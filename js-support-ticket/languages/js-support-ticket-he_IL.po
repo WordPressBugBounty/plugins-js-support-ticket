@@ -1,0 +1,7469 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: he_IL\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.4.1\n"
+
+msgid "You are not allowed"
+msgstr "אין לך הרשאה"
+
+msgid "The ticket has been locked"
+msgstr "הכרטיס ננעל"
+
+msgid "Successfully"
+msgstr "בהצלחה"
+
+msgid "The ticket has not been locked"
+msgstr "הכרטיס לא ננעל"
+
+msgid "Error"
+msgstr "שגיאה"
+
+msgid "Lock Ticket"
+msgstr "נעילת פניה"
+
+msgid "The ticket is locked by"
+msgstr "הכרטיס נעול על ידי"
+
+msgid "The ticket has been unlocked"
+msgstr "הכרטיס לא נפתח"
+
+msgid "The ticket has not been unlocked"
+msgstr "הכרטיס לא נפתח"
+
+msgid "Unlock Ticket"
+msgstr "שחרור פניה"
+
+msgid "User already a staff member"
+msgstr "המשתמש כבר איש צוות"
+
+msgid "The staff member has not been stored"
+msgstr "איש הצוות לא אוגר"
+
+msgid "The staff member has been stored"
+msgstr "איש הצוות אוחסן"
+
+msgid "The staff member has been deleted"
+msgstr "איש הצוות נמחק"
+
+msgid "The staff member has not been deleted"
+msgstr "איש הצוות לא נמחק"
+
+msgid "The staff member in use cannot delete"
+msgstr "איש הצוות הנמצא בשימוש לא יכול למחוק"
+
+msgid "Staff"
+msgstr "צוות"
+
+msgid "status has been changed"
+msgstr "הסטטוס השתנה"
+
+msgid "status has not been changed"
+msgstr "הסטטוס לא השתנה"
+
+msgid "User ID"
+msgstr "תעודת זהות של המשתמש"
+
+msgid "User Name"
+msgstr "שם משתמש"
+
+msgid "Email Address"
+msgstr "כתובת אימייל"
+
+msgid "Name"
+msgstr "שם"
+
+msgid "Email"
+msgstr "אימייל"
+
+msgid "Previous"
+msgstr "הקודם"
+
+msgid "Next"
+msgstr "הבא"
+
+msgid "Active"
+msgstr "פעיל"
+
+msgid "Disabled"
+msgstr "כבוי"
+
+msgid "Uploaded file extension error."
+msgstr "שגיאת סיומת קבצים שהועלתה."
+
+msgid "Select user"
+msgstr "בחירת משתמש"
+
+msgid "Username"
+msgstr "שם משתמש"
+
+msgid "Search"
+msgstr "חיפוש"
+
+msgid "Reset"
+msgstr "איפוס"
+
+msgid "Use search feature to select the user"
+msgstr "השתמש בתכונת החיפוש כדי לבחור את המשתמש"
+
+msgid "User"
+msgstr "משתמש"
+
+msgid "Select User"
+msgstr "בחירת משתמש"
+
+msgid "Roles"
+msgstr "תפקידים"
+
+msgid "Select Role"
+msgstr "בחירת תפקיד"
+
+msgid "First Name"
+msgstr "שם"
+
+msgid "Last Name"
+msgstr "שם משפחה"
+
+msgid "Office Phone"
+msgstr "טלפון במשרד"
+
+msgid "Extension"
+msgstr "סיומת"
+
+msgid "Mobile No"
+msgstr "מספר טלפון נייד"
+
+msgid "Picture"
+msgstr "תמונה"
+
+msgid "Maximum File Size"
+msgstr "גודל קובץ מרבי"
+
+msgid "File Extension Type"
+msgstr "סוג קובץ"
+
+msgid "Append Signature"
+msgstr "צירוף חתימה"
+
+msgid "Append signature with a reply"
+msgstr "הוסף חתימה עם תשובה"
+
+msgid "Signature"
+msgstr "חתימה"
+
+msgid "Account Status"
+msgstr "סטטוס מנוי"
+
+msgid "Select Status"
+msgstr "בחירת סטטוס"
+
+msgid "Save"
+msgstr "שמור"
+
+msgid "Cancel"
+msgstr "ביטול"
+
+msgid "Close"
+msgstr "סגור"
+
+msgid "Dashboard"
+msgstr "לוח מחוונים"
+
+msgid "Add Agent"
+msgstr "הוסף סוכן"
+
+msgid "Configuration"
+msgstr "הגדרה"
+
+msgid "Version"
+msgstr "גרסה"
+
+msgid "image"
+msgstr "תמונה"
+
+msgid "Append"
+msgstr "צירוף"
+
+msgid "Add Permissions"
+msgstr "הוסף הרשאות"
+
+msgid "Permissions"
+msgstr "הרשאות"
+
+msgid "Department Section"
+msgstr "מקטע מחלקה"
+
+msgid "Ticket Section"
+msgstr "מקטע פניה"
+
+msgid "Agent Section"
+msgstr "מדור סוכנים"
+
+msgid "Knowledge Base Section"
+msgstr "מקטע מאגר מידע"
+
+msgid "FAQ Section"
+msgstr "מקטע שו\\"
+
+msgid "Download Section"
+msgstr "מקטע הורדות"
+
+msgid "Announcement Section"
+msgstr "מקטע הודעות"
+
+msgid "Mail Section"
+msgstr "מקטע אימייל"
+
+msgid "Help Topic Section"
+msgstr "מדור נושא העזרה"
+
+msgid "Canned Response Section"
+msgstr "מדור תגובה משומר"
+
+msgid "Select / Deselect All"
+msgstr "בחירת הכל / ביטול בחירת הכל"
+
+msgid "Save Permissions"
+msgstr "שמירת הרשאות"
+
+msgid "Agents"
+msgstr "סוכנים"
+
+msgid "Add"
+msgstr "הוספה"
+
+msgid "Full Name"
+msgstr "שם מלא"
+
+msgid "Role"
+msgstr "תפקיד"
+
+msgid "Status"
+msgstr "סטטוס"
+
+msgid "Created"
+msgstr "נוצר"
+
+msgid "Action"
+msgstr "פעולה"
+
+msgid "change status"
+msgstr "לשנות סטטוס"
+
+msgid "Edit"
+msgstr "עריכה"
+
+msgid "Delete"
+msgstr "מחיקה"
+
+msgid "Are you sure you want to delete"
+msgstr "אתה בטוח שאתה רוצה למחוק"
+
+msgid "Something went wrong to try again later."
+msgstr "משהו השתבש לנסות שוב אחר כך."
+
+msgid "My Profile"
+msgstr "הפרופיל שלי"
+
+msgid "Upload Image"
+msgstr "העלאת תמונה"
+
+msgid "Phone No"
+msgstr "טלפון"
+
+msgid "Upload file limit exceeds"
+msgstr "מגבלת הקובץ העלה עולה על"
+
+msgid "No help topic found"
+msgstr "לא נמצא נושא תמיכה"
+
+msgid "Error file size too large"
+msgstr "שגיאה - הקובץ גדול מדי"
+
+msgid "Select Department"
+msgstr "בחירת מחלקה"
+
+msgid "Select Help Topic"
+msgstr "בחירת נושא עזרה"
+
+msgid "Select Priority"
+msgstr "בחירת רמת דחיפות"
+
+msgid "Select Canned response"
+msgstr "בחר תגובה משומרת"
+
+msgid "Add more"
+msgstr "הוסף עוד"
+
+msgid "Remove"
+msgstr "הסר"
+
+msgid "Reason for edit"
+msgstr "הסיבה לעריכה"
+
+msgid "Internal Note"
+msgstr "הודעה פנימית"
+
+msgid "Enter valid woocommerce order#"
+msgstr "הזן מספר חוקי של woocommerce"
+
+msgid "Order id found"
+msgstr "נמצא קוד הזמנה"
+
+msgid "Order id not found"
+msgstr "מספר ההזמנה לא נמצא"
+
+msgid "Select Product"
+msgstr "בחר מוצר"
+
+msgid "Dated"
+msgstr "תאריך"
+
+msgid "Select Order ID"
+msgstr "בחר מזהה הזמנה"
+
+msgid "Select license key"
+msgstr "בחר מפתח רישיון"
+
+msgid "Assign to me"
+msgstr "לשייך אלי"
+
+msgid "Submit Ticket"
+msgstr "שלח פניה"
+
+msgid "Show All"
+msgstr "תראה את כל"
+
+msgid "Show Less"
+msgstr "הראי פחות"
+
+msgid "Open"
+msgstr "פניות פתוחות"
+
+msgid "Closed"
+msgstr "פניות סגורות"
+
+msgid "Answered"
+msgstr "נענו"
+
+msgid "Overdue"
+msgstr "בחריגה"
+
+msgid "All Tickets"
+msgstr "כל הפניות"
+
+msgid "Tickets"
+msgstr "פניות"
+
+msgid "Ticket ID"
+msgstr "אסמכתא של הפניה"
+
+msgid "Or"
+msgstr "או"
+
+msgid "From"
+msgstr "מאת"
+
+msgid "Select staff"
+msgstr "בחירת איש צוות"
+
+msgid "Select"
+msgstr "בחר"
+
+msgid "Start Date"
+msgstr "תאריך התחלה"
+
+msgid "End Date"
+msgstr "תאריך סיום"
+
+msgid "Assigned to me"
+msgstr "הוקצה לי"
+
+msgid "Subject"
+msgstr "נושא"
+
+msgid "Priority"
+msgstr "דחיפות"
+
+msgid "sort"
+msgstr "סוג"
+
+msgid "New"
+msgstr "חדש"
+
+msgid "Waiting Reply"
+msgstr "בהמתנה לתגובה"
+
+msgid "In Progress"
+msgstr "בטיפול"
+
+msgid "Replied"
+msgstr "קיבל מענה"
+
+msgid "Close and merge"
+msgstr "סוגרים ומתמזגים"
+
+msgid "Created via Email"
+msgstr "נוצר באמצעות אימייל"
+
+msgid "The ticket is locked"
+msgstr "הכרטיס נעול"
+
+msgid "Last Reply"
+msgstr "תשובה אחרונה"
+
+msgid "Search by username"
+msgstr "חפש לפי שם משתמש"
+
+msgid "Already exists"
+msgstr "כבר קיים"
+
+msgid "The role has been stored"
+msgstr "התפקיד נשמר"
+
+msgid "The role has not been stored"
+msgstr "התפקיד לא אוחסן"
+
+msgid "The role has been deleted"
+msgstr "התפקיד נמחק"
+
+msgid "The role has not been deleted"
+msgstr "התפקיד לא נמחק"
+
+msgid "The role in use cannot be deleting"
+msgstr "לא ניתן למחוק את התפקיד בשימוש"
+
+msgid "Save Role"
+msgstr "שמירת התפקיד"
+
+msgid "Add Role"
+msgstr "הוספת תפקיד"
+
+msgid "Role Permission"
+msgstr "הרשאות תפקיד"
+
+msgid "Role Name"
+msgstr "שם התפקיד"
+
+msgid "Role permissions"
+msgstr "הרשאות תפקיד"
+
+msgid "Search Roles"
+msgstr "תפקידים בחיפוש"
+
+msgid "Add New Role"
+msgstr "הוסף תפקיד חדש"
+
+msgid "An announcement has been stored"
+msgstr "הודעה נשמרה"
+
+msgid "An announcement has not been stored"
+msgstr "הודעה לא נשמרה"
+
+msgid "An announcement has been deleted"
+msgstr "ההודעה נמחקה"
+
+msgid "An announcement has not been deleted"
+msgstr "ההודעה לא נמחקה"
+
+msgid "Announcement"
+msgstr "הודעה"
+
+msgid "ordering has been changed"
+msgstr "המחלקה לא נשמרה"
+
+msgid "ordering has not changed"
+msgstr "הסדר לא השתנה"
+
+msgid "Public"
+msgstr "ציבורי"
+
+msgid "Private"
+msgstr "פרטי"
+
+msgid "Title"
+msgstr "כותרת"
+
+msgid "Parent Category"
+msgstr "קטגוריה ראשית"
+
+msgid "Select Category"
+msgstr "בחירת קטגוריה"
+
+msgid "Description"
+msgstr "תיאור"
+
+msgid "Save Announcement"
+msgstr "שמירת הודעה"
+
+msgid "Add Announcement"
+msgstr "הוספת הודעה"
+
+msgid "Category"
+msgstr "קטגוריה"
+
+msgid "Announcements"
+msgstr "הודעות"
+
+msgid "Records per page"
+msgstr "רשומות לכל דף"
+
+msgid "Ordering"
+msgstr "סדר"
+
+msgid "Save Ordering"
+msgstr "שמור הזמנה"
+
+msgid "Category Name"
+msgstr "שם הקטגוריה"
+
+msgid "Categories"
+msgstr "קטגוריות"
+
+msgid "Banned Email Log List"
+msgstr "רשימת יומני דואר אלקטרוני אסורה"
+
+msgid "Logger Email"
+msgstr "רשם האימייל"
+
+msgid "Log"
+msgstr "רישום"
+
+msgid "Logger"
+msgstr "רשם"
+
+msgid "IP Address"
+msgstr "כתובת IP"
+
+msgid "Ban email has been stored"
+msgstr "אימייל באיסור נשמר"
+
+msgid "Ban email has not been stored"
+msgstr "דוא\\"
+
+msgid "Ban email has been deleted"
+msgstr "השעיית האימייל נמחקה"
+
+msgid "Ban email has not been deleted"
+msgstr "אימייל באיסור לא נמחק"
+
+msgid "Ban email does not exist"
+msgstr "השעיית האימייל לא קיימת"
+
+msgid "Add Banned Email"
+msgstr "הוסף דוא\\"
+
+msgid "Save Banned Email"
+msgstr "שמור דוא\\"
+
+msgid "Banned Emails"
+msgstr "אימיילים מושעים"
+
+msgid "Emails"
+msgstr "אימיילים"
+
+msgid "Submitter"
+msgstr "שולח"
+
+msgid "Canned response message has been stored"
+msgstr "הודעת תגובה משומרת נשמרה"
+
+msgid "Canned response message has not been stored"
+msgstr "הודעת תגובה משומרת לא נשמרה"
+
+msgid "Premade department message has been deleted"
+msgstr "הודעת מחלקה שהוכנה מראש נמחקה"
+
+msgid "Premade department message has not been deleted"
+msgstr "הודעת מחלקה שהוכנה מראש לא נמחקה"
+
+msgid "Canned response"
+msgstr "תגובה משומרת"
+
+msgid "Department"
+msgstr "מחלקה"
+
+msgid "Response"
+msgstr "תגובה"
+
+msgid "Save Canned Response"
+msgstr "שמור תגובה משומרת"
+
+msgid "Add Canned Response"
+msgstr "הוסף תגובה משומרת"
+
+msgid "The department under which the answer will be made is available"
+msgstr "ניתן לקבל את המחלקה שתחת התשובה עליה"
+
+msgid "Offline"
+msgstr "מנותק"
+
+msgid "Canned Responses"
+msgstr "תגובות משומרות"
+
+msgid "Last Updated"
+msgstr "עודכן לאחרונה"
+
+msgid "Not updated"
+msgstr "לא עודכן"
+
+msgid "Canned Response"
+msgstr "תגובה משומרת"
+
+msgid "Latest Tickets"
+msgstr "פניות אחרונות"
+
+msgid "Last Month Ticket Stats"
+msgstr "סטטי כרטיסים בחודש שעבר"
+
+msgid "Pending"
+msgstr "בהמתנה"
+
+msgid "The attachment has been removed"
+msgstr "הקובץ המצורף הוסר"
+
+msgid "The attachment has not been removed"
+msgstr "הקובץ המצורף לא הוסר"
+
+msgid "The download has been stored"
+msgstr "ההורדה נשמרה"
+
+msgid "The download has not been stored"
+msgstr "ההורדה לא נשמרה"
+
+msgid "Download"
+msgstr "הורדה"
+
+msgid "The download has been deleted"
+msgstr "ההורדה נמחקה"
+
+msgid "The download has not been deleted"
+msgstr "ההורדה לא נמחקה"
+
+msgid "Download All"
+msgstr "להוריד הכל"
+
+msgid "Attachments"
+msgstr "קבצים מצורפים"
+
+msgid "Save Download"
+msgstr "שמירת ההורדה"
+
+msgid "Add Download"
+msgstr "הוספת הורדה"
+
+msgid "Add More File"
+msgstr "הוספת קובץ נוסף"
+
+msgid "Delete attachment"
+msgstr "מחיקת קובץ מצורף"
+
+msgid "Downloads"
+msgstr "הורדות"
+
+msgid "grab"
+msgstr "לתפוס"
+
+msgid "Attachment"
+msgstr "קובץ מצורף"
+
+msgid "Files"
+msgstr "קבצים"
+
+msgid "Help Desk"
+msgstr "דלפק העזרה"
+
+msgid "Get Help"
+msgstr "תקבל עזרה"
+
+msgid "Service is running, please close the pag"
+msgstr "השירות פועל, אנא סגור את העמוד"
+
+msgid ""
+"Admin email address and email piping address cannot be the same, your email "
+"piping will not be work."
+msgstr "כתובת דוא\\"
+
+msgid "Your setting is working please this."
+msgstr "ההגדרה שלך עובדת בבקשה."
+
+msgid "Connection established but the system cannot read any email"
+msgstr "נוצר חיבור אך המערכת לא יכולה לקרוא דוא\\"
+
+msgid ""
+"IMAP is either not installed or not enabled in your server. Contact to "
+"hosting company"
+msgstr "IMAP אינו מותקן או אינו פעיל בשרת שלך. צור קשר עם חברת אירוח"
+
+msgid "The configuration has been stored"
+msgstr "התצורה נשמרה"
+
+msgid "The configuration not has been stored"
+msgstr "התצורה שלא נשמרה"
+
+msgid "Email address already exist"
+msgstr "כתובת הדוא\\"
+
+msgid "Email for email piping has been stored"
+msgstr "דוא\\"
+
+msgid "Email for email piping has not been stored"
+msgstr "דוא\\"
+
+msgid "The email has been deleted"
+msgstr "הדוא\\"
+
+msgid "The email has not been deleted"
+msgstr "הדוא\\"
+
+msgid "in use cannot deleted"
+msgstr "בשימוש לא ניתן למחיקה"
+
+msgid "Enabled"
+msgstr "פעיל"
+
+msgid "Only New Tickets"
+msgstr "פניות חדשות בלבד"
+
+msgid "Only Replies"
+msgstr "תשובות בלבד"
+
+msgid "Both"
+msgstr "גם וגם"
+
+msgid "Other"
+msgstr "אחר"
+
+msgid "Yes"
+msgstr "כן"
+
+msgid "No"
+msgstr "לא"
+
+msgid "Please enter the hostname first"
+msgstr "נא להזין קודם את שם השרת"
+
+msgid "Please enable email piping setting first"
+msgstr "אנא אפשר תחילה הגדרת צנרת דוא\\"
+
+msgid "Add Email Piping"
+msgstr "הוסף צנרת דוא\\"
+
+msgid "Enable email piping"
+msgstr "אפשר צנרת דוא\\"
+
+msgid "Ticket Type"
+msgstr "סוג פניה"
+
+msgid "Which email type to read"
+msgstr "איזה סוגי פניה לקרוא"
+
+msgid "Save attachments if found in an email"
+msgstr "שמור קבצים מצורפים אם יימצא בדוא\\"
+
+msgid "Host Type"
+msgstr "סוג שרת"
+
+msgid "Select your email service provider"
+msgstr "בחירת ספק שירות המיילים"
+
+msgid "Host Name"
+msgstr "שם השרת"
+
+msgid "Enabled SSL"
+msgstr "הפעל SSL"
+
+msgid "Do you have enabled SSL on your domain?"
+msgstr "האם אפשרת SSL בתחום שלך?"
+
+msgid "Host Port Number"
+msgstr "מספר פורט בשרת"
+
+msgid "Host port number to read an email from"
+msgstr "מספר יציאת מארח לקריאת דוא\\"
+
+msgid "Email address to read emails"
+msgstr "כתובת אימייל לקריאת מיילים"
+
+msgid "Password"
+msgstr "סיסמא"
+
+msgid "Password for a given email address"
+msgstr "סיסמא עבור כתובת דוא\\"
+
+msgid "check"
+msgstr "חשבון"
+
+msgid "Check Settings"
+msgstr "בדיקת הגדרות"
+
+msgid "If the system doesn't respond in 30 seconds"
+msgstr "אם המערכת לא מגיבה תוך 30 שניות"
+
+msgid "it means system unable to connect email server"
+msgstr "זה אומר שהמערכת אינה יכולה להתחבר לשרת"
+
+msgid "Save Settings"
+msgstr "שמירת ההגדרות"
+
+msgid "URL"
+msgstr "כתובת URL"
+
+msgid "Configuration of a backup job with webcron org"
+msgstr "הגדרת גיבוי עם webcron org"
+
+msgid "Name of cron job"
+msgstr "שם הcron job"
+
+msgid "Log in to webcron org in the cron area click on"
+msgstr "נא להתחבר לwebcron org i באזור ה cron באמצעות לחיצה על"
+
+msgid "Timeout"
+msgstr "פסק זמן"
+
+msgid ""
+"180 secs if the does not completely increase it most sites will work with a "
+"setting of 180 600"
+msgstr ""
+"180 שניות אם ה- לא יגדיל אותה לחלוטין, רוב האתרים יעבדו עם הגדרה של 180 600"
+
+msgid "URL you want to execute"
+msgstr "כתובת ה URL לביצוע"
+
+msgid "Login"
+msgstr "כניסה"
+
+msgid "Leave this blank"
+msgstr "השאר ריק"
+
+msgid "Execution time"
+msgstr "זמן ביצוע"
+
+msgid "That the grid below the other options select when and how"
+msgstr "לבחור להלן מתי ואיך"
+
+msgid "Alerts"
+msgstr "התראות"
+
+msgid ""
+"If you have already set up alerts methods in webcron org interface we "
+"recommend choosing an alert"
+msgstr "אם הגדרת כבר מתודיקת התראות בממשק Webcron Org אנו ממליצים לבחור התראה"
+
+msgid "Cron scheduling using wget"
+msgstr "תזמון Cron באמצעות wget"
+
+msgid "Cron scheduling using Curl"
+msgstr "תזמון Cron באמצעות Curl"
+
+msgid "Custom PHP script to run the cron job"
+msgstr "PHP script להרצת cron job"
+
+msgid "Sorry the cron job did not work"
+msgstr "סליחה שעבודת cron לא עבדה"
+
+msgid "URL for use with your won scripts and third party"
+msgstr "כתובת URL לשימוש עם won scripts שלך וצד שלישי"
+
+msgid "Recommended run script hourly"
+msgstr "מומלץ להריץ את הסקריפט כל שעה"
+
+msgid "Email Piping"
+msgstr "צנרת דוא\\"
+
+msgid "Ticket Email Type"
+msgstr "סוג דוא\\"
+
+msgid "ticket email"
+msgstr "דוא\\"
+
+msgid "Overall Reports"
+msgstr "דוחות כוללים"
+
+msgid "Staff Members Report"
+msgstr "דוח אנשי צוות"
+
+msgid "Department Report"
+msgstr "דוח המחלקה"
+
+msgid "Departments Report"
+msgstr "דו\\"
+
+msgid "JS Support Ticket Overall Reports"
+msgstr "דוחות כולל של כרטיס JS לתמיכה"
+
+msgid "Tickets By Status"
+msgstr "פניות לפי סטטוס"
+
+msgid "Tickets By Departments"
+msgstr "פניות לפי מחלקות"
+
+msgid "Tickets By Priorities"
+msgstr "פניות לפי דחיפויות"
+
+msgid "Tickets By Channel"
+msgstr "פניות לפי ערוץ"
+
+msgid "Direct"
+msgstr "הפניה"
+
+msgid "Direct reply"
+msgstr "תגובה ישירה"
+
+msgid "Email reply"
+msgstr "תגובה באימייל"
+
+msgid "Tickets By staff"
+msgstr "כרטיסים מאת הצוות"
+
+msgid "Report By"
+msgstr "דווח על ידי"
+
+msgid "staff member"
+msgstr "חבר צוות"
+
+msgid "To"
+msgstr "אל"
+
+msgid "Report By Staff Members"
+msgstr "דוח לפי חברי צוות"
+
+msgid "Ticket status by days"
+msgstr "סטטוס הכרטיס לפי ימים"
+
+msgid "Date"
+msgstr "תאריך"
+
+msgid "Tickets Staff"
+msgstr "צוות הכרטיסים"
+
+msgid "Average Rating"
+msgstr "דירוג ממוצע"
+
+msgid "Average Time"
+msgstr "זמן ממוצע"
+
+msgid "Report By staff member"
+msgstr "דוח על ידי איש צוות"
+
+msgid "Rating"
+msgstr "דירוג"
+
+msgid "Time"
+msgstr "זמן"
+
+msgid "Merged"
+msgstr "התמזג"
+
+msgid "Report By department"
+msgstr "דוח לפי מחלקה"
+
+msgid "Tickets By Department"
+msgstr "פניות לפי מחלקה"
+
+msgid "Department Name"
+msgstr "שם המחלקה"
+
+msgid "User report"
+msgstr "דוח משתמש"
+
+msgid "Users report"
+msgstr "דוח משתמשים"
+
+msgid "Users Tickets"
+msgstr "כרטיסי משתמשים"
+
+msgid "User Report"
+msgstr "דוח משתמש"
+
+msgid "Report By Departments"
+msgstr "דו\\"
+
+msgid "Tickets Data"
+msgstr "פניות לפי תאריך"
+
+msgid "Message"
+msgstr "הודעה"
+
+msgid "Assigned To"
+msgstr "לשייך ל"
+
+msgid "Requester User Name"
+msgstr "שם משתמש מבקש"
+
+msgid "Requester Name"
+msgstr "שם מבקש"
+
+msgid "Requester Email"
+msgstr "דוא\\"
+
+msgid "Requester Phone"
+msgstr "טלפון מבקש"
+
+msgid "Requester help Topic"
+msgstr "נושא מבקש עזרה"
+
+msgid "Ticket Attachment"
+msgstr "קובץ מצורף לפניה"
+
+msgid "Posted By"
+msgstr "פורסם על ידי"
+
+msgid "Note Title"
+msgstr "כותרת ההודעה"
+
+msgid "Note Message"
+msgstr "הערה הודעה"
+
+msgid "Posted Date"
+msgstr "תאריך פרסום"
+
+msgid "Note Attachment"
+msgstr "הערה מצורף"
+
+msgid "User Time"
+msgstr "זמן משתמש"
+
+msgid "System Time"
+msgstr "זמן מערכת"
+
+msgid "Edit Reason"
+msgstr "ערוך סיבה"
+
+msgid "Reply Date"
+msgstr "תאריך תגובה"
+
+msgid "Reply By"
+msgstr "תגובה מ"
+
+msgid "Reply Attachment"
+msgstr "קובץ מצורף לתגובה"
+
+msgid "Export"
+msgstr "יצא"
+
+msgid "Agent"
+msgstr "סוכן"
+
+msgid "Select Agent"
+msgstr "בחר סוכן"
+
+msgid "Ticket Status"
+msgstr "מצב הפניה"
+
+msgid "Select Ticket Status"
+msgstr "בחר סטטוס כרטיס"
+
+msgid "Ticket Overdue"
+msgstr "פניה באיחור"
+
+msgid "Select Ticket Overdue Status"
+msgstr "בחר מצב כרטיס איחור"
+
+msgid "FAQ has been stored"
+msgstr "השאלה נשמרה"
+
+msgid "FAQ has not been stored"
+msgstr "השאלה לא נשמרה"
+
+msgid "FAQ has been deleted"
+msgstr "השאלה נמחקה"
+
+msgid "FAQ has not been deleted"
+msgstr "השאלה לא נמחקה"
+
+msgid "FAQ"
+msgstr "שאלות ותשובות"
+
+msgid "Save FAQ"
+msgstr "שמירת שאלה"
+
+msgid "Add FAQ"
+msgstr "הוספת שאלה"
+
+msgid "Content"
+msgstr "תוכן"
+
+msgid "FAQ'S"
+msgstr "שאלות נפוצות"
+
+msgid "FAQs"
+msgstr "שאלות ותשובות"
+
+msgid "FAQ's"
+msgstr "שאלות ותשובות"
+
+msgid "Add FAQs"
+msgstr "הוסף שאלות נפוצות"
+
+msgid "Feedback has been stored"
+msgstr "משוב נשמר"
+
+msgid "Feedback has not been stored"
+msgstr "המשוב לא נשמר"
+
+msgid "Feedbacks"
+msgstr "פידבקים"
+
+msgid "user image"
+msgstr "תמונת משתמש"
+
+msgid "feedback image"
+msgstr "תמונת משוב"
+
+msgid "Feedback"
+msgstr "משוב"
+
+msgid "Latest Feedback"
+msgstr "משוב אחרון"
+
+msgid "Submit Feedback"
+msgstr "הגש משוב"
+
+msgid "Help topic has been stored"
+msgstr "נושא התמיכה נשמר"
+
+msgid "Help topic has not been stored"
+msgstr "נושא התמיכה לא נשמר"
+
+msgid "Help topic has been deleted"
+msgstr "נושא התמיכה נמחק"
+
+msgid "Help topic has not been deleted"
+msgstr "נושא התמיכה לא נמחק"
+
+msgid "Help topic in use cannot be deleting"
+msgstr "לא ניתן למחוק את נושא העזרה בשימוש"
+
+msgid "Help topic"
+msgstr "נושא התמיכה"
+
+msgid "Help Topic"
+msgstr "נושא התמיכה"
+
+msgid "Save Help Topic"
+msgstr "שמירת נושא תמיכה"
+
+msgid "Add Help Topic"
+msgstr "הוספת נושא תמיכה"
+
+msgid "Help Topics"
+msgstr "נושאי תמיכה"
+
+msgid "The category has been stored"
+msgstr "הקטגוריה נשמרה"
+
+msgid "The category has not been stored"
+msgstr "הקטגוריה לא נשמרה"
+
+msgid "The category has been deleted"
+msgstr "הקטגוריה נמחקה"
+
+msgid "The category has not been deleted"
+msgstr "הקטגוריה לא נמחקה"
+
+msgid "The category in use cannot be deleting"
+msgstr "לא ניתן למחוק את הקטגוריה בשימוש"
+
+msgid "Knowledgebase article has been stored"
+msgstr "מאמר בסיס מידע מאוחסן"
+
+msgid "Knowledgebase article has not been stored"
+msgstr "מאמר בסיס בסיס לא נשמר"
+
+msgid "The article has been deleted"
+msgstr "המאמר נמחק"
+
+msgid "The article has not been deleted"
+msgstr "המאמר לא נמחק"
+
+msgid "Article"
+msgstr "כתבה"
+
+msgid "The parent category does not have this type."
+msgstr "לקטגוריית האב אין סוג זה."
+
+msgid "Would you like to add this type to Parent Category?"
+msgstr "האם תרצה להוסיף סוג זה לקטגוריית אב?"
+
+msgid "Child category has this type,"
+msgstr "לקטגוריית ילדים יש סוג זה,"
+
+msgid "You cannot unmark it."
+msgstr "אינך יכול לבטל את הסימון."
+
+msgid "Draft"
+msgstr "טיוטה"
+
+msgid "Meta Description"
+msgstr "תאור מטא"
+
+msgid "Meta Keywords"
+msgstr "מילות מפתח מטא"
+
+msgid "Save Knowledge Base"
+msgstr "שמירת מאגר המידע"
+
+msgid "Please select at least one category for"
+msgstr "אנא בחר לפחות קטגוריה אחת עבור"
+
+msgid "Category For"
+msgstr "קטגוריה עבור"
+
+msgid "Knowledge Base"
+msgstr "מאגר מידע"
+
+msgid "Logo"
+msgstr "לוגו"
+
+msgid "Save Category"
+msgstr "שמירת הקטגוריה"
+
+msgid "Add Knowledge Base"
+msgstr "הוספת מאגר מידע"
+
+msgid "Meta Data Options"
+msgstr "אפשרויות תאור"
+
+msgid "Add Category"
+msgstr "הוספת קטגוריה"
+
+msgid "Category Title"
+msgstr "כותרת הקטגוריה"
+
+msgid "category"
+msgstr "קטגוריה"
+
+msgid "Article Attachment"
+msgstr "קובץ מצורף למאמר"
+
+msgid "Knowledgebase"
+msgstr "בסיס ידע"
+
+msgid "Mail has not been marked as read"
+msgstr "הדואר לא סומן כנקרא"
+
+msgid "Mail has been marked as read"
+msgstr "הדואר סומן כנקרא"
+
+msgid "Message field cannot be empty"
+msgstr "שדה ההודעה לא יכול להיות ריק"
+
+msgid "Mail has been sent"
+msgstr "דואר נשלח"
+
+msgid "Mail has not been sent"
+msgstr "הדואר לא נשלח"
+
+msgid "Mail has been deleted"
+msgstr "האימייל נמחק"
+
+msgid "Mail has not been deleted"
+msgstr "האימייל לא נמחק"
+
+msgid "Mail"
+msgstr "אימייל"
+
+msgid "is in use cannot be delete"
+msgstr "לא ניתן למחוק"
+
+msgid "Mail cannot mark as to read"
+msgstr "דואר לא יכול לסמן כקריאה"
+
+msgid "Mail cannot mark as unread"
+msgstr "לא ניתן לסמן את המייל כלא נקרא"
+
+msgid "Mail has been marked as unread"
+msgstr "הדואר סומן כלא נקרא"
+
+msgid "Compose"
+msgstr "חבר"
+
+msgid "Inbox"
+msgstr "תיבת דאר נכנס"
+
+msgid "Outbox"
+msgstr "תיבת דאר יוצא"
+
+msgid "Send"
+msgstr "שליחה"
+
+msgid "Read"
+msgstr "נקרא"
+
+msgid "Unread"
+msgstr "לא נקרא"
+
+msgid "Select Type"
+msgstr "בחירת סוג"
+
+msgid "To use this feature you must be staff member"
+msgstr "כדי להשתמש בתכונה זו עליכם להיות איש צוות"
+
+msgid "To use this feature you must have agents addon."
+msgstr "כדי להשתמש בתכונה זו עליך להוסיף סוכנים."
+
+msgid "Re"
+msgstr "נושא"
+
+msgid "mark read"
+msgstr "סימן קריאה"
+
+msgid "mark unread"
+msgstr "סמן כלא נקרא"
+
+msgid "Replied By"
+msgstr "תגובה מ"
+
+msgid "Reply"
+msgstr "השב"
+
+msgid "Type Message"
+msgstr "הקלד הודעה"
+
+msgid "Replies"
+msgstr "תגובות"
+
+msgid "Limit exceeds maximum tickets"
+msgstr "חריגה ממגבלת כמות הפניות המרבית"
+
+msgid "The maximum number of open tickets limit has been exceeded."
+msgstr "חרג מהמספר המרבי של מגבלת הכרטיסים הפתוחים."
+
+msgid "Ticket has been closed due to merged with"
+msgstr "הכרטיס נסגר עקב מיזוג עם"
+
+msgid "Ticket"
+msgstr "פניה"
+
+msgid "has been merged into"
+msgstr "מוזגה"
+
+msgid "Merge Ticket"
+msgstr "מיזוג כרטיס"
+
+msgid "Ticket ID #"
+msgstr "מספר זיהוי כרטיס"
+
+msgid "Search ticket to merge into"
+msgstr "חפש כרטיס כדי להתמזג"
+
+msgid "Edit Last Reply"
+msgstr "ערוך את התשובה האחרונה"
+
+msgid "Merge Ticket Latest Reply"
+msgstr "מיזוג הכרטיס תגובה אחרונה"
+
+msgid "Merge"
+msgstr "מיזוג"
+
+msgid "Ticket has been merged"
+msgstr "הכרטיס אוחד"
+
+msgid "Ticket has not been merged"
+msgstr "הכרטיס לא אוחד"
+
+msgid "The internal note has been posted"
+msgstr "הפתק הפנימי פורסם"
+
+msgid "The internal note has not been posted"
+msgstr "הפתק הפנימי לא פורסם"
+
+msgid "Post Internal Note"
+msgstr "פרסום הודעה פנימית"
+
+msgid "The internal note is posted by"
+msgstr "הפתק הפנימי פורסם על ידי"
+
+msgid "Pass"
+msgstr "עבר"
+
+msgid "Ticket Notification"
+msgstr "הודעה על כרטיס"
+
+msgid "Once Weekly"
+msgstr "פעם בשבוע"
+
+msgid "JS Support Ticket"
+msgstr "בקשת תמיכה"
+
+msgid "Thanks for subscribing!"
+msgstr "תודה שנרשמת!"
+
+msgid "Ticket already marked overdue"
+msgstr "הפניה כבר סומנה באיחור"
+
+msgid "The ticket has been marked as overdue"
+msgstr "הכרטיס סומן כמועד איחור"
+
+msgid "The ticket has not been marked as overdue"
+msgstr "הכרטיס לא סומן כמועד איחור"
+
+msgid "System"
+msgstr "מערכת"
+
+msgid "Mark overdue"
+msgstr "סמן כפג תוקף"
+
+msgid "The ticket is marked as overdue by"
+msgstr "הכרטיס מסומן כמועד איחור"
+
+msgid "The ticket has been unmarked as overdue"
+msgstr "הכרטיס לא סומן מאיחור"
+
+msgid "The ticket has not been unmarked as overdue"
+msgstr "הכרטיס לא סומן כאיחור"
+
+msgid "Unmark overdue"
+msgstr "בטל אי סימון מאיחור"
+
+msgid "The ticket is unmarked as overdue by"
+msgstr "הכרטיס אינו מסומן כתוצאה מאיחור"
+
+msgid "Paid Support"
+msgstr "תמיכה בתשלום"
+
+msgid "Check if you want to use this product for paid support"
+msgstr "בדוק אם ברצונך להשתמש במוצר זה לקבלת תמיכה בתשלום"
+
+msgid "Paid support type"
+msgstr "סוג תמיכה בתשלום"
+
+msgid "One-off Support"
+msgstr "תמיכה חד פעמית"
+
+msgid "Subscription Support"
+msgstr "תמיכה במנויים"
+
+msgid "Number of tickets"
+msgstr "מספר הכרטיסים"
+
+msgid ""
+"Enter allowed number of tickets that customer can post. Enter -1 for "
+"unlimited tickets."
+msgstr ""
+"הזן את מספר הכרטיסים המותר שהלקוח יכול לפרסם. הזן -1 לכרטיסים ללא הגבלה."
+
+msgid "Credential Type"
+msgstr "סוג תעודה"
+
+msgid "Additional Info"
+msgstr "מידע נוסף"
+
+msgid "Please insert values"
+msgstr "אנא הכנס ערכים"
+
+msgid "Visitor"
+msgstr "אורח"
+
+msgid "By"
+msgstr "על ידי"
+
+msgid "Credential removed on ticket close"
+msgstr "תעודות הוסרו בכרטיס קרוב"
+
+msgid "Failed to retrieve data"
+msgstr "אחזור נתונים נכשל"
+
+msgid "The new theme has been applied"
+msgstr "הנושא החדש יושם"
+
+msgid "Error applying the new theme"
+msgstr "שגיאה ביישום הנושא החדש"
+
+msgid "Themes"
+msgstr "תבניות"
+
+msgid "Color Chooser"
+msgstr "בחירת צבע"
+
+msgid "Preset Theme"
+msgstr "תבנית שהוכנה מראש"
+
+msgid "Color 1"
+msgstr "צבע 1"
+
+msgid "Top menu heading background"
+msgstr "צבע הרקע של התפריט הראשי"
+
+msgid "Color 2"
+msgstr "צבע 2"
+
+msgid "Top header line color"
+msgstr "צבע הקו של ההאדר"
+
+msgid "Button Hover"
+msgstr "ריחוף על הכפתור"
+
+msgid "Heading text"
+msgstr "טקסט הכותרת"
+
+msgid "Color 3"
+msgstr "צבע 3"
+
+msgid "Content Background Color"
+msgstr "צבע רקע התוכן"
+
+msgid "Color 4"
+msgstr "צבע 4"
+
+msgid "Content Text Color"
+msgstr "צבע טקסט התוכן"
+
+msgid "Color 5"
+msgstr "צבע 5"
+
+msgid "Border color"
+msgstr "צבע מסגרת"
+
+msgid "Lines"
+msgstr "קווים"
+
+msgid "Color 6"
+msgstr "צבע 6"
+
+msgid "Button Color"
+msgstr "צבע הכפתור"
+
+msgid "Color 7"
+msgstr "צבע 7"
+
+msgid "Top header text color"
+msgstr "צבע מלל הכותרת"
+
+msgid "Save Theme"
+msgstr "שמירת התבנית"
+
+msgid "Color Effect Preview"
+msgstr "תצוגה מקדימה של אפקט הצבע"
+
+msgid "Blue"
+msgstr "כחול"
+
+msgid "Red"
+msgstr "אדום"
+
+msgid "Greenish"
+msgstr "ירקרק"
+
+msgid "Brown"
+msgstr "חום"
+
+msgid "Orange"
+msgstr "כתום"
+
+msgid "Green"
+msgstr "ירוק"
+
+msgid "Black"
+msgstr "שחור"
+
+msgid "Mail Notification Widget"
+msgstr "וידג'ט התראת מייל"
+
+msgid "Show newly and reply mail notifications"
+msgstr "הצג הודעות דוא\\"
+
+msgid "New mail from"
+msgstr "אימייל חדש מ"
+
+msgid "Mail Notification"
+msgstr "התראת מייל"
+
+msgid "Layout"
+msgstr "פריסה"
+
+msgid "Vertical"
+msgstr "אנכי"
+
+msgid "Horizontal"
+msgstr "אופקי"
+
+msgid "Max Record"
+msgstr "רקורד מרבי"
+
+msgid "My Ticket Widget"
+msgstr "וידג'ט הפניה שלי"
+
+msgid "Show unanswered tickets"
+msgstr "הצגת פניות שלא נענו"
+
+msgid "My Tickets"
+msgstr "הפניות שלי"
+
+msgid "Order tickets"
+msgstr "להזמין כרטיסים"
+
+msgid "Close due to merge"
+msgstr "קרוב בגלל המיזוג"
+
+msgid "Product"
+msgstr "מוצר"
+
+msgid "Order"
+msgstr "סדר"
+
+msgid "There is no ticket"
+msgstr "אין כרטיס"
+
+msgid "Something went wrong"
+msgstr "משהו השתבש"
+
+msgid "Transaction Key"
+msgstr "מפתח עסקה"
+
+msgid "Hide notice"
+msgstr "הסתר הודעה"
+
+msgid "Control Panel"
+msgstr "לוח בקרה"
+
+msgid "Announcement Detail"
+msgstr "פרטי ההודעה"
+
+msgid "Edit Announcement"
+msgstr "עריכת ההודעה"
+
+msgid "Departments"
+msgstr "מחלקות"
+
+msgid "Add Department"
+msgstr "הוספת מחלקה"
+
+msgid "Edit Department"
+msgstr "עריכת מחלקה"
+
+msgid "Staff report"
+msgstr "דו\\"
+
+msgid "Staff reports"
+msgstr "דוחות הצוות"
+
+msgid "Departments report"
+msgstr "דו\\"
+
+msgid "Edit Download"
+msgstr "עריכת הורדה"
+
+msgid "Edit FAQ"
+msgstr "עריכת שו\\"
+
+msgid "FAQ Detail"
+msgstr "פרטי השו\\"
+
+msgid "Edit Knowledge Base"
+msgstr "עריכת מאגר מידע"
+
+msgid "Edit Category"
+msgstr "עריכת קטגוריה"
+
+msgid "Knowledge Base Detail"
+msgstr "פרטי מאגר מידע"
+
+msgid "Send Message"
+msgstr "שליחת ההודעה"
+
+msgid "Edit Role"
+msgstr "עריכת תפקיד"
+
+msgid "Staffs"
+msgstr "צוות"
+
+msgid "Add Staff"
+msgstr "הוספת איש צוות"
+
+msgid "Edit Staff"
+msgstr "עריכת איש צוות"
+
+msgid "Staff Permissions"
+msgstr "הרשאות איש צוות"
+
+msgid "Add Ticket"
+msgstr "הוספת פניה"
+
+msgid "Edit Ticket"
+msgstr "עריכת הפניה"
+
+msgid "Ticket Detail"
+msgstr "פרטי הפניה"
+
+msgid "Plus"
+msgstr "פלוס"
+
+msgid "Equals"
+msgstr "שווה"
+
+msgid "Minus"
+msgstr "פחות"
+
+msgid "About Us"
+msgstr "אודותינו"
+
+msgid "Translations"
+msgstr "תרגומים"
+
+msgid "System Errors"
+msgstr "שגיאות מערכת"
+
+msgid "Short Codes"
+msgstr "קיצורי קוד"
+
+msgid "Create Ticket"
+msgstr "צור פנייה"
+
+msgid "Fields"
+msgstr "שדרות"
+
+msgid "Install"
+msgstr "להתקין"
+
+msgid "Configurations"
+msgstr "הגדרות"
+
+msgid "Cron Job URLs"
+msgstr "כתובות URL של Cron"
+
+msgid "Reports"
+msgstr "דוחות"
+
+msgid "Overall Statistics"
+msgstr "סטטיסטיקה כוללת"
+
+msgid "Agent Reports"
+msgstr "דוחות סוכן"
+
+msgid "Department Reports"
+msgstr "דוחות המחלקה"
+
+msgid "User Reports"
+msgstr "דוח משתמשים"
+
+msgid "Satisfaction Report"
+msgstr "דוח שביעות רצון"
+
+msgid "GDPR Fields"
+msgstr "שדות GDPR"
+
+msgid "Erase Data Requests"
+msgstr "מחק בקשות נתונים"
+
+msgid "Premium Addons"
+msgstr "תוספות פרימיום"
+
+msgid "Install Addons"
+msgstr "התקן Addons"
+
+msgid "Addons List"
+msgstr "רשימת Addons"
+
+msgid "Feedback Fields"
+msgstr "שדות משוב"
+
+msgid "Helptopics"
+msgstr "נושאי עזרה"
+
+msgid "System Emails"
+msgstr "אייילים של המערכת"
+
+msgid "Add Email"
+msgstr "הוספת אימייל"
+
+msgid "Priorities"
+msgstr "רמות דחיפות"
+
+msgid "Add Priority"
+msgstr "הוספת דחיפות"
+
+msgid "Ban Emails"
+msgstr "השעיית אימיילים"
+
+msgid "Email Templates"
+msgstr "תבניות אימייל"
+
+msgid "New Ticket"
+msgstr "פניה חדשה"
+
+msgid "Agent Ticket"
+msgstr "כרטיס סוכן"
+
+msgid "New Agent"
+msgstr "סוכן חדש"
+
+msgid "Reassign Ticket"
+msgstr "שיוך הפניה מחדש"
+
+msgid "Close Ticket"
+msgstr "סגירת הפניה"
+
+msgid "Delete Ticket"
+msgstr "מחיקת פניה"
+
+msgid "Mark Overdue"
+msgstr "לסמן כאיחור"
+
+msgid "Ban Email"
+msgstr "השעיית אימייל"
+
+msgid "Ban email try to create ticket"
+msgstr "אימייל מושעה שניסה ליצור פניה"
+
+msgid "Department Transfer"
+msgstr "הפניה למחלקה"
+
+msgid "Ban Email and Close Ticket"
+msgstr "השעיית אימייל וסגירת הפניה"
+
+msgid "Unban Email"
+msgstr "ביטול השעיית אימייל"
+
+msgid "Response Ticket"
+msgstr "תגובה לפניה"
+
+msgid "Reply Ticket"
+msgstr "השב לפניה"
+
+msgid "New Ticket Admin Alert"
+msgstr "התראת פניה חדשה להנהלה"
+
+msgid "In Progress Ticket"
+msgstr "פניה בטיפול"
+
+msgid "Ticket priority is changed by"
+msgstr "דחיפות הפניה שונתה על-ידי"
+
+msgid "New Mail Received"
+msgstr "התקבל אימייל חדש"
+
+msgid "New Mail Message Received"
+msgstr "התקבלה הודעה חדשה באימייל"
+
+msgid "Feedback Email To User"
+msgstr "דוא\\"
+
+msgid "User Reply On Closed Ticket"
+msgstr "תשובת המשתמש בכרטיס סגור"
+
+msgid "Log out"
+msgstr "להתנתק"
+
+msgid "Username / password is incorrect"
+msgstr "שם משתמש / סיסמא אינם נכונים"
+
+msgid "Username already taken"
+msgstr "שם המשתמש כבר בשימוש"
+
+msgid "Invalid username"
+msgstr "שם משתמש לא תקין"
+
+msgid "Please enter a username"
+msgstr "נא להזין שם משתמש"
+
+msgid "Invalid email"
+msgstr "אימייל לא תקין"
+
+msgid "Email already registered"
+msgstr "האימייל כבר רשום"
+
+msgid "Please enter a password"
+msgstr "נא להזין סיסמא"
+
+msgid "Passwords do not match"
+msgstr "הסיסמאות אינם תואמות"
+
+msgid "Invalid captcha"
+msgstr "קוד אימות לא תקין"
+
+msgid "Could not subscribe to the newsletter"
+msgstr "לא ניתן היה להירשם לניוזלטר"
+
+msgid ""
+"Please check confirmation email to complete your subscription for the "
+"newsletter"
+msgstr "אנא בדוק את דוא\\"
+
+msgid "You have successfully subscribed to the newsletter"
+msgstr "נרשמת בהצלחה לניוזלטר"
+
+msgid "JS Help Desk"
+msgstr "דלפק העזרה של JS"
+
+msgid "JS Help Desk Control Panel"
+msgstr "לוח הבקרה של JS Help Help"
+
+msgid "System Error"
+msgstr "שגיאת מערכת"
+
+msgid "User Fields"
+msgstr "שדות משתמש"
+
+msgid "Ban list log"
+msgstr "יומן רשימת איסורים"
+
+msgid "Field Ordering"
+msgstr "סדר השדות"
+
+msgid "Post Installation"
+msgstr "התקנת הודעה"
+
+msgid "Premium Addon"
+msgstr "פרימיום Addon"
+
+msgid "Sorry"
+msgstr "מצטער"
+
+msgid "No record found"
+msgstr "לא נמצאו נתונים"
+
+msgid "Sorry!"
+msgstr "מצטער!"
+
+msgid "No record found ...!"
+msgstr "לא נמצא רשומה ...!"
+
+msgid "Access Denied"
+msgstr "אין גישה"
+
+msgid "You have no permission to access this page"
+msgstr "אין לך הרשאה לגשת לדף זה"
+
+msgid "User is not allowed to access this page."
+msgstr "המשתמש אינו רשאי לגשת לדף זה."
+
+msgid "You are already Logged In."
+msgstr "אתה כבר מחובר."
+
+msgid "Access Denied!"
+msgstr "גישה נדחתה!"
+
+msgid "Your account has been disabled, please contact the administrator."
+msgstr "חשבונך הושבת, אנא צור קשר עם מנהל המערכת."
+
+msgid "You are not logged In"
+msgstr "אתה לא מחובר"
+
+msgid "To access the page, Please login"
+msgstr "כדי לגשת לדף, אנא התחבר"
+
+msgid "Register"
+msgstr "הרשם"
+
+msgid "User is not allowed to view this Ticket"
+msgstr "למשתמש אסור להציג כרטיס זה"
+
+msgid ""
+"Registration has been disabled by admin, please contact the system "
+"administrator."
+msgstr "ההרשמה הושבתה על ידי מנהל המערכת, אנא צור קשר עם מנהל המערכת."
+
+msgid "You have already given the feedback for this ticket."
+msgstr "כבר נתת את המשוב עבור כרטיס זה."
+
+msgid "Ticket not found...!"
+msgstr "כרטיס לא נמצא ...!"
+
+msgid "User is not allowed to view this page"
+msgstr "אסור למשתמש להציג דף זה"
+
+msgid "Thank you so much for your feedback"
+msgstr "תודה רבה לך על המשוב שלך"
+
+msgid "Help Desk Pages"
+msgstr "דפי דלפק העזרה"
+
+msgid "Form submission failed!"
+msgstr "הגשת הטופס נכשלה!"
+
+msgid "You have not answered all required fields"
+msgstr "לא ענית על כל השדות הנדרשים"
+
+msgid "You have not given a correct time"
+msgstr "לא נתת זמן נכון"
+
+msgid "You have not given a correct e-mail address"
+msgstr "לא מסרת כתובת דואר אלקטרוני נכונה"
+
+msgid "You have not given a correct phone number"
+msgstr "לא נתת מספר טלפון נכון"
+
+msgid "You have not given a correct answer to the security question"
+msgstr "לא נתת תשובה נכונה לשאלת האבטחה"
+
+msgid "You have not given a correct date"
+msgstr "לא ציינת תאריך נכון"
+
+msgid "The input value must be between "
+msgstr "ערך הקלט חייב להיות בין"
+
+msgid " characters"
+msgstr "דמויות"
+
+msgid "The input value is longer than "
+msgstr "ערך הקלט ארוך מ-"
+
+msgid "The input value is shorter than "
+msgstr "ערך הקלט קצר מ-"
+
+msgid "Input values could not be confirmed"
+msgstr "לא ניתן היה לאשר ערכי קלט"
+
+msgid "Incorrect domain value"
+msgstr "ערך דומיין שגוי"
+
+msgid "The input value is not a correct URL"
+msgstr "ערך הקלט אינו כתובת URL נכונה"
+
+msgid "The input value is incorrect"
+msgstr "ערך הקלט אינו נכון"
+
+msgid "The input value was not a correct number"
+msgstr "ערך הקלט לא היה מספר נכון"
+
+msgid "Your social security number was incorrect"
+msgstr "מספר הביטוח הלאומי שלך לא היה נכון"
+
+msgid "Incorrect UK VAT Number"
+msgstr "מספר מע\\"
+
+msgid "The password isn't strong enough"
+msgstr "הסיסמה אינה חזקה מספיק"
+
+msgid "You have to choose at least "
+msgstr "צריך לבחור לפחות"
+
+msgid " answers"
+msgstr "תשובות"
+
+msgid "The input value can only contain alphanumeric characters "
+msgstr "ערך הקלט יכול להכיל רק תווים אלפאנומריים"
+
+msgid " and "
+msgstr "ו"
+
+msgid "The file you are trying to upload is too large"
+msgstr "הקובץ שאתה מנסה להעלות גדול מדי"
+
+msgid "The file you are trying to upload is of the wrong type"
+msgstr "הקובץ שאתה מנסה להעלות הוא מהסוג הלא נכון"
+
+msgid "Please choose between "
+msgstr "אנא בחר בין"
+
+msgid "Please choose at least "
+msgstr "אנא בחר לפחות"
+
+msgid "Please choose a maximum of "
+msgstr "אנא בחר מקסימום"
+
+msgid "The credit card number is not correct"
+msgstr "מספר כרטיס האשראי אינו נכון"
+
+msgid "The CVV number was not correct"
+msgstr "מספר ה- CVV לא היה נכון"
+
+msgid "Support"
+msgstr "תמיכה"
+
+msgid "Lost your password"
+msgstr "איבדת את הסיסמה שלך"
+
+msgid "Pagination default page size not saved"
+msgstr "גודל עימוד ברירת המחדל לא נשמר"
+
+msgid "Data directory cannot empty."
+msgstr "ספריית הנתונים אינה יכולה לרוקן."
+
+msgid "Data directory is not proper."
+msgstr "ספריית נתונים לא תואמת"
+
+msgid "Data directory is not writable."
+msgstr "לא ניתן לכתוב ספריית נתונים."
+
+msgid "System slug not be empty."
+msgstr "אי אפשר להשאיר את הסלאג ריק"
+
+msgid "System slug is conflicted with post or page slug."
+msgstr "שבלול מערכת מתנגש עם שבלול של פוסט או עמוד."
+
+msgid "Days"
+msgstr "ימים"
+
+msgid "Hours"
+msgstr "שעות"
+
+msgid "Google Recaptcha"
+msgstr "קוד אימות Google"
+
+msgid "Any"
+msgstr "כלשהו"
+
+msgid "Addition"
+msgstr "תוספת"
+
+msgid "Subtraction"
+msgstr "חיסור"
+
+msgid "Show"
+msgstr "הצג"
+
+msgid "Hide"
+msgstr "הסתר"
+
+msgid "Default"
+msgstr "ברירת מחדל"
+
+msgid "Custom"
+msgstr "המותאם אישית"
+
+msgid "Top left"
+msgstr "למעלה משמאל"
+
+msgid "Top right"
+msgstr "למעלה מימין"
+
+msgid "Middle left"
+msgstr "אמצע משמאל"
+
+msgid "Middle right"
+msgstr "אמצע מימין"
+
+msgid "Bottom left"
+msgstr "למטה משמאל"
+
+msgid "Bottom right"
+msgstr "למטה מימין"
+
+msgid "Random"
+msgstr "אקראי"
+
+msgid "Sequence"
+msgstr "סדר פעולות"
+
+msgid "General Settings"
+msgstr "הגדרות כלליות"
+
+msgid "Ticket Settings"
+msgstr "הגדרות כרטיס"
+
+msgid "Email Settings"
+msgstr "הגדרות אימייל"
+
+msgid "Agent Menu"
+msgstr "תפריט סוכנים"
+
+msgid "User Menu"
+msgstr "תפריט משתמשים"
+
+msgid "Push Notifications"
+msgstr "התראות דחיפה"
+
+msgid "Private Credentials"
+msgstr "אישורים פרטיים"
+
+msgid "Envato Validation"
+msgstr "אימות אנוואטו"
+
+msgid "Easy Digital Downloads"
+msgstr "הורדות דיגיטליות קלות"
+
+msgid "Set the heading of your plugin"
+msgstr "הגדר את כותרת התוסף שלך"
+
+msgid "Ticket Default Page"
+msgstr "דף ברירת המחדל של הכרטיס"
+
+msgid "Select Page"
+msgstr "בחר עמוד"
+
+msgid ""
+"Select JS Help Desk default page, on the action system, will redirect on the "
+"selected page. If not select the default page, email links, and support icon "
+"might not work."
+msgstr ""
+"בחר בדף ברירת המחדל של JS Help Desk, במערכת הפעולות, ינותב מחדש בעמוד שנבחר. "
+"אם לא בחר בדף ברירת המחדל, ייתכן שקישורי הדוא\\"
+
+msgid "Support Icon"
+msgstr "איקון תמיכה"
+
+msgid "Screen Tag"
+msgstr "תג מסך"
+
+msgid "Enable / disable your support icon"
+msgstr "הפעל / כבה את האיקון תמיכה שלך"
+
+msgid "Support Icon Position"
+msgstr "מיקום איקון תמיכה"
+
+msgid "Screen Tag Position"
+msgstr "מיקום תג המסך"
+
+msgid "Select position for your support icon"
+msgstr "בחר מיקום לסמל התמיכה שלך"
+
+msgid "Online"
+msgstr "מקוון"
+
+msgid "Set your plugin offline for front end"
+msgstr "הגדרת התוסף הבלתי מקוון לאתר"
+
+msgid "Offline Message"
+msgstr "הודעה כשלא מקוון"
+
+msgid "Set the offline message for your user"
+msgstr "הגדרת הודעה למשתמש כאשר אינך מקוון"
+
+msgid "Data Directory"
+msgstr "ספריית נתונים"
+
+msgid "Set the name for your data directory"
+msgstr "הגדרת שם ספריית הנתונים"
+
+msgid ""
+"You need to rename the existing data directory in the file system before "
+"changing the data directory name"
+msgstr ""
+"עליך לשנות את שם ספריית הנתונים הקיימת במערכת הקבצים לפני שינוי שם ספריית "
+"הנתונים"
+
+msgid "Date Format"
+msgstr "פורמט תאריך"
+
+msgid "Set the default date format"
+msgstr "הגדרת פורמט ברירת מחדל לתאריך"
+
+msgid "Ticket auto close"
+msgstr "סגירה אוטומטית של פניה"
+
+msgid "Ticket auto-close if user does not respond within given days"
+msgstr "הכרטיס נסגר אוטומטית אם המשתמש לא מגיב תוך ימים נתונים"
+
+msgid "No. of attachment"
+msgstr "מספר קבצים מצורפים"
+
+msgid "No. of attachment allowed at a time"
+msgstr "מספר הקבצים המותר לצירוף בפניה אחת"
+
+msgid "File maximum size"
+msgstr "גודל קובץ מרבי"
+
+msgid "Kb"
+msgstr "ק\\"
+
+msgid "File extension"
+msgstr "סוגי קובץ"
+
+msgid "File extension allowed to attach"
+msgstr "סוגי קובץ מותרים"
+
+msgid "Pagination default page size"
+msgstr "גודל ברירת המחדל לעימוד"
+
+msgid "Set the no. of record per page"
+msgstr "הגדרת מספר הרישומים לעמוד"
+
+msgid "Breadcrumbs"
+msgstr "פירורי לחם"
+
+msgid "Show hide breadcrumbs"
+msgstr "הצגה הסתרה של פירורי לחם"
+
+msgid "Top Header"
+msgstr "כותרת עליונה"
+
+msgid "Show hide Top Header"
+msgstr "הצג הסתר כותרת עליונה"
+
+msgid "Login redirect"
+msgstr "הפניית כניסה"
+
+msgid "Redirect user to JS Help Desk control panel after log in"
+msgstr "הפנה את המשתמש ללוח הבקרה של JS Help Desk לאחר הכניסה"
+
+msgid "Show count on my tickets"
+msgstr "הצגת מונה למספר הפניות שלי"
+
+msgid "Show number of the open, closed, answered ticket in my ticket"
+msgstr "הצג את מספר הכרטיס פתוח, סגור ונענה בכרטיס שלי"
+
+msgid "Show captcha on registration form"
+msgstr "הצג captcha בטופס ההרשמה"
+
+msgid "Select whether you want to show captcha on the registration form or not"
+msgstr "בחר אם ברצונך להציג captcha בטופס ההרשמה או לא"
+
+msgid "Default wp role for new users"
+msgstr "תפקיד ברירת מחדל wp למשתמשים חדשים"
+
+msgid "Select the role you want to assign to new users"
+msgstr "בחר את התפקיד שברצונך להקצות למשתמשים חדשים"
+
+msgid "Set Login Link"
+msgstr "הגדר קישור כניסה"
+
+msgid "Set Login Link Default or Custom"
+msgstr "הגדר ברירת מחדל או קישור מותאם אישית"
+
+msgid "Ticketid sequence"
+msgstr "רצף הכרטיסים"
+
+msgid "Set ticketid sequential or random"
+msgstr "הגדר כרטיסים ברצף או אקראי"
+
+msgid "Ticket listing ordering"
+msgstr "הזמנת רשימת כרטיסים"
+
+msgid "Set default ordering for ticket listing"
+msgstr "הגדר הזמנת ברירת מחדל לרישום כרטיסים"
+
+msgid "Maximum tickets"
+msgstr "מספר פניות מרבי"
+
+msgid "Maximum ticket per user"
+msgstr "מספר פניות מרבי למשתמש"
+
+msgid "Maximum open tickets"
+msgstr "מספר מרבי של פניות פתוחות"
+
+msgid "Maximum opened tickets per user"
+msgstr "מספר מרבי של פניות פתוחות למשתמש"
+
+msgid "Reopen ticket within days"
+msgstr "פתיחה מחדש של פניה תוך X ימים"
+
+msgid "The ticket can be reopened within a given number of days"
+msgstr "ניתן לפתוח מחדש את הכרטיס תוך מספר נתון של ימים"
+
+msgid "User can print ticket"
+msgstr "המשתמש יכול להדפיס פניה"
+
+msgid "Can user print ticket from ticket detail or not"
+msgstr "האם המשתמש יכול להדפיס פניה מפרטי פניה או לא"
+
+msgid "Show captcha on the visitor ticket form"
+msgstr "הצג captcha בטופס כרטיס הביקור"
+
+msgid "Show captcha when a visitor wants to create a ticket"
+msgstr "הצג captcha כאשר מבקר רוצה ליצור כרטיס"
+
+msgid "Captcha selection"
+msgstr "בחירת קוד אימות"
+
+msgid "Which captcha you want to add"
+msgstr "איזה קוד אימות להוסיף"
+
+msgid "Google recaptcha public key"
+msgstr "מפתח ציבורי של Google recaptcha"
+
+msgid "Please enter the google re-captcha public key from"
+msgstr "אנא הכנס את המפתח הציבורי של גוגל קפטצ'ה מ-"
+
+msgid "Google recaptcha private key"
+msgstr "מפתח פרטי של Google recaptcha"
+
+msgid "Please enter the google re-captcha private key from"
+msgstr "אנא הכנס את המפתח הפרטי של גוגל קפטצ'ה מ-"
+
+msgid "Own captcha calculation type"
+msgstr "סוג חישוב של Own captcha"
+
+msgid "Select calculation type addition or subtraction"
+msgstr "בחירת סוג חישוב חיבור או חיסור"
+
+msgid "Own captcha operands"
+msgstr "מערכים מתמטיים של Own captcha"
+
+msgid "Select the total operands to be given"
+msgstr "בחירת המספר הכולל של מערכים מתמטיים"
+
+msgid "Own captcha subtraction answer positive"
+msgstr "תשובה חיובית של חיסור Own captcha"
+
+msgid "Is subtraction answer should be positive"
+msgstr "האם תשובה לתרגיל חיסור צריך להיות חיובי"
+
+msgid "New ticket message"
+msgstr "הודעת פניה חדשה"
+
+msgid "This message will show on the new ticket"
+msgstr "הודעה זו תופיע בכרטיס החדש"
+
+msgid "Allow Users To Reply via Email On Closed Ticket"
+msgstr "אפשר למשתמשים להגיב באמצעות דואר אלקטרוני בכרטיס סגור"
+
+msgid "Select whether users can reply to closed email piping ticket or not"
+msgstr "בחר אם המשתמשים יכולים להשיב לכרטיס צנרת הדוא\\"
+
+msgid "Visitor can create ticket"
+msgstr "מבקר יכול ליצור פניה"
+
+msgid "Can visitor create ticket or not"
+msgstr "האם מבקר יכול או לא ליצור פניה"
+
+msgid "Visitor ticket creation message"
+msgstr "הודעת יצירת כרטיס ביקור"
+
+msgid "This text will appear whenever a visitor creates a ticket"
+msgstr "טקסט זה יופיע בכל פעם שמבקר יוצר כרטיס"
+
+msgid "Default alert email"
+msgstr "אימייל ברירת המחדל להתראות"
+
+msgid ""
+"If ticket department email is not selected then this email is used to send "
+"emails"
+msgstr "אם אימייל מחלקה לא נבחר אז יהיה שימוש באימייל ברירת המחדל למשלוח"
+
+msgid "Default admin email"
+msgstr "אימייל ברירת המחדל של ההנהלה"
+
+msgid "Admin email address to receive emails"
+msgstr "אימייל ההנהלה לקבלת מיילים"
+
+msgid "Add New Email"
+msgstr "הוסף דוא\\"
+
+msgid "Ban Email New Ticket"
+msgstr "איסור כרטיס דואר אלקטרוני חדש"
+
+msgid "Mail to admin"
+msgstr "אימייל להנהלה"
+
+msgid "Email sends to admin when banned email try to create a ticket"
+msgstr "דוא\\"
+
+msgid "Ticket Operations Email Setting"
+msgstr "הגדרת דוא\\"
+
+msgid "Admin"
+msgstr "מנהל"
+
+msgid "New ticket"
+msgstr "פניה חדשה"
+
+msgid "Ticket reassign"
+msgstr "שיוך הפניה מחדש"
+
+msgid "Ticket close"
+msgstr "סגירת פניה"
+
+msgid "Ticket delete"
+msgstr "מחיקת פניה"
+
+msgid "Ticket ban email"
+msgstr "השעיית אימייל"
+
+msgid "Ticket department transfer"
+msgstr "הפניית פניה למחלקה"
+
+msgid "Ticket reply User"
+msgstr "תגובה לפניית משתמש"
+
+msgid "Ticket Response Agent"
+msgstr "סוכן תגובת הכרטיסים"
+
+msgid "Ticket ban email and close ticket"
+msgstr "השעיית אימייל וסגירת פניה"
+
+msgid "Ticket unban email"
+msgstr "ביטול השעיית פניה"
+
+msgid "Ticket lock"
+msgstr "נעילת פניה"
+
+msgid "Ticket unlock"
+msgstr "שחרור נעילת פניה"
+
+msgid "Ticket Change Priority"
+msgstr "שינוי דחיפות קריאה"
+
+msgid "Mark Ticket In Progress"
+msgstr "סמן פנייה שבטיפול"
+
+msgid "Reply To A Closed Ticket By Email"
+msgstr "תגובה לכרטיס סגור במייל"
+
+msgid "Send Feedback Email To User"
+msgstr "שלח דוא\\"
+
+msgid "Dashboard Links"
+msgstr "קישורי לוח מחוונים"
+
+msgid "Open Ticket"
+msgstr "פתיחת פניה"
+
+msgid "Department reports"
+msgstr "דוחות המחלקה"
+
+msgid "Login/Logout Button"
+msgstr "כפתור כניסה/יציאה"
+
+msgid "Ticket Total Count"
+msgstr "סך כל הכרטיסים"
+
+msgid "Ticket Statistics"
+msgstr "סטטיסטיקת כרטיסים"
+
+msgid "Erase Agent Data"
+msgstr "מחק נתוני סוכן"
+
+msgid "Top Menu Links"
+msgstr "קישורי תפריט עליון"
+
+msgid "Home"
+msgstr "בית"
+
+msgid "Check Ticket Status"
+msgstr "בדיקת מצב הפניה"
+
+msgid "Registration"
+msgstr "הרשמה"
+
+msgid "Erase User Data"
+msgstr "מחק נתוני משתמש"
+
+msgid "Feedback Settings"
+msgstr "הגדרות משוב"
+
+msgid "Feedback Email Delay Type"
+msgstr "משוב סוג העיכוב של דוא\\"
+
+msgid "Select delay type for feedback email"
+msgstr "בחר סוג עיכוב לדוא\\"
+
+msgid "Feedback Email Delay"
+msgstr "עיכוב באמצעות דוא\\"
+
+msgid ""
+"Set no. of days or hours to send feedback email after a ticket is closed"
+msgstr "סט לא. של ימים או שעות למשלוח דוא\\"
+
+msgid "Success message after submitting feedback"
+msgstr "הודעת הצלחה לאחר הגשת משוב"
+
+msgid "This text will appear whenever anyone submits feedback"
+msgstr "טקסט זה יופיע בכל פעם שמישהו יגיש משוב"
+
+msgid "UTF Auto Switch"
+msgstr "מתג אוטומטי של UTF"
+
+msgid "Firebase Notifications"
+msgstr "הודעות על בסיס אש"
+
+msgid ""
+"JS Help Desk Desktop Notifications plugin is not installed. Please install "
+"the plugin to enable desktop notifications"
+msgstr ""
+"תוסף ההתראות שולחן העבודה של JS Help Desk אינו מותקן. אנא התקן את התוסף כדי "
+"לאפשר התראות בשולחן העבודה"
+
+msgid "Click here to insert Install."
+msgstr "לחץ כאן כדי להוסיף התקנה."
+
+msgid "JS Help Desk Desktop Notifications plugin is not active."
+msgstr "תוסף ההודעות לשולחן העבודה של JS Help Desk אינו פעיל."
+
+msgid "Find and add firebase api's keys"
+msgstr "מצא והוסף מפתחות api של בסיס האש"
+
+msgid "Click here to get firebae api keys."
+msgstr "לחץ כאן כדי לקבל מפתחות api של בסיס האש."
+
+msgid "API key for user"
+msgstr "מפתח API למשתמש"
+
+msgid "Firebase api key for front user"
+msgstr "מקש api לאינטרנט בסיסי למשתמש הקדמי"
+
+msgid "Auth Domain"
+msgstr "תחום אותנטי"
+
+msgid "Firebase Auth Domain"
+msgstr "תחום אימות של בסיס האש"
+
+msgid "Database Url"
+msgstr "כתובת אתר למסד נתונים"
+
+msgid "Firebase Database URL"
+msgstr "כתובת אתר למסד נתונים"
+
+msgid "Project Id"
+msgstr "מזהה פרויקט"
+
+msgid "Firebase Project Id"
+msgstr "מזהה פרויקט Firebase"
+
+msgid "Bucket Storage"
+msgstr "אחסון דלי"
+
+msgid "Firebase Bucket Storage"
+msgstr "אחסון דלי אש"
+
+msgid "Message Sender Id"
+msgstr "מזהה שולח הודעה"
+
+msgid "Firebase Message Sender Id"
+msgstr "מזהה שולח הודעה על בסיס האש"
+
+msgid "Private Server Key"
+msgstr "מפתח שרת פרטי"
+
+msgid "Firebase Server Key"
+msgstr "מפתח שרת Firebase"
+
+msgid "Logo Image for Desktop Notifications"
+msgstr "תמונת לוגו להתראות בשולחן העבודה"
+
+msgid "Remove Image"
+msgstr "הסר תמונה"
+
+msgid "Remove Logo"
+msgstr "הסר את הלוגו"
+
+msgid "No Firebase Notificaiton Logo"
+msgstr "אין לוגו של התראה על בסיס אש"
+
+msgid "Secret Key"
+msgstr "מפתח סודי"
+
+msgid ""
+"Private Credentials Encryption Key changing this value will discard all "
+"existing credentials "
+msgstr "מפתח הצפנת אישורים פרטיים שמשנה ערך זה ישליך את כל האישורים הקיימים"
+
+msgid "Second Level Security"
+msgstr "אבטחה ברמה השנייה"
+
+msgid "For enhanced security change encryption method in %s on line %s"
+msgstr "לשיטת ההצפנה של שינוי האבטחה המשופרת ב-% s בשורה% s"
+
+msgid "Enter Envato api key "
+msgstr "הזן את מקש ה- Envato api"
+
+msgid "Click here to generate an api key"
+msgstr "לחץ כאן כדי ליצור מפתח api"
+
+msgid "License Mandatory"
+msgstr "רישיון חובה"
+
+msgid ""
+"Prevent users from submitting a ticket without a valid license for one of "
+"your product"
+msgstr "מנע ממשתמשים להגיש כרטיס ללא רישיון תקף עבור אחד מהמוצרים שלך"
+
+msgid "Product ID"
+msgstr "מזהה מוצר"
+
+msgid "A comma-separated list of Envato product ids"
+msgstr "רשימה מופרדת בפסיקים של מזהי מוצר של Envato"
+
+msgid "Enter MailChimp API key "
+msgstr "הזן את מפתח ה- API של MailChimp"
+
+msgid "Audience ID"
+msgstr "מזהה קהל"
+
+msgid "Find Audience ID in your MailChimp account"
+msgstr "מצא את מזהה הקהל בחשבון MailChimp שלך"
+
+msgid "Enable double opt-in"
+msgstr "אפשר הצטרפות כפולה"
+
+msgid "You must also enable double opt-in in your MailChimp account"
+msgstr "עליך גם לאפשר הצטרפות כפולה לחשבון MailChimp שלך"
+
+msgid "Welcome email"
+msgstr "דוא\\"
+
+msgid "You can enable Final Welcome Email in your MailChimp account"
+msgstr "אתה יכול להפעיל את דוא\\"
+
+msgid "Verify License On Ticket Creation"
+msgstr "אמת את הרישיון בעת ​​יצירת הכרטיסים"
+
+msgid "Save Configurations"
+msgstr "שמירת ההגדרות"
+
+msgid "Ticket via email"
+msgstr "פניה באמצעות אימייל"
+
+msgid "OR"
+msgstr "או"
+
+msgid "Sorry the cron job didnot work"
+msgstr "מצטערים, ה cron job לא פעל"
+
+msgid "Update ticket status"
+msgstr "עדכן את מצב הכרטיס"
+
+msgid "Recommended run script daily"
+msgstr "מומלץ להפעיל סקריפט מדי יום"
+
+msgid "You cannot use this email, it is used in email piping"
+msgstr "אינך יכול להשתמש בדוא\\"
+
+msgid "The department has been stored"
+msgstr "המחלקה אוחסנה"
+
+msgid "The department has not been stored"
+msgstr "המחלקה לא אוחסנה"
+
+msgid "The department has been deleted"
+msgstr "המחלקה נמחקה"
+
+msgid "The department has not been deleted"
+msgstr "המחלקה לא נמחקה"
+
+msgid "The department in use cannot be delete"
+msgstr "לא ניתן למחוק את המחלקה שבשימוש"
+
+msgid "default has been changed"
+msgstr "ברירת מחדל התשנה"
+
+msgid "default has not been changed"
+msgstr "ברירת מחדל לא השתנה"
+
+msgid "No Record Found"
+msgstr "לא נמצאה רשומה"
+
+msgid "Outgoing Email"
+msgstr "הגדרות דואר (יוצא)"
+
+msgid "Select Email"
+msgstr "בחירת אימייל"
+
+msgid "Tickets of this department will receive emails from this email"
+msgstr "כרטיסים למחלקה זו יקבלו מיילים מהודעת דוא\\"
+
+msgid "Receive Email"
+msgstr "קבל אימייל"
+
+msgid "Save Department"
+msgstr "שמירת המחלקה"
+
+msgid "The user of this department will receive email on the new ticket"
+msgstr "המשתמש במחלקה זו יקבל דוא\\"
+
+msgid "Are you sure you want to delete it?"
+msgstr "האם אתה בטוח שברצונך למחוק אותו?"
+
+msgid "Search Departments"
+msgstr "חיפוש מחלקות"
+
+msgid "Outgoing"
+msgstr "יוצא"
+
+msgid "Click here to give us feedback"
+msgstr "לחץ כאן בכדי לתת לנו משוב"
+
+msgid "Email Already Exist"
+msgstr "האימייל כבר קיים"
+
+msgid "The email has been stored"
+msgstr "הדוא\\"
+
+msgid "The email has not been stored"
+msgstr "הדוא\\"
+
+msgid "False"
+msgstr "שקר"
+
+msgid "True"
+msgstr "נכון"
+
+msgid "Send Email By"
+msgstr "שלח דוא\\"
+
+msgid "SMTP host type"
+msgstr "סוג מארח SMTP"
+
+msgid "SMTP host"
+msgstr "מארח SMTP"
+
+msgid "SMTP Authentication"
+msgstr "אימות SMTP"
+
+msgid "SMTP Secure"
+msgstr "אבטחת SMTP"
+
+msgid "SMTP Port"
+msgstr "יציאת SMTP"
+
+msgid "If the system doesnot respond in 30 seconds"
+msgstr "אם המערכת אינה מגיבה תוך 30 שניות"
+
+msgid "Save Email"
+msgstr "שמירת אימייל"
+
+msgid "info"
+msgstr "מידע"
+
+msgid "System email used for sending email"
+msgstr "אימייל המערכת המשמש לשליחת מיילים"
+
+msgid "Email template has been stored"
+msgstr "תבנית האימייל נשמרה"
+
+msgid "Email template has not been stored"
+msgstr "תבנית האימייל לא נשמרה"
+
+msgid "Ban Email Try To Create Ticket"
+msgstr "איסור דוא\\"
+
+msgid "Ticket Priority Is Changed By"
+msgstr "דחיפות הפניה שונתה על-ידי"
+
+msgid "Data Deleted"
+msgstr "הנתונים נמחקו"
+
+msgid "Body"
+msgstr "גוף"
+
+msgid "Parameters"
+msgstr "משתנים"
+
+msgid "Tracking ID"
+msgstr "מזהה מעקב"
+
+msgid "Ticket URL"
+msgstr "כתובת URL של הפניה"
+
+msgid "Ticket Priority"
+msgstr "דחיפות פניה"
+
+msgid "Department title"
+msgstr "כותרת המחלקה"
+
+msgid "Group Title"
+msgstr "כותרת הקבוצה"
+
+msgid "Agent name"
+msgstr "שם סוכן"
+
+msgid "Help topic title"
+msgstr "כותרת נושא התמיכה"
+
+msgid "Feedback URL"
+msgstr "כתובת אתר משוב"
+
+msgid "Ticket Subject"
+msgstr "נושא הפניה"
+
+msgid "Ticket Tracking ID"
+msgstr "מזהה מעקב פניה"
+
+msgid "Close Date"
+msgstr "תאריך סגירה"
+
+msgid "Save Email Template"
+msgstr "שמור תבנית דוא\\"
+
+msgid "Field mark as published"
+msgstr "סמן שדה כמפורסם"
+
+msgid "Field mark as unpublished"
+msgstr "סמן שדה כלא מפורסם"
+
+msgid "Field mark as required"
+msgstr "סמן שדה כנדרש"
+
+msgid "Field mark as not required"
+msgstr "סמן שדה כלא נדרש"
+
+msgid "Field ordering down"
+msgstr "סדר שדות בסדר יורד"
+
+msgid "Field ordering up"
+msgstr "סדר שדות בסדר עולה"
+
+msgid "Parent field has not been stored"
+msgstr "שדה האב לא נשמר"
+
+msgid "Please Insert At least one value for every option"
+msgstr "אנא הכנס לפחות ערך אחד לכל אפשרות"
+
+msgid "Field has not been stored"
+msgstr "השדה אינו שוחזר"
+
+msgid "Field has been stored"
+msgstr "השדה נשמר"
+
+msgid "Field has been updated"
+msgstr "השדה עודכן"
+
+msgid "Parent Field"
+msgstr "שדה אב"
+
+msgid "Edit Field"
+msgstr "עריכת שדה"
+
+msgid "Field Title"
+msgstr "כותרת השדה"
+
+msgid "User Published"
+msgstr "המשתמש פורסם"
+
+msgid "Visitor Published"
+msgstr "המבקר פורסם"
+
+msgid "Required"
+msgstr "חובה"
+
+msgid "User Search"
+msgstr "חיפוש משתמש"
+
+msgid "Visitor Search"
+msgstr "חיפוש מבקר"
+
+msgid "Show On Listing"
+msgstr "הצג על הרישום"
+
+msgid "Advanced"
+msgstr "מתקדם"
+
+msgid "Field has not been deleted"
+msgstr "השדה לא נמחק"
+
+msgid "Field has been deleted"
+msgstr "השדה נמחק"
+
+msgid "Add Field"
+msgstr "הוסף שדה"
+
+msgid "Field"
+msgstr "שדה"
+
+msgid "Text Field"
+msgstr "שדה טקסט"
+
+msgid "Check Box"
+msgstr "תיבת הסימון"
+
+msgid "Drop Down"
+msgstr "להפיל"
+
+msgid "Text Area"
+msgstr "אזור טקסט"
+
+msgid "Radio Button"
+msgstr "כפתור רדיו"
+
+msgid "Upload File"
+msgstr "העלה קובץ"
+
+msgid "Multi Select"
+msgstr "בחירה מרובה"
+
+msgid "Terms and Conditions"
+msgstr "תנאים"
+
+msgid "Dependent Field"
+msgstr "שדה תלוי"
+
+msgid "Field Type"
+msgstr "סוג שדה"
+
+msgid "Field Size"
+msgstr "גודל השדה"
+
+msgid "Max Length"
+msgstr "אורך מרבי"
+
+msgid "Columns"
+msgstr "עמודות"
+
+msgid "Rows"
+msgstr "שורות"
+
+msgid "Use the table below to add new values"
+msgstr "השתמש בטבלה שלהלן כדי להוסיף ערכים חדשים"
+
+msgid "Add Value"
+msgstr "הוספת ערך"
+
+msgid "Terms and Conditions Text"
+msgstr "תנאים והגבלות טקסט"
+
+msgid "Terms and Conditions Link Type"
+msgstr "תנאי שימוש סוג קישור"
+
+msgid "Direct Link"
+msgstr "לינק ישיר"
+
+msgid "Wordpress Page"
+msgstr "עמוד וורדפרס"
+
+msgid "Select Link Type"
+msgstr "בחר סוג קישור"
+
+msgid "Terms and Conditions Link"
+msgstr "קישור לתנאים והגבלות"
+
+msgid "Terms and Conditions Page"
+msgstr "עמוד התנאים וההגבלות"
+
+msgid "Select Wordpress page"
+msgstr "בחר עמוד וורדפרס"
+
+msgid "Save Field"
+msgstr "שמור שדה"
+
+msgid "S.No"
+msgstr "S. לא"
+
+msgid "User Publish"
+msgstr "פרסום משתמש"
+
+msgid "Visitor Publish"
+msgstr "אורח מפרסם"
+
+msgid "Published"
+msgstr "פורסם"
+
+msgid "Unpublished"
+msgstr "ביטול פרסום"
+
+msgid "Not required"
+msgstr "לא נדרש"
+
+msgid "users popup"
+msgstr "קופץ של משתמשים"
+
+msgid "Can Not Unpublished"
+msgstr "אי אפשר לבטל את הפרסום"
+
+msgid "good"
+msgstr "טוב"
+
+msgid "cross"
+msgstr "חוצה"
+
+msgid "can not mark as not required"
+msgstr "לא יכול לסמן כלא נדרש"
+
+msgid "Cannot unpublished field"
+msgstr "לא ניתן לבטל את השדה שלא פורסם"
+
+msgid "User Data"
+msgstr "מידע משתמש"
+
+msgid "Erasing data request has been stored"
+msgstr "מחיקת בקשת נתונים נשמרה"
+
+msgid "Failed while storing"
+msgstr "נכשל בעת האחסון"
+
+msgid "Erase data request withdrawn"
+msgstr "מחיקת בקשת נתונים בוטלה"
+
+msgid "Failed while performing action"
+msgstr "נכשל בעת ביצוע הפעולה"
+
+msgid "User identifying data erased"
+msgstr "נתונים שמזהים משתמשים נמחקו"
+
+msgid "User data Deleted"
+msgstr "נתוני משתמש נמחקו"
+
+msgid "Export your data"
+msgstr "ייצא את הנתונים שלך"
+
+msgid "You have filed a request to remove your data."
+msgstr "הגשת בקשה להסרת הנתונים שלך."
+
+msgid "To withdraw erases data request"
+msgstr "לביטול מחיקת בקשת הנתונים"
+
+msgid "Request data removal from the system."
+msgstr "בקש הסרת נתונים מהמערכת."
+
+msgid "Add GDPR Field"
+msgstr "הוסף שדה GDPR"
+
+msgid "Field Text"
+msgstr "טקסט שדה"
+
+msgid "Link Type"
+msgstr "סוג קישור"
+
+msgid "Link Page"
+msgstr "עמוד קישור"
+
+msgid "User Email"
+msgstr "דוא\\"
+
+msgid "Request Status"
+msgstr "בקש מעמד"
+
+msgid "Awaiting response"
+msgstr "ממתינה לתגובה"
+
+msgid "Erased identifying data"
+msgstr "נתונים מזהים שנמחקו"
+
+msgid "Deleted"
+msgstr "נמחק"
+
+msgid "Erase identifying data"
+msgstr "מחק נתונים מזהים"
+
+msgid "Are you sure to erase identifying data"
+msgstr "האם אתה בטוח למחוק נתונים מזהים"
+
+msgid "Delete data"
+msgstr "מחק נתונים"
+
+msgid "Link"
+msgstr "קישור"
+
+msgid "Direct URL"
+msgstr "כתובת אתר ישירה"
+
+msgid "Page Title or URL"
+msgstr "כותרת עמוד או כתובת אתר"
+
+msgid "Cannot open file"
+msgstr "אין אפשרות לפתוח את הקובץ"
+
+msgid "Dir is not writable"
+msgstr "דיר לא ניתן לכתיבה"
+
+msgid "Unable to connect to the server"
+msgstr "לא ניתן להתחבר לשרת"
+
+msgid "Language is not installed"
+msgstr "השפה לא מותקנת"
+
+msgid "Language directory is not writable"
+msgstr "לא ניתן לכתוב את ספריית השפה"
+
+msgid "Required language is not installed but similar language like"
+msgstr "שפה חובה אינה מותקנת אלא שפה דומה כמו"
+
+msgid "is found in your system"
+msgstr "נמצא במערכת שלך"
+
+msgid "Language code"
+msgstr "קוד שפה"
+
+msgid "Empty values"
+msgstr "ערכים ריקים"
+
+msgid "File is not writable"
+msgstr "הקובץ אינו ניתן לכתיבה"
+
+msgid "File successfully downloaded"
+msgstr "הקובץ הורד בהצלחה"
+
+msgid "Ordering updated"
+msgstr "ההזמנה מעודכנת"
+
+msgid "Plugin Detail"
+msgstr "פרטי תוסף"
+
+msgid "Plugin for online JS Help Desk System"
+msgstr "תוסף למערכת דלפק העזרה המקוונת של JS"
+
+msgid "Created By"
+msgstr "נוצר על-ידי"
+
+msgid "Company"
+msgstr "חברה"
+
+msgid "Plugin Name"
+msgstr "שם התוסף"
+
+msgid "job plugin"
+msgstr "תוסף עבודה"
+
+msgid "vehicle manager"
+msgstr "מנהל רכב"
+
+msgid "lms plugin"
+msgstr "תוסף lms"
+
+msgid "car manager"
+msgstr "מנהל רכב"
+
+msgid "job manager"
+msgstr "מנהל תפקיד"
+
+msgid "Statistics"
+msgstr "סטטיסטיקה"
+
+msgid "Today Tickets"
+msgstr "היום כרטיסים"
+
+msgid "Short Links"
+msgstr "קישורים קצרים"
+
+msgid "Overall Report"
+msgstr "דוח כללי"
+
+msgid "email template"
+msgstr "תבנית דואר אלקטרוני"
+
+msgid "Install Now"
+msgstr "להתקין עכשיו"
+
+msgid "The best support system plugin for WordPress has everything you need."
+msgstr ""
+"התוסף של מערכת התמיכה הטובה ביותר עבור וורדפרס מכיל את כל מה שאתה צריך."
+
+msgid "Add-Ons List"
+msgstr "רשימת תוספות"
+
+msgid "Add New Addons"
+msgstr "הוסף תוספות חדשות"
+
+msgid "addon"
+msgstr "תוסיף"
+
+msgid "View All Tickets"
+msgstr "צפה בכל הכרטיסים"
+
+msgid "Waiting Agent Reply"
+msgstr "תגובה מהסוכן המתנה"
+
+msgid "Waiting Your Reply"
+msgstr "בהמתנה לתגובה"
+
+msgid "Ticket History"
+msgstr "היסטוריית פניות"
+
+msgid "Add agents and assign roles and permissions to provide assistance."
+msgstr "הוסף סוכנים והקצה תפקידים והרשאות כדי לספק סיוע."
+
+msgid "Ticket Auto Close"
+msgstr "כרטיס סגור אוטומטי"
+
+msgid ""
+"Define rules for the ticket to auto-close after a specific interval of time."
+msgstr "הגדר כללים לסגירת הכרטיס באופן אוטומטי לאחר פרק זמן מסוים."
+
+msgid "Get a survey from customers on ticket closing to improve quality."
+msgstr "קבל סקר של לקוחות בנושא סגירת הכרטיסים כדי לשפר את האיכות."
+
+msgid "Help users to find and select the area with which they need assistance."
+msgstr "עזור למשתמשים למצוא ולבחור את האזור בו הם זקוקים לסיוע."
+
+msgid "Private Note"
+msgstr "פתק פרטי"
+
+msgid ""
+"The private note is used as reminders or to give other agents insights into "
+"the ticket issue."
+msgstr "השטר הפרטי משמש כתזכורות או כדי לתת לסוכנים אחרים תובנות בנושא הכרטיס."
+
+msgid ""
+"Stop losing productivity on repetitive queries, build your knowledge base."
+msgstr "הפסק לאבד את הפרודוקטיביות בשאילתות חוזרות, בנה את בסיס הידע שלך."
+
+msgid "Max Ticket"
+msgstr "כרטיס מקסימום"
+
+msgid "Max Tickets"
+msgstr "מקס כרטיסים"
+
+msgid ""
+"Enables admin to set N numbers of tickets for users and agents separately."
+msgstr "מאפשר למנהל להגדיר N מספר כרטיסים למשתמשים ולסוכנים בנפרד."
+
+msgid "Merge Tickets"
+msgstr "מיזוג כרטיסים"
+
+msgid ""
+"Enables agents to merge two tickets of the same user into one instead of "
+"dealing with the same issue on many tickets."
+msgstr ""
+"מאפשר לסוכנים למזג שני כרטיסים של אותו משתמש לאחד במקום להתמודד עם אותה "
+"סוגיה בכרטיסים רבים."
+
+msgid ""
+"Defines rules or set specific intervals of time to make ticket auto overdue."
+"The ticket can overdue by type or overdue by Cronjob."
+msgstr ""
+"מגדיר כללים או קבע פרקי זמן ספציפיים בכדי לגרום לאיחור אוטומטי של הכרטיס. "
+"הכרטיס יכול להתיישן לפי סוג או איחור על ידי Cronjob."
+
+msgid ""
+"SMTP enables you to add custom mail protocol to send and receive emails "
+"within the js help desk."
+msgstr "SMTP מאפשר לך להוסיף פרוטוקול דואר מותאם אישית לשליחה וקבלת דוא\\"
+
+msgid ""
+"Displays complete ticket history along with the ticket status, currently "
+"assigned user and other actions performed on each ticket."
+msgstr ""
+"מציג היסטוריית כרטיסים מלאה יחד עם מצב הכרטיס, המשתמש שהוקצה כעת ופעולות "
+"אחרות שבוצעו בכל כרטיס."
+
+msgid "Pre-populated messages allow support agents to respond quickly."
+msgstr "הודעות מאוכלסות מראש מאפשרות לסוכני התמיכה להגיב במהירות."
+
+msgid "Enables users to reply to the tickets via email without login."
+msgstr "מאפשר למשתמשים להשיב לכרטיסים באמצעות דוא\\"
+
+msgid "Time Tracking"
+msgstr "מעקב אחר זמן"
+
+msgid ""
+"Track the time spent on each ticket by each agent and each reply. Report the "
+"admin on how much time is spent on each ticket."
+msgstr ""
+"עקוב אחר הזמן שהוצא בכל כרטיס על ידי כל סוכן וכל תשובה. דווח למנהל על כמה "
+"זמן מושקע בכל כרטיס."
+
+msgid "User Options"
+msgstr "אפשרויות משתמש"
+
+msgid ""
+"User options enable you to add Google Re-captcha or JS Help Desk Re-captcha "
+"for a registration form."
+msgstr ""
+"אפשרויות משתמש מאפשרות לך להוסיף מחדש Re- captcha של גוגל או JS Help Desk "
+"עבור טופס הרשמה."
+
+msgid "Actions"
+msgstr "פעולות"
+
+msgid "Ticket Actions"
+msgstr "פעולות כרטיסים"
+
+msgid ""
+"Get multiple action options on each ticket like Print Ticket, Lock Ticket, "
+"Transfer ticket, etc."
+msgstr ""
+"קבל אפשרויות פעולה מרובות בכל כרטיס, כגון הדפסת כרטיס, נעילת כרטיס, כרטיס "
+"העברת וכו '."
+
+msgid "Make unlimited announcements associated with the support system."
+msgstr "פרסם מודעות ללא הגבלה הקשורות למערכת התמיכה."
+
+msgid ""
+"It allows you to block the email of any user to restrict him to create new "
+"tickets."
+msgstr "זה מאפשר לך לחסום את הדוא\\"
+
+msgid "Desktop Notification"
+msgstr "הודעה על שולחן העבודה"
+
+msgid ""
+"The Desktop notifications will keep you up to date about anything happens on "
+"your support system."
+msgstr "התראות שולחן העבודה יעדכנו אותך בכל מה שקורה במערכת התמיכה שלך."
+
+msgid "Save the ticket as a PDF in your system and able to export all data."
+msgstr "שמור את הכרטיס כ- PDF במערכת שלך ומסוגל לייצא את כל הנתונים."
+
+msgid "Create downloads to ensure the user to get downloads from downloads."
+msgstr "צור הורדות כדי להבטיח למשתמש לקבל הורדות מההורדות."
+
+msgid "Add FAQs to drastically reduce the number of common questions."
+msgstr "הוסף שאלות נפוצות כדי להפחית בצורה דרסטית את מספר השאלות הנפוצות."
+
+msgid ""
+"Get multiple themes with a beautiful color scheme to make the site beautiful."
+msgstr "קבל מספר נושאים עם ערכת צבעים יפה כדי להפוך את האתר ליפה."
+
+msgid "Dashboard Widgets"
+msgstr "ווידג'טים של לוח המחוונים"
+
+msgid ""
+"Get immediate data of your support operations as soon as you log into your "
+"WordPress administration area."
+msgstr ""
+"קבל נתונים מיידיים על פעולות התמיכה שלך ברגע שאתה נכנס לאזור הניהול של "
+"WordPress שלך."
+
+msgid "Internal Mail"
+msgstr "דואר פנימי"
+
+msgid "Use an internal email to send emails to one agent to another agent."
+msgstr "השתמש בדוא\\"
+
+msgid "Front-End Widgets"
+msgstr "ווידג'טים מקדימים"
+
+msgid ""
+"Widgets in WordPress allow you to add content and features in the widgetized "
+"areas of your theme."
+msgstr ""
+"ווידג'טים בוורדפרס מאפשרים לך להוסיף תוכן ותכונות באזורים הווידג'טים של "
+"הנושא שלך."
+
+msgid ""
+"JS Help Desk WooCommerce provides the much-needed bridge between your "
+"WooCommerce store and the JS Help Desk."
+msgstr ""
+"דלפק העזרה של JS WooCommerce מספק את הגשר המבוקש בין חנות WooCommerce שלך ​​"
+"לדסק העזרה של JS."
+
+msgid ""
+"Collect your customer's private data, sensitive information from credit card "
+"to health information and store them encrypted."
+msgstr ""
+"איסוף הנתונים הפרטיים של הלקוח שלך, מידע רגיש מכרטיס אשראי למידע בריאותי "
+"ושמור אותם מוצפנים."
+
+msgid ""
+"Without valid Envato, license clients won't be able to open a new ticket."
+msgstr "ללא Envato תקף, לקוחות רישיון לא יוכלו לפתוח כרטיס חדש."
+
+msgid "mailchimp"
+msgstr "דואר שימפנזים"
+
+msgid "Mailchimp"
+msgstr "דואר צ'ימפ"
+
+msgid ""
+"Adds the option to the registration form for prompting new users to "
+"subscribe to your email list."
+msgstr ""
+"מוסיף את האפשרות לטופס ההרשמה להפניית משתמשים חדשים להירשם לרשימת הדוא\\"
+
+msgid "paidsupport"
+msgstr "תמיכה בתשלום"
+
+msgid ""
+"Paid Support is the easiest way to integrate and manage payments for your "
+"tickets."
+msgstr "תמיכה בתשלום היא הדרך הקלה ביותר לשלב ולנהל תשלומים עבור הכרטיסים שלך."
+
+msgid "easy digital downloads"
+msgstr "הורדות דיגיטליות קלות"
+
+msgid ""
+"EDD offers customers to open new tickets just one click from their EDD "
+"account."
+msgstr "EDD מציעה ללקוחות לפתוח כרטיסים חדשים בלחיצה אחת מחשבון EDD שלהם."
+
+msgid "We'd love to hear from You."
+msgstr "נשמח לשמוע ממך."
+
+msgid "Please write appreciated review at"
+msgstr "אנא כתוב ביקורת מוערכת בשעה"
+
+msgid "WP Extension Directory"
+msgstr "מדריך הרחבות WP"
+
+msgid "star"
+msgstr "כוכב"
+
+msgid "Spread the word"
+msgstr "תפיץ את המילה"
+
+msgid "twitter"
+msgstr "טוויטר"
+
+msgid "JS Help Desk / JS Support Ticket Control Panel"
+msgstr "דלפק העזרה של JS / לוח הבקרה לתמיכה בכרטיסי JS"
+
+msgid "JS Help Desk / JS Support Ticket main control panel"
+msgstr "דלפק העזרה של JS / לוח הבקרה הראשי של הכרטיסים לתמיכה של JS"
+
+msgid "Add new ticket form for both user and agent"
+msgstr "הוסף טופס כרטיס חדש למשתמש וגם לסוכן"
+
+msgid "My tickets for both user and agent"
+msgstr "הכרטיסים שלי למשתמש וגם לסוכן"
+
+msgid "List downloads"
+msgstr "רשימת ההורדות"
+
+msgid "Latest Downloads"
+msgstr "הורדות אחרונות"
+
+msgid "Show latest downloads. Options"
+msgstr "הצג הורדות אחרונות. אפשרויות"
+
+msgid "and"
+msgstr "וגם"
+
+msgid "i.e."
+msgstr "כלומר"
+
+msgid "Popular Downloads"
+msgstr "הורדות פופולריות"
+
+msgid "Show popular downloads. Options"
+msgstr "הצג הורדות פופולריות. אפשרויות"
+
+msgid "List knowledge base"
+msgstr "רשימת מאמרי מאגר מידע"
+
+msgid "Latest Knowledge Base"
+msgstr "מאגר הידע האחרון"
+
+msgid "Show latest knowledge base. Options"
+msgstr "הצג בסיס ידע אחרון. אפשרויות"
+
+msgid "Popular knowledge base"
+msgstr "בסיס ידע פופולרי"
+
+msgid "Show popular knowledge base. Options"
+msgstr "הצג בסיס ידע פופולרי. אפשרויות"
+
+msgid "List FAQ's"
+msgstr "רשימת שו\\"
+
+msgid "Latest FAQ's"
+msgstr "שאלות אחרונות"
+
+msgid "Show latest FAQ's. Options"
+msgstr "הצג שאלות נפוצות אחרונות. אפשרויות"
+
+msgid "Popular FAQ's"
+msgstr "שאלות פופולריות"
+
+msgid "Show popular FAQ's. Options"
+msgstr "הצג שאלות נפוצות פופולריות. אפשרויות"
+
+msgid "List announcements"
+msgstr "רשימת הודעות"
+
+msgid "Latest Announcements"
+msgstr "הודעות אחרונות"
+
+msgid "Show latest announcements. Options"
+msgstr "הצג את ההודעות האחרונות. אפשרויות"
+
+msgid "Popular Announcements"
+msgstr "הודעות פופולריות"
+
+msgid "Show popular announcements. Options"
+msgstr "הצג מודעות פופולריות. אפשרויות"
+
+msgid "spinning wheel"
+msgstr "גלגל מסתובב"
+
+msgid "Get JS Help Desk Translations"
+msgstr "קבלו תרגומי דלפק העזרה של JS"
+
+msgid "Get Translations"
+msgstr "הורד תרגומים"
+
+msgid "Select Translation"
+msgstr "בחר תרגום"
+
+msgid ""
+"When WordPress language change to ro, JS Help Desk language will auto change "
+"to ro"
+msgstr ""
+"כאשר שפת WordPress משתנה ל- ro, שפת דלפק העזרה של JS תשתנה אוטומטית ל- RO"
+
+msgid "c error"
+msgstr "שגיאה"
+
+msgid "saved"
+msgstr "שמור"
+
+msgid "Contribute In Translation"
+msgstr "עזור לתרגם"
+
+msgid "translate"
+msgstr "לתרגם"
+
+msgid "Manual Download"
+msgstr "הורדה ידנית"
+
+msgid "Log In"
+msgstr "הכנס"
+
+msgid "Log Out"
+msgstr "יציאה"
+
+msgid "Agent Feedbacks"
+msgstr "משוב של סוכן"
+
+msgid "Submit ticket"
+msgstr "הגיש כרטיס"
+
+msgid "my ticket"
+msgstr "הכרטיס שלי"
+
+msgid "View all the created tickets"
+msgstr "צפה בכל הכרטיסים שנוצרו"
+
+msgid "your ticket status"
+msgstr "מצב הכרטיס שלך"
+
+msgid "closed ticket"
+msgstr "כרטיס סגור"
+
+msgid "answered ticket"
+msgstr "ענה כרטיס"
+
+msgid "overdue ticket"
+msgstr "כרטיס איחור"
+
+msgid "View All Downloads"
+msgstr "הצג את כל ההורדות"
+
+msgid "View All Announcements"
+msgstr "צפה בכל ההודעות"
+
+msgid "View All Knowledge Base"
+msgstr "צפה בכל מאגר הידע"
+
+msgid "Latest FAQs"
+msgstr "שאלות נפוצות אחרונות"
+
+msgid "View All FAQs"
+msgstr "צפה בכל השאלות הנפוצות"
+
+msgid "keep me login"
+msgstr "השאר אותי מחובר"
+
+msgid "Repeat Password"
+msgstr "חזור על הסיסמה"
+
+msgid "Subscribe to the newsletter"
+msgstr "הירשמו לניוזלטר"
+
+msgid "Captcha"
+msgstr "קוד אימות"
+
+msgid "has been changed"
+msgstr "שונה"
+
+msgid "has not been changed"
+msgstr "לא השתנה"
+
+msgid "JS Support Ticket Settings"
+msgstr "הגדרות כרטיס JS לתמיכה"
+
+msgid "General"
+msgstr "כללי"
+
+msgid "Complete"
+msgstr "שלם"
+
+msgid "Configurations complete"
+msgstr "התצורות הושלמו"
+
+msgid "Step 4 of 4"
+msgstr "שלב 4 מתוך 4"
+
+msgid "Step 3 of 3"
+msgstr "שלב 3 מתוך 3"
+
+msgid "Setting Completed"
+msgstr "ההגדרה הושלמה"
+
+msgid "Setting you applied has been saved successfully."
+msgstr "ההגדרה שנרשמת נשמרה בהצלחה."
+
+msgid "Finish"
+msgstr "סיום"
+
+msgid "Ticket Setting"
+msgstr "הגדרות פניה"
+
+msgid "Setting Complete"
+msgstr "ההגדרה הושלמה"
+
+msgid "General Configurations"
+msgstr "תצורות כלליות"
+
+msgid "Step 1 of 4"
+msgstr "שלב 1 מתוך 4"
+
+msgid "Step 1 of 3"
+msgstr "שלב 1 מתוך 3"
+
+msgid "Enter the site title"
+msgstr "הזן את כותרת האתר"
+
+msgid "Date format for plugin"
+msgstr "פורמט תאריך לתוסף"
+
+msgid "Show Breadcrumbs"
+msgstr "הצג פירורי לחם"
+
+msgid "Show navigation in breadcrumbs"
+msgstr "הצג ניווט בפירורי לחם"
+
+msgid "Upload file size in KB's"
+msgstr "העלה את גודל הקובץ ב- KB"
+
+msgid "File Extension"
+msgstr "סיומת קובץ"
+
+msgid "Sequential"
+msgstr "ברצף"
+
+msgid "Feedback Configurations"
+msgstr "תצורות משוב"
+
+msgid "Step 3 of 4"
+msgstr "שלב 3 מתוך 4"
+
+msgid "Set Email Delay Time"
+msgstr "הגדר זמן עיכוב דוא\\"
+
+msgid " :"
+msgstr ":"
+
+msgid "Set Email Delay"
+msgstr "הגדר עיכוב דוא\\"
+
+msgid "Back"
+msgstr "חזרה"
+
+msgid "Ticket Configurations"
+msgstr "תצורות כרטיסים"
+
+msgid "Step 2 of 4"
+msgstr "שלב 2 מתוך 4"
+
+msgid "Step 2 of 3"
+msgstr "שלב 2 מתוך 3"
+
+msgid "Enable/Disable Open Ticket"
+msgstr "הפעל / השבת כרטיס פתוח"
+
+msgid "Ticket ID sequence"
+msgstr "רצף מזהה כרטיס"
+
+msgid "Set ticket id sequential or random"
+msgstr "הגדר מזהה כרטיס ברצף או אקראי"
+
+msgid "Maximum Tickets"
+msgstr "כרטיסים מקסימליים"
+
+msgid "Set Maximum Ticket Per user"
+msgstr "הגדר כרטיס מקסימלי למשתמש"
+
+msgid "Maximum Open Ticket"
+msgstr "כרטיס פתוח מרבי"
+
+msgid "Reopen ticket within Days"
+msgstr "פתח מחדש את הכרטיס תוך ימים"
+
+msgid "Show Captcha to visitor on ticket form"
+msgstr "הצג את Captcha למבקר בטופס הכרטיס"
+
+msgid "Enable/Disable Captcha on Ticket Form"
+msgstr "הפעל / השבת את Captcha בטופס הכרטיס"
+
+msgid "Own Captcha operands"
+msgstr "אופרנדים של קפטצ'ה"
+
+msgid "Enable/Disable Own Captcha subtraction"
+msgstr "הפעל / השבת חיסור Captcha משלו"
+
+msgid "Enable Print Ticket"
+msgstr "אפשר כרטיס הדפסה"
+
+msgid "Enable/Disable Print Ticket"
+msgstr "הפעל / השבת כרטיס הדפסה"
+
+msgid "Please insert activation key to proceed"
+msgstr "אנא הכנס את מפתח ההפעלה כדי להמשיך"
+
+msgid "Addon Installation Failed"
+msgstr "התקנת Addon נכשלה"
+
+msgid "Addon installation failed, Directory permission error"
+msgstr "התקנת Addon נכשלה, שגיאת הרשאת מדריך"
+
+msgid "Addon Installation Failed, File download error"
+msgstr "התקנת Addon נכשלה, שגיאת הורדת קובץ"
+
+msgid "left image"
+msgstr "תמונה שמאלית"
+
+msgid "right image"
+msgstr "תמונה נכונה"
+
+msgid "buy now"
+msgstr "קנה עכשיו"
+
+msgid "private note"
+msgstr "פתק פרטי"
+
+msgid "max ticket"
+msgstr "כרטיס מקסימלי"
+
+msgid "merge tickets"
+msgstr "מיזוג כרטיסים"
+
+msgid "time tracking"
+msgstr "מעקב אחר זמן"
+
+msgid "user options"
+msgstr "אפשרויות משתמש"
+
+msgid "ticket actions"
+msgstr "פעולות כרטיס"
+
+msgid "desktop notifications"
+msgstr "התראות בשולחן העבודה"
+
+msgid "admin widgets"
+msgstr "יישומונים של מנהל"
+
+msgid "internal mail"
+msgstr "דואר פנימי"
+
+msgid "frontend widget"
+msgstr "יישומון חזית"
+
+msgid "woocommerce support"
+msgstr "תמיכה ב - Woocommerce"
+
+msgid "mail chimp"
+msgstr "דואר שימפנזה"
+
+msgid "addon in no longer active"
+msgstr "addon ב כבר לא פעיל"
+
+msgid "Wordpress Plugin"
+msgstr "תוסף Wordpress"
+
+msgid ""
+"JS Help Desk is a trusted open source ticket system. JS Help Desk is a "
+"simple, easy to use, web-based customer support system. Users can create a "
+"ticket from the front-end. JS Help Desk comes packed with lot features than "
+"most of the expensive(and complex) support ticket system on the market. The "
+"best part is, It completely free."
+msgstr ""
+"דלפק העזרה של JS הוא מערכת כרטיסים עם קוד פתוח מהימן. דלפק העזרה של JS הוא "
+"מערכת תומכת לקוחות פשוטה, קלה לשימוש, מבוססת אינטרנט. משתמשים יכולים ליצור "
+"כרטיס מקצה הקצה. דלפק העזרה של JS מגיע עמוס בתכונות רבות מרוב מערכת הכרטיסים "
+"התומכים היקרים (והמורכבים) הקיימים בשוק. החלק הטוב ביותר הוא שזה בחינם "
+"לחלוטין."
+
+msgid "JS Help Desk Addon Installer"
+msgstr "מתקין דלפק העזרה של JS"
+
+msgid "Add on list"
+msgstr "הוסף ברשימה"
+
+msgid "Please Insert Your Activation key"
+msgstr "הכנס את מפתח ההפעלה שלך"
+
+msgid "Activation key"
+msgstr "מפתח הפעלה"
+
+msgid "Proceed"
+msgstr "להמשיך"
+
+msgid "Select Addons for download"
+msgstr "בחר Addons להורדה"
+
+msgid "All allowed add ons are already installed"
+msgstr "כל התוספים המותרים כבר מותקנים"
+
+msgid "You are not allowed to install any add on"
+msgstr "אינך מורשה להתקין תוסף כלשהו"
+
+msgid "Select All Addons"
+msgstr "בחר את כל התוספות"
+
+msgid "Add ons installed and activated successfully"
+msgstr "הוסף תוספות המותקנות ומופעלות בהצלחה"
+
+msgid ""
+"Add ons for JS Help Desk have been installed and activated successfully. "
+msgstr "תוספות עבור דלפק העזרה של JS הותקנו והופעלו בהצלחה."
+
+msgid "Priority Title Already Exist"
+msgstr "כותרת הדחיפות כבר קיימת"
+
+msgid "Priority has been stored"
+msgstr "הדחיפות נשמרה"
+
+msgid "Priority has not been stored"
+msgstr "הדחיפות לא נשמרה"
+
+msgid "Priority has been deleted"
+msgstr "הדחיפות נמחקה"
+
+msgid "Priority has not been deleted"
+msgstr "הדחיפות לא נמחקה"
+
+msgid "Default priority cannot delete"
+msgstr "אי אפשר למחוק את דחיפות ברירת המחדל"
+
+msgid "Priority has been make default"
+msgstr "הדחיפות הוגדרה כברירת מחדל"
+
+msgid "Priority has not been make default"
+msgstr "הדחיפות לא נקבעה כברירת מחדל"
+
+msgid "Color"
+msgstr "צבע"
+
+msgid "Ticket Overdue Interval Type"
+msgstr "סוג מרווח איחור הכרטיס"
+
+msgid "Save Priority"
+msgstr "שמירת הדחיפות"
+
+msgid "Date Interval"
+msgstr "מרווח תאריך"
+
+msgid "Reply posted"
+msgstr "תגובה פורסמה"
+
+msgid "Reply posted on ticket"
+msgstr "תגובה פורסמה בכרטיס"
+
+msgid "Ticket is replied by"
+msgstr "הפניה נענתה על-ידי"
+
+msgid "Reply Has been Posted"
+msgstr "תגובה פורסמה"
+
+msgid "Reply Has Not been Posted"
+msgstr "תגובה לא פורסמה"
+
+msgid "Dates"
+msgstr "תאריכים"
+
+msgid "Department Detail Report"
+msgstr "דוח פרטי המחלקה"
+
+msgid "Export Data"
+msgstr "ייצוא נתונים"
+
+msgid "Department Statistics"
+msgstr "סטטיסטיקה של המחלקה"
+
+msgid "pending ticket"
+msgstr "כרטיס ממתין"
+
+msgid "Time Taken"
+msgstr "זמן נלקח"
+
+msgid "Merged and closed"
+msgstr "התמזגה וסגרה"
+
+msgid "Out of"
+msgstr "מתוך"
+
+msgid "Ticket by departments"
+msgstr "פניות לפי מחלקות"
+
+msgid "Tickets By Priority"
+msgstr "פניות לפי דחיפות"
+
+msgid "Staff Member Tickets"
+msgstr "פניות חברי צוות"
+
+msgid "all ticket"
+msgstr "כל הכרטיס"
+
+msgid "Tickets By Status And Priorities"
+msgstr "פניות לפי סטטוס ודחיפויות"
+
+msgid "Tickets By Agents"
+msgstr "כרטיסים מאת סוכנים"
+
+msgid "Staff Reports"
+msgstr "דוח צוות"
+
+msgid "Based on"
+msgstr "מבוסס על"
+
+msgid "Customer Satisfaction"
+msgstr "שביעות רצון של לקוח"
+
+msgid "satisfaction image"
+msgstr "דימוי שביעות רצון"
+
+msgid "Excellent"
+msgstr "מעולה"
+
+msgid "NA"
+msgstr "נ.א."
+
+msgid "Happy"
+msgstr "שמח"
+
+msgid "Normal"
+msgstr "רגיל"
+
+msgid "bad"
+msgstr "רע"
+
+msgid "Sad"
+msgstr "עצוב"
+
+msgid "Angry"
+msgstr "כועסת"
+
+msgid "Agent Detail Report"
+msgstr "דוח פרטי הסוכן"
+
+msgid "Agent Statistics"
+msgstr "סטטיסטיקות סוכן"
+
+msgid "staff image"
+msgstr "תדמית הצוות"
+
+msgid "Average rating"
+msgstr "דירוג ממוצע"
+
+msgid "Average time"
+msgstr "זמן ממוצע"
+
+msgid "Tickets not assigned to the staff member"
+msgstr "כרטיסים שלא הוקצו לאיש הצוות"
+
+msgid "Minutes"
+msgstr "דקות"
+
+msgid "Report By Staff Member"
+msgstr "דוח לפי חברי צוות"
+
+msgid "User Detail Report"
+msgstr "דוח פרטי המשתמש"
+
+msgid "User Statistics"
+msgstr "סטטיסטיקות משתמשים"
+
+msgid "Users"
+msgstr "משתמשים"
+
+msgid "Ticket Status By Departments"
+msgstr "מצב הכרטיסים לפי מחלקות"
+
+msgid "Agent Report"
+msgstr "דוח סוכן"
+
+msgid "Agent Tickets"
+msgstr "כרטיסי סוכן"
+
+msgid "Reports Statistics"
+msgstr "דוחות סטטיסטיים"
+
+msgid "System error has been deleted"
+msgstr "שגיאת מערכת נמחקה"
+
+msgid "System error has not been deleted"
+msgstr "שגיאת מערכת לא נמחקה"
+
+msgid "Remove All"
+msgstr "להסיר את כל"
+
+msgid "Support for this Envato license has expired"
+msgstr "פג התמיכה ברישיון Envato זה"
+
+msgid "Record not found"
+msgstr "לא נמצאו נתונים"
+
+msgid "Banned email cannot create ticket"
+msgstr "אימייל מושעה אינו יכול ליצור פניה"
+
+msgid "Incorrect Captcha code"
+msgstr "קוד אימות שגוי"
+
+msgid "Please select paid support item"
+msgstr "בחר פריט תמיכה בתשלום"
+
+msgid "No purchase found with that code"
+msgstr "לא נמצאה רכישה עם הקוד הזה"
+
+msgid "Provide a valid license key to create a ticket."
+msgstr "ספק מפתח רישיון תקף ליצירת כרטיס."
+
+msgid "Your license has expired."
+msgstr "פג תוקף הרישיון שלך."
+
+msgid "Your license is not active, activate your license."
+msgstr "הרישיון שלך אינו פעיל, הפעל את הרישיון שלך."
+
+msgid "Due date error is not valid"
+msgstr "שגיאה. תאריך ההגשה אינו תקף"
+
+msgid "Ticket has not been created"
+msgstr "הפניה לא נוצרה"
+
+msgid "Ticket created"
+msgstr "הכרטיס נוצר"
+
+msgid "created"
+msgstr "נוצר"
+
+msgid "Guest"
+msgstr "אורח"
+
+msgid "Ticket is updated by"
+msgstr "הפניה עודכנה על-ידי"
+
+msgid "Ticket is created by"
+msgstr "הפניה נוצרה על-ידי"
+
+msgid "Ticket has been deleted"
+msgstr "הפניה נמחקה"
+
+msgid "Ticket has not been deleted"
+msgstr "הפניה לא נמחקה"
+
+msgid "in use cannot be deleted"
+msgstr "בשימוש לא ניתן למחיקה"
+
+msgid "Ticket already closed"
+msgstr "הפניה כבר נסגרה"
+
+msgid "Ticket has been closed"
+msgstr "הפניה נסגרה"
+
+msgid "Ticket has not been closed"
+msgstr "הפניה לא נסגרה"
+
+msgid "Ticket is closed by"
+msgstr "הפניה נסגרה על-ידי"
+
+msgid "Your are not allowed"
+msgstr "אין לך הרשאה"
+
+msgid "The department has been transferred"
+msgstr "המחלקה הועברה"
+
+msgid "The department has not been transferred"
+msgstr "המחלקה לא הועברה"
+
+msgid "The department is transferred by"
+msgstr "המחלקה מועברת על ידי"
+
+msgid "Assigned to agent"
+msgstr "הוקצה לסוכן"
+
+msgid "Not assigned to agent"
+msgstr "לא מוקצה לסוכן"
+
+msgid "Assign ticket to agent"
+msgstr "הקצה כרטיס לסוכן"
+
+msgid "Ticket is assigned to agent by"
+msgstr "הכרטיס מוקצה לסוכן על ידי"
+
+msgid "Ticket already have same priority"
+msgstr "יש כבר רמת דחיפות לפניה"
+
+msgid "Priority has been changed"
+msgstr "רמת הדחיפות שונתה"
+
+msgid "Priority has not been changed"
+msgstr "רמת הדחיפות לא שונתה"
+
+msgid "Change Priority"
+msgstr "שינוי דחיפות"
+
+msgid "Email already banned"
+msgstr "האימייל כבר מושעה"
+
+msgid "The email has been banned"
+msgstr "הדוא\\"
+
+msgid "The email has not been banned"
+msgstr "הדוא\\"
+
+msgid "Email is banned by"
+msgstr "האימייל הושעה על-ידי"
+
+msgid "The ticket has been reopened"
+msgstr "הכרטיס נפתח מחדש"
+
+msgid "The ticket has not been reopened"
+msgstr "הכרטיס לא נפתח מחדש"
+
+msgid "Reopen Ticket"
+msgstr "פתיחת פניה מחדש"
+
+msgid "The ticket is reopened by"
+msgstr "הכרטיס נפתח מחדש על ידי"
+
+msgid "The ticket reopens time limit end"
+msgstr "הכרטיס פותח מחדש את סיום מגבלת הזמן"
+
+msgid "Email has been unbanned"
+msgstr "השעיית האימייל בוטלה"
+
+msgid "Email has not been unbanned"
+msgstr "השעיית האימייל לא בוטלה"
+
+msgid "Unbanned Email"
+msgstr "השעיית האימייל בוטלה"
+
+msgid "Email is unbanned by"
+msgstr "השעיית האימייל בוטלה על-ידי"
+
+msgid "Email cannot be unbanned"
+msgstr "אי אפשר לבטל את השעיית האימייל"
+
+msgid "Ticket already marked in progress"
+msgstr "הפניה כבר סומנה שהיא בטיפול"
+
+msgid "The ticket has been marked as in progress"
+msgstr "הכרטיס סומן כמתבצע"
+
+msgid "The ticket has not been marked as in progress"
+msgstr "הכרטיס לא סומן כמתבצע"
+
+msgid "In progress ticket"
+msgstr "פניה בטיפול"
+
+msgid "The ticket is marked as in progress by"
+msgstr "הכרטיס מסומן כמתבצע על ידי"
+
+msgid "File upload limit exceeds"
+msgstr "מגבלת העלאת הקבצים חורגת"
+
+msgid "The uploaded file extension not valid"
+msgstr "סיומת הקובץ שהועלה לא תקפה"
+
+msgid "Paid support info"
+msgstr "מידע על תמיכה בתשלום"
+
+msgid "Order ID"
+msgstr "מספר הזמנה"
+
+msgid "Product Name"
+msgstr "שם מוצר"
+
+msgid "Total Tickets"
+msgstr "סה\\"
+
+msgid "Remaining Tickets"
+msgstr "כרטיסים שנותרו"
+
+msgid "Unlimited"
+msgstr "ללא הגבלה"
+
+msgid "You have not purchased any supported item"
+msgstr "לא רכשת פריט נתמך"
+
+msgid "Go to shop"
+msgstr "לך לחנות"
+
+msgid "Select Order"
+msgstr "בחר סדר"
+
+msgid "No canned response found"
+msgstr "לא נמצאה תגובה משומרת"
+
+msgid "Waiting agent reply"
+msgstr "תשובת סוכן המתנה"
+
+msgid "Waiting customer reply"
+msgstr "בהמתנה לתגובת הלקוח"
+
+msgid "Close ticket"
+msgstr "סגירת הפניה"
+
+msgid "premade"
+msgstr "מוכן מראש"
+
+msgid "Some values are not acceptable please retry"
+msgstr "אי אפשר לקבל כמה ערכים, נא לנסות שוב"
+
+msgid "Are you sure to mark this ticket non-premium?"
+msgstr "האם אתה בטוח לסמן את הכרטיס הזה ללא פרמיום?"
+
+msgid "Edit Reply"
+msgstr "ערוך תגובה"
+
+msgid "Edit Time"
+msgstr "ערוך זמן"
+
+msgid "Reason For Editing the timer"
+msgstr "הסיבה לעריכת הטיימר"
+
+msgid "Reason For Editing"
+msgstr "סיבה לעריכה"
+
+msgid "Resolve conflict"
+msgstr "לפתור סכסוך"
+
+msgid "Ticket Details"
+msgstr "פרטי הפניה"
+
+msgid "Lock"
+msgstr "נעילה"
+
+msgid "Add New Credential"
+msgstr "הוסף אישור חדש"
+
+msgid "Post New Internal Note"
+msgstr "פרסם הערה פנימית חדשה"
+
+msgid "play"
+msgstr "לשחק"
+
+msgid "pause"
+msgstr "הפסקה"
+
+msgid "stop"
+msgstr "תפסיק"
+
+msgid "Close on reply"
+msgstr "לסגור עם התשובה"
+
+msgid "Reason For Department Transfer"
+msgstr "סיבה להעברת מחלקה"
+
+msgid "Transfer"
+msgstr "העברה"
+
+msgid "Assign To Agent"
+msgstr "הקצה לסוכן"
+
+msgid "Assign"
+msgstr "לשייך ל"
+
+msgid "View all %d tickets by %s"
+msgstr "צפה בכל% d הכרטיסים ב-% s"
+
+msgid "Show History"
+msgstr "הצג היסטוריה"
+
+msgid "Print Ticket"
+msgstr "הדפסת כרטיס"
+
+msgid "Unmark Overdue"
+msgstr "בטל סימון מאוחר"
+
+msgid "Mark in Progress"
+msgstr "לסמן שבטיפול"
+
+msgid "agent image"
+msgstr "סוכן תמונה"
+
+msgid "Ticket Thread"
+msgstr "נושא הפניה"
+
+msgid "Post Reply"
+msgstr "פרסם תגובה"
+
+msgid "Own Signature"
+msgstr "חתימה פרטית"
+
+msgid "Department Signature"
+msgstr "חתימת מחלקה"
+
+msgid "JNone"
+msgstr "ג'ון"
+
+msgid "Add Signature"
+msgstr "הוסף חתימה"
+
+msgid "On Waiting"
+msgstr "בהמתנה"
+
+msgid "ago"
+msgstr "לפני"
+
+msgid "No Last Reply"
+msgstr "אין תשובה אחרונה"
+
+msgid "Not Given"
+msgstr "חסר"
+
+msgid "Copy"
+msgstr "עותק"
+
+msgid "Copied"
+msgstr "הועתק"
+
+msgid "Change"
+msgstr "שינוי"
+
+msgid "Ticket assigned to"
+msgstr "כרטיס שהוקצה ל-"
+
+msgid "staff photo"
+msgstr "צילום צוות"
+
+msgid "Total Time Taken"
+msgstr "זמן כולל"
+
+msgid "view ticket"
+msgstr "צפה בכרטיס"
+
+msgid "Woocommerce Order"
+msgstr "סדר Woocommerce"
+
+msgid "Envato License"
+msgstr "רישיון Envato"
+
+msgid "Item"
+msgstr "פריט"
+
+msgid "Buyer"
+msgstr "קונה"
+
+msgid "License Type"
+msgstr "סוג הרישיון"
+
+msgid "License"
+msgstr "רישיון"
+
+msgid "Purchase Date"
+msgstr "תאריך רכישה"
+
+msgid "Supported Until"
+msgstr "נתמך עד"
+
+msgid "Paid Support Details"
+msgstr "פרטי תמיכה בתשלום"
+
+msgid "Subscription"
+msgstr "מנוי"
+
+msgid "Subscribed On"
+msgstr "נרשם ל-"
+
+msgid "Support Expiry"
+msgstr "פקיעת תוקף"
+
+msgid "No expiration"
+msgstr "ללא תפוגה"
+
+msgid "Non-premium support"
+msgstr "תמיכה ללא פרמיה"
+
+msgid "Check this box if this ticket should NOT apply against the paid support"
+msgstr "סמן תיבה זו אם כרטיס זה אינו אמור לחול כנגד התמיכה בתשלום"
+
+msgid "Remaining"
+msgstr "נשאר"
+
+msgid "Link ticket to paid support"
+msgstr "קישור כרטיס לתמיכה בתשלום"
+
+msgid "Ticket Creator Name"
+msgstr "שם יוצר הכרטיסים"
+
+msgid "From Date"
+msgstr "מהתאריך"
+
+msgid "To Date"
+msgstr "עד היום"
+
+msgid "Enforce delete"
+msgstr "הכרח מחיקה"
+
+msgid "Are you sure to enforce delete"
+msgstr "האם אתה בטוח שתרצה להכריח מחיקה"
+
+msgid "Are you sure to mark this ticket non-preminum?"
+msgstr "האם אתה בטוח לסמן את הכרטיס הזה ללא פרמיום?"
+
+msgid "Message Logs"
+msgstr "יומני הודעות"
+
+msgid "Edit Timer"
+msgstr "ערוך טיימר"
+
+msgid "Type Note for Department"
+msgstr "סוג הערה למחלקה"
+
+msgid "Assigning Note"
+msgstr "הקצאת הערה"
+
+msgid "Time Track"
+msgstr "מעקב זמן"
+
+msgid "Type Internal Note"
+msgstr "הקלד הערה פנימית"
+
+msgid "View all %d tickets"
+msgstr "צפה בכל הכרטיסים של% d"
+
+msgid "Reopen"
+msgstr "נפתח מחדש"
+
+msgid "History"
+msgstr "היסטוריה"
+
+msgid "Print"
+msgstr "הדפסה"
+
+msgid "Are you sure you want to delete this ticket"
+msgstr "האם אתה בטוח שברצונך למחוק כרטיס זה"
+
+msgid "Are you sure to close this ticket"
+msgstr "האם אתה בטוח לסגור את הכרטיס הזה"
+
+msgid "Unlock"
+msgstr "לבטל נעילה"
+
+msgid "Reply a message"
+msgstr "השב להודעה"
+
+msgid "Select Premade"
+msgstr "בחירת הודעה שהוכנה מראש"
+
+msgid "Assign Ticket"
+msgstr "הקצה כרטיס"
+
+msgid "Assigned To Agent"
+msgstr "הוקצה לסוכן"
+
+msgid "View all orders"
+msgstr "צפה בכל ההזמנות"
+
+msgid "Non-preminum support"
+msgstr "תמיכה ללא פרמיה"
+
+msgid "Check Status"
+msgstr "לבדוק מצב"
+
+msgid "Account status"
+msgstr "מצב המנוי"
+
+msgid "Add Premade Message"
+msgstr "הוספת הודעה מוכנה מראש"
+
+msgid "Add Staff Member"
+msgstr "הוספת חבר צוות"
+
+msgid "Add System Email"
+msgstr "הוספת אימייל מערכת"
+
+msgid "Add User field"
+msgstr "הוסף שדה משתמש"
+
+msgid "Add new ticket form for both user and staff"
+msgstr "הוספת טופס פניה גם עבור המשתמש וגם עבור הצוות"
+
+msgid "Ago"
+msgstr "לפני"
+
+msgid "Already exisits"
+msgstr "כבר קיים"
+
+msgid "Announcement has been deleted"
+msgstr "ההודעה נמחקה"
+
+msgid "Announcement has been stored"
+msgstr "ההודעה נשמרה"
+
+msgid "Announcement has not been deleted"
+msgstr "ההודעה לא נמחקה"
+
+msgid "Announcement has not been stored"
+msgstr "ההודעה לא נשמרה"
+
+msgid "Append signature with reply"
+msgstr "צירוף חתימה לתגובה"
+
+msgid "Are you sure to close ticket"
+msgstr "בטוח שלסגור את הפניה?"
+
+msgid "Are you sure to delete"
+msgstr "בטוח שלמחוק"
+
+msgid "Article has been deleted"
+msgstr "מאמר מאגר מידע נמחק"
+
+msgid "Article has not been deleted"
+msgstr "מאמר מאגר מידע נמחק"
+
+msgid "Assign ticket to staff"
+msgstr "שיוך הפניה לצוות התמיכה"
+
+msgid "Assign to Staff"
+msgstr "שיוך הפניה לצוות התמיכה"
+
+msgid "Assign to Staff Member"
+msgstr "שיוך לחבר צוות"
+
+msgid "Assigned to staff"
+msgstr "משויך לצוות התמיכה"
+
+msgid "Attachment has been removed"
+msgstr "הקובץ המצורף הוסר"
+
+msgid "Attachment has not been removed"
+msgstr "הקובץ המצורף לא הוסר"
+
+msgid "Auto response for this topic"
+msgstr "מענה אוטומטי לנושא זה"
+
+msgid "Ban Email Log List"
+msgstr "רשימת אימיילים מושעים"
+
+msgid "Ban Email has been stored"
+msgstr "השעיית האימייל נשמרה"
+
+msgid "Ban Email has not been deleted"
+msgstr "השעיית האימייל לא נמחקה"
+
+msgid "Ban Email has not been stored"
+msgstr "השעיית האימייל לא נשמרה"
+
+msgid "Ban email"
+msgstr "השעיית אימייל"
+
+msgid "Ban email log list"
+msgstr "רשימת אימיילים מושעים"
+
+msgid "Ban email new ticket"
+msgstr "פניה חדשה של אימייל מושעה"
+
+msgid "Banlist log"
+msgstr "רישום רשימת השעיות"
+
+msgid "CURL exist"
+msgstr "CURL קיים"
+
+msgid "CURL not exist"
+msgstr "אין CURL"
+
+msgid "Can Not mark as not required"
+msgstr "לא ניתן לסמן כלא נדרש"
+
+msgid "Cannot unpublish field"
+msgstr "אי אפשר לבטל את פרסום השדה"
+
+msgid "Category has been deleted"
+msgstr "הקטגוריה נמחקה"
+
+msgid "Category has been stored"
+msgstr "הקטגוריה נשמרה"
+
+msgid "Category has not been deleted"
+msgstr "הקטגוריה לא נמחקה"
+
+msgid "Category has not been stored"
+msgstr "הקטגוריה לא נשמרה"
+
+msgid "Category in use cannot deleted"
+msgstr "אי אפשר למחוק קטגוריה בשימוש"
+
+msgid "Component Detail"
+msgstr "פרטי רכיב"
+
+msgid "Component for on-line ticket support system"
+msgstr "רכיב עבור מערכת תמיכה מקוונת"
+
+msgid "Configuration has been stored"
+msgstr "ההגדרות נשמרו"
+
+msgid "Configuration not has been stored"
+msgstr "ההגדרות לא נשמרו"
+
+msgid "Connection established but we cannot ready any email"
+msgstr "יש תקשורת אבל לא הצלחנו לקרוא אף מייל"
+
+msgid "Control panel links"
+msgstr "קישורים בלוח הבקרה"
+
+msgid "Current"
+msgstr "נוכחי"
+
+msgid "Data directory can not empty."
+msgstr "ספריית נתונים לא יכולה להיות רייקה"
+
+msgid "Data directory is not writeable."
+msgstr "ספריית נתונים חסומה לכתיבה"
+
+msgid "Database CRUD"
+msgstr "מסד נתונים CRUD"
+
+msgid "Database create table not allowed"
+msgstr "אין הרשאה ליצור טבלת מסד נתונים"
+
+msgid "Database delete record not allowed"
+msgstr "אין הרשאה למחוק נתונים ממסד הנתונים"
+
+msgid "Database drop table not allowed"
+msgstr "אין הרשאה למחוק טבלה ממסד הנתונים"
+
+msgid "Database insert record not allowed"
+msgstr "אין הרשאה להוסיף נתונים למסד הנתונים"
+
+msgid "Database update record not allowed"
+msgstr "אין הרשאה לעדכן את מסד הנתונים"
+
+msgid "Date end"
+msgstr "תאריך סיום"
+
+msgid "Date start"
+msgstr "תאריך תחילה"
+
+msgid "Day"
+msgstr "יום"
+
+msgid "Default System Email"
+msgstr "אימייל ברירת המחדל של המערכת"
+
+msgid "Default system emails"
+msgstr "אימיילים ברירת מחדל של המערכת"
+
+msgid "Delete ticket"
+msgstr "מחיקת פניה"
+
+msgid "Department Under Which The Answer Will Be Made Available"
+msgstr "מחלקה שהתשובה תהיה זמינה בה"
+
+msgid "Department has been deleted"
+msgstr "המחלקה נמחקה"
+
+msgid "Department has been stored"
+msgstr "המחלקה נשמרה"
+
+msgid "Department has been transfered"
+msgstr "המחלקה הועברה"
+
+msgid "Department has not been deleted"
+msgstr "המחלקה לא נמחקה"
+
+msgid "Department has not been stored"
+msgstr "המחלקה"
+
+msgid "Department has not been transfered"
+msgstr "המחלקה לא הועברה"
+
+msgid "Department in use cannot deleted"
+msgstr "מחלקה בשימוש לא ניתנת למחיקה"
+
+msgid "Department is transfered by"
+msgstr "המחלקה הועברה על-ידי"
+
+msgid "Dir is not writeable"
+msgstr "תיקיה חסומה לכתיבה"
+
+msgid "Directory"
+msgstr "ספריה"
+
+msgid "Directory permissions error"
+msgstr "הרשאות ספריה שגויות"
+
+msgid "Display name"
+msgstr "כינוי/שם תצוגה"
+
+msgid "Do you have enabled SSL on your domain"
+msgstr "האם הפעלת SSL על השם מתחם שלך"
+
+msgid "Documentation"
+msgstr "תיעוד"
+
+msgid "Download has been deleted"
+msgstr "ההורדה נמחקה"
+
+msgid "Download has been stored"
+msgstr "ההורדה נשמרה"
+
+msgid "Download has not been deleted"
+msgstr "ההורדה לא נמחקה"
+
+msgid "Download has not been stored"
+msgstr "ההורדה לא נשמרה"
+
+msgid "Email address"
+msgstr "כתובת אימייל"
+
+msgid "Email has been banned"
+msgstr "האימייל הושעה"
+
+msgid "Email has been deleted"
+msgstr "האימייל נמחק"
+
+msgid "Email has been stored"
+msgstr "האימייל נשמר"
+
+msgid "Email has not been banned"
+msgstr "האימייל לא הושעה"
+
+msgid "Email has not been deleted"
+msgstr "האימייל לא נמחק"
+
+msgid "Email has not been stored"
+msgstr "האימייל לא נשמר"
+
+msgid "Email send to admin when banned email try to create ticket"
+msgstr "שליחת אימייל להנהלה כאשר אימייל מושעה מנסה ליצור פניה"
+
+msgid "Enable ticket via email"
+msgstr "הפעלת יצירת פניה דרך מייל"
+
+msgid "Error applying new theme"
+msgstr "שגיאה בהפעלת התבנית החדשה"
+
+msgid "Error file ext mismatch"
+msgstr "שגיאה - סוג הקובץ אינו תקף"
+
+msgid "Error file not downloaded"
+msgstr "שגיאה - הקובץ לא ירד"
+
+msgid "Error occured"
+msgstr "אירעה שגיאה"
+
+msgid "File Downloaded Successfully"
+msgstr "הקובץ הורד בהצלחה"
+
+msgid "File download"
+msgstr "הורדת קובץ"
+
+msgid "File is not writeable"
+msgstr "קובץ חסום לכתיבה"
+
+msgid "File read write issue files cannot upload"
+msgstr "אי אפשר להעלות את הקובץ. בעיית קריאה וכתיבה"
+
+msgid "File upload limit exceed"
+msgstr "חריגה ממגבלת קובץ להעלאה"
+
+msgid "Forum"
+msgstr "פורום"
+
+msgid "GD library"
+msgstr "ספריית GD"
+
+msgid "GD library not exist"
+msgstr "אין ספריית GD"
+
+msgid "General Setting"
+msgstr "הגדרות כלליות"
+
+msgid "Get JS Support Ticket Translations"
+msgstr "קבל תרגילי כרטיסים תומכים ב- JS"
+
+msgid "Help topics"
+msgstr "נושאי תמיכה"
+
+msgid "Host port number to read email from"
+msgstr "מספר פורט בשרת לקריאת אימייל"
+
+msgid "IMAP is either not installed or not enable in your server"
+msgstr "כנראה ש imap לא מותקן או לא מופעל בשרת שלך"
+
+msgid "If system not respond in 30 seconds"
+msgstr "אם המערכת לא מגיבה תוך 30 שניות"
+
+msgid "Installation"
+msgstr "התקנה"
+
+msgid "Internal Note Has Been Posted"
+msgstr "פורסמה הודעה פנימית"
+
+msgid "Internal Note Has Not Been Posted"
+msgstr "ההודעה הפנימית לא פורסמה"
+
+msgid "Internal Notes"
+msgstr "הודעה פנימית"
+
+msgid "Internal note is posted by"
+msgstr "הודעה פנימית פורסמה על-ידי"
+
+msgid "It may take few minutes"
+msgstr "יתכן שזה יקח כמה דקות"
+
+msgid "JS Support Ticket Control Panel"
+msgstr "לב מערכת התמיכה"
+
+msgid "JS Support Ticket Pro Installer"
+msgstr "מנהל ההתקנה של מערכת התמיכה"
+
+msgid "JS Support Ticket main control panel"
+msgstr "לוח בקרה ראשי"
+
+msgid "JS Ticket Pro Installed Successfully"
+msgstr "גרסת הפרו של מערכת התמיכה הותקנה בהצלחה"
+
+msgid "Knowledge base article has been stored"
+msgstr "מאמר מאגר מידע נשמר"
+
+msgid "Knowledge base article has not been stored"
+msgstr "מאמר מאגר מידע לא נשמר"
+
+msgid "Language directory is not writeable"
+msgstr "ספריית שפה חסומה לכתיבה"
+
+msgid "Lastest Downlods"
+msgstr "הורדות אחרונות"
+
+msgid "Latest knowledge base"
+msgstr "מאמרים אחרונים במאגר המידע"
+
+msgid "Limit exceeds maximum open tickets"
+msgstr "חריגה מן המספר המרבי של פניות פתוחות"
+
+msgid "Login into your account"
+msgstr "הכנס לחשבון שלך"
+
+msgid "Login/Logout button"
+msgstr "כפתור כניסה/יציאה"
+
+msgid "Mail Setting"
+msgstr "הגדרות אימייל"
+
+msgid "Mail cannot mark as read"
+msgstr "לא ניתן לסמן את המייל כנקרא"
+
+msgid "Mail has been mark as read"
+msgstr "המייל סומן כנקרא"
+
+msgid "Mail has been send"
+msgstr "האימייל נשלח"
+
+msgid "Mail has not been mark as read"
+msgstr "המייל לא סומן כנקרא"
+
+msgid "Mail has not been send"
+msgstr "האימייל לא נשלח"
+
+msgid "Mail mark as read"
+msgstr "המייל סומן כנקרא"
+
+msgid "Mail mark as unread"
+msgstr "המייל סומן כלא נקרא"
+
+msgid "Mannual Download"
+msgstr "הורדה ידנית"
+
+msgid "Max record"
+msgstr "רקורד מרבי"
+
+msgid "More Detail"
+msgstr "פרטים נוספים"
+
+msgid "More Option"
+msgstr "אפשרויות נוספות"
+
+msgid "My tickets for both user and staff"
+msgstr "הפניות שלי הן עבור הצוות והן עבור המשתמשים"
+
+msgid "New Department"
+msgstr "מחלקה חדשה"
+
+msgid "New Help Topic"
+msgstr "נושא תמיכה חדש"
+
+msgid "New Staff"
+msgstr "חבר צוות חדש"
+
+msgid "New Version Is Available"
+msgstr "יש גרסה חדשה זמינה"
+
+msgid "New theme has been applied"
+msgstr "התבנית החדשה הופעלה"
+
+msgid "Next step"
+msgstr "הצעד הבא"
+
+msgid "No premade found"
+msgstr "לא נמצא שום מקדמה"
+
+msgid "Not assigned to staff"
+msgstr "לא משויך לצוות התמיכה"
+
+msgid "Oooops"
+msgstr "אופס"
+
+msgid "Opsss...."
+msgstr "אופסססס...."
+
+msgid "Our Products"
+msgstr "המוצרים שלנו"
+
+msgid "PHP version smaller then recomended"
+msgstr "גרסת ה PHP ישנה מן המומלץ"
+
+msgid "Password for given email address"
+msgstr "סיסמא לכתובת המייל"
+
+msgid "Please enable ticket via email setting first"
+msgstr "נא להפעיל קודם את האפשרות לפניה באמצעות אימייל"
+
+msgid "Please enter the google recaptcha private key from"
+msgstr "נא להזין את המפתח הפרטי של google recaptcha מ"
+
+msgid "Please enter the google recaptcha public key from"
+msgstr "נא להזין את המפתח הציבורי של google recaptcha מ"
+
+msgid "Please insert activation key and press start"
+msgstr "נא להזין מפתח הפעלה וללחוץ התחל"
+
+msgid "Please select atleast one category for"
+msgstr "נא לבחור לפחות קטגוריה אחת עבור"
+
+msgid "Popular knoweldge base"
+msgstr "מאמרים פופולריים במאגר המידע"
+
+msgid "Post internal note"
+msgstr "פרסום הודעה פנימית"
+
+msgid "Posted by"
+msgstr "פורסמה על-ידי"
+
+msgid "Premade Messages"
+msgstr "הודעות מוכנות מראש"
+
+msgid "Premade department message has been stored"
+msgstr "הודעת מחלקה שהוכנה מראש אוחסנה"
+
+msgid "Premade department message has not been stored"
+msgstr "הודעת מחלקה שהוכנה מראש לא אוחסנה"
+
+msgid "Premade message"
+msgstr "הודעה מוכנה מראש"
+
+msgid "Publish"
+msgstr "פרסם"
+
+msgid "Quick Configuration"
+msgstr "הגדרה מהירה"
+
+msgid "Recomended"
+msgstr "מומלץ"
+
+msgid "Redirect user to JS Support Ticket control panel after login"
+msgstr "הפניית משתמש ללוח הבקרה של התמיכה כאשר הוא מתחבר"
+
+msgid "Reply has been posted"
+msgstr "התשובה פורסמה"
+
+msgid "Reply has not been posted"
+msgstr "התשובה לא פורסמה"
+
+msgid "Report By User"
+msgstr "דוח לפי משתמש"
+
+msgid "Report By Users"
+msgstr "דוח לפי משתמשים"
+
+msgid "Requester Info"
+msgstr "מידע על הפונה"
+
+msgid "Role has been deleted"
+msgstr "התפקיד נמחק"
+
+msgid "Role has been stored"
+msgstr "התפקיד נשמר"
+
+msgid "Role has not been deleted"
+msgstr "התפקיד לא נמחק"
+
+msgid "Role has not been stored"
+msgstr "התפקיד לא נשמר"
+
+msgid "Save Staff Member"
+msgstr "שמירת חבר צוות"
+
+msgid "Save User Field"
+msgstr "שמירת ערך משתמש"
+
+msgid "Save attachments if found in email"
+msgstr "שמירת קבצים מצורפים אם צורפו למייל"
+
+msgid "Save email template"
+msgstr "שמירת תבניות אימייל"
+
+msgid "Save premade message"
+msgstr "שמירת הודעה מוכנה מראש"
+
+msgid "Search Announcement"
+msgstr "חיפוש הודעה"
+
+msgid "Search Download"
+msgstr "חיפוש הורדה"
+
+msgid "Search FAQ"
+msgstr "חיפוש שאלה"
+
+msgid "Search Knowledge Base"
+msgstr "חיפוש במאגר המידע"
+
+msgid "Select Staff"
+msgstr "בחירת איש צוות"
+
+msgid "Select department"
+msgstr "בחירת מחלקה"
+
+msgid "Select priority"
+msgstr "בחירת רמת דחיפות"
+
+msgid "Service is running please close the page"
+msgstr "השירות בפעולה, נא לסגור את העמוד"
+
+msgid "Set no. of days to mark ticket as overdue"
+msgstr "הגדרת מספר ימים לתפוגת פניה"
+
+msgid "Setting"
+msgstr "הגדרות"
+
+msgid "Show Detail"
+msgstr "הצגת פרטים"
+
+msgid "Show captcha on visitor form ticket"
+msgstr "הצגת קוד אימות בטופס פניה של מבקר"
+
+msgid "Show captcha when visitor want to create ticket"
+msgstr "הצגת קוד אימות כאשר מבקר שאינו מחובר רוצה ליצור פניה"
+
+msgid "Show latest FAQ's. Options:"
+msgstr "הצג שאלות נפוצות אחרונות. אפשרויות:"
+
+msgid "Show latest announcements. Options:"
+msgstr "הצג את ההודעות האחרונות. אפשרויות:"
+
+msgid "Show latest downloads. Options:"
+msgstr "הצג הורדות אחרונות. אפשרויות:"
+
+msgid "Show latest knowledge base. Options:"
+msgstr "הצג בסיס ידע אחרון. אפשרויות:"
+
+msgid "Show new and reply mail notifications"
+msgstr "הצגת התראות פניות ותשובות חדשות"
+
+msgid "Show number of open, closed, answered ticket in my ticket"
+msgstr "הצגת מספר פניות פתוחות, סגורות ושנענו בפניות שלי"
+
+msgid "Show popular FAQ's. Options:"
+msgstr "הצג שאלות נפוצות פופולריות. אפשרויות:"
+
+msgid "Show popular announcements. Options:"
+msgstr "הצג מודעות פופולריות. אפשרויות:"
+
+msgid "Show popular downloads. Options:"
+msgstr "הצג הורדות פופולריות. אפשרויות:"
+
+msgid "Show popular knowledge base. Options:"
+msgstr "הצג בסיס ידע פופולרי. אפשרויות:"
+
+msgid "Some thing wrong try again later"
+msgstr "משהו השתבש, נא לנסות שוב מאוחר יותר"
+
+msgid "Staff Member"
+msgstr "חבר צוות"
+
+msgid "Staff Members"
+msgstr "חברי צוות"
+
+msgid "Staff Menu Setting"
+msgstr "הגדרת תפריט צוות"
+
+msgid "Staff Section"
+msgstr "מקטע צוות"
+
+msgid "Staff Ticket"
+msgstr "פניית צוות"
+
+msgid "Staff member has been deleted"
+msgstr "חבר הצוות נמחק"
+
+msgid "Staff member has been stored"
+msgstr "חבר הצוות נשמר"
+
+msgid "Staff member has not been deleted"
+msgstr "חבר הצוות לא נמחק"
+
+msgid "Staff member has not been stored"
+msgstr "חבר הצוות לא נשמר"
+
+msgid "Staff member in use cannot deleted"
+msgstr "אי אפשר למחוק חבר צוות בשימוש"
+
+msgid "Staff member name"
+msgstr "שם חבר צוות"
+
+msgid "Start"
+msgstr "התחל"
+
+msgid "Start using"
+msgstr "תחילת שימוש"
+
+msgid "Support Area"
+msgstr "אזור התמיכה"
+
+msgid "System Slug"
+msgstr "סלאג המערכת"
+
+msgid "System slug is confilicted with post or page slug."
+msgstr "סלאג המערכת מתנגש עם עמוד או פוסט"
+
+msgid "Thanks For Installing JS Ticket Pro"
+msgstr "תודה על התקנת מערכת התמיכה"
+
+msgid "This message will show on new ticket"
+msgstr "הודעה זו תוצג בפניה חדשה"
+
+msgid "Ticket Department Transfer"
+msgstr "הפניית פניה למחלקה"
+
+msgid "Ticket Operations Mail Setting"
+msgstr "הגדרות מייל ביצוע פניות"
+
+msgid "Ticket Response Staff"
+msgstr "תגובת צוות לפניה"
+
+msgid "Ticket Via Email"
+msgstr "פניה באמצעות אימייל"
+
+msgid "Ticket auto close if user not respond within given days"
+msgstr "סגירה אוטומטית של פניה אם המשתמש לא הגיב בתוך מספר נתון של ימים"
+
+msgid "Ticket can be reopen within given number of days"
+msgstr "פניה יכולה להיפתח מחדש בתוך מספר נתון של ימים"
+
+msgid "Ticket has been locked"
+msgstr "הפניה ננעלה"
+
+msgid "Ticket has been marked as in progress"
+msgstr "הפניה סומנה שהיא בטיפול"
+
+msgid "Ticket has been marked as overdue"
+msgstr "הפניה סומנה כאיחור"
+
+msgid "Ticket has been reopend"
+msgstr "הפניה נפתחה מחדש"
+
+msgid "Ticket has been stored"
+msgstr "הפניה נשמרה"
+
+msgid "Ticket has been unlocked"
+msgstr "נעילת הפניה הוסרה"
+
+msgid "Ticket has not been locked"
+msgstr "הפניה לא ננעלה"
+
+msgid "Ticket has not been marked as in progress"
+msgstr "הפניה לא סומנה שהיא בטיפול"
+
+msgid "Ticket has not been marked as overdue"
+msgstr "הפניה לא סומנה כאיחור"
+
+msgid "Ticket has not been reopened"
+msgstr "הפניה לא נפתחה מחדש"
+
+msgid "Ticket has not been stored"
+msgstr "הפניה לא נשמרה"
+
+msgid "Ticket has not been unlocked"
+msgstr "לא הוסרה נעילת הפניה"
+
+msgid "Ticket is assigned to staff by"
+msgstr "הפניה שויכה לצוות התמיכה על-ידי"
+
+msgid "Ticket is locked"
+msgstr "הפניה נעולה"
+
+msgid "Ticket is locked by"
+msgstr "הפניה ננעלה על-ידי"
+
+msgid "Ticket is marked as in progress by"
+msgstr "הפניה סומנה שהיא בטיפול על-ידי"
+
+msgid "Ticket is marked as overdue by"
+msgstr "הפניה סומנה כאיחור על-ידי"
+
+msgid "Ticket is reopened by"
+msgstr "הפניה נפתחה מחדש על-ידי"
+
+msgid "Ticket is unlocked by"
+msgstr "נעילת הפניה הוסרה על-ידי"
+
+msgid "Ticket mark overdue"
+msgstr "לסמן כפג תוקף"
+
+msgid "Ticket reopen time limit end"
+msgstr "המועד האפשרי לפתיחת הפניה מחדש פג"
+
+msgid "Tickets By Staff"
+msgstr "פניות לפי צוות"
+
+msgid "Tickets by priorities"
+msgstr "פניות לפי דחיפויות"
+
+msgid "To Use This Feature You Must Be Staff Memeber"
+msgstr "כדי להשתמש בתכונה זו חובה להיות חבר צוות"
+
+msgid "To access this page please login"
+msgstr "כדי לגשת לעמוד זה, נא התחבר"
+
+msgid "Today"
+msgstr "היום"
+
+msgid "Top menu links"
+msgstr "קישורי תפריט עליון"
+
+msgid "Type"
+msgstr "סוג"
+
+msgid "Unable Connect To Server"
+msgstr "אי אפשר להתחבר לשרת"
+
+msgid "Unable to connect to server"
+msgstr "אי אפשר להתחבר לשרת"
+
+msgid "Update"
+msgstr "עדכון"
+
+msgid "Use Search Feature To Select The User"
+msgstr "השתמש בתכונת החיפוש כדי לבחור את המשתמש"
+
+msgid "User Menu Setting"
+msgstr "הגדרות תפריט משתמש"
+
+msgid "User already staff member"
+msgstr "המשתמש כבר חבר צוות"
+
+msgid "User id"
+msgstr "מזהה משתמש"
+
+msgid "View"
+msgstr "הצג"
+
+msgid "View Ticket"
+msgstr "הצגת הפניה"
+
+msgid "Visitor published"
+msgstr "המבקר פורסם"
+
+msgid "Waiting Customer Reply"
+msgstr "בהמתנה לתגובת הלקוח"
+
+msgid "Waiting Staff Reply"
+msgstr "בהמתנה לתגובת הצוות"
+
+msgid "Waiting reply"
+msgstr "בהמתנה לתגובה"
+
+msgid "Waiting staff reply"
+msgstr "בהמתנה לתגובת הצוות"
+
+msgid "Would you like to add this type to parent"
+msgstr "האם תרצה להוסיף סוג זה להורה"
+
+msgid "You are Already Logged in"
+msgstr "כבר מחובר"
+
+msgid "You are not allowed to view this page"
+msgstr "אין לך הרשאה לראות את הדף הזה"
+
+msgid "You are not logged in"
+msgstr "אינך מחובר"
+
+msgid "You are not staff member"
+msgstr "אינך חבר צוות"
+
+msgid "You cannot unmark it"
+msgstr "אי אפשר לבטל את הסימון"
+
+msgid "Your parent does not have this type"
+msgstr "להורה שלך אין סוג זה"
+
+msgid "Your System Is Up To Date"
+msgstr "המערכת שלך מעודכנת"
+
+msgid "Your account is disabled please contact to administrator"
+msgstr "המנוי שלך מבוטל. נא ליצור קשר עם ההנהלה."
+
+msgid "Your child have this type"
+msgstr "לילד שלך יש סוג זה"
+
+msgid "Your setting is working please save the setting"
+msgstr "נא לשמור את ההגדרות"
+
+msgid "Zip library"
+msgstr "ספריית Zip"
+
+msgid "Zip library not exist"
+msgstr "אין ספריית Zip"
+
+msgid "directory is not writeable"
+msgstr "התיקייה חסומה לכתיבה"
+
+msgid "extension"
+msgstr "הרחבה"
+
+msgid "override department setting"
+msgstr "דורס את הגדרות המחלקה"
+
+msgid "Add Files"
+msgstr "הוסף קבצים"
+
+msgid "Add Userfield"
+msgstr "הוספת שדה משתמש"
+
+msgid "Are you sure delete"
+msgstr "בטוח שלמחוק"
+
+msgid "Assign User Permissions"
+msgstr "הקצאת הרשאות משתמש"
+
+msgid "Assign to"
+msgstr "לשייך ל"
+
+msgid "Blocked"
+msgstr "חסום"
+
+msgid "Change ticket priority"
+msgstr "שינוי רמת דחיפות הפניה"
+
+msgid "Check box"
+msgstr "תיבת סימון"
+
+msgid "Control Panel Coulmn"
+msgstr "עמודת לוח בקרה"
+
+msgid "Data directory in not writable"
+msgstr "ספריית נתונים חסומה לכתיבה"
+
+msgid "Depandent field"
+msgstr "שדה תלוי"
+
+msgid "Dir not exist"
+msgstr "תיקייה לא קיימת"
+
+msgid "Display #"
+msgstr "הצגת #"
+
+msgid "Drop down"
+msgstr "רשימה נפתחת"
+
+msgid "Due Date"
+msgstr "תאריך לביצוע"
+
+msgid "Email already exist"
+msgstr "אימייל כבר קיים"
+
+msgid "Email reads sucessfully"
+msgstr "האימיילים נקראים בהצלחה"
+
+msgid "Empty values are not allowed"
+msgstr "שדה ריק לא מורשה"
+
+msgid "Enable print ticket"
+msgstr "אפשר הדפסת פניה"
+
+msgid "Field Name"
+msgstr "שם השדה"
+
+msgid "Field mark ordering down"
+msgstr "סימון שדה למטה"
+
+msgid "Get JS Tickets Translations"
+msgstr "קבל תרגומי כרטיסי JS"
+
+msgid "Id"
+msgstr "מזהה"
+
+msgid "Invalid data directory"
+msgstr "ספריית נתונים לא חוקית"
+
+msgid "Jerror Alertnoauthor"
+msgstr "אזהרת מערכת אין מחבר"
+
+msgid "Jstickets Uninstall Text"
+msgstr "טקסט הסרת התקנה"
+
+msgid "Language Translations"
+msgstr "תרגומי שפה"
+
+msgid "Loading"
+msgstr "טוען"
+
+msgid "Multi select"
+msgstr "בחירה מרובה"
+
+msgid "New Mail Message Recevied"
+msgstr "התקבלה הודעה חדשה באימייל"
+
+msgid "New Mail Receviced"
+msgstr "התקבל אימייל חדש"
+
+msgid "Not assigned"
+msgstr "לא משויך"
+
+msgid "Not default"
+msgstr "לא ברירת מחדל"
+
+msgid "Num"
+msgstr "מספר"
+
+msgid "Operation Cancel"
+msgstr "ביטול פעולה"
+
+msgid "Page not found"
+msgstr "הדף לא נמצא"
+
+msgid "Permission"
+msgstr "הרשאות"
+
+msgid "Phone"
+msgstr "טלפון"
+
+msgid "Phone Ext"
+msgstr "שלוחה"
+
+msgid "Premade"
+msgstr "הדועה שהוכנה מראש"
+
+msgid "Print ticket"
+msgstr "הדפס פניה"
+
+msgid "Radio button"
+msgstr "כפתור רדיו"
+
+msgid "Read only"
+msgstr "קריאה בלבד"
+
+msgid "Reply has not been stored"
+msgstr "התשובה לא פורסמה"
+
+msgid "Required language is not installed"
+msgstr "השפה הנדרשת לא מותקנת"
+
+msgid "Save Role Permission"
+msgstr "שמור הראשות תפקיד"
+
+msgid "Select parent field"
+msgstr "בחירת שדה אב"
+
+msgid "Select','js-jobs"
+msgstr "בחר ',' js-jobs"
+
+msgid "Staff Members Control Panel Links"
+msgstr "קישורים בלוח הבקרה של חברי צוות"
+
+msgid "Staff Members Top Menu Links"
+msgstr "קישורים בתפריט העליון  של חברי צוות"
+
+msgid "Text"
+msgstr "טקסט"
+
+msgid "Text area"
+msgstr "אזור טקסט"
+
+msgid "Text field"
+msgstr "שדה טקסט"
+
+msgid "Ticket in use cannot deleted"
+msgstr "הפניה בשימוש לא ניתן למחיקה"
+
+msgid "Ticket mark in progress"
+msgstr "סמן פניה שהיא בטיפול"
+
+msgid "Unknown"
+msgstr "לא ידוע"
+
+msgid "Upload file"
+msgstr "טען קובץ"
+
+msgid "Use The Table Below To Add New Values"
+msgstr "השתמש בטבלה שלהלן כדי להוסיף ערכים חדשים"
+
+msgid "User Control Panel Links"
+msgstr "קישורים בלוח הבקרה של המשתמש"
+
+msgid "User Top Menu Links"
+msgstr "קישורים בתפריט העליון של משתמשים"
+
+msgid "User field has been deleted"
+msgstr "שדה המשתמש נמחק"
+
+msgid "User field has been stored"
+msgstr "שדה המשתמש נשמר"
+
+msgid "User field has not been deleted"
+msgstr "שדה המשתמש לא נמחק"
+
+msgid "User field has not been stored"
+msgstr "שדה המשתמש לא נשמר"
+
+msgid "Values Between 1 T0 12 Default Is 3"
+msgstr "ערכים בין 1 ל 12 ברירת המחדל 3"
+
+msgid "View all"
+msgstr "הצג הכל"
+
+msgid "Visitor Menu Setting"
+msgstr "הגדרת תפריט מבקרים"
+
+msgid "Waiting admin/staff reply"
+msgstr "ממתין לתגובת מנהל / צוות"
+
+msgid "is not writeable"
+msgstr "לא ניתן לכתיבה"
+
+msgid "show print ticket icon on ticketdetail page to user"
+msgstr "הצג את סמל כרטיס ההדפסה בדף פרטי הכרטיס למשתמש"
+
+msgid "Form Category"
+msgstr "קטגוריית טפסים"
+
+msgid "You are not allowed to view this ticket"
+msgstr "אינך רשאי להציג כרטיס זה"
+
+msgid "You have already provided feedback for this ticket"
+msgstr "כבר סיפקת משוב עבור כרטיס זה"
+
+msgid "Ticket not found"
+msgstr "הכרטיס לא נמצא"
+
+msgid "Thank you for your feedback"
+msgstr "תודה על המשוב שלך"
+
+msgid "Feedback Setting"
+msgstr "הגדרת משוב"
+
+msgid "Interval type to mark ticket as overdue"
+msgstr "סוג המרווח לסימון הכרטיס כמועד איחור"
+
+msgid "Set no. of days or hours to mark ticket as overdue"
+msgstr "סט לא. של ימים או שעות לסימון הכרטיס כמועד איחור"
+
+msgid "Select whether you want to show captcha on registration form or not"
+msgstr "בחר האם אתה רוצה קוד אימות ברישום או לא"
+
+msgid "Select role you want to assign to new users"
+msgstr "בחר תפקיד שאתה רוצה להקצות למשתמשים חדשים"
+
+msgid "Select whether users can reply to closed ticket via email or not"
+msgstr "בחר אם המשתמשים יכולים להשיב לכרטיס סגור באמצעות דואר אלקטרוני או לא"
+
+msgid "This text will appear whenever visitor creates ticket"
+msgstr "טקסט זה יופיע בכל פעם שהמבקר יוצר כרטיס"
+
+msgid "Set no. of days or hours to send feedback email after ticket is closed"
+msgstr "סט לא. של ימים או שעות כדי לשלוח דוא\\"
+
+msgid "Feedback Successful message to customer"
+msgstr "משוב הודעה מוצלחת ללקוח"
+
+msgid "You cannot use this email it is used in ticket via email"
+msgstr "אינך יכול להשתמש בדוא\\"
+
+msgid "User of this department will receive email on new ticket"
+msgstr "המשתמש במחלקה זו יקבל דוא\\"
+
+msgid "Departent Report"
+msgstr "דוח המחלקה"
+
+msgid "Users tickets"
+msgstr "פניות משתמשים"
+
+msgid "Users Ticekts"
+msgstr "פניות משתמש"
+
+msgid "Edit reason"
+msgstr "ערוך סיבה"
+
+msgid "Answerd"
+msgstr "נענה"
+
+msgid "Select Staff Member"
+msgstr "בחר איש צוות"
+
+msgid "Provide Feedback"
+msgstr "ספק משוב"
+
+msgid "Field Parent has not been stored"
+msgstr "הורה שדה לא נשמר"
+
+msgid "Please Insert Atleat one value for every option"
+msgstr "אנא הכנס לפחות ערך אחד לכל אפשרות"
+
+msgid "Add New"
+msgstr "הוסף חדש"
+
+msgid "User Field"
+msgstr "שדה משתמש"
+
+msgid "Misc"
+msgstr "שונות"
+
+msgid "We'd love to hear from"
+msgstr "נשמח לשמוע מ"
+
+msgid "You"
+msgstr "אתה"
+
+msgid "Word Press Extension Directory"
+msgstr "מדריך הארכת עיתונות של Word"
+
+msgid "Departments Reports"
+msgstr "דוחות מחלקות"
+
+msgid "Staff Feedbacks"
+msgstr "פידבקים של הצוות"
+
+msgid "Password Again"
+msgstr "סיסמא שוב"
+
+msgid "Register New Account"
+msgstr "רישום משתמש חדש"
+
+msgid "Tickets Updater"
+msgstr "עדכוני כרטיסים"
+
+msgid "Report By Department"
+msgstr "דוח לפי מחלקה"
+
+msgid "out of"
+msgstr "מתוך"
+
+msgid "Report By Deparments"
+msgstr "דו\\"
+
+msgid "Deparments"
+msgstr "מחלקות"
+
+msgid "No Data"
+msgstr "אין מידע"
+
+msgid "Staff Report"
+msgstr "דוח צוות"
+
+msgid "Date From"
+msgstr "תאריך מ"
+
+msgid "Date To"
+msgstr "תאריך ל"
+
+msgid "My Reports"
+msgstr "הדוחות שלי"
+
+msgid "Staff Members Reports"
+msgstr "דוחות אנשי צוות"
+
+msgid "Ticket has been created"
+msgstr "הפניה נוצרה"
+
+msgid "Issue Summary"
+msgstr "סיכום הנושא"
+
+msgid "All Downloads"
+msgstr "כלל ההורדות"
+
+msgid "Low"
+msgstr "נמוך"
+
+msgid "Customer Feedbacks"
+msgstr "משוב של לקוחות"
+
+msgid "Upload"
+msgstr "טען"
+
+msgid "Ticketid"
+msgstr "מזהה פניה"
+
+msgid "Duedate Ticket"
+msgstr "פניה שפג תוקפה"
+
+msgid "New Ticket Notification"
+msgstr "הודעה על כרטיס חדש"
+
+msgid "Edit Own Time"
+msgstr "ערוך זמן משלו"
+
+msgid "View Feedback"
+msgstr "צפה במשוב"
+
+msgid "Assign Role Permissions"
+msgstr "הקצאת הרשאות תפקיד"
+
+msgid "Assign Role To User"
+msgstr "הקצאת תפקיד למשתמש"
+
+msgid "Add User"
+msgstr "הוספת משתמש"
+
+msgid "Edit User"
+msgstr "עריכת משתמש"
+
+msgid "Delete Department"
+msgstr "מחיקת מחלקה"
+
+msgid "View Department"
+msgstr "הצגת מחלקה"
+
+msgid "Delete Role"
+msgstr "מחיקת תפקיד"
+
+msgid "Delete User"
+msgstr "מחיקת משתמש"
+
+msgid "View Role"
+msgstr "הצגת תפקיד"
+
+msgid "View User"
+msgstr "הצגת משתמש"
+
+msgid "View Staff Reports"
+msgstr "צפו בדוחות הצוות"
+
+msgid "View Department Reports"
+msgstr "צפו בדוחות המחלקה"
+
+msgid "View Category"
+msgstr "צפה בקטגוריה"
+
+msgid "View Knowledge Base"
+msgstr "צפה בבסיס הידע"
+
+msgid "Delete Category"
+msgstr "מחק קטגוריה"
+
+msgid "Delete Knowledge Base"
+msgstr "מחק את בסיס הידע"
+
+msgid "View FAQ"
+msgstr "צפה בשאלות נפוצות"
+
+msgid "Delete FAQ"
+msgstr "מחק שאלות ותשובות"
+
+msgid "View Download"
+msgstr "לצפות בהורדה"
+
+msgid "Delete Download"
+msgstr "מחק הורדה"
+
+msgid "View Announcement"
+msgstr "צפה בהכרזה"
+
+msgid "Delete Announcement"
+msgstr "מחק הודעה"
+
+msgid "Allow Mail System"
+msgstr "אפשר מערכת דואר"
+
+msgid "Internal Note Title"
+msgstr "כותרת הערה פנימית"
+
+msgid "Satisfaction Reports"
+msgstr "דוחות שביעות רצון"
+
+msgid "Exports"
+msgstr "יצוא"
+
+msgid "Customer Satisfaction Report"
+msgstr "דוח שביעות רצון לקוחות"
+
+msgid "Please wait installation in progress"
+msgstr "אנא המתן להתקנה"
+
+msgid "Show Captcha To Visitor On Form Ticket"
+msgstr "הצג את קפצ'ה למבקר בכרטיס טופס"
+
+msgid "Feedback Email Settings"
+msgstr "הגדרות דוא\\"
+
+msgid "Feedback successfully stored message"
+msgstr "משוב בהודעה שנשמרה בהצלחה"
+
+msgid "Ticket Fields"
+msgstr "שדות פניה"
+
+msgid "Export Tickets"
+msgstr "ייצוא כרטיסים"
+
+msgid "High"
+msgstr "גבוהה"
+
+msgid "Ticket has been unmarked as overdue"
+msgstr "הכרטיס לא סומן כתוצאה מאיחור"
+
+msgid "Ticket has not been unmarked as overdue"
+msgstr "הכרטיס לא סומן כאיחור"
+
+msgid "Ticket is unmarked as overdue by"
+msgstr "הכרטיס אינו מסומן כתוצאה מאיחור"
+
+msgid "Assigned To Me"
+msgstr "לשייך אלי"
+
+msgid "OK"
+msgstr "בסדר"
+
+msgid "JS Support Ticket System"
+msgstr "מערכת לפתיחת קריאות שירות"
+
+msgid "Management"
+msgstr "ניהול"
+
+msgid "Ticket Id"
+msgstr "מזהה פניה"
+
+msgid "Assign To"
+msgstr "לשייך ל"
+
+msgid "Show on listing"
+msgstr "הצג ברישום"
+
+msgid "Remarks"
+msgstr "הערות"
+
+msgid "You are not login"
+msgstr "אינך מחובר"
+
+msgid "Pro Features"
+msgstr "תכונות מקצוענים"
+
+msgid "Upgrade"
+msgstr "שדרג"
+
+msgid "JS Support Ticket Pro"
+msgstr "כרטיס תמיכה תומך ב- JS"
+
+msgid "Feature available in pro version only"
+msgstr "התכונה זמינה בגרסת המקצוען בלבד"
+
+msgid "JS Support Ticket Pro Feature"
+msgstr "JS תומך בכרטיס Pro"
+
+msgid "Unlimited color tools to desire result"
+msgstr "כלי צבע בלתי מוגבלים לתוצאה הרצויה"
+
+msgid "Access Control Level"
+msgstr "רמת בקרת גישה"
+
+msgid "Access control limit you can limit your staff to do specific task"
+msgstr "מגבלת בקרת גישה אתה יכול להגביל את הצוות שלך לבצע משימה ספציפית"
+
+msgid "Staff member create premade message premade available in ticket reply"
+msgstr "איש צוות יוצר הודעה מוקדמת מראש שזמין בתגובת הכרטיס"
+
+msgid "Staff member can be created and reply your customer tickets"
+msgstr "ניתן ליצור איש צוות ולהשיב את כרטיסי הלקוחות שלך"
+
+msgid "Help topic can be add with respect to departments"
+msgstr "ניתן להוסיף נושא עזרה ביחס למחלקות"
+
+msgid "You can create and maintain knowledge Base for your ticket system"
+msgstr "אתה יכול ליצור ולתחזק Knowledge Base עבור מערכת הכרטיסים שלך"
+
+msgid "You can add downloads for your customers"
+msgstr "אתה יכול להוסיף הורדות ללקוחות שלך"
+
+msgid "Add announcements for your support system"
+msgstr "הוסף מודעות למערכת התמיכה שלך"
+
+msgid "You can Manager FAQs"
+msgstr "אתה יכול לקבל שאלות נפוצות על מנהל"
+
+msgid "You can ban and unabn any spam email address"
+msgstr "אתה יכול לאסור ולבטל כל כתובת דוא\\"
+
+msgid "If and only if customer not reply certain days ticket marked overdue"
+msgstr "אם ורק אם הלקוח לא עונה על ימים מסוימים כרטיס המסומן באיחור"
+
+msgid "System will read your email and create tickets"
+msgstr "המערכת תקרא את הדוא\\"
+
+msgid "Internal notes for staff members and administrator ticket based"
+msgstr "הערות פנימיות עבור אנשי צוות וכרטיס מנהל"
+
+msgid "Assign To Staff"
+msgstr "שיוך הפניה לצוות התמיכה"
+
+msgid "Ticket can be transferred to any other staff member"
+msgstr "ניתן להעביר כרטיס לכל איש צוות אחר"
+
+msgid "Ticket can also be transferred to any other department"
+msgstr "ניתן להעביר כרטיס לכל מחלקה אחרת"
+
+msgid "Activity Log"
+msgstr "דוח פעילות"
+
+msgid "Ticket action history with time and user name"
+msgstr "היסטוריית פעולות כרטיסים עם זמן ושם משתמש"
+
+msgid "Admin can export tickets in csv format to keep record"
+msgstr "מנהל האתר יכול לייצא כרטיסים בפורמט csv כדי לשמור על רישום"
+
+msgid "Customer Feedback"
+msgstr "משוב לקוחות"
+
+msgid "Customer can provide feedback that can be used to improve services"
+msgstr "הלקוח יכול לספק משוב שניתן להשתמש בו לשיפור השירותים"
+
+msgid "RTL Supported"
+msgstr "RTL נתמך"
+
+msgid "JS Support Ticket auto adjusts to RTL or LTR without any problem."
+msgstr "כרטיס JS תמיכה אוטומטית מתכוונן ל- RTL או LTR ללא שום בעיה."
+
+msgid "Staff Time Tracking"
+msgstr "מעקב בזמן הצוות"
+
+msgid "Visitor Ticket Open"
+msgstr "כרטיס ביקור פתוח"
+
+msgid "Visitor can also open ticket in you support system"
+msgstr "מבקר יכול גם לפתוח כרטיס במערכת התמיכה שלך"
+
+msgid "You can now lock or unlock any ticket for certain time"
+msgstr "כעת תוכלו לנעול או לבטל את הנעילה של כל כרטיס לזמן מסוים"
+
+msgid "Pro version only"
+msgstr "גרסת Pro בלבד"
+
+msgid "This ticket is marked as overdue"
+msgstr "כרטיס זה מסומן כאיחור"
+
+msgid "Ticket marked as overdue"
+msgstr "כרטיס מסומן כאיחור"
+
+msgid "Gmail"
+msgstr "Gmail"
+
+msgid "Yahoo"
+msgstr "יאהו"
+
+msgid "Aol"
+msgstr "Aol"
+
+msgid "Hotmail"
+msgstr "הוטמייל"
+
+msgid "Cron Job"
+msgstr "קרון ג'וב"
+
+msgid "Web Cron Job"
+msgstr "Web Cron Job"
+
+msgid "Wget"
+msgstr "וגט"
+
+msgid "Curl"
+msgstr "סִלְסוּל"
+
+msgid "PHP Script"
+msgstr "סקריפט PHP"
+
+msgid "JYes"
+msgstr "כן"
+
+msgid "JNo"
+msgstr "JNo"
+
+msgid "Please select"
+msgstr "בבקשה תבחר"
+
+msgid "GDPR"
+msgstr "GDPR"
+
+msgid "Own Captcha"
+msgstr "קפטצ'ה משלו"
+
+msgid "MailChimp"
+msgstr "MailChimp"
+
+msgid "DD-MM-YYYY"
+msgstr "DD-MM-YYYY"
+
+msgid "MM-DD-YYYY"
+msgstr "MM-DD-YYYY"
+
+msgid "YYYY-MM-DD"
+msgstr "YYYY-MM-DD"
+
+msgid "Api Key"
+msgstr "מפתח אפי"
+
+msgid "SMTP"
+msgstr "SMTP"
+
+msgid "TLS"
+msgstr "TLS"
+
+msgid "SSL"
+msgstr "SSL"
+
+msgid "Auto Response"
+msgstr "תגובה אוטומטית"
+
+msgid "50%"
+msgstr "50%"
+
+msgid "100%"
+msgstr "100%"
+
+msgid "Premium Addons List"
+msgstr "רשימת תוספות פרימיום"
+
+msgid "Features"
+msgstr "מאפיינים"
+
+msgid "Addons"
+msgstr "תוספות"
+
+msgid "WooCommerce"
+msgstr "WooCommerce"
+
+msgid "envato"
+msgstr "envato"
+
+msgid "fb"
+msgstr "פֶּנסיוֹן מָלֵא"
+
+msgid ":"
+msgstr ":"
+
+msgid "2"
+msgstr "2"
+
+msgid "3"
+msgstr "3"
+
+msgid "helptopic"
+msgstr "נושא עזרה"
+
+msgid "Closed and merged"
+msgstr "נסגר ואוחד"
+
+msgid "Ticket Assign and Transfer"
+msgstr "הקצאת כרטיסים והעברה"
+
+msgid ","
+msgstr ","
+
+msgid "5.0"
+msgstr "5.0"
+
+msgid "Autoresponse"
+msgstr "תגובה אוטומטית"
+
+msgid "Goto Web"
+msgstr "עבור אל האינטרנט"
+
+msgid "PHP"
+msgstr "PHP"
+
+msgid "1"
+msgstr "1"
+
+msgid "User has been successfully registered"
+msgstr "המשתמש נרשם בהצלחה"
+
+msgid "Select Form"
+msgstr "בחר טופס"
+
+msgid "Envato Purchase Code"
+msgstr "קוד רכישה של Envato"
+
+msgid "Urgent"
+msgstr "דחוף"
+
+msgid "EDD Order ID"
+msgstr "מזהה הזמנה EDD"
+
+msgid "Search keywords"
+msgstr "חיפוש מילות מפתח"
+
+msgid "Search title"
+msgstr "כותרת חיפוש"
+
+msgid "Manager"
+msgstr "מנהל"
+
+msgid "Assign Ticket To Agent"
+msgstr "הקצה כרטיס לסוכן"
+
+msgid "Mark In Progress"
+msgstr "סימון בתהליך"
+
+msgid "Change Ticket Priority"
+msgstr "שנה עדיפות כרטיס"
+
+msgid "Ban Email And Close Ticket"
+msgstr "חסום אימייל וסגור כרטיס"
+
+msgid "Release Ticket"
+msgstr "כרטיס שחרור"
+
+msgid "View Credentials"
+msgstr "הצג אישורים"
+
+msgid "Edit Credentials"
+msgstr "ערוך אישורים"
+
+msgid "Mark Non Premium"
+msgstr "סמן Non Premium"
+
+msgid "Link To Paid Support"
+msgstr "קישור לתמיכה בתשלום"
+
+msgid "Export Ticket not translate"
+msgstr "ייצוא כרטיס לא מתרגם"
+
+msgid "Edit Help Topic not translate"
+msgstr "ערוך את נושא העזרה לא מתרגם"
+
+msgid "View Help Topic"
+msgstr "הצג את נושא העזרה"
+
+msgid "Delete Help Topic"
+msgstr "מחק את נושא העזרה"
+
+msgid "Edit Canned Response"
+msgstr "ערוך תגובה מוכנה"
+
+msgid "View Canned Response"
+msgstr "צפה בתגובה משומרת"
+
+msgid "Delete Canned Response"
+msgstr "מחק תגובה מוכנה"
+
+msgid "Standard"
+msgstr "תֶקֶן"
+
+msgid "Default with auto assign"
+msgstr "ברירת מחדל עם הקצאה אוטומטית"
+
+msgid "Visible"
+msgstr "גלוי"
+
+msgid "Select Visible"
+msgstr "בחר גלוי"
+
+msgid "Logedin user"
+msgstr "משתמש מחובר"
+
+msgid "Logedin user only"
+msgstr "משתמש מחובר בלבד"
+
+msgid "visitor"
+msgstr "אורח"
+
+msgid "Single Header"
+msgstr "כותרת אחת"
+
+msgid "Multiple Header"
+msgstr "כותרות מרובות"
+
+msgid "Quick installation Guide"
+msgstr "מדריך התקנה מהיר"
+
+msgid "How to setup"
+msgstr "איך להציב"
+
+msgid "Ticket Creation"
+msgstr "יצירת כרטיסים"
+
+msgid "Custom Fields"
+msgstr "שדות מותאמים אישית"
+
+msgid "Email Notification Problems"
+msgstr "בעיות בהתראה באימייל"
+
+msgid "arrow"
+msgstr "חֵץ"
+
+msgid "close"
+msgstr "סגור"
+
+msgid "Multiform"
+msgstr "רַב צוּרוֹת"
+
+msgid "Add WP Users"
+msgstr "הוסף משתמשי WP"
+
+msgid "Other Products"
+msgstr "מוצרים אחרים"
+
+msgid "watch video"
+msgstr "צפה בוידאו"
+
+msgid "Get"
+msgstr "לקבל"
+
+msgid "This prefix will be added to slug incase of homepage links"
+msgstr "קידומת זו תתווסף ל-slug במקרה של קישורים לדף הבית"
+
+msgid " This prefix will be added to slug incase of conflict"
+msgstr "קידומת זו תתווסף ל-slug במקרה של התנגשות"
+
+msgid "Reset All"
+msgstr "לאפס הכל"
+
+msgid "Search By Slug"
+msgstr "חפש לפי Slug"
+
+msgid "Slug List"
+msgstr "רשימת שבלולים"
+
+msgid "This button will only save slugs on current page"
+msgstr "כפתור זה ישמור רק שבלולים בדף הנוכחי"
+
+msgid "Slug"
+msgstr "שבלול"
+
+msgid "Export Style"
+msgstr "סגנון ייצוא"
+
+msgid "Add Multiform"
+msgstr "הוסף Multiform"
+
+msgid "Edit Fields"
+msgstr "ערוך שדות"
+
+msgid "Save Multiform"
+msgstr "שמור Multiform"
+
+msgid "Conditions"
+msgstr "תנאים"
+
+msgid "Add Conditions"
+msgstr "הוסף תנאים"
+
+msgid "Rule Title"
+msgstr "כותרת הכלל"
+
+msgid "Agent Auto Assign"
+msgstr "הקצאת סוכן אוטומטית"
+
+msgid "Add Rule"
+msgstr "הוסף כלל"
+
+msgid "Condition Title"
+msgstr "כותרת המצב"
+
+msgid "Condition Operator"
+msgstr "מפעיל מצב"
+
+msgid "Condition value"
+msgstr "ערך מצב"
+
+msgid "Select Condition Title"
+msgstr "בחר כותרת תנאי"
+
+msgid "Submit Type"
+msgstr "סוג הגשה"
+
+msgid "Select Condition Operator"
+msgstr "בחר מצב מפעיל"
+
+msgid "Contain"
+msgstr "לְהַכִיל"
+
+msgid "Matched"
+msgstr "תואם"
+
+msgid "Equal"
+msgstr "שווה"
+
+msgid "No Value found"
+msgstr "לא נמצא ערך"
+
+msgid "No Operator found"
+msgstr "לא נמצא מפעיל"
+
+msgid "Add more Condition"
+msgstr "הוסף מצב נוסף"
+
+msgid "Save Rule"
+msgstr "שמור כלל"
+
+msgid "Delete Condition"
+msgstr "מחק מצב"
+
+msgid "Add Ticket Using Multiform"
+msgstr "הוסף כרטיס באמצעות Multiform"
+
+msgid "Addons Status"
+msgstr "סטטוס תוספות"
+
+msgid "Activated"
+msgstr "מוּפעָל"
+
+msgid "Deactivate"
+msgstr "השבת"
+
+msgid "Updated"
+msgstr "מְעוּדכָּן"
+
+msgid "Deactivated"
+msgstr "מושבת"
+
+msgid "Activate"
+msgstr "לְהַפְעִיל"
+
+msgid "New Update Version"
+msgstr "גרסת עדכון חדשה"
+
+msgid "is Available"
+msgstr "זמין"
+
+msgid "Expired"
+msgstr "לא בתוקף"
+
+msgid "Buy Now"
+msgstr "קנה עכשיו"
+
+msgid "Help"
+msgstr "עֶזרָה"
+
+msgid "Update Now"
+msgstr "עדכן כעת"
+
+msgid "Add-On’s For Help Desk"
+msgstr "תוספות לדלפק העזרה"
+
+msgid ""
+"Get trusted WordPress add on’s. Guaranteed to work fast, safe to use, "
+"beautifully coded, packed with features and easy to use."
+msgstr ""
+"קבל תוספים אמינים של וורדפרס. מובטח לעבוד מהר, בטוח לשימוש, מקודד יפה, עמוס "
+"בתכונות וקל לשימוש."
+
+msgid "Save big with an exclusive membership plan today!"
+msgstr "חסוך גדול עם תוכנית חברות בלעדית עוד היום!"
+
+msgid "show bundle pack"
+msgstr "הצג חבילה"
+
+msgid ""
+"Add agents and assign roles and permissions to provide assistance and "
+"support to customer support tickets."
+msgstr ""
+"הוסף סוכנים והקצה תפקידים והרשאות כדי לספק סיוע ותמיכה לכרטיסי תמיכת לקוחות."
+
+msgid ""
+"Define rules for ticket to auto close. Ticket will be auto close after "
+"specific interval of time which can be set by admin."
+msgstr ""
+"הגדר כללים לסגירה אוטומטית של כרטיס. הכרטיס ייסגר אוטומטית לאחר מרווח זמן "
+"ספציפי שניתן להגדיר על ידי המנהל."
+
+msgid ""
+"Get the survey from your customers on ticket closing to improve your quality "
+"of services and assistance."
+msgstr ""
+"קבל את הסקר מהלקוחות שלך על סגירת כרטיסים כדי לשפר את איכות השירותים והסיוע "
+"שלך."
+
+msgid "Helptopic"
+msgstr "נושא עזרה"
+
+msgid ""
+"Help topics help users to find and select the area with which they need "
+"assistance."
+msgstr "נושאי עזרה עוזרים למשתמשים למצוא ולבחור את האזור שבו הם זקוקים לסיוע."
+
+msgid ""
+"The private note is used as reminders or to give other agents insights into "
+"the ticket issue. User Won't see the private notes."
+msgstr ""
+"ההערה הפרטית משמשת כתזכורת או כדי לתת לסוכנים אחרים תובנות לגבי נושא הכרטיס. "
+"המשתמש לא יראה את ההערות הפרטיות."
+
+msgid ""
+"Stop losing productivity on repetitive queries,Build your knowledge base, "
+"group solutions by topics to facilitate users."
+msgstr ""
+"הפסק לאבד פרודוקטיביות בשאילתות שחוזרות על עצמן, בנה את בסיס הידע שלך, קבץ "
+"פתרונות לפי נושאים כדי להקל על המשתמשים."
+
+msgid ""
+"Enables admin to set N numbers of tickets for users to create and set N "
+"numbers of Ticket to open for agents separately."
+msgstr ""
+"מאפשר למנהל להגדיר N מספרי כרטיסים למשתמשים ליצור ולהגדיר N מספרי כרטיסים "
+"שיפתחו עבור סוכנים בנפרד."
+
+msgid "Multi Language Email Templates"
+msgstr "תבניות דוא\"ל מרובות שפות"
+
+msgid ""
+"It allows to create language-based email templates for all JS Help Desk "
+"email templates."
+msgstr ""
+"זה מאפשר ליצור תבניות דוא\"ל מבוססות שפה עבור כל תבניות הדוא\"ל של JS Help "
+"Desk."
+
+msgid ""
+"Canned Responses are pre-populated messages that allows support agents to "
+"respond quickly to customer issues."
+msgstr ""
+"תגובות מוכנות הן הודעות מאוכלסות מראש המאפשרות לסוכני תמיכה להגיב במהירות "
+"לבעיות של לקוחות."
+
+msgid ""
+"Enables users to reply to the tickets via email without the need to login to "
+"the support system first."
+msgstr ""
+"מאפשר למשתמשים להשיב לכרטיסים באמצעות דואר אלקטרוני ללא צורך בכניסה תחילה "
+"למערכת התמיכה."
+
+msgid ""
+"Make unlimited announcements associated with support system to get customer "
+"interaction."
+msgstr ""
+"פרסם הודעות בלתי מוגבלות הקשורות למערכת התמיכה כדי ליצור אינטראקציה עם "
+"לקוחות."
+
+msgid ""
+"Ban Email allows you to block email of any user to restrict him to create "
+"new tickets."
+msgstr ""
+"Ban Email מאפשר לך לחסום אימייל של כל משתמש כדי להגביל אותו ליצור כרטיסים "
+"חדשים."
+
+msgid "Descktop Notifications"
+msgstr "הודעות על שולחן העבודה"
+
+msgid ""
+"Save the ticket as a PDF in your system or the admin will also be able to "
+"export all the data inside of Ticket."
+msgstr ""
+"שמור את הכרטיס כקובץ PDF במערכת שלך או שהמנהל יוכל גם לייצא את כל הנתונים "
+"בתוך Ticket."
+
+msgid ""
+"Tired of getting tickets about the same problems? Add FAQs to drastically "
+"reduce the number of common questions from users."
+msgstr ""
+"נמאס לך להשיג כרטיסים על אותן בעיות? הוסף שאלות נפוצות כדי להפחית באופן "
+"דרסטי את מספר השאלות הנפוצות של משתמשים."
+
+msgid "Admin Widgets"
+msgstr "ווידג'טים של מנהל מערכת"
+
+msgid ""
+"Use internal email to send emails to one agent to another agent with in "
+"support ticket."
+msgstr ""
+"השתמש בדוא\"ל פנימי כדי לשלוח מיילים לסוכן אחד לסוכן אחר עם כרטיס תמיכה."
+
+msgid "Front-End Widget"
+msgstr "ווידג'ט חזיתי"
+
+msgid ""
+"Paid Support is the easiest way to integrate and manage payments for your "
+"support tickets."
+msgstr ""
+"תמיכה בתשלום היא הדרך הקלה ביותר לשלב ולנהל תשלומים עבור כרטיסי התמיכה שלך."
+
+msgid "Mail Chimp"
+msgstr "Mailchimp"
+
+msgid ""
+"The Mail Chimp add-on adds a new checkbox to the registration form for "
+"prompting new users to subscribe your email-list."
+msgstr ""
+"התוסף Mail Chimp מוסיף תיבת סימון חדשה לטופס ההרשמה כדי להנחות משתמשים חדשים "
+"להירשם לרשימת הדוא\"ל שלך."
+
+msgid ""
+"EDD offers customers to open new tickets just one click from their EDD "
+"account with optionally validating the license keys."
+msgstr ""
+"EDD מציעה ללקוחות לפתוח כרטיסים חדשים בלחיצה אחת בלבד מחשבון EDD שלהם עם "
+"אימות אופציונלי של מפתחות הרישיון."
+
+msgid "email cc"
+msgstr "דוא\"ל cc"
+
+msgid "Email Cc"
+msgstr "דוא\"ל עותק"
+
+msgid ""
+"CC(Carbon Copy) - the people who should know about the information which is "
+"being shared and the people included are able to see who is there in the "
+"list."
+msgstr ""
+"CC(Carbon Copy) - האנשים שצריכים לדעת על המידע שמשותף והאנשים הכלולים יכולים "
+"לראות מי נמצא שם ברשימה."
+
+msgid "multiform"
+msgstr "רַב צוּרוֹת"
+
+msgid "Multiform allows user to add more than one form based on requirements."
+msgstr "Multiform מאפשר למשתמש להוסיף יותר מטופס אחד בהתאם לדרישות."
+
+msgid "agent auto assign"
+msgstr "הקצאת סוכן אוטומטית"
+
+msgid ""
+"When auto assignment is enabled and a ticket is created, an appropriate "
+"agent is automatically assigned to the ticket and it is moved to the "
+"Assigned state."
+msgstr ""
+"כאשר הקצאה אוטומטית מופעלת וכרטיס נוצר, סוכן מתאים מוקצה אוטומטית לכרטיס "
+"והוא מועבר למצב מוקצה."
+
+msgid "Social Login"
+msgstr "התחברות חברתית"
+
+msgid ""
+"Users can login from their social media accounts. They can create a new "
+"account or use social media accounts."
+msgstr ""
+"משתמשים יכולים להתחבר מחשבונות המדיה החברתית שלהם. הם יכולים ליצור חשבון חדש "
+"או להשתמש בחשבונות מדיה חברתית."
+
+msgid "JS Help Desk Add-Ons Bundle Pack"
+msgstr "חבילת תוספות של JS Help Desk"
+
+msgid "Basic"
+msgstr "בסיסי"
+
+msgid "Unlimited Agents"
+msgstr "סוכנים ללא הגבלה"
+
+msgid "Show all"
+msgstr "הצג הכול"
+
+msgid "Everything in basic included and"
+msgstr "הכל בבסיסי כלול ו"
+
+msgid "Professional"
+msgstr "מקצועי"
+
+msgid "Everything in standard included and"
+msgstr "הכל בסטנדרט כלול ו"
+
+msgid "All Future Addons"
+msgstr "כל התוספות העתידיות"
+
+msgid ""
+"Hey there! We have recently launched a fresh update for the add-ons. Don't "
+"forget to update the add-ons to enjoy the greatest features!"
+msgstr ""
+"שלום! לאחרונה השקנו עדכון חדש עבור התוספות. אל תשכח לעדכן את התוספות כדי "
+"ליהנות מהתכונות הטובות ביותר!"
+
+msgid "View Addone Status"
+msgstr "הצג את סטטוס Addone"
+
+msgid "slug for ticket page"
+msgstr "שבלול עבור דף הכרטיסים"
+
+msgid "slug for agent add ticket page"
+msgstr "דף הוספת כרטיס קלס לסוכן"
+
+msgid "slug for rolepermission page"
+msgstr "שבלול עבור דף הרשאות תפקיד"
+
+msgid "slug for add announcement"
+msgstr "שבלול להכרזה נוספת"
+
+msgid "slug for add department page"
+msgstr "שבלול עבור דף הוספת מחלקה"
+
+msgid "slug for add download page"
+msgstr "שבלול להוספת דף הורדה"
+
+msgid "slug for add faq page"
+msgstr "שבלול עבור דף הוספת שאלות נפוצות"
+
+msgid "slug for faq page"
+msgstr "שבלול עבור דף שאלות נפוצות"
+
+msgid "slug for add article page"
+msgstr "שבלול להוספת דף מאמר"
+
+msgid "slug for add category page"
+msgstr "שבלול עבור דף הוספת קטגוריות"
+
+msgid "slug for user knowledgebase articles page"
+msgstr "שבלול עבור דף מאמרי מאגר הידע של המשתמש"
+
+msgid "slug for article detail page"
+msgstr "שבלול עבור דף פירוט המאמר"
+
+msgid "slug for add role page"
+msgstr "שבלול עבור דף הוספת תפקיד"
+
+msgid "slug for add agent page"
+msgstr "שבלול עבור דף הוספת סוכן"
+
+msgid "slug for agent permissions page"
+msgstr "שבלול עבור דף הרשאות סוכן"
+
+msgid "slug for my tickets page"
+msgstr "שבלול עבור דף הכרטיסים שלי"
+
+msgid "slug for agent my tickets page"
+msgstr "שבלול לסוכן דף הכרטיסים שלי"
+
+msgid "slug for knowledgebase page"
+msgstr "שבלול עבור דף מאגר הידע"
+
+msgid "slug for agent categories page"
+msgstr "דף קטגוריות של סוכנים"
+
+msgid "slug for agent kb articles page"
+msgstr "דף מאמרים של סוכן kb"
+
+msgid "slug for agent announcements page"
+msgstr "דף הכרזות של סוכן"
+
+msgid "slug for agent downloads page"
+msgstr "דף ההורדות של slug for agent"
+
+msgid "slug for agent faqs page"
+msgstr "דף שאלות נפוצות של slug לסוכן"
+
+msgid "slug for add ticket page"
+msgstr "שבלול עבור דף הוספת כרטיסים"
+
+msgid "slug for ticket status page"
+msgstr "שבלול עבור דף סטטוס הכרטיס"
+
+msgid "slug for controlpanel"
+msgstr "שבלול עבור לוח בקרה"
+
+msgid "slug for agent report detail page"
+msgstr "דף הפרטים של דיווח של slug for agent"
+
+msgid "slug for agent reports page"
+msgstr "דף דיווחים של סוכן"
+
+msgid "slug for department reports page"
+msgstr "שבלול עבור דף דוחות מחלקה"
+
+msgid "slug for announcement detail page"
+msgstr "דף פירוט הכרזה"
+
+msgid "slug for feedback page"
+msgstr "שבלול למשוב"
+
+msgid "slug for agent feedbacks page"
+msgstr "שבלול עבור דף משוב לסוכן"
+
+msgid "slug for visitor message page"
+msgstr "שבלול עבור דף הודעות מבקר"
+
+msgid "slug for add help topic page"
+msgstr "שבלול עבור הוסף דף נושא עזרה"
+
+msgid "slug for agent help topics page"
+msgstr "דף נושאי עזרה של slug for agent"
+
+msgid "slug for add canned response page"
+msgstr "שבלול להוספת דף תגובה משומר"
+
+msgid "slug for agent canned responses page"
+msgstr "דף תגובות משומר של שבלול לסוכן"
+
+msgid "slug for gdpr data compliance actions1"
+msgstr "שבלול עבור פעולות תאימות נתונים של gdpr1"
+
+msgid "slug for print ticket page"
+msgstr "שבלול להדפסת דף כרטיס"
+
+msgid "slug for my profile page"
+msgstr "שבלול עבור דף הפרופיל שלי"
+
+msgid "slug for login page"
+msgstr "שבלול עבור דף הכניסה"
+
+msgid "slug for user register page"
+msgstr "שבלול עבור דף רישום המשתמש"
+
+msgid "slug for add message page"
+msgstr "שבלול עבור דף הוספת הודעות"
+
+msgid "slug for message detail page"
+msgstr "שבלול עבור דף פירוט ההודעה"
+
+msgid "slug for message inbox page"
+msgstr "שבלול עבור דף תיבת הדואר הנכנס"
+
+msgid "slug for message outbox page"
+msgstr "שבלול עבור דף תיבת הדואר יוצא"
+
+msgid "slug for roles page"
+msgstr "דף הקליעה לתפקידים"
+
+msgid "slug for agent page"
+msgstr "דף הקליע לסוכן"
+
+msgid "slug for departments page"
+msgstr "דף שבלול למחלקות"
+
+msgid "slug for announcements page"
+msgstr "דף הקליעה להודעות"
+
+msgid "slug for downloads page"
+msgstr "דף slug להורדות"
+
+msgid "slug for faqs page"
+msgstr "דף דף שאלות נפוצות"
+
+msgid "API key is required for linkedin app"
+msgstr "מפתח API נדרש עבור אפליקציית linkedin"
+
+msgid "API Key"
+msgstr "מפתח API"
+
+msgid "secret key"
+msgstr "מפתח סודי"
+
+msgid "Secret"
+msgstr "סוֹד"
+
+msgid "Facebook user can login in js support ticket"
+msgstr "משתמש פייסבוק יכול להתחבר לכרטיס התמיכה js"
+
+msgid "Login With Linkedin"
+msgstr "התחבר עם לינקדאין"
+
+msgid "API key is required for facebook app"
+msgstr "מפתח API נדרש עבור אפליקציית Facebook"
+
+msgid "Login with linkedin"
+msgstr "התחבר עם linkedin"
+
+msgid "Login with facebook"
+msgstr "התחבר עם פייסבוק"
+
+msgid "Create User via email"
+msgstr "צור משתמש באמצעות דואר אלקטרוני"
+
+msgid "Export Ticket"
+msgstr "כרטיס ייצוא"
+
+msgid "Ticket Listing"
+msgstr "רישום כרטיסים"
+
+msgid "Visitor Ticket Setting"
+msgstr "הגדרת כרטיסים למבקר"
+
+msgid ""
+"By enabling this option, a user can know to whom the ticket has been "
+"assigned."
+msgstr "על ידי הפעלת אפשרות זו, משתמש יכול לדעת למי הוקצה הכרטיס."
+
+msgid "Assigned info. on admin tickets"
+msgstr "מידע שהוקצה. על כרטיסי מנהל"
+
+msgid ""
+"By enabling this option, an agent can know to whom the ticket has been "
+"assigned."
+msgstr "על ידי הפעלת אפשרות זו, סוכן יכול לדעת למי הוקצה הכרטיס."
+
+msgid "Assigned info. on user tickets"
+msgstr "מידע שהוקצה. על כרטיסי משתמש"
+
+msgid ""
+"By enabling this option, an admin can know to whom the ticket has been "
+"assigned."
+msgstr "על ידי הפעלת אפשרות זו, מנהל יכול לדעת למי הוקצה הכרטיס."
+
+msgid "Assigned info. on agent tickets"
+msgstr "מידע שהוקצה. על כרטיסי סוכן"
+
+msgid ""
+"By enabling this option, a user can know who closed the ticket and when that "
+"ticket closed."
+msgstr ""
+"על ידי הפעלת אפשרות זו, משתמש יכול לדעת מי סגר את הכרטיס ומתי נסגר הכרטיס "
+"הזה."
+
+msgid "Closed info. on admin closed tickets"
+msgstr "מידע סגור. על כרטיסים סגורים של מנהל"
+
+msgid ""
+"By enabling this option, an agent can know who closed the ticket and when "
+"that ticket closed."
+msgstr ""
+"על ידי הפעלת אפשרות זו, סוכן יכול לדעת מי סגר את הכרטיס ומתי נסגר הכרטיס הזה."
+
+msgid "Closed info. on agent closed tickets"
+msgstr "מידע סגור. על כרטיסים סגורים של סוכן"
+
+msgid ""
+"By enabling this option, an admin can know who closed the ticket and when "
+"that ticket closed."
+msgstr ""
+"על ידי הפעלת אפשרות זו, מנהל יכול לדעת מי סגר את הכרטיס ומתי נסגר הכרטיס הזה."
+
+msgid "Set default sorting for ticket listing"
+msgstr "הגדר מיון ברירת מחדל עבור רישום הכרטיסים"
+
+msgid "Ascending"
+msgstr "עולה"
+
+msgid "Descending"
+msgstr "יורד"
+
+msgid "Ticket listing sorting"
+msgstr "מיון רישום כרטיסים"
+
+msgid "Select whether users can see the ticket delete button"
+msgstr "בחר אם משתמשים יוכלו לראות את לחצן מחיקת הכרטיס"
+
+msgid "Show ticket delete button"
+msgstr "הצג כפתור מחיקת כרטיס"
+
+msgid ""
+"Select whether users can see the name of administrator or staff member on "
+"ticket reply"
+msgstr "בחר אם משתמשים יוכלו לראות את שם המנהל או איש הצוות בתשובת הכרטיס"
+
+msgid "Show Anonymous Name On Ticket Reply"
+msgstr "הצג שם אנונימי בתשובת הכרטיס"
+
+msgid ""
+"Select whether users can see the email of administrator or agent on ticket "
+"reply"
+msgstr ""
+"בחר אם משתמשים יוכלו לראות את האימייל של מנהל המערכת או הסוכן בתשובת הכרטיס"
+
+msgid "Show Admin OR Agent Email On Ticket Reply"
+msgstr "הצג דוא\"ל של מנהל מערכת או סוכן בתשובה לכרטיס"
+
+msgid ""
+"Show or hide the multiform popup when creating a new ticket. if you hide "
+"them, the system will open the default form."
+msgstr ""
+"הצג או הסתר את החלון הקופץ הרב-צורני בעת יצירת כרטיס חדש. אם תסתיר אותם, "
+"המערכת תפתח את טופס ברירת המחדל."
+
+msgid "Multiforms Popup For New Tickets"
+msgstr "Multiforms קופץ לכרטיסים חדשים"
+
+msgid "Set suffix for custom ticketid"
+msgstr "הגדר סיומת עבור כרטיס כרטיס מותאם אישית"
+
+msgid "Ticketid Suffix"
+msgstr "סיומת כרטיסים"
+
+msgid "Set ticketid sequential or random .e.g"
+msgstr "הגדר את כרטיס הכרטיס ברצף או אקראי .למשל"
+
+msgid "Set prefix for custom ticketid"
+msgstr "הגדר קידומת עבור כרטיס כרטיס מותאם אישית"
+
+msgid "Ticketid Prefix"
+msgstr "קידומת כרטיסים"
+
+msgid "Support Icons"
+msgstr "אייקוני תמיכה"
+
+msgid "Set custom support text"
+msgstr "הגדר טקסט תמיכה מותאם אישית"
+
+msgid "Set custom support image"
+msgstr "הגדר תמונת תמיכה מותאמת אישית"
+
+msgid "Custom Image"
+msgstr "תמונה מותאמת אישית"
+
+msgid "JS Help Desk Register Page"
+msgstr "דף הרישום של דלפק העזרה של JS"
+
+msgid "WordPress Default Login Page"
+msgstr "דף ההתחברות של וורדפרס כברירת מחדל"
+
+msgid "JS Help Desk Login Page"
+msgstr "דף התחברות של JS Help Desk"
+
+msgid "Set register Link"
+msgstr "הגדר קישור הרשמה"
+
+msgid "We are here to help you"
+msgstr "אנחנו כאן כדי לעזור לך"
+
+msgid "Help icon"
+msgstr "סמל עזרה"
+
+msgid ""
+"JS Help Desk is a professional, simple, easy to use and complete customer "
+"support system."
+msgstr "JS Help Desk היא מערכת תמיכת לקוחות מקצועית, פשוטה, קלה לשימוש ומלאה."
+
+msgid "View all videos"
+msgstr "צפה בכל הסרטונים"
+
+msgid "Video icon"
+msgstr "סמל וידאו"
+
+msgid "View All Videos"
+msgstr "הצג את כל הסרטונים"
+
+msgid "Help Desk icon"
+msgstr "סמל דלפק העזרה"
+
+msgid "JS Help Desk Support"
+msgstr "תמיכה ב-JS Help Desk"
+
+msgid ""
+"JS Help Desk delivers timely customer support if you have any query then "
+"we're here to show you the way."
+msgstr ""
+"JS Help Desk מספק תמיכת לקוחות בזמן אם יש לך שאלה כלשהי אז אנחנו כאן כדי "
+"להראות לך את הדרך."
+
+msgid "Visitor ticket creation"
+msgstr "יצירת כרטיסים למבקרים"
+
+msgid "How to set ticket auto close"
+msgstr "כיצד להגדיר סגירה אוטומטית של כרטיס"
+
+msgid "How to reopen closed ticket"
+msgstr "כיצד לפתוח מחדש כרטיס סגור"
+
+msgid "How to lock a ticket"
+msgstr "איך לנעול כרטיס"
+
+msgid "How to add private note"
+msgstr "כיצד להוסיף הערה פרטית"
+
+msgid "View ticket history"
+msgstr "הצג היסטוריית כרטיסים"
+
+msgid "How to setup custom fields"
+msgstr "כיצד להגדיר שדות מותאמים אישית"
+
+msgid "Set ticket auto overdue"
+msgstr "קבע איחור אוטומטי של כרטיס"
+
+msgid "Manually set ticket overdue"
+msgstr "הגדר ידנית את איחור הכרטיס"
+
+msgid "How to merge tickets"
+msgstr "איך למזג כרטיסים"
+
+msgid "How to export tickets"
+msgstr "כיצד לייצא כרטיסים"
+
+msgid "How use help topic"
+msgstr "כיצד להשתמש בנושא עזרה"
+
+msgid "How to change department"
+msgstr "איך מחליפים מחלקה"
+
+msgid "How to use multi-forms"
+msgstr "כיצד להשתמש במספר צורות"
+
+msgid "How to paid support"
+msgstr "כיצד לקבל תמיכה בתשלום"
+
+msgid "How to use canned response"
+msgstr "כיצד להשתמש בתגובה משומרת"
+
+msgid "How to add private credentials"
+msgstr "כיצד להוסיף אישורים פרטיים"
+
+msgid "How to ban/unban user"
+msgstr "כיצד לחסום/לבטל את החסימה של משתמש"
+
+msgid "Agent system"
+msgstr "מערכת סוכנים"
+
+msgid "Manually assign ticket to agen"
+msgstr "הקצה כרטיס ידנית לסוכן"
+
+msgid "How to edit time"
+msgstr "כיצד לערוך זמן"
+
+msgid "How to use time tracking"
+msgstr "כיצד להשתמש במעקב אחר זמן"
+
+msgid "How to set max open ticket"
+msgstr "כיצד להגדיר מקסימום כרטיס פתוח"
+
+msgid "How to show counts"
+msgstr "איך להראות ספירות"
+
+msgid "How to set Captcha"
+msgstr "כיצד להגדיר Captcha"
+
+msgid "User options"
+msgstr "אפשרויות משתמש"
+
+msgid "How to set login redirect"
+msgstr "כיצד להגדיר הפניית כניסה"
+
+msgid "How to set fields ordering"
+msgstr "כיצד להגדיר סידור שדות"
+
+msgid "How to enable social login"
+msgstr "כיצד לאפשר התחברות חברתית"
+
+msgid "Setup"
+msgstr "להכין"
+
+msgid "How to enable email piping"
+msgstr "כיצד להפעיל צנרת אימייל"
+
+msgid "How to set SMTP"
+msgstr "כיצד להגדיר SMTP"
+
+msgid "How to solve email notification problem"
+msgstr "כיצד לפתור בעיית הודעות דוא\"ל"
+
+msgid "How to translate"
+msgstr "איך לתרגם"
+
+msgid "How to set colors"
+msgstr "כיצד להגדיר צבעים"
+
+msgid "How to add Shortcode"
+msgstr "כיצד להוסיף Shortcode"
+
+msgid "How to install addons"
+msgstr "כיצד להתקין תוספים"
+
+msgid "How to Desktop Notifications"
+msgstr "כיצד לקבל התראות בשולחן העבודה"
+
+msgid "How to use knowledge base"
+msgstr "כיצד להשתמש במאגר ידע"
+
+msgid "How to use downloads"
+msgstr "כיצד להשתמש בהורדות"
+
+msgid "How to add announcement"
+msgstr "כיצד להוסיף הודעה"
+
+msgid "How to create FAQ"
+msgstr "כיצד ליצור שאלות נפוצות"
+
+msgid "How to use email cc"
+msgstr "כיצד להשתמש באימייל cc"
+
+msgid "How to use internal mail"
+msgstr "כיצד להשתמש בדואר פנימי"
+
+msgid "Use front-end widgets"
+msgstr "השתמש בווידג'טים קדמיים"
+
+msgid "How to enable admin widgets"
+msgstr "כיצד להפעיל ווידג'טים של מנהל מערכת"
+
+msgid "Select Language"
+msgstr "בחר שפה"
+
+msgid "Email CC"
+msgstr "דוא\"ל CC"
+
+msgid "Add Email CC"
+msgstr "הוסף דוא\"ל CC"
+
+msgid "Template For"
+msgstr "תבנית עבור"
+
+msgid "Sr#"
+msgstr "Sr#"
+
+msgid "Template Title"
+msgstr "כותרת התבנית"
+
+msgid "Template Type"
+msgstr "סוג תבנית"
+
+msgid "Add Email Cc"
+msgstr "הוסף עותק דוא\"ל"
+
+msgid "Select Template For"
+msgstr "בחר תבנית עבור"
+
+msgid "Select Template Type"
+msgstr "בחר סוג תבנית"
+
+msgid "Add more row"
+msgstr "הוסף עוד שורה"
+
+msgid "Delete row"
+msgstr "מחק שורה"
+
+msgid "Save Email CC"
+msgstr "שמור אימייל CC"
+
+msgid "To use this feature you must be agent"
+msgstr "כדי להשתמש בתכונה זו עליך להיות סוכן"
+
+msgid "Form has been stored"
+msgstr "הטופס נשמר"
+
+msgid "Default form cannot be set as disabled"
+msgstr "לא ניתן להגדיר את טופס ברירת המחדל כמושבת"
+
+msgid "Multiform has been deleted"
+msgstr "Multiform נמחק"
+
+msgid "Select Parent"
+msgstr "בחר הורה"
+
+msgid "Select Child"
+msgstr "בחר ילד"
+
+msgid "Select Condition"
+msgstr "בחר מצב"
+
+msgid "Not Equal"
+msgstr "לא שווה"
+
+msgid "To use this feature please fill the above three fields"
+msgstr "כדי להשתמש בתכונה זו אנא מלא את שלושת השדות לעיל"
+
+msgid "The agent has been stored"
+msgstr "הסוכן אוחסן"
+
+msgid "The agent has been deleted"
+msgstr "הסוכן נמחק"
+
+msgid "WP User ID"
+msgstr "מזהה משתמש של WP"
+
+msgid "WP Username"
+msgstr "שם משתמש של WP"
+
+msgid "User Detail"
+msgstr "פרטי משתמש"
+
+msgid "WP Full Name"
+msgstr "שם מלא של WP"
+
+msgid "WP Email Address"
+msgstr "כתובת דואר אלקטרוני של WP"
+
+msgid "Rule has been stored"
+msgstr "הכלל נשמר"
+
+msgid "Rule has been deleted"
+msgstr "הכלל נמחק"
+
+msgid "Email Cc has been stored"
+msgstr "עותק דוא\"ל נשמר"
+
+msgid "Email CC has been deleted"
+msgstr "דוא\"ל CC נמחק"
+
+msgid "Agent permissions have been stored"
+msgstr "הרשאות הסוכן נשמרו"
+
+msgid "Select Canned Response"
+msgstr "בחר תגובה מוכנה"
+
+msgid "Ticket Merge"
+msgstr "מיזוג כרטיסים"
+
+msgid "Delete Credentials"
+msgstr "מחק אישורים"
+
+msgid "Mail To Agent"
+msgstr "דואר לסוכן"
+
+msgid "View Agent Reports"
+msgstr "הצג דוחות סוכן"
+
+msgid "Add Credentials"
+msgstr "הוסף אישורים"
+
+msgid "Edit Help Topic"
+msgstr "ערוך את נושא העזרה"
+
+msgid ""
+"e.g ' I have read and agree to the [link] Terms and Conditions[/link].  ' "
+"The text between [link] and [/link] will be linked to provided url or "
+"wordpress page."
+msgstr ""
+"למשל ' קראתי ואני מסכים ל[קישור] התנאים וההגבלות[/link]. הטקסט בין [קישור] "
+"ל-[/קישור] יקושר לכתובת האתר או לדף וורדפרס שסופק."
+
+msgid "login"
+msgstr "התחברות"
+
+msgid "stars"
+msgstr "כוכבים"
+
+msgid "Please write appreciated review at WP Extension Directory"
+msgstr "אנא כתוב ביקורת מוערכת ב-WP Extension Directory"
+
+msgid ""
+"We'd love to hear from you. It'll only take 2 minutes of your time, and will "
+"really help us spread the word"
+msgstr ""
+"נשמח לשמוע ממך. זה ייקח רק 2 דקות מזמנך, ובאמת יעזור לנו להפיץ את הבשורה"
+
+msgid "love"
+msgstr "אהבה"
+
+msgid "I'd love to help :)"
+msgstr "אשמח לעזור :)"
+
+msgid "sad"
+msgstr "עָצוּב"
+
+msgid "Not this time"
+msgstr "לא הפעם"
+
+msgid "happy"
+msgstr "שַׂמֵחַ"
+
+msgid "I've already rated you"
+msgstr "כבר דירגתי אותך"
+
+msgid "thanks"
+msgstr "תודה"
+
+msgid "You are awesome !......"
+msgstr "אתה מדהים !......"
+
+msgid "Thanks for your support, we really appreciate it."
+msgstr "תודה על התמיכה שלך, אנחנו מאוד מעריכים את זה."
+
+msgid "JS Help Desk Team"
+msgstr "צוות העזרה של JS"
+
+msgid "Remind you about this later?"
+msgstr "להזכיר לך את זה מאוחר יותר?"
+
+msgid "Remind me in 3 days"
+msgstr "תזכיר לי בעוד 3 ימים"
+
+msgid "Remind me in 10 days"
+msgstr "תזכיר לי בעוד 10 ימים"
+
+msgid "Remind me in 30 days"
+msgstr "תזכיר לי בעוד 30 יום"
+
+msgid "Don't remind me about this"
+msgstr "אל תזכיר לי את זה"
+
+msgid "Watch Video"
+msgstr "צפה בוידאו"
+
+msgid "Slug(s) has been stored"
+msgstr "שבלול(ים) אוחסנו"
+
+msgid "Prefix has not been stored"
+msgstr "הקידומת לא נשמרה"
+
+msgid "+Add more Condition"
+msgstr "+ הוסף עוד מצב"
+
+msgid "Admin New Ticket Received"
+msgstr "מנהל כרטיס חדש התקבל"
+
+msgid "Staff New Ticket Received"
+msgstr "צוות התקבל כרטיס חדש"
+
+msgid "New Department Received"
+msgstr "מחלקה חדשה התקבלה"
+
+msgid "New Group Received"
+msgstr "קבוצה חדשה התקבלה"
+
+msgid "New Agent Received"
+msgstr "סוכן חדש התקבל"
+
+msgid "New Help Topic Received"
+msgstr "נושא עזרה חדש התקבל"
+
+msgid "Admin Reassign Ticket"
+msgstr "מנהל הקצה מחדש כרטיס"
+
+msgid "Staff Reassign Ticket"
+msgstr "הצוות יקצה מחדש את הכרטיס"
+
+msgid "Admin Close Ticket"
+msgstr "מנהל סגור כרטיס"
+
+msgid "Staff Close Ticket"
+msgstr "צוות סגור כרטיס"
+
+msgid "Admin Delete Ticket"
+msgstr "מנהל מערכת מחק כרטיס"
+
+msgid "Staff Delete Ticket"
+msgstr "צוות מחק כרטיס"
+
+msgid "Admin Overdue Ticket"
+msgstr "כרטיס איחור של מנהל"
+
+msgid "Staff Overdue Ticket"
+msgstr "כרטיס איחור של הצוות"
+
+msgid "Admin Email Baned"
+msgstr "דוא\"ל מנהל נאסר"
+
+msgid "Staff Email Baned"
+msgstr "דוא\"ל צוות נאסר"
+
+msgid "Admin Ticket Transfered to Department"
+msgstr "כרטיס מנהל הועבר למחלקה"
+
+msgid "Staff Ticket Transfered to Department"
+msgstr "כרטיס הצוות הועבר למחלקה"
+
+msgid "Admin Email baned and ticket closed"
+msgstr "דוא\"ל מנהל נאסר והכרטיס נסגר"
+
+msgid "Staff Email baned and ticket closed"
+msgstr "דוא\"ל צוות נאסר והכרטיס נסגר"
+
+msgid "Admin Email Unbaned"
+msgstr "דוא\"ל מנהל בוטלה"
+
+msgid "Staff Email Unbaned"
+msgstr "דוא\"ל צוות בוטלה"
+
+msgid "Admin Ticket Reply"
+msgstr "תשובה לכרטיס מנהל"
+
+msgid "Staff Ticket Reply"
+msgstr "תשובת כרטיס צוות"
+
+msgid "Ticket Received"
+msgstr "כרטיס התקבל"
+
+msgid "Banemail try new ticket"
+msgstr "Banemail נסה כרטיס חדש"
+
+msgid "Admin Ticket has been locked"
+msgstr "כרטיס מנהל מערכת ננעל"
+
+msgid "Staff Ticket has been locked"
+msgstr "כרטיס הצוות ננעל"
+
+msgid "Admin Ticket has been unlocked"
+msgstr "כרטיס מנהל מערכת בוטלה"
+
+msgid "Staff Ticket has been unlocked"
+msgstr "הכרטיס לצוות בוטלה"
+
+msgid "Admin In progress Ticket"
+msgstr "כרטיס מנהל בתהליך"
+
+msgid "Staff In progress Ticket"
+msgstr "כרטיס צוות בתהליך"
+
+msgid "Admin Ticket priority changed"
+msgstr "עדיפות כרטיס מנהל השתנתה"
+
+msgid "Staff Ticket priority changed"
+msgstr "עדיפות כרטיס הצוות השתנתה"
+
+msgid "New Mail has been sent"
+msgstr "דואר חדש נשלח"
+
+msgid "New Reply has been sent"
+msgstr "נשלחה תגובה חדשה"
+
+msgid "Delete User Data"
+msgstr "מחק את נתוני המשתמש"
+
+msgid "Closed By"
+msgstr "סגור על ידי"
+
+msgid "Closed On"
+msgstr "סגור ב-"
+
+msgid "Closed info. on user closed tickets"
+msgstr "מידע סגור. על כרטיסים סגורים על ידי משתמש"
+
+msgid "custom text"
+msgstr "טקסט מותאם אישית"
+
+msgid "Select Languages"
+msgstr "בחר שפות"
+
+msgid "IMAP Authentication cancelled"
+msgstr "אימות IMAP בוטל"
+
+msgid "Page Not Found !!"
+msgstr "הדף לא נמצא !!"

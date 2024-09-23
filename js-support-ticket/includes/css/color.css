@@ -1,0 +1,169 @@
+
+
+/*BreadCrumbs*/
+	div.js-ticket-flat a:hover, div.js-ticket-flat a.active, div.js-ticket-flat a:hover::after, div.js-ticket-flat a.active::after{background-color:#2b2b2b;}
+	div.js-ticket-breadcrumb-wrp .breadcrumb li:first-child a{background-color:#2b2b2b;}
+	div.js-ticket-breadcrumb-wrp .breadcrumb li:first-child a:hover::after{background-color:transparent !important;}
+	div.js-ticket-breadcrumb-wrp .breadcrumb li:first-child a::after {border-left-color:#2b2b2b;}
+	div.js-ticket-breadcrumb-wrp .breadcrumb li a::after{border-left-color:#c9c9c9;}
+	div.js-ticket-breadcrumb-wrp .breadcrumb li a{color:#636363;}
+	div.js-ticket-breadcrumb-wrp .breadcrumb li a:hover{color:#2b2b2b;}
+/*BreadCrumbs*/
+
+/*Top Header*/
+	div#jsst-header{background-color:#4f6df5;}
+	a.js-ticket-header-links{color:#ffffff;}
+	a.js-ticket-header-links:hover{color: #ffffff;;}
+	div#jsst-header div#jsst-header-heading{color:#f5f2f5;}
+	div#jsst-header span.jsst-header-tab a.js-cp-menu-link{background:rgba(0,0,0,0.4);color:#ffffff;}
+	div#jsst-header span.jsst-header-tab a.js-cp-menu-link:hover{background:rgba(0,0,0,0.6);color:#ffffff;}
+	div#jsst-header span.jsst-header-tab.active a.js-cp-menu-link{background:#4f6df5;color:#ffffff;}
+	div#jsst_breadcrumbs_parent div.home a{background:#2b2b2b;}
+/*Top Header*/
+/* Error Message Page */
+    div.js-ticket-messages-data-wrapper span.js-ticket-messages-main-text {color:#636363;}
+    div.js-ticket-messages-data-wrapper span.js-ticket-messages-block_text {color:#636363;}
+    span.js-ticket-user-login-btn-wrp a.js-ticket-login-btn{background-color:#4f6df5;color:#ffffff;border: 1px solid #d1d1d1;}
+	span.js-ticket-user-login-btn-wrp a.js-ticket-login-btn:hover{border-color: #2b2b2b;}
+    span.js-ticket-user-login-btn-wrp a.js-ticket-register-btn{background-color:#2b2b2b;color:#ffffff;border: 1px solid #d1d1d1;}
+	span.js-ticket-user-login-btn-wrp a.js-ticket-register-btn:hover{border-color: #4f6df5;}
+	div.jsst_errors span.error{color:#871414;border:1px solid #871414;background-color: #ffd2d3;}
+/* Error Message Page */
+/* multiform */
+    div#multiformpopup div.jsst-multiformpopup-header{background: #4f6df5;color:#ffffff;}
+    div#multiformpopup div.js-ticket-table-body div.js-ticket-multiform-row {border: 1px solid #d1d1d1;background: #f5f5f5;}
+    div#multiformpopup div.js-ticket-table-body div.js-ticket-multiform-row:hover {border: 1px solid #4f6df5;background: #ffffff;}
+    div#multiformpopup div.js-ticket-table-body div.js-ticket-multiform-row div.js-ticket-table-body-col{border-top: 1px solid #d1d1d1;}
+    div#multiformpopup div.js-ticket-table-body div.js-ticket-multiform-row div.js-ticket-table-body-col {color: #4f6df5;}
+    div#multiformpopup div.js-ticket-table-body div.js-ticket-multiform-row.selected div.js-ticket-table-body-col {color: #2b2b2b;}
+    div#multiformpopup div.js-ticket-table-body div.js-ticket-multiform-row div.js-ticket-table-body-col:first-child{color: #2b2b2b;}
+    div#multiformpopup div.js-ticket-table-body div.js-ticket-multiform-row.selected div.js-ticket-table-body-col:first-child{color: #4f6df5;}
+    div#multiformpopup div.js-ticket-table-body div.js-ticket-multiform-row div.js-ticket-table-body-col:last-child{color: #6c757d;}
+    div#multiformpopup div.js-ticket-table-body div.js-multiformpopup-link-wrp{border-top: 1px solid #d1d1d1;}
+    div#multiformpopup div.js-ticket-table-body div.js-multiformpopup-link-wrp a.js-multiformpopup-link:hover{background-color: #ffffff;color: #1578e8;border: 1px solid #1578e8;}
+    div#multiformpopup div.js-ticket-table-body div.js-multiformpopup-link-wrp a.js-multiformpopup-link{background-color: #4f6df5;color: #ffffff;border: 1px solid #d1d1d1;}
+/* multiform */
+/* Feedbacks */
+	div.js-ticket-feedback-heading{border: 1px solid #d1d1d1;background-color: #2b2b2b;color: #ffffff;}
+	div.jsst-feedback-det-wrp  div.jsst-feedback-det-list {border:1px solid #d1d1d1;}
+	div.jsst-feedback-det-wrp  div.jsst-feedback-det-list div.jsst-feedback-det-list-top {border-bottom: 1px solid #d1d1d1;}
+	div.jsst-feedback-det-wrp  div.jsst-feedback-det-list div.jsst-feedback-det-list-top div.jsst-feedback-det-list-data-wrp div.jsst-feedback-det-list-data-top {}
+	div.jsst-feedback-det-wrp  div.jsst-feedback-det-list div.jsst-feedback-det-list-top div.jsst-feedback-det-list-data-wrp div.jsst-feedback-det-list-data-top div.jsst-feedback-det-list-data-top-title {color: #636363;}
+	div.jsst-feedback-det-wrp  div.jsst-feedback-det-list div.jsst-feedback-det-list-top div.jsst-feedback-det-list-data-wrp div.jsst-feedback-det-list-data-top div.jsst-feedback-det-list-data-top-val {color: #636363;}
+	div.jsst-feedback-det-wrp  div.jsst-feedback-det-list div.jsst-feedback-det-list-top div.jsst-feedback-det-list-data-wrp div.jsst-feedback-det-list-data-top div.jsst-feedback-det-list-data-top-val a.jsst-feedback-det-list-data-top-val-txt {color: #2b2b2b;}
+	div.jsst-feedback-det-wrp  div.jsst-feedback-det-list div.jsst-feedback-det-list-top div.jsst-feedback-det-list-data-wrp div.jsst-feedback-det-list-data-btm div.jsst-feedback-det-list-datea-btm-rec div.jsst-feedback-det-list-data-btm-title{color: #636363;}
+	div.jsst-feedback-det-wrp  div.jsst-feedback-det-list div.jsst-feedback-det-list-top div.jsst-feedback-det-list-data-wrp div.jsst-feedback-det-list-data-btm div.jsst-feedback-det-list-datea-btm-rec div.jsst-feedback-det-list-data-btm-val{color: #636363;}
+	div.jsst-feedback-det-wrp  div.jsst-feedback-det-list div.jsst-feedback-det-list-btm div.jsst-feedback-det-list-btm-title{color:#636363;}
+	div.jsst-feedback-det-wrp  div.jsst-feedback-det-list div.jsst-feedback-det-list-img-wrp{}
+/* Feedbacks */
+/* Existing colors */
+	div.js-ticket-body-data-elipses a{color:#2b2b2b;text-decoration:none;}
+	div.js-ticket-detail-wrapper div.js-ticket-openclosed{background:#e7e7e7;color:#636363;border-right:1px solid #d1d1d1;}
+	div#records div.jsst_userpages a.jsst_userlink:hover{background: #2b2b2b;color:#ffffff;}
+	span.jsst_userlink.selected{background: #2b2b2b;color: #ffffff;}
+	/* Pagination */
+	div.tablenav div.tablenav-pages{border:1px solid #f1f1fc;width:100%;}
+    div.tablenav div.tablenav-pages span.page-numbers.current{background: #ffffff;color: #2b2b2b;border: 1px solid #4f6df5;padding:11px 20px;line-height: initial;display: inline-block;}
+    div.tablenav div.tablenav-pages a.page-numbers:hover{background:#ffffff;color:#4f6df5;border: 1px solid #d1d1d1;text-decoration: none;}
+    div.tablenav div.tablenav-pages a.page-numbers{background: #ffffff; /* Old browsers */background: -moz-linear-gradient(top,  #ffffff 0%, #f2f2f2 100%); /* FF3.6+ */background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ffffff), color-stop(100%,#f2f2f2)); /* Chrome,Safari4+ */background: -webkit-linear-gradient(top,  #ffffff 0%,#f2f2f2 100%); /* Chrome10+,Safari5.1+ */background: -o-linear-gradient(top,  #ffffff 0%,#f2f2f2 100%); /* Opera 11.10+ */background: -ms-linear-gradient(top,  #ffffff 0%,#f2f2f2 100%); /* IE10+ */background: linear-gradient(to bottom,  #ffffff 0%,#f2f2f2 100%); /* W3C */filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#f2f2f2',GradientType=0 ); /* IE6-9 */color: #636363;border:1px solid #d1d1d1;padding:11px 20px;line-height: initial;display: inline-block;}
+    div.tablenav div.tablenav-pages a.page-numbers.next{background: #4f6df5;color: #ffffff;border: 1px solid #4f6df5;}
+	div.tablenav div.tablenav-pages a.page-numbers.prev{background: #2b2b2b;color: #ffffff;border: 1px solid #2b2b2b;}
+	/* Pagination */
+/* Existing colors */
+	/******** Widgets ***********/
+	div#jsst-widget-myticket-wrapper{background: #f5f2f5;border:1px solid #d1d1d1;}
+	div#jsst-widget-myticket-wrapper div.jsst-widget-myticket-topbar{border-bottom: 1px solid #d1d1d1;}
+	div#jsst-widget-myticket-wrapper div.jsst-widget-myticket-topbar span.jsst-widget-myticket-subject a{color:#2b2b2b;}
+	div#jsst-widget-myticket-wrapper div.jsst-widget-myticket-topbar span.jsst-widget-myticket-status{color:#ffffff;}
+	div#jsst-widget-myticket-wrapper div.jsst-widget-myticket-bottombar span.jsst-widget-myticket-priority{color: #ffffff;}
+	div#jsst-widget-myticket-wrapper div.jsst-widget-myticket-bottombar span.jsst-widget-myticket-from span.widget-from{color:#636363;}
+	div#jsst-widget-myticket-wrapper div.jsst-widget-myticket-bottombar span.jsst-widget-myticket-from span.widget-fromname{color:#636363;}
+	div#jsst-widget-mailnotification-wrapper{background:#f5f2f5;border:1px solid #d1d1d1;}
+	div#jsst-widget-mailnotification-wrapper img{}
+	div#jsst-widget-mailnotification-wrapper span.jsst-widget-mailnotification-upper{color:#636363;}
+	div#jsst-widget-mailnotification-wrapper span.jsst-widget-mailnotification-upper span.jsst-widget-mailnotification-created{color:#636363;}
+	div#jsst-widget-mailnotification-wrapper span.jsst-widget-mailnotification-upper span.jsst-widget-mailnotification-new{color:#0752AD;}
+	div#jsst-widget-mailnotification-wrapper span.jsst-widget-mailnotification-upper span.jsst-widget-mailnotification-replied{color:#ED6B6D;}
+	div.jsst-visitor-message-wrapper{border:1px solid #d1d1d1;}
+	div.jsst-visitor-message-wrapper img{border-right:1px solid #d1d1d1}
+	div.feedback-sucess-message{border:1px solid #d1d1d1;}
+	div.feedback-sucess-message span.feedback-message-text{border-top:1px solid #d1d1d1;}
+	div.js-ticket-thread-wrapper div.js-ticket-thread-upperpart a.ticket-edit-reply-button{border:1px solid #2b2b2b;background:#f5f2f5;color:#2b2b2b;}
+	div.js-ticket-thread-wrapper div.js-ticket-thread-upperpart a.ticket-edit-time-button{border:1px solid #d1d1d1;background:#f5f2f5;color:#636363;}
+	span.js-ticket-value.js-ticket-creade-via-email-spn{border:1px solid #d1d1d1;background:#f5f2f5;color:#636363;}
+
+    /* Social Login */
+    .js-ticket-sociallogin .js-ticket-sociallogin-heading {color: #636363;}
+
+    /* admin theme page */
+    .js-admin-theme-page div.js-ticket-search-wrp div.js-ticket-form-wrp form.js-filter-form div.js-filter-button-wrp input.js-ticket-search-btn{background-color:#4f6df5;color:#ffffff;}
+    .js-admin-theme-page div.js-ticket-top-cirlce-count-wrp{border:1px solid #d1d1d1;}
+    .js-admin-theme-page div.js-ticket-search-wrp div.js-ticket-form-wrp form.js-filter-form div.js-filter-wrapper{background-color:#f5f2f5;}
+    .js-admin-theme-page div.js-ticket-search-wrp .js-ticket-form-wrp form.js-filter-form{border:1px solid #d1d1d1;}
+    .js-admin-theme-page div.js-ticket-search-wrp div.js-ticket-form-wrp form.js-filter-form div.js-filter-button-wrp input.js-ticket-reset-btn{background-color:#2b2b2b;color:#ffffff;border: 1px solid #d1d1d1;}
+    .js-admin-theme-page div.js-ticket-sorting{background:#2b2b2b;color:#ffffff;}
+    .js-admin-theme-page div.js-ticket-sorting-right div.js-ticket-sort select.js-ticket-sorting-select{background: #fff;color: #2b2b2b;border: 1px solid #d1d1d1;}
+    .js-admin-theme-page div.jsst-main-up-wrapper .js-ticket-wrapper a {color:#4f6df5;}
+    .js-admin-theme-page div.js-ticket-wrapper{border-color:#d1d1d1;}
+    .js-admin-theme-page div.js-ticket-search-wrp div.js-ticket-form-wrp form.js-filter-form div.js-filter-button-wrp .js-search-filter-btn:hover{border-color:#4f6df5;}
+    .js-admin-theme-page div.js-ticket-search-wrp div.js-ticket-form-wrp form.js-filter-form div.js-filter-button-wrp input.js-ticket-reset-btn:hover{border-color:#4f6df5;}
+    .js-admin-theme-page div.js-ticket-search-wrp div.js-ticket-form-wrp form.js-filter-form div.js-filter-button-wrp input.js-ticket-search-btn{border:1px solid #d1d1d1;}
+    .js-admin-theme-page div.js-ticket-search-wrp div.js-ticket-form-wrp form.js-filter-form div.js-filter-button-wrp input.js-ticket-search-btn:hover{border-color:#2b2b2b;}
+    .js-admin-theme-page div.jsst-main-up-wrapper .js-ticket-wrapper a:hover{color:#2b2b2b;}
+    .js-admin-theme-page div.js-ticket-wrapper div.js-ticket-data1 div.js-ticket-data-row .js-ticket-data-tit{color:#2b2b2b;}
+    .js-admin-theme-page div.js-ticket-wrapper span.js-ticket-wrapper-textcolor{color:#ffffff;}
+    .js-admin-theme-page div.js-ticket-search-wrp div.js-ticket-form-wrp form.js-filter-form div.js-filter-button-wrp .js-search-filter-btn{border:1px solid #d1d1d1;color:#636363}
+    .js-admin-theme-page div.js-ticket-wrapper div.js-ticket-toparea{color:#636363;}
+    .js-admin-theme-page div.js-myticket-link a.js-myticket-link{border:1px solid #d1d1d1;}
+    .js-admin-theme-page div.js-ticket-search-wrp div.js-ticket-form-wrp form.js-filter-form div.js-filter-wrapper div.js-filter-form-fields-wrp input.js-ticket-input-field{border:1px solid #d1d1d1;}
+    .js-admin-theme-page div.js-myticket-link a.js-myticket-link.js-ticket-green.active{border-color:#14A76C;}
+    .js-admin-theme-page div.js-myticket-link a.js-myticket-link.js-ticket-green:hover{border-color:#14A76C;}
+    .js-admin-theme-page div.js-myticket-link a.js-myticket-link.js-ticket-blue:hover{border-color:#5AB9EA;}
+    .js-admin-theme-page div.js-myticket-link a.js-myticket-link.js-ticket-red:hover{border-color:#e82d3e;}
+    .js-admin-theme-page div.js-myticket-link a.js-myticket-link.js-ticket-brown:hover{border-color:#D79922;}
+
+	/*Custom Fields*/
+	input.custom_date{background-color:#ffffff;border: 1px solid #d1d1d1;}
+	select.js-ticket-custom-select{background-color:#f5f2f5;border: 1px solid #d1d1d1;}
+	div.js-ticket-custom-radio-box{background-color:#ffffff;border: 1px solid #d1d1d1;}
+	div.js-ticket-radio-box{border: 1px solid #d1d1d1;background-color:#ffffff;}
+	 .js-ticket-custom-textarea{border: 1px solid #d1d1d1;background-color:#ffffff;}
+	 span.js-attachment-file-box{border: 1px solid #d1d1d1;background-color:#ffffff;}
+
+	div.js-ticket-table-body div.js-ticket-data-row{border:1px solid  #d1d1d1;border-top:none}
+  	div.js-ticket-table-body div.js-ticket-data-row div.js-ticket-table-body-col{}
+	div.js-ticket-table-header{background-color:#ecf0f5;border:1px solid  #d1d1d1;}
+  	div.js-ticket-table-header div.js-ticket-table-header-col{}
+  	div.js-ticket-table-header div.js-ticket-table-header-col:last-child{border-right:none;}
+  	div.js-ticket-downloads-wrp div.js-ticket-downloads-heading-wrp{background-color: #2b2b2b;border:1px solid #d1d1d1;color: #ffffff;}
+
+    /* JS Support Ticket Woocommerce */
+  	.js-ticket-wc-order-box .js-ticket-wc-order-item .js-ticket-wc-order-item-title{
+        color: #4f6df5;
+    }
+    .js-ticket-wc-order-box .js-ticket-wc-order-link{
+        background-color: #2b2b2b;
+        color: #ffffff;
+    }
+    div.js-ticket-add-form-wrapper div.js-ticket-from-field-wrp div.js-ticket-from-field .js-ticket-custom-terms-and-condition-box{border: 1px solid #d1d1d1;background:#ffffff;color: #636363;}
+    div.js-ticket-add-form-wrapper div.js-ticket-from-field-wrp div.js-ticket-from-field .js-ticket-custom-terms-and-condition-box label {color: #636363;}
+    .termsandconditions_link_anchor {color: #636363;}
+
+    div.jsst-main-up-wrapper a.js-ticket-delete-attachment {color:#ffffff;text-decoration:none}
+    .js-ticket-recaptcha{background-color:#ffffff; border:1px solid #d1d1d1;color:#636363;}
+    /*responsive*/
+    @media (max-width: 782px){
+        div.js-ticket-wrapper div.js-ticket-data1 {border-top: 1px solid #d1d1d1;}
+    }
+    @media (max-width: 650px){
+        div.js-ticket-latest-tickets-wrp div.js-ticket-row div.js-ticket-first-left {
+            border-bottom: 0;
+        }
+    }
+
+
+            div#js-ticket_screentag{opacity:1;position:fixed;top:30px;left:0px;right:auto;bottom:auto;padding:5px 10px 5px 20px;background:rgba(18, 17, 17, 0.5);z-index:9999;border-radius:0px 8px 8px 0px;}
+            div#js-ticket_screentag img.js-ticket_screentag_image{margin-left:10px;display:inline-block;width:40px;height:40px;}
+            div#js-ticket_screentag a.js-ticket_screentag_anchor{color:#ffffff;text-decoration:none;}
+            div#js-ticket_screentag span.text{display:inline-block;font-family:sans-serif;font-size:15px;}
+        

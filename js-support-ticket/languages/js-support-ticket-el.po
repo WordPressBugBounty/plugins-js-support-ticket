@@ -1,0 +1,7656 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: el\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.4.1\n"
+
+msgid "You are not allowed"
+msgstr "Δεν σας επιτρέπεται"
+
+msgid "The ticket has been locked"
+msgstr "Το εισιτήριο έχει κλειδωθεί"
+
+msgid "Successfully"
+msgstr "Επιτυχής"
+
+msgid "The ticket has not been locked"
+msgstr "Το εισιτήριο δεν έχει κλειδωθεί"
+
+msgid "Error"
+msgstr "Λάθος"
+
+msgid "Lock Ticket"
+msgstr "Κλείδωμα αιτήματος"
+
+msgid "The ticket is locked by"
+msgstr "Το εισιτήριο είναι κλειδωμένο από"
+
+msgid "The ticket has been unlocked"
+msgstr "Το εισιτήριο έχει ξεκλειδωθεί"
+
+msgid "The ticket has not been unlocked"
+msgstr "Το εισιτήριο δεν έχει ξεκλειδωθεί"
+
+msgid "Unlock Ticket"
+msgstr "Ξεκλείδωμα αιτήματος"
+
+msgid "User already a staff member"
+msgstr "Ο χρήστης είναι ήδη μέλος του προσωπικού"
+
+msgid "The staff member has not been stored"
+msgstr "Το μέλος του προσωπικού δεν έχει αποθηκευτεί"
+
+msgid "The staff member has been stored"
+msgstr "Το μέλος του προσωπικού έχει αποθηκευτεί"
+
+msgid "The staff member has been deleted"
+msgstr "Το μέλος του προσωπικού έχει διαγραφεί"
+
+msgid "The staff member has not been deleted"
+msgstr "Το μέλος του προσωπικού δεν έχει διαγραφεί"
+
+msgid "The staff member in use cannot delete"
+msgstr "Το μέλος του προσωπικού που χρησιμοποιείται δεν μπορεί να διαγράψει"
+
+msgid "Staff"
+msgstr "Προσωπικό"
+
+msgid "status has been changed"
+msgstr "Η κατάσταση έχει αλλαχθεί"
+
+msgid "status has not been changed"
+msgstr "Η κατάσταση δεν έχει αλλαχθεί"
+
+msgid "User ID"
+msgstr "ταυτότητα χρήστη"
+
+msgid "User Name"
+msgstr "Όνομα Χρήστη"
+
+msgid "Email Address"
+msgstr "Διεύθυνση email"
+
+msgid "Name"
+msgstr "Όνομα"
+
+msgid "Previous"
+msgstr "Προηγούμενο"
+
+msgid "Next"
+msgstr "Επόμενο"
+
+msgid "Active"
+msgstr "Ενεργό"
+
+msgid "Disabled"
+msgstr "Απενεργοποιημένο"
+
+msgid "Uploaded file extension error."
+msgstr "Σφάλμα επέκτασης αρχείου."
+
+msgid "Select user"
+msgstr "Επιλέξτε χρήστη"
+
+msgid "Username"
+msgstr "Όνομα χρήστη"
+
+msgid "Search"
+msgstr "Αναζήτηση"
+
+msgid "Reset"
+msgstr "Αναίρεση"
+
+msgid "Use search feature to select the user"
+msgstr "Χρησιμοποιήστε τη λειτουργία αναζήτησης για να επιλέξετε τον χρήστη"
+
+msgid "User"
+msgstr "Χρήστης"
+
+msgid "Select User"
+msgstr "Επιλογή χρήστη"
+
+msgid "Roles"
+msgstr "Ρόλοι"
+
+msgid "Select Role"
+msgstr "Επιλογή ρόλου"
+
+msgid "First Name"
+msgstr "Όνομα"
+
+msgid "Last Name"
+msgstr "Επώνυμο"
+
+msgid "Office Phone"
+msgstr "Τηλέφωνο εργασίας"
+
+msgid "Extension"
+msgstr "Επέκταση"
+
+msgid "Mobile No"
+msgstr "Αριθμός κινητού"
+
+msgid "Picture"
+msgstr "Φωτογραφίες"
+
+msgid "Maximum File Size"
+msgstr "Μέγιστο μέγεθος αρχείου"
+
+msgid "File Extension Type"
+msgstr "Τύπος επέκτασης του αρχείου"
+
+msgid "Append Signature"
+msgstr "Επισύναψη υπογραφής"
+
+msgid "Append signature with a reply"
+msgstr "Προσάρτηση υπογραφής με απάντηση"
+
+msgid "Signature"
+msgstr "Υπογραφή"
+
+msgid "Account Status"
+msgstr "Κατάσταση λογαριασμού χρήστη"
+
+msgid "Select Status"
+msgstr "Επιλογή κατάστασης"
+
+msgid "Save"
+msgstr "Αποθήκευση"
+
+msgid "Cancel"
+msgstr "Ακύρωση"
+
+msgid "Close"
+msgstr "Κλείσιμο"
+
+msgid "Dashboard"
+msgstr "Μενού"
+
+msgid "Add Agent"
+msgstr "Προσθήκη πράκτορα"
+
+msgid "Configuration"
+msgstr "Διαμόρφωση"
+
+msgid "Version"
+msgstr "Εκδοχή"
+
+msgid "image"
+msgstr "εικόνα"
+
+msgid "Append"
+msgstr "Επισυνάψη"
+
+msgid "Add Permissions"
+msgstr "Προσθήκη δικαιωμάτων"
+
+msgid "Permissions"
+msgstr "Άδειες"
+
+msgid "Department Section"
+msgstr "Τομέας τμήματος"
+
+msgid "Ticket Section"
+msgstr "Τμήμα αιτημάτων"
+
+msgid "Agent Section"
+msgstr "Ενότητα πράκτορα"
+
+msgid "Knowledge Base Section"
+msgstr "Τμήμα γνωσιακής βάσης"
+
+msgid "FAQ Section"
+msgstr "Τμήμα FAQ"
+
+msgid "Download Section"
+msgstr "Τμήμα λήψεων"
+
+msgid "Announcement Section"
+msgstr "Όλες οι ανακοινώσεις"
+
+msgid "Mail Section"
+msgstr "Τμήμα mail"
+
+msgid "Help Topic Section"
+msgstr "Ενότητα Θέματος Βοήθειας"
+
+msgid "Canned Response Section"
+msgstr "Ενότητα κονσερβοποίησης απόκρισης"
+
+msgid "Select / Deselect All"
+msgstr "Επιλογή/ Αποεπιλογή όλων"
+
+msgid "Save Permissions"
+msgstr "Αποθήκευση αδειών"
+
+msgid "Agents"
+msgstr "Πράκτορες"
+
+msgid "Add"
+msgstr "Πρόσθεση"
+
+msgid "Full Name"
+msgstr "Πλήρης όνομα"
+
+msgid "Role"
+msgstr "Ρόλος"
+
+msgid "Status"
+msgstr "Κατάσταση"
+
+msgid "Created"
+msgstr "Δημιουργήθηκε"
+
+msgid "Action"
+msgstr "Ενέργεια"
+
+msgid "change status"
+msgstr "αλλαγή κατάστασης"
+
+msgid "Edit"
+msgstr "Επεξεργασία"
+
+msgid "Delete"
+msgstr "Διαγραφή"
+
+msgid "Are you sure you want to delete"
+msgstr "Είστε βέβαιοι ότι θέλετε να διαγράψετε"
+
+msgid "Something went wrong to try again later."
+msgstr "Κάτι πήγε στραβά για να δοκιμάσετε ξανά αργότερα."
+
+msgid "My Profile"
+msgstr "Το προφιλ μου"
+
+msgid "Upload Image"
+msgstr "Μεταφόρτωση εικόνας"
+
+msgid "Phone No"
+msgstr "Αιρθμός τηλεφώνου"
+
+msgid "Upload file limit exceeds"
+msgstr "Το όριο μεταφόρτωσης υπερβαίνει"
+
+msgid "No help topic found"
+msgstr "Δεν βρέθηκε θέμα βοήθειας"
+
+msgid "Error file size too large"
+msgstr "Πρόβλημα, το αρχείο πολύ μεγάλο"
+
+msgid "Select Department"
+msgstr "Επιλέξτε τμήμα"
+
+msgid "Select Help Topic"
+msgstr "Επιλέξτε τίτλο βοήθειας"
+
+msgid "Select Priority"
+msgstr "Επιλογή προτεραιότητας"
+
+msgid "Select Canned response"
+msgstr "Επιλέξτε Κονσέρβες απόκρισης"
+
+msgid "Add more"
+msgstr "Πρόσθεσε περισσότερα"
+
+msgid "Remove"
+msgstr "Αφαιρώ"
+
+msgid "Reason for edit"
+msgstr "Λόγος επεξεργασίας"
+
+msgid "Internal Note"
+msgstr "Εσωτερικό σημείωμα"
+
+msgid "Enter valid woocommerce order#"
+msgstr "Εισαγάγετε έγκυρη παραγγελία woocommerce #"
+
+msgid "Order id found"
+msgstr "Βρέθηκε αναγνωριστικό παραγγελίας"
+
+msgid "Order id not found"
+msgstr "Το αναγνωριστικό παραγγελίας δεν βρέθηκε"
+
+msgid "Select Product"
+msgstr "Επιλέξτε Προϊόν"
+
+msgid "Dated"
+msgstr "Χρονολογημένος"
+
+msgid "Select Order ID"
+msgstr "Επιλέξτε Αναγνωριστικό παραγγελίας"
+
+msgid "Select license key"
+msgstr "Επιλέξτε κλειδί άδειας"
+
+msgid "Assign to me"
+msgstr "Ανάθεση σε εμένα"
+
+msgid "Submit Ticket"
+msgstr "Υποβολή αιτήματος"
+
+msgid "Show All"
+msgstr "Προβολή όλων"
+
+msgid "Show Less"
+msgstr "Δείξε λιγότερο"
+
+msgid "Open"
+msgstr "Ανοιχτό(α)"
+
+msgid "Closed"
+msgstr "Κλειστό(α)"
+
+msgid "Answered"
+msgstr "Απαντήσεις"
+
+msgid "Overdue"
+msgstr "Εκπρόθεσμα"
+
+msgid "All Tickets"
+msgstr "Όλα τα αιτήματα"
+
+msgid "Tickets"
+msgstr "Αιτήματα"
+
+msgid "Ticket ID"
+msgstr "Αναγνωριστικό αιτήματος"
+
+msgid "Or"
+msgstr "ή"
+
+msgid "From"
+msgstr "Από"
+
+msgid "Select staff"
+msgstr "Επιλέξτε προσωπικό"
+
+msgid "Select"
+msgstr "Επιλογή"
+
+msgid "Start Date"
+msgstr "Ημερομηνία εκκίνησης"
+
+msgid "End Date"
+msgstr "Ημερομηνία λήξης"
+
+msgid "Assigned to me"
+msgstr "Ανατέθηκε σε μένα"
+
+msgid "Subject"
+msgstr "Θέμα"
+
+msgid "Priority"
+msgstr "Προτεραιότητα"
+
+msgid "sort"
+msgstr "είδος"
+
+msgid "New"
+msgstr "Νέο"
+
+msgid "Waiting Reply"
+msgstr "Αναμονή Απάντησης"
+
+msgid "In Progress"
+msgstr "Σε εξέλιξη"
+
+msgid "Replied"
+msgstr "Απαντήθηκε"
+
+msgid "Close and merge"
+msgstr "Κλείστε και συγχωνεύστε"
+
+msgid "Created via Email"
+msgstr "Δημιουργήθηκε μέσω email"
+
+msgid "The ticket is locked"
+msgstr "Το εισιτήριο είναι κλειδωμένο"
+
+msgid "Last Reply"
+msgstr "Τελευταία απάντηση"
+
+msgid "Search by username"
+msgstr "Αναζήτηση με όνομα χρήστη"
+
+msgid "Already exists"
+msgstr "Υπάρχει ήδη"
+
+msgid "The role has been stored"
+msgstr "Ο ρόλος έχει αποθηκευτεί"
+
+msgid "The role has not been stored"
+msgstr "Ο ρόλος δεν έχει αποθηκευτεί"
+
+msgid "The role has been deleted"
+msgstr "Ο ρόλος έχει διαγραφεί"
+
+msgid "The role has not been deleted"
+msgstr "Ο ρόλος δεν έχει διαγραφεί"
+
+msgid "The role in use cannot be deleting"
+msgstr "Ο ρόλος που χρησιμοποιείται δεν μπορεί να διαγραφεί"
+
+msgid "Save Role"
+msgstr "Αποθήκευση ρόλων"
+
+msgid "Add Role"
+msgstr "Προσθήκη ρόλου χρήστη"
+
+msgid "Role Permission"
+msgstr "Άδεια ρόλου"
+
+msgid "Role Name"
+msgstr "Όνομα ρόλου"
+
+msgid "Role permissions"
+msgstr "Άδειες ρόλου"
+
+msgid "Search Roles"
+msgstr "Αναζήτηση ρόλων"
+
+msgid "Add New Role"
+msgstr "Προσθήκη νέου ρόλου"
+
+msgid "An announcement has been stored"
+msgstr "Έχει αποθηκευτεί μια ανακοίνωση"
+
+msgid "An announcement has not been stored"
+msgstr "Δεν έχει αποθηκευτεί μια ανακοίνωση"
+
+msgid "An announcement has been deleted"
+msgstr "Η ανακοίνωση διαγράφηκε"
+
+msgid "An announcement has not been deleted"
+msgstr "Δεν έχει διαγραφεί μια ανακοίνωση"
+
+msgid "Announcement"
+msgstr "Ανακοίνωση"
+
+msgid "ordering has been changed"
+msgstr "Η σειρά έχει αλλάξει"
+
+msgid "ordering has not changed"
+msgstr "Η σειρά δεν έχει αλλάξει"
+
+msgid "Public"
+msgstr "Δημόσιο"
+
+msgid "Private"
+msgstr "Εμπιστευτικό"
+
+msgid "Title"
+msgstr "Τίτλος"
+
+msgid "Parent Category"
+msgstr "Αρχική κατηγορία"
+
+msgid "Select Category"
+msgstr "Επιλέξτε κατηγορία"
+
+msgid "Description"
+msgstr "Περιγραφή"
+
+msgid "Save Announcement"
+msgstr "Αποθήκευση ανακοίνωσεις"
+
+msgid "Add Announcement"
+msgstr "Προσθήκη ανακοίνωσης"
+
+msgid "Category"
+msgstr "Κατηγορία"
+
+msgid "Announcements"
+msgstr "Ανακοινώσεις"
+
+msgid "Records per page"
+msgstr "Εγγραφές ανά σελίδα"
+
+msgid "Ordering"
+msgstr "Βάζοντας σε σειρά"
+
+msgid "Save Ordering"
+msgstr "Αποθήκευση παραγγελίας"
+
+msgid "Category Name"
+msgstr "Όνομα κατηγορίας"
+
+msgid "Categories"
+msgstr "Κατηγορίες"
+
+msgid "Banned Email Log List"
+msgstr "Λίστα απαγορευμένων μηνυμάτων ηλεκτρονικού ταχυδρομείου"
+
+msgid "Logger Email"
+msgstr "Καταγραφέας email"
+
+msgid "Log"
+msgstr "Αρχείο καταγραφής"
+
+msgid "Logger"
+msgstr "Καταγραφέας"
+
+msgid "IP Address"
+msgstr "Διεύθυνση IP"
+
+msgid "Ban email has been stored"
+msgstr "Αποθηκεύτηκε το ηλεκτρονικό ταχυδρομείο"
+
+msgid "Ban email has not been stored"
+msgstr "Ο αποκλεισμός email δεν έχει αποθηκευτεί"
+
+msgid "Ban email has been deleted"
+msgstr "Το αποκλεισμένο email έχει διαγραφή"
+
+msgid "Ban email has not been deleted"
+msgstr "Ο αποκλεισμός email δεν έχει διαγραφεί"
+
+msgid "Ban email does not exist"
+msgstr "Το αποκλεισμένο email δεν υπάρχει"
+
+msgid "Add Banned Email"
+msgstr "Προσθήκη απαγορευμένου email"
+
+msgid "Save Banned Email"
+msgstr "Αποθήκευση απαγορευμένου email"
+
+msgid "Banned Emails"
+msgstr "Αποκλεισμένα email"
+
+msgid "Emails"
+msgstr "Ηλεκτρονικά Ταχυδρομεία"
+
+msgid "Submitter"
+msgstr "Ο υποβάλλων"
+
+msgid "Canned response message has been stored"
+msgstr "Το μήνυμα απόκρισης έχει αποθηκευτεί"
+
+msgid "Canned response message has not been stored"
+msgstr "Το μήνυμα κονσερβοποίησης απόκρισης δεν έχει αποθηκευτεί"
+
+msgid "Premade department message has been deleted"
+msgstr "Το προκαθορισμένο μήνυμα του τμήματος έχει διαγραφεί"
+
+msgid "Premade department message has not been deleted"
+msgstr "Το προκαθορισμένο μήνυμα του τμήματος δεν έχει διαγραφεί"
+
+msgid "Canned response"
+msgstr "Κονσέρβες απόκρισης"
+
+msgid "Department"
+msgstr "Τμήμα"
+
+msgid "Response"
+msgstr "Απάντηση"
+
+msgid "Save Canned Response"
+msgstr "Αποθήκευση κονσερβοποιημένης απόκρισης"
+
+msgid "Add Canned Response"
+msgstr "Προσθήκη κονσερβοποιημένης απόκρισης"
+
+msgid "The department under which the answer will be made is available"
+msgstr "Το τμήμα στο οποίο θα δοθεί η απάντηση είναι διαθέσιμο"
+
+msgid "Offline"
+msgstr "Εκτός Σύνδεσης"
+
+msgid "Canned Responses"
+msgstr "Κονσερβοποιημένες απαντήσεις"
+
+msgid "Last Updated"
+msgstr "Τελευταία ενημέρωση"
+
+msgid "Not updated"
+msgstr "Δεν έχει ενημερωθεί"
+
+msgid "Canned Response"
+msgstr "Κονσέρβες απόκρισης"
+
+msgid "Latest Tickets"
+msgstr "Τελευταία αιτήματα"
+
+msgid "Last Month Ticket Stats"
+msgstr "Στατιστικά αιτημάτων τελευταίου μήνα"
+
+msgid "Pending"
+msgstr "Σε αναμονή"
+
+msgid "The attachment has been removed"
+msgstr "Το συνημμένο καταργήθηκε"
+
+msgid "The attachment has not been removed"
+msgstr "Το συνημμένο δεν έχει αφαιρεθεί"
+
+msgid "The download has been stored"
+msgstr "Η λήψη αποθηκεύτηκε"
+
+msgid "The download has not been stored"
+msgstr "Η λήψη δεν έχει αποθηκευτεί"
+
+msgid "Download"
+msgstr "Λήψη"
+
+msgid "The download has been deleted"
+msgstr "Η λήψη έχει διαγραφεί"
+
+msgid "The download has not been deleted"
+msgstr "Η λήψη δεν έχει διαγραφεί"
+
+msgid "Download All"
+msgstr "Λήψη όλων"
+
+msgid "Attachments"
+msgstr "Επισυνάψεις"
+
+msgid "Save Download"
+msgstr "Αποθήκευση λήψεων"
+
+msgid "Add Download"
+msgstr "Προσθήκη αρχείου λήψης"
+
+msgid "Add More File"
+msgstr "Προσθήκη άλλων αρχείων"
+
+msgid "Delete attachment"
+msgstr "Διαγραφή επισύναψης"
+
+msgid "Downloads"
+msgstr "Λήψεις"
+
+msgid "grab"
+msgstr "αρπάζω"
+
+msgid "Attachment"
+msgstr "Επισύναψη"
+
+msgid "Files"
+msgstr "Αρχεία"
+
+msgid "Help Desk"
+msgstr "Γραφείο βοήθειας"
+
+msgid "Get Help"
+msgstr "Ζήτα βοήθεια"
+
+msgid "Service is running, please close the pag"
+msgstr "Η υπηρεσία εκτελείται, παρακαλώ κλείστε το pag"
+
+msgid ""
+"Admin email address and email piping address cannot be the same, your email "
+"piping will not be work."
+msgstr ""
+"Η διεύθυνση email διαχειριστή και η διεύθυνση σωληνώσεων email δεν μπορούν "
+"να είναι οι ίδιες, η διοχέτευση email δεν θα λειτουργεί."
+
+msgid "Your setting is working please this."
+msgstr "Η ρύθμιση σας λειτουργεί παρακαλώ αυτό."
+
+msgid "Connection established but the system cannot read any email"
+msgstr ""
+"Η σύνδεση πραγματοποιήθηκε, αλλά το σύστημα δεν μπορεί να διαβάσει κανένα "
+"email"
+
+msgid ""
+"IMAP is either not installed or not enabled in your server. Contact to "
+"hosting company"
+msgstr ""
+"Το IMAP είτε δεν είναι εγκατεστημένο είτε δεν είναι ενεργοποιημένο στον "
+"διακομιστή σας. Επικοινωνία με την εταιρεία φιλοξενίας"
+
+msgid "The configuration has been stored"
+msgstr "Η διαμόρφωση έχει αποθηκευτεί"
+
+msgid "The configuration not has been stored"
+msgstr "Η διαμόρφωση δεν έχει αποθηκευτεί"
+
+msgid "Email address already exist"
+msgstr "Η διεύθυνση email υπάρχει ήδη"
+
+msgid "Email for email piping has been stored"
+msgstr ""
+"Έχει αποθηκευτεί η διεύθυνση ηλεκτρονικού ταχυδρομείου για σωληνώσεις email"
+
+msgid "Email for email piping has not been stored"
+msgstr "Δεν έχει αποθηκευτεί email για σωληνώσεις email"
+
+msgid "The email has been deleted"
+msgstr "Το email διαγράφηκε"
+
+msgid "The email has not been deleted"
+msgstr "Το email δεν έχει διαγραφεί"
+
+msgid "in use cannot deleted"
+msgstr "Σε χρηση και δεν διαγράφεται"
+
+msgid "Enabled"
+msgstr "Ενεργοποιημένο"
+
+msgid "Only New Tickets"
+msgstr "Μόνο νέα αιτήματα"
+
+msgid "Only Replies"
+msgstr "Μόνο απαντήσεις"
+
+msgid "Both"
+msgstr "Και τα δύο"
+
+msgid "Hotmail"
+msgstr "Hotmail - Outlook"
+
+msgid "Other"
+msgstr "άλλο"
+
+msgid "Yes"
+msgstr "Ναι"
+
+msgid "No"
+msgstr "Όχι"
+
+msgid "Please enter the hostname first"
+msgstr "Πρακαλούμε εισάγετε το όνομα του διακομιστή πρώτα"
+
+msgid "Please enable email piping setting first"
+msgstr "Ενεργοποιήστε πρώτα τη ρύθμιση σωληνώσεων email"
+
+msgid "Add Email Piping"
+msgstr "Προσθήκη Piping μέσω email"
+
+msgid "Enable email piping"
+msgstr "Ενεργοποίηση σωληνώσεων email"
+
+msgid "Ticket Type"
+msgstr "Τύπος αιτήματος"
+
+msgid "Which email type to read"
+msgstr "Ποιό είδος email να αναγνωστεί"
+
+msgid "Save attachments if found in an email"
+msgstr "Αποθηκεύστε συνημμένα αν βρεθούν σε email"
+
+msgid "Host Type"
+msgstr "Τύπος φιλοξενίας"
+
+msgid "Select your email service provider"
+msgstr "Επιλέξτε τον πάροχο email σας"
+
+msgid "Host Name"
+msgstr "Όνομα χώρου"
+
+msgid "Enabled SSL"
+msgstr "Ενεργοποιημένο SSL"
+
+msgid "Do you have enabled SSL on your domain?"
+msgstr "Έχετε ενεργοποιήσει το SSL στον τομέα σας;"
+
+msgid "Host Port Number"
+msgstr "Αριθμός πόρτας χώρου - host port number"
+
+msgid "Host port number to read an email from"
+msgstr "Αριθμός θύρας κεντρικού υπολογιστή για να διαβάσετε ένα email από"
+
+msgid "Email address to read emails"
+msgstr "Διεύθυνση email για την ανάγνωση email"
+
+msgid "Password"
+msgstr "Κωδικός"
+
+msgid "Password for a given email address"
+msgstr "Κωδικός πρόσβασης για μια δεδομένη διεύθυνση email"
+
+msgid "check"
+msgstr "έλεγχος"
+
+msgid "Check Settings"
+msgstr "Έλεγχος ρυθμίσεων"
+
+msgid "If the system doesn't respond in 30 seconds"
+msgstr "Εάν το σύστημα δεν ανταποκρίνεται σε 30 δευτερόλεπτα"
+
+msgid "it means system unable to connect email server"
+msgstr "εννοεί ότι το σύστημα δεν μπορεί να συνδεθεί στο διακομιστή email"
+
+msgid "Save Settings"
+msgstr "Αποθήκευση ρυθμίσεων"
+
+msgid "Cron Job"
+msgstr "Χρονοδιάγραμμα εργασίας - Cron Job"
+
+msgid "Web Cron Job"
+msgstr "Εργασία Web Cron"
+
+msgid "URL"
+msgstr "Δεσμός"
+
+msgid "Configuration of a backup job with webcron org"
+msgstr "Ρυθμίσεις εργασίας αντιγράφων ασφαλείας με το webcron org"
+
+msgid "Name of cron job"
+msgstr "Όνομα εργασίας cron"
+
+msgid "Log in to webcron org in the cron area click on"
+msgstr "Συνδεθείτε στο webcron org και στην περιοχή cron επιλέξετε on"
+
+msgid "Timeout"
+msgstr "Ταϊμ άουτ"
+
+msgid ""
+"180 secs if the does not completely increase it most sites will work with a "
+"setting of 180 600"
+msgstr ""
+"180 δευτερόλεπτα εάν δεν το αυξήσει πλήρως, οι περισσότεροι ιστότοποι θα "
+"λειτουργούν με ρύθμιση 180 600"
+
+msgid "URL you want to execute"
+msgstr "Ο δεσμός που θέλετε να εκτελέσετε"
+
+msgid "Login"
+msgstr "Σύνδεση"
+
+msgid "Leave this blank"
+msgstr "Αφήστε το κενό"
+
+msgid "Execution time"
+msgstr "Ώρα εκτέλεσης"
+
+msgid "Alerts"
+msgstr "Προειδοποιήσεις"
+
+msgid ""
+"If you have already set up alerts methods in webcron org interface we "
+"recommend choosing an alert"
+msgstr ""
+"Αν έχετε ήδη δημιουργήσει ειδοποιήσεις στο webcron org, προτείνουμε να "
+"διαλέξετε μία ειδοποίηση"
+
+msgid "Cron scheduling using wget"
+msgstr "Χρονοδιάγραμμα Cron χρησιμοποιώντας το wget"
+
+msgid "Cron scheduling using Curl"
+msgstr "Χρονοδιάγραμμα Cron χρησιμοποιώντας το Curl"
+
+msgid "Custom PHP script to run the cron job"
+msgstr "Φτιαχτό σενάριο εργασίας PHP για την εκτέλεση του cron job"
+
+msgid "Sorry the cron job did not work"
+msgstr "Δυστυχώς, η εργασία cron δεν λειτούργησε"
+
+msgid "URL for use with your won scripts and third party"
+msgstr "Δεσμός για χρήση με τα won scripts και εργαλεία τρίτων"
+
+msgid "Recommended run script hourly"
+msgstr "Προτείνετε η εκτέλεση της δέσμης ενεργειών σε ωριαία βάση"
+
+msgid "Email Piping"
+msgstr "Σωληνώσεις μέσω email"
+
+msgid "Ticket Email Type"
+msgstr "Τύπος email εισιτηρίου"
+
+msgid "ticket email"
+msgstr "email εισιτηρίου"
+
+msgid "Overall Reports"
+msgstr "Γενικές Αναφορές"
+
+msgid "Staff Members Report"
+msgstr "Αναφορά Μέλους Προσωπικού"
+
+msgid "Department Report"
+msgstr "Έκθεση τμήματος"
+
+msgid "Departments Report"
+msgstr "Αναφορά Τμημάτων"
+
+msgid "JS Support Ticket Overall Reports"
+msgstr "JS Support Ticket Γενικές Αναφορές"
+
+msgid "Tickets By Status"
+msgstr "Αιτήματα ανα κατάσταση"
+
+msgid "Tickets By Departments"
+msgstr "Αιτήματα ανα τμήματα"
+
+msgid "Tickets By Priorities"
+msgstr "Αιτήματα ανα προτειραίοτητα"
+
+msgid "Tickets By Channel"
+msgstr "Αιτήματα ανά κανάλι"
+
+msgid "Direct"
+msgstr "Άμεσο"
+
+msgid "Direct reply"
+msgstr "Απευθείας απάντηση"
+
+msgid "Email reply"
+msgstr "Απάντηση Email"
+
+msgid "Tickets By staff"
+msgstr "Εισιτήρια από το προσωπικό"
+
+msgid "Report By"
+msgstr "Αναφορά από"
+
+msgid "staff member"
+msgstr "μέλος του προσωπικού"
+
+msgid "To"
+msgstr "Προς"
+
+msgid "Report By Staff Members"
+msgstr "Αναφορά από μέλη του προσωπικού"
+
+msgid "Ticket status by days"
+msgstr "Κατάσταση αιτημάτων κατά ημέρες"
+
+msgid "Date"
+msgstr "Ημερομηνία"
+
+msgid "Tickets Staff"
+msgstr "Προσωπικό Αιτημάτων"
+
+msgid "Average Rating"
+msgstr "Μέση Βαθμολογία"
+
+msgid "Average Time"
+msgstr "Μέσος Χρόνος"
+
+msgid "Report By staff member"
+msgstr "Αναφορά από μέλος του προσωπικού"
+
+msgid "Rating"
+msgstr "Εκτίμηση"
+
+msgid "Time"
+msgstr "Χρόνος"
+
+msgid "Merged"
+msgstr "Συγχωνεύτηκε"
+
+msgid "Report By department"
+msgstr "Αναφορά από το τμήμα"
+
+msgid "Tickets By Department"
+msgstr "Αιτήματα ανα τμήμα"
+
+msgid "Department Name"
+msgstr "Όνομα τμήματος"
+
+msgid "User report"
+msgstr "Αναφορά χρήστη"
+
+msgid "Users report"
+msgstr "Αναφορές χρηστών"
+
+msgid "Users Tickets"
+msgstr "Εισιτήρια χρηστών"
+
+msgid "User Report"
+msgstr "Αναφορά Χρήστη"
+
+msgid "Report By Departments"
+msgstr "Αναφορά Από Τα Τμήματα"
+
+msgid "Tickets Data"
+msgstr "Δεδομένα Αιτημάτων"
+
+msgid "Message"
+msgstr "Μήνυμα"
+
+msgid "Assigned To"
+msgstr "Ανάθεση Σε"
+
+msgid "Requester User Name"
+msgstr "Όνομα Χρήστη Αιτούμενου"
+
+msgid "Requester Name"
+msgstr "Όνομα Αιτούμενου"
+
+msgid "Requester Email"
+msgstr "Email Αιτούμενου"
+
+msgid "Requester Phone"
+msgstr "Τηλέφωνο Αιτούμενου"
+
+msgid "Requester help Topic"
+msgstr "Θέμα Βοήθειας Αιτούμενου"
+
+msgid "Ticket Attachment"
+msgstr "Συνημμένο Αιτήματος"
+
+msgid "Posted By"
+msgstr "Αναρτήθηκε από"
+
+msgid "Note Title"
+msgstr "Τίτλος μηνύματος"
+
+msgid "Note Message"
+msgstr "Μήνυμα Σημείωσης"
+
+msgid "Posted Date"
+msgstr "Ημερομηνία Δημοσίευσης"
+
+msgid "Note Attachment"
+msgstr "Συνημμένο Σημείωσης"
+
+msgid "User Time"
+msgstr "Ώρα Χρήστη"
+
+msgid "System Time"
+msgstr "Ώρα Συστήματος"
+
+msgid "Edit Reason"
+msgstr "Αιτιολογία Επεξεργασίας"
+
+msgid "Reply Date"
+msgstr "Ημερομηνία Απάντησης"
+
+msgid "Reply By"
+msgstr "Απάντηση Από"
+
+msgid "Reply Attachment"
+msgstr "Συνημμένο Απάντησης"
+
+msgid "Export"
+msgstr "Εξαγογή"
+
+msgid "Agent"
+msgstr "Μέσο"
+
+msgid "Select Agent"
+msgstr "Επιλέξτε Πράκτορας"
+
+msgid "Ticket Status"
+msgstr "Κατάσταση αιτήματος"
+
+msgid "Select Ticket Status"
+msgstr "Επιλογή Κατάστασης Αιτήματος"
+
+msgid "Ticket Overdue"
+msgstr "Εκπρόθεσμο αίτημα"
+
+msgid "Select Ticket Overdue Status"
+msgstr "Επιλογή Κατάστασης Καθυστέρησης Αιτήματος"
+
+msgid "FAQ has been stored"
+msgstr "Τα FAQ έχουνε επανέλθει"
+
+msgid "FAQ has not been stored"
+msgstr "Τα FAQ δεν έχουνε επανέλθει"
+
+msgid "FAQ has been deleted"
+msgstr "Έχουνε διαγραφεί τα FAQ"
+
+msgid "FAQ has not been deleted"
+msgstr "Τα FAQ δεν έχουνε διαγραφεί"
+
+msgid "FAQ"
+msgstr "Συχνές ερωτήσεις - FAQ"
+
+msgid "Save FAQ"
+msgstr "Αποθήκευση συχνών ερωτήσεων"
+
+msgid "Add FAQ"
+msgstr "Προσθήκη συχνών ερωτήσεων"
+
+msgid "Content"
+msgstr "Περιεχόμενα"
+
+msgid "FAQ'S"
+msgstr "Συχνές ερωτήσεις"
+
+msgid "FAQs"
+msgstr "Συχνές ερωτήσεις"
+
+msgid "FAQ's"
+msgstr "Συχνές ερωτήσεις"
+
+msgid "Add FAQs"
+msgstr "Προσθήκη συχνών ερωτήσεων"
+
+msgid "Feedback has been stored"
+msgstr "Η ανατροφοδότηση έχει αποθηκευτεί"
+
+msgid "Feedback has not been stored"
+msgstr "Η Ανατροφοδότηση δεν έχει αποθηκευτεί"
+
+msgid "Feedbacks"
+msgstr "Ανατροφοδοτήσεις"
+
+msgid "user image"
+msgstr "εικόνα χρήστη"
+
+msgid "feedback image"
+msgstr "εικόνα ανατροφοδότησης"
+
+msgid "Feedback"
+msgstr "Ανατροφοδότηση"
+
+msgid "Latest Feedback"
+msgstr "Τελευταία σχόλια"
+
+msgid "Submit Feedback"
+msgstr "Υποβάλετε Ανατροφοδότηση"
+
+msgid "Help topic has been stored"
+msgstr "Το θέμα βοήθειας έχει επανέλθει"
+
+msgid "Help topic has not been stored"
+msgstr "Το θέμα βοήθειας δεν έχει επανέλθει"
+
+msgid "Help topic has been deleted"
+msgstr "Το θέμα βοήθειας έχει διαγραφεί"
+
+msgid "Help topic has not been deleted"
+msgstr "Το θέμα βοήθειας δεν έχει διαγραφεί"
+
+msgid "Help topic in use cannot be deleting"
+msgstr "Το θέμα βοήθειας που χρησιμοποιείται δεν μπορεί να διαγραφεί"
+
+msgid "Help topic"
+msgstr "Θέμα βοήθειας"
+
+msgid "Help Topic"
+msgstr "Θέμα βοήθειας"
+
+msgid "Save Help Topic"
+msgstr "Αποθήκευση θεμάτων βοήθειας"
+
+msgid "Add Help Topic"
+msgstr "Προσθήκη θέματος βοήθειας"
+
+msgid "Help Topics"
+msgstr "Θέματα βοήθειας"
+
+msgid "The category has been stored"
+msgstr "Η κατηγορία έχει αποθηκευτεί"
+
+msgid "The category has not been stored"
+msgstr "Η κατηγορία δεν έχει αποθηκευτεί"
+
+msgid "The category has been deleted"
+msgstr "Η κατηγορία έχει διαγραφεί"
+
+msgid "The category has not been deleted"
+msgstr "Η κατηγορία δεν έχει διαγραφεί"
+
+msgid "The category in use cannot be deleting"
+msgstr "Η κατηγορία που χρησιμοποιείται δεν μπορεί να διαγραφεί"
+
+msgid "Knowledgebase article has been stored"
+msgstr "Το άρθρο της Γνωσιακής βάσης έχει αποθηκευτεί"
+
+msgid "Knowledgebase article has not been stored"
+msgstr "Το άρθρο της Γνωσιακής βάσης δεν έχει αποθηκευτεί"
+
+msgid "The article has been deleted"
+msgstr "Το άρθρο έχει διαγραφεί"
+
+msgid "The article has not been deleted"
+msgstr "Το άρθρο δεν έχει διαγραφεί"
+
+msgid "Article"
+msgstr "Άρθρο"
+
+msgid "The parent category does not have this type."
+msgstr "Η γονική κατηγορία δεν έχει αυτόν τον τύπο."
+
+msgid "Would you like to add this type to Parent Category?"
+msgstr "Θέλετε να προσθέσετε αυτόν τον τύπο στην κατηγορία γονέα;"
+
+msgid "JYes"
+msgstr "Ναι"
+
+msgid "JNo"
+msgstr "Οχι"
+
+msgid "Child category has this type,"
+msgstr "Η κατηγορία παιδιών έχει αυτόν τον τύπο,"
+
+msgid "You cannot unmark it."
+msgstr "Δεν μπορείτε να το καταργήσετε."
+
+msgid "Draft"
+msgstr "Πρόχειρο"
+
+msgid "Meta Description"
+msgstr "Περιγαφή Meta"
+
+msgid "Meta Keywords"
+msgstr "Λέξεις κλειδιά Meta"
+
+msgid "Save Knowledge Base"
+msgstr "Αποθήκευση γνωσιακών βάσεων"
+
+msgid "Please select at least one category for"
+msgstr "Επιλέξτε τουλάχιστον μία κατηγορία για"
+
+msgid "Category For"
+msgstr "Κατηγορία για"
+
+msgid "Knowledge Base"
+msgstr "Γνωσιακή βάση"
+
+msgid "Logo"
+msgstr "Λογότυπο"
+
+msgid "Save Category"
+msgstr "Αποθήκευση κατηγορίας"
+
+msgid "Add Knowledge Base"
+msgstr "Προσθήκη στην γνωσιακή βάση"
+
+msgid "Meta Data Options"
+msgstr "Επιλογές δεδομένων \\"
+
+msgid "Add Category"
+msgstr "Προσθήκη κατηγορίας"
+
+msgid "Category Title"
+msgstr "Τίτλος κατηγορίας"
+
+msgid "category"
+msgstr "κατηγορία"
+
+msgid "Article Attachment"
+msgstr "Επισύναψη άρθρου"
+
+msgid "Knowledgebase"
+msgstr "Βάση Γνώσεων"
+
+msgid "Mail has not been marked as read"
+msgstr "Η αλληλογραφία δεν έχει επισημανθεί ως αναγνωσμένη"
+
+msgid "Mail has been marked as read"
+msgstr "Η αλληλογραφία έχει επισημανθεί ως αναγνωσμένη"
+
+msgid "Message field cannot be empty"
+msgstr "Το πεδίο του μηνύματος δεν μπορεί να είναι κενό"
+
+msgid "Mail has been sent"
+msgstr "Η αλληλογραφία εστάλη"
+
+msgid "Mail has not been sent"
+msgstr "Δεν έχει σταλεί αλληλογραφία"
+
+msgid "Mail has been deleted"
+msgstr "Το email έχει διαγραφεί"
+
+msgid "Mail has not been deleted"
+msgstr "Το mail δεν έχει διαγραφεί"
+
+msgid "is in use cannot be delete"
+msgstr "είναι σε χρήση δεν μπορεί να διαγραφεί"
+
+msgid "Mail cannot mark as to read"
+msgstr "Το μήνυμα δεν μπορεί να επισημανθεί ως αναγνωσμένο"
+
+msgid "Mail cannot mark as unread"
+msgstr "Το email δεν μπορεί να χαρακτηριστεί ως μη αναγνωσμένο"
+
+msgid "Mail has been marked as unread"
+msgstr "Η αλληλογραφία έχει επισημανθεί ως μη αναγνωσμένη"
+
+msgid "Compose"
+msgstr "Σύνταξη"
+
+msgid "Inbox"
+msgstr "Εισερχόμενα"
+
+msgid "Outbox"
+msgstr "Εξερχόμενα"
+
+msgid "Send"
+msgstr "Αποστολή"
+
+msgid "Read"
+msgstr "Αναγνώστηκε"
+
+msgid "Unread"
+msgstr "Μη αναγνωσμένο"
+
+msgid "Select Type"
+msgstr "Επιλογή τύπου"
+
+msgid "To use this feature you must be staff member"
+msgstr ""
+"Για να χρησιμοποιήσετε αυτήν τη δυνατότητα πρέπει να είστε μέλος του "
+"προσωπικού"
+
+msgid "To use this feature you must have agents addon."
+msgstr ""
+"Για να χρησιμοποιήσετε αυτήν τη δυνατότητα πρέπει να έχετε πρόσθετο "
+"πράκτορες."
+
+msgid "Re"
+msgstr "Απάντηση"
+
+msgid "mark read"
+msgstr "σήμα αναγνωσμένο"
+
+msgid "mark unread"
+msgstr "σημείωσε ως αδιάβαστο"
+
+msgid "Replied By"
+msgstr "Απαντήθηκε από"
+
+msgid "Reply"
+msgstr "Απάντηση"
+
+msgid "Type Message"
+msgstr "Πληκτρολογήστε Μήνυμα"
+
+msgid "Replies"
+msgstr "Απαντήσεις"
+
+msgid "Limit exceeds maximum tickets"
+msgstr "Το όριο ξεπερνά τα επιτρεπτά εισητήρια"
+
+msgid "The maximum number of open tickets limit has been exceeded."
+msgstr "Έγινε υπέρβαση του μέγιστου αριθμού ανοιχτών ορίων εισιτηρίων."
+
+msgid "Ticket has been closed due to merged with"
+msgstr "Το εισιτήριο έκλεισε λόγω συγχώνευσης με"
+
+msgid "Ticket"
+msgstr "Αίτημα"
+
+msgid "has been merged into"
+msgstr "έχει συγχωνευθεί σε"
+
+msgid "Merge Ticket"
+msgstr "Συγχώνευση εισιτηρίου"
+
+msgid "Ticket ID #"
+msgstr "Αναγνωριστικό εισιτηρίου #"
+
+msgid "Search ticket to merge into"
+msgstr "Αναζήτηση εισιτηρίου για συγχώνευση"
+
+msgid "Edit Last Reply"
+msgstr "Επεξεργασία τελευταίας απάντησης"
+
+msgid "Merge Ticket Latest Reply"
+msgstr "Συγχώνευση εισιτηρίου Τελευταία απάντηση"
+
+msgid "Merge"
+msgstr "Συγχώνευση"
+
+msgid "Ticket has been merged"
+msgstr "Το εισιτήριο συγχωνεύτηκε"
+
+msgid "Ticket has not been merged"
+msgstr "Το εισιτήριο δεν έχει συγχωνευθεί"
+
+msgid "The internal note has been posted"
+msgstr "Η εσωτερική σημείωση έχει αναρτηθεί"
+
+msgid "The internal note has not been posted"
+msgstr "Η εσωτερική σημείωση δεν έχει δημοσιευτεί"
+
+msgid "Post Internal Note"
+msgstr "Ανάρτηση εσωτερικού σημειώματος"
+
+msgid "The internal note is posted by"
+msgstr "Η εσωτερική σημείωση δημοσιεύτηκε από"
+
+msgid "Pass"
+msgstr "Ελεύθερη είσοδος"
+
+msgid "Ticket Notification"
+msgstr "Ειδοποίηση εισιτηρίων"
+
+msgid "Once Weekly"
+msgstr "Μία φορά την εβδομάδα"
+
+msgid "Thanks for subscribing!"
+msgstr "Ευχαριστούμε που εγγραφήκατε!"
+
+msgid "Ticket already marked overdue"
+msgstr "Το αίτημα έχει ήδη χαρακτηριστεί ως εκπρόθεσμο"
+
+msgid "The ticket has been marked as overdue"
+msgstr "Το εισιτήριο έχει επισημανθεί ως καθυστερημένο"
+
+msgid "The ticket has not been marked as overdue"
+msgstr "Το εισιτήριο δεν έχει επισημανθεί ως καθυστερημένο"
+
+msgid "System"
+msgstr "Σύστημα"
+
+msgid "Mark overdue"
+msgstr "Χαρακτήρισε ως εκπρόθεσμο"
+
+msgid "The ticket is marked as overdue by"
+msgstr "Το εισιτήριο επισημαίνεται ως καθυστερημένο από"
+
+msgid "The ticket has been unmarked as overdue"
+msgstr "Το εισιτήριο δεν έχει επισημανθεί ως καθυστερημένο"
+
+msgid "The ticket has not been unmarked as overdue"
+msgstr "Το εισιτήριο δεν έχει επισημανθεί ως καθυστερημένο"
+
+msgid "Unmark overdue"
+msgstr "Κατάργηση επισήμανσης καθυστερημένου"
+
+msgid "The ticket is unmarked as overdue by"
+msgstr "Το εισιτήριο δεν έχει επισημανθεί ως καθυστερημένο"
+
+msgid "Paid Support"
+msgstr "Πληρωμένη υποστήριξη"
+
+msgid "Check if you want to use this product for paid support"
+msgstr ""
+"Ελέγξτε αν θέλετε να χρησιμοποιήσετε αυτό το προϊόν για πληρωμένη υποστήριξη"
+
+msgid "Paid support type"
+msgstr "Πληρωμένος τύπος υποστήριξης"
+
+msgid "One-off Support"
+msgstr "Εφάπαξ υποστήριξη"
+
+msgid "Subscription Support"
+msgstr "Υποστήριξη συνδρομής"
+
+msgid "Number of tickets"
+msgstr "Αριθμός εισιτηρίων"
+
+msgid ""
+"Enter allowed number of tickets that customer can post. Enter -1 for "
+"unlimited tickets."
+msgstr ""
+"Εισαγάγετε τον επιτρεπόμενο αριθμό εισιτηρίων που μπορεί να δημοσιεύσει ο "
+"πελάτης. Εισαγάγετε -1 για απεριόριστα εισιτήρια."
+
+msgid "Credential Type"
+msgstr "Τύπος διαπιστευτηρίου"
+
+msgid "Additional Info"
+msgstr "Πρόσθετες πληροφορίες"
+
+msgid "Please insert values"
+msgstr "Εισαγάγετε τιμές"
+
+msgid "Visitor"
+msgstr "Επισκέπτης"
+
+msgid "By"
+msgstr "Με"
+
+msgid "Credential removed on ticket close"
+msgstr "Η πιστοποίηση καταργήθηκε στο κλείσιμο του εισιτηρίου"
+
+msgid "Failed to retrieve data"
+msgstr "Αποτυχία ανάκτησης δεδομένων"
+
+msgid "The new theme has been applied"
+msgstr "Το νέο θέμα έχει εφαρμοστεί"
+
+msgid "Error applying the new theme"
+msgstr "Σφάλμα κατά την εφαρμογή του νέου θέματος"
+
+msgid "Themes"
+msgstr "Θέματα"
+
+msgid "Color Chooser"
+msgstr "Επιλογέας χρώματος"
+
+msgid "Preset Theme"
+msgstr "Αρχικό θέμα"
+
+msgid "Color 1"
+msgstr "Χρώμα 1"
+
+msgid "Top menu heading background"
+msgstr "Φόντο κεφαλίδας πάνω μενού"
+
+msgid "Color 2"
+msgstr "Χρώμα 2"
+
+msgid "Top header line color"
+msgstr "Χρώμα γραμμής πάνω κεφαλίδας"
+
+msgid "Button Hover"
+msgstr "Χρώμα κουμπιού όταν το ποντίκι είναι από πάνω"
+
+msgid "Heading text"
+msgstr "Κείμενο κεφαλίδας"
+
+msgid "Color 3"
+msgstr "Χρώμα 3"
+
+msgid "Content Background Color"
+msgstr "Χρώμα στο φόντο του περιεχόμενου"
+
+msgid "Color 4"
+msgstr "Χρώμα 4"
+
+msgid "Content Text Color"
+msgstr "Χρώμα κειμένου του περιεχόμενου"
+
+msgid "Color 5"
+msgstr "Χρώμα 5"
+
+msgid "Border color"
+msgstr "Χρώμα περιθωρίου"
+
+msgid "Lines"
+msgstr "Γραμμές"
+
+msgid "Color 6"
+msgstr "Χρώμα 6"
+
+msgid "Button Color"
+msgstr "Χρώμα κουμπιού"
+
+msgid "Color 7"
+msgstr "Χρώμα 7"
+
+msgid "Top header text color"
+msgstr "Χρώμα γραμματοσειράς πάνω κεφαλίδας"
+
+msgid "Save Theme"
+msgstr "Αποθήκευση θεμάτων"
+
+msgid "Color Effect Preview"
+msgstr "Προεπισκόπηση  χρωματικού αποτελέσματος"
+
+msgid "Blue"
+msgstr "Μπλε"
+
+msgid "Red"
+msgstr "Κόκκινο"
+
+msgid "Greenish"
+msgstr "Πρασινωπό"
+
+msgid "Brown"
+msgstr "Καφέ"
+
+msgid "Orange"
+msgstr "Πορτοκαλί"
+
+msgid "Green"
+msgstr "Πράσινο"
+
+msgid "Black"
+msgstr "Μαύρο"
+
+msgid "Mail Notification Widget"
+msgstr "Ειδοποίηση mail σε μικροεφαρμογή"
+
+msgid "Show newly and reply mail notifications"
+msgstr "Εμφάνιση πρόσφατων ειδοποιήσεων αλληλογραφίας και απάντησης"
+
+msgid "New mail from"
+msgstr "Νεό mail από"
+
+msgid "Mail Notification"
+msgstr "Ειδοποίηση mail"
+
+msgid "Layout"
+msgstr "Διάταξη"
+
+msgid "Vertical"
+msgstr "Κάθετα"
+
+msgid "Horizontal"
+msgstr "Οριζοντίος"
+
+msgid "Max Record"
+msgstr "Μέγιστη καταγραφή"
+
+msgid "My Ticket Widget"
+msgstr "Η μικροεφαρμογή αιτήματος"
+
+msgid "Show unanswered tickets"
+msgstr "Προβολή μη απαντημένων αιτημάτων"
+
+msgid "My Tickets"
+msgstr "Αιτήματά μου"
+
+msgid "Order tickets"
+msgstr "Παραγγελία εισιτηρίων"
+
+msgid "Close due to merge"
+msgstr "Κλείσιμο λόγω συγχώνευσης"
+
+msgid "Product"
+msgstr "Προϊόν"
+
+msgid "Order"
+msgstr "Σειρά"
+
+msgid "There is no ticket"
+msgstr "Δεν υπάρχει εισιτήριο"
+
+msgid "Something went wrong"
+msgstr "Κάτι πήγε στραβά"
+
+msgid "Transaction Key"
+msgstr "Κλειδί συναλλαγής"
+
+msgid "Please select"
+msgstr "Παρακαλώ Επιλέξτε"
+
+msgid "Hide notice"
+msgstr "Απόκρυψη ειδοποίησης"
+
+msgid "Control Panel"
+msgstr "Πίνακας ελέγχου"
+
+msgid "Announcement Detail"
+msgstr "Λεπτομέρειες ανακοίνωσεις"
+
+msgid "Edit Announcement"
+msgstr "Επεξεργασία ανακοίνωσεις"
+
+msgid "Departments"
+msgstr "Τμήματα"
+
+msgid "Add Department"
+msgstr "Προσθήκη τμήματος"
+
+msgid "Edit Department"
+msgstr "Επεξεργασία τμήματος"
+
+msgid "Staff report"
+msgstr "Αναφορές προσωπικού"
+
+msgid "Staff reports"
+msgstr "Εκθέσεις προσωπικού"
+
+msgid "Departments report"
+msgstr "Αναφορά τμήματος"
+
+msgid "Edit Download"
+msgstr "Επεξεργασία λήψης"
+
+msgid "Edit FAQ"
+msgstr "Επεξεργασία συχνών ερωτήσεων - FAQ"
+
+msgid "FAQ Detail"
+msgstr "Λεπτομέρεις για το FAQ"
+
+msgid "Edit Knowledge Base"
+msgstr "Επεξεργασία γνωσιακής βάσης"
+
+msgid "Edit Category"
+msgstr "Επεξεργασία κατηγορίας"
+
+msgid "Knowledge Base Detail"
+msgstr "Λεπτομέρειες γνωσιακής βάσης"
+
+msgid "Send Message"
+msgstr "Αποστολή μηνύματος"
+
+msgid "Edit Role"
+msgstr "Επεξεργασία ρόλου"
+
+msgid "Staffs"
+msgstr "Προσωπικό"
+
+msgid "Add Staff"
+msgstr "Προσθήκη προσωπικού"
+
+msgid "Edit Staff"
+msgstr "Επεξεργασία προσωπικού"
+
+msgid "Staff Permissions"
+msgstr "Άδειες προσωπικού"
+
+msgid "Add Ticket"
+msgstr "Προσθήκη νέου αιτήματος"
+
+msgid "Edit Ticket"
+msgstr "Επεξεργασία αιτήματος"
+
+msgid "Ticket Detail"
+msgstr "Λεπτομέρειες αιτήματος"
+
+msgid "Plus"
+msgstr "Συν"
+
+msgid "Equals"
+msgstr "Ίσα"
+
+msgid "Minus"
+msgstr "Αφαίρεση"
+
+msgid "About Us"
+msgstr "Σχετικά με εμάς"
+
+msgid "Translations"
+msgstr "Μεταφράσεις"
+
+msgid "System Errors"
+msgstr "Λάθη συστήματος"
+
+msgid "Short Codes"
+msgstr "Σύντομοι κωδικοί (Short Codes)"
+
+msgid "Create Ticket"
+msgstr "Δημιουργία αιτήματος"
+
+msgid "Fields"
+msgstr "Πεδία"
+
+msgid "Install"
+msgstr "Εγκαθιστώ"
+
+msgid "Configurations"
+msgstr "Ρυθμίσεις"
+
+msgid "Cron Job URLs"
+msgstr "URL εργασίας Cron"
+
+msgid "Reports"
+msgstr "Αναφορές"
+
+msgid "Overall Statistics"
+msgstr "Συνολικά στατιστικά"
+
+msgid "Agent Reports"
+msgstr "Αναφορές πρακτόρων"
+
+msgid "Department Reports"
+msgstr "Αναφορές Τμήματος"
+
+msgid "User Reports"
+msgstr "Αναφορές χρήστη"
+
+msgid "Satisfaction Report"
+msgstr "Αναφορά Ικανοποίησης"
+
+msgid "GDPR Fields"
+msgstr "Πεδία GDPR"
+
+msgid "Erase Data Requests"
+msgstr "Διαγραφή αιτημάτων δεδομένων"
+
+msgid "Premium Addons"
+msgstr "Premium πρόσθετα"
+
+msgid "Install Addons"
+msgstr "Εγκαταστήστε πρόσθετα"
+
+msgid "Addons List"
+msgstr "Λίστα πρόσθετων"
+
+msgid "Feedback Fields"
+msgstr "Πεδία Ανατροφοδότησης"
+
+msgid "Helptopics"
+msgstr "Θέματα Βοήθειας"
+
+msgid "System Emails"
+msgstr "Email συστήματος"
+
+msgid "Add Email"
+msgstr "Προσθήκη email"
+
+msgid "Priorities"
+msgstr "Προτεραιότητες"
+
+msgid "Add Priority"
+msgstr "Προσθήκη προτεραιότητας"
+
+msgid "Ban Emails"
+msgstr "Πολλαπλός αποκλεισμός email"
+
+msgid "Email Templates"
+msgstr "Προκαθορισμένα email"
+
+msgid "New Ticket"
+msgstr "Νέο αίτημα"
+
+msgid "Agent Ticket"
+msgstr "Εισιτήριο Πράκτορα"
+
+msgid "New Agent"
+msgstr "Νέος πράκτορας"
+
+msgid "Reassign Ticket"
+msgstr "Εκχώρηση αιτήματος"
+
+msgid "Close Ticket"
+msgstr "Κλείσιμο αιτήματος"
+
+msgid "Delete Ticket"
+msgstr "Διαγραφή αιτήματος"
+
+msgid "Mark Overdue"
+msgstr "Χαρακτήριση ως εκπρόθεσμο"
+
+msgid "Ban Email"
+msgstr "Αποκλεισμός email"
+
+msgid "Ban email try to create ticket"
+msgstr "Αποκλεισμός email και προσπάθεια δημιουργίας αιτήματος"
+
+msgid "Department Transfer"
+msgstr "Μεταφορά τμήματος"
+
+msgid "Ban Email and Close Ticket"
+msgstr "Αποκλεισμός email και κλείσιμο αιτήματος"
+
+msgid "Unban Email"
+msgstr "Ξεμπλοκάρισμα email"
+
+msgid "Response Ticket"
+msgstr "Απαντημένο αίτημα"
+
+msgid "Reply Ticket"
+msgstr "Απάντηση αιτήματος"
+
+msgid "New Ticket Admin Alert"
+msgstr "Ειδοποίηση διαχειριστή νέου αιτήματος"
+
+msgid "In Progress Ticket"
+msgstr "Αίτημα σε εξέλιξη"
+
+msgid "Ticket priority is changed by"
+msgstr "Η προτεραιότητα του αιτήματος αλλάχθηκε από"
+
+msgid "New Mail Received"
+msgstr "Λήγθηκε νέο mail"
+
+msgid "New Mail Message Received"
+msgstr "Λήφθηκε νέο μήνυμα mail"
+
+msgid "Feedback Email To User"
+msgstr "Email Ανατροφοδότησης Προς Τον Χρήστη"
+
+msgid "User Reply On Closed Ticket"
+msgstr "Απάντηση Χρήστη Σε Κλειστό Αίτημα"
+
+msgid "Log out"
+msgstr "Αποσύνδεση"
+
+msgid "Username / password is incorrect"
+msgstr "Το Όνομα Χρήστη / Κωδικός Πρόσβασης είναι λάθος"
+
+msgid "Username already taken"
+msgstr "Το όνομα χρήστη υπάρχει ήδη"
+
+msgid "Invalid username"
+msgstr "Μη έγκυρο όνομα χρήστη"
+
+msgid "Please enter a username"
+msgstr "Εισαγάγετε ένα όνομα χρήστη"
+
+msgid "Invalid email"
+msgstr "Μη έγκυρο email"
+
+msgid "Email already registered"
+msgstr "Το Email έχει ήδη καταχωριστεί"
+
+msgid "Please enter a password"
+msgstr "Εισαγάγετε έναν κωδικό πρόσβασης"
+
+msgid "Passwords do not match"
+msgstr "Οι κωδικοί πρόσβασης δεν ταιριάζουν"
+
+msgid "Invalid captcha"
+msgstr "Μη έγκυρο captcha"
+
+msgid "Could not subscribe to the newsletter"
+msgstr "Δεν ήταν δυνατή η εγγραφή στο ενημερωτικό δελτίο"
+
+msgid ""
+"Please check confirmation email to complete your subscription for the "
+"newsletter"
+msgstr ""
+"Ελέγξτε το email επιβεβαίωσης για να ολοκληρώσετε τη συνδρομή σας για το "
+"ενημερωτικό δελτίο"
+
+msgid "You have successfully subscribed to the newsletter"
+msgstr "Έχετε εγγραφεί με επιτυχία στο ενημερωτικό δελτίο"
+
+msgid "JS Help Desk"
+msgstr "Γραφείο βοήθειας JS"
+
+msgid "JS Help Desk Control Panel"
+msgstr "Πίνακας ελέγχου γραφείου βοήθειας JS"
+
+msgid "System Error"
+msgstr "Πρόβλημα συστήματος"
+
+msgid "User Fields"
+msgstr "Πεδία χρηστών"
+
+msgid "Ban list log"
+msgstr "Απαγόρευση καταγραφής λίστας"
+
+msgid "Field Ordering"
+msgstr "Σειρά πεδίων"
+
+msgid "Post Installation"
+msgstr "Μετά την εγκατάσταση"
+
+msgid "Sorry"
+msgstr "Συγνώμη"
+
+msgid "No record found"
+msgstr "Δεν βρέθηκε το αρχείο"
+
+msgid "Sorry!"
+msgstr "Συγνώμη!"
+
+msgid "No record found ...!"
+msgstr "Δεν Βρέθηκε Αρχείο ...!"
+
+msgid "Access Denied"
+msgstr "Η πρόσβαση δεν επιτρέπεται"
+
+msgid "You have no permission to access this page"
+msgstr "Δεν έχετε άδεια πρόσβασης σε αυτήν τη σελίδα"
+
+msgid "User is not allowed to access this page."
+msgstr "Ο χρήστης δεν επιτρέπεται να έχει πρόσβαση σε αυτήν τη σελίδα."
+
+msgid "You are already Logged In."
+msgstr "Ειστε ηδη συνδεδεμενος."
+
+msgid "Access Denied!"
+msgstr "Δεν επιτρέπεται η πρόσβαση!"
+
+msgid "Your account has been disabled, please contact the administrator."
+msgstr ""
+"Ο λογαριασμός σας έχει απενεργοποιηθεί, επικοινωνήστε με τον διαχειριστή."
+
+msgid "You are not logged In"
+msgstr "Δεν είσαι συνδεδεμένος"
+
+msgid "To access the page, Please login"
+msgstr "Για πρόσβαση στη σελίδα, συνδεθείτε"
+
+msgid "Register"
+msgstr "Εγγραφή"
+
+msgid "User is not allowed to view this Ticket"
+msgstr "Ο χρήστης δεν επιτρέπεται να δει αυτό το εισιτήριο"
+
+msgid ""
+"Registration has been disabled by admin, please contact the system "
+"administrator."
+msgstr ""
+"Η εγγραφή έχει απενεργοποιηθεί από τον διαχειριστή, επικοινωνήστε με τον "
+"διαχειριστή του συστήματος."
+
+msgid "You have already given the feedback for this ticket."
+msgstr "Έχετε ήδη δώσει τα σχόλια για αυτό το εισιτήριο."
+
+msgid "Ticket not found...!"
+msgstr "Το εισιτήριο δεν βρέθηκε ...!"
+
+msgid "User is not allowed to view this page"
+msgstr "Ο χρήστης δεν επιτρέπεται να δει αυτήν τη σελίδα"
+
+msgid "Thank you so much for your feedback"
+msgstr "Σας ευχαριστώ πολύ για τα σχόλιά σας"
+
+msgid "Help Desk Pages"
+msgstr "Σελίδες γραφείου βοήθειας"
+
+msgid "Form submission failed!"
+msgstr "Η υποβολή της φόρμας απέτυχε!"
+
+msgid "You have not answered all required fields"
+msgstr "Δεν έχετε απαντήσει σε όλα τα απαιτούμενα πεδία"
+
+msgid "You have not given a correct time"
+msgstr "Δεν έχετε δώσει τη σωστή ώρα"
+
+msgid "You have not given a correct e-mail address"
+msgstr "Δεν έχετε δώσει σωστή διεύθυνση e-mail"
+
+msgid "You have not given a correct phone number"
+msgstr "Δεν έχετε δώσει σωστό αριθμό τηλεφώνου"
+
+msgid "You have not given a correct answer to the security question"
+msgstr "Δεν έχετε δώσει σωστή απάντηση στην ερώτηση ασφαλείας"
+
+msgid "You have not given a correct date"
+msgstr "Δεν έχετε δώσει μια σωστή ημερομηνία"
+
+msgid "The input value must be between "
+msgstr "Η τιμή εισαγωγής πρέπει να είναι μεταξύ"
+
+msgid " characters"
+msgstr "χαρακτήρες"
+
+msgid "The input value is longer than "
+msgstr "Η τιμή εισαγωγής είναι μεγαλύτερη από"
+
+msgid "The input value is shorter than "
+msgstr "Η τιμή εισαγωγής είναι μικρότερη από"
+
+msgid "Input values could not be confirmed"
+msgstr "Δεν ήταν δυνατή η επιβεβαίωση των τιμών εισαγωγής"
+
+msgid "Incorrect domain value"
+msgstr "Λανθασμένη τιμή τομέα"
+
+msgid "The input value is not a correct URL"
+msgstr "Η τιμή εισαγωγής δεν είναι σωστή διεύθυνση URL"
+
+msgid "The input value is incorrect"
+msgstr "Η τιμή εισαγωγής είναι λανθασμένη"
+
+msgid "The input value was not a correct number"
+msgstr "Η τιμή εισαγωγής δεν ήταν σωστός αριθμός"
+
+msgid "Your social security number was incorrect"
+msgstr "Ο αριθμός κοινωνικής ασφάλισης δεν ήταν σωστός"
+
+msgid "Incorrect UK VAT Number"
+msgstr "Εσφαλμένος αριθμός ΦΠΑ Ηνωμένου Βασιλείου"
+
+msgid "The password isn't strong enough"
+msgstr "Ο κωδικός πρόσβασης δεν είναι αρκετά ισχυρός"
+
+msgid "You have to choose at least "
+msgstr "Πρέπει να επιλέξετε τουλάχιστον"
+
+msgid " answers"
+msgstr "απαντήσεις"
+
+msgid "The input value can only contain alphanumeric characters "
+msgstr "Η τιμή εισαγωγής μπορεί να περιέχει μόνο αλφαριθμητικούς χαρακτήρες"
+
+msgid " and "
+msgstr "και"
+
+msgid "The file you are trying to upload is too large"
+msgstr "Το αρχείο που προσπαθείτε να ανεβάσετε είναι πολύ μεγάλο"
+
+msgid "The file you are trying to upload is of the wrong type"
+msgstr "Το αρχείο που προσπαθείτε να ανεβάσετε είναι λάθος τύπου"
+
+msgid "Please choose between "
+msgstr "Επιλέξτε μεταξύ"
+
+msgid "Please choose at least "
+msgstr "Παρακαλώ επιλέξτε τουλάχιστον"
+
+msgid "Please choose a maximum of "
+msgstr "Επιλέξτε το μέγιστο"
+
+msgid "The credit card number is not correct"
+msgstr "Ο αριθμός της πιστωτικής κάρτας δεν είναι σωστός"
+
+msgid "The CVV number was not correct"
+msgstr "Ο αριθμός CVV δεν ήταν σωστός"
+
+msgid "Support"
+msgstr "Υποστήριξη"
+
+msgid "Lost your password"
+msgstr "Εχασες τον κωδικό σου"
+
+msgid "Pagination default page size not saved"
+msgstr "Το προκαθορισμένο μέγεθος σελιδοποίησης αρχείου δεν αποθηκεύτηκε"
+
+msgid "Data directory cannot empty."
+msgstr "Ο κατάλογος δεδομένων δεν μπορεί να αδειάσει."
+
+msgid "Data directory is not proper."
+msgstr "Ο φάκελος δεδομένων δεν είναι σωστός"
+
+msgid "Data directory is not writable."
+msgstr "Ο κατάλογος δεδομένων δεν είναι εγγράψιμος."
+
+msgid "System slug not be empty."
+msgstr "Το slug του συστήματος δεν μπορεί να είναι κενό"
+
+msgid "System slug is conflicted with post or page slug."
+msgstr "Το slug συστήματος έρχεται σε διένεξη με το post ή το slug σελίδας."
+
+msgid "Days"
+msgstr "Ημέρες"
+
+msgid "Hours"
+msgstr "Ώρες"
+
+msgid "Own Captcha"
+msgstr "Το δικό σας Captcha"
+
+msgid "Any"
+msgstr "Οτιδήποτε"
+
+msgid "Addition"
+msgstr "Προσθήκη"
+
+msgid "Subtraction"
+msgstr "Αφαίρεση"
+
+msgid "Show"
+msgstr "Προβολή"
+
+msgid "Hide"
+msgstr "Απόκρυψη"
+
+msgid "Default"
+msgstr "Προκαθορισμένο"
+
+msgid "Custom"
+msgstr "Εθιμο"
+
+msgid "Top left"
+msgstr "Πάνω αριστερά"
+
+msgid "Top right"
+msgstr "Πάνω δεξιά"
+
+msgid "Middle left"
+msgstr "Μέση αριστερά"
+
+msgid "Middle right"
+msgstr "Μέση δεξιά"
+
+msgid "Bottom left"
+msgstr "Κάτω αριστερά"
+
+msgid "Bottom right"
+msgstr "Κάτω δεξιά"
+
+msgid "Random"
+msgstr "Τυχαία"
+
+msgid "Sequence"
+msgstr "Συνέχεια"
+
+msgid "General Settings"
+msgstr "Γενικές Ρυθμίσεις"
+
+msgid "Ticket Settings"
+msgstr "Ρυθμίσεις εισιτηρίων"
+
+msgid "Email Settings"
+msgstr "Ρυθμίσεις email"
+
+msgid "Agent Menu"
+msgstr "Μενού πρακτόρων"
+
+msgid "User Menu"
+msgstr "Μενού χρήστη"
+
+msgid "Push Notifications"
+msgstr "Ειδοποιήσεις προώθησης"
+
+msgid "Private Credentials"
+msgstr "Ιδιωτικά διαπιστευτήρια"
+
+msgid "Envato Validation"
+msgstr "Επικύρωση Envato"
+
+msgid "Easy Digital Downloads"
+msgstr "Εύκολη ψηφιακή λήψη"
+
+msgid "Set the heading of your plugin"
+msgstr "Θέστε την κεφαλίδα του πρόσθετού σας"
+
+msgid "Ticket Default Page"
+msgstr "Προκαθορισμένη σελίδα αιτήματος"
+
+msgid "Select Page"
+msgstr "Επιλογή σελίδας"
+
+msgid ""
+"Select JS Help Desk default page, on the action system, will redirect on the "
+"selected page. If not select the default page, email links, and support icon "
+"might not work."
+msgstr ""
+"Επιλέξτε την προεπιλεγμένη σελίδα JS Help Desk, στο σύστημα ενεργειών, θα "
+"ανακατευθύνει στην επιλεγμένη σελίδα. Εάν δεν επιλέξετε την προεπιλεγμένη "
+"σελίδα, οι σύνδεσμοι email και το εικονίδιο υποστήριξης ενδέχεται να μην "
+"λειτουργούν."
+
+msgid "Support Icon"
+msgstr "Εικονίδιο υποστήριξης"
+
+msgid "Screen Tag"
+msgstr "Εικονό-Ετικέτα"
+
+msgid "Enable / disable your support icon"
+msgstr "Ενεργοποίηση/ απενεργοποίηση του εικονιδίου υποστήριξης"
+
+msgid "Support Icon Position"
+msgstr "Θέση εικονιδίου υποστήριξης"
+
+msgid "Screen Tag Position"
+msgstr "Θέση εικονό-ετικέτας"
+
+msgid "Select position for your support icon"
+msgstr "Επιλογή του σημείο τοποθέτησης του εικονιδίου υποστήριξης"
+
+msgid "Online"
+msgstr "Σε σύνδεση"
+
+msgid "Set your plugin offline for front end"
+msgstr "Θέστε το σύστημα σας ως εκτός σύνδεσης για την σελίδα"
+
+msgid "Offline Message"
+msgstr "Μήνυμα εκτός σύνδεσης"
+
+msgid "Set the offline message for your user"
+msgstr "Θέστε το μύνημα εκτός σύνδεσης που βλέπουν οι χρήστες"
+
+msgid "Data Directory"
+msgstr "Φάκελος δεδομένων"
+
+msgid "Set the name for your data directory"
+msgstr "Θέστε το όνομα του φακέλου των δεδομένων"
+
+msgid ""
+"You need to rename the existing data directory in the file system before "
+"changing the data directory name"
+msgstr ""
+"Πρέπει να μετονομάσετε τον υπάρχοντα κατάλογο δεδομένων στο σύστημα αρχείων "
+"πριν αλλάξετε το όνομα του καταλόγου δεδομένων"
+
+msgid "Date Format"
+msgstr "Διαμόρφωση ημερομηνίας"
+
+msgid "DD-MM-YYYY"
+msgstr "ΗΗ-ΜΜ-ΕΕΕΕ"
+
+msgid "MM-DD-YYYY"
+msgstr "ΜΜ-ΗΗ-ΕΕΕΕ"
+
+msgid "YYYY-MM-DD"
+msgstr "ΕΕΕΕ-ΜΜ-ΗΗ"
+
+msgid "Set the default date format"
+msgstr "Θέστε την προκαθορισμένη μορφή ημερομηνίας"
+
+msgid "Ticket auto close"
+msgstr "Αυτόματο κλείσιμο αιτήματος"
+
+msgid "Ticket auto-close if user does not respond within given days"
+msgstr ""
+"Αυτόματο κλείσιμο εισιτηρίου εάν ο χρήστης δεν απαντήσει εντός συγκεκριμένων "
+"ημερών"
+
+msgid "No. of attachment"
+msgstr "Αριθμός επισυναπτόμενων"
+
+msgid "No. of attachment allowed at a time"
+msgstr "Αριθμός επιτρεπόμενων επισυνάψεων ανα φορά"
+
+msgid "File maximum size"
+msgstr "Μέγιστο μέγεθος αρχείου"
+
+msgid "File extension"
+msgstr "Επέκταση αρχείου"
+
+msgid "File extension allowed to attach"
+msgstr "Η επέκταση του αρχείου επιτρέπεται να επισυναφθεί"
+
+msgid "Pagination default page size"
+msgstr "Προκαθορισμένο μέγεθος σελιδοποίησης αρχείου"
+
+msgid "Set the no. of record per page"
+msgstr "Θέστε τον αριθμο των καταγραφών ανα σελίδα"
+
+msgid "Breadcrumbs"
+msgstr "Ίχνη γραφικών στοιχείων ελέγχου - Breadcrumbs"
+
+msgid "Show hide breadcrumbs"
+msgstr "Προβολη απόκρυψη γραφικών στοιχείων ελέγχου"
+
+msgid "Top Header"
+msgstr "Κορυφαία κεφαλίδα"
+
+msgid "Show hide Top Header"
+msgstr "Εμφάνιση απόκρυψης κεφαλίδας"
+
+msgid "Login redirect"
+msgstr "Ανακατεύθυνση μετά την σύνδεση"
+
+msgid "Redirect user to JS Help Desk control panel after log in"
+msgstr ""
+"Ανακατεύθυνση χρήστη στον πίνακα ελέγχου της Υπηρεσίας Βοήθειας JS μετά τη "
+"σύνδεση"
+
+msgid "Show count on my tickets"
+msgstr "Προβολή αρίθμησης στα αιτήματα μου"
+
+msgid "Show number of the open, closed, answered ticket in my ticket"
+msgstr ""
+"Εμφάνιση του αριθμού ανοιχτού, κλειστού, απαντημένου εισιτηρίου στο "
+"εισιτήριό μου"
+
+msgid "Show captcha on registration form"
+msgstr "Εμφάνιση captcha στη φόρμα εγγραφής"
+
+msgid "Select whether you want to show captcha on the registration form or not"
+msgstr "Επιλέξτε αν θέλετε να εμφανίζεται το captcha στη φόρμα εγγραφής ή όχι"
+
+msgid "Default wp role for new users"
+msgstr "Προεπιλεγμένος ρόλος wp για νέους χρήστες"
+
+msgid "Select the role you want to assign to new users"
+msgstr "Επιλέξτε το ρόλο που θέλετε να εκχωρήσετε σε νέους χρήστες"
+
+msgid "Set Login Link"
+msgstr "Ορισμός συνδέσμου σύνδεσης"
+
+msgid "Set Login Link Default or Custom"
+msgstr "Ορισμός προεπιλεγμένου ή προσαρμοσμένου συνδέσμου σύνδεσης"
+
+msgid "Ticketid sequence"
+msgstr "Ακολουθία αριθμών αιτημάτων"
+
+msgid "Set ticketid sequential or random"
+msgstr "Θέστε τον αριθμό αιτήματος σε συνεχή ή τυχαίο"
+
+msgid "Ticket listing ordering"
+msgstr "Παραγγελία εισιτηρίων"
+
+msgid "Set default ordering for ticket listing"
+msgstr "Ορίστε την προεπιλεγμένη παραγγελία για λίστα εισιτηρίων"
+
+msgid "Maximum tickets"
+msgstr "Μέγιστος αριθμός αιτημάτων"
+
+msgid "Maximum ticket per user"
+msgstr "Μέγιστος αριθμός αιτημάτων ανα χρήστη"
+
+msgid "Maximum open tickets"
+msgstr "Μέγιστα αριθμός ανοικτών αιτημάτων"
+
+msgid "Maximum opened tickets per user"
+msgstr "Μέγιστος αριθμός ανοικτών αιτημάτων ανα χρήστη"
+
+msgid "Reopen ticket within days"
+msgstr "Ξανά άνοιγμα αιτήματος μέσα σε πόσες μέρες"
+
+msgid "The ticket can be reopened within a given number of days"
+msgstr "Το εισιτήριο μπορεί να ανοίξει ξανά εντός συγκεκριμένου αριθμού ημερών"
+
+msgid "User can print ticket"
+msgstr "Ο χρήστης μπορεί να εκτυπώσει το αίτημα"
+
+msgid "Can user print ticket from ticket detail or not"
+msgstr "Μπορεί ο χρήστης να εκτυπώσει το αίτημα ή όχι"
+
+msgid "Show captcha on the visitor ticket form"
+msgstr "Εμφάνιση captcha στη φόρμα εισιτηρίου επισκέπτη"
+
+msgid "Show captcha when a visitor wants to create a ticket"
+msgstr ""
+"Εμφάνιση captcha όταν ένας επισκέπτης θέλει να δημιουργήσει ένα εισιτήριο"
+
+msgid "Captcha selection"
+msgstr "Επιλογή Captcha"
+
+msgid "Which captcha you want to add"
+msgstr "Ποιό captcha θέλετε να προσθέσετε"
+
+msgid "Google recaptcha public key"
+msgstr "Δημόσιο κλειδί Google recaptcha"
+
+msgid "Please enter the google re-captcha public key from"
+msgstr "Εισαγάγετε το δημόσιο κλειδί του Google re-captcha από"
+
+msgid "Google recaptcha private key"
+msgstr "Προσωπικό κλειδί Google recaptcha"
+
+msgid "Please enter the google re-captcha private key from"
+msgstr "Εισαγάγετε το ιδιωτικό κλειδί google re-captcha από"
+
+msgid "Own captcha calculation type"
+msgstr "Τύπος υπολογισμού του προσωπικού σας captcha"
+
+msgid "Select calculation type addition or subtraction"
+msgstr "Επιλέξτε τύπο υπολογισμού άθροισης ή αφαίρεσης"
+
+msgid "Own captcha operands"
+msgstr "Υπολογισμοί του δικού σας captcha"
+
+msgid "Select the total operands to be given"
+msgstr "Επιλέξτε το σύνολο των υπολογισμών που θα δοθούν"
+
+msgid "Own captcha subtraction answer positive"
+msgstr "Θετική απάντηση για το προσωπικό σας αφαιρετικό captcha"
+
+msgid "Is subtraction answer should be positive"
+msgstr "Η αφαίρεση θα πρέπει να δώσει θετικό αποτέλεσμα"
+
+msgid "New ticket message"
+msgstr "Μήνυμα για νέο αίτημα"
+
+msgid "This message will show on the new ticket"
+msgstr "Αυτό το μήνυμα θα εμφανιστεί στο νέο εισιτήριο"
+
+msgid "Allow Users To Reply via Email On Closed Ticket"
+msgstr ""
+"Να επιτρέπεται στους χρήστες να απαντούν μέσω ηλεκτρονικού ταχυδρομείου σε "
+"κλειστό αίτημα"
+
+msgid "Select whether users can reply to closed email piping ticket or not"
+msgstr ""
+"Επιλέξτε αν οι χρήστες μπορούν να απαντήσουν σε κλειστό εισιτήριο σωληνώσεων "
+"μέσω email ή όχι"
+
+msgid "Visitor can create ticket"
+msgstr "Ο επισκέπτης μπορεί να δημιουργήσει αίτημα"
+
+msgid "Can visitor create ticket or not"
+msgstr "Μπορεί ένας επισκέπτης να δημιουργήσει αίτημα ή όχι"
+
+msgid "Visitor ticket creation message"
+msgstr "Μήνυμα δημιουργίας αιτήματος επισκέπτη"
+
+msgid "This text will appear whenever a visitor creates a ticket"
+msgstr ""
+"Αυτό το κείμενο θα εμφανίζεται κάθε φορά που ένας επισκέπτης δημιουργεί ένα "
+"εισιτήριο"
+
+msgid "Default alert email"
+msgstr "Προκαθορισμένο email προειδοποιήσεων"
+
+msgid ""
+"If ticket department email is not selected then this email is used to send "
+"emails"
+msgstr ""
+"Αν δεν επιλεχθεί email αιτήματος για το τμήμα τότε αυτό το email θα "
+"χρησιμοποιηθεί για τις αποστολές"
+
+msgid "Default admin email"
+msgstr "Προκαθορισμένο διαχειριστικό email"
+
+msgid "Admin email address to receive emails"
+msgstr "Η διεύθυνση email του διαχειριστή για την παραλαβή των email"
+
+msgid "Add New Email"
+msgstr "Προσθήκη νέου email"
+
+msgid "Ban Email New Ticket"
+msgstr "Απαγόρευση ηλεκτρονικού ταχυδρομείου νέου εισιτηρίου"
+
+msgid "Mail to admin"
+msgstr "Mail στον διαχειριστή"
+
+msgid "Email sends to admin when banned email try to create a ticket"
+msgstr ""
+"Το email αποστέλλεται στον διαχειριστή όταν απαγορευτεί το email προσπαθήστε "
+"να δημιουργήσετε ένα εισιτήριο"
+
+msgid "Ticket Operations Email Setting"
+msgstr "Ρύθμιση email λειτουργίας εισιτηρίων"
+
+msgid "Admin"
+msgstr "Διαχειριστής"
+
+msgid "New ticket"
+msgstr "Νέο αίτημα"
+
+msgid "Ticket reassign"
+msgstr "Ξανά ανάθεση αιτήματος"
+
+msgid "Ticket close"
+msgstr "Κλείσιμο αιτήματος"
+
+msgid "Ticket delete"
+msgstr "Διαγραφή αιτήματος"
+
+msgid "Ticket ban email"
+msgstr "Αποκλεισμός email αιτήματος"
+
+msgid "Ticket department transfer"
+msgstr "Μεταφορά αιτήματος στο τμήμα"
+
+msgid "Ticket reply User"
+msgstr "Απάντηση χρήστη σε αίτημα"
+
+msgid "Ticket Response Agent"
+msgstr "Πράκτορας απόκρισης εισιτηρίων"
+
+msgid "Ticket ban email and close ticket"
+msgstr "Αποκλεισμός email αιτήματος και κλεισιμο"
+
+msgid "Ticket unban email"
+msgstr "Απεμπλοκάρισμα email αιτήματος"
+
+msgid "Ticket lock"
+msgstr "Κλείδωμα αιτήματος"
+
+msgid "Ticket unlock"
+msgstr "Ξεκλείδωμα αιτήματος"
+
+msgid "Ticket Change Priority"
+msgstr "Αλλάγη προτεραιότητας αιτήματος"
+
+msgid "Mark Ticket In Progress"
+msgstr "Χαρακτήριση του αιτήματος σε εξέλιξη"
+
+msgid "Reply To A Closed Ticket By Email"
+msgstr "Απάντηση σε ένα κλειστό αίτημα μέσω Email"
+
+msgid "Send Feedback Email To User"
+msgstr "Στείλτε Email Ανατροφοδότησης Στο Χρήστη"
+
+msgid "Dashboard Links"
+msgstr "Σύνδεσμοι ταμπλό"
+
+msgid "Open Ticket"
+msgstr "Άνοιξε αίτημα"
+
+msgid "Department reports"
+msgstr "Αναφορές Τμήματος"
+
+msgid "Login/Logout Button"
+msgstr "Κουμπί σύνδεσης/ αποσύνδεσης"
+
+msgid "Ticket Total Count"
+msgstr "Συνολικός αριθμός εισιτηρίων"
+
+msgid "Ticket Statistics"
+msgstr "Στατιστικά εισιτηρίων"
+
+msgid "Erase Agent Data"
+msgstr "Διαγραφή δεδομένων παράγοντα"
+
+msgid "Top Menu Links"
+msgstr "Κορυφαίοι σύνδεσμοι μενού"
+
+msgid "Home"
+msgstr "Αρχική"
+
+msgid "Check Ticket Status"
+msgstr "Έλεγχος κατάστασης αιτήματος"
+
+msgid "Registration"
+msgstr "Εγγραφή"
+
+msgid "Erase User Data"
+msgstr "Διαγραφή δεδομένων χρήστη"
+
+msgid "Feedback Settings"
+msgstr "Ρυθμίσεις Ανατροφοδότησης"
+
+msgid "Feedback Email Delay Type"
+msgstr "Τύπος Καθυστέρησης Email Ανατροφοδότησης"
+
+msgid "Select delay type for feedback email"
+msgstr "Επιλέξτε τύπο καθυστέρησης για το email ανατροφοδότησης"
+
+msgid "Feedback Email Delay"
+msgstr "Καθυστέρηση Email Ανατροφοδότησης"
+
+msgid ""
+"Set no. of days or hours to send feedback email after a ticket is closed"
+msgstr ""
+"Ορίστε αριθ. ημερών ή ωρών για αποστολή email ανατροφοδότησης μετά το "
+"κλείσιμο ενός εισιτηρίου"
+
+msgid "Success message after submitting feedback"
+msgstr "Μήνυμα επιτυχίας μετά την υποβολή σχολίων"
+
+msgid "This text will appear whenever anyone submits feedback"
+msgstr ""
+"Αυτό το κείμενο θα εμφανίζεται κάθε φορά που κάποιος υποβάλει ανατροφοδότηση"
+
+msgid "Firebase Notifications"
+msgstr "Ειδοποιήσεις Firebase"
+
+msgid ""
+"JS Help Desk Desktop Notifications plugin is not installed. Please install "
+"the plugin to enable desktop notifications"
+msgstr ""
+"Το πρόσθετο JS Help Desk Desktop Notifications δεν είναι εγκατεστημένο. "
+"Εγκαταστήστε την προσθήκη για να ενεργοποιήσετε τις ειδοποιήσεις στην "
+"επιφάνεια εργασίας"
+
+msgid "Click here to insert Install."
+msgstr "Κάντε κλικ εδώ για να εισαγάγετε την Εγκατάσταση."
+
+msgid "JS Help Desk Desktop Notifications plugin is not active."
+msgstr "Το πρόσθετο JS Help Desk Desktop Notifications δεν είναι ενεργό."
+
+msgid "Find and add firebase api's keys"
+msgstr "Βρείτε και προσθέστε τα κλειδιά api του Firebase"
+
+msgid "Click here to get firebae api keys."
+msgstr "Κάντε κλικ εδώ για να λάβετε τα κλειδιά του firebase api."
+
+msgid "API key for user"
+msgstr "Κλειδί API για χρήστη"
+
+msgid "Firebase api key for front user"
+msgstr "Κλειδί Firebase api για τον αρχικό χρήστη"
+
+msgid "Auth Domain"
+msgstr "Τομέας Auth"
+
+msgid "Firebase Auth Domain"
+msgstr "Τομέας ελέγχου Firebase Auth"
+
+msgid "Database Url"
+msgstr "Διεύθυνση URL βάσης δεδομένων"
+
+msgid "Firebase Database URL"
+msgstr "Διεύθυνση URL βάσης δεδομένων Firebase"
+
+msgid "Project Id"
+msgstr "Αναγνωριστικό έργου"
+
+msgid "Firebase Project Id"
+msgstr "Αναγνωριστικό έργου Firebase"
+
+msgid "Bucket Storage"
+msgstr "Αποθήκευση κάδου"
+
+msgid "Firebase Bucket Storage"
+msgstr "Αποθήκευση κάδου Firebase"
+
+msgid "Message Sender Id"
+msgstr "Αναγνωριστικό αποστολέα μηνύματος"
+
+msgid "Firebase Message Sender Id"
+msgstr "Αναγνωριστικό αποστολέα μηνυμάτων Firebase"
+
+msgid "Private Server Key"
+msgstr "Κλειδί ιδιωτικού διακομιστή"
+
+msgid "Firebase Server Key"
+msgstr "Κλειδί διακομιστή Firebase"
+
+msgid "Logo Image for Desktop Notifications"
+msgstr "Εικόνα λογότυπου για ειδοποιήσεις επιφάνειας εργασίας"
+
+msgid "Remove Image"
+msgstr "Κατάργηση εικόνας"
+
+msgid "Remove Logo"
+msgstr "Κατάργηση λογότυπου"
+
+msgid "No Firebase Notificaiton Logo"
+msgstr "Χωρίς λογότυπο ειδοποίησης Firebase"
+
+msgid "Secret Key"
+msgstr "Μυστικό κλειδί"
+
+msgid ""
+"Private Credentials Encryption Key changing this value will discard all "
+"existing credentials "
+msgstr ""
+"Το ιδιωτικό κλειδί κρυπτογράφησης διαπιστευτηρίων αλλάζοντας αυτήν την τιμή "
+"θα απορριφθούν όλα τα υπάρχοντα διαπιστευτήρια"
+
+msgid "Second Level Security"
+msgstr "Ασφάλεια δεύτερου επιπέδου"
+
+msgid "For enhanced security change encryption method in %s on line %s"
+msgstr "Για βελτιωμένη ασφάλεια αλλαγή μεθόδου κρυπτογράφησης σε% s on line% s"
+
+msgid "Api Key"
+msgstr "Κλειδί Api"
+
+msgid "Enter Envato api key "
+msgstr "Εισαγάγετε το κλειδί Envato api"
+
+msgid "Click here to generate an api key"
+msgstr "Κάντε κλικ εδώ για να δημιουργήσετε ένα κλειδί api"
+
+msgid "License Mandatory"
+msgstr "Υποχρεωτική άδεια"
+
+msgid ""
+"Prevent users from submitting a ticket without a valid license for one of "
+"your product"
+msgstr ""
+"Αποτρέψτε τους χρήστες από την υποβολή εισιτηρίου χωρίς έγκυρη άδεια για ένα "
+"από τα προϊόντα σας"
+
+msgid "Product ID"
+msgstr "Αναγνωριστικό προϊόντος"
+
+msgid "A comma-separated list of Envato product ids"
+msgstr "Μια λίστα αναγνωριστικών προϊόντων Envato διαχωρισμένων με κόμμα"
+
+msgid "Enter MailChimp API key "
+msgstr "Εισαγάγετε το κλειδί API MailChimp"
+
+msgid "Audience ID"
+msgstr "Αναγνωριστικό κοινού"
+
+msgid "Find Audience ID in your MailChimp account"
+msgstr "Βρείτε αναγνωριστικό κοινού στον λογαριασμό σας MailChimp"
+
+msgid "Enable double opt-in"
+msgstr "Ενεργοποίηση διπλής συμμετοχής"
+
+msgid "You must also enable double opt-in in your MailChimp account"
+msgstr ""
+"Πρέπει επίσης να ενεργοποιήσετε τη διπλή συμμετοχή στο λογαριασμό σας στο "
+"MailChimp"
+
+msgid "Welcome email"
+msgstr "Καλώς ήλθατε email"
+
+msgid "You can enable Final Welcome Email in your MailChimp account"
+msgstr ""
+"Μπορείτε να ενεργοποιήσετε το Final Welcome Welcome Email στον λογαριασμό "
+"σας στο MailChimp"
+
+msgid "Verify License On Ticket Creation"
+msgstr "Επαληθεύστε την άδεια χρήσης κατά τη δημιουργία εισιτηρίων"
+
+msgid "Save Configurations"
+msgstr "Αποθήκευση ρυθμίσεων"
+
+msgid "Ticket via email"
+msgstr "Αίτημα μέσω email"
+
+msgid "OR"
+msgstr "Ή"
+
+msgid "Sorry the cron job didnot work"
+msgstr "Δυστυχώς η εργασία cron δεν λειτούργησε"
+
+msgid "Update ticket status"
+msgstr "Ενημέρωση κατάστασης εισιτηρίου"
+
+msgid "Recommended run script daily"
+msgstr "Συνιστώμενο σενάριο εκτέλεσης καθημερινά"
+
+msgid "You cannot use this email, it is used in email piping"
+msgstr ""
+"Δεν μπορείτε να χρησιμοποιήσετε αυτό το email, χρησιμοποιείται σε σωληνώσεις "
+"email"
+
+msgid "The department has been stored"
+msgstr "Το τμήμα έχει αποθηκευτεί"
+
+msgid "The department has not been stored"
+msgstr "Το τμήμα δεν έχει αποθηκευτεί"
+
+msgid "The department has been deleted"
+msgstr "Το τμήμα διαγράφηκε"
+
+msgid "The department has not been deleted"
+msgstr "Το τμήμα δεν έχει διαγραφεί"
+
+msgid "The department in use cannot be delete"
+msgstr "Το τμήμα που χρησιμοποιείται δεν μπορεί να διαγραφεί"
+
+msgid "default has been changed"
+msgstr "Το προκαθορισμένο έχει αλλάξει"
+
+msgid "default has not been changed"
+msgstr "Το προκαθορισμένο δεν έχει αλλάξει"
+
+msgid "No Record Found"
+msgstr "Δεν Βρέθηκε Αρχείο"
+
+msgid "Outgoing Email"
+msgstr "Εξερχόμενα email"
+
+msgid "Select Email"
+msgstr "Επιλέξτε Email"
+
+msgid "Tickets of this department will receive emails from this email"
+msgstr "Τα εισιτήρια αυτού του τμήματος θα λάβουν email από αυτό το email"
+
+msgid "Receive Email"
+msgstr "Λήψη email"
+
+msgid "Save Department"
+msgstr "Αποθήκευση τμήματος"
+
+msgid "The user of this department will receive email on the new ticket"
+msgstr "Ο χρήστης αυτού του τμήματος θα λάβει email στο νέο εισιτήριο"
+
+msgid "Are you sure you want to delete it?"
+msgstr "Είσαι σίγουρος οτι θέλεις να το διαγράψεις;"
+
+msgid "Search Departments"
+msgstr "Αναζήτηση τμημάτων"
+
+msgid "Outgoing"
+msgstr "Εξερχόμενος"
+
+msgid "Click here to give us feedback"
+msgstr "Κάντε κλικ εδώ για να μας δώσετε ανατροφοδότηση"
+
+msgid "Email Already Exist"
+msgstr "Το email υπάρχει ήδη"
+
+msgid "The email has been stored"
+msgstr "Το email έχει αποθηκευτεί"
+
+msgid "The email has not been stored"
+msgstr "Το email δεν έχει αποθηκευτεί"
+
+msgid "False"
+msgstr "Ψευδής"
+
+msgid "True"
+msgstr "Αληθής"
+
+msgid "Send Email By"
+msgstr "Αποστολή email από"
+
+msgid "SMTP host type"
+msgstr "Τύπος κεντρικού υπολογιστή SMTP"
+
+msgid "SMTP host"
+msgstr "Κεντρικός υπολογιστής SMTP"
+
+msgid "SMTP Authentication"
+msgstr "Έλεγχος ταυτότητας SMTP"
+
+msgid "SMTP Port"
+msgstr "Θύρα SMTP"
+
+msgid "If the system doesnot respond in 30 seconds"
+msgstr "Εάν το σύστημα δεν ανταποκρίνεται σε 30 δευτερόλεπτα"
+
+msgid "Auto Response"
+msgstr "Αυτόματη απάντηση"
+
+msgid "Save Email"
+msgstr "Αποθήκευση Email"
+
+msgid "info"
+msgstr "πληροφορίες"
+
+msgid "System email used for sending email"
+msgstr "Το email του συστήματος που θα χρησιμοποιείται για την αποστολή email"
+
+msgid "Email template has been stored"
+msgstr "Το προκαθορισμένο email έχει επανέλθει"
+
+msgid "Email template has not been stored"
+msgstr "Το προκαθορισμένο email δεν έχει επανέλθει"
+
+msgid "Ban Email Try To Create Ticket"
+msgstr ""
+"Απαγόρευση ηλεκτρονικού ταχυδρομείου Δοκιμάστε να δημιουργήσετε εισιτήριο"
+
+msgid "Ticket Priority Is Changed By"
+msgstr "Η προτεραιότητα του αιτήματος αλλάχθηκε από"
+
+msgid "Data Deleted"
+msgstr "Τα δεδομένα διαγράφηκαν"
+
+msgid "Body"
+msgstr "Σώμα"
+
+msgid "Parameters"
+msgstr "Παράμετροι"
+
+msgid "Tracking ID"
+msgstr "Αριθμός εντοπισμού"
+
+msgid "Ticket URL"
+msgstr "Σύνδεσμος αιτήματος"
+
+msgid "Ticket Priority"
+msgstr "Προτεραιότητα Αιτήματος"
+
+msgid "Department title"
+msgstr "Τίτλος τμήματος"
+
+msgid "Group Title"
+msgstr "Τίτλος γκρουπ"
+
+msgid "Agent name"
+msgstr "Ονομα πράκτορα"
+
+msgid "Help topic title"
+msgstr "Τίτλος θέματος βοήθειας"
+
+msgid "Feedback URL"
+msgstr "URL Ανατροφοδότησης"
+
+msgid "Ticket Subject"
+msgstr "Θέμα Αιτήματος"
+
+msgid "Ticket Tracking ID"
+msgstr "ID Παρακολούθησης Αιτήματος"
+
+msgid "Close Date"
+msgstr "Ημερομηνία κλεισίματος"
+
+msgid "Save Email Template"
+msgstr "Αποθήκευση προτύπου ηλεκτρονικού ταχυδρομείου"
+
+msgid "Field mark as published"
+msgstr "Το πεδίο έχει δημοσιευτεί"
+
+msgid "Field mark as unpublished"
+msgstr "Το πεδίο δεν έχει δημοσιευτεί"
+
+msgid "Field mark as required"
+msgstr "Το πεδείο έχει χαρακτηριστεί ως απαραίτητο"
+
+msgid "Field mark as not required"
+msgstr "Το πεδίο έχει χαρακτηριστεί ως μη απαραίτητο"
+
+msgid "Field ordering down"
+msgstr "Μετακίνηση πεδίου προς τα κάτω"
+
+msgid "Field ordering up"
+msgstr "Μετακίνηση πεδίου προς τα πάνω"
+
+msgid "Parent field has not been stored"
+msgstr "Το γονικό πεδίο δεν έχει αποθηκευτεί"
+
+msgid "Please Insert At least one value for every option"
+msgstr "Εισαγάγετε τουλάχιστον μία τιμή για κάθε επιλογή"
+
+msgid "Field has not been stored"
+msgstr "Το πεδίο δεν έχει επανέλθει"
+
+msgid "Field has been stored"
+msgstr "Το πεδίο έχει επανέλθει"
+
+msgid "Field has been updated"
+msgstr "Το πεδίο έχει ενημερωθεί"
+
+msgid "Parent Field"
+msgstr "Γονικό πεδίο - Αρχικό"
+
+msgid "Edit Field"
+msgstr "Επεξεργασία πεδίου"
+
+msgid "Field Title"
+msgstr "Τίτλος πεδίου"
+
+msgid "User Published"
+msgstr "Ο χρήστης είναι έτοιμος"
+
+msgid "Visitor Published"
+msgstr "Δημοσίευση Επισκέπτη"
+
+msgid "Required"
+msgstr "Απαραίτητο"
+
+msgid "User Search"
+msgstr "Αναζήτηση χρήστη"
+
+msgid "Visitor Search"
+msgstr "Αναζήτηση επισκέπτη"
+
+msgid "Show On Listing"
+msgstr "Προβολή λίστας"
+
+msgid "Advanced"
+msgstr "Για προχωρημένους"
+
+msgid "Field has not been deleted"
+msgstr "Το πεδίο δεν έχει διαγραφεί"
+
+msgid "Field has been deleted"
+msgstr "Το πεδίο έχει διαγραφεί"
+
+msgid "Add Field"
+msgstr "Προσθήκη πεδίου"
+
+msgid "Field"
+msgstr "Πεδίο"
+
+msgid "Text Field"
+msgstr "Πεδίο κειμένου"
+
+msgid "Check Box"
+msgstr "Πλαίσιο ελέγχου"
+
+msgid "Drop Down"
+msgstr "Πτώση"
+
+msgid "Text Area"
+msgstr "Περιοχή κειμένου"
+
+msgid "Radio Button"
+msgstr "Κουμπί ραδιοφώνου"
+
+msgid "Upload File"
+msgstr "Ανέβασμα αρχείου"
+
+msgid "Multi Select"
+msgstr "Πολλαπλή επιλογή"
+
+msgid "Terms and Conditions"
+msgstr "Οροι και Προϋποθέσεις"
+
+msgid "Dependent Field"
+msgstr "Εξαρτημένο πεδίο"
+
+msgid "Field Type"
+msgstr "Τύπος πεδίου"
+
+msgid "Field Size"
+msgstr "Μέγεθος πεδίου"
+
+msgid "Max Length"
+msgstr "Μέγιστο μήκος"
+
+msgid "Columns"
+msgstr "Στήλες"
+
+msgid "Rows"
+msgstr "Σειρές"
+
+msgid "Use the table below to add new values"
+msgstr "Χρησιμοποιήστε τον παρακάτω πίνακα για να προσθέσετε νέες τιμές"
+
+msgid "Add Value"
+msgstr "Προσθήκη τιμής"
+
+msgid "Terms and Conditions Text"
+msgstr "Κείμενο Όρων και Προϋποθέσεων"
+
+msgid "Terms and Conditions Link Type"
+msgstr "Όροι και Προϋποθέσεις Τύπος συνδέσμου"
+
+msgid "Direct Link"
+msgstr "Απευθείας σύνδεσμος"
+
+msgid "Wordpress Page"
+msgstr "Σελίδα Wordpress"
+
+msgid "Select Link Type"
+msgstr "Επιλέξτε Τύπος συνδέσμου"
+
+msgid "Terms and Conditions Link"
+msgstr "Σύνδεσμος Όρων και Προϋποθέσεων"
+
+msgid "Terms and Conditions Page"
+msgstr "Σελίδα Όρων και Προϋποθέσεων"
+
+msgid "Select Wordpress page"
+msgstr "Επιλέξτε σελίδα Wordpress"
+
+msgid "Save Field"
+msgstr "Αποθήκευση πεδίου"
+
+msgid "User Publish"
+msgstr "Δημοσίευση Χρήστη"
+
+msgid "Visitor Publish"
+msgstr "Δημοσίευση Επισκέπτη"
+
+msgid "Published"
+msgstr "Δημοσιεύτηκε"
+
+msgid "Unpublished"
+msgstr "Μη δημοσιευμένο"
+
+msgid "Not required"
+msgstr "Δεν είναι απαραίτητο"
+
+msgid "users popup"
+msgstr "αναδυόμενο παράθυρο χρηστών"
+
+msgid "Can Not Unpublished"
+msgstr "Η δημοσίευση δεν μπορεί να αφαιρεθεί"
+
+msgid "good"
+msgstr "Καλός"
+
+msgid "cross"
+msgstr "διασχίζω"
+
+msgid "can not mark as not required"
+msgstr "δεν μπορεί να επισημανθεί ως δεν απαιτείται"
+
+msgid "Cannot unpublished field"
+msgstr "Δεν είναι δυνατή η δημοσίευση του πεδίου"
+
+msgid "User Data"
+msgstr "Δεδομένα χρήστη"
+
+msgid "Erasing data request has been stored"
+msgstr "Η διαγραφή του αιτήματος δεδομένων έχει αποθηκευτεί"
+
+msgid "Failed while storing"
+msgstr "Αποτυχία κατά την αποθήκευση"
+
+msgid "Erase data request withdrawn"
+msgstr "Η αίτηση διαγραφής δεδομένων αποσύρθηκε"
+
+msgid "Failed while performing action"
+msgstr "Αποτυχία κατά την εκτέλεση της ενέργειας"
+
+msgid "User identifying data erased"
+msgstr "Τα δεδομένα αναγνώρισης χρήστη διαγράφηκαν"
+
+msgid "User data Deleted"
+msgstr "Τα δεδομένα χρήστη διαγράφηκαν"
+
+msgid "Export your data"
+msgstr "Εξαγάγετε τα δεδομένα σας"
+
+msgid "You have filed a request to remove your data."
+msgstr "Έχετε υποβάλει αίτημα για κατάργηση των δεδομένων σας."
+
+msgid "To withdraw erases data request"
+msgstr "Για απόσυρση διαγράφει το αίτημα δεδομένων"
+
+msgid "Request data removal from the system."
+msgstr "Ζητήστε αφαίρεση δεδομένων από το σύστημα."
+
+msgid "Add GDPR Field"
+msgstr "Προσθήκη πεδίου GDPR"
+
+msgid "Field Text"
+msgstr "Κείμενο πεδίου"
+
+msgid "Link Type"
+msgstr "Τύπος συνδέσμου"
+
+msgid "Link Page"
+msgstr "Σελίδα συνδέσμου"
+
+msgid "User Email"
+msgstr "Email χρήστη"
+
+msgid "Request Status"
+msgstr "Αίτηση κατάστασης"
+
+msgid "Awaiting response"
+msgstr "Αναμονή απάντησης"
+
+msgid "Erased identifying data"
+msgstr "Διαγράφηκαν δεδομένα αναγνώρισης"
+
+msgid "Deleted"
+msgstr "Διαγράφηκε"
+
+msgid "Erase identifying data"
+msgstr "Διαγραφή δεδομένων αναγνώρισης"
+
+msgid "Are you sure to erase identifying data"
+msgstr "Είστε βέβαιοι ότι θα διαγράψετε τα δεδομένα αναγνώρισης"
+
+msgid "Delete data"
+msgstr "Διαγραφή δεδομένων"
+
+msgid "Link"
+msgstr "Σύνδεσμος"
+
+msgid "Direct URL"
+msgstr "Άμεση διεύθυνση URL"
+
+msgid "Page Title or URL"
+msgstr "Τίτλος σελίδας ή διεύθυνση URL"
+
+msgid "Cannot open file"
+msgstr "Το αρχείο δεν μπορεί να ανοιχτεί"
+
+msgid "Dir is not writable"
+msgstr "Το Dir δεν είναι εγγράψιμο"
+
+msgid "Unable to connect to the server"
+msgstr "Δεν είναι δυνατή η σύνδεση με το διακομιστή"
+
+msgid "Language is not installed"
+msgstr "Η γλώσσα δεν είναι εγκατεστημένη"
+
+msgid "Language directory is not writable"
+msgstr "Ο κατάλογος γλώσσας δεν είναι εγγράψιμος"
+
+msgid "Required language is not installed but similar language like"
+msgstr "Η απαιτούμενη γλώσσα δεν είναι εγκατεστημένη αλλά παρόμοια γλώσσα όπως"
+
+msgid "is found in your system"
+msgstr "βρέθηκε στο σύστημα σας"
+
+msgid "Language code"
+msgstr "Κωδικός γλώσσας"
+
+msgid "Empty values"
+msgstr "Άδεια πεδία"
+
+msgid "File is not writable"
+msgstr "Το αρχείο δεν είναι εγγράψιμο"
+
+msgid "File successfully downloaded"
+msgstr "Η λήψη του αρχείου ολοκληρώθηκε με επιτυχία"
+
+msgid "Ordering updated"
+msgstr "Η παραγγελία ενημερώθηκε"
+
+msgid "Plugin Detail"
+msgstr "Λεπτομέρεια προσθήκης"
+
+msgid "Plugin for online JS Help Desk System"
+msgstr "Πρόσθετο για online σύστημα JS Help Desk"
+
+msgid "Created By"
+msgstr "Δημιουργήθηκε από"
+
+msgid "Company"
+msgstr "Εταιρεία"
+
+msgid "Plugin Name"
+msgstr "Όνομα πρόσθετου"
+
+msgid "job plugin"
+msgstr "πρόσθετο εργασίας"
+
+msgid "vehicle manager"
+msgstr "διαχειριστής οχημάτων"
+
+msgid "lms plugin"
+msgstr "πρόσθετο lms"
+
+msgid "car manager"
+msgstr "διευθυντής αυτοκινήτου"
+
+msgid "job manager"
+msgstr "διευθυντής εργασίας"
+
+msgid "Statistics"
+msgstr "Στατιστικά"
+
+msgid "Today Tickets"
+msgstr "Εισιτήρια Σήμερα"
+
+msgid "Short Links"
+msgstr "Σύντομοι σύνδεσμοι"
+
+msgid "Overall Report"
+msgstr "Συνολική αναφορά"
+
+msgid "email template"
+msgstr "πρότυπο email"
+
+msgid "Install Now"
+msgstr "Εγκατάσταση τώρα"
+
+msgid "The best support system plugin for WordPress has everything you need."
+msgstr ""
+"Η καλύτερη προσθήκη συστήματος υποστήριξης για το WordPress διαθέτει όλα όσα "
+"χρειάζεστε."
+
+msgid "Add-Ons List"
+msgstr "Λίστα πρόσθετων"
+
+msgid "Add New Addons"
+msgstr "Προσθέστε νέα πρόσθετα"
+
+msgid "addon"
+msgstr "πρόσθετο"
+
+msgid "View All Tickets"
+msgstr "Δείτε όλα τα εισιτήρια"
+
+msgid "Waiting Agent Reply"
+msgstr "Αναμονή πράκτορα απάντηση"
+
+msgid "Waiting Your Reply"
+msgstr "Αναμονή απάντησής σας"
+
+msgid "Ticket History"
+msgstr "Ιστορικό αιτήματος"
+
+msgid "Addons"
+msgstr "Πρόσθετα"
+
+msgid "Add agents and assign roles and permissions to provide assistance."
+msgstr ""
+"Προσθέστε πράκτορες και εκχωρήστε ρόλους και δικαιώματα για παροχή βοήθειας."
+
+msgid "Ticket Auto Close"
+msgstr "Αυτόματο κλείσιμο εισιτηρίων"
+
+msgid ""
+"Define rules for the ticket to auto-close after a specific interval of time."
+msgstr ""
+"Ορίστε κανόνες για το κλείσιμο του εισιτηρίου μετά από ένα συγκεκριμένο "
+"χρονικό διάστημα."
+
+msgid "Get a survey from customers on ticket closing to improve quality."
+msgstr ""
+"Λάβετε μια έρευνα από τους πελάτες σχετικά με το κλείσιμο εισιτηρίων για τη "
+"βελτίωση της ποιότητας."
+
+msgid "Help users to find and select the area with which they need assistance."
+msgstr ""
+"Βοηθήστε τους χρήστες να βρουν και να επιλέξουν την περιοχή με την οποία "
+"χρειάζονται βοήθεια."
+
+msgid "Private Note"
+msgstr "Ιδιωτική σημείωση"
+
+msgid ""
+"The private note is used as reminders or to give other agents insights into "
+"the ticket issue."
+msgstr ""
+"Η ιδιωτική σημείωση χρησιμοποιείται ως υπενθύμιση ή για να δώσει στους "
+"άλλους πράκτορες πληροφορίες σχετικά με την έκδοση εισιτηρίων."
+
+msgid ""
+"Stop losing productivity on repetitive queries, build your knowledge base."
+msgstr ""
+"Σταματήστε να χάνετε παραγωγικότητα σε επαναλαμβανόμενα ερωτήματα, "
+"δημιουργήστε τη βάση γνώσεων σας."
+
+msgid "Max Ticket"
+msgstr "Μέγιστο εισιτήριο"
+
+msgid "Max Tickets"
+msgstr "Μέγιστα εισιτήρια"
+
+msgid ""
+"Enables admin to set N numbers of tickets for users and agents separately."
+msgstr ""
+"Επιτρέπει στον διαχειριστή να ορίζει N αριθμούς εισιτηρίων για χρήστες και "
+"πράκτορες ξεχωριστά."
+
+msgid "Merge Tickets"
+msgstr "Εισιτήρια Συγχώνευσης"
+
+msgid ""
+"Enables agents to merge two tickets of the same user into one instead of "
+"dealing with the same issue on many tickets."
+msgstr ""
+"Επιτρέπει στους πράκτορες να συγχωνεύσουν δύο εισιτήρια του ίδιου χρήστη σε "
+"ένα αντί να ασχολούνται με το ίδιο ζήτημα σε πολλά εισιτήρια."
+
+msgid ""
+"Defines rules or set specific intervals of time to make ticket auto overdue."
+"The ticket can overdue by type or overdue by Cronjob."
+msgstr ""
+"Καθορίζει κανόνες ή ορίζει συγκεκριμένα χρονικά διαστήματα για να "
+"καθυστερήσει αυτόματα το εισιτήριο. Το εισιτήριο μπορεί να καθυστερήσει κατά "
+"τύπο ή καθυστερημένο από την Cronjob."
+
+msgid ""
+"SMTP enables you to add custom mail protocol to send and receive emails "
+"within the js help desk."
+msgstr ""
+"Το SMTP σάς επιτρέπει να προσθέσετε προσαρμοσμένο πρωτόκολλο αλληλογραφίας "
+"για αποστολή και λήψη μηνυμάτων ηλεκτρονικού ταχυδρομείου στο γραφείο "
+"βοήθειας js."
+
+msgid ""
+"Displays complete ticket history along with the ticket status, currently "
+"assigned user and other actions performed on each ticket."
+msgstr ""
+"Εμφανίζει το πλήρες ιστορικό εισιτηρίων μαζί με την κατάσταση του "
+"εισιτηρίου, τον χρήστη που έχει εκχωρηθεί αυτήν τη στιγμή και άλλες "
+"ενέργειες που εκτελούνται σε κάθε εισιτήριο."
+
+msgid "Pre-populated messages allow support agents to respond quickly."
+msgstr ""
+"Τα προσυμπληρωμένα μηνύματα επιτρέπουν στους αντιπροσώπους υποστήριξης να "
+"ανταποκρίνονται γρήγορα."
+
+msgid "Enables users to reply to the tickets via email without login."
+msgstr ""
+"Επιτρέπει στους χρήστες να απαντούν στα εισιτήρια μέσω email χωρίς σύνδεση."
+
+msgid "Time Tracking"
+msgstr "Παρακολούθηση χρόνου"
+
+msgid ""
+"Track the time spent on each ticket by each agent and each reply. Report the "
+"admin on how much time is spent on each ticket."
+msgstr ""
+"Παρακολουθήστε το χρόνο που αφιερώνεται σε κάθε εισιτήριο από κάθε πράκτορα "
+"και κάθε απάντηση. Αναφέρετε τον διαχειριστή σχετικά με τον χρόνο που "
+"αφιερώνεται σε κάθε εισιτήριο."
+
+msgid "User Options"
+msgstr "Επιλογές χρήστη"
+
+msgid ""
+"User options enable you to add Google Re-captcha or JS Help Desk Re-captcha "
+"for a registration form."
+msgstr ""
+"Οι επιλογές χρήστη σάς επιτρέπουν να προσθέσετε το Google Re-captcha ή το JS "
+"Help Desk Re-captcha για μια φόρμα εγγραφής."
+
+msgid "Actions"
+msgstr "Ενέργειες"
+
+msgid "Ticket Actions"
+msgstr "Ενέργειες εισιτηρίων"
+
+msgid ""
+"Get multiple action options on each ticket like Print Ticket, Lock Ticket, "
+"Transfer ticket, etc."
+msgstr ""
+"Λάβετε πολλές επιλογές δράσης σε κάθε εισιτήριο, όπως Εκτύπωση εισιτηρίου, "
+"Κλείδωμα εισιτηρίου, Μεταφορά εισιτηρίου κ.λπ."
+
+msgid "Make unlimited announcements associated with the support system."
+msgstr ""
+"Κάντε απεριόριστες ανακοινώσεις που σχετίζονται με το σύστημα υποστήριξης."
+
+msgid ""
+"It allows you to block the email of any user to restrict him to create new "
+"tickets."
+msgstr ""
+"Σας επιτρέπει να αποκλείσετε το email κάθε χρήστη για να τον περιορίσετε στη "
+"δημιουργία νέων εισιτηρίων."
+
+msgid "Desktop Notification"
+msgstr "Ειδοποίηση επιφάνειας εργασίας"
+
+msgid ""
+"The Desktop notifications will keep you up to date about anything happens on "
+"your support system."
+msgstr ""
+"Οι ειδοποιήσεις στην επιφάνεια εργασίας θα σας ενημερώνουν για οτιδήποτε "
+"συμβαίνει στο σύστημα υποστήριξής σας."
+
+msgid "Save the ticket as a PDF in your system and able to export all data."
+msgstr ""
+"Αποθηκεύστε το εισιτήριο ως PDF στο σύστημά σας και μπορείτε να εξάγετε όλα "
+"τα δεδομένα."
+
+msgid "Create downloads to ensure the user to get downloads from downloads."
+msgstr ""
+"Δημιουργήστε λήψεις για να διασφαλίσετε ότι ο χρήστης θα λαμβάνει λήψεις από "
+"λήψεις."
+
+msgid "Add FAQs to drastically reduce the number of common questions."
+msgstr ""
+"Προσθέστε συχνές ερωτήσεις για να μειώσετε δραστικά τον αριθμό των κοινών "
+"ερωτήσεων."
+
+msgid ""
+"Get multiple themes with a beautiful color scheme to make the site beautiful."
+msgstr ""
+"Αποκτήστε πολλά θέματα με ένα όμορφο συνδυασμό χρωμάτων για να κάνετε τον "
+"ιστότοπο όμορφο."
+
+msgid "Dashboard Widgets"
+msgstr "Widget ταμπλό"
+
+msgid ""
+"Get immediate data of your support operations as soon as you log into your "
+"WordPress administration area."
+msgstr ""
+"Λάβετε άμεσα δεδομένα των λειτουργιών υποστήριξής σας μόλις συνδεθείτε στην "
+"περιοχή διαχείρισης του WordPress."
+
+msgid "Internal Mail"
+msgstr "Εσωτερικό Ταχυδρομείο"
+
+msgid "Use an internal email to send emails to one agent to another agent."
+msgstr ""
+"Χρησιμοποιήστε ένα εσωτερικό email για να στείλετε email σε έναν πράκτορα σε "
+"άλλο πράκτορα."
+
+msgid "Front-End Widgets"
+msgstr "Widget διεπαφής"
+
+msgid ""
+"Widgets in WordPress allow you to add content and features in the widgetized "
+"areas of your theme."
+msgstr ""
+"Τα Widgets στο WordPress σάς επιτρέπουν να προσθέτετε περιεχόμενο και "
+"δυνατότητες στις περιοχές widget του θέματος σας."
+
+msgid ""
+"JS Help Desk WooCommerce provides the much-needed bridge between your "
+"WooCommerce store and the JS Help Desk."
+msgstr ""
+"Το γραφείο βοήθειας JS Το WooCommerce παρέχει την απαραίτητη γέφυρα μεταξύ "
+"του καταστήματός σας WooCommerce και του γραφείου βοήθειας JS."
+
+msgid ""
+"Collect your customer's private data, sensitive information from credit card "
+"to health information and store them encrypted."
+msgstr ""
+"Συλλέξτε τα προσωπικά δεδομένα του πελάτη σας, ευαίσθητες πληροφορίες από "
+"πιστωτική κάρτα έως πληροφορίες υγείας και αποθηκεύστε τα κρυπτογραφημένα."
+
+msgid ""
+"Without valid Envato, license clients won't be able to open a new ticket."
+msgstr ""
+"Χωρίς έγκυρο Envato, οι πελάτες με άδεια χρήσης δεν θα μπορούν να ανοίξουν "
+"νέο εισιτήριο."
+
+msgid ""
+"Adds the option to the registration form for prompting new users to "
+"subscribe to your email list."
+msgstr ""
+"Προσθέτει την επιλογή στη φόρμα εγγραφής για να ζητήσετε από τους νέους "
+"χρήστες να εγγραφούν στη λίστα email σας."
+
+msgid "paidsupport"
+msgstr "πληρωμένη υποστήριξη"
+
+msgid ""
+"Paid Support is the easiest way to integrate and manage payments for your "
+"tickets."
+msgstr ""
+"Η Υποστήριξη επί πληρωμή είναι ο ευκολότερος τρόπος ενοποίησης και "
+"διαχείρισης πληρωμών για τα εισιτήριά σας."
+
+msgid "easy digital downloads"
+msgstr "εύκολες ψηφιακές λήψεις"
+
+msgid ""
+"EDD offers customers to open new tickets just one click from their EDD "
+"account."
+msgstr ""
+"Η EDD προσφέρει στους πελάτες να ανοίξουν νέα εισιτήρια με ένα μόνο κλικ από "
+"τον λογαριασμό τους EDD."
+
+msgid "We'd love to hear from You."
+msgstr "Θα θέλαμε πολύ να σας ακούσουμε."
+
+msgid "Please write appreciated review at"
+msgstr "Γράψτε μία θετική κριτική στο"
+
+msgid "WP Extension Directory"
+msgstr "Κατάλογος επέκτασης WP"
+
+msgid "star"
+msgstr "αστέρι"
+
+msgid "Spread the word"
+msgstr "Διέδωσέ το"
+
+msgid "twitter"
+msgstr "κελάδημα"
+
+msgid "JS Help Desk / JS Support Ticket main control panel"
+msgstr "Κεντρικός πίνακας ελέγχου εισιτηρίων JS Help Desk / JS Support"
+
+msgid "Add new ticket form for both user and agent"
+msgstr ""
+"Προσθέστε νέα φόρμα εισιτηρίου τόσο για τον χρήστη όσο και για τον πράκτορα"
+
+msgid "My tickets for both user and agent"
+msgstr "Τα εισιτήριά μου τόσο για τον χρήστη όσο και για τον πράκτορα"
+
+msgid "List downloads"
+msgstr "Λίστα αρχείων προς λήψη"
+
+msgid "Latest Downloads"
+msgstr "Τελευταίες λήψεις"
+
+msgid "Show latest downloads. Options"
+msgstr "Εμφάνιση τελευταίων λήψεων. Επιλογές"
+
+msgid "and"
+msgstr "και"
+
+msgid "i.e."
+msgstr "π.χ."
+
+msgid "Popular Downloads"
+msgstr "Δημοφιλής λήψεις"
+
+msgid "Show popular downloads. Options"
+msgstr "Εμφάνιση δημοφιλών λήψεων. Επιλογές"
+
+msgid "List knowledge base"
+msgstr "Λίστα γνωσιακών βάσεων"
+
+msgid "Latest Knowledge Base"
+msgstr "Τελευταία Γνωσιακή Βάση"
+
+msgid "Show latest knowledge base. Options"
+msgstr "Εμφάνιση τελευταίας βάσης γνώσεων. Επιλογές"
+
+msgid "Popular knowledge base"
+msgstr "Δημοφιλή γνωστική βάση"
+
+msgid "Show popular knowledge base. Options"
+msgstr "Εμφάνιση δημοφιλούς βάσης γνώσεων. Επιλογές"
+
+msgid "List FAQ's"
+msgstr "Λίστα συχνών ερωτήσεων"
+
+msgid "Latest FAQ's"
+msgstr "Τελευταίες συχνές ερωτήσεις"
+
+msgid "Show latest FAQ's. Options"
+msgstr "Εμφάνιση των πιο πρόσφατων ερωτήσεων. Επιλογές"
+
+msgid "Popular FAQ's"
+msgstr "Δημοφιλής συχνές ερωτήσεις"
+
+msgid "Show popular FAQ's. Options"
+msgstr "Εμφάνιση δημοφιλών ερωτήσεων. Επιλογές"
+
+msgid "List announcements"
+msgstr "Λίστα ανακοινώσεων"
+
+msgid "Latest Announcements"
+msgstr "Τελευταίες ανακοινώσεις"
+
+msgid "Show latest announcements. Options"
+msgstr "Εμφάνιση τελευταίων ανακοινώσεων. Επιλογές"
+
+msgid "Popular Announcements"
+msgstr "Δημοφιλής ανακοινώσεις"
+
+msgid "Show popular announcements. Options"
+msgstr "Εμφάνιση δημοφιλών ανακοινώσεων. Επιλογές"
+
+msgid "spinning wheel"
+msgstr "ΤΡΟΧΟΣ που γυριζει"
+
+msgid "Get JS Help Desk Translations"
+msgstr "Λήψη μεταφράσεων γραφείου βοήθειας JS"
+
+msgid "Get Translations"
+msgstr "Λάβε μεταφράσεις"
+
+msgid "Select Translation"
+msgstr "Επιλογή μετάφρασης"
+
+msgid ""
+"When WordPress language change to ro, JS Help Desk language will auto change "
+"to ro"
+msgstr ""
+"Όταν η γλώσσα του WordPress αλλάξει σε ro, η γλώσσα του Γραφείου Βοήθειας JS "
+"θα αλλάξει αυτόματα σε ro"
+
+msgid "c error"
+msgstr "c σφάλμα"
+
+msgid "saved"
+msgstr "αποθηκεύτηκε"
+
+msgid "Contribute In Translation"
+msgstr "Συμβάλλετε"
+
+msgid "translate"
+msgstr "μεταφράζω"
+
+msgid "Manual Download"
+msgstr "Μη αυτόματη λήψη"
+
+msgid "Log In"
+msgstr "Σύνδεση"
+
+msgid "Log Out"
+msgstr "Αποσύνδεση"
+
+msgid "Agent Feedbacks"
+msgstr "Σχόλια αντιπροσώπου"
+
+msgid "Submit ticket"
+msgstr "Υποβολή εισιτηρίου"
+
+msgid "my ticket"
+msgstr "το εισιτήριό μου"
+
+msgid "View all the created tickets"
+msgstr "Δείτε όλα τα εισιτήρια που δημιουργήθηκαν"
+
+msgid "your ticket status"
+msgstr "την κατάσταση του εισιτηρίου σας"
+
+msgid "closed ticket"
+msgstr "κλειστό εισιτήριο"
+
+msgid "answered ticket"
+msgstr "απάντησε το εισιτήριο"
+
+msgid "overdue ticket"
+msgstr "καθυστερημένο εισιτήριο"
+
+msgid "View All Downloads"
+msgstr "Προβολή όλων των λήψεων"
+
+msgid "View All Announcements"
+msgstr "Δείτε όλες τις ανακοινώσεις"
+
+msgid "View All Knowledge Base"
+msgstr "Προβολή Όλης της Γνωσιακής Βάσης"
+
+msgid "Latest FAQs"
+msgstr "Τελευταίες συχνές ερωτήσεις"
+
+msgid "View All FAQs"
+msgstr "Δείτε όλες τις συχνές ερωτήσεις"
+
+msgid "keep me login"
+msgstr "Κράτησε με συνδεδεμένο/ η"
+
+msgid "Repeat Password"
+msgstr "Επανάληψη κωδικού πρόσβασης"
+
+msgid "Subscribe to the newsletter"
+msgstr "Εγγραφείτε στο ενημερωτικό δελτίο"
+
+msgid "has been changed"
+msgstr "έχει αλλάξει"
+
+msgid "has not been changed"
+msgstr "δεν έχει αλλάξει"
+
+msgid "JS Support Ticket Settings"
+msgstr "Ρυθμίσεις εισιτηρίων υποστήριξης JS"
+
+msgid "General"
+msgstr "Γενικός"
+
+msgid "Complete"
+msgstr "Πλήρης"
+
+msgid "Configurations complete"
+msgstr "Οι διαμορφώσεις ολοκληρώθηκαν"
+
+msgid "Step 4 of 4"
+msgstr "Βήμα 4 από 4"
+
+msgid "Step 3 of 3"
+msgstr "Βήμα 3 από 3"
+
+msgid "Setting Completed"
+msgstr "Η ρύθμιση ολοκληρώθηκε"
+
+msgid "Setting you applied has been saved successfully."
+msgstr "Η ρύθμιση που εφαρμόσατε αποθηκεύτηκε με επιτυχία."
+
+msgid "Finish"
+msgstr "Τερματισμός"
+
+msgid "Ticket Setting"
+msgstr "Ρυθμίσεις αιτημάτων"
+
+msgid "Setting Complete"
+msgstr "Η ρύθμιση ολοκληρώθηκε"
+
+msgid "General Configurations"
+msgstr "Γενικές διαμορφώσεις"
+
+msgid "Step 1 of 4"
+msgstr "Βήμα 1 από 4"
+
+msgid "Step 1 of 3"
+msgstr "Βήμα 1 από 3"
+
+msgid "Enter the site title"
+msgstr "Εισαγάγετε τον τίτλο του ιστότοπου"
+
+msgid "Date format for plugin"
+msgstr "Μορφή ημερομηνίας για προσθήκη"
+
+msgid "Show Breadcrumbs"
+msgstr "Εμφάνιση Breadcrumbs"
+
+msgid "Show navigation in breadcrumbs"
+msgstr "Εμφάνιση πλοήγησης σε ψωμί"
+
+msgid "Upload file size in KB's"
+msgstr "Μεταφόρτωση μεγέθους αρχείου σε KB"
+
+msgid "File Extension"
+msgstr "Επέκταση αρχείου"
+
+msgid "Sequential"
+msgstr "Διαδοχικό"
+
+msgid "Feedback Configurations"
+msgstr "Διαμορφώσεις σχολίων"
+
+msgid "Step 3 of 4"
+msgstr "Βήμα 3 από 4"
+
+msgid "Set Email Delay Time"
+msgstr "Ορισμός ώρας καθυστέρησης email"
+
+msgid " :"
+msgstr ":"
+
+msgid "Set Email Delay"
+msgstr "Ορισμός καθυστέρησης email"
+
+msgid "Back"
+msgstr "Επιστροφή"
+
+msgid "Ticket Configurations"
+msgstr "Διαμορφώσεις εισιτηρίων"
+
+msgid "Step 2 of 4"
+msgstr "Βήμα 2 από 4"
+
+msgid "Step 2 of 3"
+msgstr "Βήμα 2 από 3"
+
+msgid "Enable/Disable Open Ticket"
+msgstr "Ενεργοποίηση / απενεργοποίηση ανοιχτού εισιτηρίου"
+
+msgid "Ticket ID sequence"
+msgstr "Ακολουθία αναγνωριστικού εισιτηρίου"
+
+msgid "Set ticket id sequential or random"
+msgstr "Ορίστε διαδοχικό ή τυχαίο αναγνωριστικό εισιτηρίου"
+
+msgid "Maximum Tickets"
+msgstr "Μέγιστα εισιτήρια"
+
+msgid "Set Maximum Ticket Per user"
+msgstr "Ορισμός μέγιστου εισιτηρίου ανά χρήστη"
+
+msgid "Maximum Open Ticket"
+msgstr "Μέγιστο ανοιχτό εισιτήριο"
+
+msgid "Reopen ticket within Days"
+msgstr "Ανοίξτε ξανά το εισιτήριο εντός ημερών"
+
+msgid "Show Captcha to visitor on ticket form"
+msgstr "Δείξτε το Captcha στον επισκέπτη στη φόρμα εισιτηρίου"
+
+msgid "Enable/Disable Captcha on Ticket Form"
+msgstr "Ενεργοποίηση / Απενεργοποίηση Captcha στη φόρμα εισιτηρίων"
+
+msgid "Own Captcha operands"
+msgstr "Οι ιδιοκτήτες του Captcha"
+
+msgid "Enable/Disable Own Captcha subtraction"
+msgstr "Ενεργοποίηση / απενεργοποίηση αφαίρεσης Captcha"
+
+msgid "Enable Print Ticket"
+msgstr "Ενεργοποίηση εκτύπωσης εισιτηρίου"
+
+msgid "Enable/Disable Print Ticket"
+msgstr "Ενεργοποίηση / απενεργοποίηση εκτύπωσης εισιτηρίου"
+
+msgid "Please insert activation key to proceed"
+msgstr "Εισαγάγετε το κλειδί ενεργοποίησης για να συνεχίσετε"
+
+msgid "Addon Installation Failed"
+msgstr "Η εγκατάσταση του Addon απέτυχε"
+
+msgid "Addon installation failed, Directory permission error"
+msgstr "Η εγκατάσταση του Addon απέτυχε, σφάλμα άδειας καταλόγου"
+
+msgid "Addon Installation Failed, File download error"
+msgstr "Η εγκατάσταση του Addon απέτυχε, σφάλμα λήψης αρχείου"
+
+msgid "left image"
+msgstr "αριστερή εικόνα"
+
+msgid "right image"
+msgstr "σωστή εικόνα"
+
+msgid "buy now"
+msgstr "αγορασε τωρα"
+
+msgid "helptopic"
+msgstr "ελπτικός"
+
+msgid "private note"
+msgstr "ιδιωτική σημείωση"
+
+msgid "max ticket"
+msgstr "μέγιστο εισιτήριο"
+
+msgid "merge tickets"
+msgstr "συγχώνευση εισιτηρίων"
+
+msgid "time tracking"
+msgstr "παρακολούθηση χρόνου"
+
+msgid "user options"
+msgstr "επιλογές χρήστη"
+
+msgid "ticket actions"
+msgstr "ενέργειες εισιτηρίων"
+
+msgid "desktop notifications"
+msgstr "ειδοποιήσεις επιφάνειας εργασίας"
+
+msgid "admin widgets"
+msgstr "widget διαχειριστή"
+
+msgid "internal mail"
+msgstr "εσωτερικό ταχυδρομείο"
+
+msgid "frontend widget"
+msgstr "widget frontend"
+
+msgid "woocommerce support"
+msgstr "υποστήριξη woocommerce"
+
+msgid "mail chimp"
+msgstr "Χιμπατζής αλληλογραφίας"
+
+msgid "addon in no longer active"
+msgstr "το addon δεν είναι πλέον ενεργό"
+
+msgid "Wordpress Plugin"
+msgstr "Πρόσθετο Wordpress"
+
+msgid ""
+"JS Help Desk is a trusted open source ticket system. JS Help Desk is a "
+"simple, easy to use, web-based customer support system. Users can create a "
+"ticket from the front-end. JS Help Desk comes packed with lot features than "
+"most of the expensive(and complex) support ticket system on the market. The "
+"best part is, It completely free."
+msgstr ""
+"Το JS Help Desk είναι ένα αξιόπιστο σύστημα εισιτηρίων ανοιχτού κώδικα. Το "
+"JS Help Desk είναι ένα απλό, εύχρηστο, διαδικτυακό σύστημα υποστήριξης "
+"πελατών. Οι χρήστες μπορούν να δημιουργήσουν ένα εισιτήριο από τη διεπαφή. "
+"Το JS Help Desk έρχεται γεμάτο με πολλές δυνατότητες από ό, τι το μεγαλύτερο "
+"από το ακριβό (και σύνθετο) σύστημα εισιτηρίων υποστήριξης στην αγορά. Το "
+"καλύτερο είναι, Είναι εντελώς δωρεάν."
+
+msgid "JS Help Desk Addon Installer"
+msgstr "Πρόγραμμα εγκατάστασης πρόσθετου γραφείου βοήθειας JS"
+
+msgid "Add on list"
+msgstr "Προσθήκη στη λίστα"
+
+msgid "Please Insert Your Activation key"
+msgstr "Εισαγάγετε το κλειδί ενεργοποίησης"
+
+msgid "Activation key"
+msgstr "Κλειδί ενεργοποίησης"
+
+msgid "Proceed"
+msgstr "Προχωρώ"
+
+msgid "Select Addons for download"
+msgstr "Επιλέξτε Πρόσθετα για λήψη"
+
+msgid "All allowed add ons are already installed"
+msgstr "Όλα τα επιτρεπόμενα πρόσθετα είναι ήδη εγκατεστημένα"
+
+msgid "You are not allowed to install any add on"
+msgstr "Δεν επιτρέπεται η εγκατάσταση πρόσθετου"
+
+msgid "Select All Addons"
+msgstr "Επιλέξτε Όλα τα πρόσθετα"
+
+msgid "Add ons installed and activated successfully"
+msgstr "Προσθέστε τα εγκατεστημένα και ενεργοποιήθηκαν με επιτυχία"
+
+msgid ""
+"Add ons for JS Help Desk have been installed and activated successfully. "
+msgstr ""
+"Τα πρόσθετα για το JS Help Desk έχουν εγκατασταθεί και ενεργοποιηθεί με "
+"επιτυχία."
+
+msgid "Priority Title Already Exist"
+msgstr "Ο τίτλος της προτεραιότητας υπάρχει ήδη"
+
+msgid "Priority has been stored"
+msgstr "Η προτεραιότητα έχει αποθηκευτεί"
+
+msgid "Priority has not been stored"
+msgstr "Η προτεραιότητα δεν έχει αποθηκευτεί"
+
+msgid "Priority has been deleted"
+msgstr "Η προτεραιότητα έχει διαγραφεί"
+
+msgid "Priority has not been deleted"
+msgstr "Η προτεραιότητα δεν έχει διαγραφεί"
+
+msgid "Default priority cannot delete"
+msgstr "Η προκαθορισμένη προτεραιότητα δεν μπορεί να διαγραφεί"
+
+msgid "Priority has been make default"
+msgstr "Η προτεραιότητα έχει καθοριστεί ως προκαθορισμένη"
+
+msgid "Priority has not been make default"
+msgstr "Η προτεραιότητα δεν έχει καθοριστεί ως προκαθοριμένη"
+
+msgid "Color"
+msgstr "Χρώμα"
+
+msgid "Ticket Overdue Interval Type"
+msgstr "Τύπος διαστήματος καθυστερημένου αιτήματος"
+
+msgid "Save Priority"
+msgstr "Αποθήκευση προτεραιοτήτων"
+
+msgid "Date Interval"
+msgstr "Διάστημα ημερομηνίας"
+
+msgid "Reply posted"
+msgstr "Η απάντηση δημοσιεύτηκε"
+
+msgid "Reply posted on ticket"
+msgstr "Η απάντηση δημοσιεύτηκε στο εισιτήριο"
+
+msgid "Ticket is replied by"
+msgstr "Το αίτημα απαντήθηκε από"
+
+msgid "Reply Has been Posted"
+msgstr "Η απάντηση δημοσιεύτηκε"
+
+msgid "Reply Has Not been Posted"
+msgstr "Η απάντηση δεν έχει δημοσιευτεί"
+
+msgid "Dates"
+msgstr "Ημερομηνίες"
+
+msgid "Department Detail Report"
+msgstr "Αναφορά λεπτομερειών τμήματος"
+
+msgid "Export Data"
+msgstr "Εξαγωγή Δεδομένων"
+
+msgid "Department Statistics"
+msgstr "Στατιστικά τμήματος"
+
+msgid "pending ticket"
+msgstr "εκκρεμεί εισιτήριο"
+
+msgid "Time Taken"
+msgstr "Χρόνος Που Πήρε"
+
+msgid "Merged and closed"
+msgstr "Συγχωνεύτηκε και έκλεισε"
+
+msgid "Out of"
+msgstr "Εκτός"
+
+msgid "Ticket by departments"
+msgstr "Αιτήματα ανά τμήμα"
+
+msgid "Tickets By Priority"
+msgstr "Αιτήματα ανα προτεραιότητα"
+
+msgid "Staff Member Tickets"
+msgstr "Αιτήματα μελών προσωπικού"
+
+msgid "all ticket"
+msgstr "όλα τα εισιτήρια"
+
+msgid "Tickets By Status And Priorities"
+msgstr "Αιτήματα ανα κατάσταση και προτεραιότητες"
+
+msgid "Tickets By Agents"
+msgstr "Εισιτήρια από αντιπροσώπους"
+
+msgid "Staff Reports"
+msgstr "Αναφορές προσωπικού"
+
+msgid "Based on"
+msgstr "Βασισμένο σε"
+
+msgid "Customer Satisfaction"
+msgstr "Ικανοποίηση Πελάτη"
+
+msgid "satisfaction image"
+msgstr "εικόνα ικανοποίησης"
+
+msgid "Excellent"
+msgstr "Άριστη"
+
+msgid "NA"
+msgstr "ΝΑ"
+
+msgid "Happy"
+msgstr "Χαρούμενος"
+
+msgid "Normal"
+msgstr "Κανονική"
+
+msgid "bad"
+msgstr "κακό"
+
+msgid "Sad"
+msgstr "Λυπημένος"
+
+msgid "Angry"
+msgstr "Θυμωμένος"
+
+msgid "Agent Detail Report"
+msgstr "Αναφορά λεπτομερειών πράκτορα"
+
+msgid "Agent Statistics"
+msgstr "Στατιστικά πράκτορα"
+
+msgid "staff image"
+msgstr "εικόνα προσωπικού"
+
+msgid "Average rating"
+msgstr "Μέση βαθμολογία"
+
+msgid "Average time"
+msgstr "Μέσος χρόνος"
+
+msgid "Tickets not assigned to the staff member"
+msgstr "Αιτήματα που δεν ανατέθηκαν στο μέλος προσωπικού"
+
+msgid "Minutes"
+msgstr "Λεπτά"
+
+msgid "Report By Staff Member"
+msgstr "Αναφορά από μέλος του προσωπικού"
+
+msgid "User Detail Report"
+msgstr "Αναφορά λεπτομερειών χρήστη"
+
+msgid "User Statistics"
+msgstr "Στατιστικά χρήστη"
+
+msgid "Users"
+msgstr "Χρήστες"
+
+msgid "Ticket Status By Departments"
+msgstr "Κατάσταση αιτημάτων κατά τμήματα"
+
+msgid "Agent Report"
+msgstr "Αναφορά αντιπροσώπου"
+
+msgid "Agent Tickets"
+msgstr "Εισιτήρια Πράκτορα"
+
+msgid "Reports Statistics"
+msgstr "Στατιστικά αναφορών"
+
+msgid "System error has been deleted"
+msgstr "Το σφάλμα συστήματος διαγράφηκε"
+
+msgid "System error has not been deleted"
+msgstr "Το σφάλμα συστήματος δεν έχει διαγραφεί"
+
+msgid "Remove All"
+msgstr "Αφαίρεση όλων"
+
+msgid "Support for this Envato license has expired"
+msgstr "Η υποστήριξη για αυτήν την άδεια Envato έχει λήξει"
+
+msgid "Record not found"
+msgstr "Η εγγραφή δεν βρέθηκε"
+
+msgid "Banned email cannot create ticket"
+msgstr "Αποκλεισμένα email δεν μπορούν να δημιουργήσουνε αιτήματα"
+
+msgid "Incorrect Captcha code"
+msgstr "Λανθασμένος κωδικός Captcha"
+
+msgid "Please select paid support item"
+msgstr "Επιλέξτε το στοιχείο υποστήριξης επί πληρωμή"
+
+msgid "No purchase found with that code"
+msgstr "Δεν βρέθηκε αγορά με αυτόν τον κωδικό"
+
+msgid "Provide a valid license key to create a ticket."
+msgstr "Δώστε ένα έγκυρο κλειδί άδειας για τη δημιουργία εισιτηρίου."
+
+msgid "Your license has expired."
+msgstr "Η άδειά σας έχει λήξει."
+
+msgid "Your license is not active, activate your license."
+msgstr "Η άδειά σας δεν είναι ενεργή, ενεργοποιήστε την άδειά σας."
+
+msgid "Due date error is not valid"
+msgstr "Η ημερομηνία παράδοσης δεν είναι σωστή"
+
+msgid "Ticket has not been created"
+msgstr "Το αίτημα δεν δημιουργήθηκε"
+
+msgid "Ticket created"
+msgstr "Το εισιτήριο δημιουργήθηκε"
+
+msgid "created"
+msgstr "δημιουργήθηκε"
+
+msgid "Guest"
+msgstr "Επισκέπτης"
+
+msgid "Ticket is updated by"
+msgstr "Το αίτημα ενημερώθηκε από"
+
+msgid "Ticket is created by"
+msgstr "Το αίτημα έχει δημιουργηθεί από"
+
+msgid "Ticket has been deleted"
+msgstr "Το αίτημα έχει διαγραφεί"
+
+msgid "Ticket has not been deleted"
+msgstr "Το αίτημα δεν έχει διαγραφεί"
+
+msgid "in use cannot be deleted"
+msgstr "Σε χρήση και δεν μπορεί να διαγραφεί"
+
+msgid "Ticket already closed"
+msgstr "Το αίτημα είναι κλειστό ήδη"
+
+msgid "Ticket has been closed"
+msgstr "Το αίτημα έχει κλείσει"
+
+msgid "Ticket has not been closed"
+msgstr "Το αίτημα δεν έχει κλείσει"
+
+msgid "Ticket is closed by"
+msgstr "Το αίτημα έκλεισε από"
+
+msgid "Your are not allowed"
+msgstr "Δεν σας επιτρέπεται"
+
+msgid "The department has been transferred"
+msgstr "Το τμήμα μεταφέρθηκε"
+
+msgid "The department has not been transferred"
+msgstr "Το τμήμα δεν έχει μεταφερθεί"
+
+msgid "The department is transferred by"
+msgstr "Το τμήμα μεταφέρεται από"
+
+msgid "Assigned to agent"
+msgstr "Ανατέθηκε στον πράκτορα"
+
+msgid "Not assigned to agent"
+msgstr "Δεν έχει ανατεθεί στον πράκτορα"
+
+msgid "Assign ticket to agent"
+msgstr "Εκχώρηση εισιτηρίου στον πράκτορα"
+
+msgid "Ticket is assigned to agent by"
+msgstr "Το εισιτήριο ανατίθεται στον πράκτορα από"
+
+msgid "Ticket already have same priority"
+msgstr "Το αίτημα έχει ήδη αυτή την προτεραιότητα"
+
+msgid "Priority has been changed"
+msgstr "Η προτεραιότητα έχει αλλάξει"
+
+msgid "Priority has not been changed"
+msgstr "Η προτεραιότητα δεν έχει αλλάξει"
+
+msgid "Change Priority"
+msgstr "Αλλαγή προτεραιότητας"
+
+msgid "Email already banned"
+msgstr "Το email έχει ήδη αποκλειστεί"
+
+msgid "The email has been banned"
+msgstr "Το email έχει απαγορευτεί"
+
+msgid "The email has not been banned"
+msgstr "Το email δεν έχει απαγορευτεί"
+
+msgid "Email is banned by"
+msgstr "Το email έχει αποκλειστεί από τον/ την"
+
+msgid "The ticket has been reopened"
+msgstr "Το εισιτήριο άνοιξε ξανά"
+
+msgid "The ticket has not been reopened"
+msgstr "Το εισιτήριο δεν έχει ανοίξει ξανά"
+
+msgid "Reopen Ticket"
+msgstr "Ξανά άνοιγμα αιτήματος"
+
+msgid "The ticket is reopened by"
+msgstr "Το εισιτήριο ανοίγει ξανά από"
+
+msgid "The ticket reopens time limit end"
+msgstr "Το εισιτήριο ανοίγει ξανά το χρονικό όριο"
+
+msgid "Email has been unbanned"
+msgstr "Το email έχει ξε-μπλοκαριστεί"
+
+msgid "Email has not been unbanned"
+msgstr "Το email δεν έχει ξε-μπλοκαριστεί"
+
+msgid "Unbanned Email"
+msgstr "Ξεμπλοκαρισμένο Email"
+
+msgid "Email is unbanned by"
+msgstr "Το email έχει ξε-μπλοκαριστεί από τον/ την"
+
+msgid "Email cannot be unbanned"
+msgstr "Το email δεν μπορεί να ξε-μπλοκαριστεί"
+
+msgid "Ticket already marked in progress"
+msgstr "Το αίτημα είναι ήδη χαρακτηρισμένο \\"
+
+msgid "The ticket has been marked as in progress"
+msgstr "Το εισιτήριο έχει επισημανθεί ως σε εξέλιξη"
+
+msgid "The ticket has not been marked as in progress"
+msgstr "Το εισιτήριο δεν έχει επισημανθεί ως σε εξέλιξη"
+
+msgid "In progress ticket"
+msgstr "Αίτημα σε εξέλιξη"
+
+msgid "The ticket is marked as in progress by"
+msgstr "Το εισιτήριο επισημαίνεται ως σε εξέλιξη από"
+
+msgid "File upload limit exceeds"
+msgstr "Το όριο μεταφόρτωσης αρχείου υπερβαίνει"
+
+msgid "The uploaded file extension not valid"
+msgstr "Η μεταφορτωμένη επέκταση αρχείου δεν είναι έγκυρη"
+
+msgid "Paid support info"
+msgstr "Πληροφορίες υποστήριξης επί πληρωμή"
+
+msgid "Order ID"
+msgstr "Αριθμός Παραγγελίας"
+
+msgid "Product Name"
+msgstr "Ονομασία προϊόντος"
+
+msgid "Total Tickets"
+msgstr "Σύνολο εισιτηρίων"
+
+msgid "Remaining Tickets"
+msgstr "Εισιτήρια που απομένουν"
+
+msgid "Unlimited"
+msgstr "Απεριόριστος"
+
+msgid "You have not purchased any supported item"
+msgstr "Δεν έχετε αγοράσει κανένα υποστηριζόμενο είδος"
+
+msgid "Go to shop"
+msgstr "Πηγαίνετε στο κατάστημα"
+
+msgid "Select Order"
+msgstr "Επιλέξτε Παραγγελία"
+
+msgid "No canned response found"
+msgstr "Δεν βρέθηκε έτοιμη απάντηση"
+
+msgid "Waiting agent reply"
+msgstr "Απάντηση πράκτορα αναμονής"
+
+msgid "Waiting customer reply"
+msgstr "Αναμονή απάντησης από πελάτη"
+
+msgid "Close ticket"
+msgstr "Κλείσιμο αιτήματος"
+
+msgid "premade"
+msgstr "προετοιμασία"
+
+msgid "Some values are not acceptable please retry"
+msgstr "Κάποιες καταχωρήσεις δεν είναι αποδεκτές, παρακαλώ ξανά δοκιμάστε"
+
+msgid "Are you sure to mark this ticket non-premium?"
+msgstr "Είστε βέβαιοι ότι θα επισημάνετε αυτό το εισιτήριο χωρίς premium;"
+
+msgid "Edit Reply"
+msgstr "Επεξεργασία Απάντησης"
+
+msgid "Edit Time"
+msgstr "Επεξεργασία Ώρας"
+
+msgid "Reason For Editing the timer"
+msgstr "Αιτιολογία Επεξεργασίας Χρονοδιακόπτη"
+
+msgid "Reason For Editing"
+msgstr "Αιτιολογία Επεξεργασίας"
+
+msgid "Resolve conflict"
+msgstr "Επίλυση συγκρούσεων"
+
+msgid "Ticket Details"
+msgstr "Λεπτομέρειες αιτήματος"
+
+msgid "Lock"
+msgstr "Κλείδωμα"
+
+msgid "Add New Credential"
+msgstr "Προσθήκη νέου διαπιστευτηρίου"
+
+msgid "Post New Internal Note"
+msgstr "Δημοσίευση νέας εσωτερικής σημείωσης"
+
+msgid "play"
+msgstr "παίζω"
+
+msgid "pause"
+msgstr "παύση"
+
+msgid "stop"
+msgstr "να σταματήσει"
+
+msgid "Close on reply"
+msgstr "Κλείσιμο μετά την απάντηση"
+
+msgid "Reason For Department Transfer"
+msgstr "Λόγος που μεταφέρετε σε άλλο τμήμα"
+
+msgid "Transfer"
+msgstr "Μεταφορά"
+
+msgid "Assign To Agent"
+msgstr "Ανάθεση σε πράκτορα"
+
+msgid "Assign"
+msgstr "Ανάθεση"
+
+msgid "View all %d tickets by %s"
+msgstr "Προβολή όλων των% d εισιτηρίων κατά% s"
+
+msgid "Show History"
+msgstr "Εμφάνιση ιστορικού"
+
+msgid "Print Ticket"
+msgstr "Εκτύπωση εισιτηρίου"
+
+msgid "Unmark Overdue"
+msgstr "Κατάργηση επισήμανσης καθυστερημένου"
+
+msgid "Mark in Progress"
+msgstr "Χαρακτήρισε σε εξέλιξη"
+
+msgid "agent image"
+msgstr "εικόνα πράκτορα"
+
+msgid "Ticket Thread"
+msgstr "Συνομιλία αιτήματος"
+
+msgid "Post Reply"
+msgstr "Ανάρτηση απάντησης"
+
+msgid "Own Signature"
+msgstr "Η υπογραφή σας"
+
+msgid "Department Signature"
+msgstr "Υπογραφή τμήματος"
+
+msgid "JNone"
+msgstr "Κανένα"
+
+msgid "Add Signature"
+msgstr "Προσθήκη υπογραφής"
+
+msgid "On Waiting"
+msgstr "Σε αναμονή"
+
+msgid "Closed and merged"
+msgstr "Κλείσιμο και συγχώνευση"
+
+msgid "ago"
+msgstr "πριν"
+
+msgid "No Last Reply"
+msgstr "Δεν υπάρχει υπάρχει τελευταία απάντηση"
+
+msgid "Not Given"
+msgstr "Δεν δόθηκε"
+
+msgid "Copy"
+msgstr "αντίγραφο"
+
+msgid "Copied"
+msgstr "Αντιγράφηκε"
+
+msgid "Change"
+msgstr "Αλλαγή"
+
+msgid "Ticket Assign and Transfer"
+msgstr "Το αίτημα έχει αναληφθεί απο τον αρμόδιο συνεργάτη"
+
+msgid "Ticket assigned to"
+msgstr "Το εισιτήριο εκχωρήθηκε στο"
+
+msgid "staff photo"
+msgstr "φωτογραφία προσωπικού"
+
+msgid "Total Time Taken"
+msgstr "Συνολικός χρόνος που απαιτείται"
+
+msgid "view ticket"
+msgstr "δείτε το εισιτήριο"
+
+msgid "Woocommerce Order"
+msgstr "Παραγγελία Woocommerce"
+
+msgid "Envato License"
+msgstr "Άδεια Envato"
+
+msgid "Item"
+msgstr "Είδος"
+
+msgid "Buyer"
+msgstr "Αγοραστής"
+
+msgid "License Type"
+msgstr "Τύπος άδειας"
+
+msgid "License"
+msgstr "Αδεια"
+
+msgid "Purchase Date"
+msgstr "Ημερομηνία αγοράς"
+
+msgid "Supported Until"
+msgstr "Υποστηρίζεται έως"
+
+msgid "Paid Support Details"
+msgstr "Λεπτομέρειες υποστήριξης επί πληρωμή"
+
+msgid "Subscription"
+msgstr "Συνδρομή"
+
+msgid "Subscribed On"
+msgstr "Εγγραφή στις"
+
+msgid "Support Expiry"
+msgstr "Υποστήριξη Λήξη"
+
+msgid "No expiration"
+msgstr "Χωρίς λήξη"
+
+msgid "Non-premium support"
+msgstr "Υποστήριξη χωρίς premium"
+
+msgid "Check this box if this ticket should NOT apply against the paid support"
+msgstr ""
+"Επιλέξτε αυτό το πλαίσιο εάν αυτό το εισιτήριο ΔΕΝ ισχύει για την πληρωμένη "
+"υποστήριξη"
+
+msgid "Remaining"
+msgstr "Παραμένων"
+
+msgid "Link ticket to paid support"
+msgstr "Συνδέστε το εισιτήριο με την πληρωμένη υποστήριξη"
+
+msgid "Ticket Creator Name"
+msgstr "Όνομα δημιουργού εισιτηρίων"
+
+msgid "From Date"
+msgstr "Από την ημερομηνία"
+
+msgid "To Date"
+msgstr "Μέχρι σήμερα"
+
+msgid "Enforce delete"
+msgstr "Εξαναγκασμός διαγραφής"
+
+msgid "Are you sure to enforce delete"
+msgstr "Είστε σίγουρος/ η ότι θέλετε να επιβάλλεται την διαγραφεί"
+
+msgid "Are you sure to mark this ticket non-preminum?"
+msgstr "Είστε βέβαιοι ότι θα επισημάνετε αυτό το εισιτήριο χωρίς premium;"
+
+msgid "Message Logs"
+msgstr "Αρχεία καταγραφής μηνυμάτων"
+
+msgid "Edit Timer"
+msgstr "Επεξεργασία Χρονοδιακόπτη"
+
+msgid "Type Note for Department"
+msgstr "Πληκτρολογήστε Σημείωση για το Τμήμα"
+
+msgid "Assigning Note"
+msgstr "Εκχώρηση σημείωσης"
+
+msgid "Time Track"
+msgstr "Παρακολούθηση Χρόνου"
+
+msgid "Type Internal Note"
+msgstr "Πληκτρολογήστε εσωτερική σημείωση"
+
+msgid "View all %d tickets"
+msgstr "Δείτε όλα τα εισιτήρια% d"
+
+msgid "Reopen"
+msgstr "Ξανανοίγω"
+
+msgid "History"
+msgstr "Ιστορία"
+
+msgid "Print"
+msgstr "Εκτύπωση"
+
+msgid "Are you sure you want to delete this ticket"
+msgstr "Είστε βέβαιοι ότι θέλετε να διαγράψετε αυτό το εισιτήριο"
+
+msgid "Are you sure to close this ticket"
+msgstr "Είστε βέβαιοι ότι θα κλείσετε αυτό το εισιτήριο"
+
+msgid "Unlock"
+msgstr "Ξεκλείδωμα"
+
+msgid "Reply a message"
+msgstr "Απάντηση μηνύματος"
+
+msgid "Select Premade"
+msgstr "Επιλογή προκαθορισμένου"
+
+msgid "Assign Ticket"
+msgstr "Εκχώρηση εισιτηρίου"
+
+msgid "Assigned To Agent"
+msgstr "Ανατέθηκε στον πράκτορα"
+
+msgid "View all orders"
+msgstr "Δείτε όλες τις παραγγελίες"
+
+msgid "Non-preminum support"
+msgstr "Υποστήριξη χωρίς premium"
+
+msgid "Check Status"
+msgstr "Ελέγξετε την κατάσταση"
+
+msgid "Account status"
+msgstr "Κατάσταση λογαριασμού χρήστη"
+
+msgid "Add Premade Message"
+msgstr "Προσθήκη προκαθορισμένου μηνύματος"
+
+msgid "Add Staff Member"
+msgstr "Προσθήκη μέλους του προσωπικού"
+
+msgid "Add System Email"
+msgstr "Προσθήκη e-mail συστήματος"
+
+msgid "Add User field"
+msgstr "Προσθήκη πεδίου χρήστη"
+
+msgid "Add new ticket form for both user and staff"
+msgstr "Προσθήκη νέας φόρμας αιτήματος για τους χρήστες και το προσωπικό"
+
+msgid "Ago"
+msgstr "Πριν από"
+
+msgid "Already exisits"
+msgstr "Υπάρχει ήδη"
+
+msgid "Announcement has been deleted"
+msgstr "Η ανακοίνωση έχει διαγραφεί"
+
+msgid "Announcement has been stored"
+msgstr "Η ανακοίνωση έχει επανέλθει"
+
+msgid "Announcement has not been deleted"
+msgstr "Η ανακοίνωση δεν έχει διαγραφεί"
+
+msgid "Announcement has not been stored"
+msgstr "Η ανακοίνωση δεν έχει επανέλθει"
+
+msgid "Append signature with reply"
+msgstr "Επισύναψη υπογραφής με την απάντηση"
+
+msgid "Are you sure to close ticket"
+msgstr "Είστε σίγουρος/ η ότι θέλετε να κλείσετε το αίτημα"
+
+msgid "Are you sure to delete"
+msgstr "Είστε σίγουρος/ η θέλετε να διαγραφεί"
+
+msgid "Article has been deleted"
+msgstr "Το άρθρο έχει διαγραφεί"
+
+msgid "Article has not been deleted"
+msgstr "Το άρθρο δεν έχει διαγραφεί"
+
+msgid "Assign ticket to staff"
+msgstr "Ανάθεση αιτήματος στο προσωπικό"
+
+msgid "Assign to Staff"
+msgstr "Ανάθεση στο προσωπικό"
+
+msgid "Assign to Staff Member"
+msgstr "Ανάθεση σε μέλος του προσωπικού"
+
+msgid "Assigned to staff"
+msgstr "Ανατέθηκε στο προσωπικό"
+
+msgid "Attachment has been removed"
+msgstr "Η επισύναψη έχει διαγραφεί"
+
+msgid "Attachment has not been removed"
+msgstr "Η επισύναψη δεν έχει διαγραφεί"
+
+msgid "Auto response for this topic"
+msgstr "Αυτόματη απάντηση γι' αυτό το θέμα"
+
+msgid "Autoresponse"
+msgstr "Αυτόματη απάντηση"
+
+msgid "Ban Email Log List"
+msgstr "Αποκλεισμός email λίστα καταγραφής"
+
+msgid "Ban Email has been stored"
+msgstr "Το αποκλεισμένο email έχει επανέλθει"
+
+msgid "Ban Email has not been deleted"
+msgstr "Το αποκλεισμένο email δεν έχει διαγραφή"
+
+msgid "Ban Email has not been stored"
+msgstr "Το αποκλεισμένο email δεν έχει επανέλθει"
+
+msgid "Ban email"
+msgstr "Αποκλεισμός email"
+
+msgid "Ban email log list"
+msgstr "Αποκλεισμός email λίστα καταγραφής"
+
+msgid "Ban email new ticket"
+msgstr "Αποκλεισμός email και νέο αίτημα"
+
+msgid "Banlist log"
+msgstr "Αρχείο καταγραφής αποκλεισμών"
+
+msgid "CURL exist"
+msgstr "Ύπαρξη CURL"
+
+msgid "CURL not exist"
+msgstr "Το CURL δεν υπάρχει"
+
+msgid "Can Not mark as not required"
+msgstr "Δεν μπορεί να χαρακτηριστεί ως ΜΗ απαραίτητο"
+
+msgid "Cannot unpublish field"
+msgstr "Δεν μπορεί να αφαιρεθεί το δημοσιευμένο πεδίο"
+
+msgid "Category has been deleted"
+msgstr "Η κατηγορία έχει διαγραφεί"
+
+msgid "Category has been stored"
+msgstr "Η κατηγορία έχει επανέλθει"
+
+msgid "Category has not been deleted"
+msgstr "Η κατηγορία δεν έχει διαγραφεί"
+
+msgid "Category has not been stored"
+msgstr "Η κατηγορία δεν έχει επανέλθει"
+
+msgid "Category in use cannot deleted"
+msgstr "Η κατηγορία χρησιμοποιείται και δεν μπορεί να διαγραφεί"
+
+msgid "Component Detail"
+msgstr "Λεπτομέρειες στοιχείου"
+
+msgid "Component for on-line ticket support system"
+msgstr "Στοιχείο για το σύστημα διαχείρισης αιτημάτων"
+
+msgid "Configuration has been stored"
+msgstr "Οι ρυθμίσεις έχουνε επανέλθει"
+
+msgid "Configuration not has been stored"
+msgstr "Οι ρυθμίσεις δεν έχουνε επανέλθει"
+
+msgid "Connection established but we cannot ready any email"
+msgstr "Έγινε σύνδεση, αλλά δεν μπορούμε να ετοιμάσουμε κανένα email"
+
+msgid "Control panel links"
+msgstr "Διασυνδέσεις του πίνακα ελέγχου"
+
+msgid "Current"
+msgstr "Τρέχων"
+
+msgid "Data directory can not empty."
+msgstr "Ο φάκελος δεδομένων δεν μπορεί να είναι άδειος"
+
+msgid "Data directory is not writeable."
+msgstr "Ο φάκελος δεδομένων δεν είναι προσβάσιμος"
+
+msgid "Database CRUD"
+msgstr "Βάση δεδομένων CRUD"
+
+msgid "Database create table not allowed"
+msgstr "Δεν επιτρέπεται η δημιουργία πίνακα στην βάση δεδομένων"
+
+msgid "Database delete record not allowed"
+msgstr "Δεν επιτρέπεται η διαγραφή δεδομένου από την βάση δεδομένων"
+
+msgid "Database drop table not allowed"
+msgstr "Δεν επιτρέπεται η διαγραφή του πίνακα από την βάση δεδομένων"
+
+msgid "Database insert record not allowed"
+msgstr "Δεν επιτρέπεται η εισαγωγή του στοιχείου στην βάση δεδομένων"
+
+msgid "Database update record not allowed"
+msgstr "Δεν επιτρέπεται η ενημέρωση του στοιχείου στην βάση δεδομένων"
+
+msgid "Date end"
+msgstr "Ημερομηνία λήξης"
+
+msgid "Date start"
+msgstr "Ημερομηνία έναρξης"
+
+msgid "Day"
+msgstr "Ημέρα"
+
+msgid "Default System Email"
+msgstr "Προκαθορισμένο email συστήματος"
+
+msgid "Default system emails"
+msgstr "Προκαθορισμένα email συστήματος"
+
+msgid "Delete ticket"
+msgstr "Διαγραφή αιτήματος"
+
+msgid "Department Under Which The Answer Will Be Made Available"
+msgstr "Η διαθέσιμη απάντηση θα βρίσκεται στο τμήμα"
+
+msgid "Department has been deleted"
+msgstr "Το τμήμα έχει διαγραφεί"
+
+msgid "Department has been stored"
+msgstr "Το τμήμα έχει επανέλθει"
+
+msgid "Department has been transfered"
+msgstr "Το τμήμα έχει μεταφερθεί"
+
+msgid "Department has not been deleted"
+msgstr "Το τμήμα δεν έχει διαγραφεί"
+
+msgid "Department has not been stored"
+msgstr "Το τμήμα δεν έχει επανέλθει"
+
+msgid "Department has not been transfered"
+msgstr "Δεν τμήμα δεν έχει μεταφερθεί"
+
+msgid "Department in use cannot deleted"
+msgstr "Το τμήμα χρησιμοποιείται και δεν μπορεί να διαγραφεί"
+
+msgid "Department is transfered by"
+msgstr "Το τμήμα μεταφέρθηκε από"
+
+msgid "Dir is not writeable"
+msgstr "Ο φάκελος δεν είναι εγγράψιμος"
+
+msgid "Directory"
+msgstr "Φάκελος"
+
+msgid "Directory permissions error"
+msgstr "Πρόβλημα με τα δικαιώματα φακέλου"
+
+msgid "Display name"
+msgstr "Προβληθέν όνομα"
+
+msgid "Do you have enabled SSL on your domain"
+msgstr "Έχετε ενεργοποιημένο SSL στο domain σας"
+
+msgid "Documentation"
+msgstr "Τεκμηρίωση"
+
+msgid "Download has been deleted"
+msgstr "Η λήψη έχει διαγραφεί"
+
+msgid "Download has been stored"
+msgstr "Η λήψη έχει επανέλθει"
+
+msgid "Download has not been deleted"
+msgstr "Η λήψη δεν έχει διαγραφεί"
+
+msgid "Download has not been stored"
+msgstr "Η λήψη δεν έχει επανέλθει"
+
+msgid "Email address"
+msgstr "Διεύθυνση email"
+
+msgid "Email has been banned"
+msgstr "Το email έχει αποκλειστεί"
+
+msgid "Email has been deleted"
+msgstr "Το email έχει διαγραφεί"
+
+msgid "Email has been stored"
+msgstr "Το email έχει αποθηκευτεί"
+
+msgid "Email has not been banned"
+msgstr "Το email δεν έχει αποκλειστεί"
+
+msgid "Email has not been deleted"
+msgstr "Το email δεν έχει διαγραφεί"
+
+msgid "Email has not been stored"
+msgstr "Το email δεν έχει αποθηκευτεί"
+
+msgid "Email send to admin when banned email try to create ticket"
+msgstr ""
+"Αποστολή email στον διαχειριστή όταν αποκλεισμένο email προσπαθεί να "
+"δημιουργήσει αίτημα"
+
+msgid "Enable ticket via email"
+msgstr "Ενεργοποίηση της λειτουργίας αιτήματος μέσω email"
+
+msgid "Error applying new theme"
+msgstr "Παρουσιάστηκε πρόβλημα στην εφαρμογή του θέματος"
+
+msgid "Error file ext mismatch"
+msgstr "Λάθος στην επέκταση του αρχείου"
+
+msgid "Error file not downloaded"
+msgstr "Πρόβλημα, το αρχείο δεν λήφθηκε"
+
+msgid "Error occured"
+msgstr "Παρουσιάστηκε πρόβλημα"
+
+msgid "File Downloaded Successfully"
+msgstr "Το αρχείο λήφθηκε επιτυχώς"
+
+msgid "File download"
+msgstr "Λήψη αρχείου"
+
+msgid "File is not writeable"
+msgstr "Το αρχείο δεν είναι εγγράψιμο"
+
+msgid "File read write issue files cannot upload"
+msgstr "Πρόβλημα εγγραφής ανάγνωσης του αρχείου, δεν μπορεί να επισυναφθεί"
+
+msgid "File upload limit exceed"
+msgstr "Ξεπεράστηκε ο επιτρεπτός αριθμός αποστολής αρχείων"
+
+msgid "Forum"
+msgstr "Δωμάτια συζητήσεων"
+
+msgid "GD library"
+msgstr "Βιβλιοθήκη GD"
+
+msgid "GD library not exist"
+msgstr "Η βιβλιοθήκη GD δεν υπάρχει"
+
+msgid "General Setting"
+msgstr "Γενικές ρυθμίσεις"
+
+msgid "Get JS Support Ticket Translations"
+msgstr "Λάβετε μεταφράσεις του JS Support Ticket"
+
+msgid "Goto Web"
+msgstr "Πήγαινε στο διαδίκτυο"
+
+msgid "Help topics"
+msgstr "Θέματα βοήθειας"
+
+msgid "Host port number to read email from"
+msgstr "Αριθμός πόρτας για να διαβάζεται email από"
+
+msgid "IMAP is either not installed or not enable in your server"
+msgstr ""
+"Το πρωτόκολλο IMAP είτε δεν είναι εγκατεστημένο είτε δεν είναι "
+"ενεργοποιημένο στον διακομιστή σας"
+
+msgid "If system not respond in 30 seconds"
+msgstr "Αν το σύστημα δεν ανταποκριθεί σε 30 δευτερόλεπτα"
+
+msgid "Installation"
+msgstr "Εγκατάσταση"
+
+msgid "Internal Note Has Been Posted"
+msgstr "Το εσωτερικό σημείωμα έχει αναρτηθεί"
+
+msgid "Internal Note Has Not Been Posted"
+msgstr "Το εσωτερικό σημείωμα δεν έχει αναρτηθεί"
+
+msgid "Internal Notes"
+msgstr "Εσωτερικές σημειώσεις"
+
+msgid "Internal note is posted by"
+msgstr "Το εσωτερικό σημείωμα έχει αναρτηθεί από"
+
+msgid "It may take few minutes"
+msgstr "Μπορεί να χρειαστούνε μερικά λεπτά"
+
+msgid "JS Support Ticket Control Panel"
+msgstr "Πίνακας ελέγχου του JS Support Ticket"
+
+msgid "JS Support Ticket Pro Installer"
+msgstr "Αρχείο εγκατάστασης JS Support Ticket Pro"
+
+msgid "JS Support Ticket main control panel"
+msgstr "Κεντρικός πίνακας ελέγχου JS Support Ticket"
+
+msgid "JS Ticket Pro Installed Successfully"
+msgstr "Το JS Ticket Pro έχει εγκατασταθεί επιτυχώς"
+
+msgid "Knowledge base article has been stored"
+msgstr "Το άρθρο της γνωσιακής βάσης έχει επανέλθει"
+
+msgid "Knowledge base article has not been stored"
+msgstr "Το άρθρο της γνωσιακής βάσης δεν έχει επανέλθει"
+
+msgid "Language directory is not writeable"
+msgstr "Ο φάκελος γλωσσών δεν είναι εγγράψιμος"
+
+msgid "Lastest Downlods"
+msgstr "Τελευταίες λήψεις"
+
+msgid "Latest knowledge base"
+msgstr "Τελευταία γνωσιακή βάση"
+
+msgid "Limit exceeds maximum open tickets"
+msgstr "Έχουνε ξεπεραστεί τα επιτρεπτά ανοικτά αιτήματα"
+
+msgid "Login into your account"
+msgstr "Σύνδεση στο λογαριασμό σου"
+
+msgid "Login/Logout button"
+msgstr "Κουμπί σύνδεσης/ αποσύνδεσης"
+
+msgid "Mail Setting"
+msgstr "Ρυθμίσεις mail"
+
+msgid "Mail cannot mark as read"
+msgstr "Το email δεν μπορεί να χαρακτηριστεί ως αναγνωσμένο"
+
+msgid "Mail has been mark as read"
+msgstr "Το email έχει χαρακτηριστεί ως αναγνωσμένο"
+
+msgid "Mail has been send"
+msgstr "Το mail έχει αποσταλεί"
+
+msgid "Mail has not been mark as read"
+msgstr "Το mail δεν έχει χαρακτηριστεί ως αναγνωσμένο"
+
+msgid "Mail has not been send"
+msgstr "Το mail δεν έχει αποσταλεί"
+
+msgid "Mail mark as read"
+msgstr "Το mail χαρακτηρίστηκε ως αναγνωσμένο"
+
+msgid "Mail mark as unread"
+msgstr "Το mail χαρακτηρίστηκε ως μη αναγνωσμένο"
+
+msgid "Mannual Download"
+msgstr "Χειροκίνητη λήψη"
+
+msgid "Max record"
+msgstr "Μέγιστη καταγραφή"
+
+msgid "More Detail"
+msgstr "Περισσότερες πληροφορίες"
+
+msgid "More Option"
+msgstr "Περισσότερες επιλογές"
+
+msgid "My tickets for both user and staff"
+msgstr "Τα αιτήματα μου και για τους χρήστες και για το προσωπικό"
+
+msgid "New Department"
+msgstr "Νέο τμήμα"
+
+msgid "New Help Topic"
+msgstr "Νέο θέμα βοήθειας"
+
+msgid "New Staff"
+msgstr "Καινούριο προσωπικό"
+
+msgid "New Version Is Available"
+msgstr "Υπάρχει διαθέσιμη νέα έκδοση"
+
+msgid "New theme has been applied"
+msgstr "Εφαρμόστηκε νέο θέμα"
+
+msgid "Next step"
+msgstr "Επόμενο βήμα"
+
+msgid "No premade found"
+msgstr "Δεν βρέθηκε προκατασκευασμένο"
+
+msgid "Not assigned to staff"
+msgstr "Δεν ανατέθηκε στο προσωπικό"
+
+msgid "Our Products"
+msgstr "Τα προϊόντα μας"
+
+msgid "PHP version smaller then recomended"
+msgstr "Η έκδοση PHP είναι μικρότερη από την προτεινόμενη"
+
+msgid "Password for given email address"
+msgstr "Ο κωδικός για την συγκεκριμένη διεύθυνση email"
+
+msgid "Please enable ticket via email setting first"
+msgstr "Παρακαλούμε ενεργοποιήστε τα αιτήματα μέσω email πρώτα"
+
+msgid "Please enter the google recaptcha private key from"
+msgstr "Παρακαλούμε είσαγετε το google recaptcha private key από"
+
+msgid "Please enter the google recaptcha public key from"
+msgstr "Παρακαλούμε είσαγετε το google recaptcha public key από"
+
+msgid "Please insert activation key and press start"
+msgstr "Παρακαλούμε εισάτε το κλειδί ενεργοποίησης πατήστε στο έναρξη"
+
+msgid "Please select atleast one category for"
+msgstr "Παρακαλούμε επιλέξτε τουλάχιστον μία κατηγορία από"
+
+msgid "Popular knoweldge base"
+msgstr "Δημοφιλής γνωσιακές βάσεις"
+
+msgid "Post internal note"
+msgstr "Ανάρτηση εσωτερικού σημειώματος"
+
+msgid "Posted by"
+msgstr "Αναρτήθηκε από"
+
+msgid "Premade Messages"
+msgstr "Προκαθορισμένα μηνύματα"
+
+msgid "Premade department message has been stored"
+msgstr "Το προκαθορισμένο μήνυμα του τμήματος έχει επανέλθει"
+
+msgid "Premade department message has not been stored"
+msgstr "Το προκαθορισμένο μήνυμα του τμήματος δεν έχει επανέλθει"
+
+msgid "Premade message"
+msgstr "Προκαθορισμένο μήνυμα"
+
+msgid "Publish"
+msgstr "Δημοσίευση"
+
+msgid "Quick Configuration"
+msgstr "Γρήγορη διαμόρφωση"
+
+msgid "Recomended"
+msgstr "Προτεινόμενο"
+
+msgid "Redirect user to JS Support Ticket control panel after login"
+msgstr ""
+"Ανακατεύθυνση του χρήστη στον πίνακα ελέγχου του JS Support Ticket μετά την "
+"σύνδεση"
+
+msgid "Reply has been posted"
+msgstr "Έχει αναρτηθεί απάντηση"
+
+msgid "Reply has not been posted"
+msgstr "Δεν έχει αναρτηθεί απάντηση"
+
+msgid "Report By User"
+msgstr "Αναφορά από χρήστη"
+
+msgid "Report By Users"
+msgstr "Αναφορά από χρήστες"
+
+msgid "Requester Info"
+msgstr "Πληροφορίες αιτούμενου"
+
+msgid "Role has been deleted"
+msgstr "Ο ρόλος έχει διαγραφεί"
+
+msgid "Role has been stored"
+msgstr "Ο ρόλος έχει επανέλθει"
+
+msgid "Role has not been deleted"
+msgstr "Ο ρόλος δεν έχει διαγραφεί"
+
+msgid "Role has not been stored"
+msgstr "Ο ρόλος δεν έχει επανέλθει"
+
+msgid "Save Staff Member"
+msgstr "Αποθήκευση μελών προσωπικού"
+
+msgid "Save User Field"
+msgstr "Αποθήκευση πεδίων χρηστών"
+
+msgid "Save attachments if found in email"
+msgstr "Αποθήκευση επισυναπτόμενων αν βρεθούν σε email"
+
+msgid "Save email template"
+msgstr "Αποθήκευση προκαθορισμένων email"
+
+msgid "Save premade message"
+msgstr "Αποθήκευση προκαθορισμένων μηνυμάτων"
+
+msgid "Search Announcement"
+msgstr "Αναζήτηση ανακοινώσεων"
+
+msgid "Search Download"
+msgstr "Αναζήτηση λήψεων"
+
+msgid "Search FAQ"
+msgstr "Αναζήτηση συχνών ερωτήσεων"
+
+msgid "Search Knowledge Base"
+msgstr "Αναζήτηση γνωσιακών βάσεων"
+
+msgid "Select Staff"
+msgstr "Επιλογή προσωπικού"
+
+msgid "Select department"
+msgstr "Επιλογή τμήματος"
+
+msgid "Select priority"
+msgstr "Επιλέξτε προτεραιότητα"
+
+msgid "Service is running please close the page"
+msgstr "Εκτελείται συντήρηση, παρακαλώ κλείστε την σελίδα"
+
+msgid "Set no. of days to mark ticket as overdue"
+msgstr "Θέστε τις ημέρες όπου το αίτημα θα θα θεωρηθεί εκπρόθεσμο"
+
+msgid "Setting"
+msgstr "Ρυθμίσεις"
+
+msgid "Show Detail"
+msgstr "Προβολή λεπτομερειών"
+
+msgid "Show captcha on visitor form ticket"
+msgstr "Προβολή captcha στην φόρμα αιτήματος επισκέπτη"
+
+msgid "Show captcha when visitor want to create ticket"
+msgstr "Προβολή captcha όταν ο επισκέπτης θέλει να δημιουργήσει αίτημα"
+
+msgid "Show latest FAQ's. Options:"
+msgstr "Προβολή τελευταίων συχνών ερωτήσεων. Επιλογές:"
+
+msgid "Show latest announcements. Options:"
+msgstr "Προβολή τελευταίων ανακοινώσεων. Επιλογές:"
+
+msgid "Show latest downloads. Options:"
+msgstr "Προβολή τελευταίων ληφθέντων. Επιλογές:"
+
+msgid "Show latest knowledge base. Options:"
+msgstr "Προβολή τελευταίων γνωσιακών βάσεων. Επιλογές:"
+
+msgid "Show new and reply mail notifications"
+msgstr "Προβολή νέων και απαντημένων ειδοποιήσεων mail"
+
+msgid "Show number of open, closed, answered ticket in my ticket"
+msgstr "Προβολή αριθμού νέων, κλειστών, απαντημένων αιτημάτων στα αιτήματα μου"
+
+msgid "Show popular FAQ's. Options:"
+msgstr "Προβολή διμοφιλών συχνών ερωτήσεων. Επιλογές:"
+
+msgid "Show popular announcements. Options:"
+msgstr "Προβολή διμοφιλών ανακοινώσεων. Επιλογές:"
+
+msgid "Show popular downloads. Options:"
+msgstr "Προβολή διμοφιλών ληφθέντων. Επιλογές:"
+
+msgid "Show popular knowledge base. Options:"
+msgstr "Προβολή διμοφιλών γνωσιακών βάσεων. Επιλογές:"
+
+msgid "Some thing wrong try again later"
+msgstr "Κάτι έχει πάει στραβά, δοκιμάστε ξανά αργότερα"
+
+msgid "Staff Member"
+msgstr "Μέλος προσωπικού"
+
+msgid "Staff Members"
+msgstr "Μέλη προσωπικού"
+
+msgid "Staff Menu Setting"
+msgstr "Ρυθμίσεις μελών προσωπικού"
+
+msgid "Staff Section"
+msgstr "Τμήμα προσωπικού"
+
+msgid "Staff Ticket"
+msgstr "Αιτήματα προσωπικού"
+
+msgid "Staff member has been deleted"
+msgstr "Το μέλος του προσωπικού έχει διαγραφεί"
+
+msgid "Staff member has been stored"
+msgstr "Το μέλος του προσωπικού έχει επανέλθει"
+
+msgid "Staff member has not been deleted"
+msgstr "Το μέλος του προσωπικού δεν έχει διαγραφεί"
+
+msgid "Staff member has not been stored"
+msgstr "Το μέλος του προσωπικού δεν έχει επανέλθει"
+
+msgid "Staff member in use cannot deleted"
+msgstr "Το μέλος του προσωπικού είναι σε χρήση και δεν μπορεί να διαγραφεί"
+
+msgid "Staff member name"
+msgstr "Όνομα μέλους προσωπικού"
+
+msgid "Start"
+msgstr "Εκκίνηση"
+
+msgid "Start using"
+msgstr "Έναρξη χρήσης"
+
+msgid "Support Area"
+msgstr "Τμήμα υποστήριξης"
+
+msgid "System Slug"
+msgstr "Slug συστήματος"
+
+msgid "System slug is confilicted with post or page slug."
+msgstr ""
+"Το slug του συστήματος είναι σε σύγκρουση με κάποιο slug άρθρου ή σελίδας"
+
+msgid "Thanks For Installing JS Ticket Pro"
+msgstr "Σας ευχαριστούμε που εγκαταστήσατε το JS Ticket Pro"
+
+msgid "This message will show on new ticket"
+msgstr "Αυτό το μήνυμα θα φαίνεται στα νέα αιτήματα"
+
+msgid "Ticket Department Transfer"
+msgstr "Μεταφορά αιτήματος στο τμήμα"
+
+msgid "Ticket Operations Mail Setting"
+msgstr "Ρυθμίσεις mail για τις λειτουργίες αιτήματος"
+
+msgid "Ticket Response Staff"
+msgstr "Το αίτημα απαντήθηκε από το προσωπικό"
+
+msgid "Ticket Via Email"
+msgstr "Αίτημα μέσω Email"
+
+msgid "Ticket auto close if user not respond within given days"
+msgstr ""
+"Αυτόματο κλείσιμο αιτήματος αν ο χρήστης δεν απαντήσε σε αυτές τις μέρες"
+
+msgid "Ticket can be reopen within given number of days"
+msgstr "Το αίτημα μπορεί να ξανά ανοιχθεί σε τόσες ημέρες"
+
+msgid "Ticket has been locked"
+msgstr "Το αίτημα έχει κλειδωθεί"
+
+msgid "Ticket has been marked as in progress"
+msgstr "Το αίτημα έχει δηλωθεί ότι βρίσκεται σε εξέλιξη"
+
+msgid "Ticket has been marked as overdue"
+msgstr "Το αίτημα έχει χαρακτηριστεί ως εκπρόθεσμο"
+
+msgid "Ticket has been reopend"
+msgstr "Το αίτημα έχει ξανά ανοιχθεί"
+
+msgid "Ticket has been stored"
+msgstr "Το αίτημα έχει επανέλθει"
+
+msgid "Ticket has been unlocked"
+msgstr "Το αίτημα έχει ξεκλειδωθεί"
+
+msgid "Ticket has not been locked"
+msgstr "Το αίτημα δεν έχει κλειδωθεί"
+
+msgid "Ticket has not been marked as in progress"
+msgstr "Το αίτημα δεν έχει χαρακτηριστεί ότι βρίσκεται σε εξέλιξη"
+
+msgid "Ticket has not been marked as overdue"
+msgstr "Το αίτημα δεν έχει χαρακτηριστεί ως εκπρόθεσμο"
+
+msgid "Ticket has not been reopened"
+msgstr "Το αίτημα δεν έχει ξανά ανοιχθεί"
+
+msgid "Ticket has not been stored"
+msgstr "Το αίτημα δεν έχει αποθηκευτεί"
+
+msgid "Ticket has not been unlocked"
+msgstr "Το αίτημα δεν έχει ξεκλειδωθεί"
+
+msgid "Ticket is assigned to staff by"
+msgstr "Το αίτημα ανατέθηκε στο προσωπικό από"
+
+msgid "Ticket is locked"
+msgstr "Το αίτημα είναι κλειδωμένο"
+
+msgid "Ticket is locked by"
+msgstr "Το αίτημα κλειδώθηκε από"
+
+msgid "Ticket is marked as in progress by"
+msgstr "Το αίτημα δηλώθηκε σε εξέλιξη από"
+
+msgid "Ticket is marked as overdue by"
+msgstr "Το αίτημα δηλώθηκε ως εκπρόθεσμο από"
+
+msgid "Ticket is reopened by"
+msgstr "Το αίτημα ξανά ανοίχθηκε από"
+
+msgid "Ticket is unlocked by"
+msgstr "Το αίτημα ξεκλειδώθηκε από"
+
+msgid "Ticket mark overdue"
+msgstr "Το αίτημα χαρακτηρίστηκε εκπρόθεσμο"
+
+msgid "Ticket reopen time limit end"
+msgstr "Χρόνος κλεισίματος αιτήματος που έχει ξανά ανοιχθεί"
+
+msgid "Tickets By Staff"
+msgstr "Αιτήματα από το προσωπικό"
+
+msgid "Tickets by priorities"
+msgstr "Αιτήματα ανα προτεραίοτητες"
+
+msgid "To Use This Feature You Must Be Staff Memeber"
+msgstr ""
+"Για να χρησιμοποιήσετε αυτή την λειτουργία πρέπει να είστε μέλος του "
+"προσωπικού"
+
+msgid "To access this page please login"
+msgstr "Συνδεθείτε για να δείτε αυτή τη σελίδα"
+
+msgid "Today"
+msgstr "Σήμερα"
+
+msgid "Top menu links"
+msgstr "Δεσμοί του πάνω μενού"
+
+msgid "Type"
+msgstr "Γράψτε"
+
+msgid "Unable Connect To Server"
+msgstr "Δεν μπορεί να πραγματοποιηθεί η σύνδεση στον διακομιστή"
+
+msgid "Unable to connect to server"
+msgstr "Δεν μπορεί να πραγματοποιηθεί η σύνδεση στον διακομιστή"
+
+msgid "Update"
+msgstr "Ενημέρωση"
+
+msgid "Use Search Feature To Select The User"
+msgstr "Χρησιμοποιήστε την λειτουργία αναζήτησης για την επιλογή χρήστη"
+
+msgid "User Menu Setting"
+msgstr "Ρυθμίσεις μενού χρηστών"
+
+msgid "User already staff member"
+msgstr "Ο χρήστης είναι ήδη μέλος του προσωπικού"
+
+msgid "User id"
+msgstr "Κλειδί χρήστη"
+
+msgid "View"
+msgstr "Προβολή"
+
+msgid "View Ticket"
+msgstr "Προβολή αιτήματος"
+
+msgid "Visitor published"
+msgstr "Ο επισκέπτης δημιουργήθηκε"
+
+msgid "Waiting Customer Reply"
+msgstr "Αναμονή απάντησης από πελάτη"
+
+msgid "Waiting Staff Reply"
+msgstr "Αναμονή απάντησης από το προσωπικό"
+
+msgid "Waiting reply"
+msgstr "Αναμονή απάντησης"
+
+msgid "Waiting staff reply"
+msgstr "Αναμονή απάντησης από το προσωπικό"
+
+msgid "Would you like to add this type to parent"
+msgstr "Θέλετε να προσθέσετε αυτόν τον τύπο στο γονέα"
+
+msgid "You are Already Logged in"
+msgstr "Έχετε συνδεθεί ήδη"
+
+msgid "You are not allowed to view this page"
+msgstr "Δεν επιτρέπεται να προβάλλεται αυτή την σελίδα"
+
+msgid "You are not logged in"
+msgstr "Δεν έχετε συνδεθεί"
+
+msgid "You are not staff member"
+msgstr "Δεν είστε μέλος του προσωπικού"
+
+msgid "You cannot unmark it"
+msgstr "Δεν μπορείτε να το απεπιλέξετε"
+
+msgid "Your parent does not have this type"
+msgstr "Ο γονέας σας δεν διαθέτει αυτόν τον τύπο"
+
+msgid "Your System Is Up To Date"
+msgstr "Το σύστημα σας είναι ενημερωμένο"
+
+msgid "Your account is disabled please contact to administrator"
+msgstr ""
+"Ο λογαριασμός σας έχει απενεργοποιηθεί, επικοινωνήστε με τον διαχειριστή"
+
+msgid "Your child have this type"
+msgstr "Το παιδί σας έχει αυτόν τον τύπο"
+
+msgid "Your setting is working please save the setting"
+msgstr "Οι ρυθμίσεις σας λειτουργούν, παρακαλώ αποθηκεύστε"
+
+msgid "Zip library"
+msgstr "Βιβλιοθήκη Zip"
+
+msgid "Zip library not exist"
+msgstr "Η βιβλιοθήκη Zip δεν υπάρχει"
+
+msgid "directory is not writeable"
+msgstr "Ο φάκελος δεν είναι εγγράψιμος"
+
+msgid "extension"
+msgstr "επέκταση"
+
+msgid "override department setting"
+msgstr "Προσπέραση ρυθμίσεων τμήματος"
+
+msgid "Add Files"
+msgstr "Προσθήκη αρχείων"
+
+msgid "Add Userfield"
+msgstr "Προσθήκε πεδίου χρήστη"
+
+msgid "Are you sure delete"
+msgstr "Είναι σίγουρη η διαγραφή"
+
+msgid "Assign User Permissions"
+msgstr "Ανάθεση αδειών χρήστη"
+
+msgid "Assign to"
+msgstr "Ανάθεση σε"
+
+msgid "Blocked"
+msgstr "Μπλοκαρισμένο"
+
+msgid "Change ticket priority"
+msgstr "Αλλαγή προτεραιότητας αιτήματος"
+
+msgid "Check box"
+msgstr "Κουτάκι επιλογής"
+
+msgid "Control Panel Coulmn"
+msgstr "Στήλες πίνακα ελέγχου"
+
+msgid "Data directory in not writable"
+msgstr "Ο φάκελος δεδομένων δεν είναι εγγράψιμος"
+
+msgid "Depandent field"
+msgstr "Εξαρτώμενο πεδίο"
+
+msgid "Dir not exist"
+msgstr "Ο κατάλογος δεν υπάρχει"
+
+msgid "Display #"
+msgstr "Προβολή #"
+
+msgid "Drop down"
+msgstr "Πτυσσόμενο μενού"
+
+msgid "Due Date"
+msgstr "Επίλυση έως"
+
+msgid "Email already exist"
+msgstr "Το Email υπάρχει ήδη"
+
+msgid "Email reads sucessfully"
+msgstr "Το email αναγνώστηκε επιτυχώς"
+
+msgid "Empty values are not allowed"
+msgstr "Δεν επιτρέπονται τα κενά πεδία"
+
+msgid "Enable print ticket"
+msgstr "Ενεργοποίηση λειτουργίας εκτύπωσης"
+
+msgid "Field Name"
+msgstr "Όνομα πεδίου"
+
+msgid "Field mark ordering down"
+msgstr "Μαρκάρισμα πεδίου για μετακίνηση κάτω"
+
+msgid "Get JS Tickets Translations"
+msgstr "Λάβετε μεταφράσεις του JS Tickets"
+
+msgid "Id"
+msgstr "Μοναδικό κλειδί"
+
+msgid "Invalid data directory"
+msgstr "Άκυρος φάκελος δεδομένων"
+
+msgid "Jstickets Uninstall Text"
+msgstr "Κείμενο απεγκατάστασης JS Tickets"
+
+msgid "Language Translations"
+msgstr "Μεταφράσεις σε γλώσσες"
+
+msgid "Loading"
+msgstr "Φόρτωση"
+
+msgid "Multi select"
+msgstr "Πολλαπλή επιλογή"
+
+msgid "New Mail Message Recevied"
+msgstr "Παραλήφθηκε νεό μήνυμα mail"
+
+msgid "New Mail Receviced"
+msgstr "Παραλήφθκε νέο mail"
+
+msgid "Not assigned"
+msgstr "Δεν έχει γίνει ανάθεση"
+
+msgid "Not default"
+msgstr "Δεν είναι προκαθορισμένο"
+
+msgid "Operation Cancel"
+msgstr "Ακύρωση λειτουργίας"
+
+msgid "Page not found"
+msgstr "Η σελίδα δεν βρέθηκε"
+
+msgid "Permission"
+msgstr "Άδεια"
+
+msgid "Phone"
+msgstr "Τηλέφωνο"
+
+msgid "Phone Ext"
+msgstr "Εσωτερικό τηλέφωνο"
+
+msgid "Premade"
+msgstr "Προκατασκευασμένο"
+
+msgid "Print ticket"
+msgstr "Εκτύπωση αιτήματος"
+
+msgid "Radio button"
+msgstr "Κουμπί \\"
+
+msgid "Read only"
+msgstr "Μόνο για ανάγνωση"
+
+msgid "Reply has not been stored"
+msgstr "Η απάντηση δεν έχει αποθηκευτεί"
+
+msgid "Required language is not installed"
+msgstr "Δεν έχει εγκατασταθεί η απαραίτητη γλώσσα"
+
+msgid "Save Role Permission"
+msgstr "Αποθήκευση αδειών ρόλων"
+
+msgid "Select parent field"
+msgstr "Επιλέξτε το γονικό πεδίο"
+
+msgid "Staff Members Control Panel Links"
+msgstr "Δεσμοί του πίνακα ελέγχου για τα μέλη προσωπικού"
+
+msgid "Staff Members Top Menu Links"
+msgstr "Δεσμοί του πάνω μενού για τα μέλη προσωπικού"
+
+msgid "Text"
+msgstr "Κείμενο"
+
+msgid "Text area"
+msgstr "Περιοχή κειμένου"
+
+msgid "Text field"
+msgstr "Πεδίο κειμένου"
+
+msgid "Ticket in use cannot deleted"
+msgstr "Το αίτημα είναι σε χρήση, δεν μπορεί να διαγραφεί"
+
+msgid "Ticket mark in progress"
+msgstr "Μαρκάρετε το αίτημα ότι βρίσκεται σε εξέλιξη"
+
+msgid "Unknown"
+msgstr "Άγνωστο"
+
+msgid "Upload file"
+msgstr "Ανέβασμα αρχείου"
+
+msgid "Use The Table Below To Add New Values"
+msgstr "Χρησιμοποιήστε τον πίνακα παρακάτω για την προσθήκη νέων τιμών"
+
+msgid "User Control Panel Links"
+msgstr "Δεσμοί του πίνακα ελέγχου του χρήστη"
+
+msgid "User Top Menu Links"
+msgstr "Δεσμοί του πάνω μενού του χρήστη"
+
+msgid "User field has been deleted"
+msgstr "Το πεδίο του χρήστη έχει διαγραφεί"
+
+msgid "User field has been stored"
+msgstr "Το πεδίο του χρήστη έχει επανέλθει"
+
+msgid "User field has not been deleted"
+msgstr "Το πεδίο του χρήστη δεν έχει διαγραφεί"
+
+msgid "User field has not been stored"
+msgstr "Το πεδίο του χρήστη δεν έχει επανέλθει"
+
+msgid "Values Between 1 T0 12 Default Is 3"
+msgstr "Τιμές μεταξύ 1 έως 12. Η προκαθορισμένη είναι 3"
+
+msgid "View all"
+msgstr "Προβολή όλως"
+
+msgid "Visitor Menu Setting"
+msgstr "Ρυθμίσεις μενού χρήστη"
+
+msgid "Waiting admin/staff reply"
+msgstr "Αναμονή απάντησης από διαχειριστή/ προσωπικό"
+
+msgid "is not writeable"
+msgstr "δεν είναι εγγράψιμο"
+
+msgid "show print ticket icon on ticketdetail page to user"
+msgstr ""
+"Προβολή εικονιδίου εκτύπωσης αιτήματος στην σελίδα λεπτομερειών του "
+"αιτήματος του χρήστη"
+
+msgid "Form Category"
+msgstr "Κατηγορία Φόρμας"
+
+msgid "You are not allowed to view this ticket"
+msgstr "Δεν επιτρέπεται να δείτε αυτό το αίτημα"
+
+msgid "You have already provided feedback for this ticket"
+msgstr "Έχετε ήδη δώσει ανατροφοδότηση για αυτό το αίτημα"
+
+msgid "Ticket not found"
+msgstr "Το αίτημα δεν βρέθηκε"
+
+msgid "Thank you for your feedback"
+msgstr "Σας ευχαριστούμε για την ανατροφοδότηση σας"
+
+msgid "Feedback Setting"
+msgstr "Ρύθμιση Ανατροφοδότησης"
+
+msgid "Interval type to mark ticket as overdue"
+msgstr "Τύπος διαστήματος επισήμανσης αιτήματος ως καθυστερημένο"
+
+msgid "Set no. of days or hours to mark ticket as overdue"
+msgstr ""
+"Ορίστε αριθμό ημερών ή ωρών για να επισημάνετε το αίτημα ως καθυστερημένο"
+
+msgid "Select whether you want to show captcha on registration form or not"
+msgstr "Επιλέξτε αν θέλετε να εμφανίζετε το captcha στη φόρμα εγγραφής ή όχι"
+
+msgid "Select role you want to assign to new users"
+msgstr "Επιλέξτε το ρόλο που θέλετε να ανατεθεί στους νέους χρήστες"
+
+msgid "Select whether users can reply to closed ticket via email or not"
+msgstr ""
+"Επιλέξτε εάν οι χρήστες μπορούν να απαντήσουν στο κλειστό εισιτήριο μέσω "
+"email ή όχι"
+
+msgid "This text will appear whenever visitor creates ticket"
+msgstr ""
+"Αυτό το κείμενο θα εμφανίζεται κάθε φορά που ο επισκέπτης δημιουργεί αίτημα"
+
+msgid "Set no. of days or hours to send feedback email after ticket is closed"
+msgstr ""
+"Ορίστε αριθμό των ημερών ή των ωρών για την αποστολή email ανατροφοδότησης "
+"μετά το κλείσιμο του αιτήματος"
+
+msgid "Feedback Successful message to customer"
+msgstr "Επιτυχής μήνυμα ανατροφοδότησης προς τον πελάτη"
+
+msgid "You cannot use this email it is used in ticket via email"
+msgstr ""
+"Δεν μπορείτε να χρησιμοποιήσετε αυτό το email, χρησιμοποιείται στο αίτημα "
+"μέσω e-mail"
+
+msgid "User of this department will receive email on new ticket"
+msgstr "Ο χρήστης αυτού του τμήματος θα λάβει email για νέο αίτημα"
+
+msgid "Departent Report"
+msgstr "Αναφορά Τμήματος"
+
+msgid "Users tickets"
+msgstr "Αιτήματα χρηστών"
+
+msgid "Users Ticekts"
+msgstr "Αιτήματα Χρηστών"
+
+msgid "Edit reason"
+msgstr "Αιτιολογία επεξεργασίας"
+
+msgid "Answerd"
+msgstr "Απαντήθηκε"
+
+msgid "Select Staff Member"
+msgstr "Επιλέξτε μέλος προσωπικού"
+
+msgid "Provide Feedback"
+msgstr "Παροχή Ανατροφοδότησης"
+
+msgid "Field Parent has not been stored"
+msgstr "Ο γονέας του πεδίου δεν έχει αποθηκευτεί"
+
+msgid "Please Insert Atleat one value for every option"
+msgstr "Παρακαλούμε εισάγετε τουλάχιστον μία τιμή για κάθε επιλογή"
+
+msgid "Add New"
+msgstr "Προθήκη Νέου"
+
+msgid "User Field"
+msgstr "Πεδίο Χρήστη"
+
+msgid "Misc"
+msgstr "Διάφορα"
+
+msgid "We'd love to hear from"
+msgstr "Θα θέλαμε πολύ να ακούσουμε"
+
+msgid "You"
+msgstr "Εσάς"
+
+msgid "Word Press Extension Directory"
+msgstr "Διαδρομή Πρόσθετου WordPress"
+
+msgid "Departments Reports"
+msgstr "Αναφορές Τμημάτων"
+
+msgid "Staff Feedbacks"
+msgstr "Ανατροφοδοτήσεις Προσωπικού"
+
+msgid "Password Again"
+msgstr "Κωδικός Πρόσβασης ξανά"
+
+msgid "Register New Account"
+msgstr "Εγγραφή Νέου Λογαριασμού"
+
+msgid "Tickets Updater"
+msgstr "Updater Αιτημάτων"
+
+msgid "Report By Department"
+msgstr "Αναφορά Από Το Τμήμα"
+
+msgid "out of"
+msgstr "Ξεμείνατε από"
+
+msgid "Report By Deparments"
+msgstr "Αναφορά Από Τμήματα"
+
+msgid "Deparments"
+msgstr "Τμήματα"
+
+msgid "No Data"
+msgstr "Χωρίς Δεδομένα"
+
+msgid "Staff Report"
+msgstr "Αναφορά Προσωπικού"
+
+msgid "Date From"
+msgstr "Ημερομηνία από"
+
+msgid "Date To"
+msgstr "Ημερομηνία έως"
+
+msgid "My Reports"
+msgstr "Οι Αναφορές Μου"
+
+msgid "Staff Members Reports"
+msgstr "Αναφορές Μελών Προσωπικού"
+
+msgid "Ticket has been created"
+msgstr "Το αίτημα δημιουργήθηκε"
+
+msgid "Issue Summary"
+msgstr "Περίληψη Προβλήματος"
+
+msgid "All Downloads"
+msgstr "Όλες Οι Λήψεις"
+
+msgid "Low"
+msgstr "Χαμηλό"
+
+msgid "Customer Feedbacks"
+msgstr "Ανατροφοδοτήσεις Πελάτη"
+
+msgid "Upload"
+msgstr "Ανέβασμα"
+
+msgid "Ticketid"
+msgstr "ID Αιτήματος"
+
+msgid "Duedate Ticket"
+msgstr "Προθεσμία Αιτήματος"
+
+msgid "New Ticket Notification"
+msgstr "Ειδοποίηση Νέου Αιτήματος"
+
+msgid "Edit Own Time"
+msgstr "Επεξεργασία της ώρας μου"
+
+msgid "View Feedback"
+msgstr "Προβολή Ανατροφοδότησης"
+
+msgid "Assign Role Permissions"
+msgstr "Εκχώρηση δικαιωμάτων Ρόλου"
+
+msgid "Assign Role To User"
+msgstr "Ανάθεση Ρόλου Στον Χρήστη"
+
+msgid "Add User"
+msgstr "Προσθήκη Χρήστη"
+
+msgid "Edit User"
+msgstr "Επεξεργασία Χρήστη"
+
+msgid "Delete Department"
+msgstr "Διαγραφή Τμήματος"
+
+msgid "View Department"
+msgstr "Προβολή Τμήματος"
+
+msgid "Delete Role"
+msgstr "Διαγραφή Ρόλου"
+
+msgid "Delete User"
+msgstr "Διαγραφή Χρήστη"
+
+msgid "View Role"
+msgstr "Προβολή Ρόλου"
+
+msgid "View User"
+msgstr "Προβολή Χρήστη"
+
+msgid "View Staff Reports"
+msgstr "Προβολή Αναφορών Προσωπικού"
+
+msgid "View Department Reports"
+msgstr "Προβολή Αναφορών Τμήματος"
+
+msgid "View Category"
+msgstr "Προβολή Κατηγορίας"
+
+msgid "View Knowledge Base"
+msgstr "Προβολή Βάσης Γνώσεων"
+
+msgid "Delete Category"
+msgstr "Διαγραφή Κατηγορίας"
+
+msgid "Delete Knowledge Base"
+msgstr "Διαγραφή Βάσης Γνώσεων"
+
+msgid "View FAQ"
+msgstr "Προβολή FAQ"
+
+msgid "Delete FAQ"
+msgstr "Διαγραφή FAQ"
+
+msgid "View Download"
+msgstr "Προβολή Λήψης"
+
+msgid "Delete Download"
+msgstr "Διαγραφή Λήψης"
+
+msgid "View Announcement"
+msgstr "Προβολή Ανακοίνωσης"
+
+msgid "Delete Announcement"
+msgstr "Διαγραφή Ανακοίνωσης"
+
+msgid "Allow Mail System"
+msgstr "Να επιτρέπεται το σύστημα αλληλογραφίας"
+
+msgid "Internal Note Title"
+msgstr "Τίτλος Εσωτερικής Σημείωσης"
+
+msgid "Satisfaction Reports"
+msgstr "Αναφορές Ικανοποίησης"
+
+msgid "Exports"
+msgstr "Εξαγωγές"
+
+msgid "Customer Satisfaction Report"
+msgstr "Αναφορά Ικανοποίησης Πελάτη"
+
+msgid "Please wait installation in progress"
+msgstr "Εκτελείτε Εγκατάσταση... παρακαλώ περιμένετε"
+
+msgid "Show Captcha To Visitor On Form Ticket"
+msgstr "Εμφάνιση Του Captcha Στούς Επισκέπτες Στο Δημιουργία Αιτήματος"
+
+msgid "Feedback Email Settings"
+msgstr "Ρυθμίσεις Email Ανατροφοδοτήσεις"
+
+msgid "Feedback successfully stored message"
+msgstr "Μήνυμα επιτυχημένης αποθήκευσης ανατροφοδότησης"
+
+msgid "Ticket Fields"
+msgstr "Πεδία Αιτήματος"
+
+msgid "Export Tickets"
+msgstr "Εξαγωγή Αιτημάτων"
+
+msgid "High"
+msgstr "Υψηλό"
+
+msgid "Ticket has been unmarked as overdue"
+msgstr "Το αίτημα δεν είναι πια επισημασμένο ως καθυστερημένο"
+
+msgid "Ticket has not been unmarked as overdue"
+msgstr "Το αίτημα είναι ακόμα επισημασμένο ως καθυστερημένο"
+
+msgid "Ticket is unmarked as overdue by"
+msgstr "Το αίτημα έχει επισημανθεί ως μη καθυστερημένο από τον/η"
+
+msgid "Assigned To Me"
+msgstr "Ανατέθηκε Σε Εμένα"
+
+msgid "OK"
+msgstr "ΟΚ"
+
+msgid "JS Support Ticket System"
+msgstr "Σύστημα JS Support Ticket"
+
+msgid "Management"
+msgstr "Διαχείριση"
+
+msgid "Ticket Id"
+msgstr "ID Αιτήματος"
+
+msgid "Assign To"
+msgstr "Ανατέθηκε Στον/η"
+
+msgid "Show on listing"
+msgstr "Εμφάνιση στη λίστα"
+
+msgid "Remarks"
+msgstr "Παρατηρήσεις"
+
+msgid "You are not login"
+msgstr "Δεν είστε συνδεδεμένος"
+
+msgid "Pro Features"
+msgstr "Pro Χαρακτηριστικά"
+
+msgid "Upgrade"
+msgstr "Αναβάθμιση"
+
+msgid "Feature available in pro version only"
+msgstr "Διαθέσιμο στην pro έκδοση μόνο"
+
+msgid "JS Support Ticket Pro Feature"
+msgstr "JS Support Ticket Pro Χαρακτηριστικό"
+
+msgid "Unlimited color tools to desire result"
+msgstr "Απεριόριστα εργαλεία χρωμάτων για το επιθυμητό αποτέλεσμα"
+
+msgid "Access Control Level"
+msgstr "Επίπεδο Ελέγχου Πρόσβασης"
+
+msgid "Access control limit you can limit your staff to do specific task"
+msgstr ""
+"Όριο ελέγχου πρόσβασης, μπορείτε να περιορίσετε το προσωπικό σας ώστε να "
+"κάνει συγκεκριμένη εργασία"
+
+msgid "Staff member create premade message premade available in ticket reply"
+msgstr ""
+"Το μέλος του προσωπικού δημιουργεί προσχεδιασμένο μήνυμα διαθέσιμο σε "
+"απάντηση αιτήματος"
+
+msgid "Staff member can be created and reply your customer tickets"
+msgstr ""
+"Μπορεί να δημιουργηθεί μέλος του προσωπικού και να απαντάει στα αιτήματα "
+"πελατών σας"
+
+msgid "Help topic can be add with respect to departments"
+msgstr "Το θέμα βοήθειας μπορεί να προστεθεί με σεβασμό στα τμήματα"
+
+msgid "You can create and maintain knowledge Base for your ticket system"
+msgstr ""
+"Μπορείτε να δημιουργήσετε και να διατηρήσετε τη βάση γνώσεων για το σύστημα "
+"αιτημάτων σας"
+
+msgid "You can add downloads for your customers"
+msgstr "Μπορείτε να προσθέσετε αρχεία λήψης για τους πελάτες σας"
+
+msgid "You can Manager FAQs"
+msgstr "Μπορείτε να διαχειριστείτε τις συχνές ερωτήσεις - FAQ"
+
+msgid "You can ban and unabn any spam email address"
+msgstr ""
+"Μπορείτε να κάνετε ban και να unban οποιαδήποτε διεύθυνση ηλεκτρονικού "
+"ταχυδρομείου spam"
+
+msgid "If and only if customer not reply certain days ticket marked overdue"
+msgstr ""
+"εάν και μόνο εάν ο πελάτης δεν απαντήσει σε ορισμένων ημερών αίτημα που έχει "
+"σημειωθεί καθυστερημένο"
+
+msgid "System will read your email and create tickets"
+msgstr "Το σύστημα θα διαβάζει τα email σας και θα δημιουργεί αιτήματα"
+
+msgid "Internal notes for staff members and administrator ticket based"
+msgstr "Εσωτερικές σημειώσεις για αιτήματα του προσωπικού και διαχειριστή"
+
+msgid "Assign To Staff"
+msgstr "Ανάθεση στο προσωπικό"
+
+msgid "Ticket can be transferred to any other staff member"
+msgstr ""
+"Το αίτημα μπορεί να μεταφερθεί σε οποιοδήποτε άλλο μέλος του προσωπικού"
+
+msgid "Ticket can also be transferred to any other department"
+msgstr "Το αίτημα μπορεί επίσης να μεταφερθεί σε οποιοδήποτε άλλο τμήμα"
+
+msgid "Activity Log"
+msgstr "Αρχείο Καταγραφής Δραστηριότητας"
+
+msgid "Ticket action history with time and user name"
+msgstr "Ιστορικό ενεργειών αιτημάτων με το χρόνο και το όνομα χρήστη"
+
+msgid "Admin can export tickets in csv format to keep record"
+msgstr ""
+"Ο διαχειριστής μπορεί να κάνει εξαγωγή αιτημάτων σε μορφή csv για την "
+"διατήριση αρχείο"
+
+msgid "Customer Feedback"
+msgstr "Ανατροφοδότηση Πελάτη"
+
+msgid "Customer can provide feedback that can be used to improve services"
+msgstr ""
+"Ο πελάτης μπορεί να παρέχει ανατροφοδότηση που μπορεί να χρησιμοποιηθεί για "
+"τη βελτίωση των υπηρεσιών"
+
+msgid "RTL Supported"
+msgstr "Υποστήριξη RTL"
+
+msgid "JS Support Ticket auto adjusts to RTL or LTR without any problem."
+msgstr ""
+"Το JS Support Ticket προσαρμόζεται αυτόματα σε RTL ή LTR χωρίς κανένα "
+"πρόβλημα."
+
+msgid "Staff Time Tracking"
+msgstr "Παρακολούθηση Χρόνου Προσωπικού"
+
+msgid "Visitor Ticket Open"
+msgstr "Ανοιχτό Αίτημα Επισκέπτη"
+
+msgid "Visitor can also open ticket in you support system"
+msgstr "Ο επισκέπτης μπορεί επίσης να ανοίξει αίτημα στο σύστημα υποστήριξης"
+
+msgid "You can now lock or unlock any ticket for certain time"
+msgstr ""
+"Τώρα μπορείτε να κλειδώσετε ή να ξεκλειδώσετε οποιοδήποτε αίτημα για "
+"ορισμένο χρόνο"
+
+msgid "Pro version only"
+msgstr "Pro έκδοση μόνο"
+
+msgid "Email"
+msgstr "ΗΛΕΚΤΡΟΝΙΚΗ ΔΙΕΥΘΥΝΣΗ"
+
+msgid "This ticket is marked as overdue"
+msgstr "Αυτό το εισιτήριο επισημαίνεται ως εκπρόθεσμο"
+
+msgid "Ticket marked as overdue"
+msgstr "Το εισιτήριο επισημάνθηκε ως εκπρόθεσμο"
+
+msgid "Gmail"
+msgstr "Gmail"
+
+msgid "Yahoo"
+msgstr "Yahoo"
+
+msgid "Aol"
+msgstr "Aol"
+
+msgid "Wget"
+msgstr "Wget"
+
+msgid "Curl"
+msgstr "Μπούκλα"
+
+msgid "PHP Script"
+msgstr "Σενάριο PHP"
+
+msgid "That the grid below the other options select when and how"
+msgstr "Ότι το πλέγμα κάτω από τις άλλες επιλογές επιλέγει πότε και πώς"
+
+msgid "Mail"
+msgstr "Ταχυδρομείο"
+
+msgid "JS Support Ticket"
+msgstr "Εισιτήριο υποστήριξης JS"
+
+msgid "GDPR"
+msgstr "GDPR"
+
+msgid "Premium Addon"
+msgstr "Premium Addon"
+
+msgid "Google Recaptcha"
+msgstr "Google Recaptcha"
+
+msgid "MailChimp"
+msgstr "MailChimp"
+
+msgid "Kb"
+msgstr "Kb"
+
+msgid "UTF Auto Switch"
+msgstr "Αυτόματος διακόπτης UTF"
+
+msgid "SMTP"
+msgstr "SMTP"
+
+msgid "TLS"
+msgstr "TLS"
+
+msgid "SSL"
+msgstr "SSL"
+
+msgid "SMTP Secure"
+msgstr "SMTP Secure"
+
+msgid "50%"
+msgstr "50%"
+
+msgid "100%"
+msgstr "100%"
+
+msgid "S.No"
+msgstr "S.No"
+
+msgid "Premium Addons List"
+msgstr "Λίστα πρόσθετων Premium"
+
+msgid "Features"
+msgstr "Χαρακτηριστικά"
+
+msgid "WooCommerce"
+msgstr "WooCommerce"
+
+msgid "envato"
+msgstr "envato"
+
+msgid "mailchimp"
+msgstr "mailchimp"
+
+msgid "Mailchimp"
+msgstr "Mailchimp"
+
+msgid "fb"
+msgstr "fb"
+
+msgid "JS Help Desk / JS Support Ticket Control Panel"
+msgstr "JS Help Desk / JS Support Ticket Control Panel"
+
+msgid "Captcha"
+msgstr "Captcha"
+
+msgid ":"
+msgstr ":"
+
+msgid "2"
+msgstr "2"
+
+msgid "3"
+msgstr "3"
+
+msgid ","
+msgstr ","
+
+msgid "5.0"
+msgstr "5.0"
+
+msgid "Oooops"
+msgstr "Ουπς"
+
+msgid "Opsss...."
+msgstr "Οψςς...."
+
+msgid "PHP"
+msgstr "PHP"
+
+msgid "1"
+msgstr "1"
+
+msgid "Jerror Alertnoauthor"
+msgstr "Jerror Alertnoσυγγραφέας"
+
+msgid "Num"
+msgstr "Αριθμ"
+
+msgid "Select','js-jobs"
+msgstr "Επιλέξτε','js-jobs"
+
+msgid "JS Support Ticket Pro"
+msgstr "JS Support Ticket Pro"
+
+msgid "Add announcements for your support system"
+msgstr "Προσθέστε ανακοινώσεις για το σύστημα υποστήριξής σας"
+
+msgid "User has been successfully registered"
+msgstr "Ο χρήστης έχει εγγραφεί με επιτυχία"
+
+msgid "Select Form"
+msgstr "Επιλέξτε Φόρμα"
+
+msgid "Envato Purchase Code"
+msgstr "Κωδικός αγοράς Envato"
+
+msgid "Urgent"
+msgstr "Επείγων"
+
+msgid "EDD Order ID"
+msgstr "Αναγνωριστικό παραγγελίας EDD"
+
+msgid "Search keywords"
+msgstr "Αναζήτηση λέξεων-κλειδιών"
+
+msgid "Search title"
+msgstr "Αναζήτηση τίτλου"
+
+msgid "Manager"
+msgstr "Διευθυντής"
+
+msgid "Assign Ticket To Agent"
+msgstr "Εκχώρηση εισιτηρίου σε πράκτορα"
+
+msgid "Mark In Progress"
+msgstr "Σημείωση σε εξέλιξη"
+
+msgid "Change Ticket Priority"
+msgstr "Αλλαγή προτεραιότητας εισιτηρίου"
+
+msgid "Ban Email And Close Ticket"
+msgstr "Απαγόρευση email και κλείσιμο εισιτηρίου"
+
+msgid "Release Ticket"
+msgstr "Εισιτήριο έκδοσης"
+
+msgid "View Credentials"
+msgstr "Προβολή διαπιστευτηρίων"
+
+msgid "Edit Credentials"
+msgstr "Επεξεργασία διαπιστευτηρίων"
+
+msgid "Mark Non Premium"
+msgstr "Mark Non Premium"
+
+msgid "Link To Paid Support"
+msgstr "Σύνδεσμος για υποστήριξη επί πληρωμή"
+
+msgid "Export Ticket not translate"
+msgstr "Το εισιτήριο εξαγωγής δεν μεταφράζεται"
+
+msgid "Edit Help Topic not translate"
+msgstr "Επεξεργασία Βοήθειας Το θέμα δεν μεταφράζεται"
+
+msgid "View Help Topic"
+msgstr "Προβολή θέματος βοήθειας"
+
+msgid "Delete Help Topic"
+msgstr "Διαγραφή θέματος βοήθειας"
+
+msgid "Edit Canned Response"
+msgstr "Επεξεργασία κονσέρβας απάντησης"
+
+msgid "View Canned Response"
+msgstr "Προβολή κονσέρβας απάντησης"
+
+msgid "Delete Canned Response"
+msgstr "Διαγραφή Canned Response"
+
+msgid "Standard"
+msgstr "Πρότυπο"
+
+msgid "Default with auto assign"
+msgstr "Προεπιλογή με αυτόματη εκχώρηση"
+
+msgid "Visible"
+msgstr "Ορατός"
+
+msgid "Select Visible"
+msgstr "Επιλέξτε Ορατό"
+
+msgid "Logedin user"
+msgstr "Συνδεδεμένος χρήστης"
+
+msgid "Logedin user only"
+msgstr "Μόνο συνδεδεμένος χρήστης"
+
+msgid "visitor"
+msgstr "επισκέπτης"
+
+msgid "Single Header"
+msgstr "Ενιαία κεφαλίδα"
+
+msgid "Multiple Header"
+msgstr "Πολλαπλή κεφαλίδα"
+
+msgid "Quick installation Guide"
+msgstr "Οδηγός γρήγορης εγκατάστασης"
+
+msgid "How to setup"
+msgstr "Πώς να ρυθμίσετε"
+
+msgid "Ticket Creation"
+msgstr "Δημιουργία εισιτηρίου"
+
+msgid "Custom Fields"
+msgstr "Προσαρμοσμένα πεδία"
+
+msgid "Email Notification Problems"
+msgstr "Προβλήματα ειδοποίησης μέσω email"
+
+msgid "arrow"
+msgstr "βέλος"
+
+msgid "close"
+msgstr "Κλείσε"
+
+msgid "Multiform"
+msgstr "Πολύμορφος"
+
+msgid "Add WP Users"
+msgstr "Προσθήκη χρηστών WP"
+
+msgid "Other Products"
+msgstr "Αλλα προϊόντα"
+
+msgid "watch video"
+msgstr "Δες το βίντεο"
+
+msgid "Get"
+msgstr "Παίρνω"
+
+msgid "This prefix will be added to slug incase of homepage links"
+msgstr ""
+"Αυτό το πρόθεμα θα προστεθεί στο slug incase των συνδέσμων αρχικής σελίδας"
+
+msgid " This prefix will be added to slug incase of conflict"
+msgstr "Αυτό το πρόθεμα θα προστεθεί στο γυμνοσάλιαγκο σε περίπτωση σύγκρουσης"
+
+msgid "Reset All"
+msgstr "Επαναφορά όλων"
+
+msgid "Search By Slug"
+msgstr "Αναζήτηση κατά Slug"
+
+msgid "Slug List"
+msgstr "Λίστα γυμνοσάλιαγκων"
+
+msgid "This button will only save slugs on current page"
+msgstr "Αυτό το κουμπί θα αποθηκεύσει μόνο γυμνοσάλιαγκες στην τρέχουσα σελίδα"
+
+msgid "Slug"
+msgstr "Γυμνοσάλιαγκας"
+
+msgid "Export Style"
+msgstr "Στυλ εξαγωγής"
+
+msgid "Add Multiform"
+msgstr "Προσθήκη πολλαπλών μορφών"
+
+msgid "Edit Fields"
+msgstr "Επεξεργασία πεδίων"
+
+msgid "Save Multiform"
+msgstr "Αποθήκευση πολλαπλών μορφών"
+
+msgid "Conditions"
+msgstr "Συνθήκες"
+
+msgid "Add Conditions"
+msgstr "Προσθήκη Προϋποθέσεων"
+
+msgid "Rule Title"
+msgstr "Τίτλος κανόνα"
+
+msgid "Agent Auto Assign"
+msgstr "Agent Auto Assign"
+
+msgid "Add Rule"
+msgstr "Προσθήκη κανόνα"
+
+msgid "Condition Title"
+msgstr "Τίτλος συνθήκης"
+
+msgid "Condition Operator"
+msgstr "Χειριστής κατάστασης"
+
+msgid "Condition value"
+msgstr "Αξία κατάστασης"
+
+msgid "Select Condition Title"
+msgstr "Επιλέξτε Τίτλος συνθήκης"
+
+msgid "Submit Type"
+msgstr "Τύπος υποβολής"
+
+msgid "Select Condition Operator"
+msgstr "Επιλέξτε Χειριστής κατάστασης"
+
+msgid "Contain"
+msgstr "Περιέχω"
+
+msgid "Matched"
+msgstr "Ταίριαξε"
+
+msgid "Equal"
+msgstr "Ισος"
+
+msgid "No Value found"
+msgstr "Δεν βρέθηκε τιμή"
+
+msgid "No Operator found"
+msgstr "Δεν βρέθηκε χειριστής"
+
+msgid "Add more Condition"
+msgstr "Προσθήκη περισσότερων Συνθηκών"
+
+msgid "Save Rule"
+msgstr "Αποθήκευση κανόνα"
+
+msgid "Delete Condition"
+msgstr "Συνθήκη διαγραφής"
+
+msgid "Add Ticket Using Multiform"
+msgstr "Προσθήκη εισιτηρίου με χρήση πολλαπλών μορφών"
+
+msgid "Addons Status"
+msgstr "Κατάσταση πρόσθετων"
+
+msgid "Activated"
+msgstr "Ενεργοποιήθηκε"
+
+msgid "Deactivate"
+msgstr "Απενεργοποίηση"
+
+msgid "Updated"
+msgstr "ΕΠΙΚΑΙΡΟΠΟΙΗΜΕΝΟ"
+
+msgid "Deactivated"
+msgstr "Απενεργοποιήθηκε"
+
+msgid "Activate"
+msgstr "Δραστηριοποιώ"
+
+msgid "New Update Version"
+msgstr "Νέα έκδοση ενημέρωσης"
+
+msgid "is Available"
+msgstr "είναι διαθέσιμο"
+
+msgid "Expired"
+msgstr "έχει λήξει"
+
+msgid "Buy Now"
+msgstr "Αγορασε τωρα"
+
+msgid "Help"
+msgstr "Βοήθεια"
+
+msgid "Update Now"
+msgstr "Ενημέρωση τώρα"
+
+msgid "Add-On’s For Help Desk"
+msgstr "Πρόσθετα για Help Desk"
+
+msgid ""
+"Get trusted WordPress add on’s. Guaranteed to work fast, safe to use, "
+"beautifully coded, packed with features and easy to use."
+msgstr ""
+"Αποκτήστε αξιόπιστα πρόσθετα WordPress. Εγγυημένη για γρήγορη λειτουργία, "
+"ασφαλή στη χρήση, όμορφα κωδικοποιημένη, γεμάτη με χαρακτηριστικά και εύκολη "
+"στη χρήση."
+
+msgid "Save big with an exclusive membership plan today!"
+msgstr "Εξοικονομήστε χρήματα με ένα αποκλειστικό πρόγραμμα συνδρομής σήμερα!"
+
+msgid "show bundle pack"
+msgstr "εμφάνιση πακέτου δέσμης"
+
+msgid ""
+"Add agents and assign roles and permissions to provide assistance and "
+"support to customer support tickets."
+msgstr ""
+"Προσθέστε αντιπροσώπους και εκχωρήστε ρόλους και δικαιώματα για την παροχή "
+"βοήθειας και υποστήριξης σε εισιτήρια υποστήριξης πελατών."
+
+msgid ""
+"Define rules for ticket to auto close. Ticket will be auto close after "
+"specific interval of time which can be set by admin."
+msgstr ""
+"Καθορίστε κανόνες για το αυτόματο κλείσιμο του εισιτηρίου. Το εισιτήριο θα "
+"κλείσει αυτόματα μετά από συγκεκριμένο χρονικό διάστημα που μπορεί να ορίσει "
+"ο διαχειριστής."
+
+msgid ""
+"Get the survey from your customers on ticket closing to improve your quality "
+"of services and assistance."
+msgstr ""
+"Λάβετε την έρευνα από τους πελάτες σας για το κλείσιμο εισιτηρίων για να "
+"βελτιώσετε την ποιότητα των υπηρεσιών και της βοήθειάς σας."
+
+msgid "Helptopic"
+msgstr "Βοηθητικό θέμα"
+
+msgid ""
+"Help topics help users to find and select the area with which they need "
+"assistance."
+msgstr ""
+"Τα θέματα βοήθειας βοηθούν τους χρήστες να βρουν και να επιλέξουν την "
+"περιοχή με την οποία χρειάζονται βοήθεια."
+
+msgid ""
+"The private note is used as reminders or to give other agents insights into "
+"the ticket issue. User Won't see the private notes."
+msgstr ""
+"Το ιδιωτικό σημείωμα χρησιμοποιείται ως υπενθυμίσεις ή για να δώσει σε "
+"άλλους πράκτορες πληροφορίες σχετικά με το ζήτημα του εισιτηρίου. Ο χρήστης "
+"δεν θα δει τις ιδιωτικές σημειώσεις."
+
+msgid ""
+"Stop losing productivity on repetitive queries,Build your knowledge base, "
+"group solutions by topics to facilitate users."
+msgstr ""
+"Σταματήστε να χάνετε την παραγωγικότητα σε επαναλαμβανόμενα ερωτήματα, "
+"Δημιουργήστε τη βάση γνώσεων σας, ομαδοποιήστε λύσεις ανά θέματα για να "
+"διευκολύνετε τους χρήστες."
+
+msgid ""
+"Enables admin to set N numbers of tickets for users to create and set N "
+"numbers of Ticket to open for agents separately."
+msgstr ""
+"Επιτρέπει στον διαχειριστή να ορίσει N αριθμούς εισιτηρίων για να "
+"δημιουργήσουν οι χρήστες και να ορίσει N αριθμούς εισιτηρίων ώστε να "
+"ανοίγουν ξεχωριστά για πράκτορες."
+
+msgid "Multi Language Email Templates"
+msgstr "Πρότυπα email πολλαπλών γλωσσών"
+
+msgid ""
+"It allows to create language-based email templates for all JS Help Desk "
+"email templates."
+msgstr ""
+"Επιτρέπει τη δημιουργία προτύπων email που βασίζονται σε γλώσσα για όλα τα "
+"πρότυπα email του Γραφείου βοήθειας JS."
+
+msgid ""
+"Canned Responses are pre-populated messages that allows support agents to "
+"respond quickly to customer issues."
+msgstr ""
+"Οι Canned Responses είναι προσυμπληρωμένα μηνύματα που επιτρέπουν στους "
+"αντιπροσώπους υποστήριξης να ανταποκρίνονται γρήγορα σε ζητήματα πελατών."
+
+msgid ""
+"Enables users to reply to the tickets via email without the need to login to "
+"the support system first."
+msgstr ""
+"Επιτρέπει στους χρήστες να απαντούν στα εισιτήρια μέσω email χωρίς να "
+"χρειάζεται να συνδεθούν πρώτα στο σύστημα υποστήριξης."
+
+msgid ""
+"Make unlimited announcements associated with support system to get customer "
+"interaction."
+msgstr ""
+"Κάντε απεριόριστες ανακοινώσεις που σχετίζονται με το σύστημα υποστήριξης "
+"για να έχετε την αλληλεπίδραση με τους πελάτες."
+
+msgid ""
+"Ban Email allows you to block email of any user to restrict him to create "
+"new tickets."
+msgstr ""
+"Το Ban Email σάς επιτρέπει να αποκλείσετε το email οποιουδήποτε χρήστη για "
+"να τον περιορίσετε στη δημιουργία νέων εισιτηρίων."
+
+msgid "Descktop Notifications"
+msgstr "Ειδοποιήσεις επιφάνειας εργασίας"
+
+msgid ""
+"Save the ticket as a PDF in your system or the admin will also be able to "
+"export all the data inside of Ticket."
+msgstr ""
+"Αποθηκεύστε το εισιτήριο ως PDF στο σύστημά σας ή ο διαχειριστής θα μπορεί "
+"επίσης να εξάγει όλα τα δεδομένα μέσα στο Ticket."
+
+msgid ""
+"Tired of getting tickets about the same problems? Add FAQs to drastically "
+"reduce the number of common questions from users."
+msgstr ""
+"Κουραστήκατε να βγάζετε εισιτήρια για τα ίδια προβλήματα; Προσθέστε συχνές "
+"ερωτήσεις για να μειώσετε δραστικά τον αριθμό των κοινών ερωτήσεων από τους "
+"χρήστες."
+
+msgid "Admin Widgets"
+msgstr "Γραφικά στοιχεία διαχειριστή"
+
+msgid ""
+"Use internal email to send emails to one agent to another agent with in "
+"support ticket."
+msgstr ""
+"Χρησιμοποιήστε εσωτερικό email για να στείλετε μηνύματα ηλεκτρονικού "
+"ταχυδρομείου σε έναν πράκτορα σε έναν άλλο πράκτορα με το εισιτήριο "
+"υποστήριξης."
+
+msgid "Front-End Widget"
+msgstr "Γραφικό στοιχείο Front-End"
+
+msgid ""
+"Paid Support is the easiest way to integrate and manage payments for your "
+"support tickets."
+msgstr ""
+"Η υποστήριξη επί πληρωμή είναι ο ευκολότερος τρόπος για να ενσωματώσετε και "
+"να διαχειριστείτε τις πληρωμές για τα εισιτήρια υποστήριξής σας."
+
+msgid "Mail Chimp"
+msgstr "Mailchimp"
+
+msgid ""
+"The Mail Chimp add-on adds a new checkbox to the registration form for "
+"prompting new users to subscribe your email-list."
+msgstr ""
+"Το πρόσθετο Mail Chimp προσθέτει ένα νέο πλαίσιο ελέγχου στη φόρμα εγγραφής "
+"για να προτρέπει τους νέους χρήστες να εγγραφούν στη λίστα email σας."
+
+msgid ""
+"EDD offers customers to open new tickets just one click from their EDD "
+"account with optionally validating the license keys."
+msgstr ""
+"Η EDD προσφέρει στους πελάτες να ανοίγουν νέα εισιτήρια μόνο με ένα κλικ από "
+"τον λογαριασμό τους EDD με προαιρετική επικύρωση των κλειδιών άδειας χρήσης."
+
+msgid "email cc"
+msgstr "email cc"
+
+msgid "Email Cc"
+msgstr "Email Κοιν"
+
+msgid ""
+"CC(Carbon Copy) - the people who should know about the information which is "
+"being shared and the people included are able to see who is there in the "
+"list."
+msgstr ""
+"CC (Carbon Copy) - τα άτομα που πρέπει να γνωρίζουν για τις πληροφορίες που "
+"μοιράζονται και τα άτομα που περιλαμβάνονται μπορούν να δουν ποιος είναι "
+"εκεί στη λίστα."
+
+msgid "multiform"
+msgstr "πολύμορφος"
+
+msgid "Multiform allows user to add more than one form based on requirements."
+msgstr ""
+"Το Multiform επιτρέπει στον χρήστη να προσθέσει περισσότερες από μία φόρμες "
+"με βάση τις απαιτήσεις."
+
+msgid "agent auto assign"
+msgstr "αυτόματη εκχώρηση πράκτορα"
+
+msgid ""
+"When auto assignment is enabled and a ticket is created, an appropriate "
+"agent is automatically assigned to the ticket and it is moved to the "
+"Assigned state."
+msgstr ""
+"Όταν είναι ενεργοποιημένη η αυτόματη εκχώρηση και δημιουργείται ένα "
+"εισιτήριο, ένας κατάλληλος πράκτορας εκχωρείται αυτόματα στο εισιτήριο και "
+"μεταφέρεται στην κατάσταση Εκχώρησης."
+
+msgid "Social Login"
+msgstr "Κοινωνική Είσοδος"
+
+msgid ""
+"Users can login from their social media accounts. They can create a new "
+"account or use social media accounts."
+msgstr ""
+"Οι χρήστες μπορούν να συνδεθούν από τους λογαριασμούς τους στα μέσα "
+"κοινωνικής δικτύωσης. Μπορούν να δημιουργήσουν έναν νέο λογαριασμό ή να "
+"χρησιμοποιήσουν λογαριασμούς μέσων κοινωνικής δικτύωσης."
+
+msgid "JS Help Desk Add-Ons Bundle Pack"
+msgstr "Πακέτο πακέτου πρόσθετων γραφείου βοήθειας JS"
+
+msgid "Basic"
+msgstr "Βασικός"
+
+msgid "Unlimited Agents"
+msgstr "Απεριόριστοι πράκτορες"
+
+msgid "Show all"
+msgstr "Προβολή όλων"
+
+msgid "Everything in basic included and"
+msgstr "Τα πάντα στα βασικά περιλαμβάνονται και"
+
+msgid "Professional"
+msgstr "Επαγγελματίας"
+
+msgid "Everything in standard included and"
+msgstr "Όλα στο στάνταρ περιλαμβάνονται και"
+
+msgid "All Future Addons"
+msgstr "Όλα τα μελλοντικά πρόσθετα"
+
+msgid ""
+"Hey there! We have recently launched a fresh update for the add-ons. Don't "
+"forget to update the add-ons to enjoy the greatest features!"
+msgstr ""
+"Γεια σου! Πρόσφατα κυκλοφορήσαμε μια νέα ενημέρωση για τα πρόσθετα. Μην "
+"ξεχάσετε να ενημερώσετε τα πρόσθετα για να απολαύσετε τις καλύτερες "
+"δυνατότητες!"
+
+msgid "View Addone Status"
+msgstr "Προβολή κατάστασης Addone"
+
+msgid "slug for ticket page"
+msgstr "γυμνοσάλιαγκος για σελίδα εισιτηρίου"
+
+msgid "slug for agent add ticket page"
+msgstr "γυμνοσάλιαγκος για πράκτορα προσθήκη σελίδας εισιτηρίου"
+
+msgid "slug for rolepermission page"
+msgstr "γυμνοσάλιαγκος για τη σελίδα άδειας ρόλου"
+
+msgid "slug for add announcement"
+msgstr "γυμνοσάλιαγκας για προσθήκη ανακοίνωσης"
+
+msgid "slug for add department page"
+msgstr "γυμνοσάλιαγκος για προσθήκη σελίδας τμήματος"
+
+msgid "slug for add download page"
+msgstr "γυμνοσάλιαγκος για προσθήκη σελίδας λήψης"
+
+msgid "slug for add faq page"
+msgstr "γυμνοσάλιαγκος για προσθήκη σελίδας faq"
+
+msgid "slug for faq page"
+msgstr "γυμνοσάλιαγκος για σελίδα faq"
+
+msgid "slug for add article page"
+msgstr "γυμνοσάλιαγκος για προσθήκη σελίδας άρθρου"
+
+msgid "slug for add category page"
+msgstr "γυμνοσάλιαγκος για προσθήκη σελίδας κατηγορίας"
+
+msgid "slug for user knowledgebase articles page"
+msgstr "slug για τη σελίδα άρθρων της βάσης γνώσεων χρήστη"
+
+msgid "slug for article detail page"
+msgstr "γυμνοσάλιαγκος για σελίδα λεπτομερειών άρθρου"
+
+msgid "slug for add role page"
+msgstr "γυμνοσάλιαγκος για προσθήκη σελίδας ρόλου"
+
+msgid "slug for add agent page"
+msgstr "γυμνοσάλιαγκος για προσθήκη σελίδας πράκτορα"
+
+msgid "slug for agent permissions page"
+msgstr "γυμνοσάλιαγκος για τη σελίδα αδειών πράκτορα"
+
+msgid "slug for my tickets page"
+msgstr "γυμνοσάλιαγκος για τη σελίδα των εισιτηρίων μου"
+
+msgid "slug for agent my tickets page"
+msgstr "γυμνοσάλιαγκος για πράκτορα σελίδα εισιτηρίων μου"
+
+msgid "slug for knowledgebase page"
+msgstr "γυμνοσάλιαγκος για τη σελίδα βάσης γνώσεων"
+
+msgid "slug for agent categories page"
+msgstr "γυμνοσάλιαγκος για τη σελίδα κατηγοριών πρακτόρων"
+
+msgid "slug for agent kb articles page"
+msgstr "γυμνοσάλιαγκος για τη σελίδα άρθρων agent kb"
+
+msgid "slug for agent announcements page"
+msgstr "γυμνοσάλιαγκος για τη σελίδα ανακοινώσεων πρακτόρων"
+
+msgid "slug for agent downloads page"
+msgstr "slug for agent λήψεις σελίδα"
+
+msgid "slug for agent faqs page"
+msgstr "γυμνοσάλιαγκος για τη σελίδα faqs του πράκτορα"
+
+msgid "slug for add ticket page"
+msgstr "γυμνοσάλιαγκος για προσθήκη σελίδας εισιτηρίου"
+
+msgid "slug for ticket status page"
+msgstr "γυμνοσάλιαγκος για σελίδα κατάστασης εισιτηρίου"
+
+msgid "slug for controlpanel"
+msgstr "γυμνοσάλιαγκας για τον πίνακα ελέγχου"
+
+msgid "slug for agent report detail page"
+msgstr "γυμνοσάλιαγκος για σελίδα λεπτομερειών αναφοράς πράκτορα"
+
+msgid "slug for agent reports page"
+msgstr "γυμνοσάλιαγκος για τη σελίδα αναφορών πράκτορα"
+
+msgid "slug for department reports page"
+msgstr "γυμνοσάλιαγκος για τη σελίδα αναφορών τμήματος"
+
+msgid "slug for announcement detail page"
+msgstr "γυμνοσάλιαγκος για σελίδα λεπτομερειών ανακοίνωσης"
+
+msgid "slug for feedback page"
+msgstr "γυμνοσάλιαγκος για σελίδα σχολίων"
+
+msgid "slug for agent feedbacks page"
+msgstr "γυμνοσάλιαγκος για τη σελίδα σχολίων πρακτόρων"
+
+msgid "slug for visitor message page"
+msgstr "γυμνοσάλιαγκος για σελίδα μηνύματος επισκέπτη"
+
+msgid "slug for add help topic page"
+msgstr "γυμνοσάλιαγκος για προσθήκη σελίδας θέματος βοήθειας"
+
+msgid "slug for agent help topics page"
+msgstr "γυμνοσάλιαγκος για τη σελίδα θεμάτων βοήθειας πράκτορα"
+
+msgid "slug for add canned response page"
+msgstr "γυμνοσάλιαγκος για προσθήκη σελίδας απόκρισης σε κονσέρβα"
+
+msgid "slug for agent canned responses page"
+msgstr "γυμνοσάλιαγκος για τον πράκτορα κονσερβοποιημένη σελίδα απαντήσεων"
+
+msgid "slug for gdpr data compliance actions1"
+msgstr "γυμνοσάλιαγκος για ενέργειες συμμόρφωσης δεδομένων Gdpr1"
+
+msgid "slug for print ticket page"
+msgstr "γυμνοσάλιαγκος για εκτύπωση σελίδα εισιτηρίου"
+
+msgid "slug for my profile page"
+msgstr "γυμνοσάλιαγκας για τη σελίδα του προφίλ μου"
+
+msgid "slug for login page"
+msgstr "γυμνοσάλιαγκος για σελίδα σύνδεσης"
+
+msgid "slug for user register page"
+msgstr "slug για σελίδα εγγραφής χρήστη"
+
+msgid "slug for add message page"
+msgstr "γυμνοσάλιαγκος για προσθήκη σελίδας μηνύματος"
+
+msgid "slug for message detail page"
+msgstr "γυμνοσάλιαγκος για τη σελίδα λεπτομερειών μηνύματος"
+
+msgid "slug for message inbox page"
+msgstr "γυμνοσάλιαγκος για τη σελίδα εισερχομένων μηνυμάτων"
+
+msgid "slug for message outbox page"
+msgstr "γυμνοσάλιαγκος για τη σελίδα εξερχόμενων μηνυμάτων"
+
+msgid "slug for roles page"
+msgstr "σελίδα γυμνοσάλιαγκας για ρόλους"
+
+msgid "slug for agent page"
+msgstr "γυμνοσάλιαγκος για σελίδα πράκτορα"
+
+msgid "slug for departments page"
+msgstr "σελίδα γυμνοσάλιαγκος για τμήματα"
+
+msgid "slug for announcements page"
+msgstr "γυμνοσάλιαγκος για τη σελίδα ανακοινώσεων"
+
+msgid "slug for downloads page"
+msgstr "slug για λήψεις σελίδα"
+
+msgid "slug for faqs page"
+msgstr "γυμνοσάλιαγκος για σελίδα faqs"
+
+msgid "API key is required for linkedin app"
+msgstr "Απαιτείται κλειδί API για την εφαρμογή linkedin"
+
+msgid "API Key"
+msgstr "Κλειδί API"
+
+msgid "secret key"
+msgstr "μυστικό κλειδί"
+
+msgid "Secret"
+msgstr "Μυστικό"
+
+msgid "Facebook user can login in js support ticket"
+msgstr "Ο χρήστης του Facebook μπορεί να συνδεθεί στο εισιτήριο υποστήριξης js"
+
+msgid "Login With Linkedin"
+msgstr "Είσοδος με το Linkedin"
+
+msgid "API key is required for facebook app"
+msgstr "Απαιτείται κλειδί API για την εφαρμογή facebook"
+
+msgid "Login with linkedin"
+msgstr "Συνδεθείτε με το linkedin"
+
+msgid "Login with facebook"
+msgstr "Σύνδεση με το Facebook"
+
+msgid "Create User via email"
+msgstr "Δημιουργία χρήστη μέσω email"
+
+msgid "Export Ticket"
+msgstr "Εισιτήριο εξαγωγής"
+
+msgid "Ticket Listing"
+msgstr "Καταχώρηση εισιτηρίων"
+
+msgid "Visitor Ticket Setting"
+msgstr "Ρύθμιση εισιτηρίου επισκεπτών"
+
+msgid ""
+"By enabling this option, a user can know to whom the ticket has been "
+"assigned."
+msgstr ""
+"Με την ενεργοποίηση αυτής της επιλογής, ένας χρήστης μπορεί να γνωρίζει σε "
+"ποιον έχει εκχωρηθεί το εισιτήριο."
+
+msgid "Assigned info. on admin tickets"
+msgstr "Ανατεθειμένες πληροφορίες. στα εισιτήρια διαχειριστή"
+
+msgid ""
+"By enabling this option, an agent can know to whom the ticket has been "
+"assigned."
+msgstr ""
+"Ενεργοποιώντας αυτήν την επιλογή, ένας πράκτορας μπορεί να γνωρίζει σε ποιον "
+"έχει εκχωρηθεί το εισιτήριο."
+
+msgid "Assigned info. on user tickets"
+msgstr "Ανατεθειμένες πληροφορίες. στα εισιτήρια χρηστών"
+
+msgid ""
+"By enabling this option, an admin can know to whom the ticket has been "
+"assigned."
+msgstr ""
+"Ενεργοποιώντας αυτήν την επιλογή, ένας διαχειριστής μπορεί να γνωρίζει σε "
+"ποιον έχει εκχωρηθεί το εισιτήριο."
+
+msgid "Assigned info. on agent tickets"
+msgstr "Ανατεθειμένες πληροφορίες. στα εισιτήρια πρακτόρων"
+
+msgid ""
+"By enabling this option, a user can know who closed the ticket and when that "
+"ticket closed."
+msgstr ""
+"Ενεργοποιώντας αυτήν την επιλογή, ένας χρήστης μπορεί να γνωρίζει ποιος "
+"έκλεισε το εισιτήριο και πότε έκλεισε αυτό το εισιτήριο."
+
+msgid "Closed info. on admin closed tickets"
+msgstr "Κλειστές πληροφορίες. στα κλειστά εισιτήρια διαχειριστή"
+
+msgid ""
+"By enabling this option, an agent can know who closed the ticket and when "
+"that ticket closed."
+msgstr ""
+"Ενεργοποιώντας αυτήν την επιλογή, ένας πράκτορας μπορεί να γνωρίζει ποιος "
+"έκλεισε το εισιτήριο και πότε έκλεισε αυτό το εισιτήριο."
+
+msgid "Closed info. on agent closed tickets"
+msgstr "Κλειστές πληροφορίες. σε κλειστά εισιτήρια πράκτορα"
+
+msgid ""
+"By enabling this option, an admin can know who closed the ticket and when "
+"that ticket closed."
+msgstr ""
+"Ενεργοποιώντας αυτήν την επιλογή, ένας διαχειριστής μπορεί να γνωρίζει ποιος "
+"έκλεισε το εισιτήριο και πότε έκλεισε αυτό το εισιτήριο."
+
+msgid "Set default sorting for ticket listing"
+msgstr "Ορίστε την προεπιλεγμένη ταξινόμηση για τη λίστα εισιτηρίων"
+
+msgid "Ascending"
+msgstr "Αύξουσα"
+
+msgid "Descending"
+msgstr "Φθίνων"
+
+msgid "Ticket listing sorting"
+msgstr "Ταξινόμηση λίστας εισιτηρίων"
+
+msgid "Select whether users can see the ticket delete button"
+msgstr "Επιλέξτε εάν οι χρήστες μπορούν να δουν το κουμπί διαγραφής εισιτηρίου"
+
+msgid "Show ticket delete button"
+msgstr "Εμφάνιση κουμπιού διαγραφής εισιτηρίου"
+
+msgid ""
+"Select whether users can see the name of administrator or staff member on "
+"ticket reply"
+msgstr ""
+"Επιλέξτε εάν οι χρήστες μπορούν να δουν το όνομα του διαχειριστή ή του "
+"μέλους του προσωπικού στην απάντηση του εισιτηρίου"
+
+msgid "Show Anonymous Name On Ticket Reply"
+msgstr "Εμφάνιση ανώνυμου ονόματος στην απάντηση του εισιτηρίου"
+
+msgid ""
+"Select whether users can see the email of administrator or agent on ticket "
+"reply"
+msgstr ""
+"Επιλέξτε εάν οι χρήστες μπορούν να δουν το email του διαχειριστή ή του "
+"πράκτορα στην απάντηση του εισιτηρίου"
+
+msgid "Show Admin OR Agent Email On Ticket Reply"
+msgstr "Εμφάνιση email Admin Ή Agent στο Ticket Reply"
+
+msgid ""
+"Show or hide the multiform popup when creating a new ticket. if you hide "
+"them, the system will open the default form."
+msgstr ""
+"Εμφάνιση ή απόκρυψη του αναδυόμενου παραθύρου πολλαπλών μορφών κατά τη "
+"δημιουργία ενός νέου εισιτηρίου. Εάν τα αποκρύψετε, το σύστημα θα ανοίξει "
+"την προεπιλεγμένη φόρμα."
+
+msgid "Multiforms Popup For New Tickets"
+msgstr "Αναδυόμενο παράθυρο πολλαπλών μορφών για νέα εισιτήρια"
+
+msgid "Set suffix for custom ticketid"
+msgstr "Ορίστε επίθημα για προσαρμοσμένο εισιτήριο"
+
+msgid "Ticketid Suffix"
+msgstr "Επίθημα Ticketid"
+
+msgid "Set ticketid sequential or random .e.g"
+msgstr "Ορίστε σειριακά ή τυχαία εισιτήρια .π.χ"
+
+msgid "Set prefix for custom ticketid"
+msgstr "Ορισμός προθέματος για προσαρμοσμένο εισιτήριο"
+
+msgid "Ticketid Prefix"
+msgstr "Πρόθεμα Ticketid"
+
+msgid "Support Icons"
+msgstr "Εικονίδια υποστήριξης"
+
+msgid "Set custom support text"
+msgstr "Ορίστε προσαρμοσμένο κείμενο υποστήριξης"
+
+msgid "Set custom support image"
+msgstr "Ορισμός προσαρμοσμένης εικόνας υποστήριξης"
+
+msgid "Custom Image"
+msgstr "Προσαρμοσμένη εικόνα"
+
+msgid "JS Help Desk Register Page"
+msgstr "Σελίδα εγγραφής γραφείου βοήθειας JS"
+
+msgid "WordPress Default Login Page"
+msgstr "Προεπιλεγμένη σελίδα σύνδεσης WordPress"
+
+msgid "JS Help Desk Login Page"
+msgstr "Σελίδα σύνδεσης JS Help Desk"
+
+msgid "Set register Link"
+msgstr "Ορισμός συνδέσμου εγγραφής"
+
+msgid "We are here to help you"
+msgstr "Είμαστε εδώ για να σας βοηθήσουμε"
+
+msgid "Help icon"
+msgstr "εικονίδιο βοήθειας"
+
+msgid ""
+"JS Help Desk is a professional, simple, easy to use and complete customer "
+"support system."
+msgstr ""
+"Το JS Help Desk είναι ένα επαγγελματικό, απλό, εύχρηστο και πλήρες σύστημα "
+"υποστήριξης πελατών."
+
+msgid "View all videos"
+msgstr "Δείτε όλα τα βίντεο"
+
+msgid "Video icon"
+msgstr "Εικονίδιο βίντεο"
+
+msgid "View All Videos"
+msgstr "Προβολή όλων των βίντεο"
+
+msgid "Help Desk icon"
+msgstr "Εικονίδιο Help Desk"
+
+msgid "JS Help Desk Support"
+msgstr "Υποστήριξη γραφείου βοήθειας JS"
+
+msgid ""
+"JS Help Desk delivers timely customer support if you have any query then "
+"we're here to show you the way."
+msgstr ""
+"Το JS Help Desk παρέχει έγκαιρη υποστήριξη πελατών εάν έχετε οποιοδήποτε "
+"ερώτημα, τότε είμαστε εδώ για να σας δείξουμε τον τρόπο."
+
+msgid "Visitor ticket creation"
+msgstr "Δημιουργία εισιτηρίου επισκεπτών"
+
+msgid "How to set ticket auto close"
+msgstr "Πώς να ρυθμίσετε το αυτόματο κλείσιμο εισιτηρίων"
+
+msgid "How to reopen closed ticket"
+msgstr "Πώς να ανοίξετε ξανά κλειστό εισιτήριο"
+
+msgid "How to lock a ticket"
+msgstr "Πώς να κλειδώσετε ένα εισιτήριο"
+
+msgid "How to add private note"
+msgstr "Πώς να προσθέσετε ιδιωτική σημείωση"
+
+msgid "View ticket history"
+msgstr "Δείτε το ιστορικό εισιτηρίων"
+
+msgid "How to setup custom fields"
+msgstr "Πώς να ρυθμίσετε προσαρμοσμένα πεδία"
+
+msgid "Set ticket auto overdue"
+msgstr "Ορισμός αυτόματης καθυστέρησης εισιτηρίου"
+
+msgid "Manually set ticket overdue"
+msgstr "Μη αυτόματη ρύθμιση εισιτηρίου με καθυστέρηση"
+
+msgid "How to merge tickets"
+msgstr "Πώς να συγχωνεύσετε εισιτήρια"
+
+msgid "How to export tickets"
+msgstr "Πώς να εξάγετε εισιτήρια"
+
+msgid "How use help topic"
+msgstr "Πώς να χρησιμοποιήσετε το θέμα βοήθειας"
+
+msgid "How to change department"
+msgstr "Πώς να αλλάξετε τμήμα"
+
+msgid "How to use multi-forms"
+msgstr "Πώς να χρησιμοποιήσετε πολλαπλές φόρμες"
+
+msgid "How to paid support"
+msgstr "Πώς να πληρώσετε υποστήριξη"
+
+msgid "How to use canned response"
+msgstr "Πώς να χρησιμοποιήσετε την κονσερβοποιημένη απόκριση"
+
+msgid "How to add private credentials"
+msgstr "Πώς να προσθέσετε ιδιωτικά διαπιστευτήρια"
+
+msgid "How to ban/unban user"
+msgstr "Τρόπος αποκλεισμού/κατάργησης αποκλεισμού χρήστη"
+
+msgid "Agent system"
+msgstr "Σύστημα αντιπροσώπων"
+
+msgid "Manually assign ticket to agen"
+msgstr "Χειροκίνητη εκχώρηση εισιτηρίου στην εταιρεία"
+
+msgid "How to edit time"
+msgstr "Πώς να επεξεργαστείτε την ώρα"
+
+msgid "How to use time tracking"
+msgstr "Πώς να χρησιμοποιήσετε την παρακολούθηση χρόνου"
+
+msgid "How to set max open ticket"
+msgstr "Πώς να ορίσετε το μέγιστο ανοιχτό εισιτήριο"
+
+msgid "How to show counts"
+msgstr "Πώς να εμφανίσετε μετράει"
+
+msgid "How to set Captcha"
+msgstr "Πώς να ρυθμίσετε το Captcha"
+
+msgid "User options"
+msgstr "Επιλογές χρήστη"
+
+msgid "How to set login redirect"
+msgstr "Πώς να ρυθμίσετε την ανακατεύθυνση σύνδεσης"
+
+msgid "How to set fields ordering"
+msgstr "Πώς να ορίσετε τη σειρά των πεδίων"
+
+msgid "How to enable social login"
+msgstr "Πώς να ενεργοποιήσετε τη σύνδεση στα κοινωνικά δίκτυα"
+
+msgid "Setup"
+msgstr "Ρύθμιση"
+
+msgid "How to enable email piping"
+msgstr "Πώς να ενεργοποιήσετε τη διοχέτευση email"
+
+msgid "How to set SMTP"
+msgstr "Πώς να ρυθμίσετε το SMTP"
+
+msgid "How to solve email notification problem"
+msgstr "Πώς να λύσετε το πρόβλημα ειδοποίησης μέσω email"
+
+msgid "How to translate"
+msgstr "Πώς να μεταφράσετε"
+
+msgid "How to set colors"
+msgstr "Πώς να ρυθμίσετε τα χρώματα"
+
+msgid "How to add Shortcode"
+msgstr "Πώς να προσθέσετε Shortcode"
+
+msgid "How to install addons"
+msgstr "Πώς να εγκαταστήσετε πρόσθετα"
+
+msgid "How to Desktop Notifications"
+msgstr "Πώς να κάνετε ειδοποιήσεις επιφάνειας εργασίας"
+
+msgid "How to use knowledge base"
+msgstr "Πώς να χρησιμοποιήσετε τη βάση γνώσεων"
+
+msgid "How to use downloads"
+msgstr "Πώς να χρησιμοποιήσετε τις λήψεις"
+
+msgid "How to add announcement"
+msgstr "Πώς να προσθέσετε ανακοίνωση"
+
+msgid "How to create FAQ"
+msgstr "Πώς να δημιουργήσετε FAQ"
+
+msgid "How to use email cc"
+msgstr "Πώς να χρησιμοποιήσετε το email cc"
+
+msgid "How to use internal mail"
+msgstr "Πώς να χρησιμοποιήσετε την εσωτερική αλληλογραφία"
+
+msgid "Use front-end widgets"
+msgstr "Χρησιμοποιήστε γραφικά στοιχεία διεπαφής"
+
+msgid "How to enable admin widgets"
+msgstr "Πώς να ενεργοποιήσετε τα γραφικά στοιχεία διαχειριστή"
+
+msgid "Select Language"
+msgstr "Επιλέξτε γλώσσα"
+
+msgid "Email CC"
+msgstr "Email CC"
+
+msgid "Add Email CC"
+msgstr "Προσθήκη CC email"
+
+msgid "Template For"
+msgstr "Πρότυπο για"
+
+msgid "Sr#"
+msgstr "Sr#"
+
+msgid "Template Title"
+msgstr "Τίτλος προτύπου"
+
+msgid "Template Type"
+msgstr "Τύπος προτύπου"
+
+msgid "Add Email Cc"
+msgstr "Προσθήκη email Κοιν"
+
+msgid "Select Template For"
+msgstr "Επιλέξτε Πρότυπο για"
+
+msgid "Select Template Type"
+msgstr "Επιλέξτε Τύπος προτύπου"
+
+msgid "Add more row"
+msgstr "Προσθέστε περισσότερη σειρά"
+
+msgid "Delete row"
+msgstr "Διαγραφή σειράς"
+
+msgid "Save Email CC"
+msgstr "Αποθήκευση CC email"
+
+msgid "To use this feature you must be agent"
+msgstr ""
+"Για να χρησιμοποιήσετε αυτήν τη δυνατότητα πρέπει να είστε αντιπρόσωπος"
+
+msgid "Form has been stored"
+msgstr "Η φόρμα έχει αποθηκευτεί"
+
+msgid "Default form cannot be set as disabled"
+msgstr "Η προεπιλεγμένη φόρμα δεν μπορεί να οριστεί ως απενεργοποιημένη"
+
+msgid "Multiform has been deleted"
+msgstr "Το Multiform έχει διαγραφεί"
+
+msgid "Select Parent"
+msgstr "Επιλέξτε Γονέας"
+
+msgid "Select Child"
+msgstr "Επιλέξτε Παιδί"
+
+msgid "Select Condition"
+msgstr "Επιλέξτε Κατάσταση"
+
+msgid "Not Equal"
+msgstr "Όχι ίσος"
+
+msgid "To use this feature please fill the above three fields"
+msgstr ""
+"Για να χρησιμοποιήσετε αυτήν τη δυνατότητα, συμπληρώστε τα τρία παραπάνω "
+"πεδία"
+
+msgid "The agent has been stored"
+msgstr "Ο πράκτορας έχει αποθηκευτεί"
+
+msgid "The agent has been deleted"
+msgstr "Ο πράκτορας έχει διαγραφεί"
+
+msgid "WP User ID"
+msgstr "Αναγνωριστικό χρήστη WP"
+
+msgid "WP Username"
+msgstr "Όνομα χρήστη WP"
+
+msgid "User Detail"
+msgstr "Στοιχεία χρήστη"
+
+msgid "WP Full Name"
+msgstr "WP Πλήρες Όνομα"
+
+msgid "WP Email Address"
+msgstr "Διεύθυνση ηλεκτρονικού ταχυδρομείου WP"
+
+msgid "Rule has been stored"
+msgstr "Ο κανόνας έχει αποθηκευτεί"
+
+msgid "Rule has been deleted"
+msgstr "Ο κανόνας έχει διαγραφεί"
+
+msgid "Email Cc has been stored"
+msgstr "Το email Κοιν. έχει αποθηκευτεί"
+
+msgid "Email CC has been deleted"
+msgstr "Το email CC έχει διαγραφεί"
+
+msgid "Agent permissions have been stored"
+msgstr "Τα δικαιώματα πράκτορα έχουν αποθηκευτεί"
+
+msgid "Select Canned Response"
+msgstr "Επιλέξτε Canned Response"
+
+msgid "Ticket Merge"
+msgstr "Συγχώνευση εισιτηρίων"
+
+msgid "Delete Credentials"
+msgstr "Διαγραφή διαπιστευτηρίων"
+
+msgid "Mail To Agent"
+msgstr "Αποστολή στον πράκτορα"
+
+msgid "View Agent Reports"
+msgstr "Προβολή αναφορών πρακτόρων"
+
+msgid "Add Credentials"
+msgstr "Προσθήκη διαπιστευτηρίων"
+
+msgid "Edit Help Topic"
+msgstr "Επεξεργασία θέματος βοήθειας"
+
+msgid ""
+"e.g ' I have read and agree to the [link] Terms and Conditions[/link].  ' "
+"The text between [link] and [/link] will be linked to provided url or "
+"wordpress page."
+msgstr ""
+"π.χ. ' Έχω διαβάσει και συμφωνώ με τους [link] Όρους και Προϋποθέσεις[/"
+"link]. Το κείμενο μεταξύ [link] και [/link] θα συνδεθεί με την παρεχόμενη "
+"διεύθυνση url ή τη σελίδα wordpress."
+
+msgid "login"
+msgstr "Σύνδεση"
+
+msgid "stars"
+msgstr "αστέρια"
+
+msgid "Please write appreciated review at WP Extension Directory"
+msgstr "Γράψτε την αξιόλογη κριτική στον Κατάλογο επεκτάσεων WP"
+
+msgid ""
+"We'd love to hear from you. It'll only take 2 minutes of your time, and will "
+"really help us spread the word"
+msgstr ""
+"Θα θέλαμε να ακούσουμε νέα σας. Θα χρειαστούν μόνο 2 λεπτά από τον χρόνο σας "
+"και θα μας βοηθήσουν πραγματικά να διαδώσουμε τη λέξη"
+
+msgid "love"
+msgstr "αγάπη"
+
+msgid "I'd love to help :)"
+msgstr "Θα ήθελα να βοηθήσω :)"
+
+msgid "sad"
+msgstr "λυπημένος"
+
+msgid "Not this time"
+msgstr "ΟΧΙ αυτη τη φορα"
+
+msgid "happy"
+msgstr "ευτυχισμένος"
+
+msgid "I've already rated you"
+msgstr "Σε έχω ήδη βαθμολογήσει"
+
+msgid "thanks"
+msgstr "ευχαριστώ"
+
+msgid "You are awesome !......"
+msgstr "Είσαι απίθανος !......"
+
+msgid "Thanks for your support, we really appreciate it."
+msgstr "Ευχαριστούμε για την υποστήριξή σας, το εκτιμούμε πραγματικά."
+
+msgid "JS Help Desk Team"
+msgstr "JS Help Desk Team"
+
+msgid "Remind you about this later?"
+msgstr "Σας το υπενθυμίζουμε αργότερα;"
+
+msgid "Remind me in 3 days"
+msgstr "Θύμισέ μου σε 3 μέρες"
+
+msgid "Remind me in 10 days"
+msgstr "Θύμισέ μου σε 10 μέρες"
+
+msgid "Remind me in 30 days"
+msgstr "Θύμισέ μου σε 30 μέρες"
+
+msgid "Don't remind me about this"
+msgstr "Μη μου το θυμίζεις αυτό"
+
+msgid "Watch Video"
+msgstr "Δες το βίντεο"
+
+msgid "Slug(s) has been stored"
+msgstr "Οι γυμνοσάλιαγκες έχουν αποθηκευτεί"
+
+msgid "Prefix has not been stored"
+msgstr "Το πρόθεμα δεν έχει αποθηκευτεί"
+
+msgid "+Add more Condition"
+msgstr "+Προσθήκη περισσότερων Συνθήκης"
+
+msgid "Admin New Ticket Received"
+msgstr "Λήψη νέου εισιτηρίου διαχειριστή"
+
+msgid "Staff New Ticket Received"
+msgstr "Προσωπικό Παρελήφθη νέο εισιτήριο"
+
+msgid "New Department Received"
+msgstr "Παρελήφθη νέο Τμήμα"
+
+msgid "New Group Received"
+msgstr "Ελήφθη νέα ομάδα"
+
+msgid "New Agent Received"
+msgstr "Ελήφθη νέος πράκτορας"
+
+msgid "New Help Topic Received"
+msgstr "Λήφθηκε νέο θέμα βοήθειας"
+
+msgid "Admin Reassign Ticket"
+msgstr "Εισιτήριο εκ νέου ανάθεσης διαχειριστή"
+
+msgid "Staff Reassign Ticket"
+msgstr "Εισιτήριο εκ νέου ανάθεσης προσωπικού"
+
+msgid "Admin Close Ticket"
+msgstr "Διαχειριστής Κλείσιμο εισιτηρίου"
+
+msgid "Staff Close Ticket"
+msgstr "Προσωπικό Κλείσιμο εισιτήριο"
+
+msgid "Admin Delete Ticket"
+msgstr "Διαχειριστής Διαγραφή εισιτηρίου"
+
+msgid "Staff Delete Ticket"
+msgstr "Προσωπικό Διαγραφή εισιτηρίου"
+
+msgid "Admin Overdue Ticket"
+msgstr "Ληξιπρόθεσμο εισιτήριο διαχειριστή"
+
+msgid "Staff Overdue Ticket"
+msgstr "Εκπρόθεσμο εισιτήριο προσωπικού"
+
+msgid "Admin Email Baned"
+msgstr "Αποκλείστηκε το email του διαχειριστή"
+
+msgid "Staff Email Baned"
+msgstr "Απαγορεύεται το email προσωπικού"
+
+msgid "Admin Ticket Transfered to Department"
+msgstr "Το εισιτήριο διαχειριστή μεταφέρθηκε στο Τμήμα"
+
+msgid "Staff Ticket Transfered to Department"
+msgstr "Εισιτήριο Προσωπικού Μεταφορά στο Τμήμα"
+
+msgid "Admin Email baned and ticket closed"
+msgstr "Το email του διαχειριστή απαγορεύτηκε και το εισιτήριο έκλεισε"
+
+msgid "Staff Email baned and ticket closed"
+msgstr "Το email του προσωπικού απαγορεύτηκε και το εισιτήριο έκλεισε"
+
+msgid "Admin Email Unbaned"
+msgstr "Καταργήθηκε η απαγόρευση του email διαχειριστή"
+
+msgid "Staff Email Unbaned"
+msgstr "Το email προσωπικού δεν απαγορεύτηκε"
+
+msgid "Admin Ticket Reply"
+msgstr "Απάντηση εισιτηρίου διαχειριστή"
+
+msgid "Staff Ticket Reply"
+msgstr "Απάντηση εισιτηρίου προσωπικού"
+
+msgid "Ticket Received"
+msgstr "Εισιτήριο παραλήφθηκε"
+
+msgid "Banemail try new ticket"
+msgstr "Η Banemail δοκιμάστε νέο εισιτήριο"
+
+msgid "Admin Ticket has been locked"
+msgstr "Το Admin Ticket έχει κλειδωθεί"
+
+msgid "Staff Ticket has been locked"
+msgstr "Το εισιτήριο προσωπικού έχει κλειδωθεί"
+
+msgid "Admin Ticket has been unlocked"
+msgstr "Το Admin Ticket ξεκλειδώθηκε"
+
+msgid "Staff Ticket has been unlocked"
+msgstr "Το εισιτήριο προσωπικού ξεκλειδώθηκε"
+
+msgid "Admin In progress Ticket"
+msgstr "Εισιτήριο Διαχειριστή σε εξέλιξη"
+
+msgid "Staff In progress Ticket"
+msgstr "Εισιτήριο Staff In progress"
+
+msgid "Admin Ticket priority changed"
+msgstr "Προτεραιότητα εισιτηρίου διαχειριστή άλλαξε"
+
+msgid "Staff Ticket priority changed"
+msgstr "Η προτεραιότητα του εισιτηρίου προσωπικού άλλαξε"
+
+msgid "New Mail has been sent"
+msgstr "Νέα αλληλογραφία έχει σταλεί"
+
+msgid "New Reply has been sent"
+msgstr "Εστάλη νέα απάντηση"
+
+msgid "Delete User Data"
+msgstr "Διαγραφή δεδομένων χρήστη"
+
+msgid "Closed By"
+msgstr "Κλειστό από"
+
+msgid "Closed On"
+msgstr "Κλειστό"
+
+msgid "Closed info. on user closed tickets"
+msgstr "Κλειστές πληροφορίες. σε εισιτήρια κλειστά από τον χρήστη"
+
+msgid "custom text"
+msgstr "προσαρμοσμένο κείμενο"
+
+msgid "Select Languages"
+msgstr "Επιλέξτε Γλώσσες"
+
+msgid "IMAP Authentication cancelled"
+msgstr "Ο έλεγχος ταυτότητας IMAP ακυρώθηκε"
+
+msgid "Page Not Found !!"
+msgstr "Η σελίδα δεν βρέθηκε !!"

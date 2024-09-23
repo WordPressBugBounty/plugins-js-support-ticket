@@ -1,0 +1,7551 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: cs_CZ\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.4.1\n"
+
+msgid "You are not allowed"
+msgstr "Nemáte povoleno"
+
+msgid "The ticket has been locked"
+msgstr "Ticket byl uzamčen"
+
+msgid "Successfully"
+msgstr "Úspěšně"
+
+msgid "The ticket has not been locked"
+msgstr "Ticket nebyl uzamčen"
+
+msgid "Error"
+msgstr "Chyba"
+
+msgid "Lock Ticket"
+msgstr "Zamknout ticket"
+
+msgid "The ticket is locked by"
+msgstr "Tiket je uzamčen"
+
+msgid "The ticket has been unlocked"
+msgstr "Ticket byl odemčen"
+
+msgid "The ticket has not been unlocked"
+msgstr "Ticket nebyla odemčen"
+
+msgid "Unlock Ticket"
+msgstr "Odemknout Ticket"
+
+msgid "User already a staff member"
+msgstr "Uživatel již je zaměstnancem"
+
+msgid "The staff member has not been stored"
+msgstr "Zaměstnanec nebyl uložen"
+
+msgid "The staff member has been stored"
+msgstr "Zaměstnanec byl uložen"
+
+msgid "The staff member has been deleted"
+msgstr "Zaměstnanec byl smazán"
+
+msgid "The staff member has not been deleted"
+msgstr "Zaměstnanec nebyl smazán"
+
+msgid "The staff member in use cannot delete"
+msgstr "Použitý zaměstnanec nemůže odstranit"
+
+msgid "Staff"
+msgstr "Personál"
+
+msgid "status has been changed"
+msgstr "stav byl změněn"
+
+msgid "status has not been changed"
+msgstr "stav nebyl změněn"
+
+msgid "User ID"
+msgstr "uživatelské ID"
+
+msgid "User Name"
+msgstr "Uživatelské jméno"
+
+msgid "Email Address"
+msgstr "Emailová adresa"
+
+msgid "Name"
+msgstr "Jméno"
+
+msgid "Previous"
+msgstr "Přechozí"
+
+msgid "Next"
+msgstr "Další"
+
+msgid "Active"
+msgstr "Aktivní"
+
+msgid "Disabled"
+msgstr "Zakázáno"
+
+msgid "Uploaded file extension error."
+msgstr "Chyba přípony nahraného souboru."
+
+msgid "Select user"
+msgstr "Vybrat uživatele"
+
+msgid "Username"
+msgstr "Uživatelské jméno"
+
+msgid "Search"
+msgstr "Hledat"
+
+msgid "Reset"
+msgstr "Resetovat"
+
+msgid "Use search feature to select the user"
+msgstr "Pomocí funkce vyhledávání vyberte uživatele"
+
+msgid "User"
+msgstr "Uživatel"
+
+msgid "Select User"
+msgstr "Vybrat uživatele"
+
+msgid "Roles"
+msgstr "Úlohy"
+
+msgid "Select Role"
+msgstr "Vybrat roli"
+
+msgid "First Name"
+msgstr "Jméno"
+
+msgid "Last Name"
+msgstr "Příjmení"
+
+msgid "Office Phone"
+msgstr "Číslo do kanceláře"
+
+msgid "Extension"
+msgstr "Rozšíření"
+
+msgid "Mobile No"
+msgstr "Mobilní číslo"
+
+msgid "Picture"
+msgstr "Obrázek"
+
+msgid "Maximum File Size"
+msgstr "Maximální velikost souboru"
+
+msgid "File Extension Type"
+msgstr "Typ souboru"
+
+msgid "Append Signature"
+msgstr "Připojit podpis"
+
+msgid "Append signature with a reply"
+msgstr "Připojte podpis s odpovědí"
+
+msgid "Signature"
+msgstr "Podpis"
+
+msgid "Account Status"
+msgstr "Stav účtu"
+
+msgid "Select Status"
+msgstr "Vybrat status"
+
+msgid "Save"
+msgstr "Uložit"
+
+msgid "Cancel"
+msgstr "Zrušit"
+
+msgid "Close"
+msgstr "Zavřít"
+
+msgid "Dashboard"
+msgstr "Řídící panel"
+
+msgid "Add Agent"
+msgstr "Přidat agenta"
+
+msgid "Configuration"
+msgstr "Nastavení"
+
+msgid "Version"
+msgstr "Verze"
+
+msgid "image"
+msgstr "obraz"
+
+msgid "Append"
+msgstr "Připojit"
+
+msgid "Add Permissions"
+msgstr "Přidat oprávnění"
+
+msgid "Permissions"
+msgstr "Oprávnění"
+
+msgid "Department Section"
+msgstr "Výběr oddělení"
+
+msgid "Ticket Section"
+msgstr "Sekce Tickety"
+
+msgid "Agent Section"
+msgstr "Agentská sekce"
+
+msgid "Knowledge Base Section"
+msgstr "Výběr znalostní databáze"
+
+msgid "FAQ Section"
+msgstr "Sekce FAQ"
+
+msgid "Download Section"
+msgstr "Stáhnout vybrané"
+
+msgid "Announcement Section"
+msgstr "Výběr oznámení"
+
+msgid "Mail Section"
+msgstr "Zprávy"
+
+msgid "Help Topic Section"
+msgstr "Sekce Téma nápovědy"
+
+msgid "Canned Response Section"
+msgstr "Sekce reakce na konzervy"
+
+msgid "Select / Deselect All"
+msgstr "Vybrat vše"
+
+msgid "Save Permissions"
+msgstr "Uložit oprávnění"
+
+msgid "Agents"
+msgstr "Agenti"
+
+msgid "Add"
+msgstr "Přidat"
+
+msgid "Full Name"
+msgstr "Celé jméno"
+
+msgid "Role"
+msgstr "Úloha"
+
+msgid "Created"
+msgstr "Vytvořeno"
+
+msgid "Action"
+msgstr "Akce"
+
+msgid "change status"
+msgstr "změnit stav"
+
+msgid "Edit"
+msgstr "Upravit"
+
+msgid "Delete"
+msgstr "Vymazat"
+
+msgid "Are you sure you want to delete"
+msgstr "Jste si jistí, že to chcete smazat"
+
+msgid "Something went wrong to try again later."
+msgstr "Něco se pokazilo zkusit to znovu později."
+
+msgid "My Profile"
+msgstr "Můj profil"
+
+msgid "Upload Image"
+msgstr "Nahrát obrázek"
+
+msgid "Phone No"
+msgstr "Telefonní číslo"
+
+msgid "Upload file limit exceeds"
+msgstr "Limit nahraného souboru překračuje"
+
+msgid "No help topic found"
+msgstr "Téma pomoci nenalezeno"
+
+msgid "Error file size too large"
+msgstr "Chyba. Soubor je příliš velký"
+
+msgid "Select Department"
+msgstr "Vybrat oddělení"
+
+msgid "Select Help Topic"
+msgstr "Vybrat téma pomoci"
+
+msgid "Select Priority"
+msgstr "Vybrat prioritu"
+
+msgid "Select Canned response"
+msgstr "Vyberte možnost Konzervovaná odpověď"
+
+msgid "Add more"
+msgstr "Přidej víc"
+
+msgid "Remove"
+msgstr "Odstranit"
+
+msgid "Reason for edit"
+msgstr "Důvod změny"
+
+msgid "Internal Note"
+msgstr "Interní poznámka"
+
+msgid "Enter valid woocommerce order#"
+msgstr "Zadejte platnou objednávku woocommerce #"
+
+msgid "Order id found"
+msgstr "ID objednávky bylo nalezeno"
+
+msgid "Order id not found"
+msgstr "ID objednávky nebylo nalezeno"
+
+msgid "Select Product"
+msgstr "Vyberte produkt"
+
+msgid "Dated"
+msgstr "Datum"
+
+msgid "Select Order ID"
+msgstr "Vyberte ID objednávky"
+
+msgid "Select license key"
+msgstr "Vyberte licenční klíč"
+
+msgid "Assign to me"
+msgstr "Přiřadit mě"
+
+msgid "Submit Ticket"
+msgstr "Odeslat Ticket"
+
+msgid "Show All"
+msgstr "Ukázat vše"
+
+msgid "Show Less"
+msgstr "Ukaž méně"
+
+msgid "Open"
+msgstr "Otevřený"
+
+msgid "Closed"
+msgstr "Uzavřeno"
+
+msgid "Answered"
+msgstr "Vybavuje se"
+
+msgid "Overdue"
+msgstr "Vypršelé"
+
+msgid "All Tickets"
+msgstr "Všechny tickety"
+
+msgid "Tickets"
+msgstr "Tickety"
+
+msgid "Or"
+msgstr "Nebo"
+
+msgid "From"
+msgstr "Od"
+
+msgid "Select staff"
+msgstr "Vybrat personál"
+
+msgid "Select"
+msgstr "Vybrat"
+
+msgid "Start Date"
+msgstr "Datum zahájení"
+
+msgid "End Date"
+msgstr "Datum konce"
+
+msgid "Assigned to me"
+msgstr "Přiřazeno ke mně"
+
+msgid "Subject"
+msgstr "Předmět"
+
+msgid "sort"
+msgstr "třídit"
+
+msgid "New"
+msgstr "Nových"
+
+msgid "Waiting Reply"
+msgstr "Čeká se na odpověď"
+
+msgid "In Progress"
+msgstr "Zpracovávání"
+
+msgid "Replied"
+msgstr "Odpovězeno"
+
+msgid "Close and merge"
+msgstr "Zavřít a sloučit"
+
+msgid "Created via Email"
+msgstr "Vytvořeno přes email"
+
+msgid "The ticket is locked"
+msgstr "Vstupenka je zamknutá"
+
+msgid "Last Reply"
+msgstr "Nejnovější odpověď"
+
+msgid "Search by username"
+msgstr "Hledat podle uživatelského jména"
+
+msgid "Already exists"
+msgstr "Již existuje"
+
+msgid "The role has been stored"
+msgstr "Role byla uložena"
+
+msgid "The role has not been stored"
+msgstr "Role nebyla uložena"
+
+msgid "The role has been deleted"
+msgstr "Role byla odstraněna"
+
+msgid "The role has not been deleted"
+msgstr "Role nebyla odstraněna"
+
+msgid "The role in use cannot be deleting"
+msgstr "Použitá role nemůže být vymazána"
+
+msgid "Save Role"
+msgstr "Uložit úlohu"
+
+msgid "Add Role"
+msgstr "Přidat roli"
+
+msgid "Role Permission"
+msgstr "Oprávnění úlohy"
+
+msgid "Role Name"
+msgstr "Jméno úlohy"
+
+msgid "Role permissions"
+msgstr "Oprávnění úlohy"
+
+msgid "Search Roles"
+msgstr "Hledání rolí"
+
+msgid "Add New Role"
+msgstr "Přidat novou roli"
+
+msgid "An announcement has been stored"
+msgstr "Oznámení bylo uloženo"
+
+msgid "An announcement has not been stored"
+msgstr "Oznámení nebylo uloženo"
+
+msgid "An announcement has been deleted"
+msgstr "Oznámení bylo odstraněno"
+
+msgid "An announcement has not been deleted"
+msgstr "Oznámení nebylo odstraněno"
+
+msgid "Announcement"
+msgstr "Oznámení"
+
+msgid "ordering has been changed"
+msgstr "objednávání bylo změněno"
+
+msgid "ordering has not changed"
+msgstr "objednávání nelze změnit"
+
+msgid "Public"
+msgstr "Veřejné"
+
+msgid "Private"
+msgstr "Soukromé"
+
+msgid "Title"
+msgstr "Titulek"
+
+msgid "Parent Category"
+msgstr "Rodičovská Kategorie"
+
+msgid "Select Category"
+msgstr "Vybrat kategorii"
+
+msgid "Description"
+msgstr "Popis"
+
+msgid "Save Announcement"
+msgstr "Uložit oznámení"
+
+msgid "Add Announcement"
+msgstr "Přidat oznámení"
+
+msgid "Category"
+msgstr "Kategotrie"
+
+msgid "Announcements"
+msgstr "Oznámení"
+
+msgid "Records per page"
+msgstr "Záznamy na stránku"
+
+msgid "Ordering"
+msgstr "Objednání"
+
+msgid "Save Ordering"
+msgstr "Uložit objednávku"
+
+msgid "Category Name"
+msgstr "Jméno kategorie"
+
+msgid "Categories"
+msgstr "Kategorie"
+
+msgid "Banned Email Log List"
+msgstr "Seznam zakázaných e-mailů"
+
+msgid "IP Address"
+msgstr "IP adresa"
+
+msgid "Ban email has been stored"
+msgstr "Byl zakázán e-mail"
+
+msgid "Ban email has not been stored"
+msgstr "Zákaz e-mailu nebyl uložen"
+
+msgid "Ban email has been deleted"
+msgstr "Zabanovaná adresa byla smazaná"
+
+msgid "Ban email has not been deleted"
+msgstr "Zákazový e-mail nebyl smazán"
+
+msgid "Ban email does not exist"
+msgstr "Zabanovaný email neexistuje"
+
+msgid "Add Banned Email"
+msgstr "Přidat zakázaný e-mail"
+
+msgid "Save Banned Email"
+msgstr "Uložit zakázaný e-mail"
+
+msgid "Banned Emails"
+msgstr "Zabanované adresy"
+
+msgid "Emails"
+msgstr "Emaily"
+
+msgid "Submitter"
+msgstr "Zadavatel"
+
+msgid "Canned response message has been stored"
+msgstr "Konzervovaná odpověď byla uložena"
+
+msgid "Canned response message has not been stored"
+msgstr "Konzervovaná odpověď nebyla uložena"
+
+msgid "Premade department message has been deleted"
+msgstr "Předpřipravená zpráva oddělení byla smazána"
+
+msgid "Premade department message has not been deleted"
+msgstr "Předpřipravená zpráva oddělení nebyla odstraněna"
+
+msgid "Canned response"
+msgstr "Konzervovaná odpověď"
+
+msgid "Department"
+msgstr "Oddělení"
+
+msgid "Response"
+msgstr "Odpovědět"
+
+msgid "Save Canned Response"
+msgstr "Uložit konzervovanou odpověď"
+
+msgid "Add Canned Response"
+msgstr "Přidat předpřipravenou odpověď"
+
+msgid "The department under which the answer will be made is available"
+msgstr "Oddělení, pod kterým bude odpověď poskytnuta, je k dispozici"
+
+msgid "Canned Responses"
+msgstr "Konzervované odpovědi"
+
+msgid "Last Updated"
+msgstr "Nejnovější aktualizace"
+
+msgid "Not updated"
+msgstr "Nenahráno"
+
+msgid "Canned Response"
+msgstr "Konzervovaná odpověď"
+
+msgid "Latest Tickets"
+msgstr "Nejnovější ticket"
+
+msgid "Last Month Ticket Stats"
+msgstr "Poslední měsíční Ticket Status"
+
+msgid "Pending"
+msgstr "Čekající"
+
+msgid "The attachment has been removed"
+msgstr "Příloha byla odstraněna"
+
+msgid "The attachment has not been removed"
+msgstr "Příloha nebyla odstraněna"
+
+msgid "The download has been stored"
+msgstr "Stahování bylo uloženo"
+
+msgid "The download has not been stored"
+msgstr "Stahování nebylo uloženo"
+
+msgid "Download"
+msgstr "Stáhnout"
+
+msgid "The download has been deleted"
+msgstr "Stahování bylo smazáno"
+
+msgid "The download has not been deleted"
+msgstr "Stahování nebylo odstraněno"
+
+msgid "Download All"
+msgstr "Stáhnout vše"
+
+msgid "Attachments"
+msgstr "Přílohy"
+
+msgid "Save Download"
+msgstr "Uložit Na stažení"
+
+msgid "Add Download"
+msgstr "Přídat na stažení"
+
+msgid "Add More File"
+msgstr "Přidat více souborů"
+
+msgid "Delete attachment"
+msgstr "Vymazat přílohu"
+
+msgid "Downloads"
+msgstr "Stahování"
+
+msgid "grab"
+msgstr "urvat"
+
+msgid "Attachment"
+msgstr "Příloha"
+
+msgid "Files"
+msgstr "Soubory"
+
+msgid "Help Desk"
+msgstr "Podpora"
+
+msgid "Get Help"
+msgstr "Získejte pomoc"
+
+msgid "Service is running, please close the pag"
+msgstr "Služba je spuštěna, prosím zavřete stránku"
+
+msgid ""
+"Admin email address and email piping address cannot be the same, your email "
+"piping will not be work."
+msgstr ""
+"E-mailová adresa správce a e-mailová adresa nesmí být stejná, vaše e-mailová "
+"adresa nebude fungovat."
+
+msgid "Your setting is working please this."
+msgstr "Vaše nastavení funguje, prosím."
+
+msgid "Connection established but the system cannot read any email"
+msgstr "Připojení bylo navázáno, ale systém nemůže číst žádný e-mail"
+
+msgid ""
+"IMAP is either not installed or not enabled in your server. Contact to "
+"hosting company"
+msgstr ""
+"IMAP není na vašem serveru nainstalován nebo není povolen. Kontakt na "
+"hostující společnost"
+
+msgid "The configuration has been stored"
+msgstr "Konfigurace byla uložena"
+
+msgid "The configuration not has been stored"
+msgstr "Konfigurace nebyla uložena"
+
+msgid "Email address already exist"
+msgstr "E-mailová adresa již existuje"
+
+msgid "Email for email piping has been stored"
+msgstr "E-mail pro odesílání e-mailů byl uložen"
+
+msgid "Email for email piping has not been stored"
+msgstr "E-mail pro odesílání e-mailů nebyl uložen"
+
+msgid "The email has been deleted"
+msgstr "E-mail byl smazán"
+
+msgid "The email has not been deleted"
+msgstr "E-mail nebyl smazán"
+
+msgid "in use cannot deleted"
+msgstr "v provozu nelze odstranit"
+
+msgid "Enabled"
+msgstr "Povoleno"
+
+msgid "Only New Tickets"
+msgstr "Pouze nové tickety"
+
+msgid "Only Replies"
+msgstr "Pouze odpovědi"
+
+msgid "Both"
+msgstr "Obojí"
+
+msgid "Other"
+msgstr "Další"
+
+msgid "Yes"
+msgstr "Ano"
+
+msgid "No"
+msgstr "Ne"
+
+msgid "Please enter the hostname first"
+msgstr "Zadejte prosím, nejdříve jméno hosta"
+
+msgid "Please enable email piping setting first"
+msgstr "Nejprve prosím povolte nastavení e-mailového potrubí"
+
+msgid "Add Email Piping"
+msgstr "Přidat e-mailové potrubí"
+
+msgid "Enable email piping"
+msgstr "Povolit propojení e-mailů"
+
+msgid "Ticket Type"
+msgstr "Napsaný Tickety"
+
+msgid "Which email type to read"
+msgstr "Který typ e-mailu chcete číst"
+
+msgid "Save attachments if found in an email"
+msgstr "Uložte přílohy, pokud se nacházejí v e-mailu"
+
+msgid "Host Type"
+msgstr "Typ hostitele"
+
+msgid "Select your email service provider"
+msgstr "Vyberte poskytovatele emailu"
+
+msgid "Host Name"
+msgstr "Název hostitele"
+
+msgid "Enabled SSL"
+msgstr "SSL povoleno"
+
+msgid "Do you have enabled SSL on your domain?"
+msgstr "Povolili jste ve své doméně SSL?"
+
+msgid "Host Port Number"
+msgstr "Port hostitele"
+
+msgid "Host port number to read an email from"
+msgstr "Číslo portu hostitele, ze kterého si můžete přečíst e-mail"
+
+msgid "Email address to read emails"
+msgstr "Emailová adresa pro čtení emailů"
+
+msgid "Password"
+msgstr "Heslo"
+
+msgid "Password for a given email address"
+msgstr "Heslo pro danou e-mailovou adresu"
+
+msgid "check"
+msgstr "šek"
+
+msgid "Check Settings"
+msgstr "Zkotrolovat nastavení"
+
+msgid "If the system doesn't respond in 30 seconds"
+msgstr "Pokud systém neodpoví do 30 sekund"
+
+msgid "it means system unable to connect email server"
+msgstr "to znamená, že systém není schopen připojit e-mailový server"
+
+msgid "Save Settings"
+msgstr "Uložit nastavení"
+
+msgid "Cron Job"
+msgstr "Úloha Cron"
+
+msgid "Configuration of a backup job with webcron org"
+msgstr "Nastavení zálohy s webcron org"
+
+msgid "Name of cron job"
+msgstr "Jméno coron job"
+
+msgid "Log in to webcron org in the cron area click on"
+msgstr "Pro přihlášení na webcron org v oblasti cron kliknete na"
+
+msgid "Timeout"
+msgstr "Čas vyršel"
+
+msgid ""
+"180 secs if the does not completely increase it most sites will work with a "
+"setting of 180 600"
+msgstr ""
+"180 sekund, pokud se nezvýší úplně, většina webů bude pracovat s nastavením "
+"180 600"
+
+msgid "URL you want to execute"
+msgstr "URL, kterou chcete spustit"
+
+msgid "Login"
+msgstr "Přihlášení"
+
+msgid "Leave this blank"
+msgstr "Nevyplńujte"
+
+msgid "Execution time"
+msgstr "Doba provedení"
+
+msgid "That the grid below the other options select when and how"
+msgstr "Že mřížka pod ostatními možnostmi zvolíte, kdy a jak"
+
+msgid "Alerts"
+msgstr "Upozornění"
+
+msgid ""
+"If you have already set up alerts methods in webcron org interface we "
+"recommend choosing an alert"
+msgstr ""
+"Pokud jste již v rozhraní webcron org nastavili metodu upozornění, "
+"doporučujeme zvolit upozornění"
+
+msgid "Cron scheduling using wget"
+msgstr "Naplánování cron pomocí wget"
+
+msgid "Cron scheduling using Curl"
+msgstr "Naplánovaní cron za pomocí Curl"
+
+msgid "Custom PHP script to run the cron job"
+msgstr "Vlastní PHP skript pro spuštění Cron"
+
+msgid "Sorry the cron job did not work"
+msgstr "Litujeme, že cron práce nefungovala"
+
+msgid "URL for use with your won scripts and third party"
+msgstr "URL pro použití se svými vyhrazenými skripty a třetí stranou"
+
+msgid "Recommended run script hourly"
+msgstr "Doporučujeme spouštět script každou hodinu"
+
+msgid "Email Piping"
+msgstr "E-mailové potrubí"
+
+msgid "Ticket Email Type"
+msgstr "Typ e-mailu s lístky"
+
+msgid "ticket email"
+msgstr "e-mail s lístky"
+
+msgid "Overall Reports"
+msgstr "Celkové přehledy"
+
+msgid "Staff Members Report"
+msgstr "Zpráva o zaměstnancích"
+
+msgid "Department Report"
+msgstr "Zpráva oddělení"
+
+msgid "Departments Report"
+msgstr "Zpráva o odděleních"
+
+msgid "JS Support Ticket Overall Reports"
+msgstr "JS Podpora Ticketu Celkové zprávy"
+
+msgid "Tickets By Status"
+msgstr "Ticket podle statusu"
+
+msgid "Tickets By Departments"
+msgstr "Ticket podle oddělení"
+
+msgid "Tickets By Priorities"
+msgstr "Ticket podle priority"
+
+msgid "Tickets By Channel"
+msgstr "Ticket podle kanálů"
+
+msgid "Direct"
+msgstr "Přímy"
+
+msgid "Direct reply"
+msgstr "Přímá odpověď"
+
+msgid "Email reply"
+msgstr "E-mailová odpověď"
+
+msgid "Tickets By staff"
+msgstr "Vstupenky Zaměstnanci"
+
+msgid "Report By"
+msgstr "Report od"
+
+msgid "staff member"
+msgstr "Zaměstnanec"
+
+msgid "To"
+msgstr "Na"
+
+msgid "Report By Staff Members"
+msgstr "Zpráva členů personálu"
+
+msgid "Ticket status by days"
+msgstr "Stav ticketů podle dnů"
+
+msgid "Date"
+msgstr "Datum"
+
+msgid "Tickets Staff"
+msgstr "Zaměstnanci Ticketu"
+
+msgid "Average Rating"
+msgstr "Průměrné hodnocení"
+
+msgid "Average Time"
+msgstr "Průměrný čas"
+
+msgid "Report By staff member"
+msgstr "Zpráva od zaměstnance"
+
+msgid "Rating"
+msgstr "Hodnocení"
+
+msgid "Time"
+msgstr "Čas"
+
+msgid "Merged"
+msgstr "Sloučeno"
+
+msgid "Report By department"
+msgstr "Zpráv od oddělení"
+
+msgid "Tickets By Department"
+msgstr "Ticket podle oddělení"
+
+msgid "Department Name"
+msgstr "Jméno oddělení"
+
+msgid "User report"
+msgstr "Uživatelský přehled"
+
+msgid "Users report"
+msgstr "Uživatelé reporty"
+
+msgid "Users Tickets"
+msgstr "Vstupenky uživatelů"
+
+msgid "User Report"
+msgstr "Uživatelský Report"
+
+msgid "Report By Departments"
+msgstr "Zpráva od oddělení"
+
+msgid "Tickets Data"
+msgstr "Údaje o Ticketech"
+
+msgid "Message"
+msgstr "Zpráva"
+
+msgid "Assigned To"
+msgstr "Přiřazen"
+
+msgid "Requester User Name"
+msgstr "Uživatelské jméno žadatele"
+
+msgid "Requester Name"
+msgstr "Jméno žadatele"
+
+msgid "Requester Email"
+msgstr "Email žadatele"
+
+msgid "Requester Phone"
+msgstr "Telefon žadatele"
+
+msgid "Requester help Topic"
+msgstr "Nápověda žadatele o pomoc"
+
+msgid "Ticket Attachment"
+msgstr "Příloha Ticketu"
+
+msgid "Posted By"
+msgstr "Zaslal"
+
+msgid "Note Title"
+msgstr "Název poznámky"
+
+msgid "Note Message"
+msgstr "Poznámka: Zpráva"
+
+msgid "Posted Date"
+msgstr "Datum zveřejnění"
+
+msgid "Note Attachment"
+msgstr "Poznámka Příloha"
+
+msgid "User Time"
+msgstr "Uživatelský čas"
+
+msgid "System Time"
+msgstr "Systémový Čas"
+
+msgid "Edit Reason"
+msgstr "Upravit odpověď"
+
+msgid "Reply Date"
+msgstr "Datum odpovědi"
+
+msgid "Reply By"
+msgstr "Odpověď od"
+
+msgid "Reply Attachment"
+msgstr "Příloha odpovědi"
+
+msgid "Export"
+msgstr "Vývozní"
+
+msgid "Agent"
+msgstr "Činidlo"
+
+msgid "Select Agent"
+msgstr "Vyberte agenta"
+
+msgid "Select Ticket Status"
+msgstr "Vyberte stav ticketu"
+
+msgid "Ticket Overdue"
+msgstr "Ticket po lhůtě platnosti"
+
+msgid "Select Ticket Overdue Status"
+msgstr "Zvolte stav zpožděného ticketu"
+
+msgid "FAQ has been stored"
+msgstr "FAQ uložena"
+
+msgid "FAQ has not been stored"
+msgstr "FAQ nebyla uložena"
+
+msgid "FAQ has been deleted"
+msgstr "FAQ vymazána"
+
+msgid "FAQ has not been deleted"
+msgstr "FAQ nebyla vymazána"
+
+msgid "Save FAQ"
+msgstr "Uložt FAQ"
+
+msgid "Add FAQ"
+msgstr "Přidat FAQ"
+
+msgid "Content"
+msgstr "Obsah"
+
+msgid "FAQ'S"
+msgstr "FAQ"
+
+msgid "FAQ's"
+msgstr "FAQ´s"
+
+msgid "Add FAQs"
+msgstr "Přidejte časté dotazy"
+
+msgid "Feedback has been stored"
+msgstr "Zpětná vazba byla uložena"
+
+msgid "Feedback has not been stored"
+msgstr "Zpětná vazba nebyla uložena"
+
+msgid "Feedbacks"
+msgstr "Zpětná vazba"
+
+msgid "user image"
+msgstr "obrázek uživatele"
+
+msgid "feedback image"
+msgstr "obrázek zpětné vazby"
+
+msgid "Feedback"
+msgstr "Zpětná vazba"
+
+msgid "Latest Feedback"
+msgstr "Nejnovější zpětná vazba"
+
+msgid "Submit Feedback"
+msgstr "Odeslat zpětnou vazbu"
+
+msgid "Help topic has been stored"
+msgstr "Téma pomoci bylo uloženo"
+
+msgid "Help topic has not been stored"
+msgstr "Téma pomoci nebylo uloženo"
+
+msgid "Help topic has been deleted"
+msgstr "Téma pomoci bylo smazáno"
+
+msgid "Help topic has not been deleted"
+msgstr "Téma pomoci nebylo smazáno"
+
+msgid "Help topic in use cannot be deleting"
+msgstr "Používané téma nápovědy nelze odstranit"
+
+msgid "Help topic"
+msgstr "Téma pomoci"
+
+msgid "Help Topic"
+msgstr "Téma pomoci"
+
+msgid "Save Help Topic"
+msgstr "Uložit téma pomoci"
+
+msgid "Add Help Topic"
+msgstr "Přidat téma pomoci"
+
+msgid "Help Topics"
+msgstr "Téma pomoci"
+
+msgid "The category has been stored"
+msgstr "Kategorie byla uložena"
+
+msgid "The category has not been stored"
+msgstr "Kategorie nebyla uložena"
+
+msgid "The category has been deleted"
+msgstr "Kategorie byla odstraněna"
+
+msgid "The category has not been deleted"
+msgstr "Kategorie nebyla odstraněna"
+
+msgid "The category in use cannot be deleting"
+msgstr "Použitou kategorii nelze odstranit"
+
+msgid "Knowledgebase article has been stored"
+msgstr "Článek znalostní databáze byl uložen"
+
+msgid "Knowledgebase article has not been stored"
+msgstr "Článek znalostní báze nebyl uložen"
+
+msgid "The article has been deleted"
+msgstr "Článek byl smazán"
+
+msgid "The article has not been deleted"
+msgstr "Článek nebyl smazán"
+
+msgid "Article"
+msgstr "Článek"
+
+msgid "The parent category does not have this type."
+msgstr "Nadřazená kategorie tento typ nemá."
+
+msgid "Would you like to add this type to Parent Category?"
+msgstr "Chcete tento typ přidat do kategorie rodičů?"
+
+msgid "JYes"
+msgstr "Ano"
+
+msgid "JNo"
+msgstr "Ne"
+
+msgid "Child category has this type,"
+msgstr "Podřízená kategorie má tento typ,"
+
+msgid "You cannot unmark it."
+msgstr "Nelze to zrušit."
+
+msgid "Draft"
+msgstr "Návrh"
+
+msgid "Meta Description"
+msgstr "Popis metadat"
+
+msgid "Meta Keywords"
+msgstr "Klíčová slova metadat"
+
+msgid "Save Knowledge Base"
+msgstr "Uložit znalostní databázi"
+
+msgid "Please select at least one category for"
+msgstr "Vyberte alespoň jednu kategorii pro"
+
+msgid "Category For"
+msgstr "Kategorie pro"
+
+msgid "Knowledge Base"
+msgstr "Znalostní databáze"
+
+msgid "Save Category"
+msgstr "Uložit kategorii"
+
+msgid "Add Knowledge Base"
+msgstr "Přidat znalostní bázi"
+
+msgid "Meta Data Options"
+msgstr "Možnosti meta dat"
+
+msgid "Add Category"
+msgstr "Přidat katergorii"
+
+msgid "Category Title"
+msgstr "Název kategorie"
+
+msgid "category"
+msgstr "kategorie"
+
+msgid "Article Attachment"
+msgstr "Příloha článku"
+
+msgid "Mail has not been marked as read"
+msgstr "Pošta nebyla označena jako přečtená"
+
+msgid "Mail has been marked as read"
+msgstr "Pošta byla označena jako přečtená"
+
+msgid "Message field cannot be empty"
+msgstr "Pole zprávy nemůže zůstat prázdné"
+
+msgid "Mail has been sent"
+msgstr "Pošta byla odeslána"
+
+msgid "Mail has not been sent"
+msgstr "Pošta nebyla odeslána"
+
+msgid "Mail has been deleted"
+msgstr "Zpráva byla vyzmazána"
+
+msgid "Mail has not been deleted"
+msgstr "Zpráva nebyla smazána"
+
+msgid "Mail"
+msgstr "Zprávy"
+
+msgid "is in use cannot be delete"
+msgstr "se používá, nelze smazat"
+
+msgid "Mail cannot mark as to read"
+msgstr "Pošta nemůže označit jako přečtená"
+
+msgid "Mail cannot mark as unread"
+msgstr "Zpráva nemůže být označena jako nepřečtená"
+
+msgid "Mail has been marked as unread"
+msgstr "Pošta byla označena jako nepřečtená"
+
+msgid "Compose"
+msgstr "Komponovat"
+
+msgid "Inbox"
+msgstr "Příchozí pošta"
+
+msgid "Outbox"
+msgstr "Odchozí zprávy"
+
+msgid "Send"
+msgstr "Odeslat"
+
+msgid "Read"
+msgstr "Přečíst"
+
+msgid "Unread"
+msgstr "Nepřečtený"
+
+msgid "Select Type"
+msgstr "Vybrat typ"
+
+msgid "To use this feature you must be staff member"
+msgstr "Abyste mohli tuto funkci používat, musíte být zaměstnancem"
+
+msgid "To use this feature you must have agents addon."
+msgstr "Pro použití této funkce musíte mít agenty addon."
+
+msgid "mark read"
+msgstr "značka přečtena"
+
+msgid "mark unread"
+msgstr "Označit nepřečtené"
+
+msgid "Replied By"
+msgstr "Odpovědel"
+
+msgid "Reply"
+msgstr "Odpověd"
+
+msgid "Type Message"
+msgstr "Zadejte zprávu"
+
+msgid "Replies"
+msgstr "Odpovídá"
+
+msgid "Limit exceeds maximum tickets"
+msgstr "Přesažen limit maximálního počtu ticketů"
+
+msgid "The maximum number of open tickets limit has been exceeded."
+msgstr "Byl překročen maximální počet otevřených vstupenek."
+
+msgid "Ticket has been closed due to merged with"
+msgstr "Vstupenka byla uzavřena kvůli sloučení s"
+
+msgid "has been merged into"
+msgstr "byla sloučena do"
+
+msgid "Merge Ticket"
+msgstr "Sloučit lístek"
+
+msgid "Ticket ID #"
+msgstr "ID vstupenky"
+
+msgid "Search ticket to merge into"
+msgstr "Vyhledejte lístek, do kterého se chcete sloučit"
+
+msgid "Edit Last Reply"
+msgstr "Upravit poslední odpověď"
+
+msgid "Merge Ticket Latest Reply"
+msgstr "Sloučit lístek Poslední odpověď"
+
+msgid "Merge"
+msgstr "Spojit"
+
+msgid "Ticket has been merged"
+msgstr "Vstupenka byla sloučena"
+
+msgid "Ticket has not been merged"
+msgstr "Vstupenka nebyla sloučena"
+
+msgid "The internal note has been posted"
+msgstr "Interní poznámka byla zveřejněna"
+
+msgid "The internal note has not been posted"
+msgstr "Interní poznámka nebyla zaúčtována"
+
+msgid "Post Internal Note"
+msgstr "Odeslat interní poznámku"
+
+msgid "The internal note is posted by"
+msgstr "Vnitřní poznámka je zveřejněna uživatelem"
+
+msgid "Pass"
+msgstr "Prošel"
+
+msgid "Ticket Notification"
+msgstr "Oznámení o vstupenkách"
+
+msgid "Once Weekly"
+msgstr "Jednou týdně"
+
+msgid "Thanks for subscribing!"
+msgstr "Díky za přihlášení!"
+
+msgid "Ticket already marked overdue"
+msgstr "Ticket již byl poznamenán po splatnosti"
+
+msgid "The ticket has been marked as overdue"
+msgstr "Vstupenka byla označena jako zpožděná"
+
+msgid "The ticket has not been marked as overdue"
+msgstr "Vstupenka nebyla označena jako zpožděná"
+
+msgid "System"
+msgstr "Systém"
+
+msgid "Mark overdue"
+msgstr "Označit jako vypršelý"
+
+msgid "The ticket is marked as overdue by"
+msgstr "Vstupenka je označena jako po splatnosti"
+
+msgid "The ticket has been unmarked as overdue"
+msgstr "Vstupenka byla neoznačena jako zpožděná"
+
+msgid "The ticket has not been unmarked as overdue"
+msgstr "Vstupenka nebyla označena jako zpožděná"
+
+msgid "Unmark overdue"
+msgstr "Odznačte po splatnosti"
+
+msgid "The ticket is unmarked as overdue by"
+msgstr "Lístek není označen jako po splatnosti"
+
+msgid "Paid Support"
+msgstr "Placená podpora"
+
+msgid "Check if you want to use this product for paid support"
+msgstr "Zkontrolujte, zda chcete tento produkt použít pro placenou podporu"
+
+msgid "Paid support type"
+msgstr "Typ placené podpory"
+
+msgid "One-off Support"
+msgstr "Jednorázová podpora"
+
+msgid "Subscription Support"
+msgstr "Podpora předplatného"
+
+msgid "Number of tickets"
+msgstr "Počet vstupenek"
+
+msgid ""
+"Enter allowed number of tickets that customer can post. Enter -1 for "
+"unlimited tickets."
+msgstr ""
+"Zadejte povolený počet vstupenek, které může zákazník zveřejnit. Zadejte -1 "
+"pro neomezený počet vstupenek."
+
+msgid "Credential Type"
+msgstr "Typ pověření"
+
+msgid "Additional Info"
+msgstr "Doplňující informace"
+
+msgid "Please insert values"
+msgstr "Vložte hodnoty"
+
+msgid "Visitor"
+msgstr "Návštěvník"
+
+msgid "By"
+msgstr "Podle"
+
+msgid "Credential removed on ticket close"
+msgstr "Pověření bylo odstraněno při uzavření lístku"
+
+msgid "Failed to retrieve data"
+msgstr "Nepodařilo se načíst data"
+
+msgid "The new theme has been applied"
+msgstr "Nové téma bylo použito"
+
+msgid "Error applying the new theme"
+msgstr "Chyba při použití nového motivu"
+
+msgid "Themes"
+msgstr "Téma"
+
+msgid "Color Chooser"
+msgstr "Výběr barvy"
+
+msgid "Preset Theme"
+msgstr "Přednastavené téma"
+
+msgid "Color 1"
+msgstr "Barva 1"
+
+msgid "Top menu heading background"
+msgstr "Hlavní nadpis záhlaví nabídky"
+
+msgid "Color 2"
+msgstr "Barva 2"
+
+msgid "Top header line color"
+msgstr "Horní čára řádku hlavičky"
+
+msgid "Button Hover"
+msgstr "Tlačítko hover"
+
+msgid "Heading text"
+msgstr "Nadpis textu"
+
+msgid "Color 3"
+msgstr "Barva 3"
+
+msgid "Content Background Color"
+msgstr "Barva pozadí obsahu"
+
+msgid "Color 4"
+msgstr "Barva 4"
+
+msgid "Content Text Color"
+msgstr "Barva textu obsahu"
+
+msgid "Color 5"
+msgstr "Barva 5"
+
+msgid "Border color"
+msgstr "Barva ohraničení"
+
+msgid "Lines"
+msgstr "Čáry"
+
+msgid "Color 6"
+msgstr "Barva 6"
+
+msgid "Button Color"
+msgstr "Barva tlačítka"
+
+msgid "Color 7"
+msgstr "Barva 7"
+
+msgid "Top header text color"
+msgstr "Horní barva textu hlavičky"
+
+msgid "Save Theme"
+msgstr "Uložit téma"
+
+msgid "Color Effect Preview"
+msgstr "Náhled barevného efektu"
+
+msgid "Blue"
+msgstr "Modrá"
+
+msgid "Red"
+msgstr "Červená"
+
+msgid "Greenish"
+msgstr "Nazelenalý"
+
+msgid "Brown"
+msgstr "Hnědá"
+
+msgid "Orange"
+msgstr "Oranžová"
+
+msgid "Green"
+msgstr "Zelená"
+
+msgid "Black"
+msgstr "Černá"
+
+msgid "Mail Notification Widget"
+msgstr "Widget oznámení zpráv"
+
+msgid "Show newly and reply mail notifications"
+msgstr "Zobrazit nově a odpovídat na oznámení e-mailem"
+
+msgid "New mail from"
+msgstr "Nová zpráva od"
+
+msgid "Mail Notification"
+msgstr "Oznámení zpráv"
+
+msgid "Layout"
+msgstr "Rozložení"
+
+msgid "Vertical"
+msgstr "Vertikální"
+
+msgid "Horizontal"
+msgstr "Horizontální"
+
+msgid "Max Record"
+msgstr "Maximální záznam"
+
+msgid "My Ticket Widget"
+msgstr "Můj ticket widget"
+
+msgid "Show unanswered tickets"
+msgstr "Zobrazit nezodpovězené tickety"
+
+msgid "My Tickets"
+msgstr "Moje tickety"
+
+msgid "Order tickets"
+msgstr "Objednejte si vstupenky"
+
+msgid "Close due to merge"
+msgstr "Zavřít kvůli sloučení"
+
+msgid "Product"
+msgstr "Produkt"
+
+msgid "Order"
+msgstr "Objednat"
+
+msgid "There is no ticket"
+msgstr "Není lístek"
+
+msgid "Something went wrong"
+msgstr "Něco se pokazilo"
+
+msgid "Transaction Key"
+msgstr "Transakční klíč"
+
+msgid "Please select"
+msgstr "Prosím vyberte"
+
+msgid "Hide notice"
+msgstr "Skrýt upozornění"
+
+msgid "Control Panel"
+msgstr "Ovládací panel"
+
+msgid "Announcement Detail"
+msgstr "Detail oznámení"
+
+msgid "Edit Announcement"
+msgstr "Upravit oznámení"
+
+msgid "Departments"
+msgstr "Oddělení"
+
+msgid "Add Department"
+msgstr "Přidat oddělení"
+
+msgid "Edit Department"
+msgstr "Upravit oddělení"
+
+msgid "Staff report"
+msgstr "Zpráva o zaměstnancích"
+
+msgid "Staff reports"
+msgstr "Zaměstnanecké zprávy"
+
+msgid "Departments report"
+msgstr "Zprávy oddělení"
+
+msgid "Edit Download"
+msgstr "Upravit stahování"
+
+msgid "Edit FAQ"
+msgstr "Upravit FAQ"
+
+msgid "FAQ Detail"
+msgstr "Detail FAQ"
+
+msgid "Edit Knowledge Base"
+msgstr "Upravit znalostní databázi"
+
+msgid "Edit Category"
+msgstr "Upravit kategorii"
+
+msgid "Knowledge Base Detail"
+msgstr "Detail znalostní databaze"
+
+msgid "Send Message"
+msgstr "Odeslat zprávu"
+
+msgid "Edit Role"
+msgstr "Upravit roli"
+
+msgid "Staffs"
+msgstr "Personál"
+
+msgid "Add Staff"
+msgstr "Přidat personál"
+
+msgid "Edit Staff"
+msgstr "Upravit personál"
+
+msgid "Staff Permissions"
+msgstr "Oprávnění personálu"
+
+msgid "Add Ticket"
+msgstr "Přidat ticket"
+
+msgid "Edit Ticket"
+msgstr "Upravit ticket"
+
+msgid "Ticket Detail"
+msgstr "Detail ticketu"
+
+msgid "Equals"
+msgstr "Rovná se"
+
+msgid "Minus"
+msgstr "Mínus"
+
+msgid "About Us"
+msgstr "O nás"
+
+msgid "Translations"
+msgstr "Překlad"
+
+msgid "System Errors"
+msgstr "Chyby systému"
+
+msgid "Short Codes"
+msgstr "Zkratky"
+
+msgid "Create Ticket"
+msgstr "Vytvořit ticket"
+
+msgid "Fields"
+msgstr "Pole"
+
+msgid "Install"
+msgstr "Nainstalujte"
+
+msgid "Configurations"
+msgstr "Nastavení"
+
+msgid "Reports"
+msgstr "Reporty"
+
+msgid "Overall Statistics"
+msgstr "Celkové statistiky"
+
+msgid "Agent Reports"
+msgstr "Zprávy agentů"
+
+msgid "Department Reports"
+msgstr "Zprávy oddělení"
+
+msgid "User Reports"
+msgstr "Přehledy uživatelů"
+
+msgid "Satisfaction Report"
+msgstr "Zpráva o spokojenosti"
+
+msgid "GDPR Fields"
+msgstr "Pole GDPR"
+
+msgid "Erase Data Requests"
+msgstr "Vymazat požadavky na data"
+
+msgid "Premium Addons"
+msgstr "Prémiové doplňky"
+
+msgid "Install Addons"
+msgstr "Nainstalujte doplňky"
+
+msgid "Addons List"
+msgstr "Seznam doplňků"
+
+msgid "Feedback Fields"
+msgstr "Polia zpětné vazby"
+
+msgid "Helptopics"
+msgstr "Témata nápovědy"
+
+msgid "System Emails"
+msgstr "Systémové emaily"
+
+msgid "Add Email"
+msgstr "Přidat Email"
+
+msgid "Priorities"
+msgstr "Priority"
+
+msgid "Add Priority"
+msgstr "Přidat prioritu"
+
+msgid "Ban Emails"
+msgstr "Zabanované emaily"
+
+msgid "Email Templates"
+msgstr "Emailová šablona"
+
+msgid "New Ticket"
+msgstr "Nový ticket"
+
+msgid "Agent Ticket"
+msgstr "Vstupenka agenta"
+
+msgid "New Agent"
+msgstr "Nový agent"
+
+msgid "Reassign Ticket"
+msgstr "Přidělení ticketu"
+
+msgid "Close Ticket"
+msgstr "Uzavřít ticket"
+
+msgid "Delete Ticket"
+msgstr "Vymazat ticket"
+
+msgid "Mark Overdue"
+msgstr "Označit jako vypršelý"
+
+msgid "Ban Email"
+msgstr "Zabanovaný email"
+
+msgid "Ban email try to create ticket"
+msgstr "Zabanovat adresu při pokusu vytvorit ticket"
+
+msgid "Department Transfer"
+msgstr "Přesun oddělení"
+
+msgid "Ban Email and Close Ticket"
+msgstr "Zabanované emaily a uzavřené tickety"
+
+msgid "Unban Email"
+msgstr "Udblokovat email"
+
+msgid "Response Ticket"
+msgstr "Odpověď na ticket STAFF"
+
+msgid "Reply Ticket"
+msgstr "Odpověď na ticket USER"
+
+msgid "New Ticket Admin Alert"
+msgstr "Nové upozornění pro admina na ticket"
+
+msgid "In Progress Ticket"
+msgstr "Ticket se zpracovává"
+
+msgid "Ticket priority is changed by"
+msgstr "Byla u ticketu vymněněna prioita STAFF"
+
+msgid "New Mail Received"
+msgstr "Nová zpráva přijata"
+
+msgid "New Mail Message Received"
+msgstr "Přijata nová zpráva"
+
+msgid "Feedback Email To User"
+msgstr "Zpětná vazba e-mailu uživateli"
+
+msgid "User Reply On Closed Ticket"
+msgstr "Odpověď uživatele na uzavřeném Ticketu"
+
+msgid "Log out"
+msgstr "Odhlásit se"
+
+msgid "Username / password is incorrect"
+msgstr "Uživatelské jméno / heslo je nesprávné"
+
+msgid "Username already taken"
+msgstr "Uživatelské jméno už používá někdo jiný"
+
+msgid "Invalid username"
+msgstr "Neplatné uživatelské jméno"
+
+msgid "Please enter a username"
+msgstr "Zadejte uživatelské jméno"
+
+msgid "Invalid email"
+msgstr "Neplatný e-mail"
+
+msgid "Email already registered"
+msgstr "E-mail již byl zaregistrován"
+
+msgid "Please enter a password"
+msgstr "Prosím, vložte heslo"
+
+msgid "Passwords do not match"
+msgstr "Hesla se neshodují"
+
+msgid "Invalid captcha"
+msgstr "Špatně zadaný captcha"
+
+msgid "Could not subscribe to the newsletter"
+msgstr "Nelze se přihlásit k odběru novinek"
+
+msgid ""
+"Please check confirmation email to complete your subscription for the "
+"newsletter"
+msgstr ""
+"Zkontrolujte prosím e-mail s potvrzením, abyste dokončili předplatné "
+"zpravodaje"
+
+msgid "You have successfully subscribed to the newsletter"
+msgstr "Úspěšně jste se přihlásili k odběru novinek"
+
+msgid "JS Help Desk Control Panel"
+msgstr "Ovládací panel JS Help Desk"
+
+msgid "System Error"
+msgstr "Systémová chyba"
+
+msgid "User Fields"
+msgstr "Uživatelská pole"
+
+msgid "Ban list log"
+msgstr "Protokol zákazu"
+
+msgid "Field Ordering"
+msgstr "Pořadí polí"
+
+msgid "Post Installation"
+msgstr "Po instalaci"
+
+msgid "Sorry"
+msgstr "Promiňte"
+
+msgid "No record found"
+msgstr "Záznam nenalezen"
+
+msgid "Sorry!"
+msgstr "Promiňte!"
+
+msgid "No record found ...!"
+msgstr "Nebyl nalezen žádný záznam ...!"
+
+msgid "Access Denied"
+msgstr "Přístup zamítnut"
+
+msgid "You have no permission to access this page"
+msgstr "K přístupu na tuto stránku nemáte oprávnění"
+
+msgid "User is not allowed to access this page."
+msgstr "Uživatel nemá přístup na tuto stránku."
+
+msgid "You are already Logged In."
+msgstr "Už jste přihlášen."
+
+msgid "Access Denied!"
+msgstr "Přístup odepřen!"
+
+msgid "Your account has been disabled, please contact the administrator."
+msgstr "Váš účet byl deaktivován, kontaktujte správce."
+
+msgid "You are not logged In"
+msgstr "Nejste přihlášen"
+
+msgid "To access the page, Please login"
+msgstr "Pro přístup na stránku se prosím přihlaste"
+
+msgid "Register"
+msgstr "Registrace"
+
+msgid "User is not allowed to view this Ticket"
+msgstr "Uživatel nemá právo prohlížet tuto Vstupenku"
+
+msgid ""
+"Registration has been disabled by admin, please contact the system "
+"administrator."
+msgstr "Registrace byla deaktivována správcem, kontaktujte správce systému."
+
+msgid "You have already given the feedback for this ticket."
+msgstr "Odpověď na tuto vstupenku jste již dali."
+
+msgid "Ticket not found...!"
+msgstr "Vstupenka nebyla nalezena ...!"
+
+msgid "User is not allowed to view this page"
+msgstr "Uživatel nemá právo tuto stránku zobrazit"
+
+msgid "Thank you so much for your feedback"
+msgstr "Děkujeme za vaši zpětnou vazbu"
+
+msgid "Help Desk Pages"
+msgstr "Stránky technické podpory"
+
+msgid "Form submission failed!"
+msgstr "Odeslání formuláře se nezdařilo!"
+
+msgid "You have not answered all required fields"
+msgstr "Neodpověděli jste všechna povinná pole"
+
+msgid "You have not given a correct time"
+msgstr "Nedali jste správný čas"
+
+msgid "You have not given a correct e-mail address"
+msgstr "Nezadali jste správnou e-mailovou adresu"
+
+msgid "You have not given a correct phone number"
+msgstr "Nezadali jste správné telefonní číslo"
+
+msgid "You have not given a correct answer to the security question"
+msgstr "Na bezpečnostní otázku jste neodpověděli správně"
+
+msgid "You have not given a correct date"
+msgstr "Neuvedli jste správné datum"
+
+msgid "The input value must be between "
+msgstr "Vstupní hodnota musí být mezi"
+
+msgid " characters"
+msgstr "znaky"
+
+msgid "The input value is longer than "
+msgstr "Vstupní hodnota je delší než"
+
+msgid "The input value is shorter than "
+msgstr "Vstupní hodnota je kratší než"
+
+msgid "Input values could not be confirmed"
+msgstr "Vstupní hodnoty nelze potvrdit"
+
+msgid "Incorrect domain value"
+msgstr "Nesprávná hodnota domény"
+
+msgid "The input value is not a correct URL"
+msgstr "Vstupní hodnota není správná adresa URL"
+
+msgid "The input value is incorrect"
+msgstr "Vstupní hodnota je nesprávná"
+
+msgid "The input value was not a correct number"
+msgstr "Vstupní hodnota nebyla správné číslo"
+
+msgid "Your social security number was incorrect"
+msgstr "Vaše číslo sociálního zabezpečení bylo nesprávné"
+
+msgid "Incorrect UK VAT Number"
+msgstr "Nesprávné číslo DPH ve Velké Británii"
+
+msgid "The password isn't strong enough"
+msgstr "Heslo není dostatečně silné"
+
+msgid "You have to choose at least "
+msgstr "Musíte si vybrat alespoň"
+
+msgid " answers"
+msgstr "odpovědi"
+
+msgid "The input value can only contain alphanumeric characters "
+msgstr "Vstupní hodnota může obsahovat pouze alfanumerické znaky"
+
+msgid " and "
+msgstr "a"
+
+msgid "The file you are trying to upload is too large"
+msgstr "Soubor, který se pokoušíte nahrát, je příliš velký"
+
+msgid "The file you are trying to upload is of the wrong type"
+msgstr "Soubor, který se pokoušíte nahrát, je nesprávného typu"
+
+msgid "Please choose between "
+msgstr "Vyberte si prosím mezi"
+
+msgid "Please choose at least "
+msgstr "Vyberte alespoň"
+
+msgid "Please choose a maximum of "
+msgstr "Vyberte prosím maximum"
+
+msgid "The credit card number is not correct"
+msgstr "Číslo kreditní karty není správné"
+
+msgid "The CVV number was not correct"
+msgstr "Číslo CVV nebylo správné"
+
+msgid "Support"
+msgstr "Podpora"
+
+msgid "Lost your password"
+msgstr "Zapomněli jste heslo"
+
+msgid "Pagination default page size not saved"
+msgstr "Výchozí velikost stránky při stránkování nebyla uložena"
+
+msgid "Data directory cannot empty."
+msgstr "Datový adresář nelze vyprázdnit."
+
+msgid "Data directory is not proper."
+msgstr "Složka s daty není správná"
+
+msgid "Data directory is not writable."
+msgstr "Datový adresář nelze zapisovat."
+
+msgid "System slug not be empty."
+msgstr "System slug není prázdný."
+
+msgid "System slug is conflicted with post or page slug."
+msgstr "Systémový slimák je v konfliktu s poštou nebo stránkovým slimákem."
+
+msgid "Days"
+msgstr "Dny"
+
+msgid "Hours"
+msgstr "Hodiny"
+
+msgid "Own Captcha"
+msgstr "Vlastní Captcha"
+
+msgid "Any"
+msgstr "Jakékoliv"
+
+msgid "Addition"
+msgstr "Přidání"
+
+msgid "Subtraction"
+msgstr "Odčítání"
+
+msgid "Show"
+msgstr "Zobrazit"
+
+msgid "Hide"
+msgstr "Skrýt"
+
+msgid "Default"
+msgstr "Výchozí"
+
+msgid "Custom"
+msgstr "Zvyk"
+
+msgid "Top left"
+msgstr "Nahoře v levo"
+
+msgid "Top right"
+msgstr "Nahoře v pravo"
+
+msgid "Middle left"
+msgstr "Uprostřed v levo"
+
+msgid "Middle right"
+msgstr "Uprostřed v pravo"
+
+msgid "Bottom left"
+msgstr "Levá spodní strana"
+
+msgid "Bottom right"
+msgstr "Pravá spodní strana"
+
+msgid "Random"
+msgstr "Náhodný"
+
+msgid "Sequence"
+msgstr "Sekvence"
+
+msgid "General Settings"
+msgstr "Obecné nastavení"
+
+msgid "Ticket Settings"
+msgstr "Nastavení vstupenek"
+
+msgid "Email Settings"
+msgstr "Nastavení e-mailu"
+
+msgid "Agent Menu"
+msgstr "Nabídka agentů"
+
+msgid "User Menu"
+msgstr "Uživatelské menu"
+
+msgid "Push Notifications"
+msgstr "Oznámení Push"
+
+msgid "Private Credentials"
+msgstr "Soukromé přihlašovací údaje"
+
+msgid "Envato Validation"
+msgstr "Ověření Envato"
+
+msgid "Easy Digital Downloads"
+msgstr "Snadné digitální stahování"
+
+msgid "Set the heading of your plugin"
+msgstr "Nastavte záhlaví pluginu"
+
+msgid "Ticket Default Page"
+msgstr "Základní stránka ticketů"
+
+msgid "Select Page"
+msgstr "Vybrat stránku"
+
+msgid ""
+"Select JS Help Desk default page, on the action system, will redirect on the "
+"selected page. If not select the default page, email links, and support icon "
+"might not work."
+msgstr ""
+"Výběr výchozí stránky JS Help Desk na systému akcí přesměruje na vybranou "
+"stránku. Pokud nevyberete výchozí stránku, e-mailové odkazy a ikona podpory "
+"nemusí fungovat."
+
+msgid "Support Icon"
+msgstr "Ikona podpory"
+
+msgid "Screen Tag"
+msgstr "Značka obrazovky"
+
+msgid "Enable / disable your support icon"
+msgstr "Povolit / zakázat ikonu podpory"
+
+msgid "Support Icon Position"
+msgstr "Pozice ikony podpory"
+
+msgid "Screen Tag Position"
+msgstr "Umístění značky obrazovky"
+
+msgid "Select position for your support icon"
+msgstr "Vyberte pozici, kde má být umístěna íkona podpory"
+
+msgid "Set your plugin offline for front end"
+msgstr "Nastavte záhlaví pro offline verzi pluginu"
+
+msgid "Offline Message"
+msgstr "Offline zpráva"
+
+msgid "Set the offline message for your user"
+msgstr "Nastavte offline zprávu pro vaše uživatelé"
+
+msgid "Data Directory"
+msgstr "Složka s daty"
+
+msgid "Set the name for your data directory"
+msgstr "Nastavte název adresáře dat"
+
+msgid ""
+"You need to rename the existing data directory in the file system before "
+"changing the data directory name"
+msgstr ""
+"Před změnou názvu datového adresáře musíte přejmenovat existující datový "
+"adresář v systému souborů"
+
+msgid "Date Format"
+msgstr "Formát data"
+
+msgid "DD-MM-YYYY"
+msgstr "DD-MM-RRRR"
+
+msgid "MM-DD-YYYY"
+msgstr "MM-DD-RRRR"
+
+msgid "YYYY-MM-DD"
+msgstr "RRRR-MM-DD"
+
+msgid "Set the default date format"
+msgstr "Vyberte základní format data"
+
+msgid "Ticket auto close"
+msgstr "Ticket byl automaticky zavřen"
+
+msgid "Ticket auto-close if user does not respond within given days"
+msgstr "Automatické zavření tiketu, pokud uživatel neodpoví do daných dnů"
+
+msgid "No. of attachment"
+msgstr "Počet příloh"
+
+msgid "No. of attachment allowed at a time"
+msgstr "Počet povolených příloh"
+
+msgid "File maximum size"
+msgstr "Maximální velikost souboru"
+
+msgid "File extension"
+msgstr "Přípona souboru"
+
+msgid "File extension allowed to attach"
+msgstr "Přípony souboru, které je povoleno přidávat"
+
+msgid "Pagination default page size"
+msgstr "Výchozí velikost stránky při stránkování"
+
+msgid "Set the no. of record per page"
+msgstr "Nastavte počet záznamů na stránku"
+
+msgid "Breadcrumbs"
+msgstr "Textová navigace"
+
+msgid "Show hide breadcrumbs"
+msgstr "Zobrazit skrýt textovou navigaci"
+
+msgid "Top Header"
+msgstr "Horní záhlaví"
+
+msgid "Show hide Top Header"
+msgstr "Zobrazit skrýt horní záhlaví"
+
+msgid "Login redirect"
+msgstr "Přesměrování přihlášení"
+
+msgid "Redirect user to JS Help Desk control panel after log in"
+msgstr "Po přihlášení přesměrujte uživatele na ovládací panel JS Help Desk"
+
+msgid "Show count on my tickets"
+msgstr "Zobrazit počitadlo na Moje tickety"
+
+msgid "Show number of the open, closed, answered ticket in my ticket"
+msgstr ""
+"Zobrazit číslo otevřené, uzavřené, odpovězené vstupenky na mé vstupence"
+
+msgid "Show captcha on registration form"
+msgstr "Zobrazit captcha na registračním formuláři"
+
+msgid "Select whether you want to show captcha on the registration form or not"
+msgstr "Vyberte, zda chcete zobrazit captcha v registračním formuláři nebo ne"
+
+msgid "Default wp role for new users"
+msgstr "Výchozí role pro nové uživatele"
+
+msgid "Select the role you want to assign to new users"
+msgstr "Vyberte roli, kterou chcete přiřadit novým uživatelům"
+
+msgid "Set Login Link"
+msgstr "Nastavit přihlašovací odkaz"
+
+msgid "Set Login Link Default or Custom"
+msgstr "Nastavit výchozí nebo vlastní odkaz pro přihlášení"
+
+msgid "Ticketid sequence"
+msgstr "Sekvence ticketů"
+
+msgid "Set ticketid sequential or random"
+msgstr "Nastavte vytváření ticketid, sekvenčí nebo náhodné"
+
+msgid "Ticket listing ordering"
+msgstr "Objednání seznamu vstupenek"
+
+msgid "Set default ordering for ticket listing"
+msgstr "Nastavit výchozí řazení pro seznam vstupenek"
+
+msgid "Maximum tickets"
+msgstr "Maximum ticketů"
+
+msgid "Maximum ticket per user"
+msgstr "Maximum ticketů na uživatele"
+
+msgid "Maximum open tickets"
+msgstr "Maximum otevřených ticketů"
+
+msgid "Maximum opened tickets per user"
+msgstr "Maximum otevřených ticketů na uživatele"
+
+msgid "Reopen ticket within days"
+msgstr "Znovu otevřít ticket po dnech"
+
+msgid "The ticket can be reopened within a given number of days"
+msgstr "Lístek lze znovu otevřít během určitého počtu dní"
+
+msgid "User can print ticket"
+msgstr "Uživatel si může vytisknout ticket"
+
+msgid "Can user print ticket from ticket detail or not"
+msgstr "Může uživatel vytisknout detail ticketu"
+
+msgid "Show captcha on the visitor ticket form"
+msgstr "Zobrazit captcha ve formuláři vstupenky pro návštěvníky"
+
+msgid "Show captcha when a visitor wants to create a ticket"
+msgstr "Zobrazit captcha, když návštěvník chce vytvořit lístek"
+
+msgid "Captcha selection"
+msgstr "Výběr Captcha"
+
+msgid "Which captcha you want to add"
+msgstr "Který captcha chcete přidat"
+
+msgid "Google recaptcha public key"
+msgstr "Veřejný klíč Google recaptcha"
+
+msgid "Please enter the google re-captcha public key from"
+msgstr "Zadejte veřejný klíč google re-captcha od"
+
+msgid "Google recaptcha private key"
+msgstr "Privátní klíč Google recaptcha"
+
+msgid "Please enter the google re-captcha private key from"
+msgstr "Zadejte soukromý klíč google re-captcha od"
+
+msgid "Own captcha calculation type"
+msgstr "Vlastní typ výpočtu captcha"
+
+msgid "Select calculation type addition or subtraction"
+msgstr "Vybrat typ výpočtu nebo doplněk"
+
+msgid "Own captcha operands"
+msgstr "Vlastní captcha operands"
+
+msgid "Select the total operands to be given"
+msgstr "Vyberte celkový počet operandů, které chcete zadat"
+
+msgid "Own captcha subtraction answer positive"
+msgstr "Vlastní captcha pozitivní odpověď"
+
+msgid "Is subtraction answer should be positive"
+msgstr "Odpověď by měla být pozitivní"
+
+msgid "New ticket message"
+msgstr "Zpráva o novém ticketu"
+
+msgid "This message will show on the new ticket"
+msgstr "Tato zpráva se zobrazí na novém lístku"
+
+msgid "Allow Users To Reply via Email On Closed Ticket"
+msgstr ""
+"Povolit uživatelům odpovědět prostřednictvím e-mailu na uzavřeném Ticketu"
+
+msgid "Select whether users can reply to closed email piping ticket or not"
+msgstr ""
+"Vyberte, zda mohou uživatelé odpovídat na uzavřenou e-mailovou vstupenku "
+"nebo ne"
+
+msgid "Visitor can create ticket"
+msgstr "Návštěvník si může vytvořit Ticket"
+
+msgid "Can visitor create ticket or not"
+msgstr "Může návštěvník vytvořit ticket"
+
+msgid "Visitor ticket creation message"
+msgstr "Zpráva o vytvoření ticketu návštěvníků"
+
+msgid "This text will appear whenever a visitor creates a ticket"
+msgstr "Tento text se objeví vždy, když návštěvník vytvoří lístek"
+
+msgid "Default alert email"
+msgstr "Výchozí email pro upozornění"
+
+msgid ""
+"If ticket department email is not selected then this email is used to send "
+"emails"
+msgstr ""
+"Pokud není zvoleno oddělení ticketu, tak je tento email použití pro "
+"odesílání emailů"
+
+msgid "Default admin email"
+msgstr "Výchozí email administrátora"
+
+msgid "Admin email address to receive emails"
+msgstr "Emailová adresa Administrátora pro příjem emailů"
+
+msgid "Add New Email"
+msgstr "Přidat nový e-mail"
+
+msgid "Ban Email New Ticket"
+msgstr "Zakázat e-mailem novou vstupenku"
+
+msgid "Mail to admin"
+msgstr "Zpráva Adminovi"
+
+msgid "Email sends to admin when banned email try to create a ticket"
+msgstr ""
+"E-mail se odešle adminovi, když se zakázaný e-mail snaží vytvořit lístek"
+
+msgid "Ticket Operations Email Setting"
+msgstr "Nastavení e-mailu pro provozování vstupenek"
+
+msgid "New ticket"
+msgstr "Nový ticket"
+
+msgid "Ticket reassign"
+msgstr "Ticket byl znovu přiřazen"
+
+msgid "Ticket close"
+msgstr "Uzavřený Ticket"
+
+msgid "Ticket delete"
+msgstr "Smazaný Ticket"
+
+msgid "Ticket ban email"
+msgstr "Ticket má zabanovaný email"
+
+msgid "Ticket department transfer"
+msgstr "Převod Ticketu"
+
+msgid "Ticket reply User"
+msgstr "Uživatelská odpověď na vstupenku"
+
+msgid "Ticket Response Agent"
+msgstr "Agent odpovědí na vstupenky"
+
+msgid "Ticket ban email and close ticket"
+msgstr "Byl zabanováný email a uzavřený ticket"
+
+msgid "Ticket unban email"
+msgstr "Ticket odbanovaný email"
+
+msgid "Ticket lock"
+msgstr "Zamknout ticket"
+
+msgid "Ticket unlock"
+msgstr "Ticket odemknout"
+
+msgid "Ticket Change Priority"
+msgstr "Změnit prioritu ticketu"
+
+msgid "Mark Ticket In Progress"
+msgstr "Označit Ticket se zpracovává"
+
+msgid "Reply To A Closed Ticket By Email"
+msgstr "Odpovědět na uzavřený ticket emailem"
+
+msgid "Send Feedback Email To User"
+msgstr "Odeslání e-mailu zpětné vazby uživateli"
+
+msgid "Dashboard Links"
+msgstr "Odkazy na řídicí panel"
+
+msgid "Open Ticket"
+msgstr "Otevřít ticket"
+
+msgid "Department reports"
+msgstr "Zprávy oddělení"
+
+msgid "Login/Logout Button"
+msgstr "Přihlašovací / odhlašovací tlačítko"
+
+msgid "Ticket Total Count"
+msgstr "Celkový počet vstupenek"
+
+msgid "Ticket Statistics"
+msgstr "Statistika vstupenek"
+
+msgid "Erase Agent Data"
+msgstr "Vymazat údaje agenta"
+
+msgid "Top Menu Links"
+msgstr "Odkazy na hlavní nabídku"
+
+msgid "Home"
+msgstr "Domů"
+
+msgid "Check Ticket Status"
+msgstr "Zkontrolovat status ticketu"
+
+msgid "Registration"
+msgstr "Registrace"
+
+msgid "Erase User Data"
+msgstr "Vymazat uživatelská data"
+
+msgid "Feedback Settings"
+msgstr "Nastavení zpětné vazby"
+
+msgid "Feedback Email Delay Type"
+msgstr "Typ zpoždění posílání e-mailů zpětné vazby"
+
+msgid "Select delay type for feedback email"
+msgstr "Zvolte typ zpoždění pro zpětnou vazbu"
+
+msgid "Feedback Email Delay"
+msgstr "Zpětná vazba e-mailu"
+
+msgid ""
+"Set no. of days or hours to send feedback email after a ticket is closed"
+msgstr ""
+"Set no. dnů nebo hodin poslat e-mail s zpětnou vazbou po uzavření vstupenky"
+
+msgid "Success message after submitting feedback"
+msgstr "Zpráva o úspěchu po odeslání zpětné vazby"
+
+msgid "This text will appear whenever anyone submits feedback"
+msgstr "Tento text se objeví vždy, když někdo podá zpětnou vazbu"
+
+msgid "Firebase Notifications"
+msgstr "Oznámení Firebase"
+
+msgid ""
+"JS Help Desk Desktop Notifications plugin is not installed. Please install "
+"the plugin to enable desktop notifications"
+msgstr ""
+"Není nainstalován plugin JS Help Desk Desktop Notifications. Chcete-li "
+"povolit oznámení na ploše, nainstalujte si plugin"
+
+msgid "Click here to insert Install."
+msgstr "Klikněte sem pro vložení instalace."
+
+msgid "JS Help Desk Desktop Notifications plugin is not active."
+msgstr "JS Help Desk Desktop Notifications plugin není aktivní."
+
+msgid "Find and add firebase api's keys"
+msgstr "Vyhledejte a přidejte klíče API firebase"
+
+msgid "Click here to get firebae api keys."
+msgstr "Klikněte sem a získejte klíče APB firebase."
+
+msgid "API key for user"
+msgstr "Klíč API pro uživatele"
+
+msgid "Firebase api key for front user"
+msgstr "Firebase api klíč pro přední uživatele"
+
+msgid "Auth Domain"
+msgstr "Autorská doména"
+
+msgid "Database Url"
+msgstr "Adresa URL databáze"
+
+msgid "Firebase Database URL"
+msgstr "URL databáze Firebase"
+
+msgid "Project Id"
+msgstr "ID projektu"
+
+msgid "Firebase Project Id"
+msgstr "ID projektu Firebase"
+
+msgid "Bucket Storage"
+msgstr "Ukládání do kbelíku"
+
+msgid "Firebase Bucket Storage"
+msgstr "Ukládání úložiště Firebase"
+
+msgid "Message Sender Id"
+msgstr "ID odesílatele zprávy"
+
+msgid "Firebase Message Sender Id"
+msgstr "ID odesílatele zprávy Firebase"
+
+msgid "Private Server Key"
+msgstr "Klíč soukromého serveru"
+
+msgid "Firebase Server Key"
+msgstr "Klíč serveru Firebase"
+
+msgid "Logo Image for Desktop Notifications"
+msgstr "Obrázek loga pro oznámení na ploše"
+
+msgid "Remove Image"
+msgstr "Odebrat obrázek"
+
+msgid "Remove Logo"
+msgstr "Odebrat logo"
+
+msgid "No Firebase Notificaiton Logo"
+msgstr "Žádné logo oznámení Firebase"
+
+msgid "Secret Key"
+msgstr "Tajný klíč"
+
+msgid "Second Level Security"
+msgstr "Zabezpečení druhé úrovně"
+
+msgid "For enhanced security change encryption method in %s on line %s"
+msgstr "Pro vylepšenou metodu šifrování změny zabezpečení v% s na řádku% s"
+
+msgid "Enter Envato api key "
+msgstr "Zadejte klíč Envato api"
+
+msgid "Click here to generate an api key"
+msgstr "Kliknutím sem vygenerujete klíč API"
+
+msgid "License Mandatory"
+msgstr "Licence Povinná"
+
+msgid ""
+"Prevent users from submitting a ticket without a valid license for one of "
+"your product"
+msgstr ""
+"Zabraňte uživatelům v odesílání letenky bez platné licence na jeden z vašich "
+"produktů"
+
+msgid "Product ID"
+msgstr "ID produktu"
+
+msgid "A comma-separated list of Envato product ids"
+msgstr "Seznam ID produktů Envato oddělený čárkami"
+
+msgid "Enter MailChimp API key "
+msgstr "Zadejte klíč API rozhraní MailChimp"
+
+msgid "Audience ID"
+msgstr "ID publika"
+
+msgid "Find Audience ID in your MailChimp account"
+msgstr "Vyhledejte ID publika ve svém účtu MailChimp"
+
+msgid "Enable double opt-in"
+msgstr "Povolit dvojité přihlášení"
+
+msgid "You must also enable double opt-in in your MailChimp account"
+msgstr "Musíte také povolit dvojité přihlášení do svého účtu MailChimp"
+
+msgid "Welcome email"
+msgstr "Uvítací e-mail"
+
+msgid "You can enable Final Welcome Email in your MailChimp account"
+msgstr "V účtu MailChimp můžete povolit závěrečný uvítací e-mail"
+
+msgid "Verify License On Ticket Creation"
+msgstr "Ověření licence na vytvoření lístku"
+
+msgid "Save Configurations"
+msgstr "Uložit nastavení"
+
+msgid "Ticket via email"
+msgstr "Ticket e-mailem"
+
+msgid "OR"
+msgstr "NEBO"
+
+msgid "Sorry the cron job didnot work"
+msgstr "Omlouváme se, cron job nefunge"
+
+msgid "Update ticket status"
+msgstr "Aktualizujte stav lístku"
+
+msgid "Recommended run script daily"
+msgstr "Doporučený denní skript"
+
+msgid "You cannot use this email, it is used in email piping"
+msgstr "Tento e-mail nelze použít, je používán v e-mailovém kanálu"
+
+msgid "The department has been stored"
+msgstr "Oddělení bylo uloženo"
+
+msgid "The department has not been stored"
+msgstr "Oddělení nebylo uloženo"
+
+msgid "The department has been deleted"
+msgstr "Oddělení bylo odstraněno"
+
+msgid "The department has not been deleted"
+msgstr "Oddělení nebylo odstraněno"
+
+msgid "The department in use cannot be delete"
+msgstr "Použité oddělení nelze odstranit"
+
+msgid "default has been changed"
+msgstr "výchozí hodnota byla změněna"
+
+msgid "default has not been changed"
+msgstr "výchozí hodnota nebyla změněna"
+
+msgid "No Record Found"
+msgstr "nebyl nalezen žádný záznam"
+
+msgid "Outgoing Email"
+msgstr "Odchozí emaily"
+
+msgid "Select Email"
+msgstr "Vybrat email"
+
+msgid "Tickets of this department will receive emails from this email"
+msgstr "Vstupenky tohoto oddělení obdrží e-maily z tohoto e-mailu"
+
+msgid "Receive Email"
+msgstr "Přijmout email"
+
+msgid "Save Department"
+msgstr "Ulož oddělení"
+
+msgid "The user of this department will receive email on the new ticket"
+msgstr "Uživatel tohoto oddělení obdrží e-mail s novým lístkem"
+
+msgid "Are you sure you want to delete it?"
+msgstr "Opravdu ji chcete smazat?"
+
+msgid "Search Departments"
+msgstr "Vyhledat oddělení"
+
+msgid "Outgoing"
+msgstr "Odchozí"
+
+msgid "Click here to give us feedback"
+msgstr "Chcete-li nám poskytnout zpětnou vazbu, klikněte zde"
+
+msgid "Email Already Exist"
+msgstr "E-mail již existuje"
+
+msgid "The email has been stored"
+msgstr "E-mail byl uložen"
+
+msgid "The email has not been stored"
+msgstr "E-mail nebyl uložen"
+
+msgid "False"
+msgstr "Nepravdivé"
+
+msgid "True"
+msgstr "Skutečný"
+
+msgid "Send Email By"
+msgstr "Odeslat e-mail od"
+
+msgid "SMTP host type"
+msgstr "Typ hostitele SMTP"
+
+msgid "SMTP host"
+msgstr "Hostitel SMTP"
+
+msgid "SMTP Authentication"
+msgstr "Ověřování SMTP"
+
+msgid "SMTP Secure"
+msgstr "Zabezpečení SMTP"
+
+msgid "SMTP Port"
+msgstr "Port SMTP"
+
+msgid "If the system doesnot respond in 30 seconds"
+msgstr "Pokud systém neodpoví do 30 sekund"
+
+msgid "Auto Response"
+msgstr "Automatická odpověď"
+
+msgid "Save Email"
+msgstr "Uložit email"
+
+msgid "info"
+msgstr "informace"
+
+msgid "System email used for sending email"
+msgstr "Systémový email pro odesílání emailů"
+
+msgid "Email template has been stored"
+msgstr "Šablona emailu byla uložena"
+
+msgid "Email template has not been stored"
+msgstr "Šablona emailu nebyla uložena"
+
+msgid "Ban Email Try To Create Ticket"
+msgstr "Zakázat e-mail Zkuste vytvořit lístek"
+
+msgid "Ticket Priority Is Changed By"
+msgstr "Priorita Ticketu je změněna od"
+
+msgid "Data Deleted"
+msgstr "Data byla smazána"
+
+msgid "Body"
+msgstr "Tělo"
+
+msgid "Parameters"
+msgstr "Parametry"
+
+msgid "Tracking ID"
+msgstr "ID sledování"
+
+msgid "Ticket Priority"
+msgstr "Priorita ticketu"
+
+msgid "Department title"
+msgstr "Název oddělení"
+
+msgid "Group Title"
+msgstr "Jméno skupiny"
+
+msgid "Agent name"
+msgstr "Jméno agenta"
+
+msgid "Help topic title"
+msgstr "Název tématu pomoci"
+
+msgid "Feedback URL"
+msgstr "Adresa URL zpětné vazby"
+
+msgid "Ticket Subject"
+msgstr "Předmět Ticket"
+
+msgid "Ticket Tracking ID"
+msgstr "Ticket ID sledování"
+
+msgid "Close Date"
+msgstr "Zavřít datum"
+
+msgid "Save Email Template"
+msgstr "Uložit šablonu e-mailu"
+
+msgid "Field mark as published"
+msgstr "Označil pole jako publikováno"
+
+msgid "Field mark as unpublished"
+msgstr "Pole označeno jako nepublikováno"
+
+msgid "Field mark as required"
+msgstr "Označit pole jako vyžadováno"
+
+msgid "Field mark as not required"
+msgstr "Označit pole jako nevyžadováno"
+
+msgid "Field ordering down"
+msgstr "Zarovnání sestupně"
+
+msgid "Field ordering up"
+msgstr "Zarovnání vzestupně"
+
+msgid "Parent field has not been stored"
+msgstr "Nadřazené pole nebylo uloženo"
+
+msgid "Please Insert At least one value for every option"
+msgstr "Vložte prosím alespoň jednu hodnotu pro každou možnost"
+
+msgid "Field has not been stored"
+msgstr "Pole nebylo uloženo"
+
+msgid "Field has been stored"
+msgstr "Pole bylo uloženo"
+
+msgid "Field has been updated"
+msgstr "Pole bylo aktualizováno"
+
+msgid "Parent Field"
+msgstr "Rodičovské pole"
+
+msgid "Edit Field"
+msgstr "Upravit pole"
+
+msgid "Field Title"
+msgstr "Jméno pole"
+
+msgid "User Published"
+msgstr "Uživatel zveřejněn"
+
+msgid "Visitor Published"
+msgstr "Návštěvník byl publikován"
+
+msgid "Required"
+msgstr "Povinný"
+
+msgid "User Search"
+msgstr "Vyhledávání uživatelů"
+
+msgid "Visitor Search"
+msgstr "Hledání návštěvníků"
+
+msgid "Show On Listing"
+msgstr "Zobrazit výpis"
+
+msgid "Advanced"
+msgstr "Rozšířené"
+
+msgid "Field has not been deleted"
+msgstr "Pole nebylo odstraněno"
+
+msgid "Field has been deleted"
+msgstr "Pole bylo smazáno"
+
+msgid "Add Field"
+msgstr "Přidat pole"
+
+msgid "Field"
+msgstr "Pole"
+
+msgid "Text Field"
+msgstr "Textové pole"
+
+msgid "Check Box"
+msgstr "Zaškrtávací políčko"
+
+msgid "Drop Down"
+msgstr "Rozevírací seznam"
+
+msgid "Text Area"
+msgstr "Oblast textu"
+
+msgid "Radio Button"
+msgstr "Přepínač"
+
+msgid "Upload File"
+msgstr "Nahrát soubor"
+
+msgid "Multi Select"
+msgstr "Více násobný výběr"
+
+msgid "Terms and Conditions"
+msgstr "Pravidla a podmínky"
+
+msgid "Dependent Field"
+msgstr "Závislé pole"
+
+msgid "Field Type"
+msgstr "Titul pole"
+
+msgid "Field Size"
+msgstr "Velikost pole"
+
+msgid "Max Length"
+msgstr "Maximální délka"
+
+msgid "Columns"
+msgstr "Sloupce"
+
+msgid "Rows"
+msgstr "Řádky"
+
+msgid "Use the table below to add new values"
+msgstr "V následující tabulce můžete přidat nové hodnoty"
+
+msgid "Add Value"
+msgstr "Přidaná hodnota"
+
+msgid "Terms and Conditions Text"
+msgstr "Obchodní podmínky Text"
+
+msgid "Terms and Conditions Link Type"
+msgstr "Smluvní podmínky Typ odkazu"
+
+msgid "Direct Link"
+msgstr "Přímý odkaz"
+
+msgid "Wordpress Page"
+msgstr "Stránka Wordpress"
+
+msgid "Select Link Type"
+msgstr "Vyberte typ odkazu"
+
+msgid "Terms and Conditions Link"
+msgstr "Odkaz na smluvní podmínky"
+
+msgid "Terms and Conditions Page"
+msgstr "Obchodní podmínky"
+
+msgid "Select Wordpress page"
+msgstr "Vyberte stránku Wordpress"
+
+msgid "Save Field"
+msgstr "Uložit pole"
+
+msgid "User Publish"
+msgstr "Publikování uživatele"
+
+msgid "Visitor Publish"
+msgstr "Publikovat návštěvníka"
+
+msgid "Published"
+msgstr "Publikována"
+
+msgid "Unpublished"
+msgstr "Nepublikovaný"
+
+msgid "Not required"
+msgstr "Není vyžadováno"
+
+msgid "users popup"
+msgstr "vyskakovací okno uživatelů"
+
+msgid "Can Not Unpublished"
+msgstr "Nemohu zneveřejnit"
+
+msgid "good"
+msgstr "dobrý"
+
+msgid "cross"
+msgstr "přejít"
+
+msgid "can not mark as not required"
+msgstr "nelze označit jako nevyžadované"
+
+msgid "Cannot unpublished field"
+msgstr "Nelze zveřejnit pole"
+
+msgid "User Data"
+msgstr "Uživatelská data"
+
+msgid "Erasing data request has been stored"
+msgstr "Byl vymazán požadavek na vymazání dat"
+
+msgid "Failed while storing"
+msgstr "Při ukládání selhalo"
+
+msgid "Erase data request withdrawn"
+msgstr "Vymazat žádost o data byla stažena"
+
+msgid "Failed while performing action"
+msgstr "Při provádění akce se nezdařilo"
+
+msgid "User identifying data erased"
+msgstr "Data pro identifikaci uživatele byla vymazána"
+
+msgid "User data Deleted"
+msgstr "Uživatelská data byla smazána"
+
+msgid "Export your data"
+msgstr "Exportujte data"
+
+msgid "You have filed a request to remove your data."
+msgstr "Podali jste žádost o odstranění svých údajů."
+
+msgid "To withdraw erases data request"
+msgstr "Chcete-li odstranit žádost o vymazání dat"
+
+msgid "Request data removal from the system."
+msgstr "Požádejte o odstranění dat ze systému."
+
+msgid "Add GDPR Field"
+msgstr "Přidat pole GDPR"
+
+msgid "Field Text"
+msgstr "Text pole"
+
+msgid "Link Type"
+msgstr "Typ odkazu"
+
+msgid "Link Page"
+msgstr "Odkazová stránka"
+
+msgid "User Email"
+msgstr "E-mail uživatele"
+
+msgid "Request Status"
+msgstr "Stav požadavku"
+
+msgid "Awaiting response"
+msgstr "Čeká na odpověď"
+
+msgid "Erased identifying data"
+msgstr "Vymazaná identifikační data"
+
+msgid "Deleted"
+msgstr "Vymazáno"
+
+msgid "Erase identifying data"
+msgstr "Vymažte identifikační údaje"
+
+msgid "Are you sure to erase identifying data"
+msgstr "Opravdu vymažete identifikační údaje"
+
+msgid "Delete data"
+msgstr "Smazat data"
+
+msgid "Link"
+msgstr "Odkaz"
+
+msgid "Direct URL"
+msgstr "Přímá adresa URL"
+
+msgid "Page Title or URL"
+msgstr "Název stránky nebo URL"
+
+msgid "Cannot open file"
+msgstr "Nemohu otevřít soubor"
+
+msgid "Dir is not writable"
+msgstr "Dir nelze zapisovat"
+
+msgid "Unable to connect to the server"
+msgstr "Nelze se připojit k serveru"
+
+msgid "Language is not installed"
+msgstr "Jazyk nebyl nainstalován"
+
+msgid "Language directory is not writable"
+msgstr "Adresář jazyků nelze zapisovat"
+
+msgid "Required language is not installed but similar language like"
+msgstr "Požadovaný jazyk není nainstalován, ale podobný jazyk jako"
+
+msgid "is found in your system"
+msgstr "se nachází ve vašem systému"
+
+msgid "Language code"
+msgstr "kód jazyka"
+
+msgid "Empty values"
+msgstr "Prázdné hodnoty"
+
+msgid "File is not writable"
+msgstr "Soubor nelze zapisovat"
+
+msgid "File successfully downloaded"
+msgstr "Soubor byl úspěšně stažen"
+
+msgid "Ordering updated"
+msgstr "Objednávka byla aktualizována"
+
+msgid "Plugin Detail"
+msgstr "Detail pluginu"
+
+msgid "Plugin for online JS Help Desk System"
+msgstr "Plugin pro online JS Help Desk System"
+
+msgid "Created By"
+msgstr "Vytvořil"
+
+msgid "Company"
+msgstr "Firma"
+
+msgid "Plugin Name"
+msgstr "Jméno pluginu"
+
+msgid "job plugin"
+msgstr "zásuvný modul pro práci"
+
+msgid "vehicle manager"
+msgstr "vedoucí vozidla"
+
+msgid "car manager"
+msgstr "správce vozu"
+
+msgid "job manager"
+msgstr "manažer práce"
+
+msgid "Statistics"
+msgstr "Statistiky"
+
+msgid "Today Tickets"
+msgstr "Vstupenky dnes"
+
+msgid "Short Links"
+msgstr "Krátké odkazy"
+
+msgid "Overall Report"
+msgstr "Celkový report"
+
+msgid "email template"
+msgstr "e-mailová šablona"
+
+msgid "Install Now"
+msgstr "Nainstalovat nyní"
+
+msgid "Premium Addons List"
+msgstr "Seznam prémiových doplňků"
+
+msgid "Features"
+msgstr "Funkce"
+
+msgid "The best support system plugin for WordPress has everything you need."
+msgstr "Nejlepší plugin systému podpory pro WordPress má vše, co potřebujete."
+
+msgid "Add-Ons List"
+msgstr "Seznam doplňků"
+
+msgid "Add New Addons"
+msgstr "Přidat nové doplňky"
+
+msgid "addon"
+msgstr "doplněk"
+
+msgid "View All Tickets"
+msgstr "Zobrazit všechny vstupenky"
+
+msgid "Waiting Agent Reply"
+msgstr "Čekající agent odpověď"
+
+msgid "Waiting Your Reply"
+msgstr "Čeká se na vaši odpověď"
+
+msgid "Ticket History"
+msgstr "Historie ticketu"
+
+msgid "Addons"
+msgstr "Addony"
+
+msgid "Add agents and assign roles and permissions to provide assistance."
+msgstr "Přidejte agenty a přiřaďte role a oprávnění k poskytování pomoci."
+
+msgid "Ticket Auto Close"
+msgstr "Automatické uzavření lístku"
+
+msgid ""
+"Define rules for the ticket to auto-close after a specific interval of time."
+msgstr ""
+"Definujte pravidla pro automatické uzavření lístku po určitém časovém "
+"intervalu."
+
+msgid "Get a survey from customers on ticket closing to improve quality."
+msgstr ""
+"Získejte průzkum od zákazníků o uzavření vstupenek za účelem zlepšení "
+"kvality."
+
+msgid "Help users to find and select the area with which they need assistance."
+msgstr "Pomozte uživatelům najít a vybrat oblast, se kterou potřebují pomoc."
+
+msgid "Private Note"
+msgstr "Soukromá poznámka"
+
+msgid ""
+"The private note is used as reminders or to give other agents insights into "
+"the ticket issue."
+msgstr ""
+"Soukromá nota se používá jako připomenutí nebo k poskytnutí dalších "
+"informací agentům o vydávání vstupenek."
+
+msgid ""
+"Stop losing productivity on repetitive queries, build your knowledge base."
+msgstr ""
+"Přestaňte ztrácet produktivitu při opakovaných dotazech a budujte svou "
+"znalostní základnu."
+
+msgid "Max Tickets"
+msgstr "Max Vstupenky"
+
+msgid ""
+"Enables admin to set N numbers of tickets for users and agents separately."
+msgstr ""
+"Umožňuje správci nastavit N počet vstupenek zvlášť pro uživatele a agenty."
+
+msgid "Merge Tickets"
+msgstr "Sloučit vstupenky"
+
+msgid ""
+"Enables agents to merge two tickets of the same user into one instead of "
+"dealing with the same issue on many tickets."
+msgstr ""
+"Umožňuje agentům sloučit dvě lístky stejného uživatele do jednoho namísto "
+"řešení stejného problému na mnoha lístcích."
+
+msgid ""
+"Defines rules or set specific intervals of time to make ticket auto overdue."
+"The ticket can overdue by type or overdue by Cronjob."
+msgstr ""
+"Definuje pravidla nebo nastavuje konkrétní časové intervaly, aby se "
+"automatické prodlení vstupenek prodalo. Vstupenka může být zpožděna podle "
+"typu nebo zpožděna společností Cronjob."
+
+msgid ""
+"SMTP enables you to add custom mail protocol to send and receive emails "
+"within the js help desk."
+msgstr ""
+"SMTP vám umožňuje přidat vlastní poštovní protokol pro odesílání a přijímání "
+"e-mailů v helpdesku js."
+
+msgid ""
+"Displays complete ticket history along with the ticket status, currently "
+"assigned user and other actions performed on each ticket."
+msgstr ""
+"Zobrazuje kompletní historii vstupenek, stav vstupenek, aktuálně přiřazeného "
+"uživatele a další akce provedené na každém lístku."
+
+msgid "Pre-populated messages allow support agents to respond quickly."
+msgstr "Předvyplněné zprávy umožňují agentům podpory rychle reagovat."
+
+msgid "Enables users to reply to the tickets via email without login."
+msgstr "Umožňuje uživatelům odpovědět na vstupenky e-mailem bez přihlášení."
+
+msgid "Time Tracking"
+msgstr "Sledování času"
+
+msgid ""
+"Track the time spent on each ticket by each agent and each reply. Report the "
+"admin on how much time is spent on each ticket."
+msgstr ""
+"Sledujte čas strávený na každém lístku každým agentem a každou odpověď. "
+"Reportujte administrátorovi, kolik času strávíte na každém lístku."
+
+msgid "User Options"
+msgstr "Možnosti uživatele"
+
+msgid ""
+"User options enable you to add Google Re-captcha or JS Help Desk Re-captcha "
+"for a registration form."
+msgstr ""
+"Uživatelské možnosti umožňují přidat Google Re-captcha nebo JS Help Desk Re-"
+"captcha pro registrační formulář."
+
+msgid "Actions"
+msgstr "Akce"
+
+msgid "Ticket Actions"
+msgstr "Akce vstupenek"
+
+msgid ""
+"Get multiple action options on each ticket like Print Ticket, Lock Ticket, "
+"Transfer ticket, etc."
+msgstr ""
+"Získejte více možností akcí na každém lístku, jako je Tisk lístků, Zamknout "
+"lístek, Transfer lístek atd."
+
+msgid "Make unlimited announcements associated with the support system."
+msgstr "Udělejte neomezená oznámení přidružená k systému podpory."
+
+msgid ""
+"It allows you to block the email of any user to restrict him to create new "
+"tickets."
+msgstr ""
+"Umožňuje vám zablokovat e-mail libovolného uživatele a omezit ho tak, aby "
+"vytvořil nové lístky."
+
+msgid "Desktop Notification"
+msgstr "Oznámení na ploše"
+
+msgid ""
+"The Desktop notifications will keep you up to date about anything happens on "
+"your support system."
+msgstr ""
+"Oznámení na ploše vás budou informovat o všem, co se ve vašem systému "
+"podpory děje."
+
+msgid "Save the ticket as a PDF in your system and able to export all data."
+msgstr ""
+"Uložte si lístek jako PDF do svého systému a můžete exportovat všechna data."
+
+msgid "Create downloads to ensure the user to get downloads from downloads."
+msgstr ""
+"Vytvářejte stahování, abyste zajistili, že uživatel bude stahování stahován."
+
+msgid "Add FAQs to drastically reduce the number of common questions."
+msgstr "Přidejte časté dotazy, abyste výrazně snížili počet častých otázek."
+
+msgid ""
+"Get multiple themes with a beautiful color scheme to make the site beautiful."
+msgstr "Získejte více motivů s krásným barevným schématem, aby byl web krásný."
+
+msgid "Dashboard Widgets"
+msgstr "Widgety řídicího panelu"
+
+msgid ""
+"Get immediate data of your support operations as soon as you log into your "
+"WordPress administration area."
+msgstr ""
+"Jakmile se přihlásíte do administrační oblasti WordPress, získejte okamžitá "
+"data o podpůrných operacích."
+
+msgid "Internal Mail"
+msgstr "Interní Mail"
+
+msgid "Use an internal email to send emails to one agent to another agent."
+msgstr ""
+"Pomocí interního e-mailu můžete odesílat e-maily jednomu agentovi jinému "
+"agentovi."
+
+msgid "Front-End Widgets"
+msgstr "Přední ovládací prvky"
+
+msgid ""
+"Widgets in WordPress allow you to add content and features in the widgetized "
+"areas of your theme."
+msgstr ""
+"Widgety v WordPress vám umožňují přidávat obsah a funkce do widgetovaných "
+"oblastí vašeho motivu."
+
+msgid ""
+"JS Help Desk WooCommerce provides the much-needed bridge between your "
+"WooCommerce store and the JS Help Desk."
+msgstr ""
+"JS Help Desk WooCommerce poskytuje tolik potřebný most mezi obchodem "
+"WooCommerce a JS Help Desk."
+
+msgid ""
+"Collect your customer's private data, sensitive information from credit card "
+"to health information and store them encrypted."
+msgstr ""
+"Shromažďujte soukromá data zákazníka, citlivé informace z kreditní karty ke "
+"zdravotním informacím a ukládejte je šifrovaná."
+
+msgid ""
+"Without valid Envato, license clients won't be able to open a new ticket."
+msgstr "Bez platného Envato nebudou moci licenční klienti otevřít nový lístek."
+
+msgid ""
+"Adds the option to the registration form for prompting new users to "
+"subscribe to your email list."
+msgstr ""
+"Přidá možnost do registračního formuláře a vyzve nové uživatele k odběru "
+"vašeho seznamu e-mailů."
+
+msgid ""
+"Paid Support is the easiest way to integrate and manage payments for your "
+"tickets."
+msgstr ""
+"Placená podpora je nejjednodušší způsob, jak integrovat a spravovat platby "
+"za vstupenky."
+
+msgid "easy digital downloads"
+msgstr "snadné digitální stahování"
+
+msgid ""
+"EDD offers customers to open new tickets just one click from their EDD "
+"account."
+msgstr ""
+"EDD nabízí zákazníkům otevírání nových vstupenek jediným kliknutím z jejich "
+"účtu EDD."
+
+msgid "We'd love to hear from You."
+msgstr "Rádi bychom od vás slyšeli."
+
+msgid "Please write appreciated review at"
+msgstr "Napište prosím oceněnou recenzi na"
+
+msgid "WP Extension Directory"
+msgstr "Adresář rozšíření WP"
+
+msgid "star"
+msgstr "hvězda"
+
+msgid "Spread the word"
+msgstr "Šířit slovo"
+
+msgid "twitter"
+msgstr "cvrlikání"
+
+msgid "JS Help Desk / JS Support Ticket Control Panel"
+msgstr "Ovládací panel JS Help Desk / JS Support Ticket Control Panel"
+
+msgid "JS Help Desk / JS Support Ticket main control panel"
+msgstr "Hlavní ovládací panel JS Help Desk / JS Support Ticket"
+
+msgid "Add new ticket form for both user and agent"
+msgstr "Přidejte nový formulář lístku pro uživatele i agenta"
+
+msgid "My tickets for both user and agent"
+msgstr "Moje vstupenky pro uživatele i agenta"
+
+msgid "List downloads"
+msgstr "Seznam stahování"
+
+msgid "Latest Downloads"
+msgstr "Nejnovější soubory ke stažení"
+
+msgid "Show latest downloads. Options"
+msgstr "Zobrazit nejnovější stahování. Možnosti"
+
+msgid "and"
+msgstr "a"
+
+msgid "i.e."
+msgstr "to je"
+
+msgid "Popular Downloads"
+msgstr "Populární soubory ke stažení"
+
+msgid "Show popular downloads. Options"
+msgstr "Zobrazit populární stahování. Možnosti"
+
+msgid "List knowledge base"
+msgstr "Seznam znalostní databaze"
+
+msgid "Latest Knowledge Base"
+msgstr "Nejnovější znalostní báze"
+
+msgid "Show latest knowledge base. Options"
+msgstr "Zobrazit nejnovější znalostní bázi. Možnosti"
+
+msgid "Popular knowledge base"
+msgstr "Populární znalostní báze"
+
+msgid "Show popular knowledge base. Options"
+msgstr "Zobrazit populární znalostní základnu. Možnosti"
+
+msgid "List FAQ's"
+msgstr "Seznam FAQ"
+
+msgid "Latest FAQ's"
+msgstr "Nejnovější  FAQ"
+
+msgid "Show latest FAQ's. Options"
+msgstr "Zobrazit nejnovější FAQ. Možnosti"
+
+msgid "Popular FAQ's"
+msgstr "Populární FAQ"
+
+msgid "Show popular FAQ's. Options"
+msgstr "Zobrazit oblíbené FAQ. Možnosti"
+
+msgid "List announcements"
+msgstr "Seznam oznámení"
+
+msgid "Latest Announcements"
+msgstr "Nejnovější oznámení"
+
+msgid "Show latest announcements. Options"
+msgstr "Zobrazit nejnovější oznámení. Možnosti"
+
+msgid "Popular Announcements"
+msgstr "Populární oznámení"
+
+msgid "Show popular announcements. Options"
+msgstr "Zobrazit populární oznámení. Možnosti"
+
+msgid "spinning wheel"
+msgstr "kolovrat"
+
+msgid "Get JS Help Desk Translations"
+msgstr "Získejte překlady JS Help Desk"
+
+msgid "Get Translations"
+msgstr "Získat překlad"
+
+msgid "Select Translation"
+msgstr "Vybrat překlad"
+
+msgid ""
+"When WordPress language change to ro, JS Help Desk language will auto change "
+"to ro"
+msgstr ""
+"Když se jazyk WordPress změní na ro, jazyk JS Help Desk se automaticky změní "
+"na ro"
+
+msgid "c error"
+msgstr "chyba c"
+
+msgid "saved"
+msgstr "uložené"
+
+msgid "Contribute In Translation"
+msgstr "Pomoc s překladem"
+
+msgid "translate"
+msgstr "přeložit"
+
+msgid "Manual Download"
+msgstr "Ruční stahování"
+
+msgid "Log In"
+msgstr "Přehlásit se"
+
+msgid "Log Out"
+msgstr "Odhlásit se"
+
+msgid "Agent Feedbacks"
+msgstr "Zpětná vazba agenta"
+
+msgid "Submit ticket"
+msgstr "Odeslat lístek"
+
+msgid "my ticket"
+msgstr "můj lístek"
+
+msgid "View all the created tickets"
+msgstr "Zobrazit všechny vytvořené vstupenky"
+
+msgid "your ticket status"
+msgstr "stav vašeho lístku"
+
+msgid "closed ticket"
+msgstr "uzavřená jízdenka"
+
+msgid "answered ticket"
+msgstr "odpověď lístek"
+
+msgid "overdue ticket"
+msgstr "po splatnosti"
+
+msgid "View All Downloads"
+msgstr "Zobrazit všechna stažení"
+
+msgid "View All Announcements"
+msgstr "Zobrazit všechna oznámení"
+
+msgid "View All Knowledge Base"
+msgstr "Zobrazit všechny znalostní báze"
+
+msgid "Latest FAQs"
+msgstr "Nejnovější FAQ"
+
+msgid "View All FAQs"
+msgstr "Zobrazit všechny časté dotazy"
+
+msgid "keep me login"
+msgstr "zůstat přihlášený"
+
+msgid "Repeat Password"
+msgstr "Zopakovat heslo"
+
+msgid "Subscribe to the newsletter"
+msgstr "Přihlaste se k odběru novinek"
+
+msgid "has been changed"
+msgstr "bylo změněno"
+
+msgid "has not been changed"
+msgstr "nebyl změněn"
+
+msgid "JS Support Ticket Settings"
+msgstr "Nastavení vstupenek podpory JS"
+
+msgid "General"
+msgstr "Všeobecné"
+
+msgid "Complete"
+msgstr "Kompletní"
+
+msgid "Configurations complete"
+msgstr "Konfigurace dokončena"
+
+msgid "Step 4 of 4"
+msgstr "Krok 4 ze 4"
+
+msgid "Step 3 of 3"
+msgstr "Krok 3 ze 3"
+
+msgid "Setting Completed"
+msgstr "Nastavení bylo dokončeno"
+
+msgid "Setting you applied has been saved successfully."
+msgstr "Nastavení, které jste použili, bylo úspěšně uloženo."
+
+msgid "Finish"
+msgstr "Konec"
+
+msgid "Ticket Setting"
+msgstr "Nastavení Ticket systemu"
+
+msgid "Setting Complete"
+msgstr "Nastavení dokončeno"
+
+msgid "General Configurations"
+msgstr "Obecné konfigurace"
+
+msgid "Step 1 of 4"
+msgstr "Krok 1 ze 4"
+
+msgid "Step 1 of 3"
+msgstr "Krok 1 ze 3"
+
+msgid "Enter the site title"
+msgstr "Zadejte název webu"
+
+msgid "Date format for plugin"
+msgstr "Formát data pro plugin"
+
+msgid "Show Breadcrumbs"
+msgstr "Zobrazit Drobečková navigace"
+
+msgid "Show navigation in breadcrumbs"
+msgstr "Zobrazit navigaci v navigaci"
+
+msgid "Upload file size in KB's"
+msgstr "Nahrajte velikost souboru v KB"
+
+msgid "File Extension"
+msgstr "Přípona souboru"
+
+msgid "Sequential"
+msgstr "Sekvenční"
+
+msgid "Feedback Configurations"
+msgstr "Konfigurace zpětné vazby"
+
+msgid "Step 3 of 4"
+msgstr "Krok 3 ze 4"
+
+msgid "Set Email Delay Time"
+msgstr "Nastavit dobu zpoždění e-mailu"
+
+msgid " :"
+msgstr ":"
+
+msgid "Set Email Delay"
+msgstr "Nastavit zpoždění e-mailu"
+
+msgid "Back"
+msgstr "Zpět"
+
+msgid "Ticket Configurations"
+msgstr "Konfigurace vstupenek"
+
+msgid "Step 2 of 4"
+msgstr "Krok 2 ze 4"
+
+msgid "Step 2 of 3"
+msgstr "Krok 2 ze 3"
+
+msgid "Enable/Disable Open Ticket"
+msgstr "Povolit / Zakázat otevřenou vstupenku"
+
+msgid "Ticket ID sequence"
+msgstr "Sekvence ID lístků"
+
+msgid "Set ticket id sequential or random"
+msgstr "Nastavit sekvenční nebo náhodné ID lístku"
+
+msgid "Maximum Tickets"
+msgstr "Maximální počet vstupenek"
+
+msgid "Set Maximum Ticket Per user"
+msgstr "Nastavit maximální vstupenku na uživatele"
+
+msgid "Maximum Open Ticket"
+msgstr "Maximální otevřený lístek"
+
+msgid "Reopen ticket within Days"
+msgstr "Znovu otevřete lístek do Dnů"
+
+msgid "Show Captcha to visitor on ticket form"
+msgstr "Ukažte Captchovi návštěvníkovi na formuláři vstupenky"
+
+msgid "Enable/Disable Captcha on Ticket Form"
+msgstr "Povolit / Zakázat Captcha ve formuláři vstupenky"
+
+msgid "Own Captcha operands"
+msgstr "Vlastní operandy Captcha"
+
+msgid "Enable/Disable Own Captcha subtraction"
+msgstr "Povolit / zakázat odčítání vlastní Captchy"
+
+msgid "Enable Print Ticket"
+msgstr "Povolit tisk vstupenek"
+
+msgid "Enable/Disable Print Ticket"
+msgstr "Povolit / zakázat tiskový lístek"
+
+msgid "Please insert activation key to proceed"
+msgstr "Chcete-li pokračovat, zadejte aktivační klíč"
+
+msgid "Addon Installation Failed"
+msgstr "Instalace doplňku se nezdařila"
+
+msgid "Addon installation failed, Directory permission error"
+msgstr "Instalace doplňku se nezdařila, chyba oprávnění adresáře"
+
+msgid "Addon Installation Failed, File download error"
+msgstr "Instalace addonu se nezdařila, chyba stahování souboru"
+
+msgid "left image"
+msgstr "obrázek vlevo"
+
+msgid "right image"
+msgstr "správný obrázek"
+
+msgid "buy now"
+msgstr "kup nyní"
+
+msgid "private note"
+msgstr "soukromá nota"
+
+msgid "max ticket"
+msgstr "maximální vstupenka"
+
+msgid "merge tickets"
+msgstr "sloučit lístky"
+
+msgid "time tracking"
+msgstr "sledování času"
+
+msgid "user options"
+msgstr "uživatelské možnosti"
+
+msgid "ticket actions"
+msgstr "akce vstupenek"
+
+msgid "desktop notifications"
+msgstr "oznámení na ploše"
+
+msgid "admin widgets"
+msgstr "admin widgety"
+
+msgid "internal mail"
+msgstr "interní pošta"
+
+msgid "frontend widget"
+msgstr "ovládací prvek frontend"
+
+msgid "woocommerce support"
+msgstr "podpora woocommerce"
+
+msgid "mail chimp"
+msgstr "poštovní šimpanz"
+
+msgid "addon in no longer active"
+msgstr "addon již není aktivní"
+
+msgid ""
+"JS Help Desk is a trusted open source ticket system. JS Help Desk is a "
+"simple, easy to use, web-based customer support system. Users can create a "
+"ticket from the front-end. JS Help Desk comes packed with lot features than "
+"most of the expensive(and complex) support ticket system on the market. The "
+"best part is, It completely free."
+msgstr ""
+"JS Help Desk je důvěryhodný systém vstupenek s otevřeným zdrojovým kódem. JS "
+"Help Desk je jednoduchý, snadno použitelný webový systém zákaznické podpory. "
+"Uživatelé si mohou vytvořit lístek z klientského rozhraní. JS Help Desk je "
+"nabitý spoustou funkcí, než většina drahého (a komplexního) systému podpory "
+"vstupenek na trhu. Nejlepší na tom je, že je zcela zdarma."
+
+msgid "JS Help Desk Addon Installer"
+msgstr "Instalační program doplňku JS Help Desk"
+
+msgid "Add on list"
+msgstr "Přidat na seznam"
+
+msgid "Please Insert Your Activation key"
+msgstr "Vložte prosím svůj aktivační klíč"
+
+msgid "Activation key"
+msgstr "Aktivační klíč"
+
+msgid "Proceed"
+msgstr "Pokračovat"
+
+msgid "Select Addons for download"
+msgstr "Vyberte Addons pro stažení"
+
+msgid "All allowed add ons are already installed"
+msgstr "Všechny povolené přidané položky jsou již nainstalovány"
+
+msgid "You are not allowed to install any add on"
+msgstr "Není dovoleno instalovat žádný doplněk"
+
+msgid "Select All Addons"
+msgstr "Vyberte Všechny doplňky"
+
+msgid "Add ons installed and activated successfully"
+msgstr "Přidání nainstalovaných a úspěšně aktivovaných doplňků"
+
+msgid "Priority Title Already Exist"
+msgstr "Název priority již existuje"
+
+msgid "Priority has been stored"
+msgstr "Priorita byla uložena"
+
+msgid "Priority has not been stored"
+msgstr "Priorita nebyla uložena"
+
+msgid "Priority has been deleted"
+msgstr "Priorita byla smazána"
+
+msgid "Priority has not been deleted"
+msgstr "Priorita nebyla smazána"
+
+msgid "Default priority cannot delete"
+msgstr "Výchozí priorita nemůže být vymazána"
+
+msgid "Priority has been make default"
+msgstr "Priorita byla nastavená jako výchozí"
+
+msgid "Priority has not been make default"
+msgstr "Priorita nebyla nastavená jako výchozí"
+
+msgid "Color"
+msgstr "Barva"
+
+msgid "Ticket Overdue Interval Type"
+msgstr "Typ zpožděného Ticketu"
+
+msgid "Save Priority"
+msgstr "Uložit prioritu"
+
+msgid "Date Interval"
+msgstr "Datum Interval"
+
+msgid "Reply posted"
+msgstr "Odpověď zveřejněna"
+
+msgid "Reply posted on ticket"
+msgstr "Odpověď zveřejněna na lístku"
+
+msgid "Ticket is replied by"
+msgstr "Na ticket odpověděl"
+
+msgid "Reply Has been Posted"
+msgstr "Odpovědět bylo zveřejněno"
+
+msgid "Reply Has Not been Posted"
+msgstr "Odpovědět nebylo zveřejněno"
+
+msgid "Dates"
+msgstr "Data"
+
+msgid "Department Detail Report"
+msgstr "Podrobná zpráva oddělení"
+
+msgid "Export Data"
+msgstr "Exportovat data"
+
+msgid "Department Statistics"
+msgstr "Statistiky oddělení"
+
+msgid "pending ticket"
+msgstr "čeká na vstupenku"
+
+msgid "Time Taken"
+msgstr "Čas přijatý"
+
+msgid "Merged and closed"
+msgstr "Sloučené a uzavřené"
+
+msgid "Out of"
+msgstr "Mimo"
+
+msgid "Ticket by departments"
+msgstr "Ticket podle oddělení"
+
+msgid "Tickets By Priority"
+msgstr "Ticket podle důležitosti"
+
+msgid "Staff Member Tickets"
+msgstr "Tickety členů personálu"
+
+msgid "all ticket"
+msgstr "všechny lístky"
+
+msgid "Tickets By Status And Priorities"
+msgstr "Tickety podle statusu a priority"
+
+msgid "Tickets By Agents"
+msgstr "Vstupenky od agentů"
+
+msgid "Staff Reports"
+msgstr "Reporty personálu"
+
+msgid "Based on"
+msgstr "Na základě"
+
+msgid "Customer Satisfaction"
+msgstr "Spokojenost zákazníků"
+
+msgid "satisfaction image"
+msgstr "obrázek spokojenosti"
+
+msgid "Excellent"
+msgstr "Vynikající"
+
+msgid "Happy"
+msgstr "Šťastný"
+
+msgid "Normal"
+msgstr "Normální"
+
+msgid "bad"
+msgstr "špatný"
+
+msgid "Sad"
+msgstr "Smutný"
+
+msgid "Angry"
+msgstr "Naštvaný"
+
+msgid "Agent Detail Report"
+msgstr "Podrobná zpráva agenta"
+
+msgid "Agent Statistics"
+msgstr "Statistiky agentů"
+
+msgid "staff image"
+msgstr "obrázek personálu"
+
+msgid "Average rating"
+msgstr "Průměrné hodnocení"
+
+msgid "Average time"
+msgstr "Průměrný čas"
+
+msgid "Tickets not assigned to the staff member"
+msgstr "Tickety, které nejsou zaměstnanci přiděleny"
+
+msgid "Minutes"
+msgstr "Minut"
+
+msgid "Report By Staff Member"
+msgstr "Zpráva člena personálu"
+
+msgid "User Detail Report"
+msgstr "Podrobná zpráva uživatele"
+
+msgid "User Statistics"
+msgstr "Statistiky uživatelů"
+
+msgid "Users"
+msgstr "Uživatelé"
+
+msgid "Ticket Status By Departments"
+msgstr "Stav Ticketů podle oddělení"
+
+msgid "Agent Report"
+msgstr "Zpráva agenta"
+
+msgid "Agent Tickets"
+msgstr "Vstupenky agenta"
+
+msgid "Reports Statistics"
+msgstr "Statistiky sestav"
+
+msgid "System error has been deleted"
+msgstr "Systémová chyba byla odstraněna"
+
+msgid "System error has not been deleted"
+msgstr "Systémová chyba nebyla odstraněna"
+
+msgid "Remove All"
+msgstr "Odebrat všechny"
+
+msgid "Support for this Envato license has expired"
+msgstr "Podpora této licence Envato vypršela"
+
+msgid "Record not found"
+msgstr "Záznam nenalezen"
+
+msgid "Banned email cannot create ticket"
+msgstr "Zabanovaná adresa nemůže vytvořit ticket"
+
+msgid "Incorrect Captcha code"
+msgstr "Špatný Captcha kód"
+
+msgid "Please select paid support item"
+msgstr "Vyberte položku placené podpory"
+
+msgid "No purchase found with that code"
+msgstr "S tímto kódem nebyl nalezen žádný nákup"
+
+msgid "Provide a valid license key to create a ticket."
+msgstr "Chcete-li vytvořit lístek, zadejte platný licenční klíč."
+
+msgid "Your license has expired."
+msgstr "Platnost vaší licence vypršela."
+
+msgid "Your license is not active, activate your license."
+msgstr "Vaše licence není aktivní, aktivujte ji."
+
+msgid "Due date error is not valid"
+msgstr "Kvůli chybě, datum není platné"
+
+msgid "Ticket has not been created"
+msgstr "Ticket nebyla vytvořena"
+
+msgid "Ticket created"
+msgstr "Vstupenka byla vytvořena"
+
+msgid "created"
+msgstr "vytvořeno"
+
+msgid "Guest"
+msgstr "Návštěvník"
+
+msgid "Ticket is updated by"
+msgstr "Ticket je aktualizován od"
+
+msgid "Ticket is created by"
+msgstr "Ticket je vytvořený od"
+
+msgid "Ticket has been deleted"
+msgstr "Ticket byl smazán"
+
+msgid "Ticket has not been deleted"
+msgstr "Ticket nebyl smazán"
+
+msgid "in use cannot be deleted"
+msgstr "v provozu, nelze aby jste odstranit"
+
+msgid "Ticket already closed"
+msgstr "Ticket již byl zavřen"
+
+msgid "Ticket has been closed"
+msgstr "Ticket byl zavřen"
+
+msgid "Ticket has not been closed"
+msgstr "Ticket nebyl uzavřen"
+
+msgid "Ticket is closed by"
+msgstr "Ticket je zavřený od"
+
+msgid "Your are not allowed"
+msgstr "Nemáte povoleno"
+
+msgid "The department has been transferred"
+msgstr "Oddělení bylo převedeno"
+
+msgid "The department has not been transferred"
+msgstr "Oddělení nebylo převedeno"
+
+msgid "The department is transferred by"
+msgstr "Katedru převádí"
+
+msgid "Assigned to agent"
+msgstr "Přiřazeno agentovi"
+
+msgid "Not assigned to agent"
+msgstr "Není přiřazen agentovi"
+
+msgid "Assign ticket to agent"
+msgstr "Přiřadit vstupenku agentovi"
+
+msgid "Ticket is assigned to agent by"
+msgstr "Vstupenka je agentovi přiřazena agentem"
+
+msgid "Ticket already have same priority"
+msgstr "Ticket již mají stejnou prioritu"
+
+msgid "Priority has been changed"
+msgstr "Priorita byla změněná"
+
+msgid "Priority has not been changed"
+msgstr "Priorita nebyla změněná"
+
+msgid "Change Priority"
+msgstr "Změnit prioritu"
+
+msgid "Email already banned"
+msgstr "Email již byl zabanován"
+
+msgid "The email has been banned"
+msgstr "E-mail byl zakázán"
+
+msgid "The email has not been banned"
+msgstr "E-mail nebyl zakázán"
+
+msgid "Email is banned by"
+msgstr "Email zabanován"
+
+msgid "The ticket has been reopened"
+msgstr "Vstupenka byla znovu otevřena"
+
+msgid "The ticket has not been reopened"
+msgstr "Vstupenka nebyla znovu otevřena"
+
+msgid "Reopen Ticket"
+msgstr "Znovu otevřít ticket"
+
+msgid "The ticket is reopened by"
+msgstr "Vstupenku znovu otevře"
+
+msgid "The ticket reopens time limit end"
+msgstr "Lístek znovu otevře časový limit"
+
+msgid "Email has been unbanned"
+msgstr "Email byl odbanován"
+
+msgid "Email has not been unbanned"
+msgstr "Email byl odbanován"
+
+msgid "Unbanned Email"
+msgstr "Odbanovaný email"
+
+msgid "Email is unbanned by"
+msgstr "Email odbanován"
+
+msgid "Email cannot be unbanned"
+msgstr "Email nemůže být odbanován"
+
+msgid "Ticket already marked in progress"
+msgstr "Ticket se již řeší"
+
+msgid "The ticket has been marked as in progress"
+msgstr "Vstupenka byla označena jako probíhá"
+
+msgid "The ticket has not been marked as in progress"
+msgstr "Vstupenka nebyla označena jako probíhá"
+
+msgid "In progress ticket"
+msgstr "Ticket se zpracovává"
+
+msgid "The ticket is marked as in progress by"
+msgstr "Vstupenka je označena jako probíhá"
+
+msgid "File upload limit exceeds"
+msgstr "Limit nahrávání souboru překračuje"
+
+msgid "The uploaded file extension not valid"
+msgstr "Nahraná přípona souboru není platná"
+
+msgid "Paid support info"
+msgstr "Informace o placené podpoře"
+
+msgid "Order ID"
+msgstr "číslo objednávky"
+
+msgid "Product Name"
+msgstr "jméno výrobku"
+
+msgid "Total Tickets"
+msgstr "Celkový počet vstupenek"
+
+msgid "Remaining Tickets"
+msgstr "Zbývající vstupenky"
+
+msgid "Unlimited"
+msgstr "Neomezený"
+
+msgid "You have not purchased any supported item"
+msgstr "Nezakoupili jste žádnou podporovanou položku"
+
+msgid "Go to shop"
+msgstr "Jít do obchodu"
+
+msgid "Select Order"
+msgstr "Vyberte možnost Objednat"
+
+msgid "No canned response found"
+msgstr "Nebyla nalezena žádná předpřipravená odpověď"
+
+msgid "Waiting agent reply"
+msgstr "Odpověď čekajícího agenta"
+
+msgid "Waiting customer reply"
+msgstr "Čeká se na odpověď zákazníka"
+
+msgid "Close ticket"
+msgstr "Uzavřít ticket"
+
+msgid "Some values are not acceptable please retry"
+msgstr "Některé hodnoty jsou špatné, prosím zkuste to znovu"
+
+msgid "Are you sure to mark this ticket non-premium?"
+msgstr "Jste si jisti, že jste tuto vstupenku označili jako prémiovou?"
+
+msgid "Edit Reply"
+msgstr "Upravit odpověď"
+
+msgid "Edit Time"
+msgstr "Upravit Čas"
+
+msgid "Reason For Editing the timer"
+msgstr "Důvod pro úpravu časovače"
+
+msgid "Reason For Editing"
+msgstr "Důvod pro úpravy"
+
+msgid "Resolve conflict"
+msgstr "Vyřešte konflikt"
+
+msgid "Ticket Details"
+msgstr "Detaily ticketu"
+
+msgid "Lock"
+msgstr "Zamknout"
+
+msgid "Add New Credential"
+msgstr "Přidat nový pověření"
+
+msgid "Post New Internal Note"
+msgstr "Přidat novou interní poznámku"
+
+msgid "play"
+msgstr "hrát si"
+
+msgid "pause"
+msgstr "pauza"
+
+msgid "Close on reply"
+msgstr "Uzavřít při odpovědi"
+
+msgid "Reason For Department Transfer"
+msgstr "Důvod přemístění oddělení"
+
+msgid "Transfer"
+msgstr "Převod"
+
+msgid "Assign To Agent"
+msgstr "Přiřadit agentovi"
+
+msgid "Assign"
+msgstr "Přiřadit"
+
+msgid "View all %d tickets by %s"
+msgstr "Zobrazit všechny% d vstupenky od% s"
+
+msgid "Show History"
+msgstr "Zobrazit historii"
+
+msgid "Print Ticket"
+msgstr "Tisk vstupenek"
+
+msgid "Unmark Overdue"
+msgstr "Odznačte po splatnosti"
+
+msgid "Mark in Progress"
+msgstr "Označit ve zpracování"
+
+msgid "agent image"
+msgstr "obrázek agenta"
+
+msgid "Ticket Thread"
+msgstr "Ticket Vlákno"
+
+msgid "Post Reply"
+msgstr "Odpovědět"
+
+msgid "Own Signature"
+msgstr "Vlastní podpis"
+
+msgid "Department Signature"
+msgstr "Podpis oddělení"
+
+msgid "Add Signature"
+msgstr "Přidat podpis"
+
+msgid "On Waiting"
+msgstr "Čekám"
+
+msgid "Closed and merged"
+msgstr "Uzavřeno a sloučeno"
+
+msgid "ago"
+msgstr "před"
+
+msgid "No Last Reply"
+msgstr "Žádná poslední odpověd"
+
+msgid "Not Given"
+msgstr "Neposkytnuto"
+
+msgid "Copy"
+msgstr "kopírovat"
+
+msgid "Copied"
+msgstr "Zkopírováno"
+
+msgid "Change"
+msgstr "Změna"
+
+msgid "Ticket Assign and Transfer"
+msgstr "Přiřazení a převod vstupenek"
+
+msgid "Ticket assigned to"
+msgstr "Vstupenka přiřazena"
+
+msgid "staff photo"
+msgstr "osazenstvo foto"
+
+msgid "Total Time Taken"
+msgstr "Celkový čas strávený"
+
+msgid "view ticket"
+msgstr "zobrazit lístek"
+
+msgid "Woocommerce Order"
+msgstr "Objednávka woocommerce"
+
+msgid "Envato License"
+msgstr "Envato licence"
+
+msgid "Item"
+msgstr "Položka"
+
+msgid "Buyer"
+msgstr "Kupující"
+
+msgid "License Type"
+msgstr "Typ licence"
+
+msgid "License"
+msgstr "Licence"
+
+msgid "Purchase Date"
+msgstr "Datum nákupu"
+
+msgid "Supported Until"
+msgstr "Podporováno do"
+
+msgid "Paid Support Details"
+msgstr "Podrobnosti o placené podpoře"
+
+msgid "Subscription"
+msgstr "Předplatné"
+
+msgid "Subscribed On"
+msgstr "Přihlásit se k odběru"
+
+msgid "Support Expiry"
+msgstr "Vypršení platnosti podpory"
+
+msgid "No expiration"
+msgstr "Bez vypršení platnosti"
+
+msgid "Non-premium support"
+msgstr "Nep prémiová podpora"
+
+msgid "Check this box if this ticket should NOT apply against the paid support"
+msgstr ""
+"Toto políčko zaškrtněte, pokud by se tato jízdenka NEMAL použít proti "
+"placené podpoře"
+
+msgid "Remaining"
+msgstr "Zbývající"
+
+msgid "Link ticket to paid support"
+msgstr "Propojte lístek s placenou podporou"
+
+msgid "Ticket Creator Name"
+msgstr "Jméno tvůrce vstupenek"
+
+msgid "From Date"
+msgstr "Od data"
+
+msgid "To Date"
+msgstr "K datu"
+
+msgid "Enforce delete"
+msgstr "Vynucené smazání"
+
+msgid "Are you sure to enforce delete"
+msgstr "Opravdu chcete vynutit smazání"
+
+msgid "Are you sure to mark this ticket non-preminum?"
+msgstr "Jste si jisti, že jste tuto vstupenku označili jako prémiovou?"
+
+msgid "Message Logs"
+msgstr "Protokoly zpráv"
+
+msgid "Edit Timer"
+msgstr "Upravit časovač"
+
+msgid "Type Note for Department"
+msgstr "Napište poznámku pro oddělení"
+
+msgid "Assigning Note"
+msgstr "Přiřazení poznámky"
+
+msgid "Time Track"
+msgstr "Časová skladba"
+
+msgid "Type Internal Note"
+msgstr "Zadejte interní poznámku"
+
+msgid "View all %d tickets"
+msgstr "Zobrazit všechny% d vstupenky"
+
+msgid "Reopen"
+msgstr "Znovu otevřít"
+
+msgid "History"
+msgstr "Dějiny"
+
+msgid "Print"
+msgstr "Tisknout"
+
+msgid "Are you sure you want to delete this ticket"
+msgstr "Opravdu chcete tento lístek smazat"
+
+msgid "Are you sure to close this ticket"
+msgstr "Jste si jistí, že tuto lístek zavřete"
+
+msgid "Unlock"
+msgstr "Odemknout"
+
+msgid "Reply a message"
+msgstr "Odpověď na zprávu"
+
+msgid "Select Premade"
+msgstr "Vybrat předpřipravené"
+
+msgid "Assign Ticket"
+msgstr "Přiřadit vstupenku"
+
+msgid "Assigned To Agent"
+msgstr "Přiřazeno agentovi"
+
+msgid "View all orders"
+msgstr "Zobrazit všechny objednávky"
+
+msgid "Non-preminum support"
+msgstr "Nep prémiová podpora"
+
+msgid "Check Status"
+msgstr "Zkontroluj stav"
+
+msgid "Account status"
+msgstr "Stav účtu"
+
+msgid "Add Premade Message"
+msgstr "Přidat předpřipravenou zprávu"
+
+msgid "Add Staff Member"
+msgstr "Přidat člena personálu"
+
+msgid "Add System Email"
+msgstr "Přidat systémový email"
+
+msgid "Add User field"
+msgstr "Přidat pole uživatele"
+
+msgid "Add new ticket form for both user and staff"
+msgstr "Přidat nový ticketový formulář pro uživatele a personál"
+
+msgid "Ago"
+msgstr "Před"
+
+msgid "Already exisits"
+msgstr "Již existuje"
+
+msgid "Announcement has been deleted"
+msgstr "Oznámení bylo smazáno"
+
+msgid "Announcement has been stored"
+msgstr "Oznámení bylo uloženo"
+
+msgid "Announcement has not been deleted"
+msgstr "Oznámení nebylo smazáno"
+
+msgid "Announcement has not been stored"
+msgstr "Oznámení nebylo uloženo"
+
+msgid "Append signature with reply"
+msgstr "Připojit podpis v odpovědi"
+
+msgid "Are you sure to close ticket"
+msgstr "Opravdu chcete uzavřít ticket"
+
+msgid "Are you sure to delete"
+msgstr "Chcete vymazat"
+
+msgid "Article has been deleted"
+msgstr "Článek byl vymazán"
+
+msgid "Article has not been deleted"
+msgstr "Článek nebyl vymazán"
+
+msgid "Assign ticket to staff"
+msgstr "Přiřadit ticket personálu"
+
+msgid "Assign to Staff"
+msgstr "Přiřadit personálu"
+
+msgid "Assign to Staff Member"
+msgstr "Přiřadit členovi personálu"
+
+msgid "Assigned to staff"
+msgstr "Přiřadit členům"
+
+msgid "Attachment has been removed"
+msgstr "Příloha byla vymazána"
+
+msgid "Attachment has not been removed"
+msgstr "Příloha nebyla vymazána"
+
+msgid "Auto response for this topic"
+msgstr "Automatická odpověď pro toto téma"
+
+msgid "Autoresponse"
+msgstr "Automatická odpověď"
+
+msgid "Ban Email Log List"
+msgstr "Seznam zabanovaných emailů"
+
+msgid "Ban Email has been stored"
+msgstr "Emailová adresa byla zabanována"
+
+msgid "Ban Email has not been deleted"
+msgstr "Zabanovaná adresa nebyla smazána"
+
+msgid "Ban Email has not been stored"
+msgstr "Emailová adresa nebyla zabanována"
+
+msgid "Ban email"
+msgstr "Zabanovaný email"
+
+msgid "Ban email log list"
+msgstr "Log zabanovaných adres"
+
+msgid "Ban email new ticket"
+msgstr "Zabanovat adresu nového ticketu"
+
+msgid "CURL exist"
+msgstr "CURL existuje"
+
+msgid "CURL not exist"
+msgstr "CURL neexistuje"
+
+msgid "Can Not mark as not required"
+msgstr "Nemohu označit jako nevyžadováno"
+
+msgid "Cannot unpublish field"
+msgstr "Nemohu zneveřejnit pole"
+
+msgid "Category has been deleted"
+msgstr "Kategorie byla smazána"
+
+msgid "Category has been stored"
+msgstr "Kategorie byla uložena"
+
+msgid "Category has not been deleted"
+msgstr "Kategorie nebyla smazána"
+
+msgid "Category has not been stored"
+msgstr "Kategorie nebyla uložena"
+
+msgid "Category in use cannot deleted"
+msgstr "Použivaná kategorie, nelze smazat"
+
+msgid "Component Detail"
+msgstr "Detail komponentu"
+
+msgid "Component for on-line ticket support system"
+msgstr "Komponent pro on-line systém podpory"
+
+msgid "Configuration has been stored"
+msgstr "Nastavení bylo uloženo"
+
+msgid "Configuration not has been stored"
+msgstr "Nastavení nebylo uloženo"
+
+msgid "Connection established but we cannot ready any email"
+msgstr "Spojení navázáno, ale nelze přečíst žádný email"
+
+msgid "Control panel links"
+msgstr "Odkazy ovládacího panelu"
+
+msgid "Current"
+msgstr "Současný"
+
+msgid "Data directory can not empty."
+msgstr "Složka s daty nemůže být prázdná"
+
+msgid "Data directory is not writeable."
+msgstr "Do složka s daty není povoleno zapisovat"
+
+msgid "Database CRUD"
+msgstr "CRUD databáze"
+
+msgid "Database create table not allowed"
+msgstr "Vytvoření tabulky v databázi není povoleno"
+
+msgid "Database delete record not allowed"
+msgstr "Vymazání záznamu v databázi není povoleno"
+
+msgid "Database drop table not allowed"
+msgstr "Databázová tabulka není povolena"
+
+msgid "Database insert record not allowed"
+msgstr "Zápis do databáze není povolen"
+
+msgid "Database update record not allowed"
+msgstr "Zápis aktualizace do databáze není povolen"
+
+msgid "Date end"
+msgstr "Datum konce"
+
+msgid "Date start"
+msgstr "Datum začátku"
+
+msgid "Day"
+msgstr "Den"
+
+msgid "Default System Email"
+msgstr "Výchozí emailový systém"
+
+msgid "Default system emails"
+msgstr "Výchozí systemový email"
+
+msgid "Delete ticket"
+msgstr "Vymazat ticket"
+
+msgid "Department Under Which The Answer Will Be Made Available"
+msgstr "Oddělení, které bude odpovídat"
+
+msgid "Department has been deleted"
+msgstr "Oddělení bylo smazáno"
+
+msgid "Department has been stored"
+msgstr "Oddělení bylo uloženo"
+
+msgid "Department has been transfered"
+msgstr "Oddělení bylo přesunuto"
+
+msgid "Department has not been deleted"
+msgstr "Oddělení nebylo smazáno"
+
+msgid "Department has not been stored"
+msgstr "Oddělení nebylo uloženo"
+
+msgid "Department has not been transfered"
+msgstr "Oddělení nebylo přesunuto"
+
+msgid "Department in use cannot deleted"
+msgstr "Oddělení je využiváno, nelze smazat"
+
+msgid "Department is transfered by"
+msgstr "Oddělení přesunul"
+
+msgid "Dir is not writeable"
+msgstr "Do adresáře nelze zapisovat"
+
+msgid "Directory"
+msgstr "Adresář"
+
+msgid "Directory permissions error"
+msgstr "Chyba v opravněních složky"
+
+msgid "Display name"
+msgstr "Zobrazit jméno"
+
+msgid "Do you have enabled SSL on your domain"
+msgstr "Na své doméně nemáte zapnuto SSL"
+
+msgid "Documentation"
+msgstr "Dokumentace"
+
+msgid "Download has been deleted"
+msgstr "Stažení bylo smazáno"
+
+msgid "Download has been stored"
+msgstr "Stažení bylo uloženo"
+
+msgid "Download has not been deleted"
+msgstr "Stažení nebylo vymazáno"
+
+msgid "Download has not been stored"
+msgstr "Stažení nebylo uloženo"
+
+msgid "Email address"
+msgstr "Emailová adresa"
+
+msgid "Email has been banned"
+msgstr "Email zabanován"
+
+msgid "Email has been deleted"
+msgstr "Email byl smazán"
+
+msgid "Email has been stored"
+msgstr "Email byl uložen"
+
+msgid "Email has not been banned"
+msgstr "Email nebyl zabanován"
+
+msgid "Email has not been deleted"
+msgstr "Email nebyl vymazán"
+
+msgid "Email has not been stored"
+msgstr "Email nebyl uložen"
+
+msgid "Email send to admin when banned email try to create ticket"
+msgstr ""
+"Odeslat adminovi email, pokud se zabanovaný email pokusí vytvořit ticket"
+
+msgid "Enable ticket via email"
+msgstr "Povolit ticket přes email"
+
+msgid "Error applying new theme"
+msgstr "Při použití nového tématu došlo k chybě"
+
+msgid "Error file ext mismatch"
+msgstr "Chyba. Špatný typ souboru"
+
+msgid "Error file not downloaded"
+msgstr "Chyba. Soubor nebyl stažen"
+
+msgid "Error occured"
+msgstr "Vyskytla se chyba"
+
+msgid "File Downloaded Successfully"
+msgstr "Soubor úspěšně stažen"
+
+msgid "File download"
+msgstr "Stažení souboru"
+
+msgid "File is not writeable"
+msgstr "Soubor není zapisovatelný"
+
+msgid "File read write issue files cannot upload"
+msgstr "Problém se čtením souboru, nelze nahrát"
+
+msgid "File upload limit exceed"
+msgstr "Překročen limit velikosti souboru"
+
+msgid "Forum"
+msgstr "Fórum"
+
+msgid "GD library"
+msgstr "GB knihovna"
+
+msgid "GD library not exist"
+msgstr "GB knihovna neexistuje"
+
+msgid "General Setting"
+msgstr "Hlavní nastavení"
+
+msgid "Get JS Support Ticket Translations"
+msgstr "Získat překlad JS Support Ticket"
+
+msgid "Goto Web"
+msgstr "Přejít na web"
+
+msgid "Help topics"
+msgstr "Téma pomoci"
+
+msgid "Host port number to read email from"
+msgstr "Číslo portu hostitele pro čtení emailu"
+
+msgid "IMAP is either not installed or not enable in your server"
+msgstr "IMAP buď to není povolen nebo nainstalován na vašem serveru"
+
+msgid "If system not respond in 30 seconds"
+msgstr "Pokud systém neodpoví do 30 vteřin"
+
+msgid "Installation"
+msgstr "Instalace"
+
+msgid "Internal Note Has Been Posted"
+msgstr "Byla zveřejněna interní poznámka"
+
+msgid "Internal Note Has Not Been Posted"
+msgstr "Interní poznámka nebyla zveřejněna"
+
+msgid "Internal Notes"
+msgstr "Interní poznámky"
+
+msgid "Internal note is posted by"
+msgstr "Interní poznámka přidal"
+
+msgid "It may take few minutes"
+msgstr "Může to zabrat pár minut"
+
+msgid "JS Support Ticket Control Panel"
+msgstr "Kontrolní panel JS Support Ticket"
+
+msgid "JS Support Ticket Pro Installer"
+msgstr "Instalátor JS Support Ticket Pro"
+
+msgid "JS Support Ticket main control panel"
+msgstr "Hlavní kontrolní panel JS Support Ticket"
+
+msgid "JS Ticket Pro Installed Successfully"
+msgstr "JS Ticket Pro úspěšně nainstalován"
+
+msgid "Knowledge base article has been stored"
+msgstr "Článek znalostní databáze uložen"
+
+msgid "Knowledge base article has not been stored"
+msgstr "Článek znalostní databáze nebyl uložen"
+
+msgid "Language directory is not writeable"
+msgstr "Nelze zapisovat do adresáře s jazyky"
+
+msgid "Lastest Downlods"
+msgstr "Nejnovější stažení"
+
+msgid "Latest knowledge base"
+msgstr "Nejnovější znalostní databáze"
+
+msgid "Limit exceeds maximum open tickets"
+msgstr "Přesažen limit maximálního počtu otevřených ticketů"
+
+msgid "Login into your account"
+msgstr "Přihlášeno na Váš účet"
+
+msgid "Login/Logout button"
+msgstr "Přihlašovací / odhlašovací tlačítko"
+
+msgid "Mail Setting"
+msgstr "Nastavení zpráv"
+
+msgid "Mail cannot mark as read"
+msgstr "Zpráva nemuže být označená jako přečtená"
+
+msgid "Mail has been mark as read"
+msgstr "Zpráva byla označená jako přečtená"
+
+msgid "Mail has been send"
+msgstr "Zpráva odeslána"
+
+msgid "Mail has not been mark as read"
+msgstr "Zpráva nebyla označená jako přečtená"
+
+msgid "Mail has not been send"
+msgstr "Zpráva nebyla odeslána"
+
+msgid "Mail mark as read"
+msgstr "Zpráva označená jako přečtená"
+
+msgid "Mail mark as unread"
+msgstr "Zpráva označená jako nepřečtena"
+
+msgid "Mannual Download"
+msgstr "Ruční stažení"
+
+msgid "Max record"
+msgstr "Maximální záznam"
+
+msgid "More Detail"
+msgstr "Více detailů"
+
+msgid "More Option"
+msgstr "Více možností"
+
+msgid "My tickets for both user and staff"
+msgstr "Moje tickety pro uživatelé a personál"
+
+msgid "New Department"
+msgstr "Nové oddělení"
+
+msgid "New Help Topic"
+msgstr "Nové téma pomoci"
+
+msgid "New Staff"
+msgstr "Nový personál"
+
+msgid "New Version Is Available"
+msgstr "Je dostupná nová verze"
+
+msgid "New theme has been applied"
+msgstr "Byla použita nová šablona vzhledu"
+
+msgid "Next step"
+msgstr "Další krok"
+
+msgid "No premade found"
+msgstr "Nenalezno"
+
+msgid "Not assigned to staff"
+msgstr "Nepřiřazeno k personálu"
+
+msgid "Oooops"
+msgstr "Huuuups"
+
+msgid "Opsss...."
+msgstr "Ajajajajaj...."
+
+msgid "Our Products"
+msgstr "Naše produkty"
+
+msgid "PHP version smaller then recomended"
+msgstr "Verze PHP je nižší než doporučená"
+
+msgid "Password for given email address"
+msgstr "Heslo pro danou e-mailovou adresu"
+
+msgid "Please enable ticket via email setting first"
+msgstr "Prosím, nejdříve povolte ticket přes email"
+
+msgid "Please enter the google recaptcha private key from"
+msgstr "Vložte prosím, google recaptcha private key z"
+
+msgid "Please enter the google recaptcha public key from"
+msgstr "Vložte prosím, google recaptcha public key z"
+
+msgid "Please insert activation key and press start"
+msgstr "Vložte prosím, aktivační klíč a poté klikněte na start"
+
+msgid "Please select atleast one category for"
+msgstr "Vyberte prosím ale jednu kategorii pro"
+
+msgid "Popular knoweldge base"
+msgstr "Populární vědomostní databáze"
+
+msgid "Post internal note"
+msgstr "Odeslat interní poznámku"
+
+msgid "Posted by"
+msgstr "Přidal"
+
+msgid "Premade Messages"
+msgstr "Předpřipravené zprávy"
+
+msgid "Premade department message has been stored"
+msgstr "Předpřipravená zpráva oddělení byla uložena"
+
+msgid "Premade department message has not been stored"
+msgstr "Předpřipravená zpráva oddělení nebyla uložena"
+
+msgid "Premade message"
+msgstr "Předpřipravená zpráva"
+
+msgid "Publish"
+msgstr "Publikovat"
+
+msgid "Quick Configuration"
+msgstr "Rychlé nastavení"
+
+msgid "Recomended"
+msgstr "Doporučené"
+
+msgid "Redirect user to JS Support Ticket control panel after login"
+msgstr "Přesměrovat uživatele na panel JS Support Ticket Control po přihlášení"
+
+msgid "Reply has been posted"
+msgstr "Odpověď byla odeslána"
+
+msgid "Reply has not been posted"
+msgstr "Odpověď nebyla odeslána"
+
+msgid "Report By User"
+msgstr "Nahlášen uživatlem"
+
+msgid "Report By Users"
+msgstr "Nahlášen uživateli"
+
+msgid "Requester Info"
+msgstr "Informace o žadateli"
+
+msgid "Role has been deleted"
+msgstr "Úloha byla vymazána"
+
+msgid "Role has been stored"
+msgstr "Úloha byla uložena"
+
+msgid "Role has not been deleted"
+msgstr "Úloha nebyla smazána"
+
+msgid "Role has not been stored"
+msgstr "Úloha nebyla uložena"
+
+msgid "Save Staff Member"
+msgstr "Uložit člena personálu"
+
+msgid "Save User Field"
+msgstr "Uložit uživatelské pole"
+
+msgid "Save attachments if found in email"
+msgstr "Uložit přílohy, pokud jsou nalezeny v emailu"
+
+msgid "Save email template"
+msgstr "Uložit šablonu emailu"
+
+msgid "Save premade message"
+msgstr "Uložit předpřipravenou zprávu"
+
+msgid "Search Announcement"
+msgstr "Vyhledat oznámení"
+
+msgid "Search Download"
+msgstr "Vyhledat Na stažení"
+
+msgid "Search FAQ"
+msgstr "Vyhledat FAQ"
+
+msgid "Search Knowledge Base"
+msgstr "Vyhledat znalostní databázi"
+
+msgid "Select Staff"
+msgstr "Vybrat personál"
+
+msgid "Select department"
+msgstr "Vybrat oddělení"
+
+msgid "Select priority"
+msgstr "Vybrat prioritu"
+
+msgid "Service is running please close the page"
+msgstr "Služba běží. nezavírejte prosím stránku"
+
+msgid "Set no. of days to mark ticket as overdue"
+msgstr "Vyberte počet dní k označení ticketů jako prošlé"
+
+msgid "Setting"
+msgstr "Nastavení"
+
+msgid "Show Detail"
+msgstr "Zobrazit detail"
+
+msgid "Show captcha on visitor form ticket"
+msgstr "Zobrazit captcha pro návštěvníka ticketu"
+
+msgid "Show captcha when visitor want to create ticket"
+msgstr "Zobrazit captcha pokud chce návštěvník vytvořit ticket"
+
+msgid "Show latest FAQ's. Options:"
+msgstr "Zobrazit nejnovější FAQ. Nastavení:"
+
+msgid "Show latest announcements. Options:"
+msgstr "Zobrazit nejnovější oznámení. Nastavení:"
+
+msgid "Show latest downloads. Options:"
+msgstr "Zobrazit nejnovější Na stažení. Nastavení:"
+
+msgid "Show latest knowledge base. Options:"
+msgstr "Zobrazit nejnovější znalostní databázi. Nastavení:"
+
+msgid "Show new and reply mail notifications"
+msgstr "Zobrazit oznámení nové a odpovězené zprávy"
+
+msgid "Show number of open, closed, answered ticket in my ticket"
+msgstr ""
+"Zobrazit počet otevřených, zavřených, odpovězených ticketů v Moje tickety"
+
+msgid "Show popular FAQ's. Options:"
+msgstr "Zobrazit popularní FAQ. Nastavení:"
+
+msgid "Show popular announcements. Options:"
+msgstr "Zobrazit populární oznámení. Nastavení:"
+
+msgid "Show popular downloads. Options:"
+msgstr "Zobrazit populární Na stažení. Nastavení:"
+
+msgid "Show popular knowledge base. Options:"
+msgstr "Zobrazit populární vědomostní databázi. Nastavení:"
+
+msgid "Some thing wrong try again later"
+msgstr "Něco je špatně, zkuste to později"
+
+msgid "Staff Member"
+msgstr "Člen personálu"
+
+msgid "Staff Members"
+msgstr "Členové personálu"
+
+msgid "Staff Menu Setting"
+msgstr "Nastavení menu personálu"
+
+msgid "Staff Section"
+msgstr "Sekce personálu"
+
+msgid "Staff Ticket"
+msgstr "Tickety personálu"
+
+msgid "Staff member has been deleted"
+msgstr "Člen personálu byl vymazán"
+
+msgid "Staff member has been stored"
+msgstr "Člen personálu byl uložen"
+
+msgid "Staff member has not been deleted"
+msgstr "Člen personálu nebyl vymazán"
+
+msgid "Staff member has not been stored"
+msgstr "Člen personálu nebyl uložen"
+
+msgid "Staff member in use cannot deleted"
+msgstr "Člen personálu se použivá, nemůžu smazat"
+
+msgid "Staff member name"
+msgstr "Jméno člena personálu"
+
+msgid "Start"
+msgstr "Začátek"
+
+msgid "Start using"
+msgstr "Začít používat"
+
+msgid "Support Area"
+msgstr "Oblast podpory"
+
+msgid "System Slug"
+msgstr "Slug systém"
+
+msgid "System slug is confilicted with post or page slug."
+msgstr "Systémový slug je konfliktní s poštou nebo stránkovým slugem."
+
+msgid "Thanks For Installing JS Ticket Pro"
+msgstr "Děkujeme, že jste nainstalovali JS Ticket Pro"
+
+msgid "This message will show on new ticket"
+msgstr "Tato zpráva se objeví u nového ticketu"
+
+msgid "Ticket Department Transfer"
+msgstr "Změna oddělení ticketu"
+
+msgid "Ticket Operations Mail Setting"
+msgstr "Mailové nastavení"
+
+msgid "Ticket Response Staff"
+msgstr "Zaměstnanci reakce na Tickety"
+
+msgid "Ticket Via Email"
+msgstr "Ticket Prostřednictvím e-mailu"
+
+msgid "Ticket auto close if user not respond within given days"
+msgstr "Automatické zavření Ticketu, pokud uživatel v daných dnech neodpoví"
+
+msgid "Ticket can be reopen within given number of days"
+msgstr "Tiket lze znovu otevřít v daném počtu dnů"
+
+msgid "Ticket has been locked"
+msgstr "Ticket byl zamčen."
+
+msgid "Ticket has been marked as in progress"
+msgstr "Ticket se řeší"
+
+msgid "Ticket has been marked as overdue"
+msgstr "Zpráva byla označená jako přečtená"
+
+msgid "Ticket has been reopend"
+msgstr "Ticket byl označen jako probíhající"
+
+msgid "Ticket has been stored"
+msgstr "Tecket byl uložen"
+
+msgid "Ticket has been unlocked"
+msgstr "Ticket byl odemčen"
+
+msgid "Ticket has not been locked"
+msgstr "Ticket nebyl zamčen"
+
+msgid "Ticket has not been marked as in progress"
+msgstr "Ticket nebyl označen jako probíhající"
+
+msgid "Ticket has not been marked as overdue"
+msgstr "Ticket nebyly označen za lhůtu"
+
+msgid "Ticket has not been reopened"
+msgstr "Ticket nebyl znovu otevřen"
+
+msgid "Ticket has not been stored"
+msgstr "Ticket nebyl uložen"
+
+msgid "Ticket has not been unlocked"
+msgstr "Ticket nebyl odemčen"
+
+msgid "Ticket is assigned to staff by"
+msgstr "Ticket je přidělen podpoře od"
+
+msgid "Ticket is locked"
+msgstr "Ticket je zamčený"
+
+msgid "Ticket is locked by"
+msgstr "Ticket je zamknut od"
+
+msgid "Ticket is marked as in progress by"
+msgstr "Ticket je označen jako probíhající od"
+
+msgid "Ticket is marked as overdue by"
+msgstr "Ticket je označen jako opožděný od"
+
+msgid "Ticket is reopened by"
+msgstr "Ticket je znovu otevřen od"
+
+msgid "Ticket is unlocked by"
+msgstr "Ticket je odemknut od"
+
+msgid "Ticket mark overdue"
+msgstr "Ticket je po lhůtě splatnosti"
+
+msgid "Ticket reopen time limit end"
+msgstr "U Ticketu znovu otevřený časový limit"
+
+msgid "Tickets By Staff"
+msgstr "Ticket podle zaměstnance"
+
+msgid "Tickets by priorities"
+msgstr "Tickety podle priorit"
+
+msgid "To Use This Feature You Must Be Staff Memeber"
+msgstr "Chcete-li použít tuto funkci, musíte být členem týmu"
+
+msgid "To access this page please login"
+msgstr "Pro přístup k této stránce se přihlašte"
+
+msgid "Today"
+msgstr "Dnes"
+
+msgid "Top menu links"
+msgstr "Odkazy nahoru pro menu"
+
+msgid "Type"
+msgstr "Napiš"
+
+msgid "Unable Connect To Server"
+msgstr "Nelze se připojit k serveru"
+
+msgid "Unable to connect to server"
+msgstr "Nelze se připojit k serveru"
+
+msgid "Update"
+msgstr "Aktualizovat"
+
+msgid "Use Search Feature To Select The User"
+msgstr "Použijte funkci Hledat a vyberte uživatele"
+
+msgid "User Menu Setting"
+msgstr "Nastavení uživatelského menu"
+
+msgid "User already staff member"
+msgstr "Uživatel již pracuje"
+
+msgid "User id"
+msgstr "Uživatelské ID"
+
+msgid "View"
+msgstr "Pohled"
+
+msgid "View Ticket"
+msgstr "Zobrazit Ticket"
+
+msgid "Visitor published"
+msgstr "Návštěvník zveřejněn"
+
+msgid "Waiting Customer Reply"
+msgstr "Čeká se na odpověď zákazníka"
+
+msgid "Waiting Staff Reply"
+msgstr "Čeká se na odpověď zaměstnanců"
+
+msgid "Waiting reply"
+msgstr "Čeká se na odpověď"
+
+msgid "Waiting staff reply"
+msgstr "Čeká se na odpověď zaměstnanců"
+
+msgid "Would you like to add this type to parent"
+msgstr "Chcete tento typ přidat k nadřazenému"
+
+msgid "You are Already Logged in"
+msgstr "Už jste přihlášen"
+
+msgid "You are not allowed to view this page"
+msgstr "Tuto stránku nemáte oprávnění prohlížet"
+
+msgid "You are not logged in"
+msgstr "Nejste přihlášen"
+
+msgid "You are not staff member"
+msgstr "Nejste zaměstnanec"
+
+msgid "You cannot unmark it"
+msgstr "Nemůžete zrušit označení"
+
+msgid "Your parent does not have this type"
+msgstr "Váš rodič tento typ nemá"
+
+msgid "Your System Is Up To Date"
+msgstr "Váš systém je aktuální"
+
+msgid "Your account is disabled please contact to administrator"
+msgstr "Váš účet je deaktivován, kontaktujte administrátora"
+
+msgid "Your child have this type"
+msgstr "Vaše dítě má tento typ"
+
+msgid "Your setting is working please save the setting"
+msgstr "Vaše nastavení pracuje, prosím uložte nastavení"
+
+msgid "Zip library"
+msgstr "Zip knihovna"
+
+msgid "Zip library not exist"
+msgstr "Zip knihovna neexistuje"
+
+msgid "directory is not writeable"
+msgstr "adresář není zapisovatelný"
+
+msgid "extension"
+msgstr "rozšíření"
+
+msgid "override department setting"
+msgstr "přepínání nastavení oddělení"
+
+msgid "Add Files"
+msgstr "Přidat soubory"
+
+msgid "Add Userfield"
+msgstr "Přidat uživatelské pole"
+
+msgid "Are you sure delete"
+msgstr "Opravdu jste smazali"
+
+msgid "Assign User Permissions"
+msgstr "Přiřaďte oprávnění uživatele"
+
+msgid "Assign to"
+msgstr "Přiřadit"
+
+msgid "Blocked"
+msgstr "Zablokovat"
+
+msgid "Change ticket priority"
+msgstr "Změnit prioritu Ticketu"
+
+msgid "Check box"
+msgstr "Zaškrtněte políčko"
+
+msgid "Control Panel Coulmn"
+msgstr "Ovládací panel Coulmn"
+
+msgid "Data directory in not writable"
+msgstr "Datový adresář není zapisovatelný"
+
+msgid "Depandent field"
+msgstr "Závislé pole"
+
+msgid "Dir not exist"
+msgstr "Dir neexistuje"
+
+msgid "Display #"
+msgstr "Zobrazit #"
+
+msgid "Due Date"
+msgstr "Datum splatnosti"
+
+msgid "Email already exist"
+msgstr "E-mail již existuje"
+
+msgid "Email reads sucessfully"
+msgstr "E-mail přečten úspěšně"
+
+msgid "Empty values are not allowed"
+msgstr "Prázdné hodnoty nejsou povoleny"
+
+msgid "Enable print ticket"
+msgstr "Aktivujte tisk Ticketu"
+
+msgid "Field Name"
+msgstr "Název pole"
+
+msgid "Field mark ordering down"
+msgstr "Pořadí značek pole"
+
+msgid "Get JS Tickets Translations"
+msgstr "Získejte JS Tickets Translations"
+
+msgid "Invalid data directory"
+msgstr "Neplatný adresář dat"
+
+msgid "Jstickets Uninstall Text"
+msgstr "Jstickety Odinstalovat text"
+
+msgid "Language Translations"
+msgstr "Jazykové překlady"
+
+msgid "Loading"
+msgstr "Načítání.."
+
+msgid "Multi select"
+msgstr "Více násobný výběr"
+
+msgid "New Mail Message Recevied"
+msgstr "Nová email zpráva přijata"
+
+msgid "New Mail Receviced"
+msgstr "Nový email přijata"
+
+msgid "Not assigned"
+msgstr "Nepřiřazena"
+
+msgid "Not default"
+msgstr "Není výchozí"
+
+msgid "Operation Cancel"
+msgstr "Zrušit operaci"
+
+msgid "Page not found"
+msgstr "Stránka nenalezena"
+
+msgid "Permission"
+msgstr "Oprávnění"
+
+msgid "Phone"
+msgstr "Telefon"
+
+msgid "Phone Ext"
+msgstr "Telefon Ext"
+
+msgid "Premade"
+msgstr "Preemade"
+
+msgid "Print ticket"
+msgstr "Tisknout Ticket"
+
+msgid "Radio button"
+msgstr "Rádiové tlačítko"
+
+msgid "Read only"
+msgstr "Pouze ke čtení"
+
+msgid "Reply has not been stored"
+msgstr "Odpověď nebyla uložena"
+
+msgid "Required language is not installed"
+msgstr "Požadovaný jazyk není nainstalován"
+
+msgid "Save Role Permission"
+msgstr "Uložit oprávnění role"
+
+msgid "Select parent field"
+msgstr "Vyberte nadřazené pole"
+
+msgid "Select','js-jobs"
+msgstr "Vyberte volbu ',' js-jobs"
+
+msgid "Staff Members Control Panel Links"
+msgstr "Zaměstnanci Odkazy na ovládací panel"
+
+msgid "Staff Members Top Menu Links"
+msgstr "Zaměstnanci Členové Top Menu Odkazy"
+
+msgid "Text area"
+msgstr "Oblast textu"
+
+msgid "Text field"
+msgstr "Textové pole"
+
+msgid "Ticket in use cannot deleted"
+msgstr "Použitý Ticket nemůže být smazán"
+
+msgid "Ticket mark in progress"
+msgstr "Značka Ticketu probíhá"
+
+msgid "Unknown"
+msgstr "Neznámý"
+
+msgid "Upload file"
+msgstr "Nahrát soubor"
+
+msgid "Use The Table Below To Add New Values"
+msgstr "Použijte tabulku níže pro přidání nových hodnot"
+
+msgid "User Control Panel Links"
+msgstr "Odkazy ovládacího panelu uživatele"
+
+msgid "User Top Menu Links"
+msgstr "Odkazy na hlavní nabídku uživatele"
+
+msgid "User field has been deleted"
+msgstr "Uživatelské pole bylo smazáno"
+
+msgid "User field has been stored"
+msgstr "Uživatelské pole bylo uloženo"
+
+msgid "User field has not been deleted"
+msgstr "Uživatelské pole nebylo smazáno"
+
+msgid "User field has not been stored"
+msgstr "Uživatelské pole nebylo uloženo"
+
+msgid "Values Between 1 T0 12 Default Is 3"
+msgstr "Hodnoty mezi 1 T0 12 Výchozí je 3"
+
+msgid "View all"
+msgstr "Zobrazit vše"
+
+msgid "Visitor Menu Setting"
+msgstr "Nastavení nabídky návštěvníka"
+
+msgid "Waiting admin/staff reply"
+msgstr "Čeká na odpověď administrátora / zaměstnanců"
+
+msgid "is not writeable"
+msgstr "není zapisovatelný"
+
+msgid "show print ticket icon on ticketdetail page to user"
+msgstr "zobrazte ikonu tisk ticketu na stránce ticketdetail"
+
+msgid "Form Category"
+msgstr "Kategorie formuláře"
+
+msgid "You are not allowed to view this ticket"
+msgstr "Nemůžete si prohlédnout tento Ticket"
+
+msgid "You have already provided feedback for this ticket"
+msgstr "Už jste poskytli zpětnou vazbu na tento Ticket"
+
+msgid "Ticket not found"
+msgstr "Tickety nebyly nalezeny"
+
+msgid "Thank you for your feedback"
+msgstr "Děkujeme vám za vaši reakci"
+
+msgid "Feedback Setting"
+msgstr "Nastavení zpětné vazby"
+
+msgid "Interval type to mark ticket as overdue"
+msgstr "Typ intervalu pro označení ticketu jako lhůtu splatnosti"
+
+msgid "Set no. of days or hours to mark ticket as overdue"
+msgstr "Nastavte č. dní nebo hodin, aby se lístek označil jako po splatnosti"
+
+msgid "Select whether you want to show captcha on registration form or not"
+msgstr "Zvolte, zda chcete na registračním formuláři zobrazit captcha, nebo ne"
+
+msgid "Select role you want to assign to new users"
+msgstr "Vyberte roli, kterou chcete přiřadit novým uživatelům"
+
+msgid "Select whether users can reply to closed ticket via email or not"
+msgstr ""
+"Zvolte, zda mohou uživatelé odpovědět na uzavřenou vstupenku prostřednictvím "
+"e-mailu nebo ne"
+
+msgid "This text will appear whenever visitor creates ticket"
+msgstr "Tento text se zobrazí vždy, když návštěvník vytvoří ticket"
+
+msgid "Set no. of days or hours to send feedback email after ticket is closed"
+msgstr ""
+"Nastavte č. dní nebo hodin, kdy po odeslání lticketu odešlete emailem zpětné "
+"vazby"
+
+msgid "Feedback Successful message to customer"
+msgstr "Zpětná vazba Úspěšná zpráva zákazníkovi"
+
+msgid "You cannot use this email it is used in ticket via email"
+msgstr ""
+"Nemůžete použít tento e-mail, který je použit v ticketu prostřednictvím e-"
+"mailu"
+
+msgid "User of this department will receive email on new ticket"
+msgstr "Uživatel tohoto oddělení obdrží e-mail na nový ticket"
+
+msgid "Departent Report"
+msgstr "Oddělovací zpráva"
+
+msgid "Users tickets"
+msgstr "Uživatelské Tickety"
+
+msgid "Users Ticekts"
+msgstr "Uživatelské reporty"
+
+msgid "Edit reason"
+msgstr "Upravit odpověď"
+
+msgid "Answerd"
+msgstr "Odpovězeno"
+
+msgid "Select Staff Member"
+msgstr "Vyberte zaměstnance"
+
+msgid "Provide Feedback"
+msgstr "Poskytnout zpětnou vazbu"
+
+msgid "Field Parent has not been stored"
+msgstr "Field Parent nebyl uložen"
+
+msgid "Please Insert Atleat one value for every option"
+msgstr "Prosím vložte Atleat jednu hodnotu pro každou možnost"
+
+msgid "Add New"
+msgstr "Přidat nové"
+
+msgid "User Field"
+msgstr "Uživatelské pole"
+
+msgid "Misc"
+msgstr "Různé"
+
+msgid "We'd love to hear from"
+msgstr "Rádi bychom slyšeli"
+
+msgid "You"
+msgstr "Ty"
+
+msgid "Departments Reports"
+msgstr "Oddělení výkazů"
+
+msgid "Staff Feedbacks"
+msgstr "Zpětná vazba zaměstnanců"
+
+msgid "Password Again"
+msgstr "Znovu Heslo"
+
+msgid "Register New Account"
+msgstr "Zaregistrujte nový účet"
+
+msgid "Tickets Updater"
+msgstr "Ticket Updater"
+
+msgid "Report By Department"
+msgstr "Zpráva podle oddělení"
+
+msgid "out of"
+msgstr "mimo"
+
+msgid "Report By Deparments"
+msgstr "Zpráva podle oddělení"
+
+msgid "Deparments"
+msgstr "Oddělení"
+
+msgid "No Data"
+msgstr "Žádná data"
+
+msgid "Staff Report"
+msgstr "Zpráva o zaměstnancích"
+
+msgid "Date From"
+msgstr "Datum od"
+
+msgid "Date To"
+msgstr "Datum do"
+
+msgid "My Reports"
+msgstr "Moje Reporty"
+
+msgid "Staff Members Reports"
+msgstr "Zprávy zaměstnanců"
+
+msgid "Ticket has been created"
+msgstr "Ticket byl vytvořen"
+
+msgid "Issue Summary"
+msgstr "Shrnutí vydání"
+
+msgid "All Downloads"
+msgstr "Všechno stáhnout"
+
+msgid "Low"
+msgstr "Nízký"
+
+msgid "Customer Feedbacks"
+msgstr "Zákaznické připomínky"
+
+msgid "Upload"
+msgstr "Nahrát"
+
+msgid "Ticketid"
+msgstr "Ticket ID"
+
+msgid "Duedate Ticket"
+msgstr "Utajé Tickety"
+
+msgid "New Ticket Notification"
+msgstr "Nový Ticket oznámení"
+
+msgid "Edit Own Time"
+msgstr "Upravit vlastní čas"
+
+msgid "View Feedback"
+msgstr "Zobrazení zpětné vazby"
+
+msgid "Assign Role Permissions"
+msgstr "Přiřaďte oprávnění role"
+
+msgid "Assign Role To User"
+msgstr "Přiřadit roli uživateli"
+
+msgid "Add User"
+msgstr "Přidat uživatele"
+
+msgid "Edit User"
+msgstr "Upravit Uživatele"
+
+msgid "Delete Department"
+msgstr "Vymazat oddělení"
+
+msgid "View Department"
+msgstr "Oddělení zobrazení"
+
+msgid "Delete Role"
+msgstr "Vymazat  roly"
+
+msgid "Delete User"
+msgstr "Vymazat uživatele"
+
+msgid "View Role"
+msgstr "Zobrazit roli"
+
+msgid "View User"
+msgstr "Zobrazit Uživatele"
+
+msgid "View Staff Reports"
+msgstr "Zobrazit zprávy o zaměstnancích"
+
+msgid "View Department Reports"
+msgstr "Zobrazení zpráv oddělení"
+
+msgid "View Category"
+msgstr "Zobrazit Kategorie"
+
+msgid "View Knowledge Base"
+msgstr "Zobrazit databázi znalostí"
+
+msgid "Delete Category"
+msgstr "Vymazat Kategorii"
+
+msgid "Delete Knowledge Base"
+msgstr "Odstranit databázi znalostí"
+
+msgid "View FAQ"
+msgstr "Zobrazit FAQ"
+
+msgid "Delete FAQ"
+msgstr "Vymazat FAQ"
+
+msgid "View Download"
+msgstr "Zobrazit Stahování"
+
+msgid "Delete Download"
+msgstr "Smazat Stahování"
+
+msgid "View Announcement"
+msgstr "Zobrazit oznámení"
+
+msgid "Delete Announcement"
+msgstr "Vymazání oznámení"
+
+msgid "Allow Mail System"
+msgstr "Povolit Email systém"
+
+msgid "Internal Note Title"
+msgstr "Interní název titulu"
+
+msgid "Satisfaction Reports"
+msgstr "Zprávy o spokojenosti"
+
+msgid "Exports"
+msgstr "Vývoz"
+
+msgid "Customer Satisfaction Report"
+msgstr "Zpráva o spokojenosti zákazníků"
+
+msgid "Please wait installation in progress"
+msgstr "Počkejte prosím, že probíhá instalace"
+
+msgid "Show Captcha To Visitor On Form Ticket"
+msgstr "Zobrazit Captcha Chcete-li zabezpečení na formuláři Ticket"
+
+msgid "Feedback Email Settings"
+msgstr "Nastavení e-mailu zpětné vazby"
+
+msgid "Feedback successfully stored message"
+msgstr "Zpráva úspěšně uložená zpráva"
+
+msgid "Ticket Fields"
+msgstr "Ticket Pole"
+
+msgid "Export Tickets"
+msgstr "Export Ticketů"
+
+msgid "High"
+msgstr "Vysoký"
+
+msgid "Ticket has been unmarked as overdue"
+msgstr "Ticket byl označen jako zpožděný"
+
+msgid "Ticket has not been unmarked as overdue"
+msgstr "Ticket nebyl označen jako zpožděný"
+
+msgid "Ticket is unmarked as overdue by"
+msgstr "Ticket je odznačen jako zpošdělí od"
+
+msgid "Assigned To Me"
+msgstr "Přiřazen mně"
+
+msgid "Management"
+msgstr "správa"
+
+msgid "Assign To"
+msgstr "Přiřadit"
+
+msgid "Show on listing"
+msgstr "Zobrazit na výpisu"
+
+msgid "Remarks"
+msgstr "Poznámky"
+
+msgid "You are not login"
+msgstr "Nejste přihlášeni"
+
+msgid "Pro Features"
+msgstr "Pro Funkce"
+
+msgid "Upgrade"
+msgstr "Aktualizovat"
+
+msgid "Feature available in pro version only"
+msgstr "Funkce dostupná pouze pro verzi"
+
+msgid "JS Support Ticket Pro Feature"
+msgstr "Funkce JS Support Ticket Pro"
+
+msgid "Unlimited color tools to desire result"
+msgstr "Neomezené barevné nástroje, které chcete dosáhnout"
+
+msgid "Access Control Level"
+msgstr "Úroveň řízení přístupu"
+
+msgid "Access control limit you can limit your staff to do specific task"
+msgstr ""
+"Limit kontroly přístupu můžete omezit své zaměstnance, aby vykonali "
+"konkrétní úkoly"
+
+msgid "Staff member create premade message premade available in ticket reply"
+msgstr ""
+"Zaměstnanec vytváří předplacené zprávy o předávání zpráv v odpovědi na "
+"Tickety"
+
+msgid "Staff member can be created and reply your customer tickets"
+msgstr ""
+"Zaměstnanec může být vytvořen a odpovědět na vaše Tickety pro zákazníka"
+
+msgid "Help topic can be add with respect to departments"
+msgstr "Téma nápovědy lze přidat s ohledem na oddělení"
+
+msgid "You can create and maintain knowledge Base for your ticket system"
+msgstr "Můžete vytvořit a udržovat znalostní bázi pro Ticket systém"
+
+msgid "You can add downloads for your customers"
+msgstr "Pro zákazníky můžete přidat stahování"
+
+msgid "Add announcements for your support system"
+msgstr "Přidat oznámení pro váš systém podpory"
+
+msgid "You can Manager FAQs"
+msgstr "Často kladené dotazy správce"
+
+msgid "You can ban and unabn any spam email address"
+msgstr "Můžete zakázat a zrušit všechny nevyžádané e-mailové adresy"
+
+msgid "If and only if customer not reply certain days ticket marked overdue"
+msgstr ""
+"Pokud a pouze v případě, že zákazník nereaguje na určité dny, jsou Teckety "
+"označené po splatnosti"
+
+msgid "System will read your email and create tickets"
+msgstr "Systém bude číst váš e-mail a vytvářet Tickety"
+
+msgid "Internal notes for staff members and administrator ticket based"
+msgstr "Interní poznámky pro zaměstnance a administrátorského Ticketu"
+
+msgid "Assign To Staff"
+msgstr "Přiřadit zaměstnancům"
+
+msgid "Ticket can be transferred to any other staff member"
+msgstr "Tickety lze přenést na jiného zaměstnance"
+
+msgid "Ticket can also be transferred to any other department"
+msgstr "Tickety lze také převést na jiné oddělení"
+
+msgid "Activity Log"
+msgstr "Záznam aktivity"
+
+msgid "Ticket action history with time and user name"
+msgstr "Historie akcí Ticketu s časem a jménem uživatele"
+
+msgid "Admin can export tickets in csv format to keep record"
+msgstr "Správce může exportovat Ticket ve formátu csv, aby udržel záznam"
+
+msgid "Customer Feedback"
+msgstr "Zákaznická zpětná vazba"
+
+msgid "Customer can provide feedback that can be used to improve services"
+msgstr ""
+"Zákazník může poskytnout zpětnou vazbu, kterou lze využít ke zlepšení služeb"
+
+msgid "RTL Supported"
+msgstr "RTL Podpora"
+
+msgid "JS Support Ticket auto adjusts to RTL or LTR without any problem."
+msgstr "JS Support Ticket auto se bez problémů nastavuje na RTL nebo LTR."
+
+msgid "Staff Time Tracking"
+msgstr "Sledování času zaměstnanců"
+
+msgid "Visitor Ticket Open"
+msgstr "Ticket pro návštěvníky je otevřen"
+
+msgid "Visitor can also open ticket in you support system"
+msgstr "Návštěvník může také otevřít Ticket v systému podpory"
+
+msgid "You can now lock or unlock any ticket for certain time"
+msgstr "Nyní můžete na určitý čas uzamknout nebo odemknout libovolný Ticket"
+
+msgid "Pro version only"
+msgstr "Pouze pro PRO Verzi"
+
+msgid "Email"
+msgstr "E-mailem"
+
+msgid "Status"
+msgstr "Postavení"
+
+msgid "Ticket ID"
+msgstr "ID vstupenky"
+
+msgid "Priority"
+msgstr "Přednost"
+
+msgid "This ticket is marked as overdue"
+msgstr "Tato jízdenka je označena jako po splatnosti"
+
+msgid "Ticket marked as overdue"
+msgstr "Vstupenka označena jako po splatnosti"
+
+msgid "Logger Email"
+msgstr "Logovací e-mail"
+
+msgid "Log"
+msgstr "Log"
+
+msgid "Logger"
+msgstr "Logger"
+
+msgid "Offline"
+msgstr "Offline"
+
+msgid "Gmail"
+msgstr "Gmail"
+
+msgid "Yahoo"
+msgstr "Yahoo"
+
+msgid "Aol"
+msgstr "Aol"
+
+msgid "Hotmail"
+msgstr "Hotmail"
+
+msgid "Web Cron Job"
+msgstr "Práce Web Cron"
+
+msgid "Wget"
+msgstr "Wget"
+
+msgid "Curl"
+msgstr "Kučera"
+
+msgid "PHP Script"
+msgstr "PHP skript"
+
+msgid "URL"
+msgstr "URL"
+
+msgid "Ticket Status"
+msgstr "Stav vstupenky"
+
+msgid "FAQ"
+msgstr "FAQ"
+
+msgid "FAQs"
+msgstr "Nejčastější dotazy"
+
+msgid "Logo"
+msgstr "Logo"
+
+msgid "Knowledgebase"
+msgstr "Znalostní báze"
+
+msgid "Re"
+msgstr "Re"
+
+msgid "Ticket"
+msgstr "Lístek"
+
+msgid "JS Support Ticket"
+msgstr "Vstupenka podpory JS"
+
+msgid "Plus"
+msgstr "Plus"
+
+msgid "Cron Job URLs"
+msgstr "Cron Job URL"
+
+msgid "GDPR"
+msgstr "GDPR"
+
+msgid "JS Help Desk"
+msgstr "Help Desk JS"
+
+msgid "Premium Addon"
+msgstr "Prémiový doplněk"
+
+msgid "Google Recaptcha"
+msgstr "Google Recaptcha"
+
+msgid "MailChimp"
+msgstr "MailChimp"
+
+msgid "Online"
+msgstr "Online"
+
+msgid "Kb"
+msgstr "Kb"
+
+msgid "Admin"
+msgstr "Admin"
+
+msgid "UTF Auto Switch"
+msgstr "Automatické přepínání UTF"
+
+msgid "Firebase Auth Domain"
+msgstr "doména Firebase Auth"
+
+msgid ""
+"Private Credentials Encryption Key changing this value will discard all "
+"existing credentials "
+msgstr ""
+"Soukromý šifrovací klíč pověření změnou této hodnoty zahodí všechna "
+"existující pověření"
+
+msgid "Api Key"
+msgstr "Klíč API"
+
+msgid "SMTP"
+msgstr "SMTP"
+
+msgid "TLS"
+msgstr "TLS"
+
+msgid "SSL"
+msgstr "SSL"
+
+msgid "Ticket URL"
+msgstr "Adresa URL lístku"
+
+msgid "50%"
+msgstr "50 %"
+
+msgid "100%"
+msgstr "100%"
+
+msgid "S.No"
+msgstr "S.No"
+
+msgid "lms plugin"
+msgstr "plugin lms"
+
+msgid "Max Ticket"
+msgstr "Max lístek"
+
+msgid "WooCommerce"
+msgstr "WooCommerce"
+
+msgid "envato"
+msgstr "envato"
+
+msgid "mailchimp"
+msgstr "mailchimp"
+
+msgid "Mailchimp"
+msgstr "Mailchimp"
+
+msgid "paidsupport"
+msgstr "placená podpora"
+
+msgid "fb"
+msgstr "fb"
+
+msgid "Captcha"
+msgstr "Captcha"
+
+msgid ":"
+msgstr ":"
+
+msgid "2"
+msgstr "2"
+
+msgid "3"
+msgstr "3"
+
+msgid "helptopic"
+msgstr "téma nápovědy"
+
+msgid "Wordpress Plugin"
+msgstr "Plugin pro Wordpress"
+
+msgid ""
+"Add ons for JS Help Desk have been installed and activated successfully. "
+msgstr "Doplňky pro JS Help Desk byly úspěšně nainstalovány a aktivovány."
+
+msgid "NA"
+msgstr "NA"
+
+msgid "premade"
+msgstr "předem vyrobený"
+
+msgid "stop"
+msgstr "stop"
+
+msgid "JNone"
+msgstr "J Žádné"
+
+msgid ","
+msgstr ","
+
+msgid "5.0"
+msgstr "5,0"
+
+msgid "Banlist log"
+msgstr "Banlist log"
+
+msgid "PHP"
+msgstr "PHP"
+
+msgid "1"
+msgstr "1"
+
+msgid "Drop down"
+msgstr "Pokles dolů"
+
+msgid "Id"
+msgstr "Id"
+
+msgid "Jerror Alertnoauthor"
+msgstr "Jerror Alertnoautor"
+
+msgid "Num"
+msgstr "Num"
+
+msgid "Text"
+msgstr "Text"
+
+msgid "Word Press Extension Directory"
+msgstr "Adresář rozšíření Wordpress"
+
+msgid "OK"
+msgstr "OK"
+
+msgid "JS Support Ticket System"
+msgstr "Systém lístků podpory JS"
+
+msgid "Ticket Id"
+msgstr "ID lístku"
+
+msgid "JS Support Ticket Pro"
+msgstr "Podpora JS Ticket Pro"
+
+msgid "User has been successfully registered"
+msgstr "Uživatel byl úspěšně zaregistrován"
+
+msgid "Select Form"
+msgstr "Vyberte Formulář"
+
+msgid "Envato Purchase Code"
+msgstr "Kód nákupu Envato"
+
+msgid "Urgent"
+msgstr "Naléhavé"
+
+msgid "EDD Order ID"
+msgstr "ID objednávky EDD"
+
+msgid "Search keywords"
+msgstr "Vyhledat klíčová slova"
+
+msgid "Search title"
+msgstr "Hledat název"
+
+msgid "Manager"
+msgstr "Manažer"
+
+msgid "Assign Ticket To Agent"
+msgstr "Přiřadit vstupenku agentovi"
+
+msgid "Mark In Progress"
+msgstr "Označit probíhá"
+
+msgid "Change Ticket Priority"
+msgstr "Změnit prioritu vstupenky"
+
+msgid "Ban Email And Close Ticket"
+msgstr "Zakázat e-mail a uzavřít lístek"
+
+msgid "Release Ticket"
+msgstr "Uvolnit lístek"
+
+msgid "View Credentials"
+msgstr "Zobrazit přihlašovací údaje"
+
+msgid "Edit Credentials"
+msgstr "Upravit přihlašovací údaje"
+
+msgid "Mark Non Premium"
+msgstr "Označit jako Non Premium"
+
+msgid "Link To Paid Support"
+msgstr "Odkaz na placenou podporu"
+
+msgid "Export Ticket not translate"
+msgstr "Exportní lístek nepřekládám"
+
+msgid "Edit Help Topic not translate"
+msgstr "Upravit téma nápovědy není přeloženo"
+
+msgid "View Help Topic"
+msgstr "Zobrazit téma nápovědy"
+
+msgid "Delete Help Topic"
+msgstr "Smazat téma nápovědy"
+
+msgid "Edit Canned Response"
+msgstr "Upravit předpřipravenou odpověď"
+
+msgid "View Canned Response"
+msgstr "Zobrazit předpřipravenou odpověď"
+
+msgid "Delete Canned Response"
+msgstr "Smazat předpřipravenou odpověď"
+
+msgid "Standard"
+msgstr "Standard"
+
+msgid "Default with auto assign"
+msgstr "Výchozí s automatickým přiřazením"
+
+msgid "Visible"
+msgstr "Viditelné"
+
+msgid "Select Visible"
+msgstr "Vyberte možnost Viditelné"
+
+msgid "Logedin user"
+msgstr "Přihlášený uživatel"
+
+msgid "Logedin user only"
+msgstr "Pouze přihlášený uživatel"
+
+msgid "visitor"
+msgstr "návštěvník"
+
+msgid "Single Header"
+msgstr "Single Header"
+
+msgid "Multiple Header"
+msgstr "Více záhlaví"
+
+msgid "Quick installation Guide"
+msgstr "Průvodce rychlou instalací"
+
+msgid "How to setup"
+msgstr "Jak nastavit"
+
+msgid "Ticket Creation"
+msgstr "Vytvoření vstupenky"
+
+msgid "Custom Fields"
+msgstr "Vlastní pole"
+
+msgid "Email Notification Problems"
+msgstr "Problémy s upozorněním e-mailem"
+
+msgid "arrow"
+msgstr "Šíp"
+
+msgid "close"
+msgstr "zavřít"
+
+msgid "Multiform"
+msgstr "Mnohotvarý"
+
+msgid "Add WP Users"
+msgstr "Přidat uživatele WP"
+
+msgid "Other Products"
+msgstr "Ostatní produkty"
+
+msgid "watch video"
+msgstr "sledovat video"
+
+msgid "Get"
+msgstr "Dostat"
+
+msgid "This prefix will be added to slug incase of homepage links"
+msgstr "Tato předpona bude přidána ke slug incase odkazů na domovskou stránku"
+
+msgid " This prefix will be added to slug incase of conflict"
+msgstr "Tato předpona bude přidána ke slugu v případě konfliktu"
+
+msgid "Reset All"
+msgstr "Obnovit vše"
+
+msgid "Search By Slug"
+msgstr "Hledat podle Slug"
+
+msgid "Slug List"
+msgstr "Seznam slimáků"
+
+msgid "This button will only save slugs on current page"
+msgstr "Toto tlačítko uloží slimáky pouze na aktuální stránku"
+
+msgid "Slug"
+msgstr "Slimák"
+
+msgid "Export Style"
+msgstr "Exportovat styl"
+
+msgid "Add Multiform"
+msgstr "Přidat Multiform"
+
+msgid "Edit Fields"
+msgstr "Upravit pole"
+
+msgid "Save Multiform"
+msgstr "Uložit Multiform"
+
+msgid "Conditions"
+msgstr "Podmínky"
+
+msgid "Add Conditions"
+msgstr "Přidat podmínky"
+
+msgid "Rule Title"
+msgstr "Název pravidla"
+
+msgid "Agent Auto Assign"
+msgstr "Automatické přiřazení agenta"
+
+msgid "Add Rule"
+msgstr "Přidat pravidlo"
+
+msgid "Condition Title"
+msgstr "Název podmínky"
+
+msgid "Condition Operator"
+msgstr "Operátor podmínek"
+
+msgid "Condition value"
+msgstr "Hodnota podmínky"
+
+msgid "Select Condition Title"
+msgstr "Vyberte Název podmínky"
+
+msgid "Submit Type"
+msgstr "Odeslat typ"
+
+msgid "Select Condition Operator"
+msgstr "Vyberte Operátor podmínky"
+
+msgid "Contain"
+msgstr "Obsahovat"
+
+msgid "Matched"
+msgstr "Shoda"
+
+msgid "Equal"
+msgstr "Rovnat se"
+
+msgid "No Value found"
+msgstr "Nebyla nalezena žádná hodnota"
+
+msgid "No Operator found"
+msgstr "Nebyl nalezen žádný operátor"
+
+msgid "Add more Condition"
+msgstr "Přidat další podmínku"
+
+msgid "Save Rule"
+msgstr "Uložit pravidlo"
+
+msgid "Delete Condition"
+msgstr "Smazat podmínku"
+
+msgid "Add Ticket Using Multiform"
+msgstr "Přidat lístek pomocí Multiform"
+
+msgid "Addons Status"
+msgstr "Stav doplňků"
+
+msgid "Activated"
+msgstr "Aktivováno"
+
+msgid "Deactivate"
+msgstr "Deaktivovat"
+
+msgid "Updated"
+msgstr "Aktualizováno"
+
+msgid "Deactivated"
+msgstr "Deaktivováno"
+
+msgid "Activate"
+msgstr "aktivovat"
+
+msgid "New Update Version"
+msgstr "Nová verze aktualizace"
+
+msgid "is Available"
+msgstr "je k dispozici"
+
+msgid "Expired"
+msgstr "Platnost vypršela"
+
+msgid "Buy Now"
+msgstr "Kup nyní"
+
+msgid "Help"
+msgstr "Pomoc"
+
+msgid "Update Now"
+msgstr "Nyní aktualizovat"
+
+msgid "Add-On’s For Help Desk"
+msgstr "Doplňky pro Help Desk"
+
+msgid ""
+"Get trusted WordPress add on’s. Guaranteed to work fast, safe to use, "
+"beautifully coded, packed with features and easy to use."
+msgstr ""
+"Získejte důvěryhodné doplňky WordPress. Zaručená rychlá práce, bezpečné "
+"použití, krásně kódované, nabité funkcemi a snadné použití."
+
+msgid "Save big with an exclusive membership plan today!"
+msgstr "Ušetřete ještě dnes díky exkluzivnímu členskému plánu!"
+
+msgid "show bundle pack"
+msgstr "zobrazit balíček balíčku"
+
+msgid ""
+"Add agents and assign roles and permissions to provide assistance and "
+"support to customer support tickets."
+msgstr ""
+"Přidejte agenty a přiřaďte role a oprávnění k poskytování pomoci a podpory k "
+"lístkům zákaznické podpory."
+
+msgid ""
+"Define rules for ticket to auto close. Ticket will be auto close after "
+"specific interval of time which can be set by admin."
+msgstr ""
+"Definujte pravidla pro automatické uzavření lístku. Vstupenka se automaticky "
+"uzavře po určitém časovém intervalu, který může nastavit admin."
+
+msgid ""
+"Get the survey from your customers on ticket closing to improve your quality "
+"of services and assistance."
+msgstr ""
+"Získejte od svých zákazníků průzkum ohledně uzavírání vstupenek, abyste "
+"zlepšili kvalitu svých služeb a pomoci."
+
+msgid "Helptopic"
+msgstr "Téma nápovědy"
+
+msgid ""
+"Help topics help users to find and select the area with which they need "
+"assistance."
+msgstr ""
+"Témata nápovědy pomáhají uživatelům najít a vybrat oblast, se kterou "
+"potřebují pomoc."
+
+msgid ""
+"The private note is used as reminders or to give other agents insights into "
+"the ticket issue. User Won't see the private notes."
+msgstr ""
+"Soukromá poznámka se používá jako připomenutí nebo k tomu, aby poskytla "
+"ostatním agentům přehled o problému s tiketem. Uživatel neuvidí soukromé "
+"poznámky."
+
+msgid ""
+"Stop losing productivity on repetitive queries,Build your knowledge base, "
+"group solutions by topics to facilitate users."
+msgstr ""
+"Zastavte ztrátu produktivity při opakujících se dotazech, vytvořte si "
+"znalostní základnu, seskupte řešení podle témat, abyste uživatelům usnadnili "
+"práci."
+
+msgid ""
+"Enables admin to set N numbers of tickets for users to create and set N "
+"numbers of Ticket to open for agents separately."
+msgstr ""
+"Umožňuje správci nastavit N čísel tiketů pro uživatele, kteří je mají "
+"vytvořit, a nastavit N čísel tiketů, aby se otevřeli agentům samostatně."
+
+msgid "Multi Language Email Templates"
+msgstr "Vícejazyčné e-mailové šablony"
+
+msgid ""
+"It allows to create language-based email templates for all JS Help Desk "
+"email templates."
+msgstr ""
+"Umožňuje vytvářet jazykové e-mailové šablony pro všechny e-mailové šablony "
+"JS Help Desk."
+
+msgid ""
+"Canned Responses are pre-populated messages that allows support agents to "
+"respond quickly to customer issues."
+msgstr ""
+"Předpřipravené odpovědi jsou předem vyplněné zprávy, které umožňují agentům "
+"podpory rychle reagovat na problémy zákazníků."
+
+msgid ""
+"Enables users to reply to the tickets via email without the need to login to "
+"the support system first."
+msgstr ""
+"Umožňuje uživatelům odpovídat na vstupenky prostřednictvím e-mailu, aniž by "
+"se museli nejprve přihlašovat do systému podpory."
+
+msgid ""
+"Make unlimited announcements associated with support system to get customer "
+"interaction."
+msgstr ""
+"Provádějte neomezená oznámení spojená se systémem podpory, abyste získali "
+"interakci se zákazníky."
+
+msgid ""
+"Ban Email allows you to block email of any user to restrict him to create "
+"new tickets."
+msgstr ""
+"Zákaz e-mailu vám umožňuje zablokovat e-mail libovolného uživatele a omezit "
+"mu vytváření nových tiketů."
+
+msgid "Descktop Notifications"
+msgstr "Oznámení na ploše"
+
+msgid ""
+"Save the ticket as a PDF in your system or the admin will also be able to "
+"export all the data inside of Ticket."
+msgstr ""
+"Uložte si vstupenku jako PDF ve svém systému nebo administrátor bude také "
+"moci exportovat všechna data uvnitř vstupenky."
+
+msgid ""
+"Tired of getting tickets about the same problems? Add FAQs to drastically "
+"reduce the number of common questions from users."
+msgstr ""
+"Už vás nebaví získávat vstupenky se stejnými problémy? Přidejte časté "
+"dotazy, abyste výrazně snížili počet běžných dotazů od uživatelů."
+
+msgid "Admin Widgets"
+msgstr "Admin Widgety"
+
+msgid ""
+"Use internal email to send emails to one agent to another agent with in "
+"support ticket."
+msgstr ""
+"Použijte interní e-mail k odesílání e-mailů jednomu agentovi jinému agentovi "
+"s lístkem podpory."
+
+msgid "Front-End Widget"
+msgstr "Přední widget"
+
+msgid ""
+"Paid Support is the easiest way to integrate and manage payments for your "
+"support tickets."
+msgstr ""
+"Placená podpora je nejjednodušší způsob, jak integrovat a spravovat platby "
+"za vaše lístky podpory."
+
+msgid "Mail Chimp"
+msgstr "Mailchimp"
+
+msgid ""
+"The Mail Chimp add-on adds a new checkbox to the registration form for "
+"prompting new users to subscribe your email-list."
+msgstr ""
+"Doplněk Mail Chimp přidává do registračního formuláře nové zaškrtávací "
+"políčko, které vyzývá nové uživatele, aby se přihlásili do vašeho e-"
+"mailového seznamu."
+
+msgid ""
+"EDD offers customers to open new tickets just one click from their EDD "
+"account with optionally validating the license keys."
+msgstr ""
+"EDD nabízí zákazníkům otevřít nové vstupenky pouhým jedním kliknutím z "
+"jejich účtu EDD s volitelným ověřením licenčních klíčů."
+
+msgid "email cc"
+msgstr "email cc"
+
+msgid "Email Cc"
+msgstr "E-mailová kopie"
+
+msgid ""
+"CC(Carbon Copy) - the people who should know about the information which is "
+"being shared and the people included are able to see who is there in the "
+"list."
+msgstr ""
+"CC (Carbon Copy) – lidé, kteří by měli vědět o informacích, které jsou "
+"sdíleny, a zahrnutí lidé mohou vidět, kdo je v seznamu."
+
+msgid "multiform"
+msgstr "mnohotvarý"
+
+msgid "Multiform allows user to add more than one form based on requirements."
+msgstr ""
+"Multiform umožňuje uživateli přidat více než jeden formulář na základě "
+"požadavků."
+
+msgid "agent auto assign"
+msgstr "automatické přiřazení agenta"
+
+msgid ""
+"When auto assignment is enabled and a ticket is created, an appropriate "
+"agent is automatically assigned to the ticket and it is moved to the "
+"Assigned state."
+msgstr ""
+"Když je povoleno automatické přiřazení a je vytvořen tiket, je k tiketu "
+"automaticky přiřazen příslušný agent a ten se přesune do stavu Přiřazeno."
+
+msgid "Social Login"
+msgstr "Sociální přihlášení"
+
+msgid ""
+"Users can login from their social media accounts. They can create a new "
+"account or use social media accounts."
+msgstr ""
+"Uživatelé se mohou přihlásit ze svých účtů na sociálních sítích. Mohou si "
+"vytvořit nový účet nebo používat účty na sociálních sítích."
+
+msgid "JS Help Desk Add-Ons Bundle Pack"
+msgstr "Balíček doplňků JS Help Desk"
+
+msgid "Basic"
+msgstr "Základní"
+
+msgid "Unlimited Agents"
+msgstr "Neomezený počet agentů"
+
+msgid "Show all"
+msgstr "Ukázat vše"
+
+msgid "Everything in basic included and"
+msgstr "Vše v základní ceně a"
+
+msgid "Professional"
+msgstr "Profesionální"
+
+msgid "Everything in standard included and"
+msgstr "Vše ve standardu v ceně a"
+
+msgid "All Future Addons"
+msgstr "Všechny budoucí doplňky"
+
+msgid ""
+"Hey there! We have recently launched a fresh update for the add-ons. Don't "
+"forget to update the add-ons to enjoy the greatest features!"
+msgstr ""
+"Nazdárek! Nedávno jsme spustili novou aktualizaci doplňků. Nezapomeňte "
+"aktualizovat doplňky, abyste si mohli užívat ty nejlepší funkce!"
+
+msgid "View Addone Status"
+msgstr "Zobrazit stav Addone"
+
+msgid "slug for ticket page"
+msgstr "slimák pro stránku lístku"
+
+msgid "slug for agent add ticket page"
+msgstr "slug for agent add ticket page"
+
+msgid "slug for rolepermission page"
+msgstr "slug pro stránku oprávnění role"
+
+msgid "slug for add announcement"
+msgstr "slimák pro přidání oznámení"
+
+msgid "slug for add department page"
+msgstr "slug pro přidání stránky oddělení"
+
+msgid "slug for add download page"
+msgstr "slug pro přidání stránky ke stažení"
+
+msgid "slug for add faq page"
+msgstr "slimák pro přidání stránky faq"
+
+msgid "slug for faq page"
+msgstr "slimák pro stránku s často kladenými dotazy"
+
+msgid "slug for add article page"
+msgstr "slimák pro přidání stránky článku"
+
+msgid "slug for add category page"
+msgstr "slug pro přidání stránky kategorie"
+
+msgid "slug for user knowledgebase articles page"
+msgstr "slug pro stránku článků databáze znalostí uživatelů"
+
+msgid "slug for article detail page"
+msgstr "slug pro stránku s podrobnostmi o článku"
+
+msgid "slug for add role page"
+msgstr "slug pro přidání stránky role"
+
+msgid "slug for add agent page"
+msgstr "slug pro stránku přidání agenta"
+
+msgid "slug for agent permissions page"
+msgstr "slug pro stránku oprávnění agenta"
+
+msgid "slug for my tickets page"
+msgstr "slimák pro mou stránku s lístky"
+
+msgid "slug for agent my tickets page"
+msgstr "slug for agent my Tickets page"
+
+msgid "slug for knowledgebase page"
+msgstr "slug pro stránku znalostní báze"
+
+msgid "slug for agent categories page"
+msgstr "slimák pro stránku kategorií agentů"
+
+msgid "slug for agent kb articles page"
+msgstr "slug for agent kb Articles page"
+
+msgid "slug for agent announcements page"
+msgstr "slimák pro stránku oznámení agentů"
+
+msgid "slug for agent downloads page"
+msgstr "slug pro stránku stahování agentů"
+
+msgid "slug for agent faqs page"
+msgstr "slimák pro stránku s častými dotazy agenta"
+
+msgid "slug for add ticket page"
+msgstr "slug pro přidání stránky lístku"
+
+msgid "slug for ticket status page"
+msgstr "slug pro stránku stavu lístku"
+
+msgid "slug for controlpanel"
+msgstr "šroub pro ovládací panel"
+
+msgid "slug for agent report detail page"
+msgstr "slug pro stránku s podrobnostmi o zprávě agenta"
+
+msgid "slug for agent reports page"
+msgstr "slug pro stránku zpráv agentů"
+
+msgid "slug for department reports page"
+msgstr "slug pro stránku zpráv oddělení"
+
+msgid "slug for announcement detail page"
+msgstr "slimák pro stránku s podrobnostmi oznámení"
+
+msgid "slug for feedback page"
+msgstr "slug pro stránku zpětné vazby"
+
+msgid "slug for agent feedbacks page"
+msgstr "slug pro stránku se zpětnou vazbou agentů"
+
+msgid "slug for visitor message page"
+msgstr "slug pro stránku se zprávami návštěvníků"
+
+msgid "slug for add help topic page"
+msgstr "slug pro přidání stránky tématu nápovědy"
+
+msgid "slug for agent help topics page"
+msgstr "slug pro stránku s tématy nápovědy pro agenty"
+
+msgid "slug for add canned response page"
+msgstr "slug pro přidání stránky s předpřipravenou odpovědí"
+
+msgid "slug for agent canned responses page"
+msgstr "slug pro stránku předpřipravených odpovědí agenta"
+
+msgid "slug for gdpr data compliance actions1"
+msgstr "slug for gdpr data compliance actions1"
+
+msgid "slug for print ticket page"
+msgstr "slug pro tisk stránky lístku"
+
+msgid "slug for my profile page"
+msgstr "slimák pro mou profilovou stránku"
+
+msgid "slug for login page"
+msgstr "slug pro přihlašovací stránku"
+
+msgid "slug for user register page"
+msgstr "slug pro stránku registrace uživatelů"
+
+msgid "slug for add message page"
+msgstr "slug pro přidání stránky zprávy"
+
+msgid "slug for message detail page"
+msgstr "slug pro stránku s podrobnostmi o zprávě"
+
+msgid "slug for message inbox page"
+msgstr "slug pro stránku doručené pošty"
+
+msgid "slug for message outbox page"
+msgstr "slug pro stránku odchozí pošty"
+
+msgid "slug for roles page"
+msgstr "slimák pro stránku rolí"
+
+msgid "slug for agent page"
+msgstr "slimák pro stránku agenta"
+
+msgid "slug for departments page"
+msgstr "slug pro stránku oddělení"
+
+msgid "slug for announcements page"
+msgstr "slug pro stránku oznámení"
+
+msgid "slug for downloads page"
+msgstr "slug pro stránku ke stažení"
+
+msgid "slug for faqs page"
+msgstr "slimák pro stránku s častými dotazy"
+
+msgid "API key is required for linkedin app"
+msgstr "Pro aplikaci linkedin je vyžadován klíč API"
+
+msgid "API Key"
+msgstr "Klíč API"
+
+msgid "secret key"
+msgstr "tajný klíč"
+
+msgid "Secret"
+msgstr "Tajný"
+
+msgid "Facebook user can login in js support ticket"
+msgstr "Uživatel Facebooku se může přihlásit v lístku podpory js"
+
+msgid "Login With Linkedin"
+msgstr "Přihlaste se přes Linkedin"
+
+msgid "API key is required for facebook app"
+msgstr "Pro aplikaci Facebook je vyžadován API klíč"
+
+msgid "Login with linkedin"
+msgstr "Přihlaste se pomocí linkedin"
+
+msgid "Login with facebook"
+msgstr "Přihlásit se pomocí Facebooku"
+
+msgid "Create User via email"
+msgstr "Vytvořit uživatele prostřednictvím e-mailu"
+
+msgid "Export Ticket"
+msgstr "Exportní lístek"
+
+msgid "Ticket Listing"
+msgstr "Výpis vstupenek"
+
+msgid "Visitor Ticket Setting"
+msgstr "Nastavení návštěvnického lístku"
+
+msgid ""
+"By enabling this option, a user can know to whom the ticket has been "
+"assigned."
+msgstr ""
+"Povolením této možnosti může uživatel vědět, komu byla vstupenka přiřazena."
+
+msgid "Assigned info. on admin tickets"
+msgstr "Přidělené informace. na admin vstupenkách"
+
+msgid ""
+"By enabling this option, an agent can know to whom the ticket has been "
+"assigned."
+msgstr "Povolením této možnosti může agent vědět, komu byl tiket přidělen."
+
+msgid "Assigned info. on user tickets"
+msgstr "Přidělené informace. na uživatelských lístcích"
+
+msgid ""
+"By enabling this option, an admin can know to whom the ticket has been "
+"assigned."
+msgstr ""
+"Povolením této možnosti může administrátor vědět, komu byl lístek přiřazen."
+
+msgid "Assigned info. on agent tickets"
+msgstr "Přidělené informace. na agentských lístcích"
+
+msgid ""
+"By enabling this option, a user can know who closed the ticket and when that "
+"ticket closed."
+msgstr ""
+"Povolením této možnosti může uživatel vědět, kdo a kdy byl lístek uzavřen."
+
+msgid "Closed info. on admin closed tickets"
+msgstr "Uzavřené info. na admin uzavřených vstupenkách"
+
+msgid ""
+"By enabling this option, an agent can know who closed the ticket and when "
+"that ticket closed."
+msgstr "Povolením této možnosti může agent vědět, kdo a kdy byl tiket uzavřen."
+
+msgid "Closed info. on agent closed tickets"
+msgstr "Uzavřené info. na vstupenkách uzavřených agentem"
+
+msgid ""
+"By enabling this option, an admin can know who closed the ticket and when "
+"that ticket closed."
+msgstr ""
+"Povolením této možnosti může správce vědět, kdo a kdy byl tiket uzavřen."
+
+msgid "Set default sorting for ticket listing"
+msgstr "Nastavit výchozí řazení pro výpis lístků"
+
+msgid "Ascending"
+msgstr "Vzestupně"
+
+msgid "Descending"
+msgstr "Klesající"
+
+msgid "Ticket listing sorting"
+msgstr "Třídění lístků"
+
+msgid "Select whether users can see the ticket delete button"
+msgstr "Vyberte, zda uživatelé uvidí tlačítko pro smazání lístku"
+
+msgid "Show ticket delete button"
+msgstr "Zobrazit tlačítko pro smazání lístku"
+
+msgid ""
+"Select whether users can see the name of administrator or staff member on "
+"ticket reply"
+msgstr ""
+"Vyberte, zda uživatelé uvidí v odpovědi na tiket jméno správce nebo "
+"zaměstnance"
+
+msgid "Show Anonymous Name On Ticket Reply"
+msgstr "Zobrazit anonymní jméno v odpovědi na tiket"
+
+msgid ""
+"Select whether users can see the email of administrator or agent on ticket "
+"reply"
+msgstr ""
+"Vyberte, zda uživatelé uvidí e-mail správce nebo agenta v odpovědi na tiket"
+
+msgid "Show Admin OR Agent Email On Ticket Reply"
+msgstr "Zobrazit e-mail správce NEBO agenta v odpovědi na tiket"
+
+msgid ""
+"Show or hide the multiform popup when creating a new ticket. if you hide "
+"them, the system will open the default form."
+msgstr ""
+"Při vytváření nového tiketu zobrazit nebo skrýt vyskakovací okno s více "
+"formáty. pokud je skryjete, systém otevře výchozí formulář."
+
+msgid "Multiforms Popup For New Tickets"
+msgstr "Multiforms Popup pro nové vstupenky"
+
+msgid "Set suffix for custom ticketid"
+msgstr "Nastavit příponu pro vlastní ticketid"
+
+msgid "Ticketid Suffix"
+msgstr "Přípona Ticketid"
+
+msgid "Set ticketid sequential or random .e.g"
+msgstr "Nastavte ticketid sekvenční nebo náhodné, např"
+
+msgid "Set prefix for custom ticketid"
+msgstr "Nastavit předponu pro vlastní číslo tiketu"
+
+msgid "Ticketid Prefix"
+msgstr "Předpona Ticketid"
+
+msgid "Support Icons"
+msgstr "Ikony podpory"
+
+msgid "Set custom support text"
+msgstr "Nastavit vlastní text podpory"
+
+msgid "Set custom support image"
+msgstr "Nastavit vlastní obrázek podpory"
+
+msgid "Custom Image"
+msgstr "Vlastní obrázek"
+
+msgid "JS Help Desk Register Page"
+msgstr "JS Help Desk Registrační stránka"
+
+msgid "WordPress Default Login Page"
+msgstr "Výchozí přihlašovací stránka WordPress"
+
+msgid "JS Help Desk Login Page"
+msgstr "Přihlašovací stránka JS Help Desk"
+
+msgid "Set register Link"
+msgstr "Nastavit odkaz na registraci"
+
+msgid "We are here to help you"
+msgstr "Jsme tu, abychom vám pomohli"
+
+msgid "Help icon"
+msgstr "Ikona nápovědy"
+
+msgid ""
+"JS Help Desk is a professional, simple, easy to use and complete customer "
+"support system."
+msgstr ""
+"JS Help Desk je profesionální, jednoduchý, snadno použitelný a kompletní "
+"systém zákaznické podpory."
+
+msgid "View all videos"
+msgstr "Zobrazit všechna videa"
+
+msgid "Video icon"
+msgstr "Ikona videa"
+
+msgid "View All Videos"
+msgstr "Zobrazit všechna videa"
+
+msgid "Help Desk icon"
+msgstr "Ikona Help Desk"
+
+msgid "JS Help Desk Support"
+msgstr "Podpora JS Help Desk"
+
+msgid ""
+"JS Help Desk delivers timely customer support if you have any query then "
+"we're here to show you the way."
+msgstr ""
+"JS Help Desk poskytuje včasnou zákaznickou podporu, pokud máte jakýkoli "
+"dotaz, pak jsme tu, abychom vám ukázali cestu."
+
+msgid "Visitor ticket creation"
+msgstr "Vytvoření návštěvnického lístku"
+
+msgid "How to set ticket auto close"
+msgstr "Jak nastavit automatické zavírání lístku"
+
+msgid "How to reopen closed ticket"
+msgstr "Jak znovu otevřít uzavřenou vstupenku"
+
+msgid "How to lock a ticket"
+msgstr "Jak zamknout lístek"
+
+msgid "How to add private note"
+msgstr "Jak přidat soukromou poznámku"
+
+msgid "View ticket history"
+msgstr "Zobrazit historii vstupenek"
+
+msgid "How to setup custom fields"
+msgstr "Jak nastavit vlastní pole"
+
+msgid "Set ticket auto overdue"
+msgstr "Nastavit automatické zpoždění platnosti lístku"
+
+msgid "Manually set ticket overdue"
+msgstr "Ručně nastavený lístek po splatnosti"
+
+msgid "How to merge tickets"
+msgstr "Jak sloučit vstupenky"
+
+msgid "How to export tickets"
+msgstr "Jak exportovat vstupenky"
+
+msgid "How use help topic"
+msgstr "Jak používat téma nápovědy"
+
+msgid "How to change department"
+msgstr "Jak změnit oddělení"
+
+msgid "How to use multi-forms"
+msgstr "Jak používat více formulářů"
+
+msgid "How to paid support"
+msgstr "Jak na placenou podporu"
+
+msgid "How to use canned response"
+msgstr "Jak používat předpřipravenou odpověď"
+
+msgid "How to add private credentials"
+msgstr "Jak přidat soukromé přihlašovací údaje"
+
+msgid "How to ban/unban user"
+msgstr "Jak zakázat/odblokovat uživatele"
+
+msgid "Agent system"
+msgstr "Systém agentů"
+
+msgid "Manually assign ticket to agen"
+msgstr "Ručně přiřaďte vstupenku agentovi"
+
+msgid "How to edit time"
+msgstr "Jak upravit čas"
+
+msgid "How to use time tracking"
+msgstr "Jak používat sledování času"
+
+msgid "How to set max open ticket"
+msgstr "Jak nastavit maximální otevřený lístek"
+
+msgid "How to show counts"
+msgstr "Jak zobrazit počty"
+
+msgid "How to set Captcha"
+msgstr "Jak nastavit Captcha"
+
+msgid "User options"
+msgstr "Uživatelské možnosti"
+
+msgid "How to set login redirect"
+msgstr "Jak nastavit přesměrování přihlášení"
+
+msgid "How to set fields ordering"
+msgstr "Jak nastavit řazení polí"
+
+msgid "How to enable social login"
+msgstr "Jak povolit sociální přihlášení"
+
+msgid "Setup"
+msgstr "Založit"
+
+msgid "How to enable email piping"
+msgstr "Jak povolit e-mailové potrubí"
+
+msgid "How to set SMTP"
+msgstr "Jak nastavit SMTP"
+
+msgid "How to solve email notification problem"
+msgstr "Jak vyřešit problém s upozorněním na e-mail"
+
+msgid "How to translate"
+msgstr "Jak přeložit"
+
+msgid "How to set colors"
+msgstr "Jak nastavit barvy"
+
+msgid "How to add Shortcode"
+msgstr "Jak přidat Shortcode"
+
+msgid "How to install addons"
+msgstr "Jak nainstalovat doplňky"
+
+msgid "How to Desktop Notifications"
+msgstr "Jak na oznámení na ploše"
+
+msgid "How to use knowledge base"
+msgstr "Jak používat znalostní bázi"
+
+msgid "How to use downloads"
+msgstr "Jak používat stahování"
+
+msgid "How to add announcement"
+msgstr "Jak přidat oznámení"
+
+msgid "How to create FAQ"
+msgstr "Jak vytvořit FAQ"
+
+msgid "How to use email cc"
+msgstr "Jak používat e-mailovou kopii"
+
+msgid "How to use internal mail"
+msgstr "Jak používat interní poštu"
+
+msgid "Use front-end widgets"
+msgstr "Používejte front-endové widgety"
+
+msgid "How to enable admin widgets"
+msgstr "Jak povolit administrátorské widgety"
+
+msgid "Select Language"
+msgstr "Zvolte jazyk"
+
+msgid "Email CC"
+msgstr "E-mail CC"
+
+msgid "Add Email CC"
+msgstr "Přidat emailovou kopii"
+
+msgid "Template For"
+msgstr "Šablona pro"
+
+msgid "Sr#"
+msgstr "sr#"
+
+msgid "Template Title"
+msgstr "Název šablony"
+
+msgid "Template Type"
+msgstr "Typ šablony"
+
+msgid "Add Email Cc"
+msgstr "Přidat e-mailovou kopii"
+
+msgid "Select Template For"
+msgstr "Vyberte možnost Šablona pro"
+
+msgid "Select Template Type"
+msgstr "Vyberte Typ šablony"
+
+msgid "Add more row"
+msgstr "Přidat další řádek"
+
+msgid "Delete row"
+msgstr "Smazat řádek"
+
+msgid "Save Email CC"
+msgstr "Uložit e-mail CC"
+
+msgid "To use this feature you must be agent"
+msgstr "Chcete-li používat tuto funkci, musíte být agent"
+
+msgid "Form has been stored"
+msgstr "Formulář byl uložen"
+
+msgid "Default form cannot be set as disabled"
+msgstr "Výchozí formulář nelze nastavit jako zakázaný"
+
+msgid "Multiform has been deleted"
+msgstr "Multiform byl smazán"
+
+msgid "Select Parent"
+msgstr "Vyberte možnost Rodič"
+
+msgid "Select Child"
+msgstr "Vyberte možnost Dítě"
+
+msgid "Select Condition"
+msgstr "Vyberte možnost Podmínka"
+
+msgid "Not Equal"
+msgstr "Nerovná se"
+
+msgid "To use this feature please fill the above three fields"
+msgstr "Chcete-li použít tuto funkci, vyplňte prosím výše uvedená tři pole"
+
+msgid "The agent has been stored"
+msgstr "Agent byl uložen"
+
+msgid "The agent has been deleted"
+msgstr "Zástupce byl smazán"
+
+msgid "WP User ID"
+msgstr "ID uživatele WP"
+
+msgid "WP Username"
+msgstr "Uživatelské jméno WP"
+
+msgid "User Detail"
+msgstr "Detail uživatele"
+
+msgid "WP Full Name"
+msgstr "Celé jméno WP"
+
+msgid "WP Email Address"
+msgstr "E-mailová adresa WP"
+
+msgid "Rule has been stored"
+msgstr "Pravidlo bylo uloženo"
+
+msgid "Rule has been deleted"
+msgstr "Pravidlo bylo smazáno"
+
+msgid "Email Cc has been stored"
+msgstr "Kopie e-mailu byla uložena"
+
+msgid "Email CC has been deleted"
+msgstr "Email CC byl smazán"
+
+msgid "Agent permissions have been stored"
+msgstr "Oprávnění agenta byla uložena"
+
+msgid "Select Canned Response"
+msgstr "Vyberte možnost Předpřipravená odpověď"
+
+msgid "Ticket Merge"
+msgstr "Sloučení lístků"
+
+msgid "Delete Credentials"
+msgstr "Smazat přihlašovací údaje"
+
+msgid "Mail To Agent"
+msgstr "Mail Agentovi"
+
+msgid "View Agent Reports"
+msgstr "Zobrazit zprávy agentů"
+
+msgid "Add Credentials"
+msgstr "Přidat přihlašovací údaje"
+
+msgid "Edit Help Topic"
+msgstr "Upravit téma nápovědy"
+
+msgid ""
+"e.g ' I have read and agree to the [link] Terms and Conditions[/link].  ' "
+"The text between [link] and [/link] will be linked to provided url or "
+"wordpress page."
+msgstr ""
+"např. ' Přečetl jsem a souhlasím s [link] Smluvními podmínkami[/link]. ' "
+"Text mezi [link] a [/link] bude propojen s poskytnutou url nebo stránkou "
+"wordpress."
+
+msgid "login"
+msgstr "přihlásit se"
+
+msgid "stars"
+msgstr "hvězdy"
+
+msgid "Please write appreciated review at WP Extension Directory"
+msgstr "Napište prosím cennou recenzi na WP Extension Directory"
+
+msgid ""
+"We'd love to hear from you. It'll only take 2 minutes of your time, and will "
+"really help us spread the word"
+msgstr ""
+"Rádi bychom od vás slyšeli. Zabere to jen 2 minuty vašeho času a skutečně "
+"nám to pomůže šířit informace"
+
+msgid "love"
+msgstr "milovat"
+
+msgid "I'd love to help :)"
+msgstr "rád pomohu :)"
+
+msgid "sad"
+msgstr "smutný"
+
+msgid "Not this time"
+msgstr "Tentokrát ne"
+
+msgid "happy"
+msgstr "šťastný"
+
+msgid "I've already rated you"
+msgstr "Už jsem tě hodnotil"
+
+msgid "thanks"
+msgstr "dík"
+
+msgid "You are awesome !......"
+msgstr "Jsi úžasný !......"
+
+msgid "Thanks for your support, we really appreciate it."
+msgstr "Děkujeme za vaši podporu, velmi si toho vážíme."
+
+msgid "JS Help Desk Team"
+msgstr "Tým Help Desk JS"
+
+msgid "Remind you about this later?"
+msgstr "Připomenout vám to později?"
+
+msgid "Remind me in 3 days"
+msgstr "Připomeňte mi za 3 dny"
+
+msgid "Remind me in 10 days"
+msgstr "Připomeňte mi za 10 dní"
+
+msgid "Remind me in 30 days"
+msgstr "Připomeňte mi za 30 dní"
+
+msgid "Don't remind me about this"
+msgstr "Tohle mi nepřipomínej"
+
+msgid "Watch Video"
+msgstr "Sledovat video"
+
+msgid "Slug(s) has been stored"
+msgstr "Slimák byl uložen"
+
+msgid "Prefix has not been stored"
+msgstr "Předpona nebyla uložena"
+
+msgid "+Add more Condition"
+msgstr "+ Přidat další stav"
+
+msgid "Admin New Ticket Received"
+msgstr "Admin Nová vstupenka přijata"
+
+msgid "Staff New Ticket Received"
+msgstr "Zaměstnanci nová vstupenka přijata"
+
+msgid "New Department Received"
+msgstr "Nové oddělení přijato"
+
+msgid "New Group Received"
+msgstr "Nová skupina přijata"
+
+msgid "New Agent Received"
+msgstr "Nový agent přijat"
+
+msgid "New Help Topic Received"
+msgstr "Bylo přijato nové téma nápovědy"
+
+msgid "Admin Reassign Ticket"
+msgstr "Změna přiřazení lístku správce"
+
+msgid "Staff Reassign Ticket"
+msgstr "Zaměstnanci přerozdělí lístek"
+
+msgid "Admin Close Ticket"
+msgstr "Admin Zavřít lístek"
+
+msgid "Staff Close Ticket"
+msgstr "Vstupenka zavřít personál"
+
+msgid "Admin Delete Ticket"
+msgstr "Admin Smazat lístek"
+
+msgid "Staff Delete Ticket"
+msgstr "Zaměstnanci smazat lístek"
+
+msgid "Admin Overdue Ticket"
+msgstr "Admin zpožděný lístek"
+
+msgid "Staff Overdue Ticket"
+msgstr "Lístek po splatnosti pro zaměstnance"
+
+msgid "Admin Email Baned"
+msgstr "Email administrátora zakázán"
+
+msgid "Staff Email Baned"
+msgstr "Email zaměstnanců zakázán"
+
+msgid "Admin Ticket Transfered to Department"
+msgstr "Administrátorský lístek převeden na oddělení"
+
+msgid "Staff Ticket Transfered to Department"
+msgstr "Lístek pro zaměstnance převeden na oddělení"
+
+msgid "Admin Email baned and ticket closed"
+msgstr "Admin Email zakázán a tiket uzavřen"
+
+msgid "Staff Email baned and ticket closed"
+msgstr "E-mail zaměstnanců zakázán a vstupenka uzavřena"
+
+msgid "Admin Email Unbaned"
+msgstr "E-mail správce zrušen"
+
+msgid "Staff Email Unbaned"
+msgstr "E-mail zaměstnanců zrušen"
+
+msgid "Admin Ticket Reply"
+msgstr "Odpověď na lístek správce"
+
+msgid "Staff Ticket Reply"
+msgstr "Odpověď na lístek zaměstnanců"
+
+msgid "Ticket Received"
+msgstr "Vstupenka přijata"
+
+msgid "Banemail try new ticket"
+msgstr "Banemail zkuste nový lístek"
+
+msgid "Admin Ticket has been locked"
+msgstr "Admin Ticket byl uzamčen"
+
+msgid "Staff Ticket has been locked"
+msgstr "Lístek pro zaměstnance byl uzamčen"
+
+msgid "Admin Ticket has been unlocked"
+msgstr "Admin Ticket byl odemčen"
+
+msgid "Staff Ticket has been unlocked"
+msgstr "Lístek pro zaměstnance byl odemčen"
+
+msgid "Admin In progress Ticket"
+msgstr "Vstupenka pro správu probíhá"
+
+msgid "Staff In progress Ticket"
+msgstr "Vstupenka pro zaměstnance probíhá"
+
+msgid "Admin Ticket priority changed"
+msgstr "Priorita Admin Ticket změněna"
+
+msgid "Staff Ticket priority changed"
+msgstr "Priorita vstupenek pro zaměstnance se změnila"
+
+msgid "New Mail has been sent"
+msgstr "Nová pošta byla odeslána"
+
+msgid "New Reply has been sent"
+msgstr "Nová odpověď byla odeslána"
+
+msgid "Delete User Data"
+msgstr "Smazat uživatelská data"
+
+msgid "Closed By"
+msgstr "Zavřeno"
+
+msgid "Closed On"
+msgstr "Zavřeno na"
+
+msgid "Closed info. on user closed tickets"
+msgstr "Uzavřené info. na uživatelsky uzavřených lístcích"
+
+msgid "custom text"
+msgstr "vlastní text"
+
+msgid "Select Languages"
+msgstr "Vyberte Jazyky"
+
+msgid "IMAP Authentication cancelled"
+msgstr "Ověření IMAP bylo zrušeno"
+
+msgid "Page Not Found !!"
+msgstr "Stránka nenalezena !!"

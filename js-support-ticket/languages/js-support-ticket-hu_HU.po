@@ -1,0 +1,7593 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: hu_HU\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.4.1\n"
+
+msgid "You are not allowed"
+msgstr "Számodra nem engedélyezett"
+
+msgid "The ticket has been locked"
+msgstr "A jegy zárva volt"
+
+msgid "Successfully"
+msgstr "Sikeresen"
+
+msgid "The ticket has not been locked"
+msgstr "A jegy nem volt zárolva"
+
+msgid "Error"
+msgstr "Hiba"
+
+msgid "Lock Ticket"
+msgstr "Hibajegy lezárása"
+
+msgid "The ticket is locked by"
+msgstr "A jegy zárva van"
+
+msgid "The ticket has been unlocked"
+msgstr "A jegy nem volt nyitva"
+
+msgid "The ticket has not been unlocked"
+msgstr "A jegyet még nem nyitották meg"
+
+msgid "Unlock Ticket"
+msgstr "Hibajegy feloldása"
+
+msgid "User already a staff member"
+msgstr "A felhasználó már alkalmazott"
+
+msgid "The staff member has not been stored"
+msgstr "Az alkalmazottat nem tárolták"
+
+msgid "The staff member has been stored"
+msgstr "Az alkalmazottat tárolták"
+
+msgid "The staff member has been deleted"
+msgstr "Az alkalmazottat törölték"
+
+msgid "The staff member has not been deleted"
+msgstr "Az alkalmazottat nem törölték"
+
+msgid "The staff member in use cannot delete"
+msgstr "A használt alkalmazott nem tudja törölni"
+
+msgid "Staff"
+msgstr "Személyzet"
+
+msgid "status has been changed"
+msgstr "státusz megváltozott"
+
+msgid "status has not been changed"
+msgstr "státusz nem változott"
+
+msgid "User ID"
+msgstr "Felhasználói azonosító"
+
+msgid "User Name"
+msgstr "Felhasználónév"
+
+msgid "Email Address"
+msgstr "Email cím"
+
+msgid "Name"
+msgstr "Név"
+
+msgid "Previous"
+msgstr "Előző"
+
+msgid "Next"
+msgstr "Következő"
+
+msgid "Active"
+msgstr "Aktív"
+
+msgid "Disabled"
+msgstr "Letiltott"
+
+msgid "Uploaded file extension error."
+msgstr "Feltöltött fájlkiterjesztési hiba."
+
+msgid "Select user"
+msgstr "Válassz felhasználót"
+
+msgid "Username"
+msgstr "Felhasználónév"
+
+msgid "Search"
+msgstr "Keres"
+
+msgid "Reset"
+msgstr "Töröl"
+
+msgid "Use search feature to select the user"
+msgstr "Használja a keresési funkciót a felhasználó kiválasztásához"
+
+msgid "User"
+msgstr "Felhasználó"
+
+msgid "Select User"
+msgstr "Válassz felhasználót"
+
+msgid "Roles"
+msgstr "Szerepkörök"
+
+msgid "Select Role"
+msgstr "Válassz szerepkört"
+
+msgid "First Name"
+msgstr "Keresztnév"
+
+msgid "Last Name"
+msgstr "Vezetéknév"
+
+msgid "Office Phone"
+msgstr "Irodai telefonszám"
+
+msgid "Extension"
+msgstr "Kiterjesztés"
+
+msgid "Mobile No"
+msgstr "Mobil szám"
+
+msgid "Picture"
+msgstr "Kép"
+
+msgid "Maximum File Size"
+msgstr "Max. file méret"
+
+msgid "File Extension Type"
+msgstr "File kiterjesztések"
+
+msgid "Append Signature"
+msgstr "Aláírás beillesztése"
+
+msgid "Append signature with a reply"
+msgstr "Aláírás hozzáadása a válaszhoz"
+
+msgid "Signature"
+msgstr "Aláírás"
+
+msgid "Account Status"
+msgstr "Fiók státusz"
+
+msgid "Select Status"
+msgstr "Válassz státuszt"
+
+msgid "Save"
+msgstr "Ment"
+
+msgid "Cancel"
+msgstr "Megszakítás"
+
+msgid "Close"
+msgstr "Bezár"
+
+msgid "Dashboard"
+msgstr "Vezérlőpult"
+
+msgid "Configuration"
+msgstr "Beállítás"
+
+msgid "Version"
+msgstr "Változat"
+
+msgid "image"
+msgstr "kép"
+
+msgid "Append"
+msgstr "Mellékel"
+
+msgid "Add Permissions"
+msgstr "Add Enmissions"
+
+msgid "Permissions"
+msgstr "Jogosultságok"
+
+msgid "Department Section"
+msgstr "Osztályok"
+
+msgid "Ticket Section"
+msgstr "Hibajegyek"
+
+msgid "Agent Section"
+msgstr "Ügynök részleg"
+
+msgid "Knowledge Base Section"
+msgstr "Tudásbázis"
+
+msgid "FAQ Section"
+msgstr "GY.I.K."
+
+msgid "Download Section"
+msgstr "Letöltések"
+
+msgid "Announcement Section"
+msgstr "Felhívások"
+
+msgid "Mail Section"
+msgstr "Email"
+
+msgid "Help Topic Section"
+msgstr "Súgó téma szakasz"
+
+msgid "Canned Response Section"
+msgstr "Konzerv válasz szakasz"
+
+msgid "Select / Deselect All"
+msgstr "Mindet kiválaszt/eldob"
+
+msgid "Save Permissions"
+msgstr "Jogosultságok mentése"
+
+msgid "Agents"
+msgstr "minőségben"
+
+msgid "Add"
+msgstr "Hozzáad"
+
+msgid "Full Name"
+msgstr "Teljes név"
+
+msgid "Role"
+msgstr "Szerepkör"
+
+msgid "Status"
+msgstr "Státusz"
+
+msgid "Created"
+msgstr "Létrehozva"
+
+msgid "Action"
+msgstr "Művelet"
+
+msgid "change status"
+msgstr "állapotváltozás"
+
+msgid "Edit"
+msgstr "Szerkesztés"
+
+msgid "Delete"
+msgstr "Törlés"
+
+msgid "Are you sure you want to delete"
+msgstr "biztos, hogy törölni akarod"
+
+msgid "Something went wrong to try again later."
+msgstr "Valami nem sikerült később újra megpróbálnom."
+
+msgid "My Profile"
+msgstr "Profilom"
+
+msgid "Upload Image"
+msgstr "Kép feltöltése"
+
+msgid "Phone No"
+msgstr "Telefonszám"
+
+msgid "Upload file limit exceeds"
+msgstr "A feltöltési fájl korlátozása meghaladja a"
+
+msgid "No help topic found"
+msgstr "Nincs ilyen Segítség Téma"
+
+msgid "Error file size too large"
+msgstr "Hiba: File méret túl nagy"
+
+msgid "Select Department"
+msgstr "Válassz osztályt"
+
+msgid "Select Help Topic"
+msgstr "Válassz súgó témát"
+
+msgid "Select Priority"
+msgstr "Válassz prioritást"
+
+msgid "Select Canned response"
+msgstr "Válassza a Konvertált válasz lehetőséget"
+
+msgid "Add more"
+msgstr "Adj hozzá többet"
+
+msgid "Remove"
+msgstr "Vegye ki"
+
+msgid "Reason for edit"
+msgstr "Szerkesztés oka"
+
+msgid "Internal Note"
+msgstr "Belső megjegyzés"
+
+msgid "Enter valid woocommerce order#"
+msgstr "Írja be az érvényes woocommerce rendelést #"
+
+msgid "Order id found"
+msgstr "Megrendelési azonosító található"
+
+msgid "Order id not found"
+msgstr "Megrendelési azonosító nem található"
+
+msgid "Select Product"
+msgstr "Válassza a Termék lehetőséget"
+
+msgid "Dated"
+msgstr "Keltezett"
+
+msgid "Select Order ID"
+msgstr "Válassza a Megrendelés azonosítót"
+
+msgid "Select license key"
+msgstr "Válassza ki a licenckulcsot"
+
+msgid "Assign to me"
+msgstr "Hozzárendelem magamhoz"
+
+msgid "Submit Ticket"
+msgstr "Hibajegy beküldése"
+
+msgid "Show All"
+msgstr "Mutasd az összeset"
+
+msgid "Show Less"
+msgstr "Mutass kevesebbet"
+
+msgid "Open"
+msgstr "Nyitott"
+
+msgid "Closed"
+msgstr "Lezárt"
+
+msgid "Answered"
+msgstr "Válaszolt"
+
+msgid "Overdue"
+msgstr "Határidőn túli"
+
+msgid "All Tickets"
+msgstr "Minden hibajegy"
+
+msgid "Tickets"
+msgstr "Hibajegyek"
+
+msgid "Ticket ID"
+msgstr "Hibajegy ID"
+
+msgid "Or"
+msgstr "vagy"
+
+msgid "From"
+msgstr "Feladó"
+
+msgid "Select staff"
+msgstr "Válassz csapatot"
+
+msgid "Select"
+msgstr "Választ"
+
+msgid "Start Date"
+msgstr "Kezdés napja"
+
+msgid "End Date"
+msgstr "Befejezés napja"
+
+msgid "Assigned to me"
+msgstr "Nekem rendelve"
+
+msgid "Subject"
+msgstr "Téma"
+
+msgid "Priority"
+msgstr "Prioritás"
+
+msgid "sort"
+msgstr "fajta"
+
+msgid "New"
+msgstr "Új"
+
+msgid "Waiting Reply"
+msgstr "Válaszra várva"
+
+msgid "In Progress"
+msgstr "Folyamatban"
+
+msgid "Replied"
+msgstr "Megválaszolt"
+
+msgid "Close and merge"
+msgstr "Bezárás és egyesítés"
+
+msgid "Created via Email"
+msgstr "Létrehozva email-ből"
+
+msgid "The ticket is locked"
+msgstr "A jegy zárva van"
+
+msgid "Last Reply"
+msgstr "Utolsó válasz"
+
+msgid "Search by username"
+msgstr "Keresés felhasználónév alapján"
+
+msgid "Already exists"
+msgstr "Már létezik"
+
+msgid "The role has been stored"
+msgstr "A szerepet tárolták"
+
+msgid "The role has not been stored"
+msgstr "A szerep nem került tárolásra"
+
+msgid "The role has been deleted"
+msgstr "A szerepet törölték"
+
+msgid "The role has not been deleted"
+msgstr "A szerepet nem törölték"
+
+msgid "The role in use cannot be deleting"
+msgstr "A használt szerep nem lehet törlés"
+
+msgid "Save Role"
+msgstr "Szerepkör mentése"
+
+msgid "Add Role"
+msgstr "Szerepkör hozzáadása"
+
+msgid "Role Permission"
+msgstr "Szerepkör jogosultságok"
+
+msgid "Role Name"
+msgstr "Szerepkör neve"
+
+msgid "Role permissions"
+msgstr "Szerepkör jogosultságai"
+
+msgid "Search Roles"
+msgstr "Keresési szerepek"
+
+msgid "Add New Role"
+msgstr "Új szerep hozzáadása"
+
+msgid "An announcement has been stored"
+msgstr "A bejelentés el lett tárolva"
+
+msgid "An announcement has not been stored"
+msgstr "A bejelentést nem tárolták"
+
+msgid "An announcement has been deleted"
+msgstr "A bejelentést töröltük"
+
+msgid "An announcement has not been deleted"
+msgstr "A bejelentést nem törölték"
+
+msgid "Announcement"
+msgstr "Felhívás"
+
+msgid "ordering has been changed"
+msgstr "sorrend megváltozott"
+
+msgid "ordering has not changed"
+msgstr "sorrend nem változott meg"
+
+msgid "Public"
+msgstr "Publikus"
+
+msgid "Private"
+msgstr "Privát"
+
+msgid "Title"
+msgstr "Cím"
+
+msgid "Parent Category"
+msgstr "Szülő kategória"
+
+msgid "Select Category"
+msgstr "Válassz kategóriát"
+
+msgid "Description"
+msgstr "Leírás"
+
+msgid "Save Announcement"
+msgstr "Felhívás nemtése"
+
+msgid "Add Announcement"
+msgstr "Felhívás hozzáadása"
+
+msgid "Category"
+msgstr "Kategória"
+
+msgid "Announcements"
+msgstr "Felhívások"
+
+msgid "Records per page"
+msgstr "Nyilvántartás oldalanként"
+
+msgid "Ordering"
+msgstr "Sorrend"
+
+msgid "Save Ordering"
+msgstr "Mentés Rendelés"
+
+msgid "Category Name"
+msgstr "Kategória név"
+
+msgid "Categories"
+msgstr "Kategóriák"
+
+msgid "Banned Email Log List"
+msgstr "Tiltott e-mail naplólista"
+
+msgid "Logger Email"
+msgstr "Bejelentő email címe"
+
+msgid "Logger"
+msgstr "Bejelentő"
+
+msgid "IP Address"
+msgstr "IP cím"
+
+msgid "Ban email has been stored"
+msgstr "A tiltott e-mail tárolásra került"
+
+msgid "Ban email has not been stored"
+msgstr "A tiltott e-mailt nem tárolták"
+
+msgid "Ban email has been deleted"
+msgstr "Tiltott email törölve lett"
+
+msgid "Ban email has not been deleted"
+msgstr "A tiltó e-mailt nem töröltük"
+
+msgid "Ban email does not exist"
+msgstr "Tiltott email nem létezik"
+
+msgid "Add Banned Email"
+msgstr "Adjon hozzá tiltott e-mailt"
+
+msgid "Save Banned Email"
+msgstr "Mentsd el a tiltott e-mailt"
+
+msgid "Banned Emails"
+msgstr "Tiltott email-ek"
+
+msgid "Emails"
+msgstr "Emailek"
+
+msgid "Submitter"
+msgstr "Elküldő"
+
+msgid "Canned response message has been stored"
+msgstr "A konzervált válaszüzenet el lett tárolva"
+
+msgid "Canned response message has not been stored"
+msgstr "A konzervált válaszüzenet nem került tárolásra"
+
+msgid "Premade department message has been deleted"
+msgstr "Előre elkészített osztály üzenet törölve"
+
+msgid "Premade department message has not been deleted"
+msgstr "Előre elkészített osztály üzenet nem lett törölve"
+
+msgid "Canned response"
+msgstr "Konzerv válasz"
+
+msgid "Department"
+msgstr "Osztály"
+
+msgid "Response"
+msgstr "Válasz"
+
+msgid "Save Canned Response"
+msgstr "Mentés a bevitt válaszra"
+
+msgid "Add Canned Response"
+msgstr "Adjon hozzá konzisztens választ"
+
+msgid "The department under which the answer will be made is available"
+msgstr "Az a részleg elérhető, amelyen a választ megválaszolják"
+
+msgid "Canned Responses"
+msgstr "Konzerv válaszok"
+
+msgid "Last Updated"
+msgstr "Legutóbb frissített"
+
+msgid "Not updated"
+msgstr "Nem frissített"
+
+msgid "Canned Response"
+msgstr "Konzerv válasz"
+
+msgid "Latest Tickets"
+msgstr "Legutóbbi hibajegyek"
+
+msgid "Last Month Ticket Stats"
+msgstr "Legutóbbi hónap hibajegy statisztikája"
+
+msgid "Pending"
+msgstr "Függőben"
+
+msgid "The attachment has been removed"
+msgstr "A mellékletet eltávolítottuk"
+
+msgid "The attachment has not been removed"
+msgstr "A mellékletet nem távolították el"
+
+msgid "The download has been stored"
+msgstr "A letöltés el lett tárolva"
+
+msgid "The download has not been stored"
+msgstr "A letöltést nem tárolta"
+
+msgid "Download"
+msgstr "Letöltés"
+
+msgid "The download has been deleted"
+msgstr "A letöltést törölték"
+
+msgid "The download has not been deleted"
+msgstr "A letöltést nem törölték"
+
+msgid "Download All"
+msgstr "Összes letöltése"
+
+msgid "Attachments"
+msgstr "Csatolmányok"
+
+msgid "Save Download"
+msgstr "Letöltés mentése"
+
+msgid "Add Download"
+msgstr "Letöltés hozzáadása"
+
+msgid "Add More File"
+msgstr "Újabb file hozzáadása"
+
+msgid "Delete attachment"
+msgstr "Csatolmányok törlése"
+
+msgid "Downloads"
+msgstr "Letöltések"
+
+msgid "grab"
+msgstr "Megragad"
+
+msgid "Attachment"
+msgstr "Csatolmányok"
+
+msgid "Files"
+msgstr "File-ok"
+
+msgid "Help Desk"
+msgstr "Ügyfélszolgálat"
+
+msgid "Get Help"
+msgstr "Kaphat segítséget"
+
+msgid "Service is running, please close the pag"
+msgstr "A szolgáltatás fut, kérjük, zárja be a oldalt"
+
+msgid ""
+"Admin email address and email piping address cannot be the same, your email "
+"piping will not be work."
+msgstr ""
+"A rendszergazdai e-mail cím és az e-mail csővezeték címe nem lehet azonos, "
+"az e-mail csővezeték nem lesz megfelelő."
+
+msgid "Your setting is working please this."
+msgstr "A beállítás működik, kérlek, ez."
+
+msgid "Connection established but the system cannot read any email"
+msgstr "A kapcsolat létrejött, de a rendszer nem képes e-maileket olvasni"
+
+msgid ""
+"IMAP is either not installed or not enabled in your server. Contact to "
+"hosting company"
+msgstr ""
+"Az IMAP vagy nincs telepítve, vagy nincs engedélyezve a szerveren. Kapcsolat "
+"a tárhely szolgáltatóval"
+
+msgid "The configuration has been stored"
+msgstr "A konfiguráció el lett tárolva"
+
+msgid "The configuration not has been stored"
+msgstr "A konfiguráció nem került tárolásra"
+
+msgid "Email address already exist"
+msgstr "Az e-mail cím már létezik"
+
+msgid "Email for email piping has been stored"
+msgstr "Az e-mail csővezetékhez tartozó e-mail tárolt"
+
+msgid "Email for email piping has not been stored"
+msgstr "Az e-mail csővezetékekhez tartozó e-maileket nem tárolta"
+
+msgid "The email has been deleted"
+msgstr "Az e-mail törölve"
+
+msgid "The email has not been deleted"
+msgstr "Az e-mailt nem töröltük"
+
+msgid "in use cannot deleted"
+msgstr "használatban, nem lehet törölni"
+
+msgid "Enabled"
+msgstr "Engedélyezett"
+
+msgid "Only New Tickets"
+msgstr "Csak új hibajegyek"
+
+msgid "Only Replies"
+msgstr "Csak válaszok"
+
+msgid "Both"
+msgstr "Mind"
+
+msgid "Other"
+msgstr "Más"
+
+msgid "Yes"
+msgstr "Igen"
+
+msgid "No"
+msgstr "Nem"
+
+msgid "Please enter the hostname first"
+msgstr "Először add meg a kiszolgálónevet (hostname)"
+
+msgid "Please enable email piping setting first"
+msgstr "Először engedélyezze az e-mail csövek beállítását"
+
+msgid "Add Email Piping"
+msgstr "Add hozzá az E-mail csővezetéket"
+
+msgid "Enable email piping"
+msgstr "Engedélyezze az e-mail csöveket"
+
+msgid "Ticket Type"
+msgstr "Hibajegy tipusa"
+
+msgid "Which email type to read"
+msgstr "Melyik email fajtát olvasnád"
+
+msgid "Save attachments if found in an email"
+msgstr "Mentse el a mellékleteket, ha talál e-mailben"
+
+msgid "Host Type"
+msgstr "Tárhely tipus"
+
+msgid "Select your email service provider"
+msgstr "Válaszd ki az email szolgáltatódat"
+
+msgid "Host Name"
+msgstr "Host név"
+
+msgid "Enabled SSL"
+msgstr "SSL engedélyezése"
+
+msgid "Do you have enabled SSL on your domain?"
+msgstr "Engedélyezte az SSL-t a domainjén?"
+
+msgid "Host Port Number"
+msgstr "Tárhely Port Szám"
+
+msgid "Host port number to read an email from"
+msgstr "Gazdaportszám, ahonnan e-mailt olvashat"
+
+msgid "Email address to read emails"
+msgstr "Email cím emailek olvasására"
+
+msgid "Password"
+msgstr "Jelszó"
+
+msgid "Password for a given email address"
+msgstr "Egy adott e-mail cím jelszava"
+
+msgid "check"
+msgstr "jelölje be"
+
+msgid "Check Settings"
+msgstr "Beállítások megjelenítése"
+
+msgid "If the system doesn't respond in 30 seconds"
+msgstr "Ha a rendszer 30 másodpercen belül nem válaszol"
+
+msgid "it means system unable to connect email server"
+msgstr "azt jelenti, hogy nem tud kapcsolódni az email szerverhez"
+
+msgid "Save Settings"
+msgstr "Beállítások mentése"
+
+msgid "Cron Job"
+msgstr "Ütemezett (Cron) feladat"
+
+msgid "Web Cron Job"
+msgstr "Webes Cron"
+
+msgid "PHP Script"
+msgstr "PHP szkript"
+
+msgid "Configuration of a backup job with webcron org"
+msgstr "Biztonsági mentés ütemezésének beállításai webcron-nal"
+
+msgid "Name of cron job"
+msgstr "Cron feladat neve"
+
+msgid "Log in to webcron org in the cron area click on"
+msgstr "Jelentkezzen be a webcron org-ba a cron területén kattintson"
+
+msgid "Timeout"
+msgstr "Időkorlát"
+
+msgid ""
+"180 secs if the does not completely increase it most sites will work with a "
+"setting of 180 600"
+msgstr ""
+"180 másodperc, ha az nem növeli teljesen, a legtöbb webhely 180 600 "
+"beállítással működik"
+
+msgid "URL you want to execute"
+msgstr "Futtatni kívánt URL"
+
+msgid "Login"
+msgstr "Bejelentkezés"
+
+msgid "Leave this blank"
+msgstr "Hagyd ütesen"
+
+msgid "Execution time"
+msgstr "Futtatás időtartama"
+
+msgid "That the grid below the other options select when and how"
+msgstr "A többi lehetőség alatti rács választja ki, hogy mikor és hogyan"
+
+msgid "Alerts"
+msgstr "Figyelmeztetések"
+
+msgid ""
+"If you have already set up alerts methods in webcron org interface we "
+"recommend choosing an alert"
+msgstr ""
+"Ha már beállított riasztási módszereket a webcron org felületén, akkor "
+"javasoljuk a riasztás választását"
+
+msgid "Cron scheduling using wget"
+msgstr "Cron-os ütemezés Wget-el"
+
+msgid "Cron scheduling using Curl"
+msgstr "Cron-os ütemezés Curl-el"
+
+msgid "Custom PHP script to run the cron job"
+msgstr "Saját PHP kód a Cron futtatásához"
+
+msgid "Sorry the cron job did not work"
+msgstr "Sajnálom, hogy a cron munka nem működött"
+
+msgid "URL for use with your won scripts and third party"
+msgstr "Saját szkriptekkel és harmadik felekkel használható URL"
+
+msgid "Recommended run script hourly"
+msgstr "A szkriptet ajánlott óránként futtatni"
+
+msgid "Email Piping"
+msgstr "E-mail csővezeték"
+
+msgid "Ticket Email Type"
+msgstr "Jegy e-mail típusa"
+
+msgid "ticket email"
+msgstr "jegy e-mail"
+
+msgid "Overall Reports"
+msgstr "Általános jelentések"
+
+msgid "Staff Members Report"
+msgstr "Az alkalmazottak jelentése"
+
+msgid "Department Report"
+msgstr "Osztály jelentése"
+
+msgid "Departments Report"
+msgstr "Osztályok jelentése"
+
+msgid "JS Support Ticket Overall Reports"
+msgstr "A JS Support Ticket átfogó jelentései"
+
+msgid "Tickets By Status"
+msgstr "Hibajegyek státuszonként"
+
+msgid "Tickets By Departments"
+msgstr "Hibajegyek osztályonként"
+
+msgid "Tickets By Priorities"
+msgstr "Hibajegyek prioritásonként"
+
+msgid "Tickets By Channel"
+msgstr "Hibajegyek csatornánként"
+
+msgid "Direct"
+msgstr "Közvetlen"
+
+msgid "Direct reply"
+msgstr "Közvetlen válasz"
+
+msgid "Email reply"
+msgstr "E-mail válasz"
+
+msgid "Tickets By staff"
+msgstr "Jegyek személyzet által"
+
+msgid "Report By"
+msgstr "Jelentés készítette"
+
+msgid "staff member"
+msgstr "munkatárs"
+
+msgid "To"
+msgstr "Címzett"
+
+msgid "Report By Staff Members"
+msgstr "Kimuatások személyzet által"
+
+msgid "Ticket status by days"
+msgstr "A jegy állapota napok szerint"
+
+msgid "Date"
+msgstr "Dátum"
+
+msgid "Tickets Staff"
+msgstr "Jegyek személyzete"
+
+msgid "Average Rating"
+msgstr "Átlagos értékelés"
+
+msgid "Average Time"
+msgstr "Átlagos idő"
+
+msgid "Report By staff member"
+msgstr "Az alkalmazott jelentése"
+
+msgid "Rating"
+msgstr "Értékelés. Kérjük válasszon a hangulatjelek közül!"
+
+msgid "Time"
+msgstr "Idő"
+
+msgid "Merged"
+msgstr "összeolvadt"
+
+msgid "Report By department"
+msgstr "Jelentés osztályonként"
+
+msgid "Tickets By Department"
+msgstr "Hibajegyek osztályonként"
+
+msgid "Department Name"
+msgstr "Osztály neve"
+
+msgid "User report"
+msgstr "Felhasználói kimutatás"
+
+msgid "Users report"
+msgstr "Felhasználók kimutatása"
+
+msgid "Users Tickets"
+msgstr "Felhasználói jegyek"
+
+msgid "User Report"
+msgstr "Felhasználói kimutatás"
+
+msgid "Report By Departments"
+msgstr "Osztályok által készített jelentés"
+
+msgid "Tickets Data"
+msgstr "Jegyek adatai"
+
+msgid "Message"
+msgstr "Üzenet"
+
+msgid "Assigned To"
+msgstr "Hozzárendelve"
+
+msgid "Requester User Name"
+msgstr "Kérelmező felhasználóneve"
+
+msgid "Requester Name"
+msgstr "A kérelmező neve"
+
+msgid "Requester Email"
+msgstr "Kérő e-mail"
+
+msgid "Requester Phone"
+msgstr "Kérő telefon"
+
+msgid "Requester help Topic"
+msgstr "Kérelmező súgó téma"
+
+msgid "Ticket Attachment"
+msgstr "Jegyek csatolása"
+
+msgid "Posted By"
+msgstr "Általa megosztva"
+
+msgid "Note Title"
+msgstr "Megjegyzés címe"
+
+msgid "Note Message"
+msgstr "Megjegyzés üzenet"
+
+msgid "Posted Date"
+msgstr "kihírdetett időpont"
+
+msgid "Note Attachment"
+msgstr "Megjegyzés Melléklet"
+
+msgid "User Time"
+msgstr "Felhasználói idő"
+
+msgid "System Time"
+msgstr "Rendszeridő"
+
+msgid "Edit Reason"
+msgstr "Indokolás szerkesztése"
+
+msgid "Reply Date"
+msgstr "Válasz dátuma"
+
+msgid "Reply By"
+msgstr "Válasz"
+
+msgid "Reply Attachment"
+msgstr "Válasz melléklet"
+
+msgid "Export"
+msgstr "Exportálás"
+
+msgid "Agent"
+msgstr "Ügynök"
+
+msgid "Select Agent"
+msgstr "Válassza az Agent lehetőséget"
+
+msgid "Ticket Status"
+msgstr "Hibajegy státusza"
+
+msgid "Select Ticket Status"
+msgstr "Válassza a Jegyállapot lehetőséget"
+
+msgid "Ticket Overdue"
+msgstr "Hibajegy határidőn túli"
+
+msgid "Select Ticket Overdue Status"
+msgstr "Válassza a Jeges lejárt állapot lehetőséget"
+
+msgid "FAQ has been stored"
+msgstr "GY.I.K. el lett tárolva"
+
+msgid "FAQ has not been stored"
+msgstr "GY.I.K. nem lett eltárolva"
+
+msgid "FAQ has been deleted"
+msgstr "GY.I.K. törölve lett"
+
+msgid "FAQ has not been deleted"
+msgstr "GY.I.K. nem lett törölve"
+
+msgid "FAQ"
+msgstr "Gyakran Ismételt Kérdések"
+
+msgid "Save FAQ"
+msgstr "GY.I.K. mentése"
+
+msgid "Add FAQ"
+msgstr "GY.I.K. hozzáadása"
+
+msgid "Content"
+msgstr "Tartalom"
+
+msgid "FAQ'S"
+msgstr "GYIK"
+
+msgid "FAQs"
+msgstr "GYIK"
+
+msgid "FAQ's"
+msgstr "Gyakran Ismételt Kérdések"
+
+msgid "Add FAQs"
+msgstr "Adjon hozzá GYIK-ot"
+
+msgid "Feedback has been stored"
+msgstr "A visszajelzés tárolt"
+
+msgid "Feedback has not been stored"
+msgstr "A visszajelzést nem tárolták"
+
+msgid "Feedbacks"
+msgstr "Visszajelzések"
+
+msgid "user image"
+msgstr "felhasználói kép"
+
+msgid "feedback image"
+msgstr "visszajelzés képe"
+
+msgid "Feedback"
+msgstr "Visszacsatolás"
+
+msgid "Latest Feedback"
+msgstr "Legfrissebb visszajelzés"
+
+msgid "Submit Feedback"
+msgstr "Visszajelzés küldése"
+
+msgid "Help topic has been stored"
+msgstr "Súgó téma el lett tárolva"
+
+msgid "Help topic has not been stored"
+msgstr "Súgó téma nem lett eltárolva"
+
+msgid "Help topic has been deleted"
+msgstr "Súgó téma törölve lett"
+
+msgid "Help topic has not been deleted"
+msgstr "Súgó téma nem lett törölve"
+
+msgid "Help topic in use cannot be deleting"
+msgstr "A használt súgótéma nem törölhető"
+
+msgid "Help topic"
+msgstr "Súgó téma"
+
+msgid "Help Topic"
+msgstr "Súgó téma"
+
+msgid "Save Help Topic"
+msgstr "Súgó téma mentése"
+
+msgid "Add Help Topic"
+msgstr "Súgó téma hozzáadása"
+
+msgid "Help Topics"
+msgstr "Súgó témák"
+
+msgid "The category has been stored"
+msgstr "A kategória el lett tárolva"
+
+msgid "The category has not been stored"
+msgstr "A kategória nem került tárolásra"
+
+msgid "The category has been deleted"
+msgstr "A kategóriát törölték"
+
+msgid "The category has not been deleted"
+msgstr "A kategóriát nem törölték"
+
+msgid "The category in use cannot be deleting"
+msgstr "A használt kategóriát nem lehet törölni"
+
+msgid "Knowledgebase article has been stored"
+msgstr "A tudásbázis-cikk el lett tárolva"
+
+msgid "Knowledgebase article has not been stored"
+msgstr "A tudásbázis cikket nem tárolták"
+
+msgid "The article has been deleted"
+msgstr "A cikket törölték"
+
+msgid "The article has not been deleted"
+msgstr "A cikket nem törölték"
+
+msgid "Article"
+msgstr "Bejegyzés"
+
+msgid "The parent category does not have this type."
+msgstr "A szülő kategóriában nincs ilyen típus."
+
+msgid "Would you like to add this type to Parent Category?"
+msgstr "Szeretné felvenni ezt a típust a szülői kategóriába?"
+
+msgid "Child category has this type,"
+msgstr "A gyermek kategóriába tartozik ez a típus,"
+
+msgid "You cannot unmark it."
+msgstr "Nem lehet megjelölni."
+
+msgid "Draft"
+msgstr "Vázlat"
+
+msgid "Meta Description"
+msgstr "Meta leírás"
+
+msgid "Meta Keywords"
+msgstr "Meta kulcsszavak"
+
+msgid "Save Knowledge Base"
+msgstr "Tudásbázis mentése"
+
+msgid "Please select at least one category for"
+msgstr "Válasszon legalább egy kategóriát ehhez:"
+
+msgid "Category For"
+msgstr "Kategória ehhez:"
+
+msgid "Knowledge Base"
+msgstr "Tudásbázis"
+
+msgid "Save Category"
+msgstr "Kategória mentése"
+
+msgid "Add Knowledge Base"
+msgstr "Tudásbázis hozzáadása"
+
+msgid "Meta Data Options"
+msgstr "Metadata lehetőségek"
+
+msgid "Add Category"
+msgstr "Kategória hozzáadása"
+
+msgid "Category Title"
+msgstr "Kategória cím"
+
+msgid "category"
+msgstr "kategória"
+
+msgid "Article Attachment"
+msgstr "Cikk csatolmányok"
+
+msgid "Knowledgebase"
+msgstr "Tudásbázis"
+
+msgid "Mail has not been marked as read"
+msgstr "A levél nem lett megjelölve olvasottnak"
+
+msgid "Mail has been marked as read"
+msgstr "A levél olvasottként lett megjelölve"
+
+msgid "Message field cannot be empty"
+msgstr "Üzenet mező nem lehet üres"
+
+msgid "Mail has been sent"
+msgstr "Levél elküldve"
+
+msgid "Mail has not been sent"
+msgstr "Nem küldték el az e-mailt"
+
+msgid "Mail has been deleted"
+msgstr "Email törölve lett"
+
+msgid "Mail has not been deleted"
+msgstr "Email nem lett rtörölve"
+
+msgid "Mail"
+msgstr "Email"
+
+msgid "is in use cannot be delete"
+msgstr "használatban van, nem törölhető"
+
+msgid "Mail cannot mark as to read"
+msgstr "A levél nem jelölhető meg olvashatóként"
+
+msgid "Mail cannot mark as unread"
+msgstr "Az emailt nem lehet nem-olvasotnak jelölni"
+
+msgid "Mail has been marked as unread"
+msgstr "A levél olvasatlanként lett megjelölve"
+
+msgid "Compose"
+msgstr "Létrehoz"
+
+msgid "Inbox"
+msgstr "Bejövő üzenetek"
+
+msgid "Outbox"
+msgstr "Kimenő üzenetek"
+
+msgid "Send"
+msgstr "Elküld"
+
+msgid "Read"
+msgstr "Olvasott"
+
+msgid "Unread"
+msgstr "Olvastalan"
+
+msgid "Select Type"
+msgstr "Válassz típust"
+
+msgid "To use this feature you must be staff member"
+msgstr "Ennek a funkciónak a használatához személyzetnek kell lennie"
+
+msgid "To use this feature you must have agents addon."
+msgstr "Ennek a funkciónak a használatához ügynökökkel kell rendelkeznie."
+
+msgid "Re"
+msgstr "Vá:"
+
+msgid "mark read"
+msgstr "Olvasottnak jelöl"
+
+msgid "mark unread"
+msgstr "olvasatlan jelölés"
+
+msgid "Replied By"
+msgstr "Megválaszolta:"
+
+msgid "Reply"
+msgstr "Válasz"
+
+msgid "Type Message"
+msgstr "Írja be az üzenetet"
+
+msgid "Replies"
+msgstr "Válaszok"
+
+msgid "Limit exceeds maximum tickets"
+msgstr "Elérted a maximum hibajegyek számát"
+
+msgid "The maximum number of open tickets limit has been exceeded."
+msgstr "A nyitott jegyek maximális száma túllépésre került."
+
+msgid "Ticket has been closed due to merged with"
+msgstr "A jegyet lezárták a következővel való egyesülés miatt:"
+
+msgid "Ticket"
+msgstr "Hibajegy"
+
+msgid "has been merged into"
+msgstr "beolvadtak a következőbe:"
+
+msgid "Merge Ticket"
+msgstr "Egyesítési jegy"
+
+msgid "Ticket ID #"
+msgstr "Jegy azonosító száma"
+
+msgid "Search ticket to merge into"
+msgstr "Keressen jegyet, amelybe beleolvadhat"
+
+msgid "Edit Last Reply"
+msgstr "Utolsó válasz szerkesztése"
+
+msgid "Merge Ticket Latest Reply"
+msgstr "Jegy egyesítése Legújabb válasz"
+
+msgid "Merge"
+msgstr "Összeolvad"
+
+msgid "Ticket has been merged"
+msgstr "A jegyet egyesítették"
+
+msgid "Ticket has not been merged"
+msgstr "A jegyet nem egyesítették"
+
+msgid "The internal note has been posted"
+msgstr "A belső feljegyzés feladásra került"
+
+msgid "The internal note has not been posted"
+msgstr "A belső feljegyzés még nem került közzétételre"
+
+msgid "Post Internal Note"
+msgstr "Belső üzenet küldése"
+
+msgid "The internal note is posted by"
+msgstr "A belső feljegyzés feladója"
+
+msgid "Pass"
+msgstr "Kész"
+
+msgid "Ticket Notification"
+msgstr "Jegy értesítés"
+
+msgid "Once Weekly"
+msgstr "Hetente egyszer"
+
+msgid "Thanks for subscribing!"
+msgstr "Köszönjük, hogy feliratkoztál!"
+
+msgid "Ticket already marked overdue"
+msgstr "Hibajegy már határidőn túlinak van jelölve"
+
+msgid "The ticket has been marked as overdue"
+msgstr "A jegyet lejártként jelölték meg"
+
+msgid "The ticket has not been marked as overdue"
+msgstr "A jegyet nem jelölték le esedékessé"
+
+msgid "System"
+msgstr "Rendszer"
+
+msgid "Mark overdue"
+msgstr "Határidőn túlinak jelölés"
+
+msgid "The ticket is marked as overdue by"
+msgstr "A jegyet lejártként jelöli meg"
+
+msgid "The ticket has been unmarked as overdue"
+msgstr "A jegyet lejártként jelölték meg"
+
+msgid "The ticket has not been unmarked as overdue"
+msgstr "A jegyet nem jelölték meg, mint lejárt"
+
+msgid "Unmark overdue"
+msgstr "Törölje a késedelmet"
+
+msgid "The ticket is unmarked as overdue by"
+msgstr "A jegyet nem jelölték le, mint lejárt"
+
+msgid "Paid Support"
+msgstr "Fizetett támogatás"
+
+msgid "Check if you want to use this product for paid support"
+msgstr ""
+"Ellenőrizze, hogy fizetett támogatást szeretne-e használni ezt a terméket"
+
+msgid "Paid support type"
+msgstr "Fizetett támogatás típusa"
+
+msgid "One-off Support"
+msgstr "Egyszeri támogatás"
+
+msgid "Subscription Support"
+msgstr "Előfizetési támogatás"
+
+msgid "Number of tickets"
+msgstr "Jegyek száma"
+
+msgid ""
+"Enter allowed number of tickets that customer can post. Enter -1 for "
+"unlimited tickets."
+msgstr ""
+"Adja meg az ügyfelek által megengedett jegyek számát. Írja be a -1-et "
+"korlátlan jegyért."
+
+msgid "Credential Type"
+msgstr "Hitelesítő adatok típusa"
+
+msgid "Additional Info"
+msgstr "További információ"
+
+msgid "Please insert values"
+msgstr "Kérjük, illesszen be értékeket"
+
+msgid "Visitor"
+msgstr "Látogató"
+
+msgid "By"
+msgstr "Által"
+
+msgid "Credential removed on ticket close"
+msgstr "A hitelesítő adatok eltávolítva a jegy közelről"
+
+msgid "Failed to retrieve data"
+msgstr "Az adatok letöltése nem sikerült"
+
+msgid "The new theme has been applied"
+msgstr "Az új témát alkalmazták"
+
+msgid "Error applying the new theme"
+msgstr "Hiba az új téma alkalmazásakor"
+
+msgid "Themes"
+msgstr "Kinézetek"
+
+msgid "Color Chooser"
+msgstr "Színválasztó"
+
+msgid "Preset Theme"
+msgstr "Jelenlegi kinézet"
+
+msgid "Color 1"
+msgstr "Szín 1"
+
+msgid "Top menu heading background"
+msgstr "Fejléc háttere"
+
+msgid "Color 2"
+msgstr "Szín 2"
+
+msgid "Top header line color"
+msgstr "Fejléc vonal színe"
+
+msgid "Button Hover"
+msgstr "Gomb lebeg"
+
+msgid "Heading text"
+msgstr "Fejléc szöveg"
+
+msgid "Color 3"
+msgstr "Szín 3"
+
+msgid "Content Background Color"
+msgstr "Tartalom háttér szín"
+
+msgid "Color 4"
+msgstr "Szín 4"
+
+msgid "Content Text Color"
+msgstr "Tartalom szöveg szín"
+
+msgid "Color 5"
+msgstr "Szín 5"
+
+msgid "Border color"
+msgstr "Szegély színe"
+
+msgid "Lines"
+msgstr "Vonalak"
+
+msgid "Color 6"
+msgstr "Szín 6"
+
+msgid "Button Color"
+msgstr "Gomb színe"
+
+msgid "Color 7"
+msgstr "Szín 7"
+
+msgid "Top header text color"
+msgstr "Fejléc szöveg színe"
+
+msgid "Save Theme"
+msgstr "Kinézet mentése"
+
+msgid "Color Effect Preview"
+msgstr "Színbeállítások megtekintése"
+
+msgid "Blue"
+msgstr "Kék"
+
+msgid "Red"
+msgstr "Piros"
+
+msgid "Greenish"
+msgstr "Zöldes"
+
+msgid "Brown"
+msgstr "Barna"
+
+msgid "Orange"
+msgstr "Narancs"
+
+msgid "Green"
+msgstr "Zöld"
+
+msgid "Black"
+msgstr "Fekete"
+
+msgid "Mail Notification Widget"
+msgstr "Email értesítési kütyü"
+
+msgid "Show newly and reply mail notifications"
+msgstr "Megjeleníti az újonnan küldött értesítéseket és a válaszokat"
+
+msgid "New mail from"
+msgstr "Új üzeneted érkezett tőle:"
+
+msgid "Mail Notification"
+msgstr "Email értesítés"
+
+msgid "Layout"
+msgstr "Elrendezés"
+
+msgid "Vertical"
+msgstr "Függőleges"
+
+msgid "Horizontal"
+msgstr "Vízszintes"
+
+msgid "Max Record"
+msgstr "Bejegyzések maximuma"
+
+msgid "My Ticket Widget"
+msgstr "A hibajegy kütyüm"
+
+msgid "Show unanswered tickets"
+msgstr "Mutasd a megválaszolatlan hibajegyeket"
+
+msgid "My Tickets"
+msgstr "Hibajegyeim"
+
+msgid "Order tickets"
+msgstr "Jegyek rendelése"
+
+msgid "Close due to merge"
+msgstr "Bezáródik az egyesülés miatt"
+
+msgid "Product"
+msgstr "Termék"
+
+msgid "Order"
+msgstr "Sorrend"
+
+msgid "There is no ticket"
+msgstr "Nincs jegy"
+
+msgid "Something went wrong"
+msgstr "Valami elromlott"
+
+msgid "Transaction Key"
+msgstr "Tranzakciós kulcs"
+
+msgid "Hide notice"
+msgstr "Figyelem elrejtése"
+
+msgid "Control Panel"
+msgstr "Vezérlőpult"
+
+msgid "Announcement Detail"
+msgstr "Felhívás részletei"
+
+msgid "Edit Announcement"
+msgstr "Felhívás szerkesztése"
+
+msgid "Departments"
+msgstr "Osztályok"
+
+msgid "Add Department"
+msgstr "Osztály hozzáadása"
+
+msgid "Edit Department"
+msgstr "Osztály szerkesztése"
+
+msgid "Staff report"
+msgstr "Személyzeti kimutatás"
+
+msgid "Staff reports"
+msgstr "A személyzet jelentései"
+
+msgid "Departments report"
+msgstr "Osztályok kimutatása"
+
+msgid "Edit Download"
+msgstr "Letöltés szerkesztése"
+
+msgid "Edit FAQ"
+msgstr "GY.I.K. szerkesztése"
+
+msgid "FAQ Detail"
+msgstr "GY.I.K. részletei"
+
+msgid "Edit Knowledge Base"
+msgstr "Tudásbázis szerkesztése"
+
+msgid "Edit Category"
+msgstr "Kategória szerkesztése"
+
+msgid "Knowledge Base Detail"
+msgstr "Tudásbázis részletei"
+
+msgid "Send Message"
+msgstr "Üzenet küldése"
+
+msgid "Edit Role"
+msgstr "Szerepkör szerkesztése"
+
+msgid "Staffs"
+msgstr "Személyzet"
+
+msgid "Add Staff"
+msgstr "Személyzet hozzáadása"
+
+msgid "Edit Staff"
+msgstr "Személyzet módosítása"
+
+msgid "Staff Permissions"
+msgstr "Személyzet jogosultságai"
+
+msgid "Add Ticket"
+msgstr "Hibajegy írása"
+
+msgid "Edit Ticket"
+msgstr "Hibajegy szerkesztése"
+
+msgid "Ticket Detail"
+msgstr "Hibajegy részletei"
+
+msgid "Plus"
+msgstr "Plusz"
+
+msgid "Equals"
+msgstr "Egyenlő"
+
+msgid "Minus"
+msgstr "Minusz"
+
+msgid "About Us"
+msgstr "Rólunk"
+
+msgid "Translations"
+msgstr "Fordítások"
+
+msgid "System Errors"
+msgstr "Rendszer hibák"
+
+msgid "Short Codes"
+msgstr "Rövid kódok"
+
+msgid "Create Ticket"
+msgstr "Hibajegy létrehozása"
+
+msgid "Fields"
+msgstr "Mezők"
+
+msgid "Install"
+msgstr "Telepítés"
+
+msgid "Configurations"
+msgstr "Beállítások"
+
+msgid "Cron Job URLs"
+msgstr "Cron Job URL-ek"
+
+msgid "Reports"
+msgstr "Kimutatások"
+
+msgid "Overall Statistics"
+msgstr "Átfogó statisztikák"
+
+msgid "Agent Reports"
+msgstr "Agent jelentések"
+
+msgid "Department Reports"
+msgstr "Osztály kimutatások"
+
+msgid "User Reports"
+msgstr "Felhasználói kimutatások"
+
+msgid "Satisfaction Report"
+msgstr "Elégedettségi kimutatás"
+
+msgid "GDPR Fields"
+msgstr "GDPR mezők"
+
+msgid "Erase Data Requests"
+msgstr "Adatok törlése"
+
+msgid "Premium Addons"
+msgstr "Prémium kiegészítők"
+
+msgid "Install Addons"
+msgstr "Telepítse az Addonokat"
+
+msgid "Addons List"
+msgstr "Kiegészítők listája"
+
+msgid "Feedback Fields"
+msgstr "Visszajelző mezők"
+
+msgid "Helptopics"
+msgstr "Segítő témák"
+
+msgid "System Emails"
+msgstr "Rendszer emailek"
+
+msgid "Add Email"
+msgstr "Email hozzáadása"
+
+msgid "Priorities"
+msgstr "Prioritások"
+
+msgid "Add Priority"
+msgstr "Prioritás hozzáadása"
+
+msgid "Ban Emails"
+msgstr "Email-ek letiltása"
+
+msgid "Email Templates"
+msgstr "Email sablonok"
+
+msgid "New Ticket"
+msgstr "Új hibajegy"
+
+msgid "New Agent"
+msgstr "Új ügynök"
+
+msgid "Reassign Ticket"
+msgstr "Hibajegy átruházása"
+
+msgid "Close Ticket"
+msgstr "Hibajegy lezárása"
+
+msgid "Delete Ticket"
+msgstr "Hibajegy törlése"
+
+msgid "Mark Overdue"
+msgstr "Határidőn túlinak jelölés"
+
+msgid "Ban Email"
+msgstr "Email cím letiltása"
+
+msgid "Ban email try to create ticket"
+msgstr "Tiltott email címről próbálnak hibajegyet létrehozni"
+
+msgid "Department Transfer"
+msgstr "Osztályra küld"
+
+msgid "Ban Email and Close Ticket"
+msgstr "Email cím letiltása és a hibajegy bezárása"
+
+msgid "Unban Email"
+msgstr "Email feloldása"
+
+msgid "Response Ticket"
+msgstr "Jálasz jegy"
+
+msgid "Reply Ticket"
+msgstr "Válasz hibajegyre"
+
+msgid "New Ticket Admin Alert"
+msgstr "Új hibajegy admin jelzés"
+
+msgid "In Progress Ticket"
+msgstr "Hibajegy folyamatban"
+
+msgid "Ticket priority is changed by"
+msgstr "A hibajegy prioritását megváltoztatta:"
+
+msgid "New Mail Received"
+msgstr "Új levélüzenet jött"
+
+msgid "New Mail Message Received"
+msgstr "Új levélüzenet jött"
+
+msgid "Feedback Email To User"
+msgstr "Visszajelző E-mail a felhasználónak"
+
+msgid "User Reply On Closed Ticket"
+msgstr "Felhasználói válasz lezárt hibajegyre"
+
+msgid "Log out"
+msgstr "Kijelentkezés"
+
+msgid "Username / password is incorrect"
+msgstr "A felhasználónév vagy a jelszó hibás!"
+
+msgid "Username already taken"
+msgstr "Ez a felhasználónév már foglalt!"
+
+msgid "Invalid username"
+msgstr "Érvénytelen felhasználónév!"
+
+msgid "Please enter a username"
+msgstr "Kérjük adjon meg egy felhasználónevet"
+
+msgid "Invalid email"
+msgstr "Érvénytelen email cím!"
+
+msgid "Email already registered"
+msgstr "Ez az email cím már regisztrálva van!"
+
+msgid "Please enter a password"
+msgstr "Kérjük adjon meg egy jelszót"
+
+msgid "Passwords do not match"
+msgstr "A jelszavak nem egyeznek!"
+
+msgid "Invalid captcha"
+msgstr "Érvénytelen captcha!"
+
+msgid "Could not subscribe to the newsletter"
+msgstr "Nem tudtam feliratkozni a hírlevélre"
+
+msgid ""
+"Please check confirmation email to complete your subscription for the "
+"newsletter"
+msgstr ""
+"Kérjük, ellenőrizze a megerősítő e-mailt, hogy teljesítse a hírlevélre való "
+"feliratkozását"
+
+msgid "You have successfully subscribed to the newsletter"
+msgstr "Sikeresen feliratkozott a hírlevélre"
+
+msgid "JS Help Desk Control Panel"
+msgstr "JS Help Desk Vezérlőpult"
+
+msgid "System Error"
+msgstr "Rendszer hiba"
+
+msgid "User Fields"
+msgstr "Felhasználói mezők"
+
+msgid "Ban list log"
+msgstr "Tiltási lista naplója"
+
+msgid "Field Ordering"
+msgstr "Mező sorrendje"
+
+msgid "Post Installation"
+msgstr "Telepítés utáni"
+
+msgid "Premium Addon"
+msgstr "Prémium kiegészítő"
+
+msgid "Sorry"
+msgstr "Sajnálom"
+
+msgid "No record found"
+msgstr "Nincs ilyen rekord"
+
+msgid "Sorry!"
+msgstr "Sajnálom!"
+
+msgid "No record found ...!"
+msgstr "Nincs találat ...!"
+
+msgid "Access Denied"
+msgstr "Nincs megfelelő jogosutságod"
+
+msgid "You have no permission to access this page"
+msgstr "Nincs jogosultsága erre az oldalra belépni"
+
+msgid "User is not allowed to access this page."
+msgstr "A felhasználó nem férhet hozzá ehhez az oldalhoz."
+
+msgid "You are already Logged In."
+msgstr "Ön már bejelentkezett."
+
+msgid "Access Denied!"
+msgstr "Hozzáférés megtagadva!"
+
+msgid "Your account has been disabled, please contact the administrator."
+msgstr ""
+"Fiókját letiltottuk, kérjük, vegye fel a kapcsolatot a rendszergazdával."
+
+msgid "You are not logged In"
+msgstr "Nem vagy bejelentkezve"
+
+msgid "To access the page, Please login"
+msgstr "Az oldal eléréséhez kérjük, jelentkezzen be"
+
+msgid "Register"
+msgstr "Regisztrálás"
+
+msgid "User is not allowed to view this Ticket"
+msgstr "A felhasználó nem engedheti meg, hogy megtekintse ezt a jegyet"
+
+msgid ""
+"Registration has been disabled by admin, please contact the system "
+"administrator."
+msgstr ""
+"A regisztrációt az adminisztrátor letiltotta, kérjük, vegye fel a "
+"kapcsolatot a rendszergazdával."
+
+msgid "You have already given the feedback for this ticket."
+msgstr "Már visszajelzést adott erről a jegyről."
+
+msgid "Ticket not found...!"
+msgstr "Jegy nem található ...!"
+
+msgid "User is not allowed to view this page"
+msgstr "A felhasználó nem látogathatja meg ezt az oldalt"
+
+msgid "Thank you so much for your feedback"
+msgstr "Nagyon köszönöm visszajelzését"
+
+msgid "Help Desk Pages"
+msgstr "Ügyfélszolgálati oldalak"
+
+msgid "Form submission failed!"
+msgstr "Az űrlap benyújtása sikertelen!"
+
+msgid "You have not answered all required fields"
+msgstr "Az összes kötelező mezőt nem adott meg"
+
+msgid "You have not given a correct time"
+msgstr "Nem adta meg a megfelelő időt"
+
+msgid "You have not given a correct e-mail address"
+msgstr "Nem adta meg a helyes e-mail címet"
+
+msgid "You have not given a correct phone number"
+msgstr "Nem adta meg a helyes telefonszámot"
+
+msgid "You have not given a correct answer to the security question"
+msgstr "Nem adott helyes választ a biztonsági kérdésre"
+
+msgid "You have not given a correct date"
+msgstr "Nem adta meg a megfelelő dátumot"
+
+msgid "The input value must be between "
+msgstr "A bemeneti értéknek közt kell lennie"
+
+msgid " characters"
+msgstr "karakterek"
+
+msgid "The input value is longer than "
+msgstr "A bemeneti érték hosszabb, mint"
+
+msgid "The input value is shorter than "
+msgstr "A bemeneti érték rövidebb, mint"
+
+msgid "Input values could not be confirmed"
+msgstr "A bemeneti értékeket nem lehetett megerősíteni"
+
+msgid "Incorrect domain value"
+msgstr "Helytelen domain érték"
+
+msgid "The input value is not a correct URL"
+msgstr "A bemeneti érték nem helyes URL"
+
+msgid "The input value is incorrect"
+msgstr "A bemeneti érték helytelen"
+
+msgid "The input value was not a correct number"
+msgstr "A bemeneti érték nem volt helyes szám"
+
+msgid "Your social security number was incorrect"
+msgstr "Társadalombiztosítási száma nem megfelelő"
+
+msgid "Incorrect UK VAT Number"
+msgstr "Helytelen brit héa-szám"
+
+msgid "The password isn't strong enough"
+msgstr "A jelszó nem elég erős"
+
+msgid "You have to choose at least "
+msgstr "Legalább választania kell"
+
+msgid " answers"
+msgstr "válaszokat"
+
+msgid "The input value can only contain alphanumeric characters "
+msgstr "A bemeneti érték csak alfanumerikus karaktereket tartalmazhat"
+
+msgid " and "
+msgstr "és"
+
+msgid "The file you are trying to upload is too large"
+msgstr "A feltölteni kívánt fájl túl nagy"
+
+msgid "The file you are trying to upload is of the wrong type"
+msgstr "A feltölteni kívánt fájl nem megfelelő típusú"
+
+msgid "Please choose between "
+msgstr "Kérjük, válasszon a következők közül:"
+
+msgid "Please choose at least "
+msgstr "Kérem, válasszon legalább"
+
+msgid "Please choose a maximum of "
+msgstr "Kérjük, válasszon legfeljebb"
+
+msgid "The credit card number is not correct"
+msgstr "A hitelkártya száma nem megfelelő"
+
+msgid "The CVV number was not correct"
+msgstr "A CVV-szám nem volt helyes"
+
+msgid "Support"
+msgstr "Támogatás"
+
+msgid "Lost your password"
+msgstr "Elvesztetted a jelszavadat"
+
+msgid "Pagination default page size not saved"
+msgstr "Alapértelmezett lapméret nem lett elmentve"
+
+msgid "Data directory cannot empty."
+msgstr "Az adatkönyvtár nem üríthető ki."
+
+msgid "Data directory is not proper."
+msgstr "Adat könyvtár nem megfelelő"
+
+msgid "Data directory is not writable."
+msgstr "Az adatkönyvtár nem írható."
+
+msgid "System slug not be empty."
+msgstr "Rendszer kereső-barát név foglalt"
+
+msgid "System slug is conflicted with post or page slug."
+msgstr "A rendszercsiga ütközik a postai vagy az oldalcsappal."
+
+msgid "Days"
+msgstr "Napok"
+
+msgid "Hours"
+msgstr "Óra"
+
+msgid "Own Captcha"
+msgstr "Saját recaptcha"
+
+msgid "Any"
+msgstr "Bármelyik"
+
+msgid "Addition"
+msgstr "Összeadás"
+
+msgid "Subtraction"
+msgstr "Kivonás"
+
+msgid "Show"
+msgstr "Mutasd"
+
+msgid "Hide"
+msgstr "Elrejt"
+
+msgid "Default"
+msgstr "Alapértelmezett"
+
+msgid "Custom"
+msgstr "Egyedi"
+
+msgid "Top left"
+msgstr "Fejléc balra"
+
+msgid "Top right"
+msgstr "Fejléc jobbra"
+
+msgid "Middle left"
+msgstr "Középen balra"
+
+msgid "Middle right"
+msgstr "Középen jobbra"
+
+msgid "Bottom left"
+msgstr "Alul balra"
+
+msgid "Bottom right"
+msgstr "Alul jobbra"
+
+msgid "Random"
+msgstr "Véletlen"
+
+msgid "Sequence"
+msgstr "Szekvencia"
+
+msgid "General Settings"
+msgstr "Általános beállítások"
+
+msgid "Ticket Settings"
+msgstr "Jegy beállítások"
+
+msgid "Email Settings"
+msgstr "E-mail beállítások"
+
+msgid "Agent Menu"
+msgstr "Agent menü"
+
+msgid "User Menu"
+msgstr "felhasználói menü"
+
+msgid "Push Notifications"
+msgstr "Értesítések"
+
+msgid "Private Credentials"
+msgstr "Privát hitelesítő adatok"
+
+msgid "Envato Validation"
+msgstr "Envato érvényesítés"
+
+msgid "Easy Digital Downloads"
+msgstr "Könnyű digitális letöltések"
+
+msgid "Set the heading of your plugin"
+msgstr "A beépülő modulod fejléce"
+
+msgid "Ticket Default Page"
+msgstr "Hibajegy alap oldal"
+
+msgid "Select Page"
+msgstr "Válassz oldalt"
+
+msgid ""
+"Select JS Help Desk default page, on the action system, will redirect on the "
+"selected page. If not select the default page, email links, and support icon "
+"might not work."
+msgstr ""
+"Válassza a JS Help Desk alapértelmezett oldalát, az akciórendszeren "
+"átirányítja a kiválasztott oldalra. Ha nem adja meg az alapértelmezett "
+"oldalt, akkor az e-mail hivatkozások és a támogatási ikon nem működnek."
+
+msgid "Support Icon"
+msgstr "Támogatás ikon"
+
+msgid "Screen Tag"
+msgstr "Képernyő cimke"
+
+msgid "Enable / disable your support icon"
+msgstr "Support ikon bekapcsolása / kikapcsolása"
+
+msgid "Support Icon Position"
+msgstr "Támogatás ikon helye"
+
+msgid "Screen Tag Position"
+msgstr "Képernyő cimke helye"
+
+msgid "Select position for your support icon"
+msgstr "Válaszd ki a support ikon helyét"
+
+msgid "Set your plugin offline for front end"
+msgstr "Jelöld a beépülő modulodat offline a felhasználói felületen"
+
+msgid "Offline Message"
+msgstr "Offline üzenet"
+
+msgid "Set the offline message for your user"
+msgstr "Állítsd be az offline üzenetet a felhasználóidnak"
+
+msgid "Data Directory"
+msgstr "Adat könyvtár"
+
+msgid "Set the name for your data directory"
+msgstr "Állítsd be az adat könyvtárad nevét"
+
+msgid ""
+"You need to rename the existing data directory in the file system before "
+"changing the data directory name"
+msgstr ""
+"Az adatkönyvtár nevének megváltoztatása előtt át kell neveznie a meglévő "
+"adatkönyvtárat a fájlrendszerben"
+
+msgid "Date Format"
+msgstr "Dátum formátuma"
+
+msgid "DD-MM-YYYY"
+msgstr "NN-HH-ÉÉÉÉ"
+
+msgid "MM-DD-YYYY"
+msgstr "HH-NN-ÉÉÉÉ"
+
+msgid "YYYY-MM-DD"
+msgstr "ÉÉÉÉ-HH-NN"
+
+msgid "Set the default date format"
+msgstr "Állítsd be az alapértelmezett dátum formátumot"
+
+msgid "Ticket auto close"
+msgstr "Hibajegy automatikus lezárása"
+
+msgid "Ticket auto-close if user does not respond within given days"
+msgstr ""
+"A jegy automatikus lezárása, ha a felhasználó nem válaszol az adott napon "
+"belül"
+
+msgid "No. of attachment"
+msgstr "Csatolmányok száma"
+
+msgid "No. of attachment allowed at a time"
+msgstr "Egyszerre csatolható csatolmányok száma"
+
+msgid "File maximum size"
+msgstr "Max fileméret"
+
+msgid "File extension"
+msgstr "File kiterjesztése"
+
+msgid "File extension allowed to attach"
+msgstr "File kiterjesztést lehet csatolni"
+
+msgid "Pagination default page size"
+msgstr "Alapértelmezett lapméret lapozáskor"
+
+msgid "Set the no. of record per page"
+msgstr "Oldalankénti bejegyzések számának beállítása"
+
+msgid "Show hide breadcrumbs"
+msgstr "A breadcrumbs mutatása/elrejtése"
+
+msgid "Top Header"
+msgstr "Felső fejléc"
+
+msgid "Show hide Top Header"
+msgstr "Mutasd a felső fejléc elrejtését"
+
+msgid "Login redirect"
+msgstr "Bejelentkezés átirányítása"
+
+msgid "Redirect user to JS Help Desk control panel after log in"
+msgstr ""
+"A felhasználó átirányítása a JS Help Desk vezérlőpultjára a bejelentkezés "
+"után"
+
+msgid "Show count on my tickets"
+msgstr "Mutasd a hibajegyeim számát"
+
+msgid "Show number of the open, closed, answered ticket in my ticket"
+msgstr "A nyitott, zárt, megválaszolt jegy számának megjelenítése a jegyemben"
+
+msgid "Show captcha on registration form"
+msgstr "Mutassa a captcha-t a regisztrációs űrlapon"
+
+msgid "Select whether you want to show captcha on the registration form or not"
+msgstr "Válassza ki, hogy a captcha megjelenik-e a regisztrációs űrlapon"
+
+msgid "Default wp role for new users"
+msgstr "Alapértelmezett WP szerepkör új felhasználóknak"
+
+msgid "Select the role you want to assign to new users"
+msgstr "Válassza ki az új felhasználókhoz hozzárendelni kívánt szerepet"
+
+msgid "Set Login Link"
+msgstr "Állítsa be a bejelentkezési linket"
+
+msgid "Set Login Link Default or Custom"
+msgstr "Állítsa be a Login Link Default vagy Custom beállítást"
+
+msgid "Ticketid sequence"
+msgstr "Hibajegy azonosító szekvencia"
+
+msgid "Set ticketid sequential or random"
+msgstr "Hibajegy sorszám beállítása - növekvő vagy véletlenszerű"
+
+msgid "Ticket listing ordering"
+msgstr "Jegylisták rendelése"
+
+msgid "Set default ordering for ticket listing"
+msgstr "Állítsa be a jegyjegyzék alapértelmezett rendelését"
+
+msgid "Maximum tickets"
+msgstr "Maximum hibajegyek"
+
+msgid "Maximum ticket per user"
+msgstr "Maximum hibajegyek egy felhasználónak"
+
+msgid "Maximum open tickets"
+msgstr "Maximum nyitott hibajegyek száma"
+
+msgid "Maximum opened tickets per user"
+msgstr "Maximum nyitott hibajegyek száma felhasználónként"
+
+msgid "Reopen ticket within days"
+msgstr "Hibajegy újranyitása ennyi napon belül"
+
+msgid "The ticket can be reopened within a given number of days"
+msgstr "A jegy egy adott napon belül újra megnyitható"
+
+msgid "User can print ticket"
+msgstr "Felhasználó nyomtathat"
+
+msgid "Can user print ticket from ticket detail or not"
+msgstr "Felhasználó tud-e hibajegy részleteket nyomtatni?"
+
+msgid "Show captcha on the visitor ticket form"
+msgstr "Mutassa a captcha-t a látogatói jegy űrlapon"
+
+msgid "Show captcha when a visitor wants to create a ticket"
+msgstr "Mutassa a captcha-t, amikor a látogató jegyet akar létrehozni"
+
+msgid "Captcha selection"
+msgstr "Captcha kiválasztása"
+
+msgid "Which captcha you want to add"
+msgstr "Melyik captcha-t szeretnéd használni"
+
+msgid "Google recaptcha public key"
+msgstr "Google recaptcha publikus kulcs"
+
+msgid "Please enter the google re-captcha public key from"
+msgstr "Kérjük, írja be a google re-captcha nyilvános kulcsát innen:"
+
+msgid "Google recaptcha private key"
+msgstr "Google recaptcha privát kulcs"
+
+msgid "Please enter the google re-captcha private key from"
+msgstr "Kérjük, írja be a google re-captcha privát kulcsát innen"
+
+msgid "Own captcha calculation type"
+msgstr "Saját captcha számítási módja"
+
+msgid "Select calculation type addition or subtraction"
+msgstr "Válassz számítási módot. Összeadás vagy kivonás?"
+
+msgid "Own captcha operands"
+msgstr "Hány elem legyen a saját captcha feladatban?"
+
+msgid "Select the total operands to be given"
+msgstr "Válasz ki az összes adott elemet"
+
+msgid "Own captcha subtraction answer positive"
+msgstr "Saját captcha kivonás eredménye pozitív"
+
+msgid "Is subtraction answer should be positive"
+msgstr "A kivonás eredménye pozitív kell hogy legyen"
+
+msgid "New ticket message"
+msgstr "Új hibajegy üzenet"
+
+msgid "This message will show on the new ticket"
+msgstr "Ez az üzenet megjelenik az új jegyen"
+
+msgid "Allow Users To Reply via Email On Closed Ticket"
+msgstr ""
+"Engedjük meg a felhasználónak, hogy lezárt hibajegyre válaszoljon email-ben"
+
+msgid "Select whether users can reply to closed email piping ticket or not"
+msgstr ""
+"Válassza ki, hogy a felhasználók válaszolhatnak-e a zárt e-mail "
+"csatornajegyre"
+
+msgid "Visitor can create ticket"
+msgstr "Látogató nyithat hibajegyet"
+
+msgid "Can visitor create ticket or not"
+msgstr "Látogató tud-e hibajegyet nyitni"
+
+msgid "Visitor ticket creation message"
+msgstr "Látogatói jegy létrehozása üzenet"
+
+msgid "This text will appear whenever a visitor creates a ticket"
+msgstr "Ez a szöveg akkor jelenik meg, amikor a látogató jegyet készít"
+
+msgid "Default alert email"
+msgstr "Alapértelmezett email cím"
+
+msgid ""
+"If ticket department email is not selected then this email is used to send "
+"emails"
+msgstr ""
+"Amennyiben hibajegy osztály nincs kijelölve, ezt az emailt használom emailek "
+"küldésére"
+
+msgid "Default admin email"
+msgstr "Alapértelmezett admin email"
+
+msgid "Admin email address to receive emails"
+msgstr "Admin email cím emailek fogadására"
+
+msgid "Add New Email"
+msgstr "Új e-mail hozzáadása"
+
+msgid "Ban Email New Ticket"
+msgstr "Bannezzen új jegyet e-mailben"
+
+msgid "Mail to admin"
+msgstr "Elküldés adminnak"
+
+msgid "Email sends to admin when banned email try to create a ticket"
+msgstr ""
+"E-mail küld az adminnak, amikor a tiltott e-mail megkísérli a jegy "
+"létrehozását"
+
+msgid "Ticket Operations Email Setting"
+msgstr "Jegyműveletek e-mail beállítása"
+
+msgid "Admin"
+msgstr "Adminisztrátor"
+
+msgid "New ticket"
+msgstr "Új hibajegy"
+
+msgid "Ticket reassign"
+msgstr "Hibajegy átirányítása"
+
+msgid "Ticket close"
+msgstr "Hibajegy lezárása"
+
+msgid "Ticket delete"
+msgstr "Hibajegy törlése"
+
+msgid "Ticket ban email"
+msgstr "Hibajegy letiltása email"
+
+msgid "Ticket department transfer"
+msgstr "Hibajegy osztályközi átirányítása"
+
+msgid "Ticket reply User"
+msgstr "Jegyválasz Felhasználó"
+
+msgid "Ticket ban email and close ticket"
+msgstr "Hibajegy letiltása email és a hibajegy zárása"
+
+msgid "Ticket unban email"
+msgstr "Hibajegy - email tiltás feloldása"
+
+msgid "Ticket lock"
+msgstr "Hibajegy felfüggesztés"
+
+msgid "Ticket unlock"
+msgstr "Hibajegy feloldása"
+
+msgid "Ticket Change Priority"
+msgstr "Hibajegy váltás priortása"
+
+msgid "Mark Ticket In Progress"
+msgstr "Hibajegy jelölés folyamatban"
+
+msgid "Reply To A Closed Ticket By Email"
+msgstr "Válasz egy zárt jegyre e-mailben"
+
+msgid "Send Feedback Email To User"
+msgstr "Visszajelző email küldése a felhasználónak"
+
+msgid "Dashboard Links"
+msgstr "Irányítópult-linkek"
+
+msgid "Open Ticket"
+msgstr "Hibajegy nyitása"
+
+msgid "Department reports"
+msgstr "Osztály jelentések"
+
+msgid "Login/Logout Button"
+msgstr "Bejelentkezés/Kijelentkezés gomb"
+
+msgid "Ticket Total Count"
+msgstr "A jegy összes száma"
+
+msgid "Ticket Statistics"
+msgstr "Jegy statisztikák"
+
+msgid "Erase Agent Data"
+msgstr "Törölje az ügynök adatait"
+
+msgid "Top Menu Links"
+msgstr "A felső menü linkei"
+
+msgid "Home"
+msgstr "Vezérlőpult"
+
+msgid "Check Ticket Status"
+msgstr "Hibajegy státuszának ellenőrzése"
+
+msgid "Registration"
+msgstr "Regisztráció"
+
+msgid "Erase User Data"
+msgstr "Felhasználói adatok törlése"
+
+msgid "Feedback Settings"
+msgstr "Visszajelzési beállítások"
+
+msgid "Feedback Email Delay Type"
+msgstr "Visszajelzés e-mail késleltetési típusa"
+
+msgid "Select delay type for feedback email"
+msgstr "Válasszon késleltetési típust a visszajelzési e-mailhez"
+
+msgid "Feedback Email Delay"
+msgstr "Visszajelzés e-mail késés"
+
+msgid ""
+"Set no. of days or hours to send feedback email after a ticket is closed"
+msgstr ""
+"Szett napok vagy órák száma, hogy visszacsatoló e-mailt küldhessen egy jegy "
+"lezárása után"
+
+msgid "Success message after submitting feedback"
+msgstr "Sikeres üzenet visszajelzés benyújtása után"
+
+msgid "This text will appear whenever anyone submits feedback"
+msgstr "Ez a szöveg akkor jelenik meg, amikor bárki visszajelzést küld"
+
+msgid "UTF Auto Switch"
+msgstr "UTF automatikus kapcsoló"
+
+msgid "Firebase Notifications"
+msgstr "Firebase értesítések"
+
+msgid ""
+"JS Help Desk Desktop Notifications plugin is not installed. Please install "
+"the plugin to enable desktop notifications"
+msgstr ""
+"A JS Help Desk Desktop Notifications bővítmény nincs telepítve. Telepítse a "
+"bővítményt az asztali értesítések engedélyezéséhez"
+
+msgid "Click here to insert Install."
+msgstr "Kattintson ide a telepítés beszúrásához."
+
+msgid "JS Help Desk Desktop Notifications plugin is not active."
+msgstr "A JS Help Desk asztali értesítések beépülő modulja nem aktív."
+
+msgid "Find and add firebase api's keys"
+msgstr "Keresse meg és adja hozzá a firebase api kulcsokat"
+
+msgid "Click here to get firebae api keys."
+msgstr "Ide kattintva megkaphatja a firebase api kulcsokat."
+
+msgid "API key for user"
+msgstr "API kulcs a felhasználó számára"
+
+msgid "Firebase api key for front user"
+msgstr "Firebase api kulcs az első felhasználó számára"
+
+msgid "Project Id"
+msgstr "Projekt azonosítója"
+
+msgid "Bucket Storage"
+msgstr "Vödör tárolása"
+
+msgid "Firebase Bucket Storage"
+msgstr "Firebase vödör tárolása"
+
+msgid "Firebase Message Sender Id"
+msgstr "Firebase üzenetküldő azonosítója"
+
+msgid "Private Server Key"
+msgstr "Privát szerver kulcs"
+
+msgid "Firebase Server Key"
+msgstr "Firebase szerver kulcs"
+
+msgid "Logo Image for Desktop Notifications"
+msgstr "Logókép az asztali értesítésekhez"
+
+msgid "Remove Image"
+msgstr "Kép eltávolítása"
+
+msgid "Remove Logo"
+msgstr "Távolítsa el a logót"
+
+msgid "No Firebase Notificaiton Logo"
+msgstr "Nincs Firebase értesítési logó"
+
+msgid "Secret Key"
+msgstr "Titkos kulcs"
+
+msgid ""
+"Private Credentials Encryption Key changing this value will discard all "
+"existing credentials "
+msgstr ""
+"A magán hitelesítő adatok titkosítási kulcsa ennek az értéknek a "
+"megváltoztatásával az összes meglévő hitelesítő adatot eldobja"
+
+msgid "Second Level Security"
+msgstr "Második szintű biztonság"
+
+msgid "For enhanced security change encryption method in %s on line %s"
+msgstr "A fokozott biztonságú titkosítási módszer módosítása% s on% s on-line"
+
+msgid "Enter Envato api key "
+msgstr "Írja be az Envato api kulcsot"
+
+msgid "Click here to generate an api key"
+msgstr "Ide kattintva generálhat egy api kulcsot"
+
+msgid "License Mandatory"
+msgstr "Engedély kötelező"
+
+msgid ""
+"Prevent users from submitting a ticket without a valid license for one of "
+"your product"
+msgstr ""
+"Megakadályozhatja a felhasználókat, hogy az Ön termékére érvényes jegy "
+"nélkül nyújtsanak be jegyet"
+
+msgid "Product ID"
+msgstr "termék azonosító"
+
+msgid "A comma-separated list of Envato product ids"
+msgstr "Vesszővel elválasztott lista az Envato termék azonosítóiról"
+
+msgid "Enter MailChimp API key "
+msgstr "Írja be a MailChimp API kulcsot"
+
+msgid "Audience ID"
+msgstr "Közönség azonosítója"
+
+msgid "Find Audience ID in your MailChimp account"
+msgstr "Keresse meg a közönség azonosítóját a MailChimp-fiókjában"
+
+msgid "Enable double opt-in"
+msgstr "Kettős bejelentkezés engedélyezése"
+
+msgid "You must also enable double opt-in in your MailChimp account"
+msgstr "A MailChimp-fiókban engedélyeznie kell a kettős bejelentkezést is"
+
+msgid "Welcome email"
+msgstr "Üdvözlő e-mail"
+
+msgid "You can enable Final Welcome Email in your MailChimp account"
+msgstr "Engedélyezheti a Végleges üdvözlő e-mailt a MailChimp-fiókjában"
+
+msgid "Verify License On Ticket Creation"
+msgstr "Ellenőrizze a jegyek létrehozásának licencét"
+
+msgid "Save Configurations"
+msgstr "Beállítások mentése"
+
+msgid "Ticket via email"
+msgstr "Email hibajegy"
+
+msgid "OR"
+msgstr "VAGY"
+
+msgid "Sorry the cron job didnot work"
+msgstr "Bocs, a Cron feladat nem működött"
+
+msgid "Update ticket status"
+msgstr "Frissítse a jegy állapotát"
+
+msgid "Recommended run script daily"
+msgstr "Ajánlott futtatási szkript naponta"
+
+msgid "You cannot use this email, it is used in email piping"
+msgstr "Ezt az e-mailt nem használhatja, hanem az e-mail csövekben használják"
+
+msgid "The department has been stored"
+msgstr "Az osztály tárolt"
+
+msgid "The department has not been stored"
+msgstr "Az osztály nem került tárolásra"
+
+msgid "The department has been deleted"
+msgstr "Az osztály törlésre került"
+
+msgid "The department has not been deleted"
+msgstr "Az osztály nem lett törölve"
+
+msgid "The department in use cannot be delete"
+msgstr "A használt osztályt nem lehet törölni"
+
+msgid "default has been changed"
+msgstr "az alapértelmezés megváltozott"
+
+msgid "default has not been changed"
+msgstr "az alapértelmezés nem változott meg"
+
+msgid "No Record Found"
+msgstr "nincs találat"
+
+msgid "Outgoing Email"
+msgstr "Kimenő email"
+
+msgid "Select Email"
+msgstr "Válassz emailt"
+
+msgid "Tickets of this department will receive emails from this email"
+msgstr "A tanszék jegyei e-maileket kapnak e-mailből"
+
+msgid "Receive Email"
+msgstr "Email jött"
+
+msgid "Save Department"
+msgstr "Osztály mentése"
+
+msgid "The user of this department will receive email on the new ticket"
+msgstr "A tanszék felhasználói e-mailt kapnak az új jegyről"
+
+msgid "Are you sure you want to delete it?"
+msgstr "Biztosan törli azt?"
+
+msgid "Search Departments"
+msgstr "Keresési osztályok"
+
+msgid "Outgoing"
+msgstr "Kimenő"
+
+msgid "Click here to give us feedback"
+msgstr "Klikk ide visszajelzés küldéséhez"
+
+msgid "Email Already Exist"
+msgstr "E-mail már létezik"
+
+msgid "The email has been stored"
+msgstr "Az e-mail tárolt"
+
+msgid "The email has not been stored"
+msgstr "Az e-mailt nem tárolták"
+
+msgid "False"
+msgstr "Hamis"
+
+msgid "True"
+msgstr "Igaz"
+
+msgid "Send Email By"
+msgstr "E-mail küldés"
+
+msgid "SMTP host type"
+msgstr "SMTP host típus"
+
+msgid "SMTP Authentication"
+msgstr "SMTP hitelesítés"
+
+msgid "SMTP Port"
+msgstr "SMTP-port"
+
+msgid "If the system doesnot respond in 30 seconds"
+msgstr "Ha a rendszer 30 másodpercen belül nem válaszol"
+
+msgid "Auto Response"
+msgstr "Automata válasz"
+
+msgid "Save Email"
+msgstr "Email mentése"
+
+msgid "System email used for sending email"
+msgstr "Rendszer emailt használja email küldésre"
+
+msgid "Email template has been stored"
+msgstr "Email sablon elmentve"
+
+msgid "Email template has not been stored"
+msgstr "Email sablon nem lett elmentve"
+
+msgid "Ban Email Try To Create Ticket"
+msgstr "Próbáljon meg jegyet létrehozni"
+
+msgid "Ticket Priority Is Changed By"
+msgstr "Hibajegy prioritását megváltoztatta:"
+
+msgid "Data Deleted"
+msgstr "Adatok törölve"
+
+msgid "Body"
+msgstr "Szövegtest"
+
+msgid "Parameters"
+msgstr "Paraméterek"
+
+msgid "Tracking ID"
+msgstr "Követési ID"
+
+msgid "Ticket URL"
+msgstr "Hibajegy URL-je"
+
+msgid "Ticket Priority"
+msgstr "Hibajegy prioritás"
+
+msgid "Department title"
+msgstr "Osztály megnevezése"
+
+msgid "Group Title"
+msgstr "Csoport megnevezése"
+
+msgid "Agent name"
+msgstr "Ügynök neve"
+
+msgid "Help topic title"
+msgstr "Súgó téma megnevezése"
+
+msgid "Feedback URL"
+msgstr "Visszajelzési URL"
+
+msgid "Ticket Subject"
+msgstr "Hibajegy címe"
+
+msgid "Ticket Tracking ID"
+msgstr "Hibajegy követési azonosító"
+
+msgid "Close Date"
+msgstr "Lezárva"
+
+msgid "Save Email Template"
+msgstr "E-mail sablon mentése"
+
+msgid "Field mark as published"
+msgstr "Mező jelölése nyilvánosnak"
+
+msgid "Field mark as unpublished"
+msgstr "Mező jelölése nem nyilvánosnak"
+
+msgid "Field mark as required"
+msgstr "Mező jelölése kötelezőnek"
+
+msgid "Field mark as not required"
+msgstr "Mező jelölése nem kötelezőnek"
+
+msgid "Field ordering down"
+msgstr "Mező rendelés"
+
+msgid "Field ordering up"
+msgstr "Mező rendelés"
+
+msgid "Parent field has not been stored"
+msgstr "A szülőmező nem került tárolásra"
+
+msgid "Please Insert At least one value for every option"
+msgstr "Kérjük, írjon be legalább egy értéket minden opcióhoz"
+
+msgid "Field has not been stored"
+msgstr "Mező nem lett letárolva"
+
+msgid "Field has been stored"
+msgstr "Mező letárolva"
+
+msgid "Field has been updated"
+msgstr "Mező frissítve"
+
+msgid "Parent Field"
+msgstr "Szülő mező"
+
+msgid "Edit Field"
+msgstr "Mező szerkesztése"
+
+msgid "Field Title"
+msgstr "Mező címe"
+
+msgid "User Published"
+msgstr "Felhasználó publikálva"
+
+msgid "Visitor Published"
+msgstr "Látogató publikálva"
+
+msgid "Required"
+msgstr "Kötelező"
+
+msgid "User Search"
+msgstr "Felhasználó keresése"
+
+msgid "Visitor Search"
+msgstr "Látogató keresése"
+
+msgid "Show On Listing"
+msgstr "Látsszon a listázáson"
+
+msgid "Advanced"
+msgstr "Haladó"
+
+msgid "Field has not been deleted"
+msgstr "A mező nem lett törölve"
+
+msgid "Field has been deleted"
+msgstr "A mező törölve lett"
+
+msgid "Add Field"
+msgstr "Add mező"
+
+msgid "Field"
+msgstr "Terület"
+
+msgid "Text Field"
+msgstr "Szöveg mező"
+
+msgid "Check Box"
+msgstr "Jelölőnégyzet"
+
+msgid "Drop Down"
+msgstr "Ledob"
+
+msgid "Text Area"
+msgstr "Szöveg terület"
+
+msgid "Radio Button"
+msgstr "Rádiógomb"
+
+msgid "Upload File"
+msgstr "Fájl feltöltés"
+
+msgid "Multi Select"
+msgstr "Többszörös választás"
+
+msgid "Terms and Conditions"
+msgstr "Felhasználási feltételek"
+
+msgid "Dependent Field"
+msgstr "Függő mező"
+
+msgid "Field Type"
+msgstr "Mező típus"
+
+msgid "Field Size"
+msgstr "Mező mérete"
+
+msgid "Max Length"
+msgstr "Maximum hossz"
+
+msgid "Columns"
+msgstr "Oszlopok"
+
+msgid "Rows"
+msgstr "Sorok"
+
+msgid "Use the table below to add new values"
+msgstr "Az alábbi táblázat segítségével új értékeket adhat hozzá"
+
+msgid "Add Value"
+msgstr "Érték hozzáadása"
+
+msgid "Terms and Conditions Text"
+msgstr "Általános Szerződési Feltételek"
+
+msgid "Terms and Conditions Link Type"
+msgstr "Szerződési feltételek Link típusa"
+
+msgid "Direct Link"
+msgstr "Közvetlen link"
+
+msgid "Wordpress Page"
+msgstr "Wordpress oldal"
+
+msgid "Select Link Type"
+msgstr "Válassza a Link típusát"
+
+msgid "Terms and Conditions Link"
+msgstr "Általános Szerződési Feltételek Link"
+
+msgid "Terms and Conditions Page"
+msgstr "Általános Szerződési Feltételek"
+
+msgid "Select Wordpress page"
+msgstr "Válassza a Wordpress oldalt"
+
+msgid "Save Field"
+msgstr "Mentés mező"
+
+msgid "S.No"
+msgstr "S. szám"
+
+msgid "User Publish"
+msgstr "Felhasználói publikálás"
+
+msgid "Visitor Publish"
+msgstr "Látogató közzététele"
+
+msgid "Published"
+msgstr "Publikált"
+
+msgid "Unpublished"
+msgstr "Nem publikált"
+
+msgid "Not required"
+msgstr "Nem szükséges"
+
+msgid "users popup"
+msgstr "felbukkanó felhasználók"
+
+msgid "Can Not Unpublished"
+msgstr "Publikálást nem lehet megszüntetni"
+
+msgid "good"
+msgstr "jó"
+
+msgid "cross"
+msgstr "kereszt"
+
+msgid "can not mark as not required"
+msgstr "nem lehet megjelölni nem szükségesként"
+
+msgid "Cannot unpublished field"
+msgstr "Nem lehet közzé nem tenni a mezőt"
+
+msgid "User Data"
+msgstr "Felhasználói adat"
+
+msgid "Erasing data request has been stored"
+msgstr "Az adatok törlésére vonatkozó kérés tárolva volt"
+
+msgid "Failed while storing"
+msgstr "Tárolás közben nem sikerült"
+
+msgid "Erase data request withdrawn"
+msgstr "Törlés az adatkérelmet visszavonták"
+
+msgid "Failed while performing action"
+msgstr "Sikertelen művelet végrehajtása közben"
+
+msgid "User identifying data erased"
+msgstr "A felhasználó azonosító adatai törlődtek"
+
+msgid "User data Deleted"
+msgstr "Felhasználói adatok törölve"
+
+msgid "Export your data"
+msgstr "Exportálja az adatait"
+
+msgid "You have filed a request to remove your data."
+msgstr "Felkérést nyújtott be az adatok eltávolítására."
+
+msgid "To withdraw erases data request"
+msgstr "A visszavonáshoz törli az adatkérést"
+
+msgid "Request data removal from the system."
+msgstr "Az adatok eltávolítását kérje a rendszerből."
+
+msgid "Add GDPR Field"
+msgstr "Adja hozzá a GDPR mezőt"
+
+msgid "Field Text"
+msgstr "Mező szöveg"
+
+msgid "Link Type"
+msgstr "Link típusa"
+
+msgid "Link Page"
+msgstr "Link oldal"
+
+msgid "User Email"
+msgstr "Felhasználói e-mail"
+
+msgid "Request Status"
+msgstr "Állapot kérése"
+
+msgid "Awaiting response"
+msgstr "Várakozásra vár"
+
+msgid "Erased identifying data"
+msgstr "Törölt azonosító adatok"
+
+msgid "Deleted"
+msgstr "törölve"
+
+msgid "Erase identifying data"
+msgstr "Az azonosító adatok törlése"
+
+msgid "Are you sure to erase identifying data"
+msgstr "Biztosan törli az azonosító adatokat"
+
+msgid "Delete data"
+msgstr "Adatok törlése"
+
+msgid "Direct URL"
+msgstr "Közvetlen URL"
+
+msgid "Page Title or URL"
+msgstr "Oldal címe vagy URL"
+
+msgid "Cannot open file"
+msgstr "File nem nyitható meg"
+
+msgid "Dir is not writable"
+msgstr "A dir nem írható"
+
+msgid "Unable to connect to the server"
+msgstr "Nem lehet csatlakozni a szerverhez"
+
+msgid "Language is not installed"
+msgstr "A nyelv nincs telepítve"
+
+msgid "Language directory is not writable"
+msgstr "A nyelvi könyvtár nem írható"
+
+msgid "Required language is not installed but similar language like"
+msgstr "A szükséges nyelv nincs telepítve, de hasonló nyelv, mint a"
+
+msgid "is found in your system"
+msgstr "található a rendszerében"
+
+msgid "Language code"
+msgstr "Nyelvi kód"
+
+msgid "Empty values"
+msgstr "Üres értékek"
+
+msgid "File is not writable"
+msgstr "A fájl nem írható"
+
+msgid "File successfully downloaded"
+msgstr "A fájl letöltése sikeres"
+
+msgid "Ordering updated"
+msgstr "A rendelés frissítve"
+
+msgid "Plugin Detail"
+msgstr "Bővítmény részlete"
+
+msgid "Plugin for online JS Help Desk System"
+msgstr "Az online JS Help Desk rendszer beépülő modulja"
+
+msgid "Created By"
+msgstr "Létrehozta:"
+
+msgid "Company"
+msgstr "Cég"
+
+msgid "Plugin Name"
+msgstr "Plugin név"
+
+msgid "vehicle manager"
+msgstr "járművezető"
+
+msgid "car manager"
+msgstr "autóvezető"
+
+msgid "job manager"
+msgstr "munkavezető"
+
+msgid "Statistics"
+msgstr "Statisztikák"
+
+msgid "Today Tickets"
+msgstr "Ma Jegyek"
+
+msgid "Short Links"
+msgstr "Rövid linkek"
+
+msgid "Overall Report"
+msgstr "Teljes kimutatás"
+
+msgid "email template"
+msgstr "e-mail sablon"
+
+msgid "Install Now"
+msgstr "Telepítés most"
+
+msgid "The best support system plugin for WordPress has everything you need."
+msgstr ""
+"A WordPress támogatási rendszerének legjobb kiegészítője mindent tartalmaz, "
+"amire szüksége van."
+
+msgid "Add-Ons List"
+msgstr "Kiegészítők listája"
+
+msgid "Add New Addons"
+msgstr "Új kiegészítők hozzáadása"
+
+msgid "addon"
+msgstr "Hozzáad"
+
+msgid "View All Tickets"
+msgstr "Az összes jegy megtekintése"
+
+msgid "Waiting Agent Reply"
+msgstr "Várakozó ügynök válasz"
+
+msgid "Waiting Your Reply"
+msgstr "Válaszodra vár"
+
+msgid "Ticket History"
+msgstr "Hibajegy történet"
+
+msgid "Addons"
+msgstr "kiegészítések"
+
+msgid "Add agents and assign roles and permissions to provide assistance."
+msgstr ""
+"Adjon hozzá ügynökeket, és rendeljen hozzá szerepeket és engedélyeket a "
+"segítségnyújtáshoz."
+
+msgid "Ticket Auto Close"
+msgstr "Jegy automatikus bezárása"
+
+msgid ""
+"Define rules for the ticket to auto-close after a specific interval of time."
+msgstr ""
+"Definiálja a jegy szabályait arra, hogy egy adott időtartam után "
+"automatikusan bezáródjon."
+
+msgid "Get a survey from customers on ticket closing to improve quality."
+msgstr ""
+"Kérjen felmérést az ügyfelektől a jegyek lezárásáról a minőség javítása "
+"érdekében."
+
+msgid "Help users to find and select the area with which they need assistance."
+msgstr ""
+"Segítsen a felhasználóknak abban, hogy megtalálja és válassza ki azt a "
+"területet, amelyben segítségre van szüksége."
+
+msgid "Private Note"
+msgstr "Saját megjegyzés"
+
+msgid ""
+"The private note is used as reminders or to give other agents insights into "
+"the ticket issue."
+msgstr ""
+"A privát jegyzetet emlékeztetõként vagy más ügynökök számára nyújt "
+"betekintést a jegy kiadásával kapcsolatban."
+
+msgid ""
+"Stop losing productivity on repetitive queries, build your knowledge base."
+msgstr ""
+"Hagyja abba a termelékenység elvesztését az ismétlődő lekérdezések során, "
+"építse fel tudásalapját."
+
+msgid "Max Tickets"
+msgstr "Max Jegyek"
+
+msgid ""
+"Enables admin to set N numbers of tickets for users and agents separately."
+msgstr ""
+"Lehetővé teszi az admin számára, hogy külön számú jegyet állítson be a "
+"felhasználók és az ügynökök számára."
+
+msgid "Merge Tickets"
+msgstr "Jegyek egyesítése"
+
+msgid ""
+"Enables agents to merge two tickets of the same user into one instead of "
+"dealing with the same issue on many tickets."
+msgstr ""
+"Lehetővé teszi az ügynököknek, hogy egyesítsék ugyanazon felhasználó két "
+"jegyét egybe, ahelyett, hogy ugyanazon kérdéssel foglalkoznának sok jegyen."
+
+msgid ""
+"Defines rules or set specific intervals of time to make ticket auto overdue."
+"The ticket can overdue by type or overdue by Cronjob."
+msgstr ""
+"Szabályokat határoz meg, vagy meghatározott időintervallumokat állít be a "
+"jegy automatikus lejártá tételéhez. A jegy típustól lejár vagy Cronjob által "
+"lejárt."
+
+msgid ""
+"SMTP enables you to add custom mail protocol to send and receive emails "
+"within the js help desk."
+msgstr ""
+"Az SMTP lehetővé teszi az egyéni levelezési protokoll hozzáadását az e-"
+"mailek küldéséhez és fogadásához a js help desk-en."
+
+msgid ""
+"Displays complete ticket history along with the ticket status, currently "
+"assigned user and other actions performed on each ticket."
+msgstr ""
+"Megjeleníti a teljes jegyelőzményt, a jegy állapotát, a jelenleg "
+"hozzárendelt felhasználót és az egyes jegyeknél végrehajtott egyéb "
+"műveleteket."
+
+msgid "Pre-populated messages allow support agents to respond quickly."
+msgstr ""
+"Az előre kitöltött üzenetek lehetővé teszik a támogatási ügynökök gyors "
+"reagálását."
+
+msgid "Enables users to reply to the tickets via email without login."
+msgstr ""
+"Lehetővé teszi a felhasználóknak, hogy bejelentkezés nélkül válaszolhassanak "
+"a jegyekre e-mailben."
+
+msgid "Time Tracking"
+msgstr "Időmérés"
+
+msgid ""
+"Track the time spent on each ticket by each agent and each reply. Report the "
+"admin on how much time is spent on each ticket."
+msgstr ""
+"Kövesse nyomon az egyes ügynökök és válaszok által az egyes jegyekre "
+"fordított időt. Jelentés az adminisztrátorról arról, hogy mennyi időt "
+"töltenek az egyes jegyekre."
+
+msgid "User Options"
+msgstr "Felhasználói beállítások"
+
+msgid ""
+"User options enable you to add Google Re-captcha or JS Help Desk Re-captcha "
+"for a registration form."
+msgstr ""
+"A felhasználói opciók lehetővé teszik a Google Re-captcha vagy a JS Help "
+"Desk Re-captcha regisztrációs űrlaphoz történő hozzáadását."
+
+msgid "Actions"
+msgstr "Hozzászólások"
+
+msgid "Ticket Actions"
+msgstr "Jegyekkel kapcsolatos tevékenységek"
+
+msgid ""
+"Get multiple action options on each ticket like Print Ticket, Lock Ticket, "
+"Transfer ticket, etc."
+msgstr ""
+"Szerezzen több műveleti lehetőséget minden jegyen, például jegyjegy "
+"nyomtatása, jegy zárolása, jegyátutalás stb."
+
+msgid "Make unlimited announcements associated with the support system."
+msgstr "Korlátlan bejelentéseket tehet a támogatási rendszerrel kapcsolatban."
+
+msgid ""
+"It allows you to block the email of any user to restrict him to create new "
+"tickets."
+msgstr ""
+"Ez lehetővé teszi, hogy blokkolja bármely felhasználó e-mailjét, hogy új "
+"jegyek létrehozására korlátozza őt."
+
+msgid "Desktop Notification"
+msgstr "Asztali értesítés"
+
+msgid ""
+"The Desktop notifications will keep you up to date about anything happens on "
+"your support system."
+msgstr ""
+"Az asztali értesítések naprakészek lesznek a támogatási rendszerben zajló "
+"eseményekről."
+
+msgid "Save the ticket as a PDF in your system and able to export all data."
+msgstr ""
+"Mentse el a jegyet PDF-ként a rendszerében, és képes legyen az összes adat "
+"exportálására."
+
+msgid "Create downloads to ensure the user to get downloads from downloads."
+msgstr ""
+"Hozzon létre letöltéseket annak érdekében, hogy a felhasználó letöltéseket "
+"szerezzen a letöltésekből."
+
+msgid "Add FAQs to drastically reduce the number of common questions."
+msgstr ""
+"Adjon hozzá GYIK-ot, hogy drasztikusan csökkentse a gyakori kérdések számát."
+
+msgid ""
+"Get multiple themes with a beautiful color scheme to make the site beautiful."
+msgstr ""
+"Szerezzen több témát egy gyönyörű színsémával, hogy a webhely szép legyen."
+
+msgid "Dashboard Widgets"
+msgstr "Műszerfal-kütyü"
+
+msgid ""
+"Get immediate data of your support operations as soon as you log into your "
+"WordPress administration area."
+msgstr ""
+"Azonnal kaphat adatokat a támogatási műveletekről, mihelyt bejelentkezik a "
+"WordPress adminisztrációs területére."
+
+msgid "Internal Mail"
+msgstr "Belső levelezés"
+
+msgid "Use an internal email to send emails to one agent to another agent."
+msgstr ""
+"Használjon belső e-mailt, ha e-maileket küld egy ügynöknek egy másik "
+"ügynöknek."
+
+msgid "Front-End Widgets"
+msgstr "Kezelőeszközök"
+
+msgid ""
+"Widgets in WordPress allow you to add content and features in the widgetized "
+"areas of your theme."
+msgstr ""
+"A WordPress kütyüi lehetővé teszik tartalom és funkciók hozzáadását a téma "
+"widgetizált területeire."
+
+msgid ""
+"JS Help Desk WooCommerce provides the much-needed bridge between your "
+"WooCommerce store and the JS Help Desk."
+msgstr ""
+"JS ügyfélszolgálat A WooCommerce biztosítja a nagyon szükséges hidat a "
+"WooCommerce áruház és a JS ügyfélszolgálat között."
+
+msgid ""
+"Collect your customer's private data, sensitive information from credit card "
+"to health information and store them encrypted."
+msgstr ""
+"Gyűjtse össze az ügyfelek személyes adatait, a bizalmas információkat a "
+"hitelkártyáktól az egészségügyi információkig, és titkosítva tárolja őket."
+
+msgid ""
+"Without valid Envato, license clients won't be able to open a new ticket."
+msgstr ""
+"Érvényes Envato nélkül az engedélyes ügyfelek nem tudnak új jegyet megnyitni."
+
+msgid ""
+"Adds the option to the registration form for prompting new users to "
+"subscribe to your email list."
+msgstr ""
+"A regisztrációs űrlaphoz hozzáadja azt a lehetőséget, hogy az új "
+"felhasználókat felszólítsa az e-mail listára való feliratkozásra."
+
+msgid ""
+"Paid Support is the easiest way to integrate and manage payments for your "
+"tickets."
+msgstr ""
+"A fizetett támogatás a legegyszerűbb módja a jegyek kifizetésének "
+"integrálására és kezelésére."
+
+msgid "easy digital downloads"
+msgstr "egyszerű digitális letöltés"
+
+msgid ""
+"EDD offers customers to open new tickets just one click from their EDD "
+"account."
+msgstr ""
+"Az EDD felkínálja az ügyfeleknek, hogy új jegyet nyissanak meg egyetlen "
+"kattintással az EDD számlájukról."
+
+msgid "We'd love to hear from You."
+msgstr "Szeretnénk hallani felőled."
+
+msgid "Please write appreciated review at"
+msgstr "Kérjük, írjon becsült értékelést itt:"
+
+msgid "WP Extension Directory"
+msgstr "WP kiterjesztés könyvtár"
+
+msgid "star"
+msgstr "csillag"
+
+msgid "Spread the word"
+msgstr "Hirdessétek"
+
+msgid "JS Help Desk / JS Support Ticket Control Panel"
+msgstr "JS Help Desk / JS Support Ticket Vezérlőpult"
+
+msgid "JS Help Desk / JS Support Ticket main control panel"
+msgstr "JS Help Desk / JS Support Ticket fő kezelőpanel"
+
+msgid "Add new ticket form for both user and agent"
+msgstr "Adjon hozzá új jegyet a felhasználó és az ügynök számára"
+
+msgid "My tickets for both user and agent"
+msgstr "Jegyem mind a felhasználó, mind az ügynök számára"
+
+msgid "List downloads"
+msgstr "Letöltések listázása"
+
+msgid "Latest Downloads"
+msgstr "Legújabb letöltések"
+
+msgid "Show latest downloads. Options"
+msgstr "A legfrissebb letöltések megjelenítése. Opciók"
+
+msgid "and"
+msgstr "és"
+
+msgid "i.e."
+msgstr "pl."
+
+msgid "Popular Downloads"
+msgstr "Népszerű letöltések"
+
+msgid "Show popular downloads. Options"
+msgstr "Népszerű letöltések megjelenítése. Opciók"
+
+msgid "List knowledge base"
+msgstr "Tudásbázis listázása"
+
+msgid "Latest Knowledge Base"
+msgstr "Legújabb tudásbázis"
+
+msgid "Show latest knowledge base. Options"
+msgstr "Mutassa meg a legújabb tudásbázist. Opciók"
+
+msgid "Popular knowledge base"
+msgstr "Népszerű tudásbázis"
+
+msgid "Show popular knowledge base. Options"
+msgstr "Mutassa a népszerű tudásbázist. Opciók"
+
+msgid "List FAQ's"
+msgstr "GY.I.K. listázása"
+
+msgid "Latest FAQ's"
+msgstr "Legutóbbi GY.I.K."
+
+msgid "Show latest FAQ's. Options"
+msgstr "Mutassa a legújabb GYIK-kat. Opciók"
+
+msgid "Popular FAQ's"
+msgstr "Népszerű GY.I.K."
+
+msgid "Show popular FAQ's. Options"
+msgstr "Mutassa a népszerű GYIK-kat. Opciók"
+
+msgid "List announcements"
+msgstr "Felhívások listázása"
+
+msgid "Latest Announcements"
+msgstr "Legutóbbi felhívások"
+
+msgid "Show latest announcements. Options"
+msgstr "A legfrissebb bejelentések megjelenítése. Opciók"
+
+msgid "Popular Announcements"
+msgstr "Népszerű felhívások"
+
+msgid "Show popular announcements. Options"
+msgstr "Népszerű bejelentések megjelenítése. Opciók"
+
+msgid "spinning wheel"
+msgstr "forgó kerék"
+
+msgid "Get JS Help Desk Translations"
+msgstr "Get JS Help Desk fordítások"
+
+msgid "Get Translations"
+msgstr "Fordítás beszerzése"
+
+msgid "Select Translation"
+msgstr "Válassz nyelvet"
+
+msgid ""
+"When WordPress language change to ro, JS Help Desk language will auto change "
+"to ro"
+msgstr ""
+"Amikor a WordPress nyelv ro-ra változik, a JS Help Desk nyelve automatikusan "
+"ro-ra változik"
+
+msgid "c error"
+msgstr "c hiba"
+
+msgid "saved"
+msgstr "mentett"
+
+msgid "Contribute In Translation"
+msgstr "Hozzájárulás a fordításhoz"
+
+msgid "translate"
+msgstr "fordít"
+
+msgid "Manual Download"
+msgstr "Kézi letöltés"
+
+msgid "Log In"
+msgstr "Bejelentkezés"
+
+msgid "Log Out"
+msgstr "Kijelentkezés"
+
+msgid "Agent Feedbacks"
+msgstr "Agent visszajelzések"
+
+msgid "Submit ticket"
+msgstr "Jegy benyújtása"
+
+msgid "my ticket"
+msgstr "a jegyem"
+
+msgid "View all the created tickets"
+msgstr "Tekintse meg az összes létrehozott jegyet"
+
+msgid "your ticket status"
+msgstr "a jegy állapota"
+
+msgid "closed ticket"
+msgstr "zárt jegy"
+
+msgid "answered ticket"
+msgstr "válaszolt jegy"
+
+msgid "overdue ticket"
+msgstr "lejárt jegy"
+
+msgid "View All Downloads"
+msgstr "Az összes letöltés megtekintése"
+
+msgid "View All Announcements"
+msgstr "Az összes közlemény megtekintése"
+
+msgid "View All Knowledge Base"
+msgstr "Tekintse meg az összes tudásbázist"
+
+msgid "Latest FAQs"
+msgstr "Legújabb GYIK"
+
+msgid "View All FAQs"
+msgstr "Az összes GYIK megtekintése"
+
+msgid "keep me login"
+msgstr "Tarts bejelentkezve"
+
+msgid "Repeat Password"
+msgstr "Jelszó újra"
+
+msgid "Subscribe to the newsletter"
+msgstr "Feliratkozás a hírlevélre"
+
+msgid "has been changed"
+msgstr "megváltozott"
+
+msgid "has not been changed"
+msgstr "nem változott meg"
+
+msgid "JS Support Ticket Settings"
+msgstr "JS támogatás jegybeállítások"
+
+msgid "General"
+msgstr "Tábornok"
+
+msgid "Complete"
+msgstr "teljes"
+
+msgid "Configurations complete"
+msgstr "A konfigurációk befejeződtek"
+
+msgid "Step 4 of 4"
+msgstr "4. lépés a 4-ből"
+
+msgid "Step 3 of 3"
+msgstr "3/3 lépés"
+
+msgid "Setting Completed"
+msgstr "A beállítás kész"
+
+msgid "Setting you applied has been saved successfully."
+msgstr "Az alkalmazott beállítás sikeresen mentésre került."
+
+msgid "Finish"
+msgstr "Befejezés"
+
+msgid "Ticket Setting"
+msgstr "Hibajegyek beállításai"
+
+msgid "Setting Complete"
+msgstr "Beállítás kész"
+
+msgid "General Configurations"
+msgstr "Általános konfigurációk"
+
+msgid "Step 1 of 4"
+msgstr "1. lépés a 4-ből"
+
+msgid "Step 1 of 3"
+msgstr "1. lépés a 3-ból"
+
+msgid "Enter the site title"
+msgstr "Írja be a webhely címét"
+
+msgid "Date format for plugin"
+msgstr "A plugin dátumformátuma"
+
+msgid "Show Breadcrumbs"
+msgstr "Mutasd zsemlemorzsa"
+
+msgid "Show navigation in breadcrumbs"
+msgstr "A navigáció megjelenítése a zsemlemorzsaban"
+
+msgid "Upload file size in KB's"
+msgstr "Töltse fel a fájl méretét KB-ban"
+
+msgid "File Extension"
+msgstr "Fájlkiterjesztés"
+
+msgid "Sequential"
+msgstr "Szekvenciális"
+
+msgid "Feedback Configurations"
+msgstr "Visszajelzés konfigurációk"
+
+msgid "Step 3 of 4"
+msgstr "3/4 lépés"
+
+msgid "Set Email Delay Time"
+msgstr "Állítsa be az e-mail késleltetési időt"
+
+msgid " :"
+msgstr ":"
+
+msgid "Set Email Delay"
+msgstr "Állítsa be az E-mail késleltetést"
+
+msgid "Back"
+msgstr "Vissza"
+
+msgid "Ticket Configurations"
+msgstr "Jegyek konfigurálása"
+
+msgid "Step 2 of 4"
+msgstr "2. lépés a 4-ből"
+
+msgid "Step 2 of 3"
+msgstr "2. lépés a 3-ból"
+
+msgid "Enable/Disable Open Ticket"
+msgstr "A Jegy megnyitása engedélyezése / letiltása"
+
+msgid "Ticket ID sequence"
+msgstr "Jegy azonosító sorrendje"
+
+msgid "Set ticket id sequential or random"
+msgstr "Állítsa be a jegy azonosítóját szekvenciálisan vagy véletlenszerűen"
+
+msgid "Maximum Tickets"
+msgstr "Maximális jegyek"
+
+msgid "Set Maximum Ticket Per user"
+msgstr "Állítsa be a maximális jegy felhasználónként"
+
+msgid "Maximum Open Ticket"
+msgstr "Maximális nyitott jegy"
+
+msgid "Reopen ticket within Days"
+msgstr "A jegy újra megnyitása napokon belül"
+
+msgid "Show Captcha to visitor on ticket form"
+msgstr "Mutassa meg a Captcha-t a látogatónak a jegyűrlapon"
+
+msgid "Enable/Disable Captcha on Ticket Form"
+msgstr "Captcha engedélyezése / letiltása a jegyűrlapon"
+
+msgid "Own Captcha operands"
+msgstr "Saját Captcha operandusok"
+
+msgid "Enable/Disable Own Captcha subtraction"
+msgstr "Saját Captcha kivonás engedélyezése / letiltása"
+
+msgid "Enable Print Ticket"
+msgstr "Jegy nyomtatásának engedélyezése"
+
+msgid "Enable/Disable Print Ticket"
+msgstr "Jegynyomtatás engedélyezése / tiltása"
+
+msgid "Please insert activation key to proceed"
+msgstr "Kérjük, helyezze be az aktiváló kulcsot a folytatáshoz"
+
+msgid "Addon Installation Failed"
+msgstr "Az Addon telepítése sikertelen"
+
+msgid "Addon installation failed, Directory permission error"
+msgstr "Az addon telepítése sikertelen, a Directory engedély hibája"
+
+msgid "Addon Installation Failed, File download error"
+msgstr "Az Addon telepítése sikertelen, fájl letöltési hiba"
+
+msgid "left image"
+msgstr "bal kép"
+
+msgid "right image"
+msgstr "jobb kép"
+
+msgid "buy now"
+msgstr "Vásárolj most"
+
+msgid "private note"
+msgstr "privát jegyzet"
+
+msgid "max ticket"
+msgstr "max jegy"
+
+msgid "merge tickets"
+msgstr "egyesül jegyek"
+
+msgid "time tracking"
+msgstr "időmérés"
+
+msgid "user options"
+msgstr "felhasználói beállítások"
+
+msgid "ticket actions"
+msgstr "jegyműveletek"
+
+msgid "desktop notifications"
+msgstr "asztali értesítések"
+
+msgid "admin widgets"
+msgstr "admin widget"
+
+msgid "internal mail"
+msgstr "belső levelezés"
+
+msgid "frontend widget"
+msgstr "kezelőfelület widget"
+
+msgid "woocommerce support"
+msgstr "woocommerce támogatás"
+
+msgid "mail chimp"
+msgstr "mail csimpánz"
+
+msgid "addon in no longer active"
+msgstr "addon már nem aktív"
+
+msgid "Wordpress Plugin"
+msgstr "Wordpress beépülő modul"
+
+msgid ""
+"JS Help Desk is a trusted open source ticket system. JS Help Desk is a "
+"simple, easy to use, web-based customer support system. Users can create a "
+"ticket from the front-end. JS Help Desk comes packed with lot features than "
+"most of the expensive(and complex) support ticket system on the market. The "
+"best part is, It completely free."
+msgstr ""
+"A JS Help Desk megbízható nyílt forrású jegyrendszer. A JS Help Desk egy "
+"egyszerű, könnyen használható, web alapú ügyfélszolgálati rendszer. A "
+"felhasználók jegyet készíthetnek a kezelőfelületből. A JS Help Desk sok "
+"funkcióval rendelkezik, mint a piacon található drága (és összetett) "
+"támogatási jegyrendszer legtöbbje. A legjobb az egészben, teljesen ingyenes."
+
+msgid "Add on list"
+msgstr "Felvétel a listára"
+
+msgid "Please Insert Your Activation key"
+msgstr "Kérjük, helyezze be az aktiválási kulcsot"
+
+msgid "Activation key"
+msgstr "Aktivációs kulcs"
+
+msgid "Proceed"
+msgstr "Folytassa"
+
+msgid "Select Addons for download"
+msgstr "Válassza a Letöltések kiegészítőket"
+
+msgid "All allowed add ons are already installed"
+msgstr "Az összes engedélyezett bővítmény már telepítve van"
+
+msgid "You are not allowed to install any add on"
+msgstr "Nem telepíthet semmilyen kiegészítőt"
+
+msgid "Select All Addons"
+msgstr "Válassza az Összes kiegészítés lehetőséget"
+
+msgid "Add ons installed and activated successfully"
+msgstr "A sikeresen telepített és aktivált on-ok hozzáadása"
+
+msgid ""
+"Add ons for JS Help Desk have been installed and activated successfully. "
+msgstr "A JS Help Desk kiegészítőinek telepítése és aktiválása sikeres volt."
+
+msgid "Priority Title Already Exist"
+msgstr "Prioritás cím már létezik"
+
+msgid "Priority has been stored"
+msgstr "Prioritás eltárolva"
+
+msgid "Priority has not been stored"
+msgstr "Prioritás nem lett eltárolva"
+
+msgid "Priority has been deleted"
+msgstr "Prioritás törölve lett"
+
+msgid "Priority has not been deleted"
+msgstr "Prioritás nem lett törölve"
+
+msgid "Default priority cannot delete"
+msgstr "Alapértelmezett prioritást nem lehet törölni"
+
+msgid "Priority has been make default"
+msgstr "Prioritás alapértelmezettnek be lett állítva"
+
+msgid "Priority has not been make default"
+msgstr "Prioritás alapértelmezettnek nem lett beállítva"
+
+msgid "Color"
+msgstr "Szín"
+
+msgid "Ticket Overdue Interval Type"
+msgstr "Jegy lejárt intervallum típusa"
+
+msgid "Save Priority"
+msgstr "Prioritás mentése"
+
+msgid "Date Interval"
+msgstr "Dátum intervallum"
+
+msgid "Reply posted"
+msgstr "Válasz feladva"
+
+msgid "Reply posted on ticket"
+msgstr "Válasz feladva a jegyen"
+
+msgid "Ticket is replied by"
+msgstr "A hibajegyre válaszolt:"
+
+msgid "Reply Has been Posted"
+msgstr "Válasz elküldve"
+
+msgid "Reply Has Not been Posted"
+msgstr "A választ még nem tették közzé"
+
+msgid "Dates"
+msgstr "Dátumok"
+
+msgid "Department Detail Report"
+msgstr "Részleges jelentés"
+
+msgid "Export Data"
+msgstr "Adatok exportálása"
+
+msgid "Department Statistics"
+msgstr "Osztálystatisztikák"
+
+msgid "pending ticket"
+msgstr "függő jegy"
+
+msgid "Time Taken"
+msgstr "Eltelt idő"
+
+msgid "Merged and closed"
+msgstr "Egyesített és bezárt"
+
+msgid "Out of"
+msgstr "Kívül"
+
+msgid "Ticket by departments"
+msgstr "Hibajegyek osztályonként"
+
+msgid "Tickets By Priority"
+msgstr "Hibajegyek prioritásonként"
+
+msgid "Staff Member Tickets"
+msgstr "Személyzet hibajegyei"
+
+msgid "all ticket"
+msgstr "minden jegy"
+
+msgid "Tickets By Status And Priorities"
+msgstr "Hibajegyek státuszonként és prioritásonként"
+
+msgid "Tickets By Agents"
+msgstr "Jegyek ügynökök által"
+
+msgid "Staff Reports"
+msgstr "Személyzeti kimutatások"
+
+msgid "Based on"
+msgstr "Alapján"
+
+msgid "Customer Satisfaction"
+msgstr "Felhasználó megelégedettség"
+
+msgid "satisfaction image"
+msgstr "elégedettségi kép"
+
+msgid "Excellent"
+msgstr "Kitűnő"
+
+msgid "NA"
+msgstr "Nincs adat"
+
+msgid "Happy"
+msgstr "Boldog"
+
+msgid "Normal"
+msgstr "Átlagos"
+
+msgid "bad"
+msgstr "rossz"
+
+msgid "Sad"
+msgstr "Szomorú"
+
+msgid "Angry"
+msgstr "Mérges"
+
+msgid "Agent Detail Report"
+msgstr "Ügynök részletes jelentése"
+
+msgid "staff image"
+msgstr "személyzet kép"
+
+msgid "Average rating"
+msgstr "Átlagos értékelés"
+
+msgid "Average time"
+msgstr "Átlagos idő"
+
+msgid "Tickets not assigned to the staff member"
+msgstr "Hibajegyek, melyek nincsenek felelőshöz rendelve"
+
+msgid "Minutes"
+msgstr "Perc"
+
+msgid "Report By Staff Member"
+msgstr "Kimutatás személyzet által"
+
+msgid "User Detail Report"
+msgstr "Felhasználói részletes jelentés"
+
+msgid "User Statistics"
+msgstr "Felhasználói statisztikák"
+
+msgid "Users"
+msgstr "Felhasználók"
+
+msgid "Ticket Status By Departments"
+msgstr "A jegy állapota osztályok szerint"
+
+msgid "Agent Report"
+msgstr "Agent jelentés"
+
+msgid "Agent Tickets"
+msgstr "Agent Jegyek"
+
+msgid "Reports Statistics"
+msgstr "Jelentések statisztikák"
+
+msgid "System error has been deleted"
+msgstr "A rendszerhibát törölték"
+
+msgid "System error has not been deleted"
+msgstr "A rendszerhibát nem törölték"
+
+msgid "Remove All"
+msgstr "Összes eltávolítása"
+
+msgid "Support for this Envato license has expired"
+msgstr "Az Envato licenc támogatása lejárt"
+
+msgid "Record not found"
+msgstr "Rekord nem található"
+
+msgid "Banned email cannot create ticket"
+msgstr "Letiltott email címmel nem lehet hibajegyet létrehozni"
+
+msgid "Incorrect Captcha code"
+msgstr "Hibás ellenőrző kód"
+
+msgid "Please select paid support item"
+msgstr "Kérjük, válassza ki a fizetett támogatási elemet"
+
+msgid "No purchase found with that code"
+msgstr "Nem található vásárlás ezzel a kóddal"
+
+msgid "Provide a valid license key to create a ticket."
+msgstr "Adjon meg egy érvényes licenckulcsot a jegy létrehozásához."
+
+msgid "Your license has expired."
+msgstr "Az engedélyed lejárt."
+
+msgid "Your license is not active, activate your license."
+msgstr "A licenc nem aktív, aktiválja a licencet."
+
+msgid "Due date error is not valid"
+msgstr "Határidő dátuma hiba nem érvényes"
+
+msgid "Ticket has not been created"
+msgstr "Hibajegy készítés sikertelen"
+
+msgid "Ticket created"
+msgstr "Jegy létrehozva"
+
+msgid "created"
+msgstr "készítette"
+
+msgid "Guest"
+msgstr "Vendég"
+
+msgid "Ticket is updated by"
+msgstr "Hibajegyet friss"
+
+msgid "Ticket is created by"
+msgstr "Hibajegyet frissítette:"
+
+msgid "Ticket has been deleted"
+msgstr "Hibajegy törölve lett"
+
+msgid "Ticket has not been deleted"
+msgstr "Hibajegy nem lett törölve"
+
+msgid "in use cannot be deleted"
+msgstr "Használatban van, nem lehet törölni"
+
+msgid "Ticket already closed"
+msgstr "Hibajegy már le van zárva"
+
+msgid "Ticket has been closed"
+msgstr "Hibajegy le lett zárva"
+
+msgid "Ticket has not been closed"
+msgstr "Hibajegy nem lett lezárva"
+
+msgid "Ticket is closed by"
+msgstr "Hibajegyet lezárta:"
+
+msgid "Your are not allowed"
+msgstr "Nincs engedélyezve"
+
+msgid "The department has been transferred"
+msgstr "Az osztály áthelyezésre került"
+
+msgid "The department has not been transferred"
+msgstr "Az osztály nem került áthelyezésre"
+
+msgid "The department is transferred by"
+msgstr "Az osztályt áthelyezi"
+
+msgid "Assigned to agent"
+msgstr "Az ügynökhöz rendelték"
+
+msgid "Not assigned to agent"
+msgstr "Nincs hozzárendelve az ügynökhöz"
+
+msgid "Assign ticket to agent"
+msgstr "Rendeljen jegyet az ügynöknek"
+
+msgid "Ticket is assigned to agent by"
+msgstr "A jegyet az ügynök osztja ki"
+
+msgid "Ticket already have same priority"
+msgstr "A hibajegynek már van prioritása"
+
+msgid "Priority has been changed"
+msgstr "Prioritás megváltozott"
+
+msgid "Priority has not been changed"
+msgstr "Prioritás nem változott meg"
+
+msgid "Change Priority"
+msgstr "Prioritás megváltoztatása"
+
+msgid "Email already banned"
+msgstr "Email már le van tiltva"
+
+msgid "The email has been banned"
+msgstr "Az e-mailt megtiltottuk"
+
+msgid "The email has not been banned"
+msgstr "Az e-mailt nem tiltottuk meg"
+
+msgid "Email is banned by"
+msgstr "Emailt letiltotta:"
+
+msgid "The ticket has been reopened"
+msgstr "A jegyet újra megnyitották"
+
+msgid "The ticket has not been reopened"
+msgstr "A jegy nem nyitott újra"
+
+msgid "Reopen Ticket"
+msgstr "Hibajegy újranyitása"
+
+msgid "The ticket is reopened by"
+msgstr "A jegyet újból megnyitja"
+
+msgid "The ticket reopens time limit end"
+msgstr "A jegy újra megnyitja az időkorlátot"
+
+msgid "Email has been unbanned"
+msgstr "Email letiltása fel lett oldva"
+
+msgid "Email has not been unbanned"
+msgstr "Email letiltása nem lett feloldva"
+
+msgid "Unbanned Email"
+msgstr "Letiltásból feloldott email"
+
+msgid "Email is unbanned by"
+msgstr "Emailt letiltásból feloldotta:"
+
+msgid "Email cannot be unbanned"
+msgstr "Az emailt nem lehet letiltásból feloldani"
+
+msgid "Ticket already marked in progress"
+msgstr "A hibajegy már folyamatban jelölést kapott"
+
+msgid "The ticket has been marked as in progress"
+msgstr "A jegyet folyamatban lévőként jelölték meg"
+
+msgid "The ticket has not been marked as in progress"
+msgstr "A jegyet nem jelölték meg, mint folyamatban lévő"
+
+msgid "In progress ticket"
+msgstr "Folyamatban lévő hibajegy"
+
+msgid "The ticket is marked as in progress by"
+msgstr "A jegyet folyamatban lévő jelöléssel jelzi:"
+
+msgid "File upload limit exceeds"
+msgstr "A fájlfeltöltési korlát meghaladja a"
+
+msgid "The uploaded file extension not valid"
+msgstr "A feltöltött fájlkiterjesztés nem érvényes"
+
+msgid "Paid support info"
+msgstr "Fizetett támogatás információ"
+
+msgid "Order ID"
+msgstr "Rendelés azonosító"
+
+msgid "Product Name"
+msgstr "termék név"
+
+msgid "Total Tickets"
+msgstr "Jegyek összesen"
+
+msgid "Remaining Tickets"
+msgstr "Maradó jegyek"
+
+msgid "Unlimited"
+msgstr "Korlátlan"
+
+msgid "You have not purchased any supported item"
+msgstr "Nem vásárolt támogatott elemet"
+
+msgid "Go to shop"
+msgstr "Boltba menni"
+
+msgid "Select Order"
+msgstr "Válassza a Rendelés lehetőséget"
+
+msgid "No canned response found"
+msgstr "Nem található konzervválasz"
+
+msgid "Waiting agent reply"
+msgstr "Várakozó ügynök válasz"
+
+msgid "Waiting customer reply"
+msgstr "Felhasználó válaszára vár"
+
+msgid "Close ticket"
+msgstr "Hibajegy lezárása"
+
+msgid "premade"
+msgstr "előre elkészített"
+
+msgid "Some values are not acceptable please retry"
+msgstr "Néhány érték nem elfogadható, próbáld újra"
+
+msgid "Are you sure to mark this ticket non-premium?"
+msgstr "Biztos, hogy ezt a jegyet nem prémium kategóriában jelölte meg?"
+
+msgid "Edit Reply"
+msgstr "Válasz szerkesztése"
+
+msgid "Edit Time"
+msgstr "Idő szerkesztése"
+
+msgid "Reason For Editing the timer"
+msgstr "Az időzítő szerkesztésének oka"
+
+msgid "Reason For Editing"
+msgstr "A szerkesztés oka"
+
+msgid "Resolve conflict"
+msgstr "Konfliktus feloldása"
+
+msgid "Ticket Details"
+msgstr "Hibajegy részletei"
+
+msgid "Lock"
+msgstr "Zárolás"
+
+msgid "Add New Credential"
+msgstr "Új hitelesítő adatok hozzáadása"
+
+msgid "Post New Internal Note"
+msgstr "Új belső megjegyzés feladása"
+
+msgid "play"
+msgstr "játék"
+
+msgid "pause"
+msgstr "szünet"
+
+msgid "stop"
+msgstr "állj meg"
+
+msgid "Close on reply"
+msgstr "Válasz után lezárás"
+
+msgid "Reason For Department Transfer"
+msgstr "Osztályra küldés oka"
+
+msgid "Transfer"
+msgstr "Átküld"
+
+msgid "Assign To Agent"
+msgstr "Hozzárendelés az ügynökhöz"
+
+msgid "Assign"
+msgstr "Hozzárendel"
+
+msgid "View all %d tickets by %s"
+msgstr "Az összes% d jegy megtekintése az% s szerint"
+
+msgid "Show History"
+msgstr "Előzmények megjelenítése"
+
+msgid "Print Ticket"
+msgstr "Jegy nyomtatása"
+
+msgid "Unmark Overdue"
+msgstr "Törölje a késedelmet"
+
+msgid "Mark in Progress"
+msgstr "Jelöld folyamatban státuszúnak"
+
+msgid "agent image"
+msgstr "ügynök kép"
+
+msgid "Ticket Thread"
+msgstr "Hibajegy szál"
+
+msgid "Post Reply"
+msgstr "Válasz küldése"
+
+msgid "Own Signature"
+msgstr "Saját aláírás"
+
+msgid "Department Signature"
+msgstr "Osztály aláírás"
+
+msgid "Add Signature"
+msgstr "Aláírás hozzáadása"
+
+msgid "On Waiting"
+msgstr "Várakozás közben"
+
+msgid "ago"
+msgstr "ezelőtt"
+
+msgid "No Last Reply"
+msgstr "Nincs utolsó válasz"
+
+msgid "Not Given"
+msgstr "Nincs megadva"
+
+msgid "Copy"
+msgstr "Másolat"
+
+msgid "Copied"
+msgstr "másolt"
+
+msgid "Change"
+msgstr "változás"
+
+msgid "Ticket assigned to"
+msgstr "Jegy rendelve"
+
+msgid "staff photo"
+msgstr "személyzet fotó"
+
+msgid "Total Time Taken"
+msgstr "Összesített idő"
+
+msgid "view ticket"
+msgstr "Jegy megtekintése"
+
+msgid "Woocommerce Order"
+msgstr "Woocommerce rendelés"
+
+msgid "Envato License"
+msgstr "Envato licenc"
+
+msgid "Item"
+msgstr "Tétel"
+
+msgid "Buyer"
+msgstr "Vevő"
+
+msgid "License Type"
+msgstr "Engedély típus"
+
+msgid "License"
+msgstr "Engedély"
+
+msgid "Purchase Date"
+msgstr "Vásárlás időpontja"
+
+msgid "Supported Until"
+msgstr "Támogatásig"
+
+msgid "Paid Support Details"
+msgstr "Fizetett támogatás részletei"
+
+msgid "Subscription"
+msgstr "Feliratkozás"
+
+msgid "Subscribed On"
+msgstr "Előfizetve"
+
+msgid "Support Expiry"
+msgstr "Támogassa a lejáratot"
+
+msgid "No expiration"
+msgstr "Nincs lejárat"
+
+msgid "Non-premium support"
+msgstr "Nem prémium támogatás"
+
+msgid "Check this box if this ticket should NOT apply against the paid support"
+msgstr ""
+"Jelölje be ezt a négyzetet, ha ez a jegy NEM vonatkozik a fizetett "
+"támogatásra"
+
+msgid "Remaining"
+msgstr "Többi"
+
+msgid "Link ticket to paid support"
+msgstr "Csatlakoztassa a jegyet a fizetett támogatáshoz"
+
+msgid "Ticket Creator Name"
+msgstr "Jegykészítő neve"
+
+msgid "From Date"
+msgstr "Dátumtól"
+
+msgid "To Date"
+msgstr "Randizni"
+
+msgid "Enforce delete"
+msgstr "Kényszerített törlés"
+
+msgid "Are you sure to enforce delete"
+msgstr "Biztosan törlöd?"
+
+msgid "Are you sure to mark this ticket non-preminum?"
+msgstr "Biztos, hogy ezt a jegyet nem prémium kategóriában jelölte meg?"
+
+msgid "Message Logs"
+msgstr "Üzenetnaplók"
+
+msgid "Edit Timer"
+msgstr "Időzítő szerkesztése"
+
+msgid "Type Note for Department"
+msgstr "Típusjegyzet az osztály számára"
+
+msgid "Assigning Note"
+msgstr "Megjegyzés hozzárendelése"
+
+msgid "Time Track"
+msgstr "Idő nyilvántartás"
+
+msgid "Type Internal Note"
+msgstr "Gépeljen be belső megjegyzés"
+
+msgid "View all %d tickets"
+msgstr "Az összes% d jegy megtekintése"
+
+msgid "Reopen"
+msgstr "újra kinyit"
+
+msgid "History"
+msgstr "Történelem"
+
+msgid "Print"
+msgstr "Nyomtat"
+
+msgid "Are you sure you want to delete this ticket"
+msgstr "Biztosan törli ezt a jegyet"
+
+msgid "Are you sure to close this ticket"
+msgstr "Biztosan bezárja ezt a jegyet"
+
+msgid "Unlock"
+msgstr "Kinyit"
+
+msgid "Reply a message"
+msgstr "Válasz egy üzenetre"
+
+msgid "Select Premade"
+msgstr "Válssz előkészítettet"
+
+msgid "Assign Ticket"
+msgstr "Rendeljen jegyet"
+
+msgid "Assigned To Agent"
+msgstr "Meghatalmazott"
+
+msgid "View all orders"
+msgstr "Az összes megrendelés megtekintése"
+
+msgid "Non-preminum support"
+msgstr "Nem prémium támogatás"
+
+msgid "Check Status"
+msgstr "Ellenőrizd az állapotot"
+
+msgid "Account status"
+msgstr "Fiók státusza"
+
+msgid "Add Premade Message"
+msgstr "Előre elkészített üzenet hozzáadása"
+
+msgid "Add Staff Member"
+msgstr "Személyzeti tag hozzáadása"
+
+msgid "Add System Email"
+msgstr "Rendszer email hozzáadása"
+
+msgid "Add User field"
+msgstr "Felhasználó mező hozzáadása"
+
+msgid "Add new ticket form for both user and staff"
+msgstr "Új jegy hozzáadása űrlap felhasználóknak és személyzetnek"
+
+msgid "Ago"
+msgstr "Óta"
+
+msgid "Already exisits"
+msgstr "Már létrehozva"
+
+msgid "Announcement has been deleted"
+msgstr "Felhívás törölve lett"
+
+msgid "Announcement has been stored"
+msgstr "Felhívás tárolva"
+
+msgid "Announcement has not been deleted"
+msgstr "Felhívás nem lett törölve"
+
+msgid "Announcement has not been stored"
+msgstr "Felhívás nem lett tárolva"
+
+msgid "Append signature with reply"
+msgstr "Aláírás beillesztése válaszokhoz"
+
+msgid "Are you sure to close ticket"
+msgstr "Biztosan bezárod a hibajegyet?"
+
+msgid "Are you sure to delete"
+msgstr "Biztosan törlöd?"
+
+msgid "Article has been deleted"
+msgstr "Bejegyzés törölve lett"
+
+msgid "Article has not been deleted"
+msgstr "Bejegyzés nem lett törölve"
+
+msgid "Assign ticket to staff"
+msgstr "Hibajegy kiosztása személyzetnek"
+
+msgid "Assign to Staff"
+msgstr "Hozzárendelés személyzethez"
+
+msgid "Assign to Staff Member"
+msgstr "Hozzárendelés személyzeti taghoz"
+
+msgid "Assigned to staff"
+msgstr "Személyzetnek kiosztva"
+
+msgid "Attachment has been removed"
+msgstr "Csatolmány törölve lett"
+
+msgid "Attachment has not been removed"
+msgstr "Csatolmány nem lett törölve"
+
+msgid "Auto response for this topic"
+msgstr "Automata válasz a témához"
+
+msgid "Autoresponse"
+msgstr "Automata válasz"
+
+msgid "Ban Email Log List"
+msgstr "Tiltott email-ek listája"
+
+msgid "Ban Email has been stored"
+msgstr "Tiltott email cím tárolva"
+
+msgid "Ban Email has not been deleted"
+msgstr "Tiltott email nem lett törölve"
+
+msgid "Ban Email has not been stored"
+msgstr "Tiltott email cím nem lett tárolva"
+
+msgid "Ban email"
+msgstr "Email cím letiltása"
+
+msgid "Ban email log list"
+msgstr "Tiltott email-ek listája"
+
+msgid "Ban email new ticket"
+msgstr "Új email hibajegy letiltása"
+
+msgid "Banlist log"
+msgstr "Letiltottak listája"
+
+msgid "CURL exist"
+msgstr "Van CURL"
+
+msgid "CURL not exist"
+msgstr "Nincs CURL"
+
+msgid "Can Not mark as not required"
+msgstr "Nem jelölhető nem kötelezőnek!"
+
+msgid "Cannot unpublish field"
+msgstr "Mező publikálását nem lehet visszavonni"
+
+msgid "Category has been deleted"
+msgstr "Kategória törölve lett"
+
+msgid "Category has been stored"
+msgstr "Kategória el lett tárolva"
+
+msgid "Category has not been deleted"
+msgstr "Kategória nem lett törölve"
+
+msgid "Category has not been stored"
+msgstr "Kategória nem lett eltárolva"
+
+msgid "Category in use cannot deleted"
+msgstr "Kategória használatban, nem lehet törölni"
+
+msgid "Component Detail"
+msgstr "Komponens részletei"
+
+msgid "Component for on-line ticket support system"
+msgstr "Online hibajegy kezelő komponens"
+
+msgid "Configuration has been stored"
+msgstr "Beállítások  el lettek tárolva"
+
+msgid "Configuration not has been stored"
+msgstr "Beállítások nem lettek eltárolva"
+
+msgid "Connection established but we cannot ready any email"
+msgstr "Kapcsolat rendben, de nem lehet levelet olvasni"
+
+msgid "Control panel links"
+msgstr "Vezérlőpult linkek"
+
+msgid "Current"
+msgstr "Jelenlegi"
+
+msgid "Data directory can not empty."
+msgstr "Adat könyvtár nem lehet üres"
+
+msgid "Data directory is not writeable."
+msgstr "Adat könyvtár nem írható"
+
+msgid "Database CRUD"
+msgstr "Adatbázis CRUD"
+
+msgid "Database create table not allowed"
+msgstr "Nem lehet adatbázis táblát létrehozni"
+
+msgid "Database delete record not allowed"
+msgstr "Adatbázisból nem lehet törölni"
+
+msgid "Database drop table not allowed"
+msgstr "Adatbázis tábla eldobása nem lehetséges"
+
+msgid "Database insert record not allowed"
+msgstr "Nem lehet az adatbázisba beilleszteni"
+
+msgid "Database update record not allowed"
+msgstr "Adatbázisaban nem lehet frissíteni"
+
+msgid "Date end"
+msgstr "Záró dátum"
+
+msgid "Date start"
+msgstr "Nyitó dátum"
+
+msgid "Day"
+msgstr "Nap"
+
+msgid "Default System Email"
+msgstr "Alapértelmezett rendszer email"
+
+msgid "Default system emails"
+msgstr "Alapértelmezett rendszer emailek"
+
+msgid "Delete ticket"
+msgstr "Hibajegy bezárása"
+
+msgid "Department Under Which The Answer Will Be Made Available"
+msgstr "Osztály, ahol a válasz rendelkezésre fog állni"
+
+msgid "Department has been deleted"
+msgstr "Osztály törölve"
+
+msgid "Department has been stored"
+msgstr "Osztály eltárolva"
+
+msgid "Department has been transfered"
+msgstr "Osztály át lett helyezve"
+
+msgid "Department has not been deleted"
+msgstr "Osztály nem lett törölve"
+
+msgid "Department has not been stored"
+msgstr "Osztály nem lett eltárolva"
+
+msgid "Department has not been transfered"
+msgstr "Osztály nem lett áthelyezve"
+
+msgid "Department in use cannot deleted"
+msgstr "Az osztály használatban van, ezért nem lehet törölni"
+
+msgid "Department is transfered by"
+msgstr "Osztályt áthelyezte:"
+
+msgid "Dir is not writeable"
+msgstr "Könyvtár nem írható"
+
+msgid "Directory"
+msgstr "Könyvtár"
+
+msgid "Directory permissions error"
+msgstr "Könyvtári jogosultság hiba"
+
+msgid "Display name"
+msgstr "Megjelenítendő név"
+
+msgid "Do you have enabled SSL on your domain"
+msgstr "Van érvényes SSL a domained?"
+
+msgid "Documentation"
+msgstr "Dokumentáció"
+
+msgid "Download has been deleted"
+msgstr "Letöltés törölve lett"
+
+msgid "Download has been stored"
+msgstr "Letöltés eltárolva"
+
+msgid "Download has not been deleted"
+msgstr "Letöltés nem lett törölve"
+
+msgid "Download has not been stored"
+msgstr "Letöltés nem lett eltárolva"
+
+msgid "Email address"
+msgstr "Email cím"
+
+msgid "Email has been banned"
+msgstr "Email le lett tiltva"
+
+msgid "Email has been deleted"
+msgstr "Email törölve lett"
+
+msgid "Email has been stored"
+msgstr "Email el lett tárolva"
+
+msgid "Email has not been banned"
+msgstr "Email nem lett letiltva"
+
+msgid "Email has not been deleted"
+msgstr "Email nem lett törölve"
+
+msgid "Email has not been stored"
+msgstr "Email nem lett eltárolva"
+
+msgid "Email send to admin when banned email try to create ticket"
+msgstr ""
+"Tiltott email próbált hibajegyet nyitni, admin email értesítés elküldve"
+
+msgid "Enable ticket via email"
+msgstr "Hibajegy elfogadása emailen keresztül"
+
+msgid "Error applying new theme"
+msgstr "Hiba az új kinézet alkalmazásában"
+
+msgid "Error file ext mismatch"
+msgstr "Hiba: file kiterjesztés nem stimmel"
+
+msgid "Error file not downloaded"
+msgstr "Hiba: file nem töltődött le"
+
+msgid "Error occured"
+msgstr "Hiba történt"
+
+msgid "File Downloaded Successfully"
+msgstr "Fájl sikeresen letöltve"
+
+msgid "File download"
+msgstr "File letöltése"
+
+msgid "File is not writeable"
+msgstr "Fájl nem írható"
+
+msgid "File read write issue files cannot upload"
+msgstr "File írás/olvasási hiba, nem lehet feltölteni"
+
+msgid "File upload limit exceed"
+msgstr "File feltöltések max. száma meghaladva"
+
+msgid "Forum"
+msgstr "Fórum"
+
+msgid "GD library"
+msgstr "GD könyvtár"
+
+msgid "GD library not exist"
+msgstr "Nincs GB könyvtár"
+
+msgid "General Setting"
+msgstr "Általános beállítások"
+
+msgid "Get JS Support Ticket Translations"
+msgstr "Szerezd be az LS Support Ticket fordítását"
+
+msgid "Goto Web"
+msgstr "Látogass meg a weben"
+
+msgid "Help topics"
+msgstr "Súgó témák"
+
+msgid "Host port number to read email from"
+msgstr "A tárhely portszáma, ahonnan az email-t olvassa"
+
+msgid "IMAP is either not installed or not enable in your server"
+msgstr "IMAP nincs installálva vagy engedélyezve a szerveren"
+
+msgid "If system not respond in 30 seconds"
+msgstr "Ha a rendszer nem válaszol 30 másodpercen belül"
+
+msgid "Installation"
+msgstr "Installálás"
+
+msgid "Internal Note Has Been Posted"
+msgstr "Belső megjegyzés lett hozzáadva"
+
+msgid "Internal Note Has Not Been Posted"
+msgstr "Belső megjegyzés nem lett hozzáadva"
+
+msgid "Internal Notes"
+msgstr "Belső megjegyzés"
+
+msgid "Internal note is posted by"
+msgstr "Belső megjegyzést küldött:"
+
+msgid "It may take few minutes"
+msgstr "Egy pár percig eltarthat"
+
+msgid "JS Support Ticket Control Panel"
+msgstr "JS Support Ticket Vezérlőpult"
+
+msgid "JS Support Ticket Pro Installer"
+msgstr "JS Support Ticket Pro telepítés"
+
+msgid "JS Support Ticket main control panel"
+msgstr "JS Support Ticket vezérlőpult"
+
+msgid "JS Ticket Pro Installed Successfully"
+msgstr "JS Ticket Pro sikeresen telepítve"
+
+msgid "Knowledge base article has been stored"
+msgstr "Tudásbázis bejegyzés tárolva lett"
+
+msgid "Knowledge base article has not been stored"
+msgstr "Tudásbázis bejegyzés nem lett tárolva"
+
+msgid "Language directory is not writeable"
+msgstr "A nyelv könyvtár nem írható"
+
+msgid "Lastest Downlods"
+msgstr "Legutóbbi letöltések"
+
+msgid "Latest knowledge base"
+msgstr "Legutóbbi tudásbázis"
+
+msgid "Limit exceeds maximum open tickets"
+msgstr "Elérted a maximum nyitott hibajegyek számát"
+
+msgid "Login into your account"
+msgstr "Jelentkezz be a fiókodba"
+
+msgid "Login/Logout button"
+msgstr "Bejelentkezés/Kijelentkezés gomb"
+
+msgid "Mail Setting"
+msgstr "Email beállítások"
+
+msgid "Mail cannot mark as read"
+msgstr "Az emailt nem lehet olvasottnak jelölni"
+
+msgid "Mail has been mark as read"
+msgstr "Email olvasottá jelölve"
+
+msgid "Mail has been send"
+msgstr "Email elküldve"
+
+msgid "Mail has not been mark as read"
+msgstr "Email nem lett olvasottnak jelölve"
+
+msgid "Mail has not been send"
+msgstr "Email nem lett elküldve"
+
+msgid "Mail mark as read"
+msgstr "Olvasottnak jelöl"
+
+msgid "Mail mark as unread"
+msgstr "Nem-olvasottnak jelöl"
+
+msgid "Mannual Download"
+msgstr "Letöltés manuálisan"
+
+msgid "Max record"
+msgstr "Bejegyzések maximuma"
+
+msgid "More Detail"
+msgstr "Több részlet"
+
+msgid "More Option"
+msgstr "Több választási lehetőség"
+
+msgid "My tickets for both user and staff"
+msgstr "Saját hibajegyeim felhasználóknak és személyzetnek"
+
+msgid "New Department"
+msgstr "Új osztály"
+
+msgid "New Help Topic"
+msgstr "Új súgó téma"
+
+msgid "New Staff"
+msgstr "Új személyzet"
+
+msgid "New Version Is Available"
+msgstr "Új verzió érhető el"
+
+msgid "New theme has been applied"
+msgstr "Következő kinézet alkalmazva"
+
+msgid "Next step"
+msgstr "Következő lépés"
+
+msgid "No premade found"
+msgstr "Nem található előkészítés"
+
+msgid "Not assigned to staff"
+msgstr "Nincs személyzetnek kiosztva"
+
+msgid "Oooops"
+msgstr "Hoppá.."
+
+msgid "Opsss...."
+msgstr "Hoppá!"
+
+msgid "Our Products"
+msgstr "Termékeink"
+
+msgid "PHP version smaller then recomended"
+msgstr "PHP öregebb mint kéne"
+
+msgid "Password for given email address"
+msgstr "A megadott email címhez tartozó jelszó"
+
+msgid "Please enable ticket via email setting first"
+msgstr "Először engedélyezd  a hibajegy emailből beállítást"
+
+msgid "Please enter the google recaptcha private key from"
+msgstr "Add meg a Google recaptcha privát kulcsot"
+
+msgid "Please enter the google recaptcha public key from"
+msgstr "Add meg a Google recaptcha publikus kulcsot"
+
+msgid "Please insert activation key and press start"
+msgstr "Írd be az aktivációs kulcsot és nyomd meg a startot"
+
+msgid "Please select atleast one category for"
+msgstr "Válassz legalább egy kategóriát"
+
+msgid "Popular knoweldge base"
+msgstr "Népszerű tudásbázis"
+
+msgid "Post internal note"
+msgstr "Belső megjegyzés beküldése"
+
+msgid "Posted by"
+msgstr "Beküldte:"
+
+msgid "Premade Messages"
+msgstr "Előre elkészített üzenetek"
+
+msgid "Premade department message has been stored"
+msgstr "Előre elkészített osztály üzenet eltárolva"
+
+msgid "Premade department message has not been stored"
+msgstr "Előre elkészített osztály üzenet nem lett eltárolva"
+
+msgid "Premade message"
+msgstr "Előkészített üzenet"
+
+msgid "Publish"
+msgstr "Publikál"
+
+msgid "Quick Configuration"
+msgstr "Gyors beálítások"
+
+msgid "Recomended"
+msgstr "Ajánlott"
+
+msgid "Redirect user to JS Support Ticket control panel after login"
+msgstr "Bejelentkezés után átirányítás a JS Support Ticket vezérlőpultjába"
+
+msgid "Reply has been posted"
+msgstr "Válasz beküldve"
+
+msgid "Reply has not been posted"
+msgstr "Válasz nem lett beküldve"
+
+msgid "Report By User"
+msgstr "Kimutatások felhasználó által"
+
+msgid "Report By Users"
+msgstr "Kimutatások felhasználók által"
+
+msgid "Requester Info"
+msgstr "Kérelmező adatai"
+
+msgid "Role has been deleted"
+msgstr "Szerepkör törölve lett"
+
+msgid "Role has been stored"
+msgstr "Szerepkör el lett tárolva"
+
+msgid "Role has not been deleted"
+msgstr "Szerepkör nem lett törölve"
+
+msgid "Role has not been stored"
+msgstr "Szerepkör nem lett eltárolva"
+
+msgid "Save Staff Member"
+msgstr "Személyzeti tag mentése"
+
+msgid "Save User Field"
+msgstr "Felhasználói mező mentése"
+
+msgid "Save attachments if found in email"
+msgstr "Csatolmányok mentése amennyiben email tartalmazza"
+
+msgid "Save email template"
+msgstr "Email sablon mentése"
+
+msgid "Save premade message"
+msgstr "Előre elkészített üzenet mentése"
+
+msgid "Search Announcement"
+msgstr "Felhívás keresése"
+
+msgid "Search Download"
+msgstr "Letöltés keresése"
+
+msgid "Search FAQ"
+msgstr "Keresés GY.I.K.-ben"
+
+msgid "Search Knowledge Base"
+msgstr "Keresés a tudásbázisban"
+
+msgid "Select Staff"
+msgstr "Válassz személyzetet"
+
+msgid "Select department"
+msgstr "Válassz osztályt"
+
+msgid "Select priority"
+msgstr "Válassz prioritást"
+
+msgid "Service is running please close the page"
+msgstr "A szolgáltatás fut, kérlek zárd be ezt az oldalt"
+
+msgid "Set no. of days to mark ticket as overdue"
+msgstr "Állítsd be a napok számát a határidőn túli megjelöléshez"
+
+msgid "Setting"
+msgstr "Beállítás"
+
+msgid "Show Detail"
+msgstr "Részletek mutatása"
+
+msgid "Show captcha on visitor form ticket"
+msgstr "Látogatónak mutasd a captcha-t"
+
+msgid "Show captcha when visitor want to create ticket"
+msgstr "Mutasd a captcha-t ha látogató akar jegyet nyitni"
+
+msgid "Show latest FAQ's. Options:"
+msgstr "Legutóbbi GY.I.K. bejegyzések. Opciók:"
+
+msgid "Show latest announcements. Options:"
+msgstr "Legutóbbi felhívások. Opciók:"
+
+msgid "Show latest downloads. Options:"
+msgstr "Legutóbbi letöltések: Opciók:"
+
+msgid "Show latest knowledge base. Options:"
+msgstr "Legutóbbi tudásbázis bejegyzések. Opciók:"
+
+msgid "Show new and reply mail notifications"
+msgstr "Mutasd az új és a megválaszolt értesítéseket"
+
+msgid "Show number of open, closed, answered ticket in my ticket"
+msgstr "Mutasd a nyitott, zárt, megválaszolt jegyeket a saját hibajegyeimben"
+
+msgid "Show popular FAQ's. Options:"
+msgstr "Népszerű GY.I.K. bejegyzések. Opciók:"
+
+msgid "Show popular announcements. Options:"
+msgstr "Népszerű felhívások. Opciók:"
+
+msgid "Show popular downloads. Options:"
+msgstr "Népszerű letöltések. Opciók:"
+
+msgid "Show popular knowledge base. Options:"
+msgstr "Népszerű tudásbázis bejegyzések. Opciók:"
+
+msgid "Some thing wrong try again later"
+msgstr "Valami nem sikerült, próbáld meg később"
+
+msgid "Staff Member"
+msgstr "Személyzeti tag"
+
+msgid "Staff Members"
+msgstr "Személyzet tagjai"
+
+msgid "Staff Menu Setting"
+msgstr "Személyezet menü beállításai"
+
+msgid "Staff Section"
+msgstr "Személyzet"
+
+msgid "Staff Ticket"
+msgstr "Személyzeti hibajegy"
+
+msgid "Staff member has been deleted"
+msgstr "Személyzet tagja törölve lett"
+
+msgid "Staff member has been stored"
+msgstr "Személyzet tagja eltárolva"
+
+msgid "Staff member has not been deleted"
+msgstr "Személyzet tagja nem lett törölve"
+
+msgid "Staff member has not been stored"
+msgstr "Személyzet tagja nem lett eltárolva"
+
+msgid "Staff member in use cannot deleted"
+msgstr "Személyzet tagja használatban, ezért nem lehet törölni"
+
+msgid "Staff member name"
+msgstr "Személyzeti tag neve"
+
+msgid "Start using"
+msgstr "Kezd el használni"
+
+msgid "Support Area"
+msgstr "Támogatási terület"
+
+msgid "System Slug"
+msgstr "Rendszer kereső-barát név"
+
+msgid "System slug is confilicted with post or page slug."
+msgstr "Rendszer kereső-barát neve ütközik a bejegyzés vagy oldal névvel"
+
+msgid "Thanks For Installing JS Ticket Pro"
+msgstr "Köszönjük, hogy telepítetted a JS Ticket Pro-t"
+
+msgid "This message will show on new ticket"
+msgstr "Ez az üzenet megjelenik az új hibajegyeken"
+
+msgid "Ticket Department Transfer"
+msgstr "Hibajegy oszályra küldése"
+
+msgid "Ticket Operations Mail Setting"
+msgstr "Hibajegy műveletek email beállítása"
+
+msgid "Ticket Response Staff"
+msgstr "Hibajegy kezelő személyzet"
+
+msgid "Ticket Via Email"
+msgstr "Hibajegy emailből"
+
+msgid "Ticket auto close if user not respond within given days"
+msgstr ""
+"Hibajegy automatikus lezárása amennyiben a felhasználó nem jelentkezik ennyi "
+"napon belül"
+
+msgid "Ticket can be reopen within given number of days"
+msgstr "A hibajegy ennyi napon belül újranyitható"
+
+msgid "Ticket has been locked"
+msgstr "Hibajegy fel nett függesztve"
+
+msgid "Ticket has been marked as in progress"
+msgstr "A hibajegy folyamatban státuszt kapott"
+
+msgid "Ticket has been marked as overdue"
+msgstr "A jegy határidőn túlinak lett jelölve"
+
+msgid "Ticket has been reopend"
+msgstr "Hibajegy újra lett nyitva"
+
+msgid "Ticket has been stored"
+msgstr "Hibajegy el lett tárolva"
+
+msgid "Ticket has been unlocked"
+msgstr "A hibajegy felfüggesztése megszűnt"
+
+msgid "Ticket has not been locked"
+msgstr "Hibajegy nem lett felfüggesztve"
+
+msgid "Ticket has not been marked as in progress"
+msgstr "A hibajegy nem kaoptt folyamatban státuszt"
+
+msgid "Ticket has not been marked as overdue"
+msgstr "A jegy nem lett határidőn túlinak jelölve"
+
+msgid "Ticket has not been reopened"
+msgstr "Hibajegy nem lett újranyitva"
+
+msgid "Ticket has not been stored"
+msgstr "Hibajegy nem lett eltárolva"
+
+msgid "Ticket has not been unlocked"
+msgstr "A hibajegy felfüggesztése nem szűnt meg"
+
+msgid "Ticket is assigned to staff by"
+msgstr "Hibajegyet kiosztotta:"
+
+msgid "Ticket is locked"
+msgstr "Hibajegy felfüggesztve"
+
+msgid "Ticket is locked by"
+msgstr "A Hibajegyet felfüggesztette:"
+
+msgid "Ticket is marked as in progress by"
+msgstr "A hibajegyet folyamatban státuszba helyezte:"
+
+msgid "Ticket is marked as overdue by"
+msgstr "A hibajegyet határidőn túlinak jelölte:"
+
+msgid "Ticket is reopened by"
+msgstr "A hibajegyet újranyitotta:"
+
+msgid "Ticket is unlocked by"
+msgstr "Hibajegy felfüggesztését megszüntette:"
+
+msgid "Ticket mark overdue"
+msgstr "Hibajegy határidőn túlinak jelölve"
+
+msgid "Ticket reopen time limit end"
+msgstr "Hibajegy újranyitásának legkésőbbi ideje"
+
+msgid "Tickets By Staff"
+msgstr "Hibajegyek személyzettől"
+
+msgid "Tickets by priorities"
+msgstr "Hibajegyek prioritásonként"
+
+msgid "To Use This Feature You Must Be Staff Memeber"
+msgstr "A funkció használatához személyzetnek kell lenned"
+
+msgid "To access this page please login"
+msgstr "Az oldal megjelenítéséhez be kell jelentkezned"
+
+msgid "Today"
+msgstr "Ma"
+
+msgid "Top menu links"
+msgstr "Fejléc menü linkek"
+
+msgid "Type"
+msgstr "Típus"
+
+msgid "Unable Connect To Server"
+msgstr "Nem tudtam a szerverhez kapcsolódni"
+
+msgid "Unable to connect to server"
+msgstr "Nem tudtam a szerverhez kapcsolódni"
+
+msgid "Update"
+msgstr "Frissítés"
+
+msgid "Use Search Feature To Select The User"
+msgstr "Használd a keresés funkciót a felhasználó kiválasztásához"
+
+msgid "User Menu Setting"
+msgstr "Felhasználó menü beállításai"
+
+msgid "User already staff member"
+msgstr "A felhaszláló már tagja a személyzetnek"
+
+msgid "User id"
+msgstr "Felhasználó ID"
+
+msgid "View"
+msgstr "Megmutat"
+
+msgid "View Ticket"
+msgstr "Hibajegy megtekintése"
+
+msgid "Visitor published"
+msgstr "Látogató publikálva"
+
+msgid "Waiting Customer Reply"
+msgstr "Felhasználó válaszára vár"
+
+msgid "Waiting Staff Reply"
+msgstr "Személyzet válaszára vár"
+
+msgid "Waiting reply"
+msgstr "Válaszra vár"
+
+msgid "Waiting staff reply"
+msgstr "Személyzet válaszára vár"
+
+msgid "Would you like to add this type to parent"
+msgstr "Szeretné hozzáadni ezt a típust a szülőhöz"
+
+msgid "You are Already Logged in"
+msgstr "Már bejelentkezett"
+
+msgid "You are not allowed to view this page"
+msgstr "Az oldal megjelenítése számodra nem engedélyezett"
+
+msgid "You are not logged in"
+msgstr "Nincs bejelentkezve"
+
+msgid "You are not staff member"
+msgstr "Nem vagy a személyzet tagja"
+
+msgid "You cannot unmark it"
+msgstr "Nem tudod a kijelölést visszavonni"
+
+msgid "Your parent does not have this type"
+msgstr "Szülõdnek nincs ilyen típusa"
+
+msgid "Your System Is Up To Date"
+msgstr "A rendszered friss"
+
+msgid "Your account is disabled please contact to administrator"
+msgstr "Fiókod le lett tiltva, kérd az admin segítségét"
+
+msgid "Your child have this type"
+msgstr "Gyermekenek ilyen típusa van"
+
+msgid "Your setting is working please save the setting"
+msgstr "A beállítás működik, kérlek mentsd el"
+
+msgid "Zip library"
+msgstr "Zip könyvtár"
+
+msgid "Zip library not exist"
+msgstr "Nincs Zip könyvtár"
+
+msgid "directory is not writeable"
+msgstr "a könyvtár nem írható"
+
+msgid "extension"
+msgstr "kiterjesztés"
+
+msgid "override department setting"
+msgstr "osztály beáll0tások felülírása"
+
+msgid "Add Files"
+msgstr "Fájl hozzáadása"
+
+msgid "Add Userfield"
+msgstr "Felhasználói mező hozzáadása"
+
+msgid "Are you sure delete"
+msgstr "Biztosan törlöd?"
+
+msgid "Assign User Permissions"
+msgstr "Felhasználói szerepkör jogosultságok hozzárendelése"
+
+msgid "Assign to"
+msgstr "Hozzárendelés a következőhőz:"
+
+msgid "Blocked"
+msgstr "Blokkolt"
+
+msgid "Change ticket priority"
+msgstr "Hibajegy prioritás váltás"
+
+msgid "Check box"
+msgstr "Jelölőnégyzet"
+
+msgid "Control Panel Coulmn"
+msgstr "Vezérlőpult oszlop"
+
+msgid "Data directory in not writable"
+msgstr "Adat könyvtár nem írható"
+
+msgid "Depandent field"
+msgstr "Függő mező"
+
+msgid "Dir not exist"
+msgstr "A könyvtár nem létezik"
+
+msgid "Display #"
+msgstr "Kijelző #"
+
+msgid "Drop down"
+msgstr "Legördülő menü"
+
+msgid "Due Date"
+msgstr "Határidő"
+
+msgid "Email already exist"
+msgstr "Az email már létezik"
+
+msgid "Email reads sucessfully"
+msgstr "Email sikeresen olvasható"
+
+msgid "Empty values are not allowed"
+msgstr "Üresen hagyás nem megengedett"
+
+msgid "Enable print ticket"
+msgstr "Hibajegy nyomtatás engedélyezése"
+
+msgid "Field Name"
+msgstr "Mező neve"
+
+msgid "Field mark ordering down"
+msgstr "A mezőjelek sorrendje"
+
+msgid "Get JS Tickets Translations"
+msgstr "Get JS Jegyek fordítása"
+
+msgid "Invalid data directory"
+msgstr "Érvénytelen adat könyvtár"
+
+msgid "Jstickets Uninstall Text"
+msgstr "A szövegek eltávolítása"
+
+msgid "Language Translations"
+msgstr "Nyelvi fordítások"
+
+msgid "Loading"
+msgstr "Betölt"
+
+msgid "Multi select"
+msgstr "Többszörös kijelölés"
+
+msgid "New Mail Message Recevied"
+msgstr "Új email üzenet érkezett"
+
+msgid "New Mail Receviced"
+msgstr "Új email érkezett"
+
+msgid "Not assigned"
+msgstr "Nincs kiosztva"
+
+msgid "Not default"
+msgstr "Nem alapértelmezett"
+
+msgid "Operation Cancel"
+msgstr "Művelet megszakítása"
+
+msgid "Page not found"
+msgstr "Oldal nem található"
+
+msgid "Permission"
+msgstr "Jogosultságok"
+
+msgid "Phone"
+msgstr "Telefon"
+
+msgid "Phone Ext"
+msgstr "Mellék"
+
+msgid "Premade"
+msgstr "Előre elkészített"
+
+msgid "Print ticket"
+msgstr "Hibajegy nyomtatása"
+
+msgid "Radio button"
+msgstr "Rádió gomb"
+
+msgid "Read only"
+msgstr "Csak olvasás"
+
+msgid "Reply has not been stored"
+msgstr "Válasz nem lett eltárolva"
+
+msgid "Required language is not installed"
+msgstr "A szükséges nyelv nincs telepítve"
+
+msgid "Save Role Permission"
+msgstr "Szerepkör jogosultság mentése"
+
+msgid "Select parent field"
+msgstr "Válassz szülő mezőt"
+
+msgid "Select','js-jobs"
+msgstr "Kiválasztás '' js-jobs"
+
+msgid "Staff Members Control Panel Links"
+msgstr "Személyzeti vezérlőpult linkek"
+
+msgid "Staff Members Top Menu Links"
+msgstr "Személyzeti fejléc menü linkek"
+
+msgid "Text"
+msgstr "Szöveg"
+
+msgid "Text area"
+msgstr "Szövegmező"
+
+msgid "Text field"
+msgstr "Szöveg mező"
+
+msgid "Ticket in use cannot deleted"
+msgstr "A hibajegy használatban van, nem lehet törölni"
+
+msgid "Ticket mark in progress"
+msgstr "Hibajegy jelölése - folyamatban"
+
+msgid "Unknown"
+msgstr "Ismeretlen"
+
+msgid "Upload file"
+msgstr "Fájlfeltöltés"
+
+msgid "Use The Table Below To Add New Values"
+msgstr "Új értékek hozzáadásához használd az alábbi táblázatot"
+
+msgid "User Control Panel Links"
+msgstr "Felhasználói vezérlőpult linkek"
+
+msgid "User Top Menu Links"
+msgstr "Felhasználói fejléc menü linkek"
+
+msgid "User field has been deleted"
+msgstr "Felhasználó mező törölve lett"
+
+msgid "User field has been stored"
+msgstr "Felhasználó mező el lett tárolva"
+
+msgid "User field has not been deleted"
+msgstr "Felhasználó mező nem lett törölve"
+
+msgid "User field has not been stored"
+msgstr "Felhasználó mező nem lett eltárolva"
+
+msgid "Values Between 1 T0 12 Default Is 3"
+msgstr "1 és 12 közötti érték. Alapértelmezett: 3"
+
+msgid "View all"
+msgstr "Mindent mutat"
+
+msgid "Visitor Menu Setting"
+msgstr "Látogatói menü beállításai"
+
+msgid "Waiting admin/staff reply"
+msgstr "Admin/személyzet válaszára vár"
+
+msgid "is not writeable"
+msgstr "Nem írható"
+
+msgid "show print ticket icon on ticketdetail page to user"
+msgstr "Hibajegy nyomtatás ikon mutatása a felhasználónak"
+
+msgid "Form Category"
+msgstr "Űrlap kategória"
+
+msgid "You are not allowed to view this ticket"
+msgstr "A hibajegy megtekintése nem férhető hozzá!"
+
+msgid "You have already provided feedback for this ticket"
+msgstr "Már adtál visszajelzést erre a hibajegyre!"
+
+msgid "Ticket not found"
+msgstr "Nincs ilyen hibajegy"
+
+msgid "Thank you for your feedback"
+msgstr "Köszönjük visszajelzésed!"
+
+msgid "Feedback Setting"
+msgstr "Visszajelzési beállítások"
+
+msgid "Interval type to mark ticket as overdue"
+msgstr "Intervalltípus a jegy lejártnak való megjelölésére"
+
+msgid "Set no. of days or hours to mark ticket as overdue"
+msgstr "Szett napok vagy órák száma, hogy jegye lejárt legyen"
+
+msgid "Select whether you want to show captcha on registration form or not"
+msgstr "Válassza ki, hogy a captcha megjelenik-e a regisztrációs űrlapon"
+
+msgid "Select role you want to assign to new users"
+msgstr "Válassz szerepkört az új felhasználókhoz"
+
+msgid "Select whether users can reply to closed ticket via email or not"
+msgstr ""
+"Válassz, hogy válaszolhat-e a felhasználó email-ben egy lezárt hibajegyre"
+
+msgid "This text will appear whenever visitor creates ticket"
+msgstr "Ez a szöveg akkor jelenik meg, amikor a látogató jegyet készít"
+
+msgid "Set no. of days or hours to send feedback email after ticket is closed"
+msgstr ""
+"Szett napok vagy órák száma, hogy visszajelzést küldjön e-mailt a jegy "
+"lezárása után"
+
+msgid "Feedback Successful message to customer"
+msgstr "Visszajelzés Sikeres üzenet az ügyfélnek"
+
+msgid "You cannot use this email it is used in ticket via email"
+msgstr "Ezt az e-mailt nem használhatja, mivel e-mailben használja a jegyekben"
+
+msgid "User of this department will receive email on new ticket"
+msgstr ""
+"Az adott osztály felhasználója fogj email-t kapni új hibajegy létrehozásakor"
+
+msgid "Departent Report"
+msgstr "Osztály jelentése"
+
+msgid "Users tickets"
+msgstr "Felhasználók hibajegyei"
+
+msgid "Users Ticekts"
+msgstr "Felhasználó hibajegyei"
+
+msgid "Edit reason"
+msgstr "Az ok szerkesztése"
+
+msgid "Answerd"
+msgstr "válaszol"
+
+msgid "Select Staff Member"
+msgstr "Válassza ki a személyzet tagját"
+
+msgid "Provide Feedback"
+msgstr "Visszajelzés"
+
+msgid "Field Parent has not been stored"
+msgstr "A Szülő mezőt nem tárolta"
+
+msgid "Please Insert Atleat one value for every option"
+msgstr "Kérjük, írjon minden opcióhoz Legalább egy értéket"
+
+msgid "Add New"
+msgstr "Új"
+
+msgid "User Field"
+msgstr "Felhasználói mező"
+
+msgid "Misc"
+msgstr "Egyéb"
+
+msgid "We'd love to hear from"
+msgstr "Szeretnénk hallani"
+
+msgid "You"
+msgstr "te"
+
+msgid "Departments Reports"
+msgstr "Osztályok jelentései"
+
+msgid "Staff Feedbacks"
+msgstr "A személyzet visszajelzése"
+
+msgid "Password Again"
+msgstr "Jelszó mégegyszer"
+
+msgid "Register New Account"
+msgstr "Új fiók regisztrálása"
+
+msgid "Tickets Updater"
+msgstr "Jegyek Updater"
+
+msgid "Report By Department"
+msgstr "Osztály jelentése"
+
+msgid "out of"
+msgstr "kívül"
+
+msgid "Report By Deparments"
+msgstr "Osztályok által készített jelentés"
+
+msgid "Deparments"
+msgstr "Osztályok"
+
+msgid "No Data"
+msgstr "Nincs adat"
+
+msgid "Staff Report"
+msgstr "Személyzeti jelentés"
+
+msgid "Date From"
+msgstr "Dátum -tól / -től"
+
+msgid "Date To"
+msgstr "Dátum:"
+
+msgid "My Reports"
+msgstr "Saját jelentéseim"
+
+msgid "Staff Members Reports"
+msgstr "Az alkalmazottak jelentései"
+
+msgid "Ticket has been created"
+msgstr "Hibajegy sikeres"
+
+msgid "Issue Summary"
+msgstr "Problémák összefoglalása"
+
+msgid "All Downloads"
+msgstr "Minden letöltés"
+
+msgid "Low"
+msgstr "Alacsony"
+
+msgid "Customer Feedbacks"
+msgstr "Felhasználói visszajelzés"
+
+msgid "Upload"
+msgstr "Feltöltés"
+
+msgid "Ticketid"
+msgstr "Hibajegy ID"
+
+msgid "Duedate Ticket"
+msgstr "Hibajegy határidő"
+
+msgid "New Ticket Notification"
+msgstr "Új jegyértesítés"
+
+msgid "Edit Own Time"
+msgstr "Saját idő szerkesztése"
+
+msgid "View Feedback"
+msgstr "Visszajelzés megtekintése"
+
+msgid "Assign Role Permissions"
+msgstr "Szerepkör-engedélyek hozzárendelése"
+
+msgid "Assign Role To User"
+msgstr "Szerepkör felhasználóhoz rendelése"
+
+msgid "Add User"
+msgstr "Felhasználó hozzáadása"
+
+msgid "Edit User"
+msgstr "Felhasználó szerkesztése"
+
+msgid "Delete Department"
+msgstr "Osztály törlése"
+
+msgid "View Department"
+msgstr "Osztály megtekintése"
+
+msgid "Delete Role"
+msgstr "Szerepkör törlése"
+
+msgid "Delete User"
+msgstr "Felhasználó törlése"
+
+msgid "View Role"
+msgstr "Szerepkör megtekintése"
+
+msgid "View User"
+msgstr "Felhasználó megtekintése"
+
+msgid "View Staff Reports"
+msgstr "Személyzeti kimutatások megtekintése"
+
+msgid "View Department Reports"
+msgstr "Osztály kimutatások megtekintése"
+
+msgid "View Category"
+msgstr "Kategória megtekintése"
+
+msgid "View Knowledge Base"
+msgstr "Tudásbázis megtekintése"
+
+msgid "Delete Category"
+msgstr "Kategória törlése"
+
+msgid "Delete Knowledge Base"
+msgstr "Tudásbázis törlése"
+
+msgid "View FAQ"
+msgstr "GyIK megtekintése"
+
+msgid "Delete FAQ"
+msgstr "GyIK törlése"
+
+msgid "View Download"
+msgstr "Letöltés megtekintése"
+
+msgid "Delete Download"
+msgstr "Letöltés törlése"
+
+msgid "View Announcement"
+msgstr "Figyelmeztető megtekintése"
+
+msgid "Delete Announcement"
+msgstr "Figyelmeztető törlése"
+
+msgid "Allow Mail System"
+msgstr "Levelező engedélyezése"
+
+msgid "Internal Note Title"
+msgstr "Belső megjegyzés címe"
+
+msgid "Satisfaction Reports"
+msgstr "Elégedettségi kimutatások"
+
+msgid "Exports"
+msgstr "Exportok"
+
+msgid "Customer Satisfaction Report"
+msgstr "Felhasználó Megelégedettség Beszámoló"
+
+msgid "Please wait installation in progress"
+msgstr "Várj, a istallálás folyamatban van..."
+
+msgid "Show Captcha To Visitor On Form Ticket"
+msgstr "Mutassa a látogatónak a Captcha-t a hibajegyen"
+
+msgid "Feedback Email Settings"
+msgstr "Visszajelző Email Beállítások"
+
+msgid "Feedback successfully stored message"
+msgstr "Visszajelzés sikeresen tárolva"
+
+msgid "Ticket Fields"
+msgstr "Hibajegy mezők"
+
+msgid "Export Tickets"
+msgstr "Hibajegyek exportálása"
+
+msgid "High"
+msgstr "Magas"
+
+msgid "Ticket has been unmarked as overdue"
+msgstr "A jegyet lejártként jelölték meg"
+
+msgid "Ticket has not been unmarked as overdue"
+msgstr "A jegyet nem jelölték meg, mint lejárt"
+
+msgid "Ticket is unmarked as overdue by"
+msgstr "A jegyet nem jelölték le, mint lejárt"
+
+msgid "Assigned To Me"
+msgstr "Hozzám rendeltek"
+
+msgid "Management"
+msgstr "Menedzselés"
+
+msgid "Ticket Id"
+msgstr "Hibajegy ID"
+
+msgid "Assign To"
+msgstr "Hozzárendelés"
+
+msgid "Show on listing"
+msgstr "Látsszon a listázáson"
+
+msgid "Remarks"
+msgstr "Megjegyzések:"
+
+msgid "You are not login"
+msgstr "Nincs bejelentkezve"
+
+msgid "Pro Features"
+msgstr "PRO verzió jellemzők"
+
+msgid "Upgrade"
+msgstr "Frissítés"
+
+msgid "Feature available in pro version only"
+msgstr "Ez a funkció csak a PRO verzióban érhető el"
+
+msgid "JS Support Ticket Pro Feature"
+msgstr "JS Support Ticket Pro szolgáltatás"
+
+msgid "Unlimited color tools to desire result"
+msgstr "Korlátlan színes eszközök az eredmény elérése érdekében"
+
+msgid "Access Control Level"
+msgstr "Beléptetés ellenőrzési szintje"
+
+msgid "Access control limit you can limit your staff to do specific task"
+msgstr ""
+"Belépési korlátozás: korlátozhatja az alkalmazottakat az adott feladat "
+"elvégzésében"
+
+msgid "Staff member create premade message premade available in ticket reply"
+msgstr ""
+"Az alkalmazott előre elkészített üzenetet készít előzetesen elérhetővé, a "
+"jegy válaszában"
+
+msgid "Staff member can be created and reply your customer tickets"
+msgstr ""
+"Az alkalmazottat létrehozhatják és megválaszolhatják a vásárlói jegyeket"
+
+msgid "Help topic can be add with respect to departments"
+msgstr "A súgó téma az osztályok vonatkozásában adható hozzá"
+
+msgid "You can create and maintain knowledge Base for your ticket system"
+msgstr "Készíthet és fenntarthat tudásalapot a jegyrendszeréhez"
+
+msgid "You can add downloads for your customers"
+msgstr "Hozzáadhat letöltéseket az ügyfelek számára"
+
+msgid "Add announcements for your support system"
+msgstr "Adjon hozzá értesítéseket a támogatási rendszeréhez"
+
+msgid "You can Manager FAQs"
+msgstr "Kezelheti a GYIK-ot"
+
+msgid "You can ban and unabn any spam email address"
+msgstr "Bármely spam e-mail címet tilthat és visszavonhat"
+
+msgid "If and only if customer not reply certain days ticket marked overdue"
+msgstr "Csak akkor, ha az ügyfél nem válaszol bizonyos napokra esedékes jegyet"
+
+msgid "System will read your email and create tickets"
+msgstr "A rendszer elolvassa az e-mailt, és jegyeket készít"
+
+msgid "Internal notes for staff members and administrator ticket based"
+msgstr "Belső megjegyzések az alkalmazottak és a rendszergazdai jegy alapján"
+
+msgid "Assign To Staff"
+msgstr "Hozzárendelés személyzethez"
+
+msgid "Ticket can be transferred to any other staff member"
+msgstr "A jegy átvihető bármilyen más alkalmazottra"
+
+msgid "Ticket can also be transferred to any other department"
+msgstr "A jegy átvihető bármilyen más osztályba"
+
+msgid "Activity Log"
+msgstr "Aktivitási napló"
+
+msgid "Ticket action history with time and user name"
+msgstr "Hibajegy történet idő és felhasználó szerint"
+
+msgid "Admin can export tickets in csv format to keep record"
+msgstr ""
+"Az adminisztrátor a jegyek csv formátumban exportálható a nyilvántartás "
+"megőrzése érdekében"
+
+msgid "Customer Feedback"
+msgstr "Felhasználó visszajelzés"
+
+msgid "Customer can provide feedback that can be used to improve services"
+msgstr "Az ügyfél visszajelzést nyújthat a szolgáltatások javításához"
+
+msgid "RTL Supported"
+msgstr "RTL támogatott"
+
+msgid "JS Support Ticket auto adjusts to RTL or LTR without any problem."
+msgstr ""
+"A JS támogatási jegy automatikusan RTL vagy LTR értékre állítja be a "
+"problémákat."
+
+msgid "Staff Time Tracking"
+msgstr "A személyzet időkövetése"
+
+msgid "Visitor Ticket Open"
+msgstr "Látogatói hibajegy nyitva"
+
+msgid "Visitor can also open ticket in you support system"
+msgstr "A látogató jegyeket is megnyithat az Ön támogatási rendszerében"
+
+msgid "You can now lock or unlock any ticket for certain time"
+msgstr "Most bármilyen jegyet zárolhat vagy kinyithat egy bizonyos ideig"
+
+msgid "Pro version only"
+msgstr "Csak a PRO verzióban"
+
+msgid "Email"
+msgstr "Email"
+
+msgid "Add Agent"
+msgstr "Ügynök hozzáadása"
+
+msgid "This ticket is marked as overdue"
+msgstr "Ez a jegy lejártként van megjelölve"
+
+msgid "Ticket marked as overdue"
+msgstr "A jegy lejártként megjelölve"
+
+msgid "Log"
+msgstr "Napló"
+
+msgid "Offline"
+msgstr "Offline"
+
+msgid "Gmail"
+msgstr "Gmail"
+
+msgid "Yahoo"
+msgstr "Jehu"
+
+msgid "Aol"
+msgstr "Aol"
+
+msgid "Hotmail"
+msgstr "Hotmail"
+
+msgid "Wget"
+msgstr "Wget"
+
+msgid "Curl"
+msgstr "Becsavar"
+
+msgid "URL"
+msgstr "URL"
+
+msgid "JYes"
+msgstr "Igen"
+
+msgid "JNo"
+msgstr "JNo"
+
+msgid "Logo"
+msgstr "Logó"
+
+msgid "JS Support Ticket"
+msgstr "JS támogatási jegy"
+
+msgid "Please select"
+msgstr "Kérlek, válassz"
+
+msgid "GDPR"
+msgstr "GDPR"
+
+msgid "Agent Ticket"
+msgstr "Ügynökjegy"
+
+msgid "JS Help Desk"
+msgstr "JS Help Desk"
+
+msgid "Google Recaptcha"
+msgstr "Google Recaptcha"
+
+msgid "MailChimp"
+msgstr "MailChimp"
+
+msgid "Online"
+msgstr "Online"
+
+msgid "Kb"
+msgstr "Kb"
+
+msgid "Breadcrumbs"
+msgstr "Zsemlemorzsa"
+
+msgid "Ticket Response Agent"
+msgstr "Ticket Response Agent"
+
+msgid "Auth Domain"
+msgstr "Auth Domain"
+
+msgid "Firebase Auth Domain"
+msgstr "Firebase Auth Domain"
+
+msgid "Database Url"
+msgstr "Adatbázis URL"
+
+msgid "Firebase Database URL"
+msgstr "Firebase-adatbázis URL-je"
+
+msgid "Firebase Project Id"
+msgstr "Firebase projektazonosító"
+
+msgid "Message Sender Id"
+msgstr "Üzenet küldő azonosítója"
+
+msgid "Api Key"
+msgstr "Api kulcs"
+
+msgid "SMTP"
+msgstr "SMTP"
+
+msgid "TLS"
+msgstr "TLS"
+
+msgid "SSL"
+msgstr "SSL"
+
+msgid "SMTP host"
+msgstr "SMTP gazdagép"
+
+msgid "SMTP Secure"
+msgstr "SMTP Biztonságos"
+
+msgid "info"
+msgstr "info"
+
+msgid "50%"
+msgstr "50%"
+
+msgid "100%"
+msgstr "100%"
+
+msgid "Link"
+msgstr "Link"
+
+msgid "job plugin"
+msgstr "job plugin"
+
+msgid "lms plugin"
+msgstr "lms beépülő modul"
+
+msgid "Premium Addons List"
+msgstr "Prémium kiegészítők listája"
+
+msgid "Features"
+msgstr "Jellemzők"
+
+msgid "Max Ticket"
+msgstr "Max jegy"
+
+msgid "WooCommerce"
+msgstr "WooCommerce"
+
+msgid "envato"
+msgstr "envato"
+
+msgid "mailchimp"
+msgstr "mailchimp"
+
+msgid "Mailchimp"
+msgstr "Mailchimp"
+
+msgid "paidsupport"
+msgstr "fizetett támogatás"
+
+msgid "fb"
+msgstr "fb"
+
+msgid "twitter"
+msgstr "twitter"
+
+msgid "Captcha"
+msgstr "Captcha"
+
+msgid ":"
+msgstr ":"
+
+msgid "2"
+msgstr "2"
+
+msgid "3"
+msgstr "3"
+
+msgid "helptopic"
+msgstr "súgótéma"
+
+msgid "JS Help Desk Addon Installer"
+msgstr "JS Help Desk Addon Installer"
+
+msgid "Agent Statistics"
+msgstr "Ügynökstatisztika"
+
+msgid "JNone"
+msgstr "JNincs"
+
+msgid "Closed and merged"
+msgstr "Lezárva és összevonva"
+
+msgid "Ticket Assign and Transfer"
+msgstr "Jegyek kiosztása és átadása"
+
+msgid ","
+msgstr ","
+
+msgid "5.0"
+msgstr "5.0"
+
+msgid "PHP"
+msgstr "PHP"
+
+msgid "Start"
+msgstr "Rajt"
+
+msgid "1"
+msgstr "1"
+
+msgid "Id"
+msgstr "Id"
+
+msgid "Jerror Alertnoauthor"
+msgstr "Jerror Alertno szerző"
+
+msgid "Num"
+msgstr "Num"
+
+msgid "Word Press Extension Directory"
+msgstr "Wordpress kiterjesztés könyvtára"
+
+msgid "OK"
+msgstr "rendben"
+
+msgid "JS Support Ticket System"
+msgstr "JS támogatási jegyrendszer"
+
+msgid "JS Support Ticket Pro"
+msgstr "JS Support Ticket Pro"
+
+msgid "User has been successfully registered"
+msgstr "A felhasználó regisztrációja sikeresen megtörtént"
+
+msgid "Select Form"
+msgstr "Válassza az Űrlap lehetőséget"
+
+msgid "Envato Purchase Code"
+msgstr "Envato vásárlási kód"
+
+msgid "Urgent"
+msgstr "Sürgős"
+
+msgid "EDD Order ID"
+msgstr "EDD rendelési azonosító"
+
+msgid "Search keywords"
+msgstr "Keresés kulcsszavakra"
+
+msgid "Search title"
+msgstr "Cím keresése"
+
+msgid "Manager"
+msgstr "Menedzser"
+
+msgid "Assign Ticket To Agent"
+msgstr "Jegy hozzárendelése ügynökhöz"
+
+msgid "Mark In Progress"
+msgstr "Megjelölés folyamatban"
+
+msgid "Change Ticket Priority"
+msgstr "Jegyprioritás módosítása"
+
+msgid "Ban Email And Close Ticket"
+msgstr "Tiltsa le az e-mailt és zárja be a jegyet"
+
+msgid "Release Ticket"
+msgstr "Kiadási jegy"
+
+msgid "View Credentials"
+msgstr "Hitelesítési adatok megtekintése"
+
+msgid "Edit Credentials"
+msgstr "Hitelesítési adatok szerkesztése"
+
+msgid "Mark Non Premium"
+msgstr "Jelölje meg, hogy nem prémium"
+
+msgid "Link To Paid Support"
+msgstr "Link a fizetett támogatáshoz"
+
+msgid "Export Ticket not translate"
+msgstr "Az exportjegyet nem fordítják le"
+
+msgid "Edit Help Topic not translate"
+msgstr "Súgó szerkesztése Nem fordítható"
+
+msgid "View Help Topic"
+msgstr "Súgó téma megtekintése"
+
+msgid "Delete Help Topic"
+msgstr "Súgótéma törlése"
+
+msgid "Edit Canned Response"
+msgstr "Készített válasz szerkesztése"
+
+msgid "View Canned Response"
+msgstr "Nézze meg az előre elkészített választ"
+
+msgid "Delete Canned Response"
+msgstr "Előírt válasz törlése"
+
+msgid "Standard"
+msgstr "Alapértelmezett"
+
+msgid "Default with auto assign"
+msgstr "Alapértelmezett automatikus hozzárendeléssel"
+
+msgid "Visible"
+msgstr "Látható"
+
+msgid "Select Visible"
+msgstr "Válassza a Látható lehetőséget"
+
+msgid "Logedin user"
+msgstr "Bejelentkezett felhasználó"
+
+msgid "Logedin user only"
+msgstr "Csak bejelentkezett felhasználó"
+
+msgid "visitor"
+msgstr "látogató"
+
+msgid "Single Header"
+msgstr "Egyetlen fejléc"
+
+msgid "Multiple Header"
+msgstr "Több fejléc"
+
+msgid "Quick installation Guide"
+msgstr "Gyors telepítési útmutató"
+
+msgid "How to setup"
+msgstr "Hogyan kell beállítani"
+
+msgid "Ticket Creation"
+msgstr "Jegykészítés"
+
+msgid "Custom Fields"
+msgstr "Egyéni mezők"
+
+msgid "Email Notification Problems"
+msgstr "E-mail értesítési problémák"
+
+msgid "arrow"
+msgstr "nyíl"
+
+msgid "close"
+msgstr "Bezárás"
+
+msgid "Multiform"
+msgstr "Sokalakú"
+
+msgid "Add WP Users"
+msgstr "WP felhasználók hozzáadása"
+
+msgid "Other Products"
+msgstr "Más termékek"
+
+msgid "watch video"
+msgstr "videót nézni"
+
+msgid "Get"
+msgstr "Kap"
+
+msgid "This prefix will be added to slug incase of homepage links"
+msgstr "Ez az előtag hozzá lesz adva a kezdőlap hivatkozásaihoz"
+
+msgid " This prefix will be added to slug incase of conflict"
+msgstr "Ez az előtag kerül hozzáadásra a slug-hoz ütközés esetén"
+
+msgid "Reset All"
+msgstr "Összes visszaállítása"
+
+msgid "Search By Slug"
+msgstr "Keresés Slug szerint"
+
+msgid "Slug List"
+msgstr "Csigák listája"
+
+msgid "This button will only save slugs on current page"
+msgstr "Ez a gomb csak az aktuális oldalon lévő csigákat menti el"
+
+msgid "Slug"
+msgstr "Meztelen csiga"
+
+msgid "Export Style"
+msgstr "Stílus exportálása"
+
+msgid "Add Multiform"
+msgstr "Multiform hozzáadása"
+
+msgid "Edit Fields"
+msgstr "Mezők szerkesztése"
+
+msgid "Save Multiform"
+msgstr "Multiform mentése"
+
+msgid "Conditions"
+msgstr "Körülmények"
+
+msgid "Add Conditions"
+msgstr "Feltételek hozzáadása"
+
+msgid "Rule Title"
+msgstr "Szabály címe"
+
+msgid "Agent Auto Assign"
+msgstr "Ügynök automatikus hozzárendelése"
+
+msgid "Add Rule"
+msgstr "Szabály hozzáadása"
+
+msgid "Condition Title"
+msgstr "Állapot Cím"
+
+msgid "Condition Operator"
+msgstr "Állapot Kezelő"
+
+msgid "Condition value"
+msgstr "Állapot értéke"
+
+msgid "Select Condition Title"
+msgstr "Válassza a Feltétel címe lehetőséget"
+
+msgid "Submit Type"
+msgstr "Beküldés típusa"
+
+msgid "Select Condition Operator"
+msgstr "Válassza a Feltételkezelő lehetőséget"
+
+msgid "Contain"
+msgstr "Tartalmaz"
+
+msgid "Matched"
+msgstr "Egyező"
+
+msgid "Equal"
+msgstr "Egyenlő"
+
+msgid "No Value found"
+msgstr "Nem található érték"
+
+msgid "No Operator found"
+msgstr "Nem található operátor"
+
+msgid "Add more Condition"
+msgstr "További feltétel hozzáadása"
+
+msgid "Save Rule"
+msgstr "Szabály mentése"
+
+msgid "Delete Condition"
+msgstr "Feltétel törlése"
+
+msgid "Add Ticket Using Multiform"
+msgstr "Jegy hozzáadása Multiform használatával"
+
+msgid "Addons Status"
+msgstr "Kiegészítők állapota"
+
+msgid "Activated"
+msgstr "Aktív"
+
+msgid "Deactivate"
+msgstr "Deaktiválás"
+
+msgid "Updated"
+msgstr "Frissítve"
+
+msgid "Deactivated"
+msgstr "Deaktiválva"
+
+msgid "Activate"
+msgstr "Aktiválja"
+
+msgid "New Update Version"
+msgstr "Új frissítési verzió"
+
+msgid "is Available"
+msgstr "elérhető"
+
+msgid "Expired"
+msgstr "Lejárt"
+
+msgid "Buy Now"
+msgstr "Vásárolj most"
+
+msgid "Help"
+msgstr "Segítség"
+
+msgid "Update Now"
+msgstr "Frissítse most"
+
+msgid "Add-On’s For Help Desk"
+msgstr "Kiegészítők a Help Desk számára"
+
+msgid ""
+"Get trusted WordPress add on’s. Guaranteed to work fast, safe to use, "
+"beautifully coded, packed with features and easy to use."
+msgstr ""
+"Szerezzen megbízható WordPress-kiegészítőket. Garantáltan gyors, biztonságos "
+"használat, gyönyörűen kódolt, tele van funkciókkal és könnyen használható."
+
+msgid "Save big with an exclusive membership plan today!"
+msgstr "Takarítson meg sokat exkluzív tagsági csomaggal még ma!"
+
+msgid "show bundle pack"
+msgstr "mutasd meg a kötegcsomagot"
+
+msgid ""
+"Add agents and assign roles and permissions to provide assistance and "
+"support to customer support tickets."
+msgstr ""
+"Ügynökök hozzáadása, szerepek és engedélyek hozzárendelése, hogy segítséget "
+"és támogatást nyújtson az ügyfélszolgálati jegyekhez."
+
+msgid ""
+"Define rules for ticket to auto close. Ticket will be auto close after "
+"specific interval of time which can be set by admin."
+msgstr ""
+"Határozza meg az automatikus bezáráshoz szükséges jegyekre vonatkozó "
+"szabályokat. A jegy automatikusan záródik egy bizonyos idő elteltével, "
+"amelyet az adminisztrátor állíthat be."
+
+msgid ""
+"Get the survey from your customers on ticket closing to improve your quality "
+"of services and assistance."
+msgstr ""
+"Szerezze be ügyfelei felmérését a jegyek lezárásáról, hogy javítsa "
+"szolgáltatásai és segítségnyújtási minőségét."
+
+msgid "Helptopic"
+msgstr "Helptopic"
+
+msgid ""
+"Help topics help users to find and select the area with which they need "
+"assistance."
+msgstr ""
+"A súgótémák segítenek a felhasználóknak megtalálni és kiválasztani azt a "
+"területet, ahol segítségre van szükségük."
+
+msgid ""
+"The private note is used as reminders or to give other agents insights into "
+"the ticket issue. User Won't see the private notes."
+msgstr ""
+"A privát jegyzet emlékeztetőként vagy arra szolgál, hogy más ügynökök "
+"betekintést nyújtsanak a jegyek problémájába. A felhasználó nem fogja látni "
+"a privát jegyzeteket."
+
+msgid ""
+"Stop losing productivity on repetitive queries,Build your knowledge base, "
+"group solutions by topics to facilitate users."
+msgstr ""
+"Ne veszítse el a termelékenységet az ismétlődő lekérdezések miatt, Építse "
+"fel tudásbázisát, csoportosítsa a megoldásokat témák szerint a felhasználók "
+"megkönnyítése érdekében."
+
+msgid ""
+"Enables admin to set N numbers of tickets for users to create and set N "
+"numbers of Ticket to open for agents separately."
+msgstr ""
+"Lehetővé teszi az adminisztrátor számára, hogy N számú jegyet állítson be a "
+"felhasználók számára, hogy létrehozzanak, és N számú jegyet állítson be, "
+"hogy külön nyíljon meg az ügynökök számára."
+
+msgid "Multi Language Email Templates"
+msgstr "Többnyelvű e-mail sablonok"
+
+msgid ""
+"It allows to create language-based email templates for all JS Help Desk "
+"email templates."
+msgstr ""
+"Lehetővé teszi nyelvi alapú e-mail sablonok létrehozását az összes JS Help "
+"Desk e-mail sablonhoz."
+
+msgid ""
+"Canned Responses are pre-populated messages that allows support agents to "
+"respond quickly to customer issues."
+msgstr ""
+"A készre adott válaszok előre kitöltött üzenetek, amelyek lehetővé teszik a "
+"támogatási ügynökök számára, hogy gyorsan reagáljanak az ügyfelek "
+"problémáira."
+
+msgid ""
+"Enables users to reply to the tickets via email without the need to login to "
+"the support system first."
+msgstr ""
+"Lehetővé teszi a felhasználók számára, hogy e-mailben válaszoljanak a "
+"jegyekre anélkül, hogy először be kellene jelentkezniük a támogatási "
+"rendszerbe."
+
+msgid ""
+"Make unlimited announcements associated with support system to get customer "
+"interaction."
+msgstr ""
+"Tegyen korlátlan számú bejelentést a támogatási rendszerhez az ügyfelek "
+"interakciója érdekében."
+
+msgid ""
+"Ban Email allows you to block email of any user to restrict him to create "
+"new tickets."
+msgstr ""
+"Az e-mail tiltása lehetővé teszi bármely felhasználó e-mailjének letiltását, "
+"hogy korlátozza új jegyek létrehozását."
+
+msgid "Descktop Notifications"
+msgstr "Asztali értesítések"
+
+msgid ""
+"Save the ticket as a PDF in your system or the admin will also be able to "
+"export all the data inside of Ticket."
+msgstr ""
+"Mentse el a jegyet PDF formátumban a rendszerébe, különben az adminisztrátor "
+"is exportálhatja az összes adatot a Ticketen belül."
+
+msgid ""
+"Tired of getting tickets about the same problems? Add FAQs to drastically "
+"reduce the number of common questions from users."
+msgstr ""
+"Belefáradt, hogy ugyanazokkal a problémákkal kapcsolatos jegyeket "
+"vásároljon? A GYIK hozzáadásával drasztikusan csökkentheti a felhasználók "
+"által feltett gyakori kérdések számát."
+
+msgid "Admin Widgets"
+msgstr "Admin Widgetek"
+
+msgid ""
+"Use internal email to send emails to one agent to another agent with in "
+"support ticket."
+msgstr ""
+"Belső e-mailekkel küldhet e-maileket az egyik ügynöknek egy másik ügynöknek "
+"a támogatási jegyben."
+
+msgid "Front-End Widget"
+msgstr "Front-End Widget"
+
+msgid ""
+"Paid Support is the easiest way to integrate and manage payments for your "
+"support tickets."
+msgstr ""
+"A fizetett támogatás a támogatási jegyek integrálásának és kifizetésének "
+"legegyszerűbb módja."
+
+msgid "Mail Chimp"
+msgstr "Mailchimp"
+
+msgid ""
+"The Mail Chimp add-on adds a new checkbox to the registration form for "
+"prompting new users to subscribe your email-list."
+msgstr ""
+"A Mail Chimp bővítmény egy új jelölőnégyzetet ad a regisztrációs űrlaphoz, "
+"hogy új felhasználókat kérjen fel az e-mail listára."
+
+msgid ""
+"EDD offers customers to open new tickets just one click from their EDD "
+"account with optionally validating the license keys."
+msgstr ""
+"Az EDD felkínálja az ügyfeleknek, hogy egyetlen kattintással nyissanak új "
+"jegyeket az EDD-fiókjukból, opcionálisan érvényesítve a licenckulcsokat."
+
+msgid "email cc"
+msgstr "email cc"
+
+msgid "Email Cc"
+msgstr "E-mail másolat"
+
+msgid ""
+"CC(Carbon Copy) - the people who should know about the information which is "
+"being shared and the people included are able to see who is there in the "
+"list."
+msgstr ""
+"CC (Carbon Copy) – azok az emberek, akiknek tudniuk kell a megosztott "
+"információkról, és a benne szereplő személyek láthatják, kik szerepelnek a "
+"listán."
+
+msgid "multiform"
+msgstr "sokalakú"
+
+msgid "Multiform allows user to add more than one form based on requirements."
+msgstr ""
+"A Multiform lehetővé teszi, hogy a felhasználó egynél több űrlapot adjon "
+"hozzá a követelményeknek megfelelően."
+
+msgid "agent auto assign"
+msgstr "ügynök automatikus hozzárendelése"
+
+msgid ""
+"When auto assignment is enabled and a ticket is created, an appropriate "
+"agent is automatically assigned to the ticket and it is moved to the "
+"Assigned state."
+msgstr ""
+"Amikor az automatikus hozzárendelés engedélyezve van, és létrejön egy jegy, "
+"a rendszer automatikusan hozzárendeli a megfelelő ügynököt a jegyhez, és a "
+"Hozzárendelt állapotba kerül."
+
+msgid "Social Login"
+msgstr "Közösségi bejelentkezés"
+
+msgid ""
+"Users can login from their social media accounts. They can create a new "
+"account or use social media accounts."
+msgstr ""
+"A felhasználók a közösségi média fiókjukból bejelentkezhetnek. "
+"Létrehozhatnak új fiókot, vagy használhatnak közösségi média fiókokat."
+
+msgid "JS Help Desk Add-Ons Bundle Pack"
+msgstr "JS Help Desk kiegészítők csomagja"
+
+msgid "Basic"
+msgstr "Alapvető"
+
+msgid "Unlimited Agents"
+msgstr "Korlátlan számú ügynök"
+
+msgid "Show all"
+msgstr "Mutasd az összeset"
+
+msgid "Everything in basic included and"
+msgstr "Az alapban minden benne van és"
+
+msgid "Professional"
+msgstr "Szakmai"
+
+msgid "Everything in standard included and"
+msgstr "Minden benne van a standardban és"
+
+msgid "All Future Addons"
+msgstr "Minden jövőbeli kiegészítés"
+
+msgid ""
+"Hey there! We have recently launched a fresh update for the add-ons. Don't "
+"forget to update the add-ons to enjoy the greatest features!"
+msgstr ""
+"Halihó! Nemrég elindítottunk egy új frissítést a kiegészítőkhöz. Ne felejtse "
+"el frissíteni a kiegészítőket, hogy élvezze a legjobb funkciókat!"
+
+msgid "View Addone Status"
+msgstr "Kiegészítés állapotának megtekintése"
+
+msgid "slug for ticket page"
+msgstr "csiga a jegyoldalhoz"
+
+msgid "slug for agent add ticket page"
+msgstr "slug ügynökhöz jegy hozzáadása oldal"
+
+msgid "slug for rolepermission page"
+msgstr "slug a rolepermission oldalhoz"
+
+msgid "slug for add announcement"
+msgstr "csiga hozzáadott bejelentést"
+
+msgid "slug for add department page"
+msgstr "slug az osztály hozzáadása oldalhoz"
+
+msgid "slug for add download page"
+msgstr "slug a letöltési oldal hozzáadásához"
+
+msgid "slug for add faq page"
+msgstr "slug a GYIK oldal hozzáadásához"
+
+msgid "slug for faq page"
+msgstr "slug a GYIK oldalhoz"
+
+msgid "slug for add article page"
+msgstr "csiga a cikk hozzáadásához"
+
+msgid "slug for add category page"
+msgstr "kategória hozzáadása oldalhoz"
+
+msgid "slug for user knowledgebase articles page"
+msgstr "slug a felhasználói tudásbázis cikkeinek oldalához"
+
+msgid "slug for article detail page"
+msgstr "csiga a cikk részletes oldalához"
+
+msgid "slug for add role page"
+msgstr "csiga szerep hozzáadása oldalhoz"
+
+msgid "slug for add agent page"
+msgstr "csiga az ügynök hozzáadása oldalhoz"
+
+msgid "slug for agent permissions page"
+msgstr "slug az ügynöki engedélyek oldalához"
+
+msgid "slug for my tickets page"
+msgstr "csiga a jegyek oldalára"
+
+msgid "slug for agent my tickets page"
+msgstr "slug ügynöknek a jegyeim oldala"
+
+msgid "slug for knowledgebase page"
+msgstr "slug a tudásbázis oldalhoz"
+
+msgid "slug for agent categories page"
+msgstr "slug az ügynökkategóriák oldalához"
+
+msgid "slug for agent kb articles page"
+msgstr "slug for agent kb cikkek oldal"
+
+msgid "slug for agent announcements page"
+msgstr "csiga az ügynöki bejelentések oldalához"
+
+msgid "slug for agent downloads page"
+msgstr "slug az ügynökletöltési oldalhoz"
+
+msgid "slug for agent faqs page"
+msgstr "slug az ügynöki GYIK oldalhoz"
+
+msgid "slug for add ticket page"
+msgstr "csiga a jegy hozzáadása oldalhoz"
+
+msgid "slug for ticket status page"
+msgstr "slug a jegy állapotoldalához"
+
+msgid "slug for controlpanel"
+msgstr "csiga a vezérlőpanelhez"
+
+msgid "slug for agent report detail page"
+msgstr "csiga az ügynökjelentés részletes oldalához"
+
+msgid "slug for agent reports page"
+msgstr "csiga az ügynökjelentések oldalához"
+
+msgid "slug for department reports page"
+msgstr "a részlegjelentések oldala"
+
+msgid "slug for announcement detail page"
+msgstr "slug a bejelentés részletes oldalához"
+
+msgid "slug for feedback page"
+msgstr "csiga a visszajelzési oldalhoz"
+
+msgid "slug for agent feedbacks page"
+msgstr "slug az ügynöki visszajelzések oldalához"
+
+msgid "slug for visitor message page"
+msgstr "csiga a látogatói üzenetoldalhoz"
+
+msgid "slug for add help topic page"
+msgstr "slug a súgótéma oldalának hozzáadásához"
+
+msgid "slug for agent help topics page"
+msgstr "slug az ügynöki súgótémák oldalához"
+
+msgid "slug for add canned response page"
+msgstr "meztelen válaszoldal hozzáadása"
+
+msgid "slug for agent canned responses page"
+msgstr "slug az ügynök kész válaszok oldalához"
+
+msgid "slug for gdpr data compliance actions1"
+msgstr "slug a gdpr adatok megfelelőségi műveleteihez1"
+
+msgid "slug for print ticket page"
+msgstr "csiga a jegyoldal nyomtatásához"
+
+msgid "slug for my profile page"
+msgstr "csiga a profiloldalamhoz"
+
+msgid "slug for login page"
+msgstr "csiga a bejelentkezési oldalhoz"
+
+msgid "slug for user register page"
+msgstr "slug a felhasználói regisztrációs oldalhoz"
+
+msgid "slug for add message page"
+msgstr "csiga az üzenet hozzáadása oldalhoz"
+
+msgid "slug for message detail page"
+msgstr "csiga az üzenet részletes oldalához"
+
+msgid "slug for message inbox page"
+msgstr "csiga az üzenetek beérkező leveleihez"
+
+msgid "slug for message outbox page"
+msgstr "csiga a kimenő üzenetek oldalához"
+
+msgid "slug for roles page"
+msgstr "slug a szerepekhez oldal"
+
+msgid "slug for agent page"
+msgstr "csiga az ügynökoldalhoz"
+
+msgid "slug for departments page"
+msgstr "slug a részlegekhez oldal"
+
+msgid "slug for announcements page"
+msgstr "csiga a közlemények oldalához"
+
+msgid "slug for downloads page"
+msgstr "slug a letöltésekhez oldal"
+
+msgid "slug for faqs page"
+msgstr "slug a GYIK oldalhoz"
+
+msgid "API key is required for linkedin app"
+msgstr "API-kulcs szükséges a linkedin alkalmazáshoz"
+
+msgid "API Key"
+msgstr "API kulcs"
+
+msgid "secret key"
+msgstr "titkos kulcs"
+
+msgid "Secret"
+msgstr "Titok"
+
+msgid "Facebook user can login in js support ticket"
+msgstr "A Facebook-felhasználó bejelentkezhet a js támogatási jegybe"
+
+msgid "Login With Linkedin"
+msgstr "Bejelentkezés Linkedln-nel"
+
+msgid "API key is required for facebook app"
+msgstr "API-kulcs szükséges a Facebook alkalmazáshoz"
+
+msgid "Login with linkedin"
+msgstr "Bejelentkezés Linkedln-nel"
+
+msgid "Login with facebook"
+msgstr "Jelentkezz be facebookal"
+
+msgid "Create User via email"
+msgstr "Felhasználó létrehozása e-mailben"
+
+msgid "Export Ticket"
+msgstr "Export jegy"
+
+msgid "Ticket Listing"
+msgstr "Jegylista"
+
+msgid "Visitor Ticket Setting"
+msgstr "Látogatói jegy beállítása"
+
+msgid ""
+"By enabling this option, a user can know to whom the ticket has been "
+"assigned."
+msgstr ""
+"Ennek az opciónak a bekapcsolásával a felhasználó megtudhatja, hogy kihez "
+"van hozzárendelve a jegy."
+
+msgid "Assigned info. on admin tickets"
+msgstr "Hozzárendelt információ. admin jegyeken"
+
+msgid ""
+"By enabling this option, an agent can know to whom the ticket has been "
+"assigned."
+msgstr ""
+"Az opció engedélyezésével az ügyintéző tudni fogja, hogy kihez van "
+"hozzárendelve a jegy."
+
+msgid "Assigned info. on user tickets"
+msgstr "Hozzárendelt információ. felhasználói jegyeken"
+
+msgid ""
+"By enabling this option, an admin can know to whom the ticket has been "
+"assigned."
+msgstr ""
+"Ennek az opciónak az engedélyezésével az adminisztrátor megtudhatja, hogy "
+"kihez van hozzárendelve a jegy."
+
+msgid "Assigned info. on agent tickets"
+msgstr "Hozzárendelt információ. ügynöki jegyeken"
+
+msgid ""
+"By enabling this option, a user can know who closed the ticket and when that "
+"ticket closed."
+msgstr ""
+"Az opció engedélyezésével a felhasználó megtudhatja, hogy ki zárta be a "
+"jegyet, és mikor zárta be a jegyet."
+
+msgid "Closed info. on admin closed tickets"
+msgstr "Zárt információ. admin zárt jegyeken"
+
+msgid ""
+"By enabling this option, an agent can know who closed the ticket and when "
+"that ticket closed."
+msgstr ""
+"Az opció engedélyezésével az ügyintéző tudni fogja, hogy ki zárta le a "
+"jegyet, és mikor zárta be a jegyet."
+
+msgid "Closed info. on agent closed tickets"
+msgstr "Zárt információ. ügynöki zárt jegyeken"
+
+msgid ""
+"By enabling this option, an admin can know who closed the ticket and when "
+"that ticket closed."
+msgstr ""
+"Az opció engedélyezésével az adminisztrátor megtudhatja, hogy ki zárta be a "
+"jegyet, és mikor zárta be a jegyet."
+
+msgid "Set default sorting for ticket listing"
+msgstr "Alapértelmezett rendezés beállítása a jegyek listájához"
+
+msgid "Ascending"
+msgstr "Emelkedő"
+
+msgid "Descending"
+msgstr "Csökkenő"
+
+msgid "Ticket listing sorting"
+msgstr "Jegylista rendezése"
+
+msgid "Select whether users can see the ticket delete button"
+msgstr "Válassza ki, hogy a felhasználók láthatják-e a jegytörlés gombot"
+
+msgid "Show ticket delete button"
+msgstr "Jegytörlés gomb megjelenítése"
+
+msgid ""
+"Select whether users can see the name of administrator or staff member on "
+"ticket reply"
+msgstr ""
+"Válassza ki, hogy a felhasználók láthatják-e az adminisztrátor vagy a "
+"munkatárs nevét a jegyválaszban"
+
+msgid "Show Anonymous Name On Ticket Reply"
+msgstr "Névtelen név megjelenítése a jegyre adott válaszon"
+
+msgid ""
+"Select whether users can see the email of administrator or agent on ticket "
+"reply"
+msgstr ""
+"Válassza ki, hogy a felhasználók láthatják-e az adminisztrátor vagy az "
+"ügynök e-mail-címét a jegyre adott válaszban"
+
+msgid "Show Admin OR Agent Email On Ticket Reply"
+msgstr "Admin VAGY ügynök e-mail megjelenítése a jegyre adott válaszon"
+
+msgid ""
+"Show or hide the multiform popup when creating a new ticket. if you hide "
+"them, the system will open the default form."
+msgstr ""
+"Új jegy létrehozásakor jelenítse meg vagy elrejtse a többformájú előugró "
+"ablakot. ha elrejti őket, a rendszer megnyitja az alapértelmezett űrlapot."
+
+msgid "Multiforms Popup For New Tickets"
+msgstr "Multiforms előugró ablak új jegyekhez"
+
+msgid "Set suffix for custom ticketid"
+msgstr "Állítsa be az egyéni jegyazonosító utótagját"
+
+msgid "Ticketid Suffix"
+msgstr "Ticketid Utótag"
+
+msgid "Set ticketid sequential or random .e.g"
+msgstr "A jegyazonosító beállítása szekvenciális vagy véletlenszerű .pl"
+
+msgid "Set prefix for custom ticketid"
+msgstr "Állítsa be az egyéni jegyazonosító előtagját"
+
+msgid "Ticketid Prefix"
+msgstr "Ticketid előtag"
+
+msgid "Support Icons"
+msgstr "Támogatási ikonok"
+
+msgid "Set custom support text"
+msgstr "Állítson be egyéni támogatási szöveget"
+
+msgid "Set custom support image"
+msgstr "Állítson be egyéni támogatási képet"
+
+msgid "Custom Image"
+msgstr "Egyedi kép"
+
+msgid "JS Help Desk Register Page"
+msgstr "JS Help Desk regisztrációs oldal"
+
+msgid "WordPress Default Login Page"
+msgstr "WordPress alapértelmezett bejelentkezési oldal"
+
+msgid "JS Help Desk Login Page"
+msgstr "JS Help Desk bejelentkezési oldal"
+
+msgid "Set register Link"
+msgstr "Állítsa be a regisztrációs linket"
+
+msgid "We are here to help you"
+msgstr "Azért vagyunk itt, hogy segítsünk"
+
+msgid "Help icon"
+msgstr "Súgó ikonra"
+
+msgid ""
+"JS Help Desk is a professional, simple, easy to use and complete customer "
+"support system."
+msgstr ""
+"A JS Help Desk egy professzionális, egyszerű, könnyen használható és teljes "
+"körű ügyfélszolgálati rendszer."
+
+msgid "View all videos"
+msgstr "Az összes videó megtekintése"
+
+msgid "Video icon"
+msgstr "Videó ikon"
+
+msgid "View All Videos"
+msgstr "Az összes videó megtekintése"
+
+msgid "Help Desk icon"
+msgstr "Help Desk ikonra"
+
+msgid "JS Help Desk Support"
+msgstr "JS Help Desk támogatás"
+
+msgid ""
+"JS Help Desk delivers timely customer support if you have any query then "
+"we're here to show you the way."
+msgstr ""
+"A JS Help Desk időben segíti az ügyfélszolgálatot, ha bármilyen kérdése van, "
+"mi itt mutatjuk meg az utat."
+
+msgid "Visitor ticket creation"
+msgstr "Látogatói jegy létrehozása"
+
+msgid "How to set ticket auto close"
+msgstr "Hogyan állítsuk be a jegyek automatikus bezárását"
+
+msgid "How to reopen closed ticket"
+msgstr "Hogyan lehet újra megnyitni a zárt jegyet"
+
+msgid "How to lock a ticket"
+msgstr "Hogyan kell lezárni a jegyet"
+
+msgid "How to add private note"
+msgstr "Privát jegyzet hozzáadása"
+
+msgid "View ticket history"
+msgstr "Jegyelőzmények megtekintése"
+
+msgid "How to setup custom fields"
+msgstr "Egyéni mezők beállítása"
+
+msgid "Set ticket auto overdue"
+msgstr "Állítsa be a jegy automatikus lejártát"
+
+msgid "Manually set ticket overdue"
+msgstr "Kézzel beállított jegy lejárt"
+
+msgid "How to merge tickets"
+msgstr "A jegyek egyesítése"
+
+msgid "How to export tickets"
+msgstr "A jegyek exportálása"
+
+msgid "How use help topic"
+msgstr "Hogyan használjuk a súgótémát"
+
+msgid "How to change department"
+msgstr "Hogyan váltsunk osztályt"
+
+msgid "How to use multi-forms"
+msgstr "A többűrlap használatának módja"
+
+msgid "How to paid support"
+msgstr "Hogyan fizethető támogatás"
+
+msgid "How to use canned response"
+msgstr "Hogyan kell használni a konzervválaszt"
+
+msgid "How to add private credentials"
+msgstr "Privát hitelesítő adatok hozzáadása"
+
+msgid "How to ban/unban user"
+msgstr "Hogyan lehet kitiltani/feloldani a felhasználót"
+
+msgid "Agent system"
+msgstr "Ügynökrendszer"
+
+msgid "Manually assign ticket to agen"
+msgstr "Jegy manuális hozzárendelése az ügynökhöz"
+
+msgid "How to edit time"
+msgstr "Hogyan kell szerkeszteni az időt"
+
+msgid "How to use time tracking"
+msgstr "Az időkövetés használata"
+
+msgid "How to set max open ticket"
+msgstr "Hogyan állítsuk be a maximális nyitott jegyet"
+
+msgid "How to show counts"
+msgstr "Hogyan kell kimutatni a számokat"
+
+msgid "How to set Captcha"
+msgstr "A Captcha beállítása"
+
+msgid "User options"
+msgstr "Felhasználói lehetőségek"
+
+msgid "How to set login redirect"
+msgstr "A bejelentkezés átirányításának beállítása"
+
+msgid "How to set fields ordering"
+msgstr "A mezők sorrendjének beállítása"
+
+msgid "How to enable social login"
+msgstr "A közösségi bejelentkezés engedélyezése"
+
+msgid "Setup"
+msgstr "Beállít"
+
+msgid "How to enable email piping"
+msgstr "Hogyan lehet engedélyezni az e-mail vezetékezést"
+
+msgid "How to set SMTP"
+msgstr "Az SMTP beállítása"
+
+msgid "How to solve email notification problem"
+msgstr "Az e-mail értesítési probléma megoldása"
+
+msgid "How to translate"
+msgstr "Hogyan kell fordítani"
+
+msgid "How to set colors"
+msgstr "Hogyan állítsuk be a színeket"
+
+msgid "How to add Shortcode"
+msgstr "Rövid kód hozzáadása"
+
+msgid "How to install addons"
+msgstr "Kiegészítők telepítése"
+
+msgid "How to Desktop Notifications"
+msgstr "Az asztali értesítések beállítása"
+
+msgid "How to use knowledge base"
+msgstr "A tudásbázis használatának módja"
+
+msgid "How to use downloads"
+msgstr "A letöltések használata"
+
+msgid "How to add announcement"
+msgstr "Bejelentés hozzáadása"
+
+msgid "How to create FAQ"
+msgstr "Hogyan készítsünk GYIK-et"
+
+msgid "How to use email cc"
+msgstr "Hogyan kell használni az e-mail cc"
+
+msgid "How to use internal mail"
+msgstr "A belső levelezés használata"
+
+msgid "Use front-end widgets"
+msgstr "Használjon előtér-modulokat"
+
+msgid "How to enable admin widgets"
+msgstr "Az adminisztrátori widgetek engedélyezése"
+
+msgid "Select Language"
+msgstr "Válasszon nyelvet"
+
+msgid "Email CC"
+msgstr "E-mail CC"
+
+msgid "Add Email CC"
+msgstr "E-mail CC hozzáadása"
+
+msgid "Template For"
+msgstr "Sablon For"
+
+msgid "Sr#"
+msgstr "Sr#"
+
+msgid "Template Title"
+msgstr "Sablon címe"
+
+msgid "Template Type"
+msgstr "Sablon típusa"
+
+msgid "Add Email Cc"
+msgstr "E-mail másolat hozzáadása"
+
+msgid "Select Template For"
+msgstr "Válassza a Sablon lehetőséget"
+
+msgid "Select Template Type"
+msgstr "Válassza ki a Sablon típusát"
+
+msgid "Add more row"
+msgstr "További sor hozzáadása"
+
+msgid "Delete row"
+msgstr "Sor törlése"
+
+msgid "Save Email CC"
+msgstr "E-mail CC mentése"
+
+msgid "To use this feature you must be agent"
+msgstr "A funkció használatához ügynöknek kell lennie"
+
+msgid "Form has been stored"
+msgstr "Az űrlap eltárolva"
+
+msgid "Default form cannot be set as disabled"
+msgstr "Az alapértelmezett űrlap nem állítható letiltottként"
+
+msgid "Multiform has been deleted"
+msgstr "Multiform törölve"
+
+msgid "Select Parent"
+msgstr "Válassza a Szülő lehetőséget"
+
+msgid "Select Child"
+msgstr "Válassza a Gyermek lehetőséget"
+
+msgid "Select Condition"
+msgstr "Válassza a Feltétel lehetőséget"
+
+msgid "Not Equal"
+msgstr "Nem egyenlő"
+
+msgid "To use this feature please fill the above three fields"
+msgstr "A funkció használatához töltse ki a fenti három mezőt"
+
+msgid "The agent has been stored"
+msgstr "Az ügynök tárolásra került"
+
+msgid "The agent has been deleted"
+msgstr "Az ügynök törölve lett"
+
+msgid "WP User ID"
+msgstr "WP felhasználói azonosító"
+
+msgid "WP Username"
+msgstr "WP felhasználónév"
+
+msgid "User Detail"
+msgstr "Felhasználói adatok"
+
+msgid "WP Full Name"
+msgstr "WP teljes név"
+
+msgid "WP Email Address"
+msgstr "WP e-mail cím"
+
+msgid "Rule has been stored"
+msgstr "A szabály eltárolva"
+
+msgid "Rule has been deleted"
+msgstr "A szabály törölve lett"
+
+msgid "Email Cc has been stored"
+msgstr "Az e-mail másolata el lett tárolva"
+
+msgid "Email CC has been deleted"
+msgstr "Az e-mail CC törölve"
+
+msgid "Agent permissions have been stored"
+msgstr "Az ügynök engedélyei el lettek tárolva"
+
+msgid "Select Canned Response"
+msgstr "Válassza az Előkészített válasz lehetőséget"
+
+msgid "Ticket Merge"
+msgstr "Ticket Merge"
+
+msgid "Delete Credentials"
+msgstr "Hitelesítési adatok törlése"
+
+msgid "Mail To Agent"
+msgstr "Levél az ügynöknek"
+
+msgid "View Agent Reports"
+msgstr "Ügynökjelentések megtekintése"
+
+msgid "Add Credentials"
+msgstr "Hitelesítési adatok hozzáadása"
+
+msgid "Edit Help Topic"
+msgstr "Súgótéma szerkesztése"
+
+msgid ""
+"e.g ' I have read and agree to the [link] Terms and Conditions[/link].  ' "
+"The text between [link] and [/link] will be linked to provided url or "
+"wordpress page."
+msgstr ""
+"pl. „Elolvastam és elfogadom a [link] Általános Szerződési Feltételeket[/"
+"link]. ' A [link] és a [/link] közötti szöveg a megadott URL-re vagy a "
+"wordpress oldalra lesz hivatkozva."
+
+msgid "login"
+msgstr "Belépés"
+
+msgid "stars"
+msgstr "csillagok"
+
+msgid "Please write appreciated review at WP Extension Directory"
+msgstr "Kérjük, írjon nagyra értékelt értékelést a WP Extension Directory-ba"
+
+msgid ""
+"We'd love to hear from you. It'll only take 2 minutes of your time, and will "
+"really help us spread the word"
+msgstr ""
+"Szeretnénk hallani felőled. Mindössze 2 percet vesz igénybe az idejéből, és "
+"valóban segíteni fog nekünk a hír terjesztésében"
+
+msgid "love"
+msgstr "szerelem"
+
+msgid "I'd love to help :)"
+msgstr "szívesen segítek :)"
+
+msgid "sad"
+msgstr "szomorú"
+
+msgid "Not this time"
+msgstr "Ezúttal nem"
+
+msgid "happy"
+msgstr "boldog"
+
+msgid "I've already rated you"
+msgstr "Már értékeltelek"
+
+msgid "thanks"
+msgstr "Kösz"
+
+msgid "You are awesome !......"
+msgstr "Király vagy !......"
+
+msgid "Thanks for your support, we really appreciate it."
+msgstr "Köszönjük a támogatást, nagyon hálásak vagyunk érte."
+
+msgid "JS Help Desk Team"
+msgstr "JS Help Desk csapata"
+
+msgid "Remind you about this later?"
+msgstr "Emlékeztet erre később?"
+
+msgid "Remind me in 3 days"
+msgstr "Emlékeztessen 3 napon belül"
+
+msgid "Remind me in 10 days"
+msgstr "Emlékeztessen 10 napon belül"
+
+msgid "Remind me in 30 days"
+msgstr "Emlékeztessen 30 napon belül"
+
+msgid "Don't remind me about this"
+msgstr "Ne emlékeztessen erre"
+
+msgid "Watch Video"
+msgstr "Videót nézni"
+
+msgid "Slug(s) has been stored"
+msgstr "A meztelen csigát tárolták"
+
+msgid "Prefix has not been stored"
+msgstr "Az előtag nem lett tárolva"
+
+msgid "+Add more Condition"
+msgstr "+További feltétel hozzáadása"
+
+msgid "Admin New Ticket Received"
+msgstr "Admin Új jegy érkezett"
+
+msgid "Staff New Ticket Received"
+msgstr "A személyzet új jegye érkezett"
+
+msgid "New Department Received"
+msgstr "Új osztály érkezett"
+
+msgid "New Group Received"
+msgstr "Új csoport érkezett"
+
+msgid "New Agent Received"
+msgstr "Új ügynök érkezett"
+
+msgid "New Help Topic Received"
+msgstr "Új súgótéma érkezett"
+
+msgid "Admin Reassign Ticket"
+msgstr "Admin Jegy újbóli hozzárendelése"
+
+msgid "Staff Reassign Ticket"
+msgstr "Személyzeti jegy átrendelése"
+
+msgid "Admin Close Ticket"
+msgstr "Admin Bezárja a jegyet"
+
+msgid "Staff Close Ticket"
+msgstr "Személyzet Zárja be a jegyet"
+
+msgid "Admin Delete Ticket"
+msgstr "Admin Jegy törlése"
+
+msgid "Staff Delete Ticket"
+msgstr "Személyzet Törölje a jegyet"
+
+msgid "Admin Overdue Ticket"
+msgstr "Admin lejárt jegy"
+
+msgid "Staff Overdue Ticket"
+msgstr "A személyzet lejárt jegye"
+
+msgid "Admin Email Baned"
+msgstr "Admin e-mail kitiltva"
+
+msgid "Staff Email Baned"
+msgstr "A személyzet e-mailje kitiltva"
+
+msgid "Admin Ticket Transfered to Department"
+msgstr "Admin jegy átutalva az osztályra"
+
+msgid "Staff Ticket Transfered to Department"
+msgstr "A személyzeti jegy átkerült az osztályra"
+
+msgid "Admin Email baned and ticket closed"
+msgstr "Admin e-mail kitiltva és jegy zárva"
+
+msgid "Staff Email baned and ticket closed"
+msgstr "A személyzet e-mailje kitiltva, a jegy pedig lezárva"
+
+msgid "Admin Email Unbaned"
+msgstr "Admin e-mail tiltva"
+
+msgid "Staff Email Unbaned"
+msgstr "A személyzet e-mailjei kitiltva"
+
+msgid "Admin Ticket Reply"
+msgstr "Admin Ticket Válasz"
+
+msgid "Staff Ticket Reply"
+msgstr "Személyzeti jegy Válasz"
+
+msgid "Ticket Received"
+msgstr "Jegy érkezett"
+
+msgid "Banemail try new ticket"
+msgstr "Banemail próbálja ki az új jegyet"
+
+msgid "Admin Ticket has been locked"
+msgstr "Az Admin Ticket zárolva van"
+
+msgid "Staff Ticket has been locked"
+msgstr "A személyzeti jegyet zárolták"
+
+msgid "Admin Ticket has been unlocked"
+msgstr "Az Admin Ticket feloldva"
+
+msgid "Staff Ticket has been unlocked"
+msgstr "A személyzeti jegyet feloldották"
+
+msgid "Admin In progress Ticket"
+msgstr "Admin folyamatban lévő jegy"
+
+msgid "Staff In progress Ticket"
+msgstr "Személyzet folyamatban Jegy"
+
+msgid "Admin Ticket priority changed"
+msgstr "Az adminisztrátori jegy prioritása megváltozott"
+
+msgid "Staff Ticket priority changed"
+msgstr "A személyzeti jegyek prioritása megváltozott"
+
+msgid "New Mail has been sent"
+msgstr "Új levelet küldtünk"
+
+msgid "New Reply has been sent"
+msgstr "Új válasz elküldve"
+
+msgid "Delete User Data"
+msgstr "Felhasználói adatok törlése"
+
+msgid "Closed By"
+msgstr "Lezárva"
+
+msgid "Closed On"
+msgstr "Bezárva"
+
+msgid "Closed info. on user closed tickets"
+msgstr "Zárt információ. felhasználói zárt jegyeken"
+
+msgid "custom text"
+msgstr "egyéni szöveg"
+
+msgid "Select Languages"
+msgstr "Válassza a Nyelvek lehetőséget"
+
+msgid "IMAP Authentication cancelled"
+msgstr "Az IMAP-hitelesítés megszakítva"
+
+msgid "Page Not Found !!"
+msgstr "Az oldal nem található !!"

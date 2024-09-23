@@ -1,0 +1,7587 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: nl_NL\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.4.1\n"
+
+msgid "You are not allowed"
+msgstr "Je bent niet bevoegd"
+
+msgid "The ticket has been locked"
+msgstr "Ticket is gesloten"
+
+msgid "Successfully"
+msgstr "Succesvol"
+
+msgid "The ticket has not been locked"
+msgstr "Ticket is niet afgesloten"
+
+msgid "Error"
+msgstr "Fout"
+
+msgid "Lock Ticket"
+msgstr "Blokkeer ticket"
+
+msgid "The ticket is locked by"
+msgstr "Ticket is gesloten door"
+
+msgid "The ticket has been unlocked"
+msgstr "Ticket is heropend"
+
+msgid "The ticket has not been unlocked"
+msgstr "Ticket is niet heropend"
+
+msgid "Unlock Ticket"
+msgstr "de-blokkeer Ticket"
+
+msgid "User already a staff member"
+msgstr "Gebruiker is al een medewerker"
+
+msgid "The staff member has not been stored"
+msgstr "Medewerker is niet opgeslagen"
+
+msgid "The staff member has been stored"
+msgstr "Medewerker is opgeslagen"
+
+msgid "The staff member has been deleted"
+msgstr "Medewerker is verwijderd"
+
+msgid "The staff member has not been deleted"
+msgstr "Medewerker is niet verwijderd"
+
+msgid "The staff member in use cannot delete"
+msgstr "Medewerker is in gebruik. Verwijderen kan niet"
+
+msgid "Staff"
+msgstr "Medewerkers"
+
+msgid "status has been changed"
+msgstr "status is gewijzigd"
+
+msgid "status has not been changed"
+msgstr "status is niet gewijzigd"
+
+msgid "User ID"
+msgstr "Gebruikers ID"
+
+msgid "User Name"
+msgstr "Gebruikersnaam"
+
+msgid "Email Address"
+msgstr "E-mail adres"
+
+msgid "Name"
+msgstr "Naam"
+
+msgid "Email"
+msgstr "E-mail"
+
+msgid "Previous"
+msgstr "Voorgaande"
+
+msgid "Next"
+msgstr "Volgende"
+
+msgid "Active"
+msgstr "Actief"
+
+msgid "Disabled"
+msgstr "Ge-deactiveerd"
+
+msgid "Uploaded file extension error."
+msgstr "Geupload bestand extentie error."
+
+msgid "Select user"
+msgstr "Selecteer gebruiker"
+
+msgid "Username"
+msgstr "Gebruikersnaam"
+
+msgid "Search"
+msgstr "Zoeken"
+
+msgid "Use search feature to select the user"
+msgstr "Gebruik zoekfunctie om gebruiker te selecteren"
+
+msgid "User"
+msgstr "Gebruiker"
+
+msgid "Select User"
+msgstr "Selecteer gebruiker"
+
+msgid "Roles"
+msgstr "Rollen"
+
+msgid "Select Role"
+msgstr "Selecteer rol"
+
+msgid "First Name"
+msgstr "Voornaam"
+
+msgid "Last Name"
+msgstr "Achternaam"
+
+msgid "Office Phone"
+msgstr "Telefoon kantoor"
+
+msgid "Extension"
+msgstr "Extentie"
+
+msgid "Mobile No"
+msgstr "Mobiele nr"
+
+msgid "Picture"
+msgstr "Beeld"
+
+msgid "Maximum File Size"
+msgstr "Maximum bestand grootte"
+
+msgid "File Extension Type"
+msgstr "Bestand extentie type"
+
+msgid "Append Signature"
+msgstr "Voeg handtekening toe"
+
+msgid "Append signature with a reply"
+msgstr "Handtekening toevoegen met reactie"
+
+msgid "Signature"
+msgstr "Handtekening"
+
+msgid "Select Status"
+msgstr "Selecteer status"
+
+msgid "Save"
+msgstr "Opslaan"
+
+msgid "Cancel"
+msgstr "Annuleer"
+
+msgid "Close"
+msgstr "Sluiten"
+
+msgid "Add Agent"
+msgstr "Afdeling toevoegen"
+
+msgid "Configuration"
+msgstr "Configuratie"
+
+msgid "Version"
+msgstr "Versie"
+
+msgid "image"
+msgstr "Afbeelding"
+
+msgid "Append"
+msgstr "Bijgevoegd"
+
+msgid "Add Permissions"
+msgstr "Bevoegdheden Toevoegen"
+
+msgid "Permissions"
+msgstr "Bevoegdheden"
+
+msgid "Department Section"
+msgstr "Afdeling selectie"
+
+msgid "Ticket Section"
+msgstr "Ticket sectie"
+
+msgid "Agent Section"
+msgstr "Medewerkers sectie"
+
+msgid "Knowledge Base Section"
+msgstr "Kennisbestand sectie"
+
+msgid "FAQ Section"
+msgstr "FAQ sectie"
+
+msgid "Download Section"
+msgstr "Download sectie"
+
+msgid "Announcement Section"
+msgstr "Sectie Aankondigingen"
+
+msgid "Mail Section"
+msgstr "E-mail sectie"
+
+msgid "Help Topic Section"
+msgstr "Help onderwerp"
+
+msgid "Canned Response Section"
+msgstr "Kennisbestand sectie"
+
+msgid "Select / Deselect All"
+msgstr "Selecteer / De-selecteer alles"
+
+msgid "Save Permissions"
+msgstr "Opslaan bevoegdheden"
+
+msgid "Agents"
+msgstr "Medewerkers"
+
+msgid "Add"
+msgstr "Voeg toe"
+
+msgid "Full Name"
+msgstr "Volledige naam"
+
+msgid "Role"
+msgstr "Rol"
+
+msgid "Created"
+msgstr "Aangemaakt"
+
+msgid "Action"
+msgstr "Actie"
+
+msgid "change status"
+msgstr "Verander Status"
+
+msgid "Edit"
+msgstr "Wijzig"
+
+msgid "Delete"
+msgstr "Verwijder"
+
+msgid "Are you sure you want to delete"
+msgstr "Weet je zeker dat je wilt verwijderen"
+
+msgid "Something went wrong to try again later."
+msgstr "Er is iets mis gegaan. Probeer later nogmaals"
+
+msgid "My Profile"
+msgstr "Mijn Profiel"
+
+msgid "Upload Image"
+msgstr "Upload Afbeelding"
+
+msgid "Phone No"
+msgstr "Telefoon nr"
+
+msgid "Upload file limit exceeds"
+msgstr "Bestand upload limiet is overschreden"
+
+msgid "No help topic found"
+msgstr "Geen help topic gevonden"
+
+msgid "Error file size too large"
+msgstr "Fout, het bestand is te groot"
+
+msgid "Select Department"
+msgstr "Selecteer afdeling"
+
+msgid "Select Help Topic"
+msgstr "Selecteer Help topic"
+
+msgid "Select Priority"
+msgstr "Selecteer prioriteit"
+
+msgid "Select Canned response"
+msgstr "Selecteer Kennisbestand"
+
+msgid "Add more"
+msgstr "Meer Toevoegen"
+
+msgid "Remove"
+msgstr "Verwijder"
+
+msgid "Reason for edit"
+msgstr "Reden door wijziging"
+
+msgid "Internal Note"
+msgstr "Interne notitie"
+
+msgid "Enter valid woocommerce order#"
+msgstr "Voer een geldige woocommerce bestelling#"
+
+msgid "Order id found"
+msgstr "Bestelling ID gevonden"
+
+msgid "Order id not found"
+msgstr "Bestelling ID niet gevonden"
+
+msgid "Select Product"
+msgstr "Selecteer Product"
+
+msgid "Dated"
+msgstr "Datum"
+
+msgid "Select Order ID"
+msgstr "Selecteer bestelling ID"
+
+msgid "Select license key"
+msgstr "Selecteer licentie sleutel"
+
+msgid "Assign to me"
+msgstr "Aan mij toewijzen"
+
+msgid "Submit Ticket"
+msgstr "Ticket toevoegen"
+
+msgid "Show All"
+msgstr "Toon Slles"
+
+msgid "Show Less"
+msgstr "Toon Minder"
+
+msgid "Closed"
+msgstr "Gesloten"
+
+msgid "Answered"
+msgstr "Beantwoord"
+
+msgid "Overdue"
+msgstr "Over tijd"
+
+msgid "All Tickets"
+msgstr "Alle Tickets"
+
+msgid "Or"
+msgstr "Of"
+
+msgid "From"
+msgstr "Van"
+
+msgid "Select staff"
+msgstr "Selecteer medewerkers"
+
+msgid "Select"
+msgstr "Selecteer"
+
+msgid "Start Date"
+msgstr "Start datum"
+
+msgid "End Date"
+msgstr "Eind datum"
+
+msgid "Assigned to me"
+msgstr "Aan mij toewijzen"
+
+msgid "Subject"
+msgstr "Onderwerp"
+
+msgid "Priority"
+msgstr "Prioriteit"
+
+msgid "sort"
+msgstr "Sorteer"
+
+msgid "New"
+msgstr "Nieuw"
+
+msgid "Waiting Reply"
+msgstr "Wacht antwoord"
+
+msgid "In Progress"
+msgstr "In behandeling"
+
+msgid "Replied"
+msgstr "Beantwoord"
+
+msgid "Close and merge"
+msgstr "Sluiten en samenvoegen"
+
+msgid "Created via Email"
+msgstr "Aangemaakt via e-mail"
+
+msgid "The ticket is locked"
+msgstr "Ticket is gesloten"
+
+msgid "Last Reply"
+msgstr "Laatste reactie"
+
+msgid "Search by username"
+msgstr "Zoeken op gebruikersnaam"
+
+msgid "Already exists"
+msgstr "Bestaat al"
+
+msgid "The role has been stored"
+msgstr "Veld is opgeslagen"
+
+msgid "The role has not been stored"
+msgstr "Rol is niet opgeslagen"
+
+msgid "The role has been deleted"
+msgstr "Rol is verwijderd"
+
+msgid "The role has not been deleted"
+msgstr "Rol is niet verwijderd"
+
+msgid "The role in use cannot be deleting"
+msgstr "Rol in gebruik, kan niet worden verwijderd"
+
+msgid "Save Role"
+msgstr "Opslaan rol"
+
+msgid "Add Role"
+msgstr "Rol toevoegen"
+
+msgid "Role Permission"
+msgstr "Rol bevoegdheden"
+
+msgid "Role Name"
+msgstr "Rol naam"
+
+msgid "Role permissions"
+msgstr "Rol permissies"
+
+msgid "Search Roles"
+msgstr "Zoek Rol"
+
+msgid "Add New Role"
+msgstr "Nieuwe rol toevoegen"
+
+msgid "An announcement has been stored"
+msgstr "Aankondiging is opgeslagen"
+
+msgid "An announcement has not been stored"
+msgstr "Aankondiging is niet opgeslagen"
+
+msgid "An announcement has been deleted"
+msgstr "Aankondiging is verwijderd"
+
+msgid "An announcement has not been deleted"
+msgstr "Aankondiging is niet verwijderd"
+
+msgid "Announcement"
+msgstr "Aankondiging"
+
+msgid "ordering has been changed"
+msgstr "sortering is gewijzigd"
+
+msgid "ordering has not changed"
+msgstr "sortering is niet gewijzigd"
+
+msgid "Public"
+msgstr "Publiek"
+
+msgid "Private"
+msgstr "Prive"
+
+msgid "Title"
+msgstr "Titel"
+
+msgid "Parent Category"
+msgstr "Hoofd categorie"
+
+msgid "Select Category"
+msgstr "Selecteer categorie"
+
+msgid "Description"
+msgstr "Omschrijving"
+
+msgid "Save Announcement"
+msgstr "Aankondiging opslaan"
+
+msgid "Add Announcement"
+msgstr "Aankondiging toevoegen"
+
+msgid "Category"
+msgstr "Categorie"
+
+msgid "Announcements"
+msgstr "Aankondigingen"
+
+msgid "Records per page"
+msgstr "Aantal tickets per pagina"
+
+msgid "Ordering"
+msgstr "Bestellen"
+
+msgid "Save Ordering"
+msgstr "Bestelling opslaan"
+
+msgid "Category Name"
+msgstr "Categorie naam"
+
+msgid "Categories"
+msgstr "Categorieën"
+
+msgid "Banned Email Log List"
+msgstr "Uitsluiten e-mail log lijst"
+
+msgid "Logger Email"
+msgstr "E-mail logger"
+
+msgid "IP Address"
+msgstr "IP adres"
+
+msgid "Ban email has been stored"
+msgstr "Geblokkeerde e-mail is opgeslagen"
+
+msgid "Ban email has not been stored"
+msgstr "Geblokkeerde e-mail is niet opgeslagen"
+
+msgid "Ban email has been deleted"
+msgstr "Geblokkeerde e-mail is verwijderd"
+
+msgid "Ban email has not been deleted"
+msgstr "Geblokkeerde e-mail is niet verwijderd"
+
+msgid "Ban email does not exist"
+msgstr "Geblokkeerde e-mail bestaat niet"
+
+msgid "Add Banned Email"
+msgstr "Geblokkeerde e-mails toevoegen"
+
+msgid "Save Banned Email"
+msgstr "Geblokkeerde e-mails opslaan"
+
+msgid "Banned Emails"
+msgstr "Geblokkeerde e-mails"
+
+msgid "Emails"
+msgstr "E-mails"
+
+msgid "Submitter"
+msgstr "Indiener"
+
+msgid "Canned response message has been stored"
+msgstr "Het kennisbestand is opgeslagen"
+
+msgid "Canned response message has not been stored"
+msgstr "Het kennisbestand is niet opgeslagen"
+
+msgid "Premade department message has been deleted"
+msgstr "Premade afdelingsbericht is verwijderd"
+
+msgid "Premade department message has not been deleted"
+msgstr "Premade afdelingsbericht is niet opgeslagen"
+
+msgid "Canned response"
+msgstr "Kennisbestand antwoord"
+
+msgid "Department"
+msgstr "Afdeling"
+
+msgid "Response"
+msgstr "Antwoord"
+
+msgid "Save Canned Response"
+msgstr "Kennisbestand antwoord opslaan"
+
+msgid "Add Canned Response"
+msgstr "Kennisbestand antwoord toevoegen"
+
+msgid "The department under which the answer will be made is available"
+msgstr "De afdeling waaronder het antwoord zal worden gegeven is beschikbaar"
+
+msgid "Canned Responses"
+msgstr "Kennisbestand antwoord"
+
+msgid "Last Updated"
+msgstr "Laatste update"
+
+msgid "Not updated"
+msgstr "Niet geupdate"
+
+msgid "Canned Response"
+msgstr "Kennisbestand antwoord"
+
+msgid "Latest Tickets"
+msgstr "Laatste Tickets"
+
+msgid "Last Month Ticket Stats"
+msgstr "Afgelopen maand ticket status"
+
+msgid "The attachment has been removed"
+msgstr "Bijlage is verwijderd"
+
+msgid "The attachment has not been removed"
+msgstr "Bijlage is niet verwijderd"
+
+msgid "The download has been stored"
+msgstr "Download is opgeslagen"
+
+msgid "The download has not been stored"
+msgstr "Download is niet opgeslagen"
+
+msgid "The download has been deleted"
+msgstr "Download is verwijderd"
+
+msgid "The download has not been deleted"
+msgstr "Download is niet verwijderd"
+
+msgid "Download All"
+msgstr "Download alles"
+
+msgid "Attachments"
+msgstr "Bijlagen"
+
+msgid "Save Download"
+msgstr "Download opslaan"
+
+msgid "Add Download"
+msgstr "Download toevoegen"
+
+msgid "Add More File"
+msgstr "Meer bestanden toevoegen"
+
+msgid "Delete attachment"
+msgstr "Verwijder bijlage"
+
+msgid "grab"
+msgstr "Kies/Pak"
+
+msgid "Attachment"
+msgstr "Bijlage"
+
+msgid "Files"
+msgstr "Bestanden"
+
+msgid "Get Help"
+msgstr "Krijg Hulp"
+
+msgid "Service is running, please close the pag"
+msgstr "Service is running, svp pagina sluiten"
+
+msgid ""
+"Admin email address and email piping address cannot be the same, your email "
+"piping will not be work."
+msgstr ""
+"Admin e-mail adres en ticket via e-mail kunnen niet gelijk zijn, uw e-mail "
+"ticket zal werken."
+
+msgid "Your setting is working please this."
+msgstr "Jouw instellingen werken. Svp instellingen opslaan"
+
+msgid "Connection established but the system cannot read any email"
+msgstr "Connectie is OK, maar we kunnen geen e-mails lezen"
+
+msgid ""
+"IMAP is either not installed or not enabled in your server. Contact to "
+"hosting company"
+msgstr "IMAP is niet geinstalleerd of niet toegankelijk op jouw server"
+
+msgid "The configuration has been stored"
+msgstr "Configuratie is opgeslagen"
+
+msgid "The configuration not has been stored"
+msgstr "Configuratie is niet opgeslagen"
+
+msgid "Email address already exist"
+msgstr "Email bestaat al"
+
+msgid "Email for email piping has been stored"
+msgstr "E-mail voor e-mail piping is opgeslagen"
+
+msgid "Email for email piping has not been stored"
+msgstr "E-mail voor e-mail piping is niet opgeslagen"
+
+msgid "The email has been deleted"
+msgstr "E-mail is verwijderd"
+
+msgid "The email has not been deleted"
+msgstr "E-mail is niet verwijderd"
+
+msgid "in use cannot deleted"
+msgstr "In gebruik. Verwijderen kan niet"
+
+msgid "Enabled"
+msgstr "Ingeschakeld"
+
+msgid "Only New Tickets"
+msgstr "Alleen nieuwe tickets"
+
+msgid "Only Replies"
+msgstr "Alleen de antwoorden"
+
+msgid "Both"
+msgstr "Beide"
+
+msgid "Other"
+msgstr "Anders"
+
+msgid "Yes"
+msgstr "Ja"
+
+msgid "No"
+msgstr "Nee"
+
+msgid "Please enter the hostname first"
+msgstr "Svp eerst de Host naam invullen"
+
+msgid "Please enable email piping setting first"
+msgstr "Svp ticket eerst activeren via Email instellingen"
+
+msgid "Add Email Piping"
+msgstr "E-mail toevoegen"
+
+msgid "Enable email piping"
+msgstr "Schakel email in"
+
+msgid "Which email type to read"
+msgstr "Welk Email type lezen"
+
+msgid "Save attachments if found in an email"
+msgstr "Bijlage uit de Email opslaan"
+
+msgid "Select your email service provider"
+msgstr "Selecteer jouw Email service provider"
+
+msgid "Host Name"
+msgstr "Host naam"
+
+msgid "Enabled SSL"
+msgstr "SSL inschakelen"
+
+msgid "Do you have enabled SSL on your domain?"
+msgstr "Is SSL ingeschakeld op uw domein?"
+
+msgid "Host Port Number"
+msgstr "Host poort nummer"
+
+msgid "Host port number to read an email from"
+msgstr "Host port nummer om emails te lezen"
+
+msgid "Email address to read emails"
+msgstr "E-mail adres om e-mails te lezen"
+
+msgid "Password"
+msgstr "Wachtwoord"
+
+msgid "Password for a given email address"
+msgstr "Wachtwoord voor bepaald email adres"
+
+msgid "check"
+msgstr "Controleer"
+
+msgid "Check Settings"
+msgstr "Check instellingen"
+
+msgid "If the system doesn't respond in 30 seconds"
+msgstr "Als het systeem in 30 seconden niet reageert"
+
+msgid "it means system unable to connect email server"
+msgstr "betekent dat het systeem geen contact heeft met de Email server"
+
+msgid "Save Settings"
+msgstr "Instellingen opslaan"
+
+msgid "Configuration of a backup job with webcron org"
+msgstr "Configureer een backup via webcron org"
+
+msgid "Name of cron job"
+msgstr "Naam Cron Job"
+
+msgid "Log in to webcron org in the cron area click on"
+msgstr "Login webcron org"
+
+msgid ""
+"180 secs if the does not completely increase it most sites will work with a "
+"setting of 180 600"
+msgstr ""
+"180 sec als de indien niet compleet de meeste sites zullen werken met een "
+"instelling tussen 180 en 600"
+
+msgid "URL you want to execute"
+msgstr "URL die je wilt uitvoeren"
+
+msgid "Leave this blank"
+msgstr "Laat dit leeg"
+
+msgid "Execution time"
+msgstr "Tijd uitvoeren"
+
+msgid "That the grid below the other options select when and how"
+msgstr "dat de stippellijn onder de andere opties. Selecteer wanneer en hoe"
+
+msgid "Alerts"
+msgstr "Meldingen"
+
+msgid ""
+"If you have already set up alerts methods in webcron org interface we "
+"recommend choosing an alert"
+msgstr ""
+"Als u al waarschuwingsmethoden hebt ingesteld in de webcron org interface "
+"dan raden we u aan een waarschuwing te kiezen"
+
+msgid "Cron scheduling using wget"
+msgstr "Cron plannen middels wget"
+
+msgid "Cron scheduling using Curl"
+msgstr "Cron plannen via Curl"
+
+msgid "Custom PHP script to run the cron job"
+msgstr "Custom PHP script om cron job te runnen"
+
+msgid "Sorry the cron job did not work"
+msgstr "Sorry, de Cron Job werkte niet"
+
+msgid "URL for use with your won scripts and third party"
+msgstr "URL voor gebruik won script en 3rd party"
+
+msgid "Recommended run script hourly"
+msgstr "Run script elk uur. Aanbeveling"
+
+msgid "Overall Reports"
+msgstr "Totaal rapportage"
+
+msgid "Staff Members Report"
+msgstr "Medewerker rapportage"
+
+msgid "Department Report"
+msgstr "Afdelingen rapportage"
+
+msgid "Departments Report"
+msgstr "Afdelingen rapportage"
+
+msgid "JS Support Ticket Overall Reports"
+msgstr "JS Support alle Tickets rapportage"
+
+msgid "Tickets By Status"
+msgstr "Tickets per status"
+
+msgid "Tickets By Departments"
+msgstr "Tickets per Afdelingen"
+
+msgid "Tickets By Priorities"
+msgstr "Tickets per Prioriteit"
+
+msgid "Tickets By Channel"
+msgstr "Tickets per kanaal"
+
+msgid "Direct"
+msgstr "Verwijs"
+
+msgid "Direct reply"
+msgstr "Direct antwoorden"
+
+msgid "Email reply"
+msgstr "Beantwoord email"
+
+msgid "Tickets By staff"
+msgstr "Tickets Per Medewerker"
+
+msgid "Report By"
+msgstr "Rapport door"
+
+msgid "staff member"
+msgstr "Medewerker"
+
+msgid "To"
+msgstr "Aan"
+
+msgid "Report By Staff Members"
+msgstr "Report per Staff leden"
+
+msgid "Ticket status by days"
+msgstr "Ticket status per dag"
+
+msgid "Date"
+msgstr "Datum"
+
+msgid "Tickets Staff"
+msgstr "Tickets medewerkers"
+
+msgid "Average Rating"
+msgstr "Gemiddelde beoordeling"
+
+msgid "Average Time"
+msgstr "Gemiddelde tijd"
+
+msgid "Report By staff member"
+msgstr "Report door Medewerker"
+
+msgid "Rating"
+msgstr "Beoordeling"
+
+msgid "Time"
+msgstr "Tijd"
+
+msgid "Merged"
+msgstr "Samengevoegd"
+
+msgid "Report By department"
+msgstr "Rapportage per afdeling"
+
+msgid "Tickets By Department"
+msgstr "Tickets per Afdeling"
+
+msgid "Department Name"
+msgstr "Afdelingsnaam"
+
+msgid "User report"
+msgstr "Gebruiker rapport"
+
+msgid "Users report"
+msgstr "Gebruikers rapport"
+
+msgid "Users Tickets"
+msgstr "Gebruikers Tickets"
+
+msgid "User Report"
+msgstr "Gebruiker Rapport"
+
+msgid "Report By Departments"
+msgstr "Rapport per afdeling"
+
+msgid "Tickets Data"
+msgstr "Tickets datum"
+
+msgid "Message"
+msgstr "Bericht"
+
+msgid "Assigned To"
+msgstr "Toegewezen Aan"
+
+msgid "Requester User Name"
+msgstr "Gebruikersnaam aanvrager"
+
+msgid "Requester Name"
+msgstr "Aanvrager naam"
+
+msgid "Requester Email"
+msgstr "Aanvrager Email"
+
+msgid "Requester Phone"
+msgstr "Aanvrager telefoonnummer"
+
+msgid "Requester help Topic"
+msgstr "Aanvrager hulp Topic"
+
+msgid "Ticket Attachment"
+msgstr "Ticket bijlage"
+
+msgid "Posted By"
+msgstr "Geplaatst door"
+
+msgid "Note Title"
+msgstr "Titel notitie"
+
+msgid "Note Message"
+msgstr "Opmerking"
+
+msgid "Posted Date"
+msgstr "Geposte Datum"
+
+msgid "Note Attachment"
+msgstr "Opmerking bijlage"
+
+msgid "User Time"
+msgstr "Gebruikerstijd"
+
+msgid "System Time"
+msgstr "Systeem tijd"
+
+msgid "Edit Reason"
+msgstr "Reden wijziging"
+
+msgid "Reply Date"
+msgstr "Antwoord datum"
+
+msgid "Reply By"
+msgstr "Beantwoord door"
+
+msgid "Reply Attachment"
+msgstr "Beantwoord bijlage"
+
+msgid "Export"
+msgstr "Exporteer"
+
+msgid "Agent"
+msgstr "Medewerker"
+
+msgid "Select Agent"
+msgstr "Selecteer medewerker"
+
+msgid "Select Ticket Status"
+msgstr "Geselecteerde ticket status"
+
+msgid "Ticket Overdue"
+msgstr "Ticket verlopen"
+
+msgid "Select Ticket Overdue Status"
+msgstr "Selecteer achterstallige ticket status"
+
+msgid "FAQ has been stored"
+msgstr "FAQ is opgeslagen"
+
+msgid "FAQ has not been stored"
+msgstr "FAQ is niet opgeslagen"
+
+msgid "FAQ has been deleted"
+msgstr "FAQ is verwijderd"
+
+msgid "FAQ has not been deleted"
+msgstr "FAQ is niet verwijderd"
+
+msgid "Save FAQ"
+msgstr "FAQ opslaan"
+
+msgid "Add FAQ"
+msgstr "FAQ toevoegen"
+
+msgid "Content"
+msgstr "Inhoud"
+
+msgid "FAQ'S"
+msgstr "Vraag & Antwoord"
+
+msgid "FAQs"
+msgstr "FAQ's"
+
+msgid "Add FAQs"
+msgstr "Vraag & Antwoord Toevoegen"
+
+msgid "Feedback has been stored"
+msgstr "Feedback is opgeslagen"
+
+msgid "Feedback has not been stored"
+msgstr "Feedback is niet opgeslagen"
+
+msgid "Feedbacks"
+msgstr "Beoordelingen"
+
+msgid "user image"
+msgstr "Gebruikers afbeelding"
+
+msgid "feedback image"
+msgstr "Feedback afbeelding"
+
+msgid "Latest Feedback"
+msgstr "Laatste Feedback"
+
+msgid "Submit Feedback"
+msgstr "Feedback opslaan"
+
+msgid "Help topic has been stored"
+msgstr "Help onderwerp is opgeslagen"
+
+msgid "Help topic has not been stored"
+msgstr "Help onderwerp is niet opgeslagen"
+
+msgid "Help topic has been deleted"
+msgstr "Help onderwerp is verwijderd"
+
+msgid "Help topic has not been deleted"
+msgstr "Help onderwerp is niet verwijderd"
+
+msgid "Help topic in use cannot be deleting"
+msgstr "Help topic in gebruik, kan niet worden verwijderd"
+
+msgid "Help topic"
+msgstr "Help Onderwerp"
+
+msgid "Help Topic"
+msgstr "Help onderwerp"
+
+msgid "Save Help Topic"
+msgstr "Help topic opslaan"
+
+msgid "Add Help Topic"
+msgstr "Help topic toevoegen"
+
+msgid "Help Topics"
+msgstr "Help Onderwerpen"
+
+msgid "The category has been stored"
+msgstr "Categorie is opgeslagen"
+
+msgid "The category has not been stored"
+msgstr "Categorie is niet opgeslagen"
+
+msgid "The category has been deleted"
+msgstr "Categorie is verwijderd"
+
+msgid "The category has not been deleted"
+msgstr "Categorie is niet verwijderd"
+
+msgid "The category in use cannot be deleting"
+msgstr "Categorie in gebruik, kan niet verwijderd worden"
+
+msgid "Knowledgebase article has been stored"
+msgstr "Kennisbestand artikel is opgeslagen"
+
+msgid "Knowledgebase article has not been stored"
+msgstr "Kennisbestand artikel is niet opgeslagen"
+
+msgid "The article has been deleted"
+msgstr "Artikel is verwijderd"
+
+msgid "The article has not been deleted"
+msgstr "Artikel is niet verwijderd"
+
+msgid "Article"
+msgstr "Artikel"
+
+msgid "The parent category does not have this type."
+msgstr "Bovenliggende hebben niet dit type"
+
+msgid "Would you like to add this type to Parent Category?"
+msgstr "Wilt u dit type toevoegen aan bovenliggende"
+
+msgid "JYes"
+msgstr "Ja"
+
+msgid "JNo"
+msgstr "Nee"
+
+msgid "Child category has this type,"
+msgstr "Onderliggende categorie heeft dit type"
+
+msgid "You cannot unmark it."
+msgstr "Je kunt de markering niet ongedaan maken"
+
+msgid "Draft"
+msgstr "Ontwerp versie"
+
+msgid "Meta Description"
+msgstr "Meta omschrijving"
+
+msgid "Save Knowledge Base"
+msgstr "Kennisbestand opslaan"
+
+msgid "Please select at least one category for"
+msgstr "Svp op z'n minst 1 catogorie selecteren"
+
+msgid "Category For"
+msgstr "Categorie voor"
+
+msgid "Knowledge Base"
+msgstr "Kennisbestand"
+
+msgid "Save Category"
+msgstr "Categorie opslaan"
+
+msgid "Add Knowledge Base"
+msgstr "Kennisbestand toevoegen"
+
+msgid "Meta Data Options"
+msgstr "Meta data opties"
+
+msgid "Add Category"
+msgstr "Categorie toevoegen"
+
+msgid "Category Title"
+msgstr "Categorie titel"
+
+msgid "category"
+msgstr "Categorie"
+
+msgid "Article Attachment"
+msgstr "Artikel bijlage"
+
+msgid "Knowledgebase"
+msgstr "Kenniscentrum"
+
+msgid "Mail has not been marked as read"
+msgstr "E-mail is niet gemarkeerd als gelezen"
+
+msgid "Mail has been marked as read"
+msgstr "E-mail is gemarkeerd als gelezen"
+
+msgid "Message field cannot be empty"
+msgstr "Berichtenveld mag niet leeg zijn"
+
+msgid "Mail has been sent"
+msgstr "E-mail is verstuurd"
+
+msgid "Mail has not been sent"
+msgstr "E-mail is niet verstuurd"
+
+msgid "Mail has been deleted"
+msgstr "E-mail is verwijderd"
+
+msgid "Mail has not been deleted"
+msgstr "E-mail is niet verwijderd"
+
+msgid "Mail"
+msgstr "E-mail"
+
+msgid "is in use cannot be delete"
+msgstr "In gebruik, kan niet worden verwijderd"
+
+msgid "Mail cannot mark as to read"
+msgstr "E-mail kan niet aangemerkt worden als gelezen"
+
+msgid "Mail cannot mark as unread"
+msgstr "E-mail kan niet aangemerkt worden als ongelezen"
+
+msgid "Mail has been marked as unread"
+msgstr "E-mail kan niet aangemerkt worden als ongelezen"
+
+msgid "Compose"
+msgstr "Samenstellen"
+
+msgid "Send"
+msgstr "Verstuurd"
+
+msgid "Read"
+msgstr "Gelezen"
+
+msgid "Unread"
+msgstr "Ongelezen"
+
+msgid "Select Type"
+msgstr "Selecteer type"
+
+msgid "To use this feature you must be staff member"
+msgstr "Om dit te gebruiken moet je medewerker zijn"
+
+msgid "To use this feature you must have agents addon."
+msgstr "Om dit te gebruiken moet je medewerker Addon hebben"
+
+msgid "Re"
+msgstr "RE:"
+
+msgid "mark read"
+msgstr "Markeer als gelezen"
+
+msgid "mark unread"
+msgstr "Markeer als ongelezen"
+
+msgid "Replied By"
+msgstr "Reactie door"
+
+msgid "Reply"
+msgstr "Reactie"
+
+msgid "Type Message"
+msgstr "Type Bericht"
+
+msgid "Replies"
+msgstr "Reacties"
+
+msgid "Limit exceeds maximum tickets"
+msgstr "Het maximaal aantal tickets is overschreden"
+
+msgid "The maximum number of open tickets limit has been exceeded."
+msgstr "Het maximum aantal open tickets is overschreden."
+
+msgid "Ticket has been closed due to merged with"
+msgstr "Ticket is gesloten wegens samenvoegen met"
+
+msgid "has been merged into"
+msgstr "Is samengevoegd met"
+
+msgid "Merge Ticket"
+msgstr "Ticket samenvoegen"
+
+msgid "Search ticket to merge into"
+msgstr "Zoek ticket om mee samen te voegen"
+
+msgid "Edit Last Reply"
+msgstr "Laatste reactie aanpassen"
+
+msgid "Merge Ticket Latest Reply"
+msgstr "Voeg laatste reactie samen van ticket"
+
+msgid "Merge"
+msgstr "Samenvoegen"
+
+msgid "Ticket has been merged"
+msgstr "Ticket is samengevoegd"
+
+msgid "Ticket has not been merged"
+msgstr "Ticket is niet samengevoegd"
+
+msgid "The internal note has been posted"
+msgstr "Interne notitie is geplaatst"
+
+msgid "The internal note has not been posted"
+msgstr "Interne notitie is niet geplaatst"
+
+msgid "Post Internal Note"
+msgstr "Plaats een interne notitie"
+
+msgid "The internal note is posted by"
+msgstr "Interne notitie is geplaatst door"
+
+msgid "Pass"
+msgstr "Overslaan"
+
+msgid "Ticket Notification"
+msgstr "Melding nieuwe ticket"
+
+msgid "Once Weekly"
+msgstr "Eens per week"
+
+msgid "JS Support Ticket"
+msgstr "Support ticket"
+
+msgid "Thanks for subscribing!"
+msgstr "Bedankt voor inschrijven"
+
+msgid "Ticket already marked overdue"
+msgstr "Ticket is reeds gemerkt als over tijdslimiet"
+
+msgid "The ticket has been marked as overdue"
+msgstr "Ticket gemerkt als over tijdslimiet"
+
+msgid "The ticket has not been marked as overdue"
+msgstr "Ticket is niet gemerkt als over tijdslimiet"
+
+msgid "System"
+msgstr "Systeem"
+
+msgid "Mark overdue"
+msgstr "Markeer als te laat"
+
+msgid "The ticket is marked as overdue by"
+msgstr "Ticket gemerkt als over tijdslimiet door"
+
+msgid "The ticket has been unmarked as overdue"
+msgstr "Ticket is niet gemerkt als over tijdslimiet"
+
+msgid "The ticket has not been unmarked as overdue"
+msgstr "Ticket is niet gemerkt als over tijdslimiet"
+
+msgid "Unmark overdue"
+msgstr "Te laat markering verwijderen"
+
+msgid "The ticket is unmarked as overdue by"
+msgstr "Ticket is niet gemerkt als over tijdslimiet door"
+
+msgid "Paid Support"
+msgstr "Betaalde ondersteuning"
+
+msgid "Check if you want to use this product for paid support"
+msgstr "Controleer of je dit product als betaalde ondersteuning wil gebruiken"
+
+msgid "Paid support type"
+msgstr "Betaalde ondersteuning type"
+
+msgid "One-off Support"
+msgstr "Eenmalige ondersteuning"
+
+msgid "Subscription Support"
+msgstr "Abonnement ondersteuning"
+
+msgid "Number of tickets"
+msgstr "Aantal Tickets"
+
+msgid ""
+"Enter allowed number of tickets that customer can post. Enter -1 for "
+"unlimited tickets."
+msgstr ""
+"Voer het toegestane aantal tickets in dat de klant kan plaatsen. Voer -1 in "
+"voor onbeperkte tickets."
+
+msgid "Credential Type"
+msgstr "Identificatietype"
+
+msgid "Additional Info"
+msgstr "Aanvullende informatie"
+
+msgid "Please insert values"
+msgstr "Voer waarden in"
+
+msgid "Visitor"
+msgstr "Bezoeker"
+
+msgid "By"
+msgstr "Door"
+
+msgid "Credential removed on ticket close"
+msgstr "Inloggegevens verwijderd bij sluiten van ticket"
+
+msgid "Failed to retrieve data"
+msgstr "Kan gegevens niet ophalen"
+
+msgid "The new theme has been applied"
+msgstr "Het nieuwe thema is toegepast"
+
+msgid "Error applying the new theme"
+msgstr "Fout bij het toepassen van het nieuwe thema"
+
+msgid "Themes"
+msgstr "Thema's"
+
+msgid "Color Chooser"
+msgstr "Kleurenkiezer"
+
+msgid "Preset Theme"
+msgstr "Voorinstelling Thema"
+
+msgid "Color 1"
+msgstr "Kleur 1"
+
+msgid "Top menu heading background"
+msgstr "Achtergrond Top menu header"
+
+msgid "Color 2"
+msgstr "Kleur 2"
+
+msgid "Top header line color"
+msgstr "Top header lijn kleur"
+
+msgid "Button Hover"
+msgstr "Aanwijsknop"
+
+msgid "Heading text"
+msgstr "Koptekst"
+
+msgid "Color 3"
+msgstr "Kleur 3"
+
+msgid "Content Background Color"
+msgstr "Content achtergrond kleur"
+
+msgid "Color 4"
+msgstr "Kleur 4"
+
+msgid "Content Text Color"
+msgstr "Contect tekst kleur"
+
+msgid "Color 5"
+msgstr "Kleur 5"
+
+msgid "Border color"
+msgstr "Rand kleur"
+
+msgid "Lines"
+msgstr "Lijnen"
+
+msgid "Color 6"
+msgstr "Kleur 6"
+
+msgid "Button Color"
+msgstr "Knop kleur"
+
+msgid "Color 7"
+msgstr "Kleur 7"
+
+msgid "Top header text color"
+msgstr "Top header tekst kleur"
+
+msgid "Save Theme"
+msgstr "Thema opslaan"
+
+msgid "Color Effect Preview"
+msgstr "Kleur effect voorbeeld"
+
+msgid "Blue"
+msgstr "Blauw"
+
+msgid "Red"
+msgstr "Rood"
+
+msgid "Greenish"
+msgstr "Groenachtig"
+
+msgid "Brown"
+msgstr "Bruin"
+
+msgid "Orange"
+msgstr "Oranje"
+
+msgid "Green"
+msgstr "Groen"
+
+msgid "Black"
+msgstr "Zwart"
+
+msgid "Mail Notification Widget"
+msgstr "E-mail melding Widget"
+
+msgid "Show newly and reply mail notifications"
+msgstr "Toon nieuw en beantwoord e-mailmeldingen"
+
+msgid "New mail from"
+msgstr "Nieuw e-mail formulier"
+
+msgid "Mail Notification"
+msgstr "E-mail melding"
+
+msgid "Layout"
+msgstr "Opmaak"
+
+msgid "Vertical"
+msgstr "Verticaal"
+
+msgid "Horizontal"
+msgstr "Horizontaal"
+
+msgid "My Ticket Widget"
+msgstr "Mijn Ticket Widget"
+
+msgid "Show unanswered tickets"
+msgstr "Toon onbeantwoorde tickets"
+
+msgid "My Tickets"
+msgstr "Mijn tickets"
+
+msgid "Order tickets"
+msgstr "Bestel tickets"
+
+msgid "Close due to merge"
+msgstr "Sluiten vanwege samenvoegen"
+
+msgid "Order"
+msgstr "Opdracht"
+
+msgid "There is no ticket"
+msgstr "Er is geen ticket"
+
+msgid "Something went wrong"
+msgstr "Er is iets fout gegaan"
+
+msgid "Transaction Key"
+msgstr "Transactiesleutel"
+
+msgid "Please select"
+msgstr "Selecteer alstublieft"
+
+msgid "Hide notice"
+msgstr "Bericht verbergen"
+
+msgid "Control Panel"
+msgstr "Bedieningspaneel"
+
+msgid "Announcement Detail"
+msgstr "Aankondiging details"
+
+msgid "Edit Announcement"
+msgstr "Wijzig aankondiging"
+
+msgid "Departments"
+msgstr "Afdelingen"
+
+msgid "Add Department"
+msgstr "Afdeling toevoegen"
+
+msgid "Edit Department"
+msgstr "Wijzig afdeling"
+
+msgid "Staff report"
+msgstr "Staff rapport"
+
+msgid "Staff reports"
+msgstr "Personeelsrapporten"
+
+msgid "Departments report"
+msgstr "Afdeling’s rapport"
+
+msgid "Edit Download"
+msgstr "Wijzig download"
+
+msgid "Edit FAQ"
+msgstr "FAQ wijzigen"
+
+msgid "FAQ Detail"
+msgstr "FAQ details"
+
+msgid "Edit Knowledge Base"
+msgstr "Wijzig kennisbestand"
+
+msgid "Edit Category"
+msgstr "Wijzig categorie"
+
+msgid "Knowledge Base Detail"
+msgstr "Kennisbestand Detail"
+
+msgid "Send Message"
+msgstr "Verstuur bericht"
+
+msgid "Edit Role"
+msgstr "Wijzig rol"
+
+msgid "Staffs"
+msgstr "Medewerkers"
+
+msgid "Add Staff"
+msgstr "Medewerkers toevoegen"
+
+msgid "Edit Staff"
+msgstr "Medewerkers wijzigen"
+
+msgid "Staff Permissions"
+msgstr "Medewerkers permissie"
+
+msgid "Add Ticket"
+msgstr "Ticket toevoegen"
+
+msgid "Edit Ticket"
+msgstr "Wijzig ticket"
+
+msgid "Equals"
+msgstr "Gelijk aan"
+
+msgid "About Us"
+msgstr "Over ons"
+
+msgid "Translations"
+msgstr "Vertalingen"
+
+msgid "System Errors"
+msgstr "Systeemfouten"
+
+msgid "Create Ticket"
+msgstr "Ticket aanmaken"
+
+msgid "Fields"
+msgstr "Velden"
+
+msgid "Install"
+msgstr "Installeren"
+
+msgid "Configurations"
+msgstr "Configuratie"
+
+msgid "Cron Job URLs"
+msgstr "Cron-taak-URL's"
+
+msgid "Reports"
+msgstr "Reporten"
+
+msgid "Overall Statistics"
+msgstr "Overall statistieken"
+
+msgid "Agent Reports"
+msgstr "Agentrapporten"
+
+msgid "Department Reports"
+msgstr "Afdeling rapporten"
+
+msgid "User Reports"
+msgstr "Gebruikers rapporten"
+
+msgid "Satisfaction Report"
+msgstr "Beoordeling’s rapport"
+
+msgid "GDPR Fields"
+msgstr "GDPR-velden"
+
+msgid "Erase Data Requests"
+msgstr "Wis gegevensverzoeken"
+
+msgid "Premium Addons"
+msgstr "Premium add-ons"
+
+msgid "Install Addons"
+msgstr "Installeer add-ons"
+
+msgid "Addons List"
+msgstr "Lijst met add-ons"
+
+msgid "Feedback Fields"
+msgstr "Beoordeling’s velden"
+
+msgid "System Emails"
+msgstr "Systeem Emails"
+
+msgid "Add Email"
+msgstr "E-mail toevoegen"
+
+msgid "Priorities"
+msgstr "Prioriteiten"
+
+msgid "Add Priority"
+msgstr "Prioriteit toevoegen"
+
+msgid "Ban Emails"
+msgstr "E-mails uitsluiten"
+
+msgid "Email Templates"
+msgstr "E-mail templates"
+
+msgid "New Ticket"
+msgstr "Nieuw ticket"
+
+msgid "New Agent"
+msgstr "Nieuwe agent"
+
+msgid "Reassign Ticket"
+msgstr "Ticket toekennen aan"
+
+msgid "Close Ticket"
+msgstr "Sluit ticket"
+
+msgid "Delete Ticket"
+msgstr "Verwijder ticket"
+
+msgid "Mark Overdue"
+msgstr "Markeer als verlopen"
+
+msgid "Ban Email"
+msgstr "E-mail uitsluiten"
+
+msgid "Ban email try to create ticket"
+msgstr "E-mail uitsluiten voor aanmaken ticket"
+
+msgid "Department Transfer"
+msgstr "Afdeling verplaatsen"
+
+msgid "Ban Email and Close Ticket"
+msgstr "E-mail uitsluiten en Ticket sluiten"
+
+msgid "Unban Email"
+msgstr "Email uitsluiten ongedaan maken"
+
+msgid "Response Ticket"
+msgstr "Reactie Ticket"
+
+msgid "Reply Ticket"
+msgstr "Antwoord Ticket"
+
+msgid "New Ticket Admin Alert"
+msgstr "Nieuw ticket admin waarschuwing"
+
+msgid "In Progress Ticket"
+msgstr "In proces ticket"
+
+msgid "Ticket priority is changed by"
+msgstr "Ticket prioriteit gewijzigd door"
+
+msgid "New Mail Received"
+msgstr "Nieuwe e-mail ontvangen"
+
+msgid "New Mail Message Received"
+msgstr "Nieuw e-mail bericht ontvangen"
+
+msgid "Feedback Email To User"
+msgstr "Feedback email naar gebruiker"
+
+msgid "User Reply On Closed Ticket"
+msgstr "Gebruiker heeft gereageerd op een gesloten ticket"
+
+msgid "Log out"
+msgstr "Uitloggen"
+
+msgid "Username / password is incorrect"
+msgstr "Gebruikersnaam / wachtwoord is onjuist"
+
+msgid "Username already taken"
+msgstr "Gebruikersnaam reeds in gebruik"
+
+msgid "Invalid username"
+msgstr "Ongeldige gebruikersnaam"
+
+msgid "Please enter a username"
+msgstr "Vul alstublieft een gebruikersnaam in"
+
+msgid "Invalid email"
+msgstr "Ongeldig email adres"
+
+msgid "Email already registered"
+msgstr "Email adres is al geregistreerd"
+
+msgid "Please enter a password"
+msgstr "Vul alstublieft een wachtwoord in"
+
+msgid "Passwords do not match"
+msgstr "Wachtwoorden komen niet overeen"
+
+msgid "Invalid captcha"
+msgstr "Ongeldige captcha"
+
+msgid "Could not subscribe to the newsletter"
+msgstr "Kon zich niet abonneren op de nieuwsbrief"
+
+msgid ""
+"Please check confirmation email to complete your subscription for the "
+"newsletter"
+msgstr ""
+"Controleer de bevestigingsmail om uw abonnement op de nieuwsbrief te "
+"voltooien"
+
+msgid "You have successfully subscribed to the newsletter"
+msgstr "U bent met succes aangemeld voor de nieuwsbrief"
+
+msgid "JS Help Desk Control Panel"
+msgstr "JS Help Desk-configuratiescherm"
+
+msgid "System Error"
+msgstr "Systeemfout"
+
+msgid "User Fields"
+msgstr "Gebruikersvelden"
+
+msgid "Ban list log"
+msgstr "Lijst met logboeken verbannen"
+
+msgid "Field Ordering"
+msgstr "Veld sortering"
+
+msgid "Post Installation"
+msgstr "Na installatie"
+
+msgid "Premium Addon"
+msgstr "Premium add-on"
+
+msgid "No record found"
+msgstr "Geen gegevens gevonden"
+
+msgid "No record found ...!"
+msgstr "Geen record gevonden ...!"
+
+msgid "Access Denied"
+msgstr "Toegang geweigerd"
+
+msgid "You have no permission to access this page"
+msgstr "U heeft geen toestemming om deze pagina te openen"
+
+msgid "User is not allowed to access this page."
+msgstr "Gebruiker heeft geen toegang tot deze pagina."
+
+msgid "You are already Logged In."
+msgstr "Je bent al ingelogd."
+
+msgid "Access Denied!"
+msgstr "Toegang geweigerd!"
+
+msgid "Your account has been disabled, please contact the administrator."
+msgstr "Uw account is uitgeschakeld, neem contact op met de beheerder."
+
+msgid "You are not logged In"
+msgstr "Je bent niet ingelogd"
+
+msgid "To access the page, Please login"
+msgstr "Log in om de pagina te openen"
+
+msgid "Register"
+msgstr "Registreren"
+
+msgid "User is not allowed to view this Ticket"
+msgstr "Het is de gebruiker niet toegestaan ​​dit ticket te bekijken"
+
+msgid ""
+"Registration has been disabled by admin, please contact the system "
+"administrator."
+msgstr ""
+"Registratie is uitgeschakeld door admin, neem contact op met de "
+"systeembeheerder."
+
+msgid "You have already given the feedback for this ticket."
+msgstr "Je hebt al feedback gegeven voor dit ticket."
+
+msgid "Ticket not found...!"
+msgstr "Ticket niet gevonden ...!"
+
+msgid "User is not allowed to view this page"
+msgstr "Gebruiker mag deze pagina niet bekijken"
+
+msgid "Thank you so much for your feedback"
+msgstr "Heel erg bedankt voor je feedback"
+
+msgid "Form submission failed!"
+msgstr "Verzenden van formulier is mislukt!"
+
+msgid "You have not answered all required fields"
+msgstr "Je hebt niet alle verplichte velden ingevuld"
+
+msgid "You have not given a correct time"
+msgstr "Je hebt niet de juiste tijd opgegeven"
+
+msgid "You have not given a correct e-mail address"
+msgstr "U heeft geen correct e-mailadres opgegeven"
+
+msgid "You have not given a correct phone number"
+msgstr "Je hebt geen correct telefoonnummer opgegeven"
+
+msgid "You have not given a correct answer to the security question"
+msgstr "U heeft de beveiligingsvraag niet correct beantwoord"
+
+msgid "You have not given a correct date"
+msgstr "Je hebt geen juiste datum opgegeven"
+
+msgid "The input value must be between "
+msgstr "De invoerwaarde moet tussen liggen"
+
+msgid " characters"
+msgstr "karakters"
+
+msgid "The input value is longer than "
+msgstr "De invoerwaarde is langer dan"
+
+msgid "The input value is shorter than "
+msgstr "De invoerwaarde is korter dan"
+
+msgid "Input values could not be confirmed"
+msgstr "Invoerwaarden konden niet worden bevestigd"
+
+msgid "Incorrect domain value"
+msgstr "Onjuiste domeinwaarde"
+
+msgid "The input value is not a correct URL"
+msgstr "De invoerwaarde is geen correcte URL"
+
+msgid "The input value is incorrect"
+msgstr "De invoerwaarde is onjuist"
+
+msgid "The input value was not a correct number"
+msgstr "De invoerwaarde was geen correct nummer"
+
+msgid "Your social security number was incorrect"
+msgstr "Uw sofinummer was onjuist"
+
+msgid "Incorrect UK VAT Number"
+msgstr "Onjuist Brits btw-nummer"
+
+msgid "The password isn't strong enough"
+msgstr "Het wachtwoord is niet sterk genoeg"
+
+msgid "You have to choose at least "
+msgstr "Je moet op zijn minst kiezen"
+
+msgid " answers"
+msgstr "antwoorden"
+
+msgid "The input value can only contain alphanumeric characters "
+msgstr "De invoerwaarde mag alleen alfanumerieke tekens bevatten"
+
+msgid " and "
+msgstr "en"
+
+msgid "The file you are trying to upload is too large"
+msgstr "Het bestand dat u probeert te uploaden, is te groot"
+
+msgid "The file you are trying to upload is of the wrong type"
+msgstr "Het bestand dat u probeert te uploaden, is van het verkeerde type"
+
+msgid "Please choose between "
+msgstr "Maak een keuze tussen"
+
+msgid "Please choose at least "
+msgstr "Kies tenminste"
+
+msgid "Please choose a maximum of "
+msgstr "Kies een maximum van"
+
+msgid "The credit card number is not correct"
+msgstr "Het creditcardnummer is niet correct"
+
+msgid "The CVV number was not correct"
+msgstr "Het CVV-nummer was niet correct"
+
+msgid "Lost your password"
+msgstr "Wachtwoord vergeten"
+
+msgid "Pagination default page size not saved"
+msgstr "Standaard pagina afmetingen zijn niet opgeslagen"
+
+msgid "Data directory cannot empty."
+msgstr "Gegevensmap kan niet leeg zijn."
+
+msgid "Data directory is not proper."
+msgstr "Data map is niet goed"
+
+msgid "Data directory is not writable."
+msgstr "Gegevensmap is niet beschrijfbaar."
+
+msgid "System slug not be empty."
+msgstr "Systeem slug mag niet leeg zijn"
+
+msgid "System slug is conflicted with post or page slug."
+msgstr "Systeemslug is in conflict met post- of paginaslug."
+
+msgid "Days"
+msgstr "Dagen"
+
+msgid "Hours"
+msgstr "Uren"
+
+msgid "Own Captcha"
+msgstr "Eigen Captcha"
+
+msgid "Any"
+msgstr "Elke"
+
+msgid "Addition"
+msgstr "Aanvulling"
+
+msgid "Subtraction"
+msgstr "Aftrekken"
+
+msgid "Show"
+msgstr "Toon"
+
+msgid "Hide"
+msgstr "Verberg"
+
+msgid "Default"
+msgstr "Standaard"
+
+msgid "Custom"
+msgstr "Op maat"
+
+msgid "Top left"
+msgstr "Top links"
+
+msgid "Top right"
+msgstr "Top rechts"
+
+msgid "Middle left"
+msgstr "Midden links"
+
+msgid "Middle right"
+msgstr "Midden rechts"
+
+msgid "Bottom left"
+msgstr "Links onder"
+
+msgid "Bottom right"
+msgstr "Rechts onder"
+
+msgid "Random"
+msgstr "Willekeurig"
+
+msgid "Sequence"
+msgstr "Volgorde"
+
+msgid "General Settings"
+msgstr "Algemene instellingen"
+
+msgid "Ticket Settings"
+msgstr "Ticketinstellingen"
+
+msgid "Email Settings"
+msgstr "Email instellingen"
+
+msgid "User Menu"
+msgstr "gebruikersmenu"
+
+msgid "Push Notifications"
+msgstr "Push-meldingen"
+
+msgid "Private Credentials"
+msgstr "Privéreferenties"
+
+msgid "Envato Validation"
+msgstr "Envato-validatie"
+
+msgid "Easy Digital Downloads"
+msgstr "Gemakkelijke digitale downloads"
+
+msgid "Set the heading of your plugin"
+msgstr "Stel heading in voor plugin"
+
+msgid "Ticket Default Page"
+msgstr "Ticket standaard pagina"
+
+msgid "Select Page"
+msgstr "Selecteer pagina"
+
+msgid ""
+"Select JS Help Desk default page, on the action system, will redirect on the "
+"selected page. If not select the default page, email links, and support icon "
+"might not work."
+msgstr ""
+"Selecteer de standaardpagina van JS Help Desk, op het actiesysteem wordt "
+"omgeleid naar de geselecteerde pagina. Als u de standaardpagina niet "
+"selecteert, werken e-maillinks en het ondersteuningspictogram mogelijk niet."
+
+msgid "Support Icon"
+msgstr "Support icoon"
+
+msgid "Screen Tag"
+msgstr "Scherm tag"
+
+msgid "Enable / disable your support icon"
+msgstr "Inschakelen / uitschakelen van uw support symbool"
+
+msgid "Support Icon Position"
+msgstr "Support icoon positie"
+
+msgid "Screen Tag Position"
+msgstr "Scherm tag positie"
+
+msgid "Select position for your support icon"
+msgstr "Selecteer positie voor uw support icoon"
+
+msgid "Set your plugin offline for front end"
+msgstr "Instellen plugin offline voor front end"
+
+msgid "Offline Message"
+msgstr "Offline bericht"
+
+msgid "Set the offline message for your user"
+msgstr "Instellen offline bericht voor gebruikers"
+
+msgid "Data Directory"
+msgstr "Data map"
+
+msgid "Set the name for your data directory"
+msgstr "Naam voor database instellen"
+
+msgid ""
+"You need to rename the existing data directory in the file system before "
+"changing the data directory name"
+msgstr ""
+"U moet de bestaande datamap in het bestandssysteem hernoemen voordat u de "
+"datamapnaam wijzigt"
+
+msgid "Date Format"
+msgstr "Datumnotitie"
+
+msgid "Set the default date format"
+msgstr "Stel standaard datum format in"
+
+msgid "Ticket auto close"
+msgstr "Automatisch ticket sluiten"
+
+msgid "Ticket auto-close if user does not respond within given days"
+msgstr ""
+"Ticket wordt automatisch gesloten als de gebruiker niet binnen bepaalde "
+"dagen reageert"
+
+msgid "No. of attachment"
+msgstr "Nr. van bijlage"
+
+msgid "No. of attachment allowed at a time"
+msgstr "Bijlage niet toegestaan op dit moment"
+
+msgid "File maximum size"
+msgstr "Bestand max grootte"
+
+msgid "File extension"
+msgstr "Bestand extensie"
+
+msgid "File extension allowed to attach"
+msgstr "Bestand extensie toegestaan voor attachment"
+
+msgid "Pagination default page size"
+msgstr "Paginering standaard pagina afmeting"
+
+msgid "Set the no. of record per page"
+msgstr "Instellen aantal record per pagina"
+
+msgid "Show hide breadcrumbs"
+msgstr "Toon verberg breadcrumbs"
+
+msgid "Top Header"
+msgstr "Bovenste koptekst"
+
+msgid "Redirect user to JS Help Desk control panel after log in"
+msgstr ""
+"Leid de gebruiker na het inloggen om naar het JS Help Desk-configuratiescherm"
+
+msgid "Show count on my tickets"
+msgstr "Toon aantallen op mijn tickets"
+
+msgid "Show number of the open, closed, answered ticket in my ticket"
+msgstr "Toon nummer van het open, gesloten, beantwoorde ticket in mijn ticket"
+
+msgid "Show captcha on registration form"
+msgstr "Toon captcha op registratieformulier"
+
+msgid "Select whether you want to show captcha on the registration form or not"
+msgstr "Selecteer of u captcha op het registratieformulier wilt tonen of niet"
+
+msgid "Default wp role for new users"
+msgstr "Standaard wordpress rol voor nieuwe gebruikers"
+
+msgid "Select the role you want to assign to new users"
+msgstr "Selecteer de rol die u aan nieuwe gebruikers wilt toewijzen"
+
+msgid "Set Login Link"
+msgstr "Inloglink instellen"
+
+msgid "Set Login Link Default or Custom"
+msgstr "Stel Login Link als standaard of aangepast in"
+
+msgid "Ticketid sequence"
+msgstr "Ticket-id reeks"
+
+msgid "Set ticketid sequential or random"
+msgstr "Ticketid opeenvolgend of willekeurig tonen"
+
+msgid "Ticket listing ordering"
+msgstr "Ticketlijst bestellen"
+
+msgid "Set default ordering for ticket listing"
+msgstr "Stel de standaardvolgorde in voor ticketvermelding"
+
+msgid "Maximum tickets"
+msgstr "Maximum aantal tickets"
+
+msgid "Maximum ticket per user"
+msgstr "Maximum aantal tickets per gebruiker"
+
+msgid "Maximum opened tickets per user"
+msgstr "Maximum open tickets per gebruiker"
+
+msgid "Reopen ticket within days"
+msgstr "Heropen ticket binnen aantal dagen"
+
+msgid "The ticket can be reopened within a given number of days"
+msgstr "Het ticket kan binnen een bepaald aantal dagen worden heropend"
+
+msgid "User can print ticket"
+msgstr "Gebruiker kan ticket afdrukken"
+
+msgid "Can user print ticket from ticket detail or not"
+msgstr "Kan de gebruiker wel of niet een ticket printen"
+
+msgid "Show captcha on the visitor ticket form"
+msgstr "Toon captcha op het bezoekerskaartje"
+
+msgid "Show captcha when a visitor wants to create a ticket"
+msgstr "Laat captcha zien wanneer een bezoeker een ticket wil maken"
+
+msgid "Captcha selection"
+msgstr "Captcha selectie"
+
+msgid "Which captcha you want to add"
+msgstr "Welke Captcha wil je toevoegen"
+
+msgid "Please enter the google re-captcha public key from"
+msgstr "Voer de Google Re-Captcha openbare sleutel in van"
+
+msgid "Please enter the google re-captcha private key from"
+msgstr "Voer de Google Re-Captcha privésleutel in van"
+
+msgid "Own captcha calculation type"
+msgstr "Eigen captcha calculatie key"
+
+msgid "Select calculation type addition or subtraction"
+msgstr "Selecteer calculatie type (aanvullen ed)"
+
+msgid "Own captcha operands"
+msgstr "Eigen captcha operands"
+
+msgid "Select the total operands to be given"
+msgstr "Selecteer het totaal aantal operands"
+
+msgid "Own captcha subtraction answer positive"
+msgstr "Eigen captcha subtraction antwoord positief"
+
+msgid "Is subtraction answer should be positive"
+msgstr "Subtraction antwoord moet positief zijn"
+
+msgid "New ticket message"
+msgstr "Nieuw ticket bericht"
+
+msgid "This message will show on the new ticket"
+msgstr "Dit bericht wordt weergegeven op het nieuwe ticket"
+
+msgid "Allow Users To Reply via Email On Closed Ticket"
+msgstr "Gebruikers toestaan via email te reageren op een gesloten ticket"
+
+msgid "Select whether users can reply to closed email piping ticket or not"
+msgstr ""
+"Selecteer of gebruikers al dan niet kunnen reageren op een gesloten e-mail "
+"piping-ticket"
+
+msgid "Visitor can create ticket"
+msgstr "Bezoeker kan ticket aanmaken"
+
+msgid "Can visitor create ticket or not"
+msgstr "Kan bezoeker ticket aanmaken of niet"
+
+msgid "Visitor ticket creation message"
+msgstr "Bezoeker maakt een ticket aan bericht"
+
+msgid "This text will appear whenever a visitor creates a ticket"
+msgstr "Deze tekst verschijnt telkens wanneer een bezoeker een ticket aanmaakt"
+
+msgid "Default alert email"
+msgstr "Standaard email alert"
+
+msgid ""
+"If ticket department email is not selected then this email is used to send "
+"emails"
+msgstr ""
+"Als ticket afdeling-email niet geselecteerd is, gebruik dit email adres"
+
+msgid "Default admin email"
+msgstr "Standaard Admin e-mail"
+
+msgid "Admin email address to receive emails"
+msgstr "Admin e-mail adres voor ontvangen e-mails"
+
+msgid "Add New Email"
+msgstr "Nieuwe e-mail toevoegen"
+
+msgid "Ban Email New Ticket"
+msgstr "Ban e-mail nieuw ticket"
+
+msgid "Mail to admin"
+msgstr "E-mail naar admin"
+
+msgid "Email sends to admin when banned email try to create a ticket"
+msgstr ""
+"E-mail wordt naar de beheerder gestuurd wanneer verboden e-mail probeert een "
+"ticket te maken"
+
+msgid "Ticket Operations Email Setting"
+msgstr "E-mailinstelling ticketbewerkingen"
+
+msgid "New ticket"
+msgstr "Nieuw ticket"
+
+msgid "Ticket reassign"
+msgstr "Ticket opnieuw toewijzen"
+
+msgid "Ticket close"
+msgstr "Ticket sluiten"
+
+msgid "Ticket delete"
+msgstr "Ticket verwijderen"
+
+msgid "Ticket ban email"
+msgstr "Ticket van geblokkeerde Email"
+
+msgid "Ticket department transfer"
+msgstr "Ticket afdeling verplaatsen"
+
+msgid "Ticket reply User"
+msgstr "Ticket antwoord gebruiker"
+
+msgid "Ticket ban email and close ticket"
+msgstr "Ticket geblokkeerde email en sluit ticket"
+
+msgid "Ticket unban email"
+msgstr "Ticket Email de-blokkeren"
+
+msgid "Ticket lock"
+msgstr "Ticket gesloten"
+
+msgid "Ticket unlock"
+msgstr "Ticket heropenen"
+
+msgid "Ticket Change Priority"
+msgstr "Ticket wijzig prioriteit"
+
+msgid "Mark Ticket In Progress"
+msgstr "Gemarkeerde ticket in behandeling"
+
+msgid "Reply To A Closed Ticket By Email"
+msgstr "Beantwoord een gesloten ticket via email"
+
+msgid "Send Feedback Email To User"
+msgstr "Verstuur feedback email naar gebruiker"
+
+msgid "Dashboard Links"
+msgstr "Dashboard-koppelingen"
+
+msgid "Open Ticket"
+msgstr "Ticket aanmaken"
+
+msgid "Department reports"
+msgstr "Afdeling rapporten"
+
+msgid "Login/Logout Button"
+msgstr "Login/Logout knop"
+
+msgid "Ticket Total Count"
+msgstr "Totaal aantal tickets"
+
+msgid "Ticket Statistics"
+msgstr "Ticketstatistieken"
+
+msgid "Erase Agent Data"
+msgstr "Agentgegevens wissen"
+
+msgid "Home"
+msgstr "Thuis"
+
+msgid "Check Ticket Status"
+msgstr "Controleer ticket status"
+
+msgid "Registration"
+msgstr "Registratie"
+
+msgid "Erase User Data"
+msgstr "Wis gebruikersgegevens"
+
+msgid "Feedback Settings"
+msgstr "Feedback Instellingen"
+
+msgid "Feedback Email Delay Type"
+msgstr "Soort email vertraging"
+
+msgid "Select delay type for feedback email"
+msgstr "Selecteer vertragingstype voor feedback email"
+
+msgid "Feedback Email Delay"
+msgstr "Vertraging feedback email"
+
+msgid ""
+"Set no. of days or hours to send feedback email after a ticket is closed"
+msgstr ""
+"Stel nr. dagen of uren om feedback-e-mail te verzenden nadat een ticket is "
+"gesloten"
+
+msgid "Success message after submitting feedback"
+msgstr "Succesbericht na het indienen van feedback"
+
+msgid "This text will appear whenever anyone submits feedback"
+msgstr "Deze tekst verschijnt wanneer iemand feedback verstuurd"
+
+msgid "UTF Auto Switch"
+msgstr "UTF automatische schakelaar"
+
+msgid "Firebase Notifications"
+msgstr "Firebase-meldingen"
+
+msgid ""
+"JS Help Desk Desktop Notifications plugin is not installed. Please install "
+"the plugin to enable desktop notifications"
+msgstr ""
+"De plug-in JS Help Desk Desktop Notifications is niet geïnstalleerd. "
+"Installeer de plug-in om bureaubladmeldingen in te schakelen"
+
+msgid "Click here to insert Install."
+msgstr "Klik hier om Install in te voegen."
+
+msgid "JS Help Desk Desktop Notifications plugin is not active."
+msgstr "De plug-in JS Help Desk Desktop Notifications is niet actief."
+
+msgid "Find and add firebase api's keys"
+msgstr "Zoek en voeg firebase API-sleutels toe"
+
+msgid "Click here to get firebae api keys."
+msgstr "Klik hier om Firebase API-sleutels te krijgen."
+
+msgid "API key for user"
+msgstr "API-sleutel voor gebruiker"
+
+msgid "Firebase api key for front user"
+msgstr "Firebase api-toets voor frontale gebruiker"
+
+msgid "Auth Domain"
+msgstr "Verificatiedomein"
+
+msgid "Firebase Auth Domain"
+msgstr "Firebase-verificatiedomein"
+
+msgid "Database Url"
+msgstr "Database-URL"
+
+msgid "Firebase Database URL"
+msgstr "Firebase Database-URL"
+
+msgid "Project Id"
+msgstr "Project-id"
+
+msgid "Firebase Project Id"
+msgstr "Firebase-project-ID"
+
+msgid "Bucket Storage"
+msgstr "Emmer opslag"
+
+msgid "Message Sender Id"
+msgstr "Bericht afzender-ID"
+
+msgid "Firebase Server Key"
+msgstr "Firebase-serversleutel"
+
+msgid "Logo Image for Desktop Notifications"
+msgstr "Logo afbeelding voor bureaubladmeldingen"
+
+msgid "Remove Image"
+msgstr "Afbeelding verwijderen"
+
+msgid "Remove Logo"
+msgstr "Logo verwijderen"
+
+msgid "No Firebase Notificaiton Logo"
+msgstr "Geen Firebase-meldingslogo"
+
+msgid "Secret Key"
+msgstr "Geheime sleutel"
+
+msgid ""
+"Private Credentials Encryption Key changing this value will discard all "
+"existing credentials "
+msgstr ""
+"Private Credentials Encryption Key die deze waarde wijzigt, verwerpt alle "
+"bestaande inloggegevens"
+
+msgid "Second Level Security"
+msgstr "Beveiliging op het tweede niveau"
+
+msgid "For enhanced security change encryption method in %s on line %s"
+msgstr "Voor verbeterde coderingsmethode voor beveiligingswijzigingen in %s op lijn %s"
+
+msgid "Api Key"
+msgstr "API sleutel"
+
+msgid "Enter Envato api key "
+msgstr "Voer de Envato api-sleutel in"
+
+msgid "Click here to generate an api key"
+msgstr "Klik hier om een ​​API-sleutel te genereren"
+
+msgid "License Mandatory"
+msgstr "Licentie verplicht"
+
+msgid ""
+"Prevent users from submitting a ticket without a valid license for one of "
+"your product"
+msgstr ""
+"Voorkom dat gebruikers een ticket indienen zonder een geldige licentie voor "
+"een van uw producten"
+
+msgid "Product ID"
+msgstr "Product-ID"
+
+msgid "A comma-separated list of Envato product ids"
+msgstr "Een door komma's gescheiden lijst met Envato-product-ID's"
+
+msgid "Enter MailChimp API key "
+msgstr "Voer de MailChimp API-sleutel in"
+
+msgid "Audience ID"
+msgstr "Doelgroep-ID"
+
+msgid "Find Audience ID in your MailChimp account"
+msgstr "Zoek doelgroep-ID in uw MailChimp-account"
+
+msgid "Enable double opt-in"
+msgstr "Schakel dubbele aanmelding in"
+
+msgid "You must also enable double opt-in in your MailChimp account"
+msgstr "U moet ook dubbele aanmelding inschakelen in uw MailChimp-account"
+
+msgid "Welcome email"
+msgstr "Welkom e-mail"
+
+msgid "You can enable Final Welcome Email in your MailChimp account"
+msgstr "U kunt Final Welcome Email inschakelen in uw MailChimp-account"
+
+msgid "Verify License On Ticket Creation"
+msgstr "Controleer de licentie bij het aanmaken van tickets"
+
+msgid "Save Configurations"
+msgstr "Configuratie opslaan"
+
+msgid "Ticket via email"
+msgstr "Ticket per mail"
+
+msgid "OR"
+msgstr "OF"
+
+msgid "Sorry the cron job didnot work"
+msgstr "Sorry, de Cron Job werkte niet"
+
+msgid "Update ticket status"
+msgstr "Ticketstatus bijwerken"
+
+msgid "Recommended run script daily"
+msgstr "Aanbevolen run-script dagelijks"
+
+msgid "You cannot use this email, it is used in email piping"
+msgstr ""
+"U kunt deze e-mail niet gebruiken, deze wordt gebruikt in e-mail piping"
+
+msgid "The department has been stored"
+msgstr "De afdeling is opgeslagen"
+
+msgid "The department has not been stored"
+msgstr "De afdeling is niet opgeslagen"
+
+msgid "The department has been deleted"
+msgstr "De afdeling is verwijderd"
+
+msgid "The department has not been deleted"
+msgstr "De afdeling is niet verwijderd"
+
+msgid "The department in use cannot be delete"
+msgstr "De gebruikte afdeling kan niet worden verwijderd"
+
+msgid "default has been changed"
+msgstr "Standaard is aangepast"
+
+msgid "default has not been changed"
+msgstr "Standaard is niet aangepast"
+
+msgid "No Record Found"
+msgstr "Geen record gevonden"
+
+msgid "Outgoing Email"
+msgstr "Uitgaande e-mail"
+
+msgid "Select Email"
+msgstr "Selecteer email"
+
+msgid "Tickets of this department will receive emails from this email"
+msgstr "Tickets van deze afdeling ontvangen e-mails van deze e-mail"
+
+msgid "Receive Email"
+msgstr "Ontvang email"
+
+msgid "Save Department"
+msgstr "Opslaan afdeling"
+
+msgid "The user of this department will receive email on the new ticket"
+msgstr ""
+"De gebruiker van deze afdeling ontvangt een e-mail over het nieuwe ticket"
+
+msgid "Are you sure you want to delete it?"
+msgstr "Weet u zeker dat u deze wilt verwijderen?"
+
+msgid "Search Departments"
+msgstr "Zoek afdelingen"
+
+msgid "Outgoing"
+msgstr "Uitgaand"
+
+msgid "Click here to give us feedback"
+msgstr "Klik hier om feedback te geven"
+
+msgid "Email Already Exist"
+msgstr "Email bestaat al"
+
+msgid "The email has been stored"
+msgstr "De e-mail is opgeslagen"
+
+msgid "The email has not been stored"
+msgstr "De e-mail is niet opgeslagen"
+
+msgid "False"
+msgstr "Niet waar"
+
+msgid "True"
+msgstr "Klopt"
+
+msgid "Send Email By"
+msgstr "E-mail verzenden via"
+
+msgid "SMTP host type"
+msgstr "SMTP-hosttype"
+
+msgid "SMTP host"
+msgstr "SMTP-host"
+
+msgid "SMTP Authentication"
+msgstr "SMTP-verificatie"
+
+msgid "SMTP Port"
+msgstr "SMTP-poort"
+
+msgid "If the system doesnot respond in 30 seconds"
+msgstr "Als het systeem niet binnen 30 seconden reageert"
+
+msgid "Auto Response"
+msgstr "Automatische antwoord"
+
+msgid "Save Email"
+msgstr "Email opslaan"
+
+msgid "System email used for sending email"
+msgstr "Systeem Email gebruikt voor versturen Email"
+
+msgid "Email template has been stored"
+msgstr "E-mail template is opgeslagen"
+
+msgid "Email template has not been stored"
+msgstr "E-mail template is niet opgeslagen"
+
+msgid "Ban Email Try To Create Ticket"
+msgstr "E-mail verbieden Probeer een ticket te maken"
+
+msgid "Ticket Priority Is Changed By"
+msgstr "Ticket prioriteit is gewijzigd"
+
+msgid "Data Deleted"
+msgstr "Gegevens verwijderd"
+
+msgid "Ticket Priority"
+msgstr "Ticket Prioriteit"
+
+msgid "Department title"
+msgstr "Afdeling titel"
+
+msgid "Group Title"
+msgstr "Groep titel"
+
+msgid "Agent name"
+msgstr "Naam agent"
+
+msgid "Help topic title"
+msgstr "Help onderwerp titel"
+
+msgid "Ticket Subject"
+msgstr "Ticket Onderwerp"
+
+msgid "Close Date"
+msgstr "Sluitings Datum"
+
+msgid "Save Email Template"
+msgstr "E-mailsjabloon opslaan"
+
+msgid "Field mark as published"
+msgstr "Markeer veld als gepubliceerd"
+
+msgid "Field mark as unpublished"
+msgstr "Markeer veld als gedepubliceerd"
+
+msgid "Field mark as required"
+msgstr "Markeer veld als verplicht"
+
+msgid "Field mark as not required"
+msgstr "Markeer veld als niet verplicht"
+
+msgid "Field ordering down"
+msgstr "Veld naar onder"
+
+msgid "Field ordering up"
+msgstr "Veld naar boven"
+
+msgid "Parent field has not been stored"
+msgstr "Bovenliggend veld is niet opgeslagen"
+
+msgid "Please Insert At least one value for every option"
+msgstr "Voer ten minste één waarde in voor elke optie"
+
+msgid "Field has not been stored"
+msgstr "Gegevens zijn niet opgeslagen"
+
+msgid "Field has been stored"
+msgstr "Veld is opgeslagen"
+
+msgid "Field has been updated"
+msgstr "het veld is geupdate"
+
+msgid "Parent Field"
+msgstr "Bovenliggend veld"
+
+msgid "Edit Field"
+msgstr "Wijzig veld"
+
+msgid "Field Title"
+msgstr "Veld titel"
+
+msgid "User Published"
+msgstr "Gebruiker gepubliceerd"
+
+msgid "Visitor Published"
+msgstr "Bezoeker publiceerde"
+
+msgid "Required"
+msgstr "Verplicht"
+
+msgid "User Search"
+msgstr "Gebruiker Zoeken"
+
+msgid "Visitor Search"
+msgstr "Bezoeker zoeken"
+
+msgid "Show On Listing"
+msgstr "Toon op lijst"
+
+msgid "Advanced"
+msgstr "Geavanceerd"
+
+msgid "Field has not been deleted"
+msgstr "Veld is niet verwijderd"
+
+msgid "Field has been deleted"
+msgstr "Veld is verwijderd"
+
+msgid "Add Field"
+msgstr "Veld toevoegen"
+
+msgid "Field"
+msgstr "Veld"
+
+msgid "Text Field"
+msgstr "Tekstveld"
+
+msgid "Check Box"
+msgstr "Selectievakje"
+
+msgid "Drop Down"
+msgstr "Laten vallen"
+
+msgid "Text Area"
+msgstr "Tekstgebied"
+
+msgid "Radio Button"
+msgstr "Radio knop"
+
+msgid "Upload File"
+msgstr "Upload bestand"
+
+msgid "Multi Select"
+msgstr "Meerkeuze selectie"
+
+msgid "Terms and Conditions"
+msgstr "Voorwaarden"
+
+msgid "Dependent Field"
+msgstr "Afhankelijk veld"
+
+msgid "Field Type"
+msgstr "Veld type"
+
+msgid "Field Size"
+msgstr "Veld afmeting"
+
+msgid "Max Length"
+msgstr "Max lengte"
+
+msgid "Columns"
+msgstr "Colommen"
+
+msgid "Rows"
+msgstr "Rijen"
+
+msgid "Use the table below to add new values"
+msgstr "Gebruik de onderstaande tabel om nieuwe waarden toe te voegen"
+
+msgid "Add Value"
+msgstr "Waarde toevoegen"
+
+msgid "Terms and Conditions Text"
+msgstr "Algemene voorwaarden Tekst"
+
+msgid "Terms and Conditions Link Type"
+msgstr "Algemene voorwaarden Linktype"
+
+msgid "Direct Link"
+msgstr "Directe link"
+
+msgid "Wordpress Page"
+msgstr "Wordpress pagina"
+
+msgid "Select Link Type"
+msgstr "Selecteer Linktype"
+
+msgid "Terms and Conditions Link"
+msgstr "Algemene voorwaarden Link"
+
+msgid "Terms and Conditions Page"
+msgstr "Algemene voorwaarden pagina"
+
+msgid "Select Wordpress page"
+msgstr "Selecteer Wordpress-pagina"
+
+msgid "Save Field"
+msgstr "Veld opslaan"
+
+msgid "S.No"
+msgstr "S.Nr"
+
+msgid "User Publish"
+msgstr "Gebruikers publiceren"
+
+msgid "Visitor Publish"
+msgstr "Bezoekers publiceren"
+
+msgid "Published"
+msgstr "Gepubliseerd"
+
+msgid "Unpublished"
+msgstr "Niet gepubliseerd"
+
+msgid "Not required"
+msgstr "Niet benodigd"
+
+msgid "users popup"
+msgstr "gebruikers pop-up"
+
+msgid "Can Not Unpublished"
+msgstr "Unpublishen kan niet"
+
+msgid "good"
+msgstr "goed"
+
+msgid "cross"
+msgstr "kruis"
+
+msgid "can not mark as not required"
+msgstr "kan niet worden gemarkeerd als niet vereist"
+
+msgid "Cannot unpublished field"
+msgstr "Kan de publicatie van het veld niet ongedaan maken"
+
+msgid "User Data"
+msgstr "Gebruikersgegevens"
+
+msgid "Erasing data request has been stored"
+msgstr "Het wissen van het gegevensverzoek is opgeslagen"
+
+msgid "Failed while storing"
+msgstr "Mislukt tijdens het opslaan"
+
+msgid "Erase data request withdrawn"
+msgstr "Wis gegevensverzoek ingetrokken"
+
+msgid "Failed while performing action"
+msgstr "Mislukt tijdens het uitvoeren van actie"
+
+msgid "User identifying data erased"
+msgstr "Gebruiker identificerende gegevens gewist"
+
+msgid "User data Deleted"
+msgstr "Gebruikersgegevens verwijderd"
+
+msgid "Export your data"
+msgstr "Exporteer uw gegevens"
+
+msgid "You have filed a request to remove your data."
+msgstr "U heeft een verzoek ingediend om uw gegevens te verwijderen."
+
+msgid "To withdraw erases data request"
+msgstr "Om in te trekken, wordt het gegevensverzoek gewist"
+
+msgid "Request data removal from the system."
+msgstr "Verzoek om gegevensverwijdering uit het systeem."
+
+msgid "Add GDPR Field"
+msgstr "Voeg GDPR-veld toe"
+
+msgid "Field Text"
+msgstr "Veldtekst"
+
+msgid "Link Type"
+msgstr "Linktype"
+
+msgid "Link Page"
+msgstr "Linkpagina"
+
+msgid "User Email"
+msgstr "E-mailadres gebruiker"
+
+msgid "Request Status"
+msgstr "Verzoek status"
+
+msgid "Awaiting response"
+msgstr "In afwachting van reactie"
+
+msgid "Erased identifying data"
+msgstr "Identificatiegegevens gewist"
+
+msgid "Deleted"
+msgstr "Verwijderd"
+
+msgid "Erase identifying data"
+msgstr "Wis identificerende gegevens"
+
+msgid "Are you sure to erase identifying data"
+msgstr "Weet u zeker dat identificerende gegevens moeten worden gewist"
+
+msgid "Delete data"
+msgstr "Verwijder data"
+
+msgid "Link"
+msgstr "Koppeling"
+
+msgid "Direct URL"
+msgstr "Directe URL"
+
+msgid "Page Title or URL"
+msgstr "Paginatitel of URL"
+
+msgid "Cannot open file"
+msgstr "Kan bestand niet openen"
+
+msgid "Dir is not writable"
+msgstr "Dir is niet beschrijfbaar"
+
+msgid "Unable to connect to the server"
+msgstr "Kan niet verbinden met de server"
+
+msgid "Language is not installed"
+msgstr "Taal is niet geinstalleerd"
+
+msgid "Language directory is not writable"
+msgstr "Taaldirectory is niet beschrijfbaar"
+
+msgid "Required language is not installed but similar language like"
+msgstr "Vereiste taal is niet geïnstalleerd, maar vergelijkbare taal zoals"
+
+msgid "is found in your system"
+msgstr "is in het systeem gevonden"
+
+msgid "Language code"
+msgstr "Taal code"
+
+msgid "Empty values"
+msgstr "Lege waarden"
+
+msgid "File is not writable"
+msgstr "Bestand is niet beschrijfbaar"
+
+msgid "File successfully downloaded"
+msgstr "Bestand succesvol gedownload"
+
+msgid "Ordering updated"
+msgstr "Bestelling bijgewerkt"
+
+msgid "Plugin Detail"
+msgstr "Details van plug-in"
+
+msgid "Plugin for online JS Help Desk System"
+msgstr "Plug-in voor online JS Help Desk-systeem"
+
+msgid "Created By"
+msgstr "Aangemaakt door"
+
+msgid "Company"
+msgstr "Bedrijf"
+
+msgid "Plugin Name"
+msgstr "Plugin naam"
+
+msgid "job plugin"
+msgstr "job plug-in"
+
+msgid "vehicle manager"
+msgstr "voertuig manager"
+
+msgid "car manager"
+msgstr "auto manager"
+
+msgid "Statistics"
+msgstr "Statistieken"
+
+msgid "Today Tickets"
+msgstr "Vandaag tickets"
+
+msgid "Short Links"
+msgstr "Korte links"
+
+msgid "email template"
+msgstr "Email sjabloon"
+
+msgid "Install Now"
+msgstr "Installeer nu"
+
+msgid "Features"
+msgstr "Kenmerken"
+
+msgid "The best support system plugin for WordPress has everything you need."
+msgstr ""
+"De beste plug-in voor het ondersteuningssysteem voor WordPress heeft alles "
+"wat je nodig hebt."
+
+msgid "Add-Ons List"
+msgstr "Lijst met add-ons"
+
+msgid "Add New Addons"
+msgstr "Voeg nieuwe add-ons toe"
+
+msgid "addon"
+msgstr "toevoeging"
+
+msgid "View All Tickets"
+msgstr "Bekijk alle tickets"
+
+msgid "Waiting Your Reply"
+msgstr "Wacht op antwoord"
+
+msgid "Ticket History"
+msgstr "Ticket historie"
+
+msgid "Add agents and assign roles and permissions to provide assistance."
+msgstr ""
+"Voeg agenten toe en wijs rollen en machtigingen toe om assistentie te "
+"verlenen."
+
+msgid "Ticket Auto Close"
+msgstr "Ticket automatisch sluiten"
+
+msgid ""
+"Define rules for the ticket to auto-close after a specific interval of time."
+msgstr ""
+"Definieer regels voor het automatisch sluiten van het ticket na een bepaald "
+"tijdsinterval."
+
+msgid "Get a survey from customers on ticket closing to improve quality."
+msgstr ""
+"Ontvang een enquête van klanten over het sluiten van tickets om de kwaliteit "
+"te verbeteren."
+
+msgid "Help users to find and select the area with which they need assistance."
+msgstr ""
+"Help gebruikers het gebied te vinden en te selecteren waarmee ze hulp nodig "
+"hebben."
+
+msgid "Private Note"
+msgstr "Privé-notitie"
+
+msgid ""
+"The private note is used as reminders or to give other agents insights into "
+"the ticket issue."
+msgstr ""
+"De privé-notitie wordt gebruikt als herinnering of om andere agenten inzicht "
+"te geven in de ticketuitgifte."
+
+msgid ""
+"Stop losing productivity on repetitive queries, build your knowledge base."
+msgstr ""
+"Stop met het verliezen van productiviteit bij herhaalde vragen, bouw uw "
+"kennisbasis op."
+
+msgid ""
+"Enables admin to set N numbers of tickets for users and agents separately."
+msgstr ""
+"Hiermee kan de beheerder N-tickets voor gebruikers en agenten afzonderlijk "
+"instellen."
+
+msgid "Merge Tickets"
+msgstr "Tickets samenvoegen"
+
+msgid ""
+"Enables agents to merge two tickets of the same user into one instead of "
+"dealing with the same issue on many tickets."
+msgstr ""
+"Hiermee kunnen agenten twee tickets van dezelfde gebruiker in één "
+"samenvoegen in plaats van hetzelfde probleem op veel tickets te behandelen."
+
+msgid ""
+"Defines rules or set specific intervals of time to make ticket auto overdue."
+"The ticket can overdue by type or overdue by Cronjob."
+msgstr ""
+"Definieert regels of stelt specifieke tijdsintervallen in om het ticket "
+"automatisch te laten vervallen. Het ticket kan te laat zijn per type of te "
+"laat door Cronjob."
+
+msgid ""
+"SMTP enables you to add custom mail protocol to send and receive emails "
+"within the js help desk."
+msgstr ""
+"Met SMTP kunt u een aangepast e-mailprotocol toevoegen om e-mails te "
+"verzenden en ontvangen binnen de js-helpdesk."
+
+msgid ""
+"Displays complete ticket history along with the ticket status, currently "
+"assigned user and other actions performed on each ticket."
+msgstr ""
+"Toont de volledige ticketgeschiedenis samen met de ticketstatus, de "
+"momenteel toegewezen gebruiker en andere acties die op elk ticket zijn "
+"uitgevoerd."
+
+msgid "Pre-populated messages allow support agents to respond quickly."
+msgstr ""
+"Met vooraf ingevulde berichten kunnen ondersteuningsmedewerkers snel "
+"reageren."
+
+msgid "Enables users to reply to the tickets via email without login."
+msgstr ""
+"Hiermee kunnen gebruikers de tickets via e-mail beantwoorden zonder in te "
+"loggen."
+
+msgid "Time Tracking"
+msgstr "Tijd bijhouden"
+
+msgid ""
+"Track the time spent on each ticket by each agent and each reply. Report the "
+"admin on how much time is spent on each ticket."
+msgstr ""
+"Houd de tijd bij die elk agent en elk antwoord aan elk ticket heeft besteed. "
+"Rapporteer de beheerder hoeveel tijd er aan elk ticket wordt besteed."
+
+msgid "User Options"
+msgstr "Gebruikersopties"
+
+msgid ""
+"User options enable you to add Google Re-captcha or JS Help Desk Re-captcha "
+"for a registration form."
+msgstr ""
+"Met gebruikersopties kunt u Google Re-captcha of JS Help Desk Re-captcha "
+"toevoegen voor een registratieformulier."
+
+msgid "Actions"
+msgstr "Acties"
+
+msgid "Ticket Actions"
+msgstr "Ticketacties"
+
+msgid ""
+"Get multiple action options on each ticket like Print Ticket, Lock Ticket, "
+"Transfer ticket, etc."
+msgstr ""
+"Krijg meerdere actie-opties op elk ticket zoals Print Ticket, Lock Ticket, "
+"Transfer Ticket, etc."
+
+msgid "Make unlimited announcements associated with the support system."
+msgstr ""
+"Maak onbeperkte aankondigingen in verband met het ondersteuningssysteem."
+
+msgid ""
+"It allows you to block the email of any user to restrict him to create new "
+"tickets."
+msgstr ""
+"Hiermee kunt u de e-mail van elke gebruiker blokkeren om hem te beperken om "
+"nieuwe tickets te maken."
+
+msgid "Desktop Notification"
+msgstr "Bureaubladmelding"
+
+msgid ""
+"The Desktop notifications will keep you up to date about anything happens on "
+"your support system."
+msgstr ""
+"De bureaubladmeldingen houden u op de hoogte van alles wat er gebeurt op uw "
+"ondersteuningssysteem."
+
+msgid "Save the ticket as a PDF in your system and able to export all data."
+msgstr ""
+"Sla het ticket op als PDF in uw systeem en u kunt alle gegevens exporteren."
+
+msgid "Create downloads to ensure the user to get downloads from downloads."
+msgstr ""
+"Maak downloads om ervoor te zorgen dat de gebruiker downloads van downloads "
+"krijgt."
+
+msgid "Add FAQs to drastically reduce the number of common questions."
+msgstr ""
+"Voeg veelgestelde vragen toe om het aantal veelgestelde vragen drastisch te "
+"verminderen."
+
+msgid ""
+"Get multiple themes with a beautiful color scheme to make the site beautiful."
+msgstr ""
+"Krijg meerdere thema's met een prachtig kleurenschema om de site mooi te "
+"maken."
+
+msgid "Dashboard Widgets"
+msgstr "Dashboard-widgets"
+
+msgid ""
+"Get immediate data of your support operations as soon as you log into your "
+"WordPress administration area."
+msgstr ""
+"Ontvang direct gegevens van uw ondersteuningsactiviteiten zodra u inlogt op "
+"uw WordPress-beheergebied."
+
+msgid "Internal Mail"
+msgstr "Interne mail"
+
+msgid "Use an internal email to send emails to one agent to another agent."
+msgstr ""
+"Gebruik een interne e-mail om e-mails van de ene agent naar de andere agent "
+"te sturen."
+
+msgid ""
+"Widgets in WordPress allow you to add content and features in the widgetized "
+"areas of your theme."
+msgstr ""
+"Met widgets in WordPress kunt u inhoud en functies toevoegen aan de "
+"widgetgebieden van uw thema."
+
+msgid ""
+"JS Help Desk WooCommerce provides the much-needed bridge between your "
+"WooCommerce store and the JS Help Desk."
+msgstr ""
+"JS Help Desk WooCommerce biedt de broodnodige brug tussen uw WooCommerce-"
+"winkel en de JS Help Desk."
+
+msgid ""
+"Collect your customer's private data, sensitive information from credit card "
+"to health information and store them encrypted."
+msgstr ""
+"Verzamel de privégegevens van uw klant, gevoelige informatie van creditcard "
+"tot gezondheidsinformatie en sla ze versleuteld op."
+
+msgid ""
+"Without valid Envato, license clients won't be able to open a new ticket."
+msgstr ""
+"Zonder geldige Envato kunnen licentiecliënten geen nieuw ticket openen."
+
+msgid ""
+"Adds the option to the registration form for prompting new users to "
+"subscribe to your email list."
+msgstr ""
+"Voegt de optie toe aan het registratieformulier om nieuwe gebruikers te "
+"vragen zich te abonneren op uw e-maillijst."
+
+msgid "paidsupport"
+msgstr "steun voor kinderen"
+
+msgid ""
+"Paid Support is the easiest way to integrate and manage payments for your "
+"tickets."
+msgstr ""
+"Betaalde ondersteuning is de gemakkelijkste manier om betalingen voor uw "
+"tickets te integreren en te beheren."
+
+msgid "easy digital downloads"
+msgstr "eenvoudige digitale downloads"
+
+msgid ""
+"EDD offers customers to open new tickets just one click from their EDD "
+"account."
+msgstr ""
+"EDD biedt klanten de mogelijkheid om met één klik nieuwe tickets te openen "
+"vanaf hun EDD-account."
+
+msgid "We'd love to hear from You."
+msgstr "We zouden graag van je horen."
+
+msgid "Please write appreciated review at"
+msgstr "Schrijf uw positieve review op"
+
+msgid "star"
+msgstr "ster"
+
+msgid "Spread the word"
+msgstr "Vertel het verder"
+
+msgid "twitter"
+msgstr "tjilpen"
+
+msgid "JS Help Desk / JS Support Ticket Control Panel"
+msgstr "JS Help Desk / JS Support Ticket Configuratiescherm"
+
+msgid "JS Help Desk / JS Support Ticket main control panel"
+msgstr "JS Help Desk / JS Support Ticket hoofdbedieningspaneel"
+
+msgid "Add new ticket form for both user and agent"
+msgstr "Voeg een nieuw ticketformulier toe voor zowel gebruiker als agent"
+
+msgid "My tickets for both user and agent"
+msgstr "Mijn tickets voor zowel gebruiker als agent"
+
+msgid "List downloads"
+msgstr "Overzicht downloads"
+
+msgid "Latest Downloads"
+msgstr "Nieuwste downloads"
+
+msgid "Show latest downloads. Options"
+msgstr "Toon de nieuwste downloads. Opties"
+
+msgid "and"
+msgstr "en"
+
+msgid "i.e."
+msgstr "In essentie"
+
+msgid "Popular Downloads"
+msgstr "Populaire downloads"
+
+msgid "Show popular downloads. Options"
+msgstr "Toon populaire downloads. Opties"
+
+msgid "List knowledge base"
+msgstr "Lijst kennisbestand"
+
+msgid "Latest Knowledge Base"
+msgstr "Nieuwste Knowledge Base"
+
+msgid "Show latest knowledge base. Options"
+msgstr "Toon de nieuwste kennisbank. Opties"
+
+msgid "Popular knowledge base"
+msgstr "Populaire kennisbank"
+
+msgid "Show popular knowledge base. Options"
+msgstr "Toon populaire kennisbank. Opties"
+
+msgid "List FAQ's"
+msgstr "Overzicht FAQ's"
+
+msgid "Latest FAQ's"
+msgstr "Laatste FAQ's"
+
+msgid "Show latest FAQ's. Options"
+msgstr "Toon de nieuwste veelgestelde vragen. Opties"
+
+msgid "Popular FAQ's"
+msgstr "Populaire FAQ's"
+
+msgid "Show popular FAQ's. Options"
+msgstr "Toon populaire FAQ's. Opties"
+
+msgid "List announcements"
+msgstr "Lijst aankondigingen"
+
+msgid "Latest Announcements"
+msgstr "Laatste aankondigingen"
+
+msgid "Show latest announcements. Options"
+msgstr "Toon laatste aankondigingen. Opties"
+
+msgid "Popular Announcements"
+msgstr "Populaire aankondigingen"
+
+msgid "Show popular announcements. Options"
+msgstr "Toon populaire aankondigingen. Opties"
+
+msgid "spinning wheel"
+msgstr "spinnewiel"
+
+msgid "Get JS Help Desk Translations"
+msgstr "Download JS Help Desk Translations"
+
+msgid "Get Translations"
+msgstr "Gebruik vertalingen"
+
+msgid "Select Translation"
+msgstr "Selecteer vertaling"
+
+msgid ""
+"When WordPress language change to ro, JS Help Desk language will auto change "
+"to ro"
+msgstr ""
+"Wanneer de WordPress-taal verandert in ro, verandert de JS Help Desk-taal "
+"automatisch in ro"
+
+msgid "c error"
+msgstr "c fout"
+
+msgid "saved"
+msgstr "opgeslagen"
+
+msgid "Contribute In Translation"
+msgstr "Bijdrage leveren in vertaling"
+
+msgid "translate"
+msgstr "vertalen"
+
+msgid "Manual Download"
+msgstr "Handmatige download"
+
+msgid "Log Out"
+msgstr "Log uit"
+
+msgid "Agent Feedbacks"
+msgstr "Feedback van agenten"
+
+msgid "Submit ticket"
+msgstr "Ticket indienen"
+
+msgid "my ticket"
+msgstr "mijn kaartje"
+
+msgid "View all the created tickets"
+msgstr "Bekijk alle gemaakte tickets"
+
+msgid "your ticket status"
+msgstr "uw ticketstatus"
+
+msgid "closed ticket"
+msgstr "gesloten ticket"
+
+msgid "answered ticket"
+msgstr "beantwoord ticket"
+
+msgid "overdue ticket"
+msgstr "ticket achterstallig"
+
+msgid "View All Downloads"
+msgstr "Bekijk alle downloads"
+
+msgid "View All Announcements"
+msgstr "Bekijk alle aankondigingen"
+
+msgid "View All Knowledge Base"
+msgstr "Bekijk alle Knowledge Base"
+
+msgid "Latest FAQs"
+msgstr "Laatste veelgestelde vragen"
+
+msgid "View All FAQs"
+msgstr "Bekijk alle veelgestelde vragen"
+
+msgid "keep me login"
+msgstr "Hou me ingelogd"
+
+msgid "Repeat Password"
+msgstr "Herhaal wachtwoord"
+
+msgid "Subscribe to the newsletter"
+msgstr "Schrijf je in voor de nieuwsbrief"
+
+msgid "has been changed"
+msgstr "is veranderd"
+
+msgid "has not been changed"
+msgstr "is niet gewijzigd"
+
+msgid "JS Support Ticket Settings"
+msgstr "JS Support Ticket-instellingen"
+
+msgid "General"
+msgstr "Algemeen"
+
+msgid "Complete"
+msgstr "Compleet"
+
+msgid "Configurations complete"
+msgstr "Configuraties zijn voltooid"
+
+msgid "Step 4 of 4"
+msgstr "Stap 4 van 4"
+
+msgid "Step 3 of 3"
+msgstr "Stap 3 van 3"
+
+msgid "Setting Completed"
+msgstr "Instelling voltooid"
+
+msgid "Setting you applied has been saved successfully."
+msgstr "De instelling die u heeft toegepast, is met succes opgeslagen."
+
+msgid "Finish"
+msgstr "Beëindigen"
+
+msgid "Ticket Setting"
+msgstr "Ticket instellingen"
+
+msgid "Setting Complete"
+msgstr "Instelling voltooid"
+
+msgid "General Configurations"
+msgstr "Algemene configuraties"
+
+msgid "Step 1 of 4"
+msgstr "Stap 1 van 4"
+
+msgid "Step 1 of 3"
+msgstr "Stap 1 van 3"
+
+msgid "Enter the site title"
+msgstr "Voer de sitetitel in"
+
+msgid "Date format for plugin"
+msgstr "Datumnotatie voor plug-in"
+
+msgid "Show Breadcrumbs"
+msgstr "Broodkruimels weergeven"
+
+msgid "Show navigation in breadcrumbs"
+msgstr "Navigatie weergeven in paneermeel"
+
+msgid "Upload file size in KB's"
+msgstr "Upload bestandsgrootte in KB's"
+
+msgid "File Extension"
+msgstr "Bestandsextensie"
+
+msgid "Sequential"
+msgstr "Opeenvolgend"
+
+msgid "Feedback Configurations"
+msgstr "Feedback configuraties"
+
+msgid "Step 3 of 4"
+msgstr "Stap 3 van 4"
+
+msgid "Set Email Delay Time"
+msgstr "E-mailvertragingstijd instellen"
+
+msgid " :"
+msgstr ":"
+
+msgid "Set Email Delay"
+msgstr "E-mailvertraging instellen"
+
+msgid "Back"
+msgstr "Terug"
+
+msgid "Ticket Configurations"
+msgstr "Ticketconfiguraties"
+
+msgid "Step 2 of 4"
+msgstr "Stap 2 van 4"
+
+msgid "Step 2 of 3"
+msgstr "Stap 2 van 3"
+
+msgid "Enable/Disable Open Ticket"
+msgstr "Open ticket inschakelen / uitschakelen"
+
+msgid "Ticket ID sequence"
+msgstr "Ticket ID-reeks"
+
+msgid "Set ticket id sequential or random"
+msgstr "Stel ticket-ID sequentieel of willekeurig in"
+
+msgid "Maximum Tickets"
+msgstr "Maximale tickets"
+
+msgid "Set Maximum Ticket Per user"
+msgstr "Maximaal ticket per gebruiker instellen"
+
+msgid "Maximum Open Ticket"
+msgstr "Maximaal open ticket"
+
+msgid "Reopen ticket within Days"
+msgstr "Heropen ticket binnen dagen"
+
+msgid "Show Captcha to visitor on ticket form"
+msgstr "Toon Captcha aan bezoeker op ticketformulier"
+
+msgid "Enable/Disable Captcha on Ticket Form"
+msgstr "Captcha in- / uitschakelen op ticketformulier"
+
+msgid "Own Captcha operands"
+msgstr "Eigen Captcha-operanden"
+
+msgid "Enable/Disable Own Captcha subtraction"
+msgstr "Eigen aftrekken van Captcha in- / uitschakelen"
+
+msgid "Enable Print Ticket"
+msgstr "Print ticket inschakelen"
+
+msgid "Enable/Disable Print Ticket"
+msgstr "Printticket in- / uitschakelen"
+
+msgid "Please insert activation key to proceed"
+msgstr "Voer de activeringssleutel in om door te gaan"
+
+msgid "Addon Installation Failed"
+msgstr "Installatie van add-on mislukt"
+
+msgid "Addon installation failed, Directory permission error"
+msgstr "Installatie van add-on mislukt, fout met directorytoestemming"
+
+msgid "Addon Installation Failed, File download error"
+msgstr "Installatie van add-on mislukt, fout bij downloaden van bestand"
+
+msgid "left image"
+msgstr "linker afbeelding"
+
+msgid "right image"
+msgstr "juiste afbeelding"
+
+msgid "buy now"
+msgstr "koop nu"
+
+msgid "helptopic"
+msgstr "Help onderwerp"
+
+msgid "private note"
+msgstr "privé-notitie"
+
+msgid "merge tickets"
+msgstr "tickets samenvoegen"
+
+msgid "time tracking"
+msgstr "tijdregistratie"
+
+msgid "user options"
+msgstr "gebruikersopties"
+
+msgid "ticket actions"
+msgstr "ticketacties"
+
+msgid "desktop notifications"
+msgstr "Bureaublad notificaties"
+
+msgid "internal mail"
+msgstr "interne mail"
+
+msgid "woocommerce support"
+msgstr "woocommerce ondersteuning"
+
+msgid "addon in no longer active"
+msgstr "addon is niet langer actief"
+
+msgid "Wordpress Plugin"
+msgstr "Wordpress-plug-in"
+
+msgid ""
+"JS Help Desk is a trusted open source ticket system. JS Help Desk is a "
+"simple, easy to use, web-based customer support system. Users can create a "
+"ticket from the front-end. JS Help Desk comes packed with lot features than "
+"most of the expensive(and complex) support ticket system on the market. The "
+"best part is, It completely free."
+msgstr ""
+"JS Help Desk is een vertrouwd open source ticketsysteem. JS Help Desk is een "
+"eenvoudig, gebruiksvriendelijk, webgebaseerd klantenondersteuningssysteem. "
+"Gebruikers kunnen vanaf de front-end een ticket aanmaken. JS Help Desk zit "
+"boordevol functies dan de meeste van de dure (en complexe) ticketsystemen "
+"voor ondersteuning op de markt. Het beste is dat het helemaal gratis is."
+
+msgid "Add on list"
+msgstr "Toevoegen aan lijst"
+
+msgid "Please Insert Your Activation key"
+msgstr "Voer uw activeringssleutel in"
+
+msgid "Activation key"
+msgstr "Activatie sleutel"
+
+msgid "Proceed"
+msgstr "Doorgaan"
+
+msgid "Select Addons for download"
+msgstr "Selecteer Addons om te downloaden"
+
+msgid "All allowed add ons are already installed"
+msgstr "Alle toegestane add-ons zijn al geïnstalleerd"
+
+msgid "You are not allowed to install any add on"
+msgstr "U mag geen add-on installeren"
+
+msgid "Select All Addons"
+msgstr "Selecteer Alle add-ons"
+
+msgid "Add ons installed and activated successfully"
+msgstr "Add-ons geïnstalleerd en succesvol geactiveerd"
+
+msgid ""
+"Add ons for JS Help Desk have been installed and activated successfully. "
+msgstr ""
+"Add-ons voor JS Help Desk zijn met succes geïnstalleerd en geactiveerd."
+
+msgid "Priority Title Already Exist"
+msgstr "Prioriteit titel bestaat al"
+
+msgid "Priority has been stored"
+msgstr "Prioriteit is opgeslagen"
+
+msgid "Priority has not been stored"
+msgstr "Prioriteit is niet opgeslagen"
+
+msgid "Priority has been deleted"
+msgstr "Prioriteit is verwijderd"
+
+msgid "Priority has not been deleted"
+msgstr "Prioriteit is niet verwijderd"
+
+msgid "Default priority cannot delete"
+msgstr "Prioriteit kan niet worden verwijderd"
+
+msgid "Priority has been make default"
+msgstr "Prioriteit is standaard gemaakt"
+
+msgid "Priority has not been make default"
+msgstr "Prioriteit is niet standaard gemaakt"
+
+msgid "Color"
+msgstr "Kleur"
+
+msgid "Ticket Overdue Interval Type"
+msgstr "Ticket te laat interval type"
+
+msgid "Save Priority"
+msgstr "Opslaan prioriteit"
+
+msgid "Date Interval"
+msgstr "Datuminterval"
+
+msgid "Reply posted"
+msgstr "Antwoord geplaatst"
+
+msgid "Reply posted on ticket"
+msgstr "Antwoord geplaatst op ticket"
+
+msgid "Ticket is replied by"
+msgstr "Ticket is beantwoord door"
+
+msgid "Reply Has been Posted"
+msgstr "Antwoord is geplaatst"
+
+msgid "Reply Has Not been Posted"
+msgstr "Antwoord is niet gepost"
+
+msgid "Dates"
+msgstr "Datums"
+
+msgid "Department Detail Report"
+msgstr "Afdelingsdetailrapport"
+
+msgid "Export Data"
+msgstr "Data Exporteren"
+
+msgid "Department Statistics"
+msgstr "Afdelingsstatistieken"
+
+msgid "pending ticket"
+msgstr "ticket in behandeling"
+
+msgid "Time Taken"
+msgstr "Termijnen"
+
+msgid "Merged and closed"
+msgstr "Samengevoegd en gesloten"
+
+msgid "Out of"
+msgstr "Uit"
+
+msgid "Ticket by departments"
+msgstr "Tickets per Afdelingen"
+
+msgid "Tickets By Priority"
+msgstr "Tickets per Prioriteit"
+
+msgid "Staff Member Tickets"
+msgstr "Medewerker tickets"
+
+msgid "all ticket"
+msgstr "alle ticket"
+
+msgid "Tickets By Status And Priorities"
+msgstr "Tickets per Status en Prioriteit"
+
+msgid "Tickets By Agents"
+msgstr "Tickets door agenten"
+
+msgid "Staff Reports"
+msgstr "Medewerkers rapporten"
+
+msgid "Based on"
+msgstr "Gebaseerd op"
+
+msgid "Customer Satisfaction"
+msgstr "Klanttevredenheid"
+
+msgid "satisfaction image"
+msgstr "tevredenheid imago"
+
+msgid "Excellent"
+msgstr "Uitstekend"
+
+msgid "NA"
+msgstr "N.V.T"
+
+msgid "Happy"
+msgstr "Blij"
+
+msgid "Normal"
+msgstr "Normaal"
+
+msgid "bad"
+msgstr "slecht"
+
+msgid "Sad"
+msgstr "Verdrietig"
+
+msgid "Angry"
+msgstr "Boos"
+
+msgid "Agent Detail Report"
+msgstr "Detailrapport van de agent"
+
+msgid "Agent Statistics"
+msgstr "Agentstatistieken"
+
+msgid "staff image"
+msgstr "imago van het personeel"
+
+msgid "Average rating"
+msgstr "Gemiddelde beoordeling"
+
+msgid "Average time"
+msgstr "Gemiddelde tijd"
+
+msgid "Tickets not assigned to the staff member"
+msgstr "Ticket is niet toegewezen aan de medewerker"
+
+msgid "Minutes"
+msgstr "Minuten"
+
+msgid "Report By Staff Member"
+msgstr "Report per Staff lid"
+
+msgid "User Detail Report"
+msgstr "Rapport met gebruikersdetails"
+
+msgid "User Statistics"
+msgstr "Gebruikersstatistieken"
+
+msgid "Users"
+msgstr "Gebruikers"
+
+msgid "Ticket Status By Departments"
+msgstr "Ticket status per afdeling"
+
+msgid "Agent Report"
+msgstr "Agentrapport"
+
+msgid "Reports Statistics"
+msgstr "Rapporteert statistieken"
+
+msgid "System error has been deleted"
+msgstr "Systeemfout is verwijderd"
+
+msgid "System error has not been deleted"
+msgstr "Systeemfout is niet verwijderd"
+
+msgid "Remove All"
+msgstr "Verwijder alles"
+
+msgid "Support for this Envato license has expired"
+msgstr "Ondersteuning voor deze Envato-licentie is verlopen"
+
+msgid "Record not found"
+msgstr "Record niet gevonden"
+
+msgid "Banned email cannot create ticket"
+msgstr "Geblokkeerd e-mail kan geen ticket aanmaken"
+
+msgid "Incorrect Captcha code"
+msgstr "Onjuiste Captcha code"
+
+msgid "Please select paid support item"
+msgstr "Selecteer een betaald ondersteuningsitem"
+
+msgid "No purchase found with that code"
+msgstr "Geen aankoop gevonden met die code"
+
+msgid "Provide a valid license key to create a ticket."
+msgstr "Geef een geldige licentiesleutel op om een ​​ticket te maken."
+
+msgid "Your license has expired."
+msgstr "Uw licentie is vervallen."
+
+msgid "Your license is not active, activate your license."
+msgstr "Uw licentie is niet actief, activeer uw licentie."
+
+msgid "Due date error is not valid"
+msgstr "Vervaldatum is niet juist"
+
+msgid "Ticket has not been created"
+msgstr "Ticket is niet aangemaakt"
+
+msgid "Ticket created"
+msgstr "Ticket gemaakt"
+
+msgid "created"
+msgstr "gemaakt"
+
+msgid "Guest"
+msgstr "Gast"
+
+msgid "Ticket is updated by"
+msgstr "Ticket is geupdate door"
+
+msgid "Ticket is created by"
+msgstr "Ticket is aangemaakt door"
+
+msgid "Ticket has been deleted"
+msgstr "Ticket is verwijderd"
+
+msgid "Ticket has not been deleted"
+msgstr "Ticket is niet verwijderd"
+
+msgid "in use cannot be deleted"
+msgstr "In gebruik, kan niet worden verwijderd"
+
+msgid "Ticket already closed"
+msgstr "Ticket is reeds gesloten"
+
+msgid "Ticket has been closed"
+msgstr "Ticket is gesloten"
+
+msgid "Ticket has not been closed"
+msgstr "Ticket is niet afgesloten"
+
+msgid "Ticket is closed by"
+msgstr "Ticket is gesloten door"
+
+msgid "Your are not allowed"
+msgstr "U bent niet gemachtigd"
+
+msgid "The department has been transferred"
+msgstr "De afdeling is overgedragen"
+
+msgid "The department has not been transferred"
+msgstr "De afdeling is niet overgedragen"
+
+msgid "The department is transferred by"
+msgstr "De afdeling wordt overgedragen door"
+
+msgid "Assigned to agent"
+msgstr "Toegewezen aan agent"
+
+msgid "Not assigned to agent"
+msgstr "Niet toegewezen aan agent"
+
+msgid "Assign ticket to agent"
+msgstr "Wijs een ticket toe aan de agent"
+
+msgid "Ticket is assigned to agent by"
+msgstr "Ticket is toegewezen aan agent door"
+
+msgid "Ticket already have same priority"
+msgstr "Ticket heeft al dezelfde prioriteit"
+
+msgid "Priority has been changed"
+msgstr "Prioriteit is gewijzigd"
+
+msgid "Priority has not been changed"
+msgstr "Prioriteit is niet gewijzigd"
+
+msgid "Change Priority"
+msgstr "Wijzig pioriteit"
+
+msgid "Email already banned"
+msgstr "E-mail is reeds geblokkeerd"
+
+msgid "The email has been banned"
+msgstr "De e-mail is verbannen"
+
+msgid "The email has not been banned"
+msgstr "De e-mail is niet verbannen"
+
+msgid "Email is banned by"
+msgstr "E-mail is geblokkeerd door"
+
+msgid "The ticket has been reopened"
+msgstr "Het ticket is heropend"
+
+msgid "The ticket has not been reopened"
+msgstr "Het ticket is niet heropend"
+
+msgid "Reopen Ticket"
+msgstr "Heropen ticket"
+
+msgid "The ticket is reopened by"
+msgstr "Het ticket wordt heropend door"
+
+msgid "The ticket reopens time limit end"
+msgstr "Het ticket heropent de tijdslimiet"
+
+msgid "Email has been unbanned"
+msgstr "E-mail verbod is opgeheven"
+
+msgid "Email has not been unbanned"
+msgstr "E-mail verbod is niet opgeheven"
+
+msgid "Unbanned Email"
+msgstr "Email verbod opgeheven"
+
+msgid "Email is unbanned by"
+msgstr "E-mail verbod opgeheven door"
+
+msgid "Email cannot be unbanned"
+msgstr "E-mail verbod kan niet worden opgeheven"
+
+msgid "Ticket already marked in progress"
+msgstr "Ticket is al gekenmerkt als in behandeling"
+
+msgid "The ticket has been marked as in progress"
+msgstr "Het ticket is gemarkeerd als bezig"
+
+msgid "The ticket has not been marked as in progress"
+msgstr "Het ticket is niet gemarkeerd als bezig"
+
+msgid "In progress ticket"
+msgstr "In behandeling ticket"
+
+msgid "The ticket is marked as in progress by"
+msgstr "Het ticket is gemarkeerd als in behandeling door"
+
+msgid "File upload limit exceeds"
+msgstr "De uploadlimiet voor bestanden is hoger"
+
+msgid "The uploaded file extension not valid"
+msgstr "De geüploade bestandsextensie is niet geldig"
+
+msgid "Paid support info"
+msgstr "Betaalde ondersteuningsinformatie"
+
+msgid "Product Name"
+msgstr "productnaam"
+
+msgid "Total Tickets"
+msgstr "Totaal aantal tickets"
+
+msgid "Remaining Tickets"
+msgstr "Resterende tickets"
+
+msgid "Unlimited"
+msgstr "Onbeperkt"
+
+msgid "You have not purchased any supported item"
+msgstr "Je hebt geen ondersteund item gekocht"
+
+msgid "Go to shop"
+msgstr "Ga naar winkel"
+
+msgid "Select Order"
+msgstr "Selecteer bestelling"
+
+msgid "No canned response found"
+msgstr "Geen standaardantwoord gevonden"
+
+msgid "Waiting agent reply"
+msgstr "Wachtend antwoord van de agent"
+
+msgid "Waiting customer reply"
+msgstr "Wacht op antwoord"
+
+msgid "Close ticket"
+msgstr "Sluit ticket"
+
+msgid "Some values are not acceptable please retry"
+msgstr "Sommige waardes zijn niet toegestaan. Probeer opnieuw"
+
+msgid "Are you sure to mark this ticket non-premium?"
+msgstr "Weet u zeker dat u dit ticket niet-premium markeert?"
+
+msgid "Edit Reply"
+msgstr "Antwoord aanpassen"
+
+msgid "Edit Time"
+msgstr "Tijd aanpassen"
+
+msgid "Reason For Editing the timer"
+msgstr "Reden voor aanpassen timer"
+
+msgid "Reason For Editing"
+msgstr "Reden voor aanpassing"
+
+msgid "Resolve conflict"
+msgstr "Conflict oplossen"
+
+msgid "Lock"
+msgstr "Gelocked"
+
+msgid "Add New Credential"
+msgstr "Nieuwe referentie toevoegen"
+
+msgid "Post New Internal Note"
+msgstr "Nieuwe interne notitie plaatsen"
+
+msgid "play"
+msgstr "Speel"
+
+msgid "pause"
+msgstr "pauze"
+
+msgid "stop"
+msgstr "hou op"
+
+msgid "Close on reply"
+msgstr "Sluiten na reactie"
+
+msgid "Reason For Department Transfer"
+msgstr "Reden voor afdeling verplaatsen"
+
+msgid "Transfer"
+msgstr "Verplaatsen"
+
+msgid "Assign To Agent"
+msgstr "Toewijzen aan agent"
+
+msgid "Assign"
+msgstr "Toewijzen"
+
+msgid "View all %d tickets by %s"
+msgstr "Bekijk alle% d tickets van% s"
+
+msgid "Show History"
+msgstr "Toon geschiedenis"
+
+msgid "Print Ticket"
+msgstr "Ticket afdrukken"
+
+msgid "Unmark Overdue"
+msgstr "Markering verwijderen"
+
+msgid "Mark in Progress"
+msgstr "Kenmerk als in behandeling"
+
+msgid "agent image"
+msgstr "agent afbeelding"
+
+msgid "Ticket Thread"
+msgstr "Ticket discussie"
+
+msgid "Post Reply"
+msgstr "Reactie op item"
+
+msgid "Own Signature"
+msgstr "Eigen handtekening"
+
+msgid "Department Signature"
+msgstr "Afdeling handtekening"
+
+msgid "JNone"
+msgstr "JGeen"
+
+msgid "Add Signature"
+msgstr "Handtekening toevoegen"
+
+msgid "On Waiting"
+msgstr "Aan het wachten"
+
+msgid "Closed and merged"
+msgstr "Gesloten en samengevoegd"
+
+msgid "ago"
+msgstr "geleden"
+
+msgid "No Last Reply"
+msgstr "Geen reactie"
+
+msgid "Not Given"
+msgstr "Niet eens"
+
+msgid "Copy"
+msgstr "Kopiëren"
+
+msgid "Copied"
+msgstr "Gekopieerd"
+
+msgid "Change"
+msgstr "Verandering"
+
+msgid "Ticket Assign and Transfer"
+msgstr "Ticket toewijzen en overdragen"
+
+msgid "Ticket assigned to"
+msgstr "Ticket toegewezen aan"
+
+msgid "staff photo"
+msgstr "foto van het personeel"
+
+msgid "Total Time Taken"
+msgstr "Totale tijd genomen"
+
+msgid "view ticket"
+msgstr "bekijk ticket"
+
+msgid "Woocommerce Order"
+msgstr "Woocommerce-bestelling"
+
+msgid "Envato License"
+msgstr "Envato-licentie"
+
+msgid "Buyer"
+msgstr "Koper"
+
+msgid "License Type"
+msgstr "Licentie type"
+
+msgid "License"
+msgstr "Licentie"
+
+msgid "Purchase Date"
+msgstr "aankoopdatum"
+
+msgid "Supported Until"
+msgstr "Ondersteund tot"
+
+msgid "Paid Support Details"
+msgstr "Betaalde ondersteuningsdetails"
+
+msgid "Subscription"
+msgstr "Abonnement"
+
+msgid "Subscribed On"
+msgstr "Geabonneerd op"
+
+msgid "Support Expiry"
+msgstr "Ondersteuning vervalt"
+
+msgid "No expiration"
+msgstr "Geen vervaldatum"
+
+msgid "Non-premium support"
+msgstr "Niet-premium ondersteuning"
+
+msgid "Check this box if this ticket should NOT apply against the paid support"
+msgstr ""
+"Vink dit vakje aan als dit ticket NIET van toepassing is op betaalde "
+"ondersteuning"
+
+msgid "Remaining"
+msgstr "Resterende"
+
+msgid "Link ticket to paid support"
+msgstr "Koppel ticket aan betaalde ondersteuning"
+
+msgid "Ticket Creator Name"
+msgstr "Naam van Ticket Creator"
+
+msgid "From Date"
+msgstr "Van datum"
+
+msgid "To Date"
+msgstr "Tot op heden"
+
+msgid "Enforce delete"
+msgstr "verwijderen"
+
+msgid "Are you sure to enforce delete"
+msgstr "Weet je zeker dat je gedwongen wilt verwijderen"
+
+msgid "Are you sure to mark this ticket non-preminum?"
+msgstr "Weet u zeker dat u dit ticket niet-premium markeert?"
+
+msgid "Message Logs"
+msgstr "Berichtenlogboeken"
+
+msgid "Edit Timer"
+msgstr "Timer aanpassen"
+
+msgid "Type Note for Department"
+msgstr "Typ opmerking voor afdeling"
+
+msgid "Assigning Note"
+msgstr "Opmerking toewijzen"
+
+msgid "Time Track"
+msgstr "Tijd bijhouden"
+
+msgid "Type Internal Note"
+msgstr "Typ interne notitie"
+
+msgid "View all %d tickets"
+msgstr "Bekijk alle% d tickets"
+
+msgid "Reopen"
+msgstr "Heropen"
+
+msgid "History"
+msgstr "Geschiedenis"
+
+msgid "Are you sure you want to delete this ticket"
+msgstr "Weet je zeker dat je dit ticket wilt verwijderen"
+
+msgid "Are you sure to close this ticket"
+msgstr "Weet je zeker dat je dit ticket sluit"
+
+msgid "Unlock"
+msgstr "Ontgrendelen"
+
+msgid "Reply a message"
+msgstr "Beantwoord een bericht"
+
+msgid "Select Premade"
+msgstr "Selecteer Premade"
+
+msgid "Assign Ticket"
+msgstr "Ticket toewijzen"
+
+msgid "Assigned To Agent"
+msgstr "Toegewezen aan agent"
+
+msgid "View all orders"
+msgstr "Bekijk alle bestellingen"
+
+msgid "Non-preminum support"
+msgstr "Niet-premium ondersteuning"
+
+msgid "Check Status"
+msgstr "Controleer de status"
+
+msgid "Add Premade Message"
+msgstr "Premade bericht toevoegen"
+
+msgid "Add Staff Member"
+msgstr "Medewerker toevoegen"
+
+msgid "Add System Email"
+msgstr "Systeem E-mail toevoegen"
+
+msgid "Add User field"
+msgstr "Gebruikersveld toevoegen"
+
+msgid "Add new ticket form for both user and staff"
+msgstr "Voeg nieuw ticket toe voor gebruiker en medewerker"
+
+msgid "Ago"
+msgstr "Geleden"
+
+msgid "Already exisits"
+msgstr "Bestaat reeds"
+
+msgid "Announcement has been deleted"
+msgstr "Aankondiging is verwijderd"
+
+msgid "Announcement has been stored"
+msgstr "Aankondiging is opgeslagen"
+
+msgid "Announcement has not been deleted"
+msgstr "Aankondiging is niet verwijderd"
+
+msgid "Announcement has not been stored"
+msgstr "Aankondiging is niet opgeslagen"
+
+msgid "Append signature with reply"
+msgstr "Handtekening toevoegen met reactie"
+
+msgid "Are you sure to close ticket"
+msgstr "Weet je zeker dat je dit ticket wilt sluiten"
+
+msgid "Are you sure to delete"
+msgstr "Weet je zeker dat je wilt verwijderen"
+
+msgid "Article has been deleted"
+msgstr "Artikel is verwijderd"
+
+msgid "Article has not been deleted"
+msgstr "Artikel is niet verwijderd"
+
+msgid "Assign ticket to staff"
+msgstr "Wijs ticket toe aan medewerkers"
+
+msgid "Assign to Staff"
+msgstr "Toewijzen aan medewerkers"
+
+msgid "Assign to Staff Member"
+msgstr "Toewijzen aan medewerker"
+
+msgid "Assigned to staff"
+msgstr "Toegewezen aan medewerkers"
+
+msgid "Attachment has been removed"
+msgstr "Bijlage is verwijderd"
+
+msgid "Attachment has not been removed"
+msgstr "Bijlage is niet verwijderd"
+
+msgid "Auto response for this topic"
+msgstr "Automatische antwoord voor dit onderwerp"
+
+msgid "Autoresponse"
+msgstr "Automatisch antwoord"
+
+msgid "Ban Email Log List"
+msgstr "Uitsluiten e-mail log lijst"
+
+msgid "Ban Email has been stored"
+msgstr "Geblokkeerde e-mail is opgeslagen"
+
+msgid "Ban Email has not been deleted"
+msgstr "Geblokkeerde e-mail is niet verwijderd"
+
+msgid "Ban Email has not been stored"
+msgstr "Geblokkeerde e-mail is niet opgeslagen"
+
+msgid "Ban email"
+msgstr "E-mail uitsluiten"
+
+msgid "Ban email log list"
+msgstr "Logfile uitgesloten e-mails"
+
+msgid "Ban email new ticket"
+msgstr "Blokkeer e-mail nieuw ticket"
+
+msgid "Banlist log"
+msgstr "Log Blokkeerlijst"
+
+msgid "CURL exist"
+msgstr "CURL bestaat"
+
+msgid "CURL not exist"
+msgstr "CURL bestaat niet"
+
+msgid "Can Not mark as not required"
+msgstr "kan dit niet selecteren om dat het niet nodig is"
+
+msgid "Cannot unpublish field"
+msgstr "Kan veld publiseren niet ongedaan maken"
+
+msgid "Category has been deleted"
+msgstr "Categorie is verwijderd"
+
+msgid "Category has been stored"
+msgstr "Categorie is opgeslagen"
+
+msgid "Category has not been deleted"
+msgstr "Categorie is niet verwijderd"
+
+msgid "Category has not been stored"
+msgstr "Categorie is niet opgeslagen"
+
+msgid "Category in use cannot deleted"
+msgstr "Categorie kan niet verwijderd worden"
+
+msgid "Component Detail"
+msgstr "Onderdeel detail"
+
+msgid "Component for on-line ticket support system"
+msgstr "Onderdeel voor on-line ticket systeem"
+
+msgid "Configuration has been stored"
+msgstr "Configuratie is opgeslagen"
+
+msgid "Configuration not has been stored"
+msgstr "Configuratie is niet opgeslagen"
+
+msgid "Connection established but we cannot ready any email"
+msgstr "Connectie is OK, maar we kunnen geen e-mails lezen"
+
+msgid "Control panel links"
+msgstr "Bedieningspaneel links"
+
+msgid "Current"
+msgstr "Huidige"
+
+msgid "Data directory can not empty."
+msgstr "Data map kan niet leeg zijn"
+
+msgid "Data directory is not writeable."
+msgstr "Data map is niet schrijfbaar"
+
+msgid "Database create table not allowed"
+msgstr "Database tabel aanmaken niet toegestaan"
+
+msgid "Database delete record not allowed"
+msgstr "Database record verwijderen is niet toegestaan"
+
+msgid "Database drop table not allowed"
+msgstr "Database drop tabel  is niet toegestaan"
+
+msgid "Database insert record not allowed"
+msgstr "Database record invoegen is niet toegestaan"
+
+msgid "Database update record not allowed"
+msgstr "Database record updaten is niet toegestaan"
+
+msgid "Date end"
+msgstr "Startdatum"
+
+msgid "Date start"
+msgstr "Einddatum"
+
+msgid "Day"
+msgstr "Dag"
+
+msgid "Default System Email"
+msgstr "Standaard systeem e-mail"
+
+msgid "Default system emails"
+msgstr "Standaard systeem e-mails"
+
+msgid "Delete ticket"
+msgstr "Verwijder ticket"
+
+msgid "Department Under Which The Answer Will Be Made Available"
+msgstr "Afdeling voor het antwoord is beschikbaar"
+
+msgid "Department has been deleted"
+msgstr "Afdeling is verwijderd"
+
+msgid "Department has been stored"
+msgstr "Afdeling is opgeslagen"
+
+msgid "Department has been transfered"
+msgstr "Afdeling is verplaatst"
+
+msgid "Department has not been deleted"
+msgstr "Afdeling is niet verwijderd"
+
+msgid "Department has not been stored"
+msgstr "Afdeling is niet opgeslagen"
+
+msgid "Department has not been transfered"
+msgstr "Afdeling is niet verplaatst"
+
+msgid "Department in use cannot deleted"
+msgstr "Afdeling is in gebruik, verwijderen gaat niet"
+
+msgid "Department is transfered by"
+msgstr "Afdeling is verplaatst door"
+
+msgid "Dir is not writeable"
+msgstr "Map is niet schrijfbaar"
+
+msgid "Directory"
+msgstr "Map"
+
+msgid "Directory permissions error"
+msgstr "Map bevoegdheden fout"
+
+msgid "Display name"
+msgstr "Toon Naam"
+
+msgid "Do you have enabled SSL on your domain"
+msgstr "Is SSL ingeschakeld op uw domein?"
+
+msgid "Documentation"
+msgstr "Documentatie"
+
+msgid "Download has been deleted"
+msgstr "Download is verwijderd"
+
+msgid "Download has been stored"
+msgstr "Download is opgeslagen"
+
+msgid "Download has not been deleted"
+msgstr "Download is niet verwijderd"
+
+msgid "Download has not been stored"
+msgstr "Download is niet opgeslagen"
+
+msgid "Email address"
+msgstr "E-mail adres"
+
+msgid "Email has been banned"
+msgstr "E-mail is geblokkeerd"
+
+msgid "Email has been deleted"
+msgstr "E-mail is verwijderd"
+
+msgid "Email has been stored"
+msgstr "E-mail is opgeslagen"
+
+msgid "Email has not been banned"
+msgstr "E-mail is niet geblokkeerd"
+
+msgid "Email has not been deleted"
+msgstr "E-mail is niet verwijderd"
+
+msgid "Email has not been stored"
+msgstr "E-mail is niet opgeslagen"
+
+msgid "Email send to admin when banned email try to create ticket"
+msgstr ""
+"Stuur e-mail naar admin als een geblokkeerd e-mail adres een ticket wil "
+"aanmaken"
+
+msgid "Enable ticket via email"
+msgstr "Activeren ticket via e-mail"
+
+msgid "Error applying new theme"
+msgstr "Fout, gebruik nieuwe template"
+
+msgid "Error file ext mismatch"
+msgstr "Fout, de bestands extensie is onjuist"
+
+msgid "Error file not downloaded"
+msgstr "Fout, bestand is niet gedownload"
+
+msgid "Error occured"
+msgstr "Er is iets fout gegaan"
+
+msgid "File Downloaded Successfully"
+msgstr "Bestand succesvol gedownload"
+
+msgid "File download"
+msgstr "Bestand download"
+
+msgid "File is not writeable"
+msgstr "Bestand is niet schrijfbaar"
+
+msgid "File read write issue files cannot upload"
+msgstr "Oeps, lees schrijf probleem. Bestanden kunnen niet worden geupload"
+
+msgid "File upload limit exceed"
+msgstr "Bestand upload limiet is overschreden"
+
+msgid "GD library not exist"
+msgstr "GD library bestaat niet"
+
+msgid "General Setting"
+msgstr "Algemene instellingen"
+
+msgid "Get JS Support Ticket Translations"
+msgstr "Gebruik JS Support Ticket vertalingen"
+
+msgid "Goto Web"
+msgstr "Ga naar de website"
+
+msgid "Help topics"
+msgstr "Help Onderwerpen"
+
+msgid "Host port number to read email from"
+msgstr "Host port nummer om emails te lezen"
+
+msgid "IMAP is either not installed or not enable in your server"
+msgstr "IMAP is niet geinstalleerd of niet toegankelijk op jouw server"
+
+msgid "If system not respond in 30 seconds"
+msgstr "Als het systeem in 30 seconden niet reageert"
+
+msgid "Installation"
+msgstr "Installatie"
+
+msgid "Internal Note Has Been Posted"
+msgstr "Interne notitie is gepost"
+
+msgid "Internal Note Has Not Been Posted"
+msgstr "Interne notitie is niet gepost"
+
+msgid "Internal Notes"
+msgstr "Interne notities"
+
+msgid "Internal note is posted by"
+msgstr "Interne notitie is geplaatst door"
+
+msgid "It may take few minutes"
+msgstr "Dit kan een paar minuten duren"
+
+msgid "JS Support Ticket Control Panel"
+msgstr "Support Ticket Control Paneel"
+
+msgid "JS Support Ticket Pro Installer"
+msgstr "Support Ticket Pro Installer"
+
+msgid "JS Support Ticket main control panel"
+msgstr "Support Ticket Hoofd control paneel"
+
+msgid "JS Ticket Pro Installed Successfully"
+msgstr "Ticket Pro succesvol geinstalleerd"
+
+msgid "Knowledge base article has been stored"
+msgstr "Kennisbestand artikel is opgeslagen"
+
+msgid "Knowledge base article has not been stored"
+msgstr "Kennisbestand artikel is niet opgeslagen"
+
+msgid "Language directory is not writeable"
+msgstr "Taal map is niet schrijfbaar"
+
+msgid "Lastest Downlods"
+msgstr "Laatste downloads"
+
+msgid "Latest knowledge base"
+msgstr "Laatste kennisbestand"
+
+msgid "Limit exceeds maximum open tickets"
+msgstr "Het maximaal aantal open tickets is overschreden"
+
+msgid "Login into your account"
+msgstr "Login in uw account"
+
+msgid "Login/Logout button"
+msgstr "Login/Logout knop"
+
+msgid "Mail Setting"
+msgstr "E-mail instellingen"
+
+msgid "Mail cannot mark as read"
+msgstr "E-mail kan niet aangemerkt worden als gelezen"
+
+msgid "Mail has been mark as read"
+msgstr "E-mail is gemarkeerd als gelezen"
+
+msgid "Mail has been send"
+msgstr "E-mail is verstuurd"
+
+msgid "Mail has not been mark as read"
+msgstr "E-mail is niet gemarkeerd als gelezen"
+
+msgid "Mail has not been send"
+msgstr "E-mail is niet verstuurd"
+
+msgid "Mail mark as read"
+msgstr "E-mail gemarkeerd als gelezen"
+
+msgid "Mail mark as unread"
+msgstr "E-mail gemarkeerd als niet ongelezen"
+
+msgid "Mannual Download"
+msgstr "Handleiding downloaden"
+
+msgid "More Detail"
+msgstr "Meer detail"
+
+msgid "More Option"
+msgstr "Meer opties"
+
+msgid "My tickets for both user and staff"
+msgstr "Mijn tickets voor gebruiker en medewerkers"
+
+msgid "New Department"
+msgstr "Nieuwe afdeling"
+
+msgid "New Help Topic"
+msgstr "Nieuwe Help onderwerp"
+
+msgid "New Staff"
+msgstr "Nieuwe medewerkers"
+
+msgid "New Version Is Available"
+msgstr "Nieuwe versie beschikbaar"
+
+msgid "New theme has been applied"
+msgstr "Nieuw thema is gebruikt"
+
+msgid "Next step"
+msgstr "Volgende stap"
+
+msgid "No premade found"
+msgstr "Geen standaard gevonden"
+
+msgid "Not assigned to staff"
+msgstr "Niet toegewezen aan medewerkers"
+
+msgid "Oooops"
+msgstr "Oeps"
+
+msgid "Opsss...."
+msgstr "Oeps...."
+
+msgid "Our Products"
+msgstr "Onze producten"
+
+msgid "PHP version smaller then recomended"
+msgstr "PHP versie is lager dan geadviseerd"
+
+msgid "Password for given email address"
+msgstr "Wachtwoord voor bepaald email adres"
+
+msgid "Please enable ticket via email setting first"
+msgstr "Svp ticket eerst activeren via Email instellingen"
+
+msgid "Please enter the google recaptcha private key from"
+msgstr "Geef A.U.B. de google recaptcha privé sleutel in"
+
+msgid "Please enter the google recaptcha public key from"
+msgstr "Geef A.U.B. de google recaptcha publieks sleutel in"
+
+msgid "Please insert activation key and press start"
+msgstr "Svp activatie sleutel invoeren en druk start"
+
+msgid "Please select atleast one category for"
+msgstr "Svp op z'n minst 1 catogorie selecteren"
+
+msgid "Popular knoweldge base"
+msgstr "Populaire kennisbestand"
+
+msgid "Post internal note"
+msgstr "Post interne notitie"
+
+msgid "Posted by"
+msgstr "Geplaatst door"
+
+msgid "Premade Messages"
+msgstr "Premade berichten"
+
+msgid "Premade department message has been stored"
+msgstr "Premade afdelingsbericht is opgeslagen"
+
+msgid "Premade department message has not been stored"
+msgstr "Premade afdelingsbericht is niet opgeslagen"
+
+msgid "Premade message"
+msgstr "Vooropgesteld bericht"
+
+msgid "Publish"
+msgstr "Publiseer"
+
+msgid "Quick Configuration"
+msgstr "Snelle configuratie"
+
+msgid "Recomended"
+msgstr "Aanbevolen"
+
+msgid "Redirect user to JS Support Ticket control panel after login"
+msgstr "Redirect naar Control paneel na login"
+
+msgid "Reply has been posted"
+msgstr "Antwoord is geplaatst"
+
+msgid "Reply has not been posted"
+msgstr "Antwoord is niet geplaatst"
+
+msgid "Report By User"
+msgstr "Report per gebruiker"
+
+msgid "Report By Users"
+msgstr "Report per gebruikers"
+
+msgid "Requester Info"
+msgstr "Info aanvrager"
+
+msgid "Role has been deleted"
+msgstr "Rol is verwijderd"
+
+msgid "Role has been stored"
+msgstr "Rol is opgeslagen"
+
+msgid "Role has not been deleted"
+msgstr "Rol is niet verwijderd"
+
+msgid "Role has not been stored"
+msgstr "Rol is niet opgeslagen"
+
+msgid "Save Staff Member"
+msgstr "Opslaan medewerker"
+
+msgid "Save User Field"
+msgstr "Gebruikersveld opslaan"
+
+msgid "Save attachments if found in email"
+msgstr "Bijlage uit de Email opslaan"
+
+msgid "Save email template"
+msgstr "Opslaan email template"
+
+msgid "Save premade message"
+msgstr "Premade bericht opslaan"
+
+msgid "Search Announcement"
+msgstr "Aankondiging zoeken"
+
+msgid "Search Download"
+msgstr "Zoek download"
+
+msgid "Search FAQ"
+msgstr "Zoek FAQ"
+
+msgid "Search Knowledge Base"
+msgstr "Zoek in kennisbestand"
+
+msgid "Select Staff"
+msgstr "Selecteer medewerkers"
+
+msgid "Select department"
+msgstr "Selecteer afdeling"
+
+msgid "Select priority"
+msgstr "Selecteer prioriteit"
+
+msgid "Service is running please close the page"
+msgstr "Service is running, svp pagina sluiten"
+
+msgid "Set no. of days to mark ticket as overdue"
+msgstr "Stel aantal dagen in voor ticket verlopen"
+
+msgid "Setting"
+msgstr "Instelling"
+
+msgid "Show Detail"
+msgstr "Toon detail"
+
+msgid "Show captcha on visitor form ticket"
+msgstr "Toon Captcha op formulier bezoeker"
+
+msgid "Show captcha when visitor want to create ticket"
+msgstr "Toon captcha wanneer bezoeker een ticket wil aanmaken"
+
+msgid "Show latest FAQ's. Options:"
+msgstr "Toon laatste FAQ's. Opties:"
+
+msgid "Show latest announcements. Options:"
+msgstr "Toon laatste aankondigingen. Opties:"
+
+msgid "Show latest downloads. Options:"
+msgstr "Toon laatste downloads: Opties:"
+
+msgid "Show latest knowledge base. Options:"
+msgstr "Toon kennisbank: Opties:"
+
+msgid "Show new and reply mail notifications"
+msgstr "Toon nieuwe Email meldingen en reacties"
+
+msgid "Show number of open, closed, answered ticket in my ticket"
+msgstr "Toon aantal open, gesloten, beantwoorde tickets in Mijn Tickets"
+
+msgid "Show popular FAQ's. Options:"
+msgstr "Toon populaire FAQ's. Opties:"
+
+msgid "Show popular announcements. Options:"
+msgstr "Toon populaire aankondigingen. Opties:"
+
+msgid "Show popular downloads. Options:"
+msgstr "Toon populaire downloads. Opties:"
+
+msgid "Show popular knowledge base. Options:"
+msgstr "Toon populair kennisbank. Opties:"
+
+msgid "Some thing wrong try again later"
+msgstr "Er is iets mis gegaan. Probeer later nogmaals"
+
+msgid "Staff Member"
+msgstr "Medewerker"
+
+msgid "Staff Members"
+msgstr "Medewerkers"
+
+msgid "Staff Menu Setting"
+msgstr "Medewerkers menu instelling"
+
+msgid "Staff Section"
+msgstr "Medewerkers sectie"
+
+msgid "Staff Ticket"
+msgstr "MedewerkersTicket"
+
+msgid "Staff member has been deleted"
+msgstr "Medewerker is verwijderd"
+
+msgid "Staff member has been stored"
+msgstr "Medewerker is opgeslagen"
+
+msgid "Staff member has not been deleted"
+msgstr "Medewerker is niet verwijderd"
+
+msgid "Staff member has not been stored"
+msgstr "Medewerker is niet opgeslagen"
+
+msgid "Staff member in use cannot deleted"
+msgstr "Medewerker is in gebruik. Verwijderen kan niet"
+
+msgid "Staff member name"
+msgstr "Naam medewerker"
+
+msgid "Start using"
+msgstr "Start gebruik"
+
+msgid "Support Area"
+msgstr "Support omgeving"
+
+msgid "System Slug"
+msgstr "Systeem slug"
+
+msgid "System slug is confilicted with post or page slug."
+msgstr "Systeem slug conficteert met post of pagina"
+
+msgid "Thanks For Installing JS Ticket Pro"
+msgstr "Dank voor installeren Ticket Pro"
+
+msgid "This message will show on new ticket"
+msgstr "Dit bericht verschijnt op een nieuw ticket"
+
+msgid "Ticket Department Transfer"
+msgstr "Verplaats ticket naar afdeling"
+
+msgid "Ticket Operations Mail Setting"
+msgstr "Ticket operations Email instelling"
+
+msgid "Ticket Response Staff"
+msgstr "Ticket antwoord medewerkers"
+
+msgid "Ticket auto close if user not respond within given days"
+msgstr ""
+"Automatisch sluiten indien gebruiker niet reageert binnen bepaalde dagen"
+
+msgid "Ticket can be reopen within given number of days"
+msgstr "Ticket kan heropend worden binnen een x aantal dagen"
+
+msgid "Ticket has been locked"
+msgstr "Ticket is geblokkeerd"
+
+msgid "Ticket has been marked as in progress"
+msgstr "Ticket is gekenmerkt als in behandeling"
+
+msgid "Ticket has been marked as overdue"
+msgstr "Ticket gemerkt als over tijdslimiet"
+
+msgid "Ticket has been reopend"
+msgstr "Ticket is heropend"
+
+msgid "Ticket has been stored"
+msgstr "Ticket is opgeslagen"
+
+msgid "Ticket has been unlocked"
+msgstr "Ticket ge-deblokkeerd"
+
+msgid "Ticket has not been locked"
+msgstr "Ticket is niet geblokkeerd"
+
+msgid "Ticket has not been marked as in progress"
+msgstr "Ticket is niet gekenmerkt als in behandeling"
+
+msgid "Ticket has not been marked as overdue"
+msgstr "Ticket is niet gemerkt als over tijdslimiet"
+
+msgid "Ticket has not been reopened"
+msgstr "Ticket is niet heropend"
+
+msgid "Ticket has not been stored"
+msgstr "Ticket is niet opgeslagen"
+
+msgid "Ticket has not been unlocked"
+msgstr "Ticket is niet ge-deblokkeerd"
+
+msgid "Ticket is assigned to staff by"
+msgstr "Ticket toegewezen aan Staff door"
+
+msgid "Ticket is locked"
+msgstr "Ticket is geblokkeerd"
+
+msgid "Ticket is locked by"
+msgstr "Ticket is geblokkeerd door"
+
+msgid "Ticket is marked as in progress by"
+msgstr "Ticket is gekenmerkt als in behandeling door"
+
+msgid "Ticket is marked as overdue by"
+msgstr "Ticket gemerkt als over tijdslimiet door"
+
+msgid "Ticket is reopened by"
+msgstr "Ticket is heropend door"
+
+msgid "Ticket is unlocked by"
+msgstr "Ticket is ge-deblokkeerd door"
+
+msgid "Ticket mark overdue"
+msgstr "Markeer ticket over tijd"
+
+msgid "Ticket reopen time limit end"
+msgstr "Ticket heropenen tijdslimiet einde"
+
+msgid "Tickets By Staff"
+msgstr "Tickets per Staff"
+
+msgid "Tickets by priorities"
+msgstr "Tickets per Prioriteiten"
+
+msgid "To Use This Feature You Must Be Staff Memeber"
+msgstr "Om dit te gebruiken moet je Staff lid zijn"
+
+msgid "To access this page please login"
+msgstr "Voor toegang, svp inloggen"
+
+msgid "Today"
+msgstr "Vandaag"
+
+msgid "Unable Connect To Server"
+msgstr "Connectie met server is niet mogelijk"
+
+msgid "Unable to connect to server"
+msgstr "Connectie met de server mislukt"
+
+msgid "Use Search Feature To Select The User"
+msgstr "Gebruik zoekfunctie om gebruiker te selecteren"
+
+msgid "User Menu Setting"
+msgstr "Gebruikers menu instellingen"
+
+msgid "User already staff member"
+msgstr "Gebruiker is al staff lid"
+
+msgid "User id"
+msgstr "Gebruiker id"
+
+msgid "View"
+msgstr "Bekijk"
+
+msgid "View Ticket"
+msgstr "Bekijk ticket"
+
+msgid "Visitor published"
+msgstr "Bezoeker gepubliceerd"
+
+msgid "Waiting Customer Reply"
+msgstr "Wacht op antwoord"
+
+msgid "Waiting Staff Reply"
+msgstr "Wacht op Staff reactie"
+
+msgid "Waiting reply"
+msgstr "Wacht op antwoord"
+
+msgid "Waiting staff reply"
+msgstr "Wachtende op staff reactie"
+
+msgid "Would you like to add this type to parent"
+msgstr "Wilt u dit type aan ouder toevoegen"
+
+msgid "You are Already Logged in"
+msgstr "U bent al ingelogd"
+
+msgid "You are not allowed to view this page"
+msgstr "Je mag deze pagina niet bekijken"
+
+msgid "You are not logged in"
+msgstr "U ben nog niet ingelogd"
+
+msgid "You are not staff member"
+msgstr "Je bent geen staff lid"
+
+msgid "You cannot unmark it"
+msgstr "Je kunt de markering niet ongedaan maken"
+
+msgid "Your parent does not have this type"
+msgstr "Je ouder heeft dit type niet"
+
+msgid "Your System Is Up To Date"
+msgstr "Jouw systeem is up-to-date"
+
+msgid "Your account is disabled please contact to administrator"
+msgstr "Jouw account is disabled. Neem contact op met de administator"
+
+msgid "Your child have this type"
+msgstr "Uw kind heeft dit type"
+
+msgid "Your setting is working please save the setting"
+msgstr "Jouw instelling werkt. Svp instelling opslaan"
+
+msgid "Zip library not exist"
+msgstr "Zip library bestaat niet"
+
+msgid "directory is not writeable"
+msgstr "Deze map is niet overschrijfbaar"
+
+msgid "extension"
+msgstr "extentie"
+
+msgid "override department setting"
+msgstr "Overschrijf afdeling settings"
+
+msgid "Add Files"
+msgstr "Bestand toevoegen"
+
+msgid "Add Userfield"
+msgstr "Gebruikersveld toevoegen"
+
+msgid "Are you sure delete"
+msgstr "Verwijderen"
+
+msgid "Assign User Permissions"
+msgstr "Toekennen gebruikersrechten"
+
+msgid "Assign to"
+msgstr "Toewijzen aan"
+
+msgid "Blocked"
+msgstr "Geblokkeerd"
+
+msgid "Change ticket priority"
+msgstr "Wijzig Ticket prioriteit"
+
+msgid "Control Panel Coulmn"
+msgstr "Control paneel Colom"
+
+msgid "Data directory in not writable"
+msgstr "Data map niet overschrijfbaar"
+
+msgid "Depandent field"
+msgstr "Afhankelijk veld"
+
+msgid "Dir not exist"
+msgstr "Bestaat niet"
+
+msgid "Display #"
+msgstr "Toon #"
+
+msgid "Due Date"
+msgstr "Vervaldatum"
+
+msgid "Email already exist"
+msgstr "Email bestaat al"
+
+msgid "Email reads sucessfully"
+msgstr "Email succesvol gelezen"
+
+msgid "Empty values are not allowed"
+msgstr "Lege waarde zijn niet toegestaan"
+
+msgid "Enable print ticket"
+msgstr "Activeer ticket afdrukken"
+
+msgid "Field Name"
+msgstr "Veldnaam"
+
+msgid "Field mark ordering down"
+msgstr "Veld markering naar onder"
+
+msgid "Get JS Tickets Translations"
+msgstr "Krijg JS Ticket Vertalingen"
+
+msgid "Invalid data directory"
+msgstr "Ongeldige gegevensmap"
+
+msgid "Jstickets Uninstall Text"
+msgstr "Jstickets Uninstall Tekst"
+
+msgid "Language Translations"
+msgstr "Vertalingen"
+
+msgid "Loading"
+msgstr "Laden"
+
+msgid "Multi select"
+msgstr "Selecteer meerdere"
+
+msgid "New Mail Message Recevied"
+msgstr "Nieuw Email bericht ontvangen"
+
+msgid "New Mail Receviced"
+msgstr "Nieuwe Email ontvangen"
+
+msgid "Not assigned"
+msgstr "Niet toegewezen"
+
+msgid "Not default"
+msgstr "Niet standaard"
+
+msgid "Num"
+msgstr "Nummer"
+
+msgid "Operation Cancel"
+msgstr "Cancel handeling"
+
+msgid "Page not found"
+msgstr "Pagina niet gevonden"
+
+msgid "Permission"
+msgstr "Permissie"
+
+msgid "Phone"
+msgstr "Telefoon"
+
+msgid "Phone Ext"
+msgstr "Telefoon ext"
+
+msgid "Radio button"
+msgstr "Radio toets"
+
+msgid "Read only"
+msgstr "Alleen lezen"
+
+msgid "Reply has not been stored"
+msgstr "Antwoordt is niet opgeslagen"
+
+msgid "Required language is not installed"
+msgstr "Vereiste taal is niet geïnstalleerd"
+
+msgid "Save Role Permission"
+msgstr "Rol toegang opslaan"
+
+msgid "Select parent field"
+msgstr "Selecteer bovenliggend veld"
+
+msgid "Select','js-jobs"
+msgstr "Selecteer ','js-jobs"
+
+msgid "Staff Members Control Panel Links"
+msgstr "Staff leden Control paneel Links"
+
+msgid "Staff Members Top Menu Links"
+msgstr "Staff leden Top menu Links"
+
+msgid "Text"
+msgstr "Tekst"
+
+msgid "Text area"
+msgstr "Tekst gebied"
+
+msgid "Text field"
+msgstr "Tekst veld"
+
+msgid "Ticket in use cannot deleted"
+msgstr "U kan geen ticket in gebruik verwijderen"
+
+msgid "Ticket mark in progress"
+msgstr "Ticket markering in behandeling"
+
+msgid "Unknown"
+msgstr "Onbekend"
+
+msgid "Upload file"
+msgstr "Upload bestand"
+
+msgid "Use The Table Below To Add New Values"
+msgstr "Gebruik onderstaande tabel om waarde toe te voegen"
+
+msgid "User Control Panel Links"
+msgstr "Gebruikers Control Paneel Links"
+
+msgid "User Top Menu Links"
+msgstr "Gebruikers Top menu Links"
+
+msgid "User field has been deleted"
+msgstr "Gebruikersveld is verwijderd"
+
+msgid "User field has been stored"
+msgstr "Gebruikersveld is opgeslagen"
+
+msgid "User field has not been deleted"
+msgstr "Gebruikersveld is niet verwijderd"
+
+msgid "User field has not been stored"
+msgstr "Gebruikersveld is niet opgeslagen"
+
+msgid "Values Between 1 T0 12 Default Is 3"
+msgstr "Waarde tussen 1 en 12. Standaard is 3"
+
+msgid "View all"
+msgstr "Bekijk alles"
+
+msgid "Visitor Menu Setting"
+msgstr "Bezoeker menu instellingen"
+
+msgid "Waiting admin/staff reply"
+msgstr "Wachtende admin/staff antwoord"
+
+msgid "is not writeable"
+msgstr "Is niet beschrijfbaar"
+
+msgid "show print ticket icon on ticketdetail page to user"
+msgstr "Toon ticket printen icoon bij ticket details pagina bij gebruiker"
+
+msgid "Form Category"
+msgstr "Categorie formulier"
+
+msgid "You are not allowed to view this ticket"
+msgstr "U heeft niet voldoende rechten om deze ticket in te zien"
+
+msgid "You have already provided feedback for this ticket"
+msgstr "U heeft al op deze ticket gereageerd"
+
+msgid "Ticket not found"
+msgstr "Ticket is niet gevonden"
+
+msgid "Thank you for your feedback"
+msgstr "Bedankt voor je feedback"
+
+msgid "Feedback Setting"
+msgstr "Feedback Instelling"
+
+msgid "Interval type to mark ticket as overdue"
+msgstr "Interval type om tickets als te laat te markeren"
+
+msgid "Set no. of days or hours to mark ticket as overdue"
+msgstr "Geef aantal dagen of uren aan om tickets als te laat te markeren"
+
+msgid "Select whether you want to show captcha on registration form or not"
+msgstr "Selecteer of u captcha op registratieformulier wilt weergeven of niet"
+
+msgid "Select role you want to assign to new users"
+msgstr "Selecteer de rol die u wil toewijzen aan nieuwe gebruikers"
+
+msgid "Select whether users can reply to closed ticket via email or not"
+msgstr ""
+"Selecteer of gebruikers wel of niet via email kunnen reageren op een "
+"gesloten ticket"
+
+msgid "This text will appear whenever visitor creates ticket"
+msgstr "Deze tekst verschijnt als bezoekers een ticket aanmaken"
+
+msgid "Set no. of days or hours to send feedback email after ticket is closed"
+msgstr ""
+"Selecteer het aantal dagen of uren voor het versturen van feedback email "
+"nadat ticket is gesloten"
+
+msgid "Feedback Successful message to customer"
+msgstr "Feedback verstuurd melding naar klant"
+
+msgid "You cannot use this email it is used in ticket via email"
+msgstr "U kunt dit emailadres niet gebruiken het is gebruikt in dit ticket"
+
+msgid "User of this department will receive email on new ticket"
+msgstr "Gebruiker van deze afdeling ontvangt een email bij een nieuw ticket"
+
+msgid "Departent Report"
+msgstr "Afdeling rapportage"
+
+msgid "Users tickets"
+msgstr "Gebruikers tickets"
+
+msgid "Users Ticekts"
+msgstr "Gebruikers Tickets"
+
+msgid "Edit reason"
+msgstr "Reden wijziging"
+
+msgid "Answerd"
+msgstr "Beantwoord"
+
+msgid "Select Staff Member"
+msgstr "Geselecteerde medewerker"
+
+msgid "Provide Feedback"
+msgstr "Feedback geven"
+
+msgid "Field Parent has not been stored"
+msgstr "Bovenstaand veld is niet opgeslagen"
+
+msgid "Please Insert Atleat one value for every option"
+msgstr "Geef minimaal 1 waarde in voor elke optie"
+
+msgid "Add New"
+msgstr "Nieuwe toevoegen"
+
+msgid "User Field"
+msgstr "Gebruikersveld"
+
+msgid "We'd love to hear from"
+msgstr "We horen graag van je"
+
+msgid "You"
+msgstr "U"
+
+msgid "Departments Reports"
+msgstr "Afdelingsrapportage"
+
+msgid "Staff Feedbacks"
+msgstr "Feedback medewerkers"
+
+msgid "Password Again"
+msgstr "Herhaal wachtwoord"
+
+msgid "Register New Account"
+msgstr "Registreer een nieuw account"
+
+msgid "Tickets Updater"
+msgstr "Tickets updaten"
+
+msgid "Report By Department"
+msgstr "Rapportage per Afdeling"
+
+msgid "out of"
+msgstr "uit"
+
+msgid "Report By Deparments"
+msgstr "Rapportage per Afdelingen"
+
+msgid "Deparments"
+msgstr "Afdelingen"
+
+msgid "No Data"
+msgstr "Geen gegevens"
+
+msgid "Staff Report"
+msgstr "Medewerker rapportage"
+
+msgid "Date From"
+msgstr "Datum vanaf"
+
+msgid "Date To"
+msgstr "Datum tot"
+
+msgid "My Reports"
+msgstr "Mijn rapportages"
+
+msgid "Staff Members Reports"
+msgstr "Medewerkers rapportage"
+
+msgid "Ticket has been created"
+msgstr "Ticket is aangemaakt"
+
+msgid "Issue Summary"
+msgstr "Samenvatting probleem"
+
+msgid "All Downloads"
+msgstr "Alle Downloads"
+
+msgid "Low"
+msgstr "Laag"
+
+msgid "Customer Feedbacks"
+msgstr "Feedback klanten"
+
+msgid "Duedate Ticket"
+msgstr "Opleverdatum ticket"
+
+msgid "New Ticket Notification"
+msgstr "Notificatie nieuwe ticket"
+
+msgid "Edit Own Time"
+msgstr "Eigen tijd bewerken"
+
+msgid "View Feedback"
+msgstr "Bekijk feedback"
+
+msgid "Assign Role Permissions"
+msgstr "Rollen toewijzen"
+
+msgid "Assign Role To User"
+msgstr "Rollen per gebruiker"
+
+msgid "Add User"
+msgstr "Toevoegen Gebruiker"
+
+msgid "Edit User"
+msgstr "Gebruiker aanpassen"
+
+msgid "Delete Department"
+msgstr "Verwijder afdeling"
+
+msgid "View Department"
+msgstr "Bekijk afdeling"
+
+msgid "Delete Role"
+msgstr "Rol verwijderen"
+
+msgid "Delete User"
+msgstr "Verwijder gebruiker"
+
+msgid "View Role"
+msgstr "Bekijk Rol"
+
+msgid "View User"
+msgstr "Bekijk gebruiker"
+
+msgid "View Staff Reports"
+msgstr "Bekijk medewerker rapportage"
+
+msgid "View Department Reports"
+msgstr "Bekijk afdeling rapportage"
+
+msgid "View Category"
+msgstr "Bekijk Categorie"
+
+msgid "View Knowledge Base"
+msgstr "Bekijk Kenniscentrum"
+
+msgid "Delete Category"
+msgstr "Verwijder Categorie"
+
+msgid "Delete Knowledge Base"
+msgstr "Verwijder Kennisbank"
+
+msgid "View FAQ"
+msgstr "Bekijk FAQ"
+
+msgid "Delete FAQ"
+msgstr "Verwijder FAQ"
+
+msgid "View Download"
+msgstr "Bekijk Download"
+
+msgid "Delete Download"
+msgstr "Verwijder Download"
+
+msgid "View Announcement"
+msgstr "Bekijk aankondiging"
+
+msgid "Delete Announcement"
+msgstr "Verwijder aankondiging"
+
+msgid "Allow Mail System"
+msgstr "Mail systeem toestaan"
+
+msgid "Internal Note Title"
+msgstr "Titel interne notitie"
+
+msgid "Satisfaction Reports"
+msgstr "Tevredenheids rapporten"
+
+msgid "Exports"
+msgstr "Exporteren"
+
+msgid "Customer Satisfaction Report"
+msgstr "Klanttevredenheid rapport"
+
+msgid "Please wait installation in progress"
+msgstr "Een moment installatie wordt uitgevoerd"
+
+msgid "Show Captcha To Visitor On Form Ticket"
+msgstr "Toon Captcha aan bezoekers op ticket formulier."
+
+msgid "Feedback Email Settings"
+msgstr "Feedback Email instellingen"
+
+msgid "Feedback successfully stored message"
+msgstr "Feedback succesvol opgeslagen"
+
+msgid "Ticket Fields"
+msgstr "Ticket velden"
+
+msgid "Export Tickets"
+msgstr "Exporteer tickets"
+
+msgid "High"
+msgstr "Hoog"
+
+msgid "Ticket has been unmarked as overdue"
+msgstr "Ticket markering \\"
+
+msgid "Ticket has not been unmarked as overdue"
+msgstr "Ticket is niet gemarkeerd als te laat"
+
+msgid "Ticket is unmarked as overdue by"
+msgstr "Ticket markering \\"
+
+msgid "Assigned To Me"
+msgstr "Aan mij toegewezen"
+
+msgid "JS Support Ticket System"
+msgstr "JS Support Ticketsysteem"
+
+msgid "Assign To"
+msgstr "Toewijzen aan"
+
+msgid "Show on listing"
+msgstr "Toon op lijst"
+
+msgid "Remarks"
+msgstr "Opmerkingen"
+
+msgid "You are not login"
+msgstr "U bent niet ingelogd"
+
+msgid "Pro Features"
+msgstr "Pro functies"
+
+msgid "Feature available in pro version only"
+msgstr "Functie alleen beschikbaar in de pro versie"
+
+msgid "JS Support Ticket Pro Feature"
+msgstr "JS Support Ticket Pro functie"
+
+msgid "Unlimited color tools to desire result"
+msgstr "Onbeperkte kleur mogelijkheden voor resultaten"
+
+msgid "Access Control Level"
+msgstr "Toegangsniveau"
+
+msgid "Access control limit you can limit your staff to do specific task"
+msgstr "Toegangslimieten voor uw personeel tot een specifieke taak"
+
+msgid "Staff member create premade message premade available in ticket reply"
+msgstr ""
+"Medewerkers gebruiken standaard berichten, beschikbaar in ticket antwoord."
+
+msgid "Staff member can be created and reply your customer tickets"
+msgstr "Medewerkers kunnen tickets aanmaken en beantwoorden van uw klanten"
+
+msgid "Help topic can be add with respect to departments"
+msgstr "Help-onderwerpen kunnen worden toegevoegd aan afdelingen"
+
+msgid "You can create and maintain knowledge Base for your ticket system"
+msgstr "Kenniscentrum aanmaken en beheren voor uw ticket systeem"
+
+msgid "You can add downloads for your customers"
+msgstr "U kunt downloads toevoegen voor uw klanten"
+
+msgid "Add announcements for your support system"
+msgstr "Voeg mededelingen toe aan uw support systeem"
+
+msgid "You can Manager FAQs"
+msgstr "U kunt FAQ's beheren"
+
+msgid "You can ban and unabn any spam email address"
+msgstr "U kunt spam email adressen blokkeren en deblokkeren"
+
+msgid "If and only if customer not reply certain days ticket marked overdue"
+msgstr ""
+"Als en alleen als klanten niet binnen gestelde tijd reageren wordt de ticket "
+"als \\"
+
+msgid "System will read your email and create tickets"
+msgstr "Systeem leest uw email en maakt tickets aan"
+
+msgid "Internal notes for staff members and administrator ticket based"
+msgstr "Interne noties voor de medewerkers en administrator op ticket basis"
+
+msgid "Assign To Staff"
+msgstr "Toewijzen aan medewerkers"
+
+msgid "Ticket can be transferred to any other staff member"
+msgstr "Ticket kan doorgestuurd worden aan een andere medewerker"
+
+msgid "Ticket can also be transferred to any other department"
+msgstr "Tickets kunnen naar andere afdelingen worden verplaatst"
+
+msgid "Activity Log"
+msgstr "Achtiviteiten logboek"
+
+msgid "Ticket action history with time and user name"
+msgstr "Ticket actie geschiedenis met tijd en gebruikersnaam"
+
+msgid "Admin can export tickets in csv format to keep record"
+msgstr "Administator kan tickets exporteren naar CSV-formaat om op te slaan"
+
+msgid "Customer Feedback"
+msgstr "Feedback van klanten"
+
+msgid "Customer can provide feedback that can be used to improve services"
+msgstr ""
+"Klant kan feedback geven die kan worden gebruikt om service te verbeteren"
+
+msgid "RTL Supported"
+msgstr "RTL ondersteund"
+
+msgid "JS Support Ticket auto adjusts to RTL or LTR without any problem."
+msgstr "JS Support Ticket past zich probleemloos aan in RTL of LTR"
+
+msgid "Staff Time Tracking"
+msgstr "Tijdregistratie personeel"
+
+msgid "Visitor Ticket Open"
+msgstr "Open ticket bezoeker"
+
+msgid "Visitor can also open ticket in you support system"
+msgstr "Bezoekers kunnen ook een ticket openen"
+
+msgid "You can now lock or unlock any ticket for certain time"
+msgstr "U kunt nu tickets voor een bepaalde tijd blokkeren en vrijgeven"
+
+msgid "Pro version only"
+msgstr "Alleen bij de Pro versie"
+
+msgid "Reset"
+msgstr "Opnieuw instellen"
+
+msgid "Account Status"
+msgstr "Account Status"
+
+msgid "Dashboard"
+msgstr "Dashboard"
+
+msgid "Status"
+msgstr "Toestand"
+
+msgid "Open"
+msgstr "Open"
+
+msgid "Tickets"
+msgstr "Kaartjes"
+
+msgid "Ticket ID"
+msgstr "Ticket ID"
+
+msgid "This ticket is marked as overdue"
+msgstr "Dit ticket is gemarkeerd als te laat"
+
+msgid "Ticket marked as overdue"
+msgstr "Ticket gemarkeerd als te laat"
+
+msgid "Log"
+msgstr "Logboek"
+
+msgid "Logger"
+msgstr "Logger"
+
+msgid "Offline"
+msgstr "Offline"
+
+msgid "Pending"
+msgstr "In behandeling"
+
+msgid "Download"
+msgstr "Downloaden"
+
+msgid "Downloads"
+msgstr "Downloads"
+
+msgid "Help Desk"
+msgstr "Helpdesk"
+
+msgid "Gmail"
+msgstr "Gmail"
+
+msgid "Yahoo"
+msgstr "Yahoo"
+
+msgid "Aol"
+msgstr "Aol"
+
+msgid "Hotmail"
+msgstr "Hotmail"
+
+msgid "Ticket Type"
+msgstr "Tickettype"
+
+msgid "Host Type"
+msgstr "Hosttype"
+
+msgid "Cron Job"
+msgstr "Cron-job"
+
+msgid "Web Cron Job"
+msgstr "Webcronjob"
+
+msgid "Wget"
+msgstr "Wget"
+
+msgid "Curl"
+msgstr "Krul"
+
+msgid "PHP Script"
+msgstr "PHP-script"
+
+msgid "URL"
+msgstr "URL"
+
+msgid "Timeout"
+msgstr "Time-out"
+
+msgid "Login"
+msgstr "Log in"
+
+msgid "Email Piping"
+msgstr "E-mailleidingen"
+
+msgid "Ticket Email Type"
+msgstr "E-mailtype ticket"
+
+msgid "ticket email"
+msgstr "ticket e-mail"
+
+msgid "Ticket Status"
+msgstr "Ticketstatus"
+
+msgid "FAQ"
+msgstr "FAQ"
+
+msgid "FAQ's"
+msgstr "Veelgestelde vragen"
+
+msgid "Feedback"
+msgstr "Feedback"
+
+msgid "Meta Keywords"
+msgstr "Meta-trefwoorden"
+
+msgid "Logo"
+msgstr "Logo"
+
+msgid "Inbox"
+msgstr "Postvak IN"
+
+msgid "Outbox"
+msgstr "Postvak UIT"
+
+msgid "Ticket"
+msgstr "Ticket"
+
+msgid "Ticket ID #"
+msgstr "Ticket ID #"
+
+msgid "Max Record"
+msgstr "Maximaal record"
+
+msgid "Product"
+msgstr "Product"
+
+msgid "Ticket Detail"
+msgstr "Ticketdetails"
+
+msgid "Plus"
+msgstr "Plus"
+
+msgid "Minus"
+msgstr "Minus"
+
+msgid "Short Codes"
+msgstr "Korte codes"
+
+msgid "GDPR"
+msgstr "AVG"
+
+msgid "Helptopics"
+msgstr "Hulponderwerpen"
+
+msgid "Agent Ticket"
+msgstr "Agentenkaartje"
+
+msgid "JS Help Desk"
+msgstr "JS-helpdesk"
+
+msgid "Sorry"
+msgstr "Sorry"
+
+msgid "Sorry!"
+msgstr "Sorry!"
+
+msgid "Help Desk Pages"
+msgstr "Helpdeskpagina's"
+
+msgid "Support"
+msgstr "Steun"
+
+msgid "Google Recaptcha"
+msgstr "Google Recaptcha"
+
+msgid "Agent Menu"
+msgstr "Agentmenu"
+
+msgid "MailChimp"
+msgstr "MailChimp"
+
+msgid "Online"
+msgstr "Online"
+
+msgid "DD-MM-YYYY"
+msgstr "DD-MM-JJJJ"
+
+msgid "MM-DD-YYYY"
+msgstr "MM-DD-JJJJ"
+
+msgid "YYYY-MM-DD"
+msgstr "JJJJ-MM-DD"
+
+msgid "Kb"
+msgstr "Kb"
+
+msgid "Breadcrumbs"
+msgstr "Paneermeel"
+
+msgid "Show hide Top Header"
+msgstr "Toon verbergen Top Header"
+
+msgid "Login redirect"
+msgstr "Omleiding voor inloggen"
+
+msgid "Maximum open tickets"
+msgstr "Maximaal open kaartjes"
+
+msgid "Google recaptcha public key"
+msgstr "Google recaptcha openbare sleutel"
+
+msgid "Google recaptcha private key"
+msgstr "Google recapcha privésleutel"
+
+msgid "Admin"
+msgstr "beheerder"
+
+msgid "Ticket Response Agent"
+msgstr "Ticketresponsagent"
+
+msgid "Top Menu Links"
+msgstr "Links naar het bovenste menu"
+
+msgid "Firebase Bucket Storage"
+msgstr "Firebase-bucketopslag"
+
+msgid "Firebase Message Sender Id"
+msgstr "Afzender-ID van Firebase-bericht"
+
+msgid "Private Server Key"
+msgstr "Privé serversleutel"
+
+msgid "SMTP"
+msgstr "SMTP"
+
+msgid "TLS"
+msgstr "TLS"
+
+msgid "SSL"
+msgstr "SSL"
+
+msgid "SMTP Secure"
+msgstr "SMTP-beveiligd"
+
+msgid "info"
+msgstr "informatie"
+
+msgid "Body"
+msgstr "Lichaam"
+
+msgid "Parameters"
+msgstr "Parameters"
+
+msgid "Tracking ID"
+msgstr "Tracking-ID"
+
+msgid "Ticket URL"
+msgstr "Ticket-URL"
+
+msgid "Feedback URL"
+msgstr "Feedback-URL"
+
+msgid "Ticket Tracking ID"
+msgstr "Tickettracking-ID"
+
+msgid "50%"
+msgstr "50%"
+
+msgid "100%"
+msgstr "100%"
+
+msgid "lms plugin"
+msgstr "lms-plug-in"
+
+msgid "job manager"
+msgstr "taakbeheerder"
+
+msgid "Overall Report"
+msgstr "Algemeen rapport"
+
+msgid "Premium Addons List"
+msgstr "Lijst met premium add-ons"
+
+msgid "Waiting Agent Reply"
+msgstr "Wachtend antwoord van agent"
+
+msgid "Addons"
+msgstr "Add-ons"
+
+msgid "Max Ticket"
+msgstr "Maximaal kaartje"
+
+msgid "Max Tickets"
+msgstr "Maximale kaartjes"
+
+msgid "Front-End Widgets"
+msgstr "Front-endwidgets"
+
+msgid "WooCommerce"
+msgstr "WooCommerce"
+
+msgid "envato"
+msgstr "envato"
+
+msgid "mailchimp"
+msgstr "mailchimp"
+
+msgid "Mailchimp"
+msgstr "Mailchimp"
+
+msgid "WP Extension Directory"
+msgstr "WP-extensiemap"
+
+msgid "fb"
+msgstr "fb"
+
+msgid "Log In"
+msgstr "Log in"
+
+msgid "Captcha"
+msgstr "Captcha"
+
+msgid ":"
+msgstr ":"
+
+msgid "2"
+msgstr "2"
+
+msgid "3"
+msgstr "3"
+
+msgid "max ticket"
+msgstr "maximaal kaartje"
+
+msgid "admin widgets"
+msgstr "beheerderswidgets"
+
+msgid "frontend widget"
+msgstr "frontend-widget"
+
+msgid "mail chimp"
+msgstr "mailchimp"
+
+msgid "JS Help Desk Addon Installer"
+msgstr "JS Help Desk Add-on-installatieprogramma"
+
+msgid "Agent Tickets"
+msgstr "Agent-tickets"
+
+msgid "Order ID"
+msgstr "Order ID"
+
+msgid "premade"
+msgstr "voorgemaakt"
+
+msgid "Ticket Details"
+msgstr "Ticketgegevens"
+
+msgid "Item"
+msgstr "Item"
+
+msgid "Print"
+msgstr "Afdrukken"
+
+msgid ","
+msgstr ","
+
+msgid "5.0"
+msgstr "5,0"
+
+msgid "Account status"
+msgstr "Account Status"
+
+msgid "Database CRUD"
+msgstr "Database CRUD"
+
+msgid "Forum"
+msgstr "Forum"
+
+msgid "GD library"
+msgstr "GD-bibliotheek"
+
+msgid "Max record"
+msgstr "Maximaal record"
+
+msgid "PHP"
+msgstr "PHP"
+
+msgid "Start"
+msgstr "Begin"
+
+msgid "Ticket Via Email"
+msgstr "Ticket via e-mail"
+
+msgid "Top menu links"
+msgstr "Links naar het bovenste menu"
+
+msgid "Type"
+msgstr "Type"
+
+msgid "Update"
+msgstr "Update"
+
+msgid "Zip library"
+msgstr "Zip-bibliotheek"
+
+msgid "1"
+msgstr "1"
+
+msgid "Check box"
+msgstr "Selectievakje"
+
+msgid "Drop down"
+msgstr "Laten vallen"
+
+msgid "Id"
+msgstr "ID kaart"
+
+msgid "Jerror Alertnoauthor"
+msgstr "Jerror Alertgeen auteur"
+
+msgid "Premade"
+msgstr "Voorgemaakt"
+
+msgid "Print ticket"
+msgstr "Ticket afdrukken"
+
+msgid "Misc"
+msgstr "Diversen"
+
+msgid "Word Press Extension Directory"
+msgstr "Directory met Wordpress-extensies"
+
+msgid "Upload"
+msgstr "Uploaden"
+
+msgid "Ticketid"
+msgstr "Ticket ID"
+
+msgid "OK"
+msgstr "OK"
+
+msgid "Management"
+msgstr "Beheer"
+
+msgid "Ticket Id"
+msgstr "Ticket ID"
+
+msgid "Upgrade"
+msgstr "Upgrade"
+
+msgid "JS Support Ticket Pro"
+msgstr "JS-ondersteuningsticket Pro"
+
+msgid "User has been successfully registered"
+msgstr "Gebruiker is succesvol geregistreerd"
+
+msgid "Select Form"
+msgstr "Selecteer Formulier"
+
+msgid "Envato Purchase Code"
+msgstr "Envato-aankoopcode"
+
+msgid "Urgent"
+msgstr "Dringend"
+
+msgid "EDD Order ID"
+msgstr "EDD-bestellings-ID"
+
+msgid "Search keywords"
+msgstr "Zoek sleutelwoorden"
+
+msgid "Search title"
+msgstr "Zoek titel"
+
+msgid "Manager"
+msgstr "Manager"
+
+msgid "Assign Ticket To Agent"
+msgstr "Ticket toewijzen aan agent"
+
+msgid "Mark In Progress"
+msgstr "Markeer in uitvoering"
+
+msgid "Change Ticket Priority"
+msgstr "Wijzig de ticketprioriteit"
+
+msgid "Ban Email And Close Ticket"
+msgstr "E-mail verbieden en ticket sluiten"
+
+msgid "Release Ticket"
+msgstr "Ticket vrijgeven"
+
+msgid "View Credentials"
+msgstr "Bekijk referenties"
+
+msgid "Edit Credentials"
+msgstr "Referenties bewerken"
+
+msgid "Mark Non Premium"
+msgstr "Markeer niet-premium"
+
+msgid "Link To Paid Support"
+msgstr "Link naar betaalde ondersteuning"
+
+msgid "Export Ticket not translate"
+msgstr "Exportticket niet vertalen"
+
+msgid "Edit Help Topic not translate"
+msgstr "Help-onderwerp bewerken is niet vertaald"
+
+msgid "View Help Topic"
+msgstr "Help-onderwerp bekijken"
+
+msgid "Delete Help Topic"
+msgstr "Help-onderwerp verwijderen"
+
+msgid "Edit Canned Response"
+msgstr "Standaardantwoord bewerken"
+
+msgid "View Canned Response"
+msgstr "Bekijk het standaardantwoord"
+
+msgid "Delete Canned Response"
+msgstr "Standaardantwoord verwijderen"
+
+msgid "Standard"
+msgstr "Standaard"
+
+msgid "Default with auto assign"
+msgstr "Standaard met automatische toewijzing"
+
+msgid "Visible"
+msgstr "Zichtbaar"
+
+msgid "Select Visible"
+msgstr "Selecteer Zichtbaar"
+
+msgid "Logedin user"
+msgstr "Ingelogde gebruiker"
+
+msgid "Logedin user only"
+msgstr "Alleen ingelogde gebruiker"
+
+msgid "visitor"
+msgstr "bezoeker"
+
+msgid "Single Header"
+msgstr "Enkele kop"
+
+msgid "Multiple Header"
+msgstr "Meerdere koptekst"
+
+msgid "Quick installation Guide"
+msgstr "Snelle installatiegids"
+
+msgid "How to setup"
+msgstr "Hoe in te stellen"
+
+msgid "Ticket Creation"
+msgstr "Ticketcreatie"
+
+msgid "Custom Fields"
+msgstr "Aangepaste velden"
+
+msgid "Email Notification Problems"
+msgstr "Problemen met e-mailmeldingen"
+
+msgid "arrow"
+msgstr "pijl"
+
+msgid "close"
+msgstr "dichtbij"
+
+msgid "Multiform"
+msgstr "Veelvormig"
+
+msgid "Add WP Users"
+msgstr "WP-gebruikers toevoegen"
+
+msgid "Other Products"
+msgstr "Andere producten"
+
+msgid "watch video"
+msgstr "bekijk video"
+
+msgid "Get"
+msgstr "Krijgen"
+
+msgid "This prefix will be added to slug incase of homepage links"
+msgstr ""
+"Dit voorvoegsel wordt toegevoegd aan slug als er links naar de startpagina "
+"zijn"
+
+msgid " This prefix will be added to slug incase of conflict"
+msgstr "Dit voorvoegsel wordt toegevoegd aan slug in geval van een conflict"
+
+msgid "Reset All"
+msgstr "Alles resetten"
+
+msgid "Search By Slug"
+msgstr "Zoeken op naaktslak"
+
+msgid "Slug List"
+msgstr "Slakkenlijst"
+
+msgid "This button will only save slugs on current page"
+msgstr "Met deze knop worden alleen slugs op de huidige pagina opgeslagen"
+
+msgid "Slug"
+msgstr "Naaktslak"
+
+msgid "Export Style"
+msgstr "Stijl exporteren"
+
+msgid "Add Multiform"
+msgstr "Veelvormig toevoegen"
+
+msgid "Edit Fields"
+msgstr "Velden bewerken"
+
+msgid "Save Multiform"
+msgstr "Bewaar Veelvormig"
+
+msgid "Conditions"
+msgstr "Voorwaarden"
+
+msgid "Add Conditions"
+msgstr "Voorwaarden toevoegen"
+
+msgid "Rule Title"
+msgstr "Regeltitel"
+
+msgid "Agent Auto Assign"
+msgstr "Agent automatisch toewijzen"
+
+msgid "Add Rule"
+msgstr "Regel toevoegen"
+
+msgid "Condition Title"
+msgstr "Conditie Titel"
+
+msgid "Condition Operator"
+msgstr "Conditie Operator"
+
+msgid "Condition value"
+msgstr "Conditie waarde"
+
+msgid "Select Condition Title"
+msgstr "Selecteer Conditietitel"
+
+msgid "Submit Type"
+msgstr "Verzendtype"
+
+msgid "Select Condition Operator"
+msgstr "Selecteer Conditieoperator"
+
+msgid "Contain"
+msgstr "Bevatten"
+
+msgid "Matched"
+msgstr "Op elkaar afgestemd"
+
+msgid "Equal"
+msgstr "Gelijkwaardig"
+
+msgid "No Value found"
+msgstr "Geen waarde gevonden"
+
+msgid "No Operator found"
+msgstr "Geen operator gevonden"
+
+msgid "Add more Condition"
+msgstr "Voeg meer voorwaarde toe"
+
+msgid "Save Rule"
+msgstr "Regel opslaan"
+
+msgid "Delete Condition"
+msgstr "Voorwaarde verwijderen"
+
+msgid "Add Ticket Using Multiform"
+msgstr "Ticket toevoegen met behulp van Multiform"
+
+msgid "Addons Status"
+msgstr "Add-onsstatus"
+
+msgid "Activated"
+msgstr "Geactiveerd"
+
+msgid "Deactivate"
+msgstr "Deactiveren"
+
+msgid "Updated"
+msgstr "Bijgewerkt"
+
+msgid "Deactivated"
+msgstr "Gedeactiveerd"
+
+msgid "Activate"
+msgstr "Activeren"
+
+msgid "New Update Version"
+msgstr "Nieuwe updateversie"
+
+msgid "is Available"
+msgstr "is beschikbaar"
+
+msgid "Expired"
+msgstr "Verlopen"
+
+msgid "Buy Now"
+msgstr "Koop nu"
+
+msgid "Help"
+msgstr "Hulp"
+
+msgid "Update Now"
+msgstr "Update nu"
+
+msgid "Add-On’s For Help Desk"
+msgstr "Add-ons voor helpdesk"
+
+msgid ""
+"Get trusted WordPress add on’s. Guaranteed to work fast, safe to use, "
+"beautifully coded, packed with features and easy to use."
+msgstr ""
+"Ontvang vertrouwde WordPress-add-ons. Gegarandeerd snel werkend, veilig in "
+"gebruik, prachtig gecodeerd, boordevol functies en gemakkelijk te gebruiken."
+
+msgid "Save big with an exclusive membership plan today!"
+msgstr "Bespaar vandaag nog flink met een exclusief lidmaatschapsplan!"
+
+msgid "show bundle pack"
+msgstr "toon bundelpakket"
+
+msgid ""
+"Add agents and assign roles and permissions to provide assistance and "
+"support to customer support tickets."
+msgstr ""
+"Voeg agenten toe en wijs rollen en machtigingen toe om hulp en ondersteuning "
+"te bieden bij klantenondersteuningstickets."
+
+msgid ""
+"Define rules for ticket to auto close. Ticket will be auto close after "
+"specific interval of time which can be set by admin."
+msgstr ""
+"Definieer regels voor het automatisch sluiten van tickets. Het ticket wordt "
+"automatisch gesloten na een specifiek tijdsinterval dat door de beheerder "
+"kan worden ingesteld."
+
+msgid ""
+"Get the survey from your customers on ticket closing to improve your quality "
+"of services and assistance."
+msgstr ""
+"Ontvang de enquête van uw klanten over het sluiten van tickets om uw "
+"kwaliteit van dienstverlening en assistentie te verbeteren."
+
+msgid "Helptopic"
+msgstr "Help onderwerp"
+
+msgid ""
+"Help topics help users to find and select the area with which they need "
+"assistance."
+msgstr ""
+"Help-onderwerpen helpen gebruikers bij het vinden en selecteren van het "
+"gebied waarbij ze hulp nodig hebben."
+
+msgid ""
+"The private note is used as reminders or to give other agents insights into "
+"the ticket issue. User Won't see the private notes."
+msgstr ""
+"De privénotitie wordt gebruikt als herinnering of om andere agenten inzicht "
+"te geven in het ticketprobleem. Gebruiker ziet de privénotities niet."
+
+msgid ""
+"Stop losing productivity on repetitive queries,Build your knowledge base, "
+"group solutions by topics to facilitate users."
+msgstr ""
+"Stop met het verliezen van productiviteit bij herhaalde vragen. Bouw uw "
+"kennisbank op, groepeer oplossingen op onderwerp om gebruikers te "
+"faciliteren."
+
+msgid ""
+"Enables admin to set N numbers of tickets for users to create and set N "
+"numbers of Ticket to open for agents separately."
+msgstr ""
+"Hiermee kan de beheerder N-nummers van tickets instellen die gebruikers "
+"kunnen maken en N-nummers van tickets instellen die afzonderlijk voor "
+"agenten kunnen worden geopend."
+
+msgid "Multi Language Email Templates"
+msgstr "Meertalige e-mailsjablonen"
+
+msgid ""
+"It allows to create language-based email templates for all JS Help Desk "
+"email templates."
+msgstr ""
+"Hiermee kunt u op taal gebaseerde e-mailsjablonen maken voor alle e-"
+"mailsjablonen van de JS Help Desk."
+
+msgid ""
+"Canned Responses are pre-populated messages that allows support agents to "
+"respond quickly to customer issues."
+msgstr ""
+"Standaardantwoorden zijn vooraf ingevulde berichten waarmee "
+"ondersteuningsagenten snel kunnen reageren op problemen van klanten."
+
+msgid ""
+"Enables users to reply to the tickets via email without the need to login to "
+"the support system first."
+msgstr ""
+"Hiermee kunnen gebruikers via e-mail op de tickets reageren zonder eerst in "
+"te loggen op het ondersteuningssysteem."
+
+msgid ""
+"Make unlimited announcements associated with support system to get customer "
+"interaction."
+msgstr ""
+"Maak onbeperkte aankondigingen in verband met het ondersteuningssysteem om "
+"klantinteractie te krijgen."
+
+msgid ""
+"Ban Email allows you to block email of any user to restrict him to create "
+"new tickets."
+msgstr ""
+"Met Ban Email kunt u de e-mail van elke gebruiker blokkeren om hem te "
+"beperken in het maken van nieuwe tickets."
+
+msgid "Descktop Notifications"
+msgstr "Bureaublad notificaties"
+
+msgid ""
+"Save the ticket as a PDF in your system or the admin will also be able to "
+"export all the data inside of Ticket."
+msgstr ""
+"Bewaar het ticket als PDF in uw systeem, anders kan de beheerder ook alle "
+"gegevens binnen Ticket exporteren."
+
+msgid ""
+"Tired of getting tickets about the same problems? Add FAQs to drastically "
+"reduce the number of common questions from users."
+msgstr ""
+"Ben je het beu om kaartjes te krijgen voor dezelfde problemen? Voeg "
+"veelgestelde vragen toe om het aantal veelgestelde vragen van gebruikers "
+"drastisch te verminderen."
+
+msgid "Admin Widgets"
+msgstr "Beheerderswidgets"
+
+msgid ""
+"Use internal email to send emails to one agent to another agent with in "
+"support ticket."
+msgstr ""
+"Gebruik interne e-mail om e-mails van de ene agent naar een andere agent te "
+"sturen met een supportticket."
+
+msgid "Front-End Widget"
+msgstr "Front-endwidget"
+
+msgid ""
+"Paid Support is the easiest way to integrate and manage payments for your "
+"support tickets."
+msgstr ""
+"Betaalde ondersteuning is de gemakkelijkste manier om betalingen voor uw "
+"ondersteuningstickets te integreren en te beheren."
+
+msgid "Mail Chimp"
+msgstr "Mailchimp"
+
+msgid ""
+"The Mail Chimp add-on adds a new checkbox to the registration form for "
+"prompting new users to subscribe your email-list."
+msgstr ""
+"De Mail Chimp add-on voegt een nieuw selectievakje toe aan het "
+"registratieformulier om nieuwe gebruikers te vragen zich op uw e-maillijst "
+"te abonneren."
+
+msgid ""
+"EDD offers customers to open new tickets just one click from their EDD "
+"account with optionally validating the license keys."
+msgstr ""
+"EDD biedt klanten de mogelijkheid om met één klik nieuwe tickets te openen "
+"vanuit hun EDD-account, waarbij optioneel de licentiesleutels worden "
+"gevalideerd."
+
+msgid "email cc"
+msgstr "e-mail cc"
+
+msgid "Email Cc"
+msgstr "E-mail CC"
+
+msgid ""
+"CC(Carbon Copy) - the people who should know about the information which is "
+"being shared and the people included are able to see who is there in the "
+"list."
+msgstr ""
+"CC (Carbon Copy) - de mensen die op de hoogte moeten zijn van de informatie "
+"die wordt gedeeld en de mensen die erin zijn opgenomen, kunnen zien wie er "
+"in de lijst staat."
+
+msgid "multiform"
+msgstr "veelvormig"
+
+msgid "Multiform allows user to add more than one form based on requirements."
+msgstr ""
+"Met Multiform kan de gebruiker meer dan één formulier toevoegen op basis van "
+"vereisten."
+
+msgid "agent auto assign"
+msgstr "agent automatisch toewijzen"
+
+msgid ""
+"When auto assignment is enabled and a ticket is created, an appropriate "
+"agent is automatically assigned to the ticket and it is moved to the "
+"Assigned state."
+msgstr ""
+"Wanneer automatische toewijzing is ingeschakeld en er een ticket wordt "
+"gemaakt, wordt automatisch een geschikte agent aan het ticket toegewezen en "
+"wordt het verplaatst naar de status Toegewezen."
+
+msgid "Social Login"
+msgstr "Sociaal inloggen"
+
+msgid ""
+"Users can login from their social media accounts. They can create a new "
+"account or use social media accounts."
+msgstr ""
+"Gebruikers kunnen inloggen vanaf hun sociale media-accounts. Ze kunnen een "
+"nieuw account aanmaken of sociale media-accounts gebruiken."
+
+msgid "JS Help Desk Add-Ons Bundle Pack"
+msgstr "JS Help Desk Add-Ons-bundelpakket"
+
+msgid "Basic"
+msgstr "Basis"
+
+msgid "Unlimited Agents"
+msgstr "Onbeperkte agenten"
+
+msgid "Show all"
+msgstr "Toon alles"
+
+msgid "Everything in basic included and"
+msgstr "Alles in de basis inbegrepen en"
+
+msgid "Professional"
+msgstr "Professioneel"
+
+msgid "Everything in standard included and"
+msgstr "Alles standaard inbegrepen en"
+
+msgid "All Future Addons"
+msgstr "Alle toekomstige add-ons"
+
+msgid ""
+"Hey there! We have recently launched a fresh update for the add-ons. Don't "
+"forget to update the add-ons to enjoy the greatest features!"
+msgstr ""
+"Hallo daar! We hebben onlangs een nieuwe update voor de add-ons gelanceerd. "
+"Vergeet niet de add-ons bij te werken om van de beste functies te genieten!"
+
+msgid "View Addone Status"
+msgstr "Bekijk Addone-status"
+
+msgid "slug for ticket page"
+msgstr "slug voor ticketpagina"
+
+msgid "slug for agent add ticket page"
+msgstr "slug voor agent-ticketpagina toevoegen"
+
+msgid "slug for rolepermission page"
+msgstr "slug voor rolmachtigingspagina"
+
+msgid "slug for add announcement"
+msgstr "slak voor aankondiging toevoegen"
+
+msgid "slug for add department page"
+msgstr "slug voor het toevoegen van een afdelingspagina"
+
+msgid "slug for add download page"
+msgstr "slak voor het toevoegen van een downloadpagina"
+
+msgid "slug for add faq page"
+msgstr "slug voor het toevoegen van een faq-pagina"
+
+msgid "slug for faq page"
+msgstr "slak voor faq-pagina"
+
+msgid "slug for add article page"
+msgstr "slug voor pagina met artikel toevoegen"
+
+msgid "slug for add category page"
+msgstr "slug voor categoriepagina toevoegen"
+
+msgid "slug for user knowledgebase articles page"
+msgstr "slug voor gebruikerskennisbankartikelenpagina"
+
+msgid "slug for article detail page"
+msgstr "slug voor artikeldetailpagina"
+
+msgid "slug for add role page"
+msgstr "slug voor het toevoegen van een rolpagina"
+
+msgid "slug for add agent page"
+msgstr "slug voor pagina voor toevoegen van agent"
+
+msgid "slug for agent permissions page"
+msgstr "slug voor pagina met agentmachtigingen"
+
+msgid "slug for my tickets page"
+msgstr "slug voor mijn ticketspagina"
+
+msgid "slug for agent my tickets page"
+msgstr "slak voor agent mijn ticketspagina"
+
+msgid "slug for knowledgebase page"
+msgstr "slug voor kennisbankpagina"
+
+msgid "slug for agent categories page"
+msgstr "slug voor pagina met agentcategorieën"
+
+msgid "slug for agent kb articles page"
+msgstr "slug voor agent kb-artikelenpagina"
+
+msgid "slug for agent announcements page"
+msgstr "slug voor pagina met agentaankondigingen"
+
+msgid "slug for agent downloads page"
+msgstr "slug voor agent-downloadpagina"
+
+msgid "slug for agent faqs page"
+msgstr "slug voor pagina met veelgestelde vragen over agenten"
+
+msgid "slug for add ticket page"
+msgstr "slug voor het toevoegen van een ticketpagina"
+
+msgid "slug for ticket status page"
+msgstr "slug voor ticketstatuspagina"
+
+msgid "slug for controlpanel"
+msgstr "plug voor bedieningspaneel"
+
+msgid "slug for agent report detail page"
+msgstr "slug voor de detailpagina van het agentrapport"
+
+msgid "slug for agent reports page"
+msgstr "slug voor pagina met agentrapporten"
+
+msgid "slug for department reports page"
+msgstr "slug voor de pagina met afdelingsrapporten"
+
+msgid "slug for announcement detail page"
+msgstr "naaktslak voor aankondigingsdetailpagina"
+
+msgid "slug for feedback page"
+msgstr "slug voor feedbackpagina"
+
+msgid "slug for agent feedbacks page"
+msgstr "slug voor pagina met feedback van agenten"
+
+msgid "slug for visitor message page"
+msgstr "slug voor bezoekersberichtpagina"
+
+msgid "slug for add help topic page"
+msgstr "slug voor het toevoegen van een Help-onderwerppagina"
+
+msgid "slug for agent help topics page"
+msgstr "slug voor pagina met Help-onderwerpen voor agenten"
+
+msgid "slug for add canned response page"
+msgstr "slug voor het toevoegen van een standaardantwoordpagina"
+
+msgid "slug for agent canned responses page"
+msgstr "slug voor de pagina met standaardantwoorden van agenten"
+
+msgid "slug for gdpr data compliance actions1"
+msgstr "slug voor acties op het gebied van AVG-naleving van gegevens1"
+
+msgid "slug for print ticket page"
+msgstr "slug voor printticketpagina"
+
+msgid "slug for my profile page"
+msgstr "slak voor mijn profielpagina"
+
+msgid "slug for login page"
+msgstr "slak voor inlogpagina"
+
+msgid "slug for user register page"
+msgstr "slug voor gebruikersregistratiepagina"
+
+msgid "slug for add message page"
+msgstr "slug voor berichtpagina toevoegen"
+
+msgid "slug for message detail page"
+msgstr "slug voor berichtdetailpagina"
+
+msgid "slug for message inbox page"
+msgstr "slug voor berichteninboxpagina"
+
+msgid "slug for message outbox page"
+msgstr "slug voor de outbox-pagina voor berichten"
+
+msgid "slug for roles page"
+msgstr "slug voor rollenpagina"
+
+msgid "slug for agent page"
+msgstr "slug voor agentpagina"
+
+msgid "slug for departments page"
+msgstr "slug voor afdelingenpagina"
+
+msgid "slug for announcements page"
+msgstr "slug voor aankondigingenpagina"
+
+msgid "slug for downloads page"
+msgstr "slak voor downloadpagina"
+
+msgid "slug for faqs page"
+msgstr "slug voor de pagina met veelgestelde vragen"
+
+msgid "API key is required for linkedin app"
+msgstr "API-sleutel is vereist voor de linkedin-app"
+
+msgid "API Key"
+msgstr "API sleutel"
+
+msgid "secret key"
+msgstr "geheime sleutel"
+
+msgid "Secret"
+msgstr "Geheim"
+
+msgid "Facebook user can login in js support ticket"
+msgstr "Facebook-gebruiker kan inloggen op js-ondersteuningsticket"
+
+msgid "Login With Linkedin"
+msgstr "Log in met LinkedIn"
+
+msgid "API key is required for facebook app"
+msgstr "API-sleutel is vereist voor de Facebook-app"
+
+msgid "Login with linkedin"
+msgstr "Log in met LinkedIn"
+
+msgid "Login with facebook"
+msgstr "Inloggen met Facebook"
+
+msgid "Create User via email"
+msgstr "Gebruiker aanmaken via e-mail"
+
+msgid "Export Ticket"
+msgstr "Ticket exporteren"
+
+msgid "Ticket Listing"
+msgstr "Ticketvermelding"
+
+msgid "Visitor Ticket Setting"
+msgstr "Instelling bezoekersticket"
+
+msgid ""
+"By enabling this option, a user can know to whom the ticket has been "
+"assigned."
+msgstr ""
+"Door deze optie in te schakelen, kan een gebruiker weten aan wie het ticket "
+"is toegewezen."
+
+msgid "Assigned info. on admin tickets"
+msgstr "Toegewezen informatie. op beheerderstickets"
+
+msgid ""
+"By enabling this option, an agent can know to whom the ticket has been "
+"assigned."
+msgstr ""
+"Door deze optie in te schakelen, kan een agent weten aan wie het ticket is "
+"toegewezen."
+
+msgid "Assigned info. on user tickets"
+msgstr "Toegewezen informatie. op gebruikerstickets"
+
+msgid ""
+"By enabling this option, an admin can know to whom the ticket has been "
+"assigned."
+msgstr ""
+"Door deze optie in te schakelen, kan een beheerder weten aan wie het ticket "
+"is toegewezen."
+
+msgid "Assigned info. on agent tickets"
+msgstr "Toegewezen informatie. op agententickets"
+
+msgid ""
+"By enabling this option, a user can know who closed the ticket and when that "
+"ticket closed."
+msgstr ""
+"Door deze optie in te schakelen, kan een gebruiker weten wie het ticket "
+"heeft gesloten en wanneer dat ticket is gesloten."
+
+msgid "Closed info. on admin closed tickets"
+msgstr "Gesloten informatie. op door de beheerder gesloten tickets"
+
+msgid ""
+"By enabling this option, an agent can know who closed the ticket and when "
+"that ticket closed."
+msgstr ""
+"Door deze optie in te schakelen, kan een agent weten wie het ticket heeft "
+"gesloten en wanneer dat ticket is gesloten."
+
+msgid "Closed info. on agent closed tickets"
+msgstr "Gesloten informatie. op door agenten gesloten tickets"
+
+msgid ""
+"By enabling this option, an admin can know who closed the ticket and when "
+"that ticket closed."
+msgstr ""
+"Door deze optie in te schakelen, kan een beheerder weten wie het ticket "
+"heeft gesloten en wanneer dat ticket is gesloten."
+
+msgid "Set default sorting for ticket listing"
+msgstr "Stel de standaardsortering voor de ticketlijst in"
+
+msgid "Ascending"
+msgstr "Oplopend"
+
+msgid "Descending"
+msgstr "Aflopend"
+
+msgid "Ticket listing sorting"
+msgstr "Sorteren van ticketlijsten"
+
+msgid "Select whether users can see the ticket delete button"
+msgstr ""
+"Selecteer of gebruikers de knop voor het verwijderen van tickets kunnen zien"
+
+msgid "Show ticket delete button"
+msgstr "Toon de knop voor het verwijderen van tickets"
+
+msgid ""
+"Select whether users can see the name of administrator or staff member on "
+"ticket reply"
+msgstr ""
+"Selecteer of gebruikers de naam van de beheerder of het personeelslid kunnen "
+"zien in het antwoord op het ticket"
+
+msgid "Show Anonymous Name On Ticket Reply"
+msgstr "Toon anonieme naam bij ticketantwoord"
+
+msgid ""
+"Select whether users can see the email of administrator or agent on ticket "
+"reply"
+msgstr ""
+"Selecteer of gebruikers de e-mail van de beheerder of agent kunnen zien bij "
+"het antwoord op het ticket"
+
+msgid "Show Admin OR Agent Email On Ticket Reply"
+msgstr "E-mailadres van beheerder of agent weergeven bij antwoord op ticket"
+
+msgid ""
+"Show or hide the multiform popup when creating a new ticket. if you hide "
+"them, the system will open the default form."
+msgstr ""
+"Toon of verberg de veelvormige pop-up bij het aanmaken van een nieuw ticket. "
+"als u ze verbergt, opent het systeem het standaardformulier."
+
+msgid "Multiforms Popup For New Tickets"
+msgstr "Multiforms-pop-up voor nieuwe tickets"
+
+msgid "Set suffix for custom ticketid"
+msgstr "Stel een achtervoegsel in voor een aangepaste ticket-id"
+
+msgid "Ticketid Suffix"
+msgstr "Ticketid-achtervoegsel"
+
+msgid "Set ticketid sequential or random .e.g"
+msgstr "Stel ticketid opeenvolgend of willekeurig in, b.v"
+
+msgid "Set prefix for custom ticketid"
+msgstr "Stel een voorvoegsel in voor een aangepaste ticketid"
+
+msgid "Ticketid Prefix"
+msgstr "Ticketid-voorvoegsel"
+
+msgid "Support Icons"
+msgstr "Ondersteuningspictogrammen"
+
+msgid "Set custom support text"
+msgstr "Stel aangepaste ondersteuningstekst in"
+
+msgid "Set custom support image"
+msgstr "Stel een aangepaste ondersteuningsafbeelding in"
+
+msgid "Custom Image"
+msgstr "Aangepaste afbeelding"
+
+msgid "JS Help Desk Register Page"
+msgstr "JS Helpdesk-registratiepagina"
+
+msgid "WordPress Default Login Page"
+msgstr "WordPress standaard inlogpagina"
+
+msgid "JS Help Desk Login Page"
+msgstr "JS Helpdesk-inlogpagina"
+
+msgid "Set register Link"
+msgstr "Registerlink instellen"
+
+msgid "We are here to help you"
+msgstr "Wij zijn hier om u te helpen"
+
+msgid "Help icon"
+msgstr "Help-pictogram"
+
+msgid ""
+"JS Help Desk is a professional, simple, easy to use and complete customer "
+"support system."
+msgstr ""
+"JS Help Desk is een professioneel, eenvoudig, gebruiksvriendelijk en "
+"compleet klantenondersteuningssysteem."
+
+msgid "View all videos"
+msgstr "Bekijk alle video's"
+
+msgid "Video icon"
+msgstr "Video-icoon"
+
+msgid "View All Videos"
+msgstr "Bekijk alle video's"
+
+msgid "Help Desk icon"
+msgstr "Helpdesk-pictogram"
+
+msgid "JS Help Desk Support"
+msgstr "JS-helpdeskondersteuning"
+
+msgid ""
+"JS Help Desk delivers timely customer support if you have any query then "
+"we're here to show you the way."
+msgstr ""
+"JS Help Desk levert tijdige klantenondersteuning. Als u vragen heeft, zijn "
+"wij hier om u de weg te wijzen."
+
+msgid "Visitor ticket creation"
+msgstr "Aanmaak van bezoekerstickets"
+
+msgid "How to set ticket auto close"
+msgstr "Hoe u het automatisch sluiten van tickets instelt"
+
+msgid "How to reopen closed ticket"
+msgstr "Hoe u een gesloten ticket kunt heropenen"
+
+msgid "How to lock a ticket"
+msgstr "Hoe een ticket te vergrendelen"
+
+msgid "How to add private note"
+msgstr "Hoe u een privénotitie kunt toevoegen"
+
+msgid "View ticket history"
+msgstr "Bekijk de ticketgeschiedenis"
+
+msgid "How to setup custom fields"
+msgstr "Aangepaste velden instellen"
+
+msgid "Set ticket auto overdue"
+msgstr "Stel ticket automatisch te laat in"
+
+msgid "Manually set ticket overdue"
+msgstr "Handmatig ticket te laat instellen"
+
+msgid "How to merge tickets"
+msgstr "Hoe tickets samen te voegen"
+
+msgid "How to export tickets"
+msgstr "Hoe tickets te exporteren"
+
+msgid "How use help topic"
+msgstr "Hoe het Help-onderwerp gebruiken"
+
+msgid "How to change department"
+msgstr "Hoe u van afdeling kunt wisselen"
+
+msgid "How to use multi-forms"
+msgstr "Hoe u meerdere formulieren gebruikt"
+
+msgid "How to paid support"
+msgstr "Hoe betaalde ondersteuning"
+
+msgid "How to use canned response"
+msgstr "Standaardantwoord gebruiken"
+
+msgid "How to add private credentials"
+msgstr "Hoe u privéreferenties kunt toevoegen"
+
+msgid "How to ban/unban user"
+msgstr "Hoe een gebruiker te verbannen/opheffen"
+
+msgid "Agent system"
+msgstr "Agent-systeem"
+
+msgid "Manually assign ticket to agen"
+msgstr "Wijs handmatig een ticket toe aan een agent"
+
+msgid "How to edit time"
+msgstr "Tijd bewerken"
+
+msgid "How to use time tracking"
+msgstr "Hoe tijdregistratie te gebruiken"
+
+msgid "How to set max open ticket"
+msgstr "Hoe u het maximale open ticket instelt"
+
+msgid "How to show counts"
+msgstr "Hoe u tellingen kunt weergeven"
+
+msgid "How to set Captcha"
+msgstr "Captcha instellen"
+
+msgid "User options"
+msgstr "Gebruikersopties"
+
+msgid "How to set login redirect"
+msgstr "Hoe u een login-omleiding instelt"
+
+msgid "How to set fields ordering"
+msgstr "Hoe u de volgorde van velden instelt"
+
+msgid "How to enable social login"
+msgstr "Hoe u sociaal inloggen inschakelt"
+
+msgid "Setup"
+msgstr "Opgericht"
+
+msgid "How to enable email piping"
+msgstr "Hoe e-mail piping in te schakelen"
+
+msgid "How to set SMTP"
+msgstr "Hoe SMTP in te stellen"
+
+msgid "How to solve email notification problem"
+msgstr "Hoe het probleem met e-mailmeldingen op te lossen"
+
+msgid "How to translate"
+msgstr "Hoe te vertalen"
+
+msgid "How to set colors"
+msgstr "Hoe kleuren in te stellen"
+
+msgid "How to add Shortcode"
+msgstr "Hoe u een shortcode toevoegt"
+
+msgid "How to install addons"
+msgstr "Hoe add-ons te installeren"
+
+msgid "How to Desktop Notifications"
+msgstr "Hoe bureaubladmeldingen te maken"
+
+msgid "How to use knowledge base"
+msgstr "Kennisbank gebruiken"
+
+msgid "How to use downloads"
+msgstr "Hoe downloads te gebruiken"
+
+msgid "How to add announcement"
+msgstr "Hoe u een aankondiging toevoegt"
+
+msgid "How to create FAQ"
+msgstr "Hoe maak je veelgestelde vragen aan?"
+
+msgid "How to use email cc"
+msgstr "Hoe e-mail CC te gebruiken"
+
+msgid "How to use internal mail"
+msgstr "Interne post gebruiken"
+
+msgid "Use front-end widgets"
+msgstr "Gebruik front-endwidgets"
+
+msgid "How to enable admin widgets"
+msgstr "Beheerwidgets inschakelen"
+
+msgid "Select Language"
+msgstr "Selecteer Taal"
+
+msgid "Email CC"
+msgstr "E-mail CC"
+
+msgid "Add Email CC"
+msgstr "Voeg e-mail CC toe"
+
+msgid "Template For"
+msgstr "Sjabloon voor"
+
+msgid "Sr#"
+msgstr "Sr#"
+
+msgid "Template Title"
+msgstr "Sjabloontitel"
+
+msgid "Template Type"
+msgstr "Sjabloontype"
+
+msgid "Add Email Cc"
+msgstr "E-mailcc toevoegen"
+
+msgid "Select Template For"
+msgstr "Selecteer Sjabloon voor"
+
+msgid "Select Template Type"
+msgstr "Selecteer Sjabloontype"
+
+msgid "Add more row"
+msgstr "Voeg meer rij toe"
+
+msgid "Delete row"
+msgstr "Verwijder rij"
+
+msgid "Save Email CC"
+msgstr "E-mail CC opslaan"
+
+msgid "To use this feature you must be agent"
+msgstr "Om deze functie te gebruiken, moet u een agent zijn"
+
+msgid "Form has been stored"
+msgstr "Formulier is opgeslagen"
+
+msgid "Default form cannot be set as disabled"
+msgstr "Het standaardformulier kan niet als uitgeschakeld worden ingesteld"
+
+msgid "Multiform has been deleted"
+msgstr "Veelvormig is verwijderd"
+
+msgid "Select Parent"
+msgstr "Selecteer Ouder"
+
+msgid "Select Child"
+msgstr "Selecteer Kind"
+
+msgid "Select Condition"
+msgstr "Selecteer Conditie"
+
+msgid "Not Equal"
+msgstr "Niet gelijk"
+
+msgid "To use this feature please fill the above three fields"
+msgstr "Om deze functie te gebruiken, vult u de bovenstaande drie velden in"
+
+msgid "The agent has been stored"
+msgstr "De agent is opgeslagen"
+
+msgid "The agent has been deleted"
+msgstr "De agent is verwijderd"
+
+msgid "WP User ID"
+msgstr "WP-gebruikers-ID"
+
+msgid "WP Username"
+msgstr "WP-gebruikersnaam"
+
+msgid "User Detail"
+msgstr "Gebruikersdetail"
+
+msgid "WP Full Name"
+msgstr "WP Volledige naam"
+
+msgid "WP Email Address"
+msgstr "WP-e-mailadres"
+
+msgid "Rule has been stored"
+msgstr "Regel is opgeslagen"
+
+msgid "Rule has been deleted"
+msgstr "Regel is verwijderd"
+
+msgid "Email Cc has been stored"
+msgstr "E-mail Cc is opgeslagen"
+
+msgid "Email CC has been deleted"
+msgstr "E-mail CC is verwijderd"
+
+msgid "Agent permissions have been stored"
+msgstr "Agentmachtigingen zijn opgeslagen"
+
+msgid "Select Canned Response"
+msgstr "Selecteer Standaardantwoord"
+
+msgid "Ticket Merge"
+msgstr "Ticket samenvoegen"
+
+msgid "Delete Credentials"
+msgstr "Inloggegevens verwijderen"
+
+msgid "Mail To Agent"
+msgstr "Mail naar agent"
+
+msgid "View Agent Reports"
+msgstr "Agentrapporten bekijken"
+
+msgid "Add Credentials"
+msgstr "Voeg referenties toe"
+
+msgid "Edit Help Topic"
+msgstr "Help-onderwerp bewerken"
+
+msgid ""
+"e.g ' I have read and agree to the [link] Terms and Conditions[/link].  ' "
+"The text between [link] and [/link] will be linked to provided url or "
+"wordpress page."
+msgstr ""
+"bijv. 'Ik heb de [link] Algemene voorwaarden[/link] gelezen en ga ermee "
+"akkoord. ' De tekst tussen [link] en [/link] wordt gelinkt naar de opgegeven "
+"url of wordpresspagina."
+
+msgid "login"
+msgstr "Log in"
+
+msgid "stars"
+msgstr "sterren"
+
+msgid "Please write appreciated review at WP Extension Directory"
+msgstr "Schrijf een gewaardeerde recensie op WP Extension Directory"
+
+msgid ""
+"We'd love to hear from you. It'll only take 2 minutes of your time, and will "
+"really help us spread the word"
+msgstr ""
+"We zouden graag van je horen. Het kost slechts 2 minuten van uw tijd en "
+"helpt ons enorm bij het verspreiden van de boodschap"
+
+msgid "love"
+msgstr "Liefde"
+
+msgid "I'd love to help :)"
+msgstr "Ik help je graag :)"
+
+msgid "sad"
+msgstr "verdrietig"
+
+msgid "Not this time"
+msgstr "Deze keer niet"
+
+msgid "happy"
+msgstr "Vrolijk"
+
+msgid "I've already rated you"
+msgstr "Ik heb je al beoordeeld"
+
+msgid "thanks"
+msgstr "Bedankt"
+
+msgid "You are awesome !......"
+msgstr "Je bent geweldig !......"
+
+msgid "Thanks for your support, we really appreciate it."
+msgstr "Bedankt voor uw steun, wij waarderen het enorm."
+
+msgid "JS Help Desk Team"
+msgstr "JS-helpdeskteam"
+
+msgid "Remind you about this later?"
+msgstr "Wil je je hier later aan herinneren?"
+
+msgid "Remind me in 3 days"
+msgstr "Herinner me er over drie dagen aan"
+
+msgid "Remind me in 10 days"
+msgstr "Herinner me er over tien dagen aan"
+
+msgid "Remind me in 30 days"
+msgstr "Herinner mij er over 30 dagen aan"
+
+msgid "Don't remind me about this"
+msgstr "Herinner mij hier niet aan"
+
+msgid "Watch Video"
+msgstr "Bekijk video"
+
+msgid "Slug(s) has been stored"
+msgstr "Naaktslak(en) zijn opgeslagen"
+
+msgid "Prefix has not been stored"
+msgstr "Het voorvoegsel is niet opgeslagen"
+
+msgid "+Add more Condition"
+msgstr "+Voeg meer voorwaarde toe"
+
+msgid "Admin New Ticket Received"
+msgstr "Beheerder Nieuw ticket ontvangen"
+
+msgid "Staff New Ticket Received"
+msgstr "Personeel Nieuw ticket ontvangen"
+
+msgid "New Department Received"
+msgstr "Nieuwe afdeling ontvangen"
+
+msgid "New Group Received"
+msgstr "Nieuwe groep ontvangen"
+
+msgid "New Agent Received"
+msgstr "Nieuwe agent ontvangen"
+
+msgid "New Help Topic Received"
+msgstr "Nieuw Help-onderwerp ontvangen"
+
+msgid "Admin Reassign Ticket"
+msgstr "Beheerder wijst ticket opnieuw toe"
+
+msgid "Staff Reassign Ticket"
+msgstr "Personeel wijst ticket opnieuw toe"
+
+msgid "Admin Close Ticket"
+msgstr "Beheerder Sluiten Ticket"
+
+msgid "Staff Close Ticket"
+msgstr "Personeel sluit ticket"
+
+msgid "Admin Delete Ticket"
+msgstr "Beheerder Ticket verwijderen"
+
+msgid "Staff Delete Ticket"
+msgstr "Personeel Verwijder ticket"
+
+msgid "Admin Overdue Ticket"
+msgstr "Beheerder te laat ticket"
+
+msgid "Staff Overdue Ticket"
+msgstr "Personeelsticket te laat"
+
+msgid "Admin Email Baned"
+msgstr "E-mailadres beheerder verboden"
+
+msgid "Staff Email Baned"
+msgstr "E-mail van personeel verboden"
+
+msgid "Admin Ticket Transfered to Department"
+msgstr "Beheerticket overgedragen aan afdeling"
+
+msgid "Staff Ticket Transfered to Department"
+msgstr "Personeelsticket overgedragen aan afdeling"
+
+msgid "Admin Email baned and ticket closed"
+msgstr "Beheerder-e-mailadres verbannen en ticket gesloten"
+
+msgid "Staff Email baned and ticket closed"
+msgstr "E-mail van personeel verboden en ticket gesloten"
+
+msgid "Admin Email Unbaned"
+msgstr "E-mailadres beheerder opgeheven"
+
+msgid "Staff Email Unbaned"
+msgstr "E-mail van personeel opgeheven"
+
+msgid "Admin Ticket Reply"
+msgstr "Antwoord beheerderticket"
+
+msgid "Staff Ticket Reply"
+msgstr "Antwoord personeelsticket"
+
+msgid "Ticket Received"
+msgstr "Ticket ontvangen"
+
+msgid "Banemail try new ticket"
+msgstr "Banemail probeer nieuw ticket"
+
+msgid "Admin Ticket has been locked"
+msgstr "Beheerdersticket is vergrendeld"
+
+msgid "Staff Ticket has been locked"
+msgstr "Personeelsticket is vergrendeld"
+
+msgid "Admin Ticket has been unlocked"
+msgstr "Beheerdersticket is ontgrendeld"
+
+msgid "Staff Ticket has been unlocked"
+msgstr "Personeelsticket is ontgrendeld"
+
+msgid "Admin In progress Ticket"
+msgstr "Beheerder In behandeling Ticket"
+
+msgid "Staff In progress Ticket"
+msgstr "Ticket voor personeel in uitvoering"
+
+msgid "Admin Ticket priority changed"
+msgstr "Prioriteit beheerdersticket gewijzigd"
+
+msgid "Staff Ticket priority changed"
+msgstr "Prioriteit personeelsticket gewijzigd"
+
+msgid "New Mail has been sent"
+msgstr "Er is nieuwe e-mail verzonden"
+
+msgid "New Reply has been sent"
+msgstr "Er is een nieuw antwoord verzonden"
+
+msgid "Delete User Data"
+msgstr "Gebruikersgegevens verwijderen"
+
+msgid "Closed By"
+msgstr "Gesloten door"
+
+msgid "Closed On"
+msgstr "Gesloten aan"
+
+msgid "Closed info. on user closed tickets"
+msgstr "Gesloten informatie. op door gebruikers gesloten tickets"
+
+msgid "custom text"
+msgstr "aangepaste tekst"
+
+msgid "Select Languages"
+msgstr "Selecteer Talen"
+
+msgid "IMAP Authentication cancelled"
+msgstr "IMAP-authenticatie geannuleerd"
+
+msgid "Page Not Found !!"
+msgstr "Pagina niet gevonden !!"

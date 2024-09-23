@@ -1,0 +1,70 @@
+REPLACE INTO `#__js_ticket_config` (`configname`, `configvalue`, `configfor`) VALUES ('versioncode','2.6.0','default');
+REPLACE INTO `#__js_ticket_config` (`configname`, `configvalue`, `configfor`) VALUES ('productversion','260','default');
+
+INSERT INTO `#__js_ticket_config` (`configname`, `configvalue`, `configfor`) VALUES('slug_prefix','st-','default');
+INSERT INTO `#__js_ticket_config` (`configname`, `configvalue`, `configfor`) VALUES('home_slug_prefix','jsst-','default');
+
+
+CREATE TABLE IF NOT EXISTS `#__js_ticket_slug` (
+	`id` int(11) NOT NULL AUTO_INCREMENT,
+	`slug` varchar(100) CHARACTER SET utf8 NOT NULL,
+	`defaultslug` varchar(100) CHARACTER SET utf8 NOT NULL,
+	`filename` varchar(100) CHARACTER SET utf8 NOT NULL,
+	`description` varchar(200) CHARACTER SET utf8 NOT NULL,
+	`status` tinyint(11) DEFAULT NULL,
+	PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=64;
+
+INSERT INTO `#__js_ticket_slug` (`id`, `slug`, `defaultslug`, `filename`, `description`, `status`) VALUES
+	(1, 'ticket', 'ticket', 'ticketdetail', 'slug for ticket page', 1),
+	(2, 'staff-add-ticket', 'staff-add-ticket', 'staffaddticket', 'slug for agent add ticket page', 1),
+	(3, 'role-permission', 'role-permission', 'rolepermission', 'slug for rolepermission page', 1),
+	(4, 'add-announcement', 'add-announcement', 'addannouncement', 'slug for add announcement', 1),
+	(5, 'add-department', 'add-department', 'adddepartment', 'slug for add department page', 1),
+	(6, 'add-download', 'add-download', 'adddownload', 'slug for add download page', 1),
+	(7, 'add-faq', 'add-faq', 'addfaq', 'slug for add faq page', 1),
+	(8, 'faq', 'faq', 'faqdetails', 'slug for faq page', 1),
+	(9, 'add-article', 'add-article', 'addarticle', 'slug for add article page', 1),
+	(10, 'add-category', 'add-category', 'addcategory', 'slug for add category page', 1),
+	(11, 'kb-articles', 'kb-articles', 'userknowledgebasearticles', 'slug for user knowledgebase articles page', 1),
+	(12, 'kb-article', 'kb-article', 'articledetails', 'slug for article detail page', 1),
+	(13, 'add-role', 'add-role', 'addrole', 'slug for add role page', 1),
+	(14, 'add-staff', 'add-staff', 'addstaff', 'slug for add agent page', 1),
+	(15, 'staff-permissions', 'staff-permissions', 'staffpermissions', 'slug for agent permissions page', 1),
+	(17, 'my-tickets', 'my-tickets', 'myticket', 'slug for my tickets page', 1),
+	(18, 'staff-my-tickets', 'staff-my-tickets', 'staffmyticket', 'slug for agent my tickets page', 1),
+	(19, 'knowledgebase', 'knowledgebase', 'userknowledgebase', 'slug for knowledgebase page', 1),
+	(20, 'staff-categories', 'staff-categories', 'stafflistcategories', 'slug for agent categories page', 1),
+	(21, 'staff-kb-articles', 'staff-kb-articles', 'stafflistarticles', 'slug for agent kb articles page', 1),
+	(22, 'staff-announcements', 'staff-announcements', 'staffannouncements', 'slug for agent announcements page', 1),
+	(23, 'staff-downloads', 'staff-downloads', 'staffdownloads', 'slug for agent downloads page', 1),
+	(24, 'staff-faqs', 'staff-faqs', 'stafffaqs', 'slug for agent faqs page', 1),
+	(25, 'add-ticket', 'add-ticket', 'addticket', 'slug for add ticket page', 1),
+	(26, 'ticket-status', 'ticket-status', 'ticketstatus', 'slug for ticket status page', 1),
+	(27, 'control-panel', 'control-panel', 'controlpanel', 'slug for controlpanel', 1),
+	(28, 'staff-report', 'staff-report', 'staffdetailreport', 'slug for agent report detail page', 1),
+	(29, 'staff-reports', 'staff-reports', 'staffreports', 'slug for agent reports page', 1),
+	(30, 'department-reports', 'department-reports', 'departmentreports', 'slug for department reports page', 1),
+	(31, 'announcement', 'announcement', 'announcementdetails', 'slug for announcement detail page', 1),
+	(32, 'feed-back', 'feed-back', 'formfeedback', 'slug for feedback page', 1),
+	(33, 'staff-feedbacks', 'staff-feedbacks', 'feedbacks', 'slug for agent feedbacks page', 1),
+	(34, 'visitor-message', 'visitor-message', 'visitormessagepage', 'slug for visitor message page', 1),
+	(35, 'add-help-topic', 'add-help-topic', 'addhelptopic', 'slug for add help topic page', 1),
+	(36, 'agent-help-topics', 'agent-help-topics', 'agenthelptopics', 'slug for agent help topics page', 1),
+	(37, 'add-canned-response', 'add-canned-response', 'addcannedresponse', 'slug for add canned response page', 1),
+	(38, 'agent-canned-responses', 'agent-canned-responses', 'agentcannedresponses', 'slug for agent canned responses page', 1),
+	(39, 'gdpr-data-compliance-actions', 'gdpr-data-compliance-actions', 'adderasedatarequest', 'slug for gdpr data compliance actions page', 1),
+	(40, 'print-ticket', 'print-ticket', 'printticket', 'slug for print ticket page', 1),
+	(41, 'my-profile', 'my-profile', 'myprofile', 'slug for my profile page', 1),
+	(42, 'login', 'login', 'login', 'slug for login page', 1),
+	(43, 'userregister', 'userregister', 'userregister', 'slug for user register page', 1),
+	(45, 'add-message', 'add-message', 'formmessage', 'slug for add message page', 1),
+	(46, 'message', 'message', 'message', 'slug for message detail page', 1),
+	(47, 'message-inbox', 'message-inbox', 'inbox', 'slug for message inbox page', 1),
+	(49, 'message-outbox', 'message-outbox', 'outbox', 'slug for message outbox page', 1),
+	(50, 'roles', 'roles', 'roles', 'slug for roles page', 1),
+	(51, 'staffs', 'staffs', 'staffs', 'slug for agent page', 1),
+	(52, 'departments', 'departments', 'departments', 'slug for departments page', 1),
+	(53, 'announcements', 'announcements', 'announcements', 'slug for announcements page', 1),
+	(54, 'downloads', 'downloads', 'downloads', 'slug for downloads page', 1),
+	(55, 'faqs', 'faqs', 'faqs', 'slug for faqs page', 1);

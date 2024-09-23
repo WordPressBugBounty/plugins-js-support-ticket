@@ -1,0 +1,7578 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: pl_PL\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.4.1\n"
+
+msgid "You are not allowed"
+msgstr "Nie masz pozwolenia"
+
+msgid "The ticket has been locked"
+msgstr "Zgłoszenie zostało zablokowane"
+
+msgid "Successfully"
+msgstr "Powodzenie"
+
+msgid "The ticket has not been locked"
+msgstr "Zgłoszenie nie zostało zablokowane"
+
+msgid "Error"
+msgstr "Błąd"
+
+msgid "Lock Ticket"
+msgstr "Zablokuj zgłoszenie"
+
+msgid "The ticket is locked by"
+msgstr "Zgłoszenie jest zamknięte"
+
+msgid "The ticket has been unlocked"
+msgstr "Zgłoszenie zostało odblokowane"
+
+msgid "The ticket has not been unlocked"
+msgstr "Zgłoszenie nie zostało odblokowane"
+
+msgid "Unlock Ticket"
+msgstr "Odblokuj zgłoszenie"
+
+msgid "User already a staff member"
+msgstr "Użytkownik jest już członkiem zespołu"
+
+msgid "The staff member has not been stored"
+msgstr "Członek zespołu nie został zapisany"
+
+msgid "The staff member has been stored"
+msgstr "Członek zespołu został zapisany"
+
+msgid "The staff member has been deleted"
+msgstr "Członek zespołu został usunięty"
+
+msgid "The staff member has not been deleted"
+msgstr "Członek zespołu nie został usunięty"
+
+msgid "The staff member in use cannot delete"
+msgstr "Aktywny członek zespołu nie może zostać usunięty"
+
+msgid "Staff"
+msgstr "Zespół"
+
+msgid "status has been changed"
+msgstr "status został zmieniony"
+
+msgid "status has not been changed"
+msgstr "status nie został zmieniony"
+
+msgid "User ID"
+msgstr "Identyfikator użytkownika"
+
+msgid "User Name"
+msgstr "Nazwa użytkownika"
+
+msgid "Email Address"
+msgstr "Adres e-mail"
+
+msgid "Name"
+msgstr "Nazwa"
+
+msgid "Previous"
+msgstr "Poprzedni"
+
+msgid "Next"
+msgstr "Następny"
+
+msgid "Active"
+msgstr "Aktywny"
+
+msgid "Disabled"
+msgstr "Wyłączone"
+
+msgid "Uploaded file extension error."
+msgstr "Błąd rozszerzenia przesłanego pliku."
+
+msgid "Select user"
+msgstr "Wybierz użytkownika"
+
+msgid "Username"
+msgstr "Nazwa użytkownika"
+
+msgid "Search"
+msgstr "Szukaj"
+
+msgid "Reset"
+msgstr "Zresetuj"
+
+msgid "Use search feature to select the user"
+msgstr "Użyj funkcji wyszukiwania, aby wybrać użytkownika"
+
+msgid "User"
+msgstr "Użytkownik"
+
+msgid "Select User"
+msgstr "Wybierz Użytkownika"
+
+msgid "Roles"
+msgstr "Funkcje"
+
+msgid "Select Role"
+msgstr "Wybierz funkcję"
+
+msgid "First Name"
+msgstr "Imię"
+
+msgid "Last Name"
+msgstr "Nazwisko"
+
+msgid "Office Phone"
+msgstr "Telefon biurowy"
+
+msgid "Extension"
+msgstr "Rozbudowa"
+
+msgid "Mobile No"
+msgstr "Numer komórkowy"
+
+msgid "Picture"
+msgstr "Obraz"
+
+msgid "Maximum File Size"
+msgstr "Maksymalny rozmiar pliku"
+
+msgid "File Extension Type"
+msgstr "Rodzaj rozszerzenia pliku"
+
+msgid "Append Signature"
+msgstr "Dołącz Podpis"
+
+msgid "Append signature with a reply"
+msgstr "Dołącz podpis z odpowiedzią"
+
+msgid "Signature"
+msgstr "Podpis"
+
+msgid "Account Status"
+msgstr "Status konta"
+
+msgid "Select Status"
+msgstr "Wybierz status"
+
+msgid "Save"
+msgstr "Zapisz"
+
+msgid "Cancel"
+msgstr "Anuluj"
+
+msgid "Close"
+msgstr "Zamknij"
+
+msgid "Dashboard"
+msgstr "Panel kontrolny"
+
+msgid "Add Agent"
+msgstr "Dodaj agenta"
+
+msgid "Configuration"
+msgstr "Konfiguracja"
+
+msgid "Version"
+msgstr "Wersja"
+
+msgid "image"
+msgstr "obraz"
+
+msgid "Append"
+msgstr "Dołącz"
+
+msgid "Add Permissions"
+msgstr "Dodaj uprawnienia"
+
+msgid "Permissions"
+msgstr "Uprawnienia"
+
+msgid "Department Section"
+msgstr "Sekcja działu"
+
+msgid "Ticket Section"
+msgstr "Sekcja zgłoszenia"
+
+msgid "Agent Section"
+msgstr "Sekcja agentów"
+
+msgid "Knowledge Base Section"
+msgstr "Sekcja Bazy Wiedzy"
+
+msgid "FAQ Section"
+msgstr "Strefa FAQ"
+
+msgid "Download Section"
+msgstr "Strefa pobrań"
+
+msgid "Announcement Section"
+msgstr "Strefa powiadomień"
+
+msgid "Mail Section"
+msgstr "Strefa emaili"
+
+msgid "Help Topic Section"
+msgstr "Sekcja tematów pomocy"
+
+msgid "Canned Response Section"
+msgstr "Sekcja zapisanych odpowiedzi"
+
+msgid "Select / Deselect All"
+msgstr "Zaznacz/odznacz wszystkie"
+
+msgid "Save Permissions"
+msgstr "Uprawnienia do zapisu"
+
+msgid "Agents"
+msgstr "Agenci"
+
+msgid "Add"
+msgstr "Dodaj"
+
+msgid "Full Name"
+msgstr "Pełne nazwisko"
+
+msgid "Role"
+msgstr "Funkcja"
+
+msgid "Created"
+msgstr "Stworzony"
+
+msgid "Action"
+msgstr "Działanie"
+
+msgid "change status"
+msgstr "Zmień status"
+
+msgid "Edit"
+msgstr "Edytuj"
+
+msgid "Delete"
+msgstr "Usuń"
+
+msgid "Are you sure you want to delete"
+msgstr "czy jesteś pewny, że chcesz usunąć"
+
+msgid "Something went wrong to try again later."
+msgstr "Coś poszło nie tak, aby spróbować ponownie później."
+
+msgid "My Profile"
+msgstr "Mój Profil"
+
+msgid "Upload Image"
+msgstr "Załaduj obrazek"
+
+msgid "Phone No"
+msgstr "Numer telefonu"
+
+msgid "Upload file limit exceeds"
+msgstr "Limit przesyłania plików przekracza"
+
+msgid "No help topic found"
+msgstr "Nie znaleziono tematu pomoc"
+
+msgid "Error file size too large"
+msgstr "Błąd. Rozmiar pliku zbyt duży."
+
+msgid "Select Department"
+msgstr "Wybierz dział"
+
+msgid "Select Help Topic"
+msgstr "Wybierz temat pomocy"
+
+msgid "Select Priority"
+msgstr "Ustaw priorytet"
+
+msgid "Select Canned response"
+msgstr "Wybierz odpowiedź w puszce"
+
+msgid "Add more"
+msgstr "Dodaj więcej"
+
+msgid "Remove"
+msgstr "Usuń"
+
+msgid "Reason for edit"
+msgstr "Powód edycji"
+
+msgid "Internal Note"
+msgstr "Notatka wewnętrzna"
+
+msgid "Enter valid woocommerce order#"
+msgstr "Wpisz poprawne zamówienie woocommerce #"
+
+msgid "Order id found"
+msgstr "Znaleziono identyfikator zamówienia"
+
+msgid "Order id not found"
+msgstr "Nie znaleziono identyfikatora zamówienia"
+
+msgid "Select Product"
+msgstr "Wybierz produkt"
+
+msgid "Dated"
+msgstr "Przestarzały"
+
+msgid "Select Order ID"
+msgstr "Wybierz identyfikator zamówienia"
+
+msgid "Select license key"
+msgstr "Wybierz klucz licencyjny"
+
+msgid "Assign to me"
+msgstr "Przypisz do mnie"
+
+msgid "Submit Ticket"
+msgstr "Wyślij zgłoszenie"
+
+msgid "Show All"
+msgstr "Pokaż wszystko"
+
+msgid "Show Less"
+msgstr "Pokaż mniej"
+
+msgid "Open"
+msgstr "Otworzony"
+
+msgid "Closed"
+msgstr "Zamknięty"
+
+msgid "Answered"
+msgstr "Odpowiedziany"
+
+msgid "Overdue"
+msgstr "Przeterminowany"
+
+msgid "All Tickets"
+msgstr "Wszystkie zgłoszenia"
+
+msgid "Tickets"
+msgstr "Zgłoszenia"
+
+msgid "Ticket ID"
+msgstr "ID zgłoszenia"
+
+msgid "Or"
+msgstr "Lub"
+
+msgid "From"
+msgstr "Od"
+
+msgid "Select staff"
+msgstr "Wybierz personel"
+
+msgid "Select"
+msgstr "Wybierz"
+
+msgid "Start Date"
+msgstr "Data rozpoczęcia"
+
+msgid "End Date"
+msgstr "Data zakończenia"
+
+msgid "Assigned to me"
+msgstr "Przydzielony do mnie"
+
+msgid "Subject"
+msgstr "Powód"
+
+msgid "Priority"
+msgstr "Priorytet"
+
+msgid "sort"
+msgstr "sortuj"
+
+msgid "New"
+msgstr "Nowy"
+
+msgid "Waiting Reply"
+msgstr "Oczekuje na odpowiedź"
+
+msgid "In Progress"
+msgstr "W trakcie"
+
+msgid "Replied"
+msgstr "Odpowiedź udzielona"
+
+msgid "Close and merge"
+msgstr "Zamknij i połącz"
+
+msgid "Created via Email"
+msgstr "Utworzona przez email"
+
+msgid "The ticket is locked"
+msgstr "Zgłoszenie jest zamknięte"
+
+msgid "Last Reply"
+msgstr "Ostatnia odpowiedź"
+
+msgid "Search by username"
+msgstr "Szukaj według nazwy użytkownika"
+
+msgid "Already exists"
+msgstr "Już istnieje"
+
+msgid "The role has been stored"
+msgstr "Rola została zapisana"
+
+msgid "The role has not been stored"
+msgstr "Rola nie została zapisana"
+
+msgid "The role has been deleted"
+msgstr "Rola została usunięta"
+
+msgid "The role has not been deleted"
+msgstr "Rola nie została usunięta"
+
+msgid "The role in use cannot be deleting"
+msgstr "Rola w użyciu nie może być usuwana"
+
+msgid "Save Role"
+msgstr "Zapisz funkcję"
+
+msgid "Add Role"
+msgstr "Dodaj funkcję"
+
+msgid "Role Permission"
+msgstr "Uprawnienia przynależne funkcji"
+
+msgid "Role Name"
+msgstr "Nazwa funkcji"
+
+msgid "Role permissions"
+msgstr "Pozwolenia dla poszczególnych funkcji"
+
+msgid "Search Roles"
+msgstr "Szukaj ról"
+
+msgid "Add New Role"
+msgstr "Dodaj nową rolę"
+
+msgid "An announcement has been stored"
+msgstr "Ogłoszenie zostało zapisane"
+
+msgid "An announcement has not been stored"
+msgstr "Ogłoszenie nie zostało zapisane"
+
+msgid "An announcement has been deleted"
+msgstr "Ogłoszenie zostało usunięte"
+
+msgid "An announcement has not been deleted"
+msgstr "Ogłoszenie nie zostało usunięte"
+
+msgid "Announcement"
+msgstr "Powiadomienie"
+
+msgid "ordering has been changed"
+msgstr "porządkowanie zostało zmienione"
+
+msgid "ordering has not changed"
+msgstr "porządkowanie nie zostało zmienione"
+
+msgid "Public"
+msgstr "Publiczne"
+
+msgid "Private"
+msgstr "Prywatne"
+
+msgid "Title"
+msgstr "Tytuł"
+
+msgid "Parent Category"
+msgstr "Kategoria nadrzędna"
+
+msgid "Select Category"
+msgstr "Wybierz Kategorie"
+
+msgid "Description"
+msgstr "Opis"
+
+msgid "Save Announcement"
+msgstr "Zachowaj powiadomienie"
+
+msgid "Add Announcement"
+msgstr "Dodaj Ogłoszenie"
+
+msgid "Category"
+msgstr "Kategoria"
+
+msgid "Announcements"
+msgstr "Powiadomienia"
+
+msgid "Records per page"
+msgstr "Zapisy na stronę"
+
+msgid "Ordering"
+msgstr "Kolejność"
+
+msgid "Save Ordering"
+msgstr "Zapisz zamawianie"
+
+msgid "Category Name"
+msgstr "Kategoria Nazwisko"
+
+msgid "Categories"
+msgstr "Kategorie"
+
+msgid "Banned Email Log List"
+msgstr "Lista dziennika zablokowanych wiadomości e-mail"
+
+msgid "Logger Email"
+msgstr "Logujący adres mailowy"
+
+msgid "Logger"
+msgstr "Logująct"
+
+msgid "IP Address"
+msgstr "Adres IP"
+
+msgid "Ban email has been stored"
+msgstr "E-mail o zakazie został zapisany"
+
+msgid "Ban email has not been stored"
+msgstr "E-mail o zakazie nie został zapisany"
+
+msgid "Ban email has been deleted"
+msgstr "Zbanowany email został usunięty"
+
+msgid "Ban email has not been deleted"
+msgstr "E-mail z zakazem nie został usunięty"
+
+msgid "Ban email does not exist"
+msgstr "Zbanowany email nie istnieje"
+
+msgid "Add Banned Email"
+msgstr "Dodaj zbanowany adres e-mail"
+
+msgid "Save Banned Email"
+msgstr "Zapisz zbanowany e-mail"
+
+msgid "Banned Emails"
+msgstr "Zbanowane emaile"
+
+msgid "Emails"
+msgstr "Emaile"
+
+msgid "Submitter"
+msgstr "Wysyłający"
+
+msgid "Canned response message has been stored"
+msgstr "Komunikat odpowiedzi z puszki został zapisany"
+
+msgid "Canned response message has not been stored"
+msgstr "Komunikat odpowiedzi z puszki nie został zapisany"
+
+msgid "Premade department message has been deleted"
+msgstr "Projekt wiadomości działu został usunięty"
+
+msgid "Premade department message has not been deleted"
+msgstr "Projekt wiadomości działu nie został usunięty"
+
+msgid "Canned response"
+msgstr "Odpowiedź w puszce"
+
+msgid "Department"
+msgstr "Dział"
+
+msgid "Response"
+msgstr "Odpowiedź"
+
+msgid "Save Canned Response"
+msgstr "Zapisz odpowiedź w puszce"
+
+msgid "Add Canned Response"
+msgstr "Dodaj odpowiedź w puszce"
+
+msgid "The department under which the answer will be made is available"
+msgstr "Dział, w ramach którego zostanie udzielona odpowiedź, jest dostępny"
+
+msgid "Offline"
+msgstr "Nieaktywny"
+
+msgid "Canned Responses"
+msgstr "Zapisane odpowiedzi"
+
+msgid "Last Updated"
+msgstr "Ostatnio Zaktualizowany"
+
+msgid "Not updated"
+msgstr "Nie zaktualizowany"
+
+msgid "Canned Response"
+msgstr "Odpowiedź w puszce"
+
+msgid "Latest Tickets"
+msgstr "Ostatnie sprawy"
+
+msgid "Last Month Ticket Stats"
+msgstr "Statystyki zgłoszeń z ostatniego miesiąca"
+
+msgid "Pending"
+msgstr "Oczekujący"
+
+msgid "The attachment has been removed"
+msgstr "Załącznik został usunięty"
+
+msgid "The attachment has not been removed"
+msgstr "Załącznik nie został usunięty"
+
+msgid "The download has been stored"
+msgstr "Pobieranie zostało zapisane"
+
+msgid "The download has not been stored"
+msgstr "Pobieranie nie zostało zapisane"
+
+msgid "Download"
+msgstr "Pobierz"
+
+msgid "The download has been deleted"
+msgstr "Pobieranie zostało usunięte"
+
+msgid "The download has not been deleted"
+msgstr "Pobranie nie zostało usunięte"
+
+msgid "Download All"
+msgstr "Pobierz wszystko"
+
+msgid "Attachments"
+msgstr "Załączniki"
+
+msgid "Save Download"
+msgstr "Zapisz plik"
+
+msgid "Add Download"
+msgstr "Dodaj Plik"
+
+msgid "Add More File"
+msgstr "Dodaj więcej plików"
+
+msgid "Delete attachment"
+msgstr "Usuń załącznik"
+
+msgid "Downloads"
+msgstr "Pliki do pobrania"
+
+msgid "grab"
+msgstr "chwycić"
+
+msgid "Attachment"
+msgstr "Załącznik"
+
+msgid "Files"
+msgstr "Pliki"
+
+msgid "Get Help"
+msgstr "Sprowadź pomoc"
+
+msgid "Service is running, please close the pag"
+msgstr "Usługa jest uruchomiona, zamknij pag"
+
+msgid ""
+"Admin email address and email piping address cannot be the same, your email "
+"piping will not be work."
+msgstr ""
+"Adres e-mail administratora i adres e-mail potoku nie mogą być takie same, "
+"Twój potok e-mail nie będzie działać."
+
+msgid "Your setting is working please this."
+msgstr "Twoje ustawienie działa, proszę."
+
+msgid "Connection established but the system cannot read any email"
+msgstr "Połączenie nawiązane, ale system nie może odczytać wiadomości e-mail"
+
+msgid ""
+"IMAP is either not installed or not enabled in your server. Contact to hosting "
+"company"
+msgstr ""
+"Protokół IMAP nie jest zainstalowany lub nie został włączony na serwerze. "
+"Kontakt z firmą hostingową"
+
+msgid "The configuration has been stored"
+msgstr "Konfiguracja została zapisana"
+
+msgid "The configuration not has been stored"
+msgstr "Konfiguracja nie została zapisana"
+
+msgid "Email address already exist"
+msgstr "Adres e-mail już istnieje"
+
+msgid "Email for email piping has been stored"
+msgstr "E-mail do przesyłania wiadomości e-mail został zapisany"
+
+msgid "Email for email piping has not been stored"
+msgstr "E-mail do przesyłania wiadomości e-mail nie został zapisany"
+
+msgid "The email has been deleted"
+msgstr "E-mail został usunięty"
+
+msgid "The email has not been deleted"
+msgstr "E-mail nie został usunięty"
+
+msgid "in use cannot deleted"
+msgstr "w użyciu, nie można usunąć"
+
+msgid "Enabled"
+msgstr "Włączone"
+
+msgid "Only New Tickets"
+msgstr "Tylko nowe sprawy"
+
+msgid "Only Replies"
+msgstr "Tylko odpowiedzi"
+
+msgid "Both"
+msgstr "Obie"
+
+msgid "Other"
+msgstr "Inny"
+
+msgid "Yes"
+msgstr "Tak"
+
+msgid "No"
+msgstr "Nie"
+
+msgid "Please enter the hostname first"
+msgstr "Wprowadź wpierw nazwę hosta"
+
+msgid "Please enable email piping setting first"
+msgstr "Najpierw włącz ustawienie przesyłania strumieniowego wiadomości e-mail"
+
+msgid "Add Email Piping"
+msgstr "Dodaj orurowanie e-mail"
+
+msgid "Enable email piping"
+msgstr "Włącz przesyłanie wiadomości e-mail"
+
+msgid "Ticket Type"
+msgstr "Typ sprawy"
+
+msgid "Which email type to read"
+msgstr "Który typ emaila ma być odczytany"
+
+msgid "Save attachments if found in an email"
+msgstr "Zapisz załączniki, jeśli znajdują się w wiadomości e-mail"
+
+msgid "Host Type"
+msgstr "Typ hosta"
+
+msgid "Select your email service provider"
+msgstr "Wybierz dostawcę usług mailowych"
+
+msgid "Host Name"
+msgstr "Nazwa hosta"
+
+msgid "Enabled SSL"
+msgstr "Włączone SSL"
+
+msgid "Do you have enabled SSL on your domain?"
+msgstr "Czy masz włączony protokół SSL w swojej domenie?"
+
+msgid "Host Port Number"
+msgstr "Numer portu hosta"
+
+msgid "Host port number to read an email from"
+msgstr "Numer portu hosta, z którego można odczytać wiadomość e-mail"
+
+msgid "Email address to read emails"
+msgstr "Adres mailowy do czytania maili"
+
+msgid "Password"
+msgstr "Hasło"
+
+msgid "Password for a given email address"
+msgstr "Hasło dla danego adresu e-mail"
+
+msgid "check"
+msgstr "zaznacz"
+
+msgid "Check Settings"
+msgstr "Sprawdź ustawienia"
+
+msgid "If the system doesn't respond in 30 seconds"
+msgstr "Jeśli system nie zareaguje w ciągu 30 sekund"
+
+msgid "it means system unable to connect email server"
+msgstr "to znaczy system nie może połączyć się z serwerem mailowym"
+
+msgid "Save Settings"
+msgstr "Zapisz ustawienia"
+
+msgid "PHP Script"
+msgstr "Skrypt PHP"
+
+msgid "Configuration of a backup job with webcron org"
+msgstr "Konfiguracja kopii zapasowej z webcron org"
+
+msgid "Name of cron job"
+msgstr "Nazwa zdania cron"
+
+msgid "Log in to webcron org in the cron area click on"
+msgstr "Loguj do webcron org w strefie cron"
+
+msgid "Timeout"
+msgstr "Czas upłynął"
+
+msgid ""
+"180 secs if the does not completely increase it most sites will work with a "
+"setting of 180 600"
+msgstr ""
+"180 sekund, jeśli nie zwiększy to całkowicie, większość witryn będzie działać "
+"z ustawieniem 180 600"
+
+msgid "URL you want to execute"
+msgstr "URL, który chcesz wykonać"
+
+msgid "Login"
+msgstr "Logowanie"
+
+msgid "Leave this blank"
+msgstr "Zostaw to niewypełnione"
+
+msgid "Execution time"
+msgstr "Czas wykonania"
+
+msgid "That the grid below the other options select when and how"
+msgstr "Poniżej wybierz opcję kiedy i gdzie"
+
+msgid "Alerts"
+msgstr "Powiadomienia"
+
+msgid ""
+"If you have already set up alerts methods in webcron org interface we "
+"recommend choosing an alert"
+msgstr ""
+"Jeżeli skonfigurowałeś już metody powiadomień w interfejsie webcron orn, "
+"rekomendujemy wybranie powiadomienia"
+
+msgid "Cron scheduling using wget"
+msgstr "Planowanie cron z użyciem wget"
+
+msgid "Cron scheduling using Curl"
+msgstr "Planowanie cron z użyciem Curl"
+
+msgid "Custom PHP script to run the cron job"
+msgstr "Własny skrypt PHP do uruchomienia zadania cron"
+
+msgid "Sorry the cron job did not work"
+msgstr "Niestety praca crona nie działała"
+
+msgid "URL for use with your won scripts and third party"
+msgstr "URL do użycia ze skryptami won i osób trzecich"
+
+msgid "Recommended run script hourly"
+msgstr "Zaleca się uruchamiać skrypt co godzinę"
+
+msgid "Email Piping"
+msgstr "Przesyłanie wiadomości e-mail"
+
+msgid "Ticket Email Type"
+msgstr "Rodzaj e-maila na bilecie"
+
+msgid "ticket email"
+msgstr "email zgłoszenia"
+
+msgid "Overall Reports"
+msgstr "Raporty ogólne"
+
+msgid "Staff Members Report"
+msgstr "Raport członków personelu"
+
+msgid "Department Report"
+msgstr "Raport Departamentu"
+
+msgid "Departments Report"
+msgstr "Raport działów"
+
+msgid "JS Support Ticket Overall Reports"
+msgstr "Raporty ogólne dotyczące zgłoszeń pomocy technicznej JS"
+
+msgid "Tickets By Status"
+msgstr "Sprawa według statusu"
+
+msgid "Tickets By Departments"
+msgstr "Sprawy według departamentów"
+
+msgid "Tickets By Priorities"
+msgstr "Sprawy według priorytetów"
+
+msgid "Tickets By Channel"
+msgstr "Sprawy według kanału"
+
+msgid "Direct"
+msgstr "Bezpośrednio"
+
+msgid "Direct reply"
+msgstr "Bezpośrednia odpowiedź"
+
+msgid "Email reply"
+msgstr "Odpowiedź e-mail"
+
+msgid "Tickets By staff"
+msgstr "Zgłoszenia przez pracowników"
+
+msgid "Report By"
+msgstr "Zgłoszone przez"
+
+msgid "staff member"
+msgstr "pracownik"
+
+msgid "To"
+msgstr "Do"
+
+msgid "Report By Staff Members"
+msgstr "Raport według członków zespołu"
+
+msgid "Ticket status by days"
+msgstr "Status zgłoszenia wg dni"
+
+msgid "Date"
+msgstr "Data"
+
+msgid "Tickets Staff"
+msgstr "Zgłoszenia pracowników"
+
+msgid "Average Rating"
+msgstr "Średni rating"
+
+msgid "Average Time"
+msgstr "Średni czas"
+
+msgid "Report By staff member"
+msgstr "Raport członka personelu"
+
+msgid "Rating"
+msgstr "Ocena"
+
+msgid "Time"
+msgstr "Czas"
+
+msgid "Merged"
+msgstr "Scalono"
+
+msgid "Report By department"
+msgstr "Raport wg działu"
+
+msgid "Tickets By Department"
+msgstr "Sprawa według działu"
+
+msgid "Department Name"
+msgstr "Nazwa działu"
+
+msgid "User report"
+msgstr "Raport użutkownika"
+
+msgid "Users report"
+msgstr "Raport użytkowników"
+
+msgid "Users Tickets"
+msgstr "Zgłoszenia użytkowników"
+
+msgid "User Report"
+msgstr "Raport użytkownika"
+
+msgid "Report By Departments"
+msgstr "Raport wg działów"
+
+msgid "Tickets Data"
+msgstr "Dane zgłoszeń"
+
+msgid "Message"
+msgstr "Wiadomość"
+
+msgid "Assigned To"
+msgstr "Przydzielone dla"
+
+msgid "Requester User Name"
+msgstr "Nazwa użytkownika żądającego"
+
+msgid "Requester Name"
+msgstr "Nazwa wnioskodawcy"
+
+msgid "Requester Email"
+msgstr "E-mail wnioskodawcy"
+
+msgid "Requester Phone"
+msgstr "Telefon żądającego"
+
+msgid "Requester help Topic"
+msgstr "Temat prośby o pomoc"
+
+msgid "Ticket Attachment"
+msgstr "Załącznik zgłoszenia"
+
+msgid "Posted By"
+msgstr "Wysłane przez"
+
+msgid "Note Title"
+msgstr "Tytuł notatki"
+
+msgid "Note Message"
+msgstr "Wiadomość/notatka"
+
+msgid "Posted Date"
+msgstr "Data wysłania"
+
+msgid "Note Attachment"
+msgstr "Uwaga Załącznik"
+
+msgid "User Time"
+msgstr "Czas użytkownika"
+
+msgid "System Time"
+msgstr "Czas systemowy"
+
+msgid "Edit Reason"
+msgstr "Popraw powód"
+
+msgid "Reply Date"
+msgstr "Data odpowiedzi"
+
+msgid "Reply By"
+msgstr "Odpowiedz przez"
+
+msgid "Reply Attachment"
+msgstr "Odpowiedz załącznik"
+
+msgid "Export"
+msgstr "Eksport"
+
+msgid "Select Agent"
+msgstr "Wybierz agenta"
+
+msgid "Ticket Status"
+msgstr "Status spraw"
+
+msgid "Select Ticket Status"
+msgstr "Wybierz status zgloszenia"
+
+msgid "Ticket Overdue"
+msgstr "Sprawa przeterminowana"
+
+msgid "Select Ticket Overdue Status"
+msgstr "Wybierz status przeterminowanego zgłoszenia"
+
+msgid "FAQ has been stored"
+msgstr "FAQ zostały zapisane"
+
+msgid "FAQ has not been stored"
+msgstr "FAQ nie zostały zapisane"
+
+msgid "FAQ has been deleted"
+msgstr "FAQ zostały usuniete"
+
+msgid "FAQ has not been deleted"
+msgstr "FAQ nie zostały usuniete"
+
+msgid "Save FAQ"
+msgstr "Zapisz FAQ"
+
+msgid "Add FAQ"
+msgstr "Dodaj FAQ"
+
+msgid "Content"
+msgstr "Zawartość"
+
+msgid "FAQ'S"
+msgstr "FAQ"
+
+msgid "FAQs"
+msgstr "FAQ"
+
+msgid "FAQ's"
+msgstr "FAQ"
+
+msgid "Add FAQs"
+msgstr "Dodaj najczęściej zadawane pytania"
+
+msgid "Feedback has been stored"
+msgstr "Informacje zwrotne zostały zapisane"
+
+msgid "Feedback has not been stored"
+msgstr "Informacje zwrotne nie zostały zapisane"
+
+msgid "Feedbacks"
+msgstr "Informacje zwrotne"
+
+msgid "user image"
+msgstr "obraz użytkownika"
+
+msgid "feedback image"
+msgstr "obraz opinii"
+
+msgid "Feedback"
+msgstr "Sprzężenie zwrotne"
+
+msgid "Latest Feedback"
+msgstr "ostatni Feedback"
+
+msgid "Submit Feedback"
+msgstr "Prześlij opinię"
+
+msgid "Help topic has been stored"
+msgstr "Temat pomocy został zapisany"
+
+msgid "Help topic has not been stored"
+msgstr "Temat pomocy nie został zapisany"
+
+msgid "Help topic has been deleted"
+msgstr "Temat pomocy został usunięty"
+
+msgid "Help topic has not been deleted"
+msgstr "Temat pomocy nie został usunięty"
+
+msgid "Help topic in use cannot be deleting"
+msgstr "Używanym tematem pomocy nie może być usunięcie"
+
+msgid "Help topic"
+msgstr "Temat Pomocy"
+
+msgid "Help Topic"
+msgstr "Temat pomocy"
+
+msgid "Save Help Topic"
+msgstr "Zapisz temat pomocy"
+
+msgid "Add Help Topic"
+msgstr "Dodaj temat pomocy"
+
+msgid "Help Topics"
+msgstr "Tematy pomocy"
+
+msgid "The category has been stored"
+msgstr "Kategoria została zapisana"
+
+msgid "The category has not been stored"
+msgstr "Kategoria nie została zapisana"
+
+msgid "The category has been deleted"
+msgstr "Kategoria została usunięta"
+
+msgid "The category has not been deleted"
+msgstr "Kategoria nie została usunięta"
+
+msgid "The category in use cannot be deleting"
+msgstr "Używana kategoria nie może być usuwana"
+
+msgid "Knowledgebase article has been stored"
+msgstr "Artykuł bazy wiedzy został zapisany"
+
+msgid "Knowledgebase article has not been stored"
+msgstr "Artykuł w bazie wiedzy nie został zapisany"
+
+msgid "The article has been deleted"
+msgstr "Artykuł został usunięty"
+
+msgid "The article has not been deleted"
+msgstr "Artykuł nie został usunięty"
+
+msgid "Article"
+msgstr "Artykuł"
+
+msgid "The parent category does not have this type."
+msgstr "Kategoria nadrzędna nie ma tego typu."
+
+msgid "Would you like to add this type to Parent Category?"
+msgstr "Czy chcesz dodać ten typ do kategorii nadrzędnej?"
+
+msgid "JYes"
+msgstr "Tak"
+
+msgid "JNo"
+msgstr "Nie"
+
+msgid "Child category has this type,"
+msgstr "Kategoria podrzędna ma ten typ,"
+
+msgid "You cannot unmark it."
+msgstr "Nie możesz tego odznaczyć."
+
+msgid "Draft"
+msgstr "Szkic"
+
+msgid "Meta Description"
+msgstr "Opis meta"
+
+msgid "Meta Keywords"
+msgstr "Słowa kluczowe Meta"
+
+msgid "Save Knowledge Base"
+msgstr "Zapisz bazę wiedzy"
+
+msgid "Please select at least one category for"
+msgstr "Wybierz przynajmniej jedną kategorię dla"
+
+msgid "Category For"
+msgstr "Kategoria Dla"
+
+msgid "Knowledge Base"
+msgstr "Baza Wiedzy"
+
+msgid "Save Category"
+msgstr "Zapisz kategorię"
+
+msgid "Add Knowledge Base"
+msgstr "Dodaj Bazę Wiedzy"
+
+msgid "Meta Data Options"
+msgstr "Opcje Meta Data"
+
+msgid "Add Category"
+msgstr "Dodaj kategorię"
+
+msgid "Category Title"
+msgstr "Kategoria Tytuł"
+
+msgid "category"
+msgstr "Kategoria"
+
+msgid "Article Attachment"
+msgstr "Załącznik artykułu"
+
+msgid "Knowledgebase"
+msgstr "Baza wiedzy"
+
+msgid "Mail has not been marked as read"
+msgstr "Poczta nie została oznaczona jako przeczytana"
+
+msgid "Mail has been marked as read"
+msgstr "Poczta została oznaczona jako przeczytana"
+
+msgid "Message field cannot be empty"
+msgstr "Pole wiadomości nie może być puste"
+
+msgid "Mail has been sent"
+msgstr "Mail został wysłany"
+
+msgid "Mail has not been sent"
+msgstr "Poczta nie została wysłana"
+
+msgid "Mail has been deleted"
+msgstr "Mail został usunięty"
+
+msgid "Mail has not been deleted"
+msgstr "Mail nie został usunięty"
+
+msgid "is in use cannot be delete"
+msgstr "jest w użyciu, nie można go usunąć"
+
+msgid "Mail cannot mark as to read"
+msgstr "Poczta nie może oznaczać jako przeczytana"
+
+msgid "Mail cannot mark as unread"
+msgstr "Mail nie może być oznaczony jako nieprzeczytany"
+
+msgid "Mail has been marked as unread"
+msgstr "Poczta została oznaczona jako nieprzeczytana"
+
+msgid "Compose"
+msgstr "Stwórz"
+
+msgid "Inbox"
+msgstr "Skrzynka odbiorcza"
+
+msgid "Outbox"
+msgstr "Skrzynka nadawcza"
+
+msgid "Send"
+msgstr "Wyślij"
+
+msgid "Read"
+msgstr "Przeczytany"
+
+msgid "Unread"
+msgstr "Nieprzeczytany"
+
+msgid "Select Type"
+msgstr "Wybierz Typ"
+
+msgid "To use this feature you must be staff member"
+msgstr "Aby korzystać z tej funkcji, musisz być członkiem personelu"
+
+msgid "To use this feature you must have agents addon."
+msgstr "Aby korzystać z tej funkcji, musisz mieć dodatek agentów."
+
+msgid "Re"
+msgstr "Odpowiedź"
+
+msgid "mark read"
+msgstr "Oznacz przeczytane"
+
+msgid "mark unread"
+msgstr "Zaznacz jako nieprzeczytane"
+
+msgid "Replied By"
+msgstr "Odpowiedział:"
+
+msgid "Reply"
+msgstr "Odpowiedź"
+
+msgid "Type Message"
+msgstr "Wpisz wiadomość"
+
+msgid "Replies"
+msgstr "Odpowiedzi"
+
+msgid "Limit exceeds maximum tickets"
+msgstr "Przekroczony limit spraw"
+
+msgid "The maximum number of open tickets limit has been exceeded."
+msgstr "Przekroczono maksymalną liczbę otwartych zgłoszeń."
+
+msgid "Ticket has been closed due to merged with"
+msgstr "Zgłoszenie zostało zamknięte z powodu scalenia z innym"
+
+msgid "Ticket"
+msgstr "Sprawa"
+
+msgid "has been merged into"
+msgstr "został połączony w"
+
+msgid "Merge Ticket"
+msgstr "Scal zgłoszenia"
+
+msgid "Ticket ID #"
+msgstr "Identyfikator zgłoszenia"
+
+msgid "Search ticket to merge into"
+msgstr "Wyszukaj zgłoszenie, z którym połączyć"
+
+msgid "Edit Last Reply"
+msgstr "Edytuj ostatnią odpowiedź"
+
+msgid "Merge Ticket Latest Reply"
+msgstr "Ostatnia odpowiedź w scalonym zgłoszeniu"
+
+msgid "Merge"
+msgstr "Łączyć"
+
+msgid "Ticket has been merged"
+msgstr "Zgłoszenie zostało scalone"
+
+msgid "Ticket has not been merged"
+msgstr "Zgłoszenie nie zostało scalone"
+
+msgid "The internal note has been posted"
+msgstr "Notatka wewnętrzna została opublikowana"
+
+msgid "The internal note has not been posted"
+msgstr "Nota wewnętrzna nie została opublikowana"
+
+msgid "Post Internal Note"
+msgstr "Dodaj notatkę wewnętrzną"
+
+msgid "The internal note is posted by"
+msgstr "Nota wewnętrzna została opublikowana przez"
+
+msgid "Pass"
+msgstr "Przekaż"
+
+msgid "Ticket Notification"
+msgstr "Powiadomienie o zgłoszeniach"
+
+msgid "Once Weekly"
+msgstr "Raz w tygodniu"
+
+msgid "JS Support Ticket"
+msgstr "Obsługa Klienta"
+
+msgid "Thanks for subscribing!"
+msgstr "Dziękuję za zasubskrybowanie!"
+
+msgid "Ticket already marked overdue"
+msgstr "Sprawa została już oznaczona jako przeterminowana"
+
+msgid "The ticket has been marked as overdue"
+msgstr "Zgłoszenie został oznaczone jako zaległe"
+
+msgid "The ticket has not been marked as overdue"
+msgstr "Zgłoszenie nie zostało oznaczone jako spóźnione"
+
+msgid "Mark overdue"
+msgstr "Oznacz jako Przeterminowane"
+
+msgid "The ticket is marked as overdue by"
+msgstr "Zgłoszenie jest oznaczone jako przeterminowane"
+
+msgid "The ticket has been unmarked as overdue"
+msgstr "Zgłoszenie zostało oznaczone jako zaległe"
+
+msgid "The ticket has not been unmarked as overdue"
+msgstr "Zgłoszenie nie zostało oznaczone jako zaległe"
+
+msgid "Unmark overdue"
+msgstr "Odznacz przeterminowane"
+
+msgid "The ticket is unmarked as overdue by"
+msgstr "Zgłoszenie nie jest oznaczone jako zaległe"
+
+msgid "Paid Support"
+msgstr "Płatne wsparcie"
+
+msgid "Check if you want to use this product for paid support"
+msgstr "Sprawdź, czy chcesz używać tego produktu do płatnej pomocy technicznej"
+
+msgid "Paid support type"
+msgstr "Typ płatnego wsparcia"
+
+msgid "One-off Support"
+msgstr "Wsparcie jednorazowe"
+
+msgid "Subscription Support"
+msgstr "Wsparcie subskrypcji"
+
+msgid "Number of tickets"
+msgstr "Ilość zgłoszeń"
+
+msgid ""
+"Enter allowed number of tickets that customer can post. Enter -1 for unlimited "
+"tickets."
+msgstr ""
+"Wprowadź dozwoloną liczbę zgłoszeń, które klient może opublikować. Wpisz -1, "
+"aby uzyskać nieograniczoną liczbę zgłoszeń."
+
+msgid "Credential Type"
+msgstr "Rodzaj referencji"
+
+msgid "Additional Info"
+msgstr "Dodatkowe informacje"
+
+msgid "Please insert values"
+msgstr "Proszę wstawić wartości"
+
+msgid "Visitor"
+msgstr "Gość"
+
+msgid "By"
+msgstr "Przez"
+
+msgid "Credential removed on ticket close"
+msgstr "Poświadczenie usunięte przy zamknięciu zgłoszenia"
+
+msgid "Failed to retrieve data"
+msgstr "Nie udało się pobrać danych"
+
+msgid "The new theme has been applied"
+msgstr "Nowy motyw został zastosowany"
+
+msgid "Error applying the new theme"
+msgstr "Błąd podczas stosowania nowego motywu"
+
+msgid "Themes"
+msgstr "Szablony"
+
+msgid "Color Chooser"
+msgstr "Wybór kolorów"
+
+msgid "Preset Theme"
+msgstr "Szablon początkowy"
+
+msgid "Color 1"
+msgstr "Kolor 1"
+
+msgid "Top menu heading background"
+msgstr "Tło top menu"
+
+msgid "Color 2"
+msgstr "Kolor 2"
+
+msgid "Top header line color"
+msgstr "Kolor linii nagłówka"
+
+msgid "Button Hover"
+msgstr "Przycisk Hover"
+
+msgid "Heading text"
+msgstr "Tekst wprowadzający"
+
+msgid "Color 3"
+msgstr "Kolor 3"
+
+msgid "Content Background Color"
+msgstr "Kolor tła treści"
+
+msgid "Color 4"
+msgstr "Kolor 4"
+
+msgid "Content Text Color"
+msgstr "Kolor tekstu treści"
+
+msgid "Color 5"
+msgstr "Kolor 5"
+
+msgid "Border color"
+msgstr "Kolor ramki"
+
+msgid "Lines"
+msgstr "Linie"
+
+msgid "Color 6"
+msgstr "Kolor 6"
+
+msgid "Button Color"
+msgstr "Kolor przycisku"
+
+msgid "Color 7"
+msgstr "Kolor 7"
+
+msgid "Top header text color"
+msgstr "Kolor tekstu nagłówka"
+
+msgid "Save Theme"
+msgstr "Zapisz szablon"
+
+msgid "Color Effect Preview"
+msgstr "Przegląd efektu kolorów"
+
+msgid "Blue"
+msgstr "Niebieski"
+
+msgid "Red"
+msgstr "Czerwony"
+
+msgid "Greenish"
+msgstr "Zielonkawy"
+
+msgid "Brown"
+msgstr "Brązowy"
+
+msgid "Orange"
+msgstr "Pomarańczowy"
+
+msgid "Green"
+msgstr "Zielony"
+
+msgid "Black"
+msgstr "Czarny"
+
+msgid "Mail Notification Widget"
+msgstr "Widget powiadomień przez email"
+
+msgid "Show newly and reply mail notifications"
+msgstr "Pokaż nowe i odpowiedz na powiadomienia pocztą"
+
+msgid "New mail from"
+msgstr "Nowy mail od"
+
+msgid "Mail Notification"
+msgstr "Powiadomienie przez email"
+
+msgid "Layout"
+msgstr "Układ"
+
+msgid "Vertical"
+msgstr "Pionowy"
+
+msgid "Horizontal"
+msgstr "Poziomy"
+
+msgid "Max Record"
+msgstr "Maksymalna liczba rekordów"
+
+msgid "My Ticket Widget"
+msgstr "Mój Widget sprawy"
+
+msgid "Show unanswered tickets"
+msgstr "Pokaż sprawy bez odpowiedzi"
+
+msgid "My Tickets"
+msgstr "Moje sprawy"
+
+msgid "Order tickets"
+msgstr "Zgłoszenia zamowień"
+
+msgid "Close due to merge"
+msgstr "Zamknij z powodu scalenia"
+
+msgid "Product"
+msgstr "Produkt"
+
+msgid "Order"
+msgstr "Porządek"
+
+msgid "There is no ticket"
+msgstr "Brak zgłoszeń"
+
+msgid "Something went wrong"
+msgstr "Coś poszło nie tak"
+
+msgid "Transaction Key"
+msgstr "Klucz transakcji"
+
+msgid "Please select"
+msgstr "Proszę wybrać"
+
+msgid "Hide notice"
+msgstr "Ukryj powiadomienie"
+
+msgid "Control Panel"
+msgstr "Panel kontrolny"
+
+msgid "Announcement Detail"
+msgstr "Szczegóły powiadomień"
+
+msgid "Edit Announcement"
+msgstr "Edytuj powiadomienia"
+
+msgid "Departments"
+msgstr "Działy"
+
+msgid "Add Department"
+msgstr "Dodaj dział"
+
+msgid "Edit Department"
+msgstr "Edytuj dział"
+
+msgid "Staff report"
+msgstr "Raport personelu"
+
+msgid "Staff reports"
+msgstr "Raporty kadrowe"
+
+msgid "Departments report"
+msgstr "Raport działu"
+
+msgid "Edit Download"
+msgstr "Edytuj pobranie"
+
+msgid "Edit FAQ"
+msgstr "Edytuj FAQ"
+
+msgid "FAQ Detail"
+msgstr "Szczegóły FAQ"
+
+msgid "Edit Knowledge Base"
+msgstr "Edytuj bazę wiedzy"
+
+msgid "Edit Category"
+msgstr "Edytuj kategorię"
+
+msgid "Knowledge Base Detail"
+msgstr "Szczegóły bazy wiedzy"
+
+msgid "Send Message"
+msgstr "Wyślij wiadomość"
+
+msgid "Edit Role"
+msgstr "Edytuj funkcję"
+
+msgid "Staffs"
+msgstr "Zespoły"
+
+msgid "Add Staff"
+msgstr "Dodaj zespół"
+
+msgid "Edit Staff"
+msgstr "Edytuj zespół"
+
+msgid "Staff Permissions"
+msgstr "Uprawnienia zespołu"
+
+msgid "Add Ticket"
+msgstr "Dodaj sprawę"
+
+msgid "Edit Ticket"
+msgstr "Edytuj sprawę"
+
+msgid "Ticket Detail"
+msgstr "Szczegóły sprawy"
+
+msgid "Plus"
+msgstr "Więcej"
+
+msgid "Equals"
+msgstr "Równa się"
+
+msgid "About Us"
+msgstr "O nas"
+
+msgid "Translations"
+msgstr "Tłumaczenia"
+
+msgid "System Errors"
+msgstr "Błędy Systemu"
+
+msgid "Short Codes"
+msgstr "Krótkie kody"
+
+msgid "Create Ticket"
+msgstr "Otwórz sprawę"
+
+msgid "Fields"
+msgstr "Pola"
+
+msgid "Install"
+msgstr "zainstalować"
+
+msgid "Configurations"
+msgstr "Parametry"
+
+msgid "Cron Job URLs"
+msgstr "Adresy URL zadań Cron"
+
+msgid "Reports"
+msgstr "Raporty"
+
+msgid "Overall Statistics"
+msgstr "Statystyka ogólna"
+
+msgid "Agent Reports"
+msgstr "Raporty agentów"
+
+msgid "Department Reports"
+msgstr "Raporty działu"
+
+msgid "User Reports"
+msgstr "Raporty użytkowników"
+
+msgid "Satisfaction Report"
+msgstr "Raporty satysfakcji"
+
+msgid "GDPR"
+msgstr "RODO"
+
+msgid "GDPR Fields"
+msgstr "Pola RODO"
+
+msgid "Erase Data Requests"
+msgstr "Usuń żądania danych"
+
+msgid "Premium Addons"
+msgstr "Dodatki premium"
+
+msgid "Install Addons"
+msgstr "Zainstaluj dodatki"
+
+msgid "Addons List"
+msgstr "Lista dodatków"
+
+msgid "Feedback Fields"
+msgstr "Pola opinii"
+
+msgid "Helptopics"
+msgstr "Tematy pomocy"
+
+msgid "System Emails"
+msgstr "Systemowe adresy email"
+
+msgid "Add Email"
+msgstr "Dodaj email"
+
+msgid "Priorities"
+msgstr "Priorytety"
+
+msgid "Add Priority"
+msgstr "Dodaj rodzaj priorytetu"
+
+msgid "Ban Emails"
+msgstr "Zbanowane adresy e-mail"
+
+msgid "Email Templates"
+msgstr "Szablony maili"
+
+msgid "New Ticket"
+msgstr "Nowa sprawa"
+
+msgid "Agent Ticket"
+msgstr "Zgłoszenie agenta"
+
+msgid "New Agent"
+msgstr "Nowy agent"
+
+msgid "Reassign Ticket"
+msgstr "Zmień przydział sprawy"
+
+msgid "Close Ticket"
+msgstr "Zamknij sprawę"
+
+msgid "Delete Ticket"
+msgstr "Usuń sprawę"
+
+msgid "Mark Overdue"
+msgstr "Oznacz jako Przeterminowane"
+
+msgid "Ban Email"
+msgstr "Banuj email"
+
+msgid "Ban email try to create ticket"
+msgstr "Banuj email próbujący utworzyć sprawę"
+
+msgid "Department Transfer"
+msgstr "Przeniesienie działu"
+
+msgid "Ban Email and Close Ticket"
+msgstr "Banuj email i zamknij sprawę"
+
+msgid "Unban Email"
+msgstr "Zdejmij ban z emaila"
+
+msgid "Response Ticket"
+msgstr "Odpowiedź w sprawie"
+
+msgid "Reply Ticket"
+msgstr "Odpowiedz"
+
+msgid "New Ticket Admin Alert"
+msgstr "Powiadomienie Admina o nowej sprawie"
+
+msgid "In Progress Ticket"
+msgstr "Sprawa w trakcie załatwiania"
+
+msgid "Ticket priority is changed by"
+msgstr "Priorytet sprawy zmieniony przez"
+
+msgid "New Mail Received"
+msgstr "Nowy mail"
+
+msgid "New Mail Message Received"
+msgstr "Nowa wiadomość e-mail"
+
+msgid "Feedback Email To User"
+msgstr "E-mail zwrotny do użytkownika"
+
+msgid "User Reply On Closed Ticket"
+msgstr "Odpowiedź użytkownika na zamkniętym bilecie"
+
+msgid "Log out"
+msgstr "Wyloguj"
+
+msgid "Username / password is incorrect"
+msgstr "Nazwa użytkownika lub hasło błędne"
+
+msgid "Username already taken"
+msgstr "Nazwa użytkownika już zajęta"
+
+msgid "Invalid username"
+msgstr "Niewłaściwa nazwa użytkownika"
+
+msgid "Please enter a username"
+msgstr "Proszę wprowadzić nazwę użytkownika"
+
+msgid "Invalid email"
+msgstr "Niewłaściwy email"
+
+msgid "Email already registered"
+msgstr "Email już zarejestrowany"
+
+msgid "Please enter a password"
+msgstr "Proszę podać hasło"
+
+msgid "Passwords do not match"
+msgstr "Hasła nie pasują"
+
+msgid "Invalid captcha"
+msgstr "Niewłaściwa captcha"
+
+msgid "Could not subscribe to the newsletter"
+msgstr "Nie można zapisać się do newslettera"
+
+msgid ""
+"Please check confirmation email to complete your subscription for the "
+"newsletter"
+msgstr ""
+"Sprawdź wiadomość e-mail z potwierdzeniem, aby zakończyć subskrypcję biuletynu"
+
+msgid "You have successfully subscribed to the newsletter"
+msgstr "Subskrybujesz newsletter"
+
+msgid "JS Help Desk Control Panel"
+msgstr "Panel sterowania JS Help Desk"
+
+msgid "System Error"
+msgstr "Błąd systemowy"
+
+msgid "User Fields"
+msgstr "Pola użytkownika"
+
+msgid "Ban list log"
+msgstr "Dziennik listy zakazów"
+
+msgid "Field Ordering"
+msgstr "Pole do kolejności"
+
+msgid "Post Installation"
+msgstr "Po instalacji"
+
+msgid "Premium Addon"
+msgstr "Dodatek premium"
+
+msgid "Sorry"
+msgstr "Przepraszam"
+
+msgid "No record found"
+msgstr "Nie znaleziono zapisów"
+
+msgid "Sorry!"
+msgstr "Przepraszam!"
+
+msgid "No record found ...!"
+msgstr "Nie znaleziona nagrania ...!"
+
+msgid "Access Denied"
+msgstr "Brak Dostępu"
+
+msgid "You have no permission to access this page"
+msgstr "Nie masz uprawnień dostępu do tej strony"
+
+msgid "User is not allowed to access this page."
+msgstr "Użytkownik nie ma dostępu do tej strony."
+
+msgid "You are already Logged In."
+msgstr "Jesteś już zalogowany."
+
+msgid "Access Denied!"
+msgstr "Brak dostępu!"
+
+msgid "Your account has been disabled, please contact the administrator."
+msgstr "Twoje konto zostało wyłączone, skontaktuj się z administratorem."
+
+msgid "You are not logged In"
+msgstr "Nie jesteś zalogowany"
+
+msgid "To access the page, Please login"
+msgstr "Aby uzyskać dostęp do strony, zaloguj się"
+
+msgid "Register"
+msgstr "Zarejestruj się"
+
+msgid "User is not allowed to view this Ticket"
+msgstr "Użytkownik nie może oglądać tego zgłoszenia"
+
+msgid ""
+"Registration has been disabled by admin, please contact the system "
+"administrator."
+msgstr ""
+"Rejestracja została wyłączona przez administratora, skontaktuj się z "
+"administratorem systemu."
+
+msgid "You have already given the feedback for this ticket."
+msgstr "Przekazałeś już informacje zwrotne dotyczące tego zgłoszenia."
+
+msgid "Ticket not found...!"
+msgstr "Nie znaleziono zgłoszenia...!"
+
+msgid "User is not allowed to view this page"
+msgstr "Użytkownik nie może przeglądać tej strony"
+
+msgid "Thank you so much for your feedback"
+msgstr "Dziękuję bardzo za opinie"
+
+msgid "Help Desk Pages"
+msgstr "Strony pomocy technicznej"
+
+msgid "Form submission failed!"
+msgstr "Przesyłanie formularza nie powiodło się!"
+
+msgid "You have not answered all required fields"
+msgstr "Nie odpowiedziałeś na wszystkie wymagane pola"
+
+msgid "You have not given a correct time"
+msgstr "Nie podałeś prawidłowego czasu"
+
+msgid "You have not given a correct e-mail address"
+msgstr "Nie podałeś prawidłowego adresu e-mail"
+
+msgid "You have not given a correct phone number"
+msgstr "Nie podałeś prawidłowego numeru telefonu"
+
+msgid "You have not given a correct answer to the security question"
+msgstr "Nie udzielono prawidłowej odpowiedzi na pytanie zabezpieczające"
+
+msgid "You have not given a correct date"
+msgstr "Nie podałeś prawidłowej daty"
+
+msgid "The input value must be between "
+msgstr "Wartość wejściowa musi być pomiędzy"
+
+msgid " characters"
+msgstr "postacie"
+
+msgid "The input value is longer than "
+msgstr "Wartość wejściowa jest dłuższa niż"
+
+msgid "The input value is shorter than "
+msgstr "Wartość wejściowa jest krótsza niż"
+
+msgid "Input values could not be confirmed"
+msgstr "Nie można potwierdzić wartości wejściowych"
+
+msgid "Incorrect domain value"
+msgstr "Niepoprawna wartość domeny"
+
+msgid "The input value is not a correct URL"
+msgstr "Wartość wejściowa nie jest poprawnym adresem URL"
+
+msgid "The input value is incorrect"
+msgstr "Wartość wejściowa jest niepoprawna"
+
+msgid "The input value was not a correct number"
+msgstr "Wartość wejściowa nie była poprawną liczbą"
+
+msgid "Your social security number was incorrect"
+msgstr "Twój numer ubezpieczenia społecznego był niepoprawny"
+
+msgid "Incorrect UK VAT Number"
+msgstr "Niepoprawny brytyjski numer VAT"
+
+msgid "The password isn't strong enough"
+msgstr "Hasło nie jest wystarczająco silne"
+
+msgid "You have to choose at least "
+msgstr "Musisz przynajmniej wybrać"
+
+msgid " answers"
+msgstr "odpowiedzi"
+
+msgid "The input value can only contain alphanumeric characters "
+msgstr "Wartość wejściowa może zawierać tylko znaki alfanumeryczne"
+
+msgid " and "
+msgstr "i"
+
+msgid "The file you are trying to upload is too large"
+msgstr "Plik, który próbujesz przesłać, jest za duży"
+
+msgid "The file you are trying to upload is of the wrong type"
+msgstr "Plik, który próbujesz przesłać, jest niewłaściwego typu"
+
+msgid "Please choose between "
+msgstr "Proszę wybrać pomiędzy"
+
+msgid "Please choose at least "
+msgstr "Proszę wybrać przynajmniej"
+
+msgid "Please choose a maximum of "
+msgstr "Wybierz maksymalnie"
+
+msgid "The credit card number is not correct"
+msgstr "Numer karty kredytowej jest nieprawidłowy"
+
+msgid "The CVV number was not correct"
+msgstr "Numer CVV był nieprawidłowy"
+
+msgid "Support"
+msgstr "Pomoc"
+
+msgid "Lost your password"
+msgstr "Zgubiłeś hasło"
+
+msgid "Pagination default page size not saved"
+msgstr "Domyślny rozmiar paginacji nie został zapisany"
+
+msgid "Data directory cannot empty."
+msgstr "Katalog danych nie może być pusty."
+
+msgid "Data directory is not proper."
+msgstr "Katalog data nie jest właściwy"
+
+msgid "Data directory is not writable."
+msgstr "Katalog danych nie jest zapisywalny."
+
+msgid "System slug not be empty."
+msgstr "Nazwa zastępcza nie może być pusta"
+
+msgid "System slug is conflicted with post or page slug."
+msgstr "Slug systemowy jest w konflikcie z zapisem postu lub strony."
+
+msgid "Days"
+msgstr "Dni"
+
+msgid "Hours"
+msgstr "Godziny"
+
+msgid "Own Captcha"
+msgstr "Własna captcha"
+
+msgid "Any"
+msgstr "Jakikolwiek"
+
+msgid "Addition"
+msgstr "Dodawanie"
+
+msgid "Subtraction"
+msgstr "Odejmowanie"
+
+msgid "Show"
+msgstr "Pokaż"
+
+msgid "Hide"
+msgstr "Ukryj"
+
+msgid "Default"
+msgstr "Domyślne"
+
+msgid "Custom"
+msgstr "Zwyczaj"
+
+msgid "Top left"
+msgstr "Górny lewy"
+
+msgid "Top right"
+msgstr "Górny prawy"
+
+msgid "Middle left"
+msgstr "Środek-lewo"
+
+msgid "Middle right"
+msgstr "Środek-prawo"
+
+msgid "Bottom left"
+msgstr "Dolny lewy"
+
+msgid "Bottom right"
+msgstr "Dolny prawy"
+
+msgid "Random"
+msgstr "Losowy"
+
+msgid "Sequence"
+msgstr "Sekwencja"
+
+msgid "General Settings"
+msgstr "Ustawienia główne"
+
+msgid "Ticket Settings"
+msgstr "Ustawienia zgłoszeń"
+
+msgid "Email Settings"
+msgstr "Ustawienia poczty e-mail"
+
+msgid "Agent Menu"
+msgstr "Menu agenta"
+
+msgid "User Menu"
+msgstr "Menu użytkownika"
+
+msgid "Push Notifications"
+msgstr "Powiadomienia push"
+
+msgid "Private Credentials"
+msgstr "Prywatne poświadczenia"
+
+msgid "Envato Validation"
+msgstr "Walidacja Envato"
+
+msgid "Easy Digital Downloads"
+msgstr "Łatwe cyfrowe pobieranie"
+
+msgid "Set the heading of your plugin"
+msgstr "Ustaw nagłówek dla swojego dodatku"
+
+msgid "Ticket Default Page"
+msgstr "Domyślna strona zgłoszenia"
+
+msgid "Select Page"
+msgstr "Wybierz stronę"
+
+msgid ""
+"Select JS Help Desk default page, on the action system, will redirect on the "
+"selected page. If not select the default page, email links, and support icon "
+"might not work."
+msgstr ""
+"Wybierz domyślną stronę JS Help Desk, w systemie akcji przekieruje na wybraną "
+"stronę. Jeśli nie, wybierz stronę domyślną, linki e-mail i ikona pomocy "
+"technicznej mogą nie działać."
+
+msgid "Support Icon"
+msgstr "Ikona pomocy technicznej"
+
+msgid "Screen Tag"
+msgstr "Tag Ekranowy"
+
+msgid "Enable / disable your support icon"
+msgstr "Włącz/Wyłącz ikonę supportu"
+
+msgid "Support Icon Position"
+msgstr "Pozycja ikony wsparcia"
+
+msgid "Screen Tag Position"
+msgstr "Pozycja Tagu Ekranowego"
+
+msgid "Select position for your support icon"
+msgstr "Wybierz pozycję ikony wsparcia"
+
+msgid "Set your plugin offline for front end"
+msgstr "Ustaw swój dodatek jako wyłączony dla front-endu"
+
+msgid "Offline Message"
+msgstr "Wiadomość o przerwie w godzinach pracy"
+
+msgid "Set the offline message for your user"
+msgstr "Ustaw wiadomość o przerwie w godzinach pracy dla użytkownika"
+
+msgid "Data Directory"
+msgstr "Katalog danych"
+
+msgid "Set the name for your data directory"
+msgstr "Ustaw nazwę dla swojego katalogu danych"
+
+msgid ""
+"You need to rename the existing data directory in the file system before "
+"changing the data directory name"
+msgstr ""
+"Przed zmianą nazwy katalogu danych należy zmienić nazwę istniejącego katalogu "
+"danych w systemie plików"
+
+msgid "Date Format"
+msgstr "Format danych"
+
+msgid "Set the default date format"
+msgstr "Ustaw format domyślny danych"
+
+msgid "Ticket auto close"
+msgstr "Automatyczne zamknięcie sprawy"
+
+msgid "Ticket auto-close if user does not respond within given days"
+msgstr ""
+"Automatyczne zamknięcie zgłoszenia, jeśli użytkownik nie odpowie w ciągu kilku "
+"dni"
+
+msgid "No. of attachment"
+msgstr "Liczba załączników"
+
+msgid "No. of attachment allowed at a time"
+msgstr "Liczba załączników dozwolona za jednym razem"
+
+msgid "File maximum size"
+msgstr "Maksymalny rozmiar pliku"
+
+msgid "File extension"
+msgstr "Rozszerzenie pliku"
+
+msgid "File extension allowed to attach"
+msgstr "Rozszerzenia plików dozwolonych do dołączenia"
+
+msgid "Pagination default page size"
+msgstr "Domyślny rozmiar strony w paginacji"
+
+msgid "Set the no. of record per page"
+msgstr "Ustaw liczbę rekordów na stronę"
+
+msgid "Breadcrumbs"
+msgstr "Okruszki"
+
+msgid "Show hide breadcrumbs"
+msgstr "Pokaż/ukryj okruszki"
+
+msgid "Show hide Top Header"
+msgstr "Pokaż ukryj górny nagłówek"
+
+msgid "Login redirect"
+msgstr "Przekierowanie logowania"
+
+msgid "Redirect user to JS Help Desk control panel after log in"
+msgstr "Po zalogowaniu przekieruj użytkownika do panelu sterowania JS Help Desk"
+
+msgid "Show count on my tickets"
+msgstr "Pokaż liczbę moich spraw"
+
+msgid "Show number of the open, closed, answered ticket in my ticket"
+msgstr ""
+"Pokaż numer otwartego, zamkniętego, odebranego zgłoszenia w moich zgłoszeniach"
+
+msgid "Show captcha on registration form"
+msgstr "Pokaż captcha w formularzu rejestracyjnym"
+
+msgid "Select whether you want to show captcha on the registration form or not"
+msgstr "Wybierz, czy chcesz pokazać captcha w formularzu rejestracyjnym, czy nie"
+
+msgid "Default wp role for new users"
+msgstr "Domyślna rola dla nowych użytkowników"
+
+msgid "Select the role you want to assign to new users"
+msgstr "Wybierz rolę, którą chcesz przypisać nowym użytkownikom"
+
+msgid "Set Login Link"
+msgstr "Ustaw link logowania"
+
+msgid "Set Login Link Default or Custom"
+msgstr "Ustaw link logowania domyślny lub niestandardowy"
+
+msgid "Ticketid sequence"
+msgstr "Sekwencja zgłoszeń"
+
+msgid "Set ticketid sequential or random"
+msgstr "Ustaw losowy sekwencyjny lub losowy"
+
+msgid "Ticket listing ordering"
+msgstr "Porządkowanie listy zgłoszeń"
+
+msgid "Set default ordering for ticket listing"
+msgstr "Ustaw domyślne porządkowanie listy zgłoszeń"
+
+msgid "Maximum tickets"
+msgstr "Maksymalna liczba spraw"
+
+msgid "Maximum ticket per user"
+msgstr "Maksymalna liczba spraw na użytkownika"
+
+msgid "Maximum open tickets"
+msgstr "Maksymalna liczba otwartych spraw"
+
+msgid "Maximum opened tickets per user"
+msgstr "Maksymalna liczba otwartych spraw na użytkownika"
+
+msgid "Reopen ticket within days"
+msgstr "Ponownie otwórz sprawę w ciągu okresu"
+
+msgid "The ticket can be reopened within a given number of days"
+msgstr "Zgłoszenie można ponownie otworzyć w ciągu określonej liczby dni"
+
+msgid "User can print ticket"
+msgstr "Użytkownik może drukować zgłoszenie"
+
+msgid "Can user print ticket from ticket detail or not"
+msgstr "Czy użytkownik może drukować sprawę ze szczegółów sprawy"
+
+msgid "Show captcha on the visitor ticket form"
+msgstr "Pokaż captcha na formularzu zgłoszenia dla gości"
+
+msgid "Show captcha when a visitor wants to create a ticket"
+msgstr "Pokaż captcha, gdy odwiedzający chce utworzyć zgłoszenie"
+
+msgid "Captcha selection"
+msgstr "Wybór captcha"
+
+msgid "Which captcha you want to add"
+msgstr "Jakiego captcha chcesz użyć"
+
+msgid "Google recaptcha public key"
+msgstr "Publiczny klucz Google recatpcha"
+
+msgid "Please enter the google re-captcha public key from"
+msgstr "Wprowadź klucz publiczny Google re-captcha z"
+
+msgid "Google recaptcha private key"
+msgstr "Prywatny klucz Google recatpcha"
+
+msgid "Please enter the google re-captcha private key from"
+msgstr "Wprowadź klucz prywatny Google re-captcha z"
+
+msgid "Own captcha calculation type"
+msgstr "Rodzaj obliczeń własnego captcha"
+
+msgid "Select calculation type addition or subtraction"
+msgstr "Wybierz rodzaj: dodawanie lub odejmowanie"
+
+msgid "Own captcha operands"
+msgstr "Liczby własnego captcha"
+
+msgid "Select the total operands to be given"
+msgstr "Podaj wynik równania"
+
+msgid "Own captcha subtraction answer positive"
+msgstr "Wynik odejmowania prawidłowy"
+
+msgid "Is subtraction answer should be positive"
+msgstr "W odejmowaniu odpowiedź powinna być dodatnia"
+
+msgid "New ticket message"
+msgstr "Nowa wiadomość w sprawie"
+
+msgid "This message will show on the new ticket"
+msgstr "Ta wiadomość pojawi się na nowym bilecie"
+
+msgid "Allow Users To Reply via Email On Closed Ticket"
+msgstr "Zezwalaj użytkownikom na odpowiadanie przez e-mail na zamkniętym bilecie"
+
+msgid "Select whether users can reply to closed email piping ticket or not"
+msgstr ""
+"Wybierz, czy użytkownicy mogą odpowiadać na zamknięte zgłoszenia wysyłania "
+"wiadomości e-mail, czy nie"
+
+msgid "Visitor can create ticket"
+msgstr "Gość może otworzyć sprawę"
+
+msgid "Can visitor create ticket or not"
+msgstr "Czy gość może lub nie otworzyć sprawę"
+
+msgid "Visitor ticket creation message"
+msgstr "Treść utworzonego zgłoszenia przez gościa"
+
+msgid "This text will appear whenever a visitor creates a ticket"
+msgstr "Ten tekst pojawi się za każdym razem, gdy użytkownik utworzy zgłoszenie"
+
+msgid "Default alert email"
+msgstr "Domyślny email powiadomienia"
+
+msgid ""
+"If ticket department email is not selected then this email is used to send "
+"emails"
+msgstr ""
+"Jeśli email działu dla sprawy nie jest wybrany wtedy ten email będzie użyty do "
+"wysyłania maili"
+
+msgid "Default admin email"
+msgstr "Domyślny email administratora"
+
+msgid "Admin email address to receive emails"
+msgstr "Adres email administratora do odbierania emaili"
+
+msgid "Add New Email"
+msgstr "Dodaj nowy e-mail"
+
+msgid "Ban Email New Ticket"
+msgstr "Zablokuj nowe zgłoszenie"
+
+msgid "Mail to admin"
+msgstr "Wyślij wiadomość do admina"
+
+msgid "Email sends to admin when banned email try to create a ticket"
+msgstr ""
+"Wiadomość e-mail jest wysyłana do administratora, gdy zablokowany adres  e-"
+"mail próbuje utworzyć zgłoszenie"
+
+msgid "Ticket Operations Email Setting"
+msgstr "Ustawienia e-mail dotyczące operacji zgłoszeń"
+
+msgid "New ticket"
+msgstr "Nowa sprawa"
+
+msgid "Ticket reassign"
+msgstr "Przekazanie sprawy"
+
+msgid "Ticket close"
+msgstr "Zamknięcie sprawy"
+
+msgid "Ticket delete"
+msgstr "Usunięcie sprawy"
+
+msgid "Ticket ban email"
+msgstr "Zbanowanie emaila sprawy"
+
+msgid "Ticket department transfer"
+msgstr "Transfer sprawy do innego departamentu"
+
+msgid "Ticket reply User"
+msgstr "Odpowiedź użytkownika"
+
+msgid "Ticket Response Agent"
+msgstr "Agent odpowiedzi na zgłoszenie"
+
+msgid "Ticket ban email and close ticket"
+msgstr "Email od zabanowaniu maila i zamknięciu sprawy"
+
+msgid "Ticket unban email"
+msgstr "Email o usunięciu bana z maila"
+
+msgid "Ticket lock"
+msgstr "Blokuj zgłoszenie"
+
+msgid "Ticket unlock"
+msgstr "Odblokuj zgłoszenie"
+
+msgid "Ticket Change Priority"
+msgstr "Priorytet zmiany zgłoszenia"
+
+msgid "Mark Ticket In Progress"
+msgstr "Oznacz wątek jako w trakcie"
+
+msgid "Reply To A Closed Ticket By Email"
+msgstr "Odpowiedz na zamknięte zgłoszenie przez e-mail"
+
+msgid "Send Feedback Email To User"
+msgstr "Wyślij wiadomość zwrotną do użytkownika"
+
+msgid "Dashboard Links"
+msgstr "Linki do deski rozdzielczej"
+
+msgid "Open Ticket"
+msgstr "Otwarta sprawa"
+
+msgid "Department reports"
+msgstr "Raporty działu"
+
+msgid "Login/Logout Button"
+msgstr "Przycisk Zaloguj/Wyloguj"
+
+msgid "Ticket Total Count"
+msgstr "Łączna liczba zgłoszeń"
+
+msgid "Ticket Statistics"
+msgstr "Statystyka zgłoszeń"
+
+msgid "Erase Agent Data"
+msgstr "Usuń dane agenta"
+
+msgid "Top Menu Links"
+msgstr "Linki do górnego menu"
+
+msgid "Home"
+msgstr "Strona główna"
+
+msgid "Check Ticket Status"
+msgstr "Sprawdź status sprawy"
+
+msgid "Registration"
+msgstr "Rejestracja"
+
+msgid "Erase User Data"
+msgstr "Usuń dane użytkownika"
+
+msgid "Feedback Settings"
+msgstr "Ustawienia opinii"
+
+msgid "Feedback Email Delay Type"
+msgstr "E-mail zwrotny Typ opóźnienia"
+
+msgid "Select delay type for feedback email"
+msgstr "Wybierz typ opóźnienia dla wiadomości zwrotnej"
+
+msgid "Feedback Email Delay"
+msgstr "Opóźnienie e-maila zwrotnego"
+
+msgid "Set no. of days or hours to send feedback email after a ticket is closed"
+msgstr ""
+"Ustaw liczbę dni lub godzin na wysłanie wiadomości zwrotnej po zamknięciu "
+"zgłoszenia"
+
+msgid "Success message after submitting feedback"
+msgstr "Komunikat o sukcesie po przesłaniu opinii"
+
+msgid "This text will appear whenever anyone submits feedback"
+msgstr "Ten tekst będzie wyświetlany za każdym razem, gdy ktoś prześle opinię"
+
+msgid "UTF Auto Switch"
+msgstr "Automatyczny przełącznik UTF"
+
+msgid "Firebase Notifications"
+msgstr "Powiadomienia Firebase"
+
+msgid ""
+"JS Help Desk Desktop Notifications plugin is not installed. Please install the "
+"plugin to enable desktop notifications"
+msgstr ""
+"Wtyczka JS Help Desk Desktop Notifications nie jest zainstalowana. Zainstaluj "
+"wtyczkę, aby włączyć powiadomienia na pulpicie"
+
+msgid "Click here to insert Install."
+msgstr "Kliknij tutaj, aby wstawić Zainstaluj."
+
+msgid "JS Help Desk Desktop Notifications plugin is not active."
+msgstr "Wtyczka JS Help Desk Desktop Notifications nie jest aktywna."
+
+msgid "Find and add firebase api's keys"
+msgstr "Znajdź i dodaj klucze interfejsu firebase"
+
+msgid "Click here to get firebae api keys."
+msgstr "Kliknij tutaj, aby uzyskać klucze api Firebase."
+
+msgid "API key for user"
+msgstr "Klucz API dla użytkownika"
+
+msgid "Firebase api key for front user"
+msgstr "Klucz API Firebase dla użytkownika frontowego"
+
+msgid "Auth Domain"
+msgstr "Domena autoryzacji"
+
+msgid "Firebase Auth Domain"
+msgstr "Domena uwierzytelniania Firebase"
+
+msgid "Database Url"
+msgstr "Adres URL bazy danych"
+
+msgid "Firebase Database URL"
+msgstr "Adres URL bazy danych Firebase"
+
+msgid "Project Id"
+msgstr "ID projektu"
+
+msgid "Firebase Project Id"
+msgstr "Identyfikator projektu Firebase"
+
+msgid "Bucket Storage"
+msgstr "Przechowywanie wiader"
+
+msgid "Message Sender Id"
+msgstr "Identyfikator nadawcy wiadomości"
+
+msgid "Firebase Message Sender Id"
+msgstr "Identyfikator nadawcy wiadomości Firebase"
+
+msgid "Private Server Key"
+msgstr "Klucz prywatnego serwera"
+
+msgid "Firebase Server Key"
+msgstr "Klucz serwera Firebase"
+
+msgid "Logo Image for Desktop Notifications"
+msgstr "Obraz logo dla powiadomień na pulpicie"
+
+msgid "Remove Image"
+msgstr "Usuń obraz"
+
+msgid "Remove Logo"
+msgstr "Usuń logo"
+
+msgid "No Firebase Notificaiton Logo"
+msgstr "Brak logo powiadomienia Firebase"
+
+msgid "Secret Key"
+msgstr "Sekretny klucz"
+
+msgid "Second Level Security"
+msgstr "Bezpieczeństwo drugiego poziomu"
+
+msgid "For enhanced security change encryption method in %s on line %s"
+msgstr "Dla metody szyfrowania ulepszonych zmian bezpieczeństwa w% s on line% s"
+
+msgid "Api Key"
+msgstr "Klucz API"
+
+msgid "Enter Envato api key "
+msgstr "Wprowadź klucz API Envato"
+
+msgid "Click here to generate an api key"
+msgstr "Kliknij tutaj, aby wygenerować klucz API"
+
+msgid "License Mandatory"
+msgstr "Licencja obowiązkowa"
+
+msgid ""
+"Prevent users from submitting a ticket without a valid license for one of your "
+"product"
+msgstr ""
+"Zapobiegaj przesyłaniu zgłoszenia przez użytkowników bez ważnej licencji na "
+"jeden z twoich produktów"
+
+msgid "Product ID"
+msgstr "ID produktu"
+
+msgid "A comma-separated list of Envato product ids"
+msgstr "Rozdzielona przecinkami lista identyfikatorów produktów Envato"
+
+msgid "Enter MailChimp API key "
+msgstr "Wprowadź klucz API MailChimp"
+
+msgid "Audience ID"
+msgstr "ID odbiorcy"
+
+msgid "Find Audience ID in your MailChimp account"
+msgstr "Znajdź identyfikator odbiorcy na swoim koncie MailChimp"
+
+msgid "Enable double opt-in"
+msgstr "Włącz podwójne opt-in"
+
+msgid "You must also enable double opt-in in your MailChimp account"
+msgstr "Musisz także włączyć podwójną zgodę na swoim koncie MailChimp"
+
+msgid "Welcome email"
+msgstr "Powitalny e-mail"
+
+msgid "You can enable Final Welcome Email in your MailChimp account"
+msgstr "Możesz włączyć końcową wiadomość powitalną na swoim koncie MailChimp"
+
+msgid "Verify License On Ticket Creation"
+msgstr "Zweryfikuj licencję na tworzenie zgłoszeń"
+
+msgid "Save Configurations"
+msgstr "Zapisz konfiguracje"
+
+msgid "Ticket via email"
+msgstr "Zgłoszenie przez e-mail"
+
+msgid "OR"
+msgstr "LUB"
+
+msgid "Sorry the cron job didnot work"
+msgstr "Przepraszamy, zadanie cron nie zostało wykonane"
+
+msgid "Update ticket status"
+msgstr "Zaktualizuj status zgłoszenia"
+
+msgid "Recommended run script daily"
+msgstr "Zalecany codzienny skrypt uruchamiania"
+
+msgid "You cannot use this email, it is used in email piping"
+msgstr ""
+"Nie możesz użyć tego e-maila, jest on używany w przesyłaniu wiadomości e-mail"
+
+msgid "The department has been stored"
+msgstr "Dział został zapisany"
+
+msgid "The department has not been stored"
+msgstr "Departament nie został zapisany"
+
+msgid "The department has been deleted"
+msgstr "Dział został usunięty"
+
+msgid "The department has not been deleted"
+msgstr "Dział nie został usunięty"
+
+msgid "The department in use cannot be delete"
+msgstr "Używanego działu nie można usunąć"
+
+msgid "default has been changed"
+msgstr "domyślne zostały zmienione"
+
+msgid "default has not been changed"
+msgstr "nie zmieniono domyślnych"
+
+msgid "No Record Found"
+msgstr "Nie znaleziona nagrania"
+
+msgid "Outgoing Email"
+msgstr "Mail wychodzący"
+
+msgid "Select Email"
+msgstr "Wybierz Email"
+
+msgid "Tickets of this department will receive emails from this email"
+msgstr ""
+"Zgłoszenia należące do tego działu otrzymają wiadomości z tego adresu e-maila"
+
+msgid "Receive Email"
+msgstr "Odbierz E-maila"
+
+msgid "Save Department"
+msgstr "Zachowaj dział"
+
+msgid "The user of this department will receive email on the new ticket"
+msgstr "Użytkownik tego działu otrzyma wiadomość e-mail z nowym zgłoszeniem"
+
+msgid "Are you sure you want to delete it?"
+msgstr "Czy na pewno chcesz go usunąć?"
+
+msgid "Search Departments"
+msgstr "Szukaj działów"
+
+msgid "Outgoing"
+msgstr "Towarzyski"
+
+msgid "Click here to give us feedback"
+msgstr "Kliknij tutaj, aby przekazać nam swoją opinię"
+
+msgid "Email Already Exist"
+msgstr "E-mail już istnieje"
+
+msgid "The email has been stored"
+msgstr "E-mail został zapisany"
+
+msgid "The email has not been stored"
+msgstr "E-mail nie został zapisany"
+
+msgid "False"
+msgstr "Fałszywe"
+
+msgid "True"
+msgstr "Prawdziwe"
+
+msgid "Send Email By"
+msgstr "Wyślij e-mail przez"
+
+msgid "SMTP host type"
+msgstr "Typ hosta SMTP"
+
+msgid "SMTP host"
+msgstr "Host SMTP"
+
+msgid "SMTP Authentication"
+msgstr "Uwierzytelnianie SMTP"
+
+msgid "SMTP Port"
+msgstr "Port SMTP"
+
+msgid "If the system doesnot respond in 30 seconds"
+msgstr "Jeśli system nie zareaguje w ciągu 30 sekund"
+
+msgid "Auto Response"
+msgstr "Autoodpowiedź"
+
+msgid "Save Email"
+msgstr "Zapisz email"
+
+msgid "info"
+msgstr "informacje"
+
+msgid "System email used for sending email"
+msgstr "Email systemowy użyty do wysłania maili"
+
+msgid "Email template has been stored"
+msgstr "Szablon maila został zapisany"
+
+msgid "Email template has not been stored"
+msgstr "Szablon maila nie został zapisany"
+
+msgid "Ban Email Try To Create Ticket"
+msgstr "Zablokuj email próbujący utworzyć zgłoszenie"
+
+msgid "Ticket Priority Is Changed By"
+msgstr "Priorytet sprawy zmieniony"
+
+msgid "Data Deleted"
+msgstr "Dane usunięte"
+
+msgid "Body"
+msgstr "Treść"
+
+msgid "Parameters"
+msgstr "Parametry"
+
+msgid "Tracking ID"
+msgstr "ID śledzenia"
+
+msgid "Ticket URL"
+msgstr "URL sprawy"
+
+msgid "Ticket Priority"
+msgstr "Priorytet zgłoszenia"
+
+msgid "Department title"
+msgstr "Nazwa departamentu"
+
+msgid "Group Title"
+msgstr "Nazwa grupy"
+
+msgid "Agent name"
+msgstr "Imię agenta"
+
+msgid "Help topic title"
+msgstr "Tytuł tematu pomocy"
+
+msgid "Feedback URL"
+msgstr "Adres URL opinii"
+
+msgid "Ticket Subject"
+msgstr "Temat zgłoszenia"
+
+msgid "Ticket Tracking ID"
+msgstr "ID zgłoszenia"
+
+msgid "Close Date"
+msgstr "Data zamknięcia"
+
+msgid "Save Email Template"
+msgstr "Zapisz szablon e-maila"
+
+msgid "Field mark as published"
+msgstr "Zaznacz jako opublikowane"
+
+msgid "Field mark as unpublished"
+msgstr "Zaznacz jako nie opublikowane"
+
+msgid "Field mark as required"
+msgstr "Zaznacz jako wymagane"
+
+msgid "Field mark as not required"
+msgstr "Zaznacz jako nie wymagane"
+
+msgid "Field ordering down"
+msgstr "Zaznacz jako sortowanie w dół"
+
+msgid "Field ordering up"
+msgstr "Zaznacz jako sortowanie w górę"
+
+msgid "Parent field has not been stored"
+msgstr "Pole nadrzędne nie zostało zapisane"
+
+msgid "Please Insert At least one value for every option"
+msgstr "Proszę wstawić przynajmniej jedną wartość dla każdej opcji"
+
+msgid "Field has not been stored"
+msgstr "Pole nie zapisane"
+
+msgid "Field has been stored"
+msgstr "Pole zostało zapisane"
+
+msgid "Field has been updated"
+msgstr "Pole zostało zaktualizowane"
+
+msgid "Parent Field"
+msgstr "Pole rodzica"
+
+msgid "Edit Field"
+msgstr "Edytuj pole"
+
+msgid "Field Title"
+msgstr "Pole tytułu"
+
+msgid "User Published"
+msgstr "Opublikowane przez użytkownika"
+
+msgid "Visitor Published"
+msgstr "Odwiedzający opublikowany"
+
+msgid "Required"
+msgstr "Wymagany"
+
+msgid "User Search"
+msgstr "Wyszukiwanie użytkownika"
+
+msgid "Visitor Search"
+msgstr "Wyszukiwanie odwiedzających"
+
+msgid "Show On Listing"
+msgstr "Pokaż na liście"
+
+msgid "Advanced"
+msgstr "Zawansowane"
+
+msgid "Field has not been deleted"
+msgstr "Pole nie zostało usunięte"
+
+msgid "Field has been deleted"
+msgstr "Pole zostało usunięte"
+
+msgid "Add Field"
+msgstr "Dodaj pole"
+
+msgid "Field"
+msgstr "Pole"
+
+msgid "Text Field"
+msgstr "Pole tekstowe"
+
+msgid "Check Box"
+msgstr "Pole wyboru"
+
+msgid "Drop Down"
+msgstr "Upuścić"
+
+msgid "Text Area"
+msgstr "Obszar tekstowy"
+
+msgid "Radio Button"
+msgstr "Przycisk radiowy"
+
+msgid "Upload File"
+msgstr "Przesyłanie pliku"
+
+msgid "Multi Select"
+msgstr "Wielokrotny wybór"
+
+msgid "Terms and Conditions"
+msgstr "Zasady i warunki"
+
+msgid "Dependent Field"
+msgstr "Pole zależne"
+
+msgid "Field Type"
+msgstr "Pole rodzaju"
+
+msgid "Field Size"
+msgstr "Pole rozmiaru"
+
+msgid "Max Length"
+msgstr "Maksymalna długość"
+
+msgid "Columns"
+msgstr "Kolumny"
+
+msgid "Rows"
+msgstr "Rzędy"
+
+msgid "Use the table below to add new values"
+msgstr "Skorzystaj z poniższej tabeli, aby dodać nowe wartości"
+
+msgid "Add Value"
+msgstr "Dodaj wartość"
+
+msgid "Terms and Conditions Text"
+msgstr "Warunki ogólne Tekst"
+
+msgid "Terms and Conditions Link Type"
+msgstr "Warunki i zasady Typ linku"
+
+msgid "Direct Link"
+msgstr "Link bezpośredni"
+
+msgid "Wordpress Page"
+msgstr "Strona Wordpress"
+
+msgid "Select Link Type"
+msgstr "Wybierz typ łącza"
+
+msgid "Terms and Conditions Link"
+msgstr "Regulamin Warunki Link"
+
+msgid "Terms and Conditions Page"
+msgstr "Regulamin strony"
+
+msgid "Select Wordpress page"
+msgstr "Wybierz stronę Wordpress"
+
+msgid "Save Field"
+msgstr "Zapisz pole"
+
+msgid "S.No"
+msgstr "Numer S."
+
+msgid "User Publish"
+msgstr "Publikuj użytkownika"
+
+msgid "Visitor Publish"
+msgstr "Publikuj odwiedzający"
+
+msgid "Published"
+msgstr "Opublikowany"
+
+msgid "Unpublished"
+msgstr "Publikacja wycofana"
+
+msgid "Not required"
+msgstr "Nie wymagane"
+
+msgid "users popup"
+msgstr "wyskakujące okienka użytkowników"
+
+msgid "Can Not Unpublished"
+msgstr "Nie można opublikować"
+
+msgid "good"
+msgstr "dobrze"
+
+msgid "cross"
+msgstr "krzyż"
+
+msgid "can not mark as not required"
+msgstr "nie można oznaczyć jako nie wymagane"
+
+msgid "Cannot unpublished field"
+msgstr "Nie można opublikować niepublikowanego pola"
+
+msgid "User Data"
+msgstr "Dane użytkownika"
+
+msgid "Erasing data request has been stored"
+msgstr "Kasowanie żądania danych zostało zapisane"
+
+msgid "Failed while storing"
+msgstr "Błąd podczas przechowywania"
+
+msgid "Erase data request withdrawn"
+msgstr "Usunięto żądanie usunięcia danych"
+
+msgid "Failed while performing action"
+msgstr "Błąd podczas wykonywania akcji"
+
+msgid "User identifying data erased"
+msgstr "Dane identyfikujące użytkownika zostały usunięte"
+
+msgid "User data Deleted"
+msgstr "Dane użytkownika zostały usunięte"
+
+msgid "Export your data"
+msgstr "Eksportuj swoje dane"
+
+msgid "You have filed a request to remove your data."
+msgstr "Złożyłeś wniosek o usunięcie swoich danych."
+
+msgid "To withdraw erases data request"
+msgstr "Wycofanie powoduje usunięcie żądania danych"
+
+msgid "Request data removal from the system."
+msgstr "Poproś o usunięcie danych z systemu."
+
+msgid "Add GDPR Field"
+msgstr "Dodaj pole RODO"
+
+msgid "Field Text"
+msgstr "Tekst pola"
+
+msgid "Link Type"
+msgstr "Typ linku"
+
+msgid "Link Page"
+msgstr "Link do strony"
+
+msgid "User Email"
+msgstr "E-mail użytkownika"
+
+msgid "Request Status"
+msgstr "Zapytaj o status"
+
+msgid "Awaiting response"
+msgstr "Czekając na odpowiedź"
+
+msgid "Erased identifying data"
+msgstr "Usunięto dane identyfikujące"
+
+msgid "Deleted"
+msgstr "Usunięte"
+
+msgid "Erase identifying data"
+msgstr "Usuń dane identyfikacyjne"
+
+msgid "Are you sure to erase identifying data"
+msgstr "Czy na pewno chcesz usunąć dane identyfikacyjne?"
+
+msgid "Delete data"
+msgstr "Usunąć dane"
+
+msgid "Link"
+msgstr "Połączyć"
+
+msgid "Direct URL"
+msgstr "Bezpośredni adres URL"
+
+msgid "Page Title or URL"
+msgstr "Tytuł strony lub adres URL"
+
+msgid "Cannot open file"
+msgstr "Nie można otworzyć pliku"
+
+msgid "Dir is not writable"
+msgstr "Dir nie jest zapisywalny"
+
+msgid "Unable to connect to the server"
+msgstr "Nie można połączyć się z serwerem"
+
+msgid "Language is not installed"
+msgstr "Język Jest niezainstalowany"
+
+msgid "Language directory is not writable"
+msgstr "Katalogu językowego nie można zapisywać"
+
+msgid "Required language is not installed but similar language like"
+msgstr "Wymagany język nie jest zainstalowany, ale podobny podobny język"
+
+msgid "is found in your system"
+msgstr "znaleziono w twoim systemie"
+
+msgid "Language code"
+msgstr "Kod języka"
+
+msgid "Empty values"
+msgstr "Puste wartości"
+
+msgid "File is not writable"
+msgstr "Pliku nie można zapisać"
+
+msgid "File successfully downloaded"
+msgstr "Plik został pobrany"
+
+msgid "Ordering updated"
+msgstr "Zamawianie zaktualizowane"
+
+msgid "Plugin Detail"
+msgstr "Szczegóły wtyczki"
+
+msgid "Plugin for online JS Help Desk System"
+msgstr "Wtyczka do systemu JS Help Desk"
+
+msgid "Created By"
+msgstr "Stworzony przez"
+
+msgid "Company"
+msgstr "Firma"
+
+msgid "Plugin Name"
+msgstr "Nazwa wtyczki"
+
+msgid "job plugin"
+msgstr "wtyczka pracy"
+
+msgid "vehicle manager"
+msgstr "kierownik pojazdu"
+
+msgid "lms plugin"
+msgstr "wtyczka lms"
+
+msgid "car manager"
+msgstr "kierownik samochodu"
+
+msgid "job manager"
+msgstr "kierownik pracy"
+
+msgid "Statistics"
+msgstr "Statystyki"
+
+msgid "Today Tickets"
+msgstr "Dzisiejsze zgłoszenia"
+
+msgid "Short Links"
+msgstr "Krótkie linki"
+
+msgid "Overall Report"
+msgstr "Raport ogólny"
+
+msgid "email template"
+msgstr "szablon wiadomości e-mail"
+
+msgid "Install Now"
+msgstr "Zainstaluj teraz"
+
+msgid "Premium Addons List"
+msgstr "Lista rozszerzeń premium"
+
+msgid "Features"
+msgstr "Funkcjonalności"
+
+msgid "The best support system plugin for WordPress has everything you need."
+msgstr ""
+"Najlepsza wtyczka systemu wsparcia dla WordPress ma wszystko, czego "
+"potrzebujesz."
+
+msgid "Add-Ons List"
+msgstr "Lista dodatków"
+
+msgid "Add New Addons"
+msgstr "Dodaj nowe dodatki"
+
+msgid "addon"
+msgstr "dodatek"
+
+msgid "View All Tickets"
+msgstr "Zobacz wszystkie zgłoszenia"
+
+msgid "Waiting Agent Reply"
+msgstr "Odpowiedź agenta oczekującego"
+
+msgid "Waiting Your Reply"
+msgstr "Oczekiwanie na Twoją odpowiedź"
+
+msgid "Ticket History"
+msgstr "Historia sprawy"
+
+msgid "Addons"
+msgstr "Dodatki"
+
+msgid "Add agents and assign roles and permissions to provide assistance."
+msgstr "Dodaj agentów i przypisz role i uprawnienia, aby zapewnić pomoc."
+
+msgid "Ticket Auto Close"
+msgstr "Automatyczne zamykanie zgłoszeń"
+
+msgid ""
+"Define rules for the ticket to auto-close after a specific interval of time."
+msgstr ""
+"Zdefiniuj reguły automatycznego zamykania zgłoszenia po upływie określonego "
+"czasu."
+
+msgid "Get a survey from customers on ticket closing to improve quality."
+msgstr ""
+"Uzyskaj ankietę od klientów na temat zamykania zgłoszeń, aby poprawić jakość."
+
+msgid "Help users to find and select the area with which they need assistance."
+msgstr "Pomóż użytkownikom znaleźć i wybrać obszar, w którym potrzebują pomocy."
+
+msgid "Private Note"
+msgstr "Prywatna notatka"
+
+msgid ""
+"The private note is used as reminders or to give other agents insights into "
+"the ticket issue."
+msgstr ""
+"Prywatna notatka służy jako przypomnienie lub umożliwia innym agentom wgląd w "
+"zgłoszenie"
+
+msgid ""
+"Stop losing productivity on repetitive queries, build your knowledge base."
+msgstr ""
+"Przestań tracić produktywność powtarzających się zapytań, zbuduj bazę wiedzy."
+
+msgid "Max Ticket"
+msgstr "Max zgłoszenia"
+
+msgid "Max Tickets"
+msgstr "Maksimum zgłoszeń"
+
+msgid ""
+"Enables admin to set N numbers of tickets for users and agents separately."
+msgstr ""
+"Umożliwia administratorowi osobne ustawienie N liczby zgłoszeń dla "
+"użytkowników i agentów."
+
+msgid "Merge Tickets"
+msgstr "Scal zgłoszenia"
+
+msgid ""
+"Enables agents to merge two tickets of the same user into one instead of "
+"dealing with the same issue on many tickets."
+msgstr ""
+"Umożliwia agentom scalenie dwóch zgłoszeń tego samego użytkownika w jedno, "
+"zapobiega zajmowanie się tym samym problemem na wielu zgłoszeniach ."
+
+msgid ""
+"Defines rules or set specific intervals of time to make ticket auto overdue."
+"The ticket can overdue by type or overdue by Cronjob."
+msgstr ""
+"Określa reguły lub ustawia określone przedziały czasu, aby zgłoszenie było "
+"automatycznie opóźnione. Zgłoszenia może być opóźniony według typu lub "
+"opóźnione przez Cronjob."
+
+msgid ""
+"SMTP enables you to add custom mail protocol to send and receive emails within "
+"the js help desk."
+msgstr ""
+"SMTP umożliwia dodawanie niestandardowego protokołu pocztowego do wysyłania i "
+"odbierania wiadomości e-mail w pomocy technicznej js."
+
+msgid ""
+"Displays complete ticket history along with the ticket status, currently "
+"assigned user and other actions performed on each ticket."
+msgstr ""
+"Wyświetla pełną historię zgłoszeń wraz ze statusem zgłoszeń, aktualnie "
+"przypisanym użytkownikiem i innymi czynnościami wykonywanymi na każdym "
+"zgłoszeniu."
+
+msgid "Pre-populated messages allow support agents to respond quickly."
+msgstr ""
+"Wstępnie wypełnione wiadomości umożliwiają agentom wsparcia szybką odpowiedź."
+
+msgid "Enables users to reply to the tickets via email without login."
+msgstr ""
+"Umożliwia użytkownikom odpowiadanie na zgłoszenia pocztą elektroniczną bez "
+"logowania."
+
+msgid "Time Tracking"
+msgstr "Śledzenie czasu"
+
+msgid ""
+"Track the time spent on each ticket by each agent and each reply. Report the "
+"admin on how much time is spent on each ticket."
+msgstr ""
+"Śledź czas spędzony na każdym zgłoszeniu przez każdego agenta i każdą "
+"odpowiedź. Zgłoś administratorowi, ile czasu zajmuje każde zgłoszenie."
+
+msgid "User Options"
+msgstr "Opcje użytkownika"
+
+msgid ""
+"User options enable you to add Google Re-captcha or JS Help Desk Re-captcha "
+"for a registration form."
+msgstr ""
+"Opcje użytkownika umożliwiają dodanie Google Re-captcha lub JS Help Desk Re-"
+"captcha do formularza rejestracyjnego."
+
+msgid "Actions"
+msgstr "działania"
+
+msgid "Ticket Actions"
+msgstr "Akcje na zgłoszeniach"
+
+msgid ""
+"Get multiple action options on each ticket like Print Ticket, Lock Ticket, "
+"Transfer ticket, etc."
+msgstr ""
+"Uzyskaj wiele opcji akcji dla każdego zgłoszenia, takich jak 'Drukuj "
+"zgłoszenie', 'Zablokuj zgłoszenie', 'Transferuj zgłoszenie' itp."
+
+msgid "Make unlimited announcements associated with the support system."
+msgstr "Dokonuj nieograniczonych ogłoszeń związanych z systemem wsparcia."
+
+msgid ""
+"It allows you to block the email of any user to restrict him to create new "
+"tickets."
+msgstr ""
+"Pozwala zablokować adres e-mail dowolnego użytkownika, aby ograniczyć mu "
+"tworzenie nowych zgłoszeń."
+
+msgid "Desktop Notification"
+msgstr "Powiadomienie na pulpicie"
+
+msgid ""
+"The Desktop notifications will keep you up to date about anything happens on "
+"your support system."
+msgstr ""
+"Powiadomienia na pulpicie informują Cię na bieżąco o wszystkim, co dzieje się "
+"w twoim systemie wsparcia."
+
+msgid "Save the ticket as a PDF in your system and able to export all data."
+msgstr ""
+"Zapisz zgłoszenie jako plik PDF w swoim systemie i wyeksportuj wszystkie dane."
+
+msgid "Create downloads to ensure the user to get downloads from downloads."
+msgstr ""
+"Twórz pliki do pobrania, aby zapewnić użytkownikom pobieranie plików z plików "
+"do pobrania."
+
+msgid "Add FAQs to drastically reduce the number of common questions."
+msgstr ""
+"Dodaj często zadawane pytania, aby radykalnie zmniejszyć liczbę typowych pytań."
+
+msgid ""
+"Get multiple themes with a beautiful color scheme to make the site beautiful."
+msgstr ""
+"Uzyskaj wiele motywów z pięknym schematem kolorów, aby strona była piękna."
+
+msgid "Dashboard Widgets"
+msgstr "Widżety na pulpicie nawigacyjnym"
+
+msgid ""
+"Get immediate data of your support operations as soon as you log into your "
+"WordPress administration area."
+msgstr ""
+"Uzyskaj natychmiastowe dane dotyczące operacji wsparcia, jak tylko zalogujesz "
+"się do obszaru administracyjnego WordPress."
+
+msgid "Internal Mail"
+msgstr "Wewnętrzny mail"
+
+msgid "Use an internal email to send emails to one agent to another agent."
+msgstr ""
+"Użyj wewnętrznej wiadomości e-mail, aby wysłać wiadomości e-mail do jednego "
+"agenta do innego agenta."
+
+msgid "Front-End Widgets"
+msgstr "Widżety front-end"
+
+msgid ""
+"Widgets in WordPress allow you to add content and features in the widgetized "
+"areas of your theme."
+msgstr ""
+"Widżety w WordPressie umożliwiają dodawanie treści i funkcji do "
+"widgetizowanych obszarów motywu."
+
+msgid ""
+"JS Help Desk WooCommerce provides the much-needed bridge between your "
+"WooCommerce store and the JS Help Desk."
+msgstr ""
+"JS Help Desk WooCommerce zapewnia bardzo potrzebny pomost między Twoim sklepem "
+"WooCommerce a JS Help Desk."
+
+msgid ""
+"Collect your customer's private data, sensitive information from credit card "
+"to health information and store them encrypted."
+msgstr ""
+"Zbieraj prywatne dane klienta, wrażliwe informacje od karty kredytowej po "
+"informacje zdrowotne i przechowuj je w postaci zaszyfrowanej."
+
+msgid "Without valid Envato, license clients won't be able to open a new ticket."
+msgstr ""
+"Bez ważnego klucza licencji Envato nie będzie można utworzyć nowych zgłoszeń."
+
+msgid ""
+"Adds the option to the registration form for prompting new users to subscribe "
+"to your email list."
+msgstr ""
+"Dodaje opcję do formularza rejestracyjnego, aby zachęcić nowych użytkowników "
+"do subskrypcji Twojej listy e-mail."
+
+msgid ""
+"Paid Support is the easiest way to integrate and manage payments for your "
+"tickets."
+msgstr ""
+"Płatne wsparcie to najprostszy sposób na zintegrowanie płatności za zgłoszenia "
+"i zarządzanie nimi."
+
+msgid "easy digital downloads"
+msgstr "łatwe cyfrowe pobieranie"
+
+msgid ""
+"EDD offers customers to open new tickets just one click from their EDD account."
+msgstr ""
+"EDD oferuje klientom otwieranie nowych zgłoszeń jednym kliknięciem z konta EDD."
+
+msgid "We'd love to hear from You."
+msgstr "Bardzo chcielibyśmy usłyszeć od Ciebie."
+
+msgid "Please write appreciated review at"
+msgstr "Proszę napisać docenioną recenzję na"
+
+msgid "WP Extension Directory"
+msgstr "Katalog rozszerzeń WP"
+
+msgid "star"
+msgstr "gwiazda"
+
+msgid "Spread the word"
+msgstr "Szerz nowinę"
+
+msgid "fb"
+msgstr "pełne wyżywienie"
+
+msgid "twitter"
+msgstr "świergot"
+
+msgid "JS Help Desk / JS Support Ticket main control panel"
+msgstr "Główny panel sterowania JS Help Desk / JS Support Ticket"
+
+msgid "Add new ticket form for both user and agent"
+msgstr "Dodaj nowy formularz zgłoszenia dla użytkownika i agenta"
+
+msgid "My tickets for both user and agent"
+msgstr "Moje zgłoszenia dla użytkownika i agenta"
+
+msgid "List downloads"
+msgstr "Wyświetl pobrania"
+
+msgid "Latest Downloads"
+msgstr "Najnowsze pliki do pobrania"
+
+msgid "Show latest downloads. Options"
+msgstr "Pokaż najnowsze pliki do pobrania. Opcje"
+
+msgid "and"
+msgstr "i"
+
+msgid "i.e."
+msgstr "np."
+
+msgid "Popular Downloads"
+msgstr "Najpopularniejsze pobrania"
+
+msgid "Show popular downloads. Options"
+msgstr "Pokaż popularne pliki do pobrania. Opcje"
+
+msgid "List knowledge base"
+msgstr "Spis Bazy Wiedzy"
+
+msgid "Latest Knowledge Base"
+msgstr "Najnowsza baza wiedzy"
+
+msgid "Show latest knowledge base. Options"
+msgstr "Pokaż najnowszą bazę wiedzy. Opcje"
+
+msgid "Popular knowledge base"
+msgstr "Popularna baza wiedzy"
+
+msgid "Show popular knowledge base. Options"
+msgstr "Pokaż popularną bazę wiedzy. Opcje"
+
+msgid "List FAQ's"
+msgstr "Lista FAQ"
+
+msgid "Latest FAQ's"
+msgstr "Ostatnie FAQ"
+
+msgid "Show latest FAQ's. Options"
+msgstr "Pokaż najnowsze FAQ. Opcje"
+
+msgid "Popular FAQ's"
+msgstr "Najpopularniejsze FAQ"
+
+msgid "Show popular FAQ's. Options"
+msgstr "Pokaż popularne FAQ. Opcje"
+
+msgid "List announcements"
+msgstr "Lista powiadomień"
+
+msgid "Latest Announcements"
+msgstr "Ostatnie powiadomienia"
+
+msgid "Show latest announcements. Options"
+msgstr "Pokaż najnowsze ogłoszenia. Opcje"
+
+msgid "Popular Announcements"
+msgstr "Najpopularniejsze powiadomienia"
+
+msgid "Show popular announcements. Options"
+msgstr "Pokaż popularne ogłoszenia. Opcje"
+
+msgid "spinning wheel"
+msgstr "kołowrotek"
+
+msgid "Get JS Help Desk Translations"
+msgstr "Uzyskaj tłumaczenia JS Help Desk"
+
+msgid "Get Translations"
+msgstr "Pobierz Tłumaczenia"
+
+msgid "Select Translation"
+msgstr "Wybierz tłumaczenie"
+
+msgid ""
+"When WordPress language change to ro, JS Help Desk language will auto change "
+"to ro"
+msgstr ""
+"Gdy WordPress zmieni język na ro, język JS Help Desk automatycznie zmieni się "
+"na ro"
+
+msgid "c error"
+msgstr "błąd c"
+
+msgid "saved"
+msgstr "zapisane"
+
+msgid "Contribute In Translation"
+msgstr "Pomóż w tłumaczeniu"
+
+msgid "translate"
+msgstr "Tłumaczyć"
+
+msgid "Manual Download"
+msgstr "Pobieranie ręczne"
+
+msgid "Log In"
+msgstr "Zaloguj"
+
+msgid "Log Out"
+msgstr "Wyloguj"
+
+msgid "Agent Feedbacks"
+msgstr "Informacje zwrotne od agentów"
+
+msgid "Submit ticket"
+msgstr "Wyślij zgłoszenie"
+
+msgid "my ticket"
+msgstr "moje zgłoszenie"
+
+msgid "View all the created tickets"
+msgstr "Zobacz wszystkie utworzone zgłoszenia"
+
+msgid "your ticket status"
+msgstr "status twojego zgłoszenia"
+
+msgid "closed ticket"
+msgstr "zgłoszenie zamknięte"
+
+msgid "answered ticket"
+msgstr "zgłoszenia z odpowiedzia"
+
+msgid "overdue ticket"
+msgstr "zaległe zgłoszenie"
+
+msgid "View All Downloads"
+msgstr "Zobacz wszystkie pliki do pobrania"
+
+msgid "View All Announcements"
+msgstr "Zobacz wszystkie ogłoszenia"
+
+msgid "View All Knowledge Base"
+msgstr "Wyświetl całą bazę wiedzy"
+
+msgid "Latest FAQs"
+msgstr "Najnowsze FAQ"
+
+msgid "View All FAQs"
+msgstr "Wyświetl wszystkie najczęściej zadawane pytania"
+
+msgid "keep me login"
+msgstr "nie wylogowuj mnie"
+
+msgid "Repeat Password"
+msgstr "Powtórz hasło"
+
+msgid "Subscribe to the newsletter"
+msgstr "Zapisz się do Newslettera"
+
+msgid "has been changed"
+msgstr "został zmieniony"
+
+msgid "has not been changed"
+msgstr "nie został zmieniony"
+
+msgid "General"
+msgstr "Generał"
+
+msgid "Complete"
+msgstr "Kompletny"
+
+msgid "Configurations complete"
+msgstr "Konfiguracje zakończone"
+
+msgid "Step 4 of 4"
+msgstr "Krok 4 z 4"
+
+msgid "Step 3 of 3"
+msgstr "Krok 3 z 3"
+
+msgid "Setting Completed"
+msgstr "Ustawienie zakończone"
+
+msgid "Setting you applied has been saved successfully."
+msgstr "Zastosowane ustawienie zostało pomyślnie zapisane."
+
+msgid "Finish"
+msgstr "Zakończ"
+
+msgid "Ticket Setting"
+msgstr "Ustawienia sprawy"
+
+msgid "Setting Complete"
+msgstr "Ustawianie zakończone"
+
+msgid "General Configurations"
+msgstr "Ogólne konfiguracje"
+
+msgid "Step 1 of 4"
+msgstr "Krok 1 z 4"
+
+msgid "Step 1 of 3"
+msgstr "Krok 1 z 3"
+
+msgid "Enter the site title"
+msgstr "Wpisz tytuł strony"
+
+msgid "Date format for plugin"
+msgstr "Format daty dla wtyczki"
+
+msgid "Show Breadcrumbs"
+msgstr "Pokaż bułkę tartą"
+
+msgid "Show navigation in breadcrumbs"
+msgstr "Pokaż nawigację w bułce tartej"
+
+msgid "Upload file size in KB's"
+msgstr "Prześlij rozmiar pliku w KB"
+
+msgid "File Extension"
+msgstr "Rozszerzenie pliku"
+
+msgid "Sequential"
+msgstr "Sekwencyjny"
+
+msgid "Feedback Configurations"
+msgstr "Konfiguracje zwrotne"
+
+msgid "Step 3 of 4"
+msgstr "Krok 3 z 4"
+
+msgid "Set Email Delay Time"
+msgstr "Ustaw czas opóźnienia wiadomości e-mail"
+
+msgid " :"
+msgstr ":"
+
+msgid "Set Email Delay"
+msgstr "Ustaw opóźnienie e-mail"
+
+msgid "Back"
+msgstr "Wróć"
+
+msgid "2"
+msgstr "2)"
+
+msgid "3"
+msgstr "3)"
+
+msgid "Ticket Configurations"
+msgstr "Konfiguracje zgłoszeń"
+
+msgid "Step 2 of 4"
+msgstr "Krok 2 z 4"
+
+msgid "Step 2 of 3"
+msgstr "Krok 2 z 3"
+
+msgid "Enable/Disable Open Ticket"
+msgstr "Włącz / wyłącz opcję 'otwarte zgłoszenie'"
+
+msgid "Ticket ID sequence"
+msgstr "Sekwencja identyfikatorów zgłoszeń"
+
+msgid "Set ticket id sequential or random"
+msgstr "Ustaw identyfikator zgłoszenia jako sekwencyjny lub losowy"
+
+msgid "Maximum Tickets"
+msgstr "Maksymalna liczba zgłoszeń"
+
+msgid "Set Maximum Ticket Per user"
+msgstr "Ustaw maksymalną ilość zgłoszeń na użytkownika"
+
+msgid "Maximum Open Ticket"
+msgstr "Maksymalny liczba otwartych zgłoszeń"
+
+msgid "Reopen ticket within Days"
+msgstr "Otwórz ponownie zgłoszeniew ciągu kilku dni"
+
+msgid "Show Captcha to visitor on ticket form"
+msgstr "Pokaż 'Captcha' gościowi na formularzu zgłoszenia"
+
+msgid "Enable/Disable Captcha on Ticket Form"
+msgstr "Włącz / wyłącz 'Captcha' na formularzu zgłoszenia"
+
+msgid "Own Captcha operands"
+msgstr "Własne operandy Captcha"
+
+msgid "Enable/Disable Own Captcha subtraction"
+msgstr "Włącz / wyłącz własne odejmowanie captcha"
+
+msgid "Enable Print Ticket"
+msgstr "Włącz opcję 'Drukuj zgłoszenie'"
+
+msgid "Enable/Disable Print Ticket"
+msgstr "Włącz / wyłącz opcję wydruku"
+
+msgid "Please insert activation key to proceed"
+msgstr "Wprowadź klucz aktywacyjny, aby kontynuować"
+
+msgid "Addon Installation Failed"
+msgstr "Instalacja dodatku nie powiodła się"
+
+msgid "Addon installation failed, Directory permission error"
+msgstr "Instalacja dodatku nie powiodła się, błąd uprawnień do katalogu"
+
+msgid "Addon Installation Failed, File download error"
+msgstr "Instalacja dodatku nie powiodła się, błąd pobierania pliku"
+
+msgid "left image"
+msgstr "lewy obraz"
+
+msgid "right image"
+msgstr "prawy obraz"
+
+msgid "buy now"
+msgstr "Kup Teraz"
+
+msgid "helptopic"
+msgstr "Temat pomocy"
+
+msgid "private note"
+msgstr "prywatna notatka"
+
+msgid "max ticket"
+msgstr "max zgłoszenia"
+
+msgid "merge tickets"
+msgstr "połącz zgłoszenia"
+
+msgid "time tracking"
+msgstr "śledzenie czasu"
+
+msgid "user options"
+msgstr "opcje użytkownika"
+
+msgid "ticket actions"
+msgstr "akcja na zgłoszeniach"
+
+msgid "desktop notifications"
+msgstr "powiadomienia na pulpicie"
+
+msgid "admin widgets"
+msgstr "widżety administracyjne"
+
+msgid "internal mail"
+msgstr "poczta wewnętrzna"
+
+msgid "frontend widget"
+msgstr "widżet frontonu"
+
+msgid "woocommerce support"
+msgstr "wsparcie woocommerce"
+
+msgid "mail chimp"
+msgstr "szympans pocztowy"
+
+msgid "addon in no longer active"
+msgstr "dodatek nie jest już aktywny"
+
+msgid "Wordpress Plugin"
+msgstr "Wtyczka Wordpress"
+
+msgid ""
+"JS Help Desk is a trusted open source ticket system. JS Help Desk is a simple, "
+"easy to use, web-based customer support system. Users can create a ticket from "
+"the front-end. JS Help Desk comes packed with lot features than most of the "
+"expensive(and complex) support ticket system on the market. The best part is, "
+"It completely free."
+msgstr ""
+"JS Help Desk to zaufany system zgłoszeń typu open source. JS Help Desk to "
+"prosty, łatwy w użyciu internetowy system obsługi klienta. Użytkownicy mogą "
+"utworzyć zgłoszenie z interfejsu. JS Help Desk jest wyposażony w wiele funkcji "
+"niż większość drogiego (i złożonego) systemu obsługi zgłoszeń na rynku. "
+"Najlepsze jest to, że całkowicie za darmo."
+
+msgid "Add on list"
+msgstr "Dodaj do listy"
+
+msgid "Please Insert Your Activation key"
+msgstr "Proszę wprowadzić klucz aktywacyjny"
+
+msgid "Activation key"
+msgstr "Klucz aktywacyjny"
+
+msgid "Proceed"
+msgstr "Kontynuować"
+
+msgid "Select Addons for download"
+msgstr "Wybierz dodatki do pobrania"
+
+msgid "All allowed add ons are already installed"
+msgstr "Wszystkie dozwolone dodatki są już zainstalowane"
+
+msgid "You are not allowed to install any add on"
+msgstr "Nie możesz instalować żadnych dodatków"
+
+msgid "Select All Addons"
+msgstr "Wybierz Wszystkie dodatki"
+
+msgid "Add ons installed and activated successfully"
+msgstr "Dodatki zainstalowane i aktywowane pomyślnie"
+
+msgid "Priority Title Already Exist"
+msgstr "Rodzaj priorytetu już istnieje"
+
+msgid "Priority has been stored"
+msgstr "Rodzaj priorytetu został zapisany"
+
+msgid "Priority has not been stored"
+msgstr "Rodzaj priorytetu nie został zapisany"
+
+msgid "Priority has been deleted"
+msgstr "Rodzaj priorytetu został usunięty"
+
+msgid "Priority has not been deleted"
+msgstr "Rodzaj priorytetu nie został usunięty"
+
+msgid "Default priority cannot delete"
+msgstr "Domyślny rodzaj priorytetu nie może zostać usunięty"
+
+msgid "Priority has been make default"
+msgstr "Rodzaj priorytetu został ustawiony jako domyślny"
+
+msgid "Priority has not been make default"
+msgstr "Rodzaj priorytetu nie został ustawiony jako domyślny"
+
+msgid "Color"
+msgstr "Kolor"
+
+msgid "Ticket Overdue Interval Type"
+msgstr "Typ interwału zaległego zgłoszenia"
+
+msgid "Save Priority"
+msgstr "Zapisz rodzaj priorytetu"
+
+msgid "Date Interval"
+msgstr "Przedział daty"
+
+msgid "Reply posted"
+msgstr "Odpowiedź wysłana"
+
+msgid "Reply posted on ticket"
+msgstr "Odpowiedź opublikowana na bilecie"
+
+msgid "Ticket is replied by"
+msgstr "Odpowiedzi w sprawie udzielił"
+
+msgid "Reply Has been Posted"
+msgstr "Odpowiedź została wysłana"
+
+msgid "Reply Has Not been Posted"
+msgstr "Odpowiedź nie została wysłana"
+
+msgid "Dates"
+msgstr "Daty"
+
+msgid "Department Detail Report"
+msgstr "Raport szczegółowy działu"
+
+msgid "Export Data"
+msgstr "Export danych"
+
+msgid "Department Statistics"
+msgstr "Statystyka działu"
+
+msgid "pending ticket"
+msgstr "oczekujące zgłoszenie"
+
+msgid "Time Taken"
+msgstr "Czas poświęcony"
+
+msgid "Merged and closed"
+msgstr "Scalono i zamknięto"
+
+msgid "Out of"
+msgstr "Poza"
+
+msgid "Ticket by departments"
+msgstr "Sprawy według działów"
+
+msgid "Tickets By Priority"
+msgstr "Sprawy według priorytetu"
+
+msgid "Staff Member Tickets"
+msgstr "Sprawy członków zespołu"
+
+msgid "all ticket"
+msgstr "wszystkie zgłoszenia"
+
+msgid "Tickets By Status And Priorities"
+msgstr "Sprawy według statusu i priorytetów"
+
+msgid "Tickets By Agents"
+msgstr "Zgłoszenia według agentów"
+
+msgid "Staff Reports"
+msgstr "Raport zespołu"
+
+msgid "Based on"
+msgstr "Na podstawie"
+
+msgid "Customer Satisfaction"
+msgstr "Satysfakcja klienta"
+
+msgid "satisfaction image"
+msgstr "obraz satysfakcji"
+
+msgid "Excellent"
+msgstr "Wyśmienicie"
+
+msgid "Happy"
+msgstr "Zadowolony"
+
+msgid "Normal"
+msgstr "Normalny"
+
+msgid "bad"
+msgstr "zły"
+
+msgid "Sad"
+msgstr "Smutny"
+
+msgid "Angry"
+msgstr "Zły"
+
+msgid "Agent Detail Report"
+msgstr "Raport szczegółowy agenta"
+
+msgid "Agent Statistics"
+msgstr "Statystyka agentów"
+
+msgid "staff image"
+msgstr "obraz personelu"
+
+msgid "Average rating"
+msgstr "Średnia ocena"
+
+msgid "Average time"
+msgstr "Średni czas"
+
+msgid "Tickets not assigned to the staff member"
+msgstr "Zgłoszenia nie przypisane do personelu"
+
+msgid "Minutes"
+msgstr "Minut"
+
+msgid "Report By Staff Member"
+msgstr "Raport według członka zespołu"
+
+msgid "User Detail Report"
+msgstr "Szczegółowy raport użytkownika"
+
+msgid "User Statistics"
+msgstr "Statystyki użytkownika"
+
+msgid "Users"
+msgstr "Użytkownicy"
+
+msgid "Ticket Status By Departments"
+msgstr "Status zgłoszenia wg działów"
+
+msgid "Agent Report"
+msgstr "Raport agenta"
+
+msgid "Agent Tickets"
+msgstr "Zgłoszenia agenta"
+
+msgid "Reports Statistics"
+msgstr "Raportuje statystyki"
+
+msgid "System error has been deleted"
+msgstr "Błąd systemu został usunięty"
+
+msgid "System error has not been deleted"
+msgstr "Błąd systemu nie został usunięty"
+
+msgid "Remove All"
+msgstr "Usuń wszystko"
+
+msgid "Support for this Envato license has expired"
+msgstr "Obsługa tej licencji Envato wygasła"
+
+msgid "Record not found"
+msgstr "Rekord nie znaleziony"
+
+msgid "Banned email cannot create ticket"
+msgstr "Zbanowany email nie może otworzyć sprawy"
+
+msgid "Incorrect Captcha code"
+msgstr "Niewłaściwy kod Captcha"
+
+msgid "Please select paid support item"
+msgstr "Wybierz płatny element wsparcia"
+
+msgid "No purchase found with that code"
+msgstr "Nie znaleziono zakupu z tym kodem"
+
+msgid "Provide a valid license key to create a ticket."
+msgstr "Podaj prawidłowy klucz licencyjny, aby utworzyć zgłoszenie."
+
+msgid "Your license has expired."
+msgstr "Twoja licencja wygasła."
+
+msgid "Your license is not active, activate your license."
+msgstr "Twoja licencja jest nieaktywna, aktywuj swoją licencję."
+
+msgid "Due date error is not valid"
+msgstr "Błąd niewłaściwej daty zakończenia"
+
+msgid "Ticket has not been created"
+msgstr "Zgłoszenia nie zostały utworzone"
+
+msgid "Ticket created"
+msgstr "Zgłoszenie utworzone"
+
+msgid "created"
+msgstr "Utworzony"
+
+msgid "Guest"
+msgstr "Gość"
+
+msgid "Ticket is updated by"
+msgstr "Sprawa została zaktualizowana"
+
+msgid "Ticket is created by"
+msgstr "Sprawa została otwarta przez"
+
+msgid "Ticket has been deleted"
+msgstr "Sprawa została usunięta"
+
+msgid "Ticket has not been deleted"
+msgstr "Sprawa nie została usunięta"
+
+msgid "in use cannot be deleted"
+msgstr "w użyciu nie może być usunięty"
+
+msgid "Ticket already closed"
+msgstr "Sprawa już zamknięta"
+
+msgid "Ticket has been closed"
+msgstr "Sprawa została zamknięta"
+
+msgid "Ticket has not been closed"
+msgstr "Sprawa nie została zamknięta"
+
+msgid "Ticket is closed by"
+msgstr "Sprawa została zamknięta przez"
+
+msgid "Your are not allowed"
+msgstr "Nie masz uprawnień"
+
+msgid "The department has been transferred"
+msgstr "Dział został przeniesiony"
+
+msgid "The department has not been transferred"
+msgstr "Departament nie został przeniesiony"
+
+msgid "The department is transferred by"
+msgstr "Departament jest przenoszony przez"
+
+msgid "Assigned to agent"
+msgstr "Przypisany do agenta"
+
+msgid "Not assigned to agent"
+msgstr "Nieprzypisany do agenta"
+
+msgid "Assign ticket to agent"
+msgstr "Przydziel zgłoszenie agentowi"
+
+msgid "Ticket is assigned to agent by"
+msgstr "Zgłoszenie jest przypisane agentowi przez"
+
+msgid "Ticket already have same priority"
+msgstr "Sprawa ma już taki priorytet"
+
+msgid "Priority has been changed"
+msgstr "Priorytet został zmieniony"
+
+msgid "Priority has not been changed"
+msgstr "Priorytet nie został zmieniony"
+
+msgid "Change Priority"
+msgstr "Zmień priorytet"
+
+msgid "Email already banned"
+msgstr "Email został już zbanowany"
+
+msgid "The email has been banned"
+msgstr "E-mail został zbanowany"
+
+msgid "The email has not been banned"
+msgstr "E-mail nie został zbanowany"
+
+msgid "Email is banned by"
+msgstr "Email został zbanowany przez"
+
+msgid "The ticket has been reopened"
+msgstr "Zgłoszenie zostało ponownie otwarte"
+
+msgid "The ticket has not been reopened"
+msgstr "Zgłoszenie nie zostało ponownie otwarte"
+
+msgid "Reopen Ticket"
+msgstr "Otwórz ponownie sprawę"
+
+msgid "The ticket is reopened by"
+msgstr "Zgłoszenie zostanie ponownie otwarte przez"
+
+msgid "The ticket reopens time limit end"
+msgstr "Zgłoszenie ponownie otwiera się po upływie terminu"
+
+msgid "Email has been unbanned"
+msgstr "Email został odbanowany"
+
+msgid "Email has not been unbanned"
+msgstr "Email nie został odbanowany"
+
+msgid "Unbanned Email"
+msgstr "Odbanowany email"
+
+msgid "Email is unbanned by"
+msgstr "Email odbanowany przez"
+
+msgid "Email cannot be unbanned"
+msgstr "Email nie może być odbanowany"
+
+msgid "Ticket already marked in progress"
+msgstr "Sprawa została już oznaczona jako w trakcie"
+
+msgid "The ticket has been marked as in progress"
+msgstr "Zgłoszenie zostało oznaczono jako w toku"
+
+msgid "The ticket has not been marked as in progress"
+msgstr "Zgłoszenie nie zostało oznaczone jako w toku"
+
+msgid "In progress ticket"
+msgstr "Sprawa w toku"
+
+msgid "The ticket is marked as in progress by"
+msgstr "Zgłoszenie jest oznaczone jako w toku przez"
+
+msgid "File upload limit exceeds"
+msgstr "Limit przesyłania plików przekracza"
+
+msgid "The uploaded file extension not valid"
+msgstr "Przesłane rozszerzenie pliku jest nieprawidłowe"
+
+msgid "Paid support info"
+msgstr "Informacje o płatnym wsparciu"
+
+msgid "Order ID"
+msgstr "ID zamówienia"
+
+msgid "Product Name"
+msgstr "Nazwa produktu"
+
+msgid "Total Tickets"
+msgstr "Zgłoszenia ogółem"
+
+msgid "Remaining Tickets"
+msgstr "Pozostałe zgłoszenia"
+
+msgid "Unlimited"
+msgstr "bez limitu"
+
+msgid "You have not purchased any supported item"
+msgstr "Nie kupiłeś żadnego obsługiwanego produktu"
+
+msgid "Go to shop"
+msgstr "Idź do sklepu"
+
+msgid "Select Order"
+msgstr "Wybierz zamówienie"
+
+msgid "No canned response found"
+msgstr "Nie znaleziono odpowiedzi w puszce"
+
+msgid "Waiting agent reply"
+msgstr "Odpowiedź agenta oczekującego"
+
+msgid "Waiting customer reply"
+msgstr "Oczekiwanie na odpowiedź klienta"
+
+msgid "Close ticket"
+msgstr "Zamknij sprawę"
+
+msgid "premade"
+msgstr "gotowe"
+
+msgid "Some values are not acceptable please retry"
+msgstr "Niektóre wartości nie są dozwolone, proszę spróbować jeszcze raz"
+
+msgid "Are you sure to mark this ticket non-premium?"
+msgstr "Czy na pewno oznaczyć to zgłoszenie jako bezpłatne?"
+
+msgid "Edit Reply"
+msgstr "Popraw odpowiedź"
+
+msgid "Edit Time"
+msgstr "Edytuj czas"
+
+msgid "Reason For Editing the timer"
+msgstr "Powód edycji timera"
+
+msgid "Reason For Editing"
+msgstr "Przyczyna edycji"
+
+msgid "Resolve conflict"
+msgstr "Rozwiąż konflikt"
+
+msgid "Ticket Details"
+msgstr "Szczegóły sprawy"
+
+msgid "Lock"
+msgstr "Zablokuj"
+
+msgid "Add New Credential"
+msgstr "Dodaj nową referencję"
+
+msgid "Post New Internal Note"
+msgstr "Opublikuj nową notatkę wewnętrzną"
+
+msgid "play"
+msgstr "grać"
+
+msgid "pause"
+msgstr "pauza"
+
+msgid "stop"
+msgstr "zatrzymać"
+
+msgid "Close on reply"
+msgstr "Zamknij po odpowiedzi"
+
+msgid "Reason For Department Transfer"
+msgstr "Powód transferu do innego działu"
+
+msgid "Assign To Agent"
+msgstr "Przypisz do agenta"
+
+msgid "Assign"
+msgstr "Przypisz"
+
+msgid "View all %d tickets by %s"
+msgstr "Wyświetl wszystkie %d zgłoszenia wg %s"
+
+msgid "Show History"
+msgstr "Pokaż historię"
+
+msgid "Print Ticket"
+msgstr "Wydrukuj zgłoszenie"
+
+msgid "Unmark Overdue"
+msgstr "Usuń znacznik przeterminowany"
+
+msgid "Mark in Progress"
+msgstr "Oznacz jako w trakcie"
+
+msgid "agent image"
+msgstr "obraz agenta"
+
+msgid "Ticket Thread"
+msgstr "Wątek sprawy"
+
+msgid "Post Reply"
+msgstr "Wyślij odpowiedź"
+
+msgid "Own Signature"
+msgstr "Własny podpis"
+
+msgid "Department Signature"
+msgstr "Podpis działu"
+
+msgid "Add Signature"
+msgstr "Dodaj podpis"
+
+msgid "On Waiting"
+msgstr "Oczekiwanie"
+
+msgid "Closed and merged"
+msgstr "Zamknięte i połączone"
+
+msgid "ago"
+msgstr "temu"
+
+msgid "No Last Reply"
+msgstr "Nie ma najnowszej odpowiedzi"
+
+msgid "Not Given"
+msgstr "Nie podano"
+
+msgid "Copy"
+msgstr "Kopiuj"
+
+msgid "Copied"
+msgstr "Skopiowano"
+
+msgid "Change"
+msgstr "Zmiana"
+
+msgid "Ticket Assign and Transfer"
+msgstr "Przydzielanie i transfer zgłoszeń"
+
+msgid "Ticket assigned to"
+msgstr "Zgłoszenie przypisane do"
+
+msgid "staff photo"
+msgstr "zdjęcie personelu"
+
+msgid "Total Time Taken"
+msgstr "Całkowity czas zajęty"
+
+msgid "view ticket"
+msgstr "sprawdź zgłoszenie"
+
+msgid "Woocommerce Order"
+msgstr "Zamówienie Woocommerce"
+
+msgid "Envato License"
+msgstr "Licencja Envato"
+
+msgid "Item"
+msgstr "Pozycja"
+
+msgid "Buyer"
+msgstr "Kupujący"
+
+msgid "License Type"
+msgstr "Rodzaj licencji"
+
+msgid "License"
+msgstr "Licencja"
+
+msgid "Purchase Date"
+msgstr "Data zakupu"
+
+msgid "Supported Until"
+msgstr "Obsługiwane do"
+
+msgid "Paid Support Details"
+msgstr "Szczegóły dotyczące płatnego wsparcia"
+
+msgid "Subscription"
+msgstr "Subskrypcja"
+
+msgid "Subscribed On"
+msgstr "Subskrybowane w dniu"
+
+msgid "Support Expiry"
+msgstr "Wygaśnięcie pomocy technicznej"
+
+msgid "No expiration"
+msgstr "bezterminowo"
+
+msgid "Non-premium support"
+msgstr "Wsparcie inne niż premium"
+
+msgid "Check this box if this ticket should NOT apply against the paid support"
+msgstr ""
+"Zaznacz to pole, jeśli to zgłoszenie NIE powinno dotyczyć płatnego wsparcia"
+
+msgid "Remaining"
+msgstr "Pozostały"
+
+msgid "Link ticket to paid support"
+msgstr "Przekaż zgłoszenie do płatnego wsparcia"
+
+msgid "Ticket Creator Name"
+msgstr "Nazwa zgłaszającego"
+
+msgid "From Date"
+msgstr "Od daty"
+
+msgid "To Date"
+msgstr "Spotykać się z kimś"
+
+msgid "Enforce delete"
+msgstr "Zmuś usunięcie"
+
+msgid "Are you sure to enforce delete"
+msgstr "Czy na pewno wymusić usunięcie"
+
+msgid "Are you sure to mark this ticket non-preminum?"
+msgstr "Czy na pewno oznaczyć to zgłoszenie jako bezpłatne?"
+
+msgid "Message Logs"
+msgstr "Dzienniki wiadomości"
+
+msgid "Edit Timer"
+msgstr "Edytuj licznik czasu"
+
+msgid "Type Note for Department"
+msgstr "Wpisz notatkę dla działu"
+
+msgid "Assigning Note"
+msgstr "Przypisywanie notatki"
+
+msgid "Time Track"
+msgstr "Tor czasu"
+
+msgid "Type Internal Note"
+msgstr "Wpisz notatkę wewnętrzną"
+
+msgid "View all %d tickets"
+msgstr "Wyświetl wszystkie %d zgłoszenia"
+
+msgid "Reopen"
+msgstr "Otworzyć na nowo"
+
+msgid "History"
+msgstr "Historia"
+
+msgid "Print"
+msgstr "Drukuj"
+
+msgid "Are you sure you want to delete this ticket"
+msgstr "Czy na pewno chcesz usunąć to zgłoszenie?"
+
+msgid "Are you sure to close this ticket"
+msgstr "Czy na pewno zamknąć to zgłoszenie ?"
+
+msgid "Unlock"
+msgstr "Odblokować"
+
+msgid "Reply a message"
+msgstr "Odpowiedz na wiadomość"
+
+msgid "Select Premade"
+msgstr "Wybierz przygotowane"
+
+msgid "Assign Ticket"
+msgstr "Przypisz zgłoszenie"
+
+msgid "Assigned To Agent"
+msgstr "Przypisany do agenta"
+
+msgid "View all orders"
+msgstr "Zobacz wszystkie zamówienia"
+
+msgid "Non-preminum support"
+msgstr "Wsparcie inne niż premium"
+
+msgid "Check Status"
+msgstr "Sprawdź status"
+
+msgid "Account status"
+msgstr "Status konta"
+
+msgid "Add Premade Message"
+msgstr "Dodaj projekt wiadomości"
+
+msgid "Add Staff Member"
+msgstr "Dodaj członka zespołu"
+
+msgid "Add System Email"
+msgstr "Dodaj email systemowy"
+
+msgid "Add User field"
+msgstr "Dodaj pole użytkownika"
+
+msgid "Add new ticket form for both user and staff"
+msgstr "Dodaj nowy formularz sprawy dla użytkownika i pracownika zespołu"
+
+msgid "Ago"
+msgstr "Wcześniej"
+
+msgid "Already exisits"
+msgstr "Już istnieje"
+
+msgid "Announcement has been deleted"
+msgstr "Powiadomienie zostało usunięte"
+
+msgid "Announcement has been stored"
+msgstr "Powiadomienie zostało zapisane"
+
+msgid "Announcement has not been deleted"
+msgstr "Powiadomienie nie zostało usunięte"
+
+msgid "Announcement has not been stored"
+msgstr "Powiadomienie nie zostało zapisane"
+
+msgid "Append signature with reply"
+msgstr "Dołącz podpis w odpowiedzi"
+
+msgid "Are you sure to close ticket"
+msgstr "Jesteś pewny, że chcesz zamknąć sprawę?"
+
+msgid "Are you sure to delete"
+msgstr "Czy na pewno usunąć"
+
+msgid "Article has been deleted"
+msgstr "Artykuł bazy wiedzy został usunięty"
+
+msgid "Article has not been deleted"
+msgstr "Artykuł bazy wiedzy nie został usunięty"
+
+msgid "Assign ticket to staff"
+msgstr "Przypisz do zespołu"
+
+msgid "Assign to Staff"
+msgstr "Przypisz do zespołu"
+
+msgid "Assign to Staff Member"
+msgstr "Przypisz do członka zespołu"
+
+msgid "Assigned to staff"
+msgstr "Przypisana do zespołu"
+
+msgid "Attachment has been removed"
+msgstr "Załącznik został usunięty"
+
+msgid "Attachment has not been removed"
+msgstr "Załącznik nie został usunięty"
+
+msgid "Auto response for this topic"
+msgstr "Autoodpowiedź w temacie"
+
+msgid "Autoresponse"
+msgstr "Autoodpowiedź"
+
+msgid "Ban Email Log List"
+msgstr "Log zbanowanych adresów mailowych"
+
+msgid "Ban Email has been stored"
+msgstr "Zbanowany email został zapisany"
+
+msgid "Ban Email has not been deleted"
+msgstr "Zbanowany email nie został usunięty"
+
+msgid "Ban Email has not been stored"
+msgstr "Zbanowany email nie został zapisany"
+
+msgid "Ban email"
+msgstr "Zablokuj email"
+
+msgid "Ban email log list"
+msgstr "Lista zbanowanych emaili"
+
+msgid "Ban email new ticket"
+msgstr "Banuj email dla nowej sprawy"
+
+msgid "Banlist log"
+msgstr "Lista zbanowanych"
+
+msgid "CURL exist"
+msgstr "CURL istnieje"
+
+msgid "CURL not exist"
+msgstr "CURL nie istniej"
+
+msgid "Can Not mark as not required"
+msgstr "Nie można zaznaczyć jako nie wymagane"
+
+msgid "Cannot unpublish field"
+msgstr "Nie można opublikować pola"
+
+msgid "Category has been deleted"
+msgstr "Kategoria została usunięta"
+
+msgid "Category has been stored"
+msgstr "Kategoria została zapisana"
+
+msgid "Category has not been deleted"
+msgstr "Kategoria nie została usunięta"
+
+msgid "Category has not been stored"
+msgstr "Kategoria nie została zapisana"
+
+msgid "Category in use cannot deleted"
+msgstr "Kategoria używana nie może zostać usunięta"
+
+msgid "Component Detail"
+msgstr "Szczegóły komponentu"
+
+msgid "Component for on-line ticket support system"
+msgstr "Komponent wsparcia obsługi spraw klientów"
+
+msgid "Configuration has been stored"
+msgstr "Konfiguracja została zapisana"
+
+msgid "Configuration not has been stored"
+msgstr "Konfiguracja nie została zapisana"
+
+msgid "Connection established but we cannot ready any email"
+msgstr "Połączenie zostało nawiązane, ale nie możemy przeczytać żadnego maila"
+
+msgid "Control panel links"
+msgstr "Linki Panelu sterowania"
+
+msgid "Current"
+msgstr "Aktualne"
+
+msgid "Data directory can not empty."
+msgstr "Ścieżka danych nie może być pusta."
+
+msgid "Data directory is not writeable."
+msgstr "Katalog data jest niezapisywalny"
+
+msgid "Database CRUD"
+msgstr "Baza danych CRUD"
+
+msgid "Database create table not allowed"
+msgstr "Utworzenie tabeli w bazie danych niedozwolone"
+
+msgid "Database delete record not allowed"
+msgstr "Usunięcie rekordu w tabeli w bazy danych niedozwolone"
+
+msgid "Database drop table not allowed"
+msgstr "Usunięcie tabeli w bazy danych niedozwolone"
+
+msgid "Database insert record not allowed"
+msgstr "Utworzenie rekordu w tabeli w bazy danych niedozwolone"
+
+msgid "Database update record not allowed"
+msgstr "Modyfikacja rekordu w tabeli w bazy danych niedozwolona"
+
+msgid "Date end"
+msgstr "Koniec daty"
+
+msgid "Date start"
+msgstr "Początek daty"
+
+msgid "Day"
+msgstr "Dzień"
+
+msgid "Default System Email"
+msgstr "Domyślny email systemowy"
+
+msgid "Default system emails"
+msgstr "Domyślne emaile systemowe"
+
+msgid "Delete ticket"
+msgstr "Usuń sprawę"
+
+msgid "Department Under Which The Answer Will Be Made Available"
+msgstr "Dział, który przygotuje odpowiedź"
+
+msgid "Department has been deleted"
+msgstr "Dział został usunięty"
+
+msgid "Department has been stored"
+msgstr "Dział został zapisany"
+
+msgid "Department has been transfered"
+msgstr "Dział został przeniesiony"
+
+msgid "Department has not been deleted"
+msgstr "Dział nie został usunięty"
+
+msgid "Department has not been stored"
+msgstr "Dział nie został zapisany"
+
+msgid "Department has not been transfered"
+msgstr "Dział nie został przeniesiony"
+
+msgid "Department in use cannot deleted"
+msgstr "Dział w użyciu, nie może być usunięty"
+
+msgid "Department is transfered by"
+msgstr "Dział został przeniesiony przez"
+
+msgid "Dir is not writeable"
+msgstr "Katalog jest niezapisywalny"
+
+msgid "Directory"
+msgstr "Katalog"
+
+msgid "Directory permissions error"
+msgstr "Błąd uprawnień katalogów"
+
+msgid "Display name"
+msgstr "Wyświetlana nazwa"
+
+msgid "Do you have enabled SSL on your domain"
+msgstr "Czy masz włączone SSL w swojej domenie"
+
+msgid "Documentation"
+msgstr "Dokumentacja"
+
+msgid "Download has been deleted"
+msgstr "Pobrany plik został usunięty"
+
+msgid "Download has been stored"
+msgstr "Pobrany plik został zachowany"
+
+msgid "Download has not been deleted"
+msgstr "Pobrany plik nie został usunięty"
+
+msgid "Download has not been stored"
+msgstr "Pobrany plik nie został zachowany"
+
+msgid "Email address"
+msgstr "Adres email"
+
+msgid "Email has been banned"
+msgstr "Email został zbanowany"
+
+msgid "Email has been deleted"
+msgstr "Email został usunięty"
+
+msgid "Email has been stored"
+msgstr "Email został zapisany"
+
+msgid "Email has not been banned"
+msgstr "Email nie został zbanowany"
+
+msgid "Email has not been deleted"
+msgstr "Email nie został usunięty"
+
+msgid "Email has not been stored"
+msgstr "Email nie został zapisany"
+
+msgid "Email send to admin when banned email try to create ticket"
+msgstr ""
+"Email wysyłany do administratora, gdy zabanowany adres mailowy próbuje "
+"otworzyć sprawę"
+
+msgid "Enable ticket via email"
+msgstr "Pozwól na otwieranie spraw przez email"
+
+msgid "Error applying new theme"
+msgstr "Błąd przy zastosowaniu nowego szablonu"
+
+msgid "Error file ext mismatch"
+msgstr "Błąd. Niezgodne rozszerzenie pliku."
+
+msgid "Error file not downloaded"
+msgstr "Błąd. Plik nie został pobrany."
+
+msgid "Error occured"
+msgstr "Wystąpił błąd"
+
+msgid "File Downloaded Successfully"
+msgstr "Plik pobrany pomyślnie"
+
+msgid "File download"
+msgstr "Pobranie pliku"
+
+msgid "File is not writeable"
+msgstr "Plik jest niezapisywalny"
+
+msgid "File read write issue files cannot upload"
+msgstr "Problem z zapisem/odczytem. Pliki nie mogą być wysłane."
+
+msgid "File upload limit exceed"
+msgstr "Przekroczono górny limit rozmiaru pliku"
+
+msgid "GD library"
+msgstr "Biblioteka GD"
+
+msgid "GD library not exist"
+msgstr "Biblioteka GD nie istnieje"
+
+msgid "General Setting"
+msgstr "Ustawienia ogólne"
+
+msgid "Get JS Support Ticket Translations"
+msgstr "Pobierz Tłumaczenia JS Support Ticket"
+
+msgid "Goto Web"
+msgstr "Idź do strony www"
+
+msgid "Help topics"
+msgstr "Tematy Pomocy"
+
+msgid "Host port number to read email from"
+msgstr "Port hosta do odczytywania Emaili"
+
+msgid "IMAP is either not installed or not enable in your server"
+msgstr "IMAP jest albo nie zainstalowany albo nie włączony na twoim serwerze"
+
+msgid "If system not respond in 30 seconds"
+msgstr "Jeśli system nie odpowiada w ciągu 30 sekund"
+
+msgid "Installation"
+msgstr "Instalacja"
+
+msgid "Internal Note Has Been Posted"
+msgstr "Została opublikowana zewnętrzna notatka"
+
+msgid "Internal Note Has Not Been Posted"
+msgstr "Zewnętrzna notatka nie została opublikowana"
+
+msgid "Internal Notes"
+msgstr "Notatki wewnętrzne"
+
+msgid "Internal note is posted by"
+msgstr "Wewnętrzna notatka została zrobiona przez"
+
+msgid "It may take few minutes"
+msgstr "To może potrwać kilka minut"
+
+msgid "JS Support Ticket Control Panel"
+msgstr "Panel JS Support"
+
+msgid "JS Support Ticket Pro Installer"
+msgstr "Instalator JS Support Ticket Pro"
+
+msgid "JS Support Ticket main control panel"
+msgstr "Panel zaplecza JS Support Ticket"
+
+msgid "JS Ticket Pro Installed Successfully"
+msgstr "JS Ticket Pro Installed Successfully zainstalowany pomyślnie"
+
+msgid "Knowledge base article has been stored"
+msgstr "Artykuł bazy wiedzy został zapisany"
+
+msgid "Knowledge base article has not been stored"
+msgstr "Artykuł bazy wiedzy nie został zapisany"
+
+msgid "Language directory is not writeable"
+msgstr "Katalog Języków jest niezapisywalny"
+
+msgid "Lastest Downlods"
+msgstr "Ostatnie pobrania"
+
+msgid "Latest knowledge base"
+msgstr "Najnowsza baza wiedzy"
+
+msgid "Limit exceeds maximum open tickets"
+msgstr "Przekroczony limit otworzonych spraw"
+
+msgid "Login into your account"
+msgstr "Zaloguj do swojego konta"
+
+msgid "Login/Logout button"
+msgstr "Przycisk Zaloguj/Wyloguj"
+
+msgid "Mail Setting"
+msgstr "Ustawienia emaila"
+
+msgid "Mail cannot mark as read"
+msgstr "Nie można oznaczyć maila jako przeczytany"
+
+msgid "Mail has been mark as read"
+msgstr "Mail został oznaczony jako przeczytany"
+
+msgid "Mail has been send"
+msgstr "Mail został wysłany"
+
+msgid "Mail has not been mark as read"
+msgstr "Wiadomość nie oznaczona jako przeczytana"
+
+msgid "Mail has not been send"
+msgstr "Mail nie został wysłany"
+
+msgid "Mail mark as read"
+msgstr "Mail oznaczony jako przeczytany"
+
+msgid "Mail mark as unread"
+msgstr "Mail oznaczony jako nieprzeczytany"
+
+msgid "Mannual Download"
+msgstr "Ręczne pobieranie"
+
+msgid "Max record"
+msgstr "Maksymalna liczba rekordów"
+
+msgid "More Detail"
+msgstr "Więcej szczegółow"
+
+msgid "More Option"
+msgstr "Więcej opcji"
+
+msgid "My tickets for both user and staff"
+msgstr "Moje sprawy użytkownika i zespołu"
+
+msgid "New Department"
+msgstr "Nowy dział"
+
+msgid "New Help Topic"
+msgstr "Nowy temat pomocy"
+
+msgid "New Staff"
+msgstr "Nowy zespół"
+
+msgid "New Version Is Available"
+msgstr "Dostępna jest nowa wersja"
+
+msgid "New theme has been applied"
+msgstr "Nowy szablon został zastosowany"
+
+msgid "Next step"
+msgstr "Następny krok"
+
+msgid "No premade found"
+msgstr "Nie znaleziono premade'a"
+
+msgid "Not assigned to staff"
+msgstr "Nieprzypisana do zespołu"
+
+msgid "Oooops"
+msgstr "Uuuups"
+
+msgid "Opsss...."
+msgstr "Ups..."
+
+msgid "Our Products"
+msgstr "Nasze produkty"
+
+msgid "PHP version smaller then recomended"
+msgstr "Wersja PHP starsza niż zalecana"
+
+msgid "Password for given email address"
+msgstr "Hasło dla danego adresu email"
+
+msgid "Please enable ticket via email setting first"
+msgstr "Proszę włączyć funkcję zgłaszania sprawy przez email"
+
+msgid "Please enter the google recaptcha private key from"
+msgstr "Wprowadź prywatny klucz Google recatpcha z"
+
+msgid "Please enter the google recaptcha public key from"
+msgstr "Wprowadź publiczny klucz Google recatpcha z"
+
+msgid "Please insert activation key and press start"
+msgstr "Proszę wprowadź klucz aktywacyjny i naciśnij start"
+
+msgid "Please select atleast one category for"
+msgstr "Proszę wybrać conajmniej jedną kategorię dla"
+
+msgid "Popular knoweldge base"
+msgstr "Najpopularniejsza baza wiedzy"
+
+msgid "Post internal note"
+msgstr "Dodaj notatkę wewnętrzną"
+
+msgid "Posted by"
+msgstr "Opublikowane przez"
+
+msgid "Premade Messages"
+msgstr "Projekty wiadomości"
+
+msgid "Premade department message has been stored"
+msgstr "Projekt wiadomości działu został zapisany"
+
+msgid "Premade department message has not been stored"
+msgstr "Projekt wiadomości działu nie został zapisany"
+
+msgid "Premade message"
+msgstr "Wstępnie wykonana wiadomość"
+
+msgid "Publish"
+msgstr "Publikuj"
+
+msgid "Quick Configuration"
+msgstr "Szybka konfiguracja"
+
+msgid "Recomended"
+msgstr "Zalecane"
+
+msgid "Redirect user to JS Support Ticket control panel after login"
+msgstr ""
+"Przekieruj użytkownika do panelu kontrolnego JS Support Ticket po logowaniu"
+
+msgid "Reply has been posted"
+msgstr "Odpowiedź została udzielona"
+
+msgid "Reply has not been posted"
+msgstr "Odpowiedź nie została udzielona"
+
+msgid "Report By User"
+msgstr "Raport według użytkownika"
+
+msgid "Report By Users"
+msgstr "Raport według użytkowników"
+
+msgid "Requester Info"
+msgstr "Informacja wnioskującego"
+
+msgid "Role has been deleted"
+msgstr "Funkcja została usunięta"
+
+msgid "Role has been stored"
+msgstr "Funkcja została zapisana"
+
+msgid "Role has not been deleted"
+msgstr "Funkcja nie została usunięta"
+
+msgid "Role has not been stored"
+msgstr "Funkcja nie została zapisana"
+
+msgid "Save Staff Member"
+msgstr "Zapisz członka zespołu"
+
+msgid "Save User Field"
+msgstr "Zapisz pole użytkownika"
+
+msgid "Save attachments if found in email"
+msgstr "Zapisz załączniki jeśli znajdują się w mailu"
+
+msgid "Save email template"
+msgstr "Zapisz szablon maila"
+
+msgid "Save premade message"
+msgstr "Zapisz projekt wiadmości"
+
+msgid "Search Announcement"
+msgstr "Szukaj powiadomienia"
+
+msgid "Search Download"
+msgstr "Szukaj pobranego pliku"
+
+msgid "Search FAQ"
+msgstr "Przeszukuj FAQ"
+
+msgid "Search Knowledge Base"
+msgstr "Przeszukaj bazę wiedzy"
+
+msgid "Select Staff"
+msgstr "Wybierz zespół"
+
+msgid "Select department"
+msgstr "Wybierz dział"
+
+msgid "Select priority"
+msgstr "Wybierz priorytet"
+
+msgid "Service is running please close the page"
+msgstr "Usługa działa, proszę zamknąć stronę"
+
+msgid "Set no. of days to mark ticket as overdue"
+msgstr ""
+"Ustaw numer dni, aby sprawa została automatycznie oznaczona jako "
+"przeterminowana"
+
+msgid "Setting"
+msgstr "Ustawienia"
+
+msgid "Show Detail"
+msgstr "Pokaż szczegóły"
+
+msgid "Show captcha on visitor form ticket"
+msgstr "Pokaż Captcha w formularzu sprawy gościa"
+
+msgid "Show captcha when visitor want to create ticket"
+msgstr "Pokaż captcha, kiedy gość chce otworzyć sprawę"
+
+msgid "Show latest FAQ's. Options:"
+msgstr "Pokazuj ostatnie FAQ. Opcje:"
+
+msgid "Show latest announcements. Options:"
+msgstr "Pokaż najnowsze ogłoszenia. Opcje:"
+
+msgid "Show latest downloads. Options:"
+msgstr "Pokaż najnowsze pliki do pobrania. Opcje:"
+
+msgid "Show latest knowledge base. Options:"
+msgstr "Pokaż najnowszą bazę wiedzy. Opcje:"
+
+msgid "Show new and reply mail notifications"
+msgstr "Pokaż powiadomienia email o nowych sprawach i odpowiedziach"
+
+msgid "Show number of open, closed, answered ticket in my ticket"
+msgstr "Pokaż liczbę moich otwartych, zamkniętych, odpowiedzianych spraw"
+
+msgid "Show popular FAQ's. Options:"
+msgstr "Pokaż popularne FAQ. Opcje:"
+
+msgid "Show popular announcements. Options:"
+msgstr "Pokaż popularne ogłoszenia. Opcje:"
+
+msgid "Show popular downloads. Options:"
+msgstr "Pokaż popularne pobrania. Opcje:"
+
+msgid "Show popular knowledge base. Options:"
+msgstr "Pokaż popularną bazę wiedzy. Opcje:"
+
+msgid "Some thing wrong try again later"
+msgstr "Coś poszło źle, spróbuj później"
+
+msgid "Staff Member"
+msgstr "Członek zespołu"
+
+msgid "Staff Members"
+msgstr "Pracownicy sztabu"
+
+msgid "Staff Menu Setting"
+msgstr "Ustawienia menu personelu"
+
+msgid "Staff Section"
+msgstr "Strefa zespołu"
+
+msgid "Staff Ticket"
+msgstr "Sprawa zespołu"
+
+msgid "Staff member has been deleted"
+msgstr "Członek zespołu został usunięty"
+
+msgid "Staff member has been stored"
+msgstr "Członek zespołu został zapisany"
+
+msgid "Staff member has not been deleted"
+msgstr "Członek zespołu nie został usunięty"
+
+msgid "Staff member has not been stored"
+msgstr "Członek zespołu nie został zapisany"
+
+msgid "Staff member in use cannot deleted"
+msgstr "Członek zespołu w trakcie pracy, nie może być usunięty"
+
+msgid "Staff member name"
+msgstr "Nazwisko członka zespołu"
+
+msgid "Start using"
+msgstr "Rozpocznij używanie"
+
+msgid "Support Area"
+msgstr "Strefa pomocy"
+
+msgid "System Slug"
+msgstr "Nazwa zastępcza"
+
+msgid "System slug is confilicted with post or page slug."
+msgstr ""
+"Nazwa zastępcza systemowa jest w konflikcie z nazwą zastępczą postu lub strony."
+
+msgid "Thanks For Installing JS Ticket Pro"
+msgstr "Dziękujemy za zainstalowanie JS Ticket Pro"
+
+msgid "This message will show on new ticket"
+msgstr "Ta wiadomość będzie pokazana w nowej sprawie"
+
+msgid "Ticket Department Transfer"
+msgstr "Transfer sprawy do działu"
+
+msgid "Ticket Operations Mail Setting"
+msgstr "Ustawienia maila o działaniach w sprawie"
+
+msgid "Ticket Response Staff"
+msgstr "Odpowiedź zespołu"
+
+msgid "Ticket Via Email"
+msgstr "Zgłoszenie sprawy przez email"
+
+msgid "Ticket auto close if user not respond within given days"
+msgstr ""
+"Automatyczne zamknięcie sprawy, jeżeli użytkownik nie odpowie w ciągu podanej "
+"liczby dni"
+
+msgid "Ticket can be reopen within given number of days"
+msgstr "Sprawa może zostać otwarta w ciągu podanego okresu dni"
+
+msgid "Ticket has been locked"
+msgstr "Sprawa została zablokowana"
+
+msgid "Ticket has been marked as in progress"
+msgstr "Sprawa została oznaczona jako w trakcie"
+
+msgid "Ticket has been marked as overdue"
+msgstr "Sprawa została oznaczona jako przeterminowana"
+
+msgid "Ticket has been reopend"
+msgstr "Sprawa została otworzona ponownie"
+
+msgid "Ticket has been stored"
+msgstr "Sprawa została zapisana"
+
+msgid "Ticket has been unlocked"
+msgstr "Sprawa została odblokowana"
+
+msgid "Ticket has not been locked"
+msgstr "Sprawa nie została zablokowana"
+
+msgid "Ticket has not been marked as in progress"
+msgstr "Sprawa nie została oznaczona jako w trakcie"
+
+msgid "Ticket has not been marked as overdue"
+msgstr "Sprawa nie została oznaczona jako przeterminowana"
+
+msgid "Ticket has not been reopened"
+msgstr "Sprawa nie została otworzona ponownie"
+
+msgid "Ticket has not been stored"
+msgstr "Sprawa nie została zapisana"
+
+msgid "Ticket has not been unlocked"
+msgstr "Sprawa nie została odblokowana"
+
+msgid "Ticket is assigned to staff by"
+msgstr "Sprawa przypisana do zespołu przez"
+
+msgid "Ticket is locked"
+msgstr "Sprawa jest zablokowana"
+
+msgid "Ticket is locked by"
+msgstr "Sprawa jest zablokowana przez"
+
+msgid "Ticket is marked as in progress by"
+msgstr "Sprawa została oznaczona jako w trakcie przez"
+
+msgid "Ticket is marked as overdue by"
+msgstr "Sprawa została oznaczona jako przeterminowana przez"
+
+msgid "Ticket is reopened by"
+msgstr "Sprawa otwarta ponownie przez"
+
+msgid "Ticket is unlocked by"
+msgstr "Sprawa została odblokowana przez"
+
+msgid "Ticket mark overdue"
+msgstr "Oznaczenie sprawy jako przeterminowanej"
+
+msgid "Ticket reopen time limit end"
+msgstr "Koniec okresu ponownego otwarcia sprawy"
+
+msgid "Tickets By Staff"
+msgstr "Sprawy według członków zespołu"
+
+msgid "Tickets by priorities"
+msgstr "Sprawy według priorytetów"
+
+msgid "To Use This Feature You Must Be Staff Memeber"
+msgstr "Aby używać tej funkcji, musisz być członkiem zespołu"
+
+msgid "To access this page please login"
+msgstr "Aby uzyskać dostęp do tej strony musisz się zalogować"
+
+msgid "Today"
+msgstr "Dzisiaj"
+
+msgid "Top menu links"
+msgstr "Linki do górnego menu"
+
+msgid "Type"
+msgstr "Typ"
+
+msgid "Unable Connect To Server"
+msgstr "Nie można połączyć się z serwerem"
+
+msgid "Unable to connect to server"
+msgstr "Błąd połączenia z serwerem"
+
+msgid "Update"
+msgstr "Aktualizuj"
+
+msgid "Use Search Feature To Select The User"
+msgstr "Użyj funkcji wyszukiwania, aby wybrać użytkownika"
+
+msgid "User Menu Setting"
+msgstr "Ustawienia menu użytkownika"
+
+msgid "User already staff member"
+msgstr "Użytkownik jest już częścią zespołu"
+
+msgid "User id"
+msgstr "Id użytkownika"
+
+msgid "View"
+msgstr "Widok"
+
+msgid "View Ticket"
+msgstr "Zobacz sprawę"
+
+msgid "Visitor published"
+msgstr "Odwiedzający opublikowany"
+
+msgid "Waiting Customer Reply"
+msgstr "Oczekiwanie na odpowiedź klienta"
+
+msgid "Waiting Staff Reply"
+msgstr "Oczekiwanie na odpowiedź zespołu"
+
+msgid "Waiting reply"
+msgstr "Oczekiwanie na odpowiedź"
+
+msgid "Waiting staff reply"
+msgstr "Oczekuje na odpowiedź personelu"
+
+msgid "Would you like to add this type to parent"
+msgstr "Czy chcesz dodać ten typ do rodzica?"
+
+msgid "You are Already Logged in"
+msgstr "Jesteś już zalogowany/a"
+
+msgid "You are not allowed to view this page"
+msgstr "Nie masz uprawnień, aby zobaczyć tę stronę"
+
+msgid "You are not logged in"
+msgstr "Nie jesteś zalogowany/a"
+
+msgid "You are not staff member"
+msgstr "Nie jesteś pracownikiem zespołu"
+
+msgid "You cannot unmark it"
+msgstr "Nie możesz tego odznaczyć"
+
+msgid "Your parent does not have this type"
+msgstr "Twój rodzic nie ma tego typu"
+
+msgid "Your System Is Up To Date"
+msgstr "Twój system jest aktualny"
+
+msgid "Your account is disabled please contact to administrator"
+msgstr "Twoje konto jest wyłączone prosimy o kontakt z administratorem"
+
+msgid "Your child have this type"
+msgstr "Twoje dziecko ma ten typ"
+
+msgid "Your setting is working please save the setting"
+msgstr "Twoje ustawienia są poprawne, zapisz je"
+
+msgid "Zip library"
+msgstr "Biblioteka Zip"
+
+msgid "Zip library not exist"
+msgstr "Biblioteka Zip nie istnieje"
+
+msgid "directory is not writeable"
+msgstr "katalog nie jest zapisywalny"
+
+msgid "extension"
+msgstr "rozszerzenie"
+
+msgid "override department setting"
+msgstr "nadpisz ustawienia działu"
+
+msgid "Add Files"
+msgstr "Dodaj pliki"
+
+msgid "Add Userfield"
+msgstr "Dodaj pole użytkownika"
+
+msgid "Are you sure delete"
+msgstr "Czy na pewno usunąć"
+
+msgid "Assign User Permissions"
+msgstr "Przypisz uprawnienia użytkownika"
+
+msgid "Assign to"
+msgstr "Przypisz do"
+
+msgid "Blocked"
+msgstr "Zablokowane"
+
+msgid "Change ticket priority"
+msgstr "Zmień priorytet zgłoszenia"
+
+msgid "Check box"
+msgstr "Zaznacz pole"
+
+msgid "Control Panel Coulmn"
+msgstr "Kolumna panelu kontrolnego"
+
+msgid "Data directory in not writable"
+msgstr "Brak możliwości zapisu w katalogu Data"
+
+msgid "Depandent field"
+msgstr "Zależne pole"
+
+msgid "Dir not exist"
+msgstr "Katalog nie istnieje"
+
+msgid "Display #"
+msgstr "Wyświetl #"
+
+msgid "Drop down"
+msgstr "Rozwiń"
+
+msgid "Due Date"
+msgstr "Termin końcowy"
+
+msgid "Email already exist"
+msgstr "Email jest już w bazie"
+
+msgid "Email reads sucessfully"
+msgstr "Email przeczytany"
+
+msgid "Empty values are not allowed"
+msgstr "Puste wartości niedozwolone"
+
+msgid "Enable print ticket"
+msgstr "Włącz drukowanie zgłoszenia"
+
+msgid "Field Name"
+msgstr "Pole nazwiska"
+
+msgid "Field mark ordering down"
+msgstr "Uporządkowanie oznaczenia pola"
+
+msgid "Get JS Tickets Translations"
+msgstr "Pobierz tłumaczenia JS Tickets"
+
+msgid "Invalid data directory"
+msgstr "Niewłaściwy katalog Data"
+
+msgid "Jerror Alertnoauthor"
+msgstr "Powiadomienie o błędzie braku autora"
+
+msgid "Jstickets Uninstall Text"
+msgstr "Tekst odinstalowania JS Ticket"
+
+msgid "Language Translations"
+msgstr "Tłumaczenia językowe"
+
+msgid "Loading"
+msgstr "Ładowanie"
+
+msgid "Multi select"
+msgstr "Multiwybór"
+
+msgid "New Mail Message Recevied"
+msgstr "Nowy mail otrzymany"
+
+msgid "New Mail Receviced"
+msgstr "Otrzymano nowy mail"
+
+msgid "Not assigned"
+msgstr "Nie przypisana"
+
+msgid "Not default"
+msgstr "Nie domyślne"
+
+msgid "Operation Cancel"
+msgstr "Działanie anulowania"
+
+msgid "Page not found"
+msgstr "Nie znaleziono strony"
+
+msgid "Permission"
+msgstr "Uprawnienie"
+
+msgid "Phone"
+msgstr "Telefon"
+
+msgid "Phone Ext"
+msgstr "Rozszerzenie telefonu"
+
+msgid "Premade"
+msgstr "Przygotowana"
+
+msgid "Print ticket"
+msgstr "Drukuj zgłoszenie"
+
+msgid "Radio button"
+msgstr "Przycisk radiowy"
+
+msgid "Read only"
+msgstr "Tylko do odczytu"
+
+msgid "Reply has not been stored"
+msgstr "Odpowiedź nie została zapisana"
+
+msgid "Required language is not installed"
+msgstr "Wymagany język nie jest zainstalowany"
+
+msgid "Save Role Permission"
+msgstr "Zapisz rolę uprawnień"
+
+msgid "Select parent field"
+msgstr "Wybierz pole nadrzędne"
+
+msgid "Select','js-jobs"
+msgstr "Wybierz „,” js-jobs"
+
+msgid "Staff Members Control Panel Links"
+msgstr "Linki Członków Zespołu w Panelu Sterowania"
+
+msgid "Staff Members Top Menu Links"
+msgstr "Linki członków zespołu w top menu"
+
+msgid "Text"
+msgstr "Tekst"
+
+msgid "Text area"
+msgstr "Pole tekstu"
+
+msgid "Text field"
+msgstr "Pole tekstowe"
+
+msgid "Ticket in use cannot deleted"
+msgstr "Nie można usunąć otwartego zgłoszenia"
+
+msgid "Ticket mark in progress"
+msgstr "Zaznaczanie zgłoszenia w trakcie"
+
+msgid "Unknown"
+msgstr "Nieznany"
+
+msgid "Upload file"
+msgstr "Załącz plik"
+
+msgid "Use The Table Below To Add New Values"
+msgstr "Skorzystaj z poniższej tabeli, aby dodać nowe wartości"
+
+msgid "User Control Panel Links"
+msgstr "Linki użytkownika w panelu sterowania"
+
+msgid "User Top Menu Links"
+msgstr "Linki użytkownika w top menu"
+
+msgid "User field has been deleted"
+msgstr "Pole użytkownika zostało usunięte"
+
+msgid "User field has been stored"
+msgstr "Pole użytkownika zostało zapisane"
+
+msgid "User field has not been deleted"
+msgstr "Pole użytkownika nie zostało usunięte"
+
+msgid "User field has not been stored"
+msgstr "Pole użytkownika nie zostało zapisane"
+
+msgid "Values Between 1 T0 12 Default Is 3"
+msgstr "Wartości pomiędzy 1 D0 12. Domyślnie 3."
+
+msgid "View all"
+msgstr "Podgląd wszystkich"
+
+msgid "Visitor Menu Setting"
+msgstr "Ustawienia menu gościa"
+
+msgid "Waiting admin/staff reply"
+msgstr "Oczekuje na odpowiedź admina lub personelu"
+
+msgid "is not writeable"
+msgstr "nie jest zapisywalny"
+
+msgid "show print ticket icon on ticketdetail page to user"
+msgstr ""
+"pokaż użytkownikowi ikonę wydruku zgłoszenia na stronie szczegółów zgłoszenia"
+
+msgid "Form Category"
+msgstr "Formularz kategorii"
+
+msgid "You are not allowed to view this ticket"
+msgstr "Brak zezwolenia na podgląd tego zgłoszenia"
+
+msgid "You have already provided feedback for this ticket"
+msgstr "Udzieliłeś już odpowiedzi dla tego zgłoszenia"
+
+msgid "Ticket not found"
+msgstr "Nie znaleziono zgłoszenia"
+
+msgid "Thank you for your feedback"
+msgstr "Dziękujemy za twoją odpowiedź"
+
+msgid "Feedback Setting"
+msgstr "Ustawienie sprzężenia zwrotnego"
+
+msgid "Interval type to mark ticket as overdue"
+msgstr "Typ interwału w celu zaznaczania zgłoszenia jako zaległe"
+
+msgid "Set no. of days or hours to mark ticket as overdue"
+msgstr "Liczba dni po których zgłoszenie będzie przeterminowane"
+
+msgid "Select whether you want to show captcha on registration form or not"
+msgstr "Wybierz, czy chcesz pokazać captcha w formularzu rejestracyjnym, czy nie"
+
+msgid "Select role you want to assign to new users"
+msgstr "Wybierz rolę dla nowych użytkowników"
+
+msgid "Select whether users can reply to closed ticket via email or not"
+msgstr ""
+"Wybierz, czy użytkownicy mogą odpowiadać na zamknięte zgłoszenia przez e-mail, "
+"czy nie"
+
+msgid "This text will appear whenever visitor creates ticket"
+msgstr "Ten tekst pojawi się za każdym razem, gdy użytkownik utworzy zgłoszenie"
+
+msgid "Set no. of days or hours to send feedback email after ticket is closed"
+msgstr ""
+"Ustaw nr dni lub godzin na wysłanie wiadomości zwrotnej po zamknięciu "
+"zgłoszenia"
+
+msgid "Feedback Successful message to customer"
+msgstr "Informacja zwrotna Pomyślna wiadomość dla klienta"
+
+msgid "You cannot use this email it is used in ticket via email"
+msgstr ""
+"Nie możesz użyć tego adresu e-mail, który jest używany w bilecie za "
+"pośrednictwem poczty elektronicznej"
+
+msgid "User of this department will receive email on new ticket"
+msgstr "Użytkownik tego działu otrzyma wiadomość e-mail z nowym zgłoszeniem"
+
+msgid "Departent Report"
+msgstr "Raport Departamentu"
+
+msgid "Users tickets"
+msgstr "Zgłoszenia użytkowników"
+
+msgid "Users Ticekts"
+msgstr "Zgłoszenia użytkowników"
+
+msgid "Edit reason"
+msgstr "Popraw powód"
+
+msgid "Answerd"
+msgstr "Odpowiedziane"
+
+msgid "Select Staff Member"
+msgstr "Wybierz członka personelu"
+
+msgid "Provide Feedback"
+msgstr "Przekazać opinię"
+
+msgid "Field Parent has not been stored"
+msgstr "Pole Parent nie zostało zapisane"
+
+msgid "Please Insert Atleat one value for every option"
+msgstr "Proszę wstawić co najmniej jedną wartość dla każdej opcji"
+
+msgid "Add New"
+msgstr "Dodaj nowy"
+
+msgid "User Field"
+msgstr "Pole użytkownika"
+
+msgid "Misc"
+msgstr "Różne"
+
+msgid "We'd love to hear from"
+msgstr "Bardzo chcielibyśmy usłyszeć od"
+
+msgid "You"
+msgstr "Pan(i)"
+
+msgid "Departments Reports"
+msgstr "Raporty działów"
+
+msgid "Staff Feedbacks"
+msgstr "Informacje zwrotne od personelu"
+
+msgid "Password Again"
+msgstr "Powtórz hasło"
+
+msgid "Register New Account"
+msgstr "Rejestruj nowe konto"
+
+msgid "Tickets Updater"
+msgstr "Aktualizujący zgłoszenie"
+
+msgid "Report By Department"
+msgstr "Raport według działu"
+
+msgid "out of"
+msgstr "poza"
+
+msgid "Report By Deparments"
+msgstr "Raport wg działów"
+
+msgid "Deparments"
+msgstr "Działy"
+
+msgid "No Data"
+msgstr "Brak danych"
+
+msgid "Staff Report"
+msgstr "Raport personelu"
+
+msgid "Date From"
+msgstr "Data od"
+
+msgid "Date To"
+msgstr "Data do"
+
+msgid "My Reports"
+msgstr "Moje raporty"
+
+msgid "Staff Members Reports"
+msgstr "Raporty członków personelu"
+
+msgid "Ticket has been created"
+msgstr "Zgłoszenie zostało utworzone"
+
+msgid "Issue Summary"
+msgstr "Podsumowanie problemu"
+
+msgid "All Downloads"
+msgstr "Wszystkie pobrania"
+
+msgid "Low"
+msgstr "Niska"
+
+msgid "Customer Feedbacks"
+msgstr "Informacje zwrotne od klientów"
+
+msgid "Upload"
+msgstr "Załącz"
+
+msgid "Ticketid"
+msgstr "Id zgłoszenia"
+
+msgid "Duedate Ticket"
+msgstr "Termin rozwiązania zgłoszenia"
+
+msgid "New Ticket Notification"
+msgstr "Powiadomienie o nowym zgłoszeniu"
+
+msgid "Edit Own Time"
+msgstr "Edytuj własny czas"
+
+msgid "View Feedback"
+msgstr "Wyświetl opinie"
+
+msgid "Assign Role Permissions"
+msgstr "Przypisz uprawnienia roli"
+
+msgid "Assign Role To User"
+msgstr "Przypisz rolę do użytkownika"
+
+msgid "Add User"
+msgstr "Dodaj użytkownika"
+
+msgid "Edit User"
+msgstr "Popraw użytkownika"
+
+msgid "Delete Department"
+msgstr "Usuń dział"
+
+msgid "View Department"
+msgstr "Podgląd działu"
+
+msgid "Delete Role"
+msgstr "Usuń rolę"
+
+msgid "Delete User"
+msgstr "Usuń użytkownika"
+
+msgid "View Role"
+msgstr "Wyświetl rolę"
+
+msgid "View User"
+msgstr "Wyświetl użytkownika"
+
+msgid "View Staff Reports"
+msgstr "Podgląd raportów personelu"
+
+msgid "View Department Reports"
+msgstr "Podgląd raportów działu"
+
+msgid "View Category"
+msgstr "Podgląd kategorii"
+
+msgid "View Knowledge Base"
+msgstr "Podgląd bazy wiedzy"
+
+msgid "Delete Category"
+msgstr "Usuń kategorię"
+
+msgid "Delete Knowledge Base"
+msgstr "Usuń bazę wiedzy"
+
+msgid "View FAQ"
+msgstr "Zobacz FAQ"
+
+msgid "Delete FAQ"
+msgstr "Usuń FAQ"
+
+msgid "View Download"
+msgstr "Podgląd pobierania"
+
+msgid "Delete Download"
+msgstr "Usuń pobieranie"
+
+msgid "View Announcement"
+msgstr "Zobacz ogłoszenie"
+
+msgid "Delete Announcement"
+msgstr "Usuń ogłoszenie"
+
+msgid "Allow Mail System"
+msgstr "Zezwalaj na system poczty"
+
+msgid "Internal Note Title"
+msgstr "Tytuł notatki wewnętrznej"
+
+msgid "Satisfaction Reports"
+msgstr "Raporty satysfakcji"
+
+msgid "Exports"
+msgstr "Eksporty"
+
+msgid "Customer Satisfaction Report"
+msgstr "Raport satysfakcji klienta"
+
+msgid "Please wait installation in progress"
+msgstr "Proszę czekać. Trwa instalacja"
+
+msgid "Show Captcha To Visitor On Form Ticket"
+msgstr "Pokaż Captcha odwiedzającemu na formularzu"
+
+msgid "Feedback Email Settings"
+msgstr "Ustawienia e-mail opinii"
+
+msgid "Feedback successfully stored message"
+msgstr "Informacja zwrotna pomyślnie zapisana wiadomość"
+
+msgid "Ticket Fields"
+msgstr "Pola zgłoszenia"
+
+msgid "Export Tickets"
+msgstr "Eksportuj zgłoszenia"
+
+msgid "High"
+msgstr "Wysoki"
+
+msgid "Ticket has been unmarked as overdue"
+msgstr "Zgłoszenie zostało oznaczone jako nieprzeterminowane"
+
+msgid "Ticket has not been unmarked as overdue"
+msgstr "Zgłoszenie nie było przeterminowane"
+
+msgid "Ticket is unmarked as overdue by"
+msgstr "Zgłoszenie przeterminowane o"
+
+msgid "Assigned To Me"
+msgstr "Przydzielone do mnie"
+
+msgid "JS Support Ticket System"
+msgstr "System zgłoszeń wsparcia JS"
+
+msgid "Management"
+msgstr "Zarządzanie"
+
+msgid "Ticket Id"
+msgstr "Id zgłoszenia"
+
+msgid "Assign To"
+msgstr "Przydziel do"
+
+msgid "Show on listing"
+msgstr "Pokaż na liście"
+
+msgid "Remarks"
+msgstr "Uwagi"
+
+msgid "You are not login"
+msgstr "Nie jesteś zalogowany"
+
+msgid "Pro Features"
+msgstr "Funkcjonalności wersji Pro"
+
+msgid "Upgrade"
+msgstr "Aktualizacja"
+
+msgid "Feature available in pro version only"
+msgstr "Funkcjonalność dostępna tylko w wersji Pro"
+
+msgid "JS Support Ticket Pro Feature"
+msgstr "Funkcjonalność wersji Pro"
+
+msgid "Unlimited color tools to desire result"
+msgstr "Nieograniczone narzędzia do kolorowania, które chcą osiągnąć rezultat"
+
+msgid "Access Control Level"
+msgstr "Poziom kontroli dostępu"
+
+msgid "Access control limit you can limit your staff to do specific task"
+msgstr ""
+"Limit kontroli dostępu możesz ograniczyć swój personel do wykonania "
+"określonego zadania"
+
+msgid "Staff member create premade message premade available in ticket reply"
+msgstr ""
+"Pracownik tworzy wstępnie przygotowaną wiadomość wstępnie przygotowaną w "
+"odpowiedzi na zgłoszenie"
+
+msgid "Staff member can be created and reply your customer tickets"
+msgstr "Można utworzyć członka personelu i odpowiedzieć na zgłoszenia klienta"
+
+msgid "Help topic can be add with respect to departments"
+msgstr "Temat pomocy można dodać w odniesieniu do działów"
+
+msgid "You can create and maintain knowledge Base for your ticket system"
+msgstr ""
+"Możesz stworzyć i utrzymywać bazę wiedzy dla swojego systemu zgłoszeniowego"
+
+msgid "You can add downloads for your customers"
+msgstr "Możesz dodawać pliki do pobrania dla swoich klientów"
+
+msgid "Add announcements for your support system"
+msgstr "Dodaj ogłoszenia do swojego systemu wsparcia"
+
+msgid "You can Manager FAQs"
+msgstr "Możesz zarządzać najczęściej zadawanymi pytaniami"
+
+msgid "You can ban and unabn any spam email address"
+msgstr "Banuj lub anuluj banowanie dowolnego adresu email ze spamem"
+
+msgid "If and only if customer not reply certain days ticket marked overdue"
+msgstr ""
+"Tylko wtedy, gdy klient nie odpowie w określonej liczbie dni na zgłoszenie "
+"zostanie oznaczony jako zaległy"
+
+msgid "System will read your email and create tickets"
+msgstr "System odczyta email i utworzy zgłoszenia"
+
+msgid "Internal notes for staff members and administrator ticket based"
+msgstr ""
+"Wewnętrzne notatki dla członków personelu, na podstawie zgłoszeń administratora"
+
+msgid "Assign To Staff"
+msgstr "Przypisz do personelu"
+
+msgid "Ticket can be transferred to any other staff member"
+msgstr "Zgłoszenie można przekazać dowolnemu członkowi personelu"
+
+msgid "Ticket can also be transferred to any other department"
+msgstr "Zgłoszenie można również przenieść do innego działu"
+
+msgid "Activity Log"
+msgstr "Log aktywności"
+
+msgid "Ticket action history with time and user name"
+msgstr "Historia akcji zgłoszeń z czasem i nazwą użytkownika"
+
+msgid "Admin can export tickets in csv format to keep record"
+msgstr ""
+"Administrator może eksportować zgłoszenia w formacie CSV, aby zachować rejestr"
+
+msgid "Customer Feedback"
+msgstr "Opinie klientów"
+
+msgid "Customer can provide feedback that can be used to improve services"
+msgstr ""
+"Klient może przekazać informacje zwrotne, które można wykorzystać do "
+"ulepszenia usług"
+
+msgid "RTL Supported"
+msgstr "Obsługiwany RTL"
+
+msgid "JS Support Ticket auto adjusts to RTL or LTR without any problem."
+msgstr ""
+"JS Support Ticket automatycznie dostosowuje się do RTL lub LTR bez żadnego "
+"problemu."
+
+msgid "Staff Time Tracking"
+msgstr "Śledzenie czasu personelu"
+
+msgid "Visitor Ticket Open"
+msgstr "Otwarte zgłoszenia gości"
+
+msgid "Visitor can also open ticket in you support system"
+msgstr "Gość może również utworzyć zgłoszenie w systemie wsparcia"
+
+msgid "You can now lock or unlock any ticket for certain time"
+msgstr ""
+"Możesz teraz zablokować lub odblokować dowolne zgłoszenie na określony czas"
+
+msgid "Pro version only"
+msgstr "Tylko w wersji Pro"
+
+msgid "Email"
+msgstr "E-mail"
+
+msgid "Status"
+msgstr "Status"
+
+msgid "This ticket is marked as overdue"
+msgstr "Bilet ten jest oznaczony jako spóźniony"
+
+msgid "Ticket marked as overdue"
+msgstr "Bilet oznaczony jako spóźniony"
+
+msgid "Log"
+msgstr "Dziennik"
+
+msgid "Help Desk"
+msgstr "Pomoc techniczna"
+
+msgid "Gmail"
+msgstr "Gmaila"
+
+msgid "Yahoo"
+msgstr "Wieśniak"
+
+msgid "Aol"
+msgstr "Aol"
+
+msgid "Hotmail"
+msgstr "Hotmail"
+
+msgid "Cron Job"
+msgstr "Crona Joba"
+
+msgid "Web Cron Job"
+msgstr "Zadanie Web Cron"
+
+msgid "Wget"
+msgstr "Wget"
+
+msgid "Curl"
+msgstr "Kędzior"
+
+msgid "URL"
+msgstr "Adres URL"
+
+msgid "Agent"
+msgstr "Agent"
+
+msgid "FAQ"
+msgstr "Często zadawane pytania"
+
+msgid "Logo"
+msgstr "Logo"
+
+msgid "Mail"
+msgstr "Poczta"
+
+msgid "System"
+msgstr "System"
+
+msgid "Minus"
+msgstr "Minus"
+
+msgid "JS Help Desk"
+msgstr "Pomoc techniczna JS"
+
+msgid "Google Recaptcha"
+msgstr "Recaptcha w Google"
+
+msgid "MailChimp"
+msgstr "MailChimp"
+
+msgid "Online"
+msgstr "online"
+
+msgid "DD-MM-YYYY"
+msgstr "DD / MM / RRRR"
+
+msgid "MM-DD-YYYY"
+msgstr "MM-DD-RRRR"
+
+msgid "YYYY-MM-DD"
+msgstr "RRRR-MM-DD"
+
+msgid "Kb"
+msgstr "Kb"
+
+msgid "Top Header"
+msgstr "Górny nagłówek"
+
+msgid "Admin"
+msgstr "Admin"
+
+msgid "Firebase Bucket Storage"
+msgstr "Magazyn wiadro Firebase"
+
+msgid ""
+"Private Credentials Encryption Key changing this value will discard all "
+"existing credentials "
+msgstr ""
+"Klucz szyfrowania poświadczeń prywatnych zmiana tej wartości spowoduje "
+"odrzucenie wszystkich istniejących poświadczeń"
+
+msgid "SMTP"
+msgstr "SMTP"
+
+msgid "TLS"
+msgstr "TLS"
+
+msgid "SSL"
+msgstr "SSL"
+
+msgid "SMTP Secure"
+msgstr "Bezpieczne SMTP"
+
+msgid "50%"
+msgstr "50%"
+
+msgid "100%"
+msgstr "100%"
+
+msgid "WooCommerce"
+msgstr "WooCommerce"
+
+msgid "envato"
+msgstr "envato"
+
+msgid "mailchimp"
+msgstr "mailchimp"
+
+msgid "Mailchimp"
+msgstr "Mailchimp"
+
+msgid "paidsupport"
+msgstr "płatne wsparcie"
+
+msgid "JS Help Desk / JS Support Ticket Control Panel"
+msgstr "Pomoc techniczna JS / Panel kontroli zgłoszeń JS"
+
+msgid "Captcha"
+msgstr "Captcha"
+
+msgid "JS Support Ticket Settings"
+msgstr "Ustawienia biletu pomocy technicznej JS"
+
+msgid ":"
+msgstr ":"
+
+msgid "JS Help Desk Addon Installer"
+msgstr "Instalator dodatku JS Help Desk"
+
+msgid "Add ons for JS Help Desk have been installed and activated successfully. "
+msgstr "Dodatki do JS Help Desk zostały pomyślnie zainstalowane i aktywowane."
+
+msgid "NA"
+msgstr "NA"
+
+msgid "Transfer"
+msgstr "Przenosić"
+
+msgid "JNone"
+msgstr "JŻaden"
+
+msgid ","
+msgstr ","
+
+msgid "5.0"
+msgstr "5,0"
+
+msgid "Forum"
+msgstr "Forum"
+
+msgid "PHP"
+msgstr "PHP"
+
+msgid "Start"
+msgstr "Początek"
+
+msgid "1"
+msgstr "1"
+
+msgid "Id"
+msgstr "ID"
+
+msgid "Num"
+msgstr "Liczba"
+
+msgid "Word Press Extension Directory"
+msgstr "Katalog rozszerzeń wordpress"
+
+msgid "OK"
+msgstr "OK"
+
+msgid "JS Support Ticket Pro"
+msgstr "Bilet pomocy technicznej JS Pro"
+
+msgid "User has been successfully registered"
+msgstr "Użytkownik został pomyślnie zarejestrowany"
+
+msgid "Select Form"
+msgstr "Wybierz Formularz"
+
+msgid "Envato Purchase Code"
+msgstr "Kod zakupu Envato"
+
+msgid "Urgent"
+msgstr "Pilny"
+
+msgid "EDD Order ID"
+msgstr "Identyfikator zamówienia EDD"
+
+msgid "Search keywords"
+msgstr "Wyszukaj słowa kluczowe"
+
+msgid "Search title"
+msgstr "Wyszukaj tytuł"
+
+msgid "Manager"
+msgstr "Menedżer"
+
+msgid "Assign Ticket To Agent"
+msgstr "Przypisz bilet do agenta"
+
+msgid "Mark In Progress"
+msgstr "Oznacz w toku"
+
+msgid "Change Ticket Priority"
+msgstr "Zmień priorytet biletu"
+
+msgid "Ban Email And Close Ticket"
+msgstr "Zablokuj e-mail i zamknij bilet"
+
+msgid "Release Ticket"
+msgstr "Bilet wydania"
+
+msgid "View Credentials"
+msgstr "Wyświetl dane uwierzytelniające"
+
+msgid "Edit Credentials"
+msgstr "Edytuj dane uwierzytelniające"
+
+msgid "Mark Non Premium"
+msgstr "Oznacz jako Non Premium"
+
+msgid "Link To Paid Support"
+msgstr "Link do płatnego wsparcia"
+
+msgid "Export Ticket not translate"
+msgstr "Bilet eksportowy nie jest tłumaczony"
+
+msgid "Edit Help Topic not translate"
+msgstr "Edytuj temat pomocy, nie tłumacz"
+
+msgid "View Help Topic"
+msgstr "Wyświetl temat pomocy"
+
+msgid "Delete Help Topic"
+msgstr "Usuń temat pomocy"
+
+msgid "Edit Canned Response"
+msgstr "Edytuj odpowiedź w szablonie"
+
+msgid "View Canned Response"
+msgstr "Wyświetl odpowiedź w szablonie"
+
+msgid "Delete Canned Response"
+msgstr "Usuń odpowiedź szablonową"
+
+msgid "Standard"
+msgstr "Standard"
+
+msgid "Default with auto assign"
+msgstr "Domyślnie z automatycznym przypisywaniem"
+
+msgid "Visible"
+msgstr "Widoczny"
+
+msgid "Select Visible"
+msgstr "Wybierz Widoczne"
+
+msgid "Logedin user"
+msgstr "Zalogowany użytkownik"
+
+msgid "Logedin user only"
+msgstr "Tylko zalogowany użytkownik"
+
+msgid "visitor"
+msgstr "gość"
+
+msgid "Single Header"
+msgstr "Pojedynczy nagłówek"
+
+msgid "Multiple Header"
+msgstr "Wiele nagłówków"
+
+msgid "Quick installation Guide"
+msgstr "Przewodnik szybkiej instalacji"
+
+msgid "How to setup"
+msgstr "Jak skonfigurować"
+
+msgid "Ticket Creation"
+msgstr "Tworzenie biletów"
+
+msgid "Custom Fields"
+msgstr "Pola niestandardowe"
+
+msgid "Email Notification Problems"
+msgstr "Problemy z powiadomieniami e-mail"
+
+msgid "arrow"
+msgstr "strzałka"
+
+msgid "close"
+msgstr "zamknąć"
+
+msgid "Multiform"
+msgstr "Wielopostaciowy"
+
+msgid "Add WP Users"
+msgstr "Dodaj użytkowników WP"
+
+msgid "Other Products"
+msgstr "Inne produkty"
+
+msgid "watch video"
+msgstr "obejrzyj wideo"
+
+msgid "Get"
+msgstr "Dostawać"
+
+msgid "This prefix will be added to slug incase of homepage links"
+msgstr ""
+"Ten prefiks zostanie dodany do ślimaka w przypadku linków do strony głównej"
+
+msgid " This prefix will be added to slug incase of conflict"
+msgstr "Ten przedrostek zostanie dodany do ślimaka w przypadku konfliktu"
+
+msgid "Reset All"
+msgstr "Zresetować wszystko"
+
+msgid "Search By Slug"
+msgstr "Szukaj według ślimaka"
+
+msgid "Slug List"
+msgstr "Lista ślimaków"
+
+msgid "This button will only save slugs on current page"
+msgstr "Ten przycisk zapisuje tylko ślimaki na bieżącej stronie"
+
+msgid "Slug"
+msgstr "Ślimak"
+
+msgid "Export Style"
+msgstr "Eksportuj styl"
+
+msgid "Add Multiform"
+msgstr "Dodaj Multiform"
+
+msgid "Edit Fields"
+msgstr "Edytuj pola"
+
+msgid "Save Multiform"
+msgstr "Zapisz Multiform"
+
+msgid "Conditions"
+msgstr "Warunki"
+
+msgid "Add Conditions"
+msgstr "Dodaj warunki"
+
+msgid "Rule Title"
+msgstr "Tytuł reguły"
+
+msgid "Agent Auto Assign"
+msgstr "Automatyczne przypisywanie agenta"
+
+msgid "Add Rule"
+msgstr "Dodaj regułę"
+
+msgid "Condition Title"
+msgstr "Tytuł warunku"
+
+msgid "Condition Operator"
+msgstr "Operator warunku"
+
+msgid "Condition value"
+msgstr "Wartość warunku"
+
+msgid "Select Condition Title"
+msgstr "Wybierz Tytuł warunku"
+
+msgid "Submit Type"
+msgstr "Typ przesłania"
+
+msgid "Select Condition Operator"
+msgstr "Wybierz Operator warunku"
+
+msgid "Contain"
+msgstr "Zawierać"
+
+msgid "Matched"
+msgstr "Dopasowane"
+
+msgid "Equal"
+msgstr "Równy"
+
+msgid "No Value found"
+msgstr "Nie znaleziono wartości"
+
+msgid "No Operator found"
+msgstr "Nie znaleziono operatora"
+
+msgid "Add more Condition"
+msgstr "Dodaj więcej warunku"
+
+msgid "Save Rule"
+msgstr "Zapisz regułę"
+
+msgid "Delete Condition"
+msgstr "Usuń warunek"
+
+msgid "Add Ticket Using Multiform"
+msgstr "Dodaj bilet za pomocą Multiform"
+
+msgid "Addons Status"
+msgstr "Stan dodatków"
+
+msgid "Activated"
+msgstr "Aktywowany"
+
+msgid "Deactivate"
+msgstr "Dezaktywować"
+
+msgid "Updated"
+msgstr "Zaktualizowano"
+
+msgid "Deactivated"
+msgstr "Dezaktywowane"
+
+msgid "Activate"
+msgstr "Aktywuj"
+
+msgid "New Update Version"
+msgstr "Nowa wersja aktualizacji"
+
+msgid "is Available"
+msgstr "jest dostępny"
+
+msgid "Expired"
+msgstr "Wygasły"
+
+msgid "Buy Now"
+msgstr "Kup Teraz"
+
+msgid "Help"
+msgstr "Pomoc"
+
+msgid "Update Now"
+msgstr "Aktualizuj teraz"
+
+msgid "Add-On’s For Help Desk"
+msgstr "Dodatki do działu pomocy technicznej"
+
+msgid ""
+"Get trusted WordPress add on’s. Guaranteed to work fast, safe to use, "
+"beautifully coded, packed with features and easy to use."
+msgstr ""
+"Zdobądź zaufane dodatki do WordPress. Gwarantujemy szybką pracę, "
+"bezpieczeństwo w użyciu, pięknie zakodowane, pełne funkcji i łatwe w użyciu."
+
+msgid "Save big with an exclusive membership plan today!"
+msgstr "Zaoszczędź dużo dzięki ekskluzywnemu planowi członkostwa już dziś!"
+
+msgid "show bundle pack"
+msgstr "pokaż pakiet pakietów"
+
+msgid ""
+"Add agents and assign roles and permissions to provide assistance and support "
+"to customer support tickets."
+msgstr ""
+"Dodaj agentów i przypisz role i uprawnienia, aby zapewnić pomoc i wsparcie dla "
+"zgłoszeń obsługi klienta."
+
+msgid ""
+"Define rules for ticket to auto close. Ticket will be auto close after "
+"specific interval of time which can be set by admin."
+msgstr ""
+"Zdefiniuj reguły automatycznego zamykania zgłoszeń. Bilet zostanie "
+"automatycznie zamknięty po upływie określonego czasu, który może ustawić "
+"administrator."
+
+msgid ""
+"Get the survey from your customers on ticket closing to improve your quality "
+"of services and assistance."
+msgstr ""
+"Uzyskaj ankietę od swoich klientów dotyczącą zamykania zgłoszeń, aby poprawić "
+"jakość usług i pomocy."
+
+msgid "Helptopic"
+msgstr "Temat pomocy"
+
+msgid ""
+"Help topics help users to find and select the area with which they need "
+"assistance."
+msgstr ""
+"Tematy pomocy pomagają użytkownikom znaleźć i wybrać obszar, w którym "
+"potrzebują pomocy."
+
+msgid ""
+"The private note is used as reminders or to give other agents insights into "
+"the ticket issue. User Won't see the private notes."
+msgstr ""
+"Prywatna notatka służy jako przypomnienie lub aby dać innym agentom wgląd w "
+"problematykę biletu. Użytkownik nie zobaczy prywatnych notatek."
+
+msgid ""
+"Stop losing productivity on repetitive queries,Build your knowledge base, "
+"group solutions by topics to facilitate users."
+msgstr ""
+"Przestań tracić produktywność na powtarzające się zapytania. Zbuduj swoją bazę "
+"wiedzy, grupuj rozwiązania według tematów, aby ułatwić użytkownikom."
+
+msgid ""
+"Enables admin to set N numbers of tickets for users to create and set N "
+"numbers of Ticket to open for agents separately."
+msgstr ""
+"Umożliwia administratorowi ustawienie N numerów biletów dla użytkowników w "
+"celu utworzenia i ustawienia N numerów biletów do osobnego otwierania dla "
+"agentów."
+
+msgid "Multi Language Email Templates"
+msgstr "Wielojęzyczne szablony e-maili"
+
+msgid ""
+"It allows to create language-based email templates for all JS Help Desk email "
+"templates."
+msgstr ""
+"Umożliwia tworzenie szablonów wiadomości e-mail w oparciu o język dla "
+"wszystkich szablonów wiadomości e-mail JS Help Desk."
+
+msgid ""
+"Canned Responses are pre-populated messages that allows support agents to "
+"respond quickly to customer issues."
+msgstr ""
+"Odpowiedzi w szablonach to wstępnie wypełnione wiadomości, które umożliwiają "
+"pracownikom pomocy technicznej szybkie reagowanie na problemy klientów."
+
+msgid ""
+"Enables users to reply to the tickets via email without the need to login to "
+"the support system first."
+msgstr ""
+"Umożliwia użytkownikom odpowiadanie na zgłoszenia e-mailem bez konieczności "
+"wcześniejszego logowania się do systemu wsparcia."
+
+msgid ""
+"Make unlimited announcements associated with support system to get customer "
+"interaction."
+msgstr ""
+"Twórz nieograniczone ogłoszenia powiązane z systemem wsparcia, aby uzyskać "
+"interakcję z klientem."
+
+msgid ""
+"Ban Email allows you to block email of any user to restrict him to create new "
+"tickets."
+msgstr ""
+"Ban Email pozwala na zablokowanie poczty dowolnego użytkownika w celu "
+"ograniczenia mu możliwości tworzenia nowych zgłoszeń."
+
+msgid "Descktop Notifications"
+msgstr "Powiadomienia na pulpicie"
+
+msgid ""
+"Save the ticket as a PDF in your system or the admin will also be able to "
+"export all the data inside of Ticket."
+msgstr ""
+"Zapisz bilet w formacie PDF w swoim systemie, w przeciwnym razie administrator "
+"będzie mógł również wyeksportować wszystkie dane z biletu."
+
+msgid ""
+"Tired of getting tickets about the same problems? Add FAQs to drastically "
+"reduce the number of common questions from users."
+msgstr ""
+"Masz dość otrzymywania zgłoszeń dotyczących tych samych problemów? Dodaj "
+"często zadawane pytania, aby drastycznie zmniejszyć liczbę częstych pytań "
+"użytkowników."
+
+msgid "Admin Widgets"
+msgstr "Widżety administratora"
+
+msgid ""
+"Use internal email to send emails to one agent to another agent with in "
+"support ticket."
+msgstr ""
+"Użyj wewnętrznego adresu e-mail, aby wysyłać wiadomości e-mail do jednego "
+"agenta do innego agenta posiadającego zgłoszenie do pomocy technicznej."
+
+msgid "Front-End Widget"
+msgstr "Widżet front-endowy"
+
+msgid ""
+"Paid Support is the easiest way to integrate and manage payments for your "
+"support tickets."
+msgstr ""
+"Płatne wsparcie to najłatwiejszy sposób integracji i zarządzania płatnościami "
+"za zgłoszenia do pomocy technicznej."
+
+msgid "Mail Chimp"
+msgstr "Mailchimp"
+
+msgid ""
+"The Mail Chimp add-on adds a new checkbox to the registration form for "
+"prompting new users to subscribe your email-list."
+msgstr ""
+"Dodatek Mail Chimp dodaje do formularza rejestracyjnego nowe pole wyboru, "
+"które pozwala nowym użytkownikom zapisać się na Twoją listę e-mailową."
+
+msgid ""
+"EDD offers customers to open new tickets just one click from their EDD account "
+"with optionally validating the license keys."
+msgstr ""
+"EDD oferuje klientom otwieranie nowych biletów jednym kliknięciem na koncie "
+"EDD z opcjonalną walidacją kluczy licencyjnych."
+
+msgid "email cc"
+msgstr "e-mail cc"
+
+msgid "Email Cc"
+msgstr "Wyślij e-mail do Dw"
+
+msgid ""
+"CC(Carbon Copy) - the people who should know about the information which is "
+"being shared and the people included are able to see who is there in the list."
+msgstr ""
+"CC(Carbon Copy) – osoby, które powinny wiedzieć o udostępnianych informacjach "
+"oraz osoby uwzględnione, mogą zobaczyć, kto znajduje się na liście."
+
+msgid "multiform"
+msgstr "wielopostaciowy"
+
+msgid "Multiform allows user to add more than one form based on requirements."
+msgstr ""
+"Multiform pozwala użytkownikowi dodać więcej niż jeden formularz w zależności "
+"od wymagań."
+
+msgid "agent auto assign"
+msgstr "automatyczne przypisywanie agenta"
+
+msgid ""
+"When auto assignment is enabled and a ticket is created, an appropriate agent "
+"is automatically assigned to the ticket and it is moved to the Assigned state."
+msgstr ""
+"Po włączeniu automatycznego przypisywania i utworzeniu zgłoszenia odpowiedni "
+"agent zostanie automatycznie przypisany do zgłoszenia i przeniesiony do stanu "
+"Przypisany."
+
+msgid "Social Login"
+msgstr "Logowanie społecznościowe"
+
+msgid ""
+"Users can login from their social media accounts. They can create a new "
+"account or use social media accounts."
+msgstr ""
+"Użytkownicy mogą logować się ze swoich kont w mediach społecznościowych. Mogą "
+"założyć nowe konto lub skorzystać z kont w mediach społecznościowych."
+
+msgid "JS Help Desk Add-Ons Bundle Pack"
+msgstr "Pakiet dodatków JS Help Desk"
+
+msgid "Basic"
+msgstr "Podstawowy"
+
+msgid "Unlimited Agents"
+msgstr "Nieograniczona liczba agentów"
+
+msgid "Show all"
+msgstr "Pokaż wszystko"
+
+msgid "Everything in basic included and"
+msgstr "Wszystko w pakiecie podstawowym i"
+
+msgid "Professional"
+msgstr "Profesjonalny"
+
+msgid "Everything in standard included and"
+msgstr "Wszystko w standardzie zawarte i"
+
+msgid "All Future Addons"
+msgstr "Wszystkie przyszłe dodatki"
+
+msgid ""
+"Hey there! We have recently launched a fresh update for the add-ons. Don't "
+"forget to update the add-ons to enjoy the greatest features!"
+msgstr ""
+"No hej! Niedawno wprowadziliśmy nową aktualizację dodatków. Nie zapomnij "
+"zaktualizować dodatków, aby cieszyć się najlepszymi funkcjami!"
+
+msgid "View Addone Status"
+msgstr "Wyświetl status dodatku"
+
+msgid "slug for ticket page"
+msgstr "błąd na stronie z biletami"
+
+msgid "slug for agent add ticket page"
+msgstr "slug dla strony dodawania biletów przez agenta"
+
+msgid "slug for rolepermission page"
+msgstr "slug dla strony uprawnień ról"
+
+msgid "slug for add announcement"
+msgstr "ślimak do dodania ogłoszenia"
+
+msgid "slug for add department page"
+msgstr "slug do dodawania strony działu"
+
+msgid "slug for add download page"
+msgstr "slug do dodawania strony pobierania"
+
+msgid "slug for add faq page"
+msgstr "slug do dodawania strony z często zadawanymi pytaniami"
+
+msgid "slug for faq page"
+msgstr "błąd dla strony z często zadawanymi pytaniami"
+
+msgid "slug for add article page"
+msgstr "slug do strony dodawania artykułu"
+
+msgid "slug for add category page"
+msgstr "slug do strony dodawania kategorii"
+
+msgid "slug for user knowledgebase articles page"
+msgstr "slug dla strony z artykułami bazy wiedzy użytkowników"
+
+msgid "slug for article detail page"
+msgstr "błąd na stronie ze szczegółami artykułu"
+
+msgid "slug for add role page"
+msgstr "slug na stronie dodawania roli"
+
+msgid "slug for add agent page"
+msgstr "slug na stronie dodawania agenta"
+
+msgid "slug for agent permissions page"
+msgstr "slug na stronie uprawnień agenta"
+
+msgid "slug for my tickets page"
+msgstr "ślimak na stronie z moimi biletami"
+
+msgid "slug for agent my tickets page"
+msgstr "ślimak dla agenta, strona z moimi biletami"
+
+msgid "slug for knowledgebase page"
+msgstr "slug dla strony bazy wiedzy"
+
+msgid "slug for agent categories page"
+msgstr "błąd na stronie kategorii agentów"
+
+msgid "slug for agent kb articles page"
+msgstr "slug dla strony z artykułami agenta kb"
+
+msgid "slug for agent announcements page"
+msgstr "slug na stronie z ogłoszeniami agentów"
+
+msgid "slug for agent downloads page"
+msgstr "slug do strony pobierania agentów"
+
+msgid "slug for agent faqs page"
+msgstr "błąd na stronie z często zadawanymi pytaniami agentów"
+
+msgid "slug for add ticket page"
+msgstr "slug do dodawania strony biletu"
+
+msgid "slug for ticket status page"
+msgstr "błąd na stronie statusu biletu"
+
+msgid "slug for controlpanel"
+msgstr "sluch do panelu sterowania"
+
+msgid "slug for agent report detail page"
+msgstr "błąd na stronie szczegółów raportu agenta"
+
+msgid "slug for agent reports page"
+msgstr "błąd na stronie raportów agentów"
+
+msgid "slug for department reports page"
+msgstr "ślimak na stronie raportów wydziałów"
+
+msgid "slug for announcement detail page"
+msgstr "slug do strony ze szczegółami ogłoszenia"
+
+msgid "slug for feedback page"
+msgstr "slug do strony z opiniami"
+
+msgid "slug for agent feedbacks page"
+msgstr "błąd na stronie z opiniami agentów"
+
+msgid "slug for visitor message page"
+msgstr "slug dla strony z wiadomościami dla gości"
+
+msgid "slug for add help topic page"
+msgstr "slug do dodawania strony tematu pomocy"
+
+msgid "slug for agent help topics page"
+msgstr "slug do strony z tematami pomocy agenta"
+
+msgid "slug for add canned response page"
+msgstr "slug do dodania strony odpowiedzi w puszkach"
+
+msgid "slug for agent canned responses page"
+msgstr "informacja o stronie odpowiedzi w puszkach agentów"
+
+msgid "slug for gdpr data compliance actions1"
+msgstr "slug do działań związanych z zgodnością danych z RODO1"
+
+msgid "slug for print ticket page"
+msgstr "slug do wydrukowania strony z biletami"
+
+msgid "slug for my profile page"
+msgstr "slug dla mojej strony profilowej"
+
+msgid "slug for login page"
+msgstr "slug do strony logowania"
+
+msgid "slug for user register page"
+msgstr "slug dla strony rejestracji użytkownika"
+
+msgid "slug for add message page"
+msgstr "slug na stronie dodawania wiadomości"
+
+msgid "slug for message detail page"
+msgstr "slug na stronie ze szczegółami wiadomości"
+
+msgid "slug for message inbox page"
+msgstr "slug na stronie skrzynki odbiorczej wiadomosci"
+
+msgid "slug for message outbox page"
+msgstr "slug dla strony skrzynki nadawczej wiadomosci"
+
+msgid "slug for roles page"
+msgstr "ślimak na stronie ról"
+
+msgid "slug for agent page"
+msgstr "błąd dla strony agenta"
+
+msgid "slug for departments page"
+msgstr "slug dla strony wydziałów"
+
+msgid "slug for announcements page"
+msgstr "slug do strony z ogłoszeniami"
+
+msgid "slug for downloads page"
+msgstr "slug do strony pobierania"
+
+msgid "slug for faqs page"
+msgstr "błąd dla strony z często zadawanymi pytaniami"
+
+msgid "API key is required for linkedin app"
+msgstr "Do aplikacji Linkedin wymagany jest klucz API"
+
+msgid "API Key"
+msgstr "Klucz API"
+
+msgid "secret key"
+msgstr "sekretny klucz"
+
+msgid "Secret"
+msgstr "Sekret"
+
+msgid "Facebook user can login in js support ticket"
+msgstr ""
+"Użytkownik Facebooka może zalogować się do zgłoszenia pomocy technicznej js"
+
+msgid "Login With Linkedin"
+msgstr "Zaloguj się za pomocą Linkedin"
+
+msgid "API key is required for facebook app"
+msgstr "Do aplikacji Facebook wymagany jest klucz API"
+
+msgid "Login with linkedin"
+msgstr "Zaloguj się za pomocą LinkedIn"
+
+msgid "Login with facebook"
+msgstr "Zaloguj się przez facebook"
+
+msgid "Create User via email"
+msgstr "Utwórz użytkownika poprzez e-mail"
+
+msgid "Export Ticket"
+msgstr "Bilet eksportowy"
+
+msgid "Ticket Listing"
+msgstr "Lista biletów"
+
+msgid "Visitor Ticket Setting"
+msgstr "Ustawienie biletu dla gości"
+
+msgid ""
+"By enabling this option, a user can know to whom the ticket has been assigned."
+msgstr ""
+"Włączając tę ​​opcję użytkownik może dowiedzieć się do kogo został przypisany "
+"bilet."
+
+msgid "Assigned info. on admin tickets"
+msgstr "Przypisane informacje. na biletach administratora"
+
+msgid ""
+"By enabling this option, an agent can know to whom the ticket has been "
+"assigned."
+msgstr ""
+"Włączając tę ​​opcję, agent może wiedzieć, do kogo został przypisany bilet."
+
+msgid "Assigned info. on user tickets"
+msgstr "Przypisane informacje. na biletach użytkownika"
+
+msgid ""
+"By enabling this option, an admin can know to whom the ticket has been "
+"assigned."
+msgstr ""
+"Włączając tę ​​opcję, administrator może wiedzieć, do kogo został przypisany "
+"bilet."
+
+msgid "Assigned info. on agent tickets"
+msgstr "Przypisane informacje. na biletach agenta"
+
+msgid ""
+"By enabling this option, a user can know who closed the ticket and when that "
+"ticket closed."
+msgstr ""
+"Włączając tę ​​opcję, użytkownik może wiedzieć, kto i kiedy zamknął zgłoszenie."
+
+msgid "Closed info. on admin closed tickets"
+msgstr "Zamknięte informacje. na biletach zamkniętych przez administratora"
+
+msgid ""
+"By enabling this option, an agent can know who closed the ticket and when that "
+"ticket closed."
+msgstr "Włączając tę ​​opcję, agent może wiedzieć, kto i kiedy zamknął zgłoszenie."
+
+msgid "Closed info. on agent closed tickets"
+msgstr "Zamknięte informacje. na biletach zamkniętych dla agentów"
+
+msgid ""
+"By enabling this option, an admin can know who closed the ticket and when that "
+"ticket closed."
+msgstr ""
+"Włączając tę ​​opcję, administrator może wiedzieć, kto i kiedy zamknął "
+"zgłoszenie."
+
+msgid "Set default sorting for ticket listing"
+msgstr "Ustaw domyślne sortowanie listy biletów"
+
+msgid "Ascending"
+msgstr "Rosnąco"
+
+msgid "Descending"
+msgstr "Malejąco"
+
+msgid "Ticket listing sorting"
+msgstr "Sortowanie listy biletów"
+
+msgid "Select whether users can see the ticket delete button"
+msgstr "Wybierz, czy użytkownicy mogą widzieć przycisk usuwania zgłoszenia"
+
+msgid "Show ticket delete button"
+msgstr "Pokaż przycisk usuwania biletu"
+
+msgid ""
+"Select whether users can see the name of administrator or staff member on "
+"ticket reply"
+msgstr ""
+"Wybierz, czy użytkownicy mogą zobaczyć nazwisko administratora lub członka "
+"personelu w odpowiedzi na zgłoszenie"
+
+msgid "Show Anonymous Name On Ticket Reply"
+msgstr "Pokaż anonimowe imię i nazwisko w odpowiedzi na zgłoszenie"
+
+msgid ""
+"Select whether users can see the email of administrator or agent on ticket "
+"reply"
+msgstr ""
+"Wybierz, czy użytkownicy mogą zobaczyć adres e-mail administratora lub agenta "
+"w odpowiedzi na zgłoszenie"
+
+msgid "Show Admin OR Agent Email On Ticket Reply"
+msgstr "Pokaż adres e-mail administratora LUB agenta w odpowiedzi na zgłoszenie"
+
+msgid ""
+"Show or hide the multiform popup when creating a new ticket. if you hide them, "
+"the system will open the default form."
+msgstr ""
+"Pokaż lub ukryj wieloformatowe wyskakujące okienko podczas tworzenia nowego "
+"zgłoszenia. jeśli je ukryjesz, system otworzy formularz domyślny."
+
+msgid "Multiforms Popup For New Tickets"
+msgstr "Wyskakujące okienko Multiforms dla nowych biletów"
+
+msgid "Set suffix for custom ticketid"
+msgstr "Ustaw sufiks dla niestandardowego identyfikatora biletu"
+
+msgid "Ticketid Suffix"
+msgstr "Sufiks biletu"
+
+msgid "Set ticketid sequential or random .e.g"
+msgstr "Ustaw bilet sekwencyjny lub losowy"
+
+msgid "Set prefix for custom ticketid"
+msgstr "Ustaw prefiks dla niestandardowego identyfikatora biletu"
+
+msgid "Ticketid Prefix"
+msgstr "Prefiks biletowy"
+
+msgid "Support Icons"
+msgstr "Ikony wsparcia"
+
+msgid "Set custom support text"
+msgstr "Ustaw niestandardowy tekst wsparcia"
+
+msgid "Set custom support image"
+msgstr "Ustaw niestandardowy obraz pomocniczy"
+
+msgid "Custom Image"
+msgstr "Niestandardowy obraz"
+
+msgid "JS Help Desk Register Page"
+msgstr "Strona rejestracyjna działu pomocy technicznej JS"
+
+msgid "WordPress Default Login Page"
+msgstr "Domyślna strona logowania WordPress"
+
+msgid "JS Help Desk Login Page"
+msgstr "Strona logowania do działu pomocy technicznej JS"
+
+msgid "Set register Link"
+msgstr "Ustaw link do rejestracji"
+
+msgid "We are here to help you"
+msgstr "Jesteśmy tutaj, aby Ci pomóc"
+
+msgid "Help icon"
+msgstr "Ikona pomocy"
+
+msgid ""
+"JS Help Desk is a professional, simple, easy to use and complete customer "
+"support system."
+msgstr ""
+"JS Help Desk to profesjonalny, prosty, łatwy w obsłudze i kompletny system "
+"obsługi klienta."
+
+msgid "View all videos"
+msgstr "Zobacz wszystkie filmy"
+
+msgid "Video icon"
+msgstr "Ikona wideo"
+
+msgid "View All Videos"
+msgstr "Zobacz wszystkie filmy"
+
+msgid "Help Desk icon"
+msgstr "Ikona pomocy technicznej"
+
+msgid "JS Help Desk Support"
+msgstr "Pomoc techniczna JS"
+
+msgid ""
+"JS Help Desk delivers timely customer support if you have any query then we're "
+"here to show you the way."
+msgstr ""
+"JS Help Desk zapewnia terminową obsługę klienta. Jeśli masz jakieś pytania, "
+"jesteśmy tutaj, aby wskazać Ci drogę."
+
+msgid "Visitor ticket creation"
+msgstr "Tworzenie biletów dla gości"
+
+msgid "How to set ticket auto close"
+msgstr "Jak ustawić automatyczne zamykanie zgłoszeń"
+
+msgid "How to reopen closed ticket"
+msgstr "Jak ponownie otworzyć zamknięty bilet"
+
+msgid "How to lock a ticket"
+msgstr "Jak zablokować bilet"
+
+msgid "How to add private note"
+msgstr "Jak dodać prywatną notatkę"
+
+msgid "View ticket history"
+msgstr "Zobacz historię biletów"
+
+msgid "How to setup custom fields"
+msgstr "Jak skonfigurować pola niestandardowe"
+
+msgid "Set ticket auto overdue"
+msgstr "Ustaw automatyczne przeterminowanie biletu"
+
+msgid "Manually set ticket overdue"
+msgstr "Ręcznie ustaw zaległy bilet"
+
+msgid "How to merge tickets"
+msgstr "Jak połączyć bilety"
+
+msgid "How to export tickets"
+msgstr "Jak eksportować bilety"
+
+msgid "How use help topic"
+msgstr "Jak korzystać z tematu pomocy"
+
+msgid "How to change department"
+msgstr "Jak zmienić dział"
+
+msgid "How to use multi-forms"
+msgstr "Jak korzystać z multiform"
+
+msgid "How to paid support"
+msgstr "Jak uzyskać płatne wsparcie"
+
+msgid "How to use canned response"
+msgstr "Jak korzystać z odpowiedzi w puszkach"
+
+msgid "How to add private credentials"
+msgstr "Jak dodać prywatne dane uwierzytelniające"
+
+msgid "How to ban/unban user"
+msgstr "Jak zablokować/odbanować użytkownika"
+
+msgid "Agent system"
+msgstr "System agentowy"
+
+msgid "Manually assign ticket to agen"
+msgstr "Ręcznie przypisz bilet do agenta"
+
+msgid "How to edit time"
+msgstr "Jak edytować czas"
+
+msgid "How to use time tracking"
+msgstr "Jak korzystać ze śledzenia czasu"
+
+msgid "How to set max open ticket"
+msgstr "Jak ustawić maksymalny bilet otwarty"
+
+msgid "How to show counts"
+msgstr "Jak pokazać liczby"
+
+msgid "How to set Captcha"
+msgstr "Jak ustawić Captcha"
+
+msgid "User options"
+msgstr "Opcje użytkownika"
+
+msgid "How to set login redirect"
+msgstr "Jak ustawić przekierowanie logowania"
+
+msgid "How to set fields ordering"
+msgstr "Jak ustawić kolejność pól"
+
+msgid "How to enable social login"
+msgstr "Jak włączyć logowanie społecznościowe"
+
+msgid "Setup"
+msgstr "Organizować coś"
+
+msgid "How to enable email piping"
+msgstr "Jak włączyć przesyłanie poczty e-mail"
+
+msgid "How to set SMTP"
+msgstr "Jak ustawić SMTP"
+
+msgid "How to solve email notification problem"
+msgstr "Jak rozwiązać problem z powiadomieniami e-mail"
+
+msgid "How to translate"
+msgstr "Jak przetłumaczyć"
+
+msgid "How to set colors"
+msgstr "Jak ustawić kolory"
+
+msgid "How to add Shortcode"
+msgstr "Jak dodać krótki kod"
+
+msgid "How to install addons"
+msgstr "Jak zainstalować dodatki"
+
+msgid "How to Desktop Notifications"
+msgstr "Jak wyświetlać powiadomienia na pulpicie"
+
+msgid "How to use knowledge base"
+msgstr "Jak korzystać z bazy wiedzy"
+
+msgid "How to use downloads"
+msgstr "Jak korzystać z plików do pobrania"
+
+msgid "How to add announcement"
+msgstr "Jak dodać ogłoszenie"
+
+msgid "How to create FAQ"
+msgstr "Jak stworzyć FAQ"
+
+msgid "How to use email cc"
+msgstr "Jak korzystać z poczty e-mail cc"
+
+msgid "How to use internal mail"
+msgstr "Jak korzystać z poczty wewnętrznej"
+
+msgid "Use front-end widgets"
+msgstr "Użyj widżetów front-end"
+
+msgid "How to enable admin widgets"
+msgstr "Jak włączyć widżety administracyjne"
+
+msgid "Select Language"
+msgstr "Wybierz język"
+
+msgid "Email CC"
+msgstr "Wyślij e-mail do CC"
+
+msgid "Add Email CC"
+msgstr "Dodaj e-mail CC"
+
+msgid "Template For"
+msgstr "Szablon dla"
+
+msgid "Sr#"
+msgstr "Senior #"
+
+msgid "Template Title"
+msgstr "Tytuł szablonu"
+
+msgid "Template Type"
+msgstr "Typ szablonu"
+
+msgid "Add Email Cc"
+msgstr "Dodaj e-mail DW"
+
+msgid "Select Template For"
+msgstr "Wybierz Szablon dla"
+
+msgid "Select Template Type"
+msgstr "Wybierz Typ szablonu"
+
+msgid "Add more row"
+msgstr "Dodaj więcej wierszy"
+
+msgid "Delete row"
+msgstr "Usuń wiersz"
+
+msgid "Save Email CC"
+msgstr "Zapisz e-mail CC"
+
+msgid "To use this feature you must be agent"
+msgstr "Aby korzystać z tej funkcji, musisz być agentem"
+
+msgid "Form has been stored"
+msgstr "Formularz został zapisany"
+
+msgid "Default form cannot be set as disabled"
+msgstr "Domyślnego formularza nie można ustawić jako wyłączonego"
+
+msgid "Multiform has been deleted"
+msgstr "Multiform został usunięty"
+
+msgid "Select Parent"
+msgstr "Wybierz opcję Rodzic"
+
+msgid "Select Child"
+msgstr "Wybierz opcję Dziecko"
+
+msgid "Select Condition"
+msgstr "Wybierz Warunek"
+
+msgid "Not Equal"
+msgstr "Nie równe"
+
+msgid "To use this feature please fill the above three fields"
+msgstr "Aby skorzystać z tej funkcji proszę wypełnić powyższe trzy pola"
+
+msgid "The agent has been stored"
+msgstr "Środek został zapisany"
+
+msgid "The agent has been deleted"
+msgstr "Agent został usunięty"
+
+msgid "WP User ID"
+msgstr "Identyfikator użytkownika WP"
+
+msgid "WP Username"
+msgstr "Nazwa użytkownika WP"
+
+msgid "User Detail"
+msgstr "Szczegóły użytkownika"
+
+msgid "WP Full Name"
+msgstr "Pełna nazwa WP"
+
+msgid "WP Email Address"
+msgstr "Adres e-mail WP"
+
+msgid "Rule has been stored"
+msgstr "Reguła została zapisana"
+
+msgid "Rule has been deleted"
+msgstr "Reguła została usunięta"
+
+msgid "Email Cc has been stored"
+msgstr "Adres e-mail DW został zapisany"
+
+msgid "Email CC has been deleted"
+msgstr "Adres e-mail CC został usunięty"
+
+msgid "Agent permissions have been stored"
+msgstr "Uprawnienia agenta zostały zapisane"
+
+msgid "Select Canned Response"
+msgstr "Wybierz opcję Odpowiedź w formie szablonu"
+
+msgid "Ticket Merge"
+msgstr "Połączenie biletów"
+
+msgid "Delete Credentials"
+msgstr "Usuń dane uwierzytelniające"
+
+msgid "Mail To Agent"
+msgstr "Wyślij e-mail do agenta"
+
+msgid "View Agent Reports"
+msgstr "Zobacz raporty agentów"
+
+msgid "Add Credentials"
+msgstr "Dodaj dane uwierzytelniające"
+
+msgid "Edit Help Topic"
+msgstr "Edytuj temat pomocy"
+
+msgid ""
+"e.g ' I have read and agree to the [link] Terms and Conditions[/link].  ' The "
+"text between [link] and [/link] will be linked to provided url or wordpress "
+"page."
+msgstr ""
+"np. „Przeczytałem i zgadzam się z [link] Warunkami korzystania[/link]. ' Tekst "
+"pomiędzy [link] i [/link] będzie linkiem do podanego adresu URL lub strony "
+"wordpress."
+
+msgid "login"
+msgstr "Zaloguj sie"
+
+msgid "stars"
+msgstr "gwiazdy"
+
+msgid "Please write appreciated review at WP Extension Directory"
+msgstr "Proszę napisać cenną recenzję w katalogu rozszerzeń WP"
+
+msgid ""
+"We'd love to hear from you. It'll only take 2 minutes of your time, and will "
+"really help us spread the word"
+msgstr ""
+"Chcielibyśmy usłyszeć od ciebie. Zajmie to tylko 2 minuty Twojego czasu, a "
+"naprawdę pomoże nam w rozpowszechnieniu informacji"
+
+msgid "love"
+msgstr "Miłość"
+
+msgid "I'd love to help :)"
+msgstr "Chętnie pomogę :)"
+
+msgid "sad"
+msgstr "smutny"
+
+msgid "Not this time"
+msgstr "Nie tym razem"
+
+msgid "happy"
+msgstr "szczęśliwy"
+
+msgid "I've already rated you"
+msgstr "Już cię oceniłem"
+
+msgid "thanks"
+msgstr "Dzięki"
+
+msgid "You are awesome !......"
+msgstr "Jesteś niesamowity !......"
+
+msgid "Thanks for your support, we really appreciate it."
+msgstr "Dziękujemy za wsparcie, naprawdę je doceniamy."
+
+msgid "JS Help Desk Team"
+msgstr "Zespół pomocy technicznej JS"
+
+msgid "Remind you about this later?"
+msgstr "Przypomnieć Ci o tym później?"
+
+msgid "Remind me in 3 days"
+msgstr "Przypomnij mi za 3 dni"
+
+msgid "Remind me in 10 days"
+msgstr "Przypomnij mi za 10 dni"
+
+msgid "Remind me in 30 days"
+msgstr "Przypomnij mi za 30 dni"
+
+msgid "Don't remind me about this"
+msgstr "Nie przypominaj mi o tym"
+
+msgid "Watch Video"
+msgstr "Obejrzyj wideo"
+
+msgid "Slug(s) has been stored"
+msgstr "Ślimak został zapisany"
+
+msgid "Prefix has not been stored"
+msgstr "Prefiks nie został zapisany"
+
+msgid "+Add more Condition"
+msgstr "+Dodaj więcej warunku"
+
+msgid "Admin New Ticket Received"
+msgstr "Administrator otrzymał nowy bilet"
+
+msgid "Staff New Ticket Received"
+msgstr "Otrzymano nowy bilet dla personelu"
+
+msgid "New Department Received"
+msgstr "Otrzymano nowy dział"
+
+msgid "New Group Received"
+msgstr "Otrzymano nową grupę"
+
+msgid "New Agent Received"
+msgstr "Otrzymano nowego agenta"
+
+msgid "New Help Topic Received"
+msgstr "Otrzymano nowy temat pomocy"
+
+msgid "Admin Reassign Ticket"
+msgstr "Administrator ponownie przypisuje bilet"
+
+msgid "Staff Reassign Ticket"
+msgstr "Personel ponownie przypisuje bilet"
+
+msgid "Admin Close Ticket"
+msgstr "Bilet zamknięcia administratora"
+
+msgid "Staff Close Ticket"
+msgstr "Bilet zamknięcia personelu"
+
+msgid "Admin Delete Ticket"
+msgstr "Administrator usuń bilet"
+
+msgid "Staff Delete Ticket"
+msgstr "Personel usuń bilet"
+
+msgid "Admin Overdue Ticket"
+msgstr "Zaległy bilet administratora"
+
+msgid "Staff Overdue Ticket"
+msgstr "Bilet za spóźnienie personelu"
+
+msgid "Admin Email Baned"
+msgstr "Zablokowany adres e-mail administratora"
+
+msgid "Staff Email Baned"
+msgstr "Zablokowany e-mail personelu"
+
+msgid "Admin Ticket Transfered to Department"
+msgstr "Bilet administratora przeniesiony do działu"
+
+msgid "Staff Ticket Transfered to Department"
+msgstr "Bilet pracowniczy przeniesiony do działu"
+
+msgid "Admin Email baned and ticket closed"
+msgstr "Adres e-mail administratora zbanowany, a zgłoszenie zamknięte"
+
+msgid "Staff Email baned and ticket closed"
+msgstr "E-mail personelu zablokowany, a zgłoszenie zamknięte"
+
+msgid "Admin Email Unbaned"
+msgstr "Adres e-mail administratora został odblokowany"
+
+msgid "Staff Email Unbaned"
+msgstr "E-mail personelu został odblokowany"
+
+msgid "Admin Ticket Reply"
+msgstr "Odpowiedź administratora na zgłoszenie"
+
+msgid "Staff Ticket Reply"
+msgstr "Odpowiedź personelu na bilet"
+
+msgid "Ticket Received"
+msgstr "Otrzymano bilet"
+
+msgid "Banemail try new ticket"
+msgstr "Banemail wypróbuj nowy bilet"
+
+msgid "Admin Ticket has been locked"
+msgstr "Bilet administratora został zablokowany"
+
+msgid "Staff Ticket has been locked"
+msgstr "Bilet pracowniczy został zablokowany"
+
+msgid "Admin Ticket has been unlocked"
+msgstr "Bilet administratora został odblokowany"
+
+msgid "Staff Ticket has been unlocked"
+msgstr "Bilet personelu został odblokowany"
+
+msgid "Admin In progress Ticket"
+msgstr "Administrator W toku Bilet"
+
+msgid "Staff In progress Ticket"
+msgstr "Bilet personelu w toku"
+
+msgid "Admin Ticket priority changed"
+msgstr "Zmieniono priorytet zgłoszenia administratora"
+
+msgid "Staff Ticket priority changed"
+msgstr "Zmieniono priorytet biletu dla personelu"
+
+msgid "New Mail has been sent"
+msgstr "Nowa poczta została wysłana"
+
+msgid "New Reply has been sent"
+msgstr "Nowa odpowiedź została wysłana"
+
+msgid "Delete User Data"
+msgstr "Usuń dane użytkownika"
+
+msgid "Closed By"
+msgstr "Zamknięte przez"
+
+msgid "Closed On"
+msgstr "Zamknięte"
+
+msgid "Closed info. on user closed tickets"
+msgstr "Zamknięte informacje. na biletach zamkniętych dla użytkowników"
+
+msgid "custom text"
+msgstr "własny tekst"
+
+msgid "Select Languages"
+msgstr "Wybierz Języki"
+
+msgid "IMAP Authentication cancelled"
+msgstr "Uwierzytelnianie IMAP anulowane"
+
+msgid "Page Not Found !!"
+msgstr "Strona nie znaleziona !!"

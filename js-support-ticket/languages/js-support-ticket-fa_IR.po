@@ -1,0 +1,7510 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: fa_IR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.4.1\n"
+
+msgid "You are not allowed"
+msgstr "شما مجاز نیستید"
+
+msgid "The ticket has been locked"
+msgstr "تیکت قفل شده است."
+
+msgid "Successfully"
+msgstr "موفقیت آمیز"
+
+msgid "The ticket has not been locked"
+msgstr "تیکت قفل نشده است."
+
+msgid "Error"
+msgstr "خطا"
+
+msgid "Lock Ticket"
+msgstr "قفل کردن تیکت"
+
+msgid "The ticket is locked by"
+msgstr "تیکت قفل شده است توسط"
+
+msgid "The ticket has been unlocked"
+msgstr "تیکت قفل شده است."
+
+msgid "The ticket has not been unlocked"
+msgstr "تیکت قفل نشده است."
+
+msgid "Unlock Ticket"
+msgstr "باز کردن قفل تیکت"
+
+msgid "User already a staff member"
+msgstr "کاربر عضو کارمندان است."
+
+msgid "The staff member has not been stored"
+msgstr "کارکنان ذخیره نشده اند."
+
+msgid "The staff member has been stored"
+msgstr "کارکنان ذخیره شده اند."
+
+msgid "The staff member has been deleted"
+msgstr "کارکنان حذف شده اند."
+
+msgid "The staff member has not been deleted"
+msgstr "کارمند حذف نشده است"
+
+msgid "The staff member in use cannot delete"
+msgstr "کارکنان در حال استفاده نمی توانند حذف کنند"
+
+msgid "Staff"
+msgstr "کارمند"
+
+msgid "status has been changed"
+msgstr "وضعیت تغییر کرده است."
+
+msgid "status has not been changed"
+msgstr "وضعیت تغییری نکرده است."
+
+msgid "User ID"
+msgstr "شناسه کاربری"
+
+msgid "User Name"
+msgstr "نام کاربری"
+
+msgid "Email Address"
+msgstr "آدرس ایمیل"
+
+msgid "Name"
+msgstr "نام"
+
+msgid "Email"
+msgstr "ایمیل"
+
+msgid "Previous"
+msgstr "قبلی"
+
+msgid "Next"
+msgstr "بعدی"
+
+msgid "Active"
+msgstr "فعال"
+
+msgid "Disabled"
+msgstr "غیرفعال شده است."
+
+msgid "Uploaded file extension error."
+msgstr "خطای پسوند پرونده بارگذاری شد."
+
+msgid "Select user"
+msgstr "انتخاب کاربر"
+
+msgid "Username"
+msgstr "نام کاربری"
+
+msgid "Search"
+msgstr "جستجو"
+
+msgid "Reset"
+msgstr "پاک کردن"
+
+msgid "Use search feature to select the user"
+msgstr "برای انتخاب کاربر از ویژگی جستجو استفاده کنید"
+
+msgid "User"
+msgstr "کاربر"
+
+msgid "Select User"
+msgstr "انتخاب کاربر"
+
+msgid "Roles"
+msgstr "نقش ها"
+
+msgid "Select Role"
+msgstr "انتخاب نقش"
+
+msgid "First Name"
+msgstr "نام"
+
+msgid "Last Name"
+msgstr "نام خانوادگی"
+
+msgid "Office Phone"
+msgstr "تلفن محل کار"
+
+msgid "Extension"
+msgstr "افزونه"
+
+msgid "Mobile No"
+msgstr "شماره موبایل"
+
+msgid "Picture"
+msgstr "تصویر"
+
+msgid "Maximum File Size"
+msgstr "حداکثر اندازه فایل"
+
+msgid "File Extension Type"
+msgstr "فرمت های مجاز"
+
+msgid "Append Signature"
+msgstr "افزودن امضا"
+
+msgid "Append signature with a reply"
+msgstr "امضا با پاسخ"
+
+msgid "Signature"
+msgstr "امضا"
+
+msgid "Account Status"
+msgstr "وضعیت اکانت"
+
+msgid "Select Status"
+msgstr "انتخاب وضعیت"
+
+msgid "Save"
+msgstr "ذخیره"
+
+msgid "Cancel"
+msgstr "لغو کردن"
+
+msgid "Close"
+msgstr "بسته"
+
+msgid "Dashboard"
+msgstr "داشبورد"
+
+msgid "Add Agent"
+msgstr "عامل را اضافه کنید"
+
+msgid "Configuration"
+msgstr "پیکربندی"
+
+msgid "Version"
+msgstr "نسخه"
+
+msgid "image"
+msgstr "تصویر"
+
+msgid "Append"
+msgstr "افزودن"
+
+msgid "Add Permissions"
+msgstr "مجوزها را اضافه کنید"
+
+msgid "Permissions"
+msgstr "مجوز دسترسی"
+
+msgid "Department Section"
+msgstr "بخش دپارتمان"
+
+msgid "Ticket Section"
+msgstr "بخش تیکت"
+
+msgid "Agent Section"
+msgstr "بخش نمایندگی"
+
+msgid "Knowledge Base Section"
+msgstr "بخش آموزش"
+
+msgid "FAQ Section"
+msgstr "بخش سوالات متداول"
+
+msgid "Download Section"
+msgstr "بخش دانلود"
+
+msgid "Announcement Section"
+msgstr "بخش اطلاعیه"
+
+msgid "Mail Section"
+msgstr "بخش ایمیل"
+
+msgid "Help Topic Section"
+msgstr "بخش موضوع راهنما"
+
+msgid "Canned Response Section"
+msgstr "بخش پاسخ کنسرو"
+
+msgid "Select / Deselect All"
+msgstr "انتخاب / عدم انتخاب همه"
+
+msgid "Save Permissions"
+msgstr "ذخیره دسترسی ها"
+
+msgid "Agents"
+msgstr "نمایندگان"
+
+msgid "Add"
+msgstr "اضافه کردن"
+
+msgid "Full Name"
+msgstr "نام کامل"
+
+msgid "Role"
+msgstr "نقش"
+
+msgid "Status"
+msgstr "وضعیت :"
+
+msgid "Created"
+msgstr "ایجاد شده"
+
+msgid "Action"
+msgstr "اقدام کردن"
+
+msgid "change status"
+msgstr "تغییروضعیت، تغییر حالت"
+
+msgid "Edit"
+msgstr "ویرایش"
+
+msgid "Delete"
+msgstr "حذف"
+
+msgid "Are you sure you want to delete"
+msgstr "آیا مطمئنید که میخواهید حذف کنید"
+
+msgid "Something went wrong to try again later."
+msgstr "مشکلی پیش آمد که بعدا دوباره امتحان کنید."
+
+msgid "My Profile"
+msgstr "پروفایل من"
+
+msgid "Upload Image"
+msgstr "بارگذاری تصویر"
+
+msgid "Phone No"
+msgstr "شماره موبایل"
+
+msgid "Upload file limit exceeds"
+msgstr "بیش از حد مجاز بارگذاری پرونده است"
+
+msgid "No help topic found"
+msgstr "تاپیکی پیدا نشد!"
+
+msgid "Error file size too large"
+msgstr "خطای اندازه پرونده بیش از حد بزرگ است."
+
+msgid "Select Department"
+msgstr "انتخاب دپارتمان"
+
+msgid "Select Help Topic"
+msgstr "انتخاب راهنما"
+
+msgid "Select Priority"
+msgstr "انتخاب اولویت"
+
+msgid "Select Canned response"
+msgstr "پاسخ کنسرو شده را انتخاب کنید"
+
+msgid "Add more"
+msgstr "افزودن موارد بیشتر"
+
+msgid "Remove"
+msgstr "برداشتن"
+
+msgid "Reason for edit"
+msgstr "دلیل ویرایش"
+
+msgid "Internal Note"
+msgstr "یادداشت داخلی"
+
+msgid "Enter valid woocommerce order#"
+msgstr "سفارش معتبر woocommerce را وارد کنید #"
+
+msgid "Order id found"
+msgstr "شناسه سفارش یافت شد"
+
+msgid "Order id not found"
+msgstr "شناسه سفارش یافت نشد"
+
+msgid "Select Product"
+msgstr "محصول را انتخاب کنید"
+
+msgid "Dated"
+msgstr "به تاریخ"
+
+msgid "Select Order ID"
+msgstr "شناسه سفارش را انتخاب کنید"
+
+msgid "Select license key"
+msgstr "کلید مجوز را انتخاب کنید"
+
+msgid "Assign to me"
+msgstr "اختصاص دادن به من"
+
+msgid "Submit Ticket"
+msgstr "ارسال تیکت"
+
+msgid "Show All"
+msgstr "نمایش همه"
+
+msgid "Show Less"
+msgstr "نمایش کمتر"
+
+msgid "Open"
+msgstr "تیکت های باز"
+
+msgid "Closed"
+msgstr "بسته شده"
+
+msgid "Answered"
+msgstr "پاسخ داده شده"
+
+msgid "Overdue"
+msgstr "سر رسیده / منقضی شده"
+
+msgid "All Tickets"
+msgstr "تمام تیکت ها"
+
+msgid "Tickets"
+msgstr "تیکت ها"
+
+msgid "Ticket ID"
+msgstr "شماره تیکت"
+
+msgid "Or"
+msgstr "یا"
+
+msgid "From"
+msgstr "از طرف"
+
+msgid "Select staff"
+msgstr "انتخاب کارکنان"
+
+msgid "Select"
+msgstr "انتخاب"
+
+msgid "Start Date"
+msgstr "تاریخ شروع"
+
+msgid "End Date"
+msgstr "تاریخ پایان"
+
+msgid "Assigned to me"
+msgstr "به من واگذار شد"
+
+msgid "Subject"
+msgstr "موضوع"
+
+msgid "Priority"
+msgstr "اولویت"
+
+msgid "sort"
+msgstr "مرتب سازی"
+
+msgid "New"
+msgstr "جدید"
+
+msgid "Waiting Reply"
+msgstr "در انتظار پاسخ"
+
+msgid "In Progress"
+msgstr "در حال انجام"
+
+msgid "Replied"
+msgstr "پاسخ داده شده"
+
+msgid "Close and merge"
+msgstr "ببندید و ادغام شوید"
+
+msgid "Created via Email"
+msgstr "ایجاد شده توسط ایمیل"
+
+msgid "The ticket is locked"
+msgstr "بلیط قفل است"
+
+msgid "Last Reply"
+msgstr "آخرین پاسخ :"
+
+msgid "Search by username"
+msgstr "جستجو با نام کاربری"
+
+msgid "Already exists"
+msgstr "درحال حاضر وجود دارد"
+
+msgid "The role has been stored"
+msgstr "این نقش ذخیره شده است"
+
+msgid "The role has not been stored"
+msgstr "این نقش ذخیره نشده است"
+
+msgid "The role has been deleted"
+msgstr "نقش حذف شده است"
+
+msgid "The role has not been deleted"
+msgstr "نقش حذف نشده است"
+
+msgid "The role in use cannot be deleting"
+msgstr "نقش در استفاده قابل حذف نیست"
+
+msgid "Save Role"
+msgstr "ذخیره نقش ها"
+
+msgid "Add Role"
+msgstr "اضافه کردن نقش"
+
+msgid "Role Permission"
+msgstr "مجوز دسترسی نقش"
+
+msgid "Role Name"
+msgstr "نام نقش"
+
+msgid "Role permissions"
+msgstr "مجوزهای دسترسی نقش"
+
+msgid "Search Roles"
+msgstr "نقش ها را جستجو کنید"
+
+msgid "Add New Role"
+msgstr "نقش جدید را اضافه کنید"
+
+msgid "An announcement has been stored"
+msgstr "یک اطلاعیه ذخیره شده است"
+
+msgid "An announcement has not been stored"
+msgstr "یک اطلاعیه ذخیره نشده است"
+
+msgid "An announcement has been deleted"
+msgstr "یک اطلاعیه حذف شده است"
+
+msgid "An announcement has not been deleted"
+msgstr "یک اطلاعیه حذف نشده است"
+
+msgid "Announcement"
+msgstr "اطلاعیه"
+
+msgid "ordering has been changed"
+msgstr "ترتیب تغییر کرده است."
+
+msgid "ordering has not changed"
+msgstr "ترتیب تغییری نکرده است."
+
+msgid "Public"
+msgstr "عمومی"
+
+msgid "Private"
+msgstr "خصوصی"
+
+msgid "Title"
+msgstr "عنوان"
+
+msgid "Parent Category"
+msgstr "مادر دسته"
+
+msgid "Select Category"
+msgstr "انتخاب دسته"
+
+msgid "Description"
+msgstr "توضیح"
+
+msgid "Save Announcement"
+msgstr "ذخیره کردن اطلاعیه"
+
+msgid "Add Announcement"
+msgstr "اضافه کردن اطلاعیه"
+
+msgid "Category"
+msgstr "دسته"
+
+msgid "Announcements"
+msgstr "اطلاعیه ها"
+
+msgid "Records per page"
+msgstr "سوابق در هر صفحه"
+
+msgid "Ordering"
+msgstr "مرتب سازی"
+
+msgid "Save Ordering"
+msgstr "ذخیره سفارش"
+
+msgid "Category Name"
+msgstr "نام دسته"
+
+msgid "Categories"
+msgstr "دسته ها"
+
+msgid "Banned Email Log List"
+msgstr "لیست ورود به سیستم ممنوعیت ایمیل"
+
+msgid "Logger Email"
+msgstr "ایمیل لاگر"
+
+msgid "Log"
+msgstr "ورود"
+
+msgid "IP Address"
+msgstr "آی پی آدرس"
+
+msgid "Ban email has been stored"
+msgstr "نامه بانکی ذخیره شده است"
+
+msgid "Ban email has not been stored"
+msgstr "ایمیل ممنوع ذخیره نشده است"
+
+msgid "Ban email has been deleted"
+msgstr "ایمیل بلاک شده پاک شده است."
+
+msgid "Ban email has not been deleted"
+msgstr "ایمیل ممنوع حذف نشده است"
+
+msgid "Ban email does not exist"
+msgstr "ایمیل بلاک شده وجود ندارد."
+
+msgid "Add Banned Email"
+msgstr "ایمیل ممنوعه اضافه کنید"
+
+msgid "Save Banned Email"
+msgstr "ذخیره ایمیل ممنوعه"
+
+msgid "Banned Emails"
+msgstr "ایمیل های بلاک شده"
+
+msgid "Emails"
+msgstr "ایمیل ها"
+
+msgid "Submitter"
+msgstr "ارسال کننده"
+
+msgid "Canned response message has been stored"
+msgstr "پیام پاسخ کنسرو ذخیره شده است"
+
+msgid "Canned response message has not been stored"
+msgstr "پیام پاسخ کنسرو ذخیره نشده است"
+
+msgid "Premade department message has been deleted"
+msgstr "پیغام های از پیش ساخته دپارتمان حذف شد."
+
+msgid "Premade department message has not been deleted"
+msgstr "پیغام های از پیش ساخته دپارتمان حذف نشده است."
+
+msgid "Canned response"
+msgstr "پاسخ کنسرو شده"
+
+msgid "Department"
+msgstr "دپارتمان"
+
+msgid "Response"
+msgstr "پاسخ"
+
+msgid "Save Canned Response"
+msgstr "پاسخ کنسرو را ذخیره کنید"
+
+msgid "Add Canned Response"
+msgstr "پاسخ کنسرو شده را اضافه کنید"
+
+msgid "The department under which the answer will be made is available"
+msgstr "دپارتمانی که پاسخ آن ارائه می شود در دسترس است"
+
+msgid "Offline"
+msgstr "آفلاین"
+
+msgid "Canned Responses"
+msgstr "پاسخ های آماده"
+
+msgid "Last Updated"
+msgstr "آخرین بروزرسانی"
+
+msgid "Not updated"
+msgstr "بروزرسانی نشده"
+
+msgid "Canned Response"
+msgstr "پاسخ کنسرو"
+
+msgid "Latest Tickets"
+msgstr "آخرین تیکت ها"
+
+msgid "Last Month Ticket Stats"
+msgstr "گزارش تیکتهای آخرین ماه"
+
+msgid "Pending"
+msgstr "در انتظار"
+
+msgid "The attachment has been removed"
+msgstr "پیوست حذف شده است"
+
+msgid "The attachment has not been removed"
+msgstr "پیوست حذف نشده است"
+
+msgid "The download has been stored"
+msgstr "بارگیری ذخیره شده است"
+
+msgid "The download has not been stored"
+msgstr "بارگیری ذخیره نشده است"
+
+msgid "Download"
+msgstr "دانلود"
+
+msgid "The download has been deleted"
+msgstr "بارگیری حذف شده است"
+
+msgid "The download has not been deleted"
+msgstr "بارگیری حذف نشده است"
+
+msgid "Download All"
+msgstr "دانلود همه"
+
+msgid "Attachments"
+msgstr "ضمیمه ها"
+
+msgid "Save Download"
+msgstr "ذخیره تنظیمات دانلود"
+
+msgid "Add Download"
+msgstr "اضافه کردن دانلود"
+
+msgid "Add More File"
+msgstr "اضافه کردن فایل های بیشتر"
+
+msgid "Delete attachment"
+msgstr "حذف کردن ضمیمه"
+
+msgid "Downloads"
+msgstr "دانلودها"
+
+msgid "grab"
+msgstr "گرفتن"
+
+msgid "Attachment"
+msgstr "ضمیمه"
+
+msgid "Files"
+msgstr "فایل ها"
+
+msgid "Help Desk"
+msgstr "میز راهنما"
+
+msgid "Get Help"
+msgstr "کمک بگیر"
+
+msgid "Service is running, please close the pag"
+msgstr "خدمات در حال اجرا است ، لطفاً بغض را ببندید"
+
+msgid ""
+"Admin email address and email piping address cannot be the same, your email "
+"piping will not be work."
+msgstr ""
+"آدرس ایمیل و آدرس لوله کشی ایمیل نمی توانند یکسان باشند ، لوله کشی ایمیل شما کار "
+"نخواهد کرد."
+
+msgid "Your setting is working please this."
+msgstr "لطفاً این گزینه را تنظیم کنید"
+
+msgid "Connection established but the system cannot read any email"
+msgstr "اتصال برقرار شد اما سیستم قادر به خواندن ایمیل نیست"
+
+msgid ""
+"IMAP is either not installed or not enabled in your server. Contact to hosting "
+"company"
+msgstr "IMAP در سرور شما نصب نشده یا فعال نشده است. تماس با شرکت میزبان"
+
+msgid "The configuration has been stored"
+msgstr "پیکربندی ذخیره شده است"
+
+msgid "The configuration not has been stored"
+msgstr "پیکربندی ذخیره نشده است"
+
+msgid "Email address already exist"
+msgstr "آدرس ایمیل قبلاً وجود دارد"
+
+msgid "Email for email piping has been stored"
+msgstr "ایمیل برای لوله کشی ایمیل ذخیره شده است"
+
+msgid "Email for email piping has not been stored"
+msgstr "ایمیل برای لوله کشی ایمیل ذخیره نشده است"
+
+msgid "The email has been deleted"
+msgstr "ایمیل حذف شده است"
+
+msgid "The email has not been deleted"
+msgstr "ایمیل حذف نشده است"
+
+msgid "in use cannot deleted"
+msgstr "در حال استفاده است نمی توانید پاک کنید."
+
+msgid "Enabled"
+msgstr "فعال شده"
+
+msgid "Only New Tickets"
+msgstr "فقط تیکت های جدید"
+
+msgid "Only Replies"
+msgstr "فقط پاسخ ها"
+
+msgid "Both"
+msgstr "هردو"
+
+msgid "Gmail"
+msgstr "جیمیل"
+
+msgid "Yahoo"
+msgstr "یاهو"
+
+msgid "Aol"
+msgstr "تعداد"
+
+msgid "Hotmail"
+msgstr "هات میل"
+
+msgid "Other"
+msgstr "غیره"
+
+msgid "Yes"
+msgstr "بله"
+
+msgid "No"
+msgstr "خیر"
+
+msgid "Please enter the hostname first"
+msgstr "لطفا نام هاست خود را وارد کنید."
+
+msgid "Please enable email piping setting first"
+msgstr "لطفا ابتدا تنظیمات لوله کشی ایمیل را فعال کنید"
+
+msgid "Add Email Piping"
+msgstr "پیپینگ ایمیل اضافه کنید"
+
+msgid "Enable email piping"
+msgstr "لوله کشی ایمیل را فعال کنید"
+
+msgid "Ticket Type"
+msgstr "نوع تیکت"
+
+msgid "Which email type to read"
+msgstr "کدام نوع ایمیل برای خواندن"
+
+msgid "Save attachments if found in an email"
+msgstr "در صورت یافتن ایمیل ، پیوست ها را ذخیره کنید"
+
+msgid "Host Type"
+msgstr "نوع هاست"
+
+msgid "Select your email service provider"
+msgstr "ارایه دهنده خدمات ایمیل خود را انتخاب کنید."
+
+msgid "Host Name"
+msgstr "نام هاست"
+
+msgid "Enabled SSL"
+msgstr "SSL فعال شده است."
+
+msgid "Do you have enabled SSL on your domain?"
+msgstr "SSL را در دامنه خود فعال کرده اید؟"
+
+msgid "Host Port Number"
+msgstr "عدد پورت هاست"
+
+msgid "Host port number to read an email from"
+msgstr "شماره پورت میزبان برای خواندن ایمیل از"
+
+msgid "Email address to read emails"
+msgstr "آدرس ایمیل برای مشاهده ایمیل ها"
+
+msgid "Password"
+msgstr "رمز عبور"
+
+msgid "Password for a given email address"
+msgstr "گذرواژه برای یک آدرس ایمیل داده شده"
+
+msgid "check"
+msgstr "بررسی"
+
+msgid "Check Settings"
+msgstr "بررسی تنظیمات"
+
+msgid "If the system doesn't respond in 30 seconds"
+msgstr "اگر سیستم در 30 ثانیه پاسخ ندهد"
+
+msgid "it means system unable to connect email server"
+msgstr "به این معنی است که سیستم قادر به اتصال سرور ایمیل می باشد."
+
+msgid "Save Settings"
+msgstr "ذخیره تنظیمات"
+
+msgid "Cron Job"
+msgstr "کرون جاب"
+
+msgid "Web Cron Job"
+msgstr "وب کرون جاب"
+
+msgid "Wget"
+msgstr "ویجت"
+
+msgid "Curl"
+msgstr "دستور Curl"
+
+msgid "PHP Script"
+msgstr "اسکریپت PHP"
+
+msgid "URL"
+msgstr "آدرس اینترنتی"
+
+msgid "Configuration of a backup job with webcron org"
+msgstr "بکاپ پیکربندی با webcron org است."
+
+msgid "Name of cron job"
+msgstr "نام کرون جاب"
+
+msgid "Log in to webcron org in the cron area click on"
+msgstr "ورود به webcron"
+
+msgid "Timeout"
+msgstr "پایان یافتن تایم"
+
+msgid ""
+"180 secs if the does not completely increase it most sites will work with a "
+"setting of 180 600"
+msgstr ""
+"180 ثانیه اگر به طور کامل افزایش نیابد بیشتر سایتها با تنظیم 180 600 کار می کنند"
+
+msgid "URL you want to execute"
+msgstr "آدرس اینترنتی که میخواهید اجرا شود"
+
+msgid "Login"
+msgstr "ورود به سیستم"
+
+msgid "Leave this blank"
+msgstr "اینجا را خالی بگذارید."
+
+msgid "Execution time"
+msgstr "زمان اجرا"
+
+msgid "That the grid below the other options select when and how"
+msgstr "در بخش های زیر آپشن های دیگر زمان و چگونگی را انتخاب کنید."
+
+msgid "Alerts"
+msgstr "هشدارها"
+
+msgid ""
+"If you have already set up alerts methods in webcron org interface we recommend "
+"choosing an alert"
+msgstr ""
+"اگر شما در حال حاضر میخواهید متدهای هشدار را در رابط webcron org ست کنید ما توصیه "
+"میکنیم انتخاب کنید یک هشدار"
+
+msgid "Cron scheduling using wget"
+msgstr "برنامه ریزی و زمانبندی با استفاده از ویجت"
+
+msgid "Cron scheduling using Curl"
+msgstr "برنامه ریزی و زمانبندی با استفاده از Curl"
+
+msgid "Custom PHP script to run the cron job"
+msgstr "اسکریپت سفارشی PHP برای راه اندازی cron job"
+
+msgid "Sorry the cron job did not work"
+msgstr "با عرض پوزش کار cron کار نمی کند"
+
+msgid "URL for use with your won scripts and third party"
+msgstr "آدرس اینترنتی برای استفاده اسکریپت و شخص ثالث"
+
+msgid "Recommended run script hourly"
+msgstr "توضیه میشود اسکریپت ساعتی را اجرا کنید."
+
+msgid "Email Piping"
+msgstr "پیپینگ ایمیل"
+
+msgid "Ticket Email Type"
+msgstr "نوع ایمیل بلیط"
+
+msgid "ticket email"
+msgstr "ایمیل بلیط"
+
+msgid "Overall Reports"
+msgstr "گزارش های کلی"
+
+msgid "Staff Members Report"
+msgstr "گزارش کارمندان"
+
+msgid "Department Report"
+msgstr "گزارش وزارت"
+
+msgid "Departments Report"
+msgstr "گزارش ادارات"
+
+msgid "JS Support Ticket Overall Reports"
+msgstr "گزارشات کلی بلیط پشتیبانی JS"
+
+msgid "Tickets By Status"
+msgstr "تیکت ها براساس وضعیت"
+
+msgid "Tickets By Departments"
+msgstr "تیکت ها براساس دپارتمان ها"
+
+msgid "Tickets By Priorities"
+msgstr "تیکت ها براساس اولویت ها"
+
+msgid "Tickets By Channel"
+msgstr "تیکت ها براساس کانال"
+
+msgid "Direct"
+msgstr "مستقیم"
+
+msgid "Direct reply"
+msgstr "پاسخ مستقیم"
+
+msgid "Email reply"
+msgstr "پاسخ به ایمیل"
+
+msgid "Tickets By staff"
+msgstr "بلیط توسط کارمندان"
+
+msgid "Report By"
+msgstr "گزارش توسط"
+
+msgid "staff member"
+msgstr "کارمند"
+
+msgid "To"
+msgstr "به"
+
+msgid "Report By Staff Members"
+msgstr "گزارش توسط کارکنان"
+
+msgid "Ticket status by days"
+msgstr "وضعیت بلیط توسط روزها"
+
+msgid "Date"
+msgstr "تاریخ"
+
+msgid "Tickets Staff"
+msgstr "کارمندان بلیط"
+
+msgid "Average Rating"
+msgstr "میانگین امتیاز"
+
+msgid "Average Time"
+msgstr "زمان متوسط"
+
+msgid "Report By staff member"
+msgstr "گزارش توسط کارکنان"
+
+msgid "Rating"
+msgstr "رتبه بندی"
+
+msgid "Time"
+msgstr "زمان"
+
+msgid "Merged"
+msgstr "ادغام شده"
+
+msgid "Report By department"
+msgstr "گزارش توسط بخش"
+
+msgid "Tickets By Department"
+msgstr "تیکت ها براساس دپارتمان"
+
+msgid "Department Name"
+msgstr "نام دپارتمان"
+
+msgid "User report"
+msgstr "گزارش کاربر"
+
+msgid "Users report"
+msgstr "گزارش کاربران"
+
+msgid "Users Tickets"
+msgstr "بلیط کاربران"
+
+msgid "User Report"
+msgstr "گزارش کاربر"
+
+msgid "Report By Departments"
+msgstr "گزارش توسط بخش ها"
+
+msgid "Tickets Data"
+msgstr "داده بلیط"
+
+msgid "Message"
+msgstr "پیام"
+
+msgid "Assigned To"
+msgstr "اختصاص یافته به"
+
+msgid "Requester User Name"
+msgstr "نام کاربر درخواست کننده"
+
+msgid "Requester Name"
+msgstr "نام درخواست کننده"
+
+msgid "Requester Email"
+msgstr "ایمیل درخواست کننده"
+
+msgid "Requester Phone"
+msgstr "تلفن درخواست کننده"
+
+msgid "Requester help Topic"
+msgstr "موضوع درخواست کمک"
+
+msgid "Ticket Attachment"
+msgstr "پیوست پیام"
+
+msgid "Posted By"
+msgstr "ارسال شده توسط"
+
+msgid "Note Title"
+msgstr "عنوان یادداشت"
+
+msgid "Note Message"
+msgstr "پیام توجه داشته باشید"
+
+msgid "Posted Date"
+msgstr "تاریخ ارسال"
+
+msgid "Note Attachment"
+msgstr "توضیح پیوست"
+
+msgid "User Time"
+msgstr "زمان کاربر"
+
+msgid "System Time"
+msgstr "زمان سیستم"
+
+msgid "Edit Reason"
+msgstr "علت ویرایش"
+
+msgid "Reply Date"
+msgstr "تاریخ پاسخ"
+
+msgid "Reply By"
+msgstr "پاسخ توسط"
+
+msgid "Reply Attachment"
+msgstr "پیوست پاسخ"
+
+msgid "Export"
+msgstr "خروجی گرفتن"
+
+msgid "Agent"
+msgstr "عامل"
+
+msgid "Select Agent"
+msgstr "نماینده را انتخاب کنید"
+
+msgid "Ticket Status"
+msgstr "وضعیت تیکت"
+
+msgid "Select Ticket Status"
+msgstr "وضعیت بلیط را انتخاب کنید"
+
+msgid "Ticket Overdue"
+msgstr "تیکت سر رسیده / منقضی شده"
+
+msgid "Select Ticket Overdue Status"
+msgstr "وضعیت تأخیر بلیط را انتخاب کنید"
+
+msgid "FAQ has been stored"
+msgstr "سوالات متداول ذخیره شد."
+
+msgid "FAQ has not been stored"
+msgstr "سوالات متداول ذخیره نشده است."
+
+msgid "FAQ has been deleted"
+msgstr "سوالات متداول حف شد."
+
+msgid "FAQ has not been deleted"
+msgstr "سوالات متداول حذف نشده است."
+
+msgid "FAQ"
+msgstr "سوالات متداول"
+
+msgid "Save FAQ"
+msgstr "ذخیره سوالات متداول"
+
+msgid "Add FAQ"
+msgstr "اضافه کردن سوالات متداول"
+
+msgid "Content"
+msgstr "محتوا"
+
+msgid "FAQ'S"
+msgstr "سؤالات متداول"
+
+msgid "FAQs"
+msgstr "سوالات متداول"
+
+msgid "FAQ's"
+msgstr "سوالات متداول"
+
+msgid "Add FAQs"
+msgstr "سؤالات متداول را اضافه کنید"
+
+msgid "Feedback has been stored"
+msgstr "بازخورد ذخیره شده است"
+
+msgid "Feedback has not been stored"
+msgstr "بازخورد ذخیره نشده است"
+
+msgid "Feedbacks"
+msgstr "بازخورد"
+
+msgid "user image"
+msgstr "تصویر کاربر"
+
+msgid "feedback image"
+msgstr "تصویر بازخورد"
+
+msgid "Feedback"
+msgstr "بازخورد"
+
+msgid "Latest Feedback"
+msgstr "آخرین بازخورد"
+
+msgid "Submit Feedback"
+msgstr "بازخورد ارائه دهید"
+
+msgid "Help topic has been stored"
+msgstr "راهنمای موردنظر ذخیره شد."
+
+msgid "Help topic has not been stored"
+msgstr "راهنمای موردنظر ذخیره نشده است."
+
+msgid "Help topic has been deleted"
+msgstr "راهنمای موردنظر حذف شد."
+
+msgid "Help topic has not been deleted"
+msgstr "راهنمای موردنظر پاک نشده است."
+
+msgid "Help topic in use cannot be deleting"
+msgstr "موضوع راهنما در حال استفاده نمی تواند حذف شود"
+
+msgid "Help topic"
+msgstr "پست راهنما"
+
+msgid "Help Topic"
+msgstr "پست راهنما"
+
+msgid "Save Help Topic"
+msgstr "ذخیره راهنما"
+
+msgid "Add Help Topic"
+msgstr "اضافه کردن راهنما"
+
+msgid "Help Topics"
+msgstr "پست های راهنما"
+
+msgid "The category has been stored"
+msgstr "این دسته ذخیره شده است"
+
+msgid "The category has not been stored"
+msgstr "دسته ذخیره نشده است"
+
+msgid "The category has been deleted"
+msgstr "دسته حذف شده است"
+
+msgid "The category has not been deleted"
+msgstr "طبقه حذف نشده است"
+
+msgid "The category in use cannot be deleting"
+msgstr "دسته استفاده نمی تواند حذف شود"
+
+msgid "Knowledgebase article has been stored"
+msgstr "مقاله دانش بنیان ذخیره شده است"
+
+msgid "Knowledgebase article has not been stored"
+msgstr "مقاله دانش بنیان ذخیره نشده است"
+
+msgid "The article has been deleted"
+msgstr "مقاله حذف شده است"
+
+msgid "The article has not been deleted"
+msgstr "مقاله حذف نشده است"
+
+msgid "Article"
+msgstr "مقاله"
+
+msgid "The parent category does not have this type."
+msgstr "دسته والدین این نوع را ندارند."
+
+msgid "Would you like to add this type to Parent Category?"
+msgstr "آیا می خواهید این نوع را به دسته والدین اضافه کنید؟"
+
+msgid "JYes"
+msgstr "بلی"
+
+msgid "JNo"
+msgstr "خیر"
+
+msgid "Child category has this type,"
+msgstr "دسته کودک دارای این نوع است ،"
+
+msgid "You cannot unmark it."
+msgstr "شما نمی توانید آن را علامت گذاری کنید."
+
+msgid "Draft"
+msgstr "پیش نویس"
+
+msgid "Meta Description"
+msgstr "توضیحات متا"
+
+msgid "Meta Keywords"
+msgstr "کلمات کلیدی متا"
+
+msgid "Save Knowledge Base"
+msgstr "ذخیره آموزش"
+
+msgid "Please select at least one category for"
+msgstr "لطفاً حداقل یک دسته را برای آن انتخاب کنید"
+
+msgid "Category For"
+msgstr "دسته برای"
+
+msgid "Knowledge Base"
+msgstr "بخش آموزش"
+
+msgid "Logo"
+msgstr "لوگو"
+
+msgid "Save Category"
+msgstr "ذخیره کردن دسته"
+
+msgid "Add Knowledge Base"
+msgstr "اضافه کردن بخش آموزش"
+
+msgid "Meta Data Options"
+msgstr "آپشن های MetaData"
+
+msgid "Add Category"
+msgstr "اضافه کردن دسته"
+
+msgid "Category Title"
+msgstr "عنوان دسته"
+
+msgid "category"
+msgstr "دسته بندی"
+
+msgid "Article Attachment"
+msgstr "ضمیمه مقاله"
+
+msgid "Knowledgebase"
+msgstr "دانش‌محور"
+
+msgid "Mail has not been marked as read"
+msgstr "نامه به عنوان خوانده شده علامت گذاری نشده است"
+
+msgid "Mail has been marked as read"
+msgstr "نامه به عنوان خوانده شده علامت گذاری شده است"
+
+msgid "Message field cannot be empty"
+msgstr "فیلد پیام نمی تواند خالی باشد."
+
+msgid "Mail has been sent"
+msgstr "نامه ارسال شده است"
+
+msgid "Mail has not been sent"
+msgstr "نامه ارسال نشده است"
+
+msgid "Mail has been deleted"
+msgstr "ایمیل حذف شد."
+
+msgid "Mail has not been deleted"
+msgstr "ایمیل حذف نشده است."
+
+msgid "Mail"
+msgstr "ایمیل"
+
+msgid "is in use cannot be delete"
+msgstr "در حال استفاده نیست"
+
+msgid "Mail cannot mark as to read"
+msgstr "نامه نمی تواند علامت خوانده شود"
+
+msgid "Mail cannot mark as unread"
+msgstr "ایمیل نمی تواند به عنوان خوانده نشده علامت گذاری شود."
+
+msgid "Mail has been marked as unread"
+msgstr "نامه به عنوان خوانده نشده علامت گذاری شده است"
+
+msgid "Compose"
+msgstr "ساختن"
+
+msgid "Inbox"
+msgstr "اینباکس"
+
+msgid "Outbox"
+msgstr "صندوق ارسال"
+
+msgid "Send"
+msgstr "ارسال"
+
+msgid "Read"
+msgstr "خواندن"
+
+msgid "Unread"
+msgstr "خوانده نشده است."
+
+msgid "Select Type"
+msgstr "انتخاب نوع"
+
+msgid "To use this feature you must be staff member"
+msgstr "برای استفاده از این ویژگی باید عضو کارمندان باشید"
+
+msgid "To use this feature you must have agents addon."
+msgstr "برای استفاده از این ویژگی باید عوامل افزونه ای داشته باشید."
+
+msgid "Re"
+msgstr "پاسخ"
+
+msgid "mark read"
+msgstr "علامت خوانده شده"
+
+msgid "mark unread"
+msgstr "علامت گذاری به عنوان خوانده نشده"
+
+msgid "Replied By"
+msgstr "ارسال شده توسط"
+
+msgid "Reply"
+msgstr "پاسخ"
+
+msgid "Type Message"
+msgstr "پیام را تایپ کنید"
+
+msgid "Replies"
+msgstr "پاسخ ها"
+
+msgid "Limit exceeds maximum tickets"
+msgstr "محدودیت حداکثری تعداد تیکت ها"
+
+msgid "The maximum number of open tickets limit has been exceeded."
+msgstr "از حداکثر تعداد بلیط های باز استفاده فراتر رفته است."
+
+msgid "Ticket has been closed due to merged with"
+msgstr "به دلیل ادغام بلیط ، بلیط بسته شده است"
+
+msgid "Ticket"
+msgstr "تیکت"
+
+msgid "has been merged into"
+msgstr "ادغام شده است"
+
+msgid "Merge Ticket"
+msgstr "بلیط ادغام"
+
+msgid "Ticket ID #"
+msgstr "شناسه بلیط #"
+
+msgid "Search ticket to merge into"
+msgstr "جستجوی بلیط برای ادغام در"
+
+msgid "Edit Last Reply"
+msgstr "آخرین پاسخ را ویرایش کنید"
+
+msgid "Merge Ticket Latest Reply"
+msgstr "آخرین ادغام بلیط"
+
+msgid "Merge"
+msgstr "ادغام"
+
+msgid "Ticket has been merged"
+msgstr "بلیط ادغام شده است"
+
+msgid "Ticket has not been merged"
+msgstr "بلیط ادغام نشده است"
+
+msgid "The internal note has been posted"
+msgstr "یادداشت داخلی ارسال شده است"
+
+msgid "The internal note has not been posted"
+msgstr "یادداشت داخلی ارسال نشده است"
+
+msgid "Post Internal Note"
+msgstr "ارسال یادداشت داخلی"
+
+msgid "The internal note is posted by"
+msgstr "یادداشت داخلی توسط ارسال شده است"
+
+msgid "Pass"
+msgstr "رمز عبور"
+
+msgid "Ticket Notification"
+msgstr "اطلاع رسانی بلیط"
+
+msgid "Once Weekly"
+msgstr "یک بار در هفته"
+
+msgid "JS Support Ticket"
+msgstr "سیستم تیکت"
+
+msgid "Thanks for subscribing!"
+msgstr "با تشکر از اشتراک!"
+
+msgid "Ticket already marked overdue"
+msgstr "تیکت در حال حاضر به صورت منقضی علامت گذاری شده است."
+
+msgid "The ticket has been marked as overdue"
+msgstr "بلیط بصورت عقب افتاده مشخص شده است"
+
+msgid "The ticket has not been marked as overdue"
+msgstr "بلیط به عنوان تأخیر مشخص نشده است"
+
+msgid "System"
+msgstr "سیستم"
+
+msgid "Mark overdue"
+msgstr "علامت گذاری به عنوان سر رسیده / منقضی شده"
+
+msgid "The ticket is marked as overdue by"
+msgstr "بلیط با توجه به تأخیر مشخص شده است"
+
+msgid "The ticket has been unmarked as overdue"
+msgstr "بلیط به دلیل تأخیر مشخص نشده است"
+
+msgid "The ticket has not been unmarked as overdue"
+msgstr "بلیط به عنوان تأخیر مشخص نشده است"
+
+msgid "Unmark overdue"
+msgstr "لغو علامت تأخیر"
+
+msgid "The ticket is unmarked as overdue by"
+msgstr "بلیط با توجه به تأخیر بدون علامت گذاری شده است"
+
+msgid "Paid Support"
+msgstr "پشتیبانی پرداخت شده"
+
+msgid "Check if you want to use this product for paid support"
+msgstr "بررسی کنید که آیا می خواهید از این محصول برای پشتیبانی پولی استفاده کنید"
+
+msgid "Paid support type"
+msgstr "نوع پشتیبانی پرداخت شده"
+
+msgid "One-off Support"
+msgstr "پشتیبانی یک طرفه"
+
+msgid "Subscription Support"
+msgstr "پشتیبانی از اشتراک"
+
+msgid "Number of tickets"
+msgstr "تعداد بلیط"
+
+msgid ""
+"Enter allowed number of tickets that customer can post. Enter -1 for unlimited "
+"tickets."
+msgstr ""
+"تعداد بلیطهای مجاز را که مشتری می تواند ارسال کند وارد کنید. برای بلیط نامحدود -1 "
+"وارد کنید."
+
+msgid "Credential Type"
+msgstr "نوع اعتبار"
+
+msgid "Additional Info"
+msgstr "اطلاعات اضافی"
+
+msgid "Please insert values"
+msgstr "لطفا مقادیر را وارد کنید"
+
+msgid "Visitor"
+msgstr "بازدید کننده"
+
+msgid "By"
+msgstr "توسط"
+
+msgid "Credential removed on ticket close"
+msgstr "اعتبارنامه نزدیک بلیط حذف شد"
+
+msgid "Failed to retrieve data"
+msgstr "بازیابی داده ها انجام نشد"
+
+msgid "The new theme has been applied"
+msgstr "موضوع جدید اعمال شده است"
+
+msgid "Error applying the new theme"
+msgstr "خطایی در استفاده از طرح جدید"
+
+msgid "Themes"
+msgstr "تم ها"
+
+msgid "Color Chooser"
+msgstr "ابزار انتخاب رنگ"
+
+msgid "Preset Theme"
+msgstr "تم از پیش تعیین شده"
+
+msgid "Color 1"
+msgstr "رنگ 1"
+
+msgid "Top menu heading background"
+msgstr "پس زمینه منوی بالای هدر"
+
+msgid "Color 2"
+msgstr "رنگ 2"
+
+msgid "Top header line color"
+msgstr "رنگ خط بالایی هدر"
+
+msgid "Button Hover"
+msgstr "رنگ دکمه هنگام موس اور شدن"
+
+msgid "Heading text"
+msgstr "متن عنوان"
+
+msgid "Color 3"
+msgstr "رنگ 3"
+
+msgid "Content Background Color"
+msgstr "رنگ پس زمینه محتوا"
+
+msgid "Color 4"
+msgstr "رنگ 4"
+
+msgid "Content Text Color"
+msgstr "رنگ محتوا"
+
+msgid "Color 5"
+msgstr "رنگ 5"
+
+msgid "Border color"
+msgstr "رنگ حاشیه"
+
+msgid "Lines"
+msgstr "خطوط"
+
+msgid "Color 6"
+msgstr "رنگ 6"
+
+msgid "Button Color"
+msgstr "رنگ دکمه"
+
+msgid "Color 7"
+msgstr "رنگ 7"
+
+msgid "Top header text color"
+msgstr "رنگ خط نوشته بالایی هدر"
+
+msgid "Save Theme"
+msgstr "ذخیره تم"
+
+msgid "Color Effect Preview"
+msgstr "مشاهده پیش نمایش افکت"
+
+msgid "Blue"
+msgstr "آبی"
+
+msgid "Red"
+msgstr "قرمز"
+
+msgid "Greenish"
+msgstr "متمایل به سبز"
+
+msgid "Brown"
+msgstr "قهوه ای"
+
+msgid "Orange"
+msgstr "نارنجی"
+
+msgid "Green"
+msgstr "سبز"
+
+msgid "Black"
+msgstr "مشکی"
+
+msgid "Mail Notification Widget"
+msgstr "ویجت اطلاع رسانی ایمیل"
+
+msgid "Show newly and reply mail notifications"
+msgstr "اعلان های ایمیل را به تازگی نشان داده و پاسخ دهید"
+
+msgid "New mail from"
+msgstr "ایمیل جدید از"
+
+msgid "Mail Notification"
+msgstr "نوتیف ایمیل"
+
+msgid "Layout"
+msgstr "طرح"
+
+msgid "Vertical"
+msgstr "عمودی"
+
+msgid "Horizontal"
+msgstr "افقی"
+
+msgid "Max Record"
+msgstr "حداکثر رکورد"
+
+msgid "My Ticket Widget"
+msgstr "ویجت تیکت من"
+
+msgid "Show unanswered tickets"
+msgstr "نمایش تیکت های بدون پاسخ"
+
+msgid "My Tickets"
+msgstr "تیکت های من"
+
+msgid "Order tickets"
+msgstr "بلیط سفارش دهید"
+
+msgid "Close due to merge"
+msgstr "به دلیل ادغام بستن"
+
+msgid "Product"
+msgstr "تولید - محصول"
+
+msgid "Order"
+msgstr "ترتیب"
+
+msgid "There is no ticket"
+msgstr "بلیط وجود ندارد"
+
+msgid "Something went wrong"
+msgstr "مشکلی پیش آمد"
+
+msgid "Transaction Key"
+msgstr "کلید معامله"
+
+msgid "Please select"
+msgstr "انتخاب نمایید."
+
+msgid "Hide notice"
+msgstr "پنهان کردن توجه"
+
+msgid "Control Panel"
+msgstr "پنل کاربری"
+
+msgid "Announcement Detail"
+msgstr "جزئیات اطلاعیه"
+
+msgid "Edit Announcement"
+msgstr "ویرایش اطلاعیه"
+
+msgid "Departments"
+msgstr "واحد ها"
+
+msgid "Add Department"
+msgstr "اضافه کردن دپارتمان"
+
+msgid "Edit Department"
+msgstr "ویرایش دپارتمان"
+
+msgid "Staff report"
+msgstr "گزارش کارمندان"
+
+msgid "Staff reports"
+msgstr "گزارش کارمندان"
+
+msgid "Departments report"
+msgstr "گزارش دپارتمانها"
+
+msgid "Edit Download"
+msgstr "ویرایش دانلود"
+
+msgid "Edit FAQ"
+msgstr "ویرایش سوالات متداول"
+
+msgid "FAQ Detail"
+msgstr "جزئیات سوالات متداول"
+
+msgid "Edit Knowledge Base"
+msgstr "ویرایش بخش آموزش"
+
+msgid "Edit Category"
+msgstr "ویرایش دسته"
+
+msgid "Knowledge Base Detail"
+msgstr "جزئیات بخش آموزش"
+
+msgid "Send Message"
+msgstr "ارسال پیام"
+
+msgid "Edit Role"
+msgstr "ویرایش نقش"
+
+msgid "Staffs"
+msgstr "کارکنان"
+
+msgid "Add Staff"
+msgstr "اضافه کردن کارمند"
+
+msgid "Edit Staff"
+msgstr "ویرایش کارکنان"
+
+msgid "Staff Permissions"
+msgstr "مجوز دسترسی کارمند"
+
+msgid "Add Ticket"
+msgstr "ایجاد تیکت"
+
+msgid "Edit Ticket"
+msgstr "ویرایش تیکت"
+
+msgid "Ticket Detail"
+msgstr "جزئیات تیکت"
+
+msgid "Equals"
+msgstr "برابر"
+
+msgid "Minus"
+msgstr "منهای"
+
+msgid "About Us"
+msgstr "درباره ما"
+
+msgid "Translations"
+msgstr "ترجمه"
+
+msgid "System Errors"
+msgstr "خطاهای سیستم"
+
+msgid "Short Codes"
+msgstr "شورت کدها"
+
+msgid "Create Ticket"
+msgstr "ایجاد پیام"
+
+msgid "Fields"
+msgstr "فیلدها"
+
+msgid "Install"
+msgstr "نصب"
+
+msgid "Configurations"
+msgstr "پیکربندی ها"
+
+msgid "Cron Job URLs"
+msgstr "URL های کار Cron"
+
+msgid "Reports"
+msgstr "گزارش ها"
+
+msgid "Overall Statistics"
+msgstr "آمار کلی"
+
+msgid "Agent Reports"
+msgstr "گزارش های عامل"
+
+msgid "Department Reports"
+msgstr "گزارشات دپارتمان"
+
+msgid "User Reports"
+msgstr "گزارش های کاربر"
+
+msgid "Satisfaction Report"
+msgstr "گزارش موفقیت‌آمیز"
+
+msgid "GDPR Fields"
+msgstr "زمینه های GDPR"
+
+msgid "Erase Data Requests"
+msgstr "پاک کردن درخواست های داده"
+
+msgid "Premium Addons"
+msgstr "افزونه های حق بیمه"
+
+msgid "Install Addons"
+msgstr "افزونه‌ها را نصب کنید"
+
+msgid "Addons List"
+msgstr "لیست Addons"
+
+msgid "Feedback Fields"
+msgstr "فیلدهای اعلان نظر"
+
+msgid "Helptopics"
+msgstr "موضوع های کمک کننده"
+
+msgid "System Emails"
+msgstr "ایمیل های سیستم"
+
+msgid "Add Email"
+msgstr "اضافه کردن ایمیل"
+
+msgid "Priorities"
+msgstr "اولویت ها"
+
+msgid "Add Priority"
+msgstr "اضافه کردن اولویت"
+
+msgid "Ban Emails"
+msgstr "بلاک ایمیل ها"
+
+msgid "Email Templates"
+msgstr "تم های ایمیل"
+
+msgid "New Ticket"
+msgstr "تیکت جدید"
+
+msgid "Agent Ticket"
+msgstr "بلیط آژانس"
+
+msgid "New Agent"
+msgstr "نماینده جدید"
+
+msgid "Reassign Ticket"
+msgstr "اختصاص تیکت"
+
+msgid "Close Ticket"
+msgstr "بستن تیکت"
+
+msgid "Delete Ticket"
+msgstr "حذف کردن تیکت"
+
+msgid "Mark Overdue"
+msgstr "علامت گذاری به عنوان سر رسیده / منقضی شده"
+
+msgid "Ban Email"
+msgstr "بلاک ایمیل"
+
+msgid "Ban email try to create ticket"
+msgstr "بلاک ایمیل کسی که سعی در ساخت تیکت جدید دارد."
+
+msgid "Department Transfer"
+msgstr "ترنسفر دپارتمان"
+
+msgid "Ban Email and Close Ticket"
+msgstr "بلاک ایمیل و بستن تیکت"
+
+msgid "Unban Email"
+msgstr "از بلاک خارج کردن ایمیل"
+
+msgid "Response Ticket"
+msgstr "تیکت پاسخ"
+
+msgid "Reply Ticket"
+msgstr "پاسخ به تیکت"
+
+msgid "New Ticket Admin Alert"
+msgstr "پیغام تیکت جدید برای مدیر"
+
+msgid "In Progress Ticket"
+msgstr "تیکت در حال بررسی است."
+
+msgid "Ticket priority is changed by"
+msgstr "اولویت تیکت تغییر کرده است توسط"
+
+msgid "New Mail Received"
+msgstr "ایمیل جدید دریافت شده است."
+
+msgid "New Mail Message Received"
+msgstr "پیغام جدیدی دریافت شده است."
+
+msgid "Feedback Email To User"
+msgstr "بازخورد ایمیل به کاربر"
+
+msgid "User Reply On Closed Ticket"
+msgstr "پاسخ کاربر در بلیط بسته"
+
+msgid "Log out"
+msgstr "خروج"
+
+msgid "Username / password is incorrect"
+msgstr "نام کاربری / رمز عبور صحیح نمیباشد."
+
+msgid "Username already taken"
+msgstr "این نام کاربری تکراری میباشد"
+
+msgid "Invalid username"
+msgstr "نام کاربری غیرمجاز"
+
+msgid "Please enter a username"
+msgstr "لطفا نام کاربری را وارد نمایید"
+
+msgid "Invalid email"
+msgstr "ایمیل نامعتبر"
+
+msgid "Email already registered"
+msgstr "این ایمیل قبلا ثبت شده است."
+
+msgid "Please enter a password"
+msgstr "لطفا کلمه عبور را وارد نمایید."
+
+msgid "Passwords do not match"
+msgstr "کلمه عبور درست نمیباشد"
+
+msgid "Invalid captcha"
+msgstr "کپچا را درست وارد نمایید"
+
+msgid "Could not subscribe to the newsletter"
+msgstr "نمی توانید در خبرنامه مشترک شوید"
+
+msgid ""
+"Please check confirmation email to complete your subscription for the newsletter"
+msgstr "لطفا ایمیل تأیید را برای تکمیل اشتراک خود برای خبرنامه بررسی کنید"
+
+msgid "You have successfully subscribed to the newsletter"
+msgstr "شما با موفقیت در خبرنامه مشترک شدید"
+
+msgid "JS Help Desk"
+msgstr "میز راهنما JS"
+
+msgid "JS Help Desk Control Panel"
+msgstr "کنترل پنل JS Help Desk"
+
+msgid "System Error"
+msgstr "خطای سیستم"
+
+msgid "User Fields"
+msgstr "فیلدهای کاربر"
+
+msgid "Ban list log"
+msgstr "ورود به لیست لیست"
+
+msgid "Field Ordering"
+msgstr "مرتب سازی فیلدها"
+
+msgid "Post Installation"
+msgstr "نصب نصب کنید"
+
+msgid "Premium Addon"
+msgstr "افزونه پریمیوم"
+
+msgid "Sorry"
+msgstr "متاسف"
+
+msgid "No record found"
+msgstr "رکوردی یافت نشد."
+
+msgid "Sorry!"
+msgstr "متاسف!"
+
+msgid "No record found ...!"
+msgstr "هیچ سابقه ای پیدا نشد ...!"
+
+msgid "Access Denied"
+msgstr "امکان دسترسی وجود ندارد."
+
+msgid "You have no permission to access this page"
+msgstr "شما اجازه دسترسی به این صفحه را ندارید"
+
+msgid "User is not allowed to access this page."
+msgstr "کاربر مجاز به دسترسی به این صفحه نیست."
+
+msgid "You are already Logged In."
+msgstr "شما پیشتر وارد شدهاید - لاگین کرده اید."
+
+msgid "Access Denied!"
+msgstr "دسترسی رد شد!"
+
+msgid "Your account has been disabled, please contact the administrator."
+msgstr "حساب شما غیرفعال است ، لطفاً با سرپرست تماس بگیرید."
+
+msgid "You are not logged In"
+msgstr "شما وارد نشده اید"
+
+msgid "To access the page, Please login"
+msgstr "برای دسترسی به صفحه ، لطفا وارد شوید"
+
+msgid "Register"
+msgstr "ثبت نام"
+
+msgid "User is not allowed to view this Ticket"
+msgstr "کاربر مجاز به دیدن این بلیط نیست"
+
+msgid ""
+"Registration has been disabled by admin, please contact the system administrator."
+msgstr "ثبت نام توسط مدیر غیرفعال شده است ، لطفا با مدیر سیستم تماس بگیرید."
+
+msgid "You have already given the feedback for this ticket."
+msgstr "شما قبلاً بازخورد این بلیط را ارائه داده اید."
+
+msgid "Ticket not found...!"
+msgstr "بلیط پیدا نشد ...!"
+
+msgid "User is not allowed to view this page"
+msgstr "کاربر مجاز به مشاهده این صفحه نیست"
+
+msgid "Thank you so much for your feedback"
+msgstr "خیلی ممنون از نظرات شما"
+
+msgid "Help Desk Pages"
+msgstr "صفحات میز راهنما"
+
+msgid "Form submission failed!"
+msgstr "ارسال فرم انجام نشد!"
+
+msgid "You have not answered all required fields"
+msgstr "شما به همه زمینه های موردنیاز پاسخ نداده اید"
+
+msgid "You have not given a correct time"
+msgstr "شما زمان صحیحی نداده اید"
+
+msgid "You have not given a correct e-mail address"
+msgstr "شما آدرس پست الکترونیکی صحیحی ارائه نکرده اید"
+
+msgid "You have not given a correct phone number"
+msgstr "شما شماره تلفنی درستی نداده اید"
+
+msgid "You have not given a correct answer to the security question"
+msgstr "شما پاسخ صحیحی به سوال امنیتی نداده اید"
+
+msgid "You have not given a correct date"
+msgstr "شما تاریخ صحیحی نداده اید"
+
+msgid "The input value must be between "
+msgstr "مقدار ورودی باید بین باشد"
+
+msgid " characters"
+msgstr "شخصیت ها"
+
+msgid "The input value is longer than "
+msgstr "مقدار ورودی طولانی تر از است"
+
+msgid "The input value is shorter than "
+msgstr "مقدار ورودی کوتاهتر از است"
+
+msgid "Input values could not be confirmed"
+msgstr "مقادیر ورودی را نمی توان تأیید کرد"
+
+msgid "Incorrect domain value"
+msgstr "مقدار دامنه نادرست است"
+
+msgid "The input value is not a correct URL"
+msgstr "مقدار ورودی یک URL صحیح نیست"
+
+msgid "The input value is incorrect"
+msgstr "مقدار ورودی نادرست است"
+
+msgid "The input value was not a correct number"
+msgstr "مقدار ورودی عدد صحیحی نبود"
+
+msgid "Your social security number was incorrect"
+msgstr "شماره تأمین اجتماعی شما نادرست بود"
+
+msgid "Incorrect UK VAT Number"
+msgstr "شماره مالیات بر ارزش افزوده انگلستان نادرست"
+
+msgid "The password isn't strong enough"
+msgstr "رمز عبور به اندازه کافی قوی نیست"
+
+msgid "You have to choose at least "
+msgstr "حداقل باید انتخاب کنید"
+
+msgid " answers"
+msgstr "جواب می دهد"
+
+msgid "The input value can only contain alphanumeric characters "
+msgstr "مقدار ورودی فقط می تواند شامل نویسه های الفبایی باشد"
+
+msgid " and "
+msgstr "و"
+
+msgid "The file you are trying to upload is too large"
+msgstr "پرونده ای که می خواهید بارگذاری کنید بسیار بزرگ است"
+
+msgid "The file you are trying to upload is of the wrong type"
+msgstr "پرونده ای که می خواهید بارگذاری کنید از نوع اشتباه است"
+
+msgid "Please choose between "
+msgstr "لطفا بین"
+
+msgid "Please choose at least "
+msgstr "لطفا حداقل انتخاب کنید"
+
+msgid "Please choose a maximum of "
+msgstr "لطفا حداکثر را انتخاب کنید"
+
+msgid "The credit card number is not correct"
+msgstr "شماره کارت اعتباری صحیح نیست"
+
+msgid "The CVV number was not correct"
+msgstr "شماره CVV صحیح نبود"
+
+msgid "Support"
+msgstr "پشتیبانی"
+
+msgid "Lost your password"
+msgstr "رمزعبور خود را گم کردید"
+
+msgid "Pagination default page size not saved"
+msgstr "صفحه بندی پیش فرض ذخیره نشده است."
+
+msgid "Data directory cannot empty."
+msgstr "دایرکتوری داده نمی تواند خالی باشد."
+
+msgid "Data directory is not proper."
+msgstr "دایرکتوری داده در وضعیت مناسبی نیست."
+
+msgid "Data directory is not writable."
+msgstr "دایرکتوری داده قابل نوشتن نیست"
+
+msgid "System slug not be empty."
+msgstr "پیوند یکتای سیستم نمیتواند خالی باشد."
+
+msgid "System slug is conflicted with post or page slug."
+msgstr "slug سیستم با slug ارسال یا صفحه تضاد دارد."
+
+msgid "Days"
+msgstr "روزها"
+
+msgid "Hours"
+msgstr "ساعت ها"
+
+msgid "Google Recaptcha"
+msgstr "گوگل کپچا"
+
+msgid "Own Captcha"
+msgstr "کپچای شخصی"
+
+msgid "Any"
+msgstr "هر"
+
+msgid "Addition"
+msgstr "اضافی"
+
+msgid "Subtraction"
+msgstr "منها کردن"
+
+msgid "Show"
+msgstr "نمایش"
+
+msgid "Hide"
+msgstr "پنهان"
+
+msgid "Default"
+msgstr "پیش فرض"
+
+msgid "Custom"
+msgstr "سفارشی"
+
+msgid "Top left"
+msgstr "بالا سمت چپ"
+
+msgid "Top right"
+msgstr "بالا سمت راست"
+
+msgid "Middle left"
+msgstr "وسط سمت چپ"
+
+msgid "Middle right"
+msgstr "وسط سمت راست"
+
+msgid "Bottom left"
+msgstr "پایین سمت چپ"
+
+msgid "Bottom right"
+msgstr "پایین سمت راست"
+
+msgid "Random"
+msgstr "تصادفی"
+
+msgid "Sequence"
+msgstr "توالی"
+
+msgid "General Settings"
+msgstr "تنظیمات عمومی"
+
+msgid "Ticket Settings"
+msgstr "تنظیمات بلیط"
+
+msgid "Email Settings"
+msgstr "تنظیمات ایمیل"
+
+msgid "Agent Menu"
+msgstr "منوی نمایندگی"
+
+msgid "User Menu"
+msgstr "منو کاربر"
+
+msgid "Push Notifications"
+msgstr "اعلانهای فشار"
+
+msgid "Private Credentials"
+msgstr "اعتبارنامه خصوصی"
+
+msgid "Envato Validation"
+msgstr "اعتبار سنجی Envato"
+
+msgid "Easy Digital Downloads"
+msgstr "بارگیری آسان دیجیتال"
+
+msgid "Set the heading of your plugin"
+msgstr "تنظیم نام برای عنوان پلاگین"
+
+msgid "Ticket Default Page"
+msgstr "صفحه پیش فرض تیکت"
+
+msgid "Select Page"
+msgstr "انتخاب صفحه"
+
+msgid ""
+"Select JS Help Desk default page, on the action system, will redirect on the "
+"selected page. If not select the default page, email links, and support icon "
+"might not work."
+msgstr ""
+"صفحه پیش فرض JS Help Desk را انتخاب کنید ، در سیستم عمل در صفحه انتخابی هدایت می "
+"شوید. اگر صفحه پیش فرض را انتخاب نکنید ، پیوندهای ایمیل و نماد پشتیبانی ممکن است "
+"کار نکنند."
+
+msgid "Support Icon"
+msgstr "آیکون پشتیبانی"
+
+msgid "Screen Tag"
+msgstr "نمایش برچسب"
+
+msgid "Enable / disable your support icon"
+msgstr "فعال / غیرفعال کردن آیکون پشتیبانی"
+
+msgid "Support Icon Position"
+msgstr "محل آیکون پشتیبانی"
+
+msgid "Screen Tag Position"
+msgstr "محل نمایش برچسب"
+
+msgid "Select position for your support icon"
+msgstr "انتخاب موقعیت آیکون پشتیبانی"
+
+msgid "Online"
+msgstr "آنلاین"
+
+msgid "Set your plugin offline for front end"
+msgstr "تنظیم آفلاین بودن پلاگین در اینترفیس"
+
+msgid "Offline Message"
+msgstr "پیغام آفلاین"
+
+msgid "Set the offline message for your user"
+msgstr "تنظیم کردن پیغام آفلاین جهت نمایش به کاربران"
+
+msgid "Data Directory"
+msgstr "دایرکتوری داده"
+
+msgid "Set the name for your data directory"
+msgstr "تنظیم نام برای دایرکتوری داده شما"
+
+msgid ""
+"You need to rename the existing data directory in the file system before changing "
+"the data directory name"
+msgstr ""
+"قبل از تغییر نام دایرکتوری داده باید دایرکتوری داده موجود را در سیستم فایل تغییر "
+"نام دهید"
+
+msgid "Date Format"
+msgstr "فرمت تاریخ"
+
+msgid "DD-MM-YYYY"
+msgstr "فرمت تاریخ DD-MM-YYYY"
+
+msgid "Set the default date format"
+msgstr "تنظیم فرمت تاریخ پیش فرض"
+
+msgid "Ticket auto close"
+msgstr "بسته شدن خودکار تیکت"
+
+msgid "Ticket auto-close if user does not respond within given days"
+msgstr "اگر کاربر در طی روزهای معین پاسخی ندهد ، بسته شدن خودکار بلیط"
+
+msgid "No. of attachment"
+msgstr "بدون ضمیمه"
+
+msgid "No. of attachment allowed at a time"
+msgstr "تعداد فایل ضمیمه مجاز در یک زمان"
+
+msgid "File maximum size"
+msgstr "حداکثر اندازه فایل"
+
+msgid "Kb"
+msgstr "کیلوبایت"
+
+msgid "File extension"
+msgstr "فرمت فایل"
+
+msgid "File extension allowed to attach"
+msgstr "فرمت فایل اجازه ضمیمه شدن دارد."
+
+msgid "Pagination default page size"
+msgstr "سایز صفحه بندی پیش فرض"
+
+msgid "Set the no. of record per page"
+msgstr "تنظیم تعداد رکورد در هر صفحه"
+
+msgid "Breadcrumbs"
+msgstr "مسیر سایت"
+
+msgid "Show hide breadcrumbs"
+msgstr "نمایش یا پنهان کردن بردکرامب"
+
+msgid "Top Header"
+msgstr "بالای عنوان"
+
+msgid "Show hide Top Header"
+msgstr "نمایش عنوان Head Top"
+
+msgid "Login redirect"
+msgstr "تغییر مسیر ورود"
+
+msgid "Redirect user to JS Help Desk control panel after log in"
+msgstr "پس از ورود به سیستم ، به کنترل پنل JS Help Desk تغییر دهید"
+
+msgid "Show count on my tickets"
+msgstr "نمایش تعداد تیکت ها در بخش تیکت های من"
+
+msgid "Show number of the open, closed, answered ticket in my ticket"
+msgstr "نمایش تعداد بلیط های باز ، بسته و پاسخ داده شده در بلیط من"
+
+msgid "Show captcha on registration form"
+msgstr "نمایش captcha در فرم ثبت نام"
+
+msgid "Select whether you want to show captcha on the registration form or not"
+msgstr "انتخاب کنید آیا می خواهید captcha را در فرم ثبت نام نشان دهید یا نه"
+
+msgid "Default wp role for new users"
+msgstr "نقش پیش فرض wp برای کاربران جدید"
+
+msgid "Select the role you want to assign to new users"
+msgstr "نقشی را که می خواهید برای کاربران جدید اختصاص دهید انتخاب کنید"
+
+msgid "Set Login Link"
+msgstr "پیوند ورود را تنظیم کنید"
+
+msgid "Set Login Link Default or Custom"
+msgstr "پیوند ورود به صورت پیش فرض یا سفارشی را تنظیم کنید"
+
+msgid "Ticketid sequence"
+msgstr "شماره تیکت متوالی"
+
+msgid "Set ticketid sequential or random"
+msgstr "تنظیم تیکت آی دی به صورت توالی یا تصادفی"
+
+msgid "Ticket listing ordering"
+msgstr "ثبت سفارش بلیط"
+
+msgid "Set default ordering for ticket listing"
+msgstr "ترتیب پیش فرض لیست لیست را تنظیم کنید"
+
+msgid "Maximum tickets"
+msgstr "حداکثر تیکت ها"
+
+msgid "Maximum ticket per user"
+msgstr "حداکثر تعداد تیکت برای هر کاربر"
+
+msgid "Maximum open tickets"
+msgstr "حداکثر تعداد تیکت ها"
+
+msgid "Maximum opened tickets per user"
+msgstr "حداکثر تعداد تیکت باز برای هر کاربر"
+
+msgid "Reopen ticket within days"
+msgstr "باز کردن مجدد تیکت طی چند روز"
+
+msgid "The ticket can be reopened within a given number of days"
+msgstr "بلیط ظرف چند روز معین قابل بازگشایی است"
+
+msgid "User can print ticket"
+msgstr "کاربر میتواند تیکت پرینت کند"
+
+msgid "Can user print ticket from ticket detail or not"
+msgstr "کاربران میتوانند تیکت را از بخش جزئیات تیکت پرینت کنند یا خیر؟"
+
+msgid "Show captcha on the visitor ticket form"
+msgstr "نمایش captcha در فرم بلیط بازدید کننده"
+
+msgid "Show captcha when a visitor wants to create a ticket"
+msgstr "هنگامی که یک بازدید کننده می خواهد بلیط ایجاد کند ، captcha را نمایش دهید"
+
+msgid "Captcha selection"
+msgstr "بخش کد امنیتی"
+
+msgid "Which captcha you want to add"
+msgstr "کد کپچایی که میخواهید اضافه کنید"
+
+msgid "Google recaptcha public key"
+msgstr "کلید عمومی گوگل reCAPTCHA"
+
+msgid "Please enter the google re-captcha public key from"
+msgstr "لطفاً کلید عمومی Google Re-captcha را وارد کنید"
+
+msgid "Google recaptcha private key"
+msgstr "کلید خصوصی گوگل reCAPTCHA"
+
+msgid "Please enter the google re-captcha private key from"
+msgstr "لطفاً کلید خصوصی Google Re-captcha را وارد کنید"
+
+msgid "Own captcha calculation type"
+msgstr "نوع محاسبه کچپای شخصی"
+
+msgid "Select calculation type addition or subtraction"
+msgstr "انتخاب نوع محاسبه جمع یا تفریق"
+
+msgid "Own captcha operands"
+msgstr "عملوند کپچای شخضی"
+
+msgid "Select the total operands to be given"
+msgstr "انتخاب تمام عملوندها"
+
+msgid "Own captcha subtraction answer positive"
+msgstr "پاسخ منهای کپچای شخصی مثبت است."
+
+msgid "Is subtraction answer should be positive"
+msgstr "جواب تفریق باید مثبت باشد."
+
+msgid "New ticket message"
+msgstr "پیام تیکت جدید"
+
+msgid "This message will show on the new ticket"
+msgstr "این پیام در بلیط جدید نشان داده خواهد شد"
+
+msgid "Allow Users To Reply via Email On Closed Ticket"
+msgstr "به کاربران اجازه دهید از طریق ایمیل بسته بلیط پاسخ دهند"
+
+msgid "Select whether users can reply to closed email piping ticket or not"
+msgstr ""
+"انتخاب کنید که آیا کاربران می توانند به بلیط بسته لوله کشی ایمیل پاسخ دهند یا خیر"
+
+msgid "Visitor can create ticket"
+msgstr "ویزیتور میتواند تیکت ایجاد کند"
+
+msgid "Can visitor create ticket or not"
+msgstr "ویزیتورها میتوانند تیکت ایجاد کنند یا خیر ؟"
+
+msgid "Visitor ticket creation message"
+msgstr "پیام ایجاد بلیط بازدید کننده"
+
+msgid "This text will appear whenever a visitor creates a ticket"
+msgstr "این متن هر زمان که بازدید کننده بلیط ایجاد کند ظاهر می شود"
+
+msgid "Default alert email"
+msgstr "ایمیل پیش فرض هشدارها"
+
+msgid ""
+"If ticket department email is not selected then this email is used to send emails"
+msgstr ""
+"اگر برای تیکت دپارتمان ایمیل اختصاصی وارد نشود از همین ایمیل برای آن استفاده "
+"خواهد شد."
+
+msgid "Default admin email"
+msgstr "ایمیل پیش فرض ادمین"
+
+msgid "Admin email address to receive emails"
+msgstr "آدرس ایمیل مدیر برای دریافت ایمیل ها"
+
+msgid "Add New Email"
+msgstr "ایمیل جدید اضافه کنید"
+
+msgid "Ban Email New Ticket"
+msgstr "بلیط جدید را ممنوع کنید"
+
+msgid "Mail to admin"
+msgstr "ایمیل به مدیر"
+
+msgid "Email sends to admin when banned email try to create a ticket"
+msgstr "وقتی ایمیل ممنوع است سعی کنید برای ایجاد بلیط اقدام به ارسال ایمیل کنید"
+
+msgid "Ticket Operations Email Setting"
+msgstr "تنظیم عملکرد ایمیل بلیط"
+
+msgid "Admin"
+msgstr "ادمین"
+
+msgid "New ticket"
+msgstr "تیکت جدید"
+
+msgid "Ticket reassign"
+msgstr "اختصاص تیکت"
+
+msgid "Ticket close"
+msgstr "تیکت بسته"
+
+msgid "Ticket delete"
+msgstr "تیکت حذف شده"
+
+msgid "Ticket ban email"
+msgstr "تیکت ایمیل بلاک شده"
+
+msgid "Ticket department transfer"
+msgstr "ترنسفر دپارتمان تیکت"
+
+msgid "Ticket reply User"
+msgstr "تیکت پاسخ داده شد توسط کاربر"
+
+msgid "Ticket Response Agent"
+msgstr "نماینده پاسخ بلیط"
+
+msgid "Ticket ban email and close ticket"
+msgstr "تیکت ایمیل بلاک شده و بسته شده تیکت"
+
+msgid "Ticket unban email"
+msgstr "خارج کردن ایمیل تیکت از بلاک"
+
+msgid "Ticket lock"
+msgstr "تیکت قفل است."
+
+msgid "Ticket unlock"
+msgstr "باز کردن قفل تیکت"
+
+msgid "Ticket Change Priority"
+msgstr "تغییر اولویت تیکت"
+
+msgid "Mark Ticket In Progress"
+msgstr "علامت گذاری تیکت به عنوان در حال بررسی"
+
+msgid "Reply To A Closed Ticket By Email"
+msgstr "پاسخ به بلیط بسته از طریق ایمیل"
+
+msgid "Send Feedback Email To User"
+msgstr "ارسال بازخورد ایمیل به کاربر"
+
+msgid "Dashboard Links"
+msgstr "پیوندهای داشبورد"
+
+msgid "Open Ticket"
+msgstr "ساخت تیکت"
+
+msgid "Department reports"
+msgstr "گزارشات دپارتمان"
+
+msgid "Login/Logout Button"
+msgstr "ورود / خروج سایت"
+
+msgid "Ticket Total Count"
+msgstr "تعداد کل بلیط ها"
+
+msgid "Ticket Statistics"
+msgstr "آمار بلیط"
+
+msgid "Erase Agent Data"
+msgstr "پاک کردن داده های نماینده"
+
+msgid "Top Menu Links"
+msgstr "پیوندهای بالای فهرست"
+
+msgid "Home"
+msgstr "خانه"
+
+msgid "Check Ticket Status"
+msgstr "بررسی وضعیت تیکت"
+
+msgid "Registration"
+msgstr "ثبت نام"
+
+msgid "Erase User Data"
+msgstr "پاک کردن داده های کاربر"
+
+msgid "Feedback Settings"
+msgstr "تنظیمات اعلام نظر"
+
+msgid "Feedback Email Delay Type"
+msgstr "بازخورد نوع تأخیر ایمیل"
+
+msgid "Select delay type for feedback email"
+msgstr "نوع تأخیر را برای ایمیل بازخورد انتخاب کنید"
+
+msgid "Feedback Email Delay"
+msgstr "تأخیر در بازخورد ایمیل"
+
+msgid "Set no. of days or hours to send feedback email after a ticket is closed"
+msgstr "نه روز یا ساعت برای ارسال ایمیل بازخورد پس از بسته شدن بلیط"
+
+msgid "Success message after submitting feedback"
+msgstr "پیام موفقیت آمیز بعد از ارسال بازخورد"
+
+msgid "This text will appear whenever anyone submits feedback"
+msgstr "این متن هر زمان که کسی بازخورد ارسال کند ظاهر می شود"
+
+msgid "UTF Auto Switch"
+msgstr "سوئیچ خودکار UTF"
+
+msgid "Firebase Notifications"
+msgstr "اعلان های Firebase"
+
+msgid ""
+"JS Help Desk Desktop Notifications plugin is not installed. Please install the "
+"plugin to enable desktop notifications"
+msgstr ""
+"افزونه اطلاعیه دسک تاپ JS Help Desk نصب نشده است. لطفاً افزونه را برای فعال کردن "
+"اعلانهای رومیزی نصب کنید"
+
+msgid "Click here to insert Install."
+msgstr "برای درج نصب اینجا کلیک کنید."
+
+msgid "JS Help Desk Desktop Notifications plugin is not active."
+msgstr "افزونه اطلاعیه دسک تاپ JS Help Desk فعال نیست."
+
+msgid "Find and add firebase api's keys"
+msgstr "کلیدهای api firebase را پیدا کرده و اضافه کنید"
+
+msgid "Click here to get firebae api keys."
+msgstr "برای دریافت کلیدهای api firebase اینجا را کلیک کنید."
+
+msgid "API key for user"
+msgstr "کلید API برای کاربر"
+
+msgid "Firebase api key for front user"
+msgstr "کلید api Firebase برای کاربر جلو"
+
+msgid "Auth Domain"
+msgstr "دامنه Auth"
+
+msgid "Database Url"
+msgstr "آدرس پایگاه داده"
+
+msgid "Firebase Database URL"
+msgstr "URL پایگاه داده Firebase"
+
+msgid "Project Id"
+msgstr "شناسه پروژه"
+
+msgid "Firebase Project Id"
+msgstr "شناسه پروژه Firebase"
+
+msgid "Bucket Storage"
+msgstr "ذخیره سازی سطل"
+
+msgid "Firebase Bucket Storage"
+msgstr "ذخیره سازی سطل Firebase"
+
+msgid "Message Sender Id"
+msgstr "شناسه فرستنده پیام"
+
+msgid "Firebase Message Sender Id"
+msgstr "شناسه فرستنده پیام Firebase"
+
+msgid "Private Server Key"
+msgstr "کلید سرور خصوصی"
+
+msgid "Firebase Server Key"
+msgstr "کلید سرور Firebase"
+
+msgid "Logo Image for Desktop Notifications"
+msgstr "تصویر آرم برای اعلان های دسک تاپ"
+
+msgid "Remove Image"
+msgstr "حذف تصویر"
+
+msgid "Remove Logo"
+msgstr "آرم را حذف کنید"
+
+msgid "No Firebase Notificaiton Logo"
+msgstr "بدون آرم اعلان Firebase"
+
+msgid "Secret Key"
+msgstr "کلید مخفی"
+
+msgid "Second Level Security"
+msgstr "امنیت سطح دوم"
+
+msgid "For enhanced security change encryption method in %s on line %s"
+msgstr "برای بهبود روش رمزگذاری تغییر امنیتی در٪ s روی خط٪ s"
+
+msgid "Api Key"
+msgstr "کلید ای پی ای"
+
+msgid "Enter Envato api key "
+msgstr "کلید api Envato را وارد کنید"
+
+msgid "Click here to generate an api key"
+msgstr "برای تولید یک کلید api اینجا کلیک کنید"
+
+msgid "License Mandatory"
+msgstr "مجوز اجباری"
+
+msgid ""
+"Prevent users from submitting a ticket without a valid license for one of your "
+"product"
+msgstr "از ارسال بلیط بدون مجوز معتبر برای یکی از محصولات شما جلوگیری کنید"
+
+msgid "Product ID"
+msgstr "شناسه محصول"
+
+msgid "A comma-separated list of Envato product ids"
+msgstr "لیست جدا از کاما از شناسه محصولات Envato"
+
+msgid "Enter MailChimp API key "
+msgstr "کلید API MailChimp را وارد کنید"
+
+msgid "Audience ID"
+msgstr "شناسه مخاطب"
+
+msgid "Find Audience ID in your MailChimp account"
+msgstr "شناسه مخاطبان را در حساب MailChimp خود پیدا کنید"
+
+msgid "Enable double opt-in"
+msgstr "انتخاب دوگانه را فعال کنید"
+
+msgid "You must also enable double opt-in in your MailChimp account"
+msgstr "همچنین باید حساب کاربری MailChimp را انتخاب کنید"
+
+msgid "Welcome email"
+msgstr "ایمیل خوش آمدید"
+
+msgid "You can enable Final Welcome Email in your MailChimp account"
+msgstr "می توانید ایمیل حساب نهایی را در حساب MailChimp خود فعال کنید"
+
+msgid "Verify License On Ticket Creation"
+msgstr "مجوز در ایجاد بلیط را تأیید کنید"
+
+msgid "Save Configurations"
+msgstr "ذخیره تنظیمات پیکربندی"
+
+msgid "Ticket via email"
+msgstr "بلیط از طریق ایمیل"
+
+msgid "OR"
+msgstr "یا"
+
+msgid "Sorry the cron job didnot work"
+msgstr "متاسفیم کرون جاب کار نمی کند."
+
+msgid "Update ticket status"
+msgstr "وضعیت بلیط را به روز کنید"
+
+msgid "Recommended run script daily"
+msgstr "اسکریپت اجرا روزانه توصیه می شود"
+
+msgid "You cannot use this email, it is used in email piping"
+msgstr "شما نمی توانید از این ایمیل استفاده کنید ، در لوله کشی ایمیل استفاده می شود"
+
+msgid "The department has been stored"
+msgstr "بخش ذخیره شده است"
+
+msgid "The department has not been stored"
+msgstr "بخش ذخیره نشده است"
+
+msgid "The department has been deleted"
+msgstr "بخش حذف شده است"
+
+msgid "The department has not been deleted"
+msgstr "بخش حذف نشده است"
+
+msgid "The department in use cannot be delete"
+msgstr "بخش مورد استفاده قابل حذف نیست"
+
+msgid "default has been changed"
+msgstr "پیش فرض تغییر کرده است."
+
+msgid "default has not been changed"
+msgstr "پیش فرض تغییر نکرده است."
+
+msgid "No Record Found"
+msgstr "هیچ سابقه ای یافت نشد"
+
+msgid "Outgoing Email"
+msgstr "ایمیل خروجی"
+
+msgid "Select Email"
+msgstr "انتخاب ایمیل"
+
+msgid "Tickets of this department will receive emails from this email"
+msgstr "بلیط های این بخش از این ایمیل ایمیل دریافت می کنند"
+
+msgid "Receive Email"
+msgstr "دریافت ایمیل"
+
+msgid "Save Department"
+msgstr "ذخیره کردن دپارتمان"
+
+msgid "The user of this department will receive email on the new ticket"
+msgstr "کاربر این بخش برای بلیط جدید ایمیل دریافت می کند"
+
+msgid "Are you sure you want to delete it?"
+msgstr "آیا مطمئن هستید که می خواهید آن را حذف کنید؟"
+
+msgid "Search Departments"
+msgstr "بخش های جستجو"
+
+msgid "Outgoing"
+msgstr "برونگرا"
+
+msgid "Click here to give us feedback"
+msgstr "اینجا را کلیک کنید تا به ما بازخورد دهید"
+
+msgid "Email Already Exist"
+msgstr "ایمیل موجود است"
+
+msgid "The email has been stored"
+msgstr "ایمیل ذخیره شده است"
+
+msgid "The email has not been stored"
+msgstr "ایمیل ذخیره نشده است"
+
+msgid "False"
+msgstr "غلط"
+
+msgid "True"
+msgstr "درست است، واقعی"
+
+msgid "Send Email By"
+msgstr "ارسال ایمیل توسط"
+
+msgid "SMTP host type"
+msgstr "نوع میزبان SMTP"
+
+msgid "SMTP host"
+msgstr "میزبان SMTP"
+
+msgid "SMTP Authentication"
+msgstr "تأیید اعتبار SMTP"
+
+msgid "SMTP Port"
+msgstr "درگاه SMTP"
+
+msgid "If the system doesnot respond in 30 seconds"
+msgstr "اگر سیستم در 30 ثانیه پاسخ ندهد"
+
+msgid "Auto Response"
+msgstr "پاسخ خودکار"
+
+msgid "Save Email"
+msgstr "ذخیره تنظیمات ایمیل"
+
+msgid "info"
+msgstr "اطلاعات"
+
+msgid "System email used for sending email"
+msgstr "استفاده از ایمیل سیستم برای ارسال ایمیل ها"
+
+msgid "Email template has been stored"
+msgstr "تم ایمیل ذخیره شد."
+
+msgid "Email template has not been stored"
+msgstr "تم ایمیل ذخیره نشده است."
+
+msgid "Ban Email Try To Create Ticket"
+msgstr "منع ایمیل سعی کنید بلیط تهیه کنید"
+
+msgid "Ticket Priority Is Changed By"
+msgstr "اولویت تیکت تغییر کرد توسط"
+
+msgid "Data Deleted"
+msgstr "داده حذف شد"
+
+msgid "Body"
+msgstr "بدنه"
+
+msgid "Parameters"
+msgstr "پارامترها"
+
+msgid "Tracking ID"
+msgstr "شماره پیگیری"
+
+msgid "Ticket URL"
+msgstr "آدرس تیکت"
+
+msgid "Ticket Priority"
+msgstr "اولویت بلیط"
+
+msgid "Department title"
+msgstr "عنوان دپارتمان"
+
+msgid "Group Title"
+msgstr "عنوان گروه"
+
+msgid "Agent name"
+msgstr "نام عامل"
+
+msgid "Help topic title"
+msgstr "عنوان پست های راهنما"
+
+msgid "Feedback URL"
+msgstr "URL بازخورد"
+
+msgid "Ticket Subject"
+msgstr "موضوع پیام"
+
+msgid "Ticket Tracking ID"
+msgstr "شماره پیگیری تیکت"
+
+msgid "Close Date"
+msgstr "تاریخ بسته شدن"
+
+msgid "Save Email Template"
+msgstr "ذخیره الگوی ایمیل"
+
+msgid "Field mark as published"
+msgstr "فیلد به صورت منتشر شده علامت گذاری شده است."
+
+msgid "Field mark as unpublished"
+msgstr "فیلد به صورت منتشرنشده علامت گذاری شده است."
+
+msgid "Field mark as required"
+msgstr "فیلد به صورت اجباری علامت گذاری شده است."
+
+msgid "Field mark as not required"
+msgstr "فیلد به صورت غیراجباری علامت گذاری شده است."
+
+msgid "Field ordering down"
+msgstr "انتقال به جایگاه پایین"
+
+msgid "Field ordering up"
+msgstr "انتقال به جایگاه بالا"
+
+msgid "Parent field has not been stored"
+msgstr "زمینه والدین ذخیره نشده است"
+
+msgid "Please Insert At least one value for every option"
+msgstr "لطفا برای هر گزینه حداقل یک مقدار وارد کنید"
+
+msgid "Field has not been stored"
+msgstr "فیلد ذخیره نشده است."
+
+msgid "Field has been stored"
+msgstr "فیلد ذخیره شد."
+
+msgid "Field has been updated"
+msgstr "فیلد بروزرسانی شد."
+
+msgid "Parent Field"
+msgstr "فیلد مادر"
+
+msgid "Edit Field"
+msgstr "ویرایش فیلد"
+
+msgid "Field Title"
+msgstr "عنوان فیلد"
+
+msgid "User Published"
+msgstr "کاربر منتشر شده است."
+
+msgid "Visitor Published"
+msgstr "منتشر شده بازدید کنندگان"
+
+msgid "Required"
+msgstr "اجباری"
+
+msgid "User Search"
+msgstr "جستجو کاربر"
+
+msgid "Visitor Search"
+msgstr "جستجو ویزیتور"
+
+msgid "Show On Listing"
+msgstr "نمایش در فهرست"
+
+msgid "Advanced"
+msgstr "پیشرفته"
+
+msgid "Field has not been deleted"
+msgstr "فیلد حذف نشده است"
+
+msgid "Field has been deleted"
+msgstr "قسمت حذف شده است"
+
+msgid "Add Field"
+msgstr "فیلد را اضافه کنید"
+
+msgid "Field"
+msgstr "رشته"
+
+msgid "Text Field"
+msgstr "قسمت متن"
+
+msgid "Check Box"
+msgstr "جعبه چک"
+
+msgid "Drop Down"
+msgstr "رها کردن"
+
+msgid "Text Area"
+msgstr "منطقه متن"
+
+msgid "Radio Button"
+msgstr "دکمه رادیویی"
+
+msgid "Upload File"
+msgstr "آپلود فایل"
+
+msgid "Multi Select"
+msgstr "چند انتخاب کنید"
+
+msgid "Terms and Conditions"
+msgstr "شرایط و ضوابط"
+
+msgid "Dependent Field"
+msgstr "زمینه وابسته"
+
+msgid "50%"
+msgstr "50 درصد"
+
+msgid "100%"
+msgstr "100 درصد"
+
+msgid "Field Type"
+msgstr "نوع فیلد"
+
+msgid "Field Size"
+msgstr "سایز فیلد"
+
+msgid "Max Length"
+msgstr "حداکثر طول"
+
+msgid "Columns"
+msgstr "ستون ها"
+
+msgid "Rows"
+msgstr "ردیف ها"
+
+msgid "Use the table below to add new values"
+msgstr "از جدول زیر برای افزودن مقادیر جدید استفاده کنید"
+
+msgid "Add Value"
+msgstr "اضافه کردن محتوا"
+
+msgid "Terms and Conditions Text"
+msgstr "متن قوانین و مقررات"
+
+msgid "Terms and Conditions Link Type"
+msgstr "شرایط و ضوابط نوع پیوند"
+
+msgid "Direct Link"
+msgstr "لینک مستقیم"
+
+msgid "Wordpress Page"
+msgstr "صفحه وردپرس"
+
+msgid "Select Link Type"
+msgstr "نوع پیوند را انتخاب کنید"
+
+msgid "Terms and Conditions Link"
+msgstr "پیوند شرایط و ضوابط"
+
+msgid "Terms and Conditions Page"
+msgstr "صفحه شرایط و ضوابط"
+
+msgid "Select Wordpress page"
+msgstr "صفحه وردپرس را انتخاب کنید"
+
+msgid "Save Field"
+msgstr "ذخیره فیلد"
+
+msgid "S.No"
+msgstr ".نه"
+
+msgid "User Publish"
+msgstr "انتشار کاربر"
+
+msgid "Visitor Publish"
+msgstr "انتشار بازدید کنندگان"
+
+msgid "Published"
+msgstr "منتشر شده"
+
+msgid "Unpublished"
+msgstr "منتشر نشده است."
+
+msgid "Not required"
+msgstr "اجباری نیست"
+
+msgid "users popup"
+msgstr "کاربران پنجره"
+
+msgid "Can Not Unpublished"
+msgstr "نمی تواند منتشر نشده بماند."
+
+msgid "good"
+msgstr "خوب"
+
+msgid "cross"
+msgstr "صلیب"
+
+msgid "can not mark as not required"
+msgstr "نمی تواند علامت گذاری به عنوان مورد نیاز نیست"
+
+msgid "Cannot unpublished field"
+msgstr "فیلد منتشر نشده امکان پذیر نیست"
+
+msgid "User Data"
+msgstr "اطلاعات کاربر"
+
+msgid "Erasing data request has been stored"
+msgstr "پاک کردن درخواست داده ذخیره شده است"
+
+msgid "Failed while storing"
+msgstr "هنگام ذخیره سازی انجام نشد"
+
+msgid "Erase data request withdrawn"
+msgstr "پاک کردن درخواست داده حذف شد"
+
+msgid "Failed while performing action"
+msgstr "هنگام انجام عمل ناموفق بود"
+
+msgid "User identifying data erased"
+msgstr "شناسایی کاربر پاک شد"
+
+msgid "User data Deleted"
+msgstr "داده های کاربر حذف شد"
+
+msgid "Export your data"
+msgstr "داده های خود را صادر کنید"
+
+msgid "You have filed a request to remove your data."
+msgstr "شما درخواستی برای حذف داده های خود ارائه داده اید"
+
+msgid "To withdraw erases data request"
+msgstr "برای برداشتن درخواست داده پاک می شود"
+
+msgid "Request data removal from the system."
+msgstr "درخواست حذف داده ها از سیستم."
+
+msgid "Add GDPR Field"
+msgstr "زمینه GDPR را اضافه کنید"
+
+msgid "Field Text"
+msgstr "متن زمینه"
+
+msgid "Link Type"
+msgstr "نوع پیوند"
+
+msgid "Link Page"
+msgstr "صفحه پیوند"
+
+msgid "User Email"
+msgstr "ایمیل کاربر"
+
+msgid "Request Status"
+msgstr "درخواست وضعیت"
+
+msgid "Awaiting response"
+msgstr "در انتظار پاسخ"
+
+msgid "Erased identifying data"
+msgstr "شناسایی داده ها پاک شد"
+
+msgid "Deleted"
+msgstr "حذف شده"
+
+msgid "Erase identifying data"
+msgstr "شناسایی داده ها را پاک کنید"
+
+msgid "Are you sure to erase identifying data"
+msgstr "مطمئن هستید اطلاعات شناسایی را پاک می کنید"
+
+msgid "Delete data"
+msgstr "حذف داده ها"
+
+msgid "Link"
+msgstr "ارتباط دادن"
+
+msgid "Direct URL"
+msgstr "URL مستقیم"
+
+msgid "Page Title or URL"
+msgstr "عنوان صفحه یا URL"
+
+msgid "Cannot open file"
+msgstr "امکان باز کردن فایل وجود ندارد."
+
+msgid "Dir is not writable"
+msgstr "دیر قابل نوشتن نیست"
+
+msgid "Unable to connect to the server"
+msgstr "نمیتوانید به سرور متصل شوید"
+
+msgid "Language is not installed"
+msgstr "زبان نصب نشده است."
+
+msgid "Language directory is not writable"
+msgstr "فهرست زبان قابل نوشتن نیست"
+
+msgid "Required language is not installed but similar language like"
+msgstr "زبان مورد نیاز نصب نشده است اما مانند زبان مشابه"
+
+msgid "is found in your system"
+msgstr "در سیستم شما یافت شد"
+
+msgid "Language code"
+msgstr "کد زبان"
+
+msgid "Empty values"
+msgstr "خالی"
+
+msgid "File is not writable"
+msgstr "پرونده قابل نوشتن نیست"
+
+msgid "File successfully downloaded"
+msgstr "پرونده با موفقیت بارگیری شد"
+
+msgid "Ordering updated"
+msgstr "سفارش به روز شد"
+
+msgid "Plugin Detail"
+msgstr "جزئیات پلاگین"
+
+msgid "Plugin for online JS Help Desk System"
+msgstr "افزونه برای سیستم آنلاین JS Help Desk"
+
+msgid "Created By"
+msgstr "ایجاد شده توسط"
+
+msgid "Company"
+msgstr "شرکت"
+
+msgid "Plugin Name"
+msgstr "نام پلاگین"
+
+msgid "job plugin"
+msgstr "پلاگین کار"
+
+msgid "vehicle manager"
+msgstr "مدیر خودرو"
+
+msgid "lms plugin"
+msgstr "پلاگین lms"
+
+msgid "car manager"
+msgstr "مدیر ماشین"
+
+msgid "job manager"
+msgstr "مدیر شغل"
+
+msgid "Statistics"
+msgstr "آمار"
+
+msgid "Today Tickets"
+msgstr "بلیط های امروز"
+
+msgid "Short Links"
+msgstr "پیوندهای کوتاه"
+
+msgid "Overall Report"
+msgstr "گزارش کلی"
+
+msgid "email template"
+msgstr "الگوی ایمیل"
+
+msgid "Install Now"
+msgstr "الآن نصب کن"
+
+msgid "Premium Addons List"
+msgstr "افزودنی های پرمیوم"
+
+msgid "The best support system plugin for WordPress has everything you need."
+msgstr "بهترین افزونه پشتیبانی سیستم برای وردپرس همه چیز مورد نیاز شما را دارد."
+
+msgid "Add-Ons List"
+msgstr "لیست افزودنی ها"
+
+msgid "Add New Addons"
+msgstr "افزودنیهای جدید اضافه کنید"
+
+msgid "addon"
+msgstr "افزونه"
+
+msgid "View All Tickets"
+msgstr "مشاهده همه بلیط ها"
+
+msgid "Waiting Agent Reply"
+msgstr "در انتظار پاسخ نماینده"
+
+msgid "Waiting Your Reply"
+msgstr "در انتظار پاسخ شما"
+
+msgid "Ticket History"
+msgstr "تاریخچه تیکت"
+
+msgid "Addons"
+msgstr "اضافات"
+
+msgid "Add agents and assign roles and permissions to provide assistance."
+msgstr "عوامل را اضافه کنید و نقشها و مجوزها را برای ارائه کمک اختصاص دهید."
+
+msgid "Ticket Auto Close"
+msgstr "بلیط خودکار ببندید"
+
+msgid "Define rules for the ticket to auto-close after a specific interval of time."
+msgstr "قوانین مربوط به بسته شدن بلیط را پس از یک بازه زمانی مشخص مشخص کنید."
+
+msgid "Get a survey from customers on ticket closing to improve quality."
+msgstr "برای بهبود کیفیت ، از مشتریان در مورد بسته شدن بلیط نظرسنجی کنید."
+
+msgid "Help users to find and select the area with which they need assistance."
+msgstr ""
+"به کاربران کمک کنید تا مناطقی را که در آن به کمک نیاز دارند ، پیدا کرده و انتخاب "
+"کنند."
+
+msgid "Private Note"
+msgstr "یادداشت خصوصی"
+
+msgid ""
+"The private note is used as reminders or to give other agents insights into the "
+"ticket issue."
+msgstr ""
+"یادداشت خصوصی به عنوان یادآوری یا برای ارائه بینش سایر نمایندگان از موضوع بلیط "
+"استفاده می شود."
+
+msgid "Stop losing productivity on repetitive queries, build your knowledge base."
+msgstr "از دست دادن بهره وری در سؤالات تکراری ، پایه دانش خود را بسازید."
+
+msgid "Max Ticket"
+msgstr "حداکثر بلیط"
+
+msgid "Max Tickets"
+msgstr "حداکثر بلیط"
+
+msgid "Enables admin to set N numbers of tickets for users and agents separately."
+msgstr ""
+"مدیر را قادر می سازد تعداد N بلیط را برای کاربران و نمایندگان بطور جداگانه تنظیم "
+"کند."
+
+msgid "Merge Tickets"
+msgstr "بلیط های ادغام"
+
+msgid ""
+"Enables agents to merge two tickets of the same user into one instead of dealing "
+"with the same issue on many tickets."
+msgstr ""
+"به نمایندگان این امکان را می دهد که به جای پرداختن به مسئله مشابه در بسیاری از "
+"بلیط ها ، دو بلیط یک کاربر را در یکی ادغام کنند."
+
+msgid ""
+"Defines rules or set specific intervals of time to make ticket auto overdue.The "
+"ticket can overdue by type or overdue by Cronjob."
+msgstr ""
+"قوانینی را تعیین می کند یا بازه های مشخصی از زمان را برای تأخیر در بلیط اتومبیل "
+"تعیین می کند. بلیط می تواند براساس نوع یا تأخیر توسط Cronjob تأخیر کند."
+
+msgid ""
+"SMTP enables you to add custom mail protocol to send and receive emails within "
+"the js help desk."
+msgstr ""
+"SMTP شما را قادر می سازد پروتکل نامه های سفارشی را برای ارسال و دریافت ایمیل در "
+"میز کمک js اضافه کنید."
+
+msgid ""
+"Displays complete ticket history along with the ticket status, currently assigned "
+"user and other actions performed on each ticket."
+msgstr ""
+"تاریخچه بلیط کامل را به همراه وضعیت بلیط نمایش می دهد ، که در حال حاضر کاربر "
+"اختصاص داده شده و سایر اقدامات انجام شده در هر بلیط."
+
+msgid "Pre-populated messages allow support agents to respond quickly."
+msgstr "پیام های از پیش جمع شده به عوامل پشتیبانی اجازه می دهد سریع پاسخ دهند."
+
+msgid "Enables users to reply to the tickets via email without login."
+msgstr ""
+"کاربران را قادر می سازد بدون ورود به سایت از طریق ایمیل به بلیط ها پاسخ دهند."
+
+msgid "Time Tracking"
+msgstr "پیگیری زمان"
+
+msgid ""
+"Track the time spent on each ticket by each agent and each reply. Report the "
+"admin on how much time is spent on each ticket."
+msgstr ""
+"زمان صرف شده در هر بلیط توسط هر نماینده و هر پاسخ را پیگیری کنید. مدیر را در مورد "
+"چگونگی هزینه هر بلیط به مدیر گزارش دهید."
+
+msgid "User Options"
+msgstr "گزینه های کاربر"
+
+msgid ""
+"User options enable you to add Google Re-captcha or JS Help Desk Re-captcha for a "
+"registration form."
+msgstr ""
+"گزینه های کاربر شما را قادر می سازد برای فرم ثبت نام Google Re-captcha یا JS Help "
+"Desk Re-captcha را اضافه کنید."
+
+msgid "Actions"
+msgstr "اقدامات"
+
+msgid "Ticket Actions"
+msgstr "اقدامات بلیط"
+
+msgid ""
+"Get multiple action options on each ticket like Print Ticket, Lock Ticket, "
+"Transfer ticket, etc."
+msgstr ""
+"در هر بلیط از گزینه های مختلف اقدام مانند بلیط بلیط ، قفل بلیط ، بلیط نقل و "
+"انتقالات و غیره استفاده کنید."
+
+msgid "Make unlimited announcements associated with the support system."
+msgstr "اعلانات نامحدود مرتبط با سیستم پشتیبانی را انجام دهید."
+
+msgid ""
+"It allows you to block the email of any user to restrict him to create new "
+"tickets."
+msgstr ""
+"این امکان را به شما می دهد تا ایمیل هر کاربر را محدود کنید تا او را برای ایجاد "
+"بلیط جدید محدود کنید."
+
+msgid "Desktop Notification"
+msgstr "اعلان دسک تاپ"
+
+msgid ""
+"The Desktop notifications will keep you up to date about anything happens on your "
+"support system."
+msgstr ""
+"اعلان های دسک تاپ شما را در مورد هر اتفاقی که در سیستم پشتیبانی شما رخ می دهد ، "
+"به روز می کنید."
+
+msgid "Save the ticket as a PDF in your system and able to export all data."
+msgstr ""
+"بلیط را به عنوان PDF در سیستم خود ذخیره کنید و قادر به صادر کردن کلیه داده ها "
+"باشید."
+
+msgid "Create downloads to ensure the user to get downloads from downloads."
+msgstr ""
+"برای اطمینان از کاربر برای دریافت بارگیری از بارگیری ، بارگیری بارگیری کنید."
+
+msgid "Add FAQs to drastically reduce the number of common questions."
+msgstr ""
+"سؤالات متداول را اضافه کنید تا به طور چشمگیر تعداد سؤالات متداول را کاهش دهید."
+
+msgid ""
+"Get multiple themes with a beautiful color scheme to make the site beautiful."
+msgstr "برای زیباتر شدن سایت ، چندین طرح با طرح رنگی زیبا را بدست آورید."
+
+msgid "Dashboard Widgets"
+msgstr "ابزارکهای داشبورد"
+
+msgid ""
+"Get immediate data of your support operations as soon as you log into your "
+"WordPress administration area."
+msgstr ""
+"به محض ورود به منطقه مدیریت وردپرس خود ، اطلاعات فوری از عملیات پشتیبانی خود را "
+"دریافت کنید."
+
+msgid "Internal Mail"
+msgstr "نامه داخلی"
+
+msgid "Use an internal email to send emails to one agent to another agent."
+msgstr ""
+"برای ارسال ایمیل به یک نماینده به نماینده دیگر از یک ایمیل داخلی استفاده کنید."
+
+msgid "Front-End Widgets"
+msgstr "ابزارک های جلویی"
+
+msgid ""
+"Widgets in WordPress allow you to add content and features in the widgetized "
+"areas of your theme."
+msgstr ""
+"ابزارک در وردپرس به شما امکان می دهد محتوا و ویژگی های خود را در مناطق ابزارک شده "
+"خود اضافه کنید."
+
+msgid ""
+"JS Help Desk WooCommerce provides the much-needed bridge between your WooCommerce "
+"store and the JS Help Desk."
+msgstr ""
+"میز کمک JS WooCommerce پل مورد نیاز بین فروشگاه WooCommerce و میز کمک JS شما را "
+"فراهم می کند."
+
+msgid ""
+"Collect your customer's private data, sensitive information from credit card to "
+"health information and store them encrypted."
+msgstr ""
+"اطلاعات شخصی مشتری ، اطلاعات حساس را از کارت اعتباری گرفته تا اطلاعات بهداشتی جمع "
+"آوری کرده و آنها را رمزگذاری شده ذخیره کنید."
+
+msgid "envato"
+msgstr "انواتو"
+
+msgid "Without valid Envato, license clients won't be able to open a new ticket."
+msgstr "بدون Envato معتبر ، مشتریان مجوز نمی توانند بلیط جدیدی را باز کنند."
+
+msgid "mailchimp"
+msgstr "صندوق پستی"
+
+msgid ""
+"Adds the option to the registration form for prompting new users to subscribe to "
+"your email list."
+msgstr ""
+"گزینه ای را برای درخواست کاربران جدید برای عضویت در لیست ایمیل شما ، به فرم ثبت "
+"نام اضافه می کند."
+
+msgid "paidsupport"
+msgstr "پشتیبان پشتیبانی"
+
+msgid ""
+"Paid Support is the easiest way to integrate and manage payments for your tickets."
+msgstr ""
+"پشتیبانی پرداخت شده ساده ترین راه برای ادغام و مدیریت پرداخت برای بلیط های شما "
+"است."
+
+msgid "easy digital downloads"
+msgstr "بارگیری آسان دیجیتال"
+
+msgid ""
+"EDD offers customers to open new tickets just one click from their EDD account."
+msgstr ""
+"EDD به مشتریان پیشنهاد می کند بلیط های جدید را فقط با یک کلیک از حساب EDD خود باز "
+"کنند."
+
+msgid "We'd love to hear from You."
+msgstr "ما از اینکه ازت خبر داشته باشیم خوشحال میشویم."
+
+msgid "Please write appreciated review at"
+msgstr "لطفا بررسی قدردانی را در اینجا بنویسید"
+
+msgid "WP Extension Directory"
+msgstr "دایرکتوری پسوند WP"
+
+msgid "star"
+msgstr "ستاره"
+
+msgid "Spread the word"
+msgstr "کلمه را پخش کنید"
+
+msgid "twitter"
+msgstr "توییتر"
+
+msgid "JS Help Desk / JS Support Ticket Control Panel"
+msgstr "کنترل پنل بلیط بلیط پشتیبانی JS Help Desk / JS"
+
+msgid "JS Help Desk / JS Support Ticket main control panel"
+msgstr "کنترل پنل اصلی بلیط میز / JS پشتیبانی بلیط"
+
+msgid "Add new ticket form for both user and agent"
+msgstr "فرم بلیط جدید را هم برای کاربر و هم برای نماینده اضافه کنید"
+
+msgid "My tickets for both user and agent"
+msgstr "بلیط من هم برای کاربر و هم برای نماینده"
+
+msgid "List downloads"
+msgstr "لیست دانلودها"
+
+msgid "Latest Downloads"
+msgstr "آخرین بارگیری ها"
+
+msgid "Show latest downloads. Options"
+msgstr "نمایش آخرین بارگیریها گزینه ها"
+
+msgid "and"
+msgstr "و"
+
+msgid "i.e."
+msgstr "یعنی"
+
+msgid "Popular Downloads"
+msgstr "دانلودهای محبوب"
+
+msgid "Show popular downloads. Options"
+msgstr "بارگیری های محبوب گزینه ها"
+
+msgid "List knowledge base"
+msgstr "لیست پست های آموزشی"
+
+msgid "Latest Knowledge Base"
+msgstr "آخرین پایگاه دانش"
+
+msgid "Show latest knowledge base. Options"
+msgstr "نمایش آخرین پایه دانش. گزینه ها"
+
+msgid "Popular knowledge base"
+msgstr "پایگاه دانش عامه"
+
+msgid "Show popular knowledge base. Options"
+msgstr "پایه دانش عمومی را نشان دهید گزینه ها"
+
+msgid "List FAQ's"
+msgstr "لیست سوالات متداول"
+
+msgid "Latest FAQ's"
+msgstr "آخرین سوالات متداول"
+
+msgid "Show latest FAQ's. Options"
+msgstr "نمایش آخرین سؤالات متداول. گزینه ها"
+
+msgid "Popular FAQ's"
+msgstr "سوالات متداول مجبوب"
+
+msgid "Show popular FAQ's. Options"
+msgstr "نمایش سؤالات متداول محبوب. گزینه ها"
+
+msgid "List announcements"
+msgstr "لیست اطلاعیه ها"
+
+msgid "Latest Announcements"
+msgstr "آخرین اطلاعیه ها"
+
+msgid "Show latest announcements. Options"
+msgstr "نمایش آخرین اطلاعیه ها گزینه ها"
+
+msgid "Popular Announcements"
+msgstr "اطلاعیه های محبوب"
+
+msgid "Show popular announcements. Options"
+msgstr "نمایش اطلاعیه های محبوب. گزینه ها"
+
+msgid "spinning wheel"
+msgstr "چرخ ریسندگی"
+
+msgid "Get JS Help Desk Translations"
+msgstr "ترجمه خدمات راهنمای JS را بدست آورید"
+
+msgid "Get Translations"
+msgstr "ترجمه های درخواست شده"
+
+msgid "Select Translation"
+msgstr "انتخاب ترجمه"
+
+msgid ""
+"When WordPress language change to ro, JS Help Desk language will auto change to ro"
+msgstr ""
+"وقتی زبان WordPress به ro تغییر یابد ، زبان میز JS Help به صورت خودکار به ro "
+"تغییر می یابد"
+
+msgid "c error"
+msgstr "خطای c"
+
+msgid "saved"
+msgstr "ذخیره"
+
+msgid "Contribute In Translation"
+msgstr "کمک در ترجمه"
+
+msgid "translate"
+msgstr "ترجمه کردن"
+
+msgid "Manual Download"
+msgstr "بارگیری دستی"
+
+msgid "Log In"
+msgstr "ورود به سیستم"
+
+msgid "Log Out"
+msgstr "خارج شدن"
+
+msgid "Agent Feedbacks"
+msgstr "بازخورد عامل"
+
+msgid "Submit ticket"
+msgstr "ارسال بلیط"
+
+msgid "my ticket"
+msgstr "بلیط من"
+
+msgid "View all the created tickets"
+msgstr "مشاهده همه بلیط های ایجاد شده"
+
+msgid "your ticket status"
+msgstr "وضعیت بلیط شما"
+
+msgid "closed ticket"
+msgstr "بلیط بسته"
+
+msgid "answered ticket"
+msgstr "بلیط پاسخ داد"
+
+msgid "overdue ticket"
+msgstr "بلیط عقب افتاده"
+
+msgid "View All Downloads"
+msgstr "مشاهده همه بارگیری ها"
+
+msgid "View All Announcements"
+msgstr "مشاهده همه اطلاعیه ها"
+
+msgid "View All Knowledge Base"
+msgstr "مشاهده همه دانش بنیان"
+
+msgid "Latest FAQs"
+msgstr "آخرین سؤالات متداول"
+
+msgid "View All FAQs"
+msgstr "مشاهده همه سؤالات متداول"
+
+msgid "keep me login"
+msgstr "مرا به خاطر بسپار!"
+
+msgid "Repeat Password"
+msgstr "تکرار رمز عبور"
+
+msgid "Subscribe to the newsletter"
+msgstr "مشترک شدن در خبرنامه"
+
+msgid "Captcha"
+msgstr "کد امنیتی"
+
+msgid "has been changed"
+msgstr "تغییر کرده است"
+
+msgid "has not been changed"
+msgstr "تغییر نکرده است"
+
+msgid "JS Support Ticket Settings"
+msgstr "تنظیمات بلیط پشتیبانی JS"
+
+msgid "General"
+msgstr "عمومی"
+
+msgid "Complete"
+msgstr "کامل"
+
+msgid "Configurations complete"
+msgstr "تنظیمات کامل شد"
+
+msgid "Step 4 of 4"
+msgstr "مرحله 4 از 4"
+
+msgid "Step 3 of 3"
+msgstr "مرحله 3 از 3"
+
+msgid "Setting Completed"
+msgstr "تنظیم انجام شد"
+
+msgid "Setting you applied has been saved successfully."
+msgstr "تنظیم برنامه اعمال شده با موفقیت ذخیره شد."
+
+msgid "Finish"
+msgstr "پایان"
+
+msgid "Ticket Setting"
+msgstr "تنظیمات تیکت"
+
+msgid "Setting Complete"
+msgstr "تنظیم کامل است"
+
+msgid "General Configurations"
+msgstr "تنظیمات عمومی"
+
+msgid "Step 1 of 4"
+msgstr "مرحله 1 از 4"
+
+msgid "Step 1 of 3"
+msgstr "مرحله 1 از 3"
+
+msgid "Enter the site title"
+msgstr "عنوان سایت را وارد کنید"
+
+msgid "Date format for plugin"
+msgstr "قالب تاریخ افزونه"
+
+msgid "Show Breadcrumbs"
+msgstr "نمایش Breadcrumbs"
+
+msgid "Show navigation in breadcrumbs"
+msgstr "نمایش پیمایش در خرده نان"
+
+msgid "Upload file size in KB's"
+msgstr "اندازه پرونده را در KB بارگذاری کنید"
+
+msgid "File Extension"
+msgstr "فرمت فایل"
+
+msgid "Sequential"
+msgstr "متوالی"
+
+msgid "Feedback Configurations"
+msgstr "پیکربندی بازخورد"
+
+msgid "Step 3 of 4"
+msgstr "مرحله 3 از 4"
+
+msgid "Set Email Delay Time"
+msgstr "زمان تأخیر ایمیل را تنظیم کنید"
+
+msgid " :"
+msgstr ":"
+
+msgid "Set Email Delay"
+msgstr "تأخیر ایمیل را تنظیم کنید"
+
+msgid "Back"
+msgstr "برگشت"
+
+msgid "Ticket Configurations"
+msgstr "پیکربندی بلیط"
+
+msgid "Step 2 of 4"
+msgstr "مرحله 2 از 4"
+
+msgid "Step 2 of 3"
+msgstr "مرحله 2 از 3"
+
+msgid "Enable/Disable Open Ticket"
+msgstr "فعال کردن و غیرفعال کردن بلیط باز"
+
+msgid "Ticket ID sequence"
+msgstr "دنباله شناسه بلیط"
+
+msgid "Set ticket id sequential or random"
+msgstr "شناسه بلیط را متوالی یا تصادفی تنظیم کنید"
+
+msgid "Maximum Tickets"
+msgstr "حداکثر بلیط"
+
+msgid "Set Maximum Ticket Per user"
+msgstr "حداکثر بلیط را برای هر کاربر تنظیم کنید"
+
+msgid "Maximum Open Ticket"
+msgstr "حداکثر بلیط باز"
+
+msgid "Reopen ticket within Days"
+msgstr "بلیط را در روزها باز کنید"
+
+msgid "Show Captcha to visitor on ticket form"
+msgstr "نمایش Captcha به بازدید کننده در فرم بلیط"
+
+msgid "Enable/Disable Captcha on Ticket Form"
+msgstr "فعال / غیرفعال کردن Captcha در فرم بلیط"
+
+msgid "Own Captcha operands"
+msgstr "اپراتورهای Captcha"
+
+msgid "Enable/Disable Own Captcha subtraction"
+msgstr "تفریق Captcha را فعال یا غیرفعال کنید"
+
+msgid "Enable Print Ticket"
+msgstr "بلیط چاپ را فعال کنید"
+
+msgid "Enable/Disable Print Ticket"
+msgstr "فعال کردن / غیرفعال کردن بلیط چاپ"
+
+msgid "Please insert activation key to proceed"
+msgstr "برای ادامه ، لطفاً کلید فعال سازی را وارد کنید"
+
+msgid "Addon Installation Failed"
+msgstr "نصب افزونه انجام نشد"
+
+msgid "Addon installation failed, Directory permission error"
+msgstr "نصب افزونه انجام نشد ، خطای مجوز فهرست"
+
+msgid "Addon Installation Failed, File download error"
+msgstr "نصب افزونه انجام نشد ، خطای بارگیری پرونده"
+
+msgid "left image"
+msgstr "تصویر سمت چپ"
+
+msgid "right image"
+msgstr "تصویر درست"
+
+msgid "buy now"
+msgstr "هم اکنون خریداری کنید"
+
+msgid "helptopic"
+msgstr "حلزونی"
+
+msgid "private note"
+msgstr "یادداشت خصوصی"
+
+msgid "max ticket"
+msgstr "بلیط حداکثر"
+
+msgid "merge tickets"
+msgstr "ادغام بلیط"
+
+msgid "time tracking"
+msgstr "ردیابی زمان"
+
+msgid "user options"
+msgstr "گزینه های کاربر"
+
+msgid "ticket actions"
+msgstr "اقدامات بلیط"
+
+msgid "desktop notifications"
+msgstr "اعلان های دسک تاپ"
+
+msgid "admin widgets"
+msgstr "ابزارک های مدیر"
+
+msgid "internal mail"
+msgstr "نامه داخلی"
+
+msgid "frontend widget"
+msgstr "ویجت جلو"
+
+msgid "woocommerce support"
+msgstr "پشتیبانی woocommerce"
+
+msgid "mail chimp"
+msgstr "چمدان نامه"
+
+msgid "addon in no longer active"
+msgstr "افزونه در دیگر فعال نیست"
+
+msgid "Wordpress Plugin"
+msgstr "افزونه وردپرس"
+
+msgid ""
+"JS Help Desk is a trusted open source ticket system. JS Help Desk is a simple, "
+"easy to use, web-based customer support system. Users can create a ticket from "
+"the front-end. JS Help Desk comes packed with lot features than most of the "
+"expensive(and complex) support ticket system on the market. The best part is, It "
+"completely free."
+msgstr ""
+"میز کمک JS یک سیستم بلیط باز منبع قابل اعتماد است. JS Help Desk یک سیستم پشتیبانی "
+"مشتری مبتنی بر وب ساده ، آسان و قابل استفاده است. کاربران می توانند از قسمت جلویی "
+"بلیط تهیه کنند. میز کمک JS از بسیاری از سیستم های پشتیبانی بلیط گران قیمت (و "
+"پیچیده) موجود در بازار مملو از ویژگی های زیادی است. بهترین قسمت این است که کاملاً "
+"رایگان است."
+
+msgid "Add on list"
+msgstr "اضافه کردن به لیست"
+
+msgid "Please Insert Your Activation key"
+msgstr "لطفاً کلید فعال سازی خود را وارد کنید"
+
+msgid "Activation key"
+msgstr "کلید فعالسازی"
+
+msgid "Proceed"
+msgstr "ادامه دهید"
+
+msgid "Select Addons for download"
+msgstr "افزونه‌ها را برای بارگیری انتخاب کنید"
+
+msgid "All allowed add ons are already installed"
+msgstr "همه افزودنیهای مجاز قبلاً نصب شده اند"
+
+msgid "You are not allowed to install any add on"
+msgstr "شما مجاز به نصب اضافی در آن نیستید"
+
+msgid "Select All Addons"
+msgstr "همه افزونه‌ها را انتخاب کنید"
+
+msgid "Add ons installed and activated successfully"
+msgstr "افزودنیهای نصب شده و موفقیت آمیز را اضافه کنید"
+
+msgid "Priority Title Already Exist"
+msgstr "عنوان اولویت در حال حاضر وجود دارد."
+
+msgid "Priority has been stored"
+msgstr "اولویت ذخیره شده است."
+
+msgid "Priority has not been stored"
+msgstr "اولویت ذخیره نشده است."
+
+msgid "Priority has been deleted"
+msgstr "اولویت حذف شده است."
+
+msgid "Priority has not been deleted"
+msgstr "اولویت حذف نشده است."
+
+msgid "Default priority cannot delete"
+msgstr "اولویت پیش فرض نمی تواند حذف شود."
+
+msgid "Priority has been make default"
+msgstr "اولویت به طور پیش فرض ایجاد شده است."
+
+msgid "Priority has not been make default"
+msgstr "اولویت به طور پیش فرض ایجاد نشده است."
+
+msgid "Color"
+msgstr "رنگ"
+
+msgid "Ticket Overdue Interval Type"
+msgstr "نوع بازه عقب بلیط"
+
+msgid "Save Priority"
+msgstr "ذخیره کردن اولویت"
+
+msgid "Date Interval"
+msgstr "فاصله زمانی"
+
+msgid "Reply posted"
+msgstr "پاسخ ارسال شد"
+
+msgid "Reply posted on ticket"
+msgstr "پاسخ ارسال شده در بلیط"
+
+msgid "Ticket is replied by"
+msgstr "تیکت ارسال شده توسط"
+
+msgid "Reply Has been Posted"
+msgstr "پاسخ ارسال شده است"
+
+msgid "Reply Has Not been Posted"
+msgstr "پاسخ ارسال نشده است"
+
+msgid "Dates"
+msgstr "تاریخ ها"
+
+msgid "Department Detail Report"
+msgstr "گزارش جزئیات وزارتخانه"
+
+msgid "Export Data"
+msgstr "داده صادرات"
+
+msgid "Department Statistics"
+msgstr "آمار دپارتمان"
+
+msgid "pending ticket"
+msgstr "بلیط در انتظار"
+
+msgid "Time Taken"
+msgstr "وقت صرف شده"
+
+msgid "Merged and closed"
+msgstr "ادغام و بسته شد"
+
+msgid "Out of"
+msgstr "بیرون از"
+
+msgid "Ticket by departments"
+msgstr "تیکت توسط دپارتمان"
+
+msgid "Tickets By Priority"
+msgstr "تیکت ها براساس اولویت"
+
+msgid "Staff Member Tickets"
+msgstr "تیکت های کارکنان"
+
+msgid "all ticket"
+msgstr "همه بلیط"
+
+msgid "Tickets By Status And Priorities"
+msgstr "تیکت ها براساس وضعیت و اولویت"
+
+msgid "Tickets By Agents"
+msgstr "بلیط توسط نمایندگان"
+
+msgid "Staff Reports"
+msgstr "گزارش های کارمند"
+
+msgid "Based on"
+msgstr "بر اساس"
+
+msgid "Customer Satisfaction"
+msgstr "رضایت کاربر"
+
+msgid "satisfaction image"
+msgstr "تصویر رضایت"
+
+msgid "Excellent"
+msgstr "عالی"
+
+msgid "Happy"
+msgstr "خوشجال"
+
+msgid "Normal"
+msgstr "معمولی"
+
+msgid "bad"
+msgstr "بد"
+
+msgid "Sad"
+msgstr "ناراحت"
+
+msgid "Angry"
+msgstr "عصبانی"
+
+msgid "Agent Detail Report"
+msgstr "گزارش جزئیات عامل"
+
+msgid "Agent Statistics"
+msgstr "آمار نماینده"
+
+msgid "staff image"
+msgstr "تصویر کارمندان"
+
+msgid "Average rating"
+msgstr "میانگین امتیاز"
+
+msgid "Average time"
+msgstr "زمان متوسط"
+
+msgid "Tickets not assigned to the staff member"
+msgstr "بلیط هایی که به کارمند اختصاص نمی یابد"
+
+msgid "Minutes"
+msgstr "دقایق"
+
+msgid "Report By Staff Member"
+msgstr "گزارش توسط کارمند"
+
+msgid "User Detail Report"
+msgstr "گزارش جزئیات کاربر"
+
+msgid "User Statistics"
+msgstr "آمار کاربر"
+
+msgid "Users"
+msgstr "کاربران"
+
+msgid "Ticket Status By Departments"
+msgstr "وضعیت بلیط توسط بخش ها"
+
+msgid "Agent Report"
+msgstr "گزارش عامل"
+
+msgid "Agent Tickets"
+msgstr "بلیط های نمایندگی"
+
+msgid "Reports Statistics"
+msgstr "گزارش آمار"
+
+msgid "System error has been deleted"
+msgstr "خطای سیستم حذف شده است"
+
+msgid "System error has not been deleted"
+msgstr "خطای سیستم حذف نشده است"
+
+msgid "Remove All"
+msgstr "همه را حذف کنید"
+
+msgid "Support for this Envato license has expired"
+msgstr "پشتیبانی از این مجوز Envato منقضی شده است"
+
+msgid "Record not found"
+msgstr "رکورد یافت نشد!"
+
+msgid "Banned email cannot create ticket"
+msgstr "ایمیل بلاک شده نمیتواند تیکت ایجاد کند."
+
+msgid "Incorrect Captcha code"
+msgstr "کد امنیتی اشتباه است."
+
+msgid "Please select paid support item"
+msgstr "لطفا مورد پشتیبانی پرداخت شده را انتخاب کنید"
+
+msgid "No purchase found with that code"
+msgstr "خریدی با آن کد یافت نشد"
+
+msgid "Provide a valid license key to create a ticket."
+msgstr "یک کلید مجوز معتبر برای ایجاد بلیط تهیه کنید."
+
+msgid "Your license has expired."
+msgstr "مجوز شما منقضی شده است"
+
+msgid "Your license is not active, activate your license."
+msgstr "مجوز شما فعال نیست ، مجوز خود را فعال کنید."
+
+msgid "Due date error is not valid"
+msgstr "خطای موعد مقرر معتبر نیست."
+
+msgid "Ticket has not been created"
+msgstr "بلیط ایجاد نشده است"
+
+msgid "Ticket created"
+msgstr "بلیط ایجاد شد"
+
+msgid "created"
+msgstr "ایجاد شده"
+
+msgid "Guest"
+msgstr "مهمان"
+
+msgid "Ticket is updated by"
+msgstr "تیکت بروزرسانی شده توسط"
+
+msgid "Ticket is created by"
+msgstr "تیکت ایجاد شده توسط"
+
+msgid "Ticket has been deleted"
+msgstr "تیکت حذف شده است."
+
+msgid "Ticket has not been deleted"
+msgstr "تیکت حذف نشده است."
+
+msgid "in use cannot be deleted"
+msgstr "در حال استفاده را نمی توان حذف کرد."
+
+msgid "Ticket already closed"
+msgstr "تیکت درحال حاضر بسته است."
+
+msgid "Ticket has been closed"
+msgstr "تیکت بسته شده است."
+
+msgid "Ticket has not been closed"
+msgstr "تیکت بسته نشده است."
+
+msgid "Ticket is closed by"
+msgstr "تیکت بسته شده توسط"
+
+msgid "Your are not allowed"
+msgstr "شما مجاز نیستید."
+
+msgid "The department has been transferred"
+msgstr "بخش منتقل شده است"
+
+msgid "The department has not been transferred"
+msgstr "بخش منتقل نشده است"
+
+msgid "The department is transferred by"
+msgstr "بخش منتقل می شود"
+
+msgid "Assigned to agent"
+msgstr "اختصاص به نماینده"
+
+msgid "Not assigned to agent"
+msgstr "به نماینده اختصاص نیافته است"
+
+msgid "Assign ticket to agent"
+msgstr "بلیط را به نماینده اختصاص دهید"
+
+msgid "Ticket is assigned to agent by"
+msgstr "بلیت توسط نماینده اختصاص داده می شود"
+
+msgid "Ticket already have same priority"
+msgstr "تیکت در حال حاضر اولویت یکسانی دارد."
+
+msgid "Priority has been changed"
+msgstr "اولویت تغییر کرده است."
+
+msgid "Priority has not been changed"
+msgstr "اولویت تغییر نکرده است."
+
+msgid "Change Priority"
+msgstr "تغییر اولویت"
+
+msgid "Email already banned"
+msgstr "ایمیل درحال حاضر بلاک شده است."
+
+msgid "The email has been banned"
+msgstr "ایمیل ممنوع شده است"
+
+msgid "The email has not been banned"
+msgstr "ایمیل ممنوع نیست"
+
+msgid "Email is banned by"
+msgstr "ایمیل بلاک شده توسط"
+
+msgid "The ticket has been reopened"
+msgstr "بلیط دوباره بازگشایی شده است"
+
+msgid "The ticket has not been reopened"
+msgstr "بلیط دوباره بازگشایی نشده است"
+
+msgid "Reopen Ticket"
+msgstr "باز کردن مجدد تیکت"
+
+msgid "The ticket is reopened by"
+msgstr "بلیط دوباره باز شده است"
+
+msgid "The ticket reopens time limit end"
+msgstr "بلیط پایان مهلت باز می شود"
+
+msgid "Email has been unbanned"
+msgstr "ایمیل از بلاک خارج شد."
+
+msgid "Email has not been unbanned"
+msgstr "ایمیل بلاک نشده است."
+
+msgid "Unbanned Email"
+msgstr "ایمیل از بلاک خارج شد."
+
+msgid "Email is unbanned by"
+msgstr "ایمیل از بلاک خارج شده توسط"
+
+msgid "Email cannot be unbanned"
+msgstr "ایمیل نمیتواند از بلاک خارج شود."
+
+msgid "Ticket already marked in progress"
+msgstr "تیکت درحال حاضر در دست بررسی علامت گذاری شده است."
+
+msgid "The ticket has been marked as in progress"
+msgstr "بلیط در حال پیشرفت است"
+
+msgid "The ticket has not been marked as in progress"
+msgstr "بلیط همانطور که در حال انجام است مشخص نشده است"
+
+msgid "In progress ticket"
+msgstr "تیکت در حال بررسی است."
+
+msgid "The ticket is marked as in progress by"
+msgstr "بلیط همانطور که در حال پیشرفت است مشخص شده است"
+
+msgid "File upload limit exceeds"
+msgstr "از حداکثر بارگذاری پرونده فراتر رفته است"
+
+msgid "The uploaded file extension not valid"
+msgstr "پسوند پرونده بارگذاری شده معتبر نیست"
+
+msgid "Paid support info"
+msgstr "اطلاعات پشتیبانی پرداخت شده"
+
+msgid "Order ID"
+msgstr "شماره سفارش"
+
+msgid "Product Name"
+msgstr "نام محصول"
+
+msgid "Total Tickets"
+msgstr "بلیط های کل"
+
+msgid "Remaining Tickets"
+msgstr "بلیط های باقیمانده"
+
+msgid "Unlimited"
+msgstr "نامحدود"
+
+msgid "You have not purchased any supported item"
+msgstr "شما هیچ مورد پشتیبانی را خریداری نکرده اید"
+
+msgid "Go to shop"
+msgstr "برو به فروشگاه"
+
+msgid "Select Order"
+msgstr "ترتیب را انتخاب کنید"
+
+msgid "No canned response found"
+msgstr "هیچ پاسخی کنسرو یافت نشد"
+
+msgid "Waiting agent reply"
+msgstr "پاسخ عامل منتظر"
+
+msgid "Waiting customer reply"
+msgstr "در انتظار پاسخ مشتری"
+
+msgid "Close ticket"
+msgstr "بستن تیکت"
+
+msgid "premade"
+msgstr "پیش فروش"
+
+msgid "Some values are not acceptable please retry"
+msgstr "برخی از اطلاعات قابل قبول نیست لطفا دوباره تلاش کنید."
+
+msgid "Are you sure to mark this ticket non-premium?"
+msgstr "مطمئن هستید که این بلیط را غیر از حق بیمه قرار داده اید؟"
+
+msgid "Edit Reply"
+msgstr "اصلاح پاسخ"
+
+msgid "Edit Time"
+msgstr "ویرایش زمان"
+
+msgid "Reason For Editing the timer"
+msgstr "دلیل ویرایش تایمر"
+
+msgid "Reason For Editing"
+msgstr "دلیل ویرایش"
+
+msgid "Resolve conflict"
+msgstr "حل اختلاف"
+
+msgid "Ticket Details"
+msgstr "جزئیات تیکت"
+
+msgid "Lock"
+msgstr "قفل کردن"
+
+msgid "Add New Credential"
+msgstr "اعتبار جدید را اضافه کنید"
+
+msgid "Post New Internal Note"
+msgstr "یادداشت جدید داخلی ارسال کنید"
+
+msgid "play"
+msgstr "بازی"
+
+msgid "pause"
+msgstr "مکث"
+
+msgid "stop"
+msgstr "متوقف کردن"
+
+msgid "Close on reply"
+msgstr "بستن تیکت هنگام پاسخ"
+
+msgid "Reason For Department Transfer"
+msgstr "دلیل ترنسفر دپارتمان"
+
+msgid "Transfer"
+msgstr "ترنسفر / انتقال"
+
+msgid "Assign To Agent"
+msgstr "اختصاص به نماینده"
+
+msgid "Assign"
+msgstr "اختصاص دادن"
+
+msgid "View all %d tickets by %s"
+msgstr "همه٪ d بلیط را با٪ s مشاهده کنید"
+
+msgid "Show History"
+msgstr "نمایش تاریخ"
+
+msgid "Print Ticket"
+msgstr "بلیط چاپ کنید"
+
+msgid "Unmark Overdue"
+msgstr "لغو علامت تأخیر"
+
+msgid "Mark in Progress"
+msgstr "علامت گذاری به عنوان درحال بررسی"
+
+msgid "agent image"
+msgstr "تصویر عامل"
+
+msgid "Ticket Thread"
+msgstr "موضوع تیکت"
+
+msgid "Post Reply"
+msgstr "ارسال پاسخ"
+
+msgid "Own Signature"
+msgstr "امضای شخصی"
+
+msgid "Department Signature"
+msgstr "امضای دپارتمان"
+
+msgid "Add Signature"
+msgstr "امضا را اضافه کنید"
+
+msgid "On Waiting"
+msgstr "در انتظار"
+
+msgid "Closed and merged"
+msgstr "بسته و ادغام شده است."
+
+msgid "ago"
+msgstr "پیش"
+
+msgid "No Last Reply"
+msgstr "بدون هیچ پاسخی"
+
+msgid "Not Given"
+msgstr "داده نشده"
+
+msgid "Copy"
+msgstr "کپی 🀄"
+
+msgid "Copied"
+msgstr "کپی شده"
+
+msgid "Change"
+msgstr "تغییر دادن"
+
+msgid "Ticket Assign and Transfer"
+msgstr "تیکت اختصاص داده شده و منتقل گردید."
+
+msgid "Ticket assigned to"
+msgstr "بلیط اختصاص داده شده به"
+
+msgid "staff photo"
+msgstr "عکس کارمندان"
+
+msgid "Total Time Taken"
+msgstr "زمان کل گرفته شده"
+
+msgid "view ticket"
+msgstr "مشاهده بلیط"
+
+msgid "Woocommerce Order"
+msgstr "سفارش ووکامرس"
+
+msgid "Envato License"
+msgstr "مجوز Envato"
+
+msgid "Item"
+msgstr "مورد"
+
+msgid "Buyer"
+msgstr "خریدار"
+
+msgid "License Type"
+msgstr "نوع مجوز"
+
+msgid "License"
+msgstr "مجوز"
+
+msgid "Purchase Date"
+msgstr "تاریخ خرید"
+
+msgid "Supported Until"
+msgstr "پشتیبانی تا"
+
+msgid "Paid Support Details"
+msgstr "جزئیات پشتیبانی پرداخت شده"
+
+msgid "Subscription"
+msgstr "اشتراک، ابونمان"
+
+msgid "Subscribed On"
+msgstr "اشتراک در"
+
+msgid "Support Expiry"
+msgstr "منقضی پشتیبانی"
+
+msgid "No expiration"
+msgstr "بدون انقضا"
+
+msgid "Non-premium support"
+msgstr "پشتیبانی غیر حق بیمه"
+
+msgid "Check this box if this ticket should NOT apply against the paid support"
+msgstr ""
+"اگر این بلیط نباید درمورد پشتیبانی پرداخت شده باشد ، این کادر را علامت بزنید"
+
+msgid "Remaining"
+msgstr "باقی مانده است"
+
+msgid "Link ticket to paid support"
+msgstr "بلیط پشتیبانی برای پشتیبانی پرداخت شده"
+
+msgid "Ticket Creator Name"
+msgstr "نام خالق بلیط"
+
+msgid "From Date"
+msgstr "از تاریخ"
+
+msgid "To Date"
+msgstr "به روز"
+
+msgid "Enforce delete"
+msgstr "حذف کردن"
+
+msgid "Are you sure to enforce delete"
+msgstr "آیا شما از پاک کردن و به اجرا درآوردن آن مطمئن هستید؟"
+
+msgid "Are you sure to mark this ticket non-preminum?"
+msgstr "مطمئن هستید که این بلیط را غیر از حق بیمه قرار داده اید؟"
+
+msgid "Message Logs"
+msgstr "گزارش های پیام"
+
+msgid "Edit Timer"
+msgstr "تایمر را ویرایش کنید"
+
+msgid "Type Note for Department"
+msgstr "نوع یادداشت برای بخش"
+
+msgid "Assigning Note"
+msgstr "اختصاص یادداشت"
+
+msgid "Time Track"
+msgstr "آهنگ زمان"
+
+msgid "Type Internal Note"
+msgstr "یادداشت داخلی را تایپ کنید"
+
+msgid "View all %d tickets"
+msgstr "همه٪ d بلیط را مشاهده کنید"
+
+msgid "Reopen"
+msgstr "باز کن"
+
+msgid "History"
+msgstr "تاریخ"
+
+msgid "Print"
+msgstr "پرینت"
+
+msgid "Are you sure you want to delete this ticket"
+msgstr "مطمئن هستید که می خواهید این بلیط را حذف کنید"
+
+msgid "Are you sure to close this ticket"
+msgstr "مطمئن هستید که این بلیط را ببندید"
+
+msgid "Unlock"
+msgstr "باز کردن"
+
+msgid "Reply a message"
+msgstr "به یک پیام پاسخ دهید"
+
+msgid "Select Premade"
+msgstr "انتخاب پیش ساخته"
+
+msgid "Assign Ticket"
+msgstr "اختصاص بلیط"
+
+msgid ","
+msgstr "،"
+
+msgid "Assigned To Agent"
+msgstr "اختصاص داده شده به نماینده"
+
+msgid "View all orders"
+msgstr "مشاهده همه سفارشات"
+
+msgid "Non-preminum support"
+msgstr "پشتیبانی غیر حق بیمه"
+
+msgid "Check Status"
+msgstr "بررسی وضعیت"
+
+msgid "Account status"
+msgstr "وضعیت اکانت"
+
+msgid "Add Premade Message"
+msgstr "اضافه کردن پیغام از پیش ساخته شده"
+
+msgid "Add Staff Member"
+msgstr "اضافه کردن عضو"
+
+msgid "Add System Email"
+msgstr "اضافه کردن سیستم ایمیل"
+
+msgid "Add User field"
+msgstr "اضافه کردن فیلد یوزر"
+
+msgid "Add new ticket form for both user and staff"
+msgstr "اضافه کردن فرم درخواست جدید برای کاربران و کارکنان"
+
+msgid "Ago"
+msgstr "قبل"
+
+msgid "Already exisits"
+msgstr "درحال حاضر وجود دارد."
+
+msgid "Announcement has been deleted"
+msgstr "اطلاعیه حذف شد."
+
+msgid "Announcement has been stored"
+msgstr "اطلاعیه ذخیره شد."
+
+msgid "Announcement has not been deleted"
+msgstr "اطلاعیه حذف نشده است."
+
+msgid "Announcement has not been stored"
+msgstr "اطلاعیه ذخیره نشده است."
+
+msgid "Append signature with reply"
+msgstr "افزودن امضا با پاسخ"
+
+msgid "Are you sure to close ticket"
+msgstr "آیا شما از بستن تیکت اطمینان دارید؟"
+
+msgid "Are you sure to delete"
+msgstr "آیا شما از پاک کردن تیکت اطمینان دارید؟"
+
+msgid "Article has been deleted"
+msgstr "مقاله حذف شد."
+
+msgid "Article has not been deleted"
+msgstr "مقاله پاک نشده است."
+
+msgid "Assign ticket to staff"
+msgstr "اختصاص دادن تیکت به کارکنان"
+
+msgid "Assign to Staff"
+msgstr "اختصاص دادن به کارکنان"
+
+msgid "Assign to Staff Member"
+msgstr "اختصاص دادن به کاربر"
+
+msgid "Assigned to staff"
+msgstr "اختصاص داده شده به کارکنان"
+
+msgid "Attachment has been removed"
+msgstr "ضمیمه پاک شد."
+
+msgid "Attachment has not been removed"
+msgstr "ضمیمه پاک نشده است."
+
+msgid "Auto response for this topic"
+msgstr "پاسخ خودکار برای این موضوع"
+
+msgid "Autoresponse"
+msgstr "پاسخ خودکار"
+
+msgid "Ban Email Log List"
+msgstr "بلاک ایمیل های فهرست ورود"
+
+msgid "Ban Email has been stored"
+msgstr "ایمیل بلاک شده ذخیره شد."
+
+msgid "Ban Email has not been deleted"
+msgstr "ایمیل بلاک شده پاک نشده است."
+
+msgid "Ban Email has not been stored"
+msgstr "ایمیل بلاک شده ذخیره نشده است."
+
+msgid "Ban email"
+msgstr "بلاک ایمیل"
+
+msgid "Ban email log list"
+msgstr "بلاک ایمیل های فهرست ورود"
+
+msgid "Ban email new ticket"
+msgstr "بلاک ایمیل تیکت جدید"
+
+msgid "Banlist log"
+msgstr "لیست لاگ های بلاک شده"
+
+msgid "CURL exist"
+msgstr "دستور CURL وجود دارد."
+
+msgid "CURL not exist"
+msgstr "دستور CURL وجود ندرد."
+
+msgid "Can Not mark as not required"
+msgstr "نمی توانید به عنوان فیلد غیراجباری علامت گذاری کنید."
+
+msgid "Cannot unpublish field"
+msgstr "نمی توانید این فیلد را منتشر نشده بگذارید."
+
+msgid "Category has been deleted"
+msgstr "دسته پاک شد."
+
+msgid "Category has been stored"
+msgstr "دسته ذخیره شد."
+
+msgid "Category has not been deleted"
+msgstr "دسته هنوز پاک نشده است"
+
+msgid "Category has not been stored"
+msgstr "دسته هنوز ذخیره نشده است."
+
+msgid "Category in use cannot deleted"
+msgstr "دسته در حال استفاده نمیتواند پاک شود."
+
+msgid "Component Detail"
+msgstr "جزئیات کامپوننت"
+
+msgid "Component for on-line ticket support system"
+msgstr "کامپوننت برای سیستم پشتیبانی تیکت"
+
+msgid "Configuration has been stored"
+msgstr "پیکربندی به درستی ذخیره شد."
+
+msgid "Configuration not has been stored"
+msgstr "پیکربندی هنوز ذخیره نشده است."
+
+msgid "Connection established but we cannot ready any email"
+msgstr "اتصال برقرار است اما ما نمیتوانیم هیچ ایمیلی را بخوانیم."
+
+msgid "Control panel links"
+msgstr "لینک های پنل کاربری"
+
+msgid "Current"
+msgstr "رایج"
+
+msgid "Data directory can not empty."
+msgstr "دایرکتوری داده نمی تواند خالی باشد."
+
+msgid "Data directory is not writeable."
+msgstr "دایرکتوری داده قابل نوشتن نیست."
+
+msgid "Database CRUD"
+msgstr "دیتابیس CRUD"
+
+msgid "Database create table not allowed"
+msgstr "امکان ایجاد جدول در دیتابیس وجود ندارد."
+
+msgid "Database delete record not allowed"
+msgstr "امکان پاک کردن اطلاعات از دیتابیس وجود ندارد."
+
+msgid "Database drop table not allowed"
+msgstr "امکان کشیدن و رها کردن جدول در دیتابیس وجود ندارد."
+
+msgid "Database insert record not allowed"
+msgstr "امکان وارد کردن داده در دیتابیس وجود ندارد."
+
+msgid "Database update record not allowed"
+msgstr "امکان اپدیت در دیتابیس وجود ندارد."
+
+msgid "Date end"
+msgstr "تاریخ پایان"
+
+msgid "Date start"
+msgstr "تاریخ شروع"
+
+msgid "Day"
+msgstr "روز"
+
+msgid "Default System Email"
+msgstr "ایمیل پیش فرض سیستم"
+
+msgid "Default system emails"
+msgstr "ایمیل های پیش فرض سیستم"
+
+msgid "Delete ticket"
+msgstr "حذف تیکت"
+
+msgid "Department Under Which The Answer Will Be Made Available"
+msgstr "دپارتمان مربوطه به محض آنلاین شدن پاسخ خواهد داد."
+
+msgid "Department has been deleted"
+msgstr "دپارتمان پاک شد."
+
+msgid "Department has been stored"
+msgstr "دپارتمان ذخیره شد."
+
+msgid "Department has been transfered"
+msgstr "دپارتمان ترنسفر شده است."
+
+msgid "Department has not been deleted"
+msgstr "دپارتمان پاک نشده است."
+
+msgid "Department has not been stored"
+msgstr "دپارتمان هنوز ذخیره نشده است."
+
+msgid "Department has not been transfered"
+msgstr "دپارتمان منتقل نشده است."
+
+msgid "Department in use cannot deleted"
+msgstr "دپارتمان درحال استفاده نمیتواند پاک شود."
+
+msgid "Department is transfered by"
+msgstr "دپارتمان در حال ترنسفرشدن است توسط"
+
+msgid "Dir is not writeable"
+msgstr "قابل نوشتن نیست."
+
+msgid "Directory"
+msgstr "دایرکتوری"
+
+msgid "Directory permissions error"
+msgstr "خطا مجوزهای دایرکتوری"
+
+msgid "Display name"
+msgstr "نمایش نام"
+
+msgid "Do you have enabled SSL on your domain"
+msgstr "آیا شما ssl را بر روی دامنه خود فعال کرده اید؟"
+
+msgid "Documentation"
+msgstr "مستندات"
+
+msgid "Download has been deleted"
+msgstr "دانلود حذف شد."
+
+msgid "Download has been stored"
+msgstr "دانلود ذخیره شد."
+
+msgid "Download has not been deleted"
+msgstr "دانلود حذف نشده است."
+
+msgid "Download has not been stored"
+msgstr "دانلود ذخیره نشده است."
+
+msgid "Email address"
+msgstr "آدرس ایمیل"
+
+msgid "Email has been banned"
+msgstr "ایمیل بلاک شد."
+
+msgid "Email has been deleted"
+msgstr "ایمیل پاک شد."
+
+msgid "Email has been stored"
+msgstr "ایمیل ذخیره شد."
+
+msgid "Email has not been banned"
+msgstr "ایمیل بلاک نشده است."
+
+msgid "Email has not been deleted"
+msgstr "ایمیل پاک نشده است."
+
+msgid "Email has not been stored"
+msgstr "ایمیل ذخیره نشده است."
+
+msgid "Email send to admin when banned email try to create ticket"
+msgstr ""
+"زمانی که ایمیل بلاک شده سعی در ساخت تیکت داشته باشد ایمیلی به ادمین ارسال میشود."
+
+msgid "Enable ticket via email"
+msgstr "فعال کردن تیکت توسط ایمیل"
+
+msgid "Error applying new theme"
+msgstr "خطا هنگام اجرای تم جدید"
+
+msgid "Error file ext mismatch"
+msgstr "خطای عدم تطابق فایل"
+
+msgid "Error file not downloaded"
+msgstr "خطای فایل دانلود نشده است."
+
+msgid "Error occured"
+msgstr "خطا رخ داده است."
+
+msgid "File Downloaded Successfully"
+msgstr "دانلود فایل با موفقیت انجام شد."
+
+msgid "File download"
+msgstr "دانلود فایل"
+
+msgid "File is not writeable"
+msgstr "فایل قابل نوشتن نیست."
+
+msgid "File read write issue files cannot upload"
+msgstr "مشکلی در خواندن فایل وجود دارد، فایل به درستی آپلود نشده است."
+
+msgid "File upload limit exceed"
+msgstr "محدودیت آپلود فایل بیشتر"
+
+msgid "Forum"
+msgstr "تالار گفتگو"
+
+msgid "GD library"
+msgstr "کتابخانه GD"
+
+msgid "GD library not exist"
+msgstr "کتابخانه GD وجود ندارد."
+
+msgid "General Setting"
+msgstr "تنظیمات عمومی"
+
+msgid "Get JS Support Ticket Translations"
+msgstr "ترجمه های درخواست شده برای سیستم تیکت"
+
+msgid "Goto Web"
+msgstr "رفتن به  وب"
+
+msgid "Help topics"
+msgstr "پست های راهنما"
+
+msgid "Host port number to read email from"
+msgstr "عدد پورت هاست برای خواندن ایمیل ها"
+
+msgid "IMAP is either not installed or not enable in your server"
+msgstr "IMAP نصب نشده است یا بر بروی سرور فعال نشده است."
+
+msgid "If system not respond in 30 seconds"
+msgstr "اگر سیستم پاسخ گو نبود در 30 ثانیه"
+
+msgid "Installation"
+msgstr "نصب و راه اندازی"
+
+msgid "Internal Note Has Been Posted"
+msgstr "یادداشت داخلی ارسال شد."
+
+msgid "Internal Note Has Not Been Posted"
+msgstr "یادداشت داخلی ارسال نشده است."
+
+msgid "Internal Notes"
+msgstr "یادداشت های داخلی"
+
+msgid "Internal note is posted by"
+msgstr "یادداشت داخلی ارسال شده توسط"
+
+msgid "It may take few minutes"
+msgstr "ممکن است چند دقیقه طول بکشد."
+
+msgid "JS Support Ticket Control Panel"
+msgstr "کنترل پنل سیستم تیکت"
+
+msgid "JS Support Ticket Pro Installer"
+msgstr "نصب و راه اندازی نسخه پولی سیستم تیکت"
+
+msgid "JS Support Ticket main control panel"
+msgstr "صفحه اصلی کنترل پنل سیستم تیکت"
+
+msgid "JS Ticket Pro Installed Successfully"
+msgstr "نسخه پولی سیستم تیکت به درستی نصب و راه اندازی گردید."
+
+msgid "Knowledge base article has been stored"
+msgstr "مقاله بخش آموزش ذخیره شد."
+
+msgid "Knowledge base article has not been stored"
+msgstr "مقاله بخش آموزش ذخیره نشده است."
+
+msgid "Language directory is not writeable"
+msgstr "دایرکتوری زبان قابل نوشتن نیست."
+
+msgid "Lastest Downlods"
+msgstr "آخرین دانلودها"
+
+msgid "Latest knowledge base"
+msgstr "آخرین آموزش ها"
+
+msgid "Limit exceeds maximum open tickets"
+msgstr "محدودیت حداکثری تیکت های باز"
+
+msgid "Login into your account"
+msgstr "ورود به حساب کاربری"
+
+msgid "Login/Logout button"
+msgstr "ورود / خروج سایت"
+
+msgid "Mail Setting"
+msgstr "تنظیمات ایمیل"
+
+msgid "Mail cannot mark as read"
+msgstr "ایمیل نمی تواند به عنوان خوانده شده علامت گذاری شود."
+
+msgid "Mail has been mark as read"
+msgstr "ایمیل به عنوان خوانده شده علامت گذاری شد."
+
+msgid "Mail has been send"
+msgstr "ایمیل به درستی ارسال شد."
+
+msgid "Mail has not been mark as read"
+msgstr "ایمیل به عنوان خوانده شده علامت گذاری نشده است."
+
+msgid "Mail has not been send"
+msgstr "ایمیل ارسال نشد."
+
+msgid "Mail mark as read"
+msgstr "علامت گذاری به عنوان خوانده شده"
+
+msgid "Mail mark as unread"
+msgstr "علامت گذاری به عنوان خوانده نشده"
+
+msgid "Mannual Download"
+msgstr "دانلود دستی"
+
+msgid "Max record"
+msgstr "حداکثر رکورد"
+
+msgid "More Detail"
+msgstr "جزئیات بیشتر"
+
+msgid "More Option"
+msgstr "تنظیمات بیشتر"
+
+msgid "My tickets for both user and staff"
+msgstr "تیکت برای کاربران و کارکنان"
+
+msgid "New Department"
+msgstr "دپارتمان جدید"
+
+msgid "New Help Topic"
+msgstr "پست آموزشی جدید"
+
+msgid "New Staff"
+msgstr "کارمند جدید"
+
+msgid "New Version Is Available"
+msgstr "ورژن جدید هم اکنون فعال است."
+
+msgid "New theme has been applied"
+msgstr "تم جدید استفاده شده است."
+
+msgid "Next step"
+msgstr "مرحله بعدی"
+
+msgid "No premade found"
+msgstr "پیغام پیش ساخته ای پیدا نشد!"
+
+msgid "Not assigned to staff"
+msgstr "اختصاص داده نشده به کارکنان"
+
+msgid "Oooops"
+msgstr "متاسفیم!"
+
+msgid "Opsss...."
+msgstr "Oooops"
+
+msgid "Our Products"
+msgstr "محصولات ما"
+
+msgid "PHP version smaller then recomended"
+msgstr "ورژن php پایین تر از ورژن پیشنهاد شده است."
+
+msgid "Password for given email address"
+msgstr "رمز عبور برای ایمیل شما ارسال شده است."
+
+msgid "Please enable ticket via email setting first"
+msgstr "لطفا اول تیکت را از طریق تنظیمات ایمیل فعال کنید."
+
+msgid "Please enter the google recaptcha private key from"
+msgstr "لطفا کلید خصوصی گوگل reCAPTCHA را از وارد کنید."
+
+msgid "Please enter the google recaptcha public key from"
+msgstr "لطفا کلید عمومی گوگل reCAPTCHA را از وارد کنید."
+
+msgid "Please insert activation key and press start"
+msgstr "لطفا کد فعال سازی را وارد کرده و سپس شروع کنید."
+
+msgid "Please select atleast one category for"
+msgstr "لطفا حداقل یک دسته را انتخاب کنید برای"
+
+msgid "Popular knoweldge base"
+msgstr "پست های آموزشی محبوب"
+
+msgid "Post internal note"
+msgstr "ارسال یادداشت داخلی"
+
+msgid "Posted by"
+msgstr "ارسال شده توسط"
+
+msgid "Premade Messages"
+msgstr "پیغام های پیش ساخته"
+
+msgid "Premade department message has been stored"
+msgstr "پیغام های از پیش ساخته دپارتمان ذخیره شد."
+
+msgid "Premade department message has not been stored"
+msgstr "پیغام های از پیش ساخته دپارتمان ذخیره نشده است."
+
+msgid "Premade message"
+msgstr "پیغام پیش ساخته"
+
+msgid "Publish"
+msgstr "انتشار"
+
+msgid "Quick Configuration"
+msgstr "پیکربندی سریع"
+
+msgid "Recomended"
+msgstr "توصیه شده"
+
+msgid "Redirect user to JS Support Ticket control panel after login"
+msgstr "ریدارکت شدن کاربر بعد از ورود به کنترل پنل سیستم تیکت"
+
+msgid "Reply has been posted"
+msgstr "پاسخ ارسال شده است."
+
+msgid "Reply has not been posted"
+msgstr "پاسخ ارسال نشده است."
+
+msgid "Report By User"
+msgstr "گزارش توسط کاربر"
+
+msgid "Report By Users"
+msgstr "گزارش توسط کاربران"
+
+msgid "Requester Info"
+msgstr "درخواست کننده اطلاعات"
+
+msgid "Role has been deleted"
+msgstr "نقش حدف شده است."
+
+msgid "Role has been stored"
+msgstr "نقش ذخیره شده است."
+
+msgid "Role has not been deleted"
+msgstr "نقش حذف نشده است."
+
+msgid "Role has not been stored"
+msgstr "نقش ذخیره نشده است."
+
+msgid "Save Staff Member"
+msgstr "ذخیره اعضا"
+
+msgid "Save User Field"
+msgstr "ذخیره فیلد کاربر"
+
+msgid "Save attachments if found in email"
+msgstr "ذخیره فایل پیوست اگر در ایمیل یافت شد."
+
+msgid "Save email template"
+msgstr "ذخیره تم ایمیل"
+
+msgid "Save premade message"
+msgstr "ذخیره پیغام های از پیش ساخته"
+
+msgid "Search Announcement"
+msgstr "جستجو اطلاعیه"
+
+msgid "Search Download"
+msgstr "جستجو دانلود"
+
+msgid "Search FAQ"
+msgstr "جستجو سوالات متداول"
+
+msgid "Search Knowledge Base"
+msgstr "جستجو آموزش"
+
+msgid "Select Staff"
+msgstr "انتخاب کارکنان"
+
+msgid "Select department"
+msgstr "انتخاب دپارتمان"
+
+msgid "Select priority"
+msgstr "انتخاب اولویت"
+
+msgid "Service is running please close the page"
+msgstr "خدمات در حال اجرا هستند لطفا این صفحه را ببندید."
+
+msgid "Set no. of days to mark ticket as overdue"
+msgstr "تنظیم تعداد روز برای علامت گذاری تیکت به صورت منقضی شده / سررسیده"
+
+msgid "Setting"
+msgstr "تنظیمات"
+
+msgid "Show Detail"
+msgstr "نمایش جزئیات"
+
+msgid "Show captcha on visitor form ticket"
+msgstr "نمایش کپچا در فرم ایجاد تیکت توسط ویزیتور"
+
+msgid "Show captcha when visitor want to create ticket"
+msgstr "نمایش کپچا زمانی که ویزیتور میخواهد تیکت ایجاد کند"
+
+msgid "Show latest FAQ's. Options:"
+msgstr "نمایش آخرین تنظیمات سوالات متداول"
+
+msgid "Show latest announcements. Options:"
+msgstr "نمایش آخرین تنظیمات اطلاعیه ها"
+
+msgid "Show latest downloads. Options:"
+msgstr "نمایش آخرین تنظیمات دانلودها"
+
+msgid "Show latest knowledge base. Options:"
+msgstr "نمایش آخرین تنظیمات بخش آموزش"
+
+msgid "Show new and reply mail notifications"
+msgstr "نمایش نوتیفیکیشن برای دریافت ایمیل پاسخ و جدید"
+
+msgid "Show number of open, closed, answered ticket in my ticket"
+msgstr "نمایش تعداد تیکت های باز / بسته شده / پاسخ داده شده در تیکت های من"
+
+msgid "Show popular FAQ's. Options:"
+msgstr "نمایش تنظیمات سوالات متداول محبوب"
+
+msgid "Show popular announcements. Options:"
+msgstr "نمایش تنظیمات اطلاعیه های محبوب"
+
+msgid "Show popular downloads. Options:"
+msgstr "نمایش تنظیمات دانلودهای محبوب"
+
+msgid "Show popular knowledge base. Options:"
+msgstr "نمایش تنظیمات آموزش های محبوب"
+
+msgid "Some thing wrong try again later"
+msgstr "بعضی چیزاها اشتباه هستند لطفا مجددا تلاش کنید."
+
+msgid "Staff Member"
+msgstr "کارکنان"
+
+msgid "Staff Members"
+msgstr "کارکنان"
+
+msgid "Staff Menu Setting"
+msgstr "تنظیمات منوی کارمند"
+
+msgid "Staff Section"
+msgstr "بخش کارمند"
+
+msgid "Staff Ticket"
+msgstr "تیکت کارمند"
+
+msgid "Staff member has been deleted"
+msgstr "کارکنان حذف شده اند."
+
+msgid "Staff member has been stored"
+msgstr "کارکنان ذخیره شده اند."
+
+msgid "Staff member has not been deleted"
+msgstr "کارکنان حذف نشده اندو"
+
+msgid "Staff member has not been stored"
+msgstr "کارکنان ذخیره نشده اند."
+
+msgid "Staff member in use cannot deleted"
+msgstr "کارکنان در حال استفاده نمی توانند حذف شوند."
+
+msgid "Staff member name"
+msgstr "نام کارکنان"
+
+msgid "Start"
+msgstr "شروع"
+
+msgid "Start using"
+msgstr "شروه با استفاده زا"
+
+msgid "Support Area"
+msgstr "منظقه پشتیبانی"
+
+msgid "System Slug"
+msgstr "پیوند یکتا سیستم"
+
+msgid "System slug is confilicted with post or page slug."
+msgstr "پیوند یکتای سیستم با پیوند یکتای پست یا پیج های شما تداخل دارد."
+
+msgid "Thanks For Installing JS Ticket Pro"
+msgstr "از نصب سیستم تیکت JS Ticket Pro متشکریم."
+
+msgid "This message will show on new ticket"
+msgstr "این پیام در یک تیکت جدید نشان داده خواهد شد."
+
+msgid "Ticket Department Transfer"
+msgstr "ترنسفر دپارتمان تیکت"
+
+msgid "Ticket Operations Mail Setting"
+msgstr "تنظیمات ایمیل تیکت"
+
+msgid "Ticket Response Staff"
+msgstr "تیکت پاسخ داده شده است."
+
+msgid "Ticket Via Email"
+msgstr "تیکت از طریق ایمیل"
+
+msgid "Ticket auto close if user not respond within given days"
+msgstr "تیکت به صورت خودکار بسته شود اگر کابر بعد از چند روز پاسخ ندهد."
+
+msgid "Ticket can be reopen within given number of days"
+msgstr "تیکت می تواند مجددا ظرف چند روز باز شود."
+
+msgid "Ticket has been locked"
+msgstr "تیکت قفل شده است."
+
+msgid "Ticket has been marked as in progress"
+msgstr "تیکت به عنوان در حال بررسی علامت گذاری شده است."
+
+msgid "Ticket has been marked as overdue"
+msgstr "تیکت به عنوان منقضی شده علامت گذاری شده است."
+
+msgid "Ticket has been reopend"
+msgstr "تیکت مجددا باز شد."
+
+msgid "Ticket has been stored"
+msgstr "تیکت به درستی ذخیره شد."
+
+msgid "Ticket has been unlocked"
+msgstr "قفل تیکت باز شد."
+
+msgid "Ticket has not been locked"
+msgstr "تیکت قفل نشده است."
+
+msgid "Ticket has not been marked as in progress"
+msgstr "تیکت به عنوان در حال بررسی علامت گذاری نشده است."
+
+msgid "Ticket has not been marked as overdue"
+msgstr "تیکت به عنوان منقضی شده علامت گذاری نشده است."
+
+msgid "Ticket has not been reopened"
+msgstr "تیکت نمی تواند مجددا باز شود."
+
+msgid "Ticket has not been stored"
+msgstr "تیکت ذخیره نشده است."
+
+msgid "Ticket has not been unlocked"
+msgstr "قفل تیکت باز نشده است."
+
+msgid "Ticket is assigned to staff by"
+msgstr "تیکت اختصاص داده شده به کارکنان توسط"
+
+msgid "Ticket is locked"
+msgstr "تیکت قفل شده است."
+
+msgid "Ticket is locked by"
+msgstr "تیکت قفل شده است توسط"
+
+msgid "Ticket is marked as in progress by"
+msgstr "تیکت به عنوان در حال بررسی علامت گذاری شده است توسط"
+
+msgid "Ticket is marked as overdue by"
+msgstr "تیکت به عنوان منقضی شده علامت گذاری شده است توسط"
+
+msgid "Ticket is reopened by"
+msgstr "تیکت مجددا باز شد توسط"
+
+msgid "Ticket is unlocked by"
+msgstr "قفل تیکت باز شده است توسط"
+
+msgid "Ticket mark overdue"
+msgstr "تیکت به عنوان منقضی شده علامت گذاری شده"
+
+msgid "Ticket reopen time limit end"
+msgstr "اجازه باز کردن مجدد تیکت در تایم محدود باطل شود."
+
+msgid "Tickets By Staff"
+msgstr "تیکت ها براساس کارکنان"
+
+msgid "Tickets by priorities"
+msgstr "تیکت ها براساس اولویت ها"
+
+msgid "To Use This Feature You Must Be Staff Memeber"
+msgstr "برای استفاده از این ویژگی باید کارمند باشید."
+
+msgid "To access this page please login"
+msgstr "برای دسترسی به این صفحه لطفا وارد حساب کاربری خود شوید."
+
+msgid "Today"
+msgstr "امروز"
+
+msgid "Top menu links"
+msgstr "لینک های منوی بالا"
+
+msgid "Type"
+msgstr "نوع"
+
+msgid "Unable Connect To Server"
+msgstr "فعال کردن اتصال به سرور"
+
+msgid "Unable to connect to server"
+msgstr "فعال کردن اتصال به سرور"
+
+msgid "Update"
+msgstr "بروزرسانی"
+
+msgid "Use Search Feature To Select The User"
+msgstr "استفاده از قابلیت جستجو برای انتخاب کاربر"
+
+msgid "User Menu Setting"
+msgstr "تنظیمات منوی کاربر"
+
+msgid "User already staff member"
+msgstr "کاربر عضو کارمندان است."
+
+msgid "User id"
+msgstr "شماره کاربر"
+
+msgid "View"
+msgstr "مشاهده"
+
+msgid "View Ticket"
+msgstr "مشاهده تیکت"
+
+msgid "Visitor published"
+msgstr "ویزیتور منتشر شده است."
+
+msgid "Waiting Customer Reply"
+msgstr "در انتظار پاسخ مشتری"
+
+msgid "Waiting Staff Reply"
+msgstr "در انتظار پاسخ کارمندان"
+
+msgid "Waiting reply"
+msgstr "در انتظار پاسخ"
+
+msgid "Waiting staff reply"
+msgstr "در انتظار پاسخ کارکنان"
+
+msgid "Would you like to add this type to parent"
+msgstr "آیا می خواهید این نوع را به والدین اضافه کنید"
+
+msgid "You are Already Logged in"
+msgstr "شما در حال حاضر وارد شده اید."
+
+msgid "You are not allowed to view this page"
+msgstr "شما اجازه دسترسی به این صفحه را ندارید."
+
+msgid "You are not logged in"
+msgstr "شما هنوز وارد نشده اید."
+
+msgid "You are not staff member"
+msgstr "شما کارمند نیستید"
+
+msgid "You cannot unmark it"
+msgstr "شما نمی توانید این را لغو علامت گذاری کنید."
+
+msgid "Your parent does not have this type"
+msgstr "والدین شما این نوع را ندارند"
+
+msgid "Your System Is Up To Date"
+msgstr "سیستم شما آپدیت است."
+
+msgid "Your account is disabled please contact to administrator"
+msgstr "اکانت شما غیرفعال شده است. لطفا با پشتیبانی تماس بگیرید."
+
+msgid "Your child have this type"
+msgstr "فرزند شما از این نوع برخوردار است"
+
+msgid "Your setting is working please save the setting"
+msgstr "لطفا تنظیمات را ذخیره کنید."
+
+msgid "Zip library"
+msgstr "کتابخانه فایل های فشرده"
+
+msgid "Zip library not exist"
+msgstr "کتابخانه فایل های فشرده در حال حاضر وجود ندارد."
+
+msgid "directory is not writeable"
+msgstr "دایرکتوری قابل نوشتن نیست."
+
+msgid "extension"
+msgstr "توسعه"
+
+msgid "override department setting"
+msgstr "تنظیمات دپارتمان لغو کردن / باطل کردن"
+
+msgid "Add Files"
+msgstr "اضافه کردن فایل"
+
+msgid "Add Userfield"
+msgstr "اضافه کردن فیلد کاربر"
+
+msgid "Are you sure delete"
+msgstr "آیا شما از حذف کردن اطمینان دارید."
+
+msgid "Assign User Permissions"
+msgstr "مجوزهای دسترسی کاربر"
+
+msgid "Assign to"
+msgstr "اختصاص داده شده به"
+
+msgid "Blocked"
+msgstr "بلاک شده"
+
+msgid "Change ticket priority"
+msgstr "تغییر اولویت تیکت"
+
+msgid "Check box"
+msgstr "چک باکس"
+
+msgid "Control Panel Coulmn"
+msgstr "ستون کنترل پنل"
+
+msgid "Data directory in not writable"
+msgstr "دیتا دایرکتوری قابل نوشتن نیست."
+
+msgid "Depandent field"
+msgstr "فیلد وابسته"
+
+msgid "Dir not exist"
+msgstr "Dir وجود ندارد."
+
+msgid "Display #"
+msgstr "نمایش #"
+
+msgid "Drop down"
+msgstr "دراپ دان"
+
+msgid "Due Date"
+msgstr "موعد مقرر"
+
+msgid "Email already exist"
+msgstr "درحال حاضر ایمیل وجود دارد."
+
+msgid "Email reads sucessfully"
+msgstr "ایمیل با موفقیت خوانده شد."
+
+msgid "Empty values are not allowed"
+msgstr "محتوای خالی امکان پذیر نیست."
+
+msgid "Enable print ticket"
+msgstr "فعال کردن پرینت تیکت"
+
+msgid "Field Name"
+msgstr "نام فیلد"
+
+msgid "Field mark ordering down"
+msgstr "ثبت سفارش علامت زمینه"
+
+msgid "Get JS Tickets Translations"
+msgstr "دریافت ترجمه های سیستم تیکت"
+
+msgid "Id"
+msgstr "شماره"
+
+msgid "Invalid data directory"
+msgstr "دایرکتوری داده معتبر نیست."
+
+msgid "Jerror Alertnoauthor"
+msgstr "هشدار نداشتن نویسنده"
+
+msgid "Jstickets Uninstall Text"
+msgstr "حذف متن Jstickets"
+
+msgid "Language Translations"
+msgstr "مترجم زبان"
+
+msgid "Loading"
+msgstr "در حال بارگذاری"
+
+msgid "Multi select"
+msgstr "چندین انتخاب"
+
+msgid "New Mail Message Recevied"
+msgstr "ایمیل جدیدی دریافت شده است."
+
+msgid "New Mail Receviced"
+msgstr "ایمیل جدیدی دریافت شده است."
+
+msgid "Not assigned"
+msgstr "اختصاص داده نشده"
+
+msgid "Not default"
+msgstr "نه به صورت پیش فرض"
+
+msgid "Num"
+msgstr "تعداد"
+
+msgid "Operation Cancel"
+msgstr "عملیات لغو شد."
+
+msgid "Page not found"
+msgstr "صفحه مورد نظر یافت نشد!"
+
+msgid "Permission"
+msgstr "مجوز دسترسی"
+
+msgid "Phone"
+msgstr "شماره تماس"
+
+msgid "Phone Ext"
+msgstr "شماره تماس ضروری"
+
+msgid "Premade"
+msgstr "از پیش ساخته"
+
+msgid "Print ticket"
+msgstr "پرینت تیکت"
+
+msgid "Radio button"
+msgstr "دکمه انتخاب"
+
+msgid "Read only"
+msgstr "تنها خواندنی"
+
+msgid "Reply has not been stored"
+msgstr "پاسخ ذخیره نشده است."
+
+msgid "Required language is not installed"
+msgstr "زبان مورد نیاز نصب نشده است."
+
+msgid "Save Role Permission"
+msgstr "ذخیره اجازه دسترسی نقش ها"
+
+msgid "Select parent field"
+msgstr "انتخاب فیلد مادر"
+
+msgid "Select','js-jobs"
+msgstr "انتخاب js-jobs"
+
+msgid "Staff Members Control Panel Links"
+msgstr "لینک های کنترل پنل کارکنان"
+
+msgid "Staff Members Top Menu Links"
+msgstr "لینک های منوی بالای کارکنان"
+
+msgid "Text"
+msgstr "نوشته"
+
+msgid "Text area"
+msgstr "فیلد متنی"
+
+msgid "Text field"
+msgstr "فیلد نوشته"
+
+msgid "Ticket in use cannot deleted"
+msgstr "تیکت درحال استفاده نمی تواند حذف شود."
+
+msgid "Ticket mark in progress"
+msgstr "تیکت به عنوان در حال بررسی علامت گذاری شده است."
+
+msgid "Unknown"
+msgstr "نامشخص"
+
+msgid "Upload file"
+msgstr "آپلود فایل"
+
+msgid "Use The Table Below To Add New Values"
+msgstr "از جدول زیر برای اضافه کردن مطلب جدید استفاده کنید."
+
+msgid "User Control Panel Links"
+msgstr "لینک های کنترل پنل کاربران"
+
+msgid "User Top Menu Links"
+msgstr "لینک های منوی بالا کاربران"
+
+msgid "User field has been deleted"
+msgstr "فیلدها حذف شده است."
+
+msgid "User field has been stored"
+msgstr "فیلدها ذخیره شده است."
+
+msgid "User field has not been deleted"
+msgstr "فیلدها حذف نشده است."
+
+msgid "User field has not been stored"
+msgstr "فیلدها ذخیره نشده است."
+
+msgid "Values Between 1 T0 12 Default Is 3"
+msgstr "مقدار وارد شده باید بین 0 تا 12 باشد مقدار پیش فرض  3 است"
+
+msgid "View all"
+msgstr "مشاهده همه"
+
+msgid "Visitor Menu Setting"
+msgstr "تنظیمات منوی ویزیتورها"
+
+msgid "Waiting admin/staff reply"
+msgstr "در انتظار پاسخ مدیر یا کارکنان"
+
+msgid "is not writeable"
+msgstr "قابل نوشتن نیست."
+
+msgid "show print ticket icon on ticketdetail page to user"
+msgstr "نمایش آیکون پرینت تیکت در صفحه جزئیات تیکت برای کاربران"
+
+msgid "Form Category"
+msgstr "دسته فرم"
+
+msgid "You are not allowed to view this ticket"
+msgstr "اجازه مشاهده این تیکت را ندارید"
+
+msgid "You have already provided feedback for this ticket"
+msgstr "شما قبلاً بازخوردی را برای این بلیط ارائه داده اید"
+
+msgid "Ticket not found"
+msgstr "تیکت یافت نشد"
+
+msgid "Thank you for your feedback"
+msgstr "با تشکر از  نظرشما"
+
+msgid "Feedback Setting"
+msgstr "تنظیمات اعلان نظر"
+
+msgid "Interval type to mark ticket as overdue"
+msgstr "نوع فاصله برای علامت گذاری بلیط به عنوان تأخیر"
+
+msgid "Set no. of days or hours to mark ticket as overdue"
+msgstr "نه روزها یا ساعتها برای علامت گذاری بلیط به عنوان تأخیر"
+
+msgid "Select whether you want to show captcha on registration form or not"
+msgstr "انتخاب کنید آیا می خواهید captcha را در فرم ثبت نام نشان دهید یا نه"
+
+msgid "Select role you want to assign to new users"
+msgstr "نقشی را که می خواهید برای کاربران جدید اختصاص دهید انتخاب کنید"
+
+msgid "Select whether users can reply to closed ticket via email or not"
+msgstr ""
+"انتخاب کنید که کاربران می توانند از طریق ایمیل به بلیط بسته پاسخ دهند یا خیر"
+
+msgid "This text will appear whenever visitor creates ticket"
+msgstr "این متن هر زمان که بازدید کننده بلیط ایجاد کند ظاهر می شود"
+
+msgid "Set no. of days or hours to send feedback email after ticket is closed"
+msgstr "نه روزها یا ساعتها برای ارسال ایمیل بازخورد پس از بسته شدن بلیط"
+
+msgid "Feedback Successful message to customer"
+msgstr "بازخورد پیام موفقیت آمیز به مشتری"
+
+msgid "You cannot use this email it is used in ticket via email"
+msgstr ""
+"شما نمی توانید از این ایمیل استفاده کنید که در بلیط از طریق ایمیل استفاده می شود"
+
+msgid "User of this department will receive email on new ticket"
+msgstr "کاربر این بخش ایمیل را با بلیط جدید دریافت می کند"
+
+msgid "Departent Report"
+msgstr "گزارش وزارت"
+
+msgid "Users tickets"
+msgstr "بلیط کاربران"
+
+msgid "Users Ticekts"
+msgstr "بلیط کاربران"
+
+msgid "Edit reason"
+msgstr "دلیل را ویرایش کنید"
+
+msgid "Answerd"
+msgstr "جواب داد"
+
+msgid "Select Staff Member"
+msgstr "عضو کارکنان را انتخاب کنید"
+
+msgid "Provide Feedback"
+msgstr "ارائه بازخورد"
+
+msgid "Field Parent has not been stored"
+msgstr "زمینه والدین ذخیره نشده است"
+
+msgid "Please Insert Atleat one value for every option"
+msgstr "لطفاً برای هر گزینه حداقل یک مقدار درج کنید"
+
+msgid "Add New"
+msgstr "جدید اضافه کن"
+
+msgid "User Field"
+msgstr "قسمت کاربر"
+
+msgid "Misc"
+msgstr "متفرقه"
+
+msgid "We'd love to hear from"
+msgstr "دوست داریم از آن بشنویم"
+
+msgid "You"
+msgstr "شما"
+
+msgid "Word Press Extension Directory"
+msgstr "دایرکتوری فرمت ورد پرس"
+
+msgid "Departments Reports"
+msgstr "گزارش های بخش ها"
+
+msgid "Staff Feedbacks"
+msgstr "بازخورد کارکنان"
+
+msgid "Password Again"
+msgstr "رمز عبور دوباره"
+
+msgid "Register New Account"
+msgstr "ثبت حساب جدید"
+
+msgid "Tickets Updater"
+msgstr "به روزرسانی بلیط"
+
+msgid "Report By Department"
+msgstr "گزارش توسط وزارت"
+
+msgid "out of"
+msgstr "بیرون از"
+
+msgid "Report By Deparments"
+msgstr "گزارش توسط بخش ها"
+
+msgid "Deparments"
+msgstr "واحدها"
+
+msgid "No Data"
+msgstr "اطلاعاتی وجود ندارد"
+
+msgid "Staff Report"
+msgstr "گزارش کارمندان"
+
+msgid "Date From"
+msgstr "تاریخ از"
+
+msgid "Date To"
+msgstr "تاریخ به"
+
+msgid "My Reports"
+msgstr "گزارش های من"
+
+msgid "Staff Members Reports"
+msgstr "گزارش کارمندان"
+
+msgid "Ticket has been created"
+msgstr "بلیط ایجاد شده است"
+
+msgid "Issue Summary"
+msgstr "خلاصه شماره"
+
+msgid "All Downloads"
+msgstr "همه بارگیری ها"
+
+msgid "Low"
+msgstr "پایین"
+
+msgid "Customer Feedbacks"
+msgstr "بازخورد مشتری"
+
+msgid "Upload"
+msgstr "بارگذاری فایل"
+
+msgid "Ticketid"
+msgstr "شماره تیکت"
+
+msgid "Duedate Ticket"
+msgstr "بلیط فروخته شده"
+
+msgid "New Ticket Notification"
+msgstr "اعلان بلیط جدید"
+
+msgid "Edit Own Time"
+msgstr "ویرایش زمان خود"
+
+msgid "View Feedback"
+msgstr "بازخورد را مشاهده کنید"
+
+msgid "Assign Role Permissions"
+msgstr "مجوزهای نقش را اختصاص دهید"
+
+msgid "Assign Role To User"
+msgstr "نقش را به کاربر اختصاص دهید"
+
+msgid "Add User"
+msgstr "کاربر را اضافه کنید"
+
+msgid "Edit User"
+msgstr "ویرایش کاربر"
+
+msgid "Delete Department"
+msgstr "بخش را حذف کنید"
+
+msgid "View Department"
+msgstr "بخش نمای"
+
+msgid "Delete Role"
+msgstr "نقش را حذف کنید"
+
+msgid "Delete User"
+msgstr "حذف کاربر"
+
+msgid "View Role"
+msgstr "نقش را مشاهده کنید"
+
+msgid "View User"
+msgstr "مشاهده کاربر"
+
+msgid "View Staff Reports"
+msgstr "گزارش کارمندان را مشاهده کنید"
+
+msgid "View Department Reports"
+msgstr "گزارش های بخش را مشاهده کنید"
+
+msgid "View Category"
+msgstr "مشاهده گروه"
+
+msgid "View Knowledge Base"
+msgstr "مشاهده پایگاه دانش"
+
+msgid "Delete Category"
+msgstr "حذف دسته"
+
+msgid "Delete Knowledge Base"
+msgstr "پایگاه دانش را حذف کنید"
+
+msgid "View FAQ"
+msgstr "مشاهده سؤالات متداول"
+
+msgid "Delete FAQ"
+msgstr "سؤالات متداول را حذف کنید"
+
+msgid "View Download"
+msgstr "نمایش دانلود"
+
+msgid "Delete Download"
+msgstr "بارگیری را حذف کنید"
+
+msgid "View Announcement"
+msgstr "مشاهده اطلاعیه"
+
+msgid "Delete Announcement"
+msgstr "حذف اطلاعیه"
+
+msgid "Allow Mail System"
+msgstr "مجاز به سیستم نامه"
+
+msgid "Internal Note Title"
+msgstr "عنوان یادداشت داخلی"
+
+msgid "Satisfaction Reports"
+msgstr "گزارش رضایت"
+
+msgid "Exports"
+msgstr "صادرات"
+
+msgid "Customer Satisfaction Report"
+msgstr "گزارش رضایت مشتری"
+
+msgid "Please wait installation in progress"
+msgstr "لطفاً منتظر نصب باشید"
+
+msgid "Show Captcha To Visitor On Form Ticket"
+msgstr "نمایش Captcha به بازدید کنندگان بلیط فرم"
+
+msgid "Feedback Email Settings"
+msgstr "بازخورد تنظیمات ایمیل"
+
+msgid "Feedback successfully stored message"
+msgstr "بازخورد با موفقیت ذخیره شده است"
+
+msgid "Ticket Fields"
+msgstr "زمینه های بلیط"
+
+msgid "Export Tickets"
+msgstr "بلیط های صادراتی"
+
+msgid "High"
+msgstr "بالا"
+
+msgid "Ticket has been unmarked as overdue"
+msgstr "بلیط به عنوان تأخیر علامت گذاری نشده است"
+
+msgid "Ticket has not been unmarked as overdue"
+msgstr "بلیط به عنوان تأخیر علامت گذاری نشده است"
+
+msgid "Ticket is unmarked as overdue by"
+msgstr "بلیط با توجه به تأخیر در علامت گذاری نشده است"
+
+msgid "Assigned To Me"
+msgstr "اختصاص به من"
+
+msgid "OK"
+msgstr "باشه"
+
+msgid "JS Support Ticket System"
+msgstr "سیستم بلیط پشتیبانی JS"
+
+msgid "Management"
+msgstr "مدیریت"
+
+msgid "Ticket Id"
+msgstr "شماره تیکت"
+
+msgid "Assign To"
+msgstr "اختصاص به"
+
+msgid "Show on listing"
+msgstr "نمایش در لیست"
+
+msgid "Remarks"
+msgstr "ملاحظات"
+
+msgid "You are not login"
+msgstr "شما وارد سیستم نیستید"
+
+msgid "Pro Features"
+msgstr "ویژگی های نرم افزار"
+
+msgid "Upgrade"
+msgstr "ارتقا"
+
+msgid "JS Support Ticket Pro"
+msgstr "JS پشتیبانی بلیط نرم افزار"
+
+msgid "Feature available in pro version only"
+msgstr "ویژگی های موجود فقط در نسخه حرفه ای"
+
+msgid "JS Support Ticket Pro Feature"
+msgstr "ویژگی پشتیبانی بلیط JS Pro"
+
+msgid "Unlimited color tools to desire result"
+msgstr "ابزارهای رنگی نامحدود برای رسیدن به نتیجه"
+
+msgid "Access Control Level"
+msgstr "سطح کنترل دسترسی"
+
+msgid "Access control limit you can limit your staff to do specific task"
+msgstr ""
+"محدودیت کنترل دسترسی شما می توانید کارمندان خود را برای انجام کارهای خاص محدود "
+"کنید"
+
+msgid "Staff member create premade message premade available in ticket reply"
+msgstr "کارکنان ایجاد پیام premade premade موجود در پاسخ بلیط"
+
+msgid "Staff member can be created and reply your customer tickets"
+msgstr "می توان عضو کارمندان ایجاد کرد و بلیط های مشتری خود را پاسخ داد"
+
+msgid "Help topic can be add with respect to departments"
+msgstr "موضوع راهنما را می توان با توجه به بخش ها اضافه کرد"
+
+msgid "You can create and maintain knowledge Base for your ticket system"
+msgstr "شما می توانید پایه و اساس دانش سیستم سیستم بلیط خود را ایجاد و حفظ کنید"
+
+msgid "You can add downloads for your customers"
+msgstr "می توانید بارگیری را برای مشتریان خود اضافه کنید"
+
+msgid "Add announcements for your support system"
+msgstr "اطلاعیه هایی را برای سیستم پشتیبانی خود اضافه کنید"
+
+msgid "You can Manager FAQs"
+msgstr "می توانید سؤالات متداول را مدیریت کنید"
+
+msgid "You can ban and unabn any spam email address"
+msgstr "می توانید هر آدرس ایمیل اسپم را ممنوع کرده و از آن استفاده نکنید"
+
+msgid "If and only if customer not reply certain days ticket marked overdue"
+msgstr ""
+"اگر و فقط در صورتی که مشتری در روزهای مشخص پاسخ نداده باشد ، بلیط مشخص شده به "
+"تأخیر افتاده است"
+
+msgid "System will read your email and create tickets"
+msgstr "سیستم ایمیل شما را خوانده و بلیط ایجاد می کند"
+
+msgid "Internal notes for staff members and administrator ticket based"
+msgstr "یادداشت های داخلی برای کارمندان و مدیر بلیط های مبتنی بر"
+
+msgid "Assign To Staff"
+msgstr "اختصاص به کارمندان"
+
+msgid "Ticket can be transferred to any other staff member"
+msgstr "بلیط را می توان به هر کارمند دیگری منتقل کرد"
+
+msgid "Ticket can also be transferred to any other department"
+msgstr "بلیط را می توان به هر بخش دیگری نیز منتقل کرد"
+
+msgid "Activity Log"
+msgstr "گزارش فعالیت"
+
+msgid "Ticket action history with time and user name"
+msgstr "تاریخچه عملکرد بلیط با زمان و نام کاربر"
+
+msgid "Admin can export tickets in csv format to keep record"
+msgstr "مدیر می تواند برای حفظ سابقه ، بلیط را با فرمت csv صادر کند"
+
+msgid "Customer Feedback"
+msgstr "بازخورد مشتری"
+
+msgid "Customer can provide feedback that can be used to improve services"
+msgstr ""
+"مشتری می‌تواند بازخورد خود را ارسال نماید تا جهت بهبود سرویس‌ها از آن استفاده شود"
+
+msgid "RTL Supported"
+msgstr "پشتیبانی از راست به چپ"
+
+msgid "JS Support Ticket auto adjusts to RTL or LTR without any problem."
+msgstr ""
+"سیستم پشتیبانی تیکت جی اس بصورت خودکار به حالت راست به چپ یا چپ به راست بدون هیچ "
+"مشکلی تغییر وضعیت دهد"
+
+msgid "Staff Time Tracking"
+msgstr "پیگیری زمان کارمندان"
+
+msgid "Visitor Ticket Open"
+msgstr "ایجاد تیکت توسط مهمان"
+
+msgid "Visitor can also open ticket in you support system"
+msgstr "کاربران مهمان می توانند در سیستم پشتیبانی تیکت ایجاد کنند"
+
+msgid "You can now lock or unlock any ticket for certain time"
+msgstr "شما می‌تواند هر تیکیتی را در زمان مشخص قفل یا باز کنید"
+
+msgid "Pro version only"
+msgstr "تنها در ورژن حرفه‌ای"
+
+msgid "This ticket is marked as overdue"
+msgstr "این بلیط به عنوان سررسید مشخص شده است"
+
+msgid "Ticket marked as overdue"
+msgstr "بلیت به عنوان سررسید مشخص شده است"
+
+msgid "Logger"
+msgstr "متمرکز ساز"
+
+msgid "Plus"
+msgstr "به علاوه"
+
+msgid "GDPR"
+msgstr "GDPR"
+
+msgid "MailChimp"
+msgstr "MailChimp"
+
+msgid "MM-DD-YYYY"
+msgstr "MM-DD-YYYY"
+
+msgid "YYYY-MM-DD"
+msgstr "YYYY-MM-DD"
+
+msgid "Firebase Auth Domain"
+msgstr "دامنه تأیید Firebase"
+
+msgid ""
+"Private Credentials Encryption Key changing this value will discard all existing "
+"credentials "
+msgstr ""
+"کلید رمزگذاری اعتبار خصوصی با تغییر این مقدار تمام اعتبارنامه های موجود حذف می شود"
+
+msgid "SMTP"
+msgstr "SMTP"
+
+msgid "TLS"
+msgstr "TLS"
+
+msgid "SSL"
+msgstr "SSL"
+
+msgid "SMTP Secure"
+msgstr "SMTP امن"
+
+msgid "Features"
+msgstr "امکانات"
+
+msgid "WooCommerce"
+msgstr "ووکامرس"
+
+msgid "Mailchimp"
+msgstr "Mailchimp"
+
+msgid "fb"
+msgstr "fb"
+
+msgid ":"
+msgstr ":"
+
+msgid "2"
+msgstr "2"
+
+msgid "3"
+msgstr "3"
+
+msgid "JS Help Desk Addon Installer"
+msgstr "JS Help Desk Addon Installer"
+
+msgid "Add ons for JS Help Desk have been installed and activated successfully. "
+msgstr "افزونه‌های JS Help Desk با موفقیت نصب و فعال شدند."
+
+msgid "NA"
+msgstr "NA"
+
+msgid "JNone"
+msgstr "J هیچ"
+
+msgid "5.0"
+msgstr "5.0"
+
+msgid "PHP"
+msgstr "PHP"
+
+msgid "1"
+msgstr "1"
+
+msgid "User has been successfully registered"
+msgstr "کاربر با موفقیت ثبت شد"
+
+msgid "Select Form"
+msgstr "فرم را انتخاب کنید"
+
+msgid "Envato Purchase Code"
+msgstr "کد خرید Envato"
+
+msgid "Urgent"
+msgstr "فوری"
+
+msgid "EDD Order ID"
+msgstr "شناسه سفارش EDD"
+
+msgid "Search keywords"
+msgstr "جستجوی کلمات کلیدی"
+
+msgid "Search title"
+msgstr "عنوان جستجو"
+
+msgid "Manager"
+msgstr "مدیر"
+
+msgid "Assign Ticket To Agent"
+msgstr "تخصیص بلیط به نماینده"
+
+msgid "Mark In Progress"
+msgstr "علامت گذاری در حال انجام"
+
+msgid "Change Ticket Priority"
+msgstr "تغییر اولویت بلیط"
+
+msgid "Ban Email And Close Ticket"
+msgstr "ممنوع کردن ایمیل و بستن بلیط"
+
+msgid "Release Ticket"
+msgstr "بلیط انتشار"
+
+msgid "View Credentials"
+msgstr "مشاهده اعتبار"
+
+msgid "Edit Credentials"
+msgstr "اعتبارنامه را ویرایش کنید"
+
+msgid "Mark Non Premium"
+msgstr "غیر حق بیمه را علامت گذاری کنید"
+
+msgid "Link To Paid Support"
+msgstr "پیوند به پشتیبانی پولی"
+
+msgid "Export Ticket not translate"
+msgstr "بلیط صادرات ترجمه نمی شود"
+
+msgid "Edit Help Topic not translate"
+msgstr "ویرایش موضوع راهنما ترجمه نمی شود"
+
+msgid "View Help Topic"
+msgstr "مشاهده مبحث راهنما"
+
+msgid "Delete Help Topic"
+msgstr "موضوع راهنما را حذف کنید"
+
+msgid "Edit Canned Response"
+msgstr "ویرایش کنسرت پاسخ"
+
+msgid "View Canned Response"
+msgstr "مشاهده پاسخ آماده"
+
+msgid "Delete Canned Response"
+msgstr "حذف پاسخ کن"
+
+msgid "Standard"
+msgstr "استاندارد"
+
+msgid "Default with auto assign"
+msgstr "پیش‌فرض با اختصاص خودکار"
+
+msgid "Visible"
+msgstr "قابل رویت"
+
+msgid "Select Visible"
+msgstr "Visible را انتخاب کنید"
+
+msgid "Logedin user"
+msgstr "کاربر وارد شده"
+
+msgid "Logedin user only"
+msgstr "فقط کاربر وارد شده"
+
+msgid "visitor"
+msgstr "بازدید کننده"
+
+msgid "Single Header"
+msgstr "تک سربرگ"
+
+msgid "Multiple Header"
+msgstr "هدر چندگانه"
+
+msgid "Quick installation Guide"
+msgstr "راهنمای نصب سریع"
+
+msgid "How to setup"
+msgstr "نحوه راه اندازی"
+
+msgid "Ticket Creation"
+msgstr "ایجاد بلیط"
+
+msgid "Custom Fields"
+msgstr "فیلدهای سفارشی"
+
+msgid "Email Notification Problems"
+msgstr "مشکلات اعلان ایمیل"
+
+msgid "arrow"
+msgstr "فلش"
+
+msgid "close"
+msgstr "بستن"
+
+msgid "Multiform"
+msgstr "چند شکلی"
+
+msgid "Add WP Users"
+msgstr "کاربران WP را اضافه کنید"
+
+msgid "Other Products"
+msgstr "سایر محصولات"
+
+msgid "watch video"
+msgstr "تماشای ویدیو"
+
+msgid "Get"
+msgstr "گرفتن"
+
+msgid "This prefix will be added to slug incase of homepage links"
+msgstr "این پیشوند به اسلاگ پیوندهای صفحه اصلی اضافه می شود"
+
+msgid " This prefix will be added to slug incase of conflict"
+msgstr "این پیشوند در صورت درگیری به Slug اضافه خواهد شد"
+
+msgid "Reset All"
+msgstr "همه رو دوباره تنظیم کن"
+
+msgid "Search By Slug"
+msgstr "جستجو بر اساس Slug"
+
+msgid "Slug List"
+msgstr "لیست اسلگ"
+
+msgid "This button will only save slugs on current page"
+msgstr "این دکمه فقط اسلاگ ها را در صفحه فعلی ذخیره می کند"
+
+msgid "Slug"
+msgstr "حلزون حرکت کردن"
+
+msgid "Export Style"
+msgstr "سبک صادراتی"
+
+msgid "Add Multiform"
+msgstr "Multiform را اضافه کنید"
+
+msgid "Edit Fields"
+msgstr "ویرایش فیلدها"
+
+msgid "Save Multiform"
+msgstr "Multiform را ذخیره کنید"
+
+msgid "Conditions"
+msgstr "شرایط"
+
+msgid "Add Conditions"
+msgstr "اضافه کردن شرایط"
+
+msgid "Rule Title"
+msgstr "عنوان قانون"
+
+msgid "Agent Auto Assign"
+msgstr "تخصیص خودکار عامل"
+
+msgid "Add Rule"
+msgstr "قانون اضافه کنید"
+
+msgid "Condition Title"
+msgstr "عنوان شرط"
+
+msgid "Condition Operator"
+msgstr "اپراتور وضعیت"
+
+msgid "Condition value"
+msgstr "ارزش شرط"
+
+msgid "Select Condition Title"
+msgstr "عنوان شرط را انتخاب کنید"
+
+msgid "Submit Type"
+msgstr "نوع ارسال"
+
+msgid "Select Condition Operator"
+msgstr "Condition Operator را انتخاب کنید"
+
+msgid "Contain"
+msgstr "حاوی"
+
+msgid "Matched"
+msgstr "تطبیق"
+
+msgid "Equal"
+msgstr "برابر"
+
+msgid "No Value found"
+msgstr "هیچ مقداری یافت نشد"
+
+msgid "No Operator found"
+msgstr "اپراتور پیدا نشد"
+
+msgid "Add more Condition"
+msgstr "اضافه کردن شرایط بیشتر"
+
+msgid "Save Rule"
+msgstr "قانون ذخیره"
+
+msgid "Delete Condition"
+msgstr "شرط حذف"
+
+msgid "Add Ticket Using Multiform"
+msgstr "با استفاده از Multiform بلیط را اضافه کنید"
+
+msgid "Addons Status"
+msgstr "وضعیت افزونه ها"
+
+msgid "Activated"
+msgstr "فعال شد"
+
+msgid "Deactivate"
+msgstr "از کار انداختن"
+
+msgid "Updated"
+msgstr "به روز شد"
+
+msgid "Deactivated"
+msgstr "غیرفعال شد"
+
+msgid "Activate"
+msgstr "فعال کنید"
+
+msgid "New Update Version"
+msgstr "نسخه به روز رسانی جدید"
+
+msgid "is Available"
+msgstr "موجود است"
+
+msgid "Expired"
+msgstr "منقضی شده"
+
+msgid "Buy Now"
+msgstr "هم اکنون خریداری کنید"
+
+msgid "Help"
+msgstr "کمک"
+
+msgid "Update Now"
+msgstr "اکنون به روز رسانی کنید"
+
+msgid "Add-On’s For Help Desk"
+msgstr "افزونه ها برای میز راهنمایی"
+
+msgid ""
+"Get trusted WordPress add on’s. Guaranteed to work fast, safe to use, beautifully "
+"coded, packed with features and easy to use."
+msgstr ""
+"افزودنی های قابل اعتماد وردپرس را دریافت کنید. تضمین شده برای کار سریع، ایمن برای "
+"استفاده، کدگذاری زیبا، بسته بندی شده با ویژگی ها و استفاده آسان."
+
+msgid "Save big with an exclusive membership plan today!"
+msgstr "امروز با یک طرح عضویت انحصاری صرفه جویی زیادی کنید!"
+
+msgid "show bundle pack"
+msgstr "نمایش بسته بسته نرم افزاری"
+
+msgid ""
+"Add agents and assign roles and permissions to provide assistance and support to "
+"customer support tickets."
+msgstr ""
+"نمایندگان را اضافه کنید و نقش ها و مجوزهایی را برای ارائه کمک و پشتیبانی به بلیط "
+"های پشتیبانی مشتری اختصاص دهید."
+
+msgid ""
+"Define rules for ticket to auto close. Ticket will be auto close after specific "
+"interval of time which can be set by admin."
+msgstr ""
+"قوانینی را برای بسته شدن خودکار بلیط تعریف کنید. بلیط پس از یک بازه زمانی خاص "
+"بسته می شود که می تواند توسط مدیر تنظیم شود."
+
+msgid ""
+"Get the survey from your customers on ticket closing to improve your quality of "
+"services and assistance."
+msgstr ""
+"برای بهبود کیفیت خدمات و کمک، نظرسنجی را از مشتریان خود در مورد بسته شدن بلیط "
+"دریافت کنید."
+
+msgid "Helptopic"
+msgstr "موضوع راهنما"
+
+msgid ""
+"Help topics help users to find and select the area with which they need "
+"assistance."
+msgstr ""
+"موضوعات راهنما به کاربران کمک می کند تا منطقه ای را که نیاز به کمک دارند پیدا "
+"کرده و انتخاب کنند."
+
+msgid ""
+"The private note is used as reminders or to give other agents insights into the "
+"ticket issue. User Won't see the private notes."
+msgstr ""
+"یادداشت خصوصی به عنوان یادآوری یا برای دادن اطلاعات بینش به سایر نمایندگان در "
+"مورد مسئله بلیط استفاده می شود. کاربر یادداشت های خصوصی را نمی بیند."
+
+msgid ""
+"Stop losing productivity on repetitive queries,Build your knowledge base, group "
+"solutions by topics to facilitate users."
+msgstr ""
+"از دست دادن بهره وری در پرس و جوهای تکراری خودداری کنید، پایگاه دانش خود را "
+"بسازید، راه حل ها را بر اساس موضوعات برای تسهیل کاربران گروه بندی کنید."
+
+msgid ""
+"Enables admin to set N numbers of tickets for users to create and set N numbers "
+"of Ticket to open for agents separately."
+msgstr ""
+"مدیر را قادر می‌سازد تا N شماره بلیط را برای کاربران ایجاد کند و N شماره بلیط را "
+"برای باز کردن جداگانه برای نمایندگان تنظیم کند."
+
+msgid "Multi Language Email Templates"
+msgstr "قالب های ایمیل چند زبانه"
+
+msgid ""
+"It allows to create language-based email templates for all JS Help Desk email "
+"templates."
+msgstr ""
+"این اجازه می دهد تا قالب های ایمیل مبتنی بر زبان را برای همه قالب های ایمیل JS "
+"Help Desk ایجاد کنید."
+
+msgid ""
+"Canned Responses are pre-populated messages that allows support agents to respond "
+"quickly to customer issues."
+msgstr ""
+"Canned Responses پیام‌هایی هستند که از قبل جمع‌بندی شده‌اند و به عوامل پشتیبانی "
+"اجازه می‌دهند تا به سرعت به مسائل مشتری پاسخ دهند."
+
+msgid ""
+"Enables users to reply to the tickets via email without the need to login to the "
+"support system first."
+msgstr ""
+"کاربران را قادر می سازد بدون نیاز به ورود به سیستم پشتیبانی ابتدا از طریق ایمیل "
+"به بلیط ها پاسخ دهند."
+
+msgid ""
+"Make unlimited announcements associated with support system to get customer "
+"interaction."
+msgstr "اعلامیه های نامحدود مرتبط با سیستم پشتیبانی برای دریافت تعامل با مشتری."
+
+msgid ""
+"Ban Email allows you to block email of any user to restrict him to create new "
+"tickets."
+msgstr ""
+"Ban Email به شما این امکان را می دهد که ایمیل هر کاربر را مسدود کنید تا او را "
+"برای ایجاد بلیط جدید محدود کنید."
+
+msgid "Descktop Notifications"
+msgstr "اطلاعیه های دسکتاپ"
+
+msgid ""
+"Save the ticket as a PDF in your system or the admin will also be able to export "
+"all the data inside of Ticket."
+msgstr ""
+"بلیط را به عنوان PDF در سیستم خود ذخیره کنید یا مدیر همچنین می تواند تمام داده "
+"های داخل Ticket را صادر کند."
+
+msgid ""
+"Tired of getting tickets about the same problems? Add FAQs to drastically reduce "
+"the number of common questions from users."
+msgstr ""
+"از گرفتن بلیط در مورد مشکلات مشابه خسته شده اید؟ سوالات متداول را اضافه کنید تا "
+"تعداد سوالات متداول کاربران را به شدت کاهش دهید."
+
+msgid "Admin Widgets"
+msgstr "ابزارک های مدیریت"
+
+msgid ""
+"Use internal email to send emails to one agent to another agent with in support "
+"ticket."
+msgstr ""
+"از ایمیل داخلی برای ارسال ایمیل به یک نماینده به نماینده دیگر با تیکت پشتیبانی "
+"استفاده کنید."
+
+msgid "Front-End Widget"
+msgstr "ویجت Front-End"
+
+msgid ""
+"Paid Support is the easiest way to integrate and manage payments for your support "
+"tickets."
+msgstr ""
+"پشتیبانی پولی ساده ترین راه برای ادغام و مدیریت پرداخت ها برای بلیط های پشتیبانی "
+"شما است."
+
+msgid "Mail Chimp"
+msgstr "Mailchimp"
+
+msgid ""
+"The Mail Chimp add-on adds a new checkbox to the registration form for prompting "
+"new users to subscribe your email-list."
+msgstr ""
+"افزونه Mail Chimp یک چک باکس جدید به فرم ثبت نام اضافه می کند تا از کاربران جدید "
+"خواسته شود که لیست ایمیل شما را مشترک کنند."
+
+msgid ""
+"EDD offers customers to open new tickets just one click from their EDD account "
+"with optionally validating the license keys."
+msgstr ""
+"EDD به مشتریان پیشنهاد می‌کند که بلیط‌های جدید را تنها با یک کلیک از حساب EDD خود "
+"با تأیید اعتبار کلیدهای مجوز، باز کنند."
+
+msgid "email cc"
+msgstr "ایمیل سی سی"
+
+msgid "Email Cc"
+msgstr "رایانامه کپی"
+
+msgid ""
+"CC(Carbon Copy) - the people who should know about the information which is being "
+"shared and the people included are able to see who is there in the list."
+msgstr ""
+"CC (کپی کربن) - افرادی که باید از اطلاعاتی که به اشتراک گذاشته می شود و افرادی که "
+"در آن گنجانده شده اند بدانند، می توانند ببینند چه کسانی در لیست هستند."
+
+msgid "multiform"
+msgstr "چند شکلی"
+
+msgid "Multiform allows user to add more than one form based on requirements."
+msgstr ""
+"Multiform به کاربر اجازه می دهد تا بیش از یک فرم را بر اساس الزامات اضافه کند."
+
+msgid "agent auto assign"
+msgstr "اختصاص خودکار عامل"
+
+msgid ""
+"When auto assignment is enabled and a ticket is created, an appropriate agent is "
+"automatically assigned to the ticket and it is moved to the Assigned state."
+msgstr ""
+"هنگامی که تخصیص خودکار فعال می شود و یک تیکت ایجاد می شود، یک عامل مناسب به طور "
+"خودکار به بلیط اختصاص داده می شود و به حالت Assigned منتقل می شود."
+
+msgid "Social Login"
+msgstr "ورود به سیستم اجتماعی"
+
+msgid ""
+"Users can login from their social media accounts. They can create a new account "
+"or use social media accounts."
+msgstr ""
+"کاربران می توانند از حساب های رسانه های اجتماعی خود وارد شوند. آنها می توانند یک "
+"حساب کاربری جدید ایجاد کنند یا از حساب های رسانه های اجتماعی استفاده کنند."
+
+msgid "JS Help Desk Add-Ons Bundle Pack"
+msgstr "بسته بسته نرم افزاری افزونه های میز راهنمای JS"
+
+msgid "Basic"
+msgstr "پایه ای"
+
+msgid "Unlimited Agents"
+msgstr "نمایندگان نامحدود"
+
+msgid "Show all"
+msgstr "نمایش همه"
+
+msgid "Everything in basic included and"
+msgstr "همه چیز در پایه شامل و"
+
+msgid "Professional"
+msgstr "حرفه ای"
+
+msgid "Everything in standard included and"
+msgstr "همه چیز در استاندارد شامل و"
+
+msgid "All Future Addons"
+msgstr "همه افزونه های آینده"
+
+msgid ""
+"Hey there! We have recently launched a fresh update for the add-ons. Don't forget "
+"to update the add-ons to enjoy the greatest features!"
+msgstr ""
+"سلام! اخیراً یک به‌روزرسانی جدید برای افزونه‌ها راه‌اندازی کرده‌ایم. فراموش نکنید که "
+"افزونه ها را به روز کنید تا از بهترین ویژگی ها لذت ببرید!"
+
+msgid "View Addone Status"
+msgstr "مشاهده وضعیت Addone"
+
+msgid "slug for ticket page"
+msgstr "اسلگ برای صفحه بلیط"
+
+msgid "slug for agent add ticket page"
+msgstr "حلزون حرکت کردن برای نماینده صفحه بلیط اضافه کنید"
+
+msgid "slug for rolepermission page"
+msgstr "اسلاگ برای صفحه مجوز نقش"
+
+msgid "slug for add announcement"
+msgstr "اسلگ برای افزودن اعلان"
+
+msgid "slug for add department page"
+msgstr "راب برای اضافه کردن صفحه بخش"
+
+msgid "slug for add download page"
+msgstr "Slug برای اضافه کردن صفحه دانلود"
+
+msgid "slug for add faq page"
+msgstr "حلزون حرکت برای افزودن صفحه faq"
+
+msgid "slug for faq page"
+msgstr "اسلگ برای صفحه FAQ"
+
+msgid "slug for add article page"
+msgstr "راب برای افزودن صفحه مقاله"
+
+msgid "slug for add category page"
+msgstr "راب برای اضافه کردن صفحه دسته"
+
+msgid "slug for user knowledgebase articles page"
+msgstr "Slug برای صفحه مقالات پایگاه دانش کاربر"
+
+msgid "slug for article detail page"
+msgstr "راب برای صفحه جزئیات مقاله"
+
+msgid "slug for add role page"
+msgstr "اسلگ برای اضافه کردن صفحه نقش"
+
+msgid "slug for add agent page"
+msgstr "راب برای افزودن صفحه عامل"
+
+msgid "slug for agent permissions page"
+msgstr "اسلاگ برای صفحه مجوزهای عامل"
+
+msgid "slug for my tickets page"
+msgstr "اسلگ برای صفحه بلیط من"
+
+msgid "slug for agent my tickets page"
+msgstr "مثل حلزون حرکت کردن برای نماینده صفحه بلیط من"
+
+msgid "slug for knowledgebase page"
+msgstr "Slug برای صفحه دانش پایگاه"
+
+msgid "slug for agent categories page"
+msgstr "حلزون حرکت برای صفحه دسته های عامل"
+
+msgid "slug for agent kb articles page"
+msgstr "Slug for agent kb صفحه مقالات"
+
+msgid "slug for agent announcements page"
+msgstr "اسلاگ برای صفحه اعلانات نماینده"
+
+msgid "slug for agent downloads page"
+msgstr "Slug for agent صفحه دانلود"
+
+msgid "slug for agent faqs page"
+msgstr "حلزون حرکت کردن برای نماینده صفحه faqs"
+
+msgid "slug for add ticket page"
+msgstr "اسلگ برای اضافه کردن صفحه بلیط"
+
+msgid "slug for ticket status page"
+msgstr "اسلگ برای صفحه وضعیت بلیط"
+
+msgid "slug for controlpanel"
+msgstr "حلزون برای کنترل پنل"
+
+msgid "slug for agent report detail page"
+msgstr "اسلگ برای صفحه جزئیات گزارش نماینده"
+
+msgid "slug for agent reports page"
+msgstr "راب برای صفحه گزارش های عامل"
+
+msgid "slug for department reports page"
+msgstr "Slug برای صفحه گزارش بخش"
+
+msgid "slug for announcement detail page"
+msgstr "حلزون حرکت برای صفحه جزئیات اعلامیه"
+
+msgid "slug for feedback page"
+msgstr "راب برای صفحه بازخورد"
+
+msgid "slug for agent feedbacks page"
+msgstr "راب برای صفحه بازخورد نماینده"
+
+msgid "slug for visitor message page"
+msgstr "اسلگ برای صفحه پیام بازدید کننده"
+
+msgid "slug for add help topic page"
+msgstr "راب برای اضافه کردن صفحه موضوع کمک"
+
+msgid "slug for agent help topics page"
+msgstr "اسلاگ برای صفحه موضوعات راهنمای عامل"
+
+msgid "slug for add canned response page"
+msgstr "حلزون حرکت برای اضافه کردن صفحه پاسخ کنسرو شده"
+
+msgid "slug for agent canned responses page"
+msgstr "حلزون حرکت کردن برای نماینده صفحه پاسخ های کنسرو شده"
+
+msgid "slug for gdpr data compliance actions1"
+msgstr "Slug برای اقدامات انطباق داده های Gdpr1"
+
+msgid "slug for print ticket page"
+msgstr "راب برای چاپ صفحه بلیط"
+
+msgid "slug for my profile page"
+msgstr "اسلگ برای صفحه نمایه من"
+
+msgid "slug for login page"
+msgstr "Slug برای صفحه ورود"
+
+msgid "slug for user register page"
+msgstr "Slug برای صفحه ثبت نام کاربر"
+
+msgid "slug for add message page"
+msgstr "اسلگ برای افزودن صفحه پیام"
+
+msgid "slug for message detail page"
+msgstr "راب برای صفحه جزئیات پیام"
+
+msgid "slug for message inbox page"
+msgstr "اسلاگ برای صفحه صندوق پیام"
+
+msgid "slug for message outbox page"
+msgstr "اسلگ برای صفحه صندوق پیام"
+
+msgid "slug for roles page"
+msgstr "صفحه اسلاگ برای نقش ها"
+
+msgid "slug for agent page"
+msgstr "اسلگ برای صفحه نماینده"
+
+msgid "slug for departments page"
+msgstr "راب برای بخش ها صفحه"
+
+msgid "slug for announcements page"
+msgstr "راب برای صفحه اطلاعیه ها"
+
+msgid "slug for downloads page"
+msgstr "Slug برای صفحه دانلود"
+
+msgid "slug for faqs page"
+msgstr "Slug برای صفحه faqs"
+
+msgid "API key is required for linkedin app"
+msgstr "کلید API برای برنامه Linkedin مورد نیاز است"
+
+msgid "API Key"
+msgstr "کلید ای پی ای"
+
+msgid "secret key"
+msgstr "کلید مخفی"
+
+msgid "Secret"
+msgstr "راز"
+
+msgid "Facebook user can login in js support ticket"
+msgstr "کاربر فیس بوک می تواند در بلیط پشتیبانی js وارد شود"
+
+msgid "Login With Linkedin"
+msgstr "با لینکدین وارد شوید"
+
+msgid "API key is required for facebook app"
+msgstr "کلید API برای برنامه فیس بوک مورد نیاز است"
+
+msgid "Login with linkedin"
+msgstr "با لینکدین وارد شوید"
+
+msgid "Login with facebook"
+msgstr "برای ورود با فیس بوک"
+
+msgid "Create User via email"
+msgstr "ایجاد کاربر از طریق ایمیل"
+
+msgid "Export Ticket"
+msgstr "بلیط صادرات"
+
+msgid "Ticket Listing"
+msgstr "لیست بلیط"
+
+msgid "Visitor Ticket Setting"
+msgstr "تنظیم بلیط بازدید کننده"
+
+msgid ""
+"By enabling this option, a user can know to whom the ticket has been assigned."
+msgstr ""
+"با فعال کردن این گزینه، کاربر می تواند بداند که بلیط به چه کسی اختصاص داده شده "
+"است."
+
+msgid "Assigned info. on admin tickets"
+msgstr "اطلاعات اختصاص داده شده در بلیط های مدیریت"
+
+msgid ""
+"By enabling this option, an agent can know to whom the ticket has been assigned."
+msgstr ""
+"با فعال کردن این گزینه، یک نماینده می تواند بداند که بلیط به چه کسی اختصاص داده "
+"شده است."
+
+msgid "Assigned info. on user tickets"
+msgstr "اطلاعات اختصاص داده شده در بلیط های کاربر"
+
+msgid ""
+"By enabling this option, an admin can know to whom the ticket has been assigned."
+msgstr ""
+"با فعال کردن این گزینه، یک ادمین می تواند بداند که بلیط به چه کسی اختصاص داده شده "
+"است."
+
+msgid "Assigned info. on agent tickets"
+msgstr "اطلاعات اختصاص داده شده در بلیط های نمایندگی"
+
+msgid ""
+"By enabling this option, a user can know who closed the ticket and when that "
+"ticket closed."
+msgstr ""
+"با فعال کردن این گزینه، کاربر می تواند بداند چه کسی بلیط را بسته و چه زمانی آن "
+"بلیط بسته شده است."
+
+msgid "Closed info. on admin closed tickets"
+msgstr "اطلاعات بسته شده روی بلیط های بسته مدیریتی"
+
+msgid ""
+"By enabling this option, an agent can know who closed the ticket and when that "
+"ticket closed."
+msgstr ""
+"با فعال کردن این گزینه، یک نماینده می تواند بداند چه کسی بلیط را بسته و چه زمانی "
+"آن بلیط بسته شده است."
+
+msgid "Closed info. on agent closed tickets"
+msgstr "اطلاعات بسته شده در بلیط های بسته آژانس"
+
+msgid ""
+"By enabling this option, an admin can know who closed the ticket and when that "
+"ticket closed."
+msgstr ""
+"با فعال کردن این گزینه، یک ادمین می‌تواند بداند چه کسی بلیط را بسته و چه زمانی "
+"بلیط بسته شده است."
+
+msgid "Set default sorting for ticket listing"
+msgstr "مرتب‌سازی پیش‌فرض را برای فهرست بلیط تنظیم کنید"
+
+msgid "Ascending"
+msgstr "صعودی"
+
+msgid "Descending"
+msgstr "نزولی"
+
+msgid "Ticket listing sorting"
+msgstr "مرتب سازی لیست بلیط"
+
+msgid "Select whether users can see the ticket delete button"
+msgstr "انتخاب کنید آیا کاربران می توانند دکمه حذف بلیط را ببینند یا خیر"
+
+msgid "Show ticket delete button"
+msgstr "نمایش دکمه حذف بلیط"
+
+msgid ""
+"Select whether users can see the name of administrator or staff member on ticket "
+"reply"
+msgstr ""
+"انتخاب کنید که آیا کاربران می توانند نام مدیر یا کارمند را در پاسخ بلیط ببینند"
+
+msgid "Show Anonymous Name On Ticket Reply"
+msgstr "نمایش نام ناشناس در پاسخ بلیط"
+
+msgid ""
+"Select whether users can see the email of administrator or agent on ticket reply"
+msgstr ""
+"انتخاب کنید آیا کاربران می توانند ایمیل مدیر یا نماینده را در پاسخ بلیط ببینند یا "
+"خیر"
+
+msgid "Show Admin OR Agent Email On Ticket Reply"
+msgstr "نمایش ایمیل مدیر یا نماینده در پاسخ به بلیط"
+
+msgid ""
+"Show or hide the multiform popup when creating a new ticket. if you hide them, "
+"the system will open the default form."
+msgstr ""
+"نمایش یا مخفی کردن پنجره چند شکلی هنگام ایجاد یک بلیط جدید. اگر آنها را پنهان "
+"کنید، سیستم فرم پیش فرض را باز می کند."
+
+msgid "Multiforms Popup For New Tickets"
+msgstr "پنجره چند شکلی برای بلیط های جدید"
+
+msgid "Set suffix for custom ticketid"
+msgstr "پسوند سفارشی بلیط را تنظیم کنید"
+
+msgid "Ticketid Suffix"
+msgstr "پسوند Ticketid"
+
+msgid "Set ticketid sequential or random .e.g"
+msgstr "تیکتید ترتیبی یا تصادفی را تنظیم کنید. به عنوان مثال"
+
+msgid "Set prefix for custom ticketid"
+msgstr "تنظیم پیشوند برای بلیط سفارشی"
+
+msgid "Ticketid Prefix"
+msgstr "پیشوند Ticketid"
+
+msgid "Support Icons"
+msgstr "آیکون های پشتیبانی"
+
+msgid "Set custom support text"
+msgstr "متن پشتیبانی سفارشی را تنظیم کنید"
+
+msgid "Set custom support image"
+msgstr "تنظیم تصویر پشتیبانی سفارشی"
+
+msgid "Custom Image"
+msgstr "تصویر سفارشی"
+
+msgid "JS Help Desk Register Page"
+msgstr "صفحه ثبت نام میز راهنمایی JS"
+
+msgid "WordPress Default Login Page"
+msgstr "صفحه ورود پیش فرض وردپرس"
+
+msgid "JS Help Desk Login Page"
+msgstr "صفحه ورود به میز راهنمای JS"
+
+msgid "Set register Link"
+msgstr "لینک ثبت نام را تنظیم کنید"
+
+msgid "We are here to help you"
+msgstr "ما اینجا هستیم تا به شما کمک کنیم"
+
+msgid "Help icon"
+msgstr "نماد راهنما"
+
+msgid ""
+"JS Help Desk is a professional, simple, easy to use and complete customer support "
+"system."
+msgstr ""
+"JS Help Desk یک سیستم پشتیبانی مشتری حرفه ای، ساده، آسان برای استفاده و کامل است."
+
+msgid "View all videos"
+msgstr "مشاهده همه ویدیوها"
+
+msgid "Video icon"
+msgstr "نماد ویدیو"
+
+msgid "View All Videos"
+msgstr "مشاهده همه ویدیوها"
+
+msgid "Help Desk icon"
+msgstr "نماد میز راهنما"
+
+msgid "JS Help Desk Support"
+msgstr "پشتیبانی از میز راهنمایی JS"
+
+msgid ""
+"JS Help Desk delivers timely customer support if you have any query then we're "
+"here to show you the way."
+msgstr ""
+"میز راهنمایی JS پشتیبانی به موقع از مشتری را ارائه می دهد اگر سؤالی دارید، پس ما "
+"اینجا هستیم تا راه را به شما نشان دهیم."
+
+msgid "Visitor ticket creation"
+msgstr "ایجاد بلیط بازدید کننده"
+
+msgid "How to set ticket auto close"
+msgstr "نحوه تنظیم بسته شدن خودکار بلیط"
+
+msgid "How to reopen closed ticket"
+msgstr "نحوه بازگشایی بلیط بسته"
+
+msgid "How to lock a ticket"
+msgstr "نحوه قفل کردن بلیط"
+
+msgid "How to add private note"
+msgstr "نحوه اضافه کردن یادداشت خصوصی"
+
+msgid "View ticket history"
+msgstr "مشاهده تاریخچه بلیط"
+
+msgid "How to setup custom fields"
+msgstr "نحوه تنظیم فیلدهای سفارشی"
+
+msgid "Set ticket auto overdue"
+msgstr "تعیین سررسید خودکار بلیط"
+
+msgid "Manually set ticket overdue"
+msgstr "بلیط عقب افتاده را به صورت دستی تنظیم کنید"
+
+msgid "How to merge tickets"
+msgstr "نحوه ادغام بلیط ها"
+
+msgid "How to export tickets"
+msgstr "نحوه صادرات بلیط"
+
+msgid "How use help topic"
+msgstr "نحوه استفاده از موضوع راهنما"
+
+msgid "How to change department"
+msgstr "نحوه تغییر بخش"
+
+msgid "How to use multi-forms"
+msgstr "نحوه استفاده از چند فرم"
+
+msgid "How to paid support"
+msgstr "نحوه پشتیبانی پولی"
+
+msgid "How to use canned response"
+msgstr "نحوه استفاده از پاسخ کنسرو شده"
+
+msgid "How to add private credentials"
+msgstr "نحوه اضافه کردن اعتبار خصوصی"
+
+msgid "How to ban/unban user"
+msgstr "نحوه ممنوع کردن / لغو ممنوعیت کاربر"
+
+msgid "Agent system"
+msgstr "سیستم عامل"
+
+msgid "Manually assign ticket to agen"
+msgstr "تخصیص دستی بلیط به agen"
+
+msgid "How to edit time"
+msgstr "نحوه ویرایش زمان"
+
+msgid "How to use time tracking"
+msgstr "نحوه استفاده از ردیابی زمان"
+
+msgid "How to set max open ticket"
+msgstr "نحوه تنظیم حداکثر بلیط باز"
+
+msgid "How to show counts"
+msgstr "نحوه نمایش شمارش"
+
+msgid "How to set Captcha"
+msgstr "نحوه تنظیم کپچا"
+
+msgid "User options"
+msgstr "گزینه های کاربر"
+
+msgid "How to set login redirect"
+msgstr "نحوه تنظیم تغییر مسیر ورود به سیستم"
+
+msgid "How to set fields ordering"
+msgstr "نحوه تنظیم ترتیب فیلدها"
+
+msgid "How to enable social login"
+msgstr "نحوه فعال کردن ورود به شبکه اجتماعی"
+
+msgid "Setup"
+msgstr "برپایی"
+
+msgid "How to enable email piping"
+msgstr "نحوه فعال کردن لوله کشی ایمیل"
+
+msgid "How to set SMTP"
+msgstr "نحوه تنظیم SMTP"
+
+msgid "How to solve email notification problem"
+msgstr "چگونه مشکل اعلان ایمیل را حل کنیم"
+
+msgid "How to translate"
+msgstr "نحوه ترجمه"
+
+msgid "How to set colors"
+msgstr "نحوه تنظیم رنگ ها"
+
+msgid "How to add Shortcode"
+msgstr "نحوه اضافه کردن کد کوتاه"
+
+msgid "How to install addons"
+msgstr "نحوه نصب افزونه ها"
+
+msgid "How to Desktop Notifications"
+msgstr "نحوه اعلان های دسکتاپ"
+
+msgid "How to use knowledge base"
+msgstr "نحوه استفاده از پایگاه دانش"
+
+msgid "How to use downloads"
+msgstr "نحوه استفاده از دانلودها"
+
+msgid "How to add announcement"
+msgstr "نحوه اضافه کردن اعلامیه"
+
+msgid "How to create FAQ"
+msgstr "نحوه ایجاد سوالات متداول"
+
+msgid "How to use email cc"
+msgstr "نحوه استفاده از ایمیل cc"
+
+msgid "How to use internal mail"
+msgstr "نحوه استفاده از نامه داخلی"
+
+msgid "Use front-end widgets"
+msgstr "از ویجت های جلویی استفاده کنید"
+
+msgid "How to enable admin widgets"
+msgstr "نحوه فعال کردن ابزارک های مدیریت"
+
+msgid "Select Language"
+msgstr "زبان را انتخاب کنید"
+
+msgid "Email CC"
+msgstr "ایمیل CC"
+
+msgid "Add Email CC"
+msgstr "ایمیل CC را اضافه کنید"
+
+msgid "Template For"
+msgstr "قالب برای"
+
+msgid "Sr#"
+msgstr "Sr#"
+
+msgid "Template Title"
+msgstr "عنوان قالب"
+
+msgid "Template Type"
+msgstr "نوع قالب"
+
+msgid "Add Email Cc"
+msgstr "افزودن ایمیل کپی"
+
+msgid "Select Template For"
+msgstr "قالب برای را انتخاب کنید"
+
+msgid "Select Template Type"
+msgstr "نوع الگو را انتخاب کنید"
+
+msgid "Add more row"
+msgstr "ردیف بیشتری اضافه کنید"
+
+msgid "Delete row"
+msgstr "حذف ردیف"
+
+msgid "Save Email CC"
+msgstr "ایمیل CC را ذخیره کنید"
+
+msgid "To use this feature you must be agent"
+msgstr "برای استفاده از این ویژگی باید نماینده باشید"
+
+msgid "Form has been stored"
+msgstr "فرم ذخیره شده است"
+
+msgid "Default form cannot be set as disabled"
+msgstr "فرم پیش فرض را نمی توان به عنوان غیرفعال تنظیم کرد"
+
+msgid "Multiform has been deleted"
+msgstr "Multiform حذف شده است"
+
+msgid "Select Parent"
+msgstr "Parent را انتخاب کنید"
+
+msgid "Select Child"
+msgstr "کودک را انتخاب کنید"
+
+msgid "Select Condition"
+msgstr "Condition را انتخاب کنید"
+
+msgid "Not Equal"
+msgstr "نا برابر"
+
+msgid "To use this feature please fill the above three fields"
+msgstr "برای استفاده از این ویژگی لطفا سه قسمت بالا را پر کنید"
+
+msgid "The agent has been stored"
+msgstr "عامل ذخیره شده است"
+
+msgid "The agent has been deleted"
+msgstr "نماینده حذف شده است"
+
+msgid "WP User ID"
+msgstr "شناسه کاربری WP"
+
+msgid "WP Username"
+msgstr "نام کاربری WP"
+
+msgid "User Detail"
+msgstr "جزئیات کاربر"
+
+msgid "WP Full Name"
+msgstr "WP نام کامل"
+
+msgid "WP Email Address"
+msgstr "آدرس ایمیل WP"
+
+msgid "Rule has been stored"
+msgstr "قانون ذخیره شده است"
+
+msgid "Rule has been deleted"
+msgstr "قانون حذف شده است"
+
+msgid "Email Cc has been stored"
+msgstr "ایمیل کپی ذخیره شده است"
+
+msgid "Email CC has been deleted"
+msgstr "ایمیل CC حذف شده است"
+
+msgid "Agent permissions have been stored"
+msgstr "مجوزهای عامل ذخیره شده است"
+
+msgid "Select Canned Response"
+msgstr "Canned Response را انتخاب کنید"
+
+msgid "Ticket Merge"
+msgstr "ادغام بلیط"
+
+msgid "Delete Credentials"
+msgstr "اعتبارنامه ها را حذف کنید"
+
+msgid "Mail To Agent"
+msgstr "نامه به نماینده"
+
+msgid "View Agent Reports"
+msgstr "مشاهده گزارش های نماینده"
+
+msgid "Add Credentials"
+msgstr "اعتبارنامه را اضافه کنید"
+
+msgid "Edit Help Topic"
+msgstr "ویرایش موضوع راهنما"
+
+msgid ""
+"e.g ' I have read and agree to the [link] Terms and Conditions[/link].  ' The "
+"text between [link] and [/link] will be linked to provided url or wordpress page."
+msgstr ""
+"به عنوان مثال \"من [link] شرایط و ضوابط[/link] را خوانده ام و با آن موافقم. متن "
+"بین [لینک] و [/لینک] به url یا صفحه وردپرس ارائه شده پیوند داده می شود."
+
+msgid "login"
+msgstr "وارد شدن"
+
+msgid "stars"
+msgstr "ستاره ها"
+
+msgid "Please write appreciated review at WP Extension Directory"
+msgstr "لطفاً نظر ارزشمند را در فهرست برنامه افزودنی WP بنویسید"
+
+msgid ""
+"We'd love to hear from you. It'll only take 2 minutes of your time, and will "
+"really help us spread the word"
+msgstr ""
+"ما از اینکه ازت خبر داشته باشیم خوشحال میشویم. این فقط 2 دقیقه از وقت شما را می "
+"گیرد و واقعاً به ما کمک می کند تا این خبر را گسترش دهیم"
+
+msgid "love"
+msgstr "عشق"
+
+msgid "I'd love to help :)"
+msgstr "من دوست دارم کمک کنم :)"
+
+msgid "sad"
+msgstr "غمگین"
+
+msgid "Not this time"
+msgstr "الآن نه"
+
+msgid "happy"
+msgstr "خوشحال"
+
+msgid "I've already rated you"
+msgstr "من قبلا به شما امتیاز داده ام"
+
+msgid "thanks"
+msgstr "با تشکر"
+
+msgid "You are awesome !......"
+msgstr "شما عالی هستند !......"
+
+msgid "Thanks for your support, we really appreciate it."
+msgstr "از حمایت شما متشکریم، ما واقعا از آن قدردانی می کنیم."
+
+msgid "JS Help Desk Team"
+msgstr "تیم میز کمک JS"
+
+msgid "Remind you about this later?"
+msgstr "بعداً این را به شما یادآوری می‌کنید؟"
+
+msgid "Remind me in 3 days"
+msgstr "3 روز دیگه بهم یادآوری کن"
+
+msgid "Remind me in 10 days"
+msgstr "10 روز دیگه بهم یادآوری کن"
+
+msgid "Remind me in 30 days"
+msgstr "30 روز دیگر به من یادآوری کن"
+
+msgid "Don't remind me about this"
+msgstr "این را به من یادآوری نکن"
+
+msgid "Watch Video"
+msgstr "تماشای ویدیو"
+
+msgid "Slug(s) has been stored"
+msgstr "Slug(ها) ذخیره شده است"
+
+msgid "Prefix has not been stored"
+msgstr "پیشوند ذخیره نشده است"
+
+msgid "+Add more Condition"
+msgstr "+ افزودن شرایط بیشتر"
+
+msgid "Admin New Ticket Received"
+msgstr "ادمین بلیط جدید دریافت کرد"
+
+msgid "Staff New Ticket Received"
+msgstr "کارکنان بلیط جدید دریافت کردند"
+
+msgid "New Department Received"
+msgstr "بخش جدید دریافت شد"
+
+msgid "New Group Received"
+msgstr "گروه جدید دریافت شد"
+
+msgid "New Agent Received"
+msgstr "نماینده جدید دریافت شد"
+
+msgid "New Help Topic Received"
+msgstr "موضوع راهنما جدید دریافت شد"
+
+msgid "Admin Reassign Ticket"
+msgstr "ادمین تخصیص مجدد بلیط"
+
+msgid "Staff Reassign Ticket"
+msgstr "تخصیص مجدد کارکنان بلیط"
+
+msgid "Admin Close Ticket"
+msgstr "ادمین بستن بلیط"
+
+msgid "Staff Close Ticket"
+msgstr "کارکنان نزدیک بلیط"
+
+msgid "Admin Delete Ticket"
+msgstr "ادمین حذف بلیط"
+
+msgid "Staff Delete Ticket"
+msgstr "کارکنان حذف بلیط"
+
+msgid "Admin Overdue Ticket"
+msgstr "بلیط معوقه مدیریت"
+
+msgid "Staff Overdue Ticket"
+msgstr "بلیط معوقه کارکنان"
+
+msgid "Admin Email Baned"
+msgstr "ایمیل ادمین ممنوع شد"
+
+msgid "Staff Email Baned"
+msgstr "ایمیل کارکنان ممنوع شد"
+
+msgid "Admin Ticket Transfered to Department"
+msgstr "بلیط مدیریت به بخش منتقل شد"
+
+msgid "Staff Ticket Transfered to Department"
+msgstr "بلیط کارکنان به بخش منتقل شد"
+
+msgid "Admin Email baned and ticket closed"
+msgstr "ایمیل ادمین ممنوع شد و بلیط بسته شد"
+
+msgid "Staff Email baned and ticket closed"
+msgstr "ایمیل کارکنان ممنوع شد و بلیط بسته شد"
+
+msgid "Admin Email Unbaned"
+msgstr "ایمیل مدیریت لغو ممنوعیت"
+
+msgid "Staff Email Unbaned"
+msgstr "ایمیل کارکنان لغو ممنوعیت"
+
+msgid "Admin Ticket Reply"
+msgstr "پاسخ تیکت ادمین"
+
+msgid "Staff Ticket Reply"
+msgstr "پاسخ بلیط کارکنان"
+
+msgid "Ticket Received"
+msgstr "بلیط دریافت شد"
+
+msgid "Banemail try new ticket"
+msgstr "Banemail بلیط جدید را امتحان کنید"
+
+msgid "Admin Ticket has been locked"
+msgstr "بلیط مدیریت قفل شده است"
+
+msgid "Staff Ticket has been locked"
+msgstr "بلیط کارکنان قفل شده است"
+
+msgid "Admin Ticket has been unlocked"
+msgstr "قفل Admin Ticket باز شده است"
+
+msgid "Staff Ticket has been unlocked"
+msgstr "قفل بلیط کارکنان باز شده است"
+
+msgid "Admin In progress Ticket"
+msgstr "ادمین بلیط در حال پیشرفت"
+
+msgid "Staff In progress Ticket"
+msgstr "بلیط در حال پیشرفت کارکنان"
+
+msgid "Admin Ticket priority changed"
+msgstr "اولویت بلیط مدیریت تغییر کرد"
+
+msgid "Staff Ticket priority changed"
+msgstr "اولویت بلیط کارکنان تغییر کرد"
+
+msgid "New Mail has been sent"
+msgstr "نامه جدید ارسال شد"
+
+msgid "New Reply has been sent"
+msgstr "پاسخ جدید ارسال شد"
+
+msgid "Delete User Data"
+msgstr "اطلاعات کاربر را حذف کنید"
+
+msgid "Closed By"
+msgstr "بسته شده توسط"
+
+msgid "Closed On"
+msgstr "بسته شد"
+
+msgid "Closed info. on user closed tickets"
+msgstr "اطلاعات بسته شده در بلیط های بسته شده توسط کاربر"
+
+msgid "custom text"
+msgstr "متن سفارشی"
+
+msgid "Select Languages"
+msgstr "زبان ها را انتخاب کنید"
+
+msgid "IMAP Authentication cancelled"
+msgstr "احراز هویت IMAP لغو شد"
+
+msgid "Page Not Found !!"
+msgstr "صفحه یافت نشد !!"
