@@ -19,7 +19,6 @@ $jssupportticket_js ="
 ";
 wp_add_inline_script('js-support-ticket-main-js',$jssupportticket_js);
 wp_enqueue_script('jquery-ui-sortable');
-$protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' || $_SERVER['SERVER_PORT'] == 443) ? "https://" : "http://";
 wp_enqueue_style('jquery-ui-css', JSST_PLUGIN_URL . 'includes/css/jquery-ui-smoothness.css');
 JSSTmessage::getMessage(); ?>
 <div id="jsstadmin-wrapper">
@@ -100,7 +99,7 @@ JSSTmessage::getMessage(); ?>
                                     <span class="js-support-ticket-table-responsive-heading">
                                         <?php echo esc_html(__('Ordering', 'js-support-ticket')); echo " : "; ?>
                                     </span>
-                                    <img alt="<?php echo esc_html(__('grab','js-support-ticket')); ?>" src="<?php echo JSST_PLUGIN_URL . 'includes/images/list-full.png'?>"/>
+                                    <img alt="<?php echo esc_html(__('grab','js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL) . 'includes/images/list-full.png'?>"/>
                                 </td>
 
                                 <td class="left"><span class="js-support-ticket-table-responsive-heading"><?php

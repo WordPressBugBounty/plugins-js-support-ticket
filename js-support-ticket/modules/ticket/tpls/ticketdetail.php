@@ -942,7 +942,7 @@ if (jssupportticket::$_config['offline'] == 2) {
                                             $mins = floor(jssupportticket::$_data['time_taken'] / 60);
                                             $mins = floor($mins % 60);
                                             $secs = floor(jssupportticket::$_data['time_taken'] % 60);
-                                            echo esc_html(__('Time Taken','js-support-ticket')).':&nbsp;'.sprintf('%02d:%02d:%02d', $hours, $mins, $secs);
+                                            echo esc_html(__('Time Taken','js-support-ticket')).':&nbsp;'.sprintf('%02d:%02d:%02d', esc_html($hours), esc_html($mins), esc_html($secs));
                                         ?>
                                     </div>
                                     <div class="timer" >
@@ -951,17 +951,17 @@ if (jssupportticket::$_config['offline'] == 2) {
                                     <div class="timer-buttons" >
                                         <?php if(JSSTincluder::getJSModel('userpermissions')->checkPermissionGrantedForTask('Edit Time')){ ?>
                                             <span class="timer-button" onclick="showEditTimerPopup()" >
-                                                <img alt="image" src="<?php echo JSST_PLUGIN_URL;?>includes/images/timer-edit.png"/>
+                                                <img alt="image" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/timer-edit.png"/>
                                             </span>
                                         <?php } ?>
                                         <span class="timer-button cls_1" onclick="changeTimerStatus(1)" >
-                                            <img alt="image" src="<?php echo JSST_PLUGIN_URL;?>includes/images/play.png"/>
+                                            <img alt="image" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/play.png"/>
                                         </span>
                                         <span class="timer-button cls_2" onclick="changeTimerStatus(2)" >
-                                            <img alt="image" src="<?php echo JSST_PLUGIN_URL;?>includes/images/pause.png"/>
+                                            <img alt="image" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/pause.png"/>
                                         </span>
                                         <span class="timer-button cls_3" onclick="changeTimerStatus(3)" >
-                                            <img alt="image" src="<?php echo JSST_PLUGIN_URL;?>includes/images/stop.png"/>
+                                            <img alt="image" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/stop.png"/>
                                         </span>
                                     </div>
                                 </div>
@@ -1298,13 +1298,13 @@ if (jssupportticket::$_config['offline'] == 2) {
                                         <?php } ?>
                                         <?php if (in_array('actions',jssupportticket::$_active_addons)) { ?>
                                             <a class="js-tkt-det-actn-btn" href="#" onclick="actionticket(9);">
-                                                <img alt="image" src="<?php echo JSST_PLUGIN_URL . 'includes/images/ticket-detail/in-progress.png'; ?>" title="<?php echo esc_html(__('Mark in Progress', 'js-support-ticket')); ?>" />
+                                                <img alt="image" src="<?php echo esc_url(JSST_PLUGIN_URL) . 'includes/images/ticket-detail/in-progress.png'; ?>" title="<?php echo esc_html(__('Mark in Progress', 'js-support-ticket')); ?>" />
                                                 <span><?php echo esc_html(__('Mark in Progress', 'js-support-ticket'));?></span>
                                             </a>
                                         <?php } ?>
                                         <?php if(in_array('banemail', jssupportticket::$_active_addons)){ ?>
                                             <a class="js-tkt-det-actn-btn" href="#" onclick="actionticket(10);">
-                                                <img alt="image" src="<?php echo JSST_PLUGIN_URL . 'includes/images/ticket-detail/ban-email-close-ticket.png'; ?>" title="<?php echo esc_html(__('Ban Email and Close Ticket', 'js-support-ticket')); ?>" />
+                                                <img alt="image" src="<?php echo esc_url(JSST_PLUGIN_URL) . 'includes/images/ticket-detail/ban-email-close-ticket.png'; ?>" title="<?php echo esc_html(__('Ban Email and Close Ticket', 'js-support-ticket')); ?>" />
                                                 <span><?php echo esc_html(__('Ban Email and Close Ticket', 'js-support-ticket')); ?></span>
                                             </a>
                                         <?php } ?>
@@ -1337,7 +1337,7 @@ if (jssupportticket::$_config['offline'] == 2) {
                                                     if (isset(jssupportticket::$_data[0]->uid) && !empty(jssupportticket::$_data[0]->uid)) {
                                                         echo wp_kses(get_avatar($note->uid), JSST_ALLOWED_TAGS);
                                                     } else { ?>
-                                                        <img alt="image" class="js-ticket-staff-img" src="<?php echo JSST_PLUGIN_URL . '/includes/images/ticketmanbig.png'; ?>" />
+                                                        <img alt="image" class="js-ticket-staff-img" src="<?php echo esc_url(JSST_PLUGIN_URL) . '/includes/images/ticketmanbig.png'; ?>" />
                                                     <?php } ?>
                                                 <?php } ?>
                                             </div>
@@ -1377,7 +1377,7 @@ if (jssupportticket::$_config['offline'] == 2) {
                                                     $mins = floor($note->usertime / 60);
                                                     $mins = floor($mins % 60);
                                                     $secs = floor($note->usertime % 60);
-                                                    $time = esc_html(__('Time Taken','js-support-ticket')).':&nbsp;'.sprintf('%02d:%02d:%02d', $hours, $mins, $secs);
+                                                    $time = esc_html(__('Time Taken','js-support-ticket')).':&nbsp;'.sprintf('%02d:%02d:%02d', esc_html($hours), esc_html($mins), esc_html($secs));
                                                     ?>
                                                     <span class="js-ticket-thread-time"><?php echo esc_html($time); ?></span>
                                                 </div>
@@ -1391,7 +1391,7 @@ if (jssupportticket::$_config['offline'] == 2) {
                                                                 <?php echo esc_html($note->filename); echo '(' . esc_html($note->filesize / 1024) . ')'; ?>
                                                             </span>
                                                             <a class="js-download-button" target="_blank" href="<?php echo esc_url(admin_url('?page=note&action=jstask&task=downloadbyid&id='.esc_attr($note->id))); ?>">
-                                                                <img alt="image" class="js-ticket-download-img" src="<?php echo JSST_PLUGIN_URL;?>/includes/images/ticket-detail/download.png">
+                                                                <img alt="image" class="js-ticket-download-img" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>/includes/images/ticket-detail/download.png">
                                                             </a>
                                                         </div>
                                                     </div>
@@ -1399,7 +1399,7 @@ if (jssupportticket::$_config['offline'] == 2) {
                                             </div>
                                             <div class="js-ticket-time-stamp-wrp">
                                                 <span class="js-ticket-ticket-created-date">
-                                                    <?php echo esc_html(date_i18n("l F d, Y, h:i:s", jssupportticketphplib::JSST_strtotime($note->created))); ?>
+                                                    <?php echo esc_html(date_i18n("l F d, Y, H:i:s", jssupportticketphplib::JSST_strtotime($note->created))); ?>
                                                 </span>
                                             </div>
                                         </div>
@@ -1461,7 +1461,7 @@ if (jssupportticket::$_config['offline'] == 2) {
                                                         </a>';
                                                         if(strpos($type, "image") !== false) {
                                                             echo '<a data-gall="gallery-ticket-thread" class="js-download-button venobox" data-vbtype="image" title="'. esc_html(__('View','js-support-ticket')).'" href="'. esc_url(JSSTincluder::getJSModel('attachment')->getAttachmentImage($attachment->id)) .'"  target="_blank">
-                                                            <img alt="'. esc_html(__('View Image','js-support-ticket')).'" src="' . JSST_PLUGIN_URL . 'includes/images/ticket-detail/view.png" />
+                                                            <img alt="'. esc_html(__('View Image','js-support-ticket')).'" src="' . esc_url(JSST_PLUGIN_URL) . 'includes/images/ticket-detail/view.png" />
                                                                 </a>';
                                                         }
                                                     echo '</div>';
@@ -1473,7 +1473,7 @@ if (jssupportticket::$_config['offline'] == 2) {
                                 </div>
                                 <div class="js-ticket-thread-cnt-btm">
                                     <span class="js-ticket-thread-date">
-                                         <?php echo esc_html(date_i18n("l F d, Y, h:i:s", jssupportticketphplib::JSST_strtotime(jssupportticket::$_data[0]->created))); ?>
+                                         <?php echo esc_html(date_i18n("l F d, Y, H:i:s", jssupportticketphplib::JSST_strtotime(jssupportticket::$_data[0]->created))); ?>
                                     </span>
                                 </div>
                             </div>
@@ -1523,7 +1523,7 @@ if (jssupportticket::$_config['offline'] == 2) {
                                                         $mins = floor($reply->time / 60);
                                                         $mins = floor($mins % 60);
                                                         $secs = floor($reply->time % 60);
-                                                        $time = esc_html(__('Time Taken','js-support-ticket')).':&nbsp;'.sprintf('%02d:%02d:%02d', $hours, $mins, $secs);
+                                                        $time = esc_html(__('Time Taken','js-support-ticket')).':&nbsp;'.sprintf('%02d:%02d:%02d', esc_html($hours), esc_html($mins), esc_html($secs));
                                                         ?>
                                                         <span class="js-ticket-thread-time"><?php echo esc_html($time); ?></span>
                                                     <?php } ?>
@@ -1566,7 +1566,7 @@ if (jssupportticket::$_config['offline'] == 2) {
                                                                         if(strpos($type, "image") !== false) {
                                                                             $path = JSSTincluder::getJSModel('attachment')->getAttachmentImage($attachment->id);
                                                                             echo '<a data-gall="gallery-'.esc_attr($reply->replyid).'" class="js-download-button venobox" data-vbtype="image" title="'. esc_html(__('View','js-support-ticket')).'" href="'. esc_url($path) .'"  target="_blank">
-                                                                            <img alt="'. esc_html(__('View Image','js-support-ticket')).'" src="' . JSST_PLUGIN_URL . 'includes/images/ticket-detail/view.png" />
+                                                                            <img alt="'. esc_html(__('View Image','js-support-ticket')).'" src="' . esc_url(JSST_PLUGIN_URL) . 'includes/images/ticket-detail/view.png" />
                                                                                 </a>';
                                                                         }
                                                                 echo '</div>';
@@ -1581,7 +1581,7 @@ if (jssupportticket::$_config['offline'] == 2) {
                                                     ?>
                                                         <div class="js-ticket-thread-cnt-btm">
                                                             <div class="js-ticket-thread-date">
-                                                                <?php echo esc_html(date_i18n("l F d, Y, h:i:s", jssupportticketphplib::JSST_strtotime($reply->created))); ?>
+                                                                <?php echo esc_html(date_i18n("l F d, Y, H:i:s", jssupportticketphplib::JSST_strtotime($reply->created))); ?>
                                                             </div>
                                                             <div class="js-ticket-thread-actions">
                                                                 <?php if(JSSTincluder::getJSModel('userpermissions')->checkPermissionGrantedForTask('Edit Reply') && jssupportticket::$_data[0]->status != 5){ ?>
@@ -1606,7 +1606,7 @@ if (jssupportticket::$_config['offline'] == 2) {
                                                 <?php } ?>
 											<div class="js-ticket-thread-cnt-btm">
 												<span class="js-ticket-thread-date">
-													 <?php echo esc_html(date_i18n("l F d, Y, h:i:s", jssupportticketphplib::JSST_strtotime($reply->created))); ?>
+													 <?php echo esc_html(date_i18n("l F d, Y, H:i:s", jssupportticketphplib::JSST_strtotime($reply->created))); ?>
 												</span>
 											</div>
 
@@ -1692,7 +1692,7 @@ if (jssupportticket::$_config['offline'] == 2) {
                                                                 $mins = floor(jssupportticket::$_data['time_taken'] / 60);
                                                                 $mins = floor($mins % 60);
                                                                 $secs = floor(jssupportticket::$_data['time_taken'] % 60);
-                                                                echo esc_html(__('Time Taken','js-support-ticket')).':&nbsp;'.sprintf('%02d:%02d:%02d', $hours, $mins, $secs);
+                                                                echo esc_html(__('Time Taken','js-support-ticket')).':&nbsp;'.sprintf('%02d:%02d:%02d', esc_html($hours), esc_html($mins), esc_html($secs));
                                                             ?>
                                                         </div>
                                                     </div>
@@ -1703,17 +1703,17 @@ if (jssupportticket::$_config['offline'] == 2) {
                                                         <div class="timer-buttons" >
                                                             <?php if(JSSTincluder::getJSModel('userpermissions')->checkPermissionGrantedForTask('Edit Own Time')){ ?>
                                                                 <span class="timer-button" onclick="showEditTimerPopup()" >
-                                                                    <img alt="image" src="<?php echo JSST_PLUGIN_URL;?>includes/images/timer-edit.png"/>
+                                                                    <img alt="image" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/timer-edit.png"/>
                                                                 </span>
                                                             <?php } ?>
                                                             <span class="timer-button cls_1" onclick="changeTimerStatus(1)" >
-                                                                <img alt="image" src="<?php echo JSST_PLUGIN_URL;?>includes/images/play.png"/>
+                                                                <img alt="image" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/play.png"/>
                                                             </span>
                                                             <span class="timer-button cls_2" onclick="changeTimerStatus(2)" >
-                                                                <img alt="image" src="<?php echo JSST_PLUGIN_URL;?>includes/images/pause.png"/>
+                                                                <img alt="image" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/pause.png"/>
                                                             </span>
                                                             <span class="timer-button cls_3" onclick="changeTimerStatus(3)" >
-                                                                <img alt="image" src="<?php echo JSST_PLUGIN_URL;?>includes/images/stop.png"/>
+                                                                <img alt="image" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/stop.png"/>
                                                             </span>
                                                         </div>
                                                     </div>
@@ -1848,7 +1848,7 @@ if (jssupportticket::$_config['offline'] == 2) {
                                     <div class="js-tkt-det-info-tit">
                                        <?php echo esc_html(__('Created','js-support-ticket')) . ': '; ?>
                                     </div>
-                                    <div class="js-tkt-det-info-val" title="<?php echo esc_html(date_i18n("d F, Y, h:i:s A", jssupportticketphplib::JSST_strtotime(jssupportticket::$_data[0]->created))); ?>">
+                                    <div class="js-tkt-det-info-val" title="<?php echo esc_html(date_i18n("d F, Y, H:i:s A", jssupportticketphplib::JSST_strtotime(jssupportticket::$_data[0]->created))); ?>">
                                        <?php echo esc_html(human_time_diff(strtotime(jssupportticket::$_data[0]->created),strtotime(date_i18n("Y-m-d H:i:s")))).' '. esc_html(__('ago', 'js-support-ticket')); ?>
                                     </div>
                                 </div>
@@ -2026,7 +2026,7 @@ if (jssupportticket::$_config['offline'] == 2) {
                                                     <img alt="<?php echo esc_html(__('staff photo','js-support-ticket')); ?>" src="<?php echo esc_url(jssupportticket::makeUrl(array('jstmod'=>'agent','task'=>'getStaffPhoto','action'=>'jstask','jssupportticketid'=>jssupportticket::$_data[0]->staffid, 'jsstpageid'=>jssupportticket::getPageid()))); ?>">
                                                     <?php
                                                 } else { ?>
-                                                    <img alt="<?php echo esc_html(__('staff photo','js-support-ticket')); ?>" src="<?php echo JSST_PLUGIN_URL . '/includes/images/user.png'; ?>" />
+                                                    <img alt="<?php echo esc_html(__('staff photo','js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL) . '/includes/images/user.png'; ?>" />
                                                     <?php
                                                 }
                                                 ?>
@@ -2089,7 +2089,7 @@ if (jssupportticket::$_config['offline'] == 2) {
                                     $mins = floor(jssupportticket::$_data['time_taken'] / 60);
                                     $mins = floor($mins % 60);
                                     $secs = floor(jssupportticket::$_data['time_taken'] % 60);
-                                    $time =  sprintf('%02d:%02d:%02d', $hours, $mins, $secs);
+                                    $time =  sprintf('%02d:%02d:%02d', esc_html($hours), esc_html($mins), esc_html($secs));
                                     ?>
                                     <div class="timer-total-time-value">
                                         <span class="timer-box">
@@ -2329,7 +2329,7 @@ if (jssupportticket::$_config['offline'] == 2) {
                                         <?php if(!empty($envlicense['purchasedate'])){ ?>
                                         <div class="js-tkt-wc-order-item">
                                             <div class="js-tkt-wc-order-item-title"><?php echo esc_html(__("Purchase Date",'js-support-ticket')); ?>:</div>
-                                            <div class="js-tkt-wc-order-item-value"><?php echo esc_html(date_i18n("F d, Y, h:i:s", jssupportticketphplib::JSST_strtotime($envlicense['purchasedate']))); ?></div>
+                                            <div class="js-tkt-wc-order-item-value"><?php echo esc_html(date_i18n("F d, Y, H:i:s", jssupportticketphplib::JSST_strtotime($envlicense['purchasedate']))); ?></div>
                                         </div>
                                         <?php } ?>
                                         <?php if(!empty($envlicense['supporteduntil'])){ ?>
@@ -2407,7 +2407,7 @@ if (jssupportticket::$_config['offline'] == 2) {
                                             <?php if(isset($paidsupport['subscriptionstartdate'])){ ?>
                                             <div class="js-tkt-wc-order-item">
                                                 <div class="js-tkt-wc-order-item-title"><?php echo esc_html(__("Subscribed On",'js-support-ticket')); ?>:</div>
-                                                <div class="js-tkt-wc-order-item-value"><?php echo esc_html(date_i18n("F d, Y, h:i:s", jssupportticketphplib::JSST_strtotime($paidsupport['subscriptionstartdate']))); ?></div>
+                                                <div class="js-tkt-wc-order-item-value"><?php echo esc_html(date_i18n("F d, Y, H:i:s", jssupportticketphplib::JSST_strtotime($paidsupport['subscriptionstartdate']))); ?></div>
                                             </div>
                                             <?php } ?>
                                             <?php if(isset($paidsupport['expiry'])){ ?>

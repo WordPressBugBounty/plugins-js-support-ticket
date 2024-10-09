@@ -91,12 +91,46 @@ class JSSTconfigurationModel {
         $path = $path . '/attachmentdata/';
         $dsk_logo_file =  $path.$file_name;
         if($file_name != ''){
-            @unlink($dsk_logo_file);
+            if ( file_exists( $dsk_logo_file ) ) {
+                wp_delete_file($dsk_logo_file);
+            }
         }
     }
 
 
     function storeConfiguration($data) {
+        $nonce = JSSTrequest::getVar('_wpnonce');
+        if (! wp_verify_nonce( $nonce, 'save-configuration') ) {
+            die( 'Security check Failed' );
+        }
+        if (!current_user_can('manage_options')) { //only admin can change it.
+            return false;
+        }
+        $data = jssupportticket::JSST_sanitizeData($data); // JSST_sanitizeData() function uses wordpress santize functions
+        // handle editor text for offline message after sanitizing all data
+        if (isset($data['offline_message'])) {
+            $data['offline_message'] = JSSTincluder::getJSModel('jssupportticket')->getSanitizedEditorData($_POST['offline_message']);
+            $data['offline_message'] = JSSTincluder::getJSModel('jssupportticket')->jsstremovetags($data['offline_message']);
+            $data['offline_message'] = JSSTincluder::getJSmodel('jssupportticket')->stripslashesFull($data['offline_message']);
+        }
+        // handle editor text for new ticket message after sanitizing all data
+        if (isset($data['new_ticket_message'])) {
+            $data['new_ticket_message'] = JSSTincluder::getJSModel('jssupportticket')->getSanitizedEditorData($_POST['new_ticket_message']);
+            $data['new_ticket_message'] = JSSTincluder::getJSModel('jssupportticket')->jsstremovetags($data['new_ticket_message']);
+            $data['new_ticket_message'] = JSSTincluder::getJSmodel('jssupportticket')->stripslashesFull($data['new_ticket_message']);
+        }
+        // handle editor text for visitor message after sanitizing all data
+        if (isset($data['visitor_message'])) {
+            $data['visitor_message'] = JSSTincluder::getJSModel('jssupportticket')->getSanitizedEditorData($_POST['visitor_message']);
+            $data['visitor_message'] = JSSTincluder::getJSModel('jssupportticket')->jsstremovetags($data['visitor_message']);
+            $data['visitor_message'] = JSSTincluder::getJSmodel('jssupportticket')->stripslashesFull($data['visitor_message']);
+        }
+        // handle editor text for feedback thanks message after sanitizing all data
+        if (isset($data['feedback_thanks_message'])) {
+            $data['feedback_thanks_message'] = JSSTincluder::getJSModel('jssupportticket')->getSanitizedEditorData($_POST['feedback_thanks_message']);
+            $data['feedback_thanks_message'] = JSSTincluder::getJSModel('jssupportticket')->jsstremovetags($data['feedback_thanks_message']);
+            $data['feedback_thanks_message'] = JSSTincluder::getJSmodel('jssupportticket')->stripslashesFull($data['feedback_thanks_message']);
+        }
         $notsave = false;
         $updateColors = false;
         foreach ($data AS $key => $value) {
@@ -250,7 +284,7 @@ class JSSTconfigurationModel {
         if ($key) {
             $unlinkPath = $userpath.'/'.$key;
             if (is_file($unlinkPath)) {
-                unlink($unlinkPath);
+                wp_delete_file($unlinkPath);
             }
         }
         jssupportticket::$_db->update(jssupportticket::$_db->prefix . 'js_ticket_config', array('configvalue' => $filename), array('configname' => 'support_custom_img'));
@@ -273,7 +307,7 @@ class JSSTconfigurationModel {
         if ($key) {
             $unlinkPath = $path.'/'.$key;
             if (is_file($unlinkPath)) {
-                unlink($unlinkPath);
+                wp_delete_file($unlinkPath);
             }
         }
         jssupportticket::$_db->update(jssupportticket::$_db->prefix . 'js_ticket_config', array('configvalue' => 0), array('configname' => 'support_custom_img'));
@@ -315,14 +349,14 @@ class JSSTconfigurationModel {
     }
 
     function genearateCronKey() {
-        $key = jssupportticketphplib::JSST_md5(date('Y-m-d'));
+        $key = jssupportticketphplib::JSST_md5(gmdate('Y-m-d'));
         $query = "UPDATE `".jssupportticket::$_db->prefix."js_ticket_config` SET configvalue = '".esc_sql($key)."' WHERE configname = 'ck'" ;
         jssupportticket::$_db->query($query);
         return true;
     }
 
     function getCronKey($passkey) {
-        if ($passkey == jssupportticketphplib::JSST_md5(date('Y-m-d'))) {
+        if ($passkey == jssupportticketphplib::JSST_md5(gmdate('Y-m-d'))) {
             $query = "SELECT configvalue FROM `".jssupportticket::$_db->prefix."js_ticket_config` WHERE configname = 'ck'";
             $key = jssupportticket::$_db->get_var($query);
             return $key;

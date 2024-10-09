@@ -248,7 +248,7 @@ class JSSTreplyModel {
                     $tokenarray['emailaddress'] = JSSTincluder::getJSModel('ticket')->getTicketEmailById($data['ticketid']);
                     $tokenarray['trackingid'] = JSSTincluder::getJSModel('ticket')->getTrackingIdById($data['ticketid']);
                     $tokenarray['sitelink']=JSSTincluder::getJSModel('jssupportticket')->getEncriptedSiteLink();
-                    $token = json_encode($tokenarray);
+                    $token = wp_json_encode($tokenarray);
                     include_once JSST_PLUGIN_PATH . 'includes/encoder.php';
                     $encoder = new JSSTEncoder();
                     $encryptedtext = $encoder->encrypt($token);
@@ -351,7 +351,7 @@ class JSSTreplyModel {
         $lastreply = jssupportticket::$_db->get_row($query);
         $lastreply->message = jssupportticketphplib::JSST_htmlentities(($lastreply->message));
 
-        return json_encode($lastreply);
+        return wp_json_encode($lastreply);
     }
 
     function getAttachmentByReplyId($id){

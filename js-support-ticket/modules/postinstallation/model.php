@@ -20,6 +20,7 @@ class JSSTPostinstallationModel {
         $error = false;
         unset($data['action']);
         unset($data['form_request']);
+        $data = jssupportticket::JSST_sanitizeData($data); // JSST_sanitizeData() function uses wordpress santize functions
         foreach ($data as $key => $value) {
             $query = "UPDATE `" . jssupportticket::$_db->prefix . "js_ticket_config` SET `configvalue` = '" . esc_sql($value) . "' WHERE `configname`= '" . esc_sql($key) . "'";
             jssupportticket::$_db->query($query);

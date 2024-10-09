@@ -413,7 +413,7 @@ if (jssupportticket::$_config['offline'] == 2) {
                         }
                     ?>
 
-                    <img src="<?php echo JSST_PLUGIN_URL . "includes/images/dashboard/add-ticket.png"; ?>" alt="<?php echo esc_html(__('Create Ticket','js-support-ticket')); ?>" />
+                    <img src="<?php echo esc_url(JSST_PLUGIN_URL) . "includes/images/dashboard/add-ticket.png"; ?>" alt="<?php echo esc_html(__('Create Ticket','js-support-ticket')); ?>" />
                     <div class="js-support-ticket-title">
                         <?php echo esc_html(__('Submit Ticket','js-support-ticket')); ?>
                     </div>
@@ -425,7 +425,7 @@ if (jssupportticket::$_config['offline'] == 2) {
                     </a>
                 </div>
                 <div class="js-support-ticket-box">
-                    <img src="<?php echo JSST_PLUGIN_URL . "includes/images/dashboard/my-tickets.png"; ?>" alt="<?php echo esc_html(__('my ticket', 'js-support-ticket')); ?>" />
+                    <img src="<?php echo esc_url(JSST_PLUGIN_URL) . "includes/images/dashboard/my-tickets.png"; ?>" alt="<?php echo esc_html(__('my ticket', 'js-support-ticket')); ?>" />
                     <div class="js-support-ticket-title">
                         <?php echo esc_html(__('My Tickets','js-support-ticket')); ?>
                     </div>
@@ -437,7 +437,7 @@ if (jssupportticket::$_config['offline'] == 2) {
                     </a>
                 </div>
                 <div class="js-support-ticket-box">
-                    <img src="<?php echo JSST_PLUGIN_URL . "includes/images/dashboard/ticket-status.png"; ?>" alt="<?php echo esc_html(__('Ticket Status','js-support-ticket')); ?>" />
+                    <img src="<?php echo esc_url(JSST_PLUGIN_URL) . "includes/images/dashboard/ticket-status.png"; ?>" alt="<?php echo esc_html(__('Ticket Status','js-support-ticket')); ?>" />
                     <div class="js-support-ticket-title">
                         <?php echo esc_html(__('Ticket Status','js-support-ticket')); ?>
                     </div>
@@ -686,10 +686,10 @@ if (jssupportticket::$_config['offline'] == 2) {
                                     if ($ticket->lock == 1) {
                                         ?>
                                         <img class="ticketstatusimage <?php echo esc_attr($counter);
-                                        $counter = 'two'; ?>" src="<?php echo JSST_PLUGIN_URL . "includes/images/lock.png"; ?>" title="<?php echo esc_html(__('The ticket is locked', 'js-support-ticket')); ?>" />
+                                        $counter = 'two'; ?>" src="<?php echo esc_url(JSST_PLUGIN_URL) . "includes/images/lock.png"; ?>" title="<?php echo esc_html(__('The ticket is locked', 'js-support-ticket')); ?>" />
                                     <?php } ?>
                                     <?php if ($ticket->isoverdue == 1) { ?>
-                                            <img class="ticketstatusimage <?php echo esc_attr($counter); ?>" src="<?php echo JSST_PLUGIN_URL . "includes/images/over-due.png"; ?>" title="<?php echo esc_html(__('This ticket is marked as overdue', 'js-support-ticket')); ?>" />
+                                            <img class="ticketstatusimage <?php echo esc_attr($counter); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL) . "includes/images/over-due.png"; ?>" title="<?php echo esc_html(__('This ticket is marked as overdue', 'js-support-ticket')); ?>" />
                                     <?php } ?>
                                     <span class="js-ticket-status" style="color:<?php echo esc_attr($style); ?>">
                                         <?php echo esc_html($status); ?>
@@ -941,10 +941,10 @@ if (jssupportticket::$_config['offline'] == 2) {
                                     $counter = 'one';
                                     if ($ticket->lock == 1) { ?>
                                         <img class="ticketstatusimage <?php echo esc_attr($counter);
-                                            $counter = 'two'; ?>" src="<?php echo JSST_PLUGIN_URL . "includes/images/lock.png"; ?>" title="<?php echo esc_html(__('The ticket is locked', 'js-support-ticket')); ?>" />
+                                            $counter = 'two'; ?>" src="<?php echo esc_url(JSST_PLUGIN_URL) . "includes/images/lock.png"; ?>" title="<?php echo esc_html(__('The ticket is locked', 'js-support-ticket')); ?>" />
                                     <?php } ?>
                                     <?php if ($ticket->isoverdue == 1) { ?>
-                                            <img class="ticketstatusimage <?php echo esc_attr($counter); ?>" src="<?php echo JSST_PLUGIN_URL . "includes/images/over-due.png"; ?>" title="<?php echo esc_html(__('This ticket is marked as overdue', 'js-support-ticket')); ?>" />
+                                            <img class="ticketstatusimage <?php echo esc_attr($counter); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL) . "includes/images/over-due.png"; ?>" title="<?php echo esc_html(__('This ticket is marked as overdue', 'js-support-ticket')); ?>" />
                                     <?php } ?>
                                     <span class="js-ticket-status" style="color:<?php echo esc_attr($style); ?>">
                                         <?php echo esc_html($status); ?>

@@ -3,8 +3,8 @@ Contributors: rabilal
 Donate link: https://jshelpdesk.com/pricing/
 Tags:  helpdesk,ticket system,support,tickets,support ticket,support desk,help,paid support,knowledgebase,faq, support plugin, ticket plugin, support system, ticketing system,monitor desk, help desk, IMAP, Email Piping, agents, js support ticket
 Requires at least: 5.5
-Tested up to: 6.6.1
-Stable tag: 2.8.7
+Tested up to: 6.6.2
+Stable tag: 2.8.8
 Requires PHP: 7.4
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
@@ -242,6 +242,9 @@ Automatic updates should work like a charm; as always though, ensure you backup 
 21. Internal Mails
 
 == Changelog ==
+= 2.8.8 =
+* Security update
+
 = 2.8.7 =
 * Security update
 

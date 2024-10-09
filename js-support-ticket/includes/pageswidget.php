@@ -53,7 +53,7 @@ if (!defined('ABSPATH'))
 		$jshelpdeskpages = isset( $instance['jshelpdeskpages'] ) ?  $instance['jshelpdeskpages']  : 'jssupportticket';
 		?>
 			<p>
-				<label for="<?php echo esc_attr( $this->get_field_id( 'jshelpdeskpages' ) ); ?>"><?php _e( 'Help Desk Pages', 'js-support-ticket' ); ?>:</label>
+				<label for="<?php echo esc_attr( $this->get_field_id( 'jshelpdeskpages' ) ); ?>"><?php esc_html_e( 'Help Desk Pages', 'js-support-ticket' ); ?>:</label>
 				<select class="widefat" id="<?php echo esc_attr( $this->get_field_id( 'jshelpdeskpages' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'jshelpdeskpages' ) ); ?>" >
 					<option value="jssupportticket" <?php echo ( $jshelpdeskpages == 'jssupportticket' ) ? 'selected="selected"' : false; ?>><?php echo esc_html__('JS Help desk control panel','js-support-ticket'); ?></option>
 					<option value="jssupportticket_addticket" <?php echo ( $jshelpdeskpages == 'jssupportticket_addticket' ) ? 'selected="selected"' : false; ?>><?php echo esc_html__('Add ticket','js-support-ticket'); ?></option>

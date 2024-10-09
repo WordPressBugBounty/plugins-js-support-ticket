@@ -230,7 +230,7 @@ class JSSTfieldorderingModel {
                 $visible['visibleCondition'] = $data['visibleCondition'];
                 $visible['visibleValue'] = $data['visibleValue'];
                 $visible_array = array_map(array($this,'sanitize_custom_field'), $visible);
-                $data['visibleparams'] = json_encode($visible_array);
+                $data['visibleparams'] = wp_json_encode($visible_array);
                 //$data['required'] = 0;
 
                 $query = "SELECT visible_field FROM " . jssupportticket::$_db->prefix . "js_ticket_fieldsordering WHERE id = " . esc_sql($data['visibleParent']);
@@ -293,9 +293,9 @@ class JSSTfieldorderingModel {
                 $params['termsandconditions_page'] = $data['termsandconditions_page'];
             }
 
-                // $params = json_encode($params);
+                // $params = wp_json_encode($params);
                 $params_array = array_map(array($this,'sanitize_custom_field'), $params);
-                $data['userfieldparams'] = json_encode($params_array, JSON_UNESCAPED_UNICODE);
+                $data['userfieldparams'] = wp_json_encode($params_array, JSON_UNESCAPED_UNICODE);
 
             //}
             // for admin_only
@@ -408,7 +408,7 @@ class JSSTfieldorderingModel {
                 $childNew->$value[0] = "";
             }
         }
-        $childNew = json_encode( $childNew );
+        $childNew = wp_json_encode( $childNew );
         $child->userfieldparams = $childNew;
         $query = "UPDATE `" . jssupportticket::$_db->prefix . "js_ticket_fieldsordering` SET userfieldparams = '" . esc_sql($childNew) . "' WHERE id = " . esc_sql($child->id);
         jssupportticket::$_db->query($query);
@@ -441,7 +441,7 @@ class JSSTfieldorderingModel {
         $jsFunction = 'getDataOfSelectedField();';
         $html = JSSTformfield::select('parentfield', $data, (isset($parent) && $parent !='') ? $parent : '', esc_html(__('Select', 'js-support-ticket')) .'&nbsp;'. esc_html(__('Parent Field', 'js-support-ticket')), array('onchange' => $jsFunction, 'class' => 'inputbox one js-form-select-field', 'data-validation' => 'required'));
         $html = jssupportticketphplib::JSST_htmlentities($html);
-        $data = json_encode($html);
+        $data = wp_json_encode($html);
         return $data;
     }
 
@@ -553,7 +553,7 @@ class JSSTfieldorderingModel {
         }
         $html .= " <input type='hidden' name='arraynames' value='" . esc_attr($fieldsvar) . "' />";
         $html = jssupportticketphplib::JSST_htmlentities($html);
-        $html = json_encode($html);
+        $html = wp_json_encode($html);
         return $html;
     }
 
@@ -575,7 +575,7 @@ class JSSTfieldorderingModel {
                     <div class="userpopup-heading" >
                     ' . esc_html(__("Edit Field", 'js-support-ticket')) . '
                     </div>
-                    <img id="popup_cross" class="userpopup-close" onClick="close_popup();" src="' . JSST_PLUGIN_URL . 'includes/images/close-icon-white.png" alt="'. esc_html(__('Close','js-support-ticket')).'">
+                    <img id="popup_cross" class="userpopup-close" onClick="close_popup();" src="' . esc_url(JSST_PLUGIN_URL) . 'includes/images/close-icon-white.png" alt="'. esc_html(__('Close','js-support-ticket')).'">
                 </div>';
         $adminurl = admin_url("?page=fieldordering&task=savefeild&formid=".esc_attr($data->multiformid));
         $html .= '<form id="adminForm" class="popup-field-from" method="post" action="' . wp_nonce_url($adminurl ,"save-feild").'">';
@@ -632,7 +632,7 @@ class JSSTfieldorderingModel {
         $html .='</div>
             </form>';
         $html = jssupportticketphplib::JSST_htmlentities($html);
-        return json_encode($html);
+        return wp_json_encode($html);
     }
 
     function deleteUserField($id){
@@ -824,7 +824,7 @@ class JSSTfieldorderingModel {
         $textvar =  ($flag == 1) ? esc_html(__('Select', 'js-support-ticket')).' '.esc_html($data->fieldtitle) : '';
         $html = JSSTformfield::select($childfield, $comboOptions, '',$textvar, array('data-validation' => '','class' => 'inputbox one js-form-select-field js-ticket-custom-select', 'onchange' => $jsFunction));
         $html = jssupportticketphplib::JSST_htmlentities($html);
-        $phtml = json_encode($html);
+        $phtml = wp_json_encode($html);
         return $phtml;
     }
 

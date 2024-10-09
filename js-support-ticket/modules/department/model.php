@@ -70,6 +70,10 @@ class JSSTdepartmentModel {
     }
 
     function storeDepartment($data) {
+        $nonce = JSSTrequest::getVar('_wpnonce');
+        if (! wp_verify_nonce( $nonce, 'save-department') ) {
+            die( 'Security check Failed' );
+        }
         if ( in_array('agent',jssupportticket::$_active_addons) && JSSTincluder::getJSModel('agent')->isUserStaff()) {
             $task_allow = ($data['id'] == '') ? 'Add Department' : 'Edit Department';
             $allowed = JSSTincluder::getJSModel('userpermissions')->checkPermissionGrantedForTask($task_allow);

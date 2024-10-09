@@ -13,7 +13,6 @@ if (jssupportticket::$_config['offline'] == 2) {
         wp_enqueue_script('jquery-ui-datepicker');
         wp_enqueue_script('file_validate.js', JSST_PLUGIN_URL . 'includes/js/file_validate.js');
 
-		$protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' || $_SERVER['SERVER_PORT'] == 443) ? "https://" : "http://";
 		wp_enqueue_style('jquery-ui-css', JSST_PLUGIN_URL . 'includes/css/jquery-ui-smoothness.css');
         $jssupportticket_js ="
             function onSubmit(token) {
@@ -182,7 +181,7 @@ if (jssupportticket::$_config['offline'] == 2) {
                         ?>
                         <div class="js-ticket-error-message-wrapper">
                             <div class="js-ticket-message-image-wrapper">
-                                <img class="js-ticket-message-image" alt="message image" src="<?php echo JSST_PLUGIN_URL.'/includes/images/error/not-permission-icon.png'; ?>">
+                                <img class="js-ticket-message-image" alt="message image" src="<?php echo esc_url(JSST_PLUGIN_URL).'/includes/images/error/not-permission-icon.png'; ?>">
                             </div>
                             <div class="js-ticket-messages-data-wrapper">
                                 <span class="js-ticket-messages-main-text">

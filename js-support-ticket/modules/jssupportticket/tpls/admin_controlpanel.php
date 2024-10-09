@@ -287,7 +287,7 @@ wp_add_inline_script('ticket-google-charts-handle',$jssupportticket_js);
                             <div class="js-cp-cnt-title">
                                 <span class="js-cp-cnt-title-txt">
                                     <?php echo esc_html(__('Statistics', 'js-support-ticket')); ?>
-                                    <?php $curdate = date_i18n('Y-m-d'); $fromdate = date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime("now -1 month")); echo " ($fromdate - $curdate)"; ?>
+                                    <?php $curdate = date_i18n('Y-m-d'); $fromdate = date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime("now -1 month")); echo " (".esc_html($fromdate)." - ".esc_html($curdate).")"; ?>
                                 </span>
                             </div>
                             <div id="js-pm-grapharea">

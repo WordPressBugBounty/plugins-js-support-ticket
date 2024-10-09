@@ -121,14 +121,6 @@ class jssupportticketphplib {
         return $output;
     }
 
-    public static function JSST_str_rot13($str){
-        $output = null;
-        if ($str !== null) {
-            $output = str_rot13($str);
-        }
-        return $output;
-    }
-
     public static function JSST_preg_replace($pattern, $replacement, $subject, $limit = -1, &$count = null){
         $output = null;
         if ($pattern !== null && $replacement !== null && $subject !== null) {

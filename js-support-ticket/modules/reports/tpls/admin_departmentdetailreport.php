@@ -3,7 +3,6 @@
     die('Restricted Access');
 ?>
 <?php
-$protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' || $_SERVER['SERVER_PORT'] == 443) ? "https://" : "http://";
 wp_enqueue_script('jquery-ui-datepicker');
 wp_enqueue_style('jquery-ui-css', JSST_PLUGIN_URL . 'includes/css/jquery-ui-smoothness.css');
 wp_enqueue_style('status-graph', JSST_PLUGIN_URL . 'includes/css/status_graph.css');
@@ -312,7 +311,7 @@ $link_export = admin_url('admin.php?page=export&task='.esc_attr($t_name).'&actio
 				            $mins = floor($ticket->time / 60);
 				            $mins = floor($mins % 60);
 				            $secs = floor($ticket->time % 60);
-				            $avgtime = sprintf('%02d:%02d:%02d', $hours, $mins, $secs);
+				            $avgtime = sprintf('%02d:%02d:%02d', esc_html($hours), esc_html($mins), esc_html($secs));
 				        }
 
 						if(in_array('feedback', jssupportticket::$_active_addons)){

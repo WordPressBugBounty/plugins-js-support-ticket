@@ -64,6 +64,10 @@ class JSSTgdprModel {
     }
 
     function storeUserEraseRequest($data){
+        $nonce = JSSTrequest::getVar('_wpnonce');
+        if (! wp_verify_nonce( $nonce, 'save-usereraserequest') ) {
+            die( 'Security check Failed' );
+        }
     	if (!$data['id']) { //new
     	    $data['created'] = date_i18n('Y-m-d H:i:s');
             $data['uid'] = JSSTincluder::getObjectClass('user')->uid();
@@ -282,7 +286,7 @@ class JSSTgdprModel {
                     $mins = floor($ticket->time / 60);
                     $mins = floor($mins % 60);
                     $secs = floor($ticket->time % 60);
-                    $time = sprintf('%02d:%02d:%02d', $hours, $mins, $secs);
+                    $time = sprintf('%02d:%02d:%02d', esc_html($hours), esc_html($mins), esc_html($secs));
                 }
                 switch($ticket->status){
                     case 0:

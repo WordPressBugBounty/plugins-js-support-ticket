@@ -88,9 +88,9 @@
                                     <?php echo esc_html(__('Required', 'js-support-ticket'));echo " : "; ?>
                                 </span>
                                 <?php if ($field->required == 1) { ?>
-                                    <img alt="<?php echo esc_html(__('good','js-support-ticket')); ?>" height="15" width="15" src="<?php echo JSST_PLUGIN_URL . 'includes/images/good.png'; ?>" />
+                                    <img alt="<?php echo esc_html(__('good','js-support-ticket')); ?>" height="15" width="15" src="<?php echo esc_url(JSST_PLUGIN_URL) . 'includes/images/good.png'; ?>" />
                                 <?php }else{ ?>
-                                    <img alt="<?php echo esc_html(__('Close','js-support-ticket')); ?>" height="15" width="15" src="<?php echo JSST_PLUGIN_URL . 'includes/images/close.png'; ?>" />
+                                    <img alt="<?php echo esc_html(__('Close','js-support-ticket')); ?>" height="15" width="15" src="<?php echo esc_url(JSST_PLUGIN_URL) . 'includes/images/close.png'; ?>" />
                                 <?php } ?>
                             </td>
                             <td>

@@ -61,7 +61,7 @@ class JSSTemailModel {
                             '{MESSAGE}' => $Message,
                             '{DEPARTMENT}' => $ticketRecord->departmentname,
                             '{PRIORITY}' => $ticketRecord->priority,
-                            '{CURRENT_YEAR}' => date('Y')
+                            '{CURRENT_YEAR}' => gmdate('Y')
                         );
 
                         // code for handling custom fields start
@@ -145,7 +145,7 @@ class JSSTemailModel {
                         $tokenarray['emailaddress']=$Email;
                         $tokenarray['trackingid']=$TrackingId;
                         $tokenarray['sitelink']=JSSTincluder::getJSModel('jssupportticket')->getEncriptedSiteLink();
-                        $token = json_encode($tokenarray);
+                        $token = wp_json_encode($tokenarray);
                         include_once JSST_PLUGIN_PATH . 'includes/encoder.php';
                         $encoder = new JSSTEncoder();
                         $encryptedtext = $encoder->encrypt($token);
@@ -219,7 +219,7 @@ class JSSTemailModel {
                             '{DEPARTMENT}' => $ticketRecord->departmentname,
                             '{PRIORITY}' => $ticketRecord->priority,
                             '{TICKET_HISTORY}' => $ticketHistory,
-                            '{CURRENT_YEAR}' => date('Y')
+                            '{CURRENT_YEAR}' => gmdate('Y')
 
                         );
                         // code for handling custom fields start
@@ -288,7 +288,7 @@ class JSSTemailModel {
                             $link = esc_url(jssupportticket::makeUrl(array('jstmod'=>'ticket', 'jstlay'=>'ticketdetail','jssupportticketid'=>$id,'jsstpageid'=>jssupportticket::getPageid())));
                             $tokenarray['emailaddress']=$Email;
                             $tokenarray['trackingid']=$TrackingId;
-                            $token = json_encode($tokenarray);
+                            $token = wp_json_encode($tokenarray);
                             include_once JSST_PLUGIN_PATH . 'includes/encoder.php';
                             $encoder = new JSSTEncoder();
                             $encryptedtext = $encoder->encrypt($token);
@@ -321,7 +321,7 @@ class JSSTemailModel {
                             '{SITETITLE}' => jssupportticket::$_config['title'],
                             '{TRACKINGID}' => $TrackingId,
                             '{SUBJECT}' => $Subject,
-                            '{CURRENT_YEAR}' => date('Y')
+                            '{CURRENT_YEAR}' => gmdate('Y')
                         );
                         $object = $this->getSenderEmailAndName(null);
                         $senderEmail = $object->email;
@@ -400,7 +400,7 @@ class JSSTemailModel {
                             '{DEPARTMENT}' => $ticketRecord->departmentname,
                             '{PRIORITY}' => $ticketRecord->priority,
                             '{TICKET_HISTORY}' => $ticketHistory,
-                            '{CURRENT_YEAR}' => date('Y')
+                            '{CURRENT_YEAR}' => gmdate('Y')
                         );
                         // code for handling custom fields start
                         $fvalue = '';
@@ -470,7 +470,7 @@ class JSSTemailModel {
                             $tokenarray['emailaddress']=$Email;
                             $tokenarray['trackingid']=$TrackingId;
                             $tokenarray['sitelink']=JSSTincluder::getJSModel('jssupportticket')->getEncriptedSiteLink();
-                            $token = json_encode($tokenarray);
+                            $token = wp_json_encode($tokenarray);
                             include_once JSST_PLUGIN_PATH . 'includes/encoder.php';
                             $encoder = new JSSTEncoder();
                             $encryptedtext = $encoder->encrypt($token);
@@ -515,7 +515,7 @@ class JSSTemailModel {
                             '{DEPARTMENT}' => $ticketRecord->departmentname,
                             '{PRIORITY}' => $ticketRecord->priority,
                             '{TICKET_HISTORY}' => $ticketHistory,
-                            '{CURRENT_YEAR}' => date('Y')
+                            '{CURRENT_YEAR}' => gmdate('Y')
                         );
                         // code for handling custom fields start
                         $fvalue = '';
@@ -583,7 +583,7 @@ class JSSTemailModel {
                             $tokenarray['emailaddress']=$Email;
                             $tokenarray['trackingid']=$TrackingId;
                             $tokenarray['sitelink']=JSSTincluder::getJSModel('jssupportticket')->getEncriptedSiteLink();
-                            $token = json_encode($tokenarray);
+                            $token = wp_json_encode($tokenarray);
                             include_once JSST_PLUGIN_PATH . 'includes/encoder.php';
                             $encoder = new JSSTEncoder();
                             $encryptedtext = $encoder->encrypt($token);
@@ -627,7 +627,7 @@ class JSSTemailModel {
                             '{DEPARTMENT}' => $ticketRecord->departmentname,
                             '{PRIORITY}' => $ticketRecord->priority,
                             '{TICKET_HISTORY}' => $ticketHistory,
-                            '{CURRENT_YEAR}' => date('Y')
+                            '{CURRENT_YEAR}' => gmdate('Y')
                         );
                         // code for handling custom fields start
                         $fvalue = '';
@@ -728,7 +728,7 @@ class JSSTemailModel {
                             '{DEPARTMENT}' => $ticketRecord->departmentname,
                             '{PRIORITY}' => $ticketRecord->priority,
                             '{TICKET_HISTORY}' => $ticketHistory,
-                            '{CURRENT_YEAR}' => date('Y')
+                            '{CURRENT_YEAR}' => gmdate('Y')
                         );
                         // code for handling custom fields start
                         $fvalue = '';
@@ -828,7 +828,7 @@ class JSSTemailModel {
                             '{DEPARTMENT}' => $ticketRecord->departmentname,
                             '{PRIORITY}' => $ticketRecord->priority,
                             '{TICKET_HISTORY}' => $ticketHistory,
-                            '{CURRENT_YEAR}' => date('Y')
+                            '{CURRENT_YEAR}' => gmdate('Y')
                         );
                         // code for handling custom fields start
                         $fvalue = '';
@@ -966,7 +966,7 @@ class JSSTemailModel {
                             '{DEPARTMENT}' => $ticketRecord->departmentname,
                             '{PRIORITY}' => $ticketRecord->priority,
                             '{TICKET_HISTORY}' => $ticketHistory,
-                            '{CURRENT_YEAR}' => date('Y')
+                            '{CURRENT_YEAR}' => gmdate('Y')
                         );
                         // code for handling custom fields start
                         $fvalue = '';
@@ -1064,7 +1064,7 @@ class JSSTemailModel {
                             '{TRACKINGID}' => $TrackingId,
                             '{DEPARTMENT}' => $ticketRecord->departmentname,
                             '{PRIORITY}' => $ticketRecord->priority,
-                            '{CURRENT_YEAR}' => date('Y')
+                            '{CURRENT_YEAR}' => gmdate('Y')
                         );
                         // code for handling custom fields start
                         $fvalue = '';
@@ -1155,7 +1155,7 @@ class JSSTemailModel {
                             '{TRACKINGID}' => $TrackingId,
                             '{DEPARTMENT}' => $ticketRecord->departmentname,
                             '{TICKET_HISTORY}' => $ticketHistory,
-                            '{CURRENT_YEAR}' => date('Y')
+                            '{CURRENT_YEAR}' => gmdate('Y')
                         );
                         // code for handling custom fields start
                         $fvalue = '';
@@ -1251,7 +1251,7 @@ class JSSTemailModel {
                             '{TRACKINGID}' => $TrackingId,
                             '{DEPARTMENT_TITLE}' => $ticketRecord->departmentname,
                             '{PRIORITY}' => $ticketRecord->priority,
-                            '{CURRENT_YEAR}' => date('Y')
+                            '{CURRENT_YEAR}' => gmdate('Y')
                         );
                         // code for handling custom fields start
                         $fvalue = '';
@@ -1392,7 +1392,7 @@ class JSSTemailModel {
                             '{DEPARTMENT}' => $ticketRecord->departmentname,
                             '{PRIORITY}' => $ticketRecord->priority,
                             '{TICKET_HISTORY}' => $ticketHistory,
-                            '{CURRENT_YEAR}' => date('Y')
+                            '{CURRENT_YEAR}' => gmdate('Y')
                         );
                         // code for handling custom fields start
                         $fvalue = '';
@@ -1445,7 +1445,7 @@ class JSSTemailModel {
                             '{DEPARTMENT}' => $ticketRecord->departmentname,
                             '{PRIORITY}' => $ticketRecord->priority,
                             '{TICKET_HISTORY}' => $ticketHistory,
-                            '{CURRENT_YEAR}' => date('Y')
+                            '{CURRENT_YEAR}' => gmdate('Y')
                         );
                         // code for handling custom fields start
                         $fvalue = '';
@@ -1506,7 +1506,7 @@ class JSSTemailModel {
                             '{SUBJECT}' => $Subject,
                             '{DEPARTMENT}' => $ticketRecord->departmentname,
                             '{PRIORITY}' => $ticketRecord->priority,
-                            '{CURRENT_YEAR}' => date('Y')
+                            '{CURRENT_YEAR}' => gmdate('Y')
                         );
                         // code for handling custom fields start
                         $fvalue = '';
@@ -1555,7 +1555,7 @@ class JSSTemailModel {
                         $tokenarray['emailaddress']=$Email;
                         $tokenarray['trackingid']=$TrackingId;
                         $tokenarray['sitelink']=JSSTincluder::getJSModel('jssupportticket')->getEncriptedSiteLink();
-                        $token = json_encode($tokenarray);
+                        $token = wp_json_encode($tokenarray);
                         include_once JSST_PLUGIN_PATH . 'includes/encoder.php';
                         $encoder = new JSSTEncoder();
                         $encryptedtext = $encoder->encrypt($token);
@@ -1572,7 +1572,7 @@ class JSSTemailModel {
                             '{/LINK}' => $linkclosing,
                             '{DEPARTMENT}' => $ticketRecord->departmentname,
                             '{PRIORITY}' => $ticketRecord->priority,
-                            '{CURRENT_YEAR}' => date('Y')
+                            '{CURRENT_YEAR}' => gmdate('Y')
                         );
                         // code for handling custom fields start
                         $fvalue = '';
@@ -1622,7 +1622,7 @@ class JSSTemailModel {
                         $matcharray = array(
                             '{SITETITLE}' => jssupportticket::$_config['title'],
                             '{EMAIL_ADDRESS}' => $Email,
-                            '{CURRENT_YEAR}' => date('Y')
+                            '{CURRENT_YEAR}' => gmdate('Y')
                         );
                         $object = $this->getDefaultSenderEmailAndName();
                         $senderEmail = $object->email;
@@ -1691,7 +1691,7 @@ class JSSTemailModel {
                         $matcharray = array(
                             '{SITETITLE}' => jssupportticket::$_config['title'],
                             '{EMAIL_ADDRESS}' => $Email,
-                            '{CURRENT_YEAR}' => date('Y')
+                            '{CURRENT_YEAR}' => gmdate('Y')
                         );
                         $object = $this->getSenderEmailAndName($id);
                         $senderEmail = $object->email;
@@ -1766,7 +1766,7 @@ class JSSTemailModel {
                             '{AGENT_NAME}' => $mailRecord->sendername,
                             '{SUBJECT}' => $mailRecord->subject,
                             '{MESSAGE}' => $mailRecord->message,
-                            '{CURRENT_YEAR}' => date('Y')
+                            '{CURRENT_YEAR}' => gmdate('Y')
                         );
                         $object = $this->getSenderEmailAndName(null);
                         $senderEmail = $object->email;
@@ -1792,7 +1792,7 @@ class JSSTemailModel {
                             '{AGENT_NAME}' => $mailRecord->sendername,
                             '{SUBJECT}' => $mailRecord->subject,
                             '{MESSAGE}' => $mailRecord->message,
-                            '{CURRENT_YEAR}' => date('Y')
+                            '{CURRENT_YEAR}' => gmdate('Y')
                         );
                         $object = $this->getSenderEmailAndName(null);
                         $senderEmail = $object->email;
@@ -1818,7 +1818,7 @@ class JSSTemailModel {
                         $matcharray = array(
                             '{SITETITLE}' => jssupportticket::$_config['title'],
                             '{USERNAME}' => jssupportticket::$_data['mail_data']['name'],
-                            '{CURRENT_YEAR}' => date('Y')
+                            '{CURRENT_YEAR}' => gmdate('Y')
                         );
                         $object = $this->getSenderEmailAndName(null);
                         $senderEmail = $object->email;
@@ -1846,7 +1846,7 @@ class JSSTemailModel {
                         $matcharray = array(
                             '{SITETITLE}' => jssupportticket::$_config['title'],
                             '{AGENT_NAME}' => $staffname,
-                            '{CURRENT_YEAR}' => date('Y')
+                            '{CURRENT_YEAR}' => gmdate('Y')
                         );
                         $object = $this->getSenderEmailAndName(null);
                         $senderEmail = $object->email;
@@ -2293,7 +2293,7 @@ class JSSTemailModel {
             $error['text'] = 'Message could not be sent. Mailer Error: '. $mail->ErrorInfo;
             $error['type'] = 1;
         }
-        return json_encode($error);;
+        return wp_json_encode($error);;
 
     }
 

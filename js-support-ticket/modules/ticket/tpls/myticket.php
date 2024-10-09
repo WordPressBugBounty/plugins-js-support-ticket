@@ -7,7 +7,6 @@
 wp_enqueue_style('status-graph', JSST_PLUGIN_URL . 'includes/css/status_graph.css');
 if (jssupportticket::$_config['offline'] == 2) {
     if (JSSTincluder::getObjectClass('user')->uid() != 0) {
-        $protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' || $_SERVER['SERVER_PORT'] == 443) ? "https://" : "http://";
         wp_enqueue_script('jquery-ui-datepicker');
         wp_enqueue_style('jquery-ui-css', JSST_PLUGIN_URL . 'includes/css/jquery-ui-smoothness.css');
         $jssupportticket_js ='
@@ -322,12 +321,12 @@ if (jssupportticket::$_config['offline'] == 2) {
         ?>
         <div class="js-ticket-sorting js-col-md-12">
             <?php /*
-            <span class="js-col-md-2 js-ticket-sorting-link"><a href="<?php echo esc_attr(jssupportticket::$_sortlinks['subject']); ?>" class="jssortlink <?php if (jssupportticket::$_sorton == 'subject') echo 'selected' ?>"><?php echo esc_html($field_array['subject']); ?><?php if (jssupportticket::$_sorton == 'subject') { ?> <img alt="image" src="<?php echo JSST_PLUGIN_URL . 'includes/images/ticketdetailicon/' . esc_attr($img) ?>"> <?php } ?></a></span>
-            <span class="js-col-md-2 js-ticket-sorting-link"><a href="<?php echo esc_attr(jssupportticket::$_sortlinks['priority']); ?>" class="jssortlink <?php if (jssupportticket::$_sorton == 'priority') echo 'selected' ?>"><?php echo esc_html(jssupportticket::JSST_getVarValue($field_array['priority'])); ?><?php if (jssupportticket::$_sorton == 'priority') { ?> <img alt="image" src="<?php echo JSST_PLUGIN_URL . 'includes/images/ticketdetailicon/' . esc_attr($img) ?>"> <?php } ?></a></span>
-            <span class="js-col-md-2 js-ticket-sorting-link"><a href="<?php echo esc_attr(jssupportticket::$_sortlinks['ticketid']); ?>" class="jssortlink <?php if (jssupportticket::$_sorton == 'ticketid') echo 'selected' ?>"><?php echo esc_html(__('Ticket ID', 'js-support-ticket')); ?><?php if (jssupportticket::$_sorton == 'ticketid') { ?> <img alt="image" src="<?php echo JSST_PLUGIN_URL . 'includes/images/ticketdetailicon/' . esc_attr($img) ?>"> <?php } ?></a></span>
-            <span class="js-col-md-2 js-ticket-sorting-link"><a href="<?php echo esc_attr(jssupportticket::$_sortlinks['isanswered']); ?>" class="jssortlink <?php if (jssupportticket::$_sorton == 'isanswered') echo 'selected' ?>"><?php echo esc_html(__('Answered', 'js-support-ticket')); ?><?php if (jssupportticket::$_sorton == 'isanswered') { ?> <img alt="image" src="<?php echo JSST_PLUGIN_URL . 'includes/images/ticketdetailicon/' . esc_attr($img) ?>"> <?php } ?></a></span>
-            <span class="js-col-md-2 js-ticket-sorting-link"><a href="<?php echo esc_attr(jssupportticket::$_sortlinks['status']); ?>" class="jssortlink <?php if (jssupportticket::$_sorton == 'status') echo 'selected' ?>"><?php echo esc_html($field_array['status']); ?><?php if (jssupportticket::$_sorton == 'status') { ?> <img alt="image" src="<?php echo JSST_PLUGIN_URL . 'includes/images/ticketdetailicon/' . esc_attr($img) ?>"> <?php } ?></a></span>
-            <span class="js-col-md-2 js-ticket-sorting-link"><a href="<?php echo esc_attr(jssupportticket::$_sortlinks['created']); ?>" class="jssortlink <?php if (jssupportticket::$_sorton == 'created') echo 'selected' ?>"><?php echo esc_html(__('Created', 'js-support-ticket')); ?><?php if (jssupportticket::$_sorton == 'created') { ?> <img alt="image" src="<?php echo JSST_PLUGIN_URL . 'includes/images/ticketdetailicon/' . esc_attr($img) ?>"> <?php } ?></a></span>
+            <span class="js-col-md-2 js-ticket-sorting-link"><a href="<?php echo esc_attr(jssupportticket::$_sortlinks['subject']); ?>" class="jssortlink <?php if (jssupportticket::$_sorton == 'subject') echo 'selected' ?>"><?php echo esc_html($field_array['subject']); ?><?php if (jssupportticket::$_sorton == 'subject') { ?> <img alt="image" src="<?php echo esc_url(JSST_PLUGIN_URL) . 'includes/images/ticketdetailicon/' . esc_attr($img) ?>"> <?php } ?></a></span>
+            <span class="js-col-md-2 js-ticket-sorting-link"><a href="<?php echo esc_attr(jssupportticket::$_sortlinks['priority']); ?>" class="jssortlink <?php if (jssupportticket::$_sorton == 'priority') echo 'selected' ?>"><?php echo esc_html(jssupportticket::JSST_getVarValue($field_array['priority'])); ?><?php if (jssupportticket::$_sorton == 'priority') { ?> <img alt="image" src="<?php echo esc_url(JSST_PLUGIN_URL) . 'includes/images/ticketdetailicon/' . esc_attr($img) ?>"> <?php } ?></a></span>
+            <span class="js-col-md-2 js-ticket-sorting-link"><a href="<?php echo esc_attr(jssupportticket::$_sortlinks['ticketid']); ?>" class="jssortlink <?php if (jssupportticket::$_sorton == 'ticketid') echo 'selected' ?>"><?php echo esc_html(__('Ticket ID', 'js-support-ticket')); ?><?php if (jssupportticket::$_sorton == 'ticketid') { ?> <img alt="image" src="<?php echo esc_url(JSST_PLUGIN_URL) . 'includes/images/ticketdetailicon/' . esc_attr($img) ?>"> <?php } ?></a></span>
+            <span class="js-col-md-2 js-ticket-sorting-link"><a href="<?php echo esc_attr(jssupportticket::$_sortlinks['isanswered']); ?>" class="jssortlink <?php if (jssupportticket::$_sorton == 'isanswered') echo 'selected' ?>"><?php echo esc_html(__('Answered', 'js-support-ticket')); ?><?php if (jssupportticket::$_sorton == 'isanswered') { ?> <img alt="image" src="<?php echo esc_url(JSST_PLUGIN_URL) . 'includes/images/ticketdetailicon/' . esc_attr($img) ?>"> <?php } ?></a></span>
+            <span class="js-col-md-2 js-ticket-sorting-link"><a href="<?php echo esc_attr(jssupportticket::$_sortlinks['status']); ?>" class="jssortlink <?php if (jssupportticket::$_sorton == 'status') echo 'selected' ?>"><?php echo esc_html($field_array['status']); ?><?php if (jssupportticket::$_sorton == 'status') { ?> <img alt="image" src="<?php echo esc_url(JSST_PLUGIN_URL) . 'includes/images/ticketdetailicon/' . esc_attr($img) ?>"> <?php } ?></a></span>
+            <span class="js-col-md-2 js-ticket-sorting-link"><a href="<?php echo esc_attr(jssupportticket::$_sortlinks['created']); ?>" class="jssortlink <?php if (jssupportticket::$_sorton == 'created') echo 'selected' ?>"><?php echo esc_html(__('Created', 'js-support-ticket')); ?><?php if (jssupportticket::$_sorton == 'created') { ?> <img alt="image" src="<?php echo esc_url(JSST_PLUGIN_URL) . 'includes/images/ticketdetailicon/' . esc_attr($img) ?>"> <?php } ?></a></span>
             */ ?>
             <div class="js-ticket-sorting-left">
                 <div class="js-ticket-sorting-heading">
@@ -346,7 +345,7 @@ if (jssupportticket::$_config['offline'] == 2) {
                         <option value="<?php echo esc_attr(jssupportticket::$_sortlinks['created']); ?>"  <?php if (jssupportticket::$_sorton == 'created') echo 'selected' ?>><?php echo esc_html(__("Created",'js-support-ticket')); ?></option>
                     </select>
                     <a href="#" class="js-admin-sort-btn" title="<?php echo esc_html(__('sort','js-support-ticket')); ?>">
-                        <img alt="<?php echo esc_html(__('sort','js-support-ticket')); ?>" src="<?php echo JSST_PLUGIN_URL . 'includes/images/' . esc_attr($img) ?>">
+                        <img alt="<?php echo esc_html(__('sort','js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL) . 'includes/images/' . esc_attr($img) ?>">
                     </a>
                 </div>
             </div>
@@ -430,10 +429,10 @@ if (jssupportticket::$_config['offline'] == 2) {
                                 if ($ticket->lock == 1) {
                                     ?>
                                     <img class="ticketstatusimage <?php echo esc_attr($counter);
-                                    $counter = 'two'; ?>" src="<?php echo JSST_PLUGIN_URL . "includes/images/lock.png"; ?>" title="<?php echo esc_html(__('The ticket is locked', 'js-support-ticket')); ?>" />
+                                    $counter = 'two'; ?>" src="<?php echo esc_url(JSST_PLUGIN_URL) . "includes/images/lock.png"; ?>" title="<?php echo esc_html(__('The ticket is locked', 'js-support-ticket')); ?>" />
                                 <?php } ?>
                                 <?php if ($ticket->isoverdue == 1) { ?>
-                                        <img class="ticketstatusimage <?php echo esc_attr($counter); ?>" src="<?php echo JSST_PLUGIN_URL . "includes/images/over-due.png"; ?>" title="<?php echo esc_html(__('This ticket is marked as overdue', 'js-support-ticket')); ?>" />
+                                        <img class="ticketstatusimage <?php echo esc_attr($counter); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL) . "includes/images/over-due.png"; ?>" title="<?php echo esc_html(__('This ticket is marked as overdue', 'js-support-ticket')); ?>" />
                                 <?php } ?>
                                 <?php echo esc_html($status); ?>
                             </span>

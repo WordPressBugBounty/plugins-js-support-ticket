@@ -187,7 +187,7 @@ wp_add_inline_script('js-support-ticket-main-js',$jssupportticket_js);
                                             ?>
                                             <span class="input-field-wrapper">
                                                 <input name="<?php echo esc_attr($textvar); ?>" id="<?php echo esc_attr($textvar); ?>" value="<?php echo esc_attr($each); ?>" class="inputbox one user-field" type="text">
-                                                <img alt="<?php echo esc_html(__('Delete', 'js-support-ticket')); ?>" class="input-field-remove-img" src="<?php echo JSST_PLUGIN_URL ?>includes/images/delete.png">
+                                                <img alt="<?php echo esc_html(__('Delete', 'js-support-ticket')); ?>" class="input-field-remove-img" src="<?php echo esc_url(JSST_PLUGIN_URL) ?>includes/images/delete.png">
                                             </span><?php
                                         }
                                     }

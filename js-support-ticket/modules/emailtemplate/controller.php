@@ -11,6 +11,7 @@ class JSSTemailtemplateController {
 
     function handleRequest() {
         $layout = JSSTrequest::getLayout('jstlay', null, 'emailtemplates');
+        jssupportticket::$_data['sanitized_args']['jsst_nonce'] = esc_html(wp_create_nonce('jsst_nonce'));
         if (self::canaddfile()) {
             switch ($layout) {
                 case 'admin_emailtemplates':
@@ -18,6 +19,8 @@ class JSSTemailtemplateController {
                     jssupportticket::$_data[1] = $tempfor;
                     JSSTincluder::getJSModel('emailtemplate')->getTemplate($tempfor);
                     break;
+                default:
+                    exit;
             }
             $module = (is_admin()) ? 'page' : 'jstmod';
             $module = JSSTrequest::getVar($module, null, 'emailtemplate');
@@ -26,12 +29,15 @@ class JSSTemailtemplateController {
     }
 
     function canaddfile() {
-        if (isset($_POST['form_request']) && $_POST['form_request'] == 'jssupportticket')
-            return false;
-        elseif (isset($_GET['action']) && $_GET['action'] == 'jstask')
-            return false;
-        else
-            return true;
+        $nonce_value = JSSTrequest::getVar('jsst_nonce');
+        if ( wp_verify_nonce( $nonce_value, 'jsst_nonce') ) {
+            if (isset($_POST['form_request']) && $_POST['form_request'] == 'jssupportticket')
+                return false;
+            elseif (isset($_GET['action']) && $_GET['action'] == 'jstask')
+                return false;
+            else
+                return true;
+        }
     }
 
     static function saveemailtemplate() {

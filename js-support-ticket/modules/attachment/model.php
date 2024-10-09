@@ -89,7 +89,7 @@ class JSSTattachmentModel {
             $path = $path . '/attachmentdata';
 
             $path = $path . '/ticket/'.$foldername.'/' . $filename;
-            unlink($path);
+            wp_delete_file($path);
             //$files = glob($path.'/*.*');
             //array_map('unlink', $files); // delete all file in the direcoty
             JSSTmessage::setMessage(esc_html(__('The attachment has been removed', 'js-support-ticket')), 'updated');
@@ -238,7 +238,7 @@ class JSSTattachmentModel {
         $filelist = jssupportticketphplib::JSST_substr($filelist, 0, jssupportticketphplib::JSST_strlen($filelist) - 1);
         $v_list = $archive->create($filelist, PCLZIP_OPT_REMOVE_PATH, $directory);
         if ($v_list == 0) {
-            die("Error : '" . $archive->errorInfo() . "'");
+            die("Error : '" . wp_kses($archive->errorInfo(), JSST_ALLOWED_TAGS) . "'");
         }
         $file = $path . '/alldownloads.zip';
         header('Content-Description: File Transfer');
@@ -252,11 +252,15 @@ class JSSTattachmentModel {
         //ob_clean();
         flush();
         readfile($file);
-        @unlink($file);
+        if ( file_exists( $file ) ) {
+            wp_delete_file($file);
+        }
         $path = JSST_PLUGIN_PATH;
         $path .= 'zipdownloads';
         $path .= '/' . $randomfolder;
-        @unlink($path . '/index.html');
+        if ( file_exists( $path . '/index.html' ) ) {
+            wp_delete_file($path . '/index.html');
+        }
         if (file_exists($path)) {
             rmdir($path);
         }
@@ -297,7 +301,7 @@ class JSSTattachmentModel {
         $filelist = jssupportticketphplib::JSST_substr($filelist, 0, jssupportticketphplib::JSST_strlen($filelist) - 1);
         $v_list = $archive->create($filelist, PCLZIP_OPT_REMOVE_PATH, $directory);
         if ($v_list == 0) {
-            die("Error : '" . $archive->errorInfo() . "'");
+            die("Error : '" . wp_kses($archive->errorInfo(), JSST_ALLOWED_TAGS) . "'");
         }
         $file = $path . '/alldownloads.zip';
         header('Content-Description: File Transfer');
@@ -311,11 +315,15 @@ class JSSTattachmentModel {
         //ob_clean();
         flush();
         readfile($file);
-        @unlink($file);
+        if ( file_exists( $file ) ) {
+            wp_delete_file($file);
+        }
         $path = JSST_PLUGIN_PATH;
         $path .= 'zipdownloads';
         $path .= '/' . $randomfolder;
-        @unlink($path . '/index.html');
+        if ( file_exists( $path . '/index.html' ) ) {
+            wp_delete_file($path . '/index.html');
+        }
         if (file_exists($path)) {
             @rmdir($path);
         }
@@ -334,7 +342,7 @@ class JSSTattachmentModel {
             }
             $i = 0;
             while ($i < $length) {
-                $char = jssupportticketphplib::JSST_substr($possible, mt_rand(0, $maxlength - 1), 1);
+                $char = jssupportticketphplib::JSST_substr($possible, wp_rand(0, $maxlength - 1), 1);
                 if (!strstr($rndfoldername, $char)) {
                     if ($i == 0) {
                         if (ctype_alpha($char)) {

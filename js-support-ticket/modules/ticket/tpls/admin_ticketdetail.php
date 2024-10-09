@@ -3,7 +3,6 @@
     die('Restricted Access');
 ?>
 <?php
-$protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' || $_SERVER['SERVER_PORT'] == 443) ? "https://" : "http://";
 JSSTmessage::getMessage();
 wp_enqueue_script('file_validate.js', JSST_PLUGIN_URL . 'includes/js/file_validate.js');
 wp_enqueue_script('jquery-ui-tabs');
@@ -718,7 +717,7 @@ $yesno = array(
                         </div>
                         <?php if(jssupportticket::$_data[0]->status != 4 && jssupportticket::$_data[0]->status != 5){ ?>
                             <div class="js-ticket-usercredentail-data-add-new-button-wrap" >
-                                <button type="button" class="js-ticket-usercredentail-data-add-new-button" onclick="addEditCredentail(<?php echo esc_js(jssupportticket::$_data[0]->id);?>,<?php echo JSSTincluder::getObjectClass('user')->uid();?>);" >
+                                <button type="button" class="js-ticket-usercredentail-data-add-new-button" onclick="addEditCredentail(<?php echo esc_js(jssupportticket::$_data[0]->id);?>,<?php echo esc_js(JSSTincluder::getObjectClass('user')->uid());?>);" >
                                     <?php echo esc_html(__("Add New Credential","js-support-ticket")); ?>
                                 </button>
                             </div>
@@ -789,7 +788,7 @@ $yesno = array(
                                                     $mins = floor(jssupportticket::$_data['time_taken'] / 60);
                                                     $mins = floor($mins % 60);
                                                     $secs = floor(jssupportticket::$_data['time_taken'] % 60);
-                                                    echo esc_html(__('Time Taken','js-support-ticket')).':&nbsp;'.sprintf('%02d:%02d:%02d', $hours, $mins, $secs);
+                                                    echo esc_html(__('Time Taken','js-support-ticket')).':&nbsp;'.sprintf('%02d:%02d:%02d', esc_html($hours), esc_html($mins), esc_html($secs));
                                                 ?>
                                             </div>
                                         </div>
@@ -800,21 +799,21 @@ $yesno = array(
                                             <div class="timer-buttons" >
                                                 <?php if(in_array('agent', jssupportticket::$_active_addons) && JSSTincluder::getJSModel('userpermissions')->checkPermissionGrantedForTask('Edit Time')){ ?>
                                                     <span class="timer-button" onclick="showEditTimerPopup()" >
-                                                        <img alt="<?php echo esc_html(__('Edit','js-support-ticket')); ?>" class="default-show" alt="image" src="<?php echo JSST_PLUGIN_URL;?>includes/images/ticket-detail/edit-time-1.png"/>
-                                                        <img alt="<?php echo esc_html(__('Edit','js-support-ticket')); ?>" class="default-hide" alt="image" src="<?php echo JSST_PLUGIN_URL;?>includes/images/ticket-detail/edit-time.png"/>
+                                                        <img alt="<?php echo esc_html(__('Edit','js-support-ticket')); ?>" class="default-show" alt="image" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/ticket-detail/edit-time-1.png"/>
+                                                        <img alt="<?php echo esc_html(__('Edit','js-support-ticket')); ?>" class="default-hide" alt="image" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/ticket-detail/edit-time.png"/>
                                                     </span>
                                                 <?php } ?>
                                                 <span class="timer-button cls_1" onclick="changeTimerStatus(1)" >
-                                                    <img alt="<?php echo esc_html(__('play','js-support-ticket')); ?>" class="default-show" alt="image" src="<?php echo JSST_PLUGIN_URL;?>includes/images/ticket-detail/play-time-1.png"/>
-                                                    <img alt="<?php echo esc_html(__('play','js-support-ticket')); ?>" class="default-hide" alt="image" src="<?php echo JSST_PLUGIN_URL;?>includes/images/ticket-detail/play-time.png"/>
+                                                    <img alt="<?php echo esc_html(__('play','js-support-ticket')); ?>" class="default-show" alt="image" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/ticket-detail/play-time-1.png"/>
+                                                    <img alt="<?php echo esc_html(__('play','js-support-ticket')); ?>" class="default-hide" alt="image" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/ticket-detail/play-time.png"/>
                                                 </span>
                                                 <span class="timer-button cls_2" onclick="changeTimerStatus(2)" >
-                                                    <img alt="<?php echo esc_html(__('pause','js-support-ticket')); ?>" class="default-show" alt="image" src="<?php echo JSST_PLUGIN_URL;?>includes/images/ticket-detail/pause-time-1.png"/>
-                                                    <img alt="<?php echo esc_html(__('pause','js-support-ticket')); ?>" class="default-hide" alt="image" src="<?php echo JSST_PLUGIN_URL;?>includes/images/ticket-detail/pause-time.png"/>
+                                                    <img alt="<?php echo esc_html(__('pause','js-support-ticket')); ?>" class="default-show" alt="image" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/ticket-detail/pause-time-1.png"/>
+                                                    <img alt="<?php echo esc_html(__('pause','js-support-ticket')); ?>" class="default-hide" alt="image" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/ticket-detail/pause-time.png"/>
                                                 </span>
                                                 <span class="timer-button cls_3" onclick="changeTimerStatus(3)" >
-                                                    <img alt="<?php echo esc_html(__('stop','js-support-ticket')); ?>" class="default-show" alt="image" src="<?php echo JSST_PLUGIN_URL;?>includes/images/ticket-detail/stop-time-1.png"/>
-                                                    <img alt="<?php echo esc_html(__('stop','js-support-ticket')); ?>" class="default-hide" alt="image" src="<?php echo JSST_PLUGIN_URL;?>includes/images/ticket-detail/stop-time.png"/>
+                                                    <img alt="<?php echo esc_html(__('stop','js-support-ticket')); ?>" class="default-show" alt="image" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/ticket-detail/stop-time-1.png"/>
+                                                    <img alt="<?php echo esc_html(__('stop','js-support-ticket')); ?>" class="default-hide" alt="image" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/ticket-detail/stop-time.png"/>
                                                 </span>
                                             </div>
                                         </div>
@@ -980,7 +979,7 @@ $yesno = array(
                             <?php if(isset(jssupportticket::$_data['nticket'])){ ?>
                             <div class="js-tkt-det-other-tkt">
                                 <a href="<?php echo esc_url(admin_url('admin.php?page=ticket&jstlay=tickets&uid='.jssupportticket::$_data[0]->uid)); ?>" class="js-tkt-det-other-tkt-btn">
-                                    <?php echo esc_html(__('View all','js-support-ticket')).' '.esc_html(jssupportticket::$_data['nticket']).' '. esc_html(__('tickets by','js-support-ticket')).' '.jssupportticket::$_data[0]->name; ?>
+                                    <?php echo esc_html(__('View all','js-support-ticket')).' '.esc_html(jssupportticket::$_data['nticket']).' '. esc_html(__('tickets by','js-support-ticket')).' '.esc_html(jssupportticket::$_data[0]->name); ?>
                                 </a>
                                 <a href="<?php echo esc_url(admin_url('admin.php?page=ticket&jstlay=tickets&uid='.jssupportticket::$_data[0]->uid)); ?>" class="js-tkt-det-other-tkt-img">
                                     <img alt="<?php echo esc_html(__('Edit Ticket','js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/ticket-detail/new-window.png" />
@@ -1171,7 +1170,7 @@ $yesno = array(
                                                             $mins = floor($note->usertime / 60);
                                                             $mins = floor($mins % 60);
                                                             $secs = floor($note->usertime % 60);
-                                                            $time = esc_html(__('Time Taken','js-support-ticket')).':&nbsp;'.sprintf('%02d:%02d:%02d', $hours, $mins, $secs);
+                                                            $time = esc_html(__('Time Taken','js-support-ticket')).':&nbsp;'.sprintf('%02d:%02d:%02d', esc_html($hours), esc_html($mins), esc_html($secs));
                                                         ?>
                                                         <span class="js-ticket-thread-time"><?php echo esc_html($time); ?></span>
                                                     <?php } ?>
@@ -1195,7 +1194,7 @@ $yesno = array(
                                                 ?>
                                                 </div>
                                                 <div class="js-ticket-thread-cnt-btm">
-                                                    <div class="js-ticket-thread-date"><?php echo esc_html(date_i18n("l F d, Y, h:i:s", jssupportticketphplib::JSST_strtotime($note->created))); ?></div>
+                                                    <div class="js-ticket-thread-date"><?php echo esc_html(date_i18n("l F d, Y, H:i:s", jssupportticketphplib::JSST_strtotime($note->created))); ?></div>
                                                     <div class="js-ticket-thread-actions">
                                                         <?php
                                                             if(in_array('timetracking', jssupportticket::$_active_addons)){
@@ -1203,7 +1202,7 @@ $yesno = array(
                                                                 $mins = floor($note->usertime / 60);
                                                                 $mins = floor($mins % 60);
                                                                 $secs = floor($note->usertime % 60);
-                                                                $time = esc_html(__('Time Taken','js-support-ticket')).':&nbsp;'.sprintf('%02d:%02d:%02d', $hours, $mins, $secs);
+                                                                $time = esc_html(__('Time Taken','js-support-ticket')).':&nbsp;'.sprintf('%02d:%02d:%02d', esc_html($hours), esc_html($mins), esc_html($secs));
                                                             ?>
                                                             <a title="<?php echo esc_html(__('Edit','js-support-ticket')); ?>" class="js-ticket-thread-actn-btn ticket-edit-time-button" href="#" onclick="return showPopupAndFillValues(<?php echo esc_js($note->id);?>,3)" >
                                                                 <img alt="<?php echo esc_html(__('Edit','js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/ticket-detail/edit-reply.png" />
@@ -1270,7 +1269,7 @@ $yesno = array(
                                 ?>
                                 <div class="js-ticket-thread-cnt-btm">
                                     <div class="js-ticket-thread-date">
-                                        <?php echo esc_html(date_i18n("l F d, Y, h:i:s", jssupportticketphplib::JSST_strtotime(jssupportticket::$_data[0]->created))); ?>
+                                        <?php echo esc_html(date_i18n("l F d, Y, H:i:s", jssupportticketphplib::JSST_strtotime(jssupportticket::$_data[0]->created))); ?>
                                     </div>
                                 </div>
                             </div>
@@ -1301,7 +1300,7 @@ $yesno = array(
                                                    $mins = floor($reply->time / 60);
                                                    $mins = floor($mins % 60);
                                                    $secs = floor($reply->time % 60);
-                                                   $time = esc_html(__('Time Taken','js-support-ticket')).':&nbsp;'.sprintf('%02d:%02d:%02d', $hours, $mins, $secs);
+                                                   $time = esc_html(__('Time Taken','js-support-ticket')).':&nbsp;'.sprintf('%02d:%02d:%02d', esc_html($hours), esc_html($mins), esc_html($secs));
                                                     ?>
                                                     <span class="js-ticket-thread-time"><?php echo esc_html($time); ?></span>
                                                     <?php
@@ -1334,7 +1333,7 @@ $yesno = array(
                                                         if(strpos($type, "image") !== false) {
                                                             $path = JSSTincluder::getJSModel('attachment')->getAttachmentImage($attachment->id);
                                                             echo wp_kses('<a data-gall="gallery-'.esc_attr($reply->replyid).'" class="button venobox" data-vbtype="image" title="'. esc_html(__('View','js-support-ticket')).'" href="'. esc_url($path) .'"  target="_blank">
-                                                                <img alt="'. esc_html(__('View Image','js-support-ticket')).'" src="' . JSST_PLUGIN_URL . 'includes/images/ticket-detail/view.png" />
+                                                                <img alt="'. esc_html(__('View Image','js-support-ticket')).'" src="' . esc_url(JSST_PLUGIN_URL) . 'includes/images/ticket-detail/view.png" />
                                                             </a>', JSST_ALLOWED_TAGS);
                                                         }
                                                     echo '</div>';
@@ -1342,7 +1341,7 @@ $yesno = array(
                                             }
                                         ?>
                                         <div class="js-ticket-thread-cnt-btm">
-                                            <div class="js-ticket-thread-date"><?php echo esc_html(date_i18n("l F d, Y, h:i:s", jssupportticketphplib::JSST_strtotime($reply->created))); ?></div>
+                                            <div class="js-ticket-thread-date"><?php echo esc_html(date_i18n("l F d, Y, H:i:s", jssupportticketphplib::JSST_strtotime($reply->created))); ?></div>
                                             <div class="js-ticket-thread-actions">
                                                <?php
                                                if(in_array('timetracking', jssupportticket::$_active_addons)){
@@ -1381,7 +1380,7 @@ $yesno = array(
                                                     $mins = floor(jssupportticket::$_data['time_taken'] / 60);
                                                     $mins = floor($mins % 60);
                                                     $secs = floor(jssupportticket::$_data['time_taken'] % 60);
-                                                    echo esc_html(__('Time Taken','js-support-ticket')).':&nbsp;'.sprintf('%02d:%02d:%02d', $hours, $mins, $secs);
+                                                    echo esc_html(__('Time Taken','js-support-ticket')).':&nbsp;'.sprintf('%02d:%02d:%02d', esc_html($hours), esc_html($mins), esc_html($secs));
                                                 ?>
                                             </div>
                                         </div>
@@ -1392,21 +1391,21 @@ $yesno = array(
                                             <div class="timer-buttons" >
                                                 <?php if(in_array('agent', jssupportticket::$_active_addons) && JSSTincluder::getJSModel('userpermissions')->checkPermissionGrantedForTask('Edit Own Time')){ ?>
                                                     <span class="timer-button" onclick="showEditTimerPopup()" >
-                                                        <img alt="<?php echo esc_html(__('Edit','js-support-ticket')); ?>" class="default-show" alt="image" src="<?php echo JSST_PLUGIN_URL;?>includes/images/ticket-detail/edit-time-1.png"/>
-                                                        <img alt="<?php echo esc_html(__('Edit','js-support-ticket')); ?>" class="default-hide" alt="image" src="<?php echo JSST_PLUGIN_URL;?>includes/images/ticket-detail/edit-time.png"/>
+                                                        <img alt="<?php echo esc_html(__('Edit','js-support-ticket')); ?>" class="default-show" alt="image" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/ticket-detail/edit-time-1.png"/>
+                                                        <img alt="<?php echo esc_html(__('Edit','js-support-ticket')); ?>" class="default-hide" alt="image" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/ticket-detail/edit-time.png"/>
                                                     </span>
                                                 <?php } ?>
                                                 <span class="timer-button cls_1" onclick="changeTimerStatus(1)" >
-                                                    <img alt="<?php echo esc_html(__('play','js-support-ticket')); ?>" class="default-show" alt="image" src="<?php echo JSST_PLUGIN_URL;?>includes/images/ticket-detail/play-time-1.png"/>
-                                                    <img alt="<?php echo esc_html(__('play','js-support-ticket')); ?>" class="default-hide" alt="image" src="<?php echo JSST_PLUGIN_URL;?>includes/images/ticket-detail/play-time.png"/>
+                                                    <img alt="<?php echo esc_html(__('play','js-support-ticket')); ?>" class="default-show" alt="image" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/ticket-detail/play-time-1.png"/>
+                                                    <img alt="<?php echo esc_html(__('play','js-support-ticket')); ?>" class="default-hide" alt="image" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/ticket-detail/play-time.png"/>
                                                 </span>
                                                 <span class="timer-button cls_2" onclick="changeTimerStatus(2)" >
-                                                    <img <?php echo esc_html(__('pause','js-support-ticket')); ?> class="default-show" alt="image" src="<?php echo JSST_PLUGIN_URL;?>includes/images/ticket-detail/pause-time-1.png"/>
-                                                    <img <?php echo esc_html(__('pause','js-support-ticket')); ?> class="default-hide" alt="image" src="<?php echo JSST_PLUGIN_URL;?>includes/images/ticket-detail/pause-time.png"/>
+                                                    <img <?php echo esc_html(__('pause','js-support-ticket')); ?> class="default-show" alt="image" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/ticket-detail/pause-time-1.png"/>
+                                                    <img <?php echo esc_html(__('pause','js-support-ticket')); ?> class="default-hide" alt="image" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/ticket-detail/pause-time.png"/>
                                                 </span>
                                                 <span class="timer-button cls_3" onclick="changeTimerStatus(3)" >
-                                                    <img <?php echo esc_html(__('stop','js-support-ticket')); ?> class="default-show" alt="image" src="<?php echo JSST_PLUGIN_URL;?>includes/images/ticket-detail/stop-time-1.png"/>
-                                                    <img <?php echo esc_html(__('stop','js-support-ticket')); ?> class="default-hide" alt="image" src="<?php echo JSST_PLUGIN_URL;?>includes/images/ticket-detail/stop-time.png"/>
+                                                    <img <?php echo esc_html(__('stop','js-support-ticket')); ?> class="default-show" alt="image" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/ticket-detail/stop-time-1.png"/>
+                                                    <img <?php echo esc_html(__('stop','js-support-ticket')); ?> class="default-hide" alt="image" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/ticket-detail/stop-time.png"/>
                                                 </span>
                                             </div>
                                         </div>
@@ -1553,7 +1552,7 @@ $yesno = array(
                                     <span class="js-tkt-det-info-tit">
                                         <?php echo esc_html(__('Created','js-support-ticket')). ' : '; ?>
                                     </span>
-                                    <span class="js-tkt-det-info-val" title="<?php echo esc_html(date_i18n("d F, Y, h:i:s A", jssupportticketphplib::JSST_strtotime(jssupportticket::$_data[0]->created))); ?>">
+                                    <span class="js-tkt-det-info-val" title="<?php echo esc_html(date_i18n("d F, Y, H:i:s A", jssupportticketphplib::JSST_strtotime(jssupportticket::$_data[0]->created))); ?>">
                                         <?php echo esc_html(human_time_diff(strtotime(jssupportticket::$_data[0]->created),strtotime(date_i18n("Y-m-d H:i:s")))).' '. esc_html(__('ago', 'js-support-ticket')); ?>
                                     </span>
                                 </div>
@@ -1653,7 +1652,7 @@ $yesno = array(
                         <div class="js-tkt-det-cnt js-tkt-det-tkt-prty">
                             <div class="js-tkt-det-hdg">
                                 <a target="blank" href="https://www.youtube.com/watch?v=8Fz-expKJLE" class="js-tkt-det-hdg-img js-cp-video-priority">
-                                    <img title="<?php echo esc_html(__('watch video','js-support-ticket')); ?>" alt="<?php echo esc_html(__('watch video','js-support-ticket')); ?>" src="<?php echo JSST_PLUGIN_URL . '/includes/images/watch-video-icon.png'; ?>" />
+                                    <img title="<?php echo esc_html(__('watch video','js-support-ticket')); ?>" alt="<?php echo esc_html(__('watch video','js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL) . '/includes/images/watch-video-icon.png'; ?>" />
                                 </a>
                                 <div class="js-tkt-det-hdg-txt">
                                     <?php echo esc_html(__('Priority','js-support-ticket')); ?>
@@ -1684,7 +1683,7 @@ $yesno = array(
                                     <?php if($agentflag){ ?>
                                     <div class="js-tkt-det-hdg">
                                         <a target="blank" href="https://www.youtube.com/watch?v=ZtCivvtAURU" class="js-tkt-det-hdg-img js-cp-video-assign">
-                                            <img title="<?php echo esc_html(__('watch video','js-support-ticket')); ?>" alt="<?php echo esc_html(__('watch video','js-support-ticket')); ?>" src="<?php echo JSST_PLUGIN_URL . '/includes/images/watch-video-icon.png'; ?>" />
+                                            <img title="<?php echo esc_html(__('watch video','js-support-ticket')); ?>" alt="<?php echo esc_html(__('watch video','js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL) . '/includes/images/watch-video-icon.png'; ?>" />
                                         </a>
                                         <div class="js-tkt-det-hdg-txt">
                                             <?php
@@ -1710,7 +1709,7 @@ $yesno = array(
                                                         <img alt="<?php echo esc_html(__('staff photo','js-support-ticket')); ?>" src="<?php echo esc_url(jssupportticket::makeUrl(array('jstmod'=>'agent','task'=>'getStaffPhoto','action'=>'jstask','jssupportticketid'=>jssupportticket::$_data[0]->staffid, 'jsstpageid'=>jssupportticket::getPageid()))); ?>">
                                                         <?php
                                                     } else { ?>
-                                                        <img alt="<?php echo esc_html(__('staff photo','js-support-ticket')); ?>" src="<?php echo JSST_PLUGIN_URL . '/includes/images/user.png'; ?>" />
+                                                        <img alt="<?php echo esc_html(__('staff photo','js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL) . '/includes/images/user.png'; ?>" />
                                                 <?php } ?>
                                             </div>
                                             <div class="js-tkt-det-user-cnt">
@@ -1723,7 +1722,7 @@ $yesno = array(
                                         <?php if($departmentflag){ ?>
                                         <div class="js-tkt-det-trsfer-dep">
                                             <a target="blank" href="https://www.youtube.com/watch?v=hewCQ0S37V8" class="js-tkt-det-hdg-img js-cp-video-department">
-                                                <img title="<?php echo esc_html(__('watch video','js-support-ticket')); ?>" alt="<?php echo esc_html(__('watch video','js-support-ticket')); ?>" src="<?php echo JSST_PLUGIN_URL . '/includes/images/watch-video-icon.png'; ?>" />
+                                                <img title="<?php echo esc_html(__('watch video','js-support-ticket')); ?>" alt="<?php echo esc_html(__('watch video','js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL) . '/includes/images/watch-video-icon.png'; ?>" />
                                             </a>
                                             <div class="js-tkt-det-trsfer-dep-txt">
                                                 <?php echo esc_html(__('Department','js-support-ticket')); ?>: <?php echo esc_html(jssupportticket::JSST_getVarValue(jssupportticket::$_data[0]->departmentname)); ?>
@@ -1754,7 +1753,7 @@ $yesno = array(
                                     $mins = floor(jssupportticket::$_data['time_taken'] / 60);
                                     $mins = floor($mins % 60);
                                     $secs = floor(jssupportticket::$_data['time_taken'] % 60);
-                                    $time =  sprintf('%02d:%02d:%02d', $hours, $mins, $secs);
+                                    $time =  sprintf('%02d:%02d:%02d', esc_html($hours), esc_html($mins), esc_html($secs));
                                     ?>
                                     <div class="timer-total-time-value">
                                         <span class="timer-box">
@@ -1998,7 +1997,7 @@ $yesno = array(
                                         <div class="js-tkt-wc-order-item">
                                             <div class="js-tkt-wc-order-item-title"><?php echo esc_html(__("Purchase Date",'js-support-ticket')); ?>:</div>
                                             <div class="js-tkt-wc-order-item-value">
-                                                <?php echo esc_html(date_i18n("F d, Y, h:i:s", jssupportticketphplib::JSST_strtotime($envlicense['purchasedate']))); ?>
+                                                <?php echo esc_html(date_i18n("F d, Y, H:i:s", jssupportticketphplib::JSST_strtotime($envlicense['purchasedate']))); ?>
                                             </div>
                                         </div>
                                         <?php } ?>
@@ -2074,7 +2073,7 @@ $yesno = array(
                                             <?php if(isset($paidsupport['subscriptionstartdate'])){ ?>
                                             <div class="js-tkt-wc-order-item">
                                                 <div class="js-tkt-wc-order-item-title"><?php echo esc_html(__("Subscribed On",'js-support-ticket')); ?>:</div>
-                                                <div class="js-tkt-wc-order-item-value"><?php echo esc_html(date_i18n("F d, Y, h:i:s", jssupportticketphplib::JSST_strtotime($paidsupport['subscriptionstartdate']))); ?></div>
+                                                <div class="js-tkt-wc-order-item-value"><?php echo esc_html(date_i18n("F d, Y, H:i:s", jssupportticketphplib::JSST_strtotime($paidsupport['subscriptionstartdate']))); ?></div>
                                             </div>
                                             <?php } ?>
                                             <?php if(isset($paidsupport['expiry'])){ ?>

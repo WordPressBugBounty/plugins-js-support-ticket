@@ -69,7 +69,7 @@
                 </div>
                 <div class="js-email-body">
                     <!-- Now add the Dropdown for the Languages -->
-                    <?php echo apply_filters( 'jsst_get_multilanguage_dropdown',''); ?>
+                    <?php echo wp_kses(apply_filters( 'jsst_get_multilanguage_dropdown',''), JSST_ALLOWED_TAGS); ?>
                     <div class="js-form-wrapper">
 
                         <div class="a-js-form-title"><?php echo esc_html(__('Subject', 'js-support-ticket')); ?></div>
@@ -351,7 +351,7 @@
                         ?>
                     </div>
                     <div class="js-form-button">
-                        <?php echo JSSTformfield::submitbutton('save', esc_html(__('Save Email Template', 'js-support-ticket')), array('class' => 'button js-form-save')); ?>
+                        <?php echo wp_kses(JSSTformfield::submitbutton('save', esc_html(__('Save Email Template', 'js-support-ticket')), array('class' => 'button js-form-save')), JSST_ALLOWED_TAGS); ?>
                     </div>
                     <?php
                     if(count(jssupportticket::$_active_addons) < 36 ){  ?>
@@ -385,14 +385,14 @@
                 wp_add_inline_script('js-support-ticket-main-js',$jssupportticket_js);
                 ?>
 
-                <?php echo JSSTformfield::hidden('id', jssupportticket::$_data[0]->id); ?>
-                <?php echo JSSTformfield::hidden('created', jssupportticket::$_data[0]->created); ?>
-                <?php echo JSSTformfield::hidden('templatefor', jssupportticket::$_data[0]->templatefor); ?>
-                <?php echo JSSTformfield::hidden('for', jssupportticket::$_data[1]); ?>
-                <?php echo JSSTformfield::hidden('action', 'emailtemplate_saveemailtemplate'); ?>
-                <?php echo JSSTformfield::hidden('form_request', 'jssupportticket'); ?>
-                <?php echo JSSTformfield::hidden('callfor', 'emailtemplate'); ?>
-                <?php echo JSSTformfield::hidden('multitemp_id', ''); ?>
+                <?php echo wp_kses(JSSTformfield::hidden('id', jssupportticket::$_data[0]->id), JSST_ALLOWED_TAGS); ?>
+                <?php echo wp_kses(JSSTformfield::hidden('created', jssupportticket::$_data[0]->created), JSST_ALLOWED_TAGS); ?>
+                <?php echo wp_kses(JSSTformfield::hidden('templatefor', jssupportticket::$_data[0]->templatefor), JSST_ALLOWED_TAGS); ?>
+                <?php echo wp_kses(JSSTformfield::hidden('for', jssupportticket::$_data[1]), JSST_ALLOWED_TAGS); ?>
+                <?php echo wp_kses(JSSTformfield::hidden('action', 'emailtemplate_saveemailtemplate'), JSST_ALLOWED_TAGS); ?>
+                <?php echo wp_kses(JSSTformfield::hidden('form_request', 'jssupportticket'), JSST_ALLOWED_TAGS); ?>
+                <?php echo wp_kses(JSSTformfield::hidden('callfor', 'emailtemplate'), JSST_ALLOWED_TAGS); ?>
+                <?php echo wp_kses(JSSTformfield::hidden('multitemp_id', ''), JSST_ALLOWED_TAGS); ?>
             </form>
         </div>
     </div>

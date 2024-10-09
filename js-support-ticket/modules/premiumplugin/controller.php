@@ -17,6 +17,18 @@ class JSSTpremiumpluginController {
                     jssupportticket::$_data['productcode'] = JSSTincluder::getJSModel('configuration')->getConfigurationByConfigName('productcode');
                     jssupportticket::$_data['producttype'] = JSSTincluder::getJSModel('configuration')->getConfigurationByConfigName('producttype');
                 break;
+                case 'admin_step2':
+                    break;
+                case 'admin_step3':
+                    break;
+                case 'admin_addonfeatures':
+                    break;
+                case 'admin_missingaddon':
+                    break;
+                case 'missingaddon':
+                    break;
+                default:
+                    exit;
             }
             $module =  'premiumplugin';
             JSSTincluder::include_file($layout, $module);
@@ -61,13 +73,13 @@ class JSSTpremiumpluginController {
                }
             }
             if(is_array($result) && isset($result['status']) && $result['status'] == 1 ){ // means everthing ok
-                $resultaddon = json_encode($result);
+                $resultaddon = wp_json_encode($result);
                 $resultaddon = jssupportticketphplib::JSST_safe_encoding( $resultaddon );
                 // jssupportticketphplib::JSST_setcookie('jsst_addon_install_data' , $resultaddon);
                 // jssupportticketphplib::JSST_setcookie('jsst_addon_install_actual_transaction_key' , $post_data['transactionkey']);
                 $result['actual_transaction_key'] = $post_data['transactionkey'];
                 // in case of session not working
-                add_option('jsst_addon_install_data',json_encode($result));
+                add_option('jsst_addon_install_data',wp_json_encode($result));
                 $url = admin_url("admin.php?page=premiumplugin&jstlay=step2");
                 wp_redirect($url);
                 return;
@@ -85,7 +97,7 @@ class JSSTpremiumpluginController {
         $array['status'] = 0;
         $array['message'] = $error;
         $array['transactionkey'] = $post_data['transactionkey'];
-        $array = json_encode( $array );
+        $array = wp_json_encode( $array );
         $array = jssupportticketphplib::JSST_safe_encoding($array);
         jssupportticketphplib::JSST_setcookie('jsst_addon_return_data' , $array , 0, COOKIEPATH);
         if ( SITECOOKIEPATH != COOKIEPATH ){
@@ -119,7 +131,7 @@ class JSSTpremiumpluginController {
             $array['status'] = 0;
             $array['message'] = esc_html(__('Addon Installation Failed','js-support-ticket')).'!';
             $array['transactionkey'] = $post_data['transactionkey'];
-            $array = json_encode( $array );
+            $array = wp_json_encode( $array );
             $array = jssupportticketphplib::JSST_safe_encoding($array);
             jssupportticketphplib::JSST_setcookie('jsst_addon_return_data' , $array , 0, COOKIEPATH);
             if ( SITECOOKIEPATH != COOKIEPATH ){
@@ -132,7 +144,7 @@ class JSSTpremiumpluginController {
         $site_url = site_url();
 		$site_url = jssupportticketphplib::JSST_str_replace("https://","",$site_url);
         $site_url = jssupportticketphplib::JSST_str_replace("http://","",$site_url);
-        $url = 'https://jshelpdesk.com/setup/index.php?token='.esc_attr($token).'&productcode='. json_encode($addon_json_array).'&domain='. $site_url;
+        $url = 'https://jshelpdesk.com/setup/index.php?token='.esc_attr($token).'&productcode='. wp_json_encode($addon_json_array).'&domain='. $site_url;
 
         $install_count = 0;
 
@@ -157,7 +169,7 @@ class JSSTpremiumpluginController {
             $array['status'] = 0;
             $array['message'] = esc_html(__('Addon Installation Failed','js-support-ticket')).'!';
             $array['transactionkey'] = $post_data['transactionkey'];
-            $array = json_encode( $array );
+            $array = wp_json_encode( $array );
             $array = jssupportticketphplib::JSST_safe_encoding($array);
             jssupportticketphplib::JSST_setcookie('jsst_addon_return_data' , $array , 0, COOKIEPATH);
             if ( SITECOOKIEPATH != COOKIEPATH ){
@@ -188,15 +200,19 @@ class JSSTpremiumpluginController {
 
             $unzipfile = unzip_file( $path, $plugin_path);
 
-            @unlink( $path ); // must unlink afterwards
-            @unlink( $tmpfile ); // must unlink afterwards
+            if ( file_exists( $path ) ) {
+                wp_delete_file( $path ); // must unlink afterwards
+            }
+            if ( file_exists( $tmpfile ) ) {
+                wp_delete_file( $tmpfile ); // must unlink afterwards
+            }
 
             if ( is_wp_error( $unzipfile ) ) {
                 $array['data'] = array();
                 $array['status'] = 0;
                 $array['message'] = esc_html(__('Addon installation failed, Directory permission error','js-support-ticket')).'!';
                 $array['transactionkey'] = $post_data['transactionkey'];
-                $array = json_encode( $array );
+                $array = wp_json_encode( $array );
                 $array = jssupportticketphplib::JSST_safe_encoding($array);
                 jssupportticketphplib::JSST_setcookie('jsst_addon_return_data' , $array , 0, COOKIEPATH);
                 if ( SITECOOKIEPATH != COOKIEPATH ){
@@ -215,7 +231,7 @@ class JSSTpremiumpluginController {
             $error_string = $tmpfile->get_error_message();
             $array['message'] = esc_html(__('Addon Installation Failed, File download error','js-support-ticket')).'!'.$error_string;
             $array['transactionkey'] = $post_data['transactionkey'];
-            $array = json_encode( $array );
+            $array = wp_json_encode( $array );
             $array = jssupportticketphplib::JSST_safe_encoding($array);
             jssupportticketphplib::JSST_setcookie('jsst_addon_return_data' , $array , 0, COOKIEPATH);
             if ( SITECOOKIEPATH != COOKIEPATH ){

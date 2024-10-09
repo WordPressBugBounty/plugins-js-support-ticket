@@ -27,7 +27,7 @@ class JS_SUPPORTTICKETUpdater {
 			}
 		}
 		$this->addon_installed_array = $addon_installed_array;
-		$this->api_key = json_encode($transaction_key_array);
+		$this->api_key = wp_json_encode($transaction_key_array);
 	}
 
 	// class constructor triggers this function. sets up intail hooks and filters to be used.
@@ -172,7 +172,7 @@ class JS_SUPPORTTICKETUpdater {
 												$transaction_key = JSSTincluder::getJSModel('jssupportticket')->getAddonTransationKey($option_name);
 												$addon_json_array = array();
 												$addon_json_array[] = jssupportticketphplib::JSST_str_replace('js-support-ticket-', '', $c_key);
-												$url = 'https://jshelpdesk.com/setup/index.php?token='.$transaction_key.'&productcode='. json_encode($addon_json_array).'&domain='. site_url();
+												$url = 'https://jshelpdesk.com/setup/index.php?token='.$transaction_key.'&productcode='. wp_json_encode($addon_json_array).'&domain='. site_url();
 
 												// prepping data for seamless update of allowed addons
 												$plugin = new stdClass();
@@ -217,9 +217,9 @@ class JS_SUPPORTTICKETUpdater {
 		if(strstr($args->slug, 'js-support-ticket-')){
 			$response = $this->jsGetPluginInfo($args->slug);
 			if ($response) {
-				$response->sections = json_decode(json_encode($response->sections),true);
-				$response->banners = json_decode(json_encode($response->banners),true);
-				$response->contributors = json_decode(json_encode($response->contributors),true);
+				$response->sections = json_decode(wp_json_encode($response->sections),true);
+				$response->banners = json_decode(wp_json_encode($response->banners),true);
+				$response->contributors = json_decode(wp_json_encode($response->contributors),true);
 				return $response;
 			}
 		}else{

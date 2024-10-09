@@ -15,8 +15,8 @@ class JSSTreviewbox {
         $current_count = get_option("jssupportticket_show_review_box_after");
         if($current_count === false) {
 			//jssupportticketphplib::JSST_strtotime not work porperly
-            //$date = date("Y-m-d", jssupportticketphplib::JSST_strtotime("+30 days"));
-            $date = date("Y-m-d", strtotime("+30 days"));
+            //$date = gmdate("Y-m-d", jssupportticketphplib::JSST_strtotime("+30 days"));
+            $date = gmdate("Y-m-d", strtotime("+30 days"));
 			add_option("jssupportticket_show_review_box_after", $date);
             return;
         } else if($current_count < 35) {
@@ -24,7 +24,7 @@ class JSSTreviewbox {
         }
         $date_to_show = get_option("jssupportticket_show_review_box_after");
         if($date_to_show !== false) {
-            $current_date = date("Y-m-d");
+            $current_date = gmdate("Y-m-d");
             if($current_date < $date_to_show) {
                 return;
             }

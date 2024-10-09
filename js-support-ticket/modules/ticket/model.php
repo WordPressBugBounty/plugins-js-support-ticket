@@ -677,7 +677,7 @@ class JSSTticketModel {
         if (in_array('agent', jssupportticket::$_active_addons) && jssupportticket::$_data['user_staff']) { //staff
             if(current_user_can('jsst_support_ticket')){
                 jssupportticket::$_data['permission_granted'] = true;
-                JSSTincluder::getObjectClass('wphdnotification')->addSessionNotificationDataToTable(date("Y-m-d h:i:s"),'','ticket_time_start_',$id);
+                JSSTincluder::getObjectClass('wphdnotification')->addSessionNotificationDataToTable(gmdate("Y-m-d h:i:s"),'','ticket_time_start_',$id);
                 if(in_array('timetracking', jssupportticket::$_active_addons)){
                     jssupportticket::$_data['time_taken'] = JSSTincluder::getJSModel('timetracking')->getTimeTakenByTicketId($id);
                 }
@@ -685,7 +685,7 @@ class JSSTticketModel {
                 jssupportticket::$_data['permission_granted'] = $this->validateTicketDetailForStaff($id);
                 if (jssupportticket::$_data['permission_granted']) { // validation passed
                     if(in_array('timetracking', jssupportticket::$_active_addons)){
-                        JSSTincluder::getObjectClass('wphdnotification')->addSessionNotificationDataToTable(date("Y-m-d h:i:s"),'','ticket_time_start_',$id);
+                        JSSTincluder::getObjectClass('wphdnotification')->addSessionNotificationDataToTable(gmdate("Y-m-d h:i:s"),'','ticket_time_start_',$id);
                         jssupportticket::$_data['time_taken'] = JSSTincluder::getJSModel('timetracking')->getTimeTakenByTicketId($id);
                     }
                 }
@@ -695,7 +695,7 @@ class JSSTticketModel {
             if(current_user_can('jsst_support_ticket') || current_user_can('jsst_support_ticket_tickets')){
                 jssupportticket::$_data['permission_granted'] = true;
                 if(in_array('timetracking', jssupportticket::$_active_addons)){
-                    JSSTincluder::getObjectClass('wphdnotification')->addSessionNotificationDataToTable(date("Y-m-d h:i:s"),'','ticket_time_start_',$id);
+                    JSSTincluder::getObjectClass('wphdnotification')->addSessionNotificationDataToTable(gmdate("Y-m-d h:i:s"),'','ticket_time_start_',$id);
                     jssupportticket::$_data['time_taken'] = JSSTincluder::getJSModel('timetracking')->getTimeTakenByTicketId($id);
                 }
             }
@@ -797,7 +797,7 @@ class JSSTticketModel {
                 // add random characters to $password until $length is reached
                 while ($i < $length) {
                     // pick a random character from the possible ones
-                    $char = jssupportticketphplib::JSST_substr($possible, mt_rand(0, $maxlength - 1), 1);
+                    $char = jssupportticketphplib::JSST_substr($possible, wp_rand(0, $maxlength - 1), 1);
                     if (!strstr($ticketid, $char)) {
                         if ($i == 0) {
                             if (ctype_alpha($char)) {
@@ -1015,7 +1015,7 @@ class JSSTticketModel {
                         JSSTmessage::setMessage(esc_html(__('No purchase found with that code', 'js-support-ticket')), 'error');
                         return false;
                     }else{
-                        $envatoData = json_encode($res);
+                        $envatoData = wp_json_encode($res);
                     }
                 }
             }
@@ -1119,7 +1119,7 @@ class JSSTticketModel {
                 $customflagforadd=true;
                 $custom_field_namesforadd[]=$ufobj->field;
             }else if($ufobj->userfieldtype == 'date'){
-                $vardata = isset($data[$ufobj->field]) ? date("Y-m-d", jssupportticketphplib::JSST_strtotime($data[$ufobj->field])) : '';
+                $vardata = isset($data[$ufobj->field]) ? gmdate("Y-m-d", jssupportticketphplib::JSST_strtotime($data[$ufobj->field])) : '';
             }else{
                 $vardata = isset($data[$ufobj->field]) ? $data[$ufobj->field] : '';
             }
@@ -1151,7 +1151,7 @@ class JSSTticketModel {
                 }
             }
         }
-        $params = html_entity_decode(json_encode($params, JSON_UNESCAPED_UNICODE));
+        $params = html_entity_decode(wp_json_encode($params, JSON_UNESCAPED_UNICODE));
         $data['params'] = $params;
         //custom field code end
 
@@ -1275,7 +1275,7 @@ class JSSTticketModel {
                 $tokenarray['emailaddress'] = $data['email'];
                 $tokenarray['trackingid'] = $data['ticketid'];
                 $tokenarray['sitelink']=JSSTincluder::getJSModel('jssupportticket')->getEncriptedSiteLink();
-                $token = json_encode($tokenarray);
+                $token = wp_json_encode($tokenarray);
                 include_once JSST_PLUGIN_PATH . 'includes/encoder.php';
                 $encoder = new JSSTEncoder();
                 $encryptedtext = $encoder->encrypt($token);
@@ -1339,7 +1339,7 @@ class JSSTticketModel {
         $params = jssupportticket::$_db->get_var($query);
         $decoded_params = json_decode($params,true);
         $decoded_params[$field] = $filename;
-        $encoded_params = json_encode($decoded_params, JSON_UNESCAPED_UNICODE);
+        $encoded_params = wp_json_encode($decoded_params, JSON_UNESCAPED_UNICODE);
         $query = "UPDATE `" . jssupportticket::$_db->prefix . "js_ticket_tickets` SET params = '" . esc_sql($encoded_params) . "' WHERE id = " . esc_sql($ticketid);
         jssupportticket::$_db->query($query);
         if (jssupportticket::$_db->last_error != null) {
@@ -2059,7 +2059,7 @@ class JSSTticketModel {
         if (!$lastreply)
             $lastreply = date_i18n('Y-m-d H:i:s');
         $days = jssupportticket::$_config['reopen_ticket_within_days'];
-        $date = date("Y-m-d H:i:s", jssupportticketphplib::JSST_strtotime(date("Y-m-d H:i:s", jssupportticketphplib::JSST_strtotime($lastreply)) . " +" . esc_html($days) . " day"));
+        $date = gmdate("Y-m-d H:i:s", jssupportticketphplib::JSST_strtotime(gmdate("Y-m-d H:i:s", jssupportticketphplib::JSST_strtotime($lastreply)) . " +" . esc_html($days) . " day"));
         if ($date < date_i18n('Y-m-d H:i:s'))
             return false;
         else
@@ -2252,7 +2252,7 @@ class JSSTticketModel {
             return;
         }
         if(jssupportticket::$_config['feedback_email_delay_type'] == 1){
-            $intrval_string = " date(DATE_ADD(closed,INTERVAL " . (int)jssupportticket::$_config['feedback_email_delay']." DAY)) < '".date("Y-m-d")."'";
+            $intrval_string = " date(DATE_ADD(closed,INTERVAL " . (int)jssupportticket::$_config['feedback_email_delay']." DAY)) < '".gmdate("Y-m-d")."'";
         }else{
             $intrval_string = " DATE_ADD(closed,INTERVAL " .(int) jssupportticket::$_config['feedback_email_delay'] . " HOUR) < '".date_i18n("Y-m-d H:i:s")."'";
         }
@@ -2279,7 +2279,9 @@ class JSSTticketModel {
         $query = "SELECT attachmentdir FROM `".jssupportticket::$_db->prefix."js_ticket_tickets` WHERE id = ".esc_sql($id);
         $foldername = jssupportticket::$_db->get_var($query);
         $userpath = $path . '/' . $foldername.'/'.$filename;
-        unlink($userpath);
+        if ( file_exists( $userpath ) ) {
+            wp_delete_file($userpath);
+        }
         return ;
     }
 
@@ -2312,7 +2314,7 @@ class JSSTticketModel {
     function createTokenByEmailAndTrackingId($emailaddress, $trackingid) {
         include_once JSST_PLUGIN_PATH . 'includes/encoder.php';
         $encoder = new JSSTEncoder();
-        $token = $encoder->encrypt(json_encode(array('emailaddress' => $emailaddress, 'trackingid' => $trackingid)));
+        $token = $encoder->encrypt(wp_json_encode(array('emailaddress' => $emailaddress, 'trackingid' => $trackingid)));
         return $token;
     }
 
@@ -2552,7 +2554,7 @@ class JSSTticketModel {
         // add random characters to $password until $length is reached
         while ($i < $length) {
             // pick a random character from the possible ones
-            $char = jssupportticketphplib::JSST_substr($possible, mt_rand(0, $maxlength - 1), 1);
+            $char = jssupportticketphplib::JSST_substr($possible, wp_rand(0, $maxlength - 1), 1);
             if (!strstr($foldername, $char)) {
                 if ($i == 0) {
                     if (ctype_alpha($char)) {
@@ -2571,7 +2573,7 @@ class JSSTticketModel {
     static function generateHash($id){
         if(!is_numeric($id))
             return null;
-        return jssupportticketphplib::JSST_safe_encoding(json_encode(base64_encode($id)));
+        return jssupportticketphplib::JSST_safe_encoding(wp_json_encode(base64_encode($id)));
     }
 
     function getUIdById($id) {

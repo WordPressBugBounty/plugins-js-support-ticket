@@ -105,7 +105,7 @@ class JSSTemailtemplateModel {
         $query = "SELECT * FROM `" . jssupportticket::$_db->prefix . "js_ticket_emailtemplates` WHERE templatefor = '" . esc_sql($templatefor) . "'";
         $result = jssupportticket::$_db->get_row($query);
         $data =  array('defaultsubject'=>htmlentities($result->subject),'defaultbody'=>htmlentities($result->body) , 'defaultid'=>htmlentities($result->id));
-        return json_encode($data);
+        return wp_json_encode($data);
 
     }
 }

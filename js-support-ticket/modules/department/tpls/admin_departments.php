@@ -24,7 +24,6 @@ $jssupportticket_js ='
 wp_add_inline_script('js-support-ticket-main-js',$jssupportticket_js);
 
 wp_enqueue_script('jquery-ui-sortable');
-$protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' || $_SERVER['SERVER_PORT'] == 443) ? "https://" : "http://";
 wp_enqueue_style('jquery-ui-css', JSST_PLUGIN_URL . 'includes/css/jquery-ui-smoothness.css');
 JSSTmessage::getMessage(); ?>
 <div id="jsstadmin-wrapper">
@@ -102,7 +101,7 @@ JSSTmessage::getMessage(); ?>
                                     <span class="js-support-ticket-table-responsive-heading">
                                         <?php echo esc_html(__('Ordering', 'js-support-ticket')); echo " : "; ?>
                                     </span>
-                                    <img alt="<?php echo esc_html(__('grab','js-support-ticket')); ?>" src="<?php echo JSST_PLUGIN_URL . 'includes/images/list-full.png'?>"/>
+                                    <img alt="<?php echo esc_html(__('grab','js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL) . 'includes/images/list-full.png'?>"/>
                                 </td>
                                 <td class="left jsst-left-row"><span class="js-support-ticket-table-responsive-heading"><?php echo esc_html(__('Department', 'js-support-ticket'));
                         echo " : "; ?></span><a title="<?php echo esc_html(__('Department','js-support-ticket')); ?>" href="?page=department&jstlay=adddepartment&jssupportticketid=<?php echo esc_attr($department->id); ?>"><?php echo esc_html($department->departmentname); ?></a></td>
@@ -111,13 +110,13 @@ JSSTmessage::getMessage(); ?>
                                 <td><span class="js-support-ticket-table-responsive-heading"><?php echo esc_html(__('Status', 'js-support-ticket'));
                                 echo " : "; ?></span>
                                 <?php if($department->isdefault == 2){ ?>
-                                    <a title="<?php echo esc_html(__('Default','js-support-ticket')); ?>"> <img alt="<?php echo esc_html(__('Default','js-support-ticket')); ?>" src="<?php echo JSST_PLUGIN_URL  .'includes/images/' . esc_attr($default); ?>"/> </a>
+                                    <a title="<?php echo esc_html(__('Default','js-support-ticket')); ?>"> <img alt="<?php echo esc_html(__('Default','js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL) .'includes/images/' . esc_attr($default); ?>"/> </a>
                                 <?php }else{ ?>
-                                    <a title="<?php echo esc_html(__('Default','js-support-ticket')); ?>" href="<?php echo esc_url(wp_nonce_url('?page=department&task=changedefault&action=jstask&departmentid='. esc_attr($department->id).'&default='.esc_attr($department->isdefault), 'change-default'));?>"> <img alt="<?php echo esc_html(__('Default','js-support-ticket')); ?>" src="<?php echo JSST_PLUGIN_URL  .'includes/images/' . esc_attr($default); ?>"/> </a>
+                                    <a title="<?php echo esc_html(__('Default','js-support-ticket')); ?>" href="<?php echo esc_url(wp_nonce_url('?page=department&task=changedefault&action=jstask&departmentid='. esc_attr($department->id).'&default='.esc_attr($department->isdefault), 'change-default'));?>"> <img alt="<?php echo esc_html(__('Default','js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL) .'includes/images/' . esc_attr($default); ?>"/> </a>
                                 <?php } ?>
                                 </td>
                                 <td><span class="js-support-ticket-table-responsive-heading"><?php echo esc_html(__('Status', 'js-support-ticket'));
-                                echo " : "; ?></span><a title="<?php echo esc_html(__('Status','js-support-ticket')); ?>" href="<?php echo esc_url(wp_nonce_url('?page=department&task=changestatus&action=jstask&departmentid='.esc_attr($department->id),'change-status'));?>"> <img alt="<?php echo esc_html(__('Status','js-support-ticket')); ?>" src="<?php echo JSST_PLUGIN_URL . 'includes/images/' . esc_attr($status); ?>"/> </a></td>
+                                echo " : "; ?></span><a title="<?php echo esc_html(__('Status','js-support-ticket')); ?>" href="<?php echo esc_url(wp_nonce_url('?page=department&task=changestatus&action=jstask&departmentid='.esc_attr($department->id),'change-status'));?>"> <img alt="<?php echo esc_html(__('Status','js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL) . 'includes/images/' . esc_attr($status); ?>"/> </a></td>
                                 <td><span class="js-support-ticket-table-responsive-heading"><?php echo esc_html(__('Created', 'js-support-ticket'));
                         echo " : "; ?></span><?php echo esc_html(date_i18n(jssupportticket::$_config['date_format'], jssupportticketphplib::JSST_strtotime($department->created))); ?></td>
                                 <td>

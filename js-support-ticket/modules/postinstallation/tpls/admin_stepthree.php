@@ -17,7 +17,7 @@ $type = array(
                 <span class="jsst_heading"><?php echo esc_html(__('JS Support Ticket Settings','js-support-ticket')); ?></span>
                 <div class="close-button-bottom">
                     <a href="#" class="close-button">
-                        <img alt="image" src="<?php echo JSST_PLUGIN_URL.'includes/images/postinstallation/close-icon.png';?>" />
+                        <img alt="image" src="<?php echo esc_url(JSST_PLUGIN_URL).'includes/images/postinstallation/close-icon.png';?>" />
                     </a>
                 </div>
             </div>
@@ -26,33 +26,33 @@ $type = array(
                     <ul class="update-header-img step-1">
                         <li class="header-parts first-part">
                             <a href="<?php echo esc_url(admin_url("admin.php?page=postinstallation&jstlay=stepone")); ?>" title="link" class="tab_icon">
-                                <img class="start" src="<?php echo JSST_PLUGIN_URL.'includes/images/postinstallation/general-settings.png';?>" />
+                                <img class="start" src="<?php echo esc_url(JSST_PLUGIN_URL).'includes/images/postinstallation/general-settings.png';?>" />
                                 <span class="text"><?php echo esc_html(__('General','js-support-ticket')); ?></span>
                             </a>
                         </li>
                         <li class="header-parts second-part">
                             <a href="<?php echo esc_url(admin_url("admin.php?page=postinstallation&jstlay=steptwo")); ?>" title="link" class="tab_icon">
-                                <img class="start" src="<?php echo JSST_PLUGIN_URL.'includes/images/postinstallation/ticket.png';?>" />
+                                <img class="start" src="<?php echo esc_url(JSST_PLUGIN_URL).'includes/images/postinstallation/ticket.png';?>" />
                                 <span class="text"><?php echo esc_html(__('Ticket Settings','js-support-ticket')); ?></span>
                             </a>
                         </li>
                         <?php if(JSSTincluder::getJSModel('jssupportticket')->getInstalledTranslationKey()){ ?>
                             <li class="header-parts third-part">
                                <a href="<?php echo esc_url(admin_url("admin.php?page=postinstallation&jstlay=translationoption")); ?>" title="link" class="tab_icon">
-                                   <img class="start" src="<?php echo JSST_PLUGIN_URL.'includes/images/postinstallation/translation.png';?>" />
+                                   <img class="start" src="<?php echo esc_url(JSST_PLUGIN_URL).'includes/images/postinstallation/translation.png';?>" />
                                     <span class="text"><?php echo esc_html(__('Translation','js-support-ticket')); ?></span>
                                 </a>
                             </li>
                         <?php } ?>
                         <li class="header-parts third-part active">
                            <a href="<?php echo esc_url(admin_url("admin.php?page=postinstallation&jstlay=stepthree")); ?>" title="link" class="tab_icon">
-                               <img class="start" src="<?php echo JSST_PLUGIN_URL.'includes/images/postinstallation/feedback.png';?>" />
+                               <img class="start" src="<?php echo esc_url(JSST_PLUGIN_URL).'includes/images/postinstallation/feedback.png';?>" />
                                 <span class="text"><?php echo esc_html(__('Feedback Settings','js-support-ticket')); ?></span>
                             </a>
                         </li>
                         <li class="header-parts forth-part">
                             <a href="<?php echo esc_url(admin_url("admin.php?page=postinstallation&jstlay=settingcomplete")); ?>" title="link" class="tab_icon">
-                               <img class="start" src="<?php echo JSST_PLUGIN_URL.'includes/images/postinstallation/complete.png';?>" />
+                               <img class="start" src="<?php echo esc_url(JSST_PLUGIN_URL).'includes/images/postinstallation/complete.png';?>" />
                                 <span class="text"><?php echo esc_html(__('Complete','js-support-ticket')); ?></span>
                             </a>
                         </li>
@@ -90,10 +90,10 @@ $type = array(
                              <div class="pic-button-part">
                                 <a class="next-step" href="#" onclick="document.getElementById('jssupportticket-form-ins').submit();" >
                                     <?php echo esc_html(__('Next','js-support-ticket')); ?>
-                                     <img alt="image" src="<?php echo JSST_PLUGIN_URL.'includes/images/postinstallation/next-arrow.png';?>">
+                                     <img alt="image" src="<?php echo esc_url(JSST_PLUGIN_URL).'includes/images/postinstallation/next-arrow.png';?>">
                                 </a>
                                 <a class="back" href="<?php echo esc_url(admin_url('admin.php?page=postinstallation&jstlay=steptwo')); ?>">
-                                    <img alt="image" src="<?php echo JSST_PLUGIN_URL.'includes/images/postinstallation/back-arrow.png';?>">
+                                    <img alt="image" src="<?php echo esc_url(JSST_PLUGIN_URL).'includes/images/postinstallation/back-arrow.png';?>">
                                     <?php echo esc_html(__('Back','js-support-ticket')); ?>
                                 </a>
                             </div>

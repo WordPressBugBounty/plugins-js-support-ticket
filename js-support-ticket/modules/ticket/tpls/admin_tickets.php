@@ -3,7 +3,6 @@
     die('Restricted Access');
 ?>
 <?php
-    $protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' || $_SERVER['SERVER_PORT'] == 443) ? "https://" : "http://";
     wp_enqueue_script('jquery-ui-datepicker');
     wp_enqueue_style('jquery-ui-css', JSST_PLUGIN_URL . 'includes/css/jquery-ui-smoothness.css');
     wp_enqueue_style('status-graph', JSST_PLUGIN_URL . 'includes/css/status_graph.css');
@@ -104,7 +103,7 @@ JSSTmessage::getMessage();
                 }
             ?>
             <h1 class="jsstadmin-head-text"><?php echo esc_html(__('Tickets','js-support-ticket')); ?></h1>
-            <a <?php echo esc_attr($id); ?> title="<?php echo esc_html(__('Add', 'js-support-ticket')); ?>" class="jsstadmin-add-link button" href="?page=ticket&jstlay=addticket&formid=<?php echo JSSTincluder::getJSModel('ticket')->getDefaultMultiFormId() ?>"><img alt="<?php echo esc_html(__('Add', 'js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/plus-icon.png" /><?php echo esc_html(__('Create Ticket','js-support-ticket')); ?></a>
+            <a <?php echo esc_attr($id); ?> title="<?php echo esc_html(__('Add', 'js-support-ticket')); ?>" class="jsstadmin-add-link button" href="?page=ticket&jstlay=addticket&formid=<?php echo esc_html(JSSTincluder::getJSModel('ticket')->getDefaultMultiFormId()) ?>"><img alt="<?php echo esc_html(__('Add', 'js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/plus-icon.png" /><?php echo esc_html(__('Create Ticket','js-support-ticket')); ?></a>
         </div>
         <div id="jsstadmin-data-wrp" class="p0 bg-n bs-n">
             <?php
@@ -330,7 +329,7 @@ JSSTmessage::getMessage();
                         <option value="<?php echo esc_attr(jssupportticket::$_sortlinks['created']); ?>"  <?php if (jssupportticket::$_sorton == 'created') echo 'selected' ?>><?php echo esc_html(__("Created",'js-support-ticket')); ?></option>
                     </select>
                     <a href="#" class="js-admin-sort-btn" title="<?php echo esc_html(__('sort','js-support-ticket')); ?>">
-                        <img alt="<?php echo esc_html(__('sort','js-support-ticket')); ?>" src="<?php echo JSST_PLUGIN_URL . 'includes/images/' . esc_attr($img) ?>">
+                        <img alt="<?php echo esc_html(__('sort','js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL) . 'includes/images/' . esc_attr($img) ?>">
                     </a>
                 </div>
             </div>
@@ -368,7 +367,7 @@ JSSTmessage::getMessage();
                             <div class="js-ticket-pic">
                                 <?php echo wp_kses(jsst_get_avatar(JSSTincluder::getJSModel('jssupportticket')->getWPUidById($ticket->uid)), JSST_ALLOWED_TAGS); ?>
                                 <?php /*if (in_array('agent',jssupportticket::$_active_addons) && $ticket->staffphoto) { ?>
-                                    <img alt="<?php echo esc_html(__('Staff','js-support-ticket')); ?>" src="<?php echo admin_url('?page=agent&action=jstask&task=getStaffPhoto&jssupportticketid='.esc_attr($ticket->staffid)); ?>">
+                                    <img alt="<?php echo esc_html(__('Staff','js-support-ticket')); ?>" src="<?php echo esc_url(admin_url('?page=agent&action=jstask&task=getStaffPhoto&jssupportticketid='.esc_attr($ticket->staffid))); ?>">
                                 <?php } else {
                                     echo jsst_get_avatar($ticket->uid);
                                 }*/ ?>
@@ -420,10 +419,10 @@ JSSTmessage::getMessage();
                                     <?php
                                     $counter = 'one';
                                     if ($ticket->lock == 1) { ?>
-                                        <img class="ticketstatusimage <?php echo esc_attr($counter); $counter = 'two'; ?>" src="<?php echo JSST_PLUGIN_URL . "includes/images/lock.png"; ?>" alt="<?php echo esc_html(__('The ticket is locked', 'js-support-ticket')); ?>" title="<?php echo esc_html(__('The ticket is locked', 'js-support-ticket')); ?>" />
+                                        <img class="ticketstatusimage <?php echo esc_attr($counter); $counter = 'two'; ?>" src="<?php echo esc_url(JSST_PLUGIN_URL) . "includes/images/lock.png"; ?>" alt="<?php echo esc_html(__('The ticket is locked', 'js-support-ticket')); ?>" title="<?php echo esc_html(__('The ticket is locked', 'js-support-ticket')); ?>" />
                                     <?php } ?>
                                     <?php if ($ticket->isoverdue == 1) { ?>
-                                        <img class="ticketstatusimage <?php echo esc_attr($counter); ?>" src="<?php echo JSST_PLUGIN_URL . "includes/images/over-due.png"; ?>" alt="<?php echo esc_html(__('This ticket is marked as overdue', 'js-support-ticket')); ?>" title="<?php echo esc_html(__('This ticket is marked as overdue', 'js-support-ticket')); ?>" />
+                                        <img class="ticketstatusimage <?php echo esc_attr($counter); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL) . "includes/images/over-due.png"; ?>" alt="<?php echo esc_html(__('This ticket is marked as overdue', 'js-support-ticket')); ?>" title="<?php echo esc_html(__('This ticket is marked as overdue', 'js-support-ticket')); ?>" />
                                     <?php } ?>
                                     <span class="js-ticket-status" style="color:<?php echo esc_attr($style); ?>">
                                         <?php echo esc_html($status); ?>

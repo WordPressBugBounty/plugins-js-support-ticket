@@ -264,7 +264,7 @@ class JSSTbreadcrumbs {
                                 echo '
                                 <li>
                                     <a href="' . esc_url($obj['link']) . '">
-                                        <img class="homeicon" alt="home icon" src="' . JSST_PLUGIN_URL . 'includes/images/homeicon-white.png"/>
+                                        <img class="homeicon" alt="'.esc_attr(__('home icon', 'js-support-ticket')).'" src="' . esc_url(JSST_PLUGIN_URL) . 'includes/images/homeicon-white.png"/>
                                     </a>
                                 </li>';
                             } else {

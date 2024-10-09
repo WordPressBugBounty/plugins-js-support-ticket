@@ -76,7 +76,7 @@
                                 <span class="js-support-ticket-table-responsive-heading">
                                     <?php echo esc_html(__('Message','js-support-ticket'));echo " : "; ?>
                                 </span>
-                                <?php echo esc_html($request->message); ?>
+                                <?php echo wp_kses($request->message, JSST_ALLOWED_TAGS); ?>
                             </td>
                             <td>
                                 <span class="js-support-ticket-table-responsive-heading">

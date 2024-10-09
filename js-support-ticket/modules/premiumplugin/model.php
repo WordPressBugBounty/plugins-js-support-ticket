@@ -68,11 +68,11 @@ class JSSTpremiumpluginModel {
         $request = wp_remote_get( self::$server_url . '?' . http_build_query( $args, '', '&' ) );
 
         if ( is_wp_error( $request ) ) {
-            return json_encode( array( 'error_code' => $request->get_error_code(), 'error' => $request->get_error_message() ) );
+            return wp_json_encode( array( 'error_code' => $request->get_error_code(), 'error' => $request->get_error_message() ) );
         }
 
         if ( wp_remote_retrieve_response_code( $request ) != 200 ) {
-            return json_encode( array( 'error_code' => wp_remote_retrieve_response_code( $request ), 'error' => 'Error code: ' . wp_remote_retrieve_response_code( $request ) ) );
+            return wp_json_encode( array( 'error_code' => wp_remote_retrieve_response_code( $request ), 'error' => 'Error code: ' . wp_remote_retrieve_response_code( $request ) ) );
         }
         $response =  wp_remote_retrieve_body( $request );
         $response = json_decode($response,true);
@@ -133,11 +133,11 @@ class JSSTpremiumpluginModel {
         );
         $request = wp_remote_get( self::$server_url . '?' . http_build_query( $defaults, '', '&' ) );
         if ( is_wp_error( $request ) ) {
-            return json_encode( array( 'error_code' => $request->get_error_code(), 'error' => $request->get_error_message() ) );
+            return wp_json_encode( array( 'error_code' => $request->get_error_code(), 'error' => $request->get_error_message() ) );
         }
 
         if ( wp_remote_retrieve_response_code( $request ) != 200 ) {
-            return json_encode( array( 'error_code' => wp_remote_retrieve_response_code( $request ), 'error' => 'Error code: ' . wp_remote_retrieve_response_code( $request ) ) );
+            return wp_json_encode( array( 'error_code' => wp_remote_retrieve_response_code( $request ), 'error' => 'Error code: ' . wp_remote_retrieve_response_code( $request ) ) );
         }
 
         $response =  wp_remote_retrieve_body( $request );
@@ -162,11 +162,11 @@ class JSSTpremiumpluginModel {
 
         $request = wp_remote_get( self::$server_url . '?' . http_build_query( $defaults, '', '&' ) );
         if ( is_wp_error( $request ) ) {
-            return json_encode( array( 'error_code' => $request->get_error_code(), 'error' => $request->get_error_message() ) );
+            return wp_json_encode( array( 'error_code' => $request->get_error_code(), 'error' => $request->get_error_message() ) );
         }
 
         if ( wp_remote_retrieve_response_code( $request ) != 200 ) {
-            return json_encode( array( 'error_code' => wp_remote_retrieve_response_code( $request ), 'error' => 'Error code: ' . wp_remote_retrieve_response_code( $request ) ) );
+            return wp_json_encode( array( 'error_code' => wp_remote_retrieve_response_code( $request ), 'error' => 'Error code: ' . wp_remote_retrieve_response_code( $request ) ) );
         }
 
         $response =  wp_remote_retrieve_body( $request );

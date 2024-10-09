@@ -42,7 +42,7 @@ JSSTmessage::getMessage();
         </div>
         <div id="jsstadmin-head">
             <h1 class="jsstadmin-head-text"><?php echo esc_html(__('Slug','js-support-ticket')); ?></h1>
-            <a class="jsstadmin-add-link button" title="<?php echo esc_html(__('reset','js-support-ticket')); ?>" href="<?php echo admin_url("admin.php?page=slug&task=resetallslugs&action=jstask"); ?>">
+            <a class="jsstadmin-add-link button" title="<?php echo esc_html(__('reset','js-support-ticket')); ?>" href="<?php echo esc_url(admin_url("admin.php?page=slug&task=resetallslugs&action=jstask")); ?>">
                 <?php echo esc_html(__('Reset All','js-support-ticket')); ?>
             </a>
         </div>
@@ -94,7 +94,7 @@ JSSTmessage::getMessage();
         <!-- page content -->
         <div id="jsstadmin-data-wrp" class="p0 bg-n bs-n">
             <!-- filter form -->
-            <form class="js-filter-form slug-configform" name="jsstadmin-form" id="conjsstadmin-form" method="post" action="<?php echo wp_nonce_url(admin_url("admin.php?page=slug&task=savehomeprefix"),"save-home-prefix"); ?>">
+            <form class="js-filter-form slug-configform" name="jsstadmin-form" id="conjsstadmin-form" method="post" action="<?php echo esc_url(wp_nonce_url(admin_url("admin.php?page=slug&task=savehomeprefix"),"save-home-prefix")); ?>">
                 <?php echo wp_kses(JSSTformfield::text('prefix', jssupportticket::$_config['home_slug_prefix'], array('class' => 'inputbox js-form-input-field', 'placeholder' => esc_html(__('Home Slug','js-support-ticket')).' '. esc_html(__('Prefix','js-support-ticket')))),JSST_ALLOWED_TAGS); ?>
                 <?php echo wp_kses(JSSTformfield::submitbutton('btnsubmit', esc_html(__('Save','js-support-ticket')), array('class' => 'button js-form-search')),JSST_ALLOWED_TAGS); ?>
                 <?php echo wp_kses(JSSTformfield::hidden('form_request', 'jssupportticket'),JSST_ALLOWED_TAGS); ?>
@@ -104,7 +104,7 @@ JSSTmessage::getMessage();
                 </div>
             </form>
             <!-- filter form -->
-            <form class="js-filter-form slug-configform" name="jsstadmin-form" id="conjsstadmin-form" method="post" action="<?php echo wp_nonce_url(admin_url("admin.php?page=slug&task=saveprefix"),"save-prefix"); ?>">
+            <form class="js-filter-form slug-configform" name="jsstadmin-form" id="conjsstadmin-form" method="post" action="<?php echo esc_url(wp_nonce_url(admin_url("admin.php?page=slug&task=saveprefix"),"save-prefix")); ?>">
                 <?php echo wp_kses(JSSTformfield::text('prefix', jssupportticket::$_config['slug_prefix'], array('class' => 'inputbox js-form-input-field', 'placeholder' => esc_html(__('Slug','js-support-ticket')).' '. esc_html(__('Prefix','js-support-ticket')))),JSST_ALLOWED_TAGS); ?>
                 <?php echo wp_kses(JSSTformfield::submitbutton('btnsubmit', esc_html(__('Save','js-support-ticket')), array('class' => 'button js-form-search')),JSST_ALLOWED_TAGS); ?>
                 <?php echo wp_kses(JSSTformfield::hidden('form_request', 'jssupportticket'),JSST_ALLOWED_TAGS); ?>
@@ -114,7 +114,7 @@ JSSTmessage::getMessage();
                 </div>
             </form>
             <!-- filter form -->
-            <form class="js-filter-form" name="jsstadmin-form" id="jsstadmin-form" method="post" action="<?php echo wp_nonce_url(admin_url("admin.php?page=slug"),"slug"); ?>">
+            <form class="js-filter-form" name="jsstadmin-form" id="jsstadmin-form" method="post" action="<?php echo esc_url(wp_nonce_url(admin_url("admin.php?page=slug"),"slug")); ?>">
                 <?php echo wp_kses(JSSTformfield::text('slug', jssupportticket::$_data['slug'], array('class' => 'inputbox js-form-input-field', 'placeholder' => esc_html(__('Search By Slug','js-support-ticket')))),JSST_ALLOWED_TAGS); ?>
                 <?php echo wp_kses(JSSTformfield::submitbutton('btnsubmit', esc_html(__('Search','js-support-ticket')), array('class' => 'button js-form-search')),JSST_ALLOWED_TAGS); ?>
                 <?php echo wp_kses(JSSTformfield::button('reset', esc_html(__('Reset','js-support-ticket')), array('class' => 'button js-form-reset', 'onclick' => 'resetFrom();')),JSST_ALLOWED_TAGS); ?>
@@ -123,7 +123,7 @@ JSSTmessage::getMessage();
             <?php
                 if (!empty(jssupportticket::$_data[0])) {
                     ?>
-                    <form id="js-list-form" method="post" action="<?php echo wp_nonce_url(admin_url("admin.php?page=slug&task=saveSlug"),"save-slug"); ?>">
+                    <form id="js-list-form" method="post" action="<?php echo esc_url(wp_nonce_url(admin_url("admin.php?page=slug&task=saveSlug"),"save-slug")); ?>">
                         <table id="js-support-ticket-table" class="js-support-ticket-table">
                             <thead>
                                 <tr class="js-support-ticket-table-heading">

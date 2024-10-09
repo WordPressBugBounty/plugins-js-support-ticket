@@ -11,7 +11,6 @@ if (jssupportticket::$_config['offline'] == 2) {
                 if (jssupportticket::$_data['staff_enabled']) { ?>
     <!-- admin -->
 <?php
-$protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' || $_SERVER['SERVER_PORT'] == 443) ? "https://" : "http://";
 wp_enqueue_script('jquery-ui-datepicker');
 wp_enqueue_style('jquery-ui-css', JSST_PLUGIN_URL . 'includes/css/jquery-ui-smoothness.css');
 $js_scriptdateformat = JSSTincluder::getJSModel('jssupportticket')->getJSSTDateFormat();
@@ -261,7 +260,7 @@ wp_add_inline_script('ticket-google-charts-handle',$jssupportticket_js);
         </div>
         <?php
         if (jssupportticket::$_data[1]) {
-            echo '<div class="tablenav"><div class="tablenav-pages"' . (jssupportticket::$_data[1]) . '</div></div>';
+            echo '<div class="tablenav"><div class="tablenav-pages"' . wp_kses_post(jssupportticket::$_data[1]) . '</div></div>';
         }
     } else {
         JSSTlayout::getNoRecordFound();

@@ -143,7 +143,7 @@ class JSSTslugModel {
                     ' . JSSTformfield::button('save', esc_html(__('Save', 'js-support-ticket')), array('class' => 'button savebutton popup-act-btn','onClick'=>'getFieldValue();'));
         $html .='</div>';
         $html = jssupportticketphplib::JSST_htmlentities($html);
-        return json_encode($html);
+        return wp_json_encode($html);
     }
 
     function getDefaultSlugFromSlug($layout) {
@@ -160,12 +160,12 @@ class JSSTslugModel {
 
     function getSlugString($home_page = 0) {
         global $wp_rewrite;
-        $rules = json_encode($wp_rewrite->rules);
+        $rules = wp_json_encode($wp_rewrite->rules);
         $query = "SELECT slug AS value FROM `".jssupportticket::$_db->prefix."js_ticket_slug`";
         $val = jssupportticket::$_db->get_results($query);
         $string = '';
         $bstring = '';
-        //$rules = json_encode($rules);
+        //$rules = wp_json_encode($rules);
         $prefix = JSSTincluder::getJSModel('configuration')->getConfigValue('slug_prefix');
         $homeprefix = JSSTincluder::getJSModel('configuration')->getConfigValue('home_slug_prefix');
         foreach ($val as $slug) {
@@ -186,7 +186,7 @@ class JSSTslugModel {
         global $wp_rewrite;
         $slug_prefix = JSSTincluder::getJSModel('configuration')->getConfigValue('slug_prefix');
         $homeprefix = JSSTincluder::getJSModel('configuration')->getConfigValue('home_slug_prefix');
-        $rules = json_encode($wp_rewrite->rules);
+        $rules = wp_json_encode($wp_rewrite->rules);
         $query = "SELECT slug AS value FROM `".jssupportticket::$_db->prefix."js_ticket_slug`";
         $val = jssupportticket::$_db->get_results($query);
         $string = array();

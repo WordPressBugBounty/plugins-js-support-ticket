@@ -67,7 +67,7 @@ class JSSTwphdnotification {
                     $data = $message;
                 }
             }
-            $data = json_encode($data , true);
+            $data = wp_json_encode($data , true);
             $sessionmsg = jssupportticketphplib::JSST_safe_encoding($data);
             if(!$update){
                 $wpdb->insert( "{$wpdb->prefix}js_ticket_jshdsessiondata", array("usersessionid" => jssupportticket::$_jshdsession->sessionid, "sessionmsg" => $sessionmsg, "sessionexpire" => jssupportticket::$_jshdsession->sessionexpire, "sessionfor" => $sessiondatafor) );

@@ -124,14 +124,14 @@ div.js-ticket-sorting span.js-ticket-sorting-link a img{display: inline-block;ve
                     </span>
                     <div class="color_portion">
                         <span class="color_title"><?php echo esc_html(__('Color 1', 'js-support-ticket')); ?></span>
-                        <input type="text" name="color1" id="color1" value="<?php echo esc_attr(jssupportticket::$_data[0]['color1']); ?>" style="background:<?php echo esc_attr(jssupportticket::$_data[0]['color1']); ?>;"/>
+                        <input type="text" name="color1" id="color1" value="<?php echo esc_attr(jssupportticket::$_data[0]['color1']); ?>" style="background:<?php echo esc_attr(jssupportticket::$_data[0]['color1']); ?>;" maxlength="15" />
                         <span class="color_location">
                             <?php echo esc_html(__('Top menu heading background', 'js-support-ticket')); ?>
                         </span>
                     </div>
                     <div class="color_portion">
                         <span class="color_title"><?php echo esc_html(__('Color 2', 'js-support-ticket')); ?></span>
-                        <input type="text" name="color2" id="color2" value="<?php echo esc_attr(jssupportticket::$_data[0]['color2']); ?>" style="background:<?php echo esc_attr(jssupportticket::$_data[0]['color2']); ?>;"/>
+                        <input type="text" name="color2" id="color2" value="<?php echo esc_attr(jssupportticket::$_data[0]['color2']); ?>" style="background:<?php echo esc_attr(jssupportticket::$_data[0]['color2']); ?>;" maxlength="15"/>
                         <span class="color_location">
                             <?php echo esc_html(__('Top header line color', 'js-support-ticket')); ?>,
                             <?php echo esc_html(__('Button Hover', 'js-support-ticket')); ?>,
@@ -140,17 +140,17 @@ div.js-ticket-sorting span.js-ticket-sorting-link a img{display: inline-block;ve
                     </div>
                     <div class="color_portion">
                         <span class="color_title"><?php echo esc_html(__('Color 3', 'js-support-ticket')); ?></span>
-                        <input type="text" name="color3" id="color3" value="<?php echo esc_attr(jssupportticket::$_data[0]['color3']); ?>" style="background:<?php echo esc_attr(jssupportticket::$_data[0]['color3']); ?>;"/>
+                        <input type="text" name="color3" id="color3" value="<?php echo esc_attr(jssupportticket::$_data[0]['color3']); ?>" style="background:<?php echo esc_attr(jssupportticket::$_data[0]['color3']); ?>;" maxlength="15"/>
                         <span class="color_location"><?php echo esc_html(__('Content Background Color', 'js-support-ticket')); ?></span>
                     </div>
                     <div class="color_portion">
                         <span class="color_title"><?php echo esc_html(__('Color 4', 'js-support-ticket')); ?></span>
-                        <input type="text" name="color4" id="color4" value="<?php echo esc_attr(jssupportticket::$_data[0]['color4']); ?>" style="background:<?php echo esc_attr(jssupportticket::$_data[0]['color4']); ?>;"/>
+                        <input type="text" name="color4" id="color4" value="<?php echo esc_attr(jssupportticket::$_data[0]['color4']); ?>" style="background:<?php echo esc_attr(jssupportticket::$_data[0]['color4']); ?>;" maxlength="15"/>
                         <span class="color_location"><?php echo esc_html(__('Content Text Color', 'js-support-ticket')); ?></span>
                     </div>
                     <div class="color_portion">
                         <span class="color_title"><?php echo esc_html(__('Color 5', 'js-support-ticket')); ?></span>
-                        <input type="text" name="color5" id="color5" value="<?php echo esc_attr(jssupportticket::$_data[0]['color5']); ?>" style="background:<?php echo esc_attr(jssupportticket::$_data[0]['color5']); ?>;"/>
+                        <input type="text" name="color5" id="color5" value="<?php echo esc_attr(jssupportticket::$_data[0]['color5']); ?>" style="background:<?php echo esc_attr(jssupportticket::$_data[0]['color5']); ?>;" maxlength="15"/>
                         <span class="color_location">
                             <?php echo esc_html(__('Border color', 'js-support-ticket')); ?>,
                             <?php echo esc_html(__('Lines', 'js-support-ticket')); ?>
@@ -158,12 +158,12 @@ div.js-ticket-sorting span.js-ticket-sorting-link a img{display: inline-block;ve
                     </div>
                     <div class="color_portion">
                         <span class="color_title"><?php echo esc_html(__('Color 6', 'js-support-ticket')); ?></span>
-                        <input type="text" name="color6" id="color6" value="<?php echo esc_attr(jssupportticket::$_data[0]['color6']); ?>" style="background:<?php echo esc_attr(jssupportticket::$_data[0]['color6']); ?>;"/>
+                        <input type="text" name="color6" id="color6" value="<?php echo esc_attr(jssupportticket::$_data[0]['color6']); ?>" style="background:<?php echo esc_attr(jssupportticket::$_data[0]['color6']); ?>;" maxlength="15"/>
                         <span class="color_location"><?php echo esc_html(__('Button Color', 'js-support-ticket')); ?></span>
                     </div>
                     <div class="color_portion">
                         <span class="color_title"><?php echo esc_html(__('Color 7', 'js-support-ticket')); ?></span>
-                        <input type="text" name="color7" id="color7" value="<?php echo esc_attr(jssupportticket::$_data[0]['color7']); ?>" style="background:<?php echo esc_attr(jssupportticket::$_data[0]['color7']); ?>;"/>
+                        <input type="text" name="color7" id="color7" value="<?php echo esc_attr(jssupportticket::$_data[0]['color7']); ?>" style="background:<?php echo esc_attr(jssupportticket::$_data[0]['color7']); ?>;" maxlength="15"/>
                         <span class="color_location"><?php echo esc_html(__('Top header text color', 'js-support-ticket')); ?></span>
                     </div>
                     <div class="color_submit_button_hide">
@@ -316,7 +316,7 @@ div.js-ticket-sorting span.js-ticket-sorting-link a img{display: inline-block;ve
                         <div class="js-col-xs-12 js-col-md-12 js-ticket-wrapper">
                             <div class="js-col-xs-12 js-col-md-12 js-ticket-toparea">
                                 <div class="js-col-xs-2 js-col-md-2 js-ticket-pic">
-                                <img alt="<?php echo esc_html(__('', 'js-support-ticket'));?>" src='<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/user.png' class='avatar avatar-96 photo' height='96' width='96' />
+                                <img alt="<?php echo esc_html(__('user', 'js-support-ticket'));?>" src='<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/user.png' class='avatar avatar-96 photo' height='96' width='96' />
                                 </div>
                                 <div class="js-col-xs-10 js-col-md-6 js-col-xs-10 js-ticket-data js-nullpadding">
                                     <div class="js-col-xs-12 js-col-md-12 js-ticket-padding-xs js-ticket-body-data-elipses name">
@@ -383,7 +383,7 @@ div.js-ticket-sorting span.js-ticket-sorting-link a img{display: inline-block;ve
                         <div class="js-col-xs-12 js-col-md-12 js-ticket-wrapper">
                             <div class="js-col-xs-12 js-col-md-12 js-ticket-toparea">
                                 <div class="js-col-xs-2 js-col-md-2 js-ticket-pic">
-                                <img alt="<?php echo esc_html(__('', 'js-support-ticket'));?>" src='<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/user.png' class='avatar avatar-96 photo' height='96' width='96' />
+                                <img alt="<?php echo esc_html(__('user', 'js-support-ticket'));?>" src='<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/user.png' class='avatar avatar-96 photo' height='96' width='96' />
                                 </div>
                                 <div class="js-col-xs-10 js-col-md-6 js-col-xs-10 js-ticket-data js-nullpadding">
                                     <div class="js-col-xs-12 js-col-md-12 js-ticket-padding-xs js-ticket-body-data-elipses name">

@@ -37,7 +37,7 @@ function jsst_authenticate_username_password($user, $username, $password)
 // register a new user
 function jsst_add_new_member()
 {
-    if (isset($_POST["jsst_user_login"]) && wp_verify_nonce($_POST['jsst_support_register_nonce'], 'jsst-support-register-nonce')) {
+    if (isset($_POST["jsst_user_login"]) && isset($_POST['jsst_support_register_nonce']) && wp_verify_nonce($_POST['jsst_support_register_nonce'], 'jsst-support-register-nonce')) {
         $user_login = sanitize_user($_POST["jsst_user_login"]);
         $user_email = sanitize_email($_POST["jsst_user_email"]);
         $user_first = sanitize_text_field($_POST["jsst_user_first"]);

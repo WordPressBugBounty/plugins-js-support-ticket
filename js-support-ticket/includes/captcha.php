@@ -8,7 +8,7 @@ class JSSTcaptcha {
     function getCaptchaForForm() {
         $rand = $this->randomNumber();
         JSSTincluder::getObjectClass('wphdnotification')->addSessionNotificationDataToTable($rand,'','jssupportticket_spamcheckid');
-        $jssupportticket_rot13 = mt_rand(0, 1);
+        $jssupportticket_rot13 = wp_rand(0, 1);
         JSSTincluder::getObjectClass('wphdnotification')->addSessionNotificationDataToTable($jssupportticket_rot13,'','jssupportticket_rot13');
 
         $operator = 2;
@@ -17,11 +17,11 @@ class JSSTcaptcha {
         }
         $max_value = 20;
         $negativ = 1;
-        $operend_1 = mt_rand($negativ, $max_value);
-        $operend_2 = mt_rand($negativ, $max_value);
+        $operend_1 = wp_rand($negativ, $max_value);
+        $operend_2 = wp_rand($negativ, $max_value);
         $operand = jssupportticket::$_config['owncaptcha_totaloperand'];
         if ($operand == 3) {
-            $operend_3 = mt_rand($negativ, $max_value);
+            $operend_3 = wp_rand($negativ, $max_value);
         }
 
         if (jssupportticket::$_config['owncaptcha_calculationtype'] == 2) { // Subtraction
@@ -51,14 +51,16 @@ class JSSTcaptcha {
         }
 
         if ($tcalc == 0)
-            $tcalc = mt_rand(1, 2);
+            $tcalc = wp_rand(1, 2);
 
         if ($tcalc == 1) { // Addition
             if ($jssupportticket_rot13 == 1) { // ROT13 coding
                 if ($operand == 2) {
-                    JSSTincluder::getObjectClass('wphdnotification')->addSessionNotificationDataToTable(str_rot13(base64_encode($operend_1 + $operend_2)),'','jssupportticket_spamcheckresult');
+                    // The use of function str_rot13() is forbidden
+                    JSSTincluder::getObjectClass('wphdnotification')->addSessionNotificationDataToTable(base64_encode($operend_1 + $operend_2),'','jssupportticket_spamcheckresult');
                 } elseif ($operand == 3) {
-                    JSSTincluder::getObjectClass('wphdnotification')->addSessionNotificationDataToTable(str_rot13(base64_encode($operend_1 + $operend_2 + $operend_3)),'','jssupportticket_spamcheckresult');
+                    // The use of function str_rot13() is forbidden
+                    JSSTincluder::getObjectClass('wphdnotification')->addSessionNotificationDataToTable(base64_encode($operend_1 + $operend_2 + $operend_3),'','jssupportticket_spamcheckresult');
                 }
             } else {
                 if ($operand == 2) {
@@ -70,9 +72,11 @@ class JSSTcaptcha {
         } elseif ($tcalc == 2) { // Subtraction
             if ($jssupportticket_rot13 == 1) {
                 if ($operand == 2) {
-                    JSSTincluder::getObjectClass('wphdnotification')->addSessionNotificationDataToTable(str_rot13(base64_encode($operend_1 - $operend_2)),'','jssupportticket_spamcheckresult');
+                    // The use of function str_rot13() is forbidden
+                    JSSTincluder::getObjectClass('wphdnotification')->addSessionNotificationDataToTable(base64_encode($operend_1 - $operend_2),'','jssupportticket_spamcheckresult');
                 } elseif ($operand == 3) {
-                    JSSTincluder::getObjectClass('wphdnotification')->addSessionNotificationDataToTable(str_rot13(base64_encode($operend_1 - $operend_2 - $operend_3)),'','jssupportticket_spamcheckresult');
+                    // The use of function str_rot13() is forbidden
+                    JSSTincluder::getObjectClass('wphdnotification')->addSessionNotificationDataToTable(base64_encode($operend_1 - $operend_2 - $operend_3),'','jssupportticket_spamcheckresult');
                 }
             } else {
                 if ($operand == 2) {
@@ -112,16 +116,16 @@ class JSSTcaptcha {
 
         // first character has to be a letter
         $characters = range('a', 'z');
-        $pw .= $characters[mt_rand(0, 25)];
+        $pw .= $characters[wp_rand(0, 25)];
 
         // other characters arbitrarily
         $numbers = range(0, 9);
         $characters = array_merge($characters, $numbers);
 
-        $pw_length = mt_rand(4, 12);
+        $pw_length = wp_rand(4, 12);
 
         for ($i = 0; $i < $pw_length; $i++) {
-            $pw .= $characters[mt_rand(0, 35)];
+            $pw .= $characters[wp_rand(0, 35)];
         }
         return $pw;
     }
@@ -129,7 +133,8 @@ class JSSTcaptcha {
     private function performChecks() {
         $jssupportticket_rot13 = JSSTincluder::getObjectClass('wphdnotification')->getNotificationDatabySessionId('jssupportticket_rot13',true);
         if($jssupportticket_rot13 == 1){
-            $spamcheckresult = jssupportticketphplib::JSST_safe_decoding(str_rot13(JSSTincluder::getObjectClass('wphdnotification')->getNotificationDatabySessionId('jssupportticket_spamcheckresult',true)));
+            // The use of function str_rot13() is forbidden
+            $spamcheckresult = jssupportticketphplib::JSST_safe_decoding(JSSTincluder::getObjectClass('wphdnotification')->getNotificationDatabySessionId('jssupportticket_spamcheckresult',true));
         } else {
             $spamcheckresult = jssupportticketphplib::JSST_safe_decoding(JSSTincluder::getObjectClass('wphdnotification')->getNotificationDatabySessionId('jssupportticket_spamcheckresult',true));
         }

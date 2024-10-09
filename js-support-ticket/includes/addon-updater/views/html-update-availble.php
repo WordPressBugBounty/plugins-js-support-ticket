@@ -27,8 +27,8 @@ if(!empty($this->addon_installed_array)){
 			if(!$transient_val){
 				if (version_compare( $response[$addon], $plugin_data['Version'], '>' ) ) { ?>
 					<div class="updated">
-						<p class="wpjm-updater-dismiss" style="float:right;"><a href="<?php echo esc_url( add_query_arg( 'dismiss-jsst-addon-update-notice-' . sanitize_title( $addon ), '1' ) ); ?>"><?php _e( 'Hide notice' ); ?></a></p>
-						<p><?php printf( '<a href="%s">New Version is avaible</a> for "%s".', admin_url('plugins.php'), esc_html( $plugin_data['Name'] ) ); ?></p>
+						<p class="wpjm-updater-dismiss" style="float:right;"><a href="<?php echo esc_url( add_query_arg( 'dismiss-jsst-addon-update-notice-' . sanitize_title( $addon ), '1' ) ); ?>"><?php esc_html_e( 'Hide notice' ); ?></a></p>
+						<p><?php printf( '<a href="%s">New Version is avaible</a> for "%s".', esc_url(admin_url('plugins.php')), esc_html( $plugin_data['Name'] ) ); ?></p>
 					</div>
 				<?php }
 			}

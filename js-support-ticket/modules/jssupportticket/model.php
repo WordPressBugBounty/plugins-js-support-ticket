@@ -607,14 +607,14 @@ class JSSTjssupportticketModel {
             }
         }
 
-        $result = json_encode($result);
+        $result = wp_json_encode($result);
 
         return $result;
     }
 
     function makeLanguageCode($lang_name){
         $langarray = wp_get_installed_translations('core');
-        $langarray = $langarray['default'];
+        $langarray = isset($langarray['default']) ? $langarray['default'] : array();
         $match = false;
         if(array_key_exists($lang_name, $langarray)){
             $lang_name = $lang_name;
@@ -667,7 +667,7 @@ class JSSTjssupportticketModel {
             $result['input'] = jssupportticketphplib::JSST_htmlentities($result['input']);
             $result['path'] = esc_html(__('Language code','js-support-ticket'));
         }
-        $result = json_encode($result);
+        $result = wp_json_encode($result);
         return $result;
     }
 
@@ -689,7 +689,7 @@ class JSSTjssupportticketModel {
 
         if($lang_name == '' || $language_code == ''){
             $result['error'] = esc_html(__('Empty values','js-support-ticket'));
-            return json_encode($result);
+            return wp_json_encode($result);
         }
 
         $final_path = $path.'/js-support-ticket-'.$language_code.'.po';
@@ -700,10 +700,10 @@ class JSSTjssupportticketModel {
 
         if(!array_key_exists($language_code, $langarray)){
             $result['error'] = $lang_name. ' ' . esc_html(__('Language is not installed','js-support-ticket'));
-            return json_encode($result);
+            return wp_json_encode($result);
         }elseif( ! is_writeable($path)){
             $result['error'] = $lang_name. ' ' . esc_html(__('Language directory is not writable','js-support-ticket')).': '.$path;
-            return json_encode($result);
+            return wp_json_encode($result);
         }
 
         if( ! file_exists($final_path)){
@@ -780,7 +780,7 @@ class JSSTjssupportticketModel {
             }
         }
 
-        $result = json_encode($result);
+        $result = wp_json_encode($result);
 
         return $result;
 
@@ -791,7 +791,9 @@ class JSSTjssupportticketModel {
         do_action('jssupportticket_load_wp_admin_file');
         $tmpfile = download_url( $url);
         copy( $tmpfile, $path );
-        @unlink( $tmpfile ); // must unlink afterwards
+        if ( file_exists( $tmpfile ) ) {
+            wp_delete_file( $tmpfile ); // must unlink afterwards
+        }
         //make mo for po file
         $this->phpmo_convert($path);
         return $result;
@@ -1366,7 +1368,7 @@ class JSSTjssupportticketModel {
                 }
                 if(is_array($array) && isset($array['file'])){
                     $jshd_tran_lang_exists = array("code" => $activated_lang, "lang_fullname" => $install_lang_name , "name" => $lang_name);
-                    $jshd_tran_lang_exists = json_encode($jshd_tran_lang_exists);
+                    $jshd_tran_lang_exists = wp_json_encode($jshd_tran_lang_exists);
                     update_option( 'jshd_tran_lang_exists', $jshd_tran_lang_exists);
                     return $jshd_tran_lang_exists;
                 }else{
@@ -1407,8 +1409,8 @@ class JSSTjssupportticketModel {
             add_option("jssupportticket_hide_review_box", "1");
         } else {
 			//jssupportticketphplib::JSST_strtotime not work porperly
-            //$date = date("Y-m-d", jssupportticketphplib::JSST_strtotime("+".$days." days"));
-			$date = date("Y-m-d", strtotime("+".$days." days"));
+            //$date = gmdate("Y-m-d", jssupportticketphplib::JSST_strtotime("+".$days." days"));
+			$date = gmdate("Y-m-d", strtotime("+".$days." days"));
             update_option("jssupportticket_show_review_box_after", $date);
         }
         return true;
@@ -1583,7 +1585,7 @@ class JSSTjssupportticketModel {
         $result['error'] = false;
         if($token == ''){
             $result['error'] = esc_html(__('Addon Installation Failed','js-support-ticket'));
-            $result = json_encode($result);
+            $result = wp_json_encode($result);
             return $result;
         }
         $site_url = site_url();
@@ -1591,12 +1593,12 @@ class JSSTjssupportticketModel {
             $site_url = str_replace("https://","",$site_url);
             $site_url = str_replace("http://","",$site_url);
         }
-        $url = 'https://jshelpdesk.com/setup/index.php?token='.$token.'&productcode='. json_encode($addon_json_array).'&domain='.$site_url;
+        $url = 'https://jshelpdesk.com/setup/index.php?token='.$token.'&productcode='. wp_json_encode($addon_json_array).'&domain='.$site_url;
         // verify token
         $verifytransactionkey = $this->verifytransactionkey($token, $url);
         if($verifytransactionkey['status'] == 0){
             $result['error'] = $verifytransactionkey['message'];
-            $result = json_encode($result);
+            $result = wp_json_encode($result);
             return $result;
         }
         $install_count = 0;
@@ -1638,12 +1640,12 @@ class JSSTjssupportticketModel {
 
         }else{
             $result['error'] = esc_html(__('Addon Installation Failed','js-support-ticket'));
-            $result = json_encode($result);
+            $result = wp_json_encode($result);
             return $result;
         }
 
         $result['success'] = esc_html(__('Addon Installed Successfully','js-support-ticket'));
-        $result = json_encode($result);
+        $result = wp_json_encode($result);
         return $result;
     }
 
@@ -1663,13 +1665,17 @@ class JSSTjssupportticketModel {
 
             $unzipfile = unzip_file( $path, $plugin_path);
 
-            @unlink( $path ); // must unlink afterwards
-            @unlink( $tmpfile ); // must unlink afterwards
+            if ( file_exists( $path ) ) {
+                wp_delete_file( $path ); // must unlink afterwards
+            }
+            if ( file_exists( $tmpfile ) ) {
+                wp_delete_file( $tmpfile ); // must unlink afterwards
+            }
 
             if ( is_wp_error( $unzipfile ) ) {
                 $result['error'] = esc_html(__('Addon installation failed','js-support-ticket')).'.';
                 $result['error'] .= " ".esc_html(jssupportticket::JSST_getVarValue($unzipfile->get_error_message()));
-                $result = json_encode($result);
+                $result = wp_json_encode($result);
                 return $result;
             } else {
                 return true;
@@ -1677,7 +1683,7 @@ class JSSTjssupportticketModel {
         }else{
             $error_string = $tmpfile->get_error_message();
             $result['error'] = esc_html(__('Addon Installation Failed, File download error','js-support-ticket')).'!'.$error_string;
-            $result = json_encode($result);
+            $result = wp_json_encode($result);
             return $result;
         }
     }
@@ -1735,7 +1741,7 @@ class JSSTjssupportticketModel {
                 if (is_dir($file)) {
                     jsstRemoveAddonUpdatesFolder($file);
                 } elseif (is_file($file)) {
-                    @unlink($file);
+                    wp_delete_file($file);
                 }
             }
         }

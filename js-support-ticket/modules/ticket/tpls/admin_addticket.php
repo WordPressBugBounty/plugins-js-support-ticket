@@ -3,7 +3,6 @@
     die('Restricted Access');
 ?>
 <?php
-    $protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' || $_SERVER['SERVER_PORT'] == 443) ? "https://" : "http://";
     wp_enqueue_script('jquery-ui-datepicker');
     wp_enqueue_script('file_validate.js', JSST_PLUGIN_URL . 'includes/js/file_validate.js');
     wp_enqueue_style('jquery-ui-css', JSST_PLUGIN_URL . 'includes/css/jquery-ui-smoothness.css');
@@ -466,7 +465,7 @@ wp_add_inline_script('js-support-ticket-main-js',$jssupportticket_js);
                                         <div class="js-form-wrapper">
                                             <div class="js-form-title">
                                                 <a target="blank" href="https://www.youtube.com/watch?v=p3vT2vhSkjk" class="js-tkt-det-hdg-img js-cp-video-internal-note">
-                                                    <img title="<?php echo esc_html(__('watch video','js-support-ticket')); ?>" alt="<?php echo esc_html(__('watch video','js-support-ticket')); ?>" src="<?php echo JSST_PLUGIN_URL ?>/includes/images/watch-video-icon.png" />
+                                                    <img title="<?php echo esc_html(__('watch video','js-support-ticket')); ?>" alt="<?php echo esc_html(__('watch video','js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL) ?>/includes/images/watch-video-icon.png" />
                                                 </a>
                                                 <?php echo esc_html(jssupportticket::JSST_getVarValue($field->fieldtitle)); ?><?php if($field->required == 1) echo '&nbsp;<span style="color: red;" >*</span>'; ?></div>
                                             <div class="js-form-value">
@@ -623,7 +622,7 @@ wp_add_inline_script('js-support-ticket-main-js',$jssupportticket_js);
                                         if(isset($formdata['wcorderid'])) $wcorderid = $formdata['wcorderid'];
                                         elseif(isset(jssupportticket::$_data[0]->wcorderid)) $wcorderid = jssupportticket::$_data[0]->wcorderid;
                                         else $wcorderid = '';
-                                        // echo JSSTformfield::select('wcorderid', $orderlist, $wcorderid, esc_html(__('Select Order', 'js-support-ticket')), array('class' => 'inputbox js-form-select-field'));
+                                        // echo wp_kses(JSSTformfield::select('wcorderid', $orderlist, $wcorderid, esc_html(__('Select Order', 'js-support-ticket')), array('class' => 'inputbox js-form-select-field')), JSST_ALLOWED_TAGS);
                                         echo wp_kses(JSSTformfield::text('wcorderid', $wcorderid, array('class' => 'inputbox js-form-input-field', 'data-validation' => ($field->required == 1) ? 'required' : '','style'=>'width:100%;', 'placeholder' => esc_html(__('Enter valid woocommerce order#' , 'js-support-ticket')))), JSST_ALLOWED_TAGS); ?>
                                         <span class="jsst_product_found" title="<?php echo esc_html(__("Order id found","js-support-ticket")); ?>" style="display: none;"></span>
                                         <span class="jsst_product_not_found" title="<?php echo esc_html(__("Order id not found","js-support-ticket")); ?>" style="display: none;"></span>

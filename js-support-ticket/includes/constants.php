@@ -191,6 +191,8 @@ if (!defined('JSST_ALLOWED_TAGS')) {
             'data-image2' => array(),
             'target' => array(),
             'data-tab-number' => array(),
+            'data-gall' => array(),
+            'data-vbtype' => array(),
             'style' => array(),
         ),
         'ul'      => array(

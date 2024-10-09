@@ -268,7 +268,7 @@ class JSSTcustomfields {
     }
 
     function formCustomFieldsForSearch($field, &$i, $isadmin = 0) {
-        if ($field->isuserfield != 1)
+        if ($field->isuserfield != 1 || $field->userfieldtype == 'file')
             return false;
         $cssclass = "";
         $html = '';

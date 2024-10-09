@@ -24,7 +24,7 @@ $jssupportticket_js ='
 <ul class="jsstadmin-sidebar-menu tree accordion" data-widget="tree" id="accordion">
     <li class="treeview <?php if(($c == 'jssupportticket' && $layout != 'shortcodes' && $layout != 'addonstatus') || $c == 'systemerror' || $c == 'slug') echo 'active'; ?>">
         <a href="admin.php?page=jssupportticket" title="<?php echo esc_html(__('Dashboard','js-support-ticket')); ?>">
-            <img class="jsst_menu-icon" alt="<?php echo esc_html(__('Dashboard','js-support-ticket')); ?>" src="<?php echo JSST_PLUGIN_URL.'includes/images/left-icons/menu/dashboard.png'; ?>"/>
+            <img class="jsst_menu-icon" alt="<?php echo esc_html(__('Dashboard','js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL).'includes/images/left-icons/menu/dashboard.png'; ?>"/>
             <span class="jsst_text"><?php echo esc_html(__('Dashboard','js-support-ticket')); ?> </span>
         </a>
         <ul class="jsstadmin-sidebar-submenu treeview-menu">
@@ -33,11 +33,12 @@ $jssupportticket_js ='
                     <?php echo esc_html(__('Dashboard','js-support-ticket')); ?>
                 </a>
             </li>
+            <?php /*
             <li class="<?php if($c == 'jssupportticket' && $layout == 'aboutus') echo 'active'; ?>">
                 <a href="?page=jssupportticket&jstlay=aboutus" title="<?php echo esc_html(__('About Us','js-support-ticket')); ?>">
                     <?php echo esc_html(__('About Us','js-support-ticket')); ?>
                 </a>
-            </li>
+            </li> */?>
             <li class="<?php if($c == 'jssupportticket' && $layout == 'translations') echo 'active'; ?>">
                 <a href="?page=jssupportticket&jstlay=translations" title="<?php echo esc_html(__('Translations','js-support-ticket')); ?>">
                     <?php echo esc_html(__('Translations','js-support-ticket')); ?>
@@ -57,7 +58,7 @@ $jssupportticket_js ='
     </li>
     <li class="treeview <?php if($c == 'ticket' || ($c == 'fieldordering' && $ff == 1 || $c == 'export' || $c == 'multiform') ) echo 'active'; ?>">
         <a href="admin.php?page=ticket" title="<?php echo esc_html(__('Tickets','js-support-ticket')); ?>">
-            <img class="jsst_menu-icon" alt="<?php echo esc_html(__('Tickets','js-support-ticket')); ?>" src="<?php echo JSST_PLUGIN_URL.'includes/images/left-icons/menu/tickets.png'; ?>"/>
+            <img class="jsst_menu-icon" alt="<?php echo esc_html(__('Tickets','js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL).'includes/images/left-icons/menu/tickets.png'; ?>"/>
             <span class="jsst_text"><?php echo esc_html(__('Tickets','js-support-ticket')); ?></span>
         </a>
         <ul class="jsstadmin-sidebar-submenu treeview-menu">
@@ -75,13 +76,13 @@ $jssupportticket_js ='
                 </a>
             </li>
             <li class="<?php if($c == 'ticket' && ($layout == 'addticket')) echo 'active'; ?>">
-                <a <?php echo esc_attr($id); ?> href="<?php echo esc_url($href); ?>" class="?page=ticket&jstlay=addticket&formid=<?php echo JSSTincluder::getJSModel('ticket')->getDefaultMultiFormId() ?>" title="<?php echo esc_html(__('Create Ticket','js-support-ticket')); ?>">
+                <a <?php echo esc_attr($id); ?> href="<?php echo esc_url($href); ?>" class="?page=ticket&jstlay=addticket&formid=<?php echo esc_html(JSSTincluder::getJSModel('ticket')->getDefaultMultiFormId()) ?>" title="<?php echo esc_html(__('Create Ticket','js-support-ticket')); ?>">
                     <?php echo esc_html(__('Create Ticket','js-support-ticket')); ?>
                 </a>
             </li>
             <?php if(!in_array('multiform', jssupportticket::$_active_addons)){ ?>
             <li class="<?php if($c == 'fieldordering') echo 'active'; ?>">
-                <a href="?page=fieldordering&fieldfor=1&formid=<?php echo JSSTincluder::getJSModel('ticket')->getDefaultMultiFormId() ?>" title="<?php echo esc_html(__('Fields','js-support-ticket')); ?>">
+                <a href="?page=fieldordering&fieldfor=1&formid=<?php echo esc_html(JSSTincluder::getJSModel('ticket')->getDefaultMultiFormId()) ?>" title="<?php echo esc_html(__('Fields','js-support-ticket')); ?>">
                     <?php echo esc_html(__('Fields','js-support-ticket')); ?>
                 </a>
             </li>
@@ -94,7 +95,7 @@ $jssupportticket_js ='
                 </li>
             <?php } ?>
             <?php if(in_array('multiform', jssupportticket::$_active_addons)){ ?>
-                <li class="<?php if($c == 'multiform') echo 'active'; ?>">
+                <li class="<?php if($c == 'multiform' || $c == 'fieldordering') echo 'active'; ?>">
                     <a href="?page=multiform" title="<?php echo esc_html(__('multiform', 'js-support-ticket')); ?>">
                         <?php echo esc_html(__('Multiform','js-support-ticket')); ?>
                     </a>
@@ -123,7 +124,7 @@ $jssupportticket_js ='
     <?php if ( in_array('agent',jssupportticket::$_active_addons)) { ?>
         <li class="treeview <?php if($c == 'agent' || $c == 'agentautoassign') echo 'active'; ?>">
             <a class="" href="admin.php?page=agent" title="<?php echo esc_html(__('Agents','js-support-ticket')); ?>">
-                <img class="jsst_menu-icon" alt="<?php echo esc_html(__('Agents','js-support-ticket')); ?>" src="<?php echo JSST_PLUGIN_URL.'includes/images/left-icons/menu/staff.png'; ?>"/>
+                <img class="jsst_menu-icon" alt="<?php echo esc_html(__('Agents','js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL).'includes/images/left-icons/menu/staff.png'; ?>"/>
                 <span class="jsst_text"><?php echo esc_html(__('Agents','js-support-ticket')); ?></span>
             </a>
             <ul class="jsstadmin-sidebar-submenu treeview-menu">
@@ -174,7 +175,7 @@ $jssupportticket_js ='
                 $url = "https://jshelpdesk.com/product/agents/";
             } ?>
         <li class="disabled-menu treeview">
-            <img class="jsst_menu-icon" alt="<?php echo esc_html(__('Agents','js-support-ticket')); ?>" src="<?php echo JSST_PLUGIN_URL.'includes/images/left-icons/menu-grey/staff.png'; ?>"/>
+            <img class="jsst_menu-icon" alt="<?php echo esc_html(__('Agents','js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL).'includes/images/left-icons/menu-grey/staff.png'; ?>"/>
             <span class="jsst_text"><?php echo esc_html(__('Agents','js-support-ticket')); ?></span>
             <a href="<?php echo esc_url($url); ?>" class="jsst_js-install-btn" title="<?php echo esc_attr($text); ?>"><?php echo esc_html($text); ?></a>
             <ul class="jsstadmin-sidebar-submenu treeview-menu">
@@ -189,7 +190,7 @@ $jssupportticket_js ='
     <?php } ?>
     <li class="treeview <?php if($c == 'configuration') echo 'active'; ?>">
         <a class="" href="?page=configuration&jsstconfigid=general" title="<?php echo esc_html(__('Configurations','js-support-ticket')); ?>">
-            <img class="jsst_menu-icon" alt="<?php echo esc_html(__('Configurations','js-support-ticket')); ?>" src="<?php echo JSST_PLUGIN_URL.'includes/images/left-icons/menu/config.png'; ?>"/>
+            <img class="jsst_menu-icon" alt="<?php echo esc_html(__('Configurations','js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL).'includes/images/left-icons/menu/config.png'; ?>"/>
             <span class="jsst_text"><?php echo esc_html(__('Configurations','js-support-ticket')); ?></span>
         </a>
         <ul class="jsstadmin-sidebar-submenu treeview-menu">
@@ -207,7 +208,7 @@ $jssupportticket_js ='
     </li>
     <li class="treeview <?php if($c == 'jssupportticket' && $layout == 'shortcodes') echo 'active'; ?>">
         <a class="" href="?page=shortcodes" title="<?php echo esc_html(__('Shortcodes','js-support-ticket')); ?>">
-            <img class="jsst_menu-icon" alt="<?php echo esc_html(__('Shortcodes','js-support-ticket')); ?>" src="<?php echo JSST_PLUGIN_URL.'includes/images/left-icons/menu/short-code.png'; ?>"/>
+            <img class="jsst_menu-icon" alt="<?php echo esc_html(__('Shortcodes','js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL).'includes/images/left-icons/menu/short-code.png'; ?>"/>
             <span class="jsst_text"><?php echo esc_html(__('Short Codes','js-support-ticket')); ?></span>
         </a>
         <ul class="jsstadmin-sidebar-submenu treeview-menu">
@@ -221,7 +222,7 @@ $jssupportticket_js ='
     </li>
     <li class="treeview <?php if($c == 'themes') echo 'active'; ?>">
         <a class="" href="?page=themes" title="<?php echo esc_html(__('Themes','js-support-ticket')); ?>">
-            <img class="jsst_menu-icon" alt="<?php echo esc_html(__('Themes','js-support-ticket')); ?>" src="<?php echo JSST_PLUGIN_URL.'includes/images/left-icons/menu/theme.png'; ?>"/>
+            <img class="jsst_menu-icon" alt="<?php echo esc_html(__('Themes','js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL).'includes/images/left-icons/menu/theme.png'; ?>"/>
             <span class="jsst_text"><?php echo esc_html(__('Themes','js-support-ticket')); ?></span>
         </a>
         <ul class="jsstadmin-sidebar-submenu treeview-menu">
@@ -234,7 +235,7 @@ $jssupportticket_js ='
     </li>
     <li class="treeview <?php if($c == 'reports') echo 'active'; ?>">
         <a class="" href="?page=reports&jstlay=overallreport" title="<?php echo esc_html(__('Reports','js-support-ticket')); ?>">
-            <img class="jsst_menu-icon" alt="<?php echo esc_html(__('Reports','js-support-ticket')); ?>" src="<?php echo JSST_PLUGIN_URL.'includes/images/left-icons/menu/report.png'; ?>"/>
+            <img class="jsst_menu-icon" alt="<?php echo esc_html(__('Reports','js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL).'includes/images/left-icons/menu/report.png'; ?>"/>
             <span class="jsst_text"><?php echo esc_html(__('Reports','js-support-ticket')); ?></span>
         </a>
         <ul class="jsstadmin-sidebar-submenu treeview-menu">
@@ -272,7 +273,7 @@ $jssupportticket_js ='
     <?php if(in_array('emailpiping', jssupportticket::$_active_addons)){ ?>
     <li class="treeview <?php if($c == 'emailpiping') echo 'active'; ?>">
         <a href="?page=emailpiping" title="<?php echo esc_html(__('Email Piping' , 'js-support-ticket')); ?>">
-            <img class="jsst_menu-icon" alt="<?php echo esc_html(__('Email Piping' , 'js-support-ticket')); ?>" src="<?php echo JSST_PLUGIN_URL.'includes/images/left-icons/menu/email-piping-2.png'; ?>"/>
+            <img class="jsst_menu-icon" alt="<?php echo esc_html(__('Email Piping' , 'js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL).'includes/images/left-icons/menu/email-piping-2.png'; ?>"/>
             <span class="jsst_text"><?php echo esc_html(__('Email Piping' , 'js-support-ticket')); ?></span>
         </a>
         <ul class="jsstadmin-sidebar-submenu treeview-menu">
@@ -293,7 +294,7 @@ $jssupportticket_js ='
                 $url = "https://jshelpdesk.com/product/email-piping/";
             } ?>
     <li class="disabled-menu treeview">
-            <img class="jsst_menu-icon" alt="<?php echo esc_html(__('Email Piping' , 'js-support-ticket')); ?>" src="<?php echo JSST_PLUGIN_URL.'includes/images/left-icons/menu-grey/email-piping-grey.png'; ?>"/>
+            <img class="jsst_menu-icon" alt="<?php echo esc_html(__('Email Piping' , 'js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL).'includes/images/left-icons/menu-grey/email-piping-grey.png'; ?>"/>
             <span class="jsst_text"><?php echo esc_html(__('Email Piping' , 'js-support-ticket')); ?></span>
             <a href="<?php echo esc_url($url); ?>" class="jsst_js-install-btn" title="<?php echo esc_attr($text); ?>"><?php echo esc_html($text); ?></a>
             <ul class="jsstadmin-sidebar-submenu treeview-menu">
@@ -308,7 +309,7 @@ $jssupportticket_js ='
     <?php } ?>
     <li class="treeview <?php if($c == 'gdpr') echo 'active'; ?>">
         <a class="" href="admin.php?page=gdpr&jstlay=gdprfields" title="<?php echo esc_html(__('GDPR','js-support-ticket')); ?>">
-            <img class="jsst_menu-icon" alt="<?php echo esc_html(__('GDPR','js-support-ticket')); ?>" src="<?php echo JSST_PLUGIN_URL.'includes/images/left-icons/menu/gdpr.png'; ?>"/>
+            <img class="jsst_menu-icon" alt="<?php echo esc_html(__('GDPR','js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL).'includes/images/left-icons/menu/gdpr.png'; ?>"/>
             <span class="jsst_text"><?php echo esc_html(__('GDPR','js-support-ticket')); ?></span>
         </a>
         <ul class="jsstadmin-sidebar-submenu treeview-menu">
@@ -326,7 +327,7 @@ $jssupportticket_js ='
     </li>
     <li class="treeview <?php if($c == 'premiumplugin') echo 'active'; ?>">
         <a class="" href="admin.php?page=premiumplugin" title="<?php echo esc_html(__('Premium Addons','js-support-ticket')); ?>">
-            <img class="jsst_menu-icon" alt="<?php echo esc_html(__('Premium Addons','js-support-ticket')); ?>" src="<?php echo JSST_PLUGIN_URL.'includes/images/left-icons/menu/ad.png'; ?>"/>
+            <img class="jsst_menu-icon" alt="<?php echo esc_html(__('Premium Addons','js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL).'includes/images/left-icons/menu/ad.png'; ?>"/>
             <span class="jsst_text"><?php echo esc_html(__('Premium Addons','js-support-ticket')); ?></span>
         </a>
         <ul class="jsstadmin-sidebar-submenu treeview-menu">
@@ -344,7 +345,7 @@ $jssupportticket_js ='
     </li>
     <li class="treeview <?php if($c == 'jssupportticket' && $layout == 'addonstatus') echo 'active'; ?>">
         <a class="" href="admin.php?page=jssupportticket" title="<?php echo esc_html(__('Addons Status','js-support-ticket')); ?>">
-            <img class="jsst_menu-icon" alt="<?php echo esc_html(__('Addons Status','js-support-ticket')); ?>" src="<?php echo JSST_PLUGIN_URL.'includes/images/left-icons/menu/addon-status.png'; ?>"/>
+            <img class="jsst_menu-icon" alt="<?php echo esc_html(__('Addons Status','js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL).'includes/images/left-icons/menu/addon-status.png'; ?>"/>
             <span class="jsst_text"><?php echo esc_html(__('Addons Status','js-support-ticket')); ?></span>
         </a>
         <ul class="jsstadmin-sidebar-submenu treeview-menu">
@@ -358,7 +359,7 @@ $jssupportticket_js ='
     <?php if(in_array('feedback', jssupportticket::$_active_addons)){ ?>
         <li class="treeview <?php if($c == 'feedback'  || ($c == 'fieldordering' && $ff == 2) ) echo 'active'; ?>">
             <a class="" href="?page=feedback&jstlay=feedbacks" title="<?php echo esc_html(__('Feedbacks','js-support-ticket')); ?>">
-                <img class="jsst_menu-icon" alt="<?php echo esc_html(__('Feedbacks','js-support-ticket')); ?>" src="<?php echo JSST_PLUGIN_URL.'includes/images/left-icons/menu/feedback.png'; ?>"/>
+                <img class="jsst_menu-icon" alt="<?php echo esc_html(__('Feedbacks','js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL).'includes/images/left-icons/menu/feedback.png'; ?>"/>
                 <span class="jsst_text"><?php echo esc_html(__('Feedbacks','js-support-ticket')); ?></span>
             </a>
             <ul class="jsstadmin-sidebar-submenu treeview-menu">
@@ -384,7 +385,7 @@ $jssupportticket_js ='
                 $url = "https://jshelpdesk.com/product/feedback/";
             } ?>
         <li class="disabled-menu treeview">
-            <img class="jsst_menu-icon" alt="<?php echo esc_html(__('Feedbacks','js-support-ticket')); ?>" src="<?php echo JSST_PLUGIN_URL.'includes/images/left-icons/menu-grey/feedback.png'; ?>"/>
+            <img class="jsst_menu-icon" alt="<?php echo esc_html(__('Feedbacks','js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL).'includes/images/left-icons/menu-grey/feedback.png'; ?>"/>
             <span class="jsst_text"><?php echo esc_html(__('Feedbacks','js-support-ticket')); ?></span>
             <a href="<?php echo esc_url($url); ?>" class="jsst_js-install-btn" title="<?php echo esc_attr($text); ?>"><?php echo esc_html($text); ?></a>
             <ul class="jsstadmin-sidebar-submenu treeview-menu">
@@ -399,7 +400,7 @@ $jssupportticket_js ='
     <?php } ?>
     <li class="treeview <?php if($c == 'department') echo 'active'; ?>">
         <a class="" href="admin.php?page=department" title="<?php echo esc_html(__('Departments' , 'js-support-ticket')); ?>">
-            <img class="jsst_menu-icon" alt="<?php echo esc_html(__('Departments' , 'js-support-ticket')); ?>" src="<?php echo JSST_PLUGIN_URL.'includes/images/left-icons/menu/department.png'; ?>"/>
+            <img class="jsst_menu-icon" alt="<?php echo esc_html(__('Departments' , 'js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL).'includes/images/left-icons/menu/department.png'; ?>"/>
             <span class="jsst_text"><?php echo esc_html(__('Departments' , 'js-support-ticket')); ?></span>
         </a>
         <ul class="jsstadmin-sidebar-submenu treeview-menu">
@@ -417,7 +418,7 @@ $jssupportticket_js ='
     </li>
     <li class="treeview <?php if($c == 'priority') echo 'active'; ?>">
         <a class="" href="admin.php?page=priority" title="<?php echo esc_html(__('Priorities' , 'js-support-ticket')); ?>">
-            <img class="jsst_menu-icon" alt="<?php echo esc_html(__('Priorities' , 'js-support-ticket')); ?>" src="<?php echo JSST_PLUGIN_URL.'includes/images/left-icons/menu/priorities.png'; ?>"/>
+            <img class="jsst_menu-icon" alt="<?php echo esc_html(__('Priorities' , 'js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL).'includes/images/left-icons/menu/priorities.png'; ?>"/>
             <span class="jsst_text"><?php echo esc_html(__('Priorities' , 'js-support-ticket')); ?></span>
         </a>
         <ul class="jsstadmin-sidebar-submenu treeview-menu">
@@ -436,7 +437,7 @@ $jssupportticket_js ='
     <?php if(in_array('knowledgebase', jssupportticket::$_active_addons)){ ?>
         <li class="treeview <?php if($c == 'knowledgebase' && ($layout == 'listcategories' || $layout == 'addcategory')) echo 'active'; ?>">
             <a class="" href="admin.php?page=knowledgebase&jstlay=listcategories" title="<?php echo esc_html(__('Categories','js-support-ticket')); ?>">
-                <img class="jsst_menu-icon" alt="<?php echo esc_html(__('Categories','js-support-ticket')); ?>" src="<?php echo JSST_PLUGIN_URL.'includes/images/left-icons/menu/category.png'; ?>"/>
+                <img class="jsst_menu-icon" alt="<?php echo esc_html(__('Categories','js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL).'includes/images/left-icons/menu/category.png'; ?>"/>
                 <span class="jsst_text"><?php echo esc_html(__('Categories','js-support-ticket')); ?></span>
             </a>
             <ul class="jsstadmin-sidebar-submenu treeview-menu">
@@ -454,7 +455,7 @@ $jssupportticket_js ='
         </li>
         <li class="treeview <?php if($c == 'knowledgebase' && ($layout == 'listarticles' || $layout == 'addarticle')) echo 'active'; ?>">
             <a class="" href="admin.php?page=knowledgebase&jstlay=listarticles" title="<?php echo esc_html(__('Knowledge Base' , 'js-support-ticket')); ?>">
-                <img class="jsst_menu-icon" alt="<?php echo esc_html(__('Knowledge Base' , 'js-support-ticket')); ?>" src="<?php echo JSST_PLUGIN_URL.'includes/images/left-icons/menu/kb.png'; ?>"/>
+                <img class="jsst_menu-icon" alt="<?php echo esc_html(__('Knowledge Base' , 'js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL).'includes/images/left-icons/menu/kb.png'; ?>"/>
                 <span class="jsst_text"><?php echo esc_html(__('Knowledge Base' , 'js-support-ticket')); ?></span>
             </a>
             <ul class="jsstadmin-sidebar-submenu treeview-menu">
@@ -480,7 +481,7 @@ $jssupportticket_js ='
                 $url = "https://jshelpdesk.com/product/knowledge-base/";
             } ?>
         <li class="disabled-menu treeview">
-            <img class="jsst_menu-icon" alt="<?php echo esc_html(__('Categories' , 'js-support-ticket')); ?>" src="<?php echo JSST_PLUGIN_URL.'includes/images/left-icons/menu-grey/category.png'; ?>"/>
+            <img class="jsst_menu-icon" alt="<?php echo esc_html(__('Categories' , 'js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL).'includes/images/left-icons/menu-grey/category.png'; ?>"/>
             <span class="jsst_text"><?php echo esc_html(__('Categories' , 'js-support-ticket')); ?></span>
             <a href="<?php echo esc_url($url); ?>" class="jsst_js-install-btn" title="<?php echo esc_attr($text); ?>"><?php echo esc_html($text); ?></a>
             <ul class="jsstadmin-sidebar-submenu treeview-menu">
@@ -493,7 +494,7 @@ $jssupportticket_js ='
             </ul>
         </li>
         <li class="disabled-menu treeview">
-            <img class="jsst_menu-icon" alt="<?php echo esc_html(__('Knowledge Base' , 'js-support-ticket')); ?>" src="<?php echo JSST_PLUGIN_URL.'includes/images/left-icons/menu-grey/kb.png'; ?>"/> <span class="jsst_text"><?php echo esc_html(__('Knowledge Base' , 'js-support-ticket')); ?></span>
+            <img class="jsst_menu-icon" alt="<?php echo esc_html(__('Knowledge Base' , 'js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL).'includes/images/left-icons/menu-grey/kb.png'; ?>"/> <span class="jsst_text"><?php echo esc_html(__('Knowledge Base' , 'js-support-ticket')); ?></span>
             <a href="<?php echo esc_url($url); ?>" class="jsst_js-install-btn" title="<?php echo esc_attr($text); ?>"><?php echo esc_html($text); ?></a>
             <ul class="jsstadmin-sidebar-submenu treeview-menu">
                 <li class="<?php if($c == 'knowledgebase' && ($layout == 'listarticles')) echo 'active'; ?>">
@@ -508,7 +509,7 @@ $jssupportticket_js ='
     <?php if(in_array('download', jssupportticket::$_active_addons)){ ?>
         <li class="treeview <?php if($c == 'download') echo 'active'; ?>">
             <a class="" href="admin.php?page=download" title="<?php echo esc_html(__('Downloads' , 'js-support-ticket')); ?>">
-                <img class="jsst_menu-icon" alt="<?php echo esc_html(__('Downloads' , 'js-support-ticket')); ?>" src="<?php echo JSST_PLUGIN_URL.'includes/images/left-icons/menu/download.png'; ?>"/>
+                <img class="jsst_menu-icon" alt="<?php echo esc_html(__('Downloads' , 'js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL).'includes/images/left-icons/menu/download.png'; ?>"/>
                 <span class="jsst_text"><?php echo esc_html(__('Downloads' , 'js-support-ticket')); ?></span>
             </a>
             <ul class="jsstadmin-sidebar-submenu treeview-menu">
@@ -534,7 +535,7 @@ $jssupportticket_js ='
                 $url = "https://jshelpdesk.com/product/download/";
             } ?>
         <li class="disabled-menu treeview">
-            <img class="jsst_menu-icon" alt="<?php echo esc_html(__('Download' , 'js-support-ticket')); ?>" src="<?php echo JSST_PLUGIN_URL.'includes/images/left-icons/menu-grey/download.png'; ?>"/>
+            <img class="jsst_menu-icon" alt="<?php echo esc_html(__('Download' , 'js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL).'includes/images/left-icons/menu-grey/download.png'; ?>"/>
             <span class="jsst_text"><?php echo esc_html(__('Download' , 'js-support-ticket')); ?></span>
             <a href="<?php echo esc_url($url); ?>" class="jsst_js-install-btn" title="<?php echo esc_attr($text); ?>"><?php echo esc_html($text); ?></a>
             <ul class="jsstadmin-sidebar-submenu treeview-menu">
@@ -550,7 +551,7 @@ $jssupportticket_js ='
     <?php if(in_array('announcement', jssupportticket::$_active_addons)){ ?>
         <li class="treeview <?php if($c == 'announcement') echo 'active'; ?>">
             <a class="" href="admin.php?page=announcement" title="<?php echo esc_html(__('Announcements' , 'js-support-ticket')); ?>">
-                <img class="jsst_menu-icon" alt="<?php echo esc_html(__('Announcements' , 'js-support-ticket')); ?>" src="<?php echo JSST_PLUGIN_URL.'includes/images/left-icons/menu/announcements.png'; ?>"/>
+                <img class="jsst_menu-icon" alt="<?php echo esc_html(__('Announcements' , 'js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL).'includes/images/left-icons/menu/announcements.png'; ?>"/>
                 <span class="jsst_text"><?php echo esc_html(__('Announcements' , 'js-support-ticket')); ?></span>
             </a>
             <ul class="jsstadmin-sidebar-submenu treeview-menu">
@@ -576,7 +577,7 @@ $jssupportticket_js ='
                 $url = "https://jshelpdesk.com/product/announcements/";
             } ?>
         <li class="disabled-menu treeview">
-            <img class="jsst_menu-icon" alt="<?php echo esc_html(__('Announcements' , 'js-support-ticket')); ?>" src="<?php echo JSST_PLUGIN_URL.'includes/images/left-icons/menu-grey/announcements.png'; ?>"/>
+            <img class="jsst_menu-icon" alt="<?php echo esc_html(__('Announcements' , 'js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL).'includes/images/left-icons/menu-grey/announcements.png'; ?>"/>
             <span class="jsst_text"><?php echo esc_html(__('Announcements' , 'js-support-ticket')); ?></span>
             <a href="<?php echo esc_url($url); ?>" class="jsst_js-install-btn" title="<?php echo esc_attr($text); ?>"><?php echo esc_html($text); ?></a>
             <ul class="jsstadmin-sidebar-submenu treeview-menu">
@@ -592,7 +593,7 @@ $jssupportticket_js ='
     <?php if(in_array('faq', jssupportticket::$_active_addons)){ ?>
         <li class="treeview <?php if($c == 'faq') echo 'active'; ?>">
             <a class="" href="admin.php?page=faq" title="<?php echo esc_html(__('FAQ\'S' , 'js-support-ticket')); ?>">
-                <img class="jsst_menu-icon" alt="<?php echo esc_html(__('FAQ\'S' , 'js-support-ticket')); ?>" src="<?php echo JSST_PLUGIN_URL.'includes/images/left-icons/menu/faq.png'; ?>"/>
+                <img class="jsst_menu-icon" alt="<?php echo esc_html(__('FAQ\'S' , 'js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL).'includes/images/left-icons/menu/faq.png'; ?>"/>
                 <span class="jsst_text"><?php echo esc_html(__('FAQ\'S' , 'js-support-ticket')); ?></span>
             </a>
             <ul class="jsstadmin-sidebar-submenu treeview-menu">
@@ -618,7 +619,7 @@ $jssupportticket_js ='
                 $url = "https://jshelpdesk.com/product/faq/";
             } ?>
         <li class="disabled-menu treeview">
-            <img class="jsst_menu-icon" alt="<?php echo esc_html(__('FAQs' , 'js-support-ticket')); ?>" src="<?php echo JSST_PLUGIN_URL.'includes/images/left-icons/menu-grey/faq.png'; ?>"/>
+            <img class="jsst_menu-icon" alt="<?php echo esc_html(__('FAQs' , 'js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL).'includes/images/left-icons/menu-grey/faq.png'; ?>"/>
             <span class="jsst_text"><?php echo esc_html(__('FAQs' , 'js-support-ticket')); ?></span>
             <a href="<?php echo esc_url($url); ?>" class="jsst_js-install-btn" title="<?php echo esc_attr($text); ?>"><?php echo esc_html($text); ?></a>
             <ul class="jsstadmin-sidebar-submenu treeview-menu">
@@ -634,7 +635,7 @@ $jssupportticket_js ='
     <?php if(in_array('helptopic', jssupportticket::$_active_addons)){ ?>
         <li class="treeview <?php if($c == 'helptopic') echo 'active'; ?>">
             <a class="" href="admin.php?page=helptopic" title="<?php echo esc_html(__('Help Topics' , 'js-support-ticket')); ?>">
-                <img class="jsst_menu-icon" alt="<?php echo esc_html(__('Help Topics' , 'js-support-ticket')); ?>" src="<?php echo JSST_PLUGIN_URL.'includes/images/left-icons/menu/help-topic.png'; ?>"/>
+                <img class="jsst_menu-icon" alt="<?php echo esc_html(__('Help Topics' , 'js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL).'includes/images/left-icons/menu/help-topic.png'; ?>"/>
                 <span class="jsst_text"><?php echo esc_html(__('Help Topics' , 'js-support-ticket')); ?></span>
             </a>
             <ul class="jsstadmin-sidebar-submenu treeview-menu">
@@ -660,7 +661,7 @@ $jssupportticket_js ='
                 $url = "https://jshelpdesk.com/product/helptopic/";
             } ?>
         <li class="disabled-menu treeview">
-            <img class="jsst_menu-icon" alt="<?php echo esc_html(__('Helptopics' , 'js-support-ticket')); ?>" src="<?php echo JSST_PLUGIN_URL.'includes/images/left-icons/menu-grey/help-topic.png'; ?>"/>
+            <img class="jsst_menu-icon" alt="<?php echo esc_html(__('Helptopics' , 'js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL).'includes/images/left-icons/menu-grey/help-topic.png'; ?>"/>
             <span class="jsst_text"><?php echo esc_html(__('Helptopics' , 'js-support-ticket')); ?></span>
             <a href="<?php echo esc_url($url); ?>" class="jsst_js-install-btn" title="<?php echo esc_attr($text); ?>"><?php echo esc_html($text); ?></a>
             <ul class="jsstadmin-sidebar-submenu treeview-menu">
@@ -675,7 +676,7 @@ $jssupportticket_js ='
     <?php } ?>
     <li class="treeview <?php if($c == 'email') echo 'active'; ?>">
         <a class="" href="admin.php?page=email" title="<?php echo esc_html(__('System Emails' , 'js-support-ticket')); ?>">
-            <img class="jsst_menu-icon" alt="<?php echo esc_html(__('System Emails' , 'js-support-ticket')); ?>" src="<?php echo JSST_PLUGIN_URL.'includes/images/left-icons/menu/system-email.png'; ?>"/>
+            <img class="jsst_menu-icon" alt="<?php echo esc_html(__('System Emails' , 'js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL).'includes/images/left-icons/menu/system-email.png'; ?>"/>
             <span class="jsst_text"><?php echo esc_html(__('System Emails' , 'js-support-ticket')); ?></span>
         </a>
         <ul class="jsstadmin-sidebar-submenu treeview-menu">
@@ -694,7 +695,7 @@ $jssupportticket_js ='
     <?php if(in_array('cannedresponses', jssupportticket::$_active_addons)){ ?>
         <li class="treeview <?php if($c == 'cannedresponses') echo 'active'; ?>">
             <a class="" href="admin.php?page=cannedresponses" title="<?php echo esc_html(__('Canned Responses' , 'js-support-ticket')); ?>">
-                <img class="jsst_menu-icon" alt="<?php echo esc_html(__('Canned Responses' , 'js-support-ticket')); ?>" src="<?php echo JSST_PLUGIN_URL.'includes/images/left-icons/menu/canned-response.png'; ?>"/>
+                <img class="jsst_menu-icon" alt="<?php echo esc_html(__('Canned Responses' , 'js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL).'includes/images/left-icons/menu/canned-response.png'; ?>"/>
                 <span class="jsst_text"><?php echo esc_html(__('Canned Responses' , 'js-support-ticket')); ?></span>
             </a>
             <ul class="jsstadmin-sidebar-submenu treeview-menu">
@@ -720,7 +721,7 @@ $jssupportticket_js ='
                 $url = "https://jshelpdesk.com/product/canned-responses/";
             } ?>
         <li class="disabled-menu treeview">
-            <img class="jsst_menu-icon" alt="<?php echo esc_html(__('Canned Responses' , 'js-support-ticket')); ?>" src="<?php echo JSST_PLUGIN_URL.'includes/images/left-icons/menu-grey/canned-response.png'; ?>"/>
+            <img class="jsst_menu-icon" alt="<?php echo esc_html(__('Canned Responses' , 'js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL).'includes/images/left-icons/menu-grey/canned-response.png'; ?>"/>
             <span class="jsst_text"><?php echo esc_html(__('Canned Responses' , 'js-support-ticket')); ?></span>
             <a href="<?php echo esc_url($url); ?>" class="jsst_js-install-btn" title="<?php echo esc_attr($text); ?>"><?php echo esc_html($text); ?></a>
             <ul class="jsstadmin-sidebar-submenu treeview-menu">
@@ -736,7 +737,7 @@ $jssupportticket_js ='
     <?php if ( in_array('agent',jssupportticket::$_active_addons)) { ?>
         <li class="treeview <?php if($c == 'role') echo 'active'; ?>">
             <a class="" href="admin.php?page=role" title="<?php echo esc_html(__('Roles' , 'js-support-ticket')); ?>">
-                <img class="jsst_menu-icon" alt="<?php echo esc_html(__('Roles' , 'js-support-ticket')); ?>" src="<?php echo JSST_PLUGIN_URL.'includes/images/left-icons/menu/role.png'; ?>"/>
+                <img class="jsst_menu-icon" alt="<?php echo esc_html(__('Roles' , 'js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL).'includes/images/left-icons/menu/role.png'; ?>"/>
                 <span class="jsst_text"><?php echo esc_html(__('Roles' , 'js-support-ticket')); ?></span>
             </a>
             <ul class="jsstadmin-sidebar-submenu treeview-menu">
@@ -762,7 +763,7 @@ $jssupportticket_js ='
                 $url = "https://jshelpdesk.com/product/agents/";
             } ?>
         <li class="disabled-menu treeview">
-            <img class="jsst_menu-icon" alt="<?php echo esc_html(__('Roles' , 'js-support-ticket')); ?>" src="<?php echo JSST_PLUGIN_URL.'includes/images/left-icons/menu-grey/role.png'; ?>"/>
+            <img class="jsst_menu-icon" alt="<?php echo esc_html(__('Roles' , 'js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL).'includes/images/left-icons/menu-grey/role.png'; ?>"/>
             <span class="jsst_text"><?php echo esc_html(__('Roles' , 'js-support-ticket')); ?></span>
             <a href="<?php echo esc_url($url); ?>" class="jsst_js-install-btn" title="<?php echo esc_attr($text); ?>"><?php echo esc_html($text); ?></a>
             <ul class="jsstadmin-sidebar-submenu treeview-menu">
@@ -778,7 +779,7 @@ $jssupportticket_js ='
     <?php if(in_array('mail', jssupportticket::$_active_addons)){ ?>
         <li class="treeview <?php if($c == 'mail') echo 'active'; ?>">
             <a class="" href="admin.php?page=mail" title="<?php echo esc_html(__('Mail' , 'js-support-ticket')); ?>">
-                <img class="jsst_menu-icon" alt="<?php echo esc_html(__('Mail' , 'js-support-ticket')); ?>" src="<?php echo JSST_PLUGIN_URL.'includes/images/left-icons/menu/mails.png'; ?>"/>
+                <img class="jsst_menu-icon" alt="<?php echo esc_html(__('Mail' , 'js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL).'includes/images/left-icons/menu/mails.png'; ?>"/>
                 <span class="jsst_text"><?php echo esc_html(__('Mail' , 'js-support-ticket')); ?></span>
             </a>
            <ul class="jsstadmin-sidebar-submenu treeview-menu">
@@ -799,7 +800,7 @@ $jssupportticket_js ='
                 $url = "https://jshelpdesk.com/product/internal-mail/";
             } ?>
         <li class="disabled-menu treeview">
-            <img class="jsst_menu-icon" alt="<?php echo esc_html(__('Mail' , 'js-support-ticket')); ?>" src="<?php echo JSST_PLUGIN_URL.'includes/images/left-icons/menu-grey/mails.png'; ?>"/>
+            <img class="jsst_menu-icon" alt="<?php echo esc_html(__('Mail' , 'js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL).'includes/images/left-icons/menu-grey/mails.png'; ?>"/>
             <span class="jsst_text"><?php echo esc_html(__('Mail' , 'js-support-ticket')); ?></span>
             <a href="<?php echo esc_url($url); ?>" class="jsst_js-install-btn" title="<?php echo esc_attr($text); ?>"><?php echo esc_html($text); ?></a>
             <ul class="jsstadmin-sidebar-submenu treeview-menu">
@@ -815,7 +816,7 @@ $jssupportticket_js ='
     <?php if(in_array('banemail', jssupportticket::$_active_addons)){ ?>
         <li class="treeview <?php if($c == 'banemail' || $c == 'banemaillog') echo 'active'; ?>">
             <a class="" href="admin.php?page=banemail" title="<?php echo esc_html(__('Banned Emails' , 'js-support-ticket')); ?>">
-                <img class="jsst_menu-icon" alt="<?php echo esc_html(__('Banned Emails' , 'js-support-ticket')); ?>" src="<?php echo JSST_PLUGIN_URL.'includes/images/left-icons/menu/ban.png'; ?>"/>
+                <img class="jsst_menu-icon" alt="<?php echo esc_html(__('Banned Emails' , 'js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL).'includes/images/left-icons/menu/ban.png'; ?>"/>
                 <span class="jsst_text"><?php echo esc_html(__('Banned Emails' , 'js-support-ticket')); ?></span>
             </a>
             <ul class="jsstadmin-sidebar-submenu treeview-menu">
@@ -841,7 +842,7 @@ $jssupportticket_js ='
                 $url = "https://jshelpdesk.com/product/ban-email/";
             } ?>
         <li class="disabled-menu treeview">
-            <img class="jsst_menu-icon" alt="<?php echo esc_html(__('Ban Emails', 'js-support-ticket')); ?>" src="<?php echo JSST_PLUGIN_URL.'includes/images/left-icons/menu-grey/ban.png'; ?>"/>
+            <img class="jsst_menu-icon" alt="<?php echo esc_html(__('Ban Emails', 'js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL).'includes/images/left-icons/menu-grey/ban.png'; ?>"/>
             <span class="jsst_text"><?php echo esc_html(__('Ban Emails' , 'js-support-ticket')); ?></span>
             <a href="<?php echo esc_url($url); ?>" class="jsst_js-install-btn" title="<?php echo esc_attr($text); ?>"><?php echo esc_html($text); ?></a>
             <ul class="jsstadmin-sidebar-submenu treeview-menu">
@@ -857,7 +858,7 @@ $jssupportticket_js ='
     <?php if(in_array('emailcc', jssupportticket::$_active_addons)){ ?>
         <li class="treeview <?php if($c == 'emailcc') echo 'active'; ?>">
             <a class="" href="admin.php?page=emailcc" title="<?php echo esc_html(__('Emial CC' , 'js-support-ticket')); ?>">
-                <img class="jsst_menu-icon" alt="<?php echo esc_html(__('Emial CC' , 'js-support-ticket')); ?>" src="<?php echo JSST_PLUGIN_URL.'includes/images/left-icons/menu/emailcc.png'; ?>"/>
+                <img class="jsst_menu-icon" alt="<?php echo esc_html(__('Emial CC' , 'js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL).'includes/images/left-icons/menu/emailcc.png'; ?>"/>
                 <span class="jsst_text"><?php echo esc_html(__('Email CC' , 'js-support-ticket')); ?></span>
             </a>
             <ul class="jsstadmin-sidebar-submenu treeview-menu">
@@ -883,7 +884,7 @@ $jssupportticket_js ='
                 $url = "https://jshelpdesk.com/product/email-cc/";
             } ?>
         <li class="disabled-menu treeview">
-            <img class="jsst_menu-icon" alt="<?php echo esc_html(__('Email CC', 'js-support-ticket')); ?>" src="<?php echo JSST_PLUGIN_URL.'includes/images/left-icons/menu-grey/emailcc.png'; ?>"/>
+            <img class="jsst_menu-icon" alt="<?php echo esc_html(__('Email CC', 'js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL).'includes/images/left-icons/menu-grey/emailcc.png'; ?>"/>
             <span class="jsst_text"><?php echo esc_html(__('Email CC' , 'js-support-ticket')); ?></span>
             <a href="<?php echo esc_url($url); ?>" class="jsst_js-install-btn" title="<?php echo esc_attr($text); ?>"><?php echo esc_html($text); ?></a>
             <ul class="jsstadmin-sidebar-submenu treeview-menu">
@@ -898,7 +899,7 @@ $jssupportticket_js ='
     <?php } ?>
     <li class="treeview <?php if($c == 'emailtemplate') echo 'active'; ?>">
         <a class="" href="admin.php?page=emailtemplate" title="<?php echo esc_html(__('Email Templates' , 'js-support-ticket')); ?>">
-            <img class="jsst_menu-icon" alt="<?php echo esc_html(__('Email Templates' , 'js-support-ticket')); ?>" src="<?php echo JSST_PLUGIN_URL.'includes/images/left-icons/menu/email-template.png'; ?>"/>
+            <img class="jsst_menu-icon" alt="<?php echo esc_html(__('Email Templates' , 'js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL).'includes/images/left-icons/menu/email-template.png'; ?>"/>
             <span class="jsst_text"><?php echo esc_html(__('Email Templates' , 'js-support-ticket')); ?></span>
         </a>
         <ul class="jsstadmin-sidebar-submenu treeview-menu">
@@ -1030,7 +1031,7 @@ $jssupportticket_js ='
     </li>
     <li class="treeview <?php if($c == 'jssupportticket' && $layout == 'help') echo 'active'; ?>">
         <a href="?page=jssupportticket&jstlay=help" title="<?php echo esc_html(__('help','js-support-ticket')); ?>">
-            <img class="jsst_menu-icon" alt="<?php echo esc_html(__('help' , 'js-support-ticket')); ?>" src="<?php echo JSST_PLUGIN_URL.'includes/images/left-icons/menu/help.png'; ?>"/>
+            <img class="jsst_menu-icon" alt="<?php echo esc_html(__('help' , 'js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL).'includes/images/left-icons/menu/help.png'; ?>"/>
             <span class="jsst_text"><?php echo esc_html(__('help','js-support-ticket')); ?></span>
         </a>
         <ul class="jsstadmin-sidebar-submenu treeview-menu">

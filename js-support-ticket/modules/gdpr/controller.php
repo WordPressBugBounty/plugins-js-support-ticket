@@ -11,6 +11,7 @@ class JSSTgdprController {
 
     function handleRequest() {
         $layout = JSSTrequest::getLayout('jstlay', null, 'gdpr');
+        jssupportticket::$_data['sanitized_args']['jsst_nonce'] = esc_html(wp_create_nonce('jsst_nonce'));
         if (self::canaddfile()) {
             switch ($layout) {
                 case 'admin_gdprfields':
@@ -26,6 +27,8 @@ class JSSTgdprController {
                 case 'adderasedatarequest':
                     JSSTincluder::getJSModel('gdpr')->getUserEraseDataRequest();
                     break;
+                default:
+                    exit;
             }
             $module = (is_admin()) ? 'page' : 'jstmod';
             $module = JSSTrequest::getVar($module, null, 'gdpr');
@@ -34,12 +37,15 @@ class JSSTgdprController {
     }
 
     function canaddfile() {
-        if (isset($_POST['form_request']) && $_POST['form_request'] == 'jssupportticket')
-            return false;
-        elseif (isset($_GET['action']) && $_GET['action'] == 'jstask')
-            return false;
-        else
-            return true;
+        $nonce_value = JSSTrequest::getVar('jsst_nonce');
+        if ( wp_verify_nonce( $nonce_value, 'jsst_nonce') ) {
+            if (isset($_POST['form_request']) && $_POST['form_request'] == 'jssupportticket')
+                return false;
+            elseif (isset($_GET['action']) && $_GET['action'] == 'jstask')
+                return false;
+            else
+                return true;
+        }
     }
 
     static function savegdprfield() {
@@ -118,7 +124,7 @@ class JSSTgdprController {
             header("Pragma: no-cache");
             header("Expires: 0");
             header("Lacation: excel.htm?id=yes");
-            print $return_value;
+            print wp_kses($return_value, JSST_ALLOWED_TAGS);
             exit;
         }
         JSSTmessage::setMessage(esc_html(__('There was no record found', 'js-support-ticket')), 'error');

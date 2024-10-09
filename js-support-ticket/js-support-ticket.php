@@ -3,15 +3,16 @@
 /**
  * @package JS Help Desk
  * @author Ahmad Bilal
- * @version 2.8.7
+ * @version 2.8.8
  */
 /*
   Plugin Name: JS Help Desk
   Plugin URI: https://www.jshelpdesk.com
   Description: JS Help Desk is a trusted open source ticket system. JS Help Desk is a simple, easy to use, web-based customer support system. User can create ticket from front-end. JS Help Desk comes packed with lot features than most of the expensive(and complex) support ticket system on market. JS Help Desk provide you best industry help desk system.
   Author: JS Help Desk
-  Version: 2.8.7
+  Version: 2.8.8
   Text Domain: js-support-ticket
+  License: GPLv3
   Author URI: https://www.jshelpdesk.com
  */
 
@@ -66,7 +67,7 @@ class jssupportticket {
         self::$_data = array();
         self::$_search = array();
         self::$_captcha = array();
-        self::$_currentversion = '287';
+        self::$_currentversion = '288';
         self::$_addon_query = array('select'=>'','join'=>'','where'=>'');
         self::$_jshdsession = JSSTincluder::getObjectClass('wphdsession');
         global $wpdb;
@@ -132,7 +133,7 @@ class jssupportticket {
                     // restore colors data end
                     update_option('jsst_currentversion', self::$_currentversion);
                     include_once JSST_PLUGIN_PATH . 'includes/updates/updates.php';
-                    JSSTupdates::checkUpdates('287');
+                    JSSTupdates::checkUpdates('288');
                     JSSTincluder::getJSModel('jssupportticket')->updateColorFile();
                 }
             }
@@ -197,7 +198,7 @@ class jssupportticket {
     function jssupportticket_activation_redirect(){
         if (get_option('jssupportticket_do_activation_redirect')) {
             delete_option('jssupportticket_do_activation_redirect');
-            exit(wp_redirect(admin_url('admin.php?page=postinstallation&jstlay=stepone')));
+            exit(esc_url(wp_redirect(admin_url('admin.php?page=postinstallation&jstlay=stepone'))));
         }
     }
 
@@ -490,19 +491,19 @@ class jssupportticket {
                 $ticketid = JSSTrequest::getVar('jssupportticketid');
                 if (in_array('agent', jssupportticket::$_active_addons) && JSSTincluder::getJSModel('agent')->isUserStaff()) { //staff
                     if(current_user_can('jsst_support_ticket')){
-                        $timecookies['ticket_time_start'][$ticketid] = date("Y-m-d h:i:s");
+                        $timecookies['ticket_time_start'][$ticketid] = gmdate("Y-m-d h:i:s");
                     }else{
                         jssupportticket::$_data['permission_granted'] = JSSTincluder::getJSModel('ticket')->validateTicketDetailForStaff($ticketid);
                         if (jssupportticket::$_data['permission_granted']) { // validation passed
                             if(in_array('timetracking', jssupportticket::$_active_addons)){
-                                $timecookies['ticket_time_start'][$ticketid] = date("Y-m-d h:i:s");
+                                $timecookies['ticket_time_start'][$ticketid] = gmdate("Y-m-d h:i:s");
                             }
                         }
                     }
                 } else { // user
                     if(current_user_can('jsst_support_ticket') || current_user_can('jsst_support_ticket_tickets')){
                         if(in_array('timetracking', jssupportticket::$_active_addons)){
-                            $timecookies['ticket_time_start'][$ticketid] = date("Y-m-d h:i:s");
+                            $timecookies['ticket_time_start'][$ticketid] = gmdate("Y-m-d h:i:s");
                         }
                     }
                 }
@@ -547,7 +548,7 @@ class jssupportticket {
     public static function setusersearchcookies($cookiesval, $jsst_search_array){
         if(!$cookiesval)
             return false;
-        $data = json_encode( $jsst_search_array );
+        $data = wp_json_encode( $jsst_search_array );
         $data = jssupportticketphplib::JSST_safe_encoding($data);
         jssupportticketphplib::JSST_setcookie("jsst_ticket_search_data" , $data , 0 , COOKIEPATH);
         if ( SITECOOKIEPATH != COOKIEPATH ){
@@ -1023,7 +1024,7 @@ class jssupportticket {
 
         if(isset($args['jstmod']) && isset($args['jstlay'])){
             // Get the original query parts
-            $redirect = @parse_url($permalink);
+            $redirect = wp_parse_url($permalink);
             if (!isset($redirect['query']))
                 $redirect['query'] = '';
 
@@ -1274,9 +1275,9 @@ class jssupportticket {
 
     function ticketviaemail() {// this funtion also handles ticket overdue bcz of hours confiuration
 /*
-        $today = date('Y-m-d');
+        $today = gmdate('Y-m-d');
         $f = fopen(JSST_PLUGIN_PATH .  'mylogone.txt', 'a') or exit("Can't open $lfile!");
-        $time = date('H:i:s');
+        $time = gmdate('H:i:s');
         $message = ' main function call cron '.$time;
         fwrite($f, "$time ($script_name) $message\n");
 */
@@ -1291,7 +1292,7 @@ class jssupportticket {
             JSSTincluder::getJSModel('emailpiping')->getAllEmailsForTickets();
         }
 /*
-        $time = date('H:i:s');
+        $time = gmdate('H:i:s');
         $message = ' after ticketviaemail controller call cron '.$time;
         fwrite($f, "$time ($script_name) $message\n");
 */

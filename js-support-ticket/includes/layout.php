@@ -9,7 +9,7 @@ class JSSTlayout {
         $html = '
 				<div class="js-ticket-error-message-wrapper">
 					<div class="js-ticket-message-image-wrapper">
-						<img class="js-ticket-message-image" alt="message image" src="' . JSST_PLUGIN_URL . 'includes/images/error/no-record-icon.png"/>
+						<img class="js-ticket-message-image" alt="message image" src="' . esc_url(JSST_PLUGIN_URL) . 'includes/images/error/no-record-icon.png"/>
 					</div>
 					<div class="js-ticket-messages-data-wrapper">
 						<span class="js-ticket-messages-main-text">
@@ -27,7 +27,7 @@ class JSSTlayout {
         $html = '
 				<div class="js-ticket-error-message-wrapper">
 					<div class="js-ticket-message-image-wrapper">
-						<img class="js-ticket-message-image" alt="message image" src="' . JSST_PLUGIN_URL . 'includes/images/error/no-record-icon.png"/>
+						<img class="js-ticket-message-image" alt="message image" src="' . esc_url(JSST_PLUGIN_URL) . 'includes/images/error/no-record-icon.png"/>
 					</div>
 					<div class="js-ticket-messages-data-wrapper">
 						<span class="js-ticket-messages-main-text">
@@ -51,7 +51,7 @@ class JSSTlayout {
         $html = '
 				<div class="js-ticket-error-message-wrapper">
 					<div class="js-ticket-message-image-wrapper">
-						<img class="js-ticket-message-image" alt="message image" src="' . JSST_PLUGIN_URL . 'includes/images/error/not-permission-icon.png"/>
+						<img class="js-ticket-message-image" alt="message image" src="' . esc_url(JSST_PLUGIN_URL) . 'includes/images/error/not-permission-icon.png"/>
 					</div>
 					<div class="js-ticket-messages-data-wrapper">
 						<span class="js-ticket-messages-main-text">
@@ -93,7 +93,7 @@ class JSSTlayout {
         $html = '
 				<div class="js-ticket-error-message-wrapper">
 					<div class="js-ticket-message-image-wrapper">
-						<img class="js-ticket-message-image" alt="message image" src="' . JSST_PLUGIN_URL . 'includes/images/error/not-permission-icon.png"/>
+						<img class="js-ticket-message-image" alt="message image" src="' . esc_url(JSST_PLUGIN_URL) . 'includes/images/error/not-permission-icon.png"/>
 					</div>
 					<div class="js-ticket-messages-data-wrapper">
 						<span class="js-ticket-messages-main-text">
@@ -112,7 +112,7 @@ class JSSTlayout {
         $html = '
 				<div class="js-ticket-error-message-wrapper">
 					<div class="js-ticket-message-image-wrapper">
-						<img class="js-ticket-message-image" alt="message image" src="' . JSST_PLUGIN_URL . 'includes/images/error/already-loggedin.png"/>
+						<img class="js-ticket-message-image" alt="message image" src="' . esc_url(JSST_PLUGIN_URL) . 'includes/images/error/already-loggedin.png"/>
 					</div>
 					<div class="js-ticket-messages-data-wrapper">
 						<span class="js-ticket-messages-main-text">
@@ -131,7 +131,7 @@ class JSSTlayout {
         $html = '
 				<div class="js-ticket-error-message-wrapper">
 					<div class="js-ticket-message-image-wrapper">
-						<img class="js-ticket-message-image" alt="message image" src="' . JSST_PLUGIN_URL . 'includes/images/error/not-permission-icon.png"/>
+						<img class="js-ticket-message-image" alt="message image" src="' . esc_url(JSST_PLUGIN_URL) . 'includes/images/error/not-permission-icon.png"/>
 					</div>
 					<div class="js-ticket-messages-data-wrapper">
 						<span class="js-ticket-messages-main-text">
@@ -150,7 +150,7 @@ class JSSTlayout {
         $html = '
 				<div class="js-ticket-error-message-wrapper">
 					<div class="js-ticket-message-image-wrapper">
-						<img class="js-ticket-message-image" alt="message image" src="' . JSST_PLUGIN_URL . 'includes/images/error/offline.png"/>
+						<img class="js-ticket-message-image" alt="message image" src="' . esc_url(JSST_PLUGIN_URL) . 'includes/images/error/offline.png"/>
 					</div>
 					<div class="js-ticket-messages-data-wrapper">
 						<span class="js-ticket-messages-main-text">
@@ -173,7 +173,7 @@ class JSSTlayout {
         $html = '
                 <div class="js-ticket-error-message-wrapper">
 					<div class="js-ticket-message-image-wrapper">
-						<img class="js-ticket-message-image" alt="message image" src="' . JSST_PLUGIN_URL . 'includes/images/error/not-login-icon.png"/>
+						<img class="js-ticket-message-image" alt="message image" src="' . esc_url(JSST_PLUGIN_URL) . 'includes/images/error/not-login-icon.png"/>
 					</div>
 					<div class="js-ticket-messages-data-wrapper">
 						<span class="js-ticket-messages-main-text">
@@ -214,7 +214,7 @@ class JSSTlayout {
         $html = '
 				<div class="js-ticket-error-message-wrapper">
 					<div class="js-ticket-message-image-wrapper">
-						<img class="js-ticket-message-image" alt="message image" src="' . JSST_PLUGIN_URL . 'includes/images/error/not-permission-icon.png"/>
+						<img class="js-ticket-message-image" alt="message image" src="' . esc_url(JSST_PLUGIN_URL) . 'includes/images/error/not-permission-icon.png"/>
 					</div>
 					<div class="js-ticket-messages-data-wrapper">
 						<span class="js-ticket-messages-main-text">
@@ -233,7 +233,7 @@ class JSSTlayout {
         $html = '
 				<div class="js-ticket-error-message-wrapper">
 					<div class="js-ticket-message-image-wrapper">
-						<img class="js-ticket-message-image" alt="message image" src="' . JSST_PLUGIN_URL . 'includes/images/error/ban.png"/>
+						<img class="js-ticket-message-image" alt="message image" src="' . esc_url(JSST_PLUGIN_URL) . 'includes/images/error/ban.png"/>
 					</div>
 					<div class="js-ticket-messages-data-wrapper">
 						<span class="js-ticket-messages-main-text">
@@ -266,7 +266,7 @@ class JSSTlayout {
 			$html = '
 					<div class="js-ticket-error-message-wrapper">
 						<div class="js-ticket-message-image-wrapper">
-							<img class="js-ticket-message-image" alt="message image" src="' . JSST_PLUGIN_URL . 'includes/images/error/success.png"/>
+							<img class="js-ticket-message-image" alt="message image" src="' . esc_url(JSST_PLUGIN_URL) . 'includes/images/error/success.png"/>
 						</div>
 						<div class="js-ticket-messages-data-wrapper">
 							<span class="js-ticket-messages-main-text">
@@ -281,7 +281,7 @@ class JSSTlayout {
 	        $html = '
 					<div class="js-ticket-error-message-wrapper">
 					<div class="js-ticket-message-image-wrapper">
-						<img class="js-ticket-message-image" alt="message image" src="' . JSST_PLUGIN_URL . 'includes/images/error/'.esc_attr($img_var).'"/>
+						<img class="js-ticket-message-image" alt="message image" src="' . esc_url(JSST_PLUGIN_URL) . 'includes/images/error/'.esc_attr($img_var).'"/>
 					</div>
 					<div class="js-ticket-messages-data-wrapper">
 						<span class="js-ticket-messages-main-text">

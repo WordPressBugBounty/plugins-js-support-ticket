@@ -33,7 +33,7 @@ if (is_plugin_active('js-support-ticket/js-support-ticket.php')) {
 		if (is_array($structure)) {
 			foreach($structure as $file) {
 				if (is_dir($file)) JSST_recursiveremove($file);
-				elseif (is_file($file)) unlink($file);
+				elseif (is_file($file)) wp_delete_file($file);
 			}
 		}
 		rmdir($dir);

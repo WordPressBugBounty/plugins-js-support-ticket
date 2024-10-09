@@ -22,7 +22,7 @@ $jssupportticket_css .= '
 	div.js-ticket-categories-heading-wrp{float: left;width: 100%;padding: 15px;}
 	div.js-ticket-categories-wrp div.js-ticket-position-relative{position: relative;}
 	div.js-ticket-head-category-image{display: inline-block;width: 60px;}
-	img.js-ticket-kb-dtl-img{}
+	img.js-ticket-kb-dtl-img{max-width: 100%;}
 	span.js-ticket-head-text{display: inline-block;margin-left: 8px;}
 	div.js-ticket-knowledgebase-wrapper{float: left;width:100%;margin-top: 20px;}
 	div.js-ticket-knowledgebase-details{float: left;width: 100%;padding: 15px;}
@@ -31,7 +31,7 @@ $jssupportticket_css .= '
 	div.js-ticket-categories-content div.js-ticket-category-box a.js-ticket-category-title{display: inline-block;text-decoration: none;outline: 0px;width: 100%;padding: 0px 5px;}
 	div.js-ticket-categories-content div.js-ticket-category-box a.js-ticket-category-title span.js-ticket-category-name{display: inline-block;padding: 13px 0px;text-align: center;line-height: initial;}
 	div.js-ticket-categories-content div.js-ticket-category-box a.js-ticket-category-title span.js-ticket-category-download-logo{display: inline-block;float: right;padding: 5px;width: 30px;height: 30px;text-align: center;margin: 10px 10px;position:relative;}
-	div.js-ticket-categories-content div.js-ticket-category-box a.js-ticket-category-title span.js-ticket-category-download-logo img.js-ticket-arrow-icon{max-width: 100px%;margin: auto;position: absolute;right: 0;left: 0;top: 0;bottom: 0;}
+	div.js-ticket-categories-content div.js-ticket-category-box a.js-ticket-category-title span.js-ticket-category-download-logo img.js-ticket-arrow-icon{max-width: 100%;margin: auto;position: absolute;right: 0;left: 0;top: 0;bottom: 0;}
 
 	div.js-ticket-categories-content div.js-ticket-category-box a.js-ticket-category-title span.js-ticket-category-download-logo img.js-ticket-download-img{vertical-align: unset;}
 	div.js-ticket-categories-content div.js-ticket-category-box a.js-ticket-category-title span.js-ticket-category-kb-logo{display: inline-block;float: left;padding:2px;width: 50px;height: 50px;position: relative;margin: 0px 5px 0px 0px; }

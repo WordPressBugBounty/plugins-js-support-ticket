@@ -11,6 +11,7 @@ class JSSTfieldorderingController {
 
     function handleRequest() {
         $layout = JSSTrequest::getLayout('jstlay', null, 'fieldordering');
+        jssupportticket::$_data['sanitized_args']['jsst_nonce'] = esc_html(wp_create_nonce('jsst_nonce'));
         if (self::canaddfile()) {
             switch ($layout) {
                 case 'admin_fieldordering':
@@ -46,6 +47,8 @@ class JSSTfieldorderingController {
                     // 
                     JSSTincluder::getJSModel('fieldordering')->getUserFieldbyId($id,1);
                     break;
+                default:
+                    exit;
             }
             $module = (is_admin()) ? 'page' : 'jstmod';
             $module = JSSTrequest::getVar($module, null, 'fieldordering');
@@ -54,12 +57,15 @@ class JSSTfieldorderingController {
     }
 
     function canaddfile() {
-        if (isset($_POST['form_request']) && $_POST['form_request'] == 'jssupportticket')
-            return false;
-        elseif (isset($_GET['action']) && $_GET['action'] == 'jstask')
-            return false;
-        else
-            return true;
+        $nonce_value = JSSTrequest::getVar('jsst_nonce');
+        if ( wp_verify_nonce( $nonce_value, 'jsst_nonce') ) {
+            if (isset($_POST['form_request']) && $_POST['form_request'] == 'jssupportticket')
+                return false;
+            elseif (isset($_GET['action']) && $_GET['action'] == 'jstask')
+                return false;
+            else
+                return true;
+        }
     }
 
     static function changeorder() {

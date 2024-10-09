@@ -12,6 +12,7 @@ class JSSTpostinstallationController {
 
     function handleRequest() {
         $layout = JSSTrequest::getLayout('jstlay', null, 'stepone');
+        jssupportticket::$_data['sanitized_args']['jsst_nonce'] = esc_html(wp_create_nonce('jsst_nonce'));
         if($this->canaddfile()){
             switch ($layout) {
                 case 'admin_quickconfig':
@@ -42,6 +43,12 @@ class JSSTpostinstallationController {
                         }
                     }
                 break;
+                case 'admin_settingcomplete':
+                    break;
+                case 'admin_stepfour':
+                    break;
+                default:
+                    exit;
             }
             $module = (is_admin()) ? 'page' : 'jstmod';
             $module = JSSTrequest::getVar($module, null, 'postinstallation');
@@ -50,12 +57,15 @@ class JSSTpostinstallationController {
 
     }
     function canaddfile() {
-        if (isset($_POST['form_request']) && $_POST['form_request'] == 'jssupportticket')
-            return false;
-        elseif (isset($_GET['action']) && $_GET['action'] == 'jstask')
-            return false;
-        else
-            return true;
+        $nonce_value = JSSTrequest::getVar('jsst_nonce');
+        if ( wp_verify_nonce( $nonce_value, 'jsst_nonce') ) {
+            if (isset($_POST['form_request']) && $_POST['form_request'] == 'jssupportticket')
+                return false;
+            elseif (isset($_GET['action']) && $_GET['action'] == 'jstask')
+                return false;
+            else
+                return true;
+        }
     }
 
     function save(){
