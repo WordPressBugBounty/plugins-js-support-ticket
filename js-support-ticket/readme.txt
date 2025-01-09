@@ -3,7 +3,7 @@ Contributors: rabilal
 Donate link: https://jshelpdesk.com/pricing/
 Tags:  helpdesk,ticket system,support,tickets,support ticket,support desk,help,paid support,knowledgebase,faq, support plugin, ticket plugin, support system, ticketing system,monitor desk, help desk, IMAP, Email Piping, agents, js support ticket
 Requires at least: 5.5
-Tested up to: 6.6.2
+Tested up to: 6.7
 Stable tag: 2.8.8
 Requires PHP: 7.4
 License: GPLv3
@@ -720,3 +720,6 @@ Yes; JS Help Desk will work with any theme.
 
 = Where can I report bugs or contribute to the project? =
 Bugs can be reported either in our support forum or preferably on the (https://joomsky.com).
+
+= How can I report security bugs? =
+You can report security bugs through the Patchstack Vulnerability Disclosure Program. The Patchstack team help validate, triage and handle any security vulnerabilities. [Report a security vulnerability.](https://patchstack.com/database/vdp/wp-job-portal)

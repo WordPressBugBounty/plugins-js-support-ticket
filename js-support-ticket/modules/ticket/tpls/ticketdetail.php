@@ -614,7 +614,22 @@ if (jssupportticket::$_config['offline'] == 2) {
                                             $message = 'member';
                                         }
                                         ?>
-                                    <td class=""><?php echo wp_kses_post($history->message); ?></td>
+                                    <td class=""><?php 
+										if(in_array('agent',jssupportticket::$_active_addons) && JSSTincluder::getJSModel('agent')->isUserStaff()){ //agent
+											echo wp_kses_post($history->message); 
+										}else{
+											if($message == 'member'){ // message by the user, so show full message to user
+												echo wp_kses_post($history->message); 
+											}else{
+												if (jssupportticket::$_config['anonymous_name_on_ticket_reply'] == 1) { 
+													$historymessage = $history->message;
+													echo wp_kses_post(preg_replace("/\([^)]+\)/","( ".__("Agent")." )",$historymessage));
+												}else{
+													echo wp_kses_post($history->message); 
+												}
+											}
+										}											
+									?></td>
                                   </tr>
                                 <?php } ?>
                             </tbody>
