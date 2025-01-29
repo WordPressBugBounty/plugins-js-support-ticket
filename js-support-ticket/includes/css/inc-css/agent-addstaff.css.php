@@ -26,9 +26,9 @@ $jssupportticket_css .= '
 	div.js-ticket-add-form-wrapper div.js-ticket-from-field-wrp div.js-ticket-from-field-title{float: left;width: 100%;margin-bottom: 5px;}
 	div.js-ticket-add-form-wrapper div.js-ticket-from-field-wrp div.js-ticket-from-field{float: left;width: 100%;position: relative;}
 	div.js-ticket-add-form-wrapper div.js-ticket-from-field-wrp div.js-ticket-from-field input.js-ticket-form-field-input{float: left;width: 100%;border-radius: 0px;padding: 10px;height: 50px;line-height: initial;}
-	div.js-ticket-add-form-wrapper div.js-ticket-from-field-wrp div.js-ticket-from-field select.js-ticket-form-field-select{float: left;width: 100%;border-radius: 0px;background: url('.JSST_PLUGIN_URL.'includes/images/selecticon.png) 96% / 4% no-repeat #eee;height: 60px;line-height: initial;padding: 10px;}
-	div.js-ticket-add-form-wrapper div.js-ticket-from-field-wrp div.js-ticket-from-field.js-ticket-from-field-wrp-full-width select#status{float: left;width: 100%;border-radius: 0px;background: url('.JSST_PLUGIN_URL.'includes/images/selecticon.png) 98% / 2% no-repeat;}
-	div.js-ticket-add-form-wrapper div.js-ticket-from-field-wrp.js-ticket-from-field-wrp-full-width div.js-ticket-from-field select#status{float: left;width: 100%;border-radius: 0px;background: url('.JSST_PLUGIN_URL.'includes/images/selecticon.png) 98% / 2% no-repeat;}
+	div.js-ticket-add-form-wrapper div.js-ticket-from-field-wrp div.js-ticket-from-field select.js-ticket-form-field-select{float: left;width: 100%;border-radius: 0px;background: url('.esc_url(JSST_PLUGIN_URL).'includes/images/selecticon.png) 96% / 4% no-repeat #eee;height: 60px;line-height: initial;padding: 10px;}
+	div.js-ticket-add-form-wrapper div.js-ticket-from-field-wrp div.js-ticket-from-field.js-ticket-from-field-wrp-full-width select#status{float: left;width: 100%;border-radius: 0px;background: url('.esc_url(JSST_PLUGIN_URL).'includes/images/selecticon.png) 98% / 2% no-repeat;}
+	div.js-ticket-add-form-wrapper div.js-ticket-from-field-wrp.js-ticket-from-field-wrp-full-width div.js-ticket-from-field select#status{float: left;width: 100%;border-radius: 0px;background: url('.esc_url(JSST_PLUGIN_URL).'includes/images/selecticon.png) 98% / 2% no-repeat;}
 
 	div.js-ticket-form-btn-wrp{float: left;width:calc(100% - 20px);margin: 0px 10px;text-align: center;padding: 25px 0px 10px 0px;}
 	div.js-ticket-form-btn-wrp input.js-ticket-save-button{padding: 20px 10px;margin-right: 10px;min-width: 120px;border-radius: 0px;line-height: initial;}
@@ -43,21 +43,21 @@ $jssupportticket_css .= '
 	div.js-ticket-select-user-btn a#userpopup{display: inline-block;width: 100%;text-align: center;padding: 10px 10px;text-decoration: none;outline: 0px;line-height: initial;height:50px;}
 
 	#records{float: left;width: 100%;padding: 0px 10px;}
-	select.js-ticket-select-field{float: left;width: 100%;border-radius: 0px;background: url('.JSST_PLUGIN_URL.'includes/images/selecticon.png) 96% / 4% no-repeat #eee; }
+	select.js-ticket-select-field{float: left;width: 100%;border-radius: 0px;background: url('.esc_url(JSST_PLUGIN_URL).'includes/images/selecticon.png) 96% / 4% no-repeat #eee; }
 	div.js-ticket-reply-attachments{display: inline-block;width: 100%;margin-bottom: 20px;}
 	div.js-ticket-reply-attachments div.js-attachment-field-title{display: inline-block;width: 100%;padding: 15px 0px;}
 	div.js-ticket-reply-attachments div.js-attachment-field{display: inline-block;width: 100%;}
 	div.tk_attachment_value_wrapperform{float: left;width:100%;padding:0px 0px;}
 	div.tk_attachment_value_wrapperform span.tk_attachment_value_text{float: left;width: calc(100% / 3 - 10px);padding: 5px 5px;margin: 5px 5px;position: relative;}
 	div.tk_attachment_value_wrapperform span.tk_attachment_value_text input.js-attachment-inputbox{width: 100%;max-width: 100%;max-height:100%;}
-	span.tk_attachment_value_text span.tk_attachment_remove{background: url('.JSST_PLUGIN_URL.'includes/images/close.png) no-repeat;background-size: 100% 100%;position: absolute;width: 20px;height: 20px;top: 12px;right:6px;}
+	span.tk_attachment_value_text span.tk_attachment_remove{background: url('.esc_url(JSST_PLUGIN_URL).'includes/images/close.png) no-repeat;background-size: 100% 100%;position: absolute;width: 20px;height: 20px;top: 12px;right:6px;}
 	span.js-ticket-staff-img {float: left;margin: 10px 0;width: 120px;}
 	span.js-ticket-staff-img img {}
 
 	div#userpopupblack{background: rgba(0,0,0,0.7);position: fixed;width: 100%;height: 100%;top:0px;left:0px;z-index: 9989;}
 	div#userpopup{position: fixed;top:50%;left:50%;width:60%; max-height: 70%; padding-top:0px;z-index: 99999;overflow-y: auto; overflow-x: hidden;transform: translate(-50%,-50%);}
 	div.jsst-popup-header{width:100%;font-size:20px;float:left;padding: 20px 10px; font-weight: bold;line-height: initial;}
-	div.popup-header-close-img{position: absolute;top:22px;right: 22px;background-image:url('.JSST_PLUGIN_URL.'includes/images/close-icon-white.png);background-size: 100%;width:20px;height: 20px;opacity: 1;cursor: pointer;}
+	div.popup-header-close-img{position: absolute;top:22px;right: 22px;background-image:url('.esc_url(JSST_PLUGIN_URL).'includes/images/close-icon-white.png);background-size: 100%;width:20px;height: 20px;opacity: 1;cursor: pointer;}
 
 	div.jsst-popup-wrapper input{margin-bottom:0px; }
 	div.jsst-popup-wrapper input#edited_time{font-size: 16px;}

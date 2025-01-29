@@ -4,6 +4,10 @@
 ?>
 <div class="jsst-main-up-wrapper">
 <?php
+$ticketstatus = array(
+    (object) array('id' => '1', 'text' => esc_html(__('Replied', 'js-support-ticket'))),
+    (object) array('id' => '0', 'text' => esc_html(__('Waiting Reply', 'js-support-ticket')))
+);
 wp_enqueue_style('status-graph', JSST_PLUGIN_URL . 'includes/css/status_graph.css');
 if (jssupportticket::$_config['offline'] == 2) {
     if (JSSTincluder::getObjectClass('user')->uid() != 0) {
@@ -289,7 +293,11 @@ if (jssupportticket::$_config['offline'] == 2) {
                                 </div>
 
                             <?php
-                            }
+                            } ?>
+                            <div class="js-col-md-3 js-filter-field-wrp">
+                                <?php echo wp_kses(JSSTformfield::select('jsst-status', $ticketstatus, isset(jssupportticket::$_data['filter']['status']) ? jssupportticket::$_data['filter']['status'] : '', esc_html(__('Select Status', 'js-support-ticket'))), JSST_ALLOWED_TAGS); ?>
+                            </div>
+                            <?php
                              $customfields = JSSTincluder::getObjectClass('customfields')->userFieldsForSearch(1);
                                 foreach ($customfields as $field) {
                                     JSSTincluder::getObjectClass('customfields')->formCustomFieldsForSearch($field, $k);
@@ -380,11 +388,11 @@ if (jssupportticket::$_config['offline'] == 2) {
                 <div class="js-col-xs-12 js-col-md-12 js-ticket-wrapper">
                     <div class="js-col-xs-12 js-col-md-12 js-ticket-toparea">
                         <div class="js-col-xs-2 js-col-md-2 js-ticket-pic">
-                            <?php if (in_array('agent',jssupportticket::$_active_addons) && $ticket->staffphoto) { ?>
+                            <?php /* if (in_array('agent',jssupportticket::$_active_addons) && $ticket->staffphoto) { ?>
                                 <img class="js-ticket-staff-img" src="<?php echo esc_url(jssupportticket::makeUrl(array('jstmod'=>'agent','task'=>'getStaffPhoto','action'=>'jstask','jssupportticketid'=> $ticket->staffid ,'jsstpageid'=>get_the_ID())));?> ">
-                            <?php } else {
+                            <?php } else { */
                                 echo wp_kses(jsst_get_avatar(JSSTincluder::getJSModel('jssupportticket')->getWPUidById($ticket->uid)), JSST_ALLOWED_TAGS);
-                            } ?>
+                            // } ?>
                         </div>
                         <div class="js-col-xs-10 js-col-md-6 js-col-xs-10 js-ticket-data js-nullpadding">
                             <div class="js-col-xs-12 js-col-md-12 js-ticket-padding-xs js-ticket-body-data-elipses name">

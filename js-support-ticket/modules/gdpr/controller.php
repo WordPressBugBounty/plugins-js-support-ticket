@@ -113,7 +113,8 @@ class JSSTgdprController {
         if (! wp_verify_nonce( $nonce, 'export-usereraserequest') ) {
             die( 'Security check Failed' );
         }
-        $uid  = JSSTrequest::getVar('jssupportticketid');
+        // get current user ID by function due to security reasons
+        $uid  = JSSTincluder::getObjectClass('user')->uid();
         $return_value = JSSTincluder::getJSModel('gdpr')->setUserExportByuid($uid);
         if (!empty($return_value)) {
             // Push the report now!

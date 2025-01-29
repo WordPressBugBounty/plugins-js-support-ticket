@@ -491,8 +491,14 @@ class JSSTcustomfields {
     }
 
     function userFieldsData($fieldfor, $listing = null, $multiformid = '') {
+        if(!is_numeric($fieldfor)){
+            return false;
+        }
         if ($multiformid == '') {
             $multiformid = JSSTincluder::getJSModel('ticket')->getDefaultMultiFormId();
+        }
+        if(!is_numeric($multiformid)){
+            return false;
         }
         if (JSSTincluder::getObjectClass('user')->isguest()) {
             $published = ' isvisitorpublished = 1 ';
@@ -512,6 +518,9 @@ class JSSTcustomfields {
     }
 
     function userFieldsForSearch($fieldfor) {
+        if(!is_numeric($fieldfor)){
+            return false;
+        }
         if (JSSTincluder::getObjectClass('user')->isguest()) {
             $inquery = ' isvisitorpublished = 1';
         } else {

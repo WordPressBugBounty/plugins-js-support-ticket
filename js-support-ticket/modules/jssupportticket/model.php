@@ -279,7 +279,7 @@ class JSSTjssupportticketModel {
     }
 
     function getAgentTicketStats($staffid){
-        if(!is_numeric($staffid) || jssupportticket::$_config['count_on_myticket'] != 1){
+        if(!is_numeric($staffid)){
             return false;
         }
 
@@ -303,7 +303,7 @@ class JSSTjssupportticketModel {
         FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` AS ticket
         JOIN `" . jssupportticket::$_db->prefix . "js_ticket_priorities` AS priority ON ticket.priorityid = priority.id
         LEFT JOIN `" . jssupportticket::$_db->prefix . "js_ticket_departments` AS department ON ticket.departmentid = department.id
-        WHERE (".esc_sql($agent_conditions).") AND ticket.isanswered = 1 ";
+        WHERE (".esc_sql($agent_conditions).") AND ticket.isanswered = 1 AND ticket.status != 4 AND ticket.status != 0 ";
         $result['answeredticket'] = jssupportticket::$_db->get_var($query);
 
         $query = "SELECT COUNT(ticket.id)
@@ -387,7 +387,7 @@ class JSSTjssupportticketModel {
     }
 
     function getUserTicketStats($uid){
-        if(!is_numeric($uid) || jssupportticket::$_config['count_on_myticket'] != 1){
+        if(!is_numeric($uid)){
             return false;
         }
 
@@ -1746,6 +1746,54 @@ class JSSTjssupportticketModel {
             }
         }
         @rmdir($dir);
+    }
+
+    function generateIndexFile($file_directory) {
+        global $wp_filesystem;
+
+        // Initialize the WP_Filesystem
+        if (!is_a($wp_filesystem, 'WP_Filesystem_Base')) {
+            require_once ABSPATH . 'wp-admin/includes/file.php'; // Include WP Filesystem functions
+            $creds = request_filesystem_credentials(site_url());
+
+            if (!WP_Filesystem($creds)) {
+                wp_die('Could not initialize the filesystem.');
+            }
+        }
+
+        // Get the uploads directory path
+        $uploads_dir = wp_upload_dir();
+        $uploads_path = $uploads_dir['basedir'];
+
+        // Normalize the paths to ensure consistency
+        $file_directory = rtrim($file_directory, '/');
+        $uploads_path = rtrim($uploads_path, '/');
+
+        // Check if the given directory is within the uploads directory
+        if (strpos($file_directory, $uploads_path) === 0) {
+            // Start from the given directory and move up to the uploads directory
+            $current_dir = $file_directory;
+            while ($current_dir !== $uploads_path) {
+                // Path to the index.php file in the current directory
+                $index_file = $current_dir . '/index.html';
+
+                // Create the index.php file if it does not exist
+                if (!$wp_filesystem->exists($index_file)) {
+                    $wp_filesystem->put_contents($index_file, '', FS_CHMOD_FILE); // FS_CHMOD_FILE ensures correct file permissions
+                }
+
+                // Move up to the parent directory
+                $current_dir = dirname($current_dir);
+            }
+
+            // Finally, check and create the index.php file in the uploads directory
+            $uploads_index_file = $uploads_path . '/index.html';
+            if (!$wp_filesystem->exists($uploads_index_file)) {
+                // $wp_filesystem->put_contents($uploads_index_file, '', FS_CHMOD_FILE);
+            }
+        }
+
+        return;
     }
 }
 

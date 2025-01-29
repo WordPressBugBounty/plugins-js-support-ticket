@@ -59,6 +59,10 @@ $jssupportticket_js ="
 ";
 wp_add_inline_script('js-support-ticket-main-js',$jssupportticket_js);
 JSSTmessage::getMessage();
+$ticketstatus = array(
+    (object) array('id' => '1', 'text' => esc_html(__('Replied', 'js-support-ticket'))),
+    (object) array('id' => '0', 'text' => esc_html(__('Waiting Reply', 'js-support-ticket')))
+);
 ?>
 <div id="jsstadmin-wrapper">
     <div id="jsstadmin-leftmenu">
@@ -296,6 +300,7 @@ JSSTmessage::getMessage();
                 <?php if(class_exists('WooCommerce') && in_array('woocommerce', jssupportticket::$_active_addons)){  ?>
                     <?php echo wp_kses(JSSTformfield::text('orderid', jssupportticket::$_data['filter']['orderid'], array('placeholder' => jssupportticket::JSST_getVarValue($field_array['wcorderid']),'class' => 'js-form-input-field')), JSST_ALLOWED_TAGS); ?>
                 <?php } ?>
+                <?php echo wp_kses(JSSTformfield::select('status', $ticketstatus, jssupportticket::$_data['filter']['status'], esc_html(__('Select Status','js-support-ticket')), array('class' => 'js-form-select-field')), JSST_ALLOWED_TAGS); ?>
                 <?php echo wp_kses(JSSTformfield::hidden('JSST_form_search', 'JSST_SEARCH'), JSST_ALLOWED_TAGS); ?>
                 <?php echo wp_kses(JSSTformfield::hidden('sortby', jssupportticket::$_data['filter']['sortby']), JSST_ALLOWED_TAGS); ?>
                 <?php echo wp_kses(JSSTformfield::hidden('list', $list), JSST_ALLOWED_TAGS); ?>

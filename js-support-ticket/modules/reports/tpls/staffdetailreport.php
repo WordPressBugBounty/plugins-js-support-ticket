@@ -69,7 +69,7 @@ wp_add_inline_script('ticket-google-charts-handle',$jssupportticket_js);
 <div class="js-ticket-staff-report-wrapper">
     <div class="js-ticket-top-search-wrp">
         <div class="js-ticket-search-fields-wrp">
-            <form class="js-filter-form" name="jssupportticketform" id="jssupportticketform" method="POST" action="<?php echo esc_url(wp_nonce_url(jssupportticket::makeUrl(array('jstmod'=>'reports', 'jstlay'=>'staffdetailreport')),"staff-detail-report")); ?>">
+            <form class="js-filter-form" name="jssupportticketform" id="jssupportticketform" method="POST" action="<?php echo esc_url(wp_nonce_url(jssupportticket::makeUrl(array('jstmod'=>'reports', 'jstlay'=>'staffdetailreport','jsst-id'=>jssupportticket::$_data['staff_report']->id)),"staff-detail-report")); ?>">
                 <?php
                 $curdate = date_i18n('Y-m-d');
                 $enddate = date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime("now -1 month"));
@@ -260,7 +260,7 @@ wp_add_inline_script('ticket-google-charts-handle',$jssupportticket_js);
         </div>
         <?php
         if (jssupportticket::$_data[1]) {
-            echo '<div class="tablenav"><div class="tablenav-pages"' . wp_kses_post(jssupportticket::$_data[1]) . '</div></div>';
+            echo '<div class="tablenav"><div class="tablenav-pages">' . (jssupportticket::$_data[1]) . '</div></div>';
         }
     } else {
         JSSTlayout::getNoRecordFound();

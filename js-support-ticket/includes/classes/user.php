@@ -260,7 +260,7 @@ class JSSTuser
         if (!is_numeric($uid))
             return false;
 
-        $query = "SELECT display_name,user_nicename FROM `".jssupportticket::$_db->prefix."js_ticket_users` WHERE id = " . $uid;
+        $query = "SELECT display_name,user_nicename FROM `".jssupportticket::$_db->prefix."js_ticket_users` WHERE id = " . esc_sql($uid);
         $result = jssupportticket::$_db->get_row($query);
         return $result;
     }

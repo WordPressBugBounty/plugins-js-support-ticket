@@ -57,6 +57,9 @@
 
 /* Ticket Detail*/
 	div.js-ticket-detail-wrapper{padding: 5px 0px;}
+	.js-ticket-thread .js-ticket-thread-cnt .js-ticket-thread-data .js-ticket-thread-read-status-wrp {margin: 14px 0 0;width: 100%;}
+	.js-ticket-thread .js-ticket-thread-cnt .js-ticket-thread-data .js-ticket-thread-read-status-btn {float: left;}
+	.js-ticket-thread .js-ticket-thread-cnt .js-ticket-thread-data .js-ticket-thread-read-status-detail {left: 0;min-width: 100%}
 	div.js-ticket-detail-box div.js-ticket-detail-left{width: 100%;padding: 10px;}
 	div.js-ticket-detail-box div.js-ticket-detail-right{width: 100%;}
 	div.js-ticket-detail-box div.js-ticket-detail-right div.js-ticket-rows-wrp{padding: 20px;text-align: center;min-height: auto !important;}

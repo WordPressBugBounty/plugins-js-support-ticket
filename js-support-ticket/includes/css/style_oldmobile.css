@@ -87,6 +87,9 @@
 	.js-ticket-thread .js-ticket-thread-image {width: 100%;}
 	.js-ticket-thread .js-ticket-thread-cnt {width: 100%;padding: 20px;text-align: center;}
 	.js-ticket-thread .js-ticket-thread-cnt .js-ticket-thread-data .js-ticket-thread-person {float: none;display: inline-block;width: 100%;}
+	.js-ticket-thread .js-ticket-thread-cnt .js-ticket-thread-data .js-ticket-thread-read-status-wrp {float: none;display: inline-block;margin: 14px 0 0;width: 100%;}
+	.js-ticket-thread .js-ticket-thread-cnt .js-ticket-thread-data .js-ticket-thread-read-status-btn {float: none;display: inline-block;}
+	.js-ticket-thread .js-ticket-thread-cnt .js-ticket-thread-data .js-ticket-thread-read-status-detail {left: 0;min-width: 100%}
 	.js-ticket-thread .js-ticket-thread-cnt .js-ticket-thread-data .js-ticket-thread-email {float: none;display: inline-block;width: 100%;}
 	.js-ticket-thread .js-ticket-thread-cnt .js-ticket-thread-data .js-ticket-thread-time {float: none;display: inline-block;width: 100%;}
 	div.js-ticket-detail-box div.js-ticket-detail-left{width: 100%;padding: 10px;}

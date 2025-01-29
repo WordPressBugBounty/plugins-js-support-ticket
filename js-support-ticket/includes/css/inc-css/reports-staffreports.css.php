@@ -33,8 +33,8 @@ $jssupportticket_css .= '
 	div.js-ticket-search-form-btn-wrp input{float: left;width: calc(100% / 2 - 10px);padding: 13px 0px;text-align: center;margin-right: 10px; border-radius: unset;line-height: initial;height: 50px;}
 	div.js-ticket-downloads-wrp{float: left;width: 100%;margin-top: 18px;}
 	div.js-ticket-downloads-wrp div.js-ticket-downloads-heading-wrp{float: left;width: 100%;padding: 15px;line-height: initial;}
-	input#jsst-date-start{background-image: url('.JSST_PLUGIN_URL.'includes/images/calender.png);background-repeat: no-repeat;background-position: 97% 11px;background-size: 25px;}
-	input#jsst-date-end{background-image: url('.JSST_PLUGIN_URL.'includes/images/calender.png);background-repeat: no-repeat;background-position: 97% 11px;background-size: 25px;}
+	input#jsst-date-start{background-image: url('.esc_url(JSST_PLUGIN_URL).'includes/images/calender.png);background-repeat: no-repeat;background-position: 97% 11px;background-size: 25px;}
+	input#jsst-date-end{background-image: url('.esc_url(JSST_PLUGIN_URL).'includes/images/calender.png);background-repeat: no-repeat;background-position: 97% 11px;background-size: 25px;}
 	div.js-admin-report-box-wrapper{float:left;width:100%;margin-top:20px;margin-bottom: 10px;}
 	div.js-ticket-download-content-wrp-mtop{margin-top: 30px;}
 	div.js-admin-report-box-wrapper div.js-admin-box{background:#ffffff;border:1px solid #cccccc;padding:0px;width: calc(100% / 5 - 5px);margin: 0px 2.5px; }
@@ -60,9 +60,9 @@ $jssupportticket_css .= '
 
 	a.js-admin-report-wrapper{float:left;display: block;width:95%;font-size:18px;}
 	a.js-admin-report-wrapper:hover{text-decoration: none;}
-	a.js-admin-report-wrapper div.js-admin-overall-report-type-wrapper{box-shadow: 0px 0px 10px #aaaaaa;border-bottom:8px solid #6AA108;color:#6AA108;margin:10px 0px;background:url('.JSST_PLUGIN_URL.'includes/images/report/overall.png)  98% center no-repeat #EAF1DD;}
-	a.js-admin-report-wrapper div.js-admin-staff-report-type-wrapper{box-shadow: 0px 0px 10px #aaaaaa;border-bottom:8px solid #1EADD8;color:#1EADD8;margin:10px 0px;background:url('.JSST_PLUGIN_URL.'includes/images/report/staffbox.png)  98% center no-repeat #EEF9FD;}
-	a.js-admin-report-wrapper div.js-admin-user-report-type-wrapper{box-shadow: 0px 0px 10px #aaaaaa;border-bottom:8px solid #D98E11;color:#D98E11;margin:10px 0px;background:url('.JSST_PLUGIN_URL.'includes/images/report/userbox.png)  98% center no-repeat #FFF5EB;}
+	a.js-admin-report-wrapper div.js-admin-overall-report-type-wrapper{box-shadow: 0px 0px 10px #aaaaaa;border-bottom:8px solid #6AA108;color:#6AA108;margin:10px 0px;background:url('.esc_url(JSST_PLUGIN_URL).'includes/images/report/overall.png)  98% center no-repeat #EAF1DD;}
+	a.js-admin-report-wrapper div.js-admin-staff-report-type-wrapper{box-shadow: 0px 0px 10px #aaaaaa;border-bottom:8px solid #1EADD8;color:#1EADD8;margin:10px 0px;background:url('.esc_url(JSST_PLUGIN_URL).'includes/images/report/staffbox.png)  98% center no-repeat #EEF9FD;}
+	a.js-admin-report-wrapper div.js-admin-user-report-type-wrapper{box-shadow: 0px 0px 10px #aaaaaa;border-bottom:8px solid #D98E11;color:#D98E11;margin:10px 0px;background:url('.esc_url(JSST_PLUGIN_URL).'includes/images/report/userbox.png)  98% center no-repeat #FFF5EB;}
 	div.js-admin-staff-wrapper{display: inline-block;width:100%;background:#ffffff;margin-top:20px;border:1px solid #cccccc;}
 	div.js-admin-staff-wrapper.js-departmentlist{padding: 10px;}
 	div.js-admin-staff-wrapper.js-departmentlist div.departmentname{font-size: 20px;}
@@ -97,9 +97,9 @@ $jssupportticket_css .= '
 	table.js-admin-report-tickets tr td{text-align: center;background:#FFFFFF;padding:8px;}
 	table.js-admin-report-tickets tr td span.js-responsive-heading{display:none;}
 	a.js-admin-report-butonright{float:right;}
-	div#js-admin-ticketviaemail-bar{display: none;float:left;height:25px;width:35%;background:url('.JSST_PLUGIN_URL.'includes/images/progress_bar.gif);background-size: 100% 100%;margin-left:20px;margin-top:5px;}
+	div#js-admin-ticketviaemail-bar{display: none;float:left;height:25px;width:35%;background:url('.esc_url(JSST_PLUGIN_URL).'includes/images/progress_bar.gif);background-size: 100% 100%;margin-left:20px;margin-top:5px;}
 	div#js-admin-ticketviaemail-text{display:none;padding:10px 0px;}
-	a#js-admin-ticketviaemail{display: block;float:left;border:1px solid #666555;padding:8px 15px 8px 40px;background:url('.JSST_PLUGIN_URL.'includes/images/button_ticketviaemail.png);background-size:100% 100%;color:#ffffff;font-weight: bold;border-radius: 4px;text-decoration: none;position: relative;}
+	a#js-admin-ticketviaemail{display: block;float:left;border:1px solid #666555;padding:8px 15px 8px 40px;background:url('.esc_url(JSST_PLUGIN_URL).'includes/images/button_ticketviaemail.png);background-size:100% 100%;color:#ffffff;font-weight: bold;border-radius: 4px;text-decoration: none;position: relative;}
 	a#js-admin-ticketviaemail img{position: absolute;top:3px;left:5px;}
 	div#js-admin-ticketviaemail-msg{padding:10px;display:inline-block;float:none;margin-top:5px;border-radius: 4px;margin-bottom:10px;}
 	div#js-admin-ticketviaemail-msg.server-error{background:#FEEFB3;color:#B98324;border:1px solid #B98324;}

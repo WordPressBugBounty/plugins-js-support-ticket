@@ -209,7 +209,7 @@ class JSSTpriorityModel {
             $order = "<";
             $direction = "DESC";
         }
-        $query = "SELECT t.ordering,t.id,t2.ordering AS ordering2 FROM `" . jssupportticket::$_db->prefix . "js_ticket_priorities` AS t,`" . jssupportticket::$_db->prefix . "js_ticket_priorities` AS t2 WHERE t.ordering $order t2.ordering AND t2.id = $id ORDER BY t.ordering $direction LIMIT 1";
+        $query = "SELECT t.ordering,t.id,t2.ordering AS ordering2 FROM `" . jssupportticket::$_db->prefix . "js_ticket_priorities` AS t,`" . jssupportticket::$_db->prefix . "js_ticket_priorities` AS t2 WHERE t.ordering $order t2.ordering AND t2.id = ".esc_sql($id)." ORDER BY t.ordering $direction LIMIT 1";
         $result = jssupportticket::$_db->get_row($query);
         $query = "UPDATE `" . jssupportticket::$_db->prefix . "js_ticket_priorities` SET ordering = " . esc_sql($result->ordering) . " WHERE id = " . esc_sql($id);
         jssupportticket::$_db->query($query);

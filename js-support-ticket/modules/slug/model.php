@@ -133,7 +133,7 @@ class JSSTslugModel {
         $slug = JSSTrequest::getVar('slug');
         $html = '<span class="userpopup-top">
                     <span id="userpopup-heading" class="userpopup-heading" >' . esc_html(__("Edit","js-support-ticket"))." ". esc_html(__("Slug", "js-support-ticket")) . '</span>
-                        <img alt="'. esc_html(__("Close","js-support-ticket")).'" onClick="closePopup();" class="userpopup-close" src="'. JSST_PLUGIN_URL.'includes/images/close-icon-white.png" />
+                        <img alt="'. esc_html(__("Close","js-support-ticket")).'" onClick="closePopup();" class="userpopup-close" src="'. esc_url(JSST_PLUGIN_URL).'includes/images/close-icon-white.png" />
                     </span>';
         $html .= '<div class="userpopup-search">
                     <div class="popup-field-title">' . esc_html(__('Slug','js-support-ticket')).' '. esc_html(__('Name','js-support-ticket')) . ' <span style="color: red;"> *</span></div>

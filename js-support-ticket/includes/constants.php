@@ -135,6 +135,7 @@ if (!defined('JSST_ALLOWED_TAGS')) {
             'data-validation' => array(),
             'required' => array(),
             'multiple' => array(),
+            'data-nonce' => array(),
             'style' => array(),
         ),
         'option'      => array(

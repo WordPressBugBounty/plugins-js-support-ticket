@@ -152,6 +152,7 @@ div#userpopup .userpopup-search form .userpopup-fields-wrp .userpopup-btn-wrp in
 .userpopup-search-history-row .userpopup-search-history-col {float: right;border-left: 1px solid #ebecec;border-right: 0;}
 .userpopup-search-history-row .userpopup-search-history-col:last-child {text-align: right;}
 .jsst-popup-wrapper .userpopup-top .userpopup-close {float: left;}
+.jsst-popup-wrapper .userpopup-top .internalnotespopup-close {float: left;}
 .jsst-merge-popup-wrapper .js-ticket-wrapper .js-ticket-data .js-ticket-title {margin-right: 0;margin-left: 3px;}
 .jsst-merge-popup-wrapper .js-ticket-wrapper .js-ticket-data1 .js-row .js-col-md-6 {float: right;}
 .jsst-merge-popup-wrapper form .js-form-wrapper .js-merge-form-wrp {float: right;}
@@ -191,7 +192,11 @@ div.js-ticket-wrapper div.js-ticket-toparea div.js-ticket-data1 {float: left;}
 .js-ticket-thread .js-ticket-thread-image {float: right;}
 .js-ticket-thread .js-ticket-thread-cnt {padding-right: 15px;}
 .js-ticket-thread .js-ticket-thread-cnt .js-ticket-thread-data .js-ticket-thread-person {float: right;}
-.js-ticket-thread .js-ticket-thread-cnt .js-ticket-thread-data .js-ticket-thread-time {float: left;margin-right: 10px;margin-left: 0;}
+.js-ticket-thread .js-ticket-thread-cnt .js-ticket-thread-data .js-ticket-thread-time {float: right;margin-right: 10px;margin-left: 0;}
+.js-ticket-thread .js-ticket-thread-cnt .js-ticket-thread-data .js-ticket-thread-read-status-wrp {float: left;margin-left: 0px;margin-right: 10px;}
+.js-ticket-thread .js-ticket-thread-cnt .js-ticket-thread-data .js-ticket-thread-read-status-btn {float: right;}
+.js-ticket-thread .js-ticket-thread-cnt .js-ticket-thread-data .js-ticket-thread-read-status-detail {right: auto;left: 0;}
+.js-ticket-thread .js-ticket-thread-cnt .js-ticket-thread-data .js-ticket-thread-read-status-detail .js-ticket-thread-read-status-row b {float: right;}
 .js-ticket-thread .js-ticket-thread-cnt-btm .js-ticket-thread-date {float: right;}
 .js-ticket-thread .js-ticket-thread-actions {float: left;}
 .js-ticket-thread-add-btn .js-ticket-thread-add-btn-link img {margin-right: 0;margin-left: 3px;}

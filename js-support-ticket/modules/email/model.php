@@ -2028,6 +2028,7 @@ class JSSTemailModel {
 
     private function getDefaultSenderEmailAndName() {
         $emailid = jssupportticket::$_config['default_alert_email'];
+        if(!is_numeric($emailid)) return false;
         $query = "SELECT email,name FROM `" . jssupportticket::$_db->prefix . "js_ticket_email` WHERE id = " . esc_sql($emailid);
         $email = jssupportticket::$_db->get_row($query);
         return $email;

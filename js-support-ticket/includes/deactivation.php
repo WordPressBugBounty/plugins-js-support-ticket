@@ -6,16 +6,16 @@ if (!defined('ABSPATH'))
 class JSSTdeactivation {
 
     static function jssupportticket_deactivate() {
-      wp_clear_scheduled_hook('jssupporticket_updateticketstatus');
-      wp_clear_scheduled_hook('jssupporticket_ticketviaemail');
-      $timestamp = wp_next_scheduled( 'jsst_delete_expire_session_data' );
-      wp_unschedule_event( $timestamp, 'jsst_delete_expire_session_data' );
-      $id = jssupportticket::getPageid();
-      jssupportticket::$_db->get_var("UPDATE `" . jssupportticket::$_db->prefix . "posts` SET post_status = 'draft' WHERE ID = ".esc_sql($id));
+        wp_clear_scheduled_hook('jssupporticket_updateticketstatus');
+        wp_clear_scheduled_hook('jssupporticket_ticketviaemail');
+        $timestamp = wp_next_scheduled( 'jsst_delete_expire_session_data' );
+        wp_unschedule_event( $timestamp, 'jsst_delete_expire_session_data' );
+        $id = jssupportticket::getPageid();
+        jssupportticket::$_db->get_var("UPDATE `" . jssupportticket::$_db->prefix . "posts` SET post_status = 'draft' WHERE ID = ".esc_sql($id));
 
-      //Delete capabilities
-      $role = get_role( 'administrator' );
-      $role->remove_cap( 'jsst_support_ticket' );
+        //Delete capabilities
+        $role = get_role( 'administrator' );
+        $role->remove_cap( 'jsst_support_ticket' );
     }
 
     static function jssupportticket_tables_to_drop() {

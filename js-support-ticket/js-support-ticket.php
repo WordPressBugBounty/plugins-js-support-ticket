@@ -3,14 +3,14 @@
 /**
  * @package JS Help Desk
  * @author Ahmad Bilal
- * @version 2.8.8
+ * @version 2.8.9
  */
 /*
   Plugin Name: JS Help Desk
   Plugin URI: https://www.jshelpdesk.com
   Description: JS Help Desk is a trusted open source ticket system. JS Help Desk is a simple, easy to use, web-based customer support system. User can create ticket from front-end. JS Help Desk comes packed with lot features than most of the expensive(and complex) support ticket system on market. JS Help Desk provide you best industry help desk system.
   Author: JS Help Desk
-  Version: 2.8.8
+  Version: 2.8.9
   Text Domain: js-support-ticket
   License: GPLv3
   Author URI: https://www.jshelpdesk.com
@@ -67,7 +67,7 @@ class jssupportticket {
         self::$_data = array();
         self::$_search = array();
         self::$_captcha = array();
-        self::$_currentversion = '288';
+        self::$_currentversion = '289';
         self::$_addon_query = array('select'=>'','join'=>'','where'=>'');
         self::$_jshdsession = JSSTincluder::getObjectClass('wphdsession');
         global $wpdb;
@@ -133,7 +133,7 @@ class jssupportticket {
                     // restore colors data end
                     update_option('jsst_currentversion', self::$_currentversion);
                     include_once JSST_PLUGIN_PATH . 'includes/updates/updates.php';
-                    JSSTupdates::checkUpdates('288');
+                    JSSTupdates::checkUpdates('289');
                     JSSTincluder::getJSModel('jssupportticket')->updateColorFile();
                 }
             }
@@ -1352,15 +1352,26 @@ if(is_admin() && is_file('includes/classes/jsstadminreviewbox.php')){
 
  //do_action( 'edd_purchase_history_row_end', $payment->ID, $payment->payment_meta );
 
-function jsst_get_avatar($uid, $class = ''){
+function jsst_get_avatar($uid, $class = '') {
+    // Default avatar image URL
     $defaultImage = JSST_PLUGIN_URL . '/includes/images/user.png';
-    $avatar = '<img alt="image" src="'.esc_url($defaultImage).'" class="'.esc_attr($class).'" />';
-    if(is_numeric($uid) && $uid){
-        $avatar = get_avatar($uid, 96, $defaultImage, '', array('class'=>$class));
-    }else{
-        $avatar = '<img alt="image" src="'.esc_url($defaultImage).'" class="'.esc_attr($class).'" />';
+
+    // Ensure the UID is valid and numeric
+    if (!is_numeric($uid) || !$uid) {
+        return '<img alt="image" src="' . esc_url($defaultImage) . '" class="' . esc_attr($class) . '" />';
     }
-    return $avatar;
+
+    // Get the avatar URL
+    $avatar_url = get_avatar_url($uid, array('size' => 96));
+
+    // Check if the avatar URL is valid
+    if (!empty($avatar_url) && @getimagesize($avatar_url)) {
+        // Use WordPress's get_avatar function to generate the avatar HTML
+        return get_avatar($uid, 96, '', '', array('class' => $class));
+    } else {
+        // Fallback to the default image if the avatar URL is invalid
+        return '<img alt="image" src="' . esc_url($defaultImage) . '" class="' . esc_attr($class) . '" />';
+    }
 }
 
 function JSSTCheckPluginInfo($slug){

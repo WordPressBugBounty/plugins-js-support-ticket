@@ -156,11 +156,11 @@ function JSST_PrintAddoneStatus($name, $title, $img, $version, $status, $cdnavai
             <a '.$btnlink.' class="'.$btnclass.'">'. jssupportticket::JSST_getVarValue($btntxt) .'</a>
         </div>
         <div class="jsst-admin-addon-status-msg jsst_admin_success">
-            <img src="'. JSST_PLUGIN_URL .'includes/images/admincp/addon/success.png" />
+            <img src="'. esc_url(JSST_PLUGIN_URL) .'includes/images/admincp/addon/success.png" />
             <span class="jsst-admin-addon-status-msg-txt"></span>
         </div>
         <div class="jsst-admin-addon-status-msg jsst_admin_error">
-            <img src="'. JSST_PLUGIN_URL .'includes/images/admincp/addon/error.png" />
+            <img src="'. esc_url(JSST_PLUGIN_URL) .'includes/images/admincp/addon/error.png" />
             <span class="jsst-admin-addon-status-msg-txt"></span>
         </div>
     </div>';

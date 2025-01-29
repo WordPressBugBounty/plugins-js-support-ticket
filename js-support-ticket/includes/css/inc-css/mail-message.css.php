@@ -25,7 +25,7 @@ $jssupportticket_css .= '
 	div.js-ticket-margin-top{margin-top: 50px !important;}
 	th:first-child, td:first-child{padding-left: 10px !important;}
 	img.js-ticket-mail-img{vertical-align: sub;}
-	div.js-ticket-add-form-wrapper div.js-ticket-from-field-wrp div.js-ticket-from-field select#to{background: url('.JSST_PLUGIN_URL.'includes/images/selecticon.png) 98% / 2% no-repeat;line-height: initial;height: 60px;padding: 10px;}
+	div.js-ticket-add-form-wrapper div.js-ticket-from-field-wrp div.js-ticket-from-field select#to{background: url('.esc_url(JSST_PLUGIN_URL).'includes/images/selecticon.png) 98% / 2% no-repeat;line-height: initial;height: 60px;padding: 10px;}
 	div.js-ticket-top-search-wrp{float: left;width: 100%;}
 	div.js-ticket-search-heading-wrp{float: left;width: 100%; padding: 10px 10px 10px 0px;}
 	div.js-ticket-search-heading-wrp div.js-ticket-heading-left{float: left;width: 70%;padding: 10px;}

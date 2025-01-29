@@ -44,11 +44,11 @@ $jssupportticket_css .= '
 	div#action-div div.js-row{display: inline-block; border-top: 1px solid #ddeeee;width:60%;margin:0px 20%;padding-top: 10px;margin-top: 10px;}
 	div#userpopupforchangepriority{position: fixed;top:50%;left:50%;width:40%;max-height:40%;z-index: 99999;overflow-y: auto; overflow-x: hidden;text-align: left;transform: translate(-50%,-50%);}
 	div#userpopupforchangepriority div.js-ticket-priorty-header{float: left;width: 100%;padding: 20px 15px;font-weight: bold;font-size: 18px;position: relative;}
-	div#userpopupforchangepriority div.js-ticket-priorty-header span.close-history{position: absolute;top: 22px;right: 16px;background:url('.JSST_PLUGIN_URL.'includes/images/close-icon-white.png) no-repeat;background-size: 100%;width:25px;height: 25px;cursor: pointer;font-weight: bold;font-size: 18px;}
+	div#userpopupforchangepriority div.js-ticket-priorty-header span.close-history{position: absolute;top: 22px;right: 16px;background:url('.esc_url(JSST_PLUGIN_URL).'includes/images/close-icon-white.png) no-repeat;background-size: 100%;width:25px;height: 25px;cursor: pointer;font-weight: bold;font-size: 18px;}
 	div#userpopupforchangepriority div.js-ticket-priorty-fields-wrp{float: left;width: 100%;}
 	div#userpopupforchangepriority div.js-ticket-priorty-fields-wrp div.js-ticket-select-priorty{float: left;width: 100%;text-align: center;padding: 35px 20px;}
-	div#userpopupforchangepriority div.js-ticket-priorty-fields-wrp div.js-ticket-select-priorty select#priority{width: 80%;border-radius: 0;float: none;background: url('.JSST_PLUGIN_URL.'includes/images/selecticon.png) 96% / 4% no-repeat #eee;padding: 10px;}
-	div#userpopupforchangepriority div.js-ticket-priorty-fields-wrp div.js-ticket-select-priorty select#prioritytemp{width: 80%;border-radius: 0;float: none;background: url('.JSST_PLUGIN_URL.'includes/images/selecticon.png) 96% / 4% no-repeat #eee;padding: 10px;}
+	div#userpopupforchangepriority div.js-ticket-priorty-fields-wrp div.js-ticket-select-priorty select#priority{width: 80%;border-radius: 0;float: none;background: url('.esc_url(JSST_PLUGIN_URL).'includes/images/selecticon.png) 96% / 4% no-repeat #eee;padding: 10px;}
+	div#userpopupforchangepriority div.js-ticket-priorty-fields-wrp div.js-ticket-select-priorty select#prioritytemp{width: 80%;border-radius: 0;float: none;background: url('.esc_url(JSST_PLUGIN_URL).'includes/images/selecticon.png) 96% / 4% no-repeat #eee;padding: 10px;}
 	div#popupforagenttransfer{position: fixed;top:50%;left:50%;width:40%;max-height:70%;z-index: 99999;overflow-y: auto; overflow-x: hidden;text-align: left;transform: translate(-50%,-50%);}
 	div#popupforagenttransfer form {float: left;width: 100%;padding: 30px;}
 	div#popupfordepartmenttransfer{position: fixed;top:50%;left:50%;width:40%;max-height:70%;z-index: 99999;overflow-y: auto; overflow-x: hidden;text-align: left;transform: translate(-50%,-50%);}
@@ -88,7 +88,7 @@ $jssupportticket_css .= '
 	div.tk_attachment_value_wrapperform{float: left;width:100%;padding:0px 0px;}
 	div.tk_attachment_value_wrapperform span.tk_attachment_value_text{float: left;width: calc(100% / 2 - 10px);padding: 5px 5px;margin: 5px 5px;position: relative;}
 	div.tk_attachment_value_wrapperform span.tk_attachment_value_text input.js-attachment-inputbox{width: 100%;max-width: 100%;max-height:100%;}
-	span.tk_attachment_value_text span.tk_attachment_remove{background: url("'.JSST_PLUGIN_URL.'includes/images/close.png") no-repeat;background-size: 100% 100%;position: absolute;width: 25px;height: 25px;top: 12px;right:6px;cursor: pointer;}
+	span.tk_attachment_value_text span.tk_attachment_remove{background: url("'.esc_url(JSST_PLUGIN_URL).'includes/images/close.png") no-repeat;background-size: 100% 100%;position: absolute;width: 25px;height: 25px;top: 12px;right:6px;cursor: pointer;}
 	span.tk_attachments_configform{display: inline-block;float:left;line-height: 25px;margin-top: 10px;width: 100%; font-size: 14px;}
 	span.tk_attachments_addform{position: relative;display: inline-block;padding: 8px 10px;cursor: pointer;margin-top: 10px;min-width: 120px;text-align: center;line-height: initial;}
 	div.js-ticket-closeonreply-wrp{float: left;width: 100%; margin-bottom: 10px;}
@@ -110,7 +110,7 @@ $jssupportticket_css .= '
 	div.js-ticket-premade-msg-wrp{float: left;width: 100%;margin-top: 20px;}
 	div.js-ticket-premade-msg-wrp div.js-ticket-premade-field-title{float: left;width: 100%;margin-bottom: 7px;}
 	div.js-ticket-premade-msg-wrp div.js-ticket-premade-field-wrp{float: left;width: 100%;}
-	div.js-ticket-premade-msg-wrp div.js-ticket-premade-field-wrp select.js-ticket-premade-select{display: inline-block;width: 50%;float: left;border-radius: 0px;background: url('.JSST_PLUGIN_URL.'includes/images/selecticon.png) 96% / 4% no-repeat #eee;padding: 10px;line-height: initial;height: 50px;}
+	div.js-ticket-premade-msg-wrp div.js-ticket-premade-field-wrp select.js-ticket-premade-select{display: inline-block;width: 50%;float: left;border-radius: 0px;background: url('.esc_url(JSST_PLUGIN_URL).'includes/images/selecticon.png) 96% / 4% no-repeat #eee;padding: 10px;line-height: initial;height: 50px;}
 	span.js-ticket-apend-radio-btn{display: inline-block;float: left;width: auto;padding: 10px;margin-left: 5px;height: 50px;}
 	span.js-ticket-apend-radio-btn input#append_premade1display{vertical-align: middle;}
 	label#forappend_premade{display: inline-block; margin: 0px;}
@@ -137,8 +137,8 @@ $jssupportticket_css .= '
 	div.js-ticket-internalnote-wrp div.js-ticket-internalnote-field-title{float: left;width: 100%;margin-bottom: 7px;}
 	div.js-ticket-internalnote-wrp div.js-ticket-internalnote-field-wrp{float: left;width: 100%;}
 	div.js-ticket-internalnote-wrp div.js-ticket-internalnote-field-wrp input.js-ticket-internalnote-input{border-radius: 0px;width:100%;}
-	div.js-ticket-premade-msg-wrp div.js-ticket-premade-field-wrp select#departmentid{display: inline-block;width: 100%;float: left;border-radius: 0px;background: url('.JSST_PLUGIN_URL.'includes/images/selecticon.png) 96% / 4% no-repeat !important;}
-	div.js-ticket-premade-msg-wrp div.js-ticket-premade-field-wrp select#staffid{display: inline-block;width: 100%;float: left;border-radius: 0px;background: url('.JSST_PLUGIN_URL.'includes/images/selecticon.png) 98% / 2% no-repeat #eee;}
+	div.js-ticket-premade-msg-wrp div.js-ticket-premade-field-wrp select#departmentid{display: inline-block;width: 100%;float: left;border-radius: 0px;background: url('.esc_url(JSST_PLUGIN_URL).'includes/images/selecticon.png) 96% / 4% no-repeat !important;}
+	div.js-ticket-premade-msg-wrp div.js-ticket-premade-field-wrp select#staffid{display: inline-block;width: 100%;float: left;border-radius: 0px;background: url('.esc_url(JSST_PLUGIN_URL).'includes/images/selecticon.png) 98% / 2% no-repeat #eee;}
 	/* Pop up Sections */
 	div#userpopupblack{background: rgba(0,0,0,0.5);position: fixed;width: 100%;height: 100%;top:0px;left:0px;z-index: 9989;}
 	div.js-ticket-popup-row{float: left;width: 100%;margin: 0;}
@@ -152,17 +152,19 @@ $jssupportticket_css .= '
 	form#userpopupsearch div.search-center-history{width:100%;font-size:17px;float:left;padding: 20px 10px; font-weight: bold;}
 	form#userpopupsearch div.search-center input{width: 100% !important;padding: 17px 15px;}
 	form#userpopupsearch div.search-center-heading{padding:10px 0px 10px 10px;margin-bottom: 10px;}
-	form#userpopupsearch div.search-center span.close{position: absolute;top:10px;right: 10px;background-image:url('.JSST_PLUGIN_URL.'includes/images/ticketdetailicon/popup-close.png);background-size: 100%;width:20px;height: 20px;opacity: 1;}
-	form#userpopupsearch div.search-center-history span.close-history{position: absolute;top: 22px;right: 16px;background:url('.JSST_PLUGIN_URL.'includes/images/close-icon-white.png) no-repeat;background-size: 100%;width:25px;height: 25px;cursor: pointer;}
-	div#usercredentailspopup div.js-ticket-usercredentails-header span.close-credentails{position: absolute;top: 22px;right: 16px;background:url('.JSST_PLUGIN_URL.'includes/images/close-icon-white.png) no-repeat;background-size: 100%;width:25px;height: 25px;cursor: pointer;}
+	form#userpopupsearch div.search-center span.close{position: absolute;top:10px;right: 10px;background-image:url('.esc_url(JSST_PLUGIN_URL).'includes/images/ticketdetailicon/popup-close.png);background-size: 100%;width:20px;height: 20px;opacity: 1;}
+	form#userpopupsearch div.search-center-history span.close-history{position: absolute;top: 22px;right: 16px;background:url('.esc_url(JSST_PLUGIN_URL).'includes/images/close-icon-white.png) no-repeat;background-size: 100%;width:25px;height: 25px;cursor: pointer;}
+	div#usercredentailspopup div.js-ticket-usercredentails-header span.close-credentails{position: absolute;top: 22px;right: 16px;background:url('.esc_url(JSST_PLUGIN_URL).'includes/images/close-icon-white.png) no-repeat;background-size: 100%;width:25px;height: 25px;cursor: pointer;}
 	div#userpopup{position: fixed;top:50%;left:50%;width:60%; max-height: 50%; padding-top:0px;z-index: 99999;overflow-y: auto; overflow-x: hidden;transform: translate(-50%,-50%);}
 	.js-ticket-textalign-center{text-align: center;}
 	div.jsst-popup-background{background: rgba(0,0,0,0.5);position: fixed;width: 100%;height: 100%;top:0px;left:0px;z-index: 9989;}
+	div.internalnote-popup-background{background: rgba(0,0,0,0.5);position: fixed;width: 100%;height: 100%;top:0px;left:0px;z-index: 9988;}
 	div.jsst-popup-wrapper{position: fixed;top:50%;left:50%;width:65%;z-index: 1000000;overflow-y: auto; overflow-x: hidden;display: inline-block;max-height:60%;transform: translate(-50%,-50%);}
 	div.jsst-merge-popup-wrapper{width:75%;max-height:65%;}
 	div.jsst-popup-header{width:100%;font-size:17px;float:left;padding: 20px 10px; font-weight: bold;}
-	div.popup-header-close-img{position: absolute;top:25px;right: 25px;background-image:url('.JSST_PLUGIN_URL.'includes/images/close-icon-white.png);background-size: 100%;width:25px;height: 25px;opacity: 1;cursor: pointer;}
-	img.popup-header-close-img{position: absolute;top:25px;right: 25px;background-image:url('.JSST_PLUGIN_URL.'includes/images/close-icon-white.png);background-size: 100%;width:25px;height: 25px;opacity: 1;cursor: pointer;}
+	div.popup-header-close-img{position: absolute;top:25px;right: 25px;background-image:url('.esc_url(JSST_PLUGIN_URL).'includes/images/close-icon-white.png);background-size: 100%;width:25px;height: 25px;opacity: 1;cursor: pointer;}
+	div.internalnote-popup-header-close-img{position: absolute;top:25px;right: 25px;background-image:url('.esc_url(JSST_PLUGIN_URL).'includes/images/close-icon-white.png);background-size: 100%;width:25px;height: 25px;opacity: 1;cursor: pointer;}
+	img.popup-header-close-img{position: absolute;top:25px;right: 25px;background-image:url('.esc_url(JSST_PLUGIN_URL).'includes/images/close-icon-white.png);background-size: 100%;width:25px;height: 25px;opacity: 1;cursor: pointer;}
 	div.jsst-popup-wrapper input{margin-bottom:0px; }
 	div.jsst-popup-wrapper input#edited_time{font-size: 16px;width: 100%;}
 	div.jsst-popup-wrapper input#systemtime{width: 100%;}
@@ -203,6 +205,7 @@ $jssupportticket_css .= '
 	div.js-ticket-detail-wrapper div.js-ticket-bottombar img.js-hidedetail{float:left;margin-right:5px;-webkit-transform: rotate(0deg);-moz-transform: rotate(0deg);-o-transform: rotate(0deg);-ms-transform: rotate(0deg);transition:all .3s;}
 	label#forcloseonreply{display: inline-block;margin: 0px;}
 	#records{float: left;width: 100%;padding: 0px 10px;}
+	#records .js-ticket-empty-msg{float: left;width: 100%;padding-bottom: 10px;text-align: center;}
 	th:first-child, td:first-child{padding-left: 10px !important;}
 
 	/*Merge Form Css*/
@@ -274,7 +277,7 @@ $jssupportticket_css .= '
 	div#usercredentailspopup{position: fixed;top:50%;left:50%;width:60%;z-index: 99999;overflow-x: hidden;text-align: left;transform: translate(-50%,-50%);}
 	div#usercredentailspopup div.js-ticket-usercredentails-fields-wrp{height:450px;overflow-y:auto;}
 	div#usercredentailspopup div.js-ticket-usercredentails-header{float: left;width: 100%;padding: 20px 10px;font-weight: bold;font-size: 18px;position: relative;}
-	div#usercredentailspopup div.js-ticket-usercredentails-header span.close-history{position: absolute;top: 22px;right: 16px;background:url('.JSST_PLUGIN_URL.'includes/images/ticketdetailicon/popup-close.png) no-repeat;background-size: 100%;width:20px;height: 20px;cursor: pointer;float: left;width: 100%;padding: 20px 5px;font-weight: bold;font-size: 18px;}
+	div#usercredentailspopup div.js-ticket-usercredentails-header span.close-history{position: absolute;top: 22px;right: 16px;background:url('.esc_url(JSST_PLUGIN_URL).'includes/images/ticketdetailicon/popup-close.png) no-repeat;background-size: 100%;width:20px;height: 20px;cursor: pointer;float: left;width: 100%;padding: 20px 5px;font-weight: bold;font-size: 18px;}
 	div#usercredentailspopup div.js-ticket-usercredentails-fields-wrp{float: left;width: 100%;padding: 30px;}
 	div#usercredentailspopup div.js-ticket-usercredentails-fields-wrp div.js-ticket-select-usercredentails{float: left;width: 100%;padding: 10px 10px 0px;}
 	div#usercredentailspopup div.js-ticket-usercredentails-fields-wrp div.js-ticket-select-usercredentails label{float: left;width: 100%;padding-bottom: 5px}
@@ -368,10 +371,14 @@ $jssupportticket_css .= '
 	.js-ticket-thread .js-ticket-thread-cnt .js-ticket-thread-data {float: left;width: 100%;padding-bottom: 8px;line-height: initial;}
 	.js-ticket-thread .js-ticket-thread-cnt .js-ticket-thread-data:last-child {padding-bottom: 0;}
 	.js-ticket-thread .js-ticket-thread-cnt .js-ticket-thread-data .js-ticket-thread-person {float: left;text-decoration:underline;text-transform: capitalize;font-size: 15px;}
+	.js-ticket-thread .js-ticket-thread-cnt .js-ticket-thread-data .js-ticket-thread-read-status-wrp {float: right;margin-left: 10px;cursor: pointer;position: relative;margin-top: -10px;}
+	.js-ticket-thread .js-ticket-thread-cnt .js-ticket-thread-data .js-ticket-thread-read-status-btn {float: right;padding: 5px 5px;border: 1px solid #ebecec;}
+	.js-ticket-thread .js-ticket-thread-cnt .js-ticket-thread-data .js-ticket-thread-read-status-detail {position: absolute;top: 45px;right: 0;color: #6c757d;border: 1px solid #ebecec;box-shadow: 0px 3px 6px #aaa7a7;padding: 0px 8px;padding: 10px;min-width: 350px;display: none;background-color: #FFF;}
+	.js-ticket-thread .js-ticket-thread-cnt .js-ticket-thread-data .js-ticket-thread-read-status-detail .js-ticket-thread-read-status-row {float: left;width: 100%;color: #575455;line-height: 1.8;}
 	.js-ticket-thread .js-ticket-thread-cnt .js-ticket-thread-data .js-ticket-thread-note {float: left;text-transform: capitalize;padding-top: 5px;}
 	.js-ticket-thread .js-ticket-thread-cnt .js-ticket-thread-data .js-ticket-thread-email {float: left;padding-top: 5px;}
 	.js-ticket-thread .js-ticket-thread-cnt .js-ticket-thread-data .js-ticket-thread-date {float: right;}
-	.js-ticket-thread .js-ticket-thread-cnt .js-ticket-thread-data .js-ticket-thread-time {float: right;margin-left: 10px;}
+	.js-ticket-thread .js-ticket-thread-cnt .js-ticket-thread-data .js-ticket-thread-time {float: left;margin-left: 10px;}
 	.js-ticket-thread .js-ticket-thread-cnt .js-ticket-thread-data.note-msg {line-height: 1.8;}
 	.js-ticket-thread .js-ticket-thread-cnt .js-ticket-thread-data.note-msg p {line-height: 1.8;margin: 10px 0 20px;}
 	.js-ticket-thread .js-ticket-thread-cnt-btm {float: left;width: 100%;padding: 10px 0 0;}

@@ -197,7 +197,10 @@ wp_add_inline_script('ticket-google-charts-handle',$jssupportticket_js);
                                     <div class="js-ticket-link-text js-ticket-green">
                                         <?php
                                             echo esc_html(__('New', 'js-support-ticket'));
-                                            echo ' ( '.esc_html(jssupportticket::$_data['ticket_total']['openticket']).' )';
+                                            // show counts accoridng to configuration
+                                            if(jssupportticket::$_config['count_on_myticket'] == 1) {
+                                                echo ' ( '.esc_html(jssupportticket::$_data['ticket_total']['openticket']).' )';
+                                            }
                                         ?>
                                     </div>
                                 </a>
@@ -223,13 +226,16 @@ wp_add_inline_script('ticket-google-charts-handle',$jssupportticket_js);
                                     <div class="js-ticket-link-text js-ticket-brown">
                                         <?php
                                             echo esc_html(__('Answered', 'js-support-ticket'));
-                                            echo ' ( '. esc_html(jssupportticket::$_data['ticket_total']['answeredticket']).' )';
+                                            // show counts accoridng to configuration
+                                            if(jssupportticket::$_config['count_on_myticket'] == 1) {
+                                                echo ' ( '. esc_html(jssupportticket::$_data['ticket_total']['answeredticket']).' )';
+                                            }
                                         ?>
                                     </div>
                                 </a>
                             </div>
                             <div class="js-ticket-link">
-                                <a class="js-ticket-link js-ticket-blue" href="?page=ticket" data-tab-number="4">
+                                <a class="js-ticket-link js-ticket-blue" href="?page=ticket" data-tab-number="1">
                                     <div class="js-ticket-cricle-wrp" data-per="<?php echo esc_attr($pending_percentage); ?>">
                                         <div class="js-mr-rp" data-progress="<?php echo esc_attr($pending_percentage); ?>">
                                             <div class="circle">
@@ -249,7 +255,10 @@ wp_add_inline_script('ticket-google-charts-handle',$jssupportticket_js);
                                     <div class="js-ticket-link-text js-ticket-blue">
                                         <?php
                                             echo esc_html(__('Pending', 'js-support-ticket'));
-                                            echo ' ( '. esc_html(jssupportticket::$_data['ticket_total']['pendingticket']).' )';
+                                            // show counts accoridng to configuration
+                                            if(jssupportticket::$_config['count_on_myticket'] == 1) {
+                                                echo ' ( '. esc_html(jssupportticket::$_data['ticket_total']['pendingticket']).' )';
+                                            }
                                         ?>
                                     </div>
                                 </a>
@@ -276,7 +285,10 @@ wp_add_inline_script('ticket-google-charts-handle',$jssupportticket_js);
                                         <div class="js-ticket-link-text js-ticket-orange">
                                             <?php
                                                 echo esc_html(__('Overdue', 'js-support-ticket'));
-                                                echo ' ( '. esc_html(jssupportticket::$_data['ticket_total']['overdueticket']).' )';
+                                                // show counts accoridng to configuration
+                                                if(jssupportticket::$_config['count_on_myticket'] == 1) {
+                                                    echo ' ( '. esc_html(jssupportticket::$_data['ticket_total']['overdueticket']).' )';
+                                                }
                                             ?>
                                         </div>
                                     </a>

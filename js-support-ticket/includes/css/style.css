@@ -230,4 +230,6 @@ div.js-ticket-add-form-wrapper div.js-ticket-from-field-wrp div.js-ticket-from-f
 	form.js-ticket-form div.js-form-wpuser-data-wrapper {float: left;width: calc(100% - 20px);padding: 18px 13px 20px;border: 1px solid #88b2da;background-color: #dfeefb;border-radius: 7px;margin: 0 10px 20px;}
 	form.js-ticket-form div.js-form-wpuser-data-wrapper input.js-ticket-form-field-input {border: 1px solid #99c6f0 !important;border-radius: 4px !important;}
 	#wp-jsticket_message-wrap button{background: #f6f7f7 !important;color: #50575e !important;background-color: #f6f7f7 !important;}
+	/*Loading css*/
+	div#jstran_loading {display: none;z-index: 9999;position: fixed;top: 40%;left: calc(50% - 64px);}
 

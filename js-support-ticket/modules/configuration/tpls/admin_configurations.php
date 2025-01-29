@@ -498,7 +498,7 @@ $plugin_array = get_option('active_plugins');
                   </li>
                 <?php } ?>
                 <?php if(in_array('sociallogin', jssupportticket::$_active_addons)){ ?>
-                  <li class="treeview" id="cn_sl">
+                  <li class="treeview" id="cn_sl" style="display:none;">
                       <a href="?page=configuration&jsstconfigid=sociallogin" title="<?php echo esc_html(__('Social Login' , 'js-support-ticket')); ?>">
                           <img class="jsst_menu-icon" alt="<?php echo esc_html(__('Social Login' , 'js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL).'includes/images/config-icons/social-login.png'; ?>"/>
                           <span class="jsst_text"><?php echo esc_html(__('Social Login' , 'js-support-ticket')); ?> </span>
@@ -628,7 +628,8 @@ $plugin_array = get_option('active_plugins');
               <div class="jsst_gen_body" id="login">
                   <h2><?php echo esc_html(__('Login', 'js-support-ticket')); ?></h2>
                   <?php
-
+                    // Configuration not in use
+                    /*
                     if(isset(jssupportticket::$_data[0]['login_redirect'])){
                       $title = esc_html(__('Login redirect', 'js-support-ticket'));
                       $field = JSSTformfield::select('login_redirect', $yesno, jssupportticket::$_data[0]['login_redirect']);
@@ -637,6 +638,7 @@ $plugin_array = get_option('active_plugins');
                       $videotext = 'Login redirect';
                       JSST_printConfigFieldSingle($title, $field, $description, $video, '', $videotext);
                     }
+                    */
 
                     if(isset(jssupportticket::$_data[0]['set_login_link'])){
                         $title = esc_html(__('Set Login Link', 'js-support-ticket'));
@@ -865,19 +867,40 @@ $plugin_array = get_option('active_plugins');
                     }
 
                     if(isset(jssupportticket::$_data[0]['anonymous_name_on_ticket_reply'])){
-                      $title = esc_html(__('Show Anonymous Name On Ticket Reply', 'js-support-ticket'));
-                      $field = JSSTformfield::select('anonymous_name_on_ticket_reply', $yesno, jssupportticket::$_data[0]['anonymous_name_on_ticket_reply']);
-                      $description =  esc_html(__('Select whether users can see the name of administrator or staff member on ticket reply','js-support-ticket'));
-                      JSST_printConfigFieldSingle($title, $field, $description);
+                        $title = esc_html(__('Show Anonymous Name On Ticket Reply', 'js-support-ticket'));
+                        $field = JSSTformfield::select('anonymous_name_on_ticket_reply', $yesno, jssupportticket::$_data[0]['anonymous_name_on_ticket_reply']);
+                        $description =  esc_html(__('Select whether users can see the name of administrator or staff member on ticket reply','js-support-ticket'));
+                        JSST_printConfigFieldSingle($title, $field, $description);
+                    }
+
+                    if(isset(jssupportticket::$_data[0]['show_read_receipt_to_admin_on_reply'])){
+                        $title = esc_html(__('Show Message Read Icon for Admin On Ticket Detail', 'js-support-ticket'));
+                        $field = JSSTformfield::select('show_read_receipt_to_admin_on_reply', $yesno, jssupportticket::$_data[0]['show_read_receipt_to_admin_on_reply']);
+                        $description =  esc_html(__('Select whether the message read icon is displayed to the administrator on ticket detail.','js-support-ticket'));
+                        JSST_printConfigFieldSingle($title, $field, $description);
+                    }
+
+                    if(isset(jssupportticket::$_data[0]['show_read_receipt_to_agent_on_reply'])){
+                        $title = esc_html(__('Show Message Read Icon For Agents on Ticket Detail', 'js-support-ticket'));
+                        $field = JSSTformfield::select('show_read_receipt_to_agent_on_reply', $yesno, jssupportticket::$_data[0]['show_read_receipt_to_agent_on_reply']);
+                        $description =  esc_html(__('Select whether the message read icon is displayed to agents on ticket detail.','js-support-ticket'));
+                        JSST_printConfigFieldSingle($title, $field, $description);
+                    }
+
+                    if(isset(jssupportticket::$_data[0]['show_read_receipt_to_user_on_reply'])){
+                        $title = esc_html(__('Show Message Read Icon For Users On Ticket Detail', 'js-support-ticket'));
+                        $field = JSSTformfield::select('show_read_receipt_to_user_on_reply', $yesno, jssupportticket::$_data[0]['show_read_receipt_to_user_on_reply']);
+                        $description =  esc_html(__('Select whether the message read icon is displayed to users on the ticket detail.','js-support-ticket'));
+                        JSST_printConfigFieldSingle($title, $field, $description);
                     }
 
                     if(isset(jssupportticket::$_data[0]['ticket_auto_close'])){
-                      $title = esc_html(__('Ticket auto close', 'js-support-ticket'));
-                      $field = JSSTformfield::text('ticket_auto_close', jssupportticket::$_data[0]['ticket_auto_close'], array('class' => 'inputbox'));
-                      $description = '<span class="js-ticket-configuration-sml-txt">'. esc_html(__('Days','js-support-ticket')).'</span>' . esc_html(__('Ticket auto-close if user does not respond within given days', 'js-support-ticket'));
-                      $video = 'Yi3zPvGdGG4';
-                      $videotext = 'Ticket auto close';
-                      JSST_printConfigFieldSingle($title, $field, $description, $video, '', $videotext);
+                        $title = esc_html(__('Ticket auto close', 'js-support-ticket'));
+                        $field = JSSTformfield::text('ticket_auto_close', jssupportticket::$_data[0]['ticket_auto_close'], array('class' => 'inputbox'));
+                        $description = '<span class="js-ticket-configuration-sml-txt">'. esc_html(__('Days','js-support-ticket')).'</span>' . esc_html(__('Ticket auto-close if user does not respond within given days', 'js-support-ticket'));
+                        $video = 'Yi3zPvGdGG4';
+                        $videotext = 'Ticket auto close';
+                        JSST_printConfigFieldSingle($title, $field, $description, $video, '', $videotext);
                     }
 
                     if(isset(jssupportticket::$_data[0]['show_ticket_delete_button'])){

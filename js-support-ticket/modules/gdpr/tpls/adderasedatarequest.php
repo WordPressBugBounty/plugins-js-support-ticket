@@ -27,7 +27,8 @@
                             <?php echo esc_html(__('Export your data', 'js-support-ticket')); ?>
                         </div>
                         <div class="js-ticket-heading-right">
-                            <a class="js-ticket-add-download-btn" href="<?php echo esc_url(wp_nonce_url(jssupportticket::makeUrl(array('jstmod'=>'gdpr','task'=>'exportusereraserequest','action'=>'jstask','jssupportticketid'=> JSSTincluder::getObjectClass('user')->uid() ,'jsstpageid'=>get_the_ID())),'export-usereraserequest')); ?>"><span class="js-ticket-add-img-wrp"></span><?php echo esc_html(__('Export', 'js-support-ticket')); ?></a>
+                            <!-- jssupportticketid removed due to security reasons -->
+                            <a class="js-ticket-add-download-btn" href="<?php echo esc_url(wp_nonce_url(jssupportticket::makeUrl(array('jstmod'=>'gdpr','task'=>'exportusereraserequest','action'=>'jstask' ,'jsstpageid'=>get_the_ID())),'export-usereraserequest')); ?>"><span class="js-ticket-add-img-wrp"></span><?php echo esc_html(__('Export', 'js-support-ticket')); ?></a>
                         </div>
                     </div>
                 </div>

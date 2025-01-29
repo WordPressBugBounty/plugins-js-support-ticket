@@ -194,8 +194,8 @@ class JSSTactivation {
                     ('tplink_faqs_user', '0', 'tplink', 'faq'),
                     ('show_breadcrumbs', '1', 'default', NULL),
                     ('productcode', 'jsticket', 'default', NULL),
-                    ('versioncode', '2.8.8', 'default', NULL),
-                    ('productversion', '288', 'default', NULL),
+                    ('versioncode', '2.8.9', 'default', NULL),
+                    ('productversion', '289', 'default', NULL),
                     ('producttype', 'free', 'default', NULL),
                     ('tve_enabled', '2', 'default', NULL),
                     ('tve_mailreadtype', '3', 'default', NULL),
@@ -239,6 +239,9 @@ class JSSTactivation {
                     ('ticket_overdue_type', '1', 'default', 'overdue'),
                     ('reply_to_closed_ticket', '1', 'default', NULL),
                     ('anonymous_name_on_ticket_reply', '2', 'ticket', NULL),
+                    ('show_read_receipt_to_user_on_reply', '1', 'ticket', NULL),
+                    ('show_read_receipt_to_agent_on_reply', '1', 'ticket', NULL),
+                    ('show_read_receipt_to_admin_on_reply', '1', 'ticket', NULL),
                     ('show_email_on_ticket_reply', '1', 'ticket', NULL),
                     ('show_ticket_delete_button', '1', 'ticket', NULL),
                     ('visitor_message', 'Thank You for contacting us. A support ticket request has been created, A representative will be getting back to you shortly.\r\nSupport Team', 'default', NULL),
@@ -433,6 +436,8 @@ class JSSTactivation {
                                 `created` datetime DEFAULT NULL,
                                 `ticketviaemail` tinyint(1) NOT NULL,
                                 `mergemessage` TINYINT(1) NOT NULL DEFAULT '0',
+                                `viewed_by` int(11) DEFAULT NULL,
+                                `viewed_on` datetime DEFAULT NULL,
                                 PRIMARY KEY (`id`)
                                 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;";
             jssupportticket::$_db->query($query);

@@ -172,6 +172,11 @@
 	.js-ticket-thread .js-ticket-thread-image {float: right;}
 	.js-ticket-thread .js-ticket-thread-cnt {padding-right: 15px;}
 	.js-ticket-thread .js-ticket-thread-cnt .js-ticket-thread-data .js-ticket-thread-person {float: right;}
+	.js-ticket-thread .js-ticket-thread-cnt .js-ticket-thread-data .js-ticket-thread-time {float: right;margin-right: 10px;}
+	.js-ticket-thread .js-ticket-thread-cnt .js-ticket-thread-data .js-ticket-thread-read-status-wrp {float: left;margin-left: 0px;margin-right: 10px;}
+	.js-ticket-thread .js-ticket-thread-cnt .js-ticket-thread-data .js-ticket-thread-read-status-btn {float: right;}
+	.js-ticket-thread .js-ticket-thread-cnt .js-ticket-thread-data .js-ticket-thread-read-status-detail {right: auto;left: 0;}
+	.js-ticket-thread .js-ticket-thread-cnt .js-ticket-thread-data .js-ticket-thread-read-status-detail .js-ticket-thread-read-status-row b {float: right;}
 	.js-ticket-thread .js-ticket-thread-cnt .js-ticket-thread-data .js-ticket-thread-email {float: right;}
 	.js-ticket-thread .js-ticket-thread-cnt-btm .js-ticket-thread-date {float: right;}
 	.js-tkt-det-hdg .js-tkt-det-hdg-txt {float: right;}
@@ -212,6 +217,7 @@
 	div#usercredentailspopup .js-ticket-usercredentails-wrp .js-ticket-usercredentails-single {text-align: right;}
 	div#usercredentailspopup .js-ticket-usercredentails-wrp .js-ticket-usercredentails-single .js-ticket-usercredentail-data {float: right;}
 	img.popup-header-close-img {right: auto;left: 25px;}
+	img.internalnote-popup-header-close-img {right: auto;left: 25px;}
 	.js-popup-search {text-align: right;}
 	div.js-merge-form-wrp {float: right;}
 	span.js-merge-btn {float: right;margin-left: 5px;margin-right: 0;}

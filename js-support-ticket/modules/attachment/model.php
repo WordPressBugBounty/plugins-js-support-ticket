@@ -100,6 +100,7 @@ class JSSTattachmentModel {
     }
 
     function getAttachmentImage($id){
+        if(!is_numeric($id)) return false;
         $query = "SELECT ticket.attachmentdir AS foldername,ticket.id AS ticketid,attach.filename  "
                 . " FROM `".jssupportticket::$_db->prefix."js_ticket_attachments` AS attach "
                 . " JOIN `".jssupportticket::$_db->prefix."js_ticket_tickets` AS ticket ON ticket.id = attach.ticketid "
@@ -154,6 +155,10 @@ class JSSTattachmentModel {
             $path = $path . '/ticket/' . $foldername;
             $file = $path . '/'.$filename;
 
+            // remove this code after version "2.9.0"
+            JSSTincluder::getJSModel('jssupportticket')->generateIndexFile($path);
+            // remove above code after version "2.9.0"
+
             header('Content-Description: File Transfer');
             header('Content-Type: application/octet-stream');
             header('Content-Disposition: attachment; filename=' . jssupportticketphplib::JSST_basename($file));
@@ -187,6 +192,9 @@ class JSSTattachmentModel {
         $path = $path . '/attachmentdata';
         $path = $path . '/ticket/' . $foldername;
         $file = $path . '/'.$filename;
+        // remove this code after version "2.9.0"
+        JSSTincluder::getJSModel('jssupportticket')->generateIndexFile($path);
+        // remove above code after version "2.9.0"
 
         header('Content-Description: File Transfer');
         header('Content-Type: application/octet-stream');
@@ -226,7 +234,11 @@ class JSSTattachmentModel {
         foreach ($ticketattachment AS $ticketattachments) {
             $directory = $jpath . '/attachmentdata/ticket/' . $ticketattachments->attachmentdir . '/';
             // $scanned_directory = array_diff(scandir($directory), array('..', '.'));
-        array_push($scanned_directory,$ticketattachments->filename);
+            array_push($scanned_directory,$ticketattachments->filename);
+        }
+        // remove this code after version "2.9.0"
+        if (!empty($directory)) {
+            JSSTincluder::getJSModel('jssupportticket')->generateIndexFile($directory);
         }
         // if(!is_dir($directory))
         //         return false;
@@ -289,8 +301,13 @@ class JSSTattachmentModel {
         foreach ($replyattachment AS $replyattachments) {
             $directory = $jpath . '/attachmentdata/ticket/' . $replyattachments->attachmentdir . '/';
             // $scanned_directory = array_diff(scandir($directory), array('..', '.'));
-        array_push($scanned_directory,$replyattachments->filename);
+            array_push($scanned_directory,$replyattachments->filename);
         }
+        // remove this code after version "2.9.0"
+        if (!empty($directory)) {
+            JSSTincluder::getJSModel('jssupportticket')->generateIndexFile($directory);
+        }
+        // remove above code after version "2.9.0"
         // if(!is_dir($directory))
         //         return false;
 

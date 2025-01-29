@@ -781,7 +781,7 @@ wp_add_inline_script('js-support-ticket-main-js',$jssupportticket_js);
                                                 echo wp_kses('
                                                     <div class="js_ticketattachment">
                                                             ' . esc_html($attachment->filename) . /*' ( ' . $attachment->filesize . ' ) ' .*/ '
-                                                            <a title="'. esc_html(__('Delete','js-support-ticket')).'" href="?page=attachment&task=deleteattachment&action=jstask&id=' . $attachment->id . '&ticketid=' . $attachmentid . '"><img alt="'. esc_html(__('Delete','js-support-ticket')).'" src="'.JSST_PLUGIN_URL.'includes/images/delete.png" /></a>
+                                                            <a title="'. esc_html(__('Delete','js-support-ticket')).'" href="?page=attachment&task=deleteattachment&action=jstask&id=' . $attachment->id . '&ticketid=' . $attachmentid . '"><img alt="'. esc_html(__('Delete','js-support-ticket')).'" src="'.esc_url(JSST_PLUGIN_URL).'includes/images/delete.png" /></a>
                                                     </div>', JSST_ALLOWED_TAGS);
                                             }
                                         }

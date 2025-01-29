@@ -476,6 +476,7 @@ if (jssupportticket::$_config['offline'] == 2) {
                                         if(isset($formdata['message'])) $message = JSSTincluder::getJSModel('jssupportticket')->getSanitizedEditorData($formdata['message']);
                                         elseif(isset(jssupportticket::$_data[0]->message)) $message = jssupportticket::$_data[0]->message;
                                         else $message = '';
+                                        // $message = '';
                                         wp_editor($message, 'jsticket_message', array('media_buttons' => false));
                                         /*
                                         * Use following settings for minimal editor as all are offering

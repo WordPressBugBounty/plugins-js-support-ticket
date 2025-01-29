@@ -9,7 +9,7 @@ class JSSTfieldorderingModel {
         if(!is_numeric($fieldfor)){
             return false;
         }
-	$formid = jssupportticket::$_data['formid'];
+	    $formid = jssupportticket::$_data['formid'];
         if (isset($formid) && $formid != null) {
             $inquery = " AND multiformid = ".esc_sql($formid);
         }
@@ -147,6 +147,7 @@ class JSSTfieldorderingModel {
 	    if(!isset($formid) || $formid==''){
 		    $formid = JSSTincluder::getJSModel('ticket')->getDefaultMultiFormId();
 	    }
+        if(!is_numeric($formid)) return false;
         $query = "SELECT  * FROM `" . jssupportticket::$_db->prefix . "js_ticket_fieldsordering` WHERE ".$published." AND fieldfor =  " . esc_sql($fieldfor) ." AND multiformid =  " . esc_sql($formid) . " ORDER BY ordering ";
         jssupportticket::$_data['fieldordering'] = jssupportticket::$_db->get_results($query);
         return;
@@ -157,6 +158,7 @@ class JSSTfieldorderingModel {
             return false;
         }
         $data = jssupportticket::JSST_sanitizeData($data); // JSST_sanitizeData() function uses wordpress santize functions
+        if(!is_numeric($data['fieldfor'])) return false;
         if ($data['isuserfield'] == 1) {
             // value to add as field ordering
             if ($data['id'] == '') { // only for new
@@ -387,6 +389,7 @@ class JSSTfieldorderingModel {
     }
 
     function updateParentField($parentfield, $field, $fieldfor) {
+        if(!is_numeric($fieldfor)) return false;
         if(!is_numeric($parentfield)) return false;
 
         $query = "UPDATE `" . jssupportticket::$_db->prefix . "js_ticket_fieldsordering` SET depandant_field = '" . esc_sql($field) . "' WHERE id = " . esc_sql($parentfield)." AND fieldfor = ".esc_sql($fieldfor);
@@ -398,6 +401,7 @@ class JSSTfieldorderingModel {
     }
 
     function updateChildField($parent, $child){
+        if(!is_numeric($child->id)) return false;
         $userfieldparams = json_decode( $child->userfieldparams);
 
         $childNew =  new stdclass();
@@ -426,16 +430,17 @@ class JSSTfieldorderingModel {
         }
         $fieldfor = JSSTrequest::getVar('fieldfor');
         $parentfield = JSSTrequest::getVar('parentfield');
+        if(!is_numeric($fieldfor)) return false;
         $wherequery = '';
         if(isset($parentfield) && $parentfield !='' ){
             $query = "SELECT id FROM " . jssupportticket::$_db->prefix . "js_ticket_fieldsordering WHERE fieldfor = ".esc_sql($fieldfor)." AND (userfieldtype = 'radio' OR userfieldtype = 'combo'OR userfieldtype = 'depandant_field') AND depandant_field = '" . esc_sql($parentfield) . "' ";
             $parent = jssupportticket::$_db->get_var($query);
             $wherequery = ' OR id = '.esc_sql($parent);
         }
-        $query = "SELECT fieldtitle AS text ,id FROM " . jssupportticket::$_db->prefix . "js_ticket_fieldsordering WHERE fieldfor = $fieldfor AND (userfieldtype = 'radio' OR userfieldtype = 'combo' OR userfieldtype = 'depandant_field') AND (depandant_field = '' ".esc_sql($wherequery)." ) ";
+        $query = "SELECT fieldtitle AS text ,id FROM " . jssupportticket::$_db->prefix . "js_ticket_fieldsordering WHERE fieldfor = ".esc_sql($fieldfor)." AND (userfieldtype = 'radio' OR userfieldtype = 'combo' OR userfieldtype = 'depandant_field') AND (depandant_field = '' ".esc_sql($wherequery)." ) ";
         $data = jssupportticket::$_db->get_results($query);
         if(isset($parentfield) && $parentfield !='' ){
-            $query = "SELECT id FROM " . jssupportticket::$_db->prefix . "js_ticket_fieldsordering WHERE fieldfor = $fieldfor AND (userfieldtype = 'radio' OR userfieldtype = 'combo'OR userfieldtype = 'depandant_field') AND depandant_field = '" . esc_sql($parentfield) . "' ";
+            $query = "SELECT id FROM " . jssupportticket::$_db->prefix . "js_ticket_fieldsordering WHERE fieldfor = ".esc_sql($fieldfor)." AND (userfieldtype = 'radio' OR userfieldtype = 'combo'OR userfieldtype = 'depandant_field') AND depandant_field = '" . esc_sql($parentfield) . "' ";
             $parent = jssupportticket::$_db->get_var($query);
         }
         $jsFunction = 'getDataOfSelectedField();';
@@ -446,9 +451,10 @@ class JSSTfieldorderingModel {
     }
 
     function getFieldsForVisibleCombobox($fieldfor, $multiformid, $field='', $cid='') {
+        if(!is_numeric($fieldfor)) return false;
         $wherequery = '';
         if(isset($field) && $field !='' ){
-            $query = "SELECT id FROM " . jssupportticket::$_db->prefix . "js_ticket_fieldsordering WHERE fieldfor = $fieldfor AND (userfieldtype = 'combo') AND visible_field = '" . esc_sql($field) . "' ";
+            $query = "SELECT id FROM " . jssupportticket::$_db->prefix . "js_ticket_fieldsordering WHERE fieldfor = ".esc_sql($fieldfor)." AND (userfieldtype = 'combo') AND visible_field = '" . esc_sql($field) . "' ";
             $parent = jssupportticket::$_db->get_var($query);
             if ($parent) {
                 $wherequery = ' OR id = '.esc_sql($parent);
@@ -459,7 +465,7 @@ class JSSTfieldorderingModel {
             $wherequeryforedit = ' AND id != '.esc_sql($cid);
         }
         
-        $query = "SELECT fieldtitle AS text ,id FROM " . jssupportticket::$_db->prefix . "js_ticket_fieldsordering WHERE (fieldfor = $fieldfor AND multiformid = '".esc_sql($multiformid)."' AND field = 'department' ".$wherequeryforedit.$wherequery.") OR (fieldfor = $fieldfor AND multiformid = '".esc_sql($multiformid)."' AND userfieldtype = 'combo' ".$wherequeryforedit.$wherequery.')';
+        $query = "SELECT fieldtitle AS text ,id FROM " . jssupportticket::$_db->prefix . "js_ticket_fieldsordering WHERE (fieldfor = ".esc_sql($fieldfor)." AND multiformid = '".esc_sql($multiformid)."' AND field = 'department' ".$wherequeryforedit.$wherequery.") OR (fieldfor = $fieldfor AND multiformid = '".esc_sql($multiformid)."' AND userfieldtype = 'combo' ".$wherequeryforedit.$wherequery.')';
         $data = jssupportticket::$_db->get_results($query);
         return $data;
     }

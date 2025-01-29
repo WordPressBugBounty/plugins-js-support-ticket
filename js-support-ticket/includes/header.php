@@ -424,6 +424,10 @@ echo wp_kses($div, JSST_ALLOWED_TAGS);
             </div>
         </div>
     </div>
+    <!-- add loading for multiform -->
+    <div id="jstran_loading">
+        <img alt="<?php echo esc_html(__('spinning wheel','js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/spinning-wheel.gif" />
+    </div>
 <?php }
 $jssupportticket_js ='
     jQuery(document).ready(function ($) {
@@ -433,14 +437,16 @@ $jssupportticket_js ='
             var url = jQuery("a#multiformpopup").prop("href");
             jQuery("div#multiformpopupblack").show();
             var ajaxurl ="'. admin_url('admin-ajax.php').'";
+            jsShowLoading();
             jQuery.post(ajaxurl, {action: "jsticket_ajax", jstmod: "multiform", task: "getmultiformlistajax", url:url, "_wpnonce":"'. esc_attr(wp_create_nonce("get-multi-form-list-ajax")).'"}, function (data) {
                 if(data){
+                    jsHideLoading();
                     jQuery("div#records").html("");
                     jQuery("div#records").html(data);
+                    jQuery("div#multiformpopup").slideDown("slow");
                     //setUserLink(); generate error
                 }
             });
-            jQuery("div#multiformpopup").slideDown("slow");
         });
 
         jQuery("div#multiformpopupblack , div.multiformpopup-header-close-img").click(function (e) {
@@ -467,6 +473,14 @@ $jssupportticket_js ='
         }
         var newUrl = oldUrl+opt+"formid="+id; // Create new url
         window.location.href = newUrl;
+    }
+
+    function jsShowLoading(){
+        jQuery("div#jstran_loading").show();
+    }
+
+    function jsHideLoading(){
+        jQuery("div#jstran_loading").hide();
     }
 ';
     wp_add_inline_script('js-support-ticket-main-js',$jssupportticket_js);

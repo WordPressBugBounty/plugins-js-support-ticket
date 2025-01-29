@@ -502,7 +502,10 @@ if (jssupportticket::$_config['offline'] == 2) {
                             <div class="js-ticket-link-text js-ticket-green">
                                 <?php
                                     echo esc_html(__('Open', 'js-support-ticket'));
-                                    echo ' ( '.esc_html($data['count']['openticket']).' )';
+                                    // show counts accoridng to configuration
+                                    if(jssupportticket::$_config['count_on_myticket'] == 1) {
+                                        echo ' ( '.esc_html($data['count']['openticket']).' )';
+                                    }
                                 ?>
                             </div>
                         </a>
@@ -528,7 +531,10 @@ if (jssupportticket::$_config['offline'] == 2) {
                             <div class="js-ticket-link-text js-ticket-red">
                                 <?php
                                     echo esc_html(__('Closed', 'js-support-ticket'));
-                                    echo ' ( '.esc_html($data['count']['closedticket']).' )';
+                                    // show counts accoridng to configuration
+                                    if(jssupportticket::$_config['count_on_myticket'] == 1) {
+                                        echo ' ( '.esc_html($data['count']['closedticket']).' )';
+                                    }
                                 ?>
                             </div>
                         </a>
@@ -554,7 +560,10 @@ if (jssupportticket::$_config['offline'] == 2) {
                             <div class="js-ticket-link-text js-ticket-brown">
                                 <?php
                                     echo esc_html(__('Answered', 'js-support-ticket'));
-                                    echo ' ( '.esc_html($data['count']['answeredticket']).' )';
+                                    // show counts accoridng to configuration
+                                    if(jssupportticket::$_config['count_on_myticket'] == 1) {
+                                        echo ' ( '.esc_html($data['count']['answeredticket']).' )';
+                                    }
                                 ?>
                             </div>
                         </a>
@@ -581,7 +590,10 @@ if (jssupportticket::$_config['offline'] == 2) {
                             <div class="js-ticket-link-text js-ticket-orange">
                                 <?php
                                     echo esc_html(__('Overdue', 'js-support-ticket'));
-                                    echo ' ( '.esc_html($data['count']['overdue']).' )';
+                                    // show counts accoridng to configuration
+                                    if(jssupportticket::$_config['count_on_myticket'] == 1) {
+                                        echo ' ( '.esc_html($data['count']['overdue']).' )';
+                                    }
                                 ?>
                             </div>
                         </a>
@@ -608,7 +620,10 @@ if (jssupportticket::$_config['offline'] == 2) {
                             <div class="js-ticket-link-text js-ticket-blue">
                                 <?php
                                     echo esc_html(__('All Tickets', 'js-support-ticket'));
-                                    echo ' ( '.esc_html($data['count']['allticket']).' )';
+                                    // show counts accoridng to configuration
+                                    if(jssupportticket::$_config['count_on_myticket'] == 1) {
+                                        echo ' ( '.esc_html($data['count']['allticket']).' )';
+                                    }
                                 ?>
                             </div>
                         </a>

@@ -268,6 +268,8 @@ class JSSTticketController {
             $url = admin_url("admin.php?page=ticket&jstlay=tickets");
         } elseif ( in_array('agent',jssupportticket::$_active_addons) && JSSTincluder::getJSModel('agent')->isUserStaff()) {
             $url = jssupportticket::makeUrl(array('jstmod'=>'agent', 'jstlay'=>'staffmyticket'));
+        } elseif (JSSTincluder::getObjectClass('user')->uid() == 0) { // visitor
+            $url = jssupportticket::makeUrl(array('jstmod'=>'ticket', 'jstlay'=>'ticketdetail', 'jssupportticketid'=>$id));
         } else {
             $url = jssupportticket::makeUrl(array('jstmod'=>'ticket', 'jstlay'=>'myticket'));
         }

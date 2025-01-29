@@ -111,7 +111,7 @@ class JSSTgdprModel {
     }
 
     function checkCanDelete($id){
-
+        if(!is_numeric($id)) return false;
         if(current_user_can('manage_options')){ // allow admin to delete ??
             return true;
         }
