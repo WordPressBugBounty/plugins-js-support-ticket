@@ -15,6 +15,8 @@ class JSSTajax {
         $task = JSSTrequest::getVar('task');
         if($task != '' && in_array($task, $functions_allowed)){
             $module = JSSTrequest::getVar('jstmod');
+			$module = str_replace("..","",$module);
+			$module = str_replace("/","",$module);
             $result = JSSTincluder::getJSModel($module)->$task();
             echo wp_kses($result, JSST_ALLOWED_TAGS);
             die();
