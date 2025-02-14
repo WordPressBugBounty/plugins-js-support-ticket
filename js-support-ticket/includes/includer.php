@@ -14,6 +14,8 @@ class JSSTincluder {
      */
 
     public static function include_file($filename, $module_name = null) {
+        $filename = jssupportticketphplib::JSST_clean_file_path($filename);
+        $module_name = jssupportticketphplib::JSST_clean_file_path($module_name);
         if ($module_name != null) {
             $file_path = JSSTincluder::getPluginPath($module_name,'file',$filename);
             if (file_exists(JSST_PLUGIN_PATH . 'includes/css/inc-css/' . $module_name . '-' . $filename . '.css.php')) {
@@ -111,6 +113,8 @@ class JSSTincluder {
      */
 
     public static function getPluginPath($module,$type,$file_name = '') {
+        $module = jssupportticketphplib::JSST_clean_file_path($module);
+        $file_name = jssupportticketphplib::JSST_clean_file_path($file_name);
 
         $addons_secondry = array('articles','articleattachmet','banemaillog','downloadattachment','roleaccessdepartments','rolepermissions','useraccessdepartments','userpermissions', 'role', 'acl_roles', 'acl_role_access_departments', 'acl_role_permissions', 'categories' ,'email_banlist', 'acl_user_access_departments','articles_attachments','email_banlist','acl_user_permissions', 'facebook', 'linkedin','socialUser');
 		$new_addon_entry = "";
