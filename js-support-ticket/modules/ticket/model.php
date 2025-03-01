@@ -2285,6 +2285,7 @@ class JSSTticketModel {
     function removeFileCustom($id,$key){
         if(!is_numeric($id)) return false;
         $filename = jssupportticketphplib::JSST_str_replace(' ', '_', $key);
+        $filename = jssupportticketphplib::JSST_clean_file_path($filename);
         $maindir = wp_upload_dir();
         $basedir = $maindir['basedir'];
         $datadirectory = jssupportticket::$_config['data_directory'];

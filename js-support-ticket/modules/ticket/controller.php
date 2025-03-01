@@ -462,6 +462,7 @@ class JSSTticketController {
     function downloadbyname(){
         $name = JSSTrequest::getVar('name');
         $id = JSSTrequest::getVar('id');
+        $name = jssupportticketphplib::JSST_clean_file_path($name);
         JSSTincluder::getJSModel('attachment')->getDownloadAttachmentByName($name,$id);
     }
 

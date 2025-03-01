@@ -181,6 +181,7 @@ class JSSTattachmentModel {
         if(empty($file_name)) return false;
         if(!is_numeric($id)) return false;
         $filename = jssupportticketphplib::JSST_str_replace(' ', '_',$file_name);
+        $filename = jssupportticketphplib::JSST_clean_file_path($filename);
         $query = "SELECT attachmentdir FROM `".jssupportticket::$_db->prefix."js_ticket_tickets` WHERE id = ".esc_sql($id);
         $foldername = jssupportticket::$_db->get_var($query);
 
