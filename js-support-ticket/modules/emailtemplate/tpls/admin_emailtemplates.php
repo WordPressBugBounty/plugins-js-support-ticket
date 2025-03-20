@@ -38,7 +38,8 @@
             <h1 class="jsstadmin-head-text"><?php echo esc_html(__('Email Templates', 'js-support-ticket')); ?></h1>
         </div>
         <div id="jsstadmin-data-wrp" class="p0 bg-n bs-n">
-            <form method="post" action="<?php echo esc_url(wp_nonce_url(admin_url("?page=emailtemplate&task=saveemailtemplate"),"save-email-template")); ?>">
+            <?php $nonce_id = isset(jssupportticket::$_data[0]->id) ? jssupportticket::$_data[0]->id : '';?>
+            <form method="post" action="<?php echo esc_url(wp_nonce_url(admin_url("?page=emailtemplate&task=saveemailtemplate"),"save-email-template-".$nonce_id)); ?>">
                 <div class="js-email-menu">
                     <span class="js-email-menu-link <?php if (jssupportticket::$_data[1] == 'tk-nw') echo 'selected'; ?>"><a class="js-email-link" href="?page=emailtemplate&for=tk-nw" title="<?php echo esc_html(__('New Ticket','js-support-ticket')); ?>"><?php echo esc_html(__('New Ticket', 'js-support-ticket')); ?></a></span>
                     <span class="js-email-menu-link <?php if (jssupportticket::$_data[1] == 'sntk-tk') echo 'selected'; ?>"><a class="js-email-link" href="?page=emailtemplate&for=sntk-tk" title="<?php echo esc_html(__('Agent Ticket','js-support-ticket')); ?>"><?php echo esc_html(__('Agent Ticket', 'js-support-ticket')); ?><?php if (!in_array('agent', jssupportticket::$_active_addons)) { ?><span style="color: red;"> *</span><?php } ?></a></span>

@@ -64,7 +64,8 @@
             <h1 class="jsstadmin-head-text"><?php echo esc_html(__('Add Email', 'js-support-ticket')); ?></h1>
         </div>
         <div id="jsstadmin-data-wrp">
-            <form class="jsstadmin-form" method="post" action="<?php echo esc_url(wp_nonce_url(admin_url("?page=email&task=saveemail"),"save-email")); ?>">
+            <?php $nonce_id = isset(jssupportticket::$_data[0]->id) ? jssupportticket::$_data[0]->id : '';?>
+            <form class="jsstadmin-form" method="post" action="<?php echo esc_url(wp_nonce_url(admin_url("?page=email&task=saveemail"),"save-email-".$nonce_id)); ?>">
                 <div class="js-form-wrapper">
                     <div class="js-form-title"><?php echo esc_html(__('Email', 'js-support-ticket')); ?>&nbsp;<span style="color: red;" >*</span></div>
                     <div class="js-form-field"><?php echo wp_kses(JSSTformfield::text('email', isset(jssupportticket::$_data[0]->email) ? jssupportticket::$_data[0]->email : '', array('class' => 'inputbox js-form-input-field', 'data-validation' => 'required email')), JSST_ALLOWED_TAGS) ?></div>

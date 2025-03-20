@@ -126,8 +126,12 @@ class JSSTslugModel {
     }
 
     function getOptionsForEditSlug() {
+        if(!current_user_can('manage_options')){
+            return false;
+        }
+        $id = JSSTrequest::getVar('id');
         $nonce = JSSTrequest::getVar('_wpnonce');
-        if (! wp_verify_nonce( $nonce, 'get-options-for-edit-slug') ) {
+        if (! wp_verify_nonce( $nonce, 'get-options-for-edit-slug-'.$id) ) {
             die( 'Security check Failed' );
         }
         $slug = JSSTrequest::getVar('slug');

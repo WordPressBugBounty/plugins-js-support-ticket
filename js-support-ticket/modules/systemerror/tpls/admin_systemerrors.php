@@ -43,7 +43,7 @@
         </div>
         <div id="jsstadmin-head">
             <h1 class="jsstadmin-head-text"><?php echo esc_html(__('System Errors','js-support-ticket')); ?></h1>
-            <a class="jsstadmin-add-link button" onclick="return confirm('<?php echo esc_html(__('Are you sure you want to delete it?', 'js-support-ticket')); ?>');" href="<?php echo esc_url(wp_nonce_url('?page=systemerror&task=deletesystemerror&action=jstask&systemerrorid=all','delete-systemerror'));?>"><img alt="<?php echo esc_html(__('Add','js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/delete.png" /><?php echo esc_html(__('Remove All', 'js-support-ticket')); ?></a>
+            <a class="jsstadmin-add-link button" onclick="return confirm('<?php echo esc_html(__('Are you sure you want to delete it?', 'js-support-ticket')); ?>');" href="<?php echo esc_url(wp_nonce_url('?page=systemerror&task=deletesystemerror&action=jstask&systemerrorid=all','delete-systemerror-all'));?>"><img alt="<?php echo esc_html(__('Add','js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/delete.png" /><?php echo esc_html(__('Remove All', 'js-support-ticket')); ?></a>
         </div>
         <div id="jsstadmin-data-wrp" class="p0">
             <?php
@@ -69,7 +69,7 @@
                             echo " : ";
                                     ?></span><?php echo esc_html(date_i18n(jssupportticket::$_config['date_format'], jssupportticketphplib::JSST_strtotime($systemerror->created))); ?></td>
                             <td>
-                                <a title="<?php echo esc_html(__('Delete','js-support-ticket')); ?>" class="action-btn" onclick="return confirm('<?php echo esc_html(__('Are you sure you want to delete it?', 'js-support-ticket')); ?>');" href="<?php echo esc_url(wp_nonce_url('?page=systemerror&task=deletesystemerror&action=jstask&systemerrorid='.esc_attr($systemerror->id),'delete-systemerror'));?>"><img alt="<?php echo esc_html(__('Delete','js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/delete.png" /></a>
+                                <a title="<?php echo esc_html(__('Delete','js-support-ticket')); ?>" class="action-btn" onclick="return confirm('<?php echo esc_html(__('Are you sure you want to delete it?', 'js-support-ticket')); ?>');" href="<?php echo esc_url(wp_nonce_url('?page=systemerror&task=deletesystemerror&action=jstask&systemerrorid='.esc_attr($systemerror->id),'delete-systemerror-'.$systemerror->id));?>"><img alt="<?php echo esc_html(__('Delete','js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/delete.png" /></a>
                             </td>
                         </tr>
                 <?php }

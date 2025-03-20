@@ -41,8 +41,9 @@ class JSSTemailtemplateController {
     }
 
     static function saveemailtemplate() {
+        $id = JSSTrequest::getVar('id');
         $nonce = JSSTrequest::getVar('_wpnonce');
-        if (! wp_verify_nonce( $nonce, 'save-email-template') ) {
+        if (! wp_verify_nonce( $nonce, 'save-email-template-'.$id) ) {
             die( 'Security check Failed' );
         }
         $data = JSSTrequest::get('post');

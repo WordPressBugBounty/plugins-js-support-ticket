@@ -487,6 +487,7 @@ table#js-support-ticket-table.js-admin-report-tickets tr td a {display: inline-b
 .js-ticket-configuration-row .js-ticket-configuration-value select {width: 100%;height: 45px;padding: 10px;box-shadow: unset;color: #6c757d;background: #fff;border: 1px solid #ebecec;background-image: url('../images/selecticon.png');background-repeat: no-repeat;background-position: calc(100% - 15px);-webkit-appearance: none;-moz-appearance: none;appearance: none;background-size: 16px;}
 .js-ticket-configuration-row .js-ticket-configuration-value .form-error {display: inline-block;width: 100%;padding: 5px 5px 0;color: red;font-size: 11px;}
 .js-ticket-configuration-row .js-ticket-configuration-description {float: left;width: 100%;padding: 10px 5px 5px;;color: #606062;}
+.js-ticket-configuration-row .js-ticket-configuration-description input[name=del_logo_for_desktop_notfication]{width: 17px !important;height: 17px !important;}
 .js-ticket-configuration-row .js-ticket-configuration-sml-txt {display: inline-block;width: 100%;padding-bottom: 5px;color: #606062;}
 .js-admin-ticketviaemail-wrapper-checksetting {float: left;width: calc(100% - 20px);margin: 0 10px 25px;}
 .js-admin-ticketviaemail-wrapper-checksetting #js-admin-ticketviaemail {float: left;border: 1px solid #ebecec;padding: 8px 15px 8px 40px;background: #1572e8;color: #ffffff;font-weight: bold;border-radius: 4px;text-decoration: none;position: relative;}

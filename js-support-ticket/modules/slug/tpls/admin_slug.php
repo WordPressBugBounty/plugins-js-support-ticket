@@ -61,10 +61,10 @@ JSSTmessage::getMessage();
                 jQuery("form#jsstadmin-form").submit();
             }
 
-            function showPopupAndSetValues(id,slug) {//Showing PopUp
+            function showPopupAndSetValues(nonce, id,slug) {//Showing PopUp
                 slug = jQuery("td#td_"+id).html();
                 slug_for_edit = id;
-                jQuery.post(ajaxurl, {action: "jsticket_ajax", jstmod: "slug", task: "getOptionsForEditSlug",id:id ,slug:slug, "_wpnonce":"'. esc_attr(wp_create_nonce("get-options-for-edit-slug")).'"}, function (data) {
+                jQuery.post(ajaxurl, {action: "jsticket_ajax", jstmod: "slug", task: "getOptionsForEditSlug",id:id ,slug:slug, "_wpnonce": nonce}, function (data) {
                     if (data) {
                         var d = jQuery.parseJSON(data);
                         jQuery("div#userpopupblack").css("display", "block");
@@ -152,7 +152,8 @@ JSSTmessage::getMessage();
                                                 <?php echo esc_html(jssupportticket::JSST_getVarValue($row->description));?>
                                             </td>
                                             <td>
-                                                <a class="action-btn" href="#" onclick="showPopupAndSetValues(<?php echo esc_js($row->id); ?>)" title="<?php echo esc_html(__('edit','js-support-ticket')); ?>">
+                                                <?php $nonce = wp_create_nonce("get-options-for-edit-slug-".$row->id); ?>
+                                                <a class="action-btn" href="#" onclick="showPopupAndSetValues('<?php echo esc_js($nonce); ?>' ,<?php echo esc_js($row->id); ?>)" title="<?php echo esc_html(__('edit','js-support-ticket')); ?>">
                                                     <img src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/edit.png" alt="<?php echo esc_html(__('edit','js-support-ticket')); ?>">
                                                 </a>
                                             </td>

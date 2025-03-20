@@ -69,11 +69,11 @@ class JSSTfieldorderingController {
     }
 
     static function changeorder() {
+        $id = JSSTrequest::getVar('fieldorderingid');
         $nonce = JSSTrequest::getVar('_wpnonce');
-        if (! wp_verify_nonce( $nonce, 'change-order') ) {
+        if (! wp_verify_nonce( $nonce, 'change-order-'.$id) ) {
             die( 'Security check Failed' );
         }
-        $id = JSSTrequest::getVar('fieldorderingid');
         $fieldfor = JSSTrequest::getVar('fieldfor');
         if($fieldfor == ''){
             $fieldfor = jssupportticket::$_data['fieldfor'];
@@ -87,11 +87,11 @@ class JSSTfieldorderingController {
     }
 
     static function changepublishstatus() {
+        $id = JSSTrequest::getVar('fieldorderingid');
         $nonce = JSSTrequest::getVar('_wpnonce');
-        if (! wp_verify_nonce( $nonce, 'change-publish-status') ) {
+        if (! wp_verify_nonce( $nonce, 'change-publish-status-'.$id) ) {
             die( 'Security check Failed' );
         }
-        $id = JSSTrequest::getVar('fieldorderingid');
         $fieldfor = JSSTrequest::getVar('fieldfor');
         if($fieldfor == ''){
             $fieldfor = jssupportticket::$_data['fieldfor'];
@@ -105,11 +105,11 @@ class JSSTfieldorderingController {
     }
 
     static function changevisitorpublishstatus() {
+        $id = JSSTrequest::getVar('fieldorderingid');
         $nonce = JSSTrequest::getVar('_wpnonce');
-        if (! wp_verify_nonce( $nonce, 'change-visitor-publish-status') ) {
+        if (! wp_verify_nonce( $nonce, 'change-visitor-publish-status-'.$id) ) {
             die( 'Security check Failed' );
         }
-        $id = JSSTrequest::getVar('fieldorderingid');
         $fieldfor = JSSTrequest::getVar('fieldfor');
         if($fieldfor == ''){
             $fieldfor = jssupportticket::$_data['fieldfor'];
@@ -123,11 +123,11 @@ class JSSTfieldorderingController {
     }
 
     static function changerequiredstatus() {
+        $id = JSSTrequest::getVar('fieldorderingid');
         $nonce = JSSTrequest::getVar('_wpnonce');
-        if (! wp_verify_nonce( $nonce, 'change-required-status') ) {
+        if (! wp_verify_nonce( $nonce, 'change-required-status-'.$id) ) {
             die( 'Security check Failed' );
         }
-        $id = JSSTrequest::getVar('fieldorderingid');
         $fieldfor = JSSTrequest::getVar('fieldfor');
         if($fieldfor == ''){
             $fieldfor = jssupportticket::$_data['fieldfor'];
@@ -141,30 +141,56 @@ class JSSTfieldorderingController {
     }
 
     static function saveuserfeild() {
-        $nonce = JSSTrequest::getVar('_wpnonce');
-        if (! wp_verify_nonce( $nonce, 'save-userfeild') ) {
-            die( 'Security check Failed' );
+        // Validate ID: Ensure it's a numeric value to prevent injection
+        $id = JSSTrequest::getVar('id');
+        if (!empty($id) && (!is_numeric($id) || intval($id) < 0)) {
+            return false;
         }
-        $data = JSSTrequest::get('post');
 
+        // Validate Nonce
+        $nonce = JSSTrequest::getVar('_wpnonce');
+        if (!wp_verify_nonce($nonce, 'save-userfeild-' . $id)) {
+            die('Security check Failed');
+        }
+
+        // Retrieve and Sanitize Input Data
+        $data = JSSTrequest::get('post');
+        if (!is_array($data)) {
+            return false; // Ensure data is an array
+        }
+        array_walk_recursive($data, function (&$item) {
+            $item = sanitize_text_field($item);
+        });
+
+        // Validate fieldfor parameter
         $fieldfor = JSSTrequest::getVar('fieldfor');
-        if($fieldfor == ''){
+        if (empty($fieldfor)) {
             $fieldfor = jssupportticket::$_data['fieldfor'];
         }
+        $fieldfor = sanitize_text_field($fieldfor); // Prevent malicious input
+
+        // Validate formid parameter
         $formid = JSSTrequest::getVar('formid');
+        $formid = sanitize_text_field($formid);
+
+        // Store the sanitized user field using prepared statements
         JSSTincluder::getJSModel('fieldordering')->storeUserField($data);
+
+        // Redirect securely
         if (is_admin()) {
-            $url = admin_url("admin.php?page=fieldordering&fieldfor=".esc_attr($fieldfor)."&formid=".esc_attr($formid));
+            $url = admin_url("admin.php?page=fieldordering&fieldfor=" . urlencode($fieldfor) . "&formid=" . urlencode($formid));
         } else {
-            $url = jssupportticket::makeUrl(array('jstmod'=>'fieldordering', 'jstlay'=>'userfeilds'));
+            $url = jssupportticket::makeUrl(array('jstmod' => 'fieldordering', 'jstlay' => 'userfeilds'));
         }
-        wp_redirect($url);
+
+        wp_safe_redirect($url);
         exit;
     }
 
     static function savefeild() {
+        $id = JSSTrequest::getVar('id');
         $nonce = JSSTrequest::getVar('_wpnonce');
-        if (! wp_verify_nonce( $nonce, 'save-feild') ) {
+        if (! wp_verify_nonce( $nonce, 'save-feild-'.$id) ) {
             die( 'Security check Failed' );
         }
         $data = JSSTrequest::get('post');
@@ -184,11 +210,11 @@ class JSSTfieldorderingController {
     }
 
     static function removeuserfeild() {
+        $id = JSSTrequest::getVar('jssupportticketid');
         $nonce = JSSTrequest::getVar('_wpnonce');
-        if (! wp_verify_nonce( $nonce, 'remove-userfeild') ) {
+        if (! wp_verify_nonce( $nonce, 'remove-userfeild-'.$id) ) {
             die( 'Security check Failed' );
         }
-        $id = JSSTrequest::getVar('jssupportticketid');
         $fieldfor = JSSTrequest::getVar('fieldfor');
         if($fieldfor == ''){
             $fieldfor = jssupportticket::$_data['fieldfor'];

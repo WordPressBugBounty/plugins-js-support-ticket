@@ -63,7 +63,8 @@ $dayshours = array(
             <h1 class="jsstadmin-head-text"><?php echo esc_html(__('Add Priority', 'js-support-ticket')); ?></h1>
         </div>
         <div id="jsstadmin-data-wrp">
-            <form class="jsstadmin-form" method="post" action="<?php echo esc_url(wp_nonce_url(admin_url("?page=priority&task=savepriority"),"save-priority")); ?>">
+            <?php $nonce_id = isset(jssupportticket::$_data[0]->id) ?jssupportticket::$_data[0]->id :''; ?>
+            <form class="jsstadmin-form" method="post" action="<?php echo esc_url(wp_nonce_url(admin_url("?page=priority&task=savepriority"),"save-priority-".$nonce_id)); ?>">
                 <div class="js-form-wrapper">
                     <div class="js-form-title"><?php echo esc_html(__('Priority', 'js-support-ticket')); ?>&nbsp;<span style="color: red;" >*</span></div>
                     <div class="js-form-value"><?php echo wp_kses(JSSTformfield::text('priority', isset(jssupportticket::$_data[0]->priority) ? jssupportticket::$_data[0]->priority : '', array('class' => 'inputbox js-form-input-field', 'data-validation' => 'required')), JSST_ALLOWED_TAGS) ?></div>

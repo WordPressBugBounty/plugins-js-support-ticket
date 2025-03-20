@@ -370,7 +370,7 @@ $ticketstatus = array(
                     <div class="js-ticket-wrapper">
                         <div class="js-ticket-toparea">
                             <div class="js-ticket-pic">
-                                <?php echo wp_kses(jsst_get_avatar(JSSTincluder::getJSModel('jssupportticket')->getWPUidById($ticket->uid)), JSST_ALLOWED_TAGS); ?>
+                                <?php echo wp_kses(jsst_get_avatar($ticket->uid), JSST_ALLOWED_TAGS); ?>
                                 <?php /*if (in_array('agent',jssupportticket::$_active_addons) && $ticket->staffphoto) { ?>
                                     <img alt="<?php echo esc_html(__('Staff','js-support-ticket')); ?>" src="<?php echo esc_url(admin_url('?page=agent&action=jstask&task=getStaffPhoto&jssupportticketid='.esc_attr($ticket->staffid))); ?>">
                                 <?php } else {
@@ -468,10 +468,10 @@ $ticketstatus = array(
                             <?php /*<span class="js-ticket-created"><?php echo esc_html(__('Created', 'js-support-ticket')); ?>&nbsp;:&nbsp;<?php echo esc_html(date_i18n(jssupportticket::$_config['date_format'], jssupportticketphplib::JSST_strtotime($ticket->created))); ?></span>*/ ?>
                             <div class="js-ticket-datapart-buttons-action">
                                 <a class="js-ticket-datapart-action-btn button" title="<?php echo esc_html(__('Edit Ticket', 'js-support-ticket')); ?>" href="?page=ticket&jstlay=addticket&jssupportticketid=<?php echo esc_attr($ticket->id); ?>"><img alt="image" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/edit-2.png" /><?php echo esc_html(__('Edit Ticket', 'js-support-ticket')); ?></a>
-                                <a class="js-ticket-datapart-action-btn button" title="<?php echo esc_html(__('Delete Ticket', 'js-support-ticket')); ?>"  onclick="return confirm('<?php echo esc_html(__('Are you sure you want to delete it?', 'js-support-ticket')); ?>');" href="<?php echo esc_url(wp_nonce_url('?page=ticket&task=deleteticket&action=jstask&ticketid='.esc_attr($ticket->id),'delete-ticket'));?>">
+                                <a class="js-ticket-datapart-action-btn button" title="<?php echo esc_html(__('Delete Ticket', 'js-support-ticket')); ?>"  onclick="return confirm('<?php echo esc_html(__('Are you sure you want to delete it?', 'js-support-ticket')); ?>');" href="<?php echo esc_url(wp_nonce_url('?page=ticket&task=deleteticket&action=jstask&ticketid='.esc_attr($ticket->id),'delete-ticket-'.$ticket->id));?>">
                                     <img alt="<?php echo esc_html(__('Delete', 'js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/delete-2.png" />
                                     <?php echo esc_html(__('Delete Ticket', 'js-support-ticket')); ?></a>
-                                <a title="<?php echo esc_html(__('Enforce delete', 'js-support-ticket')); ?>" class="js-ticket-datapart-action-btn button"  onclick="return confirm('<?php echo esc_html(__('Are you sure to enforce delete', 'js-support-ticket')); ?>');" href="<?php echo esc_url(wp_nonce_url('?page=ticket&task=enforcedeleteticket&action=jstask&ticketid='.esc_attr($ticket->id),'enforce-delete-ticket'))?>"><img src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/forced-delete.png" alt="<?php echo esc_html(__('Enforce delete', 'js-support-ticket')); ?>" /><?php echo esc_html(__('Enforce delete', 'js-support-ticket')); ?></a>
+                                <a title="<?php echo esc_html(__('Enforce delete', 'js-support-ticket')); ?>" class="js-ticket-datapart-action-btn button"  onclick="return confirm('<?php echo esc_html(__('Are you sure to enforce delete', 'js-support-ticket')); ?>');" href="<?php echo esc_url(wp_nonce_url('?page=ticket&task=enforcedeleteticket&action=jstask&ticketid='.esc_attr($ticket->id),'enforce-delete-ticket-'.$ticket->id))?>"><img src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/forced-delete.png" alt="<?php echo esc_html(__('Enforce delete', 'js-support-ticket')); ?>" /><?php echo esc_html(__('Enforce delete', 'js-support-ticket')); ?></a>
                             </div>
                         </div>
                     </div>

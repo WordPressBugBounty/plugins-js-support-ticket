@@ -44,7 +44,8 @@ wp_add_inline_script('js-support-ticket-main-js',$jssupportticket_js);
             <h1 class="jsstadmin-head-text"><?php echo esc_html(__('Add Department', 'js-support-ticket')); ?></h1>
         </div>
         <div id="jsstadmin-data-wrp">
-            <form class="jsstadmin-form" method="post" action="<?php echo esc_url(wp_nonce_url(admin_url("admin.php?page=department&task=savedepartment"),"save-department")); ?>">
+            <?php $nonce_id = isset(jssupportticket::$_data[0]->id) ? jssupportticket::$_data[0]->id : ''; ?>
+            <form class="jsstadmin-form" method="post" action="<?php echo esc_url(wp_nonce_url(admin_url("admin.php?page=department&task=savedepartment"),"save-department-".$nonce_id)); ?>">
                 <div class="js-form-wrapper">
                     <div class="js-form-title"><?php echo esc_html(__('Title', 'js-support-ticket')); ?>&nbsp;<span style="color: red;" >*</span></div>
                     <div class="js-form-value"><?php echo wp_kses(JSSTformfield::text('departmentname', isset(jssupportticket::$_data[0]->departmentname) ? jssupportticket::$_data[0]->departmentname : '', array('class' => 'inputbox js-form-input-field', 'data-validation' => 'required')), JSST_ALLOWED_TAGS) ?></div>

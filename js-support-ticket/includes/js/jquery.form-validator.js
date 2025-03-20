@@ -63,9 +63,9 @@
                     }
                 }
                 else {
-                    var $mess = $parent.find('.' + conf.errorMessageClass + '.help-block');
+                    var $mess = $parent.find('.' + conf.errorMessageClass + '.jsst-help-block');
                     if ($mess.length == 0) {
-                        $mess = $('<span></span>').addClass('help-block').addClass(conf.errorMessageClass);
+                        $mess = $('<span></span>').addClass('jsst-help-block').addClass(conf.errorMessageClass);
                         $mess.appendTo($parent);
                     }
                     $mess.html(mess);
@@ -156,7 +156,7 @@
                                 $help = $('<span />')
                                         .addClass(className)
                                         .addClass('help')
-                                        .addClass('help-block') // twitter bs
+                                        .addClass('jsst-help-block') // twitter bs
                                         .text(help)
                                         .hide();
 

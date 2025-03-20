@@ -52,7 +52,8 @@
                     </div>
                 </div>
             <?php } ?>
-                <form class="js-ticket-form" method="post" action="<?php echo esc_url(wp_nonce_url(jssupportticket::makeUrl(array('jstmod'=>'gdpr', 'task'=>'saveusereraserequest')),"save-usereraserequest")); ?>">
+                <?php $nonce_id = isset(jssupportticket::$_data[0]->id) ?jssupportticket::$_data[0]->id :''; ?>
+                <form class="js-ticket-form" method="post" action="<?php echo esc_url(wp_nonce_url(jssupportticket::makeUrl(array('jstmod'=>'gdpr', 'task'=>'saveusereraserequest')),"save-usereraserequest-".$nonce_id)); ?>">
                     <div class="js-ticket-from-field-wrp js-ticket-from-field-wrp-full-width">
                         <div class="js-ticket-from-field-title">
                             <?php echo esc_html(__('Subject', 'js-support-ticket')); ?>&nbsp;<span style="color: red;" >*</span>

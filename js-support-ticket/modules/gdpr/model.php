@@ -64,8 +64,9 @@ class JSSTgdprModel {
     }
 
     function storeUserEraseRequest($data){
+        $id = isset($data['id']) ? $data['id'] : '';
         $nonce = JSSTrequest::getVar('_wpnonce');
-        if (! wp_verify_nonce( $nonce, 'save-usereraserequest') ) {
+        if (! wp_verify_nonce( $nonce, 'save-usereraserequest-'.$id) ) {
             die( 'Security check Failed' );
         }
     	if (!$data['id']) { //new

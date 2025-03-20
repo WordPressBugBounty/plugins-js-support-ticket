@@ -391,7 +391,7 @@ if (jssupportticket::$_config['offline'] == 2) {
                             <?php /* if (in_array('agent',jssupportticket::$_active_addons) && $ticket->staffphoto) { ?>
                                 <img class="js-ticket-staff-img" src="<?php echo esc_url(jssupportticket::makeUrl(array('jstmod'=>'agent','task'=>'getStaffPhoto','action'=>'jstask','jssupportticketid'=> $ticket->staffid ,'jsstpageid'=>get_the_ID())));?> ">
                             <?php } else { */
-                                echo wp_kses(jsst_get_avatar(JSSTincluder::getJSModel('jssupportticket')->getWPUidById($ticket->uid)), JSST_ALLOWED_TAGS);
+                                echo wp_kses(jsst_get_avatar($ticket->uid), JSST_ALLOWED_TAGS);
                             // } ?>
                         </div>
                         <div class="js-col-xs-10 js-col-md-6 js-col-xs-10 js-ticket-data js-nullpadding">

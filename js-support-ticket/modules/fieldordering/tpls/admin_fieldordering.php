@@ -201,11 +201,11 @@ $type = array(
                                 <?php }elseif ($field->published == 1) {
                                     $url  = "?page=fieldordering&task=changepublishstatus&action=jstask&status=unpublish&fieldorderingid=".esc_attr($field->id).'&fieldfor='.esc_attr(jssupportticket::$_data['fieldfor']).'&formid='.esc_attr($field->multiformid);
                                          ?>
-                                        <a title="<?php echo esc_html(__('good','js-support-ticket')); ?>" href="<?php echo esc_url(wp_nonce_url($url, 'change-publish-status')); ?>" ><img height="15" width="15" src="<?php echo esc_url(JSST_PLUGIN_URL) . 'includes/images/good.png'; ?>" alt="<?php echo esc_html(__('good','js-support-ticket')); ?>" /></a>
+                                        <a title="<?php echo esc_html(__('good','js-support-ticket')); ?>" href="<?php echo esc_url(wp_nonce_url($url, 'change-publish-status-'.$field->id)); ?>" ><img height="15" width="15" src="<?php echo esc_url(JSST_PLUGIN_URL) . 'includes/images/good.png'; ?>" alt="<?php echo esc_html(__('good','js-support-ticket')); ?>" /></a>
                                 <?php }else{
                                     $url  = "?page=fieldordering&task=changepublishstatus&action=jstask&status=publish&fieldorderingid=".esc_attr($field->id).'&fieldfor='.esc_attr(jssupportticket::$_data['fieldfor']).'&formid='.esc_attr($field->multiformid);
                                          ?>
-                                        <a title="<?php echo esc_html(__('cross','js-support-ticket')); ?>" href="<?php echo esc_url(wp_nonce_url($url, 'change-publish-status')); ?>" ><img height="15" width="15" src="<?php echo esc_url(JSST_PLUGIN_URL) . 'includes/images/close.png'; ?>" alt="<?php echo esc_html(__('cross','js-support-ticket')); ?>" /></a>
+                                        <a title="<?php echo esc_html(__('cross','js-support-ticket')); ?>" href="<?php echo esc_url(wp_nonce_url($url, 'change-publish-status-'.$field->id)); ?>" ><img height="15" width="15" src="<?php echo esc_url(JSST_PLUGIN_URL) . 'includes/images/close.png'; ?>" alt="<?php echo esc_html(__('cross','js-support-ticket')); ?>" /></a>
                                 <?php } ?>
                             </td>
                             <td>
@@ -215,11 +215,11 @@ $type = array(
                                 <?php }elseif ($field->isvisitorpublished == 1) {
                                     $url  = "?page=fieldordering&task=changevisitorpublishstatus&action=jstask&status=unpublish&fieldorderingid=".esc_attr($field->id).'&fieldfor='.esc_attr(jssupportticket::$_data['fieldfor']).'&formid='.esc_attr($field->multiformid);
                                          ?>
-                                        <a title="<?php echo esc_html(__('good','js-support-ticket')); ?>" href="<?php echo esc_url(wp_nonce_url($url, 'change-visitor-publish-status')); ?>" ><img height="15" width="15" src="<?php echo esc_url(JSST_PLUGIN_URL) . 'includes/images/good.png'; ?>" alt="<?php echo esc_html(__('good','js-support-ticket')); ?>" /></a>
+                                        <a title="<?php echo esc_html(__('good','js-support-ticket')); ?>" href="<?php echo esc_url(wp_nonce_url($url, 'change-visitor-publish-status-'.$field->id)); ?>" ><img height="15" width="15" src="<?php echo esc_url(JSST_PLUGIN_URL) . 'includes/images/good.png'; ?>" alt="<?php echo esc_html(__('good','js-support-ticket')); ?>" /></a>
                                 <?php }else{
                                     $url  = "?page=fieldordering&task=changevisitorpublishstatus&action=jstask&status=publish&fieldorderingid=".esc_attr($field->id).'&fieldfor='.esc_attr(jssupportticket::$_data['fieldfor']).'&formid='.esc_attr($field->multiformid);
                                          ?>
-                                        <a title="<?php echo esc_html(__('cross','js-support-ticket')); ?>" href="<?php echo esc_url(wp_nonce_url($url, 'change-visitor-publish-status')); ?>" ><img height="15" width="15" src="<?php echo esc_url(JSST_PLUGIN_URL) . 'includes/images/close.png'; ?>" alt="<?php echo esc_html(__('cross','js-support-ticket')); ?>" /></a>
+                                        <a title="<?php echo esc_html(__('cross','js-support-ticket')); ?>" href="<?php echo esc_url(wp_nonce_url($url, 'change-visitor-publish-status-'.$field->id)); ?>" ><img height="15" width="15" src="<?php echo esc_url(JSST_PLUGIN_URL) . 'includes/images/close.png'; ?>" alt="<?php echo esc_html(__('cross','js-support-ticket')); ?>" /></a>
                                 <?php } ?>
                             </td>
                             <td>
@@ -229,11 +229,11 @@ $type = array(
                                 <?php }elseif ($field->required == 1) {
                                     $url  = "?page=fieldordering&task=changerequiredstatus&action=jstask&status=unrequired&fieldorderingid=".esc_attr($field->id).'&fieldfor='.esc_attr(jssupportticket::$_data['fieldfor']).'&formid='.esc_attr($field->multiformid);
                                          ?>
-                                        <a title="<?php echo esc_html(__('good','js-support-ticket')); ?>" href="<?php echo esc_url(wp_nonce_url($url, 'change-required-status')); ?>" ><img height="15" width="15" src="<?php echo esc_url(JSST_PLUGIN_URL) . 'includes/images/good.png'; ?>" alt="<?php echo esc_html(__('good','js-support-ticket')); ?>" /></a>
+                                        <a title="<?php echo esc_html(__('good','js-support-ticket')); ?>" href="<?php echo esc_url(wp_nonce_url($url, 'change-required-status-'.$field->id)); ?>" ><img height="15" width="15" src="<?php echo esc_url(JSST_PLUGIN_URL) . 'includes/images/good.png'; ?>" alt="<?php echo esc_html(__('good','js-support-ticket')); ?>" /></a>
                                 <?php }else{
                                     $url  = "?page=fieldordering&task=changerequiredstatus&action=jstask&status=required&fieldorderingid=".esc_attr($field->id).'&fieldfor='.esc_attr(jssupportticket::$_data['fieldfor']).'&formid='.esc_attr($field->multiformid);
                                          ?>
-                                        <a title="<?php echo esc_html(__('Close','js-support-ticket')); ?>" href="<?php echo esc_url(wp_nonce_url($url, 'change-required-status')); ?>" ><img height="15" width="15" src="<?php echo esc_url(JSST_PLUGIN_URL) . 'includes/images/close.png'; ?>" title="<?php echo esc_html(__('Close','js-support-ticket')); ?>" /></a>
+                                        <a title="<?php echo esc_html(__('Close','js-support-ticket')); ?>" href="<?php echo esc_url(wp_nonce_url($url, 'change-required-status-'.$field->id)); ?>" ><img height="15" width="15" src="<?php echo esc_url(JSST_PLUGIN_URL) . 'includes/images/close.png'; ?>" title="<?php echo esc_html(__('Close','js-support-ticket')); ?>" /></a>
                                 <?php } ?>
                             </td>
                             <td>
@@ -241,7 +241,7 @@ $type = array(
                                 <?php
                                     if($field->isuserfield==1){
                                         echo wp_kses('<a title="'. esc_html(__('Edit','js-support-ticket')).'" class="action-btn" href="?page=fieldordering&jstlay=adduserfeild&jssupportticketid='.esc_attr($field->id).'&fieldfor='.jssupportticket::$_data['fieldfor'].'&formid='.esc_attr($field->multiformid).'"><img alt="'. esc_html(__('Edit','js-support-ticket')).'" src="'.esc_url(JSST_PLUGIN_URL).'includes/images/edit.png" /></a>&nbsp;', JSST_ALLOWED_TAGS);
-                                        echo wp_kses('<a title="'. esc_html(__('Delete','js-support-ticket')).'" class="action-btn" onclick="return confirm(\''. esc_html(__('Are you sure you want to delete it?','js-support-ticket')).'\');" href="'.esc_url(wp_nonce_url('?page=fieldordering&task=removeuserfeild&action=jstask&jssupportticketid='.esc_attr($field->id).'&fieldfor='.jssupportticket::$_data['fieldfor'].'&formid='.esc_attr($field->multiformid),'remove-userfeild')).'"><img alt="'. esc_html(__('Delete','js-support-ticket')).'" src="'.esc_url(JSST_PLUGIN_URL).'includes/images/delete.png" /></a>', JSST_ALLOWED_TAGS);
+                                        echo wp_kses('<a title="'. esc_html(__('Delete','js-support-ticket')).'" class="action-btn" onclick="return confirm(\''. esc_html(__('Are you sure you want to delete it?','js-support-ticket')).'\');" href="'.esc_url(wp_nonce_url('?page=fieldordering&task=removeuserfeild&action=jstask&jssupportticketid='.esc_attr($field->id).'&fieldfor='.jssupportticket::$_data['fieldfor'].'&formid='.esc_attr($field->multiformid),'remove-userfeild-'.$field->id)).'"><img alt="'. esc_html(__('Delete','js-support-ticket')).'" src="'.esc_url(JSST_PLUGIN_URL).'includes/images/delete.png" /></a>', JSST_ALLOWED_TAGS);
                                     }else{
                                         echo '---';
                                     }

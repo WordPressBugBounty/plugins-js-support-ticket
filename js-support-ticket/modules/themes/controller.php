@@ -47,6 +47,9 @@ class JSSTthemesController {
         }
     }
     static function savetheme() {
+        if(!current_user_can('manage_options')){
+            return false;
+        }
         $nonce = JSSTrequest::getVar('_wpnonce');
         if (! wp_verify_nonce( $nonce, 'save-theme') ) {
             die( 'Security check Failed' );

@@ -443,7 +443,8 @@ class JSSTfieldorderingModel {
             $query = "SELECT id FROM " . jssupportticket::$_db->prefix . "js_ticket_fieldsordering WHERE fieldfor = ".esc_sql($fieldfor)." AND (userfieldtype = 'radio' OR userfieldtype = 'combo'OR userfieldtype = 'depandant_field') AND depandant_field = '" . esc_sql($parentfield) . "' ";
             $parent = jssupportticket::$_db->get_var($query);
         }
-        $jsFunction = 'getDataOfSelectedField();';
+        $nonce = wp_create_nonce("get-section-to-fill-values-".$fieldfor);
+        $jsFunction = 'getDataOfSelectedField("'.$nonce.'");';
         $html = JSSTformfield::select('parentfield', $data, (isset($parent) && $parent !='') ? $parent : '', esc_html(__('Select', 'js-support-ticket')) .'&nbsp;'. esc_html(__('Parent Field', 'js-support-ticket')), array('onchange' => $jsFunction, 'class' => 'inputbox one js-form-select-field', 'data-validation' => 'required'));
         $html = jssupportticketphplib::JSST_htmlentities($html);
         $data = wp_json_encode($html);
@@ -501,8 +502,9 @@ class JSSTfieldorderingModel {
     }
 
     function getSectionToFillValues() {
+        $fieldfor = JSSTrequest::getVar('fieldfor');
         $nonce = JSSTrequest::getVar('_wpnonce');
-        if (! wp_verify_nonce( $nonce, 'get-section-to-fill-values') ) {
+        if (! wp_verify_nonce( $nonce, 'get-section-to-fill-values-'.$fieldfor) ) {
             die( 'Security check Failed' );
         }
         $field = JSSTrequest::getVar('pfield');
@@ -583,8 +585,9 @@ class JSSTfieldorderingModel {
                     </div>
                     <img id="popup_cross" class="userpopup-close" onClick="close_popup();" src="' . esc_url(JSST_PLUGIN_URL) . 'includes/images/close-icon-white.png" alt="'. esc_html(__('Close','js-support-ticket')).'">
                 </div>';
+        $nonce_id = isset($data->id) ? $data->id : '';
         $adminurl = admin_url("?page=fieldordering&task=savefeild&formid=".esc_attr($data->multiformid));
-        $html .= '<form id="adminForm" class="popup-field-from" method="post" action="' . wp_nonce_url($adminurl ,"save-feild").'">';
+        $html .= '<form id="adminForm" class="popup-field-from" method="post" action="' . wp_nonce_url($adminurl ,"save-feild-".$nonce_id).'">';
         $html .= '<div class="popup-field-wrapper">
                     <div class="popup-field-title">' . esc_html(__('Field Title', 'js-support-ticket')) . '<font class="required-notifier">*</font></div>
                     <div class="popup-field-obj">' . JSSTformfield::text('fieldtitle', isset($data->fieldtitle) ? $data->fieldtitle : 'text', '', array('class' => 'inputbox one', 'data-validation' => 'required')) . '</div>
@@ -802,12 +805,12 @@ class JSSTfieldorderingModel {
     }
 
     function DataForDepandantField(){
+        $childfield = JSSTrequest::getVar('child');
         $nonce = JSSTrequest::getVar('_wpnonce');
-        if (! wp_verify_nonce( $nonce, 'data-for-depandant-field') ) {
+        if (! wp_verify_nonce( $nonce, 'data-for-depandant-field-'.$childfield) ) {
             die( 'Security check Failed' );
         }
         $val = JSSTrequest::getVar('fvalue');
-        $childfield = JSSTrequest::getVar('child');
         $query = "SELECT userfieldparams,fieldtitle,depandant_field,field FROM `".jssupportticket::$_db->prefix."js_ticket_fieldsordering` WHERE field = '".esc_sql($childfield)."'";
         $data = jssupportticket::$_db->get_row($query);
         $decoded_data = json_decode($data->userfieldparams);
@@ -824,7 +827,7 @@ class JSSTfieldorderingModel {
         }
         $jsFunction = '';
         if ($data->depandant_field != null) {
-            $wpnonce = wp_create_nonce("data-for-depandant-field");
+            $wpnonce = wp_create_nonce("data-for-depandant-field-".$data->depandant_field);
             $jsFunction = "getDataForDepandantField('".$wpnonce."','" . $data->field . "','" . $data->depandant_field . "',1);";
         }
         $textvar =  ($flag == 1) ? esc_html(__('Select', 'js-support-ticket')).' '.esc_html($data->fieldtitle) : '';

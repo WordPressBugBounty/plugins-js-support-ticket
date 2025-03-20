@@ -145,7 +145,7 @@ div.js-ticket-radio-box input.js-ticket-radio-btn{margin-right: 5px;vertical-ali
 div.js-ticket-radio-box label{display: inline-block !important;margin:0px;vertical-align: middle;}
 span.js-attachment-file-box{float: left;width:100%; padding: 5px 5px;position: relative;display: inline-block;min-height: 48px;}
 div.js-ticket-add-form-wrapper div.js-ticket-from-field-wrp{position: relative;}
-span.help-block {font-size: 14px;position: absolute;bottom: -22px;width: 100%;left: 0;}
+span.jsst-help-block {font-size: 14px;position: absolute;bottom: -22px;width: 100%;left: 0;}
 select.js-ticket-select-field{padding-top: 11px;padding-bottom: 11px;}
 select.js-ticket-premade-select{padding-top: 11px;padding-bottom: 11px;}
 div.js-ticket-premade-msg-wrp div.js-ticket-premade-field-wrp select#departmentid{padding-top: 11px;padding-bottom: 11px;}

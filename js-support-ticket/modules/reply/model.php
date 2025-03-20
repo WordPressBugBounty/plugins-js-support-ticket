@@ -374,11 +374,11 @@ class JSSTreplyModel {
     }
 
     function getReplyDataByID() {
+        $replyid = JSSTrequest::getVar('val');
         $nonce = JSSTrequest::getVar('_wpnonce');
-        if (! wp_verify_nonce( $nonce, 'get-reply-data-by-id') ) {
+        if (! wp_verify_nonce( $nonce, 'get-reply-data-by-id-'.$replyid) ) {
             die( 'Security check Failed' );
         }
-        $replyid = JSSTrequest::getVar('val');
         if(!is_numeric($replyid)) return false;
         $query = "SELECT reply.id AS replyid, reply.message AS message
                     FROM `" . jssupportticket::$_db->prefix . "js_ticket_replies` AS reply

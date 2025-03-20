@@ -230,7 +230,8 @@ if (jssupportticket::$_config['offline'] == 2) {
             ?>
 
             <?php if($showform): ?>
-            <form class="js-ticket-form" method="post" action="<?php echo esc_url(wp_nonce_url(jssupportticket::makeUrl(array('jstmod'=>'ticket', 'task'=>'saveticket')),"save-ticket")); ?>" id="adminTicketform" enctype="multipart/form-data">
+            <?php $nonce_id = isset(jssupportticket::$_data[0]->id) ?jssupportticket::$_data[0]->id :''; ?>
+            <form class="js-ticket-form" method="post" action="<?php echo esc_url(wp_nonce_url(jssupportticket::makeUrl(array('jstmod'=>'ticket', 'task'=>'saveticket')),"save-ticket-".$nonce_id)); ?>" id="adminTicketform" enctype="multipart/form-data">
                 <?php
                 $i = '';
                 $fieldcounter = 0;
@@ -361,7 +362,7 @@ if (jssupportticket::$_config['offline'] == 2) {
                                         if ($field->visible_field != null) {
                                             $visibleparams = JSSTincluder::getJSModel('fieldordering')->getDataForVisibleField($field->visible_field);
                                             foreach ($visibleparams as $visibleparam) {
-                                                $wpnonce = wp_create_nonce("is-field-required");
+                                                $wpnonce = wp_create_nonce("is-field-required-".$visibleparam->visibleParentField);
                                                 $jsVisibleFunction .= " getDataForVisibleField('".$wpnonce."', this.value, '" . $visibleparam->visibleParent . "','" . $visibleparam->visibleParentField . "','".$visibleparam->visibleValue."','".$visibleparam->visibleCondition."');";
                                                 //for default value
                                                 if (($visibleparam->visibleValue == $departmentid && $visibleparam->visibleCondition == 1) || ($visibleparam->visibleValue != $departmentid && $departmentid != 0 && $visibleparam->visibleCondition == 0)) {
@@ -532,7 +533,7 @@ if (jssupportticket::$_config['offline'] == 2) {
                                                      <div class="js_ticketattachment">
                                                              ' . esc_html($attachment->filename) . ' ( ' . esc_html($attachment->filesize) . ' ) ' . '
                                                     </div>
-                                                    <a class="js-ticket-delete-attachment" href="'.wp_nonce_url(jssupportticket::makeUrl(array('jstmod'=>'attachment', 'task'=>'deleteattachment', 'action'=>'jstask', 'id'=>$attachment->id, 'tikcetid'=>jssupportticket::$_data[0]->id, 'jsstpageid'=>jssupportticket::getPageid())),'delete-attachement') . '">' . esc_html(__('Remove','js-support-ticket')) . '</a>
+                                                    <a class="js-ticket-delete-attachment" href="'.wp_nonce_url(jssupportticket::makeUrl(array('jstmod'=>'attachment', 'task'=>'deleteattachment', 'action'=>'jstask', 'id'=>$attachment->id, 'tikcetid'=>jssupportticket::$_data[0]->id, 'jsstpageid'=>jssupportticket::getPageid())),'delete-attachement-'.$attachment->id) . '">' . esc_html(__('Remove','js-support-ticket')) . '</a>
                                                 </div>', JSST_ALLOWED_TAGS);
                                          }
                                  } ?>

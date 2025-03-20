@@ -14,28 +14,41 @@ class JSSTPostinstallationModel {
             }
     }
 
-	function storeConfigurations($data){
+    function storeConfigurations($data){
         if (empty($data))
             return false;
+
         $error = false;
         unset($data['action']);
         unset($data['form_request']);
+
+        // Sanitize all input data
         $data = jssupportticket::JSST_sanitizeData($data); // JSST_sanitizeData() function uses wordpress santize functions
+
+        // Additional security for specific parameters
+        if (isset($data['support_custom_img'])) {
+            $data['support_custom_img'] = sanitize_file_name($data['support_custom_img']); // Prevent directory traversal
+        }
+
         foreach ($data as $key => $value) {
             $query = "UPDATE `" . jssupportticket::$_db->prefix . "js_ticket_config` SET `configvalue` = '" . esc_sql($value) . "' WHERE `configname`= '" . esc_sql($key) . "'";
             jssupportticket::$_db->query($query);
-            if(jssupportticket::$_db->last_error == null){
+
+            // Track status for error handling
+            if (jssupportticket::$_db->last_error == null) {
                 $status = 0;
-            }else{
+            } else {
                 $status = 1;
             }
         }
+
         if ($status == 0) {
-            JSSTmessage::setMessage(esc_html(__('Configuration','js-support-ticket')).' '. esc_html(__('has been changed', 'js-support-ticket')), 'updated');
+            JSSTmessage::setMessage(esc_html(__('Configuration', 'js-support-ticket')) . ' ' . esc_html(__('has been changed', 'js-support-ticket')), 'updated');
         } else {
             JSSTincluder::getJSModel('systemerror')->addSystemError(); // if there is an error add it to system errorrs
-            JSSTmessage::setMessage(esc_html(__('Configuration','js-support-ticket')).' '. esc_html(__('has not been changed', 'js-support-ticket')), 'error');
+            JSSTmessage::setMessage(esc_html(__('Configuration', 'js-support-ticket')) . ' ' . esc_html(__('has not been changed', 'js-support-ticket')), 'error');
         }
+
         return;
     }
 

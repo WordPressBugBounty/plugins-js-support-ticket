@@ -32,8 +32,8 @@ $jssupportticket_css .= '
 	form#loginform-custom p.login-username input#user_login{border-radius: unset;width:100%;padding: 10px;height: 50px;}
 	form#loginform-custom p.login-password input#user_pass{border-radius: unset;width:100%;padding: 10px;height: 50px;}
 	form#loginform-custom p.login-submit input#wp-submit{min-width: 120px;border-radius: unset;padding: 20px 10px;line-height: initial;}
-	span.help-block{font-size:14px;}
-	span.help-block{color:red;}
+	span.jsst-help-block{font-size:14px;}
+	span.jsst-help-block{color:red;}
 ';
 /*Code For Colors*/
 $jssupportticket_css .= '

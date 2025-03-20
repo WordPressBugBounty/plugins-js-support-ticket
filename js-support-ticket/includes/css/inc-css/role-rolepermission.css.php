@@ -30,8 +30,8 @@ $jssupportticket_css .= '
 	div.js-ticket-role-wrp div.js-ticket-add-role-field-wrp.js-ticket-margin-bottom{margin-bottom: 10px;}
 	input.js-ticket-checkbox{vertical-align: sub;}
 	label.js-ticket-label{display: inline-block;margin: 0px;vertical-align:middle;}
-	span.help-block{font-size:14px;}
-span.help-block{color:red;}
+	span.jsst-help-block{font-size:14px;}
+span.jsst-help-block{color:red;}
 
 
 

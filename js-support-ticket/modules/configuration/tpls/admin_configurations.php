@@ -239,7 +239,7 @@ $defaultcustom = array(
 );
 $defaultregisterpage = array(
     (object) array('id' => '1', 'text' => esc_html(__('JS Help Desk Register Page', 'js-support-ticket'))),
-    (object) array('id' => '3', 'text' => esc_html(__('WordPress Default Login Page', 'js-support-ticket'))),
+    (object) array('id' => '3', 'text' => esc_html(__('WordPress Default Register Page', 'js-support-ticket'))),
     (object) array('id' => '2', 'text' => esc_html(__('Custom', 'js-support-ticket')))
 );
 $screentagposition = array(

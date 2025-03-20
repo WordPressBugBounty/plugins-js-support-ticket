@@ -44,8 +44,9 @@ class JSSTemailController {
     }
 
     static function saveemail() {
+        $id = JSSTrequest::getVar('id');
         $nonce = JSSTrequest::getVar('_wpnonce');
-        if (! wp_verify_nonce( $nonce, 'save-email') ) {
+        if (! wp_verify_nonce( $nonce, 'save-email-'.$id) ) {
             die( 'Security check Failed' );
         }
         $data = JSSTrequest::get('post');
@@ -60,11 +61,11 @@ class JSSTemailController {
     }
 
     static function deleteemail() {
+        $id = JSSTrequest::getVar('emailid');
         $nonce = JSSTrequest::getVar('_wpnonce');
-        if (! wp_verify_nonce( $nonce, 'delete-email') ) {
+        if (! wp_verify_nonce( $nonce, 'delete-email-'.$id) ) {
             die( 'Security check Failed' );
         }
-        $id = JSSTrequest::getVar('emailid');
         JSSTincluder::getJSModel('email')->removeEmail($id);
         if (is_admin()) {
             $url = admin_url("admin.php?page=email&jstlay=emails");

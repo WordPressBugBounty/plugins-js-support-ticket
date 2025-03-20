@@ -73,7 +73,7 @@ $jssupportticket_js ='
             var username = jQuery("input#username").val();
             var name = jQuery("input#name").val();
             var emailaddress = jQuery("input#emailaddress").val();
-            jQuery.post(ajaxurl, {action: "jsticket_ajax", name: name, username: username, emailaddress: emailaddress, jstmod: "'.$jstmod.'", task: "'.$task.'", "_wpnonce":"'. esc_attr($nonce) .'"}, function (data) {
+            jQuery.post(ajaxurl, {action: "jsticket_ajax", name: name, username: username, emailaddress: emailaddress, jstmod: "'.$jstmod.'", task: "'.$searchTask.'", "_wpnonce":"'. esc_attr($searchNonce) .'"}, function (data) {
                 if (data) {
                     jQuery("div#userpopup-records").html(jsstDecodeHTML(data));
                     setUserLink();
@@ -397,7 +397,7 @@ $link_export = admin_url('admin.php?page=export&task='.$t_name.'&action=jstask&u
 								<a href="<?php echo esc_url(admin_url('admin.php?page=reports&jstlay=userdetailreport&id='.$agent->id.'&date_start='.jssupportticket::$_data['filter']['date_start'].'&date_end='.jssupportticket::$_data['filter']['date_end'])); ?>" class="js-admin-staff-anchor-wrapper" title="<?php echo esc_html(__('Ticket', 'js-support-ticket')); ?>">
 									<div class="js-admin-staff-cnt">
 										<div class="js-report-staff-image">
-											<?php echo wp_kses(jsst_get_avatar(JSSTincluder::getJSModel('jssupportticket')->getWPUidById($agent->id)), JSST_ALLOWED_TAGS); ?>
+											<?php echo wp_kses(jsst_get_avatar($agent->id), JSST_ALLOWED_TAGS); ?>
 										</div>
 										<div class="js-report-staff-cnt">
 											<div class="js-report-staff-info js-report-staff-name">

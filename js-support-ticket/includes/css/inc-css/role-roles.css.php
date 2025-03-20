@@ -53,8 +53,8 @@ $jssupportticket_css .= '
 	div.js-ticket-table-body div.js-ticket-data-row div.js-ticket-table-body-col a.js-ticket-table-action-btn img {display:inline-block;}
 	div.js-ticket-table-body div.js-ticket-data-row div.js-ticket-table-body-col:first-child{text-align: left;}
 	span.js-ticket-display-block{display: none;}
-	span.help-block{font-size:14px;}
-	span.help-block{color:red;}
+	span.jsst-help-block{font-size:14px;}
+	span.jsst-help-block{color:red;}
 ';
 /*Code For Colors*/
 $jssupportticket_css .= '

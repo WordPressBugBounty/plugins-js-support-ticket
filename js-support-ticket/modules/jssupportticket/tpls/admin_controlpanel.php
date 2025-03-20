@@ -394,7 +394,7 @@ wp_add_inline_script('ticket-google-charts-handle',$jssupportticket_js);
                                 <div class="js-cp-tkt-list">
                                     <div class="js-cp-tkt-list-left">
                                         <div class="js-cp-tkt-image">
-                                            <?php echo wp_kses(jsst_get_avatar(JSSTincluder::getJSModel('jssupportticket')->getWPUidById($ticket->uid)), JSST_ALLOWED_TAGS); ?>
+                                            <?php echo wp_kses(jsst_get_avatar($ticket->uid), JSST_ALLOWED_TAGS); ?>
                                         </div>
                                         <div class="js-cp-tkt-cnt">
                                             <div class="js-cp-tkt-info name"><?php echo esc_html($ticket->name); ?></div>
@@ -464,7 +464,7 @@ wp_add_inline_script('ticket-google-charts-handle',$jssupportticket_js);
                                     ?>
                                     <div class="js-cp-feedback">
                                         <div class="js-cp-feedback-image">
-                                            <?php echo wp_kses(jsst_get_avatar(JSSTincluder::getJSModel('jssupportticket')->getWPUidById($history->uid), 'js-cp-feedback-img'), JSST_ALLOWED_TAGS); ?>
+                                            <?php echo wp_kses(jsst_get_avatar($history->uid, 'js-cp-feedback-img'), JSST_ALLOWED_TAGS); ?>
                                         </div>
                                         <div class="js-cp-feedback-cnt">
                                             <div class="js-cp-feedback-row">

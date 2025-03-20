@@ -64,9 +64,9 @@ $jssupportticket_js ='
             window.location.href = newUrl;
         });
     });
-    function getDownloadById(value) {
+    function getDownloadById(value, nonce) {
         ajaxurl = "'.esc_url(admin_url('admin-ajax.php')).'";
-        jQuery.post(ajaxurl, {action: "jsticket_ajax", downloadid: value, jstmod: "download", task: "getDownloadById",jsstpageid:'.get_the_ID().', "_wpnonce":"'.esc_attr(wp_create_nonce("get-download-by-id")).'"}, function (data) {
+        jQuery.post(ajaxurl, {action: "jsticket_ajax", downloadid: value, jstmod: "download", task: "getDownloadById",jsstpageid:'.get_the_ID().', "_wpnonce": nonce}, function (data) {
             if (data) {
                 var obj = jQuery.parseJSON(data);
                 jQuery("div#js-ticket-main-content").html(jsstDecodeHTML(obj.data));
@@ -677,7 +677,7 @@ if (jssupportticket::$_config['offline'] == 2) {
                             <div class="js-ticket-row">
                                 <div class="js-ticket-first-left">
                                     <div class="js-ticket-user-img-wrp">
-                                        <?php echo wp_kses(jsst_get_avatar(JSSTincluder::getJSModel('jssupportticket')->getWPUidById($ticket->uid)), JSST_ALLOWED_TAGS); ?>
+                                        <?php echo wp_kses(jsst_get_avatar($ticket->uid), JSST_ALLOWED_TAGS); ?>
                                     </div>
                                     <div class="js-ticket-ticket-subject">
                                         <div class="js-ticket-data-row">
@@ -763,7 +763,8 @@ if (jssupportticket::$_config['offline'] == 2) {
                                 <div class="js-ticket-data-tit">
                                     <?php echo esc_html($download->title); ?>
                                 </div>
-                                <button type="button" class="js-ticket-data-btn" onclick="getDownloadById(<?php echo esc_js($download->downloadid) ?>)">
+                                <?php $nonce = wp_create_nonce("get-download-by-id-".$download->downloadid); ?>
+                                <button type="button" class="js-ticket-data-btn" onclick="getDownloadById(<?php echo esc_js($download->downloadid) ?>, '<?php echo esc_js($nonce) ?>')">
                                     <?php echo esc_html(__('Download','js-support-ticket')); ?>
                                 </button>
                             </div>
@@ -925,12 +926,12 @@ if (jssupportticket::$_config['offline'] == 2) {
                         <div class="js-ticket-row">
                             <div class="js-col-xs-12 js-col-md-12 js-ticket-toparea">
                                 <div class="js-ticket-first-left">
-                                    <div class="js-ticket-user-img-wrp">
-                                        <?php if (in_array('agent',jssupportticket::$_active_addons) && $ticket->staffphoto) { ?>
+                                    <div class="js-ticket-user-img-wrp 01">
+                                        <?php /* if (in_array('agent',jssupportticket::$_active_addons) && $ticket->staffphoto) { ?>
                                             <img class="js-ticket-staff-img" src="<?php echo esc_url(jssupportticket::makeUrl(array('jstmod'=>'agent','task'=>'getStaffPhoto','action'=>'jstask','jssupportticketid'=> $ticket->staffid ,'jsstpageid'=>get_the_ID())));?> ">
-                                        <?php } else {
-                                            echo wp_kses(jsst_get_avatar(JSSTincluder::getJSModel('jssupportticket')->getWPUidById($ticket->uid)), JSST_ALLOWED_TAGS);
-                                        } ?>
+                                        <?php } else { */
+                                            echo wp_kses(jsst_get_avatar($ticket->uid), JSST_ALLOWED_TAGS);
+                                        // } ?>
                                     </div>
                                     <div class="js-ticket-ticket-subject">
                                         <div class="js-ticket-data-row">

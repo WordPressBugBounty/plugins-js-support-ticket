@@ -33,8 +33,8 @@ $jssupportticket_css .= '
 	div.js-ticket-form-btn-wrp{float: left;width:calc(100% - 20px);margin: 0px 10px;text-align: center;padding: 25px 0px 10px 0px;}
 	div.js-ticket-form-btn-wrp input.js-ticket-save-button{padding: 20px 10px;margin-right: 10px;min-width: 120px;border-radius: 0px;line-heght: initial;}
 	div.js-ticket-form-btn-wrp a.js-ticket-cancel-button{display: inline-block; padding: 20px 10px;min-width: 120px;border-radius: 0px;line-heght: initial;text-decoration: none;}
-	span.help-block{font-size:14px;}
-	span.help-block{color:red;}
+	span.jsst-help-block{font-size:14px;}
+	span.jsst-help-block{color:red;}
 
 	select ::-ms-expand {display:none !important;}
 	select{-webkit-appearance:none !important;}

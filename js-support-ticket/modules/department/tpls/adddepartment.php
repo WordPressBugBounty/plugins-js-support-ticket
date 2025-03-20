@@ -26,10 +26,11 @@ if (jssupportticket::$_config['offline'] == 2) {
                     wp_add_inline_script('js-support-ticket-main-js',$jssupportticket_js);
                     ?>
                     <?php /* JSSTbreadcrumbs::getBreadcrumbs(); */ ?>
-                    <?php include_once(JSST_PLUGIN_PATH . 'includes/header.php'); ?>
+                    <?php include_once(JSST_PLUGIN_PATH . 'includes/header.php');
+                    $nonce_id = isset(jssupportticket::$_data[0]->id) ? jssupportticket::$_data[0]->id : ''; ?>
 
                     <div class="js-ticket-add-form-wrapper">
-                        <form class="js-ticket-form" method="post" action="<?php echo esc_url(wp_nonce_url(jssupportticket::makeUrl(array('jstmod'=>'department', 'task'=>'savedepartment')),"save-department")); ?>">
+                        <form class="js-ticket-form" method="post" action="<?php echo esc_url(wp_nonce_url(jssupportticket::makeUrl(array('jstmod'=>'department', 'task'=>'savedepartment')),"save-department-".$nonce_id)); ?>">
                             <div class="js-ticket-from-field-wrp js-ticket-from-field-wrp-full-width">
                                 <div class="js-ticket-from-field-title">
                                     <?php echo esc_html(__('Title', 'js-support-ticket')); ?>&nbsp;<span style="color: red;" >*</span>

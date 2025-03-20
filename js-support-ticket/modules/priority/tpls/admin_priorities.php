@@ -127,14 +127,14 @@ JSSTmessage::getMessage(); ?>
                                     <?php $url = '?page=priority&task=makedefault&action=jstask&priorityid='.esc_attr($priority->id);
                                     if($pagenum > 1){
                                         $url .= '&pagenum=' . $pagenum;
-                                    }?><a title="<?php echo esc_html(__('Default','js-support-ticket')); ?>" href="<?php echo esc_url(wp_nonce_url($url, 'make-default')); ?>" ><img alt="<?php echo esc_html(__('Default','js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/<?php echo esc_attr($isdefault); ?>" /></a></td>
+                                    }?><a title="<?php echo esc_html(__('Default','js-support-ticket')); ?>" href="<?php echo esc_url(wp_nonce_url($url, 'make-default-'.$priority->id)); ?>" ><img alt="<?php echo esc_html(__('Default','js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/<?php echo esc_attr($isdefault); ?>" /></a></td>
                                 <td><span class="js-support-ticket-table-responsive-heading"><?php
                             echo esc_html(__('Color', 'js-support-ticket'));
                             echo " : ";
                             ?></span> <span class="js-ticket-admin-prirrity-color" style="background:<?php echo esc_attr($priority->prioritycolour); ?>;color:#ffffff;"> <?php echo esc_html($priority->prioritycolour); ?></span></td>
                                 <td>
                                     <a title="<?php echo esc_html(__('Edit','js-support-ticket')); ?>" class="action-btn" href="?page=priority&jstlay=addpriority&jssupportticketid=<?php echo esc_attr($priority->id); ?>"><img alt="<?php echo esc_html(__('Edit','js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/edit.png" /></a>&nbsp;&nbsp;
-                                    <a title="<?php echo esc_html(__('Delete','js-support-ticket')); ?>" class="action-btn" onclick="return confirm('<?php echo esc_html(__('Are you sure you want to delete it?', 'js-support-ticket')); ?>');" href="<?php echo esc_url(wp_nonce_url('?page=priority&task=deletepriority&action=jstask&priorityid='.esc_attr($priority->id),'delete-priority'));?>"><img alt="<?php echo esc_html(__('Delete','js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/delete.png" /></a>
+                                    <a title="<?php echo esc_html(__('Delete','js-support-ticket')); ?>" class="action-btn" onclick="return confirm('<?php echo esc_html(__('Are you sure you want to delete it?', 'js-support-ticket')); ?>');" href="<?php echo esc_url(wp_nonce_url('?page=priority&task=deletepriority&action=jstask&priorityid='.esc_attr($priority->id),'delete-priority-'.$priority->id));?>"><img alt="<?php echo esc_html(__('Delete','js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/delete.png" /></a>
                                 </td>
                             </tr>
                         <?php

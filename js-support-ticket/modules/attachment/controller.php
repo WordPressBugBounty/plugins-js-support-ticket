@@ -53,6 +53,10 @@ class JSSTattachmentController {
 
     static function deleteattachment() {
         $id = JSSTrequest::getVar('id');
+        $nonce = JSSTrequest::getVar('_wpnonce');
+        if (! wp_verify_nonce( $nonce, 'delete-attachement-'.$id)  && !is_admin()) {
+            die( 'Security check Failed' );
+        }
         $call_from = JSSTrequest::getVar('call_from','',1);
         JSSTincluder::getJSModel('attachment')->removeAttachment($id);
         if (is_admin()) {

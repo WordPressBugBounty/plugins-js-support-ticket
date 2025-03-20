@@ -130,7 +130,7 @@ class JSSTcustomfields {
                     $i = 0;
                     $jsFunction = '';
                     if ($field->depandant_field != null) {
-                        $wpnonce = wp_create_nonce("data-for-depandant-field");
+                        $wpnonce = wp_create_nonce("data-for-depandant-field-".$field->depandant_field);
                         $jsFunction = "getDataForDepandantField('".$wpnonce."','" . $field->field . "','" . $field->depandant_field . "',2);";
                     }
                     $valuearray = jssupportticketphplib::JSST_explode(', ',$value);
@@ -160,7 +160,7 @@ class JSSTcustomfields {
                 //code for handling dependent field
                 $jsFunction = '';
                 if ($field->depandant_field != null) {
-                    $wpnonce = wp_create_nonce("data-for-depandant-field");
+                    $wpnonce = wp_create_nonce("data-for-depandant-field-".$field->depandant_field);
                     $jsFunction = "getDataForDepandantField('".$wpnonce."','" . $field->field . "','" . $field->depandant_field . "',1);";
                 }
                 //code for handling visible field
@@ -168,7 +168,7 @@ class JSSTcustomfields {
                 if ($field->visible_field != null) {
                     $visibleparams = JSSTincluder::getJSModel('fieldordering')->getDataForVisibleField($field->visible_field);
                     foreach ($visibleparams as $visibleparam) {
-                        $wpnonce = wp_create_nonce("is-field-required");
+                        $wpnonce = wp_create_nonce("is-field-required-".$visibleparam->visibleParentField);
                         $jsVisibleFunction .= " getDataForVisibleField('".$wpnonce."', this.value, '" . $visibleparam->visibleParent . "','" . $visibleparam->visibleParentField . "','".$visibleparam->visibleValue."','".$visibleparam->visibleCondition."');";
                     }
                     $jsFunction.=$jsVisibleFunction;
@@ -190,7 +190,7 @@ class JSSTcustomfields {
                 //code for handling dependent field
                 $jsFunction = '';
                 if ($field->depandant_field != null) {
-                    $wpnonce = wp_create_nonce("data-for-depandant-field");
+                    $wpnonce = wp_create_nonce("data-for-depandant-field-".$field->depandant_field);
                     $jsFunction = "getDataForDepandantField('".$wpnonce."','" . $field->field . "','" . $field->depandant_field . "');";
                 }
                 //end
@@ -350,7 +350,7 @@ class JSSTcustomfields {
                     }
                     $jsFunction = '';
                     if ($field->depandant_field != null) {
-                        $wpnonce = wp_create_nonce("data-for-depandant-field");
+                        $wpnonce = wp_create_nonce("data-for-depandant-field-".$field->depandant_field);
                         $jsFunction = "getDataForDepandantField('".$wpnonce."','" . $field->field . "','" . $field->depandant_field . "',2);";
                     }
                     $html .= '<div class="js-form-cust-rad-fld-wrp">';
@@ -371,7 +371,7 @@ class JSSTcustomfields {
                         $i = 0;
                         $jsFunction = '';
                         if ($field->depandant_field != null) {
-                            $wpnonce = wp_create_nonce("data-for-depandant-field");
+                            $wpnonce = wp_create_nonce("data-for-depandant-field-".$field->depandant_field);
                             $jsFunction = "getDataForDepandantField('".$wpnonce."','" . $field->field . "','" . $field->depandant_field . "',2);";
                         }
                         $valuearray = jssupportticketphplib::JSST_explode(', ',$value);
@@ -405,7 +405,7 @@ class JSSTcustomfields {
                 //code for handling dependent field
                 $jsFunction = '';
                 if ($field->depandant_field != null) {
-                    $wpnonce = wp_create_nonce("data-for-depandant-field");
+                    $wpnonce = wp_create_nonce("data-for-depandant-field-".$field->depandant_field);
                     $jsFunction = "getDataForDepandantField('".$wpnonce."','" . $field->field . "','" . $field->depandant_field . "',1);";
                 }
                 //end
@@ -425,7 +425,7 @@ class JSSTcustomfields {
                 //code for handling dependent field
                 $jsFunction = '';
                 if ($field->depandant_field != null) {
-                    $wpnonce = wp_create_nonce("data-for-depandant-field");
+                    $wpnonce = wp_create_nonce("data-for-depandant-field-".$field->depandant_field);
                     $jsFunction = "getDataForDepandantField('".$wpnonce."','" . $field->field . "','" . $field->depandant_field . "');";
                 }
                 //end

@@ -104,9 +104,10 @@ wp_add_inline_script('js-support-ticket-main-js',$jssupportticket_js);
              (object) array('id' => 50, 'text' => esc_html(__('50%', 'js-support-ticket'))),
             (object) array('id' => 100, 'text' => esc_html(__('100%', 'js-support-ticket'))));
         ?>
+        <?php $nonce_id = isset(jssupportticket::$_data[0]['userfield']->id) ? jssupportticket::$_data[0]['userfield']->id : '';?>
         <div id="jsstadmin-data-wrp">
             <?php if(isset(jssupportticket::$_data['formid'])){ $mformid = jssupportticket::$_data['formid']; }else{ $mformid = JSSTincluder::getJSModel('ticket')->getDefaultMultiFormId(); } ?>
-            <form class="jsstadmin-form" id="adminForm" method="post" action="<?php echo esc_url(wp_nonce_url(admin_url("admin.php?page=fieldordering&task=saveuserfeild&formid=$mformid"),"save-userfeild")); ?>">
+            <form class="jsstadmin-form" id="adminForm" method="post" action="<?php echo esc_url(wp_nonce_url(admin_url("admin.php?page=fieldordering&task=saveuserfeild&formid=$mformid"),"save-userfeild-".$nonce_id)); ?>">
                 <div class="js-form-wrapper">
                     <div class="js-form-title"><?php echo esc_html(__('Field Type', 'js-support-ticket')); ?><font class="required-notifier">*</font></div>
                     <div class="js-form-value"><?php echo wp_kses(JSSTformfield::select('userfieldtype', $fieldtypes, isset(jssupportticket::$_data[0]['userfield']->userfieldtype) ? jssupportticket::$_data[0]['userfield']->userfieldtype : 'text', '', array('class' => 'inputbox one js-form-select-field', 'data-validation' => 'required', 'onchange' => 'toggleType(this.options[this.selectedIndex].value);')), JSST_ALLOWED_TAGS); ?></div>
@@ -471,10 +472,11 @@ wp_add_inline_script('js-support-ticket-main-js',$jssupportticket_js);
                     }
                 });
             }
-            function getDataOfSelectedField() {
+            function getDataOfSelectedField(nonce) {
                 ajaxurl = "'.esc_url(admin_url("admin-ajax.php")).'";
                 var field = jQuery("select#parentfield").val();
-                jQuery.post(ajaxurl, {action: "jsticket_ajax", jstmod: "fieldordering", task: "getSectionToFillValues", pfield: field, "_wpnonce":"'.esc_attr(wp_create_nonce("get-section-to-fill-values")).'"}, function (data) {
+                var ff = jQuery("input#fieldfor").val();
+                jQuery.post(ajaxurl, {action: "jsticket_ajax", jstmod: "fieldordering", task: "getSectionToFillValues", pfield: field, fieldfor: ff, "_wpnonce": nonce}, function (data) {
                     if (data) {
                         var d = jQuery.parseJSON(data);
                         jQuery("div#for-combo-options-head").show();

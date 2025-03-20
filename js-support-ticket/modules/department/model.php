@@ -70,8 +70,9 @@ class JSSTdepartmentModel {
     }
 
     function storeDepartment($data) {
+        $id = JSSTrequest::getVar('id');
         $nonce = JSSTrequest::getVar('_wpnonce');
-        if (! wp_verify_nonce( $nonce, 'save-department') ) {
+        if (! wp_verify_nonce( $nonce, 'save-department-'.$id) ) {
             die( 'Security check Failed' );
         }
         if ( in_array('agent',jssupportticket::$_active_addons) && JSSTincluder::getJSModel('agent')->isUserStaff()) {

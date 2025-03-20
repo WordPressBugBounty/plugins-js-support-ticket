@@ -56,11 +56,11 @@ class JSSTsystemerrorController {
     }
 
     static function deletesystemerror() {
+        $id = JSSTrequest::getVar('systemerrorid');
         $nonce = JSSTrequest::getVar('_wpnonce');
-        if (! wp_verify_nonce( $nonce, 'delete-systemerror') ) {
+        if (! wp_verify_nonce( $nonce, 'delete-systemerror-'.$id) ) {
             die( 'Security check Failed' );
         }
-        $id = JSSTrequest::getVar('systemerrorid');
         JSSTincluder::getJSModel('systemerror')->removeSystemError($id);
         if (is_admin()) {
             $url = admin_url("admin.php?page=systemerror&jstlay=systemerrors");

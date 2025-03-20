@@ -50,8 +50,8 @@ $jssupportticket_css .= '
 	div.js-ticket-form-btn-wrp input.js-ticket-save-button{padding: 20px 10px;margin-right: 10px;min-width: 120px;border-radius: 0px;}
 	div.js-ticket-form-btn-wrp a.js-ticket-cancel-button{display: inline-block; padding: 14px 10px;margin-right: 10px;min-width: 120px;border-radius: 0px;}
 
-	span.help-block{font-size:14px;}
-span.help-block{color:red;}
+	span.jsst-help-block{font-size:14px;}
+span.jsst-help-block{color:red;}
 ';
 /*Code For Colors*/
 $jssupportticket_css .= '

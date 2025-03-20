@@ -62,8 +62,8 @@ div#msgshowcategory div.js-ticket-notice-wrapper div.js-ticket-question{float: l
 div.js-ticket-answer-btn{float: left;width: 100%;padding-top: 10px;}
 div.js-ticket-answer-btn a.js-ticket-yes{display: inline-block;min-width: 100px;text-align: center;padding: 8px 5px;margin:0px 10px 0px 0px;}
 div.js-ticket-answer-btn a.js-ticket-no{display: inline-block;min-width: 100px;text-align: center;padding: 8px 5px;}
-span.help-block{font-size:14px;}
-span.help-block{color:red;}
+span.jsst-help-block{font-size:14px;}
+span.jsst-help-block{color:red;}
 
 select ::-ms-expand {display:none !important;}
 select{-webkit-appearance:none !important;}

@@ -131,11 +131,11 @@ class JSSTticketController {
     }
 
     function closeticket() {
+        $id = JSSTrequest::getVar('ticketid');
         $nonce = JSSTrequest::getVar('_wpnonce');
-        if (! wp_verify_nonce( $nonce, 'close-ticket') ) {
+        if (! wp_verify_nonce( $nonce, 'close-ticket-'.$id) ) {
             die( 'Security check Failed' );
         }
-        $id = JSSTrequest::getVar('ticketid');
         JSSTincluder::getJSModel('ticket')->closeTicket($id);
         if (is_admin()) {
             $url = admin_url("admin.php?page=ticket&jstlay=tickets");
@@ -171,8 +171,9 @@ class JSSTticketController {
     }
 
     static function saveticket() {
+        $id = JSSTrequest::getVar('id');
         $nonce = JSSTrequest::getVar('_wpnonce');
-        if (! wp_verify_nonce( $nonce, 'save-ticket') ) {
+        if (! wp_verify_nonce( $nonce, 'save-ticket-'.$id) ) {
             die( 'Security check Failed' );
         }
         $data = JSSTrequest::get('post');
@@ -226,11 +227,11 @@ class JSSTticketController {
     }
 
     static function transferdepartment() {
+        $data = JSSTrequest::get('post');
         $nonce = JSSTrequest::getVar('_wpnonce');
-        if (! wp_verify_nonce( $nonce, 'transfer-department') ) {
+        if (! wp_verify_nonce( $nonce, 'transfer-department-'.$data['ticketid']) ) {
             die( 'Security check Failed' );
         }
-        $data = JSSTrequest::get('post');
         JSSTincluder::getJSModel('ticket')->tickDepartmentTransfer($data);
         if (is_admin()) {
             $url = admin_url("admin.php?page=ticket&jstlay=ticketdetail&jssupportticketid=" . esc_attr($data['ticketid']));
@@ -242,11 +243,11 @@ class JSSTticketController {
     }
 
     static function assigntickettostaff() {
+        $data = JSSTrequest::get('post');
         $nonce = JSSTrequest::getVar('_wpnonce');
-        if (! wp_verify_nonce( $nonce, 'assign-ticket-to-staff') ) {
+        if (! wp_verify_nonce( $nonce, 'assign-ticket-to-staff-'.$data['ticketid']) ) {
             die( 'Security check Failed' );
         }
-        $data = JSSTrequest::get('post');
         JSSTincluder::getJSModel('ticket')->assignTicketToStaff($data);
         if (is_admin()) {
             $url = admin_url("admin.php?page=ticket&jstlay=ticketdetail&jssupportticketid=" . esc_attr($data['ticketid']));
@@ -260,7 +261,7 @@ class JSSTticketController {
     static function deleteticket() {
         $id = JSSTrequest::getVar('ticketid');
         $nonce = JSSTrequest::getVar('_wpnonce');
-        if (! wp_verify_nonce( $nonce, 'delete-ticket') ) {
+        if (! wp_verify_nonce( $nonce, 'delete-ticket-'.$id) ) {
             die( 'Security check Failed' );
         }
         JSSTincluder::getJSModel('ticket')->removeTicket($id);
@@ -278,18 +279,35 @@ class JSSTticketController {
     }
 
     static function enforcedeleteticket() {
+        // Sanitize and validate ticket ID
         $id = JSSTrequest::getVar('ticketid');
-        $nonce = JSSTrequest::getVar('_wpnonce');
-        if (! wp_verify_nonce( $nonce, 'enforce-delete-ticket') ) {
-            die( 'Security check Failed' );
+        if (!is_numeric($id) || intval($id) <= 0) {
+            die('Invalid ticket ID');
         }
+        $id = absint($id); // Ensure positive integer
+
+        // Validate Nonce
+        $nonce = JSSTrequest::getVar('_wpnonce');
+        if (!wp_verify_nonce($nonce, 'enforce-delete-ticket-' . $id)) {
+            die('Security check Failed');
+        }
+
+        // Only allow admins to delete any ticket
+        if (!current_user_can('manage_options')) {
+            die('You do not have permission to delete this ticket');
+        }
+
+        // Delete the ticket securely
         JSSTincluder::getJSModel('ticket')->removeEnforceTicket($id);
+
+        // Redirect securely
         if (is_admin()) {
             $url = admin_url("admin.php?page=ticket&jstlay=tickets");
         } else {
-            $url = jssupportticket::makeUrl(array('jstmod'=>'ticket', 'jstlay'=>'myticket'));
+            $url = jssupportticket::makeUrl(array('jstmod' => 'ticket', 'jstlay' => 'myticket'));
         }
-        wp_redirect($url);
+        
+        wp_safe_redirect($url);
         exit;
     }
 
@@ -307,11 +325,11 @@ class JSSTticketController {
     }
 
     static function reopenticket() { // for user
+        $ticketid = JSSTrequest::getVar('ticketid');
         $nonce = JSSTrequest::getVar('_wpnonce');
-        if (! wp_verify_nonce( $nonce, 'reopen-ticket') ) {
+        if (! wp_verify_nonce( $nonce, 'reopen-ticket-'.$ticketid) ) {
             die( 'Security check Failed' );
         }
-        $ticketid = JSSTrequest::getVar('ticketid');
         $data['ticketid'] = $ticketid;
         JSSTincluder::getJSModel('ticket')->reopenTicket($data);
         $url = "&jstlay=ticketdetail&jssupportticketid=" . esc_attr($data['ticketid']);
@@ -325,11 +343,11 @@ class JSSTticketController {
     }
 
     static function actionticket() {
+        $data = JSSTrequest::get('post');
         $nonce = JSSTrequest::getVar('_wpnonce');
-        if (! wp_verify_nonce( $nonce, 'action-ticket') ) {
+        if (! wp_verify_nonce( $nonce, 'action-ticket-'.$data['ticketid']) ) {
             die( 'Security check Failed' );
         }
-        $data = JSSTrequest::get('post');
         /* to handle actions */
         switch ($data['actionid']) {
             case 1: /* Change Priority Ticket */
@@ -439,8 +457,9 @@ class JSSTticketController {
         exit;
     }
     static function downloadallforreply() {
+        $downloadid = JSSTrequest::getVar('downloadid');
         $nonce = JSSTrequest::getVar('_wpnonce');
-        if (! wp_verify_nonce( $nonce, 'download-all-for-reply') ) {
+        if (! wp_verify_nonce( $nonce, 'download-all-for-reply-'.$downloadid) ) {
             die( 'Security check Failed' );
         }
         JSSTincluder::getJSModel('attachment')->getAllReplyDownloads();

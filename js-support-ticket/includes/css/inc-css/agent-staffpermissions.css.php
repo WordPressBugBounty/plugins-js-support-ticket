@@ -41,8 +41,8 @@ $jssupportticket_css .= '
 	div.js-ticket-form-btn-wrp a.js-ticket-cancel-button{display: inline-block; padding: 20px 10px;min-width: 120px;border-radius: 0px;line-height: initial;text-decoration: none;}
 	label.js-ticket-label{display: inline-block;margin: 0px;vertical-align:middle;}
 
-	span.help-block{font-size:14px;}
-span.help-block{color:red;}
+	span.jsst-help-block{font-size:14px;}
+span.jsst-help-block{color:red;}
 
 
 

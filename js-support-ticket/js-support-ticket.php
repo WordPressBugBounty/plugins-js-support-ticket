@@ -3,14 +3,14 @@
 /**
  * @package JS Help Desk
  * @author Ahmad Bilal
- * @version 2.9.2
+ * @version 2.9.3
  */
 /*
   Plugin Name: JS Help Desk
   Plugin URI: https://www.jshelpdesk.com
   Description: JS Help Desk is a trusted open source ticket system. JS Help Desk is a simple, easy to use, web-based customer support system. User can create ticket from front-end. JS Help Desk comes packed with lot features than most of the expensive(and complex) support ticket system on market. JS Help Desk provide you best industry help desk system.
   Author: JS Help Desk
-  Version: 2.9.2
+  Version: 2.9.3
   Text Domain: js-support-ticket
   License: GPLv3
   Author URI: https://www.jshelpdesk.com
@@ -67,7 +67,7 @@ class jssupportticket {
         self::$_data = array();
         self::$_search = array();
         self::$_captcha = array();
-        self::$_currentversion = '292';
+        self::$_currentversion = '293';
         self::$_addon_query = array('select'=>'','join'=>'','where'=>'');
         self::$_jshdsession = JSSTincluder::getObjectClass('wphdsession');
         global $wpdb;
@@ -133,7 +133,7 @@ class jssupportticket {
                     // restore colors data end
                     update_option('jsst_currentversion', self::$_currentversion);
                     include_once JSST_PLUGIN_PATH . 'includes/updates/updates.php';
-                    JSSTupdates::checkUpdates('292');
+                    JSSTupdates::checkUpdates('293');
                     JSSTincluder::getJSModel('jssupportticket')->updateColorFile();
                 }
             }
@@ -749,11 +749,11 @@ class jssupportticket {
 
     public function load_plugin_textdomain() {
         // load_plugin_textdomain('js-support-ticket', false, jssupportticketphplib::JSST_dirname(plugin_basename(__FILE__)) . '/languages/');
-        if(!load_plugin_textdomain('js-support-ticket')){
+        //if(!load_plugin_textdomain('js-support-ticket')){
             load_plugin_textdomain('js-support-ticket', false, jssupportticketphplib::JSST_dirname(plugin_basename(__FILE__)) . '/languages/');
-        }else{
+        /*}else{
             load_plugin_textdomain('js-support-ticket');
-        }
+        }*/
     }
 
     /*
@@ -1318,7 +1318,15 @@ function jsstAddLostPasswordLink($content) {
 add_filter( 'login_form_middle', 'jsstAddRegisterLink' );
 function jsstAddRegisterLink($content) {
     if(get_option('users_can_register')){
-        $content .= ' <a href="'.jssupportticket::makeUrl(array('jstmod'=>'jssupportticket','jstlay'=>'userregister')).'">'. esc_html(__('Register','js-support-ticket')) .'</a>';
+        $registerval = JSSTincluder::getJSModel('configuration')->getConfigValue('set_register_link');
+        $registerlink = JSSTincluder::getJSModel('configuration')->getConfigValue('register_link');
+        if($registerval == 3){
+            $content .= ' <a href="'.esc_url(wp_registration_url()).'">' . esc_html(__('Register', 'js-support-ticket')) . '</a>';
+        }else if($registerval == 2 && $registerlink != ""){
+            $content .= ' <a href="'.esc_url($registerlink).'">' . esc_html(__('Register', 'js-support-ticket')) . '</a>';
+        }else{
+            $content .= ' <a href="'.esc_url(jssupportticket::makeUrl(array('jstmod'=>'jssupportticket','jstlay'=>'userregister'))).'">'. esc_html(__('Register','js-support-ticket')) .'</a>';
+        }
     }
     return $content;
 }
@@ -1358,8 +1366,24 @@ function jsst_get_avatar($uid, $class = '') {
 
     // Ensure the UID is valid and numeric
     if (!is_numeric($uid) || !$uid) {
-        return '<img alt="image" src="' . esc_url($defaultImage) . '" class="' . esc_attr($class) . '" />';
+        return '<img alt="' . esc_html(__('image', 'js-support-ticket')) . '" src="' . esc_url($defaultImage) . '" class="' . esc_attr($class) . '" />';
     }
+
+    // in case if user is agent
+    if ( in_array('agent',jssupportticket::$_active_addons)) {
+        $query = "
+        SELECT id, photo FROM `" . jssupportticket::$_db->prefix."js_ticket_staff` AS staff WHERE staff.uid = ".esc_sql($uid);
+        $staff_data = jssupportticket::$_db->get_row($query);
+        if (!empty($staff_data->photo)) {
+            $maindir = wp_upload_dir();
+            $path = $maindir['baseurl'];
+
+            $imageurl = $path."/".jssupportticket::$_config['data_directory']."/staffdata/staff_".$staff_data->id."/".$staff_data->photo;
+
+            return '<img alt="' . esc_html(__('image', 'js-support-ticket')) . '" src="' . esc_url($imageurl) . '" class="' . esc_attr($class) . '" />';
+        }
+    }
+    $uid = JSSTincluder::getJSModel('jssupportticket')->getWPUidById($uid);
 
     // Get the avatar URL
     $avatar_url = get_avatar_url($uid, array('size' => 96));
@@ -1370,7 +1394,7 @@ function jsst_get_avatar($uid, $class = '') {
         return get_avatar($uid, 96, '', '', array('class' => $class));
     } else {
         // Fallback to the default image if the avatar URL is invalid
-        return '<img alt="image" src="' . esc_url($defaultImage) . '" class="' . esc_attr($class) . '" />';
+        return '<img alt="' . esc_html(__('image', 'js-support-ticket')) . '" src="' . esc_url($defaultImage) . '" class="' . esc_attr($class) . '" />';
     }
 }
 

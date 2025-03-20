@@ -39,6 +39,9 @@ class JSSTslugController {
     }
 
     function saveSlug() {
+        if(!current_user_can('manage_options')){
+            return false;
+        }
         $nonce = JSSTrequest::getVar('_wpnonce');
         if (! wp_verify_nonce( $nonce, 'save-slug') ) {
             die( 'Security check Failed' );
@@ -55,6 +58,9 @@ class JSSTslugController {
     }
 
     function saveprefix() {
+        if(!current_user_can('manage_options')){
+            return false;
+        }
         $nonce = JSSTrequest::getVar('_wpnonce');
         if (! wp_verify_nonce( $nonce, 'save-prefix') ) {
             die( 'Security check Failed' );
@@ -67,6 +73,9 @@ class JSSTslugController {
     }
 
     function savehomeprefix() {
+        if(!current_user_can('manage_options')){
+            return false;
+        }
         $nonce = JSSTrequest::getVar('_wpnonce');
         if (! wp_verify_nonce( $nonce, 'save-home-prefix') ) {
             die( 'Security check Failed' );

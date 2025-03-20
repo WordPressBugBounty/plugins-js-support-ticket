@@ -550,6 +550,9 @@ class JSSTjssupportticketModel {
 
     //translation code
     function getListTranslations() {
+        if(!current_user_can('manage_options')){
+            return false;
+        }
         $nonce = JSSTrequest::getVar('_wpnonce');
         if (! wp_verify_nonce( $nonce, 'get-list-translations') ) {
             die( 'Security check Failed' );
@@ -641,6 +644,9 @@ class JSSTjssupportticketModel {
     }
 
     function validateAndShowDownloadFileName( ){
+        if(!current_user_can('manage_options')){
+            return false;
+        }
         $nonce = JSSTrequest::getVar('_wpnonce');
         if (! wp_verify_nonce( $nonce, 'validate-and-show-download-filename') ) {
             die( 'Security check Failed' );
@@ -672,6 +678,9 @@ class JSSTjssupportticketModel {
     }
 
     function getLanguageTranslation(){
+        if(!current_user_can('manage_options')){
+            return false;
+        }
         $nonce = JSSTrequest::getVar('_wpnonce');
         if (! wp_verify_nonce( $nonce, 'get-language-translation') ) {
             die( 'Security check Failed' );
@@ -1202,6 +1211,9 @@ class JSSTjssupportticketModel {
     }
 
     function installPluginFromAjax(){
+        if(!current_user_can('manage_options')){
+            return false;
+        }
         $nonce = JSSTrequest::getVar('_wpnonce');
         if (! wp_verify_nonce( $nonce, 'install-plugin-ajax') ) {
              die( 'Security check Failed' ); 
@@ -1249,6 +1261,9 @@ class JSSTjssupportticketModel {
     }
 
     function activatePluginFromAjax(){
+        if(!current_user_can('manage_options')){
+            return false;
+        }
         $nonce = JSSTrequest::getVar('_wpnonce');
         if (! wp_verify_nonce( $nonce, 'activate-plugin-ajax') ) {
              die( 'Security check Failed' ); 
@@ -1381,6 +1396,9 @@ class JSSTjssupportticketModel {
     }
 
     function hidePopupFromAdmin(){
+        if(!current_user_can('manage_options')){
+            return false;
+        }
         $nonce = JSSTrequest::getVar('_wpnonce');
         if (! wp_verify_nonce( $nonce, 'hide-popup-from-admin') ) {
             die( 'Security check Failed' );
@@ -1400,6 +1418,9 @@ class JSSTjssupportticketModel {
     }
 
     function reviewBoxAction(){
+        if(!current_user_can('manage_options')){
+            return false;
+        }
         $nonce = JSSTrequest::getVar('_wpnonce');
         if (! wp_verify_nonce( $nonce, 'review-box-action') ) {
             die( 'Security check Failed' );
@@ -1566,6 +1587,9 @@ class JSSTjssupportticketModel {
     }
 
     function JSSTdownloadandinstalladdonfromAjax(){
+        if(!current_user_can('manage_options')){
+            return false;
+        }
         $nonce = JSSTrequest::getVar('_wpnonce');
         if (! wp_verify_nonce( $nonce, 'download-and-install-addon') ) {
             die( 'Security check Failed' );

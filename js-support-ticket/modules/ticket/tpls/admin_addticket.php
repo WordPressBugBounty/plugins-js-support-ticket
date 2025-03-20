@@ -292,7 +292,8 @@ wp_add_inline_script('js-support-ticket-main-js',$jssupportticket_js);
                     </div>
                 </div>
             </div>
-            <form class="jsstadmin-form" method="post" action="<?php echo esc_url(wp_nonce_url(admin_url("admin.php?page=ticket&task=saveticket"),"save-ticket")); ?>" id="adminTicketform" enctype="multipart/form-data">
+            <?php $nonce_id = isset(jssupportticket::$_data[0]->id) ?jssupportticket::$_data[0]->id :''; ?>
+            <form class="jsstadmin-form" method="post" action="<?php echo esc_url(wp_nonce_url(admin_url("admin.php?page=ticket&task=saveticket"),"save-ticket-".$nonce_id)); ?>" id="adminTicketform" enctype="multipart/form-data">
                 <?php
                     $i = '';
                     foreach (jssupportticket::$_data['fieldordering'] AS $field):
@@ -390,11 +391,11 @@ wp_add_inline_script('js-support-ticket-main-js',$jssupportticket_js);
                                             if ($field->visible_field != null) {
                                                 $visibleparams = JSSTincluder::getJSModel('fieldordering')->getDataForVisibleField($field->visible_field);
                                                 foreach ($visibleparams as $visibleparam) {
-                                                    $wpnonce = wp_create_nonce("is-field-required");
+                                                    $wpnonce = wp_create_nonce("is-field-required-".$visibleparam->visibleParentField);
                                                     $jsVisibleFunction .= " getDataForVisibleField('".$wpnonce."', this.value, '" . $visibleparam->visibleParent . "','" . $visibleparam->visibleParentField . "','".$visibleparam->visibleValue."','".$visibleparam->visibleCondition."');";
                                                     //for default value
                                                     if (($visibleparam->visibleValue == $departmentid && $visibleparam->visibleCondition == 1) || ($visibleparam->visibleValue != $departmentid && $visibleparam->visibleCondition == 0)) {
-                                                        $wpnonce = wp_create_nonce("is-field-required");
+                                                        $wpnonce = wp_create_nonce("is-field-required-".$visibleparam->visibleParentField);
                                                         $defaultFunc .= " getDataForVisibleField('".$wpnonce."', '".$departmentid."', '" . $visibleparam->visibleParent . "','" . $visibleparam->visibleParentField . "','".$visibleparam->visibleValue."','".$visibleparam->visibleCondition."');";
                                                     }
                                                 }
@@ -781,7 +782,7 @@ wp_add_inline_script('js-support-ticket-main-js',$jssupportticket_js);
                                                 echo wp_kses('
                                                     <div class="js_ticketattachment">
                                                             ' . esc_html($attachment->filename) . /*' ( ' . $attachment->filesize . ' ) ' .*/ '
-                                                            <a title="'. esc_html(__('Delete','js-support-ticket')).'" href="?page=attachment&task=deleteattachment&action=jstask&id=' . $attachment->id . '&ticketid=' . $attachmentid . '"><img alt="'. esc_html(__('Delete','js-support-ticket')).'" src="'.esc_url(JSST_PLUGIN_URL).'includes/images/delete.png" /></a>
+                                                            <a title="'. esc_html(__('Delete','js-support-ticket')).'" href="' . esc_url(wp_nonce_url('?page=attachment&task=deleteattachment&action=jstask&id=' . $attachment->id . '&ticketid=' . $attachmentid, 'delete-attachement-'.$attachment->id)) . '"><img alt="'. esc_html(__('Delete','js-support-ticket')).'" src="'.esc_url(JSST_PLUGIN_URL).'includes/images/delete.png" /></a>
                                                     </div>', JSST_ALLOWED_TAGS);
                                             }
                                         }

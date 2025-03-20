@@ -57,8 +57,9 @@ class JSSTdepartmentController {
     }
 
     static function savedepartment() {
+        $id = JSSTrequest::getVar('id');
         $nonce = JSSTrequest::getVar('_wpnonce');
-        if (! wp_verify_nonce( $nonce, 'save-department') ) {
+        if (! wp_verify_nonce( $nonce, 'save-department-'.$id) ) {
             die( 'Security check Failed' );
         }
         $data = JSSTrequest::get('post');
@@ -73,11 +74,11 @@ class JSSTdepartmentController {
     }
 
     static function deletedepartment() {
+        $id = JSSTrequest::getVar('departmentid');
         $nonce = JSSTrequest::getVar('_wpnonce');
-        if (! wp_verify_nonce( $nonce, 'delete-department') ) {
+        if (! wp_verify_nonce( $nonce, 'delete-department-'.$id) ) {
             die( 'Security check Failed' );
         }
-        $id = JSSTrequest::getVar('departmentid');
         JSSTincluder::getJSModel('department')->removeDepartment($id);
         if (is_admin()) {
             $url = admin_url("admin.php?page=department&jstlay=departments");
@@ -89,11 +90,11 @@ class JSSTdepartmentController {
     }
 
     static function changestatus() {
+        $id = JSSTrequest::getVar('departmentid');
         $nonce = JSSTrequest::getVar('_wpnonce');
-        if (! wp_verify_nonce( $nonce, 'change-status') ) {
+        if (! wp_verify_nonce( $nonce, 'change-status-'.$id) ) {
             die( 'Security check Failed' );
         }
-        $id = JSSTrequest::getVar('departmentid');
         JSSTincluder::getJSModel('department')->changeStatus($id);
         $url = admin_url("admin.php?page=department&jstlay=departments");
         $pagenum = JSSTrequest::getVar('pagenum');
@@ -104,11 +105,11 @@ class JSSTdepartmentController {
     }
 
     static function changedefault() {
+        $id = JSSTrequest::getVar('departmentid');
         $nonce = JSSTrequest::getVar('_wpnonce');
-        if (! wp_verify_nonce( $nonce, 'change-default') ) {
+        if (! wp_verify_nonce( $nonce, 'change-default-'.$id) ) {
             die( 'Security check Failed' );
         }
-        $id = JSSTrequest::getVar('departmentid');
         $default = JSSTrequest::getVar('default',null,0);
         JSSTincluder::getJSModel('department')->changeDefault($id,$default);
         $url = admin_url("admin.php?page=department&jstlay=departments");

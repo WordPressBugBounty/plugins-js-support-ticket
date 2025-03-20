@@ -46,8 +46,8 @@ span.tk_attachments_addform{position: relative;display: inline-block;padding: 8p
 div.js-ticket-attached-files-wrp{float: left;width: calc(100% / 2 - 10px);margin: 0px 5px;margin-top: 15px;}
 div.js_ticketattachment{float: left;width: 70%;padding: 10px 5px;}
 a.js-ticket-delete-attachment{display:inline-block;float: left;width: 30%;padding: 11px 5px;text-align: center;text-decoration: none;outline: 0px;}
-span.help-block{font-size:14px;}
-span.help-block{color:red;}
+span.jsst-help-block{font-size:14px;}
+span.jsst-help-block{color:red;}
 
 select ::-ms-expand {display:none !important;}
 select{-webkit-appearance:none !important;}

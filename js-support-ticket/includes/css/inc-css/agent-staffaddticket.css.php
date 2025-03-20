@@ -73,7 +73,7 @@ $jssupportticket_css .= '
 
 	span.js-ticket-apend-radio-btn{display: inline-block;float: left;width: auto;padding: 10px;margin-left: 5px;height: 50px;line-height: initial;}
 	span.js-ticket-apend-radio-btn input#append_premade1display{vertical-align: middle;}
-	span.help-block{font-size:14px;}
+	span.jsst-help-block{font-size:14px;}
 	span.js-ticket-apend-radio-btn{display: inline-block;float: left;width: auto;padding:10px;margin-left: 5px;}
 	input#append1{vertical-align: middle;}
 	label#forappend{display: inline-block;margin: 0px 0 0 2px;line-height: initial;}
@@ -129,7 +129,7 @@ $jssupportticket_css .= '
 	div#records div.jsst_userpages span.jsst_userlink{display: inline-block;padding:5px 15px;margin-left:5px;line-height: initial;}
 	span.js-ticket-display-block{display: none;}
 
-	span.help-block{color:red !important;bottom: -30px;font-size: 13px;}
+	span.jsst-help-block{color:red !important;bottom: -30px;font-size: 13px;}
 	select ::-ms-expand {display:none !important;}
 	select{-webkit-appearance:none !important;}
 	div.js-ticket-add-form-wrapper div.js-ticket-from-field-wrp div.js-ticket-from-field input.js-ticket-form-field-input.loading {background-image: url("'. esc_url(JSST_PLUGIN_URL).'includes/images/spinning-wheel.gif");background-size: 25px 25px;background-position:right center;background-repeat: no-repeat;}
@@ -168,7 +168,7 @@ $jssupportticket_css .= '
 	div.tk_attachment_value_wrapperform{border: 1px solid '.$color5.';background: #fff;}
 	span.tk_attachment_value_text{border: 1px solid '.$color5.';background-color:'.$color7.';}
 	div.js-ticket-assigned-tome{border:1px solid '.$color5.';background: #fff;}
-	span.help-block{color:red;}
+	span.jsst-help-block{color:red;}
 	span.tk_attachments_configform {color: '.$color4.';}
 	div#userpopup{background: '.$color7.';}
 	div.jsst-popup-header{background: '.$color1.';color:'.$color7.';}

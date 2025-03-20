@@ -49,8 +49,9 @@ class JSSTgdprController {
     }
 
     static function savegdprfield() {
+        $id = JSSTrequest::getVar('id');
         $nonce = JSSTrequest::getVar('_wpnonce');
-        if (! wp_verify_nonce( $nonce, 'save-gdprfield') ) {
+        if (! wp_verify_nonce( $nonce, 'save-gdprfield-'.$id) ) {
             die( 'Security check Failed' );
         }
         $data = JSSTrequest::get('post');
@@ -61,8 +62,9 @@ class JSSTgdprController {
     }
 
     static function saveusereraserequest() {
+        $id = JSSTrequest::getVar('id');
         $nonce = JSSTrequest::getVar('_wpnonce');
-        if (! wp_verify_nonce( $nonce, 'save-usereraserequest') ) {
+        if (! wp_verify_nonce( $nonce, 'save-usereraserequest-'.$id) ) {
             die( 'Security check Failed' );
         }
         $data = JSSTrequest::get('post');

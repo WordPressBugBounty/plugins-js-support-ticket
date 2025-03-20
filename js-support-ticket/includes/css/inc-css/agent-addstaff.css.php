@@ -98,8 +98,8 @@ $jssupportticket_css .= '
 	div#records div.jsst_userpages a.jsst_userlink{display: inline-block;padding:5px 15px;margin-left:5px;text-decoration: none;background:rgba(0, 0, 0, 0.05) none repeat scroll 0 0;line-height: initial;}
 	div#records div.jsst_userpages span.jsst_userlink{display: inline-block;padding:5px 15px;margin-left:5px;line-height: initial;}
 
-	span.help-block{font-size:14px;}
-	span.help-block{color:red;}
+	span.jsst-help-block{font-size:14px;}
+	span.jsst-help-block{color:red;}
 
 	div.js-ticket-append-signature-wrp{float: left;width: calc(100% / 2 - 25px); margin-right:25px;margin-bottom: 20px;}
 	div.js-ticket-append-signature-wrp.js-ticket-append-signature-wrp-full-width{width: 100%;}

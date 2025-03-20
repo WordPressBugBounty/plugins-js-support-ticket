@@ -65,7 +65,7 @@
 	div.js-ticket-assigned-tome input {margin-left: 5px !important;}
 	div.js-ticket-add-form-wrapper div.js-ticket-from-field-wrp div.js-ticket-from-field-title {text-align: right;}
 	div.js-ticket-add-form-wrapper div.js-ticket-from-field-wrp div.js-ticket-from-field select.inputbox {background-position: 10px !important;}
-	span.help-block {text-align: right;}
+	span.jsst-help-block {text-align: right;}
 	div.js-ticket-reply-attachments div.js-attachment-field-title {text-align: right;}
 	div.js-ticket-reply-attachments div.js-attachment-field {text-align: right;}
 	div.js-ticket-add-form-wrapper div.js-ticket-from-field-wrp div.js-ticket-from-field {text-align: right;}

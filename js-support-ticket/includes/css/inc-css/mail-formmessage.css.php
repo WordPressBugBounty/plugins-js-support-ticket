@@ -31,7 +31,7 @@ $jssupportticket_css .= '
 	div.js-ticket-form-btn-wrp{float: left;width:calc(100% - 20px);margin: 0px 10px;text-align: center;padding: 25px 0px 10px 0px;}
 	div.js-ticket-form-btn-wrp input.js-ticket-save-button{padding: 20px 10px;margin-right: 10px;min-width: 120px;border-radius: 0px;line-height: initial;}
 	div.js-ticket-form-btn-wrp a.js-ticket-cancel-button{display: inline-block; padding: 20px 10px;min-width: 120px;border-radius: 0px;line-height: initial;text-decoration: none;}
-	span.help-block{font-size:13px;color:red;bottom: -30px;}
+	span.jsst-help-block{font-size:13px;color:red;bottom: -30px;}
 	
 
 	select ::-ms-expand {display:none !important;}

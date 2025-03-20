@@ -290,27 +290,34 @@ class JSSTconfigurationModel {
         jssupportticket::$_db->update(jssupportticket::$_db->prefix . 'js_ticket_config', array('configvalue' => $filename), array('configname' => 'support_custom_img'));
     }
 
-    function deleteSupportCustomImage(){
+    function deleteSupportCustomImage() {
 
         $nonce = JSSTrequest::getVar('_wpnonce');
-        if (! wp_verify_nonce( $nonce, 'delete-support-customimage') ) {
-            die( 'Security check Failed' );
+        if (!wp_verify_nonce($nonce, 'delete-support-customimage')) {
+            die('Security check Failed');
         }
-        $maindir = wp_upload_dir();
-        $basedir = $maindir['basedir'];
-        $datadirectory = jssupportticket::$_config['data_directory'];
-        $path = $basedir . '/' . $datadirectory;
-        $path = $path . '/supportImg';
 
-        $query = "SELECT configvalue FROM `".jssupportticket::$_db->prefix."js_ticket_config` WHERE configname = 'support_custom_img'";
+        $maindir = wp_upload_dir();
+        $basedir = trailingslashit($maindir['basedir']);
+        $datadirectory = isset(jssupportticket::$_config['data_directory']) ? sanitize_text_field(jssupportticket::$_config['data_directory']) : '';
+        $path = $basedir . trailingslashit($datadirectory) . 'supportImg/';
+
+        $query = "SELECT configvalue FROM `" . jssupportticket::$_db->prefix . "js_ticket_config` WHERE configname = 'support_custom_img'";
         $key = jssupportticket::$_db->get_var($query);
+
         if ($key) {
-            $unlinkPath = $path.'/'.$key;
-            if (is_file($unlinkPath)) {
+            $key = sanitize_file_name($key); // Sanitize filename
+            $unlinkPath = realpath($path . $key); // Get absolute path
+
+            // Ensure the file is within the allowed directory
+            if ($unlinkPath && strpos($unlinkPath, realpath($path)) === 0 && is_file($unlinkPath)) {
                 wp_delete_file($unlinkPath);
             }
         }
+
+        // Update database to remove reference
         jssupportticket::$_db->update(jssupportticket::$_db->prefix . 'js_ticket_config', array('configvalue' => 0), array('configname' => 'support_custom_img'));
+
         return 'success';
     }
 

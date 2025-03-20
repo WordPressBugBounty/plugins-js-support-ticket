@@ -321,10 +321,11 @@ if (jssupportticket::$_config['offline'] == 2) {
 
                 jQuery(document).delegate('#ticketpopupsearch','submit', function (e) {
                     var ticketid = jQuery('#ticketidformerge').val();
+                    var nonce = jQuery('#nonce').val();
                     e.preventDefault();
                     var name = jQuery('input#name').val();
                     var email = jQuery('input#email').val();
-                    jQuery.post(ajaxurl, {action: 'jsticket_ajax', jstmod: 'mergeticket', task: 'getTicketsForMerging', name: name, email: email,ticketid:ticketid, '_wpnonce':'". esc_attr(wp_create_nonce('get-tickets-for-merging')) ."'}, function (data) {
+                    jQuery.post(ajaxurl, {action: 'jsticket_ajax', jstmod: 'mergeticket', task: 'getTicketsForMerging', name: name, email: email,ticketid:ticketid, '_wpnonce': nonce}, function (data) {
                         data=jQuery.parseJSON(data);
                        if(data !== 'undefined') {
 							if(data !== '') {
@@ -391,7 +392,7 @@ if (jssupportticket::$_config['offline'] == 2) {
                 jQuery('form#adminTicketform').submit();
             }
 
-            function getmergeticketid(mergeticketid, mergewithticketid){
+            function getmergeticketid(mergeticketid, mergewithticketid, mergeNonce){
                 if(mergewithticketid == 0){
                     mergewithticketid =  jQuery('#mergeticketid').val();
                 }else{
@@ -402,11 +403,11 @@ if (jssupportticket::$_config['offline'] == 2) {
                     return false;
                 }
                 jQuery('#mergeticketselection').hide();
-                getTicketdataForMerging(mergeticketid,mergewithticketid);
+                getTicketdataForMerging(mergeticketid,mergewithticketid,mergeNonce);
             }
 
-            function getTicketdataForMerging(mergeticketid,mergewithticketid){
-                jQuery.post(ajaxurl, {action: 'jsticket_ajax',jstmod: 'mergeticket', task: 'getLatestReplyForMerging', mergeid:mergeticketid,mergewith:mergewithticketid, '_wpnonce':'".  esc_attr(wp_create_nonce('get-latest-reply-for-merging')) ."'}, function (data) {
+            function getTicketdataForMerging(mergeticketid,mergewithticketid,mergeNonce){
+                jQuery.post(ajaxurl, {action: 'jsticket_ajax',jstmod: 'mergeticket', task: 'getLatestReplyForMerging', mergeid:mergeticketid,mergewith:mergewithticketid, '_wpnonce': mergeNonce}, function (data) {
                     if(data){
                         data = jQuery.parseJSON(data);
                         jQuery('div#popup-record-data').html('');
@@ -446,11 +447,11 @@ if (jssupportticket::$_config['offline'] == 2) {
                 jQuery('#ticketidcopybtn').text(jQuery('#ticketidcopybtn').attr('success'));
             });
 
-            function resetMergeFrom() {
+            function resetMergeFrom(nonce) {
                 var ticketid = jQuery('#ticketidformerge').val();
                 var name = '';
                 var email = '';
-                jQuery.post(ajaxurl, {action: 'jsticket_ajax', jstmod: 'mergeticket', task: 'getTicketsForMerging', name: name, email: email,ticketid:ticketid, '_wpnonce':'". esc_attr(wp_create_nonce('get-tickets-for-merging')) ."'}, function (data) {
+                jQuery.post(ajaxurl, {action: 'jsticket_ajax', jstmod: 'mergeticket', task: 'getTicketsForMerging', name: name, email: email,ticketid:ticketid, '_wpnonce': nonce}, function (data) {
                     data=jQuery.parseJSON(data);
                    if(data !== 'undefined') {
                         if(data !== '') {
@@ -478,7 +479,8 @@ if (jssupportticket::$_config['offline'] == 2) {
                 jQuery(document).on('submit','#js-ticket-usercredentails-form',function(e){
                     e.preventDefault(); // avoid to execute the actual submit of the form.
                     var fdata = jQuery(this).serialize(); // serializes the form's elements.
-                    jQuery.post(ajaxurl, {action: 'jsticket_ajax', jstmod: 'privatecredentials', task: 'storePrivateCredentials',formdata_string:fdata, '_wpnonce':'". esc_attr(wp_create_nonce('store-private-credentials')) ."'}, function (data) {
+                    var nonce = jQuery('#nonce').val();
+                    jQuery.post(ajaxurl, {action: 'jsticket_ajax', jstmod: 'privatecredentials', task: 'storePrivateCredentials',formdata_string:fdata, '_wpnonce': nonce}, function (data) {
                         if(data){ // ajax executed
                             var return_data = jQuery.parseJSON(data);
                             if(return_data.status == 1){
@@ -501,8 +503,8 @@ if (jssupportticket::$_config['offline'] == 2) {
                 );
             });
 
-            function addEditCredentail(ticketid, uid, cred_id = 0, cred_data = ''){
-                jQuery.post(ajaxurl, {action: 'jsticket_ajax', jstmod: 'privatecredentials', task: 'getFormForPrivteCredentials', ticketid: ticketid, cred_id: cred_id, cred_data: cred_data, uid: uid, '_wpnonce':'". esc_attr(wp_create_nonce('get-form-for-privte-credentials')) ."'}, function (data) {
+            function addEditCredentail(nonce, ticketid, uid, cred_id = 0, cred_data = ''){
+                jQuery.post(ajaxurl, {action: 'jsticket_ajax', jstmod: 'privatecredentials', task: 'getFormForPrivteCredentials', ticketid: ticketid, cred_id: cred_id, cred_data: cred_data, uid: uid, '_wpnonce':nonce}, function (data) {
                     if(data){ // ajax executed
                         var return_data = jQuery.parseJSON(data);
                         jQuery('.js-ticket-usercredentails-wrp').hide();
@@ -515,8 +517,8 @@ if (jssupportticket::$_config['offline'] == 2) {
                 });
             }
 
-            function getCredentails(ticketid){
-                jQuery.post(ajaxurl, {action: 'jsticket_ajax', jstmod: 'privatecredentials', task: 'getPrivateCredentials',ticketid:ticketid, '_wpnonce':'". esc_attr(wp_create_nonce('get-private-credentials')) ."'}, function (data) {
+            function getCredentails(ticketid, nonce){
+                jQuery.post(ajaxurl, {action: 'jsticket_ajax', jstmod: 'privatecredentials', task: 'getPrivateCredentials',ticketid:ticketid, '_wpnonce': nonce}, function (data) {
                     if(data){ // ajax executed
                         var return_data = jQuery.parseJSON(data);
                         if(return_data.status == 1){
@@ -534,8 +536,8 @@ if (jssupportticket::$_config['offline'] == 2) {
                 return false;
             }
 
-            function removeCredentail(cred_id){
-                var params = {action: 'jsticket_ajax', jstmod: 'privatecredentials', task: 'removePrivateCredential',cred_id:cred_id, '_wpnonce':'". esc_attr(wp_create_nonce('remove-private-credential')) ."'};
+            function removeCredentail(cred_id, nonce){
+                var params = {action: 'jsticket_ajax', jstmod: 'privatecredentials', task: 'removePrivateCredential',cred_id:cred_id, '_wpnonce': nonce};
                 ";
                 if(JSSTincluder::getObjectClass('user')->isguest() && isset(jssupportticket::$_data[0]->id)){
                     $jssupportticket_js .='
@@ -553,8 +555,8 @@ if (jssupportticket::$_config['offline'] == 2) {
                 });
                 return false;
             }
-            function closeCredentailsForm(ticketid){
-                getCredentails(ticketid);
+            function closeCredentailsForm(ticketid, nonce){
+                getCredentails(ticketid, nonce);
             }
         ";
         wp_add_inline_script('js-support-ticket-main-js',$jssupportticket_js);
@@ -582,7 +584,8 @@ if (jssupportticket::$_config['offline'] == 2) {
                         }
                         if($credential_add_permission){ ?>
                             <div class="js-ticket-usercredentail-data-add-new-button-wrap" >
-                                <button class="js-ticket-usercredentail-data-add-new-button" onclick="addEditCredentail(<?php echo esc_js(jssupportticket::$_data[0]->id);?>,<?php echo esc_js(JSSTincluder::getObjectClass('user')->uid());?>);" >
+                                <?php $nonce = wp_create_nonce('get-form-for-privte-credentials-'.jssupportticket::$_data[0]->id); ?>
+                                <button class="js-ticket-usercredentail-data-add-new-button" onclick="addEditCredentail('<?php echo esc_js($nonce);?>',<?php echo esc_js(jssupportticket::$_data[0]->id);?>,<?php echo esc_js(JSSTincluder::getObjectClass('user')->uid());?>);" >
                                     <?php echo esc_html(__("Add New Credential","js-support-ticket")); ?>
                                 </button>
                             </div><?php
@@ -663,10 +666,10 @@ if (jssupportticket::$_config['offline'] == 2) {
 
         <?php
         $jssupportticket_js ="
-            function showPopupAndFillValues(id,pfor) {
+            function showPopupAndFillValues(id,pfor,nonce) {
                 jQuery('div.edit-time-popup').hide();
                 if(pfor == 1){
-                    jQuery.post(ajaxurl, {action: 'jsticket_ajax', val: id, jstmod: 'reply', task: 'getReplyDataByID', '_wpnonce':'". esc_attr(wp_create_nonce('get-reply-data-by-id')) ."'}, function (data) {
+                    jQuery.post(ajaxurl, {action: 'jsticket_ajax', val: id, jstmod: 'reply', task: 'getReplyDataByID', '_wpnonce': nonce}, function (data) {
                         if (data) {
                             jQuery('div.popup-header-text').html('". esc_html(__('Edit Reply','js-support-ticket')) ."');
                             d = jQuery.parseJSON(data);
@@ -681,7 +684,7 @@ if (jssupportticket::$_config['offline'] == 2) {
                         }
                     });
                 }else if(pfor == 2){
-                    jQuery.post(ajaxurl, {action: 'jsticket_ajax', val: id, jstmod: 'timetracking', task: 'getTimeByReplyID', '_wpnonce':'". esc_attr(wp_create_nonce('get-time-by-reply-id')) ."'}, function (data) {
+                    jQuery.post(ajaxurl, {action: 'jsticket_ajax', val: id, jstmod: 'timetracking', task: 'getTimeByReplyID', '_wpnonce': nonce}, function (data) {
                         if (data) {
                             jQuery('div.popup-header-text').html('". esc_html(__('Edit Time','js-support-ticket')) ."');
                             d = jQuery.parseJSON(data);
@@ -704,7 +707,7 @@ if (jssupportticket::$_config['offline'] == 2) {
                         }
                     });
                 }else if(pfor == 3){
-                    jQuery.post(ajaxurl, {action: 'jsticket_ajax', val: id, jstmod: 'note', task: 'getTimeByNoteID', '_wpnonce':'". esc_attr(wp_create_nonce('get-time-by-note-id')) ."'}, function (data) {
+                    jQuery.post(ajaxurl, {action: 'jsticket_ajax', val: id, jstmod: 'note', task: 'getTimeByNoteID', '_wpnonce': nonce}, function (data) {
                         if (data) {
                             jQuery('div.popup-header-text').html('". esc_html(__('Edit Time','js-support-ticket')) ."');
                             d = jQuery.parseJSON(data);
@@ -727,7 +730,7 @@ if (jssupportticket::$_config['offline'] == 2) {
                         }
                     });
                 }else if(pfor == 4){
-                    jQuery.post(ajaxurl, {action: 'jsticket_ajax', ticketid: id, jstmod: 'mergeticket', task: 'getTicketsForMerging', '_wpnonce':'". esc_attr(wp_create_nonce('get-tickets-for-merging')) ."'}, function (data) {
+                    jQuery.post(ajaxurl, {action: 'jsticket_ajax', ticketid: id, jstmod: 'mergeticket', task: 'getTicketsForMerging', '_wpnonce': nonce}, function (data) {
                         if (data) {
                             jQuery('div.popup-header-text').html('". esc_html(__('Merge Ticket','js-support-ticket')) ."');
                             data=jQuery.parseJSON(data);
@@ -739,8 +742,8 @@ if (jssupportticket::$_config['offline'] == 2) {
                 }
                 return false;
             }
-            function updateticketlist(pagenum,ticketid){
-                jQuery.post(ajaxurl, {action: 'jsticket_ajax',jstmod: 'mergeticket', task: 'getTicketsForMerging', ticketid:ticketid,ticketlimit:pagenum, '_wpnonce':'". esc_attr(wp_create_nonce('get-tickets-for-merging')) ."'}, function (data) {
+            function updateticketlist(pagenum,ticketid,nonce){
+                jQuery.post(ajaxurl, {action: 'jsticket_ajax',jstmod: 'mergeticket', task: 'getTicketsForMerging', ticketid:ticketid,ticketlimit:pagenum, '_wpnonce': nonce}, function (data) {
                     if(data){
                         data=jQuery.parseJSON(data);
                             jQuery('div#popup-record-data').html('');
@@ -784,8 +787,7 @@ if (jssupportticket::$_config['offline'] == 2) {
                     </div>
                 </div>
             </div>
-
-            <form id="jsst-reply-form" style="display:none" method="post" action="<?php echo esc_url(wp_nonce_url(admin_url("admin.php?page=reply&task=saveeditedreply&action=jstask"),"save-edited-reply")); ?>" >
+            <form id="jsst-reply-form" style="display:none" method="post" action="<?php echo esc_url(wp_nonce_url(admin_url("admin.php?page=reply&task=saveeditedreply&action=jstask"),"save-edited-reply-".jssupportticket::$_data[0]->id)); ?>" >
                 <div class="js-ticket-edit-form-wrp">
                     <div class="js-ticket-form-field-wrp">
                         <?php wp_editor('', 'jsticket_replytext', array('media_buttons' => false,'editor_height' => 200, 'textarea_rows' => 20,)); ?>
@@ -799,8 +801,7 @@ if (jssupportticket::$_config['offline'] == 2) {
                 <?php echo wp_kses(JSSTformfield::hidden('reply-tikcetid',jssupportticket::$_data[0]->id), JSST_ALLOWED_TAGS); ?>
             </form>
             <?php if(in_array('timetracking', jssupportticket::$_active_addons)){ ?>
-
-                <form id="jsst-time-edit-form" style="display:none" method="post" action="<?php echo esc_url(wp_nonce_url(admin_url("admin.php?page=reply&task=saveeditedtime&action=jstask"),"save-edited-time")); ?>" >
+                <form id="jsst-time-edit-form" style="display:none" method="post" action="<?php echo esc_url(wp_nonce_url(admin_url("admin.php?page=reply&task=saveeditedtime&action=jstask"),"save-edited-time-".jssupportticket::$_data[0]->id)); ?>" >
                     <div class="js-ticket-edit-form-wrp">
                         <div class="js-ticket-edit-field-title">
                             <?php echo esc_html(__('Time', 'js-support-ticket')); ?>&nbsp;<span style="color: red">*</span>
@@ -833,8 +834,7 @@ if (jssupportticket::$_config['offline'] == 2) {
                     <?php echo wp_kses(JSSTformfield::hidden('reply-tikcetid',jssupportticket::$_data[0]->id), JSST_ALLOWED_TAGS); ?>
                     <?php echo wp_kses(JSSTformfield::hidden('time-confilct',''), JSST_ALLOWED_TAGS); ?>
                 </form>
-
-                <form id="jsst-note-edit-form" style="display:none" method="post" action="<?php echo esc_url(wp_nonce_url(admin_url("admin.php?page=note&task=saveeditedtime&action=jstask"),"save-edited-time")); ?>" >
+                <form id="jsst-note-edit-form" style="display:none" method="post" action="<?php echo esc_url(wp_nonce_url(admin_url("admin.php?page=note&task=saveeditedtime&action=jstask"),"save-edited-time-".jssupportticket::$_data[0]->id)); ?>" >
                     <div class="js-col-md-12 js-form-wrapper">
                         <div class="js-col-md-12 js-form-title"><?php echo esc_html(__('Time', 'js-support-ticket')); ?></div>
                         <div class="js-col-md-12 js-form-value"><?php echo wp_kses(JSSTformfield::text('edited_time', '', array('class' => 'inputbox')), JSST_ALLOWED_TAGS) ?></div>
@@ -887,7 +887,7 @@ if (jssupportticket::$_config['offline'] == 2) {
 						</div>
 					</div>
 					<div>
-						<form method="post" action="<?php echo esc_url(wp_nonce_url(jssupportticket::makeUrl(array('jstmod'=>'ticket','task'=>'transferdepartment')),"transfer-department")); ?>" enctype="multipart/form-data">
+						<form method="post" action="<?php echo esc_url(wp_nonce_url(jssupportticket::makeUrl(array('jstmod'=>'ticket','task'=>'transferdepartment')),"transfer-department-".jssupportticket::$_data[0]->id)); ?>" enctype="multipart/form-data">
 							<div class="js-ticket-premade-msg-wrp"><!-- Select Department Wrapper -->
 								<div class="js-ticket-premade-field-title"><?php echo esc_html(__('Select Department', 'js-support-ticket')); ?></div>
 								<div class="js-ticket-premade-field-wrp">
@@ -927,7 +927,7 @@ if (jssupportticket::$_config['offline'] == 2) {
 						</div>
 					</div>
 					<div>
-						<form method="post" action="<?php echo esc_url(wp_nonce_url(jssupportticket::makeUrl(array('jstmod'=>'ticket','task'=>'assigntickettostaff')),"assign-ticket-to-staff")); ?>" enctype="multipart/form-data">
+						<form method="post" action="<?php echo esc_url(wp_nonce_url(jssupportticket::makeUrl(array('jstmod'=>'ticket','task'=>'assigntickettostaff')),"assign-ticket-to-staff-".jssupportticket::$_data[0]->id)); ?>" enctype="multipart/form-data">
 							<div class="js-ticket-premade-msg-wrp"><!-- Select Department Wrapper -->
 								<div class="js-ticket-premade-field-title"><?php echo esc_html(__('Agent', 'js-support-ticket')); ?></div>
 								<div class="js-ticket-premade-field-wrp">
@@ -964,7 +964,7 @@ if (jssupportticket::$_config['offline'] == 2) {
                     </div>
                 </div>
                 <div>  <!--  postinternalnote Area   -->
-                    <form method="post" action="<?php echo esc_url(wp_nonce_url(jssupportticket::makeUrl(array('jstmod'=>'note','task'=>'savenote')),"save-note")); ?>" enctype="multipart/form-data">
+                    <form method="post" action="<?php echo esc_url(wp_nonce_url(jssupportticket::makeUrl(array('jstmod'=>'note','task'=>'savenote')),"save-note-".jssupportticket::$_data[0]->id)); ?>" enctype="multipart/form-data">
                         <?php if(in_array('timetracking', jssupportticket::$_active_addons)){ ?>
                             <div class="jsst-ticket-detail-timer-wrapper"> <!-- Top Timer Section -->
                                 <div class="timer-left" >
@@ -1080,9 +1080,9 @@ if (jssupportticket::$_config['offline'] == 2) {
                 }
                 $cur_uid = JSSTincluder::getObjectClass('user')->uid();
                 if (in_array('agent',jssupportticket::$_active_addons) && jssupportticket::$_data['user_staff']) {
-                    $link = wp_nonce_url(jssupportticket::makeUrl(array('jstmod'=>'ticket','task'=>'actionticket')),"action-ticket");
+                    $link = wp_nonce_url(jssupportticket::makeUrl(array('jstmod'=>'ticket','task'=>'actionticket')),"action-ticket-".jssupportticket::$_data[0]->id);
                 } else {
-                    $link = wp_nonce_url(jssupportticket::makeUrl(array('jstmod'=>'reply','task'=>'savereply')),"save-reply");
+                    $link = wp_nonce_url(jssupportticket::makeUrl(array('jstmod'=>'reply','task'=>'savereply')),"save-reply-".jssupportticket::$_data[0]->id);
                 }
                 ?>
                 <div class="js-ticket-ticket-detail-wrapper">
@@ -1097,7 +1097,7 @@ if (jssupportticket::$_config['offline'] == 2) {
                                     <?php /* if (in_array('agent',jssupportticket::$_active_addons) && jssupportticket::$_data[0]->staffphotophoto) { ?>
                                         <img alt="image" class="js-ticket-staff-img" src="<?php echo esc_url(jssupportticket::makeUrl(array('jstmod'=>'agent','task'=>'getStaffPhoto','action'=>'jstask','jssupportticketid'=> jssupportticket::$_data[0]->staffphotoid ,'jsstpageid'=>get_the_ID()))); ?>">
                                     <?php } else { */
-                                        echo wp_kses(jsst_get_avatar(JSSTincluder::getJSModel('jssupportticket')->getWPUidById(jssupportticket::$_data[0]->uid), 'js-ticket-staff-img'), JSST_ALLOWED_TAGS);
+                                        echo wp_kses(jsst_get_avatar(jssupportticket::$_data[0]->uid, 'js-ticket-staff-img'), JSST_ALLOWED_TAGS);
                                     // } ?>
                                 </div>
                                 <div class="js-tkt-det-user-cnt"><!-- Right Side -->
@@ -1197,8 +1197,9 @@ if (jssupportticket::$_config['offline'] == 2) {
                                             </a>
                                         <?php }?>
                                         <?php if(in_array('mergeticket',jssupportticket::$_active_addons) && $mergepermission) {
-                                            if (jssupportticket::$_data[0]->status != 4 && jssupportticket::$_data[0]->status != 5) { ?>
-                                                <a class="js-tkt-det-actn-btn" href="#" id="mergeticket" onclick="return showPopupAndFillValues(<?php echo esc_js(jssupportticket::$_data[0]->id);?>,4)">
+                                            if (jssupportticket::$_data[0]->status != 4 && jssupportticket::$_data[0]->status != 5) {
+                                                $nonce = wp_create_nonce("get-tickets-for-merging-".jssupportticket::$_data[0]->id) ?>
+                                                <a class="js-tkt-det-actn-btn" href="#" id="mergeticket" onclick="return showPopupAndFillValues(<?php echo esc_js(jssupportticket::$_data[0]->id);?>,4, '<?php echo esc_js($nonce);?>')">
                                                     <img alt="image" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/ticket-detail/merge-ticket.png" title="<?php echo esc_html(__('Merge', 'js-support-ticket')); ?>" />
                                                     <span><?php echo esc_html(__('Merge', 'js-support-ticket')); ?></span>
                                                 </a>
@@ -1215,7 +1216,7 @@ if (jssupportticket::$_config['offline'] == 2) {
                                         <?php } ?>
                                         <?php $deletepermission = JSSTincluder::getJSModel('userpermissions')->checkPermissionGrantedForTask('Delete Ticket');
                                         if($deletepermission) { ?>
-                                            <a class="js-tkt-det-actn-btn" onclick="return confirm('<?php echo esc_html(__('Are you sure you want to delete this ticket', 'js-support-ticket')); ?>');"  href="<?php echo esc_url(wp_nonce_url(jssupportticket::makeUrl(array('jstmod'=>'ticket','task'=>'deleteticket','action'=>'jstask','ticketid'=> jssupportticket::$_data[0]->id ,'jsstpageid'=>get_the_ID())),'delete-ticket')); ?>" data-ticketid="<?php echo esc_attr(jssupportticket::$_data[0]->id); ?>">
+                                            <a class="js-tkt-det-actn-btn" onclick="return confirm('<?php echo esc_html(__('Are you sure you want to delete this ticket', 'js-support-ticket')); ?>');"  href="<?php echo esc_url(wp_nonce_url(jssupportticket::makeUrl(array('jstmod'=>'ticket','task'=>'deleteticket','action'=>'jstask','ticketid'=> jssupportticket::$_data[0]->id ,'jsstpageid'=>get_the_ID())),'delete-ticket-'.jssupportticket::$_data[0]->id)); ?>" data-ticketid="<?php echo esc_attr(jssupportticket::$_data[0]->id); ?>">
                                                 <img alt="image" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/ticket-detail/delete.png" title= "<?php echo esc_html(__('Delete', 'js-support-ticket')); ?>" />
                                                 <span><?php echo esc_html(__('Delete', 'js-support-ticket')); ?></span>
                                             </a>
@@ -1223,7 +1224,8 @@ if (jssupportticket::$_config['offline'] == 2) {
                                         }
                                         $credentialpermission = JSSTincluder::getJSModel('userpermissions')->checkPermissionGrantedForTask('View Credentials');
                                         if(in_array('privatecredentials',jssupportticket::$_active_addons) && $credentialpermission){ ?>
-                                            <a class="js-tkt-det-actn-btn" href="javascript:return false;" id="private-credentials-button" onclick="getCredentails(<?php echo esc_js(jssupportticket::$_data[0]->id); ?>)">
+                                            <?php $nonce = wp_create_nonce('get-private-credentials-'.jssupportticket::$_data[0]->id) ?>
+                                            <a class="js-tkt-det-actn-btn" href="javascript:return false;" id="private-credentials-button" onclick="getCredentails(<?php echo esc_js(jssupportticket::$_data[0]->id); ?>, '<?php echo esc_js($nonce); ?>')">
                                                 <?php $query = "SELECT count(id) FROM `" . jssupportticket::$_db->prefix . "js_ticket_privatecredentials` WHERE status = 1 AND ticketid = ".esc_sql(jssupportticket::$_data[0]->id);
                                                 $cred_count = jssupportticket::$_db->get_var($query);
                                                 if ($cred_count>0) {
@@ -1239,7 +1241,7 @@ if (jssupportticket::$_config['offline'] == 2) {
                                     } else { ?>
                                             <?php if (jssupportticket::$_data[0]->status != 5) { ?>
                                                 <?php if (jssupportticket::$_data[0]->status != 4) { ?>
-                                                    <a onclick="return confirm('<?php echo esc_html(__('Are you sure to close this ticket', 'js-support-ticket')); ?>');" class="js-tkt-det-actn-btn" href="<?php echo esc_url(wp_nonce_url(jssupportticket::makeUrl(array('jstmod'=>'ticket','task'=>'closeticket','action'=>'jstask','ticketid'=> jssupportticket::$_data[0]->id ,'jsstpageid'=>get_the_ID())),"close-ticket")); ?>">
+                                                    <a onclick="return confirm('<?php echo esc_html(__('Are you sure to close this ticket', 'js-support-ticket')); ?>');" class="js-tkt-det-actn-btn" href="<?php echo esc_url(wp_nonce_url(jssupportticket::makeUrl(array('jstmod'=>'ticket','task'=>'closeticket','action'=>'jstask','ticketid'=> jssupportticket::$_data[0]->id ,'jsstpageid'=>get_the_ID())),"close-ticket-".jssupportticket::$_data[0]->id)); ?>">
                                                         <img alt="image" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/ticket-detail/close.png" title="<?php echo esc_html(__('Close', 'js-support-ticket')); ?>" />
                                                         <span><?php echo esc_html(__('Close', 'js-support-ticket')); ?></span>
                                                     </a>
@@ -1251,7 +1253,7 @@ if (jssupportticket::$_config['offline'] == 2) {
                                                     <?php } ?>
                                                 <?php } else {
                                                         if (JSSTincluder::getJSModel('ticket')->checkCanReopenTicket(jssupportticket::$_data[0]->id)) {
-                                                            $link = wp_nonce_url(jssupportticket::makeUrl(array('jstmod'=>'ticket','task'=>'reopenticket','action'=>'jstask','ticketid'=> jssupportticket::$_data[0]->id,'jsstpageid'=>get_the_ID())),"reopen-ticket"); ?>
+                                                            $link = wp_nonce_url(jssupportticket::makeUrl(array('jstmod'=>'ticket','task'=>'reopenticket','action'=>'jstask','ticketid'=> jssupportticket::$_data[0]->id,'jsstpageid'=>get_the_ID())),"reopen-ticket-".jssupportticket::$_data[0]->id); ?>
                                                             <a class="js-tkt-det-actn-btn" href="<?php echo esc_url($link); ?>" title="<?php echo esc_html(__('Reopen Ticket', 'js-support-ticket')); ?>">
                                                                 <img alt="image" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/ticket-detail/reopen.png" title="<?php echo esc_html(__('Reopen', 'js-support-ticket')); ?>" />
                                                                 <span><?php echo esc_html(__('Reopen', 'js-support-ticket')); ?></span>
@@ -1260,7 +1262,7 @@ if (jssupportticket::$_config['offline'] == 2) {
                                                 <?php } ?>
                                             <?php } ?>
                                             <?php if (jssupportticket::$_config['show_ticket_delete_button'] == 1) { ?>
-                                                <a class="js-tkt-det-actn-btn" onclick="return confirm('<?php echo esc_html(__('Are you sure you want to delete this ticket', 'js-support-ticket')); ?>');"  href="<?php echo esc_url(wp_nonce_url(jssupportticket::makeUrl(array('jstmod'=>'ticket','task'=>'deleteticket','action'=>'jstask','ticketid'=> jssupportticket::$_data[0]->id ,'jsstpageid'=>get_the_ID())),'delete-ticket')); ?>" data-ticketid="<?php echo esc_attr(jssupportticket::$_data[0]->id); ?>">
+                                                <a class="js-tkt-det-actn-btn" onclick="return confirm('<?php echo esc_html(__('Are you sure you want to delete this ticket', 'js-support-ticket')); ?>');"  href="<?php echo esc_url(wp_nonce_url(jssupportticket::makeUrl(array('jstmod'=>'ticket','task'=>'deleteticket','action'=>'jstask','ticketid'=> jssupportticket::$_data[0]->id ,'jsstpageid'=>get_the_ID())),'delete-ticket-'.jssupportticket::$_data[0]->id)); ?>" data-ticketid="<?php echo esc_attr(jssupportticket::$_data[0]->id); ?>">
                                                     <img alt="image" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/ticket-detail/delete.png" title= "<?php echo esc_html(__('Delete', 'js-support-ticket')); ?>" />
                                                     <span><?php echo esc_html(__('Delete', 'js-support-ticket')); ?></span>
                                                 </a>
@@ -1276,7 +1278,8 @@ if (jssupportticket::$_config['offline'] == 2) {
                                                 }
                                             }
                                             if(in_array('privatecredentials',jssupportticket::$_active_addons) && jssupportticket::$_data[0]->status != 4 && jssupportticket::$_data[0]->status != 5){ ?>
-                                                <a class="js-tkt-det-actn-btn" href="javascript:return false;" id="private-credentials-button" onclick="getCredentails(<?php echo esc_js(jssupportticket::$_data[0]->id); ?>)">
+                                                <?php $nonce = wp_create_nonce('get-private-credentials-'.jssupportticket::$_data[0]->id) ?>
+                                                <a class="js-tkt-det-actn-btn" href="javascript:return false;" id="private-credentials-button" onclick="getCredentails(<?php echo esc_js(jssupportticket::$_data[0]->id); ?>, '<?php echo esc_js($nonce); ?>')">
                                                     <?php $query = "SELECT count(id) FROM `" . jssupportticket::$_db->prefix . "js_ticket_privatecredentials` WHERE status = 1 AND ticketid = ".esc_sql(jssupportticket::$_data[0]->id);
                                                     $cred_count = jssupportticket::$_db->get_var($query);
                                                     if ($cred_count>0) {
@@ -1370,7 +1373,7 @@ if (jssupportticket::$_config['offline'] == 2) {
                                                     <img alt="image" class="js-ticket-staff-img" src="<?php echo esc_url(jssupportticket::makeUrl(array('jstmod'=>'agent','task'=>'getStaffPhoto','action'=>'jstask','jssupportticketid'=> $note->staff_id ,'jsstpageid'=>get_the_ID()))); ?>">
                                                 <?php } else { */
                                                     if (isset($note->userid) && !empty($note->userid)) {
-                                                        echo wp_kses(get_avatar(JSSTincluder::getJSModel('jssupportticket')->getWPUidById($note->userid)), JSST_ALLOWED_TAGS);
+                                                        echo wp_kses(jsst_get_avatar($note->userid), JSST_ALLOWED_TAGS);
                                                     } else { ?>
                                                         <img alt="image" class="js-ticket-staff-img" src="<?php echo esc_url(JSST_PLUGIN_URL) . '/includes/images/ticketmanbig.png'; ?>" />
                                                     <?php } ?>
@@ -1401,8 +1404,9 @@ if (jssupportticket::$_config['offline'] == 2) {
                                                 <?php
                                                 if(in_array('timetracking', jssupportticket::$_active_addons)){ ?>
                                                 <div class="js-ticket-edit-options-wrp" >
-                                                    <?php if(JSSTincluder::getJSModel('userpermissions')->checkPermissionGrantedForTask('Edit Time') && jssupportticket::$_data[0]->status != 5){ ?>
-                                                        <a class="js-button" href="#" onclick="return showPopupAndFillValues(<?php echo esc_js($note->id);?>,3)" >
+                                                    <?php if(JSSTincluder::getJSModel('userpermissions')->checkPermissionGrantedForTask('Edit Time') && jssupportticket::$_data[0]->status != 5){
+                                                        $nonce = wp_create_nonce('get-time-by-note-id-'.$note->id); ?>
+                                                        <a class="js-button" href="#" onclick="return showPopupAndFillValues(<?php echo esc_js($note->id);?>,3, '<?php echo esc_js($nonce);?>')" >
                                                             <img alt="image" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/ticket-detail/edit-reply.png" />
                                                             <?php echo esc_html(__('Edit Time','js-support-ticket'));?>
                                                         </a>
@@ -1459,11 +1463,11 @@ if (jssupportticket::$_config['offline'] == 2) {
                         </div> <!-- Heading -->
                         <div class="js-ticket-thread internal-note"><!-- Ticket Detail Box -->
                             <div class="js-ticket-thread-image"><!-- Left Side Image -->
-                                <?php if (in_array('agent',jssupportticket::$_active_addons) && jssupportticket::$_data[0]->staffphotophoto) { ?>
+                                <?php /* if (in_array('agent',jssupportticket::$_active_addons) && jssupportticket::$_data[0]->staffphotophoto) { ?>
                                     <img alt="image" class="js-ticket-staff-img" src="<?php echo esc_url(jssupportticket::makeUrl(array('jstmod'=>'agent','task'=>'getStaffPhoto','action'=>'jstask','jssupportticketid'=> jssupportticket::$_data[0]->staffphotoid ,'jsstpageid'=>get_the_ID()))); ?>">
-                                <?php } else {
-                                    echo wp_kses(jsst_get_avatar(JSSTincluder::getJSModel('jssupportticket')->getWPUidById(jssupportticket::$_data[0]->uid), 'js-ticket-staff-img'), JSST_ALLOWED_TAGS);
-                                } ?>
+                                <?php } else { */
+                                    echo wp_kses(jsst_get_avatar(jssupportticket::$_data[0]->uid, 'js-ticket-staff-img'), JSST_ALLOWED_TAGS);
+                                // } ?>
                             </div>
                             <div class="js-ticket-thread-cnt"><!-- Right Side Ticket Data -->
                                 <div class="js-ticket-thread-data">
@@ -1519,11 +1523,11 @@ if (jssupportticket::$_config['offline'] == 2) {
                                 if ($cur_uid == $reply->uid) ?>
                                     <div class="js-ticket-thread"><!-- Ticket Detail Box -->
                                         <div class="js-ticket-thread-image"><!-- Left Side Image -->
-                                            <?php if (in_array('agent',jssupportticket::$_active_addons) &&  $reply->staffphoto) { ?>
+                                            <?php /* if (in_array('agent',jssupportticket::$_active_addons) &&  $reply->staffphoto) { ?>
                                                 <img  class="js-ticket-staff-img" src="<?php echo esc_url(jssupportticket::makeUrl(array('jstmod'=>'agent','task'=>'getStaffPhoto','action'=>'jstask','jssupportticketid'=> $reply->staffid ,'jsstpageid'=>get_the_ID()))); ?>">
-                                            <?php } else {
-                                                echo wp_kses(jsst_get_avatar(JSSTincluder::getJSModel('jssupportticket')->getWPUidById($reply->uid), 'js-ticket-staff-img'), JSST_ALLOWED_TAGS);
-                                            } ?>
+                                            <?php } else { */
+                                                echo wp_kses(jsst_get_avatar($reply->uid, 'js-ticket-staff-img'), JSST_ALLOWED_TAGS);
+                                            // } ?>
                                         </div>
                                         <div class="js-ticket-thread-cnt"><!-- Right Side Ticket Data -->
 											<div class="js-ticket-thread-data">
@@ -1636,7 +1640,7 @@ if (jssupportticket::$_config['offline'] == 2) {
                                                                         }
                                                                 echo '</div>';
                                                                 }
-                                                            $nonce = esc_attr(wp_create_nonce("download-all-for-reply"));
+                                                            $nonce = wp_create_nonce("download-all-for-reply-".$reply->replyid);
                                                             echo wp_kses('
                                                                 <a class="js-all-download-button" target="_blank" href="' . esc_url(jssupportticket::makeUrl(array('jstmod'=>'ticket', 'task'=>'downloadallforreply', 'action'=>'jstask', 'downloadid'=>$reply->replyid, '_wpnonce'=>$nonce , 'jsstpageid'=>get_the_ID()))) . '" onclick="" target="_blank">'. esc_html(__('Download All', 'js-support-ticket')) . '</a>', JSST_ALLOWED_TAGS);?>
                                                     </div>
@@ -1649,21 +1653,24 @@ if (jssupportticket::$_config['offline'] == 2) {
                                                                 <?php echo esc_html(date_i18n("l F d, Y, H:i:s", jssupportticketphplib::JSST_strtotime($reply->created))); ?>
                                                             </div>
                                                             <div class="js-ticket-thread-actions">
-                                                                <?php if(JSSTincluder::getJSModel('userpermissions')->checkPermissionGrantedForTask('Edit Reply') && jssupportticket::$_data[0]->status != 5){ ?>
-                                                                        <a class="js-ticket-thread-actn-btn ticket-edit-reply-button" href="#" onclick="return showPopupAndFillValues(<?php echo esc_js($reply->replyid);?>,1)" >
-                                                                            <img alt="image" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/ticket-detail/edit-reply.png" />
-                                                                            <?php echo esc_html(__('Edit Reply','js-support-ticket'));?>
-                                                                        </a>
-                                                                <?php }
+                                                                <?php 
+                                                                if(JSSTincluder::getJSModel('userpermissions')->checkPermissionGrantedForTask('Edit Reply') && jssupportticket::$_data[0]->status != 5){
+                                                                    $nonce = wp_create_nonce('get-reply-data-by-id-'.$reply->replyid); ?>
+                                                                    <a class="js-ticket-thread-actn-btn ticket-edit-reply-button" href="#" onclick="return showPopupAndFillValues(<?php echo esc_js($reply->replyid);?>,1, '<?php echo esc_js($nonce);?>')" >
+                                                                        <img alt="image" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/ticket-detail/edit-reply.png" />
+                                                                        <?php echo esc_html(__('Edit Reply','js-support-ticket'));?>
+                                                                    </a>
+                                                                    <?php
+                                                                }
                                                                 if(in_array('timetracking', jssupportticket::$_active_addons)){
-                                                                    if(JSSTincluder::getJSModel('userpermissions')->checkPermissionGrantedForTask('Edit Time') && jssupportticket::$_data[0]->status != 5){ ?>
-                                                                        <a class="js-ticket-thread-actn-btn ticket-edit-time-button" href="#" onclick="return showPopupAndFillValues(<?php echo esc_js($reply->replyid);?>,2)" >
+                                                                    if(JSSTincluder::getJSModel('userpermissions')->checkPermissionGrantedForTask('Edit Time') && jssupportticket::$_data[0]->status != 5){
+                                                                        $nonce = wp_create_nonce('get-time-by-reply-id-'.$reply->replyid); ?>
+                                                                        <a class="js-ticket-thread-actn-btn ticket-edit-time-button" href="#" onclick="return showPopupAndFillValues(<?php echo esc_js($reply->replyid);?>,2, '<?php echo esc_js($nonce);?>')" >
                                                                             <img alt="image" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/ticket-detail/edit-reply.png" />
                                                                             <?php echo esc_html(__('Edit Time','js-support-ticket'));?>
                                                                         </a>
-                                                                <?php
-                                                                	}?>
-                                                    		<?php
+                                                                        <?php
+                                                                	}
                                                     			}
                                                 			?>
                                                             </div>
@@ -1744,7 +1751,7 @@ if (jssupportticket::$_config['offline'] == 2) {
                                 </form>
                                 <?php if (jssupportticket::$_data[0]->status != 4 && jssupportticket::$_data[0]->status != 5) { ?>
                                     <div id="postreply" class="js-det-tkt-rply-frm"><!-- Post Reply Area -->
-                                        <form class="js-det-tkt-form" method="post" action="<?php echo esc_url(wp_nonce_url(jssupportticket::makeUrl(array('jstmod'=>'reply','task'=>'savereply')),"save-reply")); ?>" enctype="multipart/form-data">
+                                        <form class="js-det-tkt-form" method="post" action="<?php echo esc_url(wp_nonce_url(jssupportticket::makeUrl(array('jstmod'=>'reply','task'=>'savereply')),"save-reply-".jssupportticket::$_data[0]->id)); ?>" enctype="multipart/form-data">
                                             <div class="js-tkt-det-title">
                                                 <?php echo esc_html(__('Post Reply','js-support-ticket')); ?>
                                             </div>
@@ -2087,9 +2094,10 @@ if (jssupportticket::$_config['offline'] == 2) {
                                             <div class="js-tkt-det-user-image">
                                                 <?php
                                                 if(jssupportticket::$_data[0]->staffphoto && jssupportticket::$_config['anonymous_name_on_ticket_reply'] == 2){
-                                                    ?>
+                                                    echo wp_kses(jsst_get_avatar(jssupportticket::$_data[0]->staffuid), JSST_ALLOWED_TAGS);
+                                                    /* ?>
                                                     <img alt="<?php echo esc_attr(__('staff photo','js-support-ticket')); ?>" src="<?php echo esc_url(jssupportticket::makeUrl(array('jstmod'=>'agent','task'=>'getStaffPhoto','action'=>'jstask','jssupportticketid'=>jssupportticket::$_data[0]->staffid, 'jsstpageid'=>jssupportticket::getPageid()))); ?>">
-                                                    <?php
+                                                    <?php */
                                                 } else { ?>
                                                     <img alt="<?php echo esc_attr(__('staff photo','js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL) . '/includes/images/user.png'; ?>" />
                                                     <?php
@@ -2188,7 +2196,7 @@ if (jssupportticket::$_config['offline'] == 2) {
                                     ?>
                                     <div class="js-tkt-det-user">
                                         <div class="js-tkt-det-user-image">
-                                            <?php echo wp_kses(jsst_get_avatar(JSSTincluder::getJSModel('jssupportticket')->getWPUidById(jssupportticket::$_data[0]->uid)), JSST_ALLOWED_TAGS); ?>
+                                            <?php echo wp_kses(jsst_get_avatar(jssupportticket::$_data[0]->uid), JSST_ALLOWED_TAGS); ?>
                                         </div>
                                         <div class="js-tkt-det-user-cnt">
                                             <div class="js-tkt-det-user-data name">

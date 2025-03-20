@@ -121,10 +121,7 @@ $link_export = admin_url('admin.php?page=export&task='.esc_attr($t_name).'&actio
 					<div class="js-admin-staff-wrapper">
 						<div class="js-admin-staff-cnt">
 							<div class="js-report-staff-image">
-								<?php
-									$imageurl = JSST_PLUGIN_URL."includes/images/user.png";
-								?>
-								<img class="js-report-staff-pic" src="<?php echo esc_url($imageurl); ?>" alt="<?php echo esc_html(__('staff image','js-support-ticket')); ?>"/>
+								<?php echo wp_kses(jsst_get_avatar($agent->id), JSST_ALLOWED_TAGS); ?>
 							</div>
 							<div class="js-report-staff-cnt">
 								<div class="js-report-staff-info js-report-staff-name">
@@ -360,7 +357,7 @@ $link_export = admin_url('admin.php?page=export&task='.esc_attr($t_name).'&actio
 										<div class="js-admin-staff-wrapper js-rep-tkt-list">
 											<div class="js-admin-staff-cnt">
 												<div class="js-report-staff-image">
-										            <?php echo wp_kses(jsst_get_avatar(JSSTincluder::getJSModel('jssupportticket')->getWPUidById($ticket->uid)), JSST_ALLOWED_TAGS); ?>
+										            <?php echo wp_kses(jsst_get_avatar($ticket->uid), JSST_ALLOWED_TAGS); ?>
 												</div>
 												<div class="js-report-staff-cnt">
 													<div class="js-report-staff-info js-report-staff-name">

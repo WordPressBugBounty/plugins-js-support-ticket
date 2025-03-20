@@ -1411,6 +1411,9 @@ class JSSTticketModel {
     }
 
     function removeEnforceTicket($id) {
+        if (!current_user_can('manage_options')) { //only admin can change it.
+            return false;
+        }
         $sendEmail = true;
         if (!is_numeric($id))
             return false;
@@ -2764,11 +2767,11 @@ class JSSTticketModel {
     }
 
     function isFieldRequired(){
+        $field = JSSTrequest::getVar('field');
         $nonce = JSSTrequest::getVar('_wpnonce');
-        if (! wp_verify_nonce( $nonce, 'is-field-required') ) {
+        if (! wp_verify_nonce( $nonce, 'is-field-required-'.$field) ) {
             die( 'Security check Failed' );
         }
-        $field = JSSTrequest::getVar('field');
         $query = "SELECT required  FROM " . jssupportticket::$_db->prefix . "js_ticket_fieldsordering WHERE  field ='".esc_sql($field)."'";
         return jssupportticket::$_db->get_var($query);
     }

@@ -46,8 +46,8 @@ $jssupportticket_css .= '
 	div.js-ticket-append-signature-wrp div.js-ticket-signature-radio-box.js-ticket-signature-radio-box-full-width{width: 100%;}
 	div.js-ticket-append-signature-wrp div.js-ticket-signature-radio-box label#forcanappendsignature{margin: 0px;display: inline-block;}
 
-	span.help-block{font-size:14px;}
-	span.help-block{color:red;}
+	span.jsst-help-block{font-size:14px;}
+	span.jsst-help-block{color:red;}
 
 	select ::-ms-expand {display:none !important;}
 	select{-webkit-appearance:none !important;}

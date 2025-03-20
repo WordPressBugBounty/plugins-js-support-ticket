@@ -32,24 +32,26 @@ class JSSTreplyController {
     }
 
     static function savereply() {
+        $ticketid = JSSTrequest::getVar('ticketid');
         $nonce = JSSTrequest::getVar('_wpnonce');
-        if (! wp_verify_nonce( $nonce, 'save-reply') ) {
+        if (! wp_verify_nonce( $nonce, 'save-reply-'.$ticketid) ) {
             die( 'Security check Failed' );
         }
         $data = JSSTrequest::get('post');
         JSSTincluder::getJSModel('reply')->storeReplies($data);
         if (is_admin()) {
-            $url = admin_url("admin.php?page=ticket&jstlay=ticketdetail&jssupportticketid=" . JSSTrequest::getVar('ticketid'));
+            $url = admin_url("admin.php?page=ticket&jstlay=ticketdetail&jssupportticketid=" . $ticketid);
         } else {
-            $url = jssupportticket::makeUrl(array('jstmod'=>'ticket','jstlay'=>'ticketdetail','jssupportticketid'=>JSSTrequest::getVar('ticketid')));
+            $url = jssupportticket::makeUrl(array('jstmod'=>'ticket','jstlay'=>'ticketdetail','jssupportticketid'=>$ticketid));
         }
         wp_redirect($url);
         exit;
     }
 
     static function saveeditedreply() {
+        $tikcetid = JSSTrequest::getVar('reply-tikcetid');
         $nonce = JSSTrequest::getVar('_wpnonce');
-        if (! wp_verify_nonce( $nonce, 'save-edited-reply') ) {
+        if (! wp_verify_nonce( $nonce, 'save-edited-reply-'.$tikcetid) ) {
             die( 'Security check Failed' );
         }
         $data = JSSTrequest::get('post');
@@ -64,14 +66,14 @@ class JSSTreplyController {
     }
 
     static function saveeditedtime() {
+        $data = JSSTrequest::get('post');
         $nonce = JSSTrequest::getVar('_wpnonce');
-        if (! wp_verify_nonce( $nonce, 'save-edited-time') ) {
+        if (! wp_verify_nonce( $nonce, 'save-edited-time-'.$data['reply-tikcetid']) ) {
             die( 'Security check Failed' );
         }
         if(!in_array('timetracking', jssupportticket::$_active_addons)){
             return;
         }
-        $data = JSSTrequest::get('post');
         JSSTincluder::getJSModel('timetracking')->editTime($data);
         if (current_user_can('manage_options') || current_user_can('jsst_support_ticket_tickets')) {
             $url = admin_url("admin.php?page=ticket&jstlay=ticketdetail&jssupportticketid=" . esc_attr($data['reply-tikcetid']));
