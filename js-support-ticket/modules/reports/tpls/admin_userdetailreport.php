@@ -382,12 +382,12 @@ $link_export = admin_url('admin.php?page=export&task='.esc_attr($t_name).'&actio
 								</td>
 								<td >
 									<?php
-							            // 0 -> New Ticket
-							            // 1 -> Waiting admin/staff reply
-							            // 2 -> in progress
-							            // 3 -> waiting for customer reply
-							            // 4 -> close ticket
-										switch($ticket->status){
+							            // 1 -> New Ticket
+							            // 2 -> Waiting admin/staff reply
+							            // 3 -> in progress
+							            // 4 -> waiting for customer reply
+							            // 5 -> close ticket
+										/*switch($ticket->status){
 											case 0:
 												$status = '<font color="#1EADD8">'. esc_html(__('New','js-support-ticket')).'</font>';
 												if($ticket->isoverdue == 1)
@@ -411,9 +411,20 @@ $link_export = admin_url('admin.php?page=export&task='.esc_attr($t_name).'&actio
 											case 4:
 												$status = '<font color="#5F3BBB">'. esc_html(__('Closed','js-support-ticket')).'</font>';
 											break;
-										}
-										echo wp_kses($status, JSST_ALLOWED_TAGS);
+										}*/
+										if (!in_array($ticket->status, [5, 6]) && $ticket->isoverdue == 1) {
+											$status = __('Overdue','js-support-ticket');
+							                $color = '#FFFFFF';
+							                $bgcolor = '#DB624C';
+						                } else {
+						                	$status = $ticket->statustitle;
+							                $color = $ticket->statuscolour;
+							                $bgcolor = $ticket->statusbgcolour;
+						                }
 									?>
+									<span class="priority" style="background:<?php echo esc_attr($bgcolor); ?>;color:<?php echo esc_attr($color); ?>">
+										<?php echo esc_html($status); ?>
+									</span>
 								</td>
 								<td><span class="priority" style="background:<?php echo esc_attr($ticket->prioritycolour); ?>;"><?php echo esc_html(jssupportticket::JSST_getVarValue($ticket->priority)); ?></span></td>
 								<td ><?php echo esc_html(date_i18n(jssupportticket::$_config['date_format'],strtotime($ticket->created))); ?></td>

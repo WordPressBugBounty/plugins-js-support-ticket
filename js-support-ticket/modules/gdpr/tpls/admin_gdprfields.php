@@ -105,8 +105,10 @@
                                 </span>
                                 <?php if($termsandconditions_linktype == 2){
                                     echo esc_html(__('Wordpress Page','js-support-ticket'));
-                                }else{
+                                }else if($termsandconditions_linktype == 1){
                                     echo esc_html(__('Direct URL','js-support-ticket'));
+                                }else{
+                                    echo esc_html(__('None','js-support-ticket'));
                                 } ?>
                             </td>
                             <td>

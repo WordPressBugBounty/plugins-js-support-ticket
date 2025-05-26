@@ -1419,8 +1419,8 @@ class JSSTemailModel {
                         // New ticket mail to admin
                         $link = admin_url("admin.php?page=ticket&jstlay=ticketdetail&jssupportticketid=" . esc_attr($id));
                         $matcharray['{TICKETURL}'] = $link;
-			$adminEmailid = jssupportticket::$_config['default_admin_email'];
-			$adminEmail = $this->getEmailById($adminEmailid);
+			            $adminEmailid = jssupportticket::$_config['default_admin_email'];
+			            $adminEmail = $this->getEmailById($adminEmailid);
                         if (jssupportticket::$_config['ticket_reassign_admin'] == 1) {
 
                             $template = apply_filters( 'jsst_get_email_template_by_user_defined_language','','reassign-tk' ,$adminEmail ,'');
@@ -2125,6 +2125,9 @@ class JSSTemailModel {
     }
 
     function storeEmail($data) {
+        if (!current_user_can('manage_options')) { //only admin can change it.
+            return false;
+        }
         if(!$data['id'])
         if($this->checkAlreadyExist($data['email'])){
             JSSTmessage::setMessage(esc_html(__('Email Already Exist', 'js-support-ticket')), 'error');

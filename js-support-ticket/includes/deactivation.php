@@ -29,6 +29,8 @@ class JSSTdeactivation {
            $wpdb->prefix."js_ticket_email",
            $wpdb->prefix."js_ticket_emailtemplates",
            $wpdb->prefix."js_ticket_priorities",
+           $wpdb->prefix."js_ticket_statuses",
+           $wpdb->prefix."js_ticket_products",
            $wpdb->prefix."js_ticket_replies",
            $wpdb->prefix."js_ticket_system_errors",
            $wpdb->prefix."js_ticket_tickets",
@@ -36,6 +38,7 @@ class JSSTdeactivation {
            $wpdb->prefix."js_ticket_users",
            $wpdb->prefix."js_ticket_multiform",
            $wpdb->prefix."js_ticket_slug",
+           $wpdb->prefix."js_ticket_jshdsessiondata",
         );
         return $tables;
     }

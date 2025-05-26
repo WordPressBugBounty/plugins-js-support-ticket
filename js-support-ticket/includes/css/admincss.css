@@ -14,6 +14,7 @@ a {box-shadow: unset !important;}
 .ui-sortable-helper {display: table;}
 .orange-bg {background: #feac47 !important;}
 .black-bg {background: #23282d !important;border: 1px solid #23282d !important;padding: 7.5px 15px !important}
+.js-form-ticket-readonly {pointer-events: none !important;}
 
 div#jsstadmin-data .jsst_updated,
 div#jsstadmin-data .jsst_error,
@@ -143,6 +144,7 @@ div.menu-collasped-active div#jsstadmin-leftmenu a.jsst_js-install-btn {visibili
 div.menu-collasped-active div#jsstadmin-leftmenu div#jsstadmin-logo a.jsst-anchor, 
 div.menu-collasped-active div#jsstadmin-leftmenu img.jsst_js-arrow-img {display: inline-block;opacity: 1;}
 div.menu-collasped-active div#jsstadmin-leftmenu ul.jsstadmin-sidebar-menu li.treeview.active.menu-open ul.jsstadmin-sidebar-submenu {display: block !important;}
+div.menu-collasped-active div#jsstadmin-leftmenu ul.jsstadmin-sidebar-menu li.treeview.active ul.jsstadmin-sidebar-submenu {display: block !important;}
 div.menu-collasped-active div#jsstadmin-leftmenu li.disabled-menu span.jsst_text {display: inline-block !important;}
 
 /* page top */
@@ -183,21 +185,39 @@ form.jsstadmin-form div.js-form-wrapper {float: left;width: calc(100% / 2 - 20px
 form.jsstadmin-form div.js-form-wrapper.js-form-emailcc-wrapper {width: calc(100% / 3 - 20px);}
 form.jsstadmin-form div.js-form-wrapper.fullwidth {width: calc(100% - 20px);margin: 0px 10px 20px;}
 form.jsstadmin-form div.js-form-wrapper div.js-form-title {float: left;width: 100%;margin-bottom: 10px;color: #23282d;}
+form.jsstadmin-form div.js-form-wrapper span.js-form-subtitle {color: #23282d;background: #d9f0fa;border: 1px solid #80c7e8;padding: 5px 7px;}
 form.jsstadmin-form div.js-form-wrapper div.js-form-value {float: left;width: 100%;margin-bottom: 10px;position: relative;}
+form.jsstadmin-form div.js-form-wrapper div.js-form-value .js-form-prioritycolor-wrp {float: left;width: 40px;height: 45px;border-radius: 4px;margin-right: 4px;}
+form.jsstadmin-form div.js-form-wrapper div.js-form-value .js-form-statuscolor-wrp {float: left;width: 40px;height: 45px;border-radius: 4px;margin-right: 4px;}
+form.jsstadmin-form div.js-form-wrapper div.js-form-value .js-form-statusbgcolor-wrp {float: left;width: 40px;height: 45px;border-radius: 4px;margin-right: 4px;}
+form.jsstadmin-form div.js-form-wrapper div.js-form-description {float: left;width: 100%;padding: 5px 5px 0;color: #606062;}
+form.jsstadmin-form div.js-form-wrapper .js-visible-conditions-addbtn-wrp .js-form-visible-addmore{cursor: pointer;float: left;border: unset;font-size: 15px !important;padding: 2px 13px 2px 10px;margin-left: 5px;height: 45px;display: flex;align-items: center;background-color: #000;color: #fff;font-weight: bold;}
+form.jsstadmin-form div.js-form-wrapper .js-visible-conditions-addbtn-wrp .js-form-visible-addmore:hover{background-color: #1572e8;}
+form.jsstadmin-form div.js-form-wrapper .js-visible-conditions-body-value .js-visible-conditions-delbtn{cursor: pointer;float: left;background-color: #fff;border: 1px solid #ebecec;border-radius: 3px; height: 45px;display: flex;align-items: center;padding: 0 5px;margin:0 5px;}
+form.jsstadmin-form div.js-visible-conditions-addbtn-wrp .js-form-visible-addmore{cursor: pointer;float: left;border: unset;font-size: 15px !important;padding: 2px 13px 2px 10px;margin-left: 5px;min-height: 45px;display: flex;align-items: center;background-color: #1572e8;color: #fff;font-weight: bold;}
+form.jsstadmin-form div.js-visible-conditions-addbtn-wrp .js-form-visible-addmore:hover{background-color: #000;}
+form.jsstadmin-form.has-validation-callback .js-visible-conditions-addbtn-wrp{float:left;width: 100%;margin: 0 0 10px 5px;}
+/*remove later*/
+.jsst_hide{display: none;}
 form.jsstadmin-form div.js-form-wrapper a.js-form-link {float: right;color: #1572e8;text-decoration: none;}
 form.jsstadmin-form div.js-form-wrapper div.js-form-value .form-error {display: inline-block;position: absolute;font-size: 11px;color: red;color: red;bottom: -22px;right: 0;}
 form.jsstadmin-form div.js-form-wrapper .js-form-desc {float: left;width: 100%;color: #606062;}
+form.jsstadmin-form div.js-form-wrapper .js-form-desc.js-form-status-desc {min-height: 19px;}
 form.jsstadmin-form div.js-form-wrapper .js-form-diabled-field {float: left;width: 100%;height: 45px;padding: 10px;margin: 0;box-shadow: unset;color: #6c757d;background: #f8fafc;border: 1px solid #ebecec;}
 form.jsstadmin-form div.js-form-wrapper .js-form-input-field {float: left;width: 100%;height: 45px;padding: 10px;margin: 0;box-shadow: unset;color: #6c757d;background: #f8fafc;border: 1px solid #ebecec;}
+form.jsstadmin-form div.js-form-wrapper .js-form-input-field.js-form-prioritycolor-field {width: calc(100% - 45px);}
+form.jsstadmin-form div.js-form-wrapper .js-form-input-field.js-form-statuscolor-field {width: calc(100% - 45px);}
+form.jsstadmin-form div.js-form-wrapper .js-form-input-field.js-form-statusbgcolor-field {width: calc(100% - 45px);}
 form.jsstadmin-form div.js-form-wrapper .js-form-input-field.loading {background-image: url("../images/spinning-wheel.gif");background-size: 25px 25px;background-position:right center;background-repeat: no-repeat;}
 form.jsstadmin-form div.js-form-wrapper div.js-form-value  span.jsst_product_found{background-image: url("../images/good.png");background-size: 25px 25px;background-position:right center;background-repeat: no-repeat;width:30px;height:30px;top:10px;right:10px;position:absolute;}
 form.jsstadmin-form div.js-form-wrapper div.js-form-value  span.jsst_product_not_found{background-image: url("../images/close.png");background-size: 25px 25px;background-position:right center;background-repeat: no-repeat;width:30px;height:30px;top:10px;right:10px;position:absolute;}
-form.jsstadmin-form div.js-form-wrapper.js-form-visible-wrapper {float: left;width: calc(100% - 20px);padding: 18px 13px 20px;border: 1px solid #d0e5f9;background-color: #f2f9ff;border-radius: 7px;}
+form.jsstadmin-form .js-form-visible-subheading {float: left;width: calc(100% - 20px);padding: 0px 13px 20px;text-align: center;color: #000;font-size: 20px;font-weight: 500;}
+form.jsstadmin-form div.js-form-wrapper.js-form-visible-wrapper {float: left;width: calc(100% - 20px);padding: 25px 13px 20px;border: 1px solid #d0e5f9;background-color: #f2f9ff;border-radius: 7px;}
 form.jsstadmin-form div.js-form-wrapper.js-form-visible-wrapper .js-form-title{font-weight: 400;font-size: 16px;margin: 0 5px 15px;}
-form.jsstadmin-form div.js-form-wrapper.js-form-visible-wrapper .js-form-select-field{width: calc(100% / 3 - 10px);margin:0 5px 5px;}
+form.jsstadmin-form div.js-form-wrapper.js-form-visible-wrapper .js-form-input-field,
+form.jsstadmin-form div.js-form-wrapper.js-form-visible-wrapper .js-form-select-field{width: calc(100% / 3 - 26px);margin:0 5px 5px;}
 form.jsstadmin-form div.js-form-wrapper.js-form-visible-wrapper .js-form-desc{margin:0 5px;}
 form.jsstadmin-form div.js-form-wrapper.js-form-visible-wrapper #visibleValue div{width: calc(100% / 3 - 10px);margin: 0 5px 5px;float: left;padding: 10px;color: #6c757d;}
-
 
 form.jsstadmin-form div.js-form-wrapper .js-form-chkbox-field {float: left;width: 100%;height: 45px;padding: 10px;box-shadow: unset;color: #6c757d;background: #f8fafc;border: 1px solid #ebecec;}
 form.jsstadmin-form div.js-form-wrapper .js-form-chkbox-field .radiobutton {margin-right: 5px;}
@@ -381,6 +401,7 @@ table#js-support-ticket-table tr td img {display: inline-block;max-width: 100%;h
 table#js-support-ticket-table tr .left {text-align: left;}
 table#js-support-ticket-table tr span.js-ticket-admin-prirrity-color {display: inline-block;padding: 7px 12px;}
 div.jsstadmin-help-msg {float: left;width: 100%;padding: 20px 15px;}
+div#js-field-ordering-notice {width: calc(100% - 40px);display: inline-block;padding: 8px 10px;float: left;border: 1px solid #ddd;background: #FFF;color: #333333;margin: 10px 20px 5px;box-shadow: 0 0 3px 1px rgba(0,0,0,0.2)}
 table#js-support-ticket-table.js-admin-report-tickets tr td a {display: inline-block;color: #23282d;width: auto !important;}
 
 /* error message */
@@ -680,6 +701,7 @@ div.js-tkt-det-hdg a.js-tkt-det-hdg-btn {float: right;color: #0073aa;}
 .js-tkt-det-info-data .js-tkt-det-info-val {float: left;color: #6a6a70;}
 .js-tkt-det-copy-id {display: inline-block;color: #0073aa;margin-left: 3px;cursor: pointer;}
 .js-tkt-det-tkt-prty-txt {float: left;width: 100%;text-align: center;padding: 15px;color: #fff;margin-bottom: 10px;font-size: 18px;}
+.js-tkt-det-tkt-prty-error-txt {float: left;color: #7e797a;font-size: 15px;line-height: initial;}
 .js-tkt-det-tkt-asgn-cnt div.js-tkt-det-hdg .js-tkt-det-hdg-txt {color: #7e797a;font-size: 15px;}
 .js-tkt-det-tkt-asgn-cnt div.js-tkt-det-user {padding: 10px 0;}
 .js-tkt-det-trsfer-dep {float: left;width: 100%;border-top: 1px solid #ebecec;padding: 15px 0 7px;}
@@ -1948,6 +1970,7 @@ a.button.button-primary.jssupportticket-review-box-btn {font-size: 14px;backgrou
 	.js-ticket-review-default div.js-ticket-review-default-cnt div.js-ticket-review-default-cnt-right div.js-ticket-review-row.review-description {line-height: 22px;padding: 15px 0 10px;}
 	.jssupportticket-thanks-box-popup .thanks-msg-title {padding-top: 5px;font-size: 30px;}
 	/*visible*/
+	form.jsstadmin-form div.js-form-wrapper.js-form-visible-wrapper .js-form-input-field{width: calc(100% - 10px);margin: 0 5px 15px;}
 	form.jsstadmin-form div.js-form-wrapper.js-form-visible-wrapper .js-form-select-field{width: calc(100% - 10px);margin: 0 5px 15px;}
 	form.jsstadmin-form div.js-form-wrapper.js-form-visible-wrapper{width: calc(100% - 0px)}
 	/* configuration */

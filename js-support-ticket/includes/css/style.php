@@ -142,6 +142,11 @@ $result = "
 	div.js-ticket-thread-wrapper div.js-ticket-thread-upperpart a.ticket-edit-time-button{border:1px solid $color5;background:$color3;color:$color4;}
 	span.js-ticket-value.js-ticket-creade-via-email-spn{border:1px solid $color5;background:$color3;color:$color4;}
 
+    /* ticket status */
+    div.js-ticket-checkstatus-wrp p.js-support-tkentckt-centrmainwrp::after{background:$color1; }
+    div.js-ticket-checkstatus-wrp p.js-support-tkentckt-centrmainwrp span.js-support-tkentckt-centrwrp{color:$color2;}
+    div.jsst-visitor-token-message p.jsst-visitor-token-message-token-number a{background:$color1;color:$color7;}
+
     /* Social Login */
     .js-ticket-sociallogin .js-ticket-sociallogin-heading {color: $color4;}
 

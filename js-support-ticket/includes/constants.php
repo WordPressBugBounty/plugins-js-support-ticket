@@ -103,6 +103,8 @@ if (!defined('JSST_ALLOWED_TAGS')) {
             'data-action' => array(),
             'data-sitekey' => array(),
             'style' => array(),
+            'onchange' => array(),
+            'tabindex' => array(),
         ),
         'textarea'     => array(
             'rows' => array(),
@@ -114,6 +116,9 @@ if (!defined('JSST_ALLOWED_TAGS')) {
             'data-validation' => array(),
             'autocomplete' => array(),
             'style' => array(),
+            'disabled' => array(),
+            'readonly' => array(),
+            'placeholder' => array(),
         ),
         'button'      => array(
             'type'  => array(),
@@ -137,6 +142,9 @@ if (!defined('JSST_ALLOWED_TAGS')) {
             'multiple' => array(),
             'data-nonce' => array(),
             'style' => array(),
+            'disabled' => array(),
+            'readonly' => array(),
+            'tabindex' => array(),
         ),
         'option'      => array(
             'id' => array(),

@@ -44,6 +44,9 @@ class JSSTslugModel {
         if (empty($data)) {
             return false;
         }
+        if (!current_user_can('manage_options')) { //only admin can change it.
+            return false;
+        }
         $row = JSSTincluder::getJSTable('slug');
         foreach ($data as $id => $slug) {
             if($id != '' && is_numeric($id)){
@@ -176,7 +179,7 @@ class JSSTslugModel {
             if($home_page == 1){
                 $slug->value = $homeprefix.$slug->value;
             }
-            if(strpos($rules,$slug->value) === false){
+            if(jssupportticketphplib::JSST_strpos($rules,$slug->value) === false){
                 $string .= $bstring. $slug->value;
             }else{
                 $string .= $bstring.$prefix. $slug->value;

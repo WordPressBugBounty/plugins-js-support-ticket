@@ -2,6 +2,7 @@
 	div#multiformpopup {width: 65%;}
 	div.js-cp-main-wrp div.js-cp-left {width: 100%;padding-bottom: 30px;}
 	div.js-cp-main-wrp div.js-cp-right {width: 100%;}
+	div.jsst-visitor-token-message p.jsst-visitor-token-message-token-number a{margin-bottom: 10px;}
 
 /* Add Form */
 	div.js-ticket-table-heading-wrp div.js-ticket-table-heading-left {width: auto;}
@@ -47,6 +48,7 @@
 	div#userpopup {width: 90%;}
 	div#popupforagenttransfer {width: 90%;}
 	div#popupfordepartmenttransfer {width: 90%;}
+	div#userpopupforchangestatus {width: 90%;}
 	div#popupforinternalnote {width: 93%;}
 	div.js-ticket-append-signature-wrp div.js-ticket-signature-radio-box{width: calc(100% / 2 - 10px);margin-bottom: 10px;}
 	div#userpopupforchangepriority{width: 90%;}

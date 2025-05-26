@@ -12,7 +12,7 @@ class JSSTjssupportticketController {
     function handleRequest() {
         $layout = JSSTrequest::getLayout('jstlay', null, 'controlpanel');
         jssupportticket::$_data['sanitized_args']['jsst_nonce'] = esc_html(wp_create_nonce('jsst_nonce'));
-        if (self::canaddfile()) {
+        if (self::canaddfile($layout)) {
             switch ($layout) {
                 case 'admin_controlpanel':
 			        include_once JSST_PLUGIN_PATH . 'includes/updates/updates.php';
@@ -22,7 +22,7 @@ class JSSTjssupportticketController {
                 case 'controlpanel':
                     JSSTincluder::getJSModel('jssupportticket')->getControlPanelData();
                     include_once JSST_PLUGIN_PATH . 'includes/updates/updates.php';
-                    JSSTupdates::checkUpdates('293');
+                    JSSTupdates::checkUpdates('294');
                     JSSTincluder::getJSModel('jssupportticket')->updateColorFile();
                     //JSSTincluder::getJSModel('jssupportticket')->getStaffControlPanelData();
                     break;
@@ -50,15 +50,19 @@ class JSSTjssupportticketController {
         }
     }
 
-    function canaddfile() {
+    function canaddfile($layout) {
         $nonce_value = JSSTrequest::getVar('jsst_nonce');
         if ( wp_verify_nonce( $nonce_value, 'jsst_nonce') ) {
-            if (isset($_POST['form_request']) && $_POST['form_request'] == 'jssupportticket')
+            if (isset($_POST['form_request']) && $_POST['form_request'] == 'jssupportticket') {
                 return false;
-            elseif (isset($_GET['action']) && $_GET['action'] == 'jstask')
+            } elseif (isset($_GET['action']) && $_GET['action'] == 'jstask') {
                 return false;
-            else
+            } else {
+                if(!is_admin() && jssupportticketphplib::JSST_strpos($layout, 'admin_') === 0){
+                    return false;
+                }
                 return true;
+            }
         }
     }
 
@@ -94,6 +98,14 @@ class JSSTjssupportticketController {
                 $url = admin_url("admin.php?page=priority&jstlay=priorities");
             } else {
                 $url = jssupportticket::makeUrl(array('jstmod'=>'priority', 'jstlay'=>'priorities'));
+            }
+        }elseif($post['ordering_for'] == 'status'){
+            if (is_admin()) {
+                $url = admin_url("admin.php?page=status&jstlay=statuses");
+            }
+        }elseif($post['ordering_for'] == 'product'){
+            if (is_admin()) {
+                $url = admin_url("admin.php?page=product&jstlay=products");
             }
         }elseif($post['ordering_for'] == 'fieldordering'){
             $fieldfor = JSSTrequest::getVar('fieldfor');

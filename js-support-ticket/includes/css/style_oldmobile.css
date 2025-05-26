@@ -35,6 +35,7 @@
 	
 /* Ticket Status */
 	div.js-ticket-checkstatus-wrp div.js-ticket-checkstatus-field-wrp{width: calc(100% / 1 - 50px); }
+	div.jsst-visitor-token-message p.jsst-visitor-token-message-token-number a{margin-bottom: 10px;}
 /* Add Form */
 	div.js-ticket-add-form-wrapper div.js-ticket-from-field-wrp{width: calc(100% / 1 - 10px);}
 	div.js-ticket-select-user-field{width: 65%;}
@@ -121,6 +122,7 @@
 	div#usercredentailspopup {width: 90%;}
 	div#popupforagenttransfer {width: 90%;}
 	div#popupfordepartmenttransfer {width: 90%;}
+	div#userpopupforchangestatus {width: 90%;}
 
 	/*Merge Ticket Responsive*/
     div.js-merge-ticket{margin:15px 0px;}

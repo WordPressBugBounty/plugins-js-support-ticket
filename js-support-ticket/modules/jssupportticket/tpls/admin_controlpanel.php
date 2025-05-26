@@ -411,23 +411,7 @@ wp_add_inline_script('ticket-google-charts-handle',$jssupportticket_js);
                                     </div>
                                     <div class="js-cp-tkt-status">
                                         <?php
-                                        if ($ticket->status == 0) {
-                                            $style = "#1572e8;";
-                                            $status = esc_html(__('New', 'js-support-ticket'));
-                                        } elseif ($ticket->status == 1) {
-                                            $style = "#ad6002;";
-                                            $status = esc_html(__('Waiting Agent Reply', 'js-support-ticket'));
-                                        } elseif ($ticket->status == 2) {
-                                            $style = "#FF7F50;";
-                                            $status = esc_html(__('In Progress', 'js-support-ticket'));
-                                        } elseif ($ticket->status == 3) {
-                                            $style = "green;";
-                                            $status = esc_html(__('Replied', 'js-support-ticket'));
-                                        } elseif ($ticket->status == 4) {
-                                            $style = "blue;";
-                                            $status = esc_html(__('Closed', 'js-support-ticket'));
-                                        }
-                                        echo wp_kses('<span style="color:' . esc_attr($style) . '">' . esc_html($status) . '</span>', JSST_ALLOWED_TAGS);
+                                        echo wp_kses('<span style="color:' . esc_attr($ticket->statuscolour) . ';background:' . esc_attr($ticket->statusbgcolour) . '">' . esc_html($ticket->statustitle) . '</span>', JSST_ALLOWED_TAGS);
                                         ?>
                                     </div>
                                     <div class="js-cp-tkt-crted"><?php echo esc_html(date_i18n(jssupportticket::$_config['date_format'], jssupportticketphplib::JSST_strtotime($ticket->created))); ?></div>

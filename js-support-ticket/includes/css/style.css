@@ -23,6 +23,8 @@ div.jsst-main-up-wrapper figure{margin:0}img{vertical-align:middle}.js-img-respo
 
 /* General Classes */
 .jsst-main-up-wrapper .visible{display: none;}
+.jsst-main-up-wrapper .js-ticket-visible{display: none;}
+.js-form-ticket-readonly {pointer-events: none !important;}
 select::-ms-expand { display: none; }
 /* General Classes */
 /* BreadCrumbs */
@@ -121,10 +123,20 @@ div#jsst-widget-myticket-wrapper div.jsst-widget-myticket-bottombar span.jsst-wi
 div#jsst-widget-myticket-wrapper div.jsst-widget-myticket-bottombar span.jsst-widget-myticket-from span.widget-from{}
 div#jsst-widget-myticket-wrapper div.jsst-widget-myticket-bottombar span.jsst-widget-myticket-from span.widget-fromname{}
 
+/* ticket status */
+div.js-ticket-checkstatus-wrp p.js-support-tkentckt-centrmainwrp{font-size: 18px !important;position: relative;display: inline-block;text-align: center;margin:30px 10px 50px 10px;font-weight: bold;width: calc(100% - 20px);}
+div.js-ticket-checkstatus-wrp p.js-support-tkentckt-centrmainwrp span.js-support-tkentckt-centrwrp{background-color: white;position: relative;display:inline-block;z-index: 2;padding-left: 20px;padding-right: 20px;text-align: center;}
+div.js-ticket-checkstatus-wrp p.js-support-tkentckt-centrmainwrp::after{display: block;content: '';z-index: 1;position: absolute;width: 100%;height: 1px;top: 50%;}
+
 /* Visitor Message */
 div.jsst-visitor-message-wrapper{width: 100%;float: left;padding: 15px;margin: 15px 0px;background:url(../images/body-bg-1.png)}
 div.jsst-visitor-message-wrapper img{float: left;padding-right:15px; max-width: 20%;}
 div.jsst-visitor-message-wrapper span{float: left;padding: 35px 20px;color: #373435;font-size: 18px;width: 80%;}
+div.jsst-visitor-token-message{float: left; width: 100%;background-color: #fcf8eb;border: 1px solid #e9b75d;padding: 15px;}
+div.jsst-visitor-token-message p.jsst-visitor-token-message-heading{float: left;width: 100%;font-weight: bold;margin-bottom: 10px;}
+div.jsst-visitor-token-message p.jsst-visitor-token-message-discription{float: left;width: 100%;margin-bottom: 10px;}
+div.jsst-visitor-token-message p.jsst-visitor-token-message-token-number{display: flex;flex-wrap: wrap; justify-content: space-between;align-items: center; float: left;width: 100%;padding-left:10px;background-color: #fff;border: 1px solid #e9b75d;color: #6f7070;}
+div.jsst-visitor-token-message p.jsst-visitor-token-message-token-number a{float: right;cursor: pointer;padding: 7px 10px;min-width: 140px;text-align: center;}
 
 /* Rating */
 div.jsst-rating-div{display: inline-block;padding: 0px 0px;padding-top: 10px;}
@@ -138,7 +150,7 @@ div.tablenav div.tablenav-pages{border: 1px solid #f1f1fc;width: 100%;padding: 1
 input.custom_date{background-image: url(../images/calender.png);background-repeat: no-repeat;background-position: 97% 11px;padding: 10px;height: 50px;background-size: 25px;}
 select.js-ticket-custom-select{width: 100%;border-radius: unset;background: url(../images/selecticon.png) 96% / 4% no-repeat;background-color: rgba(0, 0, 0, 0);padding-bottom: 11px;padding-top: 11px;}
 div.js-ticket-custom-radio-box{float: left;padding: 10px;height: 50px;line-height: initial;} 
-input.radiobutton.js-ticket-append-radio-btn{vertical-align: middle;margin-right: 2px !important; }
+input.radiobutton.js-ticket-append-radio-btn{vertical-align: middle;margin: 0 5px 0 0 !important }
 label{margin: 0px;display: inline-block;}
 div.js-ticket-radio-box{float: left;padding: 10px;height: 50px;line-height: initial;}
 div.js-ticket-radio-box input.js-ticket-radio-btn{margin-right: 5px;vertical-align: middle;}

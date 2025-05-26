@@ -53,6 +53,8 @@ $jssupportticket_css .= '
 	div#popupforagenttransfer form {float: left;width: 100%;padding: 30px;}
 	div#popupfordepartmenttransfer{position: fixed;top:50%;left:50%;width:40%;max-height:70%;z-index: 99999;overflow-y: auto; overflow-x: hidden;text-align: left;transform: translate(-50%,-50%);}
 	div#popupfordepartmenttransfer form {float: left;width: 100%;padding: 30px;}
+	div#userpopupforchangestatus{position: fixed;top:50%;left:50%;width:40%;max-height:70%;z-index: 99999;overflow-y: auto; overflow-x: hidden;text-align: left;transform: translate(-50%,-50%);}
+	div#userpopupforchangestatus form {float: left;width: 100%;padding: 30px;}
 	div#popupforinternalnote{position: fixed;top:50%;left:50%;width:40%;max-height:70%;z-index: 99999;overflow-y: auto; overflow-x: hidden;text-align: left;transform: translate(-50%,-50%);}
 	div#popupforinternalnote form {float: left;width: 100%;padding: 30px;}
 	div.js-ticket-priorty-btn-wrp{width: calc(100% - 20px);float: left;text-align: center; padding: 15px 0px;margin: 0px 10px;}
@@ -347,6 +349,7 @@ $jssupportticket_css .= '
 	.js-tkt-det-info-data .js-tkt-det-info-val {float: left;}
 	.js-tkt-det-copy-id {display: inline-block;margin-left: 3px;text-decoration: underline !important;cursor:pointer;}
 	.js-tkt-det-tkt-prty-txt {float: left;width: 100%;text-align: center;padding: 15px;color: #fff;margin-bottom: 10px;font-size: 18px;line-height: initial;}
+	.js-tkt-det-tkt-prty-error-txt {float: left;font-size: 15px;line-height: initial;}
 	.js-tkt-det-tkt-asgn-cnt .js-tkt-det-hdg .js-tkt-det-hdg-txt {font-size: 15px;}
 	.js-tkt-det-tkt-asgn-cnt .js-tkt-det-user {padding: 10px 0;}
 	.js-tkt-det-trsfer-dep {float: left;width: 100%;padding: 15px 0 7px;}
@@ -495,6 +498,7 @@ $jssupportticket_css .= '
 		div#userpopupforchangepriority div.js-ticket-priorty-btn-wrp{border-top:2px solid  '.$color2.';}
 		div#popupforagenttransfer {background:  #fff;border: 1px solid  '.$color5.';}
 		div#popupfordepartmenttransfer {background:  #fff;border: 1px solid  '.$color5.';}
+		div#userpopupforchangestatus {background:  #fff;border: 1px solid  '.$color5.';}
 		div#popupforinternalnote {background: #fff;border: 1px solid  '.$color5.';}
 		div.js-ticket-priorty-btn-wrp input.js-ticket-priorty-save{background-color: '.$color1.';color: '.$color7.';border: 1px solid  '.$color2.';}
 		div.js-ticket-priorty-btn-wrp input.js-ticket-priorty-save:hover{border-color: '.$color2.';}
@@ -609,6 +613,7 @@ $jssupportticket_css .= '
 		.js-tkt-det-info-data .js-tkt-det-info-val {color: '.$color4.';}
 		.js-tkt-det-copy-id {color: '.$color1.' !important;}
 		.js-tkt-det-tkt-prty-txt {color: '.$color7.';}
+		.js-tkt-det-tkt-prty-error-txt {color: '.$color4.';}
 		.js-tkt-det-tkt-asgn-cnt .js-tkt-det-hdg .js-tkt-det-hdg-txt {color: '.$color4.';}
 		.js-tkt-det-trsfer-dep {border-top: 1px solid '.$color5.';}
 		.js-tkt-det-trsfer-dep .js-tkt-det-trsfer-dep-txt {color: '.$color4.';}

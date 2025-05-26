@@ -4,7 +4,7 @@ Donate link: https://jshelpdesk.com/pricing/
 Tags:  helpdesk,ticket system,support,tickets,support ticket,support desk,help,paid support,knowledgebase,faq, support plugin, ticket plugin, support system, ticketing system,monitor desk, help desk, IMAP, Email Piping, agents, js support ticket
 Requires at least: 5.5
 Tested up to: 6.7.2
-Stable tag: 2.9.3
+Stable tag: 2.9.4
 Requires PHP: 7.4
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
@@ -242,6 +242,19 @@ Automatic updates should work like a charm; as always though, ensure you backup 
 21. Internal Mails
 
 == Changelog ==
+= 2.9.4 =
+* Security update
+* Add configuration-based reply ordering on ticket detail.
+* Add placeholder, description, search_admin, readonly, adminonly, and defaultvalue options in field ordering.
+* Improve adminonly option in field ordering.
+* Multiple visibility conditions in field ordering.
+* Add product option in field ordering.
+* Add token option to check ticket status.
+* Add custom status option.
+* Minimum required fields.
+* Add color preview option in the priority form.
+* Add GDPR fields to the user registration form.
+
 = 2.9.3 =
 * Security update
 

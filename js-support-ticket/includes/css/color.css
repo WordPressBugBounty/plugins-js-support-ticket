@@ -92,6 +92,11 @@
 	div.js-ticket-thread-wrapper div.js-ticket-thread-upperpart a.ticket-edit-time-button{border:1px solid #d1d1d1;background:#f5f2f5;color:#636363;}
 	span.js-ticket-value.js-ticket-creade-via-email-spn{border:1px solid #d1d1d1;background:#f5f2f5;color:#636363;}
 
+    /* ticket status */
+    div.js-ticket-checkstatus-wrp p.js-support-tkentckt-centrmainwrp::after{background:#4f6df5; }
+    div.js-ticket-checkstatus-wrp p.js-support-tkentckt-centrmainwrp span.js-support-tkentckt-centrwrp{color:#2b2b2b;}
+    div.jsst-visitor-token-message p.jsst-visitor-token-message-token-number a{background:#4f6df5;color:#ffffff;}
+
     /* Social Login */
     .js-ticket-sociallogin .js-ticket-sociallogin-heading {color: #636363;}
 

@@ -100,16 +100,23 @@ $jssupportticket_js ="
             });
 
         });
+        jQuery('a#chng-status').click(function (e) {
+            e.preventDefault();
+            jQuery('div#changestatus-popup').slideDown('slow');
+            jQuery('div#userpopupblack').show();
+        });
         jQuery('a#chng-prority').click(function (e) {
             e.preventDefault();
             jQuery('div#changepriority-popup').slideDown('slow');
             jQuery('div#userpopupblack').show();
         });
         jQuery('.userpopup-close, div#userpopupblack').click(function (e) {
+            jQuery('div#changestatus-popup').slideUp('slow', function () {
+                jQuery('div#userpopupblack').hide();
+            });
             jQuery('div#changepriority-popup').slideUp('slow', function () {
                 jQuery('div#userpopupblack').hide();
             });
-
         });
         jQuery('a#chng-dept').click(function (e) {
             e.preventDefault();
@@ -260,6 +267,7 @@ $jssupportticket_js ="
             }, 700);
 
         jQuery("div.jsst-popup-wrapper").slideUp("slow");
+        jQuery("div#userpopupforchangestatus").slideUp("slow");
         jQuery("div#userpopupforchangepriority").slideUp("slow");
         jQuery("div#userpopup").slideUp("slow");
 
@@ -614,25 +622,6 @@ $yesno = array(
         <div id="jsstadmin-data-wrp" class="p0 bg-n bs-n">
             <?php
             if (!empty(jssupportticket::$_data[0])) {
-                if (jssupportticket::$_data[0]->lock == 1) {
-                    $style = "darkred;";
-                    $status = esc_html(__('Lock', 'js-support-ticket'));
-                } elseif (jssupportticket::$_data[0]->status == 0) {
-                    $style = "red;";
-                    $status = esc_html(__('New', 'js-support-ticket'));
-                } elseif (jssupportticket::$_data[0]->status == 1) {
-                    $style = "orange;";
-                    $status = esc_html(__('Waiting Reply', 'js-support-ticket'));
-                } elseif (jssupportticket::$_data[0]->status == 2) {
-                    $style = "#FF7F50;";
-                    $status = esc_html(__('In Progress', 'js-support-ticket'));
-                } elseif (jssupportticket::$_data[0]->status == 3) {
-                    $style = "green;";
-                    $status = esc_html(__('Replied', 'js-support-ticket'));
-                } elseif (jssupportticket::$_data[0]->status == 4 OR jssupportticket::$_data[0]->status == 5) {
-                    $style = "blue;";
-                    $status = esc_html(__('Closed', 'js-support-ticket'));
-                }
                 $cur_uid = JSSTincluder::getObjectClass('user')->uid();
                 ?>
 
@@ -726,7 +715,7 @@ $yesno = array(
                     <div class="js-ticket-usercredentails-wrp" style="display: none;">
                         <div class="js-ticket-usercredentails-credentails-wrp">
                         </div>
-                        <?php if(jssupportticket::$_data[0]->status != 4 && jssupportticket::$_data[0]->status != 5){ ?>
+                        <?php if(jssupportticket::$_data[0]->status != 5 && jssupportticket::$_data[0]->status != 6){ ?>
                             <div class="js-ticket-usercredentail-data-add-new-button-wrap" >
                                 <?php $nonce = wp_create_nonce('get-form-for-privte-credentials-'.jssupportticket::$_data[0]->id); ?>
                                 <button type="button" class="js-ticket-usercredentail-data-add-new-button" onclick="addEditCredentail('<?php echo esc_js($nonce);?>', <?php echo esc_js(jssupportticket::$_data[0]->id);?>,<?php echo esc_js(JSSTincluder::getObjectClass('user')->uid());?>);" >
@@ -750,7 +739,7 @@ $yesno = array(
                         <div id="userpopup-records">
                             <div class="userpopup-search-history">
                                 <?php // data[5] holds the tickect history
-                                    $field_array = JSSTincluder::getJSModel('fieldordering')->getFieldTitleByFieldfor(1);
+                                    $field_array = JSSTincluder::getJSModel('fieldordering')->getFieldTitleByFieldfor(1, jssupportticket::$_data[0]->multiformid);
                                 if ((!empty(jssupportticket::$_data[5]))) {
                                     ?>
                                     <?php foreach (jssupportticket::$_data[5] AS $history) { ?>
@@ -843,7 +832,7 @@ $yesno = array(
                                     <div class="js-form-value"><?php wp_editor('', 'internalnote', array('media_buttons' => false)); ?></div>
                                 </div>
                                 <div class="js-form-wrapper">
-                                    <div class="js-form-title"><?php echo esc_html(__('Ticket', 'js-support-ticket')); echo ' '; echo esc_html($field_array['status']); ?></div>
+                                    <div class="js-form-title"><?php echo esc_html(__('Ticket', 'js-support-ticket')); echo ' '; echo esc_html(__('Status', 'js-support-ticket')); ?></div>
                                     <div class="js-form-value">
                                         <div class="jsst-formfield-radio-button-wrap">
                                             <?php echo wp_kses(JSSTformfield::checkbox('closeonreply', array('1' => esc_html(__('Close on reply', 'js-support-ticket'))), '', array('class' => 'radiobutton')), JSST_ALLOWED_TAGS); ?>
@@ -851,7 +840,7 @@ $yesno = array(
                                     </div>
                                 </div>
                                 <div class="js-form-wrapper">
-                                    <div class="js-form-title"><?php echo esc_html(jssupportticket::JSST_getVarValue($field_array['attachments'])); ?></div>
+                                    <div class="js-form-title"><?php echo esc_html(__('Attachments', 'js-support-ticket')); ?></div>
                                     <div class="js-form-value">
                                         <div class="tk_attachment_value_wrapperform">
                                             <span class="tk_attachment_value_text">
@@ -877,11 +866,41 @@ $yesno = array(
                         </div>
                     <?php } ?>
                 </div>
+                <!-- change status popup -->
+                <div id="changestatus-popup" class="jsst-popup-wrapper" style="display: none;">
+                    <div class="userpopup-top">
+                        <div class="userpopup-heading">
+                            <!-- Display heading based on field order  -->
+                            <?php echo esc_html(__('Change Status','js-support-ticket')); ?>
+                        </div>
+                        <img alt="<?php echo esc_html(__('Close','js-support-ticket')); ?>" class="userpopup-close" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/close-icon-white.png" />
+                    </div>
+                    <div class="js-admin-popup-cnt">
+                        <form class="js-det-tkt-form" method="post" action="<?php echo esc_url(wp_nonce_url(admin_url("admin.php?page=ticket&task=changestatus"),"change-status-".jssupportticket::$_data[0]->id)); ?>">
+                            <div class="js-form-wrapper">
+                                <div class="js-form-title">
+                                    <?php echo esc_html(__('Select Status','js-support-ticket')); ?>
+                                </div>
+                                <div class="js-form-value">
+                                    <?php echo wp_kses(JSSTformfield::select('status', JSSTincluder::getJSModel('status')->getStatusForCombobox(), jssupportticket::$_data[0]->status, '', array('class' => 'inputbox js-admin-popup-select-field')), JSST_ALLOWED_TAGS); ?>
+                                </div>
+                            </div>
+                            <div class="js-form-button">
+                                <?php echo wp_kses(JSSTformfield::submitbutton('changestatus', esc_html(__('Change Status','js-support-ticket')), array('class' => 'button js-admin-pop-btn-block')), JSST_ALLOWED_TAGS); ?>
+                            </div>
+                            <?php echo wp_kses(JSSTformfield::hidden('ticketid', jssupportticket::$_data[0]->id), JSST_ALLOWED_TAGS); ?>
+                            <?php echo wp_kses(JSSTformfield::hidden('uid', JSSTincluder::getObjectClass('user')->uid()), JSST_ALLOWED_TAGS); ?>
+                            <?php echo wp_kses(JSSTformfield::hidden('action', 'ticket_changestatus'), JSST_ALLOWED_TAGS); ?>
+                            <?php echo wp_kses(JSSTformfield::hidden('form_request', 'jssupportticket'), JSST_ALLOWED_TAGS); ?>
+                        </form>
+                    </div>
+                </div>
                 <!-- change priority popup -->
                 <div id="changepriority-popup" class="jsst-popup-wrapper" style="display: none;">
                     <div class="userpopup-top">
                         <div class="userpopup-heading">
-                            <?php echo esc_html(__('Change Priority','js-support-ticket')); ?>
+                            <!-- Display heading based on field order  -->
+                            <?php echo esc_html(__('Change','js-support-ticket')) ." ".esc_html(jssupportticket::JSST_getVarValue($field_array['priority'])); ?>
                         </div>
                         <img alt="<?php echo esc_html(__('Close','js-support-ticket')); ?>" class="userpopup-close" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/close-icon-white.png" />
                     </div>
@@ -892,11 +911,11 @@ $yesno = array(
                                     <?php echo esc_html(jssupportticket::JSST_getVarValue($field_array['priority'])); ?>
                                 </div>
                                 <div class="js-form-value">
-                                    <?php echo wp_kses(JSSTformfield::select('prioritytemp', JSSTincluder::getJSModel('priority')->getPriorityForCombobox(), jssupportticket::$_data[0]->priorityid, esc_html(__('Change Priority', 'js-support-ticket')), array('class' => 'inputbox js-admin-popup-select-field')), JSST_ALLOWED_TAGS); ?>
+                                    <?php echo wp_kses(JSSTformfield::select('prioritytemp', JSSTincluder::getJSModel('priority')->getPriorityForCombobox(), jssupportticket::$_data[0]->priorityid, esc_html(__('Change', 'js-support-ticket')) ." ".esc_html(jssupportticket::JSST_getVarValue($field_array['priority'])), array('class' => 'inputbox js-admin-popup-select-field')), JSST_ALLOWED_TAGS); ?>
                                 </div>
                             </div>
                             <div class="js-form-button">
-                                <?php echo wp_kses(JSSTformfield::button('changepriority', esc_html(__('Change Priority', 'js-support-ticket')), array('class' => 'button js-admin-pop-btn-block changeprioritybutton', 'onclick' => 'actionticket(1);')), JSST_ALLOWED_TAGS); ?>
+                                <?php echo wp_kses(JSSTformfield::button('changepriority', esc_html(__('Change', 'js-support-ticket')) ." ".esc_html(jssupportticket::JSST_getVarValue($field_array['priority'])), array('class' => 'button js-admin-pop-btn-block changeprioritybutton', 'onclick' => 'actionticket(1);')), JSST_ALLOWED_TAGS); ?>
                             </div>
                             <?php //echo wp_kses(JSSTformfield::hidden('ticketid', jssupportticket::$_data[0]->id), JSST_ALLOWED_TAGS); ?>
                             <?php //echo wp_kses(JSSTformfield::hidden('uid', JSSTincluder::getObjectClass('user')->uid()), JSST_ALLOWED_TAGS); ?>
@@ -910,7 +929,7 @@ $yesno = array(
                     <?php if ( in_array('actions',jssupportticket::$_active_addons)) { ?>
                         <div class="userpopup-top">
                             <div class="userpopup-heading">
-                                <?php echo esc_html(__('Department Transfer','js-support-ticket')); ?>
+                                <?php echo esc_html(jssupportticket::JSST_getVarValue($field_array['department'])) ." ".esc_html(__('Transfer','js-support-ticket')); ?>
                             </div>
                             <img alt="<?php echo esc_html(__('Close','js-support-ticket')); ?>" class="userpopup-close" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/close-icon-white.png" />
                         </div>
@@ -919,12 +938,12 @@ $yesno = array(
                                 <div class="js-form-wrapper">
                                     <div class="js-form-title"><?php echo esc_html(jssupportticket::JSST_getVarValue($field_array['department'])); ?></div>
                                     <div class="js-form-value">
-                                        <?php echo wp_kses(JSSTformfield::select('departmentid', JSSTincluder::getJSModel('department')->getDepartmentForCombobox(), jssupportticket::$_data[0]->departmentid, esc_html(__('Select Department', 'js-support-ticket')), array('class' => 'inputbox js-admin-popup-select-field')), JSST_ALLOWED_TAGS); ?>
+                                        <?php echo wp_kses(JSSTformfield::select('departmentid', JSSTincluder::getJSModel('department')->getDepartmentForCombobox(), jssupportticket::$_data[0]->departmentid, esc_html(__('Select', 'js-support-ticket')) ." ".esc_html(jssupportticket::JSST_getVarValue($field_array['department'])), array('class' => 'inputbox js-admin-popup-select-field')), JSST_ALLOWED_TAGS); ?>
                                     </div>
                                 </div>
                                 <?php if(in_array('note', jssupportticket::$_active_addons)){ ?>
                                     <div class="js-form-wrapper">
-                                        <div class="js-form-title"><label id="responcemsg" for="responce"><?php echo esc_html(__('Reason For Department Transfer', 'js-support-ticket')); ?></label></div>
+                                        <div class="js-form-title"><label id="responcemsg" for="responce"><?php echo esc_html(__('Reason For', 'js-support-ticket')) ." ".esc_html(jssupportticket::JSST_getVarValue($field_array['department'])) ." ".esc_html(__('Transfer', 'js-support-ticket')); ?></label></div>
                                         <div class="js-form-value"><?php wp_editor('', 'departmenttranfernote', array('media_buttons' => false)); ?></div>
                                     </div>
                                 <?php } ?>
@@ -1040,8 +1059,8 @@ $yesno = array(
                                 <?php } ?>
                                 <form method="post" action="<?php echo esc_url(wp_nonce_url(admin_url("admin.php?page=ticket&task=actionticket"),"action-ticket-".jssupportticket::$_data[0]->id)); ?>" id="adminTicketform" enctype="multipart/form-data">
                                     <?php
-                                        if (jssupportticket::$_data[0]->status != 5) { // merged closed ticket can not be reopend.
-                                            if (jssupportticket::$_data[0]->status != 4) { ?>
+                                        if (jssupportticket::$_data[0]->status != 6) { // merged closed ticket can not be reopend.
+                                            if (jssupportticket::$_data[0]->status != 5) { ?>
                                                 <a title="<?php echo esc_html(__('Close Ticket','js-support-ticket')); ?>" class="js-tkt-det-actn-btn" href="#" onclick="actionticket(2);">
                                                     <img alt="<?php echo esc_html(__('Close Ticket','js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/ticket-detail/close.png" />
                                                     <span><?php echo esc_html(__('Close Ticket','js-support-ticket')); ?></span>
@@ -1055,13 +1074,13 @@ $yesno = array(
                                         }
                                         jssupportticket::$_data['custom']['ticketid'] = jssupportticket::$_data[0]->id;
                                     ?>
-                                    <?php if (  in_array('actions',jssupportticket::$_active_addons) && jssupportticket::$_data[0]->status != 4 && jssupportticket::$_data[0]->status != 5 ) { ?>
+                                    <?php if (  in_array('actions',jssupportticket::$_active_addons) && jssupportticket::$_data[0]->status != 5 && jssupportticket::$_data[0]->status != 6 ) { ?>
                                         <a title="<?php echo esc_html(__('Print Ticket','js-support-ticket')); ?>" class="js-tkt-det-actn-btn" href="#" id="print-link" data-ticketid="<?php echo esc_attr(jssupportticket::$_data[0]->id); ?>">
                                             <img alt="<?php echo esc_html(__('Print Ticket','js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/ticket-detail/print.png" />
                                             <span><?php echo esc_html(__('Print Ticket','js-support-ticket')); ?></span>
                                         </a>
                                     <?php } ?>
-                                    <?php if (  in_array('mergeticket',jssupportticket::$_active_addons) && jssupportticket::$_data[0]->status != 4 && jssupportticket::$_data[0]->status != 5 ) {
+                                    <?php if (  in_array('mergeticket',jssupportticket::$_active_addons) && jssupportticket::$_data[0]->status != 5 && jssupportticket::$_data[0]->status != 6 ) {
                                         $nonce = wp_create_nonce("get-tickets-for-merging-".jssupportticket::$_data[0]->id) ?>
                                         <a title="<?php echo esc_html(__('Merge Ticket','js-support-ticket')); ?>" class="js-tkt-det-actn-btn" href="#" id="mergeticket" data-ticketid="<?php echo esc_attr(jssupportticket::$_data[0]->id); ?>" onclick="return showPopupAndFillValues(<?php echo esc_js(jssupportticket::$_data[0]->id) ?>,4, '<?php echo esc_js($nonce);?>')" >
                                             <img alt="<?php echo esc_html(__('Merge Ticket','js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/ticket-detail/merge-ticket.png" />
@@ -1367,7 +1386,7 @@ $yesno = array(
                                                         ' . esc_html($attachment->filename) . /*' ( ' . esc_html($attachment->filesize) . ' ) ' .*/ '
                                                         </span>
                                                         <a title="'. esc_html(__('Download','js-support-ticket')).'" class="button" target="_blank" href="' . esc_url($path) . '">' . esc_html(__('Download', 'js-support-ticket')) . '</a>', JSST_ALLOWED_TAGS);
-                                                        if(strpos($type, "image") !== false) {
+                                                        if(jssupportticketphplib::JSST_strpos($type, "image") !== false) {
                                                             $path = JSSTincluder::getJSModel('attachment')->getAttachmentImage($attachment->id);
                                                             echo wp_kses('<a data-gall="gallery-'.esc_attr($reply->replyid).'" class="button venobox" data-vbtype="image" title="'. esc_html(__('View','js-support-ticket')).'" href="'. esc_attr($path) .'"  target="_blank">
                                                                 <img alt="'. esc_html(__('View Image','js-support-ticket')).'" src="' . esc_url(JSST_PLUGIN_URL) . 'includes/images/ticket-detail/view.png" />
@@ -1476,7 +1495,7 @@ $yesno = array(
                                     </div>
                                 <?php } ?>
                                 <div class="js-form-wrapper">
-                                    <div class="js-form-title"><?php echo esc_html(jssupportticket::JSST_getVarValue($field_array['attachments'])); ?></div>
+                                    <div class="js-form-title"><?php echo esc_html(__('Attachments', 'js-support-ticket')); ?></div>
                                     <div class="js-form-field">
                                         <div class="tk_attachment_value_wrapperform">
                                             <span class="tk_attachment_value_text">
@@ -1499,7 +1518,7 @@ $yesno = array(
                                             <?php echo wp_kses(JSSTformfield::checkbox('ownsignature', array('1' => esc_html(__('Own Signature', 'js-support-ticket'))), '', array('class' => 'radiobutton')), JSST_ALLOWED_TAGS); ?>
                                         </div>
                                         <div class="jsst-formfield-radio-button-wrap">
-                                            <?php echo wp_kses(JSSTformfield::checkbox('departmentsignature', array('1' => esc_html(__('Department Signature', 'js-support-ticket'))), '', array('class' => 'radiobutton')), JSST_ALLOWED_TAGS); ?>
+                                            <?php echo wp_kses(JSSTformfield::checkbox('departmentsignature', array('1' => esc_html(jssupportticket::JSST_getVarValue($field_array['department'])) ." ". esc_html(__('Signature', 'js-support-ticket'))), '', array('class' => 'radiobutton')), JSST_ALLOWED_TAGS); ?>
                                         </div>
                                         <div class="jsst-formfield-radio-button-wrap">
                                             <?php echo wp_kses(JSSTformfield::checkbox('nonesignature', array('1' => esc_html(__('None', 'js-support-ticket'))), '', array('class' => 'radiobutton')), JSST_ALLOWED_TAGS); ?>
@@ -1527,7 +1546,7 @@ $yesno = array(
                                     <?php }
                                 } ?>
                                 <div class="js-form-wrapper">
-                                    <div class="js-form-title"><?php echo esc_html(__('Ticket', 'js-support-ticket')); echo ' '; echo esc_html($field_array['status']); ?></div>
+                                    <div class="js-form-title"><?php echo esc_html(__('Ticket', 'js-support-ticket')); echo ' '; echo esc_html(__('Status', 'js-support-ticket')); ?></div>
                                     <div class="jsst-formfield-radio-button-wrap">
                                         <?php echo wp_kses(JSSTformfield::checkbox('closeonreply', array('1' => esc_html(__('Close on reply', 'js-support-ticket'))), '', array('class' => 'radiobutton')), JSST_ALLOWED_TAGS); ?>
                                     </div>
@@ -1550,37 +1569,20 @@ $yesno = array(
                         <!-- ticket detail info -->
                         <div class="js-tkt-det-cnt js-tkt-det-tkt-info">
                             <?php
-                                if (jssupportticket::$_data[0]->status == 0) {
-                                    $color = "#5bb12f;";
-                                    $ticketmessage = esc_html(__('Open', 'js-support-ticket'));
-                                } elseif (jssupportticket::$_data[0]->status == 1) {
-                                    $color = "#28abe3;";
-                                    $ticketmessage = esc_html(__('On Waiting', 'js-support-ticket'));
-                                } elseif (jssupportticket::$_data[0]->status == 2) {
-                                    $color = "#69d2e7;";
-                                    $ticketmessage = esc_html(__('In Progress', 'js-support-ticket'));
-                                } elseif (jssupportticket::$_data[0]->status == 3) {
-                                    $color = "#FFB613;";
-                                    $ticketmessage = esc_html(__('Replied', 'js-support-ticket'));
-                                } elseif (jssupportticket::$_data[0]->status == 4) {
-                                    $color = "#ed1c24;";
-                                    $ticketmessage = esc_html(__('Closed', 'js-support-ticket'));
-                                } elseif (jssupportticket::$_data[0]->status == 5) {
-                                    $color = "#dc2742;";
-                                    $ticketmessage = esc_html(__('Close and merge', 'js-support-ticket'));
-                                }
-                            ?>
-                            <div class="js-tkt-det-status" style="background-color:<?php echo esc_attr($color);?>;">
+                            if (jssupportticket::$_data[0]->status == 5 || 
+                                jssupportticket::$_data[0]->status == 3 || 
+                                jssupportticket::$_data[0]->status == 6) {
+                                $stylecolor = jssupportticket::$_data[0]->statuscolour;
+                                $stylebgcolor = jssupportticket::$_data[0]->statusbgcolour;
+                                $ticketmessage = esc_html(jssupportticket::$_data[0]->statustitle);
+                            } else {
+                                $ticketmessage = esc_html(__('Open', 'js-support-ticket'));
+                                $stylecolor = '#FFFFFF';
+                                $stylebgcolor = '#5bb12f';
+                            } ?>
+                            <div class="js-tkt-det-status" style="background-color:<?php echo esc_attr($stylebgcolor)?>;color:<?php echo esc_attr($stylecolor);?>;">
                                 <?php
                                     jssupportticket::$_data['custom']['ticketid'] = jssupportticket::$_data[0]->id;
-                                    if (jssupportticket::$_data[0]->status == 4)
-                                        $ticketmessage = esc_html(__('Closed', 'js-support-ticket'));
-                                    elseif (jssupportticket::$_data[0]->status == 2)
-                                        $ticketmessage = esc_html(__('In Progress', 'js-support-ticket'));
-                                    elseif (jssupportticket::$_data[0]->status == 5)
-                                        $ticketmessage = esc_html(__('Closed and merged', 'js-support-ticket'));
-                                    else
-                                    $ticketmessage = esc_html(__('Open', 'js-support-ticket'));
                                     echo esc_html($ticketmessage);
                                 ?>
                             </div>
@@ -1604,6 +1606,7 @@ $yesno = array(
                                         ?>
                                     </span>
                                 </div>
+                                <?php /*
                                 <div class="js-tkt-det-info-data">
                                     <span class="js-tkt-det-info-tit">
                                         <?php echo esc_html(jssupportticket::JSST_getVarValue($field_array['duedate'])). ' : ' ; ?>
@@ -1614,7 +1617,7 @@ $yesno = array(
                                             else echo esc_html(date_i18n(jssupportticket::$_config['date_format'], jssupportticketphplib::JSST_strtotime(jssupportticket::$_data[0]->duedate)));
                                         ?>
                                     </span>
-                                </div>
+                                </div> */?>
                                 <?php if(in_array('helptopic', jssupportticket::$_active_addons)){ ?>
                                     <div class="js-tkt-det-info-data">
                                         <span class="js-tkt-det-info-tit">
@@ -1629,13 +1632,21 @@ $yesno = array(
                                 <?php } ?>
                                 <div class="js-tkt-det-info-data">
                                     <span class="js-tkt-det-info-tit">
+                                        <?php echo esc_html(jssupportticket::JSST_getVarValue($field_array['product'])). ' : '; ?>
+                                    </span>
+                                    <span class="js-tkt-det-info-val">
+                                        <?php echo wp_kses_post(jssupportticket::$_data[0]->producttitle); ?>
+                                    </span>
+                                </div>
+                                <div class="js-tkt-det-info-data">
+                                    <span class="js-tkt-det-info-tit">
                                         <?php echo esc_html(jssupportticket::JSST_getVarValue($field_array['department'])). ' : '; ?>
                                     </span>
                                     <span class="js-tkt-det-info-val">
                                         <?php echo esc_html(jssupportticket::$_data[0]->departmentname); ?>
                                     </span>
                                 </div>
-                                <?php if (jssupportticket::$_config['show_closedby_on_admin_tickets'] == 1 && jssupportticket::$_data[0]->status == 4) { ?>
+                                <?php if (jssupportticket::$_config['show_closedby_on_admin_tickets'] == 1 && jssupportticket::$_data[0]->status == 5) { ?>
                                     <div class="js-tkt-det-info-data">
                                         <span class="js-tkt-det-info-tit">
                                             <?php echo esc_html(__('Closed By','js-support-ticket')). ' : '; ?>
@@ -1664,7 +1675,7 @@ $yesno = array(
                                 </div>
                                 <div class="js-tkt-det-info-data">
                                     <span class="js-tkt-det-info-tit">
-                                        <?php echo esc_html($field_array['status']). ' : '; ?>
+                                        <?php echo esc_html(__('Status', 'js-support-ticket')). ' : '; ?>
                                     </span>
                                     <span class="js-tkt-det-info-val">
                                         <?php
@@ -1685,6 +1696,26 @@ $yesno = array(
                                 </div>
                             </div>
                         </div>
+                        <!-- ticket detail status -->
+                        <div class="js-tkt-det-cnt js-tkt-det-tkt-prty">
+                            <div class="js-tkt-det-hdg">
+                                <div class="js-tkt-det-hdg-txt">
+                                    <?php echo esc_html(__('Status','js-support-ticket')); ?>
+                                </div>
+                                <a title="<?php echo esc_html(__('Change','js-support-ticket')); ?>" href="#" class="js-tkt-det-hdg-btn" id="chng-status">
+                                    <?php echo esc_html(__('Change','js-support-ticket')); ?>
+                                </a>
+                            </div>
+                            <?php
+                                if (!empty(jssupportticket::$_data[0]->status)) { ?>
+                                    <div class="js-tkt-det-tkt-prty-txt" style="background : <?php echo esc_attr(jssupportticket::$_data[0]->statusbgcolour); ?>;color : <?php echo esc_attr(jssupportticket::$_data[0]->statuscolour); ?>;">
+                                        <?php
+                                        echo esc_html(jssupportticket::JSST_getVarValue(jssupportticket::$_data[0]->statustitle)); ?>
+                                    </div>
+                                    <?php
+                                }
+                            ?>
+                        </div>
                         <!-- ticket detail priority -->
                         <div class="js-tkt-det-cnt js-tkt-det-tkt-prty">
                             <div class="js-tkt-det-hdg">
@@ -1692,15 +1723,29 @@ $yesno = array(
                                     <img title="<?php echo esc_html(__('watch video','js-support-ticket')); ?>" alt="<?php echo esc_html(__('watch video','js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL) . '/includes/images/watch-video-icon.png'; ?>" />
                                 </a>
                                 <div class="js-tkt-det-hdg-txt">
-                                    <?php echo esc_html(__('Priority','js-support-ticket')); ?>
+                                    <!-- Display heading based on field order  -->
+                                    <?php echo esc_html(jssupportticket::JSST_getVarValue($field_array['priority'])); ?>
                                 </div>
                                 <a title="<?php echo esc_html(__('Change','js-support-ticket')); ?>" href="#" class="js-tkt-det-hdg-btn" id="chng-prority">
                                     <?php echo esc_html(__('Change','js-support-ticket')); ?>
                                 </a>
                             </div>
-                            <div class="js-tkt-det-tkt-prty-txt" style="background:<?php echo esc_attr(jssupportticket::$_data[0]->prioritycolour); ?>;">
-                                <?php echo esc_html(jssupportticket::JSST_getVarValue(jssupportticket::$_data[0]->priority)); ?>
-                            </div>
+                            
+                                <?php
+                                    if (!empty(jssupportticket::$_data[0]->priority)) { ?>
+                                        <div class="js-tkt-det-tkt-prty-txt" style="background:<?php echo esc_attr(jssupportticket::$_data[0]->prioritycolour); ?>;">
+                                            <?php
+                                            echo esc_html(jssupportticket::JSST_getVarValue(jssupportticket::$_data[0]->priority)); ?>
+                                        </div>
+                                        <?php
+                                    } else { ?>
+                                        <div class="js-tkt-det-tkt-prty-error-txt">
+                                            <?php
+                                            echo esc_html(__('No','js-support-ticket'))." ".esc_html(jssupportticket::JSST_getVarValue($field_array['priority']))." ".esc_html(__('set','js-support-ticket')); ?>
+                                        </div>
+                                        <?php
+                                    } ?>
+                            
                         </div>
                         <!-- ticket detail assign to staff -->
                         <?php
@@ -1755,7 +1800,8 @@ $yesno = array(
                                                 <img title="<?php echo esc_html(__('watch video','js-support-ticket')); ?>" alt="<?php echo esc_html(__('watch video','js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL) . '/includes/images/watch-video-icon.png'; ?>" />
                                             </a>
                                             <div class="js-tkt-det-trsfer-dep-txt">
-                                                <?php echo esc_html(__('Department','js-support-ticket')); ?>: <?php echo esc_html(jssupportticket::JSST_getVarValue(jssupportticket::$_data[0]->departmentname)); ?>
+                                                <!-- Display heading based on field order  -->
+                                                <?php echo esc_html(jssupportticket::JSST_getVarValue($field_array['department'])); ?>: <?php echo esc_html(jssupportticket::JSST_getVarValue(jssupportticket::$_data[0]->departmentname)); ?>
                                             </div>
                                             <a title="<?php echo esc_html(__('Change','js-support-ticket')); ?>" href="#" class="js-tkt-det-hdg-btn" id="chng-dept">
                                                 <?php echo esc_html(__('Change','js-support-ticket')); ?>
@@ -1807,7 +1853,12 @@ $yesno = array(
                         <div class="js-tkt-det-cnt js-tkt-det-user-tkts" id="usr-tkt">
                             <div class="js-tkt-det-hdg">
                                 <div class="js-tkt-det-hdg-txt">
-                                    <?php echo esc_html(jssupportticket::$_data[0]->name).' '. esc_html(__('Tickets','js-support-ticket')); ?>
+                                    <?php
+                                    if(!empty($field_array['fullname'])) {
+                                        echo esc_html(jssupportticket::$_data[0]->name).' '. esc_html(__('Tickets','js-support-ticket'));
+                                    } else {
+                                        echo esc_html(__('Other Tickets','js-support-ticket'));
+                                    } ?>
                                 </div>
                             </div>
                             <div class="js-tkt-det-usr-tkt-list">
@@ -1825,21 +1876,23 @@ $yesno = array(
                                                     </span>
                                                 </div>
                                                 <div class="js-tkt-det-user-data">
-                                                    <span class="js-tkt-det-user-tit"><?php echo esc_html(__('Department','js-support-ticket')). ' : '; ?></span>
+                                                    <span class="js-tkt-det-user-tit">
+                                                        <!-- Display heading based on field order  -->
+                                                        <?php echo esc_html(jssupportticket::JSST_getVarValue($field_array['department'])). ' : '; ?>
+                                                    </span>
                                                     <span class="js-tkt-det-user-val"><?php echo esc_html(jssupportticket::JSST_getVarValue($usertickets->departmentname)); ?></span>
                                                 </div>
                                                 <div class="js-tkt-det-user-data">
                                                     <span class="js-tkt-det-prty" style="background: <?php echo esc_attr($usertickets->prioritycolour); ?>;"><?php echo esc_html(jssupportticket::JSST_getVarValue($usertickets->priority)); ?></span>
                                                     <span class="js-tkt-det-status">
                                                         <?php
-                                                            if ($usertickets->status == 4)
-                                                                $ticketmessage = esc_html(__('Closed', 'js-support-ticket'));
-                                                            elseif ($usertickets->status == 2)
-                                                                $ticketmessage = esc_html(__('In Progress', 'js-support-ticket'));
-                                                            elseif ($usertickets->status == 5)
-                                                                $ticketmessage = esc_html(__('Closed and merged', 'js-support-ticket'));
-                                                            else
-                                                            $ticketmessage = esc_html(__('Open', 'js-support-ticket'));
+                                                            if ($usertickets->status == 5 || 
+                                                                $usertickets->status == 3 || 
+                                                                $usertickets->status == 6) {
+                                                                $ticketmessage = esc_html($usertickets->statustitle);
+                                                            } else {
+                                                                $ticketmessage = esc_html(__('Open', 'js-support-ticket'));
+                                                            }
                                                             echo esc_html($ticketmessage);
                                                         ?>
                                                     </span>
@@ -1981,6 +2034,7 @@ $yesno = array(
                         ?>
                         <!-- ticket detail envato validation -->
                         <?php
+                        
                         if(in_array('envatovalidation', jssupportticket::$_active_addons) && !empty(jssupportticket::$_data[0]->envatodata)){
                             $envlicense = jssupportticket::$_data[0]->envatodata;
                             if(!empty($envlicense)){ ?>

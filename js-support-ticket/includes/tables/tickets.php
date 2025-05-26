@@ -8,6 +8,7 @@ class JSSTticketsTable extends JSSTtable {
 	public $id = '';
 	public $uid = '';
 	public $ticketid = '';
+	public $token = '';
 	public $departmentid = '';
 	public $priorityid = '';
 	public $staffid = '';
@@ -51,6 +52,7 @@ class JSSTticketsTable extends JSSTtable {
 	public $envatodata = '';
 	public $paidsupportitemid = '';
 	public $customticketno = '';
+	public $productid = '';
 
 	function __construct() {
 		parent::__construct('tickets', 'id'); // tablename, primarykey

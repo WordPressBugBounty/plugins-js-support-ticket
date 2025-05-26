@@ -90,6 +90,9 @@ class JSSTpriorityModel {
             JSSTmessage::setMessage(esc_html(__('Priority Title Already Exist', 'js-support-ticket')), 'error');
             return;
         }
+        if (!current_user_can('manage_options')) { //only admin can change it.
+            return false;
+        }
         $data = jssupportticket::JSST_sanitizeData($data); // JSST_sanitizeData() function uses wordpress santize functions
         $data['prioritycolour'] = $data['prioritycolor'];
 

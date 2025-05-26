@@ -285,6 +285,11 @@ $ticketordering = array(
     (object) array('id' => '1', 'text' => esc_html(__('Default', 'js-support-ticket'))),
     (object) array('id' => '2', 'text' => esc_html(__('Created', 'js-support-ticket')))
 );
+
+$repliesordering = array(
+    (object) array('id' => 'ASC', 'text' => esc_html(__('Oldest First', 'js-support-ticket'))),
+    (object) array('id' => 'DESC', 'text' => esc_html(__('Newest First', 'js-support-ticket')))
+);
 $ticketsorting = array(
     (object) array('id' => '1', 'text' => esc_html(__('Ascending', 'js-support-ticket'))),
     (object) array('id' => '2', 'text' => esc_html(__('Descending', 'js-support-ticket')))
@@ -863,6 +868,13 @@ $plugin_array = get_option('active_plugins');
                       $title = esc_html(__('Show Admin OR Agent Email On Ticket Reply', 'js-support-ticket'));
                       $field = JSSTformfield::select('show_email_on_ticket_reply', $yesno, jssupportticket::$_data[0]['show_email_on_ticket_reply']);
                       $description =  esc_html(__('Select whether users can see the email of administrator or agent on ticket reply','js-support-ticket'));
+                      JSST_printConfigFieldSingle($title, $field, $description);
+                    }
+
+                    if(isset(jssupportticket::$_data[0]['ticket_replies_ordering'])){
+                      $title = esc_html(__('Ticket Replies ordering', 'js-support-ticket'));
+                      $field = JSSTformfield::select('ticket_replies_ordering', $repliesordering, jssupportticket::$_data[0]['ticket_replies_ordering']);
+                      $description =  esc_html(__('Set the default ordering for ticket replies in the detail page.', 'js-support-ticket'));
                       JSST_printConfigFieldSingle($title, $field, $description);
                     }
 

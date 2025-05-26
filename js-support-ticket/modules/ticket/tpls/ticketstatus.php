@@ -14,18 +14,28 @@ if (jssupportticket::$_config['offline'] == 2) {
             <form class="js-ticket-form form-validate" action="<?php echo esc_url(wp_nonce_url(jssupportticket::makeUrl(array('jstmod'=>'ticket','task'=>'showticketstatus')),"show-ticket-status")); ?>" method="post" id="adminForm" enctype="multipart/form-data">
                 <div class="js-ticket-checkstatus-field-wrp">
                     <div class="js-ticket-field-title">
-                        <?php echo esc_html(__('Email','js-support-ticket')); ?>&nbsp;<span style="color: red">*</span>
+                        <?php echo esc_html(__('Email','js-support-ticket')); ?>
                     </div>
                     <div class="js-ticket-field-wrp">
-                        <input class="inputbox js-ticket-form-input-field required validate-email" data-validation="email" type="text" name="email" id="email" size="40" maxlength="255" value="<?php if (isset(jssupportticket::$_data['0']->email)) echo esc_attr(jssupportticket::$_data['0']->email); ?>" required />
+                        <input class="inputbox js-ticket-form-input-field validate-email" data-validation="email" type="text" name="email" id="email" size="40" maxlength="255" value="<?php if (isset(jssupportticket::$_data['0']->email)) echo esc_attr(jssupportticket::$_data['0']->email); ?>" />
                     </div>
                 </div>
                 <div class="js-ticket-checkstatus-field-wrp">
                     <div class="js-ticket-field-title">
-                        <?php echo esc_html(__('Ticket ID','js-support-ticket')); ?>&nbsp;<span style="color: red">*</span>
+                        <?php echo esc_html(__('Ticket ID','js-support-ticket')); ?>
                     </div>
                     <div class="js-ticket-field-wrp">
-                        <input class="inputbox js-ticket-form-input-field required" type="text" name="ticketid" id="ticketid" size="40" maxlength="255" value=""  required/>
+                        <input class="inputbox js-ticket-form-input-field" type="text" name="ticketid" id="ticketid" size="40" maxlength="255" value="" />
+                    </div>
+                </div>
+                <p class="js-support-tkentckt-centrmainwrp"><span class="js-support-tkentckt-centrwrp"><?php echo esc_html(__('OR','js-support-ticket')); ?></span></p>
+                <div class="js-ticket-checkstatus-field-wrp">
+                    <div class="js-ticket-field-title">
+                        <?php echo esc_html(__('Token','js-support-ticket')); ?>
+                    </div>
+                    <div class="js-ticket-field-wrp">
+                        <input class="inputbox js-ticket-form-input-field " type="text" name="tickettoken"
+                            id="token" size="40" maxlength="255" value=""  />
                     </div>
                 </div>
                 <div class="js-ticket-form-btn-wrp">

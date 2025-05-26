@@ -9,9 +9,12 @@ $jssupportticket_js ="
             if(this.value == 1){
                 jQuery('.for-terms-condtions-linktype1').slideDown();
                 jQuery('.for-terms-condtions-linktype2').hide();
-            }else{
+            }else if(this.value == 2){
                 jQuery('.for-terms-condtions-linktype1').hide();
                 jQuery('.for-terms-condtions-linktype2').slideDown();
+            }else{
+                jQuery('.for-terms-condtions-linktype1').hide();
+                jQuery('.for-terms-condtions-linktype2').hide();
             }
         });";
         if(isset(jssupportticket::$_data[0]['userfield']->id)){
@@ -20,9 +23,12 @@ $jssupportticket_js ="
             if(intial_val == 1){
                 jQuery('.for-terms-condtions-linktype1').slideDown();
                 jQuery('.for-terms-condtions-linktype2').hide();
-            }else{
+            }else if(intial_val == 2){
                 jQuery('.for-terms-condtions-linktype1').hide();
                 jQuery('.for-terms-condtions-linktype2').slideDown();
+            }else{
+                jQuery('.for-terms-condtions-linktype1').hide();
+                jQuery('.for-terms-condtions-linktype2').hide();
             }";
         }
         $jssupportticket_js .="
@@ -70,8 +76,8 @@ $jssupportticket_js ="
             <?php $nonce_id = isset(jssupportticket::$_data[0]['userfield']->id) ? jssupportticket::$_data[0]['userfield']->id : '';?>
             <form class="jsstadmin-form" method="post" action="<?php echo esc_html(wp_nonce_url(admin_url("admin.php?page=gdpr&task=savegdprfield"),"save-gdprfield-".$nonce_id)); ?>">
                 <div class="js-form-wrapper">
-                    <div class="js-form-title"><?php echo esc_html(__('Field Title', 'js-support-ticket')); ?>&nbsp;<span style="color: red;" >*</span></div>
-                    <div class="js-form-value"><?php echo wp_kses(JSSTformfield::text('fieldtitle', isset(jssupportticket::$_data[0]['userfield']->fieldtitle) ? jssupportticket::$_data[0]['userfield']->fieldtitle : '', array('class' => 'inputbox js-form-input-field', 'data-validation' => 'required')), JSST_ALLOWED_TAGS) ?></div>
+                    <div class="js-form-title"><?php echo esc_html(__('Field Title', 'js-support-ticket')); ?></div>
+                    <div class="js-form-value"><?php echo wp_kses(JSSTformfield::text('fieldtitle', isset(jssupportticket::$_data[0]['userfield']->fieldtitle) ? jssupportticket::$_data[0]['userfield']->fieldtitle : '', array('class' => 'inputbox js-form-input-field')), JSST_ALLOWED_TAGS) ?></div>
                 </div>
                 <?php
                 $termsandconditions_text = '';
@@ -105,7 +111,8 @@ $jssupportticket_js ="
                 */
                 $linktype = array(
                     (object) array('id' => 1, 'text' => esc_html(__('Direct Link', 'js-support-ticket'))),
-                    (object) array('id' => 2, 'text' => esc_html(__('Wordpress Page', 'js-support-ticket'))));
+                    (object) array('id' => 2, 'text' => esc_html(__('Wordpress Page', 'js-support-ticket'))),
+                    (object) array('id' => 3, 'text' => esc_html(__('None', 'js-support-ticket'))));
                 ?>
                 <div class="js-form-wrapper">
                     <div class="js-form-title"><?php echo esc_html(__('Link Type', 'js-support-ticket')); ?> </div>

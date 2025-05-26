@@ -11,12 +11,24 @@ class jssupportticketadmin {
 
     function mainmenu() {
         if (current_user_can('jsst_support_ticket')) {
+            $unresolved_tickets = JSSTincluder::getJSModel('ticket')->getUnresolvedAdminTicketsCount();
+            $count_str = '';
+            if ($unresolved_tickets > 0) {
+                $count_str = ' <span class="update-plugins"><span class="plugin-count">' . $unresolved_tickets . '</span></span>';
+            }
             add_menu_page(esc_html(__('JS Help Desk Control Panel', 'js-support-ticket')), // Page title
-                    esc_html(__('Help Desk', 'js-support-ticket')), // menu title
+                    esc_html(__('Help Desk', 'js-support-ticket')). $count_str, // menu title
                     'jsst_support_ticket', // capability
                     'jssupportticket', //menu slug
                     array($this, 'showAdminPage'), // function name
-    			  JSST_PLUGIN_URL.'includes/images/admin_ticket.png',26
+                    JSST_PLUGIN_URL.'includes/images/admin_ticket.png',23
+            );
+            add_submenu_page('jssupportticket', // parent slug
+                    esc_html(__('Dashboard', 'js-support-ticket')), // Page title
+                    esc_html(__('Dashboad', 'js-support-ticket')), // menu title
+                    'jsst_support_ticket', // capability
+                    'jssupportticket', //menu slug
+                    array($this, 'showAdminPage') // function name
             );
             add_submenu_page('jssupportticket_hide', // parent slug
                     esc_html(__('Slug', 'js-support-ticket')), // Page title
@@ -59,14 +71,28 @@ class jssupportticketadmin {
                     'configuration', //menu slug
                     array($this, 'showAdminPage') // function name
             );
-             add_submenu_page('jssupportticket', // parent slug
+            add_submenu_page('jssupportticket', // parent slug
                     esc_html(__('Priorities', 'js-support-ticket')), // Page title
                     esc_html(__('Priority', 'js-support-ticket')), // menu title
                     'jsst_support_ticket', // capability
                     'priority', //menu slug
                     array($this, 'showAdminPage') // function name
             );
-             add_submenu_page('jssupportticket', // parent slug
+            add_submenu_page('jssupportticket_hide', // parent slug
+                    esc_html(__('Statuses', 'js-support-ticket')), // Page title
+                    esc_html(__('status', 'js-support-ticket')), // menu title
+                    'jsst_support_ticket', // capability
+                    'status', //menu slug
+                    array($this, 'showAdminPage') // function name
+            );
+            add_submenu_page('jssupportticket_hide', // parent slug
+                    esc_html(__('Products', 'js-support-ticket')), // Page title
+                    esc_html(__('product', 'js-support-ticket')), // menu title
+                    'jsst_support_ticket', // capability
+                    'product', //menu slug
+                    array($this, 'showAdminPage') // function name
+            );
+            add_submenu_page('jssupportticket', // parent slug
                     esc_html(__('Department', 'js-support-ticket')), // Page title
                     esc_html(__('Departments', 'js-support-ticket')), // menu title
                     'jsst_support_ticket', // capability

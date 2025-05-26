@@ -157,6 +157,9 @@ function jsst_parse_request($q) {
             case 'visitor-message':
                 jssupportticket::$_data['sanitized_args']['jstmod'] = 'ticket';
                 jssupportticket::$_data['sanitized_args']['jstlay'] = 'visitormessagepage';
+                if(!empty($q->query_vars['jst1'])){
+                    jssupportticket::$_data['sanitized_args']['jssupportticketid'] = jssupportticketphplib::JSST_str_replace('/', '',$q->query_vars['jst1']);
+                }
             break;
             case 'role-permission':
                 jssupportticket::$_data['sanitized_args']['jstmod'] = 'role';

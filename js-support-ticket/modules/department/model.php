@@ -82,6 +82,8 @@ class JSSTdepartmentModel {
                 JSSTmessage::setMessage(esc_html(__('You are not allowed', 'js-support-ticket')) . ' ' . $task_allow, 'error');
                 return;
             }
+        } else if (!current_user_can('manage_options')) { //only admin can change it.
+            return false;
         }
 
         if($data['sendmail'] == 1 && is_numeric($data['emailid'])){
@@ -321,6 +323,7 @@ class JSSTdepartmentModel {
         if (!is_numeric($departmentid))
             return false;
         $query = "SELECT id, title AS text FROM `" . jssupportticket::$_db->prefix . "js_ticket_department_message_premade` WHERE status = 1 AND departmentid = " . esc_sql($departmentid);
+        $query .= " ORDER BY title ASC ";
         $list = jssupportticket::$_db->get_results($query);
         $combobox = false;
         $html = '';

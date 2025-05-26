@@ -18,6 +18,9 @@ class JSSTPostinstallationModel {
         if (empty($data))
             return false;
 
+        if (!current_user_can('manage_options')) { //only admin can change it.
+            return false;
+        }
         $error = false;
         unset($data['action']);
         unset($data['form_request']);

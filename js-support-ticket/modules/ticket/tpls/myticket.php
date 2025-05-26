@@ -4,10 +4,6 @@
 ?>
 <div class="jsst-main-up-wrapper">
 <?php
-$ticketstatus = array(
-    (object) array('id' => '1', 'text' => esc_html(__('Replied', 'js-support-ticket'))),
-    (object) array('id' => '0', 'text' => esc_html(__('Waiting Reply', 'js-support-ticket')))
-);
 wp_enqueue_style('status-graph', JSST_PLUGIN_URL . 'includes/css/status_graph.css');
 if (jssupportticket::$_config['offline'] == 2) {
     if (JSSTincluder::getObjectClass('user')->uid() != 0) {
@@ -119,7 +115,7 @@ if (jssupportticket::$_config['offline'] == 2) {
         $overdue = ($list == 3) ? 'active' : '';
         $myticket = ($list == 4) ? 'active' : '';
         $field_array = JSSTincluder::getJSModel('fieldordering')->getFieldTitleByFieldfor(1);
-        $show_field = JSSTincluder::getJSModel('fieldordering')->getFieldsForListing(1);
+        $search_field_array = JSSTincluder::getJSModel('fieldordering')->getUserSystemFieldsForSearch();
         $open_percentage = 0;
         $close_percentage = 0;
         $answered_percentage = 0;
@@ -253,49 +249,95 @@ if (jssupportticket::$_config['offline'] == 2) {
                 <form class="js-filter-form" name="jssupportticketform" id="jssupportticketform" method="POST" action="<?php echo esc_url(wp_nonce_url(jssupportticket::makeUrl(array('jstmod'=>'ticket','jstlay'=>'myticket')),"my-ticket")); ?>">
                     <div class="js-filter-wrapper">
                         <div class="js-filter-form-fields-wrp js-col-md-7" id="js-filter-wrapper-toggle-search">
-                            <?php echo wp_kses(JSSTformfield::text('jsst-ticketsearchkeys', isset(jssupportticket::$_data['filter']['ticketsearchkeys']) ? jssupportticket::$_data['filter']['ticketsearchkeys'] : '', array('class' => 'js-ticket-input-field','placeholder' => esc_html(__('Ticket ID', 'js-support-ticket')) . ' ' . esc_html(__('Or', 'js-support-ticket')) . ' ' . esc_attr($field_array['email']) . ' ' . esc_html(__('Or', 'js-support-ticket')) . ' ' . esc_attr($field_array['subject']))), JSST_ALLOWED_TAGS); ?>
+                            <?php
+                            $emailaddress = '';
+                            if(!empty($search_field_array['email'])) {
+                                $emailaddress = ' ' . __('Or', 'js-support-ticket') . ' ' . __($search_field_array['email'], 'js-support-ticket');
+                            }
+                            $subject = '';
+                            if(!empty($search_field_array['subject'])) {
+                                $subject = ' ' . __('Or', 'js-support-ticket') . ' ' . __($search_field_array['subject'], 'js-support-ticket');
+                            }
+                            echo wp_kses(JSSTformfield::text('jsst-ticketsearchkeys', isset(jssupportticket::$_data['filter']['ticketsearchkeys']) ? jssupportticket::$_data['filter']['ticketsearchkeys'] : '', array('class' => 'js-ticket-input-field','placeholder' => esc_html(__('Ticket ID', 'js-support-ticket')) . $emailaddress . $subject)), JSST_ALLOWED_TAGS); ?>
                         </div>
                         <div id="js-filter-wrapper-toggle-area" class="js-filter-wrapper-toggle-ticketid">
                             <div class="js-col-md-3 js-filter-form-fields-wrp js-filter-wrapper-toggle-ticketid">
                                 <?php echo wp_kses(JSSTformfield::text('jsst-ticket', isset(jssupportticket::$_data['filter']['ticketid']) ? jssupportticket::$_data['filter']['ticketid'] : '', array('class' => 'js-ticket-input-field', 'placeholder' => esc_html(__('Ticket ID', 'js-support-ticket')))), JSST_ALLOWED_TAGS); ?>
                             </div>
-                            <div class="js-col-md-3 js-filter-field-wrp">
-                                <?php echo wp_kses(JSSTformfield::text('jsst-subject', isset(jssupportticket::$_data['filter']['subject']) ? jssupportticket::$_data['filter']['subject'] : '', array('class' => 'js-ticket-input-field', 'placeholder' => jssupportticket::JSST_getVarValue($field_array['subject']))), JSST_ALLOWED_TAGS); ?>
-                            </div>
-                            <div class="js-col-md-3 js-filter-field-wrp">
-                                <?php echo wp_kses(JSSTformfield::text('jsst-from', isset(jssupportticket::$_data['filter']['from']) ? jssupportticket::$_data['filter']['from'] : '', array('class' => 'js-ticket-input-field', 'placeholder' => esc_html(__('From', 'js-support-ticket')))), JSST_ALLOWED_TAGS); ?>
-                            </div>
-                            <div class="js-col-md-3 js-filter-field-wrp">
-                                <?php echo wp_kses(JSSTformfield::select('jsst-departmentid', JSSTincluder::getJSModel('department')->getDepartmentForCombobox(), isset(jssupportticket::$_data['filter']['departmentid']) ? jssupportticket::$_data['filter']['departmentid'] : '', esc_html(__('Select', 'js-support-ticket')).' '.esc_attr($field_array['department'])), JSST_ALLOWED_TAGS); ?>
-                            </div>
-                            <div class="js-col-md-3 js-filter-field-wrp">
-                                <?php echo wp_kses(JSSTformfield::text('jsst-email', isset(jssupportticket::$_data['filter']['email']) ? jssupportticket::$_data['filter']['email'] : '', array('class' => 'js-ticket-input-field', 'placeholder' => jssupportticket::JSST_getVarValue($field_array['email']))), JSST_ALLOWED_TAGS); ?>
-                            </div>
-                            <div class="js-col-md-3 js-filter-field-wrp">
-                                <?php echo wp_kses(JSSTformfield::select('jsst-priorityid', JSSTincluder::getJSModel('priority')->getPriorityForCombobox(), isset(jssupportticket::$_data['filter']['priorityid']) ? jssupportticket::$_data['filter']['priorityid'] : '', esc_html(__('Select', 'js-support-ticket')).' '.esc_attr($field_array['priority'])), JSST_ALLOWED_TAGS); ?>
-                            </div>
+                            <?php 
+                            if (!empty($search_field_array['subject'])) { ?>
+                                <div class="js-col-md-3 js-filter-field-wrp">
+                                    <?php echo wp_kses(JSSTformfield::text('jsst-subject', isset(jssupportticket::$_data['filter']['subject']) ? jssupportticket::$_data['filter']['subject'] : '', array('class' => 'js-ticket-input-field', 'placeholder' => jssupportticket::JSST_getVarValue($search_field_array['subject']))), JSST_ALLOWED_TAGS); ?>
+                                </div>
+                                <?php 
+                            } ?>
+                            <?php 
+                            if (!empty($search_field_array['fullname'])) { ?>
+                                <div class="js-col-md-3 js-filter-field-wrp">
+                                    <?php echo wp_kses(JSSTformfield::text('jsst-from', isset(jssupportticket::$_data['filter']['from']) ? jssupportticket::$_data['filter']['from'] : '', array('class' => 'js-ticket-input-field', 'placeholder' => esc_html(__('From', 'js-support-ticket')))), JSST_ALLOWED_TAGS); ?>
+                                </div>
+                                <?php 
+                            } ?>
+                            <?php 
+                            if (!empty($search_field_array['phone'])) { ?>
+                                <div class="js-col-md-3 js-filter-field-wrp">
+                                    <?php echo wp_kses(JSSTformfield::text('jsst-phone', isset(jssupportticket::$_data['filter']['phone']) ? jssupportticket::$_data['filter']['phone'] : '', array('class' => 'js-ticket-input-field', 'placeholder' => esc_html(jssupportticket::JSST_getVarValue($search_field_array['phone'])))), JSST_ALLOWED_TAGS); ?>
+                                </div>
+                                <?php 
+                            } ?>
+                            <?php
+                            if(!empty($search_field_array['product'])) { ?>
+                                <div class="js-col-md-3 js-filter-field-wrp">
+                                    <?php echo wp_kses(JSSTformfield::select('jsst-productid', JSSTincluder::getJSModel('product')->getProductForCombobox(), isset(jssupportticket::$_data['filter']['productid']) ? jssupportticket::$_data['filter']['productid'] : '', esc_html(__('Select', 'js-support-ticket')).' '.esc_attr($search_field_array['product'])), JSST_ALLOWED_TAGS); ?>
+                                </div>
+                                <?php
+                            }
+                            if(!empty($search_field_array['department'])) { ?>
+                                <div class="js-col-md-3 js-filter-field-wrp">
+                                    <?php echo wp_kses(JSSTformfield::select('jsst-departmentid', JSSTincluder::getJSModel('department')->getDepartmentForCombobox(), isset(jssupportticket::$_data['filter']['departmentid']) ? jssupportticket::$_data['filter']['departmentid'] : '', esc_html(__('Select', 'js-support-ticket')).' '.esc_attr($search_field_array['department'])), JSST_ALLOWED_TAGS); ?>
+                                </div>
+                                <?php
+                            }
+                            if(!empty($search_field_array['helptopic']) && in_array('helptopic', jssupportticket::$_active_addons)) { ?>
+                                <div class="js-col-md-3 js-filter-field-wrp">
+                                    <?php echo wp_kses(JSSTformfield::select('jsst-helptopicid', JSSTincluder::getJSModel('helptopic')->getHelpTopicsForCombobox(), isset(jssupportticket::$_data['filter']['helptopicid']) ? jssupportticket::$_data['filter']['helptopicid'] : '', esc_html(__('Select', 'js-support-ticket')).' '.esc_attr($search_field_array['helptopic'])), JSST_ALLOWED_TAGS); ?>
+                                </div>
+                                <?php
+                            }
+                            if(!empty($search_field_array['email'])) { ?>
+                                <div class="js-col-md-3 js-filter-field-wrp">
+                                    <?php echo wp_kses(JSSTformfield::text('jsst-email', isset(jssupportticket::$_data['filter']['email']) ? jssupportticket::$_data['filter']['email'] : '', array('class' => 'js-ticket-input-field', 'placeholder' => jssupportticket::JSST_getVarValue($search_field_array['email']))), JSST_ALLOWED_TAGS); ?>
+                                </div>
+                                <?php 
+                            }
+                            if(!empty($search_field_array['priority'])) { ?>
+                                <div class="js-col-md-3 js-filter-field-wrp">
+                                    <?php echo wp_kses(JSSTformfield::select('jsst-priorityid', JSSTincluder::getJSModel('priority')->getPriorityForCombobox(), isset(jssupportticket::$_data['filter']['priorityid']) ? jssupportticket::$_data['filter']['priorityid'] : '', esc_html(__('Select', 'js-support-ticket')).' '.esc_attr($search_field_array['priority'])), JSST_ALLOWED_TAGS); ?>
+                                </div>
+                                <?php 
+                            } ?>
                             <div class="js-col-md-3 js-filter-field-wrp">
                                 <?php echo wp_kses(JSSTformfield::text('jsst-datestart', isset(jssupportticket::$_data['filter']['datestart']) ? jssupportticket::$_data['filter']['datestart'] : '', array('class' => 'custom_date js-ticket-input-field', 'placeholder' => esc_html(__('Start Date', 'js-support-ticket')))), JSST_ALLOWED_TAGS); ?>
                             </div>
                             <div class="js-col-md-3 js-filter-field-wrp">
                                 <?php echo wp_kses(JSSTformfield::text('jsst-dateend', isset(jssupportticket::$_data['filter']['dateend']) ? jssupportticket::$_data['filter']['dateend'] : '', array('class' => 'custom_date js-ticket-input-field', 'placeholder' => esc_html(__('End Date', 'js-support-ticket')))), JSST_ALLOWED_TAGS); ?>
                             </div>
-                            <?php if(class_exists('WooCommerce') && in_array('woocommerce', jssupportticket::$_active_addons)){  ?>
+                            <?php if(class_exists('WooCommerce') && in_array('woocommerce', jssupportticket::$_active_addons) && !empty($search_field_array['wcorderid'])){  ?>
                                 <div class="js-col-md-3 js-filter-field-wrp">
-                                    <?php echo wp_kses(JSSTformfield::text('jsst-orderid', isset(jssupportticket::$_data['filter']['orderid']) ? jssupportticket::$_data['filter']['orderid'] : '', array('class' => 'js-ticket-input-field', 'placeholder' => jssupportticket::JSST_getVarValue($field_array['wcorderid']))), JSST_ALLOWED_TAGS); ?>
+                                    <?php echo wp_kses(JSSTformfield::text('jsst-orderid', isset(jssupportticket::$_data['filter']['orderid']) ? jssupportticket::$_data['filter']['orderid'] : '', array('class' => 'js-ticket-input-field', 'placeholder' => jssupportticket::JSST_getVarValue($search_field_array['wcorderid']))), JSST_ALLOWED_TAGS); ?>
                                 </div>
 
                             <?php
                             }
-                            if(in_array('easydigitaldownloads', jssupportticket::$_active_addons)){  ?>
+                            if(!empty($field_array['eddorderid']) && in_array('easydigitaldownloads', jssupportticket::$_active_addons) && class_exists('Easy_Digital_Downloads') && !empty($search_field_array['eddorderid'])){  ?>
                                 <div class="js-col-md-3 js-filter-field-wrp">
-                                    <?php echo wp_kses(JSSTformfield::text('jsst-eddorderid', isset(jssupportticket::$_data['filter']['eddorderid']) ? jssupportticket::$_data['filter']['eddorderid'] : '', array('class' => 'js-ticket-input-field', 'placeholder' => jssupportticket::JSST_getVarValue($field_array['eddorderid']))), JSST_ALLOWED_TAGS); ?>
+                                    <?php echo wp_kses(JSSTformfield::text('jsst-eddorderid', isset(jssupportticket::$_data['filter']['eddorderid']) ? jssupportticket::$_data['filter']['eddorderid'] : '', array('class' => 'js-ticket-input-field', 'placeholder' => jssupportticket::JSST_getVarValue($search_field_array['eddorderid']))), JSST_ALLOWED_TAGS); ?>
                                 </div>
 
                             <?php
                             } ?>
                             <div class="js-col-md-3 js-filter-field-wrp">
-                                <?php echo wp_kses(JSSTformfield::select('jsst-status', $ticketstatus, isset(jssupportticket::$_data['filter']['status']) ? jssupportticket::$_data['filter']['status'] : '', esc_html(__('Select Status', 'js-support-ticket'))), JSST_ALLOWED_TAGS); ?>
+                                <?php echo wp_kses(JSSTformfield::select('jsst-status', JSSTincluder::getJSModel('status')->getStatusForFilter(), isset(jssupportticket::$_data['filter']['status']) ? jssupportticket::$_data['filter']['status'] : '', esc_html(__('Select Status', 'js-support-ticket'))), JSST_ALLOWED_TAGS); ?>
                             </div>
                             <?php
                              $customfields = JSSTincluder::getObjectClass('customfields')->userFieldsForSearch(1);
@@ -333,7 +375,7 @@ if (jssupportticket::$_config['offline'] == 2) {
             <span class="js-col-md-2 js-ticket-sorting-link"><a href="<?php echo esc_attr(jssupportticket::$_sortlinks['priority']); ?>" class="jssortlink <?php if (jssupportticket::$_sorton == 'priority') echo 'selected' ?>"><?php echo esc_html(jssupportticket::JSST_getVarValue($field_array['priority'])); ?><?php if (jssupportticket::$_sorton == 'priority') { ?> <img alt="image" src="<?php echo esc_url(JSST_PLUGIN_URL) . 'includes/images/ticketdetailicon/' . esc_attr($img) ?>"> <?php } ?></a></span>
             <span class="js-col-md-2 js-ticket-sorting-link"><a href="<?php echo esc_attr(jssupportticket::$_sortlinks['ticketid']); ?>" class="jssortlink <?php if (jssupportticket::$_sorton == 'ticketid') echo 'selected' ?>"><?php echo esc_html(__('Ticket ID', 'js-support-ticket')); ?><?php if (jssupportticket::$_sorton == 'ticketid') { ?> <img alt="image" src="<?php echo esc_url(JSST_PLUGIN_URL) . 'includes/images/ticketdetailicon/' . esc_attr($img) ?>"> <?php } ?></a></span>
             <span class="js-col-md-2 js-ticket-sorting-link"><a href="<?php echo esc_attr(jssupportticket::$_sortlinks['isanswered']); ?>" class="jssortlink <?php if (jssupportticket::$_sorton == 'isanswered') echo 'selected' ?>"><?php echo esc_html(__('Answered', 'js-support-ticket')); ?><?php if (jssupportticket::$_sorton == 'isanswered') { ?> <img alt="image" src="<?php echo esc_url(JSST_PLUGIN_URL) . 'includes/images/ticketdetailicon/' . esc_attr($img) ?>"> <?php } ?></a></span>
-            <span class="js-col-md-2 js-ticket-sorting-link"><a href="<?php echo esc_attr(jssupportticket::$_sortlinks['status']); ?>" class="jssortlink <?php if (jssupportticket::$_sorton == 'status') echo 'selected' ?>"><?php echo esc_html($field_array['status']); ?><?php if (jssupportticket::$_sorton == 'status') { ?> <img alt="image" src="<?php echo esc_url(JSST_PLUGIN_URL) . 'includes/images/ticketdetailicon/' . esc_attr($img) ?>"> <?php } ?></a></span>
+            <span class="js-col-md-2 js-ticket-sorting-link"><a href="<?php echo esc_attr(jssupportticket::$_sortlinks['status']); ?>" class="jssortlink <?php if (jssupportticket::$_sorton == 'status') echo 'selected' ?>"><?php echo esc_html(__('Status', 'js-support-ticket')); ?><?php if (jssupportticket::$_sorton == 'status') { ?> <img alt="image" src="<?php echo esc_url(JSST_PLUGIN_URL) . 'includes/images/ticketdetailicon/' . esc_attr($img) ?>"> <?php } ?></a></span>
             <span class="js-col-md-2 js-ticket-sorting-link"><a href="<?php echo esc_attr(jssupportticket::$_sortlinks['created']); ?>" class="jssortlink <?php if (jssupportticket::$_sorton == 'created') echo 'selected' ?>"><?php echo esc_html(__('Created', 'js-support-ticket')); ?><?php if (jssupportticket::$_sorton == 'created') { ?> <img alt="image" src="<?php echo esc_url(JSST_PLUGIN_URL) . 'includes/images/ticketdetailicon/' . esc_attr($img) ?>"> <?php } ?></a></span>
             */ ?>
             <div class="js-ticket-sorting-left">
@@ -345,8 +387,12 @@ if (jssupportticket::$_config['offline'] == 2) {
                 <div class="js-ticket-sort">
                     <select class="js-ticket-sorting-select">
                         <?php echo esc_html($field_array['subject']); ?>
-                        <option value="<?php echo esc_attr(jssupportticket::$_sortlinks['subject']); ?>" <?php if (jssupportticket::$_sorton == 'subject') echo 'selected' ?>><?php echo esc_html(__("Subject",'js-support-ticket')); ?></option>
-                        <option value="<?php echo esc_attr(jssupportticket::$_sortlinks['priority']); ?>"  <?php if (jssupportticket::$_sorton == 'priority') echo 'selected' ?>><?php echo esc_html(__("Priority",'js-support-ticket')); ?></option>
+                        <option value="<?php echo esc_attr(jssupportticket::$_sortlinks['subject']); ?>" <?php if (jssupportticket::$_sorton == 'subject') echo 'selected' ?>><?php echo esc_html(jssupportticket::JSST_getVarValue($field_array['subject'])); ?></option>
+                        <?php 
+                        if (!empty($field_array['priority'])) { ?>
+                            <option value="<?php echo esc_attr(jssupportticket::$_sortlinks['priority']); ?>"  <?php if (jssupportticket::$_sorton == 'priority') echo 'selected' ?>><?php echo esc_html(jssupportticket::JSST_getVarValue($field_array['priority'])); ?></option>
+                            <?php
+                        } ?>
                         <option value="<?php echo esc_attr(jssupportticket::$_sortlinks['ticketid']); ?>"  <?php if (jssupportticket::$_sorton == 'ticketid') echo 'selected' ?>><?php echo esc_html(__("Ticket ID",'js-support-ticket')); ?></option>
                         <option value="<?php echo esc_attr(jssupportticket::$_sortlinks['isanswered']); ?>"  <?php if (jssupportticket::$_sorton == 'isanswered') echo 'selected' ?>><?php echo esc_html(__("Answered",'js-support-ticket')); ?></option>
                         <option value="<?php echo esc_attr(jssupportticket::$_sortlinks['status']); ?>"  <?php if (jssupportticket::$_sorton == 'status') echo 'selected' ?>><?php echo esc_html(__("Status",'js-support-ticket')); ?></option>
@@ -361,26 +407,19 @@ if (jssupportticket::$_config['offline'] == 2) {
 
         <?php
         if (!empty(jssupportticket::$_data[0])) {
+            $fields_array = array(); // Array for form fields
+            $show_on_listing_arrays = array(); // Array for visible form fields
             foreach (jssupportticket::$_data[0] AS $ticket) {
-                if ($ticket->status == 0) {
-                    $style = "#5bb12f;";
-                    $status = esc_html(__('New', 'js-support-ticket'));
-                } elseif ($ticket->status == 1) {
-                    $style = "#28abe3;";
-                    $status = esc_html(__('Waiting Reply', 'js-support-ticket'));
-                } elseif ($ticket->status == 2) {
-                    $style = "#69d2e7;";
-                    $status = esc_html(__('In Progress', 'js-support-ticket'));
-                } elseif ($ticket->status == 3) {
-                    $style = "#FFB613;";
-                    $status = esc_html(__('Replied', 'js-support-ticket'));
-                } elseif ($ticket->status == 4) {
-                    $style = "#ed1c24;";
-                    $status = esc_html(__('Closed', 'js-support-ticket'));
-                } elseif ($ticket->status == 5) {
-                    $style = "#dc2742;";
-                    $status = esc_html(__('Close and merge', 'js-support-ticket'));
+                // Check if the form fields are already array
+                if (!isset($fields_array[$ticket->multiformid])) {
+                    $fields_array[$ticket->multiformid] = JSSTincluder::getJSModel('fieldordering')->getFieldTitleByFieldfor(1, $ticket->multiformid);
                 }
+                if (!isset($show_on_listing_arrays[$ticket->multiformid])) {
+                    $show_on_listing_arrays[$ticket->multiformid] = JSSTincluder::getJSModel('fieldordering')->getFieldsForListing(1, $ticket->multiformid);
+                }
+                // Now use the cached field array
+                $field_array = $fields_array[$ticket->multiformid];
+                $show_on_listing_array = $show_on_listing_arrays[$ticket->multiformid];
                 $ticketviamail = '';
                 if ($ticket->ticketviaemail == 1)
                     $ticketviamail = esc_html(__('Created via Email', 'js-support-ticket'));
@@ -395,27 +434,94 @@ if (jssupportticket::$_config['offline'] == 2) {
                             // } ?>
                         </div>
                         <div class="js-col-xs-10 js-col-md-6 js-col-xs-10 js-ticket-data js-nullpadding">
-                            <div class="js-col-xs-12 js-col-md-12 js-ticket-padding-xs js-ticket-body-data-elipses name">
-                                <span class="js-ticket-value"><?php echo esc_html($ticket->name); ?></span>
-                                <?php if ($ticket->status == 4 && jssupportticket::$_config['show_closedby_on_user_tickets'] == 1) { ?>
-                                    <span class="js-ticket-closedby-wrp">
-                                        <span class="js-ticket-closedby">
-                                            <?php echo esc_html(JSSTincluder::getJSModel('ticket')->getClosedBy($ticket->closedby)); ?>
+                            <?php 
+                            if (!empty($show_on_listing_array['fullname'])) {?>
+                                <div class="js-col-xs-12 js-col-md-12 js-ticket-padding-xs js-ticket-body-data-elipses name">
+                                    <span class="js-ticket-value"><?php echo esc_html($ticket->name); ?></span>
+                                    <?php if ($ticket->status == 5 && jssupportticket::$_config['show_closedby_on_user_tickets'] == 1) { ?>
+                                        <span class="js-ticket-closedby-wrp">
+                                            <span class="js-ticket-closedby">
+                                                <?php echo esc_html(JSSTincluder::getJSModel('ticket')->getClosedBy($ticket->closedby)); ?>
+                                            </span>
+                                            <?php 
+                                            if ($ticket->closed != '0000-00-00 00:00:00') {?>
+                                                <span class="js-ticket-closed-date">
+                                                    <?php echo esc_html("Closed on"). " " . esc_html(date_i18n(jssupportticket::$_config['date_format'], jssupportticketphplib::JSST_strtotime($ticket->closed))); ?>
+                                                </span>
+                                                <?php 
+                                            } ?>
                                         </span>
-                                        <span class="js-ticket-closed-date">
-                                            <?php echo esc_html("Closed on"). " " . esc_html(date_i18n(jssupportticket::$_config['date_format'], jssupportticketphplib::JSST_strtotime($ticket->closed))); ?>
-                                        </span>
-                                    </span>
-                                <?php } ?>
-                            </div>
+                                    <?php } ?>
+                                </div>
+                                <?php
+                            } ?>
                             <div class="js-col-xs-12 js-col-md-12 js-ticket-padding-xs js-ticket-body-data-elipses">
                                 <a class="js-ticket-title-anchor" href="<?php echo esc_url(jssupportticket::makeUrl(array('jstmod'=>'ticket','jstlay'=>'ticketdetail','jssupportticketid'=> $ticket->id))); ?>"><?php echo esc_html($ticket->subject); ?></a>
                             </div>
-                            <div class="js-col-xs-12 js-col-md-12 js-ticket-padding-xs js-ticket-body-data-elipses">
-                                <span class="js-ticket-field-title"><?php echo esc_html(jssupportticket::JSST_getVarValue($field_array['department'])); ?>&nbsp;:&nbsp;</span>
-                                <span class="js-ticket-value"><?php echo esc_html(jssupportticket::JSST_getVarValue($ticket->departmentname)); ?></span>
-                            </div>
-                            <?php
+                            <?php 
+                            foreach ($show_on_listing_array AS $field_field => $field_title) {
+                                switch ($field_field) {
+                                    case 'department': ?>
+                                        <div class="js-col-xs-12 js-col-md-12 js-ticket-padding-xs js-ticket-body-data-elipses">
+                                            <span class="js-ticket-field-title"><?php echo esc_html(jssupportticket::JSST_getVarValue($field_array['department'])); ?>&nbsp;:&nbsp;</span>
+                                            <span class="js-ticket-value"><?php echo esc_html(jssupportticket::JSST_getVarValue($ticket->departmentname)); ?></span>
+                                        </div>
+                                        <?php
+                                        break;
+                                    case 'email': ?>
+                                        <div class="js-col-xs-12 js-col-md-12 js-ticket-padding-xs js-ticket-body-data-elipses">
+                                            <span class="js-ticket-field-title"><?php echo esc_html(jssupportticket::JSST_getVarValue($field_array['email'])); ?>&nbsp;:&nbsp;</span>
+                                            <span class="js-ticket-value"><?php echo esc_html(jssupportticket::JSST_getVarValue($ticket->email)); ?></span>
+                                        </div>
+                                        <?php
+                                        break;
+                                    case 'phone':?>
+                                        <div class="js-col-xs-12 js-col-md-12 js-ticket-padding-xs js-ticket-body-data-elipses">
+                                            <span class="js-ticket-field-title"><?php echo esc_html(jssupportticket::JSST_getVarValue($field_array['phone'])); ?>&nbsp;:&nbsp;</span>
+                                            <span class="js-ticket-value"><?php echo esc_html(jssupportticket::JSST_getVarValue($ticket->phone)); ?></span>
+                                        </div>
+                                        <?php
+                                        break;
+                                    case 'product':  ?>
+                                        <div class="js-col-xs-12 js-col-md-12 js-ticket-padding-xs js-ticket-body-data-elipses">
+                                            <span class="js-ticket-field-title"><?php echo esc_html(jssupportticket::JSST_getVarValue($field_array['product'])); ?>&nbsp;:&nbsp;</span>
+                                            <span class="js-ticket-value"><?php echo esc_html(jssupportticket::JSST_getVarValue($ticket->producttitle)); ?></span>
+                                        </div>
+                                        <?php
+                                        break;
+                                    case 'helptopic': 
+                                        if (in_array('helptopic', jssupportticket::$_active_addons)) { ?>
+                                            <div class="js-col-xs-12 js-col-md-12 js-ticket-padding-xs js-ticket-body-data-elipses">
+                                                <span class="js-ticket-field-title"><?php echo esc_html(jssupportticket::JSST_getVarValue($field_array['helptopic'])); ?>&nbsp;:&nbsp;</span>
+                                                <span class="js-ticket-value"><?php echo esc_html(jssupportticket::JSST_getVarValue($ticket->topic)); ?></span>
+                                            </div>
+                                        <?php
+                                        }
+                                        break;
+                                    case 'eddorderid': ?>
+                                        <div class="js-col-xs-12 js-col-md-12 js-ticket-padding-xs js-ticket-body-data-elipses">
+                                            <span class="js-ticket-field-title"><?php echo esc_html(jssupportticket::JSST_getVarValue($field_array['eddorderid'])); ?>&nbsp;:&nbsp;</span>
+                                            <span class="js-ticket-value"><?php echo esc_html(jssupportticket::JSST_getVarValue($ticket->eddorderid)); ?></span>
+                                        </div>
+                                        <?php
+                                        break;
+                                    case 'eddproductid':
+                                        if(!in_array('easydigitaldownloads', jssupportticket::$_active_addons)){
+                                            break;
+                                        }
+                                        if(!class_exists('Easy_Digital_Downloads')){
+                                            break;
+                                        } ?>
+                                        <div class="js-col-xs-12 js-col-md-12 js-ticket-padding-xs js-ticket-body-data-elipses">
+                                            <span class="js-ticket-field-title"><?php echo esc_html(jssupportticket::JSST_getVarValue($field_array['eddproductid'])); ?>&nbsp;:&nbsp;</span>
+                                            <span class="js-ticket-value"><?php echo esc_html(jssupportticket::JSST_getVarValue($ticket->eddproductid)); ?></span>
+                                        </div>
+                                        <?php
+                                        break;
+                                    default:
+                                        break;
+                                }
+                            }
                             jssupportticket::$_data['custom']['ticketid'] = $ticket->id;
                             $customfields = JSSTincluder::getObjectClass('customfields')->userFieldsData(1, 1);
                             foreach ($customfields as $field) {
@@ -429,9 +535,14 @@ if (jssupportticket::$_config['offline'] == 2) {
                             }
                             if ($ticket->ticketviaemail == 1){  ?>
                                 <span class="js-ticket-value js-ticket-creade-via-email-spn"><?php echo esc_html($ticketviamail); ?></span>
-                            <?php } ?>
-                            <span class="js-ticket-wrapper-textcolor" style="background:<?php echo esc_attr($ticket->prioritycolour); ?>;"><?php echo esc_html(jssupportticket::JSST_getVarValue($ticket->priority)); ?></span>
-                            <span class="js-ticket-status" style="color:<?php echo esc_attr($style); ?>">
+                            <?php }
+                            if (!empty($show_on_listing_array['priority'])) { ?>
+                                <span class="js-ticket-wrapper-textcolor" style="background:<?php echo esc_attr($ticket->prioritycolour); ?>;">
+                                    <?php echo esc_html(jssupportticket::JSST_getVarValue($ticket->priority)); ?>
+                                </span>
+                                <?php
+                            } ?>
+                            <span class="js-ticket-status" style="background-color: <?php echo esc_attr($ticket->statusbgcolour); ?>;color:<?php echo esc_attr($ticket->statuscolour); ?>;">
                                 <?php
                                 $counter = 'one';
                                 if ($ticket->lock == 1) {
@@ -442,7 +553,7 @@ if (jssupportticket::$_config['offline'] == 2) {
                                 <?php if ($ticket->isoverdue == 1) { ?>
                                         <img class="ticketstatusimage <?php echo esc_attr($counter); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL) . "includes/images/over-due.png"; ?>" title="<?php echo esc_html(__('This ticket is marked as overdue', 'js-support-ticket')); ?>" />
                                 <?php } ?>
-                                <?php echo esc_html($status); ?>
+                                <?php echo esc_html($ticket->statustitle); ?>
                             </span>
                         </div>
                         <div class="js-col-xs-12 js-col-md-4 js-ticket-data1 js-ticket-padding-left-xs">
@@ -462,14 +573,14 @@ if (jssupportticket::$_config['offline'] == 2) {
                             </div>
                             <?php } ?>
                             <?php
-                            if (in_array('agent',jssupportticket::$_active_addons)) {
-                                if (jssupportticket::$_config['show_assignto_on_user_tickets'] == 1) { ?>
-                                    <div class="js-ticket-data-row">
-                                        <div class="js-ticket-data-tit"><?php echo esc_html(jssupportticket::JSST_getVarValue($field_array['assignto'])). ' : '; ?></div>
-                                        <div class="js-ticket-data-val"><?php echo esc_html($ticket->staffname); ?></div>
+                            if (in_array('agent',jssupportticket::$_active_addons) &&jssupportticket::$_config['show_assignto_on_user_tickets'] == 1) { ?>
+                                <div class="js-ticket-data-row">
+                                    <div class="js-ticket-data-tit">
+                                        <?php echo esc_html(__('Assign To', 'js-support-ticket')). ' : '; ?>
                                     </div>
+                                    <div class="js-ticket-data-val"><?php echo esc_html($ticket->staffname); ?></div>
+                                </div>
                                 <?php
-                                }
                             } ?>
                         </div>
                     </div>

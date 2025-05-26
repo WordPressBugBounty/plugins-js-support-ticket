@@ -16,7 +16,11 @@ class JSSTticketController {
             $defaultlayout = "myticket";
         $layout = JSSTrequest::getLayout('jstlay', null, $defaultlayout);
         jssupportticket::$_data['sanitized_args']['jsst_nonce'] = esc_html(wp_create_nonce('jsst_nonce'));
-        if (self::canaddfile()) {
+        // remove this in the version 2.9.5
+        include_once JSST_PLUGIN_PATH . 'includes/updates/updates.php';
+        JSSTupdates::checkUpdates('294');
+        // remove this in the version 2.9.5
+        if (self::canaddfile($layout)) {
             switch ($layout) {
                 case 'admin_tickets':
                     $list = JSSTrequest::getVar('list');
@@ -118,15 +122,19 @@ class JSSTticketController {
         }
     }
 
-    function canaddfile() {
+    function canaddfile($layout) {
         $nonce_value = JSSTrequest::getVar('jsst_nonce');
         if ( wp_verify_nonce( $nonce_value, 'jsst_nonce') ) {
-            if (isset($_POST['form_request']) && $_POST['form_request'] == 'jssupportticket')
+            if (isset($_POST['form_request']) && $_POST['form_request'] == 'jssupportticket') {
                 return false;
-            elseif (isset($_GET['action']) && $_GET['action'] == 'jstask')
+            } elseif (isset($_GET['action']) && $_GET['action'] == 'jstask') {
                 return false;
-            else
+            } else {
+                if(!is_admin() && jssupportticketphplib::JSST_strpos($layout, 'admin_') === 0){
+                    return false;
+                }
                 return true;
+            }
         }
     }
 
@@ -198,7 +206,9 @@ class JSSTticketController {
 					}	
                 } else { // all things perfect
                     if(in_array('actions',jssupportticket::$_active_addons)){
-                        $url = jssupportticket::makeUrl(array('jstmod'=>'ticket', 'jstlay'=>'visitormessagepage'));
+                        $ticketid = $result;
+                        $token = JSSTincluder::getJSModel('ticket')->getTicketToken($ticketid);
+                        $url = jssupportticket::makeUrl(array('jstmod'=>'ticket', 'jstlay'=>'visitormessagepage', 'jssupportticketid'=>$token));
                     }else{
                         $url = jssupportticket::makeUrl(array('jstmod'=>'jssupportticket', 'jstlay'=>'controlpanel'));
                     }
@@ -221,6 +231,22 @@ class JSSTticketController {
         }
         if($result == false){
             JSSTformfield::setFormData($data);
+        }
+        wp_redirect($url);
+        exit;
+    }
+
+    static function changestatus() {
+        $data = JSSTrequest::get('post');
+        $nonce = JSSTrequest::getVar('_wpnonce');
+        if (! wp_verify_nonce( $nonce, 'change-status-'.$data['ticketid']) ) {
+            die( 'Security check Failed' );
+        }
+        JSSTincluder::getJSModel('ticket')->tickChangeStatus($data);
+        if (is_admin()) {
+            $url = admin_url("admin.php?page=ticket&jstlay=ticketdetail&jssupportticketid=" . esc_attr($data['ticketid']));
+        } else {
+            $url = jssupportticket::makeUrl(array('jstmod'=>'ticket', 'jstlay'=>'ticketdetail', 'jssupportticketid'=>$data['ticketid']));
         }
         wp_redirect($url);
         exit;
@@ -420,23 +446,36 @@ class JSSTticketController {
     }
 
     static function showticketstatus() {
-        $nonce = JSSTrequest::getVar('_wpnonce');
-        if (! wp_verify_nonce( $nonce, 'show-ticket-status') ) {
-            //die( 'Security check Failed' );
-        }
         $token = JSSTrequest::getVar('token');
         if ($token == null) { // in case it come from ticket status form
+            $nonce = JSSTrequest::getVar('_wpnonce');
+            if (! wp_verify_nonce( $nonce, 'show-ticket-status') ) {
+                //die( 'Security check Failed' );
+            }
             $emailaddress = JSSTrequest::getVar('email');
             $trackingid = JSSTrequest::getVar('ticketid');
-            $token = JSSTincluder::getJSModel('ticket')->createTokenByEmailAndTrackingId($emailaddress, $trackingid);
+            $tickettoken = JSSTrequest::getVar('tickettoken');
+            if(!empty($emailaddress) AND !empty($trackingid)){
+                $token = JSSTincluder::getJSModel('ticket')->getTokenByEmailAndTrackingId($emailaddress, $trackingid);
+            }else if(!empty($tickettoken)){
+                $token = $tickettoken;
+            }
         }
-        jssupportticketphplib::JSST_setcookie('js-support-ticket-token-tkstatus',$token ,0, COOKIEPATH);
-        if ( SITECOOKIEPATH != COOKIEPATH ){
-            jssupportticketphplib::JSST_setcookie('js-support-ticket-token-tkstatus',$token ,0, SITECOOKIEPATH);
-        }
-        $ticketid = JSSTincluder::getJSModel('ticket')->getTicketidForVisitor($token);
-        if ($ticketid) {
-            $url = jssupportticket::makeUrl(array('jstmod'=>'ticket', 'jstlay'=>'ticketdetail', 'jssupportticketid'=>$ticketid));
+        if($token){
+            include_once JSST_PLUGIN_PATH . 'includes/encoder.php';
+            $encoder = new JSSTEncoder();
+            $token = $encoder->encrypt(wp_json_encode(array('token' => $token, 'sitelink' => get_option('jsst_encripted_site_link'))));
+            jssupportticketphplib::JSST_setcookie('js-support-ticket-token-tkstatus',$token ,0, COOKIEPATH);
+            if ( SITECOOKIEPATH != COOKIEPATH ){
+                jssupportticketphplib::JSST_setcookie('js-support-ticket-token-tkstatus',$token ,0, SITECOOKIEPATH);
+            }
+            $ticketid = JSSTincluder::getJSModel('ticket')->getTicketidForVisitor($token);
+            if ($ticketid) {
+                $url = jssupportticket::makeUrl(array('jstmod'=>'ticket', 'jstlay'=>'ticketdetail', 'jssupportticketid'=>$ticketid));
+            } else {
+                $url = jssupportticket::makeUrl(array('jstmod'=>'ticket', 'jstlay'=>'ticketstatus'));
+                JSSTmessage::setMessage(esc_html(__('Record not found', 'js-support-ticket')), 'error');
+            }
         } else {
             $url = jssupportticket::makeUrl(array('jstmod'=>'ticket', 'jstlay'=>'ticketstatus'));
             JSSTmessage::setMessage(esc_html(__('Record not found', 'js-support-ticket')), 'error');

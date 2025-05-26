@@ -40,7 +40,9 @@ $jssupportticket_css .= '
 	div.js-ticket-search-wrp div.js-ticket-form-wrp form.js-filter-form div.js-filter-field-wrp input#jsst-datestart{background-image: url('.esc_url(JSST_PLUGIN_URL).'includes/images/calender.png);background-repeat: no-repeat;background-position: 97% 11px;padding: 10px;height: 50px;line-height: initial;background-size: 25px;}
 	div.js-ticket-search-wrp div.js-ticket-form-wrp form.js-filter-form div.js-filter-field-wrp input#jsst-dateend{background-image: url('.esc_url(JSST_PLUGIN_URL).'includes/images/calender.png);background-repeat: no-repeat;background-position: 97% 11px;padding: 10px;height: 50px;line-height: initial;background-size: 25px;}
 	div.js-ticket-search-wrp div.js-ticket-form-wrp form.js-filter-form div.js-filter-field-wrp select#jsst-departmentid{width: 100%;border-radius: unset;background: url('.esc_url(JSST_PLUGIN_URL).'includes/images/selecticon.png) 96% / 4% no-repeat;padding: 10px;height: 50px;line-height: initial;}
+	div.js-ticket-search-wrp div.js-ticket-form-wrp form.js-filter-form div.js-filter-field-wrp select#jsst-helptopicid{width: 100%;border-radius: unset;background: url('.esc_url(JSST_PLUGIN_URL).'includes/images/selecticon.png) 96% / 4% no-repeat;padding: 10px;height: 50px;line-height: initial;}
 	div.js-ticket-search-wrp div.js-ticket-form-wrp form.js-filter-form div.js-filter-field-wrp select#jsst-priorityid{width: 100%;border-radius: unset;background: url('.esc_url(JSST_PLUGIN_URL).'includes/images/selecticon.png) 96% / 4% no-repeat ;padding: 10px;height: 50px;line-height: initial;}
+	div.js-ticket-search-wrp div.js-ticket-form-wrp form.js-filter-form div.js-filter-field-wrp select#jsst-productid{width: 100%;border-radius: unset;background: url('.esc_url(JSST_PLUGIN_URL).'includes/images/selecticon.png) 96% / 4% no-repeat;padding: 10px;height: 50px;line-height: initial;}
 	div.js-ticket-search-wrp div.js-ticket-form-wrp form.js-filter-form div.js-filter-field-wrp select#jsst-status{width: 100%;border-radius: unset;background: url('.esc_url(JSST_PLUGIN_URL).'includes/images/selecticon.png) 96% / 4% no-repeat ;padding: 10px;height: 50px;line-height: initial;}
 	div.js-ticket-search-wrp div.js-ticket-form-wrp form.js-filter-form div.js-filter-field-wrp select#staffid{width: 100%;border-radius: unset;background: url('.esc_url(JSST_PLUGIN_URL).'includes/images/selecticon.png) 96% / 4% no-repeat ;padding: 10px;height: 50px;line-height: initial;}
 	div.js-ticket-search-wrp div.js-ticket-form-wrp form.js-filter-form div.js-filter-wrapper div.js-filter-form-fields-wrp input{width:100%;border-radius: unset;padding: 10px;line-height: initial;height: 50px;}
@@ -79,7 +81,7 @@ $jssupportticket_css .= '
 	div.js-ticket-wrapper div.js-ticket-data span.js-ticket-status img.ticketstatusimage.two{left:-75px;}
 	div.js-ticket-wrapper div.js-ticket-data span.js-ticket-closedby-wrp{position: relative;font-size: 14px;}
 	div.js-ticket-wrapper div.js-ticket-data span.js-ticket-closedby{display: inline-block;color: #463e8f;text-transform: capitalize;border: 1px solid #817cb3;padding: 0 8px;cursor:pointer;margin-left: 5px;}
-	div.js-ticket-wrapper div.js-ticket-data span.js-ticket-closed-date{color: #3f3f41;border: 1px solid #e6e5e5;padding: 0 8px;position: absolute;background-image: linear-gradient(to top, #d3d3d2, #f6f6f6);top: 30px;display:none;min-width: 160px;}
+	div.js-ticket-wrapper div.js-ticket-data span.js-ticket-closed-date{color: #3f3f41;border: 1px solid #e6e5e5;padding: 0 8px;position: absolute;background-image: linear-gradient(to top, #d3d3d2, #f6f6f6);top: 30px;display:none;min-width: 160px;z-index: 999;}
 	div.js-ticket-wrapper div.js-ticket-toparea .js-ticket-body-data-elipses {padding: 0;}
 	div.js-ticket-wrapper div.js-ticket-data1{margin: 0px 0px;padding: 17px 15px 17px 15px;width: 25%;}
 	div.js-ticket-wrapper div.js-ticket-data1 div.js-ticket-data-row {padding-bottom: 7px;}
@@ -158,12 +160,16 @@ $jssupportticket_css .= '
 		div.js-ticket-search-wrp div.js-ticket-form-wrp form.js-filter-form div.js-filter-field-wrp .js-form-cust-ckb-fld-wrp{background-color:#fff;border:1px solid'.$color5.';color: '.$color4.';}
 		div.js-ticket-search-wrp div.js-ticket-form-wrp form.js-filter-form div.js-filter-field-wrp input.inputbox{background-color:'.$color7.';border:1px solid'.$color5.';}
 		div.js-ticket-search-wrp div.js-ticket-form-wrp form.js-filter-form div.js-filter-field-wrp select#jsst-departmentid{background-color:#fff !important;border:1px solid'.$color5.';color: '.$color4.';}
+		div.js-ticket-search-wrp div.js-ticket-form-wrp form.js-filter-form div.js-filter-field-wrp select#jsst-helptopicid{background-color:#fff !important;border:1px solid'.$color5.';color: '.$color4.';}
 		div.js-ticket-search-wrp div.js-ticket-form-wrp form.js-filter-form div.js-filter-field-wrp select#jsst-priorityid{background-color:#fff !important;border:1px solid'.$color5.';color: '.$color4.';}
+		div.js-ticket-search-wrp div.js-ticket-form-wrp form.js-filter-form div.js-filter-field-wrp select#jsst-productid{background-color:#fff !important;border:1px solid'.$color5.';color: '.$color4.';}
 		div.js-ticket-search-wrp div.js-ticket-form-wrp form.js-filter-form div.js-filter-field-wrp select#jsst-status{background-color:#fff !important;border:1px solid'.$color5.';color: '.$color4.';}
 		div.js-ticket-search-wrp div.js-ticket-form-wrp form.js-filter-form div.js-filter-field-wrp select#staffid{background-color:'.$color3.';border:1px solid'.$color5.';}
 		div#js-filter-wrapper-toggle-area div.js-filter-wrapper div.js-filter-value input.js-ticket-input-field{background-color:'.$color3.';border:1px solid'.$color5.';}
 		div#js-filter-wrapper-toggle-area div.js-filter-wrapper div.js-filter-value select#jsst-departmentid{background-color:'.$color3.';border:1px solid'.$color5.';}
+		div#js-filter-wrapper-toggle-area div.js-filter-wrapper div.js-filter-value select#jsst-helptopicid{background-color:'.$color3.';border:1px solid'.$color5.';}
 		div#js-filter-wrapper-toggle-area div.js-filter-wrapper div.js-filter-value select#jsst-priorityid{background-color:'.$color3.';border:1px solid'.$color5.';}
+		div#js-filter-wrapper-toggle-area div.js-filter-wrapper div.js-filter-value select#jsst-productid{background-color:'.$color3.';border:1px solid'.$color5.';}
 		div#js-filter-wrapper-toggle-plus{background-color:#474749;}
 		div#js-filter-wrapper-toggle-minus{background-color:#474749;}
 		div.js-ticket-search-wrp div.js-ticket-form-wrp form.js-filter-form div.js-filter-button-wrp .js-search-filter-btn {color: '.$color4.';border: 1px solid '.$color5.';background: #fff;}

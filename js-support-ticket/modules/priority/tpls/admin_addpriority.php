@@ -71,7 +71,15 @@ $dayshours = array(
                 </div>
                 <div class="js-form-wrapper">
                     <div class="js-form-title"><?php echo esc_html(__('Color', 'js-support-ticket')); ?>&nbsp;<span style="color: red;" >*</span></div>
-                    <div class="js-form-value"><?php echo wp_kses(JSSTformfield::text('prioritycolor', isset(jssupportticket::$_data[0]->prioritycolour) ? jssupportticket::$_data[0]->prioritycolour : '', array('class' => 'inputbox js-form-input-field', 'data-validation' => 'required', 'autocomplete' => 'off')), JSST_ALLOWED_TAGS); ?></div>
+                    <div class="js-form-value">
+                        <?php
+                        $style = '';
+                        if (!empty(jssupportticket::$_data[0]->prioritycolour)) {
+                            $style = "background:".jssupportticket::$_data[0]->prioritycolour;
+                        } ?>
+                        <span style="<?php echo esc_attr($style); ?>" class="js-form-prioritycolor-wrp"></span>
+                        <?php echo wp_kses(JSSTformfield::text('prioritycolor', isset(jssupportticket::$_data[0]->prioritycolour) ? jssupportticket::$_data[0]->prioritycolour : '', array('class' => 'inputbox js-form-input-field js-form-prioritycolor-field', 'data-validation' => 'required', 'autocomplete' => 'off')), JSST_ALLOWED_TAGS); ?>
+                    </div>
                 </div>
                 <?php if(in_array('overdue', jssupportticket::$_active_addons)){ ?>
                     <div class="js-form-wrapper">
@@ -118,7 +126,10 @@ $dayshours = array(
                         jQuery(colpkr).fadeOut(500);
                         return false;
                     },
-                    onChange: function (hsb, hex, rgb) {
+                    change: function (c_event, ui) {
+                        hex = ui.color.toString();
+                        jQuery('.js-form-prioritycolor-wrp').css( 'background', hex);
+                        jQuery('.js-form-prioritycolor-wrp').css( 'border', '1px solid #ebecec');
                         jQuery('input#prioritycolor').css('backgroundColor', '#' + hex).val('#' + hex);
                     }
                 });

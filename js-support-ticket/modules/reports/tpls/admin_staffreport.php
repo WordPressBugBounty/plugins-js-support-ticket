@@ -461,14 +461,14 @@ $link_export = admin_url('admin.php?page=export&task='.esc_attr($t_name).'&actio
 										$overdue_percentage = 0;
 										$answered_percentage = 0;
 										$pending_percentage = 0;
-										if(isset(jssupportticket::$_data['ticket_total']) && isset(jssupportticket::$_data['ticket_total']['allticket']) && jssupportticket::$_data['ticket_total']['allticket'] != 0){
-										    $open_percentage = round((jssupportticket::$_data['ticket_total']['openticket'] / jssupportticket::$_data['ticket_total']['allticket']) * 100);
-										    $close_percentage = round((jssupportticket::$_data['ticket_total']['closeticket'] / jssupportticket::$_data['ticket_total']['allticket']) * 100);
-										    $overdue_percentage = round((jssupportticket::$_data['ticket_total']['overdueticket'] / jssupportticket::$_data['ticket_total']['allticket']) * 100);
-										    $answered_percentage = round((jssupportticket::$_data['ticket_total']['answeredticket'] / jssupportticket::$_data['ticket_total']['allticket']) * 100);
-										    $pending_percentage = round((jssupportticket::$_data['ticket_total']['pendingticket'] / jssupportticket::$_data['ticket_total']['allticket']) * 100);
+										if(isset(jssupportticket::$_data['ticket_total']) && isset($agent->allticket) && $agent->allticket != 0){
+										    $open_percentage = round(($agent->openticket / $agent->allticket) * 100);
+										    $close_percentage = round(($agent->closeticket / $agent->allticket) * 100);
+										    $overdue_percentage = round(($agent->overdueticket / $agent->allticket) * 100);
+										    $answered_percentage = round(($agent->answeredticket / $agent->allticket) * 100);
+										    $pending_percentage = round(($agent->pendingticket / $agent->allticket) * 100);
 										}
-										if(isset(jssupportticket::$_data['ticket_total']) && isset(jssupportticket::$_data['ticket_total']['allticket']) && jssupportticket::$_data['ticket_total']['allticket'] != 0){
+										if(isset(jssupportticket::$_data['ticket_total']) && isset($agent->allticket) && $agent->allticket != 0){
 										    $allticket_percentage = 100;
 										}
 									?>
@@ -494,7 +494,7 @@ $link_export = admin_url('admin.php?page=export&task='.esc_attr($t_name).'&actio
 									            <div class="js-ticket-link-text js-ticket-green">
 									                <?php
 									                    echo esc_html(__('Open', 'js-support-ticket'));
-									                    echo ' ( '.esc_html(jssupportticket::$_data['ticket_total']['openticket']).' )';
+									                    echo ' ( '.esc_html($agent->openticket).' )';
 									                ?>
 									            </div>
 									        </a>
@@ -520,7 +520,7 @@ $link_export = admin_url('admin.php?page=export&task='.esc_attr($t_name).'&actio
 									            <div class="js-ticket-link-text js-ticket-brown">
 									                <?php
 									                    echo esc_html(__('Answered', 'js-support-ticket'));
-									                    echo ' ( '. esc_html(jssupportticket::$_data['ticket_total']['answeredticket']).' )';
+									                    echo ' ( '. esc_html($agent->answeredticket).' )';
 									                ?>
 									            </div>
 									        </a>
@@ -546,7 +546,7 @@ $link_export = admin_url('admin.php?page=export&task='.esc_attr($t_name).'&actio
 						                        <div class="js-ticket-link-text js-ticket-blue">
 						                            <?php
 						                                echo esc_html(__('Pending', 'js-support-ticket'));
-						                                echo ' ( '. esc_html(jssupportticket::$_data['ticket_total']['pendingticket']).' )';
+						                                echo ' ( '. esc_html($agent->pendingticket).' )';
 						                            ?>
 						                        </div>
 						                    </a>
@@ -572,7 +572,7 @@ $link_export = admin_url('admin.php?page=export&task='.esc_attr($t_name).'&actio
 									            <div class="js-ticket-link-text js-ticket-orange">
 									                <?php
 									                    echo esc_html(__('Overdue', 'js-support-ticket'));
-									                    echo ' ( '. esc_html(jssupportticket::$_data['ticket_total']['overdueticket']).' )';
+									                    echo ' ( '. esc_html($agent->overdueticket).' )';
 									                ?>
 									            </div>
 									        </a>
@@ -598,7 +598,7 @@ $link_export = admin_url('admin.php?page=export&task='.esc_attr($t_name).'&actio
 									            <div class="js-ticket-link-text js-ticket-red">
 									                <?php
 									                    echo esc_html(__('Closed', 'js-support-ticket'));
-									                    echo ' ( '. esc_html(jssupportticket::$_data['ticket_total']['closeticket']).' )';
+									                    echo ' ( '. esc_html($agent->closeticket).' )';
 									                ?>
 									            </div>
 									        </a>

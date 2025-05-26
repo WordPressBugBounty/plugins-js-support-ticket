@@ -5,6 +5,9 @@ if (JSSTincluder::getObjectClass('user')->isguest() && jssupportticket::$_config
     wp_enqueue_script( 'ticket-recaptcha', 'https://www.google.com/recaptcha/api.js' );
 }
 $jssupportticket_js ="
+    jQuery(document).ready(function ($) {
+        $.validate();    
+    });
     function onSubmit(token) {
         document.getElementById('jsst_registration_form').submit();
     }
@@ -30,7 +33,7 @@ if (jssupportticket::$_config['offline'] == 2) {
                             <?php echo esc_html(__('Username','js-support-ticket')); ?> <span style="color:red">*</span>
                         </div>
                         <div class="js-ticket-from-field">
-                            <input name="jsst_user_login" id="jsst_user_login" class="required js-ticket-form-field-input" type="text"/>
+                            <input name="jsst_user_login" id="jsst_user_login" class="required js-ticket-form-field-input" type="text" data-validation="required"/>
                         </div>
                     </div>
                     <div class="js-ticket-from-field-wrp js-ticket-from-field-wrp-full-width">
@@ -38,7 +41,7 @@ if (jssupportticket::$_config['offline'] == 2) {
                             <?php echo esc_html(__('Email','js-support-ticket')); ?> <span style="color:red">*</span>
                         </div>
                         <div class="js-ticket-from-field">
-                           <input name="jsst_user_email" id="jsst_user_email" class="required js-ticket-form-field-input" type="text"/>
+                           <input name="jsst_user_email" id="jsst_user_email" class="required js-ticket-form-field-input" type="text" data-validation="required"/>
                         </div>
                     </div>
                     <div class="js-ticket-from-field-wrp js-ticket-from-field-wrp-full-width">
@@ -62,7 +65,7 @@ if (jssupportticket::$_config['offline'] == 2) {
                             <?php echo esc_html(__('Password','js-support-ticket')); ?> <span style="color:red">*</span>
                         </div>
                         <div class="js-ticket-from-field">
-                            <input name="jsst_user_pass" id="password" class="required js-ticket-form-field-input" type="password"/>
+                            <input name="jsst_user_pass" id="password" class="required js-ticket-form-field-input" type="password" data-validation="required"/>
                         </div>
                     </div>
                     <div class="js-ticket-from-field-wrp js-ticket-from-field-wrp-full-width">
@@ -70,7 +73,7 @@ if (jssupportticket::$_config['offline'] == 2) {
                             <?php echo esc_html(__('Repeat Password','js-support-ticket')); ?> <span style="color:red">*</span>
                         </div>
                         <div class="js-ticket-from-field">
-                           <input name="jsst_user_pass_confirm" id="password_again" class="required js-ticket-form-field-input" type="password"/>
+                           <input name="jsst_user_pass_confirm" id="password_again" class="required js-ticket-form-field-input" type="password" data-validation="required"/>
                         </div>
                     </div>
 
@@ -86,6 +89,10 @@ if (jssupportticket::$_config['offline'] == 2) {
                             </div>
                         </div>
                         <?php
+                    }
+                    JSSTincluder::getJSModel('fieldordering')->getFieldsOrderingforForm(3);
+                    foreach (jssupportticket::$_data['fieldordering'] as $field) {
+                        JSSTincluder::getObjectClass('customfields')->formCustomFields($field);
                     }
                     $google_recaptcha_3 = false;
                     if (jssupportticket::$_config['captcha_on_registration'] == 1) { ?>
@@ -110,10 +117,6 @@ if (jssupportticket::$_config['offline'] == 2) {
                             </div>
                         </div>
                         <?php
-                    }
-                    JSSTincluder::getJSModel('fieldordering')->getFieldsOrderingforForm(3);
-                    foreach (jssupportticket::$_data['fieldordering'] as $field) {
-                        JSSTincluder::getObjectClass('customfields')->formCustomFields($field);
                     } ?>
                     <input type="hidden" name="jsst_support_register_nonce" value="<?php echo esc_attr(wp_create_nonce('jsst-support-register-nonce')); ?>"/>
                     <div class="js-ticket-form-btn-wrp">

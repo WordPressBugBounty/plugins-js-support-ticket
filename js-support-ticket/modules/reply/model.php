@@ -12,13 +12,20 @@ class JSSTreplyModel {
 
         do_action('reset_jsst_aadon_query');
         do_action('jsst_aadon_getreplies');// to prepare any addon based query (action is defined in two addons)
+        $ordering = jssupportticket::$_config['ticket_replies_ordering'];
+        $ordering = strtoupper(trim($ordering)); // Normalize input
+
+        // Allow only ASC or DESC
+        if (!in_array($ordering, ['ASC', 'DESC'])) {
+            $ordering = 'ASC'; // default fallback
+        }
         $query = "SELECT replies.*,replies.id AS replyid,user.user_email AS useremail,viewer.display_name AS viewername,tickets.id,tickets.uid AS ticketsuid ".jssupportticket::$_addon_query['select']."
                     FROM `" . jssupportticket::$_db->prefix . "js_ticket_replies` AS replies
                     JOIN `" . jssupportticket::$_db->prefix . "js_ticket_tickets` AS tickets ON  replies.ticketid = tickets.id
                     LEFT JOIN `" . jssupportticket::$_db->prefix . "js_ticket_users` AS user ON  replies.uid = user.id
                     LEFT JOIN `" . jssupportticket::$_db->prefix . "js_ticket_users` AS viewer ON  replies.viewed_by = viewer.id
                     ".jssupportticket::$_addon_query['join']."
-                    WHERE tickets.id = " . esc_sql($id) . " ORDER By replies.id ASC";
+                    WHERE tickets.id = " . esc_sql($id) . " ORDER By replies.id ".esc_sql($ordering);
         jssupportticket::$_data[4] = jssupportticket::$_db->get_results($query);
         do_action('reset_jsst_aadon_query');
         if (jssupportticket::$_db->last_error != null) {
@@ -32,7 +39,7 @@ class JSSTreplyModel {
             $update_required = false; // Flag to determine if the update is needed
 
             // Check if the reply has not been viewed
-            if (empty($reply->viewed_by)) {
+            if (empty($reply->viewed_by) && empty($reply->mergemessage)) {
 
                 // If the current user is an admin
                 if (is_admin()) {
@@ -209,20 +216,20 @@ class JSSTreplyModel {
             JSSTincluder::getJSModel('attachment')->storeAttachments($data);
             //reply stored change action
             if (is_admin()){
-                JSSTincluder::getJSModel('ticket')->setStatus(3, $data['ticketid']); // 3 -> waiting for customer reply
+                JSSTincluder::getJSModel('ticket')->setStatus(4, $data['ticketid']); // 4 -> waiting for customer reply
                 if(in_array('timetracking', jssupportticket::$_active_addons)){
                     JSSTincluder::getJSModel('timetracking')->storeTimeTaken($data,$replyid,1);// to store time for reply 1 is to identfy that current record is reply
                 }
             }else {
                 if ( in_array('agent',jssupportticket::$_active_addons) && JSSTincluder::getJSModel('agent')->isUserStaff()){
-                    JSSTincluder::getJSModel('ticket')->setStatus(3, $data['ticketid']); // 3 -> waiting for customer reply
+                    JSSTincluder::getJSModel('ticket')->setStatus(4, $data['ticketid']); // 4 -> waiting for customer reply
                     $data['staffid'] = $staffid;
                     if(in_array('timetracking', jssupportticket::$_active_addons)){
                         JSSTincluder::getJSModel('timetracking')->storeTimeTaken($data,$replyid,1);// to store time for reply 1 is to identfy that current record is reply
                     }
 
                 }else{
-                    JSSTincluder::getJSModel('ticket')->setStatus(1, $data['ticketid']); // 1 -> waiting for admin/staff reply
+                    JSSTincluder::getJSModel('ticket')->setStatus(2, $data['ticketid']); // 2 -> waiting for admin/staff reply
                 }
             }
             JSSTincluder::getJSModel('ticket')->updateLastReply($data['ticketid']);
@@ -423,6 +430,7 @@ class JSSTreplyModel {
             'message'   => $reply,
             'status'    => 1,
             'created'   => date_i18n('Y-m-d H:i:s'),
+            'mergemessage'   => 1,
         );
         jssupportticket::$_db->replace(jssupportticket::$_db->prefix . 'js_ticket_replies', $query_array);
         if (jssupportticket::$_db->last_error == null) {

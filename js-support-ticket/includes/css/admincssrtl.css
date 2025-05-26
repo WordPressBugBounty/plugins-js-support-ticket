@@ -140,6 +140,9 @@ div.js-ticket-sorting span.js-ticket-sorting-link {float: right;}
 div.js-ticket-wrapper div.js-ticket-data span.js-ticket-status {right: auto !important;left: 2%;}
 .jsstadmin-form .js-form-wrapper #helptopic select {background-position: 10px !important;}
 .input-field-wrapper {float: right;margin-right: 0;margin-left: 10px;}
+form.jsstadmin-form div.js-form-wrapper .js-visible-conditions-addbtn-wrp .js-form-visible-addmore{float: right;margin-right: 0;}
+form.jsstadmin-form div.js-visible-conditions-addbtn-wrp .js-form-visible-addmore{float: right;margin-left: 0;margin-right: 5px;}
+form.jsstadmin-form.has-validation-callback .js-visible-conditions-addbtn-wrp{margin-right: 5px;margin-left: 0;float: right;}
 
 /* popups */
 div#userpopup .userpopup-top .userpopup-heading {float: right;}

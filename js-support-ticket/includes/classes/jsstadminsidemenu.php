@@ -313,7 +313,7 @@ $jssupportticket_js ='
             <span class="jsst_text"><?php echo esc_html(__('GDPR','js-support-ticket')); ?></span>
         </a>
         <ul class="jsstadmin-sidebar-submenu treeview-menu">
-            <li style="display: none;" class="<?php if($c == 'gdpr' && ($layout == 'gdprfields') || ($layout == 'addgdprfield')) echo 'active'; ?>">
+            <li class="<?php if($c == 'gdpr' && ($layout == 'gdprfields') || ($layout == 'addgdprfield')) echo 'active'; ?>">
                 <a href="?page=gdpr&jstlay=gdprfields" title="<?php echo esc_html(__('GDPR Fields','js-support-ticket')); ?>">
                     <?php echo esc_html(__('GDPR Fields','js-support-ticket')); ?>
                 </a>
@@ -430,6 +430,42 @@ $jssupportticket_js ='
             <li class="<?php if($c == 'priority' && ($layout == 'addpriority')) echo 'active'; ?>">
                 <a href="?page=priority&jstlay=addpriority" title="<?php echo esc_html(__('Add Priority' , 'js-support-ticket')); ?>">
                     <?php echo esc_html(__('Add Priority', 'js-support-ticket')); ?>
+                </a>
+            </li>
+        </ul>
+    </li>
+    <li class="treeview <?php if($c == 'status') echo 'active'; ?>">
+        <a class="" href="admin.php?page=status" title="<?php echo esc_html(__('Ticket Statuses' , 'js-support-ticket')); ?>">
+            <img class="jsst_menu-icon" alt="<?php echo esc_html(__('Ticket Statuses' , 'js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL).'includes/images/left-icons/menu/statuses.png'; ?>"/>
+            <span class="jsst_text"><?php echo esc_html(__('Ticket Statuses' , 'js-support-ticket')); ?></span>
+        </a>
+        <ul class="jsstadmin-sidebar-submenu treeview-menu">
+            <li class="<?php if($c == 'status' && ($layout == '')) echo 'active'; ?>">
+                <a href="?page=status" title="<?php echo esc_html(__('Ticket Statuses' , 'js-support-ticket')); ?>">
+                    <?php echo esc_html(__('Ticket Statuses', 'js-support-ticket')); ?>
+                </a>
+            </li>
+            <li class="<?php if($c == 'status' && ($layout == 'addstatus')) echo 'active'; ?>">
+                <a href="?page=status&jstlay=addstatus" title="<?php echo esc_html(__('Add Status' , 'js-support-ticket')); ?>">
+                    <?php echo esc_html(__('Add Ticket Status', 'js-support-ticket')); ?>
+                </a>
+            </li>
+        </ul>
+    </li>
+    <li class="treeview <?php if($c == 'product') echo 'active'; ?>">
+        <a class="" href="admin.php?page=product" title="<?php echo esc_html(__('Products' , 'js-support-ticket')); ?>">
+            <img class="jsst_menu-icon" alt="<?php echo esc_html(__('Products' , 'js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL).'includes/images/left-icons/menu/products.png'; ?>"/>
+            <span class="jsst_text"><?php echo esc_html(__('Products' , 'js-support-ticket')); ?></span>
+        </a>
+        <ul class="jsstadmin-sidebar-submenu treeview-menu">
+            <li class="<?php if($c == 'product' && ($layout == '')) echo 'active'; ?>">
+                <a href="?page=product" title="<?php echo esc_html(__('Products' , 'js-support-ticket')); ?>">
+                    <?php echo esc_html(__('Products', 'js-support-ticket')); ?>
+                </a>
+            </li>
+            <li class="<?php if($c == 'product' && ($layout == 'addproduct')) echo 'active'; ?>">
+                <a href="?page=product&jstlay=addproduct" title="<?php echo esc_html(__('Add Product' , 'js-support-ticket')); ?>">
+                    <?php echo esc_html(__('Add Product', 'js-support-ticket')); ?>
                 </a>
             </li>
         </ul>
@@ -738,17 +774,17 @@ $jssupportticket_js ='
         <li class="treeview <?php if($c == 'role') echo 'active'; ?>">
             <a class="" href="admin.php?page=role" title="<?php echo esc_html(__('Roles' , 'js-support-ticket')); ?>">
                 <img class="jsst_menu-icon" alt="<?php echo esc_html(__('Roles' , 'js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL).'includes/images/left-icons/menu/role.png'; ?>"/>
-                <span class="jsst_text"><?php echo esc_html(__('Roles' , 'js-support-ticket')); ?></span>
+                <span class="jsst_text"><?php echo esc_html(__('Agent Roles' , 'js-support-ticket')); ?></span>
             </a>
             <ul class="jsstadmin-sidebar-submenu treeview-menu">
                 <li class="<?php if($c == 'role' && ($layout == '')) echo 'active'; ?>">
-                    <a href="?page=role" title="<?php echo esc_html(__('Roles' , 'js-support-ticket')); ?>">
-                        <?php echo esc_html(__('Roles', 'js-support-ticket')); ?>
+                    <a href="?page=role" title="<?php echo esc_html(__('Agent Roles' , 'js-support-ticket')); ?>">
+                        <?php echo esc_html(__('Agent Roles', 'js-support-ticket')); ?>
                     </a>
                 </li>
                 <li class="<?php if($c == 'role' && ($layout == 'addrole')) echo 'active'; ?>">
                     <a href="?page=role&jstlay=addrole" title="<?php echo esc_html(__('Add Role' , 'js-support-ticket')); ?>">
-                        <?php echo esc_html(__('Add Role', 'js-support-ticket')); ?>
+                        <?php echo esc_html(__('Add Agent Role', 'js-support-ticket')); ?>
                     </a>
                 </li>
             </ul>

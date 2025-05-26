@@ -10,6 +10,8 @@ class JSSTfieldsorderingTable extends JSSTtable {
 	public $fieldtitle = '';
 	public $ordering = '';
 	public $section = '';
+	public $placeholder = '';
+	public $description = '';
 	public $fieldfor = '';
 	public $published = '';
 	public $sys = '';
@@ -26,12 +28,16 @@ class JSSTfieldsorderingTable extends JSSTtable {
 	public $showonlisting = '';
 	public $cannotshowonlisting = '';
 	public $search_user = '';
+	public $search_admin = '';
 	public $cannotsearch = '';
 	public $isvisitorpublished = '';
 	public $search_visitor = '';
 	public $userfieldparams = '';
 	public $multiformid = '';
 	public $visibleparams = '';
+	public $readonly = '';
+	public $adminonly = '';
+	public $defaultvalue = '';
 
 	function __construct() {
 		parent::__construct('fieldsordering', 'id'); // tablename, primarykey

@@ -12,7 +12,7 @@ class JSSTgdprController {
     function handleRequest() {
         $layout = JSSTrequest::getLayout('jstlay', null, 'gdpr');
         jssupportticket::$_data['sanitized_args']['jsst_nonce'] = esc_html(wp_create_nonce('jsst_nonce'));
-        if (self::canaddfile()) {
+        if (self::canaddfile($layout)) {
             switch ($layout) {
                 case 'admin_gdprfields':
                     JSSTincluder::getJSModel('gdpr')->getGDPRFeilds();
@@ -36,19 +36,26 @@ class JSSTgdprController {
         }
     }
 
-    function canaddfile() {
+    function canaddfile($layout) {
         $nonce_value = JSSTrequest::getVar('jsst_nonce');
         if ( wp_verify_nonce( $nonce_value, 'jsst_nonce') ) {
-            if (isset($_POST['form_request']) && $_POST['form_request'] == 'jssupportticket')
+            if (isset($_POST['form_request']) && $_POST['form_request'] == 'jssupportticket') {
                 return false;
-            elseif (isset($_GET['action']) && $_GET['action'] == 'jstask')
+            } elseif (isset($_GET['action']) && $_GET['action'] == 'jstask') {
                 return false;
-            else
+            } else {
+                if(!is_admin() && jssupportticketphplib::JSST_strpos($layout, 'admin_') === 0){
+                    return false;
+                }
                 return true;
+            }
         }
     }
 
     static function savegdprfield() {
+        if (!current_user_can('manage_options')) { //only admin can change it.
+            return false;
+        }
         $id = JSSTrequest::getVar('id');
         $nonce = JSSTrequest::getVar('_wpnonce');
         if (! wp_verify_nonce( $nonce, 'save-gdprfield-'.$id) ) {

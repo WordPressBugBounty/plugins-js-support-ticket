@@ -53,6 +53,7 @@
 	span.js-ticket-wrapper-textcolor {top: 15px;}
 	div.js-ticket-wrapper div.js-ticket-data span.js-ticket-status {top: 15px;right: 120px;}
 	div.js-ticket-wrapper div.js-ticket-data1 {width: 100%;padding: 20px 30px;}
+	div.jsst-visitor-token-message p.jsst-visitor-token-message-token-number a{margin-bottom: 10px;}
 
 
 /* Ticket Detail*/
@@ -88,6 +89,7 @@
 	div#popupforinternalnote {width: 90%;}
 	div#popupforagenttransfer {width: 90%;}
 	div#popupfordepartmenttransfer {width: 90%;}
+	div#userpopupforchangestatus {width: 90%;}
 	div.jsst-popup-wrapper {width: 90%;}
 
 	/*Merge Ticket Responsive*/

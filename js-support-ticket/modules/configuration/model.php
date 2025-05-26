@@ -162,7 +162,7 @@ class JSSTconfigurationModel {
                     JSSTmessage::setMessage(esc_html(__('Data directory cannot empty.', 'js-support-ticket')), 'error');
                     continue;
                 }
-                if(strpos($data_directory, '/') !== false){
+                if(jssupportticketphplib::JSST_strpos($data_directory, '/') !== false){
                     JSSTmessage::setMessage(esc_html(__('Data directory is not proper.', 'js-support-ticket')) , 'error');
                     continue;
                 }
@@ -310,7 +310,7 @@ class JSSTconfigurationModel {
             $unlinkPath = realpath($path . $key); // Get absolute path
 
             // Ensure the file is within the allowed directory
-            if ($unlinkPath && strpos($unlinkPath, realpath($path)) === 0 && is_file($unlinkPath)) {
+            if ($unlinkPath && jssupportticketphplib::JSST_strpos($unlinkPath, realpath($path)) === 0 && is_file($unlinkPath)) {
                 wp_delete_file($unlinkPath);
             }
         }

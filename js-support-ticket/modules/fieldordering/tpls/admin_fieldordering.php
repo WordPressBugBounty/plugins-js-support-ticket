@@ -159,7 +159,8 @@ $type = array(
                                 continue;
                             }
                         }
-                        if($field->field == 'wcitemid'){
+                        // hide status and assign and duedate to field
+                        if($field->field == 'wcitemid' || $field->field == 'status' || $field->field == 'assignto' || $field->field == 'duedate'){
                             continue;
                         }
 
@@ -187,7 +188,7 @@ $type = array(
                             <span class="js-support-ticket-table-responsive-heading"><?php echo esc_html(__('Field Title','js-support-ticket')); ?>:</span>
                                 <?php
                                     if ($field->fieldtitle)
-                                        echo '<a title="'. esc_html(__('users popup','js-support-ticket')).'" href="#" id="userpopup" data-id='.esc_attr($field->id).'>'.esc_html(jssupportticket::JSST_getVarValue($field->fieldtitle)).'</a>';
+                                        echo '<a title="'. esc_html(__('users popup','js-support-ticket')).'" href="?page=fieldordering&jstlay=adduserfeild&jssupportticketid='.esc_attr($field->id).'&fieldfor='.jssupportticket::$_data['fieldfor'].'&formid='.esc_attr($field->multiformid).'" id="" data-id='.esc_attr($field->id).'>'.esc_html(jssupportticket::JSST_getVarValue($field->fieldtitle)).'</a>';
                                     else echo esc_html($field->userfieldtitle);
                                     if($field->cannotunpublish == 1){
                                         echo '<font style="color:#1C6288;font-size:20px;margin:0px 5px;">*</font>';
@@ -224,7 +225,7 @@ $type = array(
                             </td>
                             <td>
                             <span class="js-support-ticket-table-responsive-heading"><?php echo esc_html(__('Required','js-support-ticket')); ?>:</span>
-                                <?php if ($field->cannotunpublish == 1 || ($field->userfieldtype == 'termsandconditions' && $field->required == 1) ) { ?>
+                                <?php if ($field->cannotunpublish == 1 || $field->field == 'termsandconditions1' || $field->field == 'termsandconditions2' || $field->field == 'termsandconditions3' || ($field->userfieldtype == 'termsandconditions' && $field->required == 1) ) { ?>
                                     <img height="15" width="15" src="<?php echo esc_url(JSST_PLUGIN_URL) . 'includes/images/good.png'; ?>" alt="<?php echo esc_html(__('good','js-support-ticket')); ?>" title="<?php echo esc_html(__('can not mark as not required','js-support-ticket')); ?>" />
                                 <?php }elseif ($field->required == 1) {
                                     $url  = "?page=fieldordering&task=changerequiredstatus&action=jstask&status=unrequired&fieldorderingid=".esc_attr($field->id).'&fieldfor='.esc_attr(jssupportticket::$_data['fieldfor']).'&formid='.esc_attr($field->multiformid);
@@ -239,11 +240,9 @@ $type = array(
                             <td>
                             <span class="js-support-ticket-table-responsive-heading"><?php echo esc_html(__('Action','js-support-ticket')); ?>:</span>
                                 <?php
+                                    echo wp_kses('<a title="'. esc_html(__('Edit','js-support-ticket')).'" class="action-btn" href="?page=fieldordering&jstlay=adduserfeild&jssupportticketid='.esc_attr($field->id).'&fieldfor='.jssupportticket::$_data['fieldfor'].'&formid='.esc_attr($field->multiformid).'"><img alt="'. esc_html(__('Edit','js-support-ticket')).'" src="'.esc_url(JSST_PLUGIN_URL).'includes/images/edit.png" /></a>&nbsp;', JSST_ALLOWED_TAGS);
                                     if($field->isuserfield==1){
-                                        echo wp_kses('<a title="'. esc_html(__('Edit','js-support-ticket')).'" class="action-btn" href="?page=fieldordering&jstlay=adduserfeild&jssupportticketid='.esc_attr($field->id).'&fieldfor='.jssupportticket::$_data['fieldfor'].'&formid='.esc_attr($field->multiformid).'"><img alt="'. esc_html(__('Edit','js-support-ticket')).'" src="'.esc_url(JSST_PLUGIN_URL).'includes/images/edit.png" /></a>&nbsp;', JSST_ALLOWED_TAGS);
                                         echo wp_kses('<a title="'. esc_html(__('Delete','js-support-ticket')).'" class="action-btn" onclick="return confirm(\''. esc_html(__('Are you sure you want to delete it?','js-support-ticket')).'\');" href="'.esc_url(wp_nonce_url('?page=fieldordering&task=removeuserfeild&action=jstask&jssupportticketid='.esc_attr($field->id).'&fieldfor='.jssupportticket::$_data['fieldfor'].'&formid='.esc_attr($field->multiformid),'remove-userfeild-'.$field->id)).'"><img alt="'. esc_html(__('Delete','js-support-ticket')).'" src="'.esc_url(JSST_PLUGIN_URL).'includes/images/delete.png" /></a>', JSST_ALLOWED_TAGS);
-                                    }else{
-                                        echo '---';
                                     }
                                 ?>
                             </td>
@@ -277,5 +276,10 @@ $type = array(
             }
             ?>
         </div>
+        <?php if (!empty(jssupportticket::$_data[0])) { ?>
+            <div id="js-field-ordering-notice">
+                <img src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/info-icon.png"> <?php echo esc_html(__('File upload fields and Check box fields cannot be made required.', 'js-support-ticket')); ?>
+            </div>
+        <?php } ?>
     </div>
 </div>
