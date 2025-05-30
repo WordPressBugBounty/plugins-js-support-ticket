@@ -7243,3 +7243,659 @@ msgstr "IMAP Authentication cancelled"
 
 msgid "Page Not Found !!"
 msgstr "Page Not Found !!"
+
+msgid "Email Template has been successfully deleted"
+msgstr ""
+
+msgid "Select Submit Type"
+msgstr ""
+
+msgid "'s Department permission has been changed"
+msgstr ""
+
+msgid "Rule has not been stored"
+msgstr ""
+
+msgid "Rule has not been deleted"
+msgstr ""
+
+msgid "Rule"
+msgstr ""
+
+msgid "Select Condition Value"
+msgstr ""
+
+msgid "The ticket is unlocked by"
+msgstr ""
+
+msgid " item(s)"
+msgstr ""
+
+msgid "Active Now"
+msgstr ""
+
+msgid "Dashboad"
+msgstr ""
+
+msgid "Statuses"
+msgstr ""
+
+msgid "status"
+msgstr ""
+
+msgid "Products"
+msgstr ""
+
+msgid "product"
+msgstr ""
+
+msgid "Emailcc"
+msgstr ""
+
+msgid "JS Help Desk Pages"
+msgstr ""
+
+msgid "JS Help desk control panel"
+msgstr ""
+
+msgid "Add ticket"
+msgstr ""
+
+msgid "My tickets"
+msgstr ""
+
+msgid "Latest downloads"
+msgstr ""
+
+msgid "Popular downloads"
+msgstr ""
+
+msgid "List FAQ`s"
+msgstr ""
+
+msgid "Latest FAQ`s"
+msgstr ""
+
+msgid "Popular FAQ`s"
+msgstr ""
+
+msgid "Latest announcements"
+msgstr ""
+
+msgid "Popular announcements"
+msgstr ""
+
+msgid "home icon"
+msgstr ""
+
+msgid "slug"
+msgstr ""
+
+msgid "Auto Assign"
+msgstr ""
+
+msgid "Shortcodes"
+msgstr ""
+
+msgid "Ticket Statuses"
+msgstr ""
+
+msgid "Add Status"
+msgstr ""
+
+msgid "Add Ticket Status"
+msgstr ""
+
+msgid "Add Product"
+msgstr ""
+
+msgid "Agent Roles"
+msgstr ""
+
+msgid "Add Agent Role"
+msgstr ""
+
+msgid "Emial CC"
+msgstr ""
+
+msgid "Add Emial CC"
+msgstr ""
+
+msgid "help"
+msgstr ""
+
+
+msgid "WooCommerce Support"
+msgstr ""
+
+msgid "Envato"
+msgstr ""
+
+msgid "Prefix has been stored"
+msgstr ""
+
+msgid "reset"
+msgstr ""
+
+msgid "Home Slug"
+msgstr ""
+
+msgid "Prefix"
+msgstr ""
+
+msgid "This prefix will be added to slug incase of conflict"
+msgstr ""
+
+msgid "edit"
+msgstr ""
+
+msgid "Missing user(s) added successfully!"
+msgstr ""
+
+msgid "No missing user found!"
+msgstr ""
+
+msgid "Not Installed"
+msgstr ""
+
+msgid "Addon Installed Successfully"
+msgstr ""
+
+msgid "Addon installation failed"
+msgstr ""
+
+msgid "add missing users"
+msgstr ""
+
+msgid "user"
+msgstr ""
+
+msgid "view all tickets history"
+msgstr ""
+
+msgid "View All Tickets History"
+msgstr ""
+
+msgid "It allows user to add more than one form based on requirements."
+msgstr ""
+
+msgid "When a ticket is created, an appropriate agent is automatically assigned to the ticket and it is moved to the Assigned state."
+msgstr ""
+
+msgid "WP Vehicle Manager"
+msgstr ""
+
+msgid "Visit site"
+msgstr ""
+
+msgid "Install WP Vehicle Manager Plugin"
+msgstr ""
+
+msgid "JS Job Manager"
+msgstr ""
+
+msgid "Install JS Job Manager Plugin"
+msgstr ""
+
+msgid "WP Learn Manager"
+msgstr ""
+
+msgid "Install WP Learn Manager Plugin"
+msgstr ""
+
+msgid "Manually assign ticket to agent"
+msgstr ""
+
+msgid "Translation"
+msgstr ""
+
+msgid "When WordPress language change to fr, JS Help Desk language will auto change to fr"
+msgstr ""
+
+msgid "Status: "
+msgstr ""
+
+msgid "The status has been changed"
+msgstr ""
+
+msgid "The status has not been changed"
+msgstr ""
+
+msgid "Ticket status change"
+msgstr ""
+
+msgid "The status is changed by"
+msgstr ""
+
+msgid "Change Status"
+msgstr ""
+
+msgid "Reason For"
+msgstr ""
+
+msgid "tickets by"
+msgstr ""
+
+msgid "View Image"
+msgstr ""
+
+msgid "Viewed By"
+msgstr ""
+
+msgid "None"
+msgstr ""
+
+msgid "set"
+msgstr ""
+
+msgid "Other Tickets"
+msgstr ""
+
+msgid "Type Note for"
+msgstr ""
+
+msgid "tickets"
+msgstr ""
+
+msgid "Token"
+msgstr ""
+
+msgid "Search Ticket"
+msgstr ""
+
+msgid "Ticket Creator"
+msgstr ""
+
+msgid "Remember Your Ticket Token for Tracking (Save It!)"
+msgstr ""
+
+msgid "You've received a token number to track your support ticket status. This is one-time code, so please save it carefully. "
+msgstr ""
+
+msgid "Copy Token"
+msgstr ""
+
+msgid "Status Title Already Exist"
+msgstr ""
+
+msgid "Status has been stored"
+msgstr ""
+
+msgid "Status has not been stored"
+msgstr ""
+
+msgid "Status has been deleted"
+msgstr ""
+
+msgid "Status has not been deleted"
+msgstr ""
+
+msgid "Text Color"
+msgstr ""
+
+msgid "Background Color"
+msgstr ""
+
+msgid "Save Status"
+msgstr ""
+
+msgid "Required Fields are not filled"
+msgstr ""
+
+msgid "Note:"
+msgstr ""
+
+msgid "Features marked with"
+msgstr ""
+
+msgid "are only available with its own addon."
+msgstr ""
+
+msgid "Product Title Already Exist"
+msgstr ""
+
+msgid "Product has been stored"
+msgstr ""
+
+msgid "Product has not been stored"
+msgstr ""
+
+msgid "Product has been deleted"
+msgstr ""
+
+msgid "Product has not been deleted"
+msgstr ""
+
+msgid "Save Product"
+msgstr ""
+
+msgid "JS Help Desk Settings"
+msgstr ""
+
+msgid "Step 2 of "
+msgstr ""
+
+msgid "Step 4 of 5"
+msgstr ""
+
+msgid "Step 1 of "
+msgstr ""
+
+msgid "Download Translation File"
+msgstr ""
+
+msgid "Want to download translation file? Click on download. It will take sometime."
+msgstr ""
+
+msgid "Download & Next"
+msgstr ""
+
+msgid "Skip this step"
+msgstr ""
+
+msgid "Recaptcha Version 2"
+msgstr ""
+
+msgid "Recaptcha Version 3"
+msgstr ""
+
+msgid "WordPress Default Register Page"
+msgstr ""
+
+msgid "4"
+msgstr ""
+
+msgid "5"
+msgstr ""
+
+msgid "6"
+msgstr ""
+
+msgid "Oldest First"
+msgstr ""
+
+msgid "Newest First"
+msgstr ""
+
+msgid "menu"
+msgstr ""
+
+msgid "Select Configuration"
+msgstr ""
+
+msgid "Facebook"
+msgstr ""
+
+msgid "Linkedin"
+msgstr ""
+
+msgid "Show number of the open, closed, answered ticket in my ticket and dashboard"
+msgstr ""
+
+msgid "Redirect user on log in"
+msgstr ""
+
+msgid "Set register Link Default or Custom"
+msgstr ""
+
+msgid " To enable registrations, WordPress admin > General > Settings > Membership: Anyone can register"
+msgstr ""
+
+msgid "Woocommerce Category"
+msgstr ""
+
+msgid "Select category to display only products of this category on the WooCommerce shop page."
+msgstr ""
+
+msgid "Set ticketid sequential or random .e.g "
+msgstr ""
+
+msgid "Pad Zeros"
+msgstr ""
+
+msgid "To pad an integer with leading zeros to a specific length"
+msgstr ""
+
+msgid "Ticket Replies ordering"
+msgstr ""
+
+msgid "Set the default ordering for ticket replies in the detail page."
+msgstr ""
+
+msgid "Show Message Read Icon for Admin On Ticket Detail"
+msgstr ""
+
+msgid "Select whether the message read icon is displayed to the administrator on ticket detail."
+msgstr ""
+
+msgid "Show Message Read Icon For Agents on Ticket Detail"
+msgstr ""
+
+msgid "Select whether the message read icon is displayed to agents on ticket detail."
+msgstr ""
+
+msgid "Show Message Read Icon For Users On Ticket Detail"
+msgstr ""
+
+msgid "Select whether the message read icon is displayed to users on the ticket detail."
+msgstr ""
+
+msgid "Department Email"
+msgstr ""
+
+msgid "Send email to all departments on ticket create"
+msgstr ""
+
+msgid "Captcha Setting"
+msgstr ""
+
+msgid "Google reCaptcha"
+msgstr ""
+
+msgid "Google ReCaptcha version"
+msgstr ""
+
+msgid "Select the Google ReCaptcha version"
+msgstr ""
+
+msgid "Google recaptcha site key"
+msgstr ""
+
+msgid "Please enter the google re-captcha site key from"
+msgstr ""
+
+msgid "Google recaptcha secret key"
+msgstr ""
+
+msgid "Please enter the google re-captcha secret key from"
+msgstr ""
+
+msgid "Search Reports"
+msgstr ""
+
+msgid "Please fill required fields."
+msgstr ""
+
+msgid "There was no record found"
+msgstr ""
+
+msgid "Select Required"
+msgstr ""
+
+msgid " Subject"
+msgstr ""
+
+msgid "Kylee Arroyo"
+msgstr ""
+
+msgid "Can I upgrade my plan?"
+msgstr ""
+
+msgid "This ticket is marked as overdue "
+msgstr ""
+
+msgid "pF3YczjML"
+msgstr ""
+
+msgid "01-11-2023"
+msgstr ""
+
+msgid "Allison Carney"
+msgstr ""
+
+msgid "How Can I get Subscription?"
+msgstr ""
+
+msgid "Tp3Y7zj01"
+msgstr ""
+
+msgid "20-12-2023"
+msgstr ""
+
+msgid "Aleena Adam"
+msgstr ""
+
+msgid "How Long do i have support access?"
+msgstr ""
+
+msgid "Ku3Y8zj3L"
+msgstr ""
+
+msgid "11-6-2023"
+msgstr ""
+
+msgid "If the colors have been saved but the user-side colors are still the same, it is advised to clear the cache."
+msgstr ""
+
+msgid "Purple"
+msgstr ""
+
+msgid "Field cannot be mark as published"
+msgstr ""
+
+msgid "Field cannot mark as required"
+msgstr ""
+
+msgid "Child fields has not been stored"
+msgstr ""
+
+msgid "Not Contain"
+msgstr ""
+
+msgid "Place Holder"
+msgstr ""
+
+msgid "Admin Search"
+msgstr ""
+
+msgid "AND"
+msgstr ""
+
+msgid "File upload fields and Check box fields cannot be made required."
+msgstr ""
+
+msgid "Default Value"
+msgstr ""
+
+msgid "To choose a default value, first add values in the area below"
+msgstr ""
+
+msgid "This option is not available in this case"
+msgstr ""
+
+msgid "Select Default Value"
+msgstr ""
+
+msgid "Read Only"
+msgstr ""
+
+msgid "Admin/Agent Only"
+msgstr ""
+
+msgid "Java Script"
+msgstr ""
+
+msgid "Add More"
+msgstr ""
+
+msgid "Visibility conditions"
+msgstr ""
+
+msgid "Add new"
+msgstr ""
+
+msgid "visibility condition"
+msgstr ""
+
+msgid "User already an agent"
+msgstr ""
+
+msgid "The agent has not been stored"
+msgstr ""
+
+msgid "The agent has not been deleted"
+msgstr ""
+
+msgid "The agent in use cannot delete"
+msgstr ""
+
+msgid "Select agent"
+msgstr ""
+
+msgid "The ticket marks as overdue"
+msgstr ""
+
+msgid "Disabled form cannot be set as default"
+msgstr ""
+
+msgid "Form has not been stored"
+msgstr ""
+
+msgid "Multiform has not been deleted"
+msgstr ""
+
+msgid "Multiform in use"
+msgstr ""
+
+msgid " cannot deleted"
+msgstr ""
+
+msgid "Closed Date"
+msgstr ""
+
+msgid "Closed Time"
+msgstr ""
+
+msgid "Total Tracking Time"
+msgstr ""
+
+msgid "Sub Category Knowledgebase"
+msgstr ""
+
+msgid "Type:"
+msgstr ""
+
+msgid "Sub Category Faqs"
+msgstr ""
+
+
+msgid "Facebook user"
+msgstr ""
+
+msgid "Linkedin user"
+msgstr ""
+
+msgid "You are logged in"
+msgstr ""
+
+msgid "You are logged out"
+msgstr ""
+
+msgid "Email Cc has not been stored"
+msgstr ""
+
+msgid "Email CC has not been deleted"
+msgstr ""
+
+msgid "Email CC "
+msgstr ""

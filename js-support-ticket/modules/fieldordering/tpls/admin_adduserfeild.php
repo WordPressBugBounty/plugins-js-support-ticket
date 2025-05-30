@@ -911,7 +911,8 @@ wp_add_inline_script('js-support-ticket-main-js',$jssupportticket_js);
             }
             function getNextField(divid, object) {
                 console.log(divid);
-                var textvar = divid + "[]";
+                let cleandivid = divid.replaceAll("[", "").replaceAll("]", "");
+                var textvar = cleandivid + "[]";
 
                 // Create elements safely using jQuery
                 var wrapper = jQuery(\'<span class="input-field-wrapper"></span>\');

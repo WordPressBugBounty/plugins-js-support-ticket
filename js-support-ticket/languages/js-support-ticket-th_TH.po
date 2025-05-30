@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 3.4.1\n"
+"X-Generator: Poedit 3.6\n"
 
 msgid "You are not allowed"
 msgstr "คุณไม่ได้รับอนุญาต"
@@ -1965,10 +1965,9 @@ msgid "Select Page"
 msgstr "เลือกหน้า"
 
 msgid ""
-"Select JS Help Desk default page, on the action system, will redirect on the selected page. If not select the default page, "
-"email links, and support icon might not work."
-msgstr ""
-"เลือกหน้าเริ่มต้นของ JS Help Desk บนระบบการดำเนินการจะเปลี่ยนเส้นทางในหน้าที่เลือก หากไม่ได้เลือกหน้าเริ่มต้นลิงก์อีเมลและไอคอนการสนับสนุนอาจไม่ทำงาน"
+"Select JS Help Desk default page, on the action system, will redirect on the selected page. If not select the default page, email links, and support icon "
+"might not work."
+msgstr "เลือกหน้าเริ่มต้นของ JS Help Desk บนระบบการดำเนินการจะเปลี่ยนเส้นทางในหน้าที่เลือก หากไม่ได้เลือกหน้าเริ่มต้นลิงก์อีเมลและไอคอนการสนับสนุนอาจไม่ทำงาน"
 
 msgid "Support Icon"
 msgstr "ไอคอนการสนับสนุน"
@@ -2966,16 +2965,13 @@ msgstr "รวมตั๋ว"
 msgid "Enables agents to merge two tickets of the same user into one instead of dealing with the same issue on many tickets."
 msgstr "ช่วยให้ตัวแทนสามารถรวมตั๋วสองใบของผู้ใช้คนเดียวกันเข้าเป็นหนึ่งเดียวแทนที่จะจัดการกับปัญหาเดียวกันในหลาย ๆ ตั๋ว"
 
-msgid ""
-"Defines rules or set specific intervals of time to make ticket auto overdue.The ticket can overdue by type or overdue by Cronjob."
+msgid "Defines rules or set specific intervals of time to make ticket auto overdue.The ticket can overdue by type or overdue by Cronjob."
 msgstr "กำหนดกฎหรือตั้งค่าช่วงเวลาเฉพาะเพื่อให้ตั๋วค้างชำระอัตโนมัติตั๋วสามารถเกินกำหนดตามประเภทหรือเกินกำหนดโดย Cronjob"
 
 msgid "SMTP enables you to add custom mail protocol to send and receive emails within the js help desk."
 msgstr "SMTP ช่วยให้คุณเพิ่มโปรโตคอลจดหมายที่กำหนดเองเพื่อส่งและรับอีเมลภายในแผนกช่วยเหลือ js"
 
-msgid ""
-"Displays complete ticket history along with the ticket status, currently assigned user and other actions performed on each "
-"ticket."
+msgid "Displays complete ticket history along with the ticket status, currently assigned user and other actions performed on each ticket."
 msgstr "แสดงประวัติตั๋วที่สมบูรณ์พร้อมกับสถานะตั๋วผู้ใช้ที่ได้รับมอบหมายในปัจจุบันและการดำเนินการอื่น ๆ ที่ดำเนินการกับแต่ละตั๋ว"
 
 msgid "Pre-populated messages allow support agents to respond quickly."
@@ -2987,8 +2983,7 @@ msgstr "ช่วยให้ผู้ใช้ตอบตั๋วผ่าน
 msgid "Time Tracking"
 msgstr "ติดตามเวลา"
 
-msgid ""
-"Track the time spent on each ticket by each agent and each reply. Report the admin on how much time is spent on each ticket."
+msgid "Track the time spent on each ticket by each agent and each reply. Report the admin on how much time is spent on each ticket."
 msgstr "ติดตามเวลาที่ใช้ในแต่ละตั๋วโดยตัวแทนและแต่ละคำตอบ รายงานผู้ดูแลเกี่ยวกับเวลาที่ใช้ไปกับตั๋วแต่ละใบ"
 
 msgid "User Options"
@@ -3048,8 +3043,7 @@ msgstr "วิดเจ็ตใน WordPress ช่วยให้คุณส�
 msgid "JS Help Desk WooCommerce provides the much-needed bridge between your WooCommerce store and the JS Help Desk."
 msgstr "JS Help Desk WooCommerce เป็นสะพานเชื่อมระหว่างร้าน WooCommerce กับ JS Help Desk"
 
-msgid ""
-"Collect your customer's private data, sensitive information from credit card to health information and store them encrypted."
+msgid "Collect your customer's private data, sensitive information from credit card to health information and store them encrypted."
 msgstr "รวบรวมข้อมูลส่วนตัวของลูกค้าของคุณข้อมูลที่ละเอียดอ่อนจากบัตรเครดิตไปจนถึงข้อมูลด้านสุขภาพและจัดเก็บข้อมูลที่เข้ารหัสไว้"
 
 msgid "Without valid Envato, license clients won't be able to open a new ticket."
@@ -3443,12 +3437,12 @@ msgid "Wordpress Plugin"
 msgstr "ปลั๊กอิน Wordpress"
 
 msgid ""
-"JS Help Desk is a trusted open source ticket system. JS Help Desk is a simple, easy to use, web-based customer support system. "
-"Users can create a ticket from the front-end. JS Help Desk comes packed with lot features than most of the expensive(and "
-"complex) support ticket system on the market. The best part is, It completely free."
+"JS Help Desk is a trusted open source ticket system. JS Help Desk is a simple, easy to use, web-based customer support system. Users can create a ticket from "
+"the front-end. JS Help Desk comes packed with lot features than most of the expensive(and complex) support ticket system on the market. The best part is, It "
+"completely free."
 msgstr ""
-"JS Help Desk เป็นระบบตั๋วโอเพ่นซอร์สที่เชื่อถือได้ JS Help Desk เป็นระบบสนับสนุนลูกค้าที่ใช้งานง่ายและใช้งานง่ายบนเว็บ ผู้ใช้สามารถสร้างตั๋วได้จากส่วนหน้า JS "
-"Help Desk มาพร้อมกับคุณสมบัติมากมายกว่าระบบตั๋วส่วนใหญ่ที่ซับซ้อน (และซับซ้อน) ในตลาด ส่วนที่ดีที่สุดคือมันฟรีอย่างสมบูรณ์"
+"JS Help Desk เป็นระบบตั๋วโอเพ่นซอร์สที่เชื่อถือได้ JS Help Desk เป็นระบบสนับสนุนลูกค้าที่ใช้งานง่ายและใช้งานง่ายบนเว็บ ผู้ใช้สามารถสร้างตั๋วได้จากส่วนหน้า JS Help Desk "
+"มาพร้อมกับคุณสมบัติมากมายกว่าระบบตั๋วส่วนใหญ่ที่ซับซ้อน (และซับซ้อน) ในตลาด ส่วนที่ดีที่สุดคือมันฟรีอย่างสมบูรณ์"
 
 msgid "JS Help Desk Addon Installer"
 msgstr "โปรแกรมติดตั้ง Addon ของ JS Help Desk"
@@ -6309,8 +6303,7 @@ msgstr "อัปเดตทันที"
 msgid "Add-On’s For Help Desk"
 msgstr "ส่วนเสริมสำหรับฝ่ายช่วยเหลือ"
 
-msgid ""
-"Get trusted WordPress add on’s. Guaranteed to work fast, safe to use, beautifully coded, packed with features and easy to use."
+msgid "Get trusted WordPress add on’s. Guaranteed to work fast, safe to use, beautifully coded, packed with features and easy to use."
 msgstr "รับส่วนเสริม WordPress ที่เชื่อถือได้ รับรองทำงานเร็ว ปลอดภัย โค้ดสวยงาม อัดแน่นด้วยฟีเจอร์และใช้งานง่าย"
 
 msgid "Save big with an exclusive membership plan today!"
@@ -6334,8 +6327,7 @@ msgstr "หัวข้อช่วยเหลือ"
 msgid "Help topics help users to find and select the area with which they need assistance."
 msgstr "หัวข้อวิธีใช้ช่วยให้ผู้ใช้ค้นหาและเลือกพื้นที่ที่ต้องการความช่วยเหลือได้"
 
-msgid ""
-"The private note is used as reminders or to give other agents insights into the ticket issue. User Won't see the private notes."
+msgid "The private note is used as reminders or to give other agents insights into the ticket issue. User Won't see the private notes."
 msgstr "บันทึกส่วนตัวจะใช้เป็นเครื่องเตือนใจหรือเพื่อให้ข้อมูลเชิงลึกแก่ตัวแทนอื่นๆ เกี่ยวกับปัญหาตั๋ว ผู้ใช้จะไม่เห็นบันทึกส่วนตัว"
 
 msgid "Stop losing productivity on repetitive queries,Build your knowledge base, group solutions by topics to facilitate users."
@@ -6399,8 +6391,7 @@ msgid "Email Cc"
 msgstr "อีเมล์ สำเนาถึง"
 
 msgid ""
-"CC(Carbon Copy) - the people who should know about the information which is being shared and the people included are able to see "
-"who is there in the list."
+"CC(Carbon Copy) - the people who should know about the information which is being shared and the people included are able to see who is there in the list."
 msgstr "CC(Carbon Copy) - ผู้ที่ควรทราบเกี่ยวกับข้อมูลที่กำลังแบ่งปันและบุคคลที่รวมอยู่จะสามารถดูว่าใครอยู่ในรายการได้บ้าง"
 
 msgid "multiform"
@@ -6413,8 +6404,7 @@ msgid "agent auto assign"
 msgstr "มอบหมายตัวแทนอัตโนมัติ"
 
 msgid ""
-"When auto assignment is enabled and a ticket is created, an appropriate agent is automatically assigned to the ticket and it is "
-"moved to the Assigned state."
+"When auto assignment is enabled and a ticket is created, an appropriate agent is automatically assigned to the ticket and it is moved to the Assigned state."
 msgstr "เมื่อเปิดใช้งานการกำหนดอัตโนมัติและสร้างตั๋ว เจ้าหน้าที่ที่เหมาะสมจะถูกกำหนดให้กับตั๋วโดยอัตโนมัติ และจะถูกย้ายไปยังสถานะมอบหมายแล้ว"
 
 msgid "Social Login"
@@ -6447,9 +6437,7 @@ msgstr "รวมทุกอย่างที่เป็นมาตรฐา
 msgid "All Future Addons"
 msgstr "ส่วนเสริมในอนาคตทั้งหมด"
 
-msgid ""
-"Hey there! We have recently launched a fresh update for the add-ons. Don't forget to update the add-ons to enjoy the greatest "
-"features!"
+msgid "Hey there! We have recently launched a fresh update for the add-ons. Don't forget to update the add-ons to enjoy the greatest features!"
 msgstr "สวัสดี! เราเพิ่งเปิดตัวการอัปเดตใหม่สำหรับส่วนเสริม อย่าลืมอัปเดตส่วนเสริมเพื่อเพลิดเพลินกับคุณสมบัติที่ยอดเยี่ยมที่สุด!"
 
 msgid "View Addone Status"
@@ -7047,10 +7035,9 @@ msgid "Edit Help Topic"
 msgstr "แก้ไขหัวข้อความช่วยเหลือ"
 
 msgid ""
-"e.g ' I have read and agree to the [link] Terms and Conditions[/link].  ' The text between [link] and [/link] will be linked to "
-"provided url or wordpress page."
-msgstr ""
-"เช่น ' ฉันได้อ่านและยอมรับ [link] ข้อกำหนดและเงื่อนไข[/link] แล้ว ' ข้อความระหว่าง [link] และ [/link] จะถูกลิงค์ไปยัง url หรือหน้า wordpress ที่ให้ไว้"
+"e.g ' I have read and agree to the [link] Terms and Conditions[/link].  ' The text between [link] and [/link] will be linked to provided url or wordpress "
+"page."
+msgstr "เช่น ' ฉันได้อ่านและยอมรับ [link] ข้อกำหนดและเงื่อนไข[/link] แล้ว ' ข้อความระหว่าง [link] และ [/link] จะถูกลิงค์ไปยัง url หรือหน้า wordpress ที่ให้ไว้"
 
 msgid "login"
 msgstr "เข้าสู่ระบบ"
@@ -7252,3 +7239,657 @@ msgstr "การรับรองความถูกต้อง IMAP ถู
 
 msgid "Page Not Found !!"
 msgstr "ไม่พบหน้านี้ !!"
+
+msgid "Email Template has been successfully deleted"
+msgstr "เทมเพลตอีเมลถูกลบเรียบร้อยแล้ว"
+
+msgid "Select Submit Type"
+msgstr "เลือกประเภทส่ง"
+
+msgid "'s Department permission has been changed"
+msgstr "การอนุญาตให้กรม"
+
+msgid "Rule has not been stored"
+msgstr "กฎยังไม่ได้รับการจัดเก็บ"
+
+msgid "Rule has not been deleted"
+msgstr "กฎยังไม่ถูกลบ"
+
+msgid "Rule"
+msgstr "กฎ"
+
+msgid "Select Condition Value"
+msgstr "เลือกค่าเงื่อนไข"
+
+msgid "The ticket is unlocked by"
+msgstr "ตั๋วถูกปลดล็อคโดย"
+
+msgid " item(s)"
+msgstr "รายการ"
+
+msgid "Active Now"
+msgstr "ใช้งานได้ทันที"
+
+msgid "Dashboad"
+msgstr "แผงหน้าปัด"
+
+msgid "Statuses"
+msgstr "สถานะ"
+
+msgid "status"
+msgstr "สถานะ"
+
+msgid "Products"
+msgstr "สินค้า"
+
+msgid "product"
+msgstr "ผลิตภัณฑ์"
+
+msgid "Emailcc"
+msgstr "emailccc"
+
+msgid "JS Help Desk Pages"
+msgstr "หน้าโต๊ะช่วยเหลือ JS"
+
+msgid "JS Help desk control panel"
+msgstr "แผงควบคุมโต๊ะช่วยเหลือ JS"
+
+msgid "Add ticket"
+msgstr "เพิ่มตั๋ว"
+
+msgid "My tickets"
+msgstr "ตั๋วของฉัน"
+
+msgid "Latest downloads"
+msgstr "ดาวน์โหลดล่าสุด"
+
+msgid "Popular downloads"
+msgstr "ดาวน์โหลดยอดนิยม"
+
+msgid "List FAQ`s"
+msgstr "รายการคำถามที่พบบ่อย"
+
+msgid "Latest FAQ`s"
+msgstr "คำถามที่พบบ่อยล่าสุด"
+
+msgid "Popular FAQ`s"
+msgstr "คำถามที่พบบ่อยยอดนิยม"
+
+msgid "Latest announcements"
+msgstr "ประกาศล่าสุด"
+
+msgid "Popular announcements"
+msgstr "ประกาศยอดนิยม"
+
+msgid "home icon"
+msgstr "ไอคอนบ้าน"
+
+msgid "slug"
+msgstr "กระสุน"
+
+msgid "Auto Assign"
+msgstr "Auto Assign"
+
+msgid "Shortcodes"
+msgstr "รหัสย่อ"
+
+msgid "Ticket Statuses"
+msgstr "สถานะตั๋ว"
+
+msgid "Add Status"
+msgstr "เพิ่มสถานะ"
+
+msgid "Add Ticket Status"
+msgstr "เพิ่มสถานะตั๋ว"
+
+msgid "Add Product"
+msgstr "เพิ่มผลิตภัณฑ์"
+
+msgid "Agent Roles"
+msgstr "บทบาทตัวแทน"
+
+msgid "Add Agent Role"
+msgstr "เพิ่มบทบาทตัวแทน"
+
+msgid "Emial CC"
+msgstr "อีเมล CC"
+
+msgid "Add Emial CC"
+msgstr "เพิ่มอีเมล CC"
+
+msgid "help"
+msgstr "ช่วย"
+
+msgid "WooCommerce Support"
+msgstr "การสนับสนุน WooCommerce"
+
+msgid "Envato"
+msgstr "envato"
+
+msgid "Prefix has been stored"
+msgstr "คำนำหน้าถูกเก็บไว้"
+
+msgid "reset"
+msgstr "รีเซ็ต"
+
+msgid "Home Slug"
+msgstr "กระสุนบ้าน"
+
+msgid "Prefix"
+msgstr "คำนำหน้า"
+
+msgid "This prefix will be added to slug incase of conflict"
+msgstr "คำนำหน้านี้จะถูกเพิ่มลงใน slug ในกรณีของความขัดแย้ง"
+
+msgid "edit"
+msgstr "แก้ไข"
+
+msgid "Missing user(s) added successfully!"
+msgstr "ผู้ใช้หายไปได้สำเร็จ!"
+
+msgid "No missing user found!"
+msgstr "ไม่พบผู้ใช้ที่หายไป!"
+
+msgid "Not Installed"
+msgstr "ไม่ได้ติดตั้ง"
+
+msgid "Addon Installed Successfully"
+msgstr "Addon ติดตั้งสำเร็จ"
+
+msgid "Addon installation failed"
+msgstr "การติดตั้ง Addon ล้มเหลว"
+
+msgid "add missing users"
+msgstr "เพิ่มผู้ใช้ที่หายไป"
+
+msgid "user"
+msgstr "ผู้ใช้"
+
+msgid "view all tickets history"
+msgstr "ดูประวัติตั๋วทั้งหมด"
+
+msgid "View All Tickets History"
+msgstr "ดูประวัติตั๋วทั้งหมด"
+
+msgid "It allows user to add more than one form based on requirements."
+msgstr "ช่วยให้ผู้ใช้สามารถเพิ่มมากกว่าหนึ่งแบบตามข้อกำหนด"
+
+msgid "When a ticket is created, an appropriate agent is automatically assigned to the ticket and it is moved to the Assigned state."
+msgstr "เมื่อมีการสร้างตั๋วตัวแทนที่เหมาะสมจะถูกกำหนดให้กับตั๋วโดยอัตโนมัติและจะถูกย้ายไปยังสถานะที่ได้รับมอบหมาย"
+
+msgid "WP Vehicle Manager"
+msgstr "ผู้จัดการยานพาหนะ WP"
+
+msgid "Visit site"
+msgstr "เยี่ยมชมเว็บไซต์"
+
+msgid "Install WP Vehicle Manager Plugin"
+msgstr "ติดตั้งปลั๊กอินตัวจัดการยานพาหนะ WP"
+
+msgid "JS Job Manager"
+msgstr "JS Job Manager"
+
+msgid "Install JS Job Manager Plugin"
+msgstr "ติดตั้งปลั๊กอิน JE Job Manager"
+
+msgid "WP Learn Manager"
+msgstr "WP เรียนรู้ผู้จัดการ"
+
+msgid "Install WP Learn Manager Plugin"
+msgstr "ติดตั้งปลั๊กอิน WP Learn Manager"
+
+msgid "Manually assign ticket to agent"
+msgstr "มอบหมายตั๋วด้วยตนเองให้กับตัวแทน"
+
+msgid "Translation"
+msgstr "การแปล"
+
+msgid "When WordPress language change to fr, JS Help Desk language will auto change to fr"
+msgstr "เมื่อภาษา WordPress เปลี่ยนเป็น FR, JS Help Desk Language จะเปลี่ยนเป็น FR อัตโนมัติ"
+
+msgid "Status: "
+msgstr "สถานะ:"
+
+msgid "The status has been changed"
+msgstr "สถานะมีการเปลี่ยนแปลง"
+
+msgid "The status has not been changed"
+msgstr "สถานะไม่เปลี่ยนแปลง"
+
+msgid "Ticket status change"
+msgstr "การเปลี่ยนแปลงสถานะตั๋ว"
+
+msgid "The status is changed by"
+msgstr "สถานะถูกเปลี่ยนแปลงโดย"
+
+msgid "Change Status"
+msgstr "เปลี่ยนสถานะ"
+
+msgid "Reason For"
+msgstr "เหตุผล"
+
+msgid "tickets by"
+msgstr "ตั๋วโดย"
+
+msgid "View Image"
+msgstr "ดูรูปภาพ"
+
+msgid "Viewed By"
+msgstr "ดูโดย"
+
+msgid "None"
+msgstr "ไม่มี"
+
+msgid "set"
+msgstr "ชุด"
+
+msgid "Other Tickets"
+msgstr "ตั๋วอื่น ๆ"
+
+msgid "Type Note for"
+msgstr "พิมพ์หมายเหตุสำหรับ"
+
+msgid "tickets"
+msgstr "ตั๋ว"
+
+msgid "Token"
+msgstr "โทเค็น"
+
+msgid "Search Ticket"
+msgstr "ตั๋วค้นหา"
+
+msgid "Ticket Creator"
+msgstr "ผู้สร้างตั๋ว"
+
+msgid "Remember Your Ticket Token for Tracking (Save It!)"
+msgstr "จำโทเค็นตั๋วของคุณสำหรับการติดตาม (บันทึกไว้!)"
+
+msgid "You've received a token number to track your support ticket status. This is one-time code, so please save it carefully. "
+msgstr "คุณได้รับหมายเลขโทเค็นเพื่อติดตามสถานะตั๋วสนับสนุนของคุณ นี่คือรหัสครั้งเดียวดังนั้นโปรดบันทึกไว้อย่างระมัดระวัง"
+
+msgid "Copy Token"
+msgstr "โทเค็นคัดลอก"
+
+msgid "Status Title Already Exist"
+msgstr "ชื่อสถานะมีอยู่แล้ว"
+
+msgid "Status has been stored"
+msgstr "สถานะได้รับการจัดเก็บ"
+
+msgid "Status has not been stored"
+msgstr "สถานะไม่ได้รับการจัดเก็บ"
+
+msgid "Status has been deleted"
+msgstr "สถานะถูกลบ"
+
+msgid "Status has not been deleted"
+msgstr "สถานะไม่ได้ถูกลบ"
+
+msgid "Text Color"
+msgstr "สีข้อความ"
+
+msgid "Background Color"
+msgstr "สีพื้นหลัง"
+
+msgid "Save Status"
+msgstr "บันทึกสถานะ"
+
+msgid "Required Fields are not filled"
+msgstr "ฟิลด์ที่จำเป็นจะไม่ถูกกรอก"
+
+msgid "Note:"
+msgstr "บันทึก:"
+
+msgid "Features marked with"
+msgstr "คุณสมบัติที่ทำเครื่องหมายด้วย"
+
+msgid "are only available with its own addon."
+msgstr "สามารถใช้ได้กับ addon ของตัวเองเท่านั้น"
+
+msgid "Product Title Already Exist"
+msgstr "ชื่อผลิตภัณฑ์มีอยู่แล้ว"
+
+msgid "Product has been stored"
+msgstr "ผลิตภัณฑ์ได้รับการจัดเก็บ"
+
+msgid "Product has not been stored"
+msgstr "ผลิตภัณฑ์ยังไม่ได้รับการจัดเก็บ"
+
+msgid "Product has been deleted"
+msgstr "ผลิตภัณฑ์ถูกลบ"
+
+msgid "Product has not been deleted"
+msgstr "ผลิตภัณฑ์ยังไม่ถูกลบ"
+
+msgid "Save Product"
+msgstr "ประหยัดสินค้า"
+
+msgid "JS Help Desk Settings"
+msgstr "การตั้งค่าโต๊ะช่วยเหลือ JS"
+
+msgid "Step 2 of "
+msgstr "ขั้นตอนที่ 2 ของ"
+
+msgid "Step 4 of 5"
+msgstr "ขั้นตอนที่ 4 จาก 5"
+
+msgid "Step 1 of "
+msgstr "ขั้นตอนที่ 1 ของ"
+
+msgid "Download Translation File"
+msgstr "ดาวน์โหลดไฟล์แปล"
+
+msgid "Want to download translation file? Click on download. It will take sometime."
+msgstr "ต้องการดาวน์โหลดไฟล์แปลหรือไม่? คลิกที่ดาวน์โหลด มันจะใช้เวลาบางครั้ง"
+
+msgid "Download & Next"
+msgstr "ดาวน์โหลดและถัดไป"
+
+msgid "Skip this step"
+msgstr "ข้ามขั้นตอนนี้"
+
+msgid "Recaptcha Version 2"
+msgstr "Recaptcha เวอร์ชัน 2"
+
+msgid "Recaptcha Version 3"
+msgstr "Recaptcha เวอร์ชัน 3"
+
+msgid "WordPress Default Register Page"
+msgstr "หน้าลงทะเบียนเริ่มต้น WordPress"
+
+msgid "4"
+msgstr "4"
+
+msgid "5"
+msgstr "5"
+
+msgid "6"
+msgstr "6"
+
+msgid "Oldest First"
+msgstr "เก่าที่สุดครั้งแรก"
+
+msgid "Newest First"
+msgstr "ใหม่ล่าสุดก่อน"
+
+msgid "menu"
+msgstr "เมนู"
+
+msgid "Select Configuration"
+msgstr "เลือกการกำหนดค่า"
+
+msgid "Facebook"
+msgstr "Facebook"
+
+msgid "Linkedin"
+msgstr "LinkedIn"
+
+msgid "Show number of the open, closed, answered ticket in my ticket and dashboard"
+msgstr "แสดงจำนวนตั๋วเปิดปิดและตอบในตั๋วและแดชบอร์ดของฉัน"
+
+msgid "Redirect user on log in"
+msgstr "เปลี่ยนเส้นทางผู้ใช้ในการเข้าสู่ระบบ"
+
+msgid "Set register Link Default or Custom"
+msgstr "ตั้งค่าการลงทะเบียนลิงค์เริ่มต้นหรือกำหนดเอง"
+
+msgid " To enable registrations, WordPress admin > General > Settings > Membership: Anyone can register"
+msgstr "ในการเปิดใช้งานการลงทะเบียนผู้ดูแลระบบ WordPress> ทั่วไป> การตั้งค่า> สมาชิก: ทุกคนสามารถลงทะเบียนได้"
+
+msgid "Woocommerce Category"
+msgstr "หมวดหมู่ WooCommerce"
+
+msgid "Select category to display only products of this category on the WooCommerce shop page."
+msgstr "เลือกหมวดหมู่เพื่อแสดงเฉพาะผลิตภัณฑ์ของหมวดหมู่นี้ในหน้า WooCommerce Shop"
+
+msgid "Set ticketid sequential or random .e.g "
+msgstr "ตั้งค่า TicketId Sequential หรือ Random .e.g"
+
+msgid "Pad Zeros"
+msgstr "Zeros"
+
+msgid "To pad an integer with leading zeros to a specific length"
+msgstr "เพื่อเพิ่มจำนวนเต็มที่มีศูนย์นำไปสู่ความยาวเฉพาะ"
+
+msgid "Ticket Replies ordering"
+msgstr "การสั่งซื้อตั๋ว"
+
+msgid "Set the default ordering for ticket replies in the detail page."
+msgstr "ตั้งค่าการสั่งซื้อเริ่มต้นสำหรับการตอบกลับตั๋วในหน้ารายละเอียด"
+
+msgid "Show Message Read Icon for Admin On Ticket Detail"
+msgstr "แสดงไอคอนอ่านข้อความสำหรับผู้ดูแลระบบในรายละเอียดตั๋ว"
+
+msgid "Select whether the message read icon is displayed to the administrator on ticket detail."
+msgstr "เลือกว่าไอคอนอ่านข้อความจะปรากฏขึ้นต่อผู้ดูแลระบบในรายละเอียดตั๋วหรือไม่"
+
+msgid "Show Message Read Icon For Agents on Ticket Detail"
+msgstr "แสดงไอคอนอ่านข้อความสำหรับตัวแทนในรายละเอียดตั๋ว"
+
+msgid "Select whether the message read icon is displayed to agents on ticket detail."
+msgstr "เลือกว่าไอคอนอ่านข้อความจะปรากฏขึ้นต่อตัวแทนในรายละเอียดตั๋วหรือไม่"
+
+msgid "Show Message Read Icon For Users On Ticket Detail"
+msgstr "แสดงไอคอนอ่านข้อความสำหรับผู้ใช้ในรายละเอียดตั๋ว"
+
+msgid "Select whether the message read icon is displayed to users on the ticket detail."
+msgstr "เลือกว่าไอคอนอ่านข้อความจะปรากฏขึ้นต่อผู้ใช้ในรายละเอียดตั๋วหรือไม่"
+
+msgid "Department Email"
+msgstr "อีเมลแผนก"
+
+msgid "Send email to all departments on ticket create"
+msgstr "ส่งอีเมลไปยังทุกแผนกในการสร้างตั๋ว"
+
+msgid "Captcha Setting"
+msgstr "การตั้งค่า captcha"
+
+msgid "Google reCaptcha"
+msgstr "Google Recaptcha"
+
+msgid "Google ReCaptcha version"
+msgstr "เวอร์ชัน Google Recaptcha"
+
+msgid "Select the Google ReCaptcha version"
+msgstr "เลือกเวอร์ชัน Google Recaptcha"
+
+msgid "Google recaptcha site key"
+msgstr "คีย์ไซต์ Google Recaptcha"
+
+msgid "Please enter the google re-captcha site key from"
+msgstr "โปรดป้อนคีย์เว็บไซต์ Google Recaptcha จาก"
+
+msgid "Google recaptcha secret key"
+msgstr "Google RECAPTCHA SECRET SECRET"
+
+msgid "Please enter the google re-captcha secret key from"
+msgstr "โปรดป้อนคีย์ Secret Google Recaptcha จาก"
+
+msgid "Search Reports"
+msgstr "รายงานค้นหา"
+
+msgid "Please fill required fields."
+msgstr "กรุณากรอกข้อมูลที่จำเป็น"
+
+msgid "There was no record found"
+msgstr "ไม่พบบันทึก"
+
+msgid "Select Required"
+msgstr "เลือกที่ต้องการ"
+
+msgid " Subject"
+msgstr "เรื่อง"
+
+msgid "Kylee Arroyo"
+msgstr "Kylee Arroyo"
+
+msgid "Can I upgrade my plan?"
+msgstr "ฉันสามารถอัพเกรดแผนของฉันได้หรือไม่?"
+
+msgid "This ticket is marked as overdue "
+msgstr "ตั๋วนี้ถูกทำเครื่องหมายว่าเกินกำหนด"
+
+msgid "pF3YczjML"
+msgstr "pf3yczjml"
+
+msgid "01-11-2023"
+msgstr "01-11-2023"
+
+msgid "Allison Carney"
+msgstr "Allison Carney"
+
+msgid "How Can I get Subscription?"
+msgstr "ฉันจะสมัครสมาชิกได้อย่างไร?"
+
+msgid "Tp3Y7zj01"
+msgstr "tp3y7zj01"
+
+msgid "20-12-2023"
+msgstr "20-12-2023"
+
+msgid "Aleena Adam"
+msgstr "Aleena Adam"
+
+msgid "How Long do i have support access?"
+msgstr "ฉันมีการสนับสนุนการเข้าถึงนานแค่ไหน?"
+
+msgid "Ku3Y8zj3L"
+msgstr "KU3Y8ZJ3L"
+
+msgid "11-6-2023"
+msgstr "11-6-2023"
+
+msgid "If the colors have been saved but the user-side colors are still the same, it is advised to clear the cache."
+msgstr "หากมีการบันทึกสี แต่สีด้านผู้ใช้ยังคงเหมือนเดิมขอแนะนำให้ล้างแคช"
+
+msgid "Purple"
+msgstr "สีม่วง"
+
+msgid "Field cannot be mark as published"
+msgstr "ไม่สามารถทำเครื่องหมายได้ตามที่เผยแพร่"
+
+msgid "Field cannot mark as required"
+msgstr "ฟิลด์ไม่สามารถทำเครื่องหมายได้ตามต้องการ"
+
+msgid "Child fields has not been stored"
+msgstr "ไม่ได้เก็บทุ่งเด็ก"
+
+msgid "Not Contain"
+msgstr "ไม่มี"
+
+msgid "Place Holder"
+msgstr "ผู้ถือครองตำแหน่ง"
+
+msgid "Admin Search"
+msgstr "การค้นหาผู้ดูแลระบบ"
+
+msgid "AND"
+msgstr "และ"
+
+msgid "File upload fields and Check box fields cannot be made required."
+msgstr "ไม่จำเป็นต้องใช้ฟิลด์ฟิลด์การอัปโหลดไฟล์และช่องทำเครื่องหมาย"
+
+msgid "Default Value"
+msgstr "ค่าเริ่มต้น"
+
+msgid "To choose a default value, first add values in the area below"
+msgstr "หากต้องการเลือกค่าเริ่มต้นให้เพิ่มค่าแรกในพื้นที่ด้านล่าง"
+
+msgid "This option is not available in this case"
+msgstr "ตัวเลือกนี้ไม่สามารถใช้ได้ในกรณีนี้"
+
+msgid "Select Default Value"
+msgstr "เลือกค่าเริ่มต้น"
+
+msgid "Read Only"
+msgstr "อ่านเท่านั้น"
+
+msgid "Admin/Agent Only"
+msgstr "ผู้ดูแลระบบ/ตัวแทนเท่านั้น"
+
+msgid "Java Script"
+msgstr "จาวาสคริปต์"
+
+msgid "Add More"
+msgstr "เพิ่มมากขึ้น"
+
+msgid "Visibility conditions"
+msgstr "เงื่อนไขการมองเห็น"
+
+msgid "Add new"
+msgstr "เพิ่มใหม่"
+
+msgid "visibility condition"
+msgstr "สภาพการมองเห็น"
+
+msgid "User already an agent"
+msgstr "ผู้ใช้เป็นตัวแทนอยู่แล้ว"
+
+msgid "The agent has not been stored"
+msgstr "ตัวแทนไม่ได้รับการจัดเก็บ"
+
+msgid "The agent has not been deleted"
+msgstr "ตัวแทนยังไม่ถูกลบ"
+
+msgid "The agent in use cannot delete"
+msgstr "ตัวแทนที่ใช้งานไม่สามารถลบได้"
+
+msgid "Select agent"
+msgstr "เลือกเอเจนต์"
+
+msgid "The ticket marks as overdue"
+msgstr "ตั๋วทำเครื่องหมายว่าเกินกำหนด"
+
+msgid "Disabled form cannot be set as default"
+msgstr "แบบฟอร์มปิดใช้งานไม่สามารถตั้งค่าเป็นค่าเริ่มต้น"
+
+msgid "Form has not been stored"
+msgstr "ไม่ได้จัดเก็บแบบฟอร์ม"
+
+msgid "Multiform has not been deleted"
+msgstr "ไม่ได้ถูกลบหลายรูปแบบ"
+
+msgid "Multiform in use"
+msgstr "หลายรูปแบบที่ใช้งาน"
+
+msgid " cannot deleted"
+msgstr "ไม่สามารถลบได้"
+
+msgid "Closed Date"
+msgstr "วันที่ปิด"
+
+msgid "Closed Time"
+msgstr "เวลาปิด"
+
+msgid "Total Tracking Time"
+msgstr "เวลาติดตามทั้งหมด"
+
+msgid "Sub Category Knowledgebase"
+msgstr "ฐานความรู้ประเภทย่อย"
+
+msgid "Type:"
+msgstr "พิมพ์:"
+
+msgid "Sub Category Faqs"
+msgstr "คำถามที่พบบ่อยประเภทย่อย"
+
+msgid "Facebook user"
+msgstr "ผู้ใช้ Facebook"
+
+msgid "Linkedin user"
+msgstr "ผู้ใช้ LinkedIn"
+
+msgid "You are logged in"
+msgstr "คุณเข้าสู่ระบบ"
+
+msgid "You are logged out"
+msgstr "คุณออกจากระบบ"
+
+msgid "Email Cc has not been stored"
+msgstr "ยังไม่ได้จัดเก็บอีเมล CC"
+
+msgid "Email CC has not been deleted"
+msgstr "CC อีเมลยังไม่ถูกลบ"
+
+msgid "Email CC "
+msgstr "อีเมล CC"

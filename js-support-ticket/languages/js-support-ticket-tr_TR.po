@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 3.4.1\n"
+"X-Generator: Poedit 3.6\n"
 
 msgid "You are not allowed"
 msgstr "Size izin verilmiyor"
@@ -686,12 +686,10 @@ msgstr "Yardım Alın"
 msgid "Service is running, please close the pag"
 msgstr "Hizmet çalışıyor lütfen sayfayı kapatın"
 
-msgid ""
-"Admin email address and email piping address cannot be the same, your email "
-"piping will not be work."
+msgid "Admin email address and email piping address cannot be the same, your email piping will not be work."
 msgstr ""
-"Yönetici e-posta adresi ile destek kaydının gönderildiği e-posta adresi aynı "
-"olamaz. Destek kaydınızın gönderildiği e-posta adresi çalışmayacak."
+"Yönetici e-posta adresi ile destek kaydının gönderildiği e-posta adresi aynı olamaz. Destek kaydınızın gönderildiği e-posta adresi "
+"çalışmayacak."
 
 msgid "Your setting is working please this."
 msgstr "Ayarlarınız çalışıyor, lütfen kaydedin"
@@ -699,12 +697,8 @@ msgstr "Ayarlarınız çalışıyor, lütfen kaydedin"
 msgid "Connection established but the system cannot read any email"
 msgstr "Bağlantı kuruldu ancak sistem herhangi bir e-posta alamadı"
 
-msgid ""
-"IMAP is either not installed or not enabled in your server. Contact to "
-"hosting company"
-msgstr ""
-"Sunucunuz üzerinde IMAP kurulmamış ya da etkinleştirilmemiş. Barındırma "
-"hizmeti sağlayıcınız ile görüşün"
+msgid "IMAP is either not installed or not enabled in your server. Contact to hosting company"
+msgstr "Sunucunuz üzerinde IMAP kurulmamış ya da etkinleştirilmemiş. Barındırma hizmeti sağlayıcınız ile görüşün"
 
 msgid "The configuration has been stored"
 msgstr "Yapılandırma kaydedildi"
@@ -719,8 +713,7 @@ msgid "Email for email piping has been stored"
 msgstr "Destek kaydı açma e-postasının gönderileceği e-posta adresi kaydedildi"
 
 msgid "Email for email piping has not been stored"
-msgstr ""
-"Destek kaydı açma e-postasının gönderileceği e-posta adresi kaydedilmedi"
+msgstr "Destek kaydı açma e-postasının gönderileceği e-posta adresi kaydedilmedi"
 
 msgid "The email has been deleted"
 msgstr "E-posta adresi silindi"
@@ -837,15 +830,12 @@ msgid "Name of cron job"
 msgstr "Zamanlanmış görevin adı"
 
 msgid "Log in to webcron org in the cron area click on"
-msgstr ""
-"webcron.org oturumu açmak için zamanlanmış görev alanında şuna tıklayın"
+msgstr "webcron.org oturumu açmak için zamanlanmış görev alanında şuna tıklayın"
 
 msgid "Timeout"
 msgstr "Zaman aşımı"
 
-msgid ""
-"180 secs if the does not completely increase it most sites will work with a "
-"setting of 180 600"
+msgid "180 secs if the does not completely increase it most sites will work with a setting of 180 600"
 msgstr "180 saniye içinde tamamlanmaz ise 180 ile 600 arasında bir değer seçin"
 
 msgid "URL you want to execute"
@@ -866,12 +856,8 @@ msgstr "Aşağıdaki tabloda ne zaman ve nasıl olacağını belirten ayarları 
 msgid "Alerts"
 msgstr "Uyarı"
 
-msgid ""
-"If you have already set up alerts methods in webcron org interface we "
-"recommend choosing an alert"
-msgstr ""
-"webcron.org arayüzünden uyarı yöntemlerini ayarladıysanız bir uyarı seçmeniz "
-"önerilir"
+msgid "If you have already set up alerts methods in webcron org interface we recommend choosing an alert"
+msgstr "webcron.org arayüzünden uyarı yöntemlerini ayarladıysanız bir uyarı seçmeniz önerilir"
 
 msgid "Cron scheduling using wget"
 msgstr "wget ile zamanlanmış görev"
@@ -1441,9 +1427,7 @@ msgid "Unmark overdue"
 msgstr "Zamanı geçmiş işaretini kaldır"
 
 msgid "The ticket is unmarked as overdue by"
-msgstr ""
-"Destek kaydının şu zamanı geçmiş olarak işareti şu kullanıcı tarafından "
-"kaldırıldı"
+msgstr "Destek kaydının şu zamanı geçmiş olarak işareti şu kullanıcı tarafından kaldırıldı"
 
 msgid "Paid Support"
 msgstr "Ücretli Destek"
@@ -1463,12 +1447,8 @@ msgstr "Destek aboneliğ"
 msgid "Number of tickets"
 msgstr "Destek kaydı sayısı"
 
-msgid ""
-"Enter allowed number of tickets that customer can post. Enter -1 for "
-"unlimited tickets."
-msgstr ""
-"Müşteri tarafından gönderilebilecek destek kaydı sayısının sınırını yazın. "
-"Sınırlama olmaması için -1 yazın."
+msgid "Enter allowed number of tickets that customer can post. Enter -1 for unlimited tickets."
+msgstr "Müşteri tarafından gönderilebilecek destek kaydı sayısının sınırını yazın. Sınırlama olmaması için -1 yazın."
 
 msgid "Credential Type"
 msgstr "Kimlik Doğrulama Türü"
@@ -1908,9 +1888,7 @@ msgstr "Güvenlik kodu geçersiz"
 msgid "Could not subscribe to the newsletter"
 msgstr "Bültene abone olunamadı"
 
-msgid ""
-"Please check confirmation email to complete your subscription for the "
-"newsletter"
+msgid "Please check confirmation email to complete your subscription for the newsletter"
 msgstr "Lütfen bülten aboneliğinizi tamamlamak için onay e-postasına bakın"
 
 msgid "You have successfully subscribed to the newsletter"
@@ -1979,12 +1957,8 @@ msgstr "Kayıt ol"
 msgid "User is not allowed to view this Ticket"
 msgstr "Kullanıcının bu destek kaydına erişme izni yok."
 
-msgid ""
-"Registration has been disabled by admin, please contact the system "
-"administrator."
-msgstr ""
-"Kayıt olma özelliği yönetici tarafından devre dışı bırakılmış. Lütfen "
-"yönetici ile görüşün"
+msgid "Registration has been disabled by admin, please contact the system administrator."
+msgstr "Kayıt olma özelliği yönetici tarafından devre dışı bırakılmış. Lütfen yönetici ile görüşün"
 
 msgid "You have already given the feedback for this ticket."
 msgstr "Bu destek kaydı için zaten bir geri bildirimde bulunmuşsunuz."
@@ -2113,8 +2087,7 @@ msgid "System slug not be empty."
 msgstr "Sistem kısaltması boş olamaz"
 
 msgid "System slug is conflicted with post or page slug."
-msgstr ""
-"Sistem kısaltması var olan bir bildirim ya da sayfa kısaltması ile çakışıyor."
+msgstr "Sistem kısaltması var olan bir bildirim ya da sayfa kısaltması ile çakışıyor."
 
 msgid "Days"
 msgstr "Gün"
@@ -2204,13 +2177,11 @@ msgid "Select Page"
 msgstr "Sayfa Seçin"
 
 msgid ""
-"Select JS Help Desk default page, on the action system, will redirect on the "
-"selected page. If not select the default page, email links, and support icon "
-"might not work."
+"Select JS Help Desk default page, on the action system, will redirect on the selected page. If not select the default page, email "
+"links, and support icon might not work."
 msgstr ""
-"JS Help Desk varsayılan sayfasını seçin. İşlem yapılırken sistem bu seçilmiş "
-"sayfaya yönlendirilir. Varsayılan sayfa belirtilmemiş ise e-posta "
-"bağlantıları ve destek simgesi çalışmayabilir."
+"JS Help Desk varsayılan sayfasını seçin. İşlem yapılırken sistem bu seçilmiş sayfaya yönlendirilir. Varsayılan sayfa belirtilmemiş "
+"ise e-posta bağlantıları ve destek simgesi çalışmayabilir."
 
 msgid "Support Icon"
 msgstr "Destek Simgesi"
@@ -2248,12 +2219,8 @@ msgstr "Veri Klasörü"
 msgid "Set the name for your data directory"
 msgstr "Veri klasörünüzün adını ayarlayın"
 
-msgid ""
-"You need to rename the existing data directory in the file system before "
-"changing the data directory name"
-msgstr ""
-"Veri klasörünün adını değiştirmeden önce dosya sisteminde var olan veri "
-"klasörünün adını değiştirmelisiniz"
+msgid "You need to rename the existing data directory in the file system before changing the data directory name"
+msgstr "Veri klasörünün adını değiştirmeden önce dosya sisteminde var olan veri klasörünün adını değiştirmelisiniz"
 
 msgid "Date Format"
 msgstr "Tarih Biçimi"
@@ -2274,9 +2241,7 @@ msgid "Ticket auto close"
 msgstr "Otomatik destek kaydı kapatma"
 
 msgid "Ticket auto-close if user does not respond within given days"
-msgstr ""
-"Kullanıcı belirtilen sürede yanıt vermezse destek kaydı otomatik olarak "
-"kapatılır"
+msgstr "Kullanıcı belirtilen sürede yanıt vermezse destek kaydı otomatik olarak kapatılır"
 
 msgid "No. of attachment"
 msgstr "Ek dosya sayısı"
@@ -2321,16 +2286,13 @@ msgid "Show count on my tickets"
 msgstr "Destek kayıtlarımın sayısı görüntülensin"
 
 msgid "Show number of the open, closed, answered ticket in my ticket"
-msgstr ""
-"Açık, kapalı, yanıtlanmış destek kayıtlarının sayısı destek kayıtlarım "
-"altında görüntülensin"
+msgstr "Açık, kapalı, yanıtlanmış destek kayıtlarının sayısı destek kayıtlarım altında görüntülensin"
 
 msgid "Show captcha on registration form"
 msgstr "Kayıt formunda güvenlik kodu görüntülensin"
 
 msgid "Select whether you want to show captcha on the registration form or not"
-msgstr ""
-"Kayıt formunda güvenlik kodunun görüntülenip görüntülenmeyeceğini seçin"
+msgstr "Kayıt formunda güvenlik kodunun görüntülenip görüntülenmeyeceğini seçin"
 
 msgid "Default wp role for new users"
 msgstr "Yeni kullanıcılar için varsayılan wp rolü"
@@ -2384,8 +2346,7 @@ msgid "Show captcha on the visitor ticket form"
 msgstr "Ziyaretçi destek kaydı formunda güvenlik kodu görüntülensin"
 
 msgid "Show captcha when a visitor wants to create a ticket"
-msgstr ""
-"Bir ziyaretçi destek kaydı eklemek istediğinde güvenlik kodu görüntülensin"
+msgstr "Bir ziyaretçi destek kaydı eklemek istediğinde güvenlik kodu görüntülensin"
 
 msgid "Captcha selection"
 msgstr "Güvenlik kodu seçimi"
@@ -2433,9 +2394,7 @@ msgid "Allow Users To Reply via Email On Closed Ticket"
 msgstr "Kullanıcıların Kapalı Bilette E-posta ile Yanıt Vermesine İzin Ver"
 
 msgid "Select whether users can reply to closed email piping ticket or not"
-msgstr ""
-"Kullanıcıların kapatılmış e-posta ile açılmış destek kaydına yanıt verip "
-"veremeyeceğini seçin"
+msgstr "Kullanıcıların kapatılmış e-posta ile açılmış destek kaydına yanıt verip veremeyeceğini seçin"
 
 msgid "Visitor can create ticket"
 msgstr "Ziyaretçiler destek kaydı oluşturabilsin"
@@ -2452,12 +2411,8 @@ msgstr "Bir ziyaretçi destek kaydı eklediğinde görüntülenecek ileti"
 msgid "Default alert email"
 msgstr "Varsayılan uyarı e-posta adresi"
 
-msgid ""
-"If ticket department email is not selected then this email is used to send "
-"emails"
-msgstr ""
-"Destek bölümü e-posta adresi seçilmemiş ise e-postaları göndermek için bu "
-"adres kullanılır"
+msgid "If ticket department email is not selected then this email is used to send emails"
+msgstr "Destek bölümü e-posta adresi seçilmemiş ise e-postaları göndermek için bu adres kullanılır"
 
 msgid "Default admin email"
 msgstr "Varsayılan yönetici e-posta adresi"
@@ -2475,9 +2430,7 @@ msgid "Mail to admin"
 msgstr "Yöneticiye posta"
 
 msgid "Email sends to admin when banned email try to create a ticket"
-msgstr ""
-"Yasaklanan e-posta bir bilet oluşturmaya çalıştığında e-posta yöneticiye "
-"gönderilir"
+msgstr "Yasaklanan e-posta bir bilet oluşturmaya çalıştığında e-posta yöneticiye gönderilir"
 
 msgid "Ticket Operations Email Setting"
 msgstr "Bilet İşlemleri E-posta Ayarı"
@@ -2581,11 +2534,8 @@ msgstr "Geri bildirim e-postası için gecikme türünü seçin"
 msgid "Feedback Email Delay"
 msgstr "Geri Bildirim E-posta Gecikmesi"
 
-msgid ""
-"Set no. of days or hours to send feedback email after a ticket is closed"
-msgstr ""
-"Set no. kapatıldıktan sonra geri bildirim e-postası göndermek için gün veya "
-"saat sayısı"
+msgid "Set no. of days or hours to send feedback email after a ticket is closed"
+msgstr "Set no. kapatıldıktan sonra geri bildirim e-postası göndermek için gün veya saat sayısı"
 
 msgid "Success message after submitting feedback"
 msgstr "Geri bildirim gönderdikten sonra başarı mesajı"
@@ -2599,12 +2549,9 @@ msgstr "UTF Otomatik Geçiş"
 msgid "Firebase Notifications"
 msgstr "Firebase Bildirimleri"
 
-msgid ""
-"JS Help Desk Desktop Notifications plugin is not installed. Please install "
-"the plugin to enable desktop notifications"
+msgid "JS Help Desk Desktop Notifications plugin is not installed. Please install the plugin to enable desktop notifications"
 msgstr ""
-"JS Yardım Masası Masaüstü Bildirimleri eklentisi yüklü değil. Masaüstü "
-"bildirimlerini etkinleştirmek için lütfen eklentiyi yükleyin"
+"JS Yardım Masası Masaüstü Bildirimleri eklentisi yüklü değil. Masaüstü bildirimlerini etkinleştirmek için lütfen eklentiyi yükleyin"
 
 msgid "Click here to insert Install."
 msgstr "Yükle'yi eklemek için buraya tıklayın."
@@ -2693,12 +2640,8 @@ msgstr "Bir api anahtarı oluşturmak için burayı tıklayın"
 msgid "License Mandatory"
 msgstr "Lisans Zorunlu"
 
-msgid ""
-"Prevent users from submitting a ticket without a valid license for one of "
-"your product"
-msgstr ""
-"Kullanıcıların, ürünlerinizden biri için geçerli bir lisans olmadan bilet "
-"göndermelerini önleyin"
+msgid "Prevent users from submitting a ticket without a valid license for one of your product"
+msgstr "Kullanıcıların, ürünlerinizden biri için geçerli bir lisans olmadan bilet göndermelerini önleyin"
 
 msgid "Product ID"
 msgstr "ürün kimliği"
@@ -2725,8 +2668,7 @@ msgid "Welcome email"
 msgstr "Hoşgeldiniz e-postası"
 
 msgid "You can enable Final Welcome Email in your MailChimp account"
-msgstr ""
-"Son Karşılama E-postasını MailChimp hesabınızdan etkinleştirebilirsiniz"
+msgstr "Son Karşılama E-postasını MailChimp hesabınızdan etkinleştirebilirsiniz"
 
 msgid "Verify License On Ticket Creation"
 msgstr "Bilet Oluşturmada Lisans Doğrulama"
@@ -2750,9 +2692,7 @@ msgid "Recommended run script daily"
 msgstr "Önerilen günlük çalışma komut dosyası"
 
 msgid "You cannot use this email, it is used in email piping"
-msgstr ""
-"Bu e-posta adresi kullanılamaz. E-posta ile destek kaydı açmak için "
-"kullanılıyor"
+msgstr "Bu e-posta adresi kullanılamaz. E-posta ile destek kaydı açmak için kullanılıyor"
 
 msgid "The department has been stored"
 msgstr "Departman kaydedildi"
@@ -3268,9 +3208,7 @@ msgid "Features"
 msgstr "Özellikler"
 
 msgid "The best support system plugin for WordPress has everything you need."
-msgstr ""
-"WordPress için en iyi destek sistemi eklentisi ihtiyacınız olan her şeye "
-"sahiptir."
+msgstr "WordPress için en iyi destek sistemi eklentisi ihtiyacınız olan her şeye sahiptir."
 
 msgid "Add-Ons List"
 msgstr "Eklentiler Listesi"
@@ -3302,36 +3240,23 @@ msgstr "Aracılar ekleyin ve yardım sağlamak için roller ve izinler atayın."
 msgid "Ticket Auto Close"
 msgstr "Otomatik Bilet Kapat"
 
-msgid ""
-"Define rules for the ticket to auto-close after a specific interval of time."
-msgstr ""
-"Belirli bir zaman aralığından sonra biletin otomatik olarak kapanması için "
-"kurallar tanımlayın."
+msgid "Define rules for the ticket to auto-close after a specific interval of time."
+msgstr "Belirli bir zaman aralığından sonra biletin otomatik olarak kapanması için kurallar tanımlayın."
 
 msgid "Get a survey from customers on ticket closing to improve quality."
-msgstr ""
-"Kaliteyi artırmak için bilet kapanış konusunda müşterilerden bir anket alın."
+msgstr "Kaliteyi artırmak için bilet kapanış konusunda müşterilerden bir anket alın."
 
 msgid "Help users to find and select the area with which they need assistance."
-msgstr ""
-"Kullanıcıların yardıma ihtiyaç duydukları alanı bulmalarına ve seçmelerine "
-"yardımcı olun."
+msgstr "Kullanıcıların yardıma ihtiyaç duydukları alanı bulmalarına ve seçmelerine yardımcı olun."
 
 msgid "Private Note"
 msgstr "Özel Not"
 
-msgid ""
-"The private note is used as reminders or to give other agents insights into "
-"the ticket issue."
-msgstr ""
-"Özel not, hatırlatma olarak veya diğer acentelere bilet sorunuyla ilgili "
-"bilgi vermek için kullanılır."
+msgid "The private note is used as reminders or to give other agents insights into the ticket issue."
+msgstr "Özel not, hatırlatma olarak veya diğer acentelere bilet sorunuyla ilgili bilgi vermek için kullanılır."
 
-msgid ""
-"Stop losing productivity on repetitive queries, build your knowledge base."
-msgstr ""
-"Tekrarlanan sorgularda verimliliği kaybetmeyi bırakın, bilgi tabanınızı "
-"oluşturun."
+msgid "Stop losing productivity on repetitive queries, build your knowledge base."
+msgstr "Tekrarlanan sorgularda verimliliği kaybetmeyi bırakın, bilgi tabanınızı oluşturun."
 
 msgid "Max Ticket"
 msgstr "Max Bilet"
@@ -3339,74 +3264,51 @@ msgstr "Max Bilet"
 msgid "Max Tickets"
 msgstr "Max Biletleri"
 
-msgid ""
-"Enables admin to set N numbers of tickets for users and agents separately."
-msgstr ""
-"Yöneticinin, kullanıcılar ve aracılar için N bilet sayısını ayrı ayrı "
-"ayarlamasını sağlar."
+msgid "Enables admin to set N numbers of tickets for users and agents separately."
+msgstr "Yöneticinin, kullanıcılar ve aracılar için N bilet sayısını ayrı ayrı ayarlamasını sağlar."
 
 msgid "Merge Tickets"
 msgstr "Merge Biletleri"
 
-msgid ""
-"Enables agents to merge two tickets of the same user into one instead of "
-"dealing with the same issue on many tickets."
+msgid "Enables agents to merge two tickets of the same user into one instead of dealing with the same issue on many tickets."
 msgstr ""
-"Temsilcilerin, aynı biletle birçok bilette aynı sorunu ele almak yerine aynı "
-"kullanıcının iki biletini tek bir seferde birleştirmesini sağlar."
+"Temsilcilerin, aynı biletle birçok bilette aynı sorunu ele almak yerine aynı kullanıcının iki biletini tek bir seferde "
+"birleştirmesini sağlar."
 
 msgid ""
-"Defines rules or set specific intervals of time to make ticket auto overdue."
-"The ticket can overdue by type or overdue by Cronjob."
+"Defines rules or set specific intervals of time to make ticket auto overdue.The ticket can overdue by type or overdue by Cronjob."
 msgstr ""
-"Bilet otomatik gecikme yapmak için kuralları tanımlar veya belirli zaman "
-"aralıkları ayarlar. Bilet, Cronjob tarafından türe veya vadesi geçmiş "
-"gecikebilir."
+"Bilet otomatik gecikme yapmak için kuralları tanımlar veya belirli zaman aralıkları ayarlar. Bilet, Cronjob tarafından türe veya "
+"vadesi geçmiş gecikebilir."
+
+msgid "SMTP enables you to add custom mail protocol to send and receive emails within the js help desk."
+msgstr "SMTP, js yardım masasında e-posta göndermek ve almak için özel posta protokolü eklemenizi sağlar."
 
 msgid ""
-"SMTP enables you to add custom mail protocol to send and receive emails "
-"within the js help desk."
+"Displays complete ticket history along with the ticket status, currently assigned user and other actions performed on each ticket."
 msgstr ""
-"SMTP, js yardım masasında e-posta göndermek ve almak için özel posta "
-"protokolü eklemenizi sağlar."
-
-msgid ""
-"Displays complete ticket history along with the ticket status, currently "
-"assigned user and other actions performed on each ticket."
-msgstr ""
-"Bilet durumu, geçerli olarak atanmış kullanıcı ve her bir bilet üzerinde "
-"gerçekleştirilen diğer işlemler ile birlikte bilet tarihinin tamamını "
-"görüntüler."
+"Bilet durumu, geçerli olarak atanmış kullanıcı ve her bir bilet üzerinde gerçekleştirilen diğer işlemler ile birlikte bilet "
+"tarihinin tamamını görüntüler."
 
 msgid "Pre-populated messages allow support agents to respond quickly."
-msgstr ""
-"Önceden doldurulmuş mesajlar destek temsilcilerinin hızlı yanıt vermesine "
-"olanak tanır."
+msgstr "Önceden doldurulmuş mesajlar destek temsilcilerinin hızlı yanıt vermesine olanak tanır."
 
 msgid "Enables users to reply to the tickets via email without login."
-msgstr ""
-"Kullanıcıların giriş yapmadan biletlere e-posta yoluyla cevap vermelerini "
-"sağlar."
+msgstr "Kullanıcıların giriş yapmadan biletlere e-posta yoluyla cevap vermelerini sağlar."
 
 msgid "Time Tracking"
 msgstr "Zaman Takibi"
 
-msgid ""
-"Track the time spent on each ticket by each agent and each reply. Report the "
-"admin on how much time is spent on each ticket."
+msgid "Track the time spent on each ticket by each agent and each reply. Report the admin on how much time is spent on each ticket."
 msgstr ""
-"Her acentenin ve her cevabın her bir bilet için harcadığı zamanı izleyin. "
-"Her bir bilet için ne kadar zaman harcandığını yöneticiye bildirin."
+"Her acentenin ve her cevabın her bir bilet için harcadığı zamanı izleyin. Her bir bilet için ne kadar zaman harcandığını yöneticiye "
+"bildirin."
 
 msgid "User Options"
 msgstr "Kullanıcı Seçenekleri"
 
-msgid ""
-"User options enable you to add Google Re-captcha or JS Help Desk Re-captcha "
-"for a registration form."
-msgstr ""
-"Kullanıcı seçenekleri, bir kayıt formu için Google Re-captcha veya JS Yardım "
-"Masası Re-captcha'sını eklemenizi sağlar."
+msgid "User options enable you to add Google Re-captcha or JS Help Desk Re-captcha for a registration form."
+msgstr "Kullanıcı seçenekleri, bir kayıt formu için Google Re-captcha veya JS Yardım Masası Re-captcha'sını eklemenizi sağlar."
 
 msgid "Actions"
 msgstr "Hareketler"
@@ -3414,120 +3316,71 @@ msgstr "Hareketler"
 msgid "Ticket Actions"
 msgstr "Bilet İşlemleri"
 
-msgid ""
-"Get multiple action options on each ticket like Print Ticket, Lock Ticket, "
-"Transfer ticket, etc."
-msgstr ""
-"Bilet Yazdır, Bilet Kilitle, Bilet transferi vb. Gibi her bilet için birden "
-"fazla işlem seçeneği edinin."
+msgid "Get multiple action options on each ticket like Print Ticket, Lock Ticket, Transfer ticket, etc."
+msgstr "Bilet Yazdır, Bilet Kilitle, Bilet transferi vb. Gibi her bilet için birden fazla işlem seçeneği edinin."
 
 msgid "Make unlimited announcements associated with the support system."
 msgstr "Destek sistemiyle ilgili sınırsız duyuru yapın."
 
-msgid ""
-"It allows you to block the email of any user to restrict him to create new "
-"tickets."
-msgstr ""
-"Yeni bilet oluşturması için herhangi bir kullanıcının e-postasını "
-"engellemenizi sağlar."
+msgid "It allows you to block the email of any user to restrict him to create new tickets."
+msgstr "Yeni bilet oluşturması için herhangi bir kullanıcının e-postasını engellemenizi sağlar."
 
 msgid "Desktop Notification"
 msgstr "Masaüstü Bildirimi"
 
-msgid ""
-"The Desktop notifications will keep you up to date about anything happens on "
-"your support system."
-msgstr ""
-"Masaüstü bildirimleri, destek sisteminizde olan her şey hakkında sizi güncel "
-"tutar."
+msgid "The Desktop notifications will keep you up to date about anything happens on your support system."
+msgstr "Masaüstü bildirimleri, destek sisteminizde olan her şey hakkında sizi güncel tutar."
 
 msgid "Save the ticket as a PDF in your system and able to export all data."
-msgstr ""
-"Bileti sisteminize PDF olarak kaydedin ve tüm verileri dışa aktarabilirsiniz."
+msgstr "Bileti sisteminize PDF olarak kaydedin ve tüm verileri dışa aktarabilirsiniz."
 
 msgid "Create downloads to ensure the user to get downloads from downloads."
-msgstr ""
-"Kullanıcının indirmelerden indirmeler almasını sağlamak için indirmeler "
-"oluşturun."
+msgstr "Kullanıcının indirmelerden indirmeler almasını sağlamak için indirmeler oluşturun."
 
 msgid "Add FAQs to drastically reduce the number of common questions."
-msgstr ""
-"Sık sorulan soruların sayısını önemli ölçüde azaltmak için SSS ekleyin."
+msgstr "Sık sorulan soruların sayısını önemli ölçüde azaltmak için SSS ekleyin."
 
-msgid ""
-"Get multiple themes with a beautiful color scheme to make the site beautiful."
-msgstr ""
-"Siteyi güzelleştirmek için güzel bir renk şeması ile birden fazla tema alın."
+msgid "Get multiple themes with a beautiful color scheme to make the site beautiful."
+msgstr "Siteyi güzelleştirmek için güzel bir renk şeması ile birden fazla tema alın."
 
 msgid "Dashboard Widgets"
 msgstr "Gösterge Tablosu Pencere Öğeleri"
 
-msgid ""
-"Get immediate data of your support operations as soon as you log into your "
-"WordPress administration area."
-msgstr ""
-"WordPress yönetim alanınıza giriş yaptığınızda destek işlemlerinizin anında "
-"verilerini alın."
+msgid "Get immediate data of your support operations as soon as you log into your WordPress administration area."
+msgstr "WordPress yönetim alanınıza giriş yaptığınızda destek işlemlerinizin anında verilerini alın."
 
 msgid "Internal Mail"
 msgstr "Dahili posta"
 
 msgid "Use an internal email to send emails to one agent to another agent."
-msgstr ""
-"Bir aracıya başka bir aracıya e-posta göndermek için dahili bir e-posta "
-"kullanın."
+msgstr "Bir aracıya başka bir aracıya e-posta göndermek için dahili bir e-posta kullanın."
 
 msgid "Front-End Widgets"
 msgstr "Ön Uç Widget'ları"
 
-msgid ""
-"Widgets in WordPress allow you to add content and features in the widgetized "
-"areas of your theme."
-msgstr ""
-"WordPress'deki widget'lar, temanızın widget'lı alanlarına içerik ve "
-"özellikler eklemenize olanak tanır."
+msgid "Widgets in WordPress allow you to add content and features in the widgetized areas of your theme."
+msgstr "WordPress'deki widget'lar, temanızın widget'lı alanlarına içerik ve özellikler eklemenize olanak tanır."
 
-msgid ""
-"JS Help Desk WooCommerce provides the much-needed bridge between your "
-"WooCommerce store and the JS Help Desk."
-msgstr ""
-"JS Yardım Masası WooCommerce, WooCommerce mağazanız ile JS Yardım Masası "
-"arasında ihtiyaç duyduğunuz köprüyü sağlar."
+msgid "JS Help Desk WooCommerce provides the much-needed bridge between your WooCommerce store and the JS Help Desk."
+msgstr "JS Yardım Masası WooCommerce, WooCommerce mağazanız ile JS Yardım Masası arasında ihtiyaç duyduğunuz köprüyü sağlar."
 
-msgid ""
-"Collect your customer's private data, sensitive information from credit card "
-"to health information and store them encrypted."
-msgstr ""
-"Müşterinizin özel verilerini, kredi kartından sağlık bilgilerine kadar "
-"hassas bilgileri toplayın ve şifreli olarak saklayın."
+msgid "Collect your customer's private data, sensitive information from credit card to health information and store them encrypted."
+msgstr "Müşterinizin özel verilerini, kredi kartından sağlık bilgilerine kadar hassas bilgileri toplayın ve şifreli olarak saklayın."
 
-msgid ""
-"Without valid Envato, license clients won't be able to open a new ticket."
+msgid "Without valid Envato, license clients won't be able to open a new ticket."
 msgstr "Geçerli Envato olmadan, lisans istemcileri yeni bir bilet açamaz."
 
-msgid ""
-"Adds the option to the registration form for prompting new users to "
-"subscribe to your email list."
-msgstr ""
-"Yeni kullanıcılardan e-posta listenize abone olmalarını istemek için kayıt "
-"formuna seçenek ekler."
+msgid "Adds the option to the registration form for prompting new users to subscribe to your email list."
+msgstr "Yeni kullanıcılardan e-posta listenize abone olmalarını istemek için kayıt formuna seçenek ekler."
 
-msgid ""
-"Paid Support is the easiest way to integrate and manage payments for your "
-"tickets."
-msgstr ""
-"Ücretli Destek, biletlerinizin ödemelerini entegre etmenin ve yönetmenin en "
-"kolay yoludur."
+msgid "Paid Support is the easiest way to integrate and manage payments for your tickets."
+msgstr "Ücretli Destek, biletlerinizin ödemelerini entegre etmenin ve yönetmenin en kolay yoludur."
 
 msgid "easy digital downloads"
 msgstr "kolay dijital indirme"
 
-msgid ""
-"EDD offers customers to open new tickets just one click from their EDD "
-"account."
-msgstr ""
-"EDD, müşterilere EDD hesaplarından sadece bir tıklamayla yeni bilet açma "
-"imkanı sunar."
+msgid "EDD offers customers to open new tickets just one click from their EDD account."
+msgstr "EDD, müşterilere EDD hesaplarından sadece bir tıklamayla yeni bilet açma imkanı sunar."
 
 msgid "We'd love to hear from You."
 msgstr "Sizden duymak isteriz."
@@ -3634,12 +3487,8 @@ msgstr "Çevirileri Al"
 msgid "Select Translation"
 msgstr "Çeviri Seçi"
 
-msgid ""
-"When WordPress language change to ro, JS Help Desk language will auto change "
-"to ro"
-msgstr ""
-"WordPress dili ro olarak değiştiğinde, JS Yardım Masası dili otomatik olarak "
-"ro olarak değişecektir"
+msgid "When WordPress language change to ro, JS Help Desk language will auto change to ro"
+msgstr "WordPress dili ro olarak değiştiğinde, JS Yardım Masası dili otomatik olarak ro olarak değişecektir"
 
 msgid "c error"
 msgstr "c hatası"
@@ -3912,17 +3761,13 @@ msgid "Wordpress Plugin"
 msgstr "Wordpress Eklentisi"
 
 msgid ""
-"JS Help Desk is a trusted open source ticket system. JS Help Desk is a "
-"simple, easy to use, web-based customer support system. Users can create a "
-"ticket from the front-end. JS Help Desk comes packed with lot features than "
-"most of the expensive(and complex) support ticket system on the market. The "
-"best part is, It completely free."
+"JS Help Desk is a trusted open source ticket system. JS Help Desk is a simple, easy to use, web-based customer support system. Users "
+"can create a ticket from the front-end. JS Help Desk comes packed with lot features than most of the expensive(and complex) support "
+"ticket system on the market. The best part is, It completely free."
 msgstr ""
-"JS Yardım Masası güvenilir bir açık kaynak kodlu bilet sistemidir. JS Yardım "
-"Masası basit, kullanımı kolay, web tabanlı bir müşteri destek sistemidir. "
-"Kullanıcılar ön uçtan bir bilet oluşturabilir. JS Yardım Masası, piyasadaki "
-"pahalı (ve karmaşık) destek bilet sisteminin çoğundan daha fazla özellikle "
-"birlikte gelir. En iyi bölüm, Tamamen ücretsiz."
+"JS Yardım Masası güvenilir bir açık kaynak kodlu bilet sistemidir. JS Yardım Masası basit, kullanımı kolay, web tabanlı bir müşteri "
+"destek sistemidir. Kullanıcılar ön uçtan bir bilet oluşturabilir. JS Yardım Masası, piyasadaki pahalı (ve karmaşık) destek bilet "
+"sisteminin çoğundan daha fazla özellikle birlikte gelir. En iyi bölüm, Tamamen ücretsiz."
 
 msgid "JS Help Desk Addon Installer"
 msgstr "JS Yardım Masası Eklenti Yükleyicisi"
@@ -4858,9 +4703,7 @@ msgid "Email has not been stored"
 msgstr "E-posta adresi kaydedilemedi"
 
 msgid "Email send to admin when banned email try to create ticket"
-msgstr ""
-"Engellenmiş bir e-posta adresiyle destek kaydı oluşturulmak istendiğinde "
-"yöneticiye e-posta gönderilsin"
+msgstr "Engellenmiş bir e-posta adresiyle destek kaydı oluşturulmak istendiğinde yöneticiye e-posta gönderilsin"
 
 msgid "Enable ticket via email"
 msgstr "E-posta ile destek kaydı alınabilsin"
@@ -5097,8 +4940,7 @@ msgid "Recomended"
 msgstr "Önerilen"
 
 msgid "Redirect user to JS Support Ticket control panel after login"
-msgstr ""
-"Kullanıcı oturum açtıktan sonra JS Support Ticket panosuna yönlendirilsin"
+msgstr "Kullanıcı oturum açtıktan sonra JS Support Ticket panosuna yönlendirilsin"
 
 msgid "Reply has been posted"
 msgstr "Yanıt gönderildi"
@@ -5179,8 +5021,7 @@ msgid "Show captcha on visitor form ticket"
 msgstr "Ziyaretçi destek kaydı formunda güvenlik kodu görüntülensin"
 
 msgid "Show captcha when visitor want to create ticket"
-msgstr ""
-"Ziyaretçiler destek kaydı eklemek istediğinde güvenlik kodu görüntülensin"
+msgstr "Ziyaretçiler destek kaydı eklemek istediğinde güvenlik kodu görüntülensin"
 
 msgid "Show latest FAQ's. Options:"
 msgstr "Son sık sorulan sorular görüntülensin. Seçenekler:"
@@ -5198,9 +5039,7 @@ msgid "Show new and reply mail notifications"
 msgstr "Yeni ve yanıt posta bildirimleri görüntülensin"
 
 msgid "Show number of open, closed, answered ticket in my ticket"
-msgstr ""
-"Açık, kapalı, yanıtlanmış destek kayıtlarının sayısı destek kayıtlarım "
-"altında görüntülensin"
+msgstr "Açık, kapalı, yanıtlanmış destek kayıtlarının sayısı destek kayıtlarım altında görüntülensin"
 
 msgid "Show popular FAQ's. Options:"
 msgstr "Beğenilen sık sorulan sorular görüntülensin. Seçenekler:"
@@ -5284,9 +5123,7 @@ msgid "Ticket Via Email"
 msgstr "Eposta Üzerinden Destek Kaydı"
 
 msgid "Ticket auto close if user not respond within given days"
-msgstr ""
-"Kullanıcı belirtilen sürede yanıt vermezse destek kaydı otomatik olarak "
-"kapatılır"
+msgstr "Kullanıcı belirtilen sürede yanıt vermezse destek kaydı otomatik olarak kapatılır"
 
 msgid "Ticket can be reopen within given number of days"
 msgstr "Destek kaydı belirtilen gün içinde yeniden açılabilir"
@@ -5673,9 +5510,7 @@ msgid "is not writeable"
 msgstr "yazılabilir değil"
 
 msgid "show print ticket icon on ticketdetail page to user"
-msgstr ""
-"kullanıcıya destek kaydı ayrıntıları sayfasında yazdırma simgesi "
-"görüntülensin"
+msgstr "kullanıcıya destek kaydı ayrıntıları sayfasında yazdırma simgesi görüntülensin"
 
 msgid "Form Category"
 msgstr "Form Kategorisi"
@@ -5708,16 +5543,13 @@ msgid "Select role you want to assign to new users"
 msgstr "Yeni kullanıcılara atamak istediğiniz rolü seçin"
 
 msgid "Select whether users can reply to closed ticket via email or not"
-msgstr ""
-"Kullanıcıların kapalı bilete e-posta ile cevap verip vermeyeceğini seçin"
+msgstr "Kullanıcıların kapalı bilete e-posta ile cevap verip vermeyeceğini seçin"
 
 msgid "This text will appear whenever visitor creates ticket"
 msgstr "Bu metin, ziyaretçi bilet oluşturduğunda görünecektir"
 
 msgid "Set no. of days or hours to send feedback email after ticket is closed"
-msgstr ""
-"Set no. kapatıldıktan sonra geri bildirim e-postası göndermek için gün veya "
-"saat sayısı"
+msgstr "Set no. kapatıldıktan sonra geri bildirim e-postası göndermek için gün veya saat sayısı"
 
 msgid "Feedback Successful message to customer"
 msgstr "Müşteriye başarılı mesaj"
@@ -6008,9 +5840,7 @@ msgid "Access Control Level"
 msgstr "Erişim Kontrol Seviyesi"
 
 msgid "Access control limit you can limit your staff to do specific task"
-msgstr ""
-"Erişim kontrol limiti personelinizi belirli bir görev yapmakla "
-"sınırlandırabilirsiniz"
+msgstr "Erişim kontrol limiti personelinizi belirli bir görev yapmakla sınırlandırabilirsiniz"
 
 msgid "Staff member create premade message premade available in ticket reply"
 msgstr "Personel hazır yanıt oluşturmak hazır mesaj hazır oluşturmak"
@@ -6022,8 +5852,7 @@ msgid "Help topic can be add with respect to departments"
 msgstr "Departmanlara yardım konusu eklenebilir"
 
 msgid "You can create and maintain knowledge Base for your ticket system"
-msgstr ""
-"Bilet sisteminiz için bilgi tabanı oluşturabilir ve bakımını yapabilirsiniz"
+msgstr "Bilet sisteminiz için bilgi tabanı oluşturabilir ve bakımını yapabilirsiniz"
 
 msgid "You can add downloads for your customers"
 msgstr "Müşterileriniz için indirmeler ekleyebilirsiniz"
@@ -6035,14 +5864,10 @@ msgid "You can Manager FAQs"
 msgstr "Yönetici SSS'lerini yapabilirsiniz"
 
 msgid "You can ban and unabn any spam email address"
-msgstr ""
-"Herhangi bir spam e-posta adresini yasaklayabilir veya devre dışı "
-"bırakabilirsiniz"
+msgstr "Herhangi bir spam e-posta adresini yasaklayabilir veya devre dışı bırakabilirsiniz"
 
 msgid "If and only if customer not reply certain days ticket marked overdue"
-msgstr ""
-"Sadece ve müşteri belirli günlerde cevap vermezse gecikmiş olarak "
-"işaretlenmiş bilet"
+msgstr "Sadece ve müşteri belirli günlerde cevap vermezse gecikmiş olarak işaretlenmiş bilet"
 
 msgid "System will read your email and create tickets"
 msgstr "Sistem e-postanızı okuyacak ve bilet oluşturacak"
@@ -6072,16 +5897,13 @@ msgid "Customer Feedback"
 msgstr "Müşteri geribildirimi"
 
 msgid "Customer can provide feedback that can be used to improve services"
-msgstr ""
-"Müşteri, hizmetleri geliştirmek için kullanılabilecek geri bildirim "
-"sağlayabilir"
+msgstr "Müşteri, hizmetleri geliştirmek için kullanılabilecek geri bildirim sağlayabilir"
 
 msgid "RTL Supported"
 msgstr "RTL Desteği"
 
 msgid "JS Support Ticket auto adjusts to RTL or LTR without any problem."
-msgstr ""
-"JS Support Ticket otomatik olarak RTL veya LTR'ye sorunsuz olarak ayarlanır."
+msgstr "JS Support Ticket otomatik olarak RTL veya LTR'ye sorunsuz olarak ayarlanır."
 
 msgid "Staff Time Tracking"
 msgstr "Personel Zaman Takibi"
@@ -6093,9 +5915,7 @@ msgid "Visitor can also open ticket in you support system"
 msgstr "Ziyaretçi destek sisteminizde de bilet açabilir"
 
 msgid "You can now lock or unlock any ticket for certain time"
-msgstr ""
-"Artık herhangi bir bileti belirli bir süre için kilitleyebilir veya kilidini "
-"açabilirsiniz"
+msgstr "Artık herhangi bir bileti belirli bir süre için kilitleyebilir veya kilidini açabilirsiniz"
 
 msgid "Pro version only"
 msgstr "Yalnızca profesyonel sürüm"
@@ -6145,12 +5965,8 @@ msgstr "Kolay Dijital İndirmeler"
 msgid "Kb"
 msgstr "KB"
 
-msgid ""
-"Private Credentials Encryption Key changing this value will discard all "
-"existing credentials "
-msgstr ""
-"Özel Kimlik Bilgileri Şifreleme Anahtarı bu değeri değiştirirse mevcut tüm "
-"kimlik bilgileri silinir"
+msgid "Private Credentials Encryption Key changing this value will discard all existing credentials "
+msgstr "Özel Kimlik Bilgileri Şifreleme Anahtarı bu değeri değiştirirse mevcut tüm kimlik bilgileri silinir"
 
 msgid "SMTP"
 msgstr "SMTP"
@@ -6200,8 +6016,7 @@ msgstr "3"
 msgid "helptopic"
 msgstr "yardım konusu"
 
-msgid ""
-"Add ons for JS Help Desk have been installed and activated successfully. "
+msgid "Add ons for JS Help Desk have been installed and activated successfully. "
 msgstr "JS Yardım Masası eklentileri başarıyla yüklendi ve etkinleştirildi."
 
 msgid "NA"
@@ -6373,8 +6188,7 @@ msgid "Get"
 msgstr "Elde etmek"
 
 msgid "This prefix will be added to slug incase of homepage links"
-msgstr ""
-"Bu önek, ana sayfa bağlantılarının olması durumunda bilgi notuna eklenecektir"
+msgstr "Bu önek, ana sayfa bağlantılarının olması durumunda bilgi notuna eklenecektir"
 
 msgid " This prefix will be added to slug incase of conflict"
 msgstr "Bu önek, çakışma durumunda bilgi notuna eklenecektir"
@@ -6505,13 +6319,10 @@ msgstr "Şimdi güncelle"
 msgid "Add-On’s For Help Desk"
 msgstr "Yardım Masası İçin Eklentiler"
 
-msgid ""
-"Get trusted WordPress add on’s. Guaranteed to work fast, safe to use, "
-"beautifully coded, packed with features and easy to use."
+msgid "Get trusted WordPress add on’s. Guaranteed to work fast, safe to use, beautifully coded, packed with features and easy to use."
 msgstr ""
-"Güvenilir WordPress eklentilerini edinin. Hızlı çalışması garantilidir, "
-"kullanımı güvenlidir, güzel bir şekilde kodlanmıştır, özelliklerle doludur "
-"ve kullanımı kolaydır."
+"Güvenilir WordPress eklentilerini edinin. Hızlı çalışması garantilidir, kullanımı güvenlidir, güzel bir şekilde kodlanmıştır, "
+"özelliklerle doludur ve kullanımı kolaydır."
 
 msgid "Save big with an exclusive membership plan today!"
 msgstr "Bugün özel bir üyelik planıyla büyük tasarruf edin!"
@@ -6519,151 +6330,92 @@ msgstr "Bugün özel bir üyelik planıyla büyük tasarruf edin!"
 msgid "show bundle pack"
 msgstr "paket paketini göster"
 
-msgid ""
-"Add agents and assign roles and permissions to provide assistance and "
-"support to customer support tickets."
-msgstr ""
-"Müşteri destek bildirimlerine yardım ve destek sağlamak için aracılar "
-"ekleyin ve roller ve izinler atayın."
+msgid "Add agents and assign roles and permissions to provide assistance and support to customer support tickets."
+msgstr "Müşteri destek bildirimlerine yardım ve destek sağlamak için aracılar ekleyin ve roller ve izinler atayın."
 
-msgid ""
-"Define rules for ticket to auto close. Ticket will be auto close after "
-"specific interval of time which can be set by admin."
+msgid "Define rules for ticket to auto close. Ticket will be auto close after specific interval of time which can be set by admin."
 msgstr ""
-"Biletin otomatik olarak kapanmasına ilişkin kuralları tanımlayın. Bilet, "
-"yönetici tarafından ayarlanabilen belirli bir zaman aralığından sonra "
-"otomatik olarak kapanacaktır."
+"Biletin otomatik olarak kapanmasına ilişkin kuralları tanımlayın. Bilet, yönetici tarafından ayarlanabilen belirli bir zaman "
+"aralığından sonra otomatik olarak kapanacaktır."
 
-msgid ""
-"Get the survey from your customers on ticket closing to improve your quality "
-"of services and assistance."
-msgstr ""
-"Hizmet ve yardım kalitenizi artırmak için müşterilerinizden bilet "
-"kapanışıyla ilgili anket alın."
+msgid "Get the survey from your customers on ticket closing to improve your quality of services and assistance."
+msgstr "Hizmet ve yardım kalitenizi artırmak için müşterilerinizden bilet kapanışıyla ilgili anket alın."
 
 msgid "Helptopic"
 msgstr "Yardım konusu"
 
-msgid ""
-"Help topics help users to find and select the area with which they need "
-"assistance."
-msgstr ""
-"Yardım konuları, kullanıcıların yardıma ihtiyaç duydukları alanı bulmalarına "
-"ve seçmelerine yardımcı olur."
+msgid "Help topics help users to find and select the area with which they need assistance."
+msgstr "Yardım konuları, kullanıcıların yardıma ihtiyaç duydukları alanı bulmalarına ve seçmelerine yardımcı olur."
 
-msgid ""
-"The private note is used as reminders or to give other agents insights into "
-"the ticket issue. User Won't see the private notes."
+msgid "The private note is used as reminders or to give other agents insights into the ticket issue. User Won't see the private notes."
 msgstr ""
-"Özel not, hatırlatma olarak veya diğer temsilcilere bilet sorunuyla ilgili "
-"bilgi vermek için kullanılır. Kullanıcı özel notları görmez."
+"Özel not, hatırlatma olarak veya diğer temsilcilere bilet sorunuyla ilgili bilgi vermek için kullanılır. Kullanıcı özel notları "
+"görmez."
 
-msgid ""
-"Stop losing productivity on repetitive queries,Build your knowledge base, "
-"group solutions by topics to facilitate users."
+msgid "Stop losing productivity on repetitive queries,Build your knowledge base, group solutions by topics to facilitate users."
 msgstr ""
-"Tekrarlanan sorgularda üretkenliğinizi kaybetmeyi bırakın, Bilgi tabanınızı "
-"oluşturun, kullanıcıları kolaylaştırmak için çözümleri konulara göre "
-"gruplandırın."
+"Tekrarlanan sorgularda üretkenliğinizi kaybetmeyi bırakın, Bilgi tabanınızı oluşturun, kullanıcıları kolaylaştırmak için çözümleri "
+"konulara göre gruplandırın."
 
-msgid ""
-"Enables admin to set N numbers of tickets for users to create and set N "
-"numbers of Ticket to open for agents separately."
+msgid "Enables admin to set N numbers of tickets for users to create and set N numbers of Ticket to open for agents separately."
 msgstr ""
-"Yöneticinin, kullanıcıların N sayıda bilet oluşturmasını ve temsilciler için "
-"ayrı ayrı açılacak şekilde N sayıda bilet ayarlamasını sağlar."
+"Yöneticinin, kullanıcıların N sayıda bilet oluşturmasını ve temsilciler için ayrı ayrı açılacak şekilde N sayıda bilet ayarlamasını "
+"sağlar."
 
 msgid "Multi Language Email Templates"
 msgstr "Çok Dilli E-posta Şablonları"
 
-msgid ""
-"It allows to create language-based email templates for all JS Help Desk "
-"email templates."
-msgstr ""
-"Tüm JS Yardım Masası e-posta şablonları için dile dayalı e-posta şablonları "
-"oluşturmanıza olanak tanır."
+msgid "It allows to create language-based email templates for all JS Help Desk email templates."
+msgstr "Tüm JS Yardım Masası e-posta şablonları için dile dayalı e-posta şablonları oluşturmanıza olanak tanır."
 
-msgid ""
-"Canned Responses are pre-populated messages that allows support agents to "
-"respond quickly to customer issues."
-msgstr ""
-"Hazır Yanıtlar, destek temsilcilerinin müşteri sorunlarına hızla yanıt "
-"vermesini sağlayan önceden doldurulmuş mesajlardır."
+msgid "Canned Responses are pre-populated messages that allows support agents to respond quickly to customer issues."
+msgstr "Hazır Yanıtlar, destek temsilcilerinin müşteri sorunlarına hızla yanıt vermesini sağlayan önceden doldurulmuş mesajlardır."
 
-msgid ""
-"Enables users to reply to the tickets via email without the need to login to "
-"the support system first."
+msgid "Enables users to reply to the tickets via email without the need to login to the support system first."
 msgstr ""
-"Kullanıcıların önce destek sistemine giriş yapmasına gerek kalmadan destek "
-"bildirimlerine e-posta yoluyla yanıt vermesini sağlar."
+"Kullanıcıların önce destek sistemine giriş yapmasına gerek kalmadan destek bildirimlerine e-posta yoluyla yanıt vermesini sağlar."
 
-msgid ""
-"Make unlimited announcements associated with support system to get customer "
-"interaction."
-msgstr ""
-"Müşteri etkileşimini sağlamak için destek sistemiyle ilgili sınırsız duyuru "
-"yapın."
+msgid "Make unlimited announcements associated with support system to get customer interaction."
+msgstr "Müşteri etkileşimini sağlamak için destek sistemiyle ilgili sınırsız duyuru yapın."
 
-msgid ""
-"Ban Email allows you to block email of any user to restrict him to create "
-"new tickets."
+msgid "Ban Email allows you to block email of any user to restrict him to create new tickets."
 msgstr ""
-"E-postayı Yasakla, herhangi bir kullanıcının e-postasını engelleyerek onu "
-"yeni bilet oluşturma konusunda kısıtlamanıza olanak tanır."
+"E-postayı Yasakla, herhangi bir kullanıcının e-postasını engelleyerek onu yeni bilet oluşturma konusunda kısıtlamanıza olanak tanır."
 
 msgid "Descktop Notifications"
 msgstr "Masaüstü bildirimleri"
 
-msgid ""
-"Save the ticket as a PDF in your system or the admin will also be able to "
-"export all the data inside of Ticket."
-msgstr ""
-"Bileti sisteminize PDF olarak kaydedin; aksi takdirde yönetici, Bilet "
-"içindeki tüm verileri de dışa aktarabilir."
+msgid "Save the ticket as a PDF in your system or the admin will also be able to export all the data inside of Ticket."
+msgstr "Bileti sisteminize PDF olarak kaydedin; aksi takdirde yönetici, Bilet içindeki tüm verileri de dışa aktarabilir."
 
-msgid ""
-"Tired of getting tickets about the same problems? Add FAQs to drastically "
-"reduce the number of common questions from users."
+msgid "Tired of getting tickets about the same problems? Add FAQs to drastically reduce the number of common questions from users."
 msgstr ""
-"Aynı sorunlarla ilgili bilet almaktan bıktınız mı? Kullanıcılardan gelen sık "
-"sorulan soruların sayısını büyük ölçüde azaltmak için SSS'ler ekleyin."
+"Aynı sorunlarla ilgili bilet almaktan bıktınız mı? Kullanıcılardan gelen sık sorulan soruların sayısını büyük ölçüde azaltmak için "
+"SSS'ler ekleyin."
 
 msgid "Admin Widgets"
 msgstr "Yönetici Widget'ları"
 
-msgid ""
-"Use internal email to send emails to one agent to another agent with in "
-"support ticket."
-msgstr ""
-"Destek bileti ile bir temsilciye başka bir temsilciye e-posta göndermek için "
-"dahili e-postayı kullanın."
+msgid "Use internal email to send emails to one agent to another agent with in support ticket."
+msgstr "Destek bileti ile bir temsilciye başka bir temsilciye e-posta göndermek için dahili e-postayı kullanın."
 
 msgid "Front-End Widget"
 msgstr "Ön Uç Widget'ı"
 
-msgid ""
-"Paid Support is the easiest way to integrate and manage payments for your "
-"support tickets."
-msgstr ""
-"Ücretli Destek, destek biletleriniz için ödemeleri entegre etmenin ve "
-"yönetmenin en kolay yoludur."
+msgid "Paid Support is the easiest way to integrate and manage payments for your support tickets."
+msgstr "Ücretli Destek, destek biletleriniz için ödemeleri entegre etmenin ve yönetmenin en kolay yoludur."
 
 msgid "Mail Chimp"
 msgstr "Posta şempanzesi"
 
-msgid ""
-"The Mail Chimp add-on adds a new checkbox to the registration form for "
-"prompting new users to subscribe your email-list."
+msgid "The Mail Chimp add-on adds a new checkbox to the registration form for prompting new users to subscribe your email-list."
 msgstr ""
-"Mail Chimp eklentisi, yeni kullanıcıları e-posta listenize abone olmaya "
-"teşvik etmek için kayıt formuna yeni bir onay kutusu ekler."
+"Mail Chimp eklentisi, yeni kullanıcıları e-posta listenize abone olmaya teşvik etmek için kayıt formuna yeni bir onay kutusu ekler."
 
-msgid ""
-"EDD offers customers to open new tickets just one click from their EDD "
-"account with optionally validating the license keys."
+msgid "EDD offers customers to open new tickets just one click from their EDD account with optionally validating the license keys."
 msgstr ""
-"EDD, isteğe bağlı olarak lisans anahtarlarını doğrulayarak müşterilere EDD "
-"hesaplarından tek tıklamayla yeni bilet açma olanağı sunar."
+"EDD, isteğe bağlı olarak lisans anahtarlarını doğrulayarak müşterilere EDD hesaplarından tek tıklamayla yeni bilet açma olanağı "
+"sunar."
 
 msgid "email cc"
 msgstr "e-posta bilgisi"
@@ -6672,41 +6424,35 @@ msgid "Email Cc"
 msgstr "E-posta Bilgisi"
 
 msgid ""
-"CC(Carbon Copy) - the people who should know about the information which is "
-"being shared and the people included are able to see who is there in the "
-"list."
+"CC(Carbon Copy) - the people who should know about the information which is being shared and the people included are able to see who "
+"is there in the list."
 msgstr ""
-"CC(Karbon Kopya) - Paylaşılan bilgilerden haberdar olması gereken kişiler ve "
-"listede yer alan kişiler listede kimlerin bulunduğunu görebilir."
+"CC(Karbon Kopya) - Paylaşılan bilgilerden haberdar olması gereken kişiler ve listede yer alan kişiler listede kimlerin bulunduğunu "
+"görebilir."
 
 msgid "multiform"
 msgstr "çok biçimli"
 
 msgid "Multiform allows user to add more than one form based on requirements."
-msgstr ""
-"Multiform, kullanıcının gereksinimlere göre birden fazla form eklemesine "
-"olanak tanır."
+msgstr "Multiform, kullanıcının gereksinimlere göre birden fazla form eklemesine olanak tanır."
 
 msgid "agent auto assign"
 msgstr "temsilci otomatik atama"
 
 msgid ""
-"When auto assignment is enabled and a ticket is created, an appropriate "
-"agent is automatically assigned to the ticket and it is moved to the "
-"Assigned state."
+"When auto assignment is enabled and a ticket is created, an appropriate agent is automatically assigned to the ticket and it is "
+"moved to the Assigned state."
 msgstr ""
-"Otomatik atama etkinleştirildiğinde ve bir bilet oluşturulduğunda, uygun bir "
-"aracı otomatik olarak bilete atanır ve Atandı durumuna taşınır."
+"Otomatik atama etkinleştirildiğinde ve bir bilet oluşturulduğunda, uygun bir aracı otomatik olarak bilete atanır ve Atandı durumuna "
+"taşınır."
 
 msgid "Social Login"
 msgstr "Sosyal Giriş"
 
-msgid ""
-"Users can login from their social media accounts. They can create a new "
-"account or use social media accounts."
+msgid "Users can login from their social media accounts. They can create a new account or use social media accounts."
 msgstr ""
-"Kullanıcılar sosyal medya hesaplarından giriş yapabilirler. Yeni bir hesap "
-"oluşturabilir veya sosyal medya hesaplarını kullanabilirler."
+"Kullanıcılar sosyal medya hesaplarından giriş yapabilirler. Yeni bir hesap oluşturabilir veya sosyal medya hesaplarını "
+"kullanabilirler."
 
 msgid "JS Help Desk Add-Ons Bundle Pack"
 msgstr "JS Yardım Masası Eklenti Paketi Paketi"
@@ -6733,11 +6479,11 @@ msgid "All Future Addons"
 msgstr "Gelecekteki Tüm Eklentiler"
 
 msgid ""
-"Hey there! We have recently launched a fresh update for the add-ons. Don't "
-"forget to update the add-ons to enjoy the greatest features!"
+"Hey there! We have recently launched a fresh update for the add-ons. Don't forget to update the add-ons to enjoy the greatest "
+"features!"
 msgstr ""
-"Selam! Yakın zamanda eklentiler için yeni bir güncelleme başlattık. En "
-"harika özelliklerin keyfini çıkarmak için eklentileri güncellemeyi unutmayın!"
+"Selam! Yakın zamanda eklentiler için yeni bir güncelleme başlattık. En harika özelliklerin keyfini çıkarmak için eklentileri "
+"güncellemeyi unutmayın!"
 
 msgid "View Addone Status"
 msgstr "Eklenme Durumunu Görüntüle"
@@ -6937,59 +6683,38 @@ msgstr "Bilet Listeleme"
 msgid "Visitor Ticket Setting"
 msgstr "Ziyaretçi Bileti Ayarı"
 
-msgid ""
-"By enabling this option, a user can know to whom the ticket has been "
-"assigned."
-msgstr ""
-"Bu seçeneği etkinleştirerek kullanıcı biletin kime atandığını bilebilir."
+msgid "By enabling this option, a user can know to whom the ticket has been assigned."
+msgstr "Bu seçeneği etkinleştirerek kullanıcı biletin kime atandığını bilebilir."
 
 msgid "Assigned info. on admin tickets"
 msgstr "Atanan bilgi. yönetici biletleri hakkında"
 
-msgid ""
-"By enabling this option, an agent can know to whom the ticket has been "
-"assigned."
-msgstr ""
-"Bu seçeneği etkinleştirerek temsilci biletin kime atandığını bilebilir."
+msgid "By enabling this option, an agent can know to whom the ticket has been assigned."
+msgstr "Bu seçeneği etkinleştirerek temsilci biletin kime atandığını bilebilir."
 
 msgid "Assigned info. on user tickets"
 msgstr "Atanan bilgi. kullanıcı biletleri üzerinde"
 
-msgid ""
-"By enabling this option, an admin can know to whom the ticket has been "
-"assigned."
-msgstr ""
-"Bu seçeneği etkinleştirerek yönetici, biletin kime atandığını bilebilir."
+msgid "By enabling this option, an admin can know to whom the ticket has been assigned."
+msgstr "Bu seçeneği etkinleştirerek yönetici, biletin kime atandığını bilebilir."
 
 msgid "Assigned info. on agent tickets"
 msgstr "Atanan bilgi. acente biletleri hakkında"
 
-msgid ""
-"By enabling this option, a user can know who closed the ticket and when that "
-"ticket closed."
-msgstr ""
-"Bu seçeneği etkinleştirerek kullanıcı, bileti kimin kapattığını ve biletin "
-"ne zaman kapandığını bilebilir."
+msgid "By enabling this option, a user can know who closed the ticket and when that ticket closed."
+msgstr "Bu seçeneği etkinleştirerek kullanıcı, bileti kimin kapattığını ve biletin ne zaman kapandığını bilebilir."
 
 msgid "Closed info. on admin closed tickets"
 msgstr "Kapalı bilgi. yönetici tarafından kapatılan biletlerde"
 
-msgid ""
-"By enabling this option, an agent can know who closed the ticket and when "
-"that ticket closed."
-msgstr ""
-"Bu seçeneği etkinleştirerek temsilci, bileti kimin kapattığını ve biletin ne "
-"zaman kapandığını bilebilir."
+msgid "By enabling this option, an agent can know who closed the ticket and when that ticket closed."
+msgstr "Bu seçeneği etkinleştirerek temsilci, bileti kimin kapattığını ve biletin ne zaman kapandığını bilebilir."
 
 msgid "Closed info. on agent closed tickets"
 msgstr "Kapalı bilgi. acentenin kapattığı biletlerde"
 
-msgid ""
-"By enabling this option, an admin can know who closed the ticket and when "
-"that ticket closed."
-msgstr ""
-"Bu seçeneği etkinleştirerek yönetici, bileti kimin kapattığını ve biletin ne "
-"zaman kapatıldığını bilebilir."
+msgid "By enabling this option, an admin can know who closed the ticket and when that ticket closed."
+msgstr "Bu seçeneği etkinleştirerek yönetici, bileti kimin kapattığını ve biletin ne zaman kapatıldığını bilebilir."
 
 msgid "Set default sorting for ticket listing"
 msgstr "Bilet listeleme için varsayılan sıralamayı ayarlayın"
@@ -7009,32 +6734,22 @@ msgstr "Kullanıcıların bilet silme butonunu görüp göremeyeceğinizi seçin
 msgid "Show ticket delete button"
 msgstr "Bilet silme butonunu göster"
 
-msgid ""
-"Select whether users can see the name of administrator or staff member on "
-"ticket reply"
-msgstr ""
-"Kullanıcıların destek bildirimi yanıtında yöneticinin veya personelin adını "
-"görüp göremeyeceğini seçin"
+msgid "Select whether users can see the name of administrator or staff member on ticket reply"
+msgstr "Kullanıcıların destek bildirimi yanıtında yöneticinin veya personelin adını görüp göremeyeceğini seçin"
 
 msgid "Show Anonymous Name On Ticket Reply"
 msgstr "Bilet Yanıtında Anonim İsmi Göster"
 
-msgid ""
-"Select whether users can see the email of administrator or agent on ticket "
-"reply"
-msgstr ""
-"Kullanıcıların destek bildirimi yanıtında yöneticinin veya temsilcinin e-"
-"postasını görüp göremeyeceğini seçin"
+msgid "Select whether users can see the email of administrator or agent on ticket reply"
+msgstr "Kullanıcıların destek bildirimi yanıtında yöneticinin veya temsilcinin e-postasını görüp göremeyeceğini seçin"
 
 msgid "Show Admin OR Agent Email On Ticket Reply"
 msgstr "Bilet Yanıtında Yönetici VEYA Temsilci E-postasını Göster"
 
-msgid ""
-"Show or hide the multiform popup when creating a new ticket. if you hide "
-"them, the system will open the default form."
+msgid "Show or hide the multiform popup when creating a new ticket. if you hide them, the system will open the default form."
 msgstr ""
-"Yeni bir bilet oluştururken çok biçimli açılır pencereyi gösterin veya "
-"gizleyin. bunları gizlerseniz sistem varsayılan formu açacaktır."
+"Yeni bir bilet oluştururken çok biçimli açılır pencereyi gösterin veya gizleyin. bunları gizlerseniz sistem varsayılan formu "
+"açacaktır."
 
 msgid "Multiforms Popup For New Tickets"
 msgstr "Yeni Biletler İçin Multiforms Açılır Penceresi"
@@ -7084,12 +6799,8 @@ msgstr "Sana yardım etmek için burdayız"
 msgid "Help icon"
 msgstr "Yardım simgesi"
 
-msgid ""
-"JS Help Desk is a professional, simple, easy to use and complete customer "
-"support system."
-msgstr ""
-"JS Yardım Masası profesyonel, basit, kullanımı kolay ve eksiksiz bir müşteri "
-"destek sistemidir."
+msgid "JS Help Desk is a professional, simple, easy to use and complete customer support system."
+msgstr "JS Yardım Masası profesyonel, basit, kullanımı kolay ve eksiksiz bir müşteri destek sistemidir."
 
 msgid "View all videos"
 msgstr "Tüm videoları görüntüle"
@@ -7106,12 +6817,8 @@ msgstr "Yardım Masası simgesi"
 msgid "JS Help Desk Support"
 msgstr "JS Yardım Masası Desteği"
 
-msgid ""
-"JS Help Desk delivers timely customer support if you have any query then "
-"we're here to show you the way."
-msgstr ""
-"JS Yardım Masası, zamanında müşteri desteği sağlar. Herhangi bir sorunuz "
-"varsa, size yolu göstermek için buradayız."
+msgid "JS Help Desk delivers timely customer support if you have any query then we're here to show you the way."
+msgstr "JS Yardım Masası, zamanında müşteri desteği sağlar. Herhangi bir sorunuz varsa, size yolu göstermek için buradayız."
 
 msgid "Visitor ticket creation"
 msgstr "Ziyaretçi bileti oluşturma"
@@ -7375,13 +7082,11 @@ msgid "Edit Help Topic"
 msgstr "Yardım Konusunu Düzenle"
 
 msgid ""
-"e.g ' I have read and agree to the [link] Terms and Conditions[/link].  ' "
-"The text between [link] and [/link] will be linked to provided url or "
-"wordpress page."
+"e.g ' I have read and agree to the [link] Terms and Conditions[/link].  ' The text between [link] and [/link] will be linked to "
+"provided url or wordpress page."
 msgstr ""
-"örneğin '[link]Şartlar ve Koşullar[/link]'ı okudum ve kabul ediyorum. "
-"' [link] ve [/link] arasındaki metin, sağlanan URL'ye veya wordpress "
-"sayfasına bağlanacaktır."
+"örneğin '[link]Şartlar ve Koşullar[/link]'ı okudum ve kabul ediyorum. ' [link] ve [/link] arasındaki metin, sağlanan URL'ye veya "
+"wordpress sayfasına bağlanacaktır."
 
 msgid "login"
 msgstr "giriş yapmak"
@@ -7392,12 +7097,8 @@ msgstr "yıldızlar"
 msgid "Please write appreciated review at WP Extension Directory"
 msgstr "Lütfen takdir ettiğiniz incelemeyi WP Extension Directory'ye yazın"
 
-msgid ""
-"We'd love to hear from you. It'll only take 2 minutes of your time, and will "
-"really help us spread the word"
-msgstr ""
-"Sizden haber almayı çok isteriz. Sadece 2 dakikanızı alacak ve bu haberi "
-"yaymamıza gerçekten yardımcı olacak."
+msgid "We'd love to hear from you. It'll only take 2 minutes of your time, and will really help us spread the word"
+msgstr "Sizden haber almayı çok isteriz. Sadece 2 dakikanızı alacak ve bu haberi yaymamıza gerçekten yardımcı olacak."
 
 msgid "love"
 msgstr "Aşk"
@@ -7587,3 +7288,657 @@ msgstr "IMAP Kimlik Doğrulaması iptal edildi"
 
 msgid "Page Not Found !!"
 msgstr "Sayfa bulunamadı !!"
+
+msgid "Email Template has been successfully deleted"
+msgstr "E -posta şablonu başarıyla silindi"
+
+msgid "Select Submit Type"
+msgstr "Gönder türünü seçin"
+
+msgid "'s Department permission has been changed"
+msgstr "Departman izni değiştirildi"
+
+msgid "Rule has not been stored"
+msgstr "Kural depolanmadı"
+
+msgid "Rule has not been deleted"
+msgstr "Kural silinmedi"
+
+msgid "Rule"
+msgstr "Kural"
+
+msgid "Select Condition Value"
+msgstr "Durum değerini seçin"
+
+msgid "The ticket is unlocked by"
+msgstr "Biletin kilidi açıldı"
+
+msgid " item(s)"
+msgstr "öğeler)"
+
+msgid "Active Now"
+msgstr "Şimdi aktif"
+
+msgid "Dashboad"
+msgstr "Gösterge paneli"
+
+msgid "Statuses"
+msgstr "Durumlar"
+
+msgid "status"
+msgstr "durum"
+
+msgid "Products"
+msgstr "Ürünler"
+
+msgid "product"
+msgstr "ürün"
+
+msgid "Emailcc"
+msgstr "E -posta"
+
+msgid "JS Help Desk Pages"
+msgstr "JS Yardım Masası Sayfaları"
+
+msgid "JS Help desk control panel"
+msgstr "JS Yardım Masa Kontrol Paneli"
+
+msgid "Add ticket"
+msgstr "Bilet ekle"
+
+msgid "My tickets"
+msgstr "Biletlerim"
+
+msgid "Latest downloads"
+msgstr "Son indirmeler"
+
+msgid "Popular downloads"
+msgstr "Popüler İndirmeler"
+
+msgid "List FAQ`s"
+msgstr "SSS'leri listeleyin"
+
+msgid "Latest FAQ`s"
+msgstr "Son SSS'ler"
+
+msgid "Popular FAQ`s"
+msgstr "Popüler SSS'ler"
+
+msgid "Latest announcements"
+msgstr "En son duyurular"
+
+msgid "Popular announcements"
+msgstr "Popüler duyurular"
+
+msgid "home icon"
+msgstr "ev simgesi"
+
+msgid "slug"
+msgstr "sülük"
+
+msgid "Auto Assign"
+msgstr "Otomatik atama"
+
+msgid "Shortcodes"
+msgstr "Kısa kodlar"
+
+msgid "Ticket Statuses"
+msgstr "Bilet durumları"
+
+msgid "Add Status"
+msgstr "Durum ekle"
+
+msgid "Add Ticket Status"
+msgstr "Bilet Durumu Ekle"
+
+msgid "Add Product"
+msgstr "Ürün Ekle"
+
+msgid "Agent Roles"
+msgstr "Ajan rolleri"
+
+msgid "Add Agent Role"
+msgstr "Ajan rolü ekle"
+
+msgid "Emial CC"
+msgstr "E -posta CC"
+
+msgid "Add Emial CC"
+msgstr "E -posta CC ekleyin"
+
+msgid "help"
+msgstr "yardım"
+
+msgid "WooCommerce Support"
+msgstr "WooCommerce Desteği"
+
+msgid "Envato"
+msgstr "En büyük"
+
+msgid "Prefix has been stored"
+msgstr "Önek depolandı"
+
+msgid "reset"
+msgstr "sıfırlamak"
+
+msgid "Home Slug"
+msgstr "Ev sümüklüsü"
+
+msgid "Prefix"
+msgstr "Önek"
+
+msgid "This prefix will be added to slug incase of conflict"
+msgstr "Bu önek, çatışmanın sümüklü böceklerine eklenecektir"
+
+msgid "edit"
+msgstr "düzenlemek"
+
+msgid "Missing user(s) added successfully!"
+msgstr "Eksik kullanıcı (lar) başarıyla eklendi!"
+
+msgid "No missing user found!"
+msgstr "Eksik kullanıcı bulunamadı!"
+
+msgid "Not Installed"
+msgstr "Kurulmamış"
+
+msgid "Addon Installed Successfully"
+msgstr "Addon başarıyla yüklendi"
+
+msgid "Addon installation failed"
+msgstr "Addon kurulumu başarısız oldu"
+
+msgid "add missing users"
+msgstr "Eksik kullanıcılar ekleyin"
+
+msgid "user"
+msgstr "kullanıcı"
+
+msgid "view all tickets history"
+msgstr "Tüm bilet geçmişini görüntüleyin"
+
+msgid "View All Tickets History"
+msgstr "Tüm bilet geçmişini görüntüleyin"
+
+msgid "It allows user to add more than one form based on requirements."
+msgstr "Kullanıcının gereksinimlere göre birden fazla form eklemesini sağlar."
+
+msgid "When a ticket is created, an appropriate agent is automatically assigned to the ticket and it is moved to the Assigned state."
+msgstr "Bir bilet oluşturulduğunda, bilete otomatik olarak uygun bir aracı atanır ve atanan duruma taşınır."
+
+msgid "WP Vehicle Manager"
+msgstr "WP Araç Yöneticisi"
+
+msgid "Visit site"
+msgstr "Ziyaret Sitesi"
+
+msgid "Install WP Vehicle Manager Plugin"
+msgstr "WP Araç Yöneticisi eklentisini yükleyin"
+
+msgid "JS Job Manager"
+msgstr "JS İş Yöneticisi"
+
+msgid "Install JS Job Manager Plugin"
+msgstr "JS İş Yöneticisi eklentisini yükleyin"
+
+msgid "WP Learn Manager"
+msgstr "WP Learn Manager"
+
+msgid "Install WP Learn Manager Plugin"
+msgstr "WP Learn Manager eklentisini yükleyin"
+
+msgid "Manually assign ticket to agent"
+msgstr "Temsilciye manuel olarak bilet atayın"
+
+msgid "Translation"
+msgstr "Çeviri"
+
+msgid "When WordPress language change to fr, JS Help Desk language will auto change to fr"
+msgstr "WordPress Dili FR'ye geçtiğinde, JS Yardım Masa Dili Otomatik Değişir FR'ye"
+
+msgid "Status: "
+msgstr "Durum:"
+
+msgid "The status has been changed"
+msgstr "Durum değiştirildi"
+
+msgid "The status has not been changed"
+msgstr "Durum değiştirilmedi"
+
+msgid "Ticket status change"
+msgstr "Bilet Durumu Değişikliği"
+
+msgid "The status is changed by"
+msgstr "Durum değiştirildi"
+
+msgid "Change Status"
+msgstr "Durum Değiştir"
+
+msgid "Reason For"
+msgstr "Neden olmak"
+
+msgid "tickets by"
+msgstr "bilet"
+
+msgid "View Image"
+msgstr "Resmi Görüntüle"
+
+msgid "Viewed By"
+msgstr "Tarafından görüntülendi"
+
+msgid "None"
+msgstr "Hiçbiri"
+
+msgid "set"
+msgstr "ayarlamak"
+
+msgid "Other Tickets"
+msgstr "Diğer Biletler"
+
+msgid "Type Note for"
+msgstr "İçin not yazın"
+
+msgid "tickets"
+msgstr "biletler"
+
+msgid "Token"
+msgstr "Jeton"
+
+msgid "Search Ticket"
+msgstr "Arama Bileti"
+
+msgid "Ticket Creator"
+msgstr "Bilet yaratıcısı"
+
+msgid "Remember Your Ticket Token for Tracking (Save It!)"
+msgstr "İzleme için bilet jetonunuzu hatırlayın (kaydedin!)"
+
+msgid "You've received a token number to track your support ticket status. This is one-time code, so please save it carefully. "
+msgstr "Destek bileti durumunuzu izlemek için bir jeton numarası aldınız. Bu bir kerelik koddur, bu yüzden lütfen dikkatlice kaydedin."
+
+msgid "Copy Token"
+msgstr "Kopyala jetonu"
+
+msgid "Status Title Already Exist"
+msgstr "Durum Başlığı zaten var"
+
+msgid "Status has been stored"
+msgstr "Durum saklandı"
+
+msgid "Status has not been stored"
+msgstr "Durum depolanmadı"
+
+msgid "Status has been deleted"
+msgstr "Durum silindi"
+
+msgid "Status has not been deleted"
+msgstr "Durum silinmedi"
+
+msgid "Text Color"
+msgstr "Metin rengi"
+
+msgid "Background Color"
+msgstr "Arka plan rengi"
+
+msgid "Save Status"
+msgstr "Durumu Kaydet"
+
+msgid "Required Fields are not filled"
+msgstr "Gerekli alanlar doldurulmaz"
+
+msgid "Note:"
+msgstr "Not:"
+
+msgid "Features marked with"
+msgstr "İşaretli özellikler"
+
+msgid "are only available with its own addon."
+msgstr "sadece kendi eklentisiyle mevcuttur."
+
+msgid "Product Title Already Exist"
+msgstr "Ürün başlığı zaten var"
+
+msgid "Product has been stored"
+msgstr "Ürün depolandı"
+
+msgid "Product has not been stored"
+msgstr "Ürün depolanmadı"
+
+msgid "Product has been deleted"
+msgstr "Ürün silindi"
+
+msgid "Product has not been deleted"
+msgstr "Ürün silinmedi"
+
+msgid "Save Product"
+msgstr "Ürünü Kaydet"
+
+msgid "JS Help Desk Settings"
+msgstr "JS Yardım Masası Ayarları"
+
+msgid "Step 2 of "
+msgstr "2. adım"
+
+msgid "Step 4 of 5"
+msgstr "5. adımın 5."
+
+msgid "Step 1 of "
+msgstr "1. adım"
+
+msgid "Download Translation File"
+msgstr "Çeviri dosyasını indir"
+
+msgid "Want to download translation file? Click on download. It will take sometime."
+msgstr "Çeviri dosyasını indirmek ister misiniz? İndirmeye tıklayın. Bir ara alacak."
+
+msgid "Download & Next"
+msgstr "İndir ve Sonraki"
+
+msgid "Skip this step"
+msgstr "Bu adımı atla"
+
+msgid "Recaptcha Version 2"
+msgstr "Recaptcha Sürüm 2"
+
+msgid "Recaptcha Version 3"
+msgstr "Recaptcha Sürüm 3"
+
+msgid "WordPress Default Register Page"
+msgstr "WordPress Varsayılan Kayıt Sayfası"
+
+msgid "4"
+msgstr "4"
+
+msgid "5"
+msgstr "5"
+
+msgid "6"
+msgstr "6"
+
+msgid "Oldest First"
+msgstr "En eski ilk"
+
+msgid "Newest First"
+msgstr "En yeni ilk"
+
+msgid "menu"
+msgstr "menü"
+
+msgid "Select Configuration"
+msgstr "Yapılandırma seçin"
+
+msgid "Facebook"
+msgstr "Facebook"
+
+msgid "Linkedin"
+msgstr "LinkedIn"
+
+msgid "Show number of the open, closed, answered ticket in my ticket and dashboard"
+msgstr "Biletimde ve gösterge panelimde açık, kapalı, cevaplanan biletin sayısını göster"
+
+msgid "Redirect user on log in"
+msgstr "Oturum açma kullanıcıyı yeniden yönlendir"
+
+msgid "Set register Link Default or Custom"
+msgstr "Kayıt Bağlantısı Varsayılan veya Özel Set"
+
+msgid " To enable registrations, WordPress admin > General > Settings > Membership: Anyone can register"
+msgstr "Kayıtları etkinleştirmek için, WordPress Yönetici> Genel> Ayarlar> Üyelik: Herkes kayıt olabilir"
+
+msgid "Woocommerce Category"
+msgstr "WooCommerce kategorisi"
+
+msgid "Select category to display only products of this category on the WooCommerce shop page."
+msgstr "WooCommerce Shop sayfasında yalnızca bu kategorinin ürünlerini görüntülemek için kategoriyi seçin."
+
+msgid "Set ticketid sequential or random .e.g "
+msgstr "TicketID'i sıralı veya rastgele .e.g ayarlayın"
+
+msgid "Pad Zeros"
+msgstr "Ped sıfırlar"
+
+msgid "To pad an integer with leading zeros to a specific length"
+msgstr "Belirli bir uzunlukta önde gelen sıfırlara sahip bir tamsayı doldurmak için"
+
+msgid "Ticket Replies ordering"
+msgstr "Sipariş vererek bilet yanıtları"
+
+msgid "Set the default ordering for ticket replies in the detail page."
+msgstr "Detay sayfasında bilet yanıtları için varsayılan siparişi ayarlayın."
+
+msgid "Show Message Read Icon for Admin On Ticket Detail"
+msgstr "Bilet Ayrıntısında Yönetici İçin Mesaj Oku simgesini göster"
+
+msgid "Select whether the message read icon is displayed to the administrator on ticket detail."
+msgstr "Bilet detayında mesaj okuma simgesinin yöneticiye görüntülenip görüntülenmediğini seçin."
+
+msgid "Show Message Read Icon For Agents on Ticket Detail"
+msgstr "Bilet Ayrıntılarında Aracılar için Mesaj Oku simgesini göster"
+
+msgid "Select whether the message read icon is displayed to agents on ticket detail."
+msgstr "Bilet detayında mesaj okuma simgesinin aracılara görüntülenip görüntülenmediğini seçin."
+
+msgid "Show Message Read Icon For Users On Ticket Detail"
+msgstr "Bilet Ayrıntılarında Kullanıcılar için Mesaj Oku simgesini göster"
+
+msgid "Select whether the message read icon is displayed to users on the ticket detail."
+msgstr "Bilet ayrıntısında mesaj okuma simgesinin kullanıcılara görüntülenip görüntülenmediğini seçin."
+
+msgid "Department Email"
+msgstr "Bölüm e -postası"
+
+msgid "Send email to all departments on ticket create"
+msgstr "Bilet Create'deki tüm departmanlara e -posta gönderin"
+
+msgid "Captcha Setting"
+msgstr "Captcha ayarı"
+
+msgid "Google reCaptcha"
+msgstr "Google Recaptcha"
+
+msgid "Google ReCaptcha version"
+msgstr "Google Recaptcha Sürümü"
+
+msgid "Select the Google ReCaptcha version"
+msgstr "Google Recaptcha sürümünü seçin"
+
+msgid "Google recaptcha site key"
+msgstr "Google Recaptcha Site Anahtarı"
+
+msgid "Please enter the google re-captcha site key from"
+msgstr "Lütfen Google Recaptcha Site Anahtarını girin."
+
+msgid "Google recaptcha secret key"
+msgstr "Google Recaptcha Gizli Anahtarı"
+
+msgid "Please enter the google re-captcha secret key from"
+msgstr "Lütfen Google Recaptcha Gizli Anahtarını girin."
+
+msgid "Search Reports"
+msgstr "Arama Raporları"
+
+msgid "Please fill required fields."
+msgstr "Lütfen gerekli alanları doldurun."
+
+msgid "There was no record found"
+msgstr "Kayıt bulunmadı"
+
+msgid "Select Required"
+msgstr "Gerekli Seçin"
+
+msgid " Subject"
+msgstr "Ders"
+
+msgid "Kylee Arroyo"
+msgstr "Kylee Arroyo"
+
+msgid "Can I upgrade my plan?"
+msgstr "Planımı yükseltebilir miyim?"
+
+msgid "This ticket is marked as overdue "
+msgstr "Bu bilet gecikmiş olarak işaretlenmiştir"
+
+msgid "pF3YczjML"
+msgstr "pf3yczjml"
+
+msgid "01-11-2023"
+msgstr "01-11-2023"
+
+msgid "Allison Carney"
+msgstr "Allison Carney"
+
+msgid "How Can I get Subscription?"
+msgstr "Abonelik nasıl alabilirim?"
+
+msgid "Tp3Y7zj01"
+msgstr "TP3Y7ZJ01"
+
+msgid "20-12-2023"
+msgstr "20-12-2023"
+
+msgid "Aleena Adam"
+msgstr "Aleena Adam"
+
+msgid "How Long do i have support access?"
+msgstr "Ne kadar zamandır destek erişimim var?"
+
+msgid "Ku3Y8zj3L"
+msgstr "KU3Y8ZJ3L"
+
+msgid "11-6-2023"
+msgstr "11-6-2023"
+
+msgid "If the colors have been saved but the user-side colors are still the same, it is advised to clear the cache."
+msgstr "Renkler kaydedilmiş ancak kullanıcı tarafı renkleri hala aynısa, önbelleğin temizlenmesi önerilir."
+
+msgid "Purple"
+msgstr "Mor"
+
+msgid "Field cannot be mark as published"
+msgstr "Alan yayınlandığı gibi işaret olamaz"
+
+msgid "Field cannot mark as required"
+msgstr "Alan gerektiği gibi işaretleyemez"
+
+msgid "Child fields has not been stored"
+msgstr "Çocuk alanları saklanmadı"
+
+msgid "Not Contain"
+msgstr "İçermemek"
+
+msgid "Place Holder"
+msgstr "Yer tutucu"
+
+msgid "Admin Search"
+msgstr "Yönetici arama"
+
+msgid "AND"
+msgstr "VE"
+
+msgid "File upload fields and Check box fields cannot be made required."
+msgstr "Dosya yükleme alanları ve onay kutusu alanları gerekli yapılamaz."
+
+msgid "Default Value"
+msgstr "Varsayılan değer"
+
+msgid "To choose a default value, first add values in the area below"
+msgstr "Varsayılan bir değer seçmek için, önce aşağıdaki alanda değerler ekleyin"
+
+msgid "This option is not available in this case"
+msgstr "Bu seçenek bu durumda mevcut değil"
+
+msgid "Select Default Value"
+msgstr "Varsayılan değer seçin"
+
+msgid "Read Only"
+msgstr "Sadece oku"
+
+msgid "Admin/Agent Only"
+msgstr "Yalnızca Yönetici/Ajan"
+
+msgid "Java Script"
+msgstr "Javascript"
+
+msgid "Add More"
+msgstr "Daha Fazla Ekle"
+
+msgid "Visibility conditions"
+msgstr "Görünürlük Koşulları"
+
+msgid "Add new"
+msgstr "Yeni ekle"
+
+msgid "visibility condition"
+msgstr "görünürlük durumu"
+
+msgid "User already an agent"
+msgstr "Kullanıcı zaten bir ajan"
+
+msgid "The agent has not been stored"
+msgstr "Temsilci saklanmadı"
+
+msgid "The agent has not been deleted"
+msgstr "Temsilci silinmedi"
+
+msgid "The agent in use cannot delete"
+msgstr "Kullanılan ajan silemez"
+
+msgid "Select agent"
+msgstr "Aracı seçin"
+
+msgid "The ticket marks as overdue"
+msgstr "Bilet gecikmiş olarak işaretler"
+
+msgid "Disabled form cannot be set as default"
+msgstr "Devre dışı form varsayılan olarak ayarlanamaz"
+
+msgid "Form has not been stored"
+msgstr "Form depolanmadı"
+
+msgid "Multiform has not been deleted"
+msgstr "Muliform silinmedi"
+
+msgid "Multiform in use"
+msgstr "Kullanımda Multiciform"
+
+msgid " cannot deleted"
+msgstr "silinemiyor"
+
+msgid "Closed Date"
+msgstr "Kapalı tarih"
+
+msgid "Closed Time"
+msgstr "Kapalı zaman"
+
+msgid "Total Tracking Time"
+msgstr "Toplam izleme süresi"
+
+msgid "Sub Category Knowledgebase"
+msgstr "Alt Kategori Bilgi tabanı"
+
+msgid "Type:"
+msgstr "Tip:"
+
+msgid "Sub Category Faqs"
+msgstr "Alt Kategori SSS"
+
+msgid "Facebook user"
+msgstr "Facebook kullanıcısı"
+
+msgid "Linkedin user"
+msgstr "LinkedIn kullanıcısı"
+
+msgid "You are logged in"
+msgstr "Giriş yaptın"
+
+msgid "You are logged out"
+msgstr "Oturum açtınız"
+
+msgid "Email Cc has not been stored"
+msgstr "E -posta CC depolanmadı"
+
+msgid "Email CC has not been deleted"
+msgstr "E -posta CC silinmedi"
+
+msgid "Email CC "
+msgstr "E -posta CC"

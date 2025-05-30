@@ -2402,19 +2402,40 @@ class JSSTticketModel {
     }
 
     function getTicketidForVisitor($token) {
-        
+
+        include_once JSST_PLUGIN_PATH . 'includes/encoder.php';
+        $encoder = new JSSTEncoder();
+        $decryptedtext = $encoder->decrypt($token);
+        $array = json_decode($decryptedtext, true);
+        $emailaddress = $array['emailaddress'];
+        $trackingid = $array['trackingid'];
+        if (isset($array['sitelink']) && $array['sitelink'] != '') {
+            $siteLink = $array['sitelink'];
+            include_once JSST_PLUGIN_PATH . 'includes/encoder.php';
+            $encoder = new JSSTEncoder();
+            $savedSiteLink = get_option('jsst_encripted_site_link');
+            $decryptedSiteLink = $encoder->decrypt($siteLink);
+            $decryptedSavedSiteLink = $encoder->decrypt($savedSiteLink);
+            if ($decryptedSiteLink != $decryptedSavedSiteLink) {
+                return false;
+            }
+        }
+        if($emailaddress == '' && $trackingid == ''){
+            return false;
+        }
+        $query = "SELECT id FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE email = '" . esc_sql($emailaddress) . "' AND ticketid = '" . esc_sql($trackingid) . "'";
+        $ticketid = jssupportticket::$_db->get_var($query);
+        return $ticketid;
+    }
+
+    function getTicketidForVisitorUsingToken($token) {
         include_once JSST_PLUGIN_PATH . 'includes/encoder.php';
         $encoder = new JSSTEncoder();
         $decryptedtext = $encoder->decrypt($token);
         $array = json_decode($decryptedtext, true);
         $token = $array['token'];
-        // $emailaddress = $array['emailaddress'];
-        // $trackingid = $array['trackingid'];
         if (isset($array['sitelink']) && $array['sitelink'] != '') {
             $siteLink = $array['sitelink'];
-            // already defined
-            //include_once JSST_PLUGIN_PATH . 'includes/encoder.php';
-            //$encoder = new JSSTEncoder();
             $savedSiteLink = get_option('jsst_encripted_site_link');
             $decryptedSiteLink = $encoder->decrypt($siteLink);
             $decryptedSavedSiteLink = $encoder->decrypt($savedSiteLink);
@@ -2508,10 +2529,14 @@ class JSSTticketModel {
         $encoder = new JSSTEncoder();
         $decryptedtext = $encoder->decrypt($token);
         $array = json_decode($decryptedtext, true);
-        $token = $array['token'];
-        // $emailaddress = $array['emailaddress'];
-        // $trackingid = $array['trackingid'];
-        $query = "SELECT id FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE token = '" . esc_sql($token) . "'";
+        if (!empty($array['token'])) {
+            $token = $array['token'];
+            $query = "SELECT id FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE token = '" . esc_sql($token) . "'";
+        } else {
+            $emailaddress = $array['emailaddress'];
+            $trackingid = $array['trackingid'];
+            $query = "SELECT id FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE email = '" . esc_sql($emailaddress) . "' AND ticketid = '" . esc_sql($trackingid) . "'";
+        }
         $ticketid = jssupportticket::$_db->get_var($query);
 
         if ($ticketid == $id) {

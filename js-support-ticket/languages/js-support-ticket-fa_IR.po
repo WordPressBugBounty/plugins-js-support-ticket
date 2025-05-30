@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 3.4.1\n"
+"X-Generator: Poedit 3.6\n"
 
 msgid "You are not allowed"
 msgstr "شما مجاز نیستید"
@@ -683,12 +683,8 @@ msgstr "کمک بگیر"
 msgid "Service is running, please close the pag"
 msgstr "خدمات در حال اجرا است ، لطفاً بغض را ببندید"
 
-msgid ""
-"Admin email address and email piping address cannot be the same, your email "
-"piping will not be work."
-msgstr ""
-"آدرس ایمیل و آدرس لوله کشی ایمیل نمی توانند یکسان باشند ، لوله کشی ایمیل شما کار "
-"نخواهد کرد."
+msgid "Admin email address and email piping address cannot be the same, your email piping will not be work."
+msgstr "آدرس ایمیل و آدرس لوله کشی ایمیل نمی توانند یکسان باشند ، لوله کشی ایمیل شما کار نخواهد کرد."
 
 msgid "Your setting is working please this."
 msgstr "لطفاً این گزینه را تنظیم کنید"
@@ -696,9 +692,7 @@ msgstr "لطفاً این گزینه را تنظیم کنید"
 msgid "Connection established but the system cannot read any email"
 msgstr "اتصال برقرار شد اما سیستم قادر به خواندن ایمیل نیست"
 
-msgid ""
-"IMAP is either not installed or not enabled in your server. Contact to hosting "
-"company"
+msgid "IMAP is either not installed or not enabled in your server. Contact to hosting company"
 msgstr "IMAP در سرور شما نصب نشده یا فعال نشده است. تماس با شرکت میزبان"
 
 msgid "The configuration has been stored"
@@ -854,11 +848,8 @@ msgstr "ورود به webcron"
 msgid "Timeout"
 msgstr "پایان یافتن تایم"
 
-msgid ""
-"180 secs if the does not completely increase it most sites will work with a "
-"setting of 180 600"
-msgstr ""
-"180 ثانیه اگر به طور کامل افزایش نیابد بیشتر سایتها با تنظیم 180 600 کار می کنند"
+msgid "180 secs if the does not completely increase it most sites will work with a setting of 180 600"
+msgstr "180 ثانیه اگر به طور کامل افزایش نیابد بیشتر سایتها با تنظیم 180 600 کار می کنند"
 
 msgid "URL you want to execute"
 msgstr "آدرس اینترنتی که میخواهید اجرا شود"
@@ -878,12 +869,8 @@ msgstr "در بخش های زیر آپشن های دیگر زمان و چگون�
 msgid "Alerts"
 msgstr "هشدارها"
 
-msgid ""
-"If you have already set up alerts methods in webcron org interface we recommend "
-"choosing an alert"
-msgstr ""
-"اگر شما در حال حاضر میخواهید متدهای هشدار را در رابط webcron org ست کنید ما توصیه "
-"میکنیم انتخاب کنید یک هشدار"
+msgid "If you have already set up alerts methods in webcron org interface we recommend choosing an alert"
+msgstr "اگر شما در حال حاضر میخواهید متدهای هشدار را در رابط webcron org ست کنید ما توصیه میکنیم انتخاب کنید یک هشدار"
 
 msgid "Cron scheduling using wget"
 msgstr "برنامه ریزی و زمانبندی با استفاده از ویجت"
@@ -1479,12 +1466,8 @@ msgstr "پشتیبانی از اشتراک"
 msgid "Number of tickets"
 msgstr "تعداد بلیط"
 
-msgid ""
-"Enter allowed number of tickets that customer can post. Enter -1 for unlimited "
-"tickets."
-msgstr ""
-"تعداد بلیطهای مجاز را که مشتری می تواند ارسال کند وارد کنید. برای بلیط نامحدود -1 "
-"وارد کنید."
+msgid "Enter allowed number of tickets that customer can post. Enter -1 for unlimited tickets."
+msgstr "تعداد بلیطهای مجاز را که مشتری می تواند ارسال کند وارد کنید. برای بلیط نامحدود -1 وارد کنید."
 
 msgid "Credential Type"
 msgstr "نوع اعتبار"
@@ -1918,8 +1901,7 @@ msgstr "کپچا را درست وارد نمایید"
 msgid "Could not subscribe to the newsletter"
 msgstr "نمی توانید در خبرنامه مشترک شوید"
 
-msgid ""
-"Please check confirmation email to complete your subscription for the newsletter"
+msgid "Please check confirmation email to complete your subscription for the newsletter"
 msgstr "لطفا ایمیل تأیید را برای تکمیل اشتراک خود برای خبرنامه بررسی کنید"
 
 msgid "You have successfully subscribed to the newsletter"
@@ -1991,8 +1973,7 @@ msgstr "ثبت نام"
 msgid "User is not allowed to view this Ticket"
 msgstr "کاربر مجاز به دیدن این بلیط نیست"
 
-msgid ""
-"Registration has been disabled by admin, please contact the system administrator."
+msgid "Registration has been disabled by admin, please contact the system administrator."
 msgstr "ثبت نام توسط مدیر غیرفعال شده است ، لطفا با مدیر سیستم تماس بگیرید."
 
 msgid "You have already given the feedback for this ticket."
@@ -2218,13 +2199,11 @@ msgid "Select Page"
 msgstr "انتخاب صفحه"
 
 msgid ""
-"Select JS Help Desk default page, on the action system, will redirect on the "
-"selected page. If not select the default page, email links, and support icon "
-"might not work."
+"Select JS Help Desk default page, on the action system, will redirect on the selected page. If not select the default page, email links, "
+"and support icon might not work."
 msgstr ""
-"صفحه پیش فرض JS Help Desk را انتخاب کنید ، در سیستم عمل در صفحه انتخابی هدایت می "
-"شوید. اگر صفحه پیش فرض را انتخاب نکنید ، پیوندهای ایمیل و نماد پشتیبانی ممکن است "
-"کار نکنند."
+"صفحه پیش فرض JS Help Desk را انتخاب کنید ، در سیستم عمل در صفحه انتخابی هدایت می شوید. اگر صفحه پیش فرض را انتخاب نکنید ، پیوندهای ایمیل "
+"و نماد پشتیبانی ممکن است کار نکنند."
 
 msgid "Support Icon"
 msgstr "آیکون پشتیبانی"
@@ -2262,12 +2241,8 @@ msgstr "دایرکتوری داده"
 msgid "Set the name for your data directory"
 msgstr "تنظیم نام برای دایرکتوری داده شما"
 
-msgid ""
-"You need to rename the existing data directory in the file system before changing "
-"the data directory name"
-msgstr ""
-"قبل از تغییر نام دایرکتوری داده باید دایرکتوری داده موجود را در سیستم فایل تغییر "
-"نام دهید"
+msgid "You need to rename the existing data directory in the file system before changing the data directory name"
+msgstr "قبل از تغییر نام دایرکتوری داده باید دایرکتوری داده موجود را در سیستم فایل تغییر نام دهید"
 
 msgid "Date Format"
 msgstr "فرمت تاریخ"
@@ -2438,8 +2413,7 @@ msgid "Allow Users To Reply via Email On Closed Ticket"
 msgstr "به کاربران اجازه دهید از طریق ایمیل بسته بلیط پاسخ دهند"
 
 msgid "Select whether users can reply to closed email piping ticket or not"
-msgstr ""
-"انتخاب کنید که آیا کاربران می توانند به بلیط بسته لوله کشی ایمیل پاسخ دهند یا خیر"
+msgstr "انتخاب کنید که آیا کاربران می توانند به بلیط بسته لوله کشی ایمیل پاسخ دهند یا خیر"
 
 msgid "Visitor can create ticket"
 msgstr "ویزیتور میتواند تیکت ایجاد کند"
@@ -2456,11 +2430,8 @@ msgstr "این متن هر زمان که بازدید کننده بلیط ایج
 msgid "Default alert email"
 msgstr "ایمیل پیش فرض هشدارها"
 
-msgid ""
-"If ticket department email is not selected then this email is used to send emails"
-msgstr ""
-"اگر برای تیکت دپارتمان ایمیل اختصاصی وارد نشود از همین ایمیل برای آن استفاده "
-"خواهد شد."
+msgid "If ticket department email is not selected then this email is used to send emails"
+msgstr "اگر برای تیکت دپارتمان ایمیل اختصاصی وارد نشود از همین ایمیل برای آن استفاده خواهد شد."
 
 msgid "Default admin email"
 msgstr "ایمیل پیش فرض ادمین"
@@ -2597,12 +2568,8 @@ msgstr "سوئیچ خودکار UTF"
 msgid "Firebase Notifications"
 msgstr "اعلان های Firebase"
 
-msgid ""
-"JS Help Desk Desktop Notifications plugin is not installed. Please install the "
-"plugin to enable desktop notifications"
-msgstr ""
-"افزونه اطلاعیه دسک تاپ JS Help Desk نصب نشده است. لطفاً افزونه را برای فعال کردن "
-"اعلانهای رومیزی نصب کنید"
+msgid "JS Help Desk Desktop Notifications plugin is not installed. Please install the plugin to enable desktop notifications"
+msgstr "افزونه اطلاعیه دسک تاپ JS Help Desk نصب نشده است. لطفاً افزونه را برای فعال کردن اعلانهای رومیزی نصب کنید"
 
 msgid "Click here to insert Install."
 msgstr "برای درج نصب اینجا کلیک کنید."
@@ -2688,9 +2655,7 @@ msgstr "برای تولید یک کلید api اینجا کلیک کنید"
 msgid "License Mandatory"
 msgstr "مجوز اجباری"
 
-msgid ""
-"Prevent users from submitting a ticket without a valid license for one of your "
-"product"
+msgid "Prevent users from submitting a ticket without a valid license for one of your product"
 msgstr "از ارسال بلیط بدون مجوز معتبر برای یکی از محصولات شما جلوگیری کنید"
 
 msgid "Product ID"
@@ -3297,19 +3262,13 @@ msgid "Get a survey from customers on ticket closing to improve quality."
 msgstr "برای بهبود کیفیت ، از مشتریان در مورد بسته شدن بلیط نظرسنجی کنید."
 
 msgid "Help users to find and select the area with which they need assistance."
-msgstr ""
-"به کاربران کمک کنید تا مناطقی را که در آن به کمک نیاز دارند ، پیدا کرده و انتخاب "
-"کنند."
+msgstr "به کاربران کمک کنید تا مناطقی را که در آن به کمک نیاز دارند ، پیدا کرده و انتخاب کنند."
 
 msgid "Private Note"
 msgstr "یادداشت خصوصی"
 
-msgid ""
-"The private note is used as reminders or to give other agents insights into the "
-"ticket issue."
-msgstr ""
-"یادداشت خصوصی به عنوان یادآوری یا برای ارائه بینش سایر نمایندگان از موضوع بلیط "
-"استفاده می شود."
+msgid "The private note is used as reminders or to give other agents insights into the ticket issue."
+msgstr "یادداشت خصوصی به عنوان یادآوری یا برای ارائه بینش سایر نمایندگان از موضوع بلیط استفاده می شود."
 
 msgid "Stop losing productivity on repetitive queries, build your knowledge base."
 msgstr "از دست دادن بهره وری در سؤالات تکراری ، پایه دانش خود را بسازید."
@@ -3321,67 +3280,42 @@ msgid "Max Tickets"
 msgstr "حداکثر بلیط"
 
 msgid "Enables admin to set N numbers of tickets for users and agents separately."
-msgstr ""
-"مدیر را قادر می سازد تعداد N بلیط را برای کاربران و نمایندگان بطور جداگانه تنظیم "
-"کند."
+msgstr "مدیر را قادر می سازد تعداد N بلیط را برای کاربران و نمایندگان بطور جداگانه تنظیم کند."
 
 msgid "Merge Tickets"
 msgstr "بلیط های ادغام"
 
-msgid ""
-"Enables agents to merge two tickets of the same user into one instead of dealing "
-"with the same issue on many tickets."
-msgstr ""
-"به نمایندگان این امکان را می دهد که به جای پرداختن به مسئله مشابه در بسیاری از "
-"بلیط ها ، دو بلیط یک کاربر را در یکی ادغام کنند."
+msgid "Enables agents to merge two tickets of the same user into one instead of dealing with the same issue on many tickets."
+msgstr "به نمایندگان این امکان را می دهد که به جای پرداختن به مسئله مشابه در بسیاری از بلیط ها ، دو بلیط یک کاربر را در یکی ادغام کنند."
 
-msgid ""
-"Defines rules or set specific intervals of time to make ticket auto overdue.The "
-"ticket can overdue by type or overdue by Cronjob."
+msgid "Defines rules or set specific intervals of time to make ticket auto overdue.The ticket can overdue by type or overdue by Cronjob."
 msgstr ""
-"قوانینی را تعیین می کند یا بازه های مشخصی از زمان را برای تأخیر در بلیط اتومبیل "
-"تعیین می کند. بلیط می تواند براساس نوع یا تأخیر توسط Cronjob تأخیر کند."
+"قوانینی را تعیین می کند یا بازه های مشخصی از زمان را برای تأخیر در بلیط اتومبیل تعیین می کند. بلیط می تواند براساس نوع یا تأخیر توسط "
+"Cronjob تأخیر کند."
 
-msgid ""
-"SMTP enables you to add custom mail protocol to send and receive emails within "
-"the js help desk."
-msgstr ""
-"SMTP شما را قادر می سازد پروتکل نامه های سفارشی را برای ارسال و دریافت ایمیل در "
-"میز کمک js اضافه کنید."
+msgid "SMTP enables you to add custom mail protocol to send and receive emails within the js help desk."
+msgstr "SMTP شما را قادر می سازد پروتکل نامه های سفارشی را برای ارسال و دریافت ایمیل در میز کمک js اضافه کنید."
 
-msgid ""
-"Displays complete ticket history along with the ticket status, currently assigned "
-"user and other actions performed on each ticket."
-msgstr ""
-"تاریخچه بلیط کامل را به همراه وضعیت بلیط نمایش می دهد ، که در حال حاضر کاربر "
-"اختصاص داده شده و سایر اقدامات انجام شده در هر بلیط."
+msgid "Displays complete ticket history along with the ticket status, currently assigned user and other actions performed on each ticket."
+msgstr "تاریخچه بلیط کامل را به همراه وضعیت بلیط نمایش می دهد ، که در حال حاضر کاربر اختصاص داده شده و سایر اقدامات انجام شده در هر بلیط."
 
 msgid "Pre-populated messages allow support agents to respond quickly."
 msgstr "پیام های از پیش جمع شده به عوامل پشتیبانی اجازه می دهد سریع پاسخ دهند."
 
 msgid "Enables users to reply to the tickets via email without login."
-msgstr ""
-"کاربران را قادر می سازد بدون ورود به سایت از طریق ایمیل به بلیط ها پاسخ دهند."
+msgstr "کاربران را قادر می سازد بدون ورود به سایت از طریق ایمیل به بلیط ها پاسخ دهند."
 
 msgid "Time Tracking"
 msgstr "پیگیری زمان"
 
-msgid ""
-"Track the time spent on each ticket by each agent and each reply. Report the "
-"admin on how much time is spent on each ticket."
-msgstr ""
-"زمان صرف شده در هر بلیط توسط هر نماینده و هر پاسخ را پیگیری کنید. مدیر را در مورد "
-"چگونگی هزینه هر بلیط به مدیر گزارش دهید."
+msgid "Track the time spent on each ticket by each agent and each reply. Report the admin on how much time is spent on each ticket."
+msgstr "زمان صرف شده در هر بلیط توسط هر نماینده و هر پاسخ را پیگیری کنید. مدیر را در مورد چگونگی هزینه هر بلیط به مدیر گزارش دهید."
 
 msgid "User Options"
 msgstr "گزینه های کاربر"
 
-msgid ""
-"User options enable you to add Google Re-captcha or JS Help Desk Re-captcha for a "
-"registration form."
-msgstr ""
-"گزینه های کاربر شما را قادر می سازد برای فرم ثبت نام Google Re-captcha یا JS Help "
-"Desk Re-captcha را اضافه کنید."
+msgid "User options enable you to add Google Re-captcha or JS Help Desk Re-captcha for a registration form."
+msgstr "گزینه های کاربر شما را قادر می سازد برای فرم ثبت نام Google Re-captcha یا JS Help Desk Re-captcha را اضافه کنید."
 
 msgid "Actions"
 msgstr "اقدامات"
@@ -3389,90 +3323,56 @@ msgstr "اقدامات"
 msgid "Ticket Actions"
 msgstr "اقدامات بلیط"
 
-msgid ""
-"Get multiple action options on each ticket like Print Ticket, Lock Ticket, "
-"Transfer ticket, etc."
-msgstr ""
-"در هر بلیط از گزینه های مختلف اقدام مانند بلیط بلیط ، قفل بلیط ، بلیط نقل و "
-"انتقالات و غیره استفاده کنید."
+msgid "Get multiple action options on each ticket like Print Ticket, Lock Ticket, Transfer ticket, etc."
+msgstr "در هر بلیط از گزینه های مختلف اقدام مانند بلیط بلیط ، قفل بلیط ، بلیط نقل و انتقالات و غیره استفاده کنید."
 
 msgid "Make unlimited announcements associated with the support system."
 msgstr "اعلانات نامحدود مرتبط با سیستم پشتیبانی را انجام دهید."
 
-msgid ""
-"It allows you to block the email of any user to restrict him to create new "
-"tickets."
-msgstr ""
-"این امکان را به شما می دهد تا ایمیل هر کاربر را محدود کنید تا او را برای ایجاد "
-"بلیط جدید محدود کنید."
+msgid "It allows you to block the email of any user to restrict him to create new tickets."
+msgstr "این امکان را به شما می دهد تا ایمیل هر کاربر را محدود کنید تا او را برای ایجاد بلیط جدید محدود کنید."
 
 msgid "Desktop Notification"
 msgstr "اعلان دسک تاپ"
 
-msgid ""
-"The Desktop notifications will keep you up to date about anything happens on your "
-"support system."
-msgstr ""
-"اعلان های دسک تاپ شما را در مورد هر اتفاقی که در سیستم پشتیبانی شما رخ می دهد ، "
-"به روز می کنید."
+msgid "The Desktop notifications will keep you up to date about anything happens on your support system."
+msgstr "اعلان های دسک تاپ شما را در مورد هر اتفاقی که در سیستم پشتیبانی شما رخ می دهد ، به روز می کنید."
 
 msgid "Save the ticket as a PDF in your system and able to export all data."
-msgstr ""
-"بلیط را به عنوان PDF در سیستم خود ذخیره کنید و قادر به صادر کردن کلیه داده ها "
-"باشید."
+msgstr "بلیط را به عنوان PDF در سیستم خود ذخیره کنید و قادر به صادر کردن کلیه داده ها باشید."
 
 msgid "Create downloads to ensure the user to get downloads from downloads."
-msgstr ""
-"برای اطمینان از کاربر برای دریافت بارگیری از بارگیری ، بارگیری بارگیری کنید."
+msgstr "برای اطمینان از کاربر برای دریافت بارگیری از بارگیری ، بارگیری بارگیری کنید."
 
 msgid "Add FAQs to drastically reduce the number of common questions."
-msgstr ""
-"سؤالات متداول را اضافه کنید تا به طور چشمگیر تعداد سؤالات متداول را کاهش دهید."
+msgstr "سؤالات متداول را اضافه کنید تا به طور چشمگیر تعداد سؤالات متداول را کاهش دهید."
 
-msgid ""
-"Get multiple themes with a beautiful color scheme to make the site beautiful."
+msgid "Get multiple themes with a beautiful color scheme to make the site beautiful."
 msgstr "برای زیباتر شدن سایت ، چندین طرح با طرح رنگی زیبا را بدست آورید."
 
 msgid "Dashboard Widgets"
 msgstr "ابزارکهای داشبورد"
 
-msgid ""
-"Get immediate data of your support operations as soon as you log into your "
-"WordPress administration area."
-msgstr ""
-"به محض ورود به منطقه مدیریت وردپرس خود ، اطلاعات فوری از عملیات پشتیبانی خود را "
-"دریافت کنید."
+msgid "Get immediate data of your support operations as soon as you log into your WordPress administration area."
+msgstr "به محض ورود به منطقه مدیریت وردپرس خود ، اطلاعات فوری از عملیات پشتیبانی خود را دریافت کنید."
 
 msgid "Internal Mail"
 msgstr "نامه داخلی"
 
 msgid "Use an internal email to send emails to one agent to another agent."
-msgstr ""
-"برای ارسال ایمیل به یک نماینده به نماینده دیگر از یک ایمیل داخلی استفاده کنید."
+msgstr "برای ارسال ایمیل به یک نماینده به نماینده دیگر از یک ایمیل داخلی استفاده کنید."
 
 msgid "Front-End Widgets"
 msgstr "ابزارک های جلویی"
 
-msgid ""
-"Widgets in WordPress allow you to add content and features in the widgetized "
-"areas of your theme."
-msgstr ""
-"ابزارک در وردپرس به شما امکان می دهد محتوا و ویژگی های خود را در مناطق ابزارک شده "
-"خود اضافه کنید."
+msgid "Widgets in WordPress allow you to add content and features in the widgetized areas of your theme."
+msgstr "ابزارک در وردپرس به شما امکان می دهد محتوا و ویژگی های خود را در مناطق ابزارک شده خود اضافه کنید."
 
-msgid ""
-"JS Help Desk WooCommerce provides the much-needed bridge between your WooCommerce "
-"store and the JS Help Desk."
-msgstr ""
-"میز کمک JS WooCommerce پل مورد نیاز بین فروشگاه WooCommerce و میز کمک JS شما را "
-"فراهم می کند."
+msgid "JS Help Desk WooCommerce provides the much-needed bridge between your WooCommerce store and the JS Help Desk."
+msgstr "میز کمک JS WooCommerce پل مورد نیاز بین فروشگاه WooCommerce و میز کمک JS شما را فراهم می کند."
 
-msgid ""
-"Collect your customer's private data, sensitive information from credit card to "
-"health information and store them encrypted."
-msgstr ""
-"اطلاعات شخصی مشتری ، اطلاعات حساس را از کارت اعتباری گرفته تا اطلاعات بهداشتی جمع "
-"آوری کرده و آنها را رمزگذاری شده ذخیره کنید."
+msgid "Collect your customer's private data, sensitive information from credit card to health information and store them encrypted."
+msgstr "اطلاعات شخصی مشتری ، اطلاعات حساس را از کارت اعتباری گرفته تا اطلاعات بهداشتی جمع آوری کرده و آنها را رمزگذاری شده ذخیره کنید."
 
 msgid "envato"
 msgstr "انواتو"
@@ -3483,30 +3383,20 @@ msgstr "بدون Envato معتبر ، مشتریان مجوز نمی توانن�
 msgid "mailchimp"
 msgstr "صندوق پستی"
 
-msgid ""
-"Adds the option to the registration form for prompting new users to subscribe to "
-"your email list."
-msgstr ""
-"گزینه ای را برای درخواست کاربران جدید برای عضویت در لیست ایمیل شما ، به فرم ثبت "
-"نام اضافه می کند."
+msgid "Adds the option to the registration form for prompting new users to subscribe to your email list."
+msgstr "گزینه ای را برای درخواست کاربران جدید برای عضویت در لیست ایمیل شما ، به فرم ثبت نام اضافه می کند."
 
 msgid "paidsupport"
 msgstr "پشتیبان پشتیبانی"
 
-msgid ""
-"Paid Support is the easiest way to integrate and manage payments for your tickets."
-msgstr ""
-"پشتیبانی پرداخت شده ساده ترین راه برای ادغام و مدیریت پرداخت برای بلیط های شما "
-"است."
+msgid "Paid Support is the easiest way to integrate and manage payments for your tickets."
+msgstr "پشتیبانی پرداخت شده ساده ترین راه برای ادغام و مدیریت پرداخت برای بلیط های شما است."
 
 msgid "easy digital downloads"
 msgstr "بارگیری آسان دیجیتال"
 
-msgid ""
-"EDD offers customers to open new tickets just one click from their EDD account."
-msgstr ""
-"EDD به مشتریان پیشنهاد می کند بلیط های جدید را فقط با یک کلیک از حساب EDD خود باز "
-"کنند."
+msgid "EDD offers customers to open new tickets just one click from their EDD account."
+msgstr "EDD به مشتریان پیشنهاد می کند بلیط های جدید را فقط با یک کلیک از حساب EDD خود باز کنند."
 
 msgid "We'd love to hear from You."
 msgstr "ما از اینکه ازت خبر داشته باشیم خوشحال میشویم."
@@ -3616,11 +3506,8 @@ msgstr "ترجمه های درخواست شده"
 msgid "Select Translation"
 msgstr "انتخاب ترجمه"
 
-msgid ""
-"When WordPress language change to ro, JS Help Desk language will auto change to ro"
-msgstr ""
-"وقتی زبان WordPress به ro تغییر یابد ، زبان میز JS Help به صورت خودکار به ro "
-"تغییر می یابد"
+msgid "When WordPress language change to ro, JS Help Desk language will auto change to ro"
+msgstr "وقتی زبان WordPress به ro تغییر یابد ، زبان میز JS Help به صورت خودکار به ro تغییر می یابد"
 
 msgid "c error"
 msgstr "خطای c"
@@ -3896,17 +3783,13 @@ msgid "Wordpress Plugin"
 msgstr "افزونه وردپرس"
 
 msgid ""
-"JS Help Desk is a trusted open source ticket system. JS Help Desk is a simple, "
-"easy to use, web-based customer support system. Users can create a ticket from "
-"the front-end. JS Help Desk comes packed with lot features than most of the "
-"expensive(and complex) support ticket system on the market. The best part is, It "
-"completely free."
+"JS Help Desk is a trusted open source ticket system. JS Help Desk is a simple, easy to use, web-based customer support system. Users can "
+"create a ticket from the front-end. JS Help Desk comes packed with lot features than most of the expensive(and complex) support ticket "
+"system on the market. The best part is, It completely free."
 msgstr ""
-"میز کمک JS یک سیستم بلیط باز منبع قابل اعتماد است. JS Help Desk یک سیستم پشتیبانی "
-"مشتری مبتنی بر وب ساده ، آسان و قابل استفاده است. کاربران می توانند از قسمت جلویی "
-"بلیط تهیه کنند. میز کمک JS از بسیاری از سیستم های پشتیبانی بلیط گران قیمت (و "
-"پیچیده) موجود در بازار مملو از ویژگی های زیادی است. بهترین قسمت این است که کاملاً "
-"رایگان است."
+"میز کمک JS یک سیستم بلیط باز منبع قابل اعتماد است. JS Help Desk یک سیستم پشتیبانی مشتری مبتنی بر وب ساده ، آسان و قابل استفاده است. "
+"کاربران می توانند از قسمت جلویی بلیط تهیه کنند. میز کمک JS از بسیاری از سیستم های پشتیبانی بلیط گران قیمت (و پیچیده) موجود در بازار مملو "
+"از ویژگی های زیادی است. بهترین قسمت این است که کاملاً رایگان است."
 
 msgid "Add on list"
 msgstr "اضافه کردن به لیست"
@@ -4494,8 +4377,7 @@ msgid "Non-premium support"
 msgstr "پشتیبانی غیر حق بیمه"
 
 msgid "Check this box if this ticket should NOT apply against the paid support"
-msgstr ""
-"اگر این بلیط نباید درمورد پشتیبانی پرداخت شده باشد ، این کادر را علامت بزنید"
+msgstr "اگر این بلیط نباید درمورد پشتیبانی پرداخت شده باشد ، این کادر را علامت بزنید"
 
 msgid "Remaining"
 msgstr "باقی مانده است"
@@ -4852,8 +4734,7 @@ msgid "Email has not been stored"
 msgstr "ایمیل ذخیره نشده است."
 
 msgid "Email send to admin when banned email try to create ticket"
-msgstr ""
-"زمانی که ایمیل بلاک شده سعی در ساخت تیکت داشته باشد ایمیلی به ادمین ارسال میشود."
+msgstr "زمانی که ایمیل بلاک شده سعی در ساخت تیکت داشته باشد ایمیلی به ادمین ارسال میشود."
 
 msgid "Enable ticket via email"
 msgstr "فعال کردن تیکت توسط ایمیل"
@@ -5696,8 +5577,7 @@ msgid "Select role you want to assign to new users"
 msgstr "نقشی را که می خواهید برای کاربران جدید اختصاص دهید انتخاب کنید"
 
 msgid "Select whether users can reply to closed ticket via email or not"
-msgstr ""
-"انتخاب کنید که کاربران می توانند از طریق ایمیل به بلیط بسته پاسخ دهند یا خیر"
+msgstr "انتخاب کنید که کاربران می توانند از طریق ایمیل به بلیط بسته پاسخ دهند یا خیر"
 
 msgid "This text will appear whenever visitor creates ticket"
 msgstr "این متن هر زمان که بازدید کننده بلیط ایجاد کند ظاهر می شود"
@@ -5709,8 +5589,7 @@ msgid "Feedback Successful message to customer"
 msgstr "بازخورد پیام موفقیت آمیز به مشتری"
 
 msgid "You cannot use this email it is used in ticket via email"
-msgstr ""
-"شما نمی توانید از این ایمیل استفاده کنید که در بلیط از طریق ایمیل استفاده می شود"
+msgstr "شما نمی توانید از این ایمیل استفاده کنید که در بلیط از طریق ایمیل استفاده می شود"
 
 msgid "User of this department will receive email on new ticket"
 msgstr "کاربر این بخش ایمیل را با بلیط جدید دریافت می کند"
@@ -5998,9 +5877,7 @@ msgid "Access Control Level"
 msgstr "سطح کنترل دسترسی"
 
 msgid "Access control limit you can limit your staff to do specific task"
-msgstr ""
-"محدودیت کنترل دسترسی شما می توانید کارمندان خود را برای انجام کارهای خاص محدود "
-"کنید"
+msgstr "محدودیت کنترل دسترسی شما می توانید کارمندان خود را برای انجام کارهای خاص محدود کنید"
 
 msgid "Staff member create premade message premade available in ticket reply"
 msgstr "کارکنان ایجاد پیام premade premade موجود در پاسخ بلیط"
@@ -6027,9 +5904,7 @@ msgid "You can ban and unabn any spam email address"
 msgstr "می توانید هر آدرس ایمیل اسپم را ممنوع کرده و از آن استفاده نکنید"
 
 msgid "If and only if customer not reply certain days ticket marked overdue"
-msgstr ""
-"اگر و فقط در صورتی که مشتری در روزهای مشخص پاسخ نداده باشد ، بلیط مشخص شده به "
-"تأخیر افتاده است"
+msgstr "اگر و فقط در صورتی که مشتری در روزهای مشخص پاسخ نداده باشد ، بلیط مشخص شده به تأخیر افتاده است"
 
 msgid "System will read your email and create tickets"
 msgstr "سیستم ایمیل شما را خوانده و بلیط ایجاد می کند"
@@ -6059,16 +5934,13 @@ msgid "Customer Feedback"
 msgstr "بازخورد مشتری"
 
 msgid "Customer can provide feedback that can be used to improve services"
-msgstr ""
-"مشتری می‌تواند بازخورد خود را ارسال نماید تا جهت بهبود سرویس‌ها از آن استفاده شود"
+msgstr "مشتری می‌تواند بازخورد خود را ارسال نماید تا جهت بهبود سرویس‌ها از آن استفاده شود"
 
 msgid "RTL Supported"
 msgstr "پشتیبانی از راست به چپ"
 
 msgid "JS Support Ticket auto adjusts to RTL or LTR without any problem."
-msgstr ""
-"سیستم پشتیبانی تیکت جی اس بصورت خودکار به حالت راست به چپ یا چپ به راست بدون هیچ "
-"مشکلی تغییر وضعیت دهد"
+msgstr "سیستم پشتیبانی تیکت جی اس بصورت خودکار به حالت راست به چپ یا چپ به راست بدون هیچ مشکلی تغییر وضعیت دهد"
 
 msgid "Staff Time Tracking"
 msgstr "پیگیری زمان کارمندان"
@@ -6112,11 +5984,8 @@ msgstr "YYYY-MM-DD"
 msgid "Firebase Auth Domain"
 msgstr "دامنه تأیید Firebase"
 
-msgid ""
-"Private Credentials Encryption Key changing this value will discard all existing "
-"credentials "
-msgstr ""
-"کلید رمزگذاری اعتبار خصوصی با تغییر این مقدار تمام اعتبارنامه های موجود حذف می شود"
+msgid "Private Credentials Encryption Key changing this value will discard all existing credentials "
+msgstr "کلید رمزگذاری اعتبار خصوصی با تغییر این مقدار تمام اعتبارنامه های موجود حذف می شود"
 
 msgid "SMTP"
 msgstr "SMTP"
@@ -6439,12 +6308,10 @@ msgstr "اکنون به روز رسانی کنید"
 msgid "Add-On’s For Help Desk"
 msgstr "افزونه ها برای میز راهنمایی"
 
-msgid ""
-"Get trusted WordPress add on’s. Guaranteed to work fast, safe to use, beautifully "
-"coded, packed with features and easy to use."
+msgid "Get trusted WordPress add on’s. Guaranteed to work fast, safe to use, beautifully coded, packed with features and easy to use."
 msgstr ""
-"افزودنی های قابل اعتماد وردپرس را دریافت کنید. تضمین شده برای کار سریع، ایمن برای "
-"استفاده، کدگذاری زیبا، بسته بندی شده با ویژگی ها و استفاده آسان."
+"افزودنی های قابل اعتماد وردپرس را دریافت کنید. تضمین شده برای کار سریع، ایمن برای استفاده، کدگذاری زیبا، بسته بندی شده با ویژگی ها و "
+"استفاده آسان."
 
 msgid "Save big with an exclusive membership plan today!"
 msgstr "امروز با یک طرح عضویت انحصاری صرفه جویی زیادی کنید!"
@@ -6452,147 +6319,81 @@ msgstr "امروز با یک طرح عضویت انحصاری صرفه جویی 
 msgid "show bundle pack"
 msgstr "نمایش بسته بسته نرم افزاری"
 
-msgid ""
-"Add agents and assign roles and permissions to provide assistance and support to "
-"customer support tickets."
-msgstr ""
-"نمایندگان را اضافه کنید و نقش ها و مجوزهایی را برای ارائه کمک و پشتیبانی به بلیط "
-"های پشتیبانی مشتری اختصاص دهید."
+msgid "Add agents and assign roles and permissions to provide assistance and support to customer support tickets."
+msgstr "نمایندگان را اضافه کنید و نقش ها و مجوزهایی را برای ارائه کمک و پشتیبانی به بلیط های پشتیبانی مشتری اختصاص دهید."
 
-msgid ""
-"Define rules for ticket to auto close. Ticket will be auto close after specific "
-"interval of time which can be set by admin."
-msgstr ""
-"قوانینی را برای بسته شدن خودکار بلیط تعریف کنید. بلیط پس از یک بازه زمانی خاص "
-"بسته می شود که می تواند توسط مدیر تنظیم شود."
+msgid "Define rules for ticket to auto close. Ticket will be auto close after specific interval of time which can be set by admin."
+msgstr "قوانینی را برای بسته شدن خودکار بلیط تعریف کنید. بلیط پس از یک بازه زمانی خاص بسته می شود که می تواند توسط مدیر تنظیم شود."
 
-msgid ""
-"Get the survey from your customers on ticket closing to improve your quality of "
-"services and assistance."
-msgstr ""
-"برای بهبود کیفیت خدمات و کمک، نظرسنجی را از مشتریان خود در مورد بسته شدن بلیط "
-"دریافت کنید."
+msgid "Get the survey from your customers on ticket closing to improve your quality of services and assistance."
+msgstr "برای بهبود کیفیت خدمات و کمک، نظرسنجی را از مشتریان خود در مورد بسته شدن بلیط دریافت کنید."
 
 msgid "Helptopic"
 msgstr "موضوع راهنما"
 
-msgid ""
-"Help topics help users to find and select the area with which they need "
-"assistance."
-msgstr ""
-"موضوعات راهنما به کاربران کمک می کند تا منطقه ای را که نیاز به کمک دارند پیدا "
-"کرده و انتخاب کنند."
+msgid "Help topics help users to find and select the area with which they need assistance."
+msgstr "موضوعات راهنما به کاربران کمک می کند تا منطقه ای را که نیاز به کمک دارند پیدا کرده و انتخاب کنند."
 
-msgid ""
-"The private note is used as reminders or to give other agents insights into the "
-"ticket issue. User Won't see the private notes."
+msgid "The private note is used as reminders or to give other agents insights into the ticket issue. User Won't see the private notes."
 msgstr ""
-"یادداشت خصوصی به عنوان یادآوری یا برای دادن اطلاعات بینش به سایر نمایندگان در "
-"مورد مسئله بلیط استفاده می شود. کاربر یادداشت های خصوصی را نمی بیند."
+"یادداشت خصوصی به عنوان یادآوری یا برای دادن اطلاعات بینش به سایر نمایندگان در مورد مسئله بلیط استفاده می شود. کاربر یادداشت های خصوصی را "
+"نمی بیند."
 
-msgid ""
-"Stop losing productivity on repetitive queries,Build your knowledge base, group "
-"solutions by topics to facilitate users."
+msgid "Stop losing productivity on repetitive queries,Build your knowledge base, group solutions by topics to facilitate users."
 msgstr ""
-"از دست دادن بهره وری در پرس و جوهای تکراری خودداری کنید، پایگاه دانش خود را "
-"بسازید، راه حل ها را بر اساس موضوعات برای تسهیل کاربران گروه بندی کنید."
+"از دست دادن بهره وری در پرس و جوهای تکراری خودداری کنید، پایگاه دانش خود را بسازید، راه حل ها را بر اساس موضوعات برای تسهیل کاربران گروه "
+"بندی کنید."
 
-msgid ""
-"Enables admin to set N numbers of tickets for users to create and set N numbers "
-"of Ticket to open for agents separately."
-msgstr ""
-"مدیر را قادر می‌سازد تا N شماره بلیط را برای کاربران ایجاد کند و N شماره بلیط را "
-"برای باز کردن جداگانه برای نمایندگان تنظیم کند."
+msgid "Enables admin to set N numbers of tickets for users to create and set N numbers of Ticket to open for agents separately."
+msgstr "مدیر را قادر می‌سازد تا N شماره بلیط را برای کاربران ایجاد کند و N شماره بلیط را برای باز کردن جداگانه برای نمایندگان تنظیم کند."
 
 msgid "Multi Language Email Templates"
 msgstr "قالب های ایمیل چند زبانه"
 
-msgid ""
-"It allows to create language-based email templates for all JS Help Desk email "
-"templates."
-msgstr ""
-"این اجازه می دهد تا قالب های ایمیل مبتنی بر زبان را برای همه قالب های ایمیل JS "
-"Help Desk ایجاد کنید."
+msgid "It allows to create language-based email templates for all JS Help Desk email templates."
+msgstr "این اجازه می دهد تا قالب های ایمیل مبتنی بر زبان را برای همه قالب های ایمیل JS Help Desk ایجاد کنید."
 
-msgid ""
-"Canned Responses are pre-populated messages that allows support agents to respond "
-"quickly to customer issues."
-msgstr ""
-"Canned Responses پیام‌هایی هستند که از قبل جمع‌بندی شده‌اند و به عوامل پشتیبانی "
-"اجازه می‌دهند تا به سرعت به مسائل مشتری پاسخ دهند."
+msgid "Canned Responses are pre-populated messages that allows support agents to respond quickly to customer issues."
+msgstr "Canned Responses پیام‌هایی هستند که از قبل جمع‌بندی شده‌اند و به عوامل پشتیبانی اجازه می‌دهند تا به سرعت به مسائل مشتری پاسخ دهند."
 
-msgid ""
-"Enables users to reply to the tickets via email without the need to login to the "
-"support system first."
-msgstr ""
-"کاربران را قادر می سازد بدون نیاز به ورود به سیستم پشتیبانی ابتدا از طریق ایمیل "
-"به بلیط ها پاسخ دهند."
+msgid "Enables users to reply to the tickets via email without the need to login to the support system first."
+msgstr "کاربران را قادر می سازد بدون نیاز به ورود به سیستم پشتیبانی ابتدا از طریق ایمیل به بلیط ها پاسخ دهند."
 
-msgid ""
-"Make unlimited announcements associated with support system to get customer "
-"interaction."
+msgid "Make unlimited announcements associated with support system to get customer interaction."
 msgstr "اعلامیه های نامحدود مرتبط با سیستم پشتیبانی برای دریافت تعامل با مشتری."
 
-msgid ""
-"Ban Email allows you to block email of any user to restrict him to create new "
-"tickets."
-msgstr ""
-"Ban Email به شما این امکان را می دهد که ایمیل هر کاربر را مسدود کنید تا او را "
-"برای ایجاد بلیط جدید محدود کنید."
+msgid "Ban Email allows you to block email of any user to restrict him to create new tickets."
+msgstr "Ban Email به شما این امکان را می دهد که ایمیل هر کاربر را مسدود کنید تا او را برای ایجاد بلیط جدید محدود کنید."
 
 msgid "Descktop Notifications"
 msgstr "اطلاعیه های دسکتاپ"
 
-msgid ""
-"Save the ticket as a PDF in your system or the admin will also be able to export "
-"all the data inside of Ticket."
-msgstr ""
-"بلیط را به عنوان PDF در سیستم خود ذخیره کنید یا مدیر همچنین می تواند تمام داده "
-"های داخل Ticket را صادر کند."
+msgid "Save the ticket as a PDF in your system or the admin will also be able to export all the data inside of Ticket."
+msgstr "بلیط را به عنوان PDF در سیستم خود ذخیره کنید یا مدیر همچنین می تواند تمام داده های داخل Ticket را صادر کند."
 
-msgid ""
-"Tired of getting tickets about the same problems? Add FAQs to drastically reduce "
-"the number of common questions from users."
-msgstr ""
-"از گرفتن بلیط در مورد مشکلات مشابه خسته شده اید؟ سوالات متداول را اضافه کنید تا "
-"تعداد سوالات متداول کاربران را به شدت کاهش دهید."
+msgid "Tired of getting tickets about the same problems? Add FAQs to drastically reduce the number of common questions from users."
+msgstr "از گرفتن بلیط در مورد مشکلات مشابه خسته شده اید؟ سوالات متداول را اضافه کنید تا تعداد سوالات متداول کاربران را به شدت کاهش دهید."
 
 msgid "Admin Widgets"
 msgstr "ابزارک های مدیریت"
 
-msgid ""
-"Use internal email to send emails to one agent to another agent with in support "
-"ticket."
-msgstr ""
-"از ایمیل داخلی برای ارسال ایمیل به یک نماینده به نماینده دیگر با تیکت پشتیبانی "
-"استفاده کنید."
+msgid "Use internal email to send emails to one agent to another agent with in support ticket."
+msgstr "از ایمیل داخلی برای ارسال ایمیل به یک نماینده به نماینده دیگر با تیکت پشتیبانی استفاده کنید."
 
 msgid "Front-End Widget"
 msgstr "ویجت Front-End"
 
-msgid ""
-"Paid Support is the easiest way to integrate and manage payments for your support "
-"tickets."
-msgstr ""
-"پشتیبانی پولی ساده ترین راه برای ادغام و مدیریت پرداخت ها برای بلیط های پشتیبانی "
-"شما است."
+msgid "Paid Support is the easiest way to integrate and manage payments for your support tickets."
+msgstr "پشتیبانی پولی ساده ترین راه برای ادغام و مدیریت پرداخت ها برای بلیط های پشتیبانی شما است."
 
 msgid "Mail Chimp"
 msgstr "Mailchimp"
 
-msgid ""
-"The Mail Chimp add-on adds a new checkbox to the registration form for prompting "
-"new users to subscribe your email-list."
-msgstr ""
-"افزونه Mail Chimp یک چک باکس جدید به فرم ثبت نام اضافه می کند تا از کاربران جدید "
-"خواسته شود که لیست ایمیل شما را مشترک کنند."
+msgid "The Mail Chimp add-on adds a new checkbox to the registration form for prompting new users to subscribe your email-list."
+msgstr "افزونه Mail Chimp یک چک باکس جدید به فرم ثبت نام اضافه می کند تا از کاربران جدید خواسته شود که لیست ایمیل شما را مشترک کنند."
 
-msgid ""
-"EDD offers customers to open new tickets just one click from their EDD account "
-"with optionally validating the license keys."
-msgstr ""
-"EDD به مشتریان پیشنهاد می‌کند که بلیط‌های جدید را تنها با یک کلیک از حساب EDD خود "
-"با تأیید اعتبار کلیدهای مجوز، باز کنند."
+msgid "EDD offers customers to open new tickets just one click from their EDD account with optionally validating the license keys."
+msgstr "EDD به مشتریان پیشنهاد می‌کند که بلیط‌های جدید را تنها با یک کلیک از حساب EDD خود با تأیید اعتبار کلیدهای مجوز، باز کنند."
 
 msgid "email cc"
 msgstr "ایمیل سی سی"
@@ -6601,38 +6402,35 @@ msgid "Email Cc"
 msgstr "رایانامه کپی"
 
 msgid ""
-"CC(Carbon Copy) - the people who should know about the information which is being "
-"shared and the people included are able to see who is there in the list."
+"CC(Carbon Copy) - the people who should know about the information which is being shared and the people included are able to see who is "
+"there in the list."
 msgstr ""
-"CC (کپی کربن) - افرادی که باید از اطلاعاتی که به اشتراک گذاشته می شود و افرادی که "
-"در آن گنجانده شده اند بدانند، می توانند ببینند چه کسانی در لیست هستند."
+"CC (کپی کربن) - افرادی که باید از اطلاعاتی که به اشتراک گذاشته می شود و افرادی که در آن گنجانده شده اند بدانند، می توانند ببینند چه "
+"کسانی در لیست هستند."
 
 msgid "multiform"
 msgstr "چند شکلی"
 
 msgid "Multiform allows user to add more than one form based on requirements."
-msgstr ""
-"Multiform به کاربر اجازه می دهد تا بیش از یک فرم را بر اساس الزامات اضافه کند."
+msgstr "Multiform به کاربر اجازه می دهد تا بیش از یک فرم را بر اساس الزامات اضافه کند."
 
 msgid "agent auto assign"
 msgstr "اختصاص خودکار عامل"
 
 msgid ""
-"When auto assignment is enabled and a ticket is created, an appropriate agent is "
-"automatically assigned to the ticket and it is moved to the Assigned state."
+"When auto assignment is enabled and a ticket is created, an appropriate agent is automatically assigned to the ticket and it is moved to "
+"the Assigned state."
 msgstr ""
-"هنگامی که تخصیص خودکار فعال می شود و یک تیکت ایجاد می شود، یک عامل مناسب به طور "
-"خودکار به بلیط اختصاص داده می شود و به حالت Assigned منتقل می شود."
+"هنگامی که تخصیص خودکار فعال می شود و یک تیکت ایجاد می شود، یک عامل مناسب به طور خودکار به بلیط اختصاص داده می شود و به حالت Assigned "
+"منتقل می شود."
 
 msgid "Social Login"
 msgstr "ورود به سیستم اجتماعی"
 
-msgid ""
-"Users can login from their social media accounts. They can create a new account "
-"or use social media accounts."
+msgid "Users can login from their social media accounts. They can create a new account or use social media accounts."
 msgstr ""
-"کاربران می توانند از حساب های رسانه های اجتماعی خود وارد شوند. آنها می توانند یک "
-"حساب کاربری جدید ایجاد کنند یا از حساب های رسانه های اجتماعی استفاده کنند."
+"کاربران می توانند از حساب های رسانه های اجتماعی خود وارد شوند. آنها می توانند یک حساب کاربری جدید ایجاد کنند یا از حساب های رسانه های "
+"اجتماعی استفاده کنند."
 
 msgid "JS Help Desk Add-Ons Bundle Pack"
 msgstr "بسته بسته نرم افزاری افزونه های میز راهنمای JS"
@@ -6659,11 +6457,9 @@ msgid "All Future Addons"
 msgstr "همه افزونه های آینده"
 
 msgid ""
-"Hey there! We have recently launched a fresh update for the add-ons. Don't forget "
-"to update the add-ons to enjoy the greatest features!"
+"Hey there! We have recently launched a fresh update for the add-ons. Don't forget to update the add-ons to enjoy the greatest features!"
 msgstr ""
-"سلام! اخیراً یک به‌روزرسانی جدید برای افزونه‌ها راه‌اندازی کرده‌ایم. فراموش نکنید که "
-"افزونه ها را به روز کنید تا از بهترین ویژگی ها لذت ببرید!"
+"سلام! اخیراً یک به‌روزرسانی جدید برای افزونه‌ها راه‌اندازی کرده‌ایم. فراموش نکنید که افزونه ها را به روز کنید تا از بهترین ویژگی ها لذت ببرید!"
 
 msgid "View Addone Status"
 msgstr "مشاهده وضعیت Addone"
@@ -6863,59 +6659,38 @@ msgstr "لیست بلیط"
 msgid "Visitor Ticket Setting"
 msgstr "تنظیم بلیط بازدید کننده"
 
-msgid ""
-"By enabling this option, a user can know to whom the ticket has been assigned."
-msgstr ""
-"با فعال کردن این گزینه، کاربر می تواند بداند که بلیط به چه کسی اختصاص داده شده "
-"است."
+msgid "By enabling this option, a user can know to whom the ticket has been assigned."
+msgstr "با فعال کردن این گزینه، کاربر می تواند بداند که بلیط به چه کسی اختصاص داده شده است."
 
 msgid "Assigned info. on admin tickets"
 msgstr "اطلاعات اختصاص داده شده در بلیط های مدیریت"
 
-msgid ""
-"By enabling this option, an agent can know to whom the ticket has been assigned."
-msgstr ""
-"با فعال کردن این گزینه، یک نماینده می تواند بداند که بلیط به چه کسی اختصاص داده "
-"شده است."
+msgid "By enabling this option, an agent can know to whom the ticket has been assigned."
+msgstr "با فعال کردن این گزینه، یک نماینده می تواند بداند که بلیط به چه کسی اختصاص داده شده است."
 
 msgid "Assigned info. on user tickets"
 msgstr "اطلاعات اختصاص داده شده در بلیط های کاربر"
 
-msgid ""
-"By enabling this option, an admin can know to whom the ticket has been assigned."
-msgstr ""
-"با فعال کردن این گزینه، یک ادمین می تواند بداند که بلیط به چه کسی اختصاص داده شده "
-"است."
+msgid "By enabling this option, an admin can know to whom the ticket has been assigned."
+msgstr "با فعال کردن این گزینه، یک ادمین می تواند بداند که بلیط به چه کسی اختصاص داده شده است."
 
 msgid "Assigned info. on agent tickets"
 msgstr "اطلاعات اختصاص داده شده در بلیط های نمایندگی"
 
-msgid ""
-"By enabling this option, a user can know who closed the ticket and when that "
-"ticket closed."
-msgstr ""
-"با فعال کردن این گزینه، کاربر می تواند بداند چه کسی بلیط را بسته و چه زمانی آن "
-"بلیط بسته شده است."
+msgid "By enabling this option, a user can know who closed the ticket and when that ticket closed."
+msgstr "با فعال کردن این گزینه، کاربر می تواند بداند چه کسی بلیط را بسته و چه زمانی آن بلیط بسته شده است."
 
 msgid "Closed info. on admin closed tickets"
 msgstr "اطلاعات بسته شده روی بلیط های بسته مدیریتی"
 
-msgid ""
-"By enabling this option, an agent can know who closed the ticket and when that "
-"ticket closed."
-msgstr ""
-"با فعال کردن این گزینه، یک نماینده می تواند بداند چه کسی بلیط را بسته و چه زمانی "
-"آن بلیط بسته شده است."
+msgid "By enabling this option, an agent can know who closed the ticket and when that ticket closed."
+msgstr "با فعال کردن این گزینه، یک نماینده می تواند بداند چه کسی بلیط را بسته و چه زمانی آن بلیط بسته شده است."
 
 msgid "Closed info. on agent closed tickets"
 msgstr "اطلاعات بسته شده در بلیط های بسته آژانس"
 
-msgid ""
-"By enabling this option, an admin can know who closed the ticket and when that "
-"ticket closed."
-msgstr ""
-"با فعال کردن این گزینه، یک ادمین می‌تواند بداند چه کسی بلیط را بسته و چه زمانی "
-"بلیط بسته شده است."
+msgid "By enabling this option, an admin can know who closed the ticket and when that ticket closed."
+msgstr "با فعال کردن این گزینه، یک ادمین می‌تواند بداند چه کسی بلیط را بسته و چه زمانی بلیط بسته شده است."
 
 msgid "Set default sorting for ticket listing"
 msgstr "مرتب‌سازی پیش‌فرض را برای فهرست بلیط تنظیم کنید"
@@ -6935,30 +6710,20 @@ msgstr "انتخاب کنید آیا کاربران می توانند دکمه �
 msgid "Show ticket delete button"
 msgstr "نمایش دکمه حذف بلیط"
 
-msgid ""
-"Select whether users can see the name of administrator or staff member on ticket "
-"reply"
-msgstr ""
-"انتخاب کنید که آیا کاربران می توانند نام مدیر یا کارمند را در پاسخ بلیط ببینند"
+msgid "Select whether users can see the name of administrator or staff member on ticket reply"
+msgstr "انتخاب کنید که آیا کاربران می توانند نام مدیر یا کارمند را در پاسخ بلیط ببینند"
 
 msgid "Show Anonymous Name On Ticket Reply"
 msgstr "نمایش نام ناشناس در پاسخ بلیط"
 
-msgid ""
-"Select whether users can see the email of administrator or agent on ticket reply"
-msgstr ""
-"انتخاب کنید آیا کاربران می توانند ایمیل مدیر یا نماینده را در پاسخ بلیط ببینند یا "
-"خیر"
+msgid "Select whether users can see the email of administrator or agent on ticket reply"
+msgstr "انتخاب کنید آیا کاربران می توانند ایمیل مدیر یا نماینده را در پاسخ بلیط ببینند یا خیر"
 
 msgid "Show Admin OR Agent Email On Ticket Reply"
 msgstr "نمایش ایمیل مدیر یا نماینده در پاسخ به بلیط"
 
-msgid ""
-"Show or hide the multiform popup when creating a new ticket. if you hide them, "
-"the system will open the default form."
-msgstr ""
-"نمایش یا مخفی کردن پنجره چند شکلی هنگام ایجاد یک بلیط جدید. اگر آنها را پنهان "
-"کنید، سیستم فرم پیش فرض را باز می کند."
+msgid "Show or hide the multiform popup when creating a new ticket. if you hide them, the system will open the default form."
+msgstr "نمایش یا مخفی کردن پنجره چند شکلی هنگام ایجاد یک بلیط جدید. اگر آنها را پنهان کنید، سیستم فرم پیش فرض را باز می کند."
 
 msgid "Multiforms Popup For New Tickets"
 msgstr "پنجره چند شکلی برای بلیط های جدید"
@@ -7008,11 +6773,8 @@ msgstr "ما اینجا هستیم تا به شما کمک کنیم"
 msgid "Help icon"
 msgstr "نماد راهنما"
 
-msgid ""
-"JS Help Desk is a professional, simple, easy to use and complete customer support "
-"system."
-msgstr ""
-"JS Help Desk یک سیستم پشتیبانی مشتری حرفه ای، ساده، آسان برای استفاده و کامل است."
+msgid "JS Help Desk is a professional, simple, easy to use and complete customer support system."
+msgstr "JS Help Desk یک سیستم پشتیبانی مشتری حرفه ای، ساده، آسان برای استفاده و کامل است."
 
 msgid "View all videos"
 msgstr "مشاهده همه ویدیوها"
@@ -7029,12 +6791,8 @@ msgstr "نماد میز راهنما"
 msgid "JS Help Desk Support"
 msgstr "پشتیبانی از میز راهنمایی JS"
 
-msgid ""
-"JS Help Desk delivers timely customer support if you have any query then we're "
-"here to show you the way."
-msgstr ""
-"میز راهنمایی JS پشتیبانی به موقع از مشتری را ارائه می دهد اگر سؤالی دارید، پس ما "
-"اینجا هستیم تا راه را به شما نشان دهیم."
+msgid "JS Help Desk delivers timely customer support if you have any query then we're here to show you the way."
+msgstr "میز راهنمایی JS پشتیبانی به موقع از مشتری را ارائه می دهد اگر سؤالی دارید، پس ما اینجا هستیم تا راه را به شما نشان دهیم."
 
 msgid "Visitor ticket creation"
 msgstr "ایجاد بلیط بازدید کننده"
@@ -7298,11 +7056,11 @@ msgid "Edit Help Topic"
 msgstr "ویرایش موضوع راهنما"
 
 msgid ""
-"e.g ' I have read and agree to the [link] Terms and Conditions[/link].  ' The "
-"text between [link] and [/link] will be linked to provided url or wordpress page."
+"e.g ' I have read and agree to the [link] Terms and Conditions[/link].  ' The text between [link] and [/link] will be linked to provided "
+"url or wordpress page."
 msgstr ""
-"به عنوان مثال \"من [link] شرایط و ضوابط[/link] را خوانده ام و با آن موافقم. متن "
-"بین [لینک] و [/لینک] به url یا صفحه وردپرس ارائه شده پیوند داده می شود."
+"به عنوان مثال \"من [link] شرایط و ضوابط[/link] را خوانده ام و با آن موافقم. متن بین [لینک] و [/لینک] به url یا صفحه وردپرس ارائه شده "
+"پیوند داده می شود."
 
 msgid "login"
 msgstr "وارد شدن"
@@ -7313,12 +7071,9 @@ msgstr "ستاره ها"
 msgid "Please write appreciated review at WP Extension Directory"
 msgstr "لطفاً نظر ارزشمند را در فهرست برنامه افزودنی WP بنویسید"
 
-msgid ""
-"We'd love to hear from you. It'll only take 2 minutes of your time, and will "
-"really help us spread the word"
+msgid "We'd love to hear from you. It'll only take 2 minutes of your time, and will really help us spread the word"
 msgstr ""
-"ما از اینکه ازت خبر داشته باشیم خوشحال میشویم. این فقط 2 دقیقه از وقت شما را می "
-"گیرد و واقعاً به ما کمک می کند تا این خبر را گسترش دهیم"
+"ما از اینکه ازت خبر داشته باشیم خوشحال میشویم. این فقط 2 دقیقه از وقت شما را می گیرد و واقعاً به ما کمک می کند تا این خبر را گسترش دهیم"
 
 msgid "love"
 msgstr "عشق"
@@ -7508,3 +7263,657 @@ msgstr "احراز هویت IMAP لغو شد"
 
 msgid "Page Not Found !!"
 msgstr "صفحه یافت نشد !!"
+
+msgid "Email Template has been successfully deleted"
+msgstr "الگوی ایمیل با موفقیت حذف شده است"
+
+msgid "Select Submit Type"
+msgstr "نوع ارسال را انتخاب کنید"
+
+msgid "'s Department permission has been changed"
+msgstr "مجوز بخش تغییر یافته است"
+
+msgid "Rule has not been stored"
+msgstr "قانون ذخیره نشده است"
+
+msgid "Rule has not been deleted"
+msgstr "قانون حذف نشده است"
+
+msgid "Rule"
+msgstr "قاعده"
+
+msgid "Select Condition Value"
+msgstr "مقدار شرط را انتخاب کنید"
+
+msgid "The ticket is unlocked by"
+msgstr "بلیط توسط قفل شده است"
+
+msgid " item(s)"
+msgstr "مورد (ها)"
+
+msgid "Active Now"
+msgstr "اکنون فعال است"
+
+msgid "Dashboad"
+msgstr "داشبورد"
+
+msgid "Statuses"
+msgstr "وضعیت وضعیت"
+
+msgid "status"
+msgstr "وضعیت"
+
+msgid "Products"
+msgstr "محصولات"
+
+msgid "product"
+msgstr "محصول"
+
+msgid "Emailcc"
+msgstr "ایمیل"
+
+msgid "JS Help Desk Pages"
+msgstr "صفحات میز راهنما JS"
+
+msgid "JS Help desk control panel"
+msgstr "صفحه کنترل میز راهنما JS"
+
+msgid "Add ticket"
+msgstr "بلیط اضافه کردن"
+
+msgid "My tickets"
+msgstr "بلیط های من"
+
+msgid "Latest downloads"
+msgstr "آخرین بارگیری ها"
+
+msgid "Popular downloads"
+msgstr "بارگیری های محبوب"
+
+msgid "List FAQ`s"
+msgstr "لیست سؤالات متداول"
+
+msgid "Latest FAQ`s"
+msgstr "آخرین سؤالات متداول"
+
+msgid "Popular FAQ`s"
+msgstr "سؤالات متداول محبوب"
+
+msgid "Latest announcements"
+msgstr "آخرین اطلاعیه ها"
+
+msgid "Popular announcements"
+msgstr "اطلاعیه های محبوب"
+
+msgid "home icon"
+msgstr "نماد خانه"
+
+msgid "slug"
+msgstr "لگد زدن"
+
+msgid "Auto Assign"
+msgstr "اختصاص خودکار"
+
+msgid "Shortcodes"
+msgstr "کد کوتاه"
+
+msgid "Ticket Statuses"
+msgstr "وضعیت بلیط"
+
+msgid "Add Status"
+msgstr "اضافه کردن وضعیت"
+
+msgid "Add Ticket Status"
+msgstr "اضافه کردن وضعیت بلیط"
+
+msgid "Add Product"
+msgstr "محصول را اضافه کنید"
+
+msgid "Agent Roles"
+msgstr "نقش"
+
+msgid "Add Agent Role"
+msgstr "نقش عامل را اضافه کنید"
+
+msgid "Emial CC"
+msgstr "ایمیل CC"
+
+msgid "Add Emial CC"
+msgstr "ایمیل CC را اضافه کنید"
+
+msgid "help"
+msgstr "کمک"
+
+msgid "WooCommerce Support"
+msgstr "پشتیبانی WooCommerce"
+
+msgid "Envato"
+msgstr "حرج"
+
+msgid "Prefix has been stored"
+msgstr "پیشوند ذخیره شده است"
+
+msgid "reset"
+msgstr "بازپا"
+
+msgid "Home Slug"
+msgstr "کلوچه خانه"
+
+msgid "Prefix"
+msgstr "پیشوند"
+
+msgid "This prefix will be added to slug incase of conflict"
+msgstr "این پیشوند به درگیری درگیری اضافه می شود"
+
+msgid "edit"
+msgstr "ویرایش کردن"
+
+msgid "Missing user(s) added successfully!"
+msgstr "کاربر (های) گمشده با موفقیت اضافه شد!"
+
+msgid "No missing user found!"
+msgstr "هیچ کاربر گمشده پیدا نشده است!"
+
+msgid "Not Installed"
+msgstr "نصب نشده است"
+
+msgid "Addon Installed Successfully"
+msgstr "افزونه با موفقیت نصب شد"
+
+msgid "Addon installation failed"
+msgstr "نصب افزودنی انجام نشد"
+
+msgid "add missing users"
+msgstr "کاربران گمشده را اضافه کنید"
+
+msgid "user"
+msgstr "کاربر"
+
+msgid "view all tickets history"
+msgstr "مشاهده همه تاریخ بلیط"
+
+msgid "View All Tickets History"
+msgstr "مشاهده همه تاریخ بلیط"
+
+msgid "It allows user to add more than one form based on requirements."
+msgstr "این امکان را به کاربر می دهد تا بیش از یک فرم را بر اساس الزامات اضافه کند."
+
+msgid "When a ticket is created, an appropriate agent is automatically assigned to the ticket and it is moved to the Assigned state."
+msgstr "هنگامی که بلیط ایجاد می شود ، یک عامل مناسب به طور خودکار به بلیط اختصاص می یابد و به حالت اختصاص یافته منتقل می شود."
+
+msgid "WP Vehicle Manager"
+msgstr "مدیر وسیله نقلیه WP"
+
+msgid "Visit site"
+msgstr "از سایت بازدید کنید"
+
+msgid "Install WP Vehicle Manager Plugin"
+msgstr "افزونه WP Vehicle Manager را نصب کنید"
+
+msgid "JS Job Manager"
+msgstr "مدیر کار JS"
+
+msgid "Install JS Job Manager Plugin"
+msgstr "افزونه JS Manager Manager را نصب کنید"
+
+msgid "WP Learn Manager"
+msgstr "WP Learn Manager"
+
+msgid "Install WP Learn Manager Plugin"
+msgstr "افزونه WP Learn Manager را نصب کنید"
+
+msgid "Manually assign ticket to agent"
+msgstr "به طور دستی بلیط را به نماینده اختصاص دهید"
+
+msgid "Translation"
+msgstr "ترجمه"
+
+msgid "When WordPress language change to fr, JS Help Desk language will auto change to fr"
+msgstr "هنگامی که زبان وردپرس به FR تغییر می کند ، JS Help Desk Language به FR تغییر می دهد"
+
+msgid "Status: "
+msgstr "وضعیت:"
+
+msgid "The status has been changed"
+msgstr "وضعیت تغییر کرده است"
+
+msgid "The status has not been changed"
+msgstr "وضعیت تغییر نکرده است"
+
+msgid "Ticket status change"
+msgstr "تغییر وضعیت بلیط"
+
+msgid "The status is changed by"
+msgstr "وضعیت توسط تغییر یافته است"
+
+msgid "Change Status"
+msgstr "وضعیت تغییر"
+
+msgid "Reason For"
+msgstr "دلیل"
+
+msgid "tickets by"
+msgstr "بلیط توسط"
+
+msgid "View Image"
+msgstr "تصویر مشاهده"
+
+msgid "Viewed By"
+msgstr "مشاهده شده توسط"
+
+msgid "None"
+msgstr "هیچ کدام"
+
+msgid "set"
+msgstr "تنظیم کردن"
+
+msgid "Other Tickets"
+msgstr "بلیط های دیگر"
+
+msgid "Type Note for"
+msgstr "نوع یادداشت برای"
+
+msgid "tickets"
+msgstr "بلیط"
+
+msgid "Token"
+msgstr "نشانه"
+
+msgid "Search Ticket"
+msgstr "بلیط جستجو"
+
+msgid "Ticket Creator"
+msgstr "سازنده بلیط"
+
+msgid "Remember Your Ticket Token for Tracking (Save It!)"
+msgstr "نشانه بلیط خود را برای ردیابی به یاد داشته باشید (ذخیره کنید!)"
+
+msgid "You've received a token number to track your support ticket status. This is one-time code, so please save it carefully. "
+msgstr "شما برای ردیابی وضعیت بلیط پشتیبانی خود یک شماره توکن دریافت کرده اید. این کد یک بار است ، بنابراین لطفاً آن را با دقت ذخیره کنید."
+
+msgid "Copy Token"
+msgstr "رمزگذاری"
+
+msgid "Status Title Already Exist"
+msgstr "عنوان وضعیت از قبل وجود دارد"
+
+msgid "Status has been stored"
+msgstr "وضعیت ذخیره شده است"
+
+msgid "Status has not been stored"
+msgstr "وضعیت ذخیره نشده است"
+
+msgid "Status has been deleted"
+msgstr "وضعیت حذف شده است"
+
+msgid "Status has not been deleted"
+msgstr "وضعیت حذف نشده است"
+
+msgid "Text Color"
+msgstr "رنگ متن"
+
+msgid "Background Color"
+msgstr "رنگ پس زمینه"
+
+msgid "Save Status"
+msgstr "ذخیره وضعیت"
+
+msgid "Required Fields are not filled"
+msgstr "زمینه های مورد نیاز پر نمی شوند"
+
+msgid "Note:"
+msgstr "توجه:"
+
+msgid "Features marked with"
+msgstr "ویژگی های مشخص شده با"
+
+msgid "are only available with its own addon."
+msgstr "فقط با افزونه خاص خود در دسترس هستند."
+
+msgid "Product Title Already Exist"
+msgstr "عنوان محصول از قبل وجود دارد"
+
+msgid "Product has been stored"
+msgstr "محصول ذخیره شده است"
+
+msgid "Product has not been stored"
+msgstr "محصول ذخیره نشده است"
+
+msgid "Product has been deleted"
+msgstr "محصول حذف شده است"
+
+msgid "Product has not been deleted"
+msgstr "محصول حذف نشده است"
+
+msgid "Save Product"
+msgstr "ذخیره محصول"
+
+msgid "JS Help Desk Settings"
+msgstr "تنظیمات میز راهنما JS"
+
+msgid "Step 2 of "
+msgstr "مرحله 2 از"
+
+msgid "Step 4 of 5"
+msgstr "مرحله 4 از 5"
+
+msgid "Step 1 of "
+msgstr "مرحله 1 از"
+
+msgid "Download Translation File"
+msgstr "دانلود پرونده ترجمه"
+
+msgid "Want to download translation file? Click on download. It will take sometime."
+msgstr "آیا می خواهید پرونده ترجمه را بارگیری کنید؟ روی بارگیری کلیک کنید مدتی طول خواهد کشید."
+
+msgid "Download & Next"
+msgstr "بارگیری و بعدی"
+
+msgid "Skip this step"
+msgstr "این مرحله را پرش کنید"
+
+msgid "Recaptcha Version 2"
+msgstr "recaptcha نسخه 2"
+
+msgid "Recaptcha Version 3"
+msgstr "نسخه 3 recaptcha"
+
+msgid "WordPress Default Register Page"
+msgstr "صفحه ثبت نام پیش فرض وردپرس"
+
+msgid "4"
+msgstr "4"
+
+msgid "5"
+msgstr "5"
+
+msgid "6"
+msgstr "6"
+
+msgid "Oldest First"
+msgstr "قدیمی ترین اول"
+
+msgid "Newest First"
+msgstr "جدیدترین اول"
+
+msgid "menu"
+msgstr "منو"
+
+msgid "Select Configuration"
+msgstr "پیکربندی را انتخاب کنید"
+
+msgid "Facebook"
+msgstr "فیس بوک"
+
+msgid "Linkedin"
+msgstr "وابسته به لینکدین"
+
+msgid "Show number of the open, closed, answered ticket in my ticket and dashboard"
+msgstr "تعداد بلیط های باز ، بسته و پاسخ داده شده را در بلیط و داشبورد من نشان دهید"
+
+msgid "Redirect user on log in"
+msgstr "کاربر را در ورود به سیستم تغییر مسیر دهید"
+
+msgid "Set register Link Default or Custom"
+msgstr "ثبت نام پیوند را به صورت پیش فرض یا سفارشی تنظیم کنید"
+
+msgid " To enable registrations, WordPress admin > General > Settings > Membership: Anyone can register"
+msgstr "برای فعال کردن ثبت نام ها ، Admin WordPress> General> تنظیمات> عضویت: هر کسی می تواند ثبت نام کند"
+
+msgid "Woocommerce Category"
+msgstr "دسته WooCommerce"
+
+msgid "Select category to display only products of this category on the WooCommerce shop page."
+msgstr "برای نمایش تنها محصولات این گروه در صفحه فروشگاه WooCommerce ، دسته را انتخاب کنید."
+
+msgid "Set ticketid sequential or random .e.g "
+msgstr "تنظیم TicketId متوالی یا تصادفی .e.g"
+
+msgid "Pad Zeros"
+msgstr "صفرا"
+
+msgid "To pad an integer with leading zeros to a specific length"
+msgstr "یک عدد صحیح را با صفرهای پیشرو به طول خاص بکشید"
+
+msgid "Ticket Replies ordering"
+msgstr "سفارش بلیط سفارش"
+
+msgid "Set the default ordering for ticket replies in the detail page."
+msgstr "سفارش پیش فرض پاسخ بلیط را در صفحه جزئیات تنظیم کنید."
+
+msgid "Show Message Read Icon for Admin On Ticket Detail"
+msgstr "نمایش پیام را برای Admin در جزئیات بلیط بخوانید"
+
+msgid "Select whether the message read icon is displayed to the administrator on ticket detail."
+msgstr "انتخاب کنید که آیا نماد خواندن پیام با جزئیات بلیط به مدیر نمایش داده می شود."
+
+msgid "Show Message Read Icon For Agents on Ticket Detail"
+msgstr "نمایش پیام را برای نمایندگان در جزئیات بلیط بخوانید"
+
+msgid "Select whether the message read icon is displayed to agents on ticket detail."
+msgstr "انتخاب کنید که آیا نماد خواندن پیام در جزئیات بلیط به نمایندگان نمایش داده می شود."
+
+msgid "Show Message Read Icon For Users On Ticket Detail"
+msgstr "نمایش پیام را برای کاربران در جزئیات بلیط بخوانید"
+
+msgid "Select whether the message read icon is displayed to users on the ticket detail."
+msgstr "انتخاب کنید که آیا نماد خواندن پیام در جزئیات بلیط به کاربران نمایش داده می شود."
+
+msgid "Department Email"
+msgstr "ایمیل"
+
+msgid "Send email to all departments on ticket create"
+msgstr "ارسال ایمیل به همه بخش ها در بلیط ایجاد"
+
+msgid "Captcha Setting"
+msgstr "تنظیم CAPTCHA"
+
+msgid "Google reCaptcha"
+msgstr "Google recaptcha"
+
+msgid "Google ReCaptcha version"
+msgstr "نسخه Google recaptcha"
+
+msgid "Select the Google ReCaptcha version"
+msgstr "نسخه Google Recaptcha را انتخاب کنید"
+
+msgid "Google recaptcha site key"
+msgstr "کلید سایت Google recaptcha"
+
+msgid "Please enter the google re-captcha site key from"
+msgstr "لطفاً کلید سایت Google Recaptcha را از آن وارد کنید"
+
+msgid "Google recaptcha secret key"
+msgstr "کلید مخفی Google Recaptcha"
+
+msgid "Please enter the google re-captcha secret key from"
+msgstr "لطفاً کلید مخفی Google Recaptcha را از آن وارد کنید"
+
+msgid "Search Reports"
+msgstr "گزارش های جستجو"
+
+msgid "Please fill required fields."
+msgstr "لطفاً زمینه های مورد نیاز را پر کنید."
+
+msgid "There was no record found"
+msgstr "هیچ سابقه ای یافت نشد"
+
+msgid "Select Required"
+msgstr "مورد نیاز را انتخاب کنید"
+
+msgid " Subject"
+msgstr "موضوع"
+
+msgid "Kylee Arroyo"
+msgstr "کایل آرووو"
+
+msgid "Can I upgrade my plan?"
+msgstr "آیا می توانم برنامه خود را ارتقا دهم؟"
+
+msgid "This ticket is marked as overdue "
+msgstr "این بلیط به عنوان تأخیر مشخص شده است"
+
+msgid "pF3YczjML"
+msgstr "pf3yczjml"
+
+msgid "01-11-2023"
+msgstr "01-11-2023"
+
+msgid "Allison Carney"
+msgstr "آلیسون کارنی"
+
+msgid "How Can I get Subscription?"
+msgstr "چگونه می توانم اشتراک دریافت کنم؟"
+
+msgid "Tp3Y7zj01"
+msgstr "tp3y7zj01"
+
+msgid "20-12-2023"
+msgstr "20-12-2023"
+
+msgid "Aleena Adam"
+msgstr "آلنا آدم"
+
+msgid "How Long do i have support access?"
+msgstr "چه مدت دسترسی پشتیبانی دارم؟"
+
+msgid "Ku3Y8zj3L"
+msgstr "ku3y8zj3l"
+
+msgid "11-6-2023"
+msgstr "11-6-2023"
+
+msgid "If the colors have been saved but the user-side colors are still the same, it is advised to clear the cache."
+msgstr "اگر رنگ ها ذخیره شده اند اما رنگ های سمت کاربر هنوز یکسان هستند ، توصیه می شود حافظه نهان را پاک کنید."
+
+msgid "Purple"
+msgstr "ارغوانی"
+
+msgid "Field cannot be mark as published"
+msgstr "حوزه نمی تواند مارک باشد همانطور که منتشر شد"
+
+msgid "Field cannot mark as required"
+msgstr "میدان نمی تواند در صورت لزوم علامت گذاری کند"
+
+msgid "Child fields has not been stored"
+msgstr "زمینه های کودک ذخیره نشده است"
+
+msgid "Not Contain"
+msgstr "حاوی نیست"
+
+msgid "Place Holder"
+msgstr "محل نگهدارنده"
+
+msgid "Admin Search"
+msgstr "جستجوی سرپرست"
+
+msgid "AND"
+msgstr "وت"
+
+msgid "File upload fields and Check box fields cannot be made required."
+msgstr "فیلدهای بارگذاری پرونده و زمینه های کادر انتخابی لازم نیست."
+
+msgid "Default Value"
+msgstr "مقدار پیش فرض"
+
+msgid "To choose a default value, first add values in the area below"
+msgstr "برای انتخاب مقدار پیش فرض ، ابتدا مقادیر موجود در منطقه زیر را اضافه کنید"
+
+msgid "This option is not available in this case"
+msgstr "این گزینه در این مورد در دسترس نیست"
+
+msgid "Select Default Value"
+msgstr "مقدار پیش فرض را انتخاب کنید"
+
+msgid "Read Only"
+msgstr "فقط بخوانید"
+
+msgid "Admin/Agent Only"
+msgstr "فقط مدیر/نماینده"
+
+msgid "Java Script"
+msgstr "جاذب"
+
+msgid "Add More"
+msgstr "اضافه کردن بیشتر"
+
+msgid "Visibility conditions"
+msgstr "شرایط دید"
+
+msgid "Add new"
+msgstr "جدید اضافه کنید"
+
+msgid "visibility condition"
+msgstr "وضعیت دید"
+
+msgid "User already an agent"
+msgstr "کاربر در حال حاضر یک عامل"
+
+msgid "The agent has not been stored"
+msgstr "عامل ذخیره نشده است"
+
+msgid "The agent has not been deleted"
+msgstr "عامل حذف نشده است"
+
+msgid "The agent in use cannot delete"
+msgstr "عامل مورد استفاده نمی تواند حذف شود"
+
+msgid "Select agent"
+msgstr "عامل را انتخاب کنید"
+
+msgid "The ticket marks as overdue"
+msgstr "علامت بلیط به عنوان به تأخیر است"
+
+msgid "Disabled form cannot be set as default"
+msgstr "فرم غیرفعال نمی تواند به صورت پیش فرض تنظیم شود"
+
+msgid "Form has not been stored"
+msgstr "فرم ذخیره نشده است"
+
+msgid "Multiform has not been deleted"
+msgstr "چند فرم حذف نشده است"
+
+msgid "Multiform in use"
+msgstr "چند فرم در استفاده"
+
+msgid " cannot deleted"
+msgstr "حذف نمی شود"
+
+msgid "Closed Date"
+msgstr "تاریخ بسته"
+
+msgid "Closed Time"
+msgstr "وقت بسته"
+
+msgid "Total Tracking Time"
+msgstr "زمان ردیابی کل"
+
+msgid "Sub Category Knowledgebase"
+msgstr "پایه دانش زیر گروه"
+
+msgid "Type:"
+msgstr "نوع:"
+
+msgid "Sub Category Faqs"
+msgstr "سؤالات متداول در گروه"
+
+msgid "Facebook user"
+msgstr "کاربر فیس بوک"
+
+msgid "Linkedin user"
+msgstr "کاربر LinkedIn"
+
+msgid "You are logged in"
+msgstr "شما وارد سیستم شده اید"
+
+msgid "You are logged out"
+msgstr "شما از سیستم خارج شده اید"
+
+msgid "Email Cc has not been stored"
+msgstr "ایمیل CC ذخیره نشده است"
+
+msgid "Email CC has not been deleted"
+msgstr "ایمیل CC حذف نشده است"
+
+msgid "Email CC "
+msgstr "ایمیل CC"

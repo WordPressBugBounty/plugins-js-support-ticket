@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 3.4.1\n"
+"X-Generator: Poedit 3.6\n"
 
 msgid "You are not allowed"
 msgstr "Anda tidak diizinkan"
@@ -668,12 +668,8 @@ msgstr "Mendapatkan bantuan"
 msgid "Service is running, please close the pag"
 msgstr "Layanan sedang berjalan, silakan tutup pag"
 
-msgid ""
-"Admin email address and email piping address cannot be the same, your email "
-"piping will not be work."
-msgstr ""
-"Alamat email admin dan alamat perpipaan email tidak boleh sama, perpipaan "
-"email Anda tidak akan berfungsi."
+msgid "Admin email address and email piping address cannot be the same, your email piping will not be work."
+msgstr "Alamat email admin dan alamat perpipaan email tidak boleh sama, perpipaan email Anda tidak akan berfungsi."
 
 msgid "Your setting is working please this."
 msgstr "Pengaturan Anda berfungsi tolong ini."
@@ -681,12 +677,8 @@ msgstr "Pengaturan Anda berfungsi tolong ini."
 msgid "Connection established but the system cannot read any email"
 msgstr "Koneksi terjalin tetapi sistem tidak dapat membaca email apa pun"
 
-msgid ""
-"IMAP is either not installed or not enabled in your server. Contact to "
-"hosting company"
-msgstr ""
-"IMAP tidak diinstal atau tidak diaktifkan di server Anda. Kontak ke "
-"perusahaan hosting"
+msgid "IMAP is either not installed or not enabled in your server. Contact to hosting company"
+msgstr "IMAP tidak diinstal atau tidak diaktifkan di server Anda. Kontak ke perusahaan hosting"
 
 msgid "The configuration has been stored"
 msgstr "Konfigurasi telah disimpan"
@@ -817,12 +809,8 @@ msgstr "Masuk ke webcron org di area cron klik"
 msgid "Timeout"
 msgstr "Waktu habis"
 
-msgid ""
-"180 secs if the does not completely increase it most sites will work with a "
-"setting of 180 600"
-msgstr ""
-"180 detik jika tidak sepenuhnya meningkatkannya, sebagian besar situs akan "
-"bekerja dengan pengaturan 180 600"
+msgid "180 secs if the does not completely increase it most sites will work with a setting of 180 600"
+msgstr "180 detik jika tidak sepenuhnya meningkatkannya, sebagian besar situs akan bekerja dengan pengaturan 180 600"
 
 msgid "URL you want to execute"
 msgstr "URL yang mau dijalankan"
@@ -842,12 +830,8 @@ msgstr "bahwa daftar berikut opsi lainnya pilih kapan dan bagaimana"
 msgid "Alerts"
 msgstr "Pemberitahuan"
 
-msgid ""
-"If you have already set up alerts methods in webcron org interface we "
-"recommend choosing an alert"
-msgstr ""
-"JIka Anda sudah mengatur metode pemberitahuan di webcron org, harap memilih "
-"pemberitahuan"
+msgid "If you have already set up alerts methods in webcron org interface we recommend choosing an alert"
+msgstr "JIka Anda sudah mengatur metode pemberitahuan di webcron org, harap memilih pemberitahuan"
 
 msgid "Cron scheduling using wget"
 msgstr "Penjadwalan cron dengan wijet"
@@ -1414,8 +1398,7 @@ msgid "Paid Support"
 msgstr "Dukungan Berbayar"
 
 msgid "Check if you want to use this product for paid support"
-msgstr ""
-"Periksa apakah Anda ingin menggunakan produk ini untuk dukungan berbayar"
+msgstr "Periksa apakah Anda ingin menggunakan produk ini untuk dukungan berbayar"
 
 msgid "Paid support type"
 msgstr "Jenis dukungan berbayar"
@@ -1429,12 +1412,8 @@ msgstr "Dukungan Berlangganan"
 msgid "Number of tickets"
 msgstr "Jumlah tiket"
 
-msgid ""
-"Enter allowed number of tickets that customer can post. Enter -1 for "
-"unlimited tickets."
-msgstr ""
-"Masukkan jumlah tiket yang diizinkan yang dapat dikirim oleh pelanggan. "
-"Masukkan -1 untuk tiket tanpa batas."
+msgid "Enter allowed number of tickets that customer can post. Enter -1 for unlimited tickets."
+msgstr "Masukkan jumlah tiket yang diizinkan yang dapat dikirim oleh pelanggan. Masukkan -1 untuk tiket tanpa batas."
 
 msgid "Credential Type"
 msgstr "Jenis Kredensial"
@@ -1856,12 +1835,8 @@ msgstr "Captcha tidak valid"
 msgid "Could not subscribe to the newsletter"
 msgstr "Tidak dapat berlangganan buletin"
 
-msgid ""
-"Please check confirmation email to complete your subscription for the "
-"newsletter"
-msgstr ""
-"Silakan periksa email konfirmasi untuk menyelesaikan berlangganan Anda untuk "
-"buletin"
+msgid "Please check confirmation email to complete your subscription for the newsletter"
+msgstr "Silakan periksa email konfirmasi untuk menyelesaikan berlangganan Anda untuk buletin"
 
 msgid "You have successfully subscribed to the newsletter"
 msgstr "Anda telah berhasil berlangganan buletin"
@@ -1932,12 +1907,8 @@ msgstr "Daftar"
 msgid "User is not allowed to view this Ticket"
 msgstr "Pengguna tidak diizinkan untuk melihat Tiket ini"
 
-msgid ""
-"Registration has been disabled by admin, please contact the system "
-"administrator."
-msgstr ""
-"Pendaftaran telah dinonaktifkan oleh admin, silakan hubungi administrator "
-"sistem."
+msgid "Registration has been disabled by admin, please contact the system administrator."
+msgstr "Pendaftaran telah dinonaktifkan oleh admin, silakan hubungi administrator sistem."
 
 msgid "You have already given the feedback for this ticket."
 msgstr "Anda telah memberikan umpan balik untuk tiket ini."
@@ -2162,13 +2133,11 @@ msgid "Select Page"
 msgstr "Pilih laman"
 
 msgid ""
-"Select JS Help Desk default page, on the action system, will redirect on the "
-"selected page. If not select the default page, email links, and support icon "
-"might not work."
+"Select JS Help Desk default page, on the action system, will redirect on the selected page. If not select the default page, email links, "
+"and support icon might not work."
 msgstr ""
-"Pilih halaman standar JS Help Desk, pada sistem tindakan, akan mengarahkan "
-"ulang pada halaman yang dipilih. Jika tidak memilih halaman default, tautan "
-"email, dan ikon dukungan mungkin tidak berfungsi."
+"Pilih halaman standar JS Help Desk, pada sistem tindakan, akan mengarahkan ulang pada halaman yang dipilih. Jika tidak memilih halaman "
+"default, tautan email, dan ikon dukungan mungkin tidak berfungsi."
 
 msgid "Support Icon"
 msgstr "Ikon layanan"
@@ -2203,12 +2172,8 @@ msgstr "Direktori data"
 msgid "Set the name for your data directory"
 msgstr "Atur nama untuk direktori data Anda"
 
-msgid ""
-"You need to rename the existing data directory in the file system before "
-"changing the data directory name"
-msgstr ""
-"Anda perlu mengganti nama direktori data yang ada di sistem file sebelum "
-"mengubah nama direktori data"
+msgid "You need to rename the existing data directory in the file system before changing the data directory name"
+msgstr "Anda perlu mengganti nama direktori data yang ada di sistem file sebelum mengubah nama direktori data"
 
 msgid "Date Format"
 msgstr "Format tanggal"
@@ -2220,9 +2185,7 @@ msgid "Ticket auto close"
 msgstr "Tiket ditutup otomatis"
 
 msgid "Ticket auto-close if user does not respond within given days"
-msgstr ""
-"Tiket tutup otomatis jika pengguna tidak merespons dalam beberapa hari "
-"tertentu"
+msgstr "Tiket tutup otomatis jika pengguna tidak merespons dalam beberapa hari tertentu"
 
 msgid "No. of attachment"
 msgstr "Jumlah lampiran"
@@ -2276,9 +2239,7 @@ msgid "Show captcha on registration form"
 msgstr "Perlihatkan captcha pada formulir pendaftaran"
 
 msgid "Select whether you want to show captcha on the registration form or not"
-msgstr ""
-"Pilih apakah Anda ingin menampilkan captcha pada formulir pendaftaran atau "
-"tidak"
+msgstr "Pilih apakah Anda ingin menampilkan captcha pada formulir pendaftaran atau tidak"
 
 msgid "Default wp role for new users"
 msgstr "Peran wp standar untuk pengguna baru"
@@ -2380,8 +2341,7 @@ msgid "Allow Users To Reply via Email On Closed Ticket"
 msgstr "Izinkan Pengguna Untuk Membalas melalui Email Pada Tiket Tertutup"
 
 msgid "Select whether users can reply to closed email piping ticket or not"
-msgstr ""
-"Pilih apakah pengguna dapat membalas tiket pipa email tertutup atau tidak"
+msgstr "Pilih apakah pengguna dapat membalas tiket pipa email tertutup atau tidak"
 
 msgid "Visitor can create ticket"
 msgstr "Tamu bisa membuat tiket"
@@ -2398,12 +2358,8 @@ msgstr "Teks ini akan muncul setiap kali pengunjung membuat tiket"
 msgid "Default alert email"
 msgstr "Email baku pemberitahuan"
 
-msgid ""
-"If ticket department email is not selected then this email is used to send "
-"emails"
-msgstr ""
-"JIka email tiket departemen tak dipilih, alamat ini dipakai untuk mengirim "
-"email"
+msgid "If ticket department email is not selected then this email is used to send emails"
+msgstr "JIka email tiket departemen tak dipilih, alamat ini dipakai untuk mengirim email"
 
 msgid "Default admin email"
 msgstr "Email baku admin"
@@ -2421,8 +2377,7 @@ msgid "Mail to admin"
 msgstr "Kirim pesan ke admin"
 
 msgid "Email sends to admin when banned email try to create a ticket"
-msgstr ""
-"Email dikirim ke admin ketika email yang diblokir mencoba membuat tiket"
+msgstr "Email dikirim ke admin ketika email yang diblokir mencoba membuat tiket"
 
 msgid "Ticket Operations Email Setting"
 msgstr "Pengaturan Email Operasi Tiket"
@@ -2523,11 +2478,8 @@ msgstr "Pilih jenis penundaan untuk email umpan balik"
 msgid "Feedback Email Delay"
 msgstr "Umpan Balik Penundaan Email"
 
-msgid ""
-"Set no. of days or hours to send feedback email after a ticket is closed"
-msgstr ""
-"Setel no. hari atau jam untuk mengirim email umpan balik setelah tiket "
-"ditutup"
+msgid "Set no. of days or hours to send feedback email after a ticket is closed"
+msgstr "Setel no. hari atau jam untuk mengirim email umpan balik setelah tiket ditutup"
 
 msgid "Success message after submitting feedback"
 msgstr "Pesan sukses setelah mengirim umpan balik"
@@ -2541,12 +2493,8 @@ msgstr "Switch Otomatis UTF"
 msgid "Firebase Notifications"
 msgstr "Firebase Notification"
 
-msgid ""
-"JS Help Desk Desktop Notifications plugin is not installed. Please install "
-"the plugin to enable desktop notifications"
-msgstr ""
-"Plugin Notifikasi Desktop Help Desk JS tidak diinstal. Silakan instal plugin "
-"untuk mengaktifkan pemberitahuan desktop"
+msgid "JS Help Desk Desktop Notifications plugin is not installed. Please install the plugin to enable desktop notifications"
+msgstr "Plugin Notifikasi Desktop Help Desk JS tidak diinstal. Silakan instal plugin untuk mengaktifkan pemberitahuan desktop"
 
 msgid "Click here to insert Install."
 msgstr "Klik di sini untuk memasukkan Instal."
@@ -2611,12 +2559,8 @@ msgstr "Tidak Ada Logo Firebase Notification"
 msgid "Secret Key"
 msgstr "Kunci rahasia"
 
-msgid ""
-"Private Credentials Encryption Key changing this value will discard all "
-"existing credentials "
-msgstr ""
-"Kunci Enkripsi Kredensial Pribadi yang mengubah nilai ini akan membuang "
-"semua kredensial yang ada"
+msgid "Private Credentials Encryption Key changing this value will discard all existing credentials "
+msgstr "Kunci Enkripsi Kredensial Pribadi yang mengubah nilai ini akan membuang semua kredensial yang ada"
 
 msgid "Second Level Security"
 msgstr "Keamanan Tingkat Kedua"
@@ -2636,12 +2580,8 @@ msgstr "Klik di sini untuk membuat kunci api"
 msgid "License Mandatory"
 msgstr "Lisensi Wajib"
 
-msgid ""
-"Prevent users from submitting a ticket without a valid license for one of "
-"your product"
-msgstr ""
-"Cegah pengguna mengirimkan tiket tanpa lisensi yang valid untuk salah satu "
-"produk Anda"
+msgid "Prevent users from submitting a ticket without a valid license for one of your product"
+msgstr "Cegah pengguna mengirimkan tiket tanpa lisensi yang valid untuk salah satu produk Anda"
 
 msgid "Product ID"
 msgstr "ID Produk"
@@ -2662,8 +2602,7 @@ msgid "Enable double opt-in"
 msgstr "Aktifkan double opt-in"
 
 msgid "You must also enable double opt-in in your MailChimp account"
-msgstr ""
-"Anda juga harus mengaktifkan dua opsi ikut serta dalam akun MailChimp Anda"
+msgstr "Anda juga harus mengaktifkan dua opsi ikut serta dalam akun MailChimp Anda"
 
 msgid "Welcome email"
 msgstr "Selamat datang email"
@@ -2693,8 +2632,7 @@ msgid "Recommended run script daily"
 msgstr "Disarankan menjalankan skrip setiap hari"
 
 msgid "You cannot use this email, it is used in email piping"
-msgstr ""
-"Anda tidak dapat menggunakan email ini, ini digunakan dalam pemipaan email"
+msgstr "Anda tidak dapat menggunakan email ini, ini digunakan dalam pemipaan email"
 
 msgid "The department has been stored"
 msgstr "Departemen telah disimpan"
@@ -3195,9 +3133,7 @@ msgid "Install Now"
 msgstr "Instal sekarang"
 
 msgid "The best support system plugin for WordPress has everything you need."
-msgstr ""
-"Plugin sistem dukungan terbaik untuk WordPress memiliki semua yang Anda "
-"butuhkan."
+msgstr "Plugin sistem dukungan terbaik untuk WordPress memiliki semua yang Anda butuhkan."
 
 msgid "Add-Ons List"
 msgstr "Daftar Pengaya"
@@ -3226,37 +3162,23 @@ msgstr "Tambahkan agen dan tetapkan peran dan izin untuk memberikan bantuan."
 msgid "Ticket Auto Close"
 msgstr "Tiket Otomatis Tutup"
 
-msgid ""
-"Define rules for the ticket to auto-close after a specific interval of time."
-msgstr ""
-"Tetapkan aturan agar tiket ditutup secara otomatis setelah selang waktu "
-"tertentu."
+msgid "Define rules for the ticket to auto-close after a specific interval of time."
+msgstr "Tetapkan aturan agar tiket ditutup secara otomatis setelah selang waktu tertentu."
 
 msgid "Get a survey from customers on ticket closing to improve quality."
-msgstr ""
-"Dapatkan survei dari pelanggan pada penutupan tiket untuk meningkatkan "
-"kualitas."
+msgstr "Dapatkan survei dari pelanggan pada penutupan tiket untuk meningkatkan kualitas."
 
 msgid "Help users to find and select the area with which they need assistance."
-msgstr ""
-"Bantu pengguna untuk menemukan dan memilih area di mana mereka membutuhkan "
-"bantuan."
+msgstr "Bantu pengguna untuk menemukan dan memilih area di mana mereka membutuhkan bantuan."
 
 msgid "Private Note"
 msgstr "Catatan Pribadi"
 
-msgid ""
-"The private note is used as reminders or to give other agents insights into "
-"the ticket issue."
-msgstr ""
-"Catatan pribadi digunakan sebagai pengingat atau untuk memberi agen lainnya "
-"wawasan tentang masalah tiket."
+msgid "The private note is used as reminders or to give other agents insights into the ticket issue."
+msgstr "Catatan pribadi digunakan sebagai pengingat atau untuk memberi agen lainnya wawasan tentang masalah tiket."
 
-msgid ""
-"Stop losing productivity on repetitive queries, build your knowledge base."
-msgstr ""
-"Berhentilah kehilangan produktivitas karena kueri berulang, bangun basis "
-"pengetahuan Anda."
+msgid "Stop losing productivity on repetitive queries, build your knowledge base."
+msgstr "Berhentilah kehilangan produktivitas karena kueri berulang, bangun basis pengetahuan Anda."
 
 msgid "Max Ticket"
 msgstr "Tiket Maks"
@@ -3264,48 +3186,32 @@ msgstr "Tiket Maks"
 msgid "Max Tickets"
 msgstr "Tiket Maks"
 
-msgid ""
-"Enables admin to set N numbers of tickets for users and agents separately."
-msgstr ""
-"Memungkinkan admin untuk mengatur N nomor tiket untuk pengguna dan agen "
-"secara terpisah."
+msgid "Enables admin to set N numbers of tickets for users and agents separately."
+msgstr "Memungkinkan admin untuk mengatur N nomor tiket untuk pengguna dan agen secara terpisah."
 
 msgid "Merge Tickets"
 msgstr "Gabung Tiket"
 
-msgid ""
-"Enables agents to merge two tickets of the same user into one instead of "
-"dealing with the same issue on many tickets."
+msgid "Enables agents to merge two tickets of the same user into one instead of dealing with the same issue on many tickets."
 msgstr ""
-"Memungkinkan agen untuk menggabungkan dua tiket dari pengguna yang sama "
-"menjadi satu alih-alih menangani masalah yang sama pada banyak tiket."
+"Memungkinkan agen untuk menggabungkan dua tiket dari pengguna yang sama menjadi satu alih-alih menangani masalah yang sama pada banyak "
+"tiket."
 
-msgid ""
-"Defines rules or set specific intervals of time to make ticket auto overdue."
-"The ticket can overdue by type or overdue by Cronjob."
+msgid "Defines rules or set specific intervals of time to make ticket auto overdue.The ticket can overdue by type or overdue by Cronjob."
 msgstr ""
-"Menentukan aturan atau mengatur interval waktu tertentu untuk membuat tiket "
-"otomatis lewat jatuh tempo. Tiket dapat jatuh tempo berdasarkan jenis atau "
-"lewat waktu dari Cronjob."
+"Menentukan aturan atau mengatur interval waktu tertentu untuk membuat tiket otomatis lewat jatuh tempo. Tiket dapat jatuh tempo "
+"berdasarkan jenis atau lewat waktu dari Cronjob."
 
-msgid ""
-"SMTP enables you to add custom mail protocol to send and receive emails "
-"within the js help desk."
-msgstr ""
-"SMTP memungkinkan Anda untuk menambahkan protokol surat kustom untuk "
-"mengirim dan menerima email dalam js help desk."
+msgid "SMTP enables you to add custom mail protocol to send and receive emails within the js help desk."
+msgstr "SMTP memungkinkan Anda untuk menambahkan protokol surat kustom untuk mengirim dan menerima email dalam js help desk."
 
-msgid ""
-"Displays complete ticket history along with the ticket status, currently "
-"assigned user and other actions performed on each ticket."
+msgid "Displays complete ticket history along with the ticket status, currently assigned user and other actions performed on each ticket."
 msgstr ""
-"Menampilkan riwayat tiket lengkap bersama dengan status tiket, pengguna yang "
-"saat ini ditugaskan, dan tindakan lain yang dilakukan pada setiap tiket."
+"Menampilkan riwayat tiket lengkap bersama dengan status tiket, pengguna yang saat ini ditugaskan, dan tindakan lain yang dilakukan pada "
+"setiap tiket."
 
 msgid "Pre-populated messages allow support agents to respond quickly."
-msgstr ""
-"Pesan yang sudah diisi sebelumnya memungkinkan agen pendukung untuk "
-"merespons dengan cepat."
+msgstr "Pesan yang sudah diisi sebelumnya memungkinkan agen pendukung untuk merespons dengan cepat."
 
 msgid "Enables users to reply to the tickets via email without login."
 msgstr "Memungkinkan pengguna untuk membalas tiket melalui email tanpa login."
@@ -3313,23 +3219,16 @@ msgstr "Memungkinkan pengguna untuk membalas tiket melalui email tanpa login."
 msgid "Time Tracking"
 msgstr "Pelacakan waktu"
 
-msgid ""
-"Track the time spent on each ticket by each agent and each reply. Report the "
-"admin on how much time is spent on each ticket."
+msgid "Track the time spent on each ticket by each agent and each reply. Report the admin on how much time is spent on each ticket."
 msgstr ""
-"Lacak waktu yang dihabiskan untuk setiap tiket oleh setiap agen dan setiap "
-"balasan. Laporkan admin tentang berapa banyak waktu yang dihabiskan untuk "
-"setiap tiket."
+"Lacak waktu yang dihabiskan untuk setiap tiket oleh setiap agen dan setiap balasan. Laporkan admin tentang berapa banyak waktu yang "
+"dihabiskan untuk setiap tiket."
 
 msgid "User Options"
 msgstr "Opsi Pengguna"
 
-msgid ""
-"User options enable you to add Google Re-captcha or JS Help Desk Re-captcha "
-"for a registration form."
-msgstr ""
-"Opsi pengguna memungkinkan Anda untuk menambahkan Google Re-captcha atau JS "
-"Help Desk Re-captcha untuk formulir pendaftaran."
+msgid "User options enable you to add Google Re-captcha or JS Help Desk Re-captcha for a registration form."
+msgstr "Opsi pengguna memungkinkan Anda untuk menambahkan Google Re-captcha atau JS Help Desk Re-captcha untuk formulir pendaftaran."
 
 msgid "Actions"
 msgstr "Tindakan"
@@ -3337,36 +3236,23 @@ msgstr "Tindakan"
 msgid "Ticket Actions"
 msgstr "Tindakan Tiket"
 
-msgid ""
-"Get multiple action options on each ticket like Print Ticket, Lock Ticket, "
-"Transfer ticket, etc."
-msgstr ""
-"Dapatkan beberapa opsi tindakan pada setiap tiket seperti Cetak Tiket, Kunci "
-"Tiket, Tiket transfer, dll."
+msgid "Get multiple action options on each ticket like Print Ticket, Lock Ticket, Transfer ticket, etc."
+msgstr "Dapatkan beberapa opsi tindakan pada setiap tiket seperti Cetak Tiket, Kunci Tiket, Tiket transfer, dll."
 
 msgid "Make unlimited announcements associated with the support system."
 msgstr "Buat pengumuman tanpa batas yang terkait dengan sistem pendukung."
 
-msgid ""
-"It allows you to block the email of any user to restrict him to create new "
-"tickets."
-msgstr ""
-"Ini memungkinkan Anda untuk memblokir email dari pengguna mana saja untuk "
-"membatasi dia untuk membuat tiket baru."
+msgid "It allows you to block the email of any user to restrict him to create new tickets."
+msgstr "Ini memungkinkan Anda untuk memblokir email dari pengguna mana saja untuk membatasi dia untuk membuat tiket baru."
 
 msgid "Desktop Notification"
 msgstr "Pemberitahuan Desktop"
 
-msgid ""
-"The Desktop notifications will keep you up to date about anything happens on "
-"your support system."
-msgstr ""
-"Pemberitahuan Desktop akan membuat Anda mendapatkan informasi terbaru "
-"tentang apa pun yang terjadi pada sistem dukungan Anda."
+msgid "The Desktop notifications will keep you up to date about anything happens on your support system."
+msgstr "Pemberitahuan Desktop akan membuat Anda mendapatkan informasi terbaru tentang apa pun yang terjadi pada sistem dukungan Anda."
 
 msgid "Save the ticket as a PDF in your system and able to export all data."
-msgstr ""
-"Simpan tiket sebagai PDF di sistem Anda dan dapat mengekspor semua data."
+msgstr "Simpan tiket sebagai PDF di sistem Anda dan dapat mengekspor semua data."
 
 msgid "Create downloads to ensure the user to get downloads from downloads."
 msgstr "Buat unduhan untuk memastikan pengguna mendapat unduhan dari unduhan."
@@ -3374,21 +3260,14 @@ msgstr "Buat unduhan untuk memastikan pengguna mendapat unduhan dari unduhan."
 msgid "Add FAQs to drastically reduce the number of common questions."
 msgstr "Tambahkan FAQ untuk secara drastis mengurangi jumlah pertanyaan umum."
 
-msgid ""
-"Get multiple themes with a beautiful color scheme to make the site beautiful."
-msgstr ""
-"Dapatkan banyak tema dengan skema warna yang indah untuk menjadikan situs "
-"ini indah."
+msgid "Get multiple themes with a beautiful color scheme to make the site beautiful."
+msgstr "Dapatkan banyak tema dengan skema warna yang indah untuk menjadikan situs ini indah."
 
 msgid "Dashboard Widgets"
 msgstr "Widget Dasbor"
 
-msgid ""
-"Get immediate data of your support operations as soon as you log into your "
-"WordPress administration area."
-msgstr ""
-"Dapatkan data langsung dari operasi dukungan Anda segera setelah Anda masuk "
-"ke area administrasi WordPress Anda."
+msgid "Get immediate data of your support operations as soon as you log into your WordPress administration area."
+msgstr "Dapatkan data langsung dari operasi dukungan Anda segera setelah Anda masuk ke area administrasi WordPress Anda."
 
 msgid "Internal Mail"
 msgstr "Surat Internal"
@@ -3399,58 +3278,32 @@ msgstr "Gunakan email internal untuk mengirim email ke satu agen ke agen lain."
 msgid "Front-End Widgets"
 msgstr "Widget Front-End"
 
-msgid ""
-"Widgets in WordPress allow you to add content and features in the widgetized "
-"areas of your theme."
-msgstr ""
-"Widget di WordPress memungkinkan Anda untuk menambahkan konten dan fitur di "
-"area widget tema Anda."
+msgid "Widgets in WordPress allow you to add content and features in the widgetized areas of your theme."
+msgstr "Widget di WordPress memungkinkan Anda untuk menambahkan konten dan fitur di area widget tema Anda."
 
-msgid ""
-"JS Help Desk WooCommerce provides the much-needed bridge between your "
-"WooCommerce store and the JS Help Desk."
-msgstr ""
-"JS Help Desk WooCommerce menyediakan jembatan yang sangat dibutuhkan antara "
-"toko WooCommerce Anda dan JS Help Desk."
+msgid "JS Help Desk WooCommerce provides the much-needed bridge between your WooCommerce store and the JS Help Desk."
+msgstr "JS Help Desk WooCommerce menyediakan jembatan yang sangat dibutuhkan antara toko WooCommerce Anda dan JS Help Desk."
 
-msgid ""
-"Collect your customer's private data, sensitive information from credit card "
-"to health information and store them encrypted."
-msgstr ""
-"Kumpulkan data pribadi pelanggan Anda, informasi sensitif dari kartu kredit "
-"hingga informasi kesehatan dan simpan dienkripsi."
+msgid "Collect your customer's private data, sensitive information from credit card to health information and store them encrypted."
+msgstr "Kumpulkan data pribadi pelanggan Anda, informasi sensitif dari kartu kredit hingga informasi kesehatan dan simpan dienkripsi."
 
-msgid ""
-"Without valid Envato, license clients won't be able to open a new ticket."
-msgstr ""
-"Tanpa Envato yang valid, klien lisensi tidak akan dapat membuka tiket baru."
+msgid "Without valid Envato, license clients won't be able to open a new ticket."
+msgstr "Tanpa Envato yang valid, klien lisensi tidak akan dapat membuka tiket baru."
 
-msgid ""
-"Adds the option to the registration form for prompting new users to "
-"subscribe to your email list."
-msgstr ""
-"Menambahkan opsi ke formulir pendaftaran untuk meminta pengguna baru "
-"berlangganan daftar email Anda."
+msgid "Adds the option to the registration form for prompting new users to subscribe to your email list."
+msgstr "Menambahkan opsi ke formulir pendaftaran untuk meminta pengguna baru berlangganan daftar email Anda."
 
 msgid "paidsupport"
 msgstr "dukungan paids"
 
-msgid ""
-"Paid Support is the easiest way to integrate and manage payments for your "
-"tickets."
-msgstr ""
-"Dukungan Berbayar adalah cara termudah untuk mengintegrasikan dan mengelola "
-"pembayaran tiket Anda."
+msgid "Paid Support is the easiest way to integrate and manage payments for your tickets."
+msgstr "Dukungan Berbayar adalah cara termudah untuk mengintegrasikan dan mengelola pembayaran tiket Anda."
 
 msgid "easy digital downloads"
 msgstr "unduhan digital yang mudah"
 
-msgid ""
-"EDD offers customers to open new tickets just one click from their EDD "
-"account."
-msgstr ""
-"EDD menawarkan pelanggan untuk membuka tiket baru hanya dengan satu klik "
-"dari akun EDD mereka."
+msgid "EDD offers customers to open new tickets just one click from their EDD account."
+msgstr "EDD menawarkan pelanggan untuk membuka tiket baru hanya dengan satu klik dari akun EDD mereka."
 
 msgid "We'd love to hear from You."
 msgstr "Kami ingin sekali mendengar dari Anda."
@@ -3560,12 +3413,8 @@ msgstr "Dapatkan terjemahan"
 msgid "Select Translation"
 msgstr "Pilih terjemahan"
 
-msgid ""
-"When WordPress language change to ro, JS Help Desk language will auto change "
-"to ro"
-msgstr ""
-"Ketika bahasa WordPress berubah menjadi ro, bahasa JS Help Desk akan "
-"otomatis berubah menjadi ro"
+msgid "When WordPress language change to ro, JS Help Desk language will auto change to ro"
+msgstr "Ketika bahasa WordPress berubah menjadi ro, bahasa JS Help Desk akan otomatis berubah menjadi ro"
 
 msgid "c error"
 msgstr "c kesalahan"
@@ -3835,18 +3684,13 @@ msgid "Wordpress Plugin"
 msgstr "Plugin Wordpress"
 
 msgid ""
-"JS Help Desk is a trusted open source ticket system. JS Help Desk is a "
-"simple, easy to use, web-based customer support system. Users can create a "
-"ticket from the front-end. JS Help Desk comes packed with lot features than "
-"most of the expensive(and complex) support ticket system on the market. The "
-"best part is, It completely free."
+"JS Help Desk is a trusted open source ticket system. JS Help Desk is a simple, easy to use, web-based customer support system. Users can "
+"create a ticket from the front-end. JS Help Desk comes packed with lot features than most of the expensive(and complex) support ticket "
+"system on the market. The best part is, It completely free."
 msgstr ""
-"JS Help Desk adalah sistem tiket sumber terbuka tepercaya. JS Help Desk "
-"adalah sistem dukungan pelanggan berbasis web yang sederhana, mudah "
-"digunakan. Pengguna dapat membuat tiket dari front-end. JS Help Desk "
-"dilengkapi dengan banyak fitur daripada sebagian besar sistem tiket dukungan "
-"yang mahal (dan kompleks) di pasar. Bagian yang terbaik adalah, Ini benar-"
-"benar gratis."
+"JS Help Desk adalah sistem tiket sumber terbuka tepercaya. JS Help Desk adalah sistem dukungan pelanggan berbasis web yang sederhana, "
+"mudah digunakan. Pengguna dapat membuat tiket dari front-end. JS Help Desk dilengkapi dengan banyak fitur daripada sebagian besar sistem "
+"tiket dukungan yang mahal (dan kompleks) di pasar. Bagian yang terbaik adalah, Ini benar-benar gratis."
 
 msgid "JS Help Desk Addon Installer"
 msgstr "Pemasang Addon Help Desk JS"
@@ -3878,8 +3722,7 @@ msgstr "Pilih Semua Addons"
 msgid "Add ons installed and activated successfully"
 msgstr "Pengaya berhasil diinstal dan diaktifkan"
 
-msgid ""
-"Add ons for JS Help Desk have been installed and activated successfully. "
+msgid "Add ons for JS Help Desk have been installed and activated successfully. "
 msgstr "Add on untuk JS Help Desk telah diinstal dan diaktifkan dengan sukses."
 
 msgid "Priority Title Already Exist"
@@ -4435,9 +4278,7 @@ msgid "Non-premium support"
 msgstr "Dukungan non-premium"
 
 msgid "Check this box if this ticket should NOT apply against the paid support"
-msgstr ""
-"Centang kotak ini jika tiket ini TIDAK boleh berlaku terhadap dukungan "
-"berbayar"
+msgstr "Centang kotak ini jika tiket ini TIDAK boleh berlaku terhadap dukungan berbayar"
 
 msgid "Remaining"
 msgstr "Tersisa"
@@ -5616,32 +5457,25 @@ msgid "Set no. of days or hours to mark ticket as overdue"
 msgstr "Setel no. hari atau jam untuk menandai tiket telah lewat waktu"
 
 msgid "Select whether you want to show captcha on registration form or not"
-msgstr ""
-"Pilih apakah Anda ingin menunjukkan captcha pada formulir pendaftaran atau "
-"tidak"
+msgstr "Pilih apakah Anda ingin menunjukkan captcha pada formulir pendaftaran atau tidak"
 
 msgid "Select role you want to assign to new users"
 msgstr "Pilih peran yang anda tugaskan ke pengguna baru"
 
 msgid "Select whether users can reply to closed ticket via email or not"
-msgstr ""
-"Pilih apakah pengguna dapat membalas tiket yang ditutup melalui email atau "
-"tidak"
+msgstr "Pilih apakah pengguna dapat membalas tiket yang ditutup melalui email atau tidak"
 
 msgid "This text will appear whenever visitor creates ticket"
 msgstr "Teks ini akan muncul setiap kali pengunjung membuat tiket"
 
 msgid "Set no. of days or hours to send feedback email after ticket is closed"
-msgstr ""
-"Setel no. hari atau jam untuk mengirim email umpan balik setelah tiket "
-"ditutup"
+msgstr "Setel no. hari atau jam untuk mengirim email umpan balik setelah tiket ditutup"
 
 msgid "Feedback Successful message to customer"
 msgstr "Umpan balik Pesan sukses untuk pelanggan"
 
 msgid "You cannot use this email it is used in ticket via email"
-msgstr ""
-"Anda tidak dapat menggunakan email ini digunakan dalam tiket melalui email"
+msgstr "Anda tidak dapat menggunakan email ini digunakan dalam tiket melalui email"
 
 msgid "User of this department will receive email on new ticket"
 msgstr "Pengguna departemen ini akan menerima email tentang tiket baru"
@@ -5920,9 +5754,7 @@ msgid "Access Control Level"
 msgstr "Acces Control Level"
 
 msgid "Access control limit you can limit your staff to do specific task"
-msgstr ""
-"Batas kontrol akses Anda dapat membatasi staf Anda untuk melakukan tugas "
-"tertentu"
+msgstr "Batas kontrol akses Anda dapat membatasi staf Anda untuk melakukan tugas tertentu"
 
 msgid "Staff member create premade message premade available in ticket reply"
 msgstr "Anggota staf membuat pesan premade yang tersedia di balasan tiket"
@@ -5934,8 +5766,7 @@ msgid "Help topic can be add with respect to departments"
 msgstr "Topik bantuan dapat ditambahkan sehubungan dengan departemen"
 
 msgid "You can create and maintain knowledge Base for your ticket system"
-msgstr ""
-"Anda dapat membuat dan memelihara Basis pengetahuan untuk sistem tiket Anda"
+msgstr "Anda dapat membuat dan memelihara Basis pengetahuan untuk sistem tiket Anda"
 
 msgid "You can add downloads for your customers"
 msgstr "Anda dapat menambahkan unduhan untuk pelanggan Anda"
@@ -5950,9 +5781,7 @@ msgid "You can ban and unabn any spam email address"
 msgstr "Anda dapat mencekal dan menghapuskan alamat email spam apa pun"
 
 msgid "If and only if customer not reply certain days ticket marked overdue"
-msgstr ""
-"Jika dan hanya jika pelanggan tidak membalas hari-hari tertentu tiket "
-"ditandai sudah lewat waktu"
+msgstr "Jika dan hanya jika pelanggan tidak membalas hari-hari tertentu tiket ditandai sudah lewat waktu"
 
 msgid "System will read your email and create tickets"
 msgstr "Sistem akan membaca email Anda dan membuat tiket"
@@ -5982,16 +5811,13 @@ msgid "Customer Feedback"
 msgstr "Umpan balik Pelanggan"
 
 msgid "Customer can provide feedback that can be used to improve services"
-msgstr ""
-"Pelanggan dapat memberikan umpan balik yang dapat digunakan untuk "
-"meningkatkan layanan"
+msgstr "Pelanggan dapat memberikan umpan balik yang dapat digunakan untuk meningkatkan layanan"
 
 msgid "RTL Supported"
 msgstr "Mendukung RTL"
 
 msgid "JS Support Ticket auto adjusts to RTL or LTR without any problem."
-msgstr ""
-"Penyesuaian otomatis JS Support Ticket ke RTL atau LTR tanpa ada permasalahan"
+msgstr "Penyesuaian otomatis JS Support Ticket ke RTL atau LTR tanpa ada permasalahan"
 
 msgid "Staff Time Tracking"
 msgstr "Pelacakan Waktu Staf"
@@ -6003,9 +5829,7 @@ msgid "Visitor can also open ticket in you support system"
 msgstr "Pengunjung juga bisa membuka tiket pada support system anda"
 
 msgid "You can now lock or unlock any ticket for certain time"
-msgstr ""
-"Anda sekarang dapat mengunci atau membuka kunci tiket apa pun untuk waktu "
-"tertentu"
+msgstr "Anda sekarang dapat mengunci atau membuka kunci tiket apa pun untuk waktu tertentu"
 
 msgid "Pro version only"
 msgstr "Versi Pro saja"
@@ -6490,12 +6314,9 @@ msgstr "Memperbarui sekarang"
 msgid "Add-On’s For Help Desk"
 msgstr "Add-On Untuk Help Desk"
 
-msgid ""
-"Get trusted WordPress add on’s. Guaranteed to work fast, safe to use, "
-"beautifully coded, packed with features and easy to use."
+msgid "Get trusted WordPress add on’s. Guaranteed to work fast, safe to use, beautifully coded, packed with features and easy to use."
 msgstr ""
-"Dapatkan add-on WordPress tepercaya. Dijamin bekerja cepat, aman digunakan, "
-"kodenya indah, dikemas dengan fitur dan mudah digunakan."
+"Dapatkan add-on WordPress tepercaya. Dijamin bekerja cepat, aman digunakan, kodenya indah, dikemas dengan fitur dan mudah digunakan."
 
 msgid "Save big with an exclusive membership plan today!"
 msgstr "Hemat banyak dengan paket keanggotaan eksklusif hari ini!"
@@ -6503,151 +6324,90 @@ msgstr "Hemat banyak dengan paket keanggotaan eksklusif hari ini!"
 msgid "show bundle pack"
 msgstr "tampilkan paket bundel"
 
-msgid ""
-"Add agents and assign roles and permissions to provide assistance and "
-"support to customer support tickets."
-msgstr ""
-"Tambahkan agen dan tetapkan peran dan izin untuk memberikan bantuan dan "
-"dukungan pada tiket dukungan pelanggan."
+msgid "Add agents and assign roles and permissions to provide assistance and support to customer support tickets."
+msgstr "Tambahkan agen dan tetapkan peran dan izin untuk memberikan bantuan dan dukungan pada tiket dukungan pelanggan."
 
-msgid ""
-"Define rules for ticket to auto close. Ticket will be auto close after "
-"specific interval of time which can be set by admin."
+msgid "Define rules for ticket to auto close. Ticket will be auto close after specific interval of time which can be set by admin."
 msgstr ""
-"Tetapkan aturan untuk tiket untuk ditutup otomatis. Tiket akan ditutup "
-"secara otomatis setelah interval waktu tertentu yang dapat diatur oleh admin."
+"Tetapkan aturan untuk tiket untuk ditutup otomatis. Tiket akan ditutup secara otomatis setelah interval waktu tertentu yang dapat diatur "
+"oleh admin."
 
-msgid ""
-"Get the survey from your customers on ticket closing to improve your quality "
-"of services and assistance."
-msgstr ""
-"Dapatkan survei dari pelanggan Anda tentang penutupan tiket untuk "
-"meningkatkan kualitas layanan dan bantuan Anda."
+msgid "Get the survey from your customers on ticket closing to improve your quality of services and assistance."
+msgstr "Dapatkan survei dari pelanggan Anda tentang penutupan tiket untuk meningkatkan kualitas layanan dan bantuan Anda."
 
 msgid "Helptopic"
 msgstr "topik bantuan"
 
-msgid ""
-"Help topics help users to find and select the area with which they need "
-"assistance."
-msgstr ""
-"Topik bantuan membantu pengguna menemukan dan memilih area bantuan yang "
-"mereka perlukan."
+msgid "Help topics help users to find and select the area with which they need assistance."
+msgstr "Topik bantuan membantu pengguna menemukan dan memilih area bantuan yang mereka perlukan."
 
-msgid ""
-"The private note is used as reminders or to give other agents insights into "
-"the ticket issue. User Won't see the private notes."
+msgid "The private note is used as reminders or to give other agents insights into the ticket issue. User Won't see the private notes."
 msgstr ""
-"Catatan pribadi digunakan sebagai pengingat atau untuk memberikan wawasan "
-"kepada agen lain tentang masalah tiket. Pengguna tidak akan melihat catatan "
-"pribadi."
+"Catatan pribadi digunakan sebagai pengingat atau untuk memberikan wawasan kepada agen lain tentang masalah tiket. Pengguna tidak akan "
+"melihat catatan pribadi."
 
-msgid ""
-"Stop losing productivity on repetitive queries,Build your knowledge base, "
-"group solutions by topics to facilitate users."
+msgid "Stop losing productivity on repetitive queries,Build your knowledge base, group solutions by topics to facilitate users."
 msgstr ""
-"Berhenti kehilangan produktivitas karena pertanyaan berulang, Bangun basis "
-"pengetahuan Anda, kelompokkan solusi berdasarkan topik untuk memfasilitasi "
-"pengguna."
+"Berhenti kehilangan produktivitas karena pertanyaan berulang, Bangun basis pengetahuan Anda, kelompokkan solusi berdasarkan topik untuk "
+"memfasilitasi pengguna."
 
-msgid ""
-"Enables admin to set N numbers of tickets for users to create and set N "
-"numbers of Ticket to open for agents separately."
+msgid "Enables admin to set N numbers of tickets for users to create and set N numbers of Ticket to open for agents separately."
 msgstr ""
-"Memungkinkan admin untuk menetapkan N jumlah tiket bagi pengguna untuk "
-"membuat dan menetapkan N jumlah Tiket untuk dibuka bagi agen secara terpisah."
+"Memungkinkan admin untuk menetapkan N jumlah tiket bagi pengguna untuk membuat dan menetapkan N jumlah Tiket untuk dibuka bagi agen "
+"secara terpisah."
 
 msgid "Multi Language Email Templates"
 msgstr "Templat Email Multi Bahasa"
 
-msgid ""
-"It allows to create language-based email templates for all JS Help Desk "
-"email templates."
-msgstr ""
-"Ini memungkinkan untuk membuat templat email berbasis bahasa untuk semua "
-"templat email JS Help Desk."
+msgid "It allows to create language-based email templates for all JS Help Desk email templates."
+msgstr "Ini memungkinkan untuk membuat templat email berbasis bahasa untuk semua templat email JS Help Desk."
 
-msgid ""
-"Canned Responses are pre-populated messages that allows support agents to "
-"respond quickly to customer issues."
+msgid "Canned Responses are pre-populated messages that allows support agents to respond quickly to customer issues."
 msgstr ""
-"Tanggapan Terekam adalah pesan yang sudah diisi sebelumnya yang memungkinkan "
-"agen dukungan merespons masalah pelanggan dengan cepat."
+"Tanggapan Terekam adalah pesan yang sudah diisi sebelumnya yang memungkinkan agen dukungan merespons masalah pelanggan dengan cepat."
 
-msgid ""
-"Enables users to reply to the tickets via email without the need to login to "
-"the support system first."
-msgstr ""
-"Memungkinkan pengguna membalas tiket melalui email tanpa perlu login ke "
-"sistem pendukung terlebih dahulu."
+msgid "Enables users to reply to the tickets via email without the need to login to the support system first."
+msgstr "Memungkinkan pengguna membalas tiket melalui email tanpa perlu login ke sistem pendukung terlebih dahulu."
 
-msgid ""
-"Make unlimited announcements associated with support system to get customer "
-"interaction."
-msgstr ""
-"Buat pengumuman tanpa batas terkait dengan sistem pendukung untuk "
-"mendapatkan interaksi pelanggan."
+msgid "Make unlimited announcements associated with support system to get customer interaction."
+msgstr "Buat pengumuman tanpa batas terkait dengan sistem pendukung untuk mendapatkan interaksi pelanggan."
 
-msgid ""
-"Ban Email allows you to block email of any user to restrict him to create "
-"new tickets."
-msgstr ""
-"Larangan Email memungkinkan Anda memblokir email pengguna mana pun untuk "
-"membatasi dia membuat tiket baru."
+msgid "Ban Email allows you to block email of any user to restrict him to create new tickets."
+msgstr "Larangan Email memungkinkan Anda memblokir email pengguna mana pun untuk membatasi dia membuat tiket baru."
 
 msgid "Descktop Notifications"
 msgstr "Pemberitahuan Desktop"
 
-msgid ""
-"Save the ticket as a PDF in your system or the admin will also be able to "
-"export all the data inside of Ticket."
-msgstr ""
-"Simpan tiket sebagai PDF di sistem Anda atau admin juga akan dapat "
-"mengekspor semua data di dalam Tiket."
+msgid "Save the ticket as a PDF in your system or the admin will also be able to export all the data inside of Ticket."
+msgstr "Simpan tiket sebagai PDF di sistem Anda atau admin juga akan dapat mengekspor semua data di dalam Tiket."
 
-msgid ""
-"Tired of getting tickets about the same problems? Add FAQs to drastically "
-"reduce the number of common questions from users."
+msgid "Tired of getting tickets about the same problems? Add FAQs to drastically reduce the number of common questions from users."
 msgstr ""
-"Bosan mendapatkan tiket tentang masalah yang sama? Tambahkan FAQ untuk "
-"mengurangi secara drastis jumlah pertanyaan umum dari pengguna."
+"Bosan mendapatkan tiket tentang masalah yang sama? Tambahkan FAQ untuk mengurangi secara drastis jumlah pertanyaan umum dari pengguna."
 
 msgid "Admin Widgets"
 msgstr "Widget Admin"
 
-msgid ""
-"Use internal email to send emails to one agent to another agent with in "
-"support ticket."
-msgstr ""
-"Gunakan email internal untuk mengirim email ke satu agen ke agen lain dengan "
-"tiket dukungan."
+msgid "Use internal email to send emails to one agent to another agent with in support ticket."
+msgstr "Gunakan email internal untuk mengirim email ke satu agen ke agen lain dengan tiket dukungan."
 
 msgid "Front-End Widget"
 msgstr "Widget Ujung Depan"
 
-msgid ""
-"Paid Support is the easiest way to integrate and manage payments for your "
-"support tickets."
-msgstr ""
-"Dukungan Berbayar adalah cara termudah untuk mengintegrasikan dan mengelola "
-"pembayaran untuk tiket dukungan Anda."
+msgid "Paid Support is the easiest way to integrate and manage payments for your support tickets."
+msgstr "Dukungan Berbayar adalah cara termudah untuk mengintegrasikan dan mengelola pembayaran untuk tiket dukungan Anda."
 
 msgid "Mail Chimp"
 msgstr "simpanan surat"
 
-msgid ""
-"The Mail Chimp add-on adds a new checkbox to the registration form for "
-"prompting new users to subscribe your email-list."
+msgid "The Mail Chimp add-on adds a new checkbox to the registration form for prompting new users to subscribe your email-list."
 msgstr ""
-"Add-on Mail Chimp menambahkan kotak centang baru ke formulir pendaftaran "
-"untuk meminta pengguna baru berlangganan daftar email Anda."
+"Add-on Mail Chimp menambahkan kotak centang baru ke formulir pendaftaran untuk meminta pengguna baru berlangganan daftar email Anda."
 
-msgid ""
-"EDD offers customers to open new tickets just one click from their EDD "
-"account with optionally validating the license keys."
+msgid "EDD offers customers to open new tickets just one click from their EDD account with optionally validating the license keys."
 msgstr ""
-"EDD menawarkan pelanggan untuk membuka tiket baru hanya dengan satu klik "
-"dari akun EDD mereka dengan memvalidasi kunci lisensi secara opsional."
+"EDD menawarkan pelanggan untuk membuka tiket baru hanya dengan satu klik dari akun EDD mereka dengan memvalidasi kunci lisensi secara "
+"opsional."
 
 msgid "email cc"
 msgstr "email c"
@@ -6656,42 +6416,33 @@ msgid "Email Cc"
 msgstr "Email CC"
 
 msgid ""
-"CC(Carbon Copy) - the people who should know about the information which is "
-"being shared and the people included are able to see who is there in the "
-"list."
+"CC(Carbon Copy) - the people who should know about the information which is being shared and the people included are able to see who is "
+"there in the list."
 msgstr ""
-"CC (Carbon Copy) - orang-orang yang seharusnya mengetahui informasi yang "
-"dibagikan dan orang-orang yang disertakan dapat melihat siapa saja yang ada "
-"dalam daftar."
+"CC (Carbon Copy) - orang-orang yang seharusnya mengetahui informasi yang dibagikan dan orang-orang yang disertakan dapat melihat siapa "
+"saja yang ada dalam daftar."
 
 msgid "multiform"
 msgstr "beraneka ragam"
 
 msgid "Multiform allows user to add more than one form based on requirements."
-msgstr ""
-"Multiform memungkinkan pengguna untuk menambahkan lebih dari satu formulir "
-"berdasarkan kebutuhan."
+msgstr "Multiform memungkinkan pengguna untuk menambahkan lebih dari satu formulir berdasarkan kebutuhan."
 
 msgid "agent auto assign"
 msgstr "penetapan otomatis agen"
 
 msgid ""
-"When auto assignment is enabled and a ticket is created, an appropriate "
-"agent is automatically assigned to the ticket and it is moved to the "
-"Assigned state."
+"When auto assignment is enabled and a ticket is created, an appropriate agent is automatically assigned to the ticket and it is moved to "
+"the Assigned state."
 msgstr ""
-"Ketika penetapan otomatis diaktifkan dan tiket dibuat, agen yang sesuai "
-"secara otomatis ditetapkan ke tiket dan dipindahkan ke status Ditugaskan."
+"Ketika penetapan otomatis diaktifkan dan tiket dibuat, agen yang sesuai secara otomatis ditetapkan ke tiket dan dipindahkan ke status "
+"Ditugaskan."
 
 msgid "Social Login"
 msgstr "Masuk Sosial"
 
-msgid ""
-"Users can login from their social media accounts. They can create a new "
-"account or use social media accounts."
-msgstr ""
-"Pengguna dapat login dari akun media sosial mereka. Mereka bisa membuat akun "
-"baru atau menggunakan akun media sosial."
+msgid "Users can login from their social media accounts. They can create a new account or use social media accounts."
+msgstr "Pengguna dapat login dari akun media sosial mereka. Mereka bisa membuat akun baru atau menggunakan akun media sosial."
 
 msgid "JS Help Desk Add-Ons Bundle Pack"
 msgstr "Paket Bundel Add-On Meja Bantuan JS"
@@ -6718,11 +6469,8 @@ msgid "All Future Addons"
 msgstr "Semua Add-on Masa Depan"
 
 msgid ""
-"Hey there! We have recently launched a fresh update for the add-ons. Don't "
-"forget to update the add-ons to enjoy the greatest features!"
-msgstr ""
-"Hai! Kami baru-baru ini meluncurkan pembaruan baru untuk add-on. Jangan lupa "
-"perbarui add-on untuk menikmati fitur terhebat!"
+"Hey there! We have recently launched a fresh update for the add-ons. Don't forget to update the add-ons to enjoy the greatest features!"
+msgstr "Hai! Kami baru-baru ini meluncurkan pembaruan baru untuk add-on. Jangan lupa perbarui add-on untuk menikmati fitur terhebat!"
 
 msgid "View Addone Status"
 msgstr "Lihat Status Tambahan"
@@ -6922,62 +6670,38 @@ msgstr "Daftar Tiket"
 msgid "Visitor Ticket Setting"
 msgstr "Pengaturan Tiket Pengunjung"
 
-msgid ""
-"By enabling this option, a user can know to whom the ticket has been "
-"assigned."
-msgstr ""
-"Dengan mengaktifkan opsi ini, pengguna dapat mengetahui kepada siapa tiket "
-"telah diberikan."
+msgid "By enabling this option, a user can know to whom the ticket has been assigned."
+msgstr "Dengan mengaktifkan opsi ini, pengguna dapat mengetahui kepada siapa tiket telah diberikan."
 
 msgid "Assigned info. on admin tickets"
 msgstr "Informasi yang ditugaskan. pada tiket admin"
 
-msgid ""
-"By enabling this option, an agent can know to whom the ticket has been "
-"assigned."
-msgstr ""
-"Dengan mengaktifkan opsi ini, agen dapat mengetahui kepada siapa tiket telah "
-"diberikan."
+msgid "By enabling this option, an agent can know to whom the ticket has been assigned."
+msgstr "Dengan mengaktifkan opsi ini, agen dapat mengetahui kepada siapa tiket telah diberikan."
 
 msgid "Assigned info. on user tickets"
 msgstr "Informasi yang ditugaskan. pada tiket pengguna"
 
-msgid ""
-"By enabling this option, an admin can know to whom the ticket has been "
-"assigned."
-msgstr ""
-"Dengan mengaktifkan opsi ini, admin dapat mengetahui kepada siapa tiket "
-"tersebut telah ditugaskan."
+msgid "By enabling this option, an admin can know to whom the ticket has been assigned."
+msgstr "Dengan mengaktifkan opsi ini, admin dapat mengetahui kepada siapa tiket tersebut telah ditugaskan."
 
 msgid "Assigned info. on agent tickets"
 msgstr "Informasi yang ditugaskan. pada tiket agen"
 
-msgid ""
-"By enabling this option, a user can know who closed the ticket and when that "
-"ticket closed."
-msgstr ""
-"Dengan mengaktifkan opsi ini, pengguna dapat mengetahui siapa yang menutup "
-"tiket dan kapan tiket tersebut ditutup."
+msgid "By enabling this option, a user can know who closed the ticket and when that ticket closed."
+msgstr "Dengan mengaktifkan opsi ini, pengguna dapat mengetahui siapa yang menutup tiket dan kapan tiket tersebut ditutup."
 
 msgid "Closed info. on admin closed tickets"
 msgstr "Informasi tertutup. pada admin tiket tertutup"
 
-msgid ""
-"By enabling this option, an agent can know who closed the ticket and when "
-"that ticket closed."
-msgstr ""
-"Dengan mengaktifkan opsi ini, agen dapat mengetahui siapa yang menutup tiket "
-"dan kapan tiket tersebut ditutup."
+msgid "By enabling this option, an agent can know who closed the ticket and when that ticket closed."
+msgstr "Dengan mengaktifkan opsi ini, agen dapat mengetahui siapa yang menutup tiket dan kapan tiket tersebut ditutup."
 
 msgid "Closed info. on agent closed tickets"
 msgstr "Informasi tertutup. pada tiket tertutup agen"
 
-msgid ""
-"By enabling this option, an admin can know who closed the ticket and when "
-"that ticket closed."
-msgstr ""
-"Dengan mengaktifkan opsi ini, admin dapat mengetahui siapa yang menutup "
-"tiket dan kapan tiket tersebut ditutup."
+msgid "By enabling this option, an admin can know who closed the ticket and when that ticket closed."
+msgstr "Dengan mengaktifkan opsi ini, admin dapat mengetahui siapa yang menutup tiket dan kapan tiket tersebut ditutup."
 
 msgid "Set default sorting for ticket listing"
 msgstr "Tetapkan penyortiran default untuk daftar tiket"
@@ -6997,32 +6721,22 @@ msgstr "Pilih apakah pengguna dapat melihat tombol hapus tiket"
 msgid "Show ticket delete button"
 msgstr "Tampilkan tombol hapus tiket"
 
-msgid ""
-"Select whether users can see the name of administrator or staff member on "
-"ticket reply"
-msgstr ""
-"Pilih apakah pengguna dapat melihat nama administrator atau anggota staf "
-"pada balasan tiket"
+msgid "Select whether users can see the name of administrator or staff member on ticket reply"
+msgstr "Pilih apakah pengguna dapat melihat nama administrator atau anggota staf pada balasan tiket"
 
 msgid "Show Anonymous Name On Ticket Reply"
 msgstr "Tampilkan Nama Anonim Pada Balasan Tiket"
 
-msgid ""
-"Select whether users can see the email of administrator or agent on ticket "
-"reply"
-msgstr ""
-"Pilih apakah pengguna dapat melihat email administrator atau agen pada "
-"balasan tiket"
+msgid "Select whether users can see the email of administrator or agent on ticket reply"
+msgstr "Pilih apakah pengguna dapat melihat email administrator atau agen pada balasan tiket"
 
 msgid "Show Admin OR Agent Email On Ticket Reply"
 msgstr "Tunjukkan Email Admin ATAU Agen Pada Balasan Tiket"
 
-msgid ""
-"Show or hide the multiform popup when creating a new ticket. if you hide "
-"them, the system will open the default form."
+msgid "Show or hide the multiform popup when creating a new ticket. if you hide them, the system will open the default form."
 msgstr ""
-"Tampilkan atau sembunyikan popup beraneka ragam saat membuat tiket baru. "
-"jika Anda menyembunyikannya, sistem akan membuka formulir default."
+"Tampilkan atau sembunyikan popup beraneka ragam saat membuat tiket baru. jika Anda menyembunyikannya, sistem akan membuka formulir "
+"default."
 
 msgid "Multiforms Popup For New Tickets"
 msgstr "Berbagai Bentuk Popup Untuk Tiket Baru"
@@ -7072,12 +6786,8 @@ msgstr "Kami di sini untuk membantu Anda"
 msgid "Help icon"
 msgstr "Ikon bantuan"
 
-msgid ""
-"JS Help Desk is a professional, simple, easy to use and complete customer "
-"support system."
-msgstr ""
-"JS Help Desk adalah sistem dukungan pelanggan yang profesional, sederhana, "
-"mudah digunakan dan lengkap."
+msgid "JS Help Desk is a professional, simple, easy to use and complete customer support system."
+msgstr "JS Help Desk adalah sistem dukungan pelanggan yang profesional, sederhana, mudah digunakan dan lengkap."
 
 msgid "View all videos"
 msgstr "Lihat semua video"
@@ -7094,12 +6804,8 @@ msgstr "Ikon Meja Bantuan"
 msgid "JS Help Desk Support"
 msgstr "Dukungan Meja Bantuan JS"
 
-msgid ""
-"JS Help Desk delivers timely customer support if you have any query then "
-"we're here to show you the way."
-msgstr ""
-"JS Help Desk memberikan dukungan pelanggan tepat waktu. Jika Anda memiliki "
-"pertanyaan, kami siap menunjukkan caranya."
+msgid "JS Help Desk delivers timely customer support if you have any query then we're here to show you the way."
+msgstr "JS Help Desk memberikan dukungan pelanggan tepat waktu. Jika Anda memiliki pertanyaan, kami siap menunjukkan caranya."
 
 msgid "Visitor ticket creation"
 msgstr "Pembuatan tiket pengunjung"
@@ -7363,13 +7069,11 @@ msgid "Edit Help Topic"
 msgstr "Edit Topik Bantuan"
 
 msgid ""
-"e.g ' I have read and agree to the [link] Terms and Conditions[/link].  ' "
-"The text between [link] and [/link] will be linked to provided url or "
-"wordpress page."
+"e.g ' I have read and agree to the [link] Terms and Conditions[/link].  ' The text between [link] and [/link] will be linked to provided "
+"url or wordpress page."
 msgstr ""
-"misal 'Saya telah membaca dan menyetujui [link] Syarat dan Ketentuan[/link]. "
-"' Teks antara [link] dan [/link] akan ditautkan ke url atau halaman "
-"wordpress yang disediakan."
+"misal 'Saya telah membaca dan menyetujui [link] Syarat dan Ketentuan[/link]. ' Teks antara [link] dan [/link] akan ditautkan ke url atau "
+"halaman wordpress yang disediakan."
 
 msgid "login"
 msgstr "Gabung"
@@ -7380,12 +7084,10 @@ msgstr "bintang"
 msgid "Please write appreciated review at WP Extension Directory"
 msgstr "Silakan tulis ulasan yang dihargai di Direktori Ekstensi WP"
 
-msgid ""
-"We'd love to hear from you. It'll only take 2 minutes of your time, and will "
-"really help us spread the word"
+msgid "We'd love to hear from you. It'll only take 2 minutes of your time, and will really help us spread the word"
 msgstr ""
-"Kami ingin mendengar pendapat Anda. Ini hanya akan memakan waktu 2 menit "
-"dari waktu Anda, dan akan sangat membantu kami menyebarkan berita"
+"Kami ingin mendengar pendapat Anda. Ini hanya akan memakan waktu 2 menit dari waktu Anda, dan akan sangat membantu kami menyebarkan "
+"berita"
 
 msgid "love"
 msgstr "Cinta"
@@ -7575,3 +7277,657 @@ msgstr "Otentikasi IMAP dibatalkan"
 
 msgid "Page Not Found !!"
 msgstr "Halaman tidak ditemukan !!"
+
+msgid "Email Template has been successfully deleted"
+msgstr "Template email telah berhasil dihapus"
+
+msgid "Select Submit Type"
+msgstr "Pilih Kirim Jenis"
+
+msgid "'s Department permission has been changed"
+msgstr "Izin departemen telah diubah"
+
+msgid "Rule has not been stored"
+msgstr "Aturan belum disimpan"
+
+msgid "Rule has not been deleted"
+msgstr "Aturan belum dihapus"
+
+msgid "Rule"
+msgstr "Aturan"
+
+msgid "Select Condition Value"
+msgstr "Pilih nilai kondisi"
+
+msgid "The ticket is unlocked by"
+msgstr "Tiket dibuka oleh"
+
+msgid " item(s)"
+msgstr "item"
+
+msgid "Active Now"
+msgstr "Aktif sekarang"
+
+msgid "Dashboad"
+msgstr "Dasbor"
+
+msgid "Statuses"
+msgstr "Status"
+
+msgid "status"
+msgstr "status"
+
+msgid "Products"
+msgstr "Produk"
+
+msgid "product"
+msgstr "produk"
+
+msgid "Emailcc"
+msgstr "Emailcc"
+
+msgid "JS Help Desk Pages"
+msgstr "Js membantu halaman meja"
+
+msgid "JS Help desk control panel"
+msgstr "JS Help Desk Control Panel"
+
+msgid "Add ticket"
+msgstr "Tambahkan tiket"
+
+msgid "My tickets"
+msgstr "Tiket saya"
+
+msgid "Latest downloads"
+msgstr "Unduhan terbaru"
+
+msgid "Popular downloads"
+msgstr "Unduhan populer"
+
+msgid "List FAQ`s"
+msgstr "Daftar FAQ"
+
+msgid "Latest FAQ`s"
+msgstr "FAQ Terbaru"
+
+msgid "Popular FAQ`s"
+msgstr "FAQ populer"
+
+msgid "Latest announcements"
+msgstr "Pengumuman terbaru"
+
+msgid "Popular announcements"
+msgstr "Pengumuman populer"
+
+msgid "home icon"
+msgstr "Ikon Rumah"
+
+msgid "slug"
+msgstr "siput"
+
+msgid "Auto Assign"
+msgstr "Penugasan otomatis"
+
+msgid "Shortcodes"
+msgstr "Kode pintas"
+
+msgid "Ticket Statuses"
+msgstr "Status tiket"
+
+msgid "Add Status"
+msgstr "Tambahkan status"
+
+msgid "Add Ticket Status"
+msgstr "Tambahkan status tiket"
+
+msgid "Add Product"
+msgstr "Tambahkan produk"
+
+msgid "Agent Roles"
+msgstr "Peran Agen"
+
+msgid "Add Agent Role"
+msgstr "Tambahkan peran agen"
+
+msgid "Emial CC"
+msgstr "Email CC"
+
+msgid "Add Emial CC"
+msgstr "Tambahkan Email CC"
+
+msgid "help"
+msgstr "membantu"
+
+msgid "WooCommerce Support"
+msgstr "Dukungan WooCommerce"
+
+msgid "Envato"
+msgstr "Envato"
+
+msgid "Prefix has been stored"
+msgstr "Awalan telah disimpan"
+
+msgid "reset"
+msgstr "mengatur ulang"
+
+msgid "Home Slug"
+msgstr "Rumah Siput"
+
+msgid "Prefix"
+msgstr "Awalan"
+
+msgid "This prefix will be added to slug incase of conflict"
+msgstr "Awalan ini akan ditambahkan ke Slug Inmase of Conflict"
+
+msgid "edit"
+msgstr "edit"
+
+msgid "Missing user(s) added successfully!"
+msgstr "Pengguna yang hilang ditambahkan dengan sukses!"
+
+msgid "No missing user found!"
+msgstr "Tidak ada pengguna yang hilang yang ditemukan!"
+
+msgid "Not Installed"
+msgstr "Tidak terpasang"
+
+msgid "Addon Installed Successfully"
+msgstr "Addon berhasil diinstal"
+
+msgid "Addon installation failed"
+msgstr "Instalasi Addon gagal"
+
+msgid "add missing users"
+msgstr "Tambahkan pengguna yang hilang"
+
+msgid "user"
+msgstr "pengguna"
+
+msgid "view all tickets history"
+msgstr "Lihat semua Sejarah Tiket"
+
+msgid "View All Tickets History"
+msgstr "Lihat semua Sejarah Tiket"
+
+msgid "It allows user to add more than one form based on requirements."
+msgstr "Ini memungkinkan pengguna untuk menambahkan lebih dari satu formulir berdasarkan persyaratan."
+
+msgid "When a ticket is created, an appropriate agent is automatically assigned to the ticket and it is moved to the Assigned state."
+msgstr "Ketika tiket dibuat, agen yang sesuai secara otomatis ditugaskan ke tiket dan dipindahkan ke keadaan yang ditugaskan."
+
+msgid "WP Vehicle Manager"
+msgstr "Manajer Kendaraan WP"
+
+msgid "Visit site"
+msgstr "Kunjungi Situs"
+
+msgid "Install WP Vehicle Manager Plugin"
+msgstr "Pasang plugin WP Vehicle Manager"
+
+msgid "JS Job Manager"
+msgstr "JS Job Manager"
+
+msgid "Install JS Job Manager Plugin"
+msgstr "Instal JS Job Manager Plugin"
+
+msgid "WP Learn Manager"
+msgstr "WP Learn Manager"
+
+msgid "Install WP Learn Manager Plugin"
+msgstr "Instal plugin WP Learn Manager"
+
+msgid "Manually assign ticket to agent"
+msgstr "Secara manual menetapkan tiket ke agen"
+
+msgid "Translation"
+msgstr "Terjemahan"
+
+msgid "When WordPress language change to fr, JS Help Desk language will auto change to fr"
+msgstr "Saat bahasa WordPress berubah menjadi FR, bahasa BANTUAN BANTUAN Meja akan berubah secara otomatis ke FR"
+
+msgid "Status: "
+msgstr "Status:"
+
+msgid "The status has been changed"
+msgstr "Status telah diubah"
+
+msgid "The status has not been changed"
+msgstr "Statusnya belum diubah"
+
+msgid "Ticket status change"
+msgstr "Perubahan Status Tiket"
+
+msgid "The status is changed by"
+msgstr "Statusnya diubah oleh"
+
+msgid "Change Status"
+msgstr "Mengubah status"
+
+msgid "Reason For"
+msgstr "Alasan untuk"
+
+msgid "tickets by"
+msgstr "tiket oleh"
+
+msgid "View Image"
+msgstr "Lihat gambar"
+
+msgid "Viewed By"
+msgstr "Dilihat oleh"
+
+msgid "None"
+msgstr "Tidak ada"
+
+msgid "set"
+msgstr "mengatur"
+
+msgid "Other Tickets"
+msgstr "Tiket lainnya"
+
+msgid "Type Note for"
+msgstr "Ketik catatan untuk"
+
+msgid "tickets"
+msgstr "tiket"
+
+msgid "Token"
+msgstr "Token"
+
+msgid "Search Ticket"
+msgstr "Tiket pencarian"
+
+msgid "Ticket Creator"
+msgstr "Pencipta tiket"
+
+msgid "Remember Your Ticket Token for Tracking (Save It!)"
+msgstr "Ingat token tiket Anda untuk melacak (simpan!)"
+
+msgid "You've received a token number to track your support ticket status. This is one-time code, so please save it carefully. "
+msgstr "Anda telah menerima nomor token untuk melacak status tiket dukungan Anda. Ini adalah kode satu kali, jadi simpan dengan hati-hati."
+
+msgid "Copy Token"
+msgstr "Salin token"
+
+msgid "Status Title Already Exist"
+msgstr "Judul Status sudah ada"
+
+msgid "Status has been stored"
+msgstr "Status telah disimpan"
+
+msgid "Status has not been stored"
+msgstr "Status belum disimpan"
+
+msgid "Status has been deleted"
+msgstr "Status telah dihapus"
+
+msgid "Status has not been deleted"
+msgstr "Status belum dihapus"
+
+msgid "Text Color"
+msgstr "Warna teks"
+
+msgid "Background Color"
+msgstr "Warna latar belakang"
+
+msgid "Save Status"
+msgstr "Simpan status"
+
+msgid "Required Fields are not filled"
+msgstr "Bidang yang diperlukan tidak diisi"
+
+msgid "Note:"
+msgstr "Catatan:"
+
+msgid "Features marked with"
+msgstr "Fitur yang ditandai dengan"
+
+msgid "are only available with its own addon."
+msgstr "hanya tersedia dengan addon sendiri."
+
+msgid "Product Title Already Exist"
+msgstr "Judul Produk sudah ada"
+
+msgid "Product has been stored"
+msgstr "Produk telah disimpan"
+
+msgid "Product has not been stored"
+msgstr "Produk belum disimpan"
+
+msgid "Product has been deleted"
+msgstr "Produk telah dihapus"
+
+msgid "Product has not been deleted"
+msgstr "Produk belum dihapus"
+
+msgid "Save Product"
+msgstr "Simpan produk"
+
+msgid "JS Help Desk Settings"
+msgstr "Pengaturan Meja Bantuan JS"
+
+msgid "Step 2 of "
+msgstr "Langkah 2 dari"
+
+msgid "Step 4 of 5"
+msgstr "Langkah 4 dari 5"
+
+msgid "Step 1 of "
+msgstr "Langkah 1 dari"
+
+msgid "Download Translation File"
+msgstr "Unduh file terjemahan"
+
+msgid "Want to download translation file? Click on download. It will take sometime."
+msgstr "Ingin mengunduh file terjemahan? Klik Unduh. Ini akan memakan waktu."
+
+msgid "Download & Next"
+msgstr "Unduh & Berikutnya"
+
+msgid "Skip this step"
+msgstr "Lewati langkah ini"
+
+msgid "Recaptcha Version 2"
+msgstr "RECAPTCHA Versi 2"
+
+msgid "Recaptcha Version 3"
+msgstr "RECAPTCHA Versi 3"
+
+msgid "WordPress Default Register Page"
+msgstr "Halaman Register Default WordPress"
+
+msgid "4"
+msgstr "4"
+
+msgid "5"
+msgstr "5"
+
+msgid "6"
+msgstr "6"
+
+msgid "Oldest First"
+msgstr "Yang tertua dulu"
+
+msgid "Newest First"
+msgstr "Yang terbaru dulu"
+
+msgid "menu"
+msgstr "menu"
+
+msgid "Select Configuration"
+msgstr "Pilih Konfigurasi"
+
+msgid "Facebook"
+msgstr "Facebook"
+
+msgid "Linkedin"
+msgstr "LinkedIn"
+
+msgid "Show number of the open, closed, answered ticket in my ticket and dashboard"
+msgstr "Tampilkan nomor tiket yang terbuka, tertutup, tertutup di tiket dan dasbor saya"
+
+msgid "Redirect user on log in"
+msgstr "Redirect User di Masuk"
+
+msgid "Set register Link Default or Custom"
+msgstr "Setel tautan register default atau kustom"
+
+msgid " To enable registrations, WordPress admin > General > Settings > Membership: Anyone can register"
+msgstr "Untuk mengaktifkan pendaftaran, admin WordPress> Umum> Pengaturan> Keanggotaan: Siapa pun dapat mendaftar"
+
+msgid "Woocommerce Category"
+msgstr "Kategori WooCommerce"
+
+msgid "Select category to display only products of this category on the WooCommerce shop page."
+msgstr "Pilih Kategori untuk menampilkan hanya produk dari kategori ini di halaman toko WooCommerce."
+
+msgid "Set ticketid sequential or random .e.g "
+msgstr "Setel Ticketid Sequential atau Random .e.g"
+
+msgid "Pad Zeros"
+msgstr "Pad Zeros"
+
+msgid "To pad an integer with leading zeros to a specific length"
+msgstr "Untuk menempatkan bilangan bulat dengan nol memimpin ke panjang tertentu"
+
+msgid "Ticket Replies ordering"
+msgstr "Balasan tiket memesan"
+
+msgid "Set the default ordering for ticket replies in the detail page."
+msgstr "Atur pemesanan default untuk balasan tiket di halaman detail."
+
+msgid "Show Message Read Icon for Admin On Ticket Detail"
+msgstr "Tampilkan Pesan Baca Ikon Untuk Admin dengan Detail Tiket"
+
+msgid "Select whether the message read icon is displayed to the administrator on ticket detail."
+msgstr "Pilih apakah ikon membaca pesan ditampilkan ke administrator dengan detail tiket."
+
+msgid "Show Message Read Icon For Agents on Ticket Detail"
+msgstr "Tampilkan Ikon Baca Pesan untuk Agen dengan Detail Tiket"
+
+msgid "Select whether the message read icon is displayed to agents on ticket detail."
+msgstr "Pilih apakah ikon membaca pesan ditampilkan ke agen dengan detail tiket."
+
+msgid "Show Message Read Icon For Users On Ticket Detail"
+msgstr "Tampilkan Ikon Baca Pesan untuk Pengguna dengan Detail Tiket"
+
+msgid "Select whether the message read icon is displayed to users on the ticket detail."
+msgstr "Pilih apakah ikon membaca pesan ditampilkan kepada pengguna pada detail tiket."
+
+msgid "Department Email"
+msgstr "Email departemen"
+
+msgid "Send email to all departments on ticket create"
+msgstr "Kirim Email ke Semua Departemen dengan Tiket Buat"
+
+msgid "Captcha Setting"
+msgstr "Pengaturan captcha"
+
+msgid "Google reCaptcha"
+msgstr "Google RECAPTCHA"
+
+msgid "Google ReCaptcha version"
+msgstr "Versi Google RECAPTCHA"
+
+msgid "Select the Google ReCaptcha version"
+msgstr "Pilih versi Google RECAPTCHA"
+
+msgid "Google recaptcha site key"
+msgstr "Kunci Situs Google RECAPTCHA"
+
+msgid "Please enter the google re-captcha site key from"
+msgstr "Harap masukkan kunci situs Google Recaptcha dari"
+
+msgid "Google recaptcha secret key"
+msgstr "Kunci rahasia Google RECAPTCHA"
+
+msgid "Please enter the google re-captcha secret key from"
+msgstr "Harap masukkan kunci rahasia google recaptcha dari"
+
+msgid "Search Reports"
+msgstr "Laporan Pencarian"
+
+msgid "Please fill required fields."
+msgstr "Harap isi bidang yang diperlukan."
+
+msgid "There was no record found"
+msgstr "Tidak ada catatan yang ditemukan"
+
+msgid "Select Required"
+msgstr "Pilih Diperlukan"
+
+msgid " Subject"
+msgstr "Subjek"
+
+msgid "Kylee Arroyo"
+msgstr "Kylee Arroyo"
+
+msgid "Can I upgrade my plan?"
+msgstr "Bisakah saya meningkatkan rencana saya?"
+
+msgid "This ticket is marked as overdue "
+msgstr "Tiket ini ditandai sebagai terlambat"
+
+msgid "pF3YczjML"
+msgstr "pf3yczjml"
+
+msgid "01-11-2023"
+msgstr "01-11-2023"
+
+msgid "Allison Carney"
+msgstr "Allison Carney"
+
+msgid "How Can I get Subscription?"
+msgstr "Bagaimana cara mendapatkan langganan?"
+
+msgid "Tp3Y7zj01"
+msgstr "TP3Y7ZJ01"
+
+msgid "20-12-2023"
+msgstr "20-12-2023"
+
+msgid "Aleena Adam"
+msgstr "Aleena Adam"
+
+msgid "How Long do i have support access?"
+msgstr "Berapa lama saya memiliki akses dukungan?"
+
+msgid "Ku3Y8zj3L"
+msgstr "KU3Y8ZJ3L"
+
+msgid "11-6-2023"
+msgstr "11-6-2023"
+
+msgid "If the colors have been saved but the user-side colors are still the same, it is advised to clear the cache."
+msgstr "Jika warna telah disimpan tetapi warna sisi pengguna masih sama, disarankan untuk membersihkan cache."
+
+msgid "Purple"
+msgstr "Ungu"
+
+msgid "Field cannot be mark as published"
+msgstr "Bidang tidak bisa ditandai seperti yang diterbitkan"
+
+msgid "Field cannot mark as required"
+msgstr "Lapangan tidak dapat menandai sesuai kebutuhan"
+
+msgid "Child fields has not been stored"
+msgstr "Ladang anak belum disimpan"
+
+msgid "Not Contain"
+msgstr "Tidak mengandung"
+
+msgid "Place Holder"
+msgstr "Placeholder"
+
+msgid "Admin Search"
+msgstr "Pencarian Admin"
+
+msgid "AND"
+msgstr "DAN"
+
+msgid "File upload fields and Check box fields cannot be made required."
+msgstr "Bidang Unggah File dan Bidang Kotak Centang Tidak Dapat Dibutuhkan."
+
+msgid "Default Value"
+msgstr "Nilai default"
+
+msgid "To choose a default value, first add values in the area below"
+msgstr "Untuk memilih nilai default, pertama tambahkan nilai di area di bawah ini"
+
+msgid "This option is not available in this case"
+msgstr "Opsi ini tidak tersedia dalam kasus ini"
+
+msgid "Select Default Value"
+msgstr "Pilih nilai default"
+
+msgid "Read Only"
+msgstr "Baca saja"
+
+msgid "Admin/Agent Only"
+msgstr "Admin/agen saja"
+
+msgid "Java Script"
+msgstr "Javascript"
+
+msgid "Add More"
+msgstr "Tambahkan lebih banyak"
+
+msgid "Visibility conditions"
+msgstr "Kondisi visibilitas"
+
+msgid "Add new"
+msgstr "Tambahkan baru"
+
+msgid "visibility condition"
+msgstr "kondisi visibilitas"
+
+msgid "User already an agent"
+msgstr "Pengguna sudah menjadi agen"
+
+msgid "The agent has not been stored"
+msgstr "Agen belum disimpan"
+
+msgid "The agent has not been deleted"
+msgstr "Agen belum dihapus"
+
+msgid "The agent in use cannot delete"
+msgstr "Agen yang digunakan tidak dapat menghapus"
+
+msgid "Select agent"
+msgstr "Pilih Agen"
+
+msgid "The ticket marks as overdue"
+msgstr "Tiketnya menandai"
+
+msgid "Disabled form cannot be set as default"
+msgstr "Formulir Dinonaktifkan tidak dapat ditetapkan sebagai default"
+
+msgid "Form has not been stored"
+msgstr "Formulir belum disimpan"
+
+msgid "Multiform has not been deleted"
+msgstr "Multiform belum dihapus"
+
+msgid "Multiform in use"
+msgstr "Banyak digunakan"
+
+msgid " cannot deleted"
+msgstr "tidak bisa dihapus"
+
+msgid "Closed Date"
+msgstr "Tanggal tertutup"
+
+msgid "Closed Time"
+msgstr "Waktu tertutup"
+
+msgid "Total Tracking Time"
+msgstr "Total waktu pelacakan"
+
+msgid "Sub Category Knowledgebase"
+msgstr "Sub Kategori KnowledgeBase"
+
+msgid "Type:"
+msgstr "Jenis:"
+
+msgid "Sub Category Faqs"
+msgstr "Sub Kategori FAQ"
+
+msgid "Facebook user"
+msgstr "Pengguna Facebook"
+
+msgid "Linkedin user"
+msgstr "Pengguna LinkedIn"
+
+msgid "You are logged in"
+msgstr "Anda masuk"
+
+msgid "You are logged out"
+msgstr "Anda sudah login"
+
+msgid "Email Cc has not been stored"
+msgstr "Email CC belum disimpan"
+
+msgid "Email CC has not been deleted"
+msgstr "Email CC belum dihapus"
+
+msgid "Email CC "
+msgstr "Email CC"

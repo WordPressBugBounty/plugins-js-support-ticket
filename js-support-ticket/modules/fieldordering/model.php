@@ -235,11 +235,13 @@ class JSSTfieldorderingModel {
                         $keyvalue = $value;
                         $value = jssupportticketphplib::JSST_str_replace(' ','__',$value);
                         $value = jssupportticketphplib::JSST_str_replace('.','___',$value);
-                        // if ( isset($data[$value]) && $data[$value] != null) {
+                        // This check was previously commented out, but caused errors when child values were empty.
+                        // Uncommented and handled properly by Hamza to avoid runtime issues with empty inputs.
+                        if ( isset($data[$value]) && $data[$value] != null) {
                             $keyvalue = jssupportticketphplib::JSST_htmlentities($keyvalue);
                             $params[$keyvalue] = array_filter($data[$value]);
                             $empty_flag = 1;
-                        // }
+                        }
                     }
                     if($empty_flag == 0){
                         JSSTmessage::setMessage(esc_html(__('Please Insert At least one value for every option', 'js-support-ticket')), 'error');
@@ -254,6 +256,8 @@ class JSSTfieldorderingModel {
             if (!empty($data['values'])) {
                 foreach ($data['values'] as $key => $value) {
                     if ($value != null) {
+                        $value = jssupportticketphplib::JSST_str_replace('[','',$value);
+                        $value = jssupportticketphplib::JSST_str_replace(']','',$value);
                         $params[] = jssupportticketphplib::JSST_trim($value);
                     }
                 }
@@ -557,16 +561,16 @@ class JSSTfieldorderingModel {
         // $parentfieldparams = stripslashes_deep($parentfieldparams);
         // $childfieldparams = stripslashes_deep($childfieldparams);
 
-        $childNew =  new stdclass();
-        foreach ($parentfieldparams as $parentkey => $parentvalue) {
-            foreach ($childfieldparams as $childkey => $childvalue) {
-                if( $parentvalue === $childkey ){
-                    foreach ($childvalue as $ckey => $cvalue) {
-                        $childNew->$parentvalue[$ckey] = $cvalue;
-                    }
-                    break;
+        $childNew = [];
+
+        foreach ($parentfieldparams as $parentKey => $parentValue) {
+            $childKeys = is_array($parentValue) ? $parentValue : [$parentValue];
+
+            foreach ($childKeys as $childKey) {
+                if (isset($childfieldparams[$childKey])) {
+                    $childNew[$childKey] = $childfieldparams[$childKey];
                 } else {
-                    $childNew->$parentvalue[0] = "";
+                    $childNew[$childKey] = '';
                 }
             }
         }
@@ -1021,7 +1025,10 @@ class JSSTfieldorderingModel {
             $published = ' AND published = 1 ';
         }
         $inquery = '';
-        if (isset($formid) && $formid != '') {
+        if (isset($formid) && $formid == 0) {
+            $defaultformid = JSSTincluder::getJSModel('ticket')->getDefaultMultiFormId();
+            $inquery = " AND multiformid = ".esc_sql($defaultformid);
+        } elseif (isset($formid) && $formid != '') {
             $inquery = " AND multiformid = ".esc_sql($formid);
         }
         $query = "SELECT field,fieldtitle FROM `" . jssupportticket::$_db->prefix . "js_ticket_fieldsordering` WHERE fieldfor = " . esc_sql($fieldfor) . $published;
@@ -1058,7 +1065,10 @@ class JSSTfieldorderingModel {
             $published = ' AND published = 1 ';
         }
         $inquery = '';
-        if (isset($formid) && $formid != '') {
+        if (isset($formid) && $formid == 0) {
+            $defaultformid = JSSTincluder::getJSModel('ticket')->getDefaultMultiFormId();
+            $inquery = " AND multiformid = ".esc_sql($defaultformid);
+        } elseif (isset($formid) && $formid != '') {
             $inquery = " AND multiformid = ".esc_sql($formid);
         }
         $query = "SELECT field, showonlisting FROM " . jssupportticket::$_db->prefix . "js_ticket_fieldsordering WHERE showonlisting = 1 AND fieldfor =  " . esc_sql($fieldfor) . esc_sql($published);

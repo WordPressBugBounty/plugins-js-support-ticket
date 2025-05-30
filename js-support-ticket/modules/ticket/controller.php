@@ -18,7 +18,7 @@ class JSSTticketController {
         jssupportticket::$_data['sanitized_args']['jsst_nonce'] = esc_html(wp_create_nonce('jsst_nonce'));
         // remove this in the version 2.9.5
         include_once JSST_PLUGIN_PATH . 'includes/updates/updates.php';
-        JSSTupdates::checkUpdates('294');
+        JSSTupdates::checkUpdates('295');
         // remove this in the version 2.9.5
         if (self::canaddfile($layout)) {
             switch ($layout) {
@@ -460,11 +460,26 @@ class JSSTticketController {
             }else if(!empty($tickettoken)){
                 $token = $tickettoken;
             }
-        }
-        if($token){
-            include_once JSST_PLUGIN_PATH . 'includes/encoder.php';
-            $encoder = new JSSTEncoder();
-            $token = $encoder->encrypt(wp_json_encode(array('token' => $token, 'sitelink' => get_option('jsst_encripted_site_link'))));
+            if($token){
+                include_once JSST_PLUGIN_PATH . 'includes/encoder.php';
+                $encoder = new JSSTEncoder();
+                $token = $encoder->encrypt(wp_json_encode(array('token' => $token, 'sitelink' => get_option('jsst_encripted_site_link'))));
+                jssupportticketphplib::JSST_setcookie('js-support-ticket-token-tkstatus',$token ,0, COOKIEPATH);
+                if ( SITECOOKIEPATH != COOKIEPATH ){
+                    jssupportticketphplib::JSST_setcookie('js-support-ticket-token-tkstatus',$token ,0, SITECOOKIEPATH);
+                }
+                $ticketid = JSSTincluder::getJSModel('ticket')->getTicketidForVisitorUsingToken($token);
+                if ($ticketid) {
+                    $url = jssupportticket::makeUrl(array('jstmod'=>'ticket', 'jstlay'=>'ticketdetail', 'jssupportticketid'=>$ticketid));
+                } else {
+                    $url = jssupportticket::makeUrl(array('jstmod'=>'ticket', 'jstlay'=>'ticketstatus'));
+                    JSSTmessage::setMessage(esc_html(__('Record not found', 'js-support-ticket')), 'error');
+                }
+            } else {
+                $url = jssupportticket::makeUrl(array('jstmod'=>'ticket', 'jstlay'=>'ticketstatus'));
+                JSSTmessage::setMessage(esc_html(__('Record not found', 'js-support-ticket')), 'error');
+            }
+        } else {
             jssupportticketphplib::JSST_setcookie('js-support-ticket-token-tkstatus',$token ,0, COOKIEPATH);
             if ( SITECOOKIEPATH != COOKIEPATH ){
                 jssupportticketphplib::JSST_setcookie('js-support-ticket-token-tkstatus',$token ,0, SITECOOKIEPATH);
@@ -476,9 +491,6 @@ class JSSTticketController {
                 $url = jssupportticket::makeUrl(array('jstmod'=>'ticket', 'jstlay'=>'ticketstatus'));
                 JSSTmessage::setMessage(esc_html(__('Record not found', 'js-support-ticket')), 'error');
             }
-        } else {
-            $url = jssupportticket::makeUrl(array('jstmod'=>'ticket', 'jstlay'=>'ticketstatus'));
-            JSSTmessage::setMessage(esc_html(__('Record not found', 'js-support-ticket')), 'error');
         }
         wp_redirect($url);
         exit;

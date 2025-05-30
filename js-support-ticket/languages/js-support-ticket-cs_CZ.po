@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 3.4.1\n"
+"X-Generator: Poedit 3.6\n"
 
 msgid "You are not allowed"
 msgstr "Nemáte povoleno"
@@ -662,12 +662,8 @@ msgstr "Získejte pomoc"
 msgid "Service is running, please close the pag"
 msgstr "Služba je spuštěna, prosím zavřete stránku"
 
-msgid ""
-"Admin email address and email piping address cannot be the same, your email "
-"piping will not be work."
-msgstr ""
-"E-mailová adresa správce a e-mailová adresa nesmí být stejná, vaše e-mailová "
-"adresa nebude fungovat."
+msgid "Admin email address and email piping address cannot be the same, your email piping will not be work."
+msgstr "E-mailová adresa správce a e-mailová adresa nesmí být stejná, vaše e-mailová adresa nebude fungovat."
 
 msgid "Your setting is working please this."
 msgstr "Vaše nastavení funguje, prosím."
@@ -675,12 +671,8 @@ msgstr "Vaše nastavení funguje, prosím."
 msgid "Connection established but the system cannot read any email"
 msgstr "Připojení bylo navázáno, ale systém nemůže číst žádný e-mail"
 
-msgid ""
-"IMAP is either not installed or not enabled in your server. Contact to "
-"hosting company"
-msgstr ""
-"IMAP není na vašem serveru nainstalován nebo není povolen. Kontakt na "
-"hostující společnost"
+msgid "IMAP is either not installed or not enabled in your server. Contact to hosting company"
+msgstr "IMAP není na vašem serveru nainstalován nebo není povolen. Kontakt na hostující společnost"
 
 msgid "The configuration has been stored"
 msgstr "Konfigurace byla uložena"
@@ -808,12 +800,8 @@ msgstr "Pro přihlášení na webcron org v oblasti cron kliknete na"
 msgid "Timeout"
 msgstr "Čas vyršel"
 
-msgid ""
-"180 secs if the does not completely increase it most sites will work with a "
-"setting of 180 600"
-msgstr ""
-"180 sekund, pokud se nezvýší úplně, většina webů bude pracovat s nastavením "
-"180 600"
+msgid "180 secs if the does not completely increase it most sites will work with a setting of 180 600"
+msgstr "180 sekund, pokud se nezvýší úplně, většina webů bude pracovat s nastavením 180 600"
 
 msgid "URL you want to execute"
 msgstr "URL, kterou chcete spustit"
@@ -833,12 +821,8 @@ msgstr "Že mřížka pod ostatními možnostmi zvolíte, kdy a jak"
 msgid "Alerts"
 msgstr "Upozornění"
 
-msgid ""
-"If you have already set up alerts methods in webcron org interface we "
-"recommend choosing an alert"
-msgstr ""
-"Pokud jste již v rozhraní webcron org nastavili metodu upozornění, "
-"doporučujeme zvolit upozornění"
+msgid "If you have already set up alerts methods in webcron org interface we recommend choosing an alert"
+msgstr "Pokud jste již v rozhraní webcron org nastavili metodu upozornění, doporučujeme zvolit upozornění"
 
 msgid "Cron scheduling using wget"
 msgstr "Naplánování cron pomocí wget"
@@ -1410,12 +1394,8 @@ msgstr "Podpora předplatného"
 msgid "Number of tickets"
 msgstr "Počet vstupenek"
 
-msgid ""
-"Enter allowed number of tickets that customer can post. Enter -1 for "
-"unlimited tickets."
-msgstr ""
-"Zadejte povolený počet vstupenek, které může zákazník zveřejnit. Zadejte -1 "
-"pro neomezený počet vstupenek."
+msgid "Enter allowed number of tickets that customer can post. Enter -1 for unlimited tickets."
+msgstr "Zadejte povolený počet vstupenek, které může zákazník zveřejnit. Zadejte -1 pro neomezený počet vstupenek."
 
 msgid "Credential Type"
 msgstr "Typ pověření"
@@ -1846,12 +1826,8 @@ msgstr "Špatně zadaný captcha"
 msgid "Could not subscribe to the newsletter"
 msgstr "Nelze se přihlásit k odběru novinek"
 
-msgid ""
-"Please check confirmation email to complete your subscription for the "
-"newsletter"
-msgstr ""
-"Zkontrolujte prosím e-mail s potvrzením, abyste dokončili předplatné "
-"zpravodaje"
+msgid "Please check confirmation email to complete your subscription for the newsletter"
+msgstr "Zkontrolujte prosím e-mail s potvrzením, abyste dokončili předplatné zpravodaje"
 
 msgid "You have successfully subscribed to the newsletter"
 msgstr "Úspěšně jste se přihlásili k odběru novinek"
@@ -1916,9 +1892,7 @@ msgstr "Registrace"
 msgid "User is not allowed to view this Ticket"
 msgstr "Uživatel nemá právo prohlížet tuto Vstupenku"
 
-msgid ""
-"Registration has been disabled by admin, please contact the system "
-"administrator."
+msgid "Registration has been disabled by admin, please contact the system administrator."
 msgstr "Registrace byla deaktivována správcem, kontaktujte správce systému."
 
 msgid "You have already given the feedback for this ticket."
@@ -2141,13 +2115,11 @@ msgid "Select Page"
 msgstr "Vybrat stránku"
 
 msgid ""
-"Select JS Help Desk default page, on the action system, will redirect on the "
-"selected page. If not select the default page, email links, and support icon "
-"might not work."
+"Select JS Help Desk default page, on the action system, will redirect on the selected page. If not select the default page, email "
+"links, and support icon might not work."
 msgstr ""
-"Výběr výchozí stránky JS Help Desk na systému akcí přesměruje na vybranou "
-"stránku. Pokud nevyberete výchozí stránku, e-mailové odkazy a ikona podpory "
-"nemusí fungovat."
+"Výběr výchozí stránky JS Help Desk na systému akcí přesměruje na vybranou stránku. Pokud nevyberete výchozí stránku, e-mailové "
+"odkazy a ikona podpory nemusí fungovat."
 
 msgid "Support Icon"
 msgstr "Ikona podpory"
@@ -2182,12 +2154,8 @@ msgstr "Složka s daty"
 msgid "Set the name for your data directory"
 msgstr "Nastavte název adresáře dat"
 
-msgid ""
-"You need to rename the existing data directory in the file system before "
-"changing the data directory name"
-msgstr ""
-"Před změnou názvu datového adresáře musíte přejmenovat existující datový "
-"adresář v systému souborů"
+msgid "You need to rename the existing data directory in the file system before changing the data directory name"
+msgstr "Před změnou názvu datového adresáře musíte přejmenovat existující datový adresář v systému souborů"
 
 msgid "Date Format"
 msgstr "Formát data"
@@ -2253,8 +2221,7 @@ msgid "Show count on my tickets"
 msgstr "Zobrazit počitadlo na Moje tickety"
 
 msgid "Show number of the open, closed, answered ticket in my ticket"
-msgstr ""
-"Zobrazit číslo otevřené, uzavřené, odpovězené vstupenky na mé vstupence"
+msgstr "Zobrazit číslo otevřené, uzavřené, odpovězené vstupenky na mé vstupence"
 
 msgid "Show captcha on registration form"
 msgstr "Zobrazit captcha na registračním formuláři"
@@ -2359,13 +2326,10 @@ msgid "This message will show on the new ticket"
 msgstr "Tato zpráva se zobrazí na novém lístku"
 
 msgid "Allow Users To Reply via Email On Closed Ticket"
-msgstr ""
-"Povolit uživatelům odpovědět prostřednictvím e-mailu na uzavřeném Ticketu"
+msgstr "Povolit uživatelům odpovědět prostřednictvím e-mailu na uzavřeném Ticketu"
 
 msgid "Select whether users can reply to closed email piping ticket or not"
-msgstr ""
-"Vyberte, zda mohou uživatelé odpovídat na uzavřenou e-mailovou vstupenku "
-"nebo ne"
+msgstr "Vyberte, zda mohou uživatelé odpovídat na uzavřenou e-mailovou vstupenku nebo ne"
 
 msgid "Visitor can create ticket"
 msgstr "Návštěvník si může vytvořit Ticket"
@@ -2382,12 +2346,8 @@ msgstr "Tento text se objeví vždy, když návštěvník vytvoří lístek"
 msgid "Default alert email"
 msgstr "Výchozí email pro upozornění"
 
-msgid ""
-"If ticket department email is not selected then this email is used to send "
-"emails"
-msgstr ""
-"Pokud není zvoleno oddělení ticketu, tak je tento email použití pro "
-"odesílání emailů"
+msgid "If ticket department email is not selected then this email is used to send emails"
+msgstr "Pokud není zvoleno oddělení ticketu, tak je tento email použití pro odesílání emailů"
 
 msgid "Default admin email"
 msgstr "Výchozí email administrátora"
@@ -2405,8 +2365,7 @@ msgid "Mail to admin"
 msgstr "Zpráva Adminovi"
 
 msgid "Email sends to admin when banned email try to create a ticket"
-msgstr ""
-"E-mail se odešle adminovi, když se zakázaný e-mail snaží vytvořit lístek"
+msgstr "E-mail se odešle adminovi, když se zakázaný e-mail snaží vytvořit lístek"
 
 msgid "Ticket Operations Email Setting"
 msgstr "Nastavení e-mailu pro provozování vstupenek"
@@ -2507,10 +2466,8 @@ msgstr "Zvolte typ zpoždění pro zpětnou vazbu"
 msgid "Feedback Email Delay"
 msgstr "Zpětná vazba e-mailu"
 
-msgid ""
-"Set no. of days or hours to send feedback email after a ticket is closed"
-msgstr ""
-"Set no. dnů nebo hodin poslat e-mail s zpětnou vazbou po uzavření vstupenky"
+msgid "Set no. of days or hours to send feedback email after a ticket is closed"
+msgstr "Set no. dnů nebo hodin poslat e-mail s zpětnou vazbou po uzavření vstupenky"
 
 msgid "Success message after submitting feedback"
 msgstr "Zpráva o úspěchu po odeslání zpětné vazby"
@@ -2521,12 +2478,8 @@ msgstr "Tento text se objeví vždy, když někdo podá zpětnou vazbu"
 msgid "Firebase Notifications"
 msgstr "Oznámení Firebase"
 
-msgid ""
-"JS Help Desk Desktop Notifications plugin is not installed. Please install "
-"the plugin to enable desktop notifications"
-msgstr ""
-"Není nainstalován plugin JS Help Desk Desktop Notifications. Chcete-li "
-"povolit oznámení na ploše, nainstalujte si plugin"
+msgid "JS Help Desk Desktop Notifications plugin is not installed. Please install the plugin to enable desktop notifications"
+msgstr "Není nainstalován plugin JS Help Desk Desktop Notifications. Chcete-li povolit oznámení na ploše, nainstalujte si plugin"
 
 msgid "Click here to insert Install."
 msgstr "Klikněte sem pro vložení instalace."
@@ -2609,12 +2562,8 @@ msgstr "Kliknutím sem vygenerujete klíč API"
 msgid "License Mandatory"
 msgstr "Licence Povinná"
 
-msgid ""
-"Prevent users from submitting a ticket without a valid license for one of "
-"your product"
-msgstr ""
-"Zabraňte uživatelům v odesílání letenky bez platné licence na jeden z vašich "
-"produktů"
+msgid "Prevent users from submitting a ticket without a valid license for one of your product"
+msgstr "Zabraňte uživatelům v odesílání letenky bez platné licence na jeden z vašich produktů"
 
 msgid "Product ID"
 msgstr "ID produktu"
@@ -3204,16 +3153,11 @@ msgstr "Přidejte agenty a přiřaďte role a oprávnění k poskytování pomoc
 msgid "Ticket Auto Close"
 msgstr "Automatické uzavření lístku"
 
-msgid ""
-"Define rules for the ticket to auto-close after a specific interval of time."
-msgstr ""
-"Definujte pravidla pro automatické uzavření lístku po určitém časovém "
-"intervalu."
+msgid "Define rules for the ticket to auto-close after a specific interval of time."
+msgstr "Definujte pravidla pro automatické uzavření lístku po určitém časovém intervalu."
 
 msgid "Get a survey from customers on ticket closing to improve quality."
-msgstr ""
-"Získejte průzkum od zákazníků o uzavření vstupenek za účelem zlepšení "
-"kvality."
+msgstr "Získejte průzkum od zákazníků o uzavření vstupenek za účelem zlepšení kvality."
 
 msgid "Help users to find and select the area with which they need assistance."
 msgstr "Pomozte uživatelům najít a vybrat oblast, se kterou potřebují pomoc."
@@ -3221,58 +3165,37 @@ msgstr "Pomozte uživatelům najít a vybrat oblast, se kterou potřebují pomoc
 msgid "Private Note"
 msgstr "Soukromá poznámka"
 
-msgid ""
-"The private note is used as reminders or to give other agents insights into "
-"the ticket issue."
-msgstr ""
-"Soukromá nota se používá jako připomenutí nebo k poskytnutí dalších "
-"informací agentům o vydávání vstupenek."
+msgid "The private note is used as reminders or to give other agents insights into the ticket issue."
+msgstr "Soukromá nota se používá jako připomenutí nebo k poskytnutí dalších informací agentům o vydávání vstupenek."
 
-msgid ""
-"Stop losing productivity on repetitive queries, build your knowledge base."
-msgstr ""
-"Přestaňte ztrácet produktivitu při opakovaných dotazech a budujte svou "
-"znalostní základnu."
+msgid "Stop losing productivity on repetitive queries, build your knowledge base."
+msgstr "Přestaňte ztrácet produktivitu při opakovaných dotazech a budujte svou znalostní základnu."
 
 msgid "Max Tickets"
 msgstr "Max Vstupenky"
 
-msgid ""
-"Enables admin to set N numbers of tickets for users and agents separately."
-msgstr ""
-"Umožňuje správci nastavit N počet vstupenek zvlášť pro uživatele a agenty."
+msgid "Enables admin to set N numbers of tickets for users and agents separately."
+msgstr "Umožňuje správci nastavit N počet vstupenek zvlášť pro uživatele a agenty."
 
 msgid "Merge Tickets"
 msgstr "Sloučit vstupenky"
 
-msgid ""
-"Enables agents to merge two tickets of the same user into one instead of "
-"dealing with the same issue on many tickets."
-msgstr ""
-"Umožňuje agentům sloučit dvě lístky stejného uživatele do jednoho namísto "
-"řešení stejného problému na mnoha lístcích."
+msgid "Enables agents to merge two tickets of the same user into one instead of dealing with the same issue on many tickets."
+msgstr "Umožňuje agentům sloučit dvě lístky stejného uživatele do jednoho namísto řešení stejného problému na mnoha lístcích."
 
 msgid ""
-"Defines rules or set specific intervals of time to make ticket auto overdue."
-"The ticket can overdue by type or overdue by Cronjob."
+"Defines rules or set specific intervals of time to make ticket auto overdue.The ticket can overdue by type or overdue by Cronjob."
 msgstr ""
-"Definuje pravidla nebo nastavuje konkrétní časové intervaly, aby se "
-"automatické prodlení vstupenek prodalo. Vstupenka může být zpožděna podle "
-"typu nebo zpožděna společností Cronjob."
+"Definuje pravidla nebo nastavuje konkrétní časové intervaly, aby se automatické prodlení vstupenek prodalo. Vstupenka může být "
+"zpožděna podle typu nebo zpožděna společností Cronjob."
+
+msgid "SMTP enables you to add custom mail protocol to send and receive emails within the js help desk."
+msgstr "SMTP vám umožňuje přidat vlastní poštovní protokol pro odesílání a přijímání e-mailů v helpdesku js."
 
 msgid ""
-"SMTP enables you to add custom mail protocol to send and receive emails "
-"within the js help desk."
+"Displays complete ticket history along with the ticket status, currently assigned user and other actions performed on each ticket."
 msgstr ""
-"SMTP vám umožňuje přidat vlastní poštovní protokol pro odesílání a přijímání "
-"e-mailů v helpdesku js."
-
-msgid ""
-"Displays complete ticket history along with the ticket status, currently "
-"assigned user and other actions performed on each ticket."
-msgstr ""
-"Zobrazuje kompletní historii vstupenek, stav vstupenek, aktuálně přiřazeného "
-"uživatele a další akce provedené na každém lístku."
+"Zobrazuje kompletní historii vstupenek, stav vstupenek, aktuálně přiřazeného uživatele a další akce provedené na každém lístku."
 
 msgid "Pre-populated messages allow support agents to respond quickly."
 msgstr "Předvyplněné zprávy umožňují agentům podpory rychle reagovat."
@@ -3283,22 +3206,16 @@ msgstr "Umožňuje uživatelům odpovědět na vstupenky e-mailem bez přihláš
 msgid "Time Tracking"
 msgstr "Sledování času"
 
-msgid ""
-"Track the time spent on each ticket by each agent and each reply. Report the "
-"admin on how much time is spent on each ticket."
+msgid "Track the time spent on each ticket by each agent and each reply. Report the admin on how much time is spent on each ticket."
 msgstr ""
-"Sledujte čas strávený na každém lístku každým agentem a každou odpověď. "
-"Reportujte administrátorovi, kolik času strávíte na každém lístku."
+"Sledujte čas strávený na každém lístku každým agentem a každou odpověď. Reportujte administrátorovi, kolik času strávíte na každém "
+"lístku."
 
 msgid "User Options"
 msgstr "Možnosti uživatele"
 
-msgid ""
-"User options enable you to add Google Re-captcha or JS Help Desk Re-captcha "
-"for a registration form."
-msgstr ""
-"Uživatelské možnosti umožňují přidat Google Re-captcha nebo JS Help Desk Re-"
-"captcha pro registrační formulář."
+msgid "User options enable you to add Google Re-captcha or JS Help Desk Re-captcha for a registration form."
+msgstr "Uživatelské možnosti umožňují přidat Google Re-captcha nebo JS Help Desk Re-captcha pro registrační formulář."
 
 msgid "Actions"
 msgstr "Akce"
@@ -3306,117 +3223,71 @@ msgstr "Akce"
 msgid "Ticket Actions"
 msgstr "Akce vstupenek"
 
-msgid ""
-"Get multiple action options on each ticket like Print Ticket, Lock Ticket, "
-"Transfer ticket, etc."
-msgstr ""
-"Získejte více možností akcí na každém lístku, jako je Tisk lístků, Zamknout "
-"lístek, Transfer lístek atd."
+msgid "Get multiple action options on each ticket like Print Ticket, Lock Ticket, Transfer ticket, etc."
+msgstr "Získejte více možností akcí na každém lístku, jako je Tisk lístků, Zamknout lístek, Transfer lístek atd."
 
 msgid "Make unlimited announcements associated with the support system."
 msgstr "Udělejte neomezená oznámení přidružená k systému podpory."
 
-msgid ""
-"It allows you to block the email of any user to restrict him to create new "
-"tickets."
-msgstr ""
-"Umožňuje vám zablokovat e-mail libovolného uživatele a omezit ho tak, aby "
-"vytvořil nové lístky."
+msgid "It allows you to block the email of any user to restrict him to create new tickets."
+msgstr "Umožňuje vám zablokovat e-mail libovolného uživatele a omezit ho tak, aby vytvořil nové lístky."
 
 msgid "Desktop Notification"
 msgstr "Oznámení na ploše"
 
-msgid ""
-"The Desktop notifications will keep you up to date about anything happens on "
-"your support system."
-msgstr ""
-"Oznámení na ploše vás budou informovat o všem, co se ve vašem systému "
-"podpory děje."
+msgid "The Desktop notifications will keep you up to date about anything happens on your support system."
+msgstr "Oznámení na ploše vás budou informovat o všem, co se ve vašem systému podpory děje."
 
 msgid "Save the ticket as a PDF in your system and able to export all data."
-msgstr ""
-"Uložte si lístek jako PDF do svého systému a můžete exportovat všechna data."
+msgstr "Uložte si lístek jako PDF do svého systému a můžete exportovat všechna data."
 
 msgid "Create downloads to ensure the user to get downloads from downloads."
-msgstr ""
-"Vytvářejte stahování, abyste zajistili, že uživatel bude stahování stahován."
+msgstr "Vytvářejte stahování, abyste zajistili, že uživatel bude stahování stahován."
 
 msgid "Add FAQs to drastically reduce the number of common questions."
 msgstr "Přidejte časté dotazy, abyste výrazně snížili počet častých otázek."
 
-msgid ""
-"Get multiple themes with a beautiful color scheme to make the site beautiful."
+msgid "Get multiple themes with a beautiful color scheme to make the site beautiful."
 msgstr "Získejte více motivů s krásným barevným schématem, aby byl web krásný."
 
 msgid "Dashboard Widgets"
 msgstr "Widgety řídicího panelu"
 
-msgid ""
-"Get immediate data of your support operations as soon as you log into your "
-"WordPress administration area."
-msgstr ""
-"Jakmile se přihlásíte do administrační oblasti WordPress, získejte okamžitá "
-"data o podpůrných operacích."
+msgid "Get immediate data of your support operations as soon as you log into your WordPress administration area."
+msgstr "Jakmile se přihlásíte do administrační oblasti WordPress, získejte okamžitá data o podpůrných operacích."
 
 msgid "Internal Mail"
 msgstr "Interní Mail"
 
 msgid "Use an internal email to send emails to one agent to another agent."
-msgstr ""
-"Pomocí interního e-mailu můžete odesílat e-maily jednomu agentovi jinému "
-"agentovi."
+msgstr "Pomocí interního e-mailu můžete odesílat e-maily jednomu agentovi jinému agentovi."
 
 msgid "Front-End Widgets"
 msgstr "Přední ovládací prvky"
 
-msgid ""
-"Widgets in WordPress allow you to add content and features in the widgetized "
-"areas of your theme."
-msgstr ""
-"Widgety v WordPress vám umožňují přidávat obsah a funkce do widgetovaných "
-"oblastí vašeho motivu."
+msgid "Widgets in WordPress allow you to add content and features in the widgetized areas of your theme."
+msgstr "Widgety v WordPress vám umožňují přidávat obsah a funkce do widgetovaných oblastí vašeho motivu."
 
-msgid ""
-"JS Help Desk WooCommerce provides the much-needed bridge between your "
-"WooCommerce store and the JS Help Desk."
-msgstr ""
-"JS Help Desk WooCommerce poskytuje tolik potřebný most mezi obchodem "
-"WooCommerce a JS Help Desk."
+msgid "JS Help Desk WooCommerce provides the much-needed bridge between your WooCommerce store and the JS Help Desk."
+msgstr "JS Help Desk WooCommerce poskytuje tolik potřebný most mezi obchodem WooCommerce a JS Help Desk."
 
-msgid ""
-"Collect your customer's private data, sensitive information from credit card "
-"to health information and store them encrypted."
-msgstr ""
-"Shromažďujte soukromá data zákazníka, citlivé informace z kreditní karty ke "
-"zdravotním informacím a ukládejte je šifrovaná."
+msgid "Collect your customer's private data, sensitive information from credit card to health information and store them encrypted."
+msgstr "Shromažďujte soukromá data zákazníka, citlivé informace z kreditní karty ke zdravotním informacím a ukládejte je šifrovaná."
 
-msgid ""
-"Without valid Envato, license clients won't be able to open a new ticket."
+msgid "Without valid Envato, license clients won't be able to open a new ticket."
 msgstr "Bez platného Envato nebudou moci licenční klienti otevřít nový lístek."
 
-msgid ""
-"Adds the option to the registration form for prompting new users to "
-"subscribe to your email list."
-msgstr ""
-"Přidá možnost do registračního formuláře a vyzve nové uživatele k odběru "
-"vašeho seznamu e-mailů."
+msgid "Adds the option to the registration form for prompting new users to subscribe to your email list."
+msgstr "Přidá možnost do registračního formuláře a vyzve nové uživatele k odběru vašeho seznamu e-mailů."
 
-msgid ""
-"Paid Support is the easiest way to integrate and manage payments for your "
-"tickets."
-msgstr ""
-"Placená podpora je nejjednodušší způsob, jak integrovat a spravovat platby "
-"za vstupenky."
+msgid "Paid Support is the easiest way to integrate and manage payments for your tickets."
+msgstr "Placená podpora je nejjednodušší způsob, jak integrovat a spravovat platby za vstupenky."
 
 msgid "easy digital downloads"
 msgstr "snadné digitální stahování"
 
-msgid ""
-"EDD offers customers to open new tickets just one click from their EDD "
-"account."
-msgstr ""
-"EDD nabízí zákazníkům otevírání nových vstupenek jediným kliknutím z jejich "
-"účtu EDD."
+msgid "EDD offers customers to open new tickets just one click from their EDD account."
+msgstr "EDD nabízí zákazníkům otevírání nových vstupenek jediným kliknutím z jejich účtu EDD."
 
 msgid "We'd love to hear from You."
 msgstr "Rádi bychom od vás slyšeli."
@@ -3526,12 +3397,8 @@ msgstr "Získat překlad"
 msgid "Select Translation"
 msgstr "Vybrat překlad"
 
-msgid ""
-"When WordPress language change to ro, JS Help Desk language will auto change "
-"to ro"
-msgstr ""
-"Když se jazyk WordPress změní na ro, jazyk JS Help Desk se automaticky změní "
-"na ro"
+msgid "When WordPress language change to ro, JS Help Desk language will auto change to ro"
+msgstr "Když se jazyk WordPress změní na ro, jazyk JS Help Desk se automaticky změní na ro"
 
 msgid "c error"
 msgstr "chyba c"
@@ -3798,17 +3665,13 @@ msgid "addon in no longer active"
 msgstr "addon již není aktivní"
 
 msgid ""
-"JS Help Desk is a trusted open source ticket system. JS Help Desk is a "
-"simple, easy to use, web-based customer support system. Users can create a "
-"ticket from the front-end. JS Help Desk comes packed with lot features than "
-"most of the expensive(and complex) support ticket system on the market. The "
-"best part is, It completely free."
+"JS Help Desk is a trusted open source ticket system. JS Help Desk is a simple, easy to use, web-based customer support system. "
+"Users can create a ticket from the front-end. JS Help Desk comes packed with lot features than most of the expensive(and complex) "
+"support ticket system on the market. The best part is, It completely free."
 msgstr ""
-"JS Help Desk je důvěryhodný systém vstupenek s otevřeným zdrojovým kódem. JS "
-"Help Desk je jednoduchý, snadno použitelný webový systém zákaznické podpory. "
-"Uživatelé si mohou vytvořit lístek z klientského rozhraní. JS Help Desk je "
-"nabitý spoustou funkcí, než většina drahého (a komplexního) systému podpory "
-"vstupenek na trhu. Nejlepší na tom je, že je zcela zdarma."
+"JS Help Desk je důvěryhodný systém vstupenek s otevřeným zdrojovým kódem. JS Help Desk je jednoduchý, snadno použitelný webový "
+"systém zákaznické podpory. Uživatelé si mohou vytvořit lístek z klientského rozhraní. JS Help Desk je nabitý spoustou funkcí, než "
+"většina drahého (a komplexního) systému podpory vstupenek na trhu. Nejlepší na tom je, že je zcela zdarma."
 
 msgid "JS Help Desk Addon Installer"
 msgstr "Instalační program doplňku JS Help Desk"
@@ -4393,9 +4256,7 @@ msgid "Non-premium support"
 msgstr "Nep prémiová podpora"
 
 msgid "Check this box if this ticket should NOT apply against the paid support"
-msgstr ""
-"Toto políčko zaškrtněte, pokud by se tato jízdenka NEMAL použít proti "
-"placené podpoře"
+msgstr "Toto políčko zaškrtněte, pokud by se tato jízdenka NEMAL použít proti placené podpoře"
 
 msgid "Remaining"
 msgstr "Zbývající"
@@ -4746,8 +4607,7 @@ msgid "Email has not been stored"
 msgstr "Email nebyl uložen"
 
 msgid "Email send to admin when banned email try to create ticket"
-msgstr ""
-"Odeslat adminovi email, pokud se zabanovaný email pokusí vytvořit ticket"
+msgstr "Odeslat adminovi email, pokud se zabanovaný email pokusí vytvořit ticket"
 
 msgid "Enable ticket via email"
 msgstr "Povolit ticket přes email"
@@ -5086,8 +4946,7 @@ msgid "Show new and reply mail notifications"
 msgstr "Zobrazit oznámení nové a odpovězené zprávy"
 
 msgid "Show number of open, closed, answered ticket in my ticket"
-msgstr ""
-"Zobrazit počet otevřených, zavřených, odpovězených ticketů v Moje tickety"
+msgstr "Zobrazit počet otevřených, zavřených, odpovězených ticketů v Moje tickety"
 
 msgid "Show popular FAQ's. Options:"
 msgstr "Zobrazit popularní FAQ. Nastavení:"
@@ -5576,25 +5435,19 @@ msgid "Select role you want to assign to new users"
 msgstr "Vyberte roli, kterou chcete přiřadit novým uživatelům"
 
 msgid "Select whether users can reply to closed ticket via email or not"
-msgstr ""
-"Zvolte, zda mohou uživatelé odpovědět na uzavřenou vstupenku prostřednictvím "
-"e-mailu nebo ne"
+msgstr "Zvolte, zda mohou uživatelé odpovědět na uzavřenou vstupenku prostřednictvím e-mailu nebo ne"
 
 msgid "This text will appear whenever visitor creates ticket"
 msgstr "Tento text se zobrazí vždy, když návštěvník vytvoří ticket"
 
 msgid "Set no. of days or hours to send feedback email after ticket is closed"
-msgstr ""
-"Nastavte č. dní nebo hodin, kdy po odeslání lticketu odešlete emailem zpětné "
-"vazby"
+msgstr "Nastavte č. dní nebo hodin, kdy po odeslání lticketu odešlete emailem zpětné vazby"
 
 msgid "Feedback Successful message to customer"
 msgstr "Zpětná vazba Úspěšná zpráva zákazníkovi"
 
 msgid "You cannot use this email it is used in ticket via email"
-msgstr ""
-"Nemůžete použít tento e-mail, který je použit v ticketu prostřednictvím e-"
-"mailu"
+msgstr "Nemůžete použít tento e-mail, který je použit v ticketu prostřednictvím e-mailu"
 
 msgid "User of this department will receive email on new ticket"
 msgstr "Uživatel tohoto oddělení obdrží e-mail na nový ticket"
@@ -5867,18 +5720,13 @@ msgid "Access Control Level"
 msgstr "Úroveň řízení přístupu"
 
 msgid "Access control limit you can limit your staff to do specific task"
-msgstr ""
-"Limit kontroly přístupu můžete omezit své zaměstnance, aby vykonali "
-"konkrétní úkoly"
+msgstr "Limit kontroly přístupu můžete omezit své zaměstnance, aby vykonali konkrétní úkoly"
 
 msgid "Staff member create premade message premade available in ticket reply"
-msgstr ""
-"Zaměstnanec vytváří předplacené zprávy o předávání zpráv v odpovědi na "
-"Tickety"
+msgstr "Zaměstnanec vytváří předplacené zprávy o předávání zpráv v odpovědi na Tickety"
 
 msgid "Staff member can be created and reply your customer tickets"
-msgstr ""
-"Zaměstnanec může být vytvořen a odpovědět na vaše Tickety pro zákazníka"
+msgstr "Zaměstnanec může být vytvořen a odpovědět na vaše Tickety pro zákazníka"
 
 msgid "Help topic can be add with respect to departments"
 msgstr "Téma nápovědy lze přidat s ohledem na oddělení"
@@ -5899,9 +5747,7 @@ msgid "You can ban and unabn any spam email address"
 msgstr "Můžete zakázat a zrušit všechny nevyžádané e-mailové adresy"
 
 msgid "If and only if customer not reply certain days ticket marked overdue"
-msgstr ""
-"Pokud a pouze v případě, že zákazník nereaguje na určité dny, jsou Teckety "
-"označené po splatnosti"
+msgstr "Pokud a pouze v případě, že zákazník nereaguje na určité dny, jsou Teckety označené po splatnosti"
 
 msgid "System will read your email and create tickets"
 msgstr "Systém bude číst váš e-mail a vytvářet Tickety"
@@ -5931,8 +5777,7 @@ msgid "Customer Feedback"
 msgstr "Zákaznická zpětná vazba"
 
 msgid "Customer can provide feedback that can be used to improve services"
-msgstr ""
-"Zákazník může poskytnout zpětnou vazbu, kterou lze využít ke zlepšení služeb"
+msgstr "Zákazník může poskytnout zpětnou vazbu, kterou lze využít ke zlepšení služeb"
 
 msgid "RTL Supported"
 msgstr "RTL Podpora"
@@ -6072,12 +5917,8 @@ msgstr "Automatické přepínání UTF"
 msgid "Firebase Auth Domain"
 msgstr "doména Firebase Auth"
 
-msgid ""
-"Private Credentials Encryption Key changing this value will discard all "
-"existing credentials "
-msgstr ""
-"Soukromý šifrovací klíč pověření změnou této hodnoty zahodí všechna "
-"existující pověření"
+msgid "Private Credentials Encryption Key changing this value will discard all existing credentials "
+msgstr "Soukromý šifrovací klíč pověření změnou této hodnoty zahodí všechna existující pověření"
 
 msgid "Api Key"
 msgstr "Klíč API"
@@ -6145,8 +5986,7 @@ msgstr "téma nápovědy"
 msgid "Wordpress Plugin"
 msgstr "Plugin pro Wordpress"
 
-msgid ""
-"Add ons for JS Help Desk have been installed and activated successfully. "
+msgid "Add ons for JS Help Desk have been installed and activated successfully. "
 msgstr "Doplňky pro JS Help Desk byly úspěšně nainstalovány a aktivovány."
 
 msgid "NA"
@@ -6474,11 +6314,9 @@ msgid "Add-On’s For Help Desk"
 msgstr "Doplňky pro Help Desk"
 
 msgid ""
-"Get trusted WordPress add on’s. Guaranteed to work fast, safe to use, "
-"beautifully coded, packed with features and easy to use."
+"Get trusted WordPress add on’s. Guaranteed to work fast, safe to use, beautifully coded, packed with features and easy to use."
 msgstr ""
-"Získejte důvěryhodné doplňky WordPress. Zaručená rychlá práce, bezpečné "
-"použití, krásně kódované, nabité funkcemi a snadné použití."
+"Získejte důvěryhodné doplňky WordPress. Zaručená rychlá práce, bezpečné použití, krásně kódované, nabité funkcemi a snadné použití."
 
 msgid "Save big with an exclusive membership plan today!"
 msgstr "Ušetřete ještě dnes díky exkluzivnímu členskému plánu!"
@@ -6486,152 +6324,92 @@ msgstr "Ušetřete ještě dnes díky exkluzivnímu členskému plánu!"
 msgid "show bundle pack"
 msgstr "zobrazit balíček balíčku"
 
-msgid ""
-"Add agents and assign roles and permissions to provide assistance and "
-"support to customer support tickets."
-msgstr ""
-"Přidejte agenty a přiřaďte role a oprávnění k poskytování pomoci a podpory k "
-"lístkům zákaznické podpory."
+msgid "Add agents and assign roles and permissions to provide assistance and support to customer support tickets."
+msgstr "Přidejte agenty a přiřaďte role a oprávnění k poskytování pomoci a podpory k lístkům zákaznické podpory."
 
-msgid ""
-"Define rules for ticket to auto close. Ticket will be auto close after "
-"specific interval of time which can be set by admin."
+msgid "Define rules for ticket to auto close. Ticket will be auto close after specific interval of time which can be set by admin."
 msgstr ""
-"Definujte pravidla pro automatické uzavření lístku. Vstupenka se automaticky "
-"uzavře po určitém časovém intervalu, který může nastavit admin."
+"Definujte pravidla pro automatické uzavření lístku. Vstupenka se automaticky uzavře po určitém časovém intervalu, který může "
+"nastavit admin."
 
-msgid ""
-"Get the survey from your customers on ticket closing to improve your quality "
-"of services and assistance."
-msgstr ""
-"Získejte od svých zákazníků průzkum ohledně uzavírání vstupenek, abyste "
-"zlepšili kvalitu svých služeb a pomoci."
+msgid "Get the survey from your customers on ticket closing to improve your quality of services and assistance."
+msgstr "Získejte od svých zákazníků průzkum ohledně uzavírání vstupenek, abyste zlepšili kvalitu svých služeb a pomoci."
 
 msgid "Helptopic"
 msgstr "Téma nápovědy"
 
-msgid ""
-"Help topics help users to find and select the area with which they need "
-"assistance."
-msgstr ""
-"Témata nápovědy pomáhají uživatelům najít a vybrat oblast, se kterou "
-"potřebují pomoc."
+msgid "Help topics help users to find and select the area with which they need assistance."
+msgstr "Témata nápovědy pomáhají uživatelům najít a vybrat oblast, se kterou potřebují pomoc."
 
 msgid ""
-"The private note is used as reminders or to give other agents insights into "
-"the ticket issue. User Won't see the private notes."
+"The private note is used as reminders or to give other agents insights into the ticket issue. User Won't see the private notes."
 msgstr ""
-"Soukromá poznámka se používá jako připomenutí nebo k tomu, aby poskytla "
-"ostatním agentům přehled o problému s tiketem. Uživatel neuvidí soukromé "
-"poznámky."
+"Soukromá poznámka se používá jako připomenutí nebo k tomu, aby poskytla ostatním agentům přehled o problému s tiketem. Uživatel "
+"neuvidí soukromé poznámky."
 
-msgid ""
-"Stop losing productivity on repetitive queries,Build your knowledge base, "
-"group solutions by topics to facilitate users."
+msgid "Stop losing productivity on repetitive queries,Build your knowledge base, group solutions by topics to facilitate users."
 msgstr ""
-"Zastavte ztrátu produktivity při opakujících se dotazech, vytvořte si "
-"znalostní základnu, seskupte řešení podle témat, abyste uživatelům usnadnili "
-"práci."
+"Zastavte ztrátu produktivity při opakujících se dotazech, vytvořte si znalostní základnu, seskupte řešení podle témat, abyste "
+"uživatelům usnadnili práci."
 
-msgid ""
-"Enables admin to set N numbers of tickets for users to create and set N "
-"numbers of Ticket to open for agents separately."
+msgid "Enables admin to set N numbers of tickets for users to create and set N numbers of Ticket to open for agents separately."
 msgstr ""
-"Umožňuje správci nastavit N čísel tiketů pro uživatele, kteří je mají "
-"vytvořit, a nastavit N čísel tiketů, aby se otevřeli agentům samostatně."
+"Umožňuje správci nastavit N čísel tiketů pro uživatele, kteří je mají vytvořit, a nastavit N čísel tiketů, aby se otevřeli agentům "
+"samostatně."
 
 msgid "Multi Language Email Templates"
 msgstr "Vícejazyčné e-mailové šablony"
 
-msgid ""
-"It allows to create language-based email templates for all JS Help Desk "
-"email templates."
-msgstr ""
-"Umožňuje vytvářet jazykové e-mailové šablony pro všechny e-mailové šablony "
-"JS Help Desk."
+msgid "It allows to create language-based email templates for all JS Help Desk email templates."
+msgstr "Umožňuje vytvářet jazykové e-mailové šablony pro všechny e-mailové šablony JS Help Desk."
 
-msgid ""
-"Canned Responses are pre-populated messages that allows support agents to "
-"respond quickly to customer issues."
-msgstr ""
-"Předpřipravené odpovědi jsou předem vyplněné zprávy, které umožňují agentům "
-"podpory rychle reagovat na problémy zákazníků."
+msgid "Canned Responses are pre-populated messages that allows support agents to respond quickly to customer issues."
+msgstr "Předpřipravené odpovědi jsou předem vyplněné zprávy, které umožňují agentům podpory rychle reagovat na problémy zákazníků."
 
-msgid ""
-"Enables users to reply to the tickets via email without the need to login to "
-"the support system first."
+msgid "Enables users to reply to the tickets via email without the need to login to the support system first."
 msgstr ""
-"Umožňuje uživatelům odpovídat na vstupenky prostřednictvím e-mailu, aniž by "
-"se museli nejprve přihlašovat do systému podpory."
+"Umožňuje uživatelům odpovídat na vstupenky prostřednictvím e-mailu, aniž by se museli nejprve přihlašovat do systému podpory."
 
-msgid ""
-"Make unlimited announcements associated with support system to get customer "
-"interaction."
-msgstr ""
-"Provádějte neomezená oznámení spojená se systémem podpory, abyste získali "
-"interakci se zákazníky."
+msgid "Make unlimited announcements associated with support system to get customer interaction."
+msgstr "Provádějte neomezená oznámení spojená se systémem podpory, abyste získali interakci se zákazníky."
 
-msgid ""
-"Ban Email allows you to block email of any user to restrict him to create "
-"new tickets."
-msgstr ""
-"Zákaz e-mailu vám umožňuje zablokovat e-mail libovolného uživatele a omezit "
-"mu vytváření nových tiketů."
+msgid "Ban Email allows you to block email of any user to restrict him to create new tickets."
+msgstr "Zákaz e-mailu vám umožňuje zablokovat e-mail libovolného uživatele a omezit mu vytváření nových tiketů."
 
 msgid "Descktop Notifications"
 msgstr "Oznámení na ploše"
 
-msgid ""
-"Save the ticket as a PDF in your system or the admin will also be able to "
-"export all the data inside of Ticket."
-msgstr ""
-"Uložte si vstupenku jako PDF ve svém systému nebo administrátor bude také "
-"moci exportovat všechna data uvnitř vstupenky."
+msgid "Save the ticket as a PDF in your system or the admin will also be able to export all the data inside of Ticket."
+msgstr "Uložte si vstupenku jako PDF ve svém systému nebo administrátor bude také moci exportovat všechna data uvnitř vstupenky."
 
-msgid ""
-"Tired of getting tickets about the same problems? Add FAQs to drastically "
-"reduce the number of common questions from users."
+msgid "Tired of getting tickets about the same problems? Add FAQs to drastically reduce the number of common questions from users."
 msgstr ""
-"Už vás nebaví získávat vstupenky se stejnými problémy? Přidejte časté "
-"dotazy, abyste výrazně snížili počet běžných dotazů od uživatelů."
+"Už vás nebaví získávat vstupenky se stejnými problémy? Přidejte časté dotazy, abyste výrazně snížili počet běžných dotazů od "
+"uživatelů."
 
 msgid "Admin Widgets"
 msgstr "Admin Widgety"
 
-msgid ""
-"Use internal email to send emails to one agent to another agent with in "
-"support ticket."
-msgstr ""
-"Použijte interní e-mail k odesílání e-mailů jednomu agentovi jinému agentovi "
-"s lístkem podpory."
+msgid "Use internal email to send emails to one agent to another agent with in support ticket."
+msgstr "Použijte interní e-mail k odesílání e-mailů jednomu agentovi jinému agentovi s lístkem podpory."
 
 msgid "Front-End Widget"
 msgstr "Přední widget"
 
-msgid ""
-"Paid Support is the easiest way to integrate and manage payments for your "
-"support tickets."
-msgstr ""
-"Placená podpora je nejjednodušší způsob, jak integrovat a spravovat platby "
-"za vaše lístky podpory."
+msgid "Paid Support is the easiest way to integrate and manage payments for your support tickets."
+msgstr "Placená podpora je nejjednodušší způsob, jak integrovat a spravovat platby za vaše lístky podpory."
 
 msgid "Mail Chimp"
 msgstr "Mailchimp"
 
-msgid ""
-"The Mail Chimp add-on adds a new checkbox to the registration form for "
-"prompting new users to subscribe your email-list."
+msgid "The Mail Chimp add-on adds a new checkbox to the registration form for prompting new users to subscribe your email-list."
 msgstr ""
-"Doplněk Mail Chimp přidává do registračního formuláře nové zaškrtávací "
-"políčko, které vyzývá nové uživatele, aby se přihlásili do vašeho e-"
-"mailového seznamu."
+"Doplněk Mail Chimp přidává do registračního formuláře nové zaškrtávací políčko, které vyzývá nové uživatele, aby se přihlásili do "
+"vašeho e-mailového seznamu."
 
-msgid ""
-"EDD offers customers to open new tickets just one click from their EDD "
-"account with optionally validating the license keys."
+msgid "EDD offers customers to open new tickets just one click from their EDD account with optionally validating the license keys."
 msgstr ""
-"EDD nabízí zákazníkům otevřít nové vstupenky pouhým jedním kliknutím z "
-"jejich účtu EDD s volitelným ověřením licenčních klíčů."
+"EDD nabízí zákazníkům otevřít nové vstupenky pouhým jedním kliknutím z jejich účtu EDD s volitelným ověřením licenčních klíčů."
 
 msgid "email cc"
 msgstr "email cc"
@@ -6640,41 +6418,34 @@ msgid "Email Cc"
 msgstr "E-mailová kopie"
 
 msgid ""
-"CC(Carbon Copy) - the people who should know about the information which is "
-"being shared and the people included are able to see who is there in the "
-"list."
+"CC(Carbon Copy) - the people who should know about the information which is being shared and the people included are able to see "
+"who is there in the list."
 msgstr ""
-"CC (Carbon Copy) – lidé, kteří by měli vědět o informacích, které jsou "
-"sdíleny, a zahrnutí lidé mohou vidět, kdo je v seznamu."
+"CC (Carbon Copy) – lidé, kteří by měli vědět o informacích, které jsou sdíleny, a zahrnutí lidé mohou vidět, kdo je v seznamu."
 
 msgid "multiform"
 msgstr "mnohotvarý"
 
 msgid "Multiform allows user to add more than one form based on requirements."
-msgstr ""
-"Multiform umožňuje uživateli přidat více než jeden formulář na základě "
-"požadavků."
+msgstr "Multiform umožňuje uživateli přidat více než jeden formulář na základě požadavků."
 
 msgid "agent auto assign"
 msgstr "automatické přiřazení agenta"
 
 msgid ""
-"When auto assignment is enabled and a ticket is created, an appropriate "
-"agent is automatically assigned to the ticket and it is moved to the "
-"Assigned state."
+"When auto assignment is enabled and a ticket is created, an appropriate agent is automatically assigned to the ticket and it is "
+"moved to the Assigned state."
 msgstr ""
-"Když je povoleno automatické přiřazení a je vytvořen tiket, je k tiketu "
-"automaticky přiřazen příslušný agent a ten se přesune do stavu Přiřazeno."
+"Když je povoleno automatické přiřazení a je vytvořen tiket, je k tiketu automaticky přiřazen příslušný agent a ten se přesune do "
+"stavu Přiřazeno."
 
 msgid "Social Login"
 msgstr "Sociální přihlášení"
 
-msgid ""
-"Users can login from their social media accounts. They can create a new "
-"account or use social media accounts."
+msgid "Users can login from their social media accounts. They can create a new account or use social media accounts."
 msgstr ""
-"Uživatelé se mohou přihlásit ze svých účtů na sociálních sítích. Mohou si "
-"vytvořit nový účet nebo používat účty na sociálních sítích."
+"Uživatelé se mohou přihlásit ze svých účtů na sociálních sítích. Mohou si vytvořit nový účet nebo používat účty na sociálních "
+"sítích."
 
 msgid "JS Help Desk Add-Ons Bundle Pack"
 msgstr "Balíček doplňků JS Help Desk"
@@ -6701,11 +6472,11 @@ msgid "All Future Addons"
 msgstr "Všechny budoucí doplňky"
 
 msgid ""
-"Hey there! We have recently launched a fresh update for the add-ons. Don't "
-"forget to update the add-ons to enjoy the greatest features!"
+"Hey there! We have recently launched a fresh update for the add-ons. Don't forget to update the add-ons to enjoy the greatest "
+"features!"
 msgstr ""
-"Nazdárek! Nedávno jsme spustili novou aktualizaci doplňků. Nezapomeňte "
-"aktualizovat doplňky, abyste si mohli užívat ty nejlepší funkce!"
+"Nazdárek! Nedávno jsme spustili novou aktualizaci doplňků. Nezapomeňte aktualizovat doplňky, abyste si mohli užívat ty nejlepší "
+"funkce!"
 
 msgid "View Addone Status"
 msgstr "Zobrazit stav Addone"
@@ -6905,54 +6676,38 @@ msgstr "Výpis vstupenek"
 msgid "Visitor Ticket Setting"
 msgstr "Nastavení návštěvnického lístku"
 
-msgid ""
-"By enabling this option, a user can know to whom the ticket has been "
-"assigned."
-msgstr ""
-"Povolením této možnosti může uživatel vědět, komu byla vstupenka přiřazena."
+msgid "By enabling this option, a user can know to whom the ticket has been assigned."
+msgstr "Povolením této možnosti může uživatel vědět, komu byla vstupenka přiřazena."
 
 msgid "Assigned info. on admin tickets"
 msgstr "Přidělené informace. na admin vstupenkách"
 
-msgid ""
-"By enabling this option, an agent can know to whom the ticket has been "
-"assigned."
+msgid "By enabling this option, an agent can know to whom the ticket has been assigned."
 msgstr "Povolením této možnosti může agent vědět, komu byl tiket přidělen."
 
 msgid "Assigned info. on user tickets"
 msgstr "Přidělené informace. na uživatelských lístcích"
 
-msgid ""
-"By enabling this option, an admin can know to whom the ticket has been "
-"assigned."
-msgstr ""
-"Povolením této možnosti může administrátor vědět, komu byl lístek přiřazen."
+msgid "By enabling this option, an admin can know to whom the ticket has been assigned."
+msgstr "Povolením této možnosti může administrátor vědět, komu byl lístek přiřazen."
 
 msgid "Assigned info. on agent tickets"
 msgstr "Přidělené informace. na agentských lístcích"
 
-msgid ""
-"By enabling this option, a user can know who closed the ticket and when that "
-"ticket closed."
-msgstr ""
-"Povolením této možnosti může uživatel vědět, kdo a kdy byl lístek uzavřen."
+msgid "By enabling this option, a user can know who closed the ticket and when that ticket closed."
+msgstr "Povolením této možnosti může uživatel vědět, kdo a kdy byl lístek uzavřen."
 
 msgid "Closed info. on admin closed tickets"
 msgstr "Uzavřené info. na admin uzavřených vstupenkách"
 
-msgid ""
-"By enabling this option, an agent can know who closed the ticket and when "
-"that ticket closed."
+msgid "By enabling this option, an agent can know who closed the ticket and when that ticket closed."
 msgstr "Povolením této možnosti může agent vědět, kdo a kdy byl tiket uzavřen."
 
 msgid "Closed info. on agent closed tickets"
 msgstr "Uzavřené info. na vstupenkách uzavřených agentem"
 
-msgid ""
-"By enabling this option, an admin can know who closed the ticket and when "
-"that ticket closed."
-msgstr ""
-"Povolením této možnosti může správce vědět, kdo a kdy byl tiket uzavřen."
+msgid "By enabling this option, an admin can know who closed the ticket and when that ticket closed."
+msgstr "Povolením této možnosti může správce vědět, kdo a kdy byl tiket uzavřen."
 
 msgid "Set default sorting for ticket listing"
 msgstr "Nastavit výchozí řazení pro výpis lístků"
@@ -6972,31 +6727,21 @@ msgstr "Vyberte, zda uživatelé uvidí tlačítko pro smazání lístku"
 msgid "Show ticket delete button"
 msgstr "Zobrazit tlačítko pro smazání lístku"
 
-msgid ""
-"Select whether users can see the name of administrator or staff member on "
-"ticket reply"
-msgstr ""
-"Vyberte, zda uživatelé uvidí v odpovědi na tiket jméno správce nebo "
-"zaměstnance"
+msgid "Select whether users can see the name of administrator or staff member on ticket reply"
+msgstr "Vyberte, zda uživatelé uvidí v odpovědi na tiket jméno správce nebo zaměstnance"
 
 msgid "Show Anonymous Name On Ticket Reply"
 msgstr "Zobrazit anonymní jméno v odpovědi na tiket"
 
-msgid ""
-"Select whether users can see the email of administrator or agent on ticket "
-"reply"
-msgstr ""
-"Vyberte, zda uživatelé uvidí e-mail správce nebo agenta v odpovědi na tiket"
+msgid "Select whether users can see the email of administrator or agent on ticket reply"
+msgstr "Vyberte, zda uživatelé uvidí e-mail správce nebo agenta v odpovědi na tiket"
 
 msgid "Show Admin OR Agent Email On Ticket Reply"
 msgstr "Zobrazit e-mail správce NEBO agenta v odpovědi na tiket"
 
-msgid ""
-"Show or hide the multiform popup when creating a new ticket. if you hide "
-"them, the system will open the default form."
+msgid "Show or hide the multiform popup when creating a new ticket. if you hide them, the system will open the default form."
 msgstr ""
-"Při vytváření nového tiketu zobrazit nebo skrýt vyskakovací okno s více "
-"formáty. pokud je skryjete, systém otevře výchozí formulář."
+"Při vytváření nového tiketu zobrazit nebo skrýt vyskakovací okno s více formáty. pokud je skryjete, systém otevře výchozí formulář."
 
 msgid "Multiforms Popup For New Tickets"
 msgstr "Multiforms Popup pro nové vstupenky"
@@ -7046,12 +6791,8 @@ msgstr "Jsme tu, abychom vám pomohli"
 msgid "Help icon"
 msgstr "Ikona nápovědy"
 
-msgid ""
-"JS Help Desk is a professional, simple, easy to use and complete customer "
-"support system."
-msgstr ""
-"JS Help Desk je profesionální, jednoduchý, snadno použitelný a kompletní "
-"systém zákaznické podpory."
+msgid "JS Help Desk is a professional, simple, easy to use and complete customer support system."
+msgstr "JS Help Desk je profesionální, jednoduchý, snadno použitelný a kompletní systém zákaznické podpory."
 
 msgid "View all videos"
 msgstr "Zobrazit všechna videa"
@@ -7068,12 +6809,8 @@ msgstr "Ikona Help Desk"
 msgid "JS Help Desk Support"
 msgstr "Podpora JS Help Desk"
 
-msgid ""
-"JS Help Desk delivers timely customer support if you have any query then "
-"we're here to show you the way."
-msgstr ""
-"JS Help Desk poskytuje včasnou zákaznickou podporu, pokud máte jakýkoli "
-"dotaz, pak jsme tu, abychom vám ukázali cestu."
+msgid "JS Help Desk delivers timely customer support if you have any query then we're here to show you the way."
+msgstr "JS Help Desk poskytuje včasnou zákaznickou podporu, pokud máte jakýkoli dotaz, pak jsme tu, abychom vám ukázali cestu."
 
 msgid "Visitor ticket creation"
 msgstr "Vytvoření návštěvnického lístku"
@@ -7337,13 +7074,11 @@ msgid "Edit Help Topic"
 msgstr "Upravit téma nápovědy"
 
 msgid ""
-"e.g ' I have read and agree to the [link] Terms and Conditions[/link].  ' "
-"The text between [link] and [/link] will be linked to provided url or "
-"wordpress page."
+"e.g ' I have read and agree to the [link] Terms and Conditions[/link].  ' The text between [link] and [/link] will be linked to "
+"provided url or wordpress page."
 msgstr ""
-"např. ' Přečetl jsem a souhlasím s [link] Smluvními podmínkami[/link]. ' "
-"Text mezi [link] a [/link] bude propojen s poskytnutou url nebo stránkou "
-"wordpress."
+"např. ' Přečetl jsem a souhlasím s [link] Smluvními podmínkami[/link]. ' Text mezi [link] a [/link] bude propojen s poskytnutou "
+"url nebo stránkou wordpress."
 
 msgid "login"
 msgstr "přihlásit se"
@@ -7354,12 +7089,8 @@ msgstr "hvězdy"
 msgid "Please write appreciated review at WP Extension Directory"
 msgstr "Napište prosím cennou recenzi na WP Extension Directory"
 
-msgid ""
-"We'd love to hear from you. It'll only take 2 minutes of your time, and will "
-"really help us spread the word"
-msgstr ""
-"Rádi bychom od vás slyšeli. Zabere to jen 2 minuty vašeho času a skutečně "
-"nám to pomůže šířit informace"
+msgid "We'd love to hear from you. It'll only take 2 minutes of your time, and will really help us spread the word"
+msgstr "Rádi bychom od vás slyšeli. Zabere to jen 2 minuty vašeho času a skutečně nám to pomůže šířit informace"
 
 msgid "love"
 msgstr "milovat"
@@ -7549,3 +7280,657 @@ msgstr "Ověření IMAP bylo zrušeno"
 
 msgid "Page Not Found !!"
 msgstr "Stránka nenalezena !!"
+
+msgid "Email Template has been successfully deleted"
+msgstr "E -mailová šablona byla úspěšně smazána"
+
+msgid "Select Submit Type"
+msgstr "Vyberte typ Odeslat"
+
+msgid "'s Department permission has been changed"
+msgstr "Oprávnění oddělení bylo změněno"
+
+msgid "Rule has not been stored"
+msgstr "Pravidlo nebylo uloženo"
+
+msgid "Rule has not been deleted"
+msgstr "Pravidlo nebylo smazáno"
+
+msgid "Rule"
+msgstr "Pravidlo"
+
+msgid "Select Condition Value"
+msgstr "Vyberte hodnotu podmínky"
+
+msgid "The ticket is unlocked by"
+msgstr "Lístek je odemčen"
+
+msgid " item(s)"
+msgstr "položky"
+
+msgid "Active Now"
+msgstr "Nyní aktivní"
+
+msgid "Dashboad"
+msgstr "Palubní deska"
+
+msgid "Statuses"
+msgstr "Stavy"
+
+msgid "status"
+msgstr "postavení"
+
+msgid "Products"
+msgstr "Produkty"
+
+msgid "product"
+msgstr "produkt"
+
+msgid "Emailcc"
+msgstr "E -mailcc"
+
+msgid "JS Help Desk Pages"
+msgstr "Stránky JS Help Desk"
+
+msgid "JS Help desk control panel"
+msgstr "Ovládací panel JS Help Desk"
+
+msgid "Add ticket"
+msgstr "Přidejte lístek"
+
+msgid "My tickets"
+msgstr "Moje lístky"
+
+msgid "Latest downloads"
+msgstr "Nejnovější stahování"
+
+msgid "Popular downloads"
+msgstr "Populární stahování"
+
+msgid "List FAQ`s"
+msgstr "Seznam FAQ"
+
+msgid "Latest FAQ`s"
+msgstr "Nejnovější FAQ"
+
+msgid "Popular FAQ`s"
+msgstr "Populární FAQ"
+
+msgid "Latest announcements"
+msgstr "Nejnovější oznámení"
+
+msgid "Popular announcements"
+msgstr "Populární oznámení"
+
+msgid "home icon"
+msgstr "Domácí ikona"
+
+msgid "slug"
+msgstr "slimák"
+
+msgid "Auto Assign"
+msgstr "Automatické přiřazení"
+
+msgid "Shortcodes"
+msgstr "Krátké kódy"
+
+msgid "Ticket Statuses"
+msgstr "Stavy lístků"
+
+msgid "Add Status"
+msgstr "Přidat stav"
+
+msgid "Add Ticket Status"
+msgstr "Přidejte stav lístku"
+
+msgid "Add Product"
+msgstr "Přidejte produkt"
+
+msgid "Agent Roles"
+msgstr "Role agenta"
+
+msgid "Add Agent Role"
+msgstr "Přidejte roli agenta"
+
+msgid "Emial CC"
+msgstr "E -mail CC"
+
+msgid "Add Emial CC"
+msgstr "Přidejte e -mail CC"
+
+msgid "help"
+msgstr "pomoc"
+
+msgid "WooCommerce Support"
+msgstr "Podpora WooCommerce"
+
+msgid "Envato"
+msgstr "Envato"
+
+msgid "Prefix has been stored"
+msgstr "Byla uložena předpona"
+
+msgid "reset"
+msgstr "resetovat"
+
+msgid "Home Slug"
+msgstr "Domácí slimák"
+
+msgid "Prefix"
+msgstr "Předpona"
+
+msgid "This prefix will be added to slug incase of conflict"
+msgstr "Tato předpona bude přidána k úschově konfliktu"
+
+msgid "edit"
+msgstr "Upravit"
+
+msgid "Missing user(s) added successfully!"
+msgstr "Chybějící uživatele (uživatele) přidány úspěšně!"
+
+msgid "No missing user found!"
+msgstr "Nebyl nalezen žádný chybějící uživatel!"
+
+msgid "Not Installed"
+msgstr "Není nainstalováno"
+
+msgid "Addon Installed Successfully"
+msgstr "Addon se nainstaloval úspěšně"
+
+msgid "Addon installation failed"
+msgstr "Instalace doplňků selhala"
+
+msgid "add missing users"
+msgstr "Přidejte pohřešované uživatele"
+
+msgid "user"
+msgstr "uživatel"
+
+msgid "view all tickets history"
+msgstr "Zobrazit historii všech vstupenek"
+
+msgid "View All Tickets History"
+msgstr "Zobrazit historii všech vstupenek"
+
+msgid "It allows user to add more than one form based on requirements."
+msgstr "Umožňuje uživateli přidat více než jeden formulář na základě požadavků."
+
+msgid "When a ticket is created, an appropriate agent is automatically assigned to the ticket and it is moved to the Assigned state."
+msgstr "Po vytvoření lístku je na lístek automaticky přiřazen vhodný agent a je přesunut do přiřazeného stavu."
+
+msgid "WP Vehicle Manager"
+msgstr "Správce vozidel WP"
+
+msgid "Visit site"
+msgstr "Navštivte stránky"
+
+msgid "Install WP Vehicle Manager Plugin"
+msgstr "Nainstalujte plugin Správce vozidel WP"
+
+msgid "JS Job Manager"
+msgstr "JS Správce práce"
+
+msgid "Install JS Job Manager Plugin"
+msgstr "Nainstalujte plugin JS Správce JIS"
+
+msgid "WP Learn Manager"
+msgstr "WP Learn Manager"
+
+msgid "Install WP Learn Manager Plugin"
+msgstr "Nainstalujte plugin WP Learn Manager"
+
+msgid "Manually assign ticket to agent"
+msgstr "Ručně přiřaďte vstupenku agentovi"
+
+msgid "Translation"
+msgstr "Překlad"
+
+msgid "When WordPress language change to fr, JS Help Desk language will auto change to fr"
+msgstr "Když se změní jazyk WordPress na fr, jazyk Help Desk JS se automaticky změní na FR"
+
+msgid "Status: "
+msgstr "Postavení:"
+
+msgid "The status has been changed"
+msgstr "Stav byl změněn"
+
+msgid "The status has not been changed"
+msgstr "Stav nebyl změněn"
+
+msgid "Ticket status change"
+msgstr "Změna stavu vstupenky"
+
+msgid "The status is changed by"
+msgstr "Stav se mění o"
+
+msgid "Change Status"
+msgstr "Změnit stav"
+
+msgid "Reason For"
+msgstr "Důvod pro"
+
+msgid "tickets by"
+msgstr "Vstupenky od"
+
+msgid "View Image"
+msgstr "Zobrazit obrázek"
+
+msgid "Viewed By"
+msgstr "Zobrazit"
+
+msgid "None"
+msgstr "Žádný"
+
+msgid "set"
+msgstr "soubor"
+
+msgid "Other Tickets"
+msgstr "Další lístky"
+
+msgid "Type Note for"
+msgstr "Zadejte poznámku pro"
+
+msgid "tickets"
+msgstr "Vstupenky"
+
+msgid "Token"
+msgstr "Žeton"
+
+msgid "Search Ticket"
+msgstr "Hledat lístek"
+
+msgid "Ticket Creator"
+msgstr "Tvůrce vstupenek"
+
+msgid "Remember Your Ticket Token for Tracking (Save It!)"
+msgstr "Pamatujte si token lístku na sledování (uložte to!)"
+
+msgid "You've received a token number to track your support ticket status. This is one-time code, so please save it carefully. "
+msgstr "Obdrželi jste číslo tokenu, abyste mohli sledovat stav vaší podpory. Jedná se o jednorázový kód, proto jej opatrně uložte."
+
+msgid "Copy Token"
+msgstr "Kopírovat token"
+
+msgid "Status Title Already Exist"
+msgstr "Název stavu již existuje"
+
+msgid "Status has been stored"
+msgstr "Stav byl uložen"
+
+msgid "Status has not been stored"
+msgstr "Stav nebyl uložen"
+
+msgid "Status has been deleted"
+msgstr "Stav byl smazán"
+
+msgid "Status has not been deleted"
+msgstr "Stav nebyl smazán"
+
+msgid "Text Color"
+msgstr "Barva textu"
+
+msgid "Background Color"
+msgstr "Barva pozadí"
+
+msgid "Save Status"
+msgstr "Uložit stav"
+
+msgid "Required Fields are not filled"
+msgstr "Požadovaná pole nejsou vyplněna"
+
+msgid "Note:"
+msgstr "Poznámka:"
+
+msgid "Features marked with"
+msgstr "Funkce označené"
+
+msgid "are only available with its own addon."
+msgstr "jsou k dispozici pouze s vlastním doplňkem."
+
+msgid "Product Title Already Exist"
+msgstr "Název produktu již existuje"
+
+msgid "Product has been stored"
+msgstr "Produkt byl uložen"
+
+msgid "Product has not been stored"
+msgstr "Produkt nebyl uložen"
+
+msgid "Product has been deleted"
+msgstr "Byl smazán produkt"
+
+msgid "Product has not been deleted"
+msgstr "Produkt nebyl smazán"
+
+msgid "Save Product"
+msgstr "Uložit produkt"
+
+msgid "JS Help Desk Settings"
+msgstr "Nastavení JS Help Desk"
+
+msgid "Step 2 of "
+msgstr "Krok 2 z"
+
+msgid "Step 4 of 5"
+msgstr "Krok 4 z 5"
+
+msgid "Step 1 of "
+msgstr "Krok 1 z"
+
+msgid "Download Translation File"
+msgstr "Stáhnout překladový soubor"
+
+msgid "Want to download translation file? Click on download. It will take sometime."
+msgstr "Chcete si stáhnout soubor překladu? Klikněte na Stáhnout. Bude to trvat někdy."
+
+msgid "Download & Next"
+msgstr "Stáhnout a další"
+
+msgid "Skip this step"
+msgstr "Přeskočte tento krok"
+
+msgid "Recaptcha Version 2"
+msgstr "Recaptcha verze 2"
+
+msgid "Recaptcha Version 3"
+msgstr "Recaptcha verze 3"
+
+msgid "WordPress Default Register Page"
+msgstr "Výchozí stránka WordPress Výchozí"
+
+msgid "4"
+msgstr "4"
+
+msgid "5"
+msgstr "5"
+
+msgid "6"
+msgstr "6"
+
+msgid "Oldest First"
+msgstr "Nejstarší první"
+
+msgid "Newest First"
+msgstr "Nejnovější první"
+
+msgid "menu"
+msgstr "menu"
+
+msgid "Select Configuration"
+msgstr "Vyberte konfiguraci"
+
+msgid "Facebook"
+msgstr "Facebook"
+
+msgid "Linkedin"
+msgstr "LinkedIn"
+
+msgid "Show number of the open, closed, answered ticket in my ticket and dashboard"
+msgstr "Zobrazit číslo otevřeného, ​​zavřeného, ​​odpověděného lístku na lístku a palubní desce"
+
+msgid "Redirect user on log in"
+msgstr "Přesměrovat uživatele na přihlášení"
+
+msgid "Set register Link Default or Custom"
+msgstr "Nastavit odkaz na registr výchozí nebo vlastní"
+
+msgid " To enable registrations, WordPress admin > General > Settings > Membership: Anyone can register"
+msgstr "Chcete -li povolit registrace, WordPress Admin> General> Nastavení> Členství: Kdokoli se může zaregistrovat"
+
+msgid "Woocommerce Category"
+msgstr "Kategorie WooCommerce"
+
+msgid "Select category to display only products of this category on the WooCommerce shop page."
+msgstr "Vyberte kategorii pro zobrazení pouze produktů této kategorie na stránce WooCommerce Shop."
+
+msgid "Set ticketid sequential or random .e.g "
+msgstr "Set TicketID sekvenční nebo náhodné .e.g"
+
+msgid "Pad Zeros"
+msgstr "PAD nuly"
+
+msgid "To pad an integer with leading zeros to a specific length"
+msgstr "Chcete -li podat celé číslo s vedoucími nuly do konkrétní délky"
+
+msgid "Ticket Replies ordering"
+msgstr "Odpověď na lístky"
+
+msgid "Set the default ordering for ticket replies in the detail page."
+msgstr "Nastavte výchozí objednávání odpovědí na lístky na stránce podrobnosti."
+
+msgid "Show Message Read Icon for Admin On Ticket Detail"
+msgstr "Zobrazit ikonu přečtení zprávy pro správce na podrobnosti o lístku"
+
+msgid "Select whether the message read icon is displayed to the administrator on ticket detail."
+msgstr "Vyberte, zda je ikona čtení zprávy zobrazena správci v detailu vstupenky."
+
+msgid "Show Message Read Icon For Agents on Ticket Detail"
+msgstr "Zobrazit ikonu přečtení zpráv pro agenty na detailu lístku"
+
+msgid "Select whether the message read icon is displayed to agents on ticket detail."
+msgstr "Vyberte, zda je ikona čtení zprávy zobrazena agentům v detailu vstupenky."
+
+msgid "Show Message Read Icon For Users On Ticket Detail"
+msgstr "Zobrazit ikonu čtení zpráv pro uživatele v detailu vstupenky"
+
+msgid "Select whether the message read icon is displayed to users on the ticket detail."
+msgstr "Vyberte, zda je ikona čtení zprávy zobrazena uživatelům v detailu lístku."
+
+msgid "Department Email"
+msgstr "E -mail oddělení"
+
+msgid "Send email to all departments on ticket create"
+msgstr "Odeslat e -mail všem oddělením na lístku Vytvořit"
+
+msgid "Captcha Setting"
+msgstr "Nastavení Captcha"
+
+msgid "Google reCaptcha"
+msgstr "Google Recaptcha"
+
+msgid "Google ReCaptcha version"
+msgstr "Verze Google Recoptcha"
+
+msgid "Select the Google ReCaptcha version"
+msgstr "Vyberte verzi Google Recoptcha"
+
+msgid "Google recaptcha site key"
+msgstr "Klíč webu Google Recaptcha"
+
+msgid "Please enter the google re-captcha site key from"
+msgstr "Zadejte prosím klíč webu Google Recaptcha"
+
+msgid "Google recaptcha secret key"
+msgstr "Google Recaptcha Secret Key"
+
+msgid "Please enter the google re-captcha secret key from"
+msgstr "Zadejte prosím Google Recaptcha Secret Key"
+
+msgid "Search Reports"
+msgstr "Vyhledávací zprávy"
+
+msgid "Please fill required fields."
+msgstr "Vyplňte prosím požadovaná pole."
+
+msgid "There was no record found"
+msgstr "Nebyl nalezen žádný záznam"
+
+msgid "Select Required"
+msgstr "Vyberte požadované"
+
+msgid " Subject"
+msgstr "Podrobit"
+
+msgid "Kylee Arroyo"
+msgstr "Kylee Arroyo"
+
+msgid "Can I upgrade my plan?"
+msgstr "Mohu upgradovat svůj plán?"
+
+msgid "This ticket is marked as overdue "
+msgstr "Tato jízdenka je označena jako zpožděná"
+
+msgid "pF3YczjML"
+msgstr "pf3yczjml"
+
+msgid "01-11-2023"
+msgstr "01-11-2023"
+
+msgid "Allison Carney"
+msgstr "Allison Carney"
+
+msgid "How Can I get Subscription?"
+msgstr "Jak mohu získat předplatné?"
+
+msgid "Tp3Y7zj01"
+msgstr "TP3Y7ZJ01"
+
+msgid "20-12-2023"
+msgstr "20-12-2023"
+
+msgid "Aleena Adam"
+msgstr "Aleena Adam"
+
+msgid "How Long do i have support access?"
+msgstr "Jak dlouho mám přístup podpory?"
+
+msgid "Ku3Y8zj3L"
+msgstr "KU3Y8ZJ3L"
+
+msgid "11-6-2023"
+msgstr "11-6-2023"
+
+msgid "If the colors have been saved but the user-side colors are still the same, it is advised to clear the cache."
+msgstr "Pokud byly barvy uloženy, ale barvy na straně uživatele jsou stále stejné, doporučuje se vyčistit mezipaměť."
+
+msgid "Purple"
+msgstr "Fialová"
+
+msgid "Field cannot be mark as published"
+msgstr "Pole nelze označit jako zveřejněné"
+
+msgid "Field cannot mark as required"
+msgstr "Pole nelze označit podle potřeby"
+
+msgid "Child fields has not been stored"
+msgstr "Dětská pole nebyla uložena"
+
+msgid "Not Contain"
+msgstr "Neobsahovat"
+
+msgid "Place Holder"
+msgstr "Zástupný symbol"
+
+msgid "Admin Search"
+msgstr "Správce vyhledávání"
+
+msgid "AND"
+msgstr "A"
+
+msgid "File upload fields and Check box fields cannot be made required."
+msgstr "Pole zaškrtávací políčka nahrát soubory nelze provést požadovaná."
+
+msgid "Default Value"
+msgstr "Výchozí hodnota"
+
+msgid "To choose a default value, first add values in the area below"
+msgstr "Chcete -li zvolit výchozí hodnotu, nejprve přidejte hodnoty v níže uvedené oblasti"
+
+msgid "This option is not available in this case"
+msgstr "Tato možnost není v tomto případě k dispozici"
+
+msgid "Select Default Value"
+msgstr "Vyberte výchozí hodnotu"
+
+msgid "Read Only"
+msgstr "Číst pouze"
+
+msgid "Admin/Agent Only"
+msgstr "Pouze admin/agent"
+
+msgid "Java Script"
+msgstr "JavaScript"
+
+msgid "Add More"
+msgstr "Přidejte další"
+
+msgid "Visibility conditions"
+msgstr "Podmínky viditelnosti"
+
+msgid "Add new"
+msgstr "Přidejte nové"
+
+msgid "visibility condition"
+msgstr "podmínka viditelnosti"
+
+msgid "User already an agent"
+msgstr "Uživatel již agent"
+
+msgid "The agent has not been stored"
+msgstr "Agent nebyl uložen"
+
+msgid "The agent has not been deleted"
+msgstr "Agent nebyl smazán"
+
+msgid "The agent in use cannot delete"
+msgstr "Agent používaný nemůže smazat"
+
+msgid "Select agent"
+msgstr "Vyberte agent"
+
+msgid "The ticket marks as overdue"
+msgstr "Lístek se označí jako zpožděné"
+
+msgid "Disabled form cannot be set as default"
+msgstr "Formulář deaktivovaného nelze nastavit jako výchozí"
+
+msgid "Form has not been stored"
+msgstr "Formulář nebyl uložen"
+
+msgid "Multiform has not been deleted"
+msgstr "Multiform nebyl smazán"
+
+msgid "Multiform in use"
+msgstr "Multiform používané"
+
+msgid " cannot deleted"
+msgstr "nelze smazat"
+
+msgid "Closed Date"
+msgstr "Uzavřené datum"
+
+msgid "Closed Time"
+msgstr "Uzavřený čas"
+
+msgid "Total Tracking Time"
+msgstr "Celková doba sledování"
+
+msgid "Sub Category Knowledgebase"
+msgstr "Podle kategorie znalostní základna"
+
+msgid "Type:"
+msgstr "Typ:"
+
+msgid "Sub Category Faqs"
+msgstr "Časté dotazy pod kategorií"
+
+msgid "Facebook user"
+msgstr "Uživatel Facebooku"
+
+msgid "Linkedin user"
+msgstr "Uživatel LinkedIn"
+
+msgid "You are logged in"
+msgstr "Jste přihlášeni"
+
+msgid "You are logged out"
+msgstr "Jste odhlášeni"
+
+msgid "Email Cc has not been stored"
+msgstr "E -mail CC nebyl uložen"
+
+msgid "Email CC has not been deleted"
+msgstr "E -mail CC nebyl smazán"
+
+msgid "Email CC "
+msgstr "E -mail CC"

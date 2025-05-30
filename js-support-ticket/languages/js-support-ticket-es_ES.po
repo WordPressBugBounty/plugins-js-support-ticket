@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 3.4.1\n"
+"X-Generator: Poedit 3.6\n"
 
 msgid "You are not allowed"
 msgstr "No tiene autorización"
@@ -674,27 +674,19 @@ msgstr "Conseguir Ayuda"
 msgid "Service is running, please close the pag"
 msgstr "El servicio se está ejecutando, cierre la página"
 
-msgid ""
-"Admin email address and email piping address cannot be the same, your email "
-"piping will not be work."
+msgid "Admin email address and email piping address cannot be the same, your email piping will not be work."
 msgstr ""
-"La dirección de correo electrónico del administrador y la dirección de la "
-"tubería de correo electrónico no pueden ser iguales, su tubería de correo "
-"electrónico no funcionará."
+"La dirección de correo electrónico del administrador y la dirección de la tubería de correo electrónico no pueden ser iguales, su tubería de "
+"correo electrónico no funcionará."
 
 msgid "Your setting is working please this."
 msgstr "Su configuración está funcionando por favor esto."
 
 msgid "Connection established but the system cannot read any email"
-msgstr ""
-"Conexión establecida pero el sistema no puede leer ningún correo electrónico"
+msgstr "Conexión establecida pero el sistema no puede leer ningún correo electrónico"
 
-msgid ""
-"IMAP is either not installed or not enabled in your server. Contact to "
-"hosting company"
-msgstr ""
-"IMAP no está instalado o no está habilitado en su servidor. Contacto a la "
-"empresa de hosting"
+msgid "IMAP is either not installed or not enabled in your server. Contact to hosting company"
+msgstr "IMAP no está instalado o no está habilitado en su servidor. Contacto a la empresa de hosting"
 
 msgid "The configuration has been stored"
 msgstr "La configuración ha sido almacenada"
@@ -706,13 +698,10 @@ msgid "Email address already exist"
 msgstr "Dirección de correo electrónico ya existe"
 
 msgid "Email for email piping has been stored"
-msgstr ""
-"El correo electrónico para la tubería de correo electrónico se ha almacenado"
+msgstr "El correo electrónico para la tubería de correo electrónico se ha almacenado"
 
 msgid "Email for email piping has not been stored"
-msgstr ""
-"El correo electrónico para la tubería de correo electrónico no se ha "
-"almacenado"
+msgstr "El correo electrónico para la tubería de correo electrónico no se ha almacenado"
 
 msgid "The email has been deleted"
 msgstr "El correo electrónico ha sido eliminado."
@@ -802,8 +791,7 @@ msgid "If the system doesn't respond in 30 seconds"
 msgstr "Si el sistema no responde en 30 segundos"
 
 msgid "it means system unable to connect email server"
-msgstr ""
-"significa que el sistema no es capaz de conectarse el servidor de correo"
+msgstr "significa que el sistema no es capaz de conectarse el servidor de correo"
 
 msgid "Save Settings"
 msgstr "Guardar Configuración"
@@ -826,12 +814,8 @@ msgstr "Nombre del servicio Cron"
 msgid "Timeout"
 msgstr "Tiempo agotado"
 
-msgid ""
-"180 secs if the does not completely increase it most sites will work with a "
-"setting of 180 600"
-msgstr ""
-"180 segundos si no lo aumenta por completo, la mayoría de los sitios "
-"funcionarán con una configuración de 180 600"
+msgid "180 secs if the does not completely increase it most sites will work with a setting of 180 600"
+msgstr "180 segundos si no lo aumenta por completo, la mayoría de los sitios funcionarán con una configuración de 180 600"
 
 msgid "URL you want to execute"
 msgstr "URL que desea ejecutar"
@@ -851,12 +835,8 @@ msgstr "De la tabla siguiente seleccione cómo y cuándo"
 msgid "Alerts"
 msgstr "Alertas"
 
-msgid ""
-"If you have already set up alerts methods in webcron org interface we "
-"recommend choosing an alert"
-msgstr ""
-"Si ya ha configurado métodos de alertas en la interfaz webcron org, le "
-"recomendamos que elija una alerta"
+msgid "If you have already set up alerts methods in webcron org interface we recommend choosing an alert"
+msgstr "Si ya ha configurado métodos de alertas en la interfaz webcron org, le recomendamos que elija una alerta"
 
 msgid "Cron scheduling using wget"
 msgstr "Cron agendado usando wget"
@@ -1428,12 +1408,8 @@ msgstr "Soporte de suscripción"
 msgid "Number of tickets"
 msgstr "Número de tickets"
 
-msgid ""
-"Enter allowed number of tickets that customer can post. Enter -1 for "
-"unlimited tickets."
-msgstr ""
-"Ingrese el número permitido de boletos que el cliente puede publicar. "
-"Ingrese -1 para boletos ilimitados."
+msgid "Enter allowed number of tickets that customer can post. Enter -1 for unlimited tickets."
+msgstr "Ingrese el número permitido de boletos que el cliente puede publicar. Ingrese -1 para boletos ilimitados."
 
 msgid "Credential Type"
 msgstr "Tipo de Credencial"
@@ -1840,12 +1816,8 @@ msgstr "Captcha inválido"
 msgid "Could not subscribe to the newsletter"
 msgstr "No se pudo suscribir al boletín"
 
-msgid ""
-"Please check confirmation email to complete your subscription for the "
-"newsletter"
-msgstr ""
-"Verifique el correo electrónico de confirmación para completar su "
-"suscripción al boletín"
+msgid "Please check confirmation email to complete your subscription for the newsletter"
+msgstr "Verifique el correo electrónico de confirmación para completar su suscripción al boletín"
 
 msgid "You have successfully subscribed to the newsletter"
 msgstr "Te has suscrito correctamente al boletín"
@@ -1913,12 +1885,8 @@ msgstr "Registrarse"
 msgid "User is not allowed to view this Ticket"
 msgstr "No tienes permisos para ver este ticket"
 
-msgid ""
-"Registration has been disabled by admin, please contact the system "
-"administrator."
-msgstr ""
-"El administrador ha deshabilitado el registro. Póngase en contacto con el "
-"administrador del sistema."
+msgid "Registration has been disabled by admin, please contact the system administrator."
+msgstr "El administrador ha deshabilitado el registro. Póngase en contacto con el administrador del sistema."
 
 msgid "You have already given the feedback for this ticket."
 msgstr "Ya ha dado su opinión sobre este boleto."
@@ -2047,9 +2015,7 @@ msgid "System slug not be empty."
 msgstr "Sistema Slug no puede estar vacío"
 
 msgid "System slug is conflicted with post or page slug."
-msgstr ""
-"La babosa del sistema está en conflicto con la publicación o la babosa de la "
-"página."
+msgstr "La babosa del sistema está en conflicto con la publicación o la babosa de la página."
 
 msgid "Days"
 msgstr "Días"
@@ -2142,14 +2108,11 @@ msgid "Select Page"
 msgstr "Seleccionar página"
 
 msgid ""
-"Select JS Help Desk default page, on the action system, will redirect on the "
-"selected page. If not select the default page, email links, and support icon "
-"might not work."
+"Select JS Help Desk default page, on the action system, will redirect on the selected page. If not select the default page, email links, and "
+"support icon might not work."
 msgstr ""
-"Seleccione la página predeterminada de JS Help Desk, en el sistema de "
-"acción, redirigirá en la página seleccionada. Si no selecciona la página "
-"predeterminada, los enlaces de correo electrónico y el ícono de soporte "
-"podrían no funcionar."
+"Seleccione la página predeterminada de JS Help Desk, en el sistema de acción, redirigirá en la página seleccionada. Si no selecciona la página "
+"predeterminada, los enlaces de correo electrónico y el ícono de soporte podrían no funcionar."
 
 msgid "Support Icon"
 msgstr "Icono de soporte"
@@ -2187,12 +2150,8 @@ msgstr "Directorio de datos"
 msgid "Set the name for your data directory"
 msgstr "Establezca el nombre para si directorio de datos"
 
-msgid ""
-"You need to rename the existing data directory in the file system before "
-"changing the data directory name"
-msgstr ""
-"Debe cambiar el nombre del directorio de datos existente en el sistema de "
-"archivos antes de cambiar el nombre del directorio de datos"
+msgid "You need to rename the existing data directory in the file system before changing the data directory name"
+msgstr "Debe cambiar el nombre del directorio de datos existente en el sistema de archivos antes de cambiar el nombre del directorio de datos"
 
 msgid "Date Format"
 msgstr "Formato de fecha"
@@ -2213,9 +2172,7 @@ msgid "Ticket auto close"
 msgstr "Ticket cerrado automáticamente"
 
 msgid "Ticket auto-close if user does not respond within given days"
-msgstr ""
-"El ticket se cierra automáticamente si el usuario no responde dentro de unos "
-"días"
+msgstr "El ticket se cierra automáticamente si el usuario no responde dentro de unos días"
 
 msgid "No. of attachment"
 msgstr "No. de adjuntos"
@@ -2254,16 +2211,13 @@ msgid "Login redirect"
 msgstr "Redireccionar logueo"
 
 msgid "Redirect user to JS Help Desk control panel after log in"
-msgstr ""
-"Redireccionar usuario al panel de control de JS Help Desk después de iniciar "
-"sesión"
+msgstr "Redireccionar usuario al panel de control de JS Help Desk después de iniciar sesión"
 
 msgid "Show count on my tickets"
 msgstr "Mostrar contador em mis tickets"
 
 msgid "Show number of the open, closed, answered ticket in my ticket"
-msgstr ""
-"Mostrar el número del boleto abierto, cerrado y respondido en mi boleto"
+msgstr "Mostrar el número del boleto abierto, cerrado y respondido en mi boleto"
 
 msgid "Show captcha on registration form"
 msgstr "Mostrar captcha en el formulario de registro"
@@ -2311,8 +2265,7 @@ msgid "Reopen ticket within days"
 msgstr "Reabrir ticket dentro de este periodo"
 
 msgid "The ticket can be reopened within a given number of days"
-msgstr ""
-"El boleto se puede volver a abrir dentro de un número determinado de días."
+msgstr "El boleto se puede volver a abrir dentro de un número determinado de días."
 
 msgid "User can print ticket"
 msgstr "El usuario puede imprimir tickets"
@@ -2369,13 +2322,10 @@ msgid "This message will show on the new ticket"
 msgstr "Este mensaje se mostrará en el nuevo ticket."
 
 msgid "Allow Users To Reply via Email On Closed Ticket"
-msgstr ""
-"Permitir a los usuarios responder por correo electrónico en un Ticket cerrado"
+msgstr "Permitir a los usuarios responder por correo electrónico en un Ticket cerrado"
 
 msgid "Select whether users can reply to closed email piping ticket or not"
-msgstr ""
-"Seleccione si los usuarios pueden responder o no al ticket de canalización "
-"de correo electrónico cerrado"
+msgstr "Seleccione si los usuarios pueden responder o no al ticket de canalización de correo electrónico cerrado"
 
 msgid "Visitor can create ticket"
 msgstr "Los visitantes pueden crear tickets"
@@ -2392,12 +2342,9 @@ msgstr "Este texto aparecerá cada vez que un visitante cree un ticket"
 msgid "Default alert email"
 msgstr "Correo de alerta por defecto"
 
-msgid ""
-"If ticket department email is not selected then this email is used to send "
-"emails"
+msgid "If ticket department email is not selected then this email is used to send emails"
 msgstr ""
-"Si no se selecciona el ticket para un departamento entonces esta dirección "
-"de email es usanda para realizar el envío de correos electrónicos"
+"Si no se selecciona el ticket para un departamento entonces esta dirección de email es usanda para realizar el envío de correos electrónicos"
 
 msgid "Default admin email"
 msgstr "Correo electrónico del administrador por defecto"
@@ -2415,9 +2362,7 @@ msgid "Mail to admin"
 msgstr "Correo electrónico para administrador"
 
 msgid "Email sends to admin when banned email try to create a ticket"
-msgstr ""
-"El correo electrónico se envía al administrador cuando el correo electrónico "
-"prohibido intenta crear un ticket"
+msgstr "El correo electrónico se envía al administrador cuando el correo electrónico prohibido intenta crear un ticket"
 
 msgid "Ticket Operations Email Setting"
 msgstr "Configuración de correo electrónico de operaciones de tickets"
@@ -2521,11 +2466,8 @@ msgstr "Seleccione el tipo de retraso para el comentario email"
 msgid "Feedback Email Delay"
 msgstr "Comentario Email Retraso"
 
-msgid ""
-"Set no. of days or hours to send feedback email after a ticket is closed"
-msgstr ""
-"Establecer no. de días u horas para enviar un correo electrónico de "
-"comentarios después de que se cierra un boleto"
+msgid "Set no. of days or hours to send feedback email after a ticket is closed"
+msgstr "Establecer no. de días u horas para enviar un correo electrónico de comentarios después de que se cierra un boleto"
 
 msgid "Success message after submitting feedback"
 msgstr "Mensaje de éxito después de enviar comentarios"
@@ -2536,21 +2478,16 @@ msgstr "Este texto aparecerá cuando alguien hace un comentario"
 msgid "Firebase Notifications"
 msgstr "Notificaciones de Firebase"
 
-msgid ""
-"JS Help Desk Desktop Notifications plugin is not installed. Please install "
-"the plugin to enable desktop notifications"
+msgid "JS Help Desk Desktop Notifications plugin is not installed. Please install the plugin to enable desktop notifications"
 msgstr ""
-"El complemento de notificaciones de escritorio de JS Help Desk no está "
-"instalado. Instale el complemento para habilitar las notificaciones de "
+"El complemento de notificaciones de escritorio de JS Help Desk no está instalado. Instale el complemento para habilitar las notificaciones de "
 "escritorio"
 
 msgid "Click here to insert Install."
 msgstr "Haga clic aquí para insertar Instalar."
 
 msgid "JS Help Desk Desktop Notifications plugin is not active."
-msgstr ""
-"El complemento de notificaciones de escritorio de JS Help Desk no está "
-"activo."
+msgstr "El complemento de notificaciones de escritorio de JS Help Desk no está activo."
 
 msgid "Find and add firebase api's keys"
 msgstr "Encuentra y agrega claves de API de Firebase"
@@ -2612,12 +2549,8 @@ msgstr "Sin logotipo de notificación de Firebase"
 msgid "Secret Key"
 msgstr "Llave secreta"
 
-msgid ""
-"Private Credentials Encryption Key changing this value will discard all "
-"existing credentials "
-msgstr ""
-"Private Credentials Encryption Key changing this value will discard all "
-"existing credentials"
+msgid "Private Credentials Encryption Key changing this value will discard all existing credentials "
+msgstr "Private Credentials Encryption Key changing this value will discard all existing credentials"
 
 msgid "Second Level Security"
 msgstr "Seguridad de segundo nivel"
@@ -2637,12 +2570,8 @@ msgstr "Haga clic aquí para generar una clave de API"
 msgid "License Mandatory"
 msgstr "Licencia obligatoria"
 
-msgid ""
-"Prevent users from submitting a ticket without a valid license for one of "
-"your product"
-msgstr ""
-"Evite que los usuarios envíen un ticket sin una licencia válida para uno de "
-"sus productos"
+msgid "Prevent users from submitting a ticket without a valid license for one of your product"
+msgstr "Evite que los usuarios envíen un ticket sin una licencia válida para uno de sus productos"
 
 msgid "Product ID"
 msgstr "identificación de producto"
@@ -2663,17 +2592,13 @@ msgid "Enable double opt-in"
 msgstr "Habilitar doble opt-in"
 
 msgid "You must also enable double opt-in in your MailChimp account"
-msgstr ""
-"También debe habilitar la opción de doble suscripción en su cuenta de "
-"MailChimp"
+msgstr "También debe habilitar la opción de doble suscripción en su cuenta de MailChimp"
 
 msgid "Welcome email"
 msgstr "Correo electrónico de bienvenida"
 
 msgid "You can enable Final Welcome Email in your MailChimp account"
-msgstr ""
-"Puede habilitar el correo electrónico de bienvenida final en su cuenta de "
-"MailChimp"
+msgstr "Puede habilitar el correo electrónico de bienvenida final en su cuenta de MailChimp"
 
 msgid "Verify License On Ticket Creation"
 msgstr "Verifique la licencia en la creación del boleto"
@@ -2697,9 +2622,7 @@ msgid "Recommended run script daily"
 msgstr "Se recomienda ejecutar script diariamente"
 
 msgid "You cannot use this email, it is used in email piping"
-msgstr ""
-"No puede usar este correo electrónico, se usa en tuberías de correo "
-"electrónico"
+msgstr "No puede usar este correo electrónico, se usa en tuberías de correo electrónico"
 
 msgid "The department has been stored"
 msgstr "El departamento ha sido almacenado"
@@ -2732,9 +2655,7 @@ msgid "Select Email"
 msgstr "Seleccionar correo"
 
 msgid "Tickets of this department will receive emails from this email"
-msgstr ""
-"Los boletos de este departamento recibirán correos electrónicos de este "
-"correo electrónico"
+msgstr "Los boletos de este departamento recibirán correos electrónicos de este correo electrónico"
 
 msgid "Receive Email"
 msgstr "Recibir email"
@@ -2743,9 +2664,7 @@ msgid "Save Department"
 msgstr "Guardar departamento"
 
 msgid "The user of this department will receive email on the new ticket"
-msgstr ""
-"El usuario de este departamento recibirá un correo electrónico con el nuevo "
-"ticket."
+msgstr "El usuario de este departamento recibirá un correo electrónico con el nuevo ticket."
 
 msgid "Are you sure you want to delete it?"
 msgstr "¿Seguro que quieres eliminarlo?"
@@ -3210,9 +3129,7 @@ msgid "Install Now"
 msgstr "Instalar ahora"
 
 msgid "The best support system plugin for WordPress has everything you need."
-msgstr ""
-"El mejor complemento de sistema de soporte para WordPress tiene todo lo que "
-"necesita."
+msgstr "El mejor complemento de sistema de soporte para WordPress tiene todo lo que necesita."
 
 msgid "Add-Ons List"
 msgstr "Lista de complementos"
@@ -3241,109 +3158,68 @@ msgstr "Complementos"
 msgid "Add agents and assign roles and permissions to provide assistance."
 msgstr "Agregue agentes y asigne roles y permisos para brindar asistencia."
 
-msgid ""
-"Define rules for the ticket to auto-close after a specific interval of time."
-msgstr ""
-"Defina reglas para que el ticket se cierre automáticamente después de un "
-"intervalo de tiempo específico."
+msgid "Define rules for the ticket to auto-close after a specific interval of time."
+msgstr "Defina reglas para que el ticket se cierre automáticamente después de un intervalo de tiempo específico."
 
 msgid "Get a survey from customers on ticket closing to improve quality."
-msgstr ""
-"Obtenga una encuesta de los clientes sobre el cierre de boletos para mejorar "
-"la calidad."
+msgstr "Obtenga una encuesta de los clientes sobre el cierre de boletos para mejorar la calidad."
 
 msgid "Help users to find and select the area with which they need assistance."
-msgstr ""
-"Ayude a los usuarios a encontrar y seleccionar el área con la que necesitan "
-"asistencia."
+msgstr "Ayude a los usuarios a encontrar y seleccionar el área con la que necesitan asistencia."
 
 msgid "Private Note"
 msgstr "Nota privada"
 
-msgid ""
-"The private note is used as reminders or to give other agents insights into "
-"the ticket issue."
-msgstr ""
-"La nota privada se usa como recordatorio o para dar a otros agentes "
-"información sobre el problema del ticket."
+msgid "The private note is used as reminders or to give other agents insights into the ticket issue."
+msgstr "La nota privada se usa como recordatorio o para dar a otros agentes información sobre el problema del ticket."
 
-msgid ""
-"Stop losing productivity on repetitive queries, build your knowledge base."
-msgstr ""
-"Deje de perder productividad en consultas repetitivas, construya su base de "
-"conocimiento."
+msgid "Stop losing productivity on repetitive queries, build your knowledge base."
+msgstr "Deje de perder productividad en consultas repetitivas, construya su base de conocimiento."
 
 msgid "Max Tickets"
 msgstr "Entradas Max"
 
-msgid ""
-"Enables admin to set N numbers of tickets for users and agents separately."
-msgstr ""
-"Permite al administrador establecer N números de tickets para usuarios y "
-"agentes por separado."
+msgid "Enables admin to set N numbers of tickets for users and agents separately."
+msgstr "Permite al administrador establecer N números de tickets para usuarios y agentes por separado."
 
 msgid "Merge Tickets"
 msgstr "Fusionar entradas"
 
-msgid ""
-"Enables agents to merge two tickets of the same user into one instead of "
-"dealing with the same issue on many tickets."
-msgstr ""
-"Permite a los agentes fusionar dos tickets del mismo usuario en uno en lugar "
-"de tratar el mismo problema en muchos tickets."
+msgid "Enables agents to merge two tickets of the same user into one instead of dealing with the same issue on many tickets."
+msgstr "Permite a los agentes fusionar dos tickets del mismo usuario en uno en lugar de tratar el mismo problema en muchos tickets."
 
-msgid ""
-"Defines rules or set specific intervals of time to make ticket auto overdue."
-"The ticket can overdue by type or overdue by Cronjob."
+msgid "Defines rules or set specific intervals of time to make ticket auto overdue.The ticket can overdue by type or overdue by Cronjob."
 msgstr ""
-"Define reglas o establece intervalos de tiempo específicos para retrasar "
-"automáticamente el ticket. El ticket puede retrasarse por tipo o retrasarse "
-"por Cronjob."
+"Define reglas o establece intervalos de tiempo específicos para retrasar automáticamente el ticket. El ticket puede retrasarse por tipo o "
+"retrasarse por Cronjob."
 
-msgid ""
-"SMTP enables you to add custom mail protocol to send and receive emails "
-"within the js help desk."
-msgstr ""
-"SMTP le permite agregar un protocolo de correo personalizado para enviar y "
-"recibir correos electrónicos dentro de la mesa de ayuda de js."
+msgid "SMTP enables you to add custom mail protocol to send and receive emails within the js help desk."
+msgstr "SMTP le permite agregar un protocolo de correo personalizado para enviar y recibir correos electrónicos dentro de la mesa de ayuda de js."
 
-msgid ""
-"Displays complete ticket history along with the ticket status, currently "
-"assigned user and other actions performed on each ticket."
+msgid "Displays complete ticket history along with the ticket status, currently assigned user and other actions performed on each ticket."
 msgstr ""
-"Muestra el historial completo del ticket junto con el estado del ticket, el "
-"usuario asignado actualmente y otras acciones realizadas en cada ticket."
+"Muestra el historial completo del ticket junto con el estado del ticket, el usuario asignado actualmente y otras acciones realizadas en cada "
+"ticket."
 
 msgid "Pre-populated messages allow support agents to respond quickly."
-msgstr ""
-"Los mensajes rellenados previamente permiten que los agentes de soporte "
-"respondan rápidamente."
+msgstr "Los mensajes rellenados previamente permiten que los agentes de soporte respondan rápidamente."
 
 msgid "Enables users to reply to the tickets via email without login."
-msgstr ""
-"Permite a los usuarios responder a los tickets por correo electrónico sin "
-"iniciar sesión."
+msgstr "Permite a los usuarios responder a los tickets por correo electrónico sin iniciar sesión."
 
 msgid "Time Tracking"
 msgstr "Seguimiento de tiempo"
 
-msgid ""
-"Track the time spent on each ticket by each agent and each reply. Report the "
-"admin on how much time is spent on each ticket."
+msgid "Track the time spent on each ticket by each agent and each reply. Report the admin on how much time is spent on each ticket."
 msgstr ""
-"Realice un seguimiento del tiempo dedicado a cada boleto por cada agente y "
-"cada respuesta. Informe al administrador sobre cuánto tiempo se dedica a "
-"cada ticket."
+"Realice un seguimiento del tiempo dedicado a cada boleto por cada agente y cada respuesta. Informe al administrador sobre cuánto tiempo se "
+"dedica a cada ticket."
 
 msgid "User Options"
 msgstr "opciones de usuario"
 
-msgid ""
-"User options enable you to add Google Re-captcha or JS Help Desk Re-captcha "
-"for a registration form."
-msgstr ""
-"Las opciones de usuario le permiten agregar Google Re-captcha o JS Help Desk "
-"Re-captcha para un formulario de registro."
+msgid "User options enable you to add Google Re-captcha or JS Help Desk Re-captcha for a registration form."
+msgstr "Las opciones de usuario le permiten agregar Google Re-captcha o JS Help Desk Re-captcha para un formulario de registro."
 
 msgid "Actions"
 msgstr "Comportamiento"
@@ -3351,126 +3227,76 @@ msgstr "Comportamiento"
 msgid "Ticket Actions"
 msgstr "Acciones de entradas"
 
-msgid ""
-"Get multiple action options on each ticket like Print Ticket, Lock Ticket, "
-"Transfer ticket, etc."
-msgstr ""
-"Obtenga múltiples opciones de acción en cada ticket como Imprimir Ticket, "
-"Bloquear Ticket, Transferir ticket, etc."
+msgid "Get multiple action options on each ticket like Print Ticket, Lock Ticket, Transfer ticket, etc."
+msgstr "Obtenga múltiples opciones de acción en cada ticket como Imprimir Ticket, Bloquear Ticket, Transferir ticket, etc."
 
 msgid "Make unlimited announcements associated with the support system."
 msgstr "Hacer anuncios ilimitados asociados con el sistema de soporte."
 
-msgid ""
-"It allows you to block the email of any user to restrict him to create new "
-"tickets."
-msgstr ""
-"Le permite bloquear el correo electrónico de cualquier usuario para "
-"restringirlo y crear nuevos tickets."
+msgid "It allows you to block the email of any user to restrict him to create new tickets."
+msgstr "Le permite bloquear el correo electrónico de cualquier usuario para restringirlo y crear nuevos tickets."
 
 msgid "Desktop Notification"
 msgstr "Notificación de escritorio"
 
-msgid ""
-"The Desktop notifications will keep you up to date about anything happens on "
-"your support system."
-msgstr ""
-"Las notificaciones de escritorio lo mantendrán informado sobre cualquier "
-"cosa que suceda en su sistema de soporte."
+msgid "The Desktop notifications will keep you up to date about anything happens on your support system."
+msgstr "Las notificaciones de escritorio lo mantendrán informado sobre cualquier cosa que suceda en su sistema de soporte."
 
 msgid "Save the ticket as a PDF in your system and able to export all data."
-msgstr ""
-"Guarde el ticket como PDF en su sistema y pueda exportar todos los datos."
+msgstr "Guarde el ticket como PDF en su sistema y pueda exportar todos los datos."
 
 msgid "Create downloads to ensure the user to get downloads from downloads."
-msgstr ""
-"Cree descargas para garantizar que el usuario obtenga descargas de las "
-"descargas."
+msgstr "Cree descargas para garantizar que el usuario obtenga descargas de las descargas."
 
 msgid "Add FAQs to drastically reduce the number of common questions."
-msgstr ""
-"Agregue preguntas frecuentes para reducir drásticamente la cantidad de "
-"preguntas comunes."
+msgstr "Agregue preguntas frecuentes para reducir drásticamente la cantidad de preguntas comunes."
 
-msgid ""
-"Get multiple themes with a beautiful color scheme to make the site beautiful."
-msgstr ""
-"Obtenga múltiples temas con un hermoso esquema de colores para hacer que el "
-"sitio sea hermoso."
+msgid "Get multiple themes with a beautiful color scheme to make the site beautiful."
+msgstr "Obtenga múltiples temas con un hermoso esquema de colores para hacer que el sitio sea hermoso."
 
 msgid "Dashboard Widgets"
 msgstr "Widgets del escritorio"
 
-msgid ""
-"Get immediate data of your support operations as soon as you log into your "
-"WordPress administration area."
-msgstr ""
-"Obtenga datos inmediatos de sus operaciones de soporte tan pronto como "
-"inicie sesión en su área de administración de WordPress."
+msgid "Get immediate data of your support operations as soon as you log into your WordPress administration area."
+msgstr "Obtenga datos inmediatos de sus operaciones de soporte tan pronto como inicie sesión en su área de administración de WordPress."
 
 msgid "Internal Mail"
 msgstr "Mail Interno"
 
 msgid "Use an internal email to send emails to one agent to another agent."
-msgstr ""
-"Use un correo electrónico interno para enviar correos electrónicos a un "
-"agente a otro agente."
+msgstr "Use un correo electrónico interno para enviar correos electrónicos a un agente a otro agente."
 
 msgid "Front-End Widgets"
 msgstr "Widgets de front-end"
 
-msgid ""
-"Widgets in WordPress allow you to add content and features in the widgetized "
-"areas of your theme."
-msgstr ""
-"Los widgets en WordPress le permiten agregar contenido y características en "
-"las áreas de widgets de su tema."
+msgid "Widgets in WordPress allow you to add content and features in the widgetized areas of your theme."
+msgstr "Los widgets en WordPress le permiten agregar contenido y características en las áreas de widgets de su tema."
 
-msgid ""
-"JS Help Desk WooCommerce provides the much-needed bridge between your "
-"WooCommerce store and the JS Help Desk."
-msgstr ""
-"JS Help Desk WooCommerce proporciona el puente muy necesario entre su tienda "
-"WooCommerce y el JS Help Desk."
+msgid "JS Help Desk WooCommerce provides the much-needed bridge between your WooCommerce store and the JS Help Desk."
+msgstr "JS Help Desk WooCommerce proporciona el puente muy necesario entre su tienda WooCommerce y el JS Help Desk."
 
-msgid ""
-"Collect your customer's private data, sensitive information from credit card "
-"to health information and store them encrypted."
+msgid "Collect your customer's private data, sensitive information from credit card to health information and store them encrypted."
 msgstr ""
-"Recopile los datos privados de su cliente, la información confidencial de la "
-"tarjeta de crédito a la información de salud y almacénelos encriptados."
+"Recopile los datos privados de su cliente, la información confidencial de la tarjeta de crédito a la información de salud y almacénelos "
+"encriptados."
 
-msgid ""
-"Without valid Envato, license clients won't be able to open a new ticket."
-msgstr ""
-"Sin Envato válido, los clientes con licencia no podrán abrir un nuevo ticket."
+msgid "Without valid Envato, license clients won't be able to open a new ticket."
+msgstr "Sin Envato válido, los clientes con licencia no podrán abrir un nuevo ticket."
 
-msgid ""
-"Adds the option to the registration form for prompting new users to "
-"subscribe to your email list."
-msgstr ""
-"Agrega la opción al formulario de registro para solicitar a los nuevos "
-"usuarios que se suscriban a su lista de correo electrónico."
+msgid "Adds the option to the registration form for prompting new users to subscribe to your email list."
+msgstr "Agrega la opción al formulario de registro para solicitar a los nuevos usuarios que se suscriban a su lista de correo electrónico."
 
 msgid "paidsupport"
 msgstr "soporte de pago"
 
-msgid ""
-"Paid Support is the easiest way to integrate and manage payments for your "
-"tickets."
-msgstr ""
-"El soporte pagado es la forma más fácil de integrar y administrar los pagos "
-"de sus boletos."
+msgid "Paid Support is the easiest way to integrate and manage payments for your tickets."
+msgstr "El soporte pagado es la forma más fácil de integrar y administrar los pagos de sus boletos."
 
 msgid "easy digital downloads"
 msgstr "descargas digitales fáciles"
 
-msgid ""
-"EDD offers customers to open new tickets just one click from their EDD "
-"account."
-msgstr ""
-"EDD ofrece a los clientes abrir nuevas entradas con solo un clic desde su "
-"cuenta EDD."
+msgid "EDD offers customers to open new tickets just one click from their EDD account."
+msgstr "EDD ofrece a los clientes abrir nuevas entradas con solo un clic desde su cuenta EDD."
 
 msgid "We'd love to hear from You."
 msgstr "Nos encantaría saber de usted."
@@ -3574,12 +3400,8 @@ msgstr "Conseguir traducciones"
 msgid "Select Translation"
 msgstr "Seleccionar traducción"
 
-msgid ""
-"When WordPress language change to ro, JS Help Desk language will auto change "
-"to ro"
-msgstr ""
-"Cuando el idioma de WordPress cambia a ro, el idioma de JS Help Desk "
-"cambiará automáticamente a ro"
+msgid "When WordPress language change to ro, JS Help Desk language will auto change to ro"
+msgstr "Cuando el idioma de WordPress cambia a ro, el idioma de JS Help Desk cambiará automáticamente a ro"
 
 msgid "saved"
 msgstr "salvado"
@@ -3786,8 +3608,7 @@ msgid "Addon Installation Failed"
 msgstr "Instalación del complemento fallida"
 
 msgid "Addon installation failed, Directory permission error"
-msgstr ""
-"Error en la instalación del complemento, error de permiso de directorio"
+msgstr "Error en la instalación del complemento, error de permiso de directorio"
 
 msgid "Addon Installation Failed, File download error"
 msgstr "Error en la instalación del complemento, error de descarga del archivo"
@@ -3847,18 +3668,13 @@ msgid "Wordpress Plugin"
 msgstr "Plugin de Wordpress"
 
 msgid ""
-"JS Help Desk is a trusted open source ticket system. JS Help Desk is a "
-"simple, easy to use, web-based customer support system. Users can create a "
-"ticket from the front-end. JS Help Desk comes packed with lot features than "
-"most of the expensive(and complex) support ticket system on the market. The "
-"best part is, It completely free."
+"JS Help Desk is a trusted open source ticket system. JS Help Desk is a simple, easy to use, web-based customer support system. Users can create "
+"a ticket from the front-end. JS Help Desk comes packed with lot features than most of the expensive(and complex) support ticket system on the "
+"market. The best part is, It completely free."
 msgstr ""
-"JS Help Desk es un sistema de tickets de código abierto confiable. JS Help "
-"Desk es un sistema de atención al cliente simple, fácil de usar y basado en "
-"la web. Los usuarios pueden crear un ticket desde el front-end. JS Help Desk "
-"viene con muchas características que la mayoría de los costosos (y "
-"complejos) sistema de tickets de soporte en el mercado. La mejor parte es "
-"que es completamente gratis."
+"JS Help Desk es un sistema de tickets de código abierto confiable. JS Help Desk es un sistema de atención al cliente simple, fácil de usar y "
+"basado en la web. Los usuarios pueden crear un ticket desde el front-end. JS Help Desk viene con muchas características que la mayoría de los "
+"costosos (y complejos) sistema de tickets de soporte en el mercado. La mejor parte es que es completamente gratis."
 
 msgid "JS Help Desk Addon Installer"
 msgstr "Instalador de complementos de la mesa de ayuda de JS"
@@ -3890,10 +3706,8 @@ msgstr "Seleccionar todos los complementos"
 msgid "Add ons installed and activated successfully"
 msgstr "Complementos instalados y activados con éxito"
 
-msgid ""
-"Add ons for JS Help Desk have been installed and activated successfully. "
-msgstr ""
-"Add ons for JS Help Desk have been installed and activated successfully."
+msgid "Add ons for JS Help Desk have been installed and activated successfully. "
+msgstr "Add ons for JS Help Desk have been installed and activated successfully."
 
 msgid "Priority Title Already Exist"
 msgstr "Título de la prioridad ya existe"
@@ -4445,8 +4259,7 @@ msgid "Non-premium support"
 msgstr "Soporte no premium"
 
 msgid "Check this box if this ticket should NOT apply against the paid support"
-msgstr ""
-"Marque esta casilla si este ticket NO debe aplicarse contra el soporte pagado"
+msgstr "Marque esta casilla si este ticket NO debe aplicarse contra el soporte pagado"
 
 msgid "Remaining"
 msgstr "Restante"
@@ -4800,9 +4613,7 @@ msgid "Email has not been stored"
 msgstr "El correo  no ha sido guardado"
 
 msgid "Email send to admin when banned email try to create ticket"
-msgstr ""
-"Enviar correo electrónico cuando una dirección electrónica desea crear un "
-"nuevo ticket"
+msgstr "Enviar correo electrónico cuando una dirección electrónica desea crear un nuevo ticket"
 
 msgid "Enable ticket via email"
 msgstr "Habilitar ticket vía correo electrónico"
@@ -4997,8 +4808,7 @@ msgid "Password for given email address"
 msgstr "Contraseña de la cuenta de correo electrónico proporcionada"
 
 msgid "Please enable ticket via email setting first"
-msgstr ""
-"Por favor habilite la característica de ticket vía correo electrónico primero"
+msgstr "Por favor habilite la característica de ticket vía correo electrónico primero"
 
 msgid "Please enter the google recaptcha private key from"
 msgstr "Por favor introduzca la llave privada del Google recapcha"
@@ -5043,9 +4853,7 @@ msgid "Recomended"
 msgstr "Recomendado"
 
 msgid "Redirect user to JS Support Ticket control panel after login"
-msgstr ""
-"Redireccionar al Panel de Control de JS Support Ticket después de iniciar "
-"sesión"
+msgstr "Redireccionar al Panel de Control de JS Support Ticket después de iniciar sesión"
 
 msgid "Reply has been posted"
 msgstr "Respuesta publicada"
@@ -5114,8 +4922,7 @@ msgid "Service is running please close the page"
 msgstr "El servicio está en marcha por favor cierre la página"
 
 msgid "Set no. of days to mark ticket as overdue"
-msgstr ""
-"Establecer no. de días para marcar un ticket fuera del límite de tiempo"
+msgstr "Establecer no. de días para marcar un ticket fuera del límite de tiempo"
 
 msgid "Setting"
 msgstr "Configuración"
@@ -5385,8 +5192,7 @@ msgid "Your System Is Up To Date"
 msgstr "Su sistema está actualizado"
 
 msgid "Your account is disabled please contact to administrator"
-msgstr ""
-"Su cuenta se encuentra deshabilitada, por favor contacte al administrador"
+msgstr "Su cuenta se encuentra deshabilitada, por favor contacte al administrador"
 
 msgid "Your child have this type"
 msgstr "Su hijo tiene este tipo"
@@ -5611,9 +5417,7 @@ msgid "is not writeable"
 msgstr "es de sólo lectura"
 
 msgid "show print ticket icon on ticketdetail page to user"
-msgstr ""
-"mostrar el  icono del ticket de impresión en la página de usuario "
-"ticketdetail."
+msgstr "mostrar el  icono del ticket de impresión en la página de usuario ticketdetail."
 
 msgid "Form Category"
 msgstr "Categoria del formulario"
@@ -5640,37 +5444,28 @@ msgid "Set no. of days or hours to mark ticket as overdue"
 msgstr "Indique nº. de días u horas para marcar el ticket como vencido"
 
 msgid "Select whether you want to show captcha on registration form or not"
-msgstr ""
-"Seleccione si desea mostrar el captcha en el formulario de registro o no"
+msgstr "Seleccione si desea mostrar el captcha en el formulario de registro o no"
 
 msgid "Select role you want to assign to new users"
 msgstr "Seleccione el rol que desea asignar a nuevos usuario"
 
 msgid "Select whether users can reply to closed ticket via email or not"
-msgstr ""
-"Seleccione si los usuarios pueden responder un ticket cerrado por correo "
-"electrónico o no"
+msgstr "Seleccione si los usuarios pueden responder un ticket cerrado por correo electrónico o no"
 
 msgid "This text will appear whenever visitor creates ticket"
 msgstr "Este texto aparecerá cuando el visitante cree un ticket"
 
 msgid "Set no. of days or hours to send feedback email after ticket is closed"
-msgstr ""
-"Indique nº. de días u horas para enviar email comentario después de cerrar "
-"el ticket"
+msgstr "Indique nº. de días u horas para enviar email comentario después de cerrar el ticket"
 
 msgid "Feedback Successful message to customer"
 msgstr "Comentarios Mensaje exitoso al cliente"
 
 msgid "You cannot use this email it is used in ticket via email"
-msgstr ""
-"No puede usar este correo electrónico; se usa en el Ticket por correo "
-"electrónico"
+msgstr "No puede usar este correo electrónico; se usa en el Ticket por correo electrónico"
 
 msgid "User of this department will receive email on new ticket"
-msgstr ""
-"El usuario de este departamento recibirá un correo electrónico con un nuevo "
-"ticket"
+msgstr "El usuario de este departamento recibirá un correo electrónico con un nuevo ticket"
 
 msgid "Departent Report"
 msgstr "Informe departamento"
@@ -5940,18 +5735,13 @@ msgid "Access Control Level"
 msgstr "Nivel de control de acceso"
 
 msgid "Access control limit you can limit your staff to do specific task"
-msgstr ""
-"En Límite de control de acceso puede limitar a su personal para realizar "
-"tareas específicas"
+msgstr "En Límite de control de acceso puede limitar a su personal para realizar tareas específicas"
 
 msgid "Staff member create premade message premade available in ticket reply"
-msgstr ""
-"El miembro del personal crea un mensaje prefabricado disponible en la "
-"respuesta del ticket"
+msgstr "El miembro del personal crea un mensaje prefabricado disponible en la respuesta del ticket"
 
 msgid "Staff member can be created and reply your customer tickets"
-msgstr ""
-"El miembro del staff puede crear y replicar los tickets de los clientes"
+msgstr "El miembro del staff puede crear y replicar los tickets de los clientes"
 
 msgid "Help topic can be add with respect to departments"
 msgstr "El tema de ayuda se puede agregar con respecto a los departamentos"
@@ -5972,17 +5762,13 @@ msgid "You can ban and unabn any spam email address"
 msgstr "Puede prohibir y desautorizar cualquier dirección de correo no deseado"
 
 msgid "If and only if customer not reply certain days ticket marked overdue"
-msgstr ""
-"Si, y solo si el cliente no responde ciertos días, boleto marcado como "
-"vencido"
+msgstr "Si, y solo si el cliente no responde ciertos días, boleto marcado como vencido"
 
 msgid "System will read your email and create tickets"
 msgstr "El sistema leerá su correo electrónico y creará tickets"
 
 msgid "Internal notes for staff members and administrator ticket based"
-msgstr ""
-"Notas internas para los miembros del personal y ticket de administrador "
-"basado"
+msgstr "Notas internas para los miembros del personal y ticket de administrador basado"
 
 msgid "Assign To Staff"
 msgstr "Asignar a equipo"
@@ -6000,24 +5786,19 @@ msgid "Ticket action history with time and user name"
 msgstr "Historial de acciones de tickets con hora y nombre de usuario"
 
 msgid "Admin can export tickets in csv format to keep record"
-msgstr ""
-"El administrador puede exportar tickets en formato csv para mantener el "
-"registro"
+msgstr "El administrador puede exportar tickets en formato csv para mantener el registro"
 
 msgid "Customer Feedback"
 msgstr "Comentarios del cliente"
 
 msgid "Customer can provide feedback that can be used to improve services"
-msgstr ""
-"El cliente puede proporcionar comentarios que pueden usarse para mejorar los "
-"servicios"
+msgstr "El cliente puede proporcionar comentarios que pueden usarse para mejorar los servicios"
 
 msgid "RTL Supported"
 msgstr "RTL soportado"
 
 msgid "JS Support Ticket auto adjusts to RTL or LTR without any problem."
-msgstr ""
-"JS Support Ticket se ajusta automáticamente a RTL o LTR sin ningún problema."
+msgstr "JS Support Ticket se ajusta automáticamente a RTL o LTR sin ningún problema."
 
 msgid "Staff Time Tracking"
 msgstr "Seguimiento del tiempo del personal"
@@ -6029,8 +5810,7 @@ msgid "Visitor can also open ticket in you support system"
 msgstr "El visitante también puede abrir un ticket en su sistema de soporte"
 
 msgid "You can now lock or unlock any ticket for certain time"
-msgstr ""
-"Ahora puedes bloquear o desbloquear cualquier ticket por un cierto tiempo"
+msgstr "Ahora puedes bloquear o desbloquear cualquier ticket por un cierto tiempo"
 
 msgid "Pro version only"
 msgstr "Version Pro sólo"
@@ -6408,8 +6188,7 @@ msgid "Get"
 msgstr "Conseguir"
 
 msgid "This prefix will be added to slug incase of homepage links"
-msgstr ""
-"Este prefijo se agregará a slug en caso de enlaces a la página de inicio."
+msgstr "Este prefijo se agregará a slug en caso de enlaces a la página de inicio."
 
 msgid " This prefix will be added to slug incase of conflict"
 msgstr "Este prefijo se agregará a slug en caso de conflicto."
@@ -6540,13 +6319,10 @@ msgstr "Actualizar ahora"
 msgid "Add-On’s For Help Desk"
 msgstr "Complementos para la mesa de ayuda"
 
-msgid ""
-"Get trusted WordPress add on’s. Guaranteed to work fast, safe to use, "
-"beautifully coded, packed with features and easy to use."
+msgid "Get trusted WordPress add on’s. Guaranteed to work fast, safe to use, beautifully coded, packed with features and easy to use."
 msgstr ""
-"Obtenga complementos confiables de WordPress. Garantizado para funcionar "
-"rápido, seguro de usar, bellamente codificado, repleto de funciones y fácil "
-"de usar."
+"Obtenga complementos confiables de WordPress. Garantizado para funcionar rápido, seguro de usar, bellamente codificado, repleto de funciones y "
+"fácil de usar."
 
 msgid "Save big with an exclusive membership plan today!"
 msgstr "¡Ahorre en grande con un plan de membresía exclusivo hoy!"
@@ -6554,154 +6330,89 @@ msgstr "¡Ahorre en grande con un plan de membresía exclusivo hoy!"
 msgid "show bundle pack"
 msgstr "mostrar paquete de paquete"
 
-msgid ""
-"Add agents and assign roles and permissions to provide assistance and "
-"support to customer support tickets."
-msgstr ""
-"Agregue agentes y asigne roles y permisos para brindar asistencia y soporte "
-"a los tickets de atención al cliente."
+msgid "Add agents and assign roles and permissions to provide assistance and support to customer support tickets."
+msgstr "Agregue agentes y asigne roles y permisos para brindar asistencia y soporte a los tickets de atención al cliente."
 
-msgid ""
-"Define rules for ticket to auto close. Ticket will be auto close after "
-"specific interval of time which can be set by admin."
+msgid "Define rules for ticket to auto close. Ticket will be auto close after specific interval of time which can be set by admin."
 msgstr ""
-"Defina reglas para que el ticket se cierre automáticamente. El ticket se "
-"cerrará automáticamente después de un intervalo de tiempo específico que el "
-"administrador puede configurar."
+"Defina reglas para que el ticket se cierre automáticamente. El ticket se cerrará automáticamente después de un intervalo de tiempo específico "
+"que el administrador puede configurar."
 
-msgid ""
-"Get the survey from your customers on ticket closing to improve your quality "
-"of services and assistance."
-msgstr ""
-"Recibe la encuesta de tus clientes sobre cierre de tickets para mejorar tu "
-"calidad de servicios y asistencia."
+msgid "Get the survey from your customers on ticket closing to improve your quality of services and assistance."
+msgstr "Recibe la encuesta de tus clientes sobre cierre de tickets para mejorar tu calidad de servicios y asistencia."
 
 msgid "Helptopic"
 msgstr "Tópico de ayuda"
 
-msgid ""
-"Help topics help users to find and select the area with which they need "
-"assistance."
-msgstr ""
-"Los temas de ayuda ayudan a los usuarios a encontrar y seleccionar el área "
-"con la que necesitan ayuda."
+msgid "Help topics help users to find and select the area with which they need assistance."
+msgstr "Los temas de ayuda ayudan a los usuarios a encontrar y seleccionar el área con la que necesitan ayuda."
 
-msgid ""
-"The private note is used as reminders or to give other agents insights into "
-"the ticket issue. User Won't see the private notes."
+msgid "The private note is used as reminders or to give other agents insights into the ticket issue. User Won't see the private notes."
 msgstr ""
-"La nota privada se utiliza como recordatorios o para brindar a otros agentes "
-"información sobre el problema del ticket. El usuario no verá las notas "
-"privadas."
+"La nota privada se utiliza como recordatorios o para brindar a otros agentes información sobre el problema del ticket. El usuario no verá las "
+"notas privadas."
 
-msgid ""
-"Stop losing productivity on repetitive queries,Build your knowledge base, "
-"group solutions by topics to facilitate users."
+msgid "Stop losing productivity on repetitive queries,Build your knowledge base, group solutions by topics to facilitate users."
 msgstr ""
-"Deje de perder productividad en consultas repetitivas. Cree su base de "
-"conocimientos, agrupe soluciones por temas para facilitar a los usuarios."
+"Deje de perder productividad en consultas repetitivas. Cree su base de conocimientos, agrupe soluciones por temas para facilitar a los usuarios."
 
-msgid ""
-"Enables admin to set N numbers of tickets for users to create and set N "
-"numbers of Ticket to open for agents separately."
+msgid "Enables admin to set N numbers of tickets for users to create and set N numbers of Ticket to open for agents separately."
 msgstr ""
-"Permite al administrador establecer N números de tickets para que los "
-"usuarios creen y configurar N números de Tickets para abrir para los agentes "
-"por separado."
+"Permite al administrador establecer N números de tickets para que los usuarios creen y configurar N números de Tickets para abrir para los "
+"agentes por separado."
 
 msgid "Multi Language Email Templates"
 msgstr "Plantillas de correo electrónico en varios idiomas"
 
-msgid ""
-"It allows to create language-based email templates for all JS Help Desk "
-"email templates."
-msgstr ""
-"Permite crear plantillas de correo electrónico basadas en idiomas para todas "
-"las plantillas de correo electrónico de JS Help Desk."
+msgid "It allows to create language-based email templates for all JS Help Desk email templates."
+msgstr "Permite crear plantillas de correo electrónico basadas en idiomas para todas las plantillas de correo electrónico de JS Help Desk."
 
-msgid ""
-"Canned Responses are pre-populated messages that allows support agents to "
-"respond quickly to customer issues."
+msgid "Canned Responses are pre-populated messages that allows support agents to respond quickly to customer issues."
 msgstr ""
-"Las respuestas preparadas son mensajes precargados que permiten a los "
-"agentes de soporte responder rápidamente a los problemas de los clientes."
+"Las respuestas preparadas son mensajes precargados que permiten a los agentes de soporte responder rápidamente a los problemas de los clientes."
 
-msgid ""
-"Enables users to reply to the tickets via email without the need to login to "
-"the support system first."
-msgstr ""
-"Permite a los usuarios responder a los tickets por correo electrónico sin "
-"necesidad de iniciar sesión primero en el sistema de soporte."
+msgid "Enables users to reply to the tickets via email without the need to login to the support system first."
+msgstr "Permite a los usuarios responder a los tickets por correo electrónico sin necesidad de iniciar sesión primero en el sistema de soporte."
 
-msgid ""
-"Make unlimited announcements associated with support system to get customer "
-"interaction."
-msgstr ""
-"Realice anuncios ilimitados asociados con el sistema de soporte para lograr "
-"la interacción con el cliente."
+msgid "Make unlimited announcements associated with support system to get customer interaction."
+msgstr "Realice anuncios ilimitados asociados con el sistema de soporte para lograr la interacción con el cliente."
 
-msgid ""
-"Ban Email allows you to block email of any user to restrict him to create "
-"new tickets."
-msgstr ""
-"Ban Email le permite bloquear el correo electrónico de cualquier usuario "
-"para restringirle la creación de nuevos tickets."
+msgid "Ban Email allows you to block email of any user to restrict him to create new tickets."
+msgstr "Ban Email le permite bloquear el correo electrónico de cualquier usuario para restringirle la creación de nuevos tickets."
 
 msgid "Descktop Notifications"
 msgstr "Notificaciones de escritorio"
 
-msgid ""
-"Save the ticket as a PDF in your system or the admin will also be able to "
-"export all the data inside of Ticket."
-msgstr ""
-"Guarde el ticket como PDF en su sistema o el administrador también podrá "
-"exportar todos los datos dentro del Ticket."
+msgid "Save the ticket as a PDF in your system or the admin will also be able to export all the data inside of Ticket."
+msgstr "Guarde el ticket como PDF en su sistema o el administrador también podrá exportar todos los datos dentro del Ticket."
 
-msgid ""
-"Tired of getting tickets about the same problems? Add FAQs to drastically "
-"reduce the number of common questions from users."
+msgid "Tired of getting tickets about the same problems? Add FAQs to drastically reduce the number of common questions from users."
 msgstr ""
-"¿Estás cansado de recibir multas por los mismos problemas? Agregue preguntas "
-"frecuentes para reducir drásticamente la cantidad de preguntas comunes de "
-"los usuarios."
+"¿Estás cansado de recibir multas por los mismos problemas? Agregue preguntas frecuentes para reducir drásticamente la cantidad de preguntas "
+"comunes de los usuarios."
 
 msgid "Admin Widgets"
 msgstr "Widgets de administrador"
 
-msgid ""
-"Use internal email to send emails to one agent to another agent with in "
-"support ticket."
-msgstr ""
-"Utilice el correo electrónico interno para enviar correos electrónicos de un "
-"agente a otro agente con un ticket de soporte."
+msgid "Use internal email to send emails to one agent to another agent with in support ticket."
+msgstr "Utilice el correo electrónico interno para enviar correos electrónicos de un agente a otro agente con un ticket de soporte."
 
 msgid "Front-End Widget"
 msgstr "Widget de interfaz de usuario"
 
-msgid ""
-"Paid Support is the easiest way to integrate and manage payments for your "
-"support tickets."
-msgstr ""
-"El soporte pagado es la forma más fácil de integrar y administrar los pagos "
-"de sus tickets de soporte."
+msgid "Paid Support is the easiest way to integrate and manage payments for your support tickets."
+msgstr "El soporte pagado es la forma más fácil de integrar y administrar los pagos de sus tickets de soporte."
 
 msgid "Mail Chimp"
 msgstr "correochimp"
 
-msgid ""
-"The Mail Chimp add-on adds a new checkbox to the registration form for "
-"prompting new users to subscribe your email-list."
+msgid "The Mail Chimp add-on adds a new checkbox to the registration form for prompting new users to subscribe your email-list."
 msgstr ""
-"El complemento Mail Chimp agrega una nueva casilla de verificación al "
-"formulario de registro para solicitar a nuevos usuarios que se suscriban a "
-"su lista de correo electrónico."
+"El complemento Mail Chimp agrega una nueva casilla de verificación al formulario de registro para solicitar a nuevos usuarios que se suscriban "
+"a su lista de correo electrónico."
 
-msgid ""
-"EDD offers customers to open new tickets just one click from their EDD "
-"account with optionally validating the license keys."
-msgstr ""
-"EDD ofrece a los clientes abrir nuevos tickets con solo un clic desde su "
-"cuenta EDD y, opcionalmente, validar las claves de licencia."
+msgid "EDD offers customers to open new tickets just one click from their EDD account with optionally validating the license keys."
+msgstr "EDD ofrece a los clientes abrir nuevos tickets con solo un clic desde su cuenta EDD y, opcionalmente, validar las claves de licencia."
 
 msgid "email cc"
 msgstr "correo electrónico"
@@ -6710,42 +6421,33 @@ msgid "Email Cc"
 msgstr "CC de correo electrónico"
 
 msgid ""
-"CC(Carbon Copy) - the people who should know about the information which is "
-"being shared and the people included are able to see who is there in the "
-"list."
+"CC(Carbon Copy) - the people who should know about the information which is being shared and the people included are able to see who is there "
+"in the list."
 msgstr ""
-"CC (copia carbón): las personas que deben conocer la información que se "
-"comparte y las personas incluidas pueden ver quién está en la lista."
+"CC (copia carbón): las personas que deben conocer la información que se comparte y las personas incluidas pueden ver quién está en la lista."
 
 msgid "multiform"
 msgstr "multiforme"
 
 msgid "Multiform allows user to add more than one form based on requirements."
-msgstr ""
-"Multiform permite al usuario agregar más de un formulario según los "
-"requisitos."
+msgstr "Multiform permite al usuario agregar más de un formulario según los requisitos."
 
 msgid "agent auto assign"
 msgstr "asignación automática del agente"
 
 msgid ""
-"When auto assignment is enabled and a ticket is created, an appropriate "
-"agent is automatically assigned to the ticket and it is moved to the "
+"When auto assignment is enabled and a ticket is created, an appropriate agent is automatically assigned to the ticket and it is moved to the "
 "Assigned state."
 msgstr ""
-"Cuando la asignación automática está habilitada y se crea un ticket, se "
-"asigna automáticamente un agente apropiado al ticket y se mueve al estado "
-"Asignado."
+"Cuando la asignación automática está habilitada y se crea un ticket, se asigna automáticamente un agente apropiado al ticket y se mueve al "
+"estado Asignado."
 
 msgid "Social Login"
 msgstr "Inicio de sesión social"
 
-msgid ""
-"Users can login from their social media accounts. They can create a new "
-"account or use social media accounts."
+msgid "Users can login from their social media accounts. They can create a new account or use social media accounts."
 msgstr ""
-"Los usuarios pueden iniciar sesión desde sus cuentas de redes sociales. "
-"Pueden crear una nueva cuenta o utilizar cuentas de redes sociales."
+"Los usuarios pueden iniciar sesión desde sus cuentas de redes sociales. Pueden crear una nueva cuenta o utilizar cuentas de redes sociales."
 
 msgid "JS Help Desk Add-Ons Bundle Pack"
 msgstr "Paquete de complementos de la mesa de ayuda de JS"
@@ -6771,13 +6473,10 @@ msgstr "Todo en estándar incluido y"
 msgid "All Future Addons"
 msgstr "Todos los complementos futuros"
 
-msgid ""
-"Hey there! We have recently launched a fresh update for the add-ons. Don't "
-"forget to update the add-ons to enjoy the greatest features!"
+msgid "Hey there! We have recently launched a fresh update for the add-ons. Don't forget to update the add-ons to enjoy the greatest features!"
 msgstr ""
-"¡Hola! Recientemente lanzamos una nueva actualización para los complementos. "
-"¡No olvides actualizar los complementos para disfrutar de las mejores "
-"funciones!"
+"¡Hola! Recientemente lanzamos una nueva actualización para los complementos. ¡No olvides actualizar los complementos para disfrutar de las "
+"mejores funciones!"
 
 msgid "View Addone Status"
 msgstr "Ver estado del complemento"
@@ -6813,8 +6512,7 @@ msgid "slug for add category page"
 msgstr "slug para agregar página de categoría"
 
 msgid "slug for user knowledgebase articles page"
-msgstr ""
-"slug para la página de artículos de la base de conocimientos del usuario"
+msgstr "slug para la página de artículos de la base de conocimientos del usuario"
 
 msgid "slug for article detail page"
 msgstr "slug para la página de detalles del artículo"
@@ -6978,62 +6676,38 @@ msgstr "Listado de entradas"
 msgid "Visitor Ticket Setting"
 msgstr "Configuración de entradas para visitantes"
 
-msgid ""
-"By enabling this option, a user can know to whom the ticket has been "
-"assigned."
-msgstr ""
-"Al habilitar esta opción, un usuario puede saber a quién se le ha asignado "
-"el ticket."
+msgid "By enabling this option, a user can know to whom the ticket has been assigned."
+msgstr "Al habilitar esta opción, un usuario puede saber a quién se le ha asignado el ticket."
 
 msgid "Assigned info. on admin tickets"
 msgstr "Información asignada. en tickets de administrador"
 
-msgid ""
-"By enabling this option, an agent can know to whom the ticket has been "
-"assigned."
-msgstr ""
-"Al habilitar esta opción, un agente puede saber a quién se le ha asignado el "
-"ticket."
+msgid "By enabling this option, an agent can know to whom the ticket has been assigned."
+msgstr "Al habilitar esta opción, un agente puede saber a quién se le ha asignado el ticket."
 
 msgid "Assigned info. on user tickets"
 msgstr "Información asignada. en tickets de usuario"
 
-msgid ""
-"By enabling this option, an admin can know to whom the ticket has been "
-"assigned."
-msgstr ""
-"Al habilitar esta opción, un administrador puede saber a quién se le ha "
-"asignado el ticket."
+msgid "By enabling this option, an admin can know to whom the ticket has been assigned."
+msgstr "Al habilitar esta opción, un administrador puede saber a quién se le ha asignado el ticket."
 
 msgid "Assigned info. on agent tickets"
 msgstr "Información asignada. en boletos de agente"
 
-msgid ""
-"By enabling this option, a user can know who closed the ticket and when that "
-"ticket closed."
-msgstr ""
-"Al habilitar esta opción, un usuario puede saber quién cerró el ticket y "
-"cuándo se cerró ese ticket."
+msgid "By enabling this option, a user can know who closed the ticket and when that ticket closed."
+msgstr "Al habilitar esta opción, un usuario puede saber quién cerró el ticket y cuándo se cerró ese ticket."
 
 msgid "Closed info. on admin closed tickets"
 msgstr "Información cerrada. en tickets cerrados de administrador"
 
-msgid ""
-"By enabling this option, an agent can know who closed the ticket and when "
-"that ticket closed."
-msgstr ""
-"Al habilitar esta opción, un agente puede saber quién cerró el ticket y "
-"cuándo se cerró ese ticket."
+msgid "By enabling this option, an agent can know who closed the ticket and when that ticket closed."
+msgstr "Al habilitar esta opción, un agente puede saber quién cerró el ticket y cuándo se cerró ese ticket."
 
 msgid "Closed info. on agent closed tickets"
 msgstr "Información cerrada. en tickets cerrados del agente"
 
-msgid ""
-"By enabling this option, an admin can know who closed the ticket and when "
-"that ticket closed."
-msgstr ""
-"Al habilitar esta opción, un administrador puede saber quién cerró el ticket "
-"y cuándo se cerró."
+msgid "By enabling this option, an admin can know who closed the ticket and when that ticket closed."
+msgstr "Al habilitar esta opción, un administrador puede saber quién cerró el ticket y cuándo se cerró."
 
 msgid "Set default sorting for ticket listing"
 msgstr "Establecer clasificación predeterminada para la lista de entradas"
@@ -7048,40 +6722,25 @@ msgid "Ticket listing sorting"
 msgstr "Clasificación de listado de entradas"
 
 msgid "Select whether users can see the ticket delete button"
-msgstr ""
-"Seleccione si los usuarios pueden ver el botón de eliminación de ticket"
+msgstr "Seleccione si los usuarios pueden ver el botón de eliminación de ticket"
 
 msgid "Show ticket delete button"
 msgstr "Mostrar botón de eliminación de ticket"
 
-msgid ""
-"Select whether users can see the name of administrator or staff member on "
-"ticket reply"
-msgstr ""
-"Seleccione si los usuarios pueden ver el nombre del administrador o miembro "
-"del personal en la respuesta al ticket"
+msgid "Select whether users can see the name of administrator or staff member on ticket reply"
+msgstr "Seleccione si los usuarios pueden ver el nombre del administrador o miembro del personal en la respuesta al ticket"
 
 msgid "Show Anonymous Name On Ticket Reply"
 msgstr "Mostrar nombre anónimo en la respuesta del ticket"
 
-msgid ""
-"Select whether users can see the email of administrator or agent on ticket "
-"reply"
-msgstr ""
-"Seleccione si los usuarios pueden ver el correo electrónico del "
-"administrador o agente en la respuesta al ticket"
+msgid "Select whether users can see the email of administrator or agent on ticket reply"
+msgstr "Seleccione si los usuarios pueden ver el correo electrónico del administrador o agente en la respuesta al ticket"
 
 msgid "Show Admin OR Agent Email On Ticket Reply"
-msgstr ""
-"Mostrar el correo electrónico del administrador o del agente en la respuesta "
-"del ticket"
+msgstr "Mostrar el correo electrónico del administrador o del agente en la respuesta del ticket"
 
-msgid ""
-"Show or hide the multiform popup when creating a new ticket. if you hide "
-"them, the system will open the default form."
-msgstr ""
-"Muestra u oculta la ventana emergente multiforme al crear un nuevo ticket. "
-"si los oculta, el sistema abrirá el formulario predeterminado."
+msgid "Show or hide the multiform popup when creating a new ticket. if you hide them, the system will open the default form."
+msgstr "Muestra u oculta la ventana emergente multiforme al crear un nuevo ticket. si los oculta, el sistema abrirá el formulario predeterminado."
 
 msgid "Multiforms Popup For New Tickets"
 msgstr "Ventana emergente multiformes para nuevos boletos"
@@ -7131,12 +6790,8 @@ msgstr "Estamos aquí para ayudarte"
 msgid "Help icon"
 msgstr "Icono de ayuda"
 
-msgid ""
-"JS Help Desk is a professional, simple, easy to use and complete customer "
-"support system."
-msgstr ""
-"JS Help Desk es un sistema de atención al cliente profesional, sencillo, "
-"fácil de usar y completo."
+msgid "JS Help Desk is a professional, simple, easy to use and complete customer support system."
+msgstr "JS Help Desk es un sistema de atención al cliente profesional, sencillo, fácil de usar y completo."
 
 msgid "View all videos"
 msgstr "Ver todos los vídeos"
@@ -7153,12 +6808,8 @@ msgstr "Icono de la mesa de ayuda"
 msgid "JS Help Desk Support"
 msgstr "Soporte de la mesa de ayuda de JS"
 
-msgid ""
-"JS Help Desk delivers timely customer support if you have any query then "
-"we're here to show you the way."
-msgstr ""
-"JS Help Desk brinda atención al cliente oportuna. Si tiene alguna consulta, "
-"estamos aquí para mostrarle el camino."
+msgid "JS Help Desk delivers timely customer support if you have any query then we're here to show you the way."
+msgstr "JS Help Desk brinda atención al cliente oportuna. Si tiene alguna consulta, estamos aquí para mostrarle el camino."
 
 msgid "Visitor ticket creation"
 msgstr "Creación de entradas de visitante"
@@ -7422,12 +7073,10 @@ msgid "Edit Help Topic"
 msgstr "Editar tema de ayuda"
 
 msgid ""
-"e.g ' I have read and agree to the [link] Terms and Conditions[/link].  ' "
-"The text between [link] and [/link] will be linked to provided url or "
+"e.g ' I have read and agree to the [link] Terms and Conditions[/link].  ' The text between [link] and [/link] will be linked to provided url or "
 "wordpress page."
 msgstr ""
-"Por ejemplo, 'He leído y acepto los [enlace] Términos y condiciones[/"
-"enlace]. ' El texto entre [enlace] y [/enlace] se vinculará a la URL "
+"Por ejemplo, 'He leído y acepto los [enlace] Términos y condiciones[/enlace]. ' El texto entre [enlace] y [/enlace] se vinculará a la URL "
 "proporcionada o a la página de WordPress."
 
 msgid "login"
@@ -7439,12 +7088,8 @@ msgstr "estrellas"
 msgid "Please write appreciated review at WP Extension Directory"
 msgstr "Por favor escriba una reseña apreciada en WP Extension Directory"
 
-msgid ""
-"We'd love to hear from you. It'll only take 2 minutes of your time, and will "
-"really help us spread the word"
-msgstr ""
-"Nos encantaría saber de usted. Solo le tomará 2 minutos de su tiempo y "
-"realmente nos ayudará a correr la voz."
+msgid "We'd love to hear from you. It'll only take 2 minutes of your time, and will really help us spread the word"
+msgstr "Nos encantaría saber de usted. Solo le tomará 2 minutos de su tiempo y realmente nos ayudará a correr la voz."
 
 msgid "love"
 msgstr "amar"
@@ -7631,3 +7276,657 @@ msgstr "Seleccionar idiomas"
 
 msgid "IMAP Authentication cancelled"
 msgstr "Autenticación IMAP cancelada"
+
+msgid "Email Template has been successfully deleted"
+msgstr "La plantilla de correo electrónico se ha eliminado correctamente"
+
+msgid "Select Submit Type"
+msgstr "Seleccione Tipo de envío"
+
+msgid "'s Department permission has been changed"
+msgstr "El permiso del departamento de Spossion ha cambiado"
+
+msgid "Rule has not been stored"
+msgstr "La regla no ha sido almacenada"
+
+msgid "Rule has not been deleted"
+msgstr "La regla no ha sido eliminada"
+
+msgid "Rule"
+msgstr "Regla"
+
+msgid "Select Condition Value"
+msgstr "Seleccionar valor de condición"
+
+msgid "The ticket is unlocked by"
+msgstr "El boleto se desbloquea por"
+
+msgid " item(s)"
+msgstr "elementos)"
+
+msgid "Active Now"
+msgstr "Activo ahora"
+
+msgid "Dashboad"
+msgstr "Panel"
+
+msgid "Statuses"
+msgstr "Estado"
+
+msgid "status"
+msgstr "estado"
+
+msgid "Products"
+msgstr "Productos"
+
+msgid "product"
+msgstr "producto"
+
+msgid "Emailcc"
+msgstr "Correo electrónicocc"
+
+msgid "JS Help Desk Pages"
+msgstr "JS Ayuda Pages de la mesa de ayuda"
+
+msgid "JS Help desk control panel"
+msgstr "Panel de control de la mesa de ayuda JS"
+
+msgid "Add ticket"
+msgstr "Agregar boleto"
+
+msgid "My tickets"
+msgstr "Mis boletos"
+
+msgid "Latest downloads"
+msgstr "Últimas descargas"
+
+msgid "Popular downloads"
+msgstr "Descargas populares"
+
+msgid "List FAQ`s"
+msgstr "Lista de preguntas frecuentes"
+
+msgid "Latest FAQ`s"
+msgstr "Últimas preguntas frecuentes"
+
+msgid "Popular FAQ`s"
+msgstr "Preguntas frecuentes populares"
+
+msgid "Latest announcements"
+msgstr "Últimos anuncios"
+
+msgid "Popular announcements"
+msgstr "Anuncios populares"
+
+msgid "home icon"
+msgstr "icono de inicio"
+
+msgid "slug"
+msgstr "babosa"
+
+msgid "Auto Assign"
+msgstr "Asignación automática"
+
+msgid "Shortcodes"
+msgstr "Códigos cortos"
+
+msgid "Ticket Statuses"
+msgstr "Estado de boletos"
+
+msgid "Add Status"
+msgstr "Agregar estado"
+
+msgid "Add Ticket Status"
+msgstr "Agregar estado del boleto"
+
+msgid "Add Product"
+msgstr "Agregar producto"
+
+msgid "Agent Roles"
+msgstr "Roles de agentes"
+
+msgid "Add Agent Role"
+msgstr "Agregar rol de agente"
+
+msgid "Emial CC"
+msgstr "Correo electrónico CC"
+
+msgid "Add Emial CC"
+msgstr "Agregar correo electrónico CC"
+
+msgid "help"
+msgstr "ayuda"
+
+msgid "WooCommerce Support"
+msgstr "Soporte de WooCommerce"
+
+msgid "Envato"
+msgstr "Envidato"
+
+msgid "Prefix has been stored"
+msgstr "El prefijo ha sido almacenado"
+
+msgid "reset"
+msgstr "reiniciar"
+
+msgid "Home Slug"
+msgstr "Babosa de casa"
+
+msgid "Prefix"
+msgstr "Prefijo"
+
+msgid "This prefix will be added to slug incase of conflict"
+msgstr "Este prefijo se agregará a Slug en caso de conflicto"
+
+msgid "edit"
+msgstr "editar"
+
+msgid "Missing user(s) added successfully!"
+msgstr "¡Los usuarios faltantes agregados con éxito!"
+
+msgid "No missing user found!"
+msgstr "¡No se encuentra el usuario falta!"
+
+msgid "Not Installed"
+msgstr "No instalado"
+
+msgid "Addon Installed Successfully"
+msgstr "Complemento instalado correctamente"
+
+msgid "Addon installation failed"
+msgstr "Falló la instalación de complementos"
+
+msgid "add missing users"
+msgstr "Agregar usuarios faltantes"
+
+msgid "user"
+msgstr "usuario"
+
+msgid "view all tickets history"
+msgstr "Ver toda la historia de los boletos"
+
+msgid "View All Tickets History"
+msgstr "Ver toda la historia de los boletos"
+
+msgid "It allows user to add more than one form based on requirements."
+msgstr "Permite al usuario agregar más de un formulario en función de los requisitos."
+
+msgid "When a ticket is created, an appropriate agent is automatically assigned to the ticket and it is moved to the Assigned state."
+msgstr "Cuando se crea un boleto, un agente apropiado se asigna automáticamente al boleto y se mueve al estado asignado."
+
+msgid "WP Vehicle Manager"
+msgstr "Administrador de vehículos de WP"
+
+msgid "Visit site"
+msgstr "Visitar sitio"
+
+msgid "Install WP Vehicle Manager Plugin"
+msgstr "Instalar el complemento WP Vehicle Manager"
+
+msgid "JS Job Manager"
+msgstr "Gerente de trabajo de JS"
+
+msgid "Install JS Job Manager Plugin"
+msgstr "Instalar el complemento JS Job Manager"
+
+msgid "WP Learn Manager"
+msgstr "Gerente de Learn WP"
+
+msgid "Install WP Learn Manager Plugin"
+msgstr "Instalar el complemento WP Learn Manager"
+
+msgid "Manually assign ticket to agent"
+msgstr "Asignar manualmente el boleto al agente"
+
+msgid "Translation"
+msgstr "Traducción"
+
+msgid "When WordPress language change to fr, JS Help Desk language will auto change to fr"
+msgstr "Cuando el lenguaje de WordPress cambie a FR, JS Ayuda la mesa de ayuda cambiará automáticamente a FR"
+
+msgid "Status: "
+msgstr "Estado:"
+
+msgid "The status has been changed"
+msgstr "El estado ha sido cambiado"
+
+msgid "The status has not been changed"
+msgstr "El estado no ha sido cambiado"
+
+msgid "Ticket status change"
+msgstr "Cambio de estado del boleto"
+
+msgid "The status is changed by"
+msgstr "El estado se cambia por"
+
+msgid "Change Status"
+msgstr "Estado de cambio"
+
+msgid "Reason For"
+msgstr "Razón"
+
+msgid "tickets by"
+msgstr "entradas para"
+
+msgid "View Image"
+msgstr "Ver imagen"
+
+msgid "Viewed By"
+msgstr "Visto por"
+
+msgid "None"
+msgstr "Ninguno"
+
+msgid "set"
+msgstr "colocar"
+
+msgid "Other Tickets"
+msgstr "Otros boletos"
+
+msgid "Type Note for"
+msgstr "Tipo de nota para"
+
+msgid "tickets"
+msgstr "entradas"
+
+msgid "Token"
+msgstr "Simbólico"
+
+msgid "Search Ticket"
+msgstr "Boleto de búsqueda"
+
+msgid "Ticket Creator"
+msgstr "Creador de boletos"
+
+msgid "Remember Your Ticket Token for Tracking (Save It!)"
+msgstr "Recuerde el token de su boleto para el seguimiento (¡guárdelo!)"
+
+msgid "You've received a token number to track your support ticket status. This is one-time code, so please save it carefully. "
+msgstr "Ha recibido un número de token para rastrear el estado de su boleto de soporte. Este es un código único, así que guárdelo cuidadosamente."
+
+msgid "Copy Token"
+msgstr "Token de copia"
+
+msgid "Status Title Already Exist"
+msgstr "El título de estado ya existe"
+
+msgid "Status has been stored"
+msgstr "El estado ha sido almacenado"
+
+msgid "Status has not been stored"
+msgstr "El estado no se ha almacenado"
+
+msgid "Status has been deleted"
+msgstr "El estado ha sido eliminado"
+
+msgid "Status has not been deleted"
+msgstr "El estado no se ha eliminado"
+
+msgid "Text Color"
+msgstr "Color de texto"
+
+msgid "Background Color"
+msgstr "Color de fondo"
+
+msgid "Save Status"
+msgstr "Guardar el estado"
+
+msgid "Required Fields are not filled"
+msgstr "Los campos requeridos no están llenos"
+
+msgid "Note:"
+msgstr "Nota:"
+
+msgid "Features marked with"
+msgstr "Características marcadas con"
+
+msgid "are only available with its own addon."
+msgstr "Solo están disponibles con su propio complemento."
+
+msgid "Product Title Already Exist"
+msgstr "El título del producto ya existe"
+
+msgid "Product has been stored"
+msgstr "El producto ha sido almacenado"
+
+msgid "Product has not been stored"
+msgstr "El producto no ha sido almacenado"
+
+msgid "Product has been deleted"
+msgstr "El producto ha sido eliminado"
+
+msgid "Product has not been deleted"
+msgstr "El producto no ha sido eliminado"
+
+msgid "Save Product"
+msgstr "Guardar el producto"
+
+msgid "JS Help Desk Settings"
+msgstr "Configuración de la mesa de ayuda JS"
+
+msgid "Step 2 of "
+msgstr "Paso 2 de"
+
+msgid "Step 4 of 5"
+msgstr "Paso 4 de 5"
+
+msgid "Step 1 of "
+msgstr "Paso 1 de"
+
+msgid "Download Translation File"
+msgstr "Descargar archivo de traducción"
+
+msgid "Want to download translation file? Click on download. It will take sometime."
+msgstr "¿Quieres descargar el archivo de traducción? Haga clic en Descargar. Tomará algún tiempo."
+
+msgid "Download & Next"
+msgstr "Descargar y Siguiente"
+
+msgid "Skip this step"
+msgstr "Omitir este paso"
+
+msgid "Recaptcha Version 2"
+msgstr "Recaptcha versión 2"
+
+msgid "Recaptcha Version 3"
+msgstr "Recaptcha versión 3"
+
+msgid "WordPress Default Register Page"
+msgstr "Página de registro predeterminado de WordPress"
+
+msgid "4"
+msgstr "4"
+
+msgid "5"
+msgstr "5"
+
+msgid "6"
+msgstr "6"
+
+msgid "Oldest First"
+msgstr "El más antiguo primero"
+
+msgid "Newest First"
+msgstr "El primero primero"
+
+msgid "menu"
+msgstr "menú"
+
+msgid "Select Configuration"
+msgstr "Seleccionar configuración"
+
+msgid "Facebook"
+msgstr "Facebook"
+
+msgid "Linkedin"
+msgstr "LinkedIn"
+
+msgid "Show number of the open, closed, answered ticket in my ticket and dashboard"
+msgstr "Mostrar el número del boleto abierto, cerrado y respondido en mi boleto y panel de control"
+
+msgid "Redirect user on log in"
+msgstr "Redirigir el usuario al inicio de sesión"
+
+msgid "Set register Link Default or Custom"
+msgstr "Establecer enlace de registro predeterminado o personalizado"
+
+msgid " To enable registrations, WordPress admin > General > Settings > Membership: Anyone can register"
+msgstr "Para habilitar registros, WordPress Admin> General> Configuración> Membresía: cualquier persona puede registrarse"
+
+msgid "Woocommerce Category"
+msgstr "Categoría de WooCommerce"
+
+msgid "Select category to display only products of this category on the WooCommerce shop page."
+msgstr "Seleccione la categoría para mostrar solo productos de esta categoría en la página de WooCommerce Shop."
+
+msgid "Set ticketid sequential or random .e.g "
+msgstr "Establecer TicketID secuencial o aleatorio .E.g"
+
+msgid "Pad Zeros"
+msgstr "Cero de almohadilla"
+
+msgid "To pad an integer with leading zeros to a specific length"
+msgstr "Para rellenar un entero con ceros líderes a una longitud específica"
+
+msgid "Ticket Replies ordering"
+msgstr "Entrega de boletos pedidos"
+
+msgid "Set the default ordering for ticket replies in the detail page."
+msgstr "Establezca el pedido predeterminado para respuestas de boletos en la página de detalles."
+
+msgid "Show Message Read Icon for Admin On Ticket Detail"
+msgstr "Show Mensaje Leer Icono para el administrador en el detalle del boleto"
+
+msgid "Select whether the message read icon is displayed to the administrator on ticket detail."
+msgstr "Seleccione si el icono de lectura del mensaje se muestra al administrador en el detalle del boleto."
+
+msgid "Show Message Read Icon For Agents on Ticket Detail"
+msgstr "Show Message Leer icono para agentes en el detalle del boleto"
+
+msgid "Select whether the message read icon is displayed to agents on ticket detail."
+msgstr "Seleccione si el icono de lectura del mensaje se muestra a los agentes con el detalle del boleto."
+
+msgid "Show Message Read Icon For Users On Ticket Detail"
+msgstr "Mostrar mensaje Lea el icono para los usuarios en el detalle del boleto"
+
+msgid "Select whether the message read icon is displayed to users on the ticket detail."
+msgstr "Seleccione si el icono de lectura del mensaje se muestra a los usuarios en el detalle del boleto."
+
+msgid "Department Email"
+msgstr "Correo electrónico del departamento"
+
+msgid "Send email to all departments on ticket create"
+msgstr "Enviar correo electrónico a todos los departamentos en Ticket Crear"
+
+msgid "Captcha Setting"
+msgstr "Entorno de captcha"
+
+msgid "Google reCaptcha"
+msgstr "Google Recaptcha"
+
+msgid "Google ReCaptcha version"
+msgstr "Versión de Google Recaptcha"
+
+msgid "Select the Google ReCaptcha version"
+msgstr "Seleccione la versión de Google Recaptcha"
+
+msgid "Google recaptcha site key"
+msgstr "Clave del sitio de Google Recaptcha"
+
+msgid "Please enter the google re-captcha site key from"
+msgstr "Ingrese la clave del sitio de Google Recaptcha desde"
+
+msgid "Google recaptcha secret key"
+msgstr "Clave secreta de Google Recaptcha"
+
+msgid "Please enter the google re-captcha secret key from"
+msgstr "Ingrese la clave secreta de Google Recaptcha desde"
+
+msgid "Search Reports"
+msgstr "Informes de búsqueda"
+
+msgid "Please fill required fields."
+msgstr "Llene los campos requeridos."
+
+msgid "There was no record found"
+msgstr "No se encontró ningún registro"
+
+msgid "Select Required"
+msgstr "Seleccionar requerido"
+
+msgid " Subject"
+msgstr "Sujeto"
+
+msgid "Kylee Arroyo"
+msgstr "Kylee Arroyo"
+
+msgid "Can I upgrade my plan?"
+msgstr "¿Puedo actualizar mi plan?"
+
+msgid "This ticket is marked as overdue "
+msgstr "Este boleto está marcado como atrasado"
+
+msgid "pF3YczjML"
+msgstr "pf3yczjml"
+
+msgid "01-11-2023"
+msgstr "01-11-2023"
+
+msgid "Allison Carney"
+msgstr "Allison Carney"
+
+msgid "How Can I get Subscription?"
+msgstr "¿Cómo puedo obtener suscripción?"
+
+msgid "Tp3Y7zj01"
+msgstr "TP3Y7ZJ01"
+
+msgid "20-12-2023"
+msgstr "20-12-2023"
+
+msgid "Aleena Adam"
+msgstr "Aleena Adam"
+
+msgid "How Long do i have support access?"
+msgstr "¿Cuánto tiempo tengo acceso de soporte?"
+
+msgid "Ku3Y8zj3L"
+msgstr "Ku3y8zj3l"
+
+msgid "11-6-2023"
+msgstr "11-6-2023"
+
+msgid "If the colors have been saved but the user-side colors are still the same, it is advised to clear the cache."
+msgstr "Si los colores se han guardado pero los colores del lado del usuario siguen siendo los mismos, se recomienda borrar el caché."
+
+msgid "Purple"
+msgstr "Púrpura"
+
+msgid "Field cannot be mark as published"
+msgstr "El campo no puede ser marcado como publicado"
+
+msgid "Field cannot mark as required"
+msgstr "El campo no puede marcar según sea necesario"
+
+msgid "Child fields has not been stored"
+msgstr "Los campos infantiles no se han almacenado"
+
+msgid "Not Contain"
+msgstr "No contener"
+
+msgid "Place Holder"
+msgstr "Marcador de posición"
+
+msgid "Admin Search"
+msgstr "Búsqueda de administrador"
+
+msgid "AND"
+msgstr "Y"
+
+msgid "File upload fields and Check box fields cannot be made required."
+msgstr "Los campos de carga de archivos y los campos de casilla de verificación no se pueden hacer."
+
+msgid "Default Value"
+msgstr "Valor predeterminado"
+
+msgid "To choose a default value, first add values in the area below"
+msgstr "Para elegir un valor predeterminado, primero agregue valores en el área a continuación"
+
+msgid "This option is not available in this case"
+msgstr "Esta opción no está disponible en este caso"
+
+msgid "Select Default Value"
+msgstr "Seleccione el valor predeterminado"
+
+msgid "Read Only"
+msgstr "Solo lectura"
+
+msgid "Admin/Agent Only"
+msgstr "Administrador/agente solamente"
+
+msgid "Java Script"
+msgstr "Javascript"
+
+msgid "Add More"
+msgstr "Agregar más"
+
+msgid "Visibility conditions"
+msgstr "Condiciones de visibilidad"
+
+msgid "Add new"
+msgstr "Agregar nuevo"
+
+msgid "visibility condition"
+msgstr "condición de visibilidad"
+
+msgid "User already an agent"
+msgstr "Usuario ya un agente"
+
+msgid "The agent has not been stored"
+msgstr "El agente no ha sido almacenado"
+
+msgid "The agent has not been deleted"
+msgstr "El agente no ha sido eliminado"
+
+msgid "The agent in use cannot delete"
+msgstr "El agente en uso no puede eliminar"
+
+msgid "Select agent"
+msgstr "Seleccionar agente"
+
+msgid "The ticket marks as overdue"
+msgstr "El boleto marca como atrasado"
+
+msgid "Disabled form cannot be set as default"
+msgstr "El formulario deshabilitado no se puede configurar como predeterminado"
+
+msgid "Form has not been stored"
+msgstr "La forma no se ha almacenado"
+
+msgid "Multiform has not been deleted"
+msgstr "Multiformes no se ha eliminado"
+
+msgid "Multiform in use"
+msgstr "Multiform en uso"
+
+msgid " cannot deleted"
+msgstr "no se puede eliminar"
+
+msgid "Closed Date"
+msgstr "Fecha cerrada"
+
+msgid "Closed Time"
+msgstr "Tiempo cerrado"
+
+msgid "Total Tracking Time"
+msgstr "Tiempo de seguimiento total"
+
+msgid "Sub Category Knowledgebase"
+msgstr "Sub categoría Base de conocimiento"
+
+msgid "Type:"
+msgstr "Tipo:"
+
+msgid "Sub Category Faqs"
+msgstr "Preguntas frecuentes de subcategas"
+
+msgid "Facebook user"
+msgstr "Usuario de Facebook"
+
+msgid "Linkedin user"
+msgstr "Usuario de LinkedIn"
+
+msgid "You are logged in"
+msgstr "Estás conectado"
+
+msgid "You are logged out"
+msgstr "Estás desconectado"
+
+msgid "Email Cc has not been stored"
+msgstr "El correo electrónico CC no se ha almacenado"
+
+msgid "Email CC has not been deleted"
+msgstr "El correo electrónico CC no se ha eliminado"
+
+msgid "Email CC "
+msgstr "Correo electrónico CC"
