@@ -1163,7 +1163,6 @@ class JSSTticketModel {
             $data['message'] = JSSTincluder::getJSModel('jssupportticket')->getSanitizedEditorData($data['jsticket_message']); // use jsticket_message to avoid conflict
     		$jsticket_message = JSSTincluder::getJSModel('jssupportticket')->jsstremovetags($data['message']);
             $jsticket_message = JSSTincluder::getJSmodel('jssupportticket')->stripslashesFull($jsticket_message);
-            $data['message'] = $jsticket_message;
         }
         //check if message field is set as required or not
         $isRequired = JSSTincluder::getJSmodel('fieldordering')->checkIsFieldRequired('issuesummary',$data['multiformid']);
@@ -1230,6 +1229,9 @@ class JSSTticketModel {
         $data['params'] = $params;
         //custom field code end
 
+	if (!empty($jsticket_message)) {
+            $data['message'] = $jsticket_message;
+        }
         $data['created'] = $created;
         $data['updated'] = $updated;
 

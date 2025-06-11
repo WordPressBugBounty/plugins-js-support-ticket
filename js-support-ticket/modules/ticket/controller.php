@@ -18,7 +18,7 @@ class JSSTticketController {
         jssupportticket::$_data['sanitized_args']['jsst_nonce'] = esc_html(wp_create_nonce('jsst_nonce'));
         // remove this in the version 2.9.5
         include_once JSST_PLUGIN_PATH . 'includes/updates/updates.php';
-        JSSTupdates::checkUpdates('295');
+        JSSTupdates::checkUpdates('296');
         // remove this in the version 2.9.5
         if (self::canaddfile($layout)) {
             switch ($layout) {

@@ -489,7 +489,7 @@ wp_add_inline_script('js-support-ticket-main-js',$jssupportticket_js);
                                     $js_value = esc_js($divid);
                                     $js_value = ($divid);
                                     ?>
-                                    <input id="depandant-field-button" class="jsst-button-link button user-field-val-button" onclick="getNextField('<?php echo $js_value; ?>', this);" value="<?php echo esc_html(__('Add More', 'js-support-ticket')); ?>" type="button">
+                                    <input id="depandant-field-button" class="jsst-button-link button user-field-val-button" onclick="getNextField('<?php echo esc_js($js_value); ?>', this);" value="<?php echo esc_html(__('Add More', 'js-support-ticket')); ?>" type="button">
                                 </div>
                             </div><?php
                         }
