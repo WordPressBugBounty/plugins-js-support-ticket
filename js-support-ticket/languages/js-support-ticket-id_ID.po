@@ -7931,3 +7931,51 @@ msgstr "Email CC belum dihapus"
 
 msgid "Email CC "
 msgstr "Email CC"
+
+msgid "Auto Update Add-Ons"
+msgstr "Add-on Pembaruan Otomatis"
+
+msgid "Addon will automatically update to the newest version"
+msgstr "Addon akan secara otomatis memperbarui ke versi terbaru"
+
+msgid "Auto Update"
+msgstr "Pembaruan Otomatis"
+
+msgid "Off"
+msgstr "Mati"
+
+msgid "On"
+msgstr "Pada"
+
+msgid "Please select at least one addon!"
+msgstr "Pilih setidaknya satu addon!"
+
+msgid "Update Key"
+msgstr "Perbarui kunci"
+
+msgid "JS Helpdesk Activation Key"
+msgstr "Kunci aktivasi JS Helpdesk"
+
+msgid "Info"
+msgstr "Info"
+
+msgid "The highlighted addons are not included in your current license. Please adjust your selection accordingly."
+msgstr "Addons yang disorot tidak termasuk dalam lisensi Anda saat ini. Harap sesuaikan pilihan Anda sesuai."
+
+msgid "Select Addons to Update with New Activation Key"
+msgstr "Pilih Addons untuk memperbarui dengan kunci aktivasi baru"
+
+msgid "This will replace the old key with the new one."
+msgstr "Ini akan menggantikan kunci lama dengan yang baru."
+
+msgid "Something went wrong!"
+msgstr "Ada yang salah!"
+
+msgid "The setting has been stored."
+msgstr "Pengaturan telah disimpan."
+
+msgid "Addon(s) Installed successfully!"
+msgstr "Addon (s) terinstal dengan sukses!"
+
+msgid "Addon(s) Installation Failed"
+msgstr "Instalasi Addon (S) gagal"

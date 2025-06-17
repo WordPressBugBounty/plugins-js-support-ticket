@@ -410,11 +410,38 @@ class JSSTconfigurationModel {
         $result = jssupportticket::$_db->get_var($query);
         return $result;
     }
+
     function getCountConfig() {
         $query = "SELECT COUNT(*)
                   FROM `".jssupportticket::$_db->prefix."js_ticket_config`";
         $result = jssupportticket::$_db->get_var($query);
         return $result;
+    }
+
+    function storeAutoUpdateConfig() {
+
+        if (!current_user_can('manage_options')) { //only admin can change it.
+            return false;
+        }
+        $configvalue = JSSTrequest::getVar('jsst_addons_auto_update','','');
+
+        if (!is_numeric($configvalue)) { //can only have numric value
+            return false;
+        }
+
+        $error = false;
+        $query = "UPDATE `" . jssupportticket::$_db->prefix . "js_ticket_config` SET `configvalue` = ".esc_sql($configvalue)." WHERE `configname`= 'jsst_addons_auto_update'";
+        if (false === jssupportticket::$_db->query($query)) {
+            $error = true;
+        }
+
+        if ($error) {
+            JSSTmessage::setMessage(esc_html(__('Something went wrong!', 'js-support-ticket')), 'error');
+            return WPJOBPORTAL_SAVE_ERROR;
+        } else {
+            JSSTmessage::setMessage(esc_html(__('The setting has been stored.', 'js-support-ticket')), 'updated');
+        }
+        return;
     }
 }
 

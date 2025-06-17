@@ -18,7 +18,7 @@
 		        <div id="jsstadmin-breadcrunbs">
 		            <ul>
 		                <li><a href="?page=jssupportticket" title="<?php echo esc_html(__('Dashboard','js-support-ticket')); ?>"><?php echo esc_html(__('Dashboard','js-support-ticket')); ?></a></li>
-		                <li><?php echo esc_html(__('Short Codes','js-support-ticket')); ?></li>
+		                <li><?php echo esc_html(__('Shortcodes','js-support-ticket')); ?></li>
 		            </ul>
 		        </div>
 		    </div>
@@ -40,7 +40,7 @@
 		    </div>
 		</div>
     	<div id="jsstadmin-head">
-            <h1 class="jsstadmin-head-text"><?php echo esc_html(__('Short Codes', 'js-support-ticket')); ?></h1>
+            <h1 class="jsstadmin-head-text"><?php echo esc_html(__('Shortcodes', 'js-support-ticket')); ?></h1>
             <a target="blank" href="https://www.youtube.com/watch?v=mN6xsD2u2CI" class="jsstadmin-add-link black-bg button js-cp-video-popup" title="<?php echo esc_html(__('Watch Video', 'js-support-ticket')); ?>">
                 <img alt="<?php echo esc_html(__('arrow','js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/play-btn.png"/>
                 <?php echo esc_html(__('Watch Video','js-support-ticket')); ?>

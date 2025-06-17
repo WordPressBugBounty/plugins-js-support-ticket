@@ -20,6 +20,7 @@ class JSSTpostinstallationController {
                 break;
                 case 'admin_stepone':
                     JSSTincluder::getJSModel('postinstallation')->getConfigurationValues();
+                    JSSTincluder::getJSModel('jssupportticket')->addMissingUsers(0);
                 break;
                 case 'admin_steptwo':
                     JSSTincluder::getJSModel('postinstallation')->getConfigurationValues();

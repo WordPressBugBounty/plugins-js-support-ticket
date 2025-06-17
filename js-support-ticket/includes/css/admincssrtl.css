@@ -242,6 +242,8 @@ div.jsstadmin-add-on-page-wrp div.add-on-page-cnt div.add-on-msg a.add-on-msg-bt
 div.jsstadmin-add-on-page-wrp div.add-on-page-cnt div.add-on-list div.add-on-item {float: right;}
 div.jsstadmin-add-on-page-wrp div.add-on-page-cnt div.add-on-bundle-pack-list div.add-on-bundle-pack-item {float: right;}
 div.jsstadmin-add-on-page-wrp div.add-on-page-cnt div.add-on-bundle-pack-list div.add-on-bundle-pack-item div.add-on-bundle-pack-price span {margin-left: unset;margin-right: 3px;}
+/* update key */
+div.jsstadmin-addons-list-data .jsstadmin-autoupdte-addons-cardwrp .jsstadmin-autoupdte-addons-card-btn{margin-right: 0;margin-left: 10px;}
 
 /* feedbacks */
 .js-ticket-feedback-image {float: left;}
@@ -335,6 +337,8 @@ button.jssupportticket-close-review-box-popup, .jssupportticket-thanks-box-popup
 .js-admin-theme-page div.js-ticket-wrapper div.js-ticket-data span.js-ticket-status.replied-status{right:auto !important;}
 .js-admin-theme-page span.js-ticket-wrapper-textcolor{right: auto;left: 20px;}
 .js-admin-theme-page div.js-ticket-wrapper div.js-ticket-data span.js-ticket-status img.ticketstatusimage.one{margin-left: 62px;}
+/* update key */
+div#jsstadmin-data-wrp .jsstadmin-update-key-form .jsstadmin-update-key-wrp .jsstadmin-update-key-slctall-addonswrp .jsstadmin-update-key-slctall-addon-checkbox-wrp{margin-left: 0;margin-right: auto;}
 
 
 @media (max-width: 1280px){
@@ -406,6 +410,8 @@ button.jssupportticket-close-review-box-popup, .jssupportticket-thanks-box-popup
     /* admin theme page */
     .js-admin-theme-page div.js-ticket-search-wrp div.js-ticket-form-wrp form.js-filter-form div.js-filter-button-wrp input.js-ticket-reset-btn{margin-left: 0;}
     .js-admin-theme-page div.js-ticket-search-wrp div.js-ticket-form-wrp form.js-filter-form div.js-filter-button-wrp .js-search-filter-btn{margin-right: 1px;}
+    /* update key */
+    div#jsstadmin-data-wrp .jsstadmin-update-key-form .jsstadmin-update-key-wrp .jsstadmin-update-key-slctall-addonswrp .jsstadmin-update-key-slctall-addon-checkbox-wrp{margin-right: 0;}
 
 }
 @media (max-width:480px) {
@@ -424,6 +430,8 @@ button.jssupportticket-close-review-box-popup, .jssupportticket-thanks-box-popup
     div#jsstadmin-data-wrp .jssticketadmin-help-btm .jssticketadmin-help-btm-wrp .jssticketadmin-help-btm-cnt a img {margin-left: unset !important;}
     /* admin theme pge */
     div.js_theme_section{float: initial;}
+    /* addon status */
+    div.jsstadmin-addons-list-data .jsstadmin-autoupdte-addons-cardwrp .jsstadmin-autoupdte-addons-card-btn{margin-left: 0;}
 }
 
 

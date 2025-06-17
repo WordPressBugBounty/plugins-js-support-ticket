@@ -1494,7 +1494,7 @@ class JSSTjssupportticketModel {
         return $network_site_url;
     }
 
-    function addMissingUsers(){
+    function addMissingUsers($show_message = 1){
         $missingUser = 0;
         $query = "SELECT id FROM `" . jssupportticket::$_db->prefix . "users`";
         $users = jssupportticket::$_db->get_results($query);
@@ -1531,10 +1531,12 @@ class JSSTjssupportticketModel {
                 }
             }
         }
-        if ($missingUser == 1) {
-            JSSTmessage::setMessage(esc_html(__('Missing user(s) added successfully!', 'js-support-ticket')), 'updated');
-        } else {
-            JSSTmessage::setMessage(esc_html(__('No missing user found!', 'js-support-ticket')), 'error');
+        if ($show_message == 1) {
+            if ($missingUser == 1) {
+                JSSTmessage::setMessage(esc_html(__('Missing user(s) added successfully!', 'js-support-ticket')), 'updated');
+            } else {
+                JSSTmessage::setMessage(esc_html(__('No missing user found!', 'js-support-ticket')), 'error');
+            }
         }
         return;
     }
@@ -1665,7 +1667,7 @@ class JSSTjssupportticketModel {
                     JSSTincluder::getJSModel('premiumplugin')->getAddonUpdateSqlFromUpdateDir($installedversion,$newversion,$plugin_path . '/sql/');
                     $updatesdir = $plugin_path.'/sql/';
                     if(preg_match('/js-support-ticket-[a-zA-Z]+/', $updatesdir)){
-                        jsstRemoveAddonUpdatesFolder($updatesdir);
+                        $this->jsstRemoveAddonUpdatesFolder($updatesdir);
                     }
                 }else{
                     JSSTincluder::getJSModel('premiumplugin')->getAddonUpdateSqlFromLive($installedversion,$newversion,$plugin_slug);
@@ -1722,6 +1724,114 @@ class JSSTjssupportticketModel {
         }
     }
 
+    function JSSTAddonsAutoUpdate(){
+        /*
+            code for auto update check from configuration
+        */
+
+        $jsst_addons_auto_update = JSSTincluder::getJSModel('configuration')->getConfigValue('jsst_addons_auto_update');
+        if( $jsst_addons_auto_update != 1){
+            return;
+        }
+        
+        require_once JSST_PLUGIN_PATH.'includes/addon-updater/jsstupdater.php';
+        $JS_SUPPORTTICKETUpdater  = new JS_SUPPORTTICKETUpdater();
+        $cdnversiondata = $JS_SUPPORTTICKETUpdater->getPluginVersionDataFromCDN();
+
+        $jssupportticket_addons = $this->getJSSTAddonsArray();
+
+        $installed_plugins = get_plugins();
+        $need_to_update = array();
+        $site_url = JSSTincluder::getJSModel('jssupportticket')->getSiteUrl();
+        $status_prefix = 'key_status_for_js-support-ticket_';
+        $final_addon_json_array = array();
+        foreach ($jssupportticket_addons as $key1 => $value1) {
+            $matched = 0;
+            $version = "";
+            foreach ($installed_plugins as $name => $value) {
+                $install_plugin_name = jssupportticketphplib::JSST_str_replace(".php","",jssupportticketphplib::JSST_basename($name));
+                if($key1 == $install_plugin_name){
+                    $matched = 1;
+                    $version = $value["Version"];
+                    $install_plugin_matched_name = $install_plugin_name;
+                }
+            }
+            if($matched == 1){ //installed
+                $name = $key1;
+                $title = $value1['title'];
+                $cdnavailableversion = "";
+                foreach ($cdnversiondata as $cdnname => $cdnversion) {
+                    $addon_json_array = array();
+                    $addon_json_final_array = array();
+                    $install_plugin_name_simple = jssupportticketphplib::JSST_str_replace("-", "", $install_plugin_matched_name);
+                    if($cdnname == jssupportticketphplib::JSST_str_replace("-", "", $install_plugin_matched_name)){
+                        if($cdnversion > $version){ // new version available
+                            $status = 'update_available';
+                            $cdnavailableversion = $cdnversion;
+                            $plugin_slug = jssupportticketphplib::JSST_str_replace('js-support-ticket-', '', $name);
+                            // get key status from local
+                            $token = get_option('transaction_key_for_'.esc_attr($name));
+                            $key_local_status = get_option($status_prefix . $token);
+                            if($key_local_status == 1){
+                                $addon_json_array[] = jssupportticketphplib::JSST_str_replace('js-support-ticket-', '', $name);
+                                $url = 'https://jshelpdesk.com/setup/index.php?token='.esc_attr($token).'&productcode='. wp_json_encode($addon_json_array).'&domain='.$site_url;
+                                // verify token
+                                $verifytransactionkey = $this->verifytransactionkey($token, $url);
+                                
+                                if($verifytransactionkey['status'] == 1){
+                                    $final_addon_json_array[] = jssupportticketphplib::JSST_str_replace('js-support-ticket-', '', $name);
+                                    $addon_json_final_array[] = jssupportticketphplib::JSST_str_replace('js-support-ticket-', '', $name);
+                                    $need_to_update[] = array("name" => $name, "current_version" => $version, "available_version" => $cdnavailableversion, "plugin_slug" => $plugin_slug );
+                                    $final_url = 'https://jshelpdesk.com/setup/index.php?token='.esc_attr($token).'&productcode='. wp_json_encode($final_addon_json_array).'&domain='.$site_url;
+                                }
+                            }
+                        }
+                    }    
+                }
+            }
+        }
+        $token = "";
+        if(!empty($need_to_update)){
+            $installed = $this->install_plugin($final_url);
+            if ( !is_wp_error( $installed ) && $installed ) {
+                // had to run two seprate loops to save token for all the addons even if some error is triggered by activation.
+
+                // run update sql
+                foreach($need_to_update AS $update){
+                    $installedversion = $update["current_version"];
+                    $newversion = $update["available_version"];
+                    $plugin_slug = $update["plugin_slug"];
+                    $key = $update["name"];
+                    if ($installedversion != $newversion) {
+                        $optionname = 'jsst-addon-'. $plugin_slug .'s-version';
+                        update_option($optionname, $newversion);
+                        $plugin_path = WP_CONTENT_DIR;
+                        $plugin_path = $plugin_path.'/plugins/'.$key.'/includes';
+                        if(is_dir($plugin_path . '/sql/') && is_readable($plugin_path . '/sql/')){
+                            if($installedversion != ''){
+                                $installedversion = str_replace('.','', $installedversion);
+                            }
+                            if($newversion != ''){
+                                $newversion = str_replace('.','', $newversion);
+                            }
+                            JSSTincluder::getJSModel('premiumplugin')->getAddonUpdateSqlFromUpdateDir($installedversion,$newversion,$plugin_path . '/sql/');
+                            $updatesdir = $plugin_path.'/sql/';
+                            if(preg_match('/js-support-ticket-[a-zA-Z]+/', $updatesdir)){
+                                $this->jsstRemoveAddonUpdatesFolder($updatesdir);
+                            }
+                        }else{
+                            JSSTincluder::getJSModel('premiumplugin')->getAddonUpdateSqlFromLive($installedversion,$newversion,$plugin_slug);
+                        }
+                    }
+                }
+
+            }else{
+                return;
+            }
+        }
+        return;
+    }
+
     function verifytransactionkey($transactionkey, $url){
         $message = 1;
         if($transactionkey != ''){
@@ -1773,7 +1883,7 @@ class JSSTjssupportticketModel {
         if (is_array($structure)) {
             foreach ($structure as $file) {
                 if (is_dir($file)) {
-                    jsstRemoveAddonUpdatesFolder($file);
+                    $this->jsstRemoveAddonUpdatesFolder($file);
                 } elseif (is_file($file)) {
                     wp_delete_file($file);
                 }
@@ -1829,6 +1939,62 @@ class JSSTjssupportticketModel {
 
         return;
     }
+
+    function jsst_check_license_status() {
+        // Get all distinct transaction keys
+        $query = "
+            SELECT DISTINCT option_value 
+            FROM `" . jssupportticket::$_db->prefix . "options`
+            WHERE option_name LIKE 'transaction_key_for_js-support-ticket%'
+        ";
+        $transaction_keys = jssupportticket::$_db->get_col($query);
+
+        if (empty($transaction_keys)) return;
+
+        $status_prefix = 'key_status_for_js-support-ticket_';
+        $site_url = JSSTincluder::getJSModel('jssupportticket')->getSiteUrl();
+        $show_key_expiry_msg = 0;
+
+        foreach ($transaction_keys as $key) {
+            // Build query string for GET request
+            $query_args = [
+                'token'   => $key,
+                'domain'  => $site_url,
+                'request' => 'keyexpirycheck'
+            ];
+
+            $url = add_query_arg($query_args, 'https://jshelpdesk.com/setup/index.php');
+
+            // Perform GET request
+            $response = wp_remote_get($url, [ 'timeout' => 15 ]);
+
+            if (is_wp_error($response)) {
+                continue; // Skip on error
+            }
+
+            $body = wp_remote_retrieve_body($response);
+            $data = json_decode($body, true);
+
+            if (!is_array($data) || !isset($data['status'])) {
+                continue; // Invalid response
+            }
+
+            // Save status
+            update_option($status_prefix . $key, $data['status'], false);
+
+            // Save expiry date if available
+            if ($data['status'] == 1 && !empty($data['expirydate'])) {
+                if (strtotime(current_time('mysql')) > strtotime($data['expirydate'])) {
+                    $show_key_expiry_msg = 1;
+                }
+            } else {
+                $show_key_expiry_msg = 1;
+            }
+        }
+
+        update_option('jsst_show_key_expiry_msg', $show_key_expiry_msg, false);
+    }
+
 }
 
 ?>

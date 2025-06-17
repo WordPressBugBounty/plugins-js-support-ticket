@@ -4488,8 +4488,8 @@ msgid "Easy Digital Downloads"
 msgstr "Downloads digitais fáceis"
 
 msgid ""
-"Select JS Help Desk default page, on the action system, will redirect on the selected page. If not select the default page, email "
-"links, and support icon might not work."
+"Select JS Help Desk default page, on the action system, will redirect on the selected page. If not select the default page, email links, "
+"and support icon might not work."
 msgstr ""
 "Selecione a página padrão do JS Help Desk, no sistema de ação, irá redirecionar para a página selecionada. Caso contrário, selecione a "
 "página padrão, os links de e-mail e o ícone de suporte poderão não funcionar."
@@ -5134,8 +5134,7 @@ msgstr "O SMTP permite que você adicione um protocolo de e-mail personalizado p
 
 msgid "Displays complete ticket history along with the ticket status, currently assigned user and other actions performed on each ticket."
 msgstr ""
-"Exibe o histórico completo do ticket junto com o status do ticket, usuário atualmente atribuído e outras ações realizadas em cada "
-"ticket."
+"Exibe o histórico completo do ticket junto com o status do ticket, usuário atualmente atribuído e outras ações realizadas em cada ticket."
 
 msgid "Pre-populated messages allow support agents to respond quickly."
 msgstr "Mensagens pré-preenchidas permitem que os agentes de suporte respondam rapidamente."
@@ -5555,9 +5554,9 @@ msgid "Wordpress Plugin"
 msgstr "Plug-in WordPress"
 
 msgid ""
-"JS Help Desk is a trusted open source ticket system. JS Help Desk is a simple, easy to use, web-based customer support system. Users "
-"can create a ticket from the front-end. JS Help Desk comes packed with lot features than most of the expensive(and complex) support "
-"ticket system on the market. The best part is, It completely free."
+"JS Help Desk is a trusted open source ticket system. JS Help Desk is a simple, easy to use, web-based customer support system. Users can "
+"create a ticket from the front-end. JS Help Desk comes packed with lot features than most of the expensive(and complex) support ticket "
+"system on the market. The best part is, It completely free."
 msgstr ""
 "JS Help Desk é um sistema confiável de tickets de código aberto. JS Help Desk é um sistema de suporte ao cliente baseado na web simples "
 "e fácil de usar. Os usuários podem criar um ticket no front-end. O JS Help Desk vem com muitos recursos que a maioria dos sistemas de "
@@ -6435,8 +6434,8 @@ msgid "agent auto assign"
 msgstr "atribuição automática de agente"
 
 msgid ""
-"When auto assignment is enabled and a ticket is created, an appropriate agent is automatically assigned to the ticket and it is moved "
-"to the Assigned state."
+"When auto assignment is enabled and a ticket is created, an appropriate agent is automatically assigned to the ticket and it is moved to "
+"the Assigned state."
 msgstr ""
 "Quando a atribuição automática está habilitada e um ticket é criado, um agente apropriado é automaticamente atribuído ao ticket e ele é "
 "movido para o estado Atribuído."
@@ -7072,11 +7071,11 @@ msgid "Edit Help Topic"
 msgstr "Editar tópico de ajuda"
 
 msgid ""
-"e.g ' I have read and agree to the [link] Terms and Conditions[/link].  ' The text between [link] and [/link] will be linked to "
-"provided url or wordpress page."
+"e.g ' I have read and agree to the [link] Terms and Conditions[/link].  ' The text between [link] and [/link] will be linked to provided "
+"url or wordpress page."
 msgstr ""
-"por exemplo, 'Li e concordo com os [link]Termos e Condições[/link]. 'O texto entre [link] e [/link] será vinculado ao URL fornecido ou "
-"à página wordpress."
+"por exemplo, 'Li e concordo com os [link]Termos e Condições[/link]. 'O texto entre [link] e [/link] será vinculado ao URL fornecido ou à "
+"página wordpress."
 
 msgid "login"
 msgstr "Conecte-se"
@@ -7932,3 +7931,51 @@ msgstr "O e -mail CC não foi excluído"
 
 msgid "Email CC "
 msgstr "E -mail cc"
+
+msgid "Auto Update Add-Ons"
+msgstr "Atualização automática complementos"
+
+msgid "Addon will automatically update to the newest version"
+msgstr "Addon será atualizado automaticamente para a versão mais recente"
+
+msgid "Auto Update"
+msgstr "Atualização automática"
+
+msgid "Off"
+msgstr "Desligado"
+
+msgid "On"
+msgstr "Sobre"
+
+msgid "Please select at least one addon!"
+msgstr "Selecione pelo menos um complemento!"
+
+msgid "Update Key"
+msgstr "Chave de atualização"
+
+msgid "JS Helpdesk Activation Key"
+msgstr "Chave de ativação do JS Helpdesk"
+
+msgid "Info"
+msgstr "Informações"
+
+msgid "The highlighted addons are not included in your current license. Please adjust your selection accordingly."
+msgstr "Os complementos destacados não estão incluídos na sua licença atual. Por favor, ajuste sua seleção de acordo."
+
+msgid "Select Addons to Update with New Activation Key"
+msgstr "Selecione Addons para atualizar com a nova chave de ativação"
+
+msgid "This will replace the old key with the new one."
+msgstr "Isso substituirá a chave antiga pelo novo."
+
+msgid "Something went wrong!"
+msgstr "Algo deu errado!"
+
+msgid "The setting has been stored."
+msgstr "A configuração foi armazenada."
+
+msgid "Addon(s) Installed successfully!"
+msgstr "Addon (s) instalado com sucesso!"
+
+msgid "Addon(s) Installation Failed"
+msgstr "A instalação (s) da addon falhou"

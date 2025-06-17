@@ -7892,3 +7892,51 @@ msgstr "Το Email CC δεν έχει διαγραφεί"
 
 msgid "Email CC "
 msgstr "Email cc"
+
+msgid "Auto Update Add-Ons"
+msgstr "Πρόσθετα ενημέρωσης αυτόματης ενημέρωσης"
+
+msgid "Addon will automatically update to the newest version"
+msgstr "Το Addon θα ενημερωθεί αυτόματα στη νεότερη έκδοση"
+
+msgid "Auto Update"
+msgstr "Αυτόματη ενημέρωση"
+
+msgid "Off"
+msgstr "Μακριά από"
+
+msgid "On"
+msgstr "Επί"
+
+msgid "Please select at least one addon!"
+msgstr "Επιλέξτε τουλάχιστον ένα addon!"
+
+msgid "Update Key"
+msgstr "Κλειδί ενημέρωσης"
+
+msgid "JS Helpdesk Activation Key"
+msgstr "Κλειδί ενεργοποίησης JS Helpdesk"
+
+msgid "Info"
+msgstr "Πληροφορίες"
+
+msgid "The highlighted addons are not included in your current license. Please adjust your selection accordingly."
+msgstr "Τα επισημασμένα πρόσθετα δεν περιλαμβάνονται στην τρέχουσα άδεια. Προσαρμόστε ανάλογα την επιλογή σας."
+
+msgid "Select Addons to Update with New Activation Key"
+msgstr "Επιλέξτε Addons για ενημέρωση με νέο κλειδί ενεργοποίησης"
+
+msgid "This will replace the old key with the new one."
+msgstr "Αυτό θα αντικαταστήσει το παλιό κλειδί με το νέο."
+
+msgid "Something went wrong!"
+msgstr "Κάτι πήγε στραβά!"
+
+msgid "The setting has been stored."
+msgstr "Η ρύθμιση έχει αποθηκευτεί."
+
+msgid "Addon(s) Installed successfully!"
+msgstr "Τα addon εγκαταστάθηκαν με επιτυχία!"
+
+msgid "Addon(s) Installation Failed"
+msgstr "Η εγκατάσταση Addon (ες) απέτυχε"

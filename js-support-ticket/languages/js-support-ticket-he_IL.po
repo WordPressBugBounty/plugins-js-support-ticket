@@ -7877,3 +7877,51 @@ msgstr "אתה מחובר"
 
 msgid "You are logged out"
 msgstr "אתה מחובר"
+
+msgid "Auto Update Add-Ons"
+msgstr "תוספות עדכונים אוטומטיים"
+
+msgid "Addon will automatically update to the newest version"
+msgstr "Addon יעדכן אוטומטית את הגרסה החדשה ביותר"
+
+msgid "Auto Update"
+msgstr "עדכון אוטומטי"
+
+msgid "Off"
+msgstr "כבוי"
+
+msgid "On"
+msgstr "עַל"
+
+msgid "Please select at least one addon!"
+msgstr "אנא בחר לפחות תוסף אחד!"
+
+msgid "Update Key"
+msgstr "עדכון מפתח"
+
+msgid "JS Helpdesk Activation Key"
+msgstr "מפתח ההפעלה של JS HelpDesk"
+
+msgid "Info"
+msgstr "מידע"
+
+msgid "The highlighted addons are not included in your current license. Please adjust your selection accordingly."
+msgstr "התוספות המודגשות אינן כלולות ברישיון הנוכחי שלך. אנא התאם את הבחירה שלך בהתאם."
+
+msgid "Select Addons to Update with New Activation Key"
+msgstr "בחר Addons כדי לעדכן עם מקש הפעלה חדש"
+
+msgid "This will replace the old key with the new one."
+msgstr "זה יחליף את המפתח הישן עם החדש."
+
+msgid "Something went wrong!"
+msgstr "משהו השתבש!"
+
+msgid "The setting has been stored."
+msgstr "התפאורה אוחסנה."
+
+msgid "Addon(s) Installed successfully!"
+msgstr "Addon (S) המותקנים בהצלחה!"
+
+msgid "Addon(s) Installation Failed"
+msgstr "התקנת Addon (S) נכשלה"

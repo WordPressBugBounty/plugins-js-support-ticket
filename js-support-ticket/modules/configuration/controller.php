@@ -72,6 +72,21 @@ class JSSTconfigurationController {
         exit;
     }
 
+    // function to handle auto update configuration
+    function saveautoupdateconfiguration() {
+        $nonce = JSSTrequest::getVar('_wpnonce');
+        if (! wp_verify_nonce( $nonce, 'jsst_configuration_nonce') ) {
+             die( 'Security check Failed' );
+        }
+        if (!current_user_can('manage_options')) { //only admin can change it.
+            return false;
+        }
+        $result = JSSTincluder::getJSModel('configuration')->storeAutoUpdateConfig();
+        $url = esc_url_raw(admin_url("admin.php?page=jssupportticket&jstlay=addonstatus"));
+        wp_redirect($url);
+        die();
+    }
+
 }
 
 $configurationController = new JSSTconfigurationController();

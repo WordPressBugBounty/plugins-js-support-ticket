@@ -7947,3 +7947,51 @@ msgstr "A CC e -mailt nem törölték"
 
 msgid "Email CC "
 msgstr "E -mailben a CC"
+
+msgid "Auto Update Add-Ons"
+msgstr "Autófrissítés kiegészítők"
+
+msgid "Addon will automatically update to the newest version"
+msgstr "ADDON automatikusan frissíti a legújabb verzióra"
+
+msgid "Auto Update"
+msgstr "Automatikus frissítés"
+
+msgid "Off"
+msgstr "Le"
+
+msgid "On"
+msgstr "On"
+
+msgid "Please select at least one addon!"
+msgstr "Kérjük, válasszon legalább egy addont!"
+
+msgid "Update Key"
+msgstr "Frissítési kulcs"
+
+msgid "JS Helpdesk Activation Key"
+msgstr "JS HelpDesk aktiválási kulcs"
+
+msgid "Info"
+msgstr "Információ"
+
+msgid "The highlighted addons are not included in your current license. Please adjust your selection accordingly."
+msgstr "A kiemelt kiegészítők nem szerepelnek a jelenlegi licencében. Kérjük, ennek megfelelően állítsa be a kiválasztását."
+
+msgid "Select Addons to Update with New Activation Key"
+msgstr "Válassza a kiegészítő lehetőségeket a frissítéshez az új aktiválási billentyűvel"
+
+msgid "This will replace the old key with the new one."
+msgstr "Ez helyettesíti a régi kulcsot az újra."
+
+msgid "Something went wrong!"
+msgstr "Valami rosszul ment!"
+
+msgid "The setting has been stored."
+msgstr "A beállítást tárolták."
+
+msgid "Addon(s) Installed successfully!"
+msgstr "Addon (ek) sikeresen telepítve!"
+
+msgid "Addon(s) Installation Failed"
+msgstr "ADDON (ek) telepítése sikertelen"

@@ -64,7 +64,7 @@ class jsSupportTicketServerCalls extends JS_SUPPORTTICKETUpdater{
 				'request' => 'generatetoken',
 				'transactionkey' => $transaction_key,
 				'productcode' => $addon_name,
-				'domain' => site_url()
+				'domain' => JSSTincluder::getJSModel('jssupportticket')->getSiteUrl()
 			);
 
 			$url = self::$server_url . '?' . http_build_query( $args, '', '&' );

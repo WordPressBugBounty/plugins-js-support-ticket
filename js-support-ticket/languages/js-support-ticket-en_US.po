@@ -7899,3 +7899,50 @@ msgstr ""
 
 msgid "Email CC "
 msgstr ""
+msgid "Auto Update Add-Ons"
+msgstr ""
+
+msgid "Addon will automatically update to the newest version"
+msgstr ""
+
+msgid "Auto Update"
+msgstr ""
+
+msgid "Off"
+msgstr ""
+
+msgid "On"
+msgstr ""
+
+msgid "Please select at least one addon!"
+msgstr ""
+
+msgid "Update Key"
+msgstr ""
+
+msgid "JS Helpdesk Activation Key"
+msgstr ""
+
+msgid "Info"
+msgstr ""
+
+msgid "The highlighted addons are not included in your current license. Please adjust your selection accordingly."
+msgstr ""
+
+msgid "Select Addons to Update with New Activation Key"
+msgstr ""
+
+msgid "This will replace the old key with the new one."
+msgstr ""
+
+msgid "Something went wrong!"
+msgstr ""
+
+msgid "The setting has been stored."
+msgstr ""
+
+msgid "Addon(s) Installed successfully!"
+msgstr ""
+
+msgid "Addon(s) Installation Failed"
+msgstr ""

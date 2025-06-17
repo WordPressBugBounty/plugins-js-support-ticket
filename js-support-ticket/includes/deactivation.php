@@ -6,6 +6,7 @@ if (!defined('ABSPATH'))
 class JSSTdeactivation {
 
     static function jssupportticket_deactivate() {
+        wp_clear_scheduled_hook('jsst_process_transation_key_status');
         wp_clear_scheduled_hook('jssupporticket_updateticketstatus');
         wp_clear_scheduled_hook('jssupporticket_ticketviaemail');
         $timestamp = wp_next_scheduled( 'jsst_delete_expire_session_data' );

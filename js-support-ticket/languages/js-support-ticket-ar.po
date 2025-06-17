@@ -7914,3 +7914,51 @@ msgstr "لم يتم حذف البريد الإلكتروني CC"
 
 msgid "Email CC "
 msgstr "البريد الإلكتروني CC"
+
+msgid "Auto Update Add-Ons"
+msgstr "Auto Update الوظائف الإضافية"
+
+msgid "Addon will automatically update to the newest version"
+msgstr "سيقوم Addon بالتحديث تلقائيًا إلى أحدث إصدار"
+
+msgid "Auto Update"
+msgstr "تحديث السيارات"
+
+msgid "Off"
+msgstr "عن"
+
+msgid "On"
+msgstr "على"
+
+msgid "Please select at least one addon!"
+msgstr "الرجاء تحديد ملحق واحد على الأقل!"
+
+msgid "Update Key"
+msgstr "تحديث مفتاح"
+
+msgid "JS Helpdesk Activation Key"
+msgstr "مفتاح تنشيط JS Helpdesk"
+
+msgid "Info"
+msgstr "معلومات"
+
+msgid "The highlighted addons are not included in your current license. Please adjust your selection accordingly."
+msgstr "لا يتم تضمين الإضافات المميزة في ترخيصك الحالي. يرجى ضبط اختيارك وفقًا لذلك."
+
+msgid "Select Addons to Update with New Activation Key"
+msgstr "حدد addons للتحديث باستخدام مفتاح التنشيط الجديد"
+
+msgid "This will replace the old key with the new one."
+msgstr "هذا سيحل محل المفتاح القديم بالمفتاح الجديد."
+
+msgid "Something went wrong!"
+msgstr "حدث خطأ ما!"
+
+msgid "The setting has been stored."
+msgstr "تم تخزين الإعداد."
+
+msgid "Addon(s) Installed successfully!"
+msgstr "Addon (s) تم تثبيتها بنجاح!"
+
+msgid "Addon(s) Installation Failed"
+msgstr "فشل التثبيت Addon (S)"

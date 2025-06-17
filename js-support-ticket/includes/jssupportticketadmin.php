@@ -86,6 +86,13 @@ class jssupportticketadmin {
                     array($this, 'showAdminPage') // function name
             );
             add_submenu_page('jssupportticket_hide', // parent slug
+                    esc_html(__('Import Data', 'js-support-ticket')), // Page title
+                    esc_html(__('Import Data', 'js-support-ticket')), // menu title
+                    'jsst_support_ticket', // capability
+                    'thirdpartyimport', //menu slug
+                    array($this, 'showAdminPage') // function name
+            );
+            add_submenu_page('jssupportticket_hide', // parent slug
                     esc_html(__('Products', 'js-support-ticket')), // Page title
                     esc_html(__('product', 'js-support-ticket')), // menu title
                     'jsst_support_ticket', // capability
@@ -336,12 +343,19 @@ class jssupportticketadmin {
                 $this->addMissingAddonPage('download');
             }
 
-
             add_submenu_page('jssupportticket', // parent slug
-                    esc_html(__('Premium Addons', 'js-support-ticket')), // Page title
-                    esc_html(__('Premium Addons', 'js-support-ticket')), // menu title
+                    esc_html(__('Install Addons', 'js-support-ticket')), // Page title
+                    esc_html(__('Install Addons', 'js-support-ticket')), // menu title
                     'jsst_support_ticket', // capability
                     'premiumplugin', //menu slug
+                    array($this, 'showAdminPage') // function name
+            );
+
+            add_submenu_page('jssupportticket', // parent slug
+                    esc_html(__('Shortcodes', 'js-support-ticket')), // Page title
+                    esc_html(__('Shortcodes', 'js-support-ticket')), // menu title
+                    'jsst_support_ticket', // capability
+                    'jssupportticket&jstlay=shortcodes', //menu slug
                     array($this, 'showAdminPage') // function name
             );
 

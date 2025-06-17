@@ -7934,3 +7934,51 @@ msgstr "E -mail CC nebyl smazán"
 
 msgid "Email CC "
 msgstr "E -mail CC"
+
+msgid "Auto Update Add-Ons"
+msgstr "Automatické aktualizace doplňků"
+
+msgid "Addon will automatically update to the newest version"
+msgstr "Addon se automaticky aktualizuje na nejnovější verzi"
+
+msgid "Auto Update"
+msgstr "Automatická aktualizace"
+
+msgid "Off"
+msgstr "Vypnuto"
+
+msgid "On"
+msgstr "Na"
+
+msgid "Please select at least one addon!"
+msgstr "Vyberte prosím alespoň jeden doplněk!"
+
+msgid "Update Key"
+msgstr "Aktualizovat klíč"
+
+msgid "JS Helpdesk Activation Key"
+msgstr "Aktivační klíč JS helpdesk"
+
+msgid "Info"
+msgstr "Informace"
+
+msgid "The highlighted addons are not included in your current license. Please adjust your selection accordingly."
+msgstr "Zvýrazněné doplňky nejsou zahrnuty do vaší aktuální licence. Podle toho upravte svůj výběr."
+
+msgid "Select Addons to Update with New Activation Key"
+msgstr "Vyberte doplňky pro aktualizaci s novým aktivačním klíčem"
+
+msgid "This will replace the old key with the new one."
+msgstr "Tím se nahradí starý klíč novým."
+
+msgid "Something went wrong!"
+msgstr "Něco se pokazilo!"
+
+msgid "The setting has been stored."
+msgstr "Nastavení bylo uloženo."
+
+msgid "Addon(s) Installed successfully!"
+msgstr "Addon (y) nainstalované úspěšně!"
+
+msgid "Addon(s) Installation Failed"
+msgstr "Instalace dodanů selhala"

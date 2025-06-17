@@ -7929,3 +7929,51 @@ msgstr "Электронная почта CC не была удалена"
 
 msgid "Email CC "
 msgstr "Электронная почта CC"
+
+msgid "Auto Update Add-Ons"
+msgstr "Автоматическое обновление надстройки"
+
+msgid "Addon will automatically update to the newest version"
+msgstr "Addon автоматически обновляется до новой версии"
+
+msgid "Auto Update"
+msgstr "Автообновление"
+
+msgid "Off"
+msgstr "Выключенный"
+
+msgid "On"
+msgstr "На"
+
+msgid "Please select at least one addon!"
+msgstr "Пожалуйста, выберите хотя бы один аддон!"
+
+msgid "Update Key"
+msgstr "Обновить ключ"
+
+msgid "JS Helpdesk Activation Key"
+msgstr "JS Helpdesk Ключ активации"
+
+msgid "Info"
+msgstr "Информация"
+
+msgid "The highlighted addons are not included in your current license. Please adjust your selection accordingly."
+msgstr "Выделенные аддоны не включены в вашу текущую лицензию. Пожалуйста, отрегулируйте свой выбор соответственно."
+
+msgid "Select Addons to Update with New Activation Key"
+msgstr "Выберите аддонс для обновления с новой ключом активации"
+
+msgid "This will replace the old key with the new one."
+msgstr "Это заменит старый ключ на новый."
+
+msgid "Something went wrong!"
+msgstr "Что -то пошло не так!"
+
+msgid "The setting has been stored."
+msgstr "Настройка была сохранена."
+
+msgid "Addon(s) Installed successfully!"
+msgstr "Аддон (ы) успешно установлен!"
+
+msgid "Addon(s) Installation Failed"
+msgstr "Установка аддон (S) не удалась"

@@ -2199,11 +2199,11 @@ msgid "Select Page"
 msgstr "انتخاب صفحه"
 
 msgid ""
-"Select JS Help Desk default page, on the action system, will redirect on the selected page. If not select the default page, email links, "
-"and support icon might not work."
+"Select JS Help Desk default page, on the action system, will redirect on the selected page. If not select the default page, email links, and "
+"support icon might not work."
 msgstr ""
-"صفحه پیش فرض JS Help Desk را انتخاب کنید ، در سیستم عمل در صفحه انتخابی هدایت می شوید. اگر صفحه پیش فرض را انتخاب نکنید ، پیوندهای ایمیل "
-"و نماد پشتیبانی ممکن است کار نکنند."
+"صفحه پیش فرض JS Help Desk را انتخاب کنید ، در سیستم عمل در صفحه انتخابی هدایت می شوید. اگر صفحه پیش فرض را انتخاب نکنید ، پیوندهای ایمیل و "
+"نماد پشتیبانی ممکن است کار نکنند."
 
 msgid "Support Icon"
 msgstr "آیکون پشتیبانی"
@@ -3290,8 +3290,8 @@ msgstr "به نمایندگان این امکان را می دهد که به ج�
 
 msgid "Defines rules or set specific intervals of time to make ticket auto overdue.The ticket can overdue by type or overdue by Cronjob."
 msgstr ""
-"قوانینی را تعیین می کند یا بازه های مشخصی از زمان را برای تأخیر در بلیط اتومبیل تعیین می کند. بلیط می تواند براساس نوع یا تأخیر توسط "
-"Cronjob تأخیر کند."
+"قوانینی را تعیین می کند یا بازه های مشخصی از زمان را برای تأخیر در بلیط اتومبیل تعیین می کند. بلیط می تواند براساس نوع یا تأخیر توسط Cronjob "
+"تأخیر کند."
 
 msgid "SMTP enables you to add custom mail protocol to send and receive emails within the js help desk."
 msgstr "SMTP شما را قادر می سازد پروتکل نامه های سفارشی را برای ارسال و دریافت ایمیل در میز کمک js اضافه کنید."
@@ -3784,12 +3784,12 @@ msgstr "افزونه وردپرس"
 
 msgid ""
 "JS Help Desk is a trusted open source ticket system. JS Help Desk is a simple, easy to use, web-based customer support system. Users can "
-"create a ticket from the front-end. JS Help Desk comes packed with lot features than most of the expensive(and complex) support ticket "
-"system on the market. The best part is, It completely free."
+"create a ticket from the front-end. JS Help Desk comes packed with lot features than most of the expensive(and complex) support ticket system "
+"on the market. The best part is, It completely free."
 msgstr ""
-"میز کمک JS یک سیستم بلیط باز منبع قابل اعتماد است. JS Help Desk یک سیستم پشتیبانی مشتری مبتنی بر وب ساده ، آسان و قابل استفاده است. "
-"کاربران می توانند از قسمت جلویی بلیط تهیه کنند. میز کمک JS از بسیاری از سیستم های پشتیبانی بلیط گران قیمت (و پیچیده) موجود در بازار مملو "
-"از ویژگی های زیادی است. بهترین قسمت این است که کاملاً رایگان است."
+"میز کمک JS یک سیستم بلیط باز منبع قابل اعتماد است. JS Help Desk یک سیستم پشتیبانی مشتری مبتنی بر وب ساده ، آسان و قابل استفاده است. کاربران "
+"می توانند از قسمت جلویی بلیط تهیه کنند. میز کمک JS از بسیاری از سیستم های پشتیبانی بلیط گران قیمت (و پیچیده) موجود در بازار مملو از ویژگی های "
+"زیادی است. بهترین قسمت این است که کاملاً رایگان است."
 
 msgid "Add on list"
 msgstr "اضافه کردن به لیست"
@@ -6310,8 +6310,8 @@ msgstr "افزونه ها برای میز راهنمایی"
 
 msgid "Get trusted WordPress add on’s. Guaranteed to work fast, safe to use, beautifully coded, packed with features and easy to use."
 msgstr ""
-"افزودنی های قابل اعتماد وردپرس را دریافت کنید. تضمین شده برای کار سریع، ایمن برای استفاده، کدگذاری زیبا، بسته بندی شده با ویژگی ها و "
-"استفاده آسان."
+"افزودنی های قابل اعتماد وردپرس را دریافت کنید. تضمین شده برای کار سریع، ایمن برای استفاده، کدگذاری زیبا، بسته بندی شده با ویژگی ها و استفاده "
+"آسان."
 
 msgid "Save big with an exclusive membership plan today!"
 msgstr "امروز با یک طرح عضویت انحصاری صرفه جویی زیادی کنید!"
@@ -6336,13 +6336,13 @@ msgstr "موضوعات راهنما به کاربران کمک می کند تا 
 
 msgid "The private note is used as reminders or to give other agents insights into the ticket issue. User Won't see the private notes."
 msgstr ""
-"یادداشت خصوصی به عنوان یادآوری یا برای دادن اطلاعات بینش به سایر نمایندگان در مورد مسئله بلیط استفاده می شود. کاربر یادداشت های خصوصی را "
-"نمی بیند."
+"یادداشت خصوصی به عنوان یادآوری یا برای دادن اطلاعات بینش به سایر نمایندگان در مورد مسئله بلیط استفاده می شود. کاربر یادداشت های خصوصی را نمی "
+"بیند."
 
 msgid "Stop losing productivity on repetitive queries,Build your knowledge base, group solutions by topics to facilitate users."
 msgstr ""
-"از دست دادن بهره وری در پرس و جوهای تکراری خودداری کنید، پایگاه دانش خود را بسازید، راه حل ها را بر اساس موضوعات برای تسهیل کاربران گروه "
-"بندی کنید."
+"از دست دادن بهره وری در پرس و جوهای تکراری خودداری کنید، پایگاه دانش خود را بسازید، راه حل ها را بر اساس موضوعات برای تسهیل کاربران گروه بندی "
+"کنید."
 
 msgid "Enables admin to set N numbers of tickets for users to create and set N numbers of Ticket to open for agents separately."
 msgstr "مدیر را قادر می‌سازد تا N شماره بلیط را برای کاربران ایجاد کند و N شماره بلیط را برای باز کردن جداگانه برای نمایندگان تنظیم کند."
@@ -6402,11 +6402,11 @@ msgid "Email Cc"
 msgstr "رایانامه کپی"
 
 msgid ""
-"CC(Carbon Copy) - the people who should know about the information which is being shared and the people included are able to see who is "
-"there in the list."
+"CC(Carbon Copy) - the people who should know about the information which is being shared and the people included are able to see who is there "
+"in the list."
 msgstr ""
-"CC (کپی کربن) - افرادی که باید از اطلاعاتی که به اشتراک گذاشته می شود و افرادی که در آن گنجانده شده اند بدانند، می توانند ببینند چه "
-"کسانی در لیست هستند."
+"CC (کپی کربن) - افرادی که باید از اطلاعاتی که به اشتراک گذاشته می شود و افرادی که در آن گنجانده شده اند بدانند، می توانند ببینند چه کسانی در "
+"لیست هستند."
 
 msgid "multiform"
 msgstr "چند شکلی"
@@ -6418,19 +6418,19 @@ msgid "agent auto assign"
 msgstr "اختصاص خودکار عامل"
 
 msgid ""
-"When auto assignment is enabled and a ticket is created, an appropriate agent is automatically assigned to the ticket and it is moved to "
-"the Assigned state."
+"When auto assignment is enabled and a ticket is created, an appropriate agent is automatically assigned to the ticket and it is moved to the "
+"Assigned state."
 msgstr ""
-"هنگامی که تخصیص خودکار فعال می شود و یک تیکت ایجاد می شود، یک عامل مناسب به طور خودکار به بلیط اختصاص داده می شود و به حالت Assigned "
-"منتقل می شود."
+"هنگامی که تخصیص خودکار فعال می شود و یک تیکت ایجاد می شود، یک عامل مناسب به طور خودکار به بلیط اختصاص داده می شود و به حالت Assigned منتقل می "
+"شود."
 
 msgid "Social Login"
 msgstr "ورود به سیستم اجتماعی"
 
 msgid "Users can login from their social media accounts. They can create a new account or use social media accounts."
 msgstr ""
-"کاربران می توانند از حساب های رسانه های اجتماعی خود وارد شوند. آنها می توانند یک حساب کاربری جدید ایجاد کنند یا از حساب های رسانه های "
-"اجتماعی استفاده کنند."
+"کاربران می توانند از حساب های رسانه های اجتماعی خود وارد شوند. آنها می توانند یک حساب کاربری جدید ایجاد کنند یا از حساب های رسانه های اجتماعی "
+"استفاده کنند."
 
 msgid "JS Help Desk Add-Ons Bundle Pack"
 msgstr "بسته بسته نرم افزاری افزونه های میز راهنمای JS"
@@ -6456,8 +6456,7 @@ msgstr "همه چیز در استاندارد شامل و"
 msgid "All Future Addons"
 msgstr "همه افزونه های آینده"
 
-msgid ""
-"Hey there! We have recently launched a fresh update for the add-ons. Don't forget to update the add-ons to enjoy the greatest features!"
+msgid "Hey there! We have recently launched a fresh update for the add-ons. Don't forget to update the add-ons to enjoy the greatest features!"
 msgstr ""
 "سلام! اخیراً یک به‌روزرسانی جدید برای افزونه‌ها راه‌اندازی کرده‌ایم. فراموش نکنید که افزونه ها را به روز کنید تا از بهترین ویژگی ها لذت ببرید!"
 
@@ -7056,11 +7055,11 @@ msgid "Edit Help Topic"
 msgstr "ویرایش موضوع راهنما"
 
 msgid ""
-"e.g ' I have read and agree to the [link] Terms and Conditions[/link].  ' The text between [link] and [/link] will be linked to provided "
-"url or wordpress page."
+"e.g ' I have read and agree to the [link] Terms and Conditions[/link].  ' The text between [link] and [/link] will be linked to provided url "
+"or wordpress page."
 msgstr ""
-"به عنوان مثال \"من [link] شرایط و ضوابط[/link] را خوانده ام و با آن موافقم. متن بین [لینک] و [/لینک] به url یا صفحه وردپرس ارائه شده "
-"پیوند داده می شود."
+"به عنوان مثال \"من [link] شرایط و ضوابط[/link] را خوانده ام و با آن موافقم. متن بین [لینک] و [/لینک] به url یا صفحه وردپرس ارائه شده پیوند "
+"داده می شود."
 
 msgid "login"
 msgstr "وارد شدن"
@@ -7072,8 +7071,7 @@ msgid "Please write appreciated review at WP Extension Directory"
 msgstr "لطفاً نظر ارزشمند را در فهرست برنامه افزودنی WP بنویسید"
 
 msgid "We'd love to hear from you. It'll only take 2 minutes of your time, and will really help us spread the word"
-msgstr ""
-"ما از اینکه ازت خبر داشته باشیم خوشحال میشویم. این فقط 2 دقیقه از وقت شما را می گیرد و واقعاً به ما کمک می کند تا این خبر را گسترش دهیم"
+msgstr "ما از اینکه ازت خبر داشته باشیم خوشحال میشویم. این فقط 2 دقیقه از وقت شما را می گیرد و واقعاً به ما کمک می کند تا این خبر را گسترش دهیم"
 
 msgid "love"
 msgstr "عشق"
@@ -7917,3 +7915,51 @@ msgstr "ایمیل CC حذف نشده است"
 
 msgid "Email CC "
 msgstr "ایمیل CC"
+
+msgid "Auto Update Add-Ons"
+msgstr "افزودنی های به روزرسانی خودکار"
+
+msgid "Addon will automatically update to the newest version"
+msgstr "افزونه به طور خودکار به جدیدترین نسخه به روز می شود"
+
+msgid "Auto Update"
+msgstr "بروزرسانی خودکار"
+
+msgid "Off"
+msgstr "از روی"
+
+msgid "On"
+msgstr "در"
+
+msgid "Please select at least one addon!"
+msgstr "لطفاً حداقل یک افزونه را انتخاب کنید!"
+
+msgid "Update Key"
+msgstr "کلید به روزرسانی"
+
+msgid "JS Helpdesk Activation Key"
+msgstr "کلید فعال سازی JS HelpDesk"
+
+msgid "Info"
+msgstr "اطلاعات"
+
+msgid "The highlighted addons are not included in your current license. Please adjust your selection accordingly."
+msgstr "افزونه های برجسته در مجوز فعلی شما گنجانده نشده است. لطفاً انتخاب خود را بر این اساس تنظیم کنید."
+
+msgid "Select Addons to Update with New Activation Key"
+msgstr "افزودنیها را برای به روزرسانی با کلید فعال سازی جدید انتخاب کنید"
+
+msgid "This will replace the old key with the new one."
+msgstr "این کلید قدیمی را با نسخه جدید جایگزین می کند."
+
+msgid "Something went wrong!"
+msgstr "مشکلی پیش آمد!"
+
+msgid "The setting has been stored."
+msgstr "تنظیمات ذخیره شده است."
+
+msgid "Addon(s) Installed successfully!"
+msgstr "Addon (بازدید کنندگان) با موفقیت نصب شد!"
+
+msgid "Addon(s) Installation Failed"
+msgstr "نصب افزودنی (ها) انجام نشد"

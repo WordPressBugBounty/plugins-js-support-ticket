@@ -22,7 +22,7 @@ class JSSTjssupportticketController {
                 case 'controlpanel':
                     JSSTincluder::getJSModel('jssupportticket')->getControlPanelData();
                     include_once JSST_PLUGIN_PATH . 'includes/updates/updates.php';
-                    JSSTupdates::checkUpdates('296');
+                    JSSTupdates::checkUpdates('297');
                     JSSTincluder::getJSModel('jssupportticket')->updateColorFile();
                     //JSSTincluder::getJSModel('jssupportticket')->getStaffControlPanelData();
                     break;
@@ -32,6 +32,7 @@ class JSSTjssupportticketController {
                 case 'admin_aboutus':
                     break;
                 case 'admin_addonstatus':
+                    JSSTincluder::getJSModel('jssupportticket')->jsst_check_license_status();
                     break;
                 case 'admin_help':
                     break;

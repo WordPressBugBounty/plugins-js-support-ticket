@@ -7924,3 +7924,51 @@ msgstr "E -mail CC nu a fost șters"
 
 msgid "Email CC "
 msgstr "Email CC"
+
+msgid "Auto Update Add-Ons"
+msgstr "Actualizare automată suplimente"
+
+msgid "Addon will automatically update to the newest version"
+msgstr "Addon se va actualiza automat la cea mai nouă versiune"
+
+msgid "Auto Update"
+msgstr "Actualizare automată"
+
+msgid "Off"
+msgstr "OFF"
+
+msgid "On"
+msgstr "Pe"
+
+msgid "Please select at least one addon!"
+msgstr "Vă rugăm să selectați cel puțin un addon!"
+
+msgid "Update Key"
+msgstr "Cheie de actualizare"
+
+msgid "JS Helpdesk Activation Key"
+msgstr "JS HELPDESK Cheie de activare"
+
+msgid "Info"
+msgstr "Informații"
+
+msgid "The highlighted addons are not included in your current license. Please adjust your selection accordingly."
+msgstr "Adăugările evidențiate nu sunt incluse în licența dvs. curentă. Vă rugăm să vă ajustați selecția în consecință."
+
+msgid "Select Addons to Update with New Activation Key"
+msgstr "Selectați Addrons pentru a actualiza cu o nouă cheie de activare"
+
+msgid "This will replace the old key with the new one."
+msgstr "Aceasta va înlocui vechea cheie cu cea nouă."
+
+msgid "Something went wrong!"
+msgstr "Ceva nu a mers bine!"
+
+msgid "The setting has been stored."
+msgstr "Setarea a fost păstrată."
+
+msgid "Addon(s) Installed successfully!"
+msgstr "Addon (s) instalat cu succes!"
+
+msgid "Addon(s) Installation Failed"
+msgstr "Instalarea Addon (s) a eșuat"

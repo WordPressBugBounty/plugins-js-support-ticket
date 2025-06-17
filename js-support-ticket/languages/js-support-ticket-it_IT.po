@@ -7906,3 +7906,51 @@ msgstr "L'e -mail CC non è stata eliminata"
 
 msgid "Email CC "
 msgstr "Email CC"
+
+msgid "Auto Update Add-Ons"
+msgstr "Aggiornati automatici Aggiornamento"
+
+msgid "Addon will automatically update to the newest version"
+msgstr "Addon si aggiornerà automaticamente alla versione più recente"
+
+msgid "Auto Update"
+msgstr "Aggiornamento automatico"
+
+msgid "Off"
+msgstr "Spento"
+
+msgid "On"
+msgstr "SU"
+
+msgid "Please select at least one addon!"
+msgstr "Seleziona almeno un componente aggiuntivo!"
+
+msgid "Update Key"
+msgstr "Chiave di aggiornamento"
+
+msgid "JS Helpdesk Activation Key"
+msgstr "Chiave di attivazione di JS Helpdesk"
+
+msgid "Info"
+msgstr "Informazioni"
+
+msgid "The highlighted addons are not included in your current license. Please adjust your selection accordingly."
+msgstr "Gli addon evidenziati non sono inclusi nella licenza attuale. Regola la selezione di conseguenza."
+
+msgid "Select Addons to Update with New Activation Key"
+msgstr "Seleziona i componenti aggiuntivi per aggiornare con la nuova chiave di attivazione"
+
+msgid "This will replace the old key with the new one."
+msgstr "Questo sostituirà la vecchia chiave con quella nuova."
+
+msgid "Something went wrong!"
+msgstr "Qualcosa è andato storto!"
+
+msgid "The setting has been stored."
+msgstr "L'impostazione è stata memorizzata."
+
+msgid "Addon(s) Installed successfully!"
+msgstr "Addon (i) installato correttamente!"
+
+msgid "Addon(s) Installation Failed"
+msgstr "L'installazione del componente aggiunta non è riuscita"

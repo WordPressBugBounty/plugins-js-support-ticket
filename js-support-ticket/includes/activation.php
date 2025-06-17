@@ -196,8 +196,8 @@ class JSSTactivation {
                     ('tplink_faqs_user', '0', 'tplink', 'faq'),
                     ('show_breadcrumbs', '1', 'default', NULL),
                     ('productcode', 'jsticket', 'default', NULL),
-                    ('versioncode', '2.9.6', 'default', NULL),
-                    ('productversion', '296', 'default', NULL),
+                    ('versioncode', '2.9.7', 'default', NULL),
+                    ('productversion', '297', 'default', NULL),
                     ('producttype', 'free', 'default', NULL),
                     ('tve_enabled', '2', 'default', NULL),
                     ('tve_mailreadtype', '3', 'default', NULL),
@@ -308,7 +308,8 @@ class JSSTactivation {
                     ('show_assignto_on_admin_tickets', '1', 'ticket', 'agent'),
                     ('show_assignto_on_agent_tickets', '1', 'ticket', 'agent'),
                     ('show_assignto_on_user_tickets', '1', 'ticket', 'agent'),
-                    ('cplink_export_ticket_staff', '1', 'cplink', 'export');";
+                    ('cplink_export_ticket_staff', '1', 'cplink', 'export'),
+                    ('jsst_addons_auto_update', '1', 'default', NULL);";
             jssupportticket::$_db->query($query);
 
             $query = "CREATE TABLE IF NOT EXISTS `" . jssupportticket::$_db->prefix . "js_ticket_departments` (

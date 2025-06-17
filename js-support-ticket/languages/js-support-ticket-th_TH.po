@@ -1965,8 +1965,8 @@ msgid "Select Page"
 msgstr "เลือกหน้า"
 
 msgid ""
-"Select JS Help Desk default page, on the action system, will redirect on the selected page. If not select the default page, email links, and support icon "
-"might not work."
+"Select JS Help Desk default page, on the action system, will redirect on the selected page. If not select the default page, email links, and support icon might not "
+"work."
 msgstr "เลือกหน้าเริ่มต้นของ JS Help Desk บนระบบการดำเนินการจะเปลี่ยนเส้นทางในหน้าที่เลือก หากไม่ได้เลือกหน้าเริ่มต้นลิงก์อีเมลและไอคอนการสนับสนุนอาจไม่ทำงาน"
 
 msgid "Support Icon"
@@ -3437,9 +3437,8 @@ msgid "Wordpress Plugin"
 msgstr "ปลั๊กอิน Wordpress"
 
 msgid ""
-"JS Help Desk is a trusted open source ticket system. JS Help Desk is a simple, easy to use, web-based customer support system. Users can create a ticket from "
-"the front-end. JS Help Desk comes packed with lot features than most of the expensive(and complex) support ticket system on the market. The best part is, It "
-"completely free."
+"JS Help Desk is a trusted open source ticket system. JS Help Desk is a simple, easy to use, web-based customer support system. Users can create a ticket from the front-"
+"end. JS Help Desk comes packed with lot features than most of the expensive(and complex) support ticket system on the market. The best part is, It completely free."
 msgstr ""
 "JS Help Desk เป็นระบบตั๋วโอเพ่นซอร์สที่เชื่อถือได้ JS Help Desk เป็นระบบสนับสนุนลูกค้าที่ใช้งานง่ายและใช้งานง่ายบนเว็บ ผู้ใช้สามารถสร้างตั๋วได้จากส่วนหน้า JS Help Desk "
 "มาพร้อมกับคุณสมบัติมากมายกว่าระบบตั๋วส่วนใหญ่ที่ซับซ้อน (และซับซ้อน) ในตลาด ส่วนที่ดีที่สุดคือมันฟรีอย่างสมบูรณ์"
@@ -6390,8 +6389,7 @@ msgstr "อีเมลซีซี"
 msgid "Email Cc"
 msgstr "อีเมล์ สำเนาถึง"
 
-msgid ""
-"CC(Carbon Copy) - the people who should know about the information which is being shared and the people included are able to see who is there in the list."
+msgid "CC(Carbon Copy) - the people who should know about the information which is being shared and the people included are able to see who is there in the list."
 msgstr "CC(Carbon Copy) - ผู้ที่ควรทราบเกี่ยวกับข้อมูลที่กำลังแบ่งปันและบุคคลที่รวมอยู่จะสามารถดูว่าใครอยู่ในรายการได้บ้าง"
 
 msgid "multiform"
@@ -6403,8 +6401,7 @@ msgstr "Multiform อนุญาตให้ผู้ใช้เพิ่ม�
 msgid "agent auto assign"
 msgstr "มอบหมายตัวแทนอัตโนมัติ"
 
-msgid ""
-"When auto assignment is enabled and a ticket is created, an appropriate agent is automatically assigned to the ticket and it is moved to the Assigned state."
+msgid "When auto assignment is enabled and a ticket is created, an appropriate agent is automatically assigned to the ticket and it is moved to the Assigned state."
 msgstr "เมื่อเปิดใช้งานการกำหนดอัตโนมัติและสร้างตั๋ว เจ้าหน้าที่ที่เหมาะสมจะถูกกำหนดให้กับตั๋วโดยอัตโนมัติ และจะถูกย้ายไปยังสถานะมอบหมายแล้ว"
 
 msgid "Social Login"
@@ -7034,9 +7031,7 @@ msgstr "เพิ่มข้อมูลรับรอง"
 msgid "Edit Help Topic"
 msgstr "แก้ไขหัวข้อความช่วยเหลือ"
 
-msgid ""
-"e.g ' I have read and agree to the [link] Terms and Conditions[/link].  ' The text between [link] and [/link] will be linked to provided url or wordpress "
-"page."
+msgid "e.g ' I have read and agree to the [link] Terms and Conditions[/link].  ' The text between [link] and [/link] will be linked to provided url or wordpress page."
 msgstr "เช่น ' ฉันได้อ่านและยอมรับ [link] ข้อกำหนดและเงื่อนไข[/link] แล้ว ' ข้อความระหว่าง [link] และ [/link] จะถูกลิงค์ไปยัง url หรือหน้า wordpress ที่ให้ไว้"
 
 msgid "login"
@@ -7893,3 +7888,51 @@ msgstr "CC อีเมลยังไม่ถูกลบ"
 
 msgid "Email CC "
 msgstr "อีเมล CC"
+
+msgid "Auto Update Add-Ons"
+msgstr "การอัปเดต Add-ons อัตโนมัติ"
+
+msgid "Addon will automatically update to the newest version"
+msgstr "Addon จะอัปเดตเป็นเวอร์ชันใหม่ล่าสุดโดยอัตโนมัติ"
+
+msgid "Auto Update"
+msgstr "อัปเดตอัตโนมัติ"
+
+msgid "Off"
+msgstr "ปิด"
+
+msgid "On"
+msgstr "บน"
+
+msgid "Please select at least one addon!"
+msgstr "โปรดเลือก Addon อย่างน้อยหนึ่งอัน!"
+
+msgid "Update Key"
+msgstr "อัปเดตคีย์"
+
+msgid "JS Helpdesk Activation Key"
+msgstr "คีย์การเปิดใช้งาน JS Helpdesk"
+
+msgid "Info"
+msgstr "ข้อมูล"
+
+msgid "The highlighted addons are not included in your current license. Please adjust your selection accordingly."
+msgstr "Addons ที่ไฮไลต์ไม่รวมอยู่ในใบอนุญาตปัจจุบันของคุณ โปรดปรับการเลือกของคุณให้เหมาะสม"
+
+msgid "Select Addons to Update with New Activation Key"
+msgstr "เลือก addons เพื่ออัปเดตด้วยรหัสเปิดใช้งานใหม่"
+
+msgid "This will replace the old key with the new one."
+msgstr "สิ่งนี้จะแทนที่คีย์เก่าด้วยคีย์ใหม่"
+
+msgid "Something went wrong!"
+msgstr "มีบางอย่างผิดปกติ!"
+
+msgid "The setting has been stored."
+msgstr "การตั้งค่าได้รับการจัดเก็บ"
+
+msgid "Addon(s) Installed successfully!"
+msgstr "ติดตั้ง Addon (S) สำเร็จ!"
+
+msgid "Addon(s) Installation Failed"
+msgstr "การติดตั้ง Addon (S) ล้มเหลว"

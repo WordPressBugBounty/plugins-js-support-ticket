@@ -7913,3 +7913,51 @@ msgstr "Email CC n'a pas été supprimé"
 
 msgid "Email CC "
 msgstr "Envoyer un courriel à CC"
+
+msgid "Auto Update Add-Ons"
+msgstr "Auto Mise à jour des modules complémentaires"
+
+msgid "Addon will automatically update to the newest version"
+msgstr "Addon mettra automatiquement à jour vers la dernière version"
+
+msgid "Auto Update"
+msgstr "Mise à jour automatique"
+
+msgid "Off"
+msgstr "Désactivé"
+
+msgid "On"
+msgstr "Sur"
+
+msgid "Please select at least one addon!"
+msgstr "Veuillez sélectionner au moins un addon!"
+
+msgid "Update Key"
+msgstr "Clé de mise à jour"
+
+msgid "JS Helpdesk Activation Key"
+msgstr "Clé d'activation JS Helpdesk"
+
+msgid "Info"
+msgstr "Informations"
+
+msgid "The highlighted addons are not included in your current license. Please adjust your selection accordingly."
+msgstr "Les addons en surbrillance ne sont pas inclus dans votre licence actuelle. Veuillez ajuster votre sélection en conséquence."
+
+msgid "Select Addons to Update with New Activation Key"
+msgstr "Sélectionnez Addons à mettre à jour avec une nouvelle clé d'activation"
+
+msgid "This will replace the old key with the new one."
+msgstr "Cela remplacera l'ancienne touche par la nouvelle."
+
+msgid "Something went wrong!"
+msgstr "Quelque chose s'est mal passé!"
+
+msgid "The setting has been stored."
+msgstr "Le paramètre a été stocké."
+
+msgid "Addon(s) Installed successfully!"
+msgstr "Addon (s) installé avec succès!"
+
+msgid "Addon(s) Installation Failed"
+msgstr "L'installation de l'addon a échoué"

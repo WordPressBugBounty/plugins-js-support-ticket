@@ -209,12 +209,12 @@ $jssupportticket_js ='
     <li class="treeview <?php if($c == 'jssupportticket' && $layout == 'shortcodes') echo 'active'; ?>">
         <a class="" href="?page=shortcodes" title="<?php echo esc_html(__('Shortcodes','js-support-ticket')); ?>">
             <img class="jsst_menu-icon" alt="<?php echo esc_html(__('Shortcodes','js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL).'includes/images/left-icons/menu/short-code.png'; ?>"/>
-            <span class="jsst_text"><?php echo esc_html(__('Short Codes','js-support-ticket')); ?></span>
+            <span class="jsst_text"><?php echo esc_html(__('Shortcodes','js-support-ticket')); ?></span>
         </a>
         <ul class="jsstadmin-sidebar-submenu treeview-menu">
             <li class="<?php if($c == 'jssupportticket' && $layout == 'shortcodes') echo 'active'; ?>">
-                <a href="?page=jssupportticket&jstlay=shortcodes" title="<?php echo esc_html(__('Short Codes', 'js-support-ticket'));; ?>">
-                    <?php echo esc_html(__('Short Codes', 'js-support-ticket'));; ?>
+                <a href="?page=jssupportticket&jstlay=shortcodes" title="<?php echo esc_html(__('Shortcodes', 'js-support-ticket'));; ?>">
+                    <?php echo esc_html(__('Shortcodes', 'js-support-ticket'));; ?>
                 </a>
             </li>
 
@@ -325,10 +325,10 @@ $jssupportticket_js ='
             </li>
         </ul>
     </li>
-    <li class="treeview <?php if($c == 'premiumplugin') echo 'active'; ?>">
-        <a class="" href="admin.php?page=premiumplugin" title="<?php echo esc_html(__('Premium Addons','js-support-ticket')); ?>">
-            <img class="jsst_menu-icon" alt="<?php echo esc_html(__('Premium Addons','js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL).'includes/images/left-icons/menu/ad.png'; ?>"/>
-            <span class="jsst_text"><?php echo esc_html(__('Premium Addons','js-support-ticket')); ?></span>
+    <li class="treeview <?php if($c == 'premiumplugin' || $layout == 'addonstatus') echo 'active'; ?>">
+        <a class="" href="admin.php?page=premiumplugin" title="<?php echo esc_html(__('Addons','js-support-ticket')); ?>">
+            <img class="jsst_menu-icon" alt="<?php echo esc_html(__('Addons','js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL).'includes/images/left-icons/menu/ad.png'; ?>"/>
+            <span class="jsst_text"><?php echo esc_html(__('Addons','js-support-ticket')); ?></span>
         </a>
         <ul class="jsstadmin-sidebar-submenu treeview-menu">
             <li class="<?php if($c == 'premiumplugin' && ($layout == 'step1') || ($layout == 'step2') || ($layout == 'step3')) echo 'active'; ?>">
@@ -336,22 +336,19 @@ $jssupportticket_js ='
                     <?php echo esc_html(__('Install Addons','js-support-ticket')); ?>
                 </a>
             </li>
-            <li class="<?php if($c == 'premiumplugin' && ($layout == 'addonfeatures')) echo 'active'; ?>">
-                <a href="?page=premiumplugin&jstlay=addonfeatures" title="<?php echo esc_html(__('Addons List','js-support-ticket')); ?>">
-                    <?php echo esc_html(__('Addons List','js-support-ticket')); ?>
-                </a>
-            </li>
-        </ul>
-    </li>
-    <li class="treeview <?php if($c == 'jssupportticket' && $layout == 'addonstatus') echo 'active'; ?>">
-        <a class="" href="admin.php?page=jssupportticket" title="<?php echo esc_html(__('Addons Status','js-support-ticket')); ?>">
-            <img class="jsst_menu-icon" alt="<?php echo esc_html(__('Addons Status','js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL).'includes/images/left-icons/menu/addon-status.png'; ?>"/>
-            <span class="jsst_text"><?php echo esc_html(__('Addons Status','js-support-ticket')); ?></span>
-        </a>
-        <ul class="jsstadmin-sidebar-submenu treeview-menu">
             <li class="<?php if($c == 'jssupportticket' && $layout == 'addonstatus') echo 'active'; ?>">
                 <a href="?page=jssupportticket&jstlay=addonstatus" title="<?php echo esc_html(__('Addons Status','js-support-ticket')); ?>">
                     <?php echo esc_html(__('Addons Status','js-support-ticket')); ?>
+                </a>
+            </li>
+            <li class="<?php if($c == 'premiumplugin' && ($layout == 'updatekey')) echo 'active'; ?>">
+                <a href="?page=premiumplugin&jstlay=updatekey" title="<?php echo esc_html(__('Update Key','js-support-ticket')); ?>">
+                    <?php echo esc_html(__('Update Key','js-support-ticket')); ?>
+                </a>
+            </li>
+            <li class="<?php if($c == 'premiumplugin' && ($layout == 'addonfeatures')) echo 'active'; ?>">
+                <a href="?page=premiumplugin&jstlay=addonfeatures" title="<?php echo esc_html(__('Addons List','js-support-ticket')); ?>">
+                    <?php echo esc_html(__('Addons List','js-support-ticket')); ?>
                 </a>
             </li>
         </ul>
@@ -448,6 +445,19 @@ $jssupportticket_js ='
             <li class="<?php if($c == 'status' && ($layout == 'addstatus')) echo 'active'; ?>">
                 <a href="?page=status&jstlay=addstatus" title="<?php echo esc_html(__('Add Status' , 'js-support-ticket')); ?>">
                     <?php echo esc_html(__('Add Ticket Status', 'js-support-ticket')); ?>
+                </a>
+            </li>
+        </ul>
+    </li>
+    <li style="display: none;" class="treeview <?php if($c == 'thirdpartyimport') echo 'active'; ?>">
+        <a class="" href="admin.php?page=thirdpartyimport" title="<?php echo esc_html(__('Import Data' , 'js-support-ticket')); ?>">
+            <img class="jsst_menu-icon" alt="<?php echo esc_html(__('Import Data' , 'js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL).'includes/images/left-icons/menu/import.png'; ?>"/>
+            <span class="jsst_text"><?php echo esc_html(__('Import Data' , 'js-support-ticket')); ?></span>
+        </a>
+        <ul class="jsstadmin-sidebar-submenu treeview-menu">
+            <li class="<?php if($c == 'thirdpartyimport' && ($layout == 'importdata' || $layout == 'importdata')) echo 'active'; ?>">
+                <a href="?page=thirdpartyimport&jstlay=importdata" title="<?php echo esc_html(__('Import Data' , 'js-support-ticket')); ?>">
+                    <?php echo esc_html(__('Import Data', 'js-support-ticket')); ?>
                 </a>
             </li>
         </ul>
@@ -1171,10 +1181,12 @@ $jssupportticket_js ='
     }
 
     function jsShowLoading(){
+        jQuery("div#black_wrapper_translation").show();
         jQuery("div#jstran_loading").show();
     }
 
     function jsHideLoading(){
+        jQuery("div#black_wrapper_translation").hide();
         jQuery("div#jstran_loading").hide();
     }
 ';

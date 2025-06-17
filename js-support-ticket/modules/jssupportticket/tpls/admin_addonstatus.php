@@ -9,6 +9,7 @@
 
     $jssupportticket_addons = JSSTincluder::getJSModel('jssupportticket')->getJSSTAddonsArray();
 ?>
+<?php JSSTmessage::getMessage(); ?>
 <div id="jsstadmin-wrapper">
     <div id="jsstadmin-leftmenu">
         <?php  JSSTincluder::getClassesInclude('jsstadminsidemenu'); ?>
@@ -43,7 +44,37 @@
         <div id="jsstadmin-head">
             <h1 class="jsstadmin-head-text"><?php echo esc_html(__('Addons Status','js-support-ticket')); ?></h1>
         </div>
+
     	<div id="jsstadmin-data-wrp" class="jsstadmin-addons-list-data">
+            <div class="jsstadmin-autoupdte-addons-title">
+                <?php echo esc_html(__('Auto Update Add-Ons','js-support-ticket')); ?>
+            </div>
+            <div class="jsstadmin-autoupdte-addons-cardwrp">
+                <div class="jsstadmin-autoupdte-addons-cardlogo">
+                    <img alt="<?php echo esc_html(__('Auto Update','js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/addon-images/addons/icon.png" />
+                </div>
+                <div class="jsstadmin-autoupdte-addons-cardwrp-rightwrp">
+                    <div class="jsstadmin-autoupdte-addons-card-title">
+                        <?php echo esc_html(__('Addon will automatically update to the newest version','js-support-ticket')); ?>
+                    </div>
+                    <?php
+                    $jsst_addons_auto_update = jssupportticket::$_config['jsst_addons_auto_update'];
+                    if($jsst_addons_auto_update == 1 ){ ?>
+                        <a href="<?php echo esc_url(wp_nonce_url(admin_url('admin.php?page=configuration&task=saveautoupdateconfiguration&action=jstask&jsst_addons_auto_update=0'),'jsst_configuration_nonce')); ?>" class="jsstadmin-autoupdte-addons-card-btn">
+                            <?php echo esc_html(__('Auto Update','js-support-ticket')).': '.esc_html(__('On','js-support-ticket')); ?>
+                        </a>
+                        <?php
+                    } else { ?>
+                        <a href="<?php echo esc_url(wp_nonce_url(admin_url('admin.php?page=configuration&task=saveautoupdateconfiguration&action=jstask&jsst_addons_auto_update=1'),'jsst_configuration_nonce')); ?>"  class="jsstadmin-autoupdte-addons-card-btn jsstadmin-autoupdte-addons-card-offbtn">
+                            <?php echo esc_html(__('Auto Update','js-support-ticket')).': '.esc_html(__('Off','js-support-ticket')); ?>
+                        </a>
+                        <?php
+                    } ?>
+                </div>
+            </div>
+            <div class="jsstadmin-addons-alladdon-title">
+                <?php echo esc_html(__('Add-Ons','js-support-ticket')); ?>
+            </div>
     		<!-- admin addons status -->
             <div id="black_wrapper_translation"></div>
             <div id="jstran_loading">
@@ -65,6 +96,7 @@
                                 $install_plugin_matched_name = $install_plugin_name;
                             }
                         }
+                        $status = '';
                         if($matched == 1){ //installed
                             $name = $key1;
                             $title = $value1['title'];

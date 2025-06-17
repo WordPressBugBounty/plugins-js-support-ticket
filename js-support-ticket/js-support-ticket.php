@@ -3,14 +3,14 @@
 /**
  * @package JS Help Desk
  * @author Ahmad Bilal
- * @version 2.9.6
+ * @version 2.9.7
  */
 /*
   Plugin Name: JS Help Desk
   Plugin URI: https://www.jshelpdesk.com
   Description: JS Help Desk is a trusted open source ticket system. JS Help Desk is a simple, easy to use, web-based customer support system. User can create ticket from front-end. JS Help Desk comes packed with lot features than most of the expensive(and complex) support ticket system on market. JS Help Desk provide you best industry help desk system.
   Author: JS Help Desk
-  Version: 2.9.6
+  Version: 2.9.7
   Text Domain: js-support-ticket
   License: GPLv3
   Author URI: https://www.jshelpdesk.com
@@ -67,7 +67,7 @@ class jssupportticket {
         self::$_data = array();
         self::$_search = array();
         self::$_captcha = array();
-        self::$_currentversion = '296';
+        self::$_currentversion = '297';
         self::$_addon_query = array('select'=>'','join'=>'','where'=>'');
         self::$_jshdsession = JSSTincluder::getObjectClass('wphdsession');
         global $wpdb;
@@ -113,11 +113,23 @@ class jssupportticket {
             // Schedule the event
             wp_schedule_event( time(), 'daily', 'jsst_delete_expire_session_data' );
         }
+        add_action( 'jsst_process_transation_key_status', array($this , 'jshd_process_transation_key_status') );
+        if( !wp_next_scheduled( 'jsst_process_transation_key_status' ) ) {
+            // Schedule the event
+            wp_schedule_event( time(), 'daily', 'jsst_process_transation_key_status' );
+        }
+        add_action( 'admin_init', array($this , 'jshd_auto_update_addons') );
+        add_action( 'jsst_auto_update_addons', array($this , 'jshd_auto_update_addons') );
+        if( !wp_next_scheduled( 'jsst_auto_update_addons' ) ) {
+            // Schedule the event
+            wp_schedule_event( time(), 'daily', 'jsst_auto_update_addons' );
+        }
         add_action( 'upgrader_process_complete', array($this , 'jssupportticket_upgrade_completed'), 10, 2 );
         // If seo plugin is activated
         if (is_plugin_active( 'all-in-one-seo-pack/all_in_one_seo_pack.php' ) ){
             add_filter( 'aioseo_disable_shortcode_parsing', '__return_true' );
         }
+        add_action('admin_notices', array($this , 'jsst_show_expiry_error_notice') );
     }
 
     function jssupportticket_upgrade_completed( $upgrader_object, $options ) {
@@ -133,8 +145,10 @@ class jssupportticket {
                     // restore colors data end
                     update_option('jsst_currentversion', self::$_currentversion);
                     include_once JSST_PLUGIN_PATH . 'includes/updates/updates.php';
-                    JSSTupdates::checkUpdates('296');
+                    JSSTupdates::checkUpdates('297');
                     JSSTincluder::getJSModel('jssupportticket')->updateColorFile();
+                    JSSTincluder::getJSModel('jssupportticket')->jsst_check_license_status();
+                    JSSTincluder::getJSModel('jssupportticket')->JSSTAddonsAutoUpdate();
                 }
             }
         }
@@ -573,6 +587,17 @@ class jssupportticket {
         }
     }
 
+    function jsst_show_expiry_error_notice() {
+        // Check if the option is set and equals '1'
+        if (get_option('jsst_show_key_expiry_msg') == '1') {
+            ?>
+            <div class="notice notice-error is-dismissible">
+                <p><?php echo __('Your JS Support Ticket license key has expired or is invalid. Please update it to continue receiving support and updates.', 'js-support-ticket'); ?></p>
+            </div>
+            <?php
+        }
+    }
+
     function jsst_handle_delete_cookies(){
 
         if(isset($_COOKIE['jsst_addon_return_data'])){
@@ -610,6 +635,15 @@ class jssupportticket {
     function jshd_delete_expire_session_data(){
         global $wpdb;
         $wpdb->query('DELETE  FROM '.$wpdb->prefix.'js_ticket_jshdsessiondata WHERE sessionexpire < "'. time() .'"');
+    }
+
+    function jshd_process_transation_key_status(){
+        JSSTincluder::getJSModel('jssupportticket')->jsst_check_license_status();
+    }
+
+    function jshd_auto_update_addons() {
+        JSSTincluder::getJSModel('jssupportticket')->jsst_check_license_status();
+        JSSTincluder::getJSModel('jssupportticket')->JSSTAddonsAutoUpdate();
     }
 
     /*

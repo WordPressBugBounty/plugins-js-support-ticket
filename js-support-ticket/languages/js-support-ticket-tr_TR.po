@@ -7942,3 +7942,51 @@ msgstr "E -posta CC silinmedi"
 
 msgid "Email CC "
 msgstr "E -posta CC"
+
+msgid "Auto Update Add-Ons"
+msgstr "Otomatik Güncelleme Eklentileri"
+
+msgid "Addon will automatically update to the newest version"
+msgstr "Addon otomatik olarak en yeni sürüme güncellenecek"
+
+msgid "Auto Update"
+msgstr "Otomatik Güncelleme"
+
+msgid "Off"
+msgstr "Kapalı"
+
+msgid "On"
+msgstr "Açık"
+
+msgid "Please select at least one addon!"
+msgstr "Lütfen en az bir eklenti seçin!"
+
+msgid "Update Key"
+msgstr "Anahtar Güncelleme"
+
+msgid "JS Helpdesk Activation Key"
+msgstr "JS Yardım Masası Aktivasyon Anahtarı"
+
+msgid "Info"
+msgstr "Bilgi"
+
+msgid "The highlighted addons are not included in your current license. Please adjust your selection accordingly."
+msgstr "Vurgulanan eklentiler mevcut lisansınıza dahil değildir. Lütfen seçiminizi buna göre ayarlayın."
+
+msgid "Select Addons to Update with New Activation Key"
+msgstr "Yeni aktivasyon anahtarıyla güncellemek için eklentileri seçin"
+
+msgid "This will replace the old key with the new one."
+msgstr "Bu, eski anahtarın yenisiyle değiştirilecektir."
+
+msgid "Something went wrong!"
+msgstr "Bir şeyler ters gitti!"
+
+msgid "The setting has been stored."
+msgstr "Ayar depolandı."
+
+msgid "Addon(s) Installed successfully!"
+msgstr "Eklenti (ler) başarıyla yüklendi!"
+
+msgid "Addon(s) Installation Failed"
+msgstr "Eklenti (ler) kurulumu başarısız oldu"
