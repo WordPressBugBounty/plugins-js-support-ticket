@@ -11,6 +11,7 @@ class JSSTactivation {
         JSSTactivation::runSQL();
 	    JSSTactivation::checkUpdates();
         JSSTactivation::addCapabilites();
+        JSSTincluder::getJSModel('jssupportticket')->addMissingUsers(0);
     }
 
     static private function addCapabilites() {
@@ -196,8 +197,8 @@ class JSSTactivation {
                     ('tplink_faqs_user', '0', 'tplink', 'faq'),
                     ('show_breadcrumbs', '1', 'default', NULL),
                     ('productcode', 'jsticket', 'default', NULL),
-                    ('versioncode', '2.9.7', 'default', NULL),
-                    ('productversion', '297', 'default', NULL),
+                    ('versioncode', '2.9.8', 'default', NULL),
+                    ('productversion', '298', 'default', NULL),
                     ('producttype', 'free', 'default', NULL),
                     ('tve_enabled', '2', 'default', NULL),
                     ('tve_mailreadtype', '3', 'default', NULL),
@@ -212,6 +213,7 @@ class JSSTactivation {
                     ('tve_hostportnumber', '', 'ticketviaemail', NULL),
                     ('ck', 'abc29ff5d6ec8d9e108ea1a4515e26a3', 'default', NULL),
                     ('login_redirect', '2', 'default', NULL),
+                    ('show_avatar', '2', 'default', NULL),
                     ('count_on_myticket', '1', 'default', NULL),
                     ('system_slug', 'jssupportticket', 'default', NULL),
                     ('default_pageid', '".$pageid."', 'default', NULL),
@@ -471,8 +473,10 @@ class JSSTactivation {
                                 `mergemessage` TINYINT(1) NOT NULL DEFAULT '0',
                                 `viewed_by` int(11) DEFAULT NULL,
                                 `viewed_on` datetime DEFAULT NULL,
-                                PRIMARY KEY (`id`)
-                                ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;";
+                                `aireplymode` tinyint(4) DEFAULT 0,
+                                PRIMARY KEY (`id`),
+                                FULLTEXT KEY `message` (`message`)
+                                ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;";
             jssupportticket::$_db->query($query);
             $query = "CREATE TABLE IF NOT EXISTS `" . jssupportticket::$_db->prefix . "js_ticket_system_errors` (
                                 `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -533,8 +537,11 @@ class JSSTactivation {
                                 `paidsupportitemid` bigint(20) NULL,
                                 `customticketno` INT NOT NULL DEFAULT '1',
                                 `productid` INT NULL,
-                                PRIMARY KEY (`id`)
-                                ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;";
+                                `aireplymode` tinyint(4) DEFAULT 0,
+                                PRIMARY KEY (`id`),
+                                FULLTEXT KEY `subject` (`subject`),
+                                FULLTEXT KEY `message` (`message`)
+                            ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;";
             jssupportticket::$_db->query($query);
             $query = "CREATE TABLE IF NOT EXISTS `" . jssupportticket::$_db->prefix . "js_ticket_fieldsordering` (
                         `id` int(11) NOT NULL AUTO_INCREMENT,

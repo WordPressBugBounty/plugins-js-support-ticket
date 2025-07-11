@@ -7940,3 +7940,168 @@ msgstr "Τα addon εγκαταστάθηκαν με επιτυχία!"
 
 msgid "Addon(s) Installation Failed"
 msgstr "Η εγκατάσταση Addon (ες) απέτυχε"
+
+msgid "Your JS Support Ticket license key has expired or is invalid. Please update it to continue receiving support and updates."
+msgstr "Το κλειδί άδειας υποστήριξης JS έχει λήξει ή είναι άκυρο. Ενημερώστε το για να συνεχίσετε να λαμβάνετε υποστήριξη και ενημερώσεις."
+
+msgid "Import Data"
+msgstr "Εισαγωγή δεδομένων"
+
+msgid "No Addon Installed!"
+msgstr "Χωρίς addon εγκατεστημένο!"
+
+msgid "Add-Ons"
+msgstr "Πρόσθετα"
+
+msgid "Copied to clipboard!"
+msgstr "Αντιγραφή στο πρόχειρο!"
+
+msgid "Failed to copy!"
+msgstr "Αποτυχία αντιγραφής!"
+
+msgid "Failed to copy to clipboard. Please copy manually."
+msgstr "Αποτυχία αντιγραφής σε πρόχειρο. Αντιγράψτε χειροκίνητα."
+
+msgid "Reply content appended!"
+msgstr "Απάντηση Περιεχόμενο Προστέθηκε!"
+
+msgid "No ticket selected!"
+msgstr "Δεν επιλεγμένο εισιτήριο!"
+
+msgid "Error fetching replies."
+msgstr "Σφάλμα Λήψη απαντήσεων."
+
+msgid "Failed to fetch replies. Please try again."
+msgstr "Απέτυχε να λάβει απαντήσεις. Δοκιμάστε ξανά."
+
+msgid "Error fetching matching tickets:"
+msgstr "Σφάλμα Λήψη εισιτηρίων αντιστοίχισης:"
+
+msgid "Error fetching replies:"
+msgstr "Σφάλμα Λήψη απαντήσεων:"
+
+msgid "No matching tickets found."
+msgstr "Δεν βρέθηκαν εισιτήρια που ταιριάζουν."
+
+msgid "Ticket ID:"
+msgstr "Αναγνωριστικό εισιτηρίου:"
+
+msgid "Replies for:"
+msgstr "Απαντήσεις για:"
+
+msgid "No replies found for this ticket."
+msgstr "Δεν βρέθηκαν απαντήσεις για αυτό το εισιτήριο."
+
+msgid "N/A"
+msgstr "N/a"
+
+msgid "No content"
+msgstr "Χωρίς περιεχόμενο"
+
+msgid "No date"
+msgstr "Χωρίς ημερομηνία"
+
+msgid "Reply By:"
+msgstr "Απάντηση από:"
+
+msgid "AI-Powered Reply Mode"
+msgstr "Λειτουργία απάντησης που τροφοδοτείται με AI"
+
+msgid "Control how this individual reply influences the AI search and response generation process for future queries."
+msgstr "Ελέγξτε τον τρόπο με τον οποίο αυτή η μεμονωμένη απάντηση επηρεάζει τη διαδικασία δημιουργίας αναζήτησης και απόκρισης AI για μελλοντικά ερωτήματα."
+
+msgid "Default: reply included in all AI search queries."
+msgstr "Προεπιλογή: Η απάντηση περιλαμβάνεται σε όλα τα ερωτήματα αναζήτησης AI."
+
+msgid "Enable: reply used in AI queries only when the Enable Tickets filter is active."
+msgstr "Ενεργοποίηση: Απάντηση που χρησιμοποιείται σε ερωτήματα AI μόνο όταν το φίλτρο Enable εισιτηρίων είναι ενεργή."
+
+msgid "Enable"
+msgstr "Καθιστώ ικανό"
+
+msgid "Disable: reply excluded from AI queries."
+msgstr "Απενεργοποίηση: Απάντηση εξαιρούνται από τα ερωτήματα AI."
+
+msgid "Disable"
+msgstr "Καθιστώ ανίκανο"
+
+msgid "AI Icon"
+msgstr "Εικονίδιο AI"
+
+msgid "AI-Powered Reply"
+msgstr "Απάντηση που τροφοδοτείται με AI"
+
+msgid "Get context-based suggestions to effortlessly create clear and relevant replies."
+msgstr "Λάβετε προτάσεις βασισμένες στο περιβάλλον για να δημιουργήσετε αβίαστα σαφείς και σχετικές απαντήσεις."
+
+msgid "Generate AI Response"
+msgstr "Δημιουργήστε απάντηση AI"
+
+msgid "Matching Tickets"
+msgstr "Ταιριάζουν εισιτήρια"
+
+msgid "Filter"
+msgstr "Φίλτρο"
+
+msgid "Enable Tickets"
+msgstr "Ενεργοποίηση εισιτηρίων"
+
+msgid "All Replies"
+msgstr "Όλες οι απαντήσεις"
+
+msgid "Enable Replies"
+msgstr "Ενεργοποίηση απαντήσεων"
+
+msgid "Control how this ticket and its replies influence AI search and response generation for future queries."
+msgstr "Ελέγξτε τον τρόπο με τον οποίο αυτό το εισιτήριο και οι απαντήσεις του επηρεάζουν την παραγωγή αναζήτησης και απόκρισης AI για μελλοντικά ερωτήματα."
+
+msgid "Default: ticket and replies included in all AI queries."
+msgstr "Προεπιλογή: Τα εισιτήρια και οι απαντήσεις περιλαμβάνονται σε όλα τα ερωτήματα AI."
+
+msgid "Enable: ticket and replies used only when the “Enable Tickets” filter is active."
+msgstr "Ενεργοποίηση: εισιτήριο και απαντήσεις που χρησιμοποιούνται μόνο όταν είναι ενεργό το φίλτρο \"Enable Tickets\"."
+
+msgid "Disable: ticket and replies excluded from AI queries."
+msgstr "Απενεργοποίηση: Τα εισιτήρια και οι απαντήσεις εξαιρέθηκαν από τα ερωτήματα AI."
+
+msgid "Get context-aware suggestions for your response."
+msgstr "Λάβετε προτάσεις για την απάντησή σας."
+
+msgid "Ticket ID is required."
+msgstr "Απαιτείται αναγνωριστικό εισιτηρίου."
+
+msgid "Ticket not found."
+msgstr "Το εισιτήριο δεν βρέθηκε."
+
+msgid "Database error occurred."
+msgstr "Παρουσιάστηκε σφάλμα βάσης δεδομένων."
+
+msgid "AI Reply Section"
+msgstr "Τμήμα απάντησης AI"
+
+msgid "Get AI-powered, context-based suggestions to effortlessly create clear, relevant, and helpful replies."
+msgstr "Αποκτήστε προτάσεις που βασίζονται σε AI, για να δημιουργήσετε αβίαστα σαφείς, σχετικές και χρήσιμες απαντήσεις."
+
+msgid "Change Ticket Status"
+msgstr "Αλλαγή κατάστασης εισιτηρίου"
+
+msgid "Use AI Powered Reply Feature"
+msgstr "Χρησιμοποιήστε τη δυνατότητα απάντησης AI"
+
+msgid "Set AI Reply Mode for Ticket"
+msgstr "Ρυθμίστε τη λειτουργία απάντησης AI για εισιτήριο"
+
+msgid "Set AI Reply Mode for Reply"
+msgstr "Ορίστε τη λειτουργία απάντησης AI για απάντηση"
+
+msgid "Limit AI Replies to Agent-Assigned Tickets"
+msgstr "Ο περιορισμός του AI απαντά στα εισιτήρια που έχουν προσβληθεί από τον πράκτορα"
+
+msgid "Suggested Response"
+msgstr "Προτεινόμενη απάντηση"
+
+msgid "Show User Avatar"
+msgstr "Εμφάνιση avatar χρήστη"
+
+msgid "Showing avatars may slightly slow down page loading"
+msgstr "Η εμφάνιση Avatars μπορεί ελαφρώς να επιβραδύνει τη φόρτωση σελίδας"

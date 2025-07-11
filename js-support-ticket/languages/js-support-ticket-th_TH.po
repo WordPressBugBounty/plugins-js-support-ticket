@@ -7936,3 +7936,168 @@ msgstr "ติดตั้ง Addon (S) สำเร็จ!"
 
 msgid "Addon(s) Installation Failed"
 msgstr "การติดตั้ง Addon (S) ล้มเหลว"
+
+msgid "Your JS Support Ticket license key has expired or is invalid. Please update it to continue receiving support and updates."
+msgstr "คีย์ใบอนุญาตใบอนุญาตขายตั๋ว JS ของคุณหมดอายุหรือไม่ถูกต้อง โปรดอัปเดตเพื่อรับการสนับสนุนและอัปเดตต่อไป"
+
+msgid "Import Data"
+msgstr "นำเข้าข้อมูล"
+
+msgid "No Addon Installed!"
+msgstr "ไม่ติดตั้ง Addon!"
+
+msgid "Add-Ons"
+msgstr "ส่วนเสริม"
+
+msgid "Copied to clipboard!"
+msgstr "คัดลอกไปยังคลิปบอร์ด!"
+
+msgid "Failed to copy!"
+msgstr "ไม่สามารถคัดลอกได้!"
+
+msgid "Failed to copy to clipboard. Please copy manually."
+msgstr "ไม่สามารถคัดลอกไปยังคลิปบอร์ด กรุณาคัดลอกด้วยตนเอง"
+
+msgid "Reply content appended!"
+msgstr "ตอบกลับเนื้อหา!"
+
+msgid "No ticket selected!"
+msgstr "ไม่มีการเลือกตั๋ว!"
+
+msgid "Error fetching replies."
+msgstr "การดึงข้อผิดพลาดตอบกลับ"
+
+msgid "Failed to fetch replies. Please try again."
+msgstr "ล้มเหลวในการดึงคำตอบ โปรดลองอีกครั้ง"
+
+msgid "Error fetching matching tickets:"
+msgstr "การดึงข้อผิดพลาดการจับคู่ตั๋ว:"
+
+msgid "Error fetching replies:"
+msgstr "การดึงข้อผิดพลาดการตอบกลับ:"
+
+msgid "No matching tickets found."
+msgstr "ไม่พบตั๋วที่ตรงกัน"
+
+msgid "Ticket ID:"
+msgstr "ID ตั๋ว:"
+
+msgid "Replies for:"
+msgstr "คำตอบสำหรับ:"
+
+msgid "No replies found for this ticket."
+msgstr "ไม่พบคำตอบสำหรับตั๋วนี้"
+
+msgid "N/A"
+msgstr "N/A"
+
+msgid "No content"
+msgstr "ไม่มีเนื้อหา"
+
+msgid "No date"
+msgstr "ไม่มีวันที่"
+
+msgid "Reply By:"
+msgstr "ตอบโดย:"
+
+msgid "AI-Powered Reply Mode"
+msgstr "โหมดตอบกลับ AI"
+
+msgid "Control how this individual reply influences the AI search and response generation process for future queries."
+msgstr "ควบคุมว่าการตอบกลับของแต่ละบุคคลมีผลต่อกระบวนการค้นหา AI และการสร้างการตอบกลับสำหรับการสอบถามในอนาคต"
+
+msgid "Default: reply included in all AI search queries."
+msgstr "ค่าเริ่มต้น: ตอบกลับรวมอยู่ในคำค้นหาการค้นหา AI ทั้งหมด"
+
+msgid "Enable: reply used in AI queries only when the Enable Tickets filter is active."
+msgstr "เปิดใช้งาน: ตอบกลับที่ใช้ในการสืบค้น AI เฉพาะเมื่อตัวกรองเปิดใช้งานตั๋วเปิดใช้งาน"
+
+msgid "Enable"
+msgstr "เปิดใช้งาน"
+
+msgid "Disable: reply excluded from AI queries."
+msgstr "ปิดการใช้งาน: ตอบกลับไม่รวมออกจากการสืบค้น AI"
+
+msgid "Disable"
+msgstr "ปิดการใช้งาน"
+
+msgid "AI Icon"
+msgstr "ไอคอน AI"
+
+msgid "AI-Powered Reply"
+msgstr "คำตอบที่ขับเคลื่อนด้วย AI"
+
+msgid "Get context-based suggestions to effortlessly create clear and relevant replies."
+msgstr "รับข้อเสนอแนะตามบริบทเพื่อสร้างการตอบกลับที่ชัดเจนและเกี่ยวข้องอย่างง่ายดาย"
+
+msgid "Generate AI Response"
+msgstr "สร้างการตอบสนอง AI"
+
+msgid "Matching Tickets"
+msgstr "ตั๋วจับคู่"
+
+msgid "Filter"
+msgstr "กรอง"
+
+msgid "Enable Tickets"
+msgstr "เปิดใช้งานตั๋ว"
+
+msgid "All Replies"
+msgstr "คำตอบทั้งหมด"
+
+msgid "Enable Replies"
+msgstr "เปิดใช้งานการตอบกลับ"
+
+msgid "Control how this ticket and its replies influence AI search and response generation for future queries."
+msgstr "ควบคุมวิธีการที่ตั๋วและการตอบกลับมีผลต่อการค้นหา AI และการสร้างการตอบกลับสำหรับการสอบถามในอนาคต"
+
+msgid "Default: ticket and replies included in all AI queries."
+msgstr "ค่าเริ่มต้น: ตั๋วและการตอบกลับที่รวมอยู่ในการสืบค้น AI ทั้งหมด"
+
+msgid "Enable: ticket and replies used only when the “Enable Tickets” filter is active."
+msgstr "เปิดใช้งาน: ตั๋วและการตอบกลับที่ใช้เฉพาะเมื่อตัวกรอง“ เปิดใช้งานตั๋ว” เปิดใช้งาน"
+
+msgid "Disable: ticket and replies excluded from AI queries."
+msgstr "ปิดการใช้งาน: ตั๋วและการตอบกลับที่แยกออกจากการสืบค้น AI"
+
+msgid "Get context-aware suggestions for your response."
+msgstr "รับคำแนะนำจากบริบทสำหรับการตอบกลับของคุณ"
+
+msgid "Ticket ID is required."
+msgstr "ต้องใช้รหัสตั๋ว"
+
+msgid "Ticket not found."
+msgstr "ไม่พบตั๋ว"
+
+msgid "Database error occurred."
+msgstr "เกิดข้อผิดพลาดของฐานข้อมูล"
+
+msgid "AI Reply Section"
+msgstr "ส่วนตอบกลับ AI"
+
+msgid "Get AI-powered, context-based suggestions to effortlessly create clear, relevant, and helpful replies."
+msgstr "รับคำแนะนำตามบริบท AI เพื่อสร้างคำตอบที่ชัดเจนมีความเกี่ยวข้องและเป็นประโยชน์อย่างง่ายดาย"
+
+msgid "Change Ticket Status"
+msgstr "เปลี่ยนสถานะตั๋ว"
+
+msgid "Use AI Powered Reply Feature"
+msgstr "ใช้คุณสมบัติการตอบกลับ AI"
+
+msgid "Set AI Reply Mode for Ticket"
+msgstr "ตั้งค่าโหมดตอบกลับ AI สำหรับตั๋ว"
+
+msgid "Set AI Reply Mode for Reply"
+msgstr "ตั้งค่าโหมดตอบกลับ AI สำหรับการตอบกลับ"
+
+msgid "Limit AI Replies to Agent-Assigned Tickets"
+msgstr "จำกัด การตอบกลับ AI ไปยังตั๋วที่กำหนดตัวแทน"
+
+msgid "Suggested Response"
+msgstr "คำตอบที่แนะนำ"
+
+msgid "Show User Avatar"
+msgstr "แสดงอวตารของผู้ใช้"
+
+msgid "Showing avatars may slightly slow down page loading"
+msgstr "การแสดงอวตารอาจชะลอการโหลดหน้าเว็บเล็กน้อย"

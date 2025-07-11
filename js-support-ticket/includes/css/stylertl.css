@@ -357,6 +357,14 @@
 	div.jsst-feedback-det-list-cust-flds {float: right;}
 	div.js-ticket-feedback-heading {text-align: right;}
 
+/* AI rply*/
+	.js-ticket-ai-powered-reply-wrapper{border: 1px solid;border-right: 5px solid #4CAF50}
+	.js-ticket-filter-group {margin-left: 5px;margin-right: auto;}
+	.js-ticket-list {text-align: right;}
+	.js-ticket-filter-select {background-position: left 10px center;}
+	.js-ticket-ai-powered-reply-content {text-align: right;}
+	.js-ticket-ai-powered-reply-action {margin-left: 15px;}
+
 
 
 

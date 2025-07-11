@@ -434,6 +434,110 @@ $jssupportticket_css .= '
 	#jsst-note-edit-form .js-form-wrapper .js-form-title {margin-bottom: 7px;}
 	#jsst-note-edit-form div.js-form-button-wrapper input.button {min-width: 150px;padding: 20px 5px;line-height: initial;border-radius: 0;}
 
+	/* ticket detail AI Powered Reply */ 
+	.js-ticket-container {background-color: #ffffff;padding: 24px;border-radius: 12px;box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);width: 100%;max-width: 960px;margin-top: 20px;margin-bottom: 20px;display: none;}
+	/* Headings */
+	.js-ticket-heading {font-size: 24px;font-weight: 700;color: #1a202c;margin-bottom: 24px;text-align: center;}
+	/* Section containers (e.g., Current Ticket, Matching Tickets, Replies) */
+	.js-ticket-section {padding: 16px;border-radius: 8px;/*margin-bottom: 24px;*/border: 1px solid;}
+	.js-ticket-current-ticket-section {background-color: #eff6ff;border-color: #bfdbfe;}
+	.js-ticket-current-ticket-title {display: none;}
+	.js-ticket-current-ticket-id {display: none;}
+	.js-ticket-current-ticket-description {font-size: 14px;color: #1d4ed8;}
+	.js-ticket-post-reply-section .js-ticket-section-heading {font-size: 20px;font-weight: 600;color: #4a5568;margin-bottom: 16px;}
+	.js-ticket-textarea {width: 100%;padding: 16px;border: 1px solid #cbd5e1;border-radius: 8px;resize: vertical;min-height: 150px;transition: border-color 0.2s ease, box-shadow 0.2s ease;}
+	.js-ticket-textarea:focus {outline: none;border-color: #3b82f6;box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.5);}
+	.js-ticket-button-group {display: flex;flex-direction: column;gap: 12px;margin-top: 16px;}
+	@media (min-width: 640px) {.js-ticket-button-group {flex-direction: row;gap: 16px;margin-top: 0;}}
+	.js-ticket-button {display: block;margin-bottom: 25px;padding: 12px 24px;border-radius: 8px;font-weight: 500;transition: background-color 0.2s ease, box-shadow 0.2s ease;box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);color: #ffffff;border: none;cursor: pointer;text-decoration: none;}
+	.js-ticket-button:hover {text-decoration: none !important;}
+	.js-ticket-post-reply-button {background-color: #2563eb;}
+	.js-ticket-post-reply-button:hover {background-color: #1d4ed8;}
+	.js-ticket-ai-reply-button-wrp {display: inline-block;width: 100%;margin-top: 20px;}
+	.js-ticket-ai-reply-button {background-color: #16a34a;}
+	.js-ticket-ai-reply-button:hover {background-color: #15803d;}
+	.js-ticket-matching-tickets-section {background-color: #f5f3ff;border-color: #ddd6fe;}
+	.js-ticket-selected-tickets-header {display: flex;align-items: center;justify-content: space-between;margin-bottom: 10px;flex-wrap: wrap;gap: 10px;}
+	.js-ticket-matching-tickets-section .js-ticket-section-heading {color: #6d28d9;white-space: nowrap;overflow: hidden;text-overflow: ellipsis;max-width: 60%;margin: 15px 0 10px;font-weight: bold;line-height: initial;font-size: 18px;}
+	.js-ticket-list {list-style: none;padding: 8px;margin: 0 -8px;display: flex;flex-direction: column;gap: 12px;max-height: 500px;overflow-y: auto;}
+	.js-ticket-list::-webkit-scrollbar {width: 8px;}
+	.js-ticket-list::-webkit-scrollbar-track {background: #f1f1f1;border-radius: 10px;}
+	.js-ticket-list::-webkit-scrollbar-thumb {background: #cbd5e1;border-radius: 10px;}
+	.js-ticket-list::-webkit-scrollbar-thumb:hover {background: #94a3b8;}
+	.js-ticket-list-item {background-color: #ffffff;padding: 16px;border-radius: 8px;box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);cursor: pointer;transition: background-color 0.15s ease-in-out;}
+	.js-ticket-list-item:hover {background-color: #f9fafb;}
+	.js-ticket-list-item p {margin: 0;}
+	.js-ticket-list-item .js-ticket-title {font-weight: 500;margin-top: 4px;margin-bottom: 4px;}
+	.js-ticket-list-item .js-ticket-id {font-size: 14px;display: -webkit-box;-webkit-line-clamp: 5;-webkit-box-orient: vertical;overflow: hidden;}
+	.js-ticket-selected-replies-section {background-color: #ecfdf5;border-color: #a7f3d0;}
+	.js-ticket-selected-replies-header {display: flex;align-items: center;justify-content: space-between;margin-bottom: 10px;}
+	.js-ticket-selected-replies-header .js-ticket-section-heading {font-size: 20px;font-weight: 600;color: #047857;margin-bottom: 0;margin-top: 0;white-space: nowrap;overflow: hidden;text-overflow: ellipsis;max-width: 50%;line-height: initial;}
+	.js-ticket-close-button {/*background-color: #1E40AF;*/background-color: #16A34A;color: #FFFFFF;padding: 8px 16px;border-radius: 8px;font-weight: 500;transition: background-color 0.2s ease;cursor: pointer;border: none;}
+	.js-ticket-close-button:hover {background-color: #2b2b2b;}
+	#js-ticket-close-tickets-btn {background-color: #6d28d9;}
+	#js-ticket-close-tickets-btn:hover {background-color: #2b2b2b;}
+	.js-ticket-replies-content {display: flex;flex-direction: column;gap: 24px;max-height: 500px;overflow-y: auto;padding: 8px;margin: 0 -8px;}
+	/* Custom scrollbar for reply content */
+	.reply-content::-webkit-scrollbar {width: 8px;}
+	.reply-content::-webkit-scrollbar-track {background: #f1f1f1;border-radius: 10px;}
+	.reply-content::-webkit-scrollbar-thumb {background: #cbd5e1;border-radius: 10px;}
+	.reply-content::-webkit-scrollbar-thumb:hover {background: #94a3b8;}
+	.js-ticket-reply-item {background-color: #ffffff;padding: 20px;border-radius: 8px;box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);border: 1px solid #a7f3d0;}
+	.js-ticket-reply-header {display: flex;justify-content: space-between;align-items: center;margin-bottom: 12px;}
+	.js-ticket-reply-header .js-ticket-reply-id {font-weight: 600;color: #059669;}
+	.js-ticket-reply-header .js-ticket-reply-timestamp {font-size: 14px;}
+	.js-ticket-reply-text {line-height: 1.625;font-size: 14px;display: -webkit-box;-webkit-line-clamp: 10;-webkit-box-orient: vertical;overflow: hidden;}
+	.js-ticket-reply-actions {display: flex;gap: 8px;margin-top: 10px; /* Space between text and action buttons */justify-content: flex-end; /* Align buttons to the right */}
+	.js-ticket-reply-action-btn {background-color: #4CAF50; /* Green */color: white;padding: 8px 12px;border: none;border-radius: 5px;cursor: pointer;font-size: 14px;transition: background-color 0.2s ease;}
+	.js-ticket-reply-action-btn.copy-btn {background-color: #ff9800; /* Orange */}
+	.js-ticket-reply-action-btn.copy-btn:hover {background-color: #2b2b2b;}
+	.js-ticket-reply-action-btn.append-btn {background-color: #1578e8;}
+	.js-ticket-reply-action-btn.append-btn:hover {background-color: #2b2b2b;}
+	/* Dropdown style */
+	.js-ticket-filter-group {display: flex;align-items: center;gap: 10px;margin-left: auto;margin-right: 5px;margin-bottom: 0px;}
+	.js-ticket-filter-label {font-weight: 500;}
+	.js-ticket-filter-select {padding: 8px 12px;border: 1px solid #cbd5e1;border-radius: 8px;background-color: white;cursor: pointer;font-size: 14px;appearance: none; /* Remove default dropdown arrow */-webkit-appearance: none;-moz-appearance: none;background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%2364748b%22%20d%3D%22M287%2C118.8L146.2%2C259.6L5.4%2C118.8z%22%2F%3E%3C%2Fsvg%3E"); /* Custom arrow */background-repeat: no-repeat;background-position: right 10px center;background-size: 12px;transition: border-color 0.2s ease, box-shadow 0.2s ease;}
+	.js-ticket-filter-select:focus {outline: none;border-color: #3b82f6;box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.5);}
+	/* Modal styles */
+	.js-ticket-modal {position: fixed;inset: 0;background-color: rgba(0, 0, 0, 0.5);display: flex;align-items: center;justify-content: center;z-index: 50;}
+	.js-ticket-modal-content {background-color: #ffffff;padding: 24px;border-radius: 12px;box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);max-width: 384px;width: 100%;text-align: center;border: 1px solid #d1d5db;}
+	.js-ticket-modal-message {font-size: 18px;font-weight: 500;color: #1a202c;margin-bottom: 16px;}
+	.js-ticket-modal-close-button {background-color: #2563eb;color: #ffffff;padding: 8px 20px;border-radius: 8px;font-weight: 500;transition: background-color 0.2s ease, box-shadow 0.2s ease;cursor: pointer;border: none;}
+	.js-ticket-modal-close-button:hover {background-color: #1d4ed8;}
+	/* Utility for hiding elements */
+	.js-ticket-hidden {display: none;}
+	/* Marked as AI-Powered Reply Feature  */
+	div.js-ticket-ai-reply-status-wrapper {float: left;width: 100%;padding: 15px 0px 25px;box-sizing: border-box;}
+	div.js-ticket-ai-reply-status-wrapper label {display: inline-block;margin-bottom: 10px;font-weight: 600;color: #444;font-size: 15px;}
+	div.js-ticket-segmented-control-wrp {padding: 15px 0;}
+	div.js-ticket-segmented-control {display: flex;border: 1px solid #c3c4c7;border-radius: 6px;overflow: hidden;width: fit-content;max-width: 100%;box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);flex-wrap: wrap;}
+	button.js-ticket-segmented-control-option {flex: 1;padding: 10px 18px;border: none;background-color: #f6f7f7;color: #40464d;cursor: pointer;font-size: 16px !important;font-weight: 500 !important;transition: background-color 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;outline: none;text-align: center;white-space: nowrap;line-height: 1.3em !important;}
+	button.js-ticket-segmented-control-option:not(:last-child) {border-right: 1px solid #c3c4c7;}
+	button.js-ticket-segmented-control-option:hover {background-color: #e0e0e0;}
+	button.js-ticket-segmented-control-option.active {box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.1);font-weight: 700;}
+	button.js-ticket-segmented-control-option.js-ticket-default.active {background-color: #808080;color: #ffffff;}
+	button.js-ticket-segmented-control-option.js-ticket-enable.active {background-color: #28a745;color: #ffffff;}
+	button.js-ticket-segmented-control-option.js-ticket-disable.active {background-color: #dc3545;color: #ffffff;}
+	button.js-ticket-segmented-control-option:focus {box-shadow: 0 0 0 2px #2196f3;}
+	.js-tkt-det-tkt-prty-txt.js-ticket-segmented-control-wrp button.js-ticket-segmented-control-option {padding: 10px !important;}
+	label.js-ticket-ai-reply-status-control-label {font-weight: 400 !important;font-size: 20px !important;}
+	.js-ticket-ai-powered-reply-wrapper {display: flex;align-items: center;background-color: #f8f8f8;padding: 7px 7px;border-left: 5px solid #4CAF50; /* Green line on the left */justify-content: space-between;flex-wrap: wrap;gap: 15px;}
+	.js-ticket-ai-powered-reply-icon {flex-shrink: 0;}
+	.js-ticket-ai-powered-reply-icon img {width: 80px; /* Adjust as needed */height: auto;display: block;}
+	.js-ticket-ai-powered-reply-content {flex-grow: 1;}
+	.js-ticket-ai-powered-reply-title {font-weight: bold;margin-bottom: 10px;font-size: 20px;}
+	.js-ticket-ai-powered-reply-text {font-size: 14px;line-height: 1.4;}
+	.js-ticket-ai-powered-reply-action {flex-shrink: 0;margin-right: 15px;}
+	.js-ticket-ai-powered-reply-button {display: inline-block;background-color: #28a745; /* Green background */color: #fff !important;padding: 11px 15px;text-decoration: none;border-radius: 6px;font-size: 14px;white-space: nowrap;font-weight: 600;}
+	.js-ticket-ai-powered-reply-button:hover {background-color: #2b2b2b;color: #FFFFFF;text-decoration: none;}
+	.js-ticket-ai-powered-reply-button:focus {color: #FFFFFF;text-decoration: none;}
+	.js-ticket-info-icon-wrapper {position: relative;display: inline-block;cursor: help;padding: 0 5px;}
+	.js-ticket-info-icon {font-size: 18px;color: #6c757d;transition: color 0.2s ease;}
+	.js-ticket-info-icon-wrapper.tooltip-active .js-ticket-info-icon::after, .js-ticket-info-icon-wrapper.tooltip-active .js-ticket-info-icon::before {opacity: 1;visibility: visible;}
+	.js-ticket-info-icon {font-size: 18px;color: #6c757d;transition: color 0.2s ease;}
+	.js-ticket-info-icon::after, .js-ticket-info-icon::before, .status-segment::after, .status-segment::before {box-sizing: border-box;content: attr(data-tooltip);position: absolute;top: calc(100% + 20px);left: 50%;transform: translateX(-50%);background-color: #343a40;color: #fff;padding: 12px 18px;border-radius: 10px;font-size: 13.5px;line-height: 1.5;white-space: normal;width: 200px;text-align: center;opacity: 0;visibility: hidden;transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;z-index: 1000;box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);}
+	.js-ticket-info-icon::before, .status-segment::before {content: "";top: calc(100% + 13px);left: 50%;transform: translateX(-50%) rotate(45deg);width: 14px;height: 35px;background-color: #343a40;z-index: 1000;}
+	.js-ticket-info-icon img {width: 20px;}
 
 	/* ticket detail woocommerce */
 	.js-tkt-wc-order-box {float: left;width: 100%;}
@@ -672,6 +776,20 @@ $jssupportticket_css .= '
 	.js-ticket-history-table-wrp table,
 	.js-ticket-history-table-wrp table th,
 	.js-ticket-history-table-wrp table td {border: 1px solid '.$color5.';}
+
+	/* AI Reply */
+    .js-tkt-det-tkt-prty div.js-ticket-segmented-control-wrp {border-top: 1px solid '.$color5.';}
+    .js-ticket-ai-powered-reply-wrapper {border: 1px solid '.$color5.';}
+    .js-ticket-container {border: 1px solid '.$color5.';}
+    .js-ticket-list-item {border: 1px solid '.$color5.';}
+    .js-ticket-list-item .js-ticket-title {color: '.$color2.';}
+    .js-ticket-ai-powered-reply-title {color: '.$color2.';}
+    .js-ticket-ai-powered-reply-text {color: '.$color4.';}
+    .js-ticket-list-item .js-ticket-id {color: '.$color4.';}
+    .js-ticket-filter-label {color: '.$color2.';}
+    .js-ticket-filter-select {color: '.$color2.';}
+    .js-ticket-reply-text {color: '.$color4.';}
+    .js-ticket-reply-header .js-ticket-reply-timestamp {color: '.$color4.';}
 
 
 	/* Ticket Details*/';

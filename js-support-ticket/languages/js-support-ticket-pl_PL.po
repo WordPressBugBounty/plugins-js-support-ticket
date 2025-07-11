@@ -2145,8 +2145,8 @@ msgid "Select Page"
 msgstr "Wybierz stronę"
 
 msgid ""
-"Select JS Help Desk default page, on the action system, will redirect on the selected page. If not select the default page, email links, "
-"and support icon might not work."
+"Select JS Help Desk default page, on the action system, will redirect on the selected page. If not select the default page, email links, and "
+"support icon might not work."
 msgstr ""
 "Wybierz domyślną stronę JS Help Desk, w systemie akcji przekieruje na wybraną stronę. Jeśli nie, wybierz stronę domyślną, linki e-mail i "
 "ikona pomocy technicznej mogą nie działać."
@@ -3220,16 +3220,16 @@ msgstr ""
 
 msgid "Defines rules or set specific intervals of time to make ticket auto overdue.The ticket can overdue by type or overdue by Cronjob."
 msgstr ""
-"Określa reguły lub ustawia określone przedziały czasu, aby zgłoszenie było automatycznie opóźnione. Zgłoszenia może być opóźniony według "
-"typu lub opóźnione przez Cronjob."
+"Określa reguły lub ustawia określone przedziały czasu, aby zgłoszenie było automatycznie opóźnione. Zgłoszenia może być opóźniony według typu "
+"lub opóźnione przez Cronjob."
 
 msgid "SMTP enables you to add custom mail protocol to send and receive emails within the js help desk."
 msgstr "SMTP umożliwia dodawanie niestandardowego protokołu pocztowego do wysyłania i odbierania wiadomości e-mail w pomocy technicznej js."
 
 msgid "Displays complete ticket history along with the ticket status, currently assigned user and other actions performed on each ticket."
 msgstr ""
-"Wyświetla pełną historię zgłoszeń wraz ze statusem zgłoszeń, aktualnie przypisanym użytkownikiem i innymi czynnościami wykonywanymi na "
-"każdym zgłoszeniu."
+"Wyświetla pełną historię zgłoszeń wraz ze statusem zgłoszeń, aktualnie przypisanym użytkownikiem i innymi czynnościami wykonywanymi na każdym "
+"zgłoszeniu."
 
 msgid "Pre-populated messages allow support agents to respond quickly."
 msgstr "Wstępnie wypełnione wiadomości umożliwiają agentom wsparcia szybką odpowiedź."
@@ -3242,8 +3242,7 @@ msgstr "Śledzenie czasu"
 
 msgid "Track the time spent on each ticket by each agent and each reply. Report the admin on how much time is spent on each ticket."
 msgstr ""
-"Śledź czas spędzony na każdym zgłoszeniu przez każdego agenta i każdą odpowiedź. Zgłoś administratorowi, ile czasu zajmuje każde "
-"zgłoszenie."
+"Śledź czas spędzony na każdym zgłoszeniu przez każdego agenta i każdą odpowiedź. Zgłoś administratorowi, ile czasu zajmuje każde zgłoszenie."
 
 msgid "User Options"
 msgstr "Opcje użytkownika"
@@ -3258,8 +3257,7 @@ msgid "Ticket Actions"
 msgstr "Akcje na zgłoszeniach"
 
 msgid "Get multiple action options on each ticket like Print Ticket, Lock Ticket, Transfer ticket, etc."
-msgstr ""
-"Uzyskaj wiele opcji akcji dla każdego zgłoszenia, takich jak 'Drukuj zgłoszenie', 'Zablokuj zgłoszenie', 'Transferuj zgłoszenie' itp."
+msgstr "Uzyskaj wiele opcji akcji dla każdego zgłoszenia, takich jak 'Drukuj zgłoszenie', 'Zablokuj zgłoszenie', 'Transferuj zgłoszenie' itp."
 
 msgid "Make unlimited announcements associated with the support system."
 msgstr "Dokonuj nieograniczonych ogłoszeń związanych z systemem wsparcia."
@@ -3307,8 +3305,7 @@ msgid "JS Help Desk WooCommerce provides the much-needed bridge between your Woo
 msgstr "JS Help Desk WooCommerce zapewnia bardzo potrzebny pomost między Twoim sklepem WooCommerce a JS Help Desk."
 
 msgid "Collect your customer's private data, sensitive information from credit card to health information and store them encrypted."
-msgstr ""
-"Zbieraj prywatne dane klienta, wrażliwe informacje od karty kredytowej po informacje zdrowotne i przechowuj je w postaci zaszyfrowanej."
+msgstr "Zbieraj prywatne dane klienta, wrażliwe informacje od karty kredytowej po informacje zdrowotne i przechowuj je w postaci zaszyfrowanej."
 
 msgid "Without valid Envato, license clients won't be able to open a new ticket."
 msgstr "Bez ważnego klucza licencji Envato nie będzie można utworzyć nowych zgłoszeń."
@@ -3711,12 +3708,12 @@ msgstr "Wtyczka Wordpress"
 
 msgid ""
 "JS Help Desk is a trusted open source ticket system. JS Help Desk is a simple, easy to use, web-based customer support system. Users can "
-"create a ticket from the front-end. JS Help Desk comes packed with lot features than most of the expensive(and complex) support ticket "
-"system on the market. The best part is, It completely free."
+"create a ticket from the front-end. JS Help Desk comes packed with lot features than most of the expensive(and complex) support ticket system "
+"on the market. The best part is, It completely free."
 msgstr ""
 "JS Help Desk to zaufany system zgłoszeń typu open source. JS Help Desk to prosty, łatwy w użyciu internetowy system obsługi klienta. "
-"Użytkownicy mogą utworzyć zgłoszenie z interfejsu. JS Help Desk jest wyposażony w wiele funkcji niż większość drogiego (i złożonego) "
-"systemu obsługi zgłoszeń na rynku. Najlepsze jest to, że całkowicie za darmo."
+"Użytkownicy mogą utworzyć zgłoszenie z interfejsu. JS Help Desk jest wyposażony w wiele funkcji niż większość drogiego (i złożonego) systemu "
+"obsługi zgłoszeń na rynku. Najlepsze jest to, że całkowicie za darmo."
 
 msgid "Add on list"
 msgstr "Dodaj do listy"
@@ -6318,8 +6315,7 @@ msgstr "Dodatki do działu pomocy technicznej"
 
 msgid "Get trusted WordPress add on’s. Guaranteed to work fast, safe to use, beautifully coded, packed with features and easy to use."
 msgstr ""
-"Zdobądź zaufane dodatki do WordPress. Gwarantujemy szybką pracę, bezpieczeństwo w użyciu, pięknie zakodowane, pełne funkcji i łatwe w "
-"użyciu."
+"Zdobądź zaufane dodatki do WordPress. Gwarantujemy szybką pracę, bezpieczeństwo w użyciu, pięknie zakodowane, pełne funkcji i łatwe w użyciu."
 
 msgid "Save big with an exclusive membership plan today!"
 msgstr "Zaoszczędź dużo dzięki ekskluzywnemu planowi członkostwa już dziś!"
@@ -6332,8 +6328,8 @@ msgstr "Dodaj agentów i przypisz role i uprawnienia, aby zapewnić pomoc i wspa
 
 msgid "Define rules for ticket to auto close. Ticket will be auto close after specific interval of time which can be set by admin."
 msgstr ""
-"Zdefiniuj reguły automatycznego zamykania zgłoszeń. Bilet zostanie automatycznie zamknięty po upływie określonego czasu, który może "
-"ustawić administrator."
+"Zdefiniuj reguły automatycznego zamykania zgłoszeń. Bilet zostanie automatycznie zamknięty po upływie określonego czasu, który może ustawić "
+"administrator."
 
 msgid "Get the survey from your customers on ticket closing to improve your quality of services and assistance."
 msgstr "Uzyskaj ankietę od swoich klientów dotyczącą zamykania zgłoszeń, aby poprawić jakość usług i pomocy."
@@ -6387,8 +6383,8 @@ msgstr ""
 
 msgid "Tired of getting tickets about the same problems? Add FAQs to drastically reduce the number of common questions from users."
 msgstr ""
-"Masz dość otrzymywania zgłoszeń dotyczących tych samych problemów? Dodaj często zadawane pytania, aby drastycznie zmniejszyć liczbę "
-"częstych pytań użytkowników."
+"Masz dość otrzymywania zgłoszeń dotyczących tych samych problemów? Dodaj często zadawane pytania, aby drastycznie zmniejszyć liczbę częstych "
+"pytań użytkowników."
 
 msgid "Admin Widgets"
 msgstr "Widżety administratora"
@@ -6422,8 +6418,8 @@ msgid "Email Cc"
 msgstr "Wyślij e-mail do Dw"
 
 msgid ""
-"CC(Carbon Copy) - the people who should know about the information which is being shared and the people included are able to see who is "
-"there in the list."
+"CC(Carbon Copy) - the people who should know about the information which is being shared and the people included are able to see who is there "
+"in the list."
 msgstr ""
 "CC(Carbon Copy) – osoby, które powinny wiedzieć o udostępnianych informacjach oraz osoby uwzględnione, mogą zobaczyć, kto znajduje się na "
 "liście."
@@ -6438,8 +6434,8 @@ msgid "agent auto assign"
 msgstr "automatyczne przypisywanie agenta"
 
 msgid ""
-"When auto assignment is enabled and a ticket is created, an appropriate agent is automatically assigned to the ticket and it is moved to "
-"the Assigned state."
+"When auto assignment is enabled and a ticket is created, an appropriate agent is automatically assigned to the ticket and it is moved to the "
+"Assigned state."
 msgstr ""
 "Po włączeniu automatycznego przypisywania i utworzeniu zgłoszenia odpowiedni agent zostanie automatycznie przypisany do zgłoszenia i "
 "przeniesiony do stanu Przypisany."
@@ -6476,10 +6472,8 @@ msgstr "Wszystko w standardzie zawarte i"
 msgid "All Future Addons"
 msgstr "Wszystkie przyszłe dodatki"
 
-msgid ""
-"Hey there! We have recently launched a fresh update for the add-ons. Don't forget to update the add-ons to enjoy the greatest features!"
-msgstr ""
-"No hej! Niedawno wprowadziliśmy nową aktualizację dodatków. Nie zapomnij zaktualizować dodatków, aby cieszyć się najlepszymi funkcjami!"
+msgid "Hey there! We have recently launched a fresh update for the add-ons. Don't forget to update the add-ons to enjoy the greatest features!"
+msgstr "No hej! Niedawno wprowadziliśmy nową aktualizację dodatków. Nie zapomnij zaktualizować dodatków, aby cieszyć się najlepszymi funkcjami!"
 
 msgid "View Addone Status"
 msgstr "Wyświetl status dodatku"
@@ -6744,8 +6738,7 @@ msgstr "Pokaż adres e-mail administratora LUB agenta w odpowiedzi na zgłoszeni
 
 msgid "Show or hide the multiform popup when creating a new ticket. if you hide them, the system will open the default form."
 msgstr ""
-"Pokaż lub ukryj wieloformatowe wyskakujące okienko podczas tworzenia nowego zgłoszenia. jeśli je ukryjesz, system otworzy formularz "
-"domyślny."
+"Pokaż lub ukryj wieloformatowe wyskakujące okienko podczas tworzenia nowego zgłoszenia. jeśli je ukryjesz, system otworzy formularz domyślny."
 
 msgid "Multiforms Popup For New Tickets"
 msgstr "Wyskakujące okienko Multiforms dla nowych biletów"
@@ -7078,8 +7071,8 @@ msgid "Edit Help Topic"
 msgstr "Edytuj temat pomocy"
 
 msgid ""
-"e.g ' I have read and agree to the [link] Terms and Conditions[/link].  ' The text between [link] and [/link] will be linked to provided "
-"url or wordpress page."
+"e.g ' I have read and agree to the [link] Terms and Conditions[/link].  ' The text between [link] and [/link] will be linked to provided url "
+"or wordpress page."
 msgstr ""
 "np. „Przeczytałem i zgadzam się z [link] Warunkami korzystania[/link]. ' Tekst pomiędzy [link] i [/link] będzie linkiem do podanego adresu "
 "URL lub strony wordpress."
@@ -7986,3 +7979,168 @@ msgstr "Addon (y) zainstalowane pomyślnie!"
 
 msgid "Addon(s) Installation Failed"
 msgstr "Instalacja dodatków nie powiodła się"
+
+msgid "Your JS Support Ticket license key has expired or is invalid. Please update it to continue receiving support and updates."
+msgstr "Klucz licencji biletów wsparcia JS wygasł lub jest nieprawidłowy. Zaktualizuj go, aby kontynuować otrzymywanie wsparcia i aktualizacji."
+
+msgid "Import Data"
+msgstr "Importuj dane"
+
+msgid "No Addon Installed!"
+msgstr "Brak zainstalowanego dodatku!"
+
+msgid "Add-Ons"
+msgstr "Dodatki"
+
+msgid "Copied to clipboard!"
+msgstr "Skopiowane do schowka!"
+
+msgid "Failed to copy!"
+msgstr "Nie udało się kopiować!"
+
+msgid "Failed to copy to clipboard. Please copy manually."
+msgstr "Nie udało się skopiować do schowka. Proszę skopiować ręcznie."
+
+msgid "Reply content appended!"
+msgstr "Odpowiedz Dołączona treść!"
+
+msgid "No ticket selected!"
+msgstr "Brak biletu!"
+
+msgid "Error fetching replies."
+msgstr "Pobieranie błędów odpowiedzi."
+
+msgid "Failed to fetch replies. Please try again."
+msgstr "Nie udało się pobierać odpowiedzi. Spróbuj ponownie."
+
+msgid "Error fetching matching tickets:"
+msgstr "Pobieranie błędów pasujące bilety:"
+
+msgid "Error fetching replies:"
+msgstr "Błąd odpowiada:"
+
+msgid "No matching tickets found."
+msgstr "Nie znaleziono pasujących biletów."
+
+msgid "Ticket ID:"
+msgstr "Identyfikator biletu:"
+
+msgid "Replies for:"
+msgstr "Odpowiedzi na:"
+
+msgid "No replies found for this ticket."
+msgstr "Nie znaleziono odpowiedzi na ten bilet."
+
+msgid "N/A"
+msgstr "Nie dotyczy"
+
+msgid "No content"
+msgstr "Brak treści"
+
+msgid "No date"
+msgstr "Brak daty"
+
+msgid "Reply By:"
+msgstr "Odpowiedz przez:"
+
+msgid "AI-Powered Reply Mode"
+msgstr "Tryb odpowiedzi z napędem AI"
+
+msgid "Control how this individual reply influences the AI search and response generation process for future queries."
+msgstr "Kontroluj, w jaki sposób ta indywidualna odpowiedź wpływa na proces wyszukiwania AI i generowanie odpowiedzi na przyszłe zapytania."
+
+msgid "Default: reply included in all AI search queries."
+msgstr "Domyślnie: Odpowiedź zawarta we wszystkich zapytaniach dotyczących wyszukiwania AI."
+
+msgid "Enable: reply used in AI queries only when the Enable Tickets filter is active."
+msgstr "Włącz: Odpowiedź używana w zapytaniach AI tylko wtedy, gdy aktywny jest filtr biletów Enable."
+
+msgid "Enable"
+msgstr "Włączać"
+
+msgid "Disable: reply excluded from AI queries."
+msgstr "Wyłącz: Odpowiedź wykluczona z zapytań AI."
+
+msgid "Disable"
+msgstr "Wyłączyć"
+
+msgid "AI Icon"
+msgstr "Ikona AI"
+
+msgid "AI-Powered Reply"
+msgstr "Odpowiedź z napędem AI"
+
+msgid "Get context-based suggestions to effortlessly create clear and relevant replies."
+msgstr "Uzyskaj sugestie oparte na kontekście, aby bez wysiłku stworzyć jasne i odpowiednie odpowiedzi."
+
+msgid "Generate AI Response"
+msgstr "Wygeneruj odpowiedź AI"
+
+msgid "Matching Tickets"
+msgstr "Dopasowanie biletów"
+
+msgid "Filter"
+msgstr "Filtr"
+
+msgid "Enable Tickets"
+msgstr "Włącz bilety"
+
+msgid "All Replies"
+msgstr "Wszystkie odpowiedzi"
+
+msgid "Enable Replies"
+msgstr "Włącz odpowiedzi"
+
+msgid "Control how this ticket and its replies influence AI search and response generation for future queries."
+msgstr "Kontroluj, w jaki sposób ten bilet i jego odpowiedzi wpływają na wyszukiwanie AI i generowanie reakcji na przyszłe zapytania."
+
+msgid "Default: ticket and replies included in all AI queries."
+msgstr "Domyślnie: bilet i odpowiedzi zawarte we wszystkich zapytaniach AI."
+
+msgid "Enable: ticket and replies used only when the “Enable Tickets” filter is active."
+msgstr "Włącz: bilet i odpowiedzi używane tylko wtedy, gdy aktywny jest filtr „Włącz bilety”."
+
+msgid "Disable: ticket and replies excluded from AI queries."
+msgstr "Wyłącz: bilet i odpowiedzi wykluczone z zapytań AI."
+
+msgid "Get context-aware suggestions for your response."
+msgstr "Uzyskaj świadomie kontekst sugestie dotyczące odpowiedzi."
+
+msgid "Ticket ID is required."
+msgstr "Wymagany jest identyfikator biletu."
+
+msgid "Ticket not found."
+msgstr "Bilet nie znaleziono."
+
+msgid "Database error occurred."
+msgstr "Wystąpił błąd bazy danych."
+
+msgid "AI Reply Section"
+msgstr "Sekcja odpowiedzi AI"
+
+msgid "Get AI-powered, context-based suggestions to effortlessly create clear, relevant, and helpful replies."
+msgstr "Uzyskaj sugestie oparte na AI, oparte na kontekście, aby bez wysiłku stworzyć jasne, odpowiednie i pomocne odpowiedzi."
+
+msgid "Change Ticket Status"
+msgstr "Zmień status biletu"
+
+msgid "Use AI Powered Reply Feature"
+msgstr "Użyj funkcji odpowiedzi zasilania AI"
+
+msgid "Set AI Reply Mode for Ticket"
+msgstr "Ustaw tryb odpowiedzi AI na bilet"
+
+msgid "Set AI Reply Mode for Reply"
+msgstr "Ustaw tryb odpowiedzi AI dla odpowiedzi"
+
+msgid "Limit AI Replies to Agent-Assigned Tickets"
+msgstr "Ogranicz odpowiedzi AI do biletów przypisanych przez agenta"
+
+msgid "Suggested Response"
+msgstr "Sugerowana odpowiedź"
+
+msgid "Show User Avatar"
+msgstr "Pokaż awatar użytkownika"
+
+msgid "Showing avatars may slightly slow down page loading"
+msgstr "Pokazanie awatarów może nieco spowolnić ładowanie strony"

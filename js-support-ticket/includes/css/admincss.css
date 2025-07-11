@@ -108,7 +108,7 @@ ul.jsstadmin-sidebar-menu li.disabled-menu span.jsst_text {display: inline-block
 ul.jsstadmin-sidebar-menu li.disabled-menu a.jsst_js-install-btn {float: right;color: #1572e8;}
 
 /* user popup */
-div#multiformpopupblack {background: rgba(0,0,0,0.5);position: fixed;width: 100%;height: 100%;top: 0px;left: 0px;z-index: 9989;}
+div#multiformpopupblack, div#black_wrapper_ai_reply {background: rgba(0,0,0,0.5);position: fixed;width: 100%;height: 100%;top: 0px;left: 0px;z-index: 9989;}
 div#multiformpopup * {box-sizing: border-box;}
 div#multiformpopup{position: fixed;top:50%;left:50%;width:50%;z-index: 9999999999;transform: translate(-50%, -50%);background: #fff;box-sizing: border-box;max-height: 70%;overflow-x: hidden;overflow-y: auto;}
 div#multiformpopup .multiformpopup-top {float: left;width: 100%;background: #1572e8;padding: 15px;}
@@ -944,6 +944,107 @@ div.jsst-merge-popup-wrapper .js-form-button-wrapper input.button.js-merge-cance
 .popup-field-from .js-submit-container input#save:hover {background: #fff;color: #1572e8;}
 .popup-field-from .js-submit-container a#user-field-anchor {display: inline-block;padding: 15px;cursor: pointer;text-align: center;border-radius: 0;height: auto;min-width: 120px;line-height: initial;box-shadow: unset;border: 1px solid;}
 
+/* ticket detail AI Powered Reply */ 
+.js-ticket-container {background-color: #ffffff;padding: 24px;border-radius: 12px;box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);width: 100%;max-width: 100%;border: 1px solid #e2e8f0;margin-top: 20px;margin-bottom: 20px;display: none;}
+/* Headings */
+.js-ticket-heading {font-size: 24px;font-weight: 700;color: #1a202c;margin-bottom: 24px;text-align: center;}
+/* Section containers (e.g., Current Ticket, Matching Tickets, Replies) */
+.js-ticket-section {padding: 16px;border-radius: 8px;/*margin-bottom: 24px;*/border: 1px solid;}
+.js-ticket-current-ticket-section {background-color: #eff6ff;border-color: #bfdbfe;}
+.js-ticket-current-ticket-title {display: none;}
+.js-ticket-current-ticket-id {display: none;}
+.js-ticket-current-ticket-description {font-size: 14px;color: #1d4ed8;}
+.js-ticket-post-reply-section .js-ticket-section-heading {font-size: 20px;font-weight: 600;color: #4a5568;margin-bottom: 16px;}
+.js-ticket-textarea {width: 100%;padding: 16px;border: 1px solid #cbd5e1;border-radius: 8px;resize: vertical;min-height: 150px;transition: border-color 0.2s ease, box-shadow 0.2s ease;}
+.js-ticket-textarea:focus {outline: none;border-color: #3b82f6;box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.5);}
+.js-ticket-button-group {display: flex;flex-direction: column;gap: 12px;margin-top: 16px;}
+@media (min-width: 640px) {.js-ticket-button-group {flex-direction: row;gap: 16px;margin-top: 0;}}
+.js-ticket-button {display: block;margin-bottom: 25px;padding: 12px 24px;border-radius: 8px;font-weight: 500;transition: background-color 0.2s ease, box-shadow 0.2s ease;box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);color: #ffffff;border: none;cursor: pointer;}
+.js-ticket-post-reply-button {background-color: #2563eb;}
+.js-ticket-post-reply-button:hover {background-color: #1d4ed8;}
+.js-ticket-ai-reply-button {background-color: #16a34a;}
+.js-ticket-ai-reply-button:hover {background-color: #15803d;}
+.js-ticket-matching-tickets-section {background-color: #f5f3ff;border-color: #ddd6fe;}
+.js-ticket-selected-tickets-header {display: flex;align-items: center;justify-content: space-between;margin-bottom: 10px;flex-wrap: wrap;gap: 10px;}
+.js-ticket-matching-tickets-section .js-ticket-section-heading {color: #6d28d9;white-space: nowrap;overflow: hidden;text-overflow: ellipsis;max-width: 60%;}
+.js-ticket-list {list-style: none;padding: 8px;margin: 0 -8px;display: flex;flex-direction: column;gap: 12px;max-height: 500px;overflow-y: auto;}
+.js-ticket-list::-webkit-scrollbar {width: 8px;}
+.js-ticket-list::-webkit-scrollbar-track {background: #f1f1f1;border-radius: 10px;}
+.js-ticket-list::-webkit-scrollbar-thumb {background: #cbd5e1;border-radius: 10px;}
+.js-ticket-list::-webkit-scrollbar-thumb:hover {background: #94a3b8;}
+.js-ticket-list-item {background-color: #ffffff;padding: 16px;border-radius: 8px;box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);border: 1px solid #e2e8f0;cursor: pointer;transition: background-color 0.15s ease-in-out;}
+.js-ticket-list-item:hover {background-color: #f9fafb;}
+.js-ticket-list-item p {margin: 0;}
+.js-ticket-list-item .js-ticket-title {font-weight: 500;color: #1a202c;margin-top: 4px;margin-bottom: 4px;}
+.js-ticket-list-item .js-ticket-id {font-size: 14px;color: #64748b;display: -webkit-box;-webkit-line-clamp: 5;-webkit-box-orient: vertical;overflow: hidden;}
+.js-ticket-selected-replies-section {background-color: #ecfdf5;border-color: #a7f3d0;}
+.js-ticket-selected-replies-header {display: flex;align-items: center;justify-content: space-between;margin-bottom: 16px;}
+.js-ticket-selected-replies-header .js-ticket-section-heading {font-size: 20px;font-weight: 600;color: #047857;margin-bottom: 0;margin-top: 0;white-space: nowrap;overflow: hidden;text-overflow: ellipsis;max-width: 60%;margin-top: 10px;line-height: initial;}
+.js-ticket-close-button {/*background-color: #1E40AF;*/background-color: #16A34A;color: #FFFFFF;padding: 8px 16px;border-radius: 8px;font-weight: 500;transition: background-color 0.2s ease;cursor: pointer;border: none;}
+.js-ticket-close-button:hover {background-color: #2b2b2b;}
+#js-ticket-close-tickets-btn {background-color: #6d28d9;}
+#js-ticket-close-tickets-btn:hover {background-color: #2b2b2b;}
+.js-ticket-replies-content {display: flex;flex-direction: column;gap: 24px;max-height: 500px;overflow-y: auto;padding: 8px;margin: 0 -8px;}
+/* Custom scrollbar for reply content */
+.js-ticket-replies-content::-webkit-scrollbar {width: 8px;}
+.js-ticket-replies-content::-webkit-scrollbar-track {background: #f1f1f1;border-radius: 10px;}
+.js-ticket-replies-content::-webkit-scrollbar-thumb {background: #cbd5e1;border-radius: 10px;}
+.js-ticket-replies-content::-webkit-scrollbar-thumb:hover {background: #94a3b8;}
+.js-ticket-reply-item {background-color: #ffffff;padding: 20px;border-radius: 8px;box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);border: 1px solid #a7f3d0;}
+.js-ticket-reply-header {display: flex;justify-content: space-between;align-items: center;margin-bottom: 12px;}
+.js-ticket-reply-header .js-ticket-reply-id {font-weight: 600;color: #059669;}
+.js-ticket-reply-header .js-ticket-reply-timestamp {font-size: 14px;color: #64748b;}
+.js-ticket-reply-text {color: #374151;line-height: 1.625;font-size: 14px;display: -webkit-box;-webkit-line-clamp: 10;-webkit-box-orient: vertical;overflow: hidden;}
+.js-ticket-reply-actions {display: flex;gap: 8px;margin-top: 10px; /* Space between text and action buttons */justify-content: flex-end; /* Align buttons to the right */}
+.js-ticket-reply-action-btn {background-color: #4CAF50; /* Green */color: white;padding: 8px 12px;border: none;border-radius: 5px;cursor: pointer;font-size: 14px;transition: background-color 0.2s ease;}
+.js-ticket-reply-action-btn.copy-btn {background-color: #ff9800;color: #FFF; /* Orange */}
+.js-ticket-reply-action-btn.copy-btn:hover {background-color: #2b2b2b;}
+.js-ticket-reply-action-btn.append-btn {background-color: #1578e8;}
+.js-ticket-reply-action-btn.append-btn:hover {background-color: #2b2b2b;}
+/* Dropdown style */
+.js-ticket-filter-group {display: flex;align-items: center;gap: 10px;margin-left: auto;margin-right: 5px;margin-bottom: 0px;}
+.js-ticket-filter-label {font-weight: 500;color: #4a5568;}
+.js-ticket-filter-select {padding: 8px 12px;border: 1px solid #cbd5e1;border-radius: 8px;background-color: white;cursor: pointer;font-size: 14px;color: #1a202c;appearance: none; /* Remove default dropdown arrow */-webkit-appearance: none;-moz-appearance: none;background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%2364748b%22%20d%3D%22M287%2C118.8L146.2%2C259.6L5.4%2C118.8z%22%2F%3E%3C%2Fsvg%3E'); /* Custom arrow */background-repeat: no-repeat;background-position: right 10px center;background-size: 12px;transition: border-color 0.2s ease, box-shadow 0.2s ease;}
+.js-ticket-filter-select:focus {outline: none;border-color: #3b82f6;box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.5);}    
+/* Modal styles */
+.js-ticket-modal {position: fixed;inset: 0;background-color: rgba(0, 0, 0, 0.5);display: flex;align-items: center;justify-content: center;z-index: 50;}
+.js-ticket-modal-content {background-color: #ffffff;padding: 24px;border-radius: 12px;box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);max-width: 384px;width: 100%;text-align: center;border: 1px solid #d1d5db;}
+.js-ticket-modal-message {font-size: 18px;font-weight: 500;color: #1a202c;margin-bottom: 16px;}
+.js-ticket-modal-close-button {background-color: #2563eb;color: #ffffff;padding: 8px 20px;border-radius: 8px;font-weight: 500;transition: background-color 0.2s ease, box-shadow 0.2s ease;cursor: pointer;border: none;}
+.js-ticket-modal-close-button:hover {background-color: #1d4ed8;}
+/* Utility for hiding elements */
+.js-ticket-hidden {display: none;}
+/* --- Marked as AI-Powered Reply Feature --- */
+div.js-ticket-ai-reply-status-wrapper {float: left;width: 100%;padding: 20px 0px;box-sizing: border-box;}
+.js-tkt-det-tkt-prty div.js-ticket-ai-reply-status-wrapper {border-top: 1px solid #ebecec;}
+div.js-ticket-ai-reply-status-wrapper label {display: inline-block;margin-bottom: 10px;font-weight: 600;color: #444;font-size: 15px;}
+div.js-ticket-segmented-control {display: flex;border: 1px solid #c3c4c7;border-radius: 6px;overflow: hidden;width: fit-content;max-width: 100%;box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);flex-wrap: wrap;}
+button.js-ticket-segmented-control-option {flex: 1;padding: 10px 18px;border: none;background-color: #f6f7f7;color: #40464d;cursor: pointer;font-size: 14px;font-weight: 500;transition: background-color 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;outline: none;text-align: center;white-space: nowrap;}
+button.js-ticket-segmented-control-option:not(:last-child) {border-right: 1px solid #c3c4c7;}
+button.js-ticket-segmented-control-option:hover {background-color: #e0e0e0;}
+button.js-ticket-segmented-control-option.active {box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.1);font-weight: 700;}
+button.js-ticket-segmented-control-option.js-ticket-default.active {background-color: #808080;color: #ffffff;}
+button.js-ticket-segmented-control-option.js-ticket-enable.active {background-color: #28a745;color: #ffffff;}
+button.js-ticket-segmented-control-option.js-ticket-disable.active {background-color: #dc3545;color: #ffffff;}
+button.js-ticket-segmented-control-option:focus {box-shadow: 0 0 0 2px #2196f3;}
+.js-ticket-ai-powered-reply-wrapper {display: flex;align-items: center;background-color: #f8f8f8;border: 1px solid #e0e0e0;padding: 7px 7px;border-left: 5px solid #4CAF50; /* Green line on the left */justify-content: space-between;flex-wrap: wrap;gap: 15px;}
+.js-ticket-ai-powered-reply-icon {flex-shrink: 0;}
+.js-ticket-ai-powered-reply-icon img {width: 80px; /* Adjust as needed */height: auto;display: block;}
+.js-ticket-ai-powered-reply-content {flex-grow: 1;}
+.js-ticket-ai-powered-reply-title {font-weight: bold;color: #333;margin-bottom: 10px;font-size: 20px;}
+.js-ticket-ai-powered-reply-text {color: #666;font-size: 14px;line-height: 1.4;}
+.js-ticket-ai-powered-reply-action {flex-shrink: 0;margin-right: 15px;}
+.js-ticket-ai-powered-reply-button {display: inline-block;background-color: #28a745; /* Green background */color: #fff;padding: 13px 20px;text-decoration: none;border-radius: 6px;font-size: 14px;white-space: nowrap;font-weight: 600;}
+.js-ticket-ai-powered-reply-button:hover {background-color: #2b2b2b;color: #FFFFFF;}
+.js-ticket-ai-powered-reply-button:focus {color: #FFFFFF;}
+.js-ticket-info-icon-wrapper {position: relative;display: inline-block;cursor: help;padding: 0 5px;}
+.js-ticket-info-icon {font-size: 18px;color: #6c757d;transition: color 0.2s ease;}
+.js-ticket-info-icon-wrapper.tooltip-active .js-ticket-info-icon::after, .js-ticket-info-icon-wrapper.tooltip-active .js-ticket-info-icon::before {opacity: 1;visibility: visible;}
+.js-ticket-info-icon {font-size: 18px;color: #6c757d;transition: color 0.2s ease;}
+.js-ticket-info-icon::after, .js-ticket-info-icon::before, .status-segment::after, .status-segment::before {box-sizing: border-box;content: attr(data-tooltip);position: absolute;top: calc(100% + 20px);left: 50%;transform: translateX(-50%);background-color: #343a40;color: #fff;padding: 12px 18px;border-radius: 10px;font-size: 13.5px;line-height: 1.5;white-space: normal;width: 200px;text-align: center;opacity: 0;visibility: hidden;transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;z-index: 1000;box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);}
+.js-ticket-info-icon::before, .status-segment::before {content: '';top: calc(100% + 13px);left: 50%;transform: translateX(-50%) rotate(45deg);width: 14px;height: 35px;background-color: #343a40;z-index: 1000;}
+.js-ticket-info-icon img {width: 20px;}
+
 /* ticket detail woocommerce */
 .js-tkt-wc-order-box {float: left;width: 100%;}
 .js-tkt-wc-order-box .js-tkt-wc-order-item {float: left;width: 100%;padding-bottom: 10px;}
@@ -987,7 +1088,7 @@ div#js-emessage-wrapper_ok{display:none; margin-top: 15px; float: left; width: 1
 div#js-emessage-wrapper_ok div{display: inline-block; font-size: 15px; color: #00A859;}
 div#js-emessage-wrapper_ok img{width: 22px; height: auto; margin-right: 10px;}
 div#black_wrapper_translation{ display: none; position: fixed;width:100%;height: 100%;top:0px;left:0px; background: rgba(0,0,0,0.6);  z-index:9998;}
-div#jstran_loading{ display: none; z-index:9999; position: fixed; top: 40%; left: calc(50% - 64px);}
+div#jstran_loading, div#js_ai_reply_loading{ display: none; z-index:9999; position: fixed; top: 40%; left: calc(50% - 64px);}
 div#js-lang-toserver{display: inline-block; float: left; width: 100%;padding: 25px 20px;}
 div#js-lang-toserver div.col:first-child{float: left;width: 65%;}
 div#js-lang-toserver div.col:last-child{float: left;padding-left: 10px;width: 35%;}
@@ -1353,6 +1454,8 @@ div.jsstadmin-add-on-page-wrp div.add-on-page-cnt div.add-on-list div.add-on-ite
 div.jsstadmin-add-on-page-wrp div.add-on-page-cnt div.add-on-list div.add-on-item.desk-notif a.add-on-btn {background: #eb1d24;}
 div.jsstadmin-add-on-page-wrp div.add-on-page-cnt div.add-on-list div.add-on-item.desk-notif a.add-on-btn:hover {border-color: #eb1d24;color: #eb1d24 !important;background: #fff;}
 div.jsstadmin-add-on-page-wrp div.add-on-page-cnt div.add-on-list div.add-on-item.agent .add-on-price {color: #3b4c56;}
+div.jsstadmin-add-on-page-wrp div.add-on-page-cnt div.add-on-list div.add-on-item.aipoweredreply a.add-on-btn {background: #4ead96;}
+div.jsstadmin-add-on-page-wrp div.add-on-page-cnt div.add-on-list div.add-on-item.aipoweredreply a.add-on-btn:hover {border-color: #4ead96;color: #4ead96 !important;background: #fff;}
 div.jsstadmin-add-on-page-wrp div.add-on-page-cnt div.add-on-list div.add-on-item.agent a.add-on-btn {background: #3b4c56;}
 div.jsstadmin-add-on-page-wrp div.add-on-page-cnt div.add-on-list div.add-on-item.agent a.add-on-btn:hover {border-color: #3b4c56;color: #3b4c56 !important;background: #fff;}
 div.jsstadmin-add-on-page-wrp div.add-on-page-cnt div.add-on-list div.add-on-item.user-opt .add-on-price {color: #fa644f;}
@@ -1754,6 +1857,7 @@ div#jsstadmin-data-wrp .jsstadmin-update-key-form .jsstadmin-update-key-wrp .jss
 div#jsstadmin-data-wrp .jsstadmin-update-key-form .jsstadmin-update-key-wrp .jsstadmin-update-key-infomsgwrp img{width: 30px;}
 div#jsstadmin-data-wrp .jsstadmin-update-key-form .jsstadmin-update-key-wrp .jsstadmin-update-key-errormsgwrp{border: 1px solid #ec4f4f;background-color: #f2e8e8;color: #ec4f4f;display: flex;align-items:center;gap: 15px;padding:15px 12px;font-size: 16px;font-weight: 600;margin-bottom: 30px;line-height: 25px;}
 div#jsstadmin-data-wrp .jsstadmin-update-key-form .jsstadmin-update-key-wrp .jsstadmin-update-key-custom-errormsgwrp .error{margin: 0px 0px 30px;}
+div#jsstadmin-data-wrp .jsstadmin-update-key-form .jsstadmin-update-key-wrp .jsstadmin-update-key-custom-errormsgwrp .updated{margin: 0px 0px 30px;}
 div#jsstadmin-data-wrp .jsstadmin-update-key-form .jsstadmin-update-key-wrp .jsstadmin-update-key-updtebtn-wrp{display: flex;align-items: center;justify-content: center;}
 div#jsstadmin-data-wrp .jsstadmin-update-key-form .jsstadmin-update-key-wrp .jsstadmin-update-key-updtebtn-wrp .jsstadmin-update-key-updtebtn{display: flex;align-items: center;cursor: pointer; justify-content: center;text-align: center;width: 100%;padding: 17px 30px;background: #373435;border: 1px solid #eee;color: #fff;font-size: 16px;font-weight: bold;margin-bottom: 60px;}
 div#jsstadmin-data-wrp .jsstadmin-update-key-form .jsstadmin-update-key-wrp .jsstadmin-update-key-updtebtn-wrp .jsstadmin-update-key-updtebtn:hover{border-color: #373435;color: #373435;background-color: #fff;}
@@ -1763,19 +1867,18 @@ div#jsstadmin-data-wrp .jsstadmin-update-key-form .jsstadmin-update-key-wrp .jss
 /* import data */
 .jsst-plugins-imprt-datasec{display: flex;flex-wrap: wrap; align-content: center;justify-content: space-between;padding:25px;border: 1px solid #e0e1e0;margin-bottom: 20px;gap: 20px;}
 .jsst-plugins-imprt-datasec .jsst-plugins-imprt-data-plgnnme{font-size: 20px;line-height: 30px; font-weight: bold;display: flex;align-items: center;}
-.jsst-plugins-imprt-datasec .jsst-plugins-imprt-databtn{padding:12px 10px;min-width: 120px; background-color: #000;color: white;text-decoration: unset;font-size: 15px;line-height: 22px; display:flex;align-items: flex-start;justify-content: center;}
+.jsst-plugins-imprt-datasec .jsst-plugins-imprt-databtn{padding:12px 10px;min-width: 120px; background-color: #000;color: white;text-decoration: unset;font-size: 15px;line-height: 22px; display:flex;align-items: flex-start;justify-content: center;gap: 7px;}
 .jsst-plugins-imprt-datasec .jsst-plugins-imprt-databtn:hover{background-color: #1572e8;}
 .jsst-plugins-imprt-datasec.jsst-plugin-notinstalled{background-color: #fdf2f3;border-color: #f8979b;}
 .jsst-plugins-imprt-datasec.jsst-plugin-notinstalled .jsst-plugins-imprt-databtn{background-color: #fff;border: 1px solid #f8979b; color: #3c434a;}
-.jsst-plugins-imprt-datasec.jsst-plugin-notinstalled .jsst-plugins-imprt-databtn .jsst-plugins-imprterror-image{margin-right: 7px;width: 20px;height: auto;}
+.jsst-plugins-imprt-datasec.jsst-plugin-notinstalled .jsst-plugins-imprt-databtn .jsst-plugins-imprterror-image{width: 20px;height: auto;}
 /* single plugin import data */
 .jsst-singleplugin-imprt-data-sec{display: flex;flex-wrap: wrap; align-content: center;justify-content: space-between;padding:25px;border: 1px solid #e0e1e0;margin-bottom: 20px;}
 .jsst-singleplugin-imprt-data-sec .jsst-singleplugin-imprt-datatitle{display: flex;width: 100%;font-size: 24px;font-weight: bold;line-height: 35px;border-bottom: 1px solid;padding-bottom: 10px;margin-bottom: 5px;}
 .jsst-singleplugin-imprt-data-sec .jsst-singleplugin-imprt-datadisc{font-size: 15px;line-height: 22px; padding:20px;border-bottom:1px solid #e0e1e0;width:calc(100% - 20px);margin: 0 10px;color: #808181;}
 .jsst-singleplugin-imprt-data-sec .jsst-singleplugin-imprt-datadisc.jsst-singleplugin-imprt-data-addonnot-instllwrp{display: flex;align-items: center;justify-content: space-between;flex-wrap: wrap;background-color:#fdf2f3;gap: 20px;}
-.jsst-singleplugin-imprt-data-sec .jsst-singleplugin-imprt-datadisc.jsst-singleplugin-imprt-data-addonnot-instllwrp .jsst-singleplugin-imprt-data-addonnot-instll{display: flex;align-items: flex-start;font-size: 13px;color: #3c434a;line-height: 18px;}
-.jsst-singleplugin-imprt-data-sec .jsst-singleplugin-imprt-datadisc.jsst-singleplugin-imprt-data-addonnot-instllwrp .jsst-singleplugin-imprt-data-addonnot-instll .jsst-plugins-imprterror-image{width: 20px;height: auto;margin-right: 5px;}
-.jsst-singleplugin-imprt-data-sec .jsst-singleplugin-imprt-datadisc.jsst-singleplugin-imprt-data-addonnot-instllwrp .jsst-singleplugin-imprt-data-addonnot-instll {display: flex;align-items: center;}
+.jsst-singleplugin-imprt-data-sec .jsst-singleplugin-imprt-datadisc.jsst-singleplugin-imprt-data-addonnot-instllwrp .jsst-singleplugin-imprt-data-addonnot-instll{display: flex;align-items: flex-start;font-size: 13px;color: #3c434a;line-height: 21px;gap: 5px;}
+.jsst-singleplugin-imprt-data-sec .jsst-singleplugin-imprt-datadisc.jsst-singleplugin-imprt-data-addonnot-instllwrp .jsst-singleplugin-imprt-data-addonnot-instll .jsst-plugins-imprterror-image{width: 20px;height: auto;}
 .jsst-singleplugin-imprt-data-sec .jsst-singleplugin-imprt-databtn-wrp{display: flex;justify-content: center;width: 100%;padding-top: 20px;}
 .jsst-singleplugin-imprt-data-sec .jsst-singleplugin-imprt-databtn-wrp .jsst-singleplugin-imprt-databtn{padding: 15px;text-align: center;border-radius: 0;height: auto;font-size: 16px;line-height: 22px; min-width: 150px;text-decoration: unset;background: #209e24;border:1px solid #cccccc;color: #fff;}
 .jsst-singleplugin-imprt-data-sec .jsst-singleplugin-imprt-databtn-wrp .jsst-singleplugin-imprt-databtn:hover{background: #fff;color: #209e24;}
@@ -1790,14 +1893,17 @@ div#jsstadmin-data-wrp .jsstadmin-update-key-form .jsstadmin-update-key-wrp .jss
 .jsst-singleplugin-imprted-data-sec .jsst-singleplugin-imprted-databtn-wrp .jsst-singleplugin-imprted-databtn{padding: 15px;text-align: center;border-radius: 0;height: auto;font-size: 16px;min-width: 150px;text-decoration: unset;background: #209e24;border:1px solid #cccccc;color: #fff;}
 .jsst-singleplugin-imprted-data-sec .jsst-singleplugin-imprted-databtn-wrp .jsst-singleplugin-imprted-databtn:hover{background: #fff;color: #209e24;}
 .jsst-import-data-result-import-table {width: 100%;border-collapse: collapse;margin-top: 20px;font-size: 16px;}
-.jsst-import-data-result-import-table th, .jsst-import-data-result-import-table td {padding:20px;border: 1px solid #ffe5e5;text-align: left;}
-.jsst-import-data-result-import-table td {padding: 20px;border: 1px solid #ffe5e5;text-align: left;color: #808181;}
+.jsst-import-data-result-import-table th, .jsst-import-data-result-import-table td {padding:20px;border: 1px solid #ffe5e5;text-align: start;}
+.jsst-import-data-result-import-table td {padding: 20px;border: 1px solid #ffe5e5;text-align:start;color: #808181;}
 .jsst-import-data-result-import-table th {background-color: #222;color: white;}
 .jsst-import-data-result-import-table td.jsst-import-data-result-similar {background-color: #fff4ec;color: #994c00;text-align: center;}
 .jsst-import-data-result-import-table td.jsst-import-data-result-failed {background-color: #ffe5e5;color: #a94442;text-align: center;}
 .jsst-import-data-result-import-table td.jsst-import-data-result-success {background-color: #e6fff0;color: #2b6d4c;text-align: center;}
 .jsst-import-data-addon-message{padding: 5px 10px;border: 1px solid #ddd;background: #FFF4EC;margin: 5px 0;display: inline-block;font-size: 15px;line-height: 20px;border: 1px solid #DDD;}
 /* import data */
+/* import message */
+div.jsst-import-data-addon-messagewrp{display: flex;align-items: center;justify-content: flex-start;width: 100%;}
+div.jsst-import-data-addon-messagewrp .jsst-import-data-addon-message{padding: 5px 10px;background: #FFF4EC;margin: 5px 0;display: inline-block;font-size: 15px;line-height: 20px;border: 1px solid #DDD;}
 @media (min-width:1750px) and (max-width:1880px){.jssupportticket-review-box-popup-content {width: 52%;}}
 @media (min-width:1650px) and (max-width:1749px){.jssupportticket-review-box-popup-content {width: 55%;}}
 @media (min-width:1500px) and (max-width:1649px){.jssupportticket-review-box-popup-content {width: 60%;}}
@@ -1969,7 +2075,18 @@ div#jsstadmin-data-wrp .jsstadmin-update-key-form .jsstadmin-update-key-wrp .jss
 	#js-support-ticket-table tr {display: block;padding: 15px;}
 	#js-support-ticket-table tbody tr td {display: block;width: 100%;text-align: left;padding: 6px 5px;border: none;}
 	#js-support-ticket-table tbody tr td::before {content: attr(data-th) ":";font-weight: bold;color: #23282d;display: inline-block;margin-right: 20px;width: auto;border: none;}
-	
+
+	/*import data tables */
+	#jsst-import-data-result-table .w60 {width: auto;}
+	#jsst-import-data-result-table .w70 {width: auto;}
+	#jsst-import-data-result-table {border-spacing: 0 6px;}
+	#jsst-import-data-result-table thead tr {display: none;}
+	#jsst-import-data-result-table tr {display: block;border: 1px solid #dedede;margin-bottom: 30px;}
+	#jsst-import-data-result-table tbody tr td:first-child{background-color: #000;color: #fff;}
+	#jsst-import-data-result-table tbody tr td {display: flex;gap: 10px; width: 100%;text-align: start;border: none;}
+	#jsst-import-data-result-table tbody tr td::before {content: attr(data-th) ":";font-weight: bold;color: #23282d;display: inline-block;width: auto;border: none;}
+	#jsst-import-data-result-table tbody tr td:first-child::before {color: #fff;}
+
 	/* feedbacks */
 	.jsst-feedback-det-wrp div.js-ticket-wrapper div.js-ticket-toparea div.js-ticket-data div.js-ticket-left div.js-ticket-data-row div.js-ticket-data-row-rec {width: 100%;margin: 0 0 10px;}
 
@@ -2169,6 +2286,9 @@ div#jsstadmin-data-wrp .jsstadmin-update-key-form .jsstadmin-update-key-wrp .jss
 	div#jsstadmin-data-wrp .jsstadmin-update-key-form .jsstadmin-update-key-wrp .jsstadmin-update-key-slctall-addonswrp{flex-wrap: wrap;}
 	div#jsstadmin-data-wrp .jsstadmin-update-key-form .jsstadmin-update-key-wrp .jsstadmin-update-key-slctall-addonswrp .jsstadmin-update-key-slctall-addon-checkbox-wrp{margin-left: unset;}
 	div#jsstadmin-data-wrp .jsstadmin-update-key-form .jsstadmin-update-key-wrp .jsstadmin-update-key-section input{width: 95%;}
+	/* AI Powered Response */
+	.js-ticket-ai-powered-reply-wrapper {justify-content: center !important;}
+	.js-ticket-ai-powered-reply-content {text-align: center;}
 }
 @media (max-width: 480px){
 	/*review*/
@@ -2274,6 +2394,10 @@ div#jsstadmin-data-wrp .jsstadmin-update-key-form .jsstadmin-update-key-wrp .jss
 	/* update key */
 	div#jsstadmin-data-wrp .jsstadmin-update-key-form .jsstadmin-update-key-wrp .jsstadmin-update-key-section input{width: 100%;}
 	div#jsstadmin-data-wrp .jsstadmin-update-key-form .jsstadmin-update-key-wrp .jsstadmin-update-key-section{padding: 10px;}
+
+	/* AI Powered Reply	*/
+	.js-ticket-matching-tickets-section .js-ticket-section-heading {max-width: 100%;}
+	.js-ticket-filter-group {margin-left: 0;}
 
 }
 

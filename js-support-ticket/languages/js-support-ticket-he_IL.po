@@ -7925,3 +7925,168 @@ msgstr "Addon (S) המותקנים בהצלחה!"
 
 msgid "Addon(s) Installation Failed"
 msgstr "התקנת Addon (S) נכשלה"
+
+msgid "Your JS Support Ticket license key has expired or is invalid. Please update it to continue receiving support and updates."
+msgstr "מפתח רישיון הכרטיסים לתמיכה ב- JS פג או אינו חוקי. אנא עדכן אותו כדי להמשיך לקבל תמיכה ועדכונים."
+
+msgid "Import Data"
+msgstr "יבוא נתונים"
+
+msgid "No Addon Installed!"
+msgstr "לא הותקן Addon!"
+
+msgid "Add-Ons"
+msgstr "תוספות"
+
+msgid "Copied to clipboard!"
+msgstr "הועתק ללוח!"
+
+msgid "Failed to copy!"
+msgstr "העתקה נכשלה!"
+
+msgid "Failed to copy to clipboard. Please copy manually."
+msgstr "העתקה נכשלה ללוח. אנא העתק ידנית."
+
+msgid "Reply content appended!"
+msgstr "תגובה תוכן צורך!"
+
+msgid "No ticket selected!"
+msgstr "לא נבחר כרטיס!"
+
+msgid "Error fetching replies."
+msgstr "שגיאה בתגובות בהשגת תשובות."
+
+msgid "Failed to fetch replies. Please try again."
+msgstr "לא הצליח להשיג תשובות. אנא נסה שוב."
+
+msgid "Error fetching matching tickets:"
+msgstr "שגיאה בהשגת כרטיסים תואמים:"
+
+msgid "Error fetching replies:"
+msgstr "שגיאה בתגובה של תשובות:"
+
+msgid "No matching tickets found."
+msgstr "לא נמצאו כרטיסים תואמים."
+
+msgid "Ticket ID:"
+msgstr "מזהה כרטיס:"
+
+msgid "Replies for:"
+msgstr "עונות עבור:"
+
+msgid "No replies found for this ticket."
+msgstr "לא נמצאו תשובות לכרטיס זה."
+
+msgid "N/A"
+msgstr "N/a"
+
+msgid "No content"
+msgstr "אין תוכן"
+
+msgid "No date"
+msgstr "אין תאריך"
+
+msgid "Reply By:"
+msgstr "תגובה מאת:"
+
+msgid "AI-Powered Reply Mode"
+msgstr "מצב תשובה המופעל על ידי AI"
+
+msgid "Control how this individual reply influences the AI search and response generation process for future queries."
+msgstr "לשלוט כיצד תשובה אינדיבידואלית זו משפיעה על תהליך יצירת החיפוש ותגובה של AI עבור שאילתות עתידיות."
+
+msgid "Default: reply included in all AI search queries."
+msgstr "ברירת מחדל: תשובה כלולה בכל שאילתות חיפוש AI."
+
+msgid "Enable: reply used in AI queries only when the Enable Tickets filter is active."
+msgstr "אפשר: תשובה המשמשת בשאילתות AI רק כאשר מסנן הכרטיסים לאפשר פעיל."
+
+msgid "Enable"
+msgstr "לְאַפשֵׁר"
+
+msgid "Disable: reply excluded from AI queries."
+msgstr "השבת: תשובה לא נכללת בשאילתות AI."
+
+msgid "Disable"
+msgstr "השבתת"
+
+msgid "AI Icon"
+msgstr "אייקון AI"
+
+msgid "AI-Powered Reply"
+msgstr "תשובה המופעלת על ידי AI"
+
+msgid "Get context-based suggestions to effortlessly create clear and relevant replies."
+msgstr "קבל הצעות מבוססות הקשר ליצירת תשובות ברורות ורלוונטיות ללא מאמץ."
+
+msgid "Generate AI Response"
+msgstr "ליצור תגובה AI"
+
+msgid "Matching Tickets"
+msgstr "כרטיסים תואמים"
+
+msgid "Filter"
+msgstr "לְסַנֵן"
+
+msgid "Enable Tickets"
+msgstr "אפשר כרטיסים"
+
+msgid "All Replies"
+msgstr "כל התשובות"
+
+msgid "Enable Replies"
+msgstr "אפשר תשובות"
+
+msgid "Control how this ticket and its replies influence AI search and response generation for future queries."
+msgstr "שלוט כיצד כרטיס זה ותשובותיו משפיעות על חיפוש AI ותגובה על שאילתות עתידיות."
+
+msgid "Default: ticket and replies included in all AI queries."
+msgstr "ברירת מחדל: כרטיס ותשובות כלולים בכל שאילתות ה- AI."
+
+msgid "Enable: ticket and replies used only when the “Enable Tickets” filter is active."
+msgstr "אפשר: כרטיס ותשובות המשמשים רק כאשר פילטר \"אפשר כרטיסים\" פעיל."
+
+msgid "Disable: ticket and replies excluded from AI queries."
+msgstr "השבת: כרטיס ותשובות שלא נכללו בשאילתות AI."
+
+msgid "Get context-aware suggestions for your response."
+msgstr "קבל הצעות מודעות להקשר לתגובתך."
+
+msgid "Ticket ID is required."
+msgstr "יש צורך במזהה כרטיס."
+
+msgid "Ticket not found."
+msgstr "כרטיס לא נמצא."
+
+msgid "Database error occurred."
+msgstr "שגיאת מסד נתונים אירעה."
+
+msgid "AI Reply Section"
+msgstr "קטע תגובה AI"
+
+msgid "Get AI-powered, context-based suggestions to effortlessly create clear, relevant, and helpful replies."
+msgstr "קבל הצעות המופעלות על ידי AI, מבוססות הקשר ליצירת תשובות ברורות, רלוונטיות ומועילות ללא מאמץ."
+
+msgid "Change Ticket Status"
+msgstr "שנה את סטטוס הכרטיס"
+
+msgid "Use AI Powered Reply Feature"
+msgstr "השתמש בתכונת תגובה מופעלת על ידי AI"
+
+msgid "Set AI Reply Mode for Ticket"
+msgstr "הגדר את מצב התשובה של AI לכרטיס"
+
+msgid "Set AI Reply Mode for Reply"
+msgstr "הגדר את מצב תגובה AI לתשובה"
+
+msgid "Limit AI Replies to Agent-Assigned Tickets"
+msgstr "הגבלת תשובות AI לכרטיסים המוכרים על סוכן"
+
+msgid "Suggested Response"
+msgstr "תגובה מוצעת"
+
+msgid "Show User Avatar"
+msgstr "הצג את אווטאר המשתמש"
+
+msgid "Showing avatars may slightly slow down page loading"
+msgstr "הצגת אווטרים עשויה להאט מעט את טעינת העמוד"

@@ -38,7 +38,7 @@ $jssupportticket_js ='
             var anchor = jQuery(this);
             jQuery(anchor).click(function (e) {
                 var id = jQuery(this).attr("data-id");
-                var name = jQuery(this).html();
+                var name = jQuery(this).attr("data-username");
                 var email = jQuery(this).attr("data-email");
                 var displayname = jQuery(this).attr("data-name");
                 jQuery("input#username-text").val(name);

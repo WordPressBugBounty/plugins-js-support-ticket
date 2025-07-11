@@ -2177,11 +2177,11 @@ msgid "Select Page"
 msgstr "Sayfa Seçin"
 
 msgid ""
-"Select JS Help Desk default page, on the action system, will redirect on the selected page. If not select the default page, email "
-"links, and support icon might not work."
+"Select JS Help Desk default page, on the action system, will redirect on the selected page. If not select the default page, email links, "
+"and support icon might not work."
 msgstr ""
-"JS Help Desk varsayılan sayfasını seçin. İşlem yapılırken sistem bu seçilmiş sayfaya yönlendirilir. Varsayılan sayfa belirtilmemiş "
-"ise e-posta bağlantıları ve destek simgesi çalışmayabilir."
+"JS Help Desk varsayılan sayfasını seçin. İşlem yapılırken sistem bu seçilmiş sayfaya yönlendirilir. Varsayılan sayfa belirtilmemiş ise e-"
+"posta bağlantıları ve destek simgesi çalışmayabilir."
 
 msgid "Support Icon"
 msgstr "Destek Simgesi"
@@ -2550,8 +2550,7 @@ msgid "Firebase Notifications"
 msgstr "Firebase Bildirimleri"
 
 msgid "JS Help Desk Desktop Notifications plugin is not installed. Please install the plugin to enable desktop notifications"
-msgstr ""
-"JS Yardım Masası Masaüstü Bildirimleri eklentisi yüklü değil. Masaüstü bildirimlerini etkinleştirmek için lütfen eklentiyi yükleyin"
+msgstr "JS Yardım Masası Masaüstü Bildirimleri eklentisi yüklü değil. Masaüstü bildirimlerini etkinleştirmek için lütfen eklentiyi yükleyin"
 
 msgid "Click here to insert Install."
 msgstr "Yükle'yi eklemek için buraya tıklayın."
@@ -3272,23 +3271,21 @@ msgstr "Merge Biletleri"
 
 msgid "Enables agents to merge two tickets of the same user into one instead of dealing with the same issue on many tickets."
 msgstr ""
-"Temsilcilerin, aynı biletle birçok bilette aynı sorunu ele almak yerine aynı kullanıcının iki biletini tek bir seferde "
-"birleştirmesini sağlar."
+"Temsilcilerin, aynı biletle birçok bilette aynı sorunu ele almak yerine aynı kullanıcının iki biletini tek bir seferde birleştirmesini "
+"sağlar."
 
-msgid ""
-"Defines rules or set specific intervals of time to make ticket auto overdue.The ticket can overdue by type or overdue by Cronjob."
+msgid "Defines rules or set specific intervals of time to make ticket auto overdue.The ticket can overdue by type or overdue by Cronjob."
 msgstr ""
-"Bilet otomatik gecikme yapmak için kuralları tanımlar veya belirli zaman aralıkları ayarlar. Bilet, Cronjob tarafından türe veya "
-"vadesi geçmiş gecikebilir."
+"Bilet otomatik gecikme yapmak için kuralları tanımlar veya belirli zaman aralıkları ayarlar. Bilet, Cronjob tarafından türe veya vadesi "
+"geçmiş gecikebilir."
 
 msgid "SMTP enables you to add custom mail protocol to send and receive emails within the js help desk."
 msgstr "SMTP, js yardım masasında e-posta göndermek ve almak için özel posta protokolü eklemenizi sağlar."
 
-msgid ""
-"Displays complete ticket history along with the ticket status, currently assigned user and other actions performed on each ticket."
+msgid "Displays complete ticket history along with the ticket status, currently assigned user and other actions performed on each ticket."
 msgstr ""
-"Bilet durumu, geçerli olarak atanmış kullanıcı ve her bir bilet üzerinde gerçekleştirilen diğer işlemler ile birlikte bilet "
-"tarihinin tamamını görüntüler."
+"Bilet durumu, geçerli olarak atanmış kullanıcı ve her bir bilet üzerinde gerçekleştirilen diğer işlemler ile birlikte bilet tarihinin "
+"tamamını görüntüler."
 
 msgid "Pre-populated messages allow support agents to respond quickly."
 msgstr "Önceden doldurulmuş mesajlar destek temsilcilerinin hızlı yanıt vermesine olanak tanır."
@@ -3761,9 +3758,9 @@ msgid "Wordpress Plugin"
 msgstr "Wordpress Eklentisi"
 
 msgid ""
-"JS Help Desk is a trusted open source ticket system. JS Help Desk is a simple, easy to use, web-based customer support system. Users "
-"can create a ticket from the front-end. JS Help Desk comes packed with lot features than most of the expensive(and complex) support "
-"ticket system on the market. The best part is, It completely free."
+"JS Help Desk is a trusted open source ticket system. JS Help Desk is a simple, easy to use, web-based customer support system. Users can "
+"create a ticket from the front-end. JS Help Desk comes packed with lot features than most of the expensive(and complex) support ticket "
+"system on the market. The best part is, It completely free."
 msgstr ""
 "JS Yardım Masası güvenilir bir açık kaynak kodlu bilet sistemidir. JS Yardım Masası basit, kullanımı kolay, web tabanlı bir müşteri "
 "destek sistemidir. Kullanıcılar ön uçtan bir bilet oluşturabilir. JS Yardım Masası, piyasadaki pahalı (ve karmaşık) destek bilet "
@@ -6335,8 +6332,8 @@ msgstr "Müşteri destek bildirimlerine yardım ve destek sağlamak için aracı
 
 msgid "Define rules for ticket to auto close. Ticket will be auto close after specific interval of time which can be set by admin."
 msgstr ""
-"Biletin otomatik olarak kapanmasına ilişkin kuralları tanımlayın. Bilet, yönetici tarafından ayarlanabilen belirli bir zaman "
-"aralığından sonra otomatik olarak kapanacaktır."
+"Biletin otomatik olarak kapanmasına ilişkin kuralları tanımlayın. Bilet, yönetici tarafından ayarlanabilen belirli bir zaman aralığından "
+"sonra otomatik olarak kapanacaktır."
 
 msgid "Get the survey from your customers on ticket closing to improve your quality of services and assistance."
 msgstr "Hizmet ve yardım kalitenizi artırmak için müşterilerinizden bilet kapanışıyla ilgili anket alın."
@@ -6349,8 +6346,7 @@ msgstr "Yardım konuları, kullanıcıların yardıma ihtiyaç duydukları alan�
 
 msgid "The private note is used as reminders or to give other agents insights into the ticket issue. User Won't see the private notes."
 msgstr ""
-"Özel not, hatırlatma olarak veya diğer temsilcilere bilet sorunuyla ilgili bilgi vermek için kullanılır. Kullanıcı özel notları "
-"görmez."
+"Özel not, hatırlatma olarak veya diğer temsilcilere bilet sorunuyla ilgili bilgi vermek için kullanılır. Kullanıcı özel notları görmez."
 
 msgid "Stop losing productivity on repetitive queries,Build your knowledge base, group solutions by topics to facilitate users."
 msgstr ""
@@ -6372,8 +6368,7 @@ msgid "Canned Responses are pre-populated messages that allows support agents to
 msgstr "Hazır Yanıtlar, destek temsilcilerinin müşteri sorunlarına hızla yanıt vermesini sağlayan önceden doldurulmuş mesajlardır."
 
 msgid "Enables users to reply to the tickets via email without the need to login to the support system first."
-msgstr ""
-"Kullanıcıların önce destek sistemine giriş yapmasına gerek kalmadan destek bildirimlerine e-posta yoluyla yanıt vermesini sağlar."
+msgstr "Kullanıcıların önce destek sistemine giriş yapmasına gerek kalmadan destek bildirimlerine e-posta yoluyla yanıt vermesini sağlar."
 
 msgid "Make unlimited announcements associated with support system to get customer interaction."
 msgstr "Müşteri etkileşimini sağlamak için destek sistemiyle ilgili sınırsız duyuru yapın."
@@ -6409,13 +6404,11 @@ msgid "Mail Chimp"
 msgstr "Posta şempanzesi"
 
 msgid "The Mail Chimp add-on adds a new checkbox to the registration form for prompting new users to subscribe your email-list."
-msgstr ""
-"Mail Chimp eklentisi, yeni kullanıcıları e-posta listenize abone olmaya teşvik etmek için kayıt formuna yeni bir onay kutusu ekler."
+msgstr "Mail Chimp eklentisi, yeni kullanıcıları e-posta listenize abone olmaya teşvik etmek için kayıt formuna yeni bir onay kutusu ekler."
 
 msgid "EDD offers customers to open new tickets just one click from their EDD account with optionally validating the license keys."
 msgstr ""
-"EDD, isteğe bağlı olarak lisans anahtarlarını doğrulayarak müşterilere EDD hesaplarından tek tıklamayla yeni bilet açma olanağı "
-"sunar."
+"EDD, isteğe bağlı olarak lisans anahtarlarını doğrulayarak müşterilere EDD hesaplarından tek tıklamayla yeni bilet açma olanağı sunar."
 
 msgid "email cc"
 msgstr "e-posta bilgisi"
@@ -6424,8 +6417,8 @@ msgid "Email Cc"
 msgstr "E-posta Bilgisi"
 
 msgid ""
-"CC(Carbon Copy) - the people who should know about the information which is being shared and the people included are able to see who "
-"is there in the list."
+"CC(Carbon Copy) - the people who should know about the information which is being shared and the people included are able to see who is "
+"there in the list."
 msgstr ""
 "CC(Karbon Kopya) - Paylaşılan bilgilerden haberdar olması gereken kişiler ve listede yer alan kişiler listede kimlerin bulunduğunu "
 "görebilir."
@@ -6440,8 +6433,8 @@ msgid "agent auto assign"
 msgstr "temsilci otomatik atama"
 
 msgid ""
-"When auto assignment is enabled and a ticket is created, an appropriate agent is automatically assigned to the ticket and it is "
-"moved to the Assigned state."
+"When auto assignment is enabled and a ticket is created, an appropriate agent is automatically assigned to the ticket and it is moved to "
+"the Assigned state."
 msgstr ""
 "Otomatik atama etkinleştirildiğinde ve bir bilet oluşturulduğunda, uygun bir aracı otomatik olarak bilete atanır ve Atandı durumuna "
 "taşınır."
@@ -6451,8 +6444,7 @@ msgstr "Sosyal Giriş"
 
 msgid "Users can login from their social media accounts. They can create a new account or use social media accounts."
 msgstr ""
-"Kullanıcılar sosyal medya hesaplarından giriş yapabilirler. Yeni bir hesap oluşturabilir veya sosyal medya hesaplarını "
-"kullanabilirler."
+"Kullanıcılar sosyal medya hesaplarından giriş yapabilirler. Yeni bir hesap oluşturabilir veya sosyal medya hesaplarını kullanabilirler."
 
 msgid "JS Help Desk Add-Ons Bundle Pack"
 msgstr "JS Yardım Masası Eklenti Paketi Paketi"
@@ -6479,11 +6471,10 @@ msgid "All Future Addons"
 msgstr "Gelecekteki Tüm Eklentiler"
 
 msgid ""
-"Hey there! We have recently launched a fresh update for the add-ons. Don't forget to update the add-ons to enjoy the greatest "
-"features!"
+"Hey there! We have recently launched a fresh update for the add-ons. Don't forget to update the add-ons to enjoy the greatest features!"
 msgstr ""
-"Selam! Yakın zamanda eklentiler için yeni bir güncelleme başlattık. En harika özelliklerin keyfini çıkarmak için eklentileri "
-"güncellemeyi unutmayın!"
+"Selam! Yakın zamanda eklentiler için yeni bir güncelleme başlattık. En harika özelliklerin keyfini çıkarmak için eklentileri güncellemeyi "
+"unutmayın!"
 
 msgid "View Addone Status"
 msgstr "Eklenme Durumunu Görüntüle"
@@ -6748,8 +6739,7 @@ msgstr "Bilet Yanıtında Yönetici VEYA Temsilci E-postasını Göster"
 
 msgid "Show or hide the multiform popup when creating a new ticket. if you hide them, the system will open the default form."
 msgstr ""
-"Yeni bir bilet oluştururken çok biçimli açılır pencereyi gösterin veya gizleyin. bunları gizlerseniz sistem varsayılan formu "
-"açacaktır."
+"Yeni bir bilet oluştururken çok biçimli açılır pencereyi gösterin veya gizleyin. bunları gizlerseniz sistem varsayılan formu açacaktır."
 
 msgid "Multiforms Popup For New Tickets"
 msgstr "Yeni Biletler İçin Multiforms Açılır Penceresi"
@@ -7082,8 +7072,8 @@ msgid "Edit Help Topic"
 msgstr "Yardım Konusunu Düzenle"
 
 msgid ""
-"e.g ' I have read and agree to the [link] Terms and Conditions[/link].  ' The text between [link] and [/link] will be linked to "
-"provided url or wordpress page."
+"e.g ' I have read and agree to the [link] Terms and Conditions[/link].  ' The text between [link] and [/link] will be linked to provided "
+"url or wordpress page."
 msgstr ""
 "örneğin '[link]Şartlar ve Koşullar[/link]'ı okudum ve kabul ediyorum. ' [link] ve [/link] arasındaki metin, sağlanan URL'ye veya "
 "wordpress sayfasına bağlanacaktır."
@@ -7990,3 +7980,168 @@ msgstr "Eklenti (ler) başarıyla yüklendi!"
 
 msgid "Addon(s) Installation Failed"
 msgstr "Eklenti (ler) kurulumu başarısız oldu"
+
+msgid "Your JS Support Ticket license key has expired or is invalid. Please update it to continue receiving support and updates."
+msgstr "JS Destek Bilet Lisansı Anahtarınız süresi doldu veya geçersiz. Destek ve güncellemeler almaya devam etmek için lütfen güncelleyin."
+
+msgid "Import Data"
+msgstr "Verileri İçe Aktar"
+
+msgid "No Addon Installed!"
+msgstr "Eklenti yok!"
+
+msgid "Add-Ons"
+msgstr "Eklentiler"
+
+msgid "Copied to clipboard!"
+msgstr "Panoya kopyalandı!"
+
+msgid "Failed to copy!"
+msgstr "Kopyalamadı!"
+
+msgid "Failed to copy to clipboard. Please copy manually."
+msgstr "Panoya kopyalayamadı. Lütfen manuel olarak kopyalayın."
+
+msgid "Reply content appended!"
+msgstr "Cevapla İçerik Eklendi!"
+
+msgid "No ticket selected!"
+msgstr "Bilet seçilmedi!"
+
+msgid "Error fetching replies."
+msgstr "Hata getirme yanıtları."
+
+msgid "Failed to fetch replies. Please try again."
+msgstr "Cevaplar getirilemedi. Lütfen tekrar deneyin."
+
+msgid "Error fetching matching tickets:"
+msgstr "Eşleşen biletleri getirme hatası:"
+
+msgid "Error fetching replies:"
+msgstr "Hata getirme yanıtları:"
+
+msgid "No matching tickets found."
+msgstr "Eşleşen bilet bulunamadı."
+
+msgid "Ticket ID:"
+msgstr "Bilet Kimliği:"
+
+msgid "Replies for:"
+msgstr "İçin yanıtlar:"
+
+msgid "No replies found for this ticket."
+msgstr "Bu bilet için cevap bulunamadı."
+
+msgid "N/A"
+msgstr "N/A"
+
+msgid "No content"
+msgstr "İçerik yok"
+
+msgid "No date"
+msgstr "Tarih yok"
+
+msgid "Reply By:"
+msgstr "Cevap:"
+
+msgid "AI-Powered Reply Mode"
+msgstr "AI ile çalışan cevap modu"
+
+msgid "Control how this individual reply influences the AI search and response generation process for future queries."
+msgstr "Bu bireysel cevabın gelecekteki sorgular için AI arama ve yanıt oluşturma sürecini nasıl etkilediğini kontrol edin."
+
+msgid "Default: reply included in all AI search queries."
+msgstr "Varsayılan: Tüm AI arama sorgularında yanıt."
+
+msgid "Enable: reply used in AI queries only when the Enable Tickets filter is active."
+msgstr "Etkinleştir: Yalnızca AI sorgularında kullanılan cevap yalnızca bilet filtresi etkin olduğunda."
+
+msgid "Enable"
+msgstr "Olanak vermek"
+
+msgid "Disable: reply excluded from AI queries."
+msgstr "Devre dışı bırak: AI sorgularından hariç tutuldu."
+
+msgid "Disable"
+msgstr "Devre dışı bırakmak"
+
+msgid "AI Icon"
+msgstr "AI simgesi"
+
+msgid "AI-Powered Reply"
+msgstr "AI ile çalışan cevap"
+
+msgid "Get context-based suggestions to effortlessly create clear and relevant replies."
+msgstr "Net ve alakalı yanıtlar yaratmak için bağlama dayalı öneriler alın."
+
+msgid "Generate AI Response"
+msgstr "AI yanıtı oluşturun"
+
+msgid "Matching Tickets"
+msgstr "Eşleşen Biletler"
+
+msgid "Filter"
+msgstr "Filtre"
+
+msgid "Enable Tickets"
+msgstr "Biletleri Etkinleştir"
+
+msgid "All Replies"
+msgstr "Tüm yanıtlar"
+
+msgid "Enable Replies"
+msgstr "Cevapları Etkinleştir"
+
+msgid "Control how this ticket and its replies influence AI search and response generation for future queries."
+msgstr "Bu biletin ve yanıtlarının gelecekteki sorgular için AI arama ve yanıt üretimini nasıl etkilediğini kontrol edin."
+
+msgid "Default: ticket and replies included in all AI queries."
+msgstr "Varsayılan: Tüm AI sorgularında bulunan bilet ve yanıtlar."
+
+msgid "Enable: ticket and replies used only when the “Enable Tickets” filter is active."
+msgstr "Etkinleştir: Bilet ve Yalnızca “Biletleri Etkinleştir” filtresi etkin olduğunda kullanılan yanıtlar."
+
+msgid "Disable: ticket and replies excluded from AI queries."
+msgstr "Devre Dışı Bırak: Bilet ve Yanıtlar AI sorgularından hariç tutulur."
+
+msgid "Get context-aware suggestions for your response."
+msgstr "Cevabınız için içeriğe duyarlı öneriler alın."
+
+msgid "Ticket ID is required."
+msgstr "Bilet kimliği gereklidir."
+
+msgid "Ticket not found."
+msgstr "Bilet bulunamadı."
+
+msgid "Database error occurred."
+msgstr "Veritabanı hatası oluştu."
+
+msgid "AI Reply Section"
+msgstr "AI Cevap Bölümü"
+
+msgid "Get AI-powered, context-based suggestions to effortlessly create clear, relevant, and helpful replies."
+msgstr "Zahmetsizce net, alakalı ve yararlı yanıtlar yaratmak için yapay zeka destekli, bağlam tabanlı öneriler alın."
+
+msgid "Change Ticket Status"
+msgstr "Bilet Durumunu Değiştir"
+
+msgid "Use AI Powered Reply Feature"
+msgstr "AI Powered Cevap Özelliği kullanın"
+
+msgid "Set AI Reply Mode for Ticket"
+msgstr "Bilet için AI Yanıt Modu ayarlayın"
+
+msgid "Set AI Reply Mode for Reply"
+msgstr "Cevap için AI Yanıt Modu ayarlayın"
+
+msgid "Limit AI Replies to Agent-Assigned Tickets"
+msgstr "AI yanıtlarını ajan tarafından atanan biletlerle sınırlayın"
+
+msgid "Suggested Response"
+msgstr "Önerilen yanıt"
+
+msgid "Show User Avatar"
+msgstr "Kullanıcı Avatarını Göster"
+
+msgid "Showing avatars may slightly slow down page loading"
+msgstr "Avatarları göstermek sayfa yüklemesini biraz yavaşlatabilir"

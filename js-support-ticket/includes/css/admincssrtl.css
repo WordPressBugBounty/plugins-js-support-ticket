@@ -339,6 +339,12 @@ button.jssupportticket-close-review-box-popup, .jssupportticket-thanks-box-popup
 .js-admin-theme-page div.js-ticket-wrapper div.js-ticket-data span.js-ticket-status img.ticketstatusimage.one{margin-left: 62px;}
 /* update key */
 div#jsstadmin-data-wrp .jsstadmin-update-key-form .jsstadmin-update-key-wrp .jsstadmin-update-key-slctall-addonswrp .jsstadmin-update-key-slctall-addon-checkbox-wrp{margin-left: 0;margin-right: auto;}
+/* AI reply*/
+.js-ticket-ai-powered-reply-wrapper{border: 1px solid #e0e0e0;border-right: 5px solid #4CAF50}
+.js-ticket-filter-group {margin-left: 5px;margin-right: auto;}
+.js-ticket-list {text-align: right;}
+.js-ticket-filter-select {background-position: left 10px center;}
+.js-ticket-ai-powered-reply-content {text-align: right;}
 
 
 @media (max-width: 1280px){

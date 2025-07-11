@@ -7963,3 +7963,168 @@ msgstr "Addon (بازدید کنندگان) با موفقیت نصب شد!"
 
 msgid "Addon(s) Installation Failed"
 msgstr "نصب افزودنی (ها) انجام نشد"
+
+msgid "Your JS Support Ticket license key has expired or is invalid. Please update it to continue receiving support and updates."
+msgstr "کلید مجوز بلیط پشتیبانی JS شما منقضی شده یا نامعتبر است. لطفاً آن را برای ادامه پشتیبانی و به روزرسانی ها به روز کنید."
+
+msgid "Import Data"
+msgstr "داده های واردات"
+
+msgid "No Addon Installed!"
+msgstr "بدون افزودن نصب نشده!"
+
+msgid "Add-Ons"
+msgstr "افزودنی"
+
+msgid "Copied to clipboard!"
+msgstr "کپی شده در کلیپ بورد!"
+
+msgid "Failed to copy!"
+msgstr "کپی نشد!"
+
+msgid "Failed to copy to clipboard. Please copy manually."
+msgstr "کپی در کلیپ بورد انجام نشد. لطفا به صورت دستی کپی کنید."
+
+msgid "Reply content appended!"
+msgstr "پاسخ به محتوای ضمیمه!"
+
+msgid "No ticket selected!"
+msgstr "بدون بلیط انتخاب نشده!"
+
+msgid "Error fetching replies."
+msgstr "پاسخ های خطای واکشی."
+
+msgid "Failed to fetch replies. Please try again."
+msgstr "پاسخ های واکشی انجام نشد. لطفا دوباره امتحان کنید"
+
+msgid "Error fetching matching tickets:"
+msgstr "خطای واکشی بلیط های تطبیق:"
+
+msgid "Error fetching replies:"
+msgstr "خطای واکشی پاسخ می دهد:"
+
+msgid "No matching tickets found."
+msgstr "بلیط تطبیق یافت نشده است."
+
+msgid "Ticket ID:"
+msgstr "شناسه بلیط:"
+
+msgid "Replies for:"
+msgstr "پاسخ برای:"
+
+msgid "No replies found for this ticket."
+msgstr "هیچ پاسخی برای این بلیط پیدا نشده است."
+
+msgid "N/A"
+msgstr "n/a"
+
+msgid "No content"
+msgstr "بدون محتوا"
+
+msgid "No date"
+msgstr "بدون تاریخ"
+
+msgid "Reply By:"
+msgstr "پاسخ توسط:"
+
+msgid "AI-Powered Reply Mode"
+msgstr "حالت پاسخ AI"
+
+msgid "Control how this individual reply influences the AI search and response generation process for future queries."
+msgstr "کنترل چگونگی تأثیر این پاسخ فردی بر فرآیند جستجوی هوش مصنوعی و پاسخ برای نمایش داده های آینده."
+
+msgid "Default: reply included in all AI search queries."
+msgstr "پیش فرض: پاسخ در کلیه نمایش داده های جستجوی AI."
+
+msgid "Enable: reply used in AI queries only when the Enable Tickets filter is active."
+msgstr "فعال کردن: پاسخ استفاده شده در نمایش داده های AI فقط در صورت فعال بودن فیلتر بلیط فعال."
+
+msgid "Enable"
+msgstr "فعال کردن"
+
+msgid "Disable: reply excluded from AI queries."
+msgstr "غیرفعال کردن: پاسخ حذف شده از نمایش داده های AI."
+
+msgid "Disable"
+msgstr "غیرفعال کردن"
+
+msgid "AI Icon"
+msgstr "نماد هوش مصنوعی"
+
+msgid "AI-Powered Reply"
+msgstr "پاسخ AI"
+
+msgid "Get context-based suggestions to effortlessly create clear and relevant replies."
+msgstr "پیشنهادات مبتنی بر زمینه را برای ایجاد پاسخ های روشن و مرتبط با آن دریافت کنید."
+
+msgid "Generate AI Response"
+msgstr "پاسخ AI را ایجاد کنید"
+
+msgid "Matching Tickets"
+msgstr "تطبیق بلیط"
+
+msgid "Filter"
+msgstr "فیلتر کردن"
+
+msgid "Enable Tickets"
+msgstr "بلیط ها را فعال کنید"
+
+msgid "All Replies"
+msgstr "همه پاسخ ها"
+
+msgid "Enable Replies"
+msgstr "پاسخ ها را فعال کنید"
+
+msgid "Control how this ticket and its replies influence AI search and response generation for future queries."
+msgstr "کنترل چگونگی تأثیر این بلیط و پاسخ های آن بر تولید هوش مصنوعی و تولید پاسخ برای نمایش داده های آینده."
+
+msgid "Default: ticket and replies included in all AI queries."
+msgstr "پیش فرض: بلیط و پاسخ های موجود در تمام نمایش داده های هوش مصنوعی."
+
+msgid "Enable: ticket and replies used only when the “Enable Tickets” filter is active."
+msgstr "Enable: بلیط و پاسخ فقط در هنگام فعال بودن فیلتر \"فعال کردن بلیط\" استفاده می شود."
+
+msgid "Disable: ticket and replies excluded from AI queries."
+msgstr "غیرفعال کردن: بلیط و پاسخ های مستثنی از نمایش داده های هوش مصنوعی."
+
+msgid "Get context-aware suggestions for your response."
+msgstr "پیشنهادات آگاهانه زمینه را برای پاسخ خود دریافت کنید."
+
+msgid "Ticket ID is required."
+msgstr "شناسه بلیط مورد نیاز است."
+
+msgid "Ticket not found."
+msgstr "بلیط یافت نشد"
+
+msgid "Database error occurred."
+msgstr "خطای بانک اطلاعاتی رخ داده است."
+
+msgid "AI Reply Section"
+msgstr "بخش پاسخ AI"
+
+msgid "Get AI-powered, context-based suggestions to effortlessly create clear, relevant, and helpful replies."
+msgstr "پیشنهادات مبتنی بر زمینه AI را برای ایجاد پاسخ های بدون دردسر ، مناسب ، مرتبط و مفید دریافت کنید."
+
+msgid "Change Ticket Status"
+msgstr "وضعیت بلیط را تغییر دهید"
+
+msgid "Use AI Powered Reply Feature"
+msgstr "از ویژگی پاسخ AI استفاده کنید"
+
+msgid "Set AI Reply Mode for Ticket"
+msgstr "حالت پاسخ AI را برای بلیط تنظیم کنید"
+
+msgid "Set AI Reply Mode for Reply"
+msgstr "حالت پاسخ AI را برای پاسخ تنظیم کنید"
+
+msgid "Limit AI Replies to Agent-Assigned Tickets"
+msgstr "پاسخ های AI را به بلیط های تعیین شده نماینده محدود کنید"
+
+msgid "Suggested Response"
+msgstr "پاسخ پیشنهادی"
+
+msgid "Show User Avatar"
+msgstr "نمایش آواتار کاربر"
+
+msgid "Showing avatars may slightly slow down page loading"
+msgstr "نشان دادن آواتارها ممکن است کمی کاهش سرعت صفحه را کاهش دهد"

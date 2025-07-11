@@ -1,10 +1,10 @@
-=== JS Help Desk - The Ultimate Help Desk & Support Plugin ===
+=== JS Help Desk – AI-Powered Help Desk & Support Plugin ===
 Contributors: rabilal
 Donate link: https://jshelpdesk.com/pricing/
-Tags:  helpdesk,ticket system,support,tickets,support ticket,support desk,help,paid support,knowledgebase,faq, support plugin, ticket plugin, support system, ticketing system,monitor desk, help desk, IMAP, Email Piping, agents, js support ticket
+Tags:  helpdesk,ticket system,AI support,tickets,support ticket,support desk,help,paid support,knowledgebase,faq, support plugin, ticket plugin, support system, ticketing system,monitor desk, help desk, IMAP, Email Piping, agents, js support ticket
 Requires at least: 5.5
 Tested up to: 6.8.1
-Stable tag: 2.9.7
+Stable tag: 2.9.8
 Requires PHP: 7.4
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
@@ -12,7 +12,7 @@ License URI: https://www.gnu.org/licenses/gpl-3.0.html
 Professional, beautiful, complete and more powerful help desk & support plugin for WordPress.
 
 == Description ==
-JS Help Desk is the best helpdesk and support plugin. JS Help Desk is a professional, simple, easy to use and complete customer support system. JS Help Desk comes packed with lot features than most of the expensive(and complex) support ticket system on market. The best part is, It completely free.
+JS Help Desk is a powerful, AI-enhanced helpdesk and customer support plugin for WordPress. It offers a complete, professional ticketing system with features like front-end ticket submission, guest tickets, email notifications, and now AI-powered reply suggestions to boost response accuracy and efficiency — all 100% free.
 
 = JS Help Desk =
 * [JS Help Desk Demo](http://demo.jshelpdesk.com)  
@@ -72,6 +72,11 @@ https://youtu.be/HxSBUoMSKs8
 	-Get a summary of tickets by priorities
 	-Get a summary of tickets by departments
 	-Get a summary of tickets created by channel
+- **AI-Powered Reply Suggestions**: JS Help Desk now comes with built-in AI capabilities. With AI-Powered Reply Suggestions, agents can generate smart, context-aware responses based on the ticket's content — helping them respond faster, reduce repetition, and improve response quality..
+	-Automatically suggests relevant replies based on ticket history and content
+	-Optional filters for including/excluding specific replies or tickets
+	-Saves time and boosts agent productivity
+	-Available in the free version with upgrade options for deeper customization
 
 
 == Premium Add-Ons ==
@@ -242,6 +247,11 @@ Automatic updates should work like a charm; as always though, ensure you backup 
 21. Internal Mails
 
 == Changelog ==
+= 2.9.8 =
+* Introduced AI-Powered reply suggestions
+* Added SupportCandy import functionality
+* Added configuration base user avatar
+
 = 2.9.7 =
 * Addons auto update functionality added
 * Key update functionality added

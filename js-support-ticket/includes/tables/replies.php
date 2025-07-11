@@ -17,6 +17,7 @@ class JSSTrepliesTable extends JSSTtable {
 	public $ticketviaemail = '';
 	public $viewed_by = '';
 	public $viewed_on = '';
+	public $aireplymode = '';
 
 	function __construct() {
 		parent::__construct('replies', 'id'); // tablename, primarykey

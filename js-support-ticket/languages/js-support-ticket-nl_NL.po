@@ -7964,3 +7964,168 @@ msgstr "Addon (s) met succes geïnstalleerd!"
 
 msgid "Addon(s) Installation Failed"
 msgstr "Installatie van addon (s) is mislukt"
+
+msgid "Your JS Support Ticket license key has expired or is invalid. Please update it to continue receiving support and updates."
+msgstr "Uw JS Support Ticket License -sleutel is verlopen of is ongeldig. Werk het bij om ondersteuning en updates te blijven ontvangen."
+
+msgid "Import Data"
+msgstr "Gegevens importeren"
+
+msgid "No Addon Installed!"
+msgstr "Geen addon geïnstalleerd!"
+
+msgid "Add-Ons"
+msgstr "Add-ons"
+
+msgid "Copied to clipboard!"
+msgstr "Gekopieerd naar klembord!"
+
+msgid "Failed to copy!"
+msgstr "Kan niet kopiëren!"
+
+msgid "Failed to copy to clipboard. Please copy manually."
+msgstr "Kan niet kopiëren naar klembord. Kopieer handmatig."
+
+msgid "Reply content appended!"
+msgstr "Antwoord inhoud toegevoegd!"
+
+msgid "No ticket selected!"
+msgstr "Geen ticket geselecteerd!"
+
+msgid "Error fetching replies."
+msgstr "Fout bij het ophalen van antwoorden."
+
+msgid "Failed to fetch replies. Please try again."
+msgstr "Kan antwoorden niet ophalen. Probeer het opnieuw."
+
+msgid "Error fetching matching tickets:"
+msgstr "Fout bij het ophalen van bijpassende tickets:"
+
+msgid "Error fetching replies:"
+msgstr "Fout bij het ophalen van antwoorden:"
+
+msgid "No matching tickets found."
+msgstr "Geen bijpassende tickets gevonden."
+
+msgid "Ticket ID:"
+msgstr "Ticket -ID:"
+
+msgid "Replies for:"
+msgstr "Antwoorden voor:"
+
+msgid "No replies found for this ticket."
+msgstr "Geen antwoorden gevonden voor dit ticket."
+
+msgid "N/A"
+msgstr "Nvt"
+
+msgid "No content"
+msgstr "Geen inhoud"
+
+msgid "No date"
+msgstr "Geen datum"
+
+msgid "Reply By:"
+msgstr "Reageren door:"
+
+msgid "AI-Powered Reply Mode"
+msgstr "AI-aangedreven antwoordmodus"
+
+msgid "Control how this individual reply influences the AI search and response generation process for future queries."
+msgstr "Controleer hoe dit individuele antwoord het AI -zoek- en respons generatieproces voor toekomstige vragen beïnvloedt."
+
+msgid "Default: reply included in all AI search queries."
+msgstr "Standaard: antwoord opgenomen in alle AI -zoekopdrachten."
+
+msgid "Enable: reply used in AI queries only when the Enable Tickets filter is active."
+msgstr "Inschakelen: Antwoord alleen gebruikt in AI -query's wanneer het filter voor het inschakelen van tickets actief is."
+
+msgid "Enable"
+msgstr "Inschakelen"
+
+msgid "Disable: reply excluded from AI queries."
+msgstr "Uitschakelen: antwoord uitgesloten van AI -vragen."
+
+msgid "Disable"
+msgstr "Uitzetten"
+
+msgid "AI Icon"
+msgstr "AI -pictogram"
+
+msgid "AI-Powered Reply"
+msgstr "AI-aangedreven antwoord"
+
+msgid "Get context-based suggestions to effortlessly create clear and relevant replies."
+msgstr "Krijg contextgebaseerde suggesties om moeiteloos duidelijke en relevante antwoorden te creëren."
+
+msgid "Generate AI Response"
+msgstr "Genereer AI -reactie"
+
+msgid "Matching Tickets"
+msgstr "Bijpassende kaartjes"
+
+msgid "Filter"
+msgstr "Filter"
+
+msgid "Enable Tickets"
+msgstr "Schakel tickets in"
+
+msgid "All Replies"
+msgstr "Alle antwoorden"
+
+msgid "Enable Replies"
+msgstr "Schakel antwoorden in"
+
+msgid "Control how this ticket and its replies influence AI search and response generation for future queries."
+msgstr "Controleer hoe dit ticket en de antwoorden ervan de zoek- en responsopwekking van AI voor toekomstige vragen beïnvloeden."
+
+msgid "Default: ticket and replies included in all AI queries."
+msgstr "Standaard: ticket en antwoorden opgenomen in alle AI -vragen."
+
+msgid "Enable: ticket and replies used only when the “Enable Tickets” filter is active."
+msgstr "Inschakelen: ticket en antwoorden alleen gebruikt wanneer het filter \"Tickets inschakelen\" actief is."
+
+msgid "Disable: ticket and replies excluded from AI queries."
+msgstr "Uitschakelen: ticket en antwoorden uitgesloten van AI -vragen."
+
+msgid "Get context-aware suggestions for your response."
+msgstr "Krijg contextbewuste suggesties voor uw reactie."
+
+msgid "Ticket ID is required."
+msgstr "Ticket -ID is vereist."
+
+msgid "Ticket not found."
+msgstr "Ticket niet gevonden."
+
+msgid "Database error occurred."
+msgstr "Databasefout is opgetreden."
+
+msgid "AI Reply Section"
+msgstr "AI Antwoordsectie"
+
+msgid "Get AI-powered, context-based suggestions to effortlessly create clear, relevant, and helpful replies."
+msgstr "Krijg AI-aangedreven, contextgebaseerde suggesties om moeiteloos duidelijke, relevante en nuttige antwoorden te creëren."
+
+msgid "Change Ticket Status"
+msgstr "Wijzig de ticketstatus"
+
+msgid "Use AI Powered Reply Feature"
+msgstr "Gebruik AI aangedreven antwoordfunctie"
+
+msgid "Set AI Reply Mode for Ticket"
+msgstr "Stel de AI -antwoordmodus in voor ticket"
+
+msgid "Set AI Reply Mode for Reply"
+msgstr "Stel de AI -antwoordmodus in voor antwoord"
+
+msgid "Limit AI Replies to Agent-Assigned Tickets"
+msgstr "Beperk AI antwoorden op door agent toegewezen tickets"
+
+msgid "Suggested Response"
+msgstr "Voorgestelde reactie"
+
+msgid "Show User Avatar"
+msgstr "Toon gebruikers avatar"
+
+msgid "Showing avatars may slightly slow down page loading"
+msgstr "Het tonen van avatars kan het laden van de pagina enigszins vertragen"

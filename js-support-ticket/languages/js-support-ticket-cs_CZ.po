@@ -7982,3 +7982,168 @@ msgstr "Addon (y) nainstalované úspěšně!"
 
 msgid "Addon(s) Installation Failed"
 msgstr "Instalace dodanů selhala"
+
+msgid "Your JS Support Ticket license key has expired or is invalid. Please update it to continue receiving support and updates."
+msgstr "Váš licenční klíč JS podpory vypršel nebo je neplatný. Aktualizujte ji a pokračujte v přijímání podpory a aktualizací."
+
+msgid "Import Data"
+msgstr "Import dat"
+
+msgid "No Addon Installed!"
+msgstr "Nainstaloval se žádný doplněk!"
+
+msgid "Add-Ons"
+msgstr "Doplňky"
+
+msgid "Copied to clipboard!"
+msgstr "Zkopírováno do schránky!"
+
+msgid "Failed to copy!"
+msgstr "Nepodařilo se kopírovat!"
+
+msgid "Failed to copy to clipboard. Please copy manually."
+msgstr "Nepodařilo se zkopírovat do schránky. Zkopírujte prosím ručně."
+
+msgid "Reply content appended!"
+msgstr "Připojena obsah odpovědět!"
+
+msgid "No ticket selected!"
+msgstr "Žádná vybrána lístek!"
+
+msgid "Error fetching replies."
+msgstr "Odpovědi na načtení chyby."
+
+msgid "Failed to fetch replies. Please try again."
+msgstr "Nepodařilo se načíst odpovědi. Zkuste to prosím znovu."
+
+msgid "Error fetching matching tickets:"
+msgstr "Vstupenky na načítání chyb:"
+
+msgid "Error fetching replies:"
+msgstr "Odpovědi na načtení chyby:"
+
+msgid "No matching tickets found."
+msgstr "Nalezeny žádné odpovídající lístky."
+
+msgid "Ticket ID:"
+msgstr "ID lístku:"
+
+msgid "Replies for:"
+msgstr "Odpovědi pro:"
+
+msgid "No replies found for this ticket."
+msgstr "Pro tuto letenku nebyly nalezeny žádné odpovědi."
+
+msgid "N/A"
+msgstr "N/a"
+
+msgid "No content"
+msgstr "Žádný obsah"
+
+msgid "No date"
+msgstr "Žádné datum"
+
+msgid "Reply By:"
+msgstr "Odpovědět:"
+
+msgid "AI-Powered Reply Mode"
+msgstr "Režim odpovědi na AI"
+
+msgid "Control how this individual reply influences the AI search and response generation process for future queries."
+msgstr "Ovládejte, jak tato individuální odpověď ovlivňuje proces vyhledávání a odezvy AI pro budoucí dotazy."
+
+msgid "Default: reply included in all AI search queries."
+msgstr "Výchozí: Odpověď zahrnuta do všech dotazů na vyhledávání AI."
+
+msgid "Enable: reply used in AI queries only when the Enable Tickets filter is active."
+msgstr "Povolit: Odpověď používaná v dotazech AI, pouze pokud je aktivní filtr Enable vstupenky."
+
+msgid "Enable"
+msgstr "Umožnit"
+
+msgid "Disable: reply excluded from AI queries."
+msgstr "Zakázat: Odpověď vyloučená z dotazů AI."
+
+msgid "Disable"
+msgstr "Deaktivovat"
+
+msgid "AI Icon"
+msgstr "Ikona AI"
+
+msgid "AI-Powered Reply"
+msgstr "Odpověď poháněná AI"
+
+msgid "Get context-based suggestions to effortlessly create clear and relevant replies."
+msgstr "Získejte kontextové návrhy k bez námahy vytvořit jasné a relevantní odpovědi."
+
+msgid "Generate AI Response"
+msgstr "Generovat odpověď AI"
+
+msgid "Matching Tickets"
+msgstr "Odpovídající lístky"
+
+msgid "Filter"
+msgstr "Filtr"
+
+msgid "Enable Tickets"
+msgstr "Povolit vstupenky"
+
+msgid "All Replies"
+msgstr "Všechny odpovědi"
+
+msgid "Enable Replies"
+msgstr "Povolit odpovědi"
+
+msgid "Control how this ticket and its replies influence AI search and response generation for future queries."
+msgstr "Ovládejte, jak tato lístek a její odpovědi ovlivňují generování AI a odezvy pro budoucí dotazy."
+
+msgid "Default: ticket and replies included in all AI queries."
+msgstr "Výchozí hodnota: Vstupenka a odpovědi zahrnuté do všech dotazů AI."
+
+msgid "Enable: ticket and replies used only when the “Enable Tickets” filter is active."
+msgstr "Povolit: Vstupenka a odpovědi použité pouze tehdy, když je aktivní filtr „Povolit vstupenky“."
+
+msgid "Disable: ticket and replies excluded from AI queries."
+msgstr "Zakázat: lístek a odpovědi vyloučené z dotazů AI."
+
+msgid "Get context-aware suggestions for your response."
+msgstr "Získejte kontextové návrhy na vaši odpověď."
+
+msgid "Ticket ID is required."
+msgstr "Je nutné ID lístku."
+
+msgid "Ticket not found."
+msgstr "Vstupenka nebyla nalezena."
+
+msgid "Database error occurred."
+msgstr "Došlo k chybě databáze."
+
+msgid "AI Reply Section"
+msgstr "AI Odpověď sekce"
+
+msgid "Get AI-powered, context-based suggestions to effortlessly create clear, relevant, and helpful replies."
+msgstr "Získejte kontextované návrhy poháněné AI, abyste bez námahy vytvořili jasné, relevantní a užitečné odpovědi."
+
+msgid "Change Ticket Status"
+msgstr "Změnit stav lístku"
+
+msgid "Use AI Powered Reply Feature"
+msgstr "Použijte funkci odpovědi na AI"
+
+msgid "Set AI Reply Mode for Ticket"
+msgstr "Nastavte režim odpovědi AI pro lístek"
+
+msgid "Set AI Reply Mode for Reply"
+msgstr "Nastavte režim odpovědi AI pro odpověď"
+
+msgid "Limit AI Replies to Agent-Assigned Tickets"
+msgstr "Omezte odpovědi AI na vstupenky přiřazené agentem"
+
+msgid "Suggested Response"
+msgstr "Navrhovaná odpověď"
+
+msgid "Show User Avatar"
+msgstr "Zobrazit uživatele avatar"
+
+msgid "Showing avatars may slightly slow down page loading"
+msgstr "Zobrazení avatarů může mírně zpomalit načítání stránky"

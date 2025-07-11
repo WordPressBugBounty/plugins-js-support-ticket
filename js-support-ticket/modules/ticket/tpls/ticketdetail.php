@@ -38,6 +38,13 @@ if (jssupportticket::$_config['offline'] == 2) {
         wp_enqueue_script('timer.js', JSST_PLUGIN_URL . 'includes/js/timer.jquery.js');
         wp_enqueue_style('jssupportticket-venobox-css', JSST_PLUGIN_URL . 'includes/css/venobox.css');
         wp_enqueue_script('venoboxjs',JSST_PLUGIN_URL.'includes/js/venobox.js');
+        if (in_array('aipoweredreply', jssupportticket::$_active_addons)){
+            $jstmod = 'aipoweredreply';
+            $jstreplymod = 'aipoweredreply';
+        } else {
+            $jstmod = 'ticket';
+            $jstreplymod = 'reply';
+        }
         $jssupportticket_js ="
             var timer_flag = 0;
             var seconds = 0;
@@ -486,7 +493,377 @@ if (jssupportticket::$_config['offline'] == 2) {
         ?>
         <div id="userpopupblack" style="display:none;"> </div>
         <?php
-        $jssupportticket_js ="
+        $jssupportticket_js ='
+            // AI-Powered Reply
+            // Temporary storage for the current tickets replies for filtering
+            let currentTicketAllReplies = [];
+            jQuery(document).ready(function(){
+                // Get DOM elements with new prefixed IDs using jQuery selectors
+                const replyTextarea = jQuery("#js-ticket-reply-textarea");
+                const matchingTicketsSection = jQuery("#js-ticket-matching-tickets-section");
+                const matchingTicketsList = jQuery("#js-ticket-matching-tickets-list");
+                const selectedTicketRepliesSection = jQuery("#js-ticket-selected-ticket-replies-section");
+                const selectedTicketRepliesContent = jQuery("#js-ticket-selected-ticket-replies-content");
+                const messageModal = jQuery("#js-ticket-message-modal");
+
+                jQuery(".js-ticket-info-icon-wrapper").hover(
+                    function(e){
+                        jQuery(this).addClass("tooltip-active");
+                    },
+                    function(e){
+                        jQuery(this).removeClass("tooltip-active");
+                    }
+                );
+                
+                // Function to show custom modal
+                function showModal(message) {
+                    jQuery("#js-ticket-modal-message").text(message);
+                    messageModal.removeClass("js-ticket-hidden");
+                }
+
+                // Function to hide custom modal
+                jQuery("#js-ticket-modal-close-btn").on("click", function(e) {
+                    e.preventDefault();
+                    jsReplyHideLoading();
+                    messageModal.addClass("js-ticket-hidden");
+                    jQuery("div#multiformpopupblack").hide();
+                });
+
+                // Function to copy text to clipboard (works in iframes)
+                function copyToClipboard(text) {
+                    const tempTextArea = document.createElement("textarea");
+                    tempTextArea.value = text;
+                    document.body.appendChild(tempTextArea);
+                    tempTextArea.select();
+                    try {
+                        const successful = document.execCommand("copy");
+                        console.log(successful);
+                        if(successful) {
+                            showModal("'.__("Copied to clipboard!", "js-support-ticket").'");    
+                        } else {
+                            showModal("'.__("Failed to copy!", "js-support-ticket").'");
+                        }
+                    } catch (err) {
+                        showModal("'.__("Failed to copy to clipboard. Please copy manually.", "js-support-ticket").'");
+                    }
+                    document.body.removeChild(tempTextArea);
+                }
+
+                // Function to append text to reply area
+                function appendToReplyArea(textToAppend) {
+                    let currentContent = replyTextarea.val();
+                    let newContent = currentContent + "\n" + textToAppend; // Append with a newline
+
+                    // Check for TinyMCE or similar rich text editor
+                    if (typeof tinyMCE !== "undefined" && tinyMCE.get("jsticket_message") && !jQuery("#wp-jsticket_message-wrap").hasClass("html-active")) {
+                        // Assuming "jsticket_message" is the ID of your TinyMCE textarea
+                        const editor = tinyMCE.get("jsticket_message");
+                        editor.execCommand("mceInsertContent", false, textToAppend);
+                    } else {
+                        replyTextarea.val(newContent);
+                    }
+                    showModal("'.__("Reply content appended!", "js-support-ticket").'");
+                }
+
+                // Function to filter and display replies based on dropdown selection
+                function displayFilteredReplies(ticket, filterType) {
+                    console.log(ticket);
+                    console.log(filterType);
+
+                    let filteredReplies = [];
+                    if (filterType === "marked") {
+                        filteredReplies = currentTicketAllReplies.filter(reply => reply.isMarked);
+                    } else { // "all"
+                        filteredReplies = currentTicketAllReplies;
+                    }
+                    displayTicketReplies(ticket, filteredReplies);
+                }
+
+                // Event listener for Replies Filter dropdown
+                jQuery("#js-ticket-replies-filter").on("change", function() {
+                    const selectedFilter = jQuery(this).val();
+                    const activeTicketItem = matchingTicketsList.find(".js-ticket-list-item.active");
+                    
+                    if (!activeTicketItem.length) {
+                        showModal("'.__("No ticket selected!", "js-support-ticket").'");
+                        return;
+                    }
+                    
+                    const ticketId = activeTicketItem.data("ticket-id");
+                    const ticketTitle = activeTicketItem.find(".js-ticket-title").text();
+                    
+                    // Show loading message
+                    jsReplyShowLoading();
+                    
+                    // Fetch replies based on filter and ticket ID
+                    jQuery.post(ajaxurl, {
+                        action: "jsticket_ajax",
+                        jstmod: "'.$jstreplymod.'",
+                        task: "getFilteredReplies",
+                        ticket_id: ticketId,
+                        filter: selectedFilter,
+                        "_wpnonce": "'. esc_attr(wp_create_nonce("get-filtered-replies")).'"
+                    }, function(data) {
+                        jsReplyHideLoading();
+                        
+                        if (data.success) {
+                            const ticket = {
+                                id: ticketId,
+                                text: ticketTitle
+                            };
+                            displayTicketReplies(ticket, data.data.replies);
+                        } else {
+                            showModal(data.message || "'.__("Error fetching replies.", "js-support-ticket").'");
+                        }
+                    }).fail(function() {
+                        jsReplyHideLoading();
+                        showModal("'.__("Failed to fetch replies. Please try again.", "js-support-ticket").'");
+                    });
+                });
+
+                // Modify the ticket click handler to set active state and store ticket ID
+                matchingTicketsList.on("click", ".js-ticket-list-item", function() {
+                    // Remove active class from all items
+                    matchingTicketsList.find(".js-ticket-list-item").removeClass("active");
+                    
+                    // Add active class to clicked item
+                    const listItem = jQuery(this);
+                    listItem.addClass("active");
+                    
+                    // const ticketId1 = activeTicketItem.data("ticket-id");
+                    const ticketId = listItem.data("ticket-id");
+                    const ticketTitle = listItem.find(".js-ticket-title").text();
+                    
+                    // Show loading message
+                    jsReplyShowLoading();
+                    
+                    // Reset filter to "all" when selecting a new ticket
+                    jQuery("#js-ticket-replies-filter").val("all");
+                    
+                    // Fetch all replies initially
+                    jQuery.post(ajaxurl, {
+                        action: "jsticket_ajax",
+                        jstmod: "'.$jstreplymod.'",
+                        task: "getFilteredReplies",
+                        ticket_id: ticketId,
+                        filter: "all",
+                        "_wpnonce": "'. esc_attr(wp_create_nonce("get-filtered-replies")).'"
+                    }, function(data) {
+                        jsReplyHideLoading();
+                        
+                        if (data.success) {
+                            const ticket = {
+                                id: ticketId,
+                                text: ticketTitle
+                            };
+                            displayTicketReplies(ticket, data.data.replies);
+                        } else {
+                            showModal(data.message || "'.__("Error fetching replies.", "js-support-ticket").'");
+                        }
+                    }).fail(function() {
+                        jsReplyHideLoading();
+                        showModal("'.__("Failed to fetch replies. Please try again.", "js-support-ticket").'");
+                    });
+                });
+
+                jQuery(".js-ticket-segmented-control-option").on("click", function(e) {
+                    var actionType = jQuery(this).data("type");
+                    var selectedValue = jQuery(this).data("value"); // Get the "data-value" attribute (default, enable, disable).
+                    var selectedId = jQuery(this).data("id");
+                    
+                    // Remove the "active" class from all segmented control options.
+                    // jQuery("#js-ticket-ai-reply-status-control").find(".js-ticket-segmented-control-option").removeClass("active");
+                    jQuery(this).closest("#js-ticket-ai-reply-status-control")
+                   .find(".js-ticket-segmented-control-option")
+                   .removeClass("active");
+
+                    // Add the "active" class to the currently clicked option.
+                    jQuery(this).addClass("active");
+
+                    // Update the value of the hidden input field.
+                    jQuery("#js-ticket-ai-reply-status-hidden").val(selectedValue);
+
+                    // Perform the AJAX request using jQuery.ajax().
+                    jQuery.post(ajaxurl, {action: "jsticket_ajax", jstmod: "reply", task: "markedAsAiPoweredReply", status:selectedValue, id: selectedId, type: actionType, "_wpnonce":"'.esc_attr(wp_create_nonce("ai-powered-reply")).'"}, function (data) {
+                        if (data) {
+                            jQuery(".jssupportticket-review-box-popup").remove();
+                            jQuery(".jssupportticket-premio-review-box").remove();
+                        }
+                    });
+                });
+
+                // Event listener for AI-Powered Reply button
+                jQuery("#js-ticket-ai-reply-btn").on("click", function (e) {
+                    e.preventDefault();
+                    // Show loading message
+                    jsReplyShowLoading();
+
+                    const currentTitle = jQuery(".js-ticket-current-ticket-title").text();
+                    const currentTicketId = jQuery(".js-ticket-current-ticket-id").text();
+                    const tickets = fetchTicketsFromPHP(currentTicketId, currentTitle, "all");
+                });
+
+                // Event listener for Replies Filter dropdown
+                jQuery("#js-ticket-tickets-filter").on("change", function(e) {
+                    e.preventDefault();
+                    const selectedFilter = jQuery(this).val();
+                    const currentTitle = jQuery(".js-ticket-current-ticket-title").text();
+                    const currentTicketId = jQuery(".js-ticket-current-ticket-id").text();
+
+                    const tickets = fetchTicketsFromPHP(currentTicketId, currentTitle, selectedFilter); 
+                });
+
+                function fetchTicketsFromPHP(ticketId, ticketSubject, selectedFilter) {
+                    jQuery.post(ajaxurl, {action: "jsticket_ajax", ticketSubject: ticketSubject, ticketId: ticketId, filter: selectedFilter, jstmod: "'.$jstmod.'", task: "checkAIReplyTicketsBySubject", "_wpnonce":"'. esc_attr(wp_create_nonce("check-smart-reply")).'"}, function (data) {
+                        if(data) {
+                            displayMatchingTickets(data);
+                        } else {
+                            showModal(`'.__('Error fetching matching tickets:', 'js-support-ticket').'`);
+                            return [];
+                            jQuery(".smartReplyTickets").hide();
+                        }
+                    });
+                }
+
+                // Function to display matching tickets
+                function displayMatchingTickets(matchingTickets) {
+                    // Parse if it is a string
+                    if (typeof matchingTickets === "string") {
+                        try {
+                            matchingTickets = JSON.parse(matchingTickets);
+                        } catch (e) {
+                            console.error("Failed to parse matchingTickets:", e);
+                            matchingTickets = [];
+                        }
+                    }
+                    
+                    matchingTicketsList.empty(); // Clear previous list
+                    selectedTicketRepliesSection.addClass("js-ticket-hidden"); // Hide replies section if open
+                    jQuery("#js-ticket-replies-filter").val("all"); // Reset filter when showing new tickets
+
+                    jQuery(".js-ticket-container").show();
+
+                    if (matchingTickets.length === 0) {
+                        matchingTicketsList.html(`<p class="js-ticket-id">'.__("No matching tickets found.", "js-support-ticket").'</p>`);
+                        matchingTicketsSection.removeClass("js-ticket-hidden");
+                        jsReplyHideLoading();
+                        matchingTicketsSection.removeClass("js-ticket-hidden");
+                        return;
+                    }
+
+                    jQuery.each(matchingTickets, (index, ticket) => {
+                        const listItem = jQuery("<li></li>")
+                            .addClass("js-ticket-list-item")
+                            .data("ticket-id", ticket.id) // Store ticket ID in data attribute
+                            .html(`<p class="js-ticket-id">'.__("Ticket ID:", "js-support-ticket").'`+ticket.ticketid+`</p><p class="js-ticket-title">`+ticket.text+`</p><p class="js-ticket-id">`+ticket.message+`</p>`);
+                        matchingTicketsList.append(listItem);
+                    });
+                    jsReplyHideLoading();
+                    matchingTicketsSection.removeClass("js-ticket-hidden");
+                }
+
+                function escapeHtml(unsafe) {
+                    return unsafe
+                        .replace(/&/g, "&amp;")
+                        .replace(/</g, "&lt;")
+                        .replace(/>/g, "&gt;")
+                        .replace(/"/g, "&quot;")
+                }
+
+                // Function to display replies of a selected ticket
+                function displayTicketReplies(ticket, replies) {
+                    // Initialize replies as empty array if undefined
+                    if (typeof replies === "undefined") {
+                        replies = [];
+                    }
+                    
+                    // Parse if it is a string
+                    if (typeof replies === "string") {
+                        try {
+                            replies = JSON.parse(replies);
+                            // Ensure it is always an array after parsing
+                            if (!Array.isArray(replies)) {
+                                replies = [];
+                            }
+                        } catch (e) {
+                            console.error("Failed to parse replies:", e);
+                            replies = [];
+                        }
+                    }
+                    
+                    // Additional type checking
+                    if (!Array.isArray(replies)) {
+                        console.error("Replies is not an array:", replies);
+                        replies = [];
+                    }
+
+                    jQuery("#js-ticket-selected-ticket-replies-title").text(`'.__("Replies for:", "js-support-ticket").' `+escapeHtml(ticket.text));
+                    selectedTicketRepliesContent.empty(); // Clear previous replies
+
+                    // Now safe to check length
+                    if (replies.length === 0) {
+                        selectedTicketRepliesContent.html(`<p class="js-ticket-id">'.__("No replies found for this ticket.", "js-support-ticket").'</p>`);
+                    } else {
+                        jQuery.each(replies, (index, reply) => {
+                            // Add null checks for reply properties
+                            const replyId = reply?.id || __("N/A", "js-support-ticket");
+                            const replyText = reply?.text || __("No content", "js-support-ticket");
+                            const replyName = reply?.name || __("No content", "js-support-ticket");
+                            const replyTimestamp = reply?.timestamp ? new Date(reply.timestamp).toLocaleString() : __("No date", "js-support-ticket");
+
+                            const replyDiv = jQuery("<div></div>")
+                                .addClass("js-ticket-reply-item")
+                                .html(`
+                                    <div class="js-ticket-reply-header">
+                                        <span class="js-ticket-reply-id">'.__("Reply By:", "js-support-ticket").' `+escapeHtml(replyName)+`</span>
+                                        <span class="js-ticket-reply-timestamp">`+replyTimestamp+`</span>
+                                    </div>
+                                    <div class="js-ticket-reply-text">
+                                        `+replyText+`
+                                    </div>
+                                    <div class="js-ticket-reply-actions">
+                                        <button class="js-ticket-reply-action-btn copy-btn" data-reply-content="`+escapeHtml(replyText)+`">'.__('Copy', 'js-support-ticket').'</button>
+                                        <button class="js-ticket-reply-action-btn append-btn" data-reply-content="`+escapeHtml(replyText)+`">'.__('Append', 'js-support-ticket').'</button>
+                                    </div>
+                                `);
+                            selectedTicketRepliesContent.append(replyDiv);
+                        });
+
+                        // Attach event listeners
+                        selectedTicketRepliesContent.find(".copy-btn").on("click", function(e) {
+                            e.preventDefault();
+                            copyToClipboard(jQuery(this).data("reply-content"));
+                        });
+                        
+                        selectedTicketRepliesContent.find(".append-btn").on("click", function(e) {
+                            e.preventDefault();
+                            appendToReplyArea(jQuery(this).data("reply-content"));
+                        });
+                    }
+
+                    matchingTicketsSection.addClass("js-ticket-hidden");
+                    selectedTicketRepliesSection.removeClass("js-ticket-hidden");
+                }
+
+                // Event listener for Close Replies button
+                jQuery("#js-ticket-close-replies-btn").on("click", function(e) {
+                    e.preventDefault();
+                    selectedTicketRepliesSection.addClass("js-ticket-hidden");
+                    matchingTicketsSection.removeClass("js-ticket-hidden"); // Show matching tickets again
+                });
+
+                // Event listener for Close Tickets button
+                jQuery("#js-ticket-close-tickets-btn").on("click", function(e) {
+                    e.preventDefault();
+                    matchingTicketsList.empty(); // Clear previous list
+                    jQuery("#js-ticket-tickets-filter").val("all"); // Reset filter when showing new tickets
+                    selectedTicketRepliesSection.addClass("js-ticket-hidden"); // Hide replies section if open
+                    jQuery("#js-ticket-replies-filter").val("all"); // Reset filter when showing new tickets
+                    jQuery(".js-ticket-container").hide();
+                    matchingTicketsSection.addClass("js-ticket-hidden");
+                });
+            });';
+        $jssupportticket_js .="
             jQuery(document).ready(function(){
                 jQuery(document).on('submit','#js-ticket-usercredentails-form',function(e){
                     e.preventDefault(); // avoid to execute the actual submit of the form.
@@ -652,7 +1029,7 @@ if (jssupportticket::$_config['offline'] == 2) {
 											}else{
 												if (jssupportticket::$_config['anonymous_name_on_ticket_reply'] == 1) { 
 													$historymessage = $history->message;
-													echo wp_kses_post(preg_replace("/\([^)]+\)/","( ".__("Agent")." )",$historymessage));
+													echo wp_kses_post(jssupportticketphplib::JSST_preg_replace("/\([^)]+\)/","( ".__("Agent")." )",$historymessage));
 												}else{
 													echo wp_kses_post($history->message); 
 												}
@@ -766,6 +1143,10 @@ if (jssupportticket::$_config['offline'] == 2) {
         ";
         wp_add_inline_script('js-support-ticket-main-js',$jssupportticket_js);
         ?>
+        <div id="black_wrapper_ai_reply" style="display:none;"></div>
+        <div id="js_ai_reply_loading">
+            <img alt="<?php echo esc_html(__('spinning wheel','js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/spinning-wheel.gif" />
+        </div>
         <span style="display:none" id="filesize"><?php echo esc_html(__('Error file size too large', 'js-support-ticket')); ?></span>
         <span style="display:none" id="fileext"><?php echo esc_html(__('The uploaded file extension not valid', 'js-support-ticket')); ?></span>
         <div class="jsst-popup-background" style="display:none" ></div>
@@ -1662,6 +2043,36 @@ if (jssupportticket::$_config['offline'] == 2) {
                                                 <?php if (in_array('agent',jssupportticket::$_active_addons) &&  jssupportticket::$_data['user_staff']) {
                                                     ?>
                                                         <div class="js-ticket-thread-cnt-btm">
+                                                            <?php
+                                                            if (
+                                                                JSSTincluder::getJSModel('userpermissions')->checkPermissionGrantedForTask('Set AI Reply Mode for Reply') &&
+                                                                in_array('aipoweredreply', jssupportticket::$_active_addons) && 
+                                                                jssupportticket::$_data[0]->uid != $reply->uid && 
+                                                                $reply->uid != 0) { ?>
+                                                                <!-- This section contains the AI Reply Feature -->
+                                                                <div class="js-ticket-ai-reply-status-wrapper">
+                                                                    <label for="js-ticket-ai-reply-status-control">
+                                                                        <?php echo esc_html__('AI-Powered Reply Mode', 'js-support-ticket').':'; ?>
+                                                                    </label>
+                                                                    <div class="js-ticket-info-icon-wrapper">
+                                                                        <span class="js-ticket-info-icon" data-tooltip="<?php echo esc_html(__("Control how this individual reply influences the AI search and response generation process for future queries.",'js-support-ticket')); ?>">
+                                                                            <img alt="<?php echo esc_html(__('Info','js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/ticket-detail/info-icon.png" />
+                                                                        </span>
+                                                                    </div>
+                                                                    <div id="js-ticket-ai-reply-status-control" class="js-ticket-segmented-control">
+                                                                        <button type="button" class="js-ticket-segmented-control-option js-ticket-default <?php echo ($reply->aireplymode == 0) ? 'active' : ''; ?>" data-value="0" data-type="reply" data-id="<?php echo $reply->replyid;?>" title="<?php echo __("Default: reply included in all AI search queries.", "js-support-ticket"); ?>">
+                                                                            <?php echo esc_html__('Default', 'js-support-ticket'); ?>
+                                                                        </button>
+                                                                        <button type="button" class="js-ticket-segmented-control-option js-ticket-enable <?php echo ($reply->aireplymode == 1) ? 'active' : ''; ?>" data-value="1" data-type="reply" data-id="<?php echo $reply->replyid;?>" title="<?php echo __("Enable: reply used in AI queries only when the Enable Tickets filter is active.", "js-support-ticket"); ?>">
+                                                                            <?php echo esc_html__('Enable', 'js-support-ticket'); ?>
+                                                                        </button>
+                                                                        <button type="button" class="js-ticket-segmented-control-option js-ticket-disable <?php echo ($reply->aireplymode == 2) ? 'active' : ''; ?>" data-value="2" data-type="reply" data-id="<?php echo $reply->replyid;?>">
+                                                                            <?php echo esc_html__('Disable', 'js-support-ticket'); ?>
+                                                                        </button>
+                                                                    </div>
+                                                                </div>
+                                                                <?php
+                                                            } ?>
                                                             <div class="js-ticket-thread-date">
                                                                 <?php echo esc_html(date_i18n("l F d, Y, H:i:s", jssupportticketphplib::JSST_strtotime($reply->created))); ?>
                                                             </div>
@@ -1823,6 +2234,87 @@ if (jssupportticket::$_config['offline'] == 2) {
                                                 <div class="js-ticket-text-editor-field-title"><?php echo esc_html(__('Type Message','js-support-ticket')); ?></div>
                                                 <div class="js-ticket-text-editor-field"><?php wp_editor('', 'jsticket_message', array('media_buttons' => false)); ?></div>
                                             </div>
+                                            <?php
+                                            if (JSSTincluder::getJSModel('userpermissions')->checkPermissionGrantedForTask('Use AI Powered Reply Feature')) { ?>
+                                                <div class="js-ticket-ai-reply-button-wrp"><!-- AI-Powered Reply -->
+                                                    <div class="js-ticket-ai-powered-reply-wrapper">
+                                                        <div class="js-ticket-ai-powered-reply-icon">
+                                                            <img alt="<?php echo esc_html(__('AI Icon','js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/ticket-detail/ai-icon.png" />
+                                                        </div>
+                                                        <div class="js-ticket-ai-powered-reply-content">
+                                                            <div class="js-ticket-ai-powered-reply-title">
+                                                                <?php echo esc_html__('AI-Powered Reply', 'js-support-ticket'); ?>
+                                                            </div>
+                                                            <div class="js-ticket-ai-powered-reply-text">
+                                                                <?php echo esc_html__('Get context-aware suggestions for your response.', 'js-support-ticket'); ?>
+                                                            </div>
+                                                        </div>
+                                                        <div id="js-ticket-ai-reply-btn" class="js-ticket-ai-powered-reply-action">
+                                                            <a href="#" class="js-ticket-ai-powered-reply-button">
+                                                                <?php echo esc_html__('Suggested Response', 'js-support-ticket'); ?>
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                    <span class="js-ticket-current-ticket-title"><?php echo jssupportticket::$_data[0]->subject ?></span>
+                                                    <span class="js-ticket-current-ticket-id"><?php echo jssupportticket::$_data[0]->id ?></span>
+                                                    <div class="js-ticket-container">
+                                                        <!-- Matching Tickets Section -->
+                                                        <div id="js-ticket-matching-tickets-section" class="js-ticket-section js-ticket-matching-tickets-section js-ticket-hidden">
+                                                            <div class="js-ticket-selected-tickets-header">
+                                                                <div class="js-ticket-section-heading"><?php echo esc_html__('Matching Tickets', 'js-support-ticket'); ?></div>
+                                                                <?php if(in_array('aipoweredreply', jssupportticket::$_active_addons)){ ?>
+                                                                    <div class="js-ticket-filter-group">
+                                                                        <label for="js-ticket-tickets-filter" class="js-ticket-filter-label"><?php echo esc_html__('Filter', 'js-support-ticket').': '; ?></label>
+                                                                        <select id="js-ticket-tickets-filter" class="js-ticket-filter-select">
+                                                                            <option value="all"><?php echo esc_html__('All Tickets', 'js-support-ticket'); ?></option>
+                                                                            <option value="marked"><?php echo esc_html__('Enable Tickets', 'js-support-ticket'); ?></option>
+                                                                        </select>
+                                                                    </div>
+                                                                <?php } ?>
+                                                                <button id="js-ticket-close-tickets-btn" class="js-ticket-close-button">
+                                                                    <?php echo esc_html__('Close', 'js-support-ticket'); ?>
+                                                                </button>
+                                                            </div>
+                                                            <ul id="js-ticket-matching-tickets-list" class="js-ticket-list">
+                                                                <!-- Matching tickets will be dynamically inserted here -->
+                                                            </ul>
+                                                        </div>
+
+                                                        <!-- Selected Ticket Replies Section -->
+                                                        <div id="js-ticket-selected-ticket-replies-section" class="js-ticket-section js-ticket-selected-replies-section js-ticket-hidden">
+                                                            <div class="js-ticket-selected-replies-header">
+                                                                <h2 class="js-ticket-section-heading" id="js-ticket-selected-ticket-replies-title"></h2>
+                                                                <?php if(in_array('aipoweredreply', jssupportticket::$_active_addons)){ ?>
+                                                                    <div class="js-ticket-filter-group">
+                                                                        <label for="js-ticket-replies-filter" class="js-ticket-filter-label"><?php echo esc_html__('Filter', 'js-support-ticket').': '; ?></label>
+                                                                        <select id="js-ticket-replies-filter" class="js-ticket-filter-select">
+                                                                            <option value="all"><?php echo esc_html__('All Replies', 'js-support-ticket'); ?></option>
+                                                                            <option value="marked"><?php echo esc_html__('Enable Replies', 'js-support-ticket'); ?></option>
+                                                                        </select>
+                                                                    </div>
+                                                                <?php } ?>
+                                                                <button id="js-ticket-close-replies-btn" class="js-ticket-close-button">
+                                                                    <?php echo esc_html__('Close', 'js-support-ticket'); ?>
+                                                                </button>
+                                                            </div>
+                                                            <div id="js-ticket-selected-ticket-replies-content" class="js-ticket-replies-content reply-content">
+                                                                <!-- Replies from selected ticket will be dynamically inserted here -->
+                                                            </div>
+                                                        </div>
+
+                                                        <!-- Custom Modal for Messages -->
+                                                        <div id="js-ticket-message-modal" class="js-ticket-modal js-ticket-hidden">
+                                                            <div class="js-ticket-modal-content">
+                                                                <p id="js-ticket-modal-message" class="js-ticket-modal-message"></p>
+                                                                <button id="js-ticket-modal-close-btn" class="js-ticket-modal-close-button">
+                                                                    <?php echo esc_html__('OK', 'js-support-ticket'); ?>
+                                                                </button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <?php 
+                                            } ?>
                                             <div class="js-ticket-reply-attachments"><!-- Attachments -->
                                                 <div class="js-attachment-field-title"><?php echo esc_html(__('Attachments', 'js-support-ticket')); ?></div>
                                                 <div class="js-attachment-field">
@@ -2090,6 +2582,41 @@ if (jssupportticket::$_config['offline'] == 2) {
                             } ?>
                         </div>
                         <?php
+                        if(
+                            in_array('agent',jssupportticket::$_active_addons) &&  
+                            jssupportticket::$_data['user_staff'] &&
+                            in_array('aipoweredreply', jssupportticket::$_active_addons) &&
+                            JSSTincluder::getJSModel('userpermissions')->checkPermissionGrantedForTask('Set AI Reply Mode for Ticket')){ ?>
+                            <div class="js-tkt-det-cnt js-tkt-det-tkt-prty"> <!-- Ticket Status -->
+                                <div class="js-tkt-det-hdg">
+                                    <div class="js-tkt-det-hdg-txt">
+                                        <label class="js-ticket-ai-reply-status-control-label" for="js-ticket-ai-reply-status-control">
+                                            <?php echo esc_html__('AI-Powered Reply Mode', 'js-support-ticket'); ?>
+                                        </label>
+                                        <div class="js-ticket-info-icon-wrapper">
+                                            <span class="js-ticket-info-icon" data-tooltip="<?php echo esc_html(__("Control how this ticket and its replies influence AI search and response generation for future queries.",'js-support-ticket')); ?>">
+                                                <img alt="<?php echo esc_html(__('Info','js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/ticket-detail/info-icon.png" />
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="js-tkt-det-tkt-prty-txt js-ticket-segmented-control-wrp">
+                                    <div id="js-ticket-ai-reply-status-control" class="js-ticket-segmented-control">
+                                        <button type="button" class="js-ticket-segmented-control-option js-ticket-default <?php echo (jssupportticket::$_data[0]->aireplymode == 0) ? 'active' : ''; ?>" data-value="0" data-type="ticket" data-id="<?php echo jssupportticket::$_data[0]->id;?>" title="<?php echo __("Default: ticket and replies included in all AI queries.", "js-support-ticket"); ?>">
+                                            <?php echo esc_html__('Default', 'js-support-ticket'); ?>
+                                        </button>
+                                        <button data-type="ticket" type="button" class="js-ticket-segmented-control-option js-ticket-enable <?php echo (jssupportticket::$_data[0]->aireplymode == 1) ? 'active' : ''; ?>" data-value="1" data-type="ticket" data-id="<?php echo jssupportticket::$_data[0]->id;?>" title="<?php echo __("Enable: ticket and replies used only when the “Enable Tickets” filter is active.", "js-support-ticket"); ?>">
+                                            <?php echo esc_html__('Enable', 'js-support-ticket'); ?>
+                                        </button>
+                                        <button data-type="ticket" type="button" class="js-ticket-segmented-control-option js-ticket-disable <?php echo (jssupportticket::$_data[0]->aireplymode == 2) ? 'active' : ''; ?>" data-value="2" data-type="ticket" data-id="<?php echo jssupportticket::$_data[0]->id;?>" title="<?php echo __("Disable: ticket and replies excluded from AI queries.", "js-support-ticket"); ?>">
+                                            <?php echo esc_html__('Disable', 'js-support-ticket'); ?>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <?php
+                        }
                         if(!empty($field_array['priority'])) { ?>
                             <div class="js-tkt-det-cnt js-tkt-det-tkt-prty"> <!-- Ticket Priority -->
                                 <div class="js-tkt-det-hdg">

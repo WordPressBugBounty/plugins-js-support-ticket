@@ -7930,3 +7930,168 @@ msgstr "Addon（s）が正常にインストールされました！"
 
 msgid "Addon(s) Installation Failed"
 msgstr "Addon（s）のインストールに失敗しました"
+
+msgid "Your JS Support Ticket license key has expired or is invalid. Please update it to continue receiving support and updates."
+msgstr "JSサポートチケットライセンスキーが期限切れになっているか、無効です。サポートと更新を継続するには、更新してください。"
+
+msgid "Import Data"
+msgstr "データをインポートします"
+
+msgid "No Addon Installed!"
+msgstr "アドオンはインストールされていません！"
+
+msgid "Add-Ons"
+msgstr "アドオン"
+
+msgid "Copied to clipboard!"
+msgstr "クリップボードにコピーされました！"
+
+msgid "Failed to copy!"
+msgstr "コピーに失敗しました！"
+
+msgid "Failed to copy to clipboard. Please copy manually."
+msgstr "クリップボードへのコピーに失敗しました。手動でコピーしてください。"
+
+msgid "Reply content appended!"
+msgstr "返信コンテンツが追加されました！"
+
+msgid "No ticket selected!"
+msgstr "チケットが選択されていません！"
+
+msgid "Error fetching replies."
+msgstr "エラーフェッチの返信。"
+
+msgid "Failed to fetch replies. Please try again."
+msgstr "返信を取得できませんでした。もう一度やり直してください。"
+
+msgid "Error fetching matching tickets:"
+msgstr "マッチングチケットの取得エラー："
+
+msgid "Error fetching replies:"
+msgstr "エラーフェッチの返信："
+
+msgid "No matching tickets found."
+msgstr "一致するチケットは見つかりませんでした。"
+
+msgid "Ticket ID:"
+msgstr "チケットID："
+
+msgid "Replies for:"
+msgstr "返信："
+
+msgid "No replies found for this ticket."
+msgstr "このチケットの返信は見つかりませんでした。"
+
+msgid "N/A"
+msgstr "n/a"
+
+msgid "No content"
+msgstr "コンテンツはありません"
+
+msgid "No date"
+msgstr "日付はありません"
+
+msgid "Reply By:"
+msgstr "返信者："
+
+msgid "AI-Powered Reply Mode"
+msgstr "AI搭載の応答モード"
+
+msgid "Control how this individual reply influences the AI search and response generation process for future queries."
+msgstr "この個々の返信が、将来のクエリのAI検索および応答生成プロセスにどのように影響するかを制御します。"
+
+msgid "Default: reply included in all AI search queries."
+msgstr "デフォルト：すべてのAI検索クエリに含まれる返信。"
+
+msgid "Enable: reply used in AI queries only when the Enable Tickets filter is active."
+msgstr "有効化：AIクエリで使用される返信は、有効なチケットフィルターがアクティブな場合にのみです。"
+
+msgid "Enable"
+msgstr "有効にする"
+
+msgid "Disable: reply excluded from AI queries."
+msgstr "無効：AIクエリから除外された返信。"
+
+msgid "Disable"
+msgstr "無効にします"
+
+msgid "AI Icon"
+msgstr "AIアイコン"
+
+msgid "AI-Powered Reply"
+msgstr "AI搭載の返信"
+
+msgid "Get context-based suggestions to effortlessly create clear and relevant replies."
+msgstr "コンテキストベースの提案を入手して、明確で関連性のある返信を簡単に作成します。"
+
+msgid "Generate AI Response"
+msgstr "AI応答を生成します"
+
+msgid "Matching Tickets"
+msgstr "マッチングチケット"
+
+msgid "Filter"
+msgstr "フィルター"
+
+msgid "Enable Tickets"
+msgstr "チケットを有効にします"
+
+msgid "All Replies"
+msgstr "すべての返信"
+
+msgid "Enable Replies"
+msgstr "返信を有効にします"
+
+msgid "Control how this ticket and its replies influence AI search and response generation for future queries."
+msgstr "このチケットとその返信が、将来のクエリのAI検索と応答の生成にどのように影響するかを制御します。"
+
+msgid "Default: ticket and replies included in all AI queries."
+msgstr "デフォルト：すべてのAIクエリに含まれるチケットと返信。"
+
+msgid "Enable: ticket and replies used only when the “Enable Tickets” filter is active."
+msgstr "有効化：「チケットを有効にする」フィルターがアクティブな場合にのみ使用されるチケットと返信。"
+
+msgid "Disable: ticket and replies excluded from AI queries."
+msgstr "無効：AIクエリから除外されたチケットと返信。"
+
+msgid "Get context-aware suggestions for your response."
+msgstr "あなたの応答のためのコンテキストを意識した提案を取得します。"
+
+msgid "Ticket ID is required."
+msgstr "チケットIDが必要です。"
+
+msgid "Ticket not found."
+msgstr "チケットが見つかりません。"
+
+msgid "Database error occurred."
+msgstr "データベースエラーが発生しました。"
+
+msgid "AI Reply Section"
+msgstr "AI返信セクション"
+
+msgid "Get AI-powered, context-based suggestions to effortlessly create clear, relevant, and helpful replies."
+msgstr "AIを搭載したコンテキストベースの提案を入手して、明確で関連性のある、役立つ返信を簡単に作成します。"
+
+msgid "Change Ticket Status"
+msgstr "チケットのステータスを変更します"
+
+msgid "Use AI Powered Reply Feature"
+msgstr "AI搭載の返信機能を使用します"
+
+msgid "Set AI Reply Mode for Ticket"
+msgstr "チケットのAI返信モードを設定します"
+
+msgid "Set AI Reply Mode for Reply"
+msgstr "返信のAI返信モードを設定します"
+
+msgid "Limit AI Replies to Agent-Assigned Tickets"
+msgstr "AIの回答をエージェントに割り当てたチケットに制限します"
+
+msgid "Suggested Response"
+msgstr "提案された応答"
+
+msgid "Show User Avatar"
+msgstr "ユーザーアバターを表示します"
+
+msgid "Showing avatars may slightly slow down page loading"
+msgstr "アバターを表示すると、ページの読み込みがわずかに遅くなる可能性があります"

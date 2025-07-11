@@ -2148,11 +2148,11 @@ msgid "Select Page"
 msgstr "Válassz oldalt"
 
 msgid ""
-"Select JS Help Desk default page, on the action system, will redirect on the selected page. If not select the default page, email "
-"links, and support icon might not work."
+"Select JS Help Desk default page, on the action system, will redirect on the selected page. If not select the default page, email links, "
+"and support icon might not work."
 msgstr ""
-"Válassza a JS Help Desk alapértelmezett oldalát, az akciórendszeren átirányítja a kiválasztott oldalra. Ha nem adja meg az "
-"alapértelmezett oldalt, akkor az e-mail hivatkozások és a támogatási ikon nem működnek."
+"Válassza a JS Help Desk alapértelmezett oldalát, az akciórendszeren átirányítja a kiválasztott oldalra. Ha nem adja meg az alapértelmezett "
+"oldalt, akkor az e-mail hivatkozások és a támogatási ikon nem működnek."
 
 msgid "Support Icon"
 msgstr "Támogatás ikon"
@@ -2566,8 +2566,7 @@ msgid "Secret Key"
 msgstr "Titkos kulcs"
 
 msgid "Private Credentials Encryption Key changing this value will discard all existing credentials "
-msgstr ""
-"A magán hitelesítő adatok titkosítási kulcsa ennek az értéknek a megváltoztatásával az összes meglévő hitelesítő adatot eldobja"
+msgstr "A magán hitelesítő adatok titkosítási kulcsa ennek az értéknek a megváltoztatásával az összes meglévő hitelesítő adatot eldobja"
 
 msgid "Second Level Security"
 msgstr "Második szintű biztonság"
@@ -3189,20 +3188,18 @@ msgstr "Jegyek egyesítése"
 
 msgid "Enables agents to merge two tickets of the same user into one instead of dealing with the same issue on many tickets."
 msgstr ""
-"Lehetővé teszi az ügynököknek, hogy egyesítsék ugyanazon felhasználó két jegyét egybe, ahelyett, hogy ugyanazon kérdéssel "
-"foglalkoznának sok jegyen."
+"Lehetővé teszi az ügynököknek, hogy egyesítsék ugyanazon felhasználó két jegyét egybe, ahelyett, hogy ugyanazon kérdéssel foglalkoznának "
+"sok jegyen."
 
-msgid ""
-"Defines rules or set specific intervals of time to make ticket auto overdue.The ticket can overdue by type or overdue by Cronjob."
+msgid "Defines rules or set specific intervals of time to make ticket auto overdue.The ticket can overdue by type or overdue by Cronjob."
 msgstr ""
-"Szabályokat határoz meg, vagy meghatározott időintervallumokat állít be a jegy automatikus lejártá tételéhez. A jegy típustól lejár "
-"vagy Cronjob által lejárt."
+"Szabályokat határoz meg, vagy meghatározott időintervallumokat állít be a jegy automatikus lejártá tételéhez. A jegy típustól lejár vagy "
+"Cronjob által lejárt."
 
 msgid "SMTP enables you to add custom mail protocol to send and receive emails within the js help desk."
 msgstr "Az SMTP lehetővé teszi az egyéni levelezési protokoll hozzáadását az e-mailek küldéséhez és fogadásához a js help desk-en."
 
-msgid ""
-"Displays complete ticket history along with the ticket status, currently assigned user and other actions performed on each ticket."
+msgid "Displays complete ticket history along with the ticket status, currently assigned user and other actions performed on each ticket."
 msgstr ""
 "Megjeleníti a teljes jegyelőzményt, a jegy állapotát, a jelenleg hozzárendelt felhasználót és az egyes jegyeknél végrehajtott egyéb "
 "műveleteket."
@@ -3218,15 +3215,14 @@ msgstr "Időmérés"
 
 msgid "Track the time spent on each ticket by each agent and each reply. Report the admin on how much time is spent on each ticket."
 msgstr ""
-"Kövesse nyomon az egyes ügynökök és válaszok által az egyes jegyekre fordított időt. Jelentés az adminisztrátorról arról, hogy "
-"mennyi időt töltenek az egyes jegyekre."
+"Kövesse nyomon az egyes ügynökök és válaszok által az egyes jegyekre fordított időt. Jelentés az adminisztrátorról arról, hogy mennyi időt "
+"töltenek az egyes jegyekre."
 
 msgid "User Options"
 msgstr "Felhasználói beállítások"
 
 msgid "User options enable you to add Google Re-captcha or JS Help Desk Re-captcha for a registration form."
-msgstr ""
-"A felhasználói opciók lehetővé teszik a Google Re-captcha vagy a JS Help Desk Re-captcha regisztrációs űrlaphoz történő hozzáadását."
+msgstr "A felhasználói opciók lehetővé teszik a Google Re-captcha vagy a JS Help Desk Re-captcha regisztrációs űrlaphoz történő hozzáadását."
 
 msgid "Actions"
 msgstr "Hozzászólások"
@@ -3291,8 +3287,7 @@ msgid "Without valid Envato, license clients won't be able to open a new ticket.
 msgstr "Érvényes Envato nélkül az engedélyes ügyfelek nem tudnak új jegyet megnyitni."
 
 msgid "Adds the option to the registration form for prompting new users to subscribe to your email list."
-msgstr ""
-"A regisztrációs űrlaphoz hozzáadja azt a lehetőséget, hogy az új felhasználókat felszólítsa az e-mail listára való feliratkozásra."
+msgstr "A regisztrációs űrlaphoz hozzáadja azt a lehetőséget, hogy az új felhasználókat felszólítsa az e-mail listára való feliratkozásra."
 
 msgid "Paid Support is the easiest way to integrate and manage payments for your tickets."
 msgstr "A fizetett támogatás a legegyszerűbb módja a jegyek kifizetésének integrálására és kezelésére."
@@ -3679,13 +3674,13 @@ msgid "Wordpress Plugin"
 msgstr "Wordpress beépülő modul"
 
 msgid ""
-"JS Help Desk is a trusted open source ticket system. JS Help Desk is a simple, easy to use, web-based customer support system. Users "
-"can create a ticket from the front-end. JS Help Desk comes packed with lot features than most of the expensive(and complex) support "
-"ticket system on the market. The best part is, It completely free."
+"JS Help Desk is a trusted open source ticket system. JS Help Desk is a simple, easy to use, web-based customer support system. Users can "
+"create a ticket from the front-end. JS Help Desk comes packed with lot features than most of the expensive(and complex) support ticket "
+"system on the market. The best part is, It completely free."
 msgstr ""
 "A JS Help Desk megbízható nyílt forrású jegyrendszer. A JS Help Desk egy egyszerű, könnyen használható, web alapú ügyfélszolgálati "
-"rendszer. A felhasználók jegyet készíthetnek a kezelőfelületből. A JS Help Desk sok funkcióval rendelkezik, mint a piacon található "
-"drága (és összetett) támogatási jegyrendszer legtöbbje. A legjobb az egészben, teljesen ingyenes."
+"rendszer. A felhasználók jegyet készíthetnek a kezelőfelületből. A JS Help Desk sok funkcióval rendelkezik, mint a piacon található drága "
+"(és összetett) támogatási jegyrendszer legtöbbje. A legjobb az egészben, teljesen ingyenes."
 
 msgid "Add on list"
 msgstr "Felvétel a listára"
@@ -6323,8 +6318,8 @@ msgstr "Kiegészítők a Help Desk számára"
 
 msgid "Get trusted WordPress add on’s. Guaranteed to work fast, safe to use, beautifully coded, packed with features and easy to use."
 msgstr ""
-"Szerezzen megbízható WordPress-kiegészítőket. Garantáltan gyors, biztonságos használat, gyönyörűen kódolt, tele van funkciókkal és "
-"könnyen használható."
+"Szerezzen megbízható WordPress-kiegészítőket. Garantáltan gyors, biztonságos használat, gyönyörűen kódolt, tele van funkciókkal és könnyen "
+"használható."
 
 msgid "Save big with an exclusive membership plan today!"
 msgstr "Takarítson meg sokat exkluzív tagsági csomaggal még ma!"
@@ -6333,8 +6328,7 @@ msgid "show bundle pack"
 msgstr "mutasd meg a kötegcsomagot"
 
 msgid "Add agents and assign roles and permissions to provide assistance and support to customer support tickets."
-msgstr ""
-"Ügynökök hozzáadása, szerepek és engedélyek hozzárendelése, hogy segítséget és támogatást nyújtson az ügyfélszolgálati jegyekhez."
+msgstr "Ügynökök hozzáadása, szerepek és engedélyek hozzárendelése, hogy segítséget és támogatást nyújtson az ügyfélszolgálati jegyekhez."
 
 msgid "Define rules for ticket to auto close. Ticket will be auto close after specific interval of time which can be set by admin."
 msgstr ""
@@ -6352,18 +6346,18 @@ msgstr "A súgótémák segítenek a felhasználóknak megtalálni és kiválasz
 
 msgid "The private note is used as reminders or to give other agents insights into the ticket issue. User Won't see the private notes."
 msgstr ""
-"A privát jegyzet emlékeztetőként vagy arra szolgál, hogy más ügynökök betekintést nyújtsanak a jegyek problémájába. A felhasználó "
-"nem fogja látni a privát jegyzeteket."
+"A privát jegyzet emlékeztetőként vagy arra szolgál, hogy más ügynökök betekintést nyújtsanak a jegyek problémájába. A felhasználó nem "
+"fogja látni a privát jegyzeteket."
 
 msgid "Stop losing productivity on repetitive queries,Build your knowledge base, group solutions by topics to facilitate users."
 msgstr ""
-"Ne veszítse el a termelékenységet az ismétlődő lekérdezések miatt, Építse fel tudásbázisát, csoportosítsa a megoldásokat témák "
-"szerint a felhasználók megkönnyítése érdekében."
+"Ne veszítse el a termelékenységet az ismétlődő lekérdezések miatt, Építse fel tudásbázisát, csoportosítsa a megoldásokat témák szerint a "
+"felhasználók megkönnyítése érdekében."
 
 msgid "Enables admin to set N numbers of tickets for users to create and set N numbers of Ticket to open for agents separately."
 msgstr ""
-"Lehetővé teszi az adminisztrátor számára, hogy N számú jegyet állítson be a felhasználók számára, hogy létrehozzanak, és N számú "
-"jegyet állítson be, hogy külön nyíljon meg az ügynökök számára."
+"Lehetővé teszi az adminisztrátor számára, hogy N számú jegyet állítson be a felhasználók számára, hogy létrehozzanak, és N számú jegyet "
+"állítson be, hogy külön nyíljon meg az ügynökök számára."
 
 msgid "Multi Language Email Templates"
 msgstr "Többnyelvű e-mail sablonok"
@@ -6378,8 +6372,8 @@ msgstr ""
 
 msgid "Enables users to reply to the tickets via email without the need to login to the support system first."
 msgstr ""
-"Lehetővé teszi a felhasználók számára, hogy e-mailben válaszoljanak a jegyekre anélkül, hogy először be kellene jelentkezniük a "
-"támogatási rendszerbe."
+"Lehetővé teszi a felhasználók számára, hogy e-mailben válaszoljanak a jegyekre anélkül, hogy először be kellene jelentkezniük a támogatási "
+"rendszerbe."
 
 msgid "Make unlimited announcements associated with support system to get customer interaction."
 msgstr "Tegyen korlátlan számú bejelentést a támogatási rendszerhez az ügyfelek interakciója érdekében."
@@ -6391,8 +6385,7 @@ msgid "Descktop Notifications"
 msgstr "Asztali értesítések"
 
 msgid "Save the ticket as a PDF in your system or the admin will also be able to export all the data inside of Ticket."
-msgstr ""
-"Mentse el a jegyet PDF formátumban a rendszerébe, különben az adminisztrátor is exportálhatja az összes adatot a Ticketen belül."
+msgstr "Mentse el a jegyet PDF formátumban a rendszerébe, különben az adminisztrátor is exportálhatja az összes adatot a Ticketen belül."
 
 msgid "Tired of getting tickets about the same problems? Add FAQs to drastically reduce the number of common questions from users."
 msgstr ""
@@ -6415,8 +6408,7 @@ msgid "Mail Chimp"
 msgstr "Mailchimp"
 
 msgid "The Mail Chimp add-on adds a new checkbox to the registration form for prompting new users to subscribe your email-list."
-msgstr ""
-"A Mail Chimp bővítmény egy új jelölőnégyzetet ad a regisztrációs űrlaphoz, hogy új felhasználókat kérjen fel az e-mail listára."
+msgstr "A Mail Chimp bővítmény egy új jelölőnégyzetet ad a regisztrációs űrlaphoz, hogy új felhasználókat kérjen fel az e-mail listára."
 
 msgid "EDD offers customers to open new tickets just one click from their EDD account with optionally validating the license keys."
 msgstr ""
@@ -6430,8 +6422,8 @@ msgid "Email Cc"
 msgstr "E-mail másolat"
 
 msgid ""
-"CC(Carbon Copy) - the people who should know about the information which is being shared and the people included are able to see who "
-"is there in the list."
+"CC(Carbon Copy) - the people who should know about the information which is being shared and the people included are able to see who is "
+"there in the list."
 msgstr ""
 "CC (Carbon Copy) – azok az emberek, akiknek tudniuk kell a megosztott információkról, és a benne szereplő személyek láthatják, kik "
 "szerepelnek a listán."
@@ -6446,11 +6438,11 @@ msgid "agent auto assign"
 msgstr "ügynök automatikus hozzárendelése"
 
 msgid ""
-"When auto assignment is enabled and a ticket is created, an appropriate agent is automatically assigned to the ticket and it is "
-"moved to the Assigned state."
+"When auto assignment is enabled and a ticket is created, an appropriate agent is automatically assigned to the ticket and it is moved to "
+"the Assigned state."
 msgstr ""
-"Amikor az automatikus hozzárendelés engedélyezve van, és létrejön egy jegy, a rendszer automatikusan hozzárendeli a megfelelő "
-"ügynököt a jegyhez, és a Hozzárendelt állapotba kerül."
+"Amikor az automatikus hozzárendelés engedélyezve van, és létrejön egy jegy, a rendszer automatikusan hozzárendeli a megfelelő ügynököt a "
+"jegyhez, és a Hozzárendelt állapotba kerül."
 
 msgid "Social Login"
 msgstr "Közösségi bejelentkezés"
@@ -6484,8 +6476,7 @@ msgid "All Future Addons"
 msgstr "Minden jövőbeli kiegészítés"
 
 msgid ""
-"Hey there! We have recently launched a fresh update for the add-ons. Don't forget to update the add-ons to enjoy the greatest "
-"features!"
+"Hey there! We have recently launched a fresh update for the add-ons. Don't forget to update the add-ons to enjoy the greatest features!"
 msgstr ""
 "Halihó! Nemrég elindítottunk egy új frissítést a kiegészítőkhöz. Ne felejtse el frissíteni a kiegészítőket, hogy élvezze a legjobb "
 "funkciókat!"
@@ -6753,8 +6744,8 @@ msgstr "Admin VAGY ügynök e-mail megjelenítése a jegyre adott válaszon"
 
 msgid "Show or hide the multiform popup when creating a new ticket. if you hide them, the system will open the default form."
 msgstr ""
-"Új jegy létrehozásakor jelenítse meg vagy elrejtse a többformájú előugró ablakot. ha elrejti őket, a rendszer megnyitja az "
-"alapértelmezett űrlapot."
+"Új jegy létrehozásakor jelenítse meg vagy elrejtse a többformájú előugró ablakot. ha elrejti őket, a rendszer megnyitja az alapértelmezett "
+"űrlapot."
 
 msgid "Multiforms Popup For New Tickets"
 msgstr "Multiforms előugró ablak új jegyekhez"
@@ -7087,11 +7078,11 @@ msgid "Edit Help Topic"
 msgstr "Súgótéma szerkesztése"
 
 msgid ""
-"e.g ' I have read and agree to the [link] Terms and Conditions[/link].  ' The text between [link] and [/link] will be linked to "
-"provided url or wordpress page."
+"e.g ' I have read and agree to the [link] Terms and Conditions[/link].  ' The text between [link] and [/link] will be linked to provided "
+"url or wordpress page."
 msgstr ""
-"pl. „Elolvastam és elfogadom a [link] Általános Szerződési Feltételeket[/link]. ' A [link] és a [/link] közötti szöveg a megadott "
-"URL-re vagy a wordpress oldalra lesz hivatkozva."
+"pl. „Elolvastam és elfogadom a [link] Általános Szerződési Feltételeket[/link]. ' A [link] és a [/link] közötti szöveg a megadott URL-re "
+"vagy a wordpress oldalra lesz hivatkozva."
 
 msgid "login"
 msgstr "Belépés"
@@ -7995,3 +7986,168 @@ msgstr "Addon (ek) sikeresen telepítve!"
 
 msgid "Addon(s) Installation Failed"
 msgstr "ADDON (ek) telepítése sikertelen"
+
+msgid "Your JS Support Ticket license key has expired or is invalid. Please update it to continue receiving support and updates."
+msgstr "A JS támogatási jegy licencje lejárt vagy érvénytelen. Kérjük, frissítse azt, hogy továbbra is fogadjon támogatást és frissítéseket."
+
+msgid "Import Data"
+msgstr "Adatok importálása"
+
+msgid "No Addon Installed!"
+msgstr "Nincs telepítve!"
+
+msgid "Add-Ons"
+msgstr "Kiegészítők"
+
+msgid "Copied to clipboard!"
+msgstr "Másolva a vágólapra!"
+
+msgid "Failed to copy!"
+msgstr "Nem sikerült másolni!"
+
+msgid "Failed to copy to clipboard. Please copy manually."
+msgstr "Nem sikerült másolni a vágólapra. Kérjük, másolja manuálisan."
+
+msgid "Reply content appended!"
+msgstr "Válasz tartalom csatolva!"
+
+msgid "No ticket selected!"
+msgstr "Nincs jegyet kiválasztva!"
+
+msgid "Error fetching replies."
+msgstr "Hiba a válaszok letöltése."
+
+msgid "Failed to fetch replies. Please try again."
+msgstr "Nem sikerült válaszokat hozni. Kérjük, próbálkozzon újra."
+
+msgid "Error fetching matching tickets:"
+msgstr "Hiba a megfelelő jegyek lekérése:"
+
+msgid "Error fetching replies:"
+msgstr "Hiba a válaszok letöltése:"
+
+msgid "No matching tickets found."
+msgstr "Nincs megfelelő jegy."
+
+msgid "Ticket ID:"
+msgstr "Jegy -azonosító:"
+
+msgid "Replies for:"
+msgstr "Válaszok:"
+
+msgid "No replies found for this ticket."
+msgstr "Nem talált válasz erre a jegyre."
+
+msgid "N/A"
+msgstr "N/A"
+
+msgid "No content"
+msgstr "Nincs tartalom"
+
+msgid "No date"
+msgstr "Nincs dátum"
+
+msgid "Reply By:"
+msgstr "Válasz:"
+
+msgid "AI-Powered Reply Mode"
+msgstr "AI-meghajtású válasz mód"
+
+msgid "Control how this individual reply influences the AI search and response generation process for future queries."
+msgstr "Ellenőrizze, hogy ez az egyéni válasz hogyan befolyásolja az AI keresési és válaszgenerációs folyamatot a jövőbeli lekérdezésekhez."
+
+msgid "Default: reply included in all AI search queries."
+msgstr "Alapértelmezés: A válasz az összes AI keresési lekérdezésbe tartalmazza."
+
+msgid "Enable: reply used in AI queries only when the Enable Tickets filter is active."
+msgstr "Engedélyezés: Az AI lekérdezésekben használt válasz csak akkor, ha az engedélyezési szűrő aktív."
+
+msgid "Enable"
+msgstr "Engedélyez"
+
+msgid "Disable: reply excluded from AI queries."
+msgstr "Letiltás: A válasz kizárva az AI lekérdezésekből."
+
+msgid "Disable"
+msgstr "Letilt"
+
+msgid "AI Icon"
+msgstr "AI ikon"
+
+msgid "AI-Powered Reply"
+msgstr "AI-alapú válasz"
+
+msgid "Get context-based suggestions to effortlessly create clear and relevant replies."
+msgstr "Kontextus-alapú javaslatokat kapjon egyértelmű és releváns válaszok könnyedén létrehozásához."
+
+msgid "Generate AI Response"
+msgstr "Generáljon AI választ"
+
+msgid "Matching Tickets"
+msgstr "Jegyek egyeztetése"
+
+msgid "Filter"
+msgstr "Szűrő"
+
+msgid "Enable Tickets"
+msgstr "Jegyek engedélyezése"
+
+msgid "All Replies"
+msgstr "Minden válasz"
+
+msgid "Enable Replies"
+msgstr "Engedélyezze a válaszokat"
+
+msgid "Control how this ticket and its replies influence AI search and response generation for future queries."
+msgstr "Ellenőrizze, hogy ez a jegy és válaszai hogyan befolyásolják az AI keresést és a válaszgenerációt a jövőbeli lekérdezésekhez."
+
+msgid "Default: ticket and replies included in all AI queries."
+msgstr "Alapértelmezés: jegy és válaszok az összes AI lekérdezésbe."
+
+msgid "Enable: ticket and replies used only when the “Enable Tickets” filter is active."
+msgstr "Engedélyezés: A jegy és a válaszok csak akkor használják, ha a „jegyek engedélyezése” szűrő aktív."
+
+msgid "Disable: ticket and replies excluded from AI queries."
+msgstr "Tiltsa ki: jegy és válaszok, amelyeket kizártak az AI lekérdezésekből."
+
+msgid "Get context-aware suggestions for your response."
+msgstr "Készítsen kontextus-tudatos javaslatokat a válaszához."
+
+msgid "Ticket ID is required."
+msgstr "Jegy -azonosító szükséges."
+
+msgid "Ticket not found."
+msgstr "Jegyet nem találtak."
+
+msgid "Database error occurred."
+msgstr "Adatbázis -hiba történt."
+
+msgid "AI Reply Section"
+msgstr "AI válasz szakasz"
+
+msgid "Get AI-powered, context-based suggestions to effortlessly create clear, relevant, and helpful replies."
+msgstr "Kapjon AI-hajtású, kontextus-alapú javaslatokat, hogy könnyedén hozzon létre egyértelmű, releváns és hasznos válaszokat."
+
+msgid "Change Ticket Status"
+msgstr "A jegy állapotának módosítása"
+
+msgid "Use AI Powered Reply Feature"
+msgstr "Használja az AI POWED válasz funkciót"
+
+msgid "Set AI Reply Mode for Ticket"
+msgstr "Állítsa be az AI válasz módot a jegyhez"
+
+msgid "Set AI Reply Mode for Reply"
+msgstr "Állítsa be az AI válasz módot a válaszhoz"
+
+msgid "Limit AI Replies to Agent-Assigned Tickets"
+msgstr "Korlátozza az AI válaszokat az ügynökök által kiosztott jegyekre"
+
+msgid "Suggested Response"
+msgstr "Javasolt válasz"
+
+msgid "Show User Avatar"
+msgstr "Mutassa meg a felhasználói avatárt"
+
+msgid "Showing avatars may slightly slow down page loading"
+msgstr "Az avatárok megjelenítése kissé lelassíthatja az oldal betöltését"

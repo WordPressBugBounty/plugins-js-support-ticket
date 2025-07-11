@@ -7930,3 +7930,168 @@ msgstr "KU3Y8ZJ3L"
 
 msgid "11-6-2023"
 msgstr "11-6-2023"
+
+msgid "Your JS Support Ticket license key has expired or is invalid. Please update it to continue receiving support and updates."
+msgstr "Kunci Lesen Sokongan JS anda telah tamat tempoh atau tidak sah. Sila kemas kini untuk terus menerima sokongan dan kemas kini."
+
+msgid "Import Data"
+msgstr "Import data"
+
+msgid "No Addon Installed!"
+msgstr "Tiada addon dipasang!"
+
+msgid "Add-Ons"
+msgstr "Tambah"
+
+msgid "Copied to clipboard!"
+msgstr "Disalin ke Clipboard!"
+
+msgid "Failed to copy!"
+msgstr "Gagal menyalin!"
+
+msgid "Failed to copy to clipboard. Please copy manually."
+msgstr "Gagal menyalin ke papan klip. Sila salin secara manual."
+
+msgid "Reply content appended!"
+msgstr "Balas kandungan yang dilampirkan!"
+
+msgid "No ticket selected!"
+msgstr "Tiada tiket dipilih!"
+
+msgid "Error fetching replies."
+msgstr "Ralat mengambil balasan."
+
+msgid "Failed to fetch replies. Please try again."
+msgstr "Gagal mengambil balasan. Sila cuba lagi."
+
+msgid "Error fetching matching tickets:"
+msgstr "Ralat mengambil tiket yang sepadan:"
+
+msgid "Error fetching replies:"
+msgstr "Ralat mengambil balasan:"
+
+msgid "No matching tickets found."
+msgstr "Tiada tiket yang sepadan dijumpai."
+
+msgid "Ticket ID:"
+msgstr "ID Tiket:"
+
+msgid "Replies for:"
+msgstr "Balasan untuk:"
+
+msgid "No replies found for this ticket."
+msgstr "Tiada balasan yang dijumpai untuk tiket ini."
+
+msgid "N/A"
+msgstr "N/a"
+
+msgid "No content"
+msgstr "Tiada kandungan"
+
+msgid "No date"
+msgstr "Tiada tarikh"
+
+msgid "Reply By:"
+msgstr "Balas oleh:"
+
+msgid "AI-Powered Reply Mode"
+msgstr "Mod balasan berkuasa AI"
+
+msgid "Control how this individual reply influences the AI search and response generation process for future queries."
+msgstr "Kawal bagaimana jawapan individu ini mempengaruhi proses pencarian dan tindak balas AI untuk pertanyaan masa depan."
+
+msgid "Default: reply included in all AI search queries."
+msgstr "Lalai: Balas termasuk dalam semua pertanyaan carian AI."
+
+msgid "Enable: reply used in AI queries only when the Enable Tickets filter is active."
+msgstr "Dayakan: Balas yang digunakan dalam pertanyaan AI hanya apabila penapis tiket membolehkan aktif."
+
+msgid "Enable"
+msgstr "Membolehkan"
+
+msgid "Disable: reply excluded from AI queries."
+msgstr "Lumpuhkan: Balas dikecualikan daripada pertanyaan AI."
+
+msgid "Disable"
+msgstr "Lumpuhkan"
+
+msgid "AI Icon"
+msgstr "Ikon AI"
+
+msgid "AI-Powered Reply"
+msgstr "Jawapan berkuasa AI"
+
+msgid "Get context-based suggestions to effortlessly create clear and relevant replies."
+msgstr "Dapatkan cadangan berasaskan konteks untuk membuat balasan yang jelas dan relevan."
+
+msgid "Generate AI Response"
+msgstr "Menjana respons AI"
+
+msgid "Matching Tickets"
+msgstr "Tiket yang sepadan"
+
+msgid "Filter"
+msgstr "Penapis"
+
+msgid "Enable Tickets"
+msgstr "Dayakan tiket"
+
+msgid "All Replies"
+msgstr "Semua balasan"
+
+msgid "Enable Replies"
+msgstr "Dayakan balasan"
+
+msgid "Control how this ticket and its replies influence AI search and response generation for future queries."
+msgstr "Kawal bagaimana tiket ini dan balasannya mempengaruhi pencarian AI dan penjanaan tindak balas untuk pertanyaan masa depan."
+
+msgid "Default: ticket and replies included in all AI queries."
+msgstr "Lalai: Tiket dan balasan termasuk dalam semua pertanyaan AI."
+
+msgid "Enable: ticket and replies used only when the “Enable Tickets” filter is active."
+msgstr "Dayakan: Tiket dan balasan yang digunakan hanya apabila penapis \"Dayakan Tiket\" aktif."
+
+msgid "Disable: ticket and replies excluded from AI queries."
+msgstr "Lumpuhkan: Tiket dan balasan dikecualikan daripada pertanyaan AI."
+
+msgid "Get context-aware suggestions for your response."
+msgstr "Dapatkan cadangan konteks untuk respons anda."
+
+msgid "Ticket ID is required."
+msgstr "ID tiket diperlukan."
+
+msgid "Ticket not found."
+msgstr "Tiket tidak dijumpai."
+
+msgid "Database error occurred."
+msgstr "Ralat pangkalan data berlaku."
+
+msgid "AI Reply Section"
+msgstr "Bahagian Balas AI"
+
+msgid "Get AI-powered, context-based suggestions to effortlessly create clear, relevant, and helpful replies."
+msgstr "Dapatkan cadangan berasaskan konteks AI untuk membuat balasan yang jelas, relevan, dan bermanfaat."
+
+msgid "Change Ticket Status"
+msgstr "Tukar status tiket"
+
+msgid "Use AI Powered Reply Feature"
+msgstr "Gunakan ciri balasan berkuasa AI"
+
+msgid "Set AI Reply Mode for Ticket"
+msgstr "Tetapkan mod balasan AI untuk tiket"
+
+msgid "Set AI Reply Mode for Reply"
+msgstr "Tetapkan mod balasan AI untuk balasan"
+
+msgid "Limit AI Replies to Agent-Assigned Tickets"
+msgstr "Hadkan balasan AI ke tiket yang ditugaskan oleh ejen"
+
+msgid "Suggested Response"
+msgstr "Respons yang dicadangkan"
+
+msgid "Show User Avatar"
+msgstr "Tunjukkan avatar pengguna"
+
+msgid "Showing avatars may slightly slow down page loading"
+msgstr "Menunjukkan avatar mungkin sedikit melambatkan halaman memuatkan"

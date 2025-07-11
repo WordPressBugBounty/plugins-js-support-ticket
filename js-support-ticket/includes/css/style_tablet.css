@@ -89,3 +89,7 @@
 div.js-ticket-table-wrp div.js-ticket-table-header {display: none;}
 div.js-ticket-table-body-col {width: 100%;text-align: left !important;}
 span.js-ticket-display-block {display: inline-block;margin-right: 5px;}
+
+/* AI Powered Response */
+.js-ticket-ai-powered-reply-wrapper {justify-content: center !important;}
+.js-ticket-ai-powered-reply-content {text-align: center;}

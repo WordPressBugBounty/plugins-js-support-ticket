@@ -163,3 +163,7 @@
 	/* login */
 	form#loginform-custom p.login-username {width: 100%;margin-right: 0 !important;}
 	form#loginform-custom p.login-password {width: 100%;margin-top: 0;}
+
+	/* AI Powered Response */
+	.js-ticket-ai-powered-reply-wrapper {justify-content: center !important;}
+	.js-ticket-ai-powered-reply-content {text-align: center;}

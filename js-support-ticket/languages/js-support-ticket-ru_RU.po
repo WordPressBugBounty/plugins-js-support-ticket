@@ -2150,12 +2150,10 @@ msgstr "Страница обращения по умолчанию"
 msgid "Select Page"
 msgstr "Выбрать страницу"
 
-msgid ""
-"Select JS Help Desk default page, on the action system, will redirect on the selected page. If not select the default page, email links, and "
-"support icon might not work."
+msgid "Select JS Help Desk default page, on the action system, will redirect on the selected page. If not select the default page, email links, and support icon might not work."
 msgstr ""
-"Выберите страницу службы поддержки JS по умолчанию, в системе действий будет перенаправлен на выбранную страницу. Если не выбрать страницу по "
-"умолчанию, ссылки электронной почты и значок поддержки могут не работать."
+"Выберите страницу службы поддержки JS по умолчанию, в системе действий будет перенаправлен на выбранную страницу. Если не выбрать страницу по умолчанию, ссылки электронной почты и "
+"значок поддержки могут не работать."
 
 msgid "Support Icon"
 msgstr "Иконка поддержки"
@@ -3226,17 +3224,13 @@ msgid "Enables agents to merge two tickets of the same user into one instead of 
 msgstr "Позволяет агентам объединять два билета одного и того же пользователя в один вместо решения одной и той же проблемы во многих билетах."
 
 msgid "Defines rules or set specific intervals of time to make ticket auto overdue.The ticket can overdue by type or overdue by Cronjob."
-msgstr ""
-"Определяет правила или устанавливает определенные интервалы времени, чтобы сделать билет автоматически просроченным. Билет может быть просрочен "
-"по типу или просрочен Cronjob."
+msgstr "Определяет правила или устанавливает определенные интервалы времени, чтобы сделать билет автоматически просроченным. Билет может быть просрочен по типу или просрочен Cronjob."
 
 msgid "SMTP enables you to add custom mail protocol to send and receive emails within the js help desk."
 msgstr "SMTP позволяет добавить собственный почтовый протокол для отправки и получения сообщений электронной почты в справочной службе js."
 
 msgid "Displays complete ticket history along with the ticket status, currently assigned user and other actions performed on each ticket."
-msgstr ""
-"Отображает полную историю заявок вместе со статусом заявки, назначенным в данный момент пользователем и другими действиями, выполненными с "
-"каждой заявкой."
+msgstr "Отображает полную историю заявок вместе со статусом заявки, назначенным в данный момент пользователем и другими действиями, выполненными с каждой заявкой."
 
 msgid "Pre-populated messages allow support agents to respond quickly."
 msgstr "Предварительно заполненные сообщения позволяют агентам поддержки быстро реагировать."
@@ -3248,8 +3242,7 @@ msgid "Time Tracking"
 msgstr "Отслеживание времени"
 
 msgid "Track the time spent on each ticket by each agent and each reply. Report the admin on how much time is spent on each ticket."
-msgstr ""
-"Отслеживайте время, затраченное на каждый тикет каждым агентом и каждым ответом. Сообщите администратору, сколько времени уходит на каждый тикет."
+msgstr "Отслеживайте время, затраченное на каждый тикет каждым агентом и каждым ответом. Сообщите администратору, сколько времени уходит на каждый тикет."
 
 msgid "User Options"
 msgstr "Параметры пользователя"
@@ -3309,9 +3302,7 @@ msgid "JS Help Desk WooCommerce provides the much-needed bridge between your Woo
 msgstr "Справочная служба JS WooCommerce обеспечивает столь необходимый мост между вашим магазином WooCommerce и справочной службой JS."
 
 msgid "Collect your customer's private data, sensitive information from credit card to health information and store them encrypted."
-msgstr ""
-"Соберите личные данные вашего клиента, конфиденциальную информацию от кредитной карты до медицинской информации и храните их в зашифрованном "
-"виде."
+msgstr "Соберите личные данные вашего клиента, конфиденциальную информацию от кредитной карты до медицинской информации и храните их в зашифрованном виде."
 
 msgid "Without valid Envato, license clients won't be able to open a new ticket."
 msgstr "Без действительного Envato лицензионные клиенты не смогут открыть новый тикет."
@@ -3710,13 +3701,12 @@ msgid "Wordpress Plugin"
 msgstr "Плагин Wordpress"
 
 msgid ""
-"JS Help Desk is a trusted open source ticket system. JS Help Desk is a simple, easy to use, web-based customer support system. Users can create "
-"a ticket from the front-end. JS Help Desk comes packed with lot features than most of the expensive(and complex) support ticket system on the "
-"market. The best part is, It completely free."
+"JS Help Desk is a trusted open source ticket system. JS Help Desk is a simple, easy to use, web-based customer support system. Users can create a ticket from the front-end. JS Help "
+"Desk comes packed with lot features than most of the expensive(and complex) support ticket system on the market. The best part is, It completely free."
 msgstr ""
-"JS Help Desk - это доверенная система заявок с открытым исходным кодом. JS Help Desk - это простая, удобная в использовании система поддержки "
-"клиентов через Интернет. Пользователи могут создать тикет из внешнего интерфейса. Справочная служба JS поставляется с большим количеством "
-"функций, чем большинство дорогих (и сложных) систем поддержки на рынке. Лучшая часть, это совершенно бесплатно."
+"JS Help Desk - это доверенная система заявок с открытым исходным кодом. JS Help Desk - это простая, удобная в использовании система поддержки клиентов через Интернет. Пользователи "
+"могут создать тикет из внешнего интерфейса. Справочная служба JS поставляется с большим количеством функций, чем большинство дорогих (и сложных) систем поддержки на рынке. Лучшая "
+"часть, это совершенно бесплатно."
 
 msgid "JS Help Desk Addon Installer"
 msgstr "Установщик дополнений JS Help Desk"
@@ -6314,9 +6304,7 @@ msgid "Add-On’s For Help Desk"
 msgstr "Дополнения для службы поддержки"
 
 msgid "Get trusted WordPress add on’s. Guaranteed to work fast, safe to use, beautifully coded, packed with features and easy to use."
-msgstr ""
-"Получите надежные дополнения WordPress. Гарантировано быстрая работа, безопасность в использовании, красивый код, множество функций и простота в "
-"использовании."
+msgstr "Получите надежные дополнения WordPress. Гарантировано быстрая работа, безопасность в использовании, красивый код, множество функций и простота в использовании."
 
 msgid "Save big with an exclusive membership plan today!"
 msgstr "Сэкономьте по-крупному с эксклюзивным планом членства уже сегодня!"
@@ -6328,9 +6316,7 @@ msgid "Add agents and assign roles and permissions to provide assistance and sup
 msgstr "Добавляйте агентов и назначайте роли и разрешения для предоставления помощи и поддержки по заявкам в службу поддержки клиентов."
 
 msgid "Define rules for ticket to auto close. Ticket will be auto close after specific interval of time which can be set by admin."
-msgstr ""
-"Определите правила автоматического закрытия заявки. Тикет будет автоматически закрыт через определенный интервал времени, который может быть "
-"установлен администратором."
+msgstr "Определите правила автоматического закрытия заявки. Тикет будет автоматически закрыт через определенный интервал времени, который может быть установлен администратором."
 
 msgid "Get the survey from your customers on ticket closing to improve your quality of services and assistance."
 msgstr "Получите опрос от своих клиентов при закрытии заявки, чтобы улучшить качество услуг и помощи."
@@ -6342,19 +6328,13 @@ msgid "Help topics help users to find and select the area with which they need a
 msgstr "Разделы справки помогают пользователям найти и выбрать область, в которой им нужна помощь."
 
 msgid "The private note is used as reminders or to give other agents insights into the ticket issue. User Won't see the private notes."
-msgstr ""
-"Личная заметка используется в качестве напоминания или для предоставления другим агентам информации о проблеме с заявкой. Пользователь не будет "
-"видеть личные заметки."
+msgstr "Личная заметка используется в качестве напоминания или для предоставления другим агентам информации о проблеме с заявкой. Пользователь не будет видеть личные заметки."
 
 msgid "Stop losing productivity on repetitive queries,Build your knowledge base, group solutions by topics to facilitate users."
-msgstr ""
-"Перестаньте терять производительность из-за повторяющихся запросов. Создайте свою базу знаний, группируйте решения по темам для облегчения "
-"работы пользователей."
+msgstr "Перестаньте терять производительность из-за повторяющихся запросов. Создайте свою базу знаний, группируйте решения по темам для облегчения работы пользователей."
 
 msgid "Enables admin to set N numbers of tickets for users to create and set N numbers of Ticket to open for agents separately."
-msgstr ""
-"Позволяет администратору устанавливать N номеров заявок для создания пользователями и устанавливать N номеров заявок для открытия отдельно для "
-"агентов."
+msgstr "Позволяет администратору устанавливать N номеров заявок для создания пользователями и устанавливать N номеров заявок для открытия отдельно для агентов."
 
 msgid "Multi Language Email Templates"
 msgstr "Многоязычные шаблоны электронной почты"
@@ -6363,9 +6343,7 @@ msgid "It allows to create language-based email templates for all JS Help Desk e
 msgstr "Он позволяет создавать шаблоны электронной почты на основе языка для всех шаблонов электронной почты службы поддержки JS."
 
 msgid "Canned Responses are pre-populated messages that allows support agents to respond quickly to customer issues."
-msgstr ""
-"Стандартные ответы — это предварительно заполненные сообщения, которые позволяют агентам службы поддержки быстро реагировать на проблемы "
-"клиентов."
+msgstr "Стандартные ответы — это предварительно заполненные сообщения, которые позволяют агентам службы поддержки быстро реагировать на проблемы клиентов."
 
 msgid "Enables users to reply to the tickets via email without the need to login to the support system first."
 msgstr "Позволяет пользователям отвечать на заявки по электронной почте без необходимости предварительного входа в систему поддержки."
@@ -6383,9 +6361,7 @@ msgid "Save the ticket as a PDF in your system or the admin will also be able to
 msgstr "Сохраните билет в формате PDF в своей системе, иначе администратор также сможет экспортировать все данные внутри билета."
 
 msgid "Tired of getting tickets about the same problems? Add FAQs to drastically reduce the number of common questions from users."
-msgstr ""
-"Устали получать билеты с одинаковыми проблемами? Добавьте часто задаваемые вопросы, чтобы значительно сократить количество распространенных "
-"вопросов от пользователей."
+msgstr "Устали получать билеты с одинаковыми проблемами? Добавьте часто задаваемые вопросы, чтобы значительно сократить количество распространенных вопросов от пользователей."
 
 msgid "Admin Widgets"
 msgstr "Виджеты администратора"
@@ -6403,13 +6379,10 @@ msgid "Mail Chimp"
 msgstr "Mailchimp"
 
 msgid "The Mail Chimp add-on adds a new checkbox to the registration form for prompting new users to subscribe your email-list."
-msgstr ""
-"Дополнение Mail Chimp добавляет в регистрационную форму новый флажок, предлагающий новым пользователям подписаться на ваш список адресов "
-"электронной почты."
+msgstr "Дополнение Mail Chimp добавляет в регистрационную форму новый флажок, предлагающий новым пользователям подписаться на ваш список адресов электронной почты."
 
 msgid "EDD offers customers to open new tickets just one click from their EDD account with optionally validating the license keys."
-msgstr ""
-"EDD предлагает клиентам открывать новые билеты одним щелчком мыши из своей учетной записи EDD с дополнительной проверкой лицензионных ключей."
+msgstr "EDD предлагает клиентам открывать новые билеты одним щелчком мыши из своей учетной записи EDD с дополнительной проверкой лицензионных ключей."
 
 msgid "email cc"
 msgstr "электронная копия"
@@ -6417,9 +6390,7 @@ msgstr "электронная копия"
 msgid "Email Cc"
 msgstr "Электронная почта копия"
 
-msgid ""
-"CC(Carbon Copy) - the people who should know about the information which is being shared and the people included are able to see who is there in "
-"the list."
+msgid "CC(Carbon Copy) - the people who should know about the information which is being shared and the people included are able to see who is there in the list."
 msgstr "CC (Carbon Copy) — люди, которые должны знать о передаваемой информации, и включенные в нее люди могут видеть, кто находится в списке."
 
 msgid "multiform"
@@ -6431,20 +6402,14 @@ msgstr "Multiform позволяет пользователю добавлять
 msgid "agent auto assign"
 msgstr "автоматическое назначение агента"
 
-msgid ""
-"When auto assignment is enabled and a ticket is created, an appropriate agent is automatically assigned to the ticket and it is moved to the "
-"Assigned state."
-msgstr ""
-"Если включено автоматическое назначение и создана заявка, заявке автоматически назначается соответствующий агент и она переходит в состояние "
-"Назначено."
+msgid "When auto assignment is enabled and a ticket is created, an appropriate agent is automatically assigned to the ticket and it is moved to the Assigned state."
+msgstr "Если включено автоматическое назначение и создана заявка, заявке автоматически назначается соответствующий агент и она переходит в состояние Назначено."
 
 msgid "Social Login"
 msgstr "Социальный вход"
 
 msgid "Users can login from their social media accounts. They can create a new account or use social media accounts."
-msgstr ""
-"Пользователи могут войти в систему через свои учетные записи в социальных сетях. Они могут создать новую учетную запись или использовать учетные "
-"записи в социальных сетях."
+msgstr "Пользователи могут войти в систему через свои учетные записи в социальных сетях. Они могут создать новую учетную запись или использовать учетные записи в социальных сетях."
 
 msgid "JS Help Desk Add-Ons Bundle Pack"
 msgstr "Пакет дополнений JS Help Desk"
@@ -6735,8 +6700,7 @@ msgid "Show Admin OR Agent Email On Ticket Reply"
 msgstr "Показывать адрес электронной почты администратора или агента при ответе на заявку"
 
 msgid "Show or hide the multiform popup when creating a new ticket. if you hide them, the system will open the default form."
-msgstr ""
-"Показать или скрыть всплывающее окно с несколькими формами при создании новой заявки. если вы их скроете, система откроет форму по умолчанию."
+msgstr "Показать или скрыть всплывающее окно с несколькими формами при создании новой заявки. если вы их скроете, система откроет форму по умолчанию."
 
 msgid "Multiforms Popup For New Tickets"
 msgstr "Всплывающее окно Multiforms для новых билетов"
@@ -7068,12 +7032,8 @@ msgstr "Добавить учетные данные"
 msgid "Edit Help Topic"
 msgstr "Изменить тему справки"
 
-msgid ""
-"e.g ' I have read and agree to the [link] Terms and Conditions[/link].  ' The text between [link] and [/link] will be linked to provided url or "
-"wordpress page."
-msgstr ""
-"например: «Я прочитал и согласен с [ссылка] Условиями использования[/link]. ' Текст между [link] и [/link] будет связан с предоставленным URL-"
-"адресом или страницей WordPress."
+msgid "e.g ' I have read and agree to the [link] Terms and Conditions[/link].  ' The text between [link] and [/link] will be linked to provided url or wordpress page."
+msgstr "например: «Я прочитал и согласен с [ссылка] Условиями использования[/link]. ' Текст между [link] и [/link] будет связан с предоставленным URL-адресом или страницей WordPress."
 
 msgid "login"
 msgstr "авторизоваться"
@@ -7977,3 +7937,168 @@ msgstr "Аддон (ы) успешно установлен!"
 
 msgid "Addon(s) Installation Failed"
 msgstr "Установка аддон (S) не удалась"
+
+msgid "Your JS Support Ticket license key has expired or is invalid. Please update it to continue receiving support and updates."
+msgstr "Ваш лицензионный ключ для поддержки JS с истекшим сроком истечения срока действия или недействителен. Пожалуйста, обновите его, чтобы продолжить получение поддержки и обновлений."
+
+msgid "Import Data"
+msgstr "Импорт данных"
+
+msgid "No Addon Installed!"
+msgstr "Аддон не установлен!"
+
+msgid "Add-Ons"
+msgstr "Надстройки"
+
+msgid "Copied to clipboard!"
+msgstr "Скопировано в буфер обмена!"
+
+msgid "Failed to copy!"
+msgstr "Не удалось скопировать!"
+
+msgid "Failed to copy to clipboard. Please copy manually."
+msgstr "Не удалось скопировать в буфер обмена. Пожалуйста, скопируйте вручную."
+
+msgid "Reply content appended!"
+msgstr "Ответить контент добавлен!"
+
+msgid "No ticket selected!"
+msgstr "Билет не выбран!"
+
+msgid "Error fetching replies."
+msgstr "Ошибка извлечения ответов."
+
+msgid "Failed to fetch replies. Please try again."
+msgstr "Не удалось получить ответы. Пожалуйста, попробуйте еще раз."
+
+msgid "Error fetching matching tickets:"
+msgstr "Ошибка извлечения соответствующих билетов:"
+
+msgid "Error fetching replies:"
+msgstr "Ошибка извлечения ответов:"
+
+msgid "No matching tickets found."
+msgstr "Никаких подходящих билетов не найдено."
+
+msgid "Ticket ID:"
+msgstr "Идентификатор билета:"
+
+msgid "Replies for:"
+msgstr "Ответы на:"
+
+msgid "No replies found for this ticket."
+msgstr "Нет ответов на этот билет."
+
+msgid "N/A"
+msgstr "N/a"
+
+msgid "No content"
+msgstr "Нет контента"
+
+msgid "No date"
+msgstr "Нет даты"
+
+msgid "Reply By:"
+msgstr "Ответить:"
+
+msgid "AI-Powered Reply Mode"
+msgstr "Режим ответа с AI"
+
+msgid "Control how this individual reply influences the AI search and response generation process for future queries."
+msgstr "Управляйте тем, как этот индивидуальный ответ влияет на процесс поиска ИИ и генерации ответов для будущих запросов."
+
+msgid "Default: reply included in all AI search queries."
+msgstr "По умолчанию: ответ включен во все поисковые запросы искусственного интеллекта."
+
+msgid "Enable: reply used in AI queries only when the Enable Tickets filter is active."
+msgstr "Включить: Ответ используется в запросах ИИ только тогда, когда активный фильтр билетов включения."
+
+msgid "Enable"
+msgstr "Давать возможность"
+
+msgid "Disable: reply excluded from AI queries."
+msgstr "Отключить: Ответ исключен из запросов ИИ."
+
+msgid "Disable"
+msgstr "Запрещать"
+
+msgid "AI Icon"
+msgstr "ИИ ИИКОНА"
+
+msgid "AI-Powered Reply"
+msgstr "Ответ с AI"
+
+msgid "Get context-based suggestions to effortlessly create clear and relevant replies."
+msgstr "Получить контекстные предложения, чтобы легко создать четкие и соответствующие ответы."
+
+msgid "Generate AI Response"
+msgstr "Генерировать ответ ИИ"
+
+msgid "Matching Tickets"
+msgstr "Соответствующие билеты"
+
+msgid "Filter"
+msgstr "Фильтр"
+
+msgid "Enable Tickets"
+msgstr "Включить билеты"
+
+msgid "All Replies"
+msgstr "Все ответы"
+
+msgid "Enable Replies"
+msgstr "Включить ответы"
+
+msgid "Control how this ticket and its replies influence AI search and response generation for future queries."
+msgstr "Контролируйте, как этот билет и его ответы влияют на поиск ИИ и генерацию ответов для будущих запросов."
+
+msgid "Default: ticket and replies included in all AI queries."
+msgstr "По умолчанию: билет и ответы, включенные во все запросы искусственного интеллекта."
+
+msgid "Enable: ticket and replies used only when the “Enable Tickets” filter is active."
+msgstr "Включить: билет и ответы, используемые только тогда, когда активен фильтр «включить билеты»."
+
+msgid "Disable: ticket and replies excluded from AI queries."
+msgstr "Отключить: билет и ответы, исключенные из AI -запросов."
+
+msgid "Get context-aware suggestions for your response."
+msgstr "Получите контекстные предложения для вашего ответа."
+
+msgid "Ticket ID is required."
+msgstr "Требуется идентификатор билета."
+
+msgid "Ticket not found."
+msgstr "Билет не найден."
+
+msgid "Database error occurred."
+msgstr "Произошла ошибка базы данных."
+
+msgid "AI Reply Section"
+msgstr "AI Ответить в раздел"
+
+msgid "Get AI-powered, context-based suggestions to effortlessly create clear, relevant, and helpful replies."
+msgstr "Получите предложения, основанные на контексте, основанные на искусственном интеллекте, чтобы легко создать четкие, актуальные и полезные ответы."
+
+msgid "Change Ticket Status"
+msgstr "Изменить статус билета"
+
+msgid "Use AI Powered Reply Feature"
+msgstr "Используйте функцию ответа с ИИ"
+
+msgid "Set AI Reply Mode for Ticket"
+msgstr "Установите режим ответа AI для билета"
+
+msgid "Set AI Reply Mode for Reply"
+msgstr "Установите режим ответа AI для ответа"
+
+msgid "Limit AI Replies to Agent-Assigned Tickets"
+msgstr "Ограничение AI отвечает на билеты, посвященные агенту"
+
+msgid "Suggested Response"
+msgstr "Предлагаемый ответ"
+
+msgid "Show User Avatar"
+msgstr "Показать пользовательский аватар"
+
+msgid "Showing avatars may slightly slow down page loading"
+msgstr "Показ аватаров может немного замедлить загрузку страницы"

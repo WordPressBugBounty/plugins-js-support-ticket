@@ -16,10 +16,10 @@ class JSSTticketController {
             $defaultlayout = "myticket";
         $layout = JSSTrequest::getLayout('jstlay', null, $defaultlayout);
         jssupportticket::$_data['sanitized_args']['jsst_nonce'] = esc_html(wp_create_nonce('jsst_nonce'));
-        // remove this in the version 2.9.5
+        // remove this in the version 2.9.9
         include_once JSST_PLUGIN_PATH . 'includes/updates/updates.php';
-        JSSTupdates::checkUpdates('297');
-        // remove this in the version 2.9.5
+        JSSTupdates::checkUpdates('298');
+        // remove this in the version 2.9.9
         if (self::canaddfile($layout)) {
             switch ($layout) {
                 case 'admin_tickets':

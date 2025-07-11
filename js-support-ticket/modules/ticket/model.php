@@ -2979,6 +2979,176 @@ class JSSTticketModel {
         }
         return $closedBy;
     }
+
+    function checkAIReplyTicketsBySubject() {
+        $nonce = JSSTrequest::getVar('_wpnonce');
+        if (!wp_verify_nonce($nonce, 'check-smart-reply')) {
+            die('Security check Failed');
+        }
+
+        $id = JSSTrequest::getVar('ticketId');
+        $subject = JSSTrequest::getVar('ticketSubject');
+
+        $agentquery = "";
+        if (in_array('agent', jssupportticket::$_active_addons) && JSSTincluder::getJSModel('agent')->isUserStaff()) {
+            $allowed = JSSTincluder::getJSModel('userpermissions')->checkPermissionGrantedForTask('Limit AI Replies to Agent-Assigned Tickets');
+            if ($allowed) {
+                $staffid = JSSTincluder::getJSModel('agent')->getStaffId(JSSTincluder::getObjectClass('user')->uid());
+                $agentquery = " AND (t.staffid = " . esc_sql($staffid) . " OR t.departmentid IN (
+                    SELECT dept.departmentid
+                    FROM `" . jssupportticket::$_db->prefix . "js_ticket_acl_user_access_departments` AS dept
+                    WHERE dept.staffid = " . esc_sql($staffid) . ")) ";
+            }
+        }
+
+        $min_relevance = 1.5; // Minimum relevance score to consider
+
+        // Get current ticket's message (for reply-based matching)
+        $query = "
+            SELECT ticket.message, ticket.uid
+            FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` AS ticket
+            WHERE ticket.id = " . esc_sql($id);
+        $ticket_data = jssupportticket::$_db->get_row($query);
+        $message = wp_strip_all_tags($ticket_data->message);
+
+        // Break the subject and message into words for partial matching
+        $subject_words = array_filter(jssupportticketphplib::JSST_explode(' ', jssupportticketphplib::JSST_trim($subject)));
+        $subject_word_count = count($subject_words);
+
+        // Weighted scoring query with exact match detection
+        $query = "
+            SELECT
+                t_scores.id,
+                t_scores.ticketid,
+                t_scores.subject,
+                t_scores.message,
+                t_scores.created,
+                t_scores.subject_score,
+                t_scores.message_score,
+                (t_scores.subject_score + t_scores.message_score) AS total_relevance,
+                t_scores.is_exact_subject_match,
+                t_scores.is_exact_message_match
+            FROM (
+                SELECT
+                    t.id,
+                    t.ticketid,
+                    t.subject,
+                    t.message,
+                    t.created,
+                    3 * IFNULL(MATCH(t.subject) AGAINST('" . esc_sql($subject) . "' IN NATURAL LANGUAGE MODE), 0) AS subject_score,
+                    1 * IFNULL(MATCH(t.message) AGAINST('" . esc_sql($message) . "' IN NATURAL LANGUAGE MODE), 0) AS message_score,
+                    t.subject LIKE '%" . esc_sql($subject) . "%' AS is_exact_subject_match,
+                    t.message LIKE '%" . esc_sql($message) . "%' AS is_exact_message_match
+                FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` t
+                WHERE t.id != " . esc_sql($id) . "
+                " . $agentquery . "
+            ) AS t_scores
+            HAVING total_relevance > " . esc_sql($min_relevance) . "
+            ORDER BY total_relevance DESC LIMIT 50";
+
+        $tickets = jssupportticket::$_db->get_results($query);
+
+        // Final result formatting
+        $results = [];
+        if (!empty($tickets)) {
+            // Compute custom_score and find max
+            $highest_score = 0;
+            foreach ($tickets as &$ticket) {
+                $custom_score = 0;
+                
+                // Exact matches get highest priority
+                if ($ticket->is_exact_subject_match) {
+                    $custom_score += ($subject_word_count * 10) + 4;
+                } elseif ($ticket->is_exact_message_match) {
+                    $custom_score += ($subject_word_count * 10) + 0;
+                } elseif ($subject_word_count > 1) {
+                    // Partial word combination matching in subject
+                    for ($i = 0; $i < $subject_word_count - 1; $i++) {
+                        $wordCombination = $subject_words[$i] . ' ' . ($subject_words[$i + 1] ?? '');
+                        if (stripos($ticket->subject, $wordCombination) !== false) {
+                            $custom_score += 10;
+                        }
+                    }
+                }
+                
+                $ticket->custom_score = $custom_score;
+                if ($ticket->custom_score > $highest_score) {
+                    $highest_score = $ticket->custom_score;
+                }
+            }
+            unset($ticket);
+
+            // Sort tickets by custom_score and total_relevance
+            usort($tickets, function ($a, $b) {
+                if ($a->custom_score === $b->custom_score) {
+                    return $b->total_relevance <=> $a->total_relevance;
+                }
+                return $b->custom_score <=> $a->custom_score;
+            });
+
+            // Apply threshold like before, but considering both custom_score and total_relevance
+            $filtered_tickets = [];
+            $threshold_percentage = 30; // 30% threshold
+            
+            // Calculate threshold values only if highest_custom_score is not zero to avoid division by zero
+            $custom_score_threshold_value = ($highest_score > 0) ? ($threshold_percentage / 100) * $highest_score : 0;
+            $highest_total_relevance = 0;
+            foreach ($tickets as $tkt) {
+                if ($tkt->total_relevance > $highest_total_relevance) {
+                    $highest_total_relevance = $tkt->total_relevance;
+                }
+            }
+            $total_relevance_threshold_value = ($highest_total_relevance > 0) ? ($threshold_percentage / 100) * $highest_total_relevance : 0;
+            foreach ($tickets as $index => $ticket) {
+                // Always keep the top result after sorting by custom_score
+                if ($index === 0) {
+                    $filtered_tickets[$ticket->id] = $ticket;
+                    continue;
+                }
+
+                // Condition 1: Check if custom_score is above its threshold
+                $is_custom_score_above_threshold = ($ticket->custom_score > 0 && $ticket->custom_score >= $custom_score_threshold_value);
+
+                // Condition 2: Check if total_relevance is above its threshold
+                $is_total_relevance_above_threshold = $ticket->total_relevance >= $total_relevance_threshold_value;
+
+                // Condition 3: Handle cases where both scores are very low (similar to original code)
+                // If custom_score is 0, total_relevance must meet the minimum relevance.
+                // This prevents purely NLP-driven low-relevance results if no custom score is found.
+                $is_scores_too_low = ($ticket->custom_score == 0 && $ticket->total_relevance < $min_relevance);
+
+                if ($is_scores_too_low) {
+                    continue;
+                }
+
+                if ($is_custom_score_above_threshold || $is_total_relevance_above_threshold) {
+                     // Ensure uniqueness by post id, keeping the highest custom_score and then the highest total_relevance
+                    if (
+                        !isset($filtered_tickets[$ticket->id]) ||
+                        $ticket->custom_score > $filtered_tickets[$ticket->id]->custom_score ||
+                        ($ticket->custom_score === $filtered_tickets[$ticket->id]->custom_score && $ticket->total_relevance > $filtered_tickets[$ticket->id]->total_relevance)
+                    ) {
+                        $filtered_tickets[$ticket->id] = $ticket;
+                    }
+                }
+            }
+
+            $tickets = array_values($filtered_tickets);
+
+            foreach ($tickets as $ticket) {
+                $results[] = [
+                    'id' => $ticket->id,
+                    'text' => $ticket->subject,
+                    'message' => wp_strip_all_tags($ticket->message),
+                    'ticketid' => $ticket->ticketid,
+                    'relevance' => $ticket->total_relevance,
+                    'custom_score' => $ticket->custom_score
+                ];
+            }
+        }
+
+        return json_encode($results);
+    }
 	
 }
 ?>

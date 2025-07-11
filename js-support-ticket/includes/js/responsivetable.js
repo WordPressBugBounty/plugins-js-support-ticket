@@ -1,7 +1,7 @@
 jQuery(document).ready(function(){
 // responsive tables
   
-jQuery('table#js-support-ticket-table').each(function(i){
+jQuery('table#js-support-ticket-table, table#jsst-import-data-result-table').each(function(i){
   var headertext = [];
   headers = jQuery(this).find('th');
   tablerows = jQuery(this).find('th');

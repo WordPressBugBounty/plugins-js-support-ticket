@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: JS Support Ticket\n"
 "POT-Creation-Date: 2019-12-17 18:15+0500\n"
-"PO-Revision-Date: 2023-11-28 13:09+0500\n"
+"PO-Revision-Date: 2025-07-07 18:06+0500\n"
 "Last-Translator: Ahmad Bilal\n"
 "Language-Team: English (http://www.transifex.com/joom-sky/js-support-ticket/language/en/)\n"
 "Language: en\n"
@@ -12,7 +12,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.4.1\n"
+"X-Generator: Poedit 3.6\n"
 "X-Poedit-Basepath: plugins\n"
 "X-Poedit-KeywordsList: __;__(;_e\n"
 "X-Poedit-SearchPath-0: .\n"
@@ -7364,7 +7364,6 @@ msgstr ""
 msgid "help"
 msgstr ""
 
-
 msgid "WooCommerce Support"
 msgstr ""
 
@@ -7878,7 +7877,6 @@ msgstr ""
 msgid "Sub Category Faqs"
 msgstr ""
 
-
 msgid "Facebook user"
 msgstr ""
 
@@ -7899,6 +7897,7 @@ msgstr ""
 
 msgid "Email CC "
 msgstr ""
+
 msgid "Auto Update Add-Ons"
 msgstr ""
 
@@ -7945,4 +7944,169 @@ msgid "Addon(s) Installed successfully!"
 msgstr ""
 
 msgid "Addon(s) Installation Failed"
+msgstr ""
+
+msgid "Your JS Support Ticket license key has expired or is invalid. Please update it to continue receiving support and updates."
+msgstr ""
+
+msgid "Import Data"
+msgstr ""
+
+msgid "No Addon Installed!"
+msgstr ""
+
+msgid "Add-Ons"
+msgstr ""
+
+msgid "Copied to clipboard!"
+msgstr ""
+
+msgid "Failed to copy!"
+msgstr ""
+
+msgid "Failed to copy to clipboard. Please copy manually."
+msgstr ""
+
+msgid "Reply content appended!"
+msgstr ""
+
+msgid "No ticket selected!"
+msgstr ""
+
+msgid "Error fetching replies."
+msgstr ""
+
+msgid "Failed to fetch replies. Please try again."
+msgstr ""
+
+msgid "Error fetching matching tickets:"
+msgstr ""
+
+msgid "Error fetching replies:"
+msgstr ""
+
+msgid "No matching tickets found."
+msgstr ""
+
+msgid "Ticket ID:"
+msgstr ""
+
+msgid "Replies for:"
+msgstr ""
+
+msgid "No replies found for this ticket."
+msgstr ""
+
+msgid "N/A"
+msgstr ""
+
+msgid "No content"
+msgstr ""
+
+msgid "No date"
+msgstr ""
+
+msgid "Reply By:"
+msgstr ""
+
+msgid "AI-Powered Reply Mode"
+msgstr ""
+
+msgid "Control how this individual reply influences the AI search and response generation process for future queries."
+msgstr ""
+
+msgid "Default: reply included in all AI search queries."
+msgstr ""
+
+msgid "Enable: reply used in AI queries only when the Enable Tickets filter is active."
+msgstr ""
+
+msgid "Enable"
+msgstr ""
+
+msgid "Disable: reply excluded from AI queries."
+msgstr ""
+
+msgid "Disable"
+msgstr ""
+
+msgid "AI Icon"
+msgstr ""
+
+msgid "AI-Powered Reply"
+msgstr ""
+
+msgid "Get context-based suggestions to effortlessly create clear and relevant replies."
+msgstr ""
+
+msgid "Generate AI Response"
+msgstr ""
+
+msgid "Matching Tickets"
+msgstr ""
+
+msgid "Filter"
+msgstr ""
+
+msgid "Enable Tickets"
+msgstr ""
+
+msgid "All Replies"
+msgstr ""
+
+msgid "Enable Replies"
+msgstr ""
+
+msgid "Control how this ticket and its replies influence AI search and response generation for future queries."
+msgstr ""
+
+msgid "Default: ticket and replies included in all AI queries."
+msgstr ""
+
+msgid "Enable: ticket and replies used only when the “Enable Tickets” filter is active."
+msgstr ""
+
+msgid "Disable: ticket and replies excluded from AI queries."
+msgstr ""
+
+msgid "Get context-aware suggestions for your response."
+msgstr ""
+
+msgid "Ticket ID is required."
+msgstr ""
+
+msgid "Ticket not found."
+msgstr ""
+
+msgid "Database error occurred."
+msgstr ""
+
+msgid "AI Reply Section"
+msgstr ""
+
+msgid "Get AI-powered, context-based suggestions to effortlessly create clear, relevant, and helpful replies."
+msgstr ""
+
+msgid "Change Ticket Status"
+msgstr ""
+
+msgid "Use AI Powered Reply Feature"
+msgstr ""
+
+msgid "Set AI Reply Mode for Ticket"
+msgstr ""
+
+msgid "Set AI Reply Mode for Reply"
+msgstr ""
+
+msgid "Limit AI Replies to Agent-Assigned Tickets"
+msgstr ""
+
+msgid "Suggested Response"
+msgstr ""
+
+msgid "Show User Avatar"
+msgstr ""
+
+msgid "Showing avatars may slightly slow down page loading"
 msgstr ""

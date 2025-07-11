@@ -282,3 +282,13 @@ function jsstDecodeHTML(html) {
     txt.innerHTML = html;
     return txt.value;
 }
+
+function jsReplyShowLoading(){
+    jQuery('div#black_wrapper_ai_reply').show();
+    jQuery('div#js_ai_reply_loading').show();
+}
+
+function jsReplyHideLoading(){
+    jQuery('div#black_wrapper_ai_reply').hide();
+    jQuery('div#js_ai_reply_loading').hide();
+}

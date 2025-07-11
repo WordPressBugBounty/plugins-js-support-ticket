@@ -75,6 +75,13 @@
                             <div class="add-on-txt"><?php echo esc_html(__('Get the survey from your customers on ticket closing to improve your quality of services and assistance.','js-support-ticket')); ?></div>
                             <a title="<?php echo esc_html(__('buy now','js-support-ticket')); ?>" href="https://jshelpdesk.com/product/feedback/" class="add-on-btn"><?php echo esc_html(__('buy now','js-support-ticket')); ?></a>
                         </div>
+                        <div class="add-on-item aipoweredreply">
+                            <img class="add-on-img" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/add-on-list/aipoweredreply.png" alt="<?php echo esc_html(__('AI Powered Reply','js-support-ticket')); ?>" />
+                            <div class="add-on-name"><?php echo esc_html(__('AI Powered Reply','js-support-ticket')); ?></div>
+
+                            <div class="add-on-txt"><?php echo esc_html(__('Get AI-powered, context-based suggestions to effortlessly create clear, relevant, and helpful replies.','js-support-ticket')); ?></div>
+                            <a title="<?php echo esc_html(__('buy now','js-support-ticket')); ?>" href="https://jshelpdesk.com/product/ai-powered-reply/" class="add-on-btn"><?php echo esc_html(__('buy now','js-support-ticket')); ?></a>
+                        </div>
                         <div class="add-on-item help-topic">
                             <img class="add-on-img" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/add-on-list/helptopic.png" alt="<?php echo esc_html(__('helptopic','js-support-ticket')); ?>" />
                             <div class="add-on-name"><?php echo esc_html(__('Helptopic','js-support-ticket')); ?></div>

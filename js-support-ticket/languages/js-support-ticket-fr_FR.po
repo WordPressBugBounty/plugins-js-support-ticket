@@ -2082,11 +2082,11 @@ msgid "Select Page"
 msgstr "Choisir une page"
 
 msgid ""
-"Select JS Help Desk default page, on the action system, will redirect on the selected page. If not select the default page, email links, and support icon might "
-"not work."
+"Select JS Help Desk default page, on the action system, will redirect on the selected page. If not select the default page, email links, and support icon might not "
+"work."
 msgstr ""
-"Sélectionner la page par défaut de JS Help Desk dans le système. Vous serez redirigé vers la page sélectionnée. Si vous n'indiquez rien, les liens mails et icone "
-"de support ne fonctionneront pas"
+"Sélectionner la page par défaut de JS Help Desk dans le système. Vous serez redirigé vers la page sélectionnée. Si vous n'indiquez rien, les liens mails et icone de "
+"support ne fonctionneront pas"
 
 msgid "Support Icon"
 msgstr "Icône Support"
@@ -3622,12 +3622,12 @@ msgstr "Plugin Wordpress"
 
 msgid ""
 "JS Help Desk is a trusted open source ticket system. JS Help Desk is a simple, easy to use, web-based customer support system. Users can create a ticket from the "
-"front-end. JS Help Desk comes packed with lot features than most of the expensive(and complex) support ticket system on the market. The best part is, It "
-"completely free."
+"front-end. JS Help Desk comes packed with lot features than most of the expensive(and complex) support ticket system on the market. The best part is, It completely "
+"free."
 msgstr ""
 "JS Help Desk est un système de ticket open source de confiance. JS Help Desk est un système de support client Web simple et facile à utiliser. Les utilisateurs "
-"peuvent créer un ticket depuis le front-end. JS Help Desk est livré avec beaucoup de fonctionnalités que la plupart des systèmes de tickets d'assistance coûteux "
-"(et complexes) sur le marché. La meilleure partie est totalement gratuite."
+"peuvent créer un ticket depuis le front-end. JS Help Desk est livré avec beaucoup de fonctionnalités que la plupart des systèmes de tickets d'assistance coûteux (et "
+"complexes) sur le marché. La meilleure partie est totalement gratuite."
 
 msgid "JS Help Desk Addon Installer"
 msgstr "Installateur d'Addon du centre aide"
@@ -6310,8 +6310,8 @@ msgstr "Modules complémentaires pour le service d'assistance"
 
 msgid "Get trusted WordPress add on’s. Guaranteed to work fast, safe to use, beautifully coded, packed with features and easy to use."
 msgstr ""
-"Obtenez des modules complémentaires WordPress fiables. Garanti pour un fonctionnement rapide, sûr à utiliser, magnifiquement codé, doté de fonctionnalités et "
-"facile à utiliser."
+"Obtenez des modules complémentaires WordPress fiables. Garanti pour un fonctionnement rapide, sûr à utiliser, magnifiquement codé, doté de fonctionnalités et facile à "
+"utiliser."
 
 msgid "Save big with an exclusive membership plan today!"
 msgstr "Économisez gros avec un plan d’adhésion exclusif dès aujourd’hui !"
@@ -6346,8 +6346,7 @@ msgstr ""
 
 msgid "Enables admin to set N numbers of tickets for users to create and set N numbers of Ticket to open for agents separately."
 msgstr ""
-"Permet à l'administrateur de définir N nombres de tickets pour que les utilisateurs puissent créer et définir N nombres de tickets à ouvrir séparément pour les "
-"agents."
+"Permet à l'administrateur de définir N nombres de tickets pour que les utilisateurs puissent créer et définir N nombres de tickets à ouvrir séparément pour les agents."
 
 msgid "Multi Language Email Templates"
 msgstr "Modèles d'e-mails multilingues"
@@ -6395,8 +6394,8 @@ msgstr "Mailchimp"
 
 msgid "The Mail Chimp add-on adds a new checkbox to the registration form for prompting new users to subscribe your email-list."
 msgstr ""
-"Le module complémentaire Mail Chimp ajoute une nouvelle case à cocher au formulaire d'inscription pour inviter les nouveaux utilisateurs à s'abonner à votre liste "
-"de diffusion."
+"Le module complémentaire Mail Chimp ajoute une nouvelle case à cocher au formulaire d'inscription pour inviter les nouveaux utilisateurs à s'abonner à votre liste de "
+"diffusion."
 
 msgid "EDD offers customers to open new tickets just one click from their EDD account with optionally validating the license keys."
 msgstr "EDD propose aux clients d'ouvrir de nouveaux tickets en un seul clic depuis leur compte EDD avec éventuellement la validation des clés de licence."
@@ -6421,15 +6420,13 @@ msgstr "attribution automatique d'agent"
 
 msgid "When auto assignment is enabled and a ticket is created, an appropriate agent is automatically assigned to the ticket and it is moved to the Assigned state."
 msgstr ""
-"Lorsque l'affectation automatique est activée et qu'un ticket est créé, un agent approprié est automatiquement affecté au ticket et celui-ci passe à l'état "
-"Attribué."
+"Lorsque l'affectation automatique est activée et qu'un ticket est créé, un agent approprié est automatiquement affecté au ticket et celui-ci passe à l'état Attribué."
 
 msgid "Social Login"
 msgstr "Connexion sociale"
 
 msgid "Users can login from their social media accounts. They can create a new account or use social media accounts."
-msgstr ""
-"Les utilisateurs peuvent se connecter depuis leurs comptes de réseaux sociaux. Ils peuvent créer un nouveau compte ou utiliser des comptes de réseaux sociaux."
+msgstr "Les utilisateurs peuvent se connecter depuis leurs comptes de réseaux sociaux. Ils peuvent créer un nouveau compte ou utiliser des comptes de réseaux sociaux."
 
 msgid "JS Help Desk Add-Ons Bundle Pack"
 msgstr "Pack de modules complémentaires JS Help Desk"
@@ -6457,8 +6454,8 @@ msgstr "Tous les futurs modules complémentaires"
 
 msgid "Hey there! We have recently launched a fresh update for the add-ons. Don't forget to update the add-ons to enjoy the greatest features!"
 msgstr ""
-"Salut! Nous avons récemment lancé une nouvelle mise à jour pour les modules complémentaires. N'oubliez pas de mettre à jour les modules complémentaires pour "
-"profiter des meilleures fonctionnalités !"
+"Salut! Nous avons récemment lancé une nouvelle mise à jour pour les modules complémentaires. N'oubliez pas de mettre à jour les modules complémentaires pour profiter "
+"des meilleures fonctionnalités !"
 
 msgid "View Addone Status"
 msgstr "Afficher le statut du module complémentaire"
@@ -7054,10 +7051,8 @@ msgstr "Ajouter des informations d'identification"
 msgid "Edit Help Topic"
 msgstr "Modifier la rubrique d'aide"
 
-msgid ""
-"e.g ' I have read and agree to the [link] Terms and Conditions[/link].  ' The text between [link] and [/link] will be linked to provided url or wordpress page."
-msgstr ""
-"par exemple, « J'ai lu et j'accepte les [link] Conditions générales[/link]. ' Le texte entre [lien] et [/lien] sera lié à l'URL ou à la page wordpress fournie."
+msgid "e.g ' I have read and agree to the [link] Terms and Conditions[/link].  ' The text between [link] and [/link] will be linked to provided url or wordpress page."
+msgstr "par exemple, « J'ai lu et j'accepte les [link] Conditions générales[/link]. ' Le texte entre [lien] et [/lien] sera lié à l'URL ou à la page wordpress fournie."
 
 msgid "login"
 msgstr "se connecter"
@@ -7961,3 +7956,168 @@ msgstr "Addon (s) installé avec succès!"
 
 msgid "Addon(s) Installation Failed"
 msgstr "L'installation de l'addon a échoué"
+
+msgid "Your JS Support Ticket license key has expired or is invalid. Please update it to continue receiving support and updates."
+msgstr "Votre clé de licence de ticket de support JS a expiré ou n'est pas valide. Veuillez le mettre à jour pour continuer à recevoir l'assistance et les mises à jour."
+
+msgid "Import Data"
+msgstr "Importer des données"
+
+msgid "No Addon Installed!"
+msgstr "Aucun addon installé!"
+
+msgid "Add-Ons"
+msgstr "Complémentations"
+
+msgid "Copied to clipboard!"
+msgstr "Copié dans le presse-papiers!"
+
+msgid "Failed to copy!"
+msgstr "Échec de la copie!"
+
+msgid "Failed to copy to clipboard. Please copy manually."
+msgstr "Échec de la copie dans le presse-papiers. Veuillez copier manuellement."
+
+msgid "Reply content appended!"
+msgstr "Répondre au contenu annexé!"
+
+msgid "No ticket selected!"
+msgstr "Aucun billet sélectionné!"
+
+msgid "Error fetching replies."
+msgstr "Erreur récupérant les réponses."
+
+msgid "Failed to fetch replies. Please try again."
+msgstr "N'a pas réussi à récupérer les réponses. Veuillez réessayer."
+
+msgid "Error fetching matching tickets:"
+msgstr "Erreur récupérant les billets correspondants:"
+
+msgid "Error fetching replies:"
+msgstr "Erreur Réponses à la récupération:"
+
+msgid "No matching tickets found."
+msgstr "Aucun billets assortis trouvés."
+
+msgid "Ticket ID:"
+msgstr "ID de billet:"
+
+msgid "Replies for:"
+msgstr "Réponses pour:"
+
+msgid "No replies found for this ticket."
+msgstr "Aucune réponse trouvée pour ce billet."
+
+msgid "N/A"
+msgstr "N / A"
+
+msgid "No content"
+msgstr "Pas de contenu"
+
+msgid "No date"
+msgstr "Pas de date"
+
+msgid "Reply By:"
+msgstr "Réponse de:"
+
+msgid "AI-Powered Reply Mode"
+msgstr "Mode de réponse alimenté par AI"
+
+msgid "Control how this individual reply influences the AI search and response generation process for future queries."
+msgstr "Contrôler comment cette réponse individuelle influence le processus de recherche de recherche et de réponse en IA pour les futures requêtes."
+
+msgid "Default: reply included in all AI search queries."
+msgstr "Par défaut: Réponse incluse dans toutes les requêtes de recherche AI."
+
+msgid "Enable: reply used in AI queries only when the Enable Tickets filter is active."
+msgstr "Activer: Réponse utilisée dans les requêtes AI uniquement lorsque le filtre des billets Activer est actif."
+
+msgid "Enable"
+msgstr "Activer"
+
+msgid "Disable: reply excluded from AI queries."
+msgstr "Désactiver: Réponse exclue des requêtes de l'IA."
+
+msgid "Disable"
+msgstr "Désactiver"
+
+msgid "AI Icon"
+msgstr "Icône AI"
+
+msgid "AI-Powered Reply"
+msgstr "Réponse alimentée par AI"
+
+msgid "Get context-based suggestions to effortlessly create clear and relevant replies."
+msgstr "Obtenez des suggestions contextuelles pour créer sans effort des réponses claires et pertinentes."
+
+msgid "Generate AI Response"
+msgstr "Générer une réponse AI"
+
+msgid "Matching Tickets"
+msgstr "Billets assortis"
+
+msgid "Filter"
+msgstr "Filtre"
+
+msgid "Enable Tickets"
+msgstr "Activer les billets"
+
+msgid "All Replies"
+msgstr "Toutes les réponses"
+
+msgid "Enable Replies"
+msgstr "Activer les réponses"
+
+msgid "Control how this ticket and its replies influence AI search and response generation for future queries."
+msgstr "Contrôlez comment ce billet et ses réponses influencent la recherche d'IA et la génération de réponse pour les futures requêtes."
+
+msgid "Default: ticket and replies included in all AI queries."
+msgstr "Par défaut: billet et réponses incluses dans toutes les requêtes AI."
+
+msgid "Enable: ticket and replies used only when the “Enable Tickets” filter is active."
+msgstr "Activer: les billets et les réponses utilisés uniquement lorsque le filtre «Activer les billets» est actif."
+
+msgid "Disable: ticket and replies excluded from AI queries."
+msgstr "Désactiver: billet et réponses exclues des requêtes de l'IA."
+
+msgid "Get context-aware suggestions for your response."
+msgstr "Obtenez des suggestions de contexte pour votre réponse."
+
+msgid "Ticket ID is required."
+msgstr "L'identification du billet est requise."
+
+msgid "Ticket not found."
+msgstr "Billet introuvable."
+
+msgid "Database error occurred."
+msgstr "Une erreur de base de données s'est produite."
+
+msgid "AI Reply Section"
+msgstr "Section de réponse AI"
+
+msgid "Get AI-powered, context-based suggestions to effortlessly create clear, relevant, and helpful replies."
+msgstr "Obtenez des suggestions basées sur un contexte alimentées par AI pour créer sans effort des réponses claires, pertinentes et utiles."
+
+msgid "Change Ticket Status"
+msgstr "Modifier l'état du ticket"
+
+msgid "Use AI Powered Reply Feature"
+msgstr "Utilisez la fonction de réponse alimentée en AI"
+
+msgid "Set AI Reply Mode for Ticket"
+msgstr "Définir le mode de réponse AI pour le billet"
+
+msgid "Set AI Reply Mode for Reply"
+msgstr "Définissez le mode de réponse AI pour la réponse"
+
+msgid "Limit AI Replies to Agent-Assigned Tickets"
+msgstr "Limiter les réponses AI aux billets attribués par l'agent"
+
+msgid "Suggested Response"
+msgstr "Réponse suggérée"
+
+msgid "Show User Avatar"
+msgstr "Afficher l'avatar de l'utilisateur"
+
+msgid "Showing avatars may slightly slow down page loading"
+msgstr "Affichage des avatars peut ralentir légèrement le chargement de la page"

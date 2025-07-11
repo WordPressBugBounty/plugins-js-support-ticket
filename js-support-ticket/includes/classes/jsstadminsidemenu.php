@@ -449,7 +449,7 @@ $jssupportticket_js ='
             </li>
         </ul>
     </li>
-    <li style="display: none;" class="treeview <?php if($c == 'thirdpartyimport') echo 'active'; ?>">
+    <li class="treeview <?php if($c == 'thirdpartyimport') echo 'active'; ?>">
         <a class="" href="admin.php?page=thirdpartyimport" title="<?php echo esc_html(__('Import Data' , 'js-support-ticket')); ?>">
             <img class="jsst_menu-icon" alt="<?php echo esc_html(__('Import Data' , 'js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL).'includes/images/left-icons/menu/import.png'; ?>"/>
             <span class="jsst_text"><?php echo esc_html(__('Import Data' , 'js-support-ticket')); ?></span>

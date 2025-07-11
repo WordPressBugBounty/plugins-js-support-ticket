@@ -491,12 +491,38 @@ wp_add_inline_script('ticket-google-charts-handle',$jssupportticket_js);
                         </div> */ ?>
                     </div>
                     <?php } ?>
-                    <?php if(count(jssupportticket::$_active_addons) < 36 ){ ?>
+                    <?php if(count(jssupportticket::$_active_addons) < 37 ){ ?>
                     <div class="js-cp-addon-wrp">
                         <div class="js-cp-cnt-title">
                             <span class="js-cp-cnt-title-txt"><?php echo esc_html(__('Addons', 'js-support-ticket')); ?></span>
                         </div>
                         <div class="js-cp-addon-list">
+                            <?php if ( !in_array('aipoweredreply',jssupportticket::$_active_addons)) { ?>
+                                <div class="js-cp-addon">
+                                    <div class="js-cp-addon-image">
+                                        <img alt="<?php echo esc_html(__('AI Powered Reply','js-support-ticket')); ?>" class="js-cp-addon-img" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/admincp/addon/aipoweredreply.png"/>
+                                    </div>
+                                    <div class="js-cp-addon-cnt">
+                                        <div class="js-cp-addon-tit">
+                                            <?php echo esc_html(__('AI Powered Reply','js-support-ticket')); ?>
+                                        </div>
+                                        <div class="js-cp-addon-desc">
+                                            <?php echo esc_html(__('Get AI-powered, context-based suggestions to effortlessly create clear, relevant, and helpful replies.', 'js-support-ticket')); ?>
+                                        </div>
+                                    </div>
+                                    <?php $plugininfo = JSSTCheckPluginInfo('js-support-ticket-aipoweredreply/js-support-ticket-aipoweredreply.php');
+                                    if($plugininfo['availability'] == "1"){
+                                        $text = $plugininfo['text'];
+                                        $url = "plugins.php?s=js-support-ticket-aipoweredreply&plugin_status=inactive";
+                                    }elseif($plugininfo['availability'] == "0"){
+                                        $text = $plugininfo['text'];
+                                        $url = "https://jshelpdesk.com/product/ai-powered-reply/";
+                                    } ?>
+                                    <a href="<?php echo esc_url($url); ?>" class="js-cp-addon-btn" title="<?php echo esc_attr($text); ?>">
+                                        <?php echo esc_html($text); ?>
+                                    </a>
+                                </div>
+                            <?php } ?>
                             <?php if ( !in_array('agent',jssupportticket::$_active_addons)) { ?>
                                 <div class="js-cp-addon">
                                     <div class="js-cp-addon-image">

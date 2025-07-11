@@ -3,14 +3,14 @@
 /**
  * @package JS Help Desk
  * @author Ahmad Bilal
- * @version 2.9.7
+ * @version 2.9.8
  */
 /*
   Plugin Name: JS Help Desk
   Plugin URI: https://www.jshelpdesk.com
   Description: JS Help Desk is a trusted open source ticket system. JS Help Desk is a simple, easy to use, web-based customer support system. User can create ticket from front-end. JS Help Desk comes packed with lot features than most of the expensive(and complex) support ticket system on market. JS Help Desk provide you best industry help desk system.
   Author: JS Help Desk
-  Version: 2.9.7
+  Version: 2.9.8
   Text Domain: js-support-ticket
   License: GPLv3
   Author URI: https://www.jshelpdesk.com
@@ -67,7 +67,7 @@ class jssupportticket {
         self::$_data = array();
         self::$_search = array();
         self::$_captcha = array();
-        self::$_currentversion = '297';
+        self::$_currentversion = '298';
         self::$_addon_query = array('select'=>'','join'=>'','where'=>'');
         self::$_jshdsession = JSSTincluder::getObjectClass('wphdsession');
         global $wpdb;
@@ -118,7 +118,6 @@ class jssupportticket {
             // Schedule the event
             wp_schedule_event( time(), 'daily', 'jsst_process_transation_key_status' );
         }
-        add_action( 'admin_init', array($this , 'jshd_auto_update_addons') );
         add_action( 'jsst_auto_update_addons', array($this , 'jshd_auto_update_addons') );
         if( !wp_next_scheduled( 'jsst_auto_update_addons' ) ) {
             // Schedule the event
@@ -145,7 +144,7 @@ class jssupportticket {
                     // restore colors data end
                     update_option('jsst_currentversion', self::$_currentversion);
                     include_once JSST_PLUGIN_PATH . 'includes/updates/updates.php';
-                    JSSTupdates::checkUpdates('297');
+                    JSSTupdates::checkUpdates('298');
                     JSSTincluder::getJSModel('jssupportticket')->updateColorFile();
                     JSSTincluder::getJSModel('jssupportticket')->jsst_check_license_status();
                     JSSTincluder::getJSModel('jssupportticket')->JSSTAddonsAutoUpdate();
@@ -1471,9 +1470,11 @@ function jsst_get_avatar($uid, $class = '') {
     $uid = JSSTincluder::getJSModel('jssupportticket')->getWPUidById($uid);
 
     // Get the avatar URL
-    //$avatar_url = get_avatar_url($uid, array('size' => 96));
-	$avatar_url = "";
-    // $avatar_url = get_fast_avatar_url($uid, array('size' => 96));
+    if(jssupportticket::$_config['show_avatar'] == 1){
+        $avatar_url = get_avatar_url($uid, array('size' => 96));
+    } else {
+        $avatar_url = "";
+    }
 
     // Check if the avatar URL is valid
     if (!empty($avatar_url) && @getimagesize($avatar_url)) {

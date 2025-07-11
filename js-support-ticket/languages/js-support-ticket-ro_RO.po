@@ -2082,11 +2082,11 @@ msgid "Select Page"
 msgstr "Selecteaza pagina"
 
 msgid ""
-"Select JS Help Desk default page, on the action system, will redirect on the selected page. If not select the default page, email links, and support "
-"icon might not work."
+"Select JS Help Desk default page, on the action system, will redirect on the selected page. If not select the default page, email links, and support icon might "
+"not work."
 msgstr ""
-"Selectați pagina implicită a JS Help Desk, pe sistemul de acțiune, va fi redirecționat pe pagina selectată. Dacă nu selectați pagina implicită, link-"
-"urile de e-mail și pictograma de asistență ar putea să nu funcționeze."
+"Selectați pagina implicită a JS Help Desk, pe sistemul de acțiune, va fi redirecționat pe pagina selectată. Dacă nu selectați pagina implicită, link-urile de e-"
+"mail și pictograma de asistență ar putea să nu funcționeze."
 
 msgid "Support Icon"
 msgstr "Icoana tichet"
@@ -3151,9 +3151,7 @@ msgid "Enables agents to merge two tickets of the same user into one instead of 
 msgstr "Permite agenților să îmbine două bilete ale aceluiași utilizator într-unul, în loc să se ocupe de aceeași problemă pe multe bilete."
 
 msgid "Defines rules or set specific intervals of time to make ticket auto overdue.The ticket can overdue by type or overdue by Cronjob."
-msgstr ""
-"Definește reguli sau stabilește intervale de timp specifice pentru a face întârzierea automată a biletului. Biletul poate fi întârziat după tip sau "
-"Cronjob."
+msgstr "Definește reguli sau stabilește intervale de timp specifice pentru a face întârzierea automată a biletului. Biletul poate fi întârziat după tip sau Cronjob."
 
 msgid "SMTP enables you to add custom mail protocol to send and receive emails within the js help desk."
 msgstr "SMTP vă permite să adăugați un protocol de e-mail personalizat pentru a trimite și primi e-mailuri în biroul de ajutor js."
@@ -3171,9 +3169,7 @@ msgid "Time Tracking"
 msgstr "Urmărirea timpului"
 
 msgid "Track the time spent on each ticket by each agent and each reply. Report the admin on how much time is spent on each ticket."
-msgstr ""
-"Urmăriți timpul petrecut pe fiecare bilet de către fiecare agent și fiecare răspuns. Raportați administratorul cât timp este petrecut pentru fiecare "
-"bilet."
+msgstr "Urmăriți timpul petrecut pe fiecare bilet de către fiecare agent și fiecare răspuns. Raportați administratorul cât timp este petrecut pentru fiecare bilet."
 
 msgid "User Options"
 msgstr "Opțiuni utilizator"
@@ -3632,13 +3628,13 @@ msgid "Wordpress Plugin"
 msgstr "Plugin Wordpress"
 
 msgid ""
-"JS Help Desk is a trusted open source ticket system. JS Help Desk is a simple, easy to use, web-based customer support system. Users can create a "
-"ticket from the front-end. JS Help Desk comes packed with lot features than most of the expensive(and complex) support ticket system on the market. "
-"The best part is, It completely free."
+"JS Help Desk is a trusted open source ticket system. JS Help Desk is a simple, easy to use, web-based customer support system. Users can create a ticket from the "
+"front-end. JS Help Desk comes packed with lot features than most of the expensive(and complex) support ticket system on the market. The best part is, It "
+"completely free."
 msgstr ""
-"JS Help Desk este un sistem de bilete open source de încredere. JS Help Desk este un sistem simplu, ușor de utilizat, bazat pe web. Utilizatorii pot "
-"crea un bilet din front-end. Serviciul de ajutor JS vine la pachet cu multe caracteristici decât cele mai scumpe (și complexe) sisteme de bilete de "
-"asistență de pe piață. Cea mai bună parte este, este complet gratuit."
+"JS Help Desk este un sistem de bilete open source de încredere. JS Help Desk este un sistem simplu, ușor de utilizat, bazat pe web. Utilizatorii pot crea un bilet "
+"din front-end. Serviciul de ajutor JS vine la pachet cu multe caracteristici decât cele mai scumpe (și complexe) sisteme de bilete de asistență de pe piață. Cea "
+"mai bună parte este, este complet gratuit."
 
 msgid "JS Help Desk Addon Installer"
 msgstr "JS Help Desk Installer Addon"
@@ -6311,9 +6307,7 @@ msgid "Add-On’s For Help Desk"
 msgstr "Suplimente pentru biroul de asistență"
 
 msgid "Get trusted WordPress add on’s. Guaranteed to work fast, safe to use, beautifully coded, packed with features and easy to use."
-msgstr ""
-"Obțineți suplimente WordPress de încredere. Garantat pentru a funcționa rapid, sigur de utilizat, frumos codificat, plin de funcții și ușor de "
-"utilizat."
+msgstr "Obțineți suplimente WordPress de încredere. Garantat pentru a funcționa rapid, sigur de utilizat, frumos codificat, plin de funcții și ușor de utilizat."
 
 msgid "Save big with an exclusive membership plan today!"
 msgstr "Economisiți mult cu un plan de membru exclusiv astăzi!"
@@ -6326,8 +6320,7 @@ msgstr "Adăugați agenți și atribuiți roluri și permisiuni pentru a oferi a
 
 msgid "Define rules for ticket to auto close. Ticket will be auto close after specific interval of time which can be set by admin."
 msgstr ""
-"Definiți regulile pentru închiderea automată a biletului. Biletul se va închide automat după un anumit interval de timp care poate fi setat de "
-"administrator."
+"Definiți regulile pentru închiderea automată a biletului. Biletul se va închide automat după un anumit interval de timp care poate fi setat de administrator."
 
 msgid "Get the survey from your customers on ticket closing to improve your quality of services and assistance."
 msgstr "Obțineți sondajul clienților dvs. privind închiderea biletelor pentru a vă îmbunătăți calitatea serviciilor și asistenței."
@@ -6339,19 +6332,14 @@ msgid "Help topics help users to find and select the area with which they need a
 msgstr "Subiectele de ajutor îi ajută pe utilizatori să găsească și să selecteze zona pentru care au nevoie de asistență."
 
 msgid "The private note is used as reminders or to give other agents insights into the ticket issue. User Won't see the private notes."
-msgstr ""
-"Nota privată este folosită ca mementouri sau pentru a oferi altor agenți informații despre problema biletelor. Utilizatorul nu va vedea notele "
-"private."
+msgstr "Nota privată este folosită ca mementouri sau pentru a oferi altor agenți informații despre problema biletelor. Utilizatorul nu va vedea notele private."
 
 msgid "Stop losing productivity on repetitive queries,Build your knowledge base, group solutions by topics to facilitate users."
-msgstr ""
-"Nu mai pierdeți productivitatea în interogările repetitive, Construiți-vă baza de cunoștințe, grupați soluțiile pe subiecte pentru a facilita "
-"utilizatorii."
+msgstr "Nu mai pierdeți productivitatea în interogările repetitive, Construiți-vă baza de cunoștințe, grupați soluțiile pe subiecte pentru a facilita utilizatorii."
 
 msgid "Enables admin to set N numbers of tickets for users to create and set N numbers of Ticket to open for agents separately."
 msgstr ""
-"Permite administratorului să seteze N numere de bilete pentru ca utilizatorii să creeze și să seteze N numere de Ticket să se deschidă pentru agenți "
-"separat."
+"Permite administratorului să seteze N numere de bilete pentru ca utilizatorii să creeze și să seteze N numere de Ticket să se deschidă pentru agenți separat."
 
 msgid "Multi Language Email Templates"
 msgstr "Șabloane de e-mail în mai multe limbi"
@@ -6379,8 +6367,8 @@ msgstr "Salvați biletul ca PDF în sistemul dvs. sau administratorul va putea, 
 
 msgid "Tired of getting tickets about the same problems? Add FAQs to drastically reduce the number of common questions from users."
 msgstr ""
-"V-ați săturat să obțineți bilete despre aceleași probleme? Adăugați întrebări frecvente pentru a reduce drastic numărul de întrebări frecvente din "
-"partea utilizatorilor."
+"V-ați săturat să obțineți bilete despre aceleași probleme? Adăugați întrebări frecvente pentru a reduce drastic numărul de întrebări frecvente din partea "
+"utilizatorilor."
 
 msgid "Admin Widgets"
 msgstr "Widgeturi de administrare"
@@ -6399,8 +6387,7 @@ msgstr "Mailchimp"
 
 msgid "The Mail Chimp add-on adds a new checkbox to the registration form for prompting new users to subscribe your email-list."
 msgstr ""
-"Suplimentul Mail Chimp adaugă o nouă casetă de selectare la formularul de înregistrare pentru a solicita noilor utilizatori să se aboneze la lista "
-"de e-mail."
+"Suplimentul Mail Chimp adaugă o nouă casetă de selectare la formularul de înregistrare pentru a solicita noilor utilizatori să se aboneze la lista de e-mail."
 
 msgid "EDD offers customers to open new tickets just one click from their EDD account with optionally validating the license keys."
 msgstr "EDD oferă clienților să deschidă bilete noi la doar un clic din contul lor EDD cu validarea opțională a cheilor de licență."
@@ -6411,12 +6398,8 @@ msgstr "email cc"
 msgid "Email Cc"
 msgstr "E-mail Cc"
 
-msgid ""
-"CC(Carbon Copy) - the people who should know about the information which is being shared and the people included are able to see who is there in the "
-"list."
-msgstr ""
-"CC (Carbon Copy) - persoanele care ar trebui să știe despre informațiile care sunt partajate și persoanele incluse pot vedea cine este acolo în "
-"listă."
+msgid "CC(Carbon Copy) - the people who should know about the information which is being shared and the people included are able to see who is there in the list."
+msgstr "CC (Carbon Copy) - persoanele care ar trebui să știe despre informațiile care sunt partajate și persoanele incluse pot vedea cine este acolo în listă."
 
 msgid "multiform"
 msgstr "multiform"
@@ -6427,12 +6410,9 @@ msgstr "Multiform permite utilizatorului să adauge mai mult de un formular în 
 msgid "agent auto assign"
 msgstr "atribuire automată a agentului"
 
-msgid ""
-"When auto assignment is enabled and a ticket is created, an appropriate agent is automatically assigned to the ticket and it is moved to the "
-"Assigned state."
+msgid "When auto assignment is enabled and a ticket is created, an appropriate agent is automatically assigned to the ticket and it is moved to the Assigned state."
 msgstr ""
-"Când atribuirea automată este activată și este creat un bilet, un agent corespunzător este atribuit automat biletului și acesta este mutat în starea "
-"Asignat."
+"Când atribuirea automată este activată și este creat un bilet, un agent corespunzător este atribuit automat biletului și acesta este mutat în starea Asignat."
 
 msgid "Social Login"
 msgstr "Conectare socială"
@@ -6465,8 +6445,7 @@ msgid "All Future Addons"
 msgstr "Toate suplimentele viitoare"
 
 msgid "Hey there! We have recently launched a fresh update for the add-ons. Don't forget to update the add-ons to enjoy the greatest features!"
-msgstr ""
-"Hei acolo! Am lansat recent o nouă actualizare pentru suplimente. Nu uitați să actualizați suplimentele pentru a vă bucura de cele mai bune funcții!"
+msgstr "Hei acolo! Am lansat recent o nouă actualizare pentru suplimente. Nu uitați să actualizați suplimentele pentru a vă bucura de cele mai bune funcții!"
 
 msgid "View Addone Status"
 msgstr "Vedeți starea adăugării"
@@ -6730,8 +6709,7 @@ msgid "Show Admin OR Agent Email On Ticket Reply"
 msgstr "Afișați e-mailul administratorului SAU agentului la răspunsul la bilet"
 
 msgid "Show or hide the multiform popup when creating a new ticket. if you hide them, the system will open the default form."
-msgstr ""
-"Afișați sau ascundeți fereastra pop-up multiformă atunci când creați un bilet nou. dacă le ascundeți, sistemul va deschide formularul implicit."
+msgstr "Afișați sau ascundeți fereastra pop-up multiformă atunci când creați un bilet nou. dacă le ascundeți, sistemul va deschide formularul implicit."
 
 msgid "Multiforms Popup For New Tickets"
 msgstr "Popup multiforme pentru bilete noi"
@@ -7064,11 +7042,10 @@ msgid "Edit Help Topic"
 msgstr "Editați subiectul de ajutor"
 
 msgid ""
-"e.g ' I have read and agree to the [link] Terms and Conditions[/link].  ' The text between [link] and [/link] will be linked to provided url or "
-"wordpress page."
+"e.g ' I have read and agree to the [link] Terms and Conditions[/link].  ' The text between [link] and [/link] will be linked to provided url or wordpress page."
 msgstr ""
-"de ex. „Am citit și sunt de acord cu [link] Termenii și condițiile[/link]. „ Textul dintre [link] și [/link] va fi legat la adresa URL furnizată sau "
-"la pagina wordpress."
+"de ex. „Am citit și sunt de acord cu [link] Termenii și condițiile[/link]. „ Textul dintre [link] și [/link] va fi legat la adresa URL furnizată sau la pagina "
+"wordpress."
 
 msgid "login"
 msgstr "log in"
@@ -7972,3 +7949,168 @@ msgstr "Addon (s) instalat cu succes!"
 
 msgid "Addon(s) Installation Failed"
 msgstr "Instalarea Addon (s) a eșuat"
+
+msgid "Your JS Support Ticket license key has expired or is invalid. Please update it to continue receiving support and updates."
+msgstr "Cheia dvs. de licență de bilet de asistență JS a expirat sau este nevalid. Vă rugăm să -l actualizați pentru a continua să primiți asistență și actualizări."
+
+msgid "Import Data"
+msgstr "Import date"
+
+msgid "No Addon Installed!"
+msgstr "Nu s -a instalat addon!"
+
+msgid "Add-Ons"
+msgstr "Suplimente"
+
+msgid "Copied to clipboard!"
+msgstr "Copiat în clipboard!"
+
+msgid "Failed to copy!"
+msgstr "Nu a reușit să copiez!"
+
+msgid "Failed to copy to clipboard. Please copy manually."
+msgstr "Nu a reușit să copiați în clipboard. Vă rugăm să copiați manual."
+
+msgid "Reply content appended!"
+msgstr "Răspundeți conținut anexat!"
+
+msgid "No ticket selected!"
+msgstr "Nu există bilet selectat!"
+
+msgid "Error fetching replies."
+msgstr "Răspunsuri de eroare."
+
+msgid "Failed to fetch replies. Please try again."
+msgstr "Nu a reușit să aducă răspunsuri. Vă rugăm să încercați din nou."
+
+msgid "Error fetching matching tickets:"
+msgstr "Eroare la preluarea biletelor de potrivire:"
+
+msgid "Error fetching replies:"
+msgstr "Răspunsuri de adunare a erorilor:"
+
+msgid "No matching tickets found."
+msgstr "Nu au fost găsite bilete potrivite."
+
+msgid "Ticket ID:"
+msgstr "ID -ul biletului:"
+
+msgid "Replies for:"
+msgstr "Răspunsuri pentru:"
+
+msgid "No replies found for this ticket."
+msgstr "Nu au fost găsite răspunsuri pentru acest bilet."
+
+msgid "N/A"
+msgstr "N / A"
+
+msgid "No content"
+msgstr "Fără conținut"
+
+msgid "No date"
+msgstr "Fără dată"
+
+msgid "Reply By:"
+msgstr "Răspunde de:"
+
+msgid "AI-Powered Reply Mode"
+msgstr "Mod de răspuns alimentat cu AI"
+
+msgid "Control how this individual reply influences the AI search and response generation process for future queries."
+msgstr "Controlează modul în care acest răspuns individual influențează procesul de căutare și generare de răspuns AI pentru interogări viitoare."
+
+msgid "Default: reply included in all AI search queries."
+msgstr "Default: Răspuns inclus în toate întrebările de căutare AI."
+
+msgid "Enable: reply used in AI queries only when the Enable Tickets filter is active."
+msgstr "Activare: Răspuns utilizat în interogări AI numai atunci când filtrul de bilete de activare este activ."
+
+msgid "Enable"
+msgstr "Permite"
+
+msgid "Disable: reply excluded from AI queries."
+msgstr "Dezactivare: Răspuns exclus din interogări AI."
+
+msgid "Disable"
+msgstr "Dezactiva"
+
+msgid "AI Icon"
+msgstr "Pictograma AI"
+
+msgid "AI-Powered Reply"
+msgstr "Răspuns alimentat cu AI"
+
+msgid "Get context-based suggestions to effortlessly create clear and relevant replies."
+msgstr "Obțineți sugestii bazate pe context pentru a crea fără efort răspunsuri clare și relevante."
+
+msgid "Generate AI Response"
+msgstr "Generați răspuns AI"
+
+msgid "Matching Tickets"
+msgstr "Biletele potrivite"
+
+msgid "Filter"
+msgstr "Filtra"
+
+msgid "Enable Tickets"
+msgstr "Activați biletele"
+
+msgid "All Replies"
+msgstr "Toate răspunsurile"
+
+msgid "Enable Replies"
+msgstr "Activați răspunsuri"
+
+msgid "Control how this ticket and its replies influence AI search and response generation for future queries."
+msgstr "Controlează modul în care acest bilet și răspunsurile sale influențează generarea de căutare și răspuns AI pentru interogări viitoare."
+
+msgid "Default: ticket and replies included in all AI queries."
+msgstr "Default: bilet și răspunsuri incluse în toate întrebările AI."
+
+msgid "Enable: ticket and replies used only when the “Enable Tickets” filter is active."
+msgstr "Activare: bilet și răspunsuri utilizate numai atunci când filtrul „Activare bilete” este activ."
+
+msgid "Disable: ticket and replies excluded from AI queries."
+msgstr "Dezactivare: bilet și răspunsuri excluse din interogări AI."
+
+msgid "Get context-aware suggestions for your response."
+msgstr "Obțineți sugestii conștiente de context pentru răspunsul dvs."
+
+msgid "Ticket ID is required."
+msgstr "ID -ul biletului este necesar."
+
+msgid "Ticket not found."
+msgstr "Bilet nu a fost găsit."
+
+msgid "Database error occurred."
+msgstr "A apărut o eroare de bază de date."
+
+msgid "AI Reply Section"
+msgstr "Secțiunea de răspuns AI"
+
+msgid "Get AI-powered, context-based suggestions to effortlessly create clear, relevant, and helpful replies."
+msgstr "Obțineți sugestii bazate pe AI, bazate pe context, pentru a crea fără efort răspunsuri clare, relevante și utile."
+
+msgid "Change Ticket Status"
+msgstr "Schimbați starea biletului"
+
+msgid "Use AI Powered Reply Feature"
+msgstr "Utilizați funcția de răspuns AI"
+
+msgid "Set AI Reply Mode for Ticket"
+msgstr "Setați modul de răspuns AI pentru bilet"
+
+msgid "Set AI Reply Mode for Reply"
+msgstr "Setați modul de răspuns AI pentru răspuns"
+
+msgid "Limit AI Replies to Agent-Assigned Tickets"
+msgstr "Limitați răspunsurile AI la biletele afectate de agent"
+
+msgid "Suggested Response"
+msgstr "Răspuns sugerat"
+
+msgid "Show User Avatar"
+msgstr "Afișați avatarul utilizatorului"
+
+msgid "Showing avatars may slightly slow down page loading"
+msgstr "Afișarea avatarilor poate încetini ușor încărcarea paginii"

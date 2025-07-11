@@ -476,6 +476,123 @@ class JSSTreplyModel {
 		}
 		return $name;
     }
+
+    function markedAsAiPoweredReply() {
+        $nonce  = JSSTrequest::getVar('_wpnonce');
+
+        if (!wp_verify_nonce($nonce, 'ai-powered-reply')) {
+            wp_die('Security check failed');
+        }
+        $status = JSSTrequest::getVar('status');
+        $type   = JSSTrequest::getVar('type');
+        $id     = intval(JSSTrequest::getVar('id'));
+
+        if ($id <= 0 || !in_array($type, ['ticket', 'reply'])) {
+            return false;
+        }
+
+        $table = ($type === 'ticket') ? 'js_ticket_tickets' : 'js_ticket_replies';
+        $query = "UPDATE `" . jssupportticket::$_db->prefix . "$table` SET aireplymode = " . esc_sql($status) . " WHERE id = " . esc_sql($id);
+
+        $result = jssupportticket::$_db->query($query);
+
+        return ($result !== false);
+    }
+
+    function getFilteredReplies() {
+        // Verify nonce
+        check_ajax_referer('get-filtered-replies', '_wpnonce');
+
+        $ticket_id = intval(JSSTrequest::getVar('ticket_id'));
+
+        if (!$ticket_id) {
+            wp_send_json_error(['message' => __('Ticket ID is required.', 'js-support-ticket')]);
+        }
+
+        $uids = $this->get_allowed_support_user_ids();
+        if (empty($uids)) {
+            wp_send_json_success(['replies' => [], 'count' => 0]);
+        }
+
+        $uids_str = implode(',', array_map('intval', $uids)); // Ensure integers
+
+        $query = "
+        SELECT r.*
+            FROM `" . jssupportticket::$_db->prefix . "js_ticket_replies` AS r
+            WHERE r.ticketid = " . esc_sql($ticket_id) . "
+            AND r.uid IN ($uids_str)";
+
+        $query .= " ORDER BY r.created ASC LIMIT 50";
+        $replies = jssupportticket::$_db->get_results($query);
+
+        if (jssupportticket::$_db->last_error) {
+            wp_send_json_error(['message' => __('Database error occurred.', 'js-support-ticket')]);
+        }
+
+        $formatted_replies = [];
+        foreach ($replies as $reply) {
+            $name = '';
+            $anon_setting = jssupportticket::$_config['anonymous_name_on_ticket_reply'];
+
+            if ($anon_setting == 1) {
+                $name = jssupportticket::$_config['title'];
+            } elseif ($anon_setting == 2) {
+                $name = JSSTincluder::getJSModel('reply')->getUserNameFromReplyById($reply->id);
+            }
+
+            $formatted_replies[] = [
+                'id'        => $reply->id,
+                'text'      => $reply->message,
+                'name'      => $name,
+                'timestamp' => $reply->created,
+                'isMarked'  => (bool) $reply->aireplymode
+            ];
+        }
+
+        wp_send_json_success([
+            'replies' => $formatted_replies,
+            'count'   => count($formatted_replies)
+        ]);
+    }
+
+    function get_allowed_support_user_ids() {
+        $allowed_uids = [];
+
+        // Get WordPress administrator user IDs
+        $admin_wp_ids = jssupportticket::$_db->get_col(
+            "SELECT user_id
+            FROM `" . jssupportticket::$_db->prefix . "usermeta`
+            WHERE meta_key = '" . jssupportticket::$_db->prefix . "capabilities'
+            AND meta_value LIKE '%administrator%'"
+        );
+
+        // Convert WP user IDs to JS Support Ticket user IDs
+        if (!empty($admin_wp_ids)) {
+            foreach ($admin_wp_ids as $wp_id) {
+                $js_user = JSSTincluder::getObjectClass('user')->getjssupportticketuidbyuserid($wp_id);
+                if (!empty($js_user) && isset($js_user[0]->id)) {
+                    $allowed_uids[] = (int)$js_user[0]->id;
+                }
+            }
+        }
+
+        // Add agent user IDs if the 'agent' addon is active
+        if (in_array('agent', jssupportticket::$_active_addons)) {
+            $agent_ids = jssupportticket::$_db->get_col(
+                "SELECT uid
+                FROM `" . jssupportticket::$_db->prefix . "js_ticket_staff`"
+            );
+            foreach ($agent_ids as $id) {
+                $allowed_uids[] = (int)$id;
+            }
+        }
+
+        // Deduplicate and ensure all values are positive integers
+        $allowed_uids = array_unique(array_filter(array_map('intval', $allowed_uids)));
+
+        // Avoid empty IN() errors
+        return !empty($allowed_uids) ? $allowed_uids : [0];
+    }
 }
 
 ?>

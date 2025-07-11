@@ -217,6 +217,7 @@ class JSSTjssupportticketModel {
 
     function getJSSTAddonsArray(){
         return array(
+            'js-support-ticket-aipoweredreply' => array('title' => esc_html(__('AI Powered Reply','js-support-ticket')), 'price' => 0, 'status' => 1),
             'js-support-ticket-actions' => array('title' => esc_html(__('Ticket Actions','js-support-ticket')), 'price' => 0, 'status' => 1),
             'js-support-ticket-agent' => array('title' => esc_html(__('Agents','js-support-ticket')), 'price' => 0, 'status' => 1),
             'js-support-ticket-autoclose' => array('title' => esc_html(__('Ticket Auto Close','js-support-ticket')), 'price' => 0, 'status' => 1),
@@ -948,7 +949,7 @@ class JSSTjssupportticketModel {
         } elseif (is_object($input)) {
             $vars = get_object_vars($input);
             foreach ($vars as $k=>$v) {
-                $input->{$k} = stripslashesFull($v);
+                $input->{$k} = $this->stripslashesFull($v);
             }
         } else {
             $input = jssupportticketphplib::JSST_stripslashes($input);
@@ -1012,17 +1013,14 @@ class JSSTjssupportticketModel {
                                 </div>
                                 <div class="js-ticket-table-body-col js-tkt-tbl-unm">
                                     <span class="js-ticket-display-block">'. esc_html(__('User Name','js-support-ticket')).':</span>
-                                    <span class="js-ticket-title"><a href="#" class="js-userpopup-link" data-id="'.esc_attr($user->userid).'" data-email="'.esc_attr($user->useremail).'" data-name="'.esc_attr($user->userdisplayname).'">';
-                                        if(isset($user->username) && $user->username != ''){
-                                            $result .= esc_html($user->username);
-                                        } else {
-                                            $result .= esc_html($user->useremail);
-                                        }
-                                        $result .='</a></span>
+                                    '.esc_html($user->username).'
+                                    </a></span>
                                 </div>
                                 <div class="js-ticket-table-body-col js-tkt-tbl-eml">
                                     <span class="js-ticket-display-block">'. esc_html(__('Email','js-support-ticket')).':</span>
-                                    '.esc_html($user->useremail).'
+                                    <span class="js-ticket-title"><a href="#" class="js-userpopup-link" data-id="'.esc_attr($user->userid).'" data-email="'.esc_attr($user->useremail).'" data-username="'.esc_attr($user->username).'" data-name="'.esc_attr($user->userdisplayname).'">
+                                        '. esc_html($user->useremail) .'
+                                        </a></span>
                                 </div>
                                 <div class="js-ticket-table-body-col js-tkt-tbl-nam">
                                     <span class="js-ticket-display-block">'. esc_html(__('Name','js-support-ticket')).':</span>
@@ -1101,17 +1099,14 @@ class JSSTjssupportticketModel {
                                 </div>
                                 <div class="js-ticket-table-body-col js-tkt-tbl-unm">
                                     <span class="js-ticket-display-block">'. esc_html(__('User Name','js-support-ticket')).':</span>
-                                    <span class="js-ticket-title"><a href="#" class="js-userpopup-link" data-id="'.esc_attr($user->userid).'" data-email="'.esc_attr($user->useremail).'" data-name="'.esc_attr($user->userdisplayname).'">';
-                                    if(isset($user->username) && $user->username != ''){
-                                        $html .= esc_html($user->username);
-                                    } else {
-                                        $html .= esc_html($user->useremail);
-                                    }
-                                    $html .='</a></span>
+                                    '.esc_html($user->username).'
+                                    </a></span>
                                 </div>
                                 <div class="js-ticket-table-body-col js-tkt-tbl-eml">
                                     <span class="js-ticket-display-block">'. esc_html(__('Email','js-support-ticket')).':</span>
+                                    <span class="js-ticket-title"><a href="#" class="js-userpopup-link" data-id="'.esc_attr($user->userid).'" data-email="'.esc_attr($user->useremail).'" data-username="'.esc_attr($user->username).'" data-name="'.esc_attr($user->userdisplayname).'">
                                     '.esc_html($user->useremail).'
+                                    </a></span>
                                 </div>
                                 <div class="js-ticket-table-body-col js-tkt-tbl-nam">
                                     <span class="js-ticket-display-block">'. esc_html(__('Name','js-support-ticket')).':</span>
@@ -1520,6 +1515,8 @@ class JSSTjssupportticketModel {
                     $row = JSSTincluder::getJSTable('users');
                     $data['wpuid'] = $user->ID;
                     $data['name'] = $user->display_name;
+                    $data['display_name'] = $user->display_name;
+                    $data['user_nicename'] = $user->user_nicename;
                     $data['user_email'] = $user->user_email;
                     $data['issocial'] = 0;
                     $data['socialid'] = null;

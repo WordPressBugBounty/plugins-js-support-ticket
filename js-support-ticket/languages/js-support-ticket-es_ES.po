@@ -7978,3 +7978,168 @@ msgstr "¡Addon (s) instalado con éxito!"
 
 msgid "Addon(s) Installation Failed"
 msgstr "Falló la instalación de complementos (s)"
+
+msgid "Your JS Support Ticket license key has expired or is invalid. Please update it to continue receiving support and updates."
+msgstr "Su clave de licencia de boleto de soporte JS ha expirado o no es válido. Actualice para continuar recibiendo soporte y actualizaciones."
+
+msgid "Import Data"
+msgstr "Importar datos"
+
+msgid "No Addon Installed!"
+msgstr "¡No hay complemento instalado!"
+
+msgid "Add-Ons"
+msgstr "Complementos"
+
+msgid "Copied to clipboard!"
+msgstr "¡Copiado al portapapeles!"
+
+msgid "Failed to copy!"
+msgstr "¡No se pudo copiar!"
+
+msgid "Failed to copy to clipboard. Please copy manually."
+msgstr "No se pudo copiar al portapapeles. Copie manualmente."
+
+msgid "Reply content appended!"
+msgstr "Responder contenido adjunto!"
+
+msgid "No ticket selected!"
+msgstr "¡No hay boleto seleccionado!"
+
+msgid "Error fetching replies."
+msgstr "Error al buscar respuestas."
+
+msgid "Failed to fetch replies. Please try again."
+msgstr "No logró obtener respuestas. Por favor intente de nuevo."
+
+msgid "Error fetching matching tickets:"
+msgstr "Error al obtener boletos de juego:"
+
+msgid "Error fetching replies:"
+msgstr "Error al buscar respuestas:"
+
+msgid "No matching tickets found."
+msgstr "No se encontraron boletos a juego."
+
+msgid "Ticket ID:"
+msgstr "ID de boleto:"
+
+msgid "Replies for:"
+msgstr "Respuestas para:"
+
+msgid "No replies found for this ticket."
+msgstr "No se encontraron respuestas para este boleto."
+
+msgid "N/A"
+msgstr "N / A"
+
+msgid "No content"
+msgstr "Sin contenido"
+
+msgid "No date"
+msgstr "No hay fecha"
+
+msgid "Reply By:"
+msgstr "Respuesta de:"
+
+msgid "AI-Powered Reply Mode"
+msgstr "Modo de respuesta a IA"
+
+msgid "Control how this individual reply influences the AI search and response generation process for future queries."
+msgstr "Controle cómo esta respuesta individual influye en el proceso de generación de búsqueda y búsqueda de AI para futuras consultas."
+
+msgid "Default: reply included in all AI search queries."
+msgstr "Valor predeterminado: Respuesta incluida en todas las consultas de búsqueda de IA."
+
+msgid "Enable: reply used in AI queries only when the Enable Tickets filter is active."
+msgstr "Habilitar: Respuesta utilizada en consultas AI solo cuando el filtro de tickets de habilitación está activo."
+
+msgid "Enable"
+msgstr "Permitir"
+
+msgid "Disable: reply excluded from AI queries."
+msgstr "Desactivar: Respuesta excluida de las consultas AI."
+
+msgid "Disable"
+msgstr "Desactivar"
+
+msgid "AI Icon"
+msgstr "Icono de ai"
+
+msgid "AI-Powered Reply"
+msgstr "Respuesta con AI"
+
+msgid "Get context-based suggestions to effortlessly create clear and relevant replies."
+msgstr "Obtenga sugerencias basadas en el contexto para crear respuestas claras y relevantes sin esfuerzo."
+
+msgid "Generate AI Response"
+msgstr "Generar respuesta de IA"
+
+msgid "Matching Tickets"
+msgstr "Boletos a juego"
+
+msgid "Filter"
+msgstr "Filtrar"
+
+msgid "Enable Tickets"
+msgstr "Habilitar boletos"
+
+msgid "All Replies"
+msgstr "Todas las respuestas"
+
+msgid "Enable Replies"
+msgstr "Habilitar respuestas"
+
+msgid "Control how this ticket and its replies influence AI search and response generation for future queries."
+msgstr "Controle cómo este boleto y sus respuestas influyen en la generación de búsqueda y respuesta de IA para futuras consultas."
+
+msgid "Default: ticket and replies included in all AI queries."
+msgstr "Valor predeterminado: boleto y respuestas incluidas en todas las consultas de IA."
+
+msgid "Enable: ticket and replies used only when the “Enable Tickets” filter is active."
+msgstr "Habilitar: Ticket y respuestas utilizadas solo cuando el filtro \"Habilitar boletos\" está activo."
+
+msgid "Disable: ticket and replies excluded from AI queries."
+msgstr "Desactivar: el boleto y las respuestas excluidas de las consultas AI."
+
+msgid "Get context-aware suggestions for your response."
+msgstr "Obtenga sugerencias de contexto para su respuesta."
+
+msgid "Ticket ID is required."
+msgstr "Se requiere una identificación de boleto."
+
+msgid "Ticket not found."
+msgstr "Boleto no encontrado."
+
+msgid "Database error occurred."
+msgstr "Se produjo un error de la base de datos."
+
+msgid "AI Reply Section"
+msgstr "Sección de respuesta de IA"
+
+msgid "Get AI-powered, context-based suggestions to effortlessly create clear, relevant, and helpful replies."
+msgstr "Obtenga sugerencias basadas en el contexto con alimentación de IA para crear respuestas claras, relevantes y útiles sin esfuerzo."
+
+msgid "Change Ticket Status"
+msgstr "Cambiar el estado del ticket"
+
+msgid "Use AI Powered Reply Feature"
+msgstr "Utilice la función de respuesta con AI Powered"
+
+msgid "Set AI Reply Mode for Ticket"
+msgstr "Establecer el modo de respuesta AI para el boleto"
+
+msgid "Set AI Reply Mode for Reply"
+msgstr "Establecer el modo de respuesta de AI para responder"
+
+msgid "Limit AI Replies to Agent-Assigned Tickets"
+msgstr "Limite las respuestas de IA a los boletos asignados por agente"
+
+msgid "Suggested Response"
+msgstr "Respuesta sugerida"
+
+msgid "Show User Avatar"
+msgstr "Mostrar avatar de usuario"
+
+msgid "Showing avatars may slightly slow down page loading"
+msgstr "Mostrar avatares puede disminuir ligeramente la carga de la página"

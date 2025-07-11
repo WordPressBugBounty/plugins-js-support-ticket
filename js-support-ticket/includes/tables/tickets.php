@@ -53,6 +53,7 @@ class JSSTticketsTable extends JSSTtable {
 	public $paidsupportitemid = '';
 	public $customticketno = '';
 	public $productid = '';
+	public $aireplymode = '';
 
 	function __construct() {
 		parent::__construct('tickets', 'id'); // tablename, primarykey

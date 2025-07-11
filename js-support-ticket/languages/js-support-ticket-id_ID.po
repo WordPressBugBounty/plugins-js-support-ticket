@@ -6315,8 +6315,7 @@ msgid "Add-On’s For Help Desk"
 msgstr "Add-On Untuk Help Desk"
 
 msgid "Get trusted WordPress add on’s. Guaranteed to work fast, safe to use, beautifully coded, packed with features and easy to use."
-msgstr ""
-"Dapatkan add-on WordPress tepercaya. Dijamin bekerja cepat, aman digunakan, kodenya indah, dikemas dengan fitur dan mudah digunakan."
+msgstr "Dapatkan add-on WordPress tepercaya. Dijamin bekerja cepat, aman digunakan, kodenya indah, dikemas dengan fitur dan mudah digunakan."
 
 msgid "Save big with an exclusive membership plan today!"
 msgstr "Hemat banyak dengan paket keanggotaan eksklusif hari ini!"
@@ -6353,8 +6352,8 @@ msgstr ""
 
 msgid "Enables admin to set N numbers of tickets for users to create and set N numbers of Ticket to open for agents separately."
 msgstr ""
-"Memungkinkan admin untuk menetapkan N jumlah tiket bagi pengguna untuk membuat dan menetapkan N jumlah Tiket untuk dibuka bagi agen "
-"secara terpisah."
+"Memungkinkan admin untuk menetapkan N jumlah tiket bagi pengguna untuk membuat dan menetapkan N jumlah Tiket untuk dibuka bagi agen secara "
+"terpisah."
 
 msgid "Multi Language Email Templates"
 msgstr "Templat Email Multi Bahasa"
@@ -6363,8 +6362,7 @@ msgid "It allows to create language-based email templates for all JS Help Desk e
 msgstr "Ini memungkinkan untuk membuat templat email berbasis bahasa untuk semua templat email JS Help Desk."
 
 msgid "Canned Responses are pre-populated messages that allows support agents to respond quickly to customer issues."
-msgstr ""
-"Tanggapan Terekam adalah pesan yang sudah diisi sebelumnya yang memungkinkan agen dukungan merespons masalah pelanggan dengan cepat."
+msgstr "Tanggapan Terekam adalah pesan yang sudah diisi sebelumnya yang memungkinkan agen dukungan merespons masalah pelanggan dengan cepat."
 
 msgid "Enables users to reply to the tickets via email without the need to login to the support system first."
 msgstr "Memungkinkan pengguna membalas tiket melalui email tanpa perlu login ke sistem pendukung terlebih dahulu."
@@ -6401,8 +6399,7 @@ msgid "Mail Chimp"
 msgstr "simpanan surat"
 
 msgid "The Mail Chimp add-on adds a new checkbox to the registration form for prompting new users to subscribe your email-list."
-msgstr ""
-"Add-on Mail Chimp menambahkan kotak centang baru ke formulir pendaftaran untuk meminta pengguna baru berlangganan daftar email Anda."
+msgstr "Add-on Mail Chimp menambahkan kotak centang baru ke formulir pendaftaran untuk meminta pengguna baru berlangganan daftar email Anda."
 
 msgid "EDD offers customers to open new tickets just one click from their EDD account with optionally validating the license keys."
 msgstr ""
@@ -6735,8 +6732,7 @@ msgstr "Tunjukkan Email Admin ATAU Agen Pada Balasan Tiket"
 
 msgid "Show or hide the multiform popup when creating a new ticket. if you hide them, the system will open the default form."
 msgstr ""
-"Tampilkan atau sembunyikan popup beraneka ragam saat membuat tiket baru. jika Anda menyembunyikannya, sistem akan membuka formulir "
-"default."
+"Tampilkan atau sembunyikan popup beraneka ragam saat membuat tiket baru. jika Anda menyembunyikannya, sistem akan membuka formulir default."
 
 msgid "Multiforms Popup For New Tickets"
 msgstr "Berbagai Bentuk Popup Untuk Tiket Baru"
@@ -7086,8 +7082,7 @@ msgstr "Silakan tulis ulasan yang dihargai di Direktori Ekstensi WP"
 
 msgid "We'd love to hear from you. It'll only take 2 minutes of your time, and will really help us spread the word"
 msgstr ""
-"Kami ingin mendengar pendapat Anda. Ini hanya akan memakan waktu 2 menit dari waktu Anda, dan akan sangat membantu kami menyebarkan "
-"berita"
+"Kami ingin mendengar pendapat Anda. Ini hanya akan memakan waktu 2 menit dari waktu Anda, dan akan sangat membantu kami menyebarkan berita"
 
 msgid "love"
 msgstr "Cinta"
@@ -7979,3 +7974,168 @@ msgstr "Addon (s) terinstal dengan sukses!"
 
 msgid "Addon(s) Installation Failed"
 msgstr "Instalasi Addon (S) gagal"
+
+msgid "Your JS Support Ticket license key has expired or is invalid. Please update it to continue receiving support and updates."
+msgstr "Kunci Lisensi Tiket Dukungan JS Anda telah kedaluwarsa atau tidak valid. Harap perbarui untuk terus menerima dukungan dan pembaruan."
+
+msgid "Import Data"
+msgstr "Impor data"
+
+msgid "No Addon Installed!"
+msgstr "Tidak ada addon yang diinstal!"
+
+msgid "Add-Ons"
+msgstr "Add-on"
+
+msgid "Copied to clipboard!"
+msgstr "Disalin ke clipboard!"
+
+msgid "Failed to copy!"
+msgstr "Gagal menyalin!"
+
+msgid "Failed to copy to clipboard. Please copy manually."
+msgstr "Gagal menyalin ke clipboard. Harap salin secara manual."
+
+msgid "Reply content appended!"
+msgstr "Balas konten ditambahkan!"
+
+msgid "No ticket selected!"
+msgstr "Tidak ada tiket yang dipilih!"
+
+msgid "Error fetching replies."
+msgstr "Kesalahan mengambil balasan."
+
+msgid "Failed to fetch replies. Please try again."
+msgstr "Gagal mengambil balasan. Tolong coba lagi."
+
+msgid "Error fetching matching tickets:"
+msgstr "Kesalahan mengambil tiket pencocokan:"
+
+msgid "Error fetching replies:"
+msgstr "Kesalahan mengambil balasan:"
+
+msgid "No matching tickets found."
+msgstr "Tidak ada tiket yang cocok."
+
+msgid "Ticket ID:"
+msgstr "ID Tiket:"
+
+msgid "Replies for:"
+msgstr "Balasan untuk:"
+
+msgid "No replies found for this ticket."
+msgstr "Tidak ada balasan yang ditemukan untuk tiket ini."
+
+msgid "N/A"
+msgstr "N/a"
+
+msgid "No content"
+msgstr "Tidak ada konten"
+
+msgid "No date"
+msgstr "Tidak ada tanggal"
+
+msgid "Reply By:"
+msgstr "Balas oleh:"
+
+msgid "AI-Powered Reply Mode"
+msgstr "Mode balasan bertenaga AI"
+
+msgid "Control how this individual reply influences the AI search and response generation process for future queries."
+msgstr "Kontrol bagaimana balasan individu ini mempengaruhi proses pencarian dan pembuatan respons AI untuk pertanyaan di masa depan."
+
+msgid "Default: reply included in all AI search queries."
+msgstr "Default: Balas Termasuk dalam semua pertanyaan pencarian AI."
+
+msgid "Enable: reply used in AI queries only when the Enable Tickets filter is active."
+msgstr "Aktifkan: Balas yang digunakan dalam kueri AI hanya saat filter tiket aktif aktif."
+
+msgid "Enable"
+msgstr "Memungkinkan"
+
+msgid "Disable: reply excluded from AI queries."
+msgstr "Nonaktifkan: Balas dikecualikan dari kueri AI."
+
+msgid "Disable"
+msgstr "Cacat"
+
+msgid "AI Icon"
+msgstr "Ikon AI"
+
+msgid "AI-Powered Reply"
+msgstr "Balasan bertenaga AI"
+
+msgid "Get context-based suggestions to effortlessly create clear and relevant replies."
+msgstr "Dapatkan saran berbasis konteks untuk dengan mudah membuat balasan yang jelas dan relevan."
+
+msgid "Generate AI Response"
+msgstr "Menghasilkan respons AI"
+
+msgid "Matching Tickets"
+msgstr "Tiket yang cocok"
+
+msgid "Filter"
+msgstr "Menyaring"
+
+msgid "Enable Tickets"
+msgstr "Aktifkan tiket"
+
+msgid "All Replies"
+msgstr "Semua balasan"
+
+msgid "Enable Replies"
+msgstr "Aktifkan balasan"
+
+msgid "Control how this ticket and its replies influence AI search and response generation for future queries."
+msgstr "Kontrol bagaimana tiket ini dan balasannya mempengaruhi pencarian AI dan generasi respons untuk pertanyaan di masa depan."
+
+msgid "Default: ticket and replies included in all AI queries."
+msgstr "Default: Tiket dan balasan termasuk dalam semua kueri AI."
+
+msgid "Enable: ticket and replies used only when the “Enable Tickets” filter is active."
+msgstr "Aktifkan: Tiket dan balasan yang digunakan hanya ketika filter \"Enable Ticket\" aktif."
+
+msgid "Disable: ticket and replies excluded from AI queries."
+msgstr "Nonaktifkan: Tiket dan balasan dikecualikan dari kueri AI."
+
+msgid "Get context-aware suggestions for your response."
+msgstr "Dapatkan saran yang sadar konteks untuk tanggapan Anda."
+
+msgid "Ticket ID is required."
+msgstr "ID tiket diperlukan."
+
+msgid "Ticket not found."
+msgstr "Tiket tidak ditemukan."
+
+msgid "Database error occurred."
+msgstr "Terjadi kesalahan database."
+
+msgid "AI Reply Section"
+msgstr "Bagian balasan ai"
+
+msgid "Get AI-powered, context-based suggestions to effortlessly create clear, relevant, and helpful replies."
+msgstr "Dapatkan saran berbasis konteks yang bertenaga AI untuk dengan mudah membuat balasan yang jelas, relevan, dan bermanfaat."
+
+msgid "Change Ticket Status"
+msgstr "Ubah status tiket"
+
+msgid "Use AI Powered Reply Feature"
+msgstr "Gunakan fitur balasan bertenaga AI"
+
+msgid "Set AI Reply Mode for Ticket"
+msgstr "Atur mode balasan AI untuk tiket"
+
+msgid "Set AI Reply Mode for Reply"
+msgstr "Atur mode balasan AI untuk balasan"
+
+msgid "Limit AI Replies to Agent-Assigned Tickets"
+msgstr "Batasi balasan AI untuk tiket yang ditugaskan agen"
+
+msgid "Suggested Response"
+msgstr "Respons yang disarankan"
+
+msgid "Show User Avatar"
+msgstr "Tunjukkan avatar pengguna"
+
+msgid "Showing avatars may slightly slow down page loading"
+msgstr "Menampilkan avatar mungkin sedikit memperlambat pemuatan halaman"

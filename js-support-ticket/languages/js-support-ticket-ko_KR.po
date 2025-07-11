@@ -7930,3 +7930,168 @@ msgstr "Addon (들)이 성공적으로 설치되었습니다!"
 
 msgid "Addon(s) Installation Failed"
 msgstr "Addon (S) 설치가 실패했습니다"
+
+msgid "Your JS Support Ticket license key has expired or is invalid. Please update it to continue receiving support and updates."
+msgstr "JS 지원 티켓 라이센스 키가 만료되었거나 유효하지 않습니다. 지원 및 업데이트를 계속 받으려면 업데이트하십시오."
+
+msgid "Import Data"
+msgstr "수입 데이터"
+
+msgid "No Addon Installed!"
+msgstr "애드온이 설치되지 않았습니다!"
+
+msgid "Add-Ons"
+msgstr "애드온"
+
+msgid "Copied to clipboard!"
+msgstr "클립 보드에 복사!"
+
+msgid "Failed to copy!"
+msgstr "복사하지 못했습니다!"
+
+msgid "Failed to copy to clipboard. Please copy manually."
+msgstr "클립 보드에 복사하지 못했습니다. 수동으로 복사하십시오."
+
+msgid "Reply content appended!"
+msgstr "답장 콘텐츠가 추가되었습니다!"
+
+msgid "No ticket selected!"
+msgstr "티켓이 선택되지 않았습니다!"
+
+msgid "Error fetching replies."
+msgstr "오류 페치 응답."
+
+msgid "Failed to fetch replies. Please try again."
+msgstr "회신을 가져 오지 못했습니다. 다시 시도하십시오."
+
+msgid "Error fetching matching tickets:"
+msgstr "일치 티켓을 오류 가져 오기 :"
+
+msgid "Error fetching replies:"
+msgstr "오류 페치 응답 :"
+
+msgid "No matching tickets found."
+msgstr "일치하는 티켓이 발견되지 않았습니다."
+
+msgid "Ticket ID:"
+msgstr "티켓 ID :"
+
+msgid "Replies for:"
+msgstr "대답 :"
+
+msgid "No replies found for this ticket."
+msgstr "이 티켓에 대한 답변이 없습니다."
+
+msgid "N/A"
+msgstr "N/A"
+
+msgid "No content"
+msgstr "콘텐츠가 없습니다"
+
+msgid "No date"
+msgstr "날짜가 없습니다"
+
+msgid "Reply By:"
+msgstr "답장 :"
+
+msgid "AI-Powered Reply Mode"
+msgstr "AI 구동 응답 모드"
+
+msgid "Control how this individual reply influences the AI search and response generation process for future queries."
+msgstr "이 개별 답변이 향후 쿼리에 대한 AI 검색 및 응답 생성 프로세스에 어떤 영향을 미치는지 제어하십시오."
+
+msgid "Default: reply included in all AI search queries."
+msgstr "기본값 : 모든 AI 검색 쿼리에 답장이 포함되어 있습니다."
+
+msgid "Enable: reply used in AI queries only when the Enable Tickets filter is active."
+msgstr "활성화 : AI 쿼리에 사용 된 회신 활성화 티켓 필터가 활성화 된 경우에만 사용됩니다."
+
+msgid "Enable"
+msgstr "할 수 있게 하다"
+
+msgid "Disable: reply excluded from AI queries."
+msgstr "비활성화 : AI 쿼리에서 답장을 제외했습니다."
+
+msgid "Disable"
+msgstr "장애를 입히다"
+
+msgid "AI Icon"
+msgstr "AI 아이콘"
+
+msgid "AI-Powered Reply"
+msgstr "AI 구동 응답"
+
+msgid "Get context-based suggestions to effortlessly create clear and relevant replies."
+msgstr "명확하고 관련성있는 답변을 쉽게 만들기 위해 상황에 기반한 제안을 받으십시오."
+
+msgid "Generate AI Response"
+msgstr "AI 응답을 생성합니다"
+
+msgid "Matching Tickets"
+msgstr "일치하는 티켓"
+
+msgid "Filter"
+msgstr "필터"
+
+msgid "Enable Tickets"
+msgstr "티켓 활성화"
+
+msgid "All Replies"
+msgstr "모든 대답"
+
+msgid "Enable Replies"
+msgstr "답장을 활성화하십시오"
+
+msgid "Control how this ticket and its replies influence AI search and response generation for future queries."
+msgstr "이 티켓과 그 답변이 향후 쿼리에 대한 AI 검색 및 응답 생성에 미치는 영향을 제어하십시오."
+
+msgid "Default: ticket and replies included in all AI queries."
+msgstr "기본값 : 티켓 및 답변은 ​​모든 AI 쿼리에 포함되었습니다."
+
+msgid "Enable: ticket and replies used only when the “Enable Tickets” filter is active."
+msgstr "활성화 : 티켓 및 회신은 \"티켓 활성화\"필터가 활성화 될 때만 사용됩니다."
+
+msgid "Disable: ticket and replies excluded from AI queries."
+msgstr "비활성화 : 티켓 및 답변은 ​​AI 쿼리에서 제외됩니다."
+
+msgid "Get context-aware suggestions for your response."
+msgstr "응답에 대한 상황을 인식하는 제안을 받으십시오."
+
+msgid "Ticket ID is required."
+msgstr "티켓 ID가 필요합니다."
+
+msgid "Ticket not found."
+msgstr "티켓을 찾을 수 없습니다."
+
+msgid "Database error occurred."
+msgstr "데이터베이스 오류가 발생했습니다."
+
+msgid "AI Reply Section"
+msgstr "AI 응답 섹션"
+
+msgid "Get AI-powered, context-based suggestions to effortlessly create clear, relevant, and helpful replies."
+msgstr "명확하고 관련성 있고 유용한 답변을 쉽게 만들기 위해 AI 구동의 컨텍스트 기반 제안을 받으십시오."
+
+msgid "Change Ticket Status"
+msgstr "티켓 상태를 변경하십시오"
+
+msgid "Use AI Powered Reply Feature"
+msgstr "AI 전원 응답 기능을 사용하십시오"
+
+msgid "Set AI Reply Mode for Ticket"
+msgstr "티켓에 대한 AI 응답 모드를 설정하십시오"
+
+msgid "Set AI Reply Mode for Reply"
+msgstr "응답을 위해 AI 응답 모드를 설정하십시오"
+
+msgid "Limit AI Replies to Agent-Assigned Tickets"
+msgstr "AI 회신을 에이전트 할당 티켓으로 제한하십시오"
+
+msgid "Suggested Response"
+msgstr "제안 된 응답"
+
+msgid "Show User Avatar"
+msgstr "사용자 아바타를 보여주세요"
+
+msgid "Showing avatars may slightly slow down page loading"
+msgstr "아바타를 보여 주면 페이지로드가 약간 느려질 수 있습니다"

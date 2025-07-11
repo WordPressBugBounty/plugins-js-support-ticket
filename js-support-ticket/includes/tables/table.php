@@ -30,6 +30,9 @@ class JSSTtable {
     protected function setColumns($data) {
         if ($this->isnew == true) { // new record insert
             $array = get_object_vars($this);
+            if(isset($array['id'])){
+                unset($array['id']);
+            }
             unset($array['isnew']);
             unset($array['primarykey']);
             unset($array['tablename']);

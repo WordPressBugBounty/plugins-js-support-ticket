@@ -229,3 +229,7 @@ div.js-ticket-downloads-content div.js-ticket-download-box div.js-ticket-downloa
 div.js-ticket-downloads-content div.js-ticket-download-box div.js-ticket-download-left a.js-ticket-download-title img.js-ticket-download-icon {float: none;display: inline-block;}
 div.js-ticket-downloads-content div.js-ticket-download-box div.js-ticket-download-left a.js-ticket-download-title span.js-ticket-download-name {width: 100%;margin: 20px 0 10px;}
 #js-ticket-main-popup div.js-ticket-download-btn {text-align: center;padding: 20px 0 10px;}
+
+/* AI Powered Reply	*/
+.js-ticket-matching-tickets-section .js-ticket-section-heading {max-width: 100%;}
+.js-ticket-filter-group {margin-left: 0;}

@@ -7962,3 +7962,168 @@ msgstr "Addon (s) تم تثبيتها بنجاح!"
 
 msgid "Addon(s) Installation Failed"
 msgstr "فشل التثبيت Addon (S)"
+
+msgid "Your JS Support Ticket license key has expired or is invalid. Please update it to continue receiving support and updates."
+msgstr "انتهت صلاحية مفتاح ترخيص تذكرة دعم JS الخاص بك أو غير صالح. يرجى تحديثها لمواصلة تلقي الدعم والتحديثات."
+
+msgid "Import Data"
+msgstr "استيراد البيانات"
+
+msgid "No Addon Installed!"
+msgstr "لم يتم تثبيت ملحق!"
+
+msgid "Add-Ons"
+msgstr "الوظائف الإضافية"
+
+msgid "Copied to clipboard!"
+msgstr "نسخ إلى الحافظة!"
+
+msgid "Failed to copy!"
+msgstr "فشل في النسخ!"
+
+msgid "Failed to copy to clipboard. Please copy manually."
+msgstr "فشل في النسخ إلى الحافظة. يرجى نسخ يدويًا."
+
+msgid "Reply content appended!"
+msgstr "رد المحتوى الملحق!"
+
+msgid "No ticket selected!"
+msgstr "لم يتم اختيار تذكرة!"
+
+msgid "Error fetching replies."
+msgstr "خطأ جلب الردود."
+
+msgid "Failed to fetch replies. Please try again."
+msgstr "فشل في جلب الردود. من فضلك حاول مرة أخرى."
+
+msgid "Error fetching matching tickets:"
+msgstr "خطأ يجلب التذاكر المطابقة:"
+
+msgid "Error fetching replies:"
+msgstr "خطأ جلب الردود:"
+
+msgid "No matching tickets found."
+msgstr "لم يتم العثور على تذاكر مطابقة."
+
+msgid "Ticket ID:"
+msgstr "معرف التذاكر:"
+
+msgid "Replies for:"
+msgstr "ردود:"
+
+msgid "No replies found for this ticket."
+msgstr "لم يتم العثور على ردود لهذه التذكرة."
+
+msgid "N/A"
+msgstr "ن/أ"
+
+msgid "No content"
+msgstr "لا محتوى"
+
+msgid "No date"
+msgstr "لا موعد"
+
+msgid "Reply By:"
+msgstr "الرد بواسطة:"
+
+msgid "AI-Powered Reply Mode"
+msgstr "وضع الرد الذي يمتد بمنظمة العفو الدولية"
+
+msgid "Control how this individual reply influences the AI search and response generation process for future queries."
+msgstr "التحكم في كيفية تأثير هذا الرد الفردي على عملية البحث عن الذكاء الاصطناعي للاستجابة للاستعلامات المستقبلية."
+
+msgid "Default: reply included in all AI search queries."
+msgstr "الافتراضي: الرد المدرج في جميع استفسارات بحث الذكاء الاصطناعي."
+
+msgid "Enable: reply used in AI queries only when the Enable Tickets filter is active."
+msgstr "تمكين: الرد المستخدم في استفسارات الذكاء الاصطناعي فقط عندما يكون مرشح تذاكر Enable نشطًا."
+
+msgid "Enable"
+msgstr "يُمكَِن"
+
+msgid "Disable: reply excluded from AI queries."
+msgstr "تعطيل: الرد المستبعد من استفسارات الذكاء الاصطناعي."
+
+msgid "Disable"
+msgstr "إبطال"
+
+msgid "AI Icon"
+msgstr "أيقونة الذكاء الاصطناعي"
+
+msgid "AI-Powered Reply"
+msgstr "رد الذكاء الاصطناعي"
+
+msgid "Get context-based suggestions to effortlessly create clear and relevant replies."
+msgstr "احصل على اقتراحات قائمة على السياق لإنشاء ردود واضحة وذات صلة."
+
+msgid "Generate AI Response"
+msgstr "توليد استجابة الذكاء الاصطناعي"
+
+msgid "Matching Tickets"
+msgstr "مطابقة التذاكر"
+
+msgid "Filter"
+msgstr "فلتر"
+
+msgid "Enable Tickets"
+msgstr "تمكين التذاكر"
+
+msgid "All Replies"
+msgstr "جميع الردود"
+
+msgid "Enable Replies"
+msgstr "تمكين الردود"
+
+msgid "Control how this ticket and its replies influence AI search and response generation for future queries."
+msgstr "تحكم في كيفية تأثير هذه التذكرة وردها على توليد البحث عن الذكاء الاصطناعي للاستعلامات المستقبلية."
+
+msgid "Default: ticket and replies included in all AI queries."
+msgstr "الافتراضي: التذاكر والردود المدرجة في جميع استفسارات الذكاء الاصطناعي."
+
+msgid "Enable: ticket and replies used only when the “Enable Tickets” filter is active."
+msgstr "تمكين: التذاكر والردود المستخدمة فقط عندما يكون مرشح \"تمكين التذاكر\" نشطًا."
+
+msgid "Disable: ticket and replies excluded from AI queries."
+msgstr "تعطيل: التذاكر والردود المستبعدة من استفسارات الذكاء الاصطناعي."
+
+msgid "Get context-aware suggestions for your response."
+msgstr "احصل على اقتراحات مدركة للسياق لاستجابتك."
+
+msgid "Ticket ID is required."
+msgstr "معرف التذاكر مطلوب."
+
+msgid "Ticket not found."
+msgstr "التذكرة لم يتم العثور عليها."
+
+msgid "Database error occurred."
+msgstr "حدث خطأ في قاعدة البيانات."
+
+msgid "AI Reply Section"
+msgstr "قسم الرد من الذكاء الاصطناعي"
+
+msgid "Get AI-powered, context-based suggestions to effortlessly create clear, relevant, and helpful replies."
+msgstr "احصل على اقتراحات مدعومة من الذكاء الاصطناعى ، وقائمة على السياق لإنشاء ردود واضحة وذات صلة ومفيدة."
+
+msgid "Change Ticket Status"
+msgstr "تغيير حالة التذكرة"
+
+msgid "Use AI Powered Reply Feature"
+msgstr "استخدم ميزة الرد المدعومة من الذكاء الاصطناعي"
+
+msgid "Set AI Reply Mode for Ticket"
+msgstr "اضبط وضع رد الذكاء الاصطناعي للتذكرة"
+
+msgid "Set AI Reply Mode for Reply"
+msgstr "اضبط وضع الرد من الذكاء الاصطناعي للرد"
+
+msgid "Limit AI Replies to Agent-Assigned Tickets"
+msgstr "الحد من ردود الذكاء الاصطناعى على التذاكر المعتمدة من الوكيل"
+
+msgid "Suggested Response"
+msgstr "استجابة مقترحة"
+
+msgid "Show User Avatar"
+msgstr "إظهار الصورة الرمزية للمستخدم"
+
+msgid "Showing avatars may slightly slow down page loading"
+msgstr "قد يؤدي إظهار الصور الرمزية إلى إبطاء تحميل الصفحة قليلاً"

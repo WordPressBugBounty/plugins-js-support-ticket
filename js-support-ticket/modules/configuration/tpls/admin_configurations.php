@@ -583,6 +583,13 @@ $plugin_array = get_option('active_plugins');
                       JSST_printConfigFieldSingle($title, $field, $description);
                     }
 
+                    if(isset(jssupportticket::$_data[0]['show_avatar'])){
+                        $title = esc_html(__('Show User Avatar', 'js-support-ticket'));
+                        $field = JSSTformfield::select('show_avatar', $yesno, jssupportticket::$_data[0]['show_avatar']);
+                        $description =  esc_html(__('Showing avatars may slightly slow down page loading', 'js-support-ticket'));
+                        JSST_printConfigFieldSingle($title, $field, $description);
+                    }
+
                     if(isset(jssupportticket::$_data[0]['count_on_myticket'])){
                       $title = esc_html(__('Show count on my tickets', 'js-support-ticket'));
                       $field = JSSTformfield::select('count_on_myticket', $yesno, jssupportticket::$_data[0]['count_on_myticket']);
@@ -592,7 +599,7 @@ $plugin_array = get_option('active_plugins');
                       JSST_printConfigFieldSingle($title, $field, $description, $video, '', $videotext);
                     }
 
-                   if(isset(jssupportticket::$_data[0]['wp_default_role'])){
+                    if(isset(jssupportticket::$_data[0]['wp_default_role'])){
                       $title = esc_html(__('Default wp role for new users', 'js-support-ticket'));
                       $field = JSSTformfield::select('wp_default_role', $userroles, jssupportticket::$_data[0]['wp_default_role']);
                       $description =  esc_html(__('Select the role you want to assign to new users', 'js-support-ticket'));
