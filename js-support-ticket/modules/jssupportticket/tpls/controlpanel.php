@@ -972,7 +972,7 @@ if (jssupportticket::$_config['offline'] == 2) {
                                     <?php echo esc_html(date_i18n(jssupportticket::$_config['date_format'], jssupportticketphplib::JSST_strtotime($ticket->created))); ?>
                                 </div>
                                 <?php
-                                if (!empty($show_on_listing_array['fullname'])) { ?>
+                                if (!empty($show_on_listing_array['priority'])) { ?>
                                     <div class="js-ticket-fourth-left">
                                         <span class="js-ticket-priorty" style="background:<?php echo esc_attr($ticket->prioritycolour); ?>;"><?php echo esc_html(jssupportticket::JSST_getVarValue($ticket->priority)); ?></span>
                                     </div>

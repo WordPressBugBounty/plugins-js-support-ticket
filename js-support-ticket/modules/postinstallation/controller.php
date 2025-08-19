@@ -11,11 +11,13 @@ class JSSTpostinstallationController {
     }
 
     function handleRequest() {
-        $layout = JSSTrequest::getLayout('jstlay', null, 'stepone');
+        $layout = JSSTrequest::getLayout('jstlay', null, 'wellcomepage');
         jssupportticket::$_data['sanitized_args']['jsst_nonce'] = esc_html(wp_create_nonce('jsst_nonce'));
         if($this->canaddfile($layout)){
             switch ($layout) {
                 case 'admin_quickconfig':
+                break;
+                case 'admin_wellcomepage':
                     JSSTincluder::getJSModel('postinstallation')->getConfigurationValues();
                 break;
                 case 'admin_stepone':

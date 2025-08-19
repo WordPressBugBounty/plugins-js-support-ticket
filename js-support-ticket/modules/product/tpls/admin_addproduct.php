@@ -3,7 +3,6 @@
     die('Restricted Access');
 ?>
 <?php
-wp_enqueue_script('iris');
 $jssupportticket_js ="
     jQuery(document).ready(function () {
         jQuery.validate();

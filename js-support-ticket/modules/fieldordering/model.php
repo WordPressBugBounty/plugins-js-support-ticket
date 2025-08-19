@@ -1319,7 +1319,7 @@ class JSSTfieldorderingModel {
                 ". wp_kses(JSSTformfield::hidden('visibleLogic[]', 'OR'), JSST_ALLOWED_TAGS) ."
                 ". wp_kses(JSSTformfield::select('visibleParent[]', JSSTincluder::getJSModel('fieldordering')->getFieldsForVisibleCombobox($fieldfor, $formid,$field,$id), '', esc_html(__('Select Parent', 'js-support-ticket')), array('class' => 'inputbox js-form-select-field js-form-input-field-visible', 'onchange' => 'getChildForVisibleCombobox(this.value, '.$orid.');getConditionsForVisibleCombobox(this.value, '.$orid.');')), JSST_ALLOWED_TAGS) ."
                 <span class='visibleValueWrp'>
-                    ". wp_kses(JSSTformfield::select('visibleValue[]', '', '', esc_html(esc_html(__('Select Child', 'js-support-ticket'))), array('class' => 'inputbox one js-form-select-field js-form-input-field-visible')), JSST_ALLOWED_TAGS) ."
+                    ". wp_kses(JSSTformfield::select('visibleValue[]', '', '', esc_html(__('Select Child', 'js-support-ticket')), array('class' => 'inputbox one js-form-select-field js-form-input-field-visible')), JSST_ALLOWED_TAGS) ."
                 </span>
                 <span class='visibleConditionWrp'>
                     ". wp_kses(JSSTformfield::select('visibleCondition[]', $equalnotequal, '', esc_html(__('Select Condition', 'js-support-ticket')), array('class' => 'inputbox one js-form-select-field js-form-input-field-visible')), JSST_ALLOWED_TAGS) ."
@@ -1364,7 +1364,7 @@ class JSSTfieldorderingModel {
                     ". wp_kses(JSSTformfield::hidden('visibleLogic[]', 'AND'), JSST_ALLOWED_TAGS) ."
                     ". wp_kses(JSSTformfield::select('visibleParent[]', JSSTincluder::getJSModel('fieldordering')->getFieldsForVisibleCombobox($fieldfor, $formid,$field,$id), '', esc_html(__('Select Parent', 'js-support-ticket')), array('class' => 'inputbox js-form-select-field js-form-input-field-visible', 'onchange' => 'getChildForVisibleCombobox(this.value, '.$orid.');getConditionsForVisibleCombobox(this.value, '.$orid.');')), JSST_ALLOWED_TAGS) ."
                     <span class='visibleValueWrp'>
-                        ". wp_kses(JSSTformfield::select('visibleValue[]', '', '', esc_html(esc_html(__('Select Child', 'js-support-ticket'))), array('class' => 'inputbox one js-form-select-field js-form-input-field-visible')), JSST_ALLOWED_TAGS) ."
+                        ". wp_kses(JSSTformfield::select('visibleValue[]', '', '', esc_html(__('Select Child', 'js-support-ticket')), array('class' => 'inputbox one js-form-select-field js-form-input-field-visible')), JSST_ALLOWED_TAGS) ."
                     </span>
                     <span class='visibleConditionWrp'>
                         ". wp_kses(JSSTformfield::select('visibleCondition[]', $equalnotequal, '', esc_html(__('Select Condition', 'js-support-ticket')), array('class' => 'inputbox one js-form-select-field js-form-input-field-visible')), JSST_ALLOWED_TAGS) ."

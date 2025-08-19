@@ -8127,3 +8127,291 @@ msgstr "إظهار الصورة الرمزية للمستخدم"
 
 msgid "Showing avatars may slightly slow down page loading"
 msgstr "قد يؤدي إظهار الصور الرمزية إلى إبطاء تحميل الصفحة قليلاً"
+
+msgid "AI Powered Reply"
+msgstr "رد الذكاء الاصطناعي"
+
+msgid "by"
+msgstr "بواسطة"
+
+msgid "Awesome Support"
+msgstr "دعم رائع"
+
+msgid "SupportCandy"
+msgstr "SupportCandy"
+
+msgid "Fluent Support"
+msgstr "الدعم بطلاقة"
+
+msgid "icon"
+msgstr "رمز"
+
+msgid "Plugin not installed"
+msgstr "البرنامج المساعد غير مثبت"
+
+msgid "Fetch Data"
+msgstr "جلب البيانات"
+
+msgid "Coming Soon"
+msgstr "قريباً"
+
+msgid "found"
+msgstr "وجد"
+
+msgid "Private Credentials Addon missing, ticket private credentials data will not be imported!"
+msgstr "بيانات الاعتماد الخاصة المفقودة ، لن يتم استيراد بيانات بيانات الاعتماد الخاصة التذاكر!"
+
+msgid "Ticket History Addon missing, full ticket history will not be imported!"
+msgstr "addon تاريخ التذاكر مفقود ، لن يتم استيراد سجل التذاكر الكامل!"
+
+msgid "Time Tracking Addon missing, ticket time tracking data will not be imported!"
+msgstr "تتبع الوقت الملحق المفقود ، لن يتم استيراد بيانات تتبع وقت التذاكر!"
+
+msgid "Note Addon missing, ticket internal note  data will not be imported!"
+msgstr "ملاحظة: لا يتم استيراد بيانات الملاحظة الداخلية التذاكر!"
+
+msgid "Addon not installed please install addon first."
+msgstr "Addon غير مثبت يرجى تثبيت Addon أولاً."
+
+msgid "No Data Found!"
+msgstr "لم يتم العثور على بيانات!"
+
+msgid "Import Data Report"
+msgstr "تقرير بيانات الاستيراد"
+
+msgid "Entity"
+msgstr "كيان"
+
+msgid "Imported"
+msgstr "مستورد"
+
+msgid "Similar Found"
+msgstr "وجدت مماثلة"
+
+msgid "Not Imported"
+msgstr "لم يتم استيراده"
+
+msgid "imported."
+msgstr "مستورد."
+
+msgid "skipped."
+msgstr "تخطي."
+
+msgid "failed."
+msgstr "فشل."
+
+msgid "Fields are only available in the default form."
+msgstr "الحقول متوفرة فقط في النموذج الافتراضي."
+
+msgid "Dashboard Options"
+msgstr "خيارات لوحة القيادة"
+
+msgid "Select which charts and sections you would like to see on your dashboard."
+msgstr "حدد المخططات والأقسام التي ترغب في رؤيتها على لوحة القيادة الخاصة بك."
+
+msgid "Ticket Trends"
+msgstr "اتجاهات التذاكر"
+
+msgid "Today's Distribution"
+msgstr "توزيع اليوم"
+
+msgid "Tickets by Department"
+msgstr "التذاكر حسب القسم"
+
+msgid "Tickets by Status"
+msgstr "تذاكر حسب الحالة"
+
+msgid "Tickets by Priorities"
+msgstr "تذاكر حسب الأولويات"
+
+msgid "Tickets by Products"
+msgstr "تذاكر المنتجات"
+
+msgid "Agent Workload"
+msgstr "عبء عمل الوكيل"
+
+msgid "Ticket Action History"
+msgstr "تاريخ حركة التذاكر"
+
+msgid "Save Changes"
+msgstr "حفظ التغييرات"
+
+msgid "New Tickets"
+msgstr "تذاكر جديدة"
+
+msgid "Pending Tickets"
+msgstr "تذاكر معلقة"
+
+msgid "Answered Tickets"
+msgstr "أجاب التذاكر"
+
+msgid "Tickets Closed Today"
+msgstr "تغلق التذاكر اليوم"
+
+msgid "Daily Ticket Flow"
+msgstr "تدفق التذاكر اليومي"
+
+msgid "Resolved"
+msgstr "حل"
+
+msgid "New Addon Update Available"
+msgstr "تحديث ملحق جديد متاح"
+
+msgid "Install the latest version to unlock new features and security patches."
+msgstr "قم بتثبيت أحدث إصدار لإلغاء قفل الميزات الجديدة وتصحيحات الأمان."
+
+msgid "Unassigned Tickets"
+msgstr "التذاكر غير المعينة"
+
+msgid "No Unassigned Tickets"
+msgstr "لا تذاكر غير محددة"
+
+msgid "All tickets have been assigned. Great job!"
+msgstr "تم تعيين جميع التذاكر. عمل رائع!"
+
+msgid "No Recent Actions"
+msgstr "لا إجراءات حديثة"
+
+msgid "There is no ticket activity to show at the moment."
+msgstr "لا يوجد نشاط تذكرة لإظهاره في الوقت الحالي."
+
+msgid "Ticket Trends (Last 7 Days)"
+msgstr "اتجاهات التذاكر (7 أيام آخر)"
+
+msgid "Today's Ticket Distribution"
+msgstr "توزيع التذاكر اليوم"
+
+msgid "View All"
+msgstr "عرض الكل"
+
+msgid "No Tickets Found"
+msgstr "لم يتم العثور على تذاكر"
+
+msgid "There are currently no tickets to display in this view."
+msgstr "لا توجد حاليًا أي تذاكر لعرضها في هذا العرض."
+
+msgid "Awaiting Customer"
+msgstr "في انتظار العميل"
+
+msgid "Awaiting Agent"
+msgstr "وكيل في انتظار"
+
+msgid "Total"
+msgstr "المجموع"
+
+msgid "No Agent Data"
+msgstr "لا توجد بيانات وكيل"
+
+msgid "Workload data for agents is not available at this time."
+msgstr "بيانات عبء العمل للوكلاء غير متوفرة في هذا الوقت."
+
+msgid "Total overdue tickets"
+msgstr "إجمالي التذاكر المتأخرة"
+
+msgid "Zero Overdue Tickets!"
+msgstr "صفر التذاكر المتأخرة!"
+
+msgid "Congratulations! The queue is clear of overdue tickets."
+msgstr "مبروك! قائمة الانتظار خالية من التذاكر المتأخرة."
+
+msgid "List of Canned Responses"
+msgstr "قائمة الردود المعلبة"
+
+msgid "No Canned Responses"
+msgstr "لا ردود معلبة"
+
+msgid "Create your first canned response to speed up your workflow."
+msgstr "قم بإنشاء أول استجابة معلبة لتسريع سير العمل الخاص بك."
+
+msgid "Open Tickets by Age"
+msgstr "فتح التذاكر حسب العمر"
+
+msgid "Age"
+msgstr "عمر"
+
+msgid "Count"
+msgstr "عدد"
+
+msgid "< 1 Day"
+msgstr "<1 يوم"
+
+msgid "1-3 Days"
+msgstr "1-3 أيام"
+
+msgid "3-7 Days"
+msgstr "3-7 أيام"
+
+msgid "> 7 Days"
+msgstr "> 7 أيام"
+
+msgid "No Open Tickets"
+msgstr "لا تذاكر مفتوحة"
+
+msgid "There are no open tickets to analyze by age."
+msgstr "لا توجد تذاكر مفتوحة للتحليل حسب العمر."
+
+msgid "Most Active Customers"
+msgstr "أكثر العملاء النشطة"
+
+msgid "Customer Name"
+msgstr "اسم العميل"
+
+msgid "Tickets Count"
+msgstr "عدد التذاكر"
+
+msgid "No Active Customers"
+msgstr "لا عملاء نشطين"
+
+msgid "Customer activity data is not yet available."
+msgstr "بيانات نشاط العميل غير متوفرة بعد."
+
+msgid "Active Timer"
+msgstr "مؤقت نشط"
+
+msgid "Timer"
+msgstr "مؤقت"
+
+msgid "No Active Timers"
+msgstr "لا توجد أجهزة توقيت نشطة"
+
+msgid "No agents have active timers running on tickets."
+msgstr "لا يوجد لدى أي وكلاء أجهزة توقيت نشطة تعمل على التذاكر."
+
+msgid "Defines rules or set specific intervals of time to make ticket auto overdue."
+msgstr "يحدد القواعد أو تعيين فترات زمنية محددة لجعل التذاكر متأخرة."
+
+msgid "SMTP enables you to add custom mail protocol to send and receive emails."
+msgstr "يتيح لك SMTP إضافة بروتوكول بريد مخصص لإرسال واستقبال رسائل البريد الإلكتروني."
+
+msgid "Available Addons"
+msgstr "الإضافات المتاحة"
+
+msgid "View All Addons"
+msgstr "عرض جميع الإضافات"
+
+msgid "View Details"
+msgstr "عرض التفاصيل"
+
+msgid "Let's Get your Configuration Setup"
+msgstr "دعنا نحصل على إعداد التكوين الخاص بك"
+
+msgid "Configurations Complete"
+msgstr "تكوينات كاملة"
+
+msgid "Welcome to JS Support Ticket"
+msgstr "مرحبًا بك في تذكرة دعم JS"
+
+msgid "Lets Get Your Configurations Set Up"
+msgstr "دعنا نحصل على تكويناتك"
+
+msgid "Plugin Quick Settings"
+msgstr "الإضافات الإضافية إعدادات سريعة"
+
+msgid "Move to Dashboard"
+msgstr "انتقل إلى لوحة القيادة"
+
+msgid "You need to rename the existing data directory in file system before changing the data directory name"
+msgstr "تحتاج إلى إعادة تسمية دليل البيانات الموجود في نظام الملفات قبل تغيير اسم دليل البيانات"
+
+msgid "URL for use with your own scripts and third party"
+msgstr "عنوان URL للاستخدام مع البرامج النصية الخاصة بك وطرف ثالث"

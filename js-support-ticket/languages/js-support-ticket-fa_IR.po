@@ -8128,3 +8128,291 @@ msgstr "نمایش آواتار کاربر"
 
 msgid "Showing avatars may slightly slow down page loading"
 msgstr "نشان دادن آواتارها ممکن است کمی کاهش سرعت صفحه را کاهش دهد"
+
+msgid "AI Powered Reply"
+msgstr ""
+
+msgid "by"
+msgstr "از طرف"
+
+msgid "Awesome Support"
+msgstr "پشتیبانی عالی"
+
+msgid "SupportCandy"
+msgstr "حامی"
+
+msgid "Fluent Support"
+msgstr "پشتیبانی روان"
+
+msgid "icon"
+msgstr "نماد"
+
+msgid "Plugin not installed"
+msgstr "افزونه نصب نشده است"
+
+msgid "Fetch Data"
+msgstr "داده های واکشی"
+
+msgid "Coming Soon"
+msgstr "به زودی"
+
+msgid "found"
+msgstr "پیدا کردن"
+
+msgid "Private Credentials Addon missing, ticket private credentials data will not be imported!"
+msgstr "اعتبارنامه های خصوصی از دست رفته ، بلیط های اعتبارنامه خصوصی بلیط وارد نمی شوند!"
+
+msgid "Ticket History Addon missing, full ticket history will not be imported!"
+msgstr "افزونه تاریخ بلیط گمشده ، تاریخچه بلیط کامل وارد نمی شود!"
+
+msgid "Time Tracking Addon missing, ticket time tracking data will not be imported!"
+msgstr "ردیابی زمان افزودنی از دست رفته ، داده های ردیابی زمان بلیط وارد نمی شود!"
+
+msgid "Note Addon missing, ticket internal note  data will not be imported!"
+msgstr "توجه داشته باشید که افزونه از دست رفته ، داده های یادداشت داخلی بلیط وارد نمی شوند!"
+
+msgid "Addon not installed please install addon first."
+msgstr "افزودنی نصب نشده لطفا ابتدا Addon را نصب کنید."
+
+msgid "No Data Found!"
+msgstr "هیچ داده ای یافت نشد!"
+
+msgid "Import Data Report"
+msgstr "گزارش داده واردات"
+
+msgid "Entity"
+msgstr "موجودیت"
+
+msgid "Imported"
+msgstr "وارد شده"
+
+msgid "Similar Found"
+msgstr "مشابه یافت شد"
+
+msgid "Not Imported"
+msgstr "وارد نشده"
+
+msgid "imported."
+msgstr "وارد شده"
+
+msgid "skipped."
+msgstr "پرش"
+
+msgid "failed."
+msgstr "شکست خورد"
+
+msgid "Fields are only available in the default form."
+msgstr "زمینه ها فقط به صورت پیش فرض در دسترس هستند."
+
+msgid "Dashboard Options"
+msgstr "گزینه های داشبورد"
+
+msgid "Select which charts and sections you would like to see on your dashboard."
+msgstr "انتخاب کنید که نمودارها و بخش هایی را که می خواهید در داشبورد خود مشاهده کنید."
+
+msgid "Ticket Trends"
+msgstr "روند بلیط"
+
+msgid "Today's Distribution"
+msgstr "توزیع امروز"
+
+msgid "Tickets by Department"
+msgstr "بلیط توسط بخش"
+
+msgid "Tickets by Status"
+msgstr "بلیط بر اساس وضعیت"
+
+msgid "Tickets by Priorities"
+msgstr "بلیط های اولویت ها"
+
+msgid "Tickets by Products"
+msgstr "بلیط توسط محصولات"
+
+msgid "Agent Workload"
+msgstr "بار کار عامل"
+
+msgid "Ticket Action History"
+msgstr "تاریخچه اقدام بلیط"
+
+msgid "Save Changes"
+msgstr "تغییرات را ذخیره کنید"
+
+msgid "New Tickets"
+msgstr "بلیط های جدید"
+
+msgid "Pending Tickets"
+msgstr "بلیط در انتظار"
+
+msgid "Answered Tickets"
+msgstr "بلیط های پاسخ داده شده"
+
+msgid "Tickets Closed Today"
+msgstr "بلیط های امروز بسته شد"
+
+msgid "Daily Ticket Flow"
+msgstr "جریان بلیط روزانه"
+
+msgid "Resolved"
+msgstr "حل شده"
+
+msgid "New Addon Update Available"
+msgstr "به روزرسانی افزودون جدید موجود است"
+
+msgid "Install the latest version to unlock new features and security patches."
+msgstr "آخرین نسخه را برای باز کردن ویژگی های جدید و تکه های امنیتی نصب کنید."
+
+msgid "Unassigned Tickets"
+msgstr "بلیط های بدون طراحی"
+
+msgid "No Unassigned Tickets"
+msgstr "بلیط های غیرمجاز"
+
+msgid "All tickets have been assigned. Great job!"
+msgstr "تمام بلیط ها اختصاص داده شده است. کار عالی!"
+
+msgid "No Recent Actions"
+msgstr "هیچ اقدامات اخیر وجود ندارد"
+
+msgid "There is no ticket activity to show at the moment."
+msgstr "در حال حاضر هیچ فعالیت بلیط برای نمایش وجود ندارد."
+
+msgid "Ticket Trends (Last 7 Days)"
+msgstr "روند بلیط (7 روز گذشته)"
+
+msgid "Today's Ticket Distribution"
+msgstr "توزیع بلیط امروز"
+
+msgid "View All"
+msgstr "مشاهده همه"
+
+msgid "No Tickets Found"
+msgstr "هیچ بلیط یافت نشد"
+
+msgid "There are currently no tickets to display in this view."
+msgstr "در حال حاضر هیچ بلیط برای نمایش در این نمای وجود ندارد."
+
+msgid "Awaiting Customer"
+msgstr "در انتظار مشتری"
+
+msgid "Awaiting Agent"
+msgstr "در انتظار نماینده"
+
+msgid "Total"
+msgstr "مجموع"
+
+msgid "No Agent Data"
+msgstr "داده های عامل"
+
+msgid "Workload data for agents is not available at this time."
+msgstr "داده های بار کاری برای نمایندگان در حال حاضر در دسترس نیست."
+
+msgid "Total overdue tickets"
+msgstr "کل بلیط های معوقه"
+
+msgid "Zero Overdue Tickets!"
+msgstr "بلیط های Zero Usdue!"
+
+msgid "Congratulations! The queue is clear of overdue tickets."
+msgstr "تبریک می گویم! صف از بلیط های به تأخیر افتاده است."
+
+msgid "List of Canned Responses"
+msgstr "لیست پاسخهای کنسرو شده"
+
+msgid "No Canned Responses"
+msgstr "بدون پاسخ کنسرو"
+
+msgid "Create your first canned response to speed up your workflow."
+msgstr "اولین پاسخ کنسرو شده خود را برای سرعت بخشیدن به گردش کار خود ایجاد کنید."
+
+msgid "Open Tickets by Age"
+msgstr "بلیط های باز بر اساس سن"
+
+msgid "Age"
+msgstr "پیری"
+
+msgid "Count"
+msgstr "شمردن"
+
+msgid "< 1 Day"
+msgstr "<1 روز"
+
+msgid "1-3 Days"
+msgstr "1-3 روز"
+
+msgid "3-7 Days"
+msgstr "3-7 روز"
+
+msgid "> 7 Days"
+msgstr "> 7 روز"
+
+msgid "No Open Tickets"
+msgstr "بلیط باز نیست"
+
+msgid "There are no open tickets to analyze by age."
+msgstr "هیچ بلیط باز برای تجزیه و تحلیل با سن وجود ندارد."
+
+msgid "Most Active Customers"
+msgstr "بیشتر مشتریان فعال"
+
+msgid "Customer Name"
+msgstr "نام مشتری"
+
+msgid "Tickets Count"
+msgstr "تعداد بلیط ها"
+
+msgid "No Active Customers"
+msgstr "مشتری فعال نیست"
+
+msgid "Customer activity data is not yet available."
+msgstr "داده های فعالیت مشتری هنوز در دسترس نیست."
+
+msgid "Active Timer"
+msgstr "تایمر فعال"
+
+msgid "Timer"
+msgstr "تایمر"
+
+msgid "No Active Timers"
+msgstr "هیچ تایمر فعال وجود ندارد"
+
+msgid "No agents have active timers running on tickets."
+msgstr "هیچ یک از نمایندگان تایمر فعال ندارند که روی بلیط کار می کنند."
+
+msgid "Defines rules or set specific intervals of time to make ticket auto overdue."
+msgstr "قوانین را تعریف می کند یا فواصل زمانی خاص را برای به پایان رساندن خودکار بلیط تعیین می کند."
+
+msgid "SMTP enables you to add custom mail protocol to send and receive emails."
+msgstr "SMTP شما را قادر می سازد پروتکل پستی سفارشی را برای ارسال و دریافت ایمیل اضافه کنید."
+
+msgid "Available Addons"
+msgstr "افزونه های موجود"
+
+msgid "View All Addons"
+msgstr "مشاهده همه افزونه ها"
+
+msgid "View Details"
+msgstr "مشاهده جزئیات"
+
+msgid "Let's Get your Configuration Setup"
+msgstr "بیایید تنظیمات پیکربندی خود را دریافت کنیم"
+
+msgid "Configurations Complete"
+msgstr "تنظیمات کامل است"
+
+msgid "Welcome to JS Support Ticket"
+msgstr "به بلیط پشتیبانی JS خوش آمدید"
+
+msgid "Lets Get Your Configurations Set Up"
+msgstr "بیایید تنظیمات خود را تنظیم کنیم"
+
+msgid "Plugin Quick Settings"
+msgstr "تنظیمات سریع افزونه"
+
+msgid "Move to Dashboard"
+msgstr "حرکت به داشبورد"
+
+msgid "You need to rename the existing data directory in file system before changing the data directory name"
+msgstr "شما باید قبل از تغییر نام فهرست داده ها ، فهرست داده های موجود را در سیستم فایل تغییر نام دهید"
+
+msgid "URL for use with your own scripts and third party"
+msgstr "URL برای استفاده با اسکریپت های شخصی خود و شخص ثالث"

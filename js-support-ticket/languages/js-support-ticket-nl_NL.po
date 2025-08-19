@@ -8129,3 +8129,291 @@ msgstr "Toon gebruikers avatar"
 
 msgid "Showing avatars may slightly slow down page loading"
 msgstr "Het tonen van avatars kan het laden van de pagina enigszins vertragen"
+
+msgid "AI Powered Reply"
+msgstr "AI aangedreven antwoord"
+
+msgid "by"
+msgstr "door"
+
+msgid "Awesome Support"
+msgstr "Geweldige ondersteuning"
+
+msgid "SupportCandy"
+msgstr "SupportCandy"
+
+msgid "Fluent Support"
+msgstr "Vloeiende ondersteuning"
+
+msgid "icon"
+msgstr "icon"
+
+msgid "Plugin not installed"
+msgstr "Plug -in niet geïnstalleerd"
+
+msgid "Fetch Data"
+msgstr "Gegevens ophalen"
+
+msgid "Coming Soon"
+msgstr "Binnenkort"
+
+msgid "found"
+msgstr "gevonden"
+
+msgid "Private Credentials Addon missing, ticket private credentials data will not be imported!"
+msgstr "Privéreferenties addon ontbreekt, ticket privéreferentiegegevens worden niet geïmporteerd!"
+
+msgid "Ticket History Addon missing, full ticket history will not be imported!"
+msgstr "Ticketgeschiedenis add -on ontbreekt, volledige ticketgeschiedenis wordt niet geïmporteerd!"
+
+msgid "Time Tracking Addon missing, ticket time tracking data will not be imported!"
+msgstr "Tijd tracking add -on ontbrekende, ticket time tracking -gegevens worden niet geïmporteerd!"
+
+msgid "Note Addon missing, ticket internal note  data will not be imported!"
+msgstr "OPMERKING ADDON MISSEN, Ticket Interne notitiegegevens worden niet geïmporteerd!"
+
+msgid "Addon not installed please install addon first."
+msgstr "Addon niet geïnstalleerd, installeer ADDON eerst."
+
+msgid "No Data Found!"
+msgstr "Geen gegevens gevonden!"
+
+msgid "Import Data Report"
+msgstr "Gegevensrapport importeren"
+
+msgid "Entity"
+msgstr "Entiteit"
+
+msgid "Imported"
+msgstr "Geïmporteerd"
+
+msgid "Similar Found"
+msgstr "Vergelijkbaar gevonden"
+
+msgid "Not Imported"
+msgstr "Niet geïmporteerd"
+
+msgid "imported."
+msgstr "geïmporteerd."
+
+msgid "skipped."
+msgstr "overgeslagen."
+
+msgid "failed."
+msgstr "mislukt."
+
+msgid "Fields are only available in the default form."
+msgstr "Velden zijn alleen beschikbaar in het standaardformulier."
+
+msgid "Dashboard Options"
+msgstr "Dashboard -opties"
+
+msgid "Select which charts and sections you would like to see on your dashboard."
+msgstr "Selecteer welke grafieken en secties u op uw dashboard wilt zien."
+
+msgid "Ticket Trends"
+msgstr "Tickettrends"
+
+msgid "Today's Distribution"
+msgstr "De verdeling van vandaag"
+
+msgid "Tickets by Department"
+msgstr "Tickets per afdeling"
+
+msgid "Tickets by Status"
+msgstr "Tickets op status"
+
+msgid "Tickets by Priorities"
+msgstr "Tickets op prioriteiten"
+
+msgid "Tickets by Products"
+msgstr "Tickets per producten"
+
+msgid "Agent Workload"
+msgstr "Agent Workload"
+
+msgid "Ticket Action History"
+msgstr "Ticket Action History"
+
+msgid "Save Changes"
+msgstr "Bewaar wijzigingen"
+
+msgid "New Tickets"
+msgstr "Nieuwe tickets"
+
+msgid "Pending Tickets"
+msgstr "In afwachting van tickets"
+
+msgid "Answered Tickets"
+msgstr "Beantwoord kaartjes"
+
+msgid "Tickets Closed Today"
+msgstr "Tickets vandaag gesloten"
+
+msgid "Daily Ticket Flow"
+msgstr "Dagelijkse ticketstroom"
+
+msgid "Resolved"
+msgstr "Opgelost"
+
+msgid "New Addon Update Available"
+msgstr "Nieuwe addon -update beschikbaar"
+
+msgid "Install the latest version to unlock new features and security patches."
+msgstr "Installeer de nieuwste versie om nieuwe functies en beveiligingspatches te ontgrendelen."
+
+msgid "Unassigned Tickets"
+msgstr "Niet -toegewezen kaartjes"
+
+msgid "No Unassigned Tickets"
+msgstr "Geen niet -toegewezen tickets"
+
+msgid "All tickets have been assigned. Great job!"
+msgstr "Alle tickets zijn toegewezen. Geweldig werk!"
+
+msgid "No Recent Actions"
+msgstr "Geen recente acties"
+
+msgid "There is no ticket activity to show at the moment."
+msgstr "Er is op dit moment geen ticketactiviteit om te laten zien."
+
+msgid "Ticket Trends (Last 7 Days)"
+msgstr "Tickettrends (laatste 7 dagen)"
+
+msgid "Today's Ticket Distribution"
+msgstr "Vandaag 's ticketverdeling"
+
+msgid "View All"
+msgstr "Bekijk alles"
+
+msgid "No Tickets Found"
+msgstr "Geen tickets gevonden"
+
+msgid "There are currently no tickets to display in this view."
+msgstr "Er zijn momenteel geen tickets om in deze weergave weer te geven."
+
+msgid "Awaiting Customer"
+msgstr "In afwachting van de klant"
+
+msgid "Awaiting Agent"
+msgstr "In afwachting van agent"
+
+msgid "Total"
+msgstr "Totaal"
+
+msgid "No Agent Data"
+msgstr "Geen agentgegevens"
+
+msgid "Workload data for agents is not available at this time."
+msgstr "Workload -gegevens voor agenten zijn op dit moment niet beschikbaar."
+
+msgid "Total overdue tickets"
+msgstr "Totale achterstallige kaartjes"
+
+msgid "Zero Overdue Tickets!"
+msgstr "Zero achterstallige tickets!"
+
+msgid "Congratulations! The queue is clear of overdue tickets."
+msgstr "Gefeliciteerd! De wachtrij is vrij van achterstallige tickets."
+
+msgid "List of Canned Responses"
+msgstr "Lijst met ingeblikte reacties"
+
+msgid "No Canned Responses"
+msgstr "Geen ingeblikte reacties"
+
+msgid "Create your first canned response to speed up your workflow."
+msgstr "Maak uw eerste ingeblikte reactie om uw workflow te versnellen."
+
+msgid "Open Tickets by Age"
+msgstr "Open tickets op leeftijd"
+
+msgid "Age"
+msgstr "Leeftijd"
+
+msgid "Count"
+msgstr "Graaf"
+
+msgid "< 1 Day"
+msgstr "<1 dag"
+
+msgid "1-3 Days"
+msgstr "1-3 dagen"
+
+msgid "3-7 Days"
+msgstr "3-7 dagen"
+
+msgid "> 7 Days"
+msgstr "> 7 dagen"
+
+msgid "No Open Tickets"
+msgstr "Geen open tickets"
+
+msgid "There are no open tickets to analyze by age."
+msgstr "Er zijn geen open tickets om op leeftijd te analyseren."
+
+msgid "Most Active Customers"
+msgstr "Meest actieve klanten"
+
+msgid "Customer Name"
+msgstr "Klantnaam"
+
+msgid "Tickets Count"
+msgstr "Tickets tellen"
+
+msgid "No Active Customers"
+msgstr "Geen actieve klanten"
+
+msgid "Customer activity data is not yet available."
+msgstr "Gegevens van klantactiviteiten zijn nog niet beschikbaar."
+
+msgid "Active Timer"
+msgstr "Actieve timer"
+
+msgid "Timer"
+msgstr "Timer"
+
+msgid "No Active Timers"
+msgstr "Geen actieve timers"
+
+msgid "No agents have active timers running on tickets."
+msgstr "Geen agenten hebben actieve timers die op tickets worden uitgevoerd."
+
+msgid "Defines rules or set specific intervals of time to make ticket auto overdue."
+msgstr "Definieert regels of stel specifieke tijdsintervallen in om ticket automatisch te laat te maken."
+
+msgid "SMTP enables you to add custom mail protocol to send and receive emails."
+msgstr "Met SMTP kunt u het aangepast e -mailprotocol toevoegen om e -mails te verzenden en ontvangen."
+
+msgid "Available Addons"
+msgstr "Beschikbare add -ons"
+
+msgid "View All Addons"
+msgstr "Bekijk alle add -ons"
+
+msgid "View Details"
+msgstr "Bekijk details"
+
+msgid "Let's Get your Configuration Setup"
+msgstr "Laten we uw configuratie -instellingen krijgen"
+
+msgid "Configurations Complete"
+msgstr "Configuraties compleet"
+
+msgid "Welcome to JS Support Ticket"
+msgstr "Welkom bij JS Support Ticket"
+
+msgid "Lets Get Your Configurations Set Up"
+msgstr "Laten we uw configuraties instellen"
+
+msgid "Plugin Quick Settings"
+msgstr "Plug -in -snelle instellingen"
+
+msgid "Move to Dashboard"
+msgstr "Ga naar het dashboard"
+
+msgid "You need to rename the existing data directory in file system before changing the data directory name"
+msgstr "U moet de bestaande gegevensmap in het bestandssysteem hernoemen voordat u de naam van de gegevensdirectory wijzigt"
+
+msgid "URL for use with your own scripts and third party"
+msgstr "URL voor gebruik met uw eigen scripts en derde partij"

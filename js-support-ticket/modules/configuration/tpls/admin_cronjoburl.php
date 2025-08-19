@@ -155,7 +155,7 @@ wp_add_inline_script('js-support-ticket-main-js',$jssupportticket_js);
                     </div>
                     <div id="url">
                         <div id="cron_job">
-                            <span class="crown_text"><?php echo esc_html(__('URL for use with your won scripts and third party','js-support-ticket')); ?></span>
+                            <span class="crown_text"><?php echo esc_html(__('URL for use with your own scripts and third party','js-support-ticket')); ?></span>
                             <div id="cron_job_detail_wrapper" class="even">
                                 <span class="crown_text_right fullwidth"><?php echo esc_html(jssupportticket::makeUrl(array('jsstcron'=>'ticketviaemail','jsstpageid'=>jssupportticket::getPageid()))); ?></span>
                             </div>
@@ -275,7 +275,7 @@ wp_add_inline_script('js-support-ticket-main-js',$jssupportticket_js);
                     </div>
                     <div id="url">
                         <div id="cron_job">
-                            <span class="crown_text"><?php echo esc_html(__('URL for use with your won scripts and third party','js-support-ticket')); ?></span>
+                            <span class="crown_text"><?php echo esc_html(__('URL for use with your own scripts and third party','js-support-ticket')); ?></span>
                             <div id="cron_job_detail_wrapper" class="even">
                                 <span class="crown_text_right fullwidth"><?php echo esc_html(jssupportticket::makeUrl(array('jsstcron'=>'updateticketstatus','jsstpageid'=>jssupportticket::getPageid()))); ?></span>
                             </div>

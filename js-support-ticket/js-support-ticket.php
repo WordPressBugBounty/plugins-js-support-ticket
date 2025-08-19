@@ -3,14 +3,14 @@
 /**
  * @package JS Help Desk
  * @author Ahmad Bilal
- * @version 2.9.8
+ * @version 2.9.9
  */
 /*
   Plugin Name: JS Help Desk
   Plugin URI: https://www.jshelpdesk.com
   Description: JS Help Desk is a trusted open source ticket system. JS Help Desk is a simple, easy to use, web-based customer support system. User can create ticket from front-end. JS Help Desk comes packed with lot features than most of the expensive(and complex) support ticket system on market. JS Help Desk provide you best industry help desk system.
   Author: JS Help Desk
-  Version: 2.9.8
+  Version: 2.9.9
   Text Domain: js-support-ticket
   License: GPLv3
   Author URI: https://www.jshelpdesk.com
@@ -67,7 +67,7 @@ class jssupportticket {
         self::$_data = array();
         self::$_search = array();
         self::$_captcha = array();
-        self::$_currentversion = '298';
+        self::$_currentversion = '299';
         self::$_addon_query = array('select'=>'','join'=>'','where'=>'');
         self::$_jshdsession = JSSTincluder::getObjectClass('wphdsession');
         global $wpdb;
@@ -144,7 +144,7 @@ class jssupportticket {
                     // restore colors data end
                     update_option('jsst_currentversion', self::$_currentversion);
                     include_once JSST_PLUGIN_PATH . 'includes/updates/updates.php';
-                    JSSTupdates::checkUpdates('298');
+                    JSSTupdates::checkUpdates('299');
                     JSSTincluder::getJSModel('jssupportticket')->updateColorFile();
                     JSSTincluder::getJSModel('jssupportticket')->jsst_check_license_status();
                     JSSTincluder::getJSModel('jssupportticket')->JSSTAddonsAutoUpdate();
@@ -211,7 +211,7 @@ class jssupportticket {
     function jssupportticket_activation_redirect(){
         if (get_option('jssupportticket_do_activation_redirect')) {
             delete_option('jssupportticket_do_activation_redirect');
-            exit(esc_url(wp_redirect(admin_url('admin.php?page=postinstallation&jstlay=stepone'))));
+            exit(esc_url(wp_redirect(admin_url('admin.php?page=postinstallation&jstlay=wellcomepage'))));
         }
     }
 
@@ -1413,6 +1413,24 @@ function jsstAddRegisterLink($content) {
         }
     }
     return $content;
+}
+
+add_action('wp_ajax_save_dashboard_preferences', 'jssupportticket_save_dashboard_preferences');
+function jssupportticket_save_dashboard_preferences() {
+    check_ajax_referer('jssupportticket_admin_nonce', 'nonce');
+
+    $preferences = filter_input(INPUT_POST, 'preferences', FILTER_DEFAULT, FILTER_REQUIRE_ARRAY);
+    if (!is_array($preferences)) {
+        wp_send_json_error(['message' => 'Invalid preferences data.']);
+    }
+
+    $clean_preferences = [];
+    foreach ($preferences as $key => $value) {
+        $clean_preferences[$key] = filter_var($value, FILTER_VALIDATE_BOOLEAN);
+    }
+    
+    update_option('jssupportticket_admin_charts_visibility', $clean_preferences);
+    wp_send_json_success(['message' => 'Preferences saved successfully.']);
 }
 
 add_action( 'jsst_addon_update_date_failed', 'jsstaddonUpdateDateFailed' );

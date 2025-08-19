@@ -28,6 +28,9 @@ div#jsstadmin-wrapper-top div#jsstadmin-wrapper-top-right {float: left}
 /* dashboard header */
 div#jsstadmin-head .jsstadmin-head-text {float: right;}
 div#jsstadmin-head a.jsstadmin-add-link {float: left;}
+.js-support-ticket-customize-panel {left: 0; right: auto;}
+.js-ticket-customize-option-item label{margin-right: 0;margin-left: 1rem;}
+.js-customize-dashboard-btn {float: left;margin-left: 0;margin-right: 8px;}
 
 div.menu-collasped-active div#jsstadmin-data {padding-left: 0;padding-right: 270px;}
 .jsstadmin-sidebar-menu li a .jsst_text {padding-left: 0;padding-right: 5px;}
@@ -345,7 +348,15 @@ div#jsstadmin-data-wrp .jsstadmin-update-key-form .jsstadmin-update-key-wrp .jss
 .js-ticket-list {text-align: right;}
 .js-ticket-filter-select {background-position: left 10px center;}
 .js-ticket-ai-powered-reply-content {text-align: right;}
-
+/* cp */
+#jsstadmin-wrapper .js-hlpdsk-legend-dot{margin-right:0;margin-left:0.4rem;}
+#jsstadmin-wrapper .js-hlpdsk-modern-table tr td::before {margin-right:0;margin-left:20px;}
+div.js-ticket-card-icon{margin-right: 0;margin-left: 12px;}
+/* installer */
+div#jsst-main-wrapper div.close-button-bottom{margin-left: unset;margin-right: auto;}
+div#jsst-main-wrapper div.jsst-config-topheading span.jsst-config-steps{margin-left: unset;margin-right: auto;}
+/* new cp update addon message */
+#jsstadmin-wrapper .js-hlpdeske-message-bar{border-left: unset;border-right: 4px solid #4f46e5;}
 
 @media (max-width: 1280px){
     /* admin theme page */
@@ -362,6 +373,7 @@ div#jsstadmin-data-wrp .jsstadmin-update-key-form .jsstadmin-update-key-wrp .jss
 	div#jsstadmin-data{padding: 0;}
 	div.menu-collasped-active div#jsstadmin-data{padding: 0;}
 	div.js-update-alert-wrp a.js-update-alert-btn {float: right;margin-right: 60px;margin-left: auto;}
+    div#jsst-main-wrapper div.close-button-bottom{right: auto;left: 10px;}
 }
 @media (max-width:767px) {
 	/*review*/
@@ -438,6 +450,8 @@ div#jsstadmin-data-wrp .jsstadmin-update-key-form .jsstadmin-update-key-wrp .jss
     div.js_theme_section{float: initial;}
     /* addon status */
     div.jsstadmin-addons-list-data .jsstadmin-autoupdte-addons-cardwrp .jsstadmin-autoupdte-addons-card-btn{margin-left: 0;}
+    /* new cp addon update message */
+    #jsstadmin-wrapper .js-hlpdeske-close-button{right: auto;left:10px;}
 }
 
 

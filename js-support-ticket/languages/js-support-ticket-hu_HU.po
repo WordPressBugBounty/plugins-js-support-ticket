@@ -8151,3 +8151,291 @@ msgstr "Mutassa meg a felhasználói avatárt"
 
 msgid "Showing avatars may slightly slow down page loading"
 msgstr "Az avatárok megjelenítése kissé lelassíthatja az oldal betöltését"
+
+msgid "AI Powered Reply"
+msgstr "AI Powered válasz"
+
+msgid "by"
+msgstr "által"
+
+msgid "Awesome Support"
+msgstr "Félelmetes támogatás"
+
+msgid "SupportCandy"
+msgstr "Támogatócandy"
+
+msgid "Fluent Support"
+msgstr "Folyékony támogatás"
+
+msgid "icon"
+msgstr "ikon"
+
+msgid "Plugin not installed"
+msgstr "A plugin nincs telepítve"
+
+msgid "Fetch Data"
+msgstr "Adatok letöltése"
+
+msgid "Coming Soon"
+msgstr "Hamarosan jön"
+
+msgid "found"
+msgstr "talált"
+
+msgid "Private Credentials Addon missing, ticket private credentials data will not be imported!"
+msgstr "A privát hitelesítő adatok Hiányzik, a jegyek privát hitelesítő adatait nem importálják!"
+
+msgid "Ticket History Addon missing, full ticket history will not be imported!"
+msgstr "A jegytörténet Hiányzik, a teljes jegytörténet nem importálódik!"
+
+msgid "Time Tracking Addon missing, ticket time tracking data will not be imported!"
+msgstr "Időkövetési addon Hiányzik, a jegyek idejének követési adatait nem importálják!"
+
+msgid "Note Addon missing, ticket internal note  data will not be imported!"
+msgstr "Megjegyzés: Addon Hiányzik, a jegy belső jegyzet adatait nem importálják!"
+
+msgid "Addon not installed please install addon first."
+msgstr "Addon nem telepítve, kérjük, telepítse először az addont."
+
+msgid "No Data Found!"
+msgstr "Nincs adat!"
+
+msgid "Import Data Report"
+msgstr "Adatjelentés importálása"
+
+msgid "Entity"
+msgstr "Entitás"
+
+msgid "Imported"
+msgstr "Importált"
+
+msgid "Similar Found"
+msgstr "Hasonló megállapított"
+
+msgid "Not Imported"
+msgstr "Nem importálva"
+
+msgid "imported."
+msgstr "importált."
+
+msgid "skipped."
+msgstr "kihagyta."
+
+msgid "failed."
+msgstr "sikertelen."
+
+msgid "Fields are only available in the default form."
+msgstr "A mezők csak az alapértelmezett űrlapon érhetők el."
+
+msgid "Dashboard Options"
+msgstr "Irányítópult beállításai"
+
+msgid "Select which charts and sections you would like to see on your dashboard."
+msgstr "Válassza ki, mely táblázatokat és szakaszokat szeretne látni a műszerfalon."
+
+msgid "Ticket Trends"
+msgstr "Jegy trendek"
+
+msgid "Today's Distribution"
+msgstr "A mai eloszlás"
+
+msgid "Tickets by Department"
+msgstr "Jegyek osztályonként"
+
+msgid "Tickets by Status"
+msgstr "Jegyek állapot szerint"
+
+msgid "Tickets by Priorities"
+msgstr "Jegyek prioritások szerint"
+
+msgid "Tickets by Products"
+msgstr "Jegyek termékek szerint"
+
+msgid "Agent Workload"
+msgstr "Ügynöki munkaterhelés"
+
+msgid "Ticket Action History"
+msgstr "Jegykezelési előzmények"
+
+msgid "Save Changes"
+msgstr "Mentse el a változásokat"
+
+msgid "New Tickets"
+msgstr "Új jegyek"
+
+msgid "Pending Tickets"
+msgstr "Függőben lévő jegyek"
+
+msgid "Answered Tickets"
+msgstr "Válaszolt jegyekre"
+
+msgid "Tickets Closed Today"
+msgstr "A jegyek ma bezártak"
+
+msgid "Daily Ticket Flow"
+msgstr "Napi jegyáramlás"
+
+msgid "Resolved"
+msgstr "Elhatározott"
+
+msgid "New Addon Update Available"
+msgstr "Új Addon frissítés elérhető"
+
+msgid "Install the latest version to unlock new features and security patches."
+msgstr "Telepítse a legújabb verziót az új funkciók és a biztonsági javítások feloldásához."
+
+msgid "Unassigned Tickets"
+msgstr "Nem kinevezett jegyek"
+
+msgid "No Unassigned Tickets"
+msgstr "Nincsenek kiosztott jegyek"
+
+msgid "All tickets have been assigned. Great job!"
+msgstr "Minden jegyet kiosztottak. Nagyszerű munka!"
+
+msgid "No Recent Actions"
+msgstr "Nincsenek legfrissebb tevékenységek"
+
+msgid "There is no ticket activity to show at the moment."
+msgstr "Jelenleg nincs jegy -tevékenység."
+
+msgid "Ticket Trends (Last 7 Days)"
+msgstr "A jegy trendjei (az elmúlt 7 nap)"
+
+msgid "Today's Ticket Distribution"
+msgstr "Ma a jegyek terjesztése"
+
+msgid "View All"
+msgstr "Tekintse meg az összeset"
+
+msgid "No Tickets Found"
+msgstr "Nincsenek jegyek"
+
+msgid "There are currently no tickets to display in this view."
+msgstr "Jelenleg nincsenek jegyek, amelyeket ebben a nézetben jeleníthet meg."
+
+msgid "Awaiting Customer"
+msgstr "Várja meg az ügyfelet"
+
+msgid "Awaiting Agent"
+msgstr "Várja az ügynököt"
+
+msgid "Total"
+msgstr "Teljes"
+
+msgid "No Agent Data"
+msgstr "Nincsenek ügynöki adatok"
+
+msgid "Workload data for agents is not available at this time."
+msgstr "Az ügynökök munkaterhelési adatainak jelenleg nem állnak rendelkezésre."
+
+msgid "Total overdue tickets"
+msgstr "Teljes lejárt jegy"
+
+msgid "Zero Overdue Tickets!"
+msgstr "Nulla késleltetett jegy!"
+
+msgid "Congratulations! The queue is clear of overdue tickets."
+msgstr "Gratulálok! A sor a lejárt jegyektől mentes."
+
+msgid "List of Canned Responses"
+msgstr "A konzerv válaszok listája"
+
+msgid "No Canned Responses"
+msgstr "Nincs konzerv válasz"
+
+msgid "Create your first canned response to speed up your workflow."
+msgstr "Hozzon létre első konzerv válaszát a munkafolyamat felgyorsításához."
+
+msgid "Open Tickets by Age"
+msgstr "Nyitott jegyek életkor szerint"
+
+msgid "Age"
+msgstr "Kor"
+
+msgid "Count"
+msgstr "Számítás"
+
+msgid "< 1 Day"
+msgstr "<1 nap"
+
+msgid "1-3 Days"
+msgstr "1-3 nap"
+
+msgid "3-7 Days"
+msgstr "3-7 nap"
+
+msgid "> 7 Days"
+msgstr "> 7 nap"
+
+msgid "No Open Tickets"
+msgstr "Nincs nyitott jegy"
+
+msgid "There are no open tickets to analyze by age."
+msgstr "Nincsenek nyitott jegyek az életkor szerinti elemzésre."
+
+msgid "Most Active Customers"
+msgstr "A legaktívabb ügyfelek"
+
+msgid "Customer Name"
+msgstr "Ügyfél neve"
+
+msgid "Tickets Count"
+msgstr "Jegyek száma"
+
+msgid "No Active Customers"
+msgstr "Nincs aktív ügyfel"
+
+msgid "Customer activity data is not yet available."
+msgstr "Az ügyfelek tevékenységi adatai még nem állnak rendelkezésre."
+
+msgid "Active Timer"
+msgstr "Aktív időzítő"
+
+msgid "Timer"
+msgstr "Időzítő"
+
+msgid "No Active Timers"
+msgstr "Nincs aktív időzítők"
+
+msgid "No agents have active timers running on tickets."
+msgstr "Egyetlen ügynöknek sem rendelkezik aktív időzítőkkel a jegyeken."
+
+msgid "Defines rules or set specific intervals of time to make ticket auto overdue."
+msgstr "Meghatározza a szabályokat, vagy állítsa be az időbeli időtartamokat a jegyek automatikus lejártának elérése érdekében."
+
+msgid "SMTP enables you to add custom mail protocol to send and receive emails."
+msgstr "Az SMTP lehetővé teszi az egyéni e -mail protokoll hozzáadását e -mailek küldéséhez és fogadásához."
+
+msgid "Available Addons"
+msgstr "Rendelkezésre álló kiegészítők"
+
+msgid "View All Addons"
+msgstr "Az összes kiegészítő megtekintése"
+
+msgid "View Details"
+msgstr "A részletek megtekintése"
+
+msgid "Let's Get your Configuration Setup"
+msgstr "Végezzük el a konfigurációs beállítást"
+
+msgid "Configurations Complete"
+msgstr "A konfigurációk teljesek"
+
+msgid "Welcome to JS Support Ticket"
+msgstr "Üdvözöljük a JS támogatási jegyében"
+
+msgid "Lets Get Your Configurations Set Up"
+msgstr "Lehetővé teszi a konfigurációk beállítását"
+
+msgid "Plugin Quick Settings"
+msgstr "Plugin Gyors beállítások"
+
+msgid "Move to Dashboard"
+msgstr "Költözni a műszerfalra"
+
+msgid "You need to rename the existing data directory in file system before changing the data directory name"
+msgstr "Az adatkönyvtár nevének megváltoztatása előtt át kell neveznie a meglévő adatkönyvtárat a fájlrendszerben"
+
+msgid "URL for use with your own scripts and third party"
+msgstr "URL a saját szkriptekkel és harmadik félvel való használatra"

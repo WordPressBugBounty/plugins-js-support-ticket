@@ -8101,3 +8101,291 @@ msgstr "แสดงอวตารของผู้ใช้"
 
 msgid "Showing avatars may slightly slow down page loading"
 msgstr "การแสดงอวตารอาจชะลอการโหลดหน้าเว็บเล็กน้อย"
+
+msgid "AI Powered Reply"
+msgstr "ตอบกลับ AI"
+
+msgid "by"
+msgstr "โดย"
+
+msgid "Awesome Support"
+msgstr "การสนับสนุนที่ยอดเยี่ยม"
+
+msgid "SupportCandy"
+msgstr "สนับสนุน"
+
+msgid "Fluent Support"
+msgstr "การสนับสนุนที่คล่องแคล่ว"
+
+msgid "icon"
+msgstr "ไอคอน"
+
+msgid "Plugin not installed"
+msgstr "ปลั๊กอินไม่ได้ติดตั้ง"
+
+msgid "Fetch Data"
+msgstr "ดึงข้อมูล"
+
+msgid "Coming Soon"
+msgstr "เร็วๆ นี้"
+
+msgid "found"
+msgstr "พบ"
+
+msgid "Private Credentials Addon missing, ticket private credentials data will not be imported!"
+msgstr "ข้อมูลประจำตัวส่วนตัวที่ขาดหายไปข้อมูลบัตรรับรองส่วนตัวของตั๋วจะไม่ถูกนำเข้า!"
+
+msgid "Ticket History Addon missing, full ticket history will not be imported!"
+msgstr "ประวัติตั๋ว Addon หายไปประวัติตั๋วเต็มจะไม่ถูกนำเข้า!"
+
+msgid "Time Tracking Addon missing, ticket time tracking data will not be imported!"
+msgstr "การติดตามเวลา Addon หายไปข้อมูลการติดตามเวลาตั๋วจะไม่ถูกนำเข้า!"
+
+msgid "Note Addon missing, ticket internal note  data will not be imported!"
+msgstr "หมายเหตุ Addon หายไปข้อมูลบันทึกภายในตั๋วจะไม่ถูกนำเข้า!"
+
+msgid "Addon not installed please install addon first."
+msgstr "Addon ไม่ได้ติดตั้งโปรดติดตั้ง addon ก่อน"
+
+msgid "No Data Found!"
+msgstr "ไม่พบข้อมูล!"
+
+msgid "Import Data Report"
+msgstr "นำเข้ารายงานข้อมูล"
+
+msgid "Entity"
+msgstr "กิจการ"
+
+msgid "Imported"
+msgstr "ที่นำเข้า"
+
+msgid "Similar Found"
+msgstr "พบคล้ายกัน"
+
+msgid "Not Imported"
+msgstr "ไม่นำเข้า"
+
+msgid "imported."
+msgstr "นำเข้า"
+
+msgid "skipped."
+msgstr "ข้าม"
+
+msgid "failed."
+msgstr "ล้มเหลว."
+
+msgid "Fields are only available in the default form."
+msgstr "ฟิลด์มีเฉพาะในแบบฟอร์มเริ่มต้นเท่านั้น"
+
+msgid "Dashboard Options"
+msgstr "ตัวเลือกแดชบอร์ด"
+
+msgid "Select which charts and sections you would like to see on your dashboard."
+msgstr "เลือกแผนภูมิและส่วนที่คุณต้องการดูบนแดชบอร์ดของคุณ"
+
+msgid "Ticket Trends"
+msgstr "แนวโน้มตั๋ว"
+
+msgid "Today's Distribution"
+msgstr "การกระจายของวันนี้"
+
+msgid "Tickets by Department"
+msgstr "ตั๋วโดยแผนก"
+
+msgid "Tickets by Status"
+msgstr "ตั๋วตามสถานะ"
+
+msgid "Tickets by Priorities"
+msgstr "ตั๋วตามลำดับความสำคัญ"
+
+msgid "Tickets by Products"
+msgstr "ตั๋วโดยผลิตภัณฑ์"
+
+msgid "Agent Workload"
+msgstr "เวิร์กโหลดเอเจนต์"
+
+msgid "Ticket Action History"
+msgstr "ประวัติการดำเนินการตั๋ว"
+
+msgid "Save Changes"
+msgstr "บันทึกการเปลี่ยนแปลง"
+
+msgid "New Tickets"
+msgstr "ตั๋วใหม่"
+
+msgid "Pending Tickets"
+msgstr "ตั๋วรอดำเนินการ"
+
+msgid "Answered Tickets"
+msgstr "ตั๋วตอบ"
+
+msgid "Tickets Closed Today"
+msgstr "ปิดตั๋ววันนี้"
+
+msgid "Daily Ticket Flow"
+msgstr "การไหลของตั๋วทุกวัน"
+
+msgid "Resolved"
+msgstr "ซึ่งได้แก้ไขแล้ว"
+
+msgid "New Addon Update Available"
+msgstr "มีการอัปเดต addon ใหม่"
+
+msgid "Install the latest version to unlock new features and security patches."
+msgstr "ติดตั้งเวอร์ชันล่าสุดเพื่อปลดล็อกคุณสมบัติใหม่และแพตช์ความปลอดภัย"
+
+msgid "Unassigned Tickets"
+msgstr "ตั๋วที่ไม่ได้ออกแบบ"
+
+msgid "No Unassigned Tickets"
+msgstr "ไม่มีตั๋วที่ไม่ได้ออกแบบ"
+
+msgid "All tickets have been assigned. Great job!"
+msgstr "ตั๋วทั้งหมดได้รับมอบหมาย เยี่ยมมาก!"
+
+msgid "No Recent Actions"
+msgstr "ไม่มีการกระทำล่าสุด"
+
+msgid "There is no ticket activity to show at the moment."
+msgstr "ไม่มีกิจกรรมตั๋วที่จะแสดงในขณะนี้"
+
+msgid "Ticket Trends (Last 7 Days)"
+msgstr "แนวโน้มตั๋ว (7 วันสุดท้าย)"
+
+msgid "Today's Ticket Distribution"
+msgstr "การกระจายตั๋วของวันนี้"
+
+msgid "View All"
+msgstr "ดูทั้งหมด"
+
+msgid "No Tickets Found"
+msgstr "ไม่พบตั๋ว"
+
+msgid "There are currently no tickets to display in this view."
+msgstr "ขณะนี้ยังไม่มีตั๋วที่แสดงในมุมมองนี้"
+
+msgid "Awaiting Customer"
+msgstr "รอลูกค้า"
+
+msgid "Awaiting Agent"
+msgstr "ตัวแทนรอ"
+
+msgid "Total"
+msgstr "ทั้งหมด"
+
+msgid "No Agent Data"
+msgstr "ไม่มีข้อมูลตัวแทน"
+
+msgid "Workload data for agents is not available at this time."
+msgstr "ข้อมูลเวิร์กโหลดสำหรับตัวแทนยังไม่พร้อมใช้งานในขณะนี้"
+
+msgid "Total overdue tickets"
+msgstr "ตั๋วที่ค้างชำระทั้งหมด"
+
+msgid "Zero Overdue Tickets!"
+msgstr "ตั๋วเกินกำหนดเป็นศูนย์!"
+
+msgid "Congratulations! The queue is clear of overdue tickets."
+msgstr "ยินดีด้วย! คิวมีตั๋วเกินกำหนด"
+
+msgid "List of Canned Responses"
+msgstr "รายการคำตอบกระป๋อง"
+
+msgid "No Canned Responses"
+msgstr "ไม่มีคำตอบกระป๋อง"
+
+msgid "Create your first canned response to speed up your workflow."
+msgstr "สร้างการตอบกลับกระป๋องครั้งแรกเพื่อเร่งเวิร์กโฟลว์ของคุณ"
+
+msgid "Open Tickets by Age"
+msgstr "เปิดตั๋วตามอายุ"
+
+msgid "Age"
+msgstr "อายุ"
+
+msgid "Count"
+msgstr "นับ"
+
+msgid "< 1 Day"
+msgstr "<1 วัน"
+
+msgid "1-3 Days"
+msgstr "1-3 วัน"
+
+msgid "3-7 Days"
+msgstr "3-7 วัน"
+
+msgid "> 7 Days"
+msgstr "> 7 วัน"
+
+msgid "No Open Tickets"
+msgstr "ไม่มีตั๋วเปิด"
+
+msgid "There are no open tickets to analyze by age."
+msgstr "ไม่มีตั๋วแบบเปิดที่จะวิเคราะห์ตามอายุ"
+
+msgid "Most Active Customers"
+msgstr "ลูกค้าที่กระตือรือร้นมากที่สุด"
+
+msgid "Customer Name"
+msgstr "ชื่อลูกค้า"
+
+msgid "Tickets Count"
+msgstr "จำนวนตั๋ว"
+
+msgid "No Active Customers"
+msgstr "ไม่มีลูกค้าที่กระตือรือร้น"
+
+msgid "Customer activity data is not yet available."
+msgstr "ยังไม่สามารถใช้ข้อมูลกิจกรรมของลูกค้าได้"
+
+msgid "Active Timer"
+msgstr "จับเวลาที่ใช้งานอยู่"
+
+msgid "Timer"
+msgstr "ตัวจับเวลา"
+
+msgid "No Active Timers"
+msgstr "ไม่มีตัวจับเวลาที่ใช้งานอยู่"
+
+msgid "No agents have active timers running on tickets."
+msgstr "ไม่มีตัวแทนใดมีตัวจับเวลาที่ใช้งานอยู่บนตั๋ว"
+
+msgid "Defines rules or set specific intervals of time to make ticket auto overdue."
+msgstr "กำหนดกฎหรือกำหนดช่วงเวลาที่เฉพาะเจาะจงเพื่อทำตั๋วเกินกำหนดอัตโนมัติ"
+
+msgid "SMTP enables you to add custom mail protocol to send and receive emails."
+msgstr "SMTP ช่วยให้คุณสามารถเพิ่มโปรโตคอลจดหมายที่กำหนดเองเพื่อส่งและรับอีเมล"
+
+msgid "Available Addons"
+msgstr "addons ที่มีอยู่"
+
+msgid "View All Addons"
+msgstr "ดู Addons ทั้งหมด"
+
+msgid "View Details"
+msgstr "ดูรายละเอียด"
+
+msgid "Let's Get your Configuration Setup"
+msgstr "มาตั้งค่าการกำหนดค่าของคุณกันเถอะ"
+
+msgid "Configurations Complete"
+msgstr "การกำหนดค่าเสร็จสมบูรณ์"
+
+msgid "Welcome to JS Support Ticket"
+msgstr "ยินดีต้อนรับสู่ตั๋วสนับสนุน JS"
+
+msgid "Lets Get Your Configurations Set Up"
+msgstr "ให้ตั้งค่าการกำหนดค่าของคุณ"
+
+msgid "Plugin Quick Settings"
+msgstr "ปลั๊กอินการตั้งค่าด่วน"
+
+msgid "Move to Dashboard"
+msgstr "ย้ายไปที่แดชบอร์ด"
+
+msgid "You need to rename the existing data directory in file system before changing the data directory name"
+msgstr "คุณต้องเปลี่ยนชื่อไดเรกทอรีข้อมูลที่มีอยู่ในระบบไฟล์ก่อนเปลี่ยนชื่อไดเรกทอรีข้อมูล"
+
+msgid "URL for use with your own scripts and third party"
+msgstr "URL สำหรับใช้กับสคริปต์ของคุณเองและบุคคลที่สาม"

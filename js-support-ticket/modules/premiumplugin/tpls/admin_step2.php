@@ -42,10 +42,7 @@ foreach ($allPlugins as $key => $value) {
                     </div>
                 </div>
             </div>
-            <div id="jsstadmin-head">
-                <h1 class="jsstadmin-head-text"><?php echo esc_html(__('Install Addons','js-support-ticket')); ?></h1>
-            </div>
-            <div id="jsstadmin-data-wrp" class="p0">
+            <div id="jsstadmin-data-wrp" class="jsst-addon-installer-mainwrp">
                 <div id="jssupportticket-content">
                     <div id="black_wrapper_translation"></div>
                     <div id="jstran_loading">
@@ -54,21 +51,10 @@ foreach ($allPlugins as $key => $value) {
                     <div id="jsst-lower-wrapper">
                         <div class="jsst-addon-installer-wrapper" >
                             <form id="jsticketfrom" action="<?php echo esc_url(wp_nonce_url(admin_url('admin.php?page=premiumplugin&task=downloadandinstalladdons&action=jstask'),"download-and-install-addons")); ?>" method="post">
-                                <div class="jsst-addon-installer-left-section-wrap" >
+                                <div class="jsst-addon-installer-right-section-wrap step2" >
                                     <div class="jsst-addon-installer-left-image-wrap" >
                                         <img class="jsst-addon-installer-left-image" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/addon-images/addon-installer-logo.png" />
                                     </div>
-                                    <div class="jsst-addon-installer-left-heading" >
-                                        <?php echo esc_html(__("JS Help Desk","js-support-ticket")); ?>
-                                    </div>
-                                    <div class="jsst-addon-installer-left-title" >
-                                        <?php echo esc_html(__("Wordpress Plugin","js-support-ticket")); ?>
-                                    </div>
-                                    <div class="jsst-addon-installer-left-description" >
-                                        <?php echo esc_html(__("JS Help Desk is a trusted open source ticket system. JS Help Desk is a simple, easy to use, web-based customer support system. Users can create a ticket from the front-end. JS Help Desk comes packed with lot features than most of the expensive(and complex) support ticket system on the market. The best part is, It completely free.","js-support-ticket")); ?>
-                                    </div>
-                                </div>
-                                <div class="jsst-addon-installer-right-section-wrap step2" >
                                     <div class="jsst-addon-installer-right-heading" >
                                         <?php echo esc_html(__("JS Help Desk Addon Installer","js-support-ticket")); ?>
                                     </div>
@@ -87,10 +73,33 @@ foreach ($allPlugins as $key => $value) {
                                         $error_message = '';
                                         if($jsst_addon_install_data){
                                             $result = $jsst_addon_install_data;
-                                            if(isset($result['status']) && $result['status'] == 1){?>
-                                                <div class="jsst-addon-installer-right-addon-title">
-                                                    <?php echo esc_html(__("Select Addons for download","js-support-ticket")); ?>
-                                                </div>
+                                            if(isset($result['status']) && $result['status'] == 1){
+                                                if (isset($result['data']) && !empty($result['data'])) {
+                                                    $addon_availble_count = 0;
+                                                    foreach ($result['data'] as $key => $value) {
+                                                        if (!in_array($key, $addon_array)) {
+                                                            $addon_availble_count++;
+                                                        }
+                                                    }
+                                                    if ($addon_availble_count == 0) {
+                                                        $error_message = esc_html(__('All allowed add ons are already installed','js-support-ticket')) . '.';
+                                                    }
+                                                } else {
+                                                    $error_message = esc_html(__('You are not allowed to install any add on','js-support-ticket')) . '.';
+                                                } ?>
+                                                <?php if($error_message == ''){ ?>
+                                                    <div class="jsst-addon-installer-right-addon-title-wrp">
+                                                        <div class="jsst-addon-installer-right-addon-title">
+                                                            <?php echo esc_html(__("Select Addons for download","js-support-ticket")); ?>
+                                                        </div>
+                                                        <div class="jsst-addon-installer-right-addon-bottom" >
+                                                            <label for="jsst-addon-installer-right-addon-checkall-checkbox"><input type="checkbox" class="jsst-addon-installer-right-addon-checkall-checkbox" id="jsst-addon-installer-right-addon-checkall-checkbox"><?php echo esc_html(__("Select All Addons","js-support-ticket")); ?></label>
+                                                        </div>
+                                                    </div>
+                                                    <?php
+                                                } else {
+                                                    $error_message = '';
+                                                } ?>
                                                 <div class="jsst-addon-installer-right-addon-section" >
                                                     <?php
                                                     if(!empty($result['data'])){
@@ -107,10 +116,12 @@ foreach ($allPlugins as $key => $value) {
                                                                 if($value['status'] == 1){ ?>
                                                                     <div class="jsst-addon-installer-right-addon-single" >
                                                                         <img class="jsst-addon-installer-right-addon-image" data-addon-name="<?php echo esc_attr($key); ?>" src="<?php echo esc_url($addon_img_path.esc_attr($addon_image_name).'.png');?>" />
-                                                                        <div class="jsst-addon-installer-right-addon-name" >
-                                                                            <?php echo esc_html($value['title']);?>
+                                                                        <div class="jsst-addon-installer-addons-btmwrp  ">
+                                                                            <input type="checkbox" class="jsst-addon-installer-right-addon-single-checkbox" id="addon-<?php echo esc_attr($key); ?>" name="<?php echo esc_attr($key); ?>" value="1">
+                                                                            <div class="jsst-addon-installer-right-addon-name" >
+                                                                                <?php echo esc_html($value['title']);?>
+                                                                            </div>
                                                                         </div>
-                                                                        <input type="checkbox" class="jsst-addon-installer-right-addon-single-checkbox" id="addon-<?php echo esc_attr($key); ?>" name="<?php echo esc_attr($key); ?>" value="1">
                                                                     </div>
                                                                     <?php
                                                                 }
@@ -126,9 +137,9 @@ foreach ($allPlugins as $key => $value) {
                                                         $url = admin_url("admin.php?page=premiumplugin&jstlay=step1");
 
                                                         echo '<div class="jsst-addon-go-back-messsage-wrap">';
-                                                        echo '<h1>';
+                                                        echo '<span>';
                                                         echo wp_kses_post($error_message);
-                                                        echo '</h1>';
+                                                        echo '</span>';
 
                                                         echo '<a class="jsst-addon-go-back-link" href="'.esc_url($url).'">';
                                                         echo esc_html(__('Back','js-support-ticket'));
@@ -137,21 +148,16 @@ foreach ($allPlugins as $key => $value) {
                                                     }
                                                      ?>
                                                 </div>
-                                                <?php if($error_message == ''){ ?>
-                                                    <div class="jsst-addon-installer-right-addon-bottom" >
-                                                        <label for="jsst-addon-installer-right-addon-checkall-checkbox"><input type="checkbox" class="jsst-addon-installer-right-addon-checkall-checkbox" id="jsst-addon-installer-right-addon-checkall-checkbox"><?php echo esc_html(__("Select All Addons","js-support-ticket")); ?></label>
-                                                    </div>
                                                 <?php
-                                                }
                                             }
                                         }else{
                                             $error_message = esc_html(__('Something went wrong','js-support-ticket')).'!';
                                             $url = admin_url("admin.php?page=premiumplugin&jstlay=step1");
 
                                             echo '<div class="jsst-addon-go-back-messsage-wrap">';
-                                            echo '<h1>';
+                                            echo '<span>';
                                             echo wp_kses_post($error_message);
-                                            echo '</h1>';
+                                            echo '</span>';
 
                                             echo '<a class="jsst-addon-go-back-link" href="'.esc_url($url).'">';
                                             echo esc_html(__('Back','js-support-ticket'));

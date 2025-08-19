@@ -38,10 +38,7 @@ if(isset($_SESSION['jsst_addon_install_data'])){
                     </div>
                 </div>
             </div>
-            <div id="jsstadmin-head">
-                <h1 class="jsstadmin-head-text"><?php echo esc_html(__('Install Addons','js-support-ticket')); ?></h1>
-            </div>
-            <div id="jsstadmin-data-wrp" class="p0">
+            <div id="jsstadmin-data-wrp" class="jsst-addon-installer-mainwrp">
                 <div id="jssupportticket-content">
                     <div id="black_wrapper_translation"></div>
                     <div id="jstran_loading">
@@ -50,28 +47,12 @@ if(isset($_SESSION['jsst_addon_install_data'])){
                     <div id="jsst-lower-wrapper">
                         <div class="jsst-addon-installer-wrapper" >
                             <form id="jsticketfrom" action="<?php echo esc_url(wp_nonce_url(admin_url('admin.php?page=premiumplugin&task=verifytransactionkey&action=jstask'),"verify-transaction-key")); ?>" method="post">
-                                <div class="jsst-addon-installer-left-section-wrap" >
+                                <div class="jsst-addon-installer-right-section-wrap" >
                                     <div class="jsst-addon-installer-left-image-wrap" >
                                         <img class="jsst-addon-installer-left-image" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/addon-images/addon-installer-logo.png" />
                                     </div>
-                                    <div class="jsst-addon-installer-left-heading" >
-                                        <?php echo esc_html(__("JS Help Desk","js-support-ticket")); ?>
-                                    </div>
-                                    <div class="jsst-addon-installer-left-title" >
-                                        <?php echo esc_html(__("Wordpress Plugin","js-support-ticket")); ?>
-                                    </div>
-                                    <div class="jsst-addon-installer-left-description" >
-                                        <?php echo esc_html(__("JS Help Desk is a trusted open source ticket system. JS Help Desk is a simple, easy to use, web-based customer support system. Users can create a ticket from the front-end. JS Help Desk comes packed with lot features than most of the expensive(and complex) support ticket system on the market. The best part is, It completely free.","js-support-ticket")); ?>
-                                    </div>
-                                </div>
-                                <div class="jsst-addon-installer-right-section-wrap" >
                                     <div class="jsst-addon-installer-right-heading" >
                                         <?php echo esc_html(__("JS Help Desk Addon Installer","js-support-ticket")); ?>
-                                    </div>
-                                    <div class="jsst-addon-installer-right-description" >
-                                        >> <a class="jsst-addon-installer-install-btn" href="?page=premiumplugin&jstlay=addonfeatures" class="jsst-addon-installer-addon-list-link" >
-                                            <?php echo esc_html(__("Add on list","js-support-ticket")); ?>
-                                        </a> <<
                                     </div>
                                     <div class="jsst-addon-installer-right-key-section" >
                                         <div class="jsst-addon-installer-right-key-label" >
@@ -100,7 +81,11 @@ if(isset($_SESSION['jsst_addon_install_data'])){
                                         <div class="jsst-addon-installer-right-key-button" >
                                             <button type="submit" class="jsst_btn" role="submit" onclick="jsShowLoading();"><?php echo esc_html(__("Proceed","js-support-ticket")); ?></button>
                                         </div>
-
+                                        <div class="jsst-addon-installer-right-description" >
+                                            >> <a class="jsst-addon-installer-install-btn" href="?page=premiumplugin&jstlay=addonfeatures" class="jsst-addon-installer-addon-list-link" >
+                                                <?php echo esc_html(__("Add on list","js-support-ticket")); ?>
+                                            </a> <<
+                                        </div>
                                     </div>
                                 </div>
                             </form>

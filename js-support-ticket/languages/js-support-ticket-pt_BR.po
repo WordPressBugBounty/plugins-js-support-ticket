@@ -8144,3 +8144,291 @@ msgstr "Mostre o avatar do usuário"
 
 msgid "Showing avatars may slightly slow down page loading"
 msgstr "Mostrando os avatares pode diminuir um pouco o carregamento da página"
+
+msgid "AI Powered Reply"
+msgstr "Resposta alimentada por IA"
+
+msgid "by"
+msgstr "por"
+
+msgid "Awesome Support"
+msgstr "Apoio incrível"
+
+msgid "SupportCandy"
+msgstr "SuporteCandy"
+
+msgid "Fluent Support"
+msgstr "Suporte fluente"
+
+msgid "icon"
+msgstr "ícone"
+
+msgid "Plugin not installed"
+msgstr "Plug -in não instalado"
+
+msgid "Fetch Data"
+msgstr "Buscar dados"
+
+msgid "Coming Soon"
+msgstr "Em breve"
+
+msgid "found"
+msgstr "encontrado"
+
+msgid "Private Credentials Addon missing, ticket private credentials data will not be imported!"
+msgstr "Credenciais privadas Addon ausentes, os dados de credenciais privados de ingressos não serão importados!"
+
+msgid "Ticket History Addon missing, full ticket history will not be imported!"
+msgstr "ADDON HISTÓRIA DE TILHOS ADDON, o histórico completo de ingressos não será importado!"
+
+msgid "Time Tracking Addon missing, ticket time tracking data will not be imported!"
+msgstr "Falta de rastreamento de tempo, os dados de rastreamento do ticket Time não serão importados!"
+
+msgid "Note Addon missing, ticket internal note  data will not be imported!"
+msgstr "NOTA ADDON Falta, os dados de notas internas do ticket não serão importadas!"
+
+msgid "Addon not installed please install addon first."
+msgstr "Addon não instalado, instale o addon primeiro."
+
+msgid "No Data Found!"
+msgstr "Nenhum dado encontrado!"
+
+msgid "Import Data Report"
+msgstr "Importar relatório de dados"
+
+msgid "Entity"
+msgstr "Entidade"
+
+msgid "Imported"
+msgstr "Importado"
+
+msgid "Similar Found"
+msgstr "Encontrado semelhante"
+
+msgid "Not Imported"
+msgstr "Não importado"
+
+msgid "imported."
+msgstr "importado."
+
+msgid "skipped."
+msgstr "pulou."
+
+msgid "failed."
+msgstr "fracassado."
+
+msgid "Fields are only available in the default form."
+msgstr "Os campos estão disponíveis apenas no formulário padrão."
+
+msgid "Dashboard Options"
+msgstr "Opções do painel"
+
+msgid "Select which charts and sections you would like to see on your dashboard."
+msgstr "Selecione quais gráficos e seções você gostaria de ver no seu painel."
+
+msgid "Ticket Trends"
+msgstr "Tendências de ingressos"
+
+msgid "Today's Distribution"
+msgstr "Distribuição de hoje"
+
+msgid "Tickets by Department"
+msgstr "Ingressos por departamento"
+
+msgid "Tickets by Status"
+msgstr "Ingressos por status"
+
+msgid "Tickets by Priorities"
+msgstr "Ingressos por prioridades"
+
+msgid "Tickets by Products"
+msgstr "Ingressos por produtos"
+
+msgid "Agent Workload"
+msgstr "Carga de trabalho do agente"
+
+msgid "Ticket Action History"
+msgstr "Histórico de ação do ingresso"
+
+msgid "Save Changes"
+msgstr "Salvar alterações"
+
+msgid "New Tickets"
+msgstr "Novos ingressos"
+
+msgid "Pending Tickets"
+msgstr "Ingressos pendentes"
+
+msgid "Answered Tickets"
+msgstr "Ingressos respondidos"
+
+msgid "Tickets Closed Today"
+msgstr "Os ingressos fecharam hoje"
+
+msgid "Daily Ticket Flow"
+msgstr "Fluxo diário de ingressos"
+
+msgid "Resolved"
+msgstr "Resolvido"
+
+msgid "New Addon Update Available"
+msgstr "Nova atualização de addon disponível"
+
+msgid "Install the latest version to unlock new features and security patches."
+msgstr "Instale a versão mais recente para desbloquear novos recursos e patches de segurança."
+
+msgid "Unassigned Tickets"
+msgstr "Ingressos não atribuídos"
+
+msgid "No Unassigned Tickets"
+msgstr "Sem ingressos não atribuídos"
+
+msgid "All tickets have been assigned. Great job!"
+msgstr "Todos os ingressos foram atribuídos. Ótimo trabalho!"
+
+msgid "No Recent Actions"
+msgstr "Nenhuma ação recente"
+
+msgid "There is no ticket activity to show at the moment."
+msgstr "Não há atividade de ingressos para mostrar no momento."
+
+msgid "Ticket Trends (Last 7 Days)"
+msgstr "Tendências de ingressos (últimos 7 dias)"
+
+msgid "Today's Ticket Distribution"
+msgstr "Hoje \\ Distribuição de ingressos"
+
+msgid "View All"
+msgstr "Ver tudo"
+
+msgid "No Tickets Found"
+msgstr "Nenhum ingressos encontrados"
+
+msgid "There are currently no tickets to display in this view."
+msgstr "Atualmente, não há ingressos para exibir nesta visualização."
+
+msgid "Awaiting Customer"
+msgstr "Aguardando cliente"
+
+msgid "Awaiting Agent"
+msgstr "Agente aguardando"
+
+msgid "Total"
+msgstr "Total"
+
+msgid "No Agent Data"
+msgstr "Sem dados de agente"
+
+msgid "Workload data for agents is not available at this time."
+msgstr "Os dados da carga de trabalho para agentes não estão disponíveis no momento."
+
+msgid "Total overdue tickets"
+msgstr "TOTALMENTE TOTAL DE ALGUNDOS"
+
+msgid "Zero Overdue Tickets!"
+msgstr "Zero ingressos vencidos!"
+
+msgid "Congratulations! The queue is clear of overdue tickets."
+msgstr "Parabéns! A fila está livre de ingressos vencidos."
+
+msgid "List of Canned Responses"
+msgstr "Lista de respostas enlatadas"
+
+msgid "No Canned Responses"
+msgstr "Sem respostas enlatadas"
+
+msgid "Create your first canned response to speed up your workflow."
+msgstr "Crie sua primeira resposta enlatada para acelerar seu fluxo de trabalho."
+
+msgid "Open Tickets by Age"
+msgstr "Bilhetes abertos por idade"
+
+msgid "Age"
+msgstr "Idade"
+
+msgid "Count"
+msgstr "Contar"
+
+msgid "< 1 Day"
+msgstr "<1 dia"
+
+msgid "1-3 Days"
+msgstr "1-3 dias"
+
+msgid "3-7 Days"
+msgstr "3-7 dias"
+
+msgid "> 7 Days"
+msgstr "> 7 dias"
+
+msgid "No Open Tickets"
+msgstr "Sem ingressos abertos"
+
+msgid "There are no open tickets to analyze by age."
+msgstr "Não há bilhetes abertos para analisar por idade."
+
+msgid "Most Active Customers"
+msgstr "Clientes mais ativos"
+
+msgid "Customer Name"
+msgstr "Nome do cliente"
+
+msgid "Tickets Count"
+msgstr "Contagem de ingressos"
+
+msgid "No Active Customers"
+msgstr "Sem clientes ativos"
+
+msgid "Customer activity data is not yet available."
+msgstr "Os dados da atividade do cliente ainda não estão disponíveis."
+
+msgid "Active Timer"
+msgstr "Timer ativo"
+
+msgid "Timer"
+msgstr "Timer"
+
+msgid "No Active Timers"
+msgstr "Sem temporizadores ativos"
+
+msgid "No agents have active timers running on tickets."
+msgstr "Nenhum agente tem temporizadores ativos em execução em ingressos."
+
+msgid "Defines rules or set specific intervals of time to make ticket auto overdue."
+msgstr "Define regras ou defina intervalos específicos de tempo para tornar o ingresso em atraso."
+
+msgid "SMTP enables you to add custom mail protocol to send and receive emails."
+msgstr "O SMTP permite adicionar protocolo de email personalizado para enviar e receber e -mails."
+
+msgid "Available Addons"
+msgstr "Addons disponíveis"
+
+msgid "View All Addons"
+msgstr "Veja todos os complementos"
+
+msgid "View Details"
+msgstr "Ver detalhes"
+
+msgid "Let's Get your Configuration Setup"
+msgstr "Vamos obter sua configuração configurada"
+
+msgid "Configurations Complete"
+msgstr "Configurações completas"
+
+msgid "Welcome to JS Support Ticket"
+msgstr "Bem -vindo ao JS Support Ticket"
+
+msgid "Lets Get Your Configurations Set Up"
+msgstr "Vamos configurar suas configurações"
+
+msgid "Plugin Quick Settings"
+msgstr "Configurações rápidas do plug -in"
+
+msgid "Move to Dashboard"
+msgstr "Mova para o painel"
+
+msgid "You need to rename the existing data directory in file system before changing the data directory name"
+msgstr "Você precisa renomear o diretório de dados existente no sistema de arquivos antes de alterar o nome do diretório de dados"
+
+msgid "URL for use with your own scripts and third party"
+msgstr "URL para uso com seus próprios scripts e terceiros"

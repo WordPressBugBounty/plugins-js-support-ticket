@@ -8095,3 +8095,291 @@ msgstr "ユーザーアバターを表示します"
 
 msgid "Showing avatars may slightly slow down page loading"
 msgstr "アバターを表示すると、ページの読み込みがわずかに遅くなる可能性があります"
+
+msgid "AI Powered Reply"
+msgstr "AI駆動型返信"
+
+msgid "by"
+msgstr "による"
+
+msgid "Awesome Support"
+msgstr "素晴らしいサポート"
+
+msgid "SupportCandy"
+msgstr "supportcandy"
+
+msgid "Fluent Support"
+msgstr "流fluentサポート"
+
+msgid "icon"
+msgstr "アイコン"
+
+msgid "Plugin not installed"
+msgstr "プラグインがインストールされていません"
+
+msgid "Fetch Data"
+msgstr "データを取得します"
+
+msgid "Coming Soon"
+msgstr "近日公開"
+
+msgid "found"
+msgstr "見つかった"
+
+msgid "Private Credentials Addon missing, ticket private credentials data will not be imported!"
+msgstr "プライベート資格情報アドオンがありません、チケットプライベート資格情報データはインポートされません！"
+
+msgid "Ticket History Addon missing, full ticket history will not be imported!"
+msgstr "チケット履歴アドオンがありません、完全なチケット履歴はインポートされません！"
+
+msgid "Time Tracking Addon missing, ticket time tracking data will not be imported!"
+msgstr "時間追跡アドオンがありません、チケットトラッキングデータはインポートされません！"
+
+msgid "Note Addon missing, ticket internal note  data will not be imported!"
+msgstr "注Addonがありません、チケット内部ノートデータはインポートされません！"
+
+msgid "Addon not installed please install addon first."
+msgstr "インストールされていないアドオンは、Addonを最初にインストールしてください。"
+
+msgid "No Data Found!"
+msgstr "データは見つかりません！"
+
+msgid "Import Data Report"
+msgstr "データレポートをインポートします"
+
+msgid "Entity"
+msgstr "実在物"
+
+msgid "Imported"
+msgstr "輸入"
+
+msgid "Similar Found"
+msgstr "同様の見つかった"
+
+msgid "Not Imported"
+msgstr "輸入されていません"
+
+msgid "imported."
+msgstr "輸入。"
+
+msgid "skipped."
+msgstr "スキップ。"
+
+msgid "failed."
+msgstr "失敗した。"
+
+msgid "Fields are only available in the default form."
+msgstr "フィールドは、デフォルトのフォームでのみ使用できます。"
+
+msgid "Dashboard Options"
+msgstr "ダッシュボードオプション"
+
+msgid "Select which charts and sections you would like to see on your dashboard."
+msgstr "ダッシュボードで表示したいチャートとセクションを選択します。"
+
+msgid "Ticket Trends"
+msgstr "チケットの傾向"
+
+msgid "Today's Distribution"
+msgstr "今日の分布"
+
+msgid "Tickets by Department"
+msgstr "部門によるチケット"
+
+msgid "Tickets by Status"
+msgstr "ステータスによるチケット"
+
+msgid "Tickets by Priorities"
+msgstr "優先順位によるチケット"
+
+msgid "Tickets by Products"
+msgstr "製品によるチケット"
+
+msgid "Agent Workload"
+msgstr "エージェントワークロード"
+
+msgid "Ticket Action History"
+msgstr "チケットアクション履歴"
+
+msgid "Save Changes"
+msgstr "変更を保存します"
+
+msgid "New Tickets"
+msgstr "新しいチケット"
+
+msgid "Pending Tickets"
+msgstr "保留中のチケット"
+
+msgid "Answered Tickets"
+msgstr "回答したチケット"
+
+msgid "Tickets Closed Today"
+msgstr "チケットは今日閉店しました"
+
+msgid "Daily Ticket Flow"
+msgstr "毎日のチケットフロー"
+
+msgid "Resolved"
+msgstr "解決しました"
+
+msgid "New Addon Update Available"
+msgstr "新しいアドオンアップデートが利用可能です"
+
+msgid "Install the latest version to unlock new features and security patches."
+msgstr "最新バージョンをインストールして、新しい機能とセキュリティパッチのロックを解除します。"
+
+msgid "Unassigned Tickets"
+msgstr "割り当てられていないチケット"
+
+msgid "No Unassigned Tickets"
+msgstr "割り当てられていないチケットはありません"
+
+msgid "All tickets have been assigned. Great job!"
+msgstr "すべてのチケットが割り当てられています。素晴らしい仕事！"
+
+msgid "No Recent Actions"
+msgstr "最近のアクションはありません"
+
+msgid "There is no ticket activity to show at the moment."
+msgstr "現時点では、チケットのアクティビティはありません。"
+
+msgid "Ticket Trends (Last 7 Days)"
+msgstr "チケットのトレンド（過去7日間）"
+
+msgid "Today's Ticket Distribution"
+msgstr "今日\\のチケット配布"
+
+msgid "View All"
+msgstr "すべてを表示します"
+
+msgid "No Tickets Found"
+msgstr "チケットは見つかりませんでした"
+
+msgid "There are currently no tickets to display in this view."
+msgstr "現在、このビューには展示するチケットはありません。"
+
+msgid "Awaiting Customer"
+msgstr "お客様を待っています"
+
+msgid "Awaiting Agent"
+msgstr "待っているエージェント"
+
+msgid "Total"
+msgstr "合計"
+
+msgid "No Agent Data"
+msgstr "エージェントデータはありません"
+
+msgid "Workload data for agents is not available at this time."
+msgstr "現時点では、エージェントのワークロードデータは利用できません。"
+
+msgid "Total overdue tickets"
+msgstr "総延滞チケット"
+
+msgid "Zero Overdue Tickets!"
+msgstr "ゼロチケット！"
+
+msgid "Congratulations! The queue is clear of overdue tickets."
+msgstr "おめでとう！キューには期限切れのチケットがありません。"
+
+msgid "List of Canned Responses"
+msgstr "缶詰の応答のリスト"
+
+msgid "No Canned Responses"
+msgstr "缶詰の反応はありません"
+
+msgid "Create your first canned response to speed up your workflow."
+msgstr "ワークフローをスピードアップするために、最初の缶詰の応答を作成します。"
+
+msgid "Open Tickets by Age"
+msgstr "年齢ごとにチケットを開きます"
+
+msgid "Age"
+msgstr "年"
+
+msgid "Count"
+msgstr "カウント"
+
+msgid "< 1 Day"
+msgstr "<1日"
+
+msgid "1-3 Days"
+msgstr "1〜3日"
+
+msgid "3-7 Days"
+msgstr "3〜7日"
+
+msgid "> 7 Days"
+msgstr "> 7日"
+
+msgid "No Open Tickets"
+msgstr "オープンチケットはありません"
+
+msgid "There are no open tickets to analyze by age."
+msgstr "年齢ごとに分析するためのオープンチケットはありません。"
+
+msgid "Most Active Customers"
+msgstr "ほとんどのアクティブな顧客"
+
+msgid "Customer Name"
+msgstr "顧客名"
+
+msgid "Tickets Count"
+msgstr "チケット数"
+
+msgid "No Active Customers"
+msgstr "アクティブな顧客はいません"
+
+msgid "Customer activity data is not yet available."
+msgstr "顧客アクティビティデータはまだ利用できません。"
+
+msgid "Active Timer"
+msgstr "アクティブタイマー"
+
+msgid "Timer"
+msgstr "タイマー"
+
+msgid "No Active Timers"
+msgstr "アクティブタイマーはありません"
+
+msgid "No agents have active timers running on tickets."
+msgstr "チケットで実行されているアクティブなタイマーはありません。"
+
+msgid "Defines rules or set specific intervals of time to make ticket auto overdue."
+msgstr "ルールを定義するか、特定の時間の間隔を設定して、チケットを自動期限にします。"
+
+msgid "SMTP enables you to add custom mail protocol to send and receive emails."
+msgstr "SMTPを使用すると、電子メールを送信および受信するためにカスタムメールプロトコルを追加できます。"
+
+msgid "Available Addons"
+msgstr "利用可能なアドオン"
+
+msgid "View All Addons"
+msgstr "すべてのアドオンを表示します"
+
+msgid "View Details"
+msgstr "詳細を表示します"
+
+msgid "Let's Get your Configuration Setup"
+msgstr "構成のセットアップを取得しましょう"
+
+msgid "Configurations Complete"
+msgstr "構成が完了します"
+
+msgid "Welcome to JS Support Ticket"
+msgstr "JSサポートチケットへようこそ"
+
+msgid "Lets Get Your Configurations Set Up"
+msgstr "構成を設定してみましょう"
+
+msgid "Plugin Quick Settings"
+msgstr "プラグインクイック設定"
+
+msgid "Move to Dashboard"
+msgstr "ダッシュボードに移動します"
+
+msgid "You need to rename the existing data directory in file system before changing the data directory name"
+msgstr "データディレクトリ名を変更する前に、ファイルシステムの既存のデータディレクトリの名前を変更する必要があります"
+
+msgid "URL for use with your own scripts and third party"
+msgstr "独自のスクリプトとサードパーティで使用するためのURL"

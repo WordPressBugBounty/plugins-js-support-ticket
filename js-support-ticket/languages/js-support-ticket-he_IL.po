@@ -8090,3 +8090,291 @@ msgstr "הצג את אווטאר המשתמש"
 
 msgid "Showing avatars may slightly slow down page loading"
 msgstr "הצגת אווטרים עשויה להאט מעט את טעינת העמוד"
+
+msgid "AI Powered Reply"
+msgstr "תשובה מופעלת על ידי AI"
+
+msgid "by"
+msgstr "עַל יְדֵי"
+
+msgid "Awesome Support"
+msgstr "תמיכה מדהימה"
+
+msgid "SupportCandy"
+msgstr "SupportCandy"
+
+msgid "Fluent Support"
+msgstr "תמיכה שוטפת"
+
+msgid "icon"
+msgstr "אייקון"
+
+msgid "Plugin not installed"
+msgstr "תוסף לא מותקן"
+
+msgid "Fetch Data"
+msgstr "להביא נתונים"
+
+msgid "Coming Soon"
+msgstr "בקרוב"
+
+msgid "found"
+msgstr "נמצא"
+
+msgid "Private Credentials Addon missing, ticket private credentials data will not be imported!"
+msgstr "אישורים פרטיים Addon חסרים, נתוני אישורים פרטיים של כרטיסים לא יובאו!"
+
+msgid "Ticket History Addon missing, full ticket history will not be imported!"
+msgstr "היסטוריית הכרטיסים תוספת חסרה, היסטוריית הכרטיסים המלאה לא תייבא!"
+
+msgid "Time Tracking Addon missing, ticket time tracking data will not be imported!"
+msgstr "מעקב אחר זמן Addon חסר, נתוני מעקב אחר כרטיסים לא יובאו!"
+
+msgid "Note Addon missing, ticket internal note  data will not be imported!"
+msgstr "הערה Addon חסר, נתוני הערות פנימיות של הכרטיסים לא יובאו!"
+
+msgid "Addon not installed please install addon first."
+msgstr "Addon לא הותקן אנא התקן תחילה את Addon."
+
+msgid "No Data Found!"
+msgstr "לא נמצאו נתונים!"
+
+msgid "Import Data Report"
+msgstr "יבוא דוח נתונים"
+
+msgid "Entity"
+msgstr "יֵשׁוּת"
+
+msgid "Imported"
+msgstr "מְיוֹבָּא"
+
+msgid "Similar Found"
+msgstr "נמצא דומה"
+
+msgid "Not Imported"
+msgstr "לא מיובא"
+
+msgid "imported."
+msgstr "מְיוֹבָּא."
+
+msgid "skipped."
+msgstr "דילג."
+
+msgid "failed."
+msgstr "נִכשָׁל."
+
+msgid "Fields are only available in the default form."
+msgstr "שדות זמינים רק בטופס ברירת המחדל."
+
+msgid "Dashboard Options"
+msgstr "אפשרויות לוח מחוונים"
+
+msgid "Select which charts and sections you would like to see on your dashboard."
+msgstr "בחר אילו תרשימים וקטעים תרצה לראות בלוח המחוונים שלך."
+
+msgid "Ticket Trends"
+msgstr "מגמות כרטיסים"
+
+msgid "Today's Distribution"
+msgstr "ההפצה של היום"
+
+msgid "Tickets by Department"
+msgstr "כרטיסים לפי מחלקה"
+
+msgid "Tickets by Status"
+msgstr "כרטיסים לפי סטטוס"
+
+msgid "Tickets by Priorities"
+msgstr "כרטיסים לפי סדרי עדיפויות"
+
+msgid "Tickets by Products"
+msgstr "כרטיסים לפי מוצרים"
+
+msgid "Agent Workload"
+msgstr "עומס עבודה של סוכן"
+
+msgid "Ticket Action History"
+msgstr "היסטוריית פעולה בכרטיס"
+
+msgid "Save Changes"
+msgstr "שמור שינויים"
+
+msgid "New Tickets"
+msgstr "כרטיסים חדשים"
+
+msgid "Pending Tickets"
+msgstr "כרטיסים בהמתנה"
+
+msgid "Answered Tickets"
+msgstr "ענה על כרטיסים"
+
+msgid "Tickets Closed Today"
+msgstr "כרטיסים נסגרו היום"
+
+msgid "Daily Ticket Flow"
+msgstr "זרימת כרטיסים יומית"
+
+msgid "Resolved"
+msgstr "נפתר"
+
+msgid "New Addon Update Available"
+msgstr "עדכון Addon חדש זמין"
+
+msgid "Install the latest version to unlock new features and security patches."
+msgstr "התקן את הגרסה האחרונה כדי לבטל את נעילת התכונות החדשות והתיקוני האבטחה."
+
+msgid "Unassigned Tickets"
+msgstr "כרטיסים שלא הוקצו"
+
+msgid "No Unassigned Tickets"
+msgstr "אין כרטיסים שלא הוקצו"
+
+msgid "All tickets have been assigned. Great job!"
+msgstr "כל הכרטיסים הוקצו. עבודה נהדרת!"
+
+msgid "No Recent Actions"
+msgstr "אין פעולות אחרונות"
+
+msgid "There is no ticket activity to show at the moment."
+msgstr "כרגע אין פעילות כרטיסים."
+
+msgid "Ticket Trends (Last 7 Days)"
+msgstr "מגמות כרטיסים (7 הימים האחרונים)"
+
+msgid "Today's Ticket Distribution"
+msgstr "הפצת הכרטיסים של היום"
+
+msgid "View All"
+msgstr "צפה בכולם"
+
+msgid "No Tickets Found"
+msgstr "לא נמצאו כרטיסים"
+
+msgid "There are currently no tickets to display in this view."
+msgstr "כרגע אין כרטיסים להציג בתצוגה זו."
+
+msgid "Awaiting Customer"
+msgstr "ממתין ללקוח"
+
+msgid "Awaiting Agent"
+msgstr "ממתין לסוכן"
+
+msgid "Total"
+msgstr "סַך הַכֹּל"
+
+msgid "No Agent Data"
+msgstr "אין נתוני סוכן"
+
+msgid "Workload data for agents is not available at this time."
+msgstr "נתוני עומס עבודה עבור סוכנים אינם זמינים בשלב זה."
+
+msgid "Total overdue tickets"
+msgstr "כרטיסים איחור בסך הכל"
+
+msgid "Zero Overdue Tickets!"
+msgstr "אפס כרטיסים איחור!"
+
+msgid "Congratulations! The queue is clear of overdue tickets."
+msgstr "מזל טוב! התור ברור מכרטיסים באיחור."
+
+msgid "List of Canned Responses"
+msgstr "רשימת תגובות משומר"
+
+msgid "No Canned Responses"
+msgstr "אין תגובות משומרות"
+
+msgid "Create your first canned response to speed up your workflow."
+msgstr "צור את התגובה המשומרת הראשונה שלך כדי להאיץ את זרימת העבודה שלך."
+
+msgid "Open Tickets by Age"
+msgstr "פתוח כרטיסים לפי גיל"
+
+msgid "Age"
+msgstr "גִיל"
+
+msgid "Count"
+msgstr "לִסְפּוֹר"
+
+msgid "< 1 Day"
+msgstr "<יום אחד"
+
+msgid "1-3 Days"
+msgstr "1-3 ימים"
+
+msgid "3-7 Days"
+msgstr "3-7 ימים"
+
+msgid "> 7 Days"
+msgstr "> 7 ימים"
+
+msgid "No Open Tickets"
+msgstr "אין כרטיסים פתוחים"
+
+msgid "There are no open tickets to analyze by age."
+msgstr "אין כרטיסים פתוחים לניתוח לפי גיל."
+
+msgid "Most Active Customers"
+msgstr "הלקוחות הפעילים ביותר"
+
+msgid "Customer Name"
+msgstr "שם הלקוח"
+
+msgid "Tickets Count"
+msgstr "כרטיסים ספירת"
+
+msgid "No Active Customers"
+msgstr "אין לקוחות פעילים"
+
+msgid "Customer activity data is not yet available."
+msgstr "נתוני פעילות לקוחות עדיין אינם זמינים."
+
+msgid "Active Timer"
+msgstr "טיימר פעיל"
+
+msgid "Timer"
+msgstr "שָׁעוֹן עֶצֶר"
+
+msgid "No Active Timers"
+msgstr "אין טיימרים פעילים"
+
+msgid "No agents have active timers running on tickets."
+msgstr "לאף סוכנים אין טיימרים פעילים הפועלים על כרטיסים."
+
+msgid "Defines rules or set specific intervals of time to make ticket auto overdue."
+msgstr "מגדיר כללים או קבע מרווחי זמן ספציפיים כדי לבצע איחור אוטומטי בכרטיס."
+
+msgid "SMTP enables you to add custom mail protocol to send and receive emails."
+msgstr "SMTP מאפשרת לך להוסיף פרוטוקול דואר מותאם אישית לשלוח ולקבל דוא\"ל."
+
+msgid "Available Addons"
+msgstr "תוספות זמינות"
+
+msgid "View All Addons"
+msgstr "צפה בכל התוספות"
+
+msgid "View Details"
+msgstr "צפה בפרטים"
+
+msgid "Let's Get your Configuration Setup"
+msgstr "בואו נקבל את הגדרת התצורה שלך"
+
+msgid "Configurations Complete"
+msgstr "התצורות הושלמו"
+
+msgid "Welcome to JS Support Ticket"
+msgstr "ברוך הבא לכרטיס התמיכה של JS"
+
+msgid "Lets Get Your Configurations Set Up"
+msgstr "מאפשר להגדיר את התצורות שלך"
+
+msgid "Plugin Quick Settings"
+msgstr "הגדרות מהירות של תוסף"
+
+msgid "Move to Dashboard"
+msgstr "עברו ללוח המחוונים"
+
+msgid "You need to rename the existing data directory in file system before changing the data directory name"
+msgstr "עליך לשנות את שם ספריית הנתונים הקיימת במערכת הקבצים לפני שינוי שם ספריית הנתונים"
+
+msgid "URL for use with your own scripts and third party"
+msgstr "כתובת אתר לשימוש עם סקריפטים משלך וצד שלישי"

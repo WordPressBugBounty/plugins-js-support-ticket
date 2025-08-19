@@ -8114,3 +8114,291 @@ msgstr "Afișați avatarul utilizatorului"
 
 msgid "Showing avatars may slightly slow down page loading"
 msgstr "Afișarea avatarilor poate încetini ușor încărcarea paginii"
+
+msgid "AI Powered Reply"
+msgstr "Răspuns alimentat AI"
+
+msgid "by"
+msgstr "de"
+
+msgid "Awesome Support"
+msgstr "Suport minunat"
+
+msgid "SupportCandy"
+msgstr "Suportcandy"
+
+msgid "Fluent Support"
+msgstr "Suport fluent"
+
+msgid "icon"
+msgstr "pictogramă"
+
+msgid "Plugin not installed"
+msgstr "Pluginul nu este instalat"
+
+msgid "Fetch Data"
+msgstr "Preluați date"
+
+msgid "Coming Soon"
+msgstr "În curând"
+
+msgid "found"
+msgstr "găsit"
+
+msgid "Private Credentials Addon missing, ticket private credentials data will not be imported!"
+msgstr "Credențe private Addon lipsesc, datele private de acreditare private nu vor fi importate!"
+
+msgid "Ticket History Addon missing, full ticket history will not be imported!"
+msgstr "Istoricul biletelor Lipsește, istoricul complet al biletelor nu va fi importat!"
+
+msgid "Time Tracking Addon missing, ticket time tracking data will not be imported!"
+msgstr "Urmărirea timpului care lipsește, datele de urmărire a timpului biletului nu vor fi importate!"
+
+msgid "Note Addon missing, ticket internal note  data will not be imported!"
+msgstr "Rețineți că lipsește, datele de notă internă a biletului nu vor fi importate!"
+
+msgid "Addon not installed please install addon first."
+msgstr "Addon nu a fost instalat, vă rugăm să instalați mai întâi Addon."
+
+msgid "No Data Found!"
+msgstr "Nu s -au găsit date!"
+
+msgid "Import Data Report"
+msgstr "Raport de date de import"
+
+msgid "Entity"
+msgstr "Entitate"
+
+msgid "Imported"
+msgstr "Importat"
+
+msgid "Similar Found"
+msgstr "Similar găsit"
+
+msgid "Not Imported"
+msgstr "Nu importat"
+
+msgid "imported."
+msgstr "importat."
+
+msgid "skipped."
+msgstr "a sărit."
+
+msgid "failed."
+msgstr "eșuat."
+
+msgid "Fields are only available in the default form."
+msgstr "Câmpurile sunt disponibile numai în formularul implicit."
+
+msgid "Dashboard Options"
+msgstr "Opțiuni de bord"
+
+msgid "Select which charts and sections you would like to see on your dashboard."
+msgstr "Selectați graficele și secțiunile pe care doriți să le vedeți pe tabloul de bord."
+
+msgid "Ticket Trends"
+msgstr "Tendințe de bilete"
+
+msgid "Today's Distribution"
+msgstr "Distribuția de astăzi"
+
+msgid "Tickets by Department"
+msgstr "Bilete pe departament"
+
+msgid "Tickets by Status"
+msgstr "Bilete după stare"
+
+msgid "Tickets by Priorities"
+msgstr "Bilete după priorități"
+
+msgid "Tickets by Products"
+msgstr "Bilete după produse"
+
+msgid "Agent Workload"
+msgstr "Volum de muncă agent"
+
+msgid "Ticket Action History"
+msgstr "Istoricul acțiunii biletelor"
+
+msgid "Save Changes"
+msgstr "Salvați modificări"
+
+msgid "New Tickets"
+msgstr "Bilete noi"
+
+msgid "Pending Tickets"
+msgstr "Bilete în așteptare"
+
+msgid "Answered Tickets"
+msgstr "Bilete răspuns"
+
+msgid "Tickets Closed Today"
+msgstr "Biletele închise astăzi"
+
+msgid "Daily Ticket Flow"
+msgstr "Flux de bilete zilnic"
+
+msgid "Resolved"
+msgstr "Rezolvat"
+
+msgid "New Addon Update Available"
+msgstr "Noua actualizare Addon disponibilă"
+
+msgid "Install the latest version to unlock new features and security patches."
+msgstr "Instalați cea mai recentă versiune pentru a debloca noi funcții și patch -uri de securitate."
+
+msgid "Unassigned Tickets"
+msgstr "Bilete neasignate"
+
+msgid "No Unassigned Tickets"
+msgstr "Fără bilete neasignate"
+
+msgid "All tickets have been assigned. Great job!"
+msgstr "Toate biletele au fost alocate. O treabă grozavă!"
+
+msgid "No Recent Actions"
+msgstr "Fără acțiuni recente"
+
+msgid "There is no ticket activity to show at the moment."
+msgstr "În acest moment nu există nicio activitate de bilet."
+
+msgid "Ticket Trends (Last 7 Days)"
+msgstr "Tendințe de bilete (ultimele 7 zile)"
+
+msgid "Today's Ticket Distribution"
+msgstr "Distribuția biletelor de astăzi"
+
+msgid "View All"
+msgstr "Vizualizați toate"
+
+msgid "No Tickets Found"
+msgstr "Nu au fost găsite bilete"
+
+msgid "There are currently no tickets to display in this view."
+msgstr "În prezent, nu există bilete de afișat în această vizualizare."
+
+msgid "Awaiting Customer"
+msgstr "În așteptarea clientului"
+
+msgid "Awaiting Agent"
+msgstr "În așteptarea agentului"
+
+msgid "Total"
+msgstr "Total"
+
+msgid "No Agent Data"
+msgstr "Fără date agent"
+
+msgid "Workload data for agents is not available at this time."
+msgstr "Datele volumului de muncă pentru agenți nu sunt disponibile în acest moment."
+
+msgid "Total overdue tickets"
+msgstr "Bilete totale întârziate"
+
+msgid "Zero Overdue Tickets!"
+msgstr "Bilete cu întârziere zero!"
+
+msgid "Congratulations! The queue is clear of overdue tickets."
+msgstr "Felicitări! Coada este clară de biletele întârziate."
+
+msgid "List of Canned Responses"
+msgstr "Lista răspunsurilor din conserve"
+
+msgid "No Canned Responses"
+msgstr "Fără răspunsuri din conserve"
+
+msgid "Create your first canned response to speed up your workflow."
+msgstr "Creați -vă primul răspuns din conserve pentru a vă grăbi fluxul de lucru."
+
+msgid "Open Tickets by Age"
+msgstr "Bilete deschise după vârstă"
+
+msgid "Age"
+msgstr "Vârstă"
+
+msgid "Count"
+msgstr "Conta"
+
+msgid "< 1 Day"
+msgstr "<1 zi"
+
+msgid "1-3 Days"
+msgstr "1-3 zile"
+
+msgid "3-7 Days"
+msgstr "3-7 zile"
+
+msgid "> 7 Days"
+msgstr "> 7 zile"
+
+msgid "No Open Tickets"
+msgstr "Fără bilete deschise"
+
+msgid "There are no open tickets to analyze by age."
+msgstr "Nu există bilete deschise de analizat după vârstă."
+
+msgid "Most Active Customers"
+msgstr "Majoritatea clienților activi"
+
+msgid "Customer Name"
+msgstr "Numele clientului"
+
+msgid "Tickets Count"
+msgstr "Biletele contează"
+
+msgid "No Active Customers"
+msgstr "Fără clienți activi"
+
+msgid "Customer activity data is not yet available."
+msgstr "Datele privind activitatea clienților nu sunt încă disponibile."
+
+msgid "Active Timer"
+msgstr "Timer activ"
+
+msgid "Timer"
+msgstr "Cronometru"
+
+msgid "No Active Timers"
+msgstr "Fără cronometre active"
+
+msgid "No agents have active timers running on tickets."
+msgstr "Niciun agenți nu au cronometre active care rulează pe bilete."
+
+msgid "Defines rules or set specific intervals of time to make ticket auto overdue."
+msgstr "Definește regulile sau setează intervale specifice de timp pentru a face întârzierea automată a biletelor."
+
+msgid "SMTP enables you to add custom mail protocol to send and receive emails."
+msgstr "SMTP vă permite să adăugați protocol de poștă personalizat pentru a trimite și primi e -mailuri."
+
+msgid "Available Addons"
+msgstr "Addoni disponibile"
+
+msgid "View All Addons"
+msgstr "Vizualizați toate suplimentele"
+
+msgid "View Details"
+msgstr "Vizualizați detalii"
+
+msgid "Let's Get your Configuration Setup"
+msgstr "Să obținem configurarea configurației"
+
+msgid "Configurations Complete"
+msgstr "Configurații complete"
+
+msgid "Welcome to JS Support Ticket"
+msgstr "Bine ați venit la biletul de asistență JS"
+
+msgid "Lets Get Your Configurations Set Up"
+msgstr "Permiteți să vă configurați configurațiile"
+
+msgid "Plugin Quick Settings"
+msgstr "Setări rapide pentru plugin"
+
+msgid "Move to Dashboard"
+msgstr "Mutați -vă la tabloul de bord"
+
+msgid "You need to rename the existing data directory in file system before changing the data directory name"
+msgstr "Trebuie să redenumiți directorul de date existent în sistemul de fișiere înainte de a schimba numele directorului de date"
+
+msgid "URL for use with your own scripts and third party"
+msgstr "URL pentru utilizare cu propriile scripturi și terți"

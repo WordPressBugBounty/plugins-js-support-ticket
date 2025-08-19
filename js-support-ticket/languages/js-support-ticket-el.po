@@ -8105,3 +8105,291 @@ msgstr "Εμφάνιση avatar χρήστη"
 
 msgid "Showing avatars may slightly slow down page loading"
 msgstr "Η εμφάνιση Avatars μπορεί ελαφρώς να επιβραδύνει τη φόρτωση σελίδας"
+
+msgid "AI Powered Reply"
+msgstr "Απάντηση με τροφοδοτείται από την AI"
+
+msgid "by"
+msgstr "με"
+
+msgid "Awesome Support"
+msgstr "Φοβερό υποστήριξη"
+
+msgid "SupportCandy"
+msgstr "Στήριξη"
+
+msgid "Fluent Support"
+msgstr "Ευέλικτη υποστήριξη"
+
+msgid "icon"
+msgstr "εικόνισμα"
+
+msgid "Plugin not installed"
+msgstr "Δεν είναι εγκατεστημένο πρόσθετο"
+
+msgid "Fetch Data"
+msgstr "Λήψη δεδομένων"
+
+msgid "Coming Soon"
+msgstr "Σύντομα"
+
+msgid "found"
+msgstr "θεμελιώ"
+
+msgid "Private Credentials Addon missing, ticket private credentials data will not be imported!"
+msgstr "Τα ιδιωτικά διαπιστευτήρια Addon που λείπουν, τα στοιχεία εισιτηρίων ιδιωτικών διαπιστευτηρίων δεν θα εισαχθούν!"
+
+msgid "Ticket History Addon missing, full ticket history will not be imported!"
+msgstr "Ιστορικό ιστορικό εισιτηρίων που λείπει, το πλήρες ιστορικό των εισιτηρίων δεν θα εισαχθεί!"
+
+msgid "Time Tracking Addon missing, ticket time tracking data will not be imported!"
+msgstr "Χρόνος παρακολούθησης addon που λείπει, τα δεδομένα παρακολούθησης χρόνου εισιτηρίων δεν θα εισαχθούν!"
+
+msgid "Note Addon missing, ticket internal note  data will not be imported!"
+msgstr "Σημείωση Addon Missing, Τα δεδομένα εσωτερικής σημείωσης εισιτηρίων δεν θα εισαχθούν!"
+
+msgid "Addon not installed please install addon first."
+msgstr "Το Addon δεν είναι εγκατεστημένο, τοποθετήστε πρώτα το Addon."
+
+msgid "No Data Found!"
+msgstr "Δεν βρέθηκαν δεδομένα!"
+
+msgid "Import Data Report"
+msgstr "Αναφορά δεδομένων εισαγωγής"
+
+msgid "Entity"
+msgstr "Οντότητα"
+
+msgid "Imported"
+msgstr "Εισαγόμενος"
+
+msgid "Similar Found"
+msgstr "Παρόμοια διαπίστωσε"
+
+msgid "Not Imported"
+msgstr "Δεν εισάγεται"
+
+msgid "imported."
+msgstr "εισαγόμενος."
+
+msgid "skipped."
+msgstr "παραλείφθηκε."
+
+msgid "failed."
+msgstr "αποτυχημένος."
+
+msgid "Fields are only available in the default form."
+msgstr "Τα πεδία είναι διαθέσιμα μόνο στην προεπιλεγμένη φόρμα."
+
+msgid "Dashboard Options"
+msgstr "Επιλογές ταμπλό"
+
+msgid "Select which charts and sections you would like to see on your dashboard."
+msgstr "Επιλέξτε ποια διαγράμματα και τμήματα θα θέλατε να δείτε στον πίνακα ελέγχου σας."
+
+msgid "Ticket Trends"
+msgstr "Τάσεις εισιτηρίων"
+
+msgid "Today's Distribution"
+msgstr "Η σημερινή διανομή"
+
+msgid "Tickets by Department"
+msgstr "Εισιτήρια ανά τμήμα"
+
+msgid "Tickets by Status"
+msgstr "Εισιτήρια κατά κατάσταση"
+
+msgid "Tickets by Priorities"
+msgstr "Εισιτήρια με προτεραιότητες"
+
+msgid "Tickets by Products"
+msgstr "Εισιτήρια ανά προϊόντα"
+
+msgid "Agent Workload"
+msgstr "Φόρτος εργασίας"
+
+msgid "Ticket Action History"
+msgstr "Ιστορικό δράσης εισιτηρίων"
+
+msgid "Save Changes"
+msgstr "Αποθήκευση αλλαγών"
+
+msgid "New Tickets"
+msgstr "Νέα εισιτήρια"
+
+msgid "Pending Tickets"
+msgstr "Εκκρεμείς εισιτήρια"
+
+msgid "Answered Tickets"
+msgstr "Απαντημένα εισιτήρια"
+
+msgid "Tickets Closed Today"
+msgstr "Τα εισιτήρια έκλεισαν σήμερα"
+
+msgid "Daily Ticket Flow"
+msgstr "Καθημερινή ροή εισιτηρίων"
+
+msgid "Resolved"
+msgstr "Αποφασισμένος"
+
+msgid "New Addon Update Available"
+msgstr "Διαθέσιμη νέα ενημέρωση addon"
+
+msgid "Install the latest version to unlock new features and security patches."
+msgstr "Εγκαταστήστε την τελευταία έκδοση για να ξεκλειδώσετε νέες δυνατότητες και μπαλώματα ασφαλείας."
+
+msgid "Unassigned Tickets"
+msgstr "Μη αξιόπιστα εισιτήρια"
+
+msgid "No Unassigned Tickets"
+msgstr "Χωρίς μη ταξινομημένα εισιτήρια"
+
+msgid "All tickets have been assigned. Great job!"
+msgstr "Όλα τα εισιτήρια έχουν ανατεθεί. Εξαιρετική δουλειά!"
+
+msgid "No Recent Actions"
+msgstr "Χωρίς πρόσφατες ενέργειες"
+
+msgid "There is no ticket activity to show at the moment."
+msgstr "Δεν υπάρχει δραστηριότητα εισιτηρίων για να δείξει αυτή τη στιγμή."
+
+msgid "Ticket Trends (Last 7 Days)"
+msgstr "Τάσεις εισιτηρίων (τελευταίες 7 ημέρες)"
+
+msgid "Today's Ticket Distribution"
+msgstr "Σήμερα διανομή εισιτηρίων"
+
+msgid "View All"
+msgstr "Βλέπω όλα"
+
+msgid "No Tickets Found"
+msgstr "Δεν βρέθηκαν εισιτήρια"
+
+msgid "There are currently no tickets to display in this view."
+msgstr "Επί του παρόντος δεν υπάρχουν εισιτήρια για εμφάνιση σε αυτήν την προβολή."
+
+msgid "Awaiting Customer"
+msgstr "Αναμονή πελάτη"
+
+msgid "Awaiting Agent"
+msgstr "Αναμονή πράκτορα"
+
+msgid "Total"
+msgstr "Σύνολο"
+
+msgid "No Agent Data"
+msgstr "Δεν υπάρχουν δεδομένα πράκτορα"
+
+msgid "Workload data for agents is not available at this time."
+msgstr "Τα δεδομένα φόρτου εργασίας για πράκτορες δεν είναι διαθέσιμα αυτή τη στιγμή."
+
+msgid "Total overdue tickets"
+msgstr "Συνολικά καθυστερημένα εισιτήρια"
+
+msgid "Zero Overdue Tickets!"
+msgstr "Εισιτήρια μηδενικού!"
+
+msgid "Congratulations! The queue is clear of overdue tickets."
+msgstr "Συγχαρητήρια! Η ουρά είναι ξεκάθαρη από τα καθυστερημένα εισιτήρια."
+
+msgid "List of Canned Responses"
+msgstr "Κατάλογος κονσερβοποιημένων απαντήσεων"
+
+msgid "No Canned Responses"
+msgstr "Χωρίς κονσερβοποιημένες απαντήσεις"
+
+msgid "Create your first canned response to speed up your workflow."
+msgstr "Δημιουργήστε την πρώτη σας κονσερβοποιημένη απάντηση για να επιταχύνετε τη ροή εργασίας σας."
+
+msgid "Open Tickets by Age"
+msgstr "Ανοίξτε εισιτήρια ανά ηλικία"
+
+msgid "Age"
+msgstr "Ηλικία"
+
+msgid "Count"
+msgstr "Κόμης"
+
+msgid "< 1 Day"
+msgstr "<1 ημέρα"
+
+msgid "1-3 Days"
+msgstr "1-3 ημέρες"
+
+msgid "3-7 Days"
+msgstr "3-7 ημέρες"
+
+msgid "> 7 Days"
+msgstr "> 7 ημέρες"
+
+msgid "No Open Tickets"
+msgstr "Χωρίς ανοιχτά εισιτήρια"
+
+msgid "There are no open tickets to analyze by age."
+msgstr "Δεν υπάρχουν ανοικτά εισιτήρια για ανάλυση ανά ηλικία."
+
+msgid "Most Active Customers"
+msgstr "Οι πιο ενεργοί πελάτες"
+
+msgid "Customer Name"
+msgstr "Όνομα πελάτη"
+
+msgid "Tickets Count"
+msgstr "Μετρήσεις των εισιτηρίων"
+
+msgid "No Active Customers"
+msgstr "Χωρίς ενεργούς πελάτες"
+
+msgid "Customer activity data is not yet available."
+msgstr "Τα δεδομένα δραστηριότητας πελατών δεν είναι ακόμη διαθέσιμα."
+
+msgid "Active Timer"
+msgstr "Ενεργός χρονοδιακόπτης"
+
+msgid "Timer"
+msgstr "Μετρών την ώραν"
+
+msgid "No Active Timers"
+msgstr "Χωρίς ενεργούς χρονομετρητές"
+
+msgid "No agents have active timers running on tickets."
+msgstr "Κανένας πράκτορας δεν έχουν ενεργούς χρονομετρητές που εκτελούνται σε εισιτήρια."
+
+msgid "Defines rules or set specific intervals of time to make ticket auto overdue."
+msgstr "Ορίζει κανόνες ή καθορίζουν συγκεκριμένα χρονικά διαστήματα για να καθιστούν καθυστερημένη την αυτόματη."
+
+msgid "SMTP enables you to add custom mail protocol to send and receive emails."
+msgstr "Το SMTP σας δίνει τη δυνατότητα να προσθέσετε πρωτόκολλο προσαρμοσμένου ταχυδρομείου για να στείλετε και να λαμβάνετε μηνύματα ηλεκτρονικού ταχυδρομείου."
+
+msgid "Available Addons"
+msgstr "Διαθέσιμα πρόσθετα"
+
+msgid "View All Addons"
+msgstr "Δείτε όλα τα πρόσθετα"
+
+msgid "View Details"
+msgstr "Προβολή λεπτομερειών"
+
+msgid "Let's Get your Configuration Setup"
+msgstr "Ας πάρουμε τη ρύθμιση διαμόρφωσης"
+
+msgid "Configurations Complete"
+msgstr "Ολοκληρώστε τις διαμορφώσεις"
+
+msgid "Welcome to JS Support Ticket"
+msgstr "Καλώς ήλθατε στο εισιτήριο υποστήριξης JS"
+
+msgid "Lets Get Your Configurations Set Up"
+msgstr "Ας ρυθμίσουμε τις διαμορφώσεις σας"
+
+msgid "Plugin Quick Settings"
+msgstr "Ρυθμίσεις γρήγορων ρυθμίσεων plugin"
+
+msgid "Move to Dashboard"
+msgstr "Μετακίνηση στον πίνακα ελέγχου"
+
+msgid "You need to rename the existing data directory in file system before changing the data directory name"
+msgstr "Πρέπει να μετονομάσετε τον υπάρχοντα κατάλογο δεδομένων στο σύστημα αρχείων πριν αλλάξετε το όνομα του καταλόγου δεδομένων"
+
+msgid "URL for use with your own scripts and third party"
+msgstr "URL για χρήση με τα δικά σας σενάρια και τρίτο μέρος"

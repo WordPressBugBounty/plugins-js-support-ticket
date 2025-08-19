@@ -8110,3 +8110,291 @@ msgstr ""
 
 msgid "Showing avatars may slightly slow down page loading"
 msgstr ""
+
+msgid "AI Powered Reply"
+msgstr ""
+
+msgid "by"
+msgstr ""
+
+msgid "Awesome Support"
+msgstr ""
+
+msgid "SupportCandy"
+msgstr ""
+
+msgid "Fluent Support"
+msgstr ""
+
+msgid "icon"
+msgstr ""
+
+msgid "Plugin not installed"
+msgstr ""
+
+msgid "Fetch Data"
+msgstr ""
+
+msgid "Coming Soon"
+msgstr ""
+
+msgid "found"
+msgstr ""
+
+msgid "Private Credentials Addon missing, ticket private credentials data will not be imported!"
+msgstr ""
+
+msgid "Ticket History Addon missing, full ticket history will not be imported!"
+msgstr ""
+
+msgid "Time Tracking Addon missing, ticket time tracking data will not be imported!"
+msgstr ""
+
+msgid "Note Addon missing, ticket internal note  data will not be imported!"
+msgstr ""
+
+msgid "Addon not installed please install addon first."
+msgstr ""
+
+msgid "No Data Found!"
+msgstr ""
+
+msgid "Import Data Report"
+msgstr ""
+
+msgid "Entity"
+msgstr ""
+
+msgid "Imported"
+msgstr ""
+
+msgid "Similar Found"
+msgstr ""
+
+msgid "Not Imported"
+msgstr ""
+
+msgid "imported."
+msgstr ""
+
+msgid "skipped."
+msgstr ""
+
+msgid "failed."
+msgstr ""
+
+msgid "Fields are only available in the default form."
+msgstr ""
+
+msgid "Dashboard Options"
+msgstr ""
+
+msgid "Select which charts and sections you would like to see on your dashboard."
+msgstr ""
+
+msgid "Ticket Trends"
+msgstr ""
+
+msgid "Today's Distribution"
+msgstr ""
+
+msgid "Tickets by Department"
+msgstr ""
+
+msgid "Tickets by Status"
+msgstr ""
+
+msgid "Tickets by Priorities"
+msgstr ""
+
+msgid "Tickets by Products"
+msgstr ""
+
+msgid "Agent Workload"
+msgstr ""
+
+msgid "Ticket Action History"
+msgstr ""
+
+msgid "Save Changes"
+msgstr ""
+
+msgid "New Tickets"
+msgstr ""
+
+msgid "Pending Tickets"
+msgstr ""
+
+msgid "Answered Tickets"
+msgstr ""
+
+msgid "Tickets Closed Today"
+msgstr ""
+
+msgid "Daily Ticket Flow"
+msgstr ""
+
+msgid "Resolved"
+msgstr ""
+
+msgid "New Addon Update Available"
+msgstr ""
+
+msgid "Install the latest version to unlock new features and security patches."
+msgstr ""
+
+msgid "Unassigned Tickets"
+msgstr ""
+
+msgid "No Unassigned Tickets"
+msgstr ""
+
+msgid "All tickets have been assigned. Great job!"
+msgstr ""
+
+msgid "No Recent Actions"
+msgstr ""
+
+msgid "There is no ticket activity to show at the moment."
+msgstr ""
+
+msgid "Ticket Trends (Last 7 Days)"
+msgstr ""
+
+msgid "Today\'s Ticket Distribution"
+msgstr ""
+
+msgid "View All"
+msgstr ""
+
+msgid "No Tickets Found"
+msgstr ""
+
+msgid "There are currently no tickets to display in this view."
+msgstr ""
+
+msgid "Awaiting Customer"
+msgstr ""
+
+msgid "Awaiting Agent"
+msgstr ""
+
+msgid "Total"
+msgstr ""
+
+msgid "No Agent Data"
+msgstr ""
+
+msgid "Workload data for agents is not available at this time."
+msgstr ""
+
+msgid "Total overdue tickets"
+msgstr ""
+
+msgid "Zero Overdue Tickets!"
+msgstr ""
+
+msgid "Congratulations! The queue is clear of overdue tickets."
+msgstr ""
+
+msgid "List of Canned Responses"
+msgstr ""
+
+msgid "No Canned Responses"
+msgstr ""
+
+msgid "Create your first canned response to speed up your workflow."
+msgstr ""
+
+msgid "Open Tickets by Age"
+msgstr ""
+
+msgid "Age"
+msgstr ""
+
+msgid "Count"
+msgstr ""
+
+msgid "< 1 Day"
+msgstr ""
+
+msgid "1-3 Days"
+msgstr ""
+
+msgid "3-7 Days"
+msgstr ""
+
+msgid "> 7 Days"
+msgstr ""
+
+msgid "No Open Tickets"
+msgstr ""
+
+msgid "There are no open tickets to analyze by age."
+msgstr ""
+
+msgid "Most Active Customers"
+msgstr ""
+
+msgid "Customer Name"
+msgstr ""
+
+msgid "Tickets Count"
+msgstr ""
+
+msgid "No Active Customers"
+msgstr ""
+
+msgid "Customer activity data is not yet available."
+msgstr ""
+
+msgid "Active Timer"
+msgstr ""
+
+msgid "Timer"
+msgstr ""
+
+msgid "No Active Timers"
+msgstr ""
+
+msgid "No agents have active timers running on tickets."
+msgstr ""
+
+msgid "Defines rules or set specific intervals of time to make ticket auto overdue."
+msgstr ""
+
+msgid "SMTP enables you to add custom mail protocol to send and receive emails."
+msgstr ""
+
+msgid "Available Addons"
+msgstr ""
+
+msgid "View All Addons"
+msgstr ""
+
+msgid "View Details"
+msgstr ""
+
+msgid "Let's Get your Configuration Setup"
+msgstr ""
+
+msgid "Configurations Complete"
+msgstr ""
+
+msgid "Welcome to JS Support Ticket"
+msgstr ""
+
+msgid "Lets Get Your Configurations Set Up"
+msgstr ""
+
+msgid "Plugin Quick Settings"
+msgstr ""
+
+msgid "Move to Dashboard"
+msgstr ""
+
+msgid "You need to rename the existing data directory in file system before changing the data directory name"
+msgstr ""
+
+msgid "URL for use with your own scripts and third party"
+msgstr ""

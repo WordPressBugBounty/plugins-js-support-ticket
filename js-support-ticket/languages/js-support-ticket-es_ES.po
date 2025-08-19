@@ -8143,3 +8143,291 @@ msgstr "Mostrar avatar de usuario"
 
 msgid "Showing avatars may slightly slow down page loading"
 msgstr "Mostrar avatares puede disminuir ligeramente la carga de la página"
+
+msgid "AI Powered Reply"
+msgstr "Respuesta alimentada con IA"
+
+msgid "by"
+msgstr "por"
+
+msgid "Awesome Support"
+msgstr "Soporte impresionante"
+
+msgid "SupportCandy"
+msgstr "SupportCandy"
+
+msgid "Fluent Support"
+msgstr "Apoyo con fluidez"
+
+msgid "icon"
+msgstr "icono"
+
+msgid "Plugin not installed"
+msgstr "Complemento no instalado"
+
+msgid "Fetch Data"
+msgstr "Buscar datos"
+
+msgid "Coming Soon"
+msgstr "Muy pronto"
+
+msgid "found"
+msgstr "encontró"
+
+msgid "Private Credentials Addon missing, ticket private credentials data will not be imported!"
+msgstr "¡Falta de credenciales privadas, no se importarán los datos de credenciales privadas de boletos!"
+
+msgid "Ticket History Addon missing, full ticket history will not be imported!"
+msgstr "¡Falta el historial de boletos, el historial completo de boletos no se importará!"
+
+msgid "Time Tracking Addon missing, ticket time tracking data will not be imported!"
+msgstr "¡Falta de seguimiento de tiempo de seguimiento, los datos de seguimiento de tiempo de boleto no se importarán!"
+
+msgid "Note Addon missing, ticket internal note  data will not be imported!"
+msgstr "¡Nota Falta del complemento, los datos de la nota interna del ticket no se importarán!"
+
+msgid "Addon not installed please install addon first."
+msgstr "Complemento no instalado Instale el complemento primero."
+
+msgid "No Data Found!"
+msgstr "¡No se encontraron datos!"
+
+msgid "Import Data Report"
+msgstr "Informe de datos de importación"
+
+msgid "Entity"
+msgstr "Entidad"
+
+msgid "Imported"
+msgstr "Importado"
+
+msgid "Similar Found"
+msgstr "Encontrado similar"
+
+msgid "Not Imported"
+msgstr "No importado"
+
+msgid "imported."
+msgstr "importado."
+
+msgid "skipped."
+msgstr "omitido."
+
+msgid "failed."
+msgstr "fallido."
+
+msgid "Fields are only available in the default form."
+msgstr "Los campos solo están disponibles en el formulario predeterminado."
+
+msgid "Dashboard Options"
+msgstr "Opciones de tablero"
+
+msgid "Select which charts and sections you would like to see on your dashboard."
+msgstr "Seleccione qué gráficos y secciones le gustaría ver en su tablero."
+
+msgid "Ticket Trends"
+msgstr "Tendencias de boletos"
+
+msgid "Today's Distribution"
+msgstr "Distribución de hoy"
+
+msgid "Tickets by Department"
+msgstr "Boletos por departamento"
+
+msgid "Tickets by Status"
+msgstr "Entradas por estado"
+
+msgid "Tickets by Priorities"
+msgstr "Boletos por prioridades"
+
+msgid "Tickets by Products"
+msgstr "Entradas por productos"
+
+msgid "Agent Workload"
+msgstr "Carga de trabajo de agente"
+
+msgid "Ticket Action History"
+msgstr "Historial de acción de boletos"
+
+msgid "Save Changes"
+msgstr "Guardar cambios"
+
+msgid "New Tickets"
+msgstr "Nuevos boletos"
+
+msgid "Pending Tickets"
+msgstr "Boletos pendientes"
+
+msgid "Answered Tickets"
+msgstr "Entradas respondidas"
+
+msgid "Tickets Closed Today"
+msgstr "Las entradas cerradas hoy"
+
+msgid "Daily Ticket Flow"
+msgstr "Flujo diario de boletos"
+
+msgid "Resolved"
+msgstr "Resuelto"
+
+msgid "New Addon Update Available"
+msgstr "Nueva actualización de complemento disponible"
+
+msgid "Install the latest version to unlock new features and security patches."
+msgstr "Instale la última versión para desbloquear nuevas funciones y parches de seguridad."
+
+msgid "Unassigned Tickets"
+msgstr "Boletos no asignados"
+
+msgid "No Unassigned Tickets"
+msgstr "No hay boletos no asignados"
+
+msgid "All tickets have been assigned. Great job!"
+msgstr "Se han asignado todos los boletos. ¡Buen trabajo!"
+
+msgid "No Recent Actions"
+msgstr "No hay acciones recientes"
+
+msgid "There is no ticket activity to show at the moment."
+msgstr "No hay actividad de boletos para mostrar en este momento."
+
+msgid "Ticket Trends (Last 7 Days)"
+msgstr "Tendencias de boletos (últimos 7 días)"
+
+msgid "Today's Ticket Distribution"
+msgstr "Distribución de boletos de hoy"
+
+msgid "View All"
+msgstr "Ver todo"
+
+msgid "No Tickets Found"
+msgstr "No se encontraron boletos"
+
+msgid "There are currently no tickets to display in this view."
+msgstr "Actualmente no hay boletos para mostrar en esta vista."
+
+msgid "Awaiting Customer"
+msgstr "Esperando al cliente"
+
+msgid "Awaiting Agent"
+msgstr "Agente en espera"
+
+msgid "Total"
+msgstr "Total"
+
+msgid "No Agent Data"
+msgstr "No hay datos de agente"
+
+msgid "Workload data for agents is not available at this time."
+msgstr "Los datos de carga de trabajo para agentes no están disponibles en este momento."
+
+msgid "Total overdue tickets"
+msgstr "Entradas totales atrasadas"
+
+msgid "Zero Overdue Tickets!"
+msgstr "¡Cero boletos atrasados!"
+
+msgid "Congratulations! The queue is clear of overdue tickets."
+msgstr "¡Felicidades! La cola está libre de boletos atrasados."
+
+msgid "List of Canned Responses"
+msgstr "Lista de respuestas enlatadas"
+
+msgid "No Canned Responses"
+msgstr "No hay respuestas enlatadas"
+
+msgid "Create your first canned response to speed up your workflow."
+msgstr "Cree su primera respuesta enlatada para acelerar su flujo de trabajo."
+
+msgid "Open Tickets by Age"
+msgstr "Boletos abiertos por edad"
+
+msgid "Age"
+msgstr "Edad"
+
+msgid "Count"
+msgstr "Contar"
+
+msgid "< 1 Day"
+msgstr "<1 día"
+
+msgid "1-3 Days"
+msgstr "1-3 días"
+
+msgid "3-7 Days"
+msgstr "3-7 días"
+
+msgid "> 7 Days"
+msgstr "> 7 días"
+
+msgid "No Open Tickets"
+msgstr "No hay entradas abiertas"
+
+msgid "There are no open tickets to analyze by age."
+msgstr "No hay boletos abiertos para analizar por edad."
+
+msgid "Most Active Customers"
+msgstr "Los clientes más activos"
+
+msgid "Customer Name"
+msgstr "Nombre del cliente"
+
+msgid "Tickets Count"
+msgstr "Cuenta de boletos"
+
+msgid "No Active Customers"
+msgstr "No hay clientes activos"
+
+msgid "Customer activity data is not yet available."
+msgstr "Los datos de actividad del cliente aún no están disponibles."
+
+msgid "Active Timer"
+msgstr "Temporizador activo"
+
+msgid "Timer"
+msgstr "Minutero"
+
+msgid "No Active Timers"
+msgstr "Sin temporizadores activos"
+
+msgid "No agents have active timers running on tickets."
+msgstr "Ningún agente tiene temporizadores activos que se ejecutan en boletos."
+
+msgid "Defines rules or set specific intervals of time to make ticket auto overdue."
+msgstr "Define reglas o establece intervalos específicos de tiempo para hacer que Ticket Auto vence."
+
+msgid "SMTP enables you to add custom mail protocol to send and receive emails."
+msgstr "SMTP le permite agregar un protocolo de correo personalizado para enviar y recibir correos electrónicos."
+
+msgid "Available Addons"
+msgstr "Complementos disponibles"
+
+msgid "View All Addons"
+msgstr "Ver todos los complementos"
+
+msgid "View Details"
+msgstr "Ver detalles"
+
+msgid "Let's Get your Configuration Setup"
+msgstr "Obtengamos su configuración de configuración"
+
+msgid "Configurations Complete"
+msgstr "Configuraciones completas"
+
+msgid "Welcome to JS Support Ticket"
+msgstr "Bienvenido a JS Support Ticket"
+
+msgid "Lets Get Your Configurations Set Up"
+msgstr "Vamos a configurar sus configuraciones"
+
+msgid "Plugin Quick Settings"
+msgstr "Configuración rápida de complemento"
+
+msgid "Move to Dashboard"
+msgstr "Moverse al tablero"
+
+msgid "You need to rename the existing data directory in file system before changing the data directory name"
+msgstr "Debe cambiar el nombre del directorio de datos existente en el sistema de archivos antes de cambiar el nombre del directorio de datos"
+
+msgid "URL for use with your own scripts and third party"
+msgstr "URL para usar con sus propios guiones y terceros"

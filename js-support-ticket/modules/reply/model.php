@@ -234,7 +234,7 @@ class JSSTreplyModel {
             }
             JSSTincluder::getJSModel('ticket')->updateLastReply($data['ticketid']);
             JSSTmessage::setMessage(esc_html(__('Reply posted', 'js-support-ticket')), 'updated');
-            $messagetype = esc_html(esc_html(__('Successfully', 'js-support-ticket')));
+            $messagetype = esc_html(__('Successfully', 'js-support-ticket'));
 
             // Reply notification
             if(in_array('notification', jssupportticket::$_active_addons)){
@@ -244,7 +244,7 @@ class JSSTreplyModel {
 
                 // to admin
                 $dataarray = array();
-                $dataarray['title'] = esc_html(esc_html(__("Reply posted on ticket","js-support-ticket")));
+                $dataarray['title'] = esc_html(__("Reply posted on ticket","js-support-ticket"));
                 $dataarray['body'] =  JSSTincluder::getJSModel('ticket')->getTicketSubjectById($data['ticketid']);
 
                 // To admin

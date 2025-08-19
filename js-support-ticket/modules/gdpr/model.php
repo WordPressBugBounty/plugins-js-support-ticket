@@ -433,10 +433,10 @@ class JSSTgdprModel {
 
             if(in_array('note', jssupportticket::$_active_addons)){
                 // delete internal notes
-                JSSTincluder::getJSModel('note')->removeTicketInternalNote($id);
+                JSSTincluder::getJSModel('note')->removeTicketInternalNote($ticket->id);
             }
             // delete replies
-            JSSTincluder::getJSModel('reply')->removeTicketReplies($id);
+            JSSTincluder::getJSModel('reply')->removeTicketReplies($ticket->id);
 
             // private credentails for ticket
             if(in_array('privatecredentials',jssupportticket::$_active_addons)){

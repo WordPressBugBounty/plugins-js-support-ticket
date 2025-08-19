@@ -197,8 +197,8 @@ class JSSTactivation {
                     ('tplink_faqs_user', '0', 'tplink', 'faq'),
                     ('show_breadcrumbs', '1', 'default', NULL),
                     ('productcode', 'jsticket', 'default', NULL),
-                    ('versioncode', '2.9.8', 'default', NULL),
-                    ('productversion', '298', 'default', NULL),
+                    ('versioncode', '2.9.9', 'default', NULL),
+                    ('productversion', '299', 'default', NULL),
                     ('producttype', 'free', 'default', NULL),
                     ('tve_enabled', '2', 'default', NULL),
                     ('tve_mailreadtype', '3', 'default', NULL),
@@ -446,7 +446,7 @@ class JSSTactivation {
                 VALUES (1, 'New', '#FFFFFF', '#5bb12f', 1, 1),
                     (2, 'Waiting Reply', '#FFFFFF', '#28abe3', 1, 2),
                     (3, 'In Progress', '#FFFFFF', '#69d2e7', 1, 3),
-                    (4, 'Replied', '#FFFFFF', '#FFB613', 1, 4),
+                    (4, 'Replied', '#FFFFFF', '#186e83', 1, 4),
                     (5, 'Closed', '#FFFFFF', '#ed1c24', 1, 5),
                     (6, 'Close due to merge', '#FFFFFF', '#ed1c24', 1, 6);";
             jssupportticket::$_db->query($query);

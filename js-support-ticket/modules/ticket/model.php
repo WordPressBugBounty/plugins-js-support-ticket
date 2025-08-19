@@ -1157,6 +1157,7 @@ class JSSTticketModel {
             $data['staffid'] = isset($data['staffid']) ? $data['staffid'] : '';
         }
         $data['status'] = isset($data['status']) ? $data['status'] : '1';
+        if($data['status'] == 0) $data['status'] = 1;
         $data['duedate'] = !empty($data['duedate']) ? date_i18n('Y-m-d',strtotime($data['duedate']))  : '';
         $data['lastreply'] = isset($data['lastreply']) ? $data['lastreply'] : '';
         if (isset($data['jsticket_message'])) {

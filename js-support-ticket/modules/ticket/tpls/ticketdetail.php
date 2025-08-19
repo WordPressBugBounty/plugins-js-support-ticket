@@ -797,7 +797,7 @@ if (jssupportticket::$_config['offline'] == 2) {
                         replies = [];
                     }
 
-                    jQuery("#js-ticket-selected-ticket-replies-title").text(`'.__("Replies for:", "js-support-ticket").' `+escapeHtml(ticket.text));
+                    jQuery("#js-ticket-selected-ticket-replies-title").text(`'.__("Replies for:", "js-support-ticket").' `+ticket.text);
                     selectedTicketRepliesContent.empty(); // Clear previous replies
 
                     // Now safe to check length

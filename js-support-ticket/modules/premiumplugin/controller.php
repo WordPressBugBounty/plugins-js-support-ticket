@@ -349,7 +349,7 @@ class JSSTpremiumpluginController {
             $array['data'] = array();
             $array['status'] = 0;
             $error_string = $tmpfile->get_error_message();
-            $array['message'] = esc_html(__('Addon Installation Failed, File download error','js-support-ticket')).'!'.$error_string;
+            $array['message'] = esc_html(__('Addon Installation Failed, File download error','js-support-ticket')).'! '.$error_string;
             $array['transactionkey'] = $post_data['transactionkey'];
             $array = wp_json_encode( $array );
             $array = jssupportticketphplib::JSST_safe_encoding($array);

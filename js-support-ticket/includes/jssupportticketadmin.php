@@ -25,7 +25,7 @@ class jssupportticketadmin {
             );
             add_submenu_page('jssupportticket', // parent slug
                     esc_html(__('Dashboard', 'js-support-ticket')), // Page title
-                    esc_html(__('Dashboad', 'js-support-ticket')), // menu title
+                    esc_html(__('Dashboard', 'js-support-ticket')), // menu title
                     'jsst_support_ticket', // capability
                     'jssupportticket', //menu slug
                     array($this, 'showAdminPage') // function name

@@ -8145,3 +8145,291 @@ msgstr "Kullanıcı Avatarını Göster"
 
 msgid "Showing avatars may slightly slow down page loading"
 msgstr "Avatarları göstermek sayfa yüklemesini biraz yavaşlatabilir"
+
+msgid "AI Powered Reply"
+msgstr "AI Powered Cevap"
+
+msgid "by"
+msgstr "ile"
+
+msgid "Awesome Support"
+msgstr "Müthiş Destek"
+
+msgid "SupportCandy"
+msgstr "Destekle"
+
+msgid "Fluent Support"
+msgstr "Akıcı destek"
+
+msgid "icon"
+msgstr "simge"
+
+msgid "Plugin not installed"
+msgstr "Eklenti yüklenmedi"
+
+msgid "Fetch Data"
+msgstr "Veriler Alın"
+
+msgid "Coming Soon"
+msgstr "Yakında gelecek"
+
+msgid "found"
+msgstr "kurmak"
+
+msgid "Private Credentials Addon missing, ticket private credentials data will not be imported!"
+msgstr "Özel kimlik bilgileri eklenti eksik, bilet özel kimlik bilgileri verileri içe aktarılmayacak!"
+
+msgid "Ticket History Addon missing, full ticket history will not be imported!"
+msgstr "Bilet Geçmişi Eklenti Eksik, Tam Bilet Tarihi İthal edilmeyecek!"
+
+msgid "Time Tracking Addon missing, ticket time tracking data will not be imported!"
+msgstr "Zaman İzleme Eklenti Eksik, Bilet Zamanı İzleme Verileri İçe Aktarılmayacak!"
+
+msgid "Note Addon missing, ticket internal note  data will not be imported!"
+msgstr "Not Addon eksik, bilet dahili notu verileri içe aktarılmayacak!"
+
+msgid "Addon not installed please install addon first."
+msgstr "Addon yüklü değil lütfen önce addon yükleyin."
+
+msgid "No Data Found!"
+msgstr "Veri bulunamadı!"
+
+msgid "Import Data Report"
+msgstr "Veri Raporunu İçe Aktar"
+
+msgid "Entity"
+msgstr "Varlık"
+
+msgid "Imported"
+msgstr "İthal"
+
+msgid "Similar Found"
+msgstr "Benzer Bulundu"
+
+msgid "Not Imported"
+msgstr "İthal edilmedi"
+
+msgid "imported."
+msgstr "ithal."
+
+msgid "skipped."
+msgstr "atladı."
+
+msgid "failed."
+msgstr "arızalı."
+
+msgid "Fields are only available in the default form."
+msgstr "Alanlar yalnızca varsayılan formda mevcuttur."
+
+msgid "Dashboard Options"
+msgstr "Gösterge Tablosu Seçenekleri"
+
+msgid "Select which charts and sections you would like to see on your dashboard."
+msgstr "Gösterge panelinizde hangi grafikleri ve bölümleri görmek istediğiniz seçin."
+
+msgid "Ticket Trends"
+msgstr "Bilet trendleri"
+
+msgid "Today's Distribution"
+msgstr "Bugünün dağıtım"
+
+msgid "Tickets by Department"
+msgstr "Departman biletleri"
+
+msgid "Tickets by Status"
+msgstr "Statüye göre biletler"
+
+msgid "Tickets by Priorities"
+msgstr "Önceliklere göre biletler"
+
+msgid "Tickets by Products"
+msgstr "Ürünlere göre biletler"
+
+msgid "Agent Workload"
+msgstr "Ajan iş yükü"
+
+msgid "Ticket Action History"
+msgstr "Bilet Eylem Geçmişi"
+
+msgid "Save Changes"
+msgstr "Değişiklikleri Kaydet"
+
+msgid "New Tickets"
+msgstr "Yeni biletler"
+
+msgid "Pending Tickets"
+msgstr "Bekleyen Biletler"
+
+msgid "Answered Tickets"
+msgstr "Cevaplanan Biletler"
+
+msgid "Tickets Closed Today"
+msgstr "Biletler bugün kapalı"
+
+msgid "Daily Ticket Flow"
+msgstr "Günlük Bilet Akışı"
+
+msgid "Resolved"
+msgstr "Çözülmüş"
+
+msgid "New Addon Update Available"
+msgstr "Yeni Addon güncellemesi mevcut"
+
+msgid "Install the latest version to unlock new features and security patches."
+msgstr "Yeni özelliklerin ve güvenlik yamalarının kilidini açmak için en son sürümü yükleyin."
+
+msgid "Unassigned Tickets"
+msgstr "Atamasız biletler"
+
+msgid "No Unassigned Tickets"
+msgstr "Atamasız bilet yok"
+
+msgid "All tickets have been assigned. Great job!"
+msgstr "Tüm biletler atandı. Harika iş!"
+
+msgid "No Recent Actions"
+msgstr "Son Eylem Yok"
+
+msgid "There is no ticket activity to show at the moment."
+msgstr "Şu anda gösterilecek bilet faaliyeti yok."
+
+msgid "Ticket Trends (Last 7 Days)"
+msgstr "Bilet Trendleri (Son 7 Gün)"
+
+msgid "Today's Ticket Distribution"
+msgstr "Bugün \\ 'nin bilet dağıtımı"
+
+msgid "View All"
+msgstr "Hepsini görüntüle"
+
+msgid "No Tickets Found"
+msgstr "Bilet bulunamadı"
+
+msgid "There are currently no tickets to display in this view."
+msgstr "Şu anda bu görünümde gösterilecek bilet yok."
+
+msgid "Awaiting Customer"
+msgstr "Müşteriyi Bekliyor"
+
+msgid "Awaiting Agent"
+msgstr "Bekleyen Ajan"
+
+msgid "Total"
+msgstr "Toplam"
+
+msgid "No Agent Data"
+msgstr "Ajan verisi yok"
+
+msgid "Workload data for agents is not available at this time."
+msgstr "Aracılar için iş yükü verileri şu anda mevcut değildir."
+
+msgid "Total overdue tickets"
+msgstr "Toplam gecikmiş biletler"
+
+msgid "Zero Overdue Tickets!"
+msgstr "Sıfır gecikmiş biletler!"
+
+msgid "Congratulations! The queue is clear of overdue tickets."
+msgstr "Tebrikler! Kuyruk gecikmiş biletlerden arındırılmıştır."
+
+msgid "List of Canned Responses"
+msgstr "Konserve Yanıtların Listesi"
+
+msgid "No Canned Responses"
+msgstr "Konserve Yanıt Yok"
+
+msgid "Create your first canned response to speed up your workflow."
+msgstr "İş akışınızı hızlandırmak için ilk konserve yanıtınızı oluşturun."
+
+msgid "Open Tickets by Age"
+msgstr "Yaşa Göre Açık Biletler"
+
+msgid "Age"
+msgstr "Yaş"
+
+msgid "Count"
+msgstr "Saymak"
+
+msgid "< 1 Day"
+msgstr "<1 gün"
+
+msgid "1-3 Days"
+msgstr "1-3 gün"
+
+msgid "3-7 Days"
+msgstr "3-7 gün"
+
+msgid "> 7 Days"
+msgstr "> 7 gün"
+
+msgid "No Open Tickets"
+msgstr "Açık bilet yok"
+
+msgid "There are no open tickets to analyze by age."
+msgstr "Yaşa göre analiz etmek için açık biletler yoktur."
+
+msgid "Most Active Customers"
+msgstr "En aktif müşteriler"
+
+msgid "Customer Name"
+msgstr "Müşteri Adı"
+
+msgid "Tickets Count"
+msgstr "Bilet sayımı"
+
+msgid "No Active Customers"
+msgstr "Aktif müşteri yok"
+
+msgid "Customer activity data is not yet available."
+msgstr "Müşteri etkinliği verileri henüz mevcut değil."
+
+msgid "Active Timer"
+msgstr "Aktif zamanlayıcı"
+
+msgid "Timer"
+msgstr "Zamanlayıcı"
+
+msgid "No Active Timers"
+msgstr "Aktif zamanlayıcı yok"
+
+msgid "No agents have active timers running on tickets."
+msgstr "Hiçbir ajanın biletlerde çalışan aktif zamanlayıcıları yoktur."
+
+msgid "Defines rules or set specific intervals of time to make ticket auto overdue."
+msgstr "Bilet otomatik gecikmiş hale getirmek için kuralları tanımlar veya belirli zaman aralıklarını belirler."
+
+msgid "SMTP enables you to add custom mail protocol to send and receive emails."
+msgstr "SMTP, e -posta göndermek ve almak için özel posta protokolü eklemenizi sağlar."
+
+msgid "Available Addons"
+msgstr "Mevcut eklentiler"
+
+msgid "View All Addons"
+msgstr "Tüm eklentileri görüntüle"
+
+msgid "View Details"
+msgstr "Ayrıntıları Görüntüle"
+
+msgid "Let's Get your Configuration Setup"
+msgstr "Yapılandırma kurulumunuzu alalım"
+
+msgid "Configurations Complete"
+msgstr "Yapılandırmalar tamamlandı"
+
+msgid "Welcome to JS Support Ticket"
+msgstr "JS Destek Biletine Hoş Geldiniz"
+
+msgid "Lets Get Your Configurations Set Up"
+msgstr "Yapılandırmalarınızı ayarlayalım"
+
+msgid "Plugin Quick Settings"
+msgstr "Eklenti Hızlı Ayarlar"
+
+msgid "Move to Dashboard"
+msgstr "Gösterge Tablosuna Taşın"
+
+msgid "You need to rename the existing data directory in file system before changing the data directory name"
+msgstr "Veri dizini adını değiştirmeden önce mevcut veri dizinini dosya sisteminde yeniden adlandırmanız gerekir."
+
+msgid "URL for use with your own scripts and third party"
+msgstr "Kendi senaryolarınız ve üçüncü taraflarınızla kullanım için URL"

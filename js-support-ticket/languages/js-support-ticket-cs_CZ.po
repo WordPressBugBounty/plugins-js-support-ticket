@@ -8147,3 +8147,291 @@ msgstr "Zobrazit uživatele avatar"
 
 msgid "Showing avatars may slightly slow down page loading"
 msgstr "Zobrazení avatarů může mírně zpomalit načítání stránky"
+
+msgid "AI Powered Reply"
+msgstr "Odpověď poháněná AI"
+
+msgid "by"
+msgstr "podle"
+
+msgid "Awesome Support"
+msgstr "Úžasná podpora"
+
+msgid "SupportCandy"
+msgstr "SupportCandy"
+
+msgid "Fluent Support"
+msgstr "Plynná podpora"
+
+msgid "icon"
+msgstr "ikona"
+
+msgid "Plugin not installed"
+msgstr "Plugin není nainstalován"
+
+msgid "Fetch Data"
+msgstr "Načtení dat"
+
+msgid "Coming Soon"
+msgstr "Přijde brzy"
+
+msgid "found"
+msgstr "nalezen"
+
+msgid "Private Credentials Addon missing, ticket private credentials data will not be imported!"
+msgstr "Soukromé přihlašovací údaje chybí, údaje o soukromých pověřeních nebudou importovány!"
+
+msgid "Ticket History Addon missing, full ticket history will not be imported!"
+msgstr "Chybějící dodatky pro historii vstupenek, historie plného lístku nebude importována!"
+
+msgid "Time Tracking Addon missing, ticket time tracking data will not be imported!"
+msgstr "Sledování času Addon chybí, data sledování času vstupenky nebudou importována!"
+
+msgid "Note Addon missing, ticket internal note  data will not be imported!"
+msgstr "Poznámka, že dodatky chybí, údaje o interní poznámce vstupenky nebudou importovány!"
+
+msgid "Addon not installed please install addon first."
+msgstr "Addon není nainstalován, prosím nainstalujte Addon nejprve."
+
+msgid "No Data Found!"
+msgstr "Žádná data nalezena!"
+
+msgid "Import Data Report"
+msgstr "Import Data Report"
+
+msgid "Entity"
+msgstr "Entita"
+
+msgid "Imported"
+msgstr "Importováno"
+
+msgid "Similar Found"
+msgstr "Podobné nalezené"
+
+msgid "Not Imported"
+msgstr "Není importováno"
+
+msgid "imported."
+msgstr "importováno."
+
+msgid "skipped."
+msgstr "přeskočil."
+
+msgid "failed."
+msgstr "selhal."
+
+msgid "Fields are only available in the default form."
+msgstr "Pole jsou k dispozici pouze ve výchozí formuláři."
+
+msgid "Dashboard Options"
+msgstr "Možnosti řídicího panelu"
+
+msgid "Select which charts and sections you would like to see on your dashboard."
+msgstr "Vyberte, které grafy a sekce byste chtěli vidět na palubní desce."
+
+msgid "Ticket Trends"
+msgstr "Trendy vstupenek"
+
+msgid "Today's Distribution"
+msgstr "Dnešní distribuce"
+
+msgid "Tickets by Department"
+msgstr "Vstupenky podle oddělení"
+
+msgid "Tickets by Status"
+msgstr "Vstupenky podle stavu"
+
+msgid "Tickets by Priorities"
+msgstr "Vstupenky podle priorit"
+
+msgid "Tickets by Products"
+msgstr "Vstupenky podle produktů"
+
+msgid "Agent Workload"
+msgstr "Pracovní zátěž agenta"
+
+msgid "Ticket Action History"
+msgstr "Historie akce vstupenek"
+
+msgid "Save Changes"
+msgstr "Ušetřete změny"
+
+msgid "New Tickets"
+msgstr "Nové lístky"
+
+msgid "Pending Tickets"
+msgstr "Čekající lístky"
+
+msgid "Answered Tickets"
+msgstr "Odpověděné vstupenky"
+
+msgid "Tickets Closed Today"
+msgstr "Vstupenky dnes zavřené"
+
+msgid "Daily Ticket Flow"
+msgstr "Denní tok vstupenek"
+
+msgid "Resolved"
+msgstr "Vyřešeno"
+
+msgid "New Addon Update Available"
+msgstr "K dispozici je nová aktualizace doplňků"
+
+msgid "Install the latest version to unlock new features and security patches."
+msgstr "Nainstalujte nejnovější verzi pro odemknutí nových funkcí a bezpečnostních záplat."
+
+msgid "Unassigned Tickets"
+msgstr "Nepřiřazené lístky"
+
+msgid "No Unassigned Tickets"
+msgstr "Žádné nepřiřazené lístky"
+
+msgid "All tickets have been assigned. Great job!"
+msgstr "Všechny vstupenky byly přiděleny. Skvělá práce!"
+
+msgid "No Recent Actions"
+msgstr "Žádné nedávné akce"
+
+msgid "There is no ticket activity to show at the moment."
+msgstr "Momentálně neexistuje žádná aktivita vstupenky."
+
+msgid "Ticket Trends (Last 7 Days)"
+msgstr "Trendy vstupenek (posledních 7 dní)"
+
+msgid "Today's Ticket Distribution"
+msgstr "Dnešní distribuce lístků"
+
+msgid "View All"
+msgstr "Zobrazit vše"
+
+msgid "No Tickets Found"
+msgstr "Nalezeny žádné lístky"
+
+msgid "There are currently no tickets to display in this view."
+msgstr "V současné době nejsou v tomto pohledu žádné lístky na zobrazení."
+
+msgid "Awaiting Customer"
+msgstr "Čeká na zákazníka"
+
+msgid "Awaiting Agent"
+msgstr "Čeká na agent"
+
+msgid "Total"
+msgstr "Celkový"
+
+msgid "No Agent Data"
+msgstr "Žádná data agenta"
+
+msgid "Workload data for agents is not available at this time."
+msgstr "V tuto chvíli nejsou k dispozici data pracovního vytížení pro agenty."
+
+msgid "Total overdue tickets"
+msgstr "Celkové vstupenky na splatnosti"
+
+msgid "Zero Overdue Tickets!"
+msgstr "Vstupenky na nulové opoždění!"
+
+msgid "Congratulations! The queue is clear of overdue tickets."
+msgstr "Gratuluji! Fronta je bez vstupenek na splatnosti."
+
+msgid "List of Canned Responses"
+msgstr "Seznam konzervovaných odpovědí"
+
+msgid "No Canned Responses"
+msgstr "Žádné konzervované odpovědi"
+
+msgid "Create your first canned response to speed up your workflow."
+msgstr "Vytvořte svou první konzervovanou odpověď na zrychlení vašeho pracovního postupu."
+
+msgid "Open Tickets by Age"
+msgstr "Otevřené vstupenky podle věku"
+
+msgid "Age"
+msgstr "Stáří"
+
+msgid "Count"
+msgstr "Počítat"
+
+msgid "< 1 Day"
+msgstr "<1 den"
+
+msgid "1-3 Days"
+msgstr "1-3 dny"
+
+msgid "3-7 Days"
+msgstr "3-7 dní"
+
+msgid "> 7 Days"
+msgstr "> 7 dní"
+
+msgid "No Open Tickets"
+msgstr "Žádné otevřené lístky"
+
+msgid "There are no open tickets to analyze by age."
+msgstr "Neexistují žádné otevřené vstupenky, které by bylo možné analyzovat podle věku."
+
+msgid "Most Active Customers"
+msgstr "Nejaktivnější zákazníci"
+
+msgid "Customer Name"
+msgstr "Jméno zákazníka"
+
+msgid "Tickets Count"
+msgstr "Počítání vstupenek"
+
+msgid "No Active Customers"
+msgstr "Žádní aktivní zákazníci"
+
+msgid "Customer activity data is not yet available."
+msgstr "Údaje o činnosti zákazníka ještě nejsou k dispozici."
+
+msgid "Active Timer"
+msgstr "Aktivní časovač"
+
+msgid "Timer"
+msgstr "Časovač"
+
+msgid "No Active Timers"
+msgstr "Žádné aktivní časovače"
+
+msgid "No agents have active timers running on tickets."
+msgstr "Žádné agenti nemají aktivní časovače běžící na lístcích."
+
+msgid "Defines rules or set specific intervals of time to make ticket auto overdue."
+msgstr "Definuje pravidla nebo nastaví konkrétní časové intervaly, aby se automatické posílení vstupenek."
+
+msgid "SMTP enables you to add custom mail protocol to send and receive emails."
+msgstr "SMTP vám umožňuje přidat vlastní poštovní protokol k odesílání a přijímání e -mailů."
+
+msgid "Available Addons"
+msgstr "Dostupné doplňky"
+
+msgid "View All Addons"
+msgstr "Zobrazit všechny doplňky"
+
+msgid "View Details"
+msgstr "Zobrazit podrobnosti"
+
+msgid "Let's Get your Configuration Setup"
+msgstr "Získáme nastavení konfigurace"
+
+msgid "Configurations Complete"
+msgstr "Konfigurace kompletní"
+
+msgid "Welcome to JS Support Ticket"
+msgstr "Vítejte na JS Support Ticket"
+
+msgid "Lets Get Your Configurations Set Up"
+msgstr "Pojďme nastavit vaše konfigurace"
+
+msgid "Plugin Quick Settings"
+msgstr "Rychlé nastavení pluginu"
+
+msgid "Move to Dashboard"
+msgstr "Přesuňte se na palubní desku"
+
+msgid "You need to rename the existing data directory in file system before changing the data directory name"
+msgstr "Před změnou názvu adresáře dat musíte přejmenovat existující datový adresář v souborovém systému"
+
+msgid "URL for use with your own scripts and third party"
+msgstr "URL pro použití s vlastními skripty a třetí stranou"

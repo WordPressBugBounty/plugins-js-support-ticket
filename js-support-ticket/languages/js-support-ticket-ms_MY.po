@@ -8095,3 +8095,291 @@ msgstr "Tunjukkan avatar pengguna"
 
 msgid "Showing avatars may slightly slow down page loading"
 msgstr "Menunjukkan avatar mungkin sedikit melambatkan halaman memuatkan"
+
+msgid "AI Powered Reply"
+msgstr "AI berkuasa berkuasa"
+
+msgid "by"
+msgstr "oleh"
+
+msgid "Awesome Support"
+msgstr "Sokongan hebat"
+
+msgid "SupportCandy"
+msgstr "Supportcandy"
+
+msgid "Fluent Support"
+msgstr "Sokongan fasih"
+
+msgid "icon"
+msgstr "ikon"
+
+msgid "Plugin not installed"
+msgstr "Plugin tidak dipasang"
+
+msgid "Fetch Data"
+msgstr "Ambil data"
+
+msgid "Coming Soon"
+msgstr "Akan datang tidak lama lagi"
+
+msgid "found"
+msgstr "dijumpai"
+
+msgid "Private Credentials Addon missing, ticket private credentials data will not be imported!"
+msgstr "Kredensial peribadi Addon hilang, Tiket Data Kredensial Peribadi tidak akan diimport!"
+
+msgid "Ticket History Addon missing, full ticket history will not be imported!"
+msgstr "Sejarah Tiket Addon Hilang, Sejarah Tiket Penuh tidak akan diimport!"
+
+msgid "Time Tracking Addon missing, ticket time tracking data will not be imported!"
+msgstr "Penjejakan Masa Addon Hilang, Data Penjejakan Masa Tiket Tidak Akan Diimport!"
+
+msgid "Note Addon missing, ticket internal note  data will not be imported!"
+msgstr "NOTA ADDON Hilang, Data Nota Dalaman Tiket Tidak Akan Diimport!"
+
+msgid "Addon not installed please install addon first."
+msgstr "Addon tidak dipasang Sila pasang Addon terlebih dahulu."
+
+msgid "No Data Found!"
+msgstr "Tiada data dijumpai!"
+
+msgid "Import Data Report"
+msgstr "Laporan Data Import"
+
+msgid "Entity"
+msgstr "Entiti"
+
+msgid "Imported"
+msgstr "Diimport"
+
+msgid "Similar Found"
+msgstr "Sama dijumpai"
+
+msgid "Not Imported"
+msgstr "Tidak diimport"
+
+msgid "imported."
+msgstr "diimport."
+
+msgid "skipped."
+msgstr "dilangkau."
+
+msgid "failed."
+msgstr "gagal."
+
+msgid "Fields are only available in the default form."
+msgstr "Bidang hanya tersedia dalam borang lalai."
+
+msgid "Dashboard Options"
+msgstr "Pilihan Dashboard"
+
+msgid "Select which charts and sections you would like to see on your dashboard."
+msgstr "Pilih carta dan bahagian mana yang anda ingin lihat di papan pemuka anda."
+
+msgid "Ticket Trends"
+msgstr "Trend Tiket"
+
+msgid "Today's Distribution"
+msgstr "Pengedaran hari ini"
+
+msgid "Tickets by Department"
+msgstr "Tiket oleh jabatan"
+
+msgid "Tickets by Status"
+msgstr "Tiket mengikut status"
+
+msgid "Tickets by Priorities"
+msgstr "Tiket oleh keutamaan"
+
+msgid "Tickets by Products"
+msgstr "Tiket oleh produk"
+
+msgid "Agent Workload"
+msgstr "Beban kerja ejen"
+
+msgid "Ticket Action History"
+msgstr "Sejarah Tindakan Tiket"
+
+msgid "Save Changes"
+msgstr "Simpan perubahan"
+
+msgid "New Tickets"
+msgstr "Tiket baru"
+
+msgid "Pending Tickets"
+msgstr "Tiket yang belum selesai"
+
+msgid "Answered Tickets"
+msgstr "Tiket menjawab"
+
+msgid "Tickets Closed Today"
+msgstr "Tiket ditutup hari ini"
+
+msgid "Daily Ticket Flow"
+msgstr "Aliran tiket harian"
+
+msgid "Resolved"
+msgstr "Diselesaikan"
+
+msgid "New Addon Update Available"
+msgstr "Kemas kini Addon Baru Tersedia"
+
+msgid "Install the latest version to unlock new features and security patches."
+msgstr "Pasang versi terkini untuk membuka kunci ciri baru dan patch keselamatan."
+
+msgid "Unassigned Tickets"
+msgstr "Tiket yang tidak ditetapkan"
+
+msgid "No Unassigned Tickets"
+msgstr "Tiada tiket yang tidak ditetapkan"
+
+msgid "All tickets have been assigned. Great job!"
+msgstr "Semua tiket telah diberikan. Kerja bagus!"
+
+msgid "No Recent Actions"
+msgstr "Tiada tindakan baru -baru ini"
+
+msgid "There is no ticket activity to show at the moment."
+msgstr "Tiada aktiviti tiket untuk ditunjukkan pada masa ini."
+
+msgid "Ticket Trends (Last 7 Days)"
+msgstr "Trend Tiket (7 hari terakhir)"
+
+msgid "Today's Ticket Distribution"
+msgstr "Pengagihan tiket hari ini"
+
+msgid "View All"
+msgstr "Lihat semua"
+
+msgid "No Tickets Found"
+msgstr "Tiada tiket dijumpai"
+
+msgid "There are currently no tickets to display in this view."
+msgstr "Pada masa ini tiada tiket untuk dipaparkan dalam paparan ini."
+
+msgid "Awaiting Customer"
+msgstr "Menunggu pelanggan"
+
+msgid "Awaiting Agent"
+msgstr "Menunggu ejen"
+
+msgid "Total"
+msgstr "Jumlah"
+
+msgid "No Agent Data"
+msgstr "Tiada data ejen"
+
+msgid "Workload data for agents is not available at this time."
+msgstr "Data beban kerja untuk ejen tidak tersedia pada masa ini."
+
+msgid "Total overdue tickets"
+msgstr "Jumlah tiket tertunggak"
+
+msgid "Zero Overdue Tickets!"
+msgstr "Tiket Zero Tertinggi!"
+
+msgid "Congratulations! The queue is clear of overdue tickets."
+msgstr "Tahniah! Baris adalah jelas tiket tertunggak."
+
+msgid "List of Canned Responses"
+msgstr "Senarai jawapan tin"
+
+msgid "No Canned Responses"
+msgstr "Tiada tindak balas kalengan"
+
+msgid "Create your first canned response to speed up your workflow."
+msgstr "Buat tindak balas kalengan pertama anda untuk mempercepat aliran kerja anda."
+
+msgid "Open Tickets by Age"
+msgstr "Buka tiket mengikut usia"
+
+msgid "Age"
+msgstr "Umur"
+
+msgid "Count"
+msgstr "Hitung"
+
+msgid "< 1 Day"
+msgstr "<1 hari"
+
+msgid "1-3 Days"
+msgstr "1-3 hari"
+
+msgid "3-7 Days"
+msgstr "3-7 hari"
+
+msgid "> 7 Days"
+msgstr "> 7 hari"
+
+msgid "No Open Tickets"
+msgstr "Tiada tiket terbuka"
+
+msgid "There are no open tickets to analyze by age."
+msgstr "Tiada tiket terbuka untuk dianalisis mengikut umur."
+
+msgid "Most Active Customers"
+msgstr "Pelanggan yang paling aktif"
+
+msgid "Customer Name"
+msgstr "Nama pelanggan"
+
+msgid "Tickets Count"
+msgstr "Tiket dikira"
+
+msgid "No Active Customers"
+msgstr "Tiada pelanggan aktif"
+
+msgid "Customer activity data is not yet available."
+msgstr "Data aktiviti pelanggan belum tersedia."
+
+msgid "Active Timer"
+msgstr "Pemasa aktif"
+
+msgid "Timer"
+msgstr "Pemasa"
+
+msgid "No Active Timers"
+msgstr "Tiada pemasa aktif"
+
+msgid "No agents have active timers running on tickets."
+msgstr "Tiada ejen mempunyai pemasa aktif yang berjalan pada tiket."
+
+msgid "Defines rules or set specific intervals of time to make ticket auto overdue."
+msgstr "Mendefinisikan peraturan atau menetapkan selang waktu tertentu untuk membuat tiket automatik tertunggak."
+
+msgid "SMTP enables you to add custom mail protocol to send and receive emails."
+msgstr "SMTP membolehkan anda menambah protokol mel tersuai untuk menghantar dan menerima e -mel."
+
+msgid "Available Addons"
+msgstr "Addon yang ada"
+
+msgid "View All Addons"
+msgstr "Lihat semua addons"
+
+msgid "View Details"
+msgstr "Lihat butiran"
+
+msgid "Let's Get your Configuration Setup"
+msgstr "Mari Dapatkan Persediaan Konfigurasi Anda"
+
+msgid "Configurations Complete"
+msgstr "Konfigurasi lengkap"
+
+msgid "Welcome to JS Support Ticket"
+msgstr "Selamat Datang ke Tiket Sokongan JS"
+
+msgid "Lets Get Your Configurations Set Up"
+msgstr "Mari kita tetapkan konfigurasi anda"
+
+msgid "Plugin Quick Settings"
+msgstr "Tetapan Plugin Cepat"
+
+msgid "Move to Dashboard"
+msgstr "Pindah ke papan pemuka"
+
+msgid "You need to rename the existing data directory in file system before changing the data directory name"
+msgstr "Anda perlu menamakan semula direktori data yang ada dalam sistem fail sebelum menukar nama direktori data"
+
+msgid "URL for use with your own scripts and third party"
+msgstr "URL untuk digunakan dengan skrip anda sendiri dan pihak ketiga"

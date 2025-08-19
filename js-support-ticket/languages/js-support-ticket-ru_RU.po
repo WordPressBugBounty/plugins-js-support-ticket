@@ -8102,3 +8102,291 @@ msgstr "Показать пользовательский аватар"
 
 msgid "Showing avatars may slightly slow down page loading"
 msgstr "Показ аватаров может немного замедлить загрузку страницы"
+
+msgid "AI Powered Reply"
+msgstr "AI Powered Ответ"
+
+msgid "by"
+msgstr "к"
+
+msgid "Awesome Support"
+msgstr "Потрясающая поддержка"
+
+msgid "SupportCandy"
+msgstr "Поддержка"
+
+msgid "Fluent Support"
+msgstr "Свободно поддерживает"
+
+msgid "icon"
+msgstr "икона"
+
+msgid "Plugin not installed"
+msgstr "Плагин не установлен"
+
+msgid "Fetch Data"
+msgstr "Получить данные"
+
+msgid "Coming Soon"
+msgstr "Вскоре"
+
+msgid "found"
+msgstr "найденный"
+
+msgid "Private Credentials Addon missing, ticket private credentials data will not be imported!"
+msgstr "Отсутствуют частные учетные данные, данные о билетах частные учетные данные не будут импортированы!"
+
+msgid "Ticket History Addon missing, full ticket history will not be imported!"
+msgstr "Аддон истории билетов отсутствует, полная история билетов не будет импортирована!"
+
+msgid "Time Tracking Addon missing, ticket time tracking data will not be imported!"
+msgstr "Аддон отслеживает время, данные отслеживания билетов не будут импортированы!"
+
+msgid "Note Addon missing, ticket internal note  data will not be imported!"
+msgstr "Примечание Addon отсутствует, данные внутренних заметок не будут импортированы!"
+
+msgid "Addon not installed please install addon first."
+msgstr "Аддон не установлен, пожалуйста, установите Addon первым."
+
+msgid "No Data Found!"
+msgstr "Нет данных!"
+
+msgid "Import Data Report"
+msgstr "Импорт данных"
+
+msgid "Entity"
+msgstr "Сущность"
+
+msgid "Imported"
+msgstr "Импортирован"
+
+msgid "Similar Found"
+msgstr "Похоже найдено"
+
+msgid "Not Imported"
+msgstr "Не импортируется"
+
+msgid "imported."
+msgstr "импортирован."
+
+msgid "skipped."
+msgstr "пропустил."
+
+msgid "failed."
+msgstr "неуспешный."
+
+msgid "Fields are only available in the default form."
+msgstr "Поля доступны только в форме по умолчанию."
+
+msgid "Dashboard Options"
+msgstr "Параметры панели панели"
+
+msgid "Select which charts and sections you would like to see on your dashboard."
+msgstr "Выберите, какие графики и разделы вы хотели бы увидеть на панели панели."
+
+msgid "Ticket Trends"
+msgstr "Билетные тенденции"
+
+msgid "Today's Distribution"
+msgstr "Сегодняшнее распространение"
+
+msgid "Tickets by Department"
+msgstr "Билеты по отделу"
+
+msgid "Tickets by Status"
+msgstr "Билеты по статусу"
+
+msgid "Tickets by Priorities"
+msgstr "Билеты по приоритетам"
+
+msgid "Tickets by Products"
+msgstr "Билеты по продуктам"
+
+msgid "Agent Workload"
+msgstr "Агент рабочая нагрузка"
+
+msgid "Ticket Action History"
+msgstr "История действий билета"
+
+msgid "Save Changes"
+msgstr "Сохранить изменения"
+
+msgid "New Tickets"
+msgstr "Новые билеты"
+
+msgid "Pending Tickets"
+msgstr "В ожидании билетов"
+
+msgid "Answered Tickets"
+msgstr "Ответил билеты"
+
+msgid "Tickets Closed Today"
+msgstr "Билеты закрыты сегодня"
+
+msgid "Daily Ticket Flow"
+msgstr "Ежедневный поток билетов"
+
+msgid "Resolved"
+msgstr "Решено"
+
+msgid "New Addon Update Available"
+msgstr "Доступно новое обновление аддона"
+
+msgid "Install the latest version to unlock new features and security patches."
+msgstr "Установите последнюю версию, чтобы разблокировать новые функции и исправления безопасности."
+
+msgid "Unassigned Tickets"
+msgstr "Незначенные билеты"
+
+msgid "No Unassigned Tickets"
+msgstr "Никаких неназначенных билетов"
+
+msgid "All tickets have been assigned. Great job!"
+msgstr "Все билеты были назначены. Отличная работа!"
+
+msgid "No Recent Actions"
+msgstr "Нет недавних действий"
+
+msgid "There is no ticket activity to show at the moment."
+msgstr "Там нет билетных мероприятий, чтобы показать в данный момент."
+
+msgid "Ticket Trends (Last 7 Days)"
+msgstr "Тенденции билетов (последние 7 дней)"
+
+msgid "Today's Ticket Distribution"
+msgstr "Сегодняшнее распределение билетов"
+
+msgid "View All"
+msgstr "Просмотреть все"
+
+msgid "No Tickets Found"
+msgstr "Билеты не найдены"
+
+msgid "There are currently no tickets to display in this view."
+msgstr "В настоящее время нет билетов для отображения в этом представлении."
+
+msgid "Awaiting Customer"
+msgstr "В ожидании клиента"
+
+msgid "Awaiting Agent"
+msgstr "В ожидании агента"
+
+msgid "Total"
+msgstr "Общий"
+
+msgid "No Agent Data"
+msgstr "Нет данных агента"
+
+msgid "Workload data for agents is not available at this time."
+msgstr "Данные рабочей нагрузки для агентов в настоящее время недоступны."
+
+msgid "Total overdue tickets"
+msgstr "Общее просроченное билеты"
+
+msgid "Zero Overdue Tickets!"
+msgstr "Ноль просроченные билеты!"
+
+msgid "Congratulations! The queue is clear of overdue tickets."
+msgstr "Поздравляю! Очередь ясна от просроченных билетов."
+
+msgid "List of Canned Responses"
+msgstr "Список консервированных ответов"
+
+msgid "No Canned Responses"
+msgstr "Нет консервированных ответов"
+
+msgid "Create your first canned response to speed up your workflow."
+msgstr "Создайте свой первый консервированный ответ, чтобы ускорить ваш рабочий процесс."
+
+msgid "Open Tickets by Age"
+msgstr "Открытые билеты по возрасту"
+
+msgid "Age"
+msgstr "Возраст"
+
+msgid "Count"
+msgstr "Считать"
+
+msgid "< 1 Day"
+msgstr "<1 день"
+
+msgid "1-3 Days"
+msgstr "1-3 дня"
+
+msgid "3-7 Days"
+msgstr "3-7 дней"
+
+msgid "> 7 Days"
+msgstr "> 7 дней"
+
+msgid "No Open Tickets"
+msgstr "Нет открытых билетов"
+
+msgid "There are no open tickets to analyze by age."
+msgstr "Не существует открытых билетов для анализа по возрасту."
+
+msgid "Most Active Customers"
+msgstr "Большинство активных клиентов"
+
+msgid "Customer Name"
+msgstr "Название клиента"
+
+msgid "Tickets Count"
+msgstr "Билеты считаются"
+
+msgid "No Active Customers"
+msgstr "Нет активных клиентов"
+
+msgid "Customer activity data is not yet available."
+msgstr "Данные о активности клиентов еще не доступны."
+
+msgid "Active Timer"
+msgstr "Активный таймер"
+
+msgid "Timer"
+msgstr "Таймер"
+
+msgid "No Active Timers"
+msgstr "Нет активных таймеров"
+
+msgid "No agents have active timers running on tickets."
+msgstr "Ни у одного агентов не есть активные таймеры, работающие на билетах."
+
+msgid "Defines rules or set specific intervals of time to make ticket auto overdue."
+msgstr "Определяет правила или установите конкретные интервалы времени, чтобы сделать билет автоматически просроченным."
+
+msgid "SMTP enables you to add custom mail protocol to send and receive emails."
+msgstr "SMTP позволяет добавлять пользовательский почтовый протокол для отправки и получения электронных писем."
+
+msgid "Available Addons"
+msgstr "Доступные аддоны"
+
+msgid "View All Addons"
+msgstr "Просмотреть все аддоны"
+
+msgid "View Details"
+msgstr "Просмотреть детали"
+
+msgid "Let's Get your Configuration Setup"
+msgstr "Давайте получим настройку конфигурации"
+
+msgid "Configurations Complete"
+msgstr "Конфигурации завершены"
+
+msgid "Welcome to JS Support Ticket"
+msgstr "Добро пожаловать в билет на поддержку JS"
+
+msgid "Lets Get Your Configurations Set Up"
+msgstr "Давайте настраиваем ваши конфигурации"
+
+msgid "Plugin Quick Settings"
+msgstr "Плагин быстрые настройки"
+
+msgid "Move to Dashboard"
+msgstr "Перейти на панель панели"
+
+msgid "You need to rename the existing data directory in file system before changing the data directory name"
+msgstr "Вам необходимо переименовать существующий каталог данных в файловой системе, прежде чем изменить имя каталога данных"
+
+msgid "URL for use with your own scripts and third party"
+msgstr "URL для использования со своими сценариями и третьей стороной"
