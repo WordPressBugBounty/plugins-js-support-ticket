@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 3.6\n"
+"X-Generator: Poedit 3.7\n"
 
 msgid "You are not allowed"
 msgstr "Nu ai dreptul"
@@ -2081,12 +2081,8 @@ msgstr "Pagina implicita"
 msgid "Select Page"
 msgstr "Selecteaza pagina"
 
-msgid ""
-"Select JS Help Desk default page, on the action system, will redirect on the selected page. If not select the default page, email links, and support icon might "
-"not work."
-msgstr ""
-"Selectați pagina implicită a JS Help Desk, pe sistemul de acțiune, va fi redirecționat pe pagina selectată. Dacă nu selectați pagina implicită, link-urile de e-"
-"mail și pictograma de asistență ar putea să nu funcționeze."
+msgid "Select JS Help Desk default page, on the action system, will redirect on the selected page. If not select the default page, email links, and support icon might not work."
+msgstr "Selectați pagina implicită a JS Help Desk, pe sistemul de acțiune, va fi redirecționat pe pagina selectată. Dacă nu selectați pagina implicită, link-urile de e-mail și pictograma de asistență ar putea să nu funcționeze."
 
 msgid "Support Icon"
 msgstr "Icoana tichet"
@@ -3628,13 +3624,11 @@ msgid "Wordpress Plugin"
 msgstr "Plugin Wordpress"
 
 msgid ""
-"JS Help Desk is a trusted open source ticket system. JS Help Desk is a simple, easy to use, web-based customer support system. Users can create a ticket from the "
-"front-end. JS Help Desk comes packed with lot features than most of the expensive(and complex) support ticket system on the market. The best part is, It "
-"completely free."
+"JS Help Desk is a trusted open source ticket system. JS Help Desk is a simple, easy to use, web-based customer support system. Users can create a ticket from the front-end. JS Help Desk comes packed with lot features than most of the "
+"expensive(and complex) support ticket system on the market. The best part is, It completely free."
 msgstr ""
-"JS Help Desk este un sistem de bilete open source de încredere. JS Help Desk este un sistem simplu, ușor de utilizat, bazat pe web. Utilizatorii pot crea un bilet "
-"din front-end. Serviciul de ajutor JS vine la pachet cu multe caracteristici decât cele mai scumpe (și complexe) sisteme de bilete de asistență de pe piață. Cea "
-"mai bună parte este, este complet gratuit."
+"JS Help Desk este un sistem de bilete open source de încredere. JS Help Desk este un sistem simplu, ușor de utilizat, bazat pe web. Utilizatorii pot crea un bilet din front-end. Serviciul de ajutor JS vine la pachet cu multe "
+"caracteristici decât cele mai scumpe (și complexe) sisteme de bilete de asistență de pe piață. Cea mai bună parte este, este complet gratuit."
 
 msgid "JS Help Desk Addon Installer"
 msgstr "JS Help Desk Installer Addon"
@@ -6319,8 +6313,7 @@ msgid "Add agents and assign roles and permissions to provide assistance and sup
 msgstr "Adăugați agenți și atribuiți roluri și permisiuni pentru a oferi asistență și suport pentru biletele de asistență pentru clienți."
 
 msgid "Define rules for ticket to auto close. Ticket will be auto close after specific interval of time which can be set by admin."
-msgstr ""
-"Definiți regulile pentru închiderea automată a biletului. Biletul se va închide automat după un anumit interval de timp care poate fi setat de administrator."
+msgstr "Definiți regulile pentru închiderea automată a biletului. Biletul se va închide automat după un anumit interval de timp care poate fi setat de administrator."
 
 msgid "Get the survey from your customers on ticket closing to improve your quality of services and assistance."
 msgstr "Obțineți sondajul clienților dvs. privind închiderea biletelor pentru a vă îmbunătăți calitatea serviciilor și asistenței."
@@ -6338,8 +6331,7 @@ msgid "Stop losing productivity on repetitive queries,Build your knowledge base,
 msgstr "Nu mai pierdeți productivitatea în interogările repetitive, Construiți-vă baza de cunoștințe, grupați soluțiile pe subiecte pentru a facilita utilizatorii."
 
 msgid "Enables admin to set N numbers of tickets for users to create and set N numbers of Ticket to open for agents separately."
-msgstr ""
-"Permite administratorului să seteze N numere de bilete pentru ca utilizatorii să creeze și să seteze N numere de Ticket să se deschidă pentru agenți separat."
+msgstr "Permite administratorului să seteze N numere de bilete pentru ca utilizatorii să creeze și să seteze N numere de Ticket să se deschidă pentru agenți separat."
 
 msgid "Multi Language Email Templates"
 msgstr "Șabloane de e-mail în mai multe limbi"
@@ -6366,9 +6358,7 @@ msgid "Save the ticket as a PDF in your system or the admin will also be able to
 msgstr "Salvați biletul ca PDF în sistemul dvs. sau administratorul va putea, de asemenea, să exporte toate datele din interiorul Ticket."
 
 msgid "Tired of getting tickets about the same problems? Add FAQs to drastically reduce the number of common questions from users."
-msgstr ""
-"V-ați săturat să obțineți bilete despre aceleași probleme? Adăugați întrebări frecvente pentru a reduce drastic numărul de întrebări frecvente din partea "
-"utilizatorilor."
+msgstr "V-ați săturat să obțineți bilete despre aceleași probleme? Adăugați întrebări frecvente pentru a reduce drastic numărul de întrebări frecvente din partea utilizatorilor."
 
 msgid "Admin Widgets"
 msgstr "Widgeturi de administrare"
@@ -6386,8 +6376,7 @@ msgid "Mail Chimp"
 msgstr "Mailchimp"
 
 msgid "The Mail Chimp add-on adds a new checkbox to the registration form for prompting new users to subscribe your email-list."
-msgstr ""
-"Suplimentul Mail Chimp adaugă o nouă casetă de selectare la formularul de înregistrare pentru a solicita noilor utilizatori să se aboneze la lista de e-mail."
+msgstr "Suplimentul Mail Chimp adaugă o nouă casetă de selectare la formularul de înregistrare pentru a solicita noilor utilizatori să se aboneze la lista de e-mail."
 
 msgid "EDD offers customers to open new tickets just one click from their EDD account with optionally validating the license keys."
 msgstr "EDD oferă clienților să deschidă bilete noi la doar un clic din contul lor EDD cu validarea opțională a cheilor de licență."
@@ -6411,8 +6400,7 @@ msgid "agent auto assign"
 msgstr "atribuire automată a agentului"
 
 msgid "When auto assignment is enabled and a ticket is created, an appropriate agent is automatically assigned to the ticket and it is moved to the Assigned state."
-msgstr ""
-"Când atribuirea automată este activată și este creat un bilet, un agent corespunzător este atribuit automat biletului și acesta este mutat în starea Asignat."
+msgstr "Când atribuirea automată este activată și este creat un bilet, un agent corespunzător este atribuit automat biletului și acesta este mutat în starea Asignat."
 
 msgid "Social Login"
 msgstr "Conectare socială"
@@ -7041,11 +7029,8 @@ msgstr "Adăugați acreditări"
 msgid "Edit Help Topic"
 msgstr "Editați subiectul de ajutor"
 
-msgid ""
-"e.g ' I have read and agree to the [link] Terms and Conditions[/link].  ' The text between [link] and [/link] will be linked to provided url or wordpress page."
-msgstr ""
-"de ex. „Am citit și sunt de acord cu [link] Termenii și condițiile[/link]. „ Textul dintre [link] și [/link] va fi legat la adresa URL furnizată sau la pagina "
-"wordpress."
+msgid "e.g ' I have read and agree to the [link] Terms and Conditions[/link].  ' The text between [link] and [/link] will be linked to provided url or wordpress page."
+msgstr "de ex. „Am citit și sunt de acord cu [link] Termenii și condițiile[/link]. „ Textul dintre [link] și [/link] va fi legat la adresa URL furnizată sau la pagina wordpress."
 
 msgid "login"
 msgstr "log in"
@@ -8402,3 +8387,381 @@ msgstr "Trebuie să redenumiți directorul de date existent în sistemul de fiș
 
 msgid "URL for use with your own scripts and third party"
 msgstr "URL pentru utilizare cu propriile scripturi și terți"
+
+msgid "Email template already exist"
+msgstr "Șablonul de e -mail există deja"
+
+msgid "JS HelpDesk System"
+msgstr "Sistem JS Helpdesk"
+
+msgid "JS HelpDesk"
+msgstr "JS Helpdesk"
+
+msgid "Main"
+msgstr "Principal"
+
+msgid "Ticket Management"
+msgstr "Managementul biletelor"
+
+msgid "User Management"
+msgstr "Gestionarea utilizatorului"
+
+msgid "Content & Knowledge"
+msgstr "Conținut și cunoștințe"
+
+msgid "Email & Communication"
+msgstr "Email și comunicare"
+
+msgid "Products & Sales"
+msgstr "Produse și vânzări"
+
+msgid "System & Settings"
+msgstr "Sistem și setări"
+
+msgid "No unused keys were found."
+msgstr "Nu au fost găsite chei neutilizate."
+
+msgid "unused key has been deleted successfully!"
+msgstr "Cheia neutilizată a fost ștersă cu succes!"
+
+msgid "unused keys have been deleted successfully!"
+msgstr "Tastele neutilizate au fost șterse cu succes!"
+
+msgid "XXXXX-XXXXX-XXXXX-XXXXX"
+msgstr "Xxxxx-xxxxx-xxxxx-xxxxx"
+
+msgid "Manage Unused Keys"
+msgstr "Gestionați tastele neutilizate"
+
+msgid "You have"
+msgstr "Aveți"
+
+msgid "unused key(s) that can be safely removed."
+msgstr "Cheia (cheile) neutilizate care pot fi eliminate în siguranță."
+
+msgid "Delete All Unused Keys"
+msgstr "Ștergeți toate tastele neutilizate"
+
+msgid "REPLIED_TICKET"
+msgstr "A răspuns_ticket"
+
+msgid "Tickets Over Time"
+msgstr "Bilete în timp"
+
+msgid "Welcome back to"
+msgstr "Bine ați venit înapoi la"
+
+msgid "As a visitor, you can easily create a support ticket by sharing your issue details."
+msgstr "În calitate de vizitator, puteți crea cu ușurință un bilet de asistență prin partajarea detaliilor problemei."
+
+msgid "Have an issue?"
+msgstr "Aveți o problemă?"
+
+msgid "Our support team is here to help. Create a new ticket to get started."
+msgstr "Echipa noastră de asistență este aici pentru a vă ajuta. Creați un bilet nou pentru a începe."
+
+msgid "Create New Ticket"
+msgstr "Creați bilet nou"
+
+msgid "Enter your information to check the status of your existing ticket."
+msgstr "Introduceți informațiile dvs. pentru a verifica starea biletului dvs. existent."
+
+msgid "Welcome back,"
+msgstr "Bine ai revenit,"
+
+msgid "open tickets"
+msgstr "Bilete deschise"
+
+msgid "No open ticket"
+msgstr "Fără bilet deschis"
+
+msgid ", and"
+msgstr ", și"
+
+msgid "is awaiting your reply."
+msgstr "vă așteaptă răspunsul."
+
+msgid "Need to assist a user?"
+msgstr "Trebuie să ajutați un utilizator?"
+
+msgid "Quickly create a new ticket on behalf of a user to provide support and track their request."
+msgstr "Creați rapid un bilet nou în numele unui utilizator pentru a oferi asistență și a urmări cererea lor."
+
+msgid "Open ticket for user"
+msgstr "Deschideți bilet pentru utilizator"
+
+msgid "OR Create a"
+msgstr "Sau creați un"
+
+msgid "Your Ticket Stats"
+msgstr "Statisticile biletelor"
+
+msgid "Open Tickets"
+msgstr "Bilete deschise"
+
+msgid "Closed Tickets"
+msgstr "Bilete închise"
+
+msgid "Overdue Tickets"
+msgstr "Bilete întârziate"
+
+msgid "Recent Tickets"
+msgstr "Bilete recente"
+
+msgid "You replied"
+msgstr "Ai răspuns"
+
+msgid "Reply from"
+msgstr "Răspunde de la"
+
+msgid "No replies yet"
+msgstr "Nu există încă răspunsuri"
+
+msgid "Customize"
+msgstr "Personalizați"
+
+msgid "Quick Actions"
+msgstr "Acțiuni rapide"
+
+msgid "Easily access your main tasks from here."
+msgstr "Accesați cu ușurință principalele sarcini de aici."
+
+msgid "Create a Ticket"
+msgstr "Creați un bilet"
+
+msgid "Here's a summary of today's ticket activity. This helps in tracking our daily progress and workload."
+msgstr "Iată un rezumat al activității biletelor de astăzi. Acest lucru ajută la urmărirea progresului nostru zilnic și a volumului nostru de muncă."
+
+msgid "Created Tickets"
+msgstr "Bilete create"
+
+msgid "Your activation key has expired."
+msgstr "Cheia dvs. de activare a expirat."
+
+msgid "Please reactivate your key to continue receiving product updates, addons, and support."
+msgstr "Vă rugăm să vă reactivați cheia pentru a continua să primiți actualizări, suplimente de produse și suport."
+
+msgid "Reactivate Activation Key"
+msgstr "Cheia de activare reactivată"
+
+msgid "Ticket Analysis (Last 7 Days)"
+msgstr "Analiza biletelor (ultimele 7 zile)"
+
+msgid "Priority:"
+msgstr "Prioritate:"
+
+msgid "No Recent Tickets"
+msgstr "Fără bilete recente"
+
+msgid "New tickets will be displayed in this section."
+msgstr "În această secțiune vor fi afișate bilete noi."
+
+msgid "All Tickets Assigned"
+msgstr "Toate biletele alocate"
+
+msgid "Great job! There are no unassigned tickets."
+msgstr "O treabă grozavă! Nu există bilete neasignate."
+
+msgid "Ticket updates and changes will appear here."
+msgstr "Actualizările și modificările biletelor vor apărea aici."
+
+msgid "Recently Replied"
+msgstr "A răspuns recent"
+
+msgid "No Replies Yet"
+msgstr "Nu există încă răspunsuri"
+
+msgid "Recently replied tickets will be shown here."
+msgstr "Biletele răspuns recent vor fi afișate aici."
+
+msgid "View All Replied Tickets"
+msgstr "Vizualizați toate biletele răspuns"
+
+msgid "Recently Closed"
+msgstr "Închis recent"
+
+msgid "No Closed Tickets"
+msgstr "Fără bilete închise"
+
+msgid "Recently closed tickets will be listed here."
+msgstr "Biletele închise recent vor fi listate aici."
+
+msgid "View All Closed Tickets"
+msgstr "Vizualizați toate biletele închise"
+
+msgid "Tickets by Priority"
+msgstr "Bilete după prioritate"
+
+msgid "Agent Performance"
+msgstr "Performanța agentului"
+
+msgid "Assigned"
+msgstr "Atribuit"
+
+msgid "No Agent Performance Data"
+msgstr "Fără date de performanță a agentului"
+
+msgid "Performance metrics will be displayed here."
+msgstr "Valorile de performanță vor fi afișate aici."
+
+msgid "Recent Canned Responses"
+msgstr "Răspunsuri recente din conserve"
+
+msgid "Recent canned responses will be listed here."
+msgstr "Răspunsuri recente din conserve vor fi listate aici."
+
+msgid "Active Timers"
+msgstr "Cronometre active"
+
+msgid "Timers started by agent will be shown here."
+msgstr "Cronometrele începute de agent vor fi afișate aici."
+
+msgid "No Customer Activity"
+msgstr "Fără activitate a clienților"
+
+msgid "Customers with the most tickets will be listed here."
+msgstr "Clienții cu cele mai multe bilete vor fi listați aici."
+
+msgid "Track the time spent on each ticket by each agent and each reply."
+msgstr "Urmăriți timpul petrecut pe fiecare bilet de fiecare agent și fiecare răspuns."
+
+msgid "Quick Installation Guide"
+msgstr "Ghid de instalare rapidă"
+
+msgid "How to setup of the Help Desk"
+msgstr "Cum să configurați biroul de asistență"
+
+msgid "Video thumbnail"
+msgstr "Miniatură video"
+
+msgid "Learn how to set up your Help Desk quickly and get it ready for use."
+msgstr "Aflați cum să vă configurați rapid biroul de asistență și pregătiți -l pentru utilizare."
+
+msgid "How to Setup System Emails"
+msgstr "Cum să configurați e -mailurile sistemului"
+
+msgid "Learn how to setup out going notification in the best Help Desk plugin for WordPress"
+msgstr "Aflați cum să configurați notificarea în pluginul pentru cel mai bun birou pentru WordPress"
+
+msgid "How to Create a Ticket"
+msgstr "Cum să creezi un bilet"
+
+msgid "A simple walkthrough of the ticket creation process for both user and administrator."
+msgstr "O simplă acțiune a procesului de creare a biletelor atât pentru utilizator, cât și pentru administrator."
+
+msgid "How to Set Email Notifications"
+msgstr "Cum să setați notificări prin e -mail"
+
+msgid "Configure your email notification settings to stay updated on ticket activity."
+msgstr "Configurați setările de notificare prin e -mail pentru a rămâne la curent cu activitatea biletelor."
+
+msgid "How to Setup Custom Fields"
+msgstr "Cum să configurați câmpuri personalizate"
+
+msgid "Learn how to add custom fields to your ticket forms to collect more specific information."
+msgstr "Aflați cum să adăugați câmpuri personalizate la formularele de bilet pentru a colecta mai multe informații specifice."
+
+msgid "Customize Dashboard"
+msgstr "Personalizați tabloul de bord"
+
+msgid "Todays Ticket Distribution"
+msgstr "Distribuția biletelor de astăzi"
+
+msgid "Number of Tickets"
+msgstr "Numărul de bilete"
+
+msgid "Yesterday"
+msgstr "Ieri"
+
+msgid "2 days ago"
+msgstr "Acum 2 zile"
+
+msgid "3 days ago"
+msgstr "Acum 3 zile"
+
+msgid "4 days ago"
+msgstr "Acum 4 zile"
+
+msgid "5 days ago"
+msgstr "Acum 5 zile"
+
+msgid "6+ days ago"
+msgstr "Acum 6 zile"
+
+msgid "Number of Open Tickets"
+msgstr "Numărul de bilete deschise"
+
+msgid "Email tempate has been deleted"
+msgstr "Șablonul de e -mail a fost șters"
+
+msgid "Email tempate has not been deleted"
+msgstr "Șablonul de e -mail nu a fost șters"
+
+msgid "Required Field(s) are not filled"
+msgstr "Câmpurile (câmpurile) necesare nu sunt completate"
+
+msgid "Default Email Template"
+msgstr "Șablon de e -mail implicit"
+
+msgid "This template is used for all forms and languages unless a specific custom template is created."
+msgstr "Acest șablon este utilizat pentru toate formele și limbile, cu excepția cazului în care este creat un șablon personalizat specific."
+
+msgid "This template is used for all forms unless a specific form template is created."
+msgstr "Acest șablon este utilizat pentru toate formele, cu excepția cazului în care se creează un șablon specific."
+
+msgid "This template is used for all languages unless a specific language template is created."
+msgstr "Acest șablon este utilizat pentru toate limbile, cu excepția cazului în care se creează un șablon de limbă specific."
+
+msgid "View/Edit Default Template"
+msgstr "Vizualizare/editați șablonul implicit"
+
+msgid "Form & Language-Specific Email Templates"
+msgstr "Formular și șabloane de e-mail specifice limbii"
+
+msgid "Form-Specific Email Templates"
+msgstr "Șabloane de e-mail specifice formularului"
+
+msgid "Language-Specific Email Templates"
+msgstr "Șabloane de e-mail specifice limbii"
+
+msgid "Customize email content for individual form, for specific language, or a combination of both. If no custom template exists for a given form or language, the default template will be used."
+msgstr "Personalizați conținutul de e -mail pentru formular individual, pentru un limbaj specific sau o combinație a ambelor. Dacă nu există un șablon personalizat pentru o anumită formă sau un limbaj, va fi utilizat șablonul implicit."
+
+msgid "Customize email content for individual form. If no custom template exists for a form, the default template will be used."
+msgstr "Personalizați conținutul de e -mail pentru formular individual. Dacă nu există un șablon personalizat pentru un formular, va fi utilizat șablonul implicit."
+
+msgid "Customize email content for specific language. If no custom template exists for a language, the default template will be used."
+msgstr "Personalizați conținutul de e -mail pentru un limbaj specific. Dacă nu există un șablon personalizat pentru o limbă, va fi utilizat șablonul implicit."
+
+msgid "-- Select a Form --"
+msgstr "-selectați un formular-"
+
+msgid "-- Select a Language --"
+msgstr "-selectați o limbă-"
+
+msgid "Create Template"
+msgstr "Creați șablon"
+
+msgid "Existing Custom Templates"
+msgstr "Șabloane personalizate existente"
+
+msgid "Form Name"
+msgstr "Numele formularului"
+
+msgid "Language"
+msgstr "Limbă"
+
+msgid "Preview"
+msgstr "Previzualizare"
+
+msgid "Form:"
+msgstr "Formă:"
+
+msgid "Language:"
+msgstr "Limbă:"
+
+msgid "Save & Next"
+msgstr "Salvați și următori"
+
+msgid "For enhanced security change encryption method in %1$s on line %2$s"
+msgstr "Pentru o metodă îmbunătățită de criptare a modificărilor de securitate în %1 $ s pe linie %2 $ s"

@@ -107,7 +107,7 @@ $tran_opt = JSSTincluder::getJSModel('jssupportticket')->getInstalledTranslation
                                 <div class="field">
                                     <?php echo wp_kses(JSSTformfield::text('title', isset(jssupportticket::$_data[0]['title']) ? jssupportticket::$_data[0]['title'] : '', array('class' => 'inputbox jsst-postsetting', 'data-validation' => 'required')), JSST_ALLOWED_TAGS) ?>
                                     <div class="desc">
-                                        <?php echo esc_html(__("Enter the site title")); ?>
+                                        <?php echo esc_html(__("Enter the site title", "js-support-ticket")); ?>
                                     </div>
                                 </div>
                             </div>
@@ -138,7 +138,7 @@ $tran_opt = JSSTincluder::getJSModel('jssupportticket')->getInstalledTranslation
                                 <div class="field">
                                     <?php echo wp_kses(JSSTformfield::text('ticket_auto_close', isset(jssupportticket::$_data[0]['ticket_auto_close']) ? jssupportticket::$_data[0]['ticket_auto_close'] : '', array('class' => 'inputbox jsst-postsetting', 'data-validation' => 'required')), JSST_ALLOWED_TAGS) ?>
                                     <div class="desc">
-                                        <?php echo esc_html(__("Ticket auto-close if user does not respond within given days")); ?>
+                                        <?php echo esc_html(__("Ticket auto-close if user does not respond within given days", "js-support-ticket")); ?>
                                     </div>
                                 </div>
                             </div>
@@ -149,7 +149,7 @@ $tran_opt = JSSTincluder::getJSModel('jssupportticket')->getInstalledTranslation
                                 <div class="field">
                                     <?php echo wp_kses(JSSTformfield::select('show_breadcrumbs', $showhide , isset(jssupportticket::$_data[0]['show_breadcrumbs']) ? jssupportticket::$_data[0]['show_breadcrumbs'] : '', '' , array('class' => 'inputbox jsst-postsetting js-select jsst-postsetting ')), JSST_ALLOWED_TAGS);?>
                                     <div class="desc">
-                                        <?php echo esc_html(__('Show navigation in breadcrumbs'); ?>&nbsp;
+                                        <?php echo esc_html(__("Show navigation in breadcrumbs", "js-support-ticket"); ?>&nbsp;
                                     </div>
                                 </div>
                             </div>*/?>
@@ -160,7 +160,7 @@ $tran_opt = JSSTincluder::getJSModel('jssupportticket')->getInstalledTranslation
                                 <div class="field">
                                     <?php echo wp_kses(JSSTformfield::text('file_maximum_size', isset(jssupportticket::$_data[0]['file_maximum_size']) ? jssupportticket::$_data[0]['file_maximum_size'] : '', array('class' => 'inputbox jsst-postsetting', 'data-validation' => 'required')), JSST_ALLOWED_TAGS) ?>
                                     <div class="desc">
-                                        <?php echo esc_html(__("Upload file size in KB's")); ?>
+                                        <?php echo esc_html(__("Upload file size in KB's", "js-support-ticket")); ?>
                                     </div>
                                 </div>
                             </div>
@@ -171,7 +171,7 @@ $tran_opt = JSSTincluder::getJSModel('jssupportticket')->getInstalledTranslation
                                 <div class="field">
                                     <?php echo wp_kses(JSSTformfield::textarea('file_extension', isset(jssupportticket::$_data[0]['file_extension']) ? jssupportticket::$_data[0]['file_extension'] : '', array('class' => 'inputbox js-textarea', 'data-validation' => 'required')), JSST_ALLOWED_TAGS) ?>
                                     <div class="desc">
-                                        <?php echo esc_html(__('Show navigation in breadcrumbs')); ?>&nbsp;
+                                        <?php echo esc_html(__("Show navigation in breadcrumbs", "js-support-ticket")); ?>&nbsp;
                                     </div>
                                 </div>
                             </div>
@@ -185,7 +185,7 @@ $tran_opt = JSSTincluder::getJSModel('jssupportticket')->getInstalledTranslation
                             </div>
                             <div class="pic-button-part">
                                 <a class="next-step full-width" href="#" onclick="document.getElementById('jssupportticket-form-ins').submit();" >
-                                    <?php echo esc_html(__('Next','js-support-ticket')); ?>
+                                    <?php echo esc_html(__('Save & Next','js-support-ticket')); ?>
                                         <img alt="image" src="<?php echo esc_url(JSST_PLUGIN_URL).'includes/images/postinstallation/next-arrow.png';?>">
                                 </a>
                             </div>

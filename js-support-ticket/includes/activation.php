@@ -182,6 +182,10 @@ class JSSTactivation {
                     ('cplink_latestannouncements_user', '2', 'cplink', 'announcement'),
                     ('cplink_latestkb_user', '2', 'cplink', 'knowledgebase'),
                     ('cplink_latestfaqs_user', '2', 'cplink', 'faq'),
+                    ('cplink_latestdownloads_staff', '2', 'cplink', 'download'),
+                    ('cplink_latestannouncements_staff', '2', 'cplink', 'announcement'),
+                    ('cplink_latestkb_staff', '2', 'cplink', 'knowledgebase'),
+                    ('cplink_latestfaqs_staff', '2', 'cplink', 'faq'),
                     ('cplink_knowledgebase_user', '2', 'cplink', 'knowledgebase'),
                     ('tplink_home_staff', '2', 'tplink', 'agent'),
                     ('tplink_tickets_staff', '2', 'tplink', 'agent'),
@@ -197,8 +201,8 @@ class JSSTactivation {
                     ('tplink_faqs_user', '0', 'tplink', 'faq'),
                     ('show_breadcrumbs', '1', 'default', NULL),
                     ('productcode', 'jsticket', 'default', NULL),
-                    ('versioncode', '2.9.9', 'default', NULL),
-                    ('productversion', '299', 'default', NULL),
+                    ('versioncode', '3.0.0', 'default', NULL),
+                    ('productversion', '300', 'default', NULL),
                     ('producttype', 'free', 'default', NULL),
                     ('tve_enabled', '2', 'default', NULL),
                     ('tve_mailreadtype', '3', 'default', NULL),
@@ -268,6 +272,7 @@ class JSSTactivation {
                     ('cplink_totalcount_staff', '2', 'cplink', 'agent'),
                     ('cplink_totalcount_user', '1', 'cplink', NULL),
                     ('cplink_ticketstats_staff', '2', 'cplink', 'agent'),
+                    ('cplink_ticketstats_user', '1', 'cplink', NULL),
                     ('tplink_login_logout_user', '1', 'tplink', NULL),
                     ('tplink_login_logout_staff', '1', 'tplink', NULL),
                     ('0d607e93d5af0655351743b41ed67944', '', 'firebase', 'notification'),
@@ -381,6 +386,7 @@ class JSSTactivation {
                                 `body` text,
                                 `created` datetime DEFAULT NULL,
                                 `status` tinyint(1) DEFAULT NULL,
+                                `multiformid` tinyint(4) DEFAULT NULL,
                                 PRIMARY KEY (`id`)
                                 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=26;";
             jssupportticket::$_db->query($query);

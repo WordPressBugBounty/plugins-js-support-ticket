@@ -28,7 +28,7 @@ if (jssupportticket::$_config['offline'] == 2) {
             <div class="js-ticket-add-form-wrapper">
                 <?php jsst_show_error_messages();?> <!-- show any error messages after form submission -->
                 <form id="jsst_registration_form" class="jsst_form" action="" method="POST">
-                    <div class="js-ticket-from-field-wrp js-ticket-from-field-wrp-full-width">
+                    <div class="js-ticket-from-field-wrp">
                         <div class="js-ticket-from-field-title">
                             <?php echo esc_html(__('Username','js-support-ticket')); ?> <span style="color:red">*</span>
                         </div>
@@ -36,7 +36,7 @@ if (jssupportticket::$_config['offline'] == 2) {
                             <input name="jsst_user_login" id="jsst_user_login" class="required js-ticket-form-field-input" type="text" data-validation="required"/>
                         </div>
                     </div>
-                    <div class="js-ticket-from-field-wrp js-ticket-from-field-wrp-full-width">
+                    <div class="js-ticket-from-field-wrp">
                         <div class="js-ticket-from-field-title">
                             <?php echo esc_html(__('Email','js-support-ticket')); ?> <span style="color:red">*</span>
                         </div>
@@ -44,7 +44,7 @@ if (jssupportticket::$_config['offline'] == 2) {
                            <input name="jsst_user_email" id="jsst_user_email" class="required js-ticket-form-field-input" type="text" data-validation="required"/>
                         </div>
                     </div>
-                    <div class="js-ticket-from-field-wrp js-ticket-from-field-wrp-full-width">
+                    <div class="js-ticket-from-field-wrp">
                         <div class="js-ticket-from-field-title">
                             <?php echo esc_html(__('First Name','js-support-ticket')); ?>
                         </div>
@@ -52,7 +52,7 @@ if (jssupportticket::$_config['offline'] == 2) {
                            <input name="jsst_user_first" id="jsst_user_first" class="required js-ticket-form-field-input" type="text"/>
                         </div>
                     </div>
-                    <div class="js-ticket-from-field-wrp js-ticket-from-field-wrp-full-width">
+                    <div class="js-ticket-from-field-wrp">
                         <div class="js-ticket-from-field-title">
                             <?php echo esc_html(__('Last Name','js-support-ticket')); ?>
                         </div>
@@ -60,7 +60,7 @@ if (jssupportticket::$_config['offline'] == 2) {
                            <input name="jsst_user_last" id="jsst_user_last" class="required js-ticket-form-field-input" type="text"/>
                         </div>
                     </div>
-                    <div class="js-ticket-from-field-wrp js-ticket-from-field-wrp-full-width">
+                    <div class="js-ticket-from-field-wrp">
                         <div class="js-ticket-from-field-title">
                             <?php echo esc_html(__('Password','js-support-ticket')); ?> <span style="color:red">*</span>
                         </div>
@@ -68,7 +68,7 @@ if (jssupportticket::$_config['offline'] == 2) {
                             <input name="jsst_user_pass" id="password" class="required js-ticket-form-field-input" type="password" data-validation="required"/>
                         </div>
                     </div>
-                    <div class="js-ticket-from-field-wrp js-ticket-from-field-wrp-full-width">
+                    <div class="js-ticket-from-field-wrp">
                         <div class="js-ticket-from-field-title">
                             <?php echo esc_html(__('Repeat Password','js-support-ticket')); ?> <span style="color:red">*</span>
                         </div>
@@ -80,7 +80,7 @@ if (jssupportticket::$_config['offline'] == 2) {
                     <?php
                     if(in_array('mailchimp',jssupportticket::$_active_addons)){
                         ?>
-                        <div class="js-ticket-from-field-wrp js-ticket-from-field-wrp-full-width">
+                        <div class="js-ticket-from-field-wrp">
                             <div class="js-ticket-from-field">
                                 <label class="js-ticket-subscribe">
                                     <input name="jsst_mailchimp_subscribe" id="jsst_mailchimp_subscribe" value="1" class="" type="checkbox"/>
@@ -96,7 +96,7 @@ if (jssupportticket::$_config['offline'] == 2) {
                     }
                     $google_recaptcha_3 = false;
                     if (jssupportticket::$_config['captcha_on_registration'] == 1) { ?>
-                        <div class="js-ticket-from-field-wrp js-ticket-from-field-wrp-full-width">
+                        <div class="js-ticket-from-field-wrp">
                             <div class="js-ticket-from-field-title">
                                 <?php echo esc_html(__('Captcha', 'js-support-ticket')); ?>
                             </div>

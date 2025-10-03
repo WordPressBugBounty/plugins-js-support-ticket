@@ -73,7 +73,7 @@ $type = array(
                                      <?php echo wp_kses(JSSTformfield::select('feedback_email_delay_type', $type , isset(jssupportticket::$_data[0]['feedback_email_delay_type']) ? jssupportticket::$_data[0]['feedback_email_delay_type'] : '', esc_html(__('Select Type', 'js-support-ticket')) , array('class' => 'inputbox jsst-postsetting js-select jsst-postsetting ')), JSST_ALLOWED_TAGS);?>
                                 </div>
                                 <div class="desc">
-                                    <?php echo esc_html(__('Set Email Delay Time')); ?>
+                                    <?php echo esc_html(__('Set Email Delay Time', "js-support-ticket")); ?>
                                 </div>
                             </div>
                             <div class="pic-config">
@@ -89,7 +89,7 @@ $type = array(
                             </div>
                              <div class="pic-button-part">
                                 <a class="next-step" href="#" onclick="document.getElementById('jssupportticket-form-ins').submit();" >
-                                    <?php echo esc_html(__('Next','js-support-ticket')); ?>
+                                    <?php echo esc_html(__('Save & Next','js-support-ticket')); ?>
                                      <img alt="image" src="<?php echo esc_url(JSST_PLUGIN_URL).'includes/images/postinstallation/next-arrow.png';?>">
                                 </a>
                                 <a class="back" href="<?php echo esc_url(admin_url('admin.php?page=postinstallation&jstlay=steptwo')); ?>">

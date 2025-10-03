@@ -49,19 +49,19 @@ if(!defined('ABSPATH'))
 
             // plugin data
             $plguins_array['awesome-support'] = [];
-            $plguins_array['awesome-support']['name'] = esc_html(__('Awesome Support','js-support-ticket'));
+            $plguins_array['awesome-support']['name'] = esc_html('Awesome Support');
             $plguins_array['awesome-support']['path'] = "awesome-support/awesome-support.php"; // needed to check if plugin is active
             $plguins_array['awesome-support']['internalid'] = 2; // value used to identfy the plugin
 
             // plugin data
             $plguins_array['supportcandy'] = [];
-            $plguins_array['supportcandy']['name'] = esc_html(__('SupportCandy','js-support-ticket'));
+            $plguins_array['supportcandy']['name'] = esc_html('SupportCandy');
             $plguins_array['supportcandy']['path'] = "supportcandy/supportcandy.php";  // needed to check if plugin is active
             $plguins_array['supportcandy']['internalid'] = 1; // value used to identfy the plugin
 
             // plugin data
             $plguins_array['fluent-support'] = [];
-            $plguins_array['fluent-support']['name'] = esc_html(__('Fluent Support','js-support-ticket'));
+            $plguins_array['fluent-support']['name'] = esc_html('Fluent Support');
             $plguins_array['fluent-support']['path'] = "fluent-support/fluent-support.php"; // needed to check if plugin is active
             $plguins_array['fluent-support']['internalid'] = 3; // value used to identfy the plugin
 
@@ -70,25 +70,18 @@ if(!defined('ABSPATH'))
                 // check if Plugin is active
                 if($count_for != $plugin['internalid']) {
                     $extr_clss = 'jsst-plugin-notinstalled';
-                    if ( is_plugin_active( $plugin['path'] ) && $plugin['name'] == 'SupportCandy') {
+                    if ( is_plugin_active( $plugin['path'] )) {
                         $extr_clss = '';
                     } ?>
                     <div class="jsst-plugins-imprt-datasec <?php echo esc_attr($extr_clss);?>">
                         <span class="jsst-plugins-imprt-data-plgnnme"><?php echo esc_html($plugin['name']); ?></span>
-                        <?php if ($plugin['name'] === 'SupportCandy') { ?>
-                            <?php if($extr_clss != ''){ ?>
-                                <span class="jsst-plugins-imprt-databtn">
-                                    <img class="jsst-plugins-imprterror-image" alt="<?php echo esc_html(__('icon','js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/imprt-icon.png" />
-                                    <?php echo esc_html(__('Plugin not installed','js-support-ticket')); ?>
-                                </span>
-                            <?php }else{ ?>
-                                <a class="jsst-plugins-imprt-databtn" href="<?php echo esc_url_raw(admin_url("admin.php?page=thirdpartyimport&jstlay=importdata&selected_plugin=".$plugin['internalid'])); ?>" title="<?php echo esc_html(__('Fetch Data','js-support-ticket')); ?>"><?php echo esc_html(__('Fetch Data','js-support-ticket')); ?></a>
-                            <?php } ?>
-                        <?php } else{ ?>
+                        <?php if($extr_clss != ''){ ?>
                             <span class="jsst-plugins-imprt-databtn">
                                 <img class="jsst-plugins-imprterror-image" alt="<?php echo esc_html(__('icon','js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/imprt-icon.png" />
-                                <?php echo esc_html(__('Coming Soon','js-support-ticket')); ?>
+                                <?php echo esc_html(__('Plugin not installed','js-support-ticket')); ?>
                             </span>
+                        <?php }else{ ?>
+                            <a class="jsst-plugins-imprt-databtn" href="<?php echo esc_url_raw(admin_url("admin.php?page=thirdpartyimport&jstlay=importdata&selected_plugin=".$plugin['internalid'])); ?>" title="<?php echo esc_html(__('Fetch Data','js-support-ticket')); ?>"><?php echo esc_html(__('Fetch Data','js-support-ticket')); ?></a>
                         <?php } ?>
                     </div>
                     <?php

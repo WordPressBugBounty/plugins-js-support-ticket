@@ -28,6 +28,7 @@ class JSSTpremiumpluginController {
                     jssupportticket::$_data['token'] = JSSTrequest::getVar('token');
                     jssupportticket::$_data['extra_addons'] = JSSTrequest::getVar('extraaddons');
                     jssupportticket::$_data['allowed_addons'] = JSSTrequest::getVar('allowedaddons');
+                    jssupportticket::$_data['unused_keys'] = JSSTincluder::getJSModel('premiumplugin')->jssupportticket_count_unused_keys();
                     break;
                 case 'admin_missingaddon':
                     break;
@@ -222,6 +223,26 @@ class JSSTpremiumpluginController {
             }
         }else{
             JSSTmessage::setMessage(esc_html(__('Please insert activation key to proceed', 'js-support-ticket')),'error');
+        }
+        $url = admin_url("admin.php?page=premiumplugin&jstlay=updatekey");
+        wp_redirect($url);
+        return;
+    }
+
+    function jssupportticket_remove_unused_keys() {
+        $nonce = JSSTrequest::getVar('_wpnonce');
+        if (! wp_verify_nonce( $nonce, 'delete-transaction-key') ) {
+            die( 'Security check Failed' );
+        }
+
+        $deleted = JSSTincluder::getJSModel('premiumplugin')->jssupportticket_remove_unused_keys();
+
+        if ($deleted === 0) {
+            JSSTmessage::setMessage(esc_html(__('No unused keys were found.', 'js-support-ticket')),'error');
+        } elseif ($deleted === 1) {
+            JSSTmessage::setMessage(esc_html($deleted . ' ' . __('unused key has been deleted successfully!', 'js-support-ticket')),'updated');
+        } else {
+            JSSTmessage::setMessage(esc_html($deleted . ' ' . __('unused keys have been deleted successfully!', 'js-support-ticket')),'updated');
         }
         $url = admin_url("admin.php?page=premiumplugin&jstlay=updatekey");
         wp_redirect($url);

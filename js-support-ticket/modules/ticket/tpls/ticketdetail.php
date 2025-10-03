@@ -1029,7 +1029,7 @@ if (jssupportticket::$_config['offline'] == 2) {
 											}else{
 												if (jssupportticket::$_config['anonymous_name_on_ticket_reply'] == 1) { 
 													$historymessage = $history->message;
-													echo wp_kses_post(jssupportticketphplib::JSST_preg_replace("/\([^)]+\)/","( ".__("Agent")." )",$historymessage));
+													echo wp_kses_post(jssupportticketphplib::JSST_preg_replace("/\([^)]+\)/","( ".__("Agent", "js-support-ticket")." )",$historymessage));
 												}else{
 													echo wp_kses_post($history->message); 
 												}
@@ -1151,7 +1151,7 @@ if (jssupportticket::$_config['offline'] == 2) {
         <span style="display:none" id="fileext"><?php echo esc_html(__('The uploaded file extension not valid', 'js-support-ticket')); ?></span>
         <div class="jsst-popup-background" style="display:none" ></div>
         <div class="internalnote-popup-background" style="display:none" ></div>
-        <div id="popup-record-data" style="display:inline-block;width:100%;"></div>
+        <div id="popup-record-data" style="display:flex;flex-wrap:wrap; width:100%;"></div>
         <div id="jsst-popup-wrapper" class="jsst-popup-wrapper" style="display:none" ><!-- Js Ticket Edit Time Popups -->
             <div class="jsst-popup-header" >
                 <div class="popup-header-text" >
@@ -1498,9 +1498,10 @@ if (jssupportticket::$_config['offline'] == 2) {
                                     } ?>
                                 </div>
                             </div>
-                            <div class="js-tkt-det-other-tkt"><!-- Ticket Detail View Btn -->
-                                <?php
-                                if(isset(jssupportticket::$_data['nticket'])){
+                            <?php
+                            if(isset(jssupportticket::$_data['nticket'])){ ?>
+                                <div class="js-tkt-det-other-tkt"><!-- Ticket Detail View Btn -->
+                                    <?php
                                     if(in_array('agent',jssupportticket::$_active_addons) && JSSTincluder::getJSModel('agent')->isUserStaff()){
                                         $url = jssupportticket::makeUrl(array('jstmod'=>'agent','jstlay'=>'staffmyticket','uid'=>jssupportticket::$_data[0]->uid));
                                     }else{
@@ -1516,10 +1517,9 @@ if (jssupportticket::$_config['offline'] == 2) {
                                         }
                                         ?>
                                     </a>
-                                    <?php
-                                }
-                                ?>
-                            </div>
+                                </div>
+                                <?php
+                            } ?>
                             <!-- Ticket Detail Message -->
                             <!-- Removed to avoid duplicate display; shown below in the ticket thread. -->
                             <?php /* echo wp_kses_post(jssupportticket::$_data[0]->message); */ ?>
@@ -1536,7 +1536,7 @@ if (jssupportticket::$_config['offline'] == 2) {
                                             ?>
                                             <div class="js-tkt-det-info-data">
                                                 <div class="js-tkt-det-info-tit">
-                                                    <?php echo wp_kses($ret['title'], JSST_ALLOWED_TAGS).' : '; ?>
+                                                    <?php echo wp_kses($ret['title'], JSST_ALLOWED_TAGS).': '; ?>
                                                 </div>
                                                 <div class="js-tkt-det-info-val">
                                                     <?php echo wp_kses($ret['value'], JSST_ALLOWED_TAGS); ?>
@@ -1773,7 +1773,7 @@ if (jssupportticket::$_config['offline'] == 2) {
                                                 <?php if (isset($note->title) && $note->title != '') { ?>
                                                     <div class="js-ticket-rows-wrp" >
                                                         <div class="js-ticket-field-value">
-                                                            <span class="js-ticket-field-value-t"><?php echo esc_html($field_array['subject']).' : '; ?></span><?php echo esc_html($note->title); ?></div>
+                                                            <span class="js-ticket-field-value-t"><?php echo esc_html($field_array['subject']).': '; ?></span><?php echo esc_html($note->title); ?></div>
                                                     </div>
                                                 <?php } ?>
                                                 <div class="js-ticket-rows-wrp" >
@@ -2051,22 +2051,24 @@ if (jssupportticket::$_config['offline'] == 2) {
                                                                 $reply->uid != 0) { ?>
                                                                 <!-- This section contains the AI Reply Feature -->
                                                                 <div class="js-ticket-ai-reply-status-wrapper">
-                                                                    <label for="js-ticket-ai-reply-status-control">
-                                                                        <?php echo esc_html__('AI-Powered Reply Mode', 'js-support-ticket').':'; ?>
-                                                                    </label>
-                                                                    <div class="js-ticket-info-icon-wrapper">
-                                                                        <span class="js-ticket-info-icon" data-tooltip="<?php echo esc_html(__("Control how this individual reply influences the AI search and response generation process for future queries.",'js-support-ticket')); ?>">
-                                                                            <img alt="<?php echo esc_html(__('Info','js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/ticket-detail/info-icon.png" />
-                                                                        </span>
+                                                                    <div class="js-ticket-ai-reply-status-control-wrp">
+                                                                        <label for="js-ticket-ai-reply-status-control">
+                                                                            <?php echo esc_html__('AI-Powered Reply Mode', 'js-support-ticket').':'; ?>
+                                                                        </label>
+                                                                        <div class="js-ticket-info-icon-wrapper">
+                                                                            <span class="js-ticket-info-icon" data-tooltip="<?php echo esc_html(__("Control how this individual reply influences the AI search and response generation process for future queries.",'js-support-ticket')); ?>">
+                                                                                <img alt="<?php echo esc_html(__('Info','js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/ticket-detail/info-icon.png" />
+                                                                            </span>
+                                                                        </div>
                                                                     </div>
                                                                     <div id="js-ticket-ai-reply-status-control" class="js-ticket-segmented-control">
-                                                                        <button type="button" class="js-ticket-segmented-control-option js-ticket-default <?php echo ($reply->aireplymode == 0) ? 'active' : ''; ?>" data-value="0" data-type="reply" data-id="<?php echo $reply->replyid;?>" title="<?php echo __("Default: reply included in all AI search queries.", "js-support-ticket"); ?>">
-                                                                            <?php echo esc_html__('Default', 'js-support-ticket'); ?>
-                                                                        </button>
-                                                                        <button type="button" class="js-ticket-segmented-control-option js-ticket-enable <?php echo ($reply->aireplymode == 1) ? 'active' : ''; ?>" data-value="1" data-type="reply" data-id="<?php echo $reply->replyid;?>" title="<?php echo __("Enable: reply used in AI queries only when the Enable Tickets filter is active.", "js-support-ticket"); ?>">
+                                                                        <button type="button" class="js-ticket-segmented-control-option js-ticket-default <?php echo ( intval( $reply->aireplymode ) === 0 ) ? 'active' : ''; ?>" data-value="0" data-type="reply" data-id="<?php echo esc_attr( $reply->replyid ); ?>" title="<?php echo esc_attr(__( "Default: reply included in all AI search queries.", "js-support-ticket" ) ); ?>">
+                                                                        <?php echo esc_html__( 'Default', 'js-support-ticket' ); ?>
+                                                                    </button>
+                                                                    <button type="button" class="js-ticket-segmented-control-option js-ticket-enable <?php echo ( intval( $reply->aireplymode ) === 1 ) ? 'active' : ''; ?>" data-value="1" data-type="reply" data-id="<?php echo esc_attr( $reply->replyid ); ?>" title="<?php echo esc_attr(__( "Enable: reply used in AI queries only when the Enable Tickets filter is active.", "js-support-ticket" ) ); ?>">
                                                                             <?php echo esc_html__('Enable', 'js-support-ticket'); ?>
                                                                         </button>
-                                                                        <button type="button" class="js-ticket-segmented-control-option js-ticket-disable <?php echo ($reply->aireplymode == 2) ? 'active' : ''; ?>" data-value="2" data-type="reply" data-id="<?php echo $reply->replyid;?>">
+                                                                        <button type="button" class="js-ticket-segmented-control-option js-ticket-disable <?php echo ( intval( $reply->aireplymode ) === 2 ) ? 'active' : ''; ?>" data-value="2" data-type="reply" data-id="<?php echo esc_attr( $reply->replyid ); ?>">
                                                                             <?php echo esc_html__('Disable', 'js-support-ticket'); ?>
                                                                         </button>
                                                                     </div>
@@ -2081,7 +2083,7 @@ if (jssupportticket::$_config['offline'] == 2) {
                                                                 if(JSSTincluder::getJSModel('userpermissions')->checkPermissionGrantedForTask('Edit Reply') && jssupportticket::$_data[0]->status != 6){
                                                                     $nonce = wp_create_nonce('get-reply-data-by-id-'.$reply->replyid); ?>
                                                                     <a class="js-ticket-thread-actn-btn ticket-edit-reply-button" href="#" onclick="return showPopupAndFillValues(<?php echo esc_js($reply->replyid);?>,1, '<?php echo esc_js($nonce);?>')" >
-                                                                        <img alt="image" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/ticket-detail/edit-reply.png" />
+                                                                        <img alt="image" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/ticket-detail/edit-time.png" />
                                                                         <?php echo esc_html(__('Edit Reply','js-support-ticket'));?>
                                                                     </a>
                                                                     <?php
@@ -2090,7 +2092,7 @@ if (jssupportticket::$_config['offline'] == 2) {
                                                                     if(JSSTincluder::getJSModel('userpermissions')->checkPermissionGrantedForTask('Edit Time') && jssupportticket::$_data[0]->status != 6){
                                                                         $nonce = wp_create_nonce('get-time-by-reply-id-'.$reply->replyid); ?>
                                                                         <a class="js-ticket-thread-actn-btn ticket-edit-time-button" href="#" onclick="return showPopupAndFillValues(<?php echo esc_js($reply->replyid);?>,2, '<?php echo esc_js($nonce);?>')" >
-                                                                            <img alt="image" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/ticket-detail/edit-reply.png" />
+                                                                            <img alt="image" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/ticket-detail/edit-time.png" />
                                                                             <?php echo esc_html(__('Edit Time','js-support-ticket'));?>
                                                                         </a>
                                                                         <?php
@@ -2241,22 +2243,24 @@ if (jssupportticket::$_config['offline'] == 2) {
                                                         <div class="js-ticket-ai-powered-reply-icon">
                                                             <img alt="<?php echo esc_html(__('AI Icon','js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/ticket-detail/ai-icon.png" />
                                                         </div>
-                                                        <div class="js-ticket-ai-powered-reply-content">
-                                                            <div class="js-ticket-ai-powered-reply-title">
-                                                                <?php echo esc_html__('AI-Powered Reply', 'js-support-ticket'); ?>
+                                                        <div class="js-ticket-ai-powered-reply-content-wrp">
+                                                            <div class="js-ticket-ai-powered-reply-content">
+                                                                <div class="js-ticket-ai-powered-reply-title">
+                                                                    <?php echo esc_html__('AI-Powered Reply', 'js-support-ticket'); ?>
+                                                                </div>
+                                                                <div class="js-ticket-ai-powered-reply-text">
+                                                                    <?php echo esc_html__('Get context-aware suggestions for your response.', 'js-support-ticket'); ?>
+                                                                </div>
                                                             </div>
-                                                            <div class="js-ticket-ai-powered-reply-text">
-                                                                <?php echo esc_html__('Get context-aware suggestions for your response.', 'js-support-ticket'); ?>
+                                                            <div id="js-ticket-ai-reply-btn" class="js-ticket-ai-powered-reply-action">
+                                                                <a href="#" class="js-ticket-ai-powered-reply-button">
+                                                                    <?php echo esc_html__('Suggested Response', 'js-support-ticket'); ?>
+                                                                </a>
                                                             </div>
-                                                        </div>
-                                                        <div id="js-ticket-ai-reply-btn" class="js-ticket-ai-powered-reply-action">
-                                                            <a href="#" class="js-ticket-ai-powered-reply-button">
-                                                                <?php echo esc_html__('Suggested Response', 'js-support-ticket'); ?>
-                                                            </a>
                                                         </div>
                                                     </div>
-                                                    <span class="js-ticket-current-ticket-title"><?php echo jssupportticket::$_data[0]->subject ?></span>
-                                                    <span class="js-ticket-current-ticket-id"><?php echo jssupportticket::$_data[0]->id ?></span>
+                                                    <span class="js-ticket-current-ticket-title"><?php echo esc_html( jssupportticket::$_data[0]->subject ); ?></span>
+                                                    <span class="js-ticket-current-ticket-id"><?php echo esc_html( jssupportticket::$_data[0]->id ); ?></span>
                                                     <div class="js-ticket-container">
                                                         <!-- Matching Tickets Section -->
                                                         <div id="js-ticket-matching-tickets-section" class="js-ticket-section js-ticket-matching-tickets-section js-ticket-hidden">
@@ -2407,7 +2411,7 @@ if (jssupportticket::$_config['offline'] == 2) {
                                     $bgcolor = '#5bb12f';
                                     $color = '#FFFFFF';
                                 } else {
-                                    $ticketmessage = esc_html(jssupportticket::$_data[0]->statustitle);
+                                    $ticketmessage = esc_html(jssupportticket::JSST_getVarValue(jssupportticket::$_data[0]->statustitle));
                                     $bgcolor = jssupportticket::$_data[0]->statusbgcolour;
                                     $color = jssupportticket::$_data[0]->statuscolour;
                                 }
@@ -2426,7 +2430,7 @@ if (jssupportticket::$_config['offline'] == 2) {
                                 </div>
                                 <div class="js-tkt-det-info-data">
                                     <div class="js-tkt-det-info-tit">
-                                       <?php echo esc_html(__('Last Reply','js-support-ticket')); ?><?php echo esc_html(__(' :','js-support-ticket'));?>
+                                       <?php echo esc_html(__('Last Reply','js-support-ticket')); ?><?php echo esc_html(__(': ','js-support-ticket'));?>
                                     </div>
                                     <div class="js-tkt-det-info-val">
                                        <?php if (empty(jssupportticket::$_data[0]->lastreply) || jssupportticket::$_data[0]->lastreply == '0000-00-00 00:00:00') echo esc_html(__('No Last Reply', 'js-support-ticket'));
@@ -2438,7 +2442,7 @@ if (jssupportticket::$_config['offline'] == 2) {
                                 if (isset($field_array['department'])) { ?>
                                     <div class="js-tkt-det-info-data">
                                         <div class="js-tkt-det-info-tit">
-                                            <?php echo esc_html(jssupportticket::JSST_getVarValue($field_array['department'])); ?><?php echo esc_html(__(' :','js-support-ticket'));?>
+                                            <?php echo esc_html(jssupportticket::JSST_getVarValue($field_array['department'])); ?><?php echo esc_html(__(': ','js-support-ticket'));?>
                                         </div>
                                         <div class="js-tkt-det-info-val">
                                             <?php echo esc_html(jssupportticket::JSST_getVarValue(jssupportticket::$_data[0]->departmentname)); ?>
@@ -2454,7 +2458,7 @@ if (jssupportticket::$_config['offline'] == 2) {
                                 if (jssupportticket::$_config['show_closedby_on_' . $configname . '_tickets'] == 1 && jssupportticket::$_data[0]->status == 5) { ?>
                                     <div class="js-tkt-det-info-data">
                                         <div class="js-tkt-det-info-tit">
-                                            <?php echo esc_html(__('Closed By','js-support-ticket')). ' : '; ?>
+                                            <?php echo esc_html(__('Closed By','js-support-ticket')). ': '; ?>
                                         </div>
                                         <div class="js-tkt-det-info-val">
                                             <?php echo esc_html(JSSTincluder::getJSModel('ticket')->getClosedBy(jssupportticket::$_data[0]->closedby)); ?>
@@ -2462,7 +2466,7 @@ if (jssupportticket::$_config['offline'] == 2) {
                                     </div>
                                     <div class="js-tkt-det-info-data">
                                         <div class="js-tkt-det-info-tit">
-                                            <?php echo esc_html(__('Closed On','js-support-ticket')). ' : '; ?>
+                                            <?php echo esc_html(__('Closed On','js-support-ticket')). ': '; ?>
                                         </div>
                                         <div class="js-tkt-det-info-val">
                                             <?php echo esc_html(date_i18n(jssupportticket::$_config['date_format'], jssupportticketphplib::JSST_strtotime(jssupportticket::$_data[0]->closed))); ?>
@@ -2471,7 +2475,7 @@ if (jssupportticket::$_config['offline'] == 2) {
                                 <?php } ?>
                                 <div class="js-tkt-det-info-data">
                                     <div class="js-tkt-det-info-tit">
-                                       <?php echo esc_html(__('Ticket ID', 'js-support-ticket')); ?><?php echo esc_html(__(' :','js-support-ticket'));?>
+                                       <?php echo esc_html(__('Ticket ID', 'js-support-ticket')); ?><?php echo esc_html(__(': ','js-support-ticket'));?>
                                     </div>
                                     <div class="js-tkt-det-info-val">
                                        <?php echo esc_html(jssupportticket::$_data[0]->ticketid); ?>
@@ -2482,7 +2486,7 @@ if (jssupportticket::$_config['offline'] == 2) {
                                 if(isset($field_array['helptopic']) && in_array('helptopic', jssupportticket::$_active_addons)){ ?>
                                     <div class="js-tkt-det-info-data">
                                         <div class="js-tkt-det-info-tit">
-                                            <?php echo esc_html(jssupportticket::JSST_getVarValue($field_array['helptopic'])); ?><?php echo esc_html(__(' :','js-support-ticket'));?>
+                                            <?php echo esc_html(jssupportticket::JSST_getVarValue($field_array['helptopic'])); ?><?php echo esc_html(__(': ','js-support-ticket'));?>
                                         </div>
                                         <div class="js-tkt-det-info-val">
                                             <?php echo esc_html(jssupportticket::JSST_getVarValue(jssupportticket::$_data[0]->helptopic)); ?>
@@ -2493,7 +2497,7 @@ if (jssupportticket::$_config['offline'] == 2) {
                                 if(isset($field_array['product'])){ ?>
                                     <div class="js-tkt-det-info-data">
                                         <div class="js-tkt-det-info-tit">
-                                            <?php echo esc_html(jssupportticket::JSST_getVarValue($field_array['product'])); ?><?php echo esc_html(__(' :','js-support-ticket'));?>
+                                            <?php echo esc_html(jssupportticket::JSST_getVarValue($field_array['product'])); ?><?php echo esc_html(__(': ','js-support-ticket'));?>
                                         </div>
                                         <div class="js-tkt-det-info-val">
                                             <?php echo esc_html(jssupportticket::JSST_getVarValue(jssupportticket::$_data[0]->producttitle)); ?>
@@ -2502,7 +2506,7 @@ if (jssupportticket::$_config['offline'] == 2) {
                                 <?php } ?>
                                 <div class="js-tkt-det-info-data">
                                     <div class="js-tkt-det-info-tit">
-                                       <?php echo esc_html(__('Status', 'js-support-ticket')); ?><?php echo esc_html(__(' :','js-support-ticket'));?>
+                                       <?php echo esc_html(__('Status', 'js-support-ticket')); ?><?php echo esc_html(__(': ','js-support-ticket'));?>
                                     </div>
                                     <div class="js-tkt-det-info-val">
                                        <?php
@@ -2603,13 +2607,13 @@ if (jssupportticket::$_config['offline'] == 2) {
                                 
                                 <div class="js-tkt-det-tkt-prty-txt js-ticket-segmented-control-wrp">
                                     <div id="js-ticket-ai-reply-status-control" class="js-ticket-segmented-control">
-                                        <button type="button" class="js-ticket-segmented-control-option js-ticket-default <?php echo (jssupportticket::$_data[0]->aireplymode == 0) ? 'active' : ''; ?>" data-value="0" data-type="ticket" data-id="<?php echo jssupportticket::$_data[0]->id;?>" title="<?php echo __("Default: ticket and replies included in all AI queries.", "js-support-ticket"); ?>">
+                                        <button type="button" class="js-ticket-segmented-control-option js-ticket-default <?php echo ( absint( jssupportticket::$_data[0]->aireplymode ) === 0 ) ? 'active' : ''; ?>" data-value="0" data-type="ticket" data-id="<?php echo esc_attr( jssupportticket::$_data[0]->id ); ?>" title="<?php echo esc_attr(__( "Default: ticket and replies included in all AI queries.", "js-support-ticket" ) ); ?>">
                                             <?php echo esc_html__('Default', 'js-support-ticket'); ?>
                                         </button>
-                                        <button data-type="ticket" type="button" class="js-ticket-segmented-control-option js-ticket-enable <?php echo (jssupportticket::$_data[0]->aireplymode == 1) ? 'active' : ''; ?>" data-value="1" data-type="ticket" data-id="<?php echo jssupportticket::$_data[0]->id;?>" title="<?php echo __("Enable: ticket and replies used only when the “Enable Tickets” filter is active.", "js-support-ticket"); ?>">
+                                        <button data-type="ticket" type="button" class="js-ticket-segmented-control-option js-ticket-enable <?php echo ( absint( jssupportticket::$_data[0]->aireplymode ) === 1 ) ? 'active' : ''; ?>" data-value="1" data-type="ticket" data-id="<?php echo esc_attr( jssupportticket::$_data[0]->id ); ?>" title="<?php echo esc_html(__( "Enable: ticket and replies used only when the “Enable Tickets” filter is active.", "js-support-ticket" ) ); ?>">
                                             <?php echo esc_html__('Enable', 'js-support-ticket'); ?>
                                         </button>
-                                        <button data-type="ticket" type="button" class="js-ticket-segmented-control-option js-ticket-disable <?php echo (jssupportticket::$_data[0]->aireplymode == 2) ? 'active' : ''; ?>" data-value="2" data-type="ticket" data-id="<?php echo jssupportticket::$_data[0]->id;?>" title="<?php echo __("Disable: ticket and replies excluded from AI queries.", "js-support-ticket"); ?>">
+                                        <button data-type="ticket" type="button" class="js-ticket-segmented-control-option js-ticket-disable <?php echo ( absint( jssupportticket::$_data[0]->aireplymode ) === 2 ) ? 'active' : ''; ?>" data-value="2" data-type="ticket" data-id="<?php echo esc_attr( jssupportticket::$_data[0]->id ); ?>" title="<?php echo esc_html(__( "Disable: ticket and replies excluded from AI queries.", "js-support-ticket" ) ); ?>">
                                             <?php echo esc_html__('Disable', 'js-support-ticket'); ?>
                                         </button>
                                     </div>
@@ -2741,7 +2745,7 @@ if (jssupportticket::$_config['offline'] == 2) {
                                         <?php if($departmentflag){ ?>
 											<div class="js-tkt-det-trsfer-dep">
 												<div class="js-tkt-det-trsfer-dep-txt">
-													<span class="js-tkt-det-trsfer-dep-txt-tit"><?php echo esc_html(jssupportticket::JSST_getVarValue($field_array['department'])).' : '; ?> </span>
+													<span class="js-tkt-det-trsfer-dep-txt-tit"><?php echo esc_html(jssupportticket::JSST_getVarValue($field_array['department'])).': '; ?> </span>
 													<?php echo esc_html(jssupportticket::$_data[0]->departmentname); ?>
 												</div>
 												<?php if(jssupportticket::$_data['user_staff']){ 
@@ -2830,7 +2834,7 @@ if (jssupportticket::$_config['offline'] == 2) {
                                             // check if the department is publish or not
                                             if (isset($ticket_field_array['department'])) { ?>
                                                 <div class="js-tkt-det-user-data">
-                                                    <span class="js-tkt-det-user-tit"><?php echo esc_html(jssupportticket::JSST_getVarValue($ticket_field_array['department'])). ' : '; ?></span>
+                                                    <span class="js-tkt-det-user-tit"><?php echo esc_html(jssupportticket::JSST_getVarValue($ticket_field_array['department'])). ': '; ?></span>
                                                     <span class="js-tkt-det-user-val"><?php echo esc_html(jssupportticket::JSST_getVarValue($userticket->departmentname)); ?></span>
                                                 </div>
                                                 <?php
@@ -2843,7 +2847,7 @@ if (jssupportticket::$_config['offline'] == 2) {
                                                     </span>
                                                     <?php 
                                                 } ?>
-                                                <span class="js-tkt-det-status">
+                                                <span class="js-tkt-det-status" style="background-color:<?php echo esc_attr($bgcolor);?>;color :<?php echo esc_attr($color);?>;">
                                                     <?php
                                                         if ($userticket->status == 5 || 
                                                             $userticket->status == 6 ||

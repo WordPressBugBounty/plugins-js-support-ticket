@@ -1790,18 +1790,18 @@ $yesno = array(
                                                         </span>
                                                     </div>
                                                     <div id="js-ticket-ai-reply-status-control" class="js-ticket-segmented-control">
-                                                        <button type="button" class="js-ticket-segmented-control-option js-ticket-default <?php echo ($reply->aireplymode == 0) ? 'active' : ''; ?>" data-value="0" data-type="reply" data-id="<?php echo $reply->replyid;?>" title="<?php echo __("Default: reply included in all AI search queries.", "js-support-ticket"); ?>">
+                                                        <button type="button" class="js-ticket-segmented-control-option js-ticket-default <?php echo ( intval( $reply->aireplymode ) === 0 ) ? 'active' : ''; ?>" data-value="0" data-type="reply" data-id="<?php echo esc_attr( $reply->replyid ); ?>" title="<?php echo esc_attr(__( "Default: reply included in all AI search queries.", "js-support-ticket" )); ?>">
                                                             <?php echo esc_html__('Default', 'js-support-ticket'); ?>
                                                         </button>
-                                                        <button type="button" class="js-ticket-segmented-control-option js-ticket-enable <?php echo ($reply->aireplymode == 1) ? 'active' : ''; ?>" data-value="1" data-type="reply" data-id="<?php echo $reply->replyid;?>" title="<?php echo __("Enable: reply used in AI queries only when the Enable Tickets filter is active.", "js-support-ticket"); ?>">
+                                                        <button type="button" class="js-ticket-segmented-control-option js-ticket-enable <?php echo ( $reply->aireplymode == 1 ) ? 'active' : ''; ?>" data-value="1" data-type="reply" data-id="<?php echo esc_attr( $reply->replyid ); ?>" title="<?php echo esc_html(__( "Enable: reply used in AI queries only when the Enable Tickets filter is active.", "js-support-ticket" )); ?>">
                                                             <?php echo esc_html__('Enable', 'js-support-ticket'); ?>
                                                         </button>
-                                                        <button type="button" class="js-ticket-segmented-control-option js-ticket-disable <?php echo ($reply->aireplymode == 2) ? 'active' : ''; ?>" data-value="2" data-type="reply" data-id="<?php echo $reply->replyid;?>" title="<?php echo __("Disable: reply excluded from AI queries.", "js-support-ticket"); ?>">
+                                                        <button type="button" class="js-ticket-segmented-control-option js-ticket-disable <?php echo ( $reply->aireplymode == 2 ) ? 'active' : ''; ?>" data-value="2" data-type="reply" data-id="<?php echo esc_attr( $reply->replyid ); ?>" title="<?php echo esc_attr(__( "Disable: reply excluded from AI queries.", "js-support-ticket" ) ); ?>">
                                                             <?php echo esc_html__('Disable', 'js-support-ticket'); ?>
                                                         </button>
                                                     </div>
                                                     <!-- Hidden input to hold the current selected value -->
-                                                    <input type="hidden" name="js_ticket_ai_reply_status" id="js-ticket-ai-reply-status-hidden" value="<?php echo $reply->aireplymode;?>" />
+                                                    <input type="hidden" name="js_ticket_ai_reply_status" id="js-ticket-ai-reply-status-hidden" value="<?php echo esc_attr( $reply->aireplymode ); ?>" />
                                                 </div>
                                                 <?php
                                             } ?>
@@ -1900,8 +1900,8 @@ $yesno = array(
                                             </a>
                                         </div>
                                     </div>
-                                    <span class="js-ticket-current-ticket-title"><?php echo jssupportticket::$_data[0]->subject ?></span>
-                                    <span class="js-ticket-current-ticket-id"><?php echo jssupportticket::$_data[0]->id ?></span>
+                                    <span class="js-ticket-current-ticket-title"><?php echo esc_html( jssupportticket::$_data[0]->subject ); ?></span>
+                                    <span class="js-ticket-current-ticket-id"><?php echo esc_html( jssupportticket::$_data[0]->id ); ?></span>
                                     <div class="js-ticket-container">
                                         <!-- Matching Tickets Section -->
                                         <div id="js-ticket-matching-tickets-section" class="js-ticket-section js-ticket-matching-tickets-section js-ticket-hidden">
@@ -2227,18 +2227,18 @@ $yesno = array(
                                 <!-- This section contains the AI Reply Feature -->
                                 <div class="js-ticket-ai-reply-status-wrapper">
                                     <div id="js-ticket-ai-reply-status-control" class="js-ticket-segmented-control">
-                                        <button type="button" class="js-ticket-segmented-control-option js-ticket-default <?php echo (jssupportticket::$_data[0]->aireplymode == 0) ? 'active' : ''; ?>" data-value="0" data-type="ticket" data-id="<?php echo jssupportticket::$_data[0]->id;?>" title="<?php echo __("Default: ticket and replies included in all AI queries.", "js-support-ticket"); ?>">
+                                        <button type="button" class="js-ticket-segmented-control-option js-ticket-default <?php echo ( jssupportticket::$_data[0]->aireplymode == 0 ) ? 'active' : ''; ?>" data-value="0" data-type="ticket" data-id="<?php echo esc_attr( jssupportticket::$_data[0]->id ); ?>" title="<?php echo esc_attr(__( "Default: ticket and replies included in all AI queries.", "js-support-ticket" ) ); ?>">
                                             <?php echo esc_html__('Default', 'js-support-ticket'); ?>
                                         </button>
-                                        <button data-type="ticket" type="button" class="js-ticket-segmented-control-option js-ticket-enable <?php echo (jssupportticket::$_data[0]->aireplymode == 1) ? 'active' : ''; ?>" data-value="1" data-type="ticket" data-id="<?php echo jssupportticket::$_data[0]->id;?>" title="<?php echo __("Enable: ticket and replies used only when the “Enable Tickets” filter is active.", "js-support-ticket"); ?>">
+                                        <button data-type="ticket" type="button" class="js-ticket-segmented-control-option js-ticket-enable <?php echo ( jssupportticket::$_data[0]->aireplymode == 1 ) ? 'active' : ''; ?>" data-value="1" data-type="ticket" data-id="<?php echo esc_attr( jssupportticket::$_data[0]->id ); ?>" title="<?php echo esc_attr(__( "Enable: ticket and replies used only when the “Enable Tickets” filter is active.", "js-support-ticket" ) ); ?>">
                                             <?php echo esc_html__('Enable', 'js-support-ticket'); ?>
                                         </button>
-                                        <button data-type="ticket" type="button" class="js-ticket-segmented-control-option js-ticket-disable <?php echo (jssupportticket::$_data[0]->aireplymode == 2) ? 'active' : ''; ?>" data-value="2" data-type="ticket" data-id="<?php echo jssupportticket::$_data[0]->id;?>" title="<?php echo __("Disable: ticket and replies excluded from AI queries.", "js-support-ticket"); ?>">
+                                        <button data-type="ticket" type="button" class="js-ticket-segmented-control-option js-ticket-disable <?php echo ( jssupportticket::$_data[0]->aireplymode == 2 ) ? 'active' : ''; ?>" data-value="2" data-type="ticket" data-id="<?php echo esc_attr( jssupportticket::$_data[0]->id ); ?>" title="<?php echo esc_attr(__( "Disable: ticket and replies excluded from AI queries.", "js-support-ticket" )); ?>">
                                             <?php echo esc_html__('Disable', 'js-support-ticket'); ?>
                                         </button>
                                     </div>
                                     <!-- Hidden input to hold the current selected value -->
-                                    <input type="hidden" name="js_ticket_ai_reply_status" id="js-ticket-ai-reply-status-hidden" value="<?php echo jssupportticket::$_data[0]->aireplymode;?>" />
+                                    <input type="hidden" name="js_ticket_ai_reply_status" id="js-ticket-ai-reply-status-hidden" value="<?php echo esc_attr( jssupportticket::$_data[0]->aireplymode ); ?>" />
                                 </div>
                             </div>
                         <?php } ?>
@@ -2466,7 +2466,7 @@ $yesno = array(
 												}
 											}
 											if($product_name == ""){ // product not matched, product changed in order
-												if(count($items == 1)){ // order have one product
+												if(count($items) == 1){ // order have one product
 													foreach ( $items as $item ) {
 														$product_name = $item->get_name();
 													}

@@ -15,11 +15,13 @@
                 });
             ';
             wp_add_inline_script('js-support-ticket-main-js',$jssupportticket_js);
-            ?>
-            <?php JSSTmessage::getMessage(); ?>
-            <?php $formdata = JSSTformfield::getFormData(); ?>
-            <?php /* JSSTbreadcrumbs::getBreadcrumbs(); */ ?>
-            <?php include_once(JSST_PLUGIN_PATH . 'includes/header.php'); ?>
+            JSSTmessage::getMessage();
+            $formdata = JSSTformfield::getFormData();
+        } ?>
+        <?php /* JSSTbreadcrumbs::getBreadcrumbs(); */ ?>
+        <?php include_once(JSST_PLUGIN_PATH . 'includes/header.php'); ?>
+        <?php
+        if (JSSTincluder::getObjectClass('user')->uid() != 0) { ?>
             <div class="js-ticket-add-form-wrapper">
                 <div class="js-ticket-top-search-wrp">
                     <div class="js-ticket-search-heading-wrp">

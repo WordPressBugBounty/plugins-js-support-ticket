@@ -73,11 +73,11 @@ class JSSTlayout {
 		                        $is_enable = get_option('users_can_register');/*check to make sure user registration is enabled*/
 	                            if ($is_enable) {
 	                            	if($registerval == 3){
-		                        	    $html .= '<a class="js-ticket-register-btn" href="'.esc_url(wp_registration_url()).'" title="' . esc_html(__('Register', 'js-support-ticke')) . '">' . esc_html(__('Register', 'js-support-ticket')) . '</a>';
+		                        	    $html .= '<a class="js-ticket-register-btn" href="'.esc_url(wp_registration_url()).'" title="' . esc_html(__('Register', 'js-support-ticket')) . '">' . esc_html(__('Register', 'js-support-ticket')) . '</a>';
 		                        	}else if($registerval == 2 && $registerlink != ""){
-		                        	    $html .= '<a class="js-ticket-register-btn" href="'.esc_url($registerlink).'" title="' . esc_html(__('Register', 'js-support-ticke')) . '">' . esc_html(__('Register', 'js-support-ticket')) . '</a>';
+		                        	    $html .= '<a class="js-ticket-register-btn" href="'.esc_url($registerlink).'" title="' . esc_html(__('Register', 'js-support-ticket')) . '">' . esc_html(__('Register', 'js-support-ticket')) . '</a>';
 		                        	}else{
-		                        		$html .= '<a class="js-ticket-register-btn" href="'.esc_url(jssupportticket::makeUrl(array('jstmod'=>'jssupportticket', 'jstlay'=>'userregister'))).'" title="' . esc_html(__('Register', 'js-support-ticke')) . '">' . esc_html(__('Register', 'js-support-ticket')) . '</a>';
+		                        		$html .= '<a class="js-ticket-register-btn" href="'.esc_url(jssupportticket::makeUrl(array('jstmod'=>'jssupportticket', 'jstlay'=>'userregister'))).'" title="' . esc_html(__('Register', 'js-support-ticket')) . '">' . esc_html(__('Register', 'js-support-ticket')) . '</a>';
 		                        	}
 		                        }
 	                    	}
@@ -194,11 +194,11 @@ class JSSTlayout {
 	                        $is_enable = get_option('users_can_register');/*check to make sure user registration is enabled*/
                             if ($is_enable) {
                             	if($registerval == 3){
-	                        	    $html .= '<a class="js-ticket-register-btn" href="'.esc_url(wp_registration_url()).'" title="' . esc_html(__('Register', 'js-support-ticke')) . '">' . esc_html(__('Register', 'js-support-ticket')) . '</a>';
+	                        	    $html .= '<a class="js-ticket-register-btn" href="'.esc_url(wp_registration_url()).'" title="' . esc_html(__('Register', 'js-support-ticket')) . '">' . esc_html(__('Register', 'js-support-ticket')) . '</a>';
 	                        	}else if($registerval == 2 && $registerlink != ""){
-	                        	    $html .= '<a class="js-ticket-register-btn" href="'.esc_url($registerlink).'" title="' . esc_html(__('Register', 'js-support-ticke')) . '">' . esc_html(__('Register', 'js-support-ticket')) . '</a>';
+	                        	    $html .= '<a class="js-ticket-register-btn" href="'.esc_url($registerlink).'" title="' . esc_html(__('Register', 'js-support-ticket')) . '">' . esc_html(__('Register', 'js-support-ticket')) . '</a>';
 	                        	}else{
-	                        		$html .= '<a class="js-ticket-register-btn" href="'.esc_url(jssupportticket::makeUrl(array('jstmod'=>'jssupportticket', 'jstlay'=>'userregister', 'js_redirecturl'=>$redirect_url))).'" title="' . esc_html(__('Register', 'js-support-ticke')) . '">' . esc_html(__('Register', 'js-support-ticket')) . '</a>';
+	                        		$html .= '<a class="js-ticket-register-btn" href="'.esc_url(jssupportticket::makeUrl(array('jstmod'=>'jssupportticket', 'jstlay'=>'userregister', 'js_redirecturl'=>$redirect_url))).'" title="' . esc_html(__('Register', 'js-support-ticket')) . '">' . esc_html(__('Register', 'js-support-ticket')) . '</a>';
 	                        	}
 	                        }
 

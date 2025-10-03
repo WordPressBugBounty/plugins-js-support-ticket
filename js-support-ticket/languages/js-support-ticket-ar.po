@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 3.6\n"
+"X-Generator: Poedit 3.7\n"
 
 msgid "You are not allowed"
 msgstr "غير مسموح لك بهذا"
@@ -687,9 +687,7 @@ msgid "Service is running, please close the pag"
 msgstr "الخدمة قيد التشغيل ، يرجى إغلاق الصفحة"
 
 msgid "Admin email address and email piping address cannot be the same, your email piping will not be work."
-msgstr ""
-"لا يمكن أن يكون عنوان البريد الإلكتروني للمشرف وعنوان  دعم توجيهات البريد الإلكتروني هو نفسه ، فلن تعمل دعم توجيهات البريد "
-"الإلكتروني الخاصة بك."
+msgstr "لا يمكن أن يكون عنوان البريد الإلكتروني للمشرف وعنوان  دعم توجيهات البريد الإلكتروني هو نفسه ، فلن تعمل دعم توجيهات البريد الإلكتروني الخاصة بك."
 
 msgid "Your setting is working please this."
 msgstr "الإعداد الخاص بك يعمل"
@@ -2182,12 +2180,8 @@ msgstr "الصفحة الافتراضية للطلب"
 msgid "Select Page"
 msgstr "اختر الصفحة"
 
-msgid ""
-"Select JS Help Desk default page, on the action system, will redirect on the selected page. If not select the default page, email "
-"links, and support icon might not work."
-msgstr ""
-"حدد الصفحة الافتراضية لـ JS Help Desk ، على نظام الإجراء ، ستتم إعادة التوجيه على الصفحة المحددة. إذا لم يتم تحديد الصفحة "
-"الافتراضية ، فقد لا تعمل روابط البريد الإلكتروني ورمز الدعم."
+msgid "Select JS Help Desk default page, on the action system, will redirect on the selected page. If not select the default page, email links, and support icon might not work."
+msgstr "حدد الصفحة الافتراضية لـ JS Help Desk ، على نظام الإجراء ، ستتم إعادة التوجيه على الصفحة المحددة. إذا لم يتم تحديد الصفحة الافتراضية ، فقد لا تعمل روابط البريد الإلكتروني ورمز الدعم."
 
 msgid "Support Icon"
 msgstr "أيقونة الدعم"
@@ -3269,15 +3263,13 @@ msgstr "دمج الطلبات"
 msgid "Enables agents to merge two tickets of the same user into one instead of dealing with the same issue on many tickets."
 msgstr "تمكين الوكلاء من دمج طلبين لنفس المستخدم في طلب واحد بدلاً من التعامل مع نفس الموضوع على العديد من الطلبات"
 
-msgid ""
-"Defines rules or set specific intervals of time to make ticket auto overdue.The ticket can overdue by type or overdue by Cronjob."
+msgid "Defines rules or set specific intervals of time to make ticket auto overdue.The ticket can overdue by type or overdue by Cronjob."
 msgstr "حدد القواعد أو حدد فترات زمنية محددة لجعل تأخر الطلب تلقائي. يمكن أن يتأخر الطلب حسب النوع أو المتأخرة بواسطة Cronjob."
 
 msgid "SMTP enables you to add custom mail protocol to send and receive emails within the js help desk."
 msgstr "يمكّنك SMTP من إضافة بروتوكول بريد مخصص لإرسال واستقبال رسائل البريد الإلكتروني داخل مكتب مساعدة js"
 
-msgid ""
-"Displays complete ticket history along with the ticket status, currently assigned user and other actions performed on each ticket."
+msgid "Displays complete ticket history along with the ticket status, currently assigned user and other actions performed on each ticket."
 msgstr "يعرض السجل الكامل للطلب بالإضافة إلى حالة الطلب والمستخدم المعين حاليًا والإجراءات الأخرى التي تتم على كل طلب."
 
 msgid "Pre-populated messages allow support agents to respond quickly."
@@ -3746,13 +3738,11 @@ msgid "Wordpress Plugin"
 msgstr "برنامج مساعد Wordpress"
 
 msgid ""
-"JS Help Desk is a trusted open source ticket system. JS Help Desk is a simple, easy to use, web-based customer support system. "
-"Users can create a ticket from the front-end. JS Help Desk comes packed with lot features than most of the expensive(and complex) "
-"support ticket system on the market. The best part is, It completely free."
+"JS Help Desk is a trusted open source ticket system. JS Help Desk is a simple, easy to use, web-based customer support system. Users can create a ticket from the front-end. JS Help Desk comes "
+"packed with lot features than most of the expensive(and complex) support ticket system on the market. The best part is, It completely free."
 msgstr ""
-"JS Help Desk هو نظام موثوق مفتوح المصدر للتذاكر وطلبات الدعم . JS Help Desk هو نظام دعم عملاء بسيط وسهل الاستخدام على شبكة "
-"الإنترنت. يمكن للمستخدمين إنشاء طلب من الواجهة الأمامية. يأتي JS Help Desk مزودًا بميزات الكثير من معظم نظام تذاكر الدعم المكلف "
-"(والمعقد) في السوق. أفضل جزء هو ، إنه مجاني تمامًا. ترجمة : محمد الكحلاوي"
+"JS Help Desk هو نظام موثوق مفتوح المصدر للتذاكر وطلبات الدعم . JS Help Desk هو نظام دعم عملاء بسيط وسهل الاستخدام على شبكة الإنترنت. يمكن للمستخدمين إنشاء طلب من الواجهة الأمامية. يأتي JS Help "
+"Desk مزودًا بميزات الكثير من معظم نظام تذاكر الدعم المكلف (والمعقد) في السوق. أفضل جزء هو ، إنه مجاني تمامًا. ترجمة : محمد الكحلاوي"
 
 msgid "JS Help Desk Addon Installer"
 msgstr "JS مكتب المساعدة الإضافة المثبته"
@@ -6334,10 +6324,8 @@ msgstr "موضوع المساعدة"
 msgid "Help topics help users to find and select the area with which they need assistance."
 msgstr "تساعد موضوعات التعليمات المستخدمين في العثور على المنطقة التي يحتاجون إلى المساعدة فيها وتحديدها."
 
-msgid ""
-"The private note is used as reminders or to give other agents insights into the ticket issue. User Won't see the private notes."
-msgstr ""
-"يتم استخدام الملاحظة الخاصة كتذكيرات أو لإعطاء وكلاء آخرين نظرة ثاقبة حول مشكلة التذكرة. لن يتمكن المستخدم من رؤية الملاحظات الخاصة."
+msgid "The private note is used as reminders or to give other agents insights into the ticket issue. User Won't see the private notes."
+msgstr "يتم استخدام الملاحظة الخاصة كتذكيرات أو لإعطاء وكلاء آخرين نظرة ثاقبة حول مشكلة التذكرة. لن يتمكن المستخدم من رؤية الملاحظات الخاصة."
 
 msgid "Stop losing productivity on repetitive queries,Build your knowledge base, group solutions by topics to facilitate users."
 msgstr "توقف عن فقدان الإنتاجية بسبب الاستعلامات المتكررة، وقم ببناء قاعدة معرفتك، وقم بتجميع الحلول حسب المواضيع لتسهيل المستخدمين."
@@ -6388,9 +6376,7 @@ msgid "Mail Chimp"
 msgstr "ميلشيمب"
 
 msgid "The Mail Chimp add-on adds a new checkbox to the registration form for prompting new users to subscribe your email-list."
-msgstr ""
-"تضيف الوظيفة الإضافية Mail Chimp مربع اختيار جديدًا إلى نموذج التسجيل لمطالبة المستخدمين الجدد بالاشتراك في قائمة البريد الإلكتروني "
-"الخاصة بك."
+msgstr "تضيف الوظيفة الإضافية Mail Chimp مربع اختيار جديدًا إلى نموذج التسجيل لمطالبة المستخدمين الجدد بالاشتراك في قائمة البريد الإلكتروني الخاصة بك."
 
 msgid "EDD offers customers to open new tickets just one click from their EDD account with optionally validating the license keys."
 msgstr "تقدم EDD للعملاء إمكانية فتح تذاكر جديدة بنقرة واحدة فقط من حساب EDD الخاص بهم مع التحقق بشكل اختياري من صحة مفاتيح الترخيص."
@@ -6401,12 +6387,8 @@ msgstr "البريد الإلكتروني نسخة"
 msgid "Email Cc"
 msgstr "نسخة من البريد الإلكتروني"
 
-msgid ""
-"CC(Carbon Copy) - the people who should know about the information which is being shared and the people included are able to see "
-"who is there in the list."
-msgstr ""
-"نسخة كربونية (نسخة كربونية) - الأشخاص الذين يجب أن يعرفوا المعلومات التي تتم مشاركتها والأشخاص المدرجون قادرون على رؤية الأشخاص "
-"الموجودين في القائمة."
+msgid "CC(Carbon Copy) - the people who should know about the information which is being shared and the people included are able to see who is there in the list."
+msgstr "نسخة كربونية (نسخة كربونية) - الأشخاص الذين يجب أن يعرفوا المعلومات التي تتم مشاركتها والأشخاص المدرجون قادرون على رؤية الأشخاص الموجودين في القائمة."
 
 msgid "multiform"
 msgstr "متعدد الأشكال"
@@ -6417,18 +6399,14 @@ msgstr "يتيح Multiform للمستخدم إضافة أكثر من نموذج 
 msgid "agent auto assign"
 msgstr "تعيين الوكيل تلقائيًا"
 
-msgid ""
-"When auto assignment is enabled and a ticket is created, an appropriate agent is automatically assigned to the ticket and it is "
-"moved to the Assigned state."
+msgid "When auto assignment is enabled and a ticket is created, an appropriate agent is automatically assigned to the ticket and it is moved to the Assigned state."
 msgstr "عند تمكين التعيين التلقائي وإنشاء تذكرة، يتم تعيين الوكيل المناسب تلقائيًا للتذكرة ويتم نقله إلى الحالة المخصصة."
 
 msgid "Social Login"
 msgstr "تسجيل الدخول الاجتماعي"
 
 msgid "Users can login from their social media accounts. They can create a new account or use social media accounts."
-msgstr ""
-"يمكن للمستخدمين تسجيل الدخول من حسابات وسائل التواصل الاجتماعي الخاصة بهم. يمكنهم إنشاء حساب جديد أو استخدام حسابات وسائل التواصل "
-"الاجتماعي."
+msgstr "يمكن للمستخدمين تسجيل الدخول من حسابات وسائل التواصل الاجتماعي الخاصة بهم. يمكنهم إنشاء حساب جديد أو استخدام حسابات وسائل التواصل الاجتماعي."
 
 msgid "JS Help Desk Add-Ons Bundle Pack"
 msgstr "حزمة الوظائف الإضافية لمكتب مساعدة JS"
@@ -6454,9 +6432,7 @@ msgstr "كل شيء في المعيار متضمن و"
 msgid "All Future Addons"
 msgstr "جميع الإضافات المستقبلية"
 
-msgid ""
-"Hey there! We have recently launched a fresh update for the add-ons. Don't forget to update the add-ons to enjoy the greatest "
-"features!"
+msgid "Hey there! We have recently launched a fresh update for the add-ons. Don't forget to update the add-ons to enjoy the greatest features!"
 msgstr "مرحبًا يا من هناك! لقد أطلقنا مؤخرًا تحديثًا جديدًا للوظائف الإضافية. لا تنس تحديث الإضافات لتستمتع بأكبر الميزات!"
 
 msgid "View Addone Status"
@@ -7053,12 +7029,8 @@ msgstr "إضافة بيانات الاعتماد"
 msgid "Edit Help Topic"
 msgstr "تحرير موضوع التعليمات"
 
-msgid ""
-"e.g ' I have read and agree to the [link] Terms and Conditions[/link].  ' The text between [link] and [/link] will be linked to "
-"provided url or wordpress page."
-msgstr ""
-"على سبيل المثال ' لقد قرأت ووافقت على [الرابط] الشروط والأحكام[/ الرابط]. سيتم ربط النص الموجود بين [link] و[/link] بعنوان URL أو "
-"صفحة Wordpress المتوفرة."
+msgid "e.g ' I have read and agree to the [link] Terms and Conditions[/link].  ' The text between [link] and [/link] will be linked to provided url or wordpress page."
+msgstr "على سبيل المثال ' لقد قرأت ووافقت على [الرابط] الشروط والأحكام[/ الرابط]. سيتم ربط النص الموجود بين [link] و[/link] بعنوان URL أو صفحة Wordpress المتوفرة."
 
 msgid "login"
 msgstr "تسجيل الدخول"
@@ -8415,3 +8387,381 @@ msgstr "تحتاج إلى إعادة تسمية دليل البيانات الم
 
 msgid "URL for use with your own scripts and third party"
 msgstr "عنوان URL للاستخدام مع البرامج النصية الخاصة بك وطرف ثالث"
+
+msgid "Email template already exist"
+msgstr "قالب البريد الإلكتروني موجود بالفعل"
+
+msgid "JS HelpDesk System"
+msgstr "نظام مساعدة JS"
+
+msgid "JS HelpDesk"
+msgstr "JS Helpdesk"
+
+msgid "Main"
+msgstr "رئيسي"
+
+msgid "Ticket Management"
+msgstr "إدارة التذاكر"
+
+msgid "User Management"
+msgstr "إدارة المستخدم"
+
+msgid "Content & Knowledge"
+msgstr "المحتوى والمعرفة"
+
+msgid "Email & Communication"
+msgstr "البريد الإلكتروني والاتصال"
+
+msgid "Products & Sales"
+msgstr "المنتجات والمبيعات"
+
+msgid "System & Settings"
+msgstr "النظام والإعدادات"
+
+msgid "No unused keys were found."
+msgstr "لم يتم العثور على مفاتيح غير مستخدمة."
+
+msgid "unused key has been deleted successfully!"
+msgstr "تم حذف المفتاح غير المستخدم بنجاح!"
+
+msgid "unused keys have been deleted successfully!"
+msgstr "تم حذف المفاتيح غير المستخدمة بنجاح!"
+
+msgid "XXXXX-XXXXX-XXXXX-XXXXX"
+msgstr "xxxxx-xxxxx-xxxxx-xxxxx"
+
+msgid "Manage Unused Keys"
+msgstr "إدارة المفاتيح غير المستخدمة"
+
+msgid "You have"
+msgstr "لديك"
+
+msgid "unused key(s) that can be safely removed."
+msgstr "المفتاح (المفاتيح) غير المستخدمة التي يمكن إزالتها بأمان."
+
+msgid "Delete All Unused Keys"
+msgstr "حذف جميع المفاتيح غير المستخدمة"
+
+msgid "REPLIED_TICKET"
+msgstr "رد _ticket"
+
+msgid "Tickets Over Time"
+msgstr "التذاكر مع مرور الوقت"
+
+msgid "Welcome back to"
+msgstr "مرحبًا بك في"
+
+msgid "As a visitor, you can easily create a support ticket by sharing your issue details."
+msgstr "كزائر ، يمكنك بسهولة إنشاء تذكرة دعم من خلال مشاركة تفاصيل مشكلتك."
+
+msgid "Have an issue?"
+msgstr "لديك مشكلة؟"
+
+msgid "Our support team is here to help. Create a new ticket to get started."
+msgstr "فريق الدعم لدينا هنا للمساعدة. إنشاء تذكرة جديدة للبدء."
+
+msgid "Create New Ticket"
+msgstr "إنشاء تذكرة جديدة"
+
+msgid "Enter your information to check the status of your existing ticket."
+msgstr "أدخل معلوماتك للتحقق من حالة تذكرتك الحالية."
+
+msgid "Welcome back,"
+msgstr "مرحبًا بعودتك،"
+
+msgid "open tickets"
+msgstr "فتح التذاكر"
+
+msgid "No open ticket"
+msgstr "لا تذكرة مفتوحة"
+
+msgid ", and"
+msgstr "، و"
+
+msgid "is awaiting your reply."
+msgstr "ينتظر ردك."
+
+msgid "Need to assist a user?"
+msgstr "هل تحتاج إلى مساعدة المستخدم؟"
+
+msgid "Quickly create a new ticket on behalf of a user to provide support and track their request."
+msgstr "قم بإنشاء تذكرة جديدة بسرعة نيابة عن المستخدم لتقديم الدعم وتتبع طلبهم."
+
+msgid "Open ticket for user"
+msgstr "فتح تذكرة للمستخدم"
+
+msgid "OR Create a"
+msgstr "أو إنشاء"
+
+msgid "Your Ticket Stats"
+msgstr "احصائيات التذاكر الخاصة بك"
+
+msgid "Open Tickets"
+msgstr "فتح التذاكر"
+
+msgid "Closed Tickets"
+msgstr "تذاكر مغلقة"
+
+msgid "Overdue Tickets"
+msgstr "التذاكر المتأخرة"
+
+msgid "Recent Tickets"
+msgstr "التذاكر الأخيرة"
+
+msgid "You replied"
+msgstr "أجبته"
+
+msgid "Reply from"
+msgstr "الرد من"
+
+msgid "No replies yet"
+msgstr "لا ردود بعد"
+
+msgid "Customize"
+msgstr "تخصيص"
+
+msgid "Quick Actions"
+msgstr "إجراءات سريعة"
+
+msgid "Easily access your main tasks from here."
+msgstr "بسهولة الوصول إلى المهام الرئيسية من هنا."
+
+msgid "Create a Ticket"
+msgstr "إنشاء تذكرة"
+
+msgid "Here's a summary of today's ticket activity. This helps in tracking our daily progress and workload."
+msgstr "إليك ملخص لنشاط التذاكر اليوم. هذا يساعد في تتبع تقدمنا ​​اليومي وعبء العمل."
+
+msgid "Created Tickets"
+msgstr "أنشأت تذاكر"
+
+msgid "Your activation key has expired."
+msgstr "انتهت صلاحية مفتاح التنشيط الخاص بك."
+
+msgid "Please reactivate your key to continue receiving product updates, addons, and support."
+msgstr "يرجى إعادة تنشيط مفتاحك لمواصلة تلقي تحديثات المنتجات والإضافات والدعم."
+
+msgid "Reactivate Activation Key"
+msgstr "إعادة تنشيط مفتاح التنشيط"
+
+msgid "Ticket Analysis (Last 7 Days)"
+msgstr "تحليل التذاكر (آخر 7 أيام)"
+
+msgid "Priority:"
+msgstr "أولوية:"
+
+msgid "No Recent Tickets"
+msgstr "لا تذاكر حديثة"
+
+msgid "New tickets will be displayed in this section."
+msgstr "سيتم عرض تذاكر جديدة في هذا القسم."
+
+msgid "All Tickets Assigned"
+msgstr "جميع التذاكر المعينة"
+
+msgid "Great job! There are no unassigned tickets."
+msgstr "عمل رائع! لا توجد تذاكر غير محددة."
+
+msgid "Ticket updates and changes will appear here."
+msgstr "ستظهر تحديثات التذاكر والتغييرات هنا."
+
+msgid "Recently Replied"
+msgstr "أجاب مؤخرًا"
+
+msgid "No Replies Yet"
+msgstr "لا ردود بعد"
+
+msgid "Recently replied tickets will be shown here."
+msgstr "سيتم عرض التذاكر التي تم الرد عليها مؤخرًا هنا."
+
+msgid "View All Replied Tickets"
+msgstr "عرض جميع التذاكر الرد"
+
+msgid "Recently Closed"
+msgstr "أغلق مؤخرا"
+
+msgid "No Closed Tickets"
+msgstr "لا تذاكر مغلقة"
+
+msgid "Recently closed tickets will be listed here."
+msgstr "سيتم سرد التذاكر المغلقة مؤخرًا هنا."
+
+msgid "View All Closed Tickets"
+msgstr "عرض جميع التذاكر المغلقة"
+
+msgid "Tickets by Priority"
+msgstr "تذاكر حسب الأولوية"
+
+msgid "Agent Performance"
+msgstr "أداء الوكيل"
+
+msgid "Assigned"
+msgstr "مُكَلَّف"
+
+msgid "No Agent Performance Data"
+msgstr "لا توجد بيانات أداء الوكيل"
+
+msgid "Performance metrics will be displayed here."
+msgstr "سيتم عرض مقاييس الأداء هنا."
+
+msgid "Recent Canned Responses"
+msgstr "الردود المعلبة الأخيرة"
+
+msgid "Recent canned responses will be listed here."
+msgstr "سيتم سرد الردود المعلبة الأخيرة هنا."
+
+msgid "Active Timers"
+msgstr "أجهزة ضبط الوقت النشطة"
+
+msgid "Timers started by agent will be shown here."
+msgstr "سيتم عرض أجهزة ضبط الوقت التي بدأها الوكيل هنا."
+
+msgid "No Customer Activity"
+msgstr "لا يوجد نشاط عميل"
+
+msgid "Customers with the most tickets will be listed here."
+msgstr "سيتم سرد العملاء الذين لديهم معظم التذاكر هنا."
+
+msgid "Track the time spent on each ticket by each agent and each reply."
+msgstr "تتبع الوقت الذي تقضيه في كل تذكرة من قبل كل وكيل وكل رد."
+
+msgid "Quick Installation Guide"
+msgstr "دليل التثبيت السريع"
+
+msgid "How to setup of the Help Desk"
+msgstr "كيفية إعداد مكتب المساعدة"
+
+msgid "Video thumbnail"
+msgstr "صورة مصغرة الفيديو"
+
+msgid "Learn how to set up your Help Desk quickly and get it ready for use."
+msgstr "تعرف على كيفية إعداد مكتب المساعدة بسرعة واستعد للاستخدام."
+
+msgid "How to Setup System Emails"
+msgstr "كيفية إعداد رسائل البريد الإلكتروني للنظام"
+
+msgid "Learn how to setup out going notification in the best Help Desk plugin for WordPress"
+msgstr "تعرف على كيفية إعداد الإخطار في أفضل مكون إضافي لمكتب المساعدة لـ WordPress"
+
+msgid "How to Create a Ticket"
+msgstr "كيفية إنشاء تذكرة"
+
+msgid "A simple walkthrough of the ticket creation process for both user and administrator."
+msgstr "تجول بسيط في عملية إنشاء التذاكر لكل من المستخدم والمسؤول."
+
+msgid "How to Set Email Notifications"
+msgstr "كيفية تعيين إشعارات البريد الإلكتروني"
+
+msgid "Configure your email notification settings to stay updated on ticket activity."
+msgstr "قم بتكوين إعدادات إشعار البريد الإلكتروني الخاصة بك للبقاء محدثًا على نشاط التذاكر."
+
+msgid "How to Setup Custom Fields"
+msgstr "كيفية إعداد الحقول المخصصة"
+
+msgid "Learn how to add custom fields to your ticket forms to collect more specific information."
+msgstr "تعرف على كيفية إضافة حقول مخصصة إلى نماذج التذاكر الخاصة بك لجمع المزيد من المعلومات المحددة."
+
+msgid "Customize Dashboard"
+msgstr "تخصيص لوحة القيادة"
+
+msgid "Todays Ticket Distribution"
+msgstr "توزيع التذاكر اليوم"
+
+msgid "Number of Tickets"
+msgstr "عدد التذاكر"
+
+msgid "Yesterday"
+msgstr "أمس"
+
+msgid "2 days ago"
+msgstr "منذ يومين"
+
+msgid "3 days ago"
+msgstr "منذ 3 أيام"
+
+msgid "4 days ago"
+msgstr "منذ 4 أيام"
+
+msgid "5 days ago"
+msgstr "قبل 5 أيام"
+
+msgid "6+ days ago"
+msgstr "منذ 6 أيام"
+
+msgid "Number of Open Tickets"
+msgstr "عدد التذاكر المفتوحة"
+
+msgid "Email tempate has been deleted"
+msgstr "تم حذف قالب البريد الإلكتروني"
+
+msgid "Email tempate has not been deleted"
+msgstr "لم يتم حذف قالب البريد الإلكتروني"
+
+msgid "Required Field(s) are not filled"
+msgstr "لا يتم ملء الحقل (الحقل) المطلوب"
+
+msgid "Default Email Template"
+msgstr "قالب البريد الإلكتروني الافتراضي"
+
+msgid "This template is used for all forms and languages unless a specific custom template is created."
+msgstr "يتم استخدام هذا القالب لجميع النماذج واللغات ما لم يتم إنشاء قالب مخصص محدد."
+
+msgid "This template is used for all forms unless a specific form template is created."
+msgstr "يتم استخدام هذا القالب لجميع النماذج ما لم يتم إنشاء قالب نموذج معين."
+
+msgid "This template is used for all languages unless a specific language template is created."
+msgstr "يتم استخدام هذا القالب لجميع اللغات ما لم يتم إنشاء قالب لغة محددة."
+
+msgid "View/Edit Default Template"
+msgstr "عرض/تحرير القالب الافتراضي"
+
+msgid "Form & Language-Specific Email Templates"
+msgstr "قوالب البريد الإلكتروني الخاصة بالنموذج واللغة"
+
+msgid "Form-Specific Email Templates"
+msgstr "قوالب البريد الإلكتروني الخاصة بالشكل"
+
+msgid "Language-Specific Email Templates"
+msgstr "قوالب البريد الإلكتروني الخاصة باللغة"
+
+msgid "Customize email content for individual form, for specific language, or a combination of both. If no custom template exists for a given form or language, the default template will be used."
+msgstr "تخصيص محتوى البريد الإلكتروني للنموذج الفردي ، ولغة محددة ، أو مزيج من الاثنين. إذا لم يكن هناك قالب مخصص لنموذج أو لغة معينة ، فسيتم استخدام القالب الافتراضي."
+
+msgid "Customize email content for individual form. If no custom template exists for a form, the default template will be used."
+msgstr "تخصيص محتوى البريد الإلكتروني للنموذج الفردي. إذا لم يكن هناك قالب مخصص لنموذج ، فسيتم استخدام القالب الافتراضي."
+
+msgid "Customize email content for specific language. If no custom template exists for a language, the default template will be used."
+msgstr "تخصيص محتوى البريد الإلكتروني للغة المحددة. إذا لم يكن هناك قالب مخصص للغة ، فسيتم استخدام القالب الافتراضي."
+
+msgid "-- Select a Form --"
+msgstr "-حدد نموذج-"
+
+msgid "-- Select a Language --"
+msgstr "-حدد لغة-"
+
+msgid "Create Template"
+msgstr "إنشاء قالب"
+
+msgid "Existing Custom Templates"
+msgstr "قوالب مخصصة موجودة"
+
+msgid "Form Name"
+msgstr "اسم النموذج"
+
+msgid "Language"
+msgstr "لغة"
+
+msgid "Preview"
+msgstr "معاينة"
+
+msgid "Form:"
+msgstr "استمارة:"
+
+msgid "Language:"
+msgstr "لغة:"
+
+msgid "Save & Next"
+msgstr "حفظ & التالي"
+
+msgid "For enhanced security change encryption method in %1$s on line %2$s"
+msgstr "لتحسين طريقة تشفير تغيير الأمان في ٪ 1 $ s على الخط ٪ 2 $ s"

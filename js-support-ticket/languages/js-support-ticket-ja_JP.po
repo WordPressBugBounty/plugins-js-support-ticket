@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 3.6\n"
+"X-Generator: Poedit 3.7\n"
 
 msgid "You are not allowed"
 msgstr "あなたは許可されていません"
@@ -8383,3 +8383,381 @@ msgstr "データディレクトリ名を変更する前に、ファイルシス
 
 msgid "URL for use with your own scripts and third party"
 msgstr "独自のスクリプトとサードパーティで使用するためのURL"
+
+msgid "Email template already exist"
+msgstr "メールテンプレートはすでに存在します"
+
+msgid "JS HelpDesk System"
+msgstr "JSヘルプデスクシステム"
+
+msgid "JS HelpDesk"
+msgstr "JSヘルプデスク"
+
+msgid "Main"
+msgstr "主要"
+
+msgid "Ticket Management"
+msgstr "チケット管理"
+
+msgid "User Management"
+msgstr "ユーザー管理"
+
+msgid "Content & Knowledge"
+msgstr "コンテンツと知識"
+
+msgid "Email & Communication"
+msgstr "電子メールと通信"
+
+msgid "Products & Sales"
+msgstr "製品と販売"
+
+msgid "System & Settings"
+msgstr "システムと設定"
+
+msgid "No unused keys were found."
+msgstr "未使用のキーは見つかりませんでした。"
+
+msgid "unused key has been deleted successfully!"
+msgstr "未使用のキーが正常に削除されました！"
+
+msgid "unused keys have been deleted successfully!"
+msgstr "未使用のキーは正常に削除されました！"
+
+msgid "XXXXX-XXXXX-XXXXX-XXXXX"
+msgstr "xxxxx-xxxxx-xxxxx-xxxxx"
+
+msgid "Manage Unused Keys"
+msgstr "未使用のキーを管理します"
+
+msgid "You have"
+msgstr "あなたが持っている"
+
+msgid "unused key(s) that can be safely removed."
+msgstr "安全に削除できる未使用キー。"
+
+msgid "Delete All Unused Keys"
+msgstr "未使用のすべてのキーを削除します"
+
+msgid "REPLIED_TICKET"
+msgstr "REPLIOD_TICKET"
+
+msgid "Tickets Over Time"
+msgstr "時間の経過とともにチケット"
+
+msgid "Welcome back to"
+msgstr "お願いします"
+
+msgid "As a visitor, you can easily create a support ticket by sharing your issue details."
+msgstr "訪問者として、問題の詳細を共有することで、サポートチケットを簡単に作成できます。"
+
+msgid "Have an issue?"
+msgstr "問題がありますか？"
+
+msgid "Our support team is here to help. Create a new ticket to get started."
+msgstr "私たちのサポートチームはここにあります。開始するための新しいチケットを作成します。"
+
+msgid "Create New Ticket"
+msgstr "新しいチケットを作成します"
+
+msgid "Enter your information to check the status of your existing ticket."
+msgstr "既存のチケットのステータスを確認するには、情報を入力してください。"
+
+msgid "Welcome back,"
+msgstr "おかえり、"
+
+msgid "open tickets"
+msgstr "開いたチケット"
+
+msgid "No open ticket"
+msgstr "オープンチケットはありません"
+
+msgid ", and"
+msgstr "、 そして"
+
+msgid "is awaiting your reply."
+msgstr "あなたの返事を待っています。"
+
+msgid "Need to assist a user?"
+msgstr "ユーザーを支援する必要がありますか？"
+
+msgid "Quickly create a new ticket on behalf of a user to provide support and track their request."
+msgstr "ユーザーに代わって新しいチケットをすばやく作成して、サポートを提供し、リクエストを追跡します。"
+
+msgid "Open ticket for user"
+msgstr "ユーザー用のオープンチケット"
+
+msgid "OR Create a"
+msgstr "またはaを作成します"
+
+msgid "Your Ticket Stats"
+msgstr "チケットの統計"
+
+msgid "Open Tickets"
+msgstr "開いたチケット"
+
+msgid "Closed Tickets"
+msgstr "閉じたチケット"
+
+msgid "Overdue Tickets"
+msgstr "期限切れのチケット"
+
+msgid "Recent Tickets"
+msgstr "最近のチケット"
+
+msgid "You replied"
+msgstr "あなたは答えました"
+
+msgid "Reply from"
+msgstr "から返信"
+
+msgid "No replies yet"
+msgstr "まだ返信はありません"
+
+msgid "Customize"
+msgstr "カスタマイズ"
+
+msgid "Quick Actions"
+msgstr "クイックアクション"
+
+msgid "Easily access your main tasks from here."
+msgstr "ここから主なタスクに簡単にアクセスできます。"
+
+msgid "Create a Ticket"
+msgstr "チケットを作成します"
+
+msgid "Here's a summary of today's ticket activity. This helps in tracking our daily progress and workload."
+msgstr "今日のチケットアクティビティの要約は次のとおりです。これは、私たちの毎日の進捗とワークロードを追跡するのに役立ちます。"
+
+msgid "Created Tickets"
+msgstr "作成したチケット"
+
+msgid "Your activation key has expired."
+msgstr "アクティベーションキーが期限切れになりました。"
+
+msgid "Please reactivate your key to continue receiving product updates, addons, and support."
+msgstr "キーを再アクティブ化して、製品の更新、アドオン、サポートを受け続けてください。"
+
+msgid "Reactivate Activation Key"
+msgstr "アクティベーションキーを再活性化します"
+
+msgid "Ticket Analysis (Last 7 Days)"
+msgstr "チケット分析（過去7日間）"
+
+msgid "Priority:"
+msgstr "優先度："
+
+msgid "No Recent Tickets"
+msgstr "最近のチケットはありません"
+
+msgid "New tickets will be displayed in this section."
+msgstr "このセクションに新しいチケットが表示されます。"
+
+msgid "All Tickets Assigned"
+msgstr "割り当てられたすべてのチケット"
+
+msgid "Great job! There are no unassigned tickets."
+msgstr "素晴らしい仕事！割り当てられていないチケットはありません。"
+
+msgid "Ticket updates and changes will appear here."
+msgstr "チケットの更新と変更がここに表示されます。"
+
+msgid "Recently Replied"
+msgstr "最近答えた"
+
+msgid "No Replies Yet"
+msgstr "まだ返信はありません"
+
+msgid "Recently replied tickets will be shown here."
+msgstr "最近回答したチケットはここに掲載されます。"
+
+msgid "View All Replied Tickets"
+msgstr "すべての返信チケットを表示します"
+
+msgid "Recently Closed"
+msgstr "最近閉鎖されました"
+
+msgid "No Closed Tickets"
+msgstr "閉じたチケットはありません"
+
+msgid "Recently closed tickets will be listed here."
+msgstr "最近閉鎖されたチケットはここにリストされます。"
+
+msgid "View All Closed Tickets"
+msgstr "すべての閉じたチケットを表示します"
+
+msgid "Tickets by Priority"
+msgstr "優先順位によるチケット"
+
+msgid "Agent Performance"
+msgstr "エージェントのパフォーマンス"
+
+msgid "Assigned"
+msgstr "割り当て"
+
+msgid "No Agent Performance Data"
+msgstr "エージェントのパフォーマンスデータはありません"
+
+msgid "Performance metrics will be displayed here."
+msgstr "パフォーマンスメトリックはここに表示されます。"
+
+msgid "Recent Canned Responses"
+msgstr "最近の缶詰の反応"
+
+msgid "Recent canned responses will be listed here."
+msgstr "最近の缶詰の回答はここにリストされます。"
+
+msgid "Active Timers"
+msgstr "アクティブタイマー"
+
+msgid "Timers started by agent will be shown here."
+msgstr "エージェントによって開始されたタイマーはここに表示されます。"
+
+msgid "No Customer Activity"
+msgstr "顧客活動はありません"
+
+msgid "Customers with the most tickets will be listed here."
+msgstr "最も多くのチケットを持つ顧客はここにリストされます。"
+
+msgid "Track the time spent on each ticket by each agent and each reply."
+msgstr "各エージェントによる各チケットに費やされた時間と各返信を追跡します。"
+
+msgid "Quick Installation Guide"
+msgstr "クイックインストールガイド"
+
+msgid "How to setup of the Help Desk"
+msgstr "ヘルプデスクのセットアップ方法"
+
+msgid "Video thumbnail"
+msgstr "ビデオサムネイル"
+
+msgid "Learn how to set up your Help Desk quickly and get it ready for use."
+msgstr "ヘルプデスクをすばやく設定し、使用する準備をする方法を学びます。"
+
+msgid "How to Setup System Emails"
+msgstr "システムのメールをセットアップする方法"
+
+msgid "Learn how to setup out going notification in the best Help Desk plugin for WordPress"
+msgstr "WordPress用の最高のヘルプデスクプラグインで通知をセットアップする方法を学ぶ"
+
+msgid "How to Create a Ticket"
+msgstr "チケットの作成方法"
+
+msgid "A simple walkthrough of the ticket creation process for both user and administrator."
+msgstr "ユーザーと管理者の両方のチケット作成プロセスの簡単なウォークスルー。"
+
+msgid "How to Set Email Notifications"
+msgstr "電子メール通知を設定する方法"
+
+msgid "Configure your email notification settings to stay updated on ticket activity."
+msgstr "電子メール通知設定を構成して、チケットのアクティビティを更新したままにします。"
+
+msgid "How to Setup Custom Fields"
+msgstr "カスタムフィールドをセットアップする方法"
+
+msgid "Learn how to add custom fields to your ticket forms to collect more specific information."
+msgstr "より具体的な情報を収集するために、チケットフォームにカスタムフィールドを追加する方法を学びます。"
+
+msgid "Customize Dashboard"
+msgstr "ダッシュボードをカスタマイズします"
+
+msgid "Todays Ticket Distribution"
+msgstr "今日のチケット配布"
+
+msgid "Number of Tickets"
+msgstr "チケットの数"
+
+msgid "Yesterday"
+msgstr "昨日"
+
+msgid "2 days ago"
+msgstr "2日前"
+
+msgid "3 days ago"
+msgstr "3日前"
+
+msgid "4 days ago"
+msgstr "4日前"
+
+msgid "5 days ago"
+msgstr "5日前"
+
+msgid "6+ days ago"
+msgstr "6日以上前"
+
+msgid "Number of Open Tickets"
+msgstr "オープンチケットの数"
+
+msgid "Email tempate has been deleted"
+msgstr "電子メールテンプレートが削除されました"
+
+msgid "Email tempate has not been deleted"
+msgstr "電子メールテンプレートは削除されていません"
+
+msgid "Required Field(s) are not filled"
+msgstr "必要なフィールドは満たされていません"
+
+msgid "Default Email Template"
+msgstr "デフォルトの電子メールテンプレート"
+
+msgid "This template is used for all forms and languages unless a specific custom template is created."
+msgstr "このテンプレートは、特定のカスタムテンプレートが作成されていない限り、あらゆるフォームと言語に使用されます。"
+
+msgid "This template is used for all forms unless a specific form template is created."
+msgstr "このテンプレートは、特定のフォームテンプレートが作成されない限り、すべてのフォームに使用されます。"
+
+msgid "This template is used for all languages unless a specific language template is created."
+msgstr "このテンプレートは、特定の言語テンプレートが作成されない限り、すべての言語に使用されます。"
+
+msgid "View/Edit Default Template"
+msgstr "デフォルトテンプレートを表示/編集します"
+
+msgid "Form & Language-Specific Email Templates"
+msgstr "フォームおよび言語固有の電子メールテンプレート"
+
+msgid "Form-Specific Email Templates"
+msgstr "フォーム固有の電子メールテンプレート"
+
+msgid "Language-Specific Email Templates"
+msgstr "言語固有の電子メールテンプレート"
+
+msgid "Customize email content for individual form, for specific language, or a combination of both. If no custom template exists for a given form or language, the default template will be used."
+msgstr "個々のフォーム、特定の言語、または両方の組み合わせの電子メールコンテンツをカスタマイズします。特定のフォームまたは言語にカスタムテンプレートが存在しない場合、デフォルトのテンプレートが使用されます。"
+
+msgid "Customize email content for individual form. If no custom template exists for a form, the default template will be used."
+msgstr "個々のフォームの電子メールコンテンツをカスタマイズします。フォームにカスタムテンプレートが存在しない場合、デフォルトのテンプレートが使用されます。"
+
+msgid "Customize email content for specific language. If no custom template exists for a language, the default template will be used."
+msgstr "特定の言語の電子メールコンテンツをカスタマイズします。言語のカスタムテンプレートが存在しない場合、デフォルトのテンプレートが使用されます。"
+
+msgid "-- Select a Form --"
+msgstr " - フォームを選択 - "
+
+msgid "-- Select a Language --"
+msgstr " - 言語を選択 - "
+
+msgid "Create Template"
+msgstr "テンプレートを作成します"
+
+msgid "Existing Custom Templates"
+msgstr "既存のカスタムテンプレート"
+
+msgid "Form Name"
+msgstr "フォーム名"
+
+msgid "Language"
+msgstr "言語"
+
+msgid "Preview"
+msgstr "プレビュー"
+
+msgid "Form:"
+msgstr "形状："
+
+msgid "Language:"
+msgstr "言語："
+
+msgid "Save & Next"
+msgstr "Save＆Next"
+
+msgid "For enhanced security change encryption method in %1$s on line %2$s"
+msgstr "強化されたセキュリティ変更暗号化のための％1 $ sオンライン％2 $ s"

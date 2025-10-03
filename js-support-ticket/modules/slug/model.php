@@ -154,7 +154,7 @@ class JSSTslugModel {
     }
 
     function getDefaultSlugFromSlug($layout) {
-        $query = "SELECT  defaultslug FROM `".jssupportticket::$_db->prefix."js_ticket_slug` WHERE defaultslug = '".esc_sql($layout)."'";
+        $query = "SELECT  defaultslug FROM `".jssupportticket::$_db->prefix."js_ticket_slug` WHERE slug = '".esc_sql($layout)."'";
         $val = jssupportticket::$_db->get_var($query);
         return sanitize_title($val);
     }

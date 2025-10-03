@@ -8100,3 +8100,382 @@ msgstr ""
 
 msgid "Limit AI Replies to Agent-Assigned Tickets"
 msgstr ""
+
+msgid "Email template already exist"
+msgstr ""
+
+msgid "JS HelpDesk System"
+msgstr ""
+
+msgid "JS HelpDesk"
+msgstr ""
+
+msgid "Main"
+msgstr ""
+
+msgid "Ticket Management"
+msgstr ""
+
+msgid "User Management"
+msgstr ""
+
+msgid "Content & Knowledge"
+msgstr ""
+
+msgid "Email & Communication"
+msgstr ""
+
+msgid "Products & Sales"
+msgstr ""
+
+msgid "System & Settings"
+msgstr ""
+
+msgid "No unused keys were found."
+msgstr ""
+
+msgid "unused key has been deleted successfully!"
+msgstr ""
+
+msgid "unused keys have been deleted successfully!"
+msgstr ""
+
+msgid "XXXXX-XXXXX-XXXXX-XXXXX"
+msgstr ""
+
+msgid "Manage Unused Keys"
+msgstr ""
+
+msgid "You have"
+msgstr ""
+
+msgid "unused key(s) that can be safely removed."
+msgstr ""
+
+msgid "Delete All Unused Keys"
+msgstr ""
+
+msgid "REPLIED_TICKET"
+msgstr ""
+
+msgid "Tickets Over Time"
+msgstr ""
+
+msgid "Welcome back to"
+msgstr ""
+
+msgid "As a visitor, you can easily create a support ticket by sharing your issue details."
+msgstr ""
+
+msgid "Have an issue?"
+msgstr ""
+
+msgid "Our support team is here to help. Create a new ticket to get started."
+msgstr ""
+
+msgid "Create New Ticket"
+msgstr ""
+
+msgid "Enter your information to check the status of your existing ticket."
+msgstr ""
+
+msgid "Welcome back,"
+msgstr ""
+
+msgid "open tickets"
+msgstr ""
+
+msgid "No open ticket"
+msgstr ""
+
+msgid ", and"
+msgstr ""
+
+msgid "is awaiting your reply."
+msgstr ""
+
+msgid "Need to assist a user?"
+msgstr ""
+
+msgid "Quickly create a new ticket on behalf of a user to provide support and track their request."
+msgstr ""
+
+msgid "Open ticket for user"
+msgstr ""
+
+msgid "OR Create a"
+msgstr ""
+
+msgid "Your Ticket Stats"
+msgstr ""
+
+msgid "Open Tickets"
+msgstr ""
+
+msgid "Closed Tickets"
+msgstr ""
+
+msgid "Overdue Tickets"
+msgstr ""
+
+msgid "Recent Tickets"
+msgstr ""
+
+msgid "You replied"
+msgstr ""
+
+msgid "Reply from"
+msgstr ""
+
+msgid "No replies yet"
+msgstr ""
+
+msgid "Customize"
+msgstr ""
+
+msgid "Quick Actions"
+msgstr ""
+
+msgid "Easily access your main tasks from here."
+msgstr ""
+
+msgid "Create a Ticket"
+msgstr ""
+
+msgid "Here's a summary of today's ticket activity. This helps in tracking our daily progress and workload."
+msgstr ""
+
+msgid "Created Tickets"
+msgstr ""
+
+msgid "Your activation key has expired."
+msgstr ""
+
+msgid "Please reactivate your key to continue receiving product updates, addons, and support."
+msgstr ""
+
+msgid "Reactivate Activation Key"
+msgstr ""
+
+msgid "Ticket Analysis (Last 7 Days)"
+msgstr ""
+
+msgid "Priority:"
+msgstr ""
+
+msgid "No Recent Tickets"
+msgstr ""
+
+msgid "New tickets will be displayed in this section."
+msgstr ""
+
+msgid "All Tickets Assigned"
+msgstr ""
+
+msgid "Great job! There are no unassigned tickets."
+msgstr ""
+
+msgid "Ticket updates and changes will appear here."
+msgstr ""
+
+msgid "Recently Replied"
+msgstr ""
+
+msgid "No Replies Yet"
+msgstr ""
+
+msgid "Recently replied tickets will be shown here."
+msgstr ""
+
+msgid "View All Replied Tickets"
+msgstr ""
+
+msgid "Recently Closed"
+msgstr ""
+
+msgid "No Closed Tickets"
+msgstr ""
+
+msgid "Recently closed tickets will be listed here."
+msgstr ""
+
+msgid "View All Closed Tickets"
+msgstr ""
+
+msgid "Tickets by Priority"
+msgstr ""
+
+msgid "Agent Performance"
+msgstr ""
+
+msgid "Assigned"
+msgstr ""
+
+msgid "No Agent Performance Data"
+msgstr ""
+
+msgid "Performance metrics will be displayed here."
+msgstr ""
+
+msgid "Recent Canned Responses"
+msgstr ""
+
+msgid "Recent canned responses will be listed here."
+msgstr ""
+
+msgid "Active Timers"
+msgstr ""
+
+msgid "Timers started by agent will be shown here."
+msgstr ""
+
+msgid "No Customer Activity"
+msgstr ""
+
+msgid "Customers with the most tickets will be listed here."
+msgstr ""
+
+msgid "Track the time spent on each ticket by each agent and each reply."
+msgstr ""
+
+msgid "Quick Installation Guide"
+msgstr ""
+
+msgid "How to setup of the Help Desk"
+msgstr ""
+
+msgid "Video thumbnail"
+msgstr ""
+
+msgid "Learn how to set up your Help Desk quickly and get it ready for use."
+msgstr ""
+
+msgid "How to Setup System Emails"
+msgstr ""
+
+msgid "Learn how to setup out going notification in the best Help Desk plugin for WordPress"
+msgstr ""
+
+msgid "How to Create a Ticket"
+msgstr ""
+
+msgid "A simple walkthrough of the ticket creation process for both user and administrator."
+msgstr ""
+
+msgid "How to Set Email Notifications"
+msgstr ""
+
+msgid "Configure your email notification settings to stay updated on ticket activity."
+msgstr ""
+
+msgid "How to Setup Custom Fields"
+msgstr ""
+
+msgid "Learn how to add custom fields to your ticket forms to collect more specific information."
+msgstr ""
+
+msgid "Customize Dashboard"
+msgstr ""
+
+msgid "Todays Ticket Distribution"
+msgstr ""
+
+msgid "Number of Tickets"
+msgstr ""
+
+msgid "Yesterday"
+msgstr ""
+
+msgid "2 days ago"
+msgstr ""
+
+msgid "3 days ago"
+msgstr ""
+
+msgid "4 days ago"
+msgstr ""
+
+msgid "5 days ago"
+msgstr ""
+
+msgid "6+ days ago"
+msgstr ""
+
+msgid "Number of Open Tickets"
+msgstr ""
+
+msgid "Email tempate has been deleted"
+msgstr ""
+
+msgid "Email tempate has not been deleted"
+msgstr ""
+
+msgid "Required Field(s) are not filled"
+msgstr ""
+
+msgid "Default Email Template"
+msgstr ""
+
+msgid "This template is used for all forms and languages unless a specific custom template is created."
+msgstr ""
+
+msgid "This template is used for all forms unless a specific form template is created."
+msgstr ""
+
+msgid "This template is used for all languages unless a specific language template is created."
+msgstr ""
+
+msgid "View/Edit Default Template"
+msgstr ""
+
+msgid "Form & Language-Specific Email Templates"
+msgstr ""
+
+msgid "Form-Specific Email Templates"
+msgstr ""
+
+msgid "Language-Specific Email Templates"
+msgstr ""
+
+msgid "Customize email content for individual form, for specific language, or a combination of both. If no custom template exists for a given form or language, the default template will be used."
+msgstr ""
+
+msgid "Customize email content for individual form. If no custom template exists for a form, the default template will be used."
+msgstr ""
+
+msgid "Customize email content for specific language. If no custom template exists for a language, the default template will be used."
+msgstr ""
+
+msgid "-- Select a Form --"
+msgstr ""
+
+msgid "-- Select a Language --"
+msgstr ""
+
+msgid "Create Template"
+msgstr ""
+
+msgid "Existing Custom Templates"
+msgstr ""
+
+msgid "Form Name"
+msgstr ""
+
+msgid "Language"
+msgstr ""
+
+msgid "Preview"
+msgstr ""
+
+msgid "Form:"
+msgstr ""
+
+msgid "Language:"
+msgstr ""
+
+msgid "Save & Next"
+msgstr ""
+
+msgid "For enhanced security change encryption method in %1$s on line %2$s"
+msgstr ""
+

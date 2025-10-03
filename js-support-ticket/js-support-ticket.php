@@ -3,14 +3,14 @@
 /**
  * @package JS Help Desk
  * @author Ahmad Bilal
- * @version 2.9.9
+ * @version 3.0.0
  */
 /*
   Plugin Name: JS Help Desk
   Plugin URI: https://www.jshelpdesk.com
   Description: JS Help Desk is a trusted open source ticket system. JS Help Desk is a simple, easy to use, web-based customer support system. User can create ticket from front-end. JS Help Desk comes packed with lot features than most of the expensive(and complex) support ticket system on market. JS Help Desk provide you best industry help desk system.
   Author: JS Help Desk
-  Version: 2.9.9
+  Version: 3.0.0
   Text Domain: js-support-ticket
   License: GPLv3
   Author URI: https://www.jshelpdesk.com
@@ -67,7 +67,7 @@ class jssupportticket {
         self::$_data = array();
         self::$_search = array();
         self::$_captcha = array();
-        self::$_currentversion = '299';
+        self::$_currentversion = '300';
         self::$_addon_query = array('select'=>'','join'=>'','where'=>'');
         self::$_jshdsession = JSSTincluder::getObjectClass('wphdsession');
         global $wpdb;
@@ -140,11 +140,11 @@ class jssupportticket {
             foreach( $options['plugins'] as $plugin ) {
                 if( $plugin == $our_plugin ) {
                     // restore colors data
-                    require(JSST_PLUGIN_PATH . 'includes/css/style.php');
+                    // require_once(JSST_PLUGIN_PATH . 'includes/css/style.php');
                     // restore colors data end
                     update_option('jsst_currentversion', self::$_currentversion);
                     include_once JSST_PLUGIN_PATH . 'includes/updates/updates.php';
-                    JSSTupdates::checkUpdates('299');
+                    JSSTupdates::checkUpdates('300');
                     JSSTincluder::getJSModel('jssupportticket')->updateColorFile();
                     JSSTincluder::getJSModel('jssupportticket')->jsst_check_license_status();
                     JSSTincluder::getJSModel('jssupportticket')->JSSTAddonsAutoUpdate();
@@ -591,7 +591,7 @@ class jssupportticket {
         if (get_option('jsst_show_key_expiry_msg') == '1') {
             ?>
             <div class="notice notice-error is-dismissible">
-                <p><?php echo __('Your JS Support Ticket license key has expired or is invalid. Please update it to continue receiving support and updates.', 'js-support-ticket'); ?></p>
+                <p><?php echo esc_html(__('Your JS Support Ticket license key has expired or is invalid. Please update it to continue receiving support and updates.', 'js-support-ticket')); ?></p>
             </div>
             <?php
         }
@@ -916,15 +916,23 @@ class jssupportticket {
                 //wp_enqueue_style('jssupportticket-main-css-rtl');
             }
             $color = require_once(JSST_PLUGIN_PATH . 'includes/css/style.php');
-            wp_enqueue_style('jssupportticket-color-css', JSST_PLUGIN_URL . 'includes/css/color.css');
+            // wp_enqueue_style('jssupportticket-color-css', JSST_PLUGIN_URL . 'includes/css/color.css');
         } else {    
             JSSTincluder::getJSModel('jssupportticket')->checkIfMainCssFileIsEnqued();
         }
     }
 
     public static function jsst_admin_register_plugin_styles() {
+        $page = JSSTrequest::getVar('page');
+        // List of all your plugin pages
+        $jsst_plugin_pages = array(
+            'jssupportticket','slug','ticket','fieldordering','agent','configuration','priority','status','thirdpartyimport','product','department','themes','reports','announcement','knowledgebase','email','systemerror','emailtemplate','translations','userfeild','cannedresponses','role','mail','banemail','banemaillog','emailpiping','export','feedback','postinstallation','faq','emailcc','agentautoassign','multiform','download','premiumplugin','shortcodes','help','helptopic','gdpr');
         wp_register_style('jsticket-bootstrapcss', JSST_PLUGIN_URL . 'includes/css/bootstrap.min.css');
         wp_register_style('jsticket-admincss', JSST_PLUGIN_URL . 'includes/css/admincss.css');
+        // Only enqueue Tailwind if the current page is part of your plugin
+        if (in_array($page, $jsst_plugin_pages)) {
+            wp_enqueue_script('jsticket-tailwind', JSST_PLUGIN_URL . 'includes/js/tailwind.js', array(), '3.4.4', false);
+        }
         wp_enqueue_style('jsticket-admincss');
         if(is_rtl()){
             wp_register_style('jsticket-admincss-rtl', JSST_PLUGIN_URL . 'includes/css/admincssrtl.css');

@@ -4,7 +4,7 @@ Donate link: https://jshelpdesk.com/pricing/
 Tags:  helpdesk,ticket system,AI support,tickets,support ticket,support desk,help,paid support,knowledgebase,faq, support plugin, ticket plugin, support system, ticketing system,monitor desk, help desk, IMAP, Email Piping, agents, js support ticket
 Requires at least: 5.5
 Tested up to: 6.8.2
-Stable tag: 2.9.9
+Stable tag: 3.0.0
 Requires PHP: 7.4
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
@@ -247,6 +247,11 @@ Automatic updates should work like a charm; as always though, ensure you backup 
 21. Internal Mails
 
 == Changelog ==
+= 3.0.0 =
+* Revamped admin dashboard with a fresh design and richer data insights.
+* Modernized user, agent, and visitor pages for a faster, clearer, and more intuitive experience.
+* Introduced form-based email templates — customize templates for each ticket form.
+
 = 2.9.9 =
 * Revamped dashboard with a fresh design and richer data insights.
 * Redesigned Addons Installation pages for a smoother and more intuitive experience.

@@ -64,7 +64,7 @@ class jssupportticketadmin {
             }else{
                 $this->addMissingAddonPage('agent');
             }
-              add_submenu_page('jssupportticket', // parent slug
+            add_submenu_page('jssupportticket', // parent slug
                     esc_html(__('Configurations', 'js-support-ticket')), // Page title
                     esc_html(__('Configurations', 'js-support-ticket')), // menu title
                     'jsst_support_ticket', // capability
@@ -165,8 +165,8 @@ class jssupportticketadmin {
                     array($this, 'showAdminPage') // function name
             );
             add_submenu_page('jssupportticket', // parent slug
-                esc_html(__('Translations')), // Page title
-                esc_html(__('Translations')), // menu title
+                esc_html(__('Translations', 'js-support-ticket')), // Page title
+                esc_html(__('Translations', 'js-support-ticket')), // menu title
                 'jsst_support_ticket', // capability
                 'jssupportticket&jstlay=translations', //menu slug
                 array($this, 'showAdminPage') // function name

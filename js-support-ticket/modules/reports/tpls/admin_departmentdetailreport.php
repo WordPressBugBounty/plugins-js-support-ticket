@@ -231,7 +231,7 @@ $link_export = admin_url('admin.php?page=export&task='.esc_attr($t_name).'&actio
 			                        </div>
 			                    </a>
 			                </div>
-			                <?php if(in_array('overdue', majesticsupport::$_active_addons)){ ?>
+			                <?php if(in_array('overdue', jssupportticket::$_active_addons)){ ?>
 						    <div class="js-ticket-link">
 						        <a class="js-ticket-link js-ticket-orange" href="#" data-tab-number="4" title="<?php echo esc_html(__('overdue ticket','js-support-ticket')); ?>">
 						            <div class="js-ticket-cricle-wrp" data-per="<?php echo esc_attr($overdue_percentage); ?>" >

@@ -334,7 +334,7 @@ wp_add_inline_script('js-support-ticket-main-js',$jssupportticket_js);
                     <div class="js-form-value" id="for-combo"></div>
                 </div>
                 <?php 
-                if (!empty(jssupportticket::$_data[0]['userfield']->field) && !in_array(jssupportticket::$_data[0]['userfield']->field, ['termsandconditions1','termsandconditions2','termsandconditions3'])) { ?>
+                if (empty(jssupportticket::$_data[0]['userfield']->id) || (!empty(jssupportticket::$_data[0]['userfield']->field) && !in_array(jssupportticket::$_data[0]['userfield']->field, ['termsandconditions1','termsandconditions2','termsandconditions3']))) { ?>
                     <div class="js-form-wrapper for-terms-condtions-hide">
                         <div class="js-form-title">
                             <?php echo esc_html(__('Default Value', 'js-support-ticket')); ?>
@@ -395,7 +395,7 @@ wp_add_inline_script('js-support-ticket-main-js',$jssupportticket_js);
                     </div>
                     <?php
                 }
-                if (empty(jssupportticket::$_data[0]['userfield']->cannotunpublish) && !empty(jssupportticket::$_data[0]['userfield']->field) && !in_array(jssupportticket::$_data[0]['userfield']->field, ['termsandconditions1','termsandconditions2','termsandconditions3'])) { ?>
+                if (empty(jssupportticket::$_data[0]['userfield']->id) || (!empty(jssupportticket::$_data[0]['userfield']->field) && !in_array(jssupportticket::$_data[0]['userfield']->field, ['termsandconditions1','termsandconditions2','termsandconditions3']))) { ?>
                     <div class="js-form-wrapper for-terms-condtions-hide">
                         <div class="js-form-title"><?php echo esc_html(__('Required', 'js-support-ticket')); ?></div>
                         <div class="js-form-value"><?php echo wp_kses(JSSTformfield::select('required', $yesno, isset(jssupportticket::$_data[0]['userfield']->required) ? jssupportticket::$_data[0]['userfield']->required : 0, '', array('class' => 'inputbox one js-form-select-field')), JSST_ALLOWED_TAGS); ?></div>
@@ -573,7 +573,7 @@ wp_add_inline_script('js-support-ticket-main-js',$jssupportticket_js);
                             </div>
                             <div class="js-form-visible-or-row"></div>
                             <div class="js-visible-conditions-addbtn-wrp">
-                                <span class="js-form-visible-addmore" onclick="getMoreORRow(this, <?php echo esc_js(jssupportticket::$_data['fieldfor']); ?>, <?php echo esc_js($mformid); ?> , '<?php echo isset(jssupportticket::$_data[0]['userfield']->field) ? jssupportticket::$_data[0]['userfield']->field : '' ?>', '<?php echo isset(jssupportticket::$_data[0]['userfield']->id) ? jssupportticket::$_data[0]['userfield']->id : '' ?>')">
+                                <span class="js-form-visible-addmore" onclick="getMoreORRow(this, <?php echo esc_js( jssupportticket::$_data['fieldfor'] ); ?>, <?php echo esc_js( $mformid ); ?>, '<?php echo isset( jssupportticket::$_data[0]['userfield']->field ) ? esc_js( jssupportticket::$_data[0]['userfield']->field ) : ''; ?>', '<?php echo isset( jssupportticket::$_data[0]['userfield']->id ) ? esc_js( jssupportticket::$_data[0]['userfield']->id ) : ''; ?>')">
                                     <img alt="<?php echo esc_html(__('OR', 'js-support-ticket')); ?>" class="input-field-remove-img" src="<?php echo esc_url(JSST_PLUGIN_URL) ?>includes/images/plus-icon.png">
                                     <?php echo esc_html(__('OR', 'js-support-ticket')); ?>
                                 </span>
@@ -585,7 +585,7 @@ wp_add_inline_script('js-support-ticket-main-js',$jssupportticket_js);
                             $androws = json_decode(jssupportticket::$_data[0]['userfield']->visibleparams);
                             $nextorid = 0;
                             foreach ($androws as $androwindex => $androw) { ?>
-                                <div class="js-form-visible-andwrp" id="js_and_row_<?php echo $androwindex; ?>">
+                                <div class="js-form-visible-andwrp" id="js_and_row_<?php echo esc_attr( $androwindex ); ?>">
                                     <?php
                                     if ($androwindex != 0) { ?>
                                         <div class="js-form-visible-subheading">
@@ -596,7 +596,7 @@ wp_add_inline_script('js-support-ticket-main-js',$jssupportticket_js);
                                     <div class="js-form-wrapper js-form-visible-wrapper">
                                         <?php 
                                         foreach ($androw as $orrowindex => $orrow) { ?>
-                                            <div id="js_or_row_<?php echo $nextorid; ?>" >
+                                            <div id="js_or_row_<?php echo esc_attr( $nextorid ); ?>" >
                                                 <?php
                                                 if ($orrowindex != 0) { ?>
                                                     <div class="js-form-visible-subheading">
@@ -614,8 +614,8 @@ wp_add_inline_script('js-support-ticket-main-js',$jssupportticket_js);
                                                     </span>
                                                     <div class="js-visible-conditions-body-row">
                                                         <div class="js-visible-conditions-body-value">
-                                                            <span onclick='deleteOrRow("js_or_row_<?php echo $nextorid; ?>")' class='js-visible-conditions-delbtn'>
-                                                                <img class='input-field-remove-img' src='<?php echo JSST_PLUGIN_URL ?>includes/images/delete-2.png' />
+                                                            <span onclick='deleteOrRow("js_or_row_<?php echo esc_js( $nextorid ); ?>")' class="js-visible-conditions-delbtn">
+                                                                <img class="input-field-remove-img" src="<?php echo esc_url( JSST_PLUGIN_URL . 'includes/images/delete-2.png' ); ?>" />
                                                             </span>
                                                         </div>
                                                     </div>
@@ -631,7 +631,7 @@ wp_add_inline_script('js-support-ticket-main-js',$jssupportticket_js);
                                         } ?>
                                         <div class="js-form-visible-or-row"></div>
                                         <div class="js-visible-conditions-addbtn-wrp">
-                                            <span class="js-form-visible-addmore" onclick="getMoreORRow(this, <?php echo esc_js(jssupportticket::$_data['fieldfor']); ?>, <?php echo esc_js($mformid); ?> , '<?php echo isset(jssupportticket::$_data[0]['userfield']->field) ? jssupportticket::$_data[0]['userfield']->field : '' ?>', '<?php echo isset(jssupportticket::$_data[0]['userfield']->id) ? jssupportticket::$_data[0]['userfield']->id : '' ?>')">
+                                            <span class="js-form-visible-addmore" onclick="getMoreORRow(this, <?php echo esc_js( jssupportticket::$_data['fieldfor'] ); ?>, <?php echo esc_js( $mformid ); ?>, '<?php echo isset( jssupportticket::$_data[0]['userfield']->field ) ? esc_js( jssupportticket::$_data[0]['userfield']->field ) : ''; ?>', '<?php echo isset( jssupportticket::$_data[0]['userfield']->id ) ? esc_js( jssupportticket::$_data[0]['userfield']->id ) : ''; ?>')">
                                                 <img alt="<?php echo esc_html(__('OR', 'js-support-ticket')); ?>" class="input-field-remove-img" src="<?php echo esc_url(JSST_PLUGIN_URL) ?>includes/images/plus-icon.png">
                                                 <?php echo esc_html(__('OR', 'js-support-ticket')); ?>
                                             </span>
@@ -648,7 +648,7 @@ wp_add_inline_script('js-support-ticket-main-js',$jssupportticket_js);
                     } ?>
                     <div class="js-form-visible-add-row"></div>
                     <div class="js-visible-conditions-addbtn-wrp">
-                        <span class="js-form-visible-addmore" onclick="getMoreANDRow(<?php echo esc_js(jssupportticket::$_data['fieldfor']); ?>, <?php echo esc_js($mformid); ?> , '<?php echo isset(jssupportticket::$_data[0]['userfield']->field) ? jssupportticket::$_data[0]['userfield']->field : '' ?>', '<?php echo isset(jssupportticket::$_data[0]['userfield']->id) ? jssupportticket::$_data[0]['userfield']->id : '' ?>')">
+                        <span class="js-form-visible-addmore" onclick="getMoreANDRow(<?php echo esc_js( jssupportticket::$_data['fieldfor'] ); ?>, <?php echo esc_js( $mformid ); ?>, '<?php echo esc_js( isset( jssupportticket::$_data[0]['userfield']->field ) ? jssupportticket::$_data[0]['userfield']->field : '' ); ?>', '<?php echo esc_js( isset( jssupportticket::$_data[0]['userfield']->id ) ? jssupportticket::$_data[0]['userfield']->id : '' ); ?>')">
                             <img alt="<?php echo esc_html(__('AND', 'js-support-ticket')); ?>" class="input-field-remove-img" src="<?php echo esc_url(JSST_PLUGIN_URL) ?>includes/images/plus-icon.png">
                             <?php echo esc_html(__('Add new', 'js-support-ticket')).' "'.esc_html(__('AND', 'js-support-ticket')).'" '.esc_html(__('visibility condition', 'js-support-ticket')); ?>
                         </span>

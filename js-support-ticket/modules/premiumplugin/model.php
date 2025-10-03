@@ -229,6 +229,71 @@ class JSSTpremiumpluginModel {
             }
         }
     }
+
+    function jssupportticket_count_unused_keys() {
+        // Get all transaction keys
+        $query = "
+            SELECT option_name, option_value 
+            FROM `" . jssupportticket::$_db->prefix . "options`
+            WHERE option_name LIKE 'transaction_key_for_js-support-ticket%'
+        ";
+        $results = jssupportticket::$_db->get_results($query);
+
+        if (empty($results)) {
+            return 0;
+        }
+
+        $unused = [];
+
+        foreach ($results as $row) {
+            $addon_slug = str_replace('transaction_key_for_', '', $row->option_name);
+
+            // 🔹 Replace this with your own addon check
+            $is_installed = apply_filters(
+                'jssupportticket_is_addon_installed',
+                file_exists(WP_PLUGIN_DIR . '/' . $addon_slug)
+            );
+
+            if (!$is_installed && !empty($row->option_value)) {
+                $unused[] = $row->option_value;
+            }
+        }
+
+        return count(array_unique($unused));
+    }
+
+    function jssupportticket_remove_unused_keys() {
+        $query = "
+            SELECT option_name, option_value 
+            FROM `" . jssupportticket::$_db->prefix . "options`
+            WHERE option_name LIKE 'transaction_key_for_js-support-ticket%'
+        ";
+        $results = jssupportticket::$_db->get_results($query);
+
+        if (empty($results)) {
+            return 0;
+        }
+
+        $deleted_keys = array();
+
+        foreach ($results as $row) {
+            $addon_slug = str_replace('transaction_key_for_', '', $row->option_name);
+
+            // Replace with your own addon check
+            $is_installed = apply_filters(
+                'jssupportticket_is_addon_installed',
+                file_exists(WP_PLUGIN_DIR . '/' . $addon_slug)
+            );
+
+            if (!$is_installed) {
+                if (delete_option($row->option_name)) {
+                    $deleted_keys[$row->option_value] = true; // track by key, not slug
+                }
+            }
+        }
+
+        return count($deleted_keys); // unique keys removed
+    }
 }
 
 ?>

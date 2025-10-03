@@ -12,6 +12,7 @@ class JSSTemailtemplatesTable extends JSSTtable {
 	public $body = '';
 	public $created = '';
 	public $status = '';
+	public $multiformid = '';
 
 	function __construct() {
 		parent::__construct('emailtemplates', 'id'); // tablename, primarykey

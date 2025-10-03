@@ -1495,6 +1495,26 @@ $plugin_array = get_option('active_plugins');
                         $field = JSSTformfield::select('cplink_latesttickets_staff', $showhide, jssupportticket::$_data[0]['cplink_latesttickets_staff']);
                         JSST_printConfigFieldSingle($title, $field);
                     }
+                    if(isset(jssupportticket::$_data[0]['cplink_latestdownloads_staff'])){
+                        $title = esc_html(__('Latest Downloads', 'js-support-ticket'));
+                        $field = JSSTformfield::select('cplink_latestdownloads_staff', $showhide, jssupportticket::$_data[0]['cplink_latestdownloads_staff']);
+                        JSST_printConfigFieldSingle($title, $field);
+                    }
+                    if(isset(jssupportticket::$_data[0]['cplink_latestannouncements_staff'])){
+                        $title = esc_html(__('Latest Announcements', 'js-support-ticket'));
+                        $field = JSSTformfield::select('cplink_latestannouncements_staff', $showhide, jssupportticket::$_data[0]['cplink_latestannouncements_staff']);
+                        JSST_printConfigFieldSingle($title, $field);
+                    }
+                    if(isset(jssupportticket::$_data[0]['cplink_latestkb_staff'])){
+                        $title = esc_html(__('Latest Knowledge Base', 'js-support-ticket'));
+                        $field = JSSTformfield::select('cplink_latestkb_staff', $showhide, jssupportticket::$_data[0]['cplink_latestkb_staff']);
+                        JSST_printConfigFieldSingle($title, $field);
+                    }
+                    if(isset(jssupportticket::$_data[0]['cplink_latestfaqs_staff'])){
+                        $title = esc_html(__('Latest FAQs', 'js-support-ticket'));
+                        $field = JSSTformfield::select('cplink_latestfaqs_staff', $showhide, jssupportticket::$_data[0]['cplink_latestfaqs_staff']);
+                        JSST_printConfigFieldSingle($title, $field);
+                    }
 
                     if(isset(jssupportticket::$_data[0]['cplink_helptopic_agent'])){
                         $title = esc_html(__('Help Topic', 'js-support-ticket'));
@@ -1622,6 +1642,11 @@ $plugin_array = get_option('active_plugins');
                     if(isset(jssupportticket::$_data[0]['cplink_latesttickets_user'])){
                         $title = esc_html(__('Latest Tickets', 'js-support-ticket'));
                         $field = JSSTformfield::select('cplink_latesttickets_user', $showhide, jssupportticket::$_data[0]['cplink_latesttickets_user']);
+                        JSST_printConfigFieldSingle($title, $field);
+                    }
+                    if(isset(jssupportticket::$_data[0]['cplink_ticketstats_user'])){
+                        $title =  esc_html(__('Ticket Statistics', 'js-support-ticket'));
+                        $field = JSSTformfield::select('cplink_ticketstats_user', $showhide, jssupportticket::$_data[0]['cplink_ticketstats_user']);
                         JSST_printConfigFieldSingle($title, $field);
                     }
                     if(isset(jssupportticket::$_data[0]['cplink_totalcount_user'])){
@@ -1930,7 +1955,12 @@ $plugin_array = get_option('active_plugins');
                       $privatecredentialsurl = WP_PLUGIN_DIR.'/js-support-ticket-privatecredentials/classes/privatecredentials.php';
                       $title = esc_html(__('Second Level Security', 'js-support-ticket'));
                       $field = '';
-                      $description =  sprintf(esc_html(__('For enhanced security change encryption method in %s on line %s', 'js-support-ticket')),$privatecredentialsurl,10);
+                      // Translators: %1$s is the file URL, %2$s is the line number.
+                      $description = sprintf(
+                        esc_html__( 'For enhanced security change encryption method in %1$s on line %2$s', 'js-support-ticket' ),
+                        $privatecredentialsurl,
+                        10
+                      );
                       JSST_printConfigFieldSingle($title, $field, $description);
                     ?>
                 </div>

@@ -250,7 +250,7 @@
                             <div class="add-on-name"><?php echo esc_html(__('Private Credentials','js-support-ticket')); ?></div>
 
                             <div class="add-on-txt"><?php echo esc_html(__("Collect your customer's private data, sensitive information from credit card to health information and store them encrypted.",'js-support-ticket')); ?></div>
-                            <a title="<?php echo esc_html(__('buy now','js-support-ticket')); ?>" href="https://jshelpdesk.com/product/widget/" class="add-on-btn"><?php echo esc_html(__('buy now','js-support-ticket')); ?></a>
+                            <a title="<?php echo esc_html(__('buy now','js-support-ticket')); ?>" href="https://jshelpdesk.com/product/private-credentials/" class="add-on-btn"><?php echo esc_html(__('buy now','js-support-ticket')); ?></a>
                         </div>
 
                         <div class="add-on-item help-topic">
@@ -258,7 +258,7 @@
                             <div class="add-on-name"><?php echo esc_html(__('WooCommerce Support','js-support-ticket')); ?></div>
 
                             <div class="add-on-txt"><?php echo esc_html(__('JS Help Desk WooCommerce provides the much-needed bridge between your WooCommerce store and the JS Help Desk.','js-support-ticket')); ?></div>
-                            <a title="<?php echo esc_html(__('buy now','js-support-ticket')); ?>" href="https://jshelpdesk.com/product/widget/" class="add-on-btn"><?php echo esc_html(__('buy now','js-support-ticket')); ?></a>
+                            <a title="<?php echo esc_html(__('buy now','js-support-ticket')); ?>" href="https://jshelpdesk.com/product/woocommerce/" class="add-on-btn"><?php echo esc_html(__('buy now','js-support-ticket')); ?></a>
                         </div>
 
                         <div class="add-on-item paid-support">

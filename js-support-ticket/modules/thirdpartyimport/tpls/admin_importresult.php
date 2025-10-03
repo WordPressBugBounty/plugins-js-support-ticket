@@ -55,10 +55,10 @@ if(!defined('ABSPATH'))
                 <table class="jsst-import-data-result-import-table" id="jsst-import-data-result-table">
                     <thead>
                         <tr>
-                            <th style="width:50%;"><?php echo  __('Entity','js-support-ticket'); ?></th>
-                            <th style="text-align: center;background-color: #006D3A;width:16.6%;"><?php echo  __('Imported','js-support-ticket'); ?></th>
-                            <th style="text-align: center;background-color: #A75424;width:16.6%;"><?php echo  __('Similar Found','js-support-ticket'); ?></th>
-                            <th style="text-align: center;background-color: #891518;width:16.6%;"><?php echo  __('Not Imported','js-support-ticket'); ?></th>
+                            <th style="width:50%;"><?php echo esc_html(__('Entity','js-support-ticket')); ?></th>
+                            <th style="text-align: center;background-color: #006D3A;width:16.6%;"><?php echo esc_html(__('Imported','js-support-ticket')); ?></th>
+                            <th style="text-align: center;background-color: #A75424;width:16.6%;"><?php echo esc_html(__('Similar Found','js-support-ticket')); ?></th>
+                            <th style="text-align: center;background-color: #891518;width:16.6%;"><?php echo esc_html(__('Not Imported','js-support-ticket')); ?></th>
 
                         </tr>
                     </thead>
@@ -105,7 +105,7 @@ if(!defined('ABSPATH'))
                 if(!empty($show_message) && in_array('multiform', jssupportticket::$_active_addons)){ ?>
                     <div class="jsst-import-data-addon-messagewrp">
                         <span class="jsst-import-data-addon-message">
-                            <?php echo  __('Fields are only available in the default form.','js-support-ticket'); ?>
+                            <?php echo esc_html(__('Fields are only available in the default form.','js-support-ticket')); ?>
                         </span>
                     </div>
                     <?php 

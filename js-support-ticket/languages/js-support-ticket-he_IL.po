@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 3.6\n"
+"X-Generator: Poedit 3.7\n"
 
 msgid "You are not allowed"
 msgstr "אין לך הרשאה"
@@ -2165,9 +2165,7 @@ msgstr "דף ברירת המחדל של הכרטיס"
 msgid "Select Page"
 msgstr "בחר עמוד"
 
-msgid ""
-"Select JS Help Desk default page, on the action system, will redirect on the selected page. If not select the default page, email "
-"links, and support icon might not work."
+msgid "Select JS Help Desk default page, on the action system, will redirect on the selected page. If not select the default page, email links, and support icon might not work."
 msgstr "בחר בדף ברירת המחדל של JS Help Desk, במערכת הפעולות, ינותב מחדש בעמוד שנבחר. אם לא בחר בדף ברירת המחדל, ייתכן שקישורי הדוא\\"
 
 msgid "Support Icon"
@@ -3241,16 +3239,13 @@ msgstr "מיזוג כרטיסים"
 msgid "Enables agents to merge two tickets of the same user into one instead of dealing with the same issue on many tickets."
 msgstr "מאפשר לסוכנים למזג שני כרטיסים של אותו משתמש לאחד במקום להתמודד עם אותה סוגיה בכרטיסים רבים."
 
-msgid ""
-"Defines rules or set specific intervals of time to make ticket auto overdue.The ticket can overdue by type or overdue by Cronjob."
-msgstr ""
-"מגדיר כללים או קבע פרקי זמן ספציפיים בכדי לגרום לאיחור אוטומטי של הכרטיס. הכרטיס יכול להתיישן לפי סוג או איחור על ידי Cronjob."
+msgid "Defines rules or set specific intervals of time to make ticket auto overdue.The ticket can overdue by type or overdue by Cronjob."
+msgstr "מגדיר כללים או קבע פרקי זמן ספציפיים בכדי לגרום לאיחור אוטומטי של הכרטיס. הכרטיס יכול להתיישן לפי סוג או איחור על ידי Cronjob."
 
 msgid "SMTP enables you to add custom mail protocol to send and receive emails within the js help desk."
 msgstr "SMTP מאפשר לך להוסיף פרוטוקול דואר מותאם אישית לשליחה וקבלת דוא\\"
 
-msgid ""
-"Displays complete ticket history along with the ticket status, currently assigned user and other actions performed on each ticket."
+msgid "Displays complete ticket history along with the ticket status, currently assigned user and other actions performed on each ticket."
 msgstr "מציג היסטוריית כרטיסים מלאה יחד עם מצב הכרטיס, המשתמש שהוקצה כעת ופעולות אחרות שבוצעו בכל כרטיס."
 
 msgid "Pre-populated messages allow support agents to respond quickly."
@@ -3734,13 +3729,11 @@ msgid "Wordpress Plugin"
 msgstr "תוסף Wordpress"
 
 msgid ""
-"JS Help Desk is a trusted open source ticket system. JS Help Desk is a simple, easy to use, web-based customer support system. "
-"Users can create a ticket from the front-end. JS Help Desk comes packed with lot features than most of the expensive(and complex) "
-"support ticket system on the market. The best part is, It completely free."
+"JS Help Desk is a trusted open source ticket system. JS Help Desk is a simple, easy to use, web-based customer support system. Users can create a ticket from the front-end. JS Help Desk comes "
+"packed with lot features than most of the expensive(and complex) support ticket system on the market. The best part is, It completely free."
 msgstr ""
-"דלפק העזרה של JS הוא מערכת כרטיסים עם קוד פתוח מהימן. דלפק העזרה של JS הוא מערכת תומכת לקוחות פשוטה, קלה לשימוש, מבוססת אינטרנט. "
-"משתמשים יכולים ליצור כרטיס מקצה הקצה. דלפק העזרה של JS מגיע עמוס בתכונות רבות מרוב מערכת הכרטיסים התומכים היקרים (והמורכבים) "
-"הקיימים בשוק. החלק הטוב ביותר הוא שזה בחינם לחלוטין."
+"דלפק העזרה של JS הוא מערכת כרטיסים עם קוד פתוח מהימן. דלפק העזרה של JS הוא מערכת תומכת לקוחות פשוטה, קלה לשימוש, מבוססת אינטרנט. משתמשים יכולים ליצור כרטיס מקצה הקצה. דלפק העזרה של JS מגיע "
+"עמוס בתכונות רבות מרוב מערכת הכרטיסים התומכים היקרים (והמורכבים) הקיימים בשוק. החלק הטוב ביותר הוא שזה בחינם לחלוטין."
 
 msgid "JS Help Desk Addon Installer"
 msgstr "מתקין דלפק העזרה של JS"
@@ -6307,8 +6300,7 @@ msgstr "עדכן כעת"
 msgid "Add-On’s For Help Desk"
 msgstr "תוספות לדלפק העזרה"
 
-msgid ""
-"Get trusted WordPress add on’s. Guaranteed to work fast, safe to use, beautifully coded, packed with features and easy to use."
+msgid "Get trusted WordPress add on’s. Guaranteed to work fast, safe to use, beautifully coded, packed with features and easy to use."
 msgstr "קבל תוספים אמינים של וורדפרס. מובטח לעבוד מהר, בטוח לשימוש, מקודד יפה, עמוס בתכונות וקל לשימוש."
 
 msgid "Save big with an exclusive membership plan today!"
@@ -6332,8 +6324,7 @@ msgstr "נושא עזרה"
 msgid "Help topics help users to find and select the area with which they need assistance."
 msgstr "נושאי עזרה עוזרים למשתמשים למצוא ולבחור את האזור שבו הם זקוקים לסיוע."
 
-msgid ""
-"The private note is used as reminders or to give other agents insights into the ticket issue. User Won't see the private notes."
+msgid "The private note is used as reminders or to give other agents insights into the ticket issue. User Won't see the private notes."
 msgstr "ההערה הפרטית משמשת כתזכורת או כדי לתת לסוכנים אחרים תובנות לגבי נושא הכרטיס. המשתמש לא יראה את ההערות הפרטיות."
 
 msgid "Stop losing productivity on repetitive queries,Build your knowledge base, group solutions by topics to facilitate users."
@@ -6396,9 +6387,7 @@ msgstr "דוא\"ל cc"
 msgid "Email Cc"
 msgstr "דוא\"ל עותק"
 
-msgid ""
-"CC(Carbon Copy) - the people who should know about the information which is being shared and the people included are able to see "
-"who is there in the list."
+msgid "CC(Carbon Copy) - the people who should know about the information which is being shared and the people included are able to see who is there in the list."
 msgstr "CC(Carbon Copy) - האנשים שצריכים לדעת על המידע שמשותף והאנשים הכלולים יכולים לראות מי נמצא שם ברשימה."
 
 msgid "multiform"
@@ -6410,9 +6399,7 @@ msgstr "Multiform מאפשר למשתמש להוסיף יותר מטופס אח�
 msgid "agent auto assign"
 msgstr "הקצאת סוכן אוטומטית"
 
-msgid ""
-"When auto assignment is enabled and a ticket is created, an appropriate agent is automatically assigned to the ticket and it is "
-"moved to the Assigned state."
+msgid "When auto assignment is enabled and a ticket is created, an appropriate agent is automatically assigned to the ticket and it is moved to the Assigned state."
 msgstr "כאשר הקצאה אוטומטית מופעלת וכרטיס נוצר, סוכן מתאים מוקצה אוטומטית לכרטיס והוא מועבר למצב מוקצה."
 
 msgid "Social Login"
@@ -6445,9 +6432,7 @@ msgstr "הכל בסטנדרט כלול ו"
 msgid "All Future Addons"
 msgstr "כל התוספות העתידיות"
 
-msgid ""
-"Hey there! We have recently launched a fresh update for the add-ons. Don't forget to update the add-ons to enjoy the greatest "
-"features!"
+msgid "Hey there! We have recently launched a fresh update for the add-ons. Don't forget to update the add-ons to enjoy the greatest features!"
 msgstr "שלום! לאחרונה השקנו עדכון חדש עבור התוספות. אל תשכח לעדכן את התוספות כדי ליהנות מהתכונות הטובות ביותר!"
 
 msgid "View Addone Status"
@@ -7044,11 +7029,8 @@ msgstr "הוסף אישורים"
 msgid "Edit Help Topic"
 msgstr "ערוך את נושא העזרה"
 
-msgid ""
-"e.g ' I have read and agree to the [link] Terms and Conditions[/link].  ' The text between [link] and [/link] will be linked to "
-"provided url or wordpress page."
-msgstr ""
-"למשל ' קראתי ואני מסכים ל[קישור] התנאים וההגבלות[/link]. הטקסט בין [קישור] ל-[/קישור] יקושר לכתובת האתר או לדף וורדפרס שסופק."
+msgid "e.g ' I have read and agree to the [link] Terms and Conditions[/link].  ' The text between [link] and [/link] will be linked to provided url or wordpress page."
+msgstr "למשל ' קראתי ואני מסכים ל[קישור] התנאים וההגבלות[/link]. הטקסט בין [קישור] ל-[/קישור] יקושר לכתובת האתר או לדף וורדפרס שסופק."
 
 msgid "login"
 msgstr "התחברות"
@@ -8378,3 +8360,381 @@ msgstr "עליך לשנות את שם ספריית הנתונים הקיימת �
 
 msgid "URL for use with your own scripts and third party"
 msgstr "כתובת אתר לשימוש עם סקריפטים משלך וצד שלישי"
+
+msgid "Email template already exist"
+msgstr "תבנית דוא\"ל כבר קיימת"
+
+msgid "JS HelpDesk System"
+msgstr "מערכת JS HelpDesk"
+
+msgid "JS HelpDesk"
+msgstr "JS HelpDesk"
+
+msgid "Main"
+msgstr "רָאשִׁי"
+
+msgid "Ticket Management"
+msgstr "ניהול כרטיסים"
+
+msgid "User Management"
+msgstr "ניהול משתמשים"
+
+msgid "Content & Knowledge"
+msgstr "תוכן וידע"
+
+msgid "Email & Communication"
+msgstr "דוא\"ל ותקשורת"
+
+msgid "Products & Sales"
+msgstr "מוצרים ומכירות"
+
+msgid "System & Settings"
+msgstr "מערכת והגדרות"
+
+msgid "No unused keys were found."
+msgstr "לא נמצאו מפתחות שאינם בשימוש."
+
+msgid "unused key has been deleted successfully!"
+msgstr "מפתח שאינו בשימוש נמחק בהצלחה!"
+
+msgid "unused keys have been deleted successfully!"
+msgstr "מפתחות שאינם בשימוש נמחקו בהצלחה!"
+
+msgid "XXXXX-XXXXX-XXXXX-XXXXX"
+msgstr "Xxxxx-xxxxx-xxxxx-xxxxx"
+
+msgid "Manage Unused Keys"
+msgstr "נהל מפתחות שאינם בשימוש"
+
+msgid "You have"
+msgstr "יש לך"
+
+msgid "unused key(s) that can be safely removed."
+msgstr "מפתח (ים) שאינם בשימוש שניתן להסיר בבטחה."
+
+msgid "Delete All Unused Keys"
+msgstr "מחק את כל המפתחות שאינם בשימוש"
+
+msgid "REPLIED_TICKET"
+msgstr "השיב_טיקט"
+
+msgid "Tickets Over Time"
+msgstr "כרטיסים לאורך זמן"
+
+msgid "Welcome back to"
+msgstr "ברוך הבא חזרה ל"
+
+msgid "As a visitor, you can easily create a support ticket by sharing your issue details."
+msgstr "כמבקר, אתה יכול בקלות ליצור כרטיס תמיכה על ידי שיתוף פרטי הבעיה שלך."
+
+msgid "Have an issue?"
+msgstr "יש בעיה?"
+
+msgid "Our support team is here to help. Create a new ticket to get started."
+msgstr "צוות התמיכה שלנו כאן כדי לעזור. צור כרטיס חדש כדי להתחיל."
+
+msgid "Create New Ticket"
+msgstr "צור כרטיס חדש"
+
+msgid "Enter your information to check the status of your existing ticket."
+msgstr "הזן את המידע שלך כדי לבדוק את מצב הכרטיס הקיים שלך."
+
+msgid "Welcome back,"
+msgstr "ברוך הבא,"
+
+msgid "open tickets"
+msgstr "פתח כרטיסים"
+
+msgid "No open ticket"
+msgstr "אין כרטיס פתוח"
+
+msgid ", and"
+msgstr ", ו"
+
+msgid "is awaiting your reply."
+msgstr "מחכה לתשובתך."
+
+msgid "Need to assist a user?"
+msgstr "צריך לסייע למשתמש?"
+
+msgid "Quickly create a new ticket on behalf of a user to provide support and track their request."
+msgstr "צור במהירות כרטיס חדש מטעם משתמש כדי לספק תמיכה ולעקוב אחר בקשתו."
+
+msgid "Open ticket for user"
+msgstr "פתוח כרטיס למשתמש"
+
+msgid "OR Create a"
+msgstr "או ליצור א"
+
+msgid "Your Ticket Stats"
+msgstr "סטטיסטיקות הכרטיסים שלך"
+
+msgid "Open Tickets"
+msgstr "פתח כרטיסים"
+
+msgid "Closed Tickets"
+msgstr "כרטיסים סגורים"
+
+msgid "Overdue Tickets"
+msgstr "איחור של כרטיסים"
+
+msgid "Recent Tickets"
+msgstr "כרטיסים אחרונים"
+
+msgid "You replied"
+msgstr "ענית"
+
+msgid "Reply from"
+msgstr "תגובה מ"
+
+msgid "No replies yet"
+msgstr "עדיין אין תשובות"
+
+msgid "Customize"
+msgstr "התאמה אישית"
+
+msgid "Quick Actions"
+msgstr "פעולות מהירות"
+
+msgid "Easily access your main tasks from here."
+msgstr "לגשת בקלות למשימות העיקריות שלך מכאן."
+
+msgid "Create a Ticket"
+msgstr "צור כרטיס"
+
+msgid "Here's a summary of today's ticket activity. This helps in tracking our daily progress and workload."
+msgstr "להלן סיכום של פעילות הכרטיסים של היום. זה עוזר במעקב אחר ההתקדמות והעומס היומיומי שלנו."
+
+msgid "Created Tickets"
+msgstr "יצרו כרטיסים"
+
+msgid "Your activation key has expired."
+msgstr "פג תוקף מפתח ההפעלה שלך."
+
+msgid "Please reactivate your key to continue receiving product updates, addons, and support."
+msgstr "אנא הפעל מחדש את המפתח שלך כדי להמשיך לקבל עדכוני מוצרים, תוספות ותמיכה."
+
+msgid "Reactivate Activation Key"
+msgstr "הפעל מחדש את מפתח ההפעלה"
+
+msgid "Ticket Analysis (Last 7 Days)"
+msgstr "ניתוח כרטיסים (7 הימים האחרונים)"
+
+msgid "Priority:"
+msgstr "עֲדִיפוּת:"
+
+msgid "No Recent Tickets"
+msgstr "אין כרטיסים אחרונים"
+
+msgid "New tickets will be displayed in this section."
+msgstr "בסעיף זה יוצגו כרטיסים חדשים."
+
+msgid "All Tickets Assigned"
+msgstr "כל הכרטיסים שהוקצו"
+
+msgid "Great job! There are no unassigned tickets."
+msgstr "עבודה נהדרת! אין כרטיסים שלא הוקצו."
+
+msgid "Ticket updates and changes will appear here."
+msgstr "עדכוני כרטיסים ושינויים יופיעו כאן."
+
+msgid "Recently Replied"
+msgstr "ענה לאחרונה"
+
+msgid "No Replies Yet"
+msgstr "עדיין אין תשובות"
+
+msgid "Recently replied tickets will be shown here."
+msgstr "לאחרונה יופיעו כרטיסים כאן."
+
+msgid "View All Replied Tickets"
+msgstr "צפה בכל הכרטיסים השיבו"
+
+msgid "Recently Closed"
+msgstr "לאחרונה סגור"
+
+msgid "No Closed Tickets"
+msgstr "אין כרטיסים סגורים"
+
+msgid "Recently closed tickets will be listed here."
+msgstr "כרטיסים סגורים לאחרונה יופיעו כאן."
+
+msgid "View All Closed Tickets"
+msgstr "צפה בכל הכרטיסים הסגורים"
+
+msgid "Tickets by Priority"
+msgstr "כרטיסים בעדיפות"
+
+msgid "Agent Performance"
+msgstr "ביצועי סוכן"
+
+msgid "Assigned"
+msgstr "מוּקצֶה"
+
+msgid "No Agent Performance Data"
+msgstr "אין נתוני ביצועי סוכן"
+
+msgid "Performance metrics will be displayed here."
+msgstr "מדדי ביצועים יוצגו כאן."
+
+msgid "Recent Canned Responses"
+msgstr "תגובות משומרות אחרונות"
+
+msgid "Recent canned responses will be listed here."
+msgstr "תגובות משומר אחרונות יופיעו כאן."
+
+msgid "Active Timers"
+msgstr "טיימרים פעילים"
+
+msgid "Timers started by agent will be shown here."
+msgstr "טיימרים שהתחילו על ידי הסוכן יוצגו כאן."
+
+msgid "No Customer Activity"
+msgstr "אין פעילות לקוח"
+
+msgid "Customers with the most tickets will be listed here."
+msgstr "לקוחות עם הכי הרבה הכרטיסים יופיעו כאן."
+
+msgid "Track the time spent on each ticket by each agent and each reply."
+msgstr "עקוב אחר הזמן שהוקדש לכל כרטיס על ידי כל סוכן וכל תשובה."
+
+msgid "Quick Installation Guide"
+msgstr "מדריך להתקנה מהירה"
+
+msgid "How to setup of the Help Desk"
+msgstr "כיצד להגדיר את דלפק העזרה"
+
+msgid "Video thumbnail"
+msgstr "תמונה ממוזערת וידאו"
+
+msgid "Learn how to set up your Help Desk quickly and get it ready for use."
+msgstr "למד כיצד להגדיר את דלפק העזרה שלך במהירות ולהכין אותו לשימוש."
+
+msgid "How to Setup System Emails"
+msgstr "כיצד להגדיר מיילים של מערכת"
+
+msgid "Learn how to setup out going notification in the best Help Desk plugin for WordPress"
+msgstr "למד כיצד להתקין הודעה על התוסף הטוב ביותר של דלפק העזרה עבור WordPress"
+
+msgid "How to Create a Ticket"
+msgstr "כיצד ליצור כרטיס"
+
+msgid "A simple walkthrough of the ticket creation process for both user and administrator."
+msgstr "דרך פשוטה של ​​תהליך יצירת הכרטיסים הן למשתמש והן למנהל."
+
+msgid "How to Set Email Notifications"
+msgstr "כיצד להגדיר התראות בדוא\"ל"
+
+msgid "Configure your email notification settings to stay updated on ticket activity."
+msgstr "קבע את התצורה של הגדרות ההודעות בדוא\"ל שלך כדי להישאר מעודכן בפעילות הכרטיסים."
+
+msgid "How to Setup Custom Fields"
+msgstr "כיצד להגדיר שדות מותאמים אישית"
+
+msgid "Learn how to add custom fields to your ticket forms to collect more specific information."
+msgstr "למד כיצד להוסיף שדות מותאמים אישית לטפסי הכרטיסים שלך כדי לאסוף מידע ספציפי יותר."
+
+msgid "Customize Dashboard"
+msgstr "התאם אישית את לוח המחוונים"
+
+msgid "Todays Ticket Distribution"
+msgstr "הפצת כרטיסים של ימינו"
+
+msgid "Number of Tickets"
+msgstr "מספר הכרטיסים"
+
+msgid "Yesterday"
+msgstr "אֶתמוֹל"
+
+msgid "2 days ago"
+msgstr "לפני יומיים"
+
+msgid "3 days ago"
+msgstr "לפני 3 ימים"
+
+msgid "4 days ago"
+msgstr "לפני 4 ימים"
+
+msgid "5 days ago"
+msgstr "לפני 5 ימים"
+
+msgid "6+ days ago"
+msgstr "לפני 6+ ימים"
+
+msgid "Number of Open Tickets"
+msgstr "מספר הכרטיסים הפתוחים"
+
+msgid "Email tempate has been deleted"
+msgstr "תבנית דוא\"ל נמחקת"
+
+msgid "Email tempate has not been deleted"
+msgstr "תבנית דוא\"ל לא נמחקת"
+
+msgid "Required Field(s) are not filled"
+msgstr "שדה / ים נדרשים אינם מלאים"
+
+msgid "Default Email Template"
+msgstr "תבנית דוא\"ל ברירת מחדל"
+
+msgid "This template is used for all forms and languages unless a specific custom template is created."
+msgstr "תבנית זו משמשת לכל הצורות והשפות אלא אם נוצרת תבנית מותאמת אישית ספציפית."
+
+msgid "This template is used for all forms unless a specific form template is created."
+msgstr "תבנית זו משמשת לכל הצורות אלא אם כן נוצרת תבנית טופס ספציפית."
+
+msgid "This template is used for all languages unless a specific language template is created."
+msgstr "תבנית זו משמשת לכל השפות אלא אם נוצרת תבנית שפה ספציפית."
+
+msgid "View/Edit Default Template"
+msgstr "תצוגה/ערוך תבנית ברירת מחדל"
+
+msgid "Form & Language-Specific Email Templates"
+msgstr "תבניות דוא\"ל ספציפיות לשפה"
+
+msgid "Form-Specific Email Templates"
+msgstr "תבניות דוא\"ל ספציפיות לטופס"
+
+msgid "Language-Specific Email Templates"
+msgstr "תבניות דוא\"ל ספציפיות לשפה"
+
+msgid "Customize email content for individual form, for specific language, or a combination of both. If no custom template exists for a given form or language, the default template will be used."
+msgstr "התאם אישית תוכן דוא\"ל לטופס פרטני, לשפה ספציפית, או שילוב של שניהם. אם לא קיימת תבנית מותאמת אישית לטופס או שפה נתונה, תבנית ברירת המחדל תשמש."
+
+msgid "Customize email content for individual form. If no custom template exists for a form, the default template will be used."
+msgstr "התאם אישית תוכן דוא\"ל לטופס פרטני. אם לא קיימת תבנית מותאמת אישית לטופס, תבנית ברירת המחדל תשמש."
+
+msgid "Customize email content for specific language. If no custom template exists for a language, the default template will be used."
+msgstr "התאם אישית תוכן דוא\"ל לשפה ספציפית. אם לא קיימת תבנית מותאמת אישית לשפה, תבנית ברירת המחדל תשמש."
+
+msgid "-- Select a Form --"
+msgstr "-בחר טופס-"
+
+msgid "-- Select a Language --"
+msgstr "-בחר שפה-"
+
+msgid "Create Template"
+msgstr "צור תבנית"
+
+msgid "Existing Custom Templates"
+msgstr "תבניות מותאמות אישית קיימות"
+
+msgid "Form Name"
+msgstr "שם טופס"
+
+msgid "Language"
+msgstr "שָׂפָה"
+
+msgid "Preview"
+msgstr "תצוגה מקדימה"
+
+msgid "Form:"
+msgstr "טוֹפֶס:"
+
+msgid "Language:"
+msgstr "שָׂפָה:"
+
+msgid "Save & Next"
+msgstr "שמור & הבא"
+
+msgid "For enhanced security change encryption method in %1$s on line %2$s"
+msgstr "לשיטת הצפנת שינוי אבטחה משופרת ב- %1 $ s על קו %2 $ s"

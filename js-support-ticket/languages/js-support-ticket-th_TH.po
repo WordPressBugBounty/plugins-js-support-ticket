@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 3.6\n"
+"X-Generator: Poedit 3.7\n"
 
 msgid "You are not allowed"
 msgstr "คุณไม่ได้รับอนุญาต"
@@ -1964,9 +1964,7 @@ msgstr "หน้าเริ่มต้นของคำร้อง"
 msgid "Select Page"
 msgstr "เลือกหน้า"
 
-msgid ""
-"Select JS Help Desk default page, on the action system, will redirect on the selected page. If not select the default page, email links, and support icon might not "
-"work."
+msgid "Select JS Help Desk default page, on the action system, will redirect on the selected page. If not select the default page, email links, and support icon might not work."
 msgstr "เลือกหน้าเริ่มต้นของ JS Help Desk บนระบบการดำเนินการจะเปลี่ยนเส้นทางในหน้าที่เลือก หากไม่ได้เลือกหน้าเริ่มต้นลิงก์อีเมลและไอคอนการสนับสนุนอาจไม่ทำงาน"
 
 msgid "Support Icon"
@@ -3437,11 +3435,11 @@ msgid "Wordpress Plugin"
 msgstr "ปลั๊กอิน Wordpress"
 
 msgid ""
-"JS Help Desk is a trusted open source ticket system. JS Help Desk is a simple, easy to use, web-based customer support system. Users can create a ticket from the front-"
-"end. JS Help Desk comes packed with lot features than most of the expensive(and complex) support ticket system on the market. The best part is, It completely free."
+"JS Help Desk is a trusted open source ticket system. JS Help Desk is a simple, easy to use, web-based customer support system. Users can create a ticket from the front-end. JS Help Desk comes "
+"packed with lot features than most of the expensive(and complex) support ticket system on the market. The best part is, It completely free."
 msgstr ""
-"JS Help Desk เป็นระบบตั๋วโอเพ่นซอร์สที่เชื่อถือได้ JS Help Desk เป็นระบบสนับสนุนลูกค้าที่ใช้งานง่ายและใช้งานง่ายบนเว็บ ผู้ใช้สามารถสร้างตั๋วได้จากส่วนหน้า JS Help Desk "
-"มาพร้อมกับคุณสมบัติมากมายกว่าระบบตั๋วส่วนใหญ่ที่ซับซ้อน (และซับซ้อน) ในตลาด ส่วนที่ดีที่สุดคือมันฟรีอย่างสมบูรณ์"
+"JS Help Desk เป็นระบบตั๋วโอเพ่นซอร์สที่เชื่อถือได้ JS Help Desk เป็นระบบสนับสนุนลูกค้าที่ใช้งานง่ายและใช้งานง่ายบนเว็บ ผู้ใช้สามารถสร้างตั๋วได้จากส่วนหน้า JS Help Desk มาพร้อมกับคุณสมบัติมากมายกว่าระบบตั๋วส่วนใหญ่ที่ซับซ้อน (และซับซ้อน) "
+"ในตลาด ส่วนที่ดีที่สุดคือมันฟรีอย่างสมบูรณ์"
 
 msgid "JS Help Desk Addon Installer"
 msgstr "โปรแกรมติดตั้ง Addon ของ JS Help Desk"
@@ -8389,3 +8387,381 @@ msgstr "คุณต้องเปลี่ยนชื่อไดเรกท
 
 msgid "URL for use with your own scripts and third party"
 msgstr "URL สำหรับใช้กับสคริปต์ของคุณเองและบุคคลที่สาม"
+
+msgid "Email template already exist"
+msgstr "เทมเพลตอีเมลมีอยู่แล้ว"
+
+msgid "JS HelpDesk System"
+msgstr "ระบบ Helpdesk JS"
+
+msgid "JS HelpDesk"
+msgstr "JS Helpdesk"
+
+msgid "Main"
+msgstr "หลัก"
+
+msgid "Ticket Management"
+msgstr "การจัดการตั๋ว"
+
+msgid "User Management"
+msgstr "การจัดการผู้ใช้"
+
+msgid "Content & Knowledge"
+msgstr "เนื้อหาและความรู้"
+
+msgid "Email & Communication"
+msgstr "อีเมลและการสื่อสาร"
+
+msgid "Products & Sales"
+msgstr "ผลิตภัณฑ์และการขาย"
+
+msgid "System & Settings"
+msgstr "ระบบและการตั้งค่า"
+
+msgid "No unused keys were found."
+msgstr "ไม่พบคีย์ที่ไม่ได้ใช้"
+
+msgid "unused key has been deleted successfully!"
+msgstr "คีย์ที่ไม่ได้ใช้ถูกลบออกได้สำเร็จ!"
+
+msgid "unused keys have been deleted successfully!"
+msgstr "คีย์ที่ไม่ได้ใช้ถูกลบออกได้สำเร็จ!"
+
+msgid "XXXXX-XXXXX-XXXXX-XXXXX"
+msgstr "XXXXX-XXXXX-XXXXX-XXXXX"
+
+msgid "Manage Unused Keys"
+msgstr "จัดการกุญแจที่ไม่ได้ใช้"
+
+msgid "You have"
+msgstr "คุณมี"
+
+msgid "unused key(s) that can be safely removed."
+msgstr "คีย์ที่ไม่ได้ใช้ซึ่งสามารถลบออกได้อย่างปลอดภัย"
+
+msgid "Delete All Unused Keys"
+msgstr "ลบคีย์ที่ไม่ได้ใช้ทั้งหมด"
+
+msgid "REPLIED_TICKET"
+msgstr "ตอบกลับ"
+
+msgid "Tickets Over Time"
+msgstr "ตั๋วเมื่อเวลาผ่านไป"
+
+msgid "Welcome back to"
+msgstr "ยินดีต้อนรับกลับสู่"
+
+msgid "As a visitor, you can easily create a support ticket by sharing your issue details."
+msgstr "ในฐานะผู้เยี่ยมชมคุณสามารถสร้างตั๋วสนับสนุนได้อย่างง่ายดายโดยการแบ่งปันรายละเอียดปัญหาของคุณ"
+
+msgid "Have an issue?"
+msgstr "มีปัญหา?"
+
+msgid "Our support team is here to help. Create a new ticket to get started."
+msgstr "ทีมสนับสนุนของเราพร้อมให้ความช่วยเหลือ สร้างตั๋วใหม่เพื่อเริ่มต้น"
+
+msgid "Create New Ticket"
+msgstr "สร้างตั๋วใหม่"
+
+msgid "Enter your information to check the status of your existing ticket."
+msgstr "ป้อนข้อมูลของคุณเพื่อตรวจสอบสถานะของตั๋วที่มีอยู่ของคุณ"
+
+msgid "Welcome back,"
+msgstr "ยินดีต้อนรับกลับมา"
+
+msgid "open tickets"
+msgstr "เปิดตั๋ว"
+
+msgid "No open ticket"
+msgstr "ไม่มีตั๋วเปิด"
+
+msgid ", and"
+msgstr ", และ"
+
+msgid "is awaiting your reply."
+msgstr "กำลังรอการตอบกลับของคุณ"
+
+msgid "Need to assist a user?"
+msgstr "ต้องการช่วยเหลือผู้ใช้หรือไม่?"
+
+msgid "Quickly create a new ticket on behalf of a user to provide support and track their request."
+msgstr "สร้างตั๋วใหม่อย่างรวดเร็วในนามของผู้ใช้เพื่อให้การสนับสนุนและติดตามคำขอของพวกเขา"
+
+msgid "Open ticket for user"
+msgstr "เปิดตั๋วสำหรับผู้ใช้"
+
+msgid "OR Create a"
+msgstr "หรือสร้างไฟล์"
+
+msgid "Your Ticket Stats"
+msgstr "สถิติตั๋วของคุณ"
+
+msgid "Open Tickets"
+msgstr "เปิดตั๋ว"
+
+msgid "Closed Tickets"
+msgstr "ตั๋วปิด"
+
+msgid "Overdue Tickets"
+msgstr "ตั๋วเกินกำหนด"
+
+msgid "Recent Tickets"
+msgstr "ตั๋วล่าสุด"
+
+msgid "You replied"
+msgstr "คุณตอบกลับ"
+
+msgid "Reply from"
+msgstr "ตอบกลับ"
+
+msgid "No replies yet"
+msgstr "ยังไม่มีคำตอบ"
+
+msgid "Customize"
+msgstr "ปรับแต่ง"
+
+msgid "Quick Actions"
+msgstr "การกระทำที่รวดเร็ว"
+
+msgid "Easily access your main tasks from here."
+msgstr "เข้าถึงงานหลักของคุณได้อย่างง่ายดายจากที่นี่"
+
+msgid "Create a Ticket"
+msgstr "สร้างตั๋ว"
+
+msgid "Here's a summary of today's ticket activity. This helps in tracking our daily progress and workload."
+msgstr "นี่คือบทสรุปของกิจกรรมตั๋ววันนี้ สิ่งนี้ช่วยในการติดตามความคืบหน้าและภาระงานประจำวันของเรา"
+
+msgid "Created Tickets"
+msgstr "ตั๋วที่สร้างขึ้น"
+
+msgid "Your activation key has expired."
+msgstr "คีย์การเปิดใช้งานของคุณหมดอายุแล้ว"
+
+msgid "Please reactivate your key to continue receiving product updates, addons, and support."
+msgstr "โปรดเปิดใช้งานคีย์ของคุณอีกครั้งเพื่อรับการอัปเดตผลิตภัณฑ์เสริมและการสนับสนุนต่อไป"
+
+msgid "Reactivate Activation Key"
+msgstr "เปิดใช้งานคีย์การเปิดใช้งานอีกครั้ง"
+
+msgid "Ticket Analysis (Last 7 Days)"
+msgstr "การวิเคราะห์ตั๋ว (7 วันสุดท้าย)"
+
+msgid "Priority:"
+msgstr "ลำดับความสำคัญ:"
+
+msgid "No Recent Tickets"
+msgstr "ไม่มีตั๋วล่าสุด"
+
+msgid "New tickets will be displayed in this section."
+msgstr "ตั๋วใหม่จะแสดงในส่วนนี้"
+
+msgid "All Tickets Assigned"
+msgstr "ตั๋วทั้งหมดที่ได้รับมอบหมาย"
+
+msgid "Great job! There are no unassigned tickets."
+msgstr "เยี่ยมมาก! ไม่มีตั๋วที่ไม่ได้กำหนด"
+
+msgid "Ticket updates and changes will appear here."
+msgstr "การอัปเดตตั๋วและการเปลี่ยนแปลงจะปรากฏขึ้นที่นี่"
+
+msgid "Recently Replied"
+msgstr "เมื่อเร็ว ๆ นี้ตอบกลับ"
+
+msgid "No Replies Yet"
+msgstr "ยังไม่มีคำตอบ"
+
+msgid "Recently replied tickets will be shown here."
+msgstr "เมื่อเร็ว ๆ นี้ตั๋วตอบกลับจะแสดงที่นี่"
+
+msgid "View All Replied Tickets"
+msgstr "ดูตั๋วตอบกลับทั้งหมด"
+
+msgid "Recently Closed"
+msgstr "ปิดเมื่อเร็ว ๆ นี้"
+
+msgid "No Closed Tickets"
+msgstr "ไม่มีตั๋วปิด"
+
+msgid "Recently closed tickets will be listed here."
+msgstr "ตั๋วปิดเมื่อเร็ว ๆ นี้จะแสดงที่นี่"
+
+msgid "View All Closed Tickets"
+msgstr "ดูตั๋วปิดทั้งหมด"
+
+msgid "Tickets by Priority"
+msgstr "ตั๋วตามลำดับความสำคัญ"
+
+msgid "Agent Performance"
+msgstr "ประสิทธิภาพของตัวแทน"
+
+msgid "Assigned"
+msgstr "ที่ได้รับมอบหมาย"
+
+msgid "No Agent Performance Data"
+msgstr "ไม่มีข้อมูลประสิทธิภาพของตัวแทน"
+
+msgid "Performance metrics will be displayed here."
+msgstr "ตัวชี้วัดประสิทธิภาพจะแสดงที่นี่"
+
+msgid "Recent Canned Responses"
+msgstr "การตอบกลับกระป๋องล่าสุด"
+
+msgid "Recent canned responses will be listed here."
+msgstr "การตอบกลับกระป๋องล่าสุดจะแสดงที่นี่"
+
+msgid "Active Timers"
+msgstr "ตัวจับเวลาที่ใช้งานอยู่"
+
+msgid "Timers started by agent will be shown here."
+msgstr "ตัวจับเวลาที่เริ่มต้นโดยตัวแทนจะแสดงที่นี่"
+
+msgid "No Customer Activity"
+msgstr "ไม่มีกิจกรรมของลูกค้า"
+
+msgid "Customers with the most tickets will be listed here."
+msgstr "ลูกค้าที่มีตั๋วมากที่สุดจะแสดงที่นี่"
+
+msgid "Track the time spent on each ticket by each agent and each reply."
+msgstr "ติดตามเวลาที่ใช้ในตั๋วแต่ละใบโดยแต่ละตัวแทนและการตอบกลับแต่ละครั้ง"
+
+msgid "Quick Installation Guide"
+msgstr "คู่มือการติดตั้งด่วน"
+
+msgid "How to setup of the Help Desk"
+msgstr "วิธีการตั้งค่าแผนกช่วยเหลือ"
+
+msgid "Video thumbnail"
+msgstr "ภาพขนาดย่อวิดีโอ"
+
+msgid "Learn how to set up your Help Desk quickly and get it ready for use."
+msgstr "เรียนรู้วิธีการตั้งค่าแผนกช่วยเหลือของคุณอย่างรวดเร็วและเตรียมพร้อมสำหรับการใช้งาน"
+
+msgid "How to Setup System Emails"
+msgstr "วิธีการตั้งค่าอีเมลระบบ"
+
+msgid "Learn how to setup out going notification in the best Help Desk plugin for WordPress"
+msgstr "เรียนรู้วิธีการตั้งค่าการแจ้งเตือนในปลั๊กอิน Help Desk ที่ดีที่สุดสำหรับ WordPress"
+
+msgid "How to Create a Ticket"
+msgstr "วิธีสร้างตั๋ว"
+
+msgid "A simple walkthrough of the ticket creation process for both user and administrator."
+msgstr "คำแนะนำที่เรียบง่ายของกระบวนการสร้างตั๋วสำหรับทั้งผู้ใช้และผู้ดูแลระบบ"
+
+msgid "How to Set Email Notifications"
+msgstr "วิธีตั้งค่าการแจ้งเตือนทางอีเมล"
+
+msgid "Configure your email notification settings to stay updated on ticket activity."
+msgstr "กำหนดค่าการตั้งค่าการแจ้งเตือนทางอีเมลของคุณเพื่ออัปเดตเกี่ยวกับกิจกรรมตั๋ว"
+
+msgid "How to Setup Custom Fields"
+msgstr "วิธีการตั้งค่าฟิลด์ที่กำหนดเอง"
+
+msgid "Learn how to add custom fields to your ticket forms to collect more specific information."
+msgstr "เรียนรู้วิธีเพิ่มฟิลด์ที่กำหนดเองในแบบฟอร์มตั๋วของคุณเพื่อรวบรวมข้อมูลเฉพาะเพิ่มเติม"
+
+msgid "Customize Dashboard"
+msgstr "ปรับแต่งแดชบอร์ด"
+
+msgid "Todays Ticket Distribution"
+msgstr "การกระจายตั๋วในปัจจุบัน"
+
+msgid "Number of Tickets"
+msgstr "จำนวนตั๋ว"
+
+msgid "Yesterday"
+msgstr "เมื่อวาน"
+
+msgid "2 days ago"
+msgstr "2 วันที่ผ่านมา"
+
+msgid "3 days ago"
+msgstr "3 วันที่ผ่านมา"
+
+msgid "4 days ago"
+msgstr "4 วันที่ผ่านมา"
+
+msgid "5 days ago"
+msgstr "5 วันที่ผ่านมา"
+
+msgid "6+ days ago"
+msgstr "6+ วันที่ผ่านมา"
+
+msgid "Number of Open Tickets"
+msgstr "จำนวนตั๋วเปิด"
+
+msgid "Email tempate has been deleted"
+msgstr "เทมเพลตอีเมลถูกลบ"
+
+msgid "Email tempate has not been deleted"
+msgstr "เทมเพลตอีเมลยังไม่ถูกลบ"
+
+msgid "Required Field(s) are not filled"
+msgstr "ฟิลด์ที่จำเป็นจะไม่ถูกกรอก"
+
+msgid "Default Email Template"
+msgstr "เทมเพลตอีเมลเริ่มต้น"
+
+msgid "This template is used for all forms and languages unless a specific custom template is created."
+msgstr "เทมเพลตนี้ใช้สำหรับทุกรูปแบบและภาษาเว้นแต่จะมีการสร้างเทมเพลตที่กำหนดเองเฉพาะ"
+
+msgid "This template is used for all forms unless a specific form template is created."
+msgstr "เทมเพลตนี้ใช้สำหรับทุกรูปแบบเว้นแต่จะมีการสร้างเทมเพลตแบบฟอร์มเฉพาะ"
+
+msgid "This template is used for all languages unless a specific language template is created."
+msgstr "เทมเพลตนี้ใช้สำหรับทุกภาษาเว้นแต่จะมีการสร้างเทมเพลตภาษาเฉพาะ"
+
+msgid "View/Edit Default Template"
+msgstr "ดู/แก้ไขเทมเพลตเริ่มต้น"
+
+msgid "Form & Language-Specific Email Templates"
+msgstr "เทมเพลตอีเมลแบบฟอร์มและภาษาเฉพาะ"
+
+msgid "Form-Specific Email Templates"
+msgstr "เทมเพลตอีเมลแบบฟอร์มเฉพาะ"
+
+msgid "Language-Specific Email Templates"
+msgstr "เทมเพลตอีเมลเฉพาะภาษา"
+
+msgid "Customize email content for individual form, for specific language, or a combination of both. If no custom template exists for a given form or language, the default template will be used."
+msgstr "ปรับแต่งเนื้อหาอีเมลสำหรับแต่ละรูปแบบสำหรับภาษาที่เฉพาะเจาะจงหรือการรวมกันของทั้งสองอย่าง หากไม่มีเทมเพลตที่กำหนดเองสำหรับแบบฟอร์มหรือภาษาที่กำหนดเทมเพลตเริ่มต้นจะถูกใช้"
+
+msgid "Customize email content for individual form. If no custom template exists for a form, the default template will be used."
+msgstr "ปรับแต่งเนื้อหาอีเมลสำหรับแต่ละรูปแบบ หากไม่มีเทมเพลตที่กำหนดเองสำหรับแบบฟอร์มเทมเพลตเริ่มต้นจะถูกใช้"
+
+msgid "Customize email content for specific language. If no custom template exists for a language, the default template will be used."
+msgstr "ปรับแต่งเนื้อหาอีเมลสำหรับภาษาที่เฉพาะเจาะจง หากไม่มีเทมเพลตที่กำหนดเองสำหรับภาษาเทมเพลตเริ่มต้นจะถูกใช้"
+
+msgid "-- Select a Form --"
+msgstr "-เลือกแบบฟอร์ม-"
+
+msgid "-- Select a Language --"
+msgstr "-เลือกภาษา-"
+
+msgid "Create Template"
+msgstr "สร้างเทมเพลต"
+
+msgid "Existing Custom Templates"
+msgstr "เทมเพลตที่กำหนดเองที่มีอยู่"
+
+msgid "Form Name"
+msgstr "ชื่อแบบฟอร์ม"
+
+msgid "Language"
+msgstr "ภาษา"
+
+msgid "Preview"
+msgstr "ดูตัวอย่าง"
+
+msgid "Form:"
+msgstr "รูปร่าง:"
+
+msgid "Language:"
+msgstr "ภาษา:"
+
+msgid "Save & Next"
+msgstr "บันทึกและถัดไป"
+
+msgid "For enhanced security change encryption method in %1$s on line %2$s"
+msgstr "สำหรับวิธีการเข้ารหัสการเปลี่ยนแปลงความปลอดภัยที่เพิ่มขึ้นใน %1 $ s บนบรรทัด %2 $ s"

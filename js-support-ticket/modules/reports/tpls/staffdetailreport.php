@@ -271,7 +271,7 @@ wp_add_inline_script('ticket-google-charts-handle',$jssupportticket_js);
         </div>
         <?php
         if (jssupportticket::$_data[1]) {
-            echo '<div class="tablenav"><div class="tablenav-pages">' . (jssupportticket::$_data[1]) . '</div></div>';
+            echo '<div class="tablenav"><div class="tablenav-pages">' . wp_kses_post(jssupportticket::$_data[1]) . '</div></div>';
         }
     } else {
         JSSTlayout::getNoRecordFound();

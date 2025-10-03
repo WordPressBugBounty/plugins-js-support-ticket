@@ -1892,6 +1892,8 @@ class JSSTticketModel {
 
     function tickChangeStatus($data) {
         $ticketid = $data['ticketid'];
+        if (!is_numeric($data['status']))
+            return false;
         if (!is_numeric($ticketid))
             return false;
         if ( in_array('agent',jssupportticket::$_active_addons) && JSSTincluder::getJSModel('agent')->isUserStaff()) {

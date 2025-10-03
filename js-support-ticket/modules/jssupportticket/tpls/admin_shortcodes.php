@@ -3,10 +3,9 @@
     die('Restricted Access');
 ?>
 <?php
-    $filepath = JSST_PLUGIN_PATH . 'includes/css/style.php';
-    $filestring = file_get_contents($filepath);
-    $color1 = JSSTincluder::getJSModel('jssupportticket')->getColorCode($filestring, 1);
-    $color3 = JSSTincluder::getJSModel('jssupportticket')->getColorCode($filestring, 3);
+	JSSTincluder::getJSModel('jssupportticket')->jsst_get_theme_colors();
+	$color1 = jssupportticket::$_colors['color1'];
+    $color3 = jssupportticket::$_colors['color3'];
 ?>
 <div id="jsstadmin-wrapper">
     <div id="jsstadmin-leftmenu">

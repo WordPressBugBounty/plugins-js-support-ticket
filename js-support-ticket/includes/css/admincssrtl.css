@@ -5,13 +5,8 @@ div#jsstadmin-leftmenu {left: auto;right: 0;}
 div#jsstadmin-data {padding-left: 0;padding-right: 70px;}
 #jsstadmin-wrapper:not(.menu-collasped-active) #jsstadmin-leftmenu .jsstadmin-sidebar-menu li.treeview:hover .jsstadmin-sidebar-submenu {left: auto;right: 60px;}
 #jsstadmin-wrapper:not(.menu-collasped-active) #jsstadmin-leftmenu .jsstadmin-sidebar-menu li.treeview:hover .jsstadmin-sidebar-submenu::before {left: auto;right: -5px;}
-ul.jsstadmin-sidebar-menu > li > a:not(.jsst_js-install-btn):hover, 
-ul.jsstadmin-sidebar-menu > li.active > a:not(.jsst_js-install-btn), 
-ul.jsstadmin-sidebar-menu > li.menu-open > a:not(.jsst_js-install-btn) {border-left: unset;border-right: 3px solid #1572e8;}
 ul.jsstadmin-sidebar-menu li a:not(.jsst_js-install-btn) {border-left: unset;border-right: 3px solid transparent;}
-ul.jsstadmin-sidebar-menu li a span.jsst_text {padding-left: unset;padding-right: 35px;}
 ul.jsstadmin-sidebar-menu li a:not(.jsst_js-install-btn) {border-left: unset;border-right: 3px solid transparent;}
-ul.jsstadmin-sidebar-menu li ul.jsstadmin-sidebar-submenu {margin: 5px 30px 10px 0px;}
 div#jsstadmin-logo img#jsstadmin-menu-toggle {float: left;}
 div#jsstadmin-wrapper div.js-other-products-wrp {float: right;}
 div.js-cp-video-baner {transform: scalex(-1);}
@@ -348,6 +343,10 @@ div#jsstadmin-data-wrp .jsstadmin-update-key-form .jsstadmin-update-key-wrp .jss
 .js-ticket-list {text-align: right;}
 .js-ticket-filter-select {background-position: left 10px center;}
 .js-ticket-ai-powered-reply-content {text-align: right;}
+/* email template multifoam */
+.js-ticket-email-templates-wrapper{float: right;}
+div.js-ticket-card-label{margin-right: 0;margin-left: 5px;}
+.js-ticket-custom-templates-table th, .js-ticket-custom-templates-table td{text-align: right;}
 /* cp */
 #jsstadmin-wrapper .js-hlpdsk-legend-dot{margin-right:0;margin-left:0.4rem;}
 #jsstadmin-wrapper .js-hlpdsk-modern-table tr td::before {margin-right:0;margin-left:20px;}
@@ -357,7 +356,11 @@ div#jsst-main-wrapper div.close-button-bottom{margin-left: unset;margin-right: a
 div#jsst-main-wrapper div.jsst-config-topheading span.jsst-config-steps{margin-left: unset;margin-right: auto;}
 /* new cp update addon message */
 #jsstadmin-wrapper .js-hlpdeske-message-bar{border-left: unset;border-right: 4px solid #4f46e5;}
-
+.jsstadmin-sidebar-menu > li.treeview > a::after {right: auto !important;left: 16px;}
+.jsst_menu-icon{margin-right: 0 !important;margin-left: 16px;}
+.jsstadmin-sidebar-submenu{padding:5px 42px 5px 0px !important;}
+#side-menu{left: 0;right: auto;}
+#side-menu.translate-x-full{--tw-translate-x:-100%;}
 @media (max-width: 1280px){
     /* admin theme page */
     .js-admin-theme-page span.js-ticket-wrapper-textcolor{top: 0;left: 0;right: 0;margin-right: 0;margin-left: 10px;}
@@ -374,6 +377,7 @@ div#jsst-main-wrapper div.jsst-config-topheading span.jsst-config-steps{margin-l
 	div.menu-collasped-active div#jsstadmin-data{padding: 0;}
 	div.js-update-alert-wrp a.js-update-alert-btn {float: right;margin-right: 60px;margin-left: auto;}
     div#jsst-main-wrapper div.close-button-bottom{right: auto;left: 10px;}
+    div#jsstadmin-leftmenu{float: right;}
 }
 @media (max-width:767px) {
 	/*review*/

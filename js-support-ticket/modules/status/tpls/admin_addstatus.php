@@ -52,7 +52,7 @@ wp_add_inline_script('js-support-ticket-main-js',$jssupportticket_js);
                     <div class="js-form-title"><?php echo esc_html(__('Status', 'js-support-ticket')); ?>&nbsp;<span style="color: red;" >*</span></div>
                     <div class="js-form-value"><?php echo wp_kses(JSSTformfield::text('status', isset(jssupportticket::$_data[0]->status) ? jssupportticket::$_data[0]->status : '', array('class' => 'inputbox js-form-input-field', 'data-validation' => 'required')), JSST_ALLOWED_TAGS) ?></div>
                     <?php if(!empty(jssupportticket::$_data[0]->custom_status)) { ?>
-                        <div class="js-form-desc">(<?php echo jssupportticket::$_data[0]->custom_status; ?>)</div>
+                        <div class="js-form-desc">(<?php echo esc_html( jssupportticket::$_data[0]->custom_status ); ?>)</div>
                     <?php } ?>
                 </div>
                 <div class="js-form-wrapper">

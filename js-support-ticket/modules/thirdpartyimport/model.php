@@ -16,13 +16,30 @@ class JSSTthirdpartyimportModel {
 
 
     private $support_candy_user_ids = array();
-    private $support_candy_department_ids = array();
     private $support_candy_agent_ids = array();
+    private $support_candy_department_ids = array();
     private $support_candy_agent_role_ids = array();
     private $support_candy_ticket_ids = array();
     private $support_candy_status_ids = array();
     private $support_candy_priority_ids = array();
     private $support_candy_premade_ids = array();
+
+
+    private $awesome_support_user_ids = array();
+    private $awesome_support_agent_ids = array();
+    private $awesome_support_department_ids = array();
+    private $awesome_support_ticket_ids = array();
+    private $awesome_support_status_ids = array();
+    private $awesome_support_priority_ids = array();
+    private $awesome_support_premade_ids = array();
+
+
+    private $fluent_support_user_ids = array();
+    private $fluent_support_agent_ids = array();
+    private $fluent_support_ticket_ids = array();
+    private $fluent_support_priority_ids = array();
+    private $fluent_support_premade_ids = array();
+
 
 
     private $_params_flag;
@@ -95,16 +112,6 @@ class JSSTthirdpartyimportModel {
                 'skipped'  => 0,
                 'failed'   => 0,
             ],
-            'ticket' => [
-                'imported' => 0,
-                'skipped'  => 0,
-                'failed'   => 0,
-            ],
-            'field' => [
-                'imported' => 0,
-                'skipped'  => 0,
-                'failed'   => 0,
-            ],
             'department' => [
                 'imported' => 0,
                 'skipped'  => 0,
@@ -134,6 +141,16 @@ class JSSTthirdpartyimportModel {
                 'imported' => 0,
                 'skipped'  => 0,
                 'failed'   => 0,
+            ],
+            'field' => [
+                'imported' => 0,
+                'skipped'  => 0,
+                'failed'   => 0,
+            ],
+            'ticket' => [
+                'imported' => 0,
+                'skipped'  => 0,
+                'failed'   => 0,
             ]
         ];
         $this->fluent_support_import_count = [
@@ -143,21 +160,6 @@ class JSSTthirdpartyimportModel {
                 'failed'   => 0,
             ],
             'agent' => [
-                'imported' => 0,
-                'skipped'  => 0,
-                'failed'   => 0,
-            ],
-            'ticket' => [
-                'imported' => 0,
-                'skipped'  => 0,
-                'failed'   => 0,
-            ],
-            'field' => [
-                'imported' => 0,
-                'skipped'  => 0,
-                'failed'   => 0,
-            ],
-            'department' => [
                 'imported' => 0,
                 'skipped'  => 0,
                 'failed'   => 0,
@@ -172,12 +174,17 @@ class JSSTthirdpartyimportModel {
                 'skipped'  => 0,
                 'failed'   => 0,
             ],
-            'status' => [
+            'product' => [
                 'imported' => 0,
                 'skipped'  => 0,
                 'failed'   => 0,
             ],
-            'product' => [
+            'field' => [
+                'imported' => 0,
+                'skipped'  => 0,
+                'failed'   => 0,
+            ],
+            'ticket' => [
                 'imported' => 0,
                 'skipped'  => 0,
                 'failed'   => 0,
@@ -2157,7 +2164,7 @@ class JSSTthirdpartyimportModel {
 
     function importAwesomeSupportData() {
         // Only for development – remove before pushing to production
-        $this->deletesupportcandyimporteddata();
+        // $this->deletesupportcandyimporteddata();
 
         // Reset previously imported IDs from options
         update_option('js_support_ticket_awesome_support_data_statuses', '');
@@ -2197,9 +2204,8 @@ class JSSTthirdpartyimportModel {
             $this->importAwesomeSupportDepartments();
         }
         $this->importAwesomeSupportPriorities();
-        
-        $this->importAwesomeSupportStatus();
         $this->importAwesomeSupportPremades();
+        $this->importAwesomeSupportStatus();
         $this->importAwesomeSupportProducts();
         $this->importAwesomeSupportTicketFields();
         $this->getAwesomeSupportTickets($this->as_ticket_custom_fields);
@@ -2226,22 +2232,9 @@ class JSSTthirdpartyimportModel {
 
         // Users
         $missingUser = 0;
-        $query = "SELECT id FROM `" . jssupportticket::$_db->prefix . "users`";
-        $users = jssupportticket::$_db->get_results($query);
-        $wpUsers = array();
-        $jsstUsers = array();
-        foreach ($users as $key => $user) {
-            $wpUsers[] = $user->id;
-        }
-        $query = " SELECT wpuid FROM `" . jssupportticket::$_db->prefix . "js_ticket_users`";
-        $users = jssupportticket::$_db->get_results($query);
-        foreach ($users as $key => $user) {
-            $jsstUsers[] = $user->wpuid;
-        }
-
-        $missingUsers = array_diff($wpUsers,$jsstUsers);
-        $count = count($missingUsers);
-        if ($count > 0) $entity_counts['user'] = $count;
+        $query = "SELECT COUNT(id) FROM `" . jssupportticket::$_db->prefix . "users`";
+        $users = jssupportticket::$_db->get_var($query);
+        if ($users > 0) $entity_counts['user'] = $users;
 
         // Agents
         $agents = get_users([
@@ -2268,9 +2261,13 @@ class JSSTthirdpartyimportModel {
         $count = is_array($priorities) ? count($priorities) : 0;
         if ($count > 0) $entity_counts['priority'] = $count;
 
-        // Faqs
-        $count = post_type_exists( 'faq' ) ? $this->getPostConutByType( 'faq' ) : 0;
-        if ($count > 0) $entity_counts['faq'] = $count;
+        // Canned Responses
+        $count = post_type_exists( 'canned-response' ) ? $this->getPostConutByType( 'canned-response' ) : 0;
+        if ($count > 0) $entity_counts['canned response'] = $count;
+
+        // Statuses
+        $count = post_type_exists( 'wpass_status' ) ? $this->getPostConutByType( 'wpass_status' ) : 0;
+        if ($count > 0) $entity_counts['status'] = $count;
 
         // Products
         $products = get_terms([
@@ -2281,20 +2278,15 @@ class JSSTthirdpartyimportModel {
         $count = is_array($products) ? count($products) : 0;
         if ($count > 0) $entity_counts['product'] = $count;
 
-        // Canned Responses
-        $count = post_type_exists( 'canned-response' ) ? $this->getPostConutByType( 'canned-response' ) : 0;
-        if ($count > 0) $entity_counts['canned response'] = $count;
-
-        // Statuses
-        $count = post_type_exists( 'wpass_status' ) ? $this->getPostConutByType( 'wpass_status' ) : 0;
-        if ($count > 0) $entity_counts['status'] = $count;
+        // Faqs
+        $count = post_type_exists( 'faq' ) ? $this->getPostConutByType( 'faq' ) : 0;
+        if ($count > 0) $entity_counts['faq'] = $count;
 
         // Custom Ticket Fields
-        if (jssupportticket::$_db->get_var("SHOW TABLES LIKE '" . jssupportticket::$_db->prefix . "psmsc_custom_fields'")) {
-            $query = "SELECT COUNT(*) 
-                      FROM `" . jssupportticket::$_db->prefix . "psmsc_custom_fields`
-                      WHERE `slug` LIKE 'cust_%' AND `type` LIKE 'cf_%' AND `field` = 'ticket'";
-            $count = (int) jssupportticket::$_db->get_var($query);
+        $custom_fields = get_option("wpas_custom_fields");
+
+        if (!empty($custom_fields)) {
+            $count = is_array($custom_fields) ? count($custom_fields) : 0;
             if ($count > 0) $entity_counts['field'] = $count;
         }
 
@@ -2314,7 +2306,13 @@ class JSSTthirdpartyimportModel {
         $query = "DELETE FROM `" . jssupportticket::$_db->prefix . "js_ticket_fieldsordering` WHERE id > 27;";
         jssupportticket::$_db->query($query);
 
+        $query = "UPDATE `" . jssupportticket::$_db->prefix . "js_ticket_fieldsordering` SET `visible_field`='' ";
+        jssupportticket::$_db->query($query);
+
         $query = "DELETE FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets`;";
+        jssupportticket::$_db->query($query);
+
+        $query = "DELETE FROM `" . jssupportticket::$_db->prefix . "js_ticket_staff_time`;";
         jssupportticket::$_db->query($query);
 
         $query = "DELETE FROM `" . jssupportticket::$_db->prefix . "js_ticket_replies`;";
@@ -2329,12 +2327,18 @@ class JSSTthirdpartyimportModel {
         if (in_array('agent', jssupportticket::$_active_addons)) {
             $query = "DELETE FROM `" . jssupportticket::$_db->prefix . "js_ticket_staff`;";
             jssupportticket::$_db->query($query);
+            $query = "DELETE FROM `" . jssupportticket::$_db->prefix . "js_ticket_acl_roles` WHERE id > 1;";
+            jssupportticket::$_db->query($query);
         }
         
         $query = "DELETE FROM `" . jssupportticket::$_db->prefix . "js_ticket_users`;";
         jssupportticket::$_db->query($query);
+        
+        $query = "DELETE FROM `" . jssupportticket::$_db->prefix . "js_ticket_department_message_premade`;";
+        jssupportticket::$_db->query($query);
 
     }
+
     private function importAwesomeSupportAgents() {
         // check if user already processed for import
         $imported_agents = array();
@@ -2348,8 +2352,15 @@ class JSSTthirdpartyimportModel {
         $total_agents = count($agents);
 
         if($agents){
-            $roleid = $this->getAgentRoleIdByAwesomeSupport();
+            if (in_array('agent', jssupportticket::$_active_addons) ) {
+                $roleid = $this->getAgentRoleIdByAwesomeSupport();
+            }
             foreach($agents AS $agent){
+                // Failed if addon not installed
+                if (!in_array('agent', jssupportticket::$_active_addons) ) {
+                    $this->awesome_support_import_count['agent']['failed']++;
+                    continue;
+                }
                 $wpuid = (int) $agent->data->ID;
                 // Skip if already imported
                 if (in_array($wpuid, $imported_agents, true)) {
@@ -2358,27 +2369,37 @@ class JSSTthirdpartyimportModel {
                 }
                 $name = $agent->data->display_name;
 
-                $query = "SELECT user.*
-                            FROM `" . jssupportticket::$_db->prefix . "users` AS user
-                            WHERE user.id = " . $wpuid;
+                $query = "
+                    SELECT user.*
+                        FROM `" . jssupportticket::$_db->prefix . "users` AS user
+                        WHERE user.id = " . $wpuid;
                 $wpuser = jssupportticket::$_db->get_row($query);
 
                 if(!$wpuser){
                     $this->awesome_support_import_count['agent']['failed'] += 1;
                     continue;
                 }
+                $js_user = JSSTincluder::getObjectClass('user')->getjssupportticketuidbyuserid($wpuid);
+                if (!empty($js_user) && isset($js_user[0]->id)) {
+                    $js_uid = (int)$js_user[0]->id;
+                } else {
+                    $this->awesome_support_import_count['agent']['failed']++;
+                    continue;
+                }
 
-                $query = "SELECT staff.*
-                            FROM `" . jssupportticket::$_db->prefix . "js_ticket_staff` AS staff
-                            WHERE staff.uid = " . $wpuid;
+                $query = "
+                    SELECT staff.*
+                        FROM `" . jssupportticket::$_db->prefix . "js_ticket_staff` AS staff
+                            WHERE staff.uid = " . $js_uid;
                 $staff = jssupportticket::$_db->get_row($query);
 
                 if (!$staff) {
+                    
                     $timestamp = date_i18n('Y-m-d H:i:s');
 
                     $data = [
                         'id'           => '',
-                        'uid'          => $wpuid,
+                        'uid'          => $js_uid,
                         'groupid'      => '',
                         'roleid'       =>  $roleid,
                         'departmentid' => '',
@@ -2546,7 +2567,7 @@ class JSSTthirdpartyimportModel {
                 WHERE LOWER(department.departmentname) = '". esc_sql($name) ."'";
             $existing = jssupportticket::$_db->get_row($check_query);
 
-            if(!$existing){ // not exists
+            if (!$existing) { // not exists
                 $row = JSSTincluder::getJSTable('departments');
 
                 $updated = date_i18n('Y-m-d H:i:s');
@@ -2569,7 +2590,7 @@ class JSSTthirdpartyimportModel {
 
                 if (!$row->store()) {
                     $this->awesome_support_import_count['department']['failed'] += 1;
-                }else{
+                } else {
                     $this->awesome_support_department_ids[] = $department->id;
                     $this->awesome_support_import_count['department']['imported'] += 1;
                 }
@@ -2585,7 +2606,7 @@ class JSSTthirdpartyimportModel {
         }
     }
     
-    private function importAwesomeSupportPriorities(){
+    private function importAwesomeSupportPriorities() {
         // check if priority already processed for import
         $imported_priorities = array();
         $imported_priorities_json = get_option('js_support_ticket_awesome_support_data_priorities');
@@ -2612,7 +2633,7 @@ class JSSTthirdpartyimportModel {
         ";
         $ordering = (int) jssupportticket::$_db->get_var($query);
 
-        foreach($priorities AS $priority){
+        foreach ($priorities AS $priority) {
             // Skip if already imported
             if (in_array($priority->id, $imported_priorities, true)) {
                 $this->awesome_support_import_count['priority']['skipped']++;
@@ -2625,12 +2646,12 @@ class JSSTthirdpartyimportModel {
             $check_query = "
                 SELECT priority.*
                 FROM `" . jssupportticket::$_db->prefix . "js_ticket_priorities` AS priority
-                WHERE LOWER(priority.priority) = '".esc_sql($name) ."'
+                WHERE LOWER(priority.priority) = '" . esc_sql($name) . "'
                 LIMIT 1
             ";
             $jshd_priority = jssupportticket::$_db->get_row($check_query);
 
-            if(!$jshd_priority){
+            if (!$jshd_priority) {
                 $row = JSSTincluder::getJSTable('priorities');
 
                 $color = "#5e8f5b"; // default color
@@ -2789,36 +2810,55 @@ class JSSTthirdpartyimportModel {
         if (empty($canned_replies)) return;
 
         foreach ($canned_replies as $canned_reply) {
+            $title = jssupportticketphplib::JSST_trim(jssupportticketphplib::JSST_strtolower($canned_reply->post_title));
+            // Failed if addon not installed
+            if (!in_array('cannedresponses', jssupportticket::$_active_addons) ) {
+                $this->awesome_support_import_count['canned response']['failed']++;
+                continue;
+            }
             // Skip if already imported
-            if (in_array($canned_reply->ID, $imported_premades, true)) {
+            if (in_array($canned_reply->id, $imported_premades, true)) {
                 $this->awesome_support_import_count['canned response']['skipped']++;
                 continue;
             }
+            // Check if this premade already exists in JS Support Ticket
+            $check_query = "
+                SELECT premade.*
+                FROM `" . jssupportticket::$_db->prefix . "js_ticket_department_message_premade` AS premade
+                WHERE LOWER(premade.title) = '" . esc_sql($title) . "'
+                LIMIT 1
+            ";
+            $jshd_canned_reply = jssupportticket::$_db->get_row($check_query);
+
+            if (!$jshd_canned_reply) {
             
-            $departmentid = JSSTincluder::getJSModel('department')->getDefaultDepartmentID();
-            // Prepare canned response data
-            $row = JSSTincluder::getJSTable('cannedresponses');
-            $updated = date_i18n('Y-m-d H:i:s');
+                $departmentid = JSSTincluder::getJSModel('department')->getDefaultDepartmentID();
+                // Prepare canned response data
+                $row = JSSTincluder::getJSTable('cannedresponses');
+                $updated = date_i18n('Y-m-d H:i:s');
 
-            $data = [
-                'id'          => '',
-                'departmentid'=> $departmentid,
-                'title'       => $canned_reply->post_title,
-                'answer'      => $canned_reply->post_content,
-                'status'      => '1',
-                'updated'     => $updated,
-                'created'     => $canned_reply->post_date
-            ];
+                $data = [
+                    'id'          => '',
+                    'departmentid'=> $departmentid,
+                    'title'       => $canned_reply->post_title,
+                    'answer'      => $canned_reply->post_content,
+                    'status'      => '1',
+                    'updated'     => $updated,
+                    'created'     => $canned_reply->post_date
+                ];
 
-            $data = jssupportticket::JSST_sanitizeData($data);
-            $data = JSSTincluder::getJSModel('jssupportticket')->stripslashesFull($data);
+                $data = jssupportticket::JSST_sanitizeData($data);
+                $data = JSSTincluder::getJSModel('jssupportticket')->stripslashesFull($data);
 
-            $row->bind($data);
-            if (!$row->store()) {
-                $this->awesome_support_import_count['canned response']['failed'] += 1;
+                $row->bind($data);
+                if (!$row->store()) {
+                    $this->awesome_support_import_count['canned response']['failed'] += 1;
+                } else {
+                    $this->awesome_support_premade_ids[] = $canned_reply->id;
+                    $this->awesome_support_import_count['canned response']['imported'] += 1;
+                }
             } else {
-                $this->awesome_support_premade_ids[] = $canned_reply->id;
-                $this->awesome_support_import_count['canned response']['imported'] += 1;
+                $this->awesome_support_import_count['canned response']['skipped'] += 1;
             }
         }
 
@@ -2970,10 +3010,6 @@ class JSSTthirdpartyimportModel {
             $attachmentdir = JSSTincluder::getJSModel('ticket')->getRandomFolderName();
             $ticket_status = 1;
 
-            // 
-            // 
-            // 
-
             $custom_statuses = get_posts( [
                 'post_type'      => 'wpass_status',
                 'post_status'    => 'any', // includes all except 'auto-draft'
@@ -3088,6 +3124,7 @@ class JSSTthirdpartyimportModel {
                 'paidsupportitemid' => "0",
                 'customticketno' => $customticketno
             ];
+
             $row = JSSTincluder::getJSTable('tickets');
             $error = 0;
             if (!$row->bind($newTicketData)) $error = 1;
@@ -3098,12 +3135,12 @@ class JSSTthirdpartyimportModel {
             } else {
                 $this->awesome_support_ticket_ids[] = $ticket->id;
                 $this->awesome_support_import_count['ticket']['imported'] += 1;
-            
+
                 $jshd_ticketid = $row->id;
 
                 //update hash value against ticket
                 $hash = JSSTincluder::getJSModel('ticket')->generateHash($jshd_ticketid);
-                $query = "UPDATE `" . jssupportticket::$_db->prefix . "js_ticket_tickets` SET `hash`='".esc_sql($hash)."' WHERE id=".esc_sql($jshd_ticketid);
+                $query = "UPDATE `" . jssupportticket::$_db->prefix . "js_ticket_tickets` SET `hash`='" . esc_sql($hash) . "' WHERE id=" . esc_sql($jshd_ticketid);
                 jssupportticket::$_db->query($query);
                 
                 $this->getAwesomeSupportTicketReplies($jshd_ticketid, $ticket->ID, $attachmentdir);
@@ -3128,17 +3165,9 @@ class JSSTthirdpartyimportModel {
 
     private function importAwesomeSupportTicketFields() {
         // Get all ticket-related custom fields
-        $query = "
-            SELECT * FROM `" . jssupportticket::$_db->prefix . "psmsc_custom_fields`
-            WHERE slug LIKE 'cust_%' AND type LIKE 'cf_%'
-            AND field = 'ticket';";
-        // $custom_fields = jssupportticket::$_db->get_results($query);
         $custom_fields = get_option("wpas_custom_fields");
 
         if (!$custom_fields) return;
-
-        // Get visibility settings
-        $ticket_field_options = get_option("wpsc-tff");
 
         $this->as_ticket_custom_fields = [];
 
@@ -3192,6 +3221,14 @@ class JSSTthirdpartyimportModel {
                 "visibleCondition" => [],
             ];
 
+            $defaultvalue_input = "";
+            $defaultvalue_select = "";
+            if($fieldtype == "combo" || $fieldtype == "radio" || $fieldtype == "checkbox") {
+                $defaultvalue_select = $custom_field['default'];
+            } else {
+                $defaultvalue_input = $custom_field['default'];
+            }
+
             // Prepare field data for import
             $fieldOrderingData = [
                 "id" => "",
@@ -3229,6 +3266,8 @@ class JSSTthirdpartyimportModel {
                 "placeholder" => $custom_field['placeholder'],
                 "description" => $custom_field['desc'],
                 "defaultvalue" => $custom_field['default'],
+                "defaultvalue_select" => $defaultvalue_select,
+                "defaultvalue_input" => $defaultvalue_input,
                 "readonly" => $custom_field['readonly'],
             ];
 
@@ -3258,7 +3297,7 @@ class JSSTthirdpartyimportModel {
                     FROM `" . jssupportticket::$_db->prefix . "posts` AS post
                     WHERE post.post_parent = ".$ast_ticket_id."
                     AND post.post_type = 'ticket_reply'
-                    ORDER BY post.id DESC";
+                    ORDER BY post.id ASC";
                     
         $posts = jssupportticket::$_db->get_results($query);
 
@@ -3269,57 +3308,114 @@ class JSSTthirdpartyimportModel {
             $userinfo = $this->getAwesomeSupportTicketCustomerInfo($post->post_author);
             $uid = $userinfo["jshd_uid"];
             $name = $userinfo["customer_name"];
-            if(empty($userinfo["jshd_uid"])){
-                /*$agentid = $this->getTicketAgentIdByAwesomeSupport($conversation->person_id);
-                if($agentid){
-                    $query = "SELECT agent.*
-                                FROM `" . jssupportticket::$_db->prefix . "js_ticket_staff` AS agent
-                                WHERE agent.id = ".$agentid.";";
-                                
-                    $agent = jssupportticket::$_db->get_row($query);
-                    $uid = $agent->uid;
-                    $name = $agent->firstname;
-                    if($agent->lastname) $name = $name. " ". $agent->lastname;
-                    
-                } */
-            }
 
-            $replyData = [
-                "id" => "",
-                "uid" => $uid,
-                "ticketid" => $jshd_ticket_id,
-                "name" => $name,
-                "message" => $post->post_content,
-                "staffid" => "",
-                "rating" => "",
-                "status" => "1",
-                "created" => $post->post_date,
-                "ticketviaemail" => "",
-                "viewed_by" => "",
-                "viewed_on" => ""
-            ];
-            $row = JSSTincluder::getJSTable('replies');
-            $data = JSSTincluder::getJSmodel('jssupportticket')->stripslashesFull($replyData);// remove slashes with quotes.
-            $error = 0;
-            if (!$row->bind($data)) {
-                $error = 1;
-            }
-            if (!$row->store()) {
-                $error = 1;
-            }
+            $status = get_post_meta( $post->ID, "custom_reply_status", true );
 
-            $jshd_ticket_reply_id = $row->id;
+            if( $status == "" || $status == "public" ){
+                $replyData = [
+                    "id" => "",
+                    "uid" => $uid,
+                    "ticketid" => $jshd_ticket_id,
+                    "name" => $name,
+                    "message" => $post->post_content,
+                    "staffid" => "",
+                    "rating" => "",
+                    "status" => "1",
+                    "created" => $post->post_date,
+                    "ticketviaemail" => "",
+                    "viewed_by" => "",
+                    "viewed_on" => ""
+                ];
+                $row = JSSTincluder::getJSTable('replies');
+                $data = JSSTincluder::getJSmodel('jssupportticket')->stripslashesFull($replyData);// remove slashes with quotes.
+                $error = 0;
+                if (!$row->bind($data)) {
+                    $error = 1;
+                }
+                if (!$row->store()) {
+                    $error = 1;
+                }
 
-            if (!empty($jshd_ticket_reply_id)) {
-                $this->getAwesomeSupportTicketAttachments($jshd_ticket_id, $jshd_ticket_reply_id, $ast_ticket_id, $post->ID, $attachmentdir);
-            }
+                $jshd_ticket_reply_id = $row->id;
 
-            if (in_array('timetracking', jssupportticket::$_active_addons)) {
-                $this->getAwesomeSupportTicketStaffTime($jshd_ticket_id, $ast_ticket_id, $jshd_ticket_reply_id, $post->ID);
-            }
+                if (!empty($jshd_ticket_reply_id)) {
+                    $this->getAwesomeSupportTicketAttachments($jshd_ticket_id, $jshd_ticket_reply_id, $ast_ticket_id, $post->ID, $attachmentdir);
+                }
+
+                if (in_array('timetracking', jssupportticket::$_active_addons)) {
+                    $this->getAwesomeSupportTicketStaffTime($jshd_ticket_id, $ast_ticket_id, $jshd_ticket_reply_id, $post->ID);
+                }
+            } else {
+                $filename = $this->getAwesomeSupportNoteAttachments($jshd_ticket_id, $post->ID, $attachmentdir);
+
+                $replyData = [
+                    "id" => "",
+                    "ticketid" => $jshd_ticket_id,
+                    "staffid" => $uid,
+                    "title" => jssupportticketphplib::JSST_strip_tags($post->post_content),
+                    "note" => $post->post_content,
+                    "status" => "1",
+                    "created" => $post->post_date,
+                    "filename" => $filename,
+                    "filesize" => 5334
+                ];
+                $row = JSSTincluder::getJSTable('note');
+                $data = JSSTincluder::getJSmodel('jssupportticket')->stripslashesFull($replyData);// remove slashes with quotes.
+                $error = 0;
+                if (!$row->bind($data)) {
+                    $error = 1;
+                }
+                if (!$row->store()) {
+                    $error = 1;
+                }
+            } 
             
         }
     }
+
+    private function getAwesomeSupportNoteAttachments($jshd_ticket_id, $as_ticket_reply_id, $attachmentdir){
+        $query = "SELECT post.*
+                    FROM `" . jssupportticket::$_db->prefix . "posts` AS post
+                    WHERE post.post_parent = ".$as_ticket_reply_id."
+                    AND post.post_type = 'attachment'
+                    ORDER BY post.id ASC";
+                    
+        $attachment = jssupportticket::$_db->get_row($query);
+
+        if (empty($attachment)) return;
+
+        require_once ABSPATH . 'wp-admin/includes/class-wp-filesystem-base.php';
+        require_once ABSPATH . 'wp-admin/includes/class-wp-filesystem-direct.php';
+
+        $filesystem = new WP_Filesystem_Direct(true);
+        $upload_dir = wp_upload_dir();
+        $upload_path = $upload_dir['basedir'];
+        $datadirectory = jssupportticket::$_config['data_directory'];
+        $path = trailingslashit($upload_path) . $datadirectory . "/attachmentdata/ticket/" . sanitize_file_name($attachmentdir);
+
+        if (!$filesystem->exists($path)) {
+            wp_mkdir_p($path);
+        }
+
+        $safe_filename = sanitize_file_name($attachment->title);
+        $source = $attachment->file_path;
+        $destination = $path . "/" . $safe_filename;
+        
+        $destination_new_name = $path."/".$attachment->title;
+
+        if (!file_exists($source)) {
+            return '';
+        }
+
+        $result = $filesystem->copy($source, $destination, true);
+        if (!$result) {
+            return '';
+        }
+        rename($destination,$destination_new_name);
+
+        return $safe_filename;
+    }
+
     private function getAwesomeSupportTicketAttachments($jshd_ticket_id, $jshd_ticket_reply_id, $ast_ticket_id, $as_ticket_reply_id, $attachmentdir){
         $as_ticket_reply_id = intval($as_ticket_reply_id);
 
@@ -3480,6 +3576,7 @@ class JSSTthirdpartyimportModel {
             }
         }
     }
+
     private function decrypt( $message, $key, $encoded = true ) {
         $method = 'aes-256-ctr';
 
@@ -3551,7 +3648,8 @@ class JSSTthirdpartyimportModel {
 
             if ($thread->post_type == 'ticket_history') {
                 $eventtype = jssupportticketphplib::JSST_strip_tags($thread->post_content);
-                $message = jssupportticketphplib::JSST_strip_tags($thread->post_content) . " " . __('by', 'js-support-ticket') . " ( $currentUserName )";
+                $messageWithBreaks = preg_replace('/<\/[^>]+>/', "$0 ", $thread->post_content);
+                $message = jssupportticketphplib::JSST_strip_tags($messageWithBreaks) . " " . __('by', 'js-support-ticket') . " ( $currentUserName )";
             } elseif ($thread->post_type == 'ticket_reply') {
                 $eventtype = __('REPLIED_TICKET', 'js-support-ticket');
                 $message = __('Ticket is replied by', 'js-support-ticket') . " ( $currentUserName )";
@@ -3596,8 +3694,10 @@ class JSSTthirdpartyimportModel {
                     // Handle and validate interval string
                     
 
-                    $timer_seconds = $tracked_time[0]['individual_time'];
-                    if ($timer_seconds <= 0) continue;
+                    $timer_minutes = $tracked_time[0]['individual_time'];
+                    if ($timer_minutes <= 0) continue;
+
+                    $timer_seconds = $timer_minutes * 60;
 
                     // Conflict detection
                     $created_dt = new DateTime($created);
@@ -3701,10 +3801,15 @@ class JSSTthirdpartyimportModel {
 
         if (is_wp_error($assigned_agent) || empty($assigned_agent)) return null;
 
-        // Find corresponding product in destination table
+        $js_user = JSSTincluder::getObjectClass('user')->getjssupportticketuidbyuserid($assigned_agent);
+        if (!empty($js_user) && isset($js_user[0]->id)) {
+            $js_uid = (int)$js_user[0]->id;
+        } else {
+            return;
+        }
         
         $query = "
-            SELECT id FROM `" . jssupportticket::$_db->prefix . "js_ticket_staff` WHERE uid = ".$assigned_agent;
+            SELECT id FROM `" . jssupportticket::$_db->prefix . "js_ticket_staff` WHERE uid = ".$js_uid;
         $jshd_agent_id = jssupportticket::$_db->get_var($query);
 
         return $jshd_agent_id ? (int)$jshd_agent_id : null;
@@ -3885,14 +3990,15 @@ class JSSTthirdpartyimportModel {
 
     function importFluentSupportData() {
         // Only for development – remove before pushing to production
-        $this->deletesupportcandyimporteddata();
+        // $this->deletesupportcandyimporteddata();
 
         // Reset previously imported IDs from options
+        update_option('js_support_ticket_fluent_support_data_priorities', '');
         update_option('js_support_ticket_fluent_support_data_users', '');
         update_option('js_support_ticket_fluent_support_data_premades', '');
         update_option('js_support_ticket_fluent_support_data_agents', '');
-        update_option('js_support_ticket_fluent_support_data_tickets', '');
         update_option('js_support_ticket_fluent_support_data_products', '');
+        update_option('js_support_ticket_fluent_support_data_tickets', '');
         
         // Prepare filesystem and create necessary directories
         require_once ABSPATH . 'wp-admin/includes/class-wp-filesystem-base.php';
@@ -3918,16 +4024,15 @@ class JSSTthirdpartyimportModel {
         if (jssupportticket::$_db->get_var("SHOW TABLES LIKE '" . jssupportticket::$_db->prefix . "fs_persons'")) {
             $this->importFluentSupportUsers();
         }
-        if (in_array('agent', jssupportticket::$_active_addons)) {
-            if (jssupportticket::$_db->get_var("SHOW TABLES LIKE '" . jssupportticket::$_db->prefix . "fs_persons'")) {
-                $this->importFluentSupportAgents();
-            }
+
+        if (jssupportticket::$_db->get_var("SHOW TABLES LIKE '" . jssupportticket::$_db->prefix . "fs_persons'")) {
+            $this->importFluentSupportAgents();
         }
+
         $this->importFluentSupportPriorities();
-        if (in_array('cannedresponses', jssupportticket::$_active_addons)) {
-            if (jssupportticket::$_db->get_var("SHOW TABLES LIKE '" . jssupportticket::$_db->prefix . "fs_saved_replies'")) {
-                $this->importFluentSupportPremades();
-            }
+
+        if (jssupportticket::$_db->get_var("SHOW TABLES LIKE '" . jssupportticket::$_db->prefix . "fs_saved_replies'")) {
+            $this->importFluentSupportPremades();
         }
         if (jssupportticket::$_db->get_var("SHOW TABLES LIKE '" . jssupportticket::$_db->prefix . "fs_products'")) {
             $this->importFluentSupportProducts();
@@ -3939,8 +4044,7 @@ class JSSTthirdpartyimportModel {
             $this->getFluentSupportTickets( );
         }
 
-        jssupportticket::$_data['jsst_import_counts'] = $this->fluent_support_import_count;
-
+        update_option('jsst_import_counts',$this->fluent_support_import_count);
         return;
     }
 
@@ -4161,6 +4265,14 @@ class JSSTthirdpartyimportModel {
                     $fieldtype = "text"; break;
             }
 
+            $query = "SELECT id,field FROM `" . jssupportticket::$_db->prefix . "js_ticket_fieldsordering` WHERE isuserfield = 1 AND LOWER(fieldtitle) ='".esc_sql(jssupportticketphplib::JSST_strtolower($custom_field['label']))."' AND userfieldtype ='".esc_sql($fieldtype)."' AND fieldfor = 1";
+            $field_record = jssupportticket::$_db->get_row($query);
+
+            if(!empty($field_record)){ // this will make sure
+                $this->fluent_support_import_count['field']['skipped'] += 1;
+                continue;
+            }
+
             // Load options for select-type fields
             $option_values = [];
             if(isset($custom_field["options"])){
@@ -4251,7 +4363,9 @@ class JSSTthirdpartyimportModel {
             $field = $this->getTicketCustomFieldId($custom_field['label']);
             $query = "SELECT * FROM `" . jssupportticket::$_db->prefix . "js_ticket_fieldsordering` WHERE field = '".esc_sql($field)."' LIMIT 1";
             $jshd_field = jssupportticket::$_db->get_row($query);
-            
+            if (empty($jshd_field)) {
+                continue;
+            }
             
 
             // Build visibility data
@@ -4270,17 +4384,24 @@ class JSSTthirdpartyimportModel {
                 }
 
                 foreach ($custom_field['conditions'] as $groupIndex => $group) {
+                    $fieldtype = '';
                     if ($group['item_key'] == 'ticket_content' || $group['item_key'] == 'ticket_product_id') {
                         continue;
                     }
                     if ($group['item_key'] == 'ticket_client_priority') {
                         $item_key = 'priority';
+                        $group['value'];
                         $value = $this->getTicketPriorityIdByFluentSupport($group['value']);
+                        $fieldtype = 'priority';
                     } elseif ($group['item_key'] == 'ticket_title') {
                         $item_key = 'subject';
                         $value = $group['value'];
+                        $fieldtype = 'subject';
                     } else {
                         // $item_key = $group['item_key'];
+                        if (empty($group['item_key'])) {
+                            continue;
+                        }
                         $item_key = $this->fc_ticket_cf[$group['item_key']];
                         $fieldtype = $this->checkTypeOfTheField($item_key);
                         if ($fieldtype == 'textarea') {
@@ -4298,7 +4419,7 @@ class JSSTthirdpartyimportModel {
                     
                     $visibledata["visibleParentField"][] = $slug;
                     $visibledata["visibleParent"][] = $item_key;
-                    $visibledata["visibleCondition"][] = $this->mapOperatorToConditionCodeForFluentSupport($group['operator']);
+                    $visibledata["visibleCondition"][] = $this->mapOperatorToConditionCodeForFluentSupport($group['operator'], $fieldtype);
                     $visibledata["visibleValue"][] = $value;
                     $visibledata["visibleLogic"][] = $visibleLogic;
                 }
@@ -4379,18 +4500,24 @@ class JSSTthirdpartyimportModel {
         return $jshd_field_id ? $jshd_field_id : null;
     }
 
-    private function mapOperatorToConditionCodeForFluentSupport ($operator) {
+    private function mapOperatorToConditionCodeForFluentSupport ($operator, $type) {
+        $operator = strtoupper(jssupportticketphplib::JSST_trim($operator));
+        $isComplex = false;
+
+        if (!empty($type)) {
+            $complexTypes = ['combo', 'checkbox', 'radio', 'multiple','priority'];
+            $isComplex = !in_array($type, $complexTypes);
+        }
+
         switch (strtoupper($operator)) {
             case '=':
-                return "1";
+            case 'CONTAINS':
+                return $isComplex ? "2" : "1";
             case '!=':
-                return "0";
-            case 'contains':
-                return "2";
-            case 'not_contains':
-                return "3";
+            case 'NOT_CONTAINS':
+                return $isComplex ? "3" : "0";
             default:
-                return "0"; // Fallback or unsupported operator
+                return $isComplex ? "4" : "0"; // Fallback or unsupported operator
         }
     }
 
@@ -4713,9 +4840,10 @@ class JSSTthirdpartyimportModel {
 
             $created = $timer->created_at;
 
-            $timer_seconds = $timer->working_minutes;
-            if ($timer_seconds <= 0) continue;
+            $timer_minutes = $timer->working_minutes;
+            if ($timer_minutes <= 0) continue;
 
+            $timer_seconds = $timer_minutes * 60;
             // Conflict detection
             $created_dt = new DateTime($created);
             $now = new DateTime();
@@ -4733,8 +4861,8 @@ class JSSTthirdpartyimportModel {
                 'usertime' => $timer_seconds,
                 'systemtime' => $systemtime,
                 'conflict' => $conflict,
-                'description' => $timer->description,
-                'timer_edit_desc' => $timer->description,
+                'description' => $timer->message,
+                'timer_edit_desc' => $timer->message,
                 'status' => 1,
                 'created' => $created
             ];
@@ -4810,24 +4938,17 @@ class JSSTthirdpartyimportModel {
         }
 
         // Get mapped user info
-        $query = "SELECT person.*
+        $query = "SELECT agent.id
                     FROM `" . jssupportticket::$_db->prefix . "fs_persons` AS person
-                    WHERE person.id = ".$customerId."
+            INNER JOIN `" . jssupportticket::$_db->prefix . "js_ticket_users` AS user
+                ON user.wpuid = person.user_id
+            INNER JOIN `" . jssupportticket::$_db->prefix . "js_ticket_staff` AS agent
+                ON agent.uid = user.id
+                    WHERE person.id = " . esc_sql($customerId) . "
                     AND person.person_type = 'agent';";
-        $agent = jssupportticket::$_db->get_row($query);
-        
-        if (empty($agent->user_id)) {
-            return null;
-        }
+        $jshd_agent = jssupportticket::$_db->get_var($query);
 
-        $uid = intval($agent->user_id);
-
-        // Securely query agent by UID
-        $query = "
-            SELECT id FROM `" . jssupportticket::$_db->prefix . "js_ticket_staff` WHERE uid = ".$uid;
-            $jshd_agent_id = jssupportticket::$_db->get_var($query);
-
-        return $jshd_agent_id ? (int)$jshd_agent_id : null;
+        return $jshd_agent ?: null;
     }
 
     private function getTicketProductIdByFluentSupport($productId){
@@ -4875,7 +4996,7 @@ class JSSTthirdpartyimportModel {
         }
 
         // Fetch all customers
-        $query = "SELECT * FROM `" . jssupportticket::$_db->prefix . "fs_persons` WHERE person_type = 'customer'";
+        $query = "SELECT * FROM `" . jssupportticket::$_db->prefix . "fs_persons` WHERE person_type = 'customer' OR person_type = 'agent'";
         $customers = jssupportticket::$_db->get_results($query);
 
         if (empty($customers)) return;
@@ -4964,7 +5085,11 @@ class JSSTthirdpartyimportModel {
 
         if($agents){
             foreach($agents AS $agent){
-
+                // Failed if addon not installed
+                if (!in_array('agent', jssupportticket::$_active_addons) ) {
+                    $this->fluent_support_import_count['agent']['failed']++;
+                    continue;
+                }
                 $wpuid = (int) $agent->user_id;
                 // Skip if already imported
                 if (in_array($wpuid, $imported_agents, true)) {
@@ -4984,20 +5109,29 @@ class JSSTthirdpartyimportModel {
                     $this->fluent_support_import_count['agent']['failed'] += 1;
                     continue;
                 }
+                $js_user = JSSTincluder::getObjectClass('user')->getjssupportticketuidbyuserid($wpuid);
+                if (!empty($js_user) && isset($js_user[0]->id)) {
+                    $js_uid = (int)$js_user[0]->id;
+                } else {
+                    $this->fluent_support_import_count['agent']['failed']++;
+                    continue;
+                }
 
                 $query = "SELECT staff.*
                             FROM `" . jssupportticket::$_db->prefix . "js_ticket_staff` AS staff
-                            WHERE staff.uid = " . $wpuid;
+                            WHERE staff.uid = " . $js_uid;
                 $staff = jssupportticket::$_db->get_row($query);
 
                 if (!$staff) {
+                    $roleid = $this->getAgentRoleIdByFluentSupport($wpuid);
+
                     $timestamp = date_i18n('Y-m-d H:i:s');
 
                     $data = [
                         'id'           => '',
-                        'uid'          => $wpuid,
+                        'uid'          => $js_uid,
                         'groupid'      => '',
-                        'roleid'       => 1,
+                        'roleid'       => $roleid,
                         'departmentid' => '',
                         'firstname'    => $first_name,
                         'lastname'     => $last_name,
@@ -5009,7 +5143,6 @@ class JSSTthirdpartyimportModel {
                         'updated'      => $timestamp,
                         'created'      => $timestamp
                     ];
-
 
                     JSSTincluder::getJSModel('agent')->storeStaff($data);
 
@@ -5025,6 +5158,101 @@ class JSSTthirdpartyimportModel {
                 update_option('js_support_ticket_fluent_support_data_agents', wp_json_encode(array_unique(array_merge($imported_agents, $this->fluent_support_agent_ids))));
             }
         }
+    }
+
+    private function getAgentRoleIdByFluentSupport($id) {
+        $capabilities = get_user_meta($id, jssupportticket::$_db->prefix . 'capabilities', true);
+        $isAdmin = !empty($capabilities['administrator']);
+        $output = [];
+
+        // Define capability-to-permission mappings
+        $capabilityPermissions = [
+            'fst_manage_saved_replies' => [
+                'Add Canned Response' => 75,
+                'Edit Canned Response' => 76,
+                'View Canned Response' => 77,
+                'Delete Canned Response' => 78,
+            ],
+            'fst_view_all_reports' => [
+                'View Agent Reports' => 59,
+                'View Department Reports' => 60,
+            ],
+            'fst_sensitive_data' => [
+                'View Credentials' => 67,
+                'Delete Credentials' => 68,
+                'Edit Credentials' => 69,
+                'Add Credentials' => 70,
+            ],
+            'fst_delete_tickets' => [
+                'Delete Ticket' => 12,
+            ],
+            'fst_assign_agents' => [
+                'Assign Ticket To Agent' => 6,
+            ],
+            'fst_merge_tickets' => [
+                'Ticket Merge' => 66,
+            ],
+            'fst_manage_unassigned_tickets' => [
+                'All Tickets' => 61,
+            ],
+            'fst_manage_own_tickets' => [
+                'Add Ticket' => 1,
+                'Edit Ticket' => 2,
+                'Close Ticket' => 3,
+                'Reopen Ticket' => 4,
+                'Reply Ticket' => 5,
+                'Assign Ticket To Agent' => 6,
+                'Ticket Department Transfer' => 7,
+                'Mark Overdue' => 8,
+                'Mark In Progress' => 9,
+                'Change Ticket Priority' => 10,
+                'Unban Email' => 11,
+                'Delete Ticket' => 12,
+                'Ban Email And Close Ticket' => 13,
+                'Lock Ticket' => 14,
+                'Attachment' => 15,
+                'Post Internal Note' => 16,
+                'Duedate Ticket' => 53,
+                'View Ticket' => 54,
+                'Release Ticket' => 55,
+                'New Ticket Notification' => 56,
+                'Allow Mail System' => 57,
+                'Print Ticket' => 58,
+                'Mark Non Premium' => 79,
+                'Link To Paid Support' => 80,
+                'Export Ticket' => 81,
+                'Change Ticket Status' => 82,
+                'Edit Own Time' => 62,
+            ],
+        ];
+
+        // Loop through capabilities and add matching permissions
+        foreach ($capabilityPermissions as $capKey => $permissions) {
+            if (!empty($capabilities[$capKey]) || $isAdmin) {
+                $output = array_merge($output, $permissions);
+            }
+        }
+
+        $name = 'Fluent Support Agent ' . $id;
+
+        $data = [
+            'name'          => $name,
+            'roleperdata'   => $output,
+            'id'            => '',
+            'created'       => '',
+            'updated'       => '',
+            'action'        => 'role_saverole',
+            'form_request'  => 'jssupportticket',
+            'save'          => 'Save Role',
+        ];
+
+        // Save the role and permissions
+        JSSTincluder::getJSModel('role')->storeRole($data);
+
+        // Retrieve role ID
+        $query = 'SELECT id FROM `' . jssupportticket::$_db->prefix . 'js_ticket_acl_roles` WHERE name = "' . esc_sql($name) . '"';
+        $id = jssupportticket::$_db->get_var($query);
+        return $id;
     }
 
     private function importFluentSupportProducts(){
@@ -5097,6 +5325,12 @@ class JSSTthirdpartyimportModel {
     }
     
     private function importFluentSupportPriorities() {
+        // check if priority already processed for import
+        $imported_priorities = array();
+        $imported_priorities_json = get_option('js_support_ticket_fluent_support_data_priorities');
+        if(!empty($imported_priorities_json)){
+            $imported_priorities = json_decode($imported_priorities_json,true);
+        }
         $priorities = array('Normal' => '#00a32a', 'Medium' => '#a5b2bd', 'Critical' => '#f06060');
 
         if (empty($priorities)) return;
@@ -5109,6 +5343,11 @@ class JSSTthirdpartyimportModel {
         $ordering = (int) jssupportticket::$_db->get_var($query);
 
         foreach ($priorities as $key => $priority) {
+            // Skip if already imported
+            if (in_array($priority, $imported_priorities, true)) {
+                $this->fluent_support_import_count['priority']['skipped']++;
+                continue;
+            }
             $name = jssupportticketphplib::JSST_trim(jssupportticketphplib::JSST_strtolower($key));
 
             // Check if this priority already exists in JS Support Ticket
@@ -5142,6 +5381,7 @@ class JSSTthirdpartyimportModel {
                 if (!$row->store()) {
                     $this->fluent_support_import_count['priority']['failed'] += 1;
                 } else {
+                    $this->fluent_support_priority_ids[] = $priority;
                     $this->fluent_support_import_count['priority']['imported'] += 1;
                 }
 
@@ -5149,6 +5389,10 @@ class JSSTthirdpartyimportModel {
             } else {
                 $this->fluent_support_import_count['priority']['skipped'] += 1;
             }
+        }
+        // Save list of imported priority IDs
+        if (!empty($this->fluent_support_priority_ids)) {
+            update_option('js_support_ticket_fluent_support_data_priorities', wp_json_encode(array_unique(array_merge($imported_priorities, $this->fluent_support_priority_ids))));
         }
     }
 
@@ -5167,56 +5411,13 @@ class JSSTthirdpartyimportModel {
 
         if (empty($canned_replies)) return;
 
-        // Step 1: Get default department
-        $department_query = "
-            SELECT department.id 
-            FROM `" . jssupportticket::$_db->prefix . "js_ticket_departments` AS department
-            WHERE department.isdefault = 1
-            LIMIT 1
-        ";
-        $department = jssupportticket::$_db->get_row($department_query);
-
-        // Step 2: If no default found, get the first department
-        if (!$department) {
-            $department_query = "
-                SELECT department.id 
-                FROM `" . jssupportticket::$_db->prefix . "js_ticket_departments` AS department
-                ORDER BY department.id ASC
-                LIMIT 1
-            ";
-            $department = jssupportticket::$_db->get_row($department_query);
-        }
-
-        // Step 3: If still no department found, insert 'Support' and get its ID
-        if (!$department) {
-            $row = JSSTincluder::getJSTable('departments');
-
-                $updated = date_i18n('Y-m-d H:i:s');
-                $created = date_i18n('Y-m-d H:i:s');
-
-                $data = [
-                    'id'              => '',
-                    'emailid'         => '1',
-                    'departmentname'  => 'Support',
-                    'ordering'        => 0,
-                    'status'          => '1',
-                    'isdefault'       => '0',
-                    'ispublic'        => '1',
-                    'updated'         => $updated,
-                    'created'         => $created
-                ];
-
-                $data = JSSTincluder::getJSmodel('jssupportticket')->stripslashesFull($data);
-                $row->bind($data);
-
-                if ($row->store()) {
-                    $departmentid = $row->id;
-                }
-        } else {
-            $departmentid = $department->id;
-        }
-
         foreach ($canned_replies as $canned_reply) {
+            $title = jssupportticketphplib::JSST_trim(jssupportticketphplib::JSST_strtolower($canned_reply->title));
+            // Failed if addon not installed
+            if (!in_array('cannedresponses', jssupportticket::$_active_addons) ) {
+                $this->fluent_support_import_count['canned response']['failed']++;
+                continue;
+            }
             // Skip if already imported
             if (in_array($canned_reply->id, $imported_premades, true)) {
                 $this->fluent_support_import_count['canned response']['skipped']++;
@@ -5227,31 +5428,93 @@ class JSSTthirdpartyimportModel {
                 $this->fluent_support_import_count['canned response']['skipped']++;
                 continue;
             }
+            // Check if this premade already exists in JS Support Ticket
+            $check_query = "
+                SELECT premade.*
+                FROM `" . jssupportticket::$_db->prefix . "js_ticket_department_message_premade` AS premade
+                WHERE LOWER(premade.title) = '" . esc_sql($title) . "'
+                LIMIT 1
+            ";
+            $jshd_canned_reply = jssupportticket::$_db->get_row($check_query);
 
-            // Prepare canned response data
-            $row = JSSTincluder::getJSTable('cannedresponses');
-            $updated = date_i18n('Y-m-d H:i:s');
+            if (!$jshd_canned_reply) {
+                $departmentid = '';
+                // Step 1: Get default department
+                $department_query = "
+                    SELECT department.id 
+                    FROM `" . jssupportticket::$_db->prefix . "js_ticket_departments` AS department
+                    WHERE department.isdefault = 1
+                    LIMIT 1
+                ";
+                $department = jssupportticket::$_db->get_row($department_query);
 
-            $data = [
-                'id'          => '',
-                'departmentid'=> $departmentid,
-                'title'       => $canned_reply->title,
-                'answer'      => $canned_reply->content,
-                'status'      => '1',
-                'updated'     => $updated,
-                'created'     => $canned_reply->created_at
-            ];
+                // Step 2: If no default found, get the first department
+                if (!$department) {
+                    $department_query = "
+                        SELECT department.id 
+                        FROM `" . jssupportticket::$_db->prefix . "js_ticket_departments` AS department
+                        ORDER BY department.id ASC
+                        LIMIT 1
+                    ";
+                    $department = jssupportticket::$_db->get_row($department_query);
+                }
 
-            $data = jssupportticket::JSST_sanitizeData($data);
-            $data['answer'] = JSSTincluder::getJSModel('jssupportticket')->getSanitizedEditorData($data['answer']);
-            $data = JSSTincluder::getJSModel('jssupportticket')->stripslashesFull($data);
+                // Step 3: If still no department found, insert 'Support' and get its ID
+                if (!$department) {
+                    $row = JSSTincluder::getJSTable('departments');
 
-            $row->bind($data);
-            if (!$row->store()) {
-                $this->fluent_support_import_count['canned response']['failed'] += 1;
+                        $updated = date_i18n('Y-m-d H:i:s');
+                        $created = date_i18n('Y-m-d H:i:s');
+
+                        $data = [
+                            'id'              => '',
+                            'emailid'         => '1',
+                            'departmentname'  => 'Support',
+                            'ordering'        => 0,
+                            'status'          => '1',
+                            'isdefault'       => '0',
+                            'ispublic'        => '1',
+                            'updated'         => $updated,
+                            'created'         => $created
+                        ];
+
+                        $data = JSSTincluder::getJSmodel('jssupportticket')->stripslashesFull($data);
+                        $row->bind($data);
+
+                        if ($row->store()) {
+                            $departmentid = $row->id;
+                        }
+                } else {
+                    $departmentid = $department->id;
+                }
+
+                // Prepare canned response data
+                $row = JSSTincluder::getJSTable('cannedresponses');
+                $updated = date_i18n('Y-m-d H:i:s');
+
+                $data = [
+                    'id'          => '',
+                    'departmentid'=> $departmentid,
+                    'title'       => $canned_reply->title,
+                    'answer'      => $canned_reply->content,
+                    'status'      => '1',
+                    'updated'     => $updated,
+                    'created'     => $canned_reply->created_at
+                ];
+
+                $data = jssupportticket::JSST_sanitizeData($data);
+                $data['answer'] = JSSTincluder::getJSModel('jssupportticket')->getSanitizedEditorData($data['answer']);
+                $data = JSSTincluder::getJSModel('jssupportticket')->stripslashesFull($data);
+
+                $row->bind($data);
+                if (!$row->store()) {
+                    $this->fluent_support_import_count['canned response']['failed'] += 1;
+                } else {
+                    $this->fluent_support_premade_ids[] = $canned_reply->id;
+                    $this->fluent_support_import_count['canned response']['imported'] += 1;
+                }
             } else {
-                $this->fluent_support_premade_ids[] = $canned_reply->id;
-                $this->fluent_support_import_count['canned response']['imported'] += 1;
+                $this->fluent_support_import_count['canned response']['skipped'] += 1;
             }
         }
 
@@ -5275,7 +5538,7 @@ class JSSTthirdpartyimportModel {
 
         // Users
         if (jssupportticket::$_db->get_var("SHOW TABLES LIKE '" . jssupportticket::$_db->prefix . "fs_persons'")) {
-            $query = "SELECT COUNT(*) FROM `" . jssupportticket::$_db->prefix . "fs_persons` WHERE person_type = 'customer'";
+            $query = "SELECT COUNT(*) FROM `" . jssupportticket::$_db->prefix . "fs_persons` WHERE person_type = 'customer' OR person_type = 'agent'";
             $count = (int) jssupportticket::$_db->get_var($query);
             if ($count > 0) $entity_counts['user'] = $count;
         }

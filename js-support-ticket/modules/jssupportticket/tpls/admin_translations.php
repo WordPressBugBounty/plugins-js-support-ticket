@@ -19,7 +19,7 @@
                 <div id="jsstadmin-breadcrunbs">
                     <ul>
                         <li><a href="?page=jssupportticket" title="<?php echo esc_html(__('Dashboard','js-support-ticket')); ?>"><?php echo esc_html(__('Dashboard','js-support-ticket')); ?></a></li>
-                        <li><?php echo esc_html(__('Translations')); // (wp auto translate it) ?></li>
+                        <li><?php echo esc_html(__('Translations','js-support-ticket')); // (wp auto translate it) ?></li>
                     </ul>
                 </div>
             </div>
@@ -41,7 +41,7 @@
             </div>
         </div>
         <div id="jsstadmin-head">
-            <h1 class="jsstadmin-head-text"><?php echo esc_html(__('Translations')); ?></h1>
+            <h1 class="jsstadmin-head-text"><?php echo esc_html(__('Translations','js-support-ticket')); ?></h1>
             <a target="blank" href="https://www.youtube.com/watch?v=Nnu2iJQ99Tk" class="jsstadmin-add-link black-bg button js-cp-video-popup" title="<?php echo esc_html(__('Watch Video', 'js-support-ticket')); ?>">
                 <img alt="<?php echo esc_html(__('arrow','js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/play-btn.png"/>
                 <?php echo esc_html(__('Watch Video','js-support-ticket')); ?>
@@ -54,12 +54,12 @@
             </div>
 
             <div id="js-language-wrapper">
-                <div class="jstopheading"><?php echo esc_html(__('Get')).' JS Help Desk '. esc_html(__('Translations')); ?></div>
-                <div id="gettranslation" class="gettranslation"><img alt="<?php echo esc_html(__('Download')); ?>" style="width:18px; height:auto;" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/download-icon.png" /><?php echo esc_html(__('Get')).' '. esc_html(__('Translations')); ?></div>
+                <div class="jstopheading"><?php echo esc_html(__('Get', "js-support-ticket")).' JS Help Desk '. esc_html(__('Translations','js-support-ticket')); ?></div>
+                <div id="gettranslation" class="gettranslation"><img alt="<?php echo esc_html(__('Download', "js-support-ticket")); ?>" style="width:18px; height:auto;" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/download-icon.png" /><?php echo esc_html(__('Get', 'js-support-ticket')).' '. esc_html(__('Translations','js-support-ticket')); ?></div>
                 <div id="js_ddl">
-                    <span class="title"><?php echo esc_html(__('Select')).' '. esc_html(__('Translation')); ?>:</span>
+                    <span class="title"><?php echo esc_html(__('Select','js-support-ticket')).' '. esc_html(__('Translation','js-support-ticket')); ?>:</span>
                     <span class="combo" id="js_combo"></span>
-                    <span class="button" id="jsdownloadbutton"><img alt="<?php echo esc_html(__('Download')); ?>" style="width:14px; height:auto;" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/download-icon.png" /><?php echo esc_html(__('Download')); ?></span>
+                    <span class="button" id="jsdownloadbutton"><img alt="<?php echo esc_html(__('Download', 'js-support-ticket')); ?>" style="width:14px; height:auto;" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/download-icon.png" /><?php echo esc_html(__('Download', 'js-support-ticket')); ?></span>
                     <div id="jscodeinputbox" class="js-some-disc"></div>
                     <div class="js-some-disc"><img alt="<?php echo esc_html(__('info','js-support-ticket')); ?>" style="width:18px; height:auto;" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/info-icon.png" /><?php echo esc_html(__('When WordPress language change to fr, JS Help Desk language will auto change to fr','js-support-ticket')); ?></div>
                 </div>

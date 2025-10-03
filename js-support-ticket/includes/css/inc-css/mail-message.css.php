@@ -1,7 +1,9 @@
-<?php 
-if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly 
+<?php
+if (!defined('ABSPATH'))
+    exit; // Exit if accessed directly 
 // if header is calling later
 JSSTincluder::getJSModel('jssupportticket')->checkIfMainCssFileIsEnqued();
+JSSTincluder::getJSModel('jssupportticket')->jsst_get_theme_colors();
 
 $color1 = jssupportticket::$_colors['color1'];
 $color2 = jssupportticket::$_colors['color2'];
@@ -18,73 +20,226 @@ $jssupportticket_css = '';
 
 /*Code for Css*/
 $jssupportticket_css .= '
-	div.js-ticket-mail-wrapper{float: left;width: 100%;margin-top: 17px;}
-	div.js-ticket-mails-btn-wrp{float: left;width: 100%;margin-top: 20px;padding: 0px 5px; }
-	div.js-ticket-mails-btn-wrp div.js-ticket-mail-btn{float: left;width:calc(100% / 3 - 10px);margin: 0px 5px;text-align: center;}
-	div.js-ticket-mails-btn-wrp div.js-ticket-mail-btn a.js-add-link{display: inline-block;float: left;width: 100%;padding: 15px;text-decoration: none;outline: 0;line-height: initial;}
-	div.js-ticket-margin-top{margin-top: 50px !important;}
-	th:first-child, td:first-child{padding-left: 10px !important;}
-	img.js-ticket-mail-img{vertical-align: sub;}
-	div.js-ticket-add-form-wrapper div.js-ticket-from-field-wrp div.js-ticket-from-field select#to{background: url('.esc_url(JSST_PLUGIN_URL).'includes/images/selecticon.png) 98% / 2% no-repeat;line-height: initial;height: 60px;padding: 10px;}
-	div.js-ticket-top-search-wrp{float: left;width: 100%;}
-	div.js-ticket-search-heading-wrp{float: left;width: 100%; padding: 10px 10px 10px 0px;}
-	div.js-ticket-search-heading-wrp div.js-ticket-heading-left{float: left;width: 70%;padding: 10px;}
-	div.js-ticket-search-heading-wrp div.js-ticket-heading-right{float: left;width: 30%;text-align: right;}
-	div.js-ticket-search-heading-wrp div.js-ticket-heading-right a.js-ticket-add-download-btn{display: inline-block;padding: 10px;text-decoration: none;outline: 0px;}
-	div.js-ticket-search-heading-wrp div.js-ticket-heading-right a.js-ticket-add-download-btn span.js-ticket-add-img-wrp{display: inline-block;margin-right: 5px;}
-	div.js-ticket-search-heading-wrp div.js-ticket-heading-right a.js-ticket-add-download-btn span.js-ticket-add-img-wrp img{vertical-align: text-bottom;}
 
-	div.js-ticket-post-reply-wrapper {float: left;width: 100%;margin-top: 20px;}
-	div.js-ticket-post-reply-wrapper div.js-ticket-thread-heading{display: inline-block;width: 100%;padding: 15px;font-size: 18px;margin-bottom: 20px;line-height: initial;}
-	div.js-ticket-post-reply-box{margin-bottom: 20px;}
-	div.js-ticket-detail-box{float: left;width: 100%;}
-	div.js-ticket-detail-box div.js-ticket-detail-left{float: left;width: 20%;padding: 20px 5px;}
-	div.js-ticket-detail-left div.js-ticket-user-img-wrp{display:inline-block;width:100%;text-align: center;margin: 0 0 5px;height: 100px;position: relative;}
-	div.js-ticket-detail-left div.js-ticket-user-img-wrp img.js-ticket-staff-img{width: auto;max-width: 100%;max-height: 100%;height: auto;position: absolute;top: 0;left: 0;right: 0;bottom: 0;margin: auto;}
-	div.js-ticket-detail-left div.js-ticket-user-name-wrp{display:inline-block;width:100%;text-align: center;margin: 5px 0px;line-height: initial;}
-	div.js-ticket-detail-left div.js-ticket-user-email-wrp{display:inline-block;width:100%;text-align: center;margin: 5px 0px;line-height: initial;}
-	div.js-ticket-detail-box div.js-ticket-detail-right{float: left;width: calc(100% - 20%);}
-	div.js-ticket-detail-box div.js-ticket-detail-right div.js-ticket-rows-wrp{float: left;width: 100%;position: relative;padding:15px;line-height: initial;}
-	div.js-ticket-detail-box div.js-ticket-detail-right div.js-ticket-rows-wrp.js-ticket-min-height{min-height:292px;}
-	div.js-ticket-detail-right div.js-ticket-row{float: left;width: 100%;padding: 0px 0 8px 0px;}
-	div.js-ticket-detail-right div.js-ticket-row div.js-ticket-field-title{display: inline-block;width:auto;margin: 0px 5px 0px 0px;}
-	div.js-ticket-detail-right div.js-ticket-row div.js-ticket-field-value{display: inline-block;width:auto;}
-	div.js-ticket-detail-right div.js-ticket-row div.js-ticket-field-value p {margin: 0;}
-	div.js-ticket-form-btn-wrp{float: left;width:calc(100% - 20px);margin: 0px 10px;text-align: center;padding: 25px 0px 10px 0px;}
-	div.js-ticket-form-btn-wrp input.js-ticket-save-button{padding: 20px 10px;margin-right: 10px;min-width: 120px;border-radius: 0px;line-height: initial;}
-	div.js-ticket-form-btn-wrp a.js-ticket-cancel-button{display: inline-block; padding: 20px 10px;min-width: 120px;border-radius: 0px;line-height: initial;text-decoration: none;}
+    /* Main Wrappers */
+    div.js-ticket-mail-wrapper,
+    div.js-ticket-post-reply-wrapper {
+        width: 100%;
+        margin-top: 17px;
+        box-sizing: border-box;
+    }
 
+    /* Top Button Bar */
+    div.js-ticket-mails-btn-wrp {
+        width:calc(100% - 20px);
+        margin-left: 10px;
+        margin-right: 10px;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-bottom: 2rem;
+    }
+
+    div.js-ticket-mails-btn-wrp div.js-ticket-mail-btn {
+        flex: 1 1 0;
+    }
+
+    div.js-ticket-mails-btn-wrp div.js-ticket-mail-btn a.js-add-link {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+        width: 100%;
+        padding: 0.75rem 1.5rem;
+        text-decoration: none;
+        outline: 0;
+        border-radius: 8px;
+        border: 1px solid '. $color5 .';
+        transition: background-color 0.2s ease, border-color 0.2s ease;
+        font-weight: 600;
+    }
+
+    img.js-ticket-mail-img {
+        vertical-align: middle;
+    }
+
+    /* Thread Heading - Styled like table heading */
+    div.js-ticket-post-reply-wrapper div.js-ticket-thread-heading {
+        padding: 15px 20px;
+        margin-bottom: 1rem;
+        font-weight: 700;
+        border-radius: 8px;
+        font-size: 17px;
+    }
+
+    /* Main Message Box - Styled as a card */
+    div.js-ticket-detail-box {
+        display: flex;
+        width: 100%;
+        border: 1px solid '. $color5 .';
+        border-radius: 12px;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.04);
+        background: #fff;
+        margin-bottom: 2rem;
+        overflow: hidden; /* For border-radius */
+    }
+
+    /* Message Left Panel (User Info) */
+    div.js-ticket-detail-box div.js-ticket-detail-left {
+        flex: 0 0 200px; /* Fixed width for the user info panel */
+        padding: 1.5rem;
+        text-align: center;
+        border-right: 1px solid ' . $color5 . ';
+    }
+
+    div.js-ticket-detail-left div.js-ticket-user-img-wrp {
+        width: 100px;
+        height: 100px;
+        margin: 0 auto 1rem;
+        position: relative;
+    }
+
+    div.js-ticket-detail-left div.js-ticket-user-img-wrp img.js-ticket-staff-img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 50%;
+    }
+
+    div.js-ticket-detail-left div.js-ticket-user-name-wrp,
+    div.js-ticket-detail-left div.js-ticket-user-email-wrp {
+        width: 100%;
+        margin: 0.25rem 0;
+        word-wrap: break-word;
+    }
+
+    /* Message Right Panel (Content) */
+    div.js-ticket-detail-box div.js-ticket-detail-right {
+        flex: 1 1 auto;
+        display: flex;
+        flex-direction: column;
+    }
+
+    div.js-ticket-detail-box div.js-ticket-detail-right div.js-ticket-rows-wrp {
+        padding: 1.5rem;
+        flex-grow: 1;
+    }
+
+    div.js-ticket-detail-right div.js-ticket-row {
+        margin-bottom: 0.75rem;
+    }
+
+    div.js-ticket-detail-right div.js-ticket-row div.js-ticket-field-title {
+        font-weight: 700;
+        margin-right: 0.5rem;
+    }
+
+	div.js-ticket-detail-right div.js-ticket-row div.js-ticket-field-value p {
+		margin: 0;
+		display: inline;
+	}
+
+    /* Bottom Button Wrapper */
+    div.js-ticket-form-btn-wrp {
+        width: 100%;
+        text-align: center;
+        padding: 1.5rem 0;
+        display: flex;
+        justify-content: center;
+        gap: 1rem;
+    }
+
+    /* Save and Cancel Buttons */
+    div.js-ticket-form-btn-wrp input.js-ticket-save-button,
+    div.js-ticket-form-btn-wrp a.js-ticket-cancel-button {
+        display: inline-block;
+        padding: 0.75rem 1.5rem;
+        margin: 0;
+        border-radius: 8px;
+        height: auto;
+        line-height: 1.5;
+        border: 1px solid '. $color5 .';
+        cursor: pointer;
+        transition: opacity 0.2s ease, background-color 0.2s ease;
+        text-decoration: none;
+        min-width: 120px;
+        font-weight: 600;
+    }
+
+    /* Select Field Styling */
+    select#to {
+        width: 100%;
+        padding: 12px 18px;
+        min-height:52px;
+        border: 1px solid '. $color5 .';
+        border-radius: 8px;
+        line-height: 1.5;
+        box-sizing: border-box;
+        height: 100%;
+        -webkit-appearance: none;
+        appearance: none;
+        background-image: url(' . esc_url(JSST_PLUGIN_URL) . 'includes/images/selecticon.png);
+        background-repeat: no-repeat;
+        background-position: right 1rem center;
+        background-size: 0.75rem;
+        padding-right: 2.5rem; /* Space for arrow */
+    }
 
 ';
 /*Code For Colors*/
 $jssupportticket_css .= '
-	div.js-ticket-mails-btn-wrp div.js-ticket-mail-btn a.js-add-link{background-color: '.$color3.';border:1px solid  '.$color5.'; color: '.$color2.';}
-	div.js-ticket-mails-btn-wrp div.js-ticket-mail-btn a.js-add-link:hover{background-color: '.$color1.';border:1px solid  '.$color2.'; color: '.$color7.';}
-	div.js-ticket-mails-btn-wrp div.js-ticket-mail-btn a.js-add-link.active{background-color: '.$color1.' !important; border:1px solid  '.$color2.' !important; color: '.$color7.' !important;}
-	div.js-ticket-mails-btn-wrp div.js-ticket-mail-btn a.js-add-link img{display:inline-block;}
-	div.js-ticket-detail-box{border:1px solid  '.$color5.';}
-	div.js-ticket-detail-box div.js-ticket-detail-right div.js-ticket-rows-wrp{color: '.$color2	.';}
-	div.js-ticket-detail-box div.js-ticket-detail-right{border-left:1px solid  '.$color5.';}
-	div.js-ticket-detail-right div.js-ticket-row div.js-ticket-field-title{color: '.$color1.';}
-	div.js-ticket-detail-right div.js-ticket-row div.js-ticket-field-value span.js-ticket-subject-link{color: '.$color2.';}
-	div.js-ticket-detail-right div.js-ticket-openclosed-box{color: '.$color7.';}
-	div.js-ticket-detail-left div.js-ticket-user-name-wrp{color: '.$color4.';}
-	div.js-ticket-detail-left div.js-ticket-user-email-wrp{color: '.$color4.';}
-	div.js-ticket-detail-right div.js-ticket-row div.js-ticket-field-value{color: '.$color4.';}
-	div.js-ticket-detail-right div.js-ticket-right-bottom{background-color:#fef1e6;color: '.$color4.';border-top:1px solid  '.$color5.';}
-	div.js-ticket-detail-wrapper div.js-ticket-action-btn-wrp div.js-ticket-btn-box{background-color:#e7ecf2;border:1px solid  '.$color5.';}
-	div.js-ticket-post-reply-wrapper div.js-ticket-thread-heading{background-color:'.$color2.';border:1px solid '.$color5.';color:'.$color7.';}
-	div.js-ticket-form-btn-wrp{border-top:2px solid '.$color2.';}
-	div.js-ticket-form-btn-wrp input.js-ticket-save-button{background-color:'.$color1.' !important;color:'.$color7.' !important;border: 1px solid '.$color5.';}
-	div.js-ticket-form-btn-wrp input.js-ticket-save-button:hover {border-color:'.$color2.';}
-	div.js-ticket-form-btn-wrp a.js-ticket-cancel-button{background: '.$color2.';color:'.$color7.';border: 1px solid '.$color5.';}
-	div.js-ticket-form-btn-wrp a.js-ticket-cancel-button:hover{border-color: '.$color1.';}
-
-
+    div.js-ticket-mails-btn-wrp div.js-ticket-mail-btn a.js-add-link {
+        background-color: #f5f2f5;
+        border: 1px solid ' . $color5 . ';
+        color: ' . $color2 . ';
+    }
+    div.js-ticket-mails-btn-wrp div.js-ticket-mail-btn a.js-add-link:hover,
+    div.js-ticket-mails-btn-wrp div.js-ticket-mail-btn a.js-add-link.active {
+        background-color: ' . $color1 . ';
+        border-color: ' . $color1 . ';
+        color: ' . $color7 . ';
+    }
+    div.js-ticket-post-reply-wrapper div.js-ticket-thread-heading {
+        background-color: ' . $color2 . ';
+        color: ' . $color7 . ';
+    }
+    div.js-ticket-detail-box {
+        border-color: ' . $color5 . ';
+    }
+    div.js-ticket-detail-box div.js-ticket-detail-left {
+        border-color: ' . $color5 . ';
+    }
+    div.js-ticket-detail-left div.js-ticket-user-name-wrp,
+    div.js-ticket-detail-left div.js-ticket-user-email-wrp,
+    div.js-ticket-detail-right div.js-ticket-row div.js-ticket-field-value {
+        color: ' . $color4 . ';
+    }
+    div.js-ticket-detail-right div.js-ticket-row div.js-ticket-field-title {
+        color: ' . $color1 . ';
+    }
+    div.js-ticket-form-btn-wrp input.js-ticket-save-button {
+        background: ' . $color1 . ' !important;
+        color: ' . $color7 . ' !important;
+        border-color: ' . $color1 . ';
+    }
+    div.js-ticket-form-btn-wrp input.js-ticket-save-button:hover {
+        background: ' . $color2 . ' !important;
+        border-color: ' . $color2 . ';
+    }
+    div.js-ticket-form-btn-wrp a.js-ticket-cancel-button {
+        background-color: #f5f2f5;
+        color: #636363;
+        border: 1px solid '. $color5 .';
+    }
+    div.js-ticket-form-btn-wrp a.js-ticket-cancel-button:hover {
+        background: ' . $color2 . ' !important;
+        border-color: ' . $color2 . ';
+        color:' . $color7 . ';
+    }
 ';
 
 
-wp_add_inline_style('jssupportticket-main-css',$jssupportticket_css);
+wp_add_inline_style('jssupportticket-main-css', $jssupportticket_css);
 
 
 ?>

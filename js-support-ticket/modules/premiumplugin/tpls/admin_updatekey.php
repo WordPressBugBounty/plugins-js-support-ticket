@@ -41,7 +41,7 @@
                 <div class="jsstadmin-update-key-wrp">
                     <div class="jsstadmin-update-key-section">
                         <h2 class="jsstadmin-update-key-title"><?php echo esc_html(__("JS Helpdesk Activation Key", 'js-support-ticket')); ?></h2>
-                        <input id="transactionkey" name="transactionkey" required type="text" placeholder="<?php echo esc_html(__("XXXXX-XXXXX-XXXXX-XXXXX", 'js-support-ticket')); ?>" value="<?php echo isset(jssupportticket::$_data['token']) ? jssupportticket::$_data['token'] : '' ?>">
+                        <input id="transactionkey" name="transactionkey" required type="text" placeholder="<?php echo esc_attr(__( "XXXXX-XXXXX-XXXXX-XXXXX", 'js-support-ticket' )); ?>" value="<?php echo isset( jssupportticket::$_data['token'] ) ? esc_attr( jssupportticket::$_data['token'] ) : ''; ?>">
                     </div>
                     <div class="jsstadmin-update-key-custom-errormsgwrp">
                     <?php
@@ -95,8 +95,8 @@
                                         $isChecked = true;
                                     }
                                 } ?>
-                                <div class="jsstadmin-update-key-single-addon <?php echo $error_class; ?>">
-                                    <input id="addon-<?php echo $key;?>" name="<?php echo $key;?>" class="jsstadmin-update-key-checkbox" type="checkbox" <?php echo ($isChecked) ? 'checked' : ''; ?>>
+                                <div class="jsstadmin-update-key-single-addon <?php echo esc_attr( $error_class ); ?>">
+                                    <input id="addon-<?php echo esc_attr( $key ); ?>" name="<?php echo esc_attr( $key ); ?>" class="jsstadmin-update-key-checkbox" type="checkbox" <?php echo ($isChecked) ? 'checked' : ''; ?>>
                                     <?php
                                     if (!empty($jssupportticket_addons[$value['TextDomain']]['title'])) {
                                         echo esc_html($jssupportticket_addons[$value['TextDomain']]['title']);
@@ -125,6 +125,32 @@
                 </div>
             </form>
         </div>
+        <?php 
+        if (!empty(jssupportticket::$_data['unused_keys'])) { ?>
+            <div id="jsstadmin-data-wrp" class="p0 bg-n bs-n" style="margin-top: 25px;">
+                <form class="jsstadmin-update-key-form" id="jsticketfrom" action="<?php echo esc_url(wp_nonce_url(admin_url('admin.php?page=premiumplugin&task=jssupportticket_remove_unused_keys&action=jstask'),"delete-transaction-key")); ?>" method="post">
+                    <div class="jsstadmin-update-key-wrp">
+                        <div class="jsstadmin-update-key-slctall-addonswrp">
+                            <span class="jsstadmin-update-key-slctall-addon-title">
+                                <?php echo esc_html(__("Manage Unused Keys", 'js-support-ticket')); ?>
+                            </span>
+                        </div>
+                        <div id="delete-info" class="mb-4">
+                            <p class="text-gray-600">
+                                <?php echo esc_html(__("You have", 'js-support-ticket')); ?>
+                                <span id="unused-count" class="font-bold text-red-600"><?php echo esc_html( jssupportticket::$_data['unused_keys'] ); ?></span>
+                                <?php echo esc_html(__("unused key(s) that can be safely removed.", 'js-support-ticket')); ?>
+                            </p>
+                        </div>
+                        <div class="jsstadmin-update-key-updtebtn-wrp">
+                            <button class="mb-4 jsstadmin-update-key-updtebtn" type="submit" style="margin-bottom: 0;">
+                                <?php echo esc_html(__("Delete All Unused Keys", 'js-support-ticket')); ?>
+                                </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        <?php } ?>
     </div>
 </div>
 <?php

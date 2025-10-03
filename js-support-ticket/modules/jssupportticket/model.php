@@ -25,6 +25,7 @@ class JSSTjssupportticketModel {
 
             $uid = JSSTincluder::getObjectClass('user')->uid();
             $staffid = JSSTincluder::getJSModel('agent')->getStaffId($uid);
+            jssupportticket::$_data[0]['user-name'] = JSSTincluder::getJSModel('agent')->getMyName($staffid);
 
             $tickets = $this->getAgentLatestTicketsForCp($staffid);
             if($tickets){
@@ -44,6 +45,17 @@ class JSSTjssupportticketModel {
         if( $user_is == 'user' ){
             $uid = JSSTincluder::getObjectClass('user')->uid();
 
+            $user_name =  '';
+            if(is_numeric($uid) && $uid > 0){
+                $currentUserName = JSSTincluder::getObjectClass('user')->getUserNameByUid($uid);
+                if ($currentUserName->display_name){
+                    $user_name =  $currentUserName->display_name;
+                } elseif ($currentUserName->user_nicename){
+                    $user_name =  $currentUserName->user_nicename;
+                }
+            }
+            jssupportticket::$_data[0]['user-name'] = $user_name;
+
             $tickets = $this->getUserLatestTicketsForCp($uid);
             if($tickets){
                 jssupportticket::$_data[0]['user-tickets'] = $tickets;
@@ -54,9 +66,12 @@ class JSSTjssupportticketModel {
             if($ticketStats){
                 jssupportticket::$_data[0]['count'] = $ticketStats;
             }
+
+            //data for graph
+            $this->getUserCpChartData($uid);
         }
 
-        if( ( $user_is == 'user' || $user_is == 'visitor' ) && $addon_are_installed ){
+        if( ( $user_is == 'agent' || $user_is == 'user' || $user_is == 'visitor' ) && $addon_are_installed ){
 
             $downloads = $this->getLatestDownloadsForCp();
             if($downloads){
@@ -98,6 +113,9 @@ class JSSTjssupportticketModel {
         $query = "SELECT COUNT(id) FROM ".jssupportticket::$_db->prefix."js_ticket_tickets";
         jssupportticket::$_data['total_tickets'] = jssupportticket::$_db->get_var($query);
 
+        $query = "SELECT COUNT(id) FROM ".jssupportticket::$_db->prefix."js_ticket_tickets WHERE DATE(closed) >= '".esc_sql($fromdate)."' AND DATE(closed) <= '".esc_sql($curdate)."' AND (status = 5 OR status = 6)";
+        jssupportticket::$_data['closed_today'] = jssupportticket::$_db->get_var($query);
+
         $query = "SELECT COUNT(id) FROM ".jssupportticket::$_db->prefix."js_ticket_tickets WHERE DATE(closed) = '".esc_sql($curdate)."' AND (status = 5 OR status = 6)";
         jssupportticket::$_data['tickets_closed_today'] = jssupportticket::$_db->get_var($query);
 
@@ -111,17 +129,20 @@ class JSSTjssupportticketModel {
         }
         
         // Section 3: Unassigned Tickets
-        $query = "SELECT id, subject, created FROM ".jssupportticket::$_db->prefix."js_ticket_tickets WHERE staffid = 0 AND status NOT IN (5,6) ORDER BY created DESC LIMIT 4";
+        $query = "SELECT ticket.id, ticket.uid, ticket.name, ticket.subject, ticket.status,  ticket.created, priority.priority, priority.prioritycolour FROM ".jssupportticket::$_db->prefix."js_ticket_tickets AS ticket
+        LEFT JOIN `" . jssupportticket::$_db->prefix . "js_ticket_priorities` AS priority ON ticket.priorityid = priority.id
+        WHERE ticket.staffid = 0 AND ticket.status NOT IN (5,6) ORDER BY ticket.created DESC LIMIT 3";
         jssupportticket::$_data['unassigned_tickets'] = jssupportticket::$_db->get_results($query);
 
         // Section 4: Ticket Action History
         if(in_array('tickethistory', jssupportticket::$_active_addons)) {
-            $query = "SELECT al.id, al.eventtype, al.message, al.referenceid, tic.ticketid, CONCAT(staff.firstname, ' ', staff.lastname) AS agent_name, al.datetime 
+            $query = "SELECT al.id, al.eventtype, al.message, al.referenceid, tic.ticketid, user.display_name AS name, al.datetime 
                         FROM ".jssupportticket::$_db->prefix."js_ticket_activity_log AS al
                         JOIN ".jssupportticket::$_db->prefix."js_ticket_tickets AS tic ON al.referenceid = tic.id
+                        LEFT JOIN `" . jssupportticket::$_db->prefix . "js_ticket_users` AS user ON  al.uid = user.id
                         LEFT JOIN ".jssupportticket::$_db->prefix."js_ticket_staff AS staff ON tic.staffid = staff.id
                         WHERE al.eventfor = 1 AND al.event = 'ticket'
-                        ORDER BY al.datetime DESC LIMIT 3";
+                        ORDER BY al.datetime DESC LIMIT 8";
             jssupportticket::$_data['ticket_action_history'] = jssupportticket::$_db->get_results($query);
         }
 
@@ -139,11 +160,14 @@ class JSSTjssupportticketModel {
             $pending_tickets_data[] = (int) jssupportticket::$_db->get_var($query_pending);
             $query_answered = "SELECT COUNT(id) FROM ".jssupportticket::$_db->prefix."js_ticket_tickets WHERE isanswered = 1 AND status != 5 AND status != 6 AND status != 1 AND DATE(created) = '$date'";
             $answered_tickets_data[] = (int) jssupportticket::$_db->get_var($query_answered);
+            $query_closed = "SELECT COUNT(id) FROM ".jssupportticket::$_db->prefix."js_ticket_tickets WHERE status IN (5,6) AND DATE(created) = '$date'";
+            $closed_tickets_data[] = (int) jssupportticket::$_db->get_var($query_closed);
         }
         jssupportticket::$_data['ticket_trends']['dates'] = $dates;
         jssupportticket::$_data['ticket_trends']['new'] = $new_tickets_data;
         jssupportticket::$_data['ticket_trends']['pending'] = $pending_tickets_data;
         jssupportticket::$_data['ticket_trends']['answered'] = $answered_tickets_data;
+        jssupportticket::$_data['ticket_trends']['closed'] = $closed_tickets_data;
 
         // Section 6: Today's Ticket Distribution (Chart Data)
         $query_new_today = "SELECT COUNT(id) FROM ".jssupportticket::$_db->prefix."js_ticket_tickets WHERE DATE(created) = '".esc_sql($curdate)."' AND status = 1";
@@ -153,10 +177,37 @@ class JSSTjssupportticketModel {
         jssupportticket::$_data['today_distribution']['answered'] = (int) jssupportticket::$_db->get_var($query_answered_today);
         jssupportticket::$_data['today_distribution']['pending'] = (int) jssupportticket::$_db->get_var($query_pending_today);
 
+        // Fetch colors from statuses table (adjust table name if needed)
+        $query_colors = "SELECT id, statusbgcolour FROM ".jssupportticket::$_db->prefix."js_ticket_statuses WHERE id IN (1,2,3,4,5)";
+        $colors = jssupportticket::$_db->get_results($query_colors, OBJECT_K);
+
+        // Map colors
+        jssupportticket::$_data['today_distribution']['colors'] = [
+            'new'      => isset($colors[1]) ? esc_attr($colors[1]->statusbgcolour) : '#4f46e5',
+            'answered' => isset($colors[2]) ? esc_attr($colors[2]->statusbgcolour) : '#10b981',
+            'pending'  => isset($colors[3]) ? esc_attr($colors[3]->statusbgcolour) : '#f59e0b',
+            'closed'  => isset($colors[5]) ? esc_attr($colors[5]->statusbgcolour) : '#9ca3af',
+        ];
+
         // Section 7: Latest Tickets
-        $query = "SELECT id, ticketid, subject, status, departmentid, lastreply FROM ".jssupportticket::$_db->prefix."js_ticket_tickets ORDER BY created DESC LIMIT 5";
+        $query = "SELECT ticket.id, ticket.uid, ticket.name, ticket.subject, ticket.status,  ticket.created, priority.priority, priority.prioritycolour  FROM ".jssupportticket::$_db->prefix."js_ticket_tickets AS ticket
+        LEFT JOIN `" . jssupportticket::$_db->prefix . "js_ticket_priorities` AS priority ON ticket.priorityid = priority.id
+         ORDER BY ticket.created DESC LIMIT 3";
         jssupportticket::$_data['latest_tickets'] = jssupportticket::$_db->get_results($query);
 
+        // Section : Recently Replied Tickets
+        $query = "SELECT ticket.id, ticket.uid, ticket.name, ticket.subject, ticket.status,  ticket.created, priority.priority, priority.prioritycolour  FROM ".jssupportticket::$_db->prefix."js_ticket_tickets AS ticket
+        LEFT JOIN `" . jssupportticket::$_db->prefix . "js_ticket_priorities` AS priority ON ticket.priorityid = priority.id
+        WHERE ticket.status = 4
+        ORDER BY ticket.lastreply DESC LIMIT 3";
+        jssupportticket::$_data['recently_replied_tickets'] = jssupportticket::$_db->get_results($query);
+
+        // Section : Recently Closed Tickets
+        $query = "SELECT ticket.id, ticket.uid, ticket.name, ticket.subject, ticket.status,  ticket.created, priority.priority, priority.prioritycolour  FROM ".jssupportticket::$_db->prefix."js_ticket_tickets AS ticket
+        LEFT JOIN `" . jssupportticket::$_db->prefix . "js_ticket_priorities` AS priority ON ticket.priorityid = priority.id
+        WHERE ticket.status IN (5,6)
+        ORDER BY ticket.closed DESC LIMIT 3";
+        jssupportticket::$_data['recently_closed_tickets'] = jssupportticket::$_db->get_results($query);
 
         // Get department names for latest tickets
         $query = "SELECT id, departmentname FROM ".jssupportticket::$_db->prefix."js_ticket_departments";
@@ -178,11 +229,13 @@ class JSSTjssupportticketModel {
 
         // Section 8: Agent Workload
         if(in_array('agent', jssupportticket::$_active_addons)) {
-            $query = "SELECT s.id, CONCAT(s.firstname, ' ', s.lastname) AS agent_name,
+            $query = "SELECT s.id, s.uid, CONCAT(s.firstname, ' ', s.lastname) AS agent_name,
                         SUM(CASE WHEN t.status = 1 THEN 1 ELSE 0 END) AS open_tickets,
-                        SUM(CASE WHEN t.status = 2 AND t.isanswered = 0 THEN 1 ELSE 0 END) AS awaiting_customer,
+                        SUM(CASE WHEN t.status = 2 AND t.isanswered = 0 THEN 1 ELSE 0 END) AS pending,
                         SUM(CASE WHEN t.status != 5 AND t.status != 6 THEN 1 ELSE 0 END) AS total_tickets,
-                        SUM(CASE WHEN t.status != 1 AND t.status != 5 AND t.status != 6 AND t.isanswered = 1 THEN 1 ELSE 0 END) AS awaiting_agent
+                        SUM(CASE WHEN t.status != 1 AND t.status != 5 AND t.status != 6 AND t.isanswered = 1 THEN 1 ELSE 0 END) AS answered,
+                        SUM(CASE WHEN t.status = 5 OR t.status = 6 THEN 1 ELSE 0 END) AS closed,
+                        SUM(CASE WHEN t.isoverdue = 1 AND t.status != 5 AND t.status != 6 THEN 1 ELSE 0 END) AS overdue
                         FROM ".jssupportticket::$_db->prefix."js_ticket_staff AS s
                         LEFT JOIN ".jssupportticket::$_db->prefix."js_ticket_tickets AS t ON s.id = t.staffid
                         GROUP BY s.id ORDER BY total_tickets DESC LIMIT 5";
@@ -194,70 +247,193 @@ class JSSTjssupportticketModel {
                     FROM ".jssupportticket::$_db->prefix."js_ticket_statuses AS s
                     LEFT JOIN ".jssupportticket::$_db->prefix."js_ticket_tickets AS t ON s.id = t.status
                     GROUP BY s.id ORDER BY ticket_count DESC";
-        jssupportticket::$_data['tickets_by_status'] = jssupportticket::$_db->get_results($query);
+
+        $statuses = jssupportticket::$_db->get_results($query);
+
+        $labels = [];
+        $data   = [];
+        $colors = [];
+
+        foreach ($statuses as $status) {
+            $labels[] = esc_html(jssupportticket::JSST_getVarValue($status->status));
+            $data[]   = (int) $status->ticket_count;
+            $colors[] = esc_attr($status->statusbgcolour ?: '#9ca3af'); // fallback gray
+        }
+
+        jssupportticket::$_data['tickets_by_status'] = [
+            'labels' => $labels,
+            'data'   => $data,
+            'colors' => $colors,
+        ];
 
         // Section 11: Tickets by Department
         $query = "SELECT d.departmentname, COUNT(t.id) AS ticket_count
                     FROM ".jssupportticket::$_db->prefix."js_ticket_departments AS d
                     LEFT JOIN ".jssupportticket::$_db->prefix."js_ticket_tickets AS t ON d.id = t.departmentid
                     GROUP BY d.id ORDER BY ticket_count DESC";
-        jssupportticket::$_data['tickets_by_department'] = jssupportticket::$_db->get_results($query);
-        // Dynamic color list for departments
-       jssupportticket::$_data['department_colors'] = ['#a855f7', '#10b981', '#d946b1', '#6b7280', '#06b6d4', '#6366f1', '#ec4899'];
+
+        $departments = jssupportticket::$_db->get_results($query);
+
+        $labels = [];
+        $data   = [];
+        $colors = [];
+
+        $available_colors = ['#a855f7', '#10b981', '#d946b1', '#6b7280', '#06b6d4', '#6366f1', '#ec4899'];
+        $color_index = 0;
+
+        foreach ($departments as $department) {
+            $labels[] = esc_html(jssupportticket::JSST_getVarValue($department->departmentname));
+            $data[]   = (int) $department->ticket_count;
+
+            // Assign colors round-robin from predefined palette
+            $colors[] = $available_colors[$color_index % count($available_colors)];
+            $color_index++;
+        }
+
+        jssupportticket::$_data['tickets_by_department'] = [
+            'labels' => $labels,
+            'data'   => $data,
+            'colors' => $colors,
+        ];
         
         // Section 12: Tickets by Priorities
         $query = "SELECT p.priority, p.prioritycolour, COUNT(t.id) AS ticket_count
                     FROM ".jssupportticket::$_db->prefix."js_ticket_priorities AS p
                     LEFT JOIN ".jssupportticket::$_db->prefix."js_ticket_tickets AS t ON p.id = t.priorityid
                     GROUP BY p.id ORDER BY ticket_count DESC";
-        jssupportticket::$_data['tickets_by_priorities'] = jssupportticket::$_db->get_results($query);
 
-        // Section 13: Tickets by Products
-        $query = "SELECT product.product, COUNT(t.id) AS ticket_count
-                    FROM ".jssupportticket::$_db->prefix."js_ticket_products AS product
-                    LEFT JOIN ".jssupportticket::$_db->prefix."js_ticket_tickets AS t ON product.id = t.productid
-                    GROUP BY product.id ORDER BY ticket_count DESC";
-        jssupportticket::$_data['tickets_by_products'] = jssupportticket::$_db->get_results($query);
-        // Dynamic color list for products
-        jssupportticket::$_data['product_colors'] = ['#6366f1', '#ec4899', '#06b6d4', '#84cc16', '#ef4444', '#f59e0b', '#3b82f6'];
+        $priorities = jssupportticket::$_db->get_results($query);
+
+        $labels = [];
+        $data   = [];
+        $colors = [];
+
+        foreach ($priorities as $priority) {
+            $labels[] = esc_html(jssupportticket::JSST_getVarValue($priority->priority));
+            $data[]   = (int) $priority->ticket_count;
+            $colors[] = esc_attr($priority->prioritycolour ?: '#999999');
+        }
+
+        jssupportticket::$_data['tickets_by_priorities'] = [
+            'labels' => $labels,
+            'data'   => $data,
+            'colors' => $colors,
+        ];
+
+
+// Section 13: Tickets by Products
+$query = "SELECT product.product, COUNT(t.id) AS ticket_count
+            FROM ".jssupportticket::$_db->prefix."js_ticket_products AS product
+            LEFT JOIN ".jssupportticket::$_db->prefix."js_ticket_tickets AS t ON product.id = t.productid
+            GROUP BY product.id ORDER BY ticket_count DESC";
+
+        $products = jssupportticket::$_db->get_results($query);
+
+        $labels = [];
+        $data   = [];
+        $colors = [];
+        $borderColors = [];
+
+        $available_colors = ['#6366f1', '#ec4899', '#06b6d4', '#84cc16', '#ef4444', '#f59e0b', '#3b82f6'];
+        $color_index = 0;
+
+        foreach ($products as $product) {
+            $labels[] = esc_html(jssupportticket::JSST_getVarValue($product->product));
+            $data[]   = (int) $product->ticket_count;
+
+            $base = $available_colors[$color_index % count($available_colors)];
+            $colors[] = $base . 'b3';   // ~70% opacity (hex + alpha)
+            $borderColors[] = $base;    // solid border
+
+            $color_index++;
+        }
+
+        jssupportticket::$_data['tickets_by_products'] = [
+            'labels' => $labels,
+            'data'   => $data,
+            'colors' => $colors,
+            'border' => $borderColors,
+        ];
         
         // Section 14: List of Saved Replies (Canned Responses)
         if(in_array('cannedresponses', jssupportticket::$_active_addons)) {
-            $query = "SELECT id, title FROM ".jssupportticket::$_db->prefix."js_ticket_department_message_premade LIMIT 5";
+            $query = "SELECT id, title FROM ".jssupportticket::$_db->prefix."js_ticket_department_message_premade LIMIT 6";
             jssupportticket::$_data['saved_replies'] = jssupportticket::$_db->get_results($query);
         }
         
         // Section 15: Open Tickets by Age
-        $date_1_day_ago = date_i18n('Y-m-d H:i:s', strtotime('-1 day'));
-        $date_3_days_ago = date_i18n('Y-m-d H:i:s', strtotime('-3 days'));
-        $date_7_days_ago = date_i18n('Y-m-d H:i:s', strtotime('-7 days'));
-        
-        $query_lt_1_day = "SELECT COUNT(id) FROM ".jssupportticket::$_db->prefix."js_ticket_tickets WHERE status NOT IN (5,6) AND created > '".esc_sql($date_1_day_ago)."'";
-        $query_1_3_days = "SELECT COUNT(id) FROM ".jssupportticket::$_db->prefix."js_ticket_tickets WHERE status NOT IN (5,6) AND created <= '".esc_sql($date_1_day_ago)."' AND created > '".esc_sql($date_3_days_ago)."'";
-        $query_3_7_days = "SELECT COUNT(id) FROM ".jssupportticket::$_db->prefix."js_ticket_tickets WHERE status NOT IN (5,6) AND created <= '".esc_sql($date_3_days_ago)."' AND created > '".esc_sql($date_7_days_ago)."'";
-        $query_gt_7_days = "SELECT COUNT(id) FROM ".jssupportticket::$_db->prefix."js_ticket_tickets WHERE status NOT IN (5,6) AND created <= '".esc_sql($date_7_days_ago)."'";
-        
-        jssupportticket::$_data['tickets_by_age']['lt_1_day'] = jssupportticket::$_db->get_var($query_lt_1_day);
-        jssupportticket::$_data['tickets_by_age']['1_3_days'] = jssupportticket::$_db->get_var($query_1_3_days);
-        jssupportticket::$_data['tickets_by_age']['3_7_days'] = jssupportticket::$_db->get_var($query_3_7_days);
-        jssupportticket::$_data['tickets_by_age']['gt_7_days'] = jssupportticket::$_db->get_var($query_gt_7_days);
+        $today       = date_i18n('Y-m-d');
+        $yesterday   = date_i18n('Y-m-d', strtotime('-1 day'));
+        $two_days    = date_i18n('Y-m-d', strtotime('-2 days'));
+        $three_days  = date_i18n('Y-m-d', strtotime('-3 days'));
+        $four_days   = date_i18n('Y-m-d', strtotime('-4 days'));
+        $five_days   = date_i18n('Y-m-d', strtotime('-5 days'));
+        $six_days    = date_i18n('Y-m-d', strtotime('-6 days'));
+
+        // Today
+        $query_today = "SELECT COUNT(id) 
+            FROM ".jssupportticket::$_db->prefix."js_ticket_tickets 
+            WHERE status NOT IN (5,6) AND DATE(created) = '".esc_sql($today)."'";
+
+        // Yesterday
+        $query_yesterday = "SELECT COUNT(id) 
+            FROM ".jssupportticket::$_db->prefix."js_ticket_tickets 
+            WHERE status NOT IN (5,6) AND DATE(created) = '".esc_sql($yesterday)."'";
+
+        // 2 days ago
+        $query_2_days = "SELECT COUNT(id) 
+            FROM ".jssupportticket::$_db->prefix."js_ticket_tickets 
+            WHERE status NOT IN (5,6) AND DATE(created) = '".esc_sql($two_days)."'";
+
+        // 3 days ago
+        $query_3_days = "SELECT COUNT(id) 
+            FROM ".jssupportticket::$_db->prefix."js_ticket_tickets 
+            WHERE status NOT IN (5,6) AND DATE(created) = '".esc_sql($three_days)."'";
+
+        // 4 days ago
+        $query_4_days = "SELECT COUNT(id) 
+            FROM ".jssupportticket::$_db->prefix."js_ticket_tickets 
+            WHERE status NOT IN (5,6) AND DATE(created) = '".esc_sql($four_days)."'";
+
+        // 5 days ago
+        $query_5_days = "SELECT COUNT(id) 
+            FROM ".jssupportticket::$_db->prefix."js_ticket_tickets 
+            WHERE status NOT IN (5,6) AND DATE(created) = '".esc_sql($five_days)."'";
+
+        // 6+ days ago
+        $query_6_plus = "SELECT COUNT(id) 
+            FROM ".jssupportticket::$_db->prefix."js_ticket_tickets 
+            WHERE status NOT IN (5,6) AND DATE(created) <= '".esc_sql($six_days)."'";
+
+        jssupportticket::$_data['tickets_by_age'] = [
+            'today'      => (int) jssupportticket::$_db->get_var($query_today),
+            'yesterday'  => (int) jssupportticket::$_db->get_var($query_yesterday),
+            'two_days'   => (int) jssupportticket::$_db->get_var($query_2_days),
+            'three_days' => (int) jssupportticket::$_db->get_var($query_3_days),
+            'four_days'  => (int) jssupportticket::$_db->get_var($query_4_days),
+            'five_days'  => (int) jssupportticket::$_db->get_var($query_5_days),
+            'six_plus'   => (int) jssupportticket::$_db->get_var($query_6_plus),
+        ];
 
         // Section 16: Most Active Customers
-        $query = "SELECT uid, 
-                 MAX(CASE WHEN name != '' THEN name END) AS name, 
-                 COUNT(id) AS ticket_count
-        FROM " . jssupportticket::$_db->prefix . "js_ticket_tickets
-        WHERE uid != 0
-        GROUP BY uid
-        ORDER BY ticket_count DESC
-        LIMIT 4";
+        $query = "SELECT t.uid, 
+                         COALESCE(u.display_name, '') AS name, 
+                         COUNT(t.id) AS ticket_count
+                  FROM " . jssupportticket::$_db->prefix . "js_ticket_tickets AS t
+                  LEFT JOIN " . jssupportticket::$_db->prefix . "js_ticket_users AS u 
+                         ON t.uid = u.id
+                  WHERE t.uid != 0
+                  GROUP BY t.uid
+                  ORDER BY ticket_count DESC
+                  LIMIT 4";
+
         jssupportticket::$_data['most_active_customers'] = jssupportticket::$_db->get_results($query);
         
         // Section 17: Active Timers
         if(in_array('timetracking', jssupportticket::$_active_addons)) {
-            $query = "SELECT t.id, t.ticketid, t.subject, st.usertime, st.created FROM ".jssupportticket::$_db->prefix."js_ticket_tickets AS t 
-                        JOIN ".jssupportticket::$_db->prefix."js_ticket_staff_time AS st ON t.id = st.ticketid 
-                        WHERE st.status = 1 ORDER BY st.created DESC LIMIT 3";
+            $query = "SELECT t.id, t.ticketid, t.name, t.subject, st.usertime, st.created FROM ".jssupportticket::$_db->prefix."js_ticket_tickets AS t 
+                    JOIN ".jssupportticket::$_db->prefix."js_ticket_staff_time AS st ON t.id = st.ticketid 
+                    WHERE st.status = 1 ORDER BY st.created DESC LIMIT 5";
             jssupportticket::$_data['active_timers'] = jssupportticket::$_db->get_results($query);
         }
 
@@ -364,6 +540,7 @@ class JSSTjssupportticketModel {
             'js-support-ticket-multilanguageemailtemplates'  => array('title' => esc_html(__('Multi Language Email Templates','js-support-ticket')), 'price' => 0, 'status' => 1),
         );
     }
+
     function getAgentLatestTicketsForCp($staffid){
         if(!is_numeric($staffid)){
             return false;
@@ -373,20 +550,41 @@ class JSSTjssupportticketModel {
         if($allowed == true){
             $agent_conditions = "1 = 1";
         }else{
-            $agent_conditions = "ticket.staffid = $staffid OR ticket.departmentid IN (SELECT dept.departmentid FROM `" . jssupportticket::$_db->prefix . "js_ticket_acl_user_access_departments` AS dept WHERE dept.staffid = ".esc_sql($staffid).")";
+            $agent_conditions = "ticket.staffid = $staffid OR ticket.departmentid IN ( SELECT dept.departmentid FROM `" . jssupportticket::$_db->prefix . "js_ticket_acl_user_access_departments` AS dept WHERE dept.staffid = ".esc_sql($staffid)." )";
         }
 
-        //latest tickets
-        $query = "SELECT DISTINCT ticket.*,department.departmentname AS departmentname ,priority.priority AS priority,
-        priority.prioritycolour AS prioritycolour,staff.photo AS staffphoto,staff.id AS staffid,
-        assignstaff.firstname AS staffname,status.status AS statustitle, status.statuscolour, status.statusbgcolour
-        FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` AS ticket
-        LEFT JOIN `" . jssupportticket::$_db->prefix . "js_ticket_priorities` AS priority ON ticket.priorityid = priority.id
-        LEFT JOIN `" . jssupportticket::$_db->prefix . "js_ticket_departments` AS department ON ticket.departmentid = department.id
-        LEFT JOIN `" . jssupportticket::$_db->prefix . "js_ticket_staff` AS staff ON staff.uid = ticket.uid
-        LEFT JOIN `" . jssupportticket::$_db->prefix . "js_ticket_staff` AS assignstaff ON ticket.staffid = assignstaff.id
-        JOIN `" . jssupportticket::$_db->prefix . "js_ticket_statuses` AS status ON status.id = ticket.status
-        WHERE (".esc_sql($agent_conditions).") ORDER BY ticket.created DESC LIMIT 3 ";
+        //latest tickets with latest reply
+        $query = "SELECT DISTINCT ticket.*,
+            department.departmentname AS departmentname,
+            priority.priority AS priority,
+            priority.prioritycolour AS prioritycolour,
+            staff.photo AS staffphoto,
+            staff.id AS staffid,
+            assignstaff.firstname AS staffname,
+            status.status AS statustitle,
+            status.statuscolour,
+            status.statusbgcolour,
+            r.name AS last_reply_name,
+            r.uid AS last_reply_uid,
+            r.created AS last_reply_created
+            FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` AS ticket
+            LEFT JOIN `" . jssupportticket::$_db->prefix . "js_ticket_priorities` AS priority ON ticket.priorityid = priority.id
+            LEFT JOIN `" . jssupportticket::$_db->prefix . "js_ticket_departments` AS department ON ticket.departmentid = department.id
+            LEFT JOIN `" . jssupportticket::$_db->prefix . "js_ticket_staff` AS staff ON staff.uid = ticket.uid
+            LEFT JOIN `" . jssupportticket::$_db->prefix . "js_ticket_staff` AS assignstaff ON ticket.staffid = assignstaff.id
+            JOIN `" . jssupportticket::$_db->prefix . "js_ticket_statuses` AS status ON status.id = ticket.status
+            LEFT JOIN `" . jssupportticket::$_db->prefix . "js_ticket_replies` AS r 
+                ON r.id = (
+                    SELECT r2.id 
+                    FROM `" . jssupportticket::$_db->prefix . "js_ticket_replies` AS r2 
+                    WHERE r2.ticketid = ticket.id 
+                    ORDER BY r2.created DESC 
+                    LIMIT 1
+                )
+            WHERE (".esc_sql($agent_conditions).") 
+            ORDER BY ticket.created DESC 
+            LIMIT 3";
+        
         $tickets = jssupportticket::$_db->get_results($query);
         return $tickets;
     }
@@ -423,6 +621,13 @@ class JSSTjssupportticketModel {
         FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` AS ticket
         LEFT JOIN `" . jssupportticket::$_db->prefix . "js_ticket_priorities` AS priority ON ticket.priorityid = priority.id
         LEFT JOIN `" . jssupportticket::$_db->prefix . "js_ticket_departments` AS department ON ticket.departmentid = department.id
+        WHERE (".esc_sql($agent_conditions).") AND ticket.isanswered != 1 AND ticket.status != 5 AND ticket.status != 1 AND (lastreply != '0000-00-00 00:00:00') ";
+        $result['pendingticket'] = jssupportticket::$_db->get_var($query);
+
+        $query = "SELECT COUNT(ticket.id)
+        FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` AS ticket
+        LEFT JOIN `" . jssupportticket::$_db->prefix . "js_ticket_priorities` AS priority ON ticket.priorityid = priority.id
+        LEFT JOIN `" . jssupportticket::$_db->prefix . "js_ticket_departments` AS department ON ticket.departmentid = department.id
         WHERE (".esc_sql($agent_conditions).") AND (ticket.status = 5 OR ticket.status = 6) ";
         $result['closedticket'] = jssupportticket::$_db->get_var($query);
 
@@ -449,54 +654,145 @@ class JSSTjssupportticketModel {
             return false;
         }
 
-        $curdate = date_i18n('Y-m-d');
-        $fromdate = date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime("now -1 month"));
+        $curdate  = date_i18n('Y-m-d');
+        $fromdate = date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime("now -7 days")); // last 7 days
 
-        $query = "SELECT priority.priority,(SELECT COUNT(id) FROM `".jssupportticket::$_db->prefix."js_ticket_tickets` WHERE priorityid = priority.id AND status = 0 AND (lastreply = '0000-00-00 00:00:00') AND date(created) >= '".esc_sql($fromdate)."' AND date(created) <= '".esc_sql($curdate)."' ) AS totalticket
-                    FROM `".jssupportticket::$_db->prefix."js_ticket_priorities` AS priority ORDER BY priority.priority";
-        $openticket_pr = jssupportticket::$_db->get_results($query);
+        // Chart header
+        jssupportticket::$_data['stack_chart_horizontal']['title'] =
+            "['Date','". esc_html(__('Overdue','js-support-ticket'))."','". esc_html(__('Pending','js-support-ticket'))."','". esc_html(__('Answered','js-support-ticket'))."','". esc_html(__('New','js-support-ticket'))."']";
 
-        $query = "SELECT COUNT(id) FROM `".jssupportticket::$_db->prefix."js_ticket_tickets`";
-        $allticket_pr = jssupportticket::$_db->get_var($query);
+        $rows = [];
 
-        $query = "SELECT priority.priority,(SELECT COUNT(id) FROM `".jssupportticket::$_db->prefix."js_ticket_tickets` WHERE priorityid = priority.id AND isanswered = 1 AND status != 5 AND status != 1 AND date(created) >= '".esc_sql($fromdate)."' AND date(created) <= '".esc_sql($curdate)."') AS totalticket
-                    FROM `".jssupportticket::$_db->prefix."js_ticket_priorities` AS priority ORDER BY priority.priority";
-        $answeredticket_pr = jssupportticket::$_db->get_results($query);
-        $query = "SELECT priority.priority,(SELECT COUNT(id) FROM `".jssupportticket::$_db->prefix."js_ticket_tickets` WHERE priorityid = priority.id AND isoverdue = 1 AND status != 5 AND date(created) >= '".esc_sql($fromdate)."' AND date(created) <= '".esc_sql($curdate)."') AS totalticket
-                    FROM `".jssupportticket::$_db->prefix."js_ticket_priorities` AS priority ORDER BY priority.priority";
-        $overdueticket_pr = jssupportticket::$_db->get_results($query);
-        $query = "SELECT priority.priority,(SELECT COUNT(id) FROM `".jssupportticket::$_db->prefix."js_ticket_tickets` WHERE priorityid = priority.id  AND isanswered != 1 AND status != 5 AND (lastreply != '0000-00-00 00:00:00') AND date(created) >= '".esc_sql($fromdate)."' AND date(created) <= '".esc_sql($curdate)."') AS totalticket
-                    FROM `".jssupportticket::$_db->prefix."js_ticket_priorities` AS priority ORDER BY priority.priority";
-        $pendingticket_pr = jssupportticket::$_db->get_results($query);
-        jssupportticket::$_data['stack_chart_horizontal']['title'] = "['". esc_html(__('Priority','js-support-ticket'))."','". esc_html(__('Overdue','js-support-ticket'))."','". esc_html(__('Pending','js-support-ticket'))."','". esc_html(__('Answered','js-support-ticket'))."','". esc_html(__('New','js-support-ticket'))."']";
-        jssupportticket::$_data['stack_chart_horizontal']['data'] = "";
+        // Loop each day in range
+        $period = new DatePeriod(
+            new DateTime($fromdate),
+            new DateInterval('P1D'),
+            (new DateTime($curdate))->modify('+1 day')
+        );
 
-        foreach($overdueticket_pr AS $index => $pr){
-            jssupportticket::$_data['stack_chart_horizontal']['data'] .= "[";
-            jssupportticket::$_data['stack_chart_horizontal']['data'] .= "'".jssupportticket::JSST_getVarValue($pr->priority)."',";
-            jssupportticket::$_data['stack_chart_horizontal']['data'] .= $overdueticket_pr[$index]->totalticket.",";
-            jssupportticket::$_data['stack_chart_horizontal']['data'] .= $pendingticket_pr[$index]->totalticket.",";
-            jssupportticket::$_data['stack_chart_horizontal']['data'] .= $answeredticket_pr[$index]->totalticket.",";
-            jssupportticket::$_data['stack_chart_horizontal']['data'] .= $openticket_pr[$index]->totalticket.",";
-            jssupportticket::$_data['stack_chart_horizontal']['data'] .= "],";
+        foreach ($period as $dateObj) {
+            $day = $dateObj->format('Y-m-d');
+
+            // Count tickets for this day
+            $overdue = jssupportticket::$_db->get_var("
+                SELECT COUNT(id) FROM `".jssupportticket::$_db->prefix."js_ticket_tickets`
+                WHERE isoverdue = 1 AND status != 5 AND status != 6 AND DATE(created) = '".esc_sql($day)."'
+            ");
+
+            $pending = jssupportticket::$_db->get_var("
+                SELECT COUNT(id) FROM `".jssupportticket::$_db->prefix."js_ticket_tickets`
+                WHERE isanswered != 1 AND status != 5 AND status != 6 AND (lastreply != '0000-00-00 00:00:00') AND DATE(created) = '".esc_sql($day)."'
+            ");
+
+            $answered = jssupportticket::$_db->get_var("
+                SELECT COUNT(id) FROM `".jssupportticket::$_db->prefix."js_ticket_tickets`
+                WHERE isanswered = 1 AND status NOT IN (1,5,6) AND DATE(created) = '".esc_sql($day)."'
+            ");
+
+            $new = jssupportticket::$_db->get_var("
+                SELECT COUNT(id) FROM `".jssupportticket::$_db->prefix."js_ticket_tickets`
+                WHERE status = 1 AND DATE(created) = '".esc_sql($day)."'
+            ");
+
+            $rows[] = "['{$day}', ".intval($overdue).", ".intval($pending).", ".intval($answered).", ".intval($new)."]";
         }
+
+        jssupportticket::$_data['stack_chart_horizontal']['data'] = implode(",", $rows);
+    }
+
+    function getUserCpChartData($uid){
+        if(!is_numeric($uid)){
+            return false;
+        }
+
+        $curdate  = date_i18n('Y-m-d');
+        $fromdate = date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime("now -7 days")); // last 7 days
+
+        // Chart header
+        jssupportticket::$_data['stack_chart_horizontal']['title'] =
+            "['Date','". esc_html(__('Overdue','js-support-ticket'))."','". esc_html(__('Pending','js-support-ticket'))."','". esc_html(__('Answered','js-support-ticket'))."','". esc_html(__('New','js-support-ticket'))."']";
+
+        $rows = [];
+
+        // Loop each day in range
+        $period = new DatePeriod(
+            new DateTime($fromdate),
+            new DateInterval('P1D'),
+            (new DateTime($curdate))->modify('+1 day')
+        );
+
+        foreach ($period as $dateObj) {
+            $day = $dateObj->format('Y-m-d');
+
+            // Count tickets for this day
+            $overdue = jssupportticket::$_db->get_var("
+                SELECT COUNT(id) FROM `".jssupportticket::$_db->prefix."js_ticket_tickets`
+                WHERE uid = ".esc_sql($uid)." AND isoverdue = 1 AND status != 5 AND status != 6 AND DATE(created) = '".esc_sql($day)."'
+            ");
+
+            $pending = jssupportticket::$_db->get_var("
+                SELECT COUNT(id) FROM `".jssupportticket::$_db->prefix."js_ticket_tickets`
+                WHERE uid = ".esc_sql($uid)." AND isanswered != 1 AND status != 5 AND status != 6 AND (lastreply != '0000-00-00 00:00:00') AND DATE(created) = '".esc_sql($day)."'
+            ");
+
+            $answered = jssupportticket::$_db->get_var("
+                SELECT COUNT(id) FROM `".jssupportticket::$_db->prefix."js_ticket_tickets`
+                WHERE uid = ".esc_sql($uid)." AND isanswered = 1 AND status NOT IN (1,5,6) AND DATE(created) = '".esc_sql($day)."'
+            ");
+
+            $new = jssupportticket::$_db->get_var("
+                SELECT COUNT(id) FROM `".jssupportticket::$_db->prefix."js_ticket_tickets`
+                WHERE uid = ".esc_sql($uid)." AND status = 1 AND DATE(created) = '".esc_sql($day)."'
+            ");
+
+            $rows[] = "['{$day}', ".intval($overdue).", ".intval($pending).", ".intval($answered).", ".intval($new)."]";
+        }
+
+        jssupportticket::$_data['stack_chart_horizontal']['data'] = implode(",", $rows);
     }
 
     function getUserLatestTicketsForCp($uid){
         if(!is_numeric($uid)){
             return false;
         }
+
         do_action('jsst_addon_user_cp_tickets');
-        $query = "SELECT ticket.*,department.departmentname AS departmentname ,priority.priority AS priority,priority.prioritycolour AS prioritycolour,status.status AS statustitle, status.statuscolour, status.statusbgcolour ".jssupportticket::$_addon_query['select']."
+
+        $query = "SELECT ticket.*,
+            department.departmentname AS departmentname,
+            priority.priority AS priority,
+            priority.prioritycolour AS prioritycolour,
+            status.status AS statustitle,
+            status.statuscolour,
+            status.statusbgcolour,
+            r.name AS last_reply_name,
+            r.uid AS last_reply_uid,
+            r.created AS last_reply_created
+            ".jssupportticket::$_addon_query['select']."
         FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` AS ticket
-        LEFT JOIN `" . jssupportticket::$_db->prefix . "js_ticket_priorities` AS priority ON ticket.priorityid = priority.id
-        LEFT JOIN `" . jssupportticket::$_db->prefix . "js_ticket_departments` AS department ON     ticket.departmentid = department.id
-        JOIN `" . jssupportticket::$_db->prefix . "js_ticket_statuses` AS status ON status.id = ticket.status
-        ".jssupportticket::$_addon_query['join'];
-        $query .= " WHERE ticket.uid = " . esc_sql($uid);
-        $query .= " ORDER BY ticket.created DESC LIMIT 3";
+        LEFT JOIN `" . jssupportticket::$_db->prefix . "js_ticket_priorities` AS priority 
+            ON ticket.priorityid = priority.id
+        LEFT JOIN `" . jssupportticket::$_db->prefix . "js_ticket_departments` AS department 
+            ON ticket.departmentid = department.id
+        JOIN `" . jssupportticket::$_db->prefix . "js_ticket_statuses` AS status 
+            ON status.id = ticket.status
+        LEFT JOIN `" . jssupportticket::$_db->prefix . "js_ticket_replies` AS r 
+            ON r.id = (
+                SELECT r2.id 
+                FROM `" . jssupportticket::$_db->prefix . "js_ticket_replies` AS r2 
+                WHERE r2.ticketid = ticket.id 
+                ORDER BY r2.created DESC 
+                LIMIT 1
+            )
+        ".jssupportticket::$_addon_query['join']."
+        WHERE ticket.uid = " . esc_sql($uid) . "
+        ORDER BY ticket.created DESC 
+        LIMIT 3";
+
         $tickets = jssupportticket::$_db->get_results($query);
+
         do_action('reset_jsst_aadon_query');
+
         return $tickets;
     }
 
@@ -1575,13 +1871,13 @@ class JSSTjssupportticketModel {
                 //wp_enqueue_style('jssupportticket-main-css-rtl');
             }
             $color = require_once(JSST_PLUGIN_PATH . 'includes/css/style.php');
-            wp_enqueue_style('jssupportticket-color-css', JSST_PLUGIN_URL . 'includes/css/color.css');
+            // wp_enqueue_style('jssupportticket-color-css', JSST_PLUGIN_URL . 'includes/css/color.css');
         }
         return true;
     }
 
     function updateColorFile(){
-        require(JSST_PLUGIN_PATH . 'includes/css/style.php');
+        // require_once(JSST_PLUGIN_PATH . 'includes/css/style.php');
     }
 
     function getSiteUrl(){
@@ -2099,6 +2395,54 @@ class JSSTjssupportticketModel {
         }
 
         update_option('jsst_show_key_expiry_msg', $show_key_expiry_msg, false);
+    }
+    
+    function jsst_get_theme_colors() {
+        require_once(JSST_PLUGIN_PATH . 'includes/css/style.php');
+        // Use a static variable to cache the colors after the first run.
+        static $colors = null;
+
+        // If we already have the colors, return them immediately.
+        if ($colors !== null) {
+            return $colors;
+        }
+
+        // --- If colors are not cached, generate them now ---
+        $default_colors = [
+            'color1' => '#4f46e5',
+            'color2' => '#2b2b2b',
+            'color3' => '#f8f8f8',
+            'color4' => '#636363',
+            'color5' => '#d1d1d1',
+            'color6' => '#e7e7e7',
+            'color7' => '#ffffff',
+            'color8' => '#2DA1CB',
+            'color9' => '#000000'
+        ];
+        
+        $saved_colors_json = get_option("jsst_set_theme_colors");
+        $saved_colors = json_decode($saved_colors_json, true);
+
+        $final_colors = is_array($saved_colors) && !empty($saved_colors)
+            ? array_merge($default_colors, $saved_colors)
+            : $default_colors;
+        
+        // Sanitize before and after the filter
+        foreach ($final_colors as $key => $value) {
+            $final_colors[$key] = jsst_validate_css_color($value); // Assumes jsst_validate_css_color() exists
+        }
+        $final_colors = apply_filters('cm_theme_colors', $final_colors, 'js-support-ticket');
+        foreach ($final_colors as $key => $value) {
+            $final_colors[$key] = jsst_validate_css_color($value);
+        }
+        
+        // Cache the final, sanitized colors in our static variable
+        $colors = $final_colors;
+        
+        // Also update the class property if you still need it for other reasons
+        jssupportticket::$_colors = $colors;
+
+        return $colors;
     }
 
 }

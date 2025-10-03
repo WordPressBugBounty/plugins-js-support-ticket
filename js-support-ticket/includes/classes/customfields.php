@@ -354,7 +354,11 @@ class JSSTcustomfields {
         $html = '';
         $i++;
         $required = $field->required;
-        $div1 = 'js-col-md-3 js-filter-field-wrp';
+        if ($field->userfieldtype == 'checkbox' || $field->userfieldtype == 'radio') {
+            $div1 = 'js-col-md-3 js-filter-field-wrp js-filter-radio-checkbox-field-wrp ';
+        } else {
+            $div1 = 'js-col-md-3 js-filter-field-wrp';
+        }
         $div3 = 'js-filter-value';
 
         $html = '<div class="' . esc_attr($div1) . '"> ';
@@ -397,6 +401,14 @@ class JSSTcustomfields {
                 if (!empty($field->userfieldparams)) {
                     $comboOptions = array();
                     $obj_option = json_decode($field->userfieldparams);
+                    $total_options= count($obj_option);
+                    if($total_options % 2 == 0)
+                    {
+                        $field_width = 'style = " width:calc(100% / 2 - 4px); margin:2px 2px;"';
+                    }else
+                    {
+                        $field_width = 'style = " width:calc(100% / 3 - 4px); margin:2px 2px;"';
+                    }
                     if(empty($value))
                         $value = array();
                     $html .= '<div class="js-form-cust-rad-fld-wrp js-form-cust-ckb-fld-wrp">';
@@ -407,8 +419,10 @@ class JSSTcustomfields {
                         }else{
                             $check = '';
                         }
-                        $html .= '<input type="checkbox" ' . esc_attr($check) . ' class="radiobutton" value="' . esc_attr($option) . '" id="' . esc_attr($field->field) . '_' . esc_attr($i) . '" name="' . esc_attr($field->field) . '[]">';
-                        $html .= '<label for="' . esc_attr($field->field) . '_' . esc_attr($i) . '" id="foruf_checkbox1">' . esc_html($option) . '</label>';
+                        $html .= '<div class="js-ticket-check-box" '.$field_width.'>';
+                            $html .= '<input type="checkbox" ' . esc_attr($check) . ' class="radiobutton" value="' . esc_attr($option) . '" id="' . esc_attr($field->field) . '_' . esc_attr($i) . '" name="' . esc_attr($field->field) . '[]">';
+                            $html .= '<label for="' . esc_attr($field->field) . '_' . esc_attr($i) . '" id="foruf_checkbox1">' . esc_html($option) . '</label>';
+                        $html .= '</div>';
                         $i++;
                     }
                     $html .= '</div>';

@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 3.6\n"
+"X-Generator: Poedit 3.7\n"
 
 msgid "You are not allowed"
 msgstr "당신은 허용되지 않습니다"
@@ -8383,3 +8383,381 @@ msgstr "데이터 디렉토리 이름을 변경하기 전에 파일 시스템에
 
 msgid "URL for use with your own scripts and third party"
 msgstr "자신의 스크립트 및 타사와 함께 사용하기위한 URL"
+
+msgid "Email template already exist"
+msgstr "이메일 템플릿이 이미 존재합니다"
+
+msgid "JS HelpDesk System"
+msgstr "JS 헬프 데스크 시스템"
+
+msgid "JS HelpDesk"
+msgstr "JS 헬프 데스크"
+
+msgid "Main"
+msgstr "기본"
+
+msgid "Ticket Management"
+msgstr "티켓 관리"
+
+msgid "User Management"
+msgstr "사용자 관리"
+
+msgid "Content & Knowledge"
+msgstr "내용 및 지식"
+
+msgid "Email & Communication"
+msgstr "이메일 및 커뮤니케이션"
+
+msgid "Products & Sales"
+msgstr "제품 및 판매"
+
+msgid "System & Settings"
+msgstr "시스템 및 설정"
+
+msgid "No unused keys were found."
+msgstr "사용되지 않은 키가 발견되지 않았습니다."
+
+msgid "unused key has been deleted successfully!"
+msgstr "사용하지 않은 키가 성공적으로 삭제되었습니다!"
+
+msgid "unused keys have been deleted successfully!"
+msgstr "사용하지 않은 키가 성공적으로 삭제되었습니다!"
+
+msgid "XXXXX-XXXXX-XXXXX-XXXXX"
+msgstr "xxxxx-xxxxx-xxxxx-xxxxx"
+
+msgid "Manage Unused Keys"
+msgstr "사용하지 않은 키를 관리하십시오"
+
+msgid "You have"
+msgstr "당신은 가지고 있습니다"
+
+msgid "unused key(s) that can be safely removed."
+msgstr "안전하게 제거 할 수있는 사용되지 않는 키."
+
+msgid "Delete All Unused Keys"
+msgstr "사용하지 않은 키를 삭제하십시오"
+
+msgid "REPLIED_TICKET"
+msgstr "대답 _ticket"
+
+msgid "Tickets Over Time"
+msgstr "시간이 지남에 따라 티켓"
+
+msgid "Welcome back to"
+msgstr "다시 오신 것을 환영합니다"
+
+msgid "As a visitor, you can easily create a support ticket by sharing your issue details."
+msgstr "방문자로서 문제 세부 정보를 공유하여 지원 티켓을 쉽게 만들 수 있습니다."
+
+msgid "Have an issue?"
+msgstr "문제가 있습니까?"
+
+msgid "Our support team is here to help. Create a new ticket to get started."
+msgstr "우리의 지원 팀이 도와 드리겠습니다. 시작하기 위해 새 티켓을 만드십시오."
+
+msgid "Create New Ticket"
+msgstr "새 티켓을 만드십시오"
+
+msgid "Enter your information to check the status of your existing ticket."
+msgstr "기존 티켓의 상태를 확인하려면 정보를 입력하십시오."
+
+msgid "Welcome back,"
+msgstr "다시 오신 것을 환영합니다."
+
+msgid "open tickets"
+msgstr "오픈 티켓"
+
+msgid "No open ticket"
+msgstr "오픈 티켓이 없습니다"
+
+msgid ", and"
+msgstr ", 그리고"
+
+msgid "is awaiting your reply."
+msgstr "답장을 기다리고 있습니다."
+
+msgid "Need to assist a user?"
+msgstr "사용자를 도울 필요가 있습니까?"
+
+msgid "Quickly create a new ticket on behalf of a user to provide support and track their request."
+msgstr "지원을 제공하고 요청을 추적하기 위해 사용자를 대신하여 새 티켓을 신속하게 작성하십시오."
+
+msgid "Open ticket for user"
+msgstr "사용자를위한 오픈 티켓"
+
+msgid "OR Create a"
+msgstr "또는 a"
+
+msgid "Your Ticket Stats"
+msgstr "티켓 통계"
+
+msgid "Open Tickets"
+msgstr "오픈 티켓"
+
+msgid "Closed Tickets"
+msgstr "폐쇄 된 티켓"
+
+msgid "Overdue Tickets"
+msgstr "연체 티켓"
+
+msgid "Recent Tickets"
+msgstr "최근 티켓"
+
+msgid "You replied"
+msgstr "당신은 대답했습니다"
+
+msgid "Reply from"
+msgstr "답장"
+
+msgid "No replies yet"
+msgstr "아직 답장이 없습니다"
+
+msgid "Customize"
+msgstr "사용자 정의하십시오"
+
+msgid "Quick Actions"
+msgstr "빠른 행동"
+
+msgid "Easily access your main tasks from here."
+msgstr "여기에서 주요 작업에 쉽게 액세스하십시오."
+
+msgid "Create a Ticket"
+msgstr "티켓을 만듭니다"
+
+msgid "Here's a summary of today's ticket activity. This helps in tracking our daily progress and workload."
+msgstr "다음은 오늘의 티켓 활동에 대한 요약입니다. 이것은 우리의 일상 진행과 작업량을 추적하는 데 도움이됩니다."
+
+msgid "Created Tickets"
+msgstr "티켓을 만들었습니다"
+
+msgid "Your activation key has expired."
+msgstr "활성화 키가 만료되었습니다."
+
+msgid "Please reactivate your key to continue receiving product updates, addons, and support."
+msgstr "제품 업데이트, 애드온 및 지원을 계속 받으려면 키를 재 활성화하십시오."
+
+msgid "Reactivate Activation Key"
+msgstr "활성화 키를 재 활성화하십시오"
+
+msgid "Ticket Analysis (Last 7 Days)"
+msgstr "티켓 분석 (마지막 7 일)"
+
+msgid "Priority:"
+msgstr "우선 사항:"
+
+msgid "No Recent Tickets"
+msgstr "최근 티켓이 없습니다"
+
+msgid "New tickets will be displayed in this section."
+msgstr "이 섹션에는 새로운 티켓이 표시됩니다."
+
+msgid "All Tickets Assigned"
+msgstr "모든 티켓이 할당되었습니다"
+
+msgid "Great job! There are no unassigned tickets."
+msgstr "좋은 일! 할당되지 않은 티켓은 없습니다."
+
+msgid "Ticket updates and changes will appear here."
+msgstr "티켓 업데이트 및 변경 사항이 여기에 나타납니다."
+
+msgid "Recently Replied"
+msgstr "최근에 대답했습니다"
+
+msgid "No Replies Yet"
+msgstr "아직 답장이 없습니다"
+
+msgid "Recently replied tickets will be shown here."
+msgstr "최근에 답변 된 티켓이 여기에 표시됩니다."
+
+msgid "View All Replied Tickets"
+msgstr "답장 된 모든 티켓을보십시오"
+
+msgid "Recently Closed"
+msgstr "최근에 문을 닫았습니다"
+
+msgid "No Closed Tickets"
+msgstr "폐쇄 된 티켓이 없습니다"
+
+msgid "Recently closed tickets will be listed here."
+msgstr "최근에 폐쇄 된 티켓은 여기에 나열됩니다."
+
+msgid "View All Closed Tickets"
+msgstr "닫힌 티켓을 모두보십시오"
+
+msgid "Tickets by Priority"
+msgstr "우선 순위 별 티켓"
+
+msgid "Agent Performance"
+msgstr "에이전트 성능"
+
+msgid "Assigned"
+msgstr "할당된"
+
+msgid "No Agent Performance Data"
+msgstr "에이전트 성능 데이터가 없습니다"
+
+msgid "Performance metrics will be displayed here."
+msgstr "성능 메트릭이 여기에 표시됩니다."
+
+msgid "Recent Canned Responses"
+msgstr "최근 통조림 반응"
+
+msgid "Recent canned responses will be listed here."
+msgstr "최근 통조림 반응이 여기에 나열됩니다."
+
+msgid "Active Timers"
+msgstr "활성 타이머"
+
+msgid "Timers started by agent will be shown here."
+msgstr "에이전트가 시작한 타이머가 여기에 표시됩니다."
+
+msgid "No Customer Activity"
+msgstr "고객 활동이 없습니다"
+
+msgid "Customers with the most tickets will be listed here."
+msgstr "티켓이 가장 많은 고객은 여기에 나열됩니다."
+
+msgid "Track the time spent on each ticket by each agent and each reply."
+msgstr "각 에이전트와 각 회신이 각 티켓에 소요 된 시간을 추적하십시오."
+
+msgid "Quick Installation Guide"
+msgstr "빠른 설치 가이드"
+
+msgid "How to setup of the Help Desk"
+msgstr "헬프 데스크 설정 방법"
+
+msgid "Video thumbnail"
+msgstr "비디오 썸네일"
+
+msgid "Learn how to set up your Help Desk quickly and get it ready for use."
+msgstr "헬프 데스크를 신속하게 설정하고 사용할 준비를하는 방법을 배우십시오."
+
+msgid "How to Setup System Emails"
+msgstr "시스템 이메일을 설정하는 방법"
+
+msgid "Learn how to setup out going notification in the best Help Desk plugin for WordPress"
+msgstr "WordPress를위한 최고의 헬프 데스크 플러그인에서 알림을 설정하는 방법에 대해 알아보십시오."
+
+msgid "How to Create a Ticket"
+msgstr "티켓을 만드는 방법"
+
+msgid "A simple walkthrough of the ticket creation process for both user and administrator."
+msgstr "사용자와 관리자 모두를위한 티켓 제작 과정의 간단한 연습."
+
+msgid "How to Set Email Notifications"
+msgstr "이메일 알림을 설정하는 방법"
+
+msgid "Configure your email notification settings to stay updated on ticket activity."
+msgstr "티켓 활동에 대한 업데이트를 유지하도록 이메일 알림 설정을 구성하십시오."
+
+msgid "How to Setup Custom Fields"
+msgstr "사용자 정의 필드를 설정하는 방법"
+
+msgid "Learn how to add custom fields to your ticket forms to collect more specific information."
+msgstr "보다 구체적인 정보를 수집하기 위해 티켓 양식에 사용자 정의 필드를 추가하는 방법을 알아보십시오."
+
+msgid "Customize Dashboard"
+msgstr "대시 보드를 사용자 정의합니다"
+
+msgid "Todays Ticket Distribution"
+msgstr "오늘날의 티켓 배포"
+
+msgid "Number of Tickets"
+msgstr "티켓 수"
+
+msgid "Yesterday"
+msgstr "어제"
+
+msgid "2 days ago"
+msgstr "2 일 전"
+
+msgid "3 days ago"
+msgstr "3 일 전"
+
+msgid "4 days ago"
+msgstr "4 일 전"
+
+msgid "5 days ago"
+msgstr "5 일 전"
+
+msgid "6+ days ago"
+msgstr "6 일 전에"
+
+msgid "Number of Open Tickets"
+msgstr "오픈 티켓 수"
+
+msgid "Email tempate has been deleted"
+msgstr "이메일 템플릿이 삭제되었습니다"
+
+msgid "Email tempate has not been deleted"
+msgstr "이메일 템플릿이 삭제되지 않았습니다"
+
+msgid "Required Field(s) are not filled"
+msgstr "필수 필드는 채워지지 않습니다"
+
+msgid "Default Email Template"
+msgstr "기본 이메일 템플릿"
+
+msgid "This template is used for all forms and languages unless a specific custom template is created."
+msgstr "이 템플릿은 특정 사용자 정의 템플릿이 만들어지지 않는 한 모든 양식 및 언어에 사용됩니다."
+
+msgid "This template is used for all forms unless a specific form template is created."
+msgstr "이 템플릿은 특정 양식 템플릿이 만들어지지 않는 한 모든 양식에 사용됩니다."
+
+msgid "This template is used for all languages unless a specific language template is created."
+msgstr "이 템플릿은 특정 언어 템플릿이 만들어지지 않는 한 모든 언어에 사용됩니다."
+
+msgid "View/Edit Default Template"
+msgstr "기본 템플릿보기/편집"
+
+msgid "Form & Language-Specific Email Templates"
+msgstr "양식 및 언어 별 이메일 템플릿"
+
+msgid "Form-Specific Email Templates"
+msgstr "양식 별 이메일 템플릿"
+
+msgid "Language-Specific Email Templates"
+msgstr "언어 별 이메일 템플릿"
+
+msgid "Customize email content for individual form, for specific language, or a combination of both. If no custom template exists for a given form or language, the default template will be used."
+msgstr "개별 양식, 특정 언어 또는이 둘의 조합에 대해 이메일 컨텐츠를 사용자 정의하십시오. 주어진 양식 또는 언어에 대한 사용자 정의 템플릿이없는 경우 기본 템플릿이 사용됩니다."
+
+msgid "Customize email content for individual form. If no custom template exists for a form, the default template will be used."
+msgstr "개별 양식의 이메일 콘텐츠를 사용자 정의하십시오. 양식에 대한 사용자 정의 템플릿이 없으면 기본 템플릿이 사용됩니다."
+
+msgid "Customize email content for specific language. If no custom template exists for a language, the default template will be used."
+msgstr "특정 언어에 대한 이메일 컨텐츠를 사용자 정의하십시오. 언어에 대한 사용자 정의 템플릿이없는 경우 기본 템플릿이 사용됩니다."
+
+msgid "-- Select a Form --"
+msgstr "-양식 선택-"
+
+msgid "-- Select a Language --"
+msgstr "-언어 선택-"
+
+msgid "Create Template"
+msgstr "템플릿을 만듭니다"
+
+msgid "Existing Custom Templates"
+msgstr "기존 사용자 정의 템플릿"
+
+msgid "Form Name"
+msgstr "양식 이름"
+
+msgid "Language"
+msgstr "언어"
+
+msgid "Preview"
+msgstr "시사"
+
+msgid "Form:"
+msgstr "형태:"
+
+msgid "Language:"
+msgstr "언어:"
+
+msgid "Save & Next"
+msgstr "저장 & 다음"
+
+msgid "For enhanced security change encryption method in %1$s on line %2$s"
+msgstr "향상된 보안 변경 암호화 방법의 경우 %1 $ S 라인 %2 $ S"

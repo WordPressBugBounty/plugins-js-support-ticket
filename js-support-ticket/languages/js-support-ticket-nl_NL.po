@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 3.6\n"
+"X-Generator: Poedit 3.7\n"
 
 msgid "You are not allowed"
 msgstr "Je bent niet bevoegd"
@@ -2036,12 +2036,9 @@ msgstr "Ticket standaard pagina"
 msgid "Select Page"
 msgstr "Selecteer pagina"
 
-msgid ""
-"Select JS Help Desk default page, on the action system, will redirect on the selected page. If not select the default page, email links, and support icon "
-"might not work."
+msgid "Select JS Help Desk default page, on the action system, will redirect on the selected page. If not select the default page, email links, and support icon might not work."
 msgstr ""
-"Selecteer de standaardpagina van JS Help Desk, op het actiesysteem wordt omgeleid naar de geselecteerde pagina. Als u de standaardpagina niet selecteert, "
-"werken e-maillinks en het ondersteuningspictogram mogelijk niet."
+"Selecteer de standaardpagina van JS Help Desk, op het actiesysteem wordt omgeleid naar de geselecteerde pagina. Als u de standaardpagina niet selecteert, werken e-maillinks en het ondersteuningspictogram mogelijk niet."
 
 msgid "Support Icon"
 msgstr "Support icoon"
@@ -3040,16 +3037,13 @@ msgid "Enables agents to merge two tickets of the same user into one instead of 
 msgstr "Hiermee kunnen agenten twee tickets van dezelfde gebruiker in één samenvoegen in plaats van hetzelfde probleem op veel tickets te behandelen."
 
 msgid "Defines rules or set specific intervals of time to make ticket auto overdue.The ticket can overdue by type or overdue by Cronjob."
-msgstr ""
-"Definieert regels of stelt specifieke tijdsintervallen in om het ticket automatisch te laten vervallen. Het ticket kan te laat zijn per type of te laat "
-"door Cronjob."
+msgstr "Definieert regels of stelt specifieke tijdsintervallen in om het ticket automatisch te laten vervallen. Het ticket kan te laat zijn per type of te laat door Cronjob."
 
 msgid "SMTP enables you to add custom mail protocol to send and receive emails within the js help desk."
 msgstr "Met SMTP kunt u een aangepast e-mailprotocol toevoegen om e-mails te verzenden en ontvangen binnen de js-helpdesk."
 
 msgid "Displays complete ticket history along with the ticket status, currently assigned user and other actions performed on each ticket."
-msgstr ""
-"Toont de volledige ticketgeschiedenis samen met de ticketstatus, de momenteel toegewezen gebruiker en andere acties die op elk ticket zijn uitgevoerd."
+msgstr "Toont de volledige ticketgeschiedenis samen met de ticketstatus, de momenteel toegewezen gebruiker en andere acties die op elk ticket zijn uitgevoerd."
 
 msgid "Pre-populated messages allow support agents to respond quickly."
 msgstr "Met vooraf ingevulde berichten kunnen ondersteuningsmedewerkers snel reageren."
@@ -3505,13 +3499,11 @@ msgid "Wordpress Plugin"
 msgstr "Wordpress-plug-in"
 
 msgid ""
-"JS Help Desk is a trusted open source ticket system. JS Help Desk is a simple, easy to use, web-based customer support system. Users can create a ticket "
-"from the front-end. JS Help Desk comes packed with lot features than most of the expensive(and complex) support ticket system on the market. The best part "
-"is, It completely free."
+"JS Help Desk is a trusted open source ticket system. JS Help Desk is a simple, easy to use, web-based customer support system. Users can create a ticket from the front-end. JS Help Desk comes packed with lot features "
+"than most of the expensive(and complex) support ticket system on the market. The best part is, It completely free."
 msgstr ""
-"JS Help Desk is een vertrouwd open source ticketsysteem. JS Help Desk is een eenvoudig, gebruiksvriendelijk, webgebaseerd klantenondersteuningssysteem. "
-"Gebruikers kunnen vanaf de front-end een ticket aanmaken. JS Help Desk zit boordevol functies dan de meeste van de dure (en complexe) ticketsystemen voor "
-"ondersteuning op de markt. Het beste is dat het helemaal gratis is."
+"JS Help Desk is een vertrouwd open source ticketsysteem. JS Help Desk is een eenvoudig, gebruiksvriendelijk, webgebaseerd klantenondersteuningssysteem. Gebruikers kunnen vanaf de front-end een ticket aanmaken. JS Help "
+"Desk zit boordevol functies dan de meeste van de dure (en complexe) ticketsystemen voor ondersteuning op de markt. Het beste is dat het helemaal gratis is."
 
 msgid "Add on list"
 msgstr "Toevoegen aan lijst"
@@ -6310,8 +6302,7 @@ msgid "Add-On’s For Help Desk"
 msgstr "Add-ons voor helpdesk"
 
 msgid "Get trusted WordPress add on’s. Guaranteed to work fast, safe to use, beautifully coded, packed with features and easy to use."
-msgstr ""
-"Ontvang vertrouwde WordPress-add-ons. Gegarandeerd snel werkend, veilig in gebruik, prachtig gecodeerd, boordevol functies en gemakkelijk te gebruiken."
+msgstr "Ontvang vertrouwde WordPress-add-ons. Gegarandeerd snel werkend, veilig in gebruik, prachtig gecodeerd, boordevol functies en gemakkelijk te gebruiken."
 
 msgid "Save big with an exclusive membership plan today!"
 msgstr "Bespaar vandaag nog flink met een exclusief lidmaatschapsplan!"
@@ -6323,9 +6314,7 @@ msgid "Add agents and assign roles and permissions to provide assistance and sup
 msgstr "Voeg agenten toe en wijs rollen en machtigingen toe om hulp en ondersteuning te bieden bij klantenondersteuningstickets."
 
 msgid "Define rules for ticket to auto close. Ticket will be auto close after specific interval of time which can be set by admin."
-msgstr ""
-"Definieer regels voor het automatisch sluiten van tickets. Het ticket wordt automatisch gesloten na een specifiek tijdsinterval dat door de beheerder kan "
-"worden ingesteld."
+msgstr "Definieer regels voor het automatisch sluiten van tickets. Het ticket wordt automatisch gesloten na een specifiek tijdsinterval dat door de beheerder kan worden ingesteld."
 
 msgid "Get the survey from your customers on ticket closing to improve your quality of services and assistance."
 msgstr "Ontvang de enquête van uw klanten over het sluiten van tickets om uw kwaliteit van dienstverlening en assistentie te verbeteren."
@@ -6340,13 +6329,10 @@ msgid "The private note is used as reminders or to give other agents insights in
 msgstr "De privénotitie wordt gebruikt als herinnering of om andere agenten inzicht te geven in het ticketprobleem. Gebruiker ziet de privénotities niet."
 
 msgid "Stop losing productivity on repetitive queries,Build your knowledge base, group solutions by topics to facilitate users."
-msgstr ""
-"Stop met het verliezen van productiviteit bij herhaalde vragen. Bouw uw kennisbank op, groepeer oplossingen op onderwerp om gebruikers te faciliteren."
+msgstr "Stop met het verliezen van productiviteit bij herhaalde vragen. Bouw uw kennisbank op, groepeer oplossingen op onderwerp om gebruikers te faciliteren."
 
 msgid "Enables admin to set N numbers of tickets for users to create and set N numbers of Ticket to open for agents separately."
-msgstr ""
-"Hiermee kan de beheerder N-nummers van tickets instellen die gebruikers kunnen maken en N-nummers van tickets instellen die afzonderlijk voor agenten "
-"kunnen worden geopend."
+msgstr "Hiermee kan de beheerder N-nummers van tickets instellen die gebruikers kunnen maken en N-nummers van tickets instellen die afzonderlijk voor agenten kunnen worden geopend."
 
 msgid "Multi Language Email Templates"
 msgstr "Meertalige e-mailsjablonen"
@@ -6373,9 +6359,7 @@ msgid "Save the ticket as a PDF in your system or the admin will also be able to
 msgstr "Bewaar het ticket als PDF in uw systeem, anders kan de beheerder ook alle gegevens binnen Ticket exporteren."
 
 msgid "Tired of getting tickets about the same problems? Add FAQs to drastically reduce the number of common questions from users."
-msgstr ""
-"Ben je het beu om kaartjes te krijgen voor dezelfde problemen? Voeg veelgestelde vragen toe om het aantal veelgestelde vragen van gebruikers drastisch te "
-"verminderen."
+msgstr "Ben je het beu om kaartjes te krijgen voor dezelfde problemen? Voeg veelgestelde vragen toe om het aantal veelgestelde vragen van gebruikers drastisch te verminderen."
 
 msgid "Admin Widgets"
 msgstr "Beheerderswidgets"
@@ -6393,12 +6377,10 @@ msgid "Mail Chimp"
 msgstr "Mailchimp"
 
 msgid "The Mail Chimp add-on adds a new checkbox to the registration form for prompting new users to subscribe your email-list."
-msgstr ""
-"De Mail Chimp add-on voegt een nieuw selectievakje toe aan het registratieformulier om nieuwe gebruikers te vragen zich op uw e-maillijst te abonneren."
+msgstr "De Mail Chimp add-on voegt een nieuw selectievakje toe aan het registratieformulier om nieuwe gebruikers te vragen zich op uw e-maillijst te abonneren."
 
 msgid "EDD offers customers to open new tickets just one click from their EDD account with optionally validating the license keys."
-msgstr ""
-"EDD biedt klanten de mogelijkheid om met één klik nieuwe tickets te openen vanuit hun EDD-account, waarbij optioneel de licentiesleutels worden gevalideerd."
+msgstr "EDD biedt klanten de mogelijkheid om met één klik nieuwe tickets te openen vanuit hun EDD-account, waarbij optioneel de licentiesleutels worden gevalideerd."
 
 msgid "email cc"
 msgstr "e-mail cc"
@@ -6406,11 +6388,8 @@ msgstr "e-mail cc"
 msgid "Email Cc"
 msgstr "E-mail CC"
 
-msgid ""
-"CC(Carbon Copy) - the people who should know about the information which is being shared and the people included are able to see who is there in the list."
-msgstr ""
-"CC (Carbon Copy) - de mensen die op de hoogte moeten zijn van de informatie die wordt gedeeld en de mensen die erin zijn opgenomen, kunnen zien wie er in "
-"de lijst staat."
+msgid "CC(Carbon Copy) - the people who should know about the information which is being shared and the people included are able to see who is there in the list."
+msgstr "CC (Carbon Copy) - de mensen die op de hoogte moeten zijn van de informatie die wordt gedeeld en de mensen die erin zijn opgenomen, kunnen zien wie er in de lijst staat."
 
 msgid "multiform"
 msgstr "veelvormig"
@@ -6421,11 +6400,8 @@ msgstr "Met Multiform kan de gebruiker meer dan één formulier toevoegen op bas
 msgid "agent auto assign"
 msgstr "agent automatisch toewijzen"
 
-msgid ""
-"When auto assignment is enabled and a ticket is created, an appropriate agent is automatically assigned to the ticket and it is moved to the Assigned state."
-msgstr ""
-"Wanneer automatische toewijzing is ingeschakeld en er een ticket wordt gemaakt, wordt automatisch een geschikte agent aan het ticket toegewezen en wordt "
-"het verplaatst naar de status Toegewezen."
+msgid "When auto assignment is enabled and a ticket is created, an appropriate agent is automatically assigned to the ticket and it is moved to the Assigned state."
+msgstr "Wanneer automatische toewijzing is ingeschakeld en er een ticket wordt gemaakt, wordt automatisch een geschikte agent aan het ticket toegewezen en wordt het verplaatst naar de status Toegewezen."
 
 msgid "Social Login"
 msgstr "Sociaal inloggen"
@@ -6458,8 +6434,7 @@ msgid "All Future Addons"
 msgstr "Alle toekomstige add-ons"
 
 msgid "Hey there! We have recently launched a fresh update for the add-ons. Don't forget to update the add-ons to enjoy the greatest features!"
-msgstr ""
-"Hallo daar! We hebben onlangs een nieuwe update voor de add-ons gelanceerd. Vergeet niet de add-ons bij te werken om van de beste functies te genieten!"
+msgstr "Hallo daar! We hebben onlangs een nieuwe update voor de add-ons gelanceerd. Vergeet niet de add-ons bij te werken om van de beste functies te genieten!"
 
 msgid "View Addone Status"
 msgstr "Bekijk Addone-status"
@@ -7055,12 +7030,8 @@ msgstr "Voeg referenties toe"
 msgid "Edit Help Topic"
 msgstr "Help-onderwerp bewerken"
 
-msgid ""
-"e.g ' I have read and agree to the [link] Terms and Conditions[/link].  ' The text between [link] and [/link] will be linked to provided url or wordpress "
-"page."
-msgstr ""
-"bijv. 'Ik heb de [link] Algemene voorwaarden[/link] gelezen en ga ermee akkoord. ' De tekst tussen [link] en [/link] wordt gelinkt naar de opgegeven url of "
-"wordpresspagina."
+msgid "e.g ' I have read and agree to the [link] Terms and Conditions[/link].  ' The text between [link] and [/link] will be linked to provided url or wordpress page."
+msgstr "bijv. 'Ik heb de [link] Algemene voorwaarden[/link] gelezen en ga ermee akkoord. ' De tekst tussen [link] en [/link] wordt gelinkt naar de opgegeven url of wordpresspagina."
 
 msgid "login"
 msgstr "Log in"
@@ -8417,3 +8388,381 @@ msgstr "U moet de bestaande gegevensmap in het bestandssysteem hernoemen voordat
 
 msgid "URL for use with your own scripts and third party"
 msgstr "URL voor gebruik met uw eigen scripts en derde partij"
+
+msgid "Email template already exist"
+msgstr "E -mailsjabloon bestaat al"
+
+msgid "JS HelpDesk System"
+msgstr "JS Helpdesk -systeem"
+
+msgid "JS HelpDesk"
+msgstr "JS helpdesk"
+
+msgid "Main"
+msgstr "Voornaamst"
+
+msgid "Ticket Management"
+msgstr "Ticketbeheer"
+
+msgid "User Management"
+msgstr "Gebruikersbeheer"
+
+msgid "Content & Knowledge"
+msgstr "Inhoud en kennis"
+
+msgid "Email & Communication"
+msgstr "E -mail en communicatie"
+
+msgid "Products & Sales"
+msgstr "Producten en verkoop"
+
+msgid "System & Settings"
+msgstr "Systeem en instellingen"
+
+msgid "No unused keys were found."
+msgstr "Er werden geen ongebruikte toetsen gevonden."
+
+msgid "unused key has been deleted successfully!"
+msgstr "Ongebruikte sleutel is met succes verwijderd!"
+
+msgid "unused keys have been deleted successfully!"
+msgstr "Ongebruikte toetsen zijn met succes verwijderd!"
+
+msgid "XXXXX-XXXXX-XXXXX-XXXXX"
+msgstr "XxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxX"
+
+msgid "Manage Unused Keys"
+msgstr "Beheer ongebruikte toetsen"
+
+msgid "You have"
+msgstr "Je hebt"
+
+msgid "unused key(s) that can be safely removed."
+msgstr "ongebruikte sleutel (en) die veilig kunnen worden verwijderd."
+
+msgid "Delete All Unused Keys"
+msgstr "Verwijder alle ongebruikte toetsen"
+
+msgid "REPLIED_TICKET"
+msgstr "Antwoord_ticket"
+
+msgid "Tickets Over Time"
+msgstr "Tickets na verloop van tijd"
+
+msgid "Welcome back to"
+msgstr "Welkom terug bij"
+
+msgid "As a visitor, you can easily create a support ticket by sharing your issue details."
+msgstr "Als bezoeker kunt u eenvoudig een ondersteuningsticket maken door uw probleemgegevens te delen."
+
+msgid "Have an issue?"
+msgstr "Heeft u een probleem?"
+
+msgid "Our support team is here to help. Create a new ticket to get started."
+msgstr "Ons ondersteuningsteam is hier om te helpen. Maak een nieuw ticket om te beginnen."
+
+msgid "Create New Ticket"
+msgstr "Maak een nieuw ticket"
+
+msgid "Enter your information to check the status of your existing ticket."
+msgstr "Voer uw informatie in om de status van uw bestaande ticket te controleren."
+
+msgid "Welcome back,"
+msgstr "Welkom terug,"
+
+msgid "open tickets"
+msgstr "open tickets"
+
+msgid "No open ticket"
+msgstr "Geen open ticket"
+
+msgid ", and"
+msgstr ", En"
+
+msgid "is awaiting your reply."
+msgstr "wacht op uw antwoord."
+
+msgid "Need to assist a user?"
+msgstr "Een gebruiker helpen?"
+
+msgid "Quickly create a new ticket on behalf of a user to provide support and track their request."
+msgstr "Maak snel een nieuw ticket namens een gebruiker om ondersteuning te bieden en hun verzoek bij te houden."
+
+msgid "Open ticket for user"
+msgstr "Open ticket voor gebruiker"
+
+msgid "OR Create a"
+msgstr "Of maak een"
+
+msgid "Your Ticket Stats"
+msgstr "Uw ticketstatistieken"
+
+msgid "Open Tickets"
+msgstr "Open tickets"
+
+msgid "Closed Tickets"
+msgstr "Gesloten kaartjes"
+
+msgid "Overdue Tickets"
+msgstr "Achterstallige kaartjes"
+
+msgid "Recent Tickets"
+msgstr "Recente tickets"
+
+msgid "You replied"
+msgstr "Je antwoordde"
+
+msgid "Reply from"
+msgstr "Antwoorden van"
+
+msgid "No replies yet"
+msgstr "Nog geen antwoorden"
+
+msgid "Customize"
+msgstr "Aanpassen"
+
+msgid "Quick Actions"
+msgstr "Snelle acties"
+
+msgid "Easily access your main tasks from here."
+msgstr "Toegang van hier gemakkelijk toegang tot uw hoofdtaken."
+
+msgid "Create a Ticket"
+msgstr "Maak een kaartje"
+
+msgid "Here's a summary of today's ticket activity. This helps in tracking our daily progress and workload."
+msgstr "Hier is een samenvatting van de ticketactiviteit van vandaag. Dit helpt bij het volgen van onze dagelijkse voortgang en werklast."
+
+msgid "Created Tickets"
+msgstr "Create tickets"
+
+msgid "Your activation key has expired."
+msgstr "Uw activeringssleutel is verlopen."
+
+msgid "Please reactivate your key to continue receiving product updates, addons, and support."
+msgstr "Activeer uw sleutel om productupdates, add -ons en ondersteuning te blijven ontvangen."
+
+msgid "Reactivate Activation Key"
+msgstr "Activering van de activeringssleutel"
+
+msgid "Ticket Analysis (Last 7 Days)"
+msgstr "Ticket -analyse (laatste 7 dagen)"
+
+msgid "Priority:"
+msgstr "Prioriteit:"
+
+msgid "No Recent Tickets"
+msgstr "Geen recente tickets"
+
+msgid "New tickets will be displayed in this section."
+msgstr "Nieuwe tickets worden in dit gedeelte weergegeven."
+
+msgid "All Tickets Assigned"
+msgstr "Alle toegewezen tickets"
+
+msgid "Great job! There are no unassigned tickets."
+msgstr "Geweldig werk! Er zijn geen niet -toegewezen tickets."
+
+msgid "Ticket updates and changes will appear here."
+msgstr "Ticketupdates en wijzigingen verschijnen hier."
+
+msgid "Recently Replied"
+msgstr "Onlangs geantwoord"
+
+msgid "No Replies Yet"
+msgstr "Nog geen antwoorden"
+
+msgid "Recently replied tickets will be shown here."
+msgstr "Onlangs beantwoordde tickets worden hier getoond."
+
+msgid "View All Replied Tickets"
+msgstr "Bekijk alle beantwoord tickets"
+
+msgid "Recently Closed"
+msgstr "Onlangs gesloten"
+
+msgid "No Closed Tickets"
+msgstr "Geen gesloten kaartjes"
+
+msgid "Recently closed tickets will be listed here."
+msgstr "Onlangs zullen hier gesloten tickets worden vermeld."
+
+msgid "View All Closed Tickets"
+msgstr "Bekijk alle gesloten tickets"
+
+msgid "Tickets by Priority"
+msgstr "Tickets op prioriteit"
+
+msgid "Agent Performance"
+msgstr "Agentprestaties"
+
+msgid "Assigned"
+msgstr "Toegewezen"
+
+msgid "No Agent Performance Data"
+msgstr "Geen prestatiegegevens van agent"
+
+msgid "Performance metrics will be displayed here."
+msgstr "Prestatiestatistieken worden hier weergegeven."
+
+msgid "Recent Canned Responses"
+msgstr "Recente ingeblikte reacties"
+
+msgid "Recent canned responses will be listed here."
+msgstr "Recente ingeblikte reacties worden hier vermeld."
+
+msgid "Active Timers"
+msgstr "Actieve timers"
+
+msgid "Timers started by agent will be shown here."
+msgstr "Timers gestart door Agent worden hier getoond."
+
+msgid "No Customer Activity"
+msgstr "Geen klantactiviteit"
+
+msgid "Customers with the most tickets will be listed here."
+msgstr "Klanten met de meeste tickets worden hier vermeld."
+
+msgid "Track the time spent on each ticket by each agent and each reply."
+msgstr "Volg de tijd die op elk ticket wordt besteed door elke agent en elk antwoord."
+
+msgid "Quick Installation Guide"
+msgstr "Snelle installatiehandleiding"
+
+msgid "How to setup of the Help Desk"
+msgstr "Hoe u de helpdesk instelt"
+
+msgid "Video thumbnail"
+msgstr "Video -miniatuur"
+
+msgid "Learn how to set up your Help Desk quickly and get it ready for use."
+msgstr "Leer hoe u uw helpdesk snel kunt instellen en maakt deze klaar voor gebruik."
+
+msgid "How to Setup System Emails"
+msgstr "Hoe u System -e -mails instelt"
+
+msgid "Learn how to setup out going notification in the best Help Desk plugin for WordPress"
+msgstr "Leer hoe u een melding kunt instellen in de beste helpdesk -plug -in voor WordPress"
+
+msgid "How to Create a Ticket"
+msgstr "Hoe u een ticket maakt"
+
+msgid "A simple walkthrough of the ticket creation process for both user and administrator."
+msgstr "Een eenvoudige doorloop van het ticketcreatieproces voor zowel gebruikers als beheerder."
+
+msgid "How to Set Email Notifications"
+msgstr "Hoe u e -mailmeldingen instelt"
+
+msgid "Configure your email notification settings to stay updated on ticket activity."
+msgstr "Configureer uw e -mailmeldingsinstellingen om op de hoogte te blijven van ticketactiviteit."
+
+msgid "How to Setup Custom Fields"
+msgstr "Hoe u aangepaste velden instelt"
+
+msgid "Learn how to add custom fields to your ticket forms to collect more specific information."
+msgstr "Leer hoe u aangepaste velden aan uw kaartformulieren kunt toevoegen om meer specifieke informatie te verzamelen."
+
+msgid "Customize Dashboard"
+msgstr "Pas het dashboard aan"
+
+msgid "Todays Ticket Distribution"
+msgstr "De ticketverdeling van vandaag"
+
+msgid "Number of Tickets"
+msgstr "Aantal tickets"
+
+msgid "Yesterday"
+msgstr "Gisteren"
+
+msgid "2 days ago"
+msgstr "2 dagen geleden"
+
+msgid "3 days ago"
+msgstr "3 dagen geleden"
+
+msgid "4 days ago"
+msgstr "4 dagen geleden"
+
+msgid "5 days ago"
+msgstr "5 dagen geleden"
+
+msgid "6+ days ago"
+msgstr "6+ dagen geleden"
+
+msgid "Number of Open Tickets"
+msgstr "Aantal open tickets"
+
+msgid "Email tempate has been deleted"
+msgstr "E -mailsjabloon is verwijderd"
+
+msgid "Email tempate has not been deleted"
+msgstr "E -mailsjabloon is niet verwijderd"
+
+msgid "Required Field(s) are not filled"
+msgstr "Vereiste veld (en) zijn niet ingevuld"
+
+msgid "Default Email Template"
+msgstr "Standaard e -mailsjabloon"
+
+msgid "This template is used for all forms and languages unless a specific custom template is created."
+msgstr "Deze sjabloon wordt gebruikt voor alle vormen en talen, tenzij een specifieke aangepaste sjabloon wordt gemaakt."
+
+msgid "This template is used for all forms unless a specific form template is created."
+msgstr "Deze sjabloon wordt voor alle vormen gebruikt, tenzij een specifieke formuliersjabloon wordt gemaakt."
+
+msgid "This template is used for all languages unless a specific language template is created."
+msgstr "Deze sjabloon wordt voor alle talen gebruikt, tenzij een specifieke taalsjabloon wordt gemaakt."
+
+msgid "View/Edit Default Template"
+msgstr "Bekijk/bewerk standaardsjabloon"
+
+msgid "Form & Language-Specific Email Templates"
+msgstr "Formulier en taalspecifieke e-mailsjablonen"
+
+msgid "Form-Specific Email Templates"
+msgstr "Formulier-specifieke e-mailsjablonen"
+
+msgid "Language-Specific Email Templates"
+msgstr "Taalspecifieke e-mailsjablonen"
+
+msgid "Customize email content for individual form, for specific language, or a combination of both. If no custom template exists for a given form or language, the default template will be used."
+msgstr "Pas e -mailinhoud aan voor individueel formulier, voor specifieke taal of een combinatie van beide. Als er geen aangepaste sjabloon bestaat voor een bepaald formulier of taal, wordt de standaardsjabloon gebruikt."
+
+msgid "Customize email content for individual form. If no custom template exists for a form, the default template will be used."
+msgstr "Pas e -mailinhoud aan voor individueel formulier. Als er geen aangepaste sjabloon bestaat voor een formulier, wordt de standaardsjabloon gebruikt."
+
+msgid "Customize email content for specific language. If no custom template exists for a language, the default template will be used."
+msgstr "Pas e -mailinhoud aan voor specifieke taal. Als er geen aangepaste sjabloon bestaat voor een taal, wordt de standaardsjabloon gebruikt."
+
+msgid "-- Select a Form --"
+msgstr "-Selecteer een formulier-"
+
+msgid "-- Select a Language --"
+msgstr "-Selecteer een taal-"
+
+msgid "Create Template"
+msgstr "Maak sjabloon"
+
+msgid "Existing Custom Templates"
+msgstr "Bestaande aangepaste sjablonen"
+
+msgid "Form Name"
+msgstr "Vormnaam"
+
+msgid "Language"
+msgstr "Taal"
+
+msgid "Preview"
+msgstr "Voorbeeld"
+
+msgid "Form:"
+msgstr "Formulier:"
+
+msgid "Language:"
+msgstr "Taal:"
+
+msgid "Save & Next"
+msgstr "Opslaan en volgende"
+
+msgid "For enhanced security change encryption method in %1$s on line %2$s"
+msgstr "Voor verbeterde coderingsmethode voor beveiligingsverandering in %1 $ s On Line %2 $ s"

@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 3.6\n"
+"X-Generator: Poedit 3.7\n"
 
 msgid "You are not allowed"
 msgstr "Anda tidak dibenarkan"
@@ -8383,3 +8383,381 @@ msgstr "Anda perlu menamakan semula direktori data yang ada dalam sistem fail se
 
 msgid "URL for use with your own scripts and third party"
 msgstr "URL untuk digunakan dengan skrip anda sendiri dan pihak ketiga"
+
+msgid "Email template already exist"
+msgstr "Templat e -mel sudah ada"
+
+msgid "JS HelpDesk System"
+msgstr "Sistem Helpdesk JS"
+
+msgid "JS HelpDesk"
+msgstr "JS Helpdesk"
+
+msgid "Main"
+msgstr "Utama"
+
+msgid "Ticket Management"
+msgstr "Pengurusan Tiket"
+
+msgid "User Management"
+msgstr "Pengurusan Pengguna"
+
+msgid "Content & Knowledge"
+msgstr "Kandungan & pengetahuan"
+
+msgid "Email & Communication"
+msgstr "E -mel & komunikasi"
+
+msgid "Products & Sales"
+msgstr "Produk & Jualan"
+
+msgid "System & Settings"
+msgstr "Sistem & Tetapan"
+
+msgid "No unused keys were found."
+msgstr "Tiada kunci yang tidak digunakan ditemui."
+
+msgid "unused key has been deleted successfully!"
+msgstr "Kunci yang tidak digunakan telah dihapuskan dengan jayanya!"
+
+msgid "unused keys have been deleted successfully!"
+msgstr "Kekunci yang tidak digunakan telah dihapuskan dengan jayanya!"
+
+msgid "XXXXX-XXXXX-XXXXX-XXXXX"
+msgstr "Xxxxx-xxxxx-xxxxx-xxxxx"
+
+msgid "Manage Unused Keys"
+msgstr "Mengurus kekunci yang tidak digunakan"
+
+msgid "You have"
+msgstr "Anda ada"
+
+msgid "unused key(s) that can be safely removed."
+msgstr "Kunci yang tidak digunakan yang boleh dikeluarkan dengan selamat."
+
+msgid "Delete All Unused Keys"
+msgstr "Padamkan semua kunci yang tidak digunakan"
+
+msgid "REPLIED_TICKET"
+msgstr "Menjawab_ticket"
+
+msgid "Tickets Over Time"
+msgstr "Tiket dari masa ke masa"
+
+msgid "Welcome back to"
+msgstr "Selamat kembali ke"
+
+msgid "As a visitor, you can easily create a support ticket by sharing your issue details."
+msgstr "Sebagai pelawat, anda boleh membuat tiket sokongan dengan mudah dengan berkongsi butiran isu anda."
+
+msgid "Have an issue?"
+msgstr "Ada masalah?"
+
+msgid "Our support team is here to help. Create a new ticket to get started."
+msgstr "Pasukan sokongan kami di sini untuk membantu. Buat tiket baru untuk bermula."
+
+msgid "Create New Ticket"
+msgstr "Buat tiket baru"
+
+msgid "Enter your information to check the status of your existing ticket."
+msgstr "Masukkan maklumat anda untuk menyemak status tiket anda yang sedia ada."
+
+msgid "Welcome back,"
+msgstr "Selamat datang kembali,"
+
+msgid "open tickets"
+msgstr "Buka tiket"
+
+msgid "No open ticket"
+msgstr "Tiada tiket terbuka"
+
+msgid ", and"
+msgstr ", dan"
+
+msgid "is awaiting your reply."
+msgstr "sedang menunggu jawapan anda."
+
+msgid "Need to assist a user?"
+msgstr "Perlu Membantu Pengguna?"
+
+msgid "Quickly create a new ticket on behalf of a user to provide support and track their request."
+msgstr "Cepat membuat tiket baru bagi pihak pengguna untuk memberikan sokongan dan menjejaki permintaan mereka."
+
+msgid "Open ticket for user"
+msgstr "Buka tiket untuk pengguna"
+
+msgid "OR Create a"
+msgstr "Atau buat a"
+
+msgid "Your Ticket Stats"
+msgstr "Statistik tiket anda"
+
+msgid "Open Tickets"
+msgstr "Buka tiket"
+
+msgid "Closed Tickets"
+msgstr "Tiket tertutup"
+
+msgid "Overdue Tickets"
+msgstr "Tiket tertunggak"
+
+msgid "Recent Tickets"
+msgstr "Tiket terkini"
+
+msgid "You replied"
+msgstr "Anda menjawab"
+
+msgid "Reply from"
+msgstr "Balas dari"
+
+msgid "No replies yet"
+msgstr "Belum ada balasan"
+
+msgid "Customize"
+msgstr "Sesuaikan"
+
+msgid "Quick Actions"
+msgstr "Tindakan cepat"
+
+msgid "Easily access your main tasks from here."
+msgstr "Mudah mengakses tugas utama anda dari sini."
+
+msgid "Create a Ticket"
+msgstr "Buat tiket"
+
+msgid "Here's a summary of today's ticket activity. This helps in tracking our daily progress and workload."
+msgstr "Inilah ringkasan aktiviti tiket hari ini. Ini membantu menjejaki kemajuan dan beban kerja harian kami."
+
+msgid "Created Tickets"
+msgstr "Tiket yang dicipta"
+
+msgid "Your activation key has expired."
+msgstr "Kunci pengaktifan anda telah tamat."
+
+msgid "Please reactivate your key to continue receiving product updates, addons, and support."
+msgstr "Sila aktifkan semula kunci anda untuk terus menerima kemas kini produk, tambahan, dan sokongan."
+
+msgid "Reactivate Activation Key"
+msgstr "Kunci pengaktifan semula"
+
+msgid "Ticket Analysis (Last 7 Days)"
+msgstr "Analisis Tiket (7 hari terakhir)"
+
+msgid "Priority:"
+msgstr "Keutamaan:"
+
+msgid "No Recent Tickets"
+msgstr "Tiada tiket baru -baru ini"
+
+msgid "New tickets will be displayed in this section."
+msgstr "Tiket baru akan dipaparkan di bahagian ini."
+
+msgid "All Tickets Assigned"
+msgstr "Semua tiket yang diberikan"
+
+msgid "Great job! There are no unassigned tickets."
+msgstr "Kerja bagus! Tiada tiket yang tidak ditetapkan."
+
+msgid "Ticket updates and changes will appear here."
+msgstr "Kemas kini dan perubahan tiket akan muncul di sini."
+
+msgid "Recently Replied"
+msgstr "Baru -baru ini menjawab"
+
+msgid "No Replies Yet"
+msgstr "Belum ada balasan"
+
+msgid "Recently replied tickets will be shown here."
+msgstr "Baru -baru ini menjawab tiket akan ditunjukkan di sini."
+
+msgid "View All Replied Tickets"
+msgstr "Lihat semua tiket yang dijawab"
+
+msgid "Recently Closed"
+msgstr "Baru -baru ini ditutup"
+
+msgid "No Closed Tickets"
+msgstr "Tiada tiket tertutup"
+
+msgid "Recently closed tickets will be listed here."
+msgstr "Tiket baru -baru ini ditutup akan disenaraikan di sini."
+
+msgid "View All Closed Tickets"
+msgstr "Lihat semua tiket tertutup"
+
+msgid "Tickets by Priority"
+msgstr "Tiket dengan keutamaan"
+
+msgid "Agent Performance"
+msgstr "Prestasi ejen"
+
+msgid "Assigned"
+msgstr "Ditugaskan"
+
+msgid "No Agent Performance Data"
+msgstr "Tiada data prestasi ejen"
+
+msgid "Performance metrics will be displayed here."
+msgstr "Metrik prestasi akan dipaparkan di sini."
+
+msgid "Recent Canned Responses"
+msgstr "Tanggapan tin baru -baru ini"
+
+msgid "Recent canned responses will be listed here."
+msgstr "Tanggapan tin terkini akan disenaraikan di sini."
+
+msgid "Active Timers"
+msgstr "Pemasa aktif"
+
+msgid "Timers started by agent will be shown here."
+msgstr "Pemasa yang dimulakan oleh ejen akan ditunjukkan di sini."
+
+msgid "No Customer Activity"
+msgstr "Tiada aktiviti pelanggan"
+
+msgid "Customers with the most tickets will be listed here."
+msgstr "Pelanggan dengan tiket paling banyak akan disenaraikan di sini."
+
+msgid "Track the time spent on each ticket by each agent and each reply."
+msgstr "Jejaki masa yang dihabiskan untuk setiap tiket oleh setiap ejen dan setiap jawapan."
+
+msgid "Quick Installation Guide"
+msgstr "Panduan pemasangan cepat"
+
+msgid "How to setup of the Help Desk"
+msgstr "Cara persediaan meja bantuan"
+
+msgid "Video thumbnail"
+msgstr "Video Thumbnail"
+
+msgid "Learn how to set up your Help Desk quickly and get it ready for use."
+msgstr "Ketahui cara menyediakan meja bantuan anda dengan cepat dan bersiaplah untuk digunakan."
+
+msgid "How to Setup System Emails"
+msgstr "Cara Menyiapkan E -mel Sistem"
+
+msgid "Learn how to setup out going notification in the best Help Desk plugin for WordPress"
+msgstr "Ketahui Cara Menyiapkan Pemberitahuan Pergi di Plugin Meja Bantuan Terbaik Untuk WordPress"
+
+msgid "How to Create a Ticket"
+msgstr "Cara membuat tiket"
+
+msgid "A simple walkthrough of the ticket creation process for both user and administrator."
+msgstr "Pelancaran mudah proses penciptaan tiket untuk pengguna dan pentadbir."
+
+msgid "How to Set Email Notifications"
+msgstr "Cara menetapkan pemberitahuan e -mel"
+
+msgid "Configure your email notification settings to stay updated on ticket activity."
+msgstr "Konfigurasikan tetapan pemberitahuan e -mel anda untuk terus dikemas kini pada aktiviti tiket."
+
+msgid "How to Setup Custom Fields"
+msgstr "Cara Menyiapkan Bidang Kustom"
+
+msgid "Learn how to add custom fields to your ticket forms to collect more specific information."
+msgstr "Ketahui cara menambah medan tersuai ke borang tiket anda untuk mengumpul maklumat yang lebih spesifik."
+
+msgid "Customize Dashboard"
+msgstr "Sesuaikan papan pemuka"
+
+msgid "Todays Ticket Distribution"
+msgstr "Pengagihan tiket hari ini"
+
+msgid "Number of Tickets"
+msgstr "Bilangan tiket"
+
+msgid "Yesterday"
+msgstr "Semalam"
+
+msgid "2 days ago"
+msgstr "2 hari yang lalu"
+
+msgid "3 days ago"
+msgstr "3 hari yang lalu"
+
+msgid "4 days ago"
+msgstr "4 hari yang lalu"
+
+msgid "5 days ago"
+msgstr "5 hari yang lalu"
+
+msgid "6+ days ago"
+msgstr "6+ hari yang lalu"
+
+msgid "Number of Open Tickets"
+msgstr "Bilangan tiket terbuka"
+
+msgid "Email tempate has been deleted"
+msgstr "Templat e -mel telah dipadamkan"
+
+msgid "Email tempate has not been deleted"
+msgstr "Templat e -mel belum dipadamkan"
+
+msgid "Required Field(s) are not filled"
+msgstr "Medan yang diperlukan tidak diisi"
+
+msgid "Default Email Template"
+msgstr "Templat e -mel lalai"
+
+msgid "This template is used for all forms and languages unless a specific custom template is created."
+msgstr "Templat ini digunakan untuk semua bentuk dan bahasa melainkan jika templat tersuai khusus dibuat."
+
+msgid "This template is used for all forms unless a specific form template is created."
+msgstr "Templat ini digunakan untuk semua bentuk kecuali templat borang tertentu dibuat."
+
+msgid "This template is used for all languages unless a specific language template is created."
+msgstr "Templat ini digunakan untuk semua bahasa melainkan jika templat bahasa tertentu dibuat."
+
+msgid "View/Edit Default Template"
+msgstr "Lihat/Edit templat lalai"
+
+msgid "Form & Language-Specific Email Templates"
+msgstr "Templat e-mel khusus & bahasa"
+
+msgid "Form-Specific Email Templates"
+msgstr "Templat e-mel khusus borang"
+
+msgid "Language-Specific Email Templates"
+msgstr "Templat e-mel khusus bahasa"
+
+msgid "Customize email content for individual form, for specific language, or a combination of both. If no custom template exists for a given form or language, the default template will be used."
+msgstr "Sesuaikan kandungan e -mel untuk bentuk individu, untuk bahasa tertentu, atau gabungan kedua -duanya. Jika tiada templat tersuai wujud untuk bentuk atau bahasa tertentu, templat lalai akan digunakan."
+
+msgid "Customize email content for individual form. If no custom template exists for a form, the default template will be used."
+msgstr "Sesuaikan kandungan e -mel untuk bentuk individu. Jika tiada templat tersuai wujud untuk borang, templat lalai akan digunakan."
+
+msgid "Customize email content for specific language. If no custom template exists for a language, the default template will be used."
+msgstr "Sesuaikan kandungan e -mel untuk bahasa tertentu. Jika tiada templat tersuai wujud untuk bahasa, templat lalai akan digunakan."
+
+msgid "-- Select a Form --"
+msgstr "-Pilih borang-"
+
+msgid "-- Select a Language --"
+msgstr "-Pilih bahasa-"
+
+msgid "Create Template"
+msgstr "Buat templat"
+
+msgid "Existing Custom Templates"
+msgstr "Templat tersuai sedia ada"
+
+msgid "Form Name"
+msgstr "Nama Bentuk"
+
+msgid "Language"
+msgstr "Bahasa"
+
+msgid "Preview"
+msgstr "Pratonton"
+
+msgid "Form:"
+msgstr "Bentuk:"
+
+msgid "Language:"
+msgstr "Bahasa:"
+
+msgid "Save & Next"
+msgstr "Simpan & Seterusnya"
+
+msgid "For enhanced security change encryption method in %1$s on line %2$s"
+msgstr "Untuk kaedah penyulitan perubahan keselamatan yang dipertingkatkan dalam %1 $ s pada baris %2 $ s"

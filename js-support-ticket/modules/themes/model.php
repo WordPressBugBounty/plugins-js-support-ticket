@@ -11,13 +11,13 @@ class JSSTthemesModel {
         }
         $data = jssupportticket::JSST_sanitizeData($data);
         update_option('jsst_set_theme_colors', wp_json_encode($data));
-        $return = require(JSST_PLUGIN_PATH . 'includes/css/style.php');
+        // $return = require_once(JSST_PLUGIN_PATH . 'includes/css/style.php');
 
-        if ($return) {
+        // if ($return) {
             JSSTmessage::setMessage(esc_html(__('The new theme has been applied', 'js-support-ticket')), 'updated');
-        } else {
-            JSSTmessage::setMessage(esc_html(__('Error applying the new theme', 'js-support-ticket')), 'error');
-        }
+        // } else {
+        //     JSSTmessage::setMessage(esc_html(__('Error applying the new theme', 'js-support-ticket')), 'error');
+        // }
         return;
     }
 

@@ -16,9 +16,9 @@ class JSSTpostinstallationController {
         if($this->canaddfile($layout)){
             switch ($layout) {
                 case 'admin_quickconfig':
+                    JSSTincluder::getJSModel('postinstallation')->getConfigurationValues();
                 break;
                 case 'admin_wellcomepage':
-                    JSSTincluder::getJSModel('postinstallation')->getConfigurationValues();
                 break;
                 case 'admin_stepone':
                     JSSTincluder::getJSModel('postinstallation')->getConfigurationValues();

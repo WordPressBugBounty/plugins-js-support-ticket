@@ -413,7 +413,6 @@ echo wp_kses($div, JSST_ALLOWED_TAGS);
                 <?php echo esc_html(__('Select Form','js-support-ticket')); ?>
             </div>
             <div class="multiformpopup-header-close-img">
-                <img src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/close-icon-white.png">
             </div>
         </div>
         <div id="records">

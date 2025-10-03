@@ -1,1620 +1,1574 @@
 <?php
-   if(!defined('ABSPATH'))
+if(!defined('ABSPATH'))
     die('Restricted Access');
-?>
-<?php
+
+/**
+ * =================================================================================
+ * CORRECTED SCRIPT LOADING
+ * This PHP block is corrected to ensure scripts load in the proper order.
+ * =================================================================================
+ */
+// 1. Register Chart.js with a unique handle.
+wp_register_script(
+    'jsst-chart-js',
+    JSST_PLUGIN_URL . 'includes/js/chart.umd.js',
+    [],
+    null,
+    true
+);
+
+// 2. Register a master handle for this page's scripts with dependencies.
+wp_register_script(
+    'js-support-ticket-dashboard-scripts', // Master handle
+    '', // No source file, we will use inline JS
+    ['jquery', 'jsst-chart-js'], // This tells WordPress to load jQuery and Chart.js first
+    null,
+    true
+);
+
+// 3. Enqueue the master handle. WordPress will now load the dependencies automatically.
+wp_enqueue_script('js-support-ticket-dashboard-scripts');
+
+// Enqueue your other scripts as before
 wp_enqueue_script('ticket-apexcharts', JSST_PLUGIN_URL . 'includes/js/apexcharts.min.js');
 wp_enqueue_script('ticket-notify-app', JSST_PLUGIN_URL . 'includes/js/firebase-app.js');
 wp_enqueue_script('ticket-notify-message', JSST_PLUGIN_URL . 'includes/js/firebase-messaging.js');
 
-wp_enqueue_style('status-graph', JSST_PLUGIN_URL . 'includes/css/status_graph.css');
 do_action('ticket-notify-generate-token');
 JSSTmessage::getMessage();
 ?>
+
 <div id="jsstadmin-wrapper">
     <div id="jsstadmin-leftmenu">
-        <?php  JSSTincluder::getClassesInclude('jsstadminsidemenu'); ?>
+        <?php JSSTincluder::getClassesInclude('jsstadminsidemenu'); ?>
     </div>
-    <div id="jsstadmin-data">
-        <div id="js-main-cp-wrapper">
-            <div id="jsstadmin-wrapper-top">
-                <div id="jsstadmin-wrapper-top-left">
-                    <div id="jsstadmin-breadcrunbs">
-                        <ul>
-                            <li><a href="?page=jssupportticket"
-                                    title="<?php echo esc_html(__('Dashboard', 'js-support-ticket')); ?>"><?php echo esc_html(__('Dashboard', 'js-support-ticket')); ?></a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <div id="jsstadmin-wrapper-top-right">
-                    <div id="jsstadmin-config-btn">
-                        <a href="<?php echo esc_url(admin_url("admin.php?page=configuration")); ?>"
-                            title="<?php echo esc_html(__('Configuration', 'js-support-ticket')); ?>">
-                            <img alt="<?php echo esc_html(__('Configuration', 'js-support-ticket')); ?>"
-                                src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/config.png" />
-                        </a>
-                    </div>
-                    <div id="jsstadmin-config-btn" class="jssticketadmin-help-btn">
-                        <a href="<?php echo esc_url(admin_url("admin.php?page=jssupportticket&jstlay=help")); ?>"
-                            title="<?php echo esc_html(__('Help', 'js-support-ticket')); ?>">
-                            <img alt="<?php echo esc_html(__('Help', 'js-support-ticket')); ?>"
-                                src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/help.png" />
-                        </a>
-                    </div>
-                    <div id="jsstadmin-vers-txt">
-                        <?php echo esc_html(__("Version", 'js-support-ticket')); ?>:
-                        <span
-                            class="jsstadmin-ver"><?php echo esc_html(JSSTincluder::getJSModel('configuration')->getConfigValue('versioncode')); ?></span>
-                    </div>
-                </div>
-            </div>
-            <div id="jsstadmin-head">
-                <h1 class="jsstadmin-head-text">
-                    <?php echo esc_html(__('Dashboard', 'js-support-ticket')); ?>
-                </h1>
-                <button id="js-customize-dashboard-btn" class="js-customize-dashboard-btn" title="<?php echo esc_attr(__('Dashboard Options', 'js-support-ticket')); ?>">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" style="width: 20px; height: 20px;">
-                      <!-- Eye outline -->
-                      <path stroke-linecap="round" stroke-linejoin="round" d="M1 12C2.73 7.61 7 4.5 12 4.5s9.27 3.11 11 7.5c-1.73 4.39-6 7.5-11 7.5S2.73 16.39 1 12z"/>
-                      
-                      <!-- Pupil -->
-                      <circle cx="12" cy="12" r="2"/>
+    <main class="flex-1 flex flex-col overflow-y-auto jsstadmin-right-content">
+        <div class="p-4 sm:p-6 lg:p-8 space-y-8">
+            <div class="flex justify-between items-center flex-wrap gap-4">
+                <h1 class="text-3xl font-bold text-gray-900"><?php echo esc_html__('Dashboard', 'js-support-ticket'); ?></h1>
+                <button id="menu-toggle" class="flex items-center gap-2 bg-white text-gray-700 font-semibold py-2 px-4 rounded-lg shadow-md hover:bg-gray-100 transition-colors">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                        <path d="M5 3a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2V5a2 2 0 00-2-2H5zM5 11a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2v-2a2 2 0 00-2-2H5zM11 5a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V5zM11 13a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" />
                     </svg>
-                    <?php echo esc_html(__('Dashboard Options', 'js-support-ticket')); ?>
+                    <span><?php echo esc_html__('Customize', 'js-support-ticket'); ?></span>
                 </button>
-                <?php if (in_array('agent', jssupportticket::$_active_addons)) { ?>
-                    <a href="?page=agent" class="jsstadmin-add-link orange-bg button"
-                        title="<?php echo esc_html(__('Agents', 'js-support-ticket')); ?>">
-                        <img alt="<?php echo esc_html(__('Staff', 'js-support-ticket')); ?>"
-                            src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/admincp/staff-1.png" />
-                        <?php echo esc_html(__('Agents', 'js-support-ticket')); ?>
-                    </a>
-                <?php } ?>
-                <a href="?page=ticket" class="jsstadmin-add-link button"
-                    title="<?php echo esc_html(__('All Tickets', 'js-support-ticket')); ?>">
-                    <img alt="<?php echo esc_html(__('All Tickets', 'js-support-ticket')); ?>"
-                        src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/admincp/all-tickets.png" />
-                    <?php echo esc_html(__('All Tickets', 'js-support-ticket')); ?>
-                </a>
             </div>
-            <div id="js-dashboard-customize-panel-overlay" class="js-support-ticket-customize-panel-overlay">
-                <div id="js-dashboard-customize-panel" class="js-support-ticket-customize-panel">
-                    <h3 class="jsstadmin-head-text" style="font-size: 1.25rem; margin-bottom: 1rem">
-                        <?php echo esc_html(__('Dashboard Options', 'js-support-ticket')); ?>
-                    </h3>
-                    <p class="text-gray-600 mb-6"><?php echo esc_html(__('Select which charts and sections you would like to see on your dashboard.', 'js-support-ticket')); ?></p>
-                    <form id="js-customize-form">
-                        <div class="space-y-4">
-                            <?php if( in_array('agent',jssupportticket::$_active_addons) ){ ?>
-                                <div class="js-ticket-customize-option-item">
-                                    <label for="toggle-unassigned_ticket" class="text-gray-700"><?php echo esc_html(__('Unassigned Ticket', 'js-support-ticket')); ?></label>
-                                    <label class="toggle-switch">
-                                        <input type="checkbox" id="toggle-unassigned_ticket" name="unassigned_ticket">
-                                        <span class="toggle-switch-slider"></span>
-                                    </label>
-                                </div>
-                            <?php } ?>
-                            <?php if( in_array('actions',jssupportticket::$_active_addons) ){ ?>
-                                <div class="js-ticket-customize-option-item">
-                                    <label for="toggle-ticket_history" class="text-gray-700"><?php echo esc_html(__('Ticket Action History', 'js-support-ticket')); ?></label>
-                                    <label class="toggle-switch">
-                                        <input type="checkbox" id="toggle-ticket_history" name="ticket_history">
-                                        <span class="toggle-switch-slider"></span>
-                                    </label>
-                                </div>
-                            <?php } ?>
-                            <div class="js-ticket-customize-option-item">
-                                <label for="toggle-ticket_trends" class="text-gray-700"><?php echo esc_html(__('Ticket Trends', 'js-support-ticket')); ?></label>
-                                <label class="toggle-switch">
-                                    <input type="checkbox" id="toggle-ticket_trends" name="ticket_trends">
-                                    <span class="toggle-switch-slider"></span>
-                                </label>
-                            </div>
-                            <div class="js-ticket-customize-option-item">
-                                <label for="toggle-today_distribution" class="text-gray-700"><?php echo esc_html(__("Today's Distribution", 'js-support-ticket')); ?></label>
-                                <label class="toggle-switch">
-                                    <input type="checkbox" id="toggle-today_distribution" name="today_distribution">
-                                    <span class="toggle-switch-slider"></span>
-                                </label>
-                            </div>
-                            <div class="js-ticket-customize-option-item">
-                                <label for="toggle-latest_tickets" class="text-gray-700"><?php echo esc_html(__('Latest Tickets', 'js-support-ticket')); ?></label>
-                                <label class="toggle-switch">
-                                    <input type="checkbox" id="toggle-latest_tickets" name="latest_tickets">
-                                    <span class="toggle-switch-slider"></span>
-                                </label>
-                            </div>
-                            <?php if( in_array('agent',jssupportticket::$_active_addons) ){ ?>
-                                <div class="js-ticket-customize-option-item">
-                                    <label for="toggle-agent_workload" class="text-gray-700"><?php echo esc_html(__('Agent Workload', 'js-support-ticket')); ?></label>
-                                    <label class="toggle-switch">
-                                        <input type="checkbox" id="toggle-agent_workload" name="agent_workload">
-                                        <span class="toggle-switch-slider"></span>
-                                    </label>
-                                </div>
-                            <?php } ?>
-                            <?php if( in_array('overdue',jssupportticket::$_active_addons) ){ ?>
-                                <div class="js-ticket-customize-option-item">
-                                    <label for="toggle-overdue_ticket" class="text-gray-700"><?php echo esc_html(__('Overdue Ticket', 'js-support-ticket')); ?></label>
-                                    <label class="toggle-switch">
-                                        <input type="checkbox" id="toggle-overdue_ticket" name="overdue_ticket">
-                                        <span class="toggle-switch-slider"></span>
-                                    </label>
-                                </div>
-                            <?php } ?>
-                            <div class="js-ticket-customize-option-item">
-                                <label for="toggle-tickets_by_department" class="text-gray-700"><?php echo esc_html(__('Tickets by Department', 'js-support-ticket')); ?></label>
-                                <label class="toggle-switch">
-                                    <input type="checkbox" id="toggle-tickets_by_department" name="tickets_by_department">
-                                    <span class="toggle-switch-slider"></span>
-                                </label>
-                            </div>
-                            <div class="js-ticket-customize-option-item">
-                                <label for="toggle-tickets_by_status" class="text-gray-700"><?php echo esc_html(__('Tickets by Status', 'js-support-ticket')); ?></label>
-                                <label class="toggle-switch">
-                                    <input type="checkbox" id="toggle-tickets_by_status" name="tickets_by_status">
-                                    <span class="toggle-switch-slider"></span>
-                                </label>
-                            </div>
-                            <div class="js-ticket-customize-option-item">
-                                <label for="toggle-tickets_by_priorities" class="text-gray-700"><?php echo esc_html(__('Tickets by Priorities', 'js-support-ticket')); ?></label>
-                                <label class="toggle-switch">
-                                    <input type="checkbox" id="toggle-tickets_by_priorities" name="tickets_by_priorities">
-                                    <span class="toggle-switch-slider"></span>
-                                </label>
-                            </div>
-                            <div class="js-ticket-customize-option-item">
-                                <label for="toggle-tickets_by_products" class="text-gray-700"><?php echo esc_html(__('Tickets by Products', 'js-support-ticket')); ?></label>
-                                <label class="toggle-switch">
-                                    <input type="checkbox" id="toggle-tickets_by_products" name="tickets_by_products">
-                                    <span class="toggle-switch-slider"></span>
-                                </label>
-                            </div>
-                            <?php if( in_array('cannedresponses',jssupportticket::$_active_addons) ){ ?>
-                                <div class="js-ticket-customize-option-item">
-                                    <label for="toggle-canned_responses" class="text-gray-700"><?php echo esc_html(__('List of Canned Responses', 'js-support-ticket')); ?></label>
-                                    <label class="toggle-switch">
-                                        <input type="checkbox" id="toggle-canned_responses" name="canned_responses">
-                                        <span class="toggle-switch-slider"></span>
-                                    </label>
-                                </div>
-                            <?php } ?>
-                            <div class="js-ticket-customize-option-item">
-                                <label for="toggle-tickets_by_age" class="text-gray-700"><?php echo esc_html(__('Open Tickets By Age', 'js-support-ticket')); ?></label>
-                                <label class="toggle-switch">
-                                    <input type="checkbox" id="toggle-tickets_by_age" name="tickets_by_age">
-                                    <span class="toggle-switch-slider"></span>
-                                </label>
-                            </div>
-                            <div class="js-ticket-customize-option-item">
-                                <label for="toggle-active_customers" class="text-gray-700"><?php echo esc_html(__('Most Active Customers', 'js-support-ticket')); ?></label>
-                                <label class="toggle-switch">
-                                    <input type="checkbox" id="toggle-active_customers" name="active_customers">
-                                    <span class="toggle-switch-slider"></span>
-                                </label>
-                            </div>
-                            <?php if( in_array('timetracking',jssupportticket::$_active_addons) ){ ?>
-                                <div class="js-ticket-customize-option-item">
-                                    <label for="toggle-active_timer" class="text-gray-700"><?php echo esc_html(__('Active Timer', 'js-support-ticket')); ?></label>
-                                    <label class="toggle-switch">
-                                        <input type="checkbox" id="toggle-active_timer" name="active_timer">
-                                        <span class="toggle-switch-slider"></span>
-                                    </label>
-                                </div>
-                            <?php } ?>
-                            <div class="js-ticket-customize-option-item">
-                                <label for="toggle-available_addons" class="text-gray-700"><?php echo esc_html(__('Available Addons', 'js-support-ticket')); ?></label>
-                                <label class="toggle-switch">
-                                    <input type="checkbox" id="toggle-available_addons" name="available_addons">
-                                    <span class="toggle-switch-slider"></span>
-                                </label>
-                            </div>
-                            <div class="js-ticket-customize-option-item">
-                                <label for="toggle-installation_guide" class="text-gray-700"><?php echo esc_html(__('Quick installation Guide', 'js-support-ticket')); ?></label>
-                                <label class="toggle-switch">
-                                    <input type="checkbox" id="toggle-installation_guide" name="installation_guide">
-                                    <span class="toggle-switch-slider"></span>
-                                </label>
-                            </div>
+
+            <section id="quick-actions" class="bg-white p-6 rounded-xl shadow-lg flex flex-col md:flex-row justify-between items-center gap-6 flex-wrap">
+                <div class="flex-1 text-center md:text-left md:rtl:text-right">
+                    <h2 class="text-2xl font-bold text-gray-900"><?php echo esc_html__('Quick Actions', 'js-support-ticket'); ?></h2>
+                    <p class="text-gray-500 text-sm mt-1">
+                        <?php echo esc_html__('Easily access your main tasks from here.', 'js-support-ticket'); ?>
+                    </p>
+                </div>
+                <div class="flex flex-col sm:flex-row gap-4 w-full md:w-auto flex-wrap justify-center">
+                    <?php
+                    $href = admin_url('admin.php?page=ticket&jstlay=addticket&formid=' . JSSTincluder::getJSModel('ticket')->getDefaultMultiFormId());
+                    $extra_attributes = '';
+                    if (in_array('multiform', jssupportticket::$_active_addons) && jssupportticket::$_config['show_multiform_popup'] == 1) {
+                        $href = '#';
+                        $extra_attributes = "id=multiformpopup";
+                    }
+                    ?>
+                    <a <?php echo $extra_attributes; ?> href="<?php echo esc_url($href); ?>" class="flex items-center justify-center gap-2 w-full sm:w-auto bg-[#4f46e5] text-white hover:text-white font-semibold py-2 px-4 rounded-lg hover:bg-indigo-700 transition-colors whitespace-nowrap">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                        <?php echo esc_html__('Create a Ticket', 'js-support-ticket'); ?>
+                    </a>
+                    <a href="?page=ticket" class="flex items-center justify-center gap-2 w-full sm:w-auto bg-gray-100 text-gray-700 font-semibold py-2 px-4 rounded-lg hover:bg-gray-200 transition-colors whitespace-nowrap">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5"><path d="M2 9a3 3 0 0 1 0 6v2a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-2a3 3 0 0 1 0-6V7a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2Z"></path></svg>
+                        <?php echo esc_html__('All Tickets', 'js-support-ticket'); ?>
+                    </a>
+                    <?php if( in_array('agent',jssupportticket::$_active_addons) ) { ?>
+                        <a href="?page=agent" class="flex items-center justify-center gap-2 w-full sm:w-auto bg-gray-100 text-gray-700 font-semibold py-2 px-4 rounded-lg hover:bg-gray-200 transition-colors whitespace-nowrap">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M22 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+                            <?php echo esc_html__('Agents', 'js-support-ticket'); ?>
+                        </a>
+                    <?php } ?>
+                    <a href="<?php echo esc_url(wp_nonce_url('?page=jssupportticket&task=addmissingusers&action=jstask','add-missing-users'));?>" class="flex items-center justify-center gap-2 w-full sm:w-auto bg-gray-100 text-gray-700 font-semibold py-2 px-4 rounded-lg hover:bg-gray-200 transition-colors whitespace-nowrap">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" 
+                            viewBox="0 0 24 24" fill="none" stroke="currentColor" 
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round" 
+                            >
+                            <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path>
+                            <circle cx="9" cy="7" r="4"></circle>
+                            <line x1="23" y1="11" x2="17" y2="11"></line>
+                            <line x1="20" y1="8" x2="20" y2="14"></line>
+                        </svg>
+                        <?php echo esc_html__('Add WP Users', 'js-support-ticket'); ?>
+                    </a>
+                </div>
+            </section>
+            
+            <div id="stats-cards" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="bg-white p-6 rounded-xl shadow-md">
+                    <a href="?page=ticket" data-tab-number="1" class="js-hlpdsk-like-card flex justify-between items-start flex-wrap">
+                        <div>
+                            <p class="text-sm font-medium text-gray-500"><?php echo esc_html__('New Tickets', 'js-support-ticket'); ?></p>
+                            <p class="text-4xl font-bold text-gray-800"><?php echo esc_html(jssupportticket::$_data['new_tickets']); ?></p>
                         </div>
-                        <div class="mt-8 flex justify-end space-x-4">
-                            <button type="button" id="js-close-customize-panel" class="js-hlpdsk-cancel-btn"><?php echo esc_html(__('Cancel', 'js-support-ticket')); ?></button>
-                            <button type="button" id="js-save-customize-panel" class="js-hlpdsk-save-btn"><?php echo esc_html(__('Save Changes', 'js-support-ticket')); ?></button>
+                        <div class="bg-indigo-100 p-3 rounded-lg">
+                           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6 text-[#4f46e5]"><path d="M2 9a3 3 0 0 1 0 6v2a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-2a3 3 0 0 1 0-6V7a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2Z"/><path d="M13 5v2"/><path d="M13 17v2"/><path d="M13 11v2"/></svg>
                         </div>
-                    </form>
+                    </a>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-md">
+                    <a href="?page=ticket" data-tab-number="1" class="js-hlpdsk-like-card flex justify-between items-start flex-wrap">
+                        <div>
+                            <p class="text-sm font-medium text-gray-500"><?php echo esc_html__('Pending Tickets', 'js-support-ticket'); ?></p>
+                            <p class="text-4xl font-bold text-gray-800"><?php echo esc_html(jssupportticket::$_data['pending_tickets']); ?></p>
+                        </div>
+                        <div class="bg-amber-100 p-3 rounded-lg">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6 text-amber-600"><path d="M12 6v6l4 2"/><circle cx="12" cy="12" r="10"/></svg>
+                        </div>
+                    </a>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-md">
+                    <a href="?page=ticket" data-tab-number="2" class="js-hlpdsk-like-card flex justify-between items-start flex-wrap">
+                        <div>
+                            <p class="text-sm font-medium text-gray-500"><?php echo esc_html__('Answered Tickets', 'js-support-ticket'); ?></p>
+                            <p class="text-4xl font-bold text-gray-800"><?php echo esc_html(jssupportticket::$_data['answered_tickets']); ?></p>
+                        </div>
+                        <div class="bg-teal-100 p-3 rounded-lg">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6 text-teal-600"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                        </div>
+                    </a>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-md">
+                    <a href="?page=ticket" data-tab-number="4" class="js-hlpdsk-like-card flex justify-between items-start flex-wrap">
+                        <div>
+                            <p class="text-sm font-medium text-gray-500"><?php echo esc_html__('Closed Tickets', 'js-support-ticket'); ?></p>
+                            <p class="text-4xl font-bold text-gray-800"><?php echo esc_html(jssupportticket::$_data['closed_today']); ?></p>
+                        </div>
+                          <div class="bg-rose-100 p-3 rounded-lg">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6 text-rose-600"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                        </div>
+                    </a>
                 </div>
             </div>
-            <div id="jsstadmin-data-wrp" class="p0 bg-n bs-n">
-                <main class="js-hlpdsk-main-content-wrapper">
-                    <section class="js-hlpdsk-section-container">
-                        <a href="?page=ticket" data-tab-number="1"
-                            class="js-hlpdsk-like-card js-hlpdsk-card js-hlpdsk-metric-card js-hlpdsk-border-blue js-hlpdsk-card-third">
-                            <div class="js-hlpdsk-content-left">
-                                <span class="js-hlpdsk-value js-hlpdsk-text-blue"><?php echo esc_html(jssupportticket::$_data['new_tickets']); ?></span>
-                                <p class="js-hlpdsk-label">
-                                    <?php echo esc_html(__('New Tickets', 'js-support-ticket')); ?>
-                                </p>
-                            </div>
-                            <div class="js-hlpdsk-icon-right">
-                                <svg xmlns="http://www.w3.org/2000/svg" 
-                                    class="js-hlpdsk-addon-icon" 
-                                     fill="none" viewBox="0 0 24 24" 
-                                     stroke="currentColor" stroke-width="2">
-                                    <path stroke-linecap="round" stroke-linejoin="round" 
-                                        d="M9 2h6a2 2 0 012 2v2a2 2 0 002 2h2v8h-2a2 2 0 00-2 2v2a2 2 0 01-2 2H9a2 2 0 01-2-2v-2a2 2 0 00-2-2H3V8h2a2 2 0 002-2V4a2 2 0 012-2z"/>
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v8m-4-4h8"/>
-                                </svg>
-                            </div>
-                        </a>
-                        <a href="?page=ticket" data-tab-number="1" class="js-hlpdsk-like-card js-hlpdsk-card js-hlpdsk-metric-card js-hlpdsk-border-yellow js-hlpdsk-card-third">
-                            <div class="js-hlpdsk-content-left">
-                                <span class="js-hlpdsk-value js-hlpdsk-text-yellow"><?php echo esc_html(jssupportticket::$_data['pending_tickets']); ?></span>
-                                <p class="js-hlpdsk-label">
-                                    <?php echo esc_html(__('Pending Tickets', 'js-support-ticket')); ?>
-                                </p>
-                            </div>
-                            <div class="js-hlpdsk-icon-right">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                    fill="currentColor" stroke="none">
-                                    <path
-                                        d="M12 2a10 10 0 1010 10A10 10 0 0012 2zm0 18a8 8 0 118-8A8 8 0 0112 20zm0-16a1 1 0 00-1 1v6a1 1 0 002 0V5a1 1 0 00-1-1z" />
-                                </svg>
-                            </div>
-                        </a>
-                        <a href="?page=ticket" data-tab-number="2" class="js-hlpdsk-like-card js-hlpdsk-card js-hlpdsk-metric-card js-hlpdsk-border-green js-hlpdsk-card-third">
-                            <div class="js-hlpdsk-content-left">
-                                <span class="js-hlpdsk-value js-hlpdsk-text-green"><?php echo esc_html(jssupportticket::$_data['answered_tickets']); ?></span>
-                                <p class="js-hlpdsk-label">
-                                    <?php echo esc_html(__('Answered Tickets', 'js-support-ticket')); ?>
-                                </p>
-                            </div>
-                            <div class="js-hlpdsk-icon-right">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                    fill="currentColor" stroke="none">
-                                    <path
-                                        d="M12 2a10 10 0 1010 10A10 10 0 0012 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.58L19 8.01z" />
-                                </svg>
-                            </div>
-                        </a>
-                        <a  href="?page=ticket" data-tab-number="5" class="js-hlpdsk-like-card js-hlpdsk-card js-hlpdsk-metric-card js-hlpdsk-border-purple js-hlpdsk-card-third">
-                            <div class="js-hlpdsk-content-left">
-                                <span class="js-hlpdsk-value js-hlpdsk-text-purple"><?php echo esc_html(jssupportticket::$_data['total_tickets']); ?></span>
-                                <p class="js-hlpdsk-label">
-                                    <?php echo esc_html(__('Total Tickets', 'js-support-ticket')); ?>
-                                </p>
-                            </div>
-                            <div class="js-hlpdsk-icon-right">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 2h6m-5 4h4m-7 4h10m-10 4h10m-10 4h10M6 6h12v14H6V6z" />
-                                </svg>
-                            </div>
-                        </a>
-                        <a href="?page=ticket" data-tab-number="4" class="js-hlpdsk-like-card js-hlpdsk-card js-hlpdsk-metric-card js-hlpdsk-border-cyan js-hlpdsk-card-third">
-                            <div class="js-hlpdsk-content-left">
-                                <span class="js-hlpdsk-value js-hlpdsk-text-cyan"><?php echo esc_html(jssupportticket::$_data['tickets_closed_today']); ?></span>
-                                <p class="js-hlpdsk-label">
-                                    <?php echo esc_html(__('Tickets Closed Today', 'js-support-ticket')); ?>
-                                </p>
-                            </div>
-                            <div class="js-hlpdsk-icon-right">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                    fill="currentColor" stroke="none">
-                                    <path
-                                        d="M19 4h-2V2h-2v2H9V2H7v2H5a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2V6a2 2 0 00-2-2zM5 20V8h14v12zm10.4-8.8l-4.4 4.4-2.4-2.4 1.4-1.4 1 1 3-3 1.4 1.4z" />
-                                </svg>
-                            </div>
-                        </a>
-                        <div class="js-hlpdsk-card js-hlpdsk-daily-flow-card js-hlpdsk-card-third">
-                            <h3 class="js-hlpdsk-section-heading"
-                                style="font-size: 1.25rem; margin-bottom: 0; margin-top: 0">
-                                <?php echo esc_html(__('Daily Ticket Flow', 'js-support-ticket')); ?>
-                            </h3>
-                            <div class="js-hlpdsk-daily-flow-content">
-                                <div>
-                                    <p style="color: #6b7280; font-size: 0.875rem; margin: 0">
-                                        <?php echo esc_html(__('Created', 'js-support-ticket')); ?>
-                                    </p>
-                                    <span class="js-hlpdsk-value js-hlpdsk-text-blue"><?php echo esc_html(jssupportticket::$_data['tickets_created_today']); ?></span>
-                                </div>
-                                <div class="js-hlpdsk-separator">/</div>
-                                <div>
-                                    <p style="color: #6b7280; font-size: 0.875rem; margin: 0">
-                                        <?php echo esc_html(__('Resolved', 'js-support-ticket')); ?>
-                                    </p>
-                                    <span class="js-hlpdsk-value js-hlpdsk-text-green"><?php echo esc_html(jssupportticket::$_data['tickets_closed_today']); ?></span>
-                                </div>
-                            </div>
+
+            <?php if (jssupportticket::$_data['update_avaliable_for_addons'] != 0) {?>
+                <section id="activation-key-expiry" class="bg-indigo-50 border-l-4 border-[#4f46e5] text-gray-700 p-6 rounded-xl shadow-lg flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
+                    <div class="flex items-center gap-4">
+                        <div class="flex-shrink-0 text-[#4f46e5]">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                              <polyline points="23 4 23 10 17 10"></polyline>
+                              <polyline points="1 20 1 14 7 14"></polyline>
+                              <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path>
+                            </svg>
                         </div>
-                    </section>
-                    <?php if (jssupportticket::$_data['update_avaliable_for_addons'] != 0) {?>
-                        <section class="js-hlpdsk-section-container js-hlpdsk-addon-updatesection">
-                            <div class="js-hlpdeske-message-bar">
-                                <div class="js-hlpdeske-message-icon">
-                                    <!-- CloudDownload icon from Lucide as SVG -->
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6">
-                                        <path d="M4 14.899A7 7 0 0 1 15.602 9.023C15.895 5.258 13.917 2 10 2 6.136 2 3 5.136 3 9c0 0.817.158 1.6.44 2.332L2.5 12.5C1.12 12.5 0 13.62 0 15s1.12 2.5 2.5 2.5H4c0 1.933 1.567 3.5 3.5 3.5h7c1.933 0 3.5-1.567 3.5-3.5 0-1.78-.96-3.32-2.39-4.14z"></path>
-                                        <polyline points="7 13 12 18 17 13"></polyline>
-                                        <line x1="12" y1="18" x2="12" y2="6"></line>
-                                    </svg>
+                        <div>
+                            <h2 class="text-xl font-bold text-black"><?php echo esc_html(__('New Addon Update Available', 'js-support-ticket')); ?></h2>
+                            <p class="text-gray-600 text-sm mt-1">
+                                <?php echo esc_html(__('Install the latest version to unlock new features and security patches.', 'js-support-ticket')); ?>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="flex-shrink-0 w-full sm:w-auto">
+                        <a href="?page=jssupportticket&jstlay=addonstatus" class="w-full sm:w-auto bg-[#4f46e5] text-white font-semibold py-2 px-4 rounded-lg hover:bg-[#4338ca] transition-colors whitespace-nowrap inline-block text-center hover:text-white">
+                            <?php echo esc_html__('Update Now', 'js-support-ticket'); ?>
+                        </a>
+                    </div>
+                </section>
+            <?php } ?>
+            
+            <section id="daily-ticket-flow" class="bg-gradient-to-r from-indigo-500 to-indigo-700 text-white p-6 rounded-xl shadow-lg flex flex-col md:flex-row justify-between items-center gap-6 flex-wrap">
+                <div class="flex-1 text-center md:text-left md:rtl:text-right">
+                    <h2 class="text-2xl font-bold text-white"><?php echo esc_html__('Daily Ticket Flow', 'js-support-ticket'); ?></h2>
+                    <p class="text-white/80 text-sm mt-2">
+                        <?php echo esc_html__("Here's a summary of today's ticket activity. This helps in tracking our daily progress and workload.", 'js-support-ticket'); ?>
+                    </p>
+                </div>
+                <div class="flex flex-col sm:flex-row gap-4 w-full md:w-auto">
+                    <div class="bg-white/20 p-4 rounded-lg flex items-center gap-4 flex-1 min-w-[200px]">
+                          <div class="bg-white/20 p-3 rounded-lg">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6 text-white"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+                        </div>
+                        <div>
+                            <p class="text-sm font-medium text-white/80"><?php echo esc_html__('Created Tickets', 'js-support-ticket'); ?></p>
+                            <p class="text-2xl font-bold"><?php echo esc_html(jssupportticket::$_data['tickets_created_today']); ?></p>
+                        </div>
+                    </div>
+                    <div class="bg-white/20 p-4 rounded-lg flex items-center gap-4 flex-1 min-w-[200px]">
+                        <div class="bg-white/20 p-3 rounded-lg">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6 text-white"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+                        </div>
+                        <div>
+                            <p class="text-sm font-medium text-white/80"><?php echo esc_html__('Closed Tickets', 'js-support-ticket'); ?></p>
+                            <p class="text-2xl font-bold"><?php echo esc_html(jssupportticket::$_data['tickets_closed_today']); ?></p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <?php if (get_option('jsst_show_key_expiry_msg') == '1') { ?>
+                <section id="activation-key-expiry" class="bg-rose-100 border-l-4 rtl:border-r-4 rtl:border-l-0 border-rose-500 text-rose-700 p-6 rounded-xl shadow-lg flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
+                    <div class="flex items-center gap-4">
+                        <div class="flex-shrink-0">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-8 h-8 text-rose-500">
+                                <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path>
+                                <line x1="12" y1="9" x2="12" y2="13"></line>
+                                <line x1="12" y1="17" x2="12.01" y2="17"></line>
+                            </svg>
+                        </div>
+                        <div>
+                            <h2 class="text-xl font-bold text-rose-800"><?php echo esc_html__('Your activation key has expired.', 'js-support-ticket'); ?></h2>
+                            <p class="text-rose-700 text-sm mt-1">
+                                <?php echo esc_html__('Please reactivate your key to continue receiving product updates, addons, and support.', 'js-support-ticket'); ?>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="flex-shrink-0 w-full sm:w-auto">
+                        <a href="<?php echo esc_url(admin_url('admin.php?page=premiumplugin&jstlay=updatekey')); ?>" class="w-full sm:w-auto bg-rose-500 text-white font-semibold py-2 px-4 rounded-lg hover:bg-rose-600 transition-colors whitespace-nowrap inline-block text-center hover:text-white">
+                            <?php echo esc_html__('Reactivate Activation Key', 'js-support-ticket'); ?>
+                        </a>
+                    </div>
+                </section>
+                <?php
+            } ?>
+
+            <section class="flex flex-col md:flex-row justify-between items-center gap-6 flex-wrap">
+                <div id="ticket-analysis" class="w-full bg-white p-5 rounded-xl shadow-lg flex-1">
+                    <h3 class="text-lg font-bold text-gray-800 mb-4"><?php echo esc_html__('Ticket Analysis (Last 7 Days)', 'js-support-ticket'); ?></h3>
+                    <div class="h-96">
+                        <canvas id="ticketAnalysisChart"></canvas>
+                    </div>
+                </div>
+                <div id="today-ticket-distribution" class="w-full bg-white p-5 rounded-xl shadow-lg flex-1">
+                    <h3 class="text-lg font-bold text-gray-800 mb-4"><?php echo esc_html__("Today's Ticket Distribution", 'js-support-ticket'); ?></h3>
+                    <div class="h-96">
+                        <canvas id="todayTicketDistributionChart"></canvas>
+                    </div>
+                </div>
+            </section>
+
+            <section id="recent-tickets" class="bg-white p-5 rounded-xl shadow-lg">
+                <h3 class="text-lg font-bold text-gray-800 mb-4"><?php echo esc_html__('Recent Tickets', 'js-support-ticket'); ?></h3>
+                <?php if (!empty(jssupportticket::$_data['latest_tickets'])) { ?>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        <?php foreach (jssupportticket::$_data['latest_tickets'] as $ticket) { ?>
+                            <div class="bg-white p-5 rounded-xl shadow-lg space-y-4 border border-gray-200 hover:shadow-xl transition-shadow duration-300 group">
+                                <div class="jsst-admin-dashboard-ticket-top-wrp flex items-center justify-between gap-4">
+                                    <div class="jsst-admin-dashboard-ticket-logowrp">
+                                        <?php echo wp_kses_post(jsst_get_avatar($ticket->uid, 'h-10 w-10 rounded-full')); ?>
+                                    </div>
+                                    <div class="flex flex-auto flex-wrap items-center gap-4 jsst-admin-dashboard-ticket-rightmain-wrp">
+                                        <div class="!ml-0 !mr-0 flex-auto jsst-admin-dashboard-ticket-middle-wrp">
+                                            <p class="font-semibold text-sm text-gray-800"><?php echo esc_html($ticket->name); ?></p>
+                                            <p class="text-xs text-gray-500">
+                                                <?php
+                                                $created_timestamp = jssupportticketphplib::JSST_strtotime( $ticket->created );
+                                                echo ( ! empty( $created_timestamp ) && $created_timestamp > 0 )
+                                                    ? esc_html( human_time_diff( $created_timestamp, current_time( 'timestamp' ) ) . ' ' . __( 'ago', 'js-support-ticket' ) )
+                                                    : '';
+                                                ?>
+                                        </div>
+                                        <span class="bg-indigo-100 text-[#4f46e5] px-2.5 py-1 rounded-full font-medium text-xs" style="background-color:<?php echo esc_attr(jssupportticket::$_data['status_map'][$ticket->status]->statusbgcolour); ?>; color:<?php echo esc_attr(jssupportticket::$_data['status_map'][$ticket->status]->statuscolour); ?>;"><?php echo esc_html(jssupportticket::JSST_getVarValue(jssupportticket::$_data['status_map'][$ticket->status]->status)); ?></span>
+                                    </div>
                                 </div>
-                                <div class="js-hlpdeske-message-content">
-                                    <div class="js-hlpdeske-message-text">
-                                        <p class="js-hlpdeske-message-title"><?php echo esc_html(__('New Addon Update Available', 'js-support-ticket')); ?></p>
-                                        <span class="js-hlpdeske-message-description">
-                                            <?php echo esc_html(__('Install the latest version to unlock new features and security patches.', 'js-support-ticket')); ?>
-                                        </span>
-                                    </div>
-                                    <div class="js-hlpdeske-message-actions">
-                                        <a href="?page=jssupportticket&jstlay=addonstatus" class="js-hlpdeske-action-button"><?php echo esc_html(__('Update Now', 'js-support-ticket')); ?></a>
-                                    </div>
+                                <a href="?page=ticket&jstlay=ticketdetail&jssupportticketid=<?php echo esc_attr($ticket->id); ?>" class="inline-block font-semibold text-gray-800 text-sm leading-6 group-hover:text-[#4f46e5] smooth-color-transition"><?php echo esc_html($ticket->subject); ?></a>
+                                <div class="flex items-center justify-between text-sm pt-2 border-t border-gray-100">
+                                    <p class="text-xs text-gray-500"><?php echo esc_html__('Priority:', 'js-support-ticket'); ?></p>
+                                    <?php if (!empty($ticket->priority)) { ?>
+                                        <span class="bg-red-100 text-red-800 px-2.5 py-1 rounded-full font-medium text-xs" style="background-color:<?php echo esc_attr($ticket->prioritycolour); ?>; color: #FFF;"><?php echo esc_html(jssupportticket::JSST_getVarValue($ticket->priority)); ?></span>
+                                    <?php } ?>
                                 </div>
                             </div>
-                        </section>
-                    <?php } ?>
-                    <?php if( in_array('agent',jssupportticket::$_active_addons)|| in_array('actions',jssupportticket::$_active_addons) ) { ?>
-                        <section class="js-hlpdsk-section-container">
-                            <?php if( in_array('agent',jssupportticket::$_active_addons) && !empty(jssupportticket::$_data['jssupportticket_admin_charts_visibility']['unassigned_ticket']) ){ ?>
-                                <div class="js-hlpdsk-card js-hlpdsk-card-half">
-                                    <h3 class="js-hlpdsk-section-heading" style="font-size: 1.25rem; margin-bottom: 1rem">
-                                        <?php echo esc_html(__('Unassigned Tickets', 'js-support-ticket')); ?>
-                                    </h3>
-                                    <?php if (!empty(jssupportticket::$_data['unassigned_tickets'])) { ?>
-                                        <ul class="js-hlpdsk-list-card">
-                                            <?php foreach (jssupportticket::$_data['unassigned_tickets'] as $ticket) { ?>
-                                                <li>
-                                                    <span class="js-hlpdsk-list-item-title"><?php echo esc_html($ticket->subject); ?></span>
-                                                    <span class="js-hlpdsk-list-item-value"><?php echo human_time_diff(jssupportticketphplib::JSST_strtotime($ticket->created), current_time('timestamp')) . ' ago'; ?></span>
-                                                </li>
+                        <?php } ?>
+                    </div>
+                <?php } else { ?>
+                    <div class="no-data-container py-10">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-12 h-12 mb-4 text-gray-400"><path d="M2 9a3 3 0 0 1 0 6v2a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-2a3 3 0 0 1 0-6V7a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2Z"/></svg>
+                        <p class="font-semibold"><?php echo esc_html__('No Recent Tickets', 'js-support-ticket'); ?></p>
+                        <p class="text-sm"><?php echo esc_html__('New tickets will be displayed in this section.', 'js-support-ticket'); ?></p>
+                    </div>
+                <?php } ?>
+                <a href="?page=ticket" class="flex flex-col text-center w-full mt-4 bg-gray-100 text-gray-700 font-semibold py-2 px-4 rounded-lg hover:bg-gray-200 transition-colors"><?php echo esc_html__('View All Tickets', 'js-support-ticket'); ?></a>
+            </section>
+
+            <section class="grid grid-cols-1 lg:grid-cols-2 gap-6 layout-grid">
+                <?php if( in_array('agent',jssupportticket::$_active_addons) ){ ?>
+                    <div id="unassigned-tickets" class="bg-white p-5 rounded-xl shadow-lg flex flex-col">
+                        <h3 class="text-lg font-bold text-gray-800 mb-4"><?php echo esc_html__('Unassigned Tickets', 'js-support-ticket'); ?></h3>
+                        <?php if (!empty(jssupportticket::$_data['unassigned_tickets'])) { ?>
+                            <div class="space-y-4 flex-grow">
+                                <?php foreach (jssupportticket::$_data['unassigned_tickets'] as $ticket) { ?>
+                                    <div class="bg-white p-4 rounded-lg border border-gray-200 space-y-3 group">
+                                        <div class="flex items-center justify-between flex-wrap gap-2">
+                                            <div class="jsst-admin-dashboard-ticket-top-wrp flex flex-auto items-center gap-4">
+                                                <div class="jsst-admin-dashboard-ticket-logowrp h-10 w-10 rounded-full bg-amber-100 flex items-center justify-center font-bold text-amber-600">
+                                                    <?php echo wp_kses_post(jsst_get_avatar($ticket->uid, 'h-10 w-10 rounded-full')); ?>
+                                                </div>
+                                                <div class="flex flex-auto flex-wrap items-center gap-4 jsst-admin-dashboard-ticket-rightmain-wrp">
+                                                    <div class="!ml-0 !mr-0 flex-auto jsst-admin-dashboard-ticket-middle-wrp">
+                                                            <p class="font-semibold text-sm text-gray-800">
+                                                                <?php echo esc_html($ticket->name); ?>
+                                                            </p>
+                                                            <p class="text-xs text-gray-500">
+                                                                <?php echo esc_html( human_time_diff( jssupportticketphplib::JSST_strtotime( $ticket->created ), current_time( 'timestamp' ) ) . ' ' . __( 'ago', 'js-support-ticket' ) ); ?>
+                                                            </p>
+                                                    </div>
+                                                    <span class="bg-amber-100 text-amber-800 px-2.5 py-1 rounded-full font-medium text-xs" style="background-color:<?php echo esc_attr(jssupportticket::$_data['status_map'][$ticket->status]->statusbgcolour); ?>; color:<?php echo esc_attr(jssupportticket::$_data['status_map'][$ticket->status]->statuscolour); ?>;">
+                                                        <?php echo esc_html(jssupportticket::JSST_getVarValue(jssupportticket::$_data['status_map'][$ticket->status]->status)); ?>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <a href="?page=ticket&jstlay=ticketdetail&jssupportticketid=<?php echo esc_attr($ticket->id); ?>" class="inline-block font-semibold text-gray-800 text-sm leading-6 group-hover:text-[#4f46e5] smooth-color-transition"><?php echo esc_html($ticket->subject); ?></a>
+                                        <div class="flex items-center justify-between text-sm pt-2 border-t border-gray-100">
+                                            <p class="text-xs text-gray-500"><?php echo esc_html__('Priority:', 'js-support-ticket'); ?></p>
+                                            <?php if (!empty($ticket->priority)) { ?>
+                                                <span class="bg-red-100 text-red-800 px-2.5 py-1 rounded-full font-medium text-xs" style="background-color:<?php echo esc_attr($ticket->prioritycolour); ?>; color: #FFF;"><?php echo esc_html(jssupportticket::JSST_getVarValue($ticket->priority)); ?></span>
                                             <?php } ?>
-                                        </ul>
-                                    <?php } else { ?>
-                                        <div class="js-hlpdsk-empty-state">
-                                            <svg class="js-hlpdsk-empty-state-icon" fill="none" viewBox="0 0 24 24"
-                                                stroke-width="1.5" stroke="currentColor">
-                                                <path stroke-linecap="round" stroke-linejoin="round"
-                                                    d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                            </svg>
-                                            <h4><?php echo esc_html(__('No Unassigned Tickets', 'js-support-ticket')); ?></h4>
-                                            <p><?php echo esc_html(__('All tickets have been assigned. Great job!', 'js-support-ticket')); ?>
+                                        </div>
+                                    </div>
+                                <?php } ?>
+                            </div>
+                        <?php } else { ?>
+                            <div class="flex-grow no-data-container">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-12 h-12 mb-4 text-gray-400"><path d="M14 9a2 2 0 0 1-2-2 2 2 0 0 1-2 2 2 2 0 0 1-2-2 2 2 0 0 1 2-2"/><path d="M18 9a2 2 0 0 1-2-2 2 2 0 0 1-2 2 2 2 0 0 1-2-2 2 2 0 0 1 2-2"/><path d="M12 9a2 2 0 0 1-2-2 2 2 0 0 1-2 2 2 2 0 0 1-2-2 2 2 0 0 1 2-2"/><path d="M6 9a2 2 0 0 1-2-2 2 2 0 0 1-2 2 2 2 0 0 1-2-2 2 2 0 0 1 2-2"/><circle cx="12" cy="12" r="10"/></svg>
+                                <p class="font-semibold"><?php echo esc_html__('All Tickets Assigned', 'js-support-ticket'); ?></p>
+                                <p class="text-sm"><?php echo esc_html__('Great job! There are no unassigned tickets.', 'js-support-ticket'); ?></p>
+                            </div>
+                        <?php } ?>
+                        <a href="?page=ticket" class="flex flex-col text-center w-full mt-4 bg-gray-100 text-gray-700 font-semibold py-2 px-4 rounded-lg hover:bg-gray-200 transition-colors"><?php echo esc_html__('View All Tickets', 'js-support-ticket'); ?></a>
+                    </div>
+                <?php } ?>
+                <?php if( in_array('actions',jssupportticket::$_active_addons) ){ ?>
+                    <div id="ticket-action-history" class="bg-white p-5 rounded-xl shadow-lg flex flex-col">
+                        <h3 class="text-lg font-bold text-gray-800 mb-4"><?php echo esc_html__('Ticket Action History', 'js-support-ticket'); ?></h3>
+                        <?php if (!empty(jssupportticket::$_data['ticket_action_history'])) { ?>
+                            <div class="space-y-6 flex-grow">
+                                <?php 
+                                // Define the three icons you want to rotate through
+                                $icons = [
+                                    [
+                                        'bg' => 'bg-indigo-100',
+                                        'svg' => '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 text-[#4f46e5]"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path></svg>'
+                                    ],
+                                    [
+                                        'bg' => 'bg-green-100',
+                                        'svg' => '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 text-green-600"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>'
+                                    ],
+                                    [
+                                        'bg' => 'bg-red-100',
+                                        'svg' => '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 text-red-500"><rect x="3" y="4" width="18" height="16" rx="2" ry="2"></rect><line x1="8" y1="9" x2="16" y2="9"></line><line x1="8" y1="13" x2="16" y2="13"></line><line x1="8" y1="17" x2="12" y2="17"></line></svg>'
+                                    ]
+                                ];
+
+                                foreach (jssupportticket::$_data['ticket_action_history'] as $index => $action) {
+                                    $icon = $icons[$index % count($icons)]; // rotate icons
+                                ?>
+                                    <a href="?page=ticket&jstlay=ticketdetail&jssupportticketid=<?php echo esc_attr($action->referenceid); ?>" class="flex items-start space-x-4 gap-4">
+                                        <div class="<?php echo esc_attr($icon['bg']); ?> bg-indigo-100 p-3 rounded-full">
+                                            <?php echo wp_kses($icon['svg'], JSST_ALLOWED_TAGS); ?>
+                                        </div>
+                                        <div class="!ml-0 !mr-0">
+                                            <p class="text-sm text-gray-800">
+                                                <?php echo esc_html(jssupportticket::JSST_getVarValue($action->message)); ?>
+                                            </p>
+                                            <p class="text-xs text-gray-500 mt-1">
+                                                <?php
+                                                if (!empty($action->name)) {
+                                                    echo esc_html(__('By', 'js-support-ticket')) . ' ' . esc_html($action->name) . ' - ';
+                                                }
+                                                echo esc_html(human_time_diff(jssupportticketphplib::JSST_strtotime($action->datetime), current_time('timestamp'))) . ' ' . esc_html(__('ago', 'js-support-ticket'));?>
                                             </p>
                                         </div>
-                                    <?php } ?>
-                                </div>
-                                <?php
-                            }
-                            if( in_array('actions',jssupportticket::$_active_addons) && !empty(jssupportticket::$_data['jssupportticket_admin_charts_visibility']['ticket_history']) ){ ?>
-                                <div class="js-hlpdsk-card js-hlpdsk-ticket-history-card js-hlpdsk-card-half">
-                                    <h3 class="js-hlpdsk-section-heading" style="font-size: 1.25rem; margin-bottom: 1rem">
-                                        <?php echo esc_html(__('Ticket Action History', 'js-support-ticket')); ?>
-                                    </h3>
-                                    <?php if (!empty(jssupportticket::$_data['ticket_action_history'])) { ?>
-                                        <div class="js-hlpdsk-table-wrapper">
-                                            <table class="js-hlpdsk-modern-table">
-                                                <thead>
-                                                    <tr>
-                                                        <th><?php echo esc_html(__('Action', 'js-support-ticket')); ?></th>
-                                                        <th><?php echo esc_html(__('Ticket ID', 'js-support-ticket')); ?></th>
-                                                        <th><?php echo esc_html(__('Agent', 'js-support-ticket')); ?></th>
-                                                        <th><?php echo esc_html(__('Time', 'js-support-ticket')); ?></th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <?php foreach (jssupportticket::$_data['ticket_action_history'] as $action) { ?>
-                                                        <tr>
-                                                            <td><?php echo esc_html($action->message); ?></td>
-                                                            <td>
-                                                                <a href="?page=ticket&jstlay=ticketdetail&jssupportticketid=<?php echo esc_attr($action->referenceid); ?>" class="js-hlpdsk-text-blue-link">#<?php echo esc_html($action->ticketid); ?></a>
-                                                            </td>
-                                                            <td><?php echo esc_html($action->agent_name); ?></td>
-                                                            <td><?php echo esc_html(date('g:i A', jssupportticketphplib::JSST_strtotime($action->datetime))); ?></td>
-                                                        </tr>
-                                                    <?php } ?>
-                                                </tbody>
-                                            </table>
+                                    </a>
+                                <?php } ?>
+                            </div>
+                        <?php } else { ?>
+                            <div class="flex-grow no-data-container">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-12 h-12 mb-4 text-gray-400"><path d="M12 20v-6M12 8V2"/><path d="m4.93 4.93 4.24 4.24"/><path d="m14.83 14.83 4.24 4.24"/><path d="M2 12h6"/><path d="M16 12h6"/><path d="m4.93 19.07 4.24-4.24"/><path d="m14.83 9.17 4.24-4.24"/></svg>
+                                <p class="font-semibold"><?php echo esc_html__('No Recent Actions', 'js-support-ticket'); ?></p>
+                                <p class="text-sm"><?php echo esc_html__('Ticket updates and changes will appear here.', 'js-support-ticket'); ?></p>
+                            </div>
+                        <?php } ?>
+                        <a href="?page=ticket" class="flex flex-col text-center w-full mt-4 bg-gray-100 text-gray-700 font-semibold py-2 px-4 rounded-lg hover:bg-gray-200 transition-colors"><?php echo esc_html__('View All Tickets', 'js-support-ticket'); ?></a>
+                    </div>
+                <?php } ?>
+                <div id="recently-replied" class="bg-white p-5 rounded-xl shadow-lg flex flex-col">
+                    <h3 class="text-lg font-bold text-gray-800 mb-4"><?php echo esc_html__('Recently Replied', 'js-support-ticket'); ?></h3>
+                    <?php if (!empty(jssupportticket::$_data['recently_replied_tickets'])) { ?>
+                        <div class="space-y-4 flex-grow">
+                            <?php foreach (jssupportticket::$_data['recently_replied_tickets'] as $ticket) { ?>
+                                <div class="bg-white p-4 rounded-lg border border-gray-200 space-y-3 group">
+                                    <div class="jsst-admin-dashboard-ticket-top-wrp flex flex-auto items-center gap-4">
+                                        <div class="jsst-admin-dashboard-ticket-logowrp h-10 w-10 rounded-full bg-amber-100 flex items-center justify-center font-bold text-amber-600">   
+                                            <?php echo wp_kses_post(jsst_get_avatar($ticket->uid, 'h-10 w-10 rounded-full')); ?>
                                         </div>
-                                    <?php } else { ?>
-                                        <div class="js-hlpdsk-empty-state">
-                                            <svg class="js-hlpdsk-empty-state-icon" fill="none" viewBox="0 0 24 24"
-                                                stroke-width="1.5e" strok="currentColor">
-                                                <path stroke-linecap="round" stroke-linejoin="round"
-                                                    d="M11.25 11.25l.041-.02a.75.75 0 011.063.852l-.708 2.836a.75.75 0 001.063.853l.041-.021M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                            </svg>
-                                            <h4><?php echo esc_html(__('No Recent Actions', 'js-support-ticket')); ?></h4>
-                                            <p><?php echo esc_html(__('There is no ticket activity to show at the moment.', 'js-support-ticket')); ?>
-                                            </p>
+                                        <div class="flex flex-auto flex-wrap items-center gap-4 jsst-admin-dashboard-ticket-rightmain-wrp">
+                                            <div class="!ml-0 !mr-0 jsst-admin-dashboard-ticket-middle-wrp">
+                                                <p class="font-semibold text-sm text-gray-800"><?php echo esc_html($ticket->name); ?></p>
+                                                <p class="text-xs text-gray-500">
+                                                    <?php
+                                                    $created_timestamp = jssupportticketphplib::JSST_strtotime( $ticket->created );
+
+                                                    if ( ! empty( $created_timestamp ) && $created_timestamp > 0 ) {
+                                                        echo esc_html( human_time_diff( $created_timestamp, current_time( 'timestamp' ) ) ) . ' ' . esc_html(__( 'ago', 'js-support-ticket' ));
+                                                    } else {
+                                                        echo '';
+                                                    }
+                                                    ?>
+                                                </p>
+                                            </div>
+                                            <span class="bg-green-100 text-green-800 px-2.5 py-1 rounded-full font-medium text-xs" style="background-color:<?php echo esc_attr(jssupportticket::$_data['status_map'][$ticket->status]->statusbgcolour); ?>; color:<?php echo esc_attr(jssupportticket::$_data['status_map'][$ticket->status]->statuscolour); ?>;"><?php echo esc_html(jssupportticket::JSST_getVarValue(jssupportticket::$_data['status_map'][$ticket->status]->status)); ?></span>
                                         </div>
-                                    <?php } ?>
+                                    </div>
+                                    <a href="?page=ticket&jstlay=ticketdetail&jssupportticketid=<?php echo esc_attr($ticket->id); ?>" class="inline-block font-semibold text-gray-800 text-sm leading-6 group-hover:text-[#4f46e5] smooth-color-transition"><?php echo esc_html($ticket->subject); ?></a>
+                                    <div class="flex items-center justify-between text-sm pt-2 border-t border-gray-100">
+                                        <p class="text-xs text-gray-500"><?php echo esc_html__('Priority:', 'js-support-ticket'); ?></p>
+                                        <?php if (!empty($ticket->priority)) { ?>
+                                            <span class="bg-blue-100 text-blue-800 px-2.5 py-1 rounded-full font-medium text-xs" style="background-color:<?php echo esc_attr($ticket->prioritycolour); ?>; color: #FFF;"><?php echo esc_html(jssupportticket::JSST_getVarValue($ticket->priority)); ?></span>
+                                        <?php } ?>
+                                    </div>
                                 </div>
                             <?php } ?>
-                        </section>
+                        </div>
+                    <?php } else { ?>
+                        <div class="flex-grow no-data-container">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-12 h-12 mb-4 text-gray-400"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></svg>
+                            <p class="font-semibold"><?php echo esc_html__('No Replies Yet', 'js-support-ticket'); ?></p>
+                            <p class="text-sm"><?php echo esc_html__('Recently replied tickets will be shown here.', 'js-support-ticket'); ?></p>
+                        </div>
                     <?php } ?>
-                    <section class="js-hlpdsk-section-container">
-                        <?php if (!empty(jssupportticket::$_data['jssupportticket_admin_charts_visibility']['ticket_trends'])) { ?>
-                            <div class="js-hlpdsk-card js-hlpdsk-chart-card js-hlpdsk-card-70">
-                                <h3><?php echo esc_html(__('Ticket Trends (Last 7 Days)', 'js-support-ticket')); ?></h3>
-                                <div id="statisticsChart" class="js-hlpdsk-chart-container-inner"></div>
-                                <div class="js-hlpdsk-chart-legend js-hlpdsk-statistics-chart">
-                                    <span class="js-hlpdsk-legend-item"><span
-                                            class="js-hlpdsk-legend-dot js-hlpdsk-dot-cyan"></span><?php echo esc_html(__('Open', 'js-support-ticket')); ?></span>
-                                    <span class="js-hlpdsk-legend-item"><span
-                                            class="js-hlpdsk-legend-dot js-hlpdsk-dot-purple"></span><?php echo esc_html(__('Pending', 'js-support-ticket')); ?></span>
-                                    <span class="js-hlpdsk-legend-item"><span
-                                            class="js-hlpdsk-legend-dot js-hlpdsk-dot-yellow"></span><?php echo esc_html(__('Answered', 'js-support-ticket')); ?></span>
-                                </div>
-                            </div>
-                        <?php
-                        }
-                        if (!empty(jssupportticket::$_data['jssupportticket_admin_charts_visibility']['today_distribution'])) { ?>
-                            <div class="js-hlpdsk-card js-hlpdsk-chart-card js-hlpdsk-card-30">
-                                <h3><?php echo esc_html(__('Today\'s Ticket Distribution', 'js-support-ticket')); ?></h3>
-                                <div id="todayTicketsChart" class="js-hlpdsk-chart-container-inner"></div>
-                                <div class="js-hlpdsk-chart-legend">
-                                    <span class="js-hlpdsk-legend-item"><span
-                                            class="js-hlpdsk-legend-dot js-hlpdsk-dot-blue"></span><?php echo esc_html(__('New', 'js-support-ticket')); ?></span>
-                                    <span class="js-hlpdsk-legend-item"><span
-                                            class="js-hlpdsk-legend-dot js-hlpdsk-dot-green"></span><?php echo esc_html(__('Answered', 'js-support-ticket')); ?></span>
-                                    <span class="js-hlpdsk-legend-item"><span
-                                            class="js-hlpdsk-legend-dot js-hlpdsk-dot-orange"></span><?php echo esc_html(__('Pending', 'js-support-ticket')); ?></span>
-                                </div>
-                            </div>
-                        <?php } ?>
-                    </section>
-                    <?php if (!empty(jssupportticket::$_data['jssupportticket_admin_charts_visibility']['latest_tickets'])) { ?>
-                        <section class="js-hlpdsk-section-container">
-                            <div class="js-hlpdsk-card js-hlpdsk-card-full latest-tickets-card">
-                                <div class="card-header-flex">
-                                    <h3><?php echo esc_html(__('Latest Tickets', 'js-support-ticket')); ?></h3>
-                                    <a href="?page=ticket"
-                                        class="view-all-btn"><?php echo esc_html(__('View All', 'js-support-ticket')); ?></a>
-                                </div>
-                                <?php if (!empty(jssupportticket::$_data['latest_tickets'])) { ?>
-                                    <div class="js-hlpdsk-table-wrapper">
-                                        <table class="js-hlpdsk-modern-table">
-                                            <thead>
-                                                <tr>
-                                                    <th style="width: 15%">
-                                                        <?php echo esc_html(__('Ticket ID', 'js-support-ticket')); ?>
-                                                    </th>
-                                                    <th style="width: 30%">
-                                                        <?php echo esc_html(__('Subject', 'js-support-ticket')); ?>
-                                                    </th>
-                                                    <th style="width: 15%">
-                                                        <?php echo esc_html(__('Status', 'js-support-ticket')); ?>
-                                                    </th>
-                                                    <th style="width: 20%">
-                                                        <?php echo esc_html(__('Department', 'js-support-ticket')); ?>
-                                                    </th>
-                                                    <th style="width: 15%">
-                                                        <?php echo esc_html(__('Last Reply', 'js-support-ticket')); ?>
-                                                    </th>
-                                                    <th style="width: 5%">
-                                                        <?php echo esc_html(__('Action', 'js-support-ticket')); ?>
-                                                    </th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <?php foreach (jssupportticket::$_data['latest_tickets'] as $ticket) { ?>
-                                                    <tr>
-                                                        <td>#<?php echo esc_html($ticket->ticketid); ?></td>
-                                                        <td><?php echo esc_html($ticket->subject); ?></td>
-                                                        <td>
-                                                            <span class="js-hlpdsk-status-tag" style="background-color:<?php echo esc_attr(jssupportticket::$_data['status_map'][$ticket->status]->statusbgcolour); ?>; color:<?php echo esc_attr(jssupportticket::$_data['status_map'][$ticket->status]->statuscolour); ?>;"><?php echo esc_html(jssupportticket::$_data['status_map'][$ticket->status]->status); ?></span>
-                                                        </td>
-                                                        <td>
-                                                            <?php
-                                                            if (!empty($ticket->departmentid)) {
-                                                                echo esc_html(jssupportticket::$_data['department_map'][$ticket->departmentid]);
-                                                            } ?>
-                                                        </td>
-                                                        <td>
-                                                            <?php
-                                                            $last_reply_timestamp = jssupportticketphplib::JSST_strtotime($ticket->lastreply);
-                                                            if (!empty($last_reply_timestamp) && $last_reply_timestamp > 0) {
-                                                                echo human_time_diff($last_reply_timestamp, current_time('timestamp')) . ' ago';
-                                                            } else {
-                                                                echo esc_html(__('', 'js-support-ticket'));
-                                                            }
-                                                            ?>
-                                                        </td>
-                                                        <td>
-                                                            <a href="?page=ticket&jstlay=ticketdetail&jssupportticketid=<?php echo esc_attr($ticket->id); ?>" class="js-hlpdsk-text-blue-link">
-                                                                <?php echo esc_html(__('View', 'js-support-ticket')); ?>
-                                                            </a>
-                                                        </td>
-                                                    </tr>
-                                                <?php } ?>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                <?php } else { ?>
-                                    <div class="js-hlpdsk-empty-state">
-                                        <svg class="js-hlpdsk-empty-state-icon" fill="none" viewBox="0 0 24 24"
-                                            stroke-width="1.5" stroke="currentColor">
-                                            <path stroke-linecap="round" stroke-linejoin="round"
-                                                d="M3.75 9.776c.112-.017.227-.026.344-.026h15.812c.117 0 .232.009.344.026m-16.5 0a2.25 2.25 0 00-1.883 2.542l.857 6a2.25 2.25 0 002.227 1.932H19.05a2.25 2.25 0 002.227-1.932l.857-6a2.25 2.25 0 00-1.883-2.542m-16.5 0V6A2.25 2.25 0 016 3.75h12A2.25 2.25 0 0120.25 6v3.776" />
-                                        </svg>
-                                        <h4><?php echo esc_html(__('No Tickets Found', 'js-support-ticket')); ?></h4>
-                                        <p><?php echo esc_html(__('There are currently no tickets to display in this view.', 'js-support-ticket')); ?>
-                                        </p>
-                                    </div>
-                                <?php } ?>
-                            </div>
-                        </section>
-                    <?php } ?>
+                    <a href="?page=ticket" data-tab-number="2" class="js-hlpdsk-like-card flex flex-col text-center w-full mt-4 bg-gray-100 text-gray-700 font-semibold py-2 px-4 rounded-lg hover:bg-gray-200 transition-colors"><?php echo esc_html__('View All Replied Tickets', 'js-support-ticket'); ?></a>
+                </div>
 
-                    <section class="js-hlpdsk-section-container">
-                        <?php if( in_array('agent',jssupportticket::$_active_addons) && !empty(jssupportticket::$_data['jssupportticket_admin_charts_visibility']['agent_workload']) ){ ?>
-                            <div class="js-hlpdsk-card js-hlpdsk-work-load-card js-hlpdsk-card-70">
-                                <div class="card-header-flex">
-                                    <h3 class="js-hlpdsk-section-heading">
-                                        <?php echo esc_html(__('Agent Workload', 'js-support-ticket')); ?>
-                                    </h3>
-                                    <a href="?page=agent" class="view-all-btn">
-                                        <?php echo esc_html(__('View All', 'js-support-ticket')).' '.esc_html(__('Agents', 'js-support-ticket')); ?>
-                                    </a>
-                                </div>
-                                <?php if (!empty(jssupportticket::$_data['agent_workload'])) { ?>
-                                    <div class="js-hlpdsk-table-wrapper">
-                                        <table class="js-hlpdsk-modern-table">
-                                            <thead>
-                                                <tr>
-                                                    <th><?php echo esc_html(__('Agent', 'js-support-ticket')); ?></th>
-                                                    <th><?php echo esc_html(__('New', 'js-support-ticket')); ?></th>
-                                                    <th><?php echo esc_html(__('Awaiting Customer', 'js-support-ticket')); ?>
-                                                    </th>
-                                                    <th><?php echo esc_html(__('Awaiting Agent', 'js-support-ticket')); ?></th>
-                                                    <th><?php echo esc_html(__('Total', 'js-support-ticket')); ?></th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <?php foreach (jssupportticket::$_data['agent_workload'] as $agent) { ?>
-                                                    <tr>
-                                                        <td><?php echo esc_html($agent->agent_name); ?></td>
-                                                        <td><?php echo esc_html($agent->open_tickets); ?></td>
-                                                        <td><?php echo esc_html($agent->awaiting_customer); ?></td>
-                                                        <td><?php echo esc_html($agent->awaiting_agent); ?></td>
-                                                        <td><?php echo esc_html($agent->total_tickets); ?></td>
-                                                    </tr>
-                                                <?php } ?>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                <?php } else { ?>
-                                    <div class="js-hlpdsk-empty-state">
-                                        <svg class="js-hlpdsk-empty-state-icon" fill="none" viewBox="0 0 24 24"
-                                            stroke-width="1.5" stroke="currentColor">
-                                            <path stroke-linecap="round" stroke-linejoin="round"
-                                                d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" />
-                                        </svg>
-                                        <h4><?php echo esc_html(__('No Agent Data', 'js-support-ticket')); ?></h4>
-                                        <p><?php echo esc_html(__('Workload data for agents is not available at this time.', 'js-support-ticket')); ?>
-                                        </p>
-                                    </div>
-                                <?php } ?>
-                            </div>
-                            <?php
-                        }
-                        if (in_array('overdue', jssupportticket::$_active_addons) && !empty(jssupportticket::$_data['jssupportticket_admin_charts_visibility']['overdue_ticket'])) {
-                            if(jssupportticket::$_data['overdue_tickets_count'] > 0) {?>
-                                <a href="?page=ticket" data-tab-number="3" class="js-hlpdsk-like-card js-hlpdsk-card js-hlpdsk-overdue-card js-hlpdsk-card-30">
-                                    <div class="js-hlpdsk-icon-right">
-                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                            stroke-width="1.5" stroke="currentColor">
-                                            <path stroke-linecap="round" stroke-linejoin="round"
-                                                d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.731 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.352zM12 20.25h.008v.008H12v-.008z" />
-                                        </svg>
-                                    </div>
-                                    <div class="js-hlpdsk-content-left">
-                                        <span class="js-hlpdsk-label"><?php echo esc_html(__('Total overdue tickets', 'js-support-ticket')); ?></span>
-                                        <span class="js-hlpdsk-value"><?php echo esc_html(jssupportticket::$_data['overdue_tickets_count']); ?></span>
-                                    </div>
-                                </a>
-                            <?php } else { ?>
-                                <div class="js-hlpdsk-card js-hlpdsk-card-30">
-                                    <div class="js-hlpdsk-empty-state">
-                                        <svg class="js-hlpdsk-empty-state-icon" style="color: #166534;" fill="none"
-                                            viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-                                            <path stroke-linecap="round" stroke-linejoin="round"
-                                                d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                        </svg>
-                                        <h4 style="color: #166534;">
-                                            <?php echo esc_html(__('Zero Overdue Tickets!', 'js-support-ticket')); ?></h4>
-                                        <p style="color: #15803d;">
-                                            <?php echo esc_html(__('Congratulations! The queue is clear of overdue tickets.', 'js-support-ticket')); ?>
-                                        </p>
-                                    </div>
-                                </div>
-                            <?php }
-                        } ?>
-                    </section>
-
-                    <section class="js-hlpdsk-section-container">
-                        <?php if (!empty(jssupportticket::$_data['jssupportticket_admin_charts_visibility']['tickets_by_department'])) { ?>
-                            <div class="js-hlpdsk-card js-hlpdsk-chart-card js-hlpdsk-card-half">
-                                <h3><?php echo esc_html(__('Tickets by Department', 'js-support-ticket')); ?></h3>
-                                <div id="departmentChart" class="js-hlpdsk-chart-container-inner"></div>
-                                <div class="js-hlpdsk-chart-legend">
-                                    <?php
-                                    if (!empty(jssupportticket::$_data['tickets_by_department'])) {
-                                        foreach (jssupportticket::$_data['tickets_by_department'] as $key => $department) { ?>
-                                            <span class="js-hlpdsk-legend-item">
-                                                <span class="js-hlpdsk-legend-dot" style="background-color:<?php echo esc_attr(jssupportticket::$_data['department_colors'][$key] ?? '#6b7280'); ?>"></span>
-                                                <?php echo esc_html($department->departmentname); ?>
-                                            </span>
-                                        <?php }
-                                    } ?>
-                                </div>
-                            </div>
-                            <?php
-                        }
-                        if (!empty(jssupportticket::$_data['jssupportticket_admin_charts_visibility']['tickets_by_status'])) { ?>
-                            <div class="js-hlpdsk-card js-hlpdsk-chart-card js-hlpdsk-card-half">
-                                <h3><?php echo esc_html(__('Tickets by Status', 'js-support-ticket')); ?></h3>
-                                <div id="statusChart" class="js-hlpdsk-chart-container-inner"></div>
-                                <div class="js-hlpdsk-chart-legend">
-                                    <?php if (!empty(jssupportticket::$_data['tickets_by_status'])) {
-                                        foreach (jssupportticket::$_data['tickets_by_status'] as $status) { ?>
-                                            <span class="js-hlpdsk-legend-item">
-                                                <span class="js-hlpdsk-legend-dot" style="background-color:<?php echo esc_attr($status->statusbgcolour); ?>"></span>
-                                                <?php echo esc_html($status->status); ?>
-                                            </span>
-                                        <?php }
-                                    } ?>
-                                </div>
-                            </div>
-                            <?php
-                        }
-                        if (!empty(jssupportticket::$_data['jssupportticket_admin_charts_visibility']['tickets_by_priorities'])) { ?>
-                            <div class="js-hlpdsk-card js-hlpdsk-chart-card js-hlpdsk-card-half">
-                                <h3><?php echo esc_html(__('Tickets by Priorities', 'js-support-ticket')); ?></h3>
-                                <div id="prioritiesChart" class="js-hlpdsk-chart-container-inner"></div>
-                                <div class="js-hlpdsk-chart-legend">
-                                    <?php
-                                    if (!empty(jssupportticket::$_data['tickets_by_priorities'])) {
-                                        foreach (jssupportticket::$_data['tickets_by_priorities'] as $priority) { ?>
-                                            <span class="js-hlpdsk-legend-item">
-                                                <span class="js-hlpdsk-legend-dot" style="background-color:<?php echo esc_attr($priority->prioritycolour); ?>"></span>
-                                                <?php echo esc_html($priority->priority); ?>
-                                            </span>
-                                        <?php }
-                                    } ?>
-                                </div>
-                            </div>
-                            <?php
-                        }
-                        if (!empty(jssupportticket::$_data['jssupportticket_admin_charts_visibility']['tickets_by_products'])) { ?>
-                            <div class="js-hlpdsk-card js-hlpdsk-chart-card js-hlpdsk-card-half">
-                                <h3><?php echo esc_html(__('Tickets by Products', 'js-support-ticket')); ?></h3>
-                                <div id="productsChart" class="js-hlpdsk-chart-container-inner"></div>
-                                <div class="js-hlpdsk-chart-legend">
-                                    <?php
-                                    if (!empty(jssupportticket::$_data['tickets_by_products'])) {
-                                        foreach (jssupportticket::$_data['tickets_by_products'] as $key => $product) { ?>
-                                            <span class="js-hlpdsk-legend-item">
-                                                <span class="js-hlpdsk-legend-dot" style="background-color:<?php echo esc_attr(jssupportticket::$_data['product_colors'][$key] ?? '#6b7280'); ?>"></span>
-                                                <?php echo esc_html($product->product); ?>
-                                            </span>
-                                        <?php }
-                                    } ?>
-                                </div>
-                            </div>
-                        <?php } ?>
-                    </section>
-
-                    <section class="js-hlpdsk-section-container">
-                        <?php
-                        if (in_array('cannedresponses', jssupportticket::$_active_addons) && !empty(jssupportticket::$_data['jssupportticket_admin_charts_visibility']['canned_responses']) ) {?>
-                            <div class="js-hlpdsk-card js-hlpdsk-card-half">
-                                <div class="card-header-flex">
-                                    <h3 class="js-hlpdsk-section-heading">
-                                        <?php echo esc_html(__('List of Canned Responses', 'js-support-ticket')); ?>
-                                    </h3>
-                                    <a href="?page=cannedresponses" class="view-all-btn">
-                                        <?php echo esc_html(__('View All', 'js-support-ticket')); ?>
-                                    </a>
-                                </div>
-                                <?php if (!empty(jssupportticket::$_data['saved_replies'])) { ?>
-                                    <ul class="js-hlpdsk-list-card">
-                                        <?php foreach (jssupportticket::$_data['saved_replies'] as $reply) { ?>
-                                            <li>
-                                                <a href="?page=cannedresponses&jstlay=addpremademessage&jssupportticketid=<?php echo esc_attr($reply->id); ?>" class="js-hlpdsk-list-item-title"><?php echo esc_html($reply->title); ?></a>
-                                            </li>
-                                        <?php } ?>
-                                    </ul>
-                                <?php } else { ?>
-                                    <div class="js-hlpdsk-empty-state">
-                                        <svg class="js-hlpdsk-empty-state-icon" fill="none" viewBox="0 0 24 24"
-                                            stroke-width="1.5" stroke="currentColor">
-                                            <path stroke-linecap="round" stroke-linejoin="round"
-                                                d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10" />
-                                        </svg>
-                                        <h4><?php echo esc_html(__('No Canned Responses', 'js-support-ticket')); ?></h4>
-                                        <p><?php echo esc_html(__('Create your first canned response to speed up your workflow.', 'js-support-ticket')); ?>
-                                        </p>
-                                    </div>
-                                <?php } ?>
-                            </div>
-                        <?php } ?>
-                        <?php if (!empty(jssupportticket::$_data['jssupportticket_admin_charts_visibility']['tickets_by_age'])) { ?>
-                            <div class="js-hlpdsk-card js-hlpdsk-ticket-age-card js-hlpdsk-card-half">
-                                <h3 class="js-hlpdsk-section-heading" style="font-size: 1.25rem; margin-bottom: 1rem">
-                                    <?php echo esc_html(__('Open Tickets by Age', 'js-support-ticket')); ?>
-                                </h3>
-                                <?php if (!empty(jssupportticket::$_data['tickets_by_age']['lt_1_day']) || !empty(jssupportticket::$_data['tickets_by_age']['1_3_days']) || !empty(jssupportticket::$_data['tickets_by_age']['3_7_days'])) { ?>
-                                    <div class="js-hlpdsk-table-wrapper">
-                                        <table class="js-hlpdsk-modern-table">
-                                            <thead>
-                                                <tr>
-                                                    <th><?php echo esc_html(__('Age', 'js-support-ticket')); ?></th>
-                                                    <th><?php echo esc_html(__('Count', 'js-support-ticket')); ?></th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <td><?php echo esc_html__('&lt; 1 Day', 'js-support-ticket'); ?></td>
-                                                    <td><?php echo esc_html(jssupportticket::$_data['tickets_by_age']['lt_1_day']); ?></td>
-                                                </tr>
-                                                <tr>
-                                                    <td><?php echo esc_html(__('1-3 Days', 'js-support-ticket')); ?></td>
-                                                    <td><?php echo esc_html(jssupportticket::$_data['tickets_by_age']['1_3_days']); ?></td>
-                                                </tr>
-                                                <tr>
-                                                    <td><?php echo esc_html(__('3-7 Days', 'js-support-ticket')); ?></td>
-                                                    <td><?php echo esc_html(jssupportticket::$_data['tickets_by_age']['3_7_days']); ?></td>
-                                                </tr>
-                                                <tr>
-                                                    <td><?php echo esc_html__('&gt; 7 Days', 'js-support-ticket'); ?></td>
-                                                    <td><?php echo esc_html(jssupportticket::$_data['tickets_by_age']['gt_7_days']); ?></td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                <?php } else { ?>
-                                    <div class="js-hlpdsk-empty-state">
-                                        <svg class="js-hlpdsk-empty-state-icon" fill="none" viewBox="0 0 24 24"
-                                            stroke-width="1.5" stroke="currentColor">
-                                            <path stroke-linecap="round" stroke-linejoin="round"
-                                                d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0h18" />
-                                        </svg>
-                                        <h4><?php echo esc_html(__('No Open Tickets', 'js-support-ticket')); ?></h4>
-                                        <p><?php echo esc_html(__('There are no open tickets to analyze by age.', 'js-support-ticket')); ?>
-                                        </p>
-                                    </div>
-                                <?php } ?>
-                            </div>
-                            <?php
-                        }
-                        if (!empty(jssupportticket::$_data['jssupportticket_admin_charts_visibility']['active_customers'])) { ?>
-                            <div class="js-hlpdsk-card js-hlpdsk-active-customer-card js-hlpdsk-card-half">
-                                <h3 class="js-hlpdsk-section-heading" style="font-size: 1.25rem; margin-bottom: 1rem">
-                                    <?php echo esc_html(__('Most Active Customers', 'js-support-ticket')); ?>
-                                </h3>
-                                <?php if (!empty(jssupportticket::$_data['most_active_customers'])) { ?>
-                                    <div class="js-hlpdsk-table-wrapper">
-                                        <table class="js-hlpdsk-modern-table">
-                                            <thead>
-                                                <tr>
-                                                    <th><?php echo esc_html(__('Customer Name', 'js-support-ticket')); ?></th>
-                                                    <th><?php echo esc_html(__('Tickets Count', 'js-support-ticket')); ?></th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <?php foreach (jssupportticket::$_data['most_active_customers'] as $customer) { ?>
-                                                    <tr>
-                                                        <td><?php echo esc_html($customer->name); ?></td>
-                                                        <td><?php echo esc_html($customer->ticket_count); ?></td>
-                                                    </tr>
-                                                <?php } ?>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                <?php } else { ?>
-                                    <div class="js-hlpdsk-empty-state">
-                                        <svg class="js-hlpdsk-empty-state-icon" fill="none" viewBox="0 0 24 24"
-                                            stroke-width="1.5" stroke="currentColor">
-                                            <path stroke-linecap="round" stroke-linejoin="round"
-                                                d="M18 18.72a9.094 9.094 0 003.741-.479 3 3 0 00-4.682-2.72m-7.5-2.962c.57-1.023-.19-2.3-1.35-2.45-1.16-.15-2.23.6-2.23 1.602 0 .56.32 1.07 1.006 1.466l.657.377a2.25 2.25 0 01-2.25 3.865l-.83.083a2.25 2.25 0 00-2.25 2.25v.52a2.25 2.25 0 002.25 2.25H18a2.25 2.25 0 002.25-2.25v-.52a2.25 2.25 0 00-2.25-2.25l-.83-.083a2.25 2.25 0 01-2.25-3.865l.657-.377c.686-.396 1.006-.906 1.006-1.466 0-1.002-1.07-1.752-2.23-1.602-1.16.15-1.92 1.43-1.35 2.45z" />
-                                        </svg>
-                                        <h4><?php echo esc_html(__('No Active Customers', 'js-support-ticket')); ?></h4>
-                                        <p><?php echo esc_html(__('Customer activity data is not yet available.', 'js-support-ticket')); ?>
-                                        </p>
-                                    </div>
-                                <?php } ?>
-                            </div>
-                            <?php
-                        }
-                        if( in_array('agent',jssupportticket::$_active_addons) && !empty(jssupportticket::$_data['jssupportticket_admin_charts_visibility']['active_timer']) ) { ?>
-                            <div class="js-hlpdsk-card js-hlpdsk-active-timer-card js-hlpdsk-card-half">
-                                <h3 class="js-hlpdsk-section-heading" style="font-size: 1.25rem; margin-bottom: 1rem">
-                                    <?php echo esc_html(__('Active Timer', 'js-support-ticket')); ?>
-                                </h3>
-                                <?php if (!empty(jssupportticket::$_data['active_timers'])) { ?>
-                                    <div class="js-hlpdsk-table-wrapper">
-                                        <table class="js-hlpdsk-modern-table">
-                                            <thead>
-                                                <tr>
-                                                    <th><?php echo esc_html(__('Ticket', 'js-support-ticket')); ?></th>
-                                                    <th><?php echo esc_html(__('Subject', 'js-support-ticket')); ?></th>
-                                                    <th><?php echo esc_html(__('Timer', 'js-support-ticket')); ?></th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <?php foreach (jssupportticket::$_data['active_timers'] as $timer) { 
-                                                    $time_diff = $timer->usertime;
-
-                                                    $hours = floor($time_diff / 3600);
-                                                    $minutes = floor($time_diff / 60);
-                                                    $seconds = $time_diff % 60;
-                                                ?>
-                                                    <tr>
-                                                        <td><a href="?page=ticket&jstlay=ticketdetail&jssupportticketid=<?php echo esc_attr($timer->id); ?>" class="js-hlpdsk-text-blue-link">#<?php echo esc_html($timer->ticketid); ?></a></td>
-                                                        <td><?php echo esc_html($timer->subject); ?></td>
-                                                        <td>
-                                                            <?php
-                                                            if ($hours > 0) {
-                                                                echo esc_html($hours).' h';
-                                                            } elseif ($minutes > 0) {
-                                                                echo esc_html($minutes).' m';
-                                                            } elseif ($seconds > 0) {
-                                                                echo esc_html($seconds). '  ';
-                                                            }
-                                                            ?>
-                                                        </td>
-                                                    </tr>
-                                                <?php } ?>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                <?php } else { ?>
-                                    <div class="js-hlpdsk-empty-state">
-                                        <svg class="js-hlpdsk-empty-state-icon" fill="none" viewBox="0 0 24 24"
-                                            stroke-width="1.5" stroke="currentColor">
-                                            <path stroke-linecap="round" stroke-linejoin="round"
-                                                d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                        </svg>
-                                        <h4><?php echo esc_html(__('No Active Timers', 'js-support-ticket')); ?></h4>
-                                        <p><?php echo esc_html(__('No agents have active timers running on tickets.', 'js-support-ticket')); ?>
-                                        </p>
-                                    </div>
-                                <?php } ?>
-                            </div>
-                            <?php
-                        } ?>
-                    </section>
-                <?php if (!empty(jssupportticket::$_data['jssupportticket_admin_charts_visibility']['available_addons'])) { ?>
-                    <?php
-                    // Define the dynamic list of available addons.
-                    $available_addons = [
-                        'agent' => [
-                            'title' => __('Agents', 'js-support-ticket'),
-                            'description' => __('Add agents and assign roles and permissions to provide assistance.', 'js-support-ticket'),
-                            'plugin_file' => 'js-support-ticket-agent/js-support-ticket-agent.php',
-                            'url' => 'https://jshelpdesk.com/product/agents/',
-                            'icon_bg' => 'js-hlpdsk-addon-icon-bg-blue',
-                            'icon_svg' => '<svg focusable="false" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" class="js-hlpdsk-addon-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14c-4.418 0-8 2.239-8 5v1h16v-1c0-2.761-3.582-5-8-5z"/></svg>',
-                        ],
-                        'autoclose' => [
-                            'title' => __('Ticket Auto Close', 'js-support-ticket'),
-                            'description' => __('Define rules for the ticket to auto-close after a specific interval of time.', 'js-support-ticket'),
-                            'plugin_file' => 'js-support-ticket-autoclose/js-support-ticket-autoclose.php',
-                            'url' => 'https://jshelpdesk.com/product/close-ticket/',
-                            'icon_bg' => 'js-hlpdsk-addon-icon-bg-pink',
-                            'icon_svg' => '<svg xmlns="http://www.w3.org/2000/svg" class="js-hlpdsk-addon-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>',
-                        ],
-                        'feedback' => [
-                            'title' => __('Feedbacks', 'js-support-ticket'),
-                            'description' => __('Get a survey from customers on ticket closing to improve quality.', 'js-support-ticket'),
-                            'plugin_file' => 'js-support-ticket-feedback/js-support-ticket-feedback.php',
-                            'url' => 'https://jshelpdesk.com/product/feedback/',
-                            'icon_bg' => 'js-hlpdsk-addon-icon-bg-teal',
-                            'icon_svg' => '<svg xmlns="http://www.w3.org/2000/svg" class="js-hlpdsk-addon-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" /></svg>',
-                        ],
-                        'helptopic' => [
-                            'title' => __('Help Topics', 'js-support-ticket'),
-                            'description' => __('Help users to find and select the area with which they need assistance.', 'js-support-ticket'),
-                            'plugin_file' => 'js-support-ticket-helptopic/js-support-ticket-helptopic.php',
-                            'url' => 'https://jshelpdesk.com/product/helptopic/',
-                            'icon_bg' => 'js-hlpdsk-addon-icon-bg-red',
-                            'icon_svg' => '<svg xmlns="http://www.w3.org/2000/svg" class="js-hlpdsk-addon-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v13m0-13C10.832 5.405 9.172 5 7.5 5S4.168 5.405 3 6.253v13C4.168 18.405 5.828 18 7.5 18s3.332.405 4.5 1.253m0-13C13.168 5.405 14.828 5 16.5 5s3.332.405 4.5 1.253v13C19.832 18.405 18.172 18 16.5 18s-3.332.405-4.5 1.253" /></svg>',
-                        ],
-                        'note' => [
-                            'title' => __('Private Note', 'js-support-ticket'),
-                            'description' => __('The private note is used as reminders or to give other agents insights into the ticket issue.', 'js-support-ticket'),
-                            'plugin_file' => 'js-support-ticket-note/js-support-ticket-note.php',
-                            'url' => 'https://jshelpdesk.com/product/internal-note/',
-                            'icon_bg' => 'js-hlpdsk-addon-icon-bg-orange',
-                            'icon_svg' => '<svg xmlns="http://www.w3.org/2000/svg" class="js-hlpdsk-addon-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15.232 5.232l3.536 3.536m-2.036-5.036a5.5 5.5 0 017.778 7.778L13.828 17.828a5.5 5.5 0 01-7.778-7.778l2.036-2.036m3.536 3.536L10 14m0 0l-1-1m-1-1l-3 3" /></svg>',
-                        ],
-                        'knowledgebase' => [
-                            'title' => __('Knowledge Base', 'js-support-ticket'),
-                            'description' => __('Stop losing productivity on repetitive queries, build your knowledge base.', 'js-support-ticket'),
-                            'plugin_file' => 'js-support-ticket-knowledgebase/js-support-ticket-knowledgebase.php',
-                            'url' => 'https://jshelpdesk.com/product/knowledge-base/',
-                            'icon_bg' => 'js-hlpdsk-addon-icon-bg-teal',
-                            'icon_svg' => '<svg xmlns="http://www.w3.org/2000/svg" class="js-hlpdsk-addon-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v13m0-13C10.832 5.405 9.172 5 7.5 5S4.168 5.405 3 6.253v13C4.168 18.405 5.828 18 7.5 18s3.332.405 4.5 1.253m0-13C13.168 5.405 14.828 5 16.5 5s3.332.405 4.5 1.253v13C19.832 18.405 18.172 18 16.5 18s-3.332.405-4.5 1.253" /></svg>',
-                        ],
-                        'maxticket' => [
-                            'title' => __('Max Tickets', 'js-support-ticket'),
-                            'description' => __('Enables admin to set N numbers of tickets for users and agents separately.', 'js-support-ticket'),
-                            'plugin_file' => 'js-support-ticket-maxticket/js-support-ticket-maxticket.php',
-                            'url' => 'https://jshelpdesk.com/product/max-ticket/',
-                            'icon_bg' => 'js-hlpdsk-addon-icon-bg-blue',
-                            'icon_svg' => '<svg xmlns="http://www.w3.org/2000/svg" class="js-hlpdsk-addon-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 19V9m6 10V5m6 14V3M3 21h18" /></svg>',
-                        ],
-                        'mergeticket' => [
-                            'title' => __('Merge Tickets', 'js-support-ticket'),
-                            'description' => __('Enables agents to merge two tickets of the same user into one instead of dealing with the same issue on many tickets.', 'js-support-ticket'),
-                            'plugin_file' => 'js-support-ticket-mergeticket/js-support-ticket-mergeticket.php',
-                            'url' => 'https://jshelpdesk.com/product/merge-ticket/',
-                            'icon_bg' => 'js-hlpdsk-addon-icon-bg-pink',
-                            'icon_svg' => '<svg xmlns="http://www.w3.org/2000/svg" class="js-hlpdsk-addon-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" /></svg>',
-                        ],
-                        'overdue' => [
-                            'title' => __('Overdue', 'js-support-ticket'),
-                            'description' => __('Defines rules or set specific intervals of time to make ticket auto overdue.', 'js-support-ticket'),
-                            'plugin_file' => 'js-support-ticket-overdue/js-support-ticket-overdue.php',
-                            'url' => 'https://jshelpdesk.com/product/overdue/',
-                            'icon_bg' => 'js-hlpdsk-addon-icon-bg-teal',
-                            'icon_svg' => '<svg xmlns="http://www.w3.org/2000/svg" class="js-hlpdsk-addon-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>',
-                        ],
-                        'smtp' => [
-                            'title' => __('SMTP', 'js-support-ticket'),
-                            'description' => __('SMTP enables you to add custom mail protocol to send and receive emails.', 'js-support-ticket'),
-                            'plugin_file' => 'js-support-ticket-smtp/js-support-ticket-smtp.php',
-                            'url' => 'https://jshelpdesk.com/product/smtp/',
-                            'icon_bg' => 'js-hlpdsk-addon-icon-bg-red',
-                            'icon_svg' => '<svg xmlns="http://www.w3.org/2000/svg" class="js-hlpdsk-addon-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8m-18 8h18a2 2 0 002-2V6a2 2 0 00-2-2H3a2 2 0 00-2 2v8a2 2 0 002 2z" /></svg>',
-                        ],
-                        'tickethistory' => [
-                            'title' => __('Ticket History', 'js-support-ticket'),
-                            'description' => __('Displays complete ticket history along with the ticket status, currently assigned user and other actions performed on each ticket.', 'js-support-ticket'),
-                            'plugin_file' => 'js-support-ticket-tickethistory/js-support-ticket-tickethistory.php',
-                            'url' => 'https://jshelpdesk.com/product/ticket-history/',
-                            'icon_bg' => 'js-hlpdsk-addon-icon-bg-orange',
-                            'icon_svg' => '<svg xmlns="http://www.w3.org/2000/svg" class="js-hlpdsk-addon-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4 5a2 2 0 012-2h10a2 2 0 012 2v14a2 2 0 01-2 2H6a2 2 0 01-2-2V5z" /><path stroke-linecap="round" stroke-linejoin="round" d="M8 7h8M8 11h8M8 15h6" /></svg>',
-                        ],
-                        'cannedresponses' => [
-                            'title' => __('Canned Responses', 'js-support-ticket'),
-                            'description' => __('Pre-populated messages allow support agents to respond quickly.', 'js-support-ticket'),
-                            'plugin_file' => 'js-support-ticket-cannedresponses/js-support-ticket-cannedresponses.php',
-                            'url' => 'https://jshelpdesk.com/product/canned-responses/',
-                            'icon_bg' => 'js-hlpdsk-addon-icon-bg-red',
-                            'icon_svg' => '<svg xmlns="http://www.w3.org/2000/svg" class="js-hlpdsk-addon-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v13m0-13C10.832 5.405 9.172 5 7.5 5S4.168 5.405 3 6.253v13C4.168 18.405 5.828 18 7.5 18s3.332.405 4.5 1.253m0-13C13.168 5.405 14.828 5 16.5 5s3.332.405 4.5 1.253v13C19.832 18.405 18.172 18 16.5 18s-3.332.405-4.5 1.253" /></svg>',
-                        ],
-                        'emailpiping' => [
-                            'title' => __('Email Piping', 'js-support-ticket'),
-                            'description' => __('Enables users to reply to the tickets via email without login.', 'js-support-ticket'),
-                            'plugin_file' => 'js-support-ticket-emailpiping/js-support-ticket-emailpiping.php',
-                            'url' => 'https://jshelpdesk.com/product/email-piping/',
-                            'icon_bg' => 'js-hlpdsk-addon-icon-bg-blue',
-                            'icon_svg' => '<svg xmlns="http://www.w3.org/2000/svg" class="js-hlpdsk-addon-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3 8l9 6 9-6v8a2 2 0 01-2 2H5a2 2 0 01-2-2V8z" /><path stroke-linecap="round" stroke-linejoin="round" d="M12 14v6m0 0l-2-2m2 2l2-2" /></svg>',
-                        ],
-                        'timetracking' => [
-                            'title' => __('Time Tracking', 'js-support-ticket'),
-                            'description' => __('Track the time spent on each ticket by each agent and each reply.', 'js-support-ticket'),
-                            'plugin_file' => 'js-support-ticket-timetracking/js-support-ticket-timetracking.php',
-                            'url' => 'https://jshelpdesk.com/product/time-tracking/',
-                            'icon_bg' => 'js-hlpdsk-addon-icon-bg-pink',
-                            'icon_svg' => '<svg xmlns="http://www.w3.org/2000/svg" class="js-hlpdsk-addon-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>',
-                        ],
-                        'useroptions' => [
-                            'title' => __('User Options', 'js-support-ticket'),
-                            'description' => __('User options enable you to add Google Re-captcha or JS Help Desk Re-captcha for a registration form.', 'js-support-ticket'),
-                            'plugin_file' => 'js-support-ticket-useroptions/js-support-ticket-useroptions.php',
-                            'url' => 'https://jshelpdesk.com/product/user-options/',
-                            'icon_bg' => 'js-hlpdsk-addon-icon-bg-teal',
-                            'icon_svg' => '<svg xmlns="http://www.w3.org/2000/svg" class="js-hlpdsk-addon-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" /></svg>',
-                        ],
-                        'actions' => [
-                            'title' => __('Ticket Actions', 'js-support-ticket'),
-                            'description' => __('Get multiple action options on each ticket like Print Ticket, Lock Ticket, Transfer ticket, etc.', 'js-support-ticket'),
-                            'plugin_file' => 'js-support-ticket-actions/js-support-ticket-actions.php',
-                            'url' => 'https://jshelpdesk.com/product/actions/',
-                            'icon_bg' => 'js-hlpdsk-addon-icon-bg-red',
-                            'icon_svg' => '<svg xmlns="http://www.w3.org/2000/svg" class="js-hlpdsk-addon-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v13m0-13C10.832 5.405 9.172 5 7.5 5S4.168 5.405 3 6.253v13C4.168 18.405 5.828 18 7.5 18s3.332.405 4.5 1.253m0-13C13.168 5.405 14.828 5 16.5 5s3.332.405 4.5 1.253v13C19.832 18.405 18.172 18 16.5 18s-3.332.405-4.5 1.253" /></svg>',
-                        ],
-                        'announcement' => [
-                            'title' => __('Announcements', 'js-support-ticket'),
-                            'description' => __('Make unlimited announcements associated with the support system.', 'js-support-ticket'),
-                            'plugin_file' => 'js-support-ticket-announcement/js-support-ticket-announcement.php',
-                            'url' => 'https://jshelpdesk.com/product/announcements/',
-                            'icon_bg' => 'js-hlpdsk-addon-icon-bg-orange',
-                            'icon_svg' => '<svg xmlns="http://www.w3.org/2000/svg" class="js-hlpdsk-addon-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15 8.5V5a2 2 0 00-2-2l-7 4H3v6h3l7 4a2 2 0 002-2v-3.5M19 10v4m0-4a2 2 0 010 4" /></svg>',
-                        ],
-                        'banemail' => [
-                            'title' => __('Ban Emails', 'js-support-ticket'),
-                            'description' => __('It allows you to block the email of any user to restrict him to create new tickets.', 'js-support-ticket'),
-                            'plugin_file' => 'js-support-ticket-banemail/js-support-ticket-banemail.php',
-                            'url' => 'https://jshelpdesk.com/product/ban-email/',
-                            'icon_bg' => 'js-hlpdsk-addon-icon-bg-blue',
-                            'icon_svg' => '<svg focusable="false" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" class="js-hlpdsk-addon-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3 8l9 6 9-6M3 8v8a2 2 0 002 2h14a2 2 0 002-2V8" /><circle cx="18" cy="18" r="4" /><path stroke-linecap="round" stroke-linejoin="round" d="M16.5 16.5L19.5 19.5" /></svg>',
-                        ],
-                        'notification' => [
-                            'title' => __('Desktop Notification', 'js-support-ticket'),
-                            'description' => __('The Desktop notifications will keep you up to date about anything happens on your support system.', 'js-support-ticket'),
-                            'plugin_file' => 'js-support-ticket-notification/js-support-ticket-notification.php',
-                            'url' => 'https://jshelpdesk.com/product/desktop-notification/',
-                            'icon_bg' => 'js-hlpdsk-addon-icon-bg-pink',
-                            'icon_svg' => '<svg xmlns="http://www.w3.org/2000/svg" class="js-hlpdsk-addon-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V4a2 2 0 10-4 0v1.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" /></svg>',
-                        ],
-                        'export' => [
-                            'title' => __('Export', 'js-support-ticket'),
-                            'description' => __('Save the ticket as a PDF in your system and able to export all data.', 'js-support-ticket'),
-                            'plugin_file' => 'js-support-ticket-export/js-support-ticket-export.php',
-                            'url' => 'https://jshelpdesk.com/product/export/',
-                            'icon_bg' => 'js-hlpdsk-addon-icon-bg-teal',
-                            'icon_svg' => '<svg xmlns="http://www.w3.org/2000/svg" class="js-hlpdsk-addon-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v2a2 2 0 002 2h12a2 2 0 002-2v-2m-4-4l-4 4m0 0l-4-4m4 4V4" /></svg>',
-                        ],
-                        'download' => [
-                            'title' => __('Downloads', 'js-support-ticket'),
-                            'description' => __('Create downloads to ensure the user to get downloads from downloads.', 'js-support-ticket'),
-                            'plugin_file' => 'js-support-ticket-download/js-support-ticket-download.php',
-                            'url' => 'https://jshelpdesk.com/product/downloads/',
-                            'icon_bg' => 'js-hlpdsk-addon-icon-bg-red',
-                            'icon_svg' => '<svg xmlns="http://www.w3.org/2000/svg" class="js-hlpdsk-addon-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3 7h5l2 2h11a1 1 0 011 1v8a2 2 0 01-2 2H5a2 2 0 01-2-2V7z" /><path stroke-linecap="round" stroke-linejoin="round" d="M12 10v6m0 0l-3-3m3 3l3-3" /></svg>',
-                        ],
-                        'faq' => [
-                            'title' => __("FAQ's", 'js-support-ticket'),
-                            'description' => __('Add FAQs to drastically reduce the number of common questions.', 'js-support-ticket'),
-                            'plugin_file' => 'js-support-ticket-faq/js-support-ticket-faq.php',
-                            'url' => 'https://jshelpdesk.com/product/faq/',
-                            'icon_bg' => 'js-hlpdsk-addon-icon-bg-orange',
-                            'icon_svg' => '<svg xmlns="http://www.w3.org/2000/svg" class="js-hlpdsk-addon-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M7 8h10a2 2 0 012 2v7a2 2 0 01-2 2H9l-4 3v-3H5a2 2 0 01-2-2v-7a2 2 0 012-2z" /><path stroke-linecap="round" stroke-linejoin="round" d="M12 11.5a1.5 1.5 0 113 0c0 .75-.5 1.5-1.5 1.5v1m0 2h.01" /></svg>',
-                        ],
-                        'dashboardwidgets' => [
-                            'title' => __('Dashboard Widgets', 'js-support-ticket'),
-                            'description' => __('Get immediate data of your support operations as soon as you log into your WordPress administration area.', 'js-support-ticket'),
-                            'plugin_file' => 'js-support-ticket-dashboardwidgets/js-support-ticket-dashboardwidgets.php',
-                            'url' => 'https://jshelpdesk.com/product/admin-widget/',
-                            'icon_bg' => 'js-hlpdsk-addon-icon-bg-blue',
-                            'icon_svg' => '<svg xmlns="http://www.w3.org/2000/svg" class="js-hlpdsk-addon-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" /></svg>',
-                        ],
-                        'mail' => [
-                            'title' => __('Internal Mail', 'js-support-ticket'),
-                            'description' => __('Use an internal email to send emails to one agent to another agent.', 'js-support-ticket'),
-                            'plugin_file' => 'js-support-ticket-mail/js-support-ticket-mail.php',
-                            'url' => 'https://jshelpdesk.com/product/internal-mail/',
-                            'icon_bg' => 'js-hlpdsk-addon-icon-bg-pink',
-                            'icon_svg' => '<svg xmlns="http://www.w3.org/2000/svg" class="js-hlpdsk-addon-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3 8l9 6 9-6M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /><path stroke-linecap="round" stroke-linejoin="round" d="M15 12h4m0 0l-2-2m2 2l-2 2" /></svg>',
-                        ],
-                        'widgets' => [
-                            'title' => __('Front-End Widgets', 'js-support-ticket'),
-                            'description' => __('Widgets in WordPress allow you to add content and features in the widgetized areas of your theme.', 'js-support-ticket'),
-                            'plugin_file' => 'js-support-ticket-widgets/js-support-ticket-widgets.php',
-                            'url' => 'https://jshelpdesk.com/product/widget/',
-                            'icon_bg' => 'js-hlpdsk-addon-icon-bg-teal',
-                            'icon_svg' => '<svg xmlns="http://www.w3.org/2000/svg" class="js-hlpdsk-addon-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1" /><rect x="14" y="3" width="7" height="7" rx="1" /><rect x="3" y="14" width="7" height="7" rx="1" /><rect x="14" y="14" width="7" height="7" rx="1" /></svg>',
-                        ],
-                        'woocommerce' => [
-                            'title' => __('WooCommerce', 'js-support-ticket'),
-                            'description' => __('JS Help Desk WooCommerce provides the much-needed bridge between your WooCommerce store and the JS Help Desk.', 'js-support-ticket'),
-                            'plugin_file' => 'js-support-ticket-woocommerce/js-support-ticket-woocommerce.php',
-                            'url' => 'https://jshelpdesk.com/product/woocommerce/',
-                            'icon_bg' => 'js-hlpdsk-addon-icon-bg-red',
-                            'icon_svg' => '<svg xmlns="http://www.w3.org/2000/svg" class="js-hlpdsk-addon-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1" /><circle cx="20" cy="21" r="1" /><path stroke-linecap="round" stroke-linejoin="round" d="M1 1h4l2.68 13.39a2 2 0 002 1.61h9.72a2 2 0 002-1.61L23 6H6" /></svg>',
-                        ],
-                        'privatecredentials' => [
-                            'title' => __('Private Credentials', 'js-support-ticket'),
-                            'description' => __('Collect your customer\'s private data, sensitive information from credit card to health information and store them encrypted.', 'js-support-ticket'),
-                            'plugin_file' => 'js-support-ticket-privatecredentials/js-support-ticket-privatecredentials.php',
-                            'url' => 'https://jshelpdesk.com/product/private-credentials/',
-                            'icon_bg' => 'js-hlpdsk-addon-icon-bg-orange',
-                            'icon_svg' => '<svg xmlns="http://www.w3.org/2000/svg" class="js-hlpdsk-addon-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 11c-1.657 0-3 1.343-3 3v4h6v-4c0-1.657-1.343-3-3-3z" /><path stroke-linecap="round" stroke-linejoin="round" d="M7 11V7a5 5 0 0110 0v4" /><rect x="5" y="11" width="14" height="10" rx="2" ry="2" /></svg>',
-                        ],
-                        'envatovalidation' => [
-                            'title' => __('Envato Validation', 'js-support-ticket'),
-                            'description' => __('Without valid Envato, license clients won\'t be able to open a new ticket.', 'js-support-ticket'),
-                            'plugin_file' => 'js-support-ticket-envatovalidation/js-support-ticket-envatovalidation.php',
-                            'url' => 'https://jshelpdesk.com/product/envato/',
-                            'icon_bg' => 'js-hlpdsk-addon-icon-bg-blue',
-                            'icon_svg' => '<svg xmlns="http://www.w3.org/2000/svg" class="js-hlpdsk-addon-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4" /><circle cx="12" cy="12" r="9" /></svg>',
-                        ],
-                        'mailchimp' => [
-                            'title' => __('Mailchimp', 'js-support-ticket'),
-                            'description' => __('Adds the option to the registration form for prompting new users to subscribe to your email list.', 'js-support-ticket'),
-                            'plugin_file' => 'js-support-ticket-mailchimp/js-support-ticket-mailchimp.php',
-                            'url' => 'https://jshelpdesk.com/product/mail-chimp/',
-                            'icon_bg' => 'js-hlpdsk-addon-icon-bg-pink',
-                            'icon_svg' => '<svg xmlns="http://www.w3.org/2000/svg" class="js-hlpdsk-addon-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3 8l9 6 9-6M4 6h16a2 2 0 012 2v10a2 2 0 01-2 2H4a2 2 0 01-2-2V8a2 2 0 012-2z" /><path stroke-linecap="round" stroke-linejoin="round" d="M7 20l-2-2m12 2l2-2" /></svg>',
-                        ],
-                        'paidsupport' => [
-                            'title' => __('Paid Support', 'js-support-ticket'),
-                            'description' => __('Paid Support is the easiest way to integrate and manage payments for your tickets.', 'js-support-ticket'),
-                            'plugin_file' => 'js-support-ticket-paidsupport/js-support-ticket-paidsupport.php',
-                            'url' => 'https://jshelpdesk.com/product/paid-support/',
-                            'icon_bg' => 'js-hlpdsk-addon-icon-bg-teal',
-                            'icon_svg' => '<svg xmlns="http://www.w3.org/2000/svg" class="js-hlpdsk-addon-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" /><path stroke-linecap="round" stroke-linejoin="round" d="M12 8v8m0 0c1.5 0 2.5-.5 2.5-1.5S13.5 13 12 13m0 3c-1.5 0-2.5-.5-2.5-1.5S10.5 13 12 13" /></svg>',
-                        ],
-                        'easydigitaldownloads' => [
-                            'title' => __('Easy Digital Downloads', 'js-support-ticket'),
-                            'description' => __('EDD offers customers to open new tickets just one click from their EDD account.', 'js-support-ticket'),
-                            'plugin_file' => 'js-support-ticket-easydigitaldownloads/js-support-ticket-easydigitaldownloads.php',
-                            'url' => 'https://jshelpdesk.com/product/easy-digital-download/',
-                            'icon_bg' => 'js-hlpdsk-addon-icon-bg-red',
-                            'icon_svg' => '<svg xmlns="http://www.w3.org/2000/svg" class="js-hlpdsk-addon-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 12v6m0 0l-3-3m3 3l3-3m4-2V7a2 2 0 00-2-2h-4l-2-2H8a2 2 0 00-2 2v12a2 2 0 002 2h8" /></svg>',
-                        ],
-                        'multilanguageemailtemplates' => [
-                            'title' => __('Multi Language Email Templates', 'js-support-ticket'),
-                            'description' => __('It allows to create language-based email templates for all JS Help Desk email templates.', 'js-support-ticket'),
-                            'plugin_file' => 'js-support-ticket-multilanguageemailtemplates/js-support-ticket-multilanguageemailtemplates.php',
-                            'url' => 'https://jshelpdesk.com/product/multi-language-email-templates',
-                            'icon_bg' => 'js-hlpdsk-addon-icon-bg-orange',
-                            'icon_svg' => '<svg xmlns="http://www.w3.org/2000/svg" class="js-hlpdsk-addon-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /><path stroke-linecap="round" stroke-linejoin="round" d="M7 4h4v3H7V4zm6 0h4v3h-4V4z" /></svg>',
-                        ],
-                        'emailcc' => [
-                            'title' => __('Email Cc', 'js-support-ticket'),
-                            'description' => __('CC(Carbon Copy) - the people who should know about the information which is being shared and the people included are able to see who is there in the list.', 'js-support-ticket'),
-                            'plugin_file' => 'js-support-ticket-emailcc/js-support-ticket-emailcc.php',
-                            'url' => 'https://jshelpdesk.com/product/emailcc/',
-                            'icon_bg' => 'js-hlpdsk-addon-icon-bg-blue',
-                            'icon_svg' => '<svg xmlns="http://www.w3.org/2000/svg" class="js-hlpdsk-addon-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /><circle cx="7" cy="19" r="2" /><circle cx="17" cy="19" r="2" /></svg>',
-                        ],
-                        'multiform' => [
-                            'title' => __('Multiform', 'js-support-ticket'),
-                            'description' => __('It allows user to add more than one form based on requirements.', 'js-support-ticket'),
-                            'plugin_file' => 'js-support-ticket-multiform/js-support-ticket-multiform.php',
-                            'url' => 'https://jshelpdesk.com/product/multi-forms/',
-                            'icon_bg' => 'js-hlpdsk-addon-icon-bg-pink',
-                            'icon_svg' => '<svg xmlns="http://www.w3.org/2000/svg" class="js-hlpdsk-addon-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><rect x="4" y="4" width="12" height="12" rx="2" ry="2"/><rect x="8" y="8" width="12" height="12" rx="2" ry="2"/></svg>',
-                        ],
-                        'agentautoassign' => [
-                            'title' => __('Agent Auto Assign', 'js-support-ticket'),
-                            'description' => __('When a ticket is created, an appropriate agent is automatically assigned to the ticket and it is moved to the Assigned state.', 'js-support-ticket'),
-                            'plugin_file' => 'js-support-ticket-agentautoassign/js-support-ticket-agentautoassign.php',
-                            'url' => 'https://jshelpdesk.com/product/agentautoassign/',
-                            'icon_bg' => 'js-hlpdsk-addon-icon-bg-teal',
-                            'icon_svg' => '<svg xmlns="http://www.w3.org/2000/svg" class="js-hlpdsk-addon-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="3"/><path d="M6 21v-2a6 6 0 0112 0v2"/><path d="M19.4 15a2 2 0 010-6"/><path d="M4.6 9a2 2 0 010 6"/></svg>',
-                        ],
-                    ];
-
-                    // Filter out active addons to get a list of inactive ones
-                    $inactive_addons = array_filter($available_addons, function($addon_slug) {
-                        return !in_array($addon_slug, jssupportticket::$_active_addons);
-                    }, ARRAY_FILTER_USE_KEY);
-
-                    // Show the section only if there are inactive addons
-                    if (count($inactive_addons) > 0) {
-                        ?>
-                        <section class="js-hlpdsk-section-container">
-                            <div class="js-hlpdsk-data-card">
-                                <div class="js-hlpdsk-header-container">
-                                    <h3 class="js-hlpdsk-section-heading" style="font-size: 1.25rem; margin-bottom: 1rem">
-                                        <?php echo esc_html(__('Available Addons', 'js-support-ticket')); ?>
-                                    </h3>
-                                    <?php if (count($inactive_addons) > 3) { ?>
-                                        <a href="?page=jssupportticket&jstlay=addonstatus" class="js-hlpdsk-view-all-link">
-                                            <?php echo esc_html(__('View All Addons', 'js-support-ticket')); ?>
-                                        </a>
-                                    <?php } ?>
-                                </div>
-                                <div class="js-hlpdsk-addons-grid">
-                                    <?php
-                                    // Show the first 3 inactive addons
-                                    $addons_to_display = array_slice($inactive_addons, 0, 3, true);
-                                    foreach ($addons_to_display as $addon_slug => $addon) {
-                                        $plugininfo = JSSTCheckPluginInfo($addon['plugin_file']);
-                                        if($plugininfo['availability'] == "1"){
-                                            $button_text = $plugininfo['text'];
-                                            $button_url = "plugins.php?s=".$addon_slug."&plugin_status=inactive";
-                                        }elseif($plugininfo['availability'] == "0"){
-                                            $button_text = isset($plugininfo['text']) ? $plugininfo['text'] : __('View Details', 'js-support-ticket');
-                                            $button_url = $addon['url'];
-                                        } else {
-                                            // Default to install button
-                                            $button_text = __('Install Now', 'js-support-ticket');
-                                            $button_url = "#";
-                                        }
-                                        ?>
-                                        <div class="js-hlpdsk-addon-card">
-                                            <div class="js-hlpdsk-addon-icon-container <?php echo esc_attr($addon['icon_bg']); ?>">
-                                                <?php echo $addon['icon_svg']; ?>
-                                            </div>
-                                            <h4 class="js-hlpdsk-addon-title"><?php echo esc_html($addon['title']); ?></h4>
-                                            <p class="js-hlpdsk-addon-description"><?php echo esc_html($addon['description']); ?></p>
-                                            <a href="<?php echo esc_url($button_url); ?>" class="js-hlpdsk-install-button">
-                                                <?php echo esc_html($button_text); ?>
-                                            </a>
+                <div id="recently-closed" class="bg-white p-5 rounded-xl shadow-lg flex flex-col">
+                    <h3 class="text-lg font-bold text-gray-800 mb-4"><?php echo esc_html__('Recently Closed', 'js-support-ticket'); ?></h3>
+                    <?php if (!empty(jssupportticket::$_data['recently_closed_tickets'])) { ?>
+                        <div class="space-y-4 flex-grow">
+                            <?php foreach (jssupportticket::$_data['recently_closed_tickets'] as $ticket) { ?>
+                                <div class="bg-white p-4 rounded-lg border border-gray-200 space-y-3 group">
+                                    <div class="jsst-admin-dashboard-ticket-top-wrp flex flex-auto items-center gap-4">
+                                        <div class="jsst-admin-dashboard-ticket-logowrp h-10 w-10 rounded-full bg-amber-100 flex items-center justify-center font-bold text-amber-600">
+                                            <?php echo wp_kses_post(jsst_get_avatar($ticket->uid, 'h-10 w-10 rounded-full')); ?>
                                         </div>
+                                        <div class="flex flex-auto flex-wrap items-center gap-4 jsst-admin-dashboard-ticket-rightmain-wrp">
+                                            <div class="!ml-0 !mr-0 flex-auto jsst-admin-dashboard-ticket-middle-wrp">
+                                                <p class="font-semibold text-sm text-gray-800"><?php echo esc_html($ticket->name); ?></p>
+                                                <p class="text-xs text-gray-500">
+                                                    <?php
+                                                    $created_timestamp = jssupportticketphplib::JSST_strtotime( $ticket->created );
+
+                                                    if ( ! empty( $created_timestamp ) && $created_timestamp > 0 ) {
+                                                        echo esc_html( human_time_diff( $created_timestamp, current_time( 'timestamp' ) ) ) . ' ' . esc_html(__( 'ago', 'js-support-ticket' ));
+                                                    } else {
+                                                        echo '';
+                                                    }
+                                                    ?>
+                                                </p>
+                                            </div>
+                                            <span class="bg-gray-200 text-gray-800 px-2.5 py-1 rounded-full font-medium text-xs" style="background-color:<?php echo esc_attr(jssupportticket::$_data['status_map'][$ticket->status]->statusbgcolour); ?>; color:<?php echo esc_attr(jssupportticket::$_data['status_map'][$ticket->status]->statuscolour); ?>;"><?php echo esc_html(jssupportticket::JSST_getVarValue(jssupportticket::$_data['status_map'][$ticket->status]->status)); ?></span>
+                                        </div>
+                                    </div>
+                                    <a href="?page=ticket&jstlay=ticketdetail&jssupportticketid=<?php echo esc_attr($ticket->id); ?>" class="inline-block font-semibold text-gray-800 text-sm leading-6 group-hover:text-[#4f46e5] smooth-color-transition"><?php echo esc_html($ticket->subject); ?></a>
+                                    <div class="flex items-center justify-between text-sm pt-2 border-t border-gray-100">
+                                        <p class="text-xs text-gray-500"><?php echo esc_html__('Priority:', 'js-support-ticket'); ?></p>
+                                        <?php if (!empty($ticket->priority)) { ?>
+                                            <span class="bg-blue-100 text-blue-800 px-2.5 py-1 rounded-full font-medium text-xs" style="background-color:<?php echo esc_attr($ticket->prioritycolour); ?>; color: #FFF;"><?php echo esc_html(jssupportticket::JSST_getVarValue($ticket->priority)); ?></span>
+                                        <?php } ?>
+                                    </div>
+                                </div>
+                            <?php } ?>
+                        </div>
+                    <?php } else { ?>
+                        <div class="flex-grow no-data-container">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-12 h-12 mb-4 text-gray-400"><path d="M15 21h-9a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h3l2-3h4l2 3h3a2 2 0 0 1 2 2v7.5"/><path d="M18 15.5V13a2 2 0 0 0-2-2h-2"/><path d="M20 19.5a2.5 2.5 0 0 1-5 0"/><path d="m17.5 17-2.5 5"/><path d="m20 22-2.5-5"/></svg>
+                            <p class="font-semibold"><?php echo esc_html__('No Closed Tickets', 'js-support-ticket'); ?></p>
+                            <p class="text-sm"><?php echo esc_html__('Recently closed tickets will be listed here.', 'js-support-ticket'); ?></p>
+                        </div>
+                    <?php } ?>
+                    <a href="?page=ticket" data-tab-number="4" class="js-hlpdsk-like-card flex flex-col text-center w-full mt-4 bg-gray-100 text-gray-700 font-semibold py-2 px-4 rounded-lg hover:bg-gray-200 transition-colors"><?php echo esc_html__('View All Closed Tickets', 'js-support-ticket'); ?></a>
+                </div>
+                <div id="tickets-by-priority" class="bg-white p-5 rounded-xl shadow-lg">
+                    <h3 class="text-lg font-bold text-gray-800 mb-4"><?php echo esc_html__('Tickets by Priority', 'js-support-ticket'); ?></h3>
+                    <div class="h-80">
+                        <canvas id="ticketsByPriorityChart"></canvas>
+                    </div>
+                </div>
+                <div id="tickets-by-department" class="bg-white p-5 rounded-xl shadow-lg">
+                    <h3 class="text-lg font-bold text-gray-800 mb-4"><?php echo esc_html__('Tickets by Department', 'js-support-ticket'); ?></h3>
+                    <div class="h-80">
+                        <canvas id="ticketsByDepartmentChart"></canvas>
+                    </div>
+                </div>
+                <?php if( in_array('agent',jssupportticket::$_active_addons)){ ?>
+                    </section>
+            
+                    <section id="staff-performance">
+                        <h3 class="text-lg font-bold text-gray-800 mb-4"><?php echo esc_html__('Agent Performance', 'js-support-ticket'); ?></h3>
+                        <div class="bg-white p-5 rounded-xl shadow-lg overflow-x-auto">
+                            <table class="w-full text-sm text-left text-gray-500" id="jsst-import-data-result-table">
+                                <thead class="text-xs text-gray-700 uppercase bg-gray-50">
+                                    <tr>
+                                        <th scope="col" class="px-6 py-4 sm:px-4">
+                                            <?php echo esc_html__('Agent', 'js-support-ticket'); ?>
+                                        </th>
+                                        <th scope="col" class="px-6 py-4 sm:px-4 text-center">
+                                            <?php echo esc_html__('Assigned', 'js-support-ticket'); ?>
+                                        </th>
+                                        <th scope="col" class="px-6 py-4 sm:px-4 text-center">
+                                            <?php echo esc_html__('Open', 'js-support-ticket'); ?>
+                                        </th>
+                                        <th scope="col" class="px-6 py-4 sm:px-4 text-center">
+                                            <?php echo esc_html__('Closed', 'js-support-ticket'); ?>
+                                        </th>
+                                        <th scope="col" class="px-6 py-4 sm:px-4 text-center">
+                                            <?php echo esc_html__('Pending', 'js-support-ticket'); ?>
+                                        </th>
+                                        <th scope="col" class="px-6 py-4 sm:px-4 text-center">
+                                            <?php echo esc_html__('Overdue', 'js-support-ticket'); ?>
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php if (!empty(jssupportticket::$_data['agent_workload'])) { ?>
+                                        <?php foreach (jssupportticket::$_data['agent_workload'] as $agent) { ?>
+                                            <tr class="bg-white border hover:bg-gray-50 group transition-colors duration-300">
+                                                <td scope="row" class="before:!content-none px-6 py-4 sm:px-2 font-medium text-gray-900 whitespace-nowrap">
+                                                    <div class="flex items-center space-x-3 flex-wrap gap-4">
+                                                        <?php echo wp_kses_post(jsst_get_avatar($agent->uid, 'h-10 w-10 rounded-full')); ?>
+                                                        <span href="?page=agent&jstlay=addstaff&jssupportticketid=<?php echo esc_attr($agent->id); ?>" class="!ml-0 !mr0 smooth-color-transition group-hover:text-[#4f46e5]"><?php echo esc_html($agent->agent_name); ?></a>
+                                                    </div>
+                                                </td>
+                                                <td class="px-6 py-4 sm:px-4 text-center">
+                                                    <?php echo esc_html($agent->total_tickets); ?>
+                                                </td>
+                                                <td class="px-6 py-4 sm:px-4 text-center">
+                                                    <?php echo esc_html($agent->open_tickets); ?>
+                                                </td>
+                                                <td class="px-6 py-4 sm:px-4 text-center">
+                                                    <?php echo esc_html($agent->closed); ?>
+                                                </td>
+                                                <td class="px-6 py-4 sm:px-4 text-center">
+                                                    <?php echo esc_html($agent->pending); ?>
+                                                </td>
+                                                <td class="px-6 py-4 sm:px-4 text-red-500 font-semibold text-center">
+                                                    <?php echo esc_html($agent->overdue); ?>
+                                                </td>
+                                            </tr>
+                                        <?php } ?>
+                                    <?php } else { ?>
+                                        <tr>
+                                            <td colspan="6" class="text-center py-10">
+                                                <div class="no-data-container">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-12 h-12 mb-4 text-gray-400"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                                                    <p class="font-semibold"><?php echo esc_html__('No Agent Performance Data', 'js-support-ticket'); ?></p>
+                                                    <p class="text-sm"><?php echo esc_html__('Performance metrics will be displayed here.', 'js-support-ticket'); ?></p>
+                                                </div>
+                                            </td>
+                                        </tr>
                                     <?php } ?>
-                                </div>
-                            </div>
-                        </section>
-                        <?php
-                    }
-                }
-                if (!empty(jssupportticket::$_data['jssupportticket_admin_charts_visibility']['installation_guide'])) { ?>
-                    <section class="js-hlpdsk-section-container">
-                        <div class="js-cp-cnt-sec js-cp-video-baner">
-                            <div class="js-cp-video-baner-cnt">
-                                <div class="js-cp-video-baner-tit">
-                                    <?php echo esc_html(__('Quick installation Guide','js-support-ticket')); ?>
-                                </div>
-                                <div class="js-cp-video-baner-desc">
-                                    <?php echo esc_html(__('The best support system plugin for WordPress has everything you need.','js-support-ticket')); ?>
-                                </div>
-                                <div class="js-cp-video-baner-btn-wrp">
-                                    <a target="blank" href="https://www.youtube.com/watch?v=Honmzw892ZE" class="js-cp-video-baner-btn js-cp-video-baner-1">
-                                        <img alt="<?php echo esc_html(__('arrow','js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/play-btn.png"/>
-                                        <?php echo esc_html(__('How to setup','js-support-ticket')); ?>
-                                    </a>
-                                    <a target="blank" href="https://www.youtube.com/watch?v=dNYnZw8WK0M" class="js-cp-video-baner-btn js-cp-video-baner-2">
-                                        <img alt="<?php echo esc_html(__('arrow','js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/play-btn.png"/>
-                                        <?php echo esc_html(__('System Emails','js-support-ticket')); ?>
-                                    </a>
-                                    <a target="blank" href="https://www.youtube.com/watch?v=zmQ4bpqSYnk" class="js-cp-video-baner-btn js-cp-video-baner-3">
-                                        <img alt="<?php echo esc_html(__('arrow','js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/play-btn.png"/>
-                                        <?php echo esc_html(__('Ticket Creation','js-support-ticket')); ?>
-                                    </a>
-                                    <a target="blank" href="https://www.youtube.com/watch?v=c7whQ6F70yM" class="js-cp-video-baner-btn js-cp-video-baner-4">
-                                        <img alt="<?php echo esc_html(__('arrow','js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/play-btn.png"/>
-                                        <?php echo esc_html(__('Custom Fields','js-support-ticket')); ?>
-                                    </a>
-                                    <a target="blank" href="https://www.youtube.com/watch?v=LvsrMtEqRms" class="js-cp-video-baner-btn js-cp-video-baner-5">
-                                        <img alt="<?php echo esc_html(__('arrow','js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/play-btn.png"/>
-                                        <?php echo esc_html(__('Email Notification Problems','js-support-ticket')); ?>
-                                    </a>
-                                </div>
-                            </div>
+                                </tbody>
+                            </table>
                         </div>
                     </section>
-                <?php } ?>
-                </main>
+                    <section class="grid grid-cols-1 lg:grid-cols-2 gap-6 layout-grid">
+                    <?php
+                } ?>
+                <?php
+                if (in_array('cannedresponses', jssupportticket::$_active_addons) ) { ?>
+                    <div id="canned-responses" class="bg-white p-5 rounded-xl shadow-lg">
+                        <h3 class="text-lg font-bold text-gray-800 mb-4"><?php echo esc_html__('Recent Canned Responses', 'js-support-ticket'); ?></h3>
+                        <?php if (!empty(jssupportticket::$_data['saved_replies'])) { ?>
+                            <div class="space-y-6">
+                                <?php 
+                                // Define a set of 5 unique icons
+                                $icons = [
+                                    // Link/chain style
+                                    '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 text-[#4f46e5]"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.72"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.72-1.72"></path></svg>',
+                                    
+                                    // Message bubble
+                                    '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 text-green-600"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>',
+
+                                    // Document/file
+                                    '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 text-red-500"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>',
+
+                                    // Tag/bookmark
+                                    '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 text-yellow-500"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path></svg>',
+
+                                    // Star (favorite reply)
+                                    '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 text-orange-500"><polygon points="12 2 15 8.5 22 9.3 17 14 18.5 21 12 17.8 5.5 21 7 14 2 9.3 9 8.5 12 2"></polygon></svg>'
+                                ];
+
+                                foreach (jssupportticket::$_data['saved_replies'] as $index => $reply) {
+                                    $icon = $icons[$index % count($icons)]; // pick unique icon
+                                ?>
+                                    <div class="space-y-3">
+                                        <a href="?page=cannedresponses&jstlay=addpremademessage&jssupportticketid=<?php echo esc_attr($reply->id); ?>" class="flex justify-between items-center text-sm">
+                                            <div class="flex items-center space-x-2">
+                                                <?php echo wp_kses( $icon, JSST_ALLOWED_TAGS ); ?>
+                                                <p class="font-semibold text-gray-700"><?php echo esc_html($reply->title); ?></p>
+                                            </div>
+                                        </a>
+                                    </div>
+                                <?php } ?>
+                            </div>
+                        <?php } else { ?>
+                            <div class="no-data-container h-full">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-12 h-12 mb-4 text-gray-400"><path d="M20.25 7.5l-.625 10.632a2.25 2.25 0 01-2.247 2.118H6.622a2.25 2.25 0 01-2.247-2.118L3.75 7.5M10 11.25h4M3.375 7.5h17.25c.621 0 1.125-.504 1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125H3.375c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125z" /></svg>
+                                <p class="font-semibold"><?php echo esc_html__('No Canned Responses', 'js-support-ticket'); ?></p>
+                                <p class="text-sm"><?php echo esc_html__('Recent canned responses will be listed here.', 'js-support-ticket'); ?></p>
+                            </div>
+                        <?php } ?>
+                    </div>
+                    <?php
+                }
+                if( in_array('timetracking',jssupportticket::$_active_addons) ) { ?>
+                    <div id="active-timers" class="bg-white p-5 rounded-xl shadow-lg">
+                        <h3 class="text-lg font-bold text-gray-800 mb-4"><?php echo esc_html__('Active Timers', 'js-support-ticket'); ?></h3>
+                        <?php if (!empty(jssupportticket::$_data['active_timers'])) { ?>
+                            <div class="space-y-4">
+                                <?php foreach (jssupportticket::$_data['active_timers'] as $timer) { 
+                                    $time_diff = $timer->usertime;
+
+                                    $hours = floor($time_diff / 3600);
+                                    $minutes = floor($time_diff / 60);
+                                    $seconds = $time_diff % 60;
+                                ?>
+                                    <div class="flex justify-between items-center p-4 border rounded-lg">
+                                        <div>
+                                            <a href="?page=ticket&jstlay=ticketdetail&jssupportticketid=<?php echo esc_attr($timer->id); ?>" class="inline-block font-semibold text-gray-800 hover:text-[#4f46e5]"><?php echo esc_html($timer->subject); ?></a>
+                                            <p class="text-sm text-gray-500"><?php echo esc_html($timer->name); ?></p>
+                                        </div>
+                                        <p class="text-lg font-bold text-green-600 bg-green-100 px-3 py-1 rounded-md">
+                                            <?php
+                                                echo esc_html($hours).':'.esc_html($minutes).':'.esc_html($seconds);
+                                            ?>
+                                        </p>
+                                    </div>
+                                <?php } ?>
+                            </div>
+                        <?php } else { ?>
+                            <div class="no-data-container h-full">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-12 h-12 mb-4 text-gray-400"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+                                <p class="font-semibold"><?php echo esc_html(__('No Active Timers', 'js-support-ticket')); ?></p>
+                                <p class="text-sm"><?php echo esc_html(__('Timers started by agent will be shown here.', 'js-support-ticket')); ?></p>
+                            </div>
+                        <?php } ?>
+                    </div>
+                    <?php
+                } ?>
+                <div id="open-tickets-by-age" class="bg-white p-5 rounded-xl shadow-lg">
+                    <h3 class="text-lg font-bold text-gray-800 mb-4"><?php echo esc_html__('Open Tickets by Age', 'js-support-ticket'); ?></h3>
+                    <div class="h-80">
+                        <canvas id="openTicketsByAgeChart"></canvas>
+                    </div>
+                </div>
+                <div id="most-active-customers" class="bg-white p-5 rounded-xl shadow-lg">
+                    <h3 class="text-lg font-bold text-gray-800 mb-4"><?php echo esc_html__('Most Active Customers', 'js-support-ticket'); ?></h3>
+                    <?php if (!empty(jssupportticket::$_data['most_active_customers'])) { ?>
+                        <div class="space-y-2">
+                            <?php foreach (jssupportticket::$_data['most_active_customers'] as $customer) { ?>
+                                <div class="flex items-center justify-between p-2 rounded-lg hover:bg-gray-50 group transition-colors duration-300">
+                                    <div class="flex items-center space-x-3 gap-4">
+                                        <?php echo wp_kses_post(jsst_get_avatar($customer->uid, 'h-10 w-10 rounded-full')); ?>
+                                        <p class="!ml-0 !mr-0 font-semibold text-sm text-gray-800 smooth-color-transition group-hover:text-[#4f46e5]">
+                                            <?php echo esc_html($customer->name); ?>
+                                        </p>
+                                    </div>
+                                    <p class="text-sm font-bold text-gray-600">
+                                        <?php echo esc_html($customer->ticket_count).' '.esc_html(__('Tickets', 'js-support-ticket')); ?>
+                                    </p>
+                                </div>
+                            <?php } ?>
+                        </div>
+                    <?php } else { ?>
+                        <div class="no-data-container h-full">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-12 h-12 mb-4 text-gray-400"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                            <p class="font-semibold"><?php echo esc_html__('No Customer Activity', 'js-support-ticket'); ?></p>
+                            <p class="text-sm"><?php echo esc_html__('Customers with the most tickets will be listed here.', 'js-support-ticket'); ?></p>
+                        </div>
+                    <?php } ?>
+                </div>
+                <div id="tickets-by-status" class="bg-white p-5 rounded-xl shadow-lg">
+                    <h3 class="text-lg font-bold text-gray-800 mb-4"><?php echo esc_html__('Tickets by Status', 'js-support-ticket'); ?></h3>
+                    <div class="h-80">
+                        <canvas id="ticketsByStatusChart"></canvas>
+                    </div>
+                </div>
+                <div id="tickets-by-products" class="bg-white p-5 rounded-xl shadow-lg">
+                    <h3 class="text-lg font-bold text-gray-800 mb-4"><?php echo esc_html__('Tickets by Products', 'js-support-ticket'); ?></h3>
+                    <div class="h-80">
+                        <canvas id="ticketsByProductsChart"></canvas>
+                    </div>
+                </div>
+            </section>
+
+            <?php
+            // Define the dynamic list of available addons.
+            $available_addons = [
+                'agent' => [
+                    'title' => __('Agents', 'js-support-ticket'),
+                    'description' => __('Add agents and assign roles and permissions to provide assistance.', 'js-support-ticket'),
+                    'plugin_file' => 'js-support-ticket-agent/js-support-ticket-agent.php',
+                    'url' => 'https://jshelpdesk.com/product/agents/',
+                    'icon_bg' => 'js-hlpdsk-addon-icon-bg-blue',
+                    'icon_svg' => '<svg focusable="false" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14c-4.418 0-8 2.239-8 5v1h16v-1c0-2.761-3.582-5-8-5z"/></svg>',
+                ],
+                'aipoweredreply' => [
+                    'title' => __('AI Powered Reply', 'js-support-ticket'),
+                    'description' => __('Get AI-powered, context-based suggestions to effortlessly create clear, relevant, and helpful replies.', 'js-support-ticket'),
+                    'plugin_file' => 'js-support-ticket-aipoweredreply/js-support-ticket-aipoweredreply.php',
+                    'url' => 'https://jshelpdesk.com/product/ai-powered-reply/',
+                    'icon_bg' => 'js-hlpdsk-addon-icon-bg-blue',
+                    'icon_svg' => '<svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-gray-600"
+                        fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <!-- Chat bubble -->
+                        <path stroke-linecap="round" stroke-linejoin="round" 
+                            d="M4 5h16v10H7l-3 3V5z"/>
+                        <!-- AI text -->
+                        <text x="12" y="12" font-size="7" text-anchor="middle" 
+                            fill="currentColor" font-weight="bold">AI</text>
+                    </svg>',
+                ],
+                'autoclose' => [
+                    'title' => __('Ticket Auto Close', 'js-support-ticket'),
+                    'description' => __('Define rules for the ticket to auto-close after a specific interval of time.', 'js-support-ticket'),
+                    'plugin_file' => 'js-support-ticket-autoclose/js-support-ticket-autoclose.php',
+                    'url' => 'https://jshelpdesk.com/product/close-ticket/',
+                    'icon_bg' => 'js-hlpdsk-addon-icon-bg-pink',
+                    'icon_svg' => '<svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>',
+                ],
+                'feedback' => [
+                    'title' => __('Feedbacks', 'js-support-ticket'),
+                    'description' => __('Get a survey from customers on ticket closing to improve quality.', 'js-support-ticket'),
+                    'plugin_file' => 'js-support-ticket-feedback/js-support-ticket-feedback.php',
+                    'url' => 'https://jshelpdesk.com/product/feedback/',
+                    'icon_bg' => 'js-hlpdsk-addon-icon-bg-teal',
+                    'icon_svg' => '<svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" /></svg>',
+                ],
+                'helptopic' => [
+                    'title' => __('Help Topics', 'js-support-ticket'),
+                    'description' => __('Help users to find and select the area with which they need assistance.', 'js-support-ticket'),
+                    'plugin_file' => 'js-support-ticket-helptopic/js-support-ticket-helptopic.php',
+                    'url' => 'https://jshelpdesk.com/product/helptopic/',
+                    'icon_bg' => 'js-hlpdsk-addon-icon-bg-red',
+                    'icon_svg' => '<svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v13m0-13C10.832 5.405 9.172 5 7.5 5S4.168 5.405 3 6.253v13C4.168 18.405 5.828 18 7.5 18s3.332.405 4.5 1.253m0-13C13.168 5.405 14.828 5 16.5 5s3.332.405 4.5 1.253v13C19.832 18.405 18.172 18 16.5 18s-3.332.405-4.5 1.253" /></svg>',
+                ],
+                'note' => [
+                    'title' => __('Private Note', 'js-support-ticket'),
+                    'description' => __('The private note is used as reminders or to give other agents insights into the ticket issue.', 'js-support-ticket'),
+                    'plugin_file' => 'js-support-ticket-note/js-support-ticket-note.php',
+                    'url' => 'https://jshelpdesk.com/product/internal-note/',
+                    'icon_bg' => 'js-hlpdsk-addon-icon-bg-orange',
+                    'icon_svg' => '<svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15.232 5.232l3.536 3.536m-2.036-5.036a5.5 5.5 0 017.778 7.778L13.828 17.828a5.5 5.5 0 01-7.778-7.778l2.036-2.036m3.536 3.536L10 14m0 0l-1-1m-1-1l-3 3" /></svg>',
+                ],
+                'knowledgebase' => [
+                    'title' => __('Knowledge Base', 'js-support-ticket'),
+                    'description' => __('Stop losing productivity on repetitive queries, build your knowledge base.', 'js-support-ticket'),
+                    'plugin_file' => 'js-support-ticket-knowledgebase/js-support-ticket-knowledgebase.php',
+                    'url' => 'https://jshelpdesk.com/product/knowledge-base/',
+                    'icon_bg' => 'js-hlpdsk-addon-icon-bg-teal',
+                    'icon_svg' => '<svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v13m0-13C10.832 5.405 9.172 5 7.5 5S4.168 5.405 3 6.253v13C4.168 18.405 5.828 18 7.5 18s3.332.405 4.5 1.253m0-13C13.168 5.405 14.828 5 16.5 5s3.332.405 4.5 1.253v13C19.832 18.405 18.172 18 16.5 18s-3.332.405-4.5 1.253" /></svg>',
+                ],
+                'maxticket' => [
+                    'title' => __('Max Tickets', 'js-support-ticket'),
+                    'description' => __('Enables admin to set N numbers of tickets for users and agents separately.', 'js-support-ticket'),
+                    'plugin_file' => 'js-support-ticket-maxticket/js-support-ticket-maxticket.php',
+                    'url' => 'https://jshelpdesk.com/product/max-ticket/',
+                    'icon_bg' => 'js-hlpdsk-addon-icon-bg-blue',
+                    'icon_svg' => '<svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 19V9m6 10V5m6 14V3M3 21h18" /></svg>',
+                ],
+                'mergeticket' => [
+                    'title' => __('Merge Tickets', 'js-support-ticket'),
+                    'description' => __('Enables agents to merge two tickets of the same user into one instead of dealing with the same issue on many tickets.', 'js-support-ticket'),
+                    'plugin_file' => 'js-support-ticket-mergeticket/js-support-ticket-mergeticket.php',
+                    'url' => 'https://jshelpdesk.com/product/merge-ticket/',
+                    'icon_bg' => 'js-hlpdsk-addon-icon-bg-pink',
+                    'icon_svg' => '<svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" /></svg>',
+                ],
+                'overdue' => [
+                    'title' => __('Overdue', 'js-support-ticket'),
+                    'description' => __('Defines rules or set specific intervals of time to make ticket auto overdue.', 'js-support-ticket'),
+                    'plugin_file' => 'js-support-ticket-overdue/js-support-ticket-overdue.php',
+                    'url' => 'https://jshelpdesk.com/product/overdue/',
+                    'icon_bg' => 'js-hlpdsk-addon-icon-bg-teal',
+                    'icon_svg' => '<svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>',
+                ],
+                'smtp' => [
+                    'title' => __('SMTP', 'js-support-ticket'),
+                    'description' => __('SMTP enables you to add custom mail protocol to send and receive emails.', 'js-support-ticket'),
+                    'plugin_file' => 'js-support-ticket-smtp/js-support-ticket-smtp.php',
+                    'url' => 'https://jshelpdesk.com/product/smtp/',
+                    'icon_bg' => 'js-hlpdsk-addon-icon-bg-red',
+                    'icon_svg' => '<svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8m-18 8h18a2 2 0 002-2V6a2 2 0 00-2-2H3a2 2 0 00-2 2v8a2 2 0 002 2z" /></svg>',
+                ],
+                'tickethistory' => [
+                    'title' => __('Ticket History', 'js-support-ticket'),
+                    'description' => __('Displays complete ticket history along with the ticket status, currently assigned user and other actions performed on each ticket.', 'js-support-ticket'),
+                    'plugin_file' => 'js-support-ticket-tickethistory/js-support-ticket-tickethistory.php',
+                    'url' => 'https://jshelpdesk.com/product/ticket-history/',
+                    'icon_bg' => 'js-hlpdsk-addon-icon-bg-orange',
+                    'icon_svg' => '<svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4 5a2 2 0 012-2h10a2 2 0 012 2v14a2 2 0 01-2 2H6a2 2 0 01-2-2V5z" /><path stroke-linecap="round" stroke-linejoin="round" d="M8 7h8M8 11h8M8 15h6" /></svg>',
+                ],
+                'cannedresponses' => [
+                    'title' => __('Canned Responses', 'js-support-ticket'),
+                    'description' => __('Pre-populated messages allow support agents to respond quickly.', 'js-support-ticket'),
+                    'plugin_file' => 'js-support-ticket-cannedresponses/js-support-ticket-cannedresponses.php',
+                    'url' => 'https://jshelpdesk.com/product/canned-responses/',
+                    'icon_bg' => 'js-hlpdsk-addon-icon-bg-red',
+                    'icon_svg' => '<svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v13m0-13C10.832 5.405 9.172 5 7.5 5S4.168 5.405 3 6.253v13C4.168 18.405 5.828 18 7.5 18s3.332.405 4.5 1.253m0-13C13.168 5.405 14.828 5 16.5 5s3.332.405 4.5 1.253v13C19.832 18.405 18.172 18 16.5 18s-3.332.405-4.5 1.253" /></svg>',
+                ],
+                'emailpiping' => [
+                    'title' => __('Email Piping', 'js-support-ticket'),
+                    'description' => __('Enables users to reply to the tickets via email without login.', 'js-support-ticket'),
+                    'plugin_file' => 'js-support-ticket-emailpiping/js-support-ticket-emailpiping.php',
+                    'url' => 'https://jshelpdesk.com/product/email-piping/',
+                    'icon_bg' => 'js-hlpdsk-addon-icon-bg-blue',
+                    'icon_svg' => '<svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3 8l9 6 9-6v8a2 2 0 01-2 2H5a2 2 0 01-2-2V8z" /><path stroke-linecap="round" stroke-linejoin="round" d="M12 14v6m0 0l-2-2m2 2l2-2" /></svg>',
+                ],
+                'timetracking' => [
+                    'title' => __('Time Tracking', 'js-support-ticket'),
+                    'description' => __('Track the time spent on each ticket by each agent and each reply.', 'js-support-ticket'),
+                    'plugin_file' => 'js-support-ticket-timetracking/js-support-ticket-timetracking.php',
+                    'url' => 'https://jshelpdesk.com/product/time-tracking/',
+                    'icon_bg' => 'js-hlpdsk-addon-icon-bg-pink',
+                    'icon_svg' => '<svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>',
+                ],
+                'useroptions' => [
+                    'title' => __('User Options', 'js-support-ticket'),
+                    'description' => __('User options enable you to add Google Re-captcha or JS Help Desk Re-captcha for a registration form.', 'js-support-ticket'),
+                    'plugin_file' => 'js-support-ticket-useroptions/js-support-ticket-useroptions.php',
+                    'url' => 'https://jshelpdesk.com/product/user-options/',
+                    'icon_bg' => 'js-hlpdsk-addon-icon-bg-teal',
+                    'icon_svg' => '<svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" /></svg>',
+                ],
+                'actions' => [
+                    'title' => __('Ticket Actions', 'js-support-ticket'),
+                    'description' => __('Get multiple action options on each ticket like Print Ticket, Lock Ticket, Transfer ticket, etc.', 'js-support-ticket'),
+                    'plugin_file' => 'js-support-ticket-actions/js-support-ticket-actions.php',
+                    'url' => 'https://jshelpdesk.com/product/actions/',
+                    'icon_bg' => 'js-hlpdsk-addon-icon-bg-red',
+                    'icon_svg' => '<svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v13m0-13C10.832 5.405 9.172 5 7.5 5S4.168 5.405 3 6.253v13C4.168 18.405 5.828 18 7.5 18s3.332.405 4.5 1.253m0-13C13.168 5.405 14.828 5 16.5 5s3.332.405 4.5 1.253v13C19.832 18.405 18.172 18 16.5 18s-3.332.405-4.5 1.253" /></svg>',
+                ],
+                'announcement' => [
+                    'title' => __('Announcements', 'js-support-ticket'),
+                    'description' => __('Make unlimited announcements associated with the support system.', 'js-support-ticket'),
+                    'plugin_file' => 'js-support-ticket-announcement/js-support-ticket-announcement.php',
+                    'url' => 'https://jshelpdesk.com/product/announcements/',
+                    'icon_bg' => 'js-hlpdsk-addon-icon-bg-orange',
+                    'icon_svg' => '<svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15 8.5V5a2 2 0 00-2-2l-7 4H3v6h3l7 4a2 2 0 002-2v-3.5M19 10v4m0-4a2 2 0 010 4" /></svg>',
+                ],
+                'banemail' => [
+                    'title' => __('Ban Emails', 'js-support-ticket'),
+                    'description' => __('It allows you to block the email of any user to restrict him to create new tickets.', 'js-support-ticket'),
+                    'plugin_file' => 'js-support-ticket-banemail/js-support-ticket-banemail.php',
+                    'url' => 'https://jshelpdesk.com/product/ban-email/',
+                    'icon_bg' => 'js-hlpdsk-addon-icon-bg-blue',
+                    'icon_svg' => '<svg focusable="false" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3 8l9 6 9-6M3 8v8a2 2 0 002 2h14a2 2 0 002-2V8" /><circle cx="18" cy="18" r="4" /><path stroke-linecap="round" stroke-linejoin="round" d="M16.5 16.5L19.5 19.5" /></svg>',
+                ],
+                'notification' => [
+                    'title' => __('Desktop Notification', 'js-support-ticket'),
+                    'description' => __('The Desktop notifications will keep you up to date about anything happens on your support system.', 'js-support-ticket'),
+                    'plugin_file' => 'js-support-ticket-notification/js-support-ticket-notification.php',
+                    'url' => 'https://jshelpdesk.com/product/desktop-notification/',
+                    'icon_bg' => 'js-hlpdsk-addon-icon-bg-pink',
+                    'icon_svg' => '<svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V4a2 2 0 10-4 0v1.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" /></svg>',
+                ],
+                'export' => [
+                    'title' => __('Export', 'js-support-ticket'),
+                    'description' => __('Save the ticket as a PDF in your system and able to export all data.', 'js-support-ticket'),
+                    'plugin_file' => 'js-support-ticket-export/js-support-ticket-export.php',
+                    'url' => 'https://jshelpdesk.com/product/export/',
+                    'icon_bg' => 'js-hlpdsk-addon-icon-bg-teal',
+                    'icon_svg' => '<svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v2a2 2 0 002 2h12a2 2 0 002-2v-2m-4-4l-4 4m0 0l-4-4m4 4V4" /></svg>',
+                ],
+                'download' => [
+                    'title' => __('Downloads', 'js-support-ticket'),
+                    'description' => __('Create downloads to ensure the user to get downloads from downloads.', 'js-support-ticket'),
+                    'plugin_file' => 'js-support-ticket-download/js-support-ticket-download.php',
+                    'url' => 'https://jshelpdesk.com/product/downloads/',
+                    'icon_bg' => 'js-hlpdsk-addon-icon-bg-red',
+                    'icon_svg' => '<svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3 7h5l2 2h11a1 1 0 011 1v8a2 2 0 01-2 2H5a2 2 0 01-2-2V7z" /><path stroke-linecap="round" stroke-linejoin="round" d="M12 10v6m0 0l-3-3m3 3l3-3" /></svg>',
+                ],
+                'faq' => [
+                    'title' => __("FAQ's", 'js-support-ticket'),
+                    'description' => __('Add FAQs to drastically reduce the number of common questions.', 'js-support-ticket'),
+                    'plugin_file' => 'js-support-ticket-faq/js-support-ticket-faq.php',
+                    'url' => 'https://jshelpdesk.com/product/faq/',
+                    'icon_bg' => 'js-hlpdsk-addon-icon-bg-orange',
+                    'icon_svg' => '<svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M7 8h10a2 2 0 012 2v7a2 2 0 01-2 2H9l-4 3v-3H5a2 2 0 01-2-2v-7a2 2 0 012-2z" /><path stroke-linecap="round" stroke-linejoin="round" d="M12 11.5a1.5 1.5 0 113 0c0 .75-.5 1.5-1.5 1.5v1m0 2h.01" /></svg>',
+                ],
+                'dashboardwidgets' => [
+                    'title' => __('Dashboard Widgets', 'js-support-ticket'),
+                    'description' => __('Get immediate data of your support operations as soon as you log into your WordPress administration area.', 'js-support-ticket'),
+                    'plugin_file' => 'js-support-ticket-dashboardwidgets/js-support-ticket-dashboardwidgets.php',
+                    'url' => 'https://jshelpdesk.com/product/admin-widget/',
+                    'icon_bg' => 'js-hlpdsk-addon-icon-bg-blue',
+                    'icon_svg' => '<svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" /></svg>',
+                ],
+                'mail' => [
+                    'title' => __('Internal Mail', 'js-support-ticket'),
+                    'description' => __('Use an internal email to send emails to one agent to another agent.', 'js-support-ticket'),
+                    'plugin_file' => 'js-support-ticket-mail/js-support-ticket-mail.php',
+                    'url' => 'https://jshelpdesk.com/product/internal-mail/',
+                    'icon_bg' => 'js-hlpdsk-addon-icon-bg-pink',
+                    'icon_svg' => '<svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3 8l9 6 9-6M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /><path stroke-linecap="round" stroke-linejoin="round" d="M15 12h4m0 0l-2-2m2 2l-2 2" /></svg>',
+                ],
+                'widgets' => [
+                    'title' => __('Front-End Widgets', 'js-support-ticket'),
+                    'description' => __('Widgets in WordPress allow you to add content and features in the widgetized areas of your theme.', 'js-support-ticket'),
+                    'plugin_file' => 'js-support-ticket-widgets/js-support-ticket-widgets.php',
+                    'url' => 'https://jshelpdesk.com/product/widget/',
+                    'icon_bg' => 'js-hlpdsk-addon-icon-bg-teal',
+                    'icon_svg' => '<svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1" /><rect x="14" y="3" width="7" height="7" rx="1" /><rect x="3" y="14" width="7" height="7" rx="1" /><rect x="14" y="14" width="7" height="7" rx="1" /></svg>',
+                ],
+                'woocommerce' => [
+                    'title' => __('WooCommerce', 'js-support-ticket'),
+                    'description' => __('JS Help Desk WooCommerce provides the much-needed bridge between your WooCommerce store and the JS Help Desk.', 'js-support-ticket'),
+                    'plugin_file' => 'js-support-ticket-woocommerce/js-support-ticket-woocommerce.php',
+                    'url' => 'https://jshelpdesk.com/product/woocommerce/',
+                    'icon_bg' => 'js-hlpdsk-addon-icon-bg-red',
+                    'icon_svg' => '<svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1" /><circle cx="20" cy="21" r="1" /><path stroke-linecap="round" stroke-linejoin="round" d="M1 1h4l2.68 13.39a2 2 0 002 1.61h9.72a2 2 0 002-1.61L23 6H6" /></svg>',
+                ],
+                'privatecredentials' => [
+                    'title' => __('Private Credentials', 'js-support-ticket'),
+                    'description' => __('Collect your customer\'s private data, sensitive information from credit card to health information and store them encrypted.', 'js-support-ticket'),
+                    'plugin_file' => 'js-support-ticket-privatecredentials/js-support-ticket-privatecredentials.php',
+                    'url' => 'https://jshelpdesk.com/product/private-credentials/',
+                    'icon_bg' => 'js-hlpdsk-addon-icon-bg-orange',
+                    'icon_svg' => '<svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 11c-1.657 0-3 1.343-3 3v4h6v-4c0-1.657-1.343-3-3-3z" /><path stroke-linecap="round" stroke-linejoin="round" d="M7 11V7a5 5 0 0110 0v4" /><rect x="5" y="11" width="14" height="10" rx="2" ry="2" /></svg>',
+                ],
+                'envatovalidation' => [
+                    'title' => __('Envato Validation', 'js-support-ticket'),
+                    'description' => __('Without valid Envato, license clients won\'t be able to open a new ticket.', 'js-support-ticket'),
+                    'plugin_file' => 'js-support-ticket-envatovalidation/js-support-ticket-envatovalidation.php',
+                    'url' => 'https://jshelpdesk.com/product/envato/',
+                    'icon_bg' => 'js-hlpdsk-addon-icon-bg-blue',
+                    'icon_svg' => '<svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4" /><circle cx="12" cy="12" r="9" /></svg>',
+                ],
+                'mailchimp' => [
+                    'title' => __('Mailchimp', 'js-support-ticket'),
+                    'description' => __('Adds the option to the registration form for prompting new users to subscribe to your email list.', 'js-support-ticket'),
+                    'plugin_file' => 'js-support-ticket-mailchimp/js-support-ticket-mailchimp.php',
+                    'url' => 'https://jshelpdesk.com/product/mail-chimp/',
+                    'icon_bg' => 'js-hlpdsk-addon-icon-bg-pink',
+                    'icon_svg' => '<svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3 8l9 6 9-6M4 6h16a2 2 0 012 2v10a2 2 0 01-2 2H4a2 2 0 01-2-2V8a2 2 0 012-2z" /><path stroke-linecap="round" stroke-linejoin="round" d="M7 20l-2-2m12 2l2-2" /></svg>',
+                ],
+                'paidsupport' => [
+                    'title' => __('Paid Support', 'js-support-ticket'),
+                    'description' => __('Paid Support is the easiest way to integrate and manage payments for your tickets.', 'js-support-ticket'),
+                    'plugin_file' => 'js-support-ticket-paidsupport/js-support-ticket-paidsupport.php',
+                    'url' => 'https://jshelpdesk.com/product/paid-support/',
+                    'icon_bg' => 'js-hlpdsk-addon-icon-bg-teal',
+                    'icon_svg' => '<svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" /><path stroke-linecap="round" stroke-linejoin="round" d="M12 8v8m0 0c1.5 0 2.5-.5 2.5-1.5S13.5 13 12 13m0 3c-1.5 0-2.5-.5-2.5-1.5S10.5 13 12 13" /></svg>',
+                ],
+                'easydigitaldownloads' => [
+                    'title' => __('Easy Digital Downloads', 'js-support-ticket'),
+                    'description' => __('EDD offers customers to open new tickets just one click from their EDD account.', 'js-support-ticket'),
+                    'plugin_file' => 'js-support-ticket-easydigitaldownloads/js-support-ticket-easydigitaldownloads.php',
+                    'url' => 'https://jshelpdesk.com/product/easy-digital-download/',
+                    'icon_bg' => 'js-hlpdsk-addon-icon-bg-red',
+                    'icon_svg' => '<svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 12v6m0 0l-3-3m3 3l3-3m4-2V7a2 2 0 00-2-2h-4l-2-2H8a2 2 0 00-2 2v12a2 2 0 002 2h8" /></svg>',
+                ],
+                'multilanguageemailtemplates' => [
+                    'title' => __('Multi Language Email Templates', 'js-support-ticket'),
+                    'description' => __('It allows to create language-based email templates for all JS Help Desk email templates.', 'js-support-ticket'),
+                    'plugin_file' => 'js-support-ticket-multilanguageemailtemplates/js-support-ticket-multilanguageemailtemplates.php',
+                    'url' => 'https://jshelpdesk.com/product/multi-language-email-templates',
+                    'icon_bg' => 'js-hlpdsk-addon-icon-bg-orange',
+                    'icon_svg' => '<svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /><path stroke-linecap="round" stroke-linejoin="round" d="M7 4h4v3H7V4zm6 0h4v3h-4V4z" /></svg>',
+                ],
+                'emailcc' => [
+                    'title' => __('Email Cc', 'js-support-ticket'),
+                    'description' => __('CC(Carbon Copy) - the people who should know about the information which is being shared and the people included are able to see who is there in the list.', 'js-support-ticket'),
+                    'plugin_file' => 'js-support-ticket-emailcc/js-support-ticket-emailcc.php',
+                    'url' => 'https://jshelpdesk.com/product/emailcc/',
+                    'icon_bg' => 'js-hlpdsk-addon-icon-bg-blue',
+                    'icon_svg' => '<svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /><circle cx="7" cy="19" r="2" /><circle cx="17" cy="19" r="2" /></svg>',
+                ],
+                'multiform' => [
+                    'title' => __('Multiform', 'js-support-ticket'),
+                    'description' => __('It allows user to add more than one form based on requirements.', 'js-support-ticket'),
+                    'plugin_file' => 'js-support-ticket-multiform/js-support-ticket-multiform.php',
+                    'url' => 'https://jshelpdesk.com/product/multi-forms/',
+                    'icon_bg' => 'js-hlpdsk-addon-icon-bg-pink',
+                    'icon_svg' => '<svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><rect x="4" y="4" width="12" height="12" rx="2" ry="2"/><rect x="8" y="8" width="12" height="12" rx="2" ry="2"/></svg>',
+                ],
+                'agentautoassign' => [
+                    'title' => __('Agent Auto Assign', 'js-support-ticket'),
+                    'description' => __('When a ticket is created, an appropriate agent is automatically assigned to the ticket and it is moved to the Assigned state.', 'js-support-ticket'),
+                    'plugin_file' => 'js-support-ticket-agentautoassign/js-support-ticket-agentautoassign.php',
+                    'url' => 'https://jshelpdesk.com/product/agentautoassign/',
+                    'icon_bg' => 'js-hlpdsk-addon-icon-bg-teal',
+                    'icon_svg' => '<svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="3"/><path d="M6 21v-2a6 6 0 0112 0v2"/><path d="M19.4 15a2 2 0 010-6"/><path d="M4.6 9a2 2 0 010 6"/></svg>',
+                ],
+            ];
+
+            // Filter out active addons to get a list of inactive ones
+            $inactive_addons = array_filter($available_addons, function($addon_slug) {
+                return !in_array($addon_slug, jssupportticket::$_active_addons);
+            }, ARRAY_FILTER_USE_KEY);
+
+            // Show the section only if there are inactive addons
+            if (count($inactive_addons) > 0) {?>
+                <section id="available-addons" class="bg-white p-5 rounded-xl shadow-lg">
+                    <h3 class="text-lg font-bold text-gray-800 mb-4"><?php echo esc_html__('Available Addons', 'js-support-ticket'); ?></h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        <?php
+                        // Show the first 6 inactive addons
+                        $addons_to_display = array_slice($inactive_addons, 0, 6, true);
+                        foreach ($addons_to_display as $addon_slug => $addon) {
+                            $plugininfo = JSSTCheckPluginInfo($addon['plugin_file']);
+                            if($plugininfo['availability'] == "1"){
+                                $button_text = $plugininfo['text'];
+                                $button_url = "plugins.php?s=".$addon_slug."&plugin_status=inactive";
+                                $button_class = "flex flex-col text-center w-full bg-gradient-to-r from-green-500 to-green-700 text-white font-semibold py-2 px-4 rounded-lg hover:from-green-600 hover:to-green-800 transition-colors hover:text-white";
+                            }elseif($plugininfo['availability'] == "0"){
+                                $button_text = isset($plugininfo['text']) ? $plugininfo['text'] : __('View Details', 'js-support-ticket');
+                                $button_url = $addon['url'];
+                                $button_class = "flex flex-col text-center w-full bg-gradient-to-r from-green-500 to-green-700 text-white font-semibold py-2 px-4 rounded-lg hover:from-green-600 hover:to-green-800 transition-colors hover:text-white";
+                            } else {
+                                // Default to install button
+                                $button_text = __('Install Now', 'js-support-ticket');
+                                $button_url = "#";
+                                $button_class = "flex-1 flex flex-col text-center w-full bg-[#4f46e5] text-white font-semibold py-2 px-4 rounded-lg hover:bg-indigo-700 transition-colors hover:text-white";
+                            }
+                            ?>
+                            <div class="bg-white p-5 rounded-xl shadow-lg flex flex-col items-start space-y-3 border border-gray-200">
+                                <div class="flex items-center space-x-3">
+                                    <div class="bg-gray-100 p-3 rounded-lg">
+                                        <?php echo wp_kses( $addon['icon_svg'] , JSST_ALLOWED_TAGS); ?>
+                                    </div>
+                                    <h4 class="font-bold text-gray-800">
+                                        <?php echo esc_html($addon['title']); ?>
+                                    </h4>
+                                </div>
+                                <p class="text-sm text-gray-600 flex-grow">
+                                    <?php echo esc_html($addon['description']); ?>
+                                </p>
+                                <a href="<?php echo esc_url($button_url); ?>" class="<?php echo esc_html($button_class); ?>">
+                                    <?php echo esc_html($button_text); ?>
+                                </a>
+                            </div>
+                        <?php } ?>
+                    </div>
+                    <?php if (count($inactive_addons) > 6) { ?>
+                        <a href="?page=jssupportticket&jstlay=addonstatus" class="flex flex-col text-center w-full mt-4 bg-gray-100 text-gray-700 font-semibold py-2 px-4 rounded-lg hover:bg-gray-200 transition-colors"><?php echo esc_html__('View All Addons', 'js-support-ticket'); ?></a>
+                    <?php } ?>
+                </section>
+                <?php
+            } ?>
+            <section id="quick-installation-guide">
+                <h3 class="text-lg font-bold text-gray-800 mb-4"><?php echo esc_html__('Quick Installation Guide', 'js-support-ticket'); ?></h3>
+                <div class="bg-white p-5 rounded-xl shadow-lg">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-4">
+                        <div class="accordion-item">
+                            <button class="accordion-header w-full flex justify-between items-center text-left py-3 px-4 font-semibold text-gray-700 bg-gray-50 rounded-lg hover:bg-gray-100 focus:outline-none">
+                                <span><?php echo esc_html__('How to setup of the Help Desk', 'js-support-ticket'); ?></span>
+                                <svg class="w-5 h-5 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                            </button>
+                            <div class="accordion-content">
+                                <a target="blank" href="https://www.youtube.com/watch?v=Honmzw892ZE" class="p-4 flex flex-col md:flex-row gap-4 items-center">
+                                    <img src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/admincp/videos/setup.jpg" alt="<?php echo esc_attr__('Video thumbnail', 'js-support-ticket'); ?>" class="rounded-lg shadow-md w-full md:w-1/3" onerror="this.onerror=null;this.src='<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/admincp/videos/setup.jpg'">
+                                    <p class="text-sm text-gray-600"><?php echo esc_html__('Learn how to set up your Help Desk quickly and get it ready for use.', 'js-support-ticket'); ?></p>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <button class="accordion-header w-full flex justify-between items-center text-left py-3 px-4 font-semibold text-gray-700 bg-gray-50 rounded-lg hover:bg-gray-100 focus:outline-none">
+                                <span><?php echo esc_html__('How to Setup System Emails', 'js-support-ticket'); ?></span>
+                                <svg class="w-5 h-5 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                            </button>
+                            <div class="accordion-content">
+                                <a target="blank" href="https://www.youtube.com/watch?v=dNYnZw8WK0M" class="p-4 flex flex-col md:flex-row gap-4 items-center">
+                                    <img src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/admincp/videos/system-email.jpg" alt="<?php echo esc_attr__('Video thumbnail', 'js-support-ticket'); ?>" class="rounded-lg shadow-md w-full md:w-1/3" onerror="this.onerror=null;this.src='<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/admincp/videos/system-email.jpg'">
+                                    <p class="text-sm text-gray-600"><?php echo esc_html__('Learn how to setup out going notification in the best Help Desk plugin for WordPress', 'js-support-ticket'); ?></p>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <button class="accordion-header w-full flex justify-between items-center text-left py-3 px-4 font-semibold text-gray-700 bg-gray-50 rounded-lg hover:bg-gray-100 focus:outline-none">
+                                <span><?php echo esc_html__('How to Create a Ticket', 'js-support-ticket'); ?></span>
+                                <svg class="w-5 h-5 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                            </button>
+                            <div class="accordion-content">
+                                <a target="blank" href="https://www.youtube.com/watch?v=zmQ4bpqSYnk" class="p-4 flex flex-col md:flex-row gap-4 items-center">
+                                    <img src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/admincp/videos/create-icket.jpg" alt="<?php echo esc_attr__('Video thumbnail', 'js-support-ticket'); ?>" class="rounded-lg shadow-md w-full md:w-1/3" onerror="this.onerror=null;this.src='<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/admincp/videos/create-icket.jpg'">
+                                    <p class="text-sm text-gray-600"><?php echo esc_html__('A simple walkthrough of the ticket creation process for both user and administrator.', 'js-support-ticket'); ?></p>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <button class="accordion-header w-full flex justify-between items-center text-left py-3 px-4 font-semibold text-gray-700 bg-gray-50 rounded-lg hover:bg-gray-100 focus:outline-none">
+                                <span><?php echo esc_html__('How to Set Email Notifications', 'js-support-ticket'); ?></span>
+                                <svg class="w-5 h-5 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                            </button>
+                            <div class="accordion-content">
+                                <a target="blank" href="https://www.youtube.com/watch?v=LvsrMtEqRms" class="p-4 flex flex-col md:flex-row gap-4 items-center">
+                                    <img src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/admincp/videos/emial-notifications.jpg" alt="<?php echo esc_attr__('Video thumbnail', 'js-support-ticket'); ?>" class="rounded-lg shadow-md w-full md:w-1/3" onerror="this.onerror=null;this.src='<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/admincp/videos/emial-notifications.jpg'">
+                                    <p class="text-sm text-gray-600"><?php echo esc_html__('Configure your email notification settings to stay updated on ticket activity.', 'js-support-ticket'); ?></p>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <button class="accordion-header w-full flex justify-between items-center text-left py-3 px-4 font-semibold text-gray-700 bg-gray-50 rounded-lg hover:bg-gray-100 focus:outline-none">
+                                <span><?php echo esc_html__('How to Setup Custom Fields', 'js-support-ticket'); ?></span>
+                                <svg class="w-5 h-5 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                            </button>
+                            <div class="accordion-content">
+                                <a target="blank" href="https://www.youtube.com/watch?v=c7whQ6F70yM" class="p-4 flex flex-col md:flex-row gap-4 items-center">
+                                    <img src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/admincp/videos/custom-fields.jpg" alt="<?php echo esc_attr__('Video thumbnail', 'js-support-ticket'); ?>" class="rounded-lg shadow-md w-full md:w-1/3" onerror="this.onerror=null;this.src='<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/admincp/videos/custom-fields.jpg'">
+                                    <p class="text-sm text-gray-600"><?php echo esc_html__('Learn how to add custom fields to your ticket forms to collect more specific information.', 'js-support-ticket'); ?></p>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
             </div>
+    </main>
 
+    <div id="side-menu" class="fixed top-4 right-0 h-full w-96 bg-gray-50 shadow-2xl p-8 transform translate-x-full overflow-y-auto">
+        <div class="flex justify-between items-center mb-8">
+            <h2 class="text-2xl font-bold text-gray-800"><?php echo esc_html__('Customize Dashboard', 'js-support-ticket'); ?></h2>
+            <button id="close-menu" class="text-gray-500 hover:text-gray-800 transition-colors">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+            </button>
         </div>
-        <?php
-        $jssupportticket_js = '
-            jQuery(document).ready(function () {
-                jQuery("span.dashboard-icon").find("span.download").hover(function(){
-                    jQuery(this).find("span").toggle("slide");
-                    }, function(){
-                    jQuery(this).find("span").toggle("slide");
-                });
-
-                jQuery("a.js-hlpdsk-like-card").click(function(e){
-                    e.preventDefault();
-                    var list = jQuery(this).attr("data-tab-number");
-                    var oldUrl = jQuery(this).attr("href");
-                    var newUrl = oldUrl+"&list="+list;
-                    window.location.href = newUrl;
-                });
-            });
-        ';
-        wp_add_inline_script('js-support-ticket-main-js', $jssupportticket_js);
-        ?>
+        <div id="menu-items" class="space-y-4"></div>
     </div>
-</div>
 <?php
+/**
+ * =================================================================================
+ * PHP DATA & CONSOLIDATED INLINE JAVASCRIPT
+ * =================================================================================
+ */
+
+$sections = [];
+$sections[] = [ 'id' => 'ticket-analysis', 'name' => esc_html__('Ticket Analysis (Last 7 Days)', 'js-support-ticket') ];
+$sections[] = [ 'id' => 'today-ticket-distribution', 'name' => esc_html__("Todays Ticket Distribution", 'js-support-ticket') ];
+$sections[] = [ 'id' => 'recent-tickets', 'name' => esc_html__('Recent Tickets', 'js-support-ticket') ];
+
+// Addon-dependent
+if ( in_array('agent', jssupportticket::$_active_addons) ) {
+    $sections[] = [ 'id' => 'unassigned-tickets', 'name' => esc_html__('Unassigned Tickets', 'js-support-ticket') ];
+    $sections[] = [ 'id' => 'staff-performance', 'name' => esc_html__('Agent Performance', 'js-support-ticket') ];
+}
+if ( in_array('actions', jssupportticket::$_active_addons) ) {
+    $sections[] = [ 'id' => 'ticket-action-history', 'name' => esc_html__('Ticket Action History', 'js-support-ticket') ];
+}
+if ( in_array('cannedresponses', jssupportticket::$_active_addons) ) {
+    $sections[] = [ 'id' => 'canned-responses', 'name' => esc_html__('Recent Canned Responses', 'js-support-ticket') ];
+}
+if ( in_array('timetracking', jssupportticket::$_active_addons) ) {
+    $sections[] = [ 'id' => 'active-timers', 'name' => esc_html__('Active Timers', 'js-support-ticket') ];
+}
+
+// Always available (rest)
+$sections[] = [ 'id' => 'recently-replied', 'name' => esc_html__('Recently Replied', 'js-support-ticket') ];
+$sections[] = [ 'id' => 'recently-closed', 'name' => esc_html__('Recently Closed', 'js-support-ticket') ];
+$sections[] = [ 'id' => 'tickets-by-priority', 'name' => esc_html__('Tickets by Priority', 'js-support-ticket') ];
+$sections[] = [ 'id' => 'tickets-by-department', 'name' => esc_html__('Tickets by Department', 'js-support-ticket') ];
+$sections[] = [ 'id' => 'open-tickets-by-age', 'name' => esc_html__('Open Tickets by Age', 'js-support-ticket') ];
+$sections[] = [ 'id' => 'most-active-customers', 'name' => esc_html__('Most Active Customers', 'js-support-ticket') ];
+$sections[] = [ 'id' => 'tickets-by-status', 'name' => esc_html__('Tickets by Status', 'js-support-ticket') ];
+$sections[] = [ 'id' => 'tickets-by-products', 'name' => esc_html__('Tickets by Products', 'js-support-ticket') ];
+$sections[] = [ 'id' => 'available-addons', 'name' => esc_html__('Available Addons', 'js-support-ticket') ];
+$sections[] = [ 'id' => 'quick-installation-guide', 'name' => esc_html__('Quick Installation Guide', 'js-support-ticket') ];
 $nonce = wp_create_nonce('jssupportticket_admin_nonce');
-$jssupportticket_js_charts = "
-    jQuery(document).ready(function() {
-        // Chart: Today's Ticket Distribution (Radial Bar)
-        const todayTicketsOptions = {
-            series: ". json_encode([jssupportticket::$_data['today_distribution']['new'] ?? 0, jssupportticket::$_data['today_distribution']['answered'] ?? 0, jssupportticket::$_data['today_distribution']['pending'] ?? 0]) .",
-            chart: { height: 300, type: 'radialBar', toolbar: { show: false } },
-            plotOptions: {
-                radialBar: {
-                    dataLabels: {
-                        name: { fontSize: '18px' },
-                        value: {
-                            fontSize: '16px',
-                            formatter: (val) => parseInt(val) + '',
-                        },
-                        total: {
-                            show: true,
-                            label: 'Total',
-                            formatter: (w) =>
-                                w.globals.seriesTotals.reduce((a, b) => a + b, 0),
-                        },
-                    },
-                },
-            },
-            labels: ['New', 'Answered', 'Pending'],
-            colors: ['#3b82f6', '#10b981', '#f59e0b'],
-            legend: { show: false },
-        };
-        new ApexCharts(
-            document.querySelector('#todayTicketsChart'),
-            todayTicketsOptions
-        ).render();
 
-        // Chart: Ticket Trends (Area Chart)
-        const statisticsOptions = {
-            series: [
-                { name: 'Open', data: ". json_encode(is_array(jssupportticket::$_data['ticket_trends']['new']) ? jssupportticket::$_data['ticket_trends']['new'] : []) ." },
-                { name: 'Pending', data: ". json_encode(is_array(jssupportticket::$_data['ticket_trends']['pending']) ? jssupportticket::$_data['ticket_trends']['pending'] : []) ." },
-                { name: 'Answered', data: ". json_encode(is_array(jssupportticket::$_data['ticket_trends']['answered']) ? jssupportticket::$_data['ticket_trends']['answered'] : []) ." },
-            ],
-            chart: {
-                type: 'area', // Corrected to area chart type
-                height: 350,
-                toolbar: { show: false },
-                zoom: { enabled: false },
-            },
-            dataLabels: {
-                enabled: false, // Hiding data labels for cleaner area chart.
-            },
-            stroke: {
-                curve: 'smooth', // Using a smooth curve for better area visualization.
-                show: true,
-                width: 2,
-            },
-            xaxis: {
-                type: 'datetime',
-                categories: ". json_encode(is_array(jssupportticket::$_data['ticket_trends']['dates']) ? jssupportticket::$_data['ticket_trends']['dates'] : []) .",
-                axisBorder: { show: false },
-                axisTicks: { show: false },
-                labels: {
-                    format: 'dd MMM',
-                    style: { colors: '#6b7280', fontSize: '12px' },
-                },
-            },
-            yaxis: {
-                title: {
-                    text: 'Tickets',
-                },
-            },
-            fill: {
-                opacity: 1,
-            },
-            tooltip: {
-                y: {
-                    formatter: function (val) {
-                        return val + ' tickets';
-                    },
-                },
-            },
-            colors: ['#06b6d4', '#a855f7', '#f59e0b'],
-            legend: { show: false },
-            grid: {
-                show: true,
-                borderColor: '#e5e7eb',
-                strokeDashArray: 4,
-                xaxis: { lines: { show: true } },
-                yaxis: { lines: { show: false } },
-            },
-        };
-        new ApexCharts(
-            document.querySelector('#statisticsChart'),
-            statisticsOptions
-        ).render();
+$jssupportticket_inline_js = '
+    jQuery(document).ready(function ($) {
+        
+        // Original jQuery event handlers
+        jQuery("span.dashboard-icon").find("span.download").hover(function(){
+            jQuery(this).find("span").toggle("slide");
+        }, function(){
+            jQuery(this).find("span").toggle("slide");
+        });
+        jQuery("a.js-hlpdsk-like-card").click(function(e){
+            e.preventDefault();
+            var list = jQuery(this).attr("data-tab-number");
+            var oldUrl = jQuery(this).attr("href");
+            var newUrl = oldUrl + "&list=" + list;
+            window.location.href = newUrl;
+        });
 
-        // Chart: Tickets by Status (Horizontal Bar)
-        const statusOptions = {
-            series: [{
-                name: 'Tickets',
-                data: ". json_encode(array_map('intval', array_column(jssupportticket::$_data['tickets_by_status'] ?? [], 'ticket_count'))) ."
-            }],
-            chart: { type: 'bar', height: 300, toolbar: { show: false } },
-            xaxis: {
-                categories: ". json_encode(array_column(jssupportticket::$_data['tickets_by_status'] ?? [], 'status')) .",
-                labels: {
-                    show: true,
-                    style: { colors: '#6b7280', fontSize: '12px' },
-                },
-                axisBorder: { show: false },
-                axisTicks: { show: false },
-            },
-            yaxis: {
-                show: true,
-                labels: { style: { colors: '#6b7280', fontSize: '12px' } },
-            },
-            plotOptions: {
-                bar: {
-                    horizontal: true,
-                    borderRadius: 8,
-                    distributed: true, // ✅ multiple colors enabled
-                    dataLabels: { position: 'top' },
-                },
-            },
-            //  Now colors array will apply to each bar
-            colors: ". json_encode(array_column(jssupportticket::$_data['tickets_by_status'] ?? [], 'statusbgcolour')) .",
-            dataLabels: {
-                enabled: true,
-                offsetX: -15,
-                style: { fontSize: '12px', colors: ['#fff'] },
-            },
-            legend: { show: false },
-            grid: {
-                show: true,
-                borderColor: '#e5e7eb',
-                strokeDashArray: 4,
-                xaxis: { lines: { show: true } },
-                yaxis: { lines: { show: false } },
-            },
-        };
-        new ApexCharts(
-            document.querySelector('#statusChart'),
-            statusOptions
-        ).render();
-
-        // Chart: Tickets by Priorities (Pie)
-        const prioritiesOptions = {
-            series: ". json_encode(array_map('intval', array_column(jssupportticket::$_data['tickets_by_priorities'] ?? [], 'ticket_count'))) .",
-            chart: { type: 'pie', height: 300, toolbar: { show: false } },
-            labels: ". json_encode(array_column(jssupportticket::$_data['tickets_by_priorities'] ?? [], 'priority')) .",
-            colors: ". json_encode(array_column(jssupportticket::$_data['tickets_by_priorities'] ?? [], 'prioritycolour')) .",
-            legend: { show: false },
-            dataLabels: {
-                enabled: true,
-                formatter: (val) => val.toFixed(1) + '%',
-            },
-        };
-        new ApexCharts(
-            document.querySelector('#prioritiesChart'),
-            prioritiesOptions
-        ).render();
-
-        // Chart: Tickets by Department (Horizontal Bar)
-        const departmentOptions = {
-            series: [{
-                name: 'Tickets',
-                data: ". json_encode(array_map('intval', array_column(jssupportticket::$_data['tickets_by_department'] ?? [], 'ticket_count'))) ."
-            }],
-            chart: { type: 'bar', height: 300, toolbar: { show: false } },
-            xaxis: {
-                categories: ". json_encode(array_column(jssupportticket::$_data['tickets_by_department'] ?? [], 'departmentname')) .",
-                labels: {
-                    show: true,
-                    style: { colors: '#6b7280', fontSize: '12px' },
-                },
-                axisBorder: { show: false },
-                axisTicks: { show: false },
-            },
-            yaxis: {
-                show: true,
-                labels: { style: { colors: '#6b7280', fontSize: '12px' } },
-            },
-            plotOptions: {
-                bar: {
-                    horizontal: true,
-                    borderRadius: 8,
-                    distributed: true, // ✅ Added to allow multiple colors
-                    dataLabels: { position: 'top' },
-                },
-            },
-            colors: ". json_encode(jssupportticket::$_data['department_colors'] ?? []) .",
-            dataLabels: {
-                enabled: true,
-                offsetX: -15,
-                style: { fontSize: '12px', colors: ['#fff'] },
-            },
-            legend: { show: false },
-            grid: {
-                show: true,
-                borderColor: '#e5e7eb',
-                strokeDashArray: 4,
-                xaxis: { lines: { show: true } },
-                yaxis: { lines: { show: false } },
-            },
-        };
-        new ApexCharts(
-            document.querySelector('#departmentChart'),
-            departmentOptions
-        ).render();
-
-        // Chart: Tickets by Products (Bar)
-        const productsOptions = {
-            series: [{ name: 'Tickets', data: ". json_encode(array_map('intval', array_column(jssupportticket::$_data['tickets_by_products'] ?? [], 'ticket_count'))) ." }],
-            chart: { type: 'bar', height: 300, toolbar: { show: false } },
-            plotOptions: {
-                bar: {
-                    borderRadius: 8,
-                    distributed: true   // ✅ Each bar gets a different color
-                }
-            },
-            dataLabels: { enabled: false },
-            xaxis: {
-                categories: ". json_encode(array_column(jssupportticket::$_data['tickets_by_products'] ?? [], 'product')) .",
-                labels: { style: { colors: '#6b7280', fontSize: '12px' } },
-                axisBorder: { show: false },
-                axisTicks: { show: false },
-            },
-            yaxis: { labels: { style: { colors: '#6b7280', fontSize: '12px' } } },
-            grid: {
-                show: true,
-                borderColor: '#e5e7eb',
-                strokeDashArray: 4,
-                yaxis: { lines: { show: true } },
-                xaxis: { lines: { show: false } },
-            },
-            colors: ". json_encode(jssupportticket::$_data['product_colors'] ?? ['#008FFB', '#00E396', '#FEB019', '#FF4560']) .",
-            legend: { show: false },
-        };
-        new ApexCharts(
-            document.querySelector('#productsChart'),
-            productsOptions
-        ).render();
-
-        // Start of new panel JS
-        const customizeBtn = jQuery('#js-customize-dashboard-btn');
-        const panelOverlay = jQuery('#js-dashboard-customize-panel-overlay');
-        const panel = jQuery('#js-dashboard-customize-panel');
-        const closeBtn = jQuery('#js-close-customize-panel');
-        const saveBtn = jQuery('#js-save-customize-panel');
-        const preferencesData = " . json_encode(jssupportticket::$_data['jssupportticket_admin_charts_visibility']) . ";
-
-        function loadPreferencesIntoPanel() {
-            for (const chartId in preferencesData) {
-                const toggle = jQuery('#toggle-' + chartId);
-                if (toggle.length) {
-                    toggle.prop('checked', preferencesData[chartId]);
-                }
-            }
-        }
-
-        function savePreferences() {
-            const preferences = {};
-            jQuery('#js-customize-form input[type=\"checkbox\"]').each(function() {
-                preferences[this.name] = this.checked;
-            });
-
-            jQuery.ajax({
-                url: ajaxurl,
-                type: 'POST',
+        // Chart.js script for Ticket Analysis
+        if(document.getElementById("ticketAnalysisChart")){
+            const ctx = document.getElementById("ticketAnalysisChart").getContext("2d");
+            const labels = ' . wp_json_encode(jssupportticket::$_data['ticket_trends']['dates']) . ';
+            const ticketAnalysisChart = new Chart(ctx, {
+                type: "bar",
                 data: {
-                    action: 'save_dashboard_preferences',
-                    nonce: '" . esc_js($nonce) . "',
-                    preferences: preferences,
+                    labels: labels,
+                    datasets: [
+                        {
+                            label: "' . esc_html__('Open', 'js-support-ticket') . '",
+                            data: ' . wp_json_encode(jssupportticket::$_data['ticket_trends']['new']) . ',
+                            backgroundColor: "' . esc_js(jssupportticket::$_data['today_distribution']['colors']['new']) . '",
+                        },
+                        {
+                            label: "' . esc_html__('Pending', 'js-support-ticket') . '",
+                            data: ' . wp_json_encode(jssupportticket::$_data['ticket_trends']['pending']) . ',
+                            backgroundColor: "' . esc_js(jssupportticket::$_data['today_distribution']['colors']['pending']) . '",
+                        },
+                        {
+                            label: "' . esc_html__('Answered', 'js-support-ticket') . '",
+                            data: ' . wp_json_encode(jssupportticket::$_data['ticket_trends']['answered']) . ',
+                            backgroundColor: "' . esc_js(jssupportticket::$_data['today_distribution']['colors']['answered']) . '",
+                        },
+                        {
+                            label: "' . esc_html__('Closed', 'js-support-ticket') . '",
+                            data: ' . wp_json_encode(jssupportticket::$_data['ticket_trends']['closed']) . ',
+                            backgroundColor: "' . esc_js(jssupportticket::$_data['today_distribution']['colors']['closed']) . '",
+                        },
+                    ]
                 },
-                success: function(response) {
-                    if (response.success) {
-                        location.reload();
-                    } else {
-                        console.error('Failed to save preferences.');
-                    }
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    interaction: { mode: "index", intersect: false },
+                    scales: {
+                        x: { stacked: true },
+                        y: {
+                            stacked: true,
+                            beginAtZero: true,
+                            title: { display: true, text: "' . esc_html__('Number of Tickets', 'js-support-ticket') . '" }
+                        }
+                    },
+                    plugins: { legend: { position: "top" }, tooltip: { mode: "index", intersect: false } }
                 }
             });
-            panelOverlay.removeClass('is-visible');
-            panel.removeClass('is-visible');
         }
 
-        customizeBtn.on('click', function() {
-            loadPreferencesIntoPanel();
-            panelOverlay.addClass('is-visible');
-            panel.addClass('is-visible');
-        });
-
-        closeBtn.on('click', function() {
-            panelOverlay.removeClass('is-visible');
-            panel.removeClass('is-visible');
-        });
-
-        panelOverlay.on('click', function(e) {
-            if (e.target.id === 'js-dashboard-customize-panel-overlay') {
-                panelOverlay.removeClass('is-visible');
-                panel.removeClass('is-visible');
-            }
-        });
-
-        saveBtn.on('click', savePreferences);
-
-        function applyInitialLayout() {
-            const initialPreferences = " . json_encode(jssupportticket::$_data['jssupportticket_admin_charts_visibility']) . ";
-            const chartSections = {
-                'ticket_trends': jQuery('#statisticsChart').closest('.js-hlpdsk-card'),
-                'today_distribution': jQuery('#todayTicketsChart').closest('.js-hlpdsk-card'),
-                'tickets_by_status': jQuery('#statusChart').closest('.js-hlpdsk-card'),
-                'tickets_by_priorities': jQuery('#prioritiesChart').closest('.js-hlpdsk-card'),
-                'tickets_by_department': jQuery('#departmentChart').closest('.js-hlpdsk-card'),
-                'tickets_by_products': jQuery('#productsChart').closest('.js-hlpdsk-card'),
-                'latest_tickets': jQuery('.latest-tickets-card'),
-                'agent_workload': jQuery('.js-hlpdsk-work-load-card'),
-                'ticket_history': jQuery('.js-hlpdsk-ticket-history-card'),
-            };
-
-            for (const chartName in initialPreferences) {
-                if (initialPreferences.hasOwnProperty(chartName) && initialPreferences[chartName] === false) {
-                    if (chartSections[chartName]) {
-                        chartSections[chartName].closest('.js-hlpdsk-section-container').addClass('hidden');
+            // Chart.js script for Today\'s Ticket Distribution
+            if(document.getElementById("todayTicketDistributionChart")){
+                const todayCtx = document.getElementById("todayTicketDistributionChart").getContext("2d");
+                const todayTicketDistributionChart = new Chart(todayCtx, {
+                    type: "doughnut",
+                    data: {
+                        labels: ["' . esc_html__('New', 'js-support-ticket') . '", "' . esc_html__('Answered', 'js-support-ticket') . '", "' . esc_html__('Pending', 'js-support-ticket') . '"],
+                        datasets: [{
+                            label: "' . esc_html__('Today Tickets', 'js-support-ticket') . '",
+                            data: [
+                                ' . intval(jssupportticket::$_data['today_distribution']['new']) . ',
+                                ' . intval(jssupportticket::$_data['today_distribution']['answered']) . ',
+                                ' . intval(jssupportticket::$_data['today_distribution']['pending']) . '
+                            ],
+                            backgroundColor: [
+                                "' . esc_js(jssupportticket::$_data['today_distribution']['colors']['new']) . '",
+                                "' . esc_js(jssupportticket::$_data['today_distribution']['colors']['answered']) . '",
+                                "' . esc_js(jssupportticket::$_data['today_distribution']['colors']['pending']) . '"
+                            ],
+                            borderColor: "#fff",
+                            borderWidth: 3,
+                            hoverOffset: 4
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        cutout: "70%",
+                        plugins: {
+                            legend: {
+                                position: "bottom",
+                                labels: { padding: 20, boxWidth: 12, font: { size: 14 } }
+                            }
+                        }
                     }
-                }
+                });
             }
+
+            // Chart.js script for Tickets by Priority
+            if(document.getElementById("ticketsByPriorityChart")){
+                const priorityCtx = document.getElementById("ticketsByPriorityChart").getContext("2d");
+                const ticketsByPriorityChart = new Chart(priorityCtx, {
+                    type: "doughnut",
+                    data: {
+                        labels: ' . wp_json_encode(jssupportticket::$_data['tickets_by_priorities']['labels']) . ',
+                        datasets: [{
+                            label: "' . esc_html__('Tickets by Priority', 'js-support-ticket') . '",
+                            data: ' . wp_json_encode(jssupportticket::$_data['tickets_by_priorities']['data']) . ',
+                            backgroundColor: ' . wp_json_encode(jssupportticket::$_data['tickets_by_priorities']['colors']) . ',
+                            borderColor: "#fff",
+                            borderWidth: 3,
+                            hoverOffset: 4
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        cutout: "70%",
+                        plugins: {
+                            legend: {
+                                position: "bottom",
+                                labels: { padding: 20, boxWidth: 12, font: { size: 14 } }
+                            }
+                        }
+                    }
+                });
+            }
+
+            // Chart.js script for Tickets by Department
+            if(document.getElementById("ticketsByDepartmentChart")){
+                const departmentCtx = document.getElementById("ticketsByDepartmentChart").getContext("2d");
+                const ticketsByDepartmentChart = new Chart(departmentCtx, {
+                    type: "doughnut",
+                    data: {
+                        labels: ' . wp_json_encode(jssupportticket::$_data['tickets_by_department']['labels']) . ',
+                        datasets: [{
+                            label: "' . esc_html__('Tickets by Department', 'js-support-ticket') . '",
+                            data: ' . wp_json_encode(jssupportticket::$_data['tickets_by_department']['data']) . ',
+                            backgroundColor: ' . wp_json_encode(jssupportticket::$_data['tickets_by_department']['colors']) . ',
+                            borderColor: "#fff",
+                            borderWidth: 3,
+                            hoverOffset: 4
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        cutout: "70%",
+                        plugins: {
+                            legend: {
+                                position: "bottom",
+                                labels: { padding: 20, boxWidth: 12, font: { size: 14 } }
+                            }
+                        }
+                    }
+                });
+            }
+
+            // Chart.js script for Open Tickets by Age
+            if(document.getElementById("openTicketsByAgeChart")){
+                const openTicketsCtx = document.getElementById("openTicketsByAgeChart").getContext("2d");
+                const openTicketsByAgeChart = new Chart(openTicketsCtx, {
+                    type: "bar",
+                    data: {
+                        labels: [
+                            "' . esc_html__('Today', 'js-support-ticket') . '",
+                            "' . esc_html__('Yesterday', 'js-support-ticket') . '",
+                            "' . esc_html__('2 days ago', 'js-support-ticket') . '",
+                            "' . esc_html__('3 days ago', 'js-support-ticket') . '",
+                            "' . esc_html__('4 days ago', 'js-support-ticket') . '",
+                            "' . esc_html__('5 days ago', 'js-support-ticket') . '",
+                            "' . esc_html__('6+ days ago', 'js-support-ticket') . '"
+                        ],
+                        datasets: [{
+                            label: "' . esc_html__('Number of Open Tickets', 'js-support-ticket') . '",
+                            data: [
+                                ' . (int) jssupportticket::$_data['tickets_by_age']['today'] . ',
+                                ' . (int) jssupportticket::$_data['tickets_by_age']['yesterday'] . ',
+                                ' . (int) jssupportticket::$_data['tickets_by_age']['two_days'] . ',
+                                ' . (int) jssupportticket::$_data['tickets_by_age']['three_days'] . ',
+                                ' . (int) jssupportticket::$_data['tickets_by_age']['four_days'] . ',
+                                ' . (int) jssupportticket::$_data['tickets_by_age']['five_days'] . ',
+                                ' . (int) jssupportticket::$_data['tickets_by_age']['six_plus'] . '
+                            ],
+                            backgroundColor: "rgba(59, 130, 246, 0.7)",
+                            borderColor: "rgba(59, 130, 246, 1)",
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        indexAxis: "y",
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        scales: {
+                            x: {
+                                beginAtZero: true,
+                                title: { display: true, text: "' . esc_html__('Number of Tickets', 'js-support-ticket') . '" }
+                            }
+                        },
+                        plugins: {
+                            legend: { display: false }
+                        }
+                    }
+                });
+            }
+
+            // Chart.js script for Tickets by Status
+            if(document.getElementById("ticketsByStatusChart")){
+                const statusCtx = document.getElementById("ticketsByStatusChart").getContext("2d");
+                const ticketsByStatusChart = new Chart(statusCtx, {
+                    type: "doughnut",
+                    data: {
+                        labels: ' . wp_json_encode(jssupportticket::$_data['tickets_by_status']['labels']) . ',
+                        datasets: [{
+                            label: "' . esc_html__('Tickets by Status', 'js-support-ticket') . '",
+                            data: ' . wp_json_encode(jssupportticket::$_data['tickets_by_status']['data']) . ',
+                            backgroundColor: ' . wp_json_encode(jssupportticket::$_data['tickets_by_status']['colors']) . ',
+                            borderColor: "#fff",
+                            borderWidth: 3,
+                            hoverOffset: 4
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        cutout: "70%",
+                        plugins: {
+                            legend: {
+                                position: "bottom",
+                                labels: { padding: 20, boxWidth: 12, font: { size: 14 } }
+                            }
+                        }
+                    }
+                });
+            }
+
+            // Chart.js script for Tickets by Products
+            if(document.getElementById("ticketsByProductsChart")){
+                const productsCtx = document.getElementById("ticketsByProductsChart").getContext("2d");
+                const ticketsByProductsChart = new Chart(productsCtx, {
+                    type: "bar",
+                    data: {
+                        labels: ' . wp_json_encode(jssupportticket::$_data['tickets_by_products']['labels']) . ',
+                        datasets: [{
+                            label: "' . esc_html__('Tickets by Products', 'js-support-ticket') . '",
+                            data: ' . wp_json_encode(jssupportticket::$_data['tickets_by_products']['data']) . ',
+                            backgroundColor: ' . wp_json_encode(jssupportticket::$_data['tickets_by_products']['colors']) . ',
+                            borderColor: ' . wp_json_encode(jssupportticket::$_data['tickets_by_products']['border']) . ',
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                title: { display: true, text: "' . esc_html__('Number of Tickets', 'js-support-ticket') . '" }
+                            }
+                        },
+                        plugins: {
+                            legend: { display: false }
+                        }
+                    }
+                });
+            }
+
+            // Accordion script for Quick Installation Guide
+        const accordionHeaders = document.querySelectorAll(".accordion-header");
+        accordionHeaders.forEach(header => {
+            header.addEventListener("click", () => {
+                const content = header.nextElementSibling;
+                const icon = header.querySelector("svg");
+                const currentlyOpen = content.style.maxHeight;
+                document.querySelectorAll(".accordion-content").forEach(c => c.style.maxHeight = null);
+                document.querySelectorAll(".accordion-header svg").forEach(i => i.classList.remove("rotate-180"));
+                if (!currentlyOpen) {
+                    content.style.maxHeight = content.scrollHeight + "px";
+                    icon.classList.add("rotate-180");
+                }
+            });
+        });
+
+        // Dashboard Chart Visibility Toggle Logic
+        const savedPreferences = ' . json_encode(get_option('jssupportticket_admin_charts_visibility', [])) . ';
+        const ajaxNonce = "' . esc_js($nonce) . '";
+        const ajaxUrl = "' . esc_url(admin_url('admin-ajax.php')) . '";
+        const sections = ' . json_encode($sections) . ';
+        
+        const menuToggle = document.getElementById("menu-toggle");
+        const closeMenu = document.getElementById("close-menu");
+        const sideMenu = document.getElementById("side-menu");
+        const menuItemsContainer = document.getElementById("menu-items");
+
+        if (menuItemsContainer) {
+            sections.forEach(section => {
+                const menuItem = document.createElement("div");
+                menuItem.classList.add("flex", "items-center", "justify-between", "p-4", "bg-white", "rounded-lg", "shadow-sm");
+                const label = document.createElement("span");
+                label.textContent = section.name;
+                label.classList.add("text-gray-700", "font-medium");
+                menuItem.appendChild(label);
+                const toggleContainer = document.createElement("label");
+                toggleContainer.classList.add("relative", "inline-flex", "items-center", "cursor-pointer");
+                const input = document.createElement("input");
+                input.type = "checkbox";
+                input.classList.add("sr-only", "peer");
+                input.dataset.sectionId = section.id;
+                input.checked = savedPreferences.hasOwnProperty(section.id) ? savedPreferences[section.id] : true;
+                const toggleBg = document.createElement("div");
+                const toggleClasses = [
+                    "w-11", "h-6", "bg-gray-200", "peer-focus:outline-none",
+                    "peer-focus:ring-4", "peer-focus:ring-indigo-300",
+                    "rounded-full", "peer", "peer-checked:after:translate-x-full",
+                    "peer-checked:after:border-white", "after:content-[\'\']",
+                    "after:absolute", "after:top-[2px]", "after:left-[2px]",
+                    "after:bg-white", "after:border-gray-300", "after:border",
+                    "after:rounded-full", "after:h-5", "after:w-5", "after:transition-all",
+                    "peer-checked:bg-indigo-600"
+                ];
+                toggleBg.className = toggleClasses.join(" ");
+                toggleContainer.appendChild(input);
+                toggleContainer.appendChild(toggleBg);
+                menuItem.appendChild(toggleContainer);
+                menuItemsContainer.appendChild(menuItem);
+                const sectionElement = document.getElementById(section.id);
+                if (sectionElement) {
+                    sectionElement.style.display = input.checked ? "" : "none";
+                }
+                input.addEventListener("change", (event) => {
+                    const sectionId = event.target.dataset.sectionId;
+                    const sectionElement = document.getElementById(sectionId);
+                    if (sectionElement) {
+                        if (!sectionElement.parentElement.classList.contains("layout-grid")) {
+                            sectionElement.style.display = event.target.checked ? "" : "none";
+                        } else {
+                            sectionElement.style.display = event.target.checked ? "" : "none";
+                            const parentGrid = sectionElement.closest(".layout-grid");
+                            if (parentGrid) {
+                                const visibleChildren = Array.from(parentGrid.children).filter(child => child.style.display !== "none");
+                                if (visibleChildren.length === 0) {
+                                    parentGrid.style.display = "none";
+                                } else {
+                                    parentGrid.style.display = "";
+                                    if (visibleChildren.length === 1) {
+                                        parentGrid.classList.remove("lg:grid-cols-2");
+                                        parentGrid.classList.add("lg:grid-cols-1");
+                                    } else {
+                                        parentGrid.classList.remove("lg:grid-cols-1");
+                                        parentGrid.classList.add("lg:grid-cols-2");
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    const preferences = { ...savedPreferences };
+                    preferences[sectionId] = event.target.checked;
+                    jQuery.ajax({
+                        url: ajaxUrl,
+                        type: "POST",
+                        data: {
+                            action: "save_dashboard_preferences",
+                            nonce: ajaxNonce,
+                            preferences: preferences,
+                        },
+                        success: function(response) {
+                            if (response.success) {
+                                Object.assign(savedPreferences, preferences);
+                                console.log("Preferences updated");
+                            } else {
+                                console.error("Failed to save preferences.");
+                            }
+                        }
+                    });
+                });
+            });
         }
-        applyInitialLayout();
+        if(menuToggle && sideMenu){
+            menuToggle.addEventListener("click", () => {
+                sideMenu.classList.remove("translate-x-full");
+            });
+        }
+        if(closeMenu && sideMenu){
+            closeMenu.addEventListener("click", () => {
+                sideMenu.classList.add("translate-x-full");
+            });
+        }
     });
-";
-// Add the inline script to the page
-wp_add_inline_script('js-support-ticket-main-js', $jssupportticket_js_charts);
+';
+
+// Attach the consolidated inline script to our main handle. This is the final step.
+wp_add_inline_script('js-support-ticket-dashboard-scripts', $jssupportticket_inline_js);
 ?>
+</div>
