@@ -2,7 +2,7 @@
 div#multiformpopup div.multiformpopup-header-close-img {right: auto;left: 22px;}
 div#multiformpopup div.js-ticket-table-body div.js-ticket-multiform-row div.js-ticket-table-body-col {text-align: right;}
 div#jsstadmin-leftmenu {left: auto;right: 0;}
-div#jsstadmin-data {padding-left: 0;padding-right: 70px;}
+div#jsstadmin-data {padding-left: 0;padding-right: 0px;}
 #jsstadmin-wrapper:not(.menu-collasped-active) #jsstadmin-leftmenu .jsstadmin-sidebar-menu li.treeview:hover .jsstadmin-sidebar-submenu {left: auto;right: 60px;}
 #jsstadmin-wrapper:not(.menu-collasped-active) #jsstadmin-leftmenu .jsstadmin-sidebar-menu li.treeview:hover .jsstadmin-sidebar-submenu::before {left: auto;right: -5px;}
 ul.jsstadmin-sidebar-menu li a:not(.jsst_js-install-btn) {border-left: unset;border-right: 3px solid transparent;}
@@ -132,7 +132,7 @@ div#theme_heading div a {float: left;margin-right: 0;margin-left: 20px;}
 div.js_theme_section {float: right;}
 div.js_effect_preview {padding-left: 0;padding-right: 10px;}
 div#jsst-header div#jsst-header-heading {float: right;}
-div#jsst-header span.jsst-header-tab {margin-right: 0 !important;margin-left: 7px;}
+div#jsst-header span.jsst-header-tab {margin-right: 0 !important;}
 div#jsst-header span.jsst-header-tab.js-ticket-loginlogoutclass {float: left !important;}
 div.js-ticket-sorting span.js-ticket-sorting-link {float: right;}
 div.js-ticket-wrapper div.js-ticket-data span.js-ticket-status {right: auto !important;left: 2%;}
@@ -321,20 +321,15 @@ div.jssticketadmin-help-btn {margin-left: unset;margin-right: 5px;}
 .jssupportticket-review-box-popup-content-wrp .jssupportticket-review-box-popup-content-left, .jssupportticket-review-box-popup-content-wrp .jssupportticket-review-box-popup-content-right {float: right;}
 button.jssupportticket-close-review-box-popup, .jssupportticket-thanks-box-popup .js-ticket-review-thanks-btn {left: 10px;right: auto;}
 /* admin theme page */
-.js-admin-theme-page div.js-ticket-myticket-link-myticket{float: right;}
-.js-admin-theme-page div.js-ticket-search-wrp div.js-ticket-form-wrp form.js-filter-form div.js-filter-wrapper div.js-filter-form-fields-wrp{float: right;}
-.js-admin-theme-page div.js-ticket-search-wrp div.js-ticket-form-wrp form.js-filter-form div.js-filter-wrapper div.js-filter-form-fields-wrp input.js-ticket-input-field{margin-left: 10px;margin-right: 0;} 
-.js-admin-theme-page div.js-ticket-search-wrp div.js-ticket-form-wrp form.js-filter-form div.js-filter-button-wrp .js-search-filter-btn{float: right;margin-left: 10px;margin-right: 0;}
-.js-admin-theme-page div.js-ticket-search-wrp div.js-ticket-form-wrp form.js-filter-form div.js-filter-button-wrp input.js-ticket-search-btn{float: right;margin-left: 10px;margin-right: 0;}
-.js-admin-theme-page div.js-ticket-search-wrp div.js-ticket-form-wrp form.js-filter-form div.js-filter-button-wrp input.js-ticket-reset-btn{margin-right:0;margin-left: 6px;}
-.js-admin-theme-page div.js-ticket-sorting-left{float: right;}
-.js-admin-theme-page div.js-ticket-sorting-right div.js-ticket-sort{float: left;}
-.js-admin-theme-page div.js-ticket-sorting-right{float: left;}
-.js-admin-theme-page div.js-ticket-sorting-right div.js-ticket-sort select.js-ticket-sorting-select{float: right;}
-.js-admin-theme-page div.js-ticket-wrapper div.js-ticket-data span.js-ticket-status{right: auto !important;left: 119px;}
-.js-admin-theme-page div.js-ticket-wrapper div.js-ticket-data span.js-ticket-status.replied-status{right:auto !important;}
-.js-admin-theme-page span.js-ticket-wrapper-textcolor{right: auto;left: 20px;}
-.js-admin-theme-page div.js-ticket-wrapper div.js-ticket-data span.js-ticket-status img.ticketstatusimage.one{margin-left: 62px;}
+.jsstadmin_themepaage_mainwrp #jsstadmin-data-wrp div#theme_heading div a{margin-left: 0;}
+.jsstadmin_themepaage_mainwrp #jsstadmin-data-wrp .job_sharing_text::before{margin-right: 0;margin-left: 12px;}
+.jsstadmin_themepaage_mainwrp #jsstadmin-data-wrp .color_portion input[type="text"]{padding-right: 60px;padding-left: 10px;}
+.jsstadmin_themepaage_mainwrp .js_themepreview_colorwrp span.js_themepreview_color{left: auto;right: 0;margin-right: 0;margin-left: 8px;border-radius: 8px;border-top-left-radius: 0px;border-bottom-left-radius: 0px;}
+.jsstadmin_themepaage_mainwrp div#jsst-header span.jsst-header-tab.js-ticket-loginlogoutclass{margin-right: auto !important;}
+.jsstadmin_themepaage_mainwrp span.js_themepreview_color{border-right: 0px !important;border-left: 1px solid #DEE2E6 !important;}
+.jsstadmin_themepaage_mainwrp div.js-ticket-search-wrp div.js-ticket-form-wrp form.js-filter-form div.js-filter-button-wrp input.js-ticket-search-btn{margin-left: 0;}
+.jsstadmin_themepaage_mainwrp#jsstadmin-wrapper div#js_job_wrapper div.js_theme_wrapper div.theme_platte div.color_wrapper span.theme_name{float: right;}
+.jsstadmin_themepaage_mainwrp#jsstadmin-wrapper div#js_job_wrapper div.js_theme_wrapper div.theme_platte div.color_wrapper a.preview{margin-right: 0;margin-left: 20px;}
 /* update key */
 div#jsstadmin-data-wrp .jsstadmin-update-key-form .jsstadmin-update-key-wrp .jsstadmin-update-key-slctall-addonswrp .jsstadmin-update-key-slctall-addon-checkbox-wrp{margin-left: 0;margin-right: auto;}
 /* AI reply*/
@@ -432,6 +427,8 @@ div#jsst-main-wrapper div.jsst-config-topheading span.jsst-config-steps{margin-l
     /* admin theme page */
     .js-admin-theme-page div.js-ticket-search-wrp div.js-ticket-form-wrp form.js-filter-form div.js-filter-button-wrp input.js-ticket-reset-btn{margin-left: 0;}
     .js-admin-theme-page div.js-ticket-search-wrp div.js-ticket-form-wrp form.js-filter-form div.js-filter-button-wrp .js-search-filter-btn{margin-right: 1px;}
+    .jsstadmin_themepaage_mainwrp div#jsst-header span.jsst-header-tab{margin-left: 0;}
+
     /* update key */
     div#jsstadmin-data-wrp .jsstadmin-update-key-form .jsstadmin-update-key-wrp .jsstadmin-update-key-slctall-addonswrp .jsstadmin-update-key-slctall-addon-checkbox-wrp{margin-right: 0;}
 
@@ -452,6 +449,7 @@ div#jsst-main-wrapper div.jsst-config-topheading span.jsst-config-steps{margin-l
     div#jsstadmin-data-wrp .jssticketadmin-help-btm .jssticketadmin-help-btm-wrp .jssticketadmin-help-btm-cnt a img {margin-left: unset !important;}
     /* admin theme pge */
     div.js_theme_section{float: initial;}
+    .jsstadmin_themepaage_mainwrp div#jsstadmin-data{width: 100%;}
     /* addon status */
     div.jsstadmin-addons-list-data .jsstadmin-autoupdte-addons-cardwrp .jsstadmin-autoupdte-addons-card-btn{margin-left: 0;}
     /* new cp addon update message */

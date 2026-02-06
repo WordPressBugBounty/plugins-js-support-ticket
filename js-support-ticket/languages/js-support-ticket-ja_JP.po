@@ -8761,3 +8761,45 @@ msgstr "Save＆Next"
 
 msgid "For enhanced security change encryption method in %1$s on line %2$s"
 msgstr "強化されたセキュリティ変更暗号化のための％1 $ sオンライン％2 $ s"
+
+msgid "Changes may require cache clearing to take effect."
+msgstr "変更を有効にするには、キャッシュのクリアが必要になる場合があります。"
+
+msgid "How Long Will My Support Stay Active?"
+msgstr "私のサポートはどのくらいの期間有効ですか?"
+
+msgid "I Can’t Log Into My Account"
+msgstr "アカウントにログインできません"
+
+msgid "I Want to Upgrade My Plan — How Can I Do It?"
+msgstr "プランをアップグレードしたいのですが、どうすればよいですか?"
+
+msgid "I’m Not Getting Access to My Subscription"
+msgstr "サブスクリプションにアクセスできません"
+
+msgid "Ticket ID Or Email Address Or Subject"
+msgstr "チケットIDまたはメールアドレスまたは件名"
+
+msgid "Sophie Martinez"
+msgstr "ソフィー・マルティネス"
+
+msgid "Daniel Brooks"
+msgstr "ダニエル・ブルックス"
+
+msgid "Liam Turner"
+msgstr "リアム・ターナー"
+
+msgid "Emily Harper"
+msgstr "エミリー・ハーパー"
+
+msgid "Noah Bennett"
+msgstr "ノア・ベネット"
+
+msgid "Olivia Chase"
+msgstr "オリビア・チェイス"
+
+msgid "Maya Collins"
+msgstr "マヤ・コリンズ"
+
+msgid "Ethan Reynolds"
+msgstr "イーサン・レイノルズ"

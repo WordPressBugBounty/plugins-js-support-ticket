@@ -3,11 +3,11 @@
     die('Restricted Access');
 }
     require_once JSST_PLUGIN_PATH.'includes/addon-updater/jsstupdater.php';
-    $JS_SUPPORTTICKETUpdater  = new JS_SUPPORTTICKETUpdater();
-    $cdnversiondata = $JS_SUPPORTTICKETUpdater->getPluginVersionDataFromCDN();
-    $not_installed = array();
+    $jsst_JS_SUPPORTTICKETUpdater  = new JS_SUPPORTTICKETUpdater();
+    $jsst_cdnversiondata = $jsst_JS_SUPPORTTICKETUpdater->getPluginVersionDataFromCDN();
+    $jsst_not_installed = array();
 
-    $jssupportticket_addons = JSSTincluder::getJSModel('jssupportticket')->getJSSTAddonsArray();
+    $jsst_jssupportticket_addons = JSSTincluder::getJSModel('jssupportticket')->getJSSTAddonsArray();
 ?>
 <?php JSSTmessage::getMessage(); ?>
 <div id="jsstadmin-wrapper">
@@ -19,20 +19,20 @@
     	    <div id="jsstadmin-wrapper-top-left">
     	        <div id="jsstadmin-breadcrunbs">
     	            <ul>
-    	                <li><a href="?page=jssupportticket" title="<?php echo esc_html(__('Dashboard','js-support-ticket')); ?>"><?php echo esc_html(__('Dashboard','js-support-ticket')); ?></a></li>
+    	                <li><a href="?page=jssupportticket" title="<?php echo esc_attr(__('Dashboard','js-support-ticket')); ?>"><?php echo esc_html(__('Dashboard','js-support-ticket')); ?></a></li>
     	                <li><?php echo esc_html(__('Addons Status','js-support-ticket')); ?></li>
     	            </ul>
     	        </div>
     	    </div>
     	    <div id="jsstadmin-wrapper-top-right">
     	        <div id="jsstadmin-config-btn">
-    	            <a href="<?php echo esc_url(admin_url("admin.php?page=configuration")); ?>" title="<?php echo esc_html(__('Configuration','js-support-ticket')); ?>">
-    	                <img alt="<?php echo esc_html(__('Configuration','js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/config.png" />
+    	            <a href="<?php echo esc_url(admin_url("admin.php?page=configuration")); ?>" title="<?php echo esc_attr(__('Configuration','js-support-ticket')); ?>">
+    	                <img alt = "<?php echo esc_attr(__('Configuration','js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/config.png" />
     	            </a>
     	        </div>
     	        <div id="jsstadmin-config-btn" class="jssticketadmin-help-btn">
-    	            <a href="<?php echo esc_url(admin_url("admin.php?page=jssupportticket&jstlay=help")); ?>" title="<?php echo esc_html(__('Help','js-support-ticket')); ?>">
-    	                <img alt="<?php echo esc_html(__('Help','js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/help.png" />
+    	            <a href="<?php echo esc_url(admin_url("admin.php?page=jssupportticket&jstlay=help")); ?>" title="<?php echo esc_attr(__('Help','js-support-ticket')); ?>">
+    	                <img alt = "<?php echo esc_attr(__('Help','js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/help.png" />
     	            </a>
     	        </div>
     	        <div id="jsstadmin-vers-txt">
@@ -51,7 +51,7 @@
             </div>
             <div class="jsstadmin-autoupdte-addons-cardwrp">
                 <div class="jsstadmin-autoupdte-addons-cardlogo">
-                    <img alt="<?php echo esc_html(__('Auto Update','js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/addon-images/addons/icon.png" />
+                    <img alt = "<?php echo esc_attr(__('Auto Update','js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/addon-images/addons/icon.png" />
                 </div>
                 <div class="jsstadmin-autoupdte-addons-cardwrp-rightwrp">
                     <div class="jsstadmin-autoupdte-addons-card-title">
@@ -78,49 +78,49 @@
     		<!-- admin addons status -->
             <div id="black_wrapper_translation"></div>
             <div id="jstran_loading">
-                <img alt="<?php echo esc_html(__('spinning wheel','js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/spinning-wheel.gif" />
+                <img alt = "<?php echo esc_attr(__('spinning wheel','js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/spinning-wheel.gif" />
             </div>
             <div class="jsstadmin-addons-list-wrp">
                 <?php
-                $installed_plugins = get_plugins();
+                $jsst_installed_plugins = get_plugins();
                 ?>
                 <?php
-                    foreach ($jssupportticket_addons as $key1 => $value1) {
-                        $matched = 0;
-                        $version = "";
-                        foreach ($installed_plugins as $name => $value) {
-                            $install_plugin_name = str_replace(".php","",basename($name));
-                            if($key1 == $install_plugin_name){
-                                $matched = 1;
-                                $version = $value["Version"];
-                                $install_plugin_matched_name = $install_plugin_name;
+                    foreach ($jsst_jssupportticket_addons as $jsst_key1 => $jsst_value1) {
+                        $jsst_matched = 0;
+                        $jsst_version = "";
+                        foreach ($jsst_installed_plugins as $jsst_name => $jsst_value) {
+                            $jsst_install_plugin_name = str_replace(".php","",basename($jsst_name));
+                            if($jsst_key1 == $jsst_install_plugin_name){
+                                $jsst_matched = 1;
+                                $jsst_version = $jsst_value["Version"];
+                                $jsst_install_plugin_matched_name = $jsst_install_plugin_name;
                             }
                         }
-                        $status = '';
-                        if($matched == 1){ //installed
-                            $name = $key1;
-                            $title = $value1['title'];
-                            $img = str_replace("js-support-ticket-", "", $key1).'.png';
-                            $cdnavailableversion = "";
-                            foreach ($cdnversiondata as $cdnname => $cdnversion) {
-                                $install_plugin_name_simple = str_replace("-", "", $install_plugin_matched_name);
-                                if($cdnname == str_replace("-", "", $install_plugin_matched_name)){
-                                    if($cdnversion > $version){ // new version available
-                                        $status = 'update_available';
-                                        $cdnavailableversion = $cdnversion;
+                        $jsst_status = '';
+                        if($jsst_matched == 1){ //installed
+                            $jsst_name = $jsst_key1;
+                            $jsst_title = $jsst_value1['title'];
+                            $jsst_img = str_replace("js-support-ticket-", "", $jsst_key1).'.png';
+                            $jsst_cdnavailableversion = "";
+                            foreach ($jsst_cdnversiondata as $jsst_cdnname => $jsst_cdnversion) {
+                                $jsst_install_plugin_name_simple = str_replace("-", "", $jsst_install_plugin_matched_name);
+                                if($jsst_cdnname == str_replace("-", "", $jsst_install_plugin_matched_name)){
+                                    if($jsst_cdnversion > $jsst_version){ // new version available
+                                        $jsst_status = 'update_available';
+                                        $jsst_cdnavailableversion = $jsst_cdnversion;
                                     }else{
-                                        $status = 'updated';
+                                        $jsst_status = 'updated';
                                     }
                                 }    
                             }
-                            JSST_PrintAddoneStatus($name, $title, $img, $version, $status, $cdnavailableversion);
+                            JSST_PrintAddoneStatus($jsst_name, $jsst_title, $jsst_img, $jsst_version, $jsst_status, $jsst_cdnavailableversion);
                         }else{ // not installed
-                            $img = str_replace("js-support-ticket-", "", $key1).'.png';
-                            $not_installed[] = array("name" => $key1, "title" => $value1['title'], "img" => $img, "status" => 'not-installed', "version" => "---");
+                            $jsst_img = str_replace("js-support-ticket-", "", $jsst_key1).'.png';
+                            $jsst_not_installed[] = array("name" => $jsst_key1, "title" => $jsst_value1['title'], "img" => $jsst_img, "status" => 'not-installed', "version" => "---");
                         }
                     }
-                    foreach ($not_installed as $notinstall_addon) {
-                        JSST_PrintAddoneStatus($notinstall_addon["name"], $notinstall_addon["title"], $notinstall_addon["img"], $notinstall_addon["version"], $notinstall_addon["status"]);
+                    foreach ($jsst_not_installed as $jsst_notinstall_addon) {
+                        JSST_PrintAddoneStatus($jsst_notinstall_addon["name"], $jsst_notinstall_addon["title"], $jsst_notinstall_addon["img"], $jsst_notinstall_addon["version"], $jsst_notinstall_addon["status"]);
                     }
                 ?>
             </div>
@@ -129,63 +129,63 @@
 </div>
 
 <?php
-function JSST_PrintAddoneStatus($name, $title, $img, $version, $status, $cdnavailableversion = ''){
-    $addoneinfo = JSSTincluder::getJSModel('jssupportticket')->checkJSSTAddoneInfo($name);
-    if ($status == 'update_available') {
-        $wrpclass = 'jsst-admin-addon-status jsst-admin-addons-status-update-wrp';
-        $btnclass = 'jsst-admin-addons-update-btn';
-        $btntxt = 'Update Now';
-        $btnlink = 'id="jsst-admin-addons-update" data-for="'.$name.'"';
-        $msg = '<span id="jsst-admin-addon-status-cdnversion">'.esc_html(__('New Update Version','js-support-ticket'));
-        $msg .= '<span>'." ".$cdnavailableversion." ".'</span>';
-        $msg .= esc_html(__('is Available','js-support-ticket')).'</span>';
-    } elseif ($status == 'expired') {
-        $wrpclass = 'jsst-admin-addon-status jsst-admin-addons-status-expired-wrp';
-        $btnclass = 'jsst-admin-addons-expired-btn';
-        $btntxt = 'Expired';
-        $btnlink = '';
-        $msg = '';
-    } elseif ($status == 'updated') {
-        $wrpclass = 'jsst-admin-addon-status';
-        $btnclass = '';
-        $btntxt = 'Updated';
-        $btnlink = '';
-        $msg = '';
+function JSST_PrintAddoneStatus($jsst_name, $jsst_title, $jsst_img, $jsst_version, $jsst_status, $jsst_cdnavailableversion = ''){
+    $jsst_addoneinfo = JSSTincluder::getJSModel('jssupportticket')->checkJSSTAddoneInfo($jsst_name);
+    if ($jsst_status == 'update_available') {
+        $jsst_wrpclass = 'jsst-admin-addon-status jsst-admin-addons-status-update-wrp';
+        $jsst_btnclass = 'jsst-admin-addons-update-btn';
+        $jsst_btntxt = 'Update Now';
+        $jsst_btnlink = 'id="jsst-admin-addons-update" data-for="'.$jsst_name.'"';
+        $jsst_msg = '<span id="jsst-admin-addon-status-cdnversion">'.esc_html(__('New Update Version','js-support-ticket'));
+        $jsst_msg .= '<span>'." ".$jsst_cdnavailableversion." ".'</span>';
+        $jsst_msg .= esc_html(__('is Available','js-support-ticket')).'</span>';
+    } elseif ($jsst_status == 'expired') {
+        $jsst_wrpclass = 'jsst-admin-addon-status jsst-admin-addons-status-expired-wrp';
+        $jsst_btnclass = 'jsst-admin-addons-expired-btn';
+        $jsst_btntxt = 'Expired';
+        $jsst_btnlink = '';
+        $jsst_msg = '';
+    } elseif ($jsst_status == 'updated') {
+        $jsst_wrpclass = 'jsst-admin-addon-status';
+        $jsst_btnclass = '';
+        $jsst_btntxt = 'Updated';
+        $jsst_btnlink = '';
+        $jsst_msg = '';
     } else {
-        $wrpclass = 'jsst-admin-addon-status';
-        $btnclass = 'jsst-admin-addons-buy-btn';
-        $btntxt = 'Buy Now';
-        $btnlink = 'href="https://jshelpdesk.com/add-ons/"';
-        $msg = '';
+        $jsst_wrpclass = 'jsst-admin-addon-status';
+        $jsst_btnclass = 'jsst-admin-addons-buy-btn';
+        $jsst_btntxt = 'Buy Now';
+        $jsst_btnlink = 'href="https://jshelpdesk.com/add-ons/"';
+        $jsst_msg = '';
     }
-    $html = '
-    <div class="'.$wrpclass.'" id="'.$name.'">
+    $jsst_html = '
+    <div class="'.$jsst_wrpclass.'" id="'.$jsst_name.'">
         <div class="jsst-addon-status-image-wrp">
-            <img alt="Addone image" src="'.esc_url(JSST_PLUGIN_URL).'includes/images/admincp/addon/'.$img.'" />
+            <img alt="Addone image" src="'.esc_url(JSST_PLUGIN_URL).'includes/images/admincp/addon/'.$jsst_img.'" />
         </div>
         <div class="jsst-admin-addon-status-title-wrp">
-            <h2>'. jssupportticket::JSST_getVarValue($title) .'</h2>
-            <a class="'. $addoneinfo["actionClass"] .'" href="'. $addoneinfo["url"] .'">
-                '. jssupportticket::JSST_getVarValue($addoneinfo["action"]) .'
+            <h2>'. jssupportticket::JSST_getVarValue($jsst_title) .'</h2>
+            <a class="'. $jsst_addoneinfo["actionClass"] .'" href="'. $jsst_addoneinfo["url"] .'">
+                '. jssupportticket::JSST_getVarValue($jsst_addoneinfo["action"]) .'
             </a>
-            '.$msg.'
+            '.$jsst_msg.'
         </div>
         <div class="jsst-admin-addon-status-addonstatus-wrp">
             <span>'. esc_html(__('Status: ','js-support-ticket')) .'</span>
             <span class="jsst-admin-adons-status-Active" href="#">
-                '. jssupportticket::JSST_getVarValue($addoneinfo["status"]) .'
+                '. jssupportticket::JSST_getVarValue($jsst_addoneinfo["status"]) .'
             </span>
         </div>
         <div class="jsst-admin-addon-status-addonsversion-wrp">
             <span id="jsst-admin-addon-status-cversion">
                 '. esc_html(__('Version','js-support-ticket')).': 
                 <span>
-                    '. $version .'
+                    '. $jsst_version .'
                 </span>
             </span>
         </div>
         <div class="jsst-admin-addon-status-addonstatusbtn-wrp">
-            <a '.$btnlink.' class="'.$btnclass.'">'. jssupportticket::JSST_getVarValue($btntxt) .'</a>
+            <a '.$jsst_btnlink.' class="'.$jsst_btnclass.'">'. jssupportticket::JSST_getVarValue($jsst_btntxt) .'</a>
         </div>
         <div class="jsst-admin-addon-status-msg jsst_admin_success">
             <img src="'. esc_url(JSST_PLUGIN_URL) .'includes/images/admincp/addon/success.png" />
@@ -196,7 +196,7 @@ function JSST_PrintAddoneStatus($name, $title, $img, $version, $status, $cdnavai
             <span class="jsst-admin-addon-status-msg-txt"></span>
         </div>
     </div>';
-        echo wp_kses($html, JSST_ALLOWED_TAGS);
+        echo wp_kses($jsst_html, JSST_ALLOWED_TAGS);
     }
 
 ?>

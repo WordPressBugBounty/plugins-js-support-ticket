@@ -1,6 +1,6 @@
 <?php
 if (!defined('ABSPATH')) die('Restricted Access');
-$tran_data = json_decode(jssupportticket::$_data[0]['jstran']);
+$jsst_tran_data = json_decode(jssupportticket::$jsst_data[0]['jstran']);
 ?>
 <div id="js-tk-admin-wrapper">
     <div id="js-tk-cparea">
@@ -15,7 +15,7 @@ $tran_data = json_decode(jssupportticket::$_data[0]['jstran']);
                         </div>
                         <div class="close-button-bottom">
                             <a href="?page=jssupportticket" class="close-button">
-                                <img alt="image" src="<?php echo esc_url(JSST_PLUGIN_URL).'includes/images/postinstallation/close-icon.png';?>" />
+                                <img alt="<?php echo esc_attr(__('image','js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL).'includes/images/postinstallation/close-icon.png';?>" />
                             </a>
                         </div>
                 </div>
@@ -39,7 +39,7 @@ $tran_data = json_decode(jssupportticket::$_data[0]['jstran']);
                                 <span class="text"><?php echo esc_html(__('Ticket Settings','js-support-ticket')); ?></span>
                             </a>
                         </li>
-                        <?php if($tran_data){ ?>
+                        <?php if($jsst_tran_data){ ?>
                             <li class="header-parts third-part active">
                                 <a href="<?php echo esc_url(admin_url("admin.php?page=postinstallation&jstlay=translationoption")); ?>" title="Translation" class="tab_icon">
                                     <div class="jsst-post-installationcard-iconwrp">
@@ -76,7 +76,7 @@ $tran_data = json_decode(jssupportticket::$_data[0]['jstran']);
                     <div class="post-installtion-content">
                         <div id="black_wrapper_translation"></div>
                         <div id="jstran_loading">
-                            <img alt="<?php echo esc_html(__('spinning wheel','js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/spinning-wheel.gif" />
+                            <img alt = "<?php echo esc_attr(__('spinning wheel','js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/spinning-wheel.gif" />
                         </div>
                         <form id="jssupportticket-form-ins" method="post" action="<?php echo esc_url(wp_nonce_url(admin_url("admin.php?page=postinstallation&task=save&action=jstask"),"save")); ?>">
                             <div class="pic-config">
@@ -84,36 +84,36 @@ $tran_data = json_decode(jssupportticket::$_data[0]['jstran']);
                                     <?php echo esc_html(__('Language code','js-support-ticket'));?>:
                                 </div>
                                 <div class="field">
-                                    <?php echo wp_kses(JSSTformfield::text('codelang', isset($tran_data->code) ? $tran_data->lang_fullname . " (" . esc_attr($tran_data->code) . ")" : '' , array('class' => 'inputbox jsst-postsetting', 'data-validation' => 'required' , 'readonly' => true)), JSST_ALLOWED_TAGS) ?>
+                                    <?php echo wp_kses(JSSTformfield::text('codelang', isset($jsst_tran_data->code) ? $jsst_tran_data->lang_fullname . " (" . esc_attr($jsst_tran_data->code) . ")" : '' , array('class' => 'inputbox jsst-postsetting', 'data-validation' => 'required' , 'readonly' => true)), JSST_ALLOWED_TAGS) ?>
                                     <div class="desc">
                                         <?php echo esc_html(__('Want to download translation file? Click on download. It will take sometime.','js-support-ticket'));?>
                                     </div>
                                 </div>
                             </div>
                             <div id="js-emessage-wrapper">
-                                <img alt="<?php echo esc_html(__('c error','js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/c_error.png" />
+                                <img alt = "<?php echo esc_attr(__('c error','js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/c_error.png" />
                                 <div id="jslang_em_text"></div>
                             </div>
                             <div id="js-emessage-wrapper_ok">
-                                <img alt="<?php echo esc_html(__('saved','js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/saved.png" />
+                                <img alt = "<?php echo esc_attr(__('saved','js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/saved.png" />
                                 <div id="jslang_em_text_ok"></div>
                             </div>
                             <div class="pic-button-part pic-3-button">
                                 <a class="next-step" href="javascript:void(0);" id="jsdownloadbutton">
                                     <?php echo esc_html(__('Download & Next','js-support-ticket')); ?>
-                                    <img alt="image" src="<?php echo esc_url(JSST_PLUGIN_URL).'includes/images/postinstallation/next-arrow.png';?>">
+                                    <img alt="<?php echo esc_attr(__('image','js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL).'includes/images/postinstallation/next-arrow.png';?>">
                                 </a>
                                 <a class="skip-step back" href="javascript:void(0);" onclick="document.getElementById('jssupportticket-form-ins').submit();">
                                     <?php echo esc_html(__('Skip this step','js-support-ticket')); ?>
-                                    <img class="backbtn-black-icon" alt="image" src="<?php echo esc_url(JSST_PLUGIN_URL).'includes/images/postinstallation/next-arrow-b.png';?>">
-                                    <img class="backbtn-white-icon" alt="image" src="<?php echo esc_url(JSST_PLUGIN_URL).'includes/images/postinstallation/next-arrow.png';?>">
+                                    <img class="backbtn-black-icon" alt="<?php echo esc_attr(__('image','js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL).'includes/images/postinstallation/next-arrow-b.png';?>">
+                                    <img class="backbtn-white-icon" alt="<?php echo esc_attr(__('image','js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL).'includes/images/postinstallation/next-arrow.png';?>">
                                 </a>
                             </div>
                             <?php echo wp_kses(JSSTformfield::hidden('action', 'postinstallation_save'), JSST_ALLOWED_TAGS); ?>
                             <?php echo wp_kses(JSSTformfield::hidden('form_request', 'jssupportticket'), JSST_ALLOWED_TAGS); ?>
                             <?php echo wp_kses(JSSTformfield::hidden('step', 'translationoption'), JSST_ALLOWED_TAGS); ?>
-                            <?php echo wp_kses(JSSTformfield::hidden('translations', isset($tran_data->name->lang_name) ? $tran_data->name->lang_name: ''), JSST_ALLOWED_TAGS); ?>
-                            <?php echo wp_kses(JSSTformfield::hidden('languagecode', isset($tran_data->code) ? $tran_data->code: ''), JSST_ALLOWED_TAGS); ?>
+                            <?php echo wp_kses(JSSTformfield::hidden('translations', isset($jsst_tran_data->name->lang_name) ? $jsst_tran_data->name->lang_name: ''), JSST_ALLOWED_TAGS); ?>
+                            <?php echo wp_kses(JSSTformfield::hidden('languagecode', isset($jsst_tran_data->code) ? $jsst_tran_data->code: ''), JSST_ALLOWED_TAGS); ?>
                         </form>
                     </div>
                 </div>
@@ -123,7 +123,7 @@ $tran_data = json_decode(jssupportticket::$_data[0]['jstran']);
 </div>
 
 <?php
-$jssupportticket_js ="
+$jsst_jssupportticket_js ="
     jQuery(document).ready(function(){
         jQuery('#jsdownloadbutton').click(function(){
             jQuery('#js-emessage-wrapper_ok').hide();
@@ -160,5 +160,5 @@ $jssupportticket_js ="
         jQuery('div#jstran_loading').hide();
     }
 ";
-wp_add_inline_script('js-support-ticket-main-js',$jssupportticket_js);
+wp_add_inline_script('js-support-ticket-main-js',$jsst_jssupportticket_js);
 ?>

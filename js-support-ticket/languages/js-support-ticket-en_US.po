@@ -8776,3 +8776,46 @@ msgstr ""
 
 msgid "For enhanced security change encryption method in %1$s on line %2$s"
 msgstr ""
+
+msgid "Changes may require cache clearing to take effect."
+msgstr "Changes may require cache clearing to take effect."
+
+msgid "How Long Will My Support Stay Active?"
+msgstr "How Long Will My Support Stay Active?"
+
+msgid "I Can’t Log Into My Account"
+msgstr "I Can’t Log Into My Account"
+
+msgid "I Want to Upgrade My Plan — How Can I Do It?"
+msgstr "I Want to Upgrade My Plan — How Can I Do It?"
+
+msgid "I’m Not Getting Access to My Subscription"
+msgstr "I’m Not Getting Access to My Subscription"
+
+msgid "Ticket ID Or Email Address Or Subject"
+msgstr "Ticket ID Or Email Address Or Subject"
+
+msgid "Sophie Martinez"
+msgstr "Sophie Martinez"
+
+msgid "Daniel Brooks"
+msgstr "Daniel Brooks"
+
+msgid "Liam Turner"
+msgstr "Liam Turner"
+
+msgid "Emily Harper"
+msgstr "Emily Harper"
+
+msgid "Noah Bennett"
+msgstr "Noah Bennett"
+
+msgid "Olivia Chase"
+msgstr "Olivia Chase"
+
+msgid "Maya Collins"
+msgstr "Maya Collins"
+
+msgid "Ethan Reynolds"
+msgstr "Ethan Reynolds"
+

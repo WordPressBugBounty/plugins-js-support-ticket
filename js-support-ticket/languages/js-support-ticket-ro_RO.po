@@ -8765,3 +8765,45 @@ msgstr "Salvați și următori"
 
 msgid "For enhanced security change encryption method in %1$s on line %2$s"
 msgstr "Pentru o metodă îmbunătățită de criptare a modificărilor de securitate în %1 $ s pe linie %2 $ s"
+
+msgid "Changes may require cache clearing to take effect."
+msgstr "Modificările pot necesita ștergerea memoriei cache pentru a intra în vigoare."
+
+msgid "How Long Will My Support Stay Active?"
+msgstr "Cât timp va rămâne activ asistența mea?"
+
+msgid "I Can’t Log Into My Account"
+msgstr "Nu mă pot autentifica în contul meu"
+
+msgid "I Want to Upgrade My Plan — How Can I Do It?"
+msgstr "Vreau să-mi actualizez planul — Cum pot face acest lucru?"
+
+msgid "I’m Not Getting Access to My Subscription"
+msgstr "Nu am acces la abonamentul meu"
+
+msgid "Ticket ID Or Email Address Or Subject"
+msgstr "ID-ul biletului sau adresa de e-mail sau subiectul"
+
+msgid "Sophie Martinez"
+msgstr "Sophie Martinez"
+
+msgid "Daniel Brooks"
+msgstr "Daniel Brooks"
+
+msgid "Liam Turner"
+msgstr "Liam Turner"
+
+msgid "Emily Harper"
+msgstr "Emily Harper"
+
+msgid "Noah Bennett"
+msgstr "Noah Bennett"
+
+msgid "Olivia Chase"
+msgstr "Olivia Chase"
+
+msgid "Maya Collins"
+msgstr "Maya Collins"
+
+msgid "Ethan Reynolds"
+msgstr "Ethan Reynolds"

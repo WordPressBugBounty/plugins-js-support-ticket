@@ -5,20 +5,20 @@ if (!defined('ABSPATH'))
 JSSTincluder::getJSModel('jssupportticket')->checkIfMainCssFileIsEnqued();
 JSSTincluder::getJSModel('jssupportticket')->jsst_get_theme_colors();
 
-$color1 = jssupportticket::$_colors['color1'];
-$color2 = jssupportticket::$_colors['color2'];
-$color3 = jssupportticket::$_colors['color3'];
-$color4 = jssupportticket::$_colors['color4'];
-$color5 = jssupportticket::$_colors['color5'];
-$color6 = jssupportticket::$_colors['color6'];
-$color7 = jssupportticket::$_colors['color7'];
-$color8 = jssupportticket::$_colors['color8'];
-$color9 = jssupportticket::$_colors['color9'];
+$jsst_color1 = jssupportticket::$jsst_colors['color1'];
+$jsst_color2 = jssupportticket::$jsst_colors['color2'];
+$jsst_color3 = jssupportticket::$jsst_colors['color3'];
+$jsst_color4 = jssupportticket::$jsst_colors['color4'];
+$jsst_color5 = jssupportticket::$jsst_colors['color5'];
+$jsst_color6 = jssupportticket::$jsst_colors['color6'];
+$jsst_color7 = jssupportticket::$jsst_colors['color7'];
+$jsst_color8 = jssupportticket::$jsst_colors['color8'];
+$jsst_color9 = jssupportticket::$jsst_colors['color9'];
 
-$jssupportticket_css = '';
+$jsst_jssupportticket_css = '';
 
 /*Code for Css*/
-$jssupportticket_css .= '
+$jsst_jssupportticket_css .= '
 /* Ticket Status Form Styling */
 form.js-ticket-form {
    
@@ -169,23 +169,23 @@ div.js-ticket-form-btn-wrp a.js-ticket-cancel-button:hover {
 
 ';
 /*Code For Colors*/
-$jssupportticket_css .= '
+$jsst_jssupportticket_css .= '
 
 /*Ticket Status*/
-	div.js-ticket-field-wrp input.js-ticket-form-input-field{background-color:#fcfcfc; border:1px solid ' . $color5 . ' !important;color:' . $color4 . ';}
-	div.js-ticket-field-title{color:' . $color2 . ';}
-	div.js-ticket-form-btn-wrp{border-top:1px solid ' . $color5 . ';}
-	div.js-ticket-form-btn-wrp input.js-ticket-save-button{background-color:' . $color1 . ' !important;color:' . $color7 . ' !important;border: none;box-shadow: 0 2px 10px rgba(' . hexdec(substr($color1, 1, 2)) . ', ' . hexdec(substr($color1, 3, 2)) . ', ' . hexdec(substr($color1, 5, 2)) . ', 0.4);}
-	div.js-ticket-form-btn-wrp input.js-ticket-save-button:hover{background-color:' . $color2 . '!important;color:' . $color7 . ' !important;box-shadow: 0 2px 10px rgba(' . hexdec(substr($color2, 1, 2)) . ', ' . hexdec(substr($color2, 3, 2)) . ', ' . hexdec(substr($color2, 5, 2)) . ', 0.5);}
-	div.js-ticket-form-btn-wrp a.js-ticket-cancel-button{background-color: #f5f2f5;color: #636363;border: 1px solid '. $color5 .';}
-	div.js-ticket-form-btn-wrp a.js-ticket-cancel-button:hover{background-color:' . $color2 . '!important;color:' . $color7 . ' !important;border-color:' . $color2 . '!important;}
+	div.js-ticket-field-wrp input.js-ticket-form-input-field{background-color:#fcfcfc; border:1px solid ' . $jsst_color5 . ' !important;color:' . $jsst_color4 . ';}
+	div.js-ticket-field-title{color:' . $jsst_color2 . ';}
+	div.js-ticket-form-btn-wrp{border-top:1px solid ' . $jsst_color5 . ';}
+	div.js-ticket-form-btn-wrp input.js-ticket-save-button{background-color:' . $jsst_color1 . ' !important;color:' . $jsst_color7 . ' !important;border: none;box-shadow: 0 2px 10px rgba(' . hexdec(substr($jsst_color1, 1, 2)) . ', ' . hexdec(substr($jsst_color1, 3, 2)) . ', ' . hexdec(substr($jsst_color1, 5, 2)) . ', 0.4);}
+	div.js-ticket-form-btn-wrp input.js-ticket-save-button:hover{background-color:' . $jsst_color2 . '!important;color:' . $jsst_color7 . ' !important;box-shadow: 0 2px 10px rgba(' . hexdec(substr($jsst_color2, 1, 2)) . ', ' . hexdec(substr($jsst_color2, 3, 2)) . ', ' . hexdec(substr($jsst_color2, 5, 2)) . ', 0.5);}
+	div.js-ticket-form-btn-wrp a.js-ticket-cancel-button{background-color: #f5f2f5;color: #636363;border: 1px solid '. $jsst_color5 .';}
+	div.js-ticket-form-btn-wrp a.js-ticket-cancel-button:hover{background-color:' . $jsst_color2 . '!important;color:' . $jsst_color7 . ' !important;border-color:' . $jsst_color2 . '!important;}
 
 /*Ticket Status*/
 
 ';
 
 
-wp_add_inline_style('jssupportticket-main-css', $jssupportticket_css);
+wp_add_inline_style('jssupportticket-main-css', $jsst_jssupportticket_css);
 
 
 ?>

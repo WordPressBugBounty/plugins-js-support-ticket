@@ -7,33 +7,33 @@ class JSSTproductModel {
 
     function getProducts() {
         // Filter
-        $producttitle = jssupportticket::$_search['product']['product'];
-        $pagesize = jssupportticket::$_search['product']['pagesize'];
-        $inquery = '';
+        $jsst_producttitle = jssupportticket::$_search['product']['product'];
+        $jsst_pagesize = jssupportticket::$_search['product']['pagesize'];
+        $jsst_inquery = '';
 
-        if ($producttitle != null){
-            $inquery .= " WHERE product.product LIKE '%".esc_sql($producttitle)."%'";
+        if ($jsst_producttitle != null){
+            $jsst_inquery .= " WHERE product.product LIKE '%".esc_sql($jsst_producttitle)."%'";
         }
 
-        jssupportticket::$_data['filter']['title'] = $producttitle;
-        jssupportticket::$_data['filter']['pagesize'] = $pagesize;
+        jssupportticket::$jsst_data['filter']['title'] = $jsst_producttitle;
+        jssupportticket::$jsst_data['filter']['pagesize'] = $jsst_pagesize;
 
         // Pagination
-        if($pagesize){
-            JSSTpagination::setLimit($pagesize);
+        if($jsst_pagesize){
+            JSSTpagination::setLimit($jsst_pagesize);
         }
-        $query = "SELECT COUNT(`id`) FROM `" . jssupportticket::$_db->prefix . "js_ticket_products` AS product ";
-        $query .= $inquery;
-        $total = jssupportticket::$_db->get_var($query);
-        jssupportticket::$_data['total'] = $total;
-        jssupportticket::$_data[1] = JSSTpagination::getPagination($total);
+        $jsst_query = "SELECT COUNT(`id`) FROM `" . jssupportticket::$_db->prefix . "js_ticket_products` AS product ";
+        $jsst_query .= $jsst_inquery;
+        $jsst_total = jssupportticket::$_db->get_var($jsst_query);
+        jssupportticket::$jsst_data['total'] = $jsst_total;
+        jssupportticket::$jsst_data[1] = JSSTpagination::getPagination($jsst_total);
 
         // Data
-        $query = "SELECT product.*
+        $jsst_query = "SELECT product.*
 					FROM `" . jssupportticket::$_db->prefix . "js_ticket_products` AS product ";
-        $query .= $inquery;
-        $query .= " ORDER BY product.ordering ASC LIMIT " . JSSTpagination::getOffset() . ", " . JSSTpagination::getLimit();
-        jssupportticket::$_data[0] = jssupportticket::$_db->get_results($query);
+        $jsst_query .= $jsst_inquery;
+        $jsst_query .= " ORDER BY product.ordering ASC LIMIT " . JSSTpagination::getOffset() . ", " . JSSTpagination::getLimit();
+        jssupportticket::$jsst_data[0] = jssupportticket::$_db->get_results($jsst_query);
         if (jssupportticket::$_db->last_error != null) {
             JSSTincluder::getJSModel('systemerror')->addSystemError();
         }
@@ -41,58 +41,58 @@ class JSSTproductModel {
     }
 
     function getProductForCombobox() {
-        $query = "SELECT id, product AS text FROM `" . jssupportticket::$_db->prefix . "js_ticket_products` WHERE status = 1 ";
-        $query .= 'ORDER BY ordering ASC';
-        $products = jssupportticket::$_db->get_results($query);
+        $jsst_query = "SELECT id, product AS text FROM `" . jssupportticket::$_db->prefix . "js_ticket_products` WHERE status = 1 ";
+        $jsst_query .= 'ORDER BY ordering ASC';
+        $jsst_products = jssupportticket::$_db->get_results($jsst_query);
 
         if (jssupportticket::$_db->last_error != null) {
             JSSTincluder::getJSModel('systemerror')->addSystemError();
         }
-        return $products;
+        return $jsst_products;
     }
 
-    function getProductForForm($id) {
-        $result=array();
-        if ($id) {
-            if (!is_numeric($id))
+    function getProductForForm($jsst_id) {
+        $jsst_result=array();
+        if ($jsst_id) {
+            if (!is_numeric($jsst_id))
                 return false;
-            $query = "SELECT product.*
+            $jsst_query = "SELECT product.*
 				FROM `" . jssupportticket::$_db->prefix . "js_ticket_products` AS product
-				WHERE product.id = " . esc_sql($id);
-            $result = jssupportticket::$_db->get_row($query);
+				WHERE product.id = " . esc_sql($jsst_id);
+            $jsst_result = jssupportticket::$_db->get_row($jsst_query);
             if (jssupportticket::$_db->last_error != null) {
                 JSSTincluder::getJSModel('systemerror')->addSystemError(); // if there is an error add it to system errorrs
             }
         }
-        jssupportticket::$_data[0]=$result;
+        jssupportticket::$jsst_data[0]=$jsst_result;
         return;
     }
 
-    function storeProduct($data) {
+    function storeProduct($jsst_data) {
         if (!current_user_can('manage_options')) { //only admin can change it.
             return false;
         }
-        if (!$this->validateProduct($data['product'], $data['id'])) {
+        if (!$this->validateProduct($jsst_data['product'], $jsst_data['id'])) {
             JSSTmessage::setMessage(esc_html(__('Product Title Already Exist', 'js-support-ticket')), 'error');
             return;
         }
-        $data = jssupportticket::JSST_sanitizeData($data); // JSST_sanitizeData() function uses wordpress santize functions
+        $jsst_data = jssupportticket::JSST_sanitizeData($jsst_data); // JSST_sanitizeData() function uses wordpress santize functions
 
-        if (!$data['id']) { //new
-            $data['ordering'] = $this->getNextOrdering();
+        if (!$jsst_data['id']) { //new
+            $jsst_data['ordering'] = $this->getNextOrdering();
         }
-        $row = JSSTincluder::getJSTable('products');
-        $data = JSSTincluder::getJSmodel('jssupportticket')->stripslashesFull($data);// remove slashes with quotes.
-        $error = 0;
-        if (!$row->bind($data)) {
-            $error = 1;
+        $jsst_row = JSSTincluder::getJSTable('products');
+        $jsst_data = JSSTincluder::getJSmodel('jssupportticket')->stripslashesFull($jsst_data);// remove slashes with quotes.
+        $jsst_error = 0;
+        if (!$jsst_row->bind($jsst_data)) {
+            $jsst_error = 1;
         }
-        if (!$row->store()) {
-            $error = 1;
+        if (!$jsst_row->store()) {
+            $jsst_error = 1;
         }
 
-        if ($error == 0) {
-            $id = $row->id;
+        if ($jsst_error == 0) {
+            $jsst_id = $jsst_row->id;
             JSSTmessage::setMessage(esc_html(__('Product has been stored', 'js-support-ticket')), 'updated');
         } else {
             JSSTincluder::getJSModel('systemerror')->addSystemError(); // if there is an error add it to system errorrs
@@ -101,75 +101,75 @@ class JSSTproductModel {
         return;
     }
 
-    private function validateProduct($product, $id) {
-        if ($id) {
-            if (!is_numeric($id))
+    private function validateProduct($jsst_product, $jsst_id) {
+        if ($jsst_id) {
+            if (!is_numeric($jsst_id))
                 return false;
-            $query = "SELECT product FROM `" . jssupportticket::$_db->prefix . "js_ticket_products` WHERE id = " . esc_sql($id);
-            $result = jssupportticket::$_db->get_var($query);
-            if ($result == $product) {
+            $jsst_query = "SELECT product FROM `" . jssupportticket::$_db->prefix . "js_ticket_products` WHERE id = " . esc_sql($jsst_id);
+            $jsst_result = jssupportticket::$_db->get_var($jsst_query);
+            if ($jsst_result == $jsst_product) {
                 return true;
             }
         }
 
-        $query = 'SELECT COUNT(id) FROM `' . jssupportticket::$_db->prefix . 'js_ticket_products` WHERE product = "' . esc_sql($product) . '"';
-        $result = jssupportticket::$_db->get_var($query);
+        $jsst_query = 'SELECT COUNT(id) FROM `' . jssupportticket::$_db->prefix . 'js_ticket_products` WHERE product = "' . esc_sql($jsst_product) . '"';
+        $jsst_result = jssupportticket::$_db->get_var($jsst_query);
         if (jssupportticket::$_db->last_error != null) {
             JSSTincluder::getJSModel('systemerror')->addSystemError();
         }
-        if ($result == 0)
+        if ($jsst_result == 0)
             return true;
         else
             return false;
     }
 
     private function getNextOrdering() {
-        $query = "SELECT MAX(ordering) FROM `" . jssupportticket::$_db->prefix . "js_ticket_products`";
-        $result = jssupportticket::$_db->get_var($query);
+        $jsst_query = "SELECT MAX(ordering) FROM `" . jssupportticket::$_db->prefix . "js_ticket_products`";
+        $jsst_result = jssupportticket::$_db->get_var($jsst_query);
         if (jssupportticket::$_db->last_error != null) {
             JSSTincluder::getJSModel('systemerror')->addSystemError();
         }
-        return $result + 1;
+        return $jsst_result + 1;
     }
 
-    function removeProduct($id) {
-        if (!is_numeric($id))
+    function removeProduct($jsst_id) {
+        if (!is_numeric($jsst_id))
             return false;
-        $canremove = $this->canRemoveProduct($id);
-        if ($canremove == 1) {
-            $row = JSSTincluder::getJSTable('products');
-            if ($row->delete($id)) {
+        $jsst_canremove = $this->canRemoveProduct($jsst_id);
+        if ($jsst_canremove == 1) {
+            $jsst_row = JSSTincluder::getJSTable('products');
+            if ($jsst_row->delete($jsst_id)) {
                 JSSTmessage::setMessage(esc_html(__('Product has been deleted', 'js-support-ticket')), 'updated');
             } else {
                 JSSTincluder::getJSModel('systemerror')->addSystemError(); // if there is an error add it to system errorrs
                 JSSTmessage::setMessage(esc_html(__('Product has not been deleted', 'js-support-ticket')), 'error');
             }
-        } elseif ($canremove == 2)
+        } elseif ($jsst_canremove == 2)
             JSSTmessage::setMessage(esc_html(__('Product','js-support-ticket')).' '. esc_html(__('in use cannot deleted', 'js-support-ticket')), 'error');
 
         return;
     }
 
-    function setOrdering($id) {
-        if (!is_numeric($id))
+    function setOrdering($jsst_id) {
+        if (!is_numeric($jsst_id))
             return false;
-        $order = JSSTrequest::getVar('order', 'get');
-        if ($order == 'down') {
-            $order = ">";
-            $direction = "ASC";
+        $jsst_order = JSSTrequest::getVar('order', 'get');
+        if ($jsst_order == 'down') {
+            $jsst_order = ">";
+            $jsst_direction = "ASC";
         } else {
-            $order = "<";
-            $direction = "DESC";
+            $jsst_order = "<";
+            $jsst_direction = "DESC";
         }
-        $query = "SELECT t.ordering,t.id,t2.ordering AS ordering2 FROM `" . jssupportticket::$_db->prefix . "js_ticket_products` AS t,`" . jssupportticket::$_db->prefix . "js_ticket_products` AS t2 WHERE t.ordering $order t2.ordering AND t2.id = ".esc_sql($id)." ORDER BY t.ordering $direction LIMIT 1";
-        $result = jssupportticket::$_db->get_row($query);
-        $query = "UPDATE `" . jssupportticket::$_db->prefix . "js_ticket_products` SET ordering = " . esc_sql($result->ordering) . " WHERE id = " . esc_sql($id);
-        jssupportticket::$_db->query($query);
-        $query = "UPDATE `" . jssupportticket::$_db->prefix . "js_ticket_products` SET ordering = " . esc_sql($result->ordering2) . " WHERE id = " . esc_sql($result->id);
-        jssupportticket::$_db->query($query);
+        $jsst_query = "SELECT t.ordering,t.id,t2.ordering AS ordering2 FROM `" . jssupportticket::$_db->prefix . "js_ticket_products` AS t,`" . jssupportticket::$_db->prefix . "js_ticket_products` AS t2 WHERE t.ordering $jsst_order t2.ordering AND t2.id = ".esc_sql($jsst_id)." ORDER BY t.ordering $jsst_direction LIMIT 1";
+        $jsst_result = jssupportticket::$_db->get_row($jsst_query);
+        $jsst_query = "UPDATE `" . jssupportticket::$_db->prefix . "js_ticket_products` SET ordering = " . esc_sql($jsst_result->ordering) . " WHERE id = " . esc_sql($jsst_id);
+        jssupportticket::$_db->query($jsst_query);
+        $jsst_query = "UPDATE `" . jssupportticket::$_db->prefix . "js_ticket_products` SET ordering = " . esc_sql($jsst_result->ordering2) . " WHERE id = " . esc_sql($jsst_result->id);
+        jssupportticket::$_db->query($jsst_query);
 
-        $row = JSSTincluder::getJSTable('products');
-        if ($row->update(array('id' => $id, 'ordering' => $result->ordering)) && $row->update(array('id' => $result->id, 'ordering' => $result->ordering2))) {
+        $jsst_row = JSSTincluder::getJSTable('products');
+        if ($jsst_row->update(array('id' => $jsst_id, 'ordering' => $jsst_result->ordering)) && $jsst_row->update(array('id' => $jsst_result->id, 'ordering' => $jsst_result->ordering2))) {
             JSSTmessage::setMessage(esc_html(__('Product','js-support-ticket')).' '. esc_html(__('ordering has been changed', 'js-support-ticket')), 'updated');
         } else {
             JSSTincluder::getJSModel('systemerror')->addSystemError(); // if there is an error add it to system errorrs
@@ -178,34 +178,34 @@ class JSSTproductModel {
         return;
     }
 
-    private function canRemoveProduct($id) {
-        if (!is_numeric($id))
+    private function canRemoveProduct($jsst_id) {
+        if (!is_numeric($jsst_id))
             return false;
-        $query = "SELECT (
-					(SELECT COUNT(id) FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE productid = " . esc_sql($id) . ")
+        $jsst_query = "SELECT (
+					(SELECT COUNT(id) FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE productid = " . esc_sql($jsst_id) . ")
 					) AS total";
-        $result = jssupportticket::$_db->get_var($query);
+        $jsst_result = jssupportticket::$_db->get_var($jsst_query);
         if (jssupportticket::$_db->last_error != null) {
             JSSTincluder::getJSModel('systemerror')->addSystemError();
         }
-        if ($result == 0) {
+        if ($jsst_result == 0) {
             return 1;
         } else
             return 2;
     }
 
-    function changeStatus($id) {
-        if (!is_numeric($id))
+    function changeStatus($jsst_id) {
+        if (!is_numeric($jsst_id))
             return false;
 
-        $query = "SELECT status FROM `" . jssupportticket::$_db->prefix . "js_ticket_products` WHERE id=" . esc_sql($id);
-        $status = jssupportticket::$_db->get_var($query);
+        $jsst_query = "SELECT status FROM `" . jssupportticket::$_db->prefix . "js_ticket_products` WHERE id=" . esc_sql($jsst_id);
+        $jsst_status = jssupportticket::$_db->get_var($jsst_query);
 
-        $status = 1 - $status;
+        $jsst_status = 1 - $jsst_status;
 
-        $row = JSSTincluder::getJSTable('products');
+        $jsst_row = JSSTincluder::getJSTable('products');
 
-        if ($row->update(array('id' => $id, 'status' => $status))) {
+        if ($jsst_row->update(array('id' => $jsst_id, 'status' => $jsst_status))) {
             JSSTmessage::setMessage(__('Product','js-support-ticket').' '.__('status has been changed', 'js-support-ticket'), 'updated');
         } else {
             JSSTincluder::getJSModel('systemerror')->addSystemError(); // if there is an error add it to system errorrs
@@ -214,17 +214,17 @@ class JSSTproductModel {
         return;
     }
 
-    function getProductById($id) {
-        if (!is_numeric($id))
+    function getProductById($jsst_id) {
+        if (!is_numeric($jsst_id))
             return false;
-        $query = "SELECT product FROM `" . jssupportticket::$_db->prefix . "js_ticket_products` WHERE id = ". esc_sql($id);
-        $product = jssupportticket::$_db->get_var($query);
-        return $product;
+        $jsst_query = "SELECT product FROM `" . jssupportticket::$_db->prefix . "js_ticket_products` WHERE id = ". esc_sql($jsst_id);
+        $jsst_product = jssupportticket::$_db->get_var($jsst_query);
+        return $jsst_product;
     }
 
     function getAdminSearchFormDataProduct(){
-        $nonce = JSSTrequest::getVar('_wpnonce');
-        if (! wp_verify_nonce( $nonce, 'products') ) {
+        $jsst_nonce = JSSTrequest::getVar('_wpnonce');
+        if (! wp_verify_nonce( $jsst_nonce, 'products') ) {
             die( 'Security check Failed' );
         }
         $jsst_search_array = array();

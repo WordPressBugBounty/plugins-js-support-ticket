@@ -1,6 +1,6 @@
 <?php
 if (!defined('ABSPATH')) die('Restricted Access');
-$tran_opt = JSSTincluder::getJSModel('jssupportticket')->getInstalledTranslationKey(); ?>
+$jsst_tran_opt = JSSTincluder::getJSModel('jssupportticket')->getInstalledTranslationKey(); ?>
 <div id="js-tk-admin-wrapper">
     <div id="js-tk-cparea">
         <div id="jsst-main-wrapper" class="post-installation">
@@ -14,7 +14,7 @@ $tran_opt = JSSTincluder::getJSModel('jssupportticket')->getInstalledTranslation
                     </div>
                     <div class="close-button-bottom">
                         <a href="?page=jssupportticket" class="close-button">
-                            <img alt="image" src="<?php echo esc_url(JSST_PLUGIN_URL).'includes/images/postinstallation/close-icon.png';?>" />
+                            <img alt="<?php echo esc_attr(__('image','js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL).'includes/images/postinstallation/close-icon.png';?>" />
                         </a>
                     </div>
                 </div>
@@ -72,16 +72,16 @@ $tran_opt = JSSTincluder::getJSModel('jssupportticket')->getInstalledTranslation
                     <div class="jsst-config-topheading">
                         <span class="heading-post-ins jsst-configurations-heading"><?php echo esc_html(__('Configurations Complete','js-support-ticket'));?></span>
                         <?php
-                            if($tran_opt && in_array('feedback', jssupportticket::$_active_addons)){
-                                $step = '5';
-                            }else if(!$tran_opt && !in_array('feedback', jssupportticket::$_active_addons)){
-                                $step = '3';
+                            if($jsst_tran_opt && in_array('feedback', jssupportticket::$_active_addons)){
+                                $jsst_step = '5';
+                            }else if(!$jsst_tran_opt && !in_array('feedback', jssupportticket::$_active_addons)){
+                                $jsst_step = '3';
                             }else{
-                                $step = '4';
+                                $jsst_step = '4';
                             }
-                            $steps = 'Step ' . $step . ' of '  . $step;
+                            $jsst_steps = 'Step ' . $jsst_step . ' of '  . $jsst_step;
                         ?>
-                        <span class="heading-post-ins jsst-config-steps"><?php echo esc_html($steps);?></span>
+                        <span class="heading-post-ins jsst-config-steps"><?php echo esc_html($jsst_steps);?></span>
                     </div>
                     <div class="post-installtion-content">
                         <form id="jslearnmanager-form-ins" method="post" action="#">

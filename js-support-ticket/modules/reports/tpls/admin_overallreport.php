@@ -4,19 +4,19 @@
 ?>
 <?php
 wp_enqueue_script('jquery-ui-datepicker');
-wp_enqueue_style('jquery-ui-css', JSST_PLUGIN_URL . 'includes/css/jquery-ui-smoothness.css');
-wp_enqueue_style('status-graph', JSST_PLUGIN_URL . 'includes/css/status_graph.css');
-wp_enqueue_script('ticket-google-charts', JSST_PLUGIN_URL . 'includes/js/google-charts.js');
-wp_register_script( 'ticket-google-charts-handle', '' );
+wp_enqueue_style('jquery-ui-css', JSST_PLUGIN_URL . 'includes/css/jquery-ui-smoothness.css', array(), jssupportticket::$_config['productversion']);
+wp_enqueue_style('status-graph', JSST_PLUGIN_URL . 'includes/css/status_graph.css', array(), jssupportticket::$_config['productversion']);
+wp_enqueue_script('ticket-google-charts', JSST_PLUGIN_URL . 'includes/js/google-charts.js', array(), jssupportticket::$_config['productversion'], true);
+wp_register_script( 'ticket-google-charts-handle', '', array(), jssupportticket::$_config['productversion'], true );
 wp_enqueue_script( 'ticket-google-charts-handle' );
-$jssupportticket_js ="
+$jsst_jssupportticket_js ="
 jQuery(document).ready(function ($) {
 	google.load('visualization', '1', {packages:['corechart']});
 	google.setOnLoadCallback(drawBarChart);
 	function drawBarChart() {
 		var data = google.visualization.arrayToDataTable([
          ['". esc_html(__('Status','js-support-ticket')) ."', '". esc_html(__('Tickets By Status','js-support-ticket')) ."', { role: 'style' }],
-         ". wp_kses(jssupportticket::$_data['bar_chart'], JSST_ALLOWED_TAGS)."
+         ". wp_kses(jssupportticket::$jsst_data['bar_chart'], JSST_ALLOWED_TAGS)."
         ]);
         var view = new google.visualization.DataView(data);
         view.setColumns([0, 1,
@@ -40,7 +40,7 @@ jQuery(document).ready(function ($) {
     function drawStackChart() {
       var data = google.visualization.arrayToDataTable([
         ['". esc_html(__('Tickets','js-support-ticket'))."', '". esc_html(__('Direct','js-support-ticket'))."', '". esc_html(__('Email','js-support-ticket'))."', { role: 'annotation' } ],
-        ". wp_kses(jssupportticket::$_data['stack_data'], JSST_ALLOWED_TAGS)."
+        ". wp_kses(jssupportticket::$jsst_data['stack_data'], JSST_ALLOWED_TAGS)."
       ]);
 
       var view = new google.visualization.DataView(data);
@@ -59,7 +59,7 @@ jQuery(document).ready(function ($) {
 	function drawPie3d1Chart() {
         var data = google.visualization.arrayToDataTable([
           ['". esc_html(__('Departments','js-support-ticket')). "', '". esc_html(__('Tickets By Department','js-support-ticket')) ."'],
-          ". wp_kses(jssupportticket::$_data['pie3d_chart1'], JSST_ALLOWED_TAGS)."
+          ". wp_kses(jssupportticket::$jsst_data['pie3d_chart1'], JSST_ALLOWED_TAGS)."
         ]);
 
         var options = {
@@ -76,14 +76,14 @@ jQuery(document).ready(function ($) {
 	function drawPie3d2Chart() {
         var data = google.visualization.arrayToDataTable([
           ['". esc_html(__('Priorities','js-support-ticket')) ."', '". esc_html(__('Tickets By Priority','js-support-ticket')) ."'],
-          ".wp_kses(jssupportticket::$_data['pie3d_chart2'], JSST_ALLOWED_TAGS)."
+          ".wp_kses(jssupportticket::$jsst_data['pie3d_chart2'], JSST_ALLOWED_TAGS)."
         ]);
 
         var options = {
           title: '". esc_html(__('Tickets By Priorities','js-support-ticket')) ."',
           chartArea :{width:450,height:350,top:80,left:80},
           is3D: true,
-          colors:".wp_kses(jssupportticket::$_data['priorityColorList'], JSST_ALLOWED_TAGS)."
+          colors:".wp_kses(jssupportticket::$jsst_data['priorityColorList'], JSST_ALLOWED_TAGS)."
         };
 
         var chart = new google.visualization.PieChart(document.getElementById('pie3d_chart2'));
@@ -94,8 +94,8 @@ jQuery(document).ready(function ($) {
     function drawStackChartHorizontal() {
       var data = google.visualization.arrayToDataTable([
       	".
-      		wp_kses(jssupportticket::$_data['stack_chart_horizontal']['title'], JSST_ALLOWED_TAGS).",".
-      		wp_kses(jssupportticket::$_data['stack_chart_horizontal']['data'], JSST_ALLOWED_TAGS)
+      		wp_kses(jssupportticket::$jsst_data['stack_chart_horizontal']['title'], JSST_ALLOWED_TAGS).",".
+      		wp_kses(jssupportticket::$jsst_data['stack_chart_horizontal']['data'], JSST_ALLOWED_TAGS)
       	."
       ]);
 
@@ -112,13 +112,13 @@ jQuery(document).ready(function ($) {
       chart.draw(view, options);
   	}
 ";
-if(isset(jssupportticket::$_data['slice_chart'])) {
-    $jssupportticket_js .="
+if(isset(jssupportticket::$jsst_data['slice_chart'])) {
+    $jsst_jssupportticket_js .="
     google.setOnLoadCallback(drawSliceChart);
     function drawSliceChart() {
         var data = google.visualization.arrayToDataTable([
             ['". esc_html(__('Tickets','js-support-ticket')) ."', '". esc_html(__('Staff Member Tickets','js-support-ticket')) ."'],
-            ". wp_kses(jssupportticket::$_data['slice_chart'], JSST_ALLOWED_TAGS)."
+            ". wp_kses(jssupportticket::$jsst_data['slice_chart'], JSST_ALLOWED_TAGS)."
         ]);
 
         var options = {
@@ -140,10 +140,10 @@ if(isset(jssupportticket::$_data['slice_chart'])) {
     }
 ";
 }
-  $jssupportticket_js .="
+  $jsst_jssupportticket_js .="
     });
 ";
-wp_add_inline_script('js-support-ticket-main-js',$jssupportticket_js);
+wp_add_inline_script('js-support-ticket-main-js',$jsst_jssupportticket_js);
 JSSTmessage::getMessage();
  ?>
 <div id="jsstadmin-wrapper">
@@ -155,20 +155,20 @@ JSSTmessage::getMessage();
             <div id="jsstadmin-wrapper-top-left">
                 <div id="jsstadmin-breadcrunbs">
                     <ul>
-                        <li><a href="?page=jssupportticket" title="<?php echo esc_html(__('Dashboard','js-support-ticket')); ?>"><?php echo esc_html(__('Dashboard','js-support-ticket')); ?></a></li>
+                        <li><a href="?page=jssupportticket" title="<?php echo esc_attr(__('Dashboard','js-support-ticket')); ?>"><?php echo esc_html(__('Dashboard','js-support-ticket')); ?></a></li>
                         <li><?php echo esc_html(__('Overall Statistics','js-support-ticket')); ?></li>
                     </ul>
                 </div>
             </div>
             <div id="jsstadmin-wrapper-top-right">
                 <div id="jsstadmin-config-btn">
-                    <a title="<?php echo esc_html(__('Configuration','js-support-ticket')); ?>" href="<?php echo esc_url(admin_url("admin.php?page=configuration")); ?>">
-                        <img alt="<?php echo esc_html(__('Configuration','js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/config.png" />
+                    <a title="<?php echo esc_attr(__('Configuration','js-support-ticket')); ?>" href="<?php echo esc_url(admin_url("admin.php?page=configuration")); ?>">
+                        <img alt = "<?php echo esc_attr(__('Configuration','js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/config.png" />
                     </a>
                 </div>
               <div id="jsstadmin-config-btn" class="jssticketadmin-help-btn">
-                  <a href="<?php echo esc_url(admin_url("admin.php?page=jssupportticket&jstlay=help")); ?>" title="<?php echo esc_html(__('Help','js-support-ticket')); ?>">
-                      <img alt="<?php echo esc_html(__('Help','js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/help.png" />
+                  <a href="<?php echo esc_url(admin_url("admin.php?page=jssupportticket&jstlay=help")); ?>" title="<?php echo esc_attr(__('Help','js-support-ticket')); ?>">
+                      <img alt = "<?php echo esc_attr(__('Help','js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/help.png" />
                   </a>
               </div>
                 <div id="jsstadmin-vers-txt">
@@ -180,31 +180,31 @@ JSSTmessage::getMessage();
         <div id="jsstadmin-head">
             <h1 class="jsstadmin-head-text"><?php echo esc_html(__("Overall Statistics", 'js-support-ticket')); ?></h1>
             <?php if(in_array('export', jssupportticket::$_active_addons)){ ?>
-                <a title="<?php echo esc_html(__('Export Data', 'js-support-ticket')); ?>" id="jsexport-link" class="jsstadmin-add-link button" href="?page=export&task=getoverallexport&action=jstask"><img alt="<?php echo esc_html(__('Export','js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/export-icon.png" /><?php echo esc_html(__('Export Data', 'js-support-ticket')); ?></a>
+                <a title="<?php echo esc_attr(__('Export Data', 'js-support-ticket')); ?>" id="jsexport-link" class="jsstadmin-add-link button" href="?page=export&task=getoverallexport&action=jstask"><img alt = "<?php echo esc_attr(__('Export','js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/export-icon.png" /><?php echo esc_html(__('Export Data', 'js-support-ticket')); ?></a>
             <?php } ?>
         </div>
         <div id="jsstadmin-data-wrp" class="p0 bg-n bs-n">
             <?php
-            $open_percentage = 0;
-            $close_percentage = 0;
-            $overdue_percentage = 0;
-            $answered_percentage = 0;
-            $allticket_percentage = 0;
-            if(isset(jssupportticket::$_data['ticket_total']) && isset(jssupportticket::$_data['ticket_total']['allticket']) && jssupportticket::$_data['ticket_total']['allticket'] != 0){
-                $open_percentage = round((jssupportticket::$_data['ticket_total']['openticket'] / jssupportticket::$_data['ticket_total']['allticket']) * 100);
-                $close_percentage = round((jssupportticket::$_data['ticket_total']['closeticket'] / jssupportticket::$_data['ticket_total']['allticket']) * 100);
-                $overdue_percentage = round((jssupportticket::$_data['ticket_total']['overdueticket'] / jssupportticket::$_data['ticket_total']['allticket']) * 100);
-                $answered_percentage = round((jssupportticket::$_data['ticket_total']['answeredticket'] / jssupportticket::$_data['ticket_total']['allticket']) * 100);
+            $jsst_open_percentage = 0;
+            $jsst_close_percentage = 0;
+            $jsst_overdue_percentage = 0;
+            $jsst_answered_percentage = 0;
+            $jsst_allticket_percentage = 0;
+            if(isset(jssupportticket::$jsst_data['ticket_total']) && isset(jssupportticket::$jsst_data['ticket_total']['allticket']) && jssupportticket::$jsst_data['ticket_total']['allticket'] != 0){
+                $jsst_open_percentage = round((jssupportticket::$jsst_data['ticket_total']['openticket'] / jssupportticket::$jsst_data['ticket_total']['allticket']) * 100);
+                $jsst_close_percentage = round((jssupportticket::$jsst_data['ticket_total']['closeticket'] / jssupportticket::$jsst_data['ticket_total']['allticket']) * 100);
+                $jsst_overdue_percentage = round((jssupportticket::$jsst_data['ticket_total']['overdueticket'] / jssupportticket::$jsst_data['ticket_total']['allticket']) * 100);
+                $jsst_answered_percentage = round((jssupportticket::$jsst_data['ticket_total']['answeredticket'] / jssupportticket::$jsst_data['ticket_total']['allticket']) * 100);
             }
-            if(isset(jssupportticket::$_data['ticket_total']) && isset(jssupportticket::$_data['ticket_total']['allticket']) && jssupportticket::$_data['ticket_total']['allticket'] != 0){
-                $allticket_percentage = 100;
+            if(isset(jssupportticket::$jsst_data['ticket_total']) && isset(jssupportticket::$jsst_data['ticket_total']['allticket']) && jssupportticket::$jsst_data['ticket_total']['allticket'] != 0){
+                $jsst_allticket_percentage = 100;
             }
             ?>
             <div class="js-ticket-count">
                 <div class="js-ticket-link">
-                    <a class="js-ticket-link js-ticket-green" href="#" data-tab-number="1" title="<?php echo esc_html(__('Open Ticket','js-support-ticket')); ?>">
-                        <div class="js-ticket-cricle-wrp" data-per="<?php echo esc_attr($open_percentage); ?>" >
-                            <div class="js-mr-rp" data-progress="<?php echo esc_attr($open_percentage); ?>">
+                    <a class="js-ticket-link js-ticket-green" href="#" data-tab-number="1" title="<?php echo esc_attr(__('Open Ticket','js-support-ticket')); ?>">
+                        <div class="js-ticket-cricle-wrp" data-per="<?php echo esc_attr($jsst_open_percentage); ?>" >
+                            <div class="js-mr-rp" data-progress="<?php echo esc_attr($jsst_open_percentage); ?>">
                                 <div class="circle">
                                     <div class="mask full">
                                          <div class="fill js-ticket-open"></div>
@@ -222,15 +222,15 @@ JSSTmessage::getMessage();
                         <div class="js-ticket-link-text js-ticket-green">
                             <?php
                                 echo esc_html(__('Open', 'js-support-ticket'));
-                                echo ' ( '.esc_html(jssupportticket::$_data['ticket_total']['openticket']).' )';
+                                echo ' ( '.esc_html(jssupportticket::$jsst_data['ticket_total']['openticket']).' )';
                             ?>
                         </div>
                     </a>
                 </div>
                 <div class="js-ticket-link">
-                    <a class="js-ticket-link js-ticket-brown" href="#" data-tab-number="2" title="<?php echo esc_html(__('answered ticket','js-support-ticket')); ?>">
-                        <div class="js-ticket-cricle-wrp" data-per="<?php echo esc_attr($answered_percentage); ?>" >
-                            <div class="js-mr-rp" data-progress="<?php echo esc_attr($answered_percentage); ?>">
+                    <a class="js-ticket-link js-ticket-brown" href="#" data-tab-number="2" title="<?php echo esc_attr(__('answered ticket','js-support-ticket')); ?>">
+                        <div class="js-ticket-cricle-wrp" data-per="<?php echo esc_attr($jsst_answered_percentage); ?>" >
+                            <div class="js-mr-rp" data-progress="<?php echo esc_attr($jsst_answered_percentage); ?>">
                                 <div class="circle">
                                     <div class="mask full">
                                          <div class="fill js-ticket-answer"></div>
@@ -248,16 +248,16 @@ JSSTmessage::getMessage();
                         <div class="js-ticket-link-text js-ticket-brown">
                             <?php
                                 echo esc_html(__('Answered', 'js-support-ticket'));
-                                echo ' ( '.esc_html(jssupportticket::$_data['ticket_total']['answeredticket']).' )';
+                                echo ' ( '.esc_html(jssupportticket::$jsst_data['ticket_total']['answeredticket']).' )';
                             ?>
                         </div>
                     </a>
                 </div>
                 <?php if(in_array('overdue', jssupportticket::$_active_addons)){ ?>
                   <div class="js-ticket-link">
-                      <a class="js-ticket-link js-ticket-orange" href="#" data-tab-number="3" title="<?php echo esc_html(__('overdue ticket','js-support-ticket')); ?>">
-                          <div class="js-ticket-cricle-wrp" data-per="<?php echo esc_attr($overdue_percentage); ?>" >
-                              <div class="js-mr-rp" data-progress="<?php echo esc_attr($overdue_percentage); ?>">
+                      <a class="js-ticket-link js-ticket-orange" href="#" data-tab-number="3" title="<?php echo esc_attr(__('overdue ticket','js-support-ticket')); ?>">
+                          <div class="js-ticket-cricle-wrp" data-per="<?php echo esc_attr($jsst_overdue_percentage); ?>" >
+                              <div class="js-mr-rp" data-progress="<?php echo esc_attr($jsst_overdue_percentage); ?>">
                                   <div class="circle">
                                       <div class="mask full">
                                            <div class="fill js-ticket-overdue"></div>
@@ -275,16 +275,16 @@ JSSTmessage::getMessage();
                           <div class="js-ticket-link-text js-ticket-orange">
                               <?php
                                   echo esc_html(__('Overdue', 'js-support-ticket'));
-                                  echo ' ( '.esc_html(jssupportticket::$_data['ticket_total']['overdueticket']).' )';
+                                  echo ' ( '.esc_html(jssupportticket::$jsst_data['ticket_total']['overdueticket']).' )';
                               ?>
                           </div>
                       </a>
                   </div>
                 <?php } ?>
                 <div class="js-ticket-link">
-                    <a class="js-ticket-link js-ticket-red" href="#" data-tab-number="4" title="<?php echo esc_html(__('Close Ticket','js-support-ticket')); ?>">
-                        <div class="js-ticket-cricle-wrp" data-per="<?php echo esc_attr($close_percentage); ?>" >
-                            <div class="js-mr-rp" data-progress="<?php echo esc_attr($close_percentage); ?>">
+                    <a class="js-ticket-link js-ticket-red" href="#" data-tab-number="4" title="<?php echo esc_attr(__('Close Ticket','js-support-ticket')); ?>">
+                        <div class="js-ticket-cricle-wrp" data-per="<?php echo esc_attr($jsst_close_percentage); ?>" >
+                            <div class="js-mr-rp" data-progress="<?php echo esc_attr($jsst_close_percentage); ?>">
                                 <div class="circle">
                                     <div class="mask full">
                                          <div class="fill js-ticket-close"></div>
@@ -302,15 +302,15 @@ JSSTmessage::getMessage();
                         <div class="js-ticket-link-text js-ticket-red">
                             <?php
                                 echo esc_html(__('Closed', 'js-support-ticket'));
-                                echo ' ( '.esc_html(jssupportticket::$_data['ticket_total']['closeticket']).' )';
+                                echo ' ( '.esc_html(jssupportticket::$jsst_data['ticket_total']['closeticket']).' )';
                             ?>
                         </div>
                     </a>
                 </div>
                 <div class="js-ticket-link">
-                    <a class="js-ticket-link js-ticket-blue" href="#" data-tab-number="5" title="<?php echo esc_html(__('all ticket','js-support-ticket')); ?>">
-                        <div class="js-ticket-cricle-wrp" data-per="<?php echo esc_attr($allticket_percentage); ?>">
-                            <div class="js-mr-rp" data-progress="<?php echo esc_attr($allticket_percentage); ?>">
+                    <a class="js-ticket-link js-ticket-blue" href="#" data-tab-number="5" title="<?php echo esc_attr(__('all ticket','js-support-ticket')); ?>">
+                        <div class="js-ticket-cricle-wrp" data-per="<?php echo esc_attr($jsst_allticket_percentage); ?>">
+                            <div class="js-mr-rp" data-progress="<?php echo esc_attr($jsst_allticket_percentage); ?>">
                                 <div class="circle">
                                     <div class="mask full">
                                          <div class="fill js-ticket-allticket"></div>
@@ -328,7 +328,7 @@ JSSTmessage::getMessage();
                         <div class="js-ticket-link-text js-ticket-blue">
                             <?php
                                 echo esc_html(__('All Tickets', 'js-support-ticket'));
-                                echo ' ( '.esc_html(jssupportticket::$_data['ticket_total']['allticket']).' )';
+                                echo ' ( '.esc_html(jssupportticket::$jsst_data['ticket_total']['allticket']).' )';
                             ?>
                         </div>
                     </a>

@@ -9,88 +9,103 @@ class JSSTwphdnotification {
 
     }
 
-    public function addSessionNotificationDataToTable($message, $msgtype, $sessiondatafor = 'notification',$ticketid = null){
-        if($message == ''){
-            if(!is_numeric($message))
+    public function addSessionNotificationDataToTable($jsst_message, $jsst_msgtype, $jsst_sessiondatafor = 'notification',$jsst_ticketid = null){
+        if($jsst_message == ''){
+            if(!is_numeric($jsst_message))
                 return false;
         }
         global $wpdb;
-        $data = array();
-        $update = false;
-        if(isset($_COOKIE['_wpjshd_session_']) && isset(jssupportticket::$_jshdsession->sessionid)){
-            if($sessiondatafor == 'notification'){
-                $data = $this->getNotificationDatabySessionId($sessiondatafor);
-                if(empty($data)){
-                    $data['msg'][0] = $message;
-                    $data['type'][0] = $msgtype;
+        $jsst_data = array();
+        $jsst_update = false;
+        if(isset($_COOKIE['_wpjshd_session_']) && isset(jssupportticket::$_jshdsession->jsst_sessionid)){
+            if($jsst_sessiondatafor == 'notification'){
+                $jsst_data = $this->getNotificationDatabySessionId($jsst_sessiondatafor);
+                if(empty($jsst_data)){
+                    $jsst_data['msg'][0] = $jsst_message;
+                    $jsst_data['type'][0] = $jsst_msgtype;
                 }else{
-                    $update = true;
-                    $count = count($data['msg']);
-                    $data['msg'][$count] = $message;
-                    $data['type'][$count] = $msgtype;
+                    $jsst_update = true;
+                    $jsst_count = count($jsst_data['msg']);
+                    $jsst_data['msg'][$jsst_count] = $jsst_message;
+                    $jsst_data['type'][$jsst_count] = $jsst_msgtype;
                 }
-            }elseif($sessiondatafor == 'submitform'){
-                $data = $this->getNotificationDatabySessionId($sessiondatafor,true);
-                $data = $message;
-            }elseif($sessiondatafor == 'ticket_time_start_'){
-                $data = $this->getNotificationDatabySessionId($sessiondatafor.$ticketid);
-                $sessiondatafor = $sessiondatafor.$ticketid;
-                if($data != ""){
-                    $update = true;
+            }elseif($jsst_sessiondatafor == 'submitform'){
+                $jsst_data = $this->getNotificationDatabySessionId($jsst_sessiondatafor,true);
+                $jsst_data = $jsst_message;
+            }elseif($jsst_sessiondatafor == 'ticket_time_start_'){
+                $jsst_data = $this->getNotificationDatabySessionId($jsst_sessiondatafor.$jsst_ticketid);
+                $jsst_sessiondatafor = $jsst_sessiondatafor.$jsst_ticketid;
+                if($jsst_data != ""){
+                    $jsst_update = true;
                 }
-                $data = $message;
+                $jsst_data = $jsst_message;
             }
-            if($sessiondatafor == 'jssupportticket_spamcheckid'){
-                $data = $this->getNotificationDatabySessionId($sessiondatafor);
-                if($data != ""){
-                    $update = true;
-                    $data = $message;
+            if($jsst_sessiondatafor == 'jssupportticket_spamcheckid'){
+                $jsst_data = $this->getNotificationDatabySessionId($jsst_sessiondatafor);
+                if($jsst_data != ""){
+                    $jsst_update = true;
+                    $jsst_data = $jsst_message;
                 }else{
-                    $data = $message;
-                }
-            }
-            if($sessiondatafor == 'jssupportticket_rot13'){
-                $data = $this->getNotificationDatabySessionId($sessiondatafor);
-                if($data != ""){
-                    $update = true;
-                    $data = $message;
-                }else{
-                    $data = $message;
+                    $jsst_data = $jsst_message;
                 }
             }
-            if($sessiondatafor == 'jssupportticket_spamcheckresult'){
-                $data = $this->getNotificationDatabySessionId($sessiondatafor);
-                if($data != ""){
-                    $update = true;
-                    $data = $message;
+            if($jsst_sessiondatafor == 'jssupportticket_rot13'){
+                $jsst_data = $this->getNotificationDatabySessionId($jsst_sessiondatafor);
+                if($jsst_data != ""){
+                    $jsst_update = true;
+                    $jsst_data = $jsst_message;
                 }else{
-                    $data = $message;
+                    $jsst_data = $jsst_message;
                 }
             }
-            $data = wp_json_encode($data , true);
-            $sessionmsg = jssupportticketphplib::JSST_safe_encoding($data);
-            if(!$update){
-                $wpdb->insert( "{$wpdb->prefix}js_ticket_jshdsessiondata", array("usersessionid" => jssupportticket::$_jshdsession->sessionid, "sessionmsg" => $sessionmsg, "sessionexpire" => jssupportticket::$_jshdsession->sessionexpire, "sessionfor" => $sessiondatafor) );
+            if($jsst_sessiondatafor == 'jssupportticket_spamcheckresult'){
+                $jsst_data = $this->getNotificationDatabySessionId($jsst_sessiondatafor);
+                if($jsst_data != ""){
+                    $jsst_update = true;
+                    $jsst_data = $jsst_message;
+                }else{
+                    $jsst_data = $jsst_message;
+                }
+            }
+            $jsst_data = wp_json_encode($jsst_data , true);
+            $jsst_sessionmsg = jssupportticketphplib::JSST_safe_encoding($jsst_data);
+            if(!$jsst_update){
+                jssupportticket::$_db->insert(
+                    jssupportticket::$_db->prefix . "js_ticket_jshdsessiondata",
+                    array(
+                        "usersessionid" => jssupportticket::$_jshdsession->jsst_sessionid,
+                        "sessionmsg"    => $jsst_sessionmsg,
+                        "sessionexpire" => jssupportticket::$_jshdsession->jsst_sessionexpire,
+                        "sessionfor"    => $jsst_sessiondatafor
+                    )
+                );
             }else{
-                $wpdb->update( "{$wpdb->prefix}js_ticket_jshdsessiondata", array("sessionmsg" => $sessionmsg), array("usersessionid" => jssupportticket::$_jshdsession->sessionid , 'sessionfor' => $sessiondatafor) );
+                jssupportticket::$_db->update(
+                    jssupportticket::$_db->prefix . "js_ticket_jshdsessiondata",
+                    array("sessionmsg" => $jsst_sessionmsg),
+                    array(
+                        "usersessionid" => jssupportticket::$_jshdsession->jsst_sessionid,
+                        "sessionfor"    => $jsst_sessiondatafor
+                    )
+                );
             }
         }
         return false;
     }
 
-    public function getNotificationDatabySessionId($sessionfor , $deldata = false){
-        if(jssupportticket::$_jshdsession->sessionid == '')
+    public function getNotificationDatabySessionId($jsst_sessionfor , $jsst_deldata = false){
+        if(jssupportticket::$_jshdsession->jsst_sessionid == '')
             return false;
-        $query = "SELECT sessionmsg FROM `" . jssupportticket::$_db->prefix . "js_ticket_jshdsessiondata` WHERE usersessionid = '" . esc_sql(jssupportticket::$_jshdsession->sessionid) . "' AND sessionfor = '" . esc_sql($sessionfor) . "' AND sessionexpire > '" . time() . "'";
-        $data = jssupportticket::$_db->get_var($query);
-        if(!empty($data)){
-            $data = jssupportticketphplib::JSST_safe_decoding($data);
-            $data = json_decode( $data , true);
+        $jsst_query = "SELECT sessionmsg FROM `" . jssupportticket::$_db->prefix . "js_ticket_jshdsessiondata` WHERE usersessionid = '" . esc_sql(jssupportticket::$_jshdsession->jsst_sessionid) . "' AND sessionfor = '" . esc_sql($jsst_sessionfor) . "' AND sessionexpire > '" . time() . "'";
+        $jsst_data = jssupportticket::$_db->get_var($jsst_query);
+        if(!empty($jsst_data)){
+            $jsst_data = jssupportticketphplib::JSST_safe_decoding($jsst_data);
+            $jsst_data = json_decode( $jsst_data , true);
         }
-        if($deldata){
-            jssupportticket::$_db->delete(jssupportticket::$_db->prefix . "js_ticket_jshdsessiondata", array( 'usersessionid' => jssupportticket::$_jshdsession->sessionid , 'sessionfor' => $sessionfor) );
+        if($jsst_deldata){
+            jssupportticket::$_db->delete(jssupportticket::$_db->prefix . "js_ticket_jshdsessiondata", array( 'usersessionid' => jssupportticket::$_jshdsession->jsst_sessionid , 'sessionfor' => $jsst_sessionfor) );
         }
-        return $data;
+        return $jsst_data;
     }
 
 }

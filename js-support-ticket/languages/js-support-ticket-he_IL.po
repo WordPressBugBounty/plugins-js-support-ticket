@@ -8738,3 +8738,45 @@ msgstr "שמור & הבא"
 
 msgid "For enhanced security change encryption method in %1$s on line %2$s"
 msgstr "לשיטת הצפנת שינוי אבטחה משופרת ב- %1 $ s על קו %2 $ s"
+
+msgid "Changes may require cache clearing to take effect."
+msgstr "שינויים עשויים לדרוש ניקוי מטמון כדי להיכנס לתוקף."
+
+msgid "How Long Will My Support Stay Active?"
+msgstr "כמה זמן התמיכה שלי תישאר פעילה?"
+
+msgid "I Can’t Log Into My Account"
+msgstr "אני לא יכול להיכנס לחשבון שלי"
+
+msgid "I Want to Upgrade My Plan — How Can I Do It?"
+msgstr "אני רוצה לשדרג את התוכנית שלי - איך אני יכול לעשות את זה?"
+
+msgid "I’m Not Getting Access to My Subscription"
+msgstr "אני לא מקבל גישה למנוי שלי"
+
+msgid "Ticket ID Or Email Address Or Subject"
+msgstr "מזהה כרטיס או כתובת אימייל או נושא"
+
+msgid "Sophie Martinez"
+msgstr "סופי מרטינז"
+
+msgid "Daniel Brooks"
+msgstr "דניאל ברוקס"
+
+msgid "Liam Turner"
+msgstr "ליאם טרנר"
+
+msgid "Emily Harper"
+msgstr "אמילי הארפר"
+
+msgid "Noah Bennett"
+msgstr "נועה בנט"
+
+msgid "Olivia Chase"
+msgstr "אוליביה צ'ייס"
+
+msgid "Maya Collins"
+msgstr "מאיה קולינס"
+
+msgid "Ethan Reynolds"
+msgstr "איתן ריינולדס"

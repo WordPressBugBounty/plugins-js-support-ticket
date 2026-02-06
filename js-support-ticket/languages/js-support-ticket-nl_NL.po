@@ -8766,3 +8766,45 @@ msgstr "Opslaan en volgende"
 
 msgid "For enhanced security change encryption method in %1$s on line %2$s"
 msgstr "Voor verbeterde coderingsmethode voor beveiligingsverandering in %1 $ s On Line %2 $ s"
+
+msgid "Changes may require cache clearing to take effect."
+msgstr "Voor wijzigingen is het mogelijk dat de cache moet worden gewist om van kracht te worden."
+
+msgid "How Long Will My Support Stay Active?"
+msgstr "Hoe lang blijft mijn ondersteuning actief?"
+
+msgid "I Can’t Log Into My Account"
+msgstr "Ik kan niet inloggen op mijn account"
+
+msgid "I Want to Upgrade My Plan — How Can I Do It?"
+msgstr "Ik wil mijn abonnement upgraden: hoe kan ik dat doen?"
+
+msgid "I’m Not Getting Access to My Subscription"
+msgstr "Ik krijg geen toegang tot mijn abonnement"
+
+msgid "Ticket ID Or Email Address Or Subject"
+msgstr "Ticket-ID of e-mailadres of onderwerp"
+
+msgid "Sophie Martinez"
+msgstr "Sophie Martínez"
+
+msgid "Daniel Brooks"
+msgstr "Daniël Brooks"
+
+msgid "Liam Turner"
+msgstr "Liam Turner"
+
+msgid "Emily Harper"
+msgstr "Emily Harper"
+
+msgid "Noah Bennett"
+msgstr "Noach Bennett"
+
+msgid "Olivia Chase"
+msgstr "Olivia Chase"
+
+msgid "Maya Collins"
+msgstr "Maya Collins"
+
+msgid "Ethan Reynolds"
+msgstr "Ethan Reynolds"

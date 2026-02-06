@@ -432,7 +432,10 @@
 	.jsst-main-up-wrapper input.custom_date{
 		background-position: 15px center;
 	}
-	
+/* widgets */
+	div.jsst-main-up-wrapper.jsst-widget-main-up-wrapper .js-ticket-head .js-ticket-head-text{margin-right: 0;}
+	div.jsst-main-up-wrapper.jsst-widget-main-up-wrapper .js-widget-download-right .js-ticket-body-row-button{border-right: unset;}
+		
 @media (max-width: 991px){
 	div.js-ticket-wrapper div.js-ticket-data1{border-right: none !important;} 
 

@@ -8,24 +8,24 @@ class JSSTreviewbox {
     }
 
     public function jsstadmin_notices() {
-        $is_hidden = get_option("jssupportticket_hide_review_box");
-        if($is_hidden !== false) {
+        $jsst_is_hidden = get_option("jssupportticket_hide_review_box");
+        if($jsst_is_hidden !== false) {
             return;
         }
-        $current_count = get_option("jssupportticket_show_review_box_after");
-        if($current_count === false) {
+        $jsst_current_count = get_option("jssupportticket_show_review_box_after");
+        if($jsst_current_count === false) {
 			//jssupportticketphplib::JSST_strtotime not work porperly
-            //$date = gmdate("Y-m-d", jssupportticketphplib::JSST_strtotime("+30 days"));
-            $date = gmdate("Y-m-d", strtotime("+30 days"));
-			add_option("jssupportticket_show_review_box_after", $date);
+            //$jsst_date = gmdate("Y-m-d", jssupportticketphplib::JSST_strtotime("+30 days"));
+            $jsst_date = gmdate("Y-m-d", strtotime("+30 days"));
+			add_option("jssupportticket_show_review_box_after", $jsst_date);
             return;
-        } else if($current_count < 35) {
+        } else if($jsst_current_count < 35) {
             return;
         }
-        $date_to_show = get_option("jssupportticket_show_review_box_after");
-        if($date_to_show !== false) {
-            $current_date = gmdate("Y-m-d");
-            if($current_date < $date_to_show) {
+        $jsst_date_to_show = get_option("jssupportticket_show_review_box_after");
+        if($jsst_date_to_show !== false) {
+            $jsst_current_date = gmdate("Y-m-d");
+            if($jsst_current_date < $jsst_date_to_show) {
                 return;
             }
         }
@@ -44,7 +44,7 @@ class JSSTreviewbox {
                             <?php echo esc_html(__("We'd love to hear from you. It'll only take 2 minutes of your time, and will really help us spread the word",'js-support-ticket')); ?>
                         </div>
                         <div class="js-ticket-review-row">
-                            <a data-mode="love" class="jssupportticket-premio-review-box-hide-btn review-love" href="https://wordpress.org/support/plugin/js-support-ticket/reviews/?filter=5" target="_blank">
+                            <a data-mode="love" class="jssupportticket-premio-review-box-hide-btn review-love" href="https://wordpress.org/support/plugin/js-support-ticket/reviews" target="_blank">
                                 <img alt="<?php echo esc_attr(__('love','js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/review/love.png">
                                 <?php echo esc_html(__("I'd love to help :)",'js-support-ticket')); ?>
                             </a>
@@ -117,7 +117,7 @@ class JSSTreviewbox {
             </div>
         </div>
         <?php
-        $jssupportticket_js ='
+        $jsst_jssupportticket_js ='
             jQuery(document).ready(function(){
                 jQuery("body").addClass("has-premio-box");
                 jQuery(document).on("click", ".jssupportticket-premio-review-dismiss-btn, .jssupportticket-premio-review-box-future-btn", function(){
@@ -158,7 +158,7 @@ class JSSTreviewbox {
                 });
             });
         ';
-        wp_add_inline_script('js-support-ticket-main-js',$jssupportticket_js);
+        wp_add_inline_script('js-support-ticket-main-js',$jsst_jssupportticket_js);
     }
 }
 $JSSTreviewbox = new JSSTreviewbox();

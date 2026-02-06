@@ -5,21 +5,21 @@ if (!defined('ABSPATH'))
 JSSTincluder::getJSModel('jssupportticket')->checkIfMainCssFileIsEnqued();
 JSSTincluder::getJSModel('jssupportticket')->jsst_get_theme_colors();
 
-$color1 = jssupportticket::$_colors['color1'];
-$color2 = jssupportticket::$_colors['color2'];
-$color3 = jssupportticket::$_colors['color3'];
-$color4 = jssupportticket::$_colors['color4'];
-$color5 = jssupportticket::$_colors['color5'];
-$color6 = jssupportticket::$_colors['color6'];
-$color7 = jssupportticket::$_colors['color7'];
-$color8 = jssupportticket::$_colors['color8'];
-$color9 = jssupportticket::$_colors['color9'];
+$jsst_color1 = jssupportticket::$jsst_colors['color1'];
+$jsst_color2 = jssupportticket::$jsst_colors['color2'];
+$jsst_color3 = jssupportticket::$jsst_colors['color3'];
+$jsst_color4 = jssupportticket::$jsst_colors['color4'];
+$jsst_color5 = jssupportticket::$jsst_colors['color5'];
+$jsst_color6 = jssupportticket::$jsst_colors['color6'];
+$jsst_color7 = jssupportticket::$jsst_colors['color7'];
+$jsst_color8 = jssupportticket::$jsst_colors['color8'];
+$jsst_color9 = jssupportticket::$jsst_colors['color9'];
 
 
-$jssupportticket_css = '';
+$jsst_jssupportticket_css = '';
 
 /*Code for Css*/
-$jssupportticket_css .= '
+$jsst_jssupportticket_css .= '
 /* General Form Styling */
 form.js-ticket-form {
     display: flex;
@@ -115,8 +115,8 @@ div.js-ticket-add-form-wrapper div.js-ticket-from-field-wrp div.js-ticket-from-f
 div.js-ticket-add-form-wrapper div.js-ticket-from-field-wrp div.js-ticket-from-field textarea:focus,
 div.js-ticket-add-form-wrapper div.js-ticket-from-field-wrp div.js-ticket-from-field select.js-ticket-form-field-select:focus {
     outline: none;
-    border-color: ' . $color1 . ';
-    box-shadow: 0 0 0 4px rgba(' . hexdec(substr($color1, 1, 2)) . ', ' . hexdec(substr($color1, 3, 2)) . ', ' . hexdec(substr($color1, 5, 2)) . ', 0.25);
+    border-color: ' . $jsst_color1 . ';
+    box-shadow: 0 0 0 4px rgba(' . hexdec(substr($jsst_color1, 1, 2)) . ', ' . hexdec(substr($jsst_color1, 3, 2)) . ', ' . hexdec(substr($jsst_color1, 5, 2)) . ', 0.25);
     background-color: #ffffff;
 }
 div.js-ticket-add-form-wrapper div.js-ticket-from-field-wrp div.js-ticket-from-field select{
@@ -125,7 +125,7 @@ div.js-ticket-add-form-wrapper div.js-ticket-from-field-wrp div.js-ticket-from-f
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 20 20\' fill=\'%23' . substr($color2, 1) . '\'%3E%3Cpath fill-rule=\'evenodd\' d=\'M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z\' clip-rule=\'evenodd\' /%3E%3C/svg%3E");
+    background-image: url("data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 20 20\' fill=\'%23' . substr($jsst_color2, 1) . '\'%3E%3Cpath fill-rule=\'evenodd\' d=\'M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z\' clip-rule=\'evenodd\' /%3E%3C/svg%3E");
     background-repeat: no-repeat;
     background-position: right 1rem center;
     background-size: 1.2em;
@@ -133,7 +133,7 @@ div.js-ticket-add-form-wrapper div.js-ticket-from-field-wrp div.js-ticket-from-f
 /* Custom Select Arrow */
 div.js-ticket-add-form-wrapper div.js-ticket-from-field-wrp div.js-ticket-from-field select.js-ticket-form-field-select,
 select.js-ticket-select-field {
-    background: url("data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 20 20\' fill=\'%23' . substr($color2, 1) . '\'%3E%3Cpath fill-rule=\'evenodd\' d=\'M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z\' clip-rule=\'evenodd\' /%3E%3C/svg%3E") calc(100% - 15px) / 1.5em no-repeat;
+    background: url("data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 20 20\' fill=\'%23' . substr($jsst_color2, 1) . '\'%3E%3Cpath fill-rule=\'evenodd\' d=\'M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z\' clip-rule=\'evenodd\' /%3E%3C/svg%3E") calc(100% - 15px) / 1.5em no-repeat;
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
@@ -196,8 +196,8 @@ div.js-ticket-form-btn-wrp {
 
 /* Save Button */
 div.js-ticket-form-btn-wrp input.js-ticket-save-button {
-    border: 1px solid ' . $color1 . ';
-    box-shadow: 0 2px 10px rgba(' . hexdec(substr($color1, 1, 2)) . ', ' . hexdec(substr($color1, 3, 2)) . ', ' . hexdec(substr($color1, 5, 2)) . ', 0.4);
+    border: 1px solid ' . $jsst_color1 . ';
+    box-shadow: 0 2px 10px rgba(' . hexdec(substr($jsst_color1, 1, 2)) . ', ' . hexdec(substr($jsst_color1, 3, 2)) . ', ' . hexdec(substr($jsst_color1, 5, 2)) . ', 0.4);
     padding: 16px 30px;
     min-width: 160px;
     border-radius: 10px;
@@ -230,15 +230,15 @@ div.js-ticket-form-btn-wrp a.js-ticket-cancel-button {
 
 /* Button Hover Effects */
 div.js-ticket-form-btn-wrp input.js-ticket-save-button:hover {
-    border-color: ' . $color2 . ' !important;
+    border-color: ' . $jsst_color2 . ' !important;
     transform: translateY(-3px);
-    box-shadow: 0 2px 10px rgba(' . hexdec(substr($color2, 1, 2)) . ', ' . hexdec(substr($color2, 3, 2)) . ', ' . hexdec(substr($color2, 5, 2)) . ', 0.5);
+    box-shadow: 0 2px 10px rgba(' . hexdec(substr($jsst_color2, 1, 2)) . ', ' . hexdec(substr($jsst_color2, 3, 2)) . ', ' . hexdec(substr($jsst_color2, 5, 2)) . ', 0.5);
     filter: brightness(1.1);
 }
 div.js-ticket-form-btn-wrp a.js-ticket-cancel-button:hover {
-    border-color: ' . $color2 . ';
+    border-color: ' . $jsst_color2 . ';
     transform: translateY(-2px);
-    box-shadow: 0 2px 10px rgba(' . hexdec(substr($color2, 1, 2)) . ', ' . hexdec(substr($color2, 3, 2)) . ', ' . hexdec(substr($color2, 5, 2)) . ', 0.5);
+    box-shadow: 0 2px 10px rgba(' . hexdec(substr($jsst_color2, 1, 2)) . ', ' . hexdec(substr($jsst_color2, 3, 2)) . ', ' . hexdec(substr($jsst_color2, 5, 2)) . ', 0.5);
 }
 
 /* Attachments Section */
@@ -252,7 +252,7 @@ div.js-ticket-reply-attachments div.js-attachment-field-title{
     width: 100%;
     padding: 15px 0px;
     font-weight: 600;
-    border-bottom: 1px solid ' . $color5 . ';
+    border-bottom: 1px solid ' . $jsst_color5 . ';
     margin-bottom: 20px;
 }
 div.js-ticket-reply-attachments div.js-attachment-field,
@@ -260,7 +260,7 @@ div.tk_attachment_value_wrapperform {
     float: left;
     width: 100%;
     padding: 15px;
-    border: 2px dashed ' . $color5 . ';
+    border: 2px dashed ' . $jsst_color5 . ';
     border-radius: 12px;
     margin-bottom: 20px;
     display: flex;
@@ -336,11 +336,11 @@ span.tk_attachments_addform{
     border-radius: 10px;
     font-weight: 700;
     transition: all 0.3s ease;
-    box-shadow: 0 2px 10px rgba(' . hexdec(substr($color1, 1, 2)) . ', ' . hexdec(substr($color1, 3, 2)) . ', ' . hexdec(substr($color1, 5, 2)) . ', 0.4);
+    box-shadow: 0 2px 10px rgba(' . hexdec(substr($jsst_color1, 1, 2)) . ', ' . hexdec(substr($jsst_color1, 3, 2)) . ', ' . hexdec(substr($jsst_color1, 5, 2)) . ', 0.4);
 }
 span.tk_attachments_addform:hover{
     transform: translateY(-3px);
-    box-shadow: 0 2px 10px rgba(' . hexdec(substr($color2, 1, 2)) . ', ' . hexdec(substr($color2, 3, 2)) . ', ' . hexdec(substr($color2, 5, 2)) . ', 0.5);
+    box-shadow: 0 2px 10px rgba(' . hexdec(substr($jsst_color2, 1, 2)) . ', ' . hexdec(substr($jsst_color2, 3, 2)) . ', ' . hexdec(substr($jsst_color2, 5, 2)) . ', 0.5);
     filter: brightness(1.1);
 }
 
@@ -375,44 +375,44 @@ select{-webkit-appearance:none !important;}
 ';
 
 /*Code For Colors*/
-$jssupportticket_css .= '
+$jsst_jssupportticket_css .= '
 /* Add Form */
 div.js-ticket-add-form-wrapper div.js-ticket-from-field-wrp div.js-ticket-from-field input.js-ticket-form-field-input,
 div.js-ticket-add-form-wrapper div.js-ticket-from-field-wrp div.js-ticket-from-field textarea,
 div.js-ticket-add-form-wrapper div.js-ticket-from-field-wrp div.js-ticket-from-field select.js-ticket-form-field-select {
-    border: 1px solid ' . $color5 . ' !important;
-    color: ' . $color4 . ';
+    border: 1px solid ' . $jsst_color5 . ' !important;
+    color: ' . $jsst_color4 . ';
     background-color: #fcfcfc;
 }
 div.js_ticketattachment{
-    color:'. $color4 .';
+    color:'. $jsst_color4 .';
 }
 div.js-ticket-add-form-wrapper div.js-ticket-from-field-wrp div.js-ticket-from-field-title {
-    color: ' . $color2 . ';
+    color: ' . $jsst_color2 . ';
 }
 div.js-ticket-form-btn-wrp {
-    border-top-color: ' . $color2 . ';
+    border-top-color: ' . $jsst_color2 . ';
 }
 div.js-ticket-form-btn-wrp input.js-ticket-save-button {
-    background-color: ' . $color1 . ' !important;
-    color: ' . $color7 . ' !important;
+    background-color: ' . $jsst_color1 . ' !important;
+    color: ' . $jsst_color7 . ' !important;
 }
 div.js-ticket-form-btn-wrp input.js-ticket-save-button:hover {
-    background-color: ' . $color2 . ' !important;
-    color: ' . $color7 . ' !important;
+    background-color: ' . $jsst_color2 . ' !important;
+    color: ' . $jsst_color7 . ' !important;
 }
 div.js-ticket-form-btn-wrp a.js-ticket-cancel-button {
     background-color: #f5f2f5;
-    color: ' . $color4 . ';
-    border-color: ' . $color5 . ';
+    color: ' . $jsst_color4 . ';
+    border-color: ' . $jsst_color5 . ';
 }
 div.js-ticket-form-btn-wrp a.js-ticket-cancel-button:hover {
-    background-color: ' . $color2 . ' !important;
-    color: ' . $color7 . ' !important;
-    border-color: ' . $color2 . ' !important;
+    background-color: ' . $jsst_color2 . ' !important;
+    color: ' . $jsst_color7 . ' !important;
+    border-color: ' . $jsst_color2 . ' !important;
 }
 a.js-ticket-delete-attachment {
-    color: ' . $color1 . ';
+    color: ' . $jsst_color1 . ';
     padding: 10px 18px;
     border-radius: 8px;
     text-decoration: none;
@@ -426,35 +426,35 @@ a.js-ticket-delete-attachment:hover {
     box-shadow: 0 5px 15px rgba(231, 76, 60, 0.3);
 }
 div.js-ticket-reply-attachments div.js-attachment-field-title {
-    color: ' . $color2 . '!important;
+    color: ' . $jsst_color2 . '!important;
 }
 span.tk_attachments_addform {
-    background-color: ' . $color1 . ';
-    color: ' . $color7 . ';
+    background-color: ' . $jsst_color1 . ';
+    color: ' . $jsst_color7 . ';
 }
 span.tk_attachments_addform:hover {
-    background-color: ' . $color2 . ';
+    background-color: ' . $jsst_color2 . ';
 }
 select.js-ticket-select-field {
     background-color: #fcfcfc !important;
-    border: 1px solid ' . $color5 . ';
-    color: ' . $color4 . ';
+    border: 1px solid ' . $jsst_color5 . ';
+    color: ' . $jsst_color4 . ';
 }
 span.tk_attachments_configform {
-    color: ' . $color4 . ';
+    color: ' . $jsst_color4 . ';
 }
 div.tk_attachment_value_wrapperform {
     background: #ffffff;
 }
 div.tk_attachment_value_wrapperform span.tk_attachment_value_text {
     background-color: #fff;
-    border: 1px solid ' . $color5 . ';
+    border: 1px solid ' . $jsst_color5 . ';
 }
 div.tk_attachment_value_wrapperform span.tk_attachment_value_text input.js-attachment-inputbox{
-    color: ' . $color4 . ';
+    color: ' . $jsst_color4 . ';
 }
 ';
 
-wp_add_inline_style('jssupportticket-main-css', $jssupportticket_css);
+wp_add_inline_style('jssupportticket-main-css', $jsst_jssupportticket_css);
 
 ?>

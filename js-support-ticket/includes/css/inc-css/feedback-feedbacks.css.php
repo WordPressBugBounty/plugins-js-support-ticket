@@ -5,20 +5,20 @@ if (!defined('ABSPATH'))
 JSSTincluder::getJSModel('jssupportticket')->checkIfMainCssFileIsEnqued();
 JSSTincluder::getJSModel('jssupportticket')->jsst_get_theme_colors();
 
-$color1 = jssupportticket::$_colors['color1'];
-$color2 = jssupportticket::$_colors['color2'];
-$color3 = jssupportticket::$_colors['color3'];
-$color4 = jssupportticket::$_colors['color4'];
-$color5 = jssupportticket::$_colors['color5'];
-$color6 = jssupportticket::$_colors['color6'];
-$color7 = jssupportticket::$_colors['color7'];
-$color8 = jssupportticket::$_colors['color8'];
-$color9 = jssupportticket::$_colors['color9'];
+$jsst_color1 = jssupportticket::$jsst_colors['color1'];
+$jsst_color2 = jssupportticket::$jsst_colors['color2'];
+$jsst_color3 = jssupportticket::$jsst_colors['color3'];
+$jsst_color4 = jssupportticket::$jsst_colors['color4'];
+$jsst_color5 = jssupportticket::$jsst_colors['color5'];
+$jsst_color6 = jssupportticket::$jsst_colors['color6'];
+$jsst_color7 = jssupportticket::$jsst_colors['color7'];
+$jsst_color8 = jssupportticket::$jsst_colors['color8'];
+$jsst_color9 = jssupportticket::$jsst_colors['color9'];
 
-$jssupportticket_css = '';
+$jsst_jssupportticket_css = '';
 
 /*Code for Css - Modern Layout Inspired by agent-staffs.css*/
-$jssupportticket_css .= '
+$jsst_jssupportticket_css .= '
 /* General Wrappers */
 	div.js-ticket-feedback-wrapper,
 	div.js-ticket-top-search-wrp {
@@ -47,7 +47,7 @@ div.js-ticket-feedback-heading{width: 100%;
 /* Search Area Card Styling */
 	div.js-ticket-top-search-wrp {
 		padding: 1.5rem;
-		border: 1px solid '. $color5 .';
+		border: 1px solid '. $jsst_color5 .';
 		border-radius: 12px;
 		box-shadow: 0 4px 6px rgba(0,0,0,0.04);
 		margin-bottom: 2rem;
@@ -115,7 +115,7 @@ div.js-ticket-feedback-heading{width: 100%;
 	select.js-ticket-select-field {
 		width: 100%;
 		padding: 12px 18px;
-		border: 1px solid '. $color5 .';
+		border: 1px solid '. $jsst_color5 .';
 		border-radius: 8px;
 		height: auto; /* Remove fixed height */
 		line-height: 1.5;
@@ -156,7 +156,7 @@ div.js-ticket-feedback-heading{width: 100%;
 		border-radius: 8px;
 		height: auto;
 		line-height: 1.5;
-		border: 1px solid '. $color5 .';
+		border: 1px solid '. $jsst_color5 .';
 		cursor: pointer;
 		transition: opacity 0.2s ease, background-color 0.2s ease;
 		height: auto;
@@ -164,7 +164,7 @@ div.js-ticket-feedback-heading{width: 100%;
 
 /* FeedBack List */
 	div.js-ticket-feedback-list-wrapper{padding: 1.5rem;
-    border: 1px solid '. $color5 .';
+    border: 1px solid '. $jsst_color5 .';
     border-radius: 12px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.04);
     margin-bottom: 2rem;
@@ -229,7 +229,7 @@ div.js-ticket-feedback-heading{width: 100%;
 		width:100%;
 		padding: 15px;
 		background: #fafafa;
-		border-top: 1px solid ' . $color5 . ';
+		border-top: 1px solid ' . $jsst_color5 . ';
 		line-height: 1.5;
 	}
 	div.jsst-feedback-det-list-btm-title{font-weight: 600;}
@@ -251,37 +251,37 @@ div.js-ticket-feedback-heading{width: 100%;
 	select::-ms-expand { display:none !important; }
 ';
 /*Code For Colors*/
-$jssupportticket_css .= '
+$jsst_jssupportticket_css .= '
 	div.js-ticket-search-fields-wrp {background: transparent;} /* Removed background, handled by parent */
-	div.js-ticket-top-search-wrp{border:1px solid ' . $color5 . ';}
-	div.js-ticket-search-heading-wrp{background-color:' . $color4 . ';color:' . $color7 . ';}
-	div.js-ticket-search-heading-wrp div.js-ticket-heading-right a.js-ticket-add-download-btn{background:' . $color2 . ';color:' . $color7 . ';}
-	div.js-ticket-search-heading-wrp div.js-ticket-heading-right a.js-ticket-add-download-btn:hover{background:rgba(125, 135, 141, 0.4);color:' . $color7 . ';}
+	div.js-ticket-top-search-wrp{border:1px solid ' . $jsst_color5 . ';}
+	div.js-ticket-search-heading-wrp{background-color:' . $jsst_color4 . ';color:' . $jsst_color7 . ';}
+	div.js-ticket-search-heading-wrp div.js-ticket-heading-right a.js-ticket-add-download-btn{background:' . $jsst_color2 . ';color:' . $jsst_color7 . ';}
+	div.js-ticket-search-heading-wrp div.js-ticket-heading-right a.js-ticket-add-download-btn:hover{background:rgba(125, 135, 141, 0.4);color:' . $jsst_color7 . ';}
 
-	div.jsst-feedback-det-list-data-row div.jsst-feedback-det-list-data-val a.jsst-feedback-det-list-data-anch {color: ' . $color4 . ';}
-	div.jsst-feedback-det-list-data-row div.jsst-feedback-det-list-data-val.name {color: ' . $color1 . ';}
-	div.jsst-feedback-det-list-data-row div.jsst-feedback-det-list-data-title {color: ' . $color2 . ';}
-	div.jsst-feedback-det-list-data-row div.jsst-feedback-det-list-data-val {color: ' . $color4 . ';}
+	div.jsst-feedback-det-list-data-row div.jsst-feedback-det-list-data-val a.jsst-feedback-det-list-data-anch {color: ' . $jsst_color4 . ';}
+	div.jsst-feedback-det-list-data-row div.jsst-feedback-det-list-data-val.name {color: ' . $jsst_color1 . ';}
+	div.jsst-feedback-det-list-data-row div.jsst-feedback-det-list-data-title {color: ' . $jsst_color2 . ';}
+	div.jsst-feedback-det-list-data-row div.jsst-feedback-det-list-data-val {color: ' . $jsst_color4 . ';}
 
-	div.js-ticket-fields-wrp div.js-ticket-form-field input.js-ticket-field-input{background-color:#fff;border:1px solid ' . $color5 . ';color: ' . $color4 . ';}
-	select.js-ticket-select-field{background-color:#fff !important;border:1px solid ' . $color5 . ';color: ' . $color4 . ';}
+	div.js-ticket-fields-wrp div.js-ticket-form-field input.js-ticket-field-input{background-color:#fff;border:1px solid ' . $jsst_color5 . ';color: ' . $jsst_color4 . ';}
+	select.js-ticket-select-field{background-color:#fff !important;border:1px solid ' . $jsst_color5 . ';color: ' . $jsst_color4 . ';}
 
-	div.js-ticket-search-form-btn-wrp input.js-search-button{background: ' . $color1 . ' !important;color:' . $color7 . ' !important;border: 1px solid ' . $color1 . ';}
-	div.js-ticket-search-form-btn-wrp input.js-search-button:hover{background: ' . $color2 . ' !important; border-color: ' . $color2 . ';}
+	div.js-ticket-search-form-btn-wrp input.js-search-button{background: ' . $jsst_color1 . ' !important;color:' . $jsst_color7 . ' !important;border: 1px solid ' . $jsst_color1 . ';}
+	div.js-ticket-search-form-btn-wrp input.js-search-button:hover{background: ' . $jsst_color2 . ' !important; border-color: ' . $jsst_color2 . ';}
 	div.js-ticket-search-form-btn-wrp input.js-reset-button{    background-color: #f5f2f5;
     color: #636363;
-    border: 1px solid '. $color5 .';
+    border: 1px solid '. $jsst_color5 .';
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);}
-	div.js-ticket-search-form-btn-wrp input.js-reset-button:hover{background: ' . $color2 . ' !important;color: ' . $color7 . ';}
+	div.js-ticket-search-form-btn-wrp input.js-reset-button:hover{background: ' . $jsst_color2 . ' !important;color: ' . $jsst_color7 . ';}
 
-	div.jsst-feedback-det-list-cust-flds .jsst-feedback-det-list-cust-flds-title {color: ' . $color2 . ';}
-	div.jsst-feedback-det-list-cust-flds .jsst-feedback-det-list-cust-flds-val {color: ' . $color4 . ';} /* Corrected class name from value to val */
-	div.jsst-feedback-det-wrp div.jsst-feedback-det-list div.jsst-feedback-det-list-btm div.jsst-feedback-det-list-btm-title {color: ' . $color4 . ';}
-	div.jsst-feedback-det-wrp div.jsst-feedback-det-list div.jsst-feedback-det-list-btm div.jsst-feedback-det-list-btm-val {color: ' . $color2 . ';}
+	div.jsst-feedback-det-list-cust-flds .jsst-feedback-det-list-cust-flds-title {color: ' . $jsst_color2 . ';}
+	div.jsst-feedback-det-list-cust-flds .jsst-feedback-det-list-cust-flds-val {color: ' . $jsst_color4 . ';} /* Corrected class name from value to val */
+	div.jsst-feedback-det-wrp div.jsst-feedback-det-list div.jsst-feedback-det-list-btm div.jsst-feedback-det-list-btm-title {color: ' . $jsst_color4 . ';}
+	div.jsst-feedback-det-wrp div.jsst-feedback-det-list div.jsst-feedback-det-list-btm div.jsst-feedback-det-list-btm-val {color: ' . $jsst_color2 . ';}
 ';
 
 
-wp_add_inline_style('jssupportticket-main-css', $jssupportticket_css);
+wp_add_inline_style('jssupportticket-main-css', $jsst_jssupportticket_css);
 
 
 ?>

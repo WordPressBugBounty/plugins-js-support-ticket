@@ -5,15 +5,15 @@ if (!defined('ABSPATH'))
 JSSTincluder::getJSModel('jssupportticket')->checkIfMainCssFileIsEnqued();
 JSSTincluder::getJSModel('jssupportticket')->jsst_get_theme_colors();
 
-$color1 = jssupportticket::$_colors['color1'];
-$color2 = jssupportticket::$_colors['color2'];
-$color3 = jssupportticket::$_colors['color3'];
-$color4 = jssupportticket::$_colors['color4'];
-$color5 = jssupportticket::$_colors['color5'];
-$color6 = jssupportticket::$_colors['color6'];
-$color7 = jssupportticket::$_colors['color7'];
-$color8 = jssupportticket::$_colors['color8'];
-$color9 = jssupportticket::$_colors['color9'];
+$jsst_color1 = jssupportticket::$jsst_colors['color1'];
+$jsst_color2 = jssupportticket::$jsst_colors['color2'];
+$jsst_color3 = jssupportticket::$jsst_colors['color3'];
+$jsst_color4 = jssupportticket::$jsst_colors['color4'];
+$jsst_color5 = jssupportticket::$jsst_colors['color5'];
+$jsst_color6 = jssupportticket::$jsst_colors['color6'];
+$jsst_color7 = jssupportticket::$jsst_colors['color7'];
+$jsst_color8 = jssupportticket::$jsst_colors['color8'];
+$jsst_color9 = jssupportticket::$jsst_colors['color9'];
 
 
 
@@ -23,10 +23,10 @@ $color9 = jssupportticket::$_colors['color9'];
 
 */
 
-$jssupportticket_css = '';
+$jsst_jssupportticket_css = '';
 
 /*Code for Css*/
-$jssupportticket_css .= '
+$jsst_jssupportticket_css .= '
 	/*
          * NEW Dashboard CSS - Full-Width Design
         */
@@ -62,8 +62,8 @@ $jssupportticket_css .= '
             font-weight: 600;
             padding: 0 10px 10px 10px;
             margin-bottom: 10px;
-            border-bottom: 1px solid ' . $color5 . ';
-            color:' . $color2 . ';
+            border-bottom: 1px solid ' . $jsst_color5 . ';
+            color:' . $jsst_color2 . ';
         }
 
         .js-ticket-menu-links {
@@ -79,7 +79,7 @@ $jssupportticket_css .= '
             gap: 12px;
             padding: 12px 10px;
             text-decoration: none;
-            color: ' . $color2 . ';
+            color: ' . $jsst_color2 . ';
             font-weight: 500;
             border-radius: 8px;
             transition: all 0.2s ease;
@@ -87,13 +87,13 @@ $jssupportticket_css .= '
 
         .js-ticket-menu-links a:hover,
         .js-ticket-menu-links a.active {
-            background-color: ' . $color1 . ';
-            color: ' . $color7 . '!important;
+            background-color: ' . $jsst_color1 . ';
+            color: ' . $jsst_color7 . '!important;
         }
 
         .js-ticket-menu-links a:hover svg,
         .js-ticket-menu-links a.active svg {
-           stroke: ' . $color7 . ';
+           stroke: ' . $jsst_color7 . ';
         }
 
 
@@ -105,7 +105,7 @@ $jssupportticket_css .= '
         }
 
         .js-ticket-menu-links li a span {
-        	color: ' . $color4 . ';
+        	color: ' . $jsst_color4 . ';
         }
 
         .js-ticket-menu-links li a:hover {
@@ -113,7 +113,7 @@ $jssupportticket_css .= '
         }
 
         .js-ticket-menu-links li a:hover span {
-        	color: ' . $color7 . ';
+        	color: ' . $jsst_color7 . ';
         	text-decoration: none;
         }
 
@@ -129,7 +129,7 @@ $jssupportticket_css .= '
     align-items: center;
     justify-content: space-between;
     padding: 15px 25px;
-    background-color: ' . $color1 . ';
+    background-color: ' . $jsst_color1 . ';
     border-radius: 12px;
     margin-bottom: 20px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
@@ -141,7 +141,7 @@ $jssupportticket_css .= '
         .js-ticket-header-nav a {
             padding: 8px 16px;
             text-decoration: none;
-            color: ' . $color4 . ';
+            color: ' . $jsst_color4 . ';
             font-weight: 500;
             border-radius: 8px;
             transition: all 0.2s ease;
@@ -152,7 +152,7 @@ $jssupportticket_css .= '
         }
         .js-ticket-header-nav a.active {
             background-color: #fff;
-            color: ' . $color1 . ';
+            color: ' . $jsst_color1 . ';
         }
 
         .js-ticket-header-actions {
@@ -164,15 +164,15 @@ $jssupportticket_css .= '
         .js-ticket-logout-btn {
             padding: 8px 16px;
             text-decoration: none;
-            color: ' . $color4 . ';
+            color: ' . $jsst_color4 . ';
             font-weight: 500;
             border-radius: 8px;
             transition: all 0.2s ease;
-            border: 1px solid ' . $color4 . ';
+            border: 1px solid ' . $jsst_color4 . ';
         }
         .js-ticket-logout-btn:hover {
             background-color: #fff;
-            color: ' . $color1 . ';
+            color: ' . $jsst_color1 . ';
         }
 
         /* --- Dashboard Layout --- */
@@ -206,7 +206,7 @@ $jssupportticket_css .= '
             font-size: 18px;
             font-weight: 700;
             display: block;
-            color: ' . $color2 . ';
+            color: ' . $jsst_color2 . ';
         }
 
         .js-ticket-stats-card span {
@@ -218,14 +218,14 @@ $jssupportticket_css .= '
 
         .js-ticket-card p {
             margin: 0 0 20px 0;
-            color: ' . $color4 . ';
+            color: ' . $jsst_color4 . ';
             font-size: 15px;
             line-height: 1.5;
         }
 
         .js-ticket-button {
             width: 100%;
-            background-color: ' . $color1 . ';
+            background-color: ' . $jsst_color1 . ';
             color: #fff !important;
             border: none;
             padding: 8px 20px;
@@ -267,17 +267,17 @@ $jssupportticket_css .= '
             font-size: 18px;
             font-weight: 700;
             display: block;
-            color: ' . $color2 . ';
+            color: ' . $jsst_color2 . ';
         }
         .js-ticket-new-ticket-card p {
             margin: 0 0 20px 0;
-            color: ' . $color4 . ';
+            color: ' . $jsst_color4 . ';
             font-size: 15px;
             line-height: 1.5;
         }
         div.jsst-main-up-wrapper .js-ticket-new-ticket-btn {
             width: 100%;
-            background-color: ' . $color1 . ';
+            background-color: ' . $jsst_color1 . ';
             color: #fff;
             border: none;
             padding: 8px 20px;
@@ -294,7 +294,7 @@ $jssupportticket_css .= '
         div.jsst-main-up-wrapper .js-ticket-new-ticket-btn:hover {
         	color: #fff;
         	text-decoration:none;
-            background-color: ' . $color2 . ';
+            background-color: ' . $jsst_color2 . ';
             transform: translateY(-2px);
         }
         .js-ticket-new-ticket-btn:hover { background-color: #4338ca; }
@@ -304,13 +304,13 @@ $jssupportticket_css .= '
             align-items: center;
             text-align: center;
             margin: 20px 0;
-               color: ' . $color2 . ';
+               color: ' . $jsst_color2 . ';
         }
 
         .js-ticket-or-separator .js-ticket-line {
             flex-grow: 1;
             height: 1px;
-            background-color: ' . $color5 . ';
+            background-color: ' . $jsst_color5 . ';
         }
 
         .js-ticket-or-separator .js-ticket-or-text {
@@ -335,26 +335,26 @@ $jssupportticket_css .= '
             padding: 6px 12px;
             font-size: 14px;
             font-weight: 500;
-            color: ' . $color4 . ';
-            background-color: ' . $color3 . ';
-            border: 1px solid ' . $color5 . ';
+            color: ' . $jsst_color4 . ';
+            background-color: ' . $jsst_color3 . ';
+            border: 1px solid ' . $jsst_color5 . ';
             border-radius: 5px;
             text-decoration: none;
             transition: all 0.3s ease;
         }
 
         div.jsst-main-up-wrapper a.js-ticket-tag-btn:hover {
-//          background-color: ' . $color1 . ';
-		    color: ' . $color1 . ';
-		    border-color: ' . $color1 . ';
+//          background-color: ' . $jsst_color1 . ';
+		    color: ' . $jsst_color1 . ';
+		    border-color: ' . $jsst_color1 . ';
             transform: translateY(-2px);
 
         }
 
         .js-ticket-tag-btn:hover {
-            background-color: ' . $color7 . ';
-            color: ' . $color1 . ';
-            border-color: ' . $color1 . ';
+            background-color: ' . $jsst_color7 . ';
+            color: ' . $jsst_color1 . ';
+            border-color: ' . $jsst_color1 . ';
         }
 
         .js-ticket-stats-list {
@@ -367,17 +367,17 @@ $jssupportticket_css .= '
             align-items: center;
             justify-content: space-between;
             text-decoration: none;
-            color: ' . $color4 . ';
+            color: ' . $jsst_color4 . ';
             padding: 10px;
             border-radius: 8px;
             transition: all 0.3s ease;
         }
         div.jsst-main-up-wrapper a.js-ticket-stat-item:hover {
-            background-color: ' . $color3 . ';
+            background-color: ' . $jsst_color3 . ';
             transform: translateY(-2px);
         }
         div.jsst-main-up-wrapper a.js-ticket-stat-item:hover .js-ticket-stat-item-label span{
-            color: ' . $color1 . ';
+            color: ' . $jsst_color1 . ';
         }
         .js-ticket-stat-item-label {
             display: flex;
@@ -416,21 +416,21 @@ $jssupportticket_css .= '
         .js-ticket-welcome-header span {
             margin: 0 0 4px 0;
             font-size: 24px;
-            color: ' . $color2 . ';
+            color: ' . $jsst_color2 . ';
             font-weight: 700;
         }
         .js-ticket-welcome-header p {
             margin: 0;
-            color: ' . $color4 . ';
+            color: ' . $jsst_color4 . ';
         }
         .js-ticket-welcome-actions {
             display: flex;
             gap: 10px;
         }
         .js-ticket-user-data-btn {
-            background-color: ' . $color2 . ';
-            color: ' . $color1 . ';
-            border: 1px solid ' . $color5 . ';
+            background-color: ' . $jsst_color2 . ';
+            color: ' . $jsst_color1 . ';
+            border: 1px solid ' . $jsst_color5 . ';
             padding: 10px 20px;
             border-radius: 8px;
             font-weight: 500;
@@ -438,18 +438,18 @@ $jssupportticket_css .= '
             transition: all 0.2s;
         }
         .js-ticket-user-data-btn:hover {
-            background-color: ' . $color1 . ';
+            background-color: ' . $jsst_color1 . ';
             color: #fff;
-            border-color: ' . $color1 . ';
+            border-color: ' . $jsst_color1 . ';
         }
         .js-ticket-user-data-btn.primary {
-            background-color: ' . $color1 . ';
+            background-color: ' . $jsst_color1 . ';
             color: #fff;
-            border-color: ' . $color1 . ';
+            border-color: ' . $jsst_color1 . ';
         }
         .js-ticket-user-data-btn.primary:hover {
-            background-color: '. $color1 .';
-            border-color: '. $color1 .';
+            background-color: '. $jsst_color1 .';
+            border-color: '. $jsst_color1 .';
         }
 
         .js-ticket-container-header {
@@ -457,7 +457,7 @@ $jssupportticket_css .= '
             justify-content: space-between;
             align-items: center;
             padding: 0 0 20px 0;
-            border-bottom: 1px solid ' . $color5 . ';
+            border-bottom: 1px solid ' . $jsst_color5 . ';
             margin-bottom: 12px;
             font-size: 18px;
         }
@@ -465,16 +465,16 @@ $jssupportticket_css .= '
             margin: 0;
             font-size: 18px;
             font-weight: 700;
-            color: ' . $color2 . ';
+            color: ' . $jsst_color2 . ';
         }
         div.jsst-main-up-wrapper .js-ticket-container-header a {
             font-size: 15px;
             font-weight: 500;
-            color: ' . $color1 . ';
+            color: ' . $jsst_color1 . ';
             text-decoration: none;
         }
         div.jsst-main-up-wrapper .js-ticket-container-header a:hover{
-            color: ' . $color2 . ';
+            color: ' . $jsst_color2 . ';
         
         }
 
@@ -489,11 +489,11 @@ $jssupportticket_css .= '
             padding: 16px 10px;
             border-radius: 8px;
             transition: background-color 0.2s;
-            border-bottom: 1px solid ' . $color5 . ';
+            border-bottom: 1px solid ' . $jsst_color5 . ';
             gap: 10px; /* Added gap for responsiveness */
         }
         .js-ticket-row:last-child { border-bottom: none; }
-        .js-ticket-row:hover { background-color: ' . $color3 . '; }
+        .js-ticket-row:hover { background-color: ' . $jsst_color3 . '; }
 
         .js-ticket-first-left {
             display: flex;
@@ -513,7 +513,7 @@ $jssupportticket_css .= '
 
         .js-ticket-agent-avatar {
             margin-left: -20px;
-            border: 2px solid ' . $color1 . ';
+            border: 2px solid ' . $jsst_color1 . ';
         }
         .js-ticket-ticket-subject{
             flex:1 1 auto;
@@ -524,7 +524,7 @@ $jssupportticket_css .= '
         }
         .js-ticket-data-row.name a {
             font-weight: 600;
-            color: ' . $color2 . ';
+            color: ' . $jsst_color2 . ';
             text-decoration: none;
             display:inline-block;
             white-space: nowrap;
@@ -540,12 +540,12 @@ $jssupportticket_css .= '
             max-width:100%;
         }
             .js-ticket-data-row.name a:hover{
-                color: ' . $color1 . ';
+                color: ' . $jsst_color1 . ';
             }
 
         .js-ticket-data-row {
             font-size: 15px;
-            color: ' . $color4 . ';
+            color: ' . $jsst_color4 . ';
         }
         .js-ticket-ticket-meta {
             display: flex;
@@ -576,17 +576,17 @@ $jssupportticket_css .= '
             border-radius: 6px;
             font-size: 14px;
             font-weight: 500;
-            background-color: ' . $color3 . ';
-            color: ' . $color4 . ';
+            background-color: ' . $jsst_color3 . ';
+            color: ' . $jsst_color4 . ';
             cursor: pointer;
             transition: all 0.2s ease;
-            border: 1px solid ' . $color5 . ';
+            border: 1px solid ' . $jsst_color5 . ';
         }
 
         div.jsst-main-up-wrapper .js-ticket-assign-tag:hover {
-            background-color: ' . $color1 . ';
+            background-color: ' . $jsst_color1 . ';
             color: #fff;
-            border-color: ' . $color1 . ';
+            border-color: ' . $jsst_color1 . ';
         }
 
         #js-ticket-pm-grapharea {
@@ -595,7 +595,7 @@ $jssupportticket_css .= '
 
         .js-ticket-tabs-nav {
             display: flex;
-            border-bottom: 1px solid ' . $color5 . ';
+            border-bottom: 1px solid ' . $jsst_color5 . ';
             margin-bottom: 10px;
         }
 
@@ -612,7 +612,7 @@ $jssupportticket_css .= '
             justify-content: space-between;
             gap: 15px;
             padding: 15px 10px;
-            border-bottom: 1px solid ' . $color5 . ';
+            border-bottom: 1px solid ' . $jsst_color5 . ';
         }
         .js-ticket-resource-item:last-child { border-bottom: none; }
 
@@ -636,7 +636,7 @@ $jssupportticket_css .= '
         .js-ticket-resource-icon svg {  }
 
         div.jsst-main-up-wrapper .js-ticket-resource-link .js-ticket-resource-title:hover {
-            color: ' . $color1 . ';
+            color: ' . $jsst_color1 . ';
             text-decoration: none !important;
         }
         div.jsst-main-up-wrapper .js-ticket-resource-link:hover {
@@ -644,7 +644,7 @@ $jssupportticket_css .= '
         }
         div.jsst-main-up-wrapper .js-ticket-resource-title {
             font-weight: 500;
-            color: ' . $color2 . ';
+            color: ' . $jsst_color2 . ';
             transition: color 0.2s;
             line-height: 1.5;
         }
@@ -659,7 +659,7 @@ $jssupportticket_css .= '
             border: none;
             padding: 5px;
             cursor: pointer;
-            color: ' . $color4 . ';
+            color: ' . $jsst_color4 . ';
             border-radius: 6px;
             display: flex;
             align-items: center;
@@ -672,7 +672,7 @@ $jssupportticket_css .= '
         }
 
         div.jsst-main-up-wrapper .js-ticket-action-btn:hover {
-            color: ' . $color2 . ';
+            color: ' . $jsst_color2 . ';
         }
 
 /* --- Existing Styles for resources-container --- */
@@ -693,14 +693,14 @@ $jssupportticket_css .= '
     background: none;
     cursor: pointer;
     font-weight: 600;
-    color: ' . $color4 . ';
+    color: ' . $jsst_color4 . ';
     position: relative;
     text-align: center;
     flex-grow: 1; /* Allow buttons to grow and fill space */
 }
 
 .js-ticket-tab-btn.active {
-    color: ' . $color1 . ';
+    color: ' . $jsst_color1 . ';
     outline: 0;
 }
 
@@ -711,7 +711,7 @@ $jssupportticket_css .= '
     left: 0;
     right: 0;
     height: 2px;
-    background-color: ' . $color1 . ';
+    background-color: ' . $jsst_color1 . ';
 }
 
 .js-ticket-tab-pane { display: none; }
@@ -741,15 +741,15 @@ div#js-ticket-main-downloadallbtn {float: left;width: 100%;padding: 0px 25px 20p
 div.js-ticket-download-btn a.js-ticket-download-btn-style {display: inline-block;padding: 12px 20px;border-radius: unset;font-weight: unset;text-decoration: none;outline: 0;line-height: initial;}
 #js-ticket-main-popup #js-ticket-main-downloadallbtn .js-ticket-download-btn {text-align: left;}
 div#js-ticket-main-popup {background: #fff !important;}
-div.js-ticket-download-description {color: ' . $color4 . ';}
-div.js-ticket-downloads-content div.js-ticket-download-box {border: 1px solid ' . $color5 . ';box-shadow: 0 8px 6px -6px #dedddd;}
-div.js-ticket-downloads-content div.js-ticket-download-box div.js-ticket-download-left a.js-ticket-download-title span.js-ticket-download-name {color: ' . $color4 . ';}
-div.js-ticket-downloads-content div.js-ticket-download-box div.js-ticket-download-left a.js-ticket-download-title span.js-ticket-download-name:hover {color: ' . $color2 . ';}
-div.js-ticket-download-btn a.js-ticket-download-btn-style {background-color: ' . $color1 . ';color:' . $color7 . '; border: 1px solid ' . $color1 . ';border-radius:10px;font-weight:500;}
-div.js-ticket-download-btn a.js-ticket-download-btn-style:hover {background-color: ' . $color2 . ';border: 1px solid ' . $color2 . ';color:' . $color7 . ';}
-#js-ticket-main-popup #js-ticket-main-downloadallbtn .js-ticket-download-btn a.js-ticket-download-btn-style {background-color: ' . $color1 . ';color: #ffffff;border-color: ' . $color1 . ';}
-#js-ticket-main-popup #js-ticket-main-downloadallbtn .js-ticket-download-btn a.js-ticket-download-btn-style:hover {border-color: ' . $color2 . ';}
-span#js-ticket-popup-title{width:100%;display: block;padding: 15px 20px; font-weight: 700; border-bottom: 1px solid ' . $color5 . ';font-size:21px;}
+div.js-ticket-download-description {color: ' . $jsst_color4 . ';}
+div.js-ticket-downloads-content div.js-ticket-download-box {border: 1px solid ' . $jsst_color5 . ';box-shadow: 0 8px 6px -6px #dedddd;}
+div.js-ticket-downloads-content div.js-ticket-download-box div.js-ticket-download-left a.js-ticket-download-title span.js-ticket-download-name {color: ' . $jsst_color4 . ';}
+div.js-ticket-downloads-content div.js-ticket-download-box div.js-ticket-download-left a.js-ticket-download-title span.js-ticket-download-name:hover {color: ' . $jsst_color2 . ';}
+div.js-ticket-download-btn a.js-ticket-download-btn-style {background-color: ' . $jsst_color1 . ';color:' . $jsst_color7 . '; border: 1px solid ' . $jsst_color1 . ';border-radius:10px;font-weight:500;}
+div.js-ticket-download-btn a.js-ticket-download-btn-style:hover {background-color: ' . $jsst_color2 . ';border: 1px solid ' . $jsst_color2 . ';color:' . $jsst_color7 . ';}
+#js-ticket-main-popup #js-ticket-main-downloadallbtn .js-ticket-download-btn a.js-ticket-download-btn-style {background-color: ' . $jsst_color1 . ';color: #ffffff;border-color: ' . $jsst_color1 . ';}
+#js-ticket-main-popup #js-ticket-main-downloadallbtn .js-ticket-download-btn a.js-ticket-download-btn-style:hover {border-color: ' . $jsst_color2 . ';}
+span#js-ticket-popup-title{width:100%;display: block;padding: 15px 20px; font-weight: 700; border-bottom: 1px solid ' . $jsst_color5 . ';font-size:21px;}
 div#js-ticket-main-popup #js-ticket-popup-close-button{
 width: 24px;
 height: 24px;
@@ -762,7 +762,7 @@ background-size: contain !important;}
 div#js-ticket-main-popup #js-ticket-popup-close-button:hover{
     transform: rotate(90deg);
     }
-span#js-ticket-popup-title { background-color: ' . $color3 . '; color: ' . $color2 . '; border-bottom-color: ' . $color5 . '; }
+span#js-ticket-popup-title { background-color: ' . $jsst_color3 . '; color: ' . $jsst_color2 . '; border-bottom-color: ' . $jsst_color5 . '; }
 /* --- Responsive Design for resources-container --- */
 @media (max-width: 768px) {
     .js-ticket-resources-container {
@@ -794,7 +794,7 @@ span#js-ticket-popup-title { background-color: ' . $color3 . '; color: ' . $colo
     }
 
     .js-ticket-tab-btn {
-        border-bottom: 1px solid ' . $color5 . ';
+        border-bottom: 1px solid ' . $jsst_color5 . ';
         text-align: left;
         flex-grow: 0; /* Prevent buttons from growing */
     }
@@ -830,7 +830,7 @@ div#multiformpopup div.js-ticket-table-body div.js-ticket-multiform-row div.js-t
         width: 100%;
         height: auto;
         border-right: none;
-        border-bottom: 1px solid ' . $color5 . ';
+        border-bottom: 1px solid ' . $jsst_color5 . ';
     }
     .js-ticket-dashboard-content-area {
         max-width: 100%;
@@ -857,7 +857,7 @@ div#multiformpopup div.js-ticket-table-body div.js-ticket-multiform-row div.js-t
 
 
 
-wp_add_inline_style('jssupportticket-main-css', $jssupportticket_css);
+wp_add_inline_style('jssupportticket-main-css', $jsst_jssupportticket_css);
 
 
 ?>

@@ -6,39 +6,39 @@ if (!defined('ABSPATH'))
 class JSSTconfigurationModel {
 
     function getConfigurations() {
-        $query = "SELECT configname,configvalue,addon
+        $jsst_query = "SELECT configname,configvalue,addon
                     FROM `" . jssupportticket::$_db->prefix . "js_ticket_config` ";//WHERE configfor != 'ticketviaemail'";
-        $data = jssupportticket::$_db->get_results($query);
+        $jsst_data = jssupportticket::$_db->get_results($jsst_query);
 
         if (jssupportticket::$_db->last_error != null) {
             JSSTincluder::getJSModel('systemerror')->addSystemError();
         }
-        foreach ($data AS $config) {
-            if($config->addon == '' ||  in_array($config->addon, jssupportticket::$_active_addons)){
-                jssupportticket::$_data[0][$config->configname] = $config->configvalue;
+        foreach ($jsst_data AS $jsst_config) {
+            if($jsst_config->addon == '' ||  in_array($jsst_config->addon, jssupportticket::$_active_addons)){
+                jssupportticket::$jsst_data[0][$jsst_config->configname] = $jsst_config->configvalue;
             }
         }
 
-        jssupportticket::$_data[1] = JSSTincluder::getJSModel('email')->getAllEmailsForCombobox();
+        jssupportticket::$jsst_data[1] = JSSTincluder::getJSModel('email')->getAllEmailsForCombobox();
         if(in_array('banemail', jssupportticket::$_active_addons)){
             JSSTincluder::getJSModel('banemaillog')->checkbandata();
         }
         return;
     }
 
-    function getConfigurationByFor($for) {
-		if($for == 'ticketviaemail'){
-			$query = "SELECT COUNT(configname) FROM `" . jssupportticket::$_db->prefix . "js_ticket_config` WHERE configfor = '".esc_sql($for)."'";
-			$count = jssupportticket::$_db->get_var($query);
-			if($count < 5){
-				$query = "SELECT configname,configvalue
+    function getConfigurationByFor($jsst_for) {
+		if($jsst_for == 'ticketviaemail'){
+			$jsst_query = "SELECT COUNT(configname) FROM `" . jssupportticket::$_db->prefix . "js_ticket_config` WHERE configfor = '".esc_sql($jsst_for)."'";
+			$jsst_count = jssupportticket::$_db->get_var($jsst_query);
+			if($jsst_count < 5){
+				$jsst_query = "SELECT configname,configvalue
 							FROM `" . jssupportticket::$_db->prefix . "js_ticket_config` ";
-				$data = jssupportticket::$_db->get_results($query);
+				$jsst_data = jssupportticket::$_db->get_results($jsst_query);
 				if (jssupportticket::$_db->last_error != null) {
 					JSSTincluder::getJSModel('systemerror')->addSystemError();
 				}
-				foreach ($data AS $config) {
-					jssupportticket::$_data[0][$config->configname] = $config->configvalue;
+				foreach ($jsst_data AS $jsst_config) {
+					jssupportticket::$jsst_data[0][$jsst_config->configname] = $jsst_config->configvalue;
 				}
 				if(in_array('banemail', jssupportticket::$_active_addons)){
                     JSSTincluder::getJSModel('banemaillog')->checkbandata();
@@ -46,163 +46,179 @@ class JSSTconfigurationModel {
                 return;
 			}
 		}
-        $query = "SELECT configname,configvalue
-					FROM `" . jssupportticket::$_db->prefix . "js_ticket_config` WHERE configfor = '".esc_sql($for)."'";
-        $data = jssupportticket::$_db->get_results($query);
+        $jsst_query = "SELECT configname,configvalue
+					FROM `" . jssupportticket::$_db->prefix . "js_ticket_config` WHERE configfor = '".esc_sql($jsst_for)."'";
+        $jsst_data = jssupportticket::$_db->get_results($jsst_query);
         if (jssupportticket::$_db->last_error != null) {
             JSSTincluder::getJSModel('systemerror')->addSystemError();
         }
-        foreach ($data AS $config) {
-            jssupportticket::$_data[0][$config->configname] = $config->configvalue;
+        foreach ($jsst_data AS $jsst_config) {
+            jssupportticket::$jsst_data[0][$jsst_config->configname] = $jsst_config->configvalue;
         }
         if(in_array('banemail', jssupportticket::$_active_addons)){
             JSSTincluder::getJSModel('banemaillog')->checkbandata();
         }
         return;
     }
-    function getCountByConfigFor($for) {
+    function getCountByConfigFor($jsst_for) {
         if (( in_array('agent',jssupportticket::$_active_addons) && JSSTincluder::getJSModel('agent')->isUserStaff())) {
-            $query = "SELECT COUNT(configvalue)
-                    FROM `" . jssupportticket::$_db->prefix . "js_ticket_config` WHERE configfor = '".esc_sql($for). "' AND configname LIKE '%staff' AND configvalue = 1 " ;
+            $jsst_query = "SELECT COUNT(configvalue)
+                    FROM `" . jssupportticket::$_db->prefix . "js_ticket_config` WHERE configfor = '".esc_sql($jsst_for). "' AND configname LIKE '%staff' AND configvalue = 1 " ;
         }else{
-            $query = "SELECT COUNT(configvalue)
-                    FROM `" . jssupportticket::$_db->prefix . "js_ticket_config` WHERE configfor = '".esc_sql($for) . "' AND configname LIKE '%user' AND configvalue = 1 " ;
+            $jsst_query = "SELECT COUNT(configvalue)
+                    FROM `" . jssupportticket::$_db->prefix . "js_ticket_config` WHERE configfor = '".esc_sql($jsst_for) . "' AND configname LIKE '%user' AND configvalue = 1 " ;
         }
-        $data = jssupportticket::$_db->get_var($query);
+        $jsst_data = jssupportticket::$_db->get_var($jsst_query);
         if (jssupportticket::$_db->last_error != null) {
             JSSTincluder::getJSModel('systemerror')->addSystemError();
         }
-        return $data;
+        return $jsst_data;
     }
 
-    function storeDesktopNotificationLogo($filename) {
-        jssupportticket::$_db->query("UPDATE `" . jssupportticket::$_db->prefix . "js_ticket_config` SET configvalue = '" . esc_sql($filename) . "' WHERE configname = 'logo_for_desktop_notfication_url' ");
+    function storeDesktopNotificationLogo($jsst_filename) {
+        jssupportticket::$_db->query("UPDATE `" . jssupportticket::$_db->prefix . "js_ticket_config` SET configvalue = '" . esc_sql($jsst_filename) . "' WHERE configname = 'logo_for_desktop_notfication_url' ");
     }
 
     function deleteDesktopNotificationsLogo() {
-        $datadirectory = jssupportticket::$_config['data_directory'];
+        $jsst_datadirectory = jssupportticket::$_config['data_directory'];
 
-        $maindir = wp_upload_dir();
-        $path = $maindir['basedir'];
-        $path = $path .'/'.$datadirectory;
+        $jsst_maindir = wp_upload_dir();
+        $jsst_path = $jsst_maindir['basedir'];
+        $jsst_path = $jsst_path .'/'.$jsst_datadirectory;
 
-        $file_name = JSSTincluder::getJSModel('configuration')->getConfigValue('logo_for_desktop_notfication_url');
+        $jsst_file_name = JSSTincluder::getJSModel('configuration')->getConfigValue('logo_for_desktop_notfication_url');
 
-        $path = $path . '/attachmentdata/';
-        $dsk_logo_file =  $path.$file_name;
-        if($file_name != ''){
-            if ( file_exists( $dsk_logo_file ) ) {
-                wp_delete_file($dsk_logo_file);
+        $jsst_path = $jsst_path . '/attachmentdata/';
+        $jsst_dsk_logo_file =  $jsst_path.$jsst_file_name;
+        if($jsst_file_name != ''){
+            if ( file_exists( $jsst_dsk_logo_file ) ) {
+                wp_delete_file($jsst_dsk_logo_file);
             }
         }
     }
 
 
-    function storeConfiguration($data) {
-        $nonce = JSSTrequest::getVar('_wpnonce');
-        if (! wp_verify_nonce( $nonce, 'save-configuration') ) {
+    function storeConfiguration($jsst_data) {
+        $jsst_nonce = JSSTrequest::getVar('_wpnonce');
+        if (! wp_verify_nonce( $jsst_nonce, 'save-configuration') ) {
             die( 'Security check Failed' );
         }
         if (!current_user_can('manage_options')) { //only admin can change it.
             return false;
         }
-        $data = jssupportticket::JSST_sanitizeData($data); // JSST_sanitizeData() function uses wordpress santize functions
+        $jsst_data = jssupportticket::JSST_sanitizeData($jsst_data); // JSST_sanitizeData() function uses wordpress santize functions
         // handle editor text for offline message after sanitizing all data
-        if (isset($data['offline_message'])) {
-            $data['offline_message'] = JSSTincluder::getJSModel('jssupportticket')->getSanitizedEditorData($_POST['offline_message']);
-            $data['offline_message'] = JSSTincluder::getJSModel('jssupportticket')->jsstremovetags($data['offline_message']);
-            $data['offline_message'] = JSSTincluder::getJSmodel('jssupportticket')->stripslashesFull($data['offline_message']);
+        if (isset($jsst_data['offline_message'])) {
+            $jsst_data['offline_message'] = JSSTincluder::getJSModel('jssupportticket')->getSanitizedEditorData(wp_unslash($_POST['offline_message'] ?? ''));
+            $jsst_data['offline_message'] = JSSTincluder::getJSModel('jssupportticket')->jsstremovetags($jsst_data['offline_message']);
+            $jsst_data['offline_message'] = JSSTincluder::getJSmodel('jssupportticket')->stripslashesFull($jsst_data['offline_message']);
         }
         // handle editor text for new ticket message after sanitizing all data
-        if (isset($data['new_ticket_message'])) {
-            $data['new_ticket_message'] = JSSTincluder::getJSModel('jssupportticket')->getSanitizedEditorData($_POST['new_ticket_message']);
-            $data['new_ticket_message'] = JSSTincluder::getJSModel('jssupportticket')->jsstremovetags($data['new_ticket_message']);
-            $data['new_ticket_message'] = JSSTincluder::getJSmodel('jssupportticket')->stripslashesFull($data['new_ticket_message']);
+        if (isset($jsst_data['new_ticket_message'])) {
+            $jsst_data['new_ticket_message'] = JSSTincluder::getJSModel('jssupportticket')->getSanitizedEditorData(wp_unslash($_POST['new_ticket_message'] ?? ''));
+            $jsst_data['new_ticket_message'] = JSSTincluder::getJSModel('jssupportticket')->jsstremovetags($jsst_data['new_ticket_message']);
+            $jsst_data['new_ticket_message'] = JSSTincluder::getJSmodel('jssupportticket')->stripslashesFull($jsst_data['new_ticket_message']);
         }
         // handle editor text for visitor message after sanitizing all data
-        if (isset($data['visitor_message'])) {
-            $data['visitor_message'] = JSSTincluder::getJSModel('jssupportticket')->getSanitizedEditorData($_POST['visitor_message']);
-            $data['visitor_message'] = JSSTincluder::getJSModel('jssupportticket')->jsstremovetags($data['visitor_message']);
-            $data['visitor_message'] = JSSTincluder::getJSmodel('jssupportticket')->stripslashesFull($data['visitor_message']);
+        if (isset($jsst_data['visitor_message'])) {
+            $jsst_data['visitor_message'] = JSSTincluder::getJSModel('jssupportticket')->getSanitizedEditorData(wp_unslash($_POST['visitor_message'] ?? ''));
+            $jsst_data['visitor_message'] = JSSTincluder::getJSModel('jssupportticket')->jsstremovetags($jsst_data['visitor_message']);
+            $jsst_data['visitor_message'] = JSSTincluder::getJSmodel('jssupportticket')->stripslashesFull($jsst_data['visitor_message']);
         }
         // handle editor text for feedback thanks message after sanitizing all data
-        if (isset($data['feedback_thanks_message'])) {
-            $data['feedback_thanks_message'] = JSSTincluder::getJSModel('jssupportticket')->getSanitizedEditorData($_POST['feedback_thanks_message']);
-            $data['feedback_thanks_message'] = JSSTincluder::getJSModel('jssupportticket')->jsstremovetags($data['feedback_thanks_message']);
-            $data['feedback_thanks_message'] = JSSTincluder::getJSmodel('jssupportticket')->stripslashesFull($data['feedback_thanks_message']);
+        if (isset($jsst_data['feedback_thanks_message'])) {
+            $jsst_data['feedback_thanks_message'] = JSSTincluder::getJSModel('jssupportticket')->getSanitizedEditorData(wp_unslash($_POST['feedback_thanks_message'] ?? ''));
+            $jsst_data['feedback_thanks_message'] = JSSTincluder::getJSModel('jssupportticket')->jsstremovetags($jsst_data['feedback_thanks_message']);
+            $jsst_data['feedback_thanks_message'] = JSSTincluder::getJSmodel('jssupportticket')->stripslashesFull($jsst_data['feedback_thanks_message']);
         }
-        $notsave = false;
-        $updateColors = false;
-        foreach ($data AS $key => $value) {
-            $query = true;
+        $jsst_notsave = false;
+        $jsst_updateColors = false;
+        foreach ($jsst_data AS $jsst_key => $jsst_value) {
+            $jsst_query = true;
             
-            if ($key == 'screentag_position') {
-                if ($value != jssupportticket::$_config['screentag_position']) {
-                    $updateColors = true;
+            if ($jsst_key == 'screentag_position') {
+                if ($jsst_value != jssupportticket::$_config['screentag_position']) {
+                    $jsst_updateColors = true;
                 }
             }
 
-            if ($key == 'pagination_default_page_size') {
-                if ($value < 3) {
+            if ($jsst_key == 'pagination_default_page_size') {
+                if ($jsst_value < 3) {
                     JSSTmessage::setMessage(esc_html(__('Pagination default page size not saved', 'js-support-ticket')), 'error');
                     continue;
                 }
             }
 
-            if($key == 'del_logo_for_desktop_notfication' && $value == 1){
+            if($jsst_key == 'del_logo_for_desktop_notfication' && $jsst_value == 1){
                 $this->deleteDesktopNotificationsLogo();
-                $key = 'logo_for_desktop_notfication_url';
-                $value = '';
+                $jsst_key = 'logo_for_desktop_notfication_url';
+                $jsst_value = '';
             }
 
 
-            if ($key == 'data_directory') {
-                $data_directory = $value;
-                if(empty($data_directory)){
+            if ($jsst_key == 'data_directory') {
+                $jsst_data_directory = $jsst_value;
+                if (empty($jsst_data_directory)) {
                     JSSTmessage::setMessage(esc_html(__('Data directory cannot empty.', 'js-support-ticket')), 'error');
                     continue;
                 }
-                if(jssupportticketphplib::JSST_strpos($data_directory, '/') !== false){
-                    JSSTmessage::setMessage(esc_html(__('Data directory is not proper.', 'js-support-ticket')) , 'error');
+                if (jssupportticketphplib::JSST_strpos($jsst_data_directory, '/') !== false) {
+                    JSSTmessage::setMessage(esc_html(__('Data directory is not proper.', 'js-support-ticket')), 'error');
                     continue;
                 }
-                $path = JSST_PLUGIN_PATH.'/'.$data_directory;
-                if ( ! file_exists($path)) {
-                   mkdir($path, 0755);
+
+                // --- INITIALIZE WP_FILESYSTEM ---
+                global $wp_filesystem;
+                if (!function_exists('wp_handle_upload')) {
+                    do_action('jssupportticket_load_wp_file');
                 }
-                if( ! is_writeable($path)){
+                if ( ! WP_Filesystem() ) {
+                    return false;
+                }
+                $jsst_wp_filesystem = $wp_filesystem;
+
+                $jsst_path = JSST_PLUGIN_PATH . '/' . $jsst_data_directory;
+
+                // Replaced file_exists() and mkdir() with WP_Filesystem methods
+                if (!$jsst_wp_filesystem->exists($jsst_path)) {
+                    // 0755 is the standard permission for WordPress directories
+                    $jsst_wp_filesystem->mkdir($jsst_path, 0755); 
+                }
+
+                // Replaced is_writeable() with $jsst_wp_filesystem->is_writable()
+                if (!$jsst_wp_filesystem->is_writable($jsst_path)) {
                     JSSTmessage::setMessage(esc_html(__('Data directory is not writable.', 'js-support-ticket')), 'error');
                     continue;
                 }
             }
-            if ($key == 'system_slug') {
-                if(empty($value)){
+            if ($jsst_key == 'system_slug') {
+                if(empty($jsst_value)){
                     JSSTmessage::setMessage(esc_html(__('System slug not be empty.', 'js-support-ticket')), 'error');
                     continue;
                 }
-                $value = jssupportticketphplib::JSST_str_replace(' ', '-', $value);
-                $query = 'SELECT COUNT(ID) FROM `'.jssupportticket::$_db->prefix.'posts` WHERE post_name = "'.esc_sql($value).'"';
-                $countslug = jssupportticket::$_db->get_var($query);
-                if($countslug >= 1){
+                $jsst_value = jssupportticketphplib::JSST_str_replace(' ', '-', $jsst_value);
+                $jsst_query = 'SELECT COUNT(ID) FROM `'.jssupportticket::$_db->prefix.'posts` WHERE post_name = "'.esc_sql($jsst_value).'"';
+                $jsst_countslug = jssupportticket::$_db->get_var($jsst_query);
+                if($jsst_countslug >= 1){
                     JSSTmessage::setMessage(esc_html(__('System slug is conflicted with post or page slug.', 'js-support-ticket')), 'error');
                     continue;
                 }
             }
-            jssupportticket::$_db->update(jssupportticket::$_db->prefix . 'js_ticket_config', array('configvalue' => $value), array('configname' => $key));
+            jssupportticket::$_db->update(jssupportticket::$_db->prefix . 'js_ticket_config', array('configvalue' => $jsst_value), array('configname' => $jsst_key));
             if (jssupportticket::$_db->last_error != null) {
                 JSSTincluder::getJSModel('systemerror')->addSystemError();
-                $notsave = true;
+                $jsst_notsave = true;
             }
         }
-        if ($notsave == false) {
+        if ($jsst_notsave == false) {
             JSSTmessage::setMessage(esc_html(__('The configuration has been stored', 'js-support-ticket')), 'updated');
-            // if($data['tve_enabled'] == 1){
+            // if($jsst_data['tve_enabled'] == 1){
             //     //JSSTincluder::getJSController('emailpiping')->registerReadEmails();
             // }
         } else {
             JSSTmessage::setMessage(esc_html(__('The configuration not has been stored', 'js-support-ticket')), 'error');
         }
-        if ($updateColors == true) {
+        if ($jsst_updateColors == true) {
             JSSTincluder::getJSModel('jssupportticket')->updateColorFile();
         }
         update_option('rewrite_rules', '');
@@ -220,98 +236,101 @@ class JSSTconfigurationModel {
         if (!function_exists('wp_handle_upload')) {
             do_action('jssupportticket_load_wp_file');
         }
-        $maindir = wp_upload_dir();
-        $basedir = $maindir['basedir'];
-        $datadirectory = jssupportticket::$_config['data_directory'];
-        
-        $path = $basedir . '/' . $datadirectory;
-        if (!file_exists($path)) { // create user directory
-            JSSTincluder::getJSModel('jssupportticket')->makeDir($path);
+        if ( ! WP_Filesystem() ) {
+            return false;
         }
-        $isupload = false;
-        $path = $path . '/supportImg';
-        if (!file_exists($path)) { // create user directory
-            JSSTincluder::getJSModel('jssupportticket')->makeDir($path);
+        $jsst_maindir = wp_upload_dir();
+        $jsst_basedir = $jsst_maindir['basedir'];
+        $jsst_datadirectory = jssupportticket::$_config['data_directory'];
+        
+        $jsst_path = $jsst_basedir . '/' . $jsst_datadirectory;
+        if (!file_exists($jsst_path)) { // create user directory
+            JSSTincluder::getJSModel('jssupportticket')->makeDir($jsst_path);
+        }
+        $jsst_isupload = false;
+        $jsst_path = $jsst_path . '/supportImg';
+        if (!file_exists($jsst_path)) { // create user directory
+            JSSTincluder::getJSModel('jssupportticket')->makeDir($jsst_path);
         }
         
         if ($_FILES['support_custom_img']['size'] > 0) {
-            $file_name = jssupportticketphplib::JSST_str_replace(' ', '_', sanitize_file_name($_FILES['support_custom_img']['name']));
-            $file_tmp = jssupportticket::JSST_sanitizeData($_FILES['support_custom_img']['tmp_name']); // actual location // JSST_sanitizeData() function uses wordpress santize functions
+            $jsst_file_name = jssupportticketphplib::JSST_str_replace(' ', '_', sanitize_file_name($_FILES['support_custom_img']['name']));
+            $jsst_file_tmp = jssupportticket::JSST_sanitizeData($_FILES['support_custom_img']['tmp_name']); // actual location // JSST_sanitizeData() function uses wordpress santize functions
 
-            $userpath = $path;
-            $isupload = true;
+            $jsst_userpath = $jsst_path;
+            $jsst_isupload = true;
         }
-        if ($isupload) {
+        if ($jsst_isupload) {
             $this->uploadfor = 'supportcustomlogo';
             // Register our path override.
             add_filter( 'upload_dir', array($this,'jssupportticket_upload_custom_logo'));
             // Do our thing. WordPress will move the file to 'uploads/mycustomdir'.
-            $result = array();
-            $file = array(
+            $jsst_result = array();
+            $jsst_file = array(
                 'name' => sanitize_file_name($_FILES['support_custom_img']['name']),
                 'type' => jssupportticket::JSST_sanitizeData($_FILES['support_custom_img']['type']),
                 'tmp_name' => jssupportticket::JSST_sanitizeData($_FILES['support_custom_img']['tmp_name']),
                 'error' => jssupportticket::JSST_sanitizeData($_FILES['support_custom_img']['error']),
                 'size' => jssupportticket::JSST_sanitizeData($_FILES['support_custom_img']['size']),
             ); // JSST_sanitizeData() function uses wordpress santize functions
-            $result = wp_handle_upload($file, array('test_form' => false));
-            if ( $result && ! isset( $result['error'] ) ) {
-                $this->setSupportCustomImage($file_name, $userpath);
+            $jsst_result = wp_handle_upload($jsst_file, array('test_form' => false));
+            if ( $jsst_result && ! isset( $jsst_result['error'] ) ) {
+                $this->setSupportCustomImage($jsst_file_name, $jsst_userpath);
             }
             // Set everything back to normal.
             remove_filter( 'upload_dir', array($this,'jssupportticket_upload_custom_logo'));
         }
     }
 
-    function jssupportticket_upload_custom_logo( $dir ) {
+    function jssupportticket_upload_custom_logo( $jsst_dir ) {
         if($this->uploadfor == 'supportcustomlogo'){
-            $datadirectory = jssupportticket::$_config['data_directory'];
-            $path = $datadirectory . '/supportImg';
-            $array = array(
-                'path'   => $dir['basedir'] . '/' . $path,
-                'url'    => $dir['baseurl'] . '/' . $path,
-                'subdir' => '/'. $path,
-            ) + $dir;
-            return $array;
+            $jsst_datadirectory = jssupportticket::$_config['data_directory'];
+            $jsst_path = $jsst_datadirectory . '/supportImg';
+            $jsst_array = array(
+                'path'   => $jsst_dir['basedir'] . '/' . $jsst_path,
+                'url'    => $jsst_dir['baseurl'] . '/' . $jsst_path,
+                'subdir' => '/'. $jsst_path,
+            ) + $jsst_dir;
+            return $jsst_array;
         }else{
-            return $dir;
+            return $jsst_dir;
         }
     }
 
-    function setSupportCustomImage($filename, $userpath){
-        $query = "SELECT configvalue FROM `".jssupportticket::$_db->prefix."js_ticket_config` WHERE configname = 'support_custom_img'";
-        $key = jssupportticket::$_db->get_var($query);
-        if ($key) {
-            $unlinkPath = $userpath.'/'.$key;
-            if (is_file($unlinkPath)) {
-                wp_delete_file($unlinkPath);
+    function setSupportCustomImage($jsst_filename, $jsst_userpath){
+        $jsst_query = "SELECT configvalue FROM `".jssupportticket::$_db->prefix."js_ticket_config` WHERE configname = 'support_custom_img'";
+        $jsst_key = jssupportticket::$_db->get_var($jsst_query);
+        if ($jsst_key) {
+            $jsst_unlinkPath = $jsst_userpath.'/'.$jsst_key;
+            if (is_file($jsst_unlinkPath)) {
+                wp_delete_file($jsst_unlinkPath);
             }
         }
-        jssupportticket::$_db->update(jssupportticket::$_db->prefix . 'js_ticket_config', array('configvalue' => $filename), array('configname' => 'support_custom_img'));
+        jssupportticket::$_db->update(jssupportticket::$_db->prefix . 'js_ticket_config', array('configvalue' => $jsst_filename), array('configname' => 'support_custom_img'));
     }
 
     function deleteSupportCustomImage() {
 
-        $nonce = JSSTrequest::getVar('_wpnonce');
-        if (!wp_verify_nonce($nonce, 'delete-support-customimage')) {
+        $jsst_nonce = JSSTrequest::getVar('_wpnonce');
+        if (!wp_verify_nonce($jsst_nonce, 'delete-support-customimage')) {
             die('Security check Failed');
         }
 
-        $maindir = wp_upload_dir();
-        $basedir = trailingslashit($maindir['basedir']);
-        $datadirectory = isset(jssupportticket::$_config['data_directory']) ? sanitize_text_field(jssupportticket::$_config['data_directory']) : '';
-        $path = $basedir . trailingslashit($datadirectory) . 'supportImg/';
+        $jsst_maindir = wp_upload_dir();
+        $jsst_basedir = trailingslashit($jsst_maindir['basedir']);
+        $jsst_datadirectory = isset(jssupportticket::$_config['data_directory']) ? sanitize_text_field(jssupportticket::$_config['data_directory']) : '';
+        $jsst_path = $jsst_basedir . trailingslashit($jsst_datadirectory) . 'supportImg/';
 
-        $query = "SELECT configvalue FROM `" . jssupportticket::$_db->prefix . "js_ticket_config` WHERE configname = 'support_custom_img'";
-        $key = jssupportticket::$_db->get_var($query);
+        $jsst_query = "SELECT configvalue FROM `" . jssupportticket::$_db->prefix . "js_ticket_config` WHERE configname = 'support_custom_img'";
+        $jsst_key = jssupportticket::$_db->get_var($jsst_query);
 
-        if ($key) {
-            $key = sanitize_file_name($key); // Sanitize filename
-            $unlinkPath = realpath($path . $key); // Get absolute path
+        if ($jsst_key) {
+            $jsst_key = sanitize_file_name($jsst_key); // Sanitize filename
+            $jsst_unlinkPath = realpath($jsst_path . $jsst_key); // Get absolute path
 
             // Ensure the file is within the allowed directory
-            if ($unlinkPath && jssupportticketphplib::JSST_strpos($unlinkPath, realpath($path)) === 0 && is_file($unlinkPath)) {
-                wp_delete_file($unlinkPath);
+            if ($jsst_unlinkPath && jssupportticketphplib::JSST_strpos($jsst_unlinkPath, realpath($jsst_path)) === 0 && is_file($jsst_unlinkPath)) {
+                wp_delete_file($jsst_unlinkPath);
             }
         }
 
@@ -322,14 +341,14 @@ class JSSTconfigurationModel {
     }
 
     function getEmailReadTime() {
-        $time = null;
-        $query = "SELECT config.configvalue FROM `".jssupportticket::$_db->prefix."js_ticket_config` AS config WHERE config.configname = 'lastEmailReadingTime'";
-        $time = jssupportticket::$_db->get_var($query);
-        return $time;
+        $jsst_time = null;
+        $jsst_query = "SELECT config.configvalue FROM `".jssupportticket::$_db->prefix."js_ticket_config` AS config WHERE config.configname = 'lastEmailReadingTime'";
+        $jsst_time = jssupportticket::$_db->get_var($jsst_query);
+        return $jsst_time;
     }
 
-    function setEmailReadTime($time) {
-        jssupportticket::$_db->update(jssupportticket::$_db->prefix . 'js_ticket_config', array('configvalue' => $time), array('configname' => 'lastEmailReadingTime'));
+    function setEmailReadTime($jsst_time) {
+        jssupportticket::$_db->update(jssupportticket::$_db->prefix . 'js_ticket_config', array('configvalue' => $jsst_time), array('configname' => 'lastEmailReadingTime'));
     }
 
     function getConfiguration() {
@@ -337,85 +356,86 @@ class JSSTconfigurationModel {
         // check for plugin using plugin name
         if (is_plugin_active('js-support-ticket/js-support-ticket.php')) {
             //plugin is activated
-            $query = "SELECT config.* FROM `" . jssupportticket::$_db->prefix . "js_ticket_config` AS config WHERE config.configfor != 'ticketviaemail'";
-            $config = jssupportticket::$_db->get_results($query);
-            foreach ($config as $conf) {
-                jssupportticket::$_config[$conf->configname] = $conf->configvalue;
+            $jsst_query = "SELECT config.* FROM `" . jssupportticket::$_db->prefix . "js_ticket_config` AS config WHERE config.configfor != 'ticketviaemail'";
+            $jsst_config = jssupportticket::$_db->get_results($jsst_query);
+            foreach ($jsst_config as $jsst_conf) {
+                jssupportticket::$_config[$jsst_conf->configname] = $jsst_conf->configvalue;
             }
-            jssupportticket::$_config['config_count'] = COUNT($config);
+            jssupportticket::$_config['config_count'] = COUNT($jsst_config);
         }
     }
 
     function getCheckCronKey() {
-        $query = "SELECT configvalue FROM `".jssupportticket::$_db->prefix."js_ticket_config` WHERE configname = 'ck'";
-        $key = jssupportticket::$_db->get_var($query);
-        if ($key && $key != '')
+        $jsst_query = "SELECT configvalue FROM `".jssupportticket::$_db->prefix."js_ticket_config` WHERE configname = 'ck'";
+        $jsst_key = jssupportticket::$_db->get_var($jsst_query);
+        if ($jsst_key && $jsst_key != '')
             return true;
         else
             return false;
     }
 
     function genearateCronKey() {
-        $key = jssupportticketphplib::JSST_md5(gmdate('Y-m-d'));
-        $query = "UPDATE `".jssupportticket::$_db->prefix."js_ticket_config` SET configvalue = '".esc_sql($key)."' WHERE configname = 'ck'" ;
-        jssupportticket::$_db->query($query);
+        $jsst_key = jssupportticketphplib::JSST_md5(gmdate('Y-m-d'));
+        $jsst_query = "UPDATE `".jssupportticket::$_db->prefix."js_ticket_config` SET configvalue = '".esc_sql($jsst_key)."' WHERE configname = 'ck'" ;
+        jssupportticket::$_db->query($jsst_query);
         return true;
     }
 
-    function getCronKey($passkey) {
-        if ($passkey == jssupportticketphplib::JSST_md5(gmdate('Y-m-d'))) {
-            $query = "SELECT configvalue FROM `".jssupportticket::$_db->prefix."js_ticket_config` WHERE configname = 'ck'";
-            $key = jssupportticket::$_db->get_var($query);
-            return $key;
+    function getCronKey($jsst_passkey) {
+        if ($jsst_passkey == jssupportticketphplib::JSST_md5(gmdate('Y-m-d'))) {
+            $jsst_query = "SELECT configvalue FROM `".jssupportticket::$_db->prefix."js_ticket_config` WHERE configname = 'ck'";
+            $jsst_key = jssupportticket::$_db->get_var($jsst_query);
+            return $jsst_key;
         }
         else
             return false;
     }
 
-    function getConfigValue($configname){
-        $query = "SELECT configvalue FROM `".jssupportticket::$_db->prefix."js_ticket_config` WHERE configname = '".esc_sql($configname)."'";
-        $configvalue = jssupportticket::$_db->get_var($query);
-        return $configvalue;
+    function getConfigValue($jsst_configname){
+        $jsst_query = "SELECT configvalue FROM `".jssupportticket::$_db->prefix."js_ticket_config` WHERE configname = '".esc_sql($jsst_configname)."'";
+        $jsst_configvalue = jssupportticket::$_db->get_var($jsst_query);
+        return $jsst_configvalue;
     }
 
     function getPageList() {
-        $query = "SELECT ID AS id, post_title AS text FROM `" . jssupportticket::$_db->prefix . "posts` WHERE post_type = 'page' AND post_status = 'publish' ";
-        $emails = jssupportticket::$_db->get_results($query);
+        $jsst_query = "SELECT ID AS id, post_title AS text FROM `" . jssupportticket::$_db->prefix . "posts` WHERE post_type = 'page' AND post_status = 'publish' ";
+        $jsst_emails = jssupportticket::$_db->get_results($jsst_query);
         if (jssupportticket::$_db->last_error != null) {
             JSSTincluder::getJSModel('systemerror')->addSystemError();
         }
-        return $emails;
+        return $jsst_emails;
     }
 
     function getWooCommerceCategoryList() {
-        $orderby = 'term_id';
-        $order = 'desc';
-        $hide_empty = false ;
-        $cat_args = array(
-            'orderby'    => $orderby,
-            'order'      => $order,
-            'hide_empty' => $hide_empty,
+        $jsst_orderby = 'term_id';
+        $jsst_order = 'desc';
+        $jsst_hide_empty = false ;
+        $jsst_cat_args = array(
+            'orderby'    => $jsst_orderby,
+            'order'      => $jsst_order,
+            'hide_empty' => $jsst_hide_empty,
         );
-        $product_categories = get_terms( 'product_cat', $cat_args );
-        $catList = array();
-        foreach ($product_categories as $category) {
-            $catList[] = (object) array('id' => $category->term_id, 'text' => $category->name);
+        $jsst_cat_args['taxonomy'] = 'product_cat';
+        $jsst_product_categories = get_terms( $jsst_cat_args );
+        $jsst_catList = array();
+        foreach ($jsst_product_categories as $jsst_category) {
+            $jsst_catList[] = (object) array('id' => $jsst_category->term_id, 'text' => $jsst_category->name);
         }
-        return $catList;
+        return $jsst_catList;
     }
 
-    function getConfigurationByConfigName($configname) {
-        $query = "SELECT configvalue
-                  FROM  `".jssupportticket::$_db->prefix."js_ticket_config` WHERE configname ='" . esc_sql($configname) . "'";
-        $result = jssupportticket::$_db->get_var($query);
-        return $result;
+    function getConfigurationByConfigName($jsst_configname) {
+        $jsst_query = "SELECT configvalue
+                  FROM  `".jssupportticket::$_db->prefix."js_ticket_config` WHERE configname ='" . esc_sql($jsst_configname) . "'";
+        $jsst_result = jssupportticket::$_db->get_var($jsst_query);
+        return $jsst_result;
     }
 
     function getCountConfig() {
-        $query = "SELECT COUNT(*)
+        $jsst_query = "SELECT COUNT(*)
                   FROM `".jssupportticket::$_db->prefix."js_ticket_config`";
-        $result = jssupportticket::$_db->get_var($query);
-        return $result;
+        $jsst_result = jssupportticket::$_db->get_var($jsst_query);
+        return $jsst_result;
     }
 
     function storeAutoUpdateConfig() {
@@ -423,19 +443,19 @@ class JSSTconfigurationModel {
         if (!current_user_can('manage_options')) { //only admin can change it.
             return false;
         }
-        $configvalue = JSSTrequest::getVar('jsst_addons_auto_update','','');
+        $jsst_configvalue = JSSTrequest::getVar('jsst_addons_auto_update','','');
 
-        if (!is_numeric($configvalue)) { //can only have numric value
+        if (!is_numeric($jsst_configvalue)) { //can only have numric value
             return false;
         }
 
-        $error = false;
-        $query = "UPDATE `" . jssupportticket::$_db->prefix . "js_ticket_config` SET `configvalue` = ".esc_sql($configvalue)." WHERE `configname`= 'jsst_addons_auto_update'";
-        if (false === jssupportticket::$_db->query($query)) {
-            $error = true;
+        $jsst_error = false;
+        $jsst_query = "UPDATE `" . jssupportticket::$_db->prefix . "js_ticket_config` SET `configvalue` = ".esc_sql($jsst_configvalue)." WHERE `configname`= 'jsst_addons_auto_update'";
+        if (false === jssupportticket::$_db->query($jsst_query)) {
+            $jsst_error = true;
         }
 
-        if ($error) {
+        if ($jsst_error) {
             JSSTmessage::setMessage(esc_html(__('Something went wrong!', 'js-support-ticket')), 'error');
             return WPJOBPORTAL_SAVE_ERROR;
         } else {

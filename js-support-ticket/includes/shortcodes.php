@@ -14,54 +14,54 @@ class JSSTshortcodes {
         add_shortcode('jssupportticket_mytickets', array($this, 'show_my_ticket'));
     }
 
-    function show_main_ticket($raw_args, $content = null) {
+    function show_main_ticket($jsst_raw_args, $jsst_content = null) {
         //default set of parameters for the front end shortcodes
         ob_start();
-        $defaults = array(
+        $jsst_defaults = array(
             'jstmod' => '',
             'jstlay' => '',
         );
-        $sanitized_args = shortcode_atts($defaults, $raw_args);
-        if(isset(jssupportticket::$_data['sanitized_args']) && !empty(jssupportticket::$_data['sanitized_args'])){
-            jssupportticket::$_data['sanitized_args'] += $sanitized_args;
+        $jsst_sanitized_args = shortcode_atts($jsst_defaults, $jsst_raw_args);
+        if(isset(jssupportticket::$jsst_data['sanitized_args']) && !empty(jssupportticket::$jsst_data['sanitized_args'])){
+            jssupportticket::$jsst_data['sanitized_args'] += $jsst_sanitized_args;
         }else{
-            jssupportticket::$_data['sanitized_args'] = $sanitized_args;
+            jssupportticket::$jsst_data['sanitized_args'] = $jsst_sanitized_args;
         }
-        $pageid = get_the_ID();
-        jssupportticket::setPageID($pageid);
+        $jsst_pageid = get_the_ID();
+        jssupportticket::setPageID($jsst_pageid);
         JSSTincluder::include_slug('');
-        $content .= ob_get_clean();
-        return $content;
+        $jsst_content .= ob_get_clean();
+        return $jsst_content;
     }
 
-    function show_form_ticket($raw_args, $content = null) {
+    function show_form_ticket($jsst_raw_args, $jsst_content = null) {
         //default set of parameters for the front end shortcodes
         ob_start();
-        $pageid = get_the_ID();
-        jssupportticket::setPageID($pageid);
-        $module = JSSTRequest::getVar('jstmod', '', 'ticket');
-        $layout = JSSTRequest::getVar('jstlay', '', 'addticket');
-        if ($layout != 'addticket' && $layout != 'staffaddticket') {
-            JSSTincluder::include_file($module);
+        $jsst_pageid = get_the_ID();
+        jssupportticket::setPageID($jsst_pageid);
+        $jsst_module = JSSTRequest::getVar('jstmod', '', 'ticket');
+        $jsst_layout = JSSTRequest::getVar('jstlay', '', 'addticket');
+        if ($jsst_layout != 'addticket' && $jsst_layout != 'staffaddticket') {
+            JSSTincluder::include_file($jsst_module);
         } else {
-            $defaults = array(
+            $jsst_defaults = array(
                 'job_type' => '',
                 'city' => '',
                 'company' => '',
             );
-            $sanitized_args = shortcode_atts($defaults, $raw_args);
-            if(isset(jssupportticket::$_data['sanitized_args']) && !empty(jssupportticket::$_data['sanitized_args'])){
-                jssupportticket::$_data['sanitized_args'] += $sanitized_args;
+            $jsst_sanitized_args = shortcode_atts($jsst_defaults, $jsst_raw_args);
+            if(isset(jssupportticket::$jsst_data['sanitized_args']) && !empty(jssupportticket::$jsst_data['sanitized_args'])){
+                jssupportticket::$jsst_data['sanitized_args'] += $jsst_sanitized_args;
             }else{
-                jssupportticket::$_data['sanitized_args'] = $sanitized_args;
+                jssupportticket::$jsst_data['sanitized_args'] = $jsst_sanitized_args;
             }
-            jssupportticket::$_data['short_code_header'] = 'addticket';
+            jssupportticket::$jsst_data['short_code_header'] = 'addticket';
             if ( in_array('agent',jssupportticket::$_active_addons) && JSSTincluder::getJSModel('agent')->isUserStaff()) {
-                $id = JSSTrequest::getVar('jssupportticketid');
-                $per_task = ($id == null) ? 'Add Ticket' : 'Edit Ticket';
-                jssupportticket::$_data['permission_granted'] = JSSTincluder::getJSModel('userpermissions')->checkPermissionGrantedForTask($per_task);
-                if (jssupportticket::$_data['permission_granted']) {
-                    JSSTincluder::getJSModel('ticket')->getTicketsForForm($id);
+                $jsst_id = JSSTrequest::getVar('jssupportticketid');
+                $jsst_per_task = ($jsst_id == null) ? 'Add Ticket' : 'Edit Ticket';
+                jssupportticket::$jsst_data['permission_granted'] = JSSTincluder::getJSModel('userpermissions')->checkPermissionGrantedForTask($jsst_per_task);
+                if (jssupportticket::$jsst_data['permission_granted']) {
+                    JSSTincluder::getJSModel('ticket')->getTicketsForForm($jsst_id);
                 }
                 JSSTincluder::include_file('staffaddticket', 'agent');
             } else {
@@ -69,90 +69,90 @@ class JSSTshortcodes {
                 JSSTincluder::include_file('addticket', 'ticket');
             }
         }
-        $content .= ob_get_clean();
-        return $content;
+        $jsst_content .= ob_get_clean();
+        return $jsst_content;
     }
 
-    function show_form_ticket_for_multiform($raw_args, $content = null) {
-        $formid = $raw_args['formid'];
+    function show_form_ticket_for_multiform($jsst_raw_args, $jsst_content = null) {
+        $jsst_formid = $jsst_raw_args['formid'];
         //default set of parameters for the front end shortcodes
         ob_start();
-        $pageid = get_the_ID();
-        jssupportticket::setPageID($pageid);
-        $module = JSSTRequest::getVar('jstmod', '', 'ticket');
-        $layout = JSSTRequest::getVar('jstlay', '', 'addticket');
-        if ($layout != 'addticket' && $layout != 'staffaddticket') {
-            JSSTincluder::include_file($module);
+        $jsst_pageid = get_the_ID();
+        jssupportticket::setPageID($jsst_pageid);
+        $jsst_module = JSSTRequest::getVar('jstmod', '', 'ticket');
+        $jsst_layout = JSSTRequest::getVar('jstlay', '', 'addticket');
+        if ($jsst_layout != 'addticket' && $jsst_layout != 'staffaddticket') {
+            JSSTincluder::include_file($jsst_module);
         } else {
-            $defaults = array(
+            $jsst_defaults = array(
                 'job_type' => '',
                 'city' => '',
                 'company' => '',
             );
-            $sanitized_args = shortcode_atts($defaults, $raw_args);
-            if(isset(jssupportticket::$_data['sanitized_args']) && !empty(jssupportticket::$_data['sanitized_args'])){
-                jssupportticket::$_data['sanitized_args'] += $sanitized_args;
+            $jsst_sanitized_args = shortcode_atts($jsst_defaults, $jsst_raw_args);
+            if(isset(jssupportticket::$jsst_data['sanitized_args']) && !empty(jssupportticket::$jsst_data['sanitized_args'])){
+                jssupportticket::$jsst_data['sanitized_args'] += $jsst_sanitized_args;
             }else{
-                jssupportticket::$_data['sanitized_args'] = $sanitized_args;
+                jssupportticket::$jsst_data['sanitized_args'] = $jsst_sanitized_args;
             }
-            jssupportticket::$_data['short_code_header'] = 'addticket';
+            jssupportticket::$jsst_data['short_code_header'] = 'addticket';
             if ( in_array('agent',jssupportticket::$_active_addons) && JSSTincluder::getJSModel('agent')->isUserStaff()) {
-                $id = JSSTrequest::getVar('jssupportticketid');
-                $per_task = ($id == null) ? 'Add Ticket' : 'Edit Ticket';
-                jssupportticket::$_data['permission_granted'] = JSSTincluder::getJSModel('userpermissions')->checkPermissionGrantedForTask($per_task);
-                if (jssupportticket::$_data['permission_granted']) {
-                    JSSTincluder::getJSModel('ticket')->getTicketsForForm($id, $formid);
+                $jsst_id = JSSTrequest::getVar('jssupportticketid');
+                $jsst_per_task = ($jsst_id == null) ? 'Add Ticket' : 'Edit Ticket';
+                jssupportticket::$jsst_data['permission_granted'] = JSSTincluder::getJSModel('userpermissions')->checkPermissionGrantedForTask($jsst_per_task);
+                if (jssupportticket::$jsst_data['permission_granted']) {
+                    JSSTincluder::getJSModel('ticket')->getTicketsForForm($jsst_id, $jsst_formid);
                 }
                 JSSTincluder::include_file('staffaddticket', 'agent');
             } else {
-                JSSTincluder::getJSModel('ticket')->getTicketsForForm(null, $formid);
+                JSSTincluder::getJSModel('ticket')->getTicketsForForm(null, $jsst_formid);
                 JSSTincluder::include_file('addticket', 'ticket');
             }
         }
-        $content .= ob_get_clean();
-        return $content;
+        $jsst_content .= ob_get_clean();
+        return $jsst_content;
     }
 
-    function show_my_ticket($raw_args, $content = null) {
+    function show_my_ticket($jsst_raw_args, $jsst_content = null) {
         //default set of parameters for the front end shortcodes
         ob_start();
-        $pageid = get_the_ID();
-        jssupportticket::setPageID($pageid);
-        $module = JSSTRequest::getVar('jstmod', '', 'ticket');
-        $layout = JSSTRequest::getVar('jstlay', '', 'myticket');
-        if ($layout != 'myticket' && $layout != 'staffmyticket') {
-            JSSTincluder::include_file($module);
+        $jsst_pageid = get_the_ID();
+        jssupportticket::setPageID($jsst_pageid);
+        $jsst_module = JSSTRequest::getVar('jstmod', '', 'ticket');
+        $jsst_layout = JSSTRequest::getVar('jstlay', '', 'myticket');
+        if ($jsst_layout != 'myticket' && $jsst_layout != 'staffmyticket') {
+            JSSTincluder::include_file($jsst_module);
         } else {
-            $defaults = array(
+            $jsst_defaults = array(
                 'list' => '',
                 'ticketid' => '',
             );
-            $list = JSSTrequest::getVar('list', 'get', null);
-            $ticketid = JSSTrequest::getVar('ticketid', null, null);
-            $args = shortcode_atts($defaults, $raw_args);
-            if(isset(jssupportticket::$_data['sanitized_args']) && !empty(jssupportticket::$_data['sanitized_args'])){
-                jssupportticket::$_data['sanitized_args'] += $args;
+            $jsst_list = JSSTrequest::getVar('list', 'get', null);
+            $jsst_ticketid = JSSTrequest::getVar('ticketid', null, null);
+            $jsst_args = shortcode_atts($jsst_defaults, $jsst_raw_args);
+            if(isset(jssupportticket::$jsst_data['sanitized_args']) && !empty(jssupportticket::$jsst_data['sanitized_args'])){
+                jssupportticket::$jsst_data['sanitized_args'] += $jsst_args;
             }else{
-                jssupportticket::$_data['sanitized_args'] = $args;
+                jssupportticket::$jsst_data['sanitized_args'] = $jsst_args;
             }
-            if ($list == null)
-                $list = $args['list'];
-            if ($ticketid == null)
-                $ticketid = $args['ticketid'];
-            jssupportticket::$_data['short_code_header'] = 'myticket';
+            if ($jsst_list == null)
+                $jsst_list = $jsst_args['list'];
+            if ($jsst_ticketid == null)
+                $jsst_ticketid = $jsst_args['ticketid'];
+            jssupportticket::$jsst_data['short_code_header'] = 'myticket';
             if ( in_array('agent',jssupportticket::$_active_addons) && JSSTincluder::getJSModel('agent')->isUserStaff()) {
                 JSSTincluder::getJSModel('ticket')->getStaffTickets();
                 JSSTincluder::include_file('staffmyticket', 'agent');
             } else {
-                JSSTincluder::getJSModel('ticket')->getMyTickets($list, $ticketid);
+                JSSTincluder::getJSModel('ticket')->getMyTickets($jsst_list, $jsst_ticketid);
                 JSSTincluder::include_file('myticket', 'ticket');
             }
         }
-        $content .= ob_get_clean();
-        return $content;
+        $jsst_content .= ob_get_clean();
+        return $jsst_content;
     }
 
 }
 
-$shortcodes = new JSSTshortcodes();
+$jsst_shortcodes = new JSSTshortcodes();
 ?>

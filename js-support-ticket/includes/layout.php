@@ -6,7 +6,7 @@ if (!defined('ABSPATH'))
 class JSSTlayout {
 
     static function getNoRecordFound() {
-        $html = '
+        $jsst_html = '
 				<div class="js-ticket-error-message-wrapper">
 					<div class="js-ticket-message-image-wrapper">
 						<img class="js-ticket-message-image" alt="message image" src="' . esc_url(JSST_PLUGIN_URL) . 'includes/images/error/no-record-icon.png"/>
@@ -21,10 +21,10 @@ class JSSTlayout {
 					</div>
 				</div>
 		';
-        echo wp_kses($html, JSST_ALLOWED_TAGS);
+        echo wp_kses($jsst_html, JSST_ALLOWED_TAGS);
     }
     static function getNoRecordFoundForAjax() {
-        $html = '
+        $jsst_html = '
 				<div class="js-ticket-error-message-wrapper">
 					<div class="js-ticket-message-image-wrapper">
 						<img class="js-ticket-message-image" alt="message image" src="' . esc_url(JSST_PLUGIN_URL) . 'includes/images/error/no-record-icon.png"/>
@@ -39,16 +39,16 @@ class JSSTlayout {
 					</div>
 				</div>
 		';
-        return wp_kses($html, JSST_ALLOWED_TAGS);
+        return wp_kses($jsst_html, JSST_ALLOWED_TAGS);
     }
 
     static function getPermissionNotGranted() {
-    	$loginval = JSSTincluder::getJSModel('configuration')->getConfigValue('set_login_link');
-        $loginlink = JSSTincluder::getJSModel('configuration')->getConfigValue('login_link');
-        $registerval = JSSTincluder::getJSModel('configuration')->getConfigValue('set_register_link');
-        $registerlink = JSSTincluder::getJSModel('configuration')->getConfigValue('register_link');
+    	$jsst_loginval = JSSTincluder::getJSModel('configuration')->getConfigValue('set_login_link');
+        $jsst_loginlink = JSSTincluder::getJSModel('configuration')->getConfigValue('login_link');
+        $jsst_registerval = JSSTincluder::getJSModel('configuration')->getConfigValue('set_register_link');
+        $jsst_registerlink = JSSTincluder::getJSModel('configuration')->getConfigValue('register_link');
         
-        $html = '
+        $jsst_html = '
 				<div class="js-ticket-error-message-wrapper">
 					<div class="js-ticket-message-image-wrapper">
 						<img class="js-ticket-message-image" alt="message image" src="' . esc_url(JSST_PLUGIN_URL) . 'includes/images/error/not-permission-icon.png"/>
@@ -62,35 +62,35 @@ class JSSTlayout {
 						</span>
 						<span class="js-ticket-user-login-btn-wrp">';
 							if (JSSTincluder::getObjectClass('user')->uid() == 0) {
-								if ($loginval == 3){
-                                    $hreflink = wp_login_url();
+								if ($jsst_loginval == 3){
+                                    $jsst_hreflink = wp_login_url();
                                 }
-		                        else if($loginval == 2 && $loginlink != ""){
-		                            $html .= '<a class="js-ticket-login-btn" href="'.esc_url($loginlink).'" title="Login">' . esc_html(__('Login', 'js-support-ticket')) . '</a>';
+		                        else if($jsst_loginval == 2 && $jsst_loginlink != ""){
+		                            $jsst_html .= '<a class="js-ticket-login-btn" href="'.esc_url($jsst_loginlink).'" title="Login">' . esc_html(__('Login', 'js-support-ticket')) . '</a>';
 		                        }else{
-		                            $html .= '<a class="js-ticket-login-btn" href="'.esc_url(jssupportticket::makeUrl(array('jstmod'=>'jssupportticket', 'jstlay'=>'login'))).'" title="Login">' . esc_html(__('Login', 'js-support-ticket')) . '</a>';
+		                            $jsst_html .= '<a class="js-ticket-login-btn" href="'.esc_url(jssupportticket::makeUrl(array('jstmod'=>'jssupportticket', 'jstlay'=>'login'))).'" title="Login">' . esc_html(__('Login', 'js-support-ticket')) . '</a>';
 		                        }
-		                        $is_enable = get_option('users_can_register');/*check to make sure user registration is enabled*/
-	                            if ($is_enable) {
-	                            	if($registerval == 3){
-		                        	    $html .= '<a class="js-ticket-register-btn" href="'.esc_url(wp_registration_url()).'" title="' . esc_html(__('Register', 'js-support-ticket')) . '">' . esc_html(__('Register', 'js-support-ticket')) . '</a>';
-		                        	}else if($registerval == 2 && $registerlink != ""){
-		                        	    $html .= '<a class="js-ticket-register-btn" href="'.esc_url($registerlink).'" title="' . esc_html(__('Register', 'js-support-ticket')) . '">' . esc_html(__('Register', 'js-support-ticket')) . '</a>';
+		                        $jsst_is_enable = get_option('users_can_register');/*check to make sure user registration is enabled*/
+	                            if ($jsst_is_enable) {
+	                            	if($jsst_registerval == 3){
+		                        	    $jsst_html .= '<a class="js-ticket-register-btn" href="'.esc_url(wp_registration_url()).'" title="' . esc_html(__('Register', 'js-support-ticket')) . '">' . esc_html(__('Register', 'js-support-ticket')) . '</a>';
+		                        	}else if($jsst_registerval == 2 && $jsst_registerlink != ""){
+		                        	    $jsst_html .= '<a class="js-ticket-register-btn" href="'.esc_url($jsst_registerlink).'" title="' . esc_html(__('Register', 'js-support-ticket')) . '">' . esc_html(__('Register', 'js-support-ticket')) . '</a>';
 		                        	}else{
-		                        		$html .= '<a class="js-ticket-register-btn" href="'.esc_url(jssupportticket::makeUrl(array('jstmod'=>'jssupportticket', 'jstlay'=>'userregister'))).'" title="' . esc_html(__('Register', 'js-support-ticket')) . '">' . esc_html(__('Register', 'js-support-ticket')) . '</a>';
+		                        		$jsst_html .= '<a class="js-ticket-register-btn" href="'.esc_url(jssupportticket::makeUrl(array('jstmod'=>'jssupportticket', 'jstlay'=>'userregister'))).'" title="' . esc_html(__('Register', 'js-support-ticket')) . '">' . esc_html(__('Register', 'js-support-ticket')) . '</a>';
 		                        	}
 		                        }
 	                    	}
 
-                    $html .= '</span>
+                    $jsst_html .= '</span>
 					</div>
 				</div>
 		';
-        echo wp_kses($html, JSST_ALLOWED_TAGS);
+        echo wp_kses($jsst_html, JSST_ALLOWED_TAGS);
     }
 
     static function getNotStaffMember() {
-        $html = '
+        $jsst_html = '
 				<div class="js-ticket-error-message-wrapper">
 					<div class="js-ticket-message-image-wrapper">
 						<img class="js-ticket-message-image" alt="message image" src="' . esc_url(JSST_PLUGIN_URL) . 'includes/images/error/not-permission-icon.png"/>
@@ -105,11 +105,11 @@ class JSSTlayout {
 					</div>
 				</div>
 		';
-        echo wp_kses($html, JSST_ALLOWED_TAGS);
+        echo wp_kses($jsst_html, JSST_ALLOWED_TAGS);
     }
 
     static function getYouAreLoggedIn() {
-        $html = '
+        $jsst_html = '
 				<div class="js-ticket-error-message-wrapper">
 					<div class="js-ticket-message-image-wrapper">
 						<img class="js-ticket-message-image" alt="message image" src="' . esc_url(JSST_PLUGIN_URL) . 'includes/images/error/already-loggedin.png"/>
@@ -124,11 +124,11 @@ class JSSTlayout {
 					</div>
 				</div>
 		';
-        echo wp_kses($html, JSST_ALLOWED_TAGS);
+        echo wp_kses($jsst_html, JSST_ALLOWED_TAGS);
     }
 
     static function getStaffMemberDisable() {
-        $html = '
+        $jsst_html = '
 				<div class="js-ticket-error-message-wrapper">
 					<div class="js-ticket-message-image-wrapper">
 						<img class="js-ticket-message-image" alt="message image" src="' . esc_url(JSST_PLUGIN_URL) . 'includes/images/error/not-permission-icon.png"/>
@@ -143,11 +143,11 @@ class JSSTlayout {
 					</div>
 				</div>
 		';
-        echo wp_kses($html, JSST_ALLOWED_TAGS);
+        echo wp_kses($jsst_html, JSST_ALLOWED_TAGS);
     }
 
     static function getSystemOffline() {
-        $html = '
+        $jsst_html = '
 				<div class="js-ticket-error-message-wrapper">
 					<div class="js-ticket-message-image-wrapper">
 						<img class="js-ticket-message-image" alt="message image" src="' . esc_url(JSST_PLUGIN_URL) . 'includes/images/error/offline.png"/>
@@ -162,15 +162,15 @@ class JSSTlayout {
 					</div>
 				</div>
 		';
-        echo wp_kses($html, JSST_ALLOWED_TAGS);
+        echo wp_kses($jsst_html, JSST_ALLOWED_TAGS);
     }
 
-    static function getUserGuest($redirect_url = '') {
-        $loginval = JSSTincluder::getJSModel('configuration')->getConfigValue('set_login_link');
-        $loginlink = JSSTincluder::getJSModel('configuration')->getConfigValue('login_link');
-        $registerval = JSSTincluder::getJSModel('configuration')->getConfigValue('set_register_link');
-        $registerlink = JSSTincluder::getJSModel('configuration')->getConfigValue('register_link');
-        $html = '
+    static function getUserGuest($jsst_redirect_url = '') {
+        $jsst_loginval = JSSTincluder::getJSModel('configuration')->getConfigValue('set_login_link');
+        $jsst_loginlink = JSSTincluder::getJSModel('configuration')->getConfigValue('login_link');
+        $jsst_registerval = JSSTincluder::getJSModel('configuration')->getConfigValue('set_register_link');
+        $jsst_registerlink = JSSTincluder::getJSModel('configuration')->getConfigValue('register_link');
+        $jsst_html = '
                 <div class="js-ticket-error-message-wrapper">
 					<div class="js-ticket-message-image-wrapper">
 						<img class="js-ticket-message-image" alt="message image" src="' . esc_url(JSST_PLUGIN_URL) . 'includes/images/error/not-login-icon.png"/>
@@ -183,35 +183,35 @@ class JSSTlayout {
 					    	' . esc_html(__('To access the page, Please login', 'js-support-ticket')) . '
 						</span>
 						<span class="js-ticket-user-login-btn-wrp">';
-							if ($loginval == 3){
-                                $hreflink = wp_login_url();
+							if ($jsst_loginval == 3){
+                                $jsst_hreflink = wp_login_url();
                             }
-	                        else if($loginval == 2 && $loginlink != ""){
-	                            $html .= '<a class="js-ticket-login-btn" href="'.esc_url($loginlink).'" title="Login">' . esc_html(__('Login', 'js-support-ticket')) . '</a>';
+	                        else if($jsst_loginval == 2 && $jsst_loginlink != ""){
+	                            $jsst_html .= '<a class="js-ticket-login-btn" href="'.esc_url($jsst_loginlink).'" title="Login">' . esc_html(__('Login', 'js-support-ticket')) . '</a>';
 	                        }else{
-	                            $html .= '<a class="js-ticket-login-btn" href="'.esc_url(jssupportticket::makeUrl(array('jstmod'=>'jssupportticket', 'jstlay'=>'login', 'js_redirecturl'=>$redirect_url))).'" title="Login">' . esc_html(__('Login', 'js-support-ticket')) . '</a>';
+	                            $jsst_html .= '<a class="js-ticket-login-btn" href="'.esc_url(jssupportticket::makeUrl(array('jstmod'=>'jssupportticket', 'jstlay'=>'login', 'js_redirecturl'=>$jsst_redirect_url))).'" title="Login">' . esc_html(__('Login', 'js-support-ticket')) . '</a>';
 	                        }
-	                        $is_enable = get_option('users_can_register');/*check to make sure user registration is enabled*/
-                            if ($is_enable) {
-                            	if($registerval == 3){
-	                        	    $html .= '<a class="js-ticket-register-btn" href="'.esc_url(wp_registration_url()).'" title="' . esc_html(__('Register', 'js-support-ticket')) . '">' . esc_html(__('Register', 'js-support-ticket')) . '</a>';
-	                        	}else if($registerval == 2 && $registerlink != ""){
-	                        	    $html .= '<a class="js-ticket-register-btn" href="'.esc_url($registerlink).'" title="' . esc_html(__('Register', 'js-support-ticket')) . '">' . esc_html(__('Register', 'js-support-ticket')) . '</a>';
+	                        $jsst_is_enable = get_option('users_can_register');/*check to make sure user registration is enabled*/
+                            if ($jsst_is_enable) {
+                            	if($jsst_registerval == 3){
+	                        	    $jsst_html .= '<a class="js-ticket-register-btn" href="'.esc_url(wp_registration_url()).'" title="' . esc_html(__('Register', 'js-support-ticket')) . '">' . esc_html(__('Register', 'js-support-ticket')) . '</a>';
+	                        	}else if($jsst_registerval == 2 && $jsst_registerlink != ""){
+	                        	    $jsst_html .= '<a class="js-ticket-register-btn" href="'.esc_url($jsst_registerlink).'" title="' . esc_html(__('Register', 'js-support-ticket')) . '">' . esc_html(__('Register', 'js-support-ticket')) . '</a>';
 	                        	}else{
-	                        		$html .= '<a class="js-ticket-register-btn" href="'.esc_url(jssupportticket::makeUrl(array('jstmod'=>'jssupportticket', 'jstlay'=>'userregister', 'js_redirecturl'=>$redirect_url))).'" title="' . esc_html(__('Register', 'js-support-ticket')) . '">' . esc_html(__('Register', 'js-support-ticket')) . '</a>';
+	                        		$jsst_html .= '<a class="js-ticket-register-btn" href="'.esc_url(jssupportticket::makeUrl(array('jstmod'=>'jssupportticket', 'jstlay'=>'userregister', 'js_redirecturl'=>$jsst_redirect_url))).'" title="' . esc_html(__('Register', 'js-support-ticket')) . '">' . esc_html(__('Register', 'js-support-ticket')) . '</a>';
 	                        	}
 	                        }
 
-                    $html .= '</span>
+                    $jsst_html .= '</span>
                     </div>
 
 				</div>
         ';
-        echo wp_kses($html, JSST_ALLOWED_TAGS);
+        echo wp_kses($jsst_html, JSST_ALLOWED_TAGS);
     }
 
     static function getYouAreNotAllowedToViewThisPage() {
-        $html = '
+        $jsst_html = '
 				<div class="js-ticket-error-message-wrapper">
 					<div class="js-ticket-message-image-wrapper">
 						<img class="js-ticket-message-image" alt="message image" src="' . esc_url(JSST_PLUGIN_URL) . 'includes/images/error/not-permission-icon.png"/>
@@ -226,11 +226,11 @@ class JSSTlayout {
 					</div>
 				</div>
 		';
-        echo wp_kses($html, JSST_ALLOWED_TAGS);
+        echo wp_kses($jsst_html, JSST_ALLOWED_TAGS);
     }
 
     static function getRegistrationDisabled() {
-        $html = '
+        $jsst_html = '
 				<div class="js-ticket-error-message-wrapper">
 					<div class="js-ticket-message-image-wrapper">
 						<img class="js-ticket-message-image" alt="message image" src="' . esc_url(JSST_PLUGIN_URL) . 'includes/images/error/ban.png"/>
@@ -245,25 +245,25 @@ class JSSTlayout {
 					</div>
 				</div>
 		';
-        echo wp_kses($html, JSST_ALLOWED_TAGS);
+        echo wp_kses($jsst_html, JSST_ALLOWED_TAGS);
     }
 
-    static function getFeedbackMessages($msg_type) {
-    	if($msg_type == 2){
-    		$img_var = '3.png';
-    		$text_var_1 = esc_html(__('Sorry!', 'js-support-ticket'));
-    		$text_var_2 = esc_html(__('You have already given the feedback for this ticket.', 'js-support-ticket'));
-    	}elseif($msg_type == 3){
-    		$img_var = 'no-record-icon.png';
-    		$text_var_1 = esc_html(__('Sorry!', 'js-support-ticket'));
-    		$text_var_2 = esc_html(__('Ticket not found...!', 'js-support-ticket'));
+    static function getFeedbackMessages($jsst_msg_type) {
+    	if($jsst_msg_type == 2){
+    		$jsst_img_var = '3.png';
+    		$jsst_text_var_1 = esc_html(__('Sorry!', 'js-support-ticket'));
+    		$jsst_text_var_2 = esc_html(__('You have already given the feedback for this ticket.', 'js-support-ticket'));
+    	}elseif($jsst_msg_type == 3){
+    		$jsst_img_var = 'no-record-icon.png';
+    		$jsst_text_var_1 = esc_html(__('Sorry!', 'js-support-ticket'));
+    		$jsst_text_var_2 = esc_html(__('Ticket not found...!', 'js-support-ticket'));
     	}else{
-    		$img_var = 'not-permission-icondd.png';
-    		$text_var_1 = esc_html(__('Sorry!', 'js-support-ticket'));
-    		$text_var_2 = esc_html(__('User is not allowed to view this page', 'js-support-ticket'));
+    		$jsst_img_var = 'not-permission-icondd.png';
+    		$jsst_text_var_1 = esc_html(__('Sorry!', 'js-support-ticket'));
+    		$jsst_text_var_2 = esc_html(__('User is not allowed to view this page', 'js-support-ticket'));
     	}
-    	if($msg_type == 4){
-			$html = '
+    	if($jsst_msg_type == 4){
+			$jsst_html = '
 					<div class="js-ticket-error-message-wrapper">
 						<div class="js-ticket-message-image-wrapper">
 							<img class="js-ticket-message-image" alt="message image" src="' . esc_url(JSST_PLUGIN_URL) . 'includes/images/error/success.png"/>
@@ -278,23 +278,23 @@ class JSSTlayout {
 						</div>
 					</div>';
     	}else{
-	        $html = '
+	        $jsst_html = '
 					<div class="js-ticket-error-message-wrapper">
 					<div class="js-ticket-message-image-wrapper">
-						<img class="js-ticket-message-image" alt="message image" src="' . esc_url(JSST_PLUGIN_URL) . 'includes/images/error/'.esc_attr($img_var).'"/>
+						<img class="js-ticket-message-image" alt="message image" src="' . esc_url(JSST_PLUGIN_URL) . 'includes/images/error/'.esc_attr($jsst_img_var).'"/>
 					</div>
 					<div class="js-ticket-messages-data-wrapper">
 						<span class="js-ticket-messages-main-text">
-					    	' . esc_html($text_var_1) . '
+					    	' . esc_html($jsst_text_var_1) . '
 						</span>
 						<span class="js-ticket-messages-block_text">
-					    	' .wp_kses($text_var_2, JSST_ALLOWED_TAGS). '
+					    	' .wp_kses($jsst_text_var_2, JSST_ALLOWED_TAGS). '
 						</span>
 					</div>
 				</div>
 			';
 		}
-        echo wp_kses($html, JSST_ALLOWED_TAGS);
+        echo wp_kses($jsst_html, JSST_ALLOWED_TAGS);
 	}
 
 }

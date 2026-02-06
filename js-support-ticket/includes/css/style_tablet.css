@@ -35,8 +35,8 @@
 	span.js-ticket-wrapper-textcolor {top: 15px;}
 	div.js-ticket-wrapper div.js-ticket-data span.js-ticket-status {right: 120px;top: 15px;}
 	div.js-ticket-wrapper div.js-ticket-data1 {width: 100%;}
-	div.js-ticket-search-wrp div.js-ticket-form-wrp form.js-filter-form div.js-filter-wrapper div.js-filter-form-fields-wrp{width: 100%;padding-bottom: 7px;margin-bottom: 10px;}
-	div.js-ticket-search-wrp div.js-ticket-form-wrp form.js-filter-form div.js-filter-button-wrp {float: left;width: 100%;padding-top: 10px;}
+	div.js-ticket-search-wrp div.js-ticket-form-wrp form.js-filter-form div.js-filter-wrapper div.js-filter-form-fields-wrp{width: 100%;padding-bottom: 7px;}
+	div.js-ticket-search-wrp div.js-ticket-form-wrp form.js-filter-form div.js-filter-button-wrp {float: left;width: 100%;}
 	div#js-filter-wrapper-toggle-btn{width: calc(100% - 90% - 5px);}
 	div.js-ticket-sorting span.js-ticket-sorting-link{padding-right: 0px;padding-left: 0px;width: calc(100% / 3);display: inline-block;float: left;}
 	div.js-myticket-link{width: calc(100% / 3);margin: 5px 0;}
@@ -94,3 +94,6 @@ span.js-ticket-display-block {display: inline-block;margin-right: 5px;}
 .js-ticket-ai-powered-reply-content {text-align: center;}
 /* add role */
 div.js-ticket-categories-heading-wrp{flex-wrap: wrap;gap: 15px;}
+/* widget */
+div.jsst-main-up-wrapper.jsst-widget-main-up-wrapper .js-ticket-body-padding{width: 100%;}
+div.jsst-main-up-wrapper.jsst-widget-main-up-wrapper .js-widget-download-right .js-ticket-body-row-button{margin-left: 0;margin-right: 0;}

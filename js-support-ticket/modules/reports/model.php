@@ -8,146 +8,146 @@ class JSSTreportsModel {
     function getOverallReportData(){
 
         //Overall Data by status
-        $query = "SELECT COUNT(id) FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` ";
-        $allticket = jssupportticket::$_db->get_var($query);
+        $jsst_query = "SELECT COUNT(id) FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` ";
+        $jsst_allticket = jssupportticket::$_db->get_var($jsst_query);
 
-        $query = "SELECT COUNT(id) FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE status != 5 AND status != 6";
-        $openticket = jssupportticket::$_db->get_var($query);
+        $jsst_query = "SELECT COUNT(id) FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE status != 5 AND status != 6";
+        $jsst_openticket = jssupportticket::$_db->get_var($jsst_query);
 
-        $query = "SELECT COUNT(id) FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE (status = 5 OR status = 6)";
-        $closeticket = jssupportticket::$_db->get_var($query);
+        $jsst_query = "SELECT COUNT(id) FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE (status = 5 OR status = 6)";
+        $jsst_closeticket = jssupportticket::$_db->get_var($jsst_query);
 
-        $query = "SELECT COUNT(id) FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE isanswered = 1 AND status != 5 AND status != 6 AND status != 1";
-        $answeredticket = jssupportticket::$_db->get_var($query);
+        $jsst_query = "SELECT COUNT(id) FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE isanswered = 1 AND status != 5 AND status != 6 AND status != 1";
+        $jsst_answeredticket = jssupportticket::$_db->get_var($jsst_query);
 
-        $query = "SELECT COUNT(id) FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE isoverdue = 1 AND status != 5";
-        $overdueticket = jssupportticket::$_db->get_var($query);
+        $jsst_query = "SELECT COUNT(id) FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE isoverdue = 1 AND status != 5";
+        $jsst_overdueticket = jssupportticket::$_db->get_var($jsst_query);
 
-        $query = "SELECT COUNT(id) FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE isanswered != 1 AND status != 5 AND (lastreply != '0000-00-00 00:00:00')";
-        $pendingticket = jssupportticket::$_db->get_var($query);
+        $jsst_query = "SELECT COUNT(id) FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE isanswered != 1 AND status != 5 AND (lastreply != '0000-00-00 00:00:00')";
+        $jsst_pendingticket = jssupportticket::$_db->get_var($jsst_query);
 
-        jssupportticket::$_data['ticket_total']['allticket'] = $allticket;
-        jssupportticket::$_data['ticket_total']['openticket'] = $openticket;
-        jssupportticket::$_data['ticket_total']['closeticket'] = $closeticket;
-        jssupportticket::$_data['ticket_total']['answeredticket'] = $answeredticket;
-        jssupportticket::$_data['ticket_total']['overdueticket'] = $overdueticket;
-        jssupportticket::$_data['ticket_total']['pendingticket'] = $pendingticket;
+        jssupportticket::$jsst_data['ticket_total']['allticket'] = $jsst_allticket;
+        jssupportticket::$jsst_data['ticket_total']['openticket'] = $jsst_openticket;
+        jssupportticket::$jsst_data['ticket_total']['closeticket'] = $jsst_closeticket;
+        jssupportticket::$jsst_data['ticket_total']['answeredticket'] = $jsst_answeredticket;
+        jssupportticket::$jsst_data['ticket_total']['overdueticket'] = $jsst_overdueticket;
+        jssupportticket::$jsst_data['ticket_total']['pendingticket'] = $jsst_pendingticket;
 
-        jssupportticket::$_data['status_chart'] = "['". esc_html(__('New','js-support-ticket'))."',$openticket],['". esc_html(__('Answered','js-support-ticket'))."',$answeredticket],['". esc_html(__('Overdue','js-support-ticket'))."',$overdueticket],['". esc_html(__('Pending','js-support-ticket'))."',$pendingticket]";
-        $total = $openticket + $closeticket + $answeredticket + $overdueticket + $pendingticket;
-        jssupportticket::$_data['bar_chart'] = "
-        ['". esc_html(__('New','js-support-ticket'))."',$openticket,'#FF9900'],
-        ['". esc_html(__('Answered','js-support-ticket'))."',$answeredticket,'#179650'],
-        ['". esc_html(__('Closed','js-support-ticket'))."',$closeticket,'#5F3BBB'],
-        ['". esc_html(__('Pending','js-support-ticket'))."',$pendingticket,'#D98E11'],
-        ['". esc_html(__('Overdue','js-support-ticket'))."',$overdueticket,'#DB624C']
+        jssupportticket::$jsst_data['status_chart'] = "['". esc_html(__('New','js-support-ticket'))."',$jsst_openticket],['". esc_html(__('Answered','js-support-ticket'))."',$jsst_answeredticket],['". esc_html(__('Overdue','js-support-ticket'))."',$jsst_overdueticket],['". esc_html(__('Pending','js-support-ticket'))."',$jsst_pendingticket]";
+        $jsst_total = $jsst_openticket + $jsst_closeticket + $jsst_answeredticket + $jsst_overdueticket + $jsst_pendingticket;
+        jssupportticket::$jsst_data['bar_chart'] = "
+        ['". esc_html(__('New','js-support-ticket'))."',$jsst_openticket,'#FF9900'],
+        ['". esc_html(__('Answered','js-support-ticket'))."',$jsst_answeredticket,'#179650'],
+        ['". esc_html(__('Closed','js-support-ticket'))."',$jsst_closeticket,'#5F3BBB'],
+        ['". esc_html(__('Pending','js-support-ticket'))."',$jsst_pendingticket,'#D98E11'],
+        ['". esc_html(__('Overdue','js-support-ticket'))."',$jsst_overdueticket,'#DB624C']
         ";
 
-        $query = "SELECT dept.departmentname,(SELECT COUNT(id) FROM `".jssupportticket::$_db->prefix."js_ticket_tickets` WHERE departmentid = dept.id) AS totalticket
+        $jsst_query = "SELECT dept.departmentname,(SELECT COUNT(id) FROM `".jssupportticket::$_db->prefix."js_ticket_tickets` WHERE departmentid = dept.id) AS totalticket
                     FROM `".jssupportticket::$_db->prefix."js_ticket_departments` AS dept";
-        $department = jssupportticket::$_db->get_results($query);
-        jssupportticket::$_data['pie3d_chart1'] = "";
-        foreach($department AS $dept){
-            jssupportticket::$_data['pie3d_chart1'] .= "['".jssupportticket::JSST_getVarValue($dept->departmentname)."',$dept->totalticket],";
+        $jsst_department = jssupportticket::$_db->get_results($jsst_query);
+        jssupportticket::$jsst_data['pie3d_chart1'] = "";
+        foreach($jsst_department AS $jsst_dept){
+            jssupportticket::$jsst_data['pie3d_chart1'] .= "['".jssupportticket::JSST_getVarValue($jsst_dept->departmentname)."',$jsst_dept->totalticket],";
         }
 
-        $query = "SELECT priority.priority,(SELECT COUNT(id) FROM `".jssupportticket::$_db->prefix."js_ticket_tickets` WHERE priorityid = priority.id) AS totalticket
+        $jsst_query = "SELECT priority.priority,(SELECT COUNT(id) FROM `".jssupportticket::$_db->prefix."js_ticket_tickets` WHERE priorityid = priority.id) AS totalticket
                     FROM `".jssupportticket::$_db->prefix."js_ticket_priorities` AS priority ORDER BY priority.priority";
-        $department = jssupportticket::$_db->get_results($query);
-        jssupportticket::$_data['pie3d_chart2'] = "";
-        foreach($department AS $dept){
-            jssupportticket::$_data['pie3d_chart2'] .= "['".jssupportticket::JSST_getVarValue($dept->priority)."',$dept->totalticket],";
+        $jsst_department = jssupportticket::$_db->get_results($jsst_query);
+        jssupportticket::$jsst_data['pie3d_chart2'] = "";
+        foreach($jsst_department AS $jsst_dept){
+            jssupportticket::$jsst_data['pie3d_chart2'] .= "['".jssupportticket::JSST_getVarValue($jsst_dept->priority)."',$jsst_dept->totalticket],";
         }
         if(in_array('emailpiping', jssupportticket::$_active_addons)){
-            $query = "SELECT COUNT(id) FROM `".jssupportticket::$_db->prefix."js_ticket_tickets` WHERE ticketviaemail = 1";
-            $ticketviaemail = jssupportticket::$_db->get_var($query);
-            $query = "SELECT COUNT(id) FROM `".jssupportticket::$_db->prefix."js_ticket_replies` WHERE ticketviaemail = 1";
-            $replyviaemail = jssupportticket::$_db->get_var($query);
+            $jsst_query = "SELECT COUNT(id) FROM `".jssupportticket::$_db->prefix."js_ticket_tickets` WHERE ticketviaemail = 1";
+            $jsst_ticketviaemail = jssupportticket::$_db->get_var($jsst_query);
+            $jsst_query = "SELECT COUNT(id) FROM `".jssupportticket::$_db->prefix."js_ticket_replies` WHERE ticketviaemail = 1";
+            $jsst_replyviaemail = jssupportticket::$_db->get_var($jsst_query);
         }else{
-            $ticketviaemail = '';
-            $replyviaemail = '';
+            $jsst_ticketviaemail = '';
+            $jsst_replyviaemail = '';
         }
-        $query = "SELECT COUNT(id) FROM `".jssupportticket::$_db->prefix."js_ticket_tickets` WHERE ticketviaemail = 0";
-        $directticket = jssupportticket::$_db->get_var($query);
-        $query = "SELECT COUNT(id) FROM `".jssupportticket::$_db->prefix."js_ticket_replies` WHERE ticketviaemail = 0";
-        $directreply = jssupportticket::$_db->get_var($query);
+        $jsst_query = "SELECT COUNT(id) FROM `".jssupportticket::$_db->prefix."js_ticket_tickets` WHERE ticketviaemail = 0";
+        $jsst_directticket = jssupportticket::$_db->get_var($jsst_query);
+        $jsst_query = "SELECT COUNT(id) FROM `".jssupportticket::$_db->prefix."js_ticket_replies` WHERE ticketviaemail = 0";
+        $jsst_directreply = jssupportticket::$_db->get_var($jsst_query);
 
-        jssupportticket::$_data['stack_data'] = "['". esc_html(__('Tickets','js-support-ticket'))."',$directticket,$ticketviaemail,''],['". esc_html(__('Replies','js-support-ticket'))."',$directreply,$replyviaemail,'']";
+        jssupportticket::$jsst_data['stack_data'] = "['". esc_html(__('Tickets','js-support-ticket'))."',$jsst_directticket,$jsst_ticketviaemail,''],['". esc_html(__('Replies','js-support-ticket'))."',$jsst_directreply,$jsst_replyviaemail,'']";
 
-        $query = "SELECT priority.priority,(SELECT COUNT(id) FROM `".jssupportticket::$_db->prefix."js_ticket_tickets` WHERE priorityid = priority.id AND status = 1 AND (lastreply = '0000-00-00 00:00:00') ) AS totalticket
+        $jsst_query = "SELECT priority.priority,(SELECT COUNT(id) FROM `".jssupportticket::$_db->prefix."js_ticket_tickets` WHERE priorityid = priority.id AND status = 1 AND (lastreply = '0000-00-00 00:00:00') ) AS totalticket
                     FROM `".jssupportticket::$_db->prefix."js_ticket_priorities` AS priority ORDER BY priority.priority";
-        $openticket_pr = jssupportticket::$_db->get_results($query);
-        $query = "SELECT priority.priority,(SELECT COUNT(id) FROM `".jssupportticket::$_db->prefix."js_ticket_tickets` WHERE priorityid = priority.id AND isanswered = 1 AND status != 5 AND status != 1 ) AS totalticket
+        $jsst_openticket_pr = jssupportticket::$_db->get_results($jsst_query);
+        $jsst_query = "SELECT priority.priority,(SELECT COUNT(id) FROM `".jssupportticket::$_db->prefix."js_ticket_tickets` WHERE priorityid = priority.id AND isanswered = 1 AND status != 5 AND status != 1 ) AS totalticket
                     FROM `".jssupportticket::$_db->prefix."js_ticket_priorities` AS priority ORDER BY priority.priority";
-        $answeredticket_pr = jssupportticket::$_db->get_results($query);
-        $query = "SELECT priority.priority,(SELECT COUNT(id) FROM `".jssupportticket::$_db->prefix."js_ticket_tickets` WHERE priorityid = priority.id AND isoverdue = 1 AND status != 5 ) AS totalticket
+        $jsst_answeredticket_pr = jssupportticket::$_db->get_results($jsst_query);
+        $jsst_query = "SELECT priority.priority,(SELECT COUNT(id) FROM `".jssupportticket::$_db->prefix."js_ticket_tickets` WHERE priorityid = priority.id AND isoverdue = 1 AND status != 5 ) AS totalticket
                     FROM `".jssupportticket::$_db->prefix."js_ticket_priorities` AS priority ORDER BY priority.priority";
-        $overdueticket_pr = jssupportticket::$_db->get_results($query);
-        $query = "SELECT priority.priority,(SELECT COUNT(id) FROM `".jssupportticket::$_db->prefix."js_ticket_tickets` WHERE priorityid = priority.id AND isanswered != 1 AND status != 5 AND (lastreply != '0000-00-00 00:00:00') ) AS totalticket
+        $jsst_overdueticket_pr = jssupportticket::$_db->get_results($jsst_query);
+        $jsst_query = "SELECT priority.priority,(SELECT COUNT(id) FROM `".jssupportticket::$_db->prefix."js_ticket_tickets` WHERE priorityid = priority.id AND isanswered != 1 AND status != 5 AND (lastreply != '0000-00-00 00:00:00') ) AS totalticket
                     FROM `".jssupportticket::$_db->prefix."js_ticket_priorities` AS priority ORDER BY priority.priority";
-        $pendingticket_pr = jssupportticket::$_db->get_results($query);
-        // jssupportticket::$_data['stack_chart_horizontal']['title'] = "['". esc_html(__('Tickets','js-support-ticket'))."',";
-        // jssupportticket::$_data['stack_chart_horizontal']['data'] = "['". esc_html(__('Overdue','js-support-ticket'))."',";
-        // foreach($overdueticket_pr AS $pr){
-        //     jssupportticket::$_data['stack_chart_horizontal']['title'] .= "'".$pr->priority."',";
-        //     jssupportticket::$_data['stack_chart_horizontal']['data'] .= $pr->totalticket.",";
+        $jsst_pendingticket_pr = jssupportticket::$_db->get_results($jsst_query);
+        // jssupportticket::$jsst_data['stack_chart_horizontal']['title'] = "['". esc_html(__('Tickets','js-support-ticket'))."',";
+        // jssupportticket::$jsst_data['stack_chart_horizontal']['data'] = "['". esc_html(__('Overdue','js-support-ticket'))."',";
+        // foreach($jsst_overdueticket_pr AS $jsst_pr){
+        //     jssupportticket::$jsst_data['stack_chart_horizontal']['title'] .= "'".$jsst_pr->priority."',";
+        //     jssupportticket::$jsst_data['stack_chart_horizontal']['data'] .= $jsst_pr->totalticket.",";
         // }
-        // jssupportticket::$_data['stack_chart_horizontal']['title'] .= "]";
-        // jssupportticket::$_data['stack_chart_horizontal']['data'] .= "],['". esc_html(__('Pending','js-support-ticket'))."',";
+        // jssupportticket::$jsst_data['stack_chart_horizontal']['title'] .= "]";
+        // jssupportticket::$jsst_data['stack_chart_horizontal']['data'] .= "],['". esc_html(__('Pending','js-support-ticket'))."',";
 
-        // foreach($pendingticket_pr AS $pr){
-        //     jssupportticket::$_data['stack_chart_horizontal']['data'] .= $pr->totalticket.",";
-        // }
-
-        // jssupportticket::$_data['stack_chart_horizontal']['data'] .= "],['". esc_html(__('Answered','js-support-ticket'))."',";
-
-        // foreach($answeredticket_pr AS $pr){
-        //     jssupportticket::$_data['stack_chart_horizontal']['data'] .= $pr->totalticket.",";
+        // foreach($jsst_pendingticket_pr AS $jsst_pr){
+        //     jssupportticket::$jsst_data['stack_chart_horizontal']['data'] .= $jsst_pr->totalticket.",";
         // }
 
-        // jssupportticket::$_data['stack_chart_horizontal']['data'] .= "],['". esc_html(__('New','js-support-ticket'))."',";
+        // jssupportticket::$jsst_data['stack_chart_horizontal']['data'] .= "],['". esc_html(__('Answered','js-support-ticket'))."',";
 
-        // foreach($openticket_pr AS $pr){
-        //     jssupportticket::$_data['stack_chart_horizontal']['data'] .= $pr->totalticket.",";
+        // foreach($jsst_answeredticket_pr AS $jsst_pr){
+        //     jssupportticket::$jsst_data['stack_chart_horizontal']['data'] .= $jsst_pr->totalticket.",";
         // }
 
-        // jssupportticket::$_data['stack_chart_horizontal']['data'] .= "]";
-        jssupportticket::$_data['stack_chart_horizontal']['title'] = "['". esc_html(__('Priority','js-support-ticket'))."','". esc_html(__('Overdue','js-support-ticket'))."','". esc_html(__('Pending','js-support-ticket'))."','". esc_html(__('Answered','js-support-ticket'))."','". esc_html(__('New','js-support-ticket'))."']";
-        jssupportticket::$_data['stack_chart_horizontal']['data'] = "";
+        // jssupportticket::$jsst_data['stack_chart_horizontal']['data'] .= "],['". esc_html(__('New','js-support-ticket'))."',";
 
-        foreach($overdueticket_pr AS $index => $pr){
-            jssupportticket::$_data['stack_chart_horizontal']['data'] .= "[";
-            jssupportticket::$_data['stack_chart_horizontal']['data'] .= "'".jssupportticket::JSST_getVarValue($pr->priority)."',";
-            jssupportticket::$_data['stack_chart_horizontal']['data'] .= $overdueticket_pr[$index]->totalticket.",";
-            jssupportticket::$_data['stack_chart_horizontal']['data'] .= $pendingticket_pr[$index]->totalticket.",";
-            jssupportticket::$_data['stack_chart_horizontal']['data'] .= $answeredticket_pr[$index]->totalticket.",";
-            jssupportticket::$_data['stack_chart_horizontal']['data'] .= $openticket_pr[$index]->totalticket.",";
-            jssupportticket::$_data['stack_chart_horizontal']['data'] .= "],";
+        // foreach($jsst_openticket_pr AS $jsst_pr){
+        //     jssupportticket::$jsst_data['stack_chart_horizontal']['data'] .= $jsst_pr->totalticket.",";
+        // }
+
+        // jssupportticket::$jsst_data['stack_chart_horizontal']['data'] .= "]";
+        jssupportticket::$jsst_data['stack_chart_horizontal']['title'] = "['". esc_html(__('Priority','js-support-ticket'))."','". esc_html(__('Overdue','js-support-ticket'))."','". esc_html(__('Pending','js-support-ticket'))."','". esc_html(__('Answered','js-support-ticket'))."','". esc_html(__('New','js-support-ticket'))."']";
+        jssupportticket::$jsst_data['stack_chart_horizontal']['data'] = "";
+
+        foreach($jsst_overdueticket_pr AS $jsst_index => $jsst_pr){
+            jssupportticket::$jsst_data['stack_chart_horizontal']['data'] .= "[";
+            jssupportticket::$jsst_data['stack_chart_horizontal']['data'] .= "'".jssupportticket::JSST_getVarValue($jsst_pr->priority)."',";
+            jssupportticket::$jsst_data['stack_chart_horizontal']['data'] .= $jsst_overdueticket_pr[$jsst_index]->totalticket.",";
+            jssupportticket::$jsst_data['stack_chart_horizontal']['data'] .= $jsst_pendingticket_pr[$jsst_index]->totalticket.",";
+            jssupportticket::$jsst_data['stack_chart_horizontal']['data'] .= $jsst_answeredticket_pr[$jsst_index]->totalticket.",";
+            jssupportticket::$jsst_data['stack_chart_horizontal']['data'] .= $jsst_openticket_pr[$jsst_index]->totalticket.",";
+            jssupportticket::$jsst_data['stack_chart_horizontal']['data'] .= "],";
         }
 
         if(in_array('agent',jssupportticket::$_active_addons)){
-            $query = "SELECT staff.firstname,staff.lastname,(SELECT COUNT(id) FROM `".jssupportticket::$_db->prefix."js_ticket_tickets` WHERE staffid = staff.id) AS totalticket
+            $jsst_query = "SELECT staff.firstname,staff.lastname,(SELECT COUNT(id) FROM `".jssupportticket::$_db->prefix."js_ticket_tickets` WHERE staffid = staff.id) AS totalticket
                         FROM `".jssupportticket::$_db->prefix."js_ticket_staff` AS staff";
-            $agenttickets = jssupportticket::$_db->get_results($query);
-            jssupportticket::$_data['slice_chart'] = '';
-            if(!empty($agenttickets))
-            foreach($agenttickets AS $ticket){
-                $agentname = $ticket->firstname;
-                if(!empty($ticket->lastname)){
-                    $agentname .= ' '.$ticket->lastname;
+            $jsst_agenttickets = jssupportticket::$_db->get_results($jsst_query);
+            jssupportticket::$jsst_data['slice_chart'] = '';
+            if(!empty($jsst_agenttickets))
+            foreach($jsst_agenttickets AS $jsst_ticket){
+                $jsst_agentname = $jsst_ticket->firstname;
+                if(!empty($jsst_ticket->lastname)){
+                    $jsst_agentname .= ' '.$jsst_ticket->lastname;
                 }
-                jssupportticket::$_data['slice_chart'] .= "['".$agentname."',$ticket->totalticket],";
+                jssupportticket::$jsst_data['slice_chart'] .= "['".$jsst_agentname."',$jsst_ticket->totalticket],";
             }
         }
 
         //To show priority colors on chart
-        $query = "SELECT prioritycolour FROM `".jssupportticket::$_db->prefix."js_ticket_priorities` ORDER BY priority ";
-        $jsonColorList = "[";
-        foreach(jssupportticket::$_db->get_results($query) as $priority){
-            $jsonColorList.= "'".$priority->prioritycolour."',";
+        $jsst_query = "SELECT prioritycolour FROM `".jssupportticket::$_db->prefix."js_ticket_priorities` ORDER BY priority ";
+        $jsst_jsonColorList = "[";
+        foreach(jssupportticket::$_db->get_results($jsst_query) as $jsst_priority){
+            $jsst_jsonColorList.= "'".$jsst_priority->prioritycolour."',";
         }
-        $jsonColorList .= "]";
-        jssupportticket::$_data['priorityColorList'] = $jsonColorList;
+        $jsst_jsonColorList .= "]";
+        jssupportticket::$jsst_data['priorityColorList'] = $jsst_jsonColorList;
         //end priority colors
     }
 
@@ -155,35 +155,35 @@ class JSSTreportsModel {
         if( !in_array('agent',jssupportticket::$_active_addons) ){
             return;
         }
-        $uid = JSSTincluder::getObjectClass('user')->uid();
-        $staffid = JSSTincluder::getJSModel('agent')->getStaffId($uid);
-        $query = "SELECT dept.departmentname,(SELECT COUNT(id) FROM `".jssupportticket::$_db->prefix."js_ticket_tickets` WHERE departmentid = dept.id ) AS totalticket
+        $jsst_uid = JSSTincluder::getObjectClass('user')->uid();
+        $jsst_staffid = JSSTincluder::getJSModel('agent')->getStaffId($jsst_uid);
+        $jsst_query = "SELECT dept.departmentname,(SELECT COUNT(id) FROM `".jssupportticket::$_db->prefix."js_ticket_tickets` WHERE departmentid = dept.id ) AS totalticket
             FROM `".jssupportticket::$_db->prefix."js_ticket_departments` AS dept
             JOIN `".jssupportticket::$_db->prefix."js_ticket_acl_user_access_departments` AS acl ON acl.departmentid = dept.id
-            WHERE acl.staffid = ".esc_sql($staffid)." AND dept.status=1";
+            WHERE acl.staffid = ".esc_sql($jsst_staffid)." AND dept.status=1";
 
-        $department = jssupportticket::$_db->get_results($query);
-        jssupportticket::$_data['pie3d_chart1'] = "";
-        $i = 0;
-        foreach($department AS $dept){
-            if($dept->totalticket == 0)
-                $i += 1;
-            jssupportticket::$_data['pie3d_chart1'] .= "['".$dept->departmentname."',$dept->totalticket],";
+        $jsst_department = jssupportticket::$_db->get_results($jsst_query);
+        jssupportticket::$jsst_data['pie3d_chart1'] = "";
+        $jsst_i = 0;
+        foreach($jsst_department AS $jsst_dept){
+            if($jsst_dept->totalticket == 0)
+                $jsst_i += 1;
+            jssupportticket::$jsst_data['pie3d_chart1'] .= "['".$jsst_dept->departmentname."',$jsst_dept->totalticket],";
         }
 
-        if(count($department) == $i)
-            jssupportticket::$_data['pie3d_chart1'] = '';
+        if(count($jsst_department) == $jsst_i)
+            jssupportticket::$jsst_data['pie3d_chart1'] = '';
 
         // pagination
-        $query = "SELECT count(dept.id)
+        $jsst_query = "SELECT count(dept.id)
             FROM `".jssupportticket::$_db->prefix."js_ticket_departments` AS dept
             JOIN `".jssupportticket::$_db->prefix."js_ticket_acl_user_access_departments` AS acl ON acl.departmentid = dept.id
-            WHERE acl.staffid = ".esc_sql($staffid)." AND dept.status=1";
-        $total = jssupportticket::$_db->get_var($query);
-        jssupportticket::$_data['total'] = $total;
-        jssupportticket::$_data[1] = JSSTpagination::getPagination($total);
+            WHERE acl.staffid = ".esc_sql($jsst_staffid)." AND dept.status=1";
+        $jsst_total = jssupportticket::$_db->get_var($jsst_query);
+        jssupportticket::$jsst_data['total'] = $jsst_total;
+        jssupportticket::$jsst_data[1] = JSSTpagination::getPagination($jsst_total);
 
-        $query = "SELECT dept.departmentname,
+        $jsst_query = "SELECT dept.departmentname,
             (SELECT COUNT(id) FROM `".jssupportticket::$_db->prefix."js_ticket_tickets` WHERE status = 1 AND (lastreply = '0000-00-00 00:00:00') AND departmentid = dept.id) AS openticket,
             (SELECT COUNT(id) FROM `".jssupportticket::$_db->prefix."js_ticket_tickets` WHERE status = 5 AND departmentid = dept.id) AS closeticket,
             (SELECT COUNT(id) FROM `".jssupportticket::$_db->prefix."js_ticket_tickets` WHERE isanswered = 1 AND status != 5 AND status != 1 AND departmentid = dept.id) AS answeredticket,
@@ -191,10 +191,10 @@ class JSSTreportsModel {
             (SELECT COUNT(id) FROM `".jssupportticket::$_db->prefix."js_ticket_tickets` WHERE isanswered != 1 AND status != 5 AND (lastreply != '0000-00-00 00:00:00') AND departmentid = dept.id) AS pendingticket
             FROM `".jssupportticket::$_db->prefix."js_ticket_departments` AS dept
             JOIN `".jssupportticket::$_db->prefix."js_ticket_acl_user_access_departments` AS acl ON acl.departmentid = dept.id
-            WHERE acl.staffid = ".esc_sql($staffid)." AND dept.status=1";
-        $query .= " LIMIT " . JSSTpagination::getOffset() . ", " . JSSTpagination::getLimit();
-        $departments = jssupportticket::$_db->get_results($query);
-        jssupportticket::$_data['departments_report'] = $departments;
+            WHERE acl.staffid = ".esc_sql($jsst_staffid)." AND dept.status=1";
+        $jsst_query .= " LIMIT " . JSSTpagination::getOffset() . ", " . JSSTpagination::getLimit();
+        $jsst_departments = jssupportticket::$_db->get_results($jsst_query);
+        jssupportticket::$jsst_data['departments_report'] = $jsst_departments;
 
         return;
     }
@@ -203,298 +203,298 @@ class JSSTreportsModel {
         if( !in_array('agent',jssupportticket::$_active_addons) ){
             return;
         }
-        $date_start = isset(jssupportticket::$_search['report']) ? jssupportticket::$_search['report']['date_start'] : '';
-        $date_end = isset(jssupportticket::$_search['report']) ? jssupportticket::$_search['report']['date_end'] : '';
+        $jsst_date_start = isset(jssupportticket::$_search['report']) ? jssupportticket::$_search['report']['date_start'] : '';
+        $jsst_date_end = isset(jssupportticket::$_search['report']) ? jssupportticket::$_search['report']['date_end'] : '';
 
-        if(isset($date_start) && $date_start != ""){
-            $date_start = date_i18n('Y-m-d',strtotime($date_start));
+        if(isset($jsst_date_start) && $jsst_date_start != ""){
+            $jsst_date_start = date_i18n('Y-m-d',strtotime($jsst_date_start));
         }
-        if(isset($date_end) && $date_end != ""){
-            $date_end = date_i18n('Y-m-d',strtotime($date_end));
+        if(isset($jsst_date_end) && $jsst_date_end != ""){
+            $jsst_date_end = date_i18n('Y-m-d',strtotime($jsst_date_end));
         }
-        if($date_start > $date_end){
-            $tmp = $date_start;
-            $date_start = $date_end;
-            $date_end = $tmp;
+        if($jsst_date_start > $jsst_date_end){
+            $jsst_tmp = $jsst_date_start;
+            $jsst_date_start = $jsst_date_end;
+            $jsst_date_end = $jsst_tmp;
         }
 
-        $uid = isset(jssupportticket::$_search['report']) ? jssupportticket::$_search['report']['uid'] : '';
+        $jsst_uid = isset(jssupportticket::$_search['report']) ? jssupportticket::$_search['report']['uid'] : '';
 
         //Line Chart Data
-        $curdate = ($date_start != null) ? date_i18n('Y-m-d',strtotime($date_start)) : date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime("now -1 month"));
-        $dates = '';
-        $fromdate = ($date_end != null) ? date_i18n('Y-m-d',strtotime($date_end)) : date_i18n('Y-m-d');
-        jssupportticket::$_data['filter']['date_start'] = $curdate;
-        jssupportticket::$_data['filter']['date_end'] = $fromdate;
-        jssupportticket::$_data['filter']['uid'] = $uid;
+        $jsst_curdate = ($jsst_date_start != null) ? date_i18n('Y-m-d',strtotime($jsst_date_start)) : date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime("now -1 month"));
+        $jsst_dates = '';
+        $jsst_fromdate = ($jsst_date_end != null) ? date_i18n('Y-m-d',strtotime($jsst_date_end)) : date_i18n('Y-m-d');
+        jssupportticket::$jsst_data['filter']['date_start'] = $jsst_curdate;
+        jssupportticket::$jsst_data['filter']['date_end'] = $jsst_fromdate;
+        jssupportticket::$jsst_data['filter']['uid'] = $jsst_uid;
         // forexport
-        $_SESSION['forexport']['curdate'] = $curdate;
-        $_SESSION['forexport']['fromdate'] = $fromdate;
-        $_SESSION['forexport']['uid'] = $uid;
+        $_SESSION['forexport']['curdate'] = $jsst_curdate;
+        $_SESSION['forexport']['fromdate'] = $jsst_fromdate;
+        $_SESSION['forexport']['uid'] = $jsst_uid;
 
-        $staffid = JSSTincluder::getJSModel('agent')->getStaffId($uid);
-        jssupportticket::$_data['filter']['staffname'] = JSSTincluder::getJSModel('agent')->getMyName($staffid);
-        $nextdate = $fromdate;
+        $jsst_staffid = JSSTincluder::getJSModel('agent')->getStaffId($jsst_uid);
+        jssupportticket::$jsst_data['filter']['staffname'] = JSSTincluder::getJSModel('agent')->getMyName($jsst_staffid);
+        $jsst_nextdate = $jsst_fromdate;
         //Query to get Data
-        $query = "SELECT COUNT(id) FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` ";
-        if($uid) $query .= " WHERE staffid = ".esc_sql($staffid);
-        $allticket = jssupportticket::$_db->get_var($query);
+        $jsst_query = "SELECT COUNT(id) FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` ";
+        if($jsst_uid) $jsst_query .= " WHERE staffid = ".esc_sql($jsst_staffid);
+        $jsst_allticket = jssupportticket::$_db->get_var($jsst_query);
 
-        $query = "SELECT created FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE status = 1 AND (lastreply = '0000-00-00 00:00:00') AND date(created) >= '" . esc_sql($curdate) . "' AND date(created) <= '" . esc_sql($fromdate) . "'";
-        if($uid) $query .= " AND staffid = ".esc_sql($staffid);
-        $openticket = jssupportticket::$_db->get_results($query);
+        $jsst_query = "SELECT created FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE status = 1 AND (lastreply = '0000-00-00 00:00:00') AND date(created) >= '" . esc_sql($jsst_curdate) . "' AND date(created) <= '" . esc_sql($jsst_fromdate) . "'";
+        if($jsst_uid) $jsst_query .= " AND staffid = ".esc_sql($jsst_staffid);
+        $jsst_openticket = jssupportticket::$_db->get_results($jsst_query);
 
-        $query = "SELECT created FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE status = 5 AND date(created) >= '" . esc_sql($curdate) . "' AND date(created) <= '" . esc_sql($fromdate) . "'";
-        if($uid) $query .= " AND staffid = ".esc_sql($staffid);
-        $closeticket = jssupportticket::$_db->get_results($query);
+        $jsst_query = "SELECT created FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE status = 5 AND date(created) >= '" . esc_sql($jsst_curdate) . "' AND date(created) <= '" . esc_sql($jsst_fromdate) . "'";
+        if($jsst_uid) $jsst_query .= " AND staffid = ".esc_sql($jsst_staffid);
+        $jsst_closeticket = jssupportticket::$_db->get_results($jsst_query);
 
-        $query = "SELECT created FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE isanswered = 1 AND status != 5 AND status != 1 AND date(created) >= '" . esc_sql($curdate) . "' AND date(created) <= '" . esc_sql($fromdate) . "'";
-        if($uid) $query .= " AND staffid = ".esc_sql($staffid);
-        $answeredticket = jssupportticket::$_db->get_results($query);
+        $jsst_query = "SELECT created FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE isanswered = 1 AND status != 5 AND status != 1 AND date(created) >= '" . esc_sql($jsst_curdate) . "' AND date(created) <= '" . esc_sql($jsst_fromdate) . "'";
+        if($jsst_uid) $jsst_query .= " AND staffid = ".esc_sql($jsst_staffid);
+        $jsst_answeredticket = jssupportticket::$_db->get_results($jsst_query);
 
-        $query = "SELECT created FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE isoverdue = 1 AND status != 5 AND date(created) >= '" . esc_sql($curdate) . "' AND date(created) <= '" . esc_sql($fromdate) . "'";
-        if($uid) $query .= " AND staffid = ".esc_sql($staffid);
-        $overdueticket = jssupportticket::$_db->get_results($query);
+        $jsst_query = "SELECT created FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE isoverdue = 1 AND status != 5 AND date(created) >= '" . esc_sql($jsst_curdate) . "' AND date(created) <= '" . esc_sql($jsst_fromdate) . "'";
+        if($jsst_uid) $jsst_query .= " AND staffid = ".esc_sql($jsst_staffid);
+        $jsst_overdueticket = jssupportticket::$_db->get_results($jsst_query);
 
-        $query = "SELECT created FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE isanswered != 1 AND status != 5 AND (lastreply != '0000-00-00 00:00:00') AND date(created) >= '" . esc_sql($curdate) . "' AND date(created) <= '" . esc_sql($fromdate) . "'";
-        if($uid) $query .= " AND staffid = ".esc_sql($staffid);
-        $pendingticket = jssupportticket::$_db->get_results($query);
+        $jsst_query = "SELECT created FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE isanswered != 1 AND status != 5 AND (lastreply != '0000-00-00 00:00:00') AND date(created) >= '" . esc_sql($jsst_curdate) . "' AND date(created) <= '" . esc_sql($jsst_fromdate) . "'";
+        if($jsst_uid) $jsst_query .= " AND staffid = ".esc_sql($jsst_staffid);
+        $jsst_pendingticket = jssupportticket::$_db->get_results($jsst_query);
 
-        $date_openticket = array();
-        $date_closeticket = array();
-        $date_answeredticket = array();
-        $date_overdueticket = array();
-        $date_pendingticket = array();
-        foreach ($openticket AS $ticket) {
-            if (!isset($date_openticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($ticket->created))]))
-                $date_openticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($ticket->created))] = 0;
-            $date_openticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($ticket->created))] = $date_openticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($ticket->created))] + 1;
+        $jsst_date_openticket = array();
+        $jsst_date_closeticket = array();
+        $jsst_date_answeredticket = array();
+        $jsst_date_overdueticket = array();
+        $jsst_date_pendingticket = array();
+        foreach ($jsst_openticket AS $jsst_ticket) {
+            if (!isset($jsst_date_openticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($jsst_ticket->created))]))
+                $jsst_date_openticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($jsst_ticket->created))] = 0;
+            $jsst_date_openticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($jsst_ticket->created))] = $jsst_date_openticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($jsst_ticket->created))] + 1;
         }
-        foreach ($closeticket AS $ticket) {
-            if (!isset($date_closeticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($ticket->created))]))
-                $date_closeticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($ticket->created))] = 0;
-            $date_closeticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($ticket->created))] = $date_closeticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($ticket->created))] + 1;
+        foreach ($jsst_closeticket AS $jsst_ticket) {
+            if (!isset($jsst_date_closeticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($jsst_ticket->created))]))
+                $jsst_date_closeticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($jsst_ticket->created))] = 0;
+            $jsst_date_closeticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($jsst_ticket->created))] = $jsst_date_closeticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($jsst_ticket->created))] + 1;
         }
-        foreach ($answeredticket AS $ticket) {
-            if (!isset($date_answeredticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($ticket->created))]))
-                $date_answeredticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($ticket->created))] = 0;
-            $date_answeredticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($ticket->created))] = $date_answeredticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($ticket->created))] + 1;
+        foreach ($jsst_answeredticket AS $jsst_ticket) {
+            if (!isset($jsst_date_answeredticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($jsst_ticket->created))]))
+                $jsst_date_answeredticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($jsst_ticket->created))] = 0;
+            $jsst_date_answeredticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($jsst_ticket->created))] = $jsst_date_answeredticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($jsst_ticket->created))] + 1;
         }
-        foreach ($overdueticket AS $ticket) {
-            if (!isset($date_overdueticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($ticket->created))]))
-                $date_overdueticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($ticket->created))] = 0;
-            $date_overdueticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($ticket->created))] = $date_overdueticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($ticket->created))] + 1;
+        foreach ($jsst_overdueticket AS $jsst_ticket) {
+            if (!isset($jsst_date_overdueticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($jsst_ticket->created))]))
+                $jsst_date_overdueticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($jsst_ticket->created))] = 0;
+            $jsst_date_overdueticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($jsst_ticket->created))] = $jsst_date_overdueticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($jsst_ticket->created))] + 1;
         }
-        foreach ($pendingticket AS $ticket) {
-            if (!isset($date_pendingticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($ticket->created))]))
-                $date_pendingticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($ticket->created))] = 0;
-            $date_pendingticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($ticket->created))] = $date_pendingticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($ticket->created))] + 1;
+        foreach ($jsst_pendingticket AS $jsst_ticket) {
+            if (!isset($jsst_date_pendingticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($jsst_ticket->created))]))
+                $jsst_date_pendingticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($jsst_ticket->created))] = 0;
+            $jsst_date_pendingticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($jsst_ticket->created))] = $jsst_date_pendingticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($jsst_ticket->created))] + 1;
         }
-        $open_ticket = 0;
-        $close_ticket = 0;
-        $answered_ticket = 0;
-        $json_array = "";
-        $open_ticket = 0;
-        $close_ticket = 0;
-        $answered_ticket = 0;
-        $overdue_ticket = 0;
-        $pending_ticket = 0;
+        $jsst_open_ticket = 0;
+        $jsst_close_ticket = 0;
+        $jsst_answered_ticket = 0;
+        $jsst_json_array = "";
+        $jsst_open_ticket = 0;
+        $jsst_close_ticket = 0;
+        $jsst_answered_ticket = 0;
+        $jsst_overdue_ticket = 0;
+        $jsst_pending_ticket = 0;
 
         do{
-            $year = date_i18n('Y',strtotime($nextdate));
-            $month = date_i18n('m',strtotime($nextdate));
-            $month = $month - 1; //js month are 0 based
-            $day = date_i18n('d',strtotime($nextdate));
-            $openticket_tmp = isset($date_openticket[$nextdate]) ? $date_openticket[$nextdate]  : 0;
-            $closeticket_tmp = isset($date_closeticket[$nextdate]) ? $date_closeticket[$nextdate] : 0;
-            $answeredticket_tmp = isset($date_answeredticket[$nextdate]) ? $date_answeredticket[$nextdate] : 0;
-            $overdueticket_tmp = isset($date_overdueticket[$nextdate]) ? $date_overdueticket[$nextdate] : 0;
-            $pendingticket_tmp = isset($date_pendingticket[$nextdate]) ? $date_pendingticket[$nextdate] : 0;
-            $json_array .= "[new Date($year,$month,$day),$openticket_tmp,$answeredticket_tmp,$pendingticket_tmp,$overdueticket_tmp,$closeticket_tmp],";
-            $open_ticket += $openticket_tmp;
-            $close_ticket += $closeticket_tmp;
-            $answered_ticket += $answeredticket_tmp;
-            $overdue_ticket += $overdueticket_tmp;
-            $pending_ticket += $pendingticket_tmp;
-            if($nextdate == $curdate){
+            $jsst_year = date_i18n('Y',strtotime($jsst_nextdate));
+            $jsst_month = date_i18n('m',strtotime($jsst_nextdate));
+            $jsst_month = $jsst_month - 1; //js month are 0 based
+            $jsst_day = date_i18n('d',strtotime($jsst_nextdate));
+            $jsst_openticket_tmp = isset($jsst_date_openticket[$jsst_nextdate]) ? $jsst_date_openticket[$jsst_nextdate]  : 0;
+            $jsst_closeticket_tmp = isset($jsst_date_closeticket[$jsst_nextdate]) ? $jsst_date_closeticket[$jsst_nextdate] : 0;
+            $jsst_answeredticket_tmp = isset($jsst_date_answeredticket[$jsst_nextdate]) ? $jsst_date_answeredticket[$jsst_nextdate] : 0;
+            $jsst_overdueticket_tmp = isset($jsst_date_overdueticket[$jsst_nextdate]) ? $jsst_date_overdueticket[$jsst_nextdate] : 0;
+            $jsst_pendingticket_tmp = isset($jsst_date_pendingticket[$jsst_nextdate]) ? $jsst_date_pendingticket[$jsst_nextdate] : 0;
+            $jsst_json_array .= "[new Date($jsst_year,$jsst_month,$jsst_day),$jsst_openticket_tmp,$jsst_answeredticket_tmp,$jsst_pendingticket_tmp,$jsst_overdueticket_tmp,$jsst_closeticket_tmp],";
+            $jsst_open_ticket += $jsst_openticket_tmp;
+            $jsst_close_ticket += $jsst_closeticket_tmp;
+            $jsst_answered_ticket += $jsst_answeredticket_tmp;
+            $jsst_overdue_ticket += $jsst_overdueticket_tmp;
+            $jsst_pending_ticket += $jsst_pendingticket_tmp;
+            if($jsst_nextdate == $jsst_curdate){
                 break;
             }
-                $nextdate = date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($nextdate . " -1 days"));
-        }while($nextdate != $curdate);
+                $jsst_nextdate = date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($jsst_nextdate . " -1 days"));
+        }while($jsst_nextdate != $jsst_curdate);
 
-        jssupportticket::$_data['ticket_total']['allticket'] = $allticket;
-        jssupportticket::$_data['ticket_total']['openticket'] = $open_ticket;
-        jssupportticket::$_data['ticket_total']['closeticket'] = $close_ticket;
-        jssupportticket::$_data['ticket_total']['answeredticket'] = $answered_ticket;
-        jssupportticket::$_data['ticket_total']['overdueticket'] = $overdue_ticket;
-        jssupportticket::$_data['ticket_total']['pendingticket'] = $pending_ticket;
+        jssupportticket::$jsst_data['ticket_total']['allticket'] = $jsst_allticket;
+        jssupportticket::$jsst_data['ticket_total']['openticket'] = $jsst_open_ticket;
+        jssupportticket::$jsst_data['ticket_total']['closeticket'] = $jsst_close_ticket;
+        jssupportticket::$jsst_data['ticket_total']['answeredticket'] = $jsst_answered_ticket;
+        jssupportticket::$jsst_data['ticket_total']['overdueticket'] = $jsst_overdue_ticket;
+        jssupportticket::$jsst_data['ticket_total']['pendingticket'] = $jsst_pending_ticket;
 
-        jssupportticket::$_data['line_chart_json_array'] = $json_array;
+        jssupportticket::$jsst_data['line_chart_json_array'] = $jsst_json_array;
 
         // Pagination
-        $query = "SELECT count(staff.id)
+        $jsst_query = "SELECT count(staff.id)
                     FROM `".jssupportticket::$_db->prefix."js_ticket_staff` AS staff
                     JOIN `".jssupportticket::$_wpprefixforuser."js_ticket_users` AS user ON user.id = staff.uid";
-        if($uid) $query .= ' WHERE staff.uid = '.esc_sql($uid);
-        $total = jssupportticket::$_db->get_var($query);
-        jssupportticket::$_data['total'] = $total;
-        jssupportticket::$_data[1] = JSSTpagination::getPagination($total , 'staffreports');
+        if($jsst_uid) $jsst_query .= ' WHERE staff.uid = '.esc_sql($jsst_uid);
+        $jsst_total = jssupportticket::$_db->get_var($jsst_query);
+        jssupportticket::$jsst_data['total'] = $jsst_total;
+        jssupportticket::$jsst_data[1] = JSSTpagination::getPagination($jsst_total , 'staffreports');
 
-        $query = "SELECT staff.photo,staff.id,staff.firstname,staff.lastname,staff.username,staff.email,user.display_name,user.user_email,user.user_nicename,
-                    (SELECT COUNT(id) FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE status = 1 AND (lastreply = '0000-00-00 00:00:00') AND date(created) >= '" . esc_sql($curdate) . "' AND date(created) <= '" . esc_sql($fromdate) . "' AND staffid = staff.id) AS openticket,
-                    (SELECT COUNT(id) FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE status = 5 AND date(created) >= '" . esc_sql($curdate) . "' AND date(created) <= '" . esc_sql($fromdate) . "' AND staffid = staff.id) AS closeticket,
-                    (SELECT COUNT(id) FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE isanswered = 1 AND status != 5 AND status != 1 AND date(created) >= '" . esc_sql($curdate) . "' AND date(created) <= '" . esc_sql($fromdate) . "' AND staffid = staff.id) AS answeredticket,
-                    (SELECT COUNT(id) FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE isoverdue = 1 AND status != 5 AND date(created) >= '" . esc_sql($curdate) . "' AND date(created) <= '" . esc_sql($fromdate) . "' AND staffid = staff.id) AS overdueticket,
-                    (SELECT COUNT(id) FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE isanswered != 1 AND status != 5 AND (lastreply != '0000-00-00 00:00:00') AND date(created) >= '" . esc_sql($curdate) . "' AND date(created) <= '" . esc_sql($fromdate) . "' AND staffid = staff.id) AS pendingticket,
-                    (SELECT COUNT(id) FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE date(created) >= '" . esc_sql($curdate) . "' AND date(created) <= '" . esc_sql($fromdate) . "' AND staffid = staff.id) AS allticket  ";
+        $jsst_query = "SELECT staff.photo,staff.id,staff.firstname,staff.lastname,staff.username,staff.email,user.display_name,user.user_email,user.user_nicename,
+                    (SELECT COUNT(id) FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE status = 1 AND (lastreply = '0000-00-00 00:00:00') AND date(created) >= '" . esc_sql($jsst_curdate) . "' AND date(created) <= '" . esc_sql($jsst_fromdate) . "' AND staffid = staff.id) AS openticket,
+                    (SELECT COUNT(id) FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE status = 5 AND date(created) >= '" . esc_sql($jsst_curdate) . "' AND date(created) <= '" . esc_sql($jsst_fromdate) . "' AND staffid = staff.id) AS closeticket,
+                    (SELECT COUNT(id) FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE isanswered = 1 AND status != 5 AND status != 1 AND date(created) >= '" . esc_sql($jsst_curdate) . "' AND date(created) <= '" . esc_sql($jsst_fromdate) . "' AND staffid = staff.id) AS answeredticket,
+                    (SELECT COUNT(id) FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE isoverdue = 1 AND status != 5 AND date(created) >= '" . esc_sql($jsst_curdate) . "' AND date(created) <= '" . esc_sql($jsst_fromdate) . "' AND staffid = staff.id) AS overdueticket,
+                    (SELECT COUNT(id) FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE isanswered != 1 AND status != 5 AND (lastreply != '0000-00-00 00:00:00') AND date(created) >= '" . esc_sql($jsst_curdate) . "' AND date(created) <= '" . esc_sql($jsst_fromdate) . "' AND staffid = staff.id) AS pendingticket,
+                    (SELECT COUNT(id) FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE date(created) >= '" . esc_sql($jsst_curdate) . "' AND date(created) <= '" . esc_sql($jsst_fromdate) . "' AND staffid = staff.id) AS allticket  ";
                     if(in_array('feedback', jssupportticket::$_active_addons)){
-                        $query .=    ",(SELECT AVG(feed.rating) FROM `" . jssupportticket::$_db->prefix . "js_ticket_feedbacks` AS feed JOIN `" . jssupportticket::$_db->prefix . "js_ticket_tickets` AS ticket ON ticket.id= feed.ticketid WHERE date(feed.created) >= '" . esc_sql($curdate) . "' AND date(feed.created) <= '" . esc_sql($fromdate) . "' AND ticket.staffid = staff.id) AS avragerating ";
+                        $jsst_query .=    ",(SELECT AVG(feed.rating) FROM `" . jssupportticket::$_db->prefix . "js_ticket_feedbacks` AS feed JOIN `" . jssupportticket::$_db->prefix . "js_ticket_tickets` AS ticket ON ticket.id= feed.ticketid WHERE date(feed.created) >= '" . esc_sql($jsst_curdate) . "' AND date(feed.created) <= '" . esc_sql($jsst_fromdate) . "' AND ticket.staffid = staff.id) AS avragerating ";
                     }
-                    $query .=  "FROM `".jssupportticket::$_db->prefix."js_ticket_staff` AS staff
+                    $jsst_query .=  "FROM `".jssupportticket::$_db->prefix."js_ticket_staff` AS staff
                     JOIN `".jssupportticket::$_wpprefixforuser."js_ticket_users` AS user ON user.id = staff.uid";
-        if($uid) $query .= ' WHERE staff.uid = '.esc_sql($uid);
-        $query .= " LIMIT " . JSSTpagination::getOffset() . ", " . JSSTpagination::getLimit();
-        $agents = jssupportticket::$_db->get_results($query);
+        if($jsst_uid) $jsst_query .= ' WHERE staff.uid = '.esc_sql($jsst_uid);
+        $jsst_query .= " LIMIT " . JSSTpagination::getOffset() . ", " . JSSTpagination::getLimit();
+        $jsst_agents = jssupportticket::$_db->get_results($jsst_query);
         if(in_array('timetracking', jssupportticket::$_active_addons)){
-            foreach ($agents as $agent) {
-                $agent->time = JSSTincluder::getJSModel('timetracking')->getAverageTimeByStaffId($agent->id);// time 0 contains avergage time in seconds and 1 contains wheter it is conflicted or not
+            foreach ($jsst_agents as $jsst_agent) {
+                $jsst_agent->time = JSSTincluder::getJSModel('timetracking')->getAverageTimeByStaffId($jsst_agent->id);// time 0 contains avergage time in seconds and 1 contains wheter it is conflicted or not
             }
         }
-        jssupportticket::$_data['staffs_report'] = $agents;
+        jssupportticket::$jsst_data['staffs_report'] = $jsst_agents;
         return;
     }
 
     function getDepartmentReports(){
-        $date_start = isset(jssupportticket::$_search['report']) ? jssupportticket::$_search['report']['date_start'] : '';
-        $date_end = isset(jssupportticket::$_search['report']) ? jssupportticket::$_search['report']['date_end'] : '';
-        if(isset($date_start) && $date_start != ""){
-            $date_start = date_i18n('Y-m-d',strtotime($date_start));
+        $jsst_date_start = isset(jssupportticket::$_search['report']) ? jssupportticket::$_search['report']['date_start'] : '';
+        $jsst_date_end = isset(jssupportticket::$_search['report']) ? jssupportticket::$_search['report']['date_end'] : '';
+        if(isset($jsst_date_start) && $jsst_date_start != ""){
+            $jsst_date_start = date_i18n('Y-m-d',strtotime($jsst_date_start));
         }
-        if(isset($date_end) && $date_end != ""){
-            $date_end = date_i18n('Y-m-d',strtotime($date_end));
+        if(isset($jsst_date_end) && $jsst_date_end != ""){
+            $jsst_date_end = date_i18n('Y-m-d',strtotime($jsst_date_end));
         }
-        if($date_start > $date_end){
-            $tmp = $date_start;
-            $date_start = $date_end;
-            $date_end = $tmp;
+        if($jsst_date_start > $jsst_date_end){
+            $jsst_tmp = $jsst_date_start;
+            $jsst_date_start = $jsst_date_end;
+            $jsst_date_end = $jsst_tmp;
         }
 
         //Line Chart Data
-        $curdate = ($date_start != null) ? date_i18n('Y-m-d',strtotime($date_start)) : date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime("now -1 month"));
-        $dates = '';
-        $fromdate = ($date_end != null) ? date_i18n('Y-m-d',strtotime($date_end)) : date_i18n('Y-m-d');
-        jssupportticket::$_data['filter']['date_start'] = $curdate;
-        jssupportticket::$_data['filter']['date_end'] = $fromdate;
+        $jsst_curdate = ($jsst_date_start != null) ? date_i18n('Y-m-d',strtotime($jsst_date_start)) : date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime("now -1 month"));
+        $jsst_dates = '';
+        $jsst_fromdate = ($jsst_date_end != null) ? date_i18n('Y-m-d',strtotime($jsst_date_end)) : date_i18n('Y-m-d');
+        jssupportticket::$jsst_data['filter']['date_start'] = $jsst_curdate;
+        jssupportticket::$jsst_data['filter']['date_end'] = $jsst_fromdate;
         // forexport
-        $_SESSION['forexport']['curdate'] = $curdate;
-        $_SESSION['forexport']['fromdate'] = $fromdate;
+        $_SESSION['forexport']['curdate'] = $jsst_curdate;
+        $_SESSION['forexport']['fromdate'] = $jsst_fromdate;
 
-        $nextdate = $fromdate;
-        $query = "SELECT created FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE status = 1 AND (lastreply = '0000-00-00 00:00:00') AND date(created) >= '" . esc_sql($curdate) . "' AND date(created) <= '" . esc_sql($fromdate) . "'";
-        $openticket = jssupportticket::$_db->get_results($query);
+        $jsst_nextdate = $jsst_fromdate;
+        $jsst_query = "SELECT created FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE status = 1 AND (lastreply = '0000-00-00 00:00:00') AND date(created) >= '" . esc_sql($jsst_curdate) . "' AND date(created) <= '" . esc_sql($jsst_fromdate) . "'";
+        $jsst_openticket = jssupportticket::$_db->get_results($jsst_query);
 
-        $query = "SELECT created FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE status = 5 AND date(created) >= '" . esc_sql($curdate) . "' AND date(created) <= '" . esc_sql($fromdate) . "'";
-        $closeticket = jssupportticket::$_db->get_results($query);
+        $jsst_query = "SELECT created FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE status = 5 AND date(created) >= '" . esc_sql($jsst_curdate) . "' AND date(created) <= '" . esc_sql($jsst_fromdate) . "'";
+        $jsst_closeticket = jssupportticket::$_db->get_results($jsst_query);
 
-        $query = "SELECT created FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE isanswered = 1 AND status != 5 AND status != 1 AND date(created) >= '" . esc_sql($curdate) . "' AND date(created) <= '" . esc_sql($fromdate) . "'";
-        $answeredticket = jssupportticket::$_db->get_results($query);
+        $jsst_query = "SELECT created FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE isanswered = 1 AND status != 5 AND status != 1 AND date(created) >= '" . esc_sql($jsst_curdate) . "' AND date(created) <= '" . esc_sql($jsst_fromdate) . "'";
+        $jsst_answeredticket = jssupportticket::$_db->get_results($jsst_query);
 
-        $query = "SELECT created FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE isoverdue = 1 AND status != 5 AND date(created) >= '" . esc_sql($curdate) . "' AND date(created) <= '" . esc_sql($fromdate) . "'";
-        $overdueticket = jssupportticket::$_db->get_results($query);
+        $jsst_query = "SELECT created FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE isoverdue = 1 AND status != 5 AND date(created) >= '" . esc_sql($jsst_curdate) . "' AND date(created) <= '" . esc_sql($jsst_fromdate) . "'";
+        $jsst_overdueticket = jssupportticket::$_db->get_results($jsst_query);
 
-        $query = "SELECT created FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE isanswered != 1 AND status != 5 AND (lastreply != '0000-00-00 00:00:00') AND date(created) >= '" . esc_sql($curdate) . "' AND date(created) <= '" . esc_sql($fromdate) . "'";
-        $pendingticket = jssupportticket::$_db->get_results($query);
+        $jsst_query = "SELECT created FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE isanswered != 1 AND status != 5 AND (lastreply != '0000-00-00 00:00:00') AND date(created) >= '" . esc_sql($jsst_curdate) . "' AND date(created) <= '" . esc_sql($jsst_fromdate) . "'";
+        $jsst_pendingticket = jssupportticket::$_db->get_results($jsst_query);
 
-        $date_openticket = array();
-        $date_closeticket = array();
-        $date_answeredticket = array();
-        $date_overdueticket = array();
-        $date_pendingticket = array();
-        foreach ($openticket AS $ticket) {
-            if (!isset($date_openticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($ticket->created))]))
-                $date_openticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($ticket->created))] = 0;
-            $date_openticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($ticket->created))] = $date_openticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($ticket->created))] + 1;
+        $jsst_date_openticket = array();
+        $jsst_date_closeticket = array();
+        $jsst_date_answeredticket = array();
+        $jsst_date_overdueticket = array();
+        $jsst_date_pendingticket = array();
+        foreach ($jsst_openticket AS $jsst_ticket) {
+            if (!isset($jsst_date_openticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($jsst_ticket->created))]))
+                $jsst_date_openticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($jsst_ticket->created))] = 0;
+            $jsst_date_openticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($jsst_ticket->created))] = $jsst_date_openticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($jsst_ticket->created))] + 1;
         }
-        foreach ($closeticket AS $ticket) {
-            if (!isset($date_closeticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($ticket->created))]))
-                $date_closeticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($ticket->created))] = 0;
-            $date_closeticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($ticket->created))] = $date_closeticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($ticket->created))] + 1;
+        foreach ($jsst_closeticket AS $jsst_ticket) {
+            if (!isset($jsst_date_closeticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($jsst_ticket->created))]))
+                $jsst_date_closeticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($jsst_ticket->created))] = 0;
+            $jsst_date_closeticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($jsst_ticket->created))] = $jsst_date_closeticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($jsst_ticket->created))] + 1;
         }
-        foreach ($answeredticket AS $ticket) {
-            if (!isset($date_answeredticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($ticket->created))]))
-                $date_answeredticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($ticket->created))] = 0;
-            $date_answeredticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($ticket->created))] = $date_answeredticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($ticket->created))] + 1;
+        foreach ($jsst_answeredticket AS $jsst_ticket) {
+            if (!isset($jsst_date_answeredticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($jsst_ticket->created))]))
+                $jsst_date_answeredticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($jsst_ticket->created))] = 0;
+            $jsst_date_answeredticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($jsst_ticket->created))] = $jsst_date_answeredticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($jsst_ticket->created))] + 1;
         }
-        foreach ($overdueticket AS $ticket) {
-            if (!isset($date_overdueticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($ticket->created))]))
-                $date_overdueticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($ticket->created))] = 0;
-            $date_overdueticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($ticket->created))] = $date_overdueticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($ticket->created))] + 1;
+        foreach ($jsst_overdueticket AS $jsst_ticket) {
+            if (!isset($jsst_date_overdueticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($jsst_ticket->created))]))
+                $jsst_date_overdueticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($jsst_ticket->created))] = 0;
+            $jsst_date_overdueticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($jsst_ticket->created))] = $jsst_date_overdueticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($jsst_ticket->created))] + 1;
         }
-        foreach ($pendingticket AS $ticket) {
-            if (!isset($date_pendingticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($ticket->created))]))
-                $date_pendingticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($ticket->created))] = 0;
-            $date_pendingticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($ticket->created))] = $date_pendingticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($ticket->created))] + 1;
+        foreach ($jsst_pendingticket AS $jsst_ticket) {
+            if (!isset($jsst_date_pendingticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($jsst_ticket->created))]))
+                $jsst_date_pendingticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($jsst_ticket->created))] = 0;
+            $jsst_date_pendingticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($jsst_ticket->created))] = $jsst_date_pendingticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($jsst_ticket->created))] + 1;
         }
-        $open_ticket = 0;
-        $close_ticket = 0;
-        $answered_ticket = 0;
-        $json_array = "";
-        $open_ticket = 0;
-        $close_ticket = 0;
-        $answered_ticket = 0;
-        $overdue_ticket = 0;
-        $pending_ticket = 0;
+        $jsst_open_ticket = 0;
+        $jsst_close_ticket = 0;
+        $jsst_answered_ticket = 0;
+        $jsst_json_array = "";
+        $jsst_open_ticket = 0;
+        $jsst_close_ticket = 0;
+        $jsst_answered_ticket = 0;
+        $jsst_overdue_ticket = 0;
+        $jsst_pending_ticket = 0;
 
         do{
-            $year = date_i18n('Y',strtotime($nextdate));
-            $month = date_i18n('m',strtotime($nextdate));
-            $month = $month - 1; //js month are 0 based
-            $day = date_i18n('d',strtotime($nextdate));
-            $openticket_tmp = isset($date_openticket[$nextdate]) ? $date_openticket[$nextdate]  : 0;
-            $closeticket_tmp = isset($date_closeticket[$nextdate]) ? $date_closeticket[$nextdate] : 0;
-            $answeredticket_tmp = isset($date_answeredticket[$nextdate]) ? $date_answeredticket[$nextdate] : 0;
-            $overdueticket_tmp = isset($date_overdueticket[$nextdate]) ? $date_overdueticket[$nextdate] : 0;
-            $pendingticket_tmp = isset($date_pendingticket[$nextdate]) ? $date_pendingticket[$nextdate] : 0;
-            $json_array .= "[new Date($year,$month,$day),$openticket_tmp,$answeredticket_tmp,$pendingticket_tmp,$overdueticket_tmp,$closeticket_tmp],";
-            $open_ticket += $openticket_tmp;
-            $close_ticket += $closeticket_tmp;
-            $answered_ticket += $answeredticket_tmp;
-            $overdue_ticket += $overdueticket_tmp;
-            $pending_ticket += $pendingticket_tmp;
-             if($nextdate == $curdate){
+            $jsst_year = date_i18n('Y',strtotime($jsst_nextdate));
+            $jsst_month = date_i18n('m',strtotime($jsst_nextdate));
+            $jsst_month = $jsst_month - 1; //js month are 0 based
+            $jsst_day = date_i18n('d',strtotime($jsst_nextdate));
+            $jsst_openticket_tmp = isset($jsst_date_openticket[$jsst_nextdate]) ? $jsst_date_openticket[$jsst_nextdate]  : 0;
+            $jsst_closeticket_tmp = isset($jsst_date_closeticket[$jsst_nextdate]) ? $jsst_date_closeticket[$jsst_nextdate] : 0;
+            $jsst_answeredticket_tmp = isset($jsst_date_answeredticket[$jsst_nextdate]) ? $jsst_date_answeredticket[$jsst_nextdate] : 0;
+            $jsst_overdueticket_tmp = isset($jsst_date_overdueticket[$jsst_nextdate]) ? $jsst_date_overdueticket[$jsst_nextdate] : 0;
+            $jsst_pendingticket_tmp = isset($jsst_date_pendingticket[$jsst_nextdate]) ? $jsst_date_pendingticket[$jsst_nextdate] : 0;
+            $jsst_json_array .= "[new Date($jsst_year,$jsst_month,$jsst_day),$jsst_openticket_tmp,$jsst_answeredticket_tmp,$jsst_pendingticket_tmp,$jsst_overdueticket_tmp,$jsst_closeticket_tmp],";
+            $jsst_open_ticket += $jsst_openticket_tmp;
+            $jsst_close_ticket += $jsst_closeticket_tmp;
+            $jsst_answered_ticket += $jsst_answeredticket_tmp;
+            $jsst_overdue_ticket += $jsst_overdueticket_tmp;
+            $jsst_pending_ticket += $jsst_pendingticket_tmp;
+             if($jsst_nextdate == $jsst_curdate){
                 break;
             }
-            $nextdate = date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($nextdate . " -1 days"));
-        }while($nextdate != $curdate);
+            $jsst_nextdate = date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($jsst_nextdate . " -1 days"));
+        }while($jsst_nextdate != $jsst_curdate);
 
-        jssupportticket::$_data['ticket_total']['openticket'] = $open_ticket;
-        jssupportticket::$_data['ticket_total']['closeticket'] = $close_ticket;
-        jssupportticket::$_data['ticket_total']['answeredticket'] = $answered_ticket;
-        jssupportticket::$_data['ticket_total']['overdueticket'] = $overdue_ticket;
-        jssupportticket::$_data['ticket_total']['pendingticket'] = $pending_ticket;
+        jssupportticket::$jsst_data['ticket_total']['openticket'] = $jsst_open_ticket;
+        jssupportticket::$jsst_data['ticket_total']['closeticket'] = $jsst_close_ticket;
+        jssupportticket::$jsst_data['ticket_total']['answeredticket'] = $jsst_answered_ticket;
+        jssupportticket::$jsst_data['ticket_total']['overdueticket'] = $jsst_overdue_ticket;
+        jssupportticket::$jsst_data['ticket_total']['pendingticket'] = $jsst_pending_ticket;
 
-        jssupportticket::$_data['line_chart_json_array'] = $json_array;
+        jssupportticket::$jsst_data['line_chart_json_array'] = $jsst_json_array;
 
         // Pagination
-        $query = "SELECT count(department.id)
+        $jsst_query = "SELECT count(department.id)
                     FROM `".jssupportticket::$_db->prefix."js_ticket_departments` AS department
                     JOIN `".jssupportticket::$_db->prefix."js_ticket_email` AS email ON department.emailid = email.id";
-        $total = jssupportticket::$_db->get_var($query);
-        jssupportticket::$_data['total'] = $total;
-        jssupportticket::$_data[1] = JSSTpagination::getPagination($total);
+        $jsst_total = jssupportticket::$_db->get_var($jsst_query);
+        jssupportticket::$jsst_data['total'] = $jsst_total;
+        jssupportticket::$jsst_data[1] = JSSTpagination::getPagination($jsst_total);
 
-        $query = "SELECT department.id,department.departmentname,email.email,
+        $jsst_query = "SELECT department.id,department.departmentname,email.email,
                     (SELECT COUNT(id) FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE departmentid = department.id) AS allticket,
-                    (SELECT COUNT(id) FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE status = 1 AND (lastreply = '0000-00-00 00:00:00') AND date(created) >= '" . esc_sql($curdate) . "' AND date(created) <= '" . esc_sql($fromdate) . "' AND departmentid = department.id) AS openticket,
-                    (SELECT COUNT(id) FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE status = 5 AND date(created) >= '" . esc_sql($curdate) . "' AND date(created) <= '" . esc_sql($fromdate) . "' AND departmentid = department.id) AS closeticket,
-                    (SELECT COUNT(id) FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE isanswered = 1 AND status != 5 AND status != 1 AND date(created) >= '" . esc_sql($curdate) . "' AND date(created) <= '" . esc_sql($fromdate) . "' AND departmentid = department.id) AS answeredticket,
-                    (SELECT COUNT(id) FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE isoverdue = 1 AND status != 5 AND date(created) >= '" . esc_sql($curdate) . "' AND date(created) <= '" . esc_sql($fromdate) . "' AND departmentid = department.id) AS overdueticket,
-                    (SELECT COUNT(id) FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE isanswered != 1 AND status != 5 AND (lastreply != '0000-00-00 00:00:00') AND date(created) >= '" . esc_sql($curdate) . "' AND date(created) <= '" . esc_sql($fromdate) . "' AND departmentid = department.id) AS pendingticket
+                    (SELECT COUNT(id) FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE status = 1 AND (lastreply = '0000-00-00 00:00:00') AND date(created) >= '" . esc_sql($jsst_curdate) . "' AND date(created) <= '" . esc_sql($jsst_fromdate) . "' AND departmentid = department.id) AS openticket,
+                    (SELECT COUNT(id) FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE status = 5 AND date(created) >= '" . esc_sql($jsst_curdate) . "' AND date(created) <= '" . esc_sql($jsst_fromdate) . "' AND departmentid = department.id) AS closeticket,
+                    (SELECT COUNT(id) FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE isanswered = 1 AND status != 5 AND status != 1 AND date(created) >= '" . esc_sql($jsst_curdate) . "' AND date(created) <= '" . esc_sql($jsst_fromdate) . "' AND departmentid = department.id) AS answeredticket,
+                    (SELECT COUNT(id) FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE isoverdue = 1 AND status != 5 AND date(created) >= '" . esc_sql($jsst_curdate) . "' AND date(created) <= '" . esc_sql($jsst_fromdate) . "' AND departmentid = department.id) AS overdueticket,
+                    (SELECT COUNT(id) FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE isanswered != 1 AND status != 5 AND (lastreply != '0000-00-00 00:00:00') AND date(created) >= '" . esc_sql($jsst_curdate) . "' AND date(created) <= '" . esc_sql($jsst_fromdate) . "' AND departmentid = department.id) AS pendingticket
                     FROM `".jssupportticket::$_db->prefix."js_ticket_departments` AS department
                     JOIN `".jssupportticket::$_db->prefix."js_ticket_email` AS email ON department.emailid = email.id";
-        $query .= " LIMIT " . JSSTpagination::getOffset() . ", " . JSSTpagination::getLimit();
-        $depatments = jssupportticket::$_db->get_results($query);
-        jssupportticket::$_data['depatments_report'] =$depatments;
+        $jsst_query .= " LIMIT " . JSSTpagination::getOffset() . ", " . JSSTpagination::getLimit();
+        $jsst_depatments = jssupportticket::$_db->get_results($jsst_query);
+        jssupportticket::$jsst_data['depatments_report'] =$jsst_depatments;
         return;
     }
 
@@ -502,904 +502,904 @@ class JSSTreportsModel {
         if( !in_array('agent',jssupportticket::$_active_addons) ){
             return;
         }
-        $date_start = isset(jssupportticket::$_search['report']) ? jssupportticket::$_search['report']['jsst-date-start'] : '';
-        $date_end = isset(jssupportticket::$_search['report']) ? jssupportticket::$_search['report']['jsst-date-end'] : '';
-        if(isset($date_start) && $date_start != ""){
-            $date_start = date_i18n('Y-m-d',strtotime($date_start));
+        $jsst_date_start = isset(jssupportticket::$_search['report']) ? jssupportticket::$_search['report']['jsst-date-start'] : '';
+        $jsst_date_end = isset(jssupportticket::$_search['report']) ? jssupportticket::$_search['report']['jsst-date-end'] : '';
+        if(isset($jsst_date_start) && $jsst_date_start != ""){
+            $jsst_date_start = date_i18n('Y-m-d',strtotime($jsst_date_start));
         }
-        if(isset($date_end) && $date_end != ""){
-            $date_end = date_i18n('Y-m-d',strtotime($date_end));
-        }
-
-        if($date_start > $date_end){
-            $tmp = $date_start;
-            $date_start = $date_end;
-            $date_end = $tmp;
+        if(isset($jsst_date_end) && $jsst_date_end != ""){
+            $jsst_date_end = date_i18n('Y-m-d',strtotime($jsst_date_end));
         }
 
-        $uid = JSSTincluder::getObjectClass('user')->uid();
+        if($jsst_date_start > $jsst_date_end){
+            $jsst_tmp = $jsst_date_start;
+            $jsst_date_start = $jsst_date_end;
+            $jsst_date_end = $jsst_tmp;
+        }
+
+        $jsst_uid = JSSTincluder::getObjectClass('user')->uid();
 
         //Line Chart Data
-        $curdate = ($date_start != null) ? date_i18n('Y-m-d',strtotime($date_start)) : date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime("now -1 month"));
-        $dates = '';
-        $fromdate = ($date_end != null) ? date_i18n('Y-m-d',strtotime($date_end)) : date_i18n('Y-m-d');
-        jssupportticket::$_data['filter']['jsst-date-start'] = $curdate;
-        jssupportticket::$_data['filter']['jsst-date-end'] = $fromdate;
+        $jsst_curdate = ($jsst_date_start != null) ? date_i18n('Y-m-d',strtotime($jsst_date_start)) : date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime("now -1 month"));
+        $jsst_dates = '';
+        $jsst_fromdate = ($jsst_date_end != null) ? date_i18n('Y-m-d',strtotime($jsst_date_end)) : date_i18n('Y-m-d');
+        jssupportticket::$jsst_data['filter']['jsst-date-start'] = $jsst_curdate;
+        jssupportticket::$jsst_data['filter']['jsst-date-end'] = $jsst_fromdate;
 
-        $staffid = JSSTincluder::getJSModel('agent')->getStaffId($uid);
+        $jsst_staffid = JSSTincluder::getJSModel('agent')->getStaffId($jsst_uid);
 
-        jssupportticket::$_data['filter']['staffname'] = JSSTincluder::getJSModel('agent')->getMyName($staffid);
-        $nextdate = $fromdate;
+        jssupportticket::$jsst_data['filter']['staffname'] = JSSTincluder::getJSModel('agent')->getMyName($jsst_staffid);
+        $jsst_nextdate = $jsst_fromdate;
         // find my depats
-        $query = "SELECT dept.departmentid FROM `" . jssupportticket::$_db->prefix . "js_ticket_acl_user_access_departments` AS dept WHERE dept.staffid = ". esc_sql($staffid);
-        $data = jssupportticket::$_db->get_results($query);
-        $my_depts = '';
-        foreach ($data as $key => $value) {
-            if($my_depts)
-                $my_depts .= ',';
-            $my_depts .= $value->departmentid;
+        $jsst_query = "SELECT dept.departmentid FROM `" . jssupportticket::$_db->prefix . "js_ticket_acl_user_access_departments` AS dept WHERE dept.staffid = ". esc_sql($jsst_staffid);
+        $jsst_data = jssupportticket::$_db->get_results($jsst_query);
+        $jsst_my_depts = '';
+        foreach ($jsst_data as $jsst_key => $jsst_value) {
+            if($jsst_my_depts)
+                $jsst_my_depts .= ',';
+            $jsst_my_depts .= $jsst_value->departmentid;
         }
         // get mytickets, or all tickets with my depatments
-        if($my_depts)
-            $dep_query = " AND (ticket.staffid = $staffid OR ticket.departmentid IN ($my_depts)) ";
+        if($jsst_my_depts)
+            $jsst_dep_query = " AND (ticket.staffid = $jsst_staffid OR ticket.departmentid IN ($jsst_my_depts)) ";
         else
-            $dep_query = " AND ( ticket.staffid = $staffid ) ";
+            $jsst_dep_query = " AND ( ticket.staffid = $jsst_staffid ) ";
         //Query to get Data
-        $query = "SELECT ticket.created FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` AS ticket WHERE ticket.status = 1 AND (ticket.lastreply = '0000-00-00 00:00:00') AND date(ticket.created) >= '" . esc_sql($curdate) . "' AND date(ticket.created) <= '" . esc_sql($fromdate) . "'";
-        $query .= $dep_query;
-        $openticket = jssupportticket::$_db->get_results($query);
+        $jsst_query = "SELECT ticket.created FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` AS ticket WHERE ticket.status = 1 AND (ticket.lastreply = '0000-00-00 00:00:00') AND date(ticket.created) >= '" . esc_sql($jsst_curdate) . "' AND date(ticket.created) <= '" . esc_sql($jsst_fromdate) . "'";
+        $jsst_query .= $jsst_dep_query;
+        $jsst_openticket = jssupportticket::$_db->get_results($jsst_query);
 
-        $query = "SELECT ticket.created FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` AS ticket WHERE ticket.status = 5 AND date(ticket.created) >= '" . esc_sql($curdate) . "' AND date(ticket.created) <= '" . esc_sql($fromdate) . "'";
-        $query .= $dep_query;
-        $closeticket = jssupportticket::$_db->get_results($query);
+        $jsst_query = "SELECT ticket.created FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` AS ticket WHERE ticket.status = 5 AND date(ticket.created) >= '" . esc_sql($jsst_curdate) . "' AND date(ticket.created) <= '" . esc_sql($jsst_fromdate) . "'";
+        $jsst_query .= $jsst_dep_query;
+        $jsst_closeticket = jssupportticket::$_db->get_results($jsst_query);
 
-        $query = "SELECT ticket.created FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` AS ticket WHERE ticket.isanswered = 1 AND ticket.status != 5 AND ticket.status != 1 AND date(ticket.created) >= '" . esc_sql($curdate) . "' AND date(ticket.created) <= '" . esc_sql($fromdate) . "'";
-        $query .= $dep_query;
-        $answeredticket = jssupportticket::$_db->get_results($query);
+        $jsst_query = "SELECT ticket.created FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` AS ticket WHERE ticket.isanswered = 1 AND ticket.status != 5 AND ticket.status != 1 AND date(ticket.created) >= '" . esc_sql($jsst_curdate) . "' AND date(ticket.created) <= '" . esc_sql($jsst_fromdate) . "'";
+        $jsst_query .= $jsst_dep_query;
+        $jsst_answeredticket = jssupportticket::$_db->get_results($jsst_query);
 
-        $query = "SELECT ticket.created FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` AS ticket WHERE ticket.isoverdue = 1 AND ticket.status != 5 AND date(ticket.created) >= '" . esc_sql($curdate) . "' AND date(ticket.created) <= '" . esc_sql($fromdate) . "'";
-        $query .= $dep_query;
-        $overdueticket = jssupportticket::$_db->get_results($query);
+        $jsst_query = "SELECT ticket.created FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` AS ticket WHERE ticket.isoverdue = 1 AND ticket.status != 5 AND date(ticket.created) >= '" . esc_sql($jsst_curdate) . "' AND date(ticket.created) <= '" . esc_sql($jsst_fromdate) . "'";
+        $jsst_query .= $jsst_dep_query;
+        $jsst_overdueticket = jssupportticket::$_db->get_results($jsst_query);
 
-        $query = "SELECT ticket.created FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` AS ticket WHERE ticket.isanswered != 1 AND ticket.status != 5 AND (ticket.lastreply != '0000-00-00 00:00:00') AND date(ticket.created) >= '" . esc_sql($curdate) . "' AND date(ticket.created) <= '" . esc_sql($fromdate) . "'";
-        $query .= $dep_query;
-        $pendingticket = jssupportticket::$_db->get_results($query);
+        $jsst_query = "SELECT ticket.created FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` AS ticket WHERE ticket.isanswered != 1 AND ticket.status != 5 AND (ticket.lastreply != '0000-00-00 00:00:00') AND date(ticket.created) >= '" . esc_sql($jsst_curdate) . "' AND date(ticket.created) <= '" . esc_sql($jsst_fromdate) . "'";
+        $jsst_query .= $jsst_dep_query;
+        $jsst_pendingticket = jssupportticket::$_db->get_results($jsst_query);
 
-        $date_openticket = array();
-        $date_closeticket = array();
-        $date_answeredticket = array();
-        $date_overdueticket = array();
-        $date_pendingticket = array();
-        foreach ($openticket AS $ticket) {
-            if (!isset($date_openticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($ticket->created))]))
-                $date_openticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($ticket->created))] = 0;
-            $date_openticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($ticket->created))] = $date_openticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($ticket->created))] + 1;
+        $jsst_date_openticket = array();
+        $jsst_date_closeticket = array();
+        $jsst_date_answeredticket = array();
+        $jsst_date_overdueticket = array();
+        $jsst_date_pendingticket = array();
+        foreach ($jsst_openticket AS $jsst_ticket) {
+            if (!isset($jsst_date_openticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($jsst_ticket->created))]))
+                $jsst_date_openticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($jsst_ticket->created))] = 0;
+            $jsst_date_openticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($jsst_ticket->created))] = $jsst_date_openticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($jsst_ticket->created))] + 1;
         }
-        foreach ($closeticket AS $ticket) {
-            if (!isset($date_closeticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($ticket->created))]))
-                $date_closeticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($ticket->created))] = 0;
-            $date_closeticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($ticket->created))] = $date_closeticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($ticket->created))] + 1;
+        foreach ($jsst_closeticket AS $jsst_ticket) {
+            if (!isset($jsst_date_closeticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($jsst_ticket->created))]))
+                $jsst_date_closeticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($jsst_ticket->created))] = 0;
+            $jsst_date_closeticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($jsst_ticket->created))] = $jsst_date_closeticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($jsst_ticket->created))] + 1;
         }
-        foreach ($answeredticket AS $ticket) {
-            if (!isset($date_answeredticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($ticket->created))]))
-                $date_answeredticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($ticket->created))] = 0;
-            $date_answeredticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($ticket->created))] = $date_answeredticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($ticket->created))] + 1;
+        foreach ($jsst_answeredticket AS $jsst_ticket) {
+            if (!isset($jsst_date_answeredticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($jsst_ticket->created))]))
+                $jsst_date_answeredticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($jsst_ticket->created))] = 0;
+            $jsst_date_answeredticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($jsst_ticket->created))] = $jsst_date_answeredticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($jsst_ticket->created))] + 1;
         }
-        foreach ($overdueticket AS $ticket) {
-            if (!isset($date_overdueticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($ticket->created))]))
-                $date_overdueticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($ticket->created))] = 0;
-            $date_overdueticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($ticket->created))] = $date_overdueticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($ticket->created))] + 1;
+        foreach ($jsst_overdueticket AS $jsst_ticket) {
+            if (!isset($jsst_date_overdueticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($jsst_ticket->created))]))
+                $jsst_date_overdueticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($jsst_ticket->created))] = 0;
+            $jsst_date_overdueticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($jsst_ticket->created))] = $jsst_date_overdueticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($jsst_ticket->created))] + 1;
         }
-        foreach ($pendingticket AS $ticket) {
-            if (!isset($date_pendingticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($ticket->created))]))
-                $date_pendingticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($ticket->created))] = 0;
-            $date_pendingticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($ticket->created))] = $date_pendingticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($ticket->created))] + 1;
+        foreach ($jsst_pendingticket AS $jsst_ticket) {
+            if (!isset($jsst_date_pendingticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($jsst_ticket->created))]))
+                $jsst_date_pendingticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($jsst_ticket->created))] = 0;
+            $jsst_date_pendingticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($jsst_ticket->created))] = $jsst_date_pendingticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($jsst_ticket->created))] + 1;
         }
-        $open_ticket = 0;
-        $close_ticket = 0;
-        $answered_ticket = 0;
-        $json_array = "";
-        $open_ticket = 0;
-        $close_ticket = 0;
-        $answered_ticket = 0;
-        $overdue_ticket = 0;
-        $pending_ticket = 0;
+        $jsst_open_ticket = 0;
+        $jsst_close_ticket = 0;
+        $jsst_answered_ticket = 0;
+        $jsst_json_array = "";
+        $jsst_open_ticket = 0;
+        $jsst_close_ticket = 0;
+        $jsst_answered_ticket = 0;
+        $jsst_overdue_ticket = 0;
+        $jsst_pending_ticket = 0;
 
         do{
-            $year = date_i18n('Y',strtotime($nextdate));
-            $month = date_i18n('m',strtotime($nextdate));
-            $month = $month - 1; //js month are 0 based
-            $day = date_i18n('d',strtotime($nextdate));
-            $openticket_tmp = isset($date_openticket[$nextdate]) ? $date_openticket[$nextdate]  : 0;
-            $closeticket_tmp = isset($date_closeticket[$nextdate]) ? $date_closeticket[$nextdate] : 0;
-            $answeredticket_tmp = isset($date_answeredticket[$nextdate]) ? $date_answeredticket[$nextdate] : 0;
-            $overdueticket_tmp = isset($date_overdueticket[$nextdate]) ? $date_overdueticket[$nextdate] : 0;
-            $pendingticket_tmp = isset($date_pendingticket[$nextdate]) ? $date_pendingticket[$nextdate] : 0;
-            $json_array .= "[new Date($year,$month,$day),$openticket_tmp,$answeredticket_tmp,$pendingticket_tmp,$overdueticket_tmp,$closeticket_tmp],";
-            $open_ticket += $openticket_tmp;
-            $close_ticket += $closeticket_tmp;
-            $answered_ticket += $answeredticket_tmp;
-            $overdue_ticket += $overdueticket_tmp;
-            $pending_ticket += $pendingticket_tmp;
-             if($nextdate == $curdate){
+            $jsst_year = date_i18n('Y',strtotime($jsst_nextdate));
+            $jsst_month = date_i18n('m',strtotime($jsst_nextdate));
+            $jsst_month = $jsst_month - 1; //js month are 0 based
+            $jsst_day = date_i18n('d',strtotime($jsst_nextdate));
+            $jsst_openticket_tmp = isset($jsst_date_openticket[$jsst_nextdate]) ? $jsst_date_openticket[$jsst_nextdate]  : 0;
+            $jsst_closeticket_tmp = isset($jsst_date_closeticket[$jsst_nextdate]) ? $jsst_date_closeticket[$jsst_nextdate] : 0;
+            $jsst_answeredticket_tmp = isset($jsst_date_answeredticket[$jsst_nextdate]) ? $jsst_date_answeredticket[$jsst_nextdate] : 0;
+            $jsst_overdueticket_tmp = isset($jsst_date_overdueticket[$jsst_nextdate]) ? $jsst_date_overdueticket[$jsst_nextdate] : 0;
+            $jsst_pendingticket_tmp = isset($jsst_date_pendingticket[$jsst_nextdate]) ? $jsst_date_pendingticket[$jsst_nextdate] : 0;
+            $jsst_json_array .= "[new Date($jsst_year,$jsst_month,$jsst_day),$jsst_openticket_tmp,$jsst_answeredticket_tmp,$jsst_pendingticket_tmp,$jsst_overdueticket_tmp,$jsst_closeticket_tmp],";
+            $jsst_open_ticket += $jsst_openticket_tmp;
+            $jsst_close_ticket += $jsst_closeticket_tmp;
+            $jsst_answered_ticket += $jsst_answeredticket_tmp;
+            $jsst_overdue_ticket += $jsst_overdueticket_tmp;
+            $jsst_pending_ticket += $jsst_pendingticket_tmp;
+             if($jsst_nextdate == $jsst_curdate){
                 break;
             }
-            $nextdate = date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($nextdate . " -1 days"));
-        }while($nextdate != $curdate);
+            $jsst_nextdate = date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($jsst_nextdate . " -1 days"));
+        }while($jsst_nextdate != $jsst_curdate);
 
-        jssupportticket::$_data['ticket_total']['openticket'] = $open_ticket;
-        jssupportticket::$_data['ticket_total']['closeticket'] = $close_ticket;
-        jssupportticket::$_data['ticket_total']['answeredticket'] = $answered_ticket;
-        jssupportticket::$_data['ticket_total']['overdueticket'] = $overdue_ticket;
-        jssupportticket::$_data['ticket_total']['pendingticket'] = $pending_ticket;
+        jssupportticket::$jsst_data['ticket_total']['openticket'] = $jsst_open_ticket;
+        jssupportticket::$jsst_data['ticket_total']['closeticket'] = $jsst_close_ticket;
+        jssupportticket::$jsst_data['ticket_total']['answeredticket'] = $jsst_answered_ticket;
+        jssupportticket::$jsst_data['ticket_total']['overdueticket'] = $jsst_overdue_ticket;
+        jssupportticket::$jsst_data['ticket_total']['pendingticket'] = $jsst_pending_ticket;
 
-        jssupportticket::$_data['line_chart_json_array'] = $json_array;
+        jssupportticket::$jsst_data['line_chart_json_array'] = $jsst_json_array;
 
         // Pagination staffs listing
-        $query = "SELECT COUNT(DISTINCT staff.id)
+        $jsst_query = "SELECT COUNT(DISTINCT staff.id)
             FROM `".jssupportticket::$_db->prefix."js_ticket_staff` AS staff
             JOIN `".jssupportticket::$_wpprefixforuser."js_ticket_users` AS user ON user.id = staff.uid
             LEFT JOIN `".jssupportticket::$_db->prefix . "js_ticket_acl_user_access_departments` AS dep ON dep.staffid = staff.id ";
-        $query .= " WHERE (staff.id = ".esc_sql($staffid)." OR dep.departmentid IN (SELECT dept.departmentid FROM `" . jssupportticket::$_db->prefix . "js_ticket_acl_user_access_departments` AS dept WHERE dept.staffid = ".esc_sql($staffid)."))";
-        $total = jssupportticket::$_db->get_var($query);
-        jssupportticket::$_data['total'] = $total;
-        jssupportticket::$_data[1] = JSSTpagination::getPagination($total);
+        $jsst_query .= " WHERE (staff.id = ".esc_sql($jsst_staffid)." OR dep.departmentid IN (SELECT dept.departmentid FROM `" . jssupportticket::$_db->prefix . "js_ticket_acl_user_access_departments` AS dept WHERE dept.staffid = ".esc_sql($jsst_staffid)."))";
+        $jsst_total = jssupportticket::$_db->get_var($jsst_query);
+        jssupportticket::$jsst_data['total'] = $jsst_total;
+        jssupportticket::$jsst_data[1] = JSSTpagination::getPagination($jsst_total);
         // data
-        $query = "SELECT DISTINCT staff.photo,staff.id,staff.firstname,staff.lastname,staff.username,staff.email,user.display_name,user.user_email,user.user_nicename,
-            (SELECT COUNT(ticket.id) FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` AS ticket WHERE ticket.status = 1 AND (ticket.lastreply = '0000-00-00 00:00:00') AND date(ticket.created) >= '" . esc_sql($curdate) . "' AND date(ticket.created) <= '" . esc_sql($fromdate) . "' AND ticket.staffid = staff.id) AS openticket,
-            (SELECT COUNT(ticket.id) FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` AS ticket WHERE ticket.status = 5 AND date(ticket.created) >= '" . esc_sql($curdate) . "' AND date(ticket.created) <= '" . esc_sql($fromdate) . "' AND ticket.staffid = staff.id) AS closeticket,
-            (SELECT COUNT(ticket.id) FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` AS ticket WHERE ticket.isanswered = 1 AND ticket.status != 5 AND ticket.status != 1 AND date(ticket.created) >= '" . esc_sql($curdate) . "' AND date(ticket.created) <= '" . esc_sql($fromdate) . "' AND ticket.staffid = staff.id) AS answeredticket,
-            (SELECT COUNT(ticket.id) FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` AS ticket WHERE ticket.isoverdue = 1 AND ticket.status != 5 AND date(ticket.created) >= '" . esc_sql($curdate) . "' AND date(ticket.created) <= '" . esc_sql($fromdate) . "' AND ticket.staffid = staff.id) AS overdueticket,
-            (SELECT COUNT(ticket.id) FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` AS ticket WHERE ticket.isanswered != 1 AND ticket.status != 5 AND (ticket.lastreply != '0000-00-00 00:00:00') AND date(ticket.created) >= '" . esc_sql($curdate) . "' AND date(ticket.created) <= '" . esc_sql($fromdate) . "' AND ticket.staffid = staff.id) AS pendingticket
+        $jsst_query = "SELECT DISTINCT staff.photo,staff.id,staff.firstname,staff.lastname,staff.username,staff.email,user.display_name,user.user_email,user.user_nicename,
+            (SELECT COUNT(ticket.id) FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` AS ticket WHERE ticket.status = 1 AND (ticket.lastreply = '0000-00-00 00:00:00') AND date(ticket.created) >= '" . esc_sql($jsst_curdate) . "' AND date(ticket.created) <= '" . esc_sql($jsst_fromdate) . "' AND ticket.staffid = staff.id) AS openticket,
+            (SELECT COUNT(ticket.id) FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` AS ticket WHERE ticket.status = 5 AND date(ticket.created) >= '" . esc_sql($jsst_curdate) . "' AND date(ticket.created) <= '" . esc_sql($jsst_fromdate) . "' AND ticket.staffid = staff.id) AS closeticket,
+            (SELECT COUNT(ticket.id) FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` AS ticket WHERE ticket.isanswered = 1 AND ticket.status != 5 AND ticket.status != 1 AND date(ticket.created) >= '" . esc_sql($jsst_curdate) . "' AND date(ticket.created) <= '" . esc_sql($jsst_fromdate) . "' AND ticket.staffid = staff.id) AS answeredticket,
+            (SELECT COUNT(ticket.id) FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` AS ticket WHERE ticket.isoverdue = 1 AND ticket.status != 5 AND date(ticket.created) >= '" . esc_sql($jsst_curdate) . "' AND date(ticket.created) <= '" . esc_sql($jsst_fromdate) . "' AND ticket.staffid = staff.id) AS overdueticket,
+            (SELECT COUNT(ticket.id) FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` AS ticket WHERE ticket.isanswered != 1 AND ticket.status != 5 AND (ticket.lastreply != '0000-00-00 00:00:00') AND date(ticket.created) >= '" . esc_sql($jsst_curdate) . "' AND date(ticket.created) <= '" . esc_sql($jsst_fromdate) . "' AND ticket.staffid = staff.id) AS pendingticket
             FROM `".jssupportticket::$_db->prefix."js_ticket_staff` AS staff
             JOIN `".jssupportticket::$_wpprefixforuser."js_ticket_users` AS user ON user.id = staff.uid
             LEFT JOIN `".jssupportticket::$_db->prefix . "js_ticket_acl_user_access_departments` AS dep ON dep.staffid = staff.id";
-        $query .= " WHERE (staff.id = ".esc_sql($staffid)." OR dep.departmentid IN (SELECT dept.departmentid FROM `" . jssupportticket::$_db->prefix . "js_ticket_acl_user_access_departments` AS dept WHERE dept.staffid = ".esc_sql($staffid)."))";
-        $query .= " LIMIT " . JSSTpagination::getOffset() . ", " . JSSTpagination::getLimit();
-        $agents = jssupportticket::$_db->get_results($query);
-        jssupportticket::$_data['staffs_report'] = $agents;
+        $jsst_query .= " WHERE (staff.id = ".esc_sql($jsst_staffid)." OR dep.departmentid IN (SELECT dept.departmentid FROM `" . jssupportticket::$_db->prefix . "js_ticket_acl_user_access_departments` AS dept WHERE dept.staffid = ".esc_sql($jsst_staffid)."))";
+        $jsst_query .= " LIMIT " . JSSTpagination::getOffset() . ", " . JSSTpagination::getLimit();
+        $jsst_agents = jssupportticket::$_db->get_results($jsst_query);
+        jssupportticket::$jsst_data['staffs_report'] = $jsst_agents;
         return;
     }
 
-    function isValidStaffid($staffid){
+    function isValidStaffid($jsst_staffid){
         if( !in_array('agent',jssupportticket::$_active_addons) ){
             return false;
         }
 
-        if( ! is_numeric($staffid))
+        if( ! is_numeric($jsst_staffid))
             return false;
-        $uid = JSSTincluder::getObjectClass('user')->uid();
-        $id = JSSTincluder::getJSModel('agent')->getStaffId($uid);
-        if( $id == $staffid )
+        $jsst_uid = JSSTincluder::getObjectClass('user')->uid();
+        $jsst_id = JSSTincluder::getJSModel('agent')->getStaffId($jsst_uid);
+        if( $jsst_id == $jsst_staffid )
             return true;
-        $query = "SELECT staff.id AS staffid
+        $jsst_query = "SELECT staff.id AS staffid
             FROM `".jssupportticket::$_db->prefix."js_ticket_staff` AS staff
             JOIN `".jssupportticket::$_wpprefixforuser."js_ticket_users` AS user ON user.id = staff.uid
             JOIN `".jssupportticket::$_db->prefix . "js_ticket_acl_user_access_departments` AS dep ON dep.staffid = staff.id ";
-        $query .= " WHERE (dep.departmentid IN (SELECT dept.departmentid FROM `" . jssupportticket::$_db->prefix . "js_ticket_acl_user_access_departments` AS dept WHERE dept.staffid = ".esc_sql($id)."))";
-        $result = jssupportticket::$_db->get_results($query);
-        foreach ($result as $agent) {
-            if($agent->staffid == $staffid)
+        $jsst_query .= " WHERE (dep.departmentid IN (SELECT dept.departmentid FROM `" . jssupportticket::$_db->prefix . "js_ticket_acl_user_access_departments` AS dept WHERE dept.staffid = ".esc_sql($jsst_id)."))";
+        $jsst_result = jssupportticket::$_db->get_results($jsst_query);
+        foreach ($jsst_result as $jsst_agent) {
+            if($jsst_agent->staffid == $jsst_staffid)
                 return true;
         }
         return false;
     }
 
     function getUserReports(){
-        $date_start = isset(jssupportticket::$_search['report']) ? jssupportticket::$_search['report']['date_start'] : '';
-        $date_end = isset(jssupportticket::$_search['report']) ? jssupportticket::$_search['report']['date_end'] : '';
-        if(isset($date_start) && $date_start != ""){
-            $date_start = date_i18n('Y-m-d',strtotime($date_start));
+        $jsst_date_start = isset(jssupportticket::$_search['report']) ? jssupportticket::$_search['report']['date_start'] : '';
+        $jsst_date_end = isset(jssupportticket::$_search['report']) ? jssupportticket::$_search['report']['date_end'] : '';
+        if(isset($jsst_date_start) && $jsst_date_start != ""){
+            $jsst_date_start = date_i18n('Y-m-d',strtotime($jsst_date_start));
         }
-        if(isset($date_end) && $date_end != ""){
-            $date_end = date_i18n('Y-m-d',strtotime($date_end));
+        if(isset($jsst_date_end) && $jsst_date_end != ""){
+            $jsst_date_end = date_i18n('Y-m-d',strtotime($jsst_date_end));
         }
-        if($date_start > $date_end){
-            $tmp = $date_start;
-            $date_start = $date_end;
-            $date_end = $tmp;
+        if($jsst_date_start > $jsst_date_end){
+            $jsst_tmp = $jsst_date_start;
+            $jsst_date_start = $jsst_date_end;
+            $jsst_date_end = $jsst_tmp;
         }
-        $uid = isset(jssupportticket::$_search['report']) ? jssupportticket::$_search['report']['uid'] : '';
+        $jsst_uid = isset(jssupportticket::$_search['report']) ? jssupportticket::$_search['report']['uid'] : '';
 
         //Line Chart Data
-        $curdate = ($date_start != null) ? date_i18n('Y-m-d',strtotime($date_start)) : date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime("now -1 month"));
-        $dates = '';
-        $fromdate = ($date_end != null) ? date_i18n('Y-m-d',strtotime($date_end)) : date_i18n('Y-m-d');
-        jssupportticket::$_data['filter']['date_start'] = $curdate;
-        jssupportticket::$_data['filter']['date_end'] = $fromdate;
-        jssupportticket::$_data['filter']['uid'] = $uid;
+        $jsst_curdate = ($jsst_date_start != null) ? date_i18n('Y-m-d',strtotime($jsst_date_start)) : date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime("now -1 month"));
+        $jsst_dates = '';
+        $jsst_fromdate = ($jsst_date_end != null) ? date_i18n('Y-m-d',strtotime($jsst_date_end)) : date_i18n('Y-m-d');
+        jssupportticket::$jsst_data['filter']['date_start'] = $jsst_curdate;
+        jssupportticket::$jsst_data['filter']['date_end'] = $jsst_fromdate;
+        jssupportticket::$jsst_data['filter']['uid'] = $jsst_uid;
 
         // forexport
-        $_SESSION['forexport']['curdate'] = $curdate;
-        $_SESSION['forexport']['fromdate'] = $fromdate;
-        $_SESSION['forexport']['uid'] = $uid;
+        $_SESSION['forexport']['curdate'] = $jsst_curdate;
+        $_SESSION['forexport']['fromdate'] = $jsst_fromdate;
+        $_SESSION['forexport']['uid'] = $jsst_uid;
 
-        jssupportticket::$_data['filter']['username'] = JSSTincluder::getJSModel('jssupportticket')->getUserNameById($uid);
-        $nextdate = $fromdate;
+        jssupportticket::$jsst_data['filter']['username'] = JSSTincluder::getJSModel('jssupportticket')->getUserNameById($jsst_uid);
+        $jsst_nextdate = $jsst_fromdate;
         //Query to get Data
-        $query = "SELECT count(id) FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` ";
-        if($uid) $query .= " WHERE  uid = ".esc_sql($uid);
-        $allticket = jssupportticket::$_db->get_var($query);
+        $jsst_query = "SELECT count(id) FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` ";
+        if($jsst_uid) $jsst_query .= " WHERE  uid = ".esc_sql($jsst_uid);
+        $jsst_allticket = jssupportticket::$_db->get_var($jsst_query);
 
-        $query = "SELECT created FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE status = 1  AND (lastreply = '0000-00-00 00:00:00') AND date(created) >= '" . esc_sql($curdate) . "' AND date(created) <= '" . esc_sql($fromdate) . "'";
-        if($uid) $query .= " AND uid = ".esc_sql($uid);
-        $openticket = jssupportticket::$_db->get_results($query);
+        $jsst_query = "SELECT created FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE status = 1  AND (lastreply = '0000-00-00 00:00:00') AND date(created) >= '" . esc_sql($jsst_curdate) . "' AND date(created) <= '" . esc_sql($jsst_fromdate) . "'";
+        if($jsst_uid) $jsst_query .= " AND uid = ".esc_sql($jsst_uid);
+        $jsst_openticket = jssupportticket::$_db->get_results($jsst_query);
 
-        $query = "SELECT created FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE status = 5 AND date(created) >= '" . esc_sql($curdate) . "' AND date(created) <= '" . esc_sql($fromdate) . "'";
-        if($uid) $query .= " AND uid = ".esc_sql($uid);
-        $closeticket = jssupportticket::$_db->get_results($query);
+        $jsst_query = "SELECT created FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE status = 5 AND date(created) >= '" . esc_sql($jsst_curdate) . "' AND date(created) <= '" . esc_sql($jsst_fromdate) . "'";
+        if($jsst_uid) $jsst_query .= " AND uid = ".esc_sql($jsst_uid);
+        $jsst_closeticket = jssupportticket::$_db->get_results($jsst_query);
 
-        $query = "SELECT created FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE isanswered = 1 AND status != 5 AND status != 1 AND date(created) >= '" . esc_sql($curdate) . "' AND date(created) <= '" . esc_sql($fromdate) . "'";
-        if($uid) $query .= " AND uid = ".esc_sql($uid);
-        $answeredticket = jssupportticket::$_db->get_results($query);
+        $jsst_query = "SELECT created FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE isanswered = 1 AND status != 5 AND status != 1 AND date(created) >= '" . esc_sql($jsst_curdate) . "' AND date(created) <= '" . esc_sql($jsst_fromdate) . "'";
+        if($jsst_uid) $jsst_query .= " AND uid = ".esc_sql($jsst_uid);
+        $jsst_answeredticket = jssupportticket::$_db->get_results($jsst_query);
 
-        $query = "SELECT created FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE isoverdue = 1 AND status != 5 AND date(created) >= '" . esc_sql($curdate) . "' AND date(created) <= '" . esc_sql($fromdate) . "'";
-        if($uid) $query .= " AND uid = ". esc_sql($uid);
-        $overdueticket = jssupportticket::$_db->get_results($query);
+        $jsst_query = "SELECT created FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE isoverdue = 1 AND status != 5 AND date(created) >= '" . esc_sql($jsst_curdate) . "' AND date(created) <= '" . esc_sql($jsst_fromdate) . "'";
+        if($jsst_uid) $jsst_query .= " AND uid = ". esc_sql($jsst_uid);
+        $jsst_overdueticket = jssupportticket::$_db->get_results($jsst_query);
 
-        $query = "SELECT created FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE isanswered != 1 AND status != 5 AND (lastreply != '0000-00-00 00:00:00') AND date(created) >= '" . esc_sql($curdate) . "' AND date(created) <= '" . esc_sql($fromdate) . "'";
-        if($uid) $query .= " AND uid = ".esc_sql($uid);
-        $pendingticket = jssupportticket::$_db->get_results($query);
+        $jsst_query = "SELECT created FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE isanswered != 1 AND status != 5 AND (lastreply != '0000-00-00 00:00:00') AND date(created) >= '" . esc_sql($jsst_curdate) . "' AND date(created) <= '" . esc_sql($jsst_fromdate) . "'";
+        if($jsst_uid) $jsst_query .= " AND uid = ".esc_sql($jsst_uid);
+        $jsst_pendingticket = jssupportticket::$_db->get_results($jsst_query);
 
-        $date_openticket = array();
-        $date_closeticket = array();
-        $date_answeredticket = array();
-        $date_overdueticket = array();
-        $date_pendingticket = array();
-        foreach ($openticket AS $ticket) {
-            if (!isset($date_openticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($ticket->created))]))
-                $date_openticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($ticket->created))] = 0;
-            $date_openticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($ticket->created))] = $date_openticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($ticket->created))] + 1;
+        $jsst_date_openticket = array();
+        $jsst_date_closeticket = array();
+        $jsst_date_answeredticket = array();
+        $jsst_date_overdueticket = array();
+        $jsst_date_pendingticket = array();
+        foreach ($jsst_openticket AS $jsst_ticket) {
+            if (!isset($jsst_date_openticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($jsst_ticket->created))]))
+                $jsst_date_openticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($jsst_ticket->created))] = 0;
+            $jsst_date_openticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($jsst_ticket->created))] = $jsst_date_openticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($jsst_ticket->created))] + 1;
         }
-        foreach ($closeticket AS $ticket) {
-            if (!isset($date_closeticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($ticket->created))]))
-                $date_closeticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($ticket->created))] = 0;
-            $date_closeticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($ticket->created))] = $date_closeticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($ticket->created))] + 1;
+        foreach ($jsst_closeticket AS $jsst_ticket) {
+            if (!isset($jsst_date_closeticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($jsst_ticket->created))]))
+                $jsst_date_closeticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($jsst_ticket->created))] = 0;
+            $jsst_date_closeticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($jsst_ticket->created))] = $jsst_date_closeticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($jsst_ticket->created))] + 1;
         }
-        foreach ($answeredticket AS $ticket) {
-            if (!isset($date_answeredticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($ticket->created))]))
-                $date_answeredticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($ticket->created))] = 0;
-            $date_answeredticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($ticket->created))] = $date_answeredticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($ticket->created))] + 1;
+        foreach ($jsst_answeredticket AS $jsst_ticket) {
+            if (!isset($jsst_date_answeredticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($jsst_ticket->created))]))
+                $jsst_date_answeredticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($jsst_ticket->created))] = 0;
+            $jsst_date_answeredticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($jsst_ticket->created))] = $jsst_date_answeredticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($jsst_ticket->created))] + 1;
         }
-        foreach ($overdueticket AS $ticket) {
-            if (!isset($date_overdueticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($ticket->created))]))
-                $date_overdueticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($ticket->created))] = 0;
-            $date_overdueticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($ticket->created))] = $date_overdueticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($ticket->created))] + 1;
+        foreach ($jsst_overdueticket AS $jsst_ticket) {
+            if (!isset($jsst_date_overdueticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($jsst_ticket->created))]))
+                $jsst_date_overdueticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($jsst_ticket->created))] = 0;
+            $jsst_date_overdueticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($jsst_ticket->created))] = $jsst_date_overdueticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($jsst_ticket->created))] + 1;
         }
-        foreach ($pendingticket AS $ticket) {
-            if (!isset($date_pendingticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($ticket->created))]))
-                $date_pendingticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($ticket->created))] = 0;
-            $date_pendingticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($ticket->created))] = $date_pendingticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($ticket->created))] + 1;
+        foreach ($jsst_pendingticket AS $jsst_ticket) {
+            if (!isset($jsst_date_pendingticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($jsst_ticket->created))]))
+                $jsst_date_pendingticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($jsst_ticket->created))] = 0;
+            $jsst_date_pendingticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($jsst_ticket->created))] = $jsst_date_pendingticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($jsst_ticket->created))] + 1;
         }
-        $open_ticket = 0;
-        $close_ticket = 0;
-        $answered_ticket = 0;
-        $overdue_ticket = 0;
-        $pending_ticket = 0;
-        $json_array = "";
+        $jsst_open_ticket = 0;
+        $jsst_close_ticket = 0;
+        $jsst_answered_ticket = 0;
+        $jsst_overdue_ticket = 0;
+        $jsst_pending_ticket = 0;
+        $jsst_json_array = "";
         do{
-            $year = date_i18n('Y',strtotime($nextdate));
-            $month = date_i18n('m',strtotime($nextdate));
-            $month = $month - 1; //js month are 0 based
-            $day = date_i18n('d',strtotime($nextdate));
-            $openticket_tmp = isset($date_openticket[$nextdate]) ? $date_openticket[$nextdate]  : 0;
-            $closeticket_tmp = isset($date_closeticket[$nextdate]) ? $date_closeticket[$nextdate] : 0;
-            $answeredticket_tmp = isset($date_answeredticket[$nextdate]) ? $date_answeredticket[$nextdate] : 0;
-            $overdueticket_tmp = isset($date_overdueticket[$nextdate]) ? $date_overdueticket[$nextdate] : 0;
-            $pendingticket_tmp = isset($date_pendingticket[$nextdate]) ? $date_pendingticket[$nextdate] : 0;
-            $json_array .= "[new Date($year,$month,$day),$openticket_tmp,$answeredticket_tmp,$pendingticket_tmp,$overdueticket_tmp,$closeticket_tmp],";
-            $open_ticket += $openticket_tmp;
-            $close_ticket += $closeticket_tmp;
-            $answered_ticket += $answeredticket_tmp;
-            $overdue_ticket += $overdueticket_tmp;
-            $pending_ticket += $pendingticket_tmp;
-             if($nextdate == $curdate){
+            $jsst_year = date_i18n('Y',strtotime($jsst_nextdate));
+            $jsst_month = date_i18n('m',strtotime($jsst_nextdate));
+            $jsst_month = $jsst_month - 1; //js month are 0 based
+            $jsst_day = date_i18n('d',strtotime($jsst_nextdate));
+            $jsst_openticket_tmp = isset($jsst_date_openticket[$jsst_nextdate]) ? $jsst_date_openticket[$jsst_nextdate]  : 0;
+            $jsst_closeticket_tmp = isset($jsst_date_closeticket[$jsst_nextdate]) ? $jsst_date_closeticket[$jsst_nextdate] : 0;
+            $jsst_answeredticket_tmp = isset($jsst_date_answeredticket[$jsst_nextdate]) ? $jsst_date_answeredticket[$jsst_nextdate] : 0;
+            $jsst_overdueticket_tmp = isset($jsst_date_overdueticket[$jsst_nextdate]) ? $jsst_date_overdueticket[$jsst_nextdate] : 0;
+            $jsst_pendingticket_tmp = isset($jsst_date_pendingticket[$jsst_nextdate]) ? $jsst_date_pendingticket[$jsst_nextdate] : 0;
+            $jsst_json_array .= "[new Date($jsst_year,$jsst_month,$jsst_day),$jsst_openticket_tmp,$jsst_answeredticket_tmp,$jsst_pendingticket_tmp,$jsst_overdueticket_tmp,$jsst_closeticket_tmp],";
+            $jsst_open_ticket += $jsst_openticket_tmp;
+            $jsst_close_ticket += $jsst_closeticket_tmp;
+            $jsst_answered_ticket += $jsst_answeredticket_tmp;
+            $jsst_overdue_ticket += $jsst_overdueticket_tmp;
+            $jsst_pending_ticket += $jsst_pendingticket_tmp;
+             if($jsst_nextdate == $jsst_curdate){
                 break;
             }
-            $nextdate = date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($nextdate . " -1 days"));
-        }while($nextdate != $curdate);
+            $jsst_nextdate = date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($jsst_nextdate . " -1 days"));
+        }while($jsst_nextdate != $jsst_curdate);
 
-        jssupportticket::$_data['ticket_total']['allticket'] = $allticket;
-        jssupportticket::$_data['ticket_total']['openticket'] = $open_ticket;
-        jssupportticket::$_data['ticket_total']['closeticket'] = $close_ticket;
-        jssupportticket::$_data['ticket_total']['answeredticket'] = $answered_ticket;
-        jssupportticket::$_data['ticket_total']['overdueticket'] = $overdue_ticket;
-        jssupportticket::$_data['ticket_total']['pendingticket'] = $pending_ticket;
+        jssupportticket::$jsst_data['ticket_total']['allticket'] = $jsst_allticket;
+        jssupportticket::$jsst_data['ticket_total']['openticket'] = $jsst_open_ticket;
+        jssupportticket::$jsst_data['ticket_total']['closeticket'] = $jsst_close_ticket;
+        jssupportticket::$jsst_data['ticket_total']['answeredticket'] = $jsst_answered_ticket;
+        jssupportticket::$jsst_data['ticket_total']['overdueticket'] = $jsst_overdue_ticket;
+        jssupportticket::$jsst_data['ticket_total']['pendingticket'] = $jsst_pending_ticket;
 
-        jssupportticket::$_data['line_chart_json_array'] = $json_array;
+        jssupportticket::$jsst_data['line_chart_json_array'] = $jsst_json_array;
 
         // Pagination
-        $query = "SELECT COUNT(user.id)
+        $jsst_query = "SELECT COUNT(user.id)
                     FROM `".jssupportticket::$_wpprefixforuser."js_ticket_users` AS user
                     WHERE user.wpuid != 0 AND ";
                     if(in_array('agent', jssupportticket::$_active_addons)){
-                        $query .=" NOT EXISTS (SELECT id FROM `".jssupportticket::$_db->prefix."js_ticket_staff` WHERE uid = user.id) AND  ";
+                        $jsst_query .=" NOT EXISTS (SELECT id FROM `".jssupportticket::$_db->prefix."js_ticket_staff` WHERE uid = user.id) AND  ";
                     }
-                    $query .=" NOT EXISTS (SELECT umeta_id FROM `".jssupportticket::$_wpprefixforuser."usermeta` WHERE user_id = user.id AND meta_value LIKE '%administrator%')";
-        if($uid) $query .= " AND user.id = ".esc_sql($uid);
-        $total = jssupportticket::$_db->get_var($query);
-        jssupportticket::$_data['total'] = $total;
-        jssupportticket::$_data[1] = JSSTpagination::getPagination($total);
+                    $jsst_query .=" NOT EXISTS (SELECT umeta_id FROM `".jssupportticket::$_wpprefixforuser."usermeta` WHERE user_id = user.id AND meta_value LIKE '%administrator%')";
+        if($jsst_uid) $jsst_query .= " AND user.id = ".esc_sql($jsst_uid);
+        $jsst_total = jssupportticket::$_db->get_var($jsst_query);
+        jssupportticket::$jsst_data['total'] = $jsst_total;
+        jssupportticket::$jsst_data[1] = JSSTpagination::getPagination($jsst_total);
 
-        $query = "SELECT user.display_name,user.user_email,user.user_nicename,user.id,
+        $jsst_query = "SELECT user.display_name,user.user_email,user.user_nicename,user.id,
                     (SELECT COUNT(id) FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE uid = user.id) AS allticket,
-                    (SELECT COUNT(id) FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE status = 1 AND (lastreply = '0000-00-00 00:00:00') AND date(created) >= '" . esc_sql($curdate) . "' AND date(created) <= '" . esc_sql($fromdate) . "' AND uid = user.id) AS openticket,
-                    (SELECT COUNT(id) FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE status = 5 AND date(created) >= '" . esc_sql($curdate) . "' AND date(created) <= '" . esc_sql($fromdate) . "' AND uid = user.id) AS closeticket,
-                    (SELECT COUNT(id) FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE isanswered = 1 AND status != 5 AND status != 1 AND date(created) >= '" . esc_sql($curdate) . "' AND date(created) <= '" . esc_sql($fromdate) . "' AND uid = user.id) AS answeredticket,
-                    (SELECT COUNT(id) FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE isoverdue = 1 AND status != 5 AND date(created) >= '" . esc_sql($curdate) . "' AND date(created) <= '" . esc_sql($fromdate) . "' AND uid = user.id) AS overdueticket,
-                    (SELECT COUNT(id) FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE isanswered != 1 AND status != 5 AND (lastreply != '0000-00-00 00:00:00') AND date(created) >= '" . esc_sql($curdate) . "' AND date(created) <= '" . esc_sql($fromdate) . "' AND uid = user.id) AS pendingticket
+                    (SELECT COUNT(id) FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE status = 1 AND (lastreply = '0000-00-00 00:00:00') AND date(created) >= '" . esc_sql($jsst_curdate) . "' AND date(created) <= '" . esc_sql($jsst_fromdate) . "' AND uid = user.id) AS openticket,
+                    (SELECT COUNT(id) FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE status = 5 AND date(created) >= '" . esc_sql($jsst_curdate) . "' AND date(created) <= '" . esc_sql($jsst_fromdate) . "' AND uid = user.id) AS closeticket,
+                    (SELECT COUNT(id) FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE isanswered = 1 AND status != 5 AND status != 1 AND date(created) >= '" . esc_sql($jsst_curdate) . "' AND date(created) <= '" . esc_sql($jsst_fromdate) . "' AND uid = user.id) AS answeredticket,
+                    (SELECT COUNT(id) FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE isoverdue = 1 AND status != 5 AND date(created) >= '" . esc_sql($jsst_curdate) . "' AND date(created) <= '" . esc_sql($jsst_fromdate) . "' AND uid = user.id) AS overdueticket,
+                    (SELECT COUNT(id) FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE isanswered != 1 AND status != 5 AND (lastreply != '0000-00-00 00:00:00') AND date(created) >= '" . esc_sql($jsst_curdate) . "' AND date(created) <= '" . esc_sql($jsst_fromdate) . "' AND uid = user.id) AS pendingticket
                     FROM `".jssupportticket::$_wpprefixforuser."js_ticket_users` AS user
                     WHERE user.wpuid != 0 AND ";
                     if(in_array('agent', jssupportticket::$_active_addons)){
-                        $query .=" NOT EXISTS (SELECT id FROM `".jssupportticket::$_db->prefix."js_ticket_staff` WHERE uid = user.id) AND  ";
+                        $jsst_query .=" NOT EXISTS (SELECT id FROM `".jssupportticket::$_db->prefix."js_ticket_staff` WHERE uid = user.id) AND  ";
                     }
-                    $query .=" NOT EXISTS (SELECT umeta_id FROM `".jssupportticket::$_wpprefixforuser."usermeta` WHERE user_id = user.id AND meta_value LIKE '%administrator%')";
-        if($uid) $query .= " AND user.id = ".esc_sql($uid);
-        $query .= " LIMIT " . JSSTpagination::getOffset() . ", " . JSSTpagination::getLimit();
-        $users = jssupportticket::$_db->get_results($query);
-        jssupportticket::$_data['users_report'] =$users;
+                    $jsst_query .=" NOT EXISTS (SELECT umeta_id FROM `".jssupportticket::$_wpprefixforuser."usermeta` WHERE user_id = user.id AND meta_value LIKE '%administrator%')";
+        if($jsst_uid) $jsst_query .= " AND user.id = ".esc_sql($jsst_uid);
+        $jsst_query .= " LIMIT " . JSSTpagination::getOffset() . ", " . JSSTpagination::getLimit();
+        $jsst_users = jssupportticket::$_db->get_results($jsst_query);
+        jssupportticket::$jsst_data['users_report'] =$jsst_users;
         return;
     }
 
-    function getStaffDetailReportByStaffId($id){
+    function getStaffDetailReportByStaffId($jsst_id){
         if( !in_array('agent',jssupportticket::$_active_addons) ){
             return;
         }
-        if(!is_numeric($id)) return false;
+        if(!is_numeric($jsst_id)) return false;
 
         if( ! is_admin()){
-            $result = $this->isValidStaffid( $id );
-            if( $result == false)
+            $jsst_result = $this->isValidStaffid( $jsst_id );
+            if( $jsst_result == false)
                 return false;
         }
 
-        $start_date = is_admin() ? 'date_start' : 'jsst-date-start';
-        $end_date = is_admin() ? 'date_end' : 'jsst-date-end';
-        if(isset($date_start) && $date_start != ""){
-            $date_start = date_i18n('Y-m-d',strtotime($date_start));
+        $jsst_start_date = is_admin() ? 'date_start' : 'jsst-date-start';
+        $jsst_end_date = is_admin() ? 'date_end' : 'jsst-date-end';
+        if(isset($jsst_date_start) && $jsst_date_start != ""){
+            $jsst_date_start = date_i18n('Y-m-d',strtotime($jsst_date_start));
         }
-        if(isset($date_end) && $date_end != ""){
-            $date_end = date_i18n('Y-m-d',strtotime($date_end));
+        if(isset($jsst_date_end) && $jsst_date_end != ""){
+            $jsst_date_end = date_i18n('Y-m-d',strtotime($jsst_date_end));
         }
-        $date_start = isset(jssupportticket::$_search['report']) ? jssupportticket::$_search['report'][$start_date] : '';
-        $date_end = isset(jssupportticket::$_search['report']) ? jssupportticket::$_search['report'][$end_date] : '';
-        if(isset($date_start) && $date_start != ""){
-            $date_start = date_i18n('Y-m-d',strtotime($date_start));
+        $jsst_date_start = isset(jssupportticket::$_search['report']) ? jssupportticket::$_search['report'][$jsst_start_date] : '';
+        $jsst_date_end = isset(jssupportticket::$_search['report']) ? jssupportticket::$_search['report'][$jsst_end_date] : '';
+        if(isset($jsst_date_start) && $jsst_date_start != ""){
+            $jsst_date_start = date_i18n('Y-m-d',strtotime($jsst_date_start));
         }
-        if(isset($date_end) && $date_end != ""){
-            $date_end = date_i18n('Y-m-d',strtotime($date_end));
+        if(isset($jsst_date_end) && $jsst_date_end != ""){
+            $jsst_date_end = date_i18n('Y-m-d',strtotime($jsst_date_end));
         }
-        if($date_start > $date_end){
-            $tmp = $date_start;
-            $date_start = $date_end;
-            $date_end = $tmp;
+        if($jsst_date_start > $jsst_date_end){
+            $jsst_tmp = $jsst_date_start;
+            $jsst_date_start = $jsst_date_end;
+            $jsst_date_end = $jsst_tmp;
         }
 
         //Line Chart Data
-        $curdate = ($date_start != null) ? date_i18n('Y-m-d',strtotime($date_start)) : date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime("now -1 month"));
-        $fromdate = ($date_end != null) ? date_i18n('Y-m-d',strtotime($date_end)) : date_i18n('Y-m-d');
-        jssupportticket::$_data['filter'][$start_date] = $curdate;
-        jssupportticket::$_data['filter'][$end_date] = $fromdate;
-        jssupportticket::$_data['filter']['uid'] = $id;
+        $jsst_curdate = ($jsst_date_start != null) ? date_i18n('Y-m-d',strtotime($jsst_date_start)) : date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime("now -1 month"));
+        $jsst_fromdate = ($jsst_date_end != null) ? date_i18n('Y-m-d',strtotime($jsst_date_end)) : date_i18n('Y-m-d');
+        jssupportticket::$jsst_data['filter'][$jsst_start_date] = $jsst_curdate;
+        jssupportticket::$jsst_data['filter'][$jsst_end_date] = $jsst_fromdate;
+        jssupportticket::$jsst_data['filter']['uid'] = $jsst_id;
 
-        $nextdate = $fromdate;
+        $jsst_nextdate = $jsst_fromdate;
 
         //Query to get Data
-        $query = "SELECT created FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE status = 1 AND (lastreply = '0000-00-00 00:00:00') AND date(created) >= '" . esc_sql($curdate) . "' AND date(created) <= '" . esc_sql($fromdate) . "'";
-        if($id) $query .= " AND staffid = ".esc_sql($id);
-        $openticket = jssupportticket::$_db->get_results($query);
+        $jsst_query = "SELECT created FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE status = 1 AND (lastreply = '0000-00-00 00:00:00') AND date(created) >= '" . esc_sql($jsst_curdate) . "' AND date(created) <= '" . esc_sql($jsst_fromdate) . "'";
+        if($jsst_id) $jsst_query .= " AND staffid = ".esc_sql($jsst_id);
+        $jsst_openticket = jssupportticket::$_db->get_results($jsst_query);
 
-        $query = "SELECT created FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE status = 5 AND date(created) >= '" . esc_sql($curdate) . "' AND date(created) <= '" . esc_sql($fromdate) . "'";
-        if($id) $query .= " AND staffid = ".esc_sql($id);
-        $closeticket = jssupportticket::$_db->get_results($query);
+        $jsst_query = "SELECT created FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE status = 5 AND date(created) >= '" . esc_sql($jsst_curdate) . "' AND date(created) <= '" . esc_sql($jsst_fromdate) . "'";
+        if($jsst_id) $jsst_query .= " AND staffid = ".esc_sql($jsst_id);
+        $jsst_closeticket = jssupportticket::$_db->get_results($jsst_query);
 
-        $query = "SELECT created FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE isanswered = 1 AND status != 5 AND status != 1 AND date(created) >= '" . esc_sql($curdate) . "' AND date(created) <= '" . esc_sql($fromdate) . "'";
-        if($id) $query .= " AND staffid = ".esc_sql($id);
-        $answeredticket = jssupportticket::$_db->get_results($query);
+        $jsst_query = "SELECT created FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE isanswered = 1 AND status != 5 AND status != 1 AND date(created) >= '" . esc_sql($jsst_curdate) . "' AND date(created) <= '" . esc_sql($jsst_fromdate) . "'";
+        if($jsst_id) $jsst_query .= " AND staffid = ".esc_sql($jsst_id);
+        $jsst_answeredticket = jssupportticket::$_db->get_results($jsst_query);
 
-        $query = "SELECT created FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE isoverdue = 1 AND status != 5 AND date(created) >= '" . esc_sql($curdate) . "' AND date(created) <= '" . esc_sql($fromdate) . "'";
-        if($id) $query .= " AND staffid = ".esc_sql($id);
-        $overdueticket = jssupportticket::$_db->get_results($query);
+        $jsst_query = "SELECT created FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE isoverdue = 1 AND status != 5 AND date(created) >= '" . esc_sql($jsst_curdate) . "' AND date(created) <= '" . esc_sql($jsst_fromdate) . "'";
+        if($jsst_id) $jsst_query .= " AND staffid = ".esc_sql($jsst_id);
+        $jsst_overdueticket = jssupportticket::$_db->get_results($jsst_query);
 
-        $query = "SELECT created FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE isanswered != 1 AND status != 5 AND (lastreply != '0000-00-00 00:00:00') AND date(created) >= '" . esc_sql($curdate) . "' AND date(created) <= '" . esc_sql($fromdate) . "'";
-        if($id) $query .= " AND staffid = ".esc_sql($id);
-        $pendingticket = jssupportticket::$_db->get_results($query);
+        $jsst_query = "SELECT created FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE isanswered != 1 AND status != 5 AND (lastreply != '0000-00-00 00:00:00') AND date(created) >= '" . esc_sql($jsst_curdate) . "' AND date(created) <= '" . esc_sql($jsst_fromdate) . "'";
+        if($jsst_id) $jsst_query .= " AND staffid = ".esc_sql($jsst_id);
+        $jsst_pendingticket = jssupportticket::$_db->get_results($jsst_query);
 
-        $date_openticket = array();
-        $date_closeticket = array();
-        $date_answeredticket = array();
-        $date_overdueticket = array();
-        $date_pendingticket = array();
-        foreach ($openticket AS $ticket) {
-            if (!isset($date_openticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($ticket->created))]))
-                $date_openticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($ticket->created))] = 0;
-            $date_openticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($ticket->created))] = $date_openticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($ticket->created))] + 1;
+        $jsst_date_openticket = array();
+        $jsst_date_closeticket = array();
+        $jsst_date_answeredticket = array();
+        $jsst_date_overdueticket = array();
+        $jsst_date_pendingticket = array();
+        foreach ($jsst_openticket AS $jsst_ticket) {
+            if (!isset($jsst_date_openticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($jsst_ticket->created))]))
+                $jsst_date_openticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($jsst_ticket->created))] = 0;
+            $jsst_date_openticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($jsst_ticket->created))] = $jsst_date_openticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($jsst_ticket->created))] + 1;
         }
-        foreach ($closeticket AS $ticket) {
-            if (!isset($date_closeticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($ticket->created))]))
-                $date_closeticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($ticket->created))] = 0;
-            $date_closeticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($ticket->created))] = $date_closeticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($ticket->created))] + 1;
+        foreach ($jsst_closeticket AS $jsst_ticket) {
+            if (!isset($jsst_date_closeticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($jsst_ticket->created))]))
+                $jsst_date_closeticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($jsst_ticket->created))] = 0;
+            $jsst_date_closeticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($jsst_ticket->created))] = $jsst_date_closeticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($jsst_ticket->created))] + 1;
         }
-        foreach ($answeredticket AS $ticket) {
-            if (!isset($date_answeredticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($ticket->created))]))
-                $date_answeredticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($ticket->created))] = 0;
-            $date_answeredticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($ticket->created))] = $date_answeredticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($ticket->created))] + 1;
+        foreach ($jsst_answeredticket AS $jsst_ticket) {
+            if (!isset($jsst_date_answeredticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($jsst_ticket->created))]))
+                $jsst_date_answeredticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($jsst_ticket->created))] = 0;
+            $jsst_date_answeredticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($jsst_ticket->created))] = $jsst_date_answeredticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($jsst_ticket->created))] + 1;
         }
-        foreach ($overdueticket AS $ticket) {
-            if (!isset($date_overdueticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($ticket->created))]))
-                $date_overdueticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($ticket->created))] = 0;
-            $date_overdueticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($ticket->created))] = $date_overdueticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($ticket->created))] + 1;
+        foreach ($jsst_overdueticket AS $jsst_ticket) {
+            if (!isset($jsst_date_overdueticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($jsst_ticket->created))]))
+                $jsst_date_overdueticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($jsst_ticket->created))] = 0;
+            $jsst_date_overdueticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($jsst_ticket->created))] = $jsst_date_overdueticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($jsst_ticket->created))] + 1;
         }
-        foreach ($pendingticket AS $ticket) {
-            if (!isset($date_pendingticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($ticket->created))]))
-                $date_pendingticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($ticket->created))] = 0;
-            $date_pendingticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($ticket->created))] = $date_pendingticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($ticket->created))] + 1;
+        foreach ($jsst_pendingticket AS $jsst_ticket) {
+            if (!isset($jsst_date_pendingticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($jsst_ticket->created))]))
+                $jsst_date_pendingticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($jsst_ticket->created))] = 0;
+            $jsst_date_pendingticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($jsst_ticket->created))] = $jsst_date_pendingticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($jsst_ticket->created))] + 1;
         }
-        $open_ticket = 0;
-        $close_ticket = 0;
-        $answered_ticket = 0;
-        $overdue_ticket = 0;
-        $pending_ticket = 0;
-        $json_array = "";
+        $jsst_open_ticket = 0;
+        $jsst_close_ticket = 0;
+        $jsst_answered_ticket = 0;
+        $jsst_overdue_ticket = 0;
+        $jsst_pending_ticket = 0;
+        $jsst_json_array = "";
         do{
-            $year = date_i18n('Y',strtotime($nextdate));
-            $month = date_i18n('m',strtotime($nextdate));
-            $month = $month - 1; //js month are 0 based
-            $day = date_i18n('d',strtotime($nextdate));
-            $openticket_tmp = isset($date_openticket[$nextdate]) ? $date_openticket[$nextdate]  : 0;
-            $closeticket_tmp = isset($date_closeticket[$nextdate]) ? $date_closeticket[$nextdate] : 0;
-            $answeredticket_tmp = isset($date_answeredticket[$nextdate]) ? $date_answeredticket[$nextdate] : 0;
-            $overdueticket_tmp = isset($date_overdueticket[$nextdate]) ? $date_overdueticket[$nextdate] : 0;
-            $pendingticket_tmp = isset($date_pendingticket[$nextdate]) ? $date_pendingticket[$nextdate] : 0;
-            $json_array .= "[new Date($year,$month,$day),$openticket_tmp,$answeredticket_tmp,$pendingticket_tmp,$overdueticket_tmp,$closeticket_tmp],";
-            $open_ticket += $openticket_tmp;
-            $close_ticket += $closeticket_tmp;
-            $answered_ticket += $answeredticket_tmp;
-            $overdue_ticket += $overdueticket_tmp;
-            $pending_ticket += $pendingticket_tmp;
-             if($nextdate == $curdate){
+            $jsst_year = date_i18n('Y',strtotime($jsst_nextdate));
+            $jsst_month = date_i18n('m',strtotime($jsst_nextdate));
+            $jsst_month = $jsst_month - 1; //js month are 0 based
+            $jsst_day = date_i18n('d',strtotime($jsst_nextdate));
+            $jsst_openticket_tmp = isset($jsst_date_openticket[$jsst_nextdate]) ? $jsst_date_openticket[$jsst_nextdate]  : 0;
+            $jsst_closeticket_tmp = isset($jsst_date_closeticket[$jsst_nextdate]) ? $jsst_date_closeticket[$jsst_nextdate] : 0;
+            $jsst_answeredticket_tmp = isset($jsst_date_answeredticket[$jsst_nextdate]) ? $jsst_date_answeredticket[$jsst_nextdate] : 0;
+            $jsst_overdueticket_tmp = isset($jsst_date_overdueticket[$jsst_nextdate]) ? $jsst_date_overdueticket[$jsst_nextdate] : 0;
+            $jsst_pendingticket_tmp = isset($jsst_date_pendingticket[$jsst_nextdate]) ? $jsst_date_pendingticket[$jsst_nextdate] : 0;
+            $jsst_json_array .= "[new Date($jsst_year,$jsst_month,$jsst_day),$jsst_openticket_tmp,$jsst_answeredticket_tmp,$jsst_pendingticket_tmp,$jsst_overdueticket_tmp,$jsst_closeticket_tmp],";
+            $jsst_open_ticket += $jsst_openticket_tmp;
+            $jsst_close_ticket += $jsst_closeticket_tmp;
+            $jsst_answered_ticket += $jsst_answeredticket_tmp;
+            $jsst_overdue_ticket += $jsst_overdueticket_tmp;
+            $jsst_pending_ticket += $jsst_pendingticket_tmp;
+             if($jsst_nextdate == $jsst_curdate){
                 break;
             }
-            $nextdate = date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($nextdate . " -1 days"));
-        }while($nextdate != $curdate);
+            $jsst_nextdate = date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($jsst_nextdate . " -1 days"));
+        }while($jsst_nextdate != $jsst_curdate);
 
-        jssupportticket::$_data['line_chart_json_array'] = $json_array;
+        jssupportticket::$jsst_data['line_chart_json_array'] = $jsst_json_array;
 
-        $query = "SELECT staff.photo,staff.id,staff.firstname,staff.lastname,staff.username,staff.email,user.display_name,user.user_email,user.user_nicename,
-                    (SELECT COUNT(id) FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE status = 1 AND (lastreply = '0000-00-00 00:00:00') AND date(created) >= '" . esc_sql($curdate) . "' AND date(created) <= '" . esc_sql($fromdate) . "' AND staffid = staff.id) AS openticket,
-                    (SELECT COUNT(id) FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE status = 5 AND date(created) >= '" . esc_sql($curdate) . "' AND date(created) <= '" . esc_sql($fromdate) . "' AND staffid = staff.id) AS closeticket,
-                    (SELECT COUNT(id) FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE isanswered = 1 AND status != 5 AND status != 1 AND date(created) >= '" . esc_sql($curdate) . "' AND date(created) <= '" . esc_sql($fromdate) . "' AND staffid = staff.id) AS answeredticket,
-                    (SELECT COUNT(id) FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE isoverdue = 1 AND status != 5 AND date(created) >= '" . esc_sql($curdate) . "' AND date(created) <= '" . esc_sql($fromdate) . "' AND staffid = staff.id) AS overdueticket,
-                    (SELECT COUNT(id) FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE date(created) >= '" . esc_sql($curdate) . "' AND date(created) <= '" . esc_sql($fromdate) . "' AND staffid = staff.id) AS allticket,
-                    (SELECT COUNT(id) FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE isanswered != 1 AND status !=  5 AND (lastreply != '0000-00-00 00:00:00') AND date(created) >= '" . esc_sql($curdate) . "' AND date(created) <= '" . esc_sql($fromdate) . "' AND staffid = staff.id) AS pendingticket   ";
+        $jsst_query = "SELECT staff.photo,staff.id,staff.firstname,staff.lastname,staff.username,staff.email,user.display_name,user.user_email,user.user_nicename,
+                    (SELECT COUNT(id) FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE status = 1 AND (lastreply = '0000-00-00 00:00:00') AND date(created) >= '" . esc_sql($jsst_curdate) . "' AND date(created) <= '" . esc_sql($jsst_fromdate) . "' AND staffid = staff.id) AS openticket,
+                    (SELECT COUNT(id) FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE status = 5 AND date(created) >= '" . esc_sql($jsst_curdate) . "' AND date(created) <= '" . esc_sql($jsst_fromdate) . "' AND staffid = staff.id) AS closeticket,
+                    (SELECT COUNT(id) FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE isanswered = 1 AND status != 5 AND status != 1 AND date(created) >= '" . esc_sql($jsst_curdate) . "' AND date(created) <= '" . esc_sql($jsst_fromdate) . "' AND staffid = staff.id) AS answeredticket,
+                    (SELECT COUNT(id) FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE isoverdue = 1 AND status != 5 AND date(created) >= '" . esc_sql($jsst_curdate) . "' AND date(created) <= '" . esc_sql($jsst_fromdate) . "' AND staffid = staff.id) AS overdueticket,
+                    (SELECT COUNT(id) FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE date(created) >= '" . esc_sql($jsst_curdate) . "' AND date(created) <= '" . esc_sql($jsst_fromdate) . "' AND staffid = staff.id) AS allticket,
+                    (SELECT COUNT(id) FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE isanswered != 1 AND status !=  5 AND (lastreply != '0000-00-00 00:00:00') AND date(created) >= '" . esc_sql($jsst_curdate) . "' AND date(created) <= '" . esc_sql($jsst_fromdate) . "' AND staffid = staff.id) AS pendingticket   ";
                     if(in_array('feedback', jssupportticket::$_active_addons)){
-                        $query .=    ",(SELECT AVG(feed.rating) FROM `" . jssupportticket::$_db->prefix . "js_ticket_feedbacks` AS feed JOIN `" . jssupportticket::$_db->prefix . "js_ticket_tickets` AS ticket ON ticket.id= feed.ticketid WHERE date(feed.created) >= '" . esc_sql($curdate) . "' AND date(feed.created) <= '" . esc_sql($fromdate) . "' AND ticket.staffid = staff.id) AS avragerating ";
+                        $jsst_query .=    ",(SELECT AVG(feed.rating) FROM `" . jssupportticket::$_db->prefix . "js_ticket_feedbacks` AS feed JOIN `" . jssupportticket::$_db->prefix . "js_ticket_tickets` AS ticket ON ticket.id= feed.ticketid WHERE date(feed.created) >= '" . esc_sql($jsst_curdate) . "' AND date(feed.created) <= '" . esc_sql($jsst_fromdate) . "' AND ticket.staffid = staff.id) AS avragerating ";
                     }
-                    $query .=  "FROM `".jssupportticket::$_db->prefix."js_ticket_staff` AS staff
+                    $jsst_query .=  "FROM `".jssupportticket::$_db->prefix."js_ticket_staff` AS staff
                     JOIN `".jssupportticket::$_wpprefixforuser."js_ticket_users` AS user ON user.id = staff.uid
-                    WHERE staff.id = ".esc_sql($id);
+                    WHERE staff.id = ".esc_sql($jsst_id);
 
-        $agent = jssupportticket::$_db->get_row($query);
-        if(!empty($agent)){
+        $jsst_agent = jssupportticket::$_db->get_row($jsst_query);
+        if(!empty($jsst_agent)){
             if(in_array('timetracking', jssupportticket::$_active_addons)){
-                $agent->time = JSSTincluder::getJSModel('timetracking')->getAverageTimeByStaffId($agent->id);// time 0 contains avergage time in seconds and 1 contains wheter it is conflicted or not
+                $jsst_agent->time = JSSTincluder::getJSModel('timetracking')->getAverageTimeByStaffId($jsst_agent->id);// time 0 contains avergage time in seconds and 1 contains wheter it is conflicted or not
             }
         }
 
-        jssupportticket::$_data['staff_report'] =$agent;
+        jssupportticket::$jsst_data['staff_report'] =$jsst_agent;
         // ticket ids for staff member on which he replied but are not assigned to him
-        $ticketid_string = '';
+        $jsst_ticketid_string = '';
         if(in_array('timetracking', jssupportticket::$_active_addons)){
-            $query = "SELECT DISTINCT(ticketid) AS ticketid
+            $jsst_query = "SELECT DISTINCT(ticketid) AS ticketid
                         FROM `".jssupportticket::$_db->prefix."js_ticket_staff_time`
-                        WHERE staffid = ".esc_sql($id);
-            $all_tickets = jssupportticket::$_db->get_results($query);
-            $comma = '';
-            foreach ($all_tickets as $ticket) {
-                $ticketid_string .= $comma.$ticket->ticketid;
-                $comma = ', ';
+                        WHERE staffid = ".esc_sql($jsst_id);
+            $jsst_all_tickets = jssupportticket::$_db->get_results($jsst_query);
+            $jsst_comma = '';
+            foreach ($jsst_all_tickets as $jsst_ticket) {
+                $jsst_ticketid_string .= $jsst_comma.$jsst_ticket->ticketid;
+                $jsst_comma = ', ';
             }
         }
 
-        if($ticketid_string == ''){
-            $q_strig = "(staffid = ".esc_sql($id).")";
+        if($jsst_ticketid_string == ''){
+            $jsst_q_strig = "(staffid = ".esc_sql($jsst_id).")";
         }else{
-            $q_strig = "(staffid = ".esc_sql($id)." OR ticket.id IN (".esc_sql($ticketid_string)."))";
+            $jsst_q_strig = "(staffid = ".esc_sql($jsst_id)." OR ticket.id IN (".esc_sql($jsst_ticketid_string)."))";
         }
 
         // Pagination
-        $query = "SELECT COUNT(ticket.id)
+        $jsst_query = "SELECT COUNT(ticket.id)
                     FROM `".jssupportticket::$_db->prefix."js_ticket_tickets` AS ticket
                     LEFT JOIN `".jssupportticket::$_db->prefix."js_ticket_priorities` AS priority ON priority.id = ticket.priorityid
-                    WHERE ".esc_sql($q_strig)." AND date(ticket.created) >= '" . esc_sql($curdate) . "' AND date(ticket.created) <= '" . esc_sql($fromdate) . "' ";
-        $total = jssupportticket::$_db->get_var($query);
-        jssupportticket::$_data['total'] = $total;
-        jssupportticket::$_data[1] = JSSTpagination::getPagination($total,'staffdetailreport');
+                    WHERE ".esc_sql($jsst_q_strig)." AND date(ticket.created) >= '" . esc_sql($jsst_curdate) . "' AND date(ticket.created) <= '" . esc_sql($jsst_fromdate) . "' ";
+        $jsst_total = jssupportticket::$_db->get_var($jsst_query);
+        jssupportticket::$jsst_data['total'] = $jsst_total;
+        jssupportticket::$jsst_data[1] = JSSTpagination::getPagination($jsst_total,'staffdetailreport');
 
         //Tickets
         do_action('jsstFeedbackQueryStaff');
-        $query = "SELECT ticket.*,priority.priority, priority.prioritycolour,status.status AS statustitle,status.statuscolour,status.statusbgcolour ".jssupportticket::$_addon_query['select']."
+        $jsst_query = "SELECT ticket.*,priority.priority, priority.prioritycolour,status.status AS statustitle,status.statuscolour,status.statusbgcolour ".jssupportticket::$_addon_query['select']."
                     FROM `".jssupportticket::$_db->prefix."js_ticket_tickets` AS ticket
                     LEFT JOIN `".jssupportticket::$_db->prefix."js_ticket_priorities` AS priority ON priority.id = ticket.priorityid
                     JOIN `" . jssupportticket::$_db->prefix . "js_ticket_statuses` AS status ON ticket.status = status.id
                     ".jssupportticket::$_addon_query['join']."
-                    WHERE ".esc_sql($q_strig)." AND date(ticket.created) >= '" . esc_sql($curdate) . "' AND date(ticket.created) <= '" . esc_sql($fromdate) . "' ";
-        $query .= " LIMIT " . JSSTpagination::getOffset() . ", " . JSSTpagination::getLimit();
-        do_action('reset_jsst_aadon_query');
-        jssupportticket::$_data['staff_tickets'] = jssupportticket::$_db->get_results($query);
+                    WHERE ".esc_sql($jsst_q_strig)." AND date(ticket.created) >= '" . esc_sql($jsst_curdate) . "' AND date(ticket.created) <= '" . esc_sql($jsst_fromdate) . "' ";
+        $jsst_query .= " LIMIT " . JSSTpagination::getOffset() . ", " . JSSTpagination::getLimit();
+        do_action('jsst_reset_aadon_query');
+        jssupportticket::$jsst_data['staff_tickets'] = jssupportticket::$_db->get_results($jsst_query);
 
         if(in_array('timetracking', jssupportticket::$_active_addons)){
-            foreach (jssupportticket::$_data['staff_tickets'] as $ticket) {
-                 //$ticket->time = JSSTincluder::getJSModel('agent')->getTimeTakenByTicketId($ticket->id);
-                 $ticket->time = JSSTincluder::getJSModel('timetracking')->getTimeTakenByTicketIdAndStaffid($ticket->id,$id);// second parameter is staff id
+            foreach (jssupportticket::$jsst_data['staff_tickets'] as $jsst_ticket) {
+                 //$jsst_ticket->time = JSSTincluder::getJSModel('agent')->getTimeTakenByTicketId($jsst_ticket->id);
+                 $jsst_ticket->time = JSSTincluder::getJSModel('timetracking')->getTimeTakenByTicketIdAndStaffid($jsst_ticket->id,$jsst_id);// second parameter is staff id
             }
         }
         return;
     }
 
-    function getDepartmentDetailReportByDepartmentId($id){
-        if(!is_numeric($id)) return false;
+    function getDepartmentDetailReportByDepartmentId($jsst_id){
+        if(!is_numeric($jsst_id)) return false;
 
-        $start_date ='date_start';
-        $end_date ='date_end';
+        $jsst_start_date ='date_start';
+        $jsst_end_date ='date_end';
 
-        $date_start = isset(jssupportticket::$_search['report']) ? jssupportticket::$_search['report']['date_start'] : '';
-        $date_end = isset(jssupportticket::$_search['report']) ? jssupportticket::$_search['report']['date_end'] : '';
-        if(isset($date_start) && $date_start != ""){
-            $date_start = date_i18n('Y-m-d',strtotime($date_start));
+        $jsst_date_start = isset(jssupportticket::$_search['report']) ? jssupportticket::$_search['report']['date_start'] : '';
+        $jsst_date_end = isset(jssupportticket::$_search['report']) ? jssupportticket::$_search['report']['date_end'] : '';
+        if(isset($jsst_date_start) && $jsst_date_start != ""){
+            $jsst_date_start = date_i18n('Y-m-d',strtotime($jsst_date_start));
         }
-        if(isset($date_end) && $date_end != ""){
-            $date_end = date_i18n('Y-m-d',strtotime($date_end));
+        if(isset($jsst_date_end) && $jsst_date_end != ""){
+            $jsst_date_end = date_i18n('Y-m-d',strtotime($jsst_date_end));
         }
-        if($date_start > $date_end){
-            $tmp = $date_start;
-            $date_start = $date_end;
-            $date_end = $tmp;
+        if($jsst_date_start > $jsst_date_end){
+            $jsst_tmp = $jsst_date_start;
+            $jsst_date_start = $jsst_date_end;
+            $jsst_date_end = $jsst_tmp;
         }
 
         //Line Chart Data
-        $curdate = ($date_start != null) ? date_i18n('Y-m-d',strtotime($date_start)) : date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime("now -1 month"));
-        $fromdate = ($date_end != null) ? date_i18n('Y-m-d',strtotime($date_end)) : date_i18n('Y-m-d');
-        jssupportticket::$_data['filter'][$start_date] = $curdate;
-        jssupportticket::$_data['filter'][$end_date] = $fromdate;
-        jssupportticket::$_data['filter']['id'] = $id;
+        $jsst_curdate = ($jsst_date_start != null) ? date_i18n('Y-m-d',strtotime($jsst_date_start)) : date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime("now -1 month"));
+        $jsst_fromdate = ($jsst_date_end != null) ? date_i18n('Y-m-d',strtotime($jsst_date_end)) : date_i18n('Y-m-d');
+        jssupportticket::$jsst_data['filter'][$jsst_start_date] = $jsst_curdate;
+        jssupportticket::$jsst_data['filter'][$jsst_end_date] = $jsst_fromdate;
+        jssupportticket::$jsst_data['filter']['id'] = $jsst_id;
 
-        $nextdate = $fromdate;
+        $jsst_nextdate = $jsst_fromdate;
 
         //Query to get Data
-        $query = "SELECT created FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE status = 1 AND (lastreply = '0000-00-00 00:00:00') AND date(created) >= '" . esc_sql($curdate) . "' AND date(created) <= '" . esc_sql($fromdate) . "'";
-        if($id) $query .= " AND departmentid = ".esc_sql($id);
-        $openticket = jssupportticket::$_db->get_results($query);
+        $jsst_query = "SELECT created FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE status = 1 AND (lastreply = '0000-00-00 00:00:00') AND date(created) >= '" . esc_sql($jsst_curdate) . "' AND date(created) <= '" . esc_sql($jsst_fromdate) . "'";
+        if($jsst_id) $jsst_query .= " AND departmentid = ".esc_sql($jsst_id);
+        $jsst_openticket = jssupportticket::$_db->get_results($jsst_query);
 
-        $query = "SELECT created FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE status = 5 AND date(created) >= '" . esc_sql($curdate) . "' AND date(created) <= '" . esc_sql($fromdate) . "'";
-        if($id) $query .= " AND departmentid = ".esc_sql($id);
-        $closeticket = jssupportticket::$_db->get_results($query);
+        $jsst_query = "SELECT created FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE status = 5 AND date(created) >= '" . esc_sql($jsst_curdate) . "' AND date(created) <= '" . esc_sql($jsst_fromdate) . "'";
+        if($jsst_id) $jsst_query .= " AND departmentid = ".esc_sql($jsst_id);
+        $jsst_closeticket = jssupportticket::$_db->get_results($jsst_query);
 
-        $query = "SELECT created FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE isanswered = 1 AND status != 5 AND status != 1 AND date(created) >= '" . esc_sql($curdate) . "' AND date(created) <= '" . esc_sql($fromdate) . "'";
-        if($id) $query .= " AND departmentid = ".esc_sql($id);
-        $answeredticket = jssupportticket::$_db->get_results($query);
+        $jsst_query = "SELECT created FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE isanswered = 1 AND status != 5 AND status != 1 AND date(created) >= '" . esc_sql($jsst_curdate) . "' AND date(created) <= '" . esc_sql($jsst_fromdate) . "'";
+        if($jsst_id) $jsst_query .= " AND departmentid = ".esc_sql($jsst_id);
+        $jsst_answeredticket = jssupportticket::$_db->get_results($jsst_query);
 
-        $query = "SELECT created FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE isoverdue = 1 AND status != 5 AND date(created) >= '" . esc_sql($curdate) . "' AND date(created) <= '" . esc_sql($fromdate) . "'";
-        if($id) $query .= " AND departmentid = ".esc_sql($id);
-        $overdueticket = jssupportticket::$_db->get_results($query);
+        $jsst_query = "SELECT created FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE isoverdue = 1 AND status != 5 AND date(created) >= '" . esc_sql($jsst_curdate) . "' AND date(created) <= '" . esc_sql($jsst_fromdate) . "'";
+        if($jsst_id) $jsst_query .= " AND departmentid = ".esc_sql($jsst_id);
+        $jsst_overdueticket = jssupportticket::$_db->get_results($jsst_query);
 
-        $query = "SELECT created FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE isanswered != 1 AND status != 5 AND (lastreply != '0000-00-00 00:00:00') AND date(created) >= '" . esc_sql($curdate) . "' AND date(created) <= '" . esc_sql($fromdate) . "'";
-        if($id) $query .= " AND departmentid = ".esc_sql($id);
-        $pendingticket = jssupportticket::$_db->get_results($query);
+        $jsst_query = "SELECT created FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE isanswered != 1 AND status != 5 AND (lastreply != '0000-00-00 00:00:00') AND date(created) >= '" . esc_sql($jsst_curdate) . "' AND date(created) <= '" . esc_sql($jsst_fromdate) . "'";
+        if($jsst_id) $jsst_query .= " AND departmentid = ".esc_sql($jsst_id);
+        $jsst_pendingticket = jssupportticket::$_db->get_results($jsst_query);
 
-        $date_openticket = array();
-        $date_closeticket = array();
-        $date_answeredticket = array();
-        $date_overdueticket = array();
-        $date_pendingticket = array();
-        foreach ($openticket AS $ticket) {
-            if (!isset($date_openticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($ticket->created))]))
-                $date_openticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($ticket->created))] = 0;
-            $date_openticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($ticket->created))] = $date_openticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($ticket->created))] + 1;
+        $jsst_date_openticket = array();
+        $jsst_date_closeticket = array();
+        $jsst_date_answeredticket = array();
+        $jsst_date_overdueticket = array();
+        $jsst_date_pendingticket = array();
+        foreach ($jsst_openticket AS $jsst_ticket) {
+            if (!isset($jsst_date_openticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($jsst_ticket->created))]))
+                $jsst_date_openticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($jsst_ticket->created))] = 0;
+            $jsst_date_openticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($jsst_ticket->created))] = $jsst_date_openticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($jsst_ticket->created))] + 1;
         }
-        foreach ($closeticket AS $ticket) {
-            if (!isset($date_closeticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($ticket->created))]))
-                $date_closeticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($ticket->created))] = 0;
-            $date_closeticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($ticket->created))] = $date_closeticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($ticket->created))] + 1;
+        foreach ($jsst_closeticket AS $jsst_ticket) {
+            if (!isset($jsst_date_closeticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($jsst_ticket->created))]))
+                $jsst_date_closeticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($jsst_ticket->created))] = 0;
+            $jsst_date_closeticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($jsst_ticket->created))] = $jsst_date_closeticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($jsst_ticket->created))] + 1;
         }
-        foreach ($answeredticket AS $ticket) {
-            if (!isset($date_answeredticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($ticket->created))]))
-                $date_answeredticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($ticket->created))] = 0;
-            $date_answeredticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($ticket->created))] = $date_answeredticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($ticket->created))] + 1;
+        foreach ($jsst_answeredticket AS $jsst_ticket) {
+            if (!isset($jsst_date_answeredticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($jsst_ticket->created))]))
+                $jsst_date_answeredticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($jsst_ticket->created))] = 0;
+            $jsst_date_answeredticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($jsst_ticket->created))] = $jsst_date_answeredticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($jsst_ticket->created))] + 1;
         }
-        foreach ($overdueticket AS $ticket) {
-            if (!isset($date_overdueticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($ticket->created))]))
-                $date_overdueticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($ticket->created))] = 0;
-            $date_overdueticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($ticket->created))] = $date_overdueticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($ticket->created))] + 1;
+        foreach ($jsst_overdueticket AS $jsst_ticket) {
+            if (!isset($jsst_date_overdueticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($jsst_ticket->created))]))
+                $jsst_date_overdueticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($jsst_ticket->created))] = 0;
+            $jsst_date_overdueticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($jsst_ticket->created))] = $jsst_date_overdueticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($jsst_ticket->created))] + 1;
         }
-        foreach ($pendingticket AS $ticket) {
-            if (!isset($date_pendingticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($ticket->created))]))
-                $date_pendingticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($ticket->created))] = 0;
-            $date_pendingticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($ticket->created))] = $date_pendingticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($ticket->created))] + 1;
+        foreach ($jsst_pendingticket AS $jsst_ticket) {
+            if (!isset($jsst_date_pendingticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($jsst_ticket->created))]))
+                $jsst_date_pendingticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($jsst_ticket->created))] = 0;
+            $jsst_date_pendingticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($jsst_ticket->created))] = $jsst_date_pendingticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($jsst_ticket->created))] + 1;
         }
-        $open_ticket = 0;
-        $close_ticket = 0;
-        $answered_ticket = 0;
-        $overdue_ticket = 0;
-        $pending_ticket = 0;
-        $json_array = "";
+        $jsst_open_ticket = 0;
+        $jsst_close_ticket = 0;
+        $jsst_answered_ticket = 0;
+        $jsst_overdue_ticket = 0;
+        $jsst_pending_ticket = 0;
+        $jsst_json_array = "";
         do{
-            $year = date_i18n('Y',strtotime($nextdate));
-            $month = date_i18n('m',strtotime($nextdate));
-            $month = $month - 1; //js month are 0 based
-            $day = date_i18n('d',strtotime($nextdate));
-            $openticket_tmp = isset($date_openticket[$nextdate]) ? $date_openticket[$nextdate]  : 0;
-            $closeticket_tmp = isset($date_closeticket[$nextdate]) ? $date_closeticket[$nextdate] : 0;
-            $answeredticket_tmp = isset($date_answeredticket[$nextdate]) ? $date_answeredticket[$nextdate] : 0;
-            $overdueticket_tmp = isset($date_overdueticket[$nextdate]) ? $date_overdueticket[$nextdate] : 0;
-            $pendingticket_tmp = isset($date_pendingticket[$nextdate]) ? $date_pendingticket[$nextdate] : 0;
-            $json_array .= "[new Date($year,$month,$day),$openticket_tmp,$answeredticket_tmp,$pendingticket_tmp,$overdueticket_tmp,$closeticket_tmp],";
-            $open_ticket += $openticket_tmp;
-            $close_ticket += $closeticket_tmp;
-            $answered_ticket += $answeredticket_tmp;
-            $overdue_ticket += $overdueticket_tmp;
-            $pending_ticket += $pendingticket_tmp;
-             if($nextdate == $curdate){
+            $jsst_year = date_i18n('Y',strtotime($jsst_nextdate));
+            $jsst_month = date_i18n('m',strtotime($jsst_nextdate));
+            $jsst_month = $jsst_month - 1; //js month are 0 based
+            $jsst_day = date_i18n('d',strtotime($jsst_nextdate));
+            $jsst_openticket_tmp = isset($jsst_date_openticket[$jsst_nextdate]) ? $jsst_date_openticket[$jsst_nextdate]  : 0;
+            $jsst_closeticket_tmp = isset($jsst_date_closeticket[$jsst_nextdate]) ? $jsst_date_closeticket[$jsst_nextdate] : 0;
+            $jsst_answeredticket_tmp = isset($jsst_date_answeredticket[$jsst_nextdate]) ? $jsst_date_answeredticket[$jsst_nextdate] : 0;
+            $jsst_overdueticket_tmp = isset($jsst_date_overdueticket[$jsst_nextdate]) ? $jsst_date_overdueticket[$jsst_nextdate] : 0;
+            $jsst_pendingticket_tmp = isset($jsst_date_pendingticket[$jsst_nextdate]) ? $jsst_date_pendingticket[$jsst_nextdate] : 0;
+            $jsst_json_array .= "[new Date($jsst_year,$jsst_month,$jsst_day),$jsst_openticket_tmp,$jsst_answeredticket_tmp,$jsst_pendingticket_tmp,$jsst_overdueticket_tmp,$jsst_closeticket_tmp],";
+            $jsst_open_ticket += $jsst_openticket_tmp;
+            $jsst_close_ticket += $jsst_closeticket_tmp;
+            $jsst_answered_ticket += $jsst_answeredticket_tmp;
+            $jsst_overdue_ticket += $jsst_overdueticket_tmp;
+            $jsst_pending_ticket += $jsst_pendingticket_tmp;
+             if($jsst_nextdate == $jsst_curdate){
                 break;
             }
-            $nextdate = date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($nextdate . " -1 days"));
-        }while($nextdate != $curdate);
+            $jsst_nextdate = date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($jsst_nextdate . " -1 days"));
+        }while($jsst_nextdate != $jsst_curdate);
 
-        jssupportticket::$_data['line_chart_json_array'] = $json_array;
+        jssupportticket::$jsst_data['line_chart_json_array'] = $jsst_json_array;
 
 
         // Pagination
-        $query = "SELECT count(ticket.id)
+        $jsst_query = "SELECT count(ticket.id)
                     FROM `".jssupportticket::$_db->prefix."js_ticket_tickets` AS ticket
-                    JOIN `".jssupportticket::$_db->prefix."js_ticket_departments` AS department ON department.id = ticket.departmentid WHERE department.id = ".esc_sql($id);
-        $total = jssupportticket::$_db->get_var($query);
-        jssupportticket::$_data['total'] = $total;
-        jssupportticket::$_data[1] = JSSTpagination::getPagination($total);
+                    JOIN `".jssupportticket::$_db->prefix."js_ticket_departments` AS department ON department.id = ticket.departmentid WHERE department.id = ".esc_sql($jsst_id);
+        $jsst_total = jssupportticket::$_db->get_var($jsst_query);
+        jssupportticket::$jsst_data['total'] = $jsst_total;
+        jssupportticket::$jsst_data[1] = JSSTpagination::getPagination($jsst_total);
 
-        $query = "SELECT department.id,department.departmentname,email.email,
+        $jsst_query = "SELECT department.id,department.departmentname,email.email,
                     (SELECT COUNT(id) FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE departmentid = department.id) AS allticket,
-                    (SELECT COUNT(id) FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE status = 1 AND (lastreply = '0000-00-00 00:00:00') AND date(created) >= '" . esc_sql($curdate) . "' AND date(created) <= '" . esc_sql($fromdate) . "' AND departmentid = department.id) AS openticket,
-                    (SELECT COUNT(id) FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE status = 5 AND date(created) >= '" . esc_sql($curdate) . "' AND date(created) <= '" . esc_sql($fromdate) . "' AND departmentid = department.id) AS closeticket,
-                    (SELECT COUNT(id) FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE isanswered = 1 AND status != 5 AND status != 1 AND date(created) >= '" . esc_sql($curdate) . "' AND date(created) <= '" . esc_sql($fromdate) . "' AND departmentid = department.id) AS answeredticket,
-                    (SELECT COUNT(id) FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE isoverdue = 1 AND status != 5 AND date(created) >= '" . esc_sql($curdate) . "' AND date(created) <= '" . esc_sql($fromdate) . "' AND departmentid = department.id) AS overdueticket,
-                    (SELECT COUNT(id) FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE isanswered != 1 AND status != 5 AND (lastreply != '0000-00-00 00:00:00') AND date(created) >= '" . esc_sql($curdate) . "' AND date(created) <= '" . esc_sql($fromdate) . "' AND departmentid = department.id) AS pendingticket
+                    (SELECT COUNT(id) FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE status = 1 AND (lastreply = '0000-00-00 00:00:00') AND date(created) >= '" . esc_sql($jsst_curdate) . "' AND date(created) <= '" . esc_sql($jsst_fromdate) . "' AND departmentid = department.id) AS openticket,
+                    (SELECT COUNT(id) FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE status = 5 AND date(created) >= '" . esc_sql($jsst_curdate) . "' AND date(created) <= '" . esc_sql($jsst_fromdate) . "' AND departmentid = department.id) AS closeticket,
+                    (SELECT COUNT(id) FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE isanswered = 1 AND status != 5 AND status != 1 AND date(created) >= '" . esc_sql($jsst_curdate) . "' AND date(created) <= '" . esc_sql($jsst_fromdate) . "' AND departmentid = department.id) AS answeredticket,
+                    (SELECT COUNT(id) FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE isoverdue = 1 AND status != 5 AND date(created) >= '" . esc_sql($jsst_curdate) . "' AND date(created) <= '" . esc_sql($jsst_fromdate) . "' AND departmentid = department.id) AS overdueticket,
+                    (SELECT COUNT(id) FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE isanswered != 1 AND status != 5 AND (lastreply != '0000-00-00 00:00:00') AND date(created) >= '" . esc_sql($jsst_curdate) . "' AND date(created) <= '" . esc_sql($jsst_fromdate) . "' AND departmentid = department.id) AS pendingticket
                     FROM `".jssupportticket::$_db->prefix."js_ticket_departments` AS department
                     JOIN `".jssupportticket::$_db->prefix."js_ticket_email` AS email ON department.emailid = email.id
-                    WHERE department.id = ".esc_sql($id);
-        //$query .= " LIMIT " . JSSTpagination::getOffset() . ", " . JSSTpagination::getLimit();
+                    WHERE department.id = ".esc_sql($jsst_id);
+        //$jsst_query .= " LIMIT " . JSSTpagination::getOffset() . ", " . JSSTpagination::getLimit();
         // No need of pagination because query return only single record
-        $depatments = jssupportticket::$_db->get_row($query);
-        jssupportticket::$_data['depatments_report'] =$depatments;
+        $jsst_depatments = jssupportticket::$_db->get_row($jsst_query);
+        jssupportticket::$jsst_data['depatments_report'] =$jsst_depatments;
 
         //Tickets
         do_action('jsstFeedbackQueryStaff');
-        $query = "SELECT ticket.*,priority.priority, priority.prioritycolour,status.status AS statustitle,status.statuscolour,status.statusbgcolour ".jssupportticket::$_addon_query['select']."
+        $jsst_query = "SELECT ticket.*,priority.priority, priority.prioritycolour,status.status AS statustitle,status.statuscolour,status.statusbgcolour ".jssupportticket::$_addon_query['select']."
                     FROM `".jssupportticket::$_db->prefix."js_ticket_tickets` AS ticket
                     LEFT JOIN `".jssupportticket::$_db->prefix."js_ticket_priorities` AS priority ON priority.id = ticket.priorityid
                     JOIN `" . jssupportticket::$_db->prefix . "js_ticket_statuses` AS status ON ticket.status = status.id
                     ".jssupportticket::$_addon_query['join']."
-                    WHERE departmentid = ".esc_sql($id)." AND date(ticket.created) >= '" . esc_sql($curdate) . "' AND date(ticket.created) <= '" . esc_sql($fromdate) . "' ";
-        $query .= " LIMIT " . JSSTpagination::getOffset() . ", " . JSSTpagination::getLimit();
-        do_action('reset_jsst_aadon_query');
+                    WHERE departmentid = ".esc_sql($jsst_id)." AND date(ticket.created) >= '" . esc_sql($jsst_curdate) . "' AND date(ticket.created) <= '" . esc_sql($jsst_fromdate) . "' ";
+        $jsst_query .= " LIMIT " . JSSTpagination::getOffset() . ", " . JSSTpagination::getLimit();
+        do_action('jsst_reset_aadon_query');
 
-        jssupportticket::$_data['department_tickets'] = jssupportticket::$_db->get_results($query);
+        jssupportticket::$jsst_data['department_tickets'] = jssupportticket::$_db->get_results($jsst_query);
         if(in_array('timetracking', jssupportticket::$_active_addons)){
-            foreach (jssupportticket::$_data['department_tickets'] as $ticket) {
-                 $ticket->time = JSSTincluder::getJSModel('timetracking')->getTimeTakenByTicketId($ticket->id);
+            foreach (jssupportticket::$jsst_data['department_tickets'] as $jsst_ticket) {
+                 $jsst_ticket->time = JSSTincluder::getJSModel('timetracking')->getTimeTakenByTicketId($jsst_ticket->id);
             }
         }
     }
 
 
-    function getStaffDetailReportByUserId($id){
-        if(!is_numeric($id)) return false;
+    function getStaffDetailReportByUserId($jsst_id){
+        if(!is_numeric($jsst_id)) return false;
 
-        $date_start = isset(jssupportticket::$_search['report']) ? jssupportticket::$_search['report']['date_start'] : '';
-        $date_end = isset(jssupportticket::$_search['report']) ? jssupportticket::$_search['report']['date_end'] : '';
-        if(isset($date_start) && $date_start != ""){
-            $date_start = date_i18n('Y-m-d',strtotime($date_start));
+        $jsst_date_start = isset(jssupportticket::$_search['report']) ? jssupportticket::$_search['report']['date_start'] : '';
+        $jsst_date_end = isset(jssupportticket::$_search['report']) ? jssupportticket::$_search['report']['date_end'] : '';
+        if(isset($jsst_date_start) && $jsst_date_start != ""){
+            $jsst_date_start = date_i18n('Y-m-d',strtotime($jsst_date_start));
         }
-        if(isset($date_end) && $date_end != ""){
-            $date_end = date_i18n('Y-m-d',strtotime($date_end));
+        if(isset($jsst_date_end) && $jsst_date_end != ""){
+            $jsst_date_end = date_i18n('Y-m-d',strtotime($jsst_date_end));
         }
-        if($date_start > $date_end){
-            $tmp = $date_start;
-            $date_start = $date_end;
-            $date_end = $tmp;
+        if($jsst_date_start > $jsst_date_end){
+            $jsst_tmp = $jsst_date_start;
+            $jsst_date_start = $jsst_date_end;
+            $jsst_date_end = $jsst_tmp;
         }
         //Line Chart Data
-        $curdate = ($date_start != null) ? date_i18n('Y-m-d',strtotime($date_start)) : date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime("now -1 month"));
-        $fromdate = ($date_end != null) ? date_i18n('Y-m-d',strtotime($date_end)) : date_i18n('Y-m-d');
-        jssupportticket::$_data['filter']['date_start'] = $curdate;
-        jssupportticket::$_data['filter']['date_end'] = $fromdate;
-        jssupportticket::$_data['filter']['uid'] = $id;
-        $nextdate = $fromdate;
+        $jsst_curdate = ($jsst_date_start != null) ? date_i18n('Y-m-d',strtotime($jsst_date_start)) : date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime("now -1 month"));
+        $jsst_fromdate = ($jsst_date_end != null) ? date_i18n('Y-m-d',strtotime($jsst_date_end)) : date_i18n('Y-m-d');
+        jssupportticket::$jsst_data['filter']['date_start'] = $jsst_curdate;
+        jssupportticket::$jsst_data['filter']['date_end'] = $jsst_fromdate;
+        jssupportticket::$jsst_data['filter']['uid'] = $jsst_id;
+        $jsst_nextdate = $jsst_fromdate;
 
         // forexport
-        $_SESSION['forexport']['curdate'] = $curdate;
-        $_SESSION['forexport']['fromdate'] = $fromdate;
-        $_SESSION['forexport']['id'] = $id;
+        $_SESSION['forexport']['curdate'] = $jsst_curdate;
+        $_SESSION['forexport']['fromdate'] = $jsst_fromdate;
+        $_SESSION['forexport']['id'] = $jsst_id;
 
 
         //Query to get Data
-        $query = "SELECT created FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE status = 1 AND (lastreply = '0000-00-00 00:00:00') AND date(created) >= '" . esc_sql($curdate) . "' AND date(created) <= '" . esc_sql($fromdate) . "'";
-        if($id) $query .= " AND uid = ".esc_sql($id);
-        $openticket = jssupportticket::$_db->get_results($query);
+        $jsst_query = "SELECT created FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE status = 1 AND (lastreply = '0000-00-00 00:00:00') AND date(created) >= '" . esc_sql($jsst_curdate) . "' AND date(created) <= '" . esc_sql($jsst_fromdate) . "'";
+        if($jsst_id) $jsst_query .= " AND uid = ".esc_sql($jsst_id);
+        $jsst_openticket = jssupportticket::$_db->get_results($jsst_query);
 
-        $query = "SELECT created FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE status = 5 AND date(created) >= '" . esc_sql($curdate) . "' AND date(created) <= '" . esc_sql($fromdate) . "'";
-        if($id) $query .= " AND uid = ".esc_sql($id);
-        $closeticket = jssupportticket::$_db->get_results($query);
+        $jsst_query = "SELECT created FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE status = 5 AND date(created) >= '" . esc_sql($jsst_curdate) . "' AND date(created) <= '" . esc_sql($jsst_fromdate) . "'";
+        if($jsst_id) $jsst_query .= " AND uid = ".esc_sql($jsst_id);
+        $jsst_closeticket = jssupportticket::$_db->get_results($jsst_query);
 
-        $query = "SELECT created FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE isanswered = 1 AND status != 5 AND status != 1 AND date(created) >= '" . esc_sql($curdate) . "' AND date(created) <= '" . esc_sql($fromdate) . "'";
-        if($id) $query .= " AND uid = ".esc_sql($id);
-        $answeredticket = jssupportticket::$_db->get_results($query);
+        $jsst_query = "SELECT created FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE isanswered = 1 AND status != 5 AND status != 1 AND date(created) >= '" . esc_sql($jsst_curdate) . "' AND date(created) <= '" . esc_sql($jsst_fromdate) . "'";
+        if($jsst_id) $jsst_query .= " AND uid = ".esc_sql($jsst_id);
+        $jsst_answeredticket = jssupportticket::$_db->get_results($jsst_query);
 
-        $query = "SELECT created FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE isoverdue = 1 AND status != 5 AND date(created) >= '" . esc_sql($curdate) . "' AND date(created) <= '" . esc_sql($fromdate) . "'";
-        if($id) $query .= " AND uid = ".esc_sql($id);
-        $overdueticket = jssupportticket::$_db->get_results($query);
+        $jsst_query = "SELECT created FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE isoverdue = 1 AND status != 5 AND date(created) >= '" . esc_sql($jsst_curdate) . "' AND date(created) <= '" . esc_sql($jsst_fromdate) . "'";
+        if($jsst_id) $jsst_query .= " AND uid = ".esc_sql($jsst_id);
+        $jsst_overdueticket = jssupportticket::$_db->get_results($jsst_query);
 
-        $query = "SELECT created FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE isanswered != 1 AND status != 5 AND (lastreply != '0000-00-00 00:00:00') AND date(created) >= '" . esc_sql($curdate) . "' AND date(created) <= '" . esc_sql($fromdate) . "'";
-        if($id) $query .= " AND uid = ".esc_sql($id);
-        $pendingticket = jssupportticket::$_db->get_results($query);
+        $jsst_query = "SELECT created FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE isanswered != 1 AND status != 5 AND (lastreply != '0000-00-00 00:00:00') AND date(created) >= '" . esc_sql($jsst_curdate) . "' AND date(created) <= '" . esc_sql($jsst_fromdate) . "'";
+        if($jsst_id) $jsst_query .= " AND uid = ".esc_sql($jsst_id);
+        $jsst_pendingticket = jssupportticket::$_db->get_results($jsst_query);
 
-        $date_openticket = array();
-        $date_closeticket = array();
-        $date_answeredticket = array();
-        $date_overdueticket = array();
-        $date_pendingticket = array();
-        foreach ($openticket AS $ticket) {
-            if (!isset($date_openticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($ticket->created))]))
-                $date_openticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($ticket->created))] = 0;
-            $date_openticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($ticket->created))] = $date_openticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($ticket->created))] + 1;
+        $jsst_date_openticket = array();
+        $jsst_date_closeticket = array();
+        $jsst_date_answeredticket = array();
+        $jsst_date_overdueticket = array();
+        $jsst_date_pendingticket = array();
+        foreach ($jsst_openticket AS $jsst_ticket) {
+            if (!isset($jsst_date_openticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($jsst_ticket->created))]))
+                $jsst_date_openticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($jsst_ticket->created))] = 0;
+            $jsst_date_openticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($jsst_ticket->created))] = $jsst_date_openticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($jsst_ticket->created))] + 1;
         }
-        foreach ($closeticket AS $ticket) {
-            if (!isset($date_closeticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($ticket->created))]))
-                $date_closeticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($ticket->created))] = 0;
-            $date_closeticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($ticket->created))] = $date_closeticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($ticket->created))] + 1;
+        foreach ($jsst_closeticket AS $jsst_ticket) {
+            if (!isset($jsst_date_closeticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($jsst_ticket->created))]))
+                $jsst_date_closeticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($jsst_ticket->created))] = 0;
+            $jsst_date_closeticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($jsst_ticket->created))] = $jsst_date_closeticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($jsst_ticket->created))] + 1;
         }
-        foreach ($answeredticket AS $ticket) {
-            if (!isset($date_answeredticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($ticket->created))]))
-                $date_answeredticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($ticket->created))] = 0;
-            $date_answeredticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($ticket->created))] = $date_answeredticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($ticket->created))] + 1;
+        foreach ($jsst_answeredticket AS $jsst_ticket) {
+            if (!isset($jsst_date_answeredticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($jsst_ticket->created))]))
+                $jsst_date_answeredticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($jsst_ticket->created))] = 0;
+            $jsst_date_answeredticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($jsst_ticket->created))] = $jsst_date_answeredticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($jsst_ticket->created))] + 1;
         }
-        foreach ($overdueticket AS $ticket) {
-            if (!isset($date_overdueticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($ticket->created))]))
-                $date_overdueticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($ticket->created))] = 0;
-            $date_overdueticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($ticket->created))] = $date_overdueticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($ticket->created))] + 1;
+        foreach ($jsst_overdueticket AS $jsst_ticket) {
+            if (!isset($jsst_date_overdueticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($jsst_ticket->created))]))
+                $jsst_date_overdueticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($jsst_ticket->created))] = 0;
+            $jsst_date_overdueticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($jsst_ticket->created))] = $jsst_date_overdueticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($jsst_ticket->created))] + 1;
         }
-        foreach ($pendingticket AS $ticket) {
-            if (!isset($date_pendingticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($ticket->created))]))
-                $date_pendingticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($ticket->created))] = 0;
-            $date_pendingticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($ticket->created))] = $date_pendingticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($ticket->created))] + 1;
+        foreach ($jsst_pendingticket AS $jsst_ticket) {
+            if (!isset($jsst_date_pendingticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($jsst_ticket->created))]))
+                $jsst_date_pendingticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($jsst_ticket->created))] = 0;
+            $jsst_date_pendingticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($jsst_ticket->created))] = $jsst_date_pendingticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($jsst_ticket->created))] + 1;
         }
-        $open_ticket = 0;
-        $close_ticket = 0;
-        $answered_ticket = 0;
-        $overdue_ticket = 0;
-        $pending_ticket = 0;
-        $json_array = "";
+        $jsst_open_ticket = 0;
+        $jsst_close_ticket = 0;
+        $jsst_answered_ticket = 0;
+        $jsst_overdue_ticket = 0;
+        $jsst_pending_ticket = 0;
+        $jsst_json_array = "";
         do{
-            $year = date_i18n('Y',strtotime($nextdate));
-            $month = date_i18n('m',strtotime($nextdate));
-            $month = $month - 1; //js month are 0 based
-            $day = date_i18n('d',strtotime($nextdate));
-            $openticket_tmp = isset($date_openticket[$nextdate]) ? $date_openticket[$nextdate]  : 0;
-            $closeticket_tmp = isset($date_closeticket[$nextdate]) ? $date_closeticket[$nextdate] : 0;
-            $answeredticket_tmp = isset($date_answeredticket[$nextdate]) ? $date_answeredticket[$nextdate] : 0;
-            $overdueticket_tmp = isset($date_overdueticket[$nextdate]) ? $date_overdueticket[$nextdate] : 0;
-            $pendingticket_tmp = isset($date_pendingticket[$nextdate]) ? $date_pendingticket[$nextdate] : 0;
-            $json_array .= "[new Date($year,$month,$day),$openticket_tmp,$answeredticket_tmp,$pendingticket_tmp,$overdueticket_tmp,$closeticket_tmp],";
-            $open_ticket += $openticket_tmp;
-            $close_ticket += $closeticket_tmp;
-            $answered_ticket += $answeredticket_tmp;
-            $overdue_ticket += $overdueticket_tmp;
-            $pending_ticket += $pendingticket_tmp;
-             if($nextdate == $curdate){
+            $jsst_year = date_i18n('Y',strtotime($jsst_nextdate));
+            $jsst_month = date_i18n('m',strtotime($jsst_nextdate));
+            $jsst_month = $jsst_month - 1; //js month are 0 based
+            $jsst_day = date_i18n('d',strtotime($jsst_nextdate));
+            $jsst_openticket_tmp = isset($jsst_date_openticket[$jsst_nextdate]) ? $jsst_date_openticket[$jsst_nextdate]  : 0;
+            $jsst_closeticket_tmp = isset($jsst_date_closeticket[$jsst_nextdate]) ? $jsst_date_closeticket[$jsst_nextdate] : 0;
+            $jsst_answeredticket_tmp = isset($jsst_date_answeredticket[$jsst_nextdate]) ? $jsst_date_answeredticket[$jsst_nextdate] : 0;
+            $jsst_overdueticket_tmp = isset($jsst_date_overdueticket[$jsst_nextdate]) ? $jsst_date_overdueticket[$jsst_nextdate] : 0;
+            $jsst_pendingticket_tmp = isset($jsst_date_pendingticket[$jsst_nextdate]) ? $jsst_date_pendingticket[$jsst_nextdate] : 0;
+            $jsst_json_array .= "[new Date($jsst_year,$jsst_month,$jsst_day),$jsst_openticket_tmp,$jsst_answeredticket_tmp,$jsst_pendingticket_tmp,$jsst_overdueticket_tmp,$jsst_closeticket_tmp],";
+            $jsst_open_ticket += $jsst_openticket_tmp;
+            $jsst_close_ticket += $jsst_closeticket_tmp;
+            $jsst_answered_ticket += $jsst_answeredticket_tmp;
+            $jsst_overdue_ticket += $jsst_overdueticket_tmp;
+            $jsst_pending_ticket += $jsst_pendingticket_tmp;
+             if($jsst_nextdate == $jsst_curdate){
                 break;
             }
-            $nextdate = date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($nextdate . " -1 days"));
-        }while($nextdate != $curdate);
+            $jsst_nextdate = date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($jsst_nextdate . " -1 days"));
+        }while($jsst_nextdate != $jsst_curdate);
 
-        jssupportticket::$_data['line_chart_json_array'] = $json_array;
+        jssupportticket::$jsst_data['line_chart_json_array'] = $jsst_json_array;
 
-        $query = "SELECT user.display_name,user.user_email,user.user_nicename,user.id,
+        $jsst_query = "SELECT user.display_name,user.user_email,user.user_nicename,user.id,
                     (SELECT COUNT(id) FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE uid = user.id) AS allticket,
-                    (SELECT COUNT(id) FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE status = 1  AND (lastreply = '0000-00-00 00:00:00') AND date(created) >= '" . esc_sql($curdate) . "' AND date(created) <= '" . esc_sql($fromdate) . "' AND uid = user.id) AS openticket,
-                    (SELECT COUNT(id) FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE status = 5 AND date(created) >= '" . esc_sql($curdate) . "' AND date(created) <= '" . esc_sql($fromdate) . "' AND uid = user.id) AS closeticket,
-                    (SELECT COUNT(id) FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE isanswered = 1 AND status != 5 AND status != 1 AND date(created) >= '" . esc_sql($curdate) . "' AND date(created) <= '" . esc_sql($fromdate) . "' AND uid = user.id) AS answeredticket,
-                    (SELECT COUNT(id) FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE isoverdue = 1 AND status != 5 AND date(created) >= '" . esc_sql($curdate) . "' AND date(created) <= '" . esc_sql($fromdate) . "' AND uid = user.id) AS overdueticket,
-                    (SELECT COUNT(id) FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE isanswered != 1 AND status != 5 AND isoverdue = 1 AND (lastreply != '0000-00-00 00:00:00') AND date(created) >= '" . esc_sql($curdate) . "' AND date(created) <= '" . esc_sql($fromdate) . "' AND uid = user.id) AS pendingticket
+                    (SELECT COUNT(id) FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE status = 1  AND (lastreply = '0000-00-00 00:00:00') AND date(created) >= '" . esc_sql($jsst_curdate) . "' AND date(created) <= '" . esc_sql($jsst_fromdate) . "' AND uid = user.id) AS openticket,
+                    (SELECT COUNT(id) FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE status = 5 AND date(created) >= '" . esc_sql($jsst_curdate) . "' AND date(created) <= '" . esc_sql($jsst_fromdate) . "' AND uid = user.id) AS closeticket,
+                    (SELECT COUNT(id) FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE isanswered = 1 AND status != 5 AND status != 1 AND date(created) >= '" . esc_sql($jsst_curdate) . "' AND date(created) <= '" . esc_sql($jsst_fromdate) . "' AND uid = user.id) AS answeredticket,
+                    (SELECT COUNT(id) FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE isoverdue = 1 AND status != 5 AND date(created) >= '" . esc_sql($jsst_curdate) . "' AND date(created) <= '" . esc_sql($jsst_fromdate) . "' AND uid = user.id) AS overdueticket,
+                    (SELECT COUNT(id) FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE isanswered != 1 AND status != 5 AND (lastreply != '0000-00-00 00:00:00') AND date(created) >= '" . esc_sql($jsst_curdate) . "' AND date(created) <= '" . esc_sql($jsst_fromdate) . "' AND uid = user.id) AS pendingticket
                     FROM `".jssupportticket::$_wpprefixforuser."js_ticket_users` AS user
-                    WHERE user.id = ".esc_sql($id);
-        $agent = jssupportticket::$_db->get_row($query);
-        jssupportticket::$_data['user_report'] =$agent;
+                    WHERE user.id = ".esc_sql($jsst_id);
+        $jsst_agent = jssupportticket::$_db->get_row($jsst_query);
+        jssupportticket::$jsst_data['user_report'] =$jsst_agent;
         // Pagination
-        $query = "SELECT COUNT(ticket.id)
+        $jsst_query = "SELECT COUNT(ticket.id)
                     FROM `".jssupportticket::$_db->prefix."js_ticket_tickets` AS ticket
                     LEFT JOIN `".jssupportticket::$_db->prefix."js_ticket_priorities` AS priority ON priority.id = ticket.priorityid
-                    WHERE uid = ".esc_sql($id)." AND date(ticket.created) >= '" . esc_sql($curdate) . "' AND date(ticket.created) <= '" . esc_sql($fromdate) . "' ";
-        $total = jssupportticket::$_db->get_var($query);
-        jssupportticket::$_data['total'] = $total;
-        jssupportticket::$_data[1] = JSSTpagination::getPagination($total);
+                    WHERE uid = ".esc_sql($jsst_id)." AND date(ticket.created) >= '" . esc_sql($jsst_curdate) . "' AND date(ticket.created) <= '" . esc_sql($jsst_fromdate) . "' ";
+        $jsst_total = jssupportticket::$_db->get_var($jsst_query);
+        jssupportticket::$jsst_data['total'] = $jsst_total;
+        jssupportticket::$jsst_data[1] = JSSTpagination::getPagination($jsst_total);
         //Tickets
         do_action('jsstFeedbackQueryStaff');
-        $query = "SELECT ticket.*,priority.priority, priority.prioritycolour,status.status AS statustitle,status.statuscolour,status.statusbgcolour ".jssupportticket::$_addon_query['select']."
+        $jsst_query = "SELECT ticket.*,priority.priority, priority.prioritycolour,status.status AS statustitle,status.statuscolour,status.statusbgcolour ".jssupportticket::$_addon_query['select']."
                     FROM `".jssupportticket::$_db->prefix."js_ticket_tickets` AS ticket
                     LEFT JOIN `".jssupportticket::$_db->prefix."js_ticket_priorities` AS priority ON priority.id = ticket.priorityid
                     JOIN `" . jssupportticket::$_db->prefix . "js_ticket_statuses` AS status ON ticket.status = status.id
                     ".jssupportticket::$_addon_query['join']."
-                    WHERE uid = ".esc_sql($id)." AND date(ticket.created) >= '" . esc_sql($curdate) . "' AND date(ticket.created) <= '" . esc_sql($fromdate) . "' ";
-        $query .= " LIMIT " . JSSTpagination::getOffset() . ", " . JSSTpagination::getLimit();
-        do_action('reset_jsst_aadon_query');
-        jssupportticket::$_data['user_tickets'] = jssupportticket::$_db->get_results($query);
+                    WHERE uid = ".esc_sql($jsst_id)." AND date(ticket.created) >= '" . esc_sql($jsst_curdate) . "' AND date(ticket.created) <= '" . esc_sql($jsst_fromdate) . "' ";
+        $jsst_query .= " LIMIT " . JSSTpagination::getOffset() . ", " . JSSTpagination::getLimit();
+        do_action('jsst_reset_aadon_query');
+        jssupportticket::$jsst_data['user_tickets'] = jssupportticket::$_db->get_results($jsst_query);
         if(in_array('timetracking', jssupportticket::$_active_addons)){
-            foreach (jssupportticket::$_data['user_tickets'] as $ticket) {
-                 $ticket->time = JSSTincluder::getJSModel('timetracking')->getTimeTakenByTicketId($ticket->id);
+            foreach (jssupportticket::$jsst_data['user_tickets'] as $jsst_ticket) {
+                 $jsst_ticket->time = JSSTincluder::getJSModel('timetracking')->getTimeTakenByTicketId($jsst_ticket->id);
             }
         }
         return;
     }
 
-    function getStaffTimingReportById($id){
+    function getStaffTimingReportById($jsst_id){
         if( !in_array('agent',jssupportticket::$_active_addons) ){
             return;
         }
-        if(!is_numeric($id)) return false;
+        if(!is_numeric($jsst_id)) return false;
 
-        $start_date ='date_start';
-        $end_date ='date_end';
+        $jsst_start_date ='date_start';
+        $jsst_end_date ='date_end';
 
-        $date_start = isset(jssupportticket::$_search['report']) ? jssupportticket::$_search['report'][$start_date] : '';
-        $date_end = isset(jssupportticket::$_search['report']) ? jssupportticket::$_search['report'][$end_date] : '';
-        if($date_start > $date_end){
-            $tmp = $date_start;
-            $date_start = $date_end;
-            $date_end = $tmp;
+        $jsst_date_start = isset(jssupportticket::$_search['report']) ? jssupportticket::$_search['report'][$jsst_start_date] : '';
+        $jsst_date_end = isset(jssupportticket::$_search['report']) ? jssupportticket::$_search['report'][$jsst_end_date] : '';
+        if($jsst_date_start > $jsst_date_end){
+            $jsst_tmp = $jsst_date_start;
+            $jsst_date_start = $jsst_date_end;
+            $jsst_date_end = $jsst_tmp;
         }
 
         //Line Chart Data
-        $curdate = ($date_start != null) ? date_i18n('Y-m-d',strtotime($date_start)) : date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime("now -1 month"));
-        $fromdate = ($date_end != null) ? date_i18n('Y-m-d',strtotime($date_end)) : date_i18n('Y-m-d');
-        jssupportticket::$_data['filter'][$start_date] = $curdate;
-        jssupportticket::$_data['filter'][$end_date] = $fromdate;
-        jssupportticket::$_data['filter']['id'] = $id;
+        $jsst_curdate = ($jsst_date_start != null) ? date_i18n('Y-m-d',strtotime($jsst_date_start)) : date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime("now -1 month"));
+        $jsst_fromdate = ($jsst_date_end != null) ? date_i18n('Y-m-d',strtotime($jsst_date_end)) : date_i18n('Y-m-d');
+        jssupportticket::$jsst_data['filter'][$jsst_start_date] = $jsst_curdate;
+        jssupportticket::$jsst_data['filter'][$jsst_end_date] = $jsst_fromdate;
+        jssupportticket::$jsst_data['filter']['id'] = $jsst_id;
 
-        $nextdate = $fromdate;
+        $jsst_nextdate = $jsst_fromdate;
 
         //Query to get Data
         if(in_array('timetracking', jssupportticket::$_active_addons)){
-            $query = "SELECT created,usertime FROM `" . jssupportticket::$_db->prefix . "js_ticket_staff_time` ";
-            $query .= " WHERE staffid = ".esc_sql($id);
-            $openticket = jssupportticket::$_db->get_results($query);
+            $jsst_query = "SELECT created,usertime FROM `" . jssupportticket::$_db->prefix . "js_ticket_staff_time` ";
+            $jsst_query .= " WHERE staffid = ".esc_sql($jsst_id);
+            $jsst_openticket = jssupportticket::$_db->get_results($jsst_query);
         }else{
-            $openticket = array();
+            $jsst_openticket = array();
         }
 
-        $date_openticket = array();
-        foreach ($openticket AS $ticket) {
-            if (!isset($date_openticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($ticket->created))]))
-                $date_openticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($ticket->created))] = 0;
-            $date_openticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($ticket->created))] = $date_openticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($ticket->created))] + $ticket->usertime;
+        $jsst_date_openticket = array();
+        foreach ($jsst_openticket AS $jsst_ticket) {
+            if (!isset($jsst_date_openticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($jsst_ticket->created))]))
+                $jsst_date_openticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($jsst_ticket->created))] = 0;
+            $jsst_date_openticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($jsst_ticket->created))] = $jsst_date_openticket[date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($jsst_ticket->created))] + $jsst_ticket->usertime;
         }
-        $open_ticket = 0;
-        $json_array = "";
+        $jsst_open_ticket = 0;
+        $jsst_json_array = "";
         do{
-            $year = date_i18n('Y',strtotime($nextdate));
-            $month = date_i18n('m',strtotime($nextdate));
-            $month = $month - 1; //js month are 0 based
-            $day = date_i18n('d',strtotime($nextdate));
-            if(isset($date_openticket[$nextdate])){
+            $jsst_year = date_i18n('Y',strtotime($jsst_nextdate));
+            $jsst_month = date_i18n('m',strtotime($jsst_nextdate));
+            $jsst_month = $jsst_month - 1; //js month are 0 based
+            $jsst_day = date_i18n('d',strtotime($jsst_nextdate));
+            if(isset($jsst_date_openticket[$jsst_nextdate])){
 
-                $mins = floor($date_openticket[$nextdate] / 60);
-                $openticket_tmp =  $mins;
+                $jsst_mins = floor($jsst_date_openticket[$jsst_nextdate] / 60);
+                $jsst_openticket_tmp =  $jsst_mins;
             }else{
-                $openticket_tmp =  0;
+                $jsst_openticket_tmp =  0;
             }
-            $json_array .= '[new Date('.$year.','.$month.','.$day.'),'.$openticket_tmp.'],';
-            $nextdate = date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($nextdate . " -1 days"));
-        }while($nextdate != $curdate);
-        jssupportticket::$_data['line_chart_json_array'] = $json_array;
-        jssupportticket::$_data[0]['staffname'] = JSSTincluder::getJSModel('agent')->getMyName($id);
+            $jsst_json_array .= '[new Date('.$jsst_year.','.$jsst_month.','.$jsst_day.'),'.$jsst_openticket_tmp.'],';
+            $jsst_nextdate = date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($jsst_nextdate . " -1 days"));
+        }while($jsst_nextdate != $jsst_curdate);
+        jssupportticket::$jsst_data['line_chart_json_array'] = $jsst_json_array;
+        jssupportticket::$jsst_data[0]['staffname'] = JSSTincluder::getJSModel('agent')->getMyName($jsst_id);
 
     }
 

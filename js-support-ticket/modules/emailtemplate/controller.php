@@ -10,35 +10,35 @@ class JSSTemailtemplateController {
     }
 
     function handleRequest() {
-        $layout = JSSTrequest::getLayout('jstlay', null, 'emailtemplates');
-        jssupportticket::$_data['sanitized_args']['jsst_nonce'] = esc_html(wp_create_nonce('jsst_nonce'));
-        if (self::canaddfile($layout)) {
-            switch ($layout) {
+        $jsst_layout = JSSTrequest::getLayout('jstlay', null, 'emailtemplates');
+        jssupportticket::$jsst_data['sanitized_args']['jsst_nonce'] = esc_html(wp_create_nonce('jsst_nonce'));
+        if (self::canaddfile($jsst_layout)) {
+            switch ($jsst_layout) {
                 case 'admin_emailtemplates':
-                    $tempfor = JSSTrequest::getVar('for', null, 'tk-nw');
-                    $formid = JSSTrequest::getVar('formid', null, '');
-                    $langcode = JSSTrequest::getVar('langcode', null, '');
-                    jssupportticket::$_data[1] = $tempfor;
-                    JSSTincluder::getJSModel('emailtemplate')->getTemplate($tempfor, $formid, $langcode);
+                    $jsst_tempfor = JSSTrequest::getVar('for', null, 'tk-nw');
+                    $jsst_formid = JSSTrequest::getVar('formid', null, '');
+                    $jsst_langcode = JSSTrequest::getVar('langcode', null, '');
+                    jssupportticket::$jsst_data[1] = $jsst_tempfor;
+                    JSSTincluder::getJSModel('emailtemplate')->getTemplate($jsst_tempfor, $jsst_formid, $jsst_langcode);
                     break;
                 default:
                     exit;
             }
-            $module = (is_admin()) ? 'page' : 'jstmod';
-            $module = JSSTrequest::getVar($module, null, 'emailtemplate');
-            JSSTincluder::include_file($layout, $module);
+            $jsst_module = (is_admin()) ? 'page' : 'jstmod';
+            $jsst_module = JSSTrequest::getVar($jsst_module, null, 'emailtemplate');
+            JSSTincluder::include_file($jsst_layout, $jsst_module);
         }
     }
 
-    function canaddfile($layout) {
-        $nonce_value = JSSTrequest::getVar('jsst_nonce');
-        if ( wp_verify_nonce( $nonce_value, 'jsst_nonce') ) {
+    function canaddfile($jsst_layout) {
+        $jsst_nonce_value = JSSTrequest::getVar('jsst_nonce');
+        if ( wp_verify_nonce( $jsst_nonce_value, 'jsst_nonce') ) {
             if (isset($_POST['form_request']) && $_POST['form_request'] == 'jssupportticket') {
                 return false;
             } elseif (isset($_GET['action']) && $_GET['action'] == 'jstask') {
                 return false;
             } else {
-                if(!is_admin() && jssupportticketphplib::JSST_strpos($layout, 'admin_') === 0){
+                if(!is_admin() && jssupportticketphplib::JSST_strpos($jsst_layout, 'admin_') === 0){
                     return false;
                 }
                 return true;
@@ -47,65 +47,65 @@ class JSSTemailtemplateController {
     }
 
     static function saveemailtemplate() {
-        $id = JSSTrequest::getVar('id');
-        $nonce = JSSTrequest::getVar('_wpnonce');
-        if (! wp_verify_nonce( $nonce, 'save-email-template-'.$id) ) {
+        $jsst_id = JSSTrequest::getVar('id');
+        $jsst_nonce = JSSTrequest::getVar('_wpnonce');
+        if (! wp_verify_nonce( $jsst_nonce, 'save-email-template-'.$jsst_id) ) {
             die( 'Security check Failed' );
         }
         if (!current_user_can('manage_options')) { //only admin can change it.
             return false;
         }
-        $data = JSSTrequest::get('post');
-        if (!empty($data['lang_id'])) {
-            if($data['lang_id'] == '' || $data['subject'] == '' || $data['body'] == ''){
+        $jsst_data = JSSTrequest::get('post');
+        if (!empty($jsst_data['lang_id'])) {
+            if($jsst_data['lang_id'] == '' || $jsst_data['subject'] == '' || $jsst_data['body'] == ''){
                 JSSTmessage::setMessage(esc_html(__('Required Fields are not filled', 'js-support-ticket')), 'error');
             }else{
-                JSSTincluder::getJSModel('multilanguageemailtemplates')->storeMultiLanguageEmailTemplate($data);
+                JSSTincluder::getJSModel('multilanguageemailtemplates')->storeMultiLanguageEmailTemplate($jsst_data);
             }
         }else{
-            JSSTincluder::getJSModel('emailtemplate')->storeEmailTemplate($data);
+            JSSTincluder::getJSModel('emailtemplate')->storeEmailTemplate($jsst_data);
         }
-        $url = admin_url("admin.php?page=emailtemplate&for=" . JSSTrequest::getVar('for'));
-        wp_redirect($url);
+        $jsst_url = admin_url("admin.php?page=emailtemplate&for=" . JSSTrequest::getVar('for'));
+        wp_safe_redirect($jsst_url);
         exit;
     }
 
     static function savecustomemailtemplate() {
-        $id = JSSTrequest::getVar('id');
-        $nonce = JSSTrequest::getVar('_wpnonce');
-        if (! wp_verify_nonce( $nonce, 'save-form-email-template') ) {
+        $jsst_id = JSSTrequest::getVar('id');
+        $jsst_nonce = JSSTrequest::getVar('_wpnonce');
+        if (! wp_verify_nonce( $jsst_nonce, 'save-form-email-template') ) {
             die( 'Security check Failed' );
         }
         if (!current_user_can('manage_options')) { //only admin can change it.
             return false;
         }
-        $data = JSSTrequest::get('post');
-        if (!empty($data['language_id']) && in_array('multilanguageemailtemplates', jssupportticket::$_active_addons)) {
-            JSSTincluder::getJSModel('multilanguageemailtemplates')->storeMultiLanguageEmailTemplate($data);
+        $jsst_data = JSSTrequest::get('post');
+        if (!empty($jsst_data['language_id']) && in_array('multilanguageemailtemplates', jssupportticket::$_active_addons)) {
+            JSSTincluder::getJSModel('multilanguageemailtemplates')->storeMultiLanguageEmailTemplate($jsst_data);
         } elseif(in_array('multiform', jssupportticket::$_active_addons)) {
-            JSSTincluder::getJSModel('multiform')->storeFormEmailTemplate($data);
+            JSSTincluder::getJSModel('multiform')->storeFormEmailTemplate($jsst_data);
         } else {
             JSSTmessage::setMessage(esc_html(__('Required Field(s) are not filled', 'js-support-ticket')), 'error');
         }
-        $url = admin_url("admin.php?page=emailtemplate&for=" . JSSTrequest::getVar('for'));
-        wp_redirect($url);
+        $jsst_url = admin_url("admin.php?page=emailtemplate&for=" . JSSTrequest::getVar('for'));
+        wp_safe_redirect($jsst_url);
         exit;
     }
 
     static function deleteformemailtemplate() {
-        $id = JSSTrequest::getVar('templateid');
-        $source = JSSTrequest::getVar('source');
-        $nonce = JSSTrequest::getVar('_wpnonce');
-        if (! wp_verify_nonce( $nonce, 'delete-template-'.$id) ) {
+        $jsst_id = JSSTrequest::getVar('templateid');
+        $jsst_source = JSSTrequest::getVar('source');
+        $jsst_nonce = JSSTrequest::getVar('_wpnonce');
+        if (! wp_verify_nonce( $jsst_nonce, 'delete-template-'.$jsst_id) ) {
             die( 'Security check Failed' );
         }
-        JSSTincluder::getJSModel('emailtemplate')->removeFormEmailTemplate($id, $source);
-        $url = admin_url("admin.php?page=emailtemplate&for=" . JSSTrequest::getVar('for'));
-        wp_redirect($url);
+        JSSTincluder::getJSModel('emailtemplate')->removeFormEmailTemplate($jsst_id, $jsst_source);
+        $jsst_url = admin_url("admin.php?page=emailtemplate&for=" . JSSTrequest::getVar('for'));
+        wp_safe_redirect($jsst_url);
         exit;
     }
 
 }
 
-$emailtemplateController = new JSSTemailtemplateController();
+$jsst_emailtemplateController = new JSSTemailtemplateController();
 ?>

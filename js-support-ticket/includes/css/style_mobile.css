@@ -173,3 +173,6 @@
 	/* add role */
 	div.js-ticket-categories-heading-wrp{flex-wrap: wrap;gap: 15px;}
 	div.js-ticket-add-form-wrapper div.js-ticket-from-field-wrp, div.js-ticket-roles-wrapper div.js-ticket-role-wrp div.js-ticket-add-role-field-wrp{min-width: unset;}
+	/* widget */
+	div.jsst-main-up-wrapper.jsst-widget-main-up-wrapper .js-ticket-body-padding{width: 100%;}
+	div.jsst-main-up-wrapper.jsst-widget-main-up-wrapper .js-widget-download-right .js-ticket-body-row-button{margin-left: 0;margin-right: 0;}

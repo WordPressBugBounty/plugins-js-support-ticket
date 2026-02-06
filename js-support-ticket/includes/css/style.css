@@ -150,7 +150,6 @@ div.jsst-visitor-token-message p.jsst-visitor-token-message-heading{float: left;
 div.jsst-visitor-token-message p.jsst-visitor-token-message-discription{float: left;width: 100%;margin-bottom: 15px; color: #856404;}
 div.jsst-visitor-token-message p.jsst-visitor-token-message-token-number{display: flex;flex-wrap: wrap; justify-content: space-between;align-items: center; float: left;width: 100%;padding: 10px 15px;background-color: #fff;border: 1px solid #ffeeba;color: #343a40; border-radius: 8px; font-size: 16px; font-family: 'Courier New', Courier, monospace;}
 div.jsst-visitor-token-message p.jsst-visitor-token-message-token-number a{float: right;cursor: pointer;padding: 8px 15px;min-width: 120px;text-align: center; background-color: #007bff; color: #fff; border-radius: 5px; text-decoration: none; transition: background-color 0.3s ease;}
-div.jsst-visitor-token-message p.jsst-visitor-token-message-token-number a:hover { background-color: #0056b3;}
 
 /* Rating */
 div.jsst-rating-div{display: inline-block;padding: 10px 0;}
@@ -283,5 +282,16 @@ div.js-ticket-add-form-wrapper div.js-ticket-from-field-wrp div.js-ticket-from-f
 	div#jstran_loading, div#js_ai_reply_loading {display: none;z-index: 9999;position: fixed;top: 50%;left: 50%; transform: translate(-50%, -50%);}
 	div.tk_attachment_value_wrapperform span.tk_attachment_value_text{font-size: 15px;}
 	.js-ticket-attached-files-wrp{display: flex;align-items: center;gap: 20px;flex-wrap: wrap;margin-bottom: 10px;width: 100%;}
-div.jsst-formfield-radio-button-wrap label{cursor: pointer;}
-div.js-ticket-signature-radio-box label{cursor: pointer;}
+	div.jsst-formfield-radio-button-wrap label{cursor: pointer;}
+	div.js-ticket-signature-radio-box label{cursor: pointer;}
+
+	/* widgets */
+	div.jsst-main-up-wrapper.jsst-widget-main-up-wrapper .js-ticket-head{width: 100%;padding: 15px 20px;display: flex;justify-content: space-between;align-items: center;margin-bottom: 1rem;float: none;font-weight: 700;border-radius: 8px;margin-top: 20px;}
+	div.jsst-main-up-wrapper.jsst-widget-main-up-wrapper .js-ticket-body-padding{display: flex;align-items: center;flex: 1 1 auto;gap: 1rem;font-weight: 600;}
+	div.jsst-main-up-wrapper.jsst-widget-main-up-wrapper .js-ticket-body-row-text a{font-weight: 600;}
+	div.jsst-main-up-wrapper.jsst-widget-main-up-wrapper .js-ticket-body-row{display: flex;flex-wrap: wrap;align-items: center;justify-content: space-between;padding: 10px;border-radius: 8px;border: 1px solid #d1d1d1;border-top-color: rgb(209, 209, 209);border-right-color: rgb(209, 209, 209);border-bottom-color: rgb(209, 209, 209);border-left-color: rgb(209, 209, 209);transition: background-color 0.2s ease;min-height: 69px;}
+	div.jsst-main-up-wrapper.jsst-widget-main-up-wrapper .js-widget-download-right input{display: inline-block;padding: 12px 20px;border-radius: 8px;font-weight: 500;text-decoration: none;transition: background-color 0.2s ease, color 0.2s ease;border: 1px solid transparent;border-top-color: transparent;border-right-color: transparent;border-bottom-color: transparent;border-left-color: transparent;}
+	div.jsst-main-up-wrapper.jsst-widget-main-up-wrapper .js-widget-download-right .js-ticket-body-row-button{margin: 20px;}
+	div.jsst-main-up-wrapper.jsst-widget-main-up-wrapper .jsst-main-down-wrapper .js-ticket-body-padding .js-ticket-body-row-downloadicon{width: 47px;height: 47px;display: flex;align-items: center;}
+	div.jsst-main-up-wrapper.jsst-widget-main-up-wrapper .jsst-main-down-wrapper .js-ticket-body-padding .js-ticket-body-row-downloadicon img{max-width: 100%;max-height: 100%;width: 47px;}
+	div.jsst-main-up-wrapper.jsst-widget-main-up-wrapper .jsst-main-down-wrapper{display: flex;flex-direction: column;gap:1rem;}

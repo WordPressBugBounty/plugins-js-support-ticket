@@ -8765,3 +8765,45 @@ msgstr "حفظ & التالي"
 
 msgid "For enhanced security change encryption method in %1$s on line %2$s"
 msgstr "لتحسين طريقة تشفير تغيير الأمان في ٪ 1 $ s على الخط ٪ 2 $ s"
+
+msgid "Changes may require cache clearing to take effect."
+msgstr "قد تتطلب التغييرات مسح ذاكرة التخزين المؤقت لتصبح سارية المفعول."
+
+msgid "How Long Will My Support Stay Active?"
+msgstr "إلى متى سيظل الدعم الخاص بي نشطًا؟"
+
+msgid "I Can’t Log Into My Account"
+msgstr "لا أستطيع تسجيل الدخول إلى حسابي"
+
+msgid "I Want to Upgrade My Plan — How Can I Do It?"
+msgstr "أرغب في ترقية خطتي — كيف يمكنني فعل ذلك؟"
+
+msgid "I’m Not Getting Access to My Subscription"
+msgstr "لا أستطيع الوصول إلى اشتراكي"
+
+msgid "Ticket ID Or Email Address Or Subject"
+msgstr "معرف التذكرة أو عنوان البريد الإلكتروني أو الموضوع"
+
+msgid "Sophie Martinez"
+msgstr "صوفي مارتينيز"
+
+msgid "Daniel Brooks"
+msgstr "دانيال بروكس"
+
+msgid "Liam Turner"
+msgstr "ليام تورنر"
+
+msgid "Emily Harper"
+msgstr "إميلي هاربر"
+
+msgid "Noah Bennett"
+msgstr "نوح بينيت"
+
+msgid "Olivia Chase"
+msgstr "أوليفيا تشيس"
+
+msgid "Maya Collins"
+msgstr "مايا كولينز"
+
+msgid "Ethan Reynolds"
+msgstr "إيثان رينولدز"

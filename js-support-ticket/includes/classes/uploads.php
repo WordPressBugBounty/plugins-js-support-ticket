@@ -5,328 +5,340 @@ if (!defined('ABSPATH'))
 
 class JSSTuploads {
 
-    private $ticketid;
-    private $articleid;
-    private $downloadid;
-    private $categoryid;
-    private $staffid;
-    private $uploadfor;
+    private $jsst_ticketid;
+    private $jsst_articleid;
+    private $jsst_downloadid;
+    private $jsst_categoryid;
+    private $jsst_staffid;
+    private $jsst_uploadfor;
 
-    function jssupportticket_upload_dir( $dir ) {
-        $form_request = JSSTrequest::getVar('form_request');
-        if($form_request == 'jssupportticket' OR $this->uploadfor == 'agent'){
-            $datadirectory = jssupportticket::$_config['data_directory'];
-            $path = $datadirectory . '/attachmentdata';
+    function jssupportticket_upload_dir( $jsst_dir ) {
+        $jsst_form_request = JSSTrequest::getVar('form_request');
+        if($jsst_form_request == 'jssupportticket' OR $this->jsst_uploadfor == 'agent'){
+            $jsst_datadirectory = jssupportticket::$_config['data_directory'];
+            $jsst_path = $jsst_datadirectory . '/attachmentdata';
 
-            $foldername = '';
+            $jsst_foldername = '';
 
-            if($this->uploadfor == 'ticket'){
-                if(!is_numeric($this->ticketid)) return false;
-                $path = $path . '/ticket';
-                $query = "SELECT attachmentdir FROM `".jssupportticket::$_db->prefix."js_ticket_tickets` WHERE id = ".esc_sql($this->ticketid);
-                $foldername = jssupportticket::$_db->get_var($query);
-            }elseif($this->uploadfor == 'article'){
-                $path = $path . '/articles/article_'.$this->articleid;
-            }elseif($this->uploadfor == 'download'){
-                $path = $path . '/downloads/download_'.$this->downloadid;
-            }elseif($this->uploadfor == 'category'){
-                $path = $datadirectory . '/knowledgebasedata/categories/category_'.$this->categoryid;
-            }elseif($this->uploadfor == 'agent'){
-                $path = $datadirectory . '/staffdata/staff_'.$this->staffid;
+            if($this->jsst_uploadfor == 'ticket'){
+                if(!is_numeric($this->jsst_ticketid)) return false;
+                $jsst_path = $jsst_path . '/ticket';
+                $jsst_query = "SELECT attachmentdir FROM `".jssupportticket::$_db->prefix."js_ticket_tickets` WHERE id = ".esc_sql($this->jsst_ticketid);
+                $jsst_foldername = jssupportticket::$_db->get_var($jsst_query);
+            }elseif($this->jsst_uploadfor == 'article'){
+                $jsst_path = $jsst_path . '/articles/article_'.$this->jsst_articleid;
+            }elseif($this->jsst_uploadfor == 'download'){
+                $jsst_path = $jsst_path . '/downloads/download_'.$this->jsst_downloadid;
+            }elseif($this->jsst_uploadfor == 'category'){
+                $jsst_path = $jsst_datadirectory . '/knowledgebasedata/categories/category_'.$this->jsst_categoryid;
+            }elseif($this->jsst_uploadfor == 'agent'){
+                $jsst_path = $jsst_datadirectory . '/staffdata/staff_'.$this->jsst_staffid;
             }
 
-            $userpath = $path . '/' . $foldername;
-            $array = array(
-                'path'   => $dir['basedir'] . '/' . $userpath,
-                'url'    => $dir['baseurl'] . '/' . $userpath,
-                'subdir' => '/'. $userpath,
-            ) + $dir;
-            return $array;
-        }elseif($this->uploadfor == 'notificationlogo'){
-            $datadirectory = jssupportticket::$_config['data_directory'];
-            $path = $datadirectory;
-            return $path;
+            $jsst_userpath = $jsst_path . '/' . $jsst_foldername;
+            $jsst_array = array(
+                'path'   => $jsst_dir['basedir'] . '/' . $jsst_userpath,
+                'url'    => $jsst_dir['baseurl'] . '/' . $jsst_userpath,
+                'subdir' => '/'. $jsst_userpath,
+            ) + $jsst_dir;
+            return $jsst_array;
+        }elseif($this->jsst_uploadfor == 'notificationlogo'){
+            $jsst_datadirectory = jssupportticket::$_config['data_directory'];
+            $jsst_path = $jsst_datadirectory;
+            return $jsst_path;
 
         }else{
-            return $dir;
+            return $jsst_dir;
         }
     }
 
-    function storeTicketAttachment($data, $caller){
-        $ticketid = $data['ticketid'];
-        $filesize = jssupportticket::$_config['file_maximum_size'];
+    function storeTicketAttachment($jsst_data, $jsst_caller){
+        $jsst_ticketid = $jsst_data['ticketid'];
+        $jsst_filesize = jssupportticket::$_config['file_maximum_size'];
         if (!function_exists('wp_handle_upload')) {
             do_action('jssupportticket_load_wp_file');
         }
-        $this->ticketid = $ticketid;
-        $this->uploadfor = 'ticket';
+        if ( ! WP_Filesystem() ) {
+            return false;
+        }
+        $this->jsst_ticketid = $jsst_ticketid;
+        $this->jsst_uploadfor = 'ticket';
         // Register our path override.
         add_filter( 'upload_dir', array($this,'jssupportticket_upload_dir'));
         // Do our thing. WordPress will move the file to 'uploads/mycustomdir'.
-        $result = array();
+        $jsst_result = array();
         if(!isset($_FILES['filename'])){
             return;
         }
-        $files = filter_var_array($_FILES['filename']);
+        $jsst_files = filter_var_array($_FILES['filename']);
 
-        if(!is_array($files['name'])){
+        if(!is_array($jsst_files['name'])){
             return;
         }
 
-        foreach ($files['name'] as $key => $value) {
-            if ($files['name'][$key]) {
-                $file = array(
-                        'name'     => $files['name'][$key],
-                        'type'     => $files['type'][$key],
-                        'tmp_name' => $files['tmp_name'][$key],
-                        'error'    => $files['error'][$key],
-                        'size'     => $files['size'][$key]
+        foreach ($jsst_files['name'] as $jsst_key => $jsst_value) {
+            if ($jsst_files['name'][$jsst_key]) {
+                $jsst_file = array(
+                        'name'     => $jsst_files['name'][$jsst_key],
+                        'type'     => $jsst_files['type'][$jsst_key],
+                        'tmp_name' => $jsst_files['tmp_name'][$jsst_key],
+                        'error'    => $jsst_files['error'][$jsst_key],
+                        'size'     => $jsst_files['size'][$jsst_key]
                         );
-                $uploadfilesize = $file['size'] / 1024; //kb
-                if($uploadfilesize > $filesize){
+                $jsst_uploadfilesize = $jsst_file['size'] / 1024; //kb
+                if($jsst_uploadfilesize > $jsst_filesize){
                     JSSTmessage::setMessage(esc_html(__('Error file size too large', 'js-support-ticket')), 'error');
                     return;
                 }
-                $filetyperesult = wp_check_filetype(sanitize_file_name($_FILES['filename']['name'][$key]));
-                if(!empty($filetyperesult['ext']) && !empty($filetyperesult['type'])){
-                    $document_file_types = JSSTincluder::getJSModel('configuration')->getConfigValue('file_extension');
-                    if(stristr($document_file_types, $filetyperesult['ext'])){
+                $jsst_filetyperesult = wp_check_filetype(sanitize_file_name($_FILES['filename']['name'][$jsst_key]));
+                if(!empty($jsst_filetyperesult['ext']) && !empty($jsst_filetyperesult['type'])){
+                    $jsst_document_file_types = JSSTincluder::getJSModel('configuration')->getConfigValue('file_extension');
+                    if(stristr($jsst_document_file_types, $jsst_filetyperesult['ext'])){
 
-                        $result = wp_handle_upload($file, array('test_form' => false));
-                        if ( $result && ! isset( $result['error'] ) ) {
+                        $jsst_result = wp_handle_upload($jsst_file, array('test_form' => false));
+                        if ( $jsst_result && ! isset( $jsst_result['error'] ) ) {
                             // Get the folder where the file was uploaded
-                            $file_directory = dirname($result['file']);
-                            $filename = jssupportticketphplib::JSST_basename( $result['file'] );
-                            $replyattachmentid = isset($data['replyattachmentid']) ? $data['replyattachmentid'] : '';
-                            $result = $caller->storeTicketAttachment($ticketid, $replyattachmentid, $uploadfilesize, $filename);
+                            $jsst_file_directory = dirname($jsst_result['file']);
+                            $jsst_filename = jssupportticketphplib::JSST_basename( $jsst_result['file'] );
+                            $jsst_replyattachmentid = isset($jsst_data['replyattachmentid']) ? $jsst_data['replyattachmentid'] : '';
+                            $jsst_result = $jsst_caller->storeTicketAttachment($jsst_ticketid, $jsst_replyattachmentid, $jsst_uploadfilesize, $jsst_filename);
                         } else {
                             /**
                              * Error generated by _wp_handle_upload()
                              * @see _wp_handle_upload() in wp-admin/includes/file.php
                              */
-                            JSSTmessage::setMessage($result['error'], 'error');
+                            JSSTmessage::setMessage($jsst_result['error'], 'error');
                         }
                     }
                 }
             }
         }
         // generate index file
-        if (!empty($file_directory)) {
-            JSSTincluder::getJSModel('jssupportticket')->generateIndexFile($file_directory);
+        if (!empty($jsst_file_directory)) {
+            JSSTincluder::getJSModel('jssupportticket')->generateIndexFile($jsst_file_directory);
         }
         // Set everything back to normal.
         remove_filter( 'upload_dir', array($this,'jssupportticket_upload_dir'));
         return;
     }
 
-    function storeTicketViaEmailAttachment($idsarray,$key,$value){
-        $ticketid = $idsarray[0];
-        if(!is_numeric($ticketid))
+    function storeTicketViaEmailAttachment($jsst_idsarray,$jsst_key,$jsst_value){
+        $jsst_ticketid = $jsst_idsarray[0];
+        if(!is_numeric($jsst_ticketid))
             return;
-        $datadirectory = jssupportticket::$_config['data_directory'];
-        $maindir = wp_upload_dir();
-        $path = $maindir['basedir'];
-        $path = $path .'/'.$datadirectory;
-        if (!file_exists($path)) { // create user directory
-            JSSTincluder::getJSModel('jssupportticket')->makeDir($path);
+        $jsst_datadirectory = jssupportticket::$_config['data_directory'];
+        $jsst_maindir = wp_upload_dir();
+        $jsst_path = $jsst_maindir['basedir'];
+        $jsst_path = $jsst_path .'/'.$jsst_datadirectory;
+        if (!file_exists($jsst_path)) { // create user directory
+            JSSTincluder::getJSModel('jssupportticket')->makeDir($jsst_path);
         }
-        $path = $path . '/attachmentdata';
-        if (!file_exists($path)) { // create user directory
-            JSSTincluder::getJSModel('jssupportticket')->makeDir($path);
+        $jsst_path = $jsst_path . '/attachmentdata';
+        if (!file_exists($jsst_path)) { // create user directory
+            JSSTincluder::getJSModel('jssupportticket')->makeDir($jsst_path);
         }
-        $path = $path . '/ticket';
-        if (!file_exists($path)) { // create user directory
-            JSSTincluder::getJSModel('jssupportticket')->makeDir($path);
+        $jsst_path = $jsst_path . '/ticket';
+        if (!file_exists($jsst_path)) { // create user directory
+            JSSTincluder::getJSModel('jssupportticket')->makeDir($jsst_path);
         }
-        $query = "SELECT attachmentdir FROM `".jssupportticket::$_db->prefix."js_ticket_tickets` WHERE id = ".esc_sql($idsarray[0]);
-        $foldername = jssupportticket::$_db->get_var($query);
+        $jsst_query = "SELECT attachmentdir FROM `".jssupportticket::$_db->prefix."js_ticket_tickets` WHERE id = ".esc_sql($jsst_idsarray[0]);
+        $jsst_foldername = jssupportticket::$_db->get_var($jsst_query);
 
-        $path = $path . '/' . $foldername;
-        if (!file_exists($path)) { // create user directory
-            JSSTincluder::getJSModel('jssupportticket')->makeDir($path);
+        $jsst_path = $jsst_path . '/' . $jsst_foldername;
+        if (!file_exists($jsst_path)) { // create user directory
+            JSSTincluder::getJSModel('jssupportticket')->makeDir($jsst_path);
         }
 
-        file_put_contents($path . '/' . $key, $value); // save the file
+        file_put_contents($jsst_path . '/' . $jsst_key, $jsst_value); // save the file
         return true;
     }
 
-    function storeArticleAttachment($data, $caller){
-        $id = $data['id'];
-        $filesize = jssupportticket::$_config['file_maximum_size'];
+    function storeArticleAttachment($jsst_data, $jsst_caller){
+        $jsst_id = $jsst_data['id'];
+        $jsst_filesize = jssupportticket::$_config['file_maximum_size'];
         if (!function_exists('wp_handle_upload')) {
             do_action('jssupportticket_load_wp_file');
         }
-        $this->articleid = $id;
-        $this->uploadfor = 'article';
+        if ( ! WP_Filesystem() ) {
+            return false;
+        }
+        $this->jsst_articleid = $jsst_id;
+        $this->jsst_uploadfor = 'article';
         // Register our path override.
         add_filter( 'upload_dir', array($this,'jssupportticket_upload_dir'));
         // Do our thing. WordPress will move the file to 'uploads/mycustomdir'.
-        $result = array();
+        $jsst_result = array();
         if(!isset($_FILES['filename'])){
             return;
         }
-        $files = filter_var_array($_FILES['filename']);
-        if(!is_array($files['name'])){
+        $jsst_files = filter_var_array($_FILES['filename']);
+        if(!is_array($jsst_files['name'])){
             return;
         }
 
-        foreach ($files['name'] as $key => $value) {
-            if ($files['name'][$key]) {
-                $file = array(
-                        'name'     => $files['name'][$key],
-                        'type'     => $files['type'][$key],
-                        'tmp_name' => $files['tmp_name'][$key],
-                        'error'    => $files['error'][$key],
-                        'size'     => $files['size'][$key]
+        foreach ($jsst_files['name'] as $jsst_key => $jsst_value) {
+            if ($jsst_files['name'][$jsst_key]) {
+                $jsst_file = array(
+                        'name'     => $jsst_files['name'][$jsst_key],
+                        'type'     => $jsst_files['type'][$jsst_key],
+                        'tmp_name' => $jsst_files['tmp_name'][$jsst_key],
+                        'error'    => $jsst_files['error'][$jsst_key],
+                        'size'     => $jsst_files['size'][$jsst_key]
                         );
-                $uploadfilesize = $file['size'] / 1024; //kb
-                if($uploadfilesize > $filesize){
+                $jsst_uploadfilesize = $jsst_file['size'] / 1024; //kb
+                if($jsst_uploadfilesize > $jsst_filesize){
                     JSSTmessage::setMessage(esc_html(__('Error file size too large', 'js-support-ticket')), 'error');
                     return;
                 }
 
-                $filetyperesult = wp_check_filetype(sanitize_file_name($_FILES['filename']['name'][$key]));
-                if(!empty($filetyperesult['ext']) && !empty($filetyperesult['type'])){
-                    $document_file_types = JSSTincluder::getJSModel('configuration')->getConfigValue('file_extension');
-                    if(stristr($document_file_types, $filetyperesult['ext'])){
+                $jsst_filetyperesult = wp_check_filetype(sanitize_file_name($_FILES['filename']['name'][$jsst_key]));
+                if(!empty($jsst_filetyperesult['ext']) && !empty($jsst_filetyperesult['type'])){
+                    $jsst_document_file_types = JSSTincluder::getJSModel('configuration')->getConfigValue('file_extension');
+                    if(stristr($jsst_document_file_types, $jsst_filetyperesult['ext'])){
 
-                        $result = wp_handle_upload($file, array('test_form' => false));
-                        if ( $result && ! isset( $result['error'] ) ) {
+                        $jsst_result = wp_handle_upload($jsst_file, array('test_form' => false));
+                        if ( $jsst_result && ! isset( $jsst_result['error'] ) ) {
                             // Get the folder where the file was uploaded
-                            $file_directory = dirname($result['file']);
-                            $filename = jssupportticketphplib::JSST_basename( $result['file'] );
-                            $result = $caller->storeArticleAttachmet($id , $uploadfilesize, $filename);
+                            $jsst_file_directory = dirname($jsst_result['file']);
+                            $jsst_filename = jssupportticketphplib::JSST_basename( $jsst_result['file'] );
+                            $jsst_result = $jsst_caller->storeArticleAttachmet($jsst_id , $jsst_uploadfilesize, $jsst_filename);
                         } else {
                             /**
                              * Error generated by _wp_handle_upload()
                              * @see _wp_handle_upload() in wp-admin/includes/file.php
                              */
-                            JSSTmessage::setMessage($result['error'], 'error');
+                            JSSTmessage::setMessage($jsst_result['error'], 'error');
                         }
                     }
                 }
             }
         }
         // generate index file
-        if (!empty($file_directory)) {
-            JSSTincluder::getJSModel('jssupportticket')->generateIndexFile($file_directory);
+        if (!empty($jsst_file_directory)) {
+            JSSTincluder::getJSModel('jssupportticket')->generateIndexFile($jsst_file_directory);
         }
         // Set everything back to normal.
         remove_filter( 'upload_dir', array($this,'jssupportticket_upload_dir'));
         return;
     }
 
-    function storeDownloadAttachment($data, $caller){
-        $id = $data['id'];
-        $filesize = jssupportticket::$_config['file_maximum_size'];
+    function storeDownloadAttachment($jsst_data, $jsst_caller){
+        $jsst_id = $jsst_data['id'];
+        $jsst_filesize = jssupportticket::$_config['file_maximum_size'];
         if (!function_exists('wp_handle_upload')) {
             do_action('jssupportticket_load_wp_file');
         }
-        $this->downloadid = $id;
-        $this->uploadfor = 'download';
+        if ( ! WP_Filesystem() ) {
+            return false;
+        }
+        $this->jsst_downloadid = $jsst_id;
+        $this->jsst_uploadfor = 'download';
         // Register our path override.
         add_filter( 'upload_dir', array($this,'jssupportticket_upload_dir'));
         // Do our thing. WordPress will move the file to 'uploads/mycustomdir'.
-        $result = array();
+        $jsst_result = array();
         if(!isset($_FILES['filename'])){
             return;
         }
-        $files = filter_var_array($_FILES['filename']);
-        if(!is_array($files['name'])){
+        $jsst_files = filter_var_array($_FILES['filename']);
+        if(!is_array($jsst_files['name'])){
             return;
         }
 
-        foreach ($files['name'] as $key => $value) {
-            if ($files['name'][$key]) {
-                $file = array(
-                        'name'     => $files['name'][$key],
-                        'type'     => $files['type'][$key],
-                        'tmp_name' => $files['tmp_name'][$key],
-                        'error'    => $files['error'][$key],
-                        'size'     => $files['size'][$key]
+        foreach ($jsst_files['name'] as $jsst_key => $jsst_value) {
+            if ($jsst_files['name'][$jsst_key]) {
+                $jsst_file = array(
+                        'name'     => $jsst_files['name'][$jsst_key],
+                        'type'     => $jsst_files['type'][$jsst_key],
+                        'tmp_name' => $jsst_files['tmp_name'][$jsst_key],
+                        'error'    => $jsst_files['error'][$jsst_key],
+                        'size'     => $jsst_files['size'][$jsst_key]
                         );
-                $uploadfilesize = $file['size'] / 1024; //kb
-                if($uploadfilesize > $filesize){
+                $jsst_uploadfilesize = $jsst_file['size'] / 1024; //kb
+                if($jsst_uploadfilesize > $jsst_filesize){
                     JSSTmessage::setMessage(esc_html(__('Error file size too large', 'js-support-ticket')), 'error');
                     return;
                 }
-                $filetyperesult = wp_check_filetype(sanitize_file_name($_FILES['filename']['name'][$key]));
-                if(!empty($filetyperesult['ext']) && !empty($filetyperesult['type'])){
-                    $document_file_types = JSSTincluder::getJSModel('configuration')->getConfigValue('file_extension');
-                    if(stristr($document_file_types, $filetyperesult['ext'])){
-                        $result = wp_handle_upload($file, array('test_form' => false));
-                        if ( $result && ! isset( $result['error'] ) ) {
+                $jsst_filetyperesult = wp_check_filetype(sanitize_file_name($_FILES['filename']['name'][$jsst_key]));
+                if(!empty($jsst_filetyperesult['ext']) && !empty($jsst_filetyperesult['type'])){
+                    $jsst_document_file_types = JSSTincluder::getJSModel('configuration')->getConfigValue('file_extension');
+                    if(stristr($jsst_document_file_types, $jsst_filetyperesult['ext'])){
+                        $jsst_result = wp_handle_upload($jsst_file, array('test_form' => false));
+                        if ( $jsst_result && ! isset( $jsst_result['error'] ) ) {
                             // Get the folder where the file was uploaded
-                            $file_directory = dirname($result['file']);
-                            $filename = jssupportticketphplib::JSST_basename( $result['file'] );
-                            $result = $caller->storeDownloadAttachment($id , $uploadfilesize, $filename);
+                            $jsst_file_directory = dirname($jsst_result['file']);
+                            $jsst_filename = jssupportticketphplib::JSST_basename( $jsst_result['file'] );
+                            $jsst_result = $jsst_caller->storeDownloadAttachment($jsst_id , $jsst_uploadfilesize, $jsst_filename);
                         } else {
                             /**
                              * Error generated by _wp_handle_upload()
                              * @see _wp_handle_upload() in wp-admin/includes/file.php
                              */
-                            JSSTmessage::setMessage($result['error'], 'error');
+                            JSSTmessage::setMessage($jsst_result['error'], 'error');
                         }
                     }
                 }
             }
         }
         // generate index file
-        if (!empty($file_directory)) {
-            JSSTincluder::getJSModel('jssupportticket')->generateIndexFile($file_directory);
+        if (!empty($jsst_file_directory)) {
+            JSSTincluder::getJSModel('jssupportticket')->generateIndexFile($jsst_file_directory);
         }
         // Set everything back to normal.
         remove_filter( 'upload_dir', array($this,'jssupportticket_upload_dir'));
         return;
     }
 
-    function uploadCategoryLogo($id , $caller){
+    function uploadCategoryLogo($jsst_id , $jsst_caller){
 
-        if(!is_numeric($id))
+        if(!is_numeric($jsst_id))
             return false;
-        $filesize = jssupportticket::$_config['file_maximum_size'];
+        $jsst_filesize = jssupportticket::$_config['file_maximum_size'];
         if (!function_exists('wp_handle_upload')) {
             do_action('jssupportticket_load_wp_file');
         }
-        $this->categoryid = $id;
-        $this->uploadfor = 'category';
+        if ( ! WP_Filesystem() ) {
+            return false;
+        }
+        $this->jsst_categoryid = $jsst_id;
+        $this->jsst_uploadfor = 'category';
         // Register our path override.
         add_filter( 'upload_dir', array($this,'jssupportticket_upload_dir'));
         // Do our thing. WordPress will move the file to 'uploads/mycustomdir'.
-        $result = array();
-        $file = array(
+        $jsst_result = array();
+        $jsst_file = array(
             'name'     => sanitize_file_name($_FILES['filename']['name']),
             'type'     => jssupportticket::JSST_sanitizeData($_FILES['filename']['type']),
             'tmp_name' => jssupportticket::JSST_sanitizeData($_FILES['filename']['tmp_name']),
             'error'    => jssupportticket::JSST_sanitizeData($_FILES['filename']['error']),
             'size'     => jssupportticket::JSST_sanitizeData($_FILES['filename']['size']),
         ); // JSST_sanitizeData() function uses wordpress santize functions
-        $uploadfilesize = $file['size'] / 1024; //kb
-        if($uploadfilesize > $filesize){
+        $jsst_uploadfilesize = $jsst_file['size'] / 1024; //kb
+        if($jsst_uploadfilesize > $jsst_filesize){
             JSSTmessage::setMessage(esc_html(__('Error file size too large', 'js-support-ticket')), 'error');
             return;
         }
 
-        $filetyperesult = wp_check_filetype(sanitize_file_name($_FILES['filename']['name']));
-        if(!empty($filetyperesult['ext']) && !empty($filetyperesult['type'])){
-            $image_file_types = JSSTincluder::getJSModel('configuration')->getConfigValue('file_extension');
+        $jsst_filetyperesult = wp_check_filetype(sanitize_file_name($_FILES['filename']['name']));
+        if(!empty($jsst_filetyperesult['ext']) && !empty($jsst_filetyperesult['type'])){
+            $jsst_image_file_types = JSSTincluder::getJSModel('configuration')->getConfigValue('file_extension');
 
-            if(stristr($image_file_types, $filetyperesult['ext'])){
+            if(stristr($jsst_image_file_types, $jsst_filetyperesult['ext'])){
 
-                $result = wp_handle_upload($file, array('test_form' => false));
-                if ( $result && ! isset( $result['error'] ) ) {
+                $jsst_result = wp_handle_upload($jsst_file, array('test_form' => false));
+                if ( $jsst_result && ! isset( $jsst_result['error'] ) ) {
                     // Get the folder where the file was uploaded
-                    $file_directory = dirname($result['file']);
-                    $filename = jssupportticketphplib::JSST_basename( $result['file'] );
-                    $result = $caller->storeCategoryLogo($id , $filename);
+                    $jsst_file_directory = dirname($jsst_result['file']);
+                    $jsst_filename = jssupportticketphplib::JSST_basename( $jsst_result['file'] );
+                    $jsst_result = $jsst_caller->storeCategoryLogo($jsst_id , $jsst_filename);
                     // generate index file
-                    JSSTincluder::getJSModel('jssupportticket')->generateIndexFile($file_directory);
+                    JSSTincluder::getJSModel('jssupportticket')->generateIndexFile($jsst_file_directory);
                 } else {
                     /**
                      * Error generated by _wp_handle_upload()
                      * @see _wp_handle_upload() in wp-admin/includes/file.php
                      */
-                    JSSTmessage::setMessage($result['error'], 'error');
+                    JSSTmessage::setMessage($jsst_result['error'], 'error');
                 }
             }
         }
@@ -335,50 +347,53 @@ class JSSTuploads {
         return;
     }
 
-    function uploadStaffLogo($id , $caller){
-        if(!is_numeric($id))
+    function uploadStaffLogo($jsst_id , $jsst_caller){
+        if(!is_numeric($jsst_id))
             return false;
-        $filesize = jssupportticket::$_config['file_maximum_size'];
+        $jsst_filesize = jssupportticket::$_config['file_maximum_size'];
         if (!function_exists('wp_handle_upload')) {
             do_action('jssupportticket_load_wp_file');
         }
-        $this->staffid = $id;
-        $this->uploadfor = 'agent';
+        if ( ! WP_Filesystem() ) {
+            return false;
+        }
+        $this->jsst_staffid = $jsst_id;
+        $this->jsst_uploadfor = 'agent';
         // Register our path override.
         add_filter( 'upload_dir', array($this,'jssupportticket_upload_dir'));
         // Do our thing. WordPress will move the file to 'uploads/mycustomdir'.
-        $result = array();
-        $file = array(
+        $jsst_result = array();
+        $jsst_file = array(
             'name'     => sanitize_file_name($_FILES['filename']['name']),
             'type'     => jssupportticket::JSST_sanitizeData($_FILES['filename']['type']),
             'tmp_name' => jssupportticket::JSST_sanitizeData($_FILES['filename']['tmp_name']),
             'error'    => jssupportticket::JSST_sanitizeData($_FILES['filename']['error']),
             'size'     => jssupportticket::JSST_sanitizeData($_FILES['filename']['size']),
         ); // JSST_sanitizeData() function uses wordpress santize functions
-        $uploadfilesize = $file['size'] / 1024; //kb
-        if($uploadfilesize > $filesize){
+        $jsst_uploadfilesize = $jsst_file['size'] / 1024; //kb
+        if($jsst_uploadfilesize > $jsst_filesize){
             JSSTmessage::setMessage(esc_html(__('Error file size too large', 'js-support-ticket')), 'error');
             return;
         }
-        $filetyperesult = wp_check_filetype(sanitize_file_name($_FILES['filename']['name']));
-        if(!empty($filetyperesult['ext']) && !empty($filetyperesult['type'])){
-            $image_file_types = JSSTincluder::getJSModel('configuration')->getConfigValue('file_extension');
-            if(stristr($image_file_types, $filetyperesult['ext'])){
+        $jsst_filetyperesult = wp_check_filetype(sanitize_file_name($_FILES['filename']['name']));
+        if(!empty($jsst_filetyperesult['ext']) && !empty($jsst_filetyperesult['type'])){
+            $jsst_image_file_types = JSSTincluder::getJSModel('configuration')->getConfigValue('file_extension');
+            if(stristr($jsst_image_file_types, $jsst_filetyperesult['ext'])){
 
-                $result = wp_handle_upload($file, array('test_form' => false));
-                if ( $result && ! isset( $result['error'] ) ) {
+                $jsst_result = wp_handle_upload($jsst_file, array('test_form' => false));
+                if ( $jsst_result && ! isset( $jsst_result['error'] ) ) {
                     // Get the folder where the file was uploaded
-                    $file_directory = dirname($result['file']);
-                    $filename = jssupportticketphplib::JSST_basename( $result['file'] );
-                    $result = $caller->storeStaffLogo($id , $filename);
+                    $jsst_file_directory = dirname($jsst_result['file']);
+                    $jsst_filename = jssupportticketphplib::JSST_basename( $jsst_result['file'] );
+                    $jsst_result = $jsst_caller->storeStaffLogo($jsst_id , $jsst_filename);
                     // generate index file
-                    JSSTincluder::getJSModel('jssupportticket')->generateIndexFile($file_directory);
+                    JSSTincluder::getJSModel('jssupportticket')->generateIndexFile($jsst_file_directory);
                 } else {
                     /**
                      * Error generated by _wp_handle_upload()
                      * @see _wp_handle_upload() in wp-admin/includes/file.php
                      */
-                    JSSTmessage::setMessage($result['error'], 'error');
+                    JSSTmessage::setMessage($jsst_result['error'], 'error');
                 }
             }
         }
@@ -387,152 +402,161 @@ class JSSTuploads {
         return;
     }
 
-    function storeTicketCustomUploadFile($id, $field){
-        if(!isset($_FILES[$field])){
+    function storeTicketCustomUploadFile($jsst_id, $jsst_field){
+        if(!isset($_FILES[$jsst_field])){
             return;
         }
         if (!function_exists('wp_handle_upload')) {
             do_action('jssupportticket_load_wp_file');
         }
-        $filesize = jssupportticket::$_config['file_maximum_size'];
-        $this->ticketid = $id;
-        $this->uploadfor = 'ticket';
+        if ( ! WP_Filesystem() ) {
+            return false;
+        }
+        $jsst_filesize = jssupportticket::$_config['file_maximum_size'];
+        $this->jsst_ticketid = $jsst_id;
+        $this->jsst_uploadfor = 'ticket';
         // Register our path override.
         add_filter( 'upload_dir', array($this,'jssupportticket_upload_dir'));
         // Do our thing. WordPress will move the file to 'uploads/mycustomdir'.
-        $result = array();
-        $file = array(
-            'name'     => sanitize_file_name($_FILES[$field]['name']),
-            'type'     => jssupportticket::JSST_sanitizeData($_FILES[$field]['type']),
-            'tmp_name' => jssupportticket::JSST_sanitizeData($_FILES[$field]['tmp_name']),
-            'error'    => jssupportticket::JSST_sanitizeData($_FILES[$field]['error']),
-            'size'     => jssupportticket::JSST_sanitizeData($_FILES[$field]['size'])
+        $jsst_result = array();
+        $jsst_file = array(
+            'name'     => sanitize_file_name($_FILES[$jsst_field]['name']),
+            'type'     => jssupportticket::JSST_sanitizeData($_FILES[$jsst_field]['type']),
+            'tmp_name' => jssupportticket::JSST_sanitizeData($_FILES[$jsst_field]['tmp_name']),
+            'error'    => jssupportticket::JSST_sanitizeData($_FILES[$jsst_field]['error']),
+            'size'     => jssupportticket::JSST_sanitizeData($_FILES[$jsst_field]['size'])
         ); // JSST_sanitizeData() function uses wordpress santize functions
-        $uploadfilesize = jssupportticket::JSST_sanitizeData($_FILES[$field]['size']) / 1024; //kb // JSST_sanitizeData() function uses wordpress santize functions
-        if($uploadfilesize > $filesize){
+        $jsst_uploadfilesize = jssupportticket::JSST_sanitizeData($_FILES[$jsst_field]['size']) / 1024; //kb // JSST_sanitizeData() function uses wordpress santize functions
+        if($jsst_uploadfilesize > $jsst_filesize){
             JSSTmessage::setMessage(esc_html(__('Error file size too large', 'js-support-ticket')), 'error');
             return;
         }
-        $filetyperesult = wp_check_filetype(sanitize_file_name($_FILES[$field]['name']));
-        if(!empty($filetyperesult['ext']) && !empty($filetyperesult['type'])){
-            $image_file_types = JSSTincluder::getJSModel('configuration')->getConfigValue('file_extension');
-            if(strstr($image_file_types, $filetyperesult['ext'])){
+        $jsst_filetyperesult = wp_check_filetype(sanitize_file_name($_FILES[$jsst_field]['name']));
+        if(!empty($jsst_filetyperesult['ext']) && !empty($jsst_filetyperesult['type'])){
+            $jsst_image_file_types = JSSTincluder::getJSModel('configuration')->getConfigValue('file_extension');
+            if(strstr($jsst_image_file_types, $jsst_filetyperesult['ext'])){
 
-                $result = wp_handle_upload($file, array('test_form' => false));
-                if (isset( $result['error'] ) ) {
+                $jsst_result = wp_handle_upload($jsst_file, array('test_form' => false));
+                if (isset( $jsst_result['error'] ) ) {
                     /**
                      * Error generated by _wp_handle_upload()
                      * @see _wp_handle_upload() in wp-admin/includes/file.php
                      */
-                    JSSTmessage::setMessage($result['error'], 'error');
+                    JSSTmessage::setMessage($jsst_result['error'], 'error');
                 }else{
-                    $filename = jssupportticketphplib::JSST_basename( $result['file'] );
+                    $jsst_filename = jssupportticketphplib::JSST_basename( $jsst_result['file'] );
                     // Get the folder where the file was uploaded
-                    $file_directory = dirname($result['file']);
+                    $jsst_file_directory = dirname($jsst_result['file']);
                     // generate index file
-                    JSSTincluder::getJSModel('jssupportticket')->generateIndexFile($file_directory);
+                    JSSTincluder::getJSModel('jssupportticket')->generateIndexFile($jsst_file_directory);
                 }
             }
         }
         // Set everything back to normal.
         remove_filter( 'upload_dir', array($this,'jssupportticket_upload_dir'));
         //to store name of custom file in params
-        JSSTincluder::getJSModel('ticket')->storeUploadFieldValueInParams($id,$filename,$field);
+        JSSTincluder::getJSModel('ticket')->storeUploadFieldValueInParams($jsst_id,$jsst_filename,$jsst_field);
         return;
     }
 
-	function uploadInternalNoteAttachment($id,$field){
-        if(!isset($_FILES[$field])){
+	function uploadInternalNoteAttachment($jsst_id,$jsst_field){
+        if(!isset($_FILES[$jsst_field])){
             return;
         }
-        $filename = '';
-        $filesize = '';
+        $jsst_filename = '';
+        $jsst_filesize = '';
         if (!function_exists('wp_handle_upload')) {
             do_action('jssupportticket_load_wp_file');
         }
-        $filesize = jssupportticket::$_config['file_maximum_size'];
-        $this->ticketid = $id;
-        $this->uploadfor = 'ticket';
+        if ( ! WP_Filesystem() ) {
+            return false;
+        }
+        $jsst_filesize = jssupportticket::$_config['file_maximum_size'];
+        $this->jsst_ticketid = $jsst_id;
+        $this->jsst_uploadfor = 'ticket';
         // Register our path override.
         add_filter( 'upload_dir', array($this,'jssupportticket_upload_dir'));
         // Do our thing. WordPress will move the file to 'uploads/mycustomdir'.
-        $result = array();
-        $file = array(
-            'name'     => sanitize_file_name($_FILES[$field]['name']),
-            'type'     => jssupportticket::JSST_sanitizeData($_FILES[$field]['type']),
-            'tmp_name' => jssupportticket::JSST_sanitizeData($_FILES[$field]['tmp_name']),
-            'error'    => jssupportticket::JSST_sanitizeData($_FILES[$field]['error']),
-            'size'     => jssupportticket::JSST_sanitizeData($_FILES[$field]['size'])
+        $jsst_result = array();
+        $jsst_file = array(
+            'name'     => sanitize_file_name($_FILES[$jsst_field]['name']),
+            'type'     => jssupportticket::JSST_sanitizeData($_FILES[$jsst_field]['type']),
+            'tmp_name' => jssupportticket::JSST_sanitizeData($_FILES[$jsst_field]['tmp_name']),
+            'error'    => jssupportticket::JSST_sanitizeData($_FILES[$jsst_field]['error']),
+            'size'     => jssupportticket::JSST_sanitizeData($_FILES[$jsst_field]['size'])
         ); // JSST_sanitizeData() function uses wordpress santize functions
-        $uploadfilesize = jssupportticket::JSST_sanitizeData($_FILES[$field]['size']) / 1024; //kb // JSST_sanitizeData() function uses wordpress santize functions
-        if($uploadfilesize > $filesize){
+        $jsst_uploadfilesize = jssupportticket::JSST_sanitizeData($_FILES[$jsst_field]['size']) / 1024; //kb // JSST_sanitizeData() function uses wordpress santize functions
+        if($jsst_uploadfilesize > $jsst_filesize){
             JSSTmessage::setMessage(esc_html(__('Error file size too large', 'js-support-ticket')), 'error');
             return;
         }
-        $filetyperesult = wp_check_filetype(sanitize_file_name($_FILES[$field]['name']));
-        if(!empty($filetyperesult['ext']) && !empty($filetyperesult['type'])){
-            $image_file_types = JSSTincluder::getJSModel('configuration')->getConfigValue('file_extension');
-            if(strstr($image_file_types, $filetyperesult['ext'])){
+        $jsst_filetyperesult = wp_check_filetype(sanitize_file_name($_FILES[$jsst_field]['name']));
+        if(!empty($jsst_filetyperesult['ext']) && !empty($jsst_filetyperesult['type'])){
+            $jsst_image_file_types = JSSTincluder::getJSModel('configuration')->getConfigValue('file_extension');
+            if(strstr($jsst_image_file_types, $jsst_filetyperesult['ext'])){
 
-                $result = wp_handle_upload($file, array('test_form' => false));
-                if (isset( $result['error'] ) ) {
+                $jsst_result = wp_handle_upload($jsst_file, array('test_form' => false));
+                if (isset( $jsst_result['error'] ) ) {
                     /**
                      * Error generated by _wp_handle_upload()
                      * @see _wp_handle_upload() in wp-admin/includes/file.php
                      */
-                    JSSTmessage::setMessage($result['error'], 'error');
+                    JSSTmessage::setMessage($jsst_result['error'], 'error');
                 }else{
-					$filename = jssupportticketphplib::JSST_basename( $result['file'] );
-					$filesize = $file['size'];
+					$jsst_filename = jssupportticketphplib::JSST_basename( $jsst_result['file'] );
+					$jsst_filesize = $jsst_file['size'];
                     // Get the folder where the file was uploaded
-                    $file_directory = dirname($result['file']);
+                    $jsst_file_directory = dirname($jsst_result['file']);
                     // generate index file
-                    JSSTincluder::getJSModel('jssupportticket')->generateIndexFile($file_directory);
+                    JSSTincluder::getJSModel('jssupportticket')->generateIndexFile($jsst_file_directory);
 				}
             }
         }
         // Set everything back to normal.
         remove_filter( 'upload_dir', array($this,'jssupportticket_upload_dir'));
-		if($filename != '' && $filesize != ''){
-			$array = array('filename' => $filename, 'filesize' => $filesize);
-			return $array;
+		if($jsst_filename != '' && $jsst_filesize != ''){
+			$jsst_array = array('filename' => $jsst_filename, 'filesize' => $jsst_filesize);
+			return $jsst_array;
 		}else{
 			return false;
 		}
 	}
 
     function uploadDesktopNotificationLogo(){
-        $filesize = jssupportticket::$_config['file_maximum_size'];
+        $jsst_filesize = jssupportticket::$_config['file_maximum_size'];
         if (!function_exists('wp_handle_upload')) {
             do_action('jssupportticket_load_wp_file');
         }
-        $this->uploadfor = 'notificationlogo';
+        if ( ! WP_Filesystem() ) {
+            return false;
+        }
+        $this->jsst_uploadfor = 'notificationlogo';
         // Register our path override.
         add_filter( 'upload_dir', array($this,'jssupportticket_upload_dir'));
         // Do our thing. WordPress will move the file to 'uploads/mycustomdir'.
-        $result = array();
-        $file = array(
+        $jsst_result = array();
+        $jsst_file = array(
             'name'     => sanitize_file_name($_FILES['logo_for_desktop_notfication']['name']),
             'type'     => jssupportticket::JSST_sanitizeData($_FILES['logo_for_desktop_notfication']['type']),
             'tmp_name' => jssupportticket::JSST_sanitizeData($_FILES['logo_for_desktop_notfication']['tmp_name']),
             'error'    => jssupportticket::JSST_sanitizeData($_FILES['logo_for_desktop_notfication']['error']),
             'size'     => jssupportticket::JSST_sanitizeData($_FILES['logo_for_desktop_notfication']['size']),
         ); // JSST_sanitizeData() function uses wordpress santize functions
-        $uploadfilesize = $file['size'] / 1024; //kb
-        if($uploadfilesize > $filesize){
+        $jsst_uploadfilesize = $jsst_file['size'] / 1024; //kb
+        if($jsst_uploadfilesize > $jsst_filesize){
             JSSTmessage::setMessage(esc_html(__('Error file size too large', 'js-support-ticket')), 'error');
             return;
         }
-        $filetyperesult = wp_check_filetype(sanitize_file_name($_FILES['logo_for_desktop_notfication']['name']));
-        if(!empty($filetyperesult['ext']) && !empty($filetyperesult['type'])){
-            $image_file_types = JSSTincluder::getJSModel('configuration')->getConfigValue('file_extension');
-            if(stristr($image_file_types, $filetyperesult['ext'])){
-                $result = wp_handle_upload($file, array('test_form' => false));
-                if ( $result && ! isset( $result['error'] ) ) {
-                    $filename = jssupportticketphplib::JSST_basename( $result['file'] );
-                    $result = JSSTincluder::getJSModel('configuration')->storeDesktopNotificationLogo($filename);
+        $jsst_filetyperesult = wp_check_filetype(sanitize_file_name($_FILES['logo_for_desktop_notfication']['name']));
+        if(!empty($jsst_filetyperesult['ext']) && !empty($jsst_filetyperesult['type'])){
+            $jsst_image_file_types = JSSTincluder::getJSModel('configuration')->getConfigValue('file_extension');
+            if(stristr($jsst_image_file_types, $jsst_filetyperesult['ext'])){
+                $jsst_result = wp_handle_upload($jsst_file, array('test_form' => false));
+                if ( $jsst_result && ! isset( $jsst_result['error'] ) ) {
+                    $jsst_filename = jssupportticketphplib::JSST_basename( $jsst_result['file'] );
+                    $jsst_result = JSSTincluder::getJSModel('configuration')->storeDesktopNotificationLogo($jsst_filename);
                 } else {
-                    JSSTmessage::setMessage($result['error'], 'error');
+                    JSSTmessage::setMessage($jsst_result['error'], 'error');
                 }
             }
         }

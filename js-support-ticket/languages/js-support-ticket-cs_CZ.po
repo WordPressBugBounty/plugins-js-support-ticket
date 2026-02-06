@@ -8765,3 +8765,45 @@ msgstr "Uložit a další"
 
 msgid "For enhanced security change encryption method in %1$s on line %2$s"
 msgstr "Pro zvýšenou metodu šifrování zabezpečení v %1 $ s na řádku 2 $ s"
+
+msgid "Changes may require cache clearing to take effect."
+msgstr "Změny mohou vyžadovat vymazání mezipaměti, aby se projevily."
+
+msgid "How Long Will My Support Stay Active?"
+msgstr "Jak dlouho zůstane moje podpora aktivní?"
+
+msgid "I Can’t Log Into My Account"
+msgstr "Nemohu se přihlásit ke svému účtu"
+
+msgid "I Want to Upgrade My Plan — How Can I Do It?"
+msgstr "Chci upgradovat svůj plán – jak to mohu udělat?"
+
+msgid "I’m Not Getting Access to My Subscription"
+msgstr "Nemám přístup ke svému předplatnému"
+
+msgid "Ticket ID Or Email Address Or Subject"
+msgstr "ID vstupenky nebo e-mailová adresa nebo předmět"
+
+msgid "Sophie Martinez"
+msgstr "Sophie Martinezová"
+
+msgid "Daniel Brooks"
+msgstr "Daniel Brooks"
+
+msgid "Liam Turner"
+msgstr "Liam Turner"
+
+msgid "Emily Harper"
+msgstr "Emily Harperová"
+
+msgid "Noah Bennett"
+msgstr "Noah Bennett"
+
+msgid "Olivia Chase"
+msgstr "Olivia Chaseová"
+
+msgid "Maya Collins"
+msgstr "Maya Collinsová"
+
+msgid "Ethan Reynolds"
+msgstr "Ethan Reynolds"

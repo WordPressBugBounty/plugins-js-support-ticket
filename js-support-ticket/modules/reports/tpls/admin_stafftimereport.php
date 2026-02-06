@@ -4,12 +4,12 @@
 ?>
 <?php
 wp_enqueue_script('jquery-ui-datepicker');
-wp_enqueue_style('jquery-ui-css', JSST_PLUGIN_URL . 'includes/css/jquery-ui-smoothness.css');
-$id = JSSTrequest::getVar('id');
-wp_enqueue_script('ticket-google-charts', JSST_PLUGIN_URL . 'includes/js/google-charts.js');
-wp_register_script( 'ticket-google-charts-handle', '' );
+wp_enqueue_style('jquery-ui-css', JSST_PLUGIN_URL . 'includes/css/jquery-ui-smoothness.css', array(), jssupportticket::$_config['productversion']);
+$jsst_id = JSSTrequest::getVar('id');
+wp_enqueue_script('ticket-google-charts', JSST_PLUGIN_URL . 'includes/js/google-charts.js', array(), jssupportticket::$_config['productversion'], true);
+wp_register_script( 'ticket-google-charts-handle', '', array(), jssupportticket::$_config['productversion'], true );
 wp_enqueue_script( 'ticket-google-charts-handle' );
-$jssupportticket_js ="
+$jsst_jssupportticket_js ="
     jQuery(document).ready(function ($) {
         $('.custom_date').datepicker({
             dateFormat: 'yy-mm-dd'
@@ -22,8 +22,8 @@ $jssupportticket_js ="
         document.getElementById('jssupportticketform').submit();
     }
     ";
-wp_add_inline_script('js-support-ticket-main-js',$jssupportticket_js);
-$jssupportticket_js ="
+wp_add_inline_script('js-support-ticket-main-js',$jsst_jssupportticket_js);
+$jsst_jssupportticket_js ="
     google.load('visualization', '1', {packages:['corechart']});
 	google.setOnLoadCallback(drawChart);
 
@@ -32,7 +32,7 @@ $jssupportticket_js ="
 		data.addColumn('date', '". esc_html(__('Dates','js-support-ticket')) ."');
         data.addColumn('number', '". esc_html(__('Minutes','js-support-ticket')) ."');
         data.addRows([
-			". wp_kses(jssupportticket::$_data['line_chart_json_array'], JSST_ALLOWED_TAGS) ."
+			". wp_kses(jssupportticket::$jsst_data['line_chart_json_array'], JSST_ALLOWED_TAGS) ."
         ]);
 
         var options = {
@@ -49,7 +49,7 @@ $jssupportticket_js ="
         chart.draw(data, options);
     }
 ";
-wp_add_inline_script('ticket-google-charts-handle',$jssupportticket_js);
+wp_add_inline_script('ticket-google-charts-handle',$jsst_jssupportticket_js);
 JSSTmessage::getMessage();
  ?>
 
@@ -60,23 +60,23 @@ JSSTmessage::getMessage();
         <?php  JSSTincluder::getClassesInclude('jsstadminsidemenu'); ?>
     </div>
     <div id="jsstadmin-data">
-    <span class="js-adminhead-title"> <a class="jsanchor-backlink" href="<?php echo esc_url(admin_url('admin.php?page=reports&jstlay=staffdetailreport&id='.esc_attr($id)));?>"><img alt="image" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/back-icon.png" /></a> <span class="jsheadtext"><?php echo esc_html(__("Report By Staff Member", 'js-support-ticket')); ?></span>
+    <span class="js-adminhead-title"> <a class="jsanchor-backlink" href="<?php echo esc_url(admin_url('admin.php?page=reports&jstlay=staffdetailreport&id='.esc_attr($jsst_id)));?>"><img alt="<?php echo esc_attr(__('image','js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/back-icon.png" /></a> <span class="jsheadtext"><?php echo esc_html(__("Report By Staff Member", 'js-support-ticket')); ?></span>
     </span>
-    <a href="<?php echo esc_url(admin_url('admin.php?page=reports&jstlay=staffreport&date_start='.jssupportticket::$_data['filter']['date_start'].'&date_end='.jssupportticket::$_data['filter']['date_end'])); ?>"></a>
-    <form class="js-filter-form js-report-form" name="jssupportticketform" id="jssupportticketform" method="post" action="<?php echo esc_url(wp_nonce_url(admin_url("admin.php?page=reports&jstlay=stafftimereport&id=".esc_attr($id)),"reports")); ?>">
+    <a href="<?php echo esc_url(admin_url('admin.php?page=reports&jstlay=staffreport&date_start='.jssupportticket::$jsst_data['filter']['date_start'].'&date_end='.jssupportticket::$jsst_data['filter']['date_end'])); ?>"></a>
+    <form class="js-filter-form js-report-form" name="jssupportticketform" id="jssupportticketform" method="post" action="<?php echo esc_url(wp_nonce_url(admin_url("admin.php?page=reports&jstlay=stafftimereport&id=".esc_attr($jsst_id)),"reports")); ?>">
         <?php
-            $curdate = date_i18n('Y-m-d');
-            $enddate = date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime("now -1 month"));
-            $date_start = !empty(jssupportticket::$_data['filter']['date_start']) ? jssupportticket::$_data['filter']['date_start'] : $curdate;
-            $date_end = !empty(jssupportticket::$_data['filter']['date_end']) ? jssupportticket::$_data['filter']['date_end'] : $enddate;
-        	echo wp_kses(JSSTformfield::text('date_start', $date_start, array('class' => 'custom_date','placeholder' => esc_html(__('Start Date','js-support-ticket')))), JSST_ALLOWED_TAGS);
-        	echo wp_kses(JSSTformfield::text('date_end', $date_end, array('class' => 'custom_date','placeholder' => esc_html(__('End Date','js-support-ticket')))), JSST_ALLOWED_TAGS);
+            $jsst_curdate = date_i18n('Y-m-d');
+            $jsst_enddate = date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime("now -1 month"));
+            $jsst_date_start = !empty(jssupportticket::$jsst_data['filter']['date_start']) ? jssupportticket::$jsst_data['filter']['date_start'] : $jsst_curdate;
+            $jsst_date_end = !empty(jssupportticket::$jsst_data['filter']['date_end']) ? jssupportticket::$jsst_data['filter']['date_end'] : $jsst_enddate;
+        	echo wp_kses(JSSTformfield::text('date_start', $jsst_date_start, array('class' => 'custom_date','placeholder' => esc_html(__('Start Date','js-support-ticket')))), JSST_ALLOWED_TAGS);
+        	echo wp_kses(JSSTformfield::text('date_end', $jsst_date_end, array('class' => 'custom_date','placeholder' => esc_html(__('End Date','js-support-ticket')))), JSST_ALLOWED_TAGS);
         	echo wp_kses(JSSTformfield::hidden('JSST_form_search', 'JSST_SEARCH'), JSST_ALLOWED_TAGS);
     	?>
         <?php echo wp_kses(JSSTformfield::submitbutton('go', esc_html(__('Search', 'js-support-ticket')), array('class' => 'button')), JSST_ALLOWED_TAGS); ?>
     	<?php echo wp_kses(JSSTformfield::button('reset', esc_html(__('Reset', 'js-support-ticket')), array('class' => 'button', 'onclick' => 'resetFrom();')), JSST_ALLOWED_TAGS); ?>
     </form>
-    <span class="js-admin-subtitle"><?php echo esc_html(jssupportticket::$_data[0]['staffname']); ?></span>
+    <span class="js-admin-subtitle"><?php echo esc_html(jssupportticket::$jsst_data[0]['staffname']); ?></span>
     <div id="curve_chart" style="height:400px;width:98%; "></div>
   </div>
 </div>

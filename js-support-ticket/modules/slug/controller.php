@@ -10,31 +10,31 @@ class JSSTslugController {
     }
 
     function handleRequest() {
-        $layout = JSSTrequest::getLayout('jstlay', null, 'slug');
-        jssupportticket::$_data['sanitized_args']['jsst_nonce'] = esc_html(wp_create_nonce('jsst_nonce'));
-        if (self::canaddfile($layout)) {
-            switch ($layout) {
+        $jsst_layout = JSSTrequest::getLayout('jstlay', null, 'slug');
+        jssupportticket::$jsst_data['sanitized_args']['jsst_nonce'] = esc_html(wp_create_nonce('jsst_nonce'));
+        if (self::canaddfile($jsst_layout)) {
+            switch ($jsst_layout) {
                 case 'admin_slug':
                     JSSTincluder::getJSModel('slug')->getSlug();
                     break;
                 default:
                     exit;
             }
-            $module = (is_admin()) ? 'page' : 'jstmod';
-            $module = JSSTrequest::getVar($module, null, 'slug');
-            JSSTincluder::include_file($layout, $module);
+            $jsst_module = (is_admin()) ? 'page' : 'jstmod';
+            $jsst_module = JSSTrequest::getVar($jsst_module, null, 'slug');
+            JSSTincluder::include_file($jsst_layout, $jsst_module);
         }
     }
 
-    function canaddfile($layout) {
-        $nonce_value = JSSTrequest::getVar('jsst_nonce');
-        if ( wp_verify_nonce( $nonce_value, 'jsst_nonce') ) {
+    function canaddfile($jsst_layout) {
+        $jsst_nonce_value = JSSTrequest::getVar('jsst_nonce');
+        if ( wp_verify_nonce( $jsst_nonce_value, 'jsst_nonce') ) {
             if (isset($_POST['form_request']) && $_POST['form_request'] == 'jssupportticket') {
                 return false;
             } elseif (isset($_GET['action']) && $_GET['action'] == 'jstask') {
                 return false;
             } else {
-                if(!is_admin() && jssupportticketphplib::JSST_strpos($layout, 'admin_') === 0){
+                if(!is_admin() && jssupportticketphplib::JSST_strpos($jsst_layout, 'admin_') === 0){
                     return false;
                 }
                 return true;
@@ -46,18 +46,18 @@ class JSSTslugController {
         if(!current_user_can('manage_options')){
             return false;
         }
-        $nonce = JSSTrequest::getVar('_wpnonce');
-        if (! wp_verify_nonce( $nonce, 'save-slug') ) {
+        $jsst_nonce = JSSTrequest::getVar('_wpnonce');
+        if (! wp_verify_nonce( $jsst_nonce, 'save-slug') ) {
             die( 'Security check Failed' );
         }
-        $data = JSSTrequest::get('post');
-        $result = JSSTincluder::getJSModel('slug')->storeSlug($data);
-        if($data['pagenum'] > 0){
-            $url = admin_url("admin.php?page=slug&pagenum=".esc_attr($data['pagenum']));
+        $jsst_data = JSSTrequest::get('post');
+        $jsst_result = JSSTincluder::getJSModel('slug')->storeSlug($jsst_data);
+        if($jsst_data['pagenum'] > 0){
+            $jsst_url = admin_url("admin.php?page=slug&pagenum=".esc_attr($jsst_data['pagenum']));
         }else{
-            $url = admin_url("admin.php?page=slug");
+            $jsst_url = admin_url("admin.php?page=slug");
         }
-        wp_redirect($url);
+        wp_safe_redirect($jsst_url);
         exit;
     }
 
@@ -65,14 +65,14 @@ class JSSTslugController {
         if(!current_user_can('manage_options')){
             return false;
         }
-        $nonce = JSSTrequest::getVar('_wpnonce');
-        if (! wp_verify_nonce( $nonce, 'save-prefix') ) {
+        $jsst_nonce = JSSTrequest::getVar('_wpnonce');
+        if (! wp_verify_nonce( $jsst_nonce, 'save-prefix') ) {
             die( 'Security check Failed' );
         }
-        $data = JSSTrequest::get('post');
-        $result = JSSTincluder::getJSModel('slug')->savePrefix($data);
-        $url = admin_url("admin.php?page=slug");
-        wp_redirect($url);
+        $jsst_data = JSSTrequest::get('post');
+        $jsst_result = JSSTincluder::getJSModel('slug')->savePrefix($jsst_data);
+        $jsst_url = admin_url("admin.php?page=slug");
+        wp_safe_redirect($jsst_url);
         exit;
     }
 
@@ -80,26 +80,26 @@ class JSSTslugController {
         if(!current_user_can('manage_options')){
             return false;
         }
-        $nonce = JSSTrequest::getVar('_wpnonce');
-        if (! wp_verify_nonce( $nonce, 'save-home-prefix') ) {
+        $jsst_nonce = JSSTrequest::getVar('_wpnonce');
+        if (! wp_verify_nonce( $jsst_nonce, 'save-home-prefix') ) {
             die( 'Security check Failed' );
         }
-        $data = JSSTrequest::get('post');
-        $result = JSSTincluder::getJSModel('slug')->saveHomePrefix($data);
-        $url = admin_url("admin.php?page=slug");
-        wp_redirect($url);
+        $jsst_data = JSSTrequest::get('post');
+        $jsst_result = JSSTincluder::getJSModel('slug')->saveHomePrefix($jsst_data);
+        $jsst_url = admin_url("admin.php?page=slug");
+        wp_safe_redirect($jsst_url);
         exit;
     }
 
     function resetallslugs() {
-        $data = JSSTrequest::get('post');
-        $result = JSSTincluder::getJSModel('slug')->resetAllSlugs();
-        $url = admin_url("admin.php?page=slug");
-        wp_redirect($url);
+        $jsst_data = JSSTrequest::get('post');
+        $jsst_result = JSSTincluder::getJSModel('slug')->resetAllSlugs();
+        $jsst_url = admin_url("admin.php?page=slug");
+        wp_safe_redirect($jsst_url);
         exit;
     }
 
 }
 
-$slugController = new JSSTslugController();
+$jsst_slugController = new JSSTslugController();
 ?>

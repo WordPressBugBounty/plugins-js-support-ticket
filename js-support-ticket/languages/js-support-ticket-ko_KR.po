@@ -8761,3 +8761,45 @@ msgstr "저장 & 다음"
 
 msgid "For enhanced security change encryption method in %1$s on line %2$s"
 msgstr "향상된 보안 변경 암호화 방법의 경우 %1 $ S 라인 %2 $ S"
+
+msgid "Changes may require cache clearing to take effect."
+msgstr "변경 사항을 적용하려면 캐시를 지워야 할 수도 있습니다."
+
+msgid "How Long Will My Support Stay Active?"
+msgstr "내 지원은 얼마나 오랫동안 활성 상태로 유지됩니까?"
+
+msgid "I Can’t Log Into My Account"
+msgstr "내 계정에 로그인할 수 없습니다"
+
+msgid "I Want to Upgrade My Plan — How Can I Do It?"
+msgstr "내 플랜을 업그레이드하고 싶습니다. 어떻게 해야 합니까?"
+
+msgid "I’m Not Getting Access to My Subscription"
+msgstr "내 구독에 액세스할 수 없습니다"
+
+msgid "Ticket ID Or Email Address Or Subject"
+msgstr "티켓 ID 또는 이메일 주소 또는 제목"
+
+msgid "Sophie Martinez"
+msgstr "소피 마르티네즈"
+
+msgid "Daniel Brooks"
+msgstr "다니엘 브룩스"
+
+msgid "Liam Turner"
+msgstr "리암 터너"
+
+msgid "Emily Harper"
+msgstr "에밀리 하퍼"
+
+msgid "Noah Bennett"
+msgstr "노아 베넷"
+
+msgid "Olivia Chase"
+msgstr "올리비아 체이스"
+
+msgid "Maya Collins"
+msgstr "마야 콜린스"
+
+msgid "Ethan Reynolds"
+msgstr "에단 레이놀즈"

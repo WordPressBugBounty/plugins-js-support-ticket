@@ -11,13 +11,13 @@ class jssupportticketadmin {
 
     function mainmenu() {
         if (current_user_can('jsst_support_ticket')) {
-            $unresolved_tickets = JSSTincluder::getJSModel('ticket')->getUnresolvedAdminTicketsCount();
-            $count_str = '';
-            if ($unresolved_tickets > 0) {
-                $count_str = ' <span class="update-plugins"><span class="plugin-count">' . $unresolved_tickets . '</span></span>';
+            $jsst_unresolved_tickets = JSSTincluder::getJSModel('ticket')->getUnresolvedAdminTicketsCount();
+            $jsst_count_str = '';
+            if ($jsst_unresolved_tickets > 0) {
+                $jsst_count_str = ' <span class="update-plugins"><span class="plugin-count">' . $jsst_unresolved_tickets . '</span></span>';
             }
             add_menu_page(esc_html(__('JS Help Desk Control Panel', 'js-support-ticket')), // Page title
-                    esc_html(__('Help Desk', 'js-support-ticket')). $count_str, // menu title
+                    esc_html(__('Help Desk', 'js-support-ticket')). $jsst_count_str, // menu title
                     'jsst_support_ticket', // capability
                     'jssupportticket', //menu slug
                     array($this, 'showAdminPage'), // function name
@@ -420,19 +420,19 @@ class jssupportticketadmin {
         }
     }
 
-    function addMissingAddonPage($module_name){
+    function addMissingAddonPage($jsst_module_name){
         add_submenu_page('jssupportticket_hide', // parent slug
                 esc_html(__('Premium Addon', 'js-support-ticket')), // Page title
                 esc_html(__('Premium Addon', 'js-support-ticket')), // menu title
                 'jsst_support_ticket', // capability
-                $module_name, //menu slug
+                $jsst_module_name, //menu slug
                 array($this, 'showMissingAddonPage') // function name
         );
     }
 
     function showAdminPage() {
-        $page = JSSTrequest::getVar('page');
-        JSSTincluder::include_file($page);
+        $jsst_page = JSSTrequest::getVar('page');
+        JSSTincluder::include_file($jsst_page);
     }
 
     function showMissingAddonPage() {
@@ -441,5 +441,5 @@ class jssupportticketadmin {
 
 }
 
-$jssupportticketAdmin = new jssupportticketadmin();
+$jsst_jssupportticketAdmin = new jssupportticketadmin();
 ?>

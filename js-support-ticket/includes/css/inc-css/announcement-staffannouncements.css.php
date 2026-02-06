@@ -5,19 +5,19 @@ if (!defined('ABSPATH'))
 JSSTincluder::getJSModel('jssupportticket')->checkIfMainCssFileIsEnqued();
 JSSTincluder::getJSModel('jssupportticket')->jsst_get_theme_colors();
 
-$color1 = jssupportticket::$_colors['color1'];
-$color2 = jssupportticket::$_colors['color2'];
-$color3 = jssupportticket::$_colors['color3'];
-$color4 = jssupportticket::$_colors['color4'];
-$color5 = jssupportticket::$_colors['color5'];
-$color6 = jssupportticket::$_colors['color6'];
-$color7 = jssupportticket::$_colors['color7'];
-$color8 = jssupportticket::$_colors['color8'];
-$color9 = jssupportticket::$_colors['color9'];
-$jssupportticket_css = '';
+$jsst_color1 = jssupportticket::$jsst_colors['color1'];
+$jsst_color2 = jssupportticket::$jsst_colors['color2'];
+$jsst_color3 = jssupportticket::$jsst_colors['color3'];
+$jsst_color4 = jssupportticket::$jsst_colors['color4'];
+$jsst_color5 = jssupportticket::$jsst_colors['color5'];
+$jsst_color6 = jssupportticket::$jsst_colors['color6'];
+$jsst_color7 = jssupportticket::$jsst_colors['color7'];
+$jsst_color8 = jssupportticket::$jsst_colors['color8'];
+$jsst_color9 = jssupportticket::$jsst_colors['color9'];
+$jsst_jssupportticket_css = '';
 
 /*Code for Css*/
-$jssupportticket_css .= '
+$jsst_jssupportticket_css .= '
 /* Annoucement */
 
     /* General Wrappers - Modern Layout */
@@ -26,13 +26,13 @@ $jssupportticket_css .= '
     div.js-ticket-download-content-wrp,
     div.js-ticket-table-wrp {width: 100%;float: none; /* Remove float */box-sizing: border-box;}
     div.js-ticket-top-search-wrp{display:flex;}
-    div.js-ticket-top-search-wrp,div.js-ticket-download-content-wrp {border: 1px solid ' . $color5 . ';
+    div.js-ticket-top-search-wrp,div.js-ticket-download-content-wrp {border: 1px solid ' . $jsst_color5 . ';
 		width: 100%;}
 	div.jsst-main-up-wrapper input, div.jsst-main-up-wrapper button, div.jsst-main-up-wrapper select, div.jsst-main-up-wrapper textarea {line-height: 1.3;margin-bottom: 0px;}
 
     /* Card Styling for Search and Content Areas */
     div.js-ticket-top-search-wrp,
-    div.js-ticket-download-content-wrp {padding: 1.5rem;border: 1px solid ' . $color5 . ';border-radius: 12px;box-shadow: 0 4px 6px rgba(0,0,0,0.04);margin-bottom: 2rem;margin-top: 17px;background: #fff; /* Added for card effect */}
+    div.js-ticket-download-content-wrp {padding: 1.5rem;border: 1px solid ' . $jsst_color5 . ';border-radius: 12px;box-shadow: 0 4px 6px rgba(0,0,0,0.04);margin-bottom: 2rem;margin-top: 17px;background: #fff; /* Added for card effect */}
 
     /* Main Form Container - Flexbox Layout */
     form#jssupportticketform {width: 100%;display: flex;gap: 10px;flex-wrap: wrap;}
@@ -46,7 +46,7 @@ $jssupportticket_css .= '
 
 	/* Input and Select Styling */
 	div.js-ticket-fields-wrp div.js-ticket-form-field input.js-ticket-field-input,
-	select.js-ticket-select-field{width: 100%;padding:12px 18px;border: 1px solid '. $color5 .';border-radius: 8px;height: auto; /* Remove fixed height */line-height: 1.5;transition: border-color 0.2s ease, box-shadow 0.2s ease;box-sizing: border-box;height: 100%;min-height:52px;}
+	select.js-ticket-select-field{width: 100%;padding:12px 18px;border: 1px solid '. $jsst_color5 .';border-radius: 8px;height: auto; /* Remove fixed height */line-height: 1.5;transition: border-color 0.2s ease, box-shadow 0.2s ease;box-sizing: border-box;height: 100%;min-height:52px;}
 	select.js-ticket-select-field{-webkit-appearance: none;appearance: none;background-image: url(' . esc_url(JSST_PLUGIN_URL) . 'includes/images/selecticon.png);background-repeat: no-repeat;background-position: right 1rem center;background-size: 0.75rem;padding-right: 2.5rem; /* Space for arrow */}
 	
 	/* Button Wrapper */
@@ -56,7 +56,7 @@ $jssupportticket_css .= '
 	/* Buttons */
 	div.js-ticket-search-form-btn-wrp input,
     div.js-ticket-search-form-btn-wrp-download input.js-search-button,
-    div.js-ticket-search-form-btn-wrp-download input.js-reset-button {float: none;width: auto;padding: 5px 20px;min-height:52px;min-width:120px;font-weight:600;margin: 0;border-radius: 8px;height: auto;line-height: 1.5;border: 1px solid '. $color5 .';cursor: pointer;transition: opacity 0.2s ease, background-color 0.2s ease;}
+    div.js-ticket-search-form-btn-wrp-download input.js-reset-button {float: none;width: auto;padding: 5px 20px;min-height:52px;min-width:120px;font-weight:600;margin: 0;border-radius: 8px;height: auto;line-height: 1.5;border: 1px solid '. $jsst_color5 .';cursor: pointer;transition: opacity 0.2s ease, background-color 0.2s ease;}
 	/* Table Heading Wrapper */
 	div.js-ticket-table-heading-wrp{width: 100%;padding: 15px 20px;display: flex;justify-content: space-between;align-items: center;margin-bottom: 1rem;float: none;font-weight: 700;border-radius: 8px;}
 
@@ -74,7 +74,7 @@ $jssupportticket_css .= '
 
     div.js-ticket-table-body {width: 100%;float: none;}
 
-	div.js-ticket-table-body div.js-ticket-data-row {border-bottom: 1px solid ' . $color5 . ';transition: background-color 0.2s ease;}
+	div.js-ticket-table-body div.js-ticket-data-row {border-bottom: 1px solid ' . $jsst_color5 . ';transition: background-color 0.2s ease;}
 	
 	/* Table Columns */
 	div.js-ticket-table-wrp div.js-ticket-table-header div.js-ticket-table-header-col,
@@ -145,53 +145,53 @@ $jssupportticket_css .= '
 	select{-webkit-appearance:none !important;}
 ';
 /*Code For Colors*/
-$jssupportticket_css .= '
-	div.js-ticket-top-search-wrp{border:1px solid  ' . $color5 . ';}
+$jsst_jssupportticket_css .= '
+	div.js-ticket-top-search-wrp{border:1px solid  ' . $jsst_color5 . ';}
 	div.js-ticket-search-fields-wrp {background: #fff;}
-	select.js-ticket-select-field{background-color: #fff !important;border:1px solid  ' . $color5 . ';color: ' . $color4 . ';}
-	select#departmentid{background-color: ' . $color3 . ';border:1px solid  ' . $color5 . ';}
-	div.js-ticket-premade-msg-wrp div.js-ticket-premade-field-wrp select#departmentid{background-color: ' . $color3 . ';border:1px solid  ' . $color5 . ';}
-	div.js-ticket-premade-msg-wrp div.js-ticket-premade-field-wrp select#staffid{background-color: ' . $color3 . ';border:1px solid  ' . $color5 . ';}
-	div.js-ticket-search-form-btn-wrp input.js-search-button{background: ' . $color1 . ' !important;color: ' . $color7 . ' !important;}
-	div.js-ticket-search-form-btn-wrp input.js-search-button:hover {background: ' . $color2 . ' !important;color: ' . $color7 . ' !important;}
-	div.js-ticket-search-form-btn-wrp input.js-reset-button{background-color: #f5f2f5;color: #636363;border: 1px solid '. $color5 .';box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);}
-    div.js-ticket-table-header{background: ' . $color3 . ' !important;}
-	div.js-ticket-search-form-btn-wrp input.js-reset-button:hover {background: ' . $color2 . ' !important;color: ' . $color7 . ' !important;}
-	div.js-ticket-table-heading-wrp{background-color: ' . $color2 . ';color: ' . $color7 . ';}
-	div.js-ticket-table-heading-wrp div.js-ticket-table-heading-right a.js-ticket-table-add-btn{background: ' . $color2 . ';color: ' . $color7 . ';border:1px solid  ' . $color5 . ';}
-	div.js-ticket-table-heading-wrp div.js-ticket-table-heading-right a.js-ticket-table-add-btn:hover{border-color: ' . $color1 . ';}
-	div.js-ticket-fields-wrp div.js-ticket-form-field input.js-ticket-field-input{background-color: #fff;border:1px solid  ' . $color5 . ';color: ' . $color4 . ';}
-	div.js-ticket-table-header{background-color:#ecf0f5;border:1px solid  ' . $color5 . ';}
-	div.js-ticket-table-header div.js-ticket-table-header-col{color: ' . $color2 . ';}
+	select.js-ticket-select-field{background-color: #fff !important;border:1px solid  ' . $jsst_color5 . ';color: ' . $jsst_color4 . ';}
+	select#departmentid{background-color: ' . $jsst_color3 . ';border:1px solid  ' . $jsst_color5 . ';}
+	div.js-ticket-premade-msg-wrp div.js-ticket-premade-field-wrp select#departmentid{background-color: ' . $jsst_color3 . ';border:1px solid  ' . $jsst_color5 . ';}
+	div.js-ticket-premade-msg-wrp div.js-ticket-premade-field-wrp select#staffid{background-color: ' . $jsst_color3 . ';border:1px solid  ' . $jsst_color5 . ';}
+	div.js-ticket-search-form-btn-wrp input.js-search-button{background: ' . $jsst_color1 . ' !important;color: ' . $jsst_color7 . ' !important;}
+	div.js-ticket-search-form-btn-wrp input.js-search-button:hover {background: ' . $jsst_color2 . ' !important;color: ' . $jsst_color7 . ' !important;}
+	div.js-ticket-search-form-btn-wrp input.js-reset-button{background-color: #f5f2f5;color: #636363;border: 1px solid '. $jsst_color5 .';box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);}
+    div.js-ticket-table-header{background: ' . $jsst_color3 . ' !important;}
+	div.js-ticket-search-form-btn-wrp input.js-reset-button:hover {background: ' . $jsst_color2 . ' !important;color: ' . $jsst_color7 . ' !important;}
+	div.js-ticket-table-heading-wrp{background-color: ' . $jsst_color2 . ';color: ' . $jsst_color7 . ';}
+	div.js-ticket-table-heading-wrp div.js-ticket-table-heading-right a.js-ticket-table-add-btn{background: ' . $jsst_color2 . ';color: ' . $jsst_color7 . ';border:1px solid  ' . $jsst_color5 . ';}
+	div.js-ticket-table-heading-wrp div.js-ticket-table-heading-right a.js-ticket-table-add-btn:hover{border-color: ' . $jsst_color1 . ';}
+	div.js-ticket-fields-wrp div.js-ticket-form-field input.js-ticket-field-input{background-color: #fff;border:1px solid  ' . $jsst_color5 . ';color: ' . $jsst_color4 . ';}
+	div.js-ticket-table-header{background-color:#ecf0f5;border:1px solid  ' . $jsst_color5 . ';}
+	div.js-ticket-table-header div.js-ticket-table-header-col{color: ' . $jsst_color2 . ';}
 	div.js-ticket-table-header div.js-ticket-table-header-col:last-child{}
-	div.js-ticket-table-body div.js-ticket-data-row div.js-ticket-table-body-col .js-ticket-title-anchor{color: ' . $color1 . ';}
-	div.js-ticket-table-body div.js-ticket-data-row{border:1px solid  ' . $color5 . ';}
-	div.js-ticket-table-body div.js-ticket-data-row div.js-ticket-table-body-col{color: ' . $color4 . ';}
+	div.js-ticket-table-body div.js-ticket-data-row div.js-ticket-table-body-col .js-ticket-title-anchor{color: ' . $jsst_color1 . ';}
+	div.js-ticket-table-body div.js-ticket-data-row{border:1px solid  ' . $jsst_color5 . ';}
+	div.js-ticket-table-body div.js-ticket-data-row div.js-ticket-table-body-col{color: ' . $jsst_color4 . ';}
 	div.js-ticket-table-body div.js-ticket-data-row div.js-ticket-table-body-col:last-child{}
-	div.js-ticket-table-body div.js-ticket-data-row div.js-ticket-table-body-col .js-ticket-table-action-btn {border: 1px solid ' . $color5 . ';background: #fff;}
-	div.js-ticket-table-body div.js-ticket-data-row div.js-ticket-table-body-col .js-ticket-table-action-btn:hover {border-color: ' . $color1 . ';}
-	div.js-ticket-announcement-wrapper div.js-ticket-table-body div.js-ticket-data-row {border:1px solid' . $color5 . ';}
-	th.js-ticket-table-th{border-right:1px solid  ' . $color5 . ';}
-	tbody.js-ticket-table-tbody{border:1px solid  ' . $color5 . ';}
-	td.js-ticket-table-td{border-right:1px solid  ' . $color5 . ';}
-	div.js_ticketattachment{background-color: ' . $color3 . ';border:1px solid  ' . $color5 . ';}
-	div.js-ticket-categories-heading-wrp{background-color:#ecf0f5;border:1px solid  ' . $color5 . ';}
-	div.js-ticket-categories-content div.js-ticket-category-box{background-color: ' . $color3 . ';border:1px solid  ' . $color5 . ';}
-	div.js-ticket-categories-content div.js-ticket-category-box a.js-ticket-category-title span.js-ticket-category-download-logo{background: ' . $color2 . ';}
-	div.js-ticket-downloads-wrp div.js-ticket-downloads-heading-wrp{background-color:#ecf0f5;border:1px solid  ' . $color5 . ';}
-	div.js-ticket-downloads-content div.js-ticket-download-box{background-color: ' . $color3 . ';border:1px solid  ' . $color5 . ';}
-	div.js-ticket-download-btn button.js-ticket-download-btn-style{background-color: ' . $color2 . ';}
-	div.js-ticket-download-btn a.js-ticket-download-btn-style{background-color: ' . $color1 . '; color: ' . $color7 . ';}
+	div.js-ticket-table-body div.js-ticket-data-row div.js-ticket-table-body-col .js-ticket-table-action-btn {border: 1px solid ' . $jsst_color5 . ';background: #fff;}
+	div.js-ticket-table-body div.js-ticket-data-row div.js-ticket-table-body-col .js-ticket-table-action-btn:hover {border-color: ' . $jsst_color1 . ';}
+	div.js-ticket-announcement-wrapper div.js-ticket-table-body div.js-ticket-data-row {border:1px solid' . $jsst_color5 . ';}
+	th.js-ticket-table-th{border-right:1px solid  ' . $jsst_color5 . ';}
+	tbody.js-ticket-table-tbody{border:1px solid  ' . $jsst_color5 . ';}
+	td.js-ticket-table-td{border-right:1px solid  ' . $jsst_color5 . ';}
+	div.js_ticketattachment{background-color: ' . $jsst_color3 . ';border:1px solid  ' . $jsst_color5 . ';}
+	div.js-ticket-categories-heading-wrp{background-color:#ecf0f5;border:1px solid  ' . $jsst_color5 . ';}
+	div.js-ticket-categories-content div.js-ticket-category-box{background-color: ' . $jsst_color3 . ';border:1px solid  ' . $jsst_color5 . ';}
+	div.js-ticket-categories-content div.js-ticket-category-box a.js-ticket-category-title span.js-ticket-category-download-logo{background: ' . $jsst_color2 . ';}
+	div.js-ticket-downloads-wrp div.js-ticket-downloads-heading-wrp{background-color:#ecf0f5;border:1px solid  ' . $jsst_color5 . ';}
+	div.js-ticket-downloads-content div.js-ticket-download-box{background-color: ' . $jsst_color3 . ';border:1px solid  ' . $jsst_color5 . ';}
+	div.js-ticket-download-btn button.js-ticket-download-btn-style{background-color: ' . $jsst_color2 . ';}
+	div.js-ticket-download-btn a.js-ticket-download-btn-style{background-color: ' . $jsst_color1 . '; color: ' . $jsst_color7 . ';}
 	div.js-ticket-download-btn a.js-ticket-download-btn-style:hover{
-	background-color: ' . $color2 . '; color: ' . $color7 . ';
+	background-color: ' . $jsst_color2 . '; color: ' . $jsst_color7 . ';
 	}
-	div#js-ticket-main-popup{background:  ' . $color7 . ';}
-	span#js-ticket-popup-title{background-color: ' . $color2 . ';color: ' . $color7 . ';}
-	div.js-ticket-downloads-content div.js-ticket-download-box div.js-ticket-download-left a.js-ticket-download-title:hover{color: ' . $color2 . ';}
-	div.js-ticket-categories-content div.js-ticket-category-box a.js-ticket-category-title:hover{color: ' . $color2 . ';}';
+	div#js-ticket-main-popup{background:  ' . $jsst_color7 . ';}
+	span#js-ticket-popup-title{background-color: ' . $jsst_color2 . ';color: ' . $jsst_color7 . ';}
+	div.js-ticket-downloads-content div.js-ticket-download-box div.js-ticket-download-left a.js-ticket-download-title:hover{color: ' . $jsst_color2 . ';}
+	div.js-ticket-categories-content div.js-ticket-category-box a.js-ticket-category-title:hover{color: ' . $jsst_color2 . ';}';
 
 
-wp_add_inline_style('jssupportticket-main-css', $jssupportticket_css);
+wp_add_inline_style('jssupportticket-main-css', $jsst_jssupportticket_css);
 
 
 ?>

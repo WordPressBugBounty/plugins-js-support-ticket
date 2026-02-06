@@ -3,14 +3,14 @@
 /**
  * @package JS Help Desk
  * @author Ahmad Bilal
- * @version 3.0.0
+ * @version 3.0.3
  */
 /*
-  Plugin Name: JS Help Desk
+  Plugin Name: JS Help Desk – AI-Powered Support & Ticketing System
   Plugin URI: https://www.jshelpdesk.com
   Description: JS Help Desk is a trusted open source ticket system. JS Help Desk is a simple, easy to use, web-based customer support system. User can create ticket from front-end. JS Help Desk comes packed with lot features than most of the expensive(and complex) support ticket system on market. JS Help Desk provide you best industry help desk system.
   Author: JS Help Desk
-  Version: 3.0.0
+  Version: 3.0.3
   Text Domain: js-support-ticket
   License: GPLv3
   Author URI: https://www.jshelpdesk.com
@@ -23,7 +23,7 @@ class jssupportticket {
 
     public static $_path;
     public static $_pluginpath;
-    public static $_data; /* data[0] for list , data[1] for total paginition ,data[2] userfieldsforview , data[3] userfield for form , data[4] for reply , data[5] for ticket history  , data[6] for internal notes  , data[7] for ban email  , data['ticket_attachment'] for attachment */
+    public static $jsst_data; /* data[0] for list , data[1] for total paginition ,data[2] userfieldsforview , data[3] userfield for form , data[4] for reply , data[5] for ticket history  , data[6] for internal notes  , data[7] for ban email  , data['ticket_attachment'] for attachment */
     public static $_pageid;
     public static $_db;
     public static $_config;
@@ -33,7 +33,7 @@ class jssupportticket {
     public static $_sortlinks;
     public static $_msg;
     public static $_wpprefixforuser;
-    public static $_colors;
+    public static $jsst_colors;
     public static $_active_addons;
     public static $_addon_query;
     public static $_currentversion;
@@ -46,15 +46,15 @@ class jssupportticket {
         // php 8.1 issues
         require_once 'includes/jssupportticketphplib.php';
         // to check what addons are active and create an array.
-        $plugin_array = get_option('active_plugins');
-        $addon_array = array();
-        foreach ($plugin_array as $key => $value) {
-            $plugin_name = pathinfo($value, PATHINFO_FILENAME);
-            if(strstr($plugin_name, 'js-support-ticket-')){
-                $addon_array[] = jssupportticketphplib::JSST_str_replace('js-support-ticket-', '', $plugin_name);
+        $jsst_plugin_array = get_option('active_plugins');
+        $jsst_addon_array = array();
+        foreach ($jsst_plugin_array as $jsst_key => $jsst_value) {
+            $jsst_plugin_name = pathinfo($jsst_value, PATHINFO_FILENAME);
+            if(strstr($jsst_plugin_name, 'js-support-ticket-')){
+                $jsst_addon_array[] = jssupportticketphplib::JSST_str_replace('js-support-ticket-', '', $jsst_plugin_name);
             }
         }
-        self::$_active_addons = $addon_array;
+        self::$_active_addons = $jsst_addon_array;
         // above code is its right place
 
 
@@ -64,10 +64,10 @@ class jssupportticket {
         self::registeractions();
         self::$_path = plugin_dir_path(__FILE__);
         self::$_pluginpath = plugins_url('/', __FILE__);
-        self::$_data = array();
+        self::$jsst_data = array();
         self::$_search = array();
         self::$_captcha = array();
-        self::$_currentversion = '300';
+        self::$_currentversion = '303';
         self::$_addon_query = array('select'=>'','join'=>'','where'=>'');
         self::$_jshdsession = JSSTincluder::getObjectClass('wphdsession');
         global $wpdb;
@@ -89,18 +89,18 @@ class jssupportticket {
         }
         add_filter('wpmu_drop_tables', array($this, 'jssupportticket_delete_site')); //when site is deleted in multisite
 
-        add_action('plugins_loaded', array($this, 'load_plugin_textdomain'));
+        // add_action('plugins_loaded', array($this, 'load_plugin_textdomain'));
         add_action('jssupporticket_updateticketstatus', array($this,'updateticketstatus'));
         if(in_array('actions',jssupportticket::$_active_addons)){
             add_action('template_redirect', array($this, 'printTicket'), 5); // Only for the print ticket in wordpress
         }
         add_action('admin_init', array($this, 'jssupportticket_activation_redirect'));
         add_action( 'wp_footer', array($this,'checkScreenTag') );
-        add_action( 'resetnotificationvalues', array($this, 'resetNotificationValues'));
+        add_action( 'jsst_resetnotificationvalues', array($this, 'jsst_resetnotificationvalues'));
         //for style sheets
         add_action('wp_head', array($this,'jsst_register_plugin_styles'));
         add_action('admin_enqueue_scripts', array($this,'jsst_admin_register_plugin_styles') );
-        add_action('reset_jsst_aadon_query', array($this,'reset_jsst_aadon_query') );
+        add_action('jsst_reset_aadon_query', array($this,'jsst_reset_aadon_query') );
         
         add_action('jssupporticket_ticketviaemail', array($this,'ticketviaemail'));// this also handles ticket over due and ticket feedback
         add_action('init', array($this,'jsst_handle_public_cronjob'));
@@ -129,22 +129,25 @@ class jssupportticket {
             add_filter( 'aioseo_disable_shortcode_parsing', '__return_true' );
         }
         add_action('admin_notices', array($this , 'jsst_show_expiry_error_notice') );
+        /* remove this in the 3.0.3 */
+        add_action('admin_notices', array($this , 'jsst_show_addon_update_global_notice') );
+        /* remove this in the 3.0.3 */
     }
 
-    function jssupportticket_upgrade_completed( $upgrader_object, $options ) {
+    function jssupportticket_upgrade_completed( $jsst_upgrader_object, $jsst_options ) {
         // The path to our plugin's main file
-        $our_plugin = plugin_basename( __FILE__ );
+        $jsst_our_plugin = plugin_basename( __FILE__ );
         // If an update has taken place and the updated type is plugins and the plugins element exists
-        if( $options['action'] == 'update' && $options['type'] == 'plugin' && isset( $options['plugins'] ) ) {
+        if( $jsst_options['action'] == 'update' && $jsst_options['type'] == 'plugin' && isset( $jsst_options['plugins'] ) ) {
             // Iterate through the plugins being updated and check if ours is there
-            foreach( $options['plugins'] as $plugin ) {
-                if( $plugin == $our_plugin ) {
+            foreach( $jsst_options['plugins'] as $jsst_plugin ) {
+                if( $jsst_plugin == $jsst_our_plugin ) {
                     // restore colors data
                     // require_once(JSST_PLUGIN_PATH . 'includes/css/style.php');
                     // restore colors data end
                     update_option('jsst_currentversion', self::$_currentversion);
                     include_once JSST_PLUGIN_PATH . 'includes/updates/updates.php';
-                    JSSTupdates::checkUpdates('300');
+                    JSSTupdates::checkUpdates('303');
                     JSSTincluder::getJSModel('jssupportticket')->updateColorFile();
                     JSSTincluder::getJSModel('jssupportticket')->jsst_check_license_status();
                     JSSTincluder::getJSModel('jssupportticket')->JSSTAddonsAutoUpdate();
@@ -153,21 +156,21 @@ class jssupportticket {
         }
     }
 
-    function jssupportticket_customschedules($schedules){
-        $schedules['halfhour'] = array(
+    function jssupportticket_customschedules($jsst_schedules){
+        $jsst_schedules['halfhour'] = array(
            'interval' => 1800,
            'display'=> 'Half hour'
         );
-       return $schedules;
+       return $jsst_schedules;
     }
 
-    function jssupportticket_activate($network_wide = false) {
+    function jssupportticket_activate($jsst_network_wide = false) {
         include_once 'includes/activation.php';
-        if(function_exists('is_multisite') && is_multisite() && $network_wide){
+        if(function_exists('is_multisite') && is_multisite() && $jsst_network_wide){
             global $wpdb;
-            $blogs = $wpdb->get_col("SELECT blog_id FROM $wpdb->blogs");
-            foreach($blogs as $blog_id){
-                switch_to_blog( $blog_id );
+            $jsst_blogs = jssupportticket::$_db->get_col("SELECT blog_id FROM " . jssupportticket::$_db->base_prefix . "blogs");
+            foreach($jsst_blogs as $jsst_blog_id){
+                switch_to_blog( $jsst_blog_id );
                 JSSTactivation::jssupportticket_activate();
                 restore_current_blog();
             }
@@ -179,46 +182,50 @@ class jssupportticket {
         wp_schedule_event(time(), 'halfhour', 'jssupporticket_ticketviaemail');// this also handles ticket overdue (bcz of hors configuration)
     }
 
-    function jssupportticket_new_site($new_site){
-        $pluginname = plugin_basename(__FILE__);
-        if(is_plugin_active_for_network($pluginname)){
+    function jssupportticket_new_site($jsst_new_site){
+        $jsst_pluginname = plugin_basename(__FILE__);
+        if(is_plugin_active_for_network($jsst_pluginname)){
             include_once 'includes/activation.php';
-            switch_to_blog($new_site->blog_id);
+            switch_to_blog($jsst_new_site->blog_id);
             JSSTactivation::jssupportticket_activate();
             restore_current_blog();
         }
     }
 
-    function jssupportticket_new_blog($blog_id, $user_id, $domain, $path, $site_id, $meta){
-        $pluginname = plugin_basename(__FILE__);
-        if(is_plugin_active_for_network($pluginname)){
+    function jssupportticket_new_blog($jsst_blog_id, $jsst_user_id, $jsst_domain, $jsst_path, $jsst_site_id, $jsst_meta){
+        $jsst_pluginname = plugin_basename(__FILE__);
+        if(is_plugin_active_for_network($jsst_pluginname)){
             include_once 'includes/activation.php';
-            switch_to_blog($blog_id);
+            switch_to_blog($jsst_blog_id);
             JSSTactivation::jssupportticket_activate();
             restore_current_blog();
         }
     }
 
-    function jssupportticket_delete_site($tables){
+    function jssupportticket_delete_site($jsst_tables){
         include_once 'includes/deactivation.php';
-        $tablestodrop = JSSTdeactivation::jssupportticket_tables_to_drop();
-        foreach($tablestodrop as $tablename){
-            $tables[] = $tablename;
+        $jsst_tablestodrop = JSSTdeactivation::jssupportticket_tables_to_drop();
+        foreach($jsst_tablestodrop as $jsst_tablename){
+            $jsst_tables[] = $jsst_tablename;
         }
-        return $tables;
+        return $jsst_tables;
     }
 
     function jssupportticket_activation_redirect(){
         if (get_option('jssupportticket_do_activation_redirect')) {
             delete_option('jssupportticket_do_activation_redirect');
-            exit(esc_url(wp_redirect(admin_url('admin.php?page=postinstallation&jstlay=wellcomepage'))));
+            // 1. Perform the safe redirect
+            wp_safe_redirect( admin_url( 'admin.php?page=postinstallation&jstlay=wellcomepage' ) );
+
+            // 2. Terminate the script immediately after
+            exit;
         }
     }
 
     function jsst_handle_public_cronjob(){
-        $action = JSSTrequest::getVar('jsstcron','get',null);
-        if ($action) {
-            switch ($action) {
+        $jsst_action = JSSTrequest::getVar('jsstcron','get',null);
+        if ($jsst_action) {
+            switch ($jsst_action) {
                 case 'ticketviaemail':
                     do_action('jssupporticket_ticketviaemail');
                     break;
@@ -231,118 +238,118 @@ class jssupportticket {
     }
 
     function jsjp_safe_style_css(){
-        $styles[] = 'display';
-        $styles[] = 'color';
-        $styles[] = 'width';
-        $styles[] = 'max-width';
-        $styles[] = 'min-width';
-        $styles[] = 'height';
-        $styles[] = 'min-height';
-        $styles[] = 'max-height';
-        $styles[] = 'background-color';
-        $styles[] = 'border';
-        $styles[] = 'border-bottom';
-        $styles[] = 'border-top';
-        $styles[] = 'border-left';
-        $styles[] = 'border-right';
-        $styles[] = 'border-color';
-        $styles[] = 'padding';
-        $styles[] = 'padding-top';
-        $styles[] = 'padding-bottom';
-        $styles[] = 'padding-left';
-        $styles[] = 'padding-right';
-        $styles[] = 'margin';
-        $styles[] = 'margin-top';
-        $styles[] = 'margin-bottom';
-        $styles[] = 'margin-left';
-        $styles[] = 'margin-right';
-        $styles[] = 'background';
-        $styles[] = 'font-weight';
-        $styles[] = 'font-size';
-        $styles[] = 'text-align';
-        $styles[] = 'text-decoration';
-        $styles[] = 'text-transform';
-        $styles[] = 'line-height';
-        $styles[] = 'visibility';
-        $styles[] = 'cellspacing';
-        $styles[] = 'data-id';
-        $styles[] = 'cursor';
-        $styles[] = 'vertical-align';
-        $styles[] = 'float';
-        $styles[] = 'position';
-        $styles[] = 'left';
-        $styles[] = 'right';
-        $styles[] = 'bottom';
-        $styles[] = 'top';
-        $styles[] = 'z-index';
-        $styles[] = 'overflow';
-        return $styles;
+        $jsst_styles[] = 'display';
+        $jsst_styles[] = 'color';
+        $jsst_styles[] = 'width';
+        $jsst_styles[] = 'max-width';
+        $jsst_styles[] = 'min-width';
+        $jsst_styles[] = 'height';
+        $jsst_styles[] = 'min-height';
+        $jsst_styles[] = 'max-height';
+        $jsst_styles[] = 'background-color';
+        $jsst_styles[] = 'border';
+        $jsst_styles[] = 'border-bottom';
+        $jsst_styles[] = 'border-top';
+        $jsst_styles[] = 'border-left';
+        $jsst_styles[] = 'border-right';
+        $jsst_styles[] = 'border-color';
+        $jsst_styles[] = 'padding';
+        $jsst_styles[] = 'padding-top';
+        $jsst_styles[] = 'padding-bottom';
+        $jsst_styles[] = 'padding-left';
+        $jsst_styles[] = 'padding-right';
+        $jsst_styles[] = 'margin';
+        $jsst_styles[] = 'margin-top';
+        $jsst_styles[] = 'margin-bottom';
+        $jsst_styles[] = 'margin-left';
+        $jsst_styles[] = 'margin-right';
+        $jsst_styles[] = 'background';
+        $jsst_styles[] = 'font-weight';
+        $jsst_styles[] = 'font-size';
+        $jsst_styles[] = 'text-align';
+        $jsst_styles[] = 'text-decoration';
+        $jsst_styles[] = 'text-transform';
+        $jsst_styles[] = 'line-height';
+        $jsst_styles[] = 'visibility';
+        $jsst_styles[] = 'cellspacing';
+        $jsst_styles[] = 'data-id';
+        $jsst_styles[] = 'cursor';
+        $jsst_styles[] = 'vertical-align';
+        $jsst_styles[] = 'float';
+        $jsst_styles[] = 'position';
+        $jsst_styles[] = 'left';
+        $jsst_styles[] = 'right';
+        $jsst_styles[] = 'bottom';
+        $jsst_styles[] = 'top';
+        $jsst_styles[] = 'z-index';
+        $jsst_styles[] = 'overflow';
+        return $jsst_styles;
     }
 
     function jsst_handle_search_form_data(){
 
-        $isadmin = is_admin();
-        $jstlay = '';
+        $jsst_isadmin = is_admin();
+        $jsst_jstlay = '';
         if(isset($_REQUEST['jstlay'])){
-            $jstlay = jssupportticket::JSST_sanitizeData($_REQUEST['jstlay']); // JSST_sanitizeData() function uses wordpress santize functions
+            $jsst_jstlay = jssupportticket::JSST_sanitizeData( wp_unslash( $_REQUEST['jstlay'] ?? '' ) ); // JSST_sanitizeData() function uses wordpress santize functions
         }elseif(isset($_REQUEST['page'])){
-            $jstlay = jssupportticket::JSST_sanitizeData($_REQUEST['page']); // JSST_sanitizeData() function uses wordpress santize functions
+            $jsst_jstlay = jssupportticket::JSST_sanitizeData($_REQUEST['page']); // JSST_sanitizeData() function uses wordpress santize functions
         }elseif(isset($_REQUEST['jshdlay'])){
-            $jstlay = jssupportticket::JSST_sanitizeData($_REQUEST['jshdlay']); // JSST_sanitizeData() function uses wordpress santize functions
+            $jsst_jstlay = jssupportticket::JSST_sanitizeData($_REQUEST['jshdlay']); // JSST_sanitizeData() function uses wordpress santize functions
         }
-        $callfrom = 3;
+        $jsst_callfrom = 3;
         if(isset($_REQUEST['JSST_form_search']) && $_REQUEST['JSST_form_search'] == 'JSST_SEARCH'){
-            $callfrom = 1;
+            $jsst_callfrom = 1;
         }elseif(JSSTrequest::getVar('pagenum', 'get', null) != null){
-            $callfrom = 2;
+            $jsst_callfrom = 2;
         }
 
-        $setcookies = false;
-        $ticket_search_cookie_data = '';
+        $jsst_setcookies = false;
+        $jsst_ticket_search_cookie_data = '';
         $jsst_search_array = array();
-        switch($jstlay){
+        switch($jsst_jstlay){
             case 'tickets':
             case 'myticket':
             case 'ticket':
             case 'staffmyticket':
                 if( in_array('agent',jssupportticket::$_active_addons) ){
-                    $agent = JSSTincluder::getJSModel('agent')->isUserStaff();
+                    $jsst_agent = JSSTincluder::getJSModel('agent')->isUserStaff();
                 }else{
-                    $agent = false;
+                    $jsst_agent = false;
                 }
-                if(is_admin() || $agent){
-                    $search_userfields = JSSTincluder::getObjectClass('customfields')->adminFieldsForSearch(1);
+                if(is_admin() || $jsst_agent){
+                    $jsst_search_userfields = JSSTincluder::getObjectClass('customfields')->adminFieldsForSearch(1);
                 } else {
-                    $search_userfields = JSSTincluder::getObjectClass('customfields')->userFieldsForSearch(1);
+                    $jsst_search_userfields = JSSTincluder::getObjectClass('customfields')->userFieldsForSearch(1);
                 }
-                if($callfrom == 1){
+                if($jsst_callfrom == 1){
                     if(is_admin()){
-                        $jsst_search_array = JSSTincluder::getJSModel('ticket')->getAdminTicketSearchFormData($search_userfields);
+                        $jsst_search_array = JSSTincluder::getJSModel('ticket')->getAdminTicketSearchFormData($jsst_search_userfields);
                     }else{
-                        $jsst_search_array = JSSTincluder::getJSModel('ticket')->getFrontSideTicketSearchFormData($search_userfields);
+                        $jsst_search_array = JSSTincluder::getJSModel('ticket')->getFrontSideTicketSearchFormData($jsst_search_userfields);
                     }
-                    $setcookies = true;
-                }elseif($callfrom == 2){
-                    $jsst_search_array = JSSTincluder::getJSModel('ticket')->getCookiesSavedSearchDataTicket($search_userfields);
+                    $jsst_setcookies = true;
+                }elseif($jsst_callfrom == 2){
+                    $jsst_search_array = JSSTincluder::getJSModel('ticket')->getCookiesSavedSearchDataTicket($jsst_search_userfields);
                 }else{
                     jssupportticket::removeusersearchcookies();
                 }
-                JSSTincluder::getJSModel('ticket')->setSearchVariableForTicket($jsst_search_array,$search_userfields);
+                JSSTincluder::getJSModel('ticket')->setSearchVariableForTicket($jsst_search_array,$jsst_search_userfields);
             break;
             case 'departments':
             case 'department':
-                $deptname = (is_admin()) ? 'departmentname' : 'jsst-dept';
-                if($callfrom == 1){
+                $jsst_deptname = (is_admin()) ? 'departmentname' : 'jsst-dept';
+                if($jsst_callfrom == 1){
                     $jsst_search_array = JSSTincluder::getJSModel('department')->getAdminDepartmentSearchFormData();
-                    $setcookies = true;
-                }elseif($callfrom == 2){
+                    $jsst_setcookies = true;
+                }elseif($jsst_callfrom == 2){
                     if(isset($_COOKIE['jsst_ticket_search_data'])){
-                        $ticket_search_cookie_data = jssupportticket::JSST_sanitizeData($_COOKIE['jsst_ticket_search_data']); // JSST_sanitizeData() function uses wordpress santize functions
-                        $ticket_search_cookie_data = json_decode( jssupportticketphplib::JSST_safe_decoding($ticket_search_cookie_data) , true );
+                        $jsst_ticket_search_cookie_data = jssupportticket::JSST_sanitizeData($_COOKIE['jsst_ticket_search_data']); // JSST_sanitizeData() function uses wordpress santize functions
+                        $jsst_ticket_search_cookie_data = json_decode( jssupportticketphplib::JSST_safe_decoding($jsst_ticket_search_cookie_data) , true );
                     }
-                    if($ticket_search_cookie_data != '' && isset($ticket_search_cookie_data['search_from_department'])){
-                        $jsst_search_array['departmentname'] = $ticket_search_cookie_data['departmentname'];
-                        $jsst_search_array['pagesize'] = $ticket_search_cookie_data['pagesize'];
+                    if($jsst_ticket_search_cookie_data != '' && isset($jsst_ticket_search_cookie_data['search_from_department'])){
+                        $jsst_search_array['departmentname'] = $jsst_ticket_search_cookie_data['departmentname'];
+                        $jsst_search_array['pagesize'] = $jsst_ticket_search_cookie_data['pagesize'];
                     }
                 }else{
                     jssupportticket::removeusersearchcookies();
@@ -352,16 +359,16 @@ class jssupportticket {
                 jssupportticket::$_search['department']['pagesize'] = isset($jsst_search_array['pagesize']) ? $jsst_search_array['pagesize'] : null;
             break;
             case 'erasedatarequests':
-                if($callfrom == 1 && is_admin()){
+                if($jsst_callfrom == 1 && is_admin()){
                     $jsst_search_array = JSSTincluder::getJSModel('gdpr')->getAdminSearchFormDataGDPR();
-                    $setcookies = true;
-                }elseif($callfrom == 2){
+                    $jsst_setcookies = true;
+                }elseif($jsst_callfrom == 2){
                     if(isset($_COOKIE['jsst_ticket_search_data'])){
-                        $ticket_search_cookie_data = jssupportticket::JSST_sanitizeData($_COOKIE['jsst_ticket_search_data']); // JSST_sanitizeData() function uses wordpress santize functions
-                        $ticket_search_cookie_data = json_decode( jssupportticketphplib::JSST_safe_decoding($ticket_search_cookie_data) , true );
+                        $jsst_ticket_search_cookie_data = jssupportticket::JSST_sanitizeData($_COOKIE['jsst_ticket_search_data']); // JSST_sanitizeData() function uses wordpress santize functions
+                        $jsst_ticket_search_cookie_data = json_decode( jssupportticketphplib::JSST_safe_decoding($jsst_ticket_search_cookie_data) , true );
                     }
-                    if($ticket_search_cookie_data != '' && isset($ticket_search_cookie_data['search_from_gdpr'])){
-                        $jsst_search_array['email'] = $ticket_search_cookie_data['email'];
+                    if($jsst_ticket_search_cookie_data != '' && isset($jsst_ticket_search_cookie_data['search_from_gdpr'])){
+                        $jsst_search_array['email'] = $jsst_ticket_search_cookie_data['email'];
                     }
                 }else{
                     jssupportticket::removeusersearchcookies();
@@ -371,17 +378,17 @@ class jssupportticket {
             break;
             case 'priorities':
             case 'priority':
-                if($callfrom == 1 && is_admin()){
+                if($jsst_callfrom == 1 && is_admin()){
                     $jsst_search_array = JSSTincluder::getJSModel('priority')->getAdminSearchFormDataPriority();
-                    $setcookies = true;
-                }elseif($callfrom == 2){
+                    $jsst_setcookies = true;
+                }elseif($jsst_callfrom == 2){
                     if(isset($_COOKIE['jsst_ticket_search_data'])){
-                        $ticket_search_cookie_data = jssupportticket::JSST_sanitizeData($_COOKIE['jsst_ticket_search_data']); // JSST_sanitizeData() function uses wordpress santize functions
-                        $ticket_search_cookie_data = json_decode( jssupportticketphplib::JSST_safe_decoding($ticket_search_cookie_data) , true );
+                        $jsst_ticket_search_cookie_data = jssupportticket::JSST_sanitizeData($_COOKIE['jsst_ticket_search_data']); // JSST_sanitizeData() function uses wordpress santize functions
+                        $jsst_ticket_search_cookie_data = json_decode( jssupportticketphplib::JSST_safe_decoding($jsst_ticket_search_cookie_data) , true );
                     }
-                    if($ticket_search_cookie_data != '' && isset($ticket_search_cookie_data['search_from_priority'])){
-                        $jsst_search_array['title'] = $ticket_search_cookie_data['title'];
-                        $jsst_search_array['pagesize'] = $ticket_search_cookie_data['pagesize'];
+                    if($jsst_ticket_search_cookie_data != '' && isset($jsst_ticket_search_cookie_data['search_from_priority'])){
+                        $jsst_search_array['title'] = $jsst_ticket_search_cookie_data['title'];
+                        $jsst_search_array['pagesize'] = $jsst_ticket_search_cookie_data['pagesize'];
                     }
                 }else{
                     jssupportticket::removeusersearchcookies();
@@ -392,17 +399,17 @@ class jssupportticket {
             break;
             case 'statuses':
             case 'status':
-                if($callfrom == 1 && is_admin()){
+                if($jsst_callfrom == 1 && is_admin()){
                     $jsst_search_array = JSSTincluder::getJSModel('status')->getAdminSearchFormDataStatus();
-                    $setcookies = true;
-                }elseif($callfrom == 2){
+                    $jsst_setcookies = true;
+                }elseif($jsst_callfrom == 2){
                     if(isset($_COOKIE['jsst_ticket_search_data'])){
-                        $ticket_search_cookie_data = jssupportticket::JSST_sanitizeData($_COOKIE['jsst_ticket_search_data']); // JSST_sanitizeData() function uses wordpress santize functions
-                        $ticket_search_cookie_data = json_decode( jssupportticketphplib::JSST_safe_decoding($ticket_search_cookie_data) , true );
+                        $jsst_ticket_search_cookie_data = jssupportticket::JSST_sanitizeData($_COOKIE['jsst_ticket_search_data']); // JSST_sanitizeData() function uses wordpress santize functions
+                        $jsst_ticket_search_cookie_data = json_decode( jssupportticketphplib::JSST_safe_decoding($jsst_ticket_search_cookie_data) , true );
                     }
-                    if($ticket_search_cookie_data != '' && isset($ticket_search_cookie_data['search_from_status'])){
-                        $jsst_search_array['title'] = $ticket_search_cookie_data['title'];
-                        $jsst_search_array['pagesize'] = $ticket_search_cookie_data['pagesize'];
+                    if($jsst_ticket_search_cookie_data != '' && isset($jsst_ticket_search_cookie_data['search_from_status'])){
+                        $jsst_search_array['title'] = $jsst_ticket_search_cookie_data['title'];
+                        $jsst_search_array['pagesize'] = $jsst_ticket_search_cookie_data['pagesize'];
                     }
                 }else{
                     jssupportticket::removeusersearchcookies();
@@ -413,17 +420,17 @@ class jssupportticket {
             break;
             case 'products':
             case 'product':
-                if($callfrom == 1 && is_admin()){
+                if($jsst_callfrom == 1 && is_admin()){
                     $jsst_search_array = JSSTincluder::getJSModel('product')->getAdminSearchFormDataProduct();
-                    $setcookies = true;
-                }elseif($callfrom == 2){
+                    $jsst_setcookies = true;
+                }elseif($jsst_callfrom == 2){
                     if(isset($_COOKIE['jsst_ticket_search_data'])){
-                        $ticket_search_cookie_data = jssupportticket::JSST_sanitizeData($_COOKIE['jsst_ticket_search_data']); // JSST_sanitizeData() function uses wordpress santize functions
-                        $ticket_search_cookie_data = json_decode( jssupportticketphplib::JSST_safe_decoding($ticket_search_cookie_data) , true );
+                        $jsst_ticket_search_cookie_data = jssupportticket::JSST_sanitizeData($_COOKIE['jsst_ticket_search_data']); // JSST_sanitizeData() function uses wordpress santize functions
+                        $jsst_ticket_search_cookie_data = json_decode( jssupportticketphplib::JSST_safe_decoding($jsst_ticket_search_cookie_data) , true );
                     }
-                    if($ticket_search_cookie_data != '' && isset($ticket_search_cookie_data['search_from_product'])){
-                        $jsst_search_array['title'] = $ticket_search_cookie_data['title'];
-                        $jsst_search_array['pagesize'] = $ticket_search_cookie_data['pagesize'];
+                    if($jsst_ticket_search_cookie_data != '' && isset($jsst_ticket_search_cookie_data['search_from_product'])){
+                        $jsst_search_array['title'] = $jsst_ticket_search_cookie_data['title'];
+                        $jsst_search_array['pagesize'] = $jsst_ticket_search_cookie_data['pagesize'];
                     }
                 }else{
                     jssupportticket::removeusersearchcookies();
@@ -433,16 +440,16 @@ class jssupportticket {
                 jssupportticket::$_search['product']['pagesize'] = isset($jsst_search_array['pagesize']) ? $jsst_search_array['pagesize'] : null;
             break;
             case 'slug':
-                if($callfrom == 1 && is_admin()){
+                if($jsst_callfrom == 1 && is_admin()){
                     $jsst_search_array = JSSTincluder::getJSModel('slug')->getAdminSearchFormDataSlug();
-                    $setcookies = true;
-                }elseif($callfrom == 2){
+                    $jsst_setcookies = true;
+                }elseif($jsst_callfrom == 2){
                     if(isset($_COOKIE['jsst_ticket_search_data'])){
-                        $ticket_search_cookie_data = jssupportticket::JSST_sanitizeData($_COOKIE['jsst_ticket_search_data']); // JSST_sanitizeData() function uses wordpress santize functions
-                        $ticket_search_cookie_data = json_decode( jssupportticketphplib::JSST_safe_decoding($ticket_search_cookie_data) , true );
+                        $jsst_ticket_search_cookie_data = jssupportticket::JSST_sanitizeData($_COOKIE['jsst_ticket_search_data']); // JSST_sanitizeData() function uses wordpress santize functions
+                        $jsst_ticket_search_cookie_data = json_decode( jssupportticketphplib::JSST_safe_decoding($jsst_ticket_search_cookie_data) , true );
                     }
-                    if($ticket_search_cookie_data != '' && isset($ticket_search_cookie_data['search_from_slug'])){
-                        $jsst_search_array['slug'] = $ticket_search_cookie_data['slug'];
+                    if($jsst_ticket_search_cookie_data != '' && isset($jsst_ticket_search_cookie_data['search_from_slug'])){
+                        $jsst_search_array['slug'] = $jsst_ticket_search_cookie_data['slug'];
                     }
                 }else{
                     jssupportticket::removeusersearchcookies();
@@ -452,16 +459,16 @@ class jssupportticket {
             break;
             case 'emails':
             case 'email':
-                if($callfrom == 1 && is_admin()){
+                if($jsst_callfrom == 1 && is_admin()){
                     $jsst_search_array = JSSTincluder::getJSModel('email')->getAdminSearchFormDataEmails();
-                    $setcookies = true;
-                }elseif($callfrom == 2){
+                    $jsst_setcookies = true;
+                }elseif($jsst_callfrom == 2){
                     if(isset($_COOKIE['jsst_ticket_search_data'])){
-                        $ticket_search_cookie_data = jssupportticket::JSST_sanitizeData($_COOKIE['jsst_ticket_search_data']); // JSST_sanitizeData() function uses wordpress santize functions
-                        $ticket_search_cookie_data = json_decode( jssupportticketphplib::JSST_safe_decoding($ticket_search_cookie_data) , true );
+                        $jsst_ticket_search_cookie_data = jssupportticket::JSST_sanitizeData($_COOKIE['jsst_ticket_search_data']); // JSST_sanitizeData() function uses wordpress santize functions
+                        $jsst_ticket_search_cookie_data = json_decode( jssupportticketphplib::JSST_safe_decoding($jsst_ticket_search_cookie_data) , true );
                     }
-                    if($ticket_search_cookie_data != '' && isset($ticket_search_cookie_data['search_from_email'])){
-                        $jsst_search_array['email'] = $ticket_search_cookie_data['email'];
+                    if($jsst_ticket_search_cookie_data != '' && isset($jsst_ticket_search_cookie_data['search_from_email'])){
+                        $jsst_search_array['email'] = $jsst_ticket_search_cookie_data['email'];
                     }
                 }else{
                     jssupportticket::removeusersearchcookies();
@@ -475,25 +482,25 @@ class jssupportticket {
             case 'departmentdetailreport':
             case 'userdetailreport':
             case 'stafftimereport':
-                if($callfrom == 1 && is_admin()){
-                    $nonce = JSSTrequest::getVar('_wpnonce');
-                    if (! wp_verify_nonce( $nonce, 'reports') ) {
+                if($jsst_callfrom == 1 && is_admin()){
+                    $jsst_nonce = JSSTrequest::getVar('_wpnonce');
+                    if (! wp_verify_nonce( $jsst_nonce, 'reports') ) {
                         die( 'Security check Failed' );
                     }                    
                     $jsst_search_array['date_start'] = JSSTrequest::getVar('date_start');
                     $jsst_search_array['date_end'] = JSSTrequest::getVar('date_end');
                     $jsst_search_array['uid'] = JSSTrequest::getVar('uid');
                     $jsst_search_array['search_from_reports'] = 1;
-                    $setcookies = true;
-                }elseif($callfrom == 2 && is_admin()){
+                    $jsst_setcookies = true;
+                }elseif($jsst_callfrom == 2 && is_admin()){
                     if(isset($_COOKIE['jsst_ticket_search_data'])){
-                        $ticket_search_cookie_data = jssupportticket::JSST_sanitizeData($_COOKIE['jsst_ticket_search_data']); // JSST_sanitizeData() function uses wordpress santize functions
-                        $ticket_search_cookie_data = json_decode( jssupportticketphplib::JSST_safe_decoding($ticket_search_cookie_data) , true );
+                        $jsst_ticket_search_cookie_data = jssupportticket::JSST_sanitizeData($_COOKIE['jsst_ticket_search_data']); // JSST_sanitizeData() function uses wordpress santize functions
+                        $jsst_ticket_search_cookie_data = json_decode( jssupportticketphplib::JSST_safe_decoding($jsst_ticket_search_cookie_data) , true );
                     }
-                    if(!empty($ticket_search_cookie_data) && isset($ticket_search_cookie_data['search_from_reports'])){
-                        $jsst_search_array['date_start'] = $ticket_search_cookie_data['date_start'];
-                        $jsst_search_array['date_end'] = $ticket_search_cookie_data['date_end'];
-                        $jsst_search_array['uid'] = $ticket_search_cookie_data['uid'];
+                    if(!empty($jsst_ticket_search_cookie_data) && isset($jsst_ticket_search_cookie_data['search_from_reports'])){
+                        $jsst_search_array['date_start'] = $jsst_ticket_search_cookie_data['date_start'];
+                        $jsst_search_array['date_end'] = $jsst_ticket_search_cookie_data['date_end'];
+                        $jsst_search_array['uid'] = $jsst_ticket_search_cookie_data['uid'];
                     }
                 }else{
                     jssupportticket::removeusersearchcookies();
@@ -503,19 +510,19 @@ class jssupportticket {
                 jssupportticket::$_search['report']['uid'] = isset($jsst_search_array['uid']) ? $jsst_search_array['uid'] : null;
             break;
             case 'staffreports':
-                if($callfrom == 1){
+                if($jsst_callfrom == 1){
                     $jsst_search_array['jsst-date-start'] = JSSTrequest::getVar('jsst-date-start');
                     $jsst_search_array['jsst-date-end'] = JSSTrequest::getVar('jsst-date-end');
                     $jsst_search_array['search_from_reports_staff'] = 1;
-                    $setcookies = true;
-                }elseif($callfrom == 2){
+                    $jsst_setcookies = true;
+                }elseif($jsst_callfrom == 2){
                     if(isset($_COOKIE['jsst_ticket_search_data'])){
-                        $ticket_search_cookie_data = jssupportticket::JSST_sanitizeData($_COOKIE['jsst_ticket_search_data']); // JSST_sanitizeData() function uses wordpress santize functions
-                        $ticket_search_cookie_data = json_decode( jssupportticketphplib::JSST_safe_decoding($ticket_search_cookie_data) , true );
+                        $jsst_ticket_search_cookie_data = jssupportticket::JSST_sanitizeData($_COOKIE['jsst_ticket_search_data']); // JSST_sanitizeData() function uses wordpress santize functions
+                        $jsst_ticket_search_cookie_data = json_decode( jssupportticketphplib::JSST_safe_decoding($jsst_ticket_search_cookie_data) , true );
                     }
-                    if(!empty($ticket_search_cookie_data) && isset($ticket_search_cookie_data['search_from_reports_staff'])){
-                        $jsst_search_array['jsst-date-start'] = $ticket_search_cookie_data['jsst-date-start'];
-                        $jsst_search_array['jsst-date-end'] = $ticket_search_cookie_data['jsst-date-end'];
+                    if(!empty($jsst_ticket_search_cookie_data) && isset($jsst_ticket_search_cookie_data['search_from_reports_staff'])){
+                        $jsst_search_array['jsst-date-start'] = $jsst_ticket_search_cookie_data['jsst-date-start'];
+                        $jsst_search_array['jsst-date-end'] = $jsst_ticket_search_cookie_data['jsst-date-end'];
                     }
                 }else{
                     jssupportticket::removeusersearchcookies();
@@ -525,64 +532,65 @@ class jssupportticket {
             break;
             case 'admin_staffdetailreport':
             case 'staffdetailreport':
-                $start_date = is_admin() ? 'date_start' : 'jsst-date-start';
-                $end_date = is_admin() ? 'date_end' : 'jsst-date-end';
-                if($callfrom == 1){
-                    $nonce = JSSTrequest::getVar('_wpnonce');
-                    if (! wp_verify_nonce( $nonce, 'staff-detail-report') ) {
+                $jsst_start_date = is_admin() ? 'date_start' : 'jsst-date-start';
+                $jsst_end_date = is_admin() ? 'date_end' : 'jsst-date-end';
+                if($jsst_callfrom == 1){
+                    $jsst_nonce = JSSTrequest::getVar('_wpnonce');
+                    if (! wp_verify_nonce( $jsst_nonce, 'staff-detail-report') ) {
                         die( 'Security check Failed' );
                     }        
-                    $jsst_search_array[$start_date] = JSSTrequest::getVar($start_date);
-                    $jsst_search_array[$end_date] = JSSTrequest::getVar($end_date);
+                    $jsst_search_array[$jsst_start_date] = JSSTrequest::getVar($jsst_start_date);
+                    $jsst_search_array[$jsst_end_date] = JSSTrequest::getVar($jsst_end_date);
                     $jsst_search_array['search_from_reports_detail'] = 1;
-                    $setcookies = true;
-                }elseif($callfrom == 2){
+                    $jsst_setcookies = true;
+                }elseif($jsst_callfrom == 2){
                     if(isset($_COOKIE['jsst_ticket_search_data'])){
-                        $ticket_search_cookie_data = jssupportticket::JSST_sanitizeData($_COOKIE['jsst_ticket_search_data']); // JSST_sanitizeData() function uses wordpress santize functions
-                        $ticket_search_cookie_data = json_decode( jssupportticketphplib::JSST_safe_decoding($ticket_search_cookie_data) , true );
+                        $jsst_ticket_search_cookie_data = jssupportticket::JSST_sanitizeData($_COOKIE['jsst_ticket_search_data']); // JSST_sanitizeData() function uses wordpress santize functions
+                        $jsst_ticket_search_cookie_data = json_decode( jssupportticketphplib::JSST_safe_decoding($jsst_ticket_search_cookie_data) , true );
                     }
-                    if(!empty($ticket_search_cookie_data) && isset($ticket_search_cookie_data['search_from_reports_detail'])){
-                        $jsst_search_array[$start_date] = $ticket_search_cookie_data[$start_date];
-                        $jsst_search_array[$end_date] = $ticket_search_cookie_data[$end_date];
+                    if(!empty($jsst_ticket_search_cookie_data) && isset($jsst_ticket_search_cookie_data['search_from_reports_detail'])){
+                        $jsst_search_array[$jsst_start_date] = $jsst_ticket_search_cookie_data[$jsst_start_date];
+                        $jsst_search_array[$jsst_end_date] = $jsst_ticket_search_cookie_data[$jsst_end_date];
                     }
                 }else{
                     jssupportticket::removeusersearchcookies();
                 }
-                jssupportticket::$_search['report'][$start_date] = isset($jsst_search_array[$start_date]) ? $jsst_search_array[$start_date] : null;
-                jssupportticket::$_search['report'][$end_date] = isset($jsst_search_array[$end_date]) ? $jsst_search_array[$end_date] : null;
+                jssupportticket::$_search['report'][$jsst_start_date] = isset($jsst_search_array[$jsst_start_date]) ? $jsst_search_array[$jsst_start_date] : null;
+                jssupportticket::$_search['report'][$jsst_end_date] = isset($jsst_search_array[$jsst_end_date]) ? $jsst_search_array[$jsst_end_date] : null;
             break;
             case 'ticketdetail':
-                $ticketid = JSSTrequest::getVar('jssupportticketid');
+                $jsst_ticketid = JSSTrequest::getVar('jssupportticketid');
                 if (in_array('agent', jssupportticket::$_active_addons) && JSSTincluder::getJSModel('agent')->isUserStaff()) { //staff
                     if(current_user_can('jsst_support_ticket')){
-                        $timecookies['ticket_time_start'][$ticketid] = gmdate("Y-m-d h:i:s");
+                        $jsst_timecookies['ticket_time_start'][$jsst_ticketid] = gmdate("Y-m-d h:i:s");
                     }else{
-                        jssupportticket::$_data['permission_granted'] = JSSTincluder::getJSModel('ticket')->validateTicketDetailForStaff($ticketid);
-                        if (jssupportticket::$_data['permission_granted']) { // validation passed
+                        jssupportticket::$jsst_data['permission_granted'] = JSSTincluder::getJSModel('ticket')->validateTicketDetailForStaff($jsst_ticketid);
+                        if (jssupportticket::$jsst_data['permission_granted']) { // validation passed
                             if(in_array('timetracking', jssupportticket::$_active_addons)){
-                                $timecookies['ticket_time_start'][$ticketid] = gmdate("Y-m-d h:i:s");
+                                $jsst_timecookies['ticket_time_start'][$jsst_ticketid] = gmdate("Y-m-d h:i:s");
                             }
                         }
                     }
                 } else { // user
                     if(current_user_can('jsst_support_ticket') || current_user_can('jsst_support_ticket_tickets')){
                         if(in_array('timetracking', jssupportticket::$_active_addons)){
-                            $timecookies['ticket_time_start'][$ticketid] = gmdate("Y-m-d h:i:s");
+                            $jsst_timecookies['ticket_time_start'][$jsst_ticketid] = gmdate("Y-m-d h:i:s");
                         }
                     }
                 }
-                if(isset($timecookies['ticket_time_start'][$ticketid])){
-                    $val = 'ticket_time_start_'.$ticketid;
-                    jssupportticketphplib::JSST_setcookie($val , $timecookies['ticket_time_start'][$ticketid] , 0, COOKIEPATH);
+                if(isset($jsst_timecookies['ticket_time_start'][$jsst_ticketid])){
+                    $jsst_user_id = JSSTincluder::getObjectClass('user')->uid();
+                    $jsst_val = 'ticket_time_start_'.$jsst_ticketid.'_'.$jsst_user_id;
+                    set_transient($jsst_val, $jsst_timecookies['ticket_time_start'][$jsst_ticketid], DAY_IN_SECONDS);
                     if ( SITECOOKIEPATH != COOKIEPATH ){
-                        jssupportticketphplib::JSST_setcookie('jshelpdesk-timetack' , $timecookies , 0, SITECOOKIEPATH);
+                        jssupportticketphplib::JSST_setcookie('jshelpdesk-timetack' , $jsst_timecookies['ticket_time_start'][$jsst_ticketid] , 0, SITECOOKIEPATH);
                     }
                 }
             break;
         }
 
-        if($setcookies){
-            jssupportticket::setusersearchcookies($setcookies,$jsst_search_array);
+        if($jsst_setcookies){
+            jssupportticket::setusersearchcookies($jsst_setcookies,$jsst_search_array);
         }
     }
 
@@ -595,6 +603,49 @@ class jssupportticket {
             </div>
             <?php
         }
+    }
+
+    function jsst_show_addon_update_global_notice() {
+        $update_avaliable_for_addons = JSSTincluder::getJSModel('jssupportticket')->showUpdateAvaliableAlert();
+
+        // Safety checks
+        if (!current_user_can('manage_options')) {
+            return;
+        }
+
+        if (empty($update_avaliable_for_addons)) {
+            return;
+        }
+
+        ?>
+        <div class="jsst-admin-alert notice notice-warning">
+            <div class="jsst-alert-content">
+
+                <div class="jsst-alert-icon">⚠️</div>
+
+                <div class="jsst-alert-text">
+                    <h2>
+                        <?php echo esc_html__('Action Required: Addon Updates Needed', 'js-support-ticket'); ?>
+                    </h2>
+
+                    <p>
+                        <?php echo esc_html__(
+                            'Major changes have been introduced. All JS Support Ticket addons must be updated immediately to prevent system errors and broken functionality.',
+                            'js-support-ticket'
+                        ); ?>
+                    </p>
+                </div>
+
+                <div class="jsst-alert-action">
+                    <a href="<?php echo esc_url(admin_url('admin.php?page=jssupportticket&jstlay=addonstatus')); ?>"
+                       class="jsst-alert-btn">
+                        <?php echo esc_html__('Update All Addons Now', 'js-support-ticket'); ?>
+                    </a>
+                </div>
+
+            </div>
+        </div>
+        <?php
     }
 
     function jsst_handle_delete_cookies(){
@@ -620,20 +671,24 @@ class jssupportticket {
         }
     }
 
-    public static function setusersearchcookies($cookiesval, $jsst_search_array){
-        if(!$cookiesval)
+    public static function setusersearchcookies($jsst_cookiesval, $jsst_search_array){
+        if(!$jsst_cookiesval)
             return false;
-        $data = wp_json_encode( $jsst_search_array );
-        $data = jssupportticketphplib::JSST_safe_encoding($data);
-        jssupportticketphplib::JSST_setcookie("jsst_ticket_search_data" , $data , 0 , COOKIEPATH);
+        $jsst_data = wp_json_encode( $jsst_search_array );
+        $jsst_data = jssupportticketphplib::JSST_safe_encoding($jsst_data);
+        jssupportticketphplib::JSST_setcookie("jsst_ticket_search_data" , $jsst_data , 0 , COOKIEPATH);
         if ( SITECOOKIEPATH != COOKIEPATH ){
-            jssupportticketphplib::JSST_setcookie('jsst_ticket_search_data' , $data , 0 , SITECOOKIEPATH);
+            jssupportticketphplib::JSST_setcookie('jsst_ticket_search_data' , $jsst_data , 0 , SITECOOKIEPATH);
         }
     }
 
     function jshd_delete_expire_session_data(){
-        global $wpdb;
-        $wpdb->query('DELETE  FROM '.$wpdb->prefix.'js_ticket_jshdsessiondata WHERE sessionexpire < "'. time() .'"');
+        jssupportticket::$_db->query( 
+            jssupportticket::$_db->prepare( 
+                "DELETE FROM " . jssupportticket::$_db->prefix . "js_ticket_jshdsessiondata WHERE sessionexpire < %d", 
+                time() 
+            ) 
+        );
     }
 
     function jshd_process_transation_key_status(){
@@ -662,31 +717,31 @@ class jssupportticket {
      */
 
      function printTicket() {
-        $layout = JSSTrequest::getVar('jstlay');
-        if ($layout == 'printticket') {
-            $ticketid = JSSTrequest::getVar('jssupportticketid');
+        $jsst_layout = JSSTrequest::getVar('jstlay');
+        if ($jsst_layout == 'printticket') {
+            $jsst_ticketid = JSSTrequest::getVar('jssupportticketid');
             if(in_array('agent', jssupportticket::$_active_addons)){
-                jssupportticket::$_data['user_staff'] = JSSTincluder::getJSModel('agent')->isUserStaff();
+                jssupportticket::$jsst_data['user_staff'] = JSSTincluder::getJSModel('agent')->isUserStaff();
             }else{
-                jssupportticket::$_data['user_staff'] = false;
+                jssupportticket::$jsst_data['user_staff'] = false;
             }
 
-            JSSTincluder::getJSModel('ticket')->getTicketForDetail($ticketid);
+            JSSTincluder::getJSModel('ticket')->getTicketForDetail($jsst_ticketid);
             jssupportticket::addStyleSheets();
             jssupportticket::jsst_register_plugin_styles();
-            jssupportticket::$_data['print'] = 1; //print flag to handle appearnce
+            jssupportticket::$jsst_data['print'] = 1; //print flag to handle appearnce
             JSSTincluder::include_file('ticketdetail', 'ticket');
             exit();
         }
     }
 
-    function jssupportticket_deactivate($network_wide = false) {
+    function jssupportticket_deactivate($jsst_network_wide = false) {
         include_once 'includes/deactivation.php';
-        if(function_exists('is_multisite') && is_multisite() && $network_wide){
+        if(function_exists('is_multisite') && is_multisite() && $jsst_network_wide){
             global $wpdb;
-            $blogs = $wpdb->get_col("SELECT blog_id FROM $wpdb->blogs");
-            foreach($blogs as $blog_id){
-                switch_to_blog( $blog_id );
+            $jsst_blogs = jssupportticket::$_db->get_col("SELECT blog_id FROM " . jssupportticket::$_db->base_prefix . "blogs");
+            foreach($jsst_blogs as $jsst_blog_id){
+                switch_to_blog( $jsst_blog_id );
                 JSSTdeactivation::jssupportticket_deactivate();
                 restore_current_blog();
             }
@@ -695,34 +750,34 @@ class jssupportticket {
         }
     }
 
-    function jsst_login_redirect( $redirect_to, $request, $user ) {
+    function jsst_login_redirect( $jsst_redirect_to, $jsst_request, $jsst_user ) {
         //is there a user to check?
         global $user;
         if ( isset( $user->roles ) && is_array( $user->roles ) ) {
             //check for admins
             if ( in_array( 'administrator', $user->roles ) ) {
                 // redirect them to the default place
-                return $redirect_to;
+                return $jsst_redirect_to;
             } else {
-                $redirecturl = JSSTrequest::getVar('redirect_to');
-                if(jssupportticket::$_config['login_redirect'] == 1 && $redirecturl == null){
-                    $pageid = jssupportticket::getPageid();
-                    $link = "index.php?page_id=".$pageid;
-                    return $link;
-                }elseif($redirecturl != null){
-                    return $redirecturl;
+                $jsst_redirecturl = JSSTrequest::getVar('redirect_to');
+                if(jssupportticket::$_config['login_redirect'] == 1 && $jsst_redirecturl == null){
+                    $jsst_pageid = jssupportticket::getPageid();
+                    $jsst_link = "index.php?page_id=".$jsst_pageid;
+                    return $jsst_link;
+                }elseif($jsst_redirecturl != null){
+                    return $jsst_redirecturl;
                 }else{
                     return home_url();
                 }
             }
         } else {
-            return $redirect_to;
+            return $jsst_redirect_to;
         }
     }
 
-    function resetNotificationValues(){ // config and key values empty
-        // $query = "UPDATE `".jssupportticket::$_db->prefix."js_ticket_config` SET configvalue = '' WHERE configfor = 'firebase'";
-        // $value = jssupportticket::$_db->get_var($query);
+    function jsst_resetnotificationvalues(){ // config and key values empty
+        // $jsst_query = "UPDATE `".jssupportticket::$_db->prefix."js_ticket_config` SET configvalue = '' WHERE configfor = 'firebase'";
+        // $jsst_value = jssupportticket::$_db->get_var($jsst_query);
     }
 
     function registeractions() {
@@ -743,44 +798,44 @@ class jssupportticket {
     }
 
     //Funtions for Ticket Hooks
-    function ticketcreate($ticketobject) {
-        return $ticketobject;
+    function ticketcreate($jsst_ticketobject) {
+        return $jsst_ticketobject;
     }
 
-    function ticketreply($ticketobject) {
-        return $ticketobject;
+    function ticketreply($jsst_ticketobject) {
+        return $jsst_ticketobject;
     }
 
-    function ticketclose($ticketobject) {
-        return $ticketobject;
+    function ticketclose($jsst_ticketobject) {
+        return $jsst_ticketobject;
     }
 
-    function ticketdelete($ticketobject) {
-        return $ticketobject;
+    function ticketdelete($jsst_ticketobject) {
+        return $jsst_ticketobject;
     }
 
-    function ticketbeforelisting($ticketobject) {
-        return $ticketobject;
+    function ticketbeforelisting($jsst_ticketobject) {
+        return $jsst_ticketobject;
     }
 
-    function ticketbeforeview($ticketobject) {
-        return $ticketobject;
+    function ticketbeforeview($jsst_ticketobject) {
+        return $jsst_ticketobject;
     }
 
     //Funtion for Email Hooks
-    function beforeemailticketcreate($recevierEmail, $subject, $body, $senderEmail) {
+    function beforeemailticketcreate($jsst_recevierEmail, $jsst_subject, $jsst_body, $jsst_senderEmail) {
         return;
     }
 
-    function beforeemailticketdelete($recevierEmail, $subject, $body, $senderEmail) {
+    function beforeemailticketdelete($jsst_recevierEmail, $jsst_subject, $jsst_body, $jsst_senderEmail) {
         return;
     }
 
-    function beforeemailticketreply($recevierEmail, $subject, $body, $senderEmail) {
+    function beforeemailticketreply($jsst_recevierEmail, $jsst_subject, $jsst_body, $jsst_senderEmail) {
         return;
     }
 
-    function beforeemailticketclose($recevierEmail, $subject, $body, $senderEmail) {
+    function beforeemailticketclose($jsst_recevierEmail, $jsst_subject, $jsst_body, $jsst_senderEmail) {
         return;
     }
 
@@ -831,21 +886,21 @@ class jssupportticket {
      * Localization
      */
 
-    public function load_plugin_textdomain() {
+    // public function load_plugin_textdomain() {
         // load_plugin_textdomain('js-support-ticket', false, jssupportticketphplib::JSST_dirname(plugin_basename(__FILE__)) . '/languages/');
         //if(!load_plugin_textdomain('js-support-ticket')){
-            load_plugin_textdomain('js-support-ticket', false, jssupportticketphplib::JSST_dirname(plugin_basename(__FILE__)) . '/languages/');
+            // load_plugin_textdomain('js-support-ticket', false, jssupportticketphplib::JSST_dirname(plugin_basename(__FILE__)) . '/languages/');
         /*}else{
             load_plugin_textdomain('js-support-ticket');
         }*/
-    }
+    // }
 
     /*
      * Check the current request and handle according to it
      */
 
-    function checkRequest($content) {
-        return $content;
+    function checkRequest($jsst_content) {
+        return $jsst_content;
     }
 
     /*
@@ -854,16 +909,16 @@ class jssupportticket {
 
     static function addStyleSheets() {
         wp_enqueue_script('jquery');
-        wp_enqueue_script('commonjs',JSST_PLUGIN_URL.'includes/js/common.js');
-        wp_enqueue_script('responsivetablejs',JSST_PLUGIN_URL.'includes/js/responsivetable.js');
+        wp_enqueue_script('commonjs',JSST_PLUGIN_URL.'includes/js/common.js', array(), jssupportticket::$_config['productversion'], true);
+        wp_enqueue_script('responsivetablejs',JSST_PLUGIN_URL.'includes/js/responsivetable.js', array(), jssupportticket::$_config['productversion'], true);
         wp_enqueue_script('jquery-ui-accordion');
-        wp_enqueue_script('jsst-formvalidator',JSST_PLUGIN_URL.'includes/js/jquery.form-validator.js');
-        wp_enqueue_script( 'js-support-ticket-main-js', JSST_PLUGIN_URL . 'includes/js/common.js', array( 'jquery' ), false, true );
+        wp_enqueue_script('jsst-formvalidator',JSST_PLUGIN_URL.'includes/js/jquery.form-validator.js', array(), jssupportticket::$_config['productversion'], true);
+        wp_enqueue_script( 'js-support-ticket-main-js', JSST_PLUGIN_URL . 'includes/js/common.js', array( 'jquery' ), jssupportticket::$_config['productversion'], true );
         if(in_array('notification', jssupportticket::$_active_addons)){
             wp_localize_script('commonjs', 'common', array('apiKey_firebase' => jssupportticket::$_config['apiKey_firebase'],'authDomain_firebase'=> jssupportticket::$_config['authDomain_firebase'],'databaseURL_firebase'=>jssupportticket::$_config['databaseURL_firebase'], 'projectId_firebase' => jssupportticket::$_config['projectId_firebase'], 'storageBucket_firebase' => jssupportticket::$_config['storageBucket_firebase'], 'messagingSenderId_firebase' => jssupportticket::$_config['messagingSenderId_firebase']));
         }
         //to localize validation error messages
-        $js = '
+        $jsst_js = '
         jQuery.formUtils.LANG = {
             errorTitle: "'. esc_html(__("Form submission failed!",'js-support-ticket')).'",
             requiredFields: "'. esc_html(__("You have not answered all required fields",'js-support-ticket')).'",
@@ -898,24 +953,24 @@ class jssupportticket {
             badCVV: "'. esc_html(__("The CVV number was not correct",'js-support-ticket')).'"
         };
         ';
-        wp_add_inline_script('jsst-formvalidator',$js);
+        wp_add_inline_script('jsst-formvalidator',$jsst_js);
     }
 
     public static function jsst_register_plugin_styles(){
         global $wp_styles;
         if (!isset($wp_styles->queue)) {
-            wp_enqueue_style('jssupportticket-main-css', JSST_PLUGIN_URL . 'includes/css/style.css');
+            wp_enqueue_style('jssupportticket-main-css', JSST_PLUGIN_URL . 'includes/css/style.css', array(), jssupportticket::$_config['productversion']);
             // responsive style sheets
-            wp_enqueue_style('jssupportticket-tablet-css', JSST_PLUGIN_URL . 'includes/css/style_tablet.css',array(),'','(min-width: 668px) and (max-width: 782px)');
-            wp_enqueue_style('jssupportticket-mobile-css', JSST_PLUGIN_URL . 'includes/css/style_mobile.css',array(),'','(min-width: 481px) and (max-width: 667px)');
-            wp_enqueue_style('jssupportticket-oldmobile-css', JSST_PLUGIN_URL . 'includes/css/style_oldmobile.css',array(),'','(max-width: 480px)');
+            wp_enqueue_style('jssupportticket-tablet-css', JSST_PLUGIN_URL . 'includes/css/style_tablet.css', array(), jssupportticket::$_config['productversion'], '(min-width: 668px) and (max-width: 782px)');
+            wp_enqueue_style('jssupportticket-mobile-css', JSST_PLUGIN_URL . 'includes/css/style_mobile.css', array(), jssupportticket::$_config['productversion'], '(min-width: 481px) and (max-width: 667px)');
+            wp_enqueue_style('jssupportticket-oldmobile-css', JSST_PLUGIN_URL . 'includes/css/style_oldmobile.css', array(), jssupportticket::$_config['productversion'], '(max-width: 480px)');
             //wp_enqueue_style('jssupportticket-main-css');
             if(is_rtl()){
                 //wp_register_style('jssupportticket-main-css-rtl', JSST_PLUGIN_URL . 'includes/css/stylertl.css');
-                wp_enqueue_style('jssupportticket-main-css-rtl', JSST_PLUGIN_URL . 'includes/css/stylertl.css');
+                wp_enqueue_style('jssupportticket-main-css-rtl', JSST_PLUGIN_URL . 'includes/css/stylertl.css', array(), jssupportticket::$_config['productversion']);
                 //wp_enqueue_style('jssupportticket-main-css-rtl');
             }
-            $color = require_once(JSST_PLUGIN_PATH . 'includes/css/style.php');
+            $jsst_color1 = require_once(JSST_PLUGIN_PATH . 'includes/css/style.php');
             // wp_enqueue_style('jssupportticket-color-css', JSST_PLUGIN_URL . 'includes/css/color.css');
         } else {    
             JSSTincluder::getJSModel('jssupportticket')->checkIfMainCssFileIsEnqued();
@@ -923,19 +978,19 @@ class jssupportticket {
     }
 
     public static function jsst_admin_register_plugin_styles() {
-        $page = JSSTrequest::getVar('page');
+        $jsst_page = JSSTrequest::getVar('page');
         // List of all your plugin pages
         $jsst_plugin_pages = array(
             'jssupportticket','slug','ticket','fieldordering','agent','configuration','priority','status','thirdpartyimport','product','department','themes','reports','announcement','knowledgebase','email','systemerror','emailtemplate','translations','userfeild','cannedresponses','role','mail','banemail','banemaillog','emailpiping','export','feedback','postinstallation','faq','emailcc','agentautoassign','multiform','download','premiumplugin','shortcodes','help','helptopic','gdpr');
-        wp_register_style('jsticket-bootstrapcss', JSST_PLUGIN_URL . 'includes/css/bootstrap.min.css');
-        wp_register_style('jsticket-admincss', JSST_PLUGIN_URL . 'includes/css/admincss.css');
+        wp_register_style('jsticket-bootstrapcss', JSST_PLUGIN_URL . 'includes/css/bootstrap.min.css', array(), jssupportticket::$_config['productversion']);
+        wp_register_style('jsticket-admincss', JSST_PLUGIN_URL . 'includes/css/admincss.css', array(), jssupportticket::$_config['productversion']);
         // Only enqueue Tailwind if the current page is part of your plugin
-        if (in_array($page, $jsst_plugin_pages)) {
+        if (in_array($jsst_page, $jsst_plugin_pages)) {
             wp_enqueue_script('jsticket-tailwind', JSST_PLUGIN_URL . 'includes/js/tailwind.js', array(), '3.4.4', false);
         }
         wp_enqueue_style('jsticket-admincss');
         if(is_rtl()){
-            wp_register_style('jsticket-admincss-rtl', JSST_PLUGIN_URL . 'includes/css/admincssrtl.css');
+            wp_register_style('jsticket-admincss-rtl', JSST_PLUGIN_URL . 'includes/css/admincssrtl.css', array(), jssupportticket::$_config['productversion']);
             wp_enqueue_style('jsticket-admincss-rtl');
         }
     }
@@ -948,19 +1003,19 @@ class jssupportticket {
         if(jssupportticket::$_pageid != ''){
             return jssupportticket::$_pageid;
         }else{
-            $pageid = JSSTrequest::getVar('page_id','GET');
-            if($pageid){
-                return $pageid;
+            $jsst_pageid = JSSTrequest::getVar('page_id','GET');
+            if($jsst_pageid){
+                return $jsst_pageid;
             }else{ // in case of categories popup
-                $query = "SELECT configvalue FROM `".jssupportticket::$_db->prefix."js_ticket_config` WHERE configname = 'default_pageid'";
-                $pageid = jssupportticket::$_db->get_var($query);
-                return $pageid;
+                $jsst_query = "SELECT configvalue FROM `".jssupportticket::$_db->prefix."js_ticket_config` WHERE configname = 'default_pageid'";
+                $jsst_pageid = jssupportticket::$_db->get_var($jsst_query);
+                return $jsst_pageid;
             }
         }
     }
 
-    public static function setPageID($id) {
-        jssupportticket::$_pageid = $id;
+    public static function setPageID($jsst_id) {
+        jssupportticket::$_pageid = $jsst_id;
         return;
     }
 
@@ -968,163 +1023,163 @@ class jssupportticket {
      * function to parse the spaces in given string
      */
 
-    public static function parseSpaces($string) {
-        return jssupportticketphplib::JSST_str_replace('%20',' ',$string);
+    public static function parseSpaces($jsst_string) {
+        return jssupportticketphplib::JSST_str_replace('%20',' ',$jsst_string);
     }
 
     static function checkScreenTag(){
         if(!is_admin()){
             if (jssupportticket::$_config['support_screentag'] == 1) { // we need to show the support ticket tag
                 if (jssupportticket::$_config['support_custom_img'] == '0') {
-                    $img_scr = JSST_PLUGIN_URL.'includes/images/support.png';
+                    $jsst_img_scr = JSST_PLUGIN_URL.'includes/images/support.png';
                 } else {
-                    $maindir = wp_upload_dir();
-                    $basedir = $maindir['baseurl'];
-                    $datadirectory = jssupportticket::$_config['data_directory'];
-                    $img_scr = $basedir . '/' . $datadirectory.'/supportImg/'.jssupportticket::$_config['support_custom_img'];
+                    $jsst_maindir = wp_upload_dir();
+                    $jsst_basedir = $jsst_maindir['baseurl'];
+                    $jsst_datadirectory = jssupportticket::$_config['data_directory'];
+                    $jsst_img_scr = $jsst_basedir . '/' . $jsst_datadirectory.'/supportImg/'.jssupportticket::$_config['support_custom_img'];
                 }
                 if (isset(jssupportticket::$_config['support_custom_txt']) && jssupportticket::$_config['support_custom_txt'] != '') {
-                    $support_txt = jssupportticket::$_config['support_custom_txt'];
+                    $jsst_support_txt = jssupportticket::$_config['support_custom_txt'];
                 } else {
-                    $support_txt = "Support";
+                    $jsst_support_txt = "Support";
                 }
-                $location = 'left';
-                $borderradius = '0px 8px 8px 0px';
-                $padding = '5px 10px 5px 20px';
+                $jsst_location = 'left';
+                $jsst_borderradius = '0px 8px 8px 0px';
+                $jsst_padding = '5px 10px 5px 20px';
                 switch (jssupportticket::$_config['screentag_position']) {
                     case 1: // Top left
-                        $top = "30px";
-                        $left = "0px";
-                        $right = "auto";
-                        $bottom = "auto";
+                        $jsst_top = "30px";
+                        $jsst_left = "0px";
+                        $jsst_right = "auto";
+                        $jsst_bottom = "auto";
                     break;
                     case 2: // Top right
-                        $top = "30px";
-                        $left = "auto";
-                        $right = "0px";
-                        $bottom = "auto";
-                        $location = 'right';
-                        $borderradius = '8px 0px 0px 8px';
-                        $padding = '5px 20px 5px 10px';
+                        $jsst_top = "30px";
+                        $jsst_left = "auto";
+                        $jsst_right = "0px";
+                        $jsst_bottom = "auto";
+                        $jsst_location = 'right';
+                        $jsst_borderradius = '8px 0px 0px 8px';
+                        $jsst_padding = '5px 20px 5px 10px';
                     break;
                     case 3: // middle left
-                        $top = "48%";
-                        $left = "0px";
-                        $right = "auto";
-                        $bottom = "auto";
+                        $jsst_top = "48%";
+                        $jsst_left = "0px";
+                        $jsst_right = "auto";
+                        $jsst_bottom = "auto";
                     break;
                     case 4: // middle right
-                        $top = "48%";
-                        $left = "auto";
-                        $right = "0px";
-                        $bottom = "auto";
-                        $location = 'right';
-                        $borderradius = '8px 0px 0px 8px';
-                        $padding = '5px 20px 5px 10px';
+                        $jsst_top = "48%";
+                        $jsst_left = "auto";
+                        $jsst_right = "0px";
+                        $jsst_bottom = "auto";
+                        $jsst_location = 'right';
+                        $jsst_borderradius = '8px 0px 0px 8px';
+                        $jsst_padding = '5px 20px 5px 10px';
                     break;
                     case 5: // bottom left
-                        $top = "auto";
-                        $left = "0px";
-                        $right = "auto";
-                        $bottom = "30px";
+                        $jsst_top = "auto";
+                        $jsst_left = "0px";
+                        $jsst_right = "auto";
+                        $jsst_bottom = "30px";
                     break;
                     case 6: // bottom right
-                        $top = "auto";
-                        $left = "auto";
-                        $right = "0px";
-                        $bottom = "30px";
-                        $location = 'right';
-                        $borderradius = '8px 0px 0px 8px';
-                        $padding = '5px 20px 5px 10px';
+                        $jsst_top = "auto";
+                        $jsst_left = "auto";
+                        $jsst_right = "0px";
+                        $jsst_bottom = "30px";
+                        $jsst_location = 'right';
+                        $jsst_borderradius = '8px 0px 0px 8px';
+                        $jsst_padding = '5px 20px 5px 10px';
                     break;
                 }
-                // $html = '<style type="text/css">
-                //             div#js-ticket_screentag{opacity:0;position:fixed;top:'.$top.';left:'.$left.';right:'.$right.';bottom:'.$bottom.';padding:'.$padding.';background:rgba(18, 17, 17, 0.5);z-index:9999;border-radius:'.$borderradius.';}
-                //             div#js-ticket_screentag img.js-ticket_screentag_image{margin-'.$location.':10px;display:inline-block;}
+                // $jsst_html = '<style type="text/css">
+                //             div#js-ticket_screentag{opacity:0;position:fixed;top:'.$jsst_top.';left:'.$jsst_left.';right:'.$jsst_right.';bottom:'.$jsst_bottom.';padding:'.$jsst_padding.';background:rgba(18, 17, 17, 0.5);z-index:9999;border-radius:'.$jsst_borderradius.';}
+                //             div#js-ticket_screentag img.js-ticket_screentag_image{margin-'.$jsst_location.':10px;display:inline-block;}
                 //             div#js-ticket_screentag a.js-ticket_screentag_anchor{color:#ffffff;text-decoration:none;}
                 //             div#js-ticket_screentag span.text{display:inline-block;font-family:sans-serif;font-size:15px;}
                 //         </style>';
 
-                $html ='
+                $jsst_html ='
                         <div id="js-ticket_screentag">
                         <a class="js-ticket_screentag_anchor" href="' . esc_url(site_url('?page_id=' . jssupportticket::$_config['default_pageid'])) . '">';
-                if($location == 'right'){
-                    $html .= '<img class="js-ticket_screentag_image" alt="screen tag" src="'.esc_url($img_scr).'" /><span class="text">'.esc_html($support_txt).'</span>';
+                if($jsst_location == 'right'){
+                    $jsst_html .= '<img class="js-ticket_screentag_image" alt="screen tag" src="'.esc_url($jsst_img_scr).'" /><span class="text">'.esc_html($jsst_support_txt).'</span>';
                 }else{
-                    $html .= '<span class="text">'.esc_html($support_txt).'</span><img class="js-ticket_screentag_image" alt="screen tag" src="'.esc_url($img_scr).'" />';
+                    $jsst_html .= '<span class="text">'.esc_html($jsst_support_txt).'</span><img class="js-ticket_screentag_image" alt="screen tag" src="'.esc_url($jsst_img_scr).'" />';
                 }
-                $html .= '</a>
+                $jsst_html .= '</a>
                         </div>';
-                        $jssupportticket_js = '
+                        $jsst_jssupportticket_js = '
                             jQuery(document).ready(function(){
-                                jQuery("div#js-ticket_screentag").css("'.$location.'","-"+(jQuery("div#js-ticket_screentag span.text").width() + 25)+"px");
+                                jQuery("div#js-ticket_screentag").css("'.$jsst_location.'","-"+(jQuery("div#js-ticket_screentag span.text").width() + 25)+"px");
                                 jQuery("div#js-ticket_screentag").css("opacity",1);
                                 jQuery("div#js-ticket_screentag").hover(
                                     function(){
-                                        jQuery(this).animate({'.$location.': "+="+(jQuery("div#js-ticket_screentag span.text").width() + 25)}, 1000);
+                                        jQuery(this).animate({'.$jsst_location.': "+="+(jQuery("div#js-ticket_screentag span.text").width() + 25)}, 1000);
                                     },
                                     function(){
-                                        jQuery(this).animate({'.$location.': "-="+(jQuery("div#js-ticket_screentag span.text").width() + 25)}, 1000);
+                                        jQuery(this).animate({'.$jsst_location.': "-="+(jQuery("div#js-ticket_screentag span.text").width() + 25)}, 1000);
                                     }
                                 );
                             });';
-                        wp_add_inline_script('js-support-ticket-main-js',$jssupportticket_js);
-                echo wp_kses($html, JSST_ALLOWED_TAGS);
+                        wp_add_inline_script('js-support-ticket-main-js',$jsst_jssupportticket_js);
+                echo wp_kses($jsst_html, JSST_ALLOWED_TAGS);
             }
         }
     }
 
-    public static function JSST_getVarValue($text_string) {
-        $translations = get_translations_for_domain('js-support-ticket');
-        $translation  = $translations->translate( $text_string );
-        return esc_html($translation);
+    public static function JSST_getVarValue($jsst_text_string) {
+        $jsst_translations = get_translations_for_domain('js-support-ticket');
+        $jsst_translation  = $jsst_translations->translate( $jsst_text_string );
+        return esc_html($jsst_translation);
     }
 
-    static function JSST_sanitizeData($data){
-        if($data == null){
-            return $data;
+    static function JSST_sanitizeData($jsst_data){
+        if($jsst_data == null){
+            return $jsst_data;
         }
-        if(is_array($data)){
-            return map_deep( $data, 'sanitize_text_field' );
+        if(is_array($jsst_data)){
+            return map_deep( $jsst_data, 'sanitize_text_field' );
         }else{
-            return sanitize_text_field( $data );
+            return sanitize_text_field( $jsst_data );
         }
     }
 
-    static function makeUrl($args = array()){
+    static function makeUrl($jsst_args = array()){
         global $wp_rewrite;
 
-        $pageid = JSSTrequest::getVar('jsstpageid');
-        if(is_numeric($pageid)){
-            $permalink = get_the_permalink($pageid);
+        $jsst_pageid = JSSTrequest::getVar('jsstpageid');
+        if(is_numeric($jsst_pageid)){
+            $jsst_permalink = get_the_permalink($jsst_pageid);
         }else{
-            if(isset($args['jsstpageid']) && is_numeric($args['jsstpageid'])){
-                $permalink = get_the_permalink($args['jsstpageid']);
+            if(isset($jsst_args['jsstpageid']) && is_numeric($jsst_args['jsstpageid'])){
+                $jsst_permalink = get_the_permalink($jsst_args['jsstpageid']);
             }else{
-                $permalink = get_the_permalink();
+                $jsst_permalink = get_the_permalink();
             }
         }
 
         if (!$wp_rewrite->using_permalinks() || is_feed()){
-            if(!strstr($permalink, 'page_id') && !strstr($permalink, '?p=')){
-                $page['page_id'] = get_option('page_on_front');
-                $args = $page + $args;
+            if(!strstr($jsst_permalink, 'page_id') && !strstr($jsst_permalink, '?p=')){
+                $jsst_page['page_id'] = get_option('page_on_front');
+                $jsst_args = $jsst_page + $jsst_args;
             }
-            $redirect_url = add_query_arg($args,$permalink);
-            return $redirect_url;
+            $jsst_redirect_url = add_query_arg($jsst_args,$jsst_permalink);
+            return $jsst_redirect_url;
         }
 
-        if(isset($args['jstmod']) && isset($args['jstlay'])){
+        if(isset($jsst_args['jstmod']) && isset($jsst_args['jstlay'])){
             // Get the original query parts
-            $redirect = wp_parse_url($permalink);
-            if (!isset($redirect['query']))
-                $redirect['query'] = '';
+            $jsst_redirect = wp_parse_url($jsst_permalink);
+            if (!isset($jsst_redirect['query']))
+                $jsst_redirect['query'] = '';
 
-            if(strstr($permalink, '?')){ // if variable exist
-                $redirect_array = jssupportticketphplib::JSST_explode('?', $permalink);
-                $_redirect = $redirect_array[0];
+            if(strstr($jsst_permalink, '?')){ // if variable exist
+                $jsst_redirect_array = jssupportticketphplib::JSST_explode('?', $jsst_permalink);
+                $_redirect = $jsst_redirect_array[0];
             }else{
-                $_redirect = $permalink;
+                $_redirect = $jsst_permalink;
             }
 
             if($_redirect[strlen($_redirect) - 1] == '/'){
@@ -1133,245 +1188,252 @@ class jssupportticket {
 
 
             // If is layout
-            $changename = false;
+            $jsst_changename = false;
             if(file_exists(WP_PLUGIN_DIR.'/js-jobs/js-jobs.php')){
-                $changename = true;
+                $jsst_changename = true;
             }
             if(file_exists(WP_PLUGIN_DIR.'/js-vehicle-manager/js-vehicle-manager.php')){
-                $changename = true;
+                $jsst_changename = true;
             }
-            if (isset($args['jstlay'])) {
-                /* switch ($args['jstlay']) {
-                    case 'ticketdetail':$layout = 'ticket';break;
-                    case 'staffaddticket':$layout = 'staff-add-ticket';break;
-                    case 'rolepermission':$layout = 'role-permission';break;
-                    case 'addannouncement':$layout = 'add-announcement';break;
-                    case 'adddepartment':$layout = 'add-department';break;
-                    case 'adddownload':$layout = 'add-download';break;
-                    case 'addfaq':$layout = 'add-faq';break;
-                    case 'faqdetails':$layout = 'faq';break;
-                    case 'addarticle':$layout = 'add-article';break;
-                    case 'addcategory':$layout = 'add-category';break;
-                    case 'userknowledgebasearticles':$layout = 'kb-articles';break;
-                    case 'articledetails':$layout = 'kb-article';break;
-                    case 'addrole':$layout = 'add-role';break;
-                    case 'addstaff':$layout = 'add-staff';break;
-                    case 'staffpermissions':$layout = 'staff-permissions';break;
-                    case 'myticket':$layout = 'my-tickets';break;
-                    case 'staffmyticket':$layout = 'staff-my-tickets';break;
-                    case 'userknowledgebase':$layout = 'knowledgebase';break;
-                    case 'stafflistcategories':$layout = 'staff-categories';break;
-                    case 'stafflistarticles':$layout = 'staff-kb-articles';break;
-                    case 'staffannouncements':$layout = 'staff-announcements';break;
-                    case 'staffdownloads':$layout = 'staff-downloads';break;
-                    case 'stafffaqs':$layout = 'staff-faqs';break;
-                    case 'addticket':$layout = 'add-ticket';break;
-                    case 'ticketstatus':$layout = 'ticket-status';break;
-                    case 'controlpanel':$layout = 'control-panel';break;
-                    case 'staffdetailreport':$layout = 'staff-report';break;
-                    case 'staffreports':$layout = 'staff-reports';break;
-                    case 'departmentreports':$layout = 'department-reports';break;
-                    case 'announcementdetails':$layout = 'announcement';break;
-                    case 'formfeedback':$layout = 'feed-back';break;
-                    case 'feedbacks':$layout = 'staff-feedbacks';break;
-                    case 'visitormessagepage':$layout = 'visitor-message';break;
-                    case 'addhelptopic':$layout = 'add-help-topic';break;
-                    case 'agenthelptopics':$layout = 'agent-help-topics';break;
-                    case 'addcannedresponse':$layout = 'add-canned-response';break;
-                    case 'agentcannedresponses':$layout = 'agent-canned-responses';break;
-                    case 'adderasedatarequest':$layout = 'gdpr-data-compliance-actions';break;
+            if (isset($jsst_args['jstlay'])) {
+                /* switch ($jsst_args['jstlay']) {
+                    case 'ticketdetail':$jsst_layout = 'ticket';break;
+                    case 'staffaddticket':$jsst_layout = 'staff-add-ticket';break;
+                    case 'rolepermission':$jsst_layout = 'role-permission';break;
+                    case 'addannouncement':$jsst_layout = 'add-announcement';break;
+                    case 'adddepartment':$jsst_layout = 'add-department';break;
+                    case 'adddownload':$jsst_layout = 'add-download';break;
+                    case 'addfaq':$jsst_layout = 'add-faq';break;
+                    case 'faqdetails':$jsst_layout = 'faq';break;
+                    case 'addarticle':$jsst_layout = 'add-article';break;
+                    case 'addcategory':$jsst_layout = 'add-category';break;
+                    case 'userknowledgebasearticles':$jsst_layout = 'kb-articles';break;
+                    case 'articledetails':$jsst_layout = 'kb-article';break;
+                    case 'addrole':$jsst_layout = 'add-role';break;
+                    case 'addstaff':$jsst_layout = 'add-staff';break;
+                    case 'staffpermissions':$jsst_layout = 'staff-permissions';break;
+                    case 'myticket':$jsst_layout = 'my-tickets';break;
+                    case 'staffmyticket':$jsst_layout = 'staff-my-tickets';break;
+                    case 'userknowledgebase':$jsst_layout = 'knowledgebase';break;
+                    case 'stafflistcategories':$jsst_layout = 'staff-categories';break;
+                    case 'stafflistarticles':$jsst_layout = 'staff-kb-articles';break;
+                    case 'staffannouncements':$jsst_layout = 'staff-announcements';break;
+                    case 'staffdownloads':$jsst_layout = 'staff-downloads';break;
+                    case 'stafffaqs':$jsst_layout = 'staff-faqs';break;
+                    case 'addticket':$jsst_layout = 'add-ticket';break;
+                    case 'ticketstatus':$jsst_layout = 'ticket-status';break;
+                    case 'controlpanel':$jsst_layout = 'control-panel';break;
+                    case 'staffdetailreport':$jsst_layout = 'staff-report';break;
+                    case 'staffreports':$jsst_layout = 'staff-reports';break;
+                    case 'departmentreports':$jsst_layout = 'department-reports';break;
+                    case 'announcementdetails':$jsst_layout = 'announcement';break;
+                    case 'formfeedback':$jsst_layout = 'feed-back';break;
+                    case 'feedbacks':$jsst_layout = 'staff-feedbacks';break;
+                    case 'visitormessagepage':$jsst_layout = 'visitor-message';break;
+                    case 'addhelptopic':$jsst_layout = 'add-help-topic';break;
+                    case 'agenthelptopics':$jsst_layout = 'agent-help-topics';break;
+                    case 'addcannedresponse':$jsst_layout = 'add-canned-response';break;
+                    case 'agentcannedresponses':$jsst_layout = 'agent-canned-responses';break;
+                    case 'adderasedatarequest':$jsst_layout = 'gdpr-data-compliance-actions';break;
                     case 'printticket':
-                    $layout = 'print-ticket';
+                    $jsst_layout = 'print-ticket';
                     break;
                     case 'myprofile':
-                        $layout = ($changename === true) ? 'ticket-my-profile' : 'my-profile';
+                        $jsst_layout = ($jsst_changename === true) ? 'ticket-my-profile' : 'my-profile';
                     break;
                     case 'login':
-                        $layout = ($changename === true) ? 'ticket-login' : 'login';
+                        $jsst_layout = ($jsst_changename === true) ? 'ticket-login' : 'login';
                     break;
                     case 'userregister':
-                        $layout = ($changename === true) ? 'ticket-user-register' : 'userregister';
+                        $jsst_layout = ($jsst_changename === true) ? 'ticket-user-register' : 'userregister';
                     break;
                     case 'formmessage':
-                        $layout = ($changename === true) ? 'ticket-add-message' : 'add-message';
+                        $jsst_layout = ($jsst_changename === true) ? 'ticket-add-message' : 'add-message';
                     break;
                     case 'message':
-                        $layout = ($changename === true) ? 'ticket-message' : 'message';
+                        $jsst_layout = ($jsst_changename === true) ? 'ticket-message' : 'message';
                     break;
                     case 'inbox':
-                        $layout = ($changename === true) ? 'ticket-message-inbox' : 'message-inbox';
+                        $jsst_layout = ($jsst_changename === true) ? 'ticket-message-inbox' : 'message-inbox';
                     break;
                     case 'outbox':
-                        $layout = ($changename === true) ? 'ticket-message-outbox' : 'message-outbox';
+                        $jsst_layout = ($jsst_changename === true) ? 'ticket-message-outbox' : 'message-outbox';
                     break;
-                    default:$layout = $args['jstlay'];break;
+                    default:$jsst_layout = $jsst_args['jstlay'];break;
                 } */
 
-                $layout = '';
-                $layout = JSSTincluder::getJSModel('slug')->getSlugFromFileName($args['jstlay'],$args['jstmod']);
+                $jsst_layout = '';
+                $jsst_layout = JSSTincluder::getJSModel('slug')->getSlugFromFileName($jsst_args['jstlay'],$jsst_args['jstmod']);
                 global $wp_rewrite;
-                $slug_prefix = JSSTincluder::getJSModel('configuration')->getConfigValue('home_slug_prefix');
+                $jsst_slug_prefix = JSSTincluder::getJSModel('configuration')->getConfigValue('home_slug_prefix');
                 if(is_home() || is_front_page()){
                     if($_redirect == site_url()){
-                        $layout = $slug_prefix.$layout;
+                        $jsst_layout = $jsst_slug_prefix.$jsst_layout;
                     }
                 }else{
                     if($_redirect == site_url()){
-                        $layout = $slug_prefix.$layout;
+                        $jsst_layout = $jsst_slug_prefix.$jsst_layout;
                     }
                 }
-                $_redirect .= '/' . $layout;
+                $_redirect .= '/' . $jsst_layout;
             }
             // If is list
-            if (isset($args['list'])) {
-                $_redirect .= '/' . $args['list'];
+            if (isset($jsst_args['list'])) {
+                $_redirect .= '/' . $jsst_args['list'];
             }
             // If is sortby
-            if (isset($args['sortby'])) {
-                $_redirect .= '/' . $args['sortby'];
+            if (isset($jsst_args['sortby'])) {
+                $_redirect .= '/' . $jsst_args['sortby'];
             }
             // If is jssupportticket_ticketid
-            if (isset($args['jssupportticketid'])) {
-                $_redirect .= '/' . $args['jssupportticketid'];
-                if($args['jstlay'] == 'addticket'){
+            if (isset($jsst_args['jssupportticketid'])) {
+                $_redirect .= '/' . $jsst_args['jssupportticketid'];
+                if($jsst_args['jstlay'] == 'addticket'){
                     $_redirect .= '_10';// 10 for ticket id
                 }
             }
 
-            if (isset($args['edd_order_id'])) {
-                $_redirect .= '/' . $args['edd_order_id'].'_11';// 11 for easy digital downloads id
+            if (isset($jsst_args['edd_order_id'])) {
+                $_redirect .= '/' . $jsst_args['edd_order_id'].'_11';// 11 for easy digital downloads id
             }
 
-            if (isset($args['uid'])) {
-                $_redirect .= '/' . $args['uid'].'_12';// 12 for user id
+            if (isset($jsst_args['uid'])) {
+                $_redirect .= '/' . $jsst_args['uid'].'_12';// 12 for user id
             }
 
-            if (isset($args['paidsupportid'])) {
-                $_redirect .= '/' . $args['paidsupportid'].'_13';// 13 for paid support id
+            if (isset($jsst_args['paidsupportid'])) {
+                $_redirect .= '/' . $jsst_args['paidsupportid'].'_13';// 13 for paid support id
             }
-            if (isset($args['formid'])){
-                $_redirect .= '/' . $args['formid'].'_15';// 15 multi form id
+            if (isset($jsst_args['formid'])){
+                $_redirect .= '/' . $jsst_args['formid'].'_15';// 15 multi form id
             }
 
 
-            if (isset($args['jsst-id'])){
-                $_redirect .= '/' . $args['jsst-id'];
+            if (isset($jsst_args['jsst-id'])){
+                $_redirect .= '/' . $jsst_args['jsst-id'];
             }
-            if (isset($args['jsst-date-start'])){
-                $_redirect .= '/date-start:' . $args['jsst-date-start'];
+            if (isset($jsst_args['jsst-date-start'])){
+                $_redirect .= '/date-start:' . $jsst_args['jsst-date-start'];
             }
-            if (isset($args['jsst-date-end'])){
-                $_redirect .= '/date-end:' . $args['jsst-date-end'];
+            if (isset($jsst_args['jsst-date-end'])){
+                $_redirect .= '/date-end:' . $jsst_args['jsst-date-end'];
             }
-            if (isset($args['js_redirecturl'])){
-                $_redirect .= '/?js_redirecturl=' . $args['js_redirecturl'];
+            if (isset($jsst_args['js_redirecturl'])){
+                $_redirect .= '/?js_redirecturl=' . $jsst_args['js_redirecturl'];
             }
-            if (isset($args['token'])){
-                $_redirect .= '/?token=' . $args['token'];
+            if (isset($jsst_args['token'])){
+                $_redirect .= '/?token=' . $jsst_args['token'];
             }
-            if (isset($args['successflag'])){
-                $_redirect .= '/?successflag=' . $args['successflag'];
+            if (isset($jsst_args['successflag'])){
+                $_redirect .= '/?successflag=' . $jsst_args['successflag'];
             }
             return $_redirect;
         }else{ // incase of form
-            $redirect_url = add_query_arg($args,$permalink);
-            return $redirect_url;
+            $jsst_redirect_url = add_query_arg($jsst_args,$jsst_permalink);
+            return $jsst_redirect_url;
         }
     }
 
-    function reset_jsst_aadon_query(){
+    function jsst_reset_aadon_query(){
         jssupportticket::$_addon_query = array('select'=>'','join'=>'','where'=>'');
     }
 
     function jssupportticket_load_wp_plugin_file() {
-        $wp_admin_url = admin_url('includes/plugin.php');
-        $wp_admin_path = str_replace(site_url('/'), ABSPATH, $wp_admin_url);
-        if(jssupportticketphplib::JSST_strpos($wp_admin_path, "http") !== false) {
-            $wp_admin_path = ABSPATH . 'wp-admin/includes/plugin.php';
-        }
-        require_once($wp_admin_path);
+        // $jsst_wp_admin_url = admin_url('includes/plugin.php');
+        // $jsst_wp_admin_path = str_replace(site_url('/'), ABSPATH, $jsst_wp_admin_url);
+        // if(jssupportticketphplib::JSST_strpos($jsst_wp_admin_path, "http") !== false) {
+            $jsst_wp_admin_path = ABSPATH . 'wp-admin/includes/plugin.php';
+        // }
+        require_once($jsst_wp_admin_path);
     }
 
     function jssupportticket_load_wp_admin_file() {
-        $wp_admin_url = admin_url('includes/admin.php');
-        $wp_admin_path = str_replace(site_url('/'), ABSPATH, $wp_admin_url);
-        if(jssupportticketphplib::JSST_strpos($wp_admin_path, "http") !== false) {
-            $wp_admin_path = ABSPATH . 'wp-admin/includes/admin.php';
-        }
-        require_once($wp_admin_path);
+        // $jsst_wp_admin_url = admin_url('includes/admin.php');
+        // $jsst_wp_admin_path = str_replace(site_url('/'), ABSPATH, $jsst_wp_admin_url);
+        // if(jssupportticketphplib::JSST_strpos($jsst_wp_admin_path, "http") !== false) {
+            $jsst_wp_admin_path = ABSPATH . 'wp-admin/includes/admin.php';
+        // }
+        require_once($jsst_wp_admin_path);
     }
 
     function jssupportticket_load_wp_file() {
-        $wp_admin_url = admin_url('includes/file.php');
-        $wp_admin_path = str_replace(site_url('/'), ABSPATH, $wp_admin_url);
-        if(jssupportticketphplib::JSST_strpos($wp_admin_path, "http") !== false) {
-            $wp_admin_path = ABSPATH . 'wp-admin/includes/file.php';
-        }
-        require_once($wp_admin_path);
+        // $jsst_wp_admin_url = admin_url('includes/file.php');
+        // $jsst_wp_admin_path = str_replace(site_url('/'), ABSPATH, $jsst_wp_admin_url);
+        // if(jssupportticketphplib::JSST_strpos($jsst_wp_admin_path, "http") !== false) {
+            $jsst_wp_admin_path = ABSPATH . 'wp-admin/includes/file.php';
+        // }
+        require_once($jsst_wp_admin_path);
     }
 
     function jssupportticket_load_wp_pcl_zip() {
-        $wp_admin_url = admin_url('includes/class-pclzip.php');
-        $wp_admin_path = str_replace(site_url('/'), ABSPATH, $wp_admin_url);
-        if(jssupportticketphplib::JSST_strpos($wp_admin_path, "http") !== false) {
-            $wp_admin_path = ABSPATH . 'wp-admin/includes/class-pclzip.php';
-        }
-        require_once($wp_admin_path);
+        // $jsst_wp_admin_url = admin_url('includes/class-pclzip.php');
+        // $jsst_wp_admin_path = str_replace(site_url('/'), ABSPATH, $jsst_wp_admin_url);
+        // if(jssupportticketphplib::JSST_strpos($jsst_wp_admin_path, "http") !== false) {
+            $jsst_wp_admin_path = ABSPATH . 'wp-admin/includes/class-pclzip.php';
+        // }
+        require_once($jsst_wp_admin_path);
     }
 
     function jssupportticket_load_wp_ajax_upgrader_skin() {
-        $wp_admin_url = admin_url('includes/class-wp-ajax-upgrader-skin.php');
-        $wp_admin_path = str_replace(site_url('/'), ABSPATH, $wp_admin_url);
-        if(jssupportticketphplib::JSST_strpos($wp_admin_path, "http") !== false) {
-            $wp_admin_path = ABSPATH . 'wp-admin/includes/class-wp-ajax-upgrader-skin.php';
-        }
-        require_once($wp_admin_path);
+        // $jsst_wp_admin_url = admin_url('includes/class-wp-ajax-upgrader-skin.php');
+        // $jsst_wp_admin_path = str_replace(site_url('/'), ABSPATH, $jsst_wp_admin_url);
+        // if(jssupportticketphplib::JSST_strpos($jsst_wp_admin_path, "http") !== false) {
+            $jsst_wp_admin_path = ABSPATH . 'wp-admin/includes/class-wp-ajax-upgrader-skin.php';
+        // }
+        require_once($jsst_wp_admin_path);
     }
 
     function jssupportticket_load_wp_upgrader() {
-        $wp_admin_url = admin_url('includes/class-wp-upgrader.php');
-        $wp_admin_path = str_replace(site_url('/'), ABSPATH, $wp_admin_url);
-        if(jssupportticketphplib::JSST_strpos($wp_admin_path, "http") !== false) {
-            $wp_admin_path = ABSPATH . 'wp-admin/includes/class-wp-upgrader.php';
-        }
-        require_once($wp_admin_path);
+        // $jsst_wp_admin_url = admin_url('includes/class-wp-upgrader.php');
+        // $jsst_wp_admin_path = str_replace(site_url('/'), ABSPATH, $jsst_wp_admin_url);
+        // if(jssupportticketphplib::JSST_strpos($jsst_wp_admin_path, "http") !== false) {
+            $jsst_wp_admin_path = ABSPATH . 'wp-admin/includes/class-wp-upgrader.php';
+        // }
+        require_once($jsst_wp_admin_path);
     }
 
     function jssupportticket_load_wp_plugin_upgrader() {
-        $wp_admin_url = admin_url('includes/class-plugin-upgrader.php');
-        $wp_admin_path = str_replace(site_url('/'), ABSPATH, $wp_admin_url);
-        if(jssupportticketphplib::JSST_strpos($wp_admin_path, "http") !== false) {
-            $wp_admin_path = ABSPATH . 'wp-admin/includes/class-plugin-upgrader.php';
-        }
-        require_once($wp_admin_path);
+        // $jsst_wp_admin_url = admin_url('includes/class-plugin-upgrader.php');
+        // $jsst_wp_admin_path = str_replace(site_url('/'), ABSPATH, $jsst_wp_admin_url);
+        // if(jssupportticketphplib::JSST_strpos($jsst_wp_admin_path, "http") !== false) {
+            $jsst_wp_admin_path = ABSPATH . 'wp-admin/includes/class-plugin-upgrader.php';
+        // }
+        require_once($jsst_wp_admin_path);
     }
 
     function jssupportticket_load_wp_translation_install() {
-        $wp_admin_url = admin_url('includes/translation-install.php');
-        $wp_admin_path = str_replace(site_url('/'), ABSPATH, $wp_admin_url);
-        if(jssupportticketphplib::JSST_strpos($wp_admin_path, "http") !== false) {
-            $wp_admin_path = ABSPATH . 'wp-admin/includes/translation-install.php';
-        }
-        require_once($wp_admin_path);
+        // $jsst_wp_admin_url = admin_url('includes/translation-install.php');
+        // $jsst_wp_admin_path = str_replace(site_url('/'), ABSPATH, $jsst_wp_admin_url);
+        // if(jssupportticketphplib::JSST_strpos($jsst_wp_admin_path, "http") !== false) {
+            $jsst_wp_admin_path = ABSPATH . 'wp-admin/includes/translation-install.php';
+        // }
+        require_once($jsst_wp_admin_path);
     }
 
     function jssupportticket_load_phpass() {
-        $wp_site_url = site_url('wp-includes/class-phpass.php');
-        $wp_site_path = str_replace(site_url('/'), ABSPATH, $wp_site_url);
-		if(jssupportticketphplib::JSST_strpos($wp_site_path, "http") !== false) {
-			$wp_site_path = ABSPATH . 'wp-includes/class-phpass.php';
-		}		
-        require_once($wp_site_path);
+        /**
+         * Safely include the PasswordHash class.
+         * WPINC is a core WordPress constant that points to the 'wp-includes' folder.
+         * This remains compatible with security plugins that rename paths.
+         */
+        $jsst_wp_site_path = ABSPATH . WPINC . '/class-phpass.php';
+
+        if (file_exists($jsst_wp_site_path)) {
+            require_once($jsst_wp_site_path);
+        } else {
+            // Fallback for extreme cases where WPINC might not be defined or path is non-standard
+            require_once(ABSPATH . 'wp-includes/class-phpass.php');
+        }
     }
 
 
     function ticketviaemail() {// this funtion also handles ticket overdue bcz of hours confiuration
 /*
-        $today = gmdate('Y-m-d');
-        $f = fopen(JSST_PLUGIN_PATH .  'mylogone.txt', 'a') or exit("Can't open $lfile!");
-        $time = gmdate('H:i:s');
-        $message = ' main function call cron '.$time;
-        fwrite($f, "$time ($script_name) $message\n");
+        $jsst_today = gmdate('Y-m-d');
+        $jsst_f = fopen(JSST_PLUGIN_PATH .  'mylogone.txt', 'a') or exit("Can't open $jsst_lfile!");
+        $jsst_time = gmdate('H:i:s');
+        $jsst_message = ' main function call cron '.$jsst_time;
+        fwrite($jsst_f, "$jsst_time ($jsst_script_name) $jsst_message\n");
 */
         if(in_array('overdue', jssupportticket::$_active_addons)){
             JSSTincluder::getJSModel('overdue')->updateTicketStatusToOverDueCron();// this funtions handles the overdue of tickets by cron
@@ -1384,9 +1446,9 @@ class jssupportticket {
             JSSTincluder::getJSModel('emailpiping')->getAllEmailsForTickets();
         }
 /*
-        $time = gmdate('H:i:s');
-        $message = ' after ticketviaemail controller call cron '.$time;
-        fwrite($f, "$time ($script_name) $message\n");
+        $jsst_time = gmdate('H:i:s');
+        $jsst_message = ' after ticketviaemail controller call cron '.$jsst_time;
+        fwrite($jsst_f, "$jsst_time ($jsst_script_name) $jsst_message\n");
 */
     }
 }
@@ -1399,45 +1461,45 @@ function jsst_custom_init_session() {
 }
 
 // add the filter
-$jssupportticket = new jssupportticket();
+$jsst_jssupportticket = new jssupportticket();
 
 add_filter( 'login_form_middle', 'jsstAddLostPasswordLink' );
-function jsstAddLostPasswordLink($content) {
-   return $content.'
+function jsstAddLostPasswordLink($jsst_content) {
+   return $jsst_content.'
    <a href="'.site_url().'/wp-login.php?action=lostpassword">'. esc_html(__('Lost your password','js-support-ticket')) .'?</a>';
 }
 
 add_filter( 'login_form_middle', 'jsstAddRegisterLink' );
-function jsstAddRegisterLink($content) {
+function jsstAddRegisterLink($jsst_content) {
     if(get_option('users_can_register')){
-        $registerval = JSSTincluder::getJSModel('configuration')->getConfigValue('set_register_link');
-        $registerlink = JSSTincluder::getJSModel('configuration')->getConfigValue('register_link');
-        if($registerval == 3){
-            $content .= ' <a href="'.esc_url(wp_registration_url()).'">' . esc_html(__('Register', 'js-support-ticket')) . '</a>';
-        }else if($registerval == 2 && $registerlink != ""){
-            $content .= ' <a href="'.esc_url($registerlink).'">' . esc_html(__('Register', 'js-support-ticket')) . '</a>';
+        $jsst_registerval = JSSTincluder::getJSModel('configuration')->getConfigValue('set_register_link');
+        $jsst_registerlink = JSSTincluder::getJSModel('configuration')->getConfigValue('register_link');
+        if($jsst_registerval == 3){
+            $jsst_content .= ' <a href="'.esc_url(wp_registration_url()).'">' . esc_html(__('Register', 'js-support-ticket')) . '</a>';
+        }else if($jsst_registerval == 2 && $jsst_registerlink != ""){
+            $jsst_content .= ' <a href="'.esc_url($jsst_registerlink).'">' . esc_html(__('Register', 'js-support-ticket')) . '</a>';
         }else{
-            $content .= ' <a href="'.esc_url(jssupportticket::makeUrl(array('jstmod'=>'jssupportticket','jstlay'=>'userregister'))).'">'. esc_html(__('Register','js-support-ticket')) .'</a>';
+            $jsst_content .= ' <a href="'.esc_url(jssupportticket::makeUrl(array('jstmod'=>'jssupportticket','jstlay'=>'userregister'))).'">'. esc_html(__('Register','js-support-ticket')) .'</a>';
         }
     }
-    return $content;
+    return $jsst_content;
 }
 
 add_action('wp_ajax_save_dashboard_preferences', 'jssupportticket_save_dashboard_preferences');
 function jssupportticket_save_dashboard_preferences() {
     check_ajax_referer('jssupportticket_admin_nonce', 'nonce');
 
-    $preferences = filter_input(INPUT_POST, 'preferences', FILTER_DEFAULT, FILTER_REQUIRE_ARRAY);
-    if (!is_array($preferences)) {
+    $jsst_preferences = filter_input(INPUT_POST, 'preferences', FILTER_DEFAULT, FILTER_REQUIRE_ARRAY);
+    if (!is_array($jsst_preferences)) {
         wp_send_json_error(['message' => 'Invalid preferences data.']);
     }
 
-    $clean_preferences = [];
-    foreach ($preferences as $key => $value) {
-        $clean_preferences[$key] = filter_var($value, FILTER_VALIDATE_BOOLEAN);
+    $jsst_clean_preferences = [];
+    foreach ($jsst_preferences as $jsst_key => $jsst_value) {
+        $jsst_clean_preferences[$jsst_key] = filter_var($jsst_value, FILTER_VALIDATE_BOOLEAN);
     }
     
-    update_option('jssupportticket_admin_charts_visibility', $clean_preferences);
+    update_option('jssupportticket_admin_charts_visibility', $jsst_clean_preferences);
     wp_send_json_success(['message' => 'Preferences saved successfully.']);
 }
 
@@ -1448,16 +1510,16 @@ function jsstaddonUpdateDateFailed(){
 
 add_filter('style_loader_tag', 'jsstW3cValidation', 10, 2);
 add_filter('script_loader_tag', 'jsstW3cValidation', 10, 2);
-function jsstW3cValidation($tag, $handle) {
-    return jssupportticketphplib::JSST_preg_replace( "/type=['\"]text\/(javascript|css)['\"]/", '', $tag );
+function jsstW3cValidation($jsst_tag, $jsst_handle) {
+    return jssupportticketphplib::JSST_preg_replace( "/type=['\"]text\/(javascript|css)['\"]/", '', $jsst_tag );
 }
 
 if(!empty(jssupportticket::$_active_addons)){
     require_once 'includes/addon-updater/jsstupdater.php';
-    $JS_SUPPORTTICKETUpdater  = new JS_SUPPORTTICKETUpdater();
+    $jsst_JS_SUPPORTTICKETUpdater  = new JS_SUPPORTTICKETUpdater();
 }
 
-//$jssupportticket = new jssupportticket();
+//$jsst_jssupportticket = new jssupportticket();
 if(is_file('includes/updater/updater.php')){
     include_once 'includes/updater/updater.php';
 }
@@ -1468,68 +1530,68 @@ if(is_admin() && is_file('includes/classes/jsstadminreviewbox.php')){
 
  //do_action('edd_purchase_history_header_after');
 
- //do_action( 'edd_purchase_history_row_end', $payment->ID, $payment->payment_meta );
+ //do_action( 'edd_purchase_history_row_end', $jsst_payment->ID, $jsst_payment->payment_meta );
 
-function jsst_get_avatar($uid, $class = '') {
+function jsst_get_avatar($jsst_uid, $jsst_class = '') {
     // Default avatar image URL
-    $defaultImage = JSST_PLUGIN_URL . '/includes/images/user.png';
+    $jsst_defaultImage = JSST_PLUGIN_URL . '/includes/images/user.png';
 
     // Ensure the UID is valid and numeric
-    if (!is_numeric($uid) || !$uid) {
-        return '<img alt="' . esc_html(__('image', 'js-support-ticket')) . '" src="' . esc_url($defaultImage) . '" class="' . esc_attr($class) . '" />';
+    if (!is_numeric($jsst_uid) || !$jsst_uid) {
+        return '<img alt="' . esc_html(__('image', 'js-support-ticket')) . '" src="' . esc_url($jsst_defaultImage) . '" class="' . esc_attr($jsst_class) . '" />';
     }
 
     // in case if user is agent
     if ( in_array('agent',jssupportticket::$_active_addons)) {
-        $query = "
-        SELECT id, photo FROM `" . jssupportticket::$_db->prefix."js_ticket_staff` AS staff WHERE staff.uid = ".esc_sql($uid);
-        $staff_data = jssupportticket::$_db->get_row($query);
-        if (!empty($staff_data->photo)) {
-            $maindir = wp_upload_dir();
-            $path = $maindir['baseurl'];
+        $jsst_query = "
+        SELECT id, photo FROM `" . jssupportticket::$_db->prefix."js_ticket_staff` AS staff WHERE staff.uid = ".esc_sql($jsst_uid);
+        $jsst_staff_data = jssupportticket::$_db->get_row($jsst_query);
+        if (!empty($jsst_staff_data->photo)) {
+            $jsst_maindir = wp_upload_dir();
+            $jsst_path = $jsst_maindir['baseurl'];
 
-            $imageurl = $path."/".jssupportticket::$_config['data_directory']."/staffdata/staff_".$staff_data->id."/".$staff_data->photo;
+            $jsst_imageurl = $jsst_path."/".jssupportticket::$_config['data_directory']."/staffdata/staff_".$jsst_staff_data->id."/".$jsst_staff_data->photo;
 
-            return '<img alt="' . esc_html(__('image', 'js-support-ticket')) . '" src="' . esc_url($imageurl) . '" class="' . esc_attr($class) . '" />';
+            return '<img alt="' . esc_html(__('image', 'js-support-ticket')) . '" src="' . esc_url($jsst_imageurl) . '" class="' . esc_attr($jsst_class) . '" />';
         }
     }
-    $uid = JSSTincluder::getJSModel('jssupportticket')->getWPUidById($uid);
+    $jsst_uid = JSSTincluder::getJSModel('jssupportticket')->getWPUidById($jsst_uid);
 
     // Get the avatar URL
     if(jssupportticket::$_config['show_avatar'] == 1){
-        $avatar_url = get_avatar_url($uid, array('size' => 96));
+        $jsst_avatar_url = get_avatar_url($jsst_uid, array('size' => 96));
     } else {
-        $avatar_url = "";
+        $jsst_avatar_url = "";
     }
 
     // Check if the avatar URL is valid
-    if (!empty($avatar_url) && @getimagesize($avatar_url)) {
+    if (!empty($jsst_avatar_url) && @getimagesize($jsst_avatar_url)) {
         // Use WordPress's get_avatar function to generate the avatar HTML
-        return get_avatar($uid, 96, '', '', array('class' => $class));
+        return get_avatar($jsst_uid, 96, '', '', array('class' => $jsst_class));
     } else {
         // Fallback to the default image if the avatar URL is invalid
-        return '<img alt="' . esc_html(__('image', 'js-support-ticket')) . '" src="' . esc_url($defaultImage) . '" class="' . esc_attr($class) . '" />';
+        return '<img alt="' . esc_html(__('image', 'js-support-ticket')) . '" src="' . esc_url($jsst_defaultImage) . '" class="' . esc_attr($jsst_class) . '" />';
     }
 }
 
-function JSSTCheckPluginInfo($slug){
-    if(file_exists(WP_PLUGIN_DIR . '/'.$slug) && is_plugin_active($slug)){
-        $text = esc_html(__("Activated","js-support-ticket"));
-        $disabled = "disabled";
-        $class = "js-btn-activated";
-        $availability = "-1";
-    }else if(file_exists(WP_PLUGIN_DIR . '/'.$slug) && !is_plugin_active($slug)){
-        $text = esc_html(__("Active Now","js-support-ticket"));
-        $disabled = "";
-        $class = "js-btn-green js-btn-active-now";
-        $availability = "1";
-    }else if(!file_exists(WP_PLUGIN_DIR . '/'.$slug)){
-        $text = esc_html(__("Install Now","js-support-ticket"));
-        $disabled = "";
-        $class = "js-btn-install-now";
-        $availability = "0";
+function JSSTCheckPluginInfo($jsst_slug){
+    if(file_exists(WP_PLUGIN_DIR . '/'.$jsst_slug) && is_plugin_active($jsst_slug)){
+        $jsst_text = esc_html(__("Activated","js-support-ticket"));
+        $jsst_disabled = "disabled";
+        $jsst_class = "js-btn-activated";
+        $jsst_availability = "-1";
+    }else if(file_exists(WP_PLUGIN_DIR . '/'.$jsst_slug) && !is_plugin_active($jsst_slug)){
+        $jsst_text = esc_html(__("Active Now","js-support-ticket"));
+        $jsst_disabled = "";
+        $jsst_class = "js-btn-green js-btn-active-now";
+        $jsst_availability = "1";
+    }else if(!file_exists(WP_PLUGIN_DIR . '/'.$jsst_slug)){
+        $jsst_text = esc_html(__("Install Now","js-support-ticket"));
+        $jsst_disabled = "";
+        $jsst_class = "js-btn-install-now";
+        $jsst_availability = "0";
     }
-    return array("text" => $text, "disabled" => $disabled, "class" => $class, "availability" => $availability);
+    return array("text" => $jsst_text, "disabled" => $jsst_disabled, "class" => $jsst_class, "availability" => $jsst_availability);
 }
 
 ?>

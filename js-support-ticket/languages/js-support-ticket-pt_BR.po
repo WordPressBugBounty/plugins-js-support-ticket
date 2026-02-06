@@ -8765,3 +8765,45 @@ msgstr "Salvar e próximo"
 
 msgid "For enhanced security change encryption method in %1$s on line %2$s"
 msgstr "Para um método aprimorado de criptografia de mudança de segurança em %1 $ s na linha %2 $ s"
+
+msgid "Changes may require cache clearing to take effect."
+msgstr "As alterações podem exigir a limpeza do cache para entrar em vigor."
+
+msgid "How Long Will My Support Stay Active?"
+msgstr "Por quanto tempo meu suporte permanecerá ativo?"
+
+msgid "I Can’t Log Into My Account"
+msgstr "Não consigo entrar na minha conta"
+
+msgid "I Want to Upgrade My Plan — How Can I Do It?"
+msgstr "Quero atualizar meu plano – como posso fazer isso?"
+
+msgid "I’m Not Getting Access to My Subscription"
+msgstr "Não estou obtendo acesso à minha assinatura"
+
+msgid "Ticket ID Or Email Address Or Subject"
+msgstr "ID do ticket ou endereço de e-mail ou assunto"
+
+msgid "Sophie Martinez"
+msgstr "Sofia Martinez"
+
+msgid "Daniel Brooks"
+msgstr "Daniel Brooks"
+
+msgid "Liam Turner"
+msgstr "Liam Turner"
+
+msgid "Emily Harper"
+msgstr "Emily Harper"
+
+msgid "Noah Bennett"
+msgstr "Noah Bennet"
+
+msgid "Olivia Chase"
+msgstr "Olivia Chase"
+
+msgid "Maya Collins"
+msgstr "Maya Collins"
+
+msgid "Ethan Reynolds"
+msgstr "Ethan Reynolds"

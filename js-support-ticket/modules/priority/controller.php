@@ -10,35 +10,35 @@ class JSSTpriorityController {
     }
 
     function handleRequest() {
-        $layout = JSSTrequest::getLayout('jstlay', null, 'priorities');
-        jssupportticket::$_data['sanitized_args']['jsst_nonce'] = esc_html(wp_create_nonce('jsst_nonce'));
-        if (self::canaddfile($layout)) {
-            switch ($layout) {
+        $jsst_layout = JSSTrequest::getLayout('jstlay', null, 'priorities');
+        jssupportticket::$jsst_data['sanitized_args']['jsst_nonce'] = esc_html(wp_create_nonce('jsst_nonce'));
+        if (self::canaddfile($jsst_layout)) {
+            switch ($jsst_layout) {
                 case 'admin_priorities':
                     JSSTincluder::getJSModel('priority')->getPriorities();
                     break;
                 case 'admin_addpriority':
-                    $id = JSSTrequest::getVar('jssupportticketid', 'get');
-                    JSSTincluder::getJSModel('priority')->getPriorityForForm($id);
+                    $jsst_id = JSSTrequest::getVar('jssupportticketid', 'get');
+                    JSSTincluder::getJSModel('priority')->getPriorityForForm($jsst_id);
                     break;
                 default:
                     exit;
             }
-            $module = (is_admin()) ? 'page' : 'jstmod';
-            $module = JSSTrequest::getVar($module, null, 'priority');
-            JSSTincluder::include_file($layout, $module);
+            $jsst_module = (is_admin()) ? 'page' : 'jstmod';
+            $jsst_module = JSSTrequest::getVar($jsst_module, null, 'priority');
+            JSSTincluder::include_file($jsst_layout, $jsst_module);
         }
     }
 
-    function canaddfile($layout) {
-        $nonce_value = JSSTrequest::getVar('jsst_nonce');
-        if ( wp_verify_nonce( $nonce_value, 'jsst_nonce') ) {
+    function canaddfile($jsst_layout) {
+        $jsst_nonce_value = JSSTrequest::getVar('jsst_nonce');
+        if ( wp_verify_nonce( $jsst_nonce_value, 'jsst_nonce') ) {
             if (isset($_POST['form_request']) && $_POST['form_request'] == 'jssupportticket') {
                 return false;
             } elseif (isset($_GET['action']) && $_GET['action'] == 'jstask') {
                 return false;
             } else {
-                if(!is_admin() && jssupportticketphplib::JSST_strpos($layout, 'admin_') === 0){
+                if(!is_admin() && jssupportticketphplib::JSST_strpos($jsst_layout, 'admin_') === 0){
                     return false;
                 }
                 return true;
@@ -47,72 +47,72 @@ class JSSTpriorityController {
     }
 
     static function savepriority() {
-        $id = JSSTrequest::getVar('id');
-        $nonce = JSSTrequest::getVar('_wpnonce');
-        if (! wp_verify_nonce( $nonce, 'save-priority-'.$id) ) {
+        $jsst_id = JSSTrequest::getVar('id');
+        $jsst_nonce = JSSTrequest::getVar('_wpnonce');
+        if (! wp_verify_nonce( $jsst_nonce, 'save-priority-'.$jsst_id) ) {
             die( 'Security check Failed' );
         }
         if (!current_user_can('manage_options')) { //only admin can change it.
             return false;
         }
-        $data = JSSTrequest::get('post');
-        JSSTincluder::getJSModel('priority')->storePriority($data);
+        $jsst_data = JSSTrequest::get('post');
+        JSSTincluder::getJSModel('priority')->storePriority($jsst_data);
         if (is_admin()) {
-            $url = admin_url("admin.php?page=priority&jstlay=priorities");
+            $jsst_url = admin_url("admin.php?page=priority&jstlay=priorities");
         } else {
-            $url = jssupportticket::makeUrl(array('jstmod'=>'priority','jstlay'=>'priorities'));
+            $jsst_url = jssupportticket::makeUrl(array('jstmod'=>'priority','jstlay'=>'priorities'));
         }
-        wp_redirect($url);
+        wp_safe_redirect($jsst_url);
         exit;
     }
 
     static function deletepriority() {
-        $id = JSSTrequest::getVar('priorityid');
-        $nonce = JSSTrequest::getVar('_wpnonce');
-        if (! wp_verify_nonce( $nonce, 'delete-priority-'.$id) ) {
+        $jsst_id = JSSTrequest::getVar('priorityid');
+        $jsst_nonce = JSSTrequest::getVar('_wpnonce');
+        if (! wp_verify_nonce( $jsst_nonce, 'delete-priority-'.$jsst_id) ) {
             die( 'Security check Failed' );
         }
-        JSSTincluder::getJSModel('priority')->removePriority($id);
+        JSSTincluder::getJSModel('priority')->removePriority($jsst_id);
         if (is_admin()) {
-            $url = admin_url("admin.php?page=priority&jstlay=priorities");
+            $jsst_url = admin_url("admin.php?page=priority&jstlay=priorities");
         } else {
-            $url = jssupportticket::makeUrl(array('jstmod'=>'priority','jstlay'=>'priorities'));
+            $jsst_url = jssupportticket::makeUrl(array('jstmod'=>'priority','jstlay'=>'priorities'));
         }
-        wp_redirect($url);
+        wp_safe_redirect($jsst_url);
         exit;
     }
 
     static function makedefault() {
-        $id = JSSTrequest::getVar('priorityid');
-        $nonce = JSSTrequest::getVar('_wpnonce');
-        if (! wp_verify_nonce( $nonce, 'make-default-'.$id) ) {
+        $jsst_id = JSSTrequest::getVar('priorityid');
+        $jsst_nonce = JSSTrequest::getVar('_wpnonce');
+        if (! wp_verify_nonce( $jsst_nonce, 'make-default-'.$jsst_id) ) {
             die( 'Security check Failed' );
         }
-        JSSTincluder::getJSModel('priority')->makeDefault($id);
-        $pagenum = JSSTrequest::getVar('pagenum');
-        $url = "admin.php?page=priority&jstlay=priorities";
-        if ($pagenum)
-            $url .= '&pagenum=' . $pagenum;
-        wp_redirect($url);
+        JSSTincluder::getJSModel('priority')->makeDefault($jsst_id);
+        $jsst_pagenum = JSSTrequest::getVar('pagenum');
+        $jsst_url = "admin.php?page=priority&jstlay=priorities";
+        if ($jsst_pagenum)
+            $jsst_url .= '&pagenum=' . $jsst_pagenum;
+        wp_safe_redirect($jsst_url);
         exit;
     }
 
     static function ordering() {
-        $nonce = JSSTrequest::getVar('_wpnonce');
-        if (! wp_verify_nonce( $nonce, 'ordering') ) {
+        $jsst_nonce = JSSTrequest::getVar('_wpnonce');
+        if (! wp_verify_nonce( $jsst_nonce, 'ordering') ) {
             die( 'Security check Failed' );
         }
-        $id = JSSTrequest::getVar('priorityid');
-        JSSTincluder::getJSModel('priority')->setOrdering($id);
-        $pagenum = JSSTrequest::getVar('pagenum');
-        $url = "admin.php?page=priority&jstlay=priorities";
-        if ($pagenum)
-            $url .= '&pagenum=' . $pagenum;
-        wp_redirect($url);
+        $jsst_id = JSSTrequest::getVar('priorityid');
+        JSSTincluder::getJSModel('priority')->setOrdering($jsst_id);
+        $jsst_pagenum = JSSTrequest::getVar('pagenum');
+        $jsst_url = "admin.php?page=priority&jstlay=priorities";
+        if ($jsst_pagenum)
+            $jsst_url .= '&pagenum=' . $jsst_pagenum;
+        wp_safe_redirect($jsst_url);
         exit;
     }
 
 }
 
-$priorityController = new JSSTpriorityController();
+$jsst_priorityController = new JSSTpriorityController();
 ?>

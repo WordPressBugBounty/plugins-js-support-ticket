@@ -17,7 +17,7 @@ if (jssupportticket::$_config['offline'] == 2) {
                         <?php echo esc_html(__('Email','js-support-ticket')); ?>
                     </div>
                     <div class="js-ticket-field-wrp">
-                        <input class="inputbox js-ticket-form-input-field validate-email" data-validation="email" type="text" name="email" id="email" size="40" maxlength="255" value="<?php if (isset(jssupportticket::$_data['0']->email)) echo esc_attr(jssupportticket::$_data['0']->email); ?>" />
+                        <input class="inputbox js-ticket-form-input-field validate-email" data-validation="email" type="text" name="email" id="email" size="40" maxlength="255" value="<?php if (isset(jssupportticket::$jsst_data['0']->email)) echo esc_attr(jssupportticket::$jsst_data['0']->email); ?>" />
                     </div>
                 </div>
                 <div class="js-ticket-checkstatus-field-wrp">
@@ -39,7 +39,7 @@ if (jssupportticket::$_config['offline'] == 2) {
                     </div>
                 </div>
                 <div class="js-ticket-form-btn-wrp">
-                    <input class="tk_dft_btn js-ticket-save-button" type="submit" name="submit_app" value="<?php echo esc_html(__('Check Status','js-support-ticket')); ?>" />
+                    <input class="tk_dft_btn js-ticket-save-button" type="submit" name="submit_app" value="<?php echo esc_attr(__('Check Status','js-support-ticket')); ?>" />
                 </div>
                 <?php echo wp_kses(JSSTformfield::hidden('form_request', 'jssupportticket'), JSST_ALLOWED_TAGS); ?>
                 <?php echo wp_kses(JSSTformfield::hidden('checkstatus', 1), JSST_ALLOWED_TAGS); ?>
@@ -48,9 +48,9 @@ if (jssupportticket::$_config['offline'] == 2) {
         </div>
     <?php
     }else {// User is guest
-        $redirect_url = jssupportticket::makeUrl(array('jstmod'=>'ticket','jstlay'=>'ticketstatus'));
-        $redirect_url = jssupportticketphplib::JSST_safe_encoding($redirect_url);
-        JSSTlayout::getUserGuest($redirect_url);
+        $jsst_redirect_url = jssupportticket::makeUrl(array('jstmod'=>'ticket','jstlay'=>'ticketstatus'));
+        $jsst_redirect_url = jssupportticketphplib::JSST_safe_encoding($jsst_redirect_url);
+        JSSTlayout::getUserGuest($jsst_redirect_url);
     }
 } else { // System is offline
     JSSTlayout::getSystemOffline();

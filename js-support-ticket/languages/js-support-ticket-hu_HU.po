@@ -8765,3 +8765,45 @@ msgstr "Mentés és Következő"
 
 msgid "For enhanced security change encryption method in %1$s on line %2$s"
 msgstr "A továbbfejlesztett biztonsági változás érdekében a titkosítási módszer %1 $ s on -on on on %2 $ s"
+
+msgid "Changes may require cache clearing to take effect."
+msgstr "A változtatások érvénybe lépéséhez szükség lehet a gyorsítótár törlésére."
+
+msgid "How Long Will My Support Stay Active?"
+msgstr "Mennyi ideig marad aktív a támogatásom?"
+
+msgid "I Can’t Log Into My Account"
+msgstr "Nem tudok bejelentkezni a fiókomba"
+
+msgid "I Want to Upgrade My Plan — How Can I Do It?"
+msgstr "Frissíteni szeretném a tervemet – hogyan tehetem meg?"
+
+msgid "I’m Not Getting Access to My Subscription"
+msgstr "Nem férek hozzá az előfizetésemhez"
+
+msgid "Ticket ID Or Email Address Or Subject"
+msgstr "Jegyazonosító vagy e-mail cím vagy tárgy"
+
+msgid "Sophie Martinez"
+msgstr "Sophie Martinez"
+
+msgid "Daniel Brooks"
+msgstr "Daniel Brooks"
+
+msgid "Liam Turner"
+msgstr "Liam Turner"
+
+msgid "Emily Harper"
+msgstr "Emily Harper"
+
+msgid "Noah Bennett"
+msgstr "Noah Bennett"
+
+msgid "Olivia Chase"
+msgstr "Olivia Chase"
+
+msgid "Maya Collins"
+msgstr "Maya Collins"
+
+msgid "Ethan Reynolds"
+msgstr "Ethan Reynolds"

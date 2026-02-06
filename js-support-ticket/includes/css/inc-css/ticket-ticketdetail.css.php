@@ -5,21 +5,21 @@ if (!defined('ABSPATH'))
 JSSTincluder::getJSModel('jssupportticket')->checkIfMainCssFileIsEnqued();
 JSSTincluder::getJSModel('jssupportticket')->jsst_get_theme_colors();
 
-$color1 = jssupportticket::$_colors['color1'];
-$color2 = jssupportticket::$_colors['color2'];
-$color3 = jssupportticket::$_colors['color3'];
-$color4 = jssupportticket::$_colors['color4'];
-$color5 = jssupportticket::$_colors['color5'];
-$color6 = jssupportticket::$_colors['color6'];
-$color7 = jssupportticket::$_colors['color7'];
-$color8 = jssupportticket::$_colors['color8'];
-$color9 = jssupportticket::$_colors['color9'];
+$jsst_color1 = jssupportticket::$jsst_colors['color1'];
+$jsst_color2 = jssupportticket::$jsst_colors['color2'];
+$jsst_color3 = jssupportticket::$jsst_colors['color3'];
+$jsst_color4 = jssupportticket::$jsst_colors['color4'];
+$jsst_color5 = jssupportticket::$jsst_colors['color5'];
+$jsst_color6 = jssupportticket::$jsst_colors['color6'];
+$jsst_color7 = jssupportticket::$jsst_colors['color7'];
+$jsst_color8 = jssupportticket::$jsst_colors['color8'];
+$jsst_color9 = jssupportticket::$jsst_colors['color9'];
 
 
-$jssupportticket_css = '';
+$jsst_jssupportticket_css = '';
 
 /*Code for Css*/
-$jssupportticket_css .= '
+$jsst_jssupportticket_css .= '
 
 /*
  * =================================================================
@@ -102,7 +102,7 @@ div.js-ticket-thread-actions{
     position: relative;
     border-radius: 9px;
     padding: 4px;
-    border: 1px solid '. $color5 .';
+    border: 1px solid '. $jsst_color5 .';
 }
 
 /* Individual buttons */
@@ -156,7 +156,7 @@ div.js-ticket-thread-actions{
     flex-wrap: wrap;
     gap:20px;
     line-height: 1.6;
-    color: ' . esc_attr($color4) . ';
+    color: ' . esc_attr($jsst_color4) . ';
     width:100%;
 }
 .js-ticket-ticket-detail-wrapper #adminTicketform{
@@ -171,7 +171,7 @@ div.js-ticket-thread-actions{
 }
 .js-tkt-det-user {
     padding: 10px 0;
-    border-bottom: 1px solid ' . esc_attr($color5) . ';
+    border-bottom: 1px solid ' . esc_attr($jsst_color5) . ';
 }
 .js-tkt-det-usr-tkt-list .js-tkt-det-user:last-child {
     border-bottom: none;
@@ -186,7 +186,7 @@ div.js-ticket-thread-actions{
 }
 .js-tkt-det-usr-tkt-list .js-tkt-det-user-data.name {
     font-weight: 600;
-    color: ' . esc_attr($color2) . ';
+    color: ' . esc_attr($jsst_color2) . ';
 }
 .js-tkt-det-user .js-tkt-det-user-image {
     flex-shrink: 0;
@@ -197,21 +197,21 @@ div.js-ticket-thread-actions{
 }
 .js-tkt-det-user .js-tkt-det-user-cnt .js-tkt-det-user-data.name {
     font-weight: 600;
-    color: ' . esc_attr($color2) . ';
+    color: ' . esc_attr($jsst_color2) . ';
     text-decoration: none;
     margin-bottom: 5px;
 }
 .js-tkt-det-user .js-tkt-det-user-cnt .js-tkt-det-user-data.subject {
     font-weight: 500;
-    color: ' . esc_attr($color2) . ';
+    color: ' . esc_attr($jsst_color2) . ';
     margin-bottom: 5px;
 }
 .js-tkt-det-other-tkt .jsst-main-up-wrapper a {
-    color: ' . esc_attr($color1) . ' !important;}
+    color: ' . esc_attr($jsst_color1) . ' !important;}
 
 .js-tkt-det-other-tkt {
     background: #fef1e6;
-    border: 1px solid '. $color5 .';
+    border: 1px solid '. $jsst_color5 .';
     float: left;
     width: 100%;
     padding: 15px;
@@ -249,14 +249,14 @@ div.js-ticket-thread-actions{
     justify-content: space-between;
     align-items: center;
     padding: 20px 25px;
-    background-color: '. $color3 .';
-    border-bottom: 1px solid ' . $color5 . ';
+    background-color: '. $jsst_color3 .';
+    border-bottom: 1px solid ' . $jsst_color5 . ';
     flex-shrink: 0;
 }
 
 #popupforinternalnote .popup-header-text {
     font-weight: 600;
-    color: ' . $color2 . ';
+    color: ' . $jsst_color2 . ';
 }
 
 /* Header Close Icon */
@@ -298,7 +298,7 @@ background-image: url(\'data:image/svg+xml,%3csvg xmlns="http://www.w3.org/2000/
 /* Time Tracker Bar */
 #popupforinternalnote .jsst-ticket-detail-timer-wrapper {
     background-color: #f8f9fa;
-    border: 1px solid '. $color5 .';
+    border: 1px solid '. $jsst_color5 .';
     border-radius: 12px;
     padding: 15px 20px;
     display: flex;
@@ -326,7 +326,7 @@ background-image: url(\'data:image/svg+xml,%3csvg xmlns="http://www.w3.org/2000/
     background-color: #ffffff;
     padding: 5px 12px;
     border-radius: 6px;
-    border: 1px solid '. $color5 .';
+    border: 1px solid '. $jsst_color5 .';
 }
 
 #popupforinternalnote .timer-buttons {
@@ -341,14 +341,14 @@ background-image: url(\'data:image/svg+xml,%3csvg xmlns="http://www.w3.org/2000/
     width: 32px;
     height: 32px;
     background-color: #ffffff;
-    border: 1px solid '. $color5 .';
+    border: 1px solid '. $jsst_color5 .';
     border-radius: 50%;
     cursor: pointer;
     transition: all 0.2s ease;
 }
 
 #popupforinternalnote .timer-button:hover {
-    border-color: '. $color1 .';
+    border-color: '. $jsst_color1 .';
     background-color: #f0f7ff;
 }
 
@@ -365,7 +365,7 @@ background-image: url(\'data:image/svg+xml,%3csvg xmlns="http://www.w3.org/2000/
     padding: 12px 15px;
     color: #495057;
     background-color: #ffffff;
-    border: 1px solid '. $color5 .';
+    border: 1px solid '. $jsst_color5 .';
     border-radius: 8px;
     box-sizing: border-box;
     transition: border-color 0.2s ease, box-shadow 0.2s ease;
@@ -384,7 +384,7 @@ background-image: url(\'data:image/svg+xml,%3csvg xmlns="http://www.w3.org/2000/
 
 /* Attachments Section */
 #popupforinternalnote .js-attachment-field {
-    border: 2px dashed ' . esc_attr($color5) . ';
+    border: 2px dashed ' . esc_attr($jsst_color5) . ';
     border-radius: 12px;
     padding: 20px;
     text-align: center;
@@ -392,7 +392,7 @@ background-image: url(\'data:image/svg+xml,%3csvg xmlns="http://www.w3.org/2000/
 }
 
 #popupforinternalnote .js-attachment-field:hover {
-    border-color: ' . esc_attr($color1) . ';
+    border-color: ' . esc_attr($jsst_color1) . ';
 }
 
 #popupforinternalnote .tk_attachments_configform {
@@ -433,13 +433,13 @@ background-image: url(\'data:image/svg+xml,%3csvg xmlns="http://www.w3.org/2000/
     justify-content: space-between;
     align-items: center;
     padding: 20px 25px;
-    background-color: '. $color3.';
-    border-bottom: 1px solid ' . $color5 . ';
+    background-color: '. $jsst_color3.';
+    border-bottom: 1px solid ' . $jsst_color5 . ';
 }
 
 #jsst-popup-wrapper .popup-header-text {
     font-weight: 600;
-    color:  ' . $color2 . ';
+    color:  ' . $jsst_color2 . ';
 }
 
 /* Header Close Icon */
@@ -456,7 +456,7 @@ form#jsst-note-edit-form .js-col-md-12.js-form-button-wrapper {
     display: flex;
     gap: 10px;
     padding-top: 20px;
-    border-top: 1px solid ' . $color5 . ';
+    border-top: 1px solid ' . $jsst_color5 . ';
     margin-top: 10px;
     margin-left:25px;
     justify-content:center;
@@ -470,25 +470,25 @@ input#ppppok {
     font-weight: 600;
     cursor: pointer;
     transition: all 0.2s ease;
-    background-color: ' . esc_attr($color1) . '!important;
-    color: ' . esc_attr($color7) . ' !important;
+    background-color: ' . esc_attr($jsst_color1) . '!important;
+    color: ' . esc_attr($jsst_color7) . ' !important;
     border:unset !important;
 }
 input#ppppok:hover{
-    background-color: ' . esc_attr($color2) . '!important;
-    color: ' . esc_attr($color7) . ' !important;
+    background-color: ' . esc_attr($jsst_color2) . '!important;
+    color: ' . esc_attr($jsst_color7) . ' !important;
 }
 input#cancele {
     padding: 10px 20px;
     border-radius: 10px;
     cursor: pointer;
     background-color: #f5f2f5 !important;
-    color: ' . esc_attr($color4) . ' !important;
-    border: 1px solid ' . esc_attr($color5) . ' !important;
+    color: ' . esc_attr($jsst_color4) . ' !important;
+    border: 1px solid ' . esc_attr($jsst_color5) . ' !important;
 }
 input#cancele:hover{
-        background-color: ' . esc_attr($color2) . '  !important;
-    color: ' . esc_attr($color7) . ' !important;
+        background-color: ' . esc_attr($jsst_color2) . '  !important;
+    color: ' . esc_attr($jsst_color7) . ' !important;
 }
 
 #jsst-popup-wrapper .popup-header-close-img:hover {
@@ -518,7 +518,7 @@ input#cancele:hover{
         appearance: none;
         width: 14px;
         height: 14px;
-        border: 1px solid '. $color5 .';
+        border: 1px solid '. $jsst_color5 .';
         border-radius: 4px;
         background-color: #ffffff;
         cursor: pointer;
@@ -539,8 +539,8 @@ input#cancele:hover{
         background-repeat: no-repeat;
     }
 .js-ticket-premade-msg-wrp span.js-ticket-apend-radio-btn input:checked {
-        background-color: ' . esc_attr($color1) . ';
-        border-color: ' . esc_attr($color1) . ';
+        background-color: ' . esc_attr($jsst_color1) . ';
+        border-color: ' . esc_attr($jsst_color1) . ';
     }
 /* Input and Textarea fields */
 #jsst-popup-wrapper .inputbox,
@@ -549,7 +549,7 @@ input#cancele:hover{
     padding: 12px 15px;
     color: #495057;
     background-color: #ffffff;
-    border: 1px solid '. $color5 .';
+    border: 1px solid '. $jsst_color5 .';
     border-radius: 8px;
     box-sizing: border-box;
     transition: border-color 0.2s ease, box-shadow 0.2s ease;
@@ -569,7 +569,7 @@ input#cancele:hover{
 
 /* Styling for the WP Editor */
 #jsst-popup-wrapper .wp-editor-wrap {
-    border: 1px solid '. $color5 .';
+    border: 1px solid '. $jsst_color5 .';
     border-radius: 8px;
 }
 
@@ -578,7 +578,7 @@ input#cancele:hover{
     display: flex;
     gap: 10px;
     padding-top: 20px;
-    border-top: 1px solid '. $color5 .';
+    border-top: 1px solid '. $jsst_color5 .';
     margin-top: 10px;
 }
 
@@ -601,8 +601,8 @@ input#cancele:hover{
 }
 
 #jsst-popup-wrapper .js-ticket-priorty-save:hover {
-    background-color: ' . esc_attr($color2) . '!important;
-    border-color: ' . esc_attr($color2) . ' !important;
+    background-color: ' . esc_attr($jsst_color2) . '!important;
+    border-color: ' . esc_attr($jsst_color2) . ' !important;
     transform: translateY(-2px);
     box-shadow: 0 4px 10px rgba(0, 123, 255, 0.2);
 }
@@ -610,14 +610,14 @@ input#cancele:hover{
 /* "Cancel" button */
 #jsst-popup-wrapper .js-ticket-priorty-cancel {
     background-color: #f5f2f5;
-    color: '. $color4 .';
-    border: 1px solid '. $color5 .';
+    color: '. $jsst_color4 .';
+    border: 1px solid '. $jsst_color5 .';
 }
 
 #jsst-popup-wrapper .js-ticket-priorty-cancel:hover {
-    background-color:'. $color2 .' ;
-    border-color: '. $color2 .';
-     color:'. $color7 .' ;
+    background-color:'. $jsst_color2 .' ;
+    border-color: '. $jsst_color2 .';
+     color:'. $jsst_color7 .' ;
 }
 
 /*
@@ -653,13 +653,13 @@ input#cancele:hover{
     justify-content: space-between;
     align-items: center;
     padding: 20px 25px;
-    background-color: ' . $color3 . ';
-    border-bottom: 1px solid ' . $color5 . ';
+    background-color: ' . $jsst_color3 . ';
+    border-bottom: 1px solid ' . $jsst_color5 . ';
 }
 
 #popupforagenttransfer .popup-header-text {
     font-weight: 600;
-    color: ' . $color2 . ';
+    color: ' . $jsst_color2 . ';
     font-size: 21px;
 }
 
@@ -698,7 +698,7 @@ input#cancele:hover{
     padding: 12px 15px;
     color: #495057;
     background-color: #ffffff;
-    border: 1px solid '. $color5 .';
+    border: 1px solid '. $jsst_color5 .';
     border-radius: 8px;
     -webkit-appearance: none;
     -moz-appearance: none;
@@ -729,14 +729,14 @@ input#cancele:hover{
     justify-content: flex-end;
     margin-top: 10px;
     padding-top: 20px;
-    border-top: 1px solid ' . $color5 . ';
+    border-top: 1px solid ' . $jsst_color5 . ';
     border-radius:0px;
 }
 
 
 /* Assign Button */
 #popupforagenttransfer .js-ticket-save-button {
-    background-color:' . $color1 . ';
+    background-color:' . $jsst_color1 . ';
     color: #ffffff;
     border: none;
     padding: 12px 25px;
@@ -746,7 +746,7 @@ input#cancele:hover{
     transition: background-color 0.2s ease, transform 0.2s ease;
 }
 #popupforagenttransfer .js-ticket-save-button:hover {
-    background-color: ' . $color2 . ';
+    background-color: ' . $jsst_color2 . ';
     transform: translateY(-2px);
     box-shadow: 0 4px 10px rgba(0, 123, 255, 0.2);
 }
@@ -779,10 +779,10 @@ input#cancele:hover{
     justify-content: space-between;
     align-items: center;
     padding: 20px 25px;
-    background-color: ' . $color3 . ';
-    border-bottom: 1px solid ' . $color5 . ';
+    background-color: ' . $jsst_color3 . ';
+    border-bottom: 1px solid ' . $jsst_color5 . ';
     font-weight: 600;
-    color: ' . $color2 . ';
+    color: ' . $jsst_color2 . ';
 }
 
 /* Close icon in header */
@@ -811,7 +811,7 @@ input#cancele:hover{
     padding: 12px 15px;
     color: #495057;
     background-color: #ffffff;
-    border: 1px solid '. $color5 .';
+    border: 1px solid '. $jsst_color5 .';
     border-radius: 8px;
     -webkit-appearance: none;
     -moz-appearance: none;
@@ -835,7 +835,7 @@ input#cancele:hover{
     gap: 10px;
     padding: 20px 25px;
     background-color: #f8f9fa;
-    border-top: 1px solid ' . $color5 . ';
+    border-top: 1px solid ' . $jsst_color5 . ';
 }
 
 /* Common button styles */
@@ -851,9 +851,9 @@ input#cancele:hover{
 .js-row.js-ticket-popup-row{
     padding: 15px 20px;
     font-weight: 600;
-    border-bottom: 1px solid ' . $color5 . ';
-    background-color: ' . $color3 . ';
-    color: ' . $color2 . ';
+    border-bottom: 1px solid ' . $jsst_color5 . ';
+    background-color: ' . $jsst_color3 . ';
+    color: ' . $jsst_color2 . ';
     display: flex;
     justify-content: center;
     align-items: center;
@@ -874,30 +874,30 @@ input#cancele:hover{
 }
 /* "Change Priority" button */
 #userpopupforchangepriority .js-ticket-priorty-save {
-    background-color: '.$color1.';
+    background-color: '.$jsst_color1.';
     color: #ffffff;
-    border: 1px solid '.$color1.';
+    border: 1px solid '.$jsst_color1.';
 }
 
 #userpopupforchangepriority .js-ticket-priorty-save:hover {
-    background-color: '.$color2.';
-    border-color: '.$color2.';
+    background-color: '.$jsst_color2.';
+    border-color: '.$jsst_color2.';
     transform: translateY(-2px);
-    box-shadow: 0 2px 10px rgba(' . hexdec(substr($color2, 1, 2)) . ', ' . hexdec(substr($color2, 3, 2)) . ', ' . hexdec(substr($color2, 5, 2)) . ', 0.5);
+    box-shadow: 0 2px 10px rgba(' . hexdec(substr($jsst_color2, 1, 2)) . ', ' . hexdec(substr($jsst_color2, 3, 2)) . ', ' . hexdec(substr($jsst_color2, 5, 2)) . ', 0.5);
 }
 
 /* "Cancel" button */
 #userpopupforchangepriority .js-ticket-priorty-cancel {
     background-color: #f5f2f5;
     color: #6c757d;
-    border: 1px solid '. $color5 .';
+    border: 1px solid '. $jsst_color5 .';
 }
 
 #userpopupforchangepriority .js-ticket-priorty-cancel:hover {
-    background-color: '. $color2 .';
-    color:'. $color7 .';
+    background-color: '. $jsst_color2 .';
+    color:'. $jsst_color7 .';
     transform: translateY(-2px);
-    border-color: '. $color2 .';
+    border-color: '. $jsst_color2 .';
 }
 
 /*
@@ -915,7 +915,7 @@ input#cancele:hover{
     width: 55%;
     max-width: 100%; /* Optimal width for a simple form */
     background-color: #ffffff;
-    border: 1px solid '. $color5 .';
+    border: 1px solid '. $jsst_color5 .';
     border-radius: 16px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
     z-index: 10002; /* Ensure it appears above other elements */
@@ -928,15 +928,15 @@ input#cancele:hover{
     justify-content: space-between;
     align-items: center;
     padding: 20px 25px;
-    background-color: ' . $color3 . ';
-    border-bottom: 1px solid ' . $color5 . ';
+    background-color: ' . $jsst_color3 . ';
+    border-bottom: 1px solid ' . $jsst_color5 . ';
 }
 .jsst-popup-header .popup-header-text{
     font-size:21px;
 }
 #userpopupforchangestatus .popup-header-text {
     font-weight: 600;
-    color: ' . $color2 . ';
+    color: ' . $jsst_color2 . ';
 }
 
 /* Close icon in the header */
@@ -978,7 +978,7 @@ input#cancele:hover{
     
     color: #495057;
     background-color: #ffffff;
-    border: 1px solid '. $color5 .';
+    border: 1px solid '. $jsst_color5 .';
     border-radius: 8px;
     -webkit-appearance: none;
     -moz-appearance: none;
@@ -1004,7 +1004,7 @@ input#cancele:hover{
 
 /* Save Button */
 #userpopupforchangestatus .js-ticket-save-button {
-    background-color:' . esc_attr($color1) . ';
+    background-color:' . esc_attr($jsst_color1) . ';
     color: #ffffff;
     border: none;
     padding: 12px 25px;
@@ -1016,7 +1016,7 @@ input#cancele:hover{
 }
 
 #userpopupforchangestatus .js-ticket-save-button:hover {
-    background-color: ' . esc_attr($color2) . ';
+    background-color: ' . esc_attr($jsst_color2) . ';
     color: #ffffff;
     transform: translateY(-2px);
     box-shadow: 0 4px 10px rgba(0, 123, 255, 0.2);
@@ -1042,22 +1042,22 @@ button.js-ticket-usercredentail-data-add-new-button {
     align-items: center;
     gap: 8px;
     padding: 10px 20px;
-    background-color: '.$color1.';
+    background-color: '.$jsst_color1.';
     color: #fff !important;
-    border: 1px solid '.$color1.';
+    border: 1px solid '.$jsst_color1.';
     border-radius: 8px;
     text-decoration: none !important;
     font-weight: 600;
     line-height: 1.5;
     transition: all 0.2s ease-in-out;
     cursor:pointer;
-    box-shadow:0 2px 10px rgba(' . hexdec(substr($color1, 1, 2)) . ', ' . hexdec(substr($color1, 3, 2)) . ', ' . hexdec(substr($color1, 5, 2)) . ', 0.4);
+    box-shadow:0 2px 10px rgba(' . hexdec(substr($jsst_color1, 1, 2)) . ', ' . hexdec(substr($jsst_color1, 3, 2)) . ', ' . hexdec(substr($jsst_color1, 5, 2)) . ', 0.4);
 }
 button.js-ticket-usercredentail-data-add-new-button:hover{
-    background-color: '.$color2.';
+    background-color: '.$jsst_color2.';
     color: #fff !important;
-    border: 1px solid '.$color2.';
-    box-shadow:0 2px 10px rgba(' . hexdec(substr($color2, 1, 2)) . ', ' . hexdec(substr($color2, 3, 2)) . ', ' . hexdec(substr($color2, 5, 2)) . ', 0.5);
+    border: 1px solid '.$jsst_color2.';
+    box-shadow:0 2px 10px rgba(' . hexdec(substr($jsst_color2, 1, 2)) . ', ' . hexdec(substr($jsst_color2, 3, 2)) . ', ' . hexdec(substr($jsst_color2, 5, 2)) . ', 0.5);
 }
 
         /* Fields Wrapper */
@@ -1087,7 +1087,7 @@ button.js-ticket-usercredentail-data-add-new-button:hover{
             line-height: 1.5;
             color: #343a40;
             background-color: #ffffff;
-            border: 1px solid '. $color5 .';
+            border: 1px solid '. $jsst_color5 .';
             border-radius: 10px;
             box-sizing: border-box;
             transition: border-color 0.2s ease, box-shadow 0.2s ease;
@@ -1111,7 +1111,7 @@ button.js-ticket-usercredentail-data-add-new-button:hover{
             gap: 12px;
             margin-top: 30px;
             padding-top: 20px;
-            border-top: 1px solid ' . $color5 . ';
+            border-top: 1px solid ' . $jsst_color5 . ';
         }
 
         /* Shared Button Styles */
@@ -1129,14 +1129,14 @@ button.js-ticket-usercredentail-data-add-new-button:hover{
 
         /* Save Button */
         .js-ticket-usercredentails-save {
-            background-color: ' . esc_attr($color1) . ';
+            background-color: ' . esc_attr($jsst_color1) . ';
             color: #ffffff;
             box-shadow: 0 4px 15px rgba(52, 152, 219, 0.3);
         }
 
         .js-ticket-usercredentails-save:hover {
-            background-color: ' . esc_attr($color2) . ';
-            color:' . esc_attr($color7) . ';
+            background-color: ' . esc_attr($jsst_color2) . ';
+            color:' . esc_attr($jsst_color7) . ';
              transform: translateY(-2px);
             box-shadow: 0 6px 20px rgba(52, 152, 219, 0.4);
         }
@@ -1144,8 +1144,8 @@ button.js-ticket-usercredentail-data-add-new-button:hover{
        
 
         .js-ticket-usercredentails-cancel:hover {
-            background-color: ' . esc_attr($color2) . ';
-            color: ' . esc_attr($color7) . ' ;
+            background-color: ' . esc_attr($jsst_color2) . ';
+            color: ' . esc_attr($jsst_color7) . ' ;
         }
 
         /* Responsive adjustments */
@@ -1183,10 +1183,10 @@ button.js-ticket-usercredentail-data-add-new-button:hover{
 }
 
 .jsst-merge-popup-wrapper .jsst-popup-header {
-    color: ' . esc_attr($color2) . ';
+    color: ' . esc_attr($jsst_color2) . ';
     padding: 15px 25px;
     font-weight: 600;
-    border-bottom: 1px solid ' . esc_attr($color5) . ';
+    border-bottom: 1px solid ' . esc_attr($jsst_color5) . ';
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -1214,28 +1214,28 @@ button.js-ticket-usercredentail-data-add-new-button:hover{
 #popup-record-data {
     max-height: 60vh;
     overflow-y: auto;
-    background-color: ' . esc_attr($color7) . ';
+    background-color: ' . esc_attr($jsst_color7) . ';
 }
 
 
 #popup-record-data .js-form-field-wrp input[type="text"] {
     flex-grow: 1;
     padding: 10px 15px;
-    border: 1px solid ' . esc_attr($color5) . ';
+    border: 1px solid ' . esc_attr($jsst_color5) . ';
     border-radius: 8px;
-    color: ' . esc_attr($color4) . ';
+    color: ' . esc_attr($jsst_color4) . ';
     transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
 #popup-record-data .js-form-field-wrp input[type="text"]:focus {
     outline: none;
-    border-color: ' . esc_attr($color1) . ';
+    border-color: ' . esc_attr($jsst_color1) . ';
     box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
 }
 
 #popup-record-data .js-form-button-wrp .button {
-    background-color: ' . esc_attr($color1) . ';
-    color: ' . esc_attr($color7) . ';
+    background-color: ' . esc_attr($jsst_color1) . ';
+    color: ' . esc_attr($jsst_color7) . ';
     border: none;
     padding: 10px 20px;
     border-radius: 8px;
@@ -1245,13 +1245,13 @@ button.js-ticket-usercredentail-data-add-new-button:hover{
 }
 
 #popup-record-data .js-form-button-wrp .button:hover {
-    background-color: ' . esc_attr($color2) . ';
+    background-color: ' . esc_attr($jsst_color2) . ';
     transform: translateY(-1px);
 }
 
 /* Styling for the ticket list */
 #popup-record-data .js-ticket-con {
-    border: 1px solid ' . esc_attr($color5) . ';
+    border: 1px solid ' . esc_attr($jsst_color5) . ';
     border-radius: 10px;
     overflow: hidden;
 }
@@ -1262,7 +1262,7 @@ button.js-ticket-usercredentail-data-add-new-button:hover{
 }
 
 #popup-record-data .js-col-md-12:not(:last-child) {
-    border-bottom: 1px solid ' . esc_attr($color5) . ';
+    border-bottom: 1px solid ' . esc_attr($jsst_color5) . ';
 }
 
 #popup-record-data .js-ticket-datatb-head,
@@ -1274,13 +1274,13 @@ button.js-ticket-usercredentail-data-add-new-button:hover{
 }
 
 #popup-record-data .js-ticket-data-row:hover {
-    background-color: ' . esc_attr($color3) . ';
+    background-color: ' . esc_attr($jsst_color3) . ';
 }
 
 #popup-record-data .js-ticket-datatb-head {
-    background-color: ' . esc_attr($color3) . ';
+    background-color: ' . esc_attr($jsst_color3) . ';
     font-weight: 600;
-    color: ' . esc_attr($color2) . ';
+    color: ' . esc_attr($jsst_color2) . ';
     text-transform: uppercase;
     letter-spacing: 0.5px;
 }
@@ -1360,7 +1360,7 @@ div#userpopupforchangepriority
 }
 div#userpopupforchangepriority {
     background: #fff;
-    border: 1px solid '. $color5 .';
+    border: 1px solid '. $jsst_color5 .';
 }
 div.jsst-main-up-wrapper .js-tkt-wc-order-item {
     display: flex;
@@ -1369,8 +1369,8 @@ div.jsst-main-up-wrapper .js-tkt-wc-order-item {
 
 }
 div.jsst-main-up-wrapper .js-tkt-wc-order-item select{
-    border:1px solid ' . $color5 . ';
-    color: ' . $color2 . ';
+    border:1px solid ' . $jsst_color5 . ';
+    color: ' . $jsst_color2 . ';
     padding: 12px 15px;
     line-height: initial;
     height: 50px;
@@ -1378,7 +1378,7 @@ div.jsst-main-up-wrapper .js-tkt-wc-order-item select{
     border-radius: 8px;
     width: 100%;
     background-color:#fcfcfc;
-    background: url("data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 20 20\' fill=\'%23' . substr($color2, 1) . '\'%3E%3Cpath fill-rule=\'evenodd\' d=\'M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z\' clip-rule=\'evenodd\' /%3E%3C/svg%3E") calc(100% - 15px) / 1.5em no-repeat #fcfcfc; /* Custom SVG arrow for select, off-white background */
+    background: url("data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 20 20\' fill=\'%23' . substr($jsst_color2, 1) . '\'%3E%3Cpath fill-rule=\'evenodd\' d=\'M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z\' clip-rule=\'evenodd\' /%3E%3C/svg%3E") calc(100% - 15px) / 1.5em no-repeat #fcfcfc; /* Custom SVG arrow for select, off-white background */
     -webkit-appearance: none; /* Remove default arrow */
     -moz-appearance: none;
     appearance: none;
@@ -1398,8 +1398,8 @@ div.jsst-main-up-wrapper .js-tkt-wc-order-item button{
     display: inline-block;
     letter-spacing: 0.5px;
     margin-right: 0;
-    background-color:' . $color1 . ';
-    box-shadow:0 2px 10px rgba(' . hexdec(substr($color1, 1, 2)) . ', ' . hexdec(substr($color1, 3, 2)) . ', ' . hexdec(substr($color1, 5, 2)) . ', 0.4);
+    background-color:' . $jsst_color1 . ';
+    box-shadow:0 2px 10px rgba(' . hexdec(substr($jsst_color1, 1, 2)) . ', ' . hexdec(substr($jsst_color1, 3, 2)) . ', ' . hexdec(substr($jsst_color1, 5, 2)) . ', 0.4);
     border:unset;
     color:#fff;
 }
@@ -1412,14 +1412,14 @@ div.jsst-main-up-wrapper .js-tkt-wc-order-box .js-tkt-wc-order-item{
     width:100%;
 }
 div.jsst-main-up-wrapper .js-tkt-wc-order-item button:hover{
-    background-color:' . $color2 . ';
-    box-shadow:0 2px 10px rgba(' . hexdec(substr($color2, 1, 2)) . ', ' . hexdec(substr($color2, 3, 2)) . ', ' . hexdec(substr($color2, 5, 2)) . ', 0.5);
+    background-color:' . $jsst_color2 . ';
+    box-shadow:0 2px 10px rgba(' . hexdec(substr($jsst_color2, 1, 2)) . ', ' . hexdec(substr($jsst_color2, 3, 2)) . ', ' . hexdec(substr($jsst_color2, 5, 2)) . ', 0.5);
     color:#fff;
     transform: translateY(-2px);
 }
 div.jsst-main-up-wrapper .js-tkt-wc-order-item .js-tkt-wc-order-item-title{
     font-weight:600;
-    color:'. $color2 .';
+    color:'. $jsst_color2 .';
 }
 div.jsst-main-up-wrapper .js-tkt-wc-order-item .js-tkt-wc-order-item-value{
     margin-left:auto;
@@ -1429,7 +1429,7 @@ div.jsst-main-up-wrapper .js-tkt-wc-order-item-link{
 }
 .js-ticket-text-editor-wrp .js-ticket-text-editor-field-title{
     font-weight: 600;
-    color:' . $color2 . ' ;
+    color:' . $jsst_color2 . ' ;
     margin-bottom: 15px;
 }
 /* merge tict new popup */
@@ -1512,10 +1512,10 @@ span.js-heading.js-heading-text{
     margin-bottom:20px;
 }
 #popup-record-data .jsst-merge-popup-wrapper .js-merge-form-title.js-col-md-12{
-    border-bottom:1px solid ' . $color5 . ' !important;
+    border-bottom:1px solid ' . $jsst_color5 . ' !important;
 }
 #popup-record-data .jsst-merge-popup-wrapper .js-col-md-12.js-ticket-toparea{
-    border:1px solid '. $color5 .' !important;
+    border:1px solid '. $jsst_color5 .' !important;
 }
 
 /* Reused Ticket Card Styles */
@@ -1528,7 +1528,7 @@ span.js-heading.js-heading-text{
     box-shadow: 0 8px 32px rgba(0, 31, 63, 0.08);
     padding: 15px;
     margin: 0 auto; /* Added margin for separation */
-    border: 1px solid '. $color5 .';
+    border: 1px solid '. $jsst_color5 .';
     width: 100%;
     transition: all 0.3s ease-in-out;
     padding-bottom: 25px;
@@ -1580,7 +1580,7 @@ span.js-heading.js-heading-text{
 .jsst-merge-popup-wrapper .js-ticket-data1 {
     text-align: left;
     padding-left: 10px;
-    border-left: 1px solid ' . $color5 . ';
+    border-left: 1px solid ' . $jsst_color5 . ';
     flex: 0 0 290px;
     padding-right: 0;
 }
@@ -1644,7 +1644,7 @@ span.js-heading.js-heading-text{
 .jsst-merge-popup-wrapper .js-popup-search {
     padding: 20px;
     background-color: #f8f9fa;
-    border-top: 1px solid ' . $color5 . ';
+    border-top: 1px solid ' . $jsst_color5 . ';
 }
 
 .jsst-merge-popup-wrapper .js-merge-form-title {
@@ -1671,7 +1671,7 @@ span.js-heading.js-heading-text{
     width: 100%;
     padding: 12px 15px;
     border-radius: 8px;
-    border: 1px solid '. $color5 .';
+    border: 1px solid '. $jsst_color5 .';
     background-color: #fff;
     color: #4e555f;
     box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.05);
@@ -1706,13 +1706,13 @@ span.js-heading.js-heading-text{
 
 .jsst-merge-popup-wrapper input.js-search {
     color: #fff;
-    background-color: ' . $color1 . ';
+    background-color: ' . $jsst_color1 . ';
 }
 
 .jsst-merge-popup-wrapper input.js-search:hover {
     transform: translateY(-2px);
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
-    background-color: ' . $color2 . ';
+    background-color: ' . $jsst_color2 . ';
 
 }
 
@@ -1722,7 +1722,7 @@ span.js-heading.js-heading-text{
 }
 
 .jsst-merge-popup-wrapper input.js-cancel:hover {
-    background-color: ' . $color2 . ';
+    background-color: ' . $jsst_color2 . ';
     color: #fff;
     transform: translateY(-2px);
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
@@ -1757,7 +1757,7 @@ span.js-heading.js-heading-text{
 }
 
 .jsst-merge-popup-wrapper .js-over-lay a.js-merge-btn {
-    background-color: ' . $color1 . ';
+    background-color: ' . $jsst_color1 . ';
     color: white;
     padding: 12px 24px;
     border-radius: 8px;
@@ -1768,7 +1768,7 @@ span.js-heading.js-heading-text{
 }
 
 .jsst-merge-popup-wrapper .js-over-lay a.js-merge-btn:hover {
-    background-color: ' . $color2 . ';
+    background-color: ' . $jsst_color2 . ';
     transform: translateY(-2px);
 }
 
@@ -1788,7 +1788,7 @@ span.js-heading.js-heading-text{
     display: inline-block;
     padding: 8px 16px;
     margin: 0 5px;
-    border: 1px solid '. $color5 .';
+    border: 1px solid '. $jsst_color5 .';
     border-radius: 5px;
     text-decoration: none;
     color: #4e555f;
@@ -1800,17 +1800,17 @@ span.js-heading.js-heading-text{
     color: white;
 }
 .jsst-merge-popup-wrapper .jsst_userlink:hover{
-    background-color:'. $color1 .';
+    background-color:'. $jsst_color1 .';
 }
 /* Cancel Button at Bottom */
 .jsst-merge-popup-wrapper .js-form-button-wrapper-merge {
     text-align:center;
     padding: 20px;
-    border-top: 1px solid ' . $color5 . ';
+    border-top: 1px solid ' . $jsst_color5 . ';
     background-color: #f8f9fa;
 }
 div.jsst-main-up-wrapper .jsst-merge-popup-wrapper input.js-merge-save-btn{
-    background-color: ' . $color1 . ';
+    background-color: ' . $jsst_color1 . ';
     color: #fff;
     border: none;
     padding: 12px 24px;
@@ -1818,20 +1818,20 @@ div.jsst-main-up-wrapper .jsst-merge-popup-wrapper input.js-merge-save-btn{
     font-weight: 600;
     cursor: pointer;
     transition: all 0.3s ease;
-    box-shadow: 0 2px 10px rgba(' . hexdec(substr($color1, 1, 2)) . ', ' . hexdec(substr($color1, 3, 2)) . ', ' . hexdec(substr($color1, 5, 2)) . ', 0.4);
+    box-shadow: 0 2px 10px rgba(' . hexdec(substr($jsst_color1, 1, 2)) . ', ' . hexdec(substr($jsst_color1, 3, 2)) . ', ' . hexdec(substr($jsst_color1, 5, 2)) . ', 0.4);
 }
 div.jsst-main-up-wrapper .jsst-merge-popup-wrapper input.js-merge-save-btn:hover{
-    background-color: ' . $color2 . ';
+    background-color: ' . $jsst_color2 . ';
     color: #fff;
     transform: translateY(-2px);
-    box-shadow: 0 2px 10px rgba(' . hexdec(substr($color2, 1, 2)) . ', ' . hexdec(substr($color2, 3, 2)) . ', ' . hexdec(substr($color2, 5, 2)) . ', 0.5);
+    box-shadow: 0 2px 10px rgba(' . hexdec(substr($jsst_color2, 1, 2)) . ', ' . hexdec(substr($jsst_color2, 3, 2)) . ', ' . hexdec(substr($jsst_color2, 5, 2)) . ', 0.5);
 }
 
 .jsst-merge-popup-wrapper .js-merge-cancel-btn {
     padding: 12px 24px;
     background-color: #f5f2f5;
     color: #4e555f;
-    border: 1px solid '. $color5 .';
+    border: 1px solid '. $jsst_color5 .';
     border-radius: 8px;
     cursor: pointer;
     transition: all 0.3s ease;
@@ -1839,8 +1839,8 @@ div.jsst-main-up-wrapper .jsst-merge-popup-wrapper input.js-merge-save-btn:hover
 }
 
 .jsst-merge-popup-wrapper .js-merge-cancel-btn:hover {
-    background-color: ' . $color2 . ';
-    color: '. $color7 .';
+    background-color: ' . $jsst_color2 . ';
+    color: '. $jsst_color7 .';
     transform: translateY(-2px);
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
@@ -1852,7 +1852,7 @@ div.jsst-main-up-wrapper .jsst-merge-popup-wrapper input.js-merge-save-btn:hover
         padding-left: 0;
         margin-top: 15px;
         border-left: none;
-        border-top: 1px solid ' . $color5 . ';
+        border-top: 1px solid ' . $jsst_color5 . ';
     }
 
     .jsst-merge-popup-wrapper .js-ticket-data1 {
@@ -1883,7 +1883,7 @@ div.jsst-main-up-wrapper .jsst-merge-popup-wrapper input.js-merge-save-btn:hover
         padding-left: 0;
         padding-top: 24px;
         border-left: 10px;
-        border-top: 1px solid ' . $color5 . '
+        border-top: 1px solid ' . $jsst_color5 . '
     }
 
     .jsst-merge-popup-wrapper .js-merge-form-wrp {
@@ -1954,7 +1954,7 @@ div#js-ticket-ai-reply-btn {
 .js-ticket-edit-options-wrp {
     padding-top: 15px;
     margin-top: 15px;
-    border-top: 1px solid ' . esc_attr($color5) . ';
+    border-top: 1px solid ' . esc_attr($jsst_color5) . ';
     display: flex;
     align-items: center;
     flex-wrap: wrap;
@@ -1966,23 +1966,23 @@ div#js-ticket-ai-reply-btn {
     align-items: center;
     gap: 8px;
     padding: 6px 12px;
-    background-color: ' . esc_attr($color3) . ';
-    border: 1px solid ' . esc_attr($color5) . ';
+    background-color: ' . esc_attr($jsst_color3) . ';
+    border: 1px solid ' . esc_attr($jsst_color5) . ';
     border-radius: 6px;
     text-decoration: none;
     font-weight: 500;
-    color: ' . esc_attr($color4) . ';
+    color: ' . esc_attr($jsst_color4) . ';
     transition: all 0.2s ease-in-out;
 }
 .js-ticket-edit-options-wrp a.js-button:hover {
-    background-color: ' . esc_attr($color7) . ';
-    border-color: ' . esc_attr($color1) . ';
-    color: ' . esc_attr($color1) . ';
+    background-color: ' . esc_attr($jsst_color7) . ';
+    border-color: ' . esc_attr($jsst_color1) . ';
+    color: ' . esc_attr($jsst_color1) . ';
 }
 .js-ticket-edit-options-wrp .js-ticket-thread-time {
     
     font-weight: 500;
-    color: ' . esc_attr($color4) . ';
+    color: ' . esc_attr($jsst_color4) . ';
     margin-left: auto;
 }
 
@@ -1990,7 +1990,7 @@ div#js-ticket-ai-reply-btn {
 .js-ticket-attachments-wrp {
     margin-top: 20px;
     padding-top: 20px;
-    border-top: 1px dashed ' . esc_attr($color5) . ';
+    border-top: 1px dashed ' . esc_attr($jsst_color5) . ';
 }
 
 .js-ticket-attachments-wrp div.js_ticketattachment {
@@ -1998,19 +1998,19 @@ div#js-ticket-ai-reply-btn {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background-color: ' . esc_attr($color3) . ';
-    border: 1px solid ' . esc_attr($color5) . ';
+    background-color: ' . esc_attr($jsst_color3) . ';
+    border: 1px solid ' . esc_attr($jsst_color5) . ';
     padding: 10px 15px;
     border-radius: 8px;
     margin-bottom: 10px;
     transition: border-color 0.2s ease;
 }
 .js-ticket-attachments-wrp div.js_ticketattachment:hover {
-    border-color: ' . esc_attr($color1) . ';
+    border-color: ' . esc_attr($jsst_color1) . ';
 }
 .js-ticket-attachments-wrp div.js_ticketattachment span.js-ticket-download-file-title {
     font-weight: 500;
-    color: ' . esc_attr($color2) . ';
+    color: ' . esc_attr($jsst_color2) . ';
 }
 .js-ticket-attachments-wrp div.js_ticketattachment a.js-download-button {
     padding: 5px;
@@ -2022,7 +2022,7 @@ div#js-ticket-ai-reply-btn {
 }
 
 .js-ticket-attachments-wrp div.js_ticketattachment a.js-download-button:hover {
-    background-color: ' . esc_attr($color5) . ';
+    background-color: ' . esc_attr($jsst_color5) . ';
 }
 
 
@@ -2106,9 +2106,9 @@ div#js-ticket-ai-reply-btn {
     align-items: center;
     gap: 8px;
     padding: 10px 20px;
-    background-color: ' . esc_attr($color1) . ';
-    color: ' . esc_attr($color7) . ' !important;
-    border: 1px solid ' . esc_attr($color1) . ';
+    background-color: ' . esc_attr($jsst_color1) . ';
+    color: ' . esc_attr($jsst_color7) . ' !important;
+    border: 1px solid ' . esc_attr($jsst_color1) . ';
     border-radius: 8px;
     text-decoration: none !important;
     font-weight: 600;
@@ -2116,8 +2116,8 @@ div#js-ticket-ai-reply-btn {
     transition: all 0.2s ease-in-out;
 }
 .js-ticket-thread-add-btn .js-ticket-thread-add-btn-link:hover {
-    background-color: ' . esc_attr($color2) . ';
-    border-color: ' . esc_attr($color2) . ';
+    background-color: ' . esc_attr($jsst_color2) . ';
+    border-color: ' . esc_attr($jsst_color2) . ';
     transform: translateY(-2px);
     box-shadow: 0 4px 10px rgba(0,0,0,0.1);
 }
@@ -2127,8 +2127,8 @@ div#js-ticket-ai-reply-btn {
 
 /* Time Tracker Bar */
 .jsst-ticket-detail-timer-wrapper {
-    background-color: ' . esc_attr($color3) . ';
-    border: 1px solid ' . esc_attr($color5) . ';
+    background-color: ' . esc_attr($jsst_color3) . ';
+    border: 1px solid ' . esc_attr($jsst_color5) . ';
     border-radius: 10px;
     padding: 15px 20px;
     display: flex;
@@ -2138,7 +2138,7 @@ div#js-ticket-ai-reply-btn {
 }
 .jsst-ticket-detail-timer-wrapper div.timer-left, .jsst-ticket-detail-timer-wrapper div.timer-total-time {
     font-weight: 500;
-    color: ' . esc_attr($color4) . ';
+    color: ' . esc_attr($jsst_color4) . ';
 }
 .jsst-ticket-detail-timer-wrapper div.timer-right {
     display: flex;
@@ -2147,11 +2147,11 @@ div#js-ticket-ai-reply-btn {
 }
 .jsst-ticket-detail-timer-wrapper div.timer {
     font-weight: 600;
-    color: ' . esc_attr($color2) . ';
+    color: ' . esc_attr($jsst_color2) . ';
     background-color:#fff;
     padding: 5px 12px;
     border-radius: 6px;
-    border: 1px solid ' . esc_attr($color5) . ';
+    border: 1px solid ' . esc_attr($jsst_color5) . ';
 }
 .jsst-ticket-detail-timer-wrapper div.timer-buttons {
     display: flex;
@@ -2163,22 +2163,22 @@ div#js-ticket-ai-reply-btn {
     justify-content: center;
     width: 36px;
     height: 36px;
-    background-color: ' . esc_attr($color7) . ';
-    border: 1px solid ' . esc_attr($color5) . ';
+    background-color: ' . esc_attr($jsst_color7) . ';
+    border: 1px solid ' . esc_attr($jsst_color5) . ';
     border-radius: 50%;
     cursor: pointer;
     transition: all 0.2s ease;
 }
 .jsst-ticket-detail-timer-wrapper div.timer-right div.timer-buttons span.timer-button:hover {
-    border-color: ' . esc_attr($color2) . ';
-    background-color: ' . esc_attr($color2) . ';
+    border-color: ' . esc_attr($jsst_color2) . ';
+    background-color: ' . esc_attr($jsst_color2) . ';
 }
 .jsst-ticket-detail-timer-wrapper div.timer-right div.timer-buttons span.timer-button:hover img {
     filter: brightness(0) invert(1);
 }
 .jsst-ticket-detail-timer-wrapper div.timer-right div.timer-buttons span.timer-button.selected {
-    background-color: ' . esc_attr($color8) . ';
-    border-color: ' . esc_attr($color8) . ';
+    background-color: ' . esc_attr($jsst_color8) . ';
+    border-color: ' . esc_attr($jsst_color8) . ';
 }
 .jsst-ticket-detail-timer-wrapper div.timer-right div.timer-buttons span.timer-button.selected img {
     filter: brightness(0) invert(1);
@@ -2193,7 +2193,7 @@ div#js-ticket-ai-reply-btn {
 .js-ticket-premade-msg-wrp div.js-ticket-premade-field-title {
 
     font-weight: 600;
-    color: ' . esc_attr($color2) . ';
+    color: ' . esc_attr($jsst_color2) . ';
     margin-bottom: 10px;
 }
 .js-ticket-premade-msg-wrp div.js-ticket-premade-field-wrp {
@@ -2205,7 +2205,7 @@ div#js-ticket-ai-reply-btn {
     flex-grow: 1;
     background-color: white !important;
     border-radius: 8px;
-    border: 1px solid ' . esc_attr($color5) . ';
+    border: 1px solid ' . esc_attr($jsst_color5) . ';
     margin-bottom: 5px;
     min-height:52px;
 }
@@ -2214,9 +2214,9 @@ div#js-ticket-ai-reply-btn {
     align-items: center;
     height: 60px;
     padding: 0 15px;
-    border: 1px solid ' . esc_attr($color5) . ';
+    border: 1px solid ' . esc_attr($jsst_color5) . ';
     border-radius: 8px;
-    background-color: ' . esc_attr($color7) . ';
+    background-color: ' . esc_attr($jsst_color7) . ';
 }
 .js-ticket-premade-msg-wrp span.js-ticket-apend-radio-btn input {
     margin-right: 8px;
@@ -2230,13 +2230,13 @@ div#js-ticket-ai-reply-btn {
 .js-ticket-append-signature-wrp {
     margin-top: 25px;
     padding-top: 25px;
-    border-top: 1px solid ' . esc_attr($color5) . ';
+    border-top: 1px solid ' . esc_attr($jsst_color5) . ';
 }
 
 /* Title for the section, e.g., "Append Signature" */
 .js-ticket-append-signature-wrp div.js-ticket-append-field-title {
     font-weight: 600;
-    color: ' . esc_attr($color2) . ';
+    color: ' . esc_attr($jsst_color2) . ';
     margin-bottom: 15px;
 }
 
@@ -2252,7 +2252,7 @@ div#js-ticket-ai-reply-btn {
     display: inline-flex;
     align-items: center;
     background-color: white;
-    border: 1px solid ' . esc_attr($color5) . ';
+    border: 1px solid ' . esc_attr($jsst_color5) . ';
     padding: 12px 15px;
     border-radius: 8px;
     cursor: pointer;
@@ -2260,7 +2260,7 @@ div#js-ticket-ai-reply-btn {
 }
 
 .js-ticket-append-signature-wrp div.js-ticket-signature-radio-box:hover {
-    border-color: ' . esc_attr($color1) . ';
+    border-color: ' . esc_attr($jsst_color1) . ';
 }
 
 /* The checkbox input element */
@@ -2283,14 +2283,14 @@ div#js-ticket-ai-reply-btn {
         width: 100%;
         
         padding-top: 30px; /* More padding above attachment section */
-        border-top: 1px solid ' . $color5 . '; /* Separator line */
+        border-top: 1px solid ' . $jsst_color5 . '; /* Separator line */
     }
     div.js-ticket-reply-attachments div.js-attachment-field-title{
         display: inline-block;
         width: 100%;
         padding: 15px 0px;
         font-weight: 600;
-        border-bottom: 1px solid ' . $color5 . '; /* Separator below the title */
+        border-bottom: 1px solid ' . $jsst_color5 . '; /* Separator below the title */
         margin-bottom: 20px; /* Space below the title */
     }
     div.js-ticket-reply-attachments div.js-attachment-field{
@@ -2306,9 +2306,9 @@ div#js-ticket-ai-reply-btn {
         float: left;
         width: 100%;
         padding: 15px;
-        border: 2px dashed '. $color5 .';
+        border: 2px dashed '. $jsst_color5 .';
         border-radius: 12px;
-        background-color: ' . $color3 . ';
+        background-color: ' . $jsst_color3 . ';
         margin-bottom: 20px;
         display: flex;
         align-items: center;
@@ -2322,7 +2322,7 @@ div#js-ticket-ai-reply-btn {
         float: left;
         width: 100%;
         padding: 15px; /* More padding inside the wrapper */
-        border: 2px dashed ' . $color5 . '; /* Slightly thicker dashed border */
+        border: 2px dashed ' . $jsst_color5 . '; /* Slightly thicker dashed border */
         border-radius: 12px; /* Softer rounded corners */
         background-color: #ffffff; /* Light gray background */
         margin-bottom: 20px; /* Space below wrapper */
@@ -2357,7 +2357,7 @@ div#js-ticket-ai-reply-btn {
         max-width: 100%;
         max-height: 100%;
         border: none;
-        color: ' . $color4 . ';
+        color: ' . $jsst_color4 . ';
         background: transparent;
         font-size: 15px;
         cursor: pointer;
@@ -2387,7 +2387,7 @@ div#js-ticket-ai-reply-btn {
        
         width: 100%;
        
-        color: ' . $color4 . ';
+        color: ' . $jsst_color4 . ';
         opacity: 0.75;
         text-align: left; /* Align text to the left */
         box-sizing: border-box; /* Include padding in width */
@@ -2403,42 +2403,42 @@ div#js-ticket-ai-reply-btn {
         min-width: 150px; /* Wider button */
         text-align: center;
         line-height: initial;
-        background-color: ' . $color1 . '; /* Solid primary color */
-        color: ' . $color7 . ';
+        background-color: ' . $jsst_color1 . '; /* Solid primary color */
+        color: ' . $jsst_color7 . ';
         border: none;
         border-radius: 10px; /* Softer rounded corners */
         font-weight: 700;
         transition: all 0.3s ease;
-        box-shadow: 0 2px 10px rgba(' . hexdec(substr($color1, 1, 2)) . ', ' . hexdec(substr($color1, 3, 2)) . ', ' . hexdec(substr($color1, 5, 2)) . ', 0.4);
+        box-shadow: 0 2px 10px rgba(' . hexdec(substr($jsst_color1, 1, 2)) . ', ' . hexdec(substr($jsst_color1, 3, 2)) . ', ' . hexdec(substr($jsst_color1, 5, 2)) . ', 0.4);
     } 
     span.tk_attachments_addform:hover{
-        background-color: ' . $color2 . '; /* Secondary color on hover */
-        border-color: ' . $color2 . '; /* Secondary color border on hover */
+        background-color: ' . $jsst_color2 . '; /* Secondary color on hover */
+        border-color: ' . $jsst_color2 . '; /* Secondary color border on hover */
         transform: translateY(-3px);
-        box-shadow: 0 2px 10px rgba(' . hexdec(substr($color2, 1, 2)) . ', ' . hexdec(substr($color2, 3, 2)) . ', ' . hexdec(substr($color2, 5, 2)) . ', 0.5);
+        box-shadow: 0 2px 10px rgba(' . hexdec(substr($jsst_color2, 1, 2)) . ', ' . hexdec(substr($jsst_color2, 3, 2)) . ', ' . hexdec(substr($jsst_color2, 5, 2)) . ', 0.5);
         filter: brightness(1.1);
     }
 .js-ticket-reply-attachments div.js-attachment-field-title {
    
     font-weight: 600;
-    color: ' . esc_attr($color2) . ';
+    color: ' . esc_attr($jsst_color2) . ';
     margin-bottom: 10px;
 }
 .js-ticket-reply-attachments .js-attachment-field-title {
     font-weight: 600;
-    color: ' . esc_attr($color2) . '; /* Title text color */
+    color: ' . esc_attr($jsst_color2) . '; /* Title text color */
     margin-bottom: 15px;
 }
 /* Styling the file input element itself */
 .js-ticket-reply-attachments input {
     flex-grow: 1;
-    color: ' . esc_attr($color2) . '; /* Text color */
+    color: ' . esc_attr($jsst_color2) . '; /* Text color */
 }
 
 /* Helper text for file size and extension limits */
 .js-ticket-reply-attachments .tk_attachments_configform {
     display: block;
-    color: ' . esc_attr($color2) . '; /* Helper text color */
+    color: ' . esc_attr($jsst_color2) . '; /* Helper text color */
     margin-top: 15px;
     line-height: 1.5;
 }
@@ -2447,9 +2447,9 @@ div#js-ticket-ai-reply-btn {
 .js-ticket-reply-attachments .tk_attachments_addform {
     display: inline-block;
     margin-top: 15px;
-    background-color: ' . esc_attr($color3) . '; /* Button background */
-    color: ' . esc_attr($color2) . '; /* Button text color */
-    border: 1px solid ' . esc_attr($color2) . '; /* Button border color */
+    background-color: ' . esc_attr($jsst_color3) . '; /* Button background */
+    color: ' . esc_attr($jsst_color2) . '; /* Button text color */
+    border: 1px solid ' . esc_attr($jsst_color2) . '; /* Button border color */
     font-weight: 600;
     padding: 10px 20px;
     border-radius: 8px;
@@ -2459,8 +2459,8 @@ div#js-ticket-ai-reply-btn {
 .js-ticket-reply-attachments span.tk_attachments_configform{word-break: break-all;}
 
 .js-ticket-reply-attachments .tk_attachments_addform:hover {
-    color: ' . esc_attr($color1) . '; /* Hover text color */
-    border-color: ' . esc_attr($color1) . '; /* Hover border color */
+    color: ' . esc_attr($jsst_color1) . '; /* Hover text color */
+    border-color: ' . esc_attr($jsst_color1) . '; /* Hover border color */
 }
 /* Container for a single file input and its remove button */
 .js-ticket-reply-attachments .tk_attachment_value_text {
@@ -2468,8 +2468,8 @@ div#js-ticket-ai-reply-btn {
     min-width: 280px;
     display: flex;
     align-items: center;
-    background: ' . esc_attr($color3) . '; /* Background color */
-    border: 1px solid ' . esc_attr($color2) . '; /* Border color */
+    background: ' . esc_attr($jsst_color3) . '; /* Background color */
+    border: 1px solid ' . esc_attr($jsst_color2) . '; /* Border color */
     border-radius: 8px;
     padding: 8px 12px;
 }
@@ -2488,8 +2488,8 @@ div#js-ticket-ai-reply-btn {
 .js-ticket-reply-attachments span.tk_attachment_value_text {
     display: flex;
     align-items: center;
-    background: ' . esc_attr($color3) . ';
-    border: 1px solid ' . esc_attr($color5) . ';
+    background: ' . esc_attr($jsst_color3) . ';
+    border: 1px solid ' . esc_attr($jsst_color5) . ';
     padding: 5px 10px;
     border-radius: 8px;
 }
@@ -2509,16 +2509,16 @@ div#js-ticket-ai-reply-btn {
 }
 .js-ticket-reply-attachments span.tk_attachments_configform {
     
-    color: ' . esc_attr($color4) . ';
+    color: ' . esc_attr($jsst_color4) . ';
     margin-top: 10px;
     display: block;
 }
 .js-ticket-reply-attachments span.tk_attachments_addform {
     display: inline-block;
     margin-top: 15px;
-    background-color: ' . esc_attr($color1) . ';
-    color: ' . esc_attr($color7) . ';
-    border: 1px solid ' . esc_attr($color5) . ';
+    background-color: ' . esc_attr($jsst_color1) . ';
+    color: ' . esc_attr($jsst_color7) . ';
+    border: 1px solid ' . esc_attr($jsst_color5) . ';
     font-weight: 500;
     padding: 12px 16px;
     border-radius: 8px;
@@ -2526,9 +2526,9 @@ div#js-ticket-ai-reply-btn {
     transition: all 0.2s ease;
 }
 .js-ticket-reply-attachments span.tk_attachments_addform:hover {
-    color: ' . esc_attr($color7) . ';
-    border-color: ' . esc_attr($color2) . ';
-    background-color: ' . esc_attr($color2) . ';
+    color: ' . esc_attr($jsst_color7) . ';
+    border-color: ' . esc_attr($jsst_color2) . ';
+    background-color: ' . esc_attr($jsst_color2) . ';
 }
 
 
@@ -2536,13 +2536,13 @@ div#js-ticket-ai-reply-btn {
 .js-ticket-assigntome-wrp, .js-ticket-closeonreply-wrp {
     margin-top: 25px;
     padding-top: 25px;
-    border-top: 1px solid ' . esc_attr($color5) . ';
+    border-top: 1px solid ' . esc_attr($jsst_color5) . ';
 }
 .js-ticket-assigntome-wrp div.js-ticket-assigntome-field-title,
 .js-ticket-closeonreply-wrp div.js-ticket-closeonreply-title {
    
     font-weight: 600;
-    color: ' . esc_attr($color2) . ';
+    color: ' . esc_attr($jsst_color2) . ';
     margin-bottom: 10px;
 }
 .js-ticket-assigntome-wrp div.js-ticket-assigntome-field-wrp,
@@ -2550,7 +2550,7 @@ div#js-ticket-ai-reply-btn {
     display: inline-flex;
     align-items: center;
     background-color: white;
-    border: 1px solid ' . esc_attr($color5) . ';
+    border: 1px solid ' . esc_attr($jsst_color5) . ';
     padding: 12px 15px;
     border-radius: 8px;
     cursor: pointer;
@@ -2573,7 +2573,7 @@ div#js-ticket-ai-reply-btn {
     appearance: none;
     width: 14px;
     height: 14px;
-    border: 1px solid '. $color2 .';
+    border: 1px solid '. $jsst_color2 .';
     border-radius: 4px;
     background-color: #ffffff;
     cursor: pointer;
@@ -2583,8 +2583,8 @@ div#js-ticket-ai-reply-btn {
     opacity: 1;
 }
 .js-ticket-append-signature-wrp div.js-ticket-signature-radio-box input:checked, .js-ticket-assigntome-wrp div.js-ticket-assigntome-field-wrp input:checked, .replyFormStatus.js-form-title-position-reletive-left input:checked {
-    background-color: ' . $color1 . ';
-    border-color: ' . $color1 . ';      
+    background-color: ' . $jsst_color1 . ';
+    border-color: ' . $jsst_color1 . ';      
 }
 .js-ticket-append-signature-wrp div.js-ticket-signature-radio-box input:after, .js-ticket-assigntome-wrp div.js-ticket-assigntome-field-wrp input:after, .replyFormStatus.js-form-title-position-reletive-left input:after {
     content: "";
@@ -2600,7 +2600,7 @@ div#js-ticket-ai-reply-btn {
 /* General Content Card Style */
 .js-tkt-det-cnt {
     background-color: #fff;
-    border: 1px solid ' . esc_attr($color5) . ';
+    border: 1px solid ' . esc_attr($jsst_color5) . ';
     border-radius: 12px;
     box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
     width: 100%;
@@ -2616,7 +2616,7 @@ div#js-ticket-ai-reply-btn {
  * =================================================================
  * Styles for all modules in the right sidebar for a consistent look.
  */
-$jssupportticket_css .= '
+$jsst_jssupportticket_css .= '
 .js-tkt-det-right .js-tkt-det-cnt {
     padding:20px 15px;
 }
@@ -2630,12 +2630,12 @@ $jssupportticket_css .= '
     width: 100%;
     padding-bottom: 15px;
     margin-bottom: 15px;
-    border-bottom: 1px solid ' . esc_attr($color5) . ';
+    border-bottom: 1px solid ' . esc_attr($jsst_color5) . ';
 }
 
 .js-tkt-det-hdg .js-tkt-det-hdg-txt {
     font-weight: 600;
-    color: ' . esc_attr($color2) . ';
+    color: ' . esc_attr($jsst_color2) . ';
 }
 
 .js-tkt-det-hdg-txt {
@@ -2695,9 +2695,9 @@ $jssupportticket_css .= '
     padding: 12px 0;
     margin: 0 4px; /* Create a small space between boxes */
     position: relative; /* Needed for positioning the colon separator */
-    background: linear-gradient(145deg, ' . esc_attr($color7) . ', ' . esc_attr($color3) . ');
-    color: ' . esc_attr($color2) . ';
-    border: 1px solid ' . esc_attr($color5) . ';
+    background: linear-gradient(145deg, ' . esc_attr($jsst_color7) . ', ' . esc_attr($jsst_color3) . ');
+    color: ' . esc_attr($jsst_color2) . ';
+    border: 1px solid ' . esc_attr($jsst_color5) . ';
     border-radius: 8px;
     box-shadow: 0 3px 5px rgba(0, 0, 0, 0.05);
     font-weight: 700;
@@ -2711,19 +2711,19 @@ $jssupportticket_css .= '
     right: -8px; /* Position the colon perfectly in the gap */
     top: 50%;
     transform: translateY(-50%);
-    color: ' . esc_attr($color2) . ';
+    color: ' . esc_attr($jsst_color2) . ';
     opacity: 0.4; /* Make the colon slightly less prominent */
     font-weight: 700;
 }
 
 .js-tkt-det-hdg .js-tkt-det-hdg-btn {
     font-weight: 500;
-    color: ' . esc_attr($color1) . ';
+    color: ' . esc_attr($jsst_color1) . ';
     text-decoration: none;
     transition: color 0.2s ease;
 }
 .js-tkt-det-hdg .js-tkt-det-hdg-btn:hover {
-    color: ' . esc_attr($color2) . ';
+    color: ' . esc_attr($jsst_color2) . ';
 }
 
 /* Status & Priority Pills */
@@ -2749,7 +2749,7 @@ $jssupportticket_css .= '
 }
 .js-tkt-det-info-data .js-tkt-det-info-tit {
     font-weight: 500;
-    color: ' . esc_attr($color2) . ';
+    color: ' . esc_attr($jsst_color2) . ';
     padding-right: 10px;
     width:fit-content;
     max-width:100%;
@@ -2764,7 +2764,7 @@ $jssupportticket_css .= '
     gap:5px;
 }
 .js-tkt-det-copy-id {
-    color: ' . esc_attr($color1) . ';
+    color: ' . esc_attr($jsst_color1) . ';
     text-decoration: none;
     font-weight: 500;
     cursor: pointer;
@@ -2776,7 +2776,7 @@ $jssupportticket_css .= '
     justify-content: space-between;
     align-items: center;
     padding-bottom: 12px;
-    border-bottom: 1px solid ' . $color5 . ';
+    border-bottom: 1px solid ' . $jsst_color5 . ';
     margin-bottom: 12px;
 }
 /* Text within the header (e.g., "Not assigned to agent") */
@@ -2786,7 +2786,7 @@ $jssupportticket_css .= '
 }
 .js-tkt-det-tkt-asgn-cnt .js-tkt-det-hdg .js-tkt-det-hdg-txt {
    
-    color: ' . esc_attr($color4) . ';
+    color: ' . esc_attr($jsst_color4) . ';
 }
 .js-tkt-det-trsfer-dep {
    display: flex;
@@ -2795,20 +2795,20 @@ $jssupportticket_css .= '
     background-color: #f8f9fa;
     padding: 15px;
     border-radius: 8px;
-    border: 1px solid '. $color5 .';
+    border: 1px solid '. $jsst_color5 .';
 }
 
 /* "Change" button in the header */
 .js-tkt-det-tkt-asgn-cnt .js-tkt-det-hdg-btn {
     font-weight: 600;
-    color:' . esc_attr($color1) . ';
+    color:' . esc_attr($jsst_color1) . ';
     text-decoration: none;
     border-radius: 6px;
     transition: background-color 0.2s ease, color 0.2s ease;
 }
 
 .js-tkt-det-tkt-asgn-cnt .js-tkt-det-hdg-btn:hover {
-    color: ' . esc_attr($color2) . ';
+    color: ' . esc_attr($jsst_color2) . ';
 }
 /* Text block for department info */
 .js-tkt-det-trsfer-dep-txt {
@@ -2818,7 +2818,7 @@ $jssupportticket_css .= '
 /* Title part of the department text (e.g., "Department :") */
 .js-tkt-det-trsfer-dep-txt-tit {
     font-weight: 500;
-    color: '. $color2 .';
+    color: '. $jsst_color2 .';
     
 }
 .js-ticket-reply-forms-heading {
@@ -2826,7 +2826,7 @@ $jssupportticket_css .= '
     padding: 20px;
     color: #0c0c0c;
     background-color: #ffffff;
-    border: 1px solid '. $color5 .';
+    border: 1px solid '. $jsst_color5 .';
     border-radius: 12px;
     margin-bottom: 0;
 }
@@ -2846,7 +2846,7 @@ $jssupportticket_css .= '
     margin-top: 15px;
     margin-left: 125px;
 }
-input#ppppok:hover {background-color: ' . esc_attr($color2) . ';color: ' . esc_attr($color7) . ';}
+input#ppppok:hover {background-color: ' . esc_attr($jsst_color2) . ';color: ' . esc_attr($jsst_color7) . ';}
 
 .js-tkt-det-tkt-asgn-cnt .js-tkt-det-info-wrp {padding: 0px;}
 
@@ -2869,7 +2869,7 @@ input#ppppok:hover {background-color: ' . esc_attr($color2) . ';color: ' . esc_a
     padding: 10px 0;
 }
 .js-tkt-det-usr-tkt-list:not(:last-child){
-    border-bottom: 1px solid ' . esc_attr($color5) . ';
+    border-bottom: 1px solid ' . esc_attr($jsst_color5) . ';
 }
 
 .js-tkt-det-usr-tkt-list .js-tkt-det-prty,
@@ -2879,9 +2879,9 @@ input#ppppok:hover {background-color: ' . esc_attr($color2) . ';color: ' . esc_a
     font-weight: 500;
 }
 .js-tkt-det-usr-tkt-list .js-tkt-det-status {
-    background-color: ' . esc_attr($color3) . ';
-    border: 1px solid ' . esc_attr($color5) . ';
-    color: ' . esc_attr($color4) . ';
+    background-color: ' . esc_attr($jsst_color3) . ';
+    border: 1px solid ' . esc_attr($jsst_color5) . ';
+    color: ' . esc_attr($jsst_color4) . ';
 }
 
 /*
@@ -2900,7 +2900,7 @@ input#ppppok:hover {background-color: ' . esc_attr($color2) . ';color: ' . esc_a
     .js-ticket-current-ticket-id {display: none;}
     .js-ticket-current-ticket-description {font-size: 14px;color: #1d4ed8;}
     .js-ticket-post-reply-section .js-ticket-section-heading {font-size: 20px;font-weight: 600;color: #4a5568;margin-bottom: 16px;}
-    .js-ticket-textarea {width: 100%;padding: 16px;border: 1px solid '. $color5 .';border-radius: 8px;resize: vertical;min-height: 150px;transition: border-color 0.2s ease, box-shadow 0.2s ease;}
+    .js-ticket-textarea {width: 100%;padding: 16px;border: 1px solid '. $jsst_color5 .';border-radius: 8px;resize: vertical;min-height: 150px;transition: border-color 0.2s ease, box-shadow 0.2s ease;}
     .js-ticket-textarea:focus {outline: none;border-color: #3b82f6;box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.5);}
     .js-ticket-button-group {display: flex;flex-direction: column;gap: 12px;margin-top: 16px;}
     @media (min-width: 640px) {.js-ticket-button-group {flex-direction: row;gap: 16px;margin-top: 0;}}
@@ -2951,11 +2951,11 @@ input#ppppok:hover {background-color: ' . esc_attr($color2) . ';color: ' . esc_a
     /* Dropdown style */
     .js-ticket-filter-group {display: flex;align-items: center;gap: 10px;margin-left: auto;margin-right: 5px;margin-bottom: 0px;}
     .js-ticket-filter-label {font-weight: 500;}
-    .js-ticket-filter-select {padding: 8px 12px;border: 1px solid '. $color5 .';border-radius: 8px;background-color: white;cursor: pointer;font-size: 14px;appearance: none; /* Remove default dropdown arrow */-webkit-appearance: none;-moz-appearance: none;background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%2364748b%22%20d%3D%22M287%2C118.8L146.2%2C259.6L5.4%2C118.8z%22%2F%3E%3C%2Fsvg%3E"); /* Custom arrow */background-repeat: no-repeat;background-position: right 10px center;background-size: 12px;transition: border-color 0.2s ease, box-shadow 0.2s ease;}
+    .js-ticket-filter-select {padding: 8px 12px;border: 1px solid '. $jsst_color5 .';border-radius: 8px;background-color: white;cursor: pointer;font-size: 14px;appearance: none; /* Remove default dropdown arrow */-webkit-appearance: none;-moz-appearance: none;background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%2364748b%22%20d%3D%22M287%2C118.8L146.2%2C259.6L5.4%2C118.8z%22%2F%3E%3C%2Fsvg%3E"); /* Custom arrow */background-repeat: no-repeat;background-position: right 10px center;background-size: 12px;transition: border-color 0.2s ease, box-shadow 0.2s ease;}
     .js-ticket-filter-select:focus {outline: none;border-color: #3b82f6;box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.5);}
     /* Modal styles */
     .js-ticket-modal {position: fixed;inset: 0;background-color: rgba(0, 0, 0, 0.5);display: flex;align-items: center;justify-content: center;z-index: 50;}
-    .js-ticket-modal-content {background-color: #ffffff;padding: 24px;border-radius: 12px;box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);max-width: 384px;width: 100%;text-align: center;border: 1px solid '. $color5 .';}
+    .js-ticket-modal-content {background-color: #ffffff;padding: 24px;border-radius: 12px;box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);max-width: 384px;width: 100%;text-align: center;border: 1px solid '. $jsst_color5 .';}
     .js-ticket-modal-message {font-size: 18px;font-weight: 500;color: #1a202c;margin-bottom: 16px;}
     .js-ticket-modal-close-button {background-color: #2563eb;color: #ffffff;padding: 8px 20px;border-radius: 8px;font-weight: 500;transition: background-color 0.2s ease, box-shadow 0.2s ease;cursor: pointer;border: none;}
     .js-ticket-modal-close-button:hover {background-color: #1d4ed8;}
@@ -2965,7 +2965,7 @@ input#ppppok:hover {background-color: ' . esc_attr($color2) . ';color: ' . esc_a
     div.js-ticket-ai-reply-status-wrapper {float: left;width: 100%;padding: 15px 0px 0px;box-sizing: border-box;}
     div.js-ticket-ai-reply-status-wrapper label {display: inline-block;margin-bottom: 10px;font-weight: 600;color: #444;}
     div.js-ticket-segmented-control-wrp {padding: 15px 0;}
-    div.js-ticket-segmented-control {display: flex;border: 1px solid '. $color5 .';border-radius: 6px;overflow: hidden;width: 100%;max-width: 100%;box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);flex-wrap: wrap;}
+    div.js-ticket-segmented-control {display: flex;border: 1px solid '. $jsst_color5 .';border-radius: 6px;overflow: hidden;width: 100%;max-width: 100%;box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);flex-wrap: wrap;}
     button.js-ticket-segmented-control-option {flex: 1;padding: 10px 18px;border: none;background-color: #f6f7f7;color: #40464d;cursor: pointer;font-size: 16px !important;font-weight: 500 !important;transition: background-color 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;outline: none;text-align: center;white-space: nowrap;line-height: 1.3em !important;}
     button.js-ticket-segmented-control-option:not(:last-child) {border-right: 1px solid #c3c4c7;}
     button.js-ticket-segmented-control-option:hover {background-color: #e0e0e0;}
@@ -2974,7 +2974,7 @@ input#ppppok:hover {background-color: ' . esc_attr($color2) . ';color: ' . esc_a
     button.js-ticket-segmented-control-option.js-ticket-enable.active {background-color: #28a745;color: #ffffff;}
     button.js-ticket-segmented-control-option.js-ticket-disable.active {background-color: #dc3545;color: #ffffff;}
     button.js-ticket-segmented-control-option:focus {box-shadow: 0 0 0 2px #2196f3;}
-    .js-tkt-det-tkt-prty-txt.js-ticket-segmented-control-wrp button.js-ticket-segmented-control-option {padding: 10px 0 !important;border:1px solid '.$color5.';}
+    .js-tkt-det-tkt-prty-txt.js-ticket-segmented-control-wrp button.js-ticket-segmented-control-option {padding: 10px 0 !important;border:1px solid '.$jsst_color5.';}
     label.js-ticket-ai-reply-status-control-label {font-size: 20px !important;}
     .js-ticket-info-icon-wrapper {position: relative;display: inline-block;cursor: help;padding: 0 5px;}
     .js-ticket-info-icon {font-size: 18px;color: #6c757d;transition: color 0.2s ease;}
@@ -2984,18 +2984,18 @@ input#ppppok:hover {background-color: ' . esc_attr($color2) . ';color: ' . esc_a
     .js-ticket-info-icon::before, .status-segment::before {content: "";top: calc(100% + 13px);left: 50%;transform: translateX(-50%) rotate(45deg);width: 14px;height: 35px;background-color: #343a40;z-index: 1000;}
     .js-ticket-info-icon img {width: 20px;}
         /* AI Reply */
-    .js-tkt-det-tkt-prty div.js-ticket-segmented-control-wrp {border-top: 1px solid ' . $color5 . ';}
+    .js-tkt-det-tkt-prty div.js-ticket-segmented-control-wrp {border-top: 1px solid ' . $jsst_color5 . ';}
 
-    .js-ticket-container {border: 1px solid ' . $color5 . ';}
-    .js-ticket-list-item {border: 1px solid ' . $color5 . ';}
-    .js-ticket-list-item .js-ticket-title {color: ' . $color2 . ';}
-    .js-ticket-ai-powered-reply-title {color: ' . $color2 . ';}
-    .js-ticket-ai-powered-reply-text {color: ' . $color4 . ';}
-    .js-ticket-list-item .js-ticket-id {color: ' . $color4 . ';}
-    .js-ticket-filter-label {color: ' . $color2 . ';}
-    .js-ticket-filter-select {color: ' . $color2 . ';}
-    .js-ticket-reply-text {color: ' . $color4 . ';}
-    .js-ticket-reply-header .js-ticket-reply-timestamp {color: ' . $color4 . ';}
+    .js-ticket-container {border: 1px solid ' . $jsst_color5 . ';}
+    .js-ticket-list-item {border: 1px solid ' . $jsst_color5 . ';}
+    .js-ticket-list-item .js-ticket-title {color: ' . $jsst_color2 . ';}
+    .js-ticket-ai-powered-reply-title {color: ' . $jsst_color2 . ';}
+    .js-ticket-ai-powered-reply-text {color: ' . $jsst_color4 . ';}
+    .js-ticket-list-item .js-ticket-id {color: ' . $jsst_color4 . ';}
+    .js-ticket-filter-label {color: ' . $jsst_color2 . ';}
+    .js-ticket-filter-select {color: ' . $jsst_color2 . ';}
+    .js-ticket-reply-text {color: ' . $jsst_color4 . ';}
+    .js-ticket-reply-header .js-ticket-reply-timestamp {color: ' . $jsst_color4 . ';}
 
         /*
          * =================================================================
@@ -3036,7 +3036,7 @@ input#ppppok:hover {background-color: ' . esc_attr($color2) . ';color: ' . esc_a
         /* Individual Ticket Card */
         .js-ticket-list-item {
             background-color: #ffffff;
-            border: 1px solid '. $color5 .';
+            border: 1px solid '. $jsst_color5 .';
             border-radius: 12px;
             padding: 20px;
             margin-bottom: 15px;
@@ -3050,13 +3050,13 @@ input#ppppok:hover {background-color: ' . esc_attr($color2) . ';color: ' . esc_a
         }
         .content-area ol li, .content-area ul li {
             margin: 0 0 .25rem 1rem;
-            border-left: 4px solid ' . $color1 . ';
+            border-left: 4px solid ' . $jsst_color1 . ';
         }
         
         .js-ticket-list-item.selected {
-            border-left: 4px solid ' . $color1 . ';
+            border-left: 4px solid ' . $jsst_color1 . ';
             background-color: #f0f8ff;
-            border-color: ' . $color1 . ';
+            border-color: ' . $jsst_color1 . ';
         }
 
         .js-ticket-list-item .js-ticket-id {
@@ -3110,7 +3110,7 @@ input#ppppok:hover {background-color: ' . esc_attr($color2) . ';color: ' . esc_a
             align-items: center;
             margin-bottom: 15px;
             padding-bottom: 10px;
-            border-bottom: 1px solid ' . $color5 . ';
+            border-bottom: 1px solid ' . $jsst_color5 . ';
         }
 
         .js-ticket-reply-id {
@@ -3130,7 +3130,7 @@ input#ppppok:hover {background-color: ' . esc_attr($color2) . ';color: ' . esc_a
         .js-ticket-reply-actions {
             margin-top: 15px;
             padding-top: 15px;
-            border-top: 1px solid ' . $color5 . ';
+            border-top: 1px solid ' . $jsst_color5 . ';
             display: flex;
             gap: 10px;
             justify-content: flex-end;
@@ -3286,7 +3286,7 @@ input#ppppok:hover {background-color: ' . esc_attr($color2) . ';color: ' . esc_a
  * =================================================================
  * Styles for the ticket header, thread, replies, and forms.
  */
-$jssupportticket_css .= '
+$jsst_jssupportticket_css .= '
 /* User/Ticket Info Header */
 .js-tkt-det-info-wrp {
     padding: 20px;
@@ -3325,7 +3325,7 @@ $jssupportticket_css .= '
 }
 .js-ticket-thread .js-ticket-thread-cnt .js-ticket-thread-data .js-ticket-thread-read-status-btn {
     padding:5px 5px 8px;
-    border:1px solid '.$color5.';
+    border:1px solid '.$jsst_color5.';
     border-radius:10px;
     cursor: pointer;
     display:flex;
@@ -3335,11 +3335,11 @@ $jssupportticket_css .= '
     position: absolute;
     top: 37px;
     right: 15px;
-    background-color: '.$color3.';
+    background-color: '.$jsst_color3.';
     padding:10px;
     width:100%;
     min-width:200px;
-    border:1px solid '.$color4.';
+    border:1px solid '.$jsst_color4.';
     border-radius:10px;
 }
 .js-tkt-det-user-image img {
@@ -3369,15 +3369,15 @@ span.js-tkt-det-prty {color:white;}
     
     margin-top: 20px;
     padding-top: 20px;
-    border-top: 1px solid ' . esc_attr($color5) . ';
+    border-top: 1px solid ' . esc_attr($jsst_color5) . ';
 }
 .js-tkt-det-left .js-tkt-det-actn-btn-wrp .js-tkt-det-actn-btn{
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    background-color: ' . esc_attr($color3) . ';
-    border: 1px solid ' . esc_attr($color5) . ';
-    color: ' . esc_attr($color4) . ';
+    background-color: ' . esc_attr($jsst_color3) . ';
+    border: 1px solid ' . esc_attr($jsst_color5) . ';
+    color: ' . esc_attr($jsst_color4) . ';
     padding: 8px 16px;
     border-radius: 8px;
     text-decoration: none;
@@ -3386,9 +3386,9 @@ span.js-tkt-det-prty {color:white;}
     margin: 5px;
 }
 .js-tkt-det-actn-btn-wrp .js-tkt-det-actn-btn:hover {
-    border-color: ' . esc_attr($color1) . ';
-    background-color: ' . esc_attr($color7) . ';
-    color: ' . esc_attr($color1) . ';
+    border-color: ' . esc_attr($jsst_color1) . ';
+    background-color: ' . esc_attr($jsst_color7) . ';
+    color: ' . esc_attr($jsst_color1) . ';
     transform: translateY(-2px);
     box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.07), 0 2px 4px -2px rgba(0, 0, 0, 0.07);
 }
@@ -3402,9 +3402,9 @@ span.js-tkt-det-prty {color:white;}
 
     font-weight: 600;
     padding: 20px;
-    color: ' . esc_attr($color2) . ';
+    color: ' . esc_attr($jsst_color2) . ';
     background-color: #fff;
-    border: 1px solid ' . esc_attr($color5) . ';
+    border: 1px solid ' . esc_attr($jsst_color5) . ';
     border-radius: 12px;
     margin-bottom: 0;
 }
@@ -3416,7 +3416,7 @@ span.js-tkt-det-prty {color:white;}
     gap: 20px;
     padding: 20px;
     background-color: #fff;
-    border: 1px solid ' . esc_attr($color5) . ';
+    border: 1px solid ' . esc_attr($jsst_color5) . ';
     border-radius: 12px;
 }
 .js-ticket-thread.internal-note {
@@ -3438,7 +3438,7 @@ span.js-tkt-det-prty {color:white;}
 }
 .js-ticket-thread .js-ticket-thread-person {
     font-weight: 600;
-    color: ' . esc_attr($color2) . ';
+    color: ' . esc_attr($jsst_color2) . ';
 }
 .js-ticket-thread .note-msg {
     margin-top: 10px;
@@ -3446,10 +3446,17 @@ span.js-tkt-det-prty {color:white;}
 .js-ticket-thread .note-msg p {
     margin-top: 0;
 }
+.js-ticket-thread .js-ticket-thread-cnt .js-ticket-thread-data.note-msg{
+    flex-direction:column;
+    align-items:flex-start;
+}
+.js-ticket-thread .js-ticket-thread-cnt .js-ticket-thread-data.note-msg img{
+    max-width:100%;
+}
 .js-ticket-thread .js-ticket-thread-cnt-btm {
     margin-top: 15px;
     padding-top: 15px;
-    border-top: 1px solid ' . esc_attr($color5) . ';
+    border-top: 1px solid ' . esc_attr($jsst_color5) . ';
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -3458,10 +3465,10 @@ span.js-tkt-det-prty {color:white;}
     
 }
 .js-ticket-thread .js-ticket-thread-cnt-btm .js-ticket-thread-date {
-    color: ' . esc_attr($color4) . ';
+    color: ' . esc_attr($jsst_color4) . ';
 }
 .js-ticket-thread .js-ticket-thread-actions .js-ticket-thread-actn-btn,.js_ticketattachment .button {
-    color: ' . esc_attr($color4) . ';
+    color: ' . esc_attr($jsst_color4) . ';
     text-decoration: none;
     
     padding: 5px 10px;
@@ -3471,7 +3478,7 @@ span.js-tkt-det-prty {color:white;}
     display: inline-flex;
     align-items: center;
     background-color: #f9fafb;
-    border: 1px solid '. $color5 .';
+    border: 1px solid '. $jsst_color5 .';
 }
 .js-ticket-thread .js-ticket-thread-actions .js-ticket-thread-actn-btn{
     gap:8px;
@@ -3481,19 +3488,19 @@ span.js-tkt-det-prty {color:white;}
    
 }
 .js-ticket-thread .js-ticket-thread-actions .js-ticket-thread-actn-btn, .js_ticketattachment .button:hover {
-    border-color: ' . esc_attr($color2) . ';
-    background-color: ' . esc_attr($color2) . ';
-    color: ' . esc_attr($color7) . ';
+    border-color: ' . esc_attr($jsst_color2) . ';
+    background-color: ' . esc_attr($jsst_color2) . ';
+    color: ' . esc_attr($jsst_color7) . ';
 }
 #popupforinternalnote .js-ticket-internalnote-field-title{
     font-weight:600;
-    color:' . esc_attr($color2) . ';
+    color:' . esc_attr($jsst_color2) . ';
 }
-#popupforinternalnote .js-attachment-field:hover{border-color:' . esc_attr($color5) . ';}
+#popupforinternalnote .js-attachment-field:hover{border-color:' . esc_attr($jsst_color5) . ';}
 .js-form-wrapper .js-form-title{
     font-weight:600;
     margin-bottom:10px;
-     color:' . esc_attr($color4) . ';
+     color:' . esc_attr($jsst_color4) . ';
 }
 .js-form-wrapper .js-form-value select{
     width: 100%;
@@ -3509,14 +3516,14 @@ span.js-tkt-det-prty {color:white;}
 .js-ticket-attachments-wrp {
     margin-top: 20px;
     padding-top: 20px;
-    border-top: 1px dashed ' . esc_attr($color5) . ';
+    border-top: 1px dashed ' . esc_attr($jsst_color5) . ';
     width: 100%;
 }
 div.js-ticket-attachments-wrp div.js_ticketattachment {
     display: flex;
     align-items: center;
-    background-color: ' . esc_attr($color3) . ';
-    border: 1px solid ' . esc_attr($color5) . ';
+    background-color: ' . esc_attr($jsst_color3) . ';
+    border: 1px solid ' . esc_attr($jsst_color5) . ';
     padding: 10px;
     border-radius: 8px;
     margin-bottom: 10px;
@@ -3529,8 +3536,8 @@ div.js-ticket-attachments-wrp div.js_ticketattachment .js-ticket-download-file-t
 }
 a.js-all-download-button {
     display: inline-block;
-    background-color: ' . esc_attr($color1) . ';
-    color: ' . esc_attr($color7) . ' !important;
+    background-color: ' . esc_attr($jsst_color1) . ';
+    color: ' . esc_attr($jsst_color7) . ' !important;
     padding: 8px 16px;
     border-radius: 8px;
     text-decoration: none;
@@ -3538,7 +3545,7 @@ a.js-all-download-button {
     transition: background-color 0.2s ease;
 }
 a.js-all-download-button:hover {
-    background-color: ' . esc_attr($color2) . ';
+    background-color: ' . esc_attr($jsst_color2) . ';
 }
 .js-ticket-reply-form-button-wrp{
     display: inline-block;
@@ -3551,25 +3558,25 @@ a.js-all-download-button:hover {
     margin-top:15px;
     }
    .js-ticket-reply-form-button-wrp input:hover {
-    background-color: ' . ($color2) . ';
-    color: ' . ($color7) . ';
-    box-shadow:0 2px 10px rgba(' . hexdec(substr($color2, 1, 2)) . ', ' . hexdec(substr($color2, 3, 2)) . ', ' . hexdec(substr($color2, 5, 2)) . ', 0.5);
+    background-color: ' . ($jsst_color2) . ';
+    color: ' . ($jsst_color7) . ';
+    box-shadow:0 2px 10px rgba(' . hexdec(substr($jsst_color2, 1, 2)) . ', ' . hexdec(substr($jsst_color2, 3, 2)) . ', ' . hexdec(substr($jsst_color2, 5, 2)) . ', 0.5);
     transform: translateY(-3px);
 }
 .js-ticket-reply-form-button-wrp input{
     display: inline-block;
-    color: ' . ($color7) . ' !important;
+    color: ' . ($jsst_color7) . ' !important;
     padding: 12px 20px;
     border-radius: 8px;
     text-decoration: none;
     font-weight: 600;
     border:unset;
-    box-shadow: 0 2px 10px rgba(' . hexdec(substr($color1, 1, 2)) . ', ' . hexdec(substr($color1, 3, 2)) . ', ' . hexdec(substr($color1, 5, 2)) . ', 0.4);
+    box-shadow: 0 2px 10px rgba(' . hexdec(substr($jsst_color1, 1, 2)) . ', ' . hexdec(substr($jsst_color1, 3, 2)) . ', ' . hexdec(substr($jsst_color1, 5, 2)) . ', 0.4);
     transition: background-color 0.2s ease;
     width: 100%;
-    background-color: ' . ($color1) . ';
+    background-color: ' . ($jsst_color1) . ';
     transition: all 0.3s ease;
-    color: ' . ($color7) . ';}
+    color: ' . ($jsst_color7) . ';}
 .js-ticket-priorty-btn-wrp {
     display: flex
 ;
@@ -3577,16 +3584,16 @@ a.js-all-download-button:hover {
     margin-bottom: 20px;
     gap: 15px;
 }
-input#changepriority:hover {background-color: ' . esc_attr($color2) . '!important;
+input#changepriority:hover {background-color: ' . esc_attr($jsst_color2) . '!important;
 }
 
 /* Close Buttons in AI Feature Headers */
 
 .js-ticket-close-button:hover,
 #js-ticket-close-tickets-btn:hover {
-    border-color: ' . esc_attr($color2) . ';
-    background-color: ' . esc_attr($color2) . ';
-    color: ' . esc_attr($color7) . ';
+    border-color: ' . esc_attr($jsst_color2) . ';
+    background-color: ' . esc_attr($jsst_color2) . ';
+    color: ' . esc_attr($jsst_color7) . ';
 }
 
 ';
@@ -3608,9 +3615,9 @@ input#changepriority:hover {background-color: ' . esc_attr($color2) . '!importan
 /* Reply Form Wrapper */
 .js-det-tkt-rply-frm {
     padding: 25px;
-    border: 1px solid ' . esc_attr($color5) . ';
+    border: 1px solid ' . esc_attr($jsst_color5) . ';
     border-radius: 12px;
-    background-color: ' . esc_attr($color7) . ';
+    background-color: ' . esc_attr($jsst_color7) . ';
 }
 .js-det-tkt-rply-frm .js-tkt-det-title {
   
@@ -3618,7 +3625,7 @@ input#changepriority:hover {background-color: ' . esc_attr($color2) . '!importan
     padding: 20px;
     color: #1f2937;
     background-color: #ffffff;
-    border: 1px solid '. $color5 .';
+    border: 1px solid '. $jsst_color5 .';
     border-radius: 12px;
     margin-bottom: 0;
 }
@@ -3630,7 +3637,7 @@ input#changepriority:hover {background-color: ' . esc_attr($color2) . '!importan
 .js-ticket-premade-field-title {
     font-weight: 500;
     margin-bottom: 8px;
-    color: ' . esc_attr($color2) . ';
+    color: ' . esc_attr($jsst_color2) . ';
 }
 /* The container for the "Append" checkbox option */
 .js-ticket-apend-radio-btn {
@@ -3657,13 +3664,13 @@ select.js-ticket-premade-select {
     padding-right: 2.5rem;
     height: 44px;
     border-radius: 8px !important;
-    border: 1px solid ' . esc_attr($color5) . ';
+    border: 1px solid ' . esc_attr($jsst_color5) . ';
     padding: 10px;
 }
 
 /* Text Editor (wp_editor) */
 .wp-editor-wrap {
-    border: 1px solid ' . esc_attr($color5) . ';
+    border: 1px solid ' . esc_attr($jsst_color5) . ';
     border-radius: 8px;
 }
 .jsst-main-up-wrapper .wp-editor-container {
@@ -3675,8 +3682,8 @@ select.js-ticket-premade-select {
     margin-top: 20px;
 }
 .jsst-formfield-radio-button-wrap, .replyFormStatus {
-    background-color: ' . esc_attr($color3) . ';
-    border: 1px solid ' . esc_attr($color5) . ';
+    background-color: ' . esc_attr($jsst_color3) . ';
+    border: 1px solid ' . esc_attr($jsst_color5) . ';
     padding: 10px 15px;
     border-radius: 8px;
     display: inline-flex;
@@ -3697,8 +3704,8 @@ js-tkt-det-hdg-txt .label{font-weight: 700;}
     text-align: left;
 }
 input.js-ticket-save-button {
-    background-color: ' . esc_attr($color1) . ' !important;
-    color: ' . esc_attr($color7) . ' !important;
+    background-color: ' . esc_attr($jsst_color1) . ' !important;
+    color: ' . esc_attr($jsst_color7) . ' !important;
     border: none !important;
     padding: 12px 24px !important;
    
@@ -3708,7 +3715,7 @@ input.js-ticket-save-button {
     transition: all 0.2s ease;
 }
 input.js-ticket-save-button:hover {
-    background-color: ' . esc_attr($color2) . ' !important;
+    background-color: ' . esc_attr($jsst_color2) . ' !important;
     transform: translateY(-2px);
     box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
 }
@@ -3720,7 +3727,7 @@ input.js-ticket-save-button:hover {
  * =================================================================
  * A unified design for all popups (History, Change Priority, etc.).
  */
-$jssupportticket_css .= '
+$jsst_jssupportticket_css .= '
 div#userpopupblack, div.jsst-popup-background {
     background: rgba(31, 41, 55, 0.7);
     backdrop-filter: blur(4px);
@@ -3742,11 +3749,11 @@ div#userpopup, div.jsst-popup-wrapper, div#usercredentailspopup, div#popupforage
 }
 
 .jsst-popup-header, .js-ticket-priorty-header, .js-ticket-usercredentails-header, #userpopup.js-row js-ticket-popup-row {
-    background-color:' . esc_attr($color3) . ';
-    color: ' . esc_attr($color2) . ';
+    background-color:' . esc_attr($jsst_color3) . ';
+    color: ' . esc_attr($jsst_color2) . ';
     padding: 15px 20px;
     font-weight: 600;
-    border-bottom: 1px solid ' . esc_attr($color5) . ';
+    border-bottom: 1px solid ' . esc_attr($jsst_color5) . ';
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -3792,14 +3799,14 @@ form#jsst-note-edit-form .js-form-wrapper{
 }
 form#jsst-note-edit-form .js-form-wrapper .js-form-title{
     font-weight:600;
-    color:'.$color2.';
+    color:'.$jsst_color2.';
 }
 
 #prioritytemp, #departmentid, #staffid, #status {
     width: 100% !important;
     padding: 10px !important;
     border-radius: 8px !important;
-    border: 1px solid ' . esc_attr($color5) . ' !important;
+    border: 1px solid ' . esc_attr($jsst_color5) . ' !important;
     background-color: #fff !important;
 
 }
@@ -3820,19 +3827,19 @@ div.js-ticket-premade-msg-wrp div.js-ticket-premade-field-wrp select#staffid {ma
     transition: all 0.2s ease;
 }
 input.js-ticket-priorty-save {
-    background-color: ' . esc_attr($color1) . ' !important;
-    color: ' . esc_attr($color7) . ' !important;
-    border: 1px solid ' . esc_attr($color1) . ' !important;
+    background-color: ' . esc_attr($jsst_color1) . ' !important;
+    color: ' . esc_attr($jsst_color7) . ' !important;
+    border: 1px solid ' . esc_attr($jsst_color1) . ' !important;
 }
 input.js-ticket-priorty-save:hover{
-    border-color:'.$color2.' !important;
+    border-color:'.$jsst_color2.' !important;
 }
 input.js-ticket-priorty-cancel {
 
 }
 input.js-ticket-priorty-cancel:hover {
-    border-color: ' . esc_attr($color2) . ';
-    color: ' . esc_attr($color2) . ';
+    border-color: ' . esc_attr($jsst_color2) . ';
+    color: ' . esc_attr($jsst_color2) . ';
 }
 
 /* History Popup Table */
@@ -3848,27 +3855,27 @@ input.js-ticket-priorty-cancel:hover {
 }
 .js-ticket-history-table-wrp th {
     background-color: #f5f2f5;
-    color: ' . esc_attr($color2) . ';
+    color: ' . esc_attr($jsst_color2) . ';
     text-align: left;
     font-weight: 600;
 }
 .js-ticket-history-table-wrp th, .js-ticket-history-table-wrp td {
     padding: 12px 15px;
-    border: 1px solid ' . esc_attr($color5) . ';
+    border: 1px solid ' . esc_attr($jsst_color5) . ';
 }
 .js-ticket-history-table-wrp tbody tr:nth-child(odd) {
-    background-color: ' . esc_attr($color3) . ';
+    background-color: ' . esc_attr($jsst_color3) . ';
 }
 #popupforinternalnote .timer-button:hover {
-    background-color: ' . esc_attr($color2) . '!important;
-    border-color: ' . esc_attr($color2) . '!important;
+    background-color: ' . esc_attr($jsst_color2) . '!important;
+    border-color: ' . esc_attr($jsst_color2) . '!important;
 }
 
 
 div.jsst-ticket-detail-timer-wrapper div.timer-right div.timer-buttons span.timer-button, #popupforinternalnote .timer-button
  { 
-    background-color: ' . esc_attr($color1) . ';
-    border: 1px solid ' . esc_attr($color1) . ';
+    background-color: ' . esc_attr($jsst_color1) . ';
+    border: 1px solid ' . esc_attr($jsst_color1) . ';
     border-radius: 50%;
     padding: 6px;
     align-items: center;
@@ -3883,7 +3890,7 @@ div.jsst-ticket-detail-timer-wrapper div.timer-right div.timer-buttons span.time
  * =================================================================
  * Styles for the AI-powered reply feature and other interactive elements.
  */
-$jssupportticket_css .= '
+$jsst_jssupportticket_css .= '
 .js-ticket-ai-powered-reply-wrapper {
     display: flex;
     align-items: center;
@@ -3905,7 +3912,7 @@ $jssupportticket_css .= '
     margin-right:auto;
 }
 .js-ticket-ai-powered-reply-icon img { width: 50px; }
-.js-ticket-ai-powered-reply-title { font-weight: 600; color: ' . esc_attr($color2) . ';  }
+.js-ticket-ai-powered-reply-title { font-weight: 600; color: ' . esc_attr($jsst_color2) . ';  }
 .js-ticket-ai-powered-reply-text {font-size: 15px; }
 .js-ticket-ai-powered-reply-action a {
    background-color: #15803d; /* Darker Green */
@@ -3929,7 +3936,7 @@ $jssupportticket_css .= '
  * =================================================================
  * Overrides for remaining classes to ensure a cohesive design.
  */
-.js-ticket-thread .js-ticket-thread-actions .js-ticket-thread-actn-btn:hover{background-color: ' . esc_attr($color1) . '; color:' . esc_attr($color7) . ';    border-color: ' . esc_attr($color1) . ';}
+.js-ticket-thread .js-ticket-thread-actions .js-ticket-thread-actn-btn:hover{background-color: ' . esc_attr($jsst_color1) . '; color:' . esc_attr($jsst_color7) . ';    border-color: ' . esc_attr($jsst_color1) . ';}
 .js-tkt-det-tkt-custm-flds .js-tkt-det-info-data{
     margin-bottom: 10px;
     align-items: flex-start;
@@ -3943,7 +3950,7 @@ $jssupportticket_css .= '
 }
 div.jsst-ticket-detail-timer-wrapper {
     background-color: #fff;
-    border: 1px solid ' . esc_attr($color5) . ';
+    border: 1px solid ' . esc_attr($jsst_color5) . ';
     border-radius: 12px;
     padding: 15px;
     display: flex;
@@ -3955,16 +3962,16 @@ div.jsst-ticket-detail-timer-wrapper {
 div.jsst-ticket-detail-timer-wrapper .timer-right .timer {
    
     font-weight: 600;
-    color: ' . esc_attr($color2) . ';
+    color: ' . esc_attr($jsst_color2) . ';
 }
 #popupforinternalnote .timer-button:hover{
-     background-color: ' . esc_attr($color1) . ';
-    border-color: ' . esc_attr($color1) . ';
+     background-color: ' . esc_attr($jsst_color1) . ';
+    border-color: ' . esc_attr($jsst_color1) . ';
 }
 div.jsst-ticket-detail-timer-wrapper div.timer-right div.timer-buttons span.timer-button, #popupforinternalnote .timer-button
  { 
-    background-color: ' . esc_attr($color1) . ';
-    border: 1px solid ' . esc_attr($color1) . ';
+    background-color: ' . esc_attr($jsst_color1) . ';
+    border: 1px solid ' . esc_attr($jsst_color1) . ';
     border-radius: 50%;
     padding: 6px;
     align-items: center;
@@ -3986,7 +3993,7 @@ div.jsst-ticket-detail-timer-wrapper div.timer-right div.timer-buttons span.time
         appearance: none;
         width: 14px;
         height: 14px;
-        border: 1px solid '. $color5 .';
+        border: 1px solid '. $jsst_color5 .';
         border-radius: 4px;
         background-color: #ffffff;
         cursor: pointer;
@@ -4007,8 +4014,8 @@ div.jsst-ticket-detail-timer-wrapper div.timer-right div.timer-buttons span.time
         background-repeat: no-repeat;
     }
     div.jsst-main-up-wrapper input.radiobutton.js-ticket-append-radio-btn:checked, .replyFormStatus.js-form-title-position-reletive-left input:checked {
-        background-color: ' . esc_attr($color1) . ';
-        border-color: ' . esc_attr($color1) . ';
+        background-color: ' . esc_attr($jsst_color1) . ';
+        border-color: ' . esc_attr($jsst_color1) . ';
     }
   /* Main Container for a single credential entry */
     .js-ticket-usercredentails-single {
@@ -4022,7 +4029,7 @@ div.jsst-ticket-detail-timer-wrapper div.timer-right div.timer-buttons span.time
     display: flex;
     flex-wrap: wrap;
     gap: 15px 20px;
-    border: 1px solid '. $color5 .';
+    border: 1px solid '. $jsst_color5 .';
     margin: 20px
         }
 
@@ -4033,7 +4040,7 @@ div.jsst-ticket-detail-timer-wrapper div.timer-right div.timer-buttons span.time
             font-weight: 600;
             color: #343a40;
             padding-bottom: 15px;
-            border-bottom: 1px solid ' . $color5 . ';
+            border-bottom: 1px solid ' . $jsst_color5 . ';
             margin-bottom: 5px;
         }
 
@@ -4077,7 +4084,7 @@ div.jsst-ticket-detail-timer-wrapper div.timer-right div.timer-buttons span.time
             gap: 10px;
             margin-top: 15px;
             padding-top: 20px;
-            border-top: 1px solid ' . $color5 . ';
+            border-top: 1px solid ' . $jsst_color5 . ';
         }
 
         /* Shared button styles */
@@ -4094,12 +4101,12 @@ div.jsst-ticket-detail-timer-wrapper div.timer-right div.timer-buttons span.time
 
         /* Edit Button */
         .js-ticket-usercredentail-data-button-edit {
-            background-color: ' . esc_attr($color1) . ';
+            background-color: ' . esc_attr($jsst_color1) . ';
             color: #ffffff;
         }
 
         .js-ticket-usercredentail-data-button-edit:hover {
-            background-color: ' . esc_attr($color2) . ';
+            background-color: ' . esc_attr($jsst_color2) . ';
              color: #ffffff;
             transform: translateY(-2px);
         }
@@ -4121,13 +4128,13 @@ div.jsst-ticket-detail-timer-wrapper div.timer-right div.timer-buttons span.time
             transform: translateY(-2px);
         }
         .js-ticket-priorty-btn-wrp input{
-            border:1px solid '. $color5 .';
+            border:1px solid '. $jsst_color5 .';
             background:#f5f2f5;
         }
         .js-ticket-priorty-btn-wrp input:hover{
-                border-color: '. $color2 .';
-                background-color:'. $color2 .';
-                color:'. $color7 .';
+                border-color: '. $jsst_color2 .';
+                background-color:'. $jsst_color2 .';
+                color:'. $jsst_color7 .';
             }
         /* Responsive adjustments */
         @media (max-width: 600px) {
@@ -4152,8 +4159,8 @@ div.jsst-ticket-detail-timer-wrapper div.timer-right div.timer-buttons span.time
             .js-row.js-ticket-popup-row {
                 padding: 15px 20px;
                 font-weight: 600;
-                border-bottom: 1px solid ' . $color5 . ';
-                background-color:' . $color3 .';
+                border-bottom: 1px solid ' . $jsst_color5 . ';
+                background-color:' . $jsst_color3 .';
                 display: flex;
                 align-items: center;
             }
@@ -4172,16 +4179,16 @@ div.jsst-ticket-detail-timer-wrapper div.timer-right div.timer-buttons span.time
             }
             div#usercredentailspopup .js-ticket-usercredentails-wrp .js-ticket-usercredentails-single {
                 background: #fff;
-                border: 1px solid '. $color5 .';
+                border: 1px solid '. $jsst_color5 .';
             }
             div.jsst-ticket-detail-timer-wrapper div.timer-right div.timer-buttons span.timer-button,.selected {
-                background-color: ' . esc_attr($color1) . ';
-                border-color: ' . esc_attr($color1) . ';
+                background-color: ' . esc_attr($jsst_color1) . ';
+                border-color: ' . esc_attr($jsst_color1) . ';
             }
 }
     ';
 
-wp_add_inline_style('jssupportticket-main-css', $jssupportticket_css);
+wp_add_inline_style('jssupportticket-main-css', $jsst_jssupportticket_css);
 
 
 ?>

@@ -2,9 +2,9 @@
 if (!defined('ABSPATH'))
     die('Restricted Access');
 if (JSSTincluder::getObjectClass('user')->isguest() && jssupportticket::$_config['show_captcha_on_visitor_from_ticket'] == 1 && jssupportticket::$_config['captcha_selection'] == 1) {
-    wp_enqueue_script( 'ticket-recaptcha', 'https://www.google.com/recaptcha/api.js' );
+    wp_enqueue_script( 'ticket-recaptcha', 'https://www.google.com/recaptcha/api.js', array(), jssupportticket::$_config['productversion'], true );
 }
-$jssupportticket_js ="
+$jsst_jssupportticket_js ="
     jQuery(document).ready(function ($) {
         $.validate();    
     });
@@ -12,16 +12,16 @@ $jssupportticket_js ="
         document.getElementById('jsst_registration_form').submit();
     }
 ";
-wp_add_inline_script('js-support-ticket-main-js',$jssupportticket_js);
+wp_add_inline_script('js-support-ticket-main-js',$jsst_jssupportticket_js);
 ?>
 <div class="jsst-main-up-wrapper">
 <?php
 if (jssupportticket::$_config['offline'] == 2) {
     if (JSSTincluder::getObjectClass('user')->isguest()) {
         // check to make sure user registration is enabled
-        $is_enable = get_option('users_can_register');
+        $jsst_is_enable = get_option('users_can_register');
         // only show the registration form if allowed
-        if ($is_enable) {
+        if ($jsst_is_enable) {
             JSSTmessage::getMessage();
             include_once(JSST_PLUGIN_PATH . 'includes/header.php'); ?>
 
@@ -91,10 +91,10 @@ if (jssupportticket::$_config['offline'] == 2) {
                         <?php
                     }
                     JSSTincluder::getJSModel('fieldordering')->getFieldsOrderingforForm(3);
-                    foreach (jssupportticket::$_data['fieldordering'] as $field) {
-                        JSSTincluder::getObjectClass('customfields')->formCustomFields($field);
+                    foreach (jssupportticket::$jsst_data['fieldordering'] as $jsst_field) {
+                        JSSTincluder::getObjectClass('customfields')->formCustomFields($jsst_field);
                     }
-                    $google_recaptcha_3 = false;
+                    $jsst_google_recaptcha_3 = false;
                     if (jssupportticket::$_config['captcha_on_registration'] == 1) { ?>
                         <div class="js-ticket-from-field-wrp">
                             <div class="js-ticket-from-field-title">
@@ -103,15 +103,15 @@ if (jssupportticket::$_config['offline'] == 2) {
                             <div class="js-ticket-from-field">
                                 <?php
                                 if (jssupportticket::$_config['captcha_selection'] == 1) { // Google recaptcha
-                                    $error = null;
+                                    $jsst_error = null;
                                     if (jssupportticket::$_config['recaptcha_version'] == 1) {
                                         echo '<div class="g-recaptcha" data-sitekey="'.wp_kses_post(jssupportticket::$_config['recaptcha_publickey']).'"></div>';
                                     } else {
-                                        $google_recaptcha_3 = true;
+                                        $jsst_google_recaptcha_3 = true;
                                     }
                                 } else { // own captcha
-                                    $captcha = new JSSTcaptcha;
-                                    echo wp_kses($captcha->getCaptchaForForm(), JSST_ALLOWED_TAGS);
+                                    $jsst_captcha = new JSSTcaptcha;
+                                    echo wp_kses($jsst_captcha->getCaptchaForForm(), JSST_ALLOWED_TAGS);
 
                                 } ?>
                             </div>
@@ -121,7 +121,7 @@ if (jssupportticket::$_config['offline'] == 2) {
                     <input type="hidden" name="jsst_support_register_nonce" value="<?php echo esc_attr(wp_create_nonce('jsst-support-register-nonce')); ?>"/>
                     <div class="js-ticket-form-btn-wrp">
                         <?php
-                        if($google_recaptcha_3 == true && JSSTincluder::getObjectClass('user')->isguest()){ // to handle case of google recpatcha version 3
+                        if($jsst_google_recaptcha_3 == true && JSSTincluder::getObjectClass('user')->isguest()){ // to handle case of google recpatcha version 3
                             echo wp_kses(JSSTformfield::button('save', esc_html(__('Register', 'js-support-ticket')), array('class' => 'js-ticket-save-button g-recaptcha', 'data-callback' => 'onSubmit', 'data-action' => 'submit', 'data-sitekey' => esc_attr(jssupportticket::$_config['recaptcha_publickey']))), JSST_ALLOWED_TAGS);
                         } else {
                             echo wp_kses(JSSTformfield::submitbutton('save', esc_html(__('Register', 'js-support-ticket')), array('class' => 'js-ticket-save-button')), JSST_ALLOWED_TAGS);
@@ -138,8 +138,8 @@ if (jssupportticket::$_config['offline'] == 2) {
             JSSTlayout::getYouAreLoggedIn();
     }
 }
-if(isset($google_recaptcha) && $google_recaptcha){
-    wp_enqueue_script( 'ticket-recaptcha', 'https://www.google.com/recaptcha/api.js' );
+if(isset($jsst_google_recaptcha) && $jsst_google_recaptcha){
+    wp_enqueue_script( 'ticket-recaptcha', 'https://www.google.com/recaptcha/api.js', array(), jssupportticket::$_config['productversion'], true );
 }
 ?>
 </div>

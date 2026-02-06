@@ -5,19 +5,19 @@ if (!defined('ABSPATH'))
 JSSTincluder::getJSModel('jssupportticket')->checkIfMainCssFileIsEnqued();
 JSSTincluder::getJSModel('jssupportticket')->jsst_get_theme_colors();
 
-$color1 = jssupportticket::$_colors['color1'];
-$color2 = jssupportticket::$_colors['color2'];
-$color3 = jssupportticket::$_colors['color3'];
-$color4 = jssupportticket::$_colors['color4'];
-$color5 = jssupportticket::$_colors['color5'];
-$color6 = jssupportticket::$_colors['color6'];
-$color7 = jssupportticket::$_colors['color7'];
-$color8 = jssupportticket::$_colors['color8'];
-$color9 = jssupportticket::$_colors['color9'];
-$jssupportticket_css = '';
+$jsst_color1 = jssupportticket::$jsst_colors['color1'];
+$jsst_color2 = jssupportticket::$jsst_colors['color2'];
+$jsst_color3 = jssupportticket::$jsst_colors['color3'];
+$jsst_color4 = jssupportticket::$jsst_colors['color4'];
+$jsst_color5 = jssupportticket::$jsst_colors['color5'];
+$jsst_color6 = jssupportticket::$jsst_colors['color6'];
+$jsst_color7 = jssupportticket::$jsst_colors['color7'];
+$jsst_color8 = jssupportticket::$jsst_colors['color8'];
+$jsst_color9 = jssupportticket::$jsst_colors['color9'];
+$jsst_jssupportticket_css = '';
 
 /*Code for Css*/
-$jssupportticket_css .= '
+$jsst_jssupportticket_css .= '
     /* Article Detail Modern Layout */
 
         div.js-ticket-downloads-wrp {
@@ -38,7 +38,7 @@ $jssupportticket_css .= '
         margin-top: 1.5rem;
     }
     div.js-ticket-knowledgebase-wrapper p{
-        color:' .$color4 .';
+        color:' .$jsst_color4 .';
     }
 
     /* Heading section for the title */
@@ -130,63 +130,63 @@ $jssupportticket_css .= '
     }
 ';
 /*Code For Colors*/
-$jssupportticket_css .= '
+$jsst_jssupportticket_css .= '
     /* Colors for Modern Layout */
 
     div.js-ticket-knowledgebase-wrapper {
         background-color: #fff;
-        border: 1px solid ' . $color5 . ';
+        border: 1px solid ' . $jsst_color5 . ';
     }
 
     div.js-ticket-search-heading-wrp {
-        color:' . $color2 . ';
-        border-color: ' . $color5 . '; /* Separator color */
+        color:' . $jsst_color2 . ';
+        border-color: ' . $jsst_color5 . '; /* Separator color */
     }
 
     div.js-ticket-knowledge-details {
-        color:' . $color4 . ';
+        color:' . $jsst_color4 . ';
     }
 
     div.js-ticket-categories-heading-wrp,
     div.js-ticket-downloads-wrp div.js-ticket-downloads-heading-wrp {
-        background-color:' . $color3 . ';
-        border:1px solid ' . $color5 . ';
-        color:' . $color2 . ';
+        background-color:' . $jsst_color3 . ';
+        border:1px solid ' . $jsst_color5 . ';
+        color:' . $jsst_color2 . ';
     }
 
     div.js-ticket-downloads-content div.js-ticket-download-box {
         background-color: #fff;
-        border:1px solid ' . $color5 . ';
+        border:1px solid ' . $jsst_color5 . ';
     }
     
     div.js-ticket-downloads-content div.js-ticket-download-box:hover {
         background-color: #fff;
-        border-color: ' . $color1 . ';
+        border-color: ' . $jsst_color1 . ';
     }
 
     div.js-ticket-downloads-content div.js-ticket-download-box div.js-ticket-download-left a.js-ticket-download-title span.js-ticket-download-name {
-        color: ' . $color4 . ';
+        color: ' . $jsst_color4 . ';
     }
 
     div.js-ticket-downloads-content div.js-ticket-download-box div.js-ticket-download-left a.js-ticket-download-title:hover span.js-ticket-download-name {
-        color: ' . $color2 . ';
+        color: ' . $jsst_color2 . ';
     }
 
     div.js-ticket-download-btn a.js-ticket-download-btn-style {
-        color: ' . $color7 . ';
-        background-color: ' . $color1 . ';
-        border:1px solid ' . $color1 . ';
+        color: ' . $jsst_color7 . ';
+        background-color: ' . $jsst_color1 . ';
+        border:1px solid ' . $jsst_color1 . ';
     }
 
     div.js-ticket-download-btn a.js-ticket-download-btn-style:hover {
-        color: ' . $color7 . ';
-        background-color: ' . $color2 . ';
-        border-color:' . $color2 . ';
+        color: ' . $jsst_color7 . ';
+        background-color: ' . $jsst_color2 . ';
+        border-color:' . $jsst_color2 . ';
     }
 ';
 
 
-wp_add_inline_style('jssupportticket-main-css', $jssupportticket_css);
+wp_add_inline_style('jssupportticket-main-css', $jsst_jssupportticket_css);
 
 
 ?>

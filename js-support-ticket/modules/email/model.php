@@ -5,12 +5,12 @@ if (!defined('ABSPATH'))
 
 class JSSTemailModel {
     /*
-      $mailfor
+      $jsst_mailfor
       For which purpose you want to send mail
       1 => Ticket
 
-      $action
-      For which action of $mailfor you want to send the mail
+      $jsst_action
+      For which action of $jsst_mailfor you want to send the mail
       1 => New Ticket Create
       2 => Close Ticket
       3 => Delete Ticket
@@ -18,40 +18,40 @@ class JSSTemailModel {
       5 => Reply Ticket (Ticket member)
       6 => Lock Ticket
 
-      $id
+      $jsst_id
       id required when recever emailaddress is stored in record
      */
 
-    function sendMail($mailfor, $action, $id = null, $tablename = null) {
-        if (!is_numeric($mailfor))
+    function sendMail($jsst_mailfor, $jsst_action, $jsst_id = null, $jsst_tablename = null) {
+        if (!is_numeric($jsst_mailfor))
             return false;
-        if (!is_numeric($action))
+        if (!is_numeric($jsst_action))
             return false;
-        if ($id != null)
-            if (!is_numeric($id))
+        if ($jsst_id != null)
+            if (!is_numeric($jsst_id))
                 return false;
-        $pageid = jssupportticket::getPageid();
-		$adminEmailid = jssupportticket::$_config['default_admin_email'];
-		$adminEmail = $this->getEmailById($adminEmailid);
+        $jsst_pageid = jssupportticket::getPageid();
+		$jsst_adminEmailid = jssupportticket::$_config['default_admin_email'];
+		$jsst_adminEmail = $this->getEmailById($jsst_adminEmailid);
 		
-        switch ($mailfor) {
+        switch ($jsst_mailfor) {
             case 1: // Mail For Tickets
-                switch ($action) {
+                switch ($jsst_action) {
                     case 1: // New Ticket Created
-                        $ticketRecord = $this->getRecordByTablenameAndId('js_ticket_tickets', $id);
-                        if (isset($ticketRecord->name) && isset($ticketRecord->subject) && isset($ticketRecord->ticketid) && isset($ticketRecord->email)) {
-                        $Username = $ticketRecord->name;
-                        $Subject = $ticketRecord->subject;
-                        $TrackingId = $ticketRecord->ticketid;
-                        $Email = $ticketRecord->email;
-                        $DepName = $ticketRecord->departmentname;
+                        $jsst_ticketRecord = $this->getRecordByTablenameAndId('js_ticket_tickets', $jsst_id);
+                        if (isset($jsst_ticketRecord->name) && isset($jsst_ticketRecord->subject) && isset($jsst_ticketRecord->ticketid) && isset($jsst_ticketRecord->email)) {
+                        $Username = $jsst_ticketRecord->name;
+                        $Subject = $jsst_ticketRecord->subject;
+                        $TrackingId = $jsst_ticketRecord->ticketid;
+                        $Email = $jsst_ticketRecord->email;
+                        $DepName = $jsst_ticketRecord->departmentname;
                         if(in_array('helptopic', jssupportticket::$_active_addons)){
-                            $HelptopicName = $ticketRecord->topic;
+                            $HelptopicName = $jsst_ticketRecord->topic;
                         }else{
                             $HelptopicName = '';
                         }
-                        $Message = $ticketRecord->message;
-                        $matcharray = array(
+                        $Message = $jsst_ticketRecord->message;
+                        $jsst_matcharray = array(
                             '{SITETITLE}' => jssupportticket::$_config['title'],
                             '{USERNAME}' => $Username,
                             '{SUBJECT}' => $Subject,
@@ -59,135 +59,135 @@ class JSSTemailModel {
                             '{HELP_TOPIC}' => $HelptopicName,
                             '{EMAIL}' => $Email,
                             '{MESSAGE}' => $Message,
-                            '{DEPARTMENT}' => $ticketRecord->departmentname,
-                            '{PRIORITY}' => $ticketRecord->priority,
+                            '{DEPARTMENT}' => $jsst_ticketRecord->departmentname,
+                            '{PRIORITY}' => $jsst_ticketRecord->priority,
                             '{CURRENT_YEAR}' => gmdate('Y')
                         );
 
                         // code for handling custom fields start
-                        $fvalue = '';
-                        if(!empty($ticketRecord->params)){
-                            $data = json_decode($ticketRecord->params,true);
+                        $jsst_fvalue = '';
+                        if(!empty($jsst_ticketRecord->params)){
+                            $jsst_data = json_decode($jsst_ticketRecord->params,true);
                         }
-                        $fields = JSSTincluder::getJSModel('fieldordering')->getUserfieldsfor(1);
-                        if( isset($data) && is_array($data)){
-                            foreach ($fields as $field) {
-                                if($field->userfieldtype != 'file'){
-                                    $fvalue = '';
-                                    if(array_key_exists($field->field, $data)){
-                                        $fvalue = $data[$field->field];
+                        $jsst_fields = JSSTincluder::getJSModel('fieldordering')->getUserfieldsfor(1);
+                        if( isset($jsst_data) && is_array($jsst_data)){
+                            foreach ($jsst_fields as $jsst_field) {
+                                if($jsst_field->userfieldtype != 'file'){
+                                    $jsst_fvalue = '';
+                                    if(array_key_exists($jsst_field->field, $jsst_data)){
+                                        $jsst_fvalue = $jsst_data[$jsst_field->field];
                                     }
-                                    $matcharray['{'.$field->field.'}'] = $fvalue;// match array new index for custom field
+                                    $jsst_matcharray['{'.$jsst_field->field.'}'] = $jsst_fvalue;// match array new index for custom field
                                 }
                             }
                         }
                         // code for handling custom fields end
-                        $object = $this->getSenderEmailAndName($id);
-                        $senderEmail = $object->email;
-                        $senderName = $object->name;
+                        $jsst_object = $this->getSenderEmailAndName($jsst_id);
+                        $jsst_senderEmail = $jsst_object->email;
+                        $jsst_senderName = $jsst_object->name;
 
                         // New ticket mail to admin
                         if(jssupportticket::$_config['new_ticket_mail_to_admin'] == 1) {
-                            $adminEmailid = jssupportticket::$_config['default_admin_email'];
-                            $adminEmail = $this->getEmailById($adminEmailid);
-                            $template = apply_filters( 'jsst_get_email_template_by_user_defined_language','','ticket-new-admin' , $adminEmail ,'', $ticketRecord->multiformid);
-                            if($template == '' && empty($template)){
-                                $template = $this->getTemplateForEmail('ticket-new-admin', $ticketRecord->multiformid);
+                            $jsst_adminEmailid = jssupportticket::$_config['default_admin_email'];
+                            $jsst_adminEmail = $this->getEmailById($jsst_adminEmailid);
+                            $jsst_template = apply_filters( 'jsst_get_email_template_by_user_defined_language','','ticket-new-admin' , $jsst_adminEmail ,'', $jsst_ticketRecord->multiformid);
+                            if($jsst_template == '' && empty($jsst_template)){
+                                $jsst_template = $this->getTemplateForEmail('ticket-new-admin', $jsst_ticketRecord->multiformid);
                             }
-                            $msgSubject = $template->subject;
-                            $msgBody = $template->body;
-                            $link = admin_url("admin.php?page=ticket&jstlay=ticketdetail&jssupportticketid=" . esc_attr($id));
-                            $matcharray['{TICKETURL}'] = $link;
-                            $msgBody .= '<input type="hidden" name="ticketid:' . esc_attr($TrackingId) . '###admin####" />';
-                            $msgBody .= '<span style="display:none;" ticketid:' . esc_attr($TrackingId) . '###admin#### ></span>';
-                            $attachments = '';
-                            $this->replaceMatches($msgSubject, $matcharray);
-                            $this->replaceMatches($msgBody, $matcharray);
-                            $this->sendEmail($adminEmail, $msgSubject, $msgBody, $senderEmail, $senderName, $attachments, $action, 'ticket-new-admin');
+                            $jsst_msgSubject = $jsst_template->subject;
+                            $jsst_msgBody = $jsst_template->body;
+                            $jsst_link = admin_url("admin.php?page=ticket&jstlay=ticketdetail&jssupportticketid=" . esc_attr($jsst_id));
+                            $jsst_matcharray['{TICKETURL}'] = $jsst_link;
+                            $jsst_msgBody .= '<input type="hidden" name="ticketid:' . esc_attr($TrackingId) . '###admin####" />';
+                            $jsst_msgBody .= '<span style="display:none;" ticketid:' . esc_attr($TrackingId) . '###admin#### ></span>';
+                            $jsst_attachments = '';
+                            $this->replaceMatches($jsst_msgSubject, $jsst_matcharray);
+                            $this->replaceMatches($jsst_msgBody, $jsst_matcharray);
+                            $this->sendEmail($jsst_adminEmail, $jsst_msgSubject, $jsst_msgBody, $jsst_senderEmail, $jsst_senderName, $jsst_attachments, $jsst_action, 'ticket-new-admin');
                         }
                         //Check to send email to department
-                        $query = "SELECT dept.sendmail, email.email AS emailaddress
+                        $jsst_query = "SELECT dept.sendmail, email.email AS emailaddress
                                     FROM `".jssupportticket::$_db->prefix."js_ticket_tickets` AS ticket
                                     LEFT JOIN `".jssupportticket::$_db->prefix."js_ticket_departments` AS dept ON dept.id = ticket.departmentid
                                     LEFT JOIN `".jssupportticket::$_db->prefix."js_ticket_email` AS email ON email.id = dept.emailid
-                                    WHERE ticket.id = ".esc_sql($id);
-                        $dept_result = jssupportticket::$_db->get_row($query);
-                        if($dept_result){
-                            if(isset($dept_result->sendmail) && $dept_result->sendmail == 1){
-                                $deptemail = $dept_result->emailaddress;
-                                $template = apply_filters( 'jsst_get_email_template_by_user_defined_language','','ticket-new-admin' , $deptemail ,'', $ticketRecord->multiformid);
-                                if($template == '' && empty($template)){
-                                    $template = $this->getTemplateForEmail('ticket-new-admin', $ticketRecord->multiformid);
+                                    WHERE ticket.id = ".esc_sql($jsst_id);
+                        $jsst_dept_result = jssupportticket::$_db->get_row($jsst_query);
+                        if($jsst_dept_result){
+                            if(isset($jsst_dept_result->sendmail) && $jsst_dept_result->sendmail == 1){
+                                $jsst_deptemail = $jsst_dept_result->emailaddress;
+                                $jsst_template = apply_filters( 'jsst_get_email_template_by_user_defined_language','','ticket-new-admin' , $jsst_deptemail ,'', $jsst_ticketRecord->multiformid);
+                                if($jsst_template == '' && empty($jsst_template)){
+                                    $jsst_template = $this->getTemplateForEmail('ticket-new-admin', $jsst_ticketRecord->multiformid);
                                 }
 
-                                $msgSubject = $template->subject;
-                                $msgBody = $template->body;
+                                $jsst_msgSubject = $jsst_template->subject;
+                                $jsst_msgBody = $jsst_template->body;
 
-                                $link = admin_url("admin.php?page=ticket&jstlay=ticketdetail&jssupportticketid=" . esc_attr($id));
-                                $matcharray['{TICKETURL}'] = $link;
-                                $msgBody .= '<input type="hidden" name="ticketid:' . esc_attr($TrackingId) . '###admin####" />';
-                                $msgBody .= '<span style="display:none;" ticketid:' . esc_attr($TrackingId) . '###admin#### ></span>';
-                                $attachments = '';
-                                $this->replaceMatches($msgSubject, $matcharray);
-                                $this->replaceMatches($msgBody, $matcharray);
-                                $this->sendEmail($deptemail, $msgSubject, $msgBody, $senderEmail, $senderName, $attachments, $action, 'ticket-new-admin');
+                                $jsst_link = admin_url("admin.php?page=ticket&jstlay=ticketdetail&jssupportticketid=" . esc_attr($jsst_id));
+                                $jsst_matcharray['{TICKETURL}'] = $jsst_link;
+                                $jsst_msgBody .= '<input type="hidden" name="ticketid:' . esc_attr($TrackingId) . '###admin####" />';
+                                $jsst_msgBody .= '<span style="display:none;" ticketid:' . esc_attr($TrackingId) . '###admin#### ></span>';
+                                $jsst_attachments = '';
+                                $this->replaceMatches($jsst_msgSubject, $jsst_matcharray);
+                                $this->replaceMatches($jsst_msgBody, $jsst_matcharray);
+                                $this->sendEmail($jsst_deptemail, $jsst_msgSubject, $jsst_msgBody, $jsst_senderEmail, $jsst_senderName, $jsst_attachments, $jsst_action, 'ticket-new-admin');
                             }
                         }
                         // New ticket mail to User
-                        $template = apply_filters( 'jsst_get_email_template_by_user_defined_language','','ticket-new' , $ticketRecord->email , $ticketRecord->uid, $ticketRecord->multiformid);
-                        if($template == '' && empty($template)){
-                            $template = $this->getTemplateForEmail('ticket-new', $ticketRecord->multiformid);
+                        $jsst_template = apply_filters( 'jsst_get_email_template_by_user_defined_language','','ticket-new' , $jsst_ticketRecord->email , $jsst_ticketRecord->uid, $jsst_ticketRecord->multiformid);
+                        if($jsst_template == '' && empty($jsst_template)){
+                            $jsst_template = $this->getTemplateForEmail('ticket-new', $jsst_ticketRecord->multiformid);
                         }
                         //Parsing template
-                        $msgSubject = $template->subject;
-                        $msgBody = $template->body;
+                        $jsst_msgSubject = $jsst_template->subject;
+                        $jsst_msgBody = $jsst_template->body;
                         //token encrption
-                        $tokenarray['emailaddress']=$Email;
-                        $tokenarray['trackingid']=$TrackingId;
-                        $tokenarray['sitelink']=JSSTincluder::getJSModel('jssupportticket')->getEncriptedSiteLink();
-                        $token = wp_json_encode($tokenarray);
+                        $jsst_tokenarray['emailaddress']=$Email;
+                        $jsst_tokenarray['trackingid']=$TrackingId;
+                        $jsst_tokenarray['sitelink']=JSSTincluder::getJSModel('jssupportticket')->getEncriptedSiteLink();
+                        $jsst_token = wp_json_encode($jsst_tokenarray);
                         include_once JSST_PLUGIN_PATH . 'includes/encoder.php';
-                        $encoder = new JSSTEncoder();
-                        $encryptedtext = $encoder->encrypt($token);
+                        $jsst_encoder = new JSSTEncoder();
+                        $jsst_encryptedtext = $jsst_encoder->encrypt($jsst_token);
                         // end token encryotion
-                        $link = esc_url(jssupportticket::makeUrl(array('jstmod'=>'ticket', 'task'=>'showticketstatus','action'=>'jstask','token'=>$encryptedtext,'jsstpageid'=>jssupportticket::getPageid())));
-                        $matcharray['{TICKETURL}'] = $link;
-                        $this->replaceMatches($msgSubject, $matcharray);
-                        $this->replaceMatches($msgBody, $matcharray);
-                        $msgBody .= '<input type="hidden" name="ticketid:' . esc_attr($TrackingId) . '###user####" />';
-                        $msgBody .= '<span style="display:none;" ticketid:' . esc_attr($TrackingId) . '###user#### ></span>';
-                        $attachments = '';
-                        $this->sendEmail($Email, $msgSubject, $msgBody, $senderEmail, $senderName, $attachments, $action);
+                        $jsst_link = esc_url(jssupportticket::makeUrl(array('jstmod'=>'ticket', 'task'=>'showticketstatus','action'=>'jstask','token'=>$jsst_encryptedtext,'jsstpageid'=>jssupportticket::getPageid())));
+                        $jsst_matcharray['{TICKETURL}'] = $jsst_link;
+                        $this->replaceMatches($jsst_msgSubject, $jsst_matcharray);
+                        $this->replaceMatches($jsst_msgBody, $jsst_matcharray);
+                        $jsst_msgBody .= '<input type="hidden" name="ticketid:' . esc_attr($TrackingId) . '###user####" />';
+                        $jsst_msgBody .= '<span style="display:none;" ticketid:' . esc_attr($TrackingId) . '###user#### ></span>';
+                        $jsst_attachments = '';
+                        $this->sendEmail($Email, $jsst_msgSubject, $jsst_msgBody, $jsst_senderEmail, $jsst_senderName, $jsst_attachments, $jsst_action);
 
                         //New ticket mail to staff member
                         if ( in_array('agent',jssupportticket::$_active_addons) && jssupportticket::$_config['new_ticket_mail_to_staff_members'] == 1) {
                             // Get All Staff member of the department of Current Ticket
                             if ( in_array('agentautoassign',jssupportticket::$_active_addons) && isset(jssupportticket::$_config['department_email_on_ticket_create']) && jssupportticket::$_config['department_email_on_ticket_create'] == 2) {
-                                $agentmembers = JSSTincluder::getJSModel('agentautoassign')->getAllStaffMemberByDepId($ticketRecord->departmentid);
+                                $jsst_agentmembers = JSSTincluder::getJSModel('agentautoassign')->getAllStaffMemberByDepId($jsst_ticketRecord->departmentid);
                             }
                             else{
-                                $agentmembers = JSSTincluder::getJSModel('agent')->getAllStaffMemberByDepId($ticketRecord->departmentid);
+                                $jsst_agentmembers = JSSTincluder::getJSModel('agent')->getAllStaffMemberByDepId($jsst_ticketRecord->departmentid);
                             }
-                            if(is_array($agentmembers) && !empty($agentmembers)){
-                                foreach ($agentmembers AS $agent) {
-                                    if($agent->canemail == 1){
-                                        $staffuid = $agent->staffuid;
-                                        $template = apply_filters( 'jsst_get_email_template_by_user_defined_language','','ticket-staff' , $agent->email , $staffuid, $ticketRecord->multiformid);
-                                        if($template == '' && empty($template)){
-                                            $template = $this->getTemplateForEmail('ticket-staff', $ticketRecord->multiformid);
+                            if(is_array($jsst_agentmembers) && !empty($jsst_agentmembers)){
+                                foreach ($jsst_agentmembers AS $jsst_agent) {
+                                    if($jsst_agent->canemail == 1){
+                                        $jsst_staffuid = $jsst_agent->staffuid;
+                                        $jsst_template = apply_filters( 'jsst_get_email_template_by_user_defined_language','','ticket-staff' , $jsst_agent->email , $jsst_staffuid, $jsst_ticketRecord->multiformid);
+                                        if($jsst_template == '' && empty($jsst_template)){
+                                            $jsst_template = $this->getTemplateForEmail('ticket-staff', $jsst_ticketRecord->multiformid);
                                         }
 
-                                        $msgSubject = $template->subject;
-                                        $msgBody = $template->body;
-                                        $link = esc_url(jssupportticket::makeUrl(array('jstmod'=>'ticket', 'jstlay'=>'ticketdetail','jssupportticketid'=>$id,'jsstpageid'=>jssupportticket::getPageid())));
-                                        $matcharray['{TICKETURL}'] = $link;
-                                        $this->replaceMatches($msgSubject, $matcharray);
-                                        $this->replaceMatches($msgBody, $matcharray);
-                                        $msgBody .= '<input type="hidden" name="ticketid:' . esc_attr($TrackingId) . '###" />';
-                                        $msgBody .= '<input type="hidden" name="ticketid:' . esc_attr($TrackingId) . '###staff####" />';
-                                        $msgBody .= '<span style="display:none;" ticketid:' . esc_attr($TrackingId) . '###staff#### ></span>';
-                                        $attachments = '';
-                                        $this->sendEmail($agent->email, $msgSubject, $msgBody, $senderEmail, $senderName, $attachments, $action, 'ticket-staff');
+                                        $jsst_msgSubject = $jsst_template->subject;
+                                        $jsst_msgBody = $jsst_template->body;
+                                        $jsst_link = esc_url(jssupportticket::makeUrl(array('jstmod'=>'ticket', 'jstlay'=>'ticketdetail','jssupportticketid'=>$jsst_id,'jsstpageid'=>jssupportticket::getPageid())));
+                                        $jsst_matcharray['{TICKETURL}'] = $jsst_link;
+                                        $this->replaceMatches($jsst_msgSubject, $jsst_matcharray);
+                                        $this->replaceMatches($jsst_msgBody, $jsst_matcharray);
+                                        $jsst_msgBody .= '<input type="hidden" name="ticketid:' . esc_attr($TrackingId) . '###" />';
+                                        $jsst_msgBody .= '<input type="hidden" name="ticketid:' . esc_attr($TrackingId) . '###staff####" />';
+                                        $jsst_msgBody .= '<span style="display:none;" ticketid:' . esc_attr($TrackingId) . '###staff#### ></span>';
+                                        $jsst_attachments = '';
+                                        $this->sendEmail($jsst_agent->email, $jsst_msgSubject, $jsst_msgBody, $jsst_senderEmail, $jsst_senderName, $jsst_attachments, $jsst_action, 'ticket-staff');
                                     }
                                 }
                             }
@@ -195,20 +195,20 @@ class JSSTemailModel {
                         }
                         break;
                     case 2: // Close Ticket
-                        $ticketRecord = $this->getRecordByTablenameAndId('js_ticket_tickets', $id);
-                        $Username = $ticketRecord->name;
-                        $Subject = $ticketRecord->subject;
-                        $TrackingId = $ticketRecord->ticketid;
-                        $Email = $ticketRecord->email;
-                        $DepName = $ticketRecord->departmentname;
+                        $jsst_ticketRecord = $this->getRecordByTablenameAndId('js_ticket_tickets', $jsst_id);
+                        $Username = $jsst_ticketRecord->name;
+                        $Subject = $jsst_ticketRecord->subject;
+                        $TrackingId = $jsst_ticketRecord->ticketid;
+                        $Email = $jsst_ticketRecord->email;
+                        $DepName = $jsst_ticketRecord->departmentname;
                         if(in_array('helptopic', jssupportticket::$_active_addons)){
-                            $HelptopicName = $ticketRecord->topic;
+                            $HelptopicName = $jsst_ticketRecord->topic;
                         }else{
                             $HelptopicName = '';
                         }
-                        $Message = $ticketRecord->message;
-                        $ticketHistory = $this->getTicketReplyHistory($id);
-                        $matcharray = array(
+                        $Message = $jsst_ticketRecord->message;
+                        $jsst_ticketHistory = $this->getTicketReplyHistory($jsst_id);
+                        $jsst_matcharray = array(
                             '{SITETITLE}' => jssupportticket::$_config['title'],
                             '{USERNAME}' => $Username,
                             '{SUBJECT}' => $Subject,
@@ -216,180 +216,180 @@ class JSSTemailModel {
                             '{HELP_TOPIC}' => $HelptopicName,
                             '{EMAIL}' => $Email,
                             '{MESSAGE}' => $Message,
-                            '{DEPARTMENT}' => $ticketRecord->departmentname,
-                            '{PRIORITY}' => $ticketRecord->priority,
-                            '{TICKET_HISTORY}' => $ticketHistory,
+                            '{DEPARTMENT}' => $jsst_ticketRecord->departmentname,
+                            '{PRIORITY}' => $jsst_ticketRecord->priority,
+                            '{TICKET_HISTORY}' => $jsst_ticketHistory,
                             '{CURRENT_YEAR}' => gmdate('Y')
 
                         );
                         // code for handling custom fields start
-                        $fvalue = '';
-                        if(!empty($ticketRecord->params)){
-                            $data = json_decode($ticketRecord->params,true);
+                        $jsst_fvalue = '';
+                        if(!empty($jsst_ticketRecord->params)){
+                            $jsst_data = json_decode($jsst_ticketRecord->params,true);
                         }
-                        $fields = JSSTincluder::getJSModel('fieldordering')->getUserfieldsfor(1);
-                        if( isset($data) && is_array($data)){
-                            foreach ($fields as $field) {
-                                if($field->userfieldtype != 'file'){
-                                    $fvalue = '';
-                                    if(array_key_exists($field->field, $data)){
-                                        $fvalue = $data[$field->field];
+                        $jsst_fields = JSSTincluder::getJSModel('fieldordering')->getUserfieldsfor(1);
+                        if( isset($jsst_data) && is_array($jsst_data)){
+                            foreach ($jsst_fields as $jsst_field) {
+                                if($jsst_field->userfieldtype != 'file'){
+                                    $jsst_fvalue = '';
+                                    if(array_key_exists($jsst_field->field, $jsst_data)){
+                                        $jsst_fvalue = $jsst_data[$jsst_field->field];
                                     }
-                                    $matcharray['{'.$field->field.'}'] = $fvalue;// match array new index for custom field
+                                    $jsst_matcharray['{'.$jsst_field->field.'}'] = $jsst_fvalue;// match array new index for custom field
                                 }
                             }
                         }
                         // code for handling custom fields end
-                        $object = $this->getSenderEmailAndName($id);
-                        $senderEmail = $object->email;
-                        $senderName = $object->name;
-                        $defaulttemplate = $this->getTemplateForEmail('close-tk', $ticketRecord->multiformid);
+                        $jsst_object = $this->getSenderEmailAndName($jsst_id);
+                        $jsst_senderEmail = $jsst_object->email;
+                        $jsst_senderName = $jsst_object->name;
+                        $jsst_defaulttemplate = $this->getTemplateForEmail('close-tk', $jsst_ticketRecord->multiformid);
                         // Close ticket mail to admin
                         if (jssupportticket::$_config['ticket_close_admin'] == 1) {
-                            $adminEmailid = jssupportticket::$_config['default_admin_email'];
-                            $adminEmail = $this->getEmailById($adminEmailid);
+                            $jsst_adminEmailid = jssupportticket::$_config['default_admin_email'];
+                            $jsst_adminEmail = $this->getEmailById($jsst_adminEmailid);
 
-                            $template = apply_filters( 'jsst_get_email_template_by_user_defined_language','','close-tk' , $adminEmail ,'', $ticketRecord->multiformid);
-                            if($template == '' && empty($template)){
-                                $template = $defaulttemplate;
+                            $jsst_template = apply_filters( 'jsst_get_email_template_by_user_defined_language','','close-tk' , $jsst_adminEmail ,'', $jsst_ticketRecord->multiformid);
+                            if($jsst_template == '' && empty($jsst_template)){
+                                $jsst_template = $jsst_defaulttemplate;
                             }
 
-                            $link = admin_url("admin.php?page=ticket&jstlay=ticketdetail&jssupportticketid=" . esc_attr($id));
-                            $matcharray['{TICKETURL}'] = $link;
-                            $matcharray['{FEEDBACKURL}'] = ' ';
-                            $msgSubject = $template->subject;
-                            $msgBody = $template->body;
-                            $attachments = '';
-                            $this->replaceMatches($msgSubject, $matcharray);
-                            $this->replaceMatches($msgBody, $matcharray);
-                            $this->sendEmail($adminEmail, $msgSubject, $msgBody, $senderEmail, $senderName, $attachments, $action, 'close-tk-admin');
+                            $jsst_link = admin_url("admin.php?page=ticket&jstlay=ticketdetail&jssupportticketid=" . esc_attr($jsst_id));
+                            $jsst_matcharray['{TICKETURL}'] = $jsst_link;
+                            $jsst_matcharray['{FEEDBACKURL}'] = ' ';
+                            $jsst_msgSubject = $jsst_template->subject;
+                            $jsst_msgBody = $jsst_template->body;
+                            $jsst_attachments = '';
+                            $this->replaceMatches($jsst_msgSubject, $jsst_matcharray);
+                            $this->replaceMatches($jsst_msgBody, $jsst_matcharray);
+                            $this->sendEmail($jsst_adminEmail, $jsst_msgSubject, $jsst_msgBody, $jsst_senderEmail, $jsst_senderName, $jsst_attachments, $jsst_action, 'close-tk-admin');
                         }
                         // Close ticket mail to staff member
                         if ( in_array('agent',jssupportticket::$_active_addons) && jssupportticket::$_config['ticket_close_staff'] == 1) {
-                            $agentEmail = $this->getStaffEmailAddressByStaffId($ticketRecord->staffid);
-                            $staffuid = $this->getStaffUidByStaffId($ticketRecord->staffid);
-                            $template = apply_filters( 'jsst_get_email_template_by_user_defined_language','','close-tk' , $agentEmail ,$staffuid, $ticketRecord->multiformid);
-                            if($template == '' && empty($template)){
-                                $template = $defaulttemplate;
+                            $jsst_agentEmail = $this->getStaffEmailAddressByStaffId($jsst_ticketRecord->staffid);
+                            $jsst_staffuid = $this->getStaffUidByStaffId($jsst_ticketRecord->staffid);
+                            $jsst_template = apply_filters( 'jsst_get_email_template_by_user_defined_language','','close-tk' , $jsst_agentEmail ,$jsst_staffuid, $jsst_ticketRecord->multiformid);
+                            if($jsst_template == '' && empty($jsst_template)){
+                                $jsst_template = $jsst_defaulttemplate;
                             }
 
-                            $link = esc_url(jssupportticket::makeUrl(array('jstmod'=>'ticket', 'jstlay'=>'ticketdetail','jssupportticketid'=>$id,'jsstpageid'=>jssupportticket::getPageid())));
-                            $matcharray['{TICKETURL}'] = $link;
-                            $matcharray['{FEEDBACKURL}'] = ' ';
-                            $msgSubject = $template->subject;
-                            $msgBody = $template->body;
-                            $attachments = '';
-                            $this->replaceMatches($msgSubject, $matcharray);
-                            $this->replaceMatches($msgBody, $matcharray);
-                            $this->sendEmail($agentEmail, $msgSubject, $msgBody, $senderEmail, $senderName, $attachments, $action, 'close-tk-staff');
+                            $jsst_link = esc_url(jssupportticket::makeUrl(array('jstmod'=>'ticket', 'jstlay'=>'ticketdetail','jssupportticketid'=>$jsst_id,'jsstpageid'=>jssupportticket::getPageid())));
+                            $jsst_matcharray['{TICKETURL}'] = $jsst_link;
+                            $jsst_matcharray['{FEEDBACKURL}'] = ' ';
+                            $jsst_msgSubject = $jsst_template->subject;
+                            $jsst_msgBody = $jsst_template->body;
+                            $jsst_attachments = '';
+                            $this->replaceMatches($jsst_msgSubject, $jsst_matcharray);
+                            $this->replaceMatches($jsst_msgBody, $jsst_matcharray);
+                            $this->sendEmail($jsst_agentEmail, $jsst_msgSubject, $jsst_msgBody, $jsst_senderEmail, $jsst_senderName, $jsst_attachments, $jsst_action, 'close-tk-staff');
                         }
                         // New ticket mail to User
                         if (jssupportticket::$_config['ticket_close_user'] == 1) {
-                            $link = esc_url(jssupportticket::makeUrl(array('jstmod'=>'ticket', 'jstlay'=>'ticketdetail','jssupportticketid'=>$id,'jsstpageid'=>jssupportticket::getPageid())));
-                            $tokenarray['emailaddress']=$Email;
-                            $tokenarray['trackingid']=$TrackingId;
-                            $token = wp_json_encode($tokenarray);
+                            $jsst_link = esc_url(jssupportticket::makeUrl(array('jstmod'=>'ticket', 'jstlay'=>'ticketdetail','jssupportticketid'=>$jsst_id,'jsstpageid'=>jssupportticket::getPageid())));
+                            $jsst_tokenarray['emailaddress']=$Email;
+                            $jsst_tokenarray['trackingid']=$TrackingId;
+                            $jsst_token = wp_json_encode($jsst_tokenarray);
                             include_once JSST_PLUGIN_PATH . 'includes/encoder.php';
-                            $encoder = new JSSTEncoder();
-                            $encryptedtext = $encoder->encrypt($token);
+                            $jsst_encoder = new JSSTEncoder();
+                            $jsst_encryptedtext = $jsst_encoder->encrypt($jsst_token);
                             if(in_array('feedback', jssupportticket::$_active_addons)){
-                                $flink = "<a href=" . esc_url(jssupportticket::makeUrl(array('jstmod'=>'feedback', 'task'=>'showfeedbackform','action'=>'jstask','token'=>$encryptedtext,'jsstpageid'=>jssupportticket::getPageid()))) . ">". esc_html(__('Click here to give us feedback','js-support-ticket'))." </a>";
+                                $jsst_flink = "<a href=" . esc_url(jssupportticket::makeUrl(array('jstmod'=>'feedback', 'task'=>'showfeedbackform','action'=>'jstask','token'=>$jsst_encryptedtext,'jsstpageid'=>jssupportticket::getPageid()))) . ">". esc_html(__('Click here to give us feedback','js-support-ticket'))." </a>";
                             }else{
-                                $flink = " ";
+                                $jsst_flink = " ";
                             }
 
-                            $template = apply_filters( 'jsst_get_email_template_by_user_defined_language','','close-tk' , $Email ,$ticketRecord->uid, $ticketRecord->multiformid);
-                            if($template == '' && empty($template)){
-                                $template = $defaulttemplate;
+                            $jsst_template = apply_filters( 'jsst_get_email_template_by_user_defined_language','','close-tk' , $Email ,$jsst_ticketRecord->uid, $jsst_ticketRecord->multiformid);
+                            if($jsst_template == '' && empty($jsst_template)){
+                                $jsst_template = $jsst_defaulttemplate;
                             }
 
-                            $matcharray['{TICKETURL}'] = $link;
-                            $matcharray['{FEEDBACKURL}'] = $flink;
-                            $msgSubject = $template->subject;
-                            $msgBody = $template->body;
-                            $attachments = '';
-                            $this->replaceMatches($msgSubject, $matcharray);
-                            $this->replaceMatches($msgBody, $matcharray);
-                            $this->sendEmail($Email, $msgSubject, $msgBody, $senderEmail, $senderName, $attachments, $action);
+                            $jsst_matcharray['{TICKETURL}'] = $jsst_link;
+                            $jsst_matcharray['{FEEDBACKURL}'] = $jsst_flink;
+                            $jsst_msgSubject = $jsst_template->subject;
+                            $jsst_msgBody = $jsst_template->body;
+                            $jsst_attachments = '';
+                            $this->replaceMatches($jsst_msgSubject, $jsst_matcharray);
+                            $this->replaceMatches($jsst_msgBody, $jsst_matcharray);
+                            $this->sendEmail($Email, $jsst_msgSubject, $jsst_msgBody, $jsst_senderEmail, $jsst_senderName, $jsst_attachments, $jsst_action);
                         }
                         break;
                     case 3: // Delete Ticket
-                        $TrackingId = jssupportticket::$_data['ticketid'];
-                        $Email = jssupportticket::$_data['ticketemail'];
-                        $Subject = jssupportticket::$_data['ticketsubject'];
-                        $matcharray = array(
+                        $TrackingId = jssupportticket::$jsst_data['ticketid'];
+                        $Email = jssupportticket::$jsst_data['ticketemail'];
+                        $Subject = jssupportticket::$jsst_data['ticketsubject'];
+                        $jsst_matcharray = array(
                             '{SITETITLE}' => jssupportticket::$_config['title'],
                             '{TRACKINGID}' => $TrackingId,
                             '{SUBJECT}' => $Subject,
                             '{CURRENT_YEAR}' => gmdate('Y')
                         );
-                        $object = $this->getSenderEmailAndName(null);
-                        $senderEmail = $object->email;
-                        $senderName = $object->name;
-                        $defaulttemplate = $this->getTemplateForEmail('delete-tk');
+                        $jsst_object = $this->getSenderEmailAndName(null);
+                        $jsst_senderEmail = $jsst_object->email;
+                        $jsst_senderName = $jsst_object->name;
+                        $jsst_defaulttemplate = $this->getTemplateForEmail('delete-tk');
                         // Delete ticket mail to admin
                         if (jssupportticket::$_config['ticket_delete_admin'] == 1) {
-                            $adminEmailid = jssupportticket::$_config['default_admin_email'];
-                            $adminEmail = $this->getEmailById($adminEmailid);
+                            $jsst_adminEmailid = jssupportticket::$_config['default_admin_email'];
+                            $jsst_adminEmail = $this->getEmailById($jsst_adminEmailid);
 
-                            $template = apply_filters( 'jsst_get_email_template_by_user_defined_language','','delete-tk' , $adminEmail ,'');
-                            if($template == '' && empty($template)){
-                                $template = $defaulttemplate;
+                            $jsst_template = apply_filters( 'jsst_get_email_template_by_user_defined_language','','delete-tk' , $jsst_adminEmail ,'');
+                            if($jsst_template == '' && empty($jsst_template)){
+                                $jsst_template = $jsst_defaulttemplate;
                             }
-                            $msgSubject = $template->subject;
-                            $msgBody = $template->body;
-                            $attachments = '';
-                            $this->replaceMatches($msgSubject, $matcharray);
-                            $this->replaceMatches($msgBody, $matcharray);
-                            $this->sendEmail($adminEmail, $msgSubject, $msgBody, $senderEmail, $senderName, $attachments, $action, 'delete-tk-admin');
+                            $jsst_msgSubject = $jsst_template->subject;
+                            $jsst_msgBody = $jsst_template->body;
+                            $jsst_attachments = '';
+                            $this->replaceMatches($jsst_msgSubject, $jsst_matcharray);
+                            $this->replaceMatches($jsst_msgBody, $jsst_matcharray);
+                            $this->sendEmail($jsst_adminEmail, $jsst_msgSubject, $jsst_msgBody, $jsst_senderEmail, $jsst_senderName, $jsst_attachments, $jsst_action, 'delete-tk-admin');
                         }
                         // Delete ticket mail to staff
                         if ( in_array('agent',jssupportticket::$_active_addons) && jssupportticket::$_config['ticket_delete_staff'] == 1) {
-                            $agent_id = jssupportticket::$_data['staffid'];
-                            $agentEmail = $this->getStaffEmailAddressByStaffId($agent_id);
-                            if( ! empty($agentEmail)){
-                                $staffuid = $this->getStaffUidByStaffId(jssupportticket::$_data['staffid']);
-                                $template = apply_filters( 'jsst_get_email_template_by_user_defined_language','','delete-tk' , $agentEmail ,$staffuid);
-                                if($template == '' && empty($template)){
-                                    $template = $defaulttemplate;
+                            $jsst_agent_id = jssupportticket::$jsst_data['staffid'];
+                            $jsst_agentEmail = $this->getStaffEmailAddressByStaffId($jsst_agent_id);
+                            if( ! empty($jsst_agentEmail)){
+                                $jsst_staffuid = $this->getStaffUidByStaffId(jssupportticket::$jsst_data['staffid']);
+                                $jsst_template = apply_filters( 'jsst_get_email_template_by_user_defined_language','','delete-tk' , $jsst_agentEmail ,$jsst_staffuid);
+                                if($jsst_template == '' && empty($jsst_template)){
+                                    $jsst_template = $jsst_defaulttemplate;
                                 }
-                                $msgSubject = $template->subject;
-                                $msgBody = $template->body;
-                                $attachments = '';
-                                $this->replaceMatches($msgSubject, $matcharray);
-                                $this->replaceMatches($msgBody, $matcharray);
-                                $this->sendEmail($agentEmail, $msgSubject, $msgBody, $senderEmail, $senderName, $attachments, $action, 'delete-tk-staff');
+                                $jsst_msgSubject = $jsst_template->subject;
+                                $jsst_msgBody = $jsst_template->body;
+                                $jsst_attachments = '';
+                                $this->replaceMatches($jsst_msgSubject, $jsst_matcharray);
+                                $this->replaceMatches($jsst_msgBody, $jsst_matcharray);
+                                $this->sendEmail($jsst_agentEmail, $jsst_msgSubject, $jsst_msgBody, $jsst_senderEmail, $jsst_senderName, $jsst_attachments, $jsst_action, 'delete-tk-staff');
                             }
                         }
                         // New ticket mail to User
                         if (jssupportticket::$_config['ticket_delete_user'] == 1) {
-                            $template = apply_filters( 'jsst_get_email_template_by_user_defined_language','','delete-tk' , $Email , '');
-                            if($template == '' && empty($template)){
-                                $template = $defaulttemplate;
+                            $jsst_template = apply_filters( 'jsst_get_email_template_by_user_defined_language','','delete-tk' , $Email , '');
+                            if($jsst_template == '' && empty($jsst_template)){
+                                $jsst_template = $jsst_defaulttemplate;
                             }
-                            $msgSubject = $template->subject;
-                            $msgBody = $template->body;
-                            $attachments = '';
-                            $this->replaceMatches($msgSubject, $matcharray);
-                            $this->replaceMatches($msgBody, $matcharray);
-                            $this->sendEmail($Email, $msgSubject, $msgBody, $senderEmail, $senderName, $attachments, $action);
+                            $jsst_msgSubject = $jsst_template->subject;
+                            $jsst_msgBody = $jsst_template->body;
+                            $jsst_attachments = '';
+                            $this->replaceMatches($jsst_msgSubject, $jsst_matcharray);
+                            $this->replaceMatches($jsst_msgBody, $jsst_matcharray);
+                            $this->sendEmail($Email, $jsst_msgSubject, $jsst_msgBody, $jsst_senderEmail, $jsst_senderName, $jsst_attachments, $jsst_action);
                         }
                         break;
                     case 4: // Reply Ticket (Admin/Staff Member)
-                        $ticketRecord = $this->getRecordByTablenameAndId('js_ticket_tickets', $id);
-                        $Username = $ticketRecord->name;
-                        $Subject = $ticketRecord->subject;
-                        $TrackingId = $ticketRecord->ticketid;
-                        $DepName = $ticketRecord->departmentname;
+                        $jsst_ticketRecord = $this->getRecordByTablenameAndId('js_ticket_tickets', $jsst_id);
+                        $Username = $jsst_ticketRecord->name;
+                        $Subject = $jsst_ticketRecord->subject;
+                        $TrackingId = $jsst_ticketRecord->ticketid;
+                        $DepName = $jsst_ticketRecord->departmentname;
                         if(in_array('helptopic', jssupportticket::$_active_addons)){
-                            $HelptopicName = $ticketRecord->topic;
+                            $HelptopicName = $jsst_ticketRecord->topic;
                         }else{
                             $HelptopicName = '';
                         }
-                        $Email = $ticketRecord->email;
-                        $Message = $this->getLatestReplyByTicketId($id);
-                        $ticketHistory = $this->getTicketReplyHistory($id);
-                        $matcharray = array(
+                        $Email = $jsst_ticketRecord->email;
+                        $Message = $this->getLatestReplyByTicketId($jsst_id);
+                        $jsst_ticketHistory = $this->getTicketReplyHistory($jsst_id);
+                        $jsst_matcharray = array(
                             '{SITETITLE}' => jssupportticket::$_config['title'],
                             '{USERNAME}' => $Username,
                             '{SUBJECT}' => $Subject,
@@ -397,114 +397,114 @@ class JSSTemailModel {
                             '{HELP_TOPIC}' => $HelptopicName,
                             '{EMAIL}' => $Email,
                             '{MESSAGE}' => $Message,
-                            '{DEPARTMENT}' => $ticketRecord->departmentname,
-                            '{PRIORITY}' => $ticketRecord->priority,
-                            '{TICKET_HISTORY}' => $ticketHistory,
+                            '{DEPARTMENT}' => $jsst_ticketRecord->departmentname,
+                            '{PRIORITY}' => $jsst_ticketRecord->priority,
+                            '{TICKET_HISTORY}' => $jsst_ticketHistory,
                             '{CURRENT_YEAR}' => gmdate('Y')
                         );
                         // code for handling custom fields start
-                        $fvalue = '';
-                        if(!empty($ticketRecord->params)){
-                            $data = json_decode($ticketRecord->params,true);
+                        $jsst_fvalue = '';
+                        if(!empty($jsst_ticketRecord->params)){
+                            $jsst_data = json_decode($jsst_ticketRecord->params,true);
                         }
-                        $fields = JSSTincluder::getJSModel('fieldordering')->getUserfieldsfor(1);
-                        if( isset($data) && is_array($data)){
-                            foreach ($fields as $field) {
-                                if($field->userfieldtype != 'file'){
-                                    $fvalue = '';
-                                    if(array_key_exists($field->field, $data)){
-                                        $fvalue = $data[$field->field];
+                        $jsst_fields = JSSTincluder::getJSModel('fieldordering')->getUserfieldsfor(1);
+                        if( isset($jsst_data) && is_array($jsst_data)){
+                            foreach ($jsst_fields as $jsst_field) {
+                                if($jsst_field->userfieldtype != 'file'){
+                                    $jsst_fvalue = '';
+                                    if(array_key_exists($jsst_field->field, $jsst_data)){
+                                        $jsst_fvalue = $jsst_data[$jsst_field->field];
                                     }
-                                    $matcharray['{'.$field->field.'}'] = $fvalue;// match array new index for custom field
+                                    $jsst_matcharray['{'.$jsst_field->field.'}'] = $jsst_fvalue;// match array new index for custom field
                                 }
                             }
                         }
                         // code for handling custom fields end
-                        $object = $this->getSenderEmailAndName($id);
-                        $senderEmail = $object->email;
-                        $senderName = $object->name;
-                        $defaulttemplate = $this->getTemplateForEmail('reply-tk');
+                        $jsst_object = $this->getSenderEmailAndName($jsst_id);
+                        $jsst_senderEmail = $jsst_object->email;
+                        $jsst_senderName = $jsst_object->name;
+                        $jsst_defaulttemplate = $this->getTemplateForEmail('reply-tk');
                         // Reply ticket mail to admin
                         if (jssupportticket::$_config['ticket_response_to_staff_admin'] == 1) {
-                            $adminEmailid = jssupportticket::$_config['default_admin_email'];
-                            $adminEmail = $this->getEmailById($adminEmailid);
-                            $link = admin_url("admin.php?page=ticket&jstlay=ticketdetail&jssupportticketid=" . esc_attr($id));
-                            $matcharray['{TICKETURL}'] = $link;
+                            $jsst_adminEmailid = jssupportticket::$_config['default_admin_email'];
+                            $jsst_adminEmail = $this->getEmailById($jsst_adminEmailid);
+                            $jsst_link = admin_url("admin.php?page=ticket&jstlay=ticketdetail&jssupportticketid=" . esc_attr($jsst_id));
+                            $jsst_matcharray['{TICKETURL}'] = $jsst_link;
 
-                            $template = apply_filters( 'jsst_get_email_template_by_user_defined_language','','reply-tk' , $adminEmail , '', $ticketRecord->multiformid);
-                            if($template == '' && empty($template)){
-                                $template = $defaulttemplate;
+                            $jsst_template = apply_filters( 'jsst_get_email_template_by_user_defined_language','','reply-tk' , $jsst_adminEmail , '', $jsst_ticketRecord->multiformid);
+                            if($jsst_template == '' && empty($jsst_template)){
+                                $jsst_template = $jsst_defaulttemplate;
                             }
 
-                            $msgSubject = $template->subject;
-                            $msgBody = $template->body;
-                            $this->replaceMatches($msgSubject, $matcharray);
-                            $this->replaceMatches($msgBody, $matcharray);
-                            $msgBody .= '<input type="hidden" name="ticketid:' . esc_attr($TrackingId) . '###admin####" />';
-                            $attachments = '';
-                            $this->sendEmail($adminEmail, $msgSubject, $msgBody, $senderEmail, $senderName, $attachments, $action, 'reply-tk-admin');
+                            $jsst_msgSubject = $jsst_template->subject;
+                            $jsst_msgBody = $jsst_template->body;
+                            $this->replaceMatches($jsst_msgSubject, $jsst_matcharray);
+                            $this->replaceMatches($jsst_msgBody, $jsst_matcharray);
+                            $jsst_msgBody .= '<input type="hidden" name="ticketid:' . esc_attr($TrackingId) . '###admin####" />';
+                            $jsst_attachments = '';
+                            $this->sendEmail($jsst_adminEmail, $jsst_msgSubject, $jsst_msgBody, $jsst_senderEmail, $jsst_senderName, $jsst_attachments, $jsst_action, 'reply-tk-admin');
                         }
                         // Reply ticket mail to staff
                         if ( in_array('agent',jssupportticket::$_active_addons) && jssupportticket::$_config['ticket_response_to_staff_staff'] == 1) {
-                            $agentEmail = $this->getStaffEmailAddressByStaffId($ticketRecord->staffid);
-                            $link = esc_url(jssupportticket::makeUrl(array('jstmod'=>'ticket', 'jstlay'=>'ticketdetail','jssupportticketid'=>$id,'jsstpageid'=>jssupportticket::getPageid())));
-                            $staffuid = $this->getStaffUidByStaffId($ticketRecord->staffid);
-                            $template = apply_filters( 'jsst_get_email_template_by_user_defined_language','','reply-tk' , $agentEmail , $staffuid, $ticketRecord->multiformid);
-                            if($template == '' && empty($template)){
-                                $template = $defaulttemplate;
+                            $jsst_agentEmail = $this->getStaffEmailAddressByStaffId($jsst_ticketRecord->staffid);
+                            $jsst_link = esc_url(jssupportticket::makeUrl(array('jstmod'=>'ticket', 'jstlay'=>'ticketdetail','jssupportticketid'=>$jsst_id,'jsstpageid'=>jssupportticket::getPageid())));
+                            $jsst_staffuid = $this->getStaffUidByStaffId($jsst_ticketRecord->staffid);
+                            $jsst_template = apply_filters( 'jsst_get_email_template_by_user_defined_language','','reply-tk' , $jsst_agentEmail , $jsst_staffuid, $jsst_ticketRecord->multiformid);
+                            if($jsst_template == '' && empty($jsst_template)){
+                                $jsst_template = $jsst_defaulttemplate;
                             }
 
-                            $matcharray['{TICKETURL}'] = $link;
-                            $msgSubject = $template->subject;
-                            $msgBody = $template->body;
-                            $this->replaceMatches($msgSubject, $matcharray);
-                            $this->replaceMatches($msgBody, $matcharray);
-                            $msgBody .= '<input type="hidden" name="ticketid:' . esc_attr($TrackingId) . '###staff####" />';
-                            $attachments = '';
-                            $this->sendEmail($agentEmail, $msgSubject, $msgBody, $senderEmail, $senderName, $attachments, $action, 'reply-tk-staff');
+                            $jsst_matcharray['{TICKETURL}'] = $jsst_link;
+                            $jsst_msgSubject = $jsst_template->subject;
+                            $jsst_msgBody = $jsst_template->body;
+                            $this->replaceMatches($jsst_msgSubject, $jsst_matcharray);
+                            $this->replaceMatches($jsst_msgBody, $jsst_matcharray);
+                            $jsst_msgBody .= '<input type="hidden" name="ticketid:' . esc_attr($TrackingId) . '###staff####" />';
+                            $jsst_attachments = '';
+                            $this->sendEmail($jsst_agentEmail, $jsst_msgSubject, $jsst_msgBody, $jsst_senderEmail, $jsst_senderName, $jsst_attachments, $jsst_action, 'reply-tk-staff');
                         }
                         // New ticket mail to User
-                        $template = $this->getTemplateForEmail('responce-tk');
+                        $jsst_template = $this->getTemplateForEmail('responce-tk');
                         if (jssupportticket::$_config['ticket_response_to_staff_user'] == 1) {
                             //token encrption
-                            $tokenarray['emailaddress']=$Email;
-                            $tokenarray['trackingid']=$TrackingId;
-                            $tokenarray['sitelink']=JSSTincluder::getJSModel('jssupportticket')->getEncriptedSiteLink();
-                            $token = wp_json_encode($tokenarray);
+                            $jsst_tokenarray['emailaddress']=$Email;
+                            $jsst_tokenarray['trackingid']=$TrackingId;
+                            $jsst_tokenarray['sitelink']=JSSTincluder::getJSModel('jssupportticket')->getEncriptedSiteLink();
+                            $jsst_token = wp_json_encode($jsst_tokenarray);
                             include_once JSST_PLUGIN_PATH . 'includes/encoder.php';
-                            $encoder = new JSSTEncoder();
-                            $encryptedtext = $encoder->encrypt($token);
+                            $jsst_encoder = new JSSTEncoder();
+                            $jsst_encryptedtext = $jsst_encoder->encrypt($jsst_token);
                             // end token encryotion
-                            $link = esc_url(jssupportticket::makeUrl(array('jstmod'=>'ticket', 'task'=>'showticketstatus','action'=>'jstask','token'=>$encryptedtext,'jsstpageid'=>jssupportticket::getPageid())));
-                            $template = apply_filters( 'jsst_get_email_template_by_user_defined_language','','reply-tk' , $Email , $ticketRecord->uid, $ticketRecord->multiformid);
-                            if($template == '' && empty($template)){
-                                $template = $defaulttemplate;
+                            $jsst_link = esc_url(jssupportticket::makeUrl(array('jstmod'=>'ticket', 'task'=>'showticketstatus','action'=>'jstask','token'=>$jsst_encryptedtext,'jsstpageid'=>jssupportticket::getPageid())));
+                            $jsst_template = apply_filters( 'jsst_get_email_template_by_user_defined_language','','reply-tk' , $Email , $jsst_ticketRecord->uid, $jsst_ticketRecord->multiformid);
+                            if($jsst_template == '' && empty($jsst_template)){
+                                $jsst_template = $jsst_defaulttemplate;
                             }
-                            $matcharray['{TICKETURL}'] = $link;
-                            $msgSubject = $template->subject;
-                            $msgBody = $template->body;
-                            $this->replaceMatches($msgSubject, $matcharray);
-                            $this->replaceMatches($msgBody, $matcharray);
-                            $msgBody .= '<input type="hidden" name="ticketid:' . esc_attr($TrackingId) . '###user####" />';
-                            $attachments = '';
-                            $this->sendEmail($Email, $msgSubject, $msgBody, $senderEmail, $senderName, $attachments, $action);
+                            $jsst_matcharray['{TICKETURL}'] = $jsst_link;
+                            $jsst_msgSubject = $jsst_template->subject;
+                            $jsst_msgBody = $jsst_template->body;
+                            $this->replaceMatches($jsst_msgSubject, $jsst_matcharray);
+                            $this->replaceMatches($jsst_msgBody, $jsst_matcharray);
+                            $jsst_msgBody .= '<input type="hidden" name="ticketid:' . esc_attr($TrackingId) . '###user####" />';
+                            $jsst_attachments = '';
+                            $this->sendEmail($Email, $jsst_msgSubject, $jsst_msgBody, $jsst_senderEmail, $jsst_senderName, $jsst_attachments, $jsst_action);
                         }
                         break;
                     case 5: // Reply Ticket (Ticket Member)
-                        $ticketRecord = $this->getRecordByTablenameAndId('js_ticket_tickets', $id);
-                        $Username = $ticketRecord->name;
-                        $Subject = $ticketRecord->subject;
-                        $TrackingId = $ticketRecord->ticketid;
-                        $DepName = $ticketRecord->departmentname;
+                        $jsst_ticketRecord = $this->getRecordByTablenameAndId('js_ticket_tickets', $jsst_id);
+                        $Username = $jsst_ticketRecord->name;
+                        $Subject = $jsst_ticketRecord->subject;
+                        $TrackingId = $jsst_ticketRecord->ticketid;
+                        $DepName = $jsst_ticketRecord->departmentname;
                         if(in_array('helptopic', jssupportticket::$_active_addons)){
-                            $HelptopicName = $ticketRecord->topic;
+                            $HelptopicName = $jsst_ticketRecord->topic;
                         }else{
                             $HelptopicName = '';
                         }
-                        $Email = $ticketRecord->email;
-                        $Message = $this->getLatestReplyByTicketId($id);
-                        $ticketHistory = $this->getTicketReplyHistory($id);
-                        $matcharray = array(
+                        $Email = $jsst_ticketRecord->email;
+                        $Message = $this->getLatestReplyByTicketId($jsst_id);
+                        $jsst_ticketHistory = $this->getTicketReplyHistory($jsst_id);
+                        $jsst_matcharray = array(
                             '{SITETITLE}' => jssupportticket::$_config['title'],
                             '{USERNAME}' => $Username,
                             '{SUBJECT}' => $Subject,
@@ -512,418 +512,418 @@ class JSSTemailModel {
                             '{HELP_TOPIC}' => $HelptopicName,
                             '{EMAIL}' => $Email,
                             '{MESSAGE}' => $Message,
-                            '{DEPARTMENT}' => $ticketRecord->departmentname,
-                            '{PRIORITY}' => $ticketRecord->priority,
-                            '{TICKET_HISTORY}' => $ticketHistory,
+                            '{DEPARTMENT}' => $jsst_ticketRecord->departmentname,
+                            '{PRIORITY}' => $jsst_ticketRecord->priority,
+                            '{TICKET_HISTORY}' => $jsst_ticketHistory,
                             '{CURRENT_YEAR}' => gmdate('Y')
                         );
                         // code for handling custom fields start
-                        $fvalue = '';
-                        if(!empty($ticketRecord->params)){
-                            $data = json_decode($ticketRecord->params,true);
+                        $jsst_fvalue = '';
+                        if(!empty($jsst_ticketRecord->params)){
+                            $jsst_data = json_decode($jsst_ticketRecord->params,true);
                         }
-                        $fields = JSSTincluder::getJSModel('fieldordering')->getUserfieldsfor(1);
-                        if( isset($data) && is_array($data)){
-                            foreach ($fields as $field) {
-                                if($field->userfieldtype != 'file'){
-                                    $fvalue = '';
-                                    if(array_key_exists($field->field, $data)){
-                                        $fvalue = $data[$field->field];
+                        $jsst_fields = JSSTincluder::getJSModel('fieldordering')->getUserfieldsfor(1);
+                        if( isset($jsst_data) && is_array($jsst_data)){
+                            foreach ($jsst_fields as $jsst_field) {
+                                if($jsst_field->userfieldtype != 'file'){
+                                    $jsst_fvalue = '';
+                                    if(array_key_exists($jsst_field->field, $jsst_data)){
+                                        $jsst_fvalue = $jsst_data[$jsst_field->field];
                                     }
-                                    $matcharray['{'.$field->field.'}'] = $fvalue;// match array new index for custom field
+                                    $jsst_matcharray['{'.$jsst_field->field.'}'] = $jsst_fvalue;// match array new index for custom field
                                 }
                             }
                         }
                         // code for handling custom fields end
-                        $object = $this->getSenderEmailAndName($id);
-                        $senderEmail = $object->email;
-                        $senderName = $object->name;
-                        $defaulttemplate = $this->getTemplateForEmail('reply-tk');
+                        $jsst_object = $this->getSenderEmailAndName($jsst_id);
+                        $jsst_senderEmail = $jsst_object->email;
+                        $jsst_senderName = $jsst_object->name;
+                        $jsst_defaulttemplate = $this->getTemplateForEmail('reply-tk');
                         // New ticket mail to admin
                         if (jssupportticket::$_config['ticket_reply_ticket_user_admin'] == 1) {
-                            $adminEmailid = jssupportticket::$_config['default_admin_email'];
-                            $adminEmail = $this->getEmailById($adminEmailid);
-                            $link = admin_url("admin.php?page=ticket&jstlay=ticketdetail&jssupportticketid=" . esc_attr($id));
-                            $matcharray['{TICKETURL}'] = $link;
+                            $jsst_adminEmailid = jssupportticket::$_config['default_admin_email'];
+                            $jsst_adminEmail = $this->getEmailById($jsst_adminEmailid);
+                            $jsst_link = admin_url("admin.php?page=ticket&jstlay=ticketdetail&jssupportticketid=" . esc_attr($jsst_id));
+                            $jsst_matcharray['{TICKETURL}'] = $jsst_link;
 
-                            $template = apply_filters( 'jsst_get_email_template_by_user_defined_language','','reply-tk' ,$adminEmail ,'', $ticketRecord->multiformid);
-                            if($template == '' && empty($template)){
-                                $template = $defaulttemplate;
+                            $jsst_template = apply_filters( 'jsst_get_email_template_by_user_defined_language','','reply-tk' ,$jsst_adminEmail ,'', $jsst_ticketRecord->multiformid);
+                            if($jsst_template == '' && empty($jsst_template)){
+                                $jsst_template = $jsst_defaulttemplate;
                             }
-                            $msgSubject = $template->subject;
-                            $msgBody = $template->body;
-                            $this->replaceMatches($msgSubject, $matcharray);
-                            $this->replaceMatches($msgBody, $matcharray);
-                            $msgBody .= '<input type="hidden" name="ticketid:' . esc_attr($TrackingId) . '###admin####" />';
-                            $attachments = '';
-                            $this->sendEmail($adminEmail, $msgSubject, $msgBody, $senderEmail, $senderName, $attachments, $action, 'reply-tk-admin');
+                            $jsst_msgSubject = $jsst_template->subject;
+                            $jsst_msgBody = $jsst_template->body;
+                            $this->replaceMatches($jsst_msgSubject, $jsst_matcharray);
+                            $this->replaceMatches($jsst_msgBody, $jsst_matcharray);
+                            $jsst_msgBody .= '<input type="hidden" name="ticketid:' . esc_attr($TrackingId) . '###admin####" />';
+                            $jsst_attachments = '';
+                            $this->sendEmail($jsst_adminEmail, $jsst_msgSubject, $jsst_msgBody, $jsst_senderEmail, $jsst_senderName, $jsst_attachments, $jsst_action, 'reply-tk-admin');
                         }
                         // New ticket mail to staff
                         if ( in_array('agent',jssupportticket::$_active_addons) && jssupportticket::$_config['ticket_reply_ticket_user_staff'] == 1) {
-                            $agentEmail = $this->getStaffEmailAddressByStaffId($ticketRecord->staffid);
-                            $link = esc_url(jssupportticket::makeUrl(array('jstmod'=>'ticket', 'jstlay'=>'ticketdetail','jssupportticketid'=>$id,'jsstpageid'=>jssupportticket::getPageid())));
-                            $matcharray['{TICKETURL}'] = $link;
-                            $staffuid = $this->getStaffUidByStaffId($ticketRecord->staffid);
-                            $template = apply_filters( 'jsst_get_email_template_by_user_defined_language','','reply-tk' ,$adminEmail ,$staffuid, $ticketRecord->multiformid);
-                            if($template == '' && empty($template)){
-                                $template = $defaulttemplate;
+                            $jsst_agentEmail = $this->getStaffEmailAddressByStaffId($jsst_ticketRecord->staffid);
+                            $jsst_link = esc_url(jssupportticket::makeUrl(array('jstmod'=>'ticket', 'jstlay'=>'ticketdetail','jssupportticketid'=>$jsst_id,'jsstpageid'=>jssupportticket::getPageid())));
+                            $jsst_matcharray['{TICKETURL}'] = $jsst_link;
+                            $jsst_staffuid = $this->getStaffUidByStaffId($jsst_ticketRecord->staffid);
+                            $jsst_template = apply_filters( 'jsst_get_email_template_by_user_defined_language','','reply-tk' ,$jsst_adminEmail ,$jsst_staffuid, $jsst_ticketRecord->multiformid);
+                            if($jsst_template == '' && empty($jsst_template)){
+                                $jsst_template = $jsst_defaulttemplate;
                             }
 
-                            $msgSubject = $template->subject;
-                            $msgBody = $template->body;
-                            $this->replaceMatches($msgSubject, $matcharray);
-                            $this->replaceMatches($msgBody, $matcharray);
-                            $msgBody .= '<input type="hidden" name="ticketid:' . esc_attr($TrackingId) . '###staff####" />';
-                            $attachments = '';
-                            $this->sendEmail($agentEmail, $msgSubject, $msgBody, $senderEmail, $senderName, $attachments, $action, 'reply-tk-staff');
+                            $jsst_msgSubject = $jsst_template->subject;
+                            $jsst_msgBody = $jsst_template->body;
+                            $this->replaceMatches($jsst_msgSubject, $jsst_matcharray);
+                            $this->replaceMatches($jsst_msgBody, $jsst_matcharray);
+                            $jsst_msgBody .= '<input type="hidden" name="ticketid:' . esc_attr($TrackingId) . '###staff####" />';
+                            $jsst_attachments = '';
+                            $this->sendEmail($jsst_agentEmail, $jsst_msgSubject, $jsst_msgBody, $jsst_senderEmail, $jsst_senderName, $jsst_attachments, $jsst_action, 'reply-tk-staff');
                         }
                         // New ticket mail to User
                         if (jssupportticket::$_config['ticket_reply_ticket_user_user'] == 1) {
                             //token encrption
-                            $tokenarray['emailaddress']=$Email;
-                            $tokenarray['trackingid']=$TrackingId;
-                            $tokenarray['sitelink']=JSSTincluder::getJSModel('jssupportticket')->getEncriptedSiteLink();
-                            $token = wp_json_encode($tokenarray);
+                            $jsst_tokenarray['emailaddress']=$Email;
+                            $jsst_tokenarray['trackingid']=$TrackingId;
+                            $jsst_tokenarray['sitelink']=JSSTincluder::getJSModel('jssupportticket')->getEncriptedSiteLink();
+                            $jsst_token = wp_json_encode($jsst_tokenarray);
                             include_once JSST_PLUGIN_PATH . 'includes/encoder.php';
-                            $encoder = new JSSTEncoder();
-                            $encryptedtext = $encoder->encrypt($token);
+                            $jsst_encoder = new JSSTEncoder();
+                            $jsst_encryptedtext = $jsst_encoder->encrypt($jsst_token);
                             // end token encryotion
-                            $link = esc_url(jssupportticket::makeUrl(array('jstmod'=>'ticket' ,'task'=>'showticketstatus','action'=>'jstask','token'=>$encryptedtext,'jsstpageid'=>jssupportticket::getPageid())));
-                            $matcharray['{TICKETURL}'] = $link;
-                            $template = apply_filters( 'jsst_get_email_template_by_user_defined_language','','reply-tk' ,$Email ,$ticketRecord->uid, $ticketRecord->multiformid);
-                            if($template == '' && empty($template)){
-                                $template = $defaulttemplate;
+                            $jsst_link = esc_url(jssupportticket::makeUrl(array('jstmod'=>'ticket' ,'task'=>'showticketstatus','action'=>'jstask','token'=>$jsst_encryptedtext,'jsstpageid'=>jssupportticket::getPageid())));
+                            $jsst_matcharray['{TICKETURL}'] = $jsst_link;
+                            $jsst_template = apply_filters( 'jsst_get_email_template_by_user_defined_language','','reply-tk' ,$Email ,$jsst_ticketRecord->uid, $jsst_ticketRecord->multiformid);
+                            if($jsst_template == '' && empty($jsst_template)){
+                                $jsst_template = $jsst_defaulttemplate;
                             }
 
-                            $msgSubject = $template->subject;
-                            $msgBody = $template->body;
-                            $this->replaceMatches($msgSubject, $matcharray);
-                            $this->replaceMatches($msgBody, $matcharray);
-                            $msgBody .= '<input type="hidden" name="ticketid:' . esc_attr($TrackingId) . '###user####" />';
-                            $attachments = '';
-                            $this->sendEmail($Email, $msgSubject, $msgBody, $senderEmail, $senderName, $attachments, $action);
+                            $jsst_msgSubject = $jsst_template->subject;
+                            $jsst_msgBody = $jsst_template->body;
+                            $this->replaceMatches($jsst_msgSubject, $jsst_matcharray);
+                            $this->replaceMatches($jsst_msgBody, $jsst_matcharray);
+                            $jsst_msgBody .= '<input type="hidden" name="ticketid:' . esc_attr($TrackingId) . '###user####" />';
+                            $jsst_attachments = '';
+                            $this->sendEmail($Email, $jsst_msgSubject, $jsst_msgBody, $jsst_senderEmail, $jsst_senderName, $jsst_attachments, $jsst_action);
                         }
                         break;
                     case 6: // Lock Ticket
-                        $ticketRecord = $this->getRecordByTablenameAndId('js_ticket_tickets', $id);
-                        $Username = $ticketRecord->name;
-                        $Subject = $ticketRecord->subject;
-                        $TrackingId = $ticketRecord->ticketid;
-                        $DepName = $ticketRecord->departmentname;
+                        $jsst_ticketRecord = $this->getRecordByTablenameAndId('js_ticket_tickets', $jsst_id);
+                        $Username = $jsst_ticketRecord->name;
+                        $Subject = $jsst_ticketRecord->subject;
+                        $TrackingId = $jsst_ticketRecord->ticketid;
+                        $DepName = $jsst_ticketRecord->departmentname;
                         if(in_array('helptopic', jssupportticket::$_active_addons)){
-                            $HelptopicName = $ticketRecord->topic;
+                            $HelptopicName = $jsst_ticketRecord->topic;
                         }else{
                             $HelptopicName = '';
                         }
-                        $Email = $ticketRecord->email;
-                        $ticketHistory = $this->getTicketReplyHistory($id);
-                        $matcharray = array(
+                        $Email = $jsst_ticketRecord->email;
+                        $jsst_ticketHistory = $this->getTicketReplyHistory($jsst_id);
+                        $jsst_matcharray = array(
                             '{SITETITLE}' => jssupportticket::$_config['title'],
                             '{USERNAME}' => $Username,
                             '{SUBJECT}' => $Subject,
                             '{TRACKINGID}' => $TrackingId,
                             '{HELP_TOPIC}' => $HelptopicName,
                             '{EMAIL}' => $Email,
-                            '{DEPARTMENT}' => $ticketRecord->departmentname,
-                            '{PRIORITY}' => $ticketRecord->priority,
-                            '{TICKET_HISTORY}' => $ticketHistory,
+                            '{DEPARTMENT}' => $jsst_ticketRecord->departmentname,
+                            '{PRIORITY}' => $jsst_ticketRecord->priority,
+                            '{TICKET_HISTORY}' => $jsst_ticketHistory,
                             '{CURRENT_YEAR}' => gmdate('Y')
                         );
                         // code for handling custom fields start
-                        $fvalue = '';
-                        if(!empty($ticketRecord->params)){
-                            $data = json_decode($ticketRecord->params,true);
+                        $jsst_fvalue = '';
+                        if(!empty($jsst_ticketRecord->params)){
+                            $jsst_data = json_decode($jsst_ticketRecord->params,true);
                         }
-                        $fields = JSSTincluder::getJSModel('fieldordering')->getUserfieldsfor(1);
-                        if( isset($data) && is_array($data)){
-                            foreach ($fields as $field) {
-                                if($field->userfieldtype != 'file'){
-                                    $fvalue = '';
-                                    if(array_key_exists($field->field, $data)){
-                                        $fvalue = $data[$field->field];
+                        $jsst_fields = JSSTincluder::getJSModel('fieldordering')->getUserfieldsfor(1);
+                        if( isset($jsst_data) && is_array($jsst_data)){
+                            foreach ($jsst_fields as $jsst_field) {
+                                if($jsst_field->userfieldtype != 'file'){
+                                    $jsst_fvalue = '';
+                                    if(array_key_exists($jsst_field->field, $jsst_data)){
+                                        $jsst_fvalue = $jsst_data[$jsst_field->field];
                                     }
-                                    $matcharray['{'.$field->field.'}'] = $fvalue;// match array new index for custom field
+                                    $jsst_matcharray['{'.$jsst_field->field.'}'] = $jsst_fvalue;// match array new index for custom field
                                 }
                             }
                         }
                         // code for handling custom fields end
-                        $object = $this->getSenderEmailAndName($id);
-                        $senderEmail = $object->email;
-                        $senderName = $object->name;
-                        $defaulttemplate = $this->getTemplateForEmail('lock-tk', $ticketRecord->multiformid);
+                        $jsst_object = $this->getSenderEmailAndName($jsst_id);
+                        $jsst_senderEmail = $jsst_object->email;
+                        $jsst_senderName = $jsst_object->name;
+                        $jsst_defaulttemplate = $this->getTemplateForEmail('lock-tk', $jsst_ticketRecord->multiformid);
                         // New ticket mail to admin
                         if (jssupportticket::$_config['ticket_lock_admin'] == 1) {
-                            $adminEmailid = jssupportticket::$_config['default_admin_email'];
-                            $adminEmail = $this->getEmailById($adminEmailid);
-                            $link = admin_url("admin.php?page=ticket&jstlay=ticketdetail&jssupportticketid=" . esc_attr($id));
-                            $matcharray['{TICKETURL}'] = $link;
-                            $template = apply_filters( 'jsst_get_email_template_by_user_defined_language','','lock-tk' ,$adminEmail ,'', $ticketRecord->multiformid);
-                            if($template == '' && empty($template)){
-                                $template = $defaulttemplate;
+                            $jsst_adminEmailid = jssupportticket::$_config['default_admin_email'];
+                            $jsst_adminEmail = $this->getEmailById($jsst_adminEmailid);
+                            $jsst_link = admin_url("admin.php?page=ticket&jstlay=ticketdetail&jssupportticketid=" . esc_attr($jsst_id));
+                            $jsst_matcharray['{TICKETURL}'] = $jsst_link;
+                            $jsst_template = apply_filters( 'jsst_get_email_template_by_user_defined_language','','lock-tk' ,$jsst_adminEmail ,'', $jsst_ticketRecord->multiformid);
+                            if($jsst_template == '' && empty($jsst_template)){
+                                $jsst_template = $jsst_defaulttemplate;
                             }
-                            $msgSubject = $template->subject;
-                            $msgBody = $template->body;
-                            $attachments = '';
+                            $jsst_msgSubject = $jsst_template->subject;
+                            $jsst_msgBody = $jsst_template->body;
+                            $jsst_attachments = '';
 
-                            $this->replaceMatches($msgSubject, $matcharray);
-                            $this->replaceMatches($msgBody, $matcharray);
-                            $this->sendEmail($adminEmail, $msgSubject, $msgBody, $senderEmail, $senderName, $attachments, $action, 'lock-tk-admin');
+                            $this->replaceMatches($jsst_msgSubject, $jsst_matcharray);
+                            $this->replaceMatches($jsst_msgBody, $jsst_matcharray);
+                            $this->sendEmail($jsst_adminEmail, $jsst_msgSubject, $jsst_msgBody, $jsst_senderEmail, $jsst_senderName, $jsst_attachments, $jsst_action, 'lock-tk-admin');
                         }
                         // New ticket mail to staff
                         if ( in_array('agent',jssupportticket::$_active_addons) && jssupportticket::$_config['ticket_lock_staff'] == 1) {
-                            $agentEmail = $this->getStaffEmailAddressByStaffId($ticketRecord->staffid);
-                            $link = esc_url(jssupportticket::makeUrl(array('jstmod'=>'ticket', 'jstlay'=>'ticketdetail','jssupportticketid'=>$id,'jsstpageid'=>jssupportticket::getPageid())));
+                            $jsst_agentEmail = $this->getStaffEmailAddressByStaffId($jsst_ticketRecord->staffid);
+                            $jsst_link = esc_url(jssupportticket::makeUrl(array('jstmod'=>'ticket', 'jstlay'=>'ticketdetail','jssupportticketid'=>$jsst_id,'jsstpageid'=>jssupportticket::getPageid())));
 
-                            $matcharray['{TICKETURL}'] = $link;
-                            $staffuid = $this->getStaffUidByStaffId($ticketRecord->staffid);
-                            $template = apply_filters( 'jsst_get_email_template_by_user_defined_language','','lock-tk' ,$agentEmail ,$staffuid, $ticketRecord->multiformid);
-                            if($template == '' && empty($template)){
-                                $template = $defaulttemplate;
+                            $jsst_matcharray['{TICKETURL}'] = $jsst_link;
+                            $jsst_staffuid = $this->getStaffUidByStaffId($jsst_ticketRecord->staffid);
+                            $jsst_template = apply_filters( 'jsst_get_email_template_by_user_defined_language','','lock-tk' ,$jsst_agentEmail ,$jsst_staffuid, $jsst_ticketRecord->multiformid);
+                            if($jsst_template == '' && empty($jsst_template)){
+                                $jsst_template = $jsst_defaulttemplate;
                             }
-                            $msgSubject = $template->subject;
-                            $msgBody = $template->body;
-                            $attachments = '';
+                            $jsst_msgSubject = $jsst_template->subject;
+                            $jsst_msgBody = $jsst_template->body;
+                            $jsst_attachments = '';
 
-                            $this->replaceMatches($msgSubject, $matcharray);
-                            $this->replaceMatches($msgBody, $matcharray);
-                            $this->sendEmail($agentEmail, $msgSubject, $msgBody, $senderEmail, $senderName, $attachments, $action, 'lock-tk-staff');
+                            $this->replaceMatches($jsst_msgSubject, $jsst_matcharray);
+                            $this->replaceMatches($jsst_msgBody, $jsst_matcharray);
+                            $this->sendEmail($jsst_agentEmail, $jsst_msgSubject, $jsst_msgBody, $jsst_senderEmail, $jsst_senderName, $jsst_attachments, $jsst_action, 'lock-tk-staff');
                         }
                         // New ticket mail to User
                         if (jssupportticket::$_config['ticket_lock_user'] == 1) {
-                            $link = esc_url(jssupportticket::makeUrl(array('jstmod'=>'ticket', 'jstlay'=>'ticketdetail','jssupportticketid'=>$id,'jsstpageid'=>jssupportticket::getPageid())));
+                            $jsst_link = esc_url(jssupportticket::makeUrl(array('jstmod'=>'ticket', 'jstlay'=>'ticketdetail','jssupportticketid'=>$jsst_id,'jsstpageid'=>jssupportticket::getPageid())));
 
-                            $matcharray['{TICKETURL}'] = $link;
-                            $template = apply_filters( 'jsst_get_email_template_by_user_defined_language','','lock-tk' ,$Email ,$ticketRecord->uid, $ticketRecord->multiformid);
-                            if($template == '' && empty($template)){
-                                $template = $defaulttemplate;
+                            $jsst_matcharray['{TICKETURL}'] = $jsst_link;
+                            $jsst_template = apply_filters( 'jsst_get_email_template_by_user_defined_language','','lock-tk' ,$Email ,$jsst_ticketRecord->uid, $jsst_ticketRecord->multiformid);
+                            if($jsst_template == '' && empty($jsst_template)){
+                                $jsst_template = $jsst_defaulttemplate;
                             }
-                            $msgSubject = $template->subject;
-                            $msgBody = $template->body;
-                            $attachments = '';
-                            $this->replaceMatches($msgSubject, $matcharray);
-                            $this->replaceMatches($msgBody, $matcharray);
-                            $this->sendEmail($Email, $msgSubject, $msgBody, $senderEmail, $senderName, $attachments, $action);
+                            $jsst_msgSubject = $jsst_template->subject;
+                            $jsst_msgBody = $jsst_template->body;
+                            $jsst_attachments = '';
+                            $this->replaceMatches($jsst_msgSubject, $jsst_matcharray);
+                            $this->replaceMatches($jsst_msgBody, $jsst_matcharray);
+                            $this->sendEmail($Email, $jsst_msgSubject, $jsst_msgBody, $jsst_senderEmail, $jsst_senderName, $jsst_attachments, $jsst_action);
                         }
                         break;
                     case 7: // Unlock Ticket
-                        $ticketRecord = $this->getRecordByTablenameAndId('js_ticket_tickets', $id);
-                        $Username = $ticketRecord->name;
-                        $Subject = $ticketRecord->subject;
-                        $TrackingId = $ticketRecord->ticketid;
-                        $DepName = $ticketRecord->departmentname;
+                        $jsst_ticketRecord = $this->getRecordByTablenameAndId('js_ticket_tickets', $jsst_id);
+                        $Username = $jsst_ticketRecord->name;
+                        $Subject = $jsst_ticketRecord->subject;
+                        $TrackingId = $jsst_ticketRecord->ticketid;
+                        $DepName = $jsst_ticketRecord->departmentname;
                         if(in_array('helptopic', jssupportticket::$_active_addons)){
-                            $HelptopicName = $ticketRecord->topic;
+                            $HelptopicName = $jsst_ticketRecord->topic;
                         }else{
                             $HelptopicName = '';
                         }
-                        $Email = $ticketRecord->email;
-                        $ticketHistory = $this->getTicketReplyHistory($id);
-                        $matcharray = array(
+                        $Email = $jsst_ticketRecord->email;
+                        $jsst_ticketHistory = $this->getTicketReplyHistory($jsst_id);
+                        $jsst_matcharray = array(
                             '{SITETITLE}' => jssupportticket::$_config['title'],
                             '{USERNAME}' => $Username,
                             '{SUBJECT}' => $Subject,
                             '{TRACKINGID}' => $TrackingId,
                             '{HELP_TOPIC}' => $HelptopicName,
                             '{EMAIL}' => $Email,
-                            '{DEPARTMENT}' => $ticketRecord->departmentname,
-                            '{PRIORITY}' => $ticketRecord->priority,
-                            '{TICKET_HISTORY}' => $ticketHistory,
+                            '{DEPARTMENT}' => $jsst_ticketRecord->departmentname,
+                            '{PRIORITY}' => $jsst_ticketRecord->priority,
+                            '{TICKET_HISTORY}' => $jsst_ticketHistory,
                             '{CURRENT_YEAR}' => gmdate('Y')
                         );
                         // code for handling custom fields start
-                        $fvalue = '';
-                        if(!empty($ticketRecord->params)){
-                            $data = json_decode($ticketRecord->params,true);
+                        $jsst_fvalue = '';
+                        if(!empty($jsst_ticketRecord->params)){
+                            $jsst_data = json_decode($jsst_ticketRecord->params,true);
                         }
-                        $fields = JSSTincluder::getJSModel('fieldordering')->getUserfieldsfor(1);
-                        if( isset($data) && is_array($data)){
-                            foreach ($fields as $field) {
-                                if($field->userfieldtype != 'file'){
-                                    $fvalue = '';
-                                    if(array_key_exists($field->field, $data)){
-                                        $fvalue = $data[$field->field];
+                        $jsst_fields = JSSTincluder::getJSModel('fieldordering')->getUserfieldsfor(1);
+                        if( isset($jsst_data) && is_array($jsst_data)){
+                            foreach ($jsst_fields as $jsst_field) {
+                                if($jsst_field->userfieldtype != 'file'){
+                                    $jsst_fvalue = '';
+                                    if(array_key_exists($jsst_field->field, $jsst_data)){
+                                        $jsst_fvalue = $jsst_data[$jsst_field->field];
                                     }
-                                    $matcharray['{'.$field->field.'}'] = $fvalue;// match array new index for custom field
+                                    $jsst_matcharray['{'.$jsst_field->field.'}'] = $jsst_fvalue;// match array new index for custom field
                                 }
                             }
                         }
                         // code for handling custom fields end
-                        $object = $this->getSenderEmailAndName($id);
-                        $senderEmail = $object->email;
-                        $senderName = $object->name;
-                        $defaulttemplate = $this->getTemplateForEmail('unlock-tk', $ticketRecord->multiformid);
+                        $jsst_object = $this->getSenderEmailAndName($jsst_id);
+                        $jsst_senderEmail = $jsst_object->email;
+                        $jsst_senderName = $jsst_object->name;
+                        $jsst_defaulttemplate = $this->getTemplateForEmail('unlock-tk', $jsst_ticketRecord->multiformid);
                         // New ticket mail to admin
                         if (jssupportticket::$_config['ticket_unlock_admin'] == 1) {
-                            $adminEmailid = jssupportticket::$_config['default_admin_email'];
-                            $adminEmail = $this->getEmailById($adminEmailid);
-                            $link = admin_url("admin.php?page=ticket&jstlay=ticketdetail&jssupportticketid=" . esc_attr($id));
+                            $jsst_adminEmailid = jssupportticket::$_config['default_admin_email'];
+                            $jsst_adminEmail = $this->getEmailById($jsst_adminEmailid);
+                            $jsst_link = admin_url("admin.php?page=ticket&jstlay=ticketdetail&jssupportticketid=" . esc_attr($jsst_id));
 
-                            $matcharray['{TICKETURL}'] = $link;
-                            $template = apply_filters( 'jsst_get_email_template_by_user_defined_language','','unlock-tk' ,$adminEmail ,'', $ticketRecord->multiformid);
-                            if($template == '' && empty($template)){
-                            $template = $defaulttemplate;
+                            $jsst_matcharray['{TICKETURL}'] = $jsst_link;
+                            $jsst_template = apply_filters( 'jsst_get_email_template_by_user_defined_language','','unlock-tk' ,$jsst_adminEmail ,'', $jsst_ticketRecord->multiformid);
+                            if($jsst_template == '' && empty($jsst_template)){
+                            $jsst_template = $jsst_defaulttemplate;
                             }
-                            $msgSubject = $template->subject;
-                            $msgBody = $template->body;
-                            $attachments = '';
+                            $jsst_msgSubject = $jsst_template->subject;
+                            $jsst_msgBody = $jsst_template->body;
+                            $jsst_attachments = '';
 
-                            $this->replaceMatches($msgSubject, $matcharray);
-                            $this->replaceMatches($msgBody, $matcharray);
-                            $this->sendEmail($adminEmail, $msgSubject, $msgBody, $senderEmail, $senderName, $attachments, $action, 'unlock-tk-admin');
+                            $this->replaceMatches($jsst_msgSubject, $jsst_matcharray);
+                            $this->replaceMatches($jsst_msgBody, $jsst_matcharray);
+                            $this->sendEmail($jsst_adminEmail, $jsst_msgSubject, $jsst_msgBody, $jsst_senderEmail, $jsst_senderName, $jsst_attachments, $jsst_action, 'unlock-tk-admin');
                         }
                         // New ticket mail to staff
                         if ( in_array('agent',jssupportticket::$_active_addons) && jssupportticket::$_config['ticket_unlock_staff'] == 1) {
-                            $agentEmail = $this->getStaffEmailAddressByStaffId($ticketRecord->staffid);
-                            $link = esc_url(jssupportticket::makeUrl(array('jstmod'=>'ticket', 'jstlay'=>'ticketdetail','jssupportticketid'=>$id,'jsstpageid'=>jssupportticket::getPageid())));
+                            $jsst_agentEmail = $this->getStaffEmailAddressByStaffId($jsst_ticketRecord->staffid);
+                            $jsst_link = esc_url(jssupportticket::makeUrl(array('jstmod'=>'ticket', 'jstlay'=>'ticketdetail','jssupportticketid'=>$jsst_id,'jsstpageid'=>jssupportticket::getPageid())));
 
-                            $matcharray['{TICKETURL}'] = $link;
-                            $staffuid = $this->getStaffUidByStaffId($ticketRecord->staffid);
-                            $template = apply_filters( 'jsst_get_email_template_by_user_defined_language','','unlock-tk' ,$agentEmail ,$staffuid, $ticketRecord->multiformid);
-                            if($template == '' && empty($template)){
-                            $template = $defaulttemplate;
+                            $jsst_matcharray['{TICKETURL}'] = $jsst_link;
+                            $jsst_staffuid = $this->getStaffUidByStaffId($jsst_ticketRecord->staffid);
+                            $jsst_template = apply_filters( 'jsst_get_email_template_by_user_defined_language','','unlock-tk' ,$jsst_agentEmail ,$jsst_staffuid, $jsst_ticketRecord->multiformid);
+                            if($jsst_template == '' && empty($jsst_template)){
+                            $jsst_template = $jsst_defaulttemplate;
                             }
-                            $msgSubject = $template->subject;
-                            $msgBody = $template->body;
-                            $attachments = '';
+                            $jsst_msgSubject = $jsst_template->subject;
+                            $jsst_msgBody = $jsst_template->body;
+                            $jsst_attachments = '';
 
-                            $this->replaceMatches($msgSubject, $matcharray);
-                            $this->replaceMatches($msgBody, $matcharray);
-                            $this->sendEmail($agentEmail, $msgSubject, $msgBody, $senderEmail, $senderName, $attachments, $action, 'unlock-tk-staff');
+                            $this->replaceMatches($jsst_msgSubject, $jsst_matcharray);
+                            $this->replaceMatches($jsst_msgBody, $jsst_matcharray);
+                            $this->sendEmail($jsst_agentEmail, $jsst_msgSubject, $jsst_msgBody, $jsst_senderEmail, $jsst_senderName, $jsst_attachments, $jsst_action, 'unlock-tk-staff');
                         }
                         // New ticket mail to User
                         if (jssupportticket::$_config['ticket_unlock_user'] == 1) {
-                            $link = esc_url(jssupportticket::makeUrl(array('jstmod'=>'ticket', 'jstlay'=>'ticketdetail','jssupportticketid'=>$id,'jsstpageid'=>jssupportticket::getPageid())));
+                            $jsst_link = esc_url(jssupportticket::makeUrl(array('jstmod'=>'ticket', 'jstlay'=>'ticketdetail','jssupportticketid'=>$jsst_id,'jsstpageid'=>jssupportticket::getPageid())));
 
-                            $matcharray['{TICKETURL}'] = $link;
-                            $template = apply_filters( 'jsst_get_email_template_by_user_defined_language','','unlock-tk' ,$Email ,$ticketRecord->uid, $ticketRecord->multiformid);
-                            if($template == '' && empty($template)){
-                                $template = $defaulttemplate;
+                            $jsst_matcharray['{TICKETURL}'] = $jsst_link;
+                            $jsst_template = apply_filters( 'jsst_get_email_template_by_user_defined_language','','unlock-tk' ,$Email ,$jsst_ticketRecord->uid, $jsst_ticketRecord->multiformid);
+                            if($jsst_template == '' && empty($jsst_template)){
+                                $jsst_template = $jsst_defaulttemplate;
                             }
-                            $msgSubject = $template->subject;
-                            $msgBody = $template->body;
-                            $attachments = '';
+                            $jsst_msgSubject = $jsst_template->subject;
+                            $jsst_msgBody = $jsst_template->body;
+                            $jsst_attachments = '';
 
-                            $this->replaceMatches($msgSubject, $matcharray);
-                            $this->replaceMatches($msgBody, $matcharray);
-                            $this->sendEmail($Email, $msgSubject, $msgBody, $senderEmail, $senderName, $attachments, $action);
+                            $this->replaceMatches($jsst_msgSubject, $jsst_matcharray);
+                            $this->replaceMatches($jsst_msgBody, $jsst_matcharray);
+                            $this->sendEmail($Email, $jsst_msgSubject, $jsst_msgBody, $jsst_senderEmail, $jsst_senderName, $jsst_attachments, $jsst_action);
                         }
                         break;
                     case 8: // Markoverdue Ticket
-                        $ticketRecord = $this->getRecordByTablenameAndId('js_ticket_tickets', $id);
-                        $TrackingId = $ticketRecord->ticketid;
-                        $DepName = $ticketRecord->departmentname;
+                        $jsst_ticketRecord = $this->getRecordByTablenameAndId('js_ticket_tickets', $jsst_id);
+                        $TrackingId = $jsst_ticketRecord->ticketid;
+                        $DepName = $jsst_ticketRecord->departmentname;
                         if(in_array('helptopic', jssupportticket::$_active_addons)){
-                            $HelptopicName = $ticketRecord->topic;
+                            $HelptopicName = $jsst_ticketRecord->topic;
                         }else{
                             $HelptopicName = '';
                         }
-                        $Email = $ticketRecord->email;
-                        $Subject = $ticketRecord->subject;
-                        $ticketHistory = $this->getTicketReplyHistory($id);
-                        $matcharray = array(
+                        $Email = $jsst_ticketRecord->email;
+                        $Subject = $jsst_ticketRecord->subject;
+                        $jsst_ticketHistory = $this->getTicketReplyHistory($jsst_id);
+                        $jsst_matcharray = array(
                             '{SITETITLE}' => jssupportticket::$_config['title'],
                             '{TRACKINGID}' => $TrackingId,
                             '{HELP_TOPIC}' => $HelptopicName,
                             '{SUBJECT}' => $Subject,
-                            '{DEPARTMENT}' => $ticketRecord->departmentname,
-                            '{PRIORITY}' => $ticketRecord->priority,
-                            '{TICKET_HISTORY}' => $ticketHistory,
+                            '{DEPARTMENT}' => $jsst_ticketRecord->departmentname,
+                            '{PRIORITY}' => $jsst_ticketRecord->priority,
+                            '{TICKET_HISTORY}' => $jsst_ticketHistory,
                             '{CURRENT_YEAR}' => gmdate('Y')
                         );
                         // code for handling custom fields start
-                        $fvalue = '';
-                        if(!empty($ticketRecord->params)){
-                            $data = json_decode($ticketRecord->params,true);
+                        $jsst_fvalue = '';
+                        if(!empty($jsst_ticketRecord->params)){
+                            $jsst_data = json_decode($jsst_ticketRecord->params,true);
                         }
-                        $fields = JSSTincluder::getJSModel('fieldordering')->getUserfieldsfor(1);
-                        if( isset($data) && is_array($data)){
-                            foreach ($fields as $field) {
-                                if($field->userfieldtype != 'file'){
-                                    $fvalue = '';
-                                    if(array_key_exists($field->field, $data)){
-                                        $fvalue = $data[$field->field];
+                        $jsst_fields = JSSTincluder::getJSModel('fieldordering')->getUserfieldsfor(1);
+                        if( isset($jsst_data) && is_array($jsst_data)){
+                            foreach ($jsst_fields as $jsst_field) {
+                                if($jsst_field->userfieldtype != 'file'){
+                                    $jsst_fvalue = '';
+                                    if(array_key_exists($jsst_field->field, $jsst_data)){
+                                        $jsst_fvalue = $jsst_data[$jsst_field->field];
                                     }
-                                    $matcharray['{'.$field->field.'}'] = $fvalue;// match array new index for custom field
+                                    $jsst_matcharray['{'.$jsst_field->field.'}'] = $jsst_fvalue;// match array new index for custom field
                                 }
                             }
                         }
                         // code for handling custom fields end
-                        $object = $this->getSenderEmailAndName($id);
-                        $senderEmail = $object->email;
-                        $senderName = $object->name;
-                        $defaulttemplate = $this->getTemplateForEmail('moverdue-tk', $ticketRecord->multiformid);
+                        $jsst_object = $this->getSenderEmailAndName($jsst_id);
+                        $jsst_senderEmail = $jsst_object->email;
+                        $jsst_senderName = $jsst_object->name;
+                        $jsst_defaulttemplate = $this->getTemplateForEmail('moverdue-tk', $jsst_ticketRecord->multiformid);
                         // New ticket mail to admin
                         if (jssupportticket::$_config['ticket_mark_overdue_admin'] == 1) {
-                            $adminEmailid = jssupportticket::$_config['default_admin_email'];
-                            $adminEmail = $this->getEmailById($adminEmailid);
-                            $link = admin_url("admin.php?page=ticket&jstlay=ticketdetail&jssupportticketid=" . esc_attr($id));
+                            $jsst_adminEmailid = jssupportticket::$_config['default_admin_email'];
+                            $jsst_adminEmail = $this->getEmailById($jsst_adminEmailid);
+                            $jsst_link = admin_url("admin.php?page=ticket&jstlay=ticketdetail&jssupportticketid=" . esc_attr($jsst_id));
 
-                            $matcharray['{TICKETURL}'] = $link;
-                            $template = apply_filters( 'jsst_get_email_template_by_user_defined_language','','moverdue-tk' ,$adminEmail ,'', $ticketRecord->multiformid);
-                            if($template == '' && empty($template)){
-                                $template = $defaulttemplate;
+                            $jsst_matcharray['{TICKETURL}'] = $jsst_link;
+                            $jsst_template = apply_filters( 'jsst_get_email_template_by_user_defined_language','','moverdue-tk' ,$jsst_adminEmail ,'', $jsst_ticketRecord->multiformid);
+                            if($jsst_template == '' && empty($jsst_template)){
+                                $jsst_template = $jsst_defaulttemplate;
                             }
-                            $msgSubject = $template->subject;
-                            $msgBody = $template->body;
-                            $attachments = '';
-                            $this->replaceMatches($msgSubject, $matcharray);
-                            $this->replaceMatches($msgBody, $matcharray);
-                            $this->sendEmail($adminEmail, $msgSubject, $msgBody, $senderEmail, $senderName, $attachments, $action, 'moverdue-tk-admin');
+                            $jsst_msgSubject = $jsst_template->subject;
+                            $jsst_msgBody = $jsst_template->body;
+                            $jsst_attachments = '';
+                            $this->replaceMatches($jsst_msgSubject, $jsst_matcharray);
+                            $this->replaceMatches($jsst_msgBody, $jsst_matcharray);
+                            $this->sendEmail($jsst_adminEmail, $jsst_msgSubject, $jsst_msgBody, $jsst_senderEmail, $jsst_senderName, $jsst_attachments, $jsst_action, 'moverdue-tk-admin');
                         }
                         // New ticket mail to staff
                         if ( in_array('agent',jssupportticket::$_active_addons) && jssupportticket::$_config['ticket_mark_overdue_staff'] == 1) {
-                            $agentEmail = $this->getStaffEmailAddressByStaffId($ticketRecord->staffid);
-                            $link = esc_url(jssupportticket::makeUrl(array('jstmod'=>'ticket', 'jstlay'=>'ticketdetail','jssupportticketid'=>$id,'jsstpageid'=>jssupportticket::getPageid())));
+                            $jsst_agentEmail = $this->getStaffEmailAddressByStaffId($jsst_ticketRecord->staffid);
+                            $jsst_link = esc_url(jssupportticket::makeUrl(array('jstmod'=>'ticket', 'jstlay'=>'ticketdetail','jssupportticketid'=>$jsst_id,'jsstpageid'=>jssupportticket::getPageid())));
 
-                            $matcharray['{TICKETURL}'] = $link;
-                            $staffuid = $this->getStaffUidByStaffId($ticketRecord->staffid);
+                            $jsst_matcharray['{TICKETURL}'] = $jsst_link;
+                            $jsst_staffuid = $this->getStaffUidByStaffId($jsst_ticketRecord->staffid);
 
-                            $template = apply_filters( 'jsst_get_email_template_by_user_defined_language','','moverdue-tk' ,$adminEmail ,$staffuid, $ticketRecord->multiformid);
-                            if($template == '' && empty($template)){
-                                $template = $defaulttemplate;
+                            $jsst_template = apply_filters( 'jsst_get_email_template_by_user_defined_language','','moverdue-tk' ,$jsst_adminEmail ,$jsst_staffuid, $jsst_ticketRecord->multiformid);
+                            if($jsst_template == '' && empty($jsst_template)){
+                                $jsst_template = $jsst_defaulttemplate;
                             }
-                            $msgSubject = $template->subject;
-                            $msgBody = $template->body;
-                            $attachments = '';
-                            $this->replaceMatches($msgSubject, $matcharray);
-                            $this->replaceMatches($msgBody, $matcharray);
-                            $this->sendEmail($agentEmail, $msgSubject, $msgBody, $senderEmail, $senderName, $attachments, $action, 'moverdue-tk-staff');
+                            $jsst_msgSubject = $jsst_template->subject;
+                            $jsst_msgBody = $jsst_template->body;
+                            $jsst_attachments = '';
+                            $this->replaceMatches($jsst_msgSubject, $jsst_matcharray);
+                            $this->replaceMatches($jsst_msgBody, $jsst_matcharray);
+                            $this->sendEmail($jsst_agentEmail, $jsst_msgSubject, $jsst_msgBody, $jsst_senderEmail, $jsst_senderName, $jsst_attachments, $jsst_action, 'moverdue-tk-staff');
                             // Get All Staff member of the department of Current Ticket
-                            $agentmembers = JSSTincluder::getJSModel('agent')->getAllStaffMemberByDepId($ticketRecord->departmentid);
-                            if(is_array($agentmembers) && !empty($agentmembers)){
-                                foreach ($agentmembers AS $agent) {
-                                    if($agent->canemail == 1){
-                                        $template = apply_filters( 'jsst_get_email_template_by_user_defined_language','','moverdue-tk' ,$agent->email ,$agent->staffuid, $ticketRecord->multiformid);
-                                        if($template == '' && empty($template)){
-                                            $template = $defaulttemplate;
+                            $jsst_agentmembers = JSSTincluder::getJSModel('agent')->getAllStaffMemberByDepId($jsst_ticketRecord->departmentid);
+                            if(is_array($jsst_agentmembers) && !empty($jsst_agentmembers)){
+                                foreach ($jsst_agentmembers AS $jsst_agent) {
+                                    if($jsst_agent->canemail == 1){
+                                        $jsst_template = apply_filters( 'jsst_get_email_template_by_user_defined_language','','moverdue-tk' ,$jsst_agent->email ,$jsst_agent->staffuid, $jsst_ticketRecord->multiformid);
+                                        if($jsst_template == '' && empty($jsst_template)){
+                                            $jsst_template = $jsst_defaulttemplate;
                                         }
-                                        $msgSubject = $template->subject;
-                                        $msgBody = $template->body;
-                                        $msgBody .= '<input type="hidden" name="ticketid:' . esc_attr($TrackingId) . '###staff####" />';
-                                        $msgBody .= '<span style="display:none;" ticketid:' . esc_attr($TrackingId) . '###staff#### ></span>';
-                                        $attachments = '';
-                                        $this->sendEmail($agent->email, $msgSubject, $msgBody, $senderEmail, $senderName, $attachments, $action);
+                                        $jsst_msgSubject = $jsst_template->subject;
+                                        $jsst_msgBody = $jsst_template->body;
+                                        $jsst_msgBody .= '<input type="hidden" name="ticketid:' . esc_attr($TrackingId) . '###staff####" />';
+                                        $jsst_msgBody .= '<span style="display:none;" ticketid:' . esc_attr($TrackingId) . '###staff#### ></span>';
+                                        $jsst_attachments = '';
+                                        $this->sendEmail($jsst_agent->email, $jsst_msgSubject, $jsst_msgBody, $jsst_senderEmail, $jsst_senderName, $jsst_attachments, $jsst_action);
                                     }
                                 }
                             }
                             // send email to staff memebers with all ticket permissions
-                            if( !is_numeric($ticketRecord->staffid) && !is_numeric($ticketRecord->departmentid)){
+                            if( !is_numeric($jsst_ticketRecord->staffid) && !is_numeric($jsst_ticketRecord->departmentid)){
                                 if( in_array('agent',jssupportticket::$_active_addons)){
-                                    $agentmembers = JSSTincluder::getJSModel('agent')->getAllStaffMemberByAllTicketPermission();
-                                    if(is_array($agentmembers) && !empty($agentmembers)){
-                                        foreach ($agentmembers AS $agent) {
-                                            if($agent->canemail == 1){
-                                                $template = apply_filters( 'jsst_get_email_template_by_user_defined_language','','moverdue-tk' ,$agent->email,$agent->uid, $ticketRecord->multiformid);
-                                                if($template == '' && empty($template)){
-                                                    $template = $defaulttemplate;
+                                    $jsst_agentmembers = JSSTincluder::getJSModel('agent')->getAllStaffMemberByAllTicketPermission();
+                                    if(is_array($jsst_agentmembers) && !empty($jsst_agentmembers)){
+                                        foreach ($jsst_agentmembers AS $jsst_agent) {
+                                            if($jsst_agent->canemail == 1){
+                                                $jsst_template = apply_filters( 'jsst_get_email_template_by_user_defined_language','','moverdue-tk' ,$jsst_agent->email,$jsst_agent->uid, $jsst_ticketRecord->multiformid);
+                                                if($jsst_template == '' && empty($jsst_template)){
+                                                    $jsst_template = $jsst_defaulttemplate;
                                                 }
-                                                $msgSubject = $template->subject;
-                                                $msgBody = $template->body;
-                                                $msgBody .= '<input type="hidden" name="ticketid:' . esc_attr($TrackingId) . '###staff####" />';
-                                                $msgBody .= '<span style="display:none;" ticketid:' . esc_attr($TrackingId) . '###staff#### ></span>';
-                                                $attachments = '';
+                                                $jsst_msgSubject = $jsst_template->subject;
+                                                $jsst_msgBody = $jsst_template->body;
+                                                $jsst_msgBody .= '<input type="hidden" name="ticketid:' . esc_attr($TrackingId) . '###staff####" />';
+                                                $jsst_msgBody .= '<span style="display:none;" ticketid:' . esc_attr($TrackingId) . '###staff#### ></span>';
+                                                $jsst_attachments = '';
 
-                                                $this->sendEmail($agent->email, $msgSubject, $msgBody, $senderEmail, $senderName, $attachments, $action);
+                                                $this->sendEmail($jsst_agent->email, $jsst_msgSubject, $jsst_msgBody, $jsst_senderEmail, $jsst_senderName, $jsst_attachments, $jsst_action);
                                             }
                                         }
                                     }
@@ -932,421 +932,421 @@ class JSSTemailModel {
                         }
                         // New ticket mail to User
                         if (jssupportticket::$_config['ticket_mark_overdue_user'] == 1) {
-                            $link = esc_url(jssupportticket::makeUrl(array('jstmod'=>'ticket', 'jstlay'=>'ticketdetail','jssupportticketid'=>$id,'jsstpageid'=>jssupportticket::getPageid())));
-                            $matcharray['{TICKETURL}'] = $link;
-                            $template = apply_filters( 'jsst_get_email_template_by_user_defined_language','','moverdue-tk' ,$Email ,$ticketRecord->uid, $ticketRecord->multiformid);
-                            if($template == '' && empty($template)){
-                                $template = $defaulttemplate;
+                            $jsst_link = esc_url(jssupportticket::makeUrl(array('jstmod'=>'ticket', 'jstlay'=>'ticketdetail','jssupportticketid'=>$jsst_id,'jsstpageid'=>jssupportticket::getPageid())));
+                            $jsst_matcharray['{TICKETURL}'] = $jsst_link;
+                            $jsst_template = apply_filters( 'jsst_get_email_template_by_user_defined_language','','moverdue-tk' ,$Email ,$jsst_ticketRecord->uid, $jsst_ticketRecord->multiformid);
+                            if($jsst_template == '' && empty($jsst_template)){
+                                $jsst_template = $jsst_defaulttemplate;
                             }
-                            $msgSubject = $template->subject;
-                            $msgBody = $template->body;
-                            $attachments = '';
-                            $this->replaceMatches($msgSubject, $matcharray);
-                            $this->replaceMatches($msgBody, $matcharray);
-                            $this->sendEmail($Email, $msgSubject, $msgBody, $senderEmail, $senderName, $attachments, $action);
+                            $jsst_msgSubject = $jsst_template->subject;
+                            $jsst_msgBody = $jsst_template->body;
+                            $jsst_attachments = '';
+                            $this->replaceMatches($jsst_msgSubject, $jsst_matcharray);
+                            $this->replaceMatches($jsst_msgBody, $jsst_matcharray);
+                            $this->sendEmail($Email, $jsst_msgSubject, $jsst_msgBody, $jsst_senderEmail, $jsst_senderName, $jsst_attachments, $jsst_action);
                         }
                         break;
                     case 9: // Mark in progress Ticket
-                        $ticketRecord = $this->getRecordByTablenameAndId('js_ticket_tickets', $id);
-                        $TrackingId = $ticketRecord->ticketid;
-                        $DepName = $ticketRecord->departmentname;
+                        $jsst_ticketRecord = $this->getRecordByTablenameAndId('js_ticket_tickets', $jsst_id);
+                        $TrackingId = $jsst_ticketRecord->ticketid;
+                        $DepName = $jsst_ticketRecord->departmentname;
                         if(in_array('helptopic', jssupportticket::$_active_addons)){
-                            $HelptopicName = $ticketRecord->topic;
+                            $HelptopicName = $jsst_ticketRecord->topic;
                         }else{
                             $HelptopicName = '';
                         }
-                        $Email = $ticketRecord->email;
-                        $Subject = $ticketRecord->subject;
-                        $ticketHistory = $this->getTicketReplyHistory($id);
-                        $matcharray = array(
+                        $Email = $jsst_ticketRecord->email;
+                        $Subject = $jsst_ticketRecord->subject;
+                        $jsst_ticketHistory = $this->getTicketReplyHistory($jsst_id);
+                        $jsst_matcharray = array(
                             '{SITETITLE}' => jssupportticket::$_config['title'],
                             '{TRACKINGID}' => $TrackingId,
                             '{HELP_TOPIC}' => $HelptopicName,
                             '{SUBJECT}' => $Subject,
-                            '{DEPARTMENT}' => $ticketRecord->departmentname,
-                            '{PRIORITY}' => $ticketRecord->priority,
-                            '{TICKET_HISTORY}' => $ticketHistory,
+                            '{DEPARTMENT}' => $jsst_ticketRecord->departmentname,
+                            '{PRIORITY}' => $jsst_ticketRecord->priority,
+                            '{TICKET_HISTORY}' => $jsst_ticketHistory,
                             '{CURRENT_YEAR}' => gmdate('Y')
                         );
                         // code for handling custom fields start
-                        $fvalue = '';
-                        if(!empty($ticketRecord->params)){
-                            $data = json_decode($ticketRecord->params,true);
+                        $jsst_fvalue = '';
+                        if(!empty($jsst_ticketRecord->params)){
+                            $jsst_data = json_decode($jsst_ticketRecord->params,true);
                         }
-                        $fields = JSSTincluder::getJSModel('fieldordering')->getUserfieldsfor(1);
-                        if( isset($data) && is_array($data)){
-                            foreach ($fields as $field) {
-                                if($field->userfieldtype != 'file'){
-                                    $fvalue = '';
-                                    if(array_key_exists($field->field, $data)){
-                                        $fvalue = $data[$field->field];
+                        $jsst_fields = JSSTincluder::getJSModel('fieldordering')->getUserfieldsfor(1);
+                        if( isset($jsst_data) && is_array($jsst_data)){
+                            foreach ($jsst_fields as $jsst_field) {
+                                if($jsst_field->userfieldtype != 'file'){
+                                    $jsst_fvalue = '';
+                                    if(array_key_exists($jsst_field->field, $jsst_data)){
+                                        $jsst_fvalue = $jsst_data[$jsst_field->field];
                                     }
-                                    $matcharray['{'.$field->field.'}'] = $fvalue;// match array new index for custom field
+                                    $jsst_matcharray['{'.$jsst_field->field.'}'] = $jsst_fvalue;// match array new index for custom field
                                 }
                             }
                         }
                         // code for handling custom fields end
-                        $object = $this->getSenderEmailAndName($id);
-                        $senderEmail = $object->email;
-                        $senderName = $object->name;
-                        $defaulttemplate = $this->getTemplateForEmail('minprogress-tk', $ticketRecord->multiformid);
+                        $jsst_object = $this->getSenderEmailAndName($jsst_id);
+                        $jsst_senderEmail = $jsst_object->email;
+                        $jsst_senderName = $jsst_object->name;
+                        $jsst_defaulttemplate = $this->getTemplateForEmail('minprogress-tk', $jsst_ticketRecord->multiformid);
                         // New ticket mail to admin
                         if (jssupportticket::$_config['ticket_mark_progress_admin'] == 1) {
-                            $adminEmailid = jssupportticket::$_config['default_admin_email'];
-                            $adminEmail = $this->getEmailById($adminEmailid);
-                            $link = admin_url("admin.php?page=ticket&jstlay=ticketdetail&jssupportticketid=" . esc_attr($id));
+                            $jsst_adminEmailid = jssupportticket::$_config['default_admin_email'];
+                            $jsst_adminEmail = $this->getEmailById($jsst_adminEmailid);
+                            $jsst_link = admin_url("admin.php?page=ticket&jstlay=ticketdetail&jssupportticketid=" . esc_attr($jsst_id));
 
-                            $matcharray['{TICKETURL}'] = $link;
+                            $jsst_matcharray['{TICKETURL}'] = $jsst_link;
 
-                            $template = apply_filters( 'jsst_get_email_template_by_user_defined_language','','minprogress-tk' ,$adminEmail ,'', $ticketRecord->multiformid);
-                            if($template == '' && empty($template)){
-                                $template = $defaulttemplate;
+                            $jsst_template = apply_filters( 'jsst_get_email_template_by_user_defined_language','','minprogress-tk' ,$jsst_adminEmail ,'', $jsst_ticketRecord->multiformid);
+                            if($jsst_template == '' && empty($jsst_template)){
+                                $jsst_template = $jsst_defaulttemplate;
                             }
-                            $msgSubject = $template->subject;
-                            $msgBody = $template->body;
-                            $attachments = '';
-                            $this->replaceMatches($msgSubject, $matcharray);
-                            $this->replaceMatches($msgBody, $matcharray);
-                            $this->sendEmail($adminEmail, $msgSubject, $msgBody, $senderEmail, $senderName, $attachments, $action, 'minprogress-tk-admin');
+                            $jsst_msgSubject = $jsst_template->subject;
+                            $jsst_msgBody = $jsst_template->body;
+                            $jsst_attachments = '';
+                            $this->replaceMatches($jsst_msgSubject, $jsst_matcharray);
+                            $this->replaceMatches($jsst_msgBody, $jsst_matcharray);
+                            $this->sendEmail($jsst_adminEmail, $jsst_msgSubject, $jsst_msgBody, $jsst_senderEmail, $jsst_senderName, $jsst_attachments, $jsst_action, 'minprogress-tk-admin');
                         }
                         // New ticket mail to staff
                         if ( in_array('agent',jssupportticket::$_active_addons) && jssupportticket::$_config['ticket_mark_progress_staff'] == 1) {
-                            $agentEmail = $this->getStaffEmailAddressByStaffId($ticketRecord->staffid);
-                            $link = esc_url(jssupportticket::makeUrl(array('jstmod'=>'ticket', 'jstlay'=>'ticketdetail','jssupportticketid'=>$id,'jsstpageid'=>jssupportticket::getPageid())));
+                            $jsst_agentEmail = $this->getStaffEmailAddressByStaffId($jsst_ticketRecord->staffid);
+                            $jsst_link = esc_url(jssupportticket::makeUrl(array('jstmod'=>'ticket', 'jstlay'=>'ticketdetail','jssupportticketid'=>$jsst_id,'jsstpageid'=>jssupportticket::getPageid())));
 
-                            $matcharray['{TICKETURL}'] = $link;
-                            $staffuid = $this->getStaffUidByStaffId($ticketRecord->staffid);
-                            $template = apply_filters( 'jsst_get_email_template_by_user_defined_language','','minprogress-tk'
-                             ,$agentEmail ,$staffuid, $ticketRecord->multiformid);
-                            if($template == '' && empty($template)){
-                                $template = $defaulttemplate;
+                            $jsst_matcharray['{TICKETURL}'] = $jsst_link;
+                            $jsst_staffuid = $this->getStaffUidByStaffId($jsst_ticketRecord->staffid);
+                            $jsst_template = apply_filters( 'jsst_get_email_template_by_user_defined_language','','minprogress-tk'
+                             ,$jsst_agentEmail ,$jsst_staffuid, $jsst_ticketRecord->multiformid);
+                            if($jsst_template == '' && empty($jsst_template)){
+                                $jsst_template = $jsst_defaulttemplate;
                             }
-                            $msgSubject = $template->subject;
-                            $msgBody = $template->body;
-                            $attachments = '';
-                            $this->replaceMatches($msgSubject, $matcharray);
-                            $this->replaceMatches($msgBody, $matcharray);
-                            $this->sendEmail($agentEmail, $msgSubject, $msgBody, $senderEmail, $senderName, $attachments, $action, 'minprogress-tk-staff');
+                            $jsst_msgSubject = $jsst_template->subject;
+                            $jsst_msgBody = $jsst_template->body;
+                            $jsst_attachments = '';
+                            $this->replaceMatches($jsst_msgSubject, $jsst_matcharray);
+                            $this->replaceMatches($jsst_msgBody, $jsst_matcharray);
+                            $this->sendEmail($jsst_agentEmail, $jsst_msgSubject, $jsst_msgBody, $jsst_senderEmail, $jsst_senderName, $jsst_attachments, $jsst_action, 'minprogress-tk-staff');
                         }
                         // New ticket mail to User
                         if (jssupportticket::$_config['ticket_mark_progress_user'] == 1) {
-                            $link = esc_url(jssupportticket::makeUrl(array('jstmod'=>'ticket', 'jstlay'=>'ticketdetail','jssupportticketid'=>$id,'jsstpageid'=>jssupportticket::getPageid())));
+                            $jsst_link = esc_url(jssupportticket::makeUrl(array('jstmod'=>'ticket', 'jstlay'=>'ticketdetail','jssupportticketid'=>$jsst_id,'jsstpageid'=>jssupportticket::getPageid())));
 
-                            $matcharray['{TICKETURL}'] = $link;
-                            $template = apply_filters( 'jsst_get_email_template_by_user_defined_language','','minprogress-tk' ,$Email ,$ticketRecord->uid, $ticketRecord->multiformid);
-                            if($template == '' && empty($template)){
-                                $template = $defaulttemplate;
+                            $jsst_matcharray['{TICKETURL}'] = $jsst_link;
+                            $jsst_template = apply_filters( 'jsst_get_email_template_by_user_defined_language','','minprogress-tk' ,$Email ,$jsst_ticketRecord->uid, $jsst_ticketRecord->multiformid);
+                            if($jsst_template == '' && empty($jsst_template)){
+                                $jsst_template = $jsst_defaulttemplate;
                             }
-                            $msgSubject = $template->subject;
-                            $msgBody = $template->body;
-                            $attachments = '';
-                            $this->replaceMatches($msgSubject, $matcharray);
-                            $this->replaceMatches($msgBody, $matcharray);
-                            $this->sendEmail($Email, $msgSubject, $msgBody, $senderEmail, $senderName, $attachments, $action);
+                            $jsst_msgSubject = $jsst_template->subject;
+                            $jsst_msgBody = $jsst_template->body;
+                            $jsst_attachments = '';
+                            $this->replaceMatches($jsst_msgSubject, $jsst_matcharray);
+                            $this->replaceMatches($jsst_msgBody, $jsst_matcharray);
+                            $this->sendEmail($Email, $jsst_msgSubject, $jsst_msgBody, $jsst_senderEmail, $jsst_senderName, $jsst_attachments, $jsst_action);
                         }
                         break;
                     case 10: // Ban email and close Ticket
-                        $ticketRecord = $this->getRecordByTablenameAndId('js_ticket_tickets', $id);
-                        $TrackingId = $ticketRecord->ticketid;
-                        $DepName = $ticketRecord->departmentname;
+                        $jsst_ticketRecord = $this->getRecordByTablenameAndId('js_ticket_tickets', $jsst_id);
+                        $TrackingId = $jsst_ticketRecord->ticketid;
+                        $DepName = $jsst_ticketRecord->departmentname;
                         if(in_array('helptopic', jssupportticket::$_active_addons)){
-                            $HelptopicName = $ticketRecord->topic;
+                            $HelptopicName = $jsst_ticketRecord->topic;
                         }else{
                             $HelptopicName = '';
                         }
-                        $Email = $ticketRecord->email;
-                        $Subject = $ticketRecord->subject;
-                        $matcharray = array(
+                        $Email = $jsst_ticketRecord->email;
+                        $Subject = $jsst_ticketRecord->subject;
+                        $jsst_matcharray = array(
                             '{SITETITLE}' => jssupportticket::$_config['title'],
                             '{EMAIL_ADDRESS}' => $Email,
                             '{SUBJECT}' => $Subject,
                             '{HELP_TOPIC}' => $HelptopicName,
                             '{TRACKINGID}' => $TrackingId,
-                            '{DEPARTMENT}' => $ticketRecord->departmentname,
-                            '{PRIORITY}' => $ticketRecord->priority,
+                            '{DEPARTMENT}' => $jsst_ticketRecord->departmentname,
+                            '{PRIORITY}' => $jsst_ticketRecord->priority,
                             '{CURRENT_YEAR}' => gmdate('Y')
                         );
                         // code for handling custom fields start
-                        $fvalue = '';
-                        if(!empty($ticketRecord->params)){
-                            $data = json_decode($ticketRecord->params,true);
+                        $jsst_fvalue = '';
+                        if(!empty($jsst_ticketRecord->params)){
+                            $jsst_data = json_decode($jsst_ticketRecord->params,true);
                         }
-                        $fields = JSSTincluder::getJSModel('fieldordering')->getUserfieldsfor(1);
-                        if( isset($data) && is_array($data)){
-                            foreach ($fields as $field) {
-                                if($field->userfieldtype != 'file'){
-                                    $fvalue = '';
-                                    if(array_key_exists($field->field, $data)){
-                                        $fvalue = $data[$field->field];
+                        $jsst_fields = JSSTincluder::getJSModel('fieldordering')->getUserfieldsfor(1);
+                        if( isset($jsst_data) && is_array($jsst_data)){
+                            foreach ($jsst_fields as $jsst_field) {
+                                if($jsst_field->userfieldtype != 'file'){
+                                    $jsst_fvalue = '';
+                                    if(array_key_exists($jsst_field->field, $jsst_data)){
+                                        $jsst_fvalue = $jsst_data[$jsst_field->field];
                                     }
-                                    $matcharray['{'.$field->field.'}'] = $fvalue;// match array new index for custom field
+                                    $jsst_matcharray['{'.$jsst_field->field.'}'] = $jsst_fvalue;// match array new index for custom field
                                 }
                             }
                         }
                         // code for handling custom fields end
-                        $object = $this->getSenderEmailAndName($id);
-                        $senderEmail = $object->email;
-                        $senderName = $object->name;
-                        $defaulttemplate = $this->getTemplateForEmail('banemailcloseticket-tk', $ticketRecord->multiformid);
+                        $jsst_object = $this->getSenderEmailAndName($jsst_id);
+                        $jsst_senderEmail = $jsst_object->email;
+                        $jsst_senderName = $jsst_object->name;
+                        $jsst_defaulttemplate = $this->getTemplateForEmail('banemailcloseticket-tk', $jsst_ticketRecord->multiformid);
 
                         // New ticket mail to admin
                         if (jssupportticket::$_config['ticker_ban_eamil_and_close_ticktet_admin'] == 1) {
-                            $adminEmailid = jssupportticket::$_config['default_admin_email'];
-                            $adminEmail = $this->getEmailById($adminEmailid);
-                            $template = apply_filters( 'jsst_get_email_template_by_user_defined_language','','banemailcloseticket-tk' ,$adminEmail ,'', $ticketRecord->multiformid);
-                            if($template == '' && empty($template)){
-                                $template = $defaulttemplate;
+                            $jsst_adminEmailid = jssupportticket::$_config['default_admin_email'];
+                            $jsst_adminEmail = $this->getEmailById($jsst_adminEmailid);
+                            $jsst_template = apply_filters( 'jsst_get_email_template_by_user_defined_language','','banemailcloseticket-tk' ,$jsst_adminEmail ,'', $jsst_ticketRecord->multiformid);
+                            if($jsst_template == '' && empty($jsst_template)){
+                                $jsst_template = $jsst_defaulttemplate;
                             }
-                            $msgSubject = $template->subject;
-                            $msgBody = $template->body;
-                            $attachments = '';
-                            $this->replaceMatches($msgSubject, $matcharray);
-                            $this->replaceMatches($msgBody, $matcharray);
-                            $this->sendEmail($adminEmail, $msgSubject, $msgBody, $senderEmail, $senderName, $attachments, $action, 'banemailcloseticket-tk-admin');
+                            $jsst_msgSubject = $jsst_template->subject;
+                            $jsst_msgBody = $jsst_template->body;
+                            $jsst_attachments = '';
+                            $this->replaceMatches($jsst_msgSubject, $jsst_matcharray);
+                            $this->replaceMatches($jsst_msgBody, $jsst_matcharray);
+                            $this->sendEmail($jsst_adminEmail, $jsst_msgSubject, $jsst_msgBody, $jsst_senderEmail, $jsst_senderName, $jsst_attachments, $jsst_action, 'banemailcloseticket-tk-admin');
                         }
                         // New ticket mail to staff
                         if ( in_array('agent',jssupportticket::$_active_addons) && jssupportticket::$_config['ticker_ban_eamil_and_close_ticktet_staff'] == 1) {
-                            $agentEmail = $this->getStaffEmailAddressByStaffId($ticketRecord->staffid);
-                            $staffuid = $this->getStaffUidByStaffId($ticketRecord->staffid);
-                            $template = apply_filters( 'jsst_get_email_template_by_user_defined_language','','banemailcloseticket-tk' ,$adminEmail ,$staffuid, $ticketRecord->multiformid);
-                            if($template == '' && empty($template)){
-                                $template = $defaulttemplate;
+                            $jsst_agentEmail = $this->getStaffEmailAddressByStaffId($jsst_ticketRecord->staffid);
+                            $jsst_staffuid = $this->getStaffUidByStaffId($jsst_ticketRecord->staffid);
+                            $jsst_template = apply_filters( 'jsst_get_email_template_by_user_defined_language','','banemailcloseticket-tk' ,$jsst_adminEmail ,$jsst_staffuid, $jsst_ticketRecord->multiformid);
+                            if($jsst_template == '' && empty($jsst_template)){
+                                $jsst_template = $jsst_defaulttemplate;
                             }
-                            $msgSubject = $template->subject;
-                            $msgBody = $template->body;
-                            $attachments = '';
+                            $jsst_msgSubject = $jsst_template->subject;
+                            $jsst_msgBody = $jsst_template->body;
+                            $jsst_attachments = '';
 
-                            $this->replaceMatches($msgSubject, $matcharray);
-                            $this->replaceMatches($msgBody, $matcharray);
-                            $this->sendEmail($agentEmail, $msgSubject, $msgBody, $senderEmail, $senderName, $attachments, $action, 'banemailcloseticket-tk-staff');
+                            $this->replaceMatches($jsst_msgSubject, $jsst_matcharray);
+                            $this->replaceMatches($jsst_msgBody, $jsst_matcharray);
+                            $this->sendEmail($jsst_agentEmail, $jsst_msgSubject, $jsst_msgBody, $jsst_senderEmail, $jsst_senderName, $jsst_attachments, $jsst_action, 'banemailcloseticket-tk-staff');
                         }
                         // New ticket mail to User
                         if (jssupportticket::$_config['ticker_ban_eamil_and_close_ticktet_user'] == 1) {
-                            $template = apply_filters( 'jsst_get_email_template_by_user_defined_language','','banemailcloseticket-tk' ,$Email ,$ticketRecord->uid, $ticketRecord->multiformid);
-                            if($template == '' && empty($template)){
-                                $template = $defaulttemplate;
+                            $jsst_template = apply_filters( 'jsst_get_email_template_by_user_defined_language','','banemailcloseticket-tk' ,$Email ,$jsst_ticketRecord->uid, $jsst_ticketRecord->multiformid);
+                            if($jsst_template == '' && empty($jsst_template)){
+                                $jsst_template = $jsst_defaulttemplate;
                             }
-                            $msgSubject = $template->subject;
-                            $msgBody = $template->body;
-                            $attachments = '';
-                            $this->replaceMatches($msgSubject, $matcharray);
-                            $this->replaceMatches($msgBody, $matcharray);
-                            $this->sendEmail($Email, $msgSubject, $msgBody, $senderEmail, $senderName, $attachments, $action);
+                            $jsst_msgSubject = $jsst_template->subject;
+                            $jsst_msgBody = $jsst_template->body;
+                            $jsst_attachments = '';
+                            $this->replaceMatches($jsst_msgSubject, $jsst_matcharray);
+                            $this->replaceMatches($jsst_msgBody, $jsst_matcharray);
+                            $this->sendEmail($Email, $jsst_msgSubject, $jsst_msgBody, $jsst_senderEmail, $jsst_senderName, $jsst_attachments, $jsst_action);
                         }
                         break;
                     case 11: // Priority change ticket
-                        $ticketRecord = $this->getRecordByTablenameAndId('js_ticket_tickets', $id);
-                        $TrackingId = $ticketRecord->ticketid;
-                        $Subject = $ticketRecord->subject;
-                        $DepName = $ticketRecord->departmentname;
+                        $jsst_ticketRecord = $this->getRecordByTablenameAndId('js_ticket_tickets', $jsst_id);
+                        $TrackingId = $jsst_ticketRecord->ticketid;
+                        $Subject = $jsst_ticketRecord->subject;
+                        $DepName = $jsst_ticketRecord->departmentname;
                         if(in_array('helptopic', jssupportticket::$_active_addons)){
-                            $HelptopicName = $ticketRecord->topic;
+                            $HelptopicName = $jsst_ticketRecord->topic;
                         }else{
                             $HelptopicName = '';
                         }
-                        $Email = $ticketRecord->email;
-                        $Priority = JSSTincluder::getJSModel('priority')->getPriorityById($ticketRecord->priorityid);
-                        $ticketHistory = $this->getTicketReplyHistory($id);
-                        $matcharray = array(
+                        $Email = $jsst_ticketRecord->email;
+                        $Priority = JSSTincluder::getJSModel('priority')->getPriorityById($jsst_ticketRecord->priorityid);
+                        $jsst_ticketHistory = $this->getTicketReplyHistory($jsst_id);
+                        $jsst_matcharray = array(
                             '{SITETITLE}' => jssupportticket::$_config['title'],
                             '{PRIORITY_TITLE}' => $Priority,
                             '{SUBJECT}' => $Subject,
                             '{HELP_TOPIC}' => $HelptopicName,
                             '{TRACKINGID}' => $TrackingId,
-                            '{DEPARTMENT}' => $ticketRecord->departmentname,
-                            '{TICKET_HISTORY}' => $ticketHistory,
+                            '{DEPARTMENT}' => $jsst_ticketRecord->departmentname,
+                            '{TICKET_HISTORY}' => $jsst_ticketHistory,
                             '{CURRENT_YEAR}' => gmdate('Y')
                         );
                         // code for handling custom fields start
-                        $fvalue = '';
-                        if(!empty($ticketRecord->params)){
-                            $data = json_decode($ticketRecord->params,true);
+                        $jsst_fvalue = '';
+                        if(!empty($jsst_ticketRecord->params)){
+                            $jsst_data = json_decode($jsst_ticketRecord->params,true);
                         }
-                        $fields = JSSTincluder::getJSModel('fieldordering')->getUserfieldsfor(1);
-                        if( isset($data) && is_array($data)){
-                            foreach ($fields as $field) {
-                                if($field->userfieldtype != 'file'){
-                                    $fvalue = '';
-                                    if(array_key_exists($field->field, $data)){
-                                        $fvalue = $data[$field->field];
+                        $jsst_fields = JSSTincluder::getJSModel('fieldordering')->getUserfieldsfor(1);
+                        if( isset($jsst_data) && is_array($jsst_data)){
+                            foreach ($jsst_fields as $jsst_field) {
+                                if($jsst_field->userfieldtype != 'file'){
+                                    $jsst_fvalue = '';
+                                    if(array_key_exists($jsst_field->field, $jsst_data)){
+                                        $jsst_fvalue = $jsst_data[$jsst_field->field];
                                     }
-                                    $matcharray['{'.$field->field.'}'] = $fvalue;// match array new index for custom field
+                                    $jsst_matcharray['{'.$jsst_field->field.'}'] = $jsst_fvalue;// match array new index for custom field
                                 }
                             }
                         }
                         // code for handling custom fields end
-                        $object = $this->getSenderEmailAndName($id);
-                        $senderEmail = $object->email;
-                        $senderName = $object->name;
-                        $defaulttemplate = $this->getTemplateForEmail('prtrans-tk', $ticketRecord->multiformid);
+                        $jsst_object = $this->getSenderEmailAndName($jsst_id);
+                        $jsst_senderEmail = $jsst_object->email;
+                        $jsst_senderName = $jsst_object->name;
+                        $jsst_defaulttemplate = $this->getTemplateForEmail('prtrans-tk', $jsst_ticketRecord->multiformid);
 
                         // New ticket mail to admin
-						$template = apply_filters( 'jsst_get_email_template_by_user_defined_language','','prtrans-tk' ,$adminEmail ,'', $ticketRecord->multiformid);
-						if($template == '' && empty($template)){
-							$template = $defaulttemplate;
+						$jsst_template = apply_filters( 'jsst_get_email_template_by_user_defined_language','','prtrans-tk' ,$jsst_adminEmail ,'', $jsst_ticketRecord->multiformid);
+						if($jsst_template == '' && empty($jsst_template)){
+							$jsst_template = $jsst_defaulttemplate;
 						}
                         if (jssupportticket::$_config['ticket_priority_admin'] == 1) {
-                            $link = admin_url("admin.php?page=ticket&jstlay=ticketdetail&jssupportticketid=" . esc_attr($id));
-                            $matcharray['{TICKETURL}'] = $link;
-                            $adminEmailid = jssupportticket::$_config['default_admin_email'];
-                            $adminEmail = $this->getEmailById($adminEmailid);
-                            $msgSubject = $template->subject;
-                            $msgBody = $template->body;
-                            $attachments = '';
-                            $this->replaceMatches($msgSubject, $matcharray);
-                            $this->replaceMatches($msgBody, $matcharray);
-                            $this->sendEmail($adminEmail, $msgSubject, $msgBody, $senderEmail, $senderName, $attachments, $action, 'prtrans-tk-admin');
+                            $jsst_link = admin_url("admin.php?page=ticket&jstlay=ticketdetail&jssupportticketid=" . esc_attr($jsst_id));
+                            $jsst_matcharray['{TICKETURL}'] = $jsst_link;
+                            $jsst_adminEmailid = jssupportticket::$_config['default_admin_email'];
+                            $jsst_adminEmail = $this->getEmailById($jsst_adminEmailid);
+                            $jsst_msgSubject = $jsst_template->subject;
+                            $jsst_msgBody = $jsst_template->body;
+                            $jsst_attachments = '';
+                            $this->replaceMatches($jsst_msgSubject, $jsst_matcharray);
+                            $this->replaceMatches($jsst_msgBody, $jsst_matcharray);
+                            $this->sendEmail($jsst_adminEmail, $jsst_msgSubject, $jsst_msgBody, $jsst_senderEmail, $jsst_senderName, $jsst_attachments, $jsst_action, 'prtrans-tk-admin');
                         }
-                        $msgSubject = $template->subject;
-                        $msgBody = $template->body;
-                        $link = esc_url(jssupportticket::makeUrl(array('jstmod'=>'ticket', 'jstlay'=>'ticketdetail','jssupportticketid'=>$id,'jsstpageid'=>jssupportticket::getPageid())));
-                        $matcharray['{TICKETURL}'] = $link;
+                        $jsst_msgSubject = $jsst_template->subject;
+                        $jsst_msgBody = $jsst_template->body;
+                        $jsst_link = esc_url(jssupportticket::makeUrl(array('jstmod'=>'ticket', 'jstlay'=>'ticketdetail','jssupportticketid'=>$jsst_id,'jsstpageid'=>jssupportticket::getPageid())));
+                        $jsst_matcharray['{TICKETURL}'] = $jsst_link;
                         // New ticket mail to staff
                         if ( in_array('agent',jssupportticket::$_active_addons) && jssupportticket::$_config['ticket_priority_staff'] == 1) {
-                            $agentEmail = $this->getStaffEmailAddressByStaffId($ticketRecord->staffid);
-                            $staffuid = $this->getStaffUidByStaffId($ticketRecord->staffid);
+                            $jsst_agentEmail = $this->getStaffEmailAddressByStaffId($jsst_ticketRecord->staffid);
+                            $jsst_staffuid = $this->getStaffUidByStaffId($jsst_ticketRecord->staffid);
 
-                            $template = apply_filters( 'jsst_get_email_template_by_user_defined_language','','prtrans-tk' ,$agentEmail ,$staffuid, $ticketRecord->multiformid);
-                            if($template == '' && empty($template)){
-                                $template = $defaulttemplate;
+                            $jsst_template = apply_filters( 'jsst_get_email_template_by_user_defined_language','','prtrans-tk' ,$jsst_agentEmail ,$jsst_staffuid, $jsst_ticketRecord->multiformid);
+                            if($jsst_template == '' && empty($jsst_template)){
+                                $jsst_template = $jsst_defaulttemplate;
                             }
-                            $msgSubject = $template->subject;
-                            $msgBody = $template->body;
-                            $attachments = '';
+                            $jsst_msgSubject = $jsst_template->subject;
+                            $jsst_msgBody = $jsst_template->body;
+                            $jsst_attachments = '';
 
-                            $this->replaceMatches($msgSubject, $matcharray);
-                            $this->replaceMatches($msgBody, $matcharray);
-                            $this->sendEmail($agentEmail, $msgSubject, $msgBody, $senderEmail, $senderName, $attachments, $action, 'prtrans-tk-staff');
+                            $this->replaceMatches($jsst_msgSubject, $jsst_matcharray);
+                            $this->replaceMatches($jsst_msgBody, $jsst_matcharray);
+                            $this->sendEmail($jsst_agentEmail, $jsst_msgSubject, $jsst_msgBody, $jsst_senderEmail, $jsst_senderName, $jsst_attachments, $jsst_action, 'prtrans-tk-staff');
                         }
                         // New ticket mail to User
                         if (jssupportticket::$_config['ticket_priority_user'] == 1) {
-                            $template = apply_filters( 'jsst_get_email_template_by_user_defined_language','','prtrans-tk' ,$Email ,$ticketRecord->uid, $ticketRecord->multiformid);
-                            if($template == '' && empty($template)){
-                                $template = $defaulttemplate;
+                            $jsst_template = apply_filters( 'jsst_get_email_template_by_user_defined_language','','prtrans-tk' ,$Email ,$jsst_ticketRecord->uid, $jsst_ticketRecord->multiformid);
+                            if($jsst_template == '' && empty($jsst_template)){
+                                $jsst_template = $jsst_defaulttemplate;
                             }
-                            $msgSubject = $template->subject;
-                            $msgBody = $template->body;
-                            $attachments = '';
-                            $this->replaceMatches($msgSubject, $matcharray);
-                            $this->replaceMatches($msgBody, $matcharray);
-                            $this->sendEmail($Email, $msgSubject, $msgBody, $senderEmail, $senderName, $attachments, $action);
+                            $jsst_msgSubject = $jsst_template->subject;
+                            $jsst_msgBody = $jsst_template->body;
+                            $jsst_attachments = '';
+                            $this->replaceMatches($jsst_msgSubject, $jsst_matcharray);
+                            $this->replaceMatches($jsst_msgBody, $jsst_matcharray);
+                            $this->sendEmail($Email, $jsst_msgSubject, $jsst_msgBody, $jsst_senderEmail, $jsst_senderName, $jsst_attachments, $jsst_action);
                         }
                         break;
                     case 12: // DEPARTMENT TRANSFER
-                        $ticketRecord = $this->getRecordByTablenameAndId('js_ticket_tickets', $id);
-                        $TrackingId = $ticketRecord->ticketid;
-                        $Subject = $ticketRecord->subject;
-                        $DepName = $ticketRecord->departmentname;
+                        $jsst_ticketRecord = $this->getRecordByTablenameAndId('js_ticket_tickets', $jsst_id);
+                        $TrackingId = $jsst_ticketRecord->ticketid;
+                        $Subject = $jsst_ticketRecord->subject;
+                        $DepName = $jsst_ticketRecord->departmentname;
                         if(in_array('helptopic', jssupportticket::$_active_addons)){
-                            $HelptopicName = $ticketRecord->topic;
+                            $HelptopicName = $jsst_ticketRecord->topic;
                         }else{
                             $HelptopicName = '';
                         }
-                        $Email = $ticketRecord->email;
-                        $Department = JSSTincluder::getJSModel('department')->getDepartmentById($ticketRecord->departmentid);
-                        $matcharray = array(
+                        $Email = $jsst_ticketRecord->email;
+                        $Department = JSSTincluder::getJSModel('department')->getDepartmentById($jsst_ticketRecord->departmentid);
+                        $jsst_matcharray = array(
                             '{SITETITLE}' => jssupportticket::$_config['title'],
                             '{SUBJECT}' => $Subject,
                             '{HELP_TOPIC}' => $HelptopicName,
                             '{TRACKINGID}' => $TrackingId,
-                            '{DEPARTMENT_TITLE}' => $ticketRecord->departmentname,
-                            '{PRIORITY}' => $ticketRecord->priority,
+                            '{DEPARTMENT_TITLE}' => $jsst_ticketRecord->departmentname,
+                            '{PRIORITY}' => $jsst_ticketRecord->priority,
                             '{CURRENT_YEAR}' => gmdate('Y')
                         );
                         // code for handling custom fields start
-                        $fvalue = '';
-                        if(!empty($ticketRecord->params)){
-                            $data = json_decode($ticketRecord->params,true);
+                        $jsst_fvalue = '';
+                        if(!empty($jsst_ticketRecord->params)){
+                            $jsst_data = json_decode($jsst_ticketRecord->params,true);
                         }
-                        $fields = JSSTincluder::getJSModel('fieldordering')->getUserfieldsfor(1);
-                        if( isset($data) && is_array($data)){
-                            foreach ($fields as $field) {
-                                if($field->userfieldtype != 'file'){
-                                    $fvalue = '';
-                                    if(array_key_exists($field->field, $data)){
-                                        $fvalue = $data[$field->field];
+                        $jsst_fields = JSSTincluder::getJSModel('fieldordering')->getUserfieldsfor(1);
+                        if( isset($jsst_data) && is_array($jsst_data)){
+                            foreach ($jsst_fields as $jsst_field) {
+                                if($jsst_field->userfieldtype != 'file'){
+                                    $jsst_fvalue = '';
+                                    if(array_key_exists($jsst_field->field, $jsst_data)){
+                                        $jsst_fvalue = $jsst_data[$jsst_field->field];
                                     }
-                                    $matcharray['{'.$field->field.'}'] = $fvalue;// match array new index for custom field
+                                    $jsst_matcharray['{'.$jsst_field->field.'}'] = $jsst_fvalue;// match array new index for custom field
                                 }
                             }
                         }
                         // code for handling custom fields end
-                        $object = $this->getSenderEmailAndName($id);
-                        $senderEmail = $object->email;
-                        $senderName = $object->name;
-                        $defaulttemplate = $this->getTemplateForEmail('deptrans-tk', $ticketRecord->multiformid);
+                        $jsst_object = $this->getSenderEmailAndName($jsst_id);
+                        $jsst_senderEmail = $jsst_object->email;
+                        $jsst_senderName = $jsst_object->name;
+                        $jsst_defaulttemplate = $this->getTemplateForEmail('deptrans-tk', $jsst_ticketRecord->multiformid);
                         // New ticket mail to admin
                         if (jssupportticket::$_config['ticket_department_transfer_admin'] == 1) {
-                            $adminEmailid = jssupportticket::$_config['default_admin_email'];
-                            $adminEmail = $this->getEmailById($adminEmailid);
+                            $jsst_adminEmailid = jssupportticket::$_config['default_admin_email'];
+                            $jsst_adminEmail = $this->getEmailById($jsst_adminEmailid);
 
-                            $template = apply_filters( 'jsst_get_email_template_by_user_defined_language','','deptrans-tk' ,$adminEmail ,'', $ticketRecord->multiformid);
-                            if($template == '' && empty($template)){
-                                $template = $defaulttemplate;
+                            $jsst_template = apply_filters( 'jsst_get_email_template_by_user_defined_language','','deptrans-tk' ,$jsst_adminEmail ,'', $jsst_ticketRecord->multiformid);
+                            if($jsst_template == '' && empty($jsst_template)){
+                                $jsst_template = $jsst_defaulttemplate;
                             }
-                            $msgSubject = $template->subject;
-                            $msgBody = $template->body;
-                            $attachments = '';
-                            $this->replaceMatches($msgSubject, $matcharray);
-                            $this->replaceMatches($msgBody, $matcharray);
-                            $this->sendEmail($adminEmail, $msgSubject, $msgBody, $senderEmail, $senderName, $attachments, $action, 'deptrans-tk-admin');
+                            $jsst_msgSubject = $jsst_template->subject;
+                            $jsst_msgBody = $jsst_template->body;
+                            $jsst_attachments = '';
+                            $this->replaceMatches($jsst_msgSubject, $jsst_matcharray);
+                            $this->replaceMatches($jsst_msgBody, $jsst_matcharray);
+                            $this->sendEmail($jsst_adminEmail, $jsst_msgSubject, $jsst_msgBody, $jsst_senderEmail, $jsst_senderName, $jsst_attachments, $jsst_action, 'deptrans-tk-admin');
                         }
                         // New ticket mail to staff
                         if ( in_array('agent',jssupportticket::$_active_addons) && jssupportticket::$_config['ticket_department_transfer_staff'] == 1) {
-                            $agentEmail = $this->getStaffEmailAddressByStaffId($ticketRecord->staffid);
-                            $staffuid = $this->getStaffUidByStaffId($ticketRecord->staffid);
+                            $jsst_agentEmail = $this->getStaffEmailAddressByStaffId($jsst_ticketRecord->staffid);
+                            $jsst_staffuid = $this->getStaffUidByStaffId($jsst_ticketRecord->staffid);
 
-                            $template = apply_filters( 'jsst_get_email_template_by_user_defined_language','','deptrans-tk' ,$agentEmail ,$staffuid, $ticketRecord->multiformid);
-                            if($template == '' && empty($template)){
-                                $template = $defaulttemplate;
+                            $jsst_template = apply_filters( 'jsst_get_email_template_by_user_defined_language','','deptrans-tk' ,$jsst_agentEmail ,$jsst_staffuid, $jsst_ticketRecord->multiformid);
+                            if($jsst_template == '' && empty($jsst_template)){
+                                $jsst_template = $jsst_defaulttemplate;
                             }
-                            $msgSubject = $template->subject;
-                            $msgBody = $template->body;
-                            $attachments = '';
-                            $this->replaceMatches($msgSubject, $matcharray);
-                            $this->replaceMatches($msgBody, $matcharray);
-                            $this->sendEmail($agentEmail, $msgSubject, $msgBody, $senderEmail, $senderName, $attachments, $action, 'deptrans-tk-staff');
+                            $jsst_msgSubject = $jsst_template->subject;
+                            $jsst_msgBody = $jsst_template->body;
+                            $jsst_attachments = '';
+                            $this->replaceMatches($jsst_msgSubject, $jsst_matcharray);
+                            $this->replaceMatches($jsst_msgBody, $jsst_matcharray);
+                            $this->sendEmail($jsst_agentEmail, $jsst_msgSubject, $jsst_msgBody, $jsst_senderEmail, $jsst_senderName, $jsst_attachments, $jsst_action, 'deptrans-tk-staff');
 
                             // send email to all staff memebers of current ticket department
                             // Get All Staff member of the department of Current Ticket
-                            $agentmembers = JSSTincluder::getJSModel('agent')->getAllStaffMemberByDepId($ticketRecord->departmentid);
-                            if(is_array($agentmembers) && !empty($agentmembers)){
-                                foreach ($agentmembers AS $agent) {
-                                    if($agent->canemail == 1){
-                                        $template = apply_filters( 'jsst_get_email_template_by_user_defined_language','','deptrans-tk' ,$agent->email ,$agent->staffuid, $ticketRecord->multiformid);
-                                        if($template == '' && empty($template)){
-                                            $template = $defaulttemplate;
+                            $jsst_agentmembers = JSSTincluder::getJSModel('agent')->getAllStaffMemberByDepId($jsst_ticketRecord->departmentid);
+                            if(is_array($jsst_agentmembers) && !empty($jsst_agentmembers)){
+                                foreach ($jsst_agentmembers AS $jsst_agent) {
+                                    if($jsst_agent->canemail == 1){
+                                        $jsst_template = apply_filters( 'jsst_get_email_template_by_user_defined_language','','deptrans-tk' ,$jsst_agent->email ,$jsst_agent->staffuid, $jsst_ticketRecord->multiformid);
+                                        if($jsst_template == '' && empty($jsst_template)){
+                                            $jsst_template = $jsst_defaulttemplate;
                                         }
-                                        $msgSubject = $template->subject;
-                                        $msgBody = $template->body;
-                                        $this->replaceMatches($msgSubject, $matcharray);
-                                        $this->replaceMatches($msgBody, $matcharray);
-                                        $msgBody .= '<input type="hidden" name="ticketid:' . esc_attr($TrackingId) . '###staff####" />';
-                                        $msgBody .= '<span style="display:none;" ticketid:' . esc_attr($TrackingId) . '###staff#### ></span>';
-                                        $attachments = '';
-                                        $this->sendEmail($agent->email, $msgSubject, $msgBody, $senderEmail, $senderName, $attachments, $action);
+                                        $jsst_msgSubject = $jsst_template->subject;
+                                        $jsst_msgBody = $jsst_template->body;
+                                        $this->replaceMatches($jsst_msgSubject, $jsst_matcharray);
+                                        $this->replaceMatches($jsst_msgBody, $jsst_matcharray);
+                                        $jsst_msgBody .= '<input type="hidden" name="ticketid:' . esc_attr($TrackingId) . '###staff####" />';
+                                        $jsst_msgBody .= '<span style="display:none;" ticketid:' . esc_attr($TrackingId) . '###staff#### ></span>';
+                                        $jsst_attachments = '';
+                                        $this->sendEmail($jsst_agent->email, $jsst_msgSubject, $jsst_msgBody, $jsst_senderEmail, $jsst_senderName, $jsst_attachments, $jsst_action);
                                     }
                                 }
                             }
                             // send email to staff memebers with all ticket permissions
-                            if( !is_numeric($ticketRecord->staffid) && !is_numeric($ticketRecord->departmentid)){
+                            if( !is_numeric($jsst_ticketRecord->staffid) && !is_numeric($jsst_ticketRecord->departmentid)){
                                 if( in_array('agent',jssupportticket::$_active_addons) ){
-                                    $agentmembers = JSSTincluder::getJSModel('agent')->getAllStaffMemberByAllTicketPermission();
-                                    if(is_array($agentmembers) && !empty($agentmembers)){
-                                        foreach ($agentmembers AS $agent) {
-                                            if($agent->canemail == 1){
-                                                $template = apply_filters( 'jsst_get_email_template_by_user_defined_language','','deptrans-tk' ,$agent->email ,$agent->uid, $ticketRecord->multiformid);
-                                                if($template == '' && empty($template)){
-                                                    $template = $defaulttemplate;
+                                    $jsst_agentmembers = JSSTincluder::getJSModel('agent')->getAllStaffMemberByAllTicketPermission();
+                                    if(is_array($jsst_agentmembers) && !empty($jsst_agentmembers)){
+                                        foreach ($jsst_agentmembers AS $jsst_agent) {
+                                            if($jsst_agent->canemail == 1){
+                                                $jsst_template = apply_filters( 'jsst_get_email_template_by_user_defined_language','','deptrans-tk' ,$jsst_agent->email ,$jsst_agent->uid, $jsst_ticketRecord->multiformid);
+                                                if($jsst_template == '' && empty($jsst_template)){
+                                                    $jsst_template = $jsst_defaulttemplate;
                                                 }
-                                                $msgSubject = $template->subject;
-                                                $msgBody = $template->body;
-                                                $this->replaceMatches($msgSubject, $matcharray);
-                                                $this->replaceMatches($msgBody, $matcharray);
-                                                $msgBody .= '<input type="hidden" name="ticketid:' . esc_attr($TrackingId) . '###staff####" />';
-                                                $msgBody .= '<span style="display:none;" ticketid:' . esc_attr($TrackingId) . '###staff#### ></span>';
-                                                $attachments = '';
-                                                $this->sendEmail($agent->email, $msgSubject, $msgBody, $senderEmail, $senderName, $attachments, $action);
+                                                $jsst_msgSubject = $jsst_template->subject;
+                                                $jsst_msgBody = $jsst_template->body;
+                                                $this->replaceMatches($jsst_msgSubject, $jsst_matcharray);
+                                                $this->replaceMatches($jsst_msgBody, $jsst_matcharray);
+                                                $jsst_msgBody .= '<input type="hidden" name="ticketid:' . esc_attr($TrackingId) . '###staff####" />';
+                                                $jsst_msgBody .= '<span style="display:none;" ticketid:' . esc_attr($TrackingId) . '###staff#### ></span>';
+                                                $jsst_attachments = '';
+                                                $this->sendEmail($jsst_agent->email, $jsst_msgSubject, $jsst_msgBody, $jsst_senderEmail, $jsst_senderName, $jsst_attachments, $jsst_action);
                                             }
                                         }
                                     }
@@ -1355,402 +1355,402 @@ class JSSTemailModel {
                         }
                         // New ticket mail to User
                         if (jssupportticket::$_config['ticket_department_transfer_user'] == 1) {
-                            $template = apply_filters( 'jsst_get_email_template_by_user_defined_language','','deptrans-tk' ,$Email,$ticketRecord->uid, $ticketRecord->multiformid);
-                            if($template == '' && empty($template)){
-                                $template = $defaulttemplate;
+                            $jsst_template = apply_filters( 'jsst_get_email_template_by_user_defined_language','','deptrans-tk' ,$Email,$jsst_ticketRecord->uid, $jsst_ticketRecord->multiformid);
+                            if($jsst_template == '' && empty($jsst_template)){
+                                $jsst_template = $jsst_defaulttemplate;
                             }
-                            $msgSubject = $template->subject;
-                            $msgBody = $template->body;
-                            $attachments = '';
-                            $this->replaceMatches($msgSubject, $matcharray);
-                            $this->replaceMatches($msgBody, $matcharray);
-                            $this->sendEmail($Email, $msgSubject, $msgBody, $senderEmail, $senderName, $attachments, $action);
+                            $jsst_msgSubject = $jsst_template->subject;
+                            $jsst_msgBody = $jsst_template->body;
+                            $jsst_attachments = '';
+                            $this->replaceMatches($jsst_msgSubject, $jsst_matcharray);
+                            $this->replaceMatches($jsst_msgBody, $jsst_matcharray);
+                            $this->sendEmail($Email, $jsst_msgSubject, $jsst_msgBody, $jsst_senderEmail, $jsst_senderName, $jsst_attachments, $jsst_action);
                         }
                         break;
                     case 13: // REASSIGN TICKET TO STAFF
                         if(! in_array('agent',jssupportticket::$_active_addons) ){
                             return;
                         }
-                        $ticketRecord = $this->getRecordByTablenameAndId('js_ticket_tickets', $id);
-                        $TrackingId = $ticketRecord->ticketid;
-                        $DepName = $ticketRecord->departmentname;
+                        $jsst_ticketRecord = $this->getRecordByTablenameAndId('js_ticket_tickets', $jsst_id);
+                        $TrackingId = $jsst_ticketRecord->ticketid;
+                        $DepName = $jsst_ticketRecord->departmentname;
                         if(in_array('helptopic', jssupportticket::$_active_addons)){
-                            $HelptopicName = $ticketRecord->topic;
+                            $HelptopicName = $jsst_ticketRecord->topic;
                         }else{
                             $HelptopicName = '';
                         }
-                        $Email = $ticketRecord->email;
-                        $Subject = $ticketRecord->subject;
-                        $Staff = JSSTincluder::getJSModel('agent')->getMyName($ticketRecord->staffid);
-                        $ticketHistory = $this->getTicketReplyHistory($id);
-                        $matcharray = array(
+                        $Email = $jsst_ticketRecord->email;
+                        $Subject = $jsst_ticketRecord->subject;
+                        $Staff = JSSTincluder::getJSModel('agent')->getMyName($jsst_ticketRecord->staffid);
+                        $jsst_ticketHistory = $this->getTicketReplyHistory($jsst_id);
+                        $jsst_matcharray = array(
                             '{SITETITLE}' => jssupportticket::$_config['title'],
                             '{AGENT_NAME}' => $Staff,
                             '{SUBJECT}' => $Subject,
                             '{HELP_TOPIC}' => $HelptopicName,
                             '{TRACKINGID}' => $TrackingId,
-                            '{DEPARTMENT}' => $ticketRecord->departmentname,
-                            '{PRIORITY}' => $ticketRecord->priority,
-                            '{TICKET_HISTORY}' => $ticketHistory,
+                            '{DEPARTMENT}' => $jsst_ticketRecord->departmentname,
+                            '{PRIORITY}' => $jsst_ticketRecord->priority,
+                            '{TICKET_HISTORY}' => $jsst_ticketHistory,
                             '{CURRENT_YEAR}' => gmdate('Y')
                         );
                         // code for handling custom fields start
-                        $fvalue = '';
-                        if(!empty($ticketRecord->params)){
-                            $data = json_decode($ticketRecord->params,true);
+                        $jsst_fvalue = '';
+                        if(!empty($jsst_ticketRecord->params)){
+                            $jsst_data = json_decode($jsst_ticketRecord->params,true);
                         }
-                        $fields = JSSTincluder::getJSModel('fieldordering')->getUserfieldsfor(1);
-                        if( isset($data) && is_array($data)){
-                            foreach ($fields as $field) {
-                                if($field->userfieldtype != 'file'){
-                                    $fvalue = '';
-                                    if(array_key_exists($field->field, $data)){
-                                        $fvalue = $data[$field->field];
+                        $jsst_fields = JSSTincluder::getJSModel('fieldordering')->getUserfieldsfor(1);
+                        if( isset($jsst_data) && is_array($jsst_data)){
+                            foreach ($jsst_fields as $jsst_field) {
+                                if($jsst_field->userfieldtype != 'file'){
+                                    $jsst_fvalue = '';
+                                    if(array_key_exists($jsst_field->field, $jsst_data)){
+                                        $jsst_fvalue = $jsst_data[$jsst_field->field];
                                     }
-                                    $matcharray['{'.$field->field.'}'] = $fvalue;// match array new index for custom field
+                                    $jsst_matcharray['{'.$jsst_field->field.'}'] = $jsst_fvalue;// match array new index for custom field
                                 }
                             }
                         }
                         // code for handling custom fields end
-                        $object = $this->getSenderEmailAndName($id);
-                        $senderEmail = $object->email;
-                        $senderName = $object->name;
-                        $defaulttemplate = $this->getTemplateForEmail('reassign-tk', $ticketRecord->multiformid);
+                        $jsst_object = $this->getSenderEmailAndName($jsst_id);
+                        $jsst_senderEmail = $jsst_object->email;
+                        $jsst_senderName = $jsst_object->name;
+                        $jsst_defaulttemplate = $this->getTemplateForEmail('reassign-tk', $jsst_ticketRecord->multiformid);
                         // New ticket mail to admin
-                        $link = admin_url("admin.php?page=ticket&jstlay=ticketdetail&jssupportticketid=" . esc_attr($id));
-                        $matcharray['{TICKETURL}'] = $link;
-			            $adminEmailid = jssupportticket::$_config['default_admin_email'];
-			            $adminEmail = $this->getEmailById($adminEmailid);
+                        $jsst_link = admin_url("admin.php?page=ticket&jstlay=ticketdetail&jssupportticketid=" . esc_attr($jsst_id));
+                        $jsst_matcharray['{TICKETURL}'] = $jsst_link;
+			            $jsst_adminEmailid = jssupportticket::$_config['default_admin_email'];
+			            $jsst_adminEmail = $this->getEmailById($jsst_adminEmailid);
                         if (jssupportticket::$_config['ticket_reassign_admin'] == 1) {
 
-                            $template = apply_filters( 'jsst_get_email_template_by_user_defined_language','','reassign-tk' ,$adminEmail ,'', $ticketRecord->multiformid);
-                            if($template == '' && empty($template)){
-                                $template = $defaulttemplate;
+                            $jsst_template = apply_filters( 'jsst_get_email_template_by_user_defined_language','','reassign-tk' ,$jsst_adminEmail ,'', $jsst_ticketRecord->multiformid);
+                            if($jsst_template == '' && empty($jsst_template)){
+                                $jsst_template = $jsst_defaulttemplate;
                             }
-                            $msgSubject = $template->subject;
-                            $msgBody = $template->body;
-                            $attachments = '';
+                            $jsst_msgSubject = $jsst_template->subject;
+                            $jsst_msgBody = $jsst_template->body;
+                            $jsst_attachments = '';
 
-                            $this->replaceMatches($msgSubject, $matcharray);
-                            $this->replaceMatches($msgBody, $matcharray);
-                            $this->sendEmail($adminEmail, $msgSubject, $msgBody, $senderEmail, $senderName, $attachments, $action, 'reassign-tk-admin');
+                            $this->replaceMatches($jsst_msgSubject, $jsst_matcharray);
+                            $this->replaceMatches($jsst_msgBody, $jsst_matcharray);
+                            $this->sendEmail($jsst_adminEmail, $jsst_msgSubject, $jsst_msgBody, $jsst_senderEmail, $jsst_senderName, $jsst_attachments, $jsst_action, 'reassign-tk-admin');
                         }
 
-                        $matcharray = array(
+                        $jsst_matcharray = array(
                             '{SITETITLE}' => jssupportticket::$_config['title'],
                             '{AGENT_NAME}' => $Staff,
                             '{SUBJECT}' => $Subject,
                             '{HELP_TOPIC}' => $HelptopicName,
                             '{TRACKINGID}' => $TrackingId,
-                            '{DEPARTMENT}' => $ticketRecord->departmentname,
-                            '{PRIORITY}' => $ticketRecord->priority,
-                            '{TICKET_HISTORY}' => $ticketHistory,
+                            '{DEPARTMENT}' => $jsst_ticketRecord->departmentname,
+                            '{PRIORITY}' => $jsst_ticketRecord->priority,
+                            '{TICKET_HISTORY}' => $jsst_ticketHistory,
                             '{CURRENT_YEAR}' => gmdate('Y')
                         );
                         // code for handling custom fields start
-                        $fvalue = '';
-                        if(!empty($ticketRecord->params)){
-                            $data = json_decode($ticketRecord->params,true);
+                        $jsst_fvalue = '';
+                        if(!empty($jsst_ticketRecord->params)){
+                            $jsst_data = json_decode($jsst_ticketRecord->params,true);
                         }
-                        $fields = JSSTincluder::getJSModel('fieldordering')->getUserfieldsfor(1);
-                        if( isset($data) && is_array($data)){
-                            foreach ($fields as $field) {
-                                if($field->userfieldtype != 'file'){
-                                    $fvalue = '';
-                                    if(array_key_exists($field->field, $data)){
-                                        $fvalue = $data[$field->field];
+                        $jsst_fields = JSSTincluder::getJSModel('fieldordering')->getUserfieldsfor(1);
+                        if( isset($jsst_data) && is_array($jsst_data)){
+                            foreach ($jsst_fields as $jsst_field) {
+                                if($jsst_field->userfieldtype != 'file'){
+                                    $jsst_fvalue = '';
+                                    if(array_key_exists($jsst_field->field, $jsst_data)){
+                                        $jsst_fvalue = $jsst_data[$jsst_field->field];
                                     }
-                                    $matcharray['{'.$field->field.'}'] = $fvalue;// match array new index for custom field
+                                    $jsst_matcharray['{'.$jsst_field->field.'}'] = $jsst_fvalue;// match array new index for custom field
                                 }
                             }
                         }
                         // code for handling custom fields end
-                        $link = esc_url(jssupportticket::makeUrl(array('jstmod'=>'ticket', 'jstlay'=>'ticketdetail','jssupportticketid'=>$id,'jsstpageid'=>jssupportticket::getPageid())));
-                        $matcharray['{TICKETURL}'] = $link;
+                        $jsst_link = esc_url(jssupportticket::makeUrl(array('jstmod'=>'ticket', 'jstlay'=>'ticketdetail','jssupportticketid'=>$jsst_id,'jsstpageid'=>jssupportticket::getPageid())));
+                        $jsst_matcharray['{TICKETURL}'] = $jsst_link;
                         // New ticket mail to staff
                         if ( in_array('agent',jssupportticket::$_active_addons) && jssupportticket::$_config['ticket_reassign_staff'] == 1) {
-                            $agentEmail = $this->getStaffEmailAddressByStaffId($ticketRecord->staffid);
-                            $staffuid = $this->getStaffUidByStaffId($ticketRecord->staffid);
-                            $template = apply_filters( 'jsst_get_email_template_by_user_defined_language','','reassign-tk' ,$adminEmail ,$staffuid, $ticketRecord->multiformid);
-                            if($template == '' && empty($template)){
-                                $template = $defaulttemplate;
+                            $jsst_agentEmail = $this->getStaffEmailAddressByStaffId($jsst_ticketRecord->staffid);
+                            $jsst_staffuid = $this->getStaffUidByStaffId($jsst_ticketRecord->staffid);
+                            $jsst_template = apply_filters( 'jsst_get_email_template_by_user_defined_language','','reassign-tk' ,$jsst_adminEmail ,$jsst_staffuid, $jsst_ticketRecord->multiformid);
+                            if($jsst_template == '' && empty($jsst_template)){
+                                $jsst_template = $jsst_defaulttemplate;
                             }
 
-                            $msgSubject = $template->subject;
-                            $msgBody = $template->body;
-                            $attachments = '';
-                            $this->replaceMatches($msgSubject, $matcharray);
-                            $this->replaceMatches($msgBody, $matcharray);
-                            $this->sendEmail($agentEmail, $msgSubject, $msgBody, $senderEmail, $senderName, $attachments, $action, 'reassign-tk-staff');
+                            $jsst_msgSubject = $jsst_template->subject;
+                            $jsst_msgBody = $jsst_template->body;
+                            $jsst_attachments = '';
+                            $this->replaceMatches($jsst_msgSubject, $jsst_matcharray);
+                            $this->replaceMatches($jsst_msgBody, $jsst_matcharray);
+                            $this->sendEmail($jsst_agentEmail, $jsst_msgSubject, $jsst_msgBody, $jsst_senderEmail, $jsst_senderName, $jsst_attachments, $jsst_action, 'reassign-tk-staff');
                         }
                         // New ticket mail to User
                         if (jssupportticket::$_config['ticket_reassign_user'] == 1) {
-                            $template = apply_filters( 'jsst_get_email_template_by_user_defined_language','','reassign-tk' ,$Email ,$ticketRecord->uid, $ticketRecord->multiformid);
-                            if($template == '' && empty($template)){
-                                $template = $defaulttemplate;
+                            $jsst_template = apply_filters( 'jsst_get_email_template_by_user_defined_language','','reassign-tk' ,$Email ,$jsst_ticketRecord->uid, $jsst_ticketRecord->multiformid);
+                            if($jsst_template == '' && empty($jsst_template)){
+                                $jsst_template = $jsst_defaulttemplate;
                             }
-                            $msgSubject = $template->subject;
-                            $msgBody = $template->body;
-                            $attachments = '';
-                            $this->replaceMatches($msgSubject, $matcharray);
-                            $this->replaceMatches($msgBody, $matcharray);
-                            $this->sendEmail($Email, $msgSubject, $msgBody, $senderEmail, $senderName, $attachments, $action);
+                            $jsst_msgSubject = $jsst_template->subject;
+                            $jsst_msgBody = $jsst_template->body;
+                            $jsst_attachments = '';
+                            $this->replaceMatches($jsst_msgSubject, $jsst_matcharray);
+                            $this->replaceMatches($jsst_msgBody, $jsst_matcharray);
+                            $this->sendEmail($Email, $jsst_msgSubject, $jsst_msgBody, $jsst_senderEmail, $jsst_senderName, $jsst_attachments, $jsst_action);
                         }
                         break;
                     case 14: // Reply to closed ticket for Email Piping
-                        $ticketRecord = $this->getRecordByTablenameAndId('js_ticket_tickets', $id);
-                        $Subject = $ticketRecord->subject;
-                        $Email = $ticketRecord->email;
-                        $matcharray = array(
+                        $jsst_ticketRecord = $this->getRecordByTablenameAndId('js_ticket_tickets', $jsst_id);
+                        $Subject = $jsst_ticketRecord->subject;
+                        $Email = $jsst_ticketRecord->email;
+                        $jsst_matcharray = array(
                             '{SITETITLE}' => jssupportticket::$_config['title'],
                             '{SUBJECT}' => $Subject,
-                            '{DEPARTMENT}' => $ticketRecord->departmentname,
-                            '{PRIORITY}' => $ticketRecord->priority,
+                            '{DEPARTMENT}' => $jsst_ticketRecord->departmentname,
+                            '{PRIORITY}' => $jsst_ticketRecord->priority,
                             '{CURRENT_YEAR}' => gmdate('Y')
                         );
                         // code for handling custom fields start
-                        $fvalue = '';
-                        if(!empty($ticketRecord->params)){
-                            $data = json_decode($ticketRecord->params,true);
+                        $jsst_fvalue = '';
+                        if(!empty($jsst_ticketRecord->params)){
+                            $jsst_data = json_decode($jsst_ticketRecord->params,true);
                         }
-                        $fields = JSSTincluder::getJSModel('fieldordering')->getUserfieldsfor(1);
-                        if( isset($data) && is_array($data)){
-                            foreach ($fields as $field) {
-                                if($field->userfieldtype != 'file'){
-                                    $fvalue = '';
-                                    if(array_key_exists($field->field, $data)){
-                                        $fvalue = $data[$field->field];
+                        $jsst_fields = JSSTincluder::getJSModel('fieldordering')->getUserfieldsfor(1);
+                        if( isset($jsst_data) && is_array($jsst_data)){
+                            foreach ($jsst_fields as $jsst_field) {
+                                if($jsst_field->userfieldtype != 'file'){
+                                    $jsst_fvalue = '';
+                                    if(array_key_exists($jsst_field->field, $jsst_data)){
+                                        $jsst_fvalue = $jsst_data[$jsst_field->field];
                                     }
-                                    $matcharray['{'.$field->field.'}'] = $fvalue;// match array new index for custom field
+                                    $jsst_matcharray['{'.$jsst_field->field.'}'] = $jsst_fvalue;// match array new index for custom field
                                 }
                             }
                         }
                         // code for handling custom fields end
-                        $object = $this->getSenderEmailAndName($id);
-                        $senderEmail = $object->email;
-                        $senderName = $object->name;
-                        $defaulttemplate = $this->getTemplateForEmail('mail-rpy-closed', $ticketRecord->multiformid);
+                        $jsst_object = $this->getSenderEmailAndName($jsst_id);
+                        $jsst_senderEmail = $jsst_object->email;
+                        $jsst_senderName = $jsst_object->name;
+                        $jsst_defaulttemplate = $this->getTemplateForEmail('mail-rpy-closed', $jsst_ticketRecord->multiformid);
                         // New ticket mail to User
                         if (jssupportticket::$_config['ticket_reply_closed_ticket_user'] == 1) {
-                            $template = apply_filters( 'jsst_get_email_template_by_user_defined_language','','mail-rpy-closed' ,$Email ,$ticketRecord->uid, $ticketRecord->multiformid);
-                            if($template == '' && empty($template)){
-                                $template = $defaulttemplate;
+                            $jsst_template = apply_filters( 'jsst_get_email_template_by_user_defined_language','','mail-rpy-closed' ,$Email ,$jsst_ticketRecord->uid, $jsst_ticketRecord->multiformid);
+                            if($jsst_template == '' && empty($jsst_template)){
+                                $jsst_template = $jsst_defaulttemplate;
                             }
-                            $msgBody = $template->body;
-                            $attachments = '';
-                            $this->replaceMatches($msgBody, $matcharray);
-                            $this->sendEmail($Email, $msgSubject, $msgBody, $senderEmail, $senderName, $attachments, $action);
+                            $jsst_msgBody = $jsst_template->body;
+                            $jsst_attachments = '';
+                            $this->replaceMatches($jsst_msgBody, $jsst_matcharray);
+                            $this->sendEmail($Email, $jsst_msgSubject, $jsst_msgBody, $jsst_senderEmail, $jsst_senderName, $jsst_attachments, $jsst_action);
                         }
                         break;
                     case 15: // Send feedback email to user
                         if(!in_array('feedback', jssupportticket::$_active_addons)){
                             break;
                         }
-                        $ticketRecord = $this->getRecordByTablenameAndId('js_ticket_tickets', $id);
-                        $Subject = $ticketRecord->subject;
-                        $Email = $ticketRecord->email;
-                        $TrackingId = $ticketRecord->ticketid;
-                        $close_date = date_i18n(jssupportticket::$_config['date_format'], jssupportticketphplib::JSST_strtotime($ticketRecord->closed));
-                        $username = $ticketRecord->name;
-                        $tokenarray['emailaddress']=$Email;
-                        $tokenarray['trackingid']=$TrackingId;
-                        $tokenarray['sitelink']=JSSTincluder::getJSModel('jssupportticket')->getEncriptedSiteLink();
-                        $token = wp_json_encode($tokenarray);
+                        $jsst_ticketRecord = $this->getRecordByTablenameAndId('js_ticket_tickets', $jsst_id);
+                        $Subject = $jsst_ticketRecord->subject;
+                        $Email = $jsst_ticketRecord->email;
+                        $TrackingId = $jsst_ticketRecord->ticketid;
+                        $jsst_close_date = date_i18n(jssupportticket::$_config['date_format'], jssupportticketphplib::JSST_strtotime($jsst_ticketRecord->closed));
+                        $jsst_username = $jsst_ticketRecord->name;
+                        $jsst_tokenarray['emailaddress']=$Email;
+                        $jsst_tokenarray['trackingid']=$TrackingId;
+                        $jsst_tokenarray['sitelink']=JSSTincluder::getJSModel('jssupportticket')->getEncriptedSiteLink();
+                        $jsst_token = wp_json_encode($jsst_tokenarray);
                         include_once JSST_PLUGIN_PATH . 'includes/encoder.php';
-                        $encoder = new JSSTEncoder();
-                        $encryptedtext = $encoder->encrypt($token);
-                        $link = "<a href=" . esc_url(jssupportticket::makeUrl(array('jstmod'=>'feedback', 'task'=>'showfeedbackform','action'=>'jstask','token'=>$encryptedtext,'jsstpageid'=>jssupportticket::getPageid()))) . ">";
-                        $linkclosing = "</a>";
-                        $tracking_url = "<a href=" . esc_url(jssupportticket::makeUrl(array('jstmod'=>'ticket', 'task'=>'showticketstatus','action'=>'jstask','token'=>$encryptedtext,'jsstpageid'=>jssupportticket::getPageid()))) . ">" . $TrackingId . "</a>";
-                        $matcharray = array(
+                        $jsst_encoder = new JSSTEncoder();
+                        $jsst_encryptedtext = $jsst_encoder->encrypt($jsst_token);
+                        $jsst_link = "<a href=" . esc_url(jssupportticket::makeUrl(array('jstmod'=>'feedback', 'task'=>'showfeedbackform','action'=>'jstask','token'=>$jsst_encryptedtext,'jsstpageid'=>jssupportticket::getPageid()))) . ">";
+                        $jsst_linkclosing = "</a>";
+                        $jsst_tracking_url = "<a href=" . esc_url(jssupportticket::makeUrl(array('jstmod'=>'ticket', 'task'=>'showticketstatus','action'=>'jstask','token'=>$jsst_encryptedtext,'jsstpageid'=>jssupportticket::getPageid()))) . ">" . $TrackingId . "</a>";
+                        $jsst_matcharray = array(
                             '{SITETITLE}' => jssupportticket::$_config['title'],
-                            '{USERNAME}' => $username,
-                            '{USER_NAME}' => $username,
+                            '{USERNAME}' => $jsst_username,
+                            '{USER_NAME}' => $jsst_username,
                             '{TICKET_SUBJECT}' => $Subject,
-                            '{TRACKING_ID}' => $tracking_url,
-                            '{CLOSE_DATE}' => $close_date,
-                            '{LINK}' => $link,
-                            '{/LINK}' => $linkclosing,
-                            '{DEPARTMENT}' => $ticketRecord->departmentname,
-                            '{PRIORITY}' => $ticketRecord->priority,
+                            '{TRACKING_ID}' => $jsst_tracking_url,
+                            '{CLOSE_DATE}' => $jsst_close_date,
+                            '{LINK}' => $jsst_link,
+                            '{/LINK}' => $jsst_linkclosing,
+                            '{DEPARTMENT}' => $jsst_ticketRecord->departmentname,
+                            '{PRIORITY}' => $jsst_ticketRecord->priority,
                             '{CURRENT_YEAR}' => gmdate('Y')
                         );
                         // code for handling custom fields start
-                        $fvalue = '';
-                        if(!empty($ticketRecord->params)){
-                            $data = json_decode($ticketRecord->params,true);
+                        $jsst_fvalue = '';
+                        if(!empty($jsst_ticketRecord->params)){
+                            $jsst_data = json_decode($jsst_ticketRecord->params,true);
                         }
-                        $fields = JSSTincluder::getJSModel('fieldordering')->getUserfieldsfor(1);
-                        if( isset($data) && is_array($data)){
-                            foreach ($fields as $field) {
-                                if($field->userfieldtype != 'file'){
-                                    $fvalue = '';
-                                    if(array_key_exists($field->field, $data)){
-                                        $fvalue = $data[$field->field];
+                        $jsst_fields = JSSTincluder::getJSModel('fieldordering')->getUserfieldsfor(1);
+                        if( isset($jsst_data) && is_array($jsst_data)){
+                            foreach ($jsst_fields as $jsst_field) {
+                                if($jsst_field->userfieldtype != 'file'){
+                                    $jsst_fvalue = '';
+                                    if(array_key_exists($jsst_field->field, $jsst_data)){
+                                        $jsst_fvalue = $jsst_data[$jsst_field->field];
                                     }
-                                    $matcharray['{'.$field->field.'}'] = $fvalue;// match array new index for custom field
+                                    $jsst_matcharray['{'.$jsst_field->field.'}'] = $jsst_fvalue;// match array new index for custom field
                                 }
                             }
                         }
                         // code for handling custom fields end
-                        $object = $this->getSenderEmailAndName($id);
-                        $senderEmail = $object->email;
-                        $senderName = $object->name;
-                        $defaulttemplate = $this->getTemplateForEmail('mail-feedback', $ticketRecord->multiformid);
+                        $jsst_object = $this->getSenderEmailAndName($jsst_id);
+                        $jsst_senderEmail = $jsst_object->email;
+                        $jsst_senderName = $jsst_object->name;
+                        $jsst_defaulttemplate = $this->getTemplateForEmail('mail-feedback', $jsst_ticketRecord->multiformid);
                         // New ticket mail to User
                         if (jssupportticket::$_config['ticket_feedback_user'] == 1) {
-                            $template = apply_filters( 'jsst_get_email_template_by_user_defined_language','','mail-feedback' ,$Email ,$ticketRecord->uid);
-                            if($template == '' && empty($template)){
-                                $template = $defaulttemplate;
+                            $jsst_template = apply_filters( 'jsst_get_email_template_by_user_defined_language','','mail-feedback' ,$Email ,$jsst_ticketRecord->uid);
+                            if($jsst_template == '' && empty($jsst_template)){
+                                $jsst_template = $jsst_defaulttemplate;
                             }
-                            $msgSubject = $template->subject;
-                            $msgBody = $template->body;
-                            $attachments = '';
-                            $this->replaceMatches($msgBody, $matcharray);
-                            $this->sendEmail($Email, $msgSubject, $msgBody, $senderEmail, $senderName, $attachments, $action);
+                            $jsst_msgSubject = $jsst_template->subject;
+                            $jsst_msgBody = $jsst_template->body;
+                            $jsst_attachments = '';
+                            $this->replaceMatches($jsst_msgBody, $jsst_matcharray);
+                            $this->sendEmail($Email, $jsst_msgSubject, $jsst_msgBody, $jsst_senderEmail, $jsst_senderName, $jsst_attachments, $jsst_action);
                         }
                         break;
                 }
                 break;
             case 2: // Ban Email
-                switch ($action) {
+                switch ($jsst_action) {
                     case 1: // Ban Email
-                        if ($tablename != null)
-                            $banemailRecord = $this->getRecordByTablenameAndId($tablename, $id);
+                        if ($jsst_tablename != null)
+                            $jsst_banemailRecord = $this->getRecordByTablenameAndId($jsst_tablename, $jsst_id);
                         else
-                            $banemailRecord = $this->getRecordByTablenameAndId('js_ticket_email_banlist', $id);
-                        $Email = $banemailRecord->email;
-                        $matcharray = array(
+                            $jsst_banemailRecord = $this->getRecordByTablenameAndId('js_ticket_email_banlist', $jsst_id);
+                        $Email = $jsst_banemailRecord->email;
+                        $jsst_matcharray = array(
                             '{SITETITLE}' => jssupportticket::$_config['title'],
                             '{EMAIL_ADDRESS}' => $Email,
                             '{CURRENT_YEAR}' => gmdate('Y')
                         );
-                        $object = $this->getDefaultSenderEmailAndName();
-                        $senderEmail = $object->email;
-                        $senderName = $object->name;
-                        $defaulttemplate = $this->getTemplateForEmail('banemail-tk');
+                        $jsst_object = $this->getDefaultSenderEmailAndName();
+                        $jsst_senderEmail = $jsst_object->email;
+                        $jsst_senderName = $jsst_object->name;
+                        $jsst_defaulttemplate = $this->getTemplateForEmail('banemail-tk');
 
                         // New ticket mail to admin
                         if (jssupportticket::$_config['ticket_ban_email_admin'] == 1) {
-                            $adminEmailid = jssupportticket::$_config['default_admin_email'];
-                            $adminEmail = $this->getEmailById($adminEmailid);
-                            $template = apply_filters( 'jsst_get_email_template_by_user_defined_language','','banemail-tk' ,$adminEmail ,'');
-                            if($template == '' && empty($template)){
-                                $template = $defaulttemplate;
+                            $jsst_adminEmailid = jssupportticket::$_config['default_admin_email'];
+                            $jsst_adminEmail = $this->getEmailById($jsst_adminEmailid);
+                            $jsst_template = apply_filters( 'jsst_get_email_template_by_user_defined_language','','banemail-tk' ,$jsst_adminEmail ,'');
+                            if($jsst_template == '' && empty($jsst_template)){
+                                $jsst_template = $jsst_defaulttemplate;
                             }
-                            $msgSubject = $template->subject;
-                            $msgBody = $template->body;
-                            $attachments = '';
+                            $jsst_msgSubject = $jsst_template->subject;
+                            $jsst_msgBody = $jsst_template->body;
+                            $jsst_attachments = '';
 
-                            $this->replaceMatches($msgSubject, $matcharray);
-                            $this->replaceMatches($msgBody, $matcharray);
-                            $this->sendEmail($adminEmail, $msgSubject, $msgBody, $senderEmail, $senderName, $attachments, $action, 'banemail-tk-admin');
+                            $this->replaceMatches($jsst_msgSubject, $jsst_matcharray);
+                            $this->replaceMatches($jsst_msgBody, $jsst_matcharray);
+                            $this->sendEmail($jsst_adminEmail, $jsst_msgSubject, $jsst_msgBody, $jsst_senderEmail, $jsst_senderName, $jsst_attachments, $jsst_action, 'banemail-tk-admin');
                         }
                         // New ticket mail to staff
                         if ( in_array('agent',jssupportticket::$_active_addons) && jssupportticket::$_config['ticket_ban_email_staff'] == 1) {
-                            if ($tablename != null){
-                                $agentEmail = $this->getStaffEmailAddressByStaffId($banemailRecord->staffid);
-                                $staffuid = $this->getStaffUidByStaffId($banemailRecord->staffid);
+                            if ($jsst_tablename != null){
+                                $jsst_agentEmail = $this->getStaffEmailAddressByStaffId($jsst_banemailRecord->staffid);
+                                $jsst_staffuid = $this->getStaffUidByStaffId($jsst_banemailRecord->staffid);
                             }else{
-                                $agentEmail = $this->getStaffEmailAddressByStaffId($banemailRecord->submitter);
-                                $staffuid = $this->getStaffUidByStaffId($banemailRecord->submitter);
+                                $jsst_agentEmail = $this->getStaffEmailAddressByStaffId($jsst_banemailRecord->submitter);
+                                $jsst_staffuid = $this->getStaffUidByStaffId($jsst_banemailRecord->submitter);
                             }
 
-                            $template = apply_filters( 'jsst_get_email_template_by_user_defined_language','','banemail-tk' ,$agentEmail ,$staffuid);
-                            if($template == '' && empty($template)){
-                                $template = $defaulttemplate;
+                            $jsst_template = apply_filters( 'jsst_get_email_template_by_user_defined_language','','banemail-tk' ,$jsst_agentEmail ,$jsst_staffuid);
+                            if($jsst_template == '' && empty($jsst_template)){
+                                $jsst_template = $jsst_defaulttemplate;
                             }
-                            $msgSubject = $template->subject;
-                            $msgBody = $template->body;
-                            $attachments = '';
+                            $jsst_msgSubject = $jsst_template->subject;
+                            $jsst_msgBody = $jsst_template->body;
+                            $jsst_attachments = '';
 
-                            $this->replaceMatches($msgSubject, $matcharray);
-                            $this->replaceMatches($msgBody, $matcharray);
-                            $this->sendEmail($agentEmail, $msgSubject, $msgBody, $senderEmail, $senderName, $attachments, $action, 'banemail-tk-staff');
+                            $this->replaceMatches($jsst_msgSubject, $jsst_matcharray);
+                            $this->replaceMatches($jsst_msgBody, $jsst_matcharray);
+                            $this->sendEmail($jsst_agentEmail, $jsst_msgSubject, $jsst_msgBody, $jsst_senderEmail, $jsst_senderName, $jsst_attachments, $jsst_action, 'banemail-tk-staff');
                         }
                         // New ticket mail to User
                         if (jssupportticket::$_config['ticket_ban_email_user'] == 1) {
-                            $template = apply_filters( 'jsst_get_email_template_by_user_defined_language','','banemail-tk' ,$Email ,'');
-                            if($template == '' && empty($template)){
-                                $template = $defaulttemplate;
+                            $jsst_template = apply_filters( 'jsst_get_email_template_by_user_defined_language','','banemail-tk' ,$Email ,'');
+                            if($jsst_template == '' && empty($jsst_template)){
+                                $jsst_template = $jsst_defaulttemplate;
                             }
-                            $msgSubject = $template->subject;
-                            $msgBody = $template->body;
-                            $attachments = '';
+                            $jsst_msgSubject = $jsst_template->subject;
+                            $jsst_msgBody = $jsst_template->body;
+                            $jsst_attachments = '';
 
-                            $this->replaceMatches($msgSubject, $matcharray);
-                            $this->replaceMatches($msgBody, $matcharray);
-                            $this->sendEmail($Email, $msgSubject, $msgBody, $senderEmail, $senderName, $attachments, $action);
+                            $this->replaceMatches($jsst_msgSubject, $jsst_matcharray);
+                            $this->replaceMatches($jsst_msgBody, $jsst_matcharray);
+                            $this->sendEmail($Email, $jsst_msgSubject, $jsst_msgBody, $jsst_senderEmail, $jsst_senderName, $jsst_attachments, $jsst_action);
                         }
                         break;
                     case 2: // Unban Email
-                        if ($tablename != null)
-                            $ticketRecord = $this->getRecordByTablenameAndId($tablename, $id);
+                        if ($jsst_tablename != null)
+                            $jsst_ticketRecord = $this->getRecordByTablenameAndId($jsst_tablename, $jsst_id);
                         else
-                            $ticketRecord = $this->getRecordByTablenameAndId('js_ticket_tickets', $id);
-                        $Email = $ticketRecord->email;
-                        $matcharray = array(
+                            $jsst_ticketRecord = $this->getRecordByTablenameAndId('js_ticket_tickets', $jsst_id);
+                        $Email = $jsst_ticketRecord->email;
+                        $jsst_matcharray = array(
                             '{SITETITLE}' => jssupportticket::$_config['title'],
                             '{EMAIL_ADDRESS}' => $Email,
                             '{CURRENT_YEAR}' => gmdate('Y')
                         );
-                        $object = $this->getSenderEmailAndName($id);
-                        $senderEmail = $object->email;
-                        $senderName = $object->name;
-                        $defaulttemplate = $this->getTemplateForEmail('unbanemail-tk');
+                        $jsst_object = $this->getSenderEmailAndName($jsst_id);
+                        $jsst_senderEmail = $jsst_object->email;
+                        $jsst_senderName = $jsst_object->name;
+                        $jsst_defaulttemplate = $this->getTemplateForEmail('unbanemail-tk');
 
                         // New ticket mail to admin
                         if (jssupportticket::$_config['unban_email_admin'] == 1) {
-                            $adminEmailid = jssupportticket::$_config['default_admin_email'];
-                            $adminEmail = $this->getEmailById($adminEmailid);
-                            $template = apply_filters( 'jsst_get_email_template_by_user_defined_language','','unbanemail-tk' ,$adminEmail ,'', $ticketRecord->multiformid);
-                            if($template == '' && empty($template)){
-                                $template = $defaulttemplate;
+                            $jsst_adminEmailid = jssupportticket::$_config['default_admin_email'];
+                            $jsst_adminEmail = $this->getEmailById($jsst_adminEmailid);
+                            $jsst_template = apply_filters( 'jsst_get_email_template_by_user_defined_language','','unbanemail-tk' ,$jsst_adminEmail ,'', $jsst_ticketRecord->multiformid);
+                            if($jsst_template == '' && empty($jsst_template)){
+                                $jsst_template = $jsst_defaulttemplate;
                             }
-                            $msgSubject = $template->subject;
-                            $msgBody = $template->body;
-                            $attachments = '';
-                            $this->replaceMatches($msgSubject, $matcharray);
-                            $this->replaceMatches($msgBody, $matcharray);
-                            $this->sendEmail($adminEmail, $msgSubject, $msgBody, $senderEmail, $senderName, $attachments, $action, 'unbanemail-tk-admin');
+                            $jsst_msgSubject = $jsst_template->subject;
+                            $jsst_msgBody = $jsst_template->body;
+                            $jsst_attachments = '';
+                            $this->replaceMatches($jsst_msgSubject, $jsst_matcharray);
+                            $this->replaceMatches($jsst_msgBody, $jsst_matcharray);
+                            $this->sendEmail($jsst_adminEmail, $jsst_msgSubject, $jsst_msgBody, $jsst_senderEmail, $jsst_senderName, $jsst_attachments, $jsst_action, 'unbanemail-tk-admin');
                         }
                         // New ticket mail to staff
                         if ( in_array('agent',jssupportticket::$_active_addons) && jssupportticket::$_config['unban_email_staff'] == 1) {
-                            if ($tablename != null){
-                                $agentEmail = $this->getStaffEmailAddressByStaffId($ticketRecord->staffid);
-                                $staffuid = $this->getStaffUidByStaffId($ticketRecord->staffid);
+                            if ($jsst_tablename != null){
+                                $jsst_agentEmail = $this->getStaffEmailAddressByStaffId($jsst_ticketRecord->staffid);
+                                $jsst_staffuid = $this->getStaffUidByStaffId($jsst_ticketRecord->staffid);
                             }else{
-                                $agentEmail = $this->getStaffEmailAddressByStaffId($ticketRecord->submitter);
-                                $staffuid = $this->getStaffUidByStaffId($ticketRecord->submitter);
+                                $jsst_agentEmail = $this->getStaffEmailAddressByStaffId($jsst_ticketRecord->submitter);
+                                $jsst_staffuid = $this->getStaffUidByStaffId($jsst_ticketRecord->submitter);
                             }
-                            $template = apply_filters( 'jsst_get_email_template_by_user_defined_language','','unbanemail-tk' ,$agentEmail ,$staffuid, $ticketRecord->multiformid);
-                            if($template == '' && empty($template)){
-                                $template = $defaulttemplate;
+                            $jsst_template = apply_filters( 'jsst_get_email_template_by_user_defined_language','','unbanemail-tk' ,$jsst_agentEmail ,$jsst_staffuid, $jsst_ticketRecord->multiformid);
+                            if($jsst_template == '' && empty($jsst_template)){
+                                $jsst_template = $jsst_defaulttemplate;
                             }
-                            $msgSubject = $template->subject;
-                            $msgBody = $template->body;
-                            $attachments = '';
-                            $this->replaceMatches($msgSubject, $matcharray);
-                            $this->replaceMatches($msgBody, $matcharray);
-                            $this->sendEmail($agentEmail, $msgSubject, $msgBody, $senderEmail, $senderName, $attachments, $action, 'unbanemail-tk-staff');
+                            $jsst_msgSubject = $jsst_template->subject;
+                            $jsst_msgBody = $jsst_template->body;
+                            $jsst_attachments = '';
+                            $this->replaceMatches($jsst_msgSubject, $jsst_matcharray);
+                            $this->replaceMatches($jsst_msgBody, $jsst_matcharray);
+                            $this->sendEmail($jsst_agentEmail, $jsst_msgSubject, $jsst_msgBody, $jsst_senderEmail, $jsst_senderName, $jsst_attachments, $jsst_action, 'unbanemail-tk-staff');
                         }
                         // New ticket mail to User
                         if (jssupportticket::$_config['unban_email_user'] == 1) {
-                            if ($tablename != null){
-                                $template = apply_filters( 'jsst_get_email_template_by_user_defined_language','','unbanemail-tk' , $Email, '', $ticketRecord->multiformid);
+                            if ($jsst_tablename != null){
+                                $jsst_template = apply_filters( 'jsst_get_email_template_by_user_defined_language','','unbanemail-tk' , $Email, '', $jsst_ticketRecord->multiformid);
                             }else{
-                                $template = apply_filters( 'jsst_get_email_template_by_user_defined_language','','unbanemail-tk' ,$ticketRecord->email , $ticketRecord->uid, $ticketRecord->multiformid);
+                                $jsst_template = apply_filters( 'jsst_get_email_template_by_user_defined_language','','unbanemail-tk' ,$jsst_ticketRecord->email , $jsst_ticketRecord->uid, $jsst_ticketRecord->multiformid);
                             }
 
-                            if($template == '' && empty($template)){
-                                $template = $defaulttemplate;
+                            if($jsst_template == '' && empty($jsst_template)){
+                                $jsst_template = $jsst_defaulttemplate;
                             }
-                            $msgSubject = $template->subject;
-                            $msgBody = $template->body;
-                            $attachments = '';
-                            $this->replaceMatches($msgSubject, $matcharray);
-                            $this->replaceMatches($msgBody, $matcharray);
-                            $this->sendEmail($Email, $msgSubject, $msgBody, $senderEmail, $senderName, $attachments, $action);
+                            $jsst_msgSubject = $jsst_template->subject;
+                            $jsst_msgBody = $jsst_template->body;
+                            $jsst_attachments = '';
+                            $this->replaceMatches($jsst_msgSubject, $jsst_matcharray);
+                            $this->replaceMatches($jsst_msgBody, $jsst_matcharray);
+                            $this->sendEmail($Email, $jsst_msgSubject, $jsst_msgBody, $jsst_senderEmail, $jsst_senderName, $jsst_attachments, $jsst_action);
                         }
                         break;
                 }
@@ -1759,113 +1759,113 @@ class JSSTemailModel {
                 if(!in_array('mail', jssupportticket::$_active_addons)){ // if mail addon is not installed
                     break;
                 }
-                switch ($action) {
+                switch ($jsst_action) {
                     case 1: // Store message
-                        $mailRecord = $this->getMailRecordById($id);
-                        $matcharray = array(
+                        $jsst_mailRecord = $this->getMailRecordById($jsst_id);
+                        $jsst_matcharray = array(
                             '{SITETITLE}' => jssupportticket::$_config['title'],
-                            '{AGENT_NAME}' => $mailRecord->sendername,
-                            '{SUBJECT}' => $mailRecord->subject,
-                            '{MESSAGE}' => $mailRecord->message,
+                            '{AGENT_NAME}' => $jsst_mailRecord->sendername,
+                            '{SUBJECT}' => $jsst_mailRecord->subject,
+                            '{MESSAGE}' => $jsst_mailRecord->message,
                             '{CURRENT_YEAR}' => gmdate('Y')
                         );
-                        $object = $this->getSenderEmailAndName(null);
-                        $senderEmail = $object->email;
-                        $senderName = $object->name;
-                        $defaulttemplate = $this->getTemplateForEmail('mail-new');
-                        $template = apply_filters( 'jsst_get_email_template_by_user_defined_language','','mail-new' ,'' ,$mailRecord->staffuid);
-                        if($template == '' && empty($template)){
-                            $template = $defaulttemplate;
+                        $jsst_object = $this->getSenderEmailAndName(null);
+                        $jsst_senderEmail = $jsst_object->email;
+                        $jsst_senderName = $jsst_object->name;
+                        $jsst_defaulttemplate = $this->getTemplateForEmail('mail-new');
+                        $jsst_template = apply_filters( 'jsst_get_email_template_by_user_defined_language','','mail-new' ,'' ,$jsst_mailRecord->staffuid);
+                        if($jsst_template == '' && empty($jsst_template)){
+                            $jsst_template = $jsst_defaulttemplate;
                         }
-                        $msgSubject = $template->subject;
-                        $msgBody = $template->body;
+                        $jsst_msgSubject = $jsst_template->subject;
+                        $jsst_msgBody = $jsst_template->body;
 
-                        $Email = $mailRecord->receveremail;
-                        $attachments = '';
-                        $this->replaceMatches($msgSubject, $matcharray);
-                        $this->replaceMatches($msgBody, $matcharray);
-                        $this->sendEmail($Email, $msgSubject, $msgBody, $senderEmail, $senderName, $attachments, $action, 'mail-new');
+                        $Email = $jsst_mailRecord->receveremail;
+                        $jsst_attachments = '';
+                        $this->replaceMatches($jsst_msgSubject, $jsst_matcharray);
+                        $this->replaceMatches($jsst_msgBody, $jsst_matcharray);
+                        $this->sendEmail($Email, $jsst_msgSubject, $jsst_msgBody, $jsst_senderEmail, $jsst_senderName, $jsst_attachments, $jsst_action, 'mail-new');
                         break;
                     case 2: // Store reply
-                        $mailRecord = $this->getMailRecordById($id, 1);
-                        $matcharray = array(
+                        $jsst_mailRecord = $this->getMailRecordById($jsst_id, 1);
+                        $jsst_matcharray = array(
                             '{SITETITLE}' => jssupportticket::$_config['title'],
-                            '{AGENT_NAME}' => $mailRecord->sendername,
-                            '{SUBJECT}' => $mailRecord->subject,
-                            '{MESSAGE}' => $mailRecord->message,
+                            '{AGENT_NAME}' => $jsst_mailRecord->sendername,
+                            '{SUBJECT}' => $jsst_mailRecord->subject,
+                            '{MESSAGE}' => $jsst_mailRecord->message,
                             '{CURRENT_YEAR}' => gmdate('Y')
                         );
-                        $object = $this->getSenderEmailAndName(null);
-                        $senderEmail = $object->email;
-                        $senderName = $object->name;
-                        $defaulttemplate = $this->getTemplateForEmail('mail-rpy');
-                        $template = apply_filters( 'jsst_get_email_template_by_user_defined_language','','mail-rpy' ,'' ,$mailRecord->staffuid);
-                        if($template == '' && empty($template)){
-                            $template = $defaulttemplate;
+                        $jsst_object = $this->getSenderEmailAndName(null);
+                        $jsst_senderEmail = $jsst_object->email;
+                        $jsst_senderName = $jsst_object->name;
+                        $jsst_defaulttemplate = $this->getTemplateForEmail('mail-rpy');
+                        $jsst_template = apply_filters( 'jsst_get_email_template_by_user_defined_language','','mail-rpy' ,'' ,$jsst_mailRecord->staffuid);
+                        if($jsst_template == '' && empty($jsst_template)){
+                            $jsst_template = $jsst_defaulttemplate;
                         }
-                        $msgSubject = $template->subject;
-                        $msgBody = $template->body;
-                        $Email = $mailRecord->receveremail;
-                        $attachments = '';
-                        $this->replaceMatches($msgSubject, $matcharray);
-                        $this->replaceMatches($msgBody, $matcharray);
-                        $this->sendEmail($Email, $msgSubject, $msgBody, $senderEmail, $senderName, $attachments, $action, 'mail-rpy');
+                        $jsst_msgSubject = $jsst_template->subject;
+                        $jsst_msgBody = $jsst_template->body;
+                        $Email = $jsst_mailRecord->receveremail;
+                        $jsst_attachments = '';
+                        $this->replaceMatches($jsst_msgSubject, $jsst_matcharray);
+                        $this->replaceMatches($jsst_msgBody, $jsst_matcharray);
+                        $this->sendEmail($Email, $jsst_msgSubject, $jsst_msgBody, $jsst_senderEmail, $jsst_senderName, $jsst_attachments, $jsst_action, 'mail-rpy');
                         break;
                 }
                 break;
             case 4: // gdpr data erase or delte.
-                switch ($action) {
+                switch ($jsst_action) {
                     case 1: // erase data email
-                        $matcharray = array(
+                        $jsst_matcharray = array(
                             '{SITETITLE}' => jssupportticket::$_config['title'],
-                            '{USERNAME}' => jssupportticket::$_data['mail_data']['name'],
+                            '{USERNAME}' => jssupportticket::$jsst_data['mail_data']['name'],
                             '{CURRENT_YEAR}' => gmdate('Y')
                         );
-                        $object = $this->getSenderEmailAndName(null);
-                        $senderEmail = $object->email;
-                        $senderName = $object->name;
-                        $defaulttemplate = $this->getTemplateForEmail('delete-user-data');
-                        $template = apply_filters( 'jsst_get_email_template_by_user_defined_language','','delete-user-data' ,jssupportticket::$_data['mail_data']['email'] , '');
-                        if($template == '' && empty($template)){
-                            $template = $defaulttemplate;
+                        $jsst_object = $this->getSenderEmailAndName(null);
+                        $jsst_senderEmail = $jsst_object->email;
+                        $jsst_senderName = $jsst_object->name;
+                        $jsst_defaulttemplate = $this->getTemplateForEmail('delete-user-data');
+                        $jsst_template = apply_filters( 'jsst_get_email_template_by_user_defined_language','','delete-user-data' ,jssupportticket::$jsst_data['mail_data']['email'] , '');
+                        if($jsst_template == '' && empty($jsst_template)){
+                            $jsst_template = $jsst_defaulttemplate;
                         }
 
-                        $msgSubject = $template->subject;
-                        $msgBody = $template->body;
-                        $Email = jssupportticket::$_data['mail_data']['email'];
-                        $attachments = '';
-                        $this->replaceMatches($msgSubject, $matcharray);
-                        $this->replaceMatches($msgBody, $matcharray);
-                        $this->sendEmail($Email, $msgSubject, $msgBody, $senderEmail, $senderName, $attachments, $action);
+                        $jsst_msgSubject = $jsst_template->subject;
+                        $jsst_msgBody = $jsst_template->body;
+                        $Email = jssupportticket::$jsst_data['mail_data']['email'];
+                        $jsst_attachments = '';
+                        $this->replaceMatches($jsst_msgSubject, $jsst_matcharray);
+                        $this->replaceMatches($jsst_msgBody, $jsst_matcharray);
+                        $this->sendEmail($Email, $jsst_msgSubject, $jsst_msgBody, $jsst_senderEmail, $jsst_senderName, $jsst_attachments, $jsst_action);
                         break;
                 }
                 break;
             case 5: // agent emails
-                switch ($action) {
+                switch ($jsst_action) {
                     case 1: // new agent
-                        $staffname = JSSTincluder::getJSModel('agent')->getMyName($id);
-                        $matcharray = array(
+                        $jsst_staffname = JSSTincluder::getJSModel('agent')->getMyName($jsst_id);
+                        $jsst_matcharray = array(
                             '{SITETITLE}' => jssupportticket::$_config['title'],
-                            '{AGENT_NAME}' => $staffname,
+                            '{AGENT_NAME}' => $jsst_staffname,
                             '{CURRENT_YEAR}' => gmdate('Y')
                         );
-                        $object = $this->getSenderEmailAndName(null);
-                        $senderEmail = $object->email;
-                        $senderName = $object->name;
-                        $defaulttemplate = $this->getTemplateForEmail('staff-new');
+                        $jsst_object = $this->getSenderEmailAndName(null);
+                        $jsst_senderEmail = $jsst_object->email;
+                        $jsst_senderName = $jsst_object->name;
+                        $jsst_defaulttemplate = $this->getTemplateForEmail('staff-new');
 
-                        $adminEmailid = jssupportticket::$_config['default_admin_email'];
-                        $adminEmail = $this->getEmailById($adminEmailid);
-                        $template = apply_filters( 'jsst_get_email_template_by_user_defined_language','','staff-new' , $adminEmail , '');
-                        if($template == '' && empty($template)){
-                            $template = $defaulttemplate;
+                        $jsst_adminEmailid = jssupportticket::$_config['default_admin_email'];
+                        $jsst_adminEmail = $this->getEmailById($jsst_adminEmailid);
+                        $jsst_template = apply_filters( 'jsst_get_email_template_by_user_defined_language','','staff-new' , $jsst_adminEmail , '');
+                        if($jsst_template == '' && empty($jsst_template)){
+                            $jsst_template = $jsst_defaulttemplate;
                         }
-                        $msgSubject = $template->subject;
-                        $msgBody = $template->body;
-                        $attachments = '';
-                        $this->replaceMatches($msgSubject, $matcharray);
-                        $this->replaceMatches($msgBody, $matcharray);
-                        $this->sendEmail($adminEmail, $msgSubject, $msgBody, $senderEmail, $senderName, $attachments, $action, 'staff-new');
+                        $jsst_msgSubject = $jsst_template->subject;
+                        $jsst_msgBody = $jsst_template->body;
+                        $jsst_attachments = '';
+                        $this->replaceMatches($jsst_msgSubject, $jsst_matcharray);
+                        $this->replaceMatches($jsst_msgBody, $jsst_matcharray);
+                        $this->sendEmail($jsst_adminEmail, $jsst_msgSubject, $jsst_msgBody, $jsst_senderEmail, $jsst_senderName, $jsst_attachments, $jsst_action, 'staff-new');
                         break;
                 }
                 break;
@@ -1873,127 +1873,127 @@ class JSSTemailModel {
     }
 
 
-    function getMailRecordById($id, $replyto = null) { // this function will not be called if the mail addon is not installed
-        if (!is_numeric($id))
+    function getMailRecordById($jsst_id, $jsst_replyto = null) { // this function will not be called if the mail addon is not installed
+        if (!is_numeric($jsst_id))
             return false;
-        if ($replyto == null) {
-            $query = "SELECT mail.subject,mail.message,CONCAT(staff.firstname,' ',staff.lastname) AS sendername, staff.uid as staffuid
+        if ($jsst_replyto == null) {
+            $jsst_query = "SELECT mail.subject,mail.message,CONCAT(staff.firstname,' ',staff.lastname) AS sendername, staff.uid as staffuid
                         FROM `" . jssupportticket::$_db->prefix . "js_ticket_staff_mail` AS mail
                         JOIN `" . jssupportticket::$_db->prefix . "js_ticket_staff` AS staff ON staff.id = mail.fromid
-                        WHERE mail.id = " . esc_sql($id);
+                        WHERE mail.id = " . esc_sql($jsst_id);
         } else {
-            $query = "SELECT mail.subject,reply.message,CONCAT(staff.firstname,' ',staff.lastname) AS sendername, staff.uid as staffuid
+            $jsst_query = "SELECT mail.subject,reply.message,CONCAT(staff.firstname,' ',staff.lastname) AS sendername, staff.uid as staffuid
                         FROM `" . jssupportticket::$_db->prefix . "js_ticket_staff_mail` AS reply
                         JOIN `" . jssupportticket::$_db->prefix . "js_ticket_staff_mail` AS mail ON mail.id = reply.replytoid
                         JOIN `" . jssupportticket::$_db->prefix . "js_ticket_staff` AS staff ON staff.id = reply.fromid
-                        WHERE reply.id = " . esc_sql($id);
+                        WHERE reply.id = " . esc_sql($jsst_id);
         }
-        $result = jssupportticket::$_db->get_row($query);
-            $query = "SELECT staff.email
+        $jsst_result = jssupportticket::$_db->get_row($jsst_query);
+            $jsst_query = "SELECT staff.email
                         FROM `" . jssupportticket::$_db->prefix . "js_ticket_staff_mail` AS mail
                         JOIN `" . jssupportticket::$_db->prefix . "js_ticket_staff` AS staff ON staff.id = mail.toid
-                        WHERE mail.id = " . esc_sql($id);
-        $email = jssupportticket::$_db->get_var($query);
-        $result->receveremail = $email;
-        return $result;
+                        WHERE mail.id = " . esc_sql($jsst_id);
+        $jsst_email = jssupportticket::$_db->get_var($jsst_query);
+        $jsst_result->receveremail = $jsst_email;
+        return $jsst_result;
     }
 
-    private function getStaffEmailAddressByStaffId($id) {
-        if (!is_numeric($id))
+    private function getStaffEmailAddressByStaffId($jsst_id) {
+        if (!is_numeric($jsst_id))
             return false;
-        $query = "SELECT staff.email
+        $jsst_query = "SELECT staff.email
                     FROM `" . jssupportticket::$_db->prefix . "js_ticket_staff` AS staff
-                    WHERE staff.id = " . esc_sql($id);
-        $emailaddress = jssupportticket::$_db->get_var($query);
-        return $emailaddress;
+                    WHERE staff.id = " . esc_sql($jsst_id);
+        $jsst_emailaddress = jssupportticket::$_db->get_var($jsst_query);
+        return $jsst_emailaddress;
     }
 
-    private function getStaffUidByStaffId($id) {
-        if (!is_numeric($id))
+    private function getStaffUidByStaffId($jsst_id) {
+        if (!is_numeric($jsst_id))
             return false;
-        $query = "SELECT staff.uid
+        $jsst_query = "SELECT staff.uid
                     FROM `" . jssupportticket::$_db->prefix . "js_ticket_staff` AS staff
-                    WHERE staff.id = " . esc_sql($id);
-        $emailaddress = jssupportticket::$_db->get_var($query);
-        return $emailaddress;
+                    WHERE staff.id = " . esc_sql($jsst_id);
+        $jsst_emailaddress = jssupportticket::$_db->get_var($jsst_query);
+        return $jsst_emailaddress;
     }
 
-    private function getLatestReplyByTicketId($id) {
-        if (!is_numeric($id))
+    private function getLatestReplyByTicketId($jsst_id) {
+        if (!is_numeric($jsst_id))
             return false;
-        $query = "SELECT reply.message FROM `" . jssupportticket::$_db->prefix . "js_ticket_replies` AS reply WHERE reply.ticketid = " . esc_sql($id) . " ORDER BY reply.created DESC LIMIT 1";
-        $message = jssupportticket::$_db->get_var($query);
+        $jsst_query = "SELECT reply.message FROM `" . jssupportticket::$_db->prefix . "js_ticket_replies` AS reply WHERE reply.ticketid = " . esc_sql($jsst_id) . " ORDER BY reply.created DESC LIMIT 1";
+        $jsst_message = jssupportticket::$_db->get_var($jsst_query);
         if (jssupportticket::$_db->last_error != null) {
             JSSTincluder::getJSModel('systemerror')->addSystemError();
         }
-        return $message;
+        return $jsst_message;
     }
 
-    private function replaceMatches(&$string, $matcharray) {
-        foreach ($matcharray AS $find => $replace) {
-            $string = jssupportticketphplib::JSST_str_replace($find, $replace, $string);
+    private function replaceMatches(&$jsst_string, $jsst_matcharray) {
+        foreach ($jsst_matcharray AS $jsst_find => $jsst_replace) {
+            $jsst_string = jssupportticketphplib::JSST_str_replace($jsst_find, $jsst_replace, $jsst_string);
         }
     }
 
-    function sendEmail($recevierEmail, $subject, $body, $senderEmail, $senderName, $attachments, $action, $actionfor='') {
+    function sendEmail($jsst_recevierEmail, $jsst_subject, $jsst_body, $jsst_senderEmail, $jsst_senderName, $jsst_attachments, $jsst_action, $jsst_actionfor='') {
 
-        if( (is_array($recevierEmail) && empty($recevierEmail)) || (!is_array($recevierEmail) && jssupportticketphplib::JSST_trim($recevierEmail) == '') ){ // avoid the case of trying to send email to empty email.
+        if( (is_array($jsst_recevierEmail) && empty($jsst_recevierEmail)) || (!is_array($jsst_recevierEmail) && jssupportticketphplib::JSST_trim($jsst_recevierEmail) == '') ){ // avoid the case of trying to send email to empty email.
             return;
         }
 
-        $enablesmtp = $this->checkSMTPEnableOrDisable($senderEmail);
-        if ($enablesmtp) {
-            $this->sendSMTPmail($recevierEmail, $subject, $body, $senderEmail, $senderName, $attachments, $action, $actionfor);
+        $jsst_enablesmtp = $this->checkSMTPEnableOrDisable($jsst_senderEmail);
+        if ($jsst_enablesmtp) {
+            $this->sendSMTPmail($jsst_recevierEmail, $jsst_subject, $jsst_body, $jsst_senderEmail, $jsst_senderName, $jsst_attachments, $jsst_action, $jsst_actionfor);
         }else{
-            $this->sendEmailDefault($recevierEmail, $subject, $body, $senderEmail, $senderName, $attachments, $action, $actionfor);
+            $this->sendEmailDefault($jsst_recevierEmail, $jsst_subject, $jsst_body, $jsst_senderEmail, $jsst_senderName, $jsst_attachments, $jsst_action, $jsst_actionfor);
         }
 
     }
 
-    private function sendEmailDefault($recevierEmail, $subject, $body, $senderEmail, $senderName, $attachments, $action, $actionfor) {
-        $senderName = jssupportticket::$_config['title']; // site name
+    private function sendEmailDefault($jsst_recevierEmail, $jsst_subject, $jsst_body, $jsst_senderEmail, $jsst_senderName, $jsst_attachments, $jsst_action, $jsst_actionfor) {
+        $jsst_senderName = jssupportticket::$_config['title']; // site name
         /*
-          $attachments = array( WP_CONTENT_DIR . '/uploads/file_to_attach.zip' );
-          $headers = 'From: My Name <myname@example.com>' . "\r\n";
-          wp_mail('test@example.org', 'subject', 'message', $headers, $attachments );
+          $jsst_attachments = array( WP_CONTENT_DIR . '/uploads/file_to_attach.zip' );
+          $jsst_headers = 'From: My Name <myname@example.com>' . "\r\n";
+          wp_mail('test@example.org', 'subject', 'message', $jsst_headers, $jsst_attachments );
 
-          $action
-          For which action of $mailfor you want to send the mail
+          $jsst_action
+          For which action of $jsst_mailfor you want to send the mail
           1 => New Ticket Create
           2 => Close Ticket
           3 => Delete Ticket
           4 => Reply Ticket (Admin/Staff Member)
           5 => Reply Ticket (Ticket member)
          */
-        switch ($action) {
+        switch ($jsst_action) {
             case 1:
-                do_action('jsst-beforeemailticketcreate', $recevierEmail, $subject, $body, $senderEmail);
+                do_action('jsst-beforeemailticketcreate', $jsst_recevierEmail, $jsst_subject, $jsst_body, $jsst_senderEmail);
                 break;
             case 2:
-                do_action('jsst-beforeemailticketreply', $recevierEmail, $subject, $body, $senderEmail);
+                do_action('jsst-beforeemailticketreply', $jsst_recevierEmail, $jsst_subject, $jsst_body, $jsst_senderEmail);
                 break;
             case 3:
-                do_action('jsst-beforeemailticketclose', $recevierEmail, $subject, $body, $senderEmail);
+                do_action('jsst-beforeemailticketclose', $jsst_recevierEmail, $jsst_subject, $jsst_body, $jsst_senderEmail);
                 break;
             case 4:
-                do_action('jsst-beforeemailticketdelete', $recevierEmail, $subject, $body, $senderEmail);
+                do_action('jsst-beforeemailticketdelete', $jsst_recevierEmail, $jsst_subject, $jsst_body, $jsst_senderEmail);
                 break;
         }
-        if (!$senderName)
-            $senderName = jssupportticket::$_config['title'];
-        $headers[] = 'From: ' . $senderName . ' <' . $senderEmail . '>' . "\r\n";
-        $headers = apply_filters('jsst_emailcc_send_email_to_cc' , $headers , $actionfor); // eg $actionfor = ticket-new
+        if (!$jsst_senderName)
+            $jsst_senderName = jssupportticket::$_config['title'];
+        $jsst_headers[] = 'From: ' . $jsst_senderName . ' <' . $jsst_senderEmail . '>' . "\r\n";
+        $jsst_headers = apply_filters('jsst_emailcc_send_email_to_cc' , $jsst_headers , $jsst_actionfor); // eg $jsst_actionfor = ticket-new
         add_filter('wp_mail_content_type', array($this,'jsst_set_html_content_type'));
-        // $body = jssupportticketphplib::JSST_preg_replace('/\r?\n|\r/', '<br/>', $body);
-        // $body = jssupportticketphplib::JSST_str_replace(array("\r\n", "\r", "\n"), "<br/>", $body);
-        // $body = nl2br($body);
-		if($recevierEmail){
-			if(!wp_mail($recevierEmail, $subject, $body, $headers, $attachments)){
+        // $jsst_body = jssupportticketphplib::JSST_preg_replace('/\r?\n|\r/', '<br/>', $jsst_body);
+        // $jsst_body = jssupportticketphplib::JSST_str_replace(array("\r\n", "\r", "\n"), "<br/>", $jsst_body);
+        // $jsst_body = nl2br($jsst_body);
+		if($jsst_recevierEmail){
+			if(!wp_mail($jsst_recevierEmail, $jsst_subject, $jsst_body, $jsst_headers, $jsst_attachments)){
 				if($GLOBALS['phpmailer']->ErrorInfo)
 					JSSTincluder::getJSModel('systemerror')->addSystemError($GLOBALS['phpmailer']->ErrorInfo);
 			}
 		}else{
-			JSSTincluder::getJSModel('systemerror')->addSystemError("No recipient email for ".$subject);
+			JSSTincluder::getJSModel('systemerror')->addSystemError("No recipient email for ".$jsst_subject);
 		}
     }
 
@@ -2001,59 +2001,59 @@ class JSSTemailModel {
         return 'text/html';
     }
 
-    private function sendSMTPmail($recevierEmail, $subject, $body, $senderEmail, $senderName, $attachments, $action, $actionfor){
-        do_action('jsst_aadon_send_smtp_mail',$recevierEmail, $subject, $body, $senderEmail, $senderName, $attachments, $action, $actionfor);
+    private function sendSMTPmail($jsst_recevierEmail, $jsst_subject, $jsst_body, $jsst_senderEmail, $jsst_senderName, $jsst_attachments, $jsst_action, $jsst_actionfor){
+        do_action('jsst_aadon_send_smtp_mail',$jsst_recevierEmail, $jsst_subject, $jsst_body, $jsst_senderEmail, $jsst_senderName, $jsst_attachments, $jsst_action, $jsst_actionfor);
     }
 
-    private function getSenderEmailAndName($id) {
-        if ($id) {
-            if (!is_numeric($id))
+    private function getSenderEmailAndName($jsst_id) {
+        if ($jsst_id) {
+            if (!is_numeric($jsst_id))
                 return false;
-            $query = "SELECT email.email,email.name
+            $jsst_query = "SELECT email.email,email.name
                         FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` AS ticket
                         JOIN `" . jssupportticket::$_db->prefix . "js_ticket_departments` AS department ON department.id = ticket.departmentid
                         JOIN `" . jssupportticket::$_db->prefix . "js_ticket_email` AS email ON email.id = department.emailid
-                        WHERE ticket.id = " . esc_sql($id);
-            $email = jssupportticket::$_db->get_row($query);
+                        WHERE ticket.id = " . esc_sql($jsst_id);
+            $jsst_email = jssupportticket::$_db->get_row($jsst_query);
             if (jssupportticket::$_db->last_error != null) {
                 JSSTincluder::getJSModel('systemerror')->addSystemError();
             }
         } else {
-            $email = '';
+            $jsst_email = '';
         }
-        if (empty($email)) {
-            $email = $this->getDefaultSenderEmailAndName();
+        if (empty($jsst_email)) {
+            $jsst_email = $this->getDefaultSenderEmailAndName();
         }
-        return $email;
+        return $jsst_email;
     }
 
     private function getDefaultSenderEmailAndName() {
-        $emailid = jssupportticket::$_config['default_alert_email'];
-        if(!is_numeric($emailid)) return false;
-        $query = "SELECT email,name FROM `" . jssupportticket::$_db->prefix . "js_ticket_email` WHERE id = " . esc_sql($emailid);
-        $email = jssupportticket::$_db->get_row($query);
-        return $email;
+        $jsst_emailid = jssupportticket::$_config['default_alert_email'];
+        if(!is_numeric($jsst_emailid)) return false;
+        $jsst_query = "SELECT email,name FROM `" . jssupportticket::$_db->prefix . "js_ticket_email` WHERE id = " . esc_sql($jsst_emailid);
+        $jsst_email = jssupportticket::$_db->get_row($jsst_query);
+        return $jsst_email;
     }
 
-    private function getTemplateForEmail($templatefor, $multiformid = '') {
-        $query = "SELECT * FROM `" . jssupportticket::$_db->prefix . "js_ticket_emailtemplates` WHERE templatefor = '" . esc_sql($templatefor) . "'";
+    private function getTemplateForEmail($jsst_templatefor, $jsst_multiformid = '') {
+        $jsst_query = "SELECT * FROM `" . jssupportticket::$_db->prefix . "js_ticket_emailtemplates` WHERE templatefor = '" . esc_sql($jsst_templatefor) . "'";
 
         // If multiformid is provided
-        if (!empty($multiformid)) {
-            $query .= " AND multiformid = " . esc_sql($multiformid);
-            $template = jssupportticket::$_db->get_row($query);
+        if (!empty($jsst_multiformid)) {
+            $jsst_query .= " AND multiformid = " . esc_sql($jsst_multiformid);
+            $jsst_template = jssupportticket::$_db->get_row($jsst_query);
 
             // If no form-specific template is found, fallback to default
-            if (empty($template)) {
-                $query = "SELECT * FROM `" . jssupportticket::$_db->prefix . "js_ticket_emailtemplates` 
-                          WHERE templatefor = '" . esc_sql($templatefor) . "'
+            if (empty($jsst_template)) {
+                $jsst_query = "SELECT * FROM `" . jssupportticket::$_db->prefix . "js_ticket_emailtemplates` 
+                          WHERE templatefor = '" . esc_sql($jsst_templatefor) . "'
                           AND (multiformid IS NULL OR multiformid = '')";
-                $template = jssupportticket::$_db->get_row($query);
+                $jsst_template = jssupportticket::$_db->get_row($jsst_query);
             }
         } else {
             // No multiformid passed — get default template
-            $query .= " AND (multiformid IS NULL OR multiformid = '')";
-            $template = jssupportticket::$_db->get_row($query);
+            $jsst_query .= " AND (multiformid IS NULL OR multiformid = '')";
+            $jsst_template = jssupportticket::$_db->get_row($jsst_query);
         }
 
         // Handle DB error
@@ -2061,57 +2061,57 @@ class JSSTemailModel {
             JSSTincluder::getJSModel('systemerror')->addSystemError();
         }
 
-        return $template;
+        return $jsst_template;
     }
 
-    private function getRecordByTablenameAndId($tablename, $id) {
-        if (!is_numeric($id))
+    private function getRecordByTablenameAndId($jsst_tablename, $jsst_id) {
+        if (!is_numeric($jsst_id))
             return false;
-        switch($tablename){
+        switch($jsst_tablename){
             case 'js_ticket_tickets':
-                do_action('get_mail_table_record_query');// to prepare any addon based query
-                $query = "SELECT ticket.*,department.departmentname,priority.priority ".jssupportticket::$_addon_query['select']
-                    . " FROM `" . jssupportticket::$_db->prefix . $tablename . "` AS ticket "
+                do_action('jsst_get_mail_table_record_query');// to prepare any addon based query
+                $jsst_query = "SELECT ticket.*,department.departmentname,priority.priority ".jssupportticket::$_addon_query['select']
+                    . " FROM `" . jssupportticket::$_db->prefix . $jsst_tablename . "` AS ticket "
                     . " LEFT JOIN `" . jssupportticket::$_db->prefix . "js_ticket_departments` AS department ON department.id = ticket.departmentid "
                     . jssupportticket::$_addon_query['join']
                     . " LEFT JOIN `" . jssupportticket::$_db->prefix . "js_ticket_priorities` AS priority ON priority.id = ticket.priorityid "
-                    . " WHERE ticket.id = " . esc_sql($id);
-                do_action('reset_jsst_aadon_query');
+                    . " WHERE ticket.id = " . esc_sql($jsst_id);
+                do_action('jsst_reset_aadon_query');
             break;
             default:
-                $query = "SELECT * FROM `" . jssupportticket::$_db->prefix . $tablename . "` WHERE id = " . esc_sql($id);
+                $jsst_query = "SELECT * FROM `" . jssupportticket::$_db->prefix . $jsst_tablename . "` WHERE id = " . esc_sql($jsst_id);
             break;
         }
-        $record = jssupportticket::$_db->get_row($query);
+        $jsst_record = jssupportticket::$_db->get_row($jsst_query);
         if (jssupportticket::$_db->last_error != null) {
             JSSTincluder::getJSModel('systemerror')->addSystemError();
         }
-        return $record;
+        return $jsst_record;
     }
 
     function getEmails() {
         // Filter
-        $email = jssupportticket::$_search['email']['email'];
-        $inquery = '';
-        if ($email != null)
-            $inquery .= " WHERE email.email LIKE '%".esc_sql($email)."%'";
+        $jsst_email = jssupportticket::$_search['email']['email'];
+        $jsst_inquery = '';
+        if ($jsst_email != null)
+            $jsst_inquery .= " WHERE email.email LIKE '%".esc_sql($jsst_email)."%'";
 
-        jssupportticket::$_data['filter']['email'] = $email;
+        jssupportticket::$jsst_data['filter']['email'] = $jsst_email;
 
         // Pagination
-        $query = "SELECT COUNT(email.id)
+        $jsst_query = "SELECT COUNT(email.id)
                     FROM `" . jssupportticket::$_db->prefix . "js_ticket_email` AS email ";
-        $query .= $inquery;
-        $total = jssupportticket::$_db->get_var($query);
-        jssupportticket::$_data[1] = JSSTpagination::getPagination($total);
+        $jsst_query .= $jsst_inquery;
+        $jsst_total = jssupportticket::$_db->get_var($jsst_query);
+        jssupportticket::$jsst_data[1] = JSSTpagination::getPagination($jsst_total);
 
         // Data
-        $query = " SELECT email.id, email.email, email.autoresponse, email.created, email.updated,email.status
+        $jsst_query = " SELECT email.id, email.email, email.autoresponse, email.created, email.updated,email.status
                     FROM `" . jssupportticket::$_db->prefix . "js_ticket_email` AS email ";
-        $query .= $inquery;
-        $query .= " ORDER BY email.email DESC LIMIT " . JSSTpagination::getOffset() . ", " . JSSTpagination::getLimit();
-        jssupportticket::$_data[0] = jssupportticket::$_db->get_results($query);
-        jssupportticket::$_data['email'] = $email;
+        $jsst_query .= $jsst_inquery;
+        $jsst_query .= " ORDER BY email.email DESC LIMIT " . JSSTpagination::getOffset() . ", " . JSSTpagination::getLimit();
+        jssupportticket::$jsst_data[0] = jssupportticket::$_db->get_results($jsst_query);
+        jssupportticket::$jsst_data['email'] = $jsst_email;
         if (jssupportticket::$_db->last_error != null) {
             JSSTincluder::getJSModel('systemerror')->addSystemError();
         }
@@ -2119,24 +2119,24 @@ class JSSTemailModel {
     }
 
     function getAllEmailsForCombobox() {
-        $query = "SELECT id AS id, email AS text FROM `" . jssupportticket::$_db->prefix . "js_ticket_email` WHERE status = 1 AND autoresponse = 1";
-        $emails = jssupportticket::$_db->get_results($query);
+        $jsst_query = "SELECT id AS id, email AS text FROM `" . jssupportticket::$_db->prefix . "js_ticket_email` WHERE status = 1 AND autoresponse = 1";
+        $jsst_emails = jssupportticket::$_db->get_results($jsst_query);
         if (jssupportticket::$_db->last_error != null) {
             JSSTincluder::getJSModel('systemerror')->addSystemError();
         }
-        return $emails;
+        return $jsst_emails;
     }
 
-    function getEmailForForm($id) {
-        if ($id) {
-            if (!is_numeric($id))
+    function getEmailForForm($jsst_id) {
+        if ($jsst_id) {
+            if (!is_numeric($jsst_id))
                 return false;
-            $query = "SELECT email.id, email.email, email.autoresponse, email.created, email.updated,email.status,email.smtpemailauth,email.smtphosttype,email.smtphost,email.smtpauthencation,email.name,email.password,email.smtpsecure,email.mailport
+            $jsst_query = "SELECT email.id, email.email, email.autoresponse, email.created, email.updated,email.status,email.smtpemailauth,email.smtphosttype,email.smtphost,email.smtpauthencation,email.name,email.password,email.smtpsecure,email.mailport
                         FROM `" . jssupportticket::$_db->prefix . "js_ticket_email` AS email
-                        WHERE email.id = " . esc_sql($id);
-            jssupportticket::$_data[0] = jssupportticket::$_db->get_row($query);
-            if(isset(jssupportticket::$_data[0]->password) && jssupportticket::$_data[0]->password != ''){
-                jssupportticket::$_data[0]->password = jssupportticketphplib::JSST_safe_decoding(jssupportticket::$_data[0]->password);
+                        WHERE email.id = " . esc_sql($jsst_id);
+            jssupportticket::$jsst_data[0] = jssupportticket::$_db->get_row($jsst_query);
+            if(isset(jssupportticket::$jsst_data[0]->password) && jssupportticket::$jsst_data[0]->password != ''){
+                jssupportticket::$jsst_data[0]->password = jssupportticketphplib::JSST_safe_decoding(jssupportticket::$jsst_data[0]->password);
             }
             if (jssupportticket::$_db->last_error != null) {
                 JSSTincluder::getJSModel('systemerror')->addSystemError(); // if there is an error add it to system errorrs
@@ -2145,39 +2145,39 @@ class JSSTemailModel {
         return;
     }
 
-    function storeEmail($data) {
+    function storeEmail($jsst_data) {
         if (!current_user_can('manage_options')) { //only admin can change it.
             return false;
         }
-        if(!$data['id'])
-        if($this->checkAlreadyExist($data['email'])){
+        if(!$jsst_data['id'])
+        if($this->checkAlreadyExist($jsst_data['email'])){
             JSSTmessage::setMessage(esc_html(__('Email Already Exist', 'js-support-ticket')), 'error');
             return;
         }
-        if ($data['id'])
-            $data['updated'] = date_i18n('Y-m-d H:i:s');
+        if ($jsst_data['id'])
+            $jsst_data['updated'] = date_i18n('Y-m-d H:i:s');
         else{
-            $data['updated'] = date_i18n('Y-m-d H:i:s');
-            $data['created'] = date_i18n('Y-m-d H:i:s');
+            $jsst_data['updated'] = date_i18n('Y-m-d H:i:s');
+            $jsst_data['created'] = date_i18n('Y-m-d H:i:s');
         }
-        if(isset($data['password']) && $data['password'] != ''){
-            $data['password'] = jssupportticketphplib::JSST_safe_encoding($data['password']);
-        }
-
-        $data = jssupportticket::JSST_sanitizeData($data); // JSST_sanitizeData() function uses wordpress santize functions
-
-        $row = JSSTincluder::getJSTable('email');
-
-        $data = JSSTincluder::getJSmodel('jssupportticket')->stripslashesFull($data);// remove slashes with quotes.
-        $error = 0;
-        if (!$row->bind($data)) {
-            $error = 1;
-        }
-        if (!$row->store()) {
-            $error = 1;
+        if(isset($jsst_data['password']) && $jsst_data['password'] != ''){
+            $jsst_data['password'] = jssupportticketphplib::JSST_safe_encoding($jsst_data['password']);
         }
 
-        if ($error == 0) {
+        $jsst_data = jssupportticket::JSST_sanitizeData($jsst_data); // JSST_sanitizeData() function uses wordpress santize functions
+
+        $jsst_row = JSSTincluder::getJSTable('email');
+
+        $jsst_data = JSSTincluder::getJSmodel('jssupportticket')->stripslashesFull($jsst_data);// remove slashes with quotes.
+        $jsst_error = 0;
+        if (!$jsst_row->bind($jsst_data)) {
+            $jsst_error = 1;
+        }
+        if (!$jsst_row->store()) {
+            $jsst_error = 1;
+        }
+
+        if ($jsst_error == 0) {
             JSSTmessage::setMessage(esc_html(__('The email has been stored', 'js-support-ticket')), 'updated');
         } else {
             JSSTincluder::getJSModel('systemerror')->addSystemError(); // if there is an error add it to system errorrs
@@ -2186,21 +2186,21 @@ class JSSTemailModel {
         return;
     }
 
-    function checkAlreadyExist($email){
-        $query = "SELECT COUNT(id) FROM`" . jssupportticket::$_db->prefix . "js_ticket_email`  WHERE email = '".esc_sql($email)."'";
-        $result = jssupportticket::$_db->get_var($query);
-        if($result > 0)
+    function checkAlreadyExist($jsst_email){
+        $jsst_query = "SELECT COUNT(id) FROM`" . jssupportticket::$_db->prefix . "js_ticket_email`  WHERE email = '".esc_sql($jsst_email)."'";
+        $jsst_result = jssupportticket::$_db->get_var($jsst_query);
+        if($jsst_result > 0)
             return true;
         else
             return false;
     }
 
-    function removeEmail($id) {
-        if (!is_numeric($id))
+    function removeEmail($jsst_id) {
+        if (!is_numeric($jsst_id))
             return false;
-        if ($this->canRemoveEmail($id)) {
-            $row = JSSTincluder::getJSTable('email');
-            if ($row->delete($id)) {
+        if ($this->canRemoveEmail($jsst_id)) {
+            $jsst_row = JSSTincluder::getJSTable('email');
+            if ($jsst_row->delete($jsst_id)) {
                 JSSTmessage::setMessage(esc_html(__('The email has been deleted', 'js-support-ticket')), 'updated');
             } else {
                 JSSTincluder::getJSModel('systemerror')->addSystemError(); // if there is an error add it to system errorrs
@@ -2212,119 +2212,119 @@ class JSSTemailModel {
         return;
     }
 
-    private function canRemoveEmail($id) {
-        if (!is_numeric($id))
+    private function canRemoveEmail($jsst_id) {
+        if (!is_numeric($jsst_id))
             return false;
-        $query = "SELECT (
-                        (SELECT COUNT(id) FROM `" . jssupportticket::$_db->prefix . "js_ticket_departments` WHERE emailid = " . esc_sql($id) . ")
-                        + (SELECT COUNT(*) FROM `" . jssupportticket::$_db->prefix . "js_ticket_config` WHERE configname = 'default_alert_email' AND configvalue = " . esc_sql($id) . ")
-                        + (SELECT COUNT(*) FROM `" . jssupportticket::$_db->prefix . "js_ticket_config` WHERE configname = 'default_admin_email' AND configvalue = " . esc_sql($id) . ")
+        $jsst_query = "SELECT (
+                        (SELECT COUNT(id) FROM `" . jssupportticket::$_db->prefix . "js_ticket_departments` WHERE emailid = " . esc_sql($jsst_id) . ")
+                        + (SELECT COUNT(*) FROM `" . jssupportticket::$_db->prefix . "js_ticket_config` WHERE configname = 'default_alert_email' AND configvalue = " . esc_sql($jsst_id) . ")
+                        + (SELECT COUNT(*) FROM `" . jssupportticket::$_db->prefix . "js_ticket_config` WHERE configname = 'default_admin_email' AND configvalue = " . esc_sql($jsst_id) . ")
                         ) AS total";
-        $result = jssupportticket::$_db->get_var($query);
+        $jsst_result = jssupportticket::$_db->get_var($jsst_query);
         if (jssupportticket::$_db->last_error != null) {
             JSSTincluder::getJSModel('systemerror')->addSystemError();
         }
-        if ($result == 0)
+        if ($jsst_result == 0)
             return true;
         else
             return false;
     }
 
     function getEmailForDepartment() {
-        $query = "SELECT id, email AS text FROM `" . jssupportticket::$_db->prefix . "js_ticket_email`";
-        $emails = jssupportticket::$_db->get_results($query);
+        $jsst_query = "SELECT id, email AS text FROM `" . jssupportticket::$_db->prefix . "js_ticket_email`";
+        $jsst_emails = jssupportticket::$_db->get_results($jsst_query);
         if (jssupportticket::$_db->last_error != null) {
             JSSTincluder::getJSModel('systemerror')->addSystemError();
         }
-        return $emails;
+        return $jsst_emails;
     }
 
-    function getEmailById($id) {
-        if (!is_numeric($id))
+    function getEmailById($jsst_id) {
+        if (!is_numeric($jsst_id))
             return false;
-        $query = "SELECT email  FROM `" . jssupportticket::$_db->prefix . "js_ticket_email` WHERE id = " . esc_sql($id);
-        $email = jssupportticket::$_db->get_var($query);
+        $jsst_query = "SELECT email  FROM `" . jssupportticket::$_db->prefix . "js_ticket_email` WHERE id = " . esc_sql($jsst_id);
+        $jsst_email = jssupportticket::$_db->get_var($jsst_query);
         if (jssupportticket::$_db->last_error != null) {
             JSSTincluder::getJSModel('systemerror')->addSystemError();
         }
-        return $email;
+        return $jsst_email;
     }
 
-    function checkSMTPEnableOrDisable($senderemail){
+    function checkSMTPEnableOrDisable($jsst_senderemail){
         if(!in_array('smtp', jssupportticket::$_active_addons)){
             return false;
         }
-        if(!is_string($senderemail))
+        if(!is_string($jsst_senderemail))
             return false;
-        $query = "SELECT COUNT(id) FROM `" . jssupportticket::$_db->prefix . "js_ticket_email` WHERE email = '".esc_sql($senderemail). "' AND smtpemailauth = 1"; // 1 For smtp 0 for default
-        $total = jssupportticket::$_db->get_var($query);
-        if($total > 0){
+        $jsst_query = "SELECT COUNT(id) FROM `" . jssupportticket::$_db->prefix . "js_ticket_email` WHERE email = '".esc_sql($jsst_senderemail). "' AND smtpemailauth = 1"; // 1 For smtp 0 for default
+        $jsst_total = jssupportticket::$_db->get_var($jsst_query);
+        if($jsst_total > 0){
             return true;
         }else{
             return false;
         }
     }
 
-    function getSMTPEmailConfig($senderemail){
-        $query = "SELECT * FROM  `" . jssupportticket::$_db->prefix . "js_ticket_email` WHERE email = '".esc_sql($senderemail)."'";
-        $emailconfig = jssupportticket::$_db->get_row($query);
-        return $emailconfig;
+    function getSMTPEmailConfig($jsst_senderemail){
+        $jsst_query = "SELECT * FROM  `" . jssupportticket::$_db->prefix . "js_ticket_email` WHERE email = '".esc_sql($jsst_senderemail)."'";
+        $jsst_emailconfig = jssupportticket::$_db->get_row($jsst_query);
+        return $jsst_emailconfig;
     }
 
     function sendTestEmail(){
-        $nonce = JSSTrequest::getVar('_wpnonce');
-        if (! wp_verify_nonce( $nonce, 'send-test-email') ) {
+        $jsst_nonce = JSSTrequest::getVar('_wpnonce');
+        if (! wp_verify_nonce( $jsst_nonce, 'send-test-email') ) {
             die( 'Security check Failed' );
         }
-        $hosttype = JSSTrequest::getVar('hosttype');
-        $hostname = JSSTrequest::getVar('hostname');
-        $ssl = JSSTrequest::getVar('ssl');
-        $hostportnumber = JSSTrequest::getVar('hostportnumber');
-        $emailaddress = JSSTrequest::getVar('emailaddress');
-        $password = JSSTrequest::getVar('password');
-        $smtpauthencation = JSSTrequest::getVar('smtpauthencation');
+        $jsst_hosttype = JSSTrequest::getVar('hosttype');
+        $jsst_hostname = JSSTrequest::getVar('hostname');
+        $jsst_ssl = JSSTrequest::getVar('ssl');
+        $jsst_hostportnumber = JSSTrequest::getVar('hostportnumber');
+        $jsst_emailaddress = JSSTrequest::getVar('emailaddress');
+        $jsst_password = JSSTrequest::getVar('password');
+        $jsst_smtpauthencation = JSSTrequest::getVar('smtpauthencation');
 
         require_once ABSPATH . WPINC . '/class-phpmailer.php';
         require_once ABSPATH . WPINC . '/class-smtp.php';
-        $mail = new PHPMailer(true);
+        $jsst_mail = new PHPMailer(true);
         try {
 
-            $mail->isSMTP();
-            $mail->Host = $hostname;
-            //$mail->Host = 'smtp1.example.com;
-            $mail->SMTPAuth = $smtpauthencation;
-            $mail->Username = $emailaddress;
-            $mail->Password = $password;
-            if($ssl == 0){
-                $mail->SMTPSecure = 'ssl';
+            $jsst_mail->isSMTP();
+            $jsst_mail->Host = $jsst_hostname;
+            //$jsst_mail->Host = 'smtp1.example.com;
+            $jsst_mail->SMTPAuth = $jsst_smtpauthencation;
+            $jsst_mail->Username = $jsst_emailaddress;
+            $jsst_mail->Password = $jsst_password;
+            if($jsst_ssl == 0){
+                $jsst_mail->SMTPSecure = 'ssl';
             }else{
-                $mail->SMTPSecure = 'tls';
+                $jsst_mail->SMTPSecure = 'tls';
             }
-            $mail->Port = $hostportnumber;
+            $jsst_mail->Port = $jsst_hostportnumber;
             //Recipients
-            $mail->setFrom($emailaddress, jssupportticket::$_config['title']);
-            $adminEmailid = jssupportticket::$_config['default_admin_email'];
-            $adminEmail = $this->getEmailById($adminEmailid);
+            $jsst_mail->setFrom($jsst_emailaddress, jssupportticket::$_config['title']);
+            $jsst_adminEmailid = jssupportticket::$_config['default_admin_email'];
+            $jsst_adminEmail = $this->getEmailById($jsst_adminEmailid);
 
-            $mail->addAddress($adminEmail,'Administrator');
+            $jsst_mail->addAddress($jsst_adminEmail,'Administrator');
 
-            $mail->isHTML(true);
-            $mail->Subject = 'SMTP Test email From :'.site_url();
-            $mail->Body    = 'This is body text for SMTP test email from :'.site_url();
-            $mail->send();
-            $error['text'] = 'Test email has been sent on : '. $adminEmail;
-            $error['type'] = 0;
-        } catch (Exception $e) {
-            $error['text'] = 'Message could not be sent. Mailer Error: '. $mail->ErrorInfo;
-            $error['type'] = 1;
+            $jsst_mail->isHTML(true);
+            $jsst_mail->Subject = 'SMTP Test email From :'.site_url();
+            $jsst_mail->Body    = 'This is body text for SMTP test email from :'.site_url();
+            $jsst_mail->send();
+            $jsst_error['text'] = 'Test email has been sent on : '. $jsst_adminEmail;
+            $jsst_error['type'] = 0;
+        } catch (Exception $jsst_e) {
+            $jsst_error['text'] = 'Message could not be sent. Mailer Error: '. $jsst_mail->ErrorInfo;
+            $jsst_error['type'] = 1;
         }
-        return wp_json_encode($error);;
+        return wp_json_encode($jsst_error);;
 
     }
 
     function getAdminSearchFormDataEmails(){
-        $nonce = JSSTrequest::getVar('_wpnonce');
-        if (! wp_verify_nonce( $nonce, 'emails') ) {
+        $jsst_nonce = JSSTrequest::getVar('_wpnonce');
+        if (! wp_verify_nonce( $jsst_nonce, 'emails') ) {
             die( 'Security check Failed' );
         }
         $jsst_search_array = array();
@@ -2333,41 +2333,41 @@ class JSSTemailModel {
         return $jsst_search_array;
     }
 
-    private function getTicketReplyHistory($id) {
-        $html = '';
-        if ($id) {
-            if (!is_numeric($id))
+    private function getTicketReplyHistory($jsst_id) {
+        $jsst_html = '';
+        if ($jsst_id) {
+            if (!is_numeric($jsst_id))
                 return false;
-            $query = "SELECT replies.*,replies.id AS replyid,tickets.id 
+            $jsst_query = "SELECT replies.*,replies.id AS replyid,tickets.id 
                     FROM `" . jssupportticket::$_db->prefix . "js_ticket_replies` AS replies
                     JOIN `" . jssupportticket::$_db->prefix . "js_ticket_tickets` AS tickets ON  replies.ticketid = tickets.id
-                    WHERE tickets.id = " . esc_sql($id) . " ORDER By replies.id DESC";
-            $replies = jssupportticket::$_db->get_results($query);
-            foreach ($replies as $key => $reply) {
-                if ($key == 0) {
-                    $html .= '<div style="float:left;width:100%;padding:15px 0;border-bottom:1px solid #ebecec;margin-bottom:20px;">
+                    WHERE tickets.id = " . esc_sql($jsst_id) . " ORDER By replies.id DESC";
+            $jsst_replies = jssupportticket::$_db->get_results($jsst_query);
+            foreach ($jsst_replies as $jsst_key => $jsst_reply) {
+                if ($jsst_key == 0) {
+                    $jsst_html .= '<div style="float:left;width:100%;padding:15px 0;border-bottom:1px solid #ebecec;margin-bottom:20px;">
                                 <div style="font-weight:bold;font-size:18px;margin-bottom:5px;color:#4b4b4d;">'. esc_html(__('Ticket History','js-support-ticket')).'</div>';
                 }
-                $html .= '<div style="float:left;width:100%;padding:10px 15px;border:1px solid #ebecec;background:#f8fafc;box-sizing:border-box;margin:10px 0;">
+                $jsst_html .= '<div style="float:left;width:100%;padding:10px 15px;border:1px solid #ebecec;background:#f8fafc;box-sizing:border-box;margin:10px 0;">
                             <div style="float:left;width:100%;margin:10px 0;">
                                 <span style="float:left;width:auto;display:inline-block;color:#4b4b4d;font-size:14px;font-weight: 600;">'. esc_html(__('Reply By','js-support-ticket')).':&nbsp;</span>
-                                <span style="float:left;width:auto;display:inline-block;color:#727376;">'.esc_html($reply->name).'</span>
+                                <span style="float:left;width:auto;display:inline-block;color:#727376;">'.esc_html($jsst_reply->name).'</span>
                             </div>
                             <div style="float:left;width:100%;margin:10px 0 0;">
                                 <span style="float:left;width:auto;display:inline-block;color:#4b4b4d;font-size:14px;font-weight: 600;">'. esc_html(__('Date','js-support-ticket')).':&nbsp;</span>
-                                <span style="float:left;width:auto;display:inline-block;color:#727376;">'.esc_html($reply->created).'</span>
+                                <span style="float:left;width:auto;display:inline-block;color:#727376;">'.esc_html($jsst_reply->created).'</span>
                             </div>
                             <div style="float:left;width:100%;">
-                                <span style="float:left;width:auto;display:inline-block;color:#727376;">'.esc_html($reply->message).'</span>
+                                <span style="float:left;width:auto;display:inline-block;color:#727376;">'.esc_html($jsst_reply->message).'</span>
                             </div>
                         </div>';
             }
-            if (isset($html)) {
-                $html .= '</div>';
+            if (isset($jsst_html)) {
+                $jsst_html .= '</div>';
             }
             
         }
-        return $html;
+        return $jsst_html;
     }
 }
 

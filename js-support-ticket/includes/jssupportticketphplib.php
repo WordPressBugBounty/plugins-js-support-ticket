@@ -8,314 +8,314 @@ class jssupportticketphplib {
     function __construct() {
     }
 
-    static function JSST_str_replace($search,$replace,$content){
-        if($content == ''){
-            return $content;
+    static function JSST_str_replace($jsst_search,$jsst_replace,$jsst_content){
+        if($jsst_content == ''){
+            return $jsst_content;
         }
-        if($replace === null){
-            return $content;
+        if($jsst_replace === null){
+            return $jsst_content;
         }
 
-        $content = str_replace($search, $replace, $content);
-        return $content;
+        $jsst_content = str_replace($jsst_search, $jsst_replace, $jsst_content);
+        return $jsst_content;
     }
 
-    static function JSST_safe_encoding($string){
-        if($string == ''){
-            return $string;
+    static function JSST_safe_encoding($jsst_string){
+        if($jsst_string == ''){
+            return $jsst_string;
         }
-        $string = base64_encode($string);
-        //return mb_convert_encoding($string, 'UTF-8', mb_detect_encoding($string));
-        return $string;
+        $jsst_string = base64_encode($jsst_string);
+        //return mb_convert_encoding($jsst_string, 'UTF-8', mb_detect_encoding($jsst_string));
+        return $jsst_string;
     }
 
-    static function JSST_safe_decoding($string){
-        if($string == ''){
-            return $string;
+    static function JSST_safe_decoding($jsst_string){
+        if($jsst_string == ''){
+            return $jsst_string;
         }
-        $string = base64_decode($string);
-        return $string;
+        $jsst_string = base64_decode($jsst_string);
+        return $jsst_string;
     }
 
 
-    public static function JSST_strstr($haystack, $needle) {
-        if($haystack == '' || $needle == ''){
+    public static function JSST_strstr($jsst_haystack, $jsst_needle) {
+        if($jsst_haystack == '' || $jsst_needle == ''){
             return false;
         }
-        return strstr($haystack, $needle);
+        return strstr($jsst_haystack, $jsst_needle);
     }
 
-    public static function JSST_explode($separator, $haystack) {
-        if($separator == ''){
+    public static function JSST_explode($jsst_separator, $jsst_haystack) {
+        if($jsst_separator == ''){
             return array();
         }
-        if($haystack == ''){
+        if($jsst_haystack == ''){
             return array();
         }
-        return explode($separator, $haystack);
+        return explode($jsst_separator, $jsst_haystack);
     }
 
-    // public static function JSST_strip_tags($string, $allowed_tags) {
-    //     if($string == ''){
+    // public static function JSST_strip_tags($jsst_string, $jsst_allowed_tags) {
+    //     if($jsst_string == ''){
     //         return '';
     //     }
-    //     return strip_tags($string, $allowed_tags);
+    //     return strip_tags($jsst_string, $jsst_allowed_tags);
     // }
-    public static function JSST_strip_tags($string, $allowable_tags = NULL) {
-      if (!is_null($string)) {
-        return strip_tags($string, $allowable_tags);
+    public static function JSST_strip_tags($jsst_string, $jsst_allowable_tags = NULL) {
+      if (!is_null($jsst_string)) {
+        return strip_tags($jsst_string, $jsst_allowable_tags);
       }
-      return $string;
+      return $jsst_string;
     }
 
 
-    public static function JSST_htmlentities($string) {
-        if($string == ''){
+    public static function JSST_htmlentities($jsst_string) {
+        if($jsst_string == ''){
             return '';
         }
-        return htmlentities($string);
+        return htmlentities($jsst_string);
     }
 
-    public static function JSST_strtoupper($string) {
-        if($string == ''){
+    public static function JSST_strtoupper($jsst_string) {
+        if($jsst_string == ''){
             return '';
         }
-        return strtoupper($string);
+        return strtoupper($jsst_string);
     }
 
-    public static function JSST_basename($string,$suffix = '') {
-        $basename = '';
-        if($string !== ''){
-           $basename = basename($string,$suffix);
+    public static function JSST_basename($jsst_string,$jsst_suffix = '') {
+        $jsst_basename = '';
+        if($jsst_string !== ''){
+           $jsst_basename = basename($jsst_string,$jsst_suffix);
         }
-        return $basename;
+        return $jsst_basename;
     }
 
-    public static function JSST_dirname($string,$lvls = 1) {
-        $dirname = '';
-        if($string !== ''){
-           $dirname = dirname($string,$lvls);
+    public static function JSST_dirname($jsst_string,$jsst_lvls = 1) {
+        $jsst_dirname = '';
+        if($jsst_string !== ''){
+           $jsst_dirname = dirname($jsst_string,$jsst_lvls);
         }
-        return $dirname;
+        return $jsst_dirname;
     }
 
 
-    public static function JSST_substr($str, $start, $length = null) {
-        $output = null;
-        if ($str !== null) {
-            if ($length !== null) {
-                $output = substr($str, $start, $length);
+    public static function JSST_substr($jsst_str, $jsst_start, $jsst_length = null) {
+        $jsst_output = null;
+        if ($jsst_str !== null) {
+            if ($jsst_length !== null) {
+                $jsst_output = substr($jsst_str, $jsst_start, $jsst_length);
             } else {
-                $output = substr($str, $start);
+                $jsst_output = substr($jsst_str, $jsst_start);
             }
         }
-        return $output;
+        return $jsst_output;
     }
 
 
-    public static function JSST_ucwords($str, $delimiters = "") {
-        $output = null;
-        if ($str !== null) {
-            $output = ucwords($str, $delimiters);
+    public static function JSST_ucwords($jsst_str, $jsst_delimiters = "") {
+        $jsst_output = null;
+        if ($jsst_str !== null) {
+            $jsst_output = ucwords($jsst_str, $jsst_delimiters);
         }
-        return $output;
+        return $jsst_output;
     }
 
-    public static function JSST_preg_replace($pattern, $replacement, $subject, $limit = -1, &$count = null){
-        $output = null;
-        if ($pattern !== null && $replacement !== null && $subject !== null) {
-            $output = preg_replace($pattern, $replacement, $subject, $limit, $count);
+    public static function JSST_preg_replace($jsst_pattern, $jsst_replacement, $jsst_subject, $jsst_limit = -1, &$jsst_count = null){
+        $jsst_output = null;
+        if ($jsst_pattern !== null && $jsst_replacement !== null && $jsst_subject !== null) {
+            $jsst_output = preg_replace($jsst_pattern, $jsst_replacement, $jsst_subject, $jsst_limit, $jsst_count);
         }
-        return $output;
+        return $jsst_output;
     }
 
-    public static function JSST_strlen($str){
-        $output = null;
-        if ($str !== null) {
-            $output = strlen($str);
+    public static function JSST_strlen($jsst_str){
+        $jsst_output = null;
+        if ($jsst_str !== null) {
+            $jsst_output = strlen($jsst_str);
         }
-        return $output;
+        return $jsst_output;
     }
 
 
-    public static function JSST_md5($str, $raw_output = false){
-        $output = null;
-        if ($str !== null) {
-            $output = md5($str, $raw_output);
+    public static function JSST_md5($jsst_str, $jsst_raw_output = false){
+        $jsst_output = null;
+        if ($jsst_str !== null) {
+            $jsst_output = md5($jsst_str, $jsst_raw_output);
         }
-        return $output;
+        return $jsst_output;
     }
 
-    public static function JSST_preg_match($pattern, $subject, &$matches = null, $flags = 0, $offset = 0){
-        $output = null;
-        if ($pattern !== null && $subject !== null) {
-            $output = preg_match($pattern, $subject, $matches, $flags, $offset);
+    public static function JSST_preg_match($jsst_pattern, $jsst_subject, &$jsst_matches = null, $jsst_flags = 0, $jsst_offset = 0){
+        $jsst_output = null;
+        if ($jsst_pattern !== null && $jsst_subject !== null) {
+            $jsst_output = preg_match($jsst_pattern, $jsst_subject, $jsst_matches, $jsst_flags, $jsst_offset);
         }
-        return $output;
+        return $jsst_output;
     }
 
-    public static function JSST_strtolower($str){
-        $output = null;
-        if ($str !== null) {
-            $output = strtolower($str);
+    public static function JSST_strtolower($jsst_str){
+        $jsst_output = null;
+        if ($jsst_str !== null) {
+            $jsst_output = strtolower($jsst_str);
         }
-        return $output;
+        return $jsst_output;
     }
 
-    public static function JSST_strpos($haystack, $needle, $offset = 0){
-        $output = null;
-        if ($haystack !== null && $needle !== null) {
-            $output = strpos($haystack, $needle, $offset);
+    public static function JSST_strpos($jsst_haystack, $jsst_needle, $jsst_offset = 0){
+        $jsst_output = null;
+        if ($jsst_haystack !== null && $jsst_needle !== null) {
+            $jsst_output = strpos($jsst_haystack, $jsst_needle, $jsst_offset);
         }
-        return $output;
+        return $jsst_output;
     }
 
-    public static function JSST_str_repeat($input, $multiplier){
-        $output = null;
-        if ($input !== null && $multiplier !== null) {
-            $output = str_repeat($input, $multiplier);
+    public static function JSST_str_repeat($jsst_input, $jsst_multiplier){
+        $jsst_output = null;
+        if ($jsst_input !== null && $jsst_multiplier !== null) {
+            $jsst_output = str_repeat($jsst_input, $jsst_multiplier);
         }
-        return $output;
+        return $jsst_output;
     }
 
-    public static function JSST_stripslashes($str){
-        $output = null;
-        if ($str !== null) {
-            $output = stripslashes($str);
+    public static function JSST_stripslashes($jsst_str){
+        $jsst_output = null;
+        if ($jsst_str !== null) {
+            $jsst_output = stripslashes($jsst_str);
         }
-        return $output;
+        return $jsst_output;
     }
 
-    public static function JSST_htmlspecialchars($string, $flags = ENT_COMPAT | ENT_HTML401, $encoding = 'UTF-8', $double_encode = true){
-        $output = null;
-        if ($string !== null) {
-            $output = htmlspecialchars($string, $flags, $encoding, $double_encode);
+    public static function JSST_htmlspecialchars($jsst_string, $jsst_flags = ENT_COMPAT | ENT_HTML401, $jsst_encoding = 'UTF-8', $jsst_double_encode = true){
+        $jsst_output = null;
+        if ($jsst_string !== null) {
+            $jsst_output = htmlspecialchars($jsst_string, $jsst_flags, $jsst_encoding, $jsst_double_encode);
         }
-        return $output;
+        return $jsst_output;
     }
 
-    public static function JSST_setcookie($name, $value = "", $expires = 0, $path = "", $domain = "", $secure = false, $httponly = false){
-        $output = null;
-        if ($name != null && $domain !== null) {
+    public static function JSST_setcookie($jsst_name, $jsst_value = "", $jsst_expires = 0, $jsst_path = "", $jsst_domain = "", $jsst_secure = false, $jsst_httponly = false){
+        $jsst_output = null;
+        if ($jsst_name != null && $jsst_domain !== null) {
             if (!headers_sent()) {
-          	    $output = setcookie($name, $value, $expires, $path, $domain, $secure, $httponly);
+          	    $jsst_output = setcookie($jsst_name, $jsst_value, $jsst_expires, $jsst_path, $jsst_domain, $jsst_secure, $jsst_httponly);
             }
         }
-        return $output;
+        return $jsst_output;
     }
 
-    public static function JSST_urlencode($str){
-        $output = null;
-        if ($str !== null) {
-            $output = urlencode($str);
+    public static function JSST_urlencode($jsst_str){
+        $jsst_output = null;
+        if ($jsst_str !== null) {
+            $jsst_output = urlencode($jsst_str);
         }
-        return $output;
+        return $jsst_output;
     }
 
-    public static function JSST_crypt($str, $salt = null)
+    public static function JSST_crypt($jsst_str, $jsst_salt = null)
     {
-        $output = null;
-        if ($str !== null) {
-            if ($salt !== null) {
-                $output = crypt($str, $salt);
+        $jsst_output = null;
+        if ($jsst_str !== null) {
+            if ($jsst_salt !== null) {
+                $jsst_output = crypt($jsst_str, $jsst_salt);
             } else {
-                $output = crypt($str);
+                $jsst_output = crypt($jsst_str);
             }
         }
-        return $output;
+        return $jsst_output;
     }
 
-    public static function JSST_urldecode($str)
+    public static function JSST_urldecode($jsst_str)
     {
-        $output = null;
-        if ($str !== null) {
-            $output = urldecode($str);
+        $jsst_output = null;
+        if ($jsst_str !== null) {
+            $jsst_output = urldecode($jsst_str);
         }
-        return $output;
+        return $jsst_output;
     }
 
-    public static function JSST_trim($str, $charlist = ""){
-        $output = null;
-        if ($str !== null) {
-            $output = trim($str, $charlist);
+    public static function JSST_trim($jsst_str, $jsst_charlist = ""){
+        $jsst_output = null;
+        if ($jsst_str !== null) {
+            $jsst_output = trim($jsst_str, $jsst_charlist);
         }
-        return $output;
+        return $jsst_output;
     }
 
-    public static function JSST_rtrim($str, $chars = null){
-        $output = null;
-        if ($str !== null) {
-            if ($chars !== null) {
-                $output = rtrim($str, $chars);
+    public static function JSST_rtrim($jsst_str, $jsst_chars = null){
+        $jsst_output = null;
+        if ($jsst_str !== null) {
+            if ($jsst_chars !== null) {
+                $jsst_output = rtrim($jsst_str, $jsst_chars);
             } else {
-                $output = rtrim($str);
+                $jsst_output = rtrim($jsst_str);
             }
         }
-        return $output;
+        return $jsst_output;
     }
 
-    public static function JSST_addslashes($str){
-        $output = null;
-        if ($str !== null) {
-            $output = addslashes($str);
+    public static function JSST_addslashes($jsst_str){
+        $jsst_output = null;
+        if ($jsst_str !== null) {
+            $jsst_output = addslashes($jsst_str);
         }
-        return $output;
+        return $jsst_output;
     }
 
-    public static function JSST_stristr($haystack, $needle, $before_needle = false)
+    public static function JSST_stristr($jsst_haystack, $jsst_needle, $jsst_before_needle = false)
     {
-        $output = null;
-        if ($haystack !== null && $needle !== null) {
-            $output = stristr($haystack, $needle, $before_needle);
+        $jsst_output = null;
+        if ($jsst_haystack !== null && $jsst_needle !== null) {
+            $jsst_output = stristr($jsst_haystack, $jsst_needle, $jsst_before_needle);
         }
-        return $output;
+        return $jsst_output;
     }
 
-    public static function JSST_ucfirst($str){
-        $output = null;
-        if ($str !== null) {
-            $output = ucfirst($str);
+    public static function JSST_ucfirst($jsst_str){
+        $jsst_output = null;
+        if ($jsst_str !== null) {
+            $jsst_output = ucfirst($jsst_str);
         }
-        return $output;
+        return $jsst_output;
     }
 
-    public static function JSST_parse_str($str, &$output){
-        if ($str !== null) {
-            parse_str($str, $output);
+    public static function JSST_parse_str($jsst_str, &$jsst_output){
+        if ($jsst_str !== null) {
+            parse_str($jsst_str, $jsst_output);
         }
     }
 
 
-    public static function JSST_preg_split($pattern, $subject, $limit = -1, $flags = 0){
-        $output = null;
-        if ($pattern !== null && $subject !== null) {
-            $output = preg_split($pattern, $subject, $limit, $flags);
+    public static function JSST_preg_split($jsst_pattern, $jsst_subject, $jsst_limit = -1, $jsst_flags = 0){
+        $jsst_output = null;
+        if ($jsst_pattern !== null && $jsst_subject !== null) {
+            $jsst_output = preg_split($jsst_pattern, $jsst_subject, $jsst_limit, $jsst_flags);
         }
-        return $output;
+        return $jsst_output;
     }
 
-    public static function JSST_number_format($num,$decimals = 0,$decimal_separator = ".",$thousands_separator = ","){
-        $output = null;
-        if ($num !== null) {
-            $output = number_format($num,$decimals,$decimal_separator,$thousands_separator);
+    public static function JSST_number_format($jsst_num,$jsst_decimals = 0,$jsst_decimal_separator = ".",$jsst_thousands_separator = ","){
+        $jsst_output = null;
+        if ($jsst_num !== null) {
+            $jsst_output = number_format($jsst_num,$jsst_decimals,$jsst_decimal_separator,$jsst_thousands_separator);
         }
-        return $output;
+        return $jsst_output;
     }
 
-    public static function JSST_strtotime($datetime, $baseTimestamp = null){
-        $output = null;
-        if ($datetime !== null) {
-            $output = strtotime($datetime, $baseTimestamp);
+    public static function JSST_strtotime($jsst_datetime, $jsst_baseTimestamp = null){
+        $jsst_output = null;
+        if ($jsst_datetime !== null) {
+            $jsst_output = strtotime($jsst_datetime, $jsst_baseTimestamp);
         }
-        return $output;
+        return $jsst_output;
     }
 
-    public static function JSST_clean_file_path($path){ // this function to remove relative path componenets from module and file name
-        if($path != ''){
-            $path = str_replace('./','',$path);
-            $path = str_replace('..','',$path);
+    public static function JSST_clean_file_path($jsst_path){ // this function to remove relative path componenets from module and file name
+        if($jsst_path != ''){
+            $jsst_path = str_replace('./','',$jsst_path);
+            $jsst_path = str_replace('..','',$jsst_path);
         }
-        return $path;
+        return $jsst_path;
     }
 
 

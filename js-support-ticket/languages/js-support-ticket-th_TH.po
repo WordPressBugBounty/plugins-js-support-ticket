@@ -3435,11 +3435,9 @@ msgid "Wordpress Plugin"
 msgstr "ปลั๊กอิน Wordpress"
 
 msgid ""
-"JS Help Desk is a trusted open source ticket system. JS Help Desk is a simple, easy to use, web-based customer support system. Users can create a ticket from the front-end. JS Help Desk comes "
-"packed with lot features than most of the expensive(and complex) support ticket system on the market. The best part is, It completely free."
-msgstr ""
-"JS Help Desk เป็นระบบตั๋วโอเพ่นซอร์สที่เชื่อถือได้ JS Help Desk เป็นระบบสนับสนุนลูกค้าที่ใช้งานง่ายและใช้งานง่ายบนเว็บ ผู้ใช้สามารถสร้างตั๋วได้จากส่วนหน้า JS Help Desk มาพร้อมกับคุณสมบัติมากมายกว่าระบบตั๋วส่วนใหญ่ที่ซับซ้อน (และซับซ้อน) "
-"ในตลาด ส่วนที่ดีที่สุดคือมันฟรีอย่างสมบูรณ์"
+"JS Help Desk is a trusted open source ticket system. JS Help Desk is a simple, easy to use, web-based customer support system. Users can create a ticket from the front-end. JS Help Desk comes packed with lot features than most of the "
+"expensive(and complex) support ticket system on the market. The best part is, It completely free."
+msgstr "JS Help Desk เป็นระบบตั๋วโอเพ่นซอร์สที่เชื่อถือได้ JS Help Desk เป็นระบบสนับสนุนลูกค้าที่ใช้งานง่ายและใช้งานง่ายบนเว็บ ผู้ใช้สามารถสร้างตั๋วได้จากส่วนหน้า JS Help Desk มาพร้อมกับคุณสมบัติมากมายกว่าระบบตั๋วส่วนใหญ่ที่ซับซ้อน (และซับซ้อน) ในตลาด ส่วนที่ดีที่สุดคือมันฟรีอย่างสมบูรณ์"
 
 msgid "JS Help Desk Addon Installer"
 msgstr "โปรแกรมติดตั้ง Addon ของ JS Help Desk"
@@ -8765,3 +8763,45 @@ msgstr "บันทึกและถัดไป"
 
 msgid "For enhanced security change encryption method in %1$s on line %2$s"
 msgstr "สำหรับวิธีการเข้ารหัสการเปลี่ยนแปลงความปลอดภัยที่เพิ่มขึ้นใน %1 $ s บนบรรทัด %2 $ s"
+
+msgid "Changes may require cache clearing to take effect."
+msgstr "การเปลี่ยนแปลงอาจต้องมีการล้างแคชจึงจะมีผล"
+
+msgid "How Long Will My Support Stay Active?"
+msgstr "การสนับสนุนของฉันจะคงอยู่ได้นานแค่ไหน?"
+
+msgid "I Can’t Log Into My Account"
+msgstr "ฉันไม่สามารถเข้าสู่บัญชีของฉันได้"
+
+msgid "I Want to Upgrade My Plan — How Can I Do It?"
+msgstr "ฉันต้องการอัพเกรดแผนของฉัน — ฉันจะทำอย่างไร?"
+
+msgid "I’m Not Getting Access to My Subscription"
+msgstr "ฉันไม่สามารถเข้าถึงการสมัครสมาชิกของฉันได้"
+
+msgid "Ticket ID Or Email Address Or Subject"
+msgstr "รหัสตั๋วหรือที่อยู่อีเมลหรือหัวเรื่อง"
+
+msgid "Sophie Martinez"
+msgstr "โซฟี มาร์ติเนซ"
+
+msgid "Daniel Brooks"
+msgstr "แดเนียล บรูคส์"
+
+msgid "Liam Turner"
+msgstr "เลียม เทิร์นเนอร์"
+
+msgid "Emily Harper"
+msgstr "เอมิลี่ ฮาร์เปอร์"
+
+msgid "Noah Bennett"
+msgstr "โนอาห์ เบนเน็ตต์"
+
+msgid "Olivia Chase"
+msgstr "โอลิเวีย เชส"
+
+msgid "Maya Collins"
+msgstr "มายา คอลลินส์"
+
+msgid "Ethan Reynolds"
+msgstr "อีธาน เรย์โนลด์ส"

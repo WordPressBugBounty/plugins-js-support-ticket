@@ -16,16 +16,16 @@ class JSSTactivation {
 
     static private function addCapabilites() {
 		if($GLOBALS['wp_roles']->is_role( 'administrator' )){ // if role exists
-			$role = get_role( 'administrator' );
-			$role->add_cap( 'jsst_support_ticket' );
-			$role->add_cap( 'jsst_support_ticket_tickets' );
+			$jsst_role = get_role( 'administrator' );
+			$jsst_role->add_cap( 'jsst_support_ticket' );
+			$jsst_role->add_cap( 'jsst_support_ticket_tickets' );
 		}
 		if($GLOBALS['wp_roles']->is_role( 'contributor' )){ // if role exists
-			$role2 = get_role( 'contributor' );
-			$role2->add_cap( 'jsst_support_ticket_tickets' );
+			$jsst_role2 = get_role( 'contributor' );
+			$jsst_role2->add_cap( 'jsst_support_ticket_tickets' );
 		}
-        $capabilities = array("jsst_support_ticket_tickets"=>true, "read"=> true);
-        add_role("js_support_ticket_admin_agent", "JS Help Desk agent (admin)",$capabilities);
+        $jsst_capabilities = array("jsst_support_ticket_tickets"=>true, "read"=> true);
+        add_role("js_support_ticket_admin_agent", "JS Help Desk agent (admin)",$jsst_capabilities);
     }
 
     static private function checkUpdates() {
@@ -34,16 +34,16 @@ class JSSTactivation {
     }
 
     static private function insertMenu() {
-        $pageexist = jssupportticket::$_db->get_var("Select COUNT(id) FROM `" . jssupportticket::$_db->prefix . "posts` WHERE post_name = 'js-support-ticket-controlpanel'");
-        if ($pageexist == 0) {
-            $post = array(
+        $jsst_pageexist = jssupportticket::$_db->get_var("Select COUNT(id) FROM `" . jssupportticket::$_db->prefix . "posts` WHERE post_name = 'js-support-ticket-controlpanel'");
+        if ($jsst_pageexist == 0) {
+            $jsst_post = array(
                 'post_name' => 'js-support-ticket-controlpanel',
                 'post_title' => 'JS Help Desk',
                 'post_status' => 'publish',
                 'post_content' => '[jssupportticket]',
                 'post_type' => 'page'
             );
-            wp_insert_post($post);
+            wp_insert_post($jsst_post);
         } else {
             jssupportticket::$_db->get_var("UPDATE `" . jssupportticket::$_db->prefix . "posts` SET post_status = 'publish' WHERE post_name = 'js-support-ticket-controlpanel'");
         }
@@ -51,8 +51,8 @@ class JSSTactivation {
     }
 
     static private function runSQL() {
-        $pageid = jssupportticket::$_db->get_var("SELECT id FROM `" . jssupportticket::$_db->prefix . "posts` WHERE post_name = 'js-support-ticket-controlpanel'");
-         $query = "CREATE TABLE IF NOT EXISTS `" . jssupportticket::$_db->prefix . "js_ticket_config` (
+        $jsst_pageid = jssupportticket::$_db->get_var("SELECT id FROM `" . jssupportticket::$_db->prefix . "posts` WHERE post_name = 'js-support-ticket-controlpanel'");
+         $jsst_query = "CREATE TABLE IF NOT EXISTS `" . jssupportticket::$_db->prefix . "js_ticket_config` (
                       `configname` varchar(100) NOT NULL DEFAULT '',
                       `configvalue` text NOT NULL DEFAULT '',
                       `configfor` varchar(50) DEFAULT NULL,
@@ -61,11 +61,11 @@ class JSSTactivation {
                       FULLTEXT KEY `config_name` (`configname`),
                       FULLTEXT KEY `config_for` (`configfor`)
                     ) ENGINE=MyISAM DEFAULT CHARSET=utf8;";
-        jssupportticket::$_db->query($query);
-        //$uid = JSSTincluder::getObjectClass('user')->uid(); no need it
-        $runConfig = jssupportticket::$_db->get_var("SELECT COUNT(configname) FROM `" . jssupportticket::$_db->prefix . "js_ticket_config`");
-        if ($runConfig == 0) {
-            $query = "CREATE TABLE IF NOT EXISTS `" . jssupportticket::$_db->prefix . "js_ticket_attachments` (
+        jssupportticket::$_db->query($jsst_query);
+        //$jsst_uid = JSSTincluder::getObjectClass('user')->uid(); no need it
+        $jsst_runConfig = jssupportticket::$_db->get_var("SELECT COUNT(configname) FROM `" . jssupportticket::$_db->prefix . "js_ticket_config`");
+        if ($jsst_runConfig == 0) {
+            $jsst_query = "CREATE TABLE IF NOT EXISTS `" . jssupportticket::$_db->prefix . "js_ticket_attachments` (
                                 `id` int(11) NOT NULL AUTO_INCREMENT,
                                 `ticketid` int(11) DEFAULT NULL,
                                 `replyattachmentid` int(11) DEFAULT NULL,
@@ -77,9 +77,9 @@ class JSSTactivation {
                                 `created` datetime DEFAULT NULL,
                                 PRIMARY KEY (`id`)
                                 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;";
-            jssupportticket::$_db->query($query);
+            jssupportticket::$_db->query($jsst_query);
 
-            $query = "INSERT INTO `" . jssupportticket::$_db->prefix . "js_ticket_config` (`configname`, `configvalue`, `configfor`, `addon`) VALUES
+            $jsst_query = "INSERT INTO `" . jssupportticket::$_db->prefix . "js_ticket_config` (`configname`, `configvalue`, `configfor`, `addon`) VALUES
                     ('title', 'JS Help Desk System', 'default', NULL),
                     ('offline', '2', 'default', NULL),
                     ('offline_message', 'We are offline now please come back soon.\r\n\r\nThank you', 'default', NULL),
@@ -201,8 +201,8 @@ class JSSTactivation {
                     ('tplink_faqs_user', '0', 'tplink', 'faq'),
                     ('show_breadcrumbs', '1', 'default', NULL),
                     ('productcode', 'jsticket', 'default', NULL),
-                    ('versioncode', '3.0.0', 'default', NULL),
-                    ('productversion', '300', 'default', NULL),
+                    ('versioncode', '3.0.3', 'default', NULL),
+                    ('productversion', '303', 'default', NULL),
                     ('producttype', 'free', 'default', NULL),
                     ('tve_enabled', '2', 'default', NULL),
                     ('tve_mailreadtype', '3', 'default', NULL),
@@ -220,7 +220,7 @@ class JSSTactivation {
                     ('show_avatar', '2', 'default', NULL),
                     ('count_on_myticket', '1', 'default', NULL),
                     ('system_slug', 'jssupportticket', 'default', NULL),
-                    ('default_pageid', '".$pageid."', 'default', NULL),
+                    ('default_pageid', '".$jsst_pageid."', 'default', NULL),
                     ('support_screentag', '1', 'default', NULL),
                     ('support_custom_img', '0', 'default', NULL),
                     ('support_custom_txt', 'Support', 'default', NULL),
@@ -317,9 +317,9 @@ class JSSTactivation {
                     ('show_assignto_on_user_tickets', '1', 'ticket', 'agent'),
                     ('cplink_export_ticket_staff', '1', 'cplink', 'export'),
                     ('jsst_addons_auto_update', '1', 'default', NULL);";
-            jssupportticket::$_db->query($query);
+            jssupportticket::$_db->query($jsst_query);
 
-            $query = "CREATE TABLE IF NOT EXISTS `" . jssupportticket::$_db->prefix . "js_ticket_departments` (
+            $jsst_query = "CREATE TABLE IF NOT EXISTS `" . jssupportticket::$_db->prefix . "js_ticket_departments` (
                                 `id` int(11) NOT NULL AUTO_INCREMENT,
                                 `emailtemplateid` int(11) DEFAULT NULL,
                                 `emailid` int(11) DEFAULT NULL,
@@ -339,10 +339,10 @@ class JSSTactivation {
                                 `sendmail` tinyint NOT NULL DEFAULT '0',
                                 PRIMARY KEY (`id`)
                                 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2;";
-            jssupportticket::$_db->query($query);
-            $query = "INSERT INTO `" . jssupportticket::$_db->prefix . "js_ticket_departments` (`id`, `emailtemplateid`, `emailid`, `autoresponceemailid`, `managerid`, `departmentname`, `departmentsignature`, `ispublic`, `ticketautoresponce`, `messageautoresponce`, `canappendsignature`, `ordering`, `updated`, `created`, `status`) VALUES (1, NULL, 1, NULL, NULL, 'Support', '-- \n\n Support Department.', 1, NULL, NULL, 1, 1, '" . date_i18n('Y-m-d H:i:s') . "', '" . date_i18n('Y-m-d H:i:s') . "', 1);";
-            jssupportticket::$_db->query($query);
-            $query = "CREATE TABLE IF NOT EXISTS `" . jssupportticket::$_db->prefix . "js_ticket_email` (
+            jssupportticket::$_db->query($jsst_query);
+            $jsst_query = "INSERT INTO `" . jssupportticket::$_db->prefix . "js_ticket_departments` (`id`, `emailtemplateid`, `emailid`, `autoresponceemailid`, `managerid`, `departmentname`, `departmentsignature`, `ispublic`, `ticketautoresponce`, `messageautoresponce`, `canappendsignature`, `ordering`, `updated`, `created`, `status`) VALUES (1, NULL, 1, NULL, NULL, 'Support', '-- \n\n Support Department.', 1, NULL, NULL, 1, 1, '" . date_i18n('Y-m-d H:i:s') . "', '" . date_i18n('Y-m-d H:i:s') . "', 1);";
+            jssupportticket::$_db->query($jsst_query);
+            $jsst_query = "CREATE TABLE IF NOT EXISTS `" . jssupportticket::$_db->prefix . "js_ticket_email` (
                                 `id` int(11) NOT NULL AUTO_INCREMENT,
                                 `autoresponse` tinyint(1) DEFAULT NULL,
                                 `priorityid` int(11) DEFAULT NULL,
@@ -372,13 +372,13 @@ class JSSTactivation {
                                 `updated` datetime DEFAULT NULL,
                                 PRIMARY KEY (`id`)
                                 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2;";
-            jssupportticket::$_db->query($query);
-            $systememail = get_option('admin_email');
-            $query = "INSERT INTO `" . jssupportticket::$_db->prefix . "js_ticket_email` (`id`,`autoresponse`, `priorityid`, `email`, `name`, `uid`, `password`, `status`, `mailhost`, `mailprotocol`, `mailencryption`, `mailport`, `mailfetchfrequency`, `mailfetchmaximum`, `maildeleted`, `mailerrors`, `maillasterror`, `maillastfetch`, `smtpactive`, `smtphost`, `smtpport`, `smtpsecure`, `smtpauthencation`, `created`, `updated`) VALUES
-                                (1,1, 1, '" . $systememail . "', NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2014-10-02 10:38:48', '0000-00-00 00:00:00');";
-            jssupportticket::$_db->query($query);
+            jssupportticket::$_db->query($jsst_query);
+            $jsst_systememail = get_option('admin_email');
+            $jsst_query = "INSERT INTO `" . jssupportticket::$_db->prefix . "js_ticket_email` (`id`,`autoresponse`, `priorityid`, `email`, `name`, `uid`, `password`, `status`, `mailhost`, `mailprotocol`, `mailencryption`, `mailport`, `mailfetchfrequency`, `mailfetchmaximum`, `maildeleted`, `mailerrors`, `maillasterror`, `maillastfetch`, `smtpactive`, `smtphost`, `smtpport`, `smtpsecure`, `smtpauthencation`, `created`, `updated`) VALUES
+                                (1,1, 1, '" . $jsst_systememail . "', NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2014-10-02 10:38:48', '0000-00-00 00:00:00');";
+            jssupportticket::$_db->query($jsst_query);
 
-            $query = "CREATE TABLE IF NOT EXISTS `" . jssupportticket::$_db->prefix . "js_ticket_emailtemplates` (
+            $jsst_query = "CREATE TABLE IF NOT EXISTS `" . jssupportticket::$_db->prefix . "js_ticket_emailtemplates` (
                                 `id` int(11) NOT NULL AUTO_INCREMENT,
                                 `templatefor` varchar(50) DEFAULT NULL,
                                 `title` varchar(50) DEFAULT NULL,
@@ -389,8 +389,8 @@ class JSSTactivation {
                                 `multiformid` tinyint(4) DEFAULT NULL,
                                 PRIMARY KEY (`id`)
                                 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=26;";
-            jssupportticket::$_db->query($query);
-            $query = "INSERT INTO `" . jssupportticket::$_db->prefix . "js_ticket_emailtemplates` (`id`, `templatefor`, `title`, `subject`, `body`, `created`, `status`) VALUES
+            jssupportticket::$_db->query($jsst_query);
+            $jsst_query = "INSERT INTO `" . jssupportticket::$_db->prefix . "js_ticket_emailtemplates` (`id`, `templatefor`, `title`, `subject`, `body`, `created`, `status`) VALUES
                                 (1, 'ticket-new', '', '{SITETITLE}: New Ticket Received', '<div style=\"background-color: #f7f7f7; margin: 0; padding: 70px 0; width: 100%;\">\n<div style=\"border: 3px dotted #ebecec; width: 600px; display: block; margin: 0 auto; background: #fff;\">\n<div style=\"padding: 15px 20px; background: #3e4095; color: #fff; font-size: 16px; font-weight: bold; text-transform: uppercase; border-bottom: 1px solid #4b4b4d;\">JS Help Desk</div>\n<div style=\"padding: 30px; text-align: center; font-weight: bold; background: #576cf1; color: #fff; text-transform: capitalize; font-size: 22px;\">{SITETITLE}: New Ticket Received</div>\n<div style=\"padding: 40px 20px 20px;\">\n<div style=\"padding-bottom: 20px; border-bottom: 1px solid #ebecec;\">\n<div style=\"font-weight: bold; font-size: 18px; margin-bottom: 15px; color: #4b4b4d;\">Dear {USERNAME},</div>\n<div style=\"color: #727376; line-height: 2;\">Your support ticket (<strong style=\"color: #4b4b4d;\">{SUBJECT}</strong>) with ticket id (<strong style=\"color: #4b4b4d;\">{TRACKINGID}</strong>) has been submitted. We try to reply all tickets as soon as possible, usually within 24 hours.</div>\n</div>\n<div style=\"padding: 20px 0;\">\n<div style=\"font-weight: bold; font-size: 16px; margin-bottom: 10px; color: #4b4b4d;\">You will receive email notification when our agent replies to your ticket. You can view the status of your ticket here:</div>\n</div>\n<div style=\"padding: 0 0 30px; text-align: center;\"><a style=\"display: inline-block; padding: 15px; background: #576cf1; width: 40%; text-align: center; text-decoration: none; color: #ffff; text-transform: capitalize; border-bottom: 3px solid #4b4b4d;\" href=\"{TICKETURL}\">View Ticket</a></div>\n<div style=\"background: #fef2ef; padding: 15px; margin-bottom: 20px; border: 1px solid #eba7a8;\">\n<div style=\"font-weight: bold; font-size: 14px; margin-bottom: 5px; color: #983133; text-transform: uppercase;\">Do not reply TO this E-Mail</div>\n<div style=\"color: #727376; line-height: 2;\">This is an automated e-mail message sent from our support system. Do not reply to this e-mail as we cannot receive your reply!</div>\n</div>\n<div style=\"color: #727376; line-height: 2;\">This email was sent from <a href=\"https://www.jshelpdesk.com\"><span style=\"color: #3e4095; display: inline-block; text-decoration: underline; cursor: pointer;\">JS Help Desk System</span></a> to <span style=\"color: #606062; display: inline-block; text-decoration: underline;\">{EMAIL}</span></div>\n</div>\n<div style=\"background: #4b4b4d; padding: 20px; color: #fff; text-align: center; border-bottom: 5px solid #576cf1;\">© 2014-{CURRENT_YEAR} All rights reserved - <a href=\"https://www.jshelpdesk.com\"><span style=\"color: white; display: inline-block; text-decoration: underline; cursor: pointer;\">JS Help Desk System</span></a></div>\n</div>\n</div>', NULL, 0),
                                 (2, 'department-new', '', '{SITETITLE}:  New Department {DEPARTMENT_TITLE} has been received', '<div style=\"border: 3px dotted #ebecec;\">\n<div style=\"padding: 20px; background: #3e4095; color: #fff; font-size: 16px; font-weight: bold; text-transform: uppercase; border-bottom: 1px solid #4b4b4d;\">JS Help Desk</div>\n<div style=\"padding: 40px; text-align: center; font-weight: bold; background: #576cf1; color: #fff; text-transform: capitalize; font-size: 30px;\">{SITETITLE}: New Department</div>\n<div style=\"padding: 40px 20px;\">\n<div style=\"padding-bottom: 20px; border-bottom: 1px solid #ebecec;\">\n<div style=\"font-weight: bold; font-size: 18px; margin-bottom: 15px; color: #4b4b4d;\">Dear Admin,</div>\n<div style=\"color: #727376; line-height: 2;\">We receive new department (<strong style=\"color: #4b4b4d;\">{DEPARTMENT_TITLE}</strong>).</div>\n</div>\n<div style=\"background: #fef2ef; padding: 25px; margin-bottom: 20px; border: 1px solid #eba7a8;\">\n<div style=\"font-weight: bold; font-size: 16px; margin-bottom: 15px; color: #983133; text-transform: uppercase;\">Do not reply on this E-Mail</div>\n<div style=\"color: #727376; line-height: 2;\">This is an automated e-mail message sent from our support system. Do not reply to this e-mail as we cannot receive your reply!</div>\n</div>\n<div style=\"color: #727376; line-height: 2;\">This email was sent from <a href=\"https://www.jshelpdesk.com\"><span style=\"color: #3e4095; display: inline-block; text-decoration: underline; cursor: pointer;\">JS Help Desk System</span></a> to <span style=\"color: #606062; display: inline-block; text-decoration: underline;\">{EMAIL}</span></div>\n</div>\n<div style=\"background: #4b4b4d; padding: 20px; color: #fff; text-align: center; border-bottom: 5px solid #576cf1;\">© 2014-{CURRENT_YEAR} All rights reserved - <a href=\"https://www.jshelpdesk.com\"><span style=\"color: white; display: inline-block; text-decoration: underline; cursor: pointer;\">JS Help Desk System</span></a></div>\n</div>', NULL, 0),
                                 (3, 'group-new', '', '{SITETITLE}:  New Group {GROUP_TITLE} has beed received ', 'Hello Admin ,\r\n\r\nWe receive new group.\r\n\r\n<span style=\"color: red;\"><strong>*DO NOT REPLY TO THIS E-MAIL*</strong></span>\r\nThis is an automated e-mail message sent from our support system. Do not reply to this e-mail as we wonot receive your reply!', NULL, 0),
@@ -419,8 +419,8 @@ class JSSTactivation {
                                 (27,'mail-feedback','','{SITETITLE}: Give Us Your Feedback','<div style=\"background-color: #f7f7f7; margin: 0; padding: 70px 0; width: 100%;\">\n<div style=\"border: 3px dotted #ebecec; width: 600px; display: block; margin: 0 auto; background: #fff;\">\n<div style=\"padding: 15px 20px; background: #3e4095; color: #fff; font-size: 16px; font-weight: bold; text-transform: uppercase; border-bottom: 1px solid #4b4b4d;\">JS Help Desk</div>\n<div style=\"padding: 30px; text-align: center; font-weight: bold; background: #576cf1; color: #fff; text-transform: capitalize; font-size: 22px;\">{SITETITLE}: Give Us Your Feedback</div>\n<div style=\"padding: 40px 20px 20px;\">\n<div style=\"padding-bottom: 20px; border-bottom: 1px solid #ebecec;\">\n<div style=\"font-weight: bold; font-size: 18px; margin-bottom: 15px; color: #4b4b4d;\">Dear {USERNAME},</div>\n<div style=\"color: #727376; line-height: 2;\">Your support ticket (<strong style=\"color: #4b4b4d;\">{TICKET_SUBJECT}</strong>) having tracking id (<strong style=\"color: #4b4b4d;\">{TRACKING_ID}</strong>) has been closed on (<strong style=\"color: #4b4b4d;\">{CLOSE_DATE}</strong>).</div>\n</div>\n<div style=\"border: 1px solid #ebecec;\">\n<div style=\"border-bottom: 1px solid #ebecec; color: #727376; padding: 15px;\">Mail Subject : {SUBJECT}</div>\n<div style=\"border-bottom: 1px solid #ebecec; color: #727376; padding: 15px;\">Message : {MESSAGE}</div>\n</div>\n<div style=\"padding: 20px 0;\">\n<div style=\"font-weight: bold; font-size: 16px; margin-bottom: 10px; color: #4b4b4d;\">We would really appreciate if you took the time to tell us how well our agent helped you in your problem.</div>\n</div>\n<div style=\"text-align: center; margin-bottom: 40px;\">{LINK}link text{/LINK}</div>\n<div style=\"background: #fef2ef; padding: 15px; margin-bottom: 20px; border: 1px solid #eba7a8;\">\n<div style=\"font-weight: bold; font-size: 14px; margin-bottom: 5px; color: #983133; text-transform: uppercase;\">Do not reply on this E-Mail</div>\n<div style=\"color: #727376; line-height: 2;\">This is an automated e-mail message sent from our support system. Do not reply to this e-mail as we cannot receive your reply!</div>\n</div>\n<div style=\"color: #727376; line-height: 2;\">This email was sent from <a href=\"https://www.jshelpdesk.com\"><span style=\"color: #3e4095; display: inline-block; text-decoration: underline; cursor: pointer;\">JS Help Desk System</span></a> to <span style=\"color: #606062; display: inline-block; text-decoration: underline;\">{EMAIL}</span></div>\n</div>\n<div style=\"background: #4b4b4d; padding: 20px; color: #fff; text-align: center; border-bottom: 5px solid #576cf1;\">© 2014-{CURRENT_YEAR} All rights reserved - <a href=\"https://www.jshelpdesk.com\"><span style=\"color: white; display: inline-block; text-decoration: underline; cursor: pointer;\">JS Help Desk System</span></a></div>\n</div>\n</div>',NULL,0),
                                 (28,'delete-user-data','','{SITETITLE}: Delete User Data','<div style=\"background-color: #f7f7f7; margin: 0; padding: 70px 0; width: 100%;\">\n<div style=\"border: 3px dotted #ebecec; width: 600px; display: block; margin: 0 auto; background: #fff;\">\n<div style=\"padding: 15px 20px; background: #3e4095; color: #fff; font-size: 16px; font-weight: bold; text-transform: uppercase; border-bottom: 1px solid #4b4b4d;\">JS Help Desk</div>\n<div style=\"padding: 30px; text-align: center; font-weight: bold; background: #576cf1; color: #fff; text-transform: capitalize; font-size: 22px;\">{SITETITLE}: Data Delete request</div>\n<div style=\"padding: 40px 20px 20px;\">\n<div style=\"padding-bottom: 20px; border-bottom: 1px solid #ebecec;\">\n<div style=\"font-weight: bold; font-size: 18px; margin-bottom: 15px; color: #4b4b4d;\">Dear {USERNAME},</div>\n<div style=\"color: #727376; line-height: 2;\">Your data delete request has been received.</div>\n</div>\n<div style=\"background: #fef2ef; padding: 15px; margin-bottom: 20px; border: 1px solid #eba7a8;\">\n<div style=\"font-weight: bold; font-size: 14px; margin-bottom: 5px; color: #983133; text-transform: uppercase;\">Do not reply TO this E-Mail</div>\n<div style=\"color: #727376; line-height: 2;\">This is an automated e-mail message sent from our support system. Do not reply to this e-mail as we cannot receive your reply!</div>\n</div>\n<div style=\"color: #727376; line-height: 2;\">This email was sent from <a href=\"https://www.jshelpdesk.com\"><span style=\"color: #3e4095; display: inline-block; text-decoration: underline; cursor: pointer;\">JS Help Desk System</span></a> to <span style=\"color: #606062; display: inline-block; text-decoration: underline;\">{EMAIL}</span></div>\n</div>\n<div style=\"background: #4b4b4d; padding: 20px; color: #fff; text-align: center; border-bottom: 5px solid #576cf1;\">© 2014-{CURRENT_YEAR} All rights reserved - <a href=\"https://www.jshelpdesk.com\"><span style=\"color: white; display: inline-block; text-decoration: underline; cursor: pointer;\">JS Help Desk System</span></a></div>\n</div>\n</div>',NULL,0);"
                                 ;
-            jssupportticket::$_db->query($query);
-            $query = "CREATE TABLE IF NOT EXISTS `" . jssupportticket::$_db->prefix . "js_ticket_priorities` (
+            jssupportticket::$_db->query($jsst_query);
+            $jsst_query = "CREATE TABLE IF NOT EXISTS `" . jssupportticket::$_db->prefix . "js_ticket_priorities` (
                                 `id` int(11) NOT NULL AUTO_INCREMENT,
                                 `priority` varchar(60) DEFAULT NULL,
                                 `prioritycolour` varchar(7) DEFAULT NULL,
@@ -433,11 +433,11 @@ class JSSTactivation {
                                 `status` tinyint(4) NOT NULL DEFAULT '0',
                                 PRIMARY KEY (`id`)
                                 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5;";
-            jssupportticket::$_db->query($query);
-            $query = "INSERT INTO `" . jssupportticket::$_db->prefix . "js_ticket_priorities` (`id`, `priority`, `prioritycolour`, `priorityurgency`, `ispublic`, `overdueinterval`, `overduetypeid`, `ordering`, `isdefault`, `status`) VALUES (1, 'Low', '#86f793', 0, 1, 3, '1', 1, 1, 0),(2, 'High', '#ed8e00', 0, 1, 1, '1', 3, 0, 1),(3, 'Normal', '#c7cbf5', 0, 1, 2, '1', 2, 0, 1),(4, 'Urgent', '#c90000', 0, 1, 1, '1', 4, 0, 0);";
-            jssupportticket::$_db->query($query);
+            jssupportticket::$_db->query($jsst_query);
+            $jsst_query = "INSERT INTO `" . jssupportticket::$_db->prefix . "js_ticket_priorities` (`id`, `priority`, `prioritycolour`, `priorityurgency`, `ispublic`, `overdueinterval`, `overduetypeid`, `ordering`, `isdefault`, `status`) VALUES (1, 'Low', '#86f793', 0, 1, 3, '1', 1, 1, 0),(2, 'High', '#ed8e00', 0, 1, 1, '1', 3, 0, 1),(3, 'Normal', '#c7cbf5', 0, 1, 2, '1', 2, 0, 1),(4, 'Urgent', '#c90000', 0, 1, 1, '1', 4, 0, 0);";
+            jssupportticket::$_db->query($jsst_query);
 
-            $query = "CREATE TABLE IF NOT EXISTS `" . jssupportticket::$_db->prefix . "js_ticket_statuses` (
+            $jsst_query = "CREATE TABLE IF NOT EXISTS `" . jssupportticket::$_db->prefix . "js_ticket_statuses` (
                 `id` int(11) NOT NULL AUTO_INCREMENT,
                 `status` varchar(60) DEFAULT NULL,
                 `statuscolour` varchar(7) DEFAULT NULL,
@@ -446,26 +446,26 @@ class JSSTactivation {
                 `ordering` int(11) NOT NULL,
                 PRIMARY KEY (`id`)
                 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=7;";
-            jssupportticket::$_db->query($query);
+            jssupportticket::$_db->query($jsst_query);
             
-            $query = "INSERT INTO `" . jssupportticket::$_db->prefix . "js_ticket_statuses` (`id`, `status`, `statuscolour`, `statusbgcolour`, `sys`, `ordering`)
+            $jsst_query = "INSERT INTO `" . jssupportticket::$_db->prefix . "js_ticket_statuses` (`id`, `status`, `statuscolour`, `statusbgcolour`, `sys`, `ordering`)
                 VALUES (1, 'New', '#FFFFFF', '#5bb12f', 1, 1),
                     (2, 'Waiting Reply', '#FFFFFF', '#28abe3', 1, 2),
                     (3, 'In Progress', '#FFFFFF', '#69d2e7', 1, 3),
                     (4, 'Replied', '#FFFFFF', '#186e83', 1, 4),
                     (5, 'Closed', '#FFFFFF', '#ed1c24', 1, 5),
                     (6, 'Close due to merge', '#FFFFFF', '#ed1c24', 1, 6);";
-            jssupportticket::$_db->query($query);
+            jssupportticket::$_db->query($jsst_query);
 
-            $query = "CREATE TABLE IF NOT EXISTS `" . jssupportticket::$_db->prefix . "js_ticket_products` (
+            $jsst_query = "CREATE TABLE IF NOT EXISTS `" . jssupportticket::$_db->prefix . "js_ticket_products` (
                 `id` int(11) NOT NULL AUTO_INCREMENT,
                 `product` varchar(60) DEFAULT NULL,
                 `status` tinyint(1) DEFAULT NULL,
                 `ordering` int(11) NOT NULL,
                 PRIMARY KEY (`id`)
                 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;";
-            jssupportticket::$_db->query($query);
-            $query = "CREATE TABLE IF NOT EXISTS `" . jssupportticket::$_db->prefix . "js_ticket_replies` (
+            jssupportticket::$_db->query($jsst_query);
+            $jsst_query = "CREATE TABLE IF NOT EXISTS `" . jssupportticket::$_db->prefix . "js_ticket_replies` (
                                 `id` int(11) NOT NULL AUTO_INCREMENT,
                                 `uid` int(11) NOT NULL,
                                 `ticketid` int(11) DEFAULT NULL,
@@ -483,8 +483,8 @@ class JSSTactivation {
                                 PRIMARY KEY (`id`),
                                 FULLTEXT KEY `message` (`message`)
                                 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;";
-            jssupportticket::$_db->query($query);
-            $query = "CREATE TABLE IF NOT EXISTS `" . jssupportticket::$_db->prefix . "js_ticket_system_errors` (
+            jssupportticket::$_db->query($jsst_query);
+            $jsst_query = "CREATE TABLE IF NOT EXISTS `" . jssupportticket::$_db->prefix . "js_ticket_system_errors` (
                                 `id` int(11) NOT NULL AUTO_INCREMENT,
                                 `uid` int(11) DEFAULT NULL,
                                 `error` text,
@@ -492,8 +492,8 @@ class JSSTactivation {
                                 `created` datetime DEFAULT NULL,
                                 PRIMARY KEY (`id`)
                                 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;";
-            jssupportticket::$_db->query($query);
-            $query = "CREATE TABLE IF NOT EXISTS `" . jssupportticket::$_db->prefix . "js_ticket_tickets` (
+            jssupportticket::$_db->query($jsst_query);
+            $jsst_query = "CREATE TABLE IF NOT EXISTS `" . jssupportticket::$_db->prefix . "js_ticket_tickets` (
                                 `id` int(11) NOT NULL AUTO_INCREMENT,
                                 `uid` int(11) DEFAULT NULL,
                                 `ticketid` varchar(35) DEFAULT NULL,
@@ -548,8 +548,8 @@ class JSSTactivation {
                                 FULLTEXT KEY `subject` (`subject`),
                                 FULLTEXT KEY `message` (`message`)
                             ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;";
-            jssupportticket::$_db->query($query);
-            $query = "CREATE TABLE IF NOT EXISTS `" . jssupportticket::$_db->prefix . "js_ticket_fieldsordering` (
+            jssupportticket::$_db->query($jsst_query);
+            $jsst_query = "CREATE TABLE IF NOT EXISTS `" . jssupportticket::$_db->prefix . "js_ticket_fieldsordering` (
                         `id` int(11) NOT NULL AUTO_INCREMENT,
                         `field` varchar(50) NOT NULL,
                         `fieldtitle` varchar(50) DEFAULT NULL,
@@ -585,8 +585,8 @@ class JSSTactivation {
                         `defaultvalue` varchar(255) DEFAULT NULL,
                         PRIMARY KEY (`id`),KEY `fieldordering_filedfor` (`fieldfor`))
                         ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=14;";
-            jssupportticket::$_db->query($query);
-            $query = "INSERT INTO `" . jssupportticket::$_db->prefix . "js_ticket_fieldsordering` (`id`, `field`, `fieldtitle`, `ordering`, `section`, `placeholder`, `description`, `fieldfor`, `published`, `sys`, `cannotunpublish`, `required`,`cannotsearch`,`showonlisting`,`cannotshowonlisting`,`search_user`,`search_admin`,`isvisitorpublished`,`userfieldparams`) VALUES
+            jssupportticket::$_db->query($jsst_query);
+            $jsst_query = "INSERT INTO `" . jssupportticket::$_db->prefix . "js_ticket_fieldsordering` (`id`, `field`, `fieldtitle`, `ordering`, `section`, `placeholder`, `description`, `fieldfor`, `published`, `sys`, `cannotunpublish`, `required`,`cannotsearch`,`showonlisting`,`cannotshowonlisting`,`search_user`,`search_admin`,`isvisitorpublished`,`userfieldparams`) VALUES
             (1, 'email', 'Email Address', 2, '10', NULL, NULL, 1, 1, 0, 0, 1, 0, 0, 0, 1, 1, 1, NULL),  
             (15, 'users', 'Users', 1, '10', NULL, NULL, 1, 1, 0, 0, 0, 1, NULL, 1, 0, 0, 1, NULL),  
             (2, 'fullname', 'Full Name', 3, '10', NULL, NULL, 1, 1, 0, 0, 1, 0, 1, 0, 0, 1, 1, NULL),  
@@ -615,8 +615,8 @@ class JSSTactivation {
             (26, 'termsandconditions2', 'terms and conditions 2', 26, '10', NULL, NULL, 1, 0, 0, 0, 1, 1, 0, 1, 0, 0, 0, '{\"termsandconditions_text\":\"I understand my personal info may be stored.\",\"termsandconditions_linktype\":\"3\"}'),
             (27, 'termsandconditions3', 'terms and conditions 3', 27, '10', NULL, NULL, 1, 0, 0, 0, 1, 1, 0, 1, 0, 0, 0, '{\"termsandconditions_text\":\"I acknowledge response times may vary.\",\"termsandconditions_linktype\":\"3\"}');";
 
-            jssupportticket::$_db->query($query);
-            $query = "CREATE TABLE IF NOT EXISTS `" . jssupportticket::$_db->prefix . "js_ticket_erasedatarequests` (
+            jssupportticket::$_db->query($jsst_query);
+            $jsst_query = "CREATE TABLE IF NOT EXISTS `" . jssupportticket::$_db->prefix . "js_ticket_erasedatarequests` (
                       `id` int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
                       `uid` int(11) NOT NULL,
                       `subject` varchar(250) NOT NULL,
@@ -624,17 +624,17 @@ class JSSTactivation {
                       `status` int(11) NOT NULL,
                       `created` datetime NOT NULL
                     ) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;";
-            jssupportticket::$_db->query($query);
-            $query = "CREATE TABLE IF NOT EXISTS `" . jssupportticket::$_db->prefix . "js_ticket_jshdsessiondata` (
+            jssupportticket::$_db->query($jsst_query);
+            $jsst_query = "CREATE TABLE IF NOT EXISTS `" . jssupportticket::$_db->prefix . "js_ticket_jshdsessiondata` (
               `id` int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
               `usersessionid` char(64) NOT NULL,
               `sessionmsg` text CHARACTER SET utf8 NOT NULL,
               `sessionexpire` bigint(32) NOT NULL,
               `sessionfor` varchar(125) NOT NULL
             ) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;";
-            jssupportticket::$_db->query($query);
+            jssupportticket::$_db->query($jsst_query);
 
-            $query = "CREATE TABLE IF NOT EXISTS `" . jssupportticket::$_db->prefix . "js_ticket_users` (
+            $jsst_query = "CREATE TABLE IF NOT EXISTS `" . jssupportticket::$_db->prefix . "js_ticket_users` (
               `id` bigint(20) NOT NULL PRIMARY KEY AUTO_INCREMENT,
               `wpuid` bigint(20),
               `name` varchar(250),
@@ -647,9 +647,9 @@ class JSSTactivation {
               `created` datetime NOT NULL,
               `autogenerated` int(2)
             ) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;";
-            jssupportticket::$_db->query($query);
+            jssupportticket::$_db->query($jsst_query);
 
-            $query = "CREATE TABLE IF NOT EXISTS `" . jssupportticket::$_db->prefix . "js_ticket_slug` (
+            $jsst_query = "CREATE TABLE IF NOT EXISTS `" . jssupportticket::$_db->prefix . "js_ticket_slug` (
               `id` int(11) NOT NULL AUTO_INCREMENT,
               `slug` varchar(100) CHARACTER SET utf8 NOT NULL,
               `defaultslug` varchar(100) CHARACTER SET utf8 NOT NULL,
@@ -658,9 +658,9 @@ class JSSTactivation {
               `status` tinyint(11) DEFAULT NULL,
               PRIMARY KEY (`id`)
             ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=64;";
-            jssupportticket::$_db->query($query);
+            jssupportticket::$_db->query($jsst_query);
 
-            $query = "INSERT INTO `" . jssupportticket::$_db->prefix . "js_ticket_slug` (`id`, `slug`, `defaultslug`, `filename`, `description`, `status`) VALUES
+            $jsst_query = "INSERT INTO `" . jssupportticket::$_db->prefix . "js_ticket_slug` (`id`, `slug`, `defaultslug`, `filename`, `description`, `status`) VALUES
               (1, 'ticket', 'ticket', 'ticketdetail', 'slug for ticket page', 1),
               (2, 'staff-add-ticket', 'staff-add-ticket', 'staffaddticket', 'slug for agent add ticket page', 1),
               (3, 'role-permission', 'role-permission', 'rolepermission', 'slug for rolepermission page', 1),
@@ -715,7 +715,7 @@ class JSSTactivation {
               (55, 'faqs', 'faqs', 'faqs', 'slug for faqs page', 1),
               (56, 'agent-export', 'export', 'export', 'slug for export page', 1);";
 
-            jssupportticket::$_db->query($query);
+            jssupportticket::$_db->query($jsst_query);
         }
     }
 

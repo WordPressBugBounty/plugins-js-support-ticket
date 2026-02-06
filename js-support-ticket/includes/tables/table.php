@@ -10,45 +10,45 @@ class JSSTtable {
     public $primarykey = '';
     public $tablename = '';
 
-    function __construct($tbl, $pk) {
-        $this->tablename = jssupportticket::$_db->prefix . 'js_ticket_' . $tbl;
-        $this->primarykey = $pk;
+    function __construct($jsst_tbl, $jsst_pk) {
+        $this->tablename = jssupportticket::$_db->prefix . 'js_ticket_' . $jsst_tbl;
+        $this->primarykey = $jsst_pk;
     }
 
-    public function bind($data) {
-        if ((!is_array($data)) || (empty($data)))
+    public function bind($jsst_data) {
+        if ((!is_array($jsst_data)) || (empty($jsst_data)))
             return false;
-        if (isset($data['id']) && !empty($data['id'])) { // Edit case
+        if (isset($jsst_data['id']) && !empty($jsst_data['id'])) { // Edit case
             $this->isnew = false;
         } else { // New case
             $this->isnew = true;
         }
-        $result = $this->setColumns($data);
-        return $result;
+        $jsst_result = $this->setColumns($jsst_data);
+        return $jsst_result;
     }
 
-    protected function setColumns($data) {
+    protected function setColumns($jsst_data) {
         if ($this->isnew == true) { // new record insert
-            $array = get_object_vars($this);
-            if(isset($array['id'])){
-                unset($array['id']);
+            $jsst_array = get_object_vars($this);
+            if(isset($jsst_array['id'])){
+                unset($jsst_array['id']);
             }
-            unset($array['isnew']);
-            unset($array['primarykey']);
-            unset($array['tablename']);
-            unset($array['columns']);
-            foreach ($array AS $k => $v) {
-                if (isset($data[$k])) {
-                    $this->$k = $data[$k];
+            unset($jsst_array['isnew']);
+            unset($jsst_array['primarykey']);
+            unset($jsst_array['tablename']);
+            unset($jsst_array['columns']);
+            foreach ($jsst_array AS $jsst_k => $jsst_v) {
+                if (isset($jsst_data[$jsst_k])) {
+                    $this->$jsst_k = $jsst_data[$jsst_k];
                 }
-                $this->columns[$k] = $this->$k;
+                $this->columns[$jsst_k] = $this->$jsst_k;
             }
         } else { // update record
-            if (isset($data[$this->primarykey])) {
-                foreach ($data AS $k => $v) {
-                    if (isset($this->$k)) {
-                        $this->$k = $v;
-                        $this->columns[$k] = $v;
+            if (isset($jsst_data[$this->primarykey])) {
+                foreach ($jsst_data AS $jsst_k => $jsst_v) {
+                    if (isset($this->$jsst_k)) {
+                        $this->$jsst_k = $jsst_v;
+                        $this->columns[$jsst_k] = $jsst_v;
                     }
                 }
             } else {
@@ -63,9 +63,9 @@ class JSSTtable {
             jssupportticket::$_db->insert($this->tablename, $this->columns);
             if (jssupportticket::$_db->last_error == null) {
                 $this->{$this->primarykey} = jssupportticket::$_db->insert_id;
-                $id = jssupportticket::$_db->insert_id;
+                $jsst_id = jssupportticket::$_db->insert_id;
                 //activity log //1 for insert
-                //JSSTincluder::getJSModel('tickethistory')->storeActivity(1, $this->tablename, $this->columns, $id);
+                //JSSTincluder::getJSModel('tickethistory')->storeActivity(1, $this->tablename, $this->columns, $jsst_id);
             } else {
                 JSSTincluder::getJSModel('systemerror')->addSystemError();
                 return false;
@@ -81,26 +81,26 @@ class JSSTtable {
         return true;
     }
 
-    function update($data) {
-        $result = $this->bind($data);
-        if ($result == false) {
+    function update($jsst_data) {
+        $jsst_result = $this->bind($jsst_data);
+        if ($jsst_result == false) {
             return false;
         }
-        $result = $this->store();
-        if ($result == false) {
+        $jsst_result = $this->store();
+        if ($jsst_result == false) {
             return false;
         }
         return true;
     }
 
-    function delete($id) {
-        if (!is_numeric($id))
+    function delete($jsst_id) {
+        if (!is_numeric($jsst_id))
             return false;
         //data for delete
-        //$data = JSSTincluder::getJSModel('tickethistory')->getDeleteActionDataToStore($this->tablename, $id);
-        jssupportticket::$_db->delete($this->tablename, array($this->primarykey => $id));
+        //$jsst_data = JSSTincluder::getJSModel('tickethistory')->getDeleteActionDataToStore($this->tablename, $jsst_id);
+        jssupportticket::$_db->delete($this->tablename, array($this->primarykey => $jsst_id));
         if (jssupportticket::$_db->last_error == null) {
-            //JSSTincluder::getJSModel('tickethistory')->storeActivityLogForActionDelete($data, $id);
+            //JSSTincluder::getJSModel('tickethistory')->storeActivityLogForActionDelete($jsst_data, $jsst_id);
             return true;
         } else {
             JSSTincluder::getJSModel('systemerror')->addSystemError();
@@ -112,20 +112,20 @@ class JSSTtable {
         return true;
     }
 
-    function load($id){
-        if(!is_numeric($id)) return false;
-        $query = "SELECT * FROM `".$this->tablename."` WHERE ".$this->primarykey." = ".esc_sql($id);
-        $result = jssupportticket::$_db->get_row($query);
-        $array = get_object_vars($this);
-        unset($array['isnew']);
-        unset($array['primarykey']);
-        unset($array['tablename']);
-        unset($array['columns']);
-        foreach ($array AS $k => $v) {
-            if (isset($result->$k)) {
-                $this->$k = $result->$k;
+    function load($jsst_id){
+        if(!is_numeric($jsst_id)) return false;
+        $jsst_query = "SELECT * FROM `".$this->tablename."` WHERE ".$this->primarykey." = ".esc_sql($jsst_id);
+        $jsst_result = jssupportticket::$_db->get_row($jsst_query);
+        $jsst_array = get_object_vars($this);
+        unset($jsst_array['isnew']);
+        unset($jsst_array['primarykey']);
+        unset($jsst_array['tablename']);
+        unset($jsst_array['columns']);
+        foreach ($jsst_array AS $jsst_k => $jsst_v) {
+            if (isset($jsst_result->$jsst_k)) {
+                $this->$jsst_k = $jsst_result->$jsst_k;
             }
-            $this->columns[$k] = $this->$k;
+            $this->columns[$jsst_k] = $this->$jsst_k;
         }
         return true;
     }

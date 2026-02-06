@@ -247,3 +247,6 @@ div.js-ticket-add-form-wrapper div.js-ticket-from-field-wrp, div.js-ticket-roles
 .jsst-formfield-radio-button-wrap{margin-bottom: 10px;}
 .js-ticket-reply-attachments .tk_attachment_value_text{min-width: unset;margin: 0 !important;}
 .js-tkt-det-user-cnt .js-tkt-det-user-data{justify-content: center;}
+/* widget */
+div.jsst-main-up-wrapper.jsst-widget-main-up-wrapper .js-ticket-body-padding{width: 100%;}
+div.jsst-main-up-wrapper.jsst-widget-main-up-wrapper .js-widget-download-right .js-ticket-body-row-button{padding-top: 15px;border-top: 1px solid #eee;width: 100%;margin-left: 0;margin-right: 0;border-right: unset;}

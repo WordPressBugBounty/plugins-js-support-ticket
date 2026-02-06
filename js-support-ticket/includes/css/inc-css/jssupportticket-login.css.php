@@ -5,20 +5,20 @@ if (!defined('ABSPATH'))
 JSSTincluder::getJSModel('jssupportticket')->checkIfMainCssFileIsEnqued();
 JSSTincluder::getJSModel('jssupportticket')->jsst_get_theme_colors();
 
-$color1 = jssupportticket::$_colors['color1'];
-$color2 = jssupportticket::$_colors['color2'];
-$color3 = jssupportticket::$_colors['color3'];
-$color4 = jssupportticket::$_colors['color4'];
-$color5 = jssupportticket::$_colors['color5'];
-$color6 = jssupportticket::$_colors['color6'];
-$color7 = jssupportticket::$_colors['color7'];
-$color8 = jssupportticket::$_colors['color8'];
-$color9 = jssupportticket::$_colors['color9'];
+$jsst_color1 = jssupportticket::$jsst_colors['color1'];
+$jsst_color2 = jssupportticket::$jsst_colors['color2'];
+$jsst_color3 = jssupportticket::$jsst_colors['color3'];
+$jsst_color4 = jssupportticket::$jsst_colors['color4'];
+$jsst_color5 = jssupportticket::$jsst_colors['color5'];
+$jsst_color6 = jssupportticket::$jsst_colors['color6'];
+$jsst_color7 = jssupportticket::$jsst_colors['color7'];
+$jsst_color8 = jssupportticket::$jsst_colors['color8'];
+$jsst_color9 = jssupportticket::$jsst_colors['color9'];
 
-$jssupportticket_css = '';
+$jsst_jssupportticket_css = '';
 
 /*Code for Css*/
-$jssupportticket_css .= '
+$jsst_jssupportticket_css .= '
 /* Login Page Modernized */
 div.js-ticket-login-wrapper {
     float: left;
@@ -126,7 +126,7 @@ form#loginform-custom p.login-remember label input#rememberme {
         appearance: none;
         width: 14px; /* Larger size */
         height: 14px;
-        border: 1px solid ' . $color5 . '; /* Border with secondary color */
+        border: 1px solid ' . $jsst_color5 . '; /* Border with secondary color */
         border-radius: 4px; /* Slightly more rounded */
         background-color: #fff;
         cursor: pointer;
@@ -136,8 +136,8 @@ form#loginform-custom p.login-remember label input#rememberme {
         opacity: 1;
     }
     form#loginform-custom p.login-remember label input#rememberme:checked {
-        background-color: ' . $color1 . '; /* Primary color fill when checked */
-        border-color: ' . $color1 . ';
+        background-color: ' . $jsst_color1 . '; /* Primary color fill when checked */
+        border-color: ' . $jsst_color1 . ';
     }
     form#loginform-custom p.login-remember label input#rememberme:after {
         content: "";
@@ -206,42 +206,42 @@ span.jsst-help-block {
 
 ';
 /*Code For Colors*/
-$jssupportticket_css .= '
+$jsst_jssupportticket_css .= '
 	/* Login Page Colors */
 	form#loginform-custom p.login-username label,
 	form#loginform-custom p.login-password label,
 	form#loginform-custom p.login-remember label {
-		color: ' . $color2 . ';
+		color: ' . $jsst_color2 . ';
 	}
 
 	form#loginform-custom p.login-submit {
-		border-top-color: ' . $color5 . ';
+		border-top-color: ' . $jsst_color5 . ';
 	}
 
 	form#loginform-custom p.login-username input#user_login,
 	form#loginform-custom p.login-password input#user_pass {
 		background-color: #fcfcfc;
-		border:1px solid ' . $color5 . ';
-		color:' . $color4 . ';
+		border:1px solid ' . $jsst_color5 . ';
+		color:' . $jsst_color4 . ';
 	}
 
 	form#loginform-custom p.login-submit input#wp-submit {
-		background-color: ' . $color1 . ';
-		color: ' . $color7 . ';
-        box-shadow: 0 2px 10px rgba(' . hexdec(substr($color1, 1, 2)) . ', ' . hexdec(substr($color1, 3, 2)) . ', ' . hexdec(substr($color1, 5, 2)) . ', 0.4);
+		background-color: ' . $jsst_color1 . ';
+		color: ' . $jsst_color7 . ';
+        box-shadow: 0 2px 10px rgba(' . hexdec(substr($jsst_color1, 1, 2)) . ', ' . hexdec(substr($jsst_color1, 3, 2)) . ', ' . hexdec(substr($jsst_color1, 5, 2)) . ', 0.4);
 	}
 
 	form#loginform-custom p.login-submit input#wp-submit:hover {
-		background-color: ' . $color2 . ';
+		background-color: ' . $jsst_color2 . ';
         transform: translateY(-3px);
         filter: brightness(1.1);
-        box-shadow: 0 2px 10px rgba(' . hexdec(substr($color2, 1, 2)) . ', ' . hexdec(substr($color2, 3, 2)) . ', ' . hexdec(substr($color2, 5, 2)) . ', 0.5);
+        box-shadow: 0 2px 10px rgba(' . hexdec(substr($jsst_color2, 1, 2)) . ', ' . hexdec(substr($jsst_color2, 3, 2)) . ', ' . hexdec(substr($jsst_color2, 5, 2)) . ', 0.5);
 	}
-	.js-ticket-login-wrapper a{color:' . $color1 . '!important;}
+	.js-ticket-login-wrapper a{color:' . $jsst_color1 . '!important;}
 ';
 
 
-wp_add_inline_style('jssupportticket-main-css', $jssupportticket_css);
+wp_add_inline_style('jssupportticket-main-css', $jsst_jssupportticket_css);
 
 
 ?>

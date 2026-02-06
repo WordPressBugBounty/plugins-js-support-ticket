@@ -10,36 +10,36 @@ class JSSTsystemerrorController {
     }
 
     function handleRequest() {
-        $layout = JSSTrequest::getLayout('jstlay', null, 'systemerrors');
-        jssupportticket::$_data['sanitized_args']['jsst_nonce'] = esc_html(wp_create_nonce('jsst_nonce'));
-        if (self::canaddfile($layout)) {
-            switch ($layout) {
+        $jsst_layout = JSSTrequest::getLayout('jstlay', null, 'systemerrors');
+        jssupportticket::$jsst_data['sanitized_args']['jsst_nonce'] = esc_html(wp_create_nonce('jsst_nonce'));
+        if (self::canaddfile($jsst_layout)) {
+            switch ($jsst_layout) {
                 case 'admin_systemerrors':
                     JSSTincluder::getJSModel('systemerror')->getSystemErrors();
                     break;
 
                 case 'admin_addsystemerror':
-                    $id = JSSTrequest::getVar('jssupportticketid', 'get');
-                    JSSTincluder::getJSModel('systemerror')->getsystemerrorForForm($id);
+                    $jsst_id = JSSTrequest::getVar('jssupportticketid', 'get');
+                    JSSTincluder::getJSModel('systemerror')->getsystemerrorForForm($jsst_id);
                     break;
                 default:
                     exit;
             }
-            $module = (is_admin()) ? 'page' : 'jstmod';
-            $module = JSSTrequest::getVar($module, null, 'systemerror');
-            JSSTincluder::include_file($layout, $module);
+            $jsst_module = (is_admin()) ? 'page' : 'jstmod';
+            $jsst_module = JSSTrequest::getVar($jsst_module, null, 'systemerror');
+            JSSTincluder::include_file($jsst_layout, $jsst_module);
         }
     }
 
-    function canaddfile($layout) {
-        $nonce_value = JSSTrequest::getVar('jsst_nonce');
-        if ( wp_verify_nonce( $nonce_value, 'jsst_nonce') ) {
+    function canaddfile($jsst_layout) {
+        $jsst_nonce_value = JSSTrequest::getVar('jsst_nonce');
+        if ( wp_verify_nonce( $jsst_nonce_value, 'jsst_nonce') ) {
             if (isset($_POST['form_request']) && $_POST['form_request'] == 'jssupportticket') {
                 return false;
             } elseif (isset($_GET['action']) && $_GET['action'] == 'jstask') {
                 return false;
             } else {
-                if(!is_admin() && jssupportticketphplib::JSST_strpos($layout, 'admin_') === 0){
+                if(!is_admin() && jssupportticketphplib::JSST_strpos($jsst_layout, 'admin_') === 0){
                     return false;
                 }
                 return true;
@@ -48,34 +48,34 @@ class JSSTsystemerrorController {
     }
 
     static function savesystemerror() {
-        $data = JSSTrequest::get('post');
-        JSSTincluder::getJSModel('systemerror')->storesystemerror($data);
+        $jsst_data = JSSTrequest::get('post');
+        JSSTincluder::getJSModel('systemerror')->storesystemerror($jsst_data);
         if (is_admin()) {
-            $url = admin_url("admin.php?page=systemerror&jstlay=systemerrors");
+            $jsst_url = admin_url("admin.php?page=systemerror&jstlay=systemerrors");
         } else {
-            $url = jssupportticket::makeUrl(array('jstmod'=>'systemerror','jstlay'=>'systemerrors'));
+            $jsst_url = jssupportticket::makeUrl(array('jstmod'=>'systemerror','jstlay'=>'systemerrors'));
         }
-        wp_redirect($url);
+        wp_safe_redirect($jsst_url);
         exit;
     }
 
     static function deletesystemerror() {
-        $id = JSSTrequest::getVar('systemerrorid');
-        $nonce = JSSTrequest::getVar('_wpnonce');
-        if (! wp_verify_nonce( $nonce, 'delete-systemerror-'.$id) ) {
+        $jsst_id = JSSTrequest::getVar('systemerrorid');
+        $jsst_nonce = JSSTrequest::getVar('_wpnonce');
+        if (! wp_verify_nonce( $jsst_nonce, 'delete-systemerror-'.$jsst_id) ) {
             die( 'Security check Failed' );
         }
-        JSSTincluder::getJSModel('systemerror')->removeSystemError($id);
+        JSSTincluder::getJSModel('systemerror')->removeSystemError($jsst_id);
         if (is_admin()) {
-            $url = admin_url("admin.php?page=systemerror&jstlay=systemerrors");
+            $jsst_url = admin_url("admin.php?page=systemerror&jstlay=systemerrors");
         } else {
-            $url = jssupportticket::makeUrl(array('jstmod'=>'systemerror','jstlay'=>'systemerrors'));
+            $jsst_url = jssupportticket::makeUrl(array('jstmod'=>'systemerror','jstlay'=>'systemerrors'));
         }
-        wp_redirect($url);
+        wp_safe_redirect($jsst_url);
         exit;
     }
 
 }
 
-$systemerrorController = new JSSTsystemerrorController();
+$jsst_systemerrorController = new JSSTsystemerrorController();
 ?>

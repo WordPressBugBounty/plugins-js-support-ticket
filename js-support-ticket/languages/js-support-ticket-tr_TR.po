@@ -8765,3 +8765,45 @@ msgstr "Kaydet ve Sonraki"
 
 msgid "For enhanced security change encryption method in %1$s on line %2$s"
 msgstr "Gelişmiş Güvenlik Değişikliği Şifreleme Yöntemi için %1 $ s on line %2 $ s"
+
+msgid "Changes may require cache clearing to take effect."
+msgstr "Değişikliklerin etkili olması için önbelleğin temizlenmesi gerekebilir."
+
+msgid "How Long Will My Support Stay Active?"
+msgstr "Desteğim Ne Kadar Süre Aktif Kalacak?"
+
+msgid "I Can’t Log Into My Account"
+msgstr "Hesabıma Giriş Yapamıyorum"
+
+msgid "I Want to Upgrade My Plan — How Can I Do It?"
+msgstr "Planımı Yükseltmek İstiyorum - Bunu Nasıl Yapabilirim?"
+
+msgid "I’m Not Getting Access to My Subscription"
+msgstr "Aboneliğime Erişemiyorum"
+
+msgid "Ticket ID Or Email Address Or Subject"
+msgstr "Bilet Kimliği veya E-posta Adresi Veya Konusu"
+
+msgid "Sophie Martinez"
+msgstr "Sophie Martinez"
+
+msgid "Daniel Brooks"
+msgstr "Daniel Brooks"
+
+msgid "Liam Turner"
+msgstr "Liam Turner"
+
+msgid "Emily Harper"
+msgstr "Emily Harper"
+
+msgid "Noah Bennett"
+msgstr "Nuh Bennett"
+
+msgid "Olivia Chase"
+msgstr "Olivia Chase"
+
+msgid "Maya Collins"
+msgstr "Maya Collins"
+
+msgid "Ethan Reynolds"
+msgstr "Ethan Reynolds"

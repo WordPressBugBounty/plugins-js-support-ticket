@@ -8,15 +8,15 @@ class JSSTpremiumpluginController {
     }
 
     function handleRequest() {
-        $module = "premiumplugin";
+        $jsst_module = "premiumplugin";
         if ($this->canAddLayout()) {
-            $layout = JSSTrequest::getLayout('jstlay', null, 'step1');
+            $jsst_layout = JSSTrequest::getLayout('jstlay', null, 'step1');
             JSSTincluder::getJSModel('jssupportticket')->jsst_check_license_status();
-            switch ($layout) {
+            switch ($jsst_layout) {
                 case 'admin_step1':
-                    jssupportticket::$_data['versioncode'] = JSSTincluder::getJSModel('configuration')->getConfigurationByConfigName('versioncode');
-                    jssupportticket::$_data['productcode'] = JSSTincluder::getJSModel('configuration')->getConfigurationByConfigName('productcode');
-                    jssupportticket::$_data['producttype'] = JSSTincluder::getJSModel('configuration')->getConfigurationByConfigName('producttype');
+                    jssupportticket::$jsst_data['versioncode'] = JSSTincluder::getJSModel('configuration')->getConfigurationByConfigName('versioncode');
+                    jssupportticket::$jsst_data['productcode'] = JSSTincluder::getJSModel('configuration')->getConfigurationByConfigName('productcode');
+                    jssupportticket::$jsst_data['producttype'] = JSSTincluder::getJSModel('configuration')->getConfigurationByConfigName('producttype');
                 break;
                 case 'admin_step2':
                     break;
@@ -25,10 +25,10 @@ class JSSTpremiumpluginController {
                 case 'admin_addonfeatures':
                     break;
                 case 'admin_updatekey':
-                    jssupportticket::$_data['token'] = JSSTrequest::getVar('token');
-                    jssupportticket::$_data['extra_addons'] = JSSTrequest::getVar('extraaddons');
-                    jssupportticket::$_data['allowed_addons'] = JSSTrequest::getVar('allowedaddons');
-                    jssupportticket::$_data['unused_keys'] = JSSTincluder::getJSModel('premiumplugin')->jssupportticket_count_unused_keys();
+                    jssupportticket::$jsst_data['token'] = JSSTrequest::getVar('token');
+                    jssupportticket::$jsst_data['extra_addons'] = JSSTrequest::getVar('extraaddons');
+                    jssupportticket::$jsst_data['allowed_addons'] = JSSTrequest::getVar('allowedaddons');
+                    jssupportticket::$jsst_data['unused_keys'] = JSSTincluder::getJSModel('premiumplugin')->jssupportticket_count_unused_keys();
                     break;
                 case 'admin_missingaddon':
                     break;
@@ -37,8 +37,8 @@ class JSSTpremiumpluginController {
                 default:
                     exit;
             }
-            $module =  'premiumplugin';
-            JSSTincluder::include_file($layout, $module);
+            $jsst_module =  'premiumplugin';
+            JSSTincluder::include_file($jsst_layout, $jsst_module);
         }
     }
 
@@ -52,161 +52,161 @@ class JSSTpremiumpluginController {
     }
 
     function verifytransactionkey(){
-        $nonce = JSSTrequest::getVar('_wpnonce');
-        if (! wp_verify_nonce( $nonce, 'verify-transaction-key') ) {
+        $jsst_nonce = JSSTrequest::getVar('_wpnonce');
+        if (! wp_verify_nonce( $jsst_nonce, 'verify-transaction-key') ) {
             die( 'Security check Failed' );
         }
-        $post_data['transactionkey'] = JSSTrequest::getVar('transactionkey','','');
-        if($post_data['transactionkey'] != ''){
+        $jsst_post_data['transactionkey'] = JSSTrequest::getVar('transactionkey','','');
+        if($jsst_post_data['transactionkey'] != ''){
 
 
-            $post_data['domain'] = site_url();
-            $post_data['step'] = 'one';
-            $post_data['myown'] = 1;
+            $jsst_post_data['domain'] = site_url();
+            $jsst_post_data['step'] = 'one';
+            $jsst_post_data['myown'] = 1;
 
-            $url = 'https://jshelpdesk.com/setup/index.php';
+            $jsst_url = 'https://jshelpdesk.com/setup/index.php';
 
-            $response = wp_remote_post( $url, array('body' => $post_data,'timeout'=>7,'sslverify'=>false));
-            if( !is_wp_error($response) && $response['response']['code'] == 200 && isset($response['body']) ){
-                $result = $response['body'];
-                $result = json_decode($result,true);
+            $jsst_response = wp_remote_post( $jsst_url, array('body' => $jsst_post_data,'timeout'=>7,'sslverify'=>false));
+            if( !is_wp_error($jsst_response) && $jsst_response['response']['code'] == 200 && isset($jsst_response['body']) ){
+                $jsst_result = $jsst_response['body'];
+                $jsst_result = json_decode($jsst_result,true);
 
             }else{
-                $result = false;
-                if(!is_wp_error($response)){
-                   $error = $response['response']['message'];
+                $jsst_result = false;
+                if(!is_wp_error($jsst_response)){
+                   $jsst_error = $jsst_response['response']['message'];
                }else{
-                    $error = $response->get_error_message();
+                    $jsst_error = $jsst_response->get_error_message();
                }
             }
-            if(is_array($result) && isset($result['status']) && $result['status'] == 1 ){ // means everthing ok
-                $resultaddon = wp_json_encode($result);
-                $resultaddon = jssupportticketphplib::JSST_safe_encoding( $resultaddon );
-                // jssupportticketphplib::JSST_setcookie('jsst_addon_install_data' , $resultaddon);
-                // jssupportticketphplib::JSST_setcookie('jsst_addon_install_actual_transaction_key' , $post_data['transactionkey']);
-                $result['actual_transaction_key'] = $post_data['transactionkey'];
+            if(is_array($jsst_result) && isset($jsst_result['status']) && $jsst_result['status'] == 1 ){ // means everthing ok
+                $jsst_resultaddon = wp_json_encode($jsst_result);
+                $jsst_resultaddon = jssupportticketphplib::JSST_safe_encoding( $jsst_resultaddon );
+                // jssupportticketphplib::JSST_setcookie('jsst_addon_install_data' , $jsst_resultaddon);
+                // jssupportticketphplib::JSST_setcookie('jsst_addon_install_actual_transaction_key' , $jsst_post_data['transactionkey']);
+                $jsst_result['actual_transaction_key'] = $jsst_post_data['transactionkey'];
                 // in case of session not working
-                add_option('jsst_addon_install_data',wp_json_encode($result));
-                $url = admin_url("admin.php?page=premiumplugin&jstlay=step2");
-                wp_redirect($url);
+                add_option('jsst_addon_install_data',wp_json_encode($jsst_result));
+                $jsst_url = admin_url("admin.php?page=premiumplugin&jstlay=step2");
+                wp_safe_redirect($jsst_url);
                 return;
             }else{
-                if(isset($result[0]) && $result[0] == 0){
-                    $error = $result[1];
-                }elseif(isset($result['error']) && $result['error'] != ''){
-                    $error = $result['error'];
+                if(isset($jsst_result[0]) && $jsst_result[0] == 0){
+                    $jsst_error = $jsst_result[1];
+                }elseif(isset($jsst_result['error']) && $jsst_result['error'] != ''){
+                    $jsst_error = $jsst_result['error'];
                 }
             }
         }else{
-            $error = esc_html(__('Please insert activation key to proceed','js-support-ticket')).'!';
+            $jsst_error = esc_html(__('Please insert activation key to proceed','js-support-ticket')).'!';
         }
-        $array['data'] = array();
-        $array['status'] = 0;
-        $array['message'] = $error;
-        $array['transactionkey'] = $post_data['transactionkey'];
-        $array = wp_json_encode( $array );
-        $array = jssupportticketphplib::JSST_safe_encoding($array);
-        jssupportticketphplib::JSST_setcookie('jsst_addon_return_data' , $array , 0, COOKIEPATH);
+        $jsst_array['data'] = array();
+        $jsst_array['status'] = 0;
+        $jsst_array['message'] = $jsst_error;
+        $jsst_array['transactionkey'] = $jsst_post_data['transactionkey'];
+        $jsst_array = wp_json_encode( $jsst_array );
+        $jsst_array = jssupportticketphplib::JSST_safe_encoding($jsst_array);
+        jssupportticketphplib::JSST_setcookie('jsst_addon_return_data' , $jsst_array , 0, COOKIEPATH);
         if ( SITECOOKIEPATH != COOKIEPATH ){
-            jssupportticketphplib::JSST_setcookie('jsst_addon_return_data' , $array , 0, SITECOOKIEPATH);
+            jssupportticketphplib::JSST_setcookie('jsst_addon_return_data' , $jsst_array , 0, SITECOOKIEPATH);
         }
-        $url = admin_url("admin.php?page=premiumplugin&jstlay=step1");
-        wp_redirect($url);
+        $jsst_url = admin_url("admin.php?page=premiumplugin&jstlay=step1");
+        wp_safe_redirect($jsst_url);
         return;
     }
 
     function updatetransactionkey(){
-        $nonce = JSSTrequest::getVar('_wpnonce');
-        if (! wp_verify_nonce( $nonce, 'update-transaction-key') ) {
+        $jsst_nonce = JSSTrequest::getVar('_wpnonce');
+        if (! wp_verify_nonce( $jsst_nonce, 'update-transaction-key') ) {
             die( 'Security check Failed' );
         }
 
-        $post_data = JSSTrequest::get('post');
-        $addons_array = $post_data;
-        if(isset($addons_array['transactionkey'])){
-            unset($addons_array['transactionkey']);
+        $jsst_post_data = JSSTrequest::get('post');
+        $jsst_addons_array = $jsst_post_data;
+        if(isset($jsst_addons_array['transactionkey'])){
+            unset($jsst_addons_array['transactionkey']);
         }
-        $addon_json_array = array();
-        $addon_name = '';
-        foreach ($addons_array as $key => $value) {
-            $addon_json_array[] = jssupportticketphplib::JSST_str_replace('js-support-ticket-', '', $key);
-            $addon_name = $key;
+        $jsst_addon_json_array = array();
+        $jsst_addon_name = '';
+        foreach ($jsst_addons_array as $jsst_key => $jsst_value) {
+            $jsst_addon_json_array[] = jssupportticketphplib::JSST_str_replace('js-support-ticket-', '', $jsst_key);
+            $jsst_addon_name = $jsst_key;
         }
 
-        if (empty($addon_json_array)) {
+        if (empty($jsst_addon_json_array)) {
             JSSTmessage::setMessage(esc_html(__("Please select at least one addon!", "js-support-ticket")),'error');
-            $url = admin_url("admin.php?page=premiumplugin&jstlay=updatekey");
-            wp_redirect($url);
+            $jsst_url = admin_url("admin.php?page=premiumplugin&jstlay=updatekey");
+            wp_safe_redirect($jsst_url);
             return;
         }
 
-        $token = $post_data['transactionkey'];
-        if($token != ''){
-            $site_url = JSSTincluder::getJSModel('jssupportticket')->getSiteUrl();
-            $post_data['transactionkey'] = $token;
-            $post_data['domain'] = $site_url;
-            $post_data['step'] = 'one';
-            $post_data['myown'] = 1;
+        $jsst_token = $jsst_post_data['transactionkey'];
+        if($jsst_token != ''){
+            $jsst_site_url = JSSTincluder::getJSModel('jssupportticket')->getSiteUrl();
+            $jsst_post_data['transactionkey'] = $jsst_token;
+            $jsst_post_data['domain'] = $jsst_site_url;
+            $jsst_post_data['step'] = 'one';
+            $jsst_post_data['myown'] = 1;
 
-            $url = 'https://jshelpdesk.com/setup/index.php';
+            $jsst_url = 'https://jshelpdesk.com/setup/index.php';
 
-            $response = wp_remote_post( $url, array('body' => $post_data,'timeout'=>7,'sslverify'=>false));
-            if( !is_wp_error($response) && $response['response']['code'] == 200 && isset($response['body']) ){
-                $result = $response['body'];
-                $result = json_decode($result,true);
+            $jsst_response = wp_remote_post( $jsst_url, array('body' => $jsst_post_data,'timeout'=>7,'sslverify'=>false));
+            if( !is_wp_error($jsst_response) && $jsst_response['response']['code'] == 200 && isset($jsst_response['body']) ){
+                $jsst_result = $jsst_response['body'];
+                $jsst_result = json_decode($jsst_result,true);
             } else {
-                $result = false;
-                if(!is_wp_error($response)){
-                   $error = $response['response']['message'];
+                $jsst_result = false;
+                if(!is_wp_error($jsst_response)){
+                   $jsst_error = $jsst_response['response']['message'];
                 }else{
-                    $error = $response->get_error_message();
+                    $jsst_error = $jsst_response->get_error_message();
                 }
             }
-            if(is_array($result) && isset($result['status']) && $result['status'] == 1 ){ // means everthing ok
-                $extra_addons = [];
-                $allowed_addons = [];
-                foreach ($addons_array as $key => $value) {
-                    if (!array_key_exists($key, $result['data'])) {
-                        $extra_addons[] = $key;
+            if(is_array($jsst_result) && isset($jsst_result['status']) && $jsst_result['status'] == 1 ){ // means everthing ok
+                $jsst_extra_addons = [];
+                $jsst_allowed_addons = [];
+                foreach ($jsst_addons_array as $jsst_key => $jsst_value) {
+                    if (!array_key_exists($jsst_key, $jsst_result['data'])) {
+                        $jsst_extra_addons[] = $jsst_key;
                     } else {
-                        $allowed_addons[] = $key;
+                        $jsst_allowed_addons[] = $jsst_key;
                     }
                 }
-                if (!empty($extra_addons)) {
-                    $extraaddons = wp_json_encode($extra_addons);
-                    $allowedaddons = wp_json_encode($allowed_addons);
-                    $url = admin_url("admin.php?page=premiumplugin&jstlay=updatekey&token=".$token."&extraaddons=".$extraaddons."&allowedaddons=".$allowedaddons);
-                    wp_redirect($url);
+                if (!empty($jsst_extra_addons)) {
+                    $jsst_extraaddons = wp_json_encode($jsst_extra_addons);
+                    $jsst_allowedaddons = wp_json_encode($jsst_allowed_addons);
+                    $jsst_url = admin_url("admin.php?page=premiumplugin&jstlay=updatekey&token=".$jsst_token."&extraaddons=".$jsst_extraaddons."&allowedaddons=".$jsst_allowedaddons);
+                    wp_safe_redirect($jsst_url);
                     return;
                 }
 
                 require_once JSST_PLUGIN_PATH.'includes/addon-updater/jsstupdater.php';
-                $JS_SUPPORTTICKETUpdater  = new JS_SUPPORTTICKETUpdater();
-                $token_key = $JS_SUPPORTTICKETUpdater->jsstGetTokenFromTransactionKey( $token,$addon_name);
+                $jsst_JS_SUPPORTTICKETUpdater  = new JS_SUPPORTTICKETUpdater();
+                $jsst_token_key = $jsst_JS_SUPPORTTICKETUpdater->jsstGetTokenFromTransactionKey( $jsst_token,$jsst_addon_name);
 
-                $url = 'https://jshelpdesk.com/setup/index.php?token='.esc_attr($token_key).'&productcode='. wp_json_encode($addon_json_array).'&domain='. $site_url;
-                $verifytransactionkey = JSSTincluder::getJSModel('jssupportticket')->verifytransactionkey($token_key, $url);
-                if($verifytransactionkey['status'] == 0){
-                    JSSTmessage::setMessage(esc_html($verifytransactionkey['message']),'error');
-                    $url = admin_url("admin.php?page=premiumplugin&jstlay=updatekey");
-                    wp_redirect($url);
+                $jsst_url = 'https://jshelpdesk.com/setup/index.php?token='.esc_attr($jsst_token_key).'&productcode='. wp_json_encode($jsst_addon_json_array).'&domain='. $jsst_site_url;
+                $jsst_verifytransactionkey = JSSTincluder::getJSModel('jssupportticket')->verifytransactionkey($jsst_token_key, $jsst_url);
+                if($jsst_verifytransactionkey['status'] == 0){
+                    JSSTmessage::setMessage(esc_html($jsst_verifytransactionkey['message']),'error');
+                    $jsst_url = admin_url("admin.php?page=premiumplugin&jstlay=updatekey");
+                    wp_safe_redirect($jsst_url);
                     return;
                 }
-                $install_count = 0;
+                $jsst_install_count = 0;
 
-                $installed = $this->install_plugin($url);
-                if ( !is_wp_error( $installed ) && $installed ) {
+                $jsst_installed = $this->install_plugin($jsst_url);
+                if ( !is_wp_error( $jsst_installed ) && $jsst_installed ) {
                     // had to run two seprate loops to save token for all the addons even if some error is triggered by activation.
-                    foreach ($post_data as $key => $value) {
-                        if(strstr($key, 'js-support-ticket-')){
-                            update_option('transaction_key_for_'.$key,$token_key);
+                    foreach ($jsst_post_data as $jsst_key => $jsst_value) {
+                        if(strstr($jsst_key, 'js-support-ticket-')){
+                            update_option('transaction_key_for_'.$jsst_key,$jsst_token_key);
                         }
                     }
 
-                    foreach ($post_data as $key => $value) {
-                        if(strstr($key, 'js-support-ticket-')){
-                            $activate = activate_plugin( $key.'/'.$key.'.php' );
-                            $install_count++;
+                    foreach ($jsst_post_data as $jsst_key => $jsst_value) {
+                        if(strstr($jsst_key, 'js-support-ticket-')){
+                            $jsst_activate = activate_plugin( $jsst_key.'/'.$jsst_key.'.php' );
+                            $jsst_install_count++;
                         }
                     }
                     JSSTmessage::setMessage(esc_html(__('Addon(s) Installed successfully!', 'js-support-ticket')),'updated');
@@ -214,172 +214,172 @@ class JSSTpremiumpluginController {
                     JSSTmessage::setMessage(esc_html(__('Addon(s) Installation Failed', 'js-support-ticket')),'error');
                 }
             }else{
-                if(isset($result[0]) && $result[0] == 0){
-                    $error = $result[1];
-                }elseif(isset($result['error']) && $result['error'] != ''){
-                    $error = $result['error'];
+                if(isset($jsst_result[0]) && $jsst_result[0] == 0){
+                    $jsst_error = $jsst_result[1];
+                }elseif(isset($jsst_result['error']) && $jsst_result['error'] != ''){
+                    $jsst_error = $jsst_result['error'];
                 }
-                JSSTmessage::setMessage(esc_html($error),'error');
+                JSSTmessage::setMessage(esc_html($jsst_error),'error');
             }
         }else{
             JSSTmessage::setMessage(esc_html(__('Please insert activation key to proceed', 'js-support-ticket')),'error');
         }
-        $url = admin_url("admin.php?page=premiumplugin&jstlay=updatekey");
-        wp_redirect($url);
+        $jsst_url = admin_url("admin.php?page=premiumplugin&jstlay=updatekey");
+        wp_safe_redirect($jsst_url);
         return;
     }
 
     function jssupportticket_remove_unused_keys() {
-        $nonce = JSSTrequest::getVar('_wpnonce');
-        if (! wp_verify_nonce( $nonce, 'delete-transaction-key') ) {
+        $jsst_nonce = JSSTrequest::getVar('_wpnonce');
+        if (! wp_verify_nonce( $jsst_nonce, 'delete-transaction-key') ) {
             die( 'Security check Failed' );
         }
 
-        $deleted = JSSTincluder::getJSModel('premiumplugin')->jssupportticket_remove_unused_keys();
+        $jsst_deleted = JSSTincluder::getJSModel('premiumplugin')->jssupportticket_remove_unused_keys();
 
-        if ($deleted === 0) {
+        if ($jsst_deleted === 0) {
             JSSTmessage::setMessage(esc_html(__('No unused keys were found.', 'js-support-ticket')),'error');
-        } elseif ($deleted === 1) {
-            JSSTmessage::setMessage(esc_html($deleted . ' ' . __('unused key has been deleted successfully!', 'js-support-ticket')),'updated');
+        } elseif ($jsst_deleted === 1) {
+            JSSTmessage::setMessage(esc_html($jsst_deleted . ' ' . __('unused key has been deleted successfully!', 'js-support-ticket')),'updated');
         } else {
-            JSSTmessage::setMessage(esc_html($deleted . ' ' . __('unused keys have been deleted successfully!', 'js-support-ticket')),'updated');
+            JSSTmessage::setMessage(esc_html($jsst_deleted . ' ' . __('unused keys have been deleted successfully!', 'js-support-ticket')),'updated');
         }
-        $url = admin_url("admin.php?page=premiumplugin&jstlay=updatekey");
-        wp_redirect($url);
+        $jsst_url = admin_url("admin.php?page=premiumplugin&jstlay=updatekey");
+        wp_safe_redirect($jsst_url);
         return;
     }
 
     function downloadandinstalladdons(){
-        $nonce = JSSTrequest::getVar('_wpnonce');
-        if (! wp_verify_nonce( $nonce, 'download-and-install-addons') ) {
+        $jsst_nonce = JSSTrequest::getVar('_wpnonce');
+        if (! wp_verify_nonce( $jsst_nonce, 'download-and-install-addons') ) {
             die( 'Security check Failed' );
         }
-        $post_data = JSSTrequest::get('post');
+        $jsst_post_data = JSSTrequest::get('post');
 
-        $addons_array = $post_data;
-        if(isset($addons_array['token'])){
-            unset($addons_array['token']);
+        $jsst_addons_array = $jsst_post_data;
+        if(isset($jsst_addons_array['token'])){
+            unset($jsst_addons_array['token']);
         }
-        $addon_json_array = array();
+        $jsst_addon_json_array = array();
 
-        foreach ($addons_array as $key => $value) {
-            $addon_json_array[] = jssupportticketphplib::JSST_str_replace('js-support-ticket-', '', $key);
+        foreach ($jsst_addons_array as $jsst_key => $jsst_value) {
+            $jsst_addon_json_array[] = jssupportticketphplib::JSST_str_replace('js-support-ticket-', '', $jsst_key);
         }
 
-        $token = $post_data['token'];
-        if($token == ''){
-            $array['data'] = array();
-            $array['status'] = 0;
-            $array['message'] = esc_html(__('Addon Installation Failed','js-support-ticket')).'!';
-            $array['transactionkey'] = $post_data['transactionkey'];
-            $array = wp_json_encode( $array );
-            $array = jssupportticketphplib::JSST_safe_encoding($array);
-            jssupportticketphplib::JSST_setcookie('jsst_addon_return_data' , $array , 0, COOKIEPATH);
+        $jsst_token = $jsst_post_data['token'];
+        if($jsst_token == ''){
+            $jsst_array['data'] = array();
+            $jsst_array['status'] = 0;
+            $jsst_array['message'] = esc_html(__('Addon Installation Failed','js-support-ticket')).'!';
+            $jsst_array['transactionkey'] = $jsst_post_data['transactionkey'];
+            $jsst_array = wp_json_encode( $jsst_array );
+            $jsst_array = jssupportticketphplib::JSST_safe_encoding($jsst_array);
+            jssupportticketphplib::JSST_setcookie('jsst_addon_return_data' , $jsst_array , 0, COOKIEPATH);
             if ( SITECOOKIEPATH != COOKIEPATH ){
-                jssupportticketphplib::JSST_setcookie('jsst_addon_return_data' , $array , 0, SITECOOKIEPATH);
+                jssupportticketphplib::JSST_setcookie('jsst_addon_return_data' , $jsst_array , 0, SITECOOKIEPATH);
             }
-            $url = admin_url("admin.php?page=premiumplugin&jstlay=step1");
-            wp_redirect($url);
+            $jsst_url = admin_url("admin.php?page=premiumplugin&jstlay=step1");
+            wp_safe_redirect($jsst_url);
             exit;
         }
-        $site_url = site_url();
-		$site_url = jssupportticketphplib::JSST_str_replace("https://","",$site_url);
-        $site_url = jssupportticketphplib::JSST_str_replace("http://","",$site_url);
-        $url = 'https://jshelpdesk.com/setup/index.php?token='.esc_attr($token).'&productcode='. wp_json_encode($addon_json_array).'&domain='. $site_url;
+        $jsst_site_url = site_url();
+		$jsst_site_url = jssupportticketphplib::JSST_str_replace("https://","",$jsst_site_url);
+        $jsst_site_url = jssupportticketphplib::JSST_str_replace("http://","",$jsst_site_url);
+        $jsst_url = 'https://jshelpdesk.com/setup/index.php?token='.esc_attr($jsst_token).'&productcode='. wp_json_encode($jsst_addon_json_array).'&domain='. $jsst_site_url;
 
-        $install_count = 0;
+        $jsst_install_count = 0;
 
-        $installed = $this->install_plugin($url);
-        if ( !is_wp_error( $installed ) && $installed ) {
+        $jsst_installed = $this->install_plugin($jsst_url);
+        if ( !is_wp_error( $jsst_installed ) && $jsst_installed ) {
             // had to run two seprate loops to save token for all the addons even if some error is triggered by activation.
-            foreach ($post_data as $key => $value) {
-                if(strstr($key, 'js-support-ticket-')){
-                    update_option('transaction_key_for_'.$key,$token);
+            foreach ($jsst_post_data as $jsst_key => $jsst_value) {
+                if(strstr($jsst_key, 'js-support-ticket-')){
+                    update_option('transaction_key_for_'.$jsst_key,$jsst_token);
                 }
             }
 
-            foreach ($post_data as $key => $value) {
-                if(strstr($key, 'js-support-ticket-')){
-                    $activate = activate_plugin( $key.'/'.$key.'.php' );
-                    $install_count++;
+            foreach ($jsst_post_data as $jsst_key => $jsst_value) {
+                if(strstr($jsst_key, 'js-support-ticket-')){
+                    $jsst_activate = activate_plugin( $jsst_key.'/'.$jsst_key.'.php' );
+                    $jsst_install_count++;
                 }
             }
 
         }else{
-            $array['data'] = array();
-            $array['status'] = 0;
-            $array['message'] = esc_html(__('Addon Installation Failed','js-support-ticket')).'!';
-            $array['transactionkey'] = $post_data['transactionkey'];
-            $array = wp_json_encode( $array );
-            $array = jssupportticketphplib::JSST_safe_encoding($array);
-            jssupportticketphplib::JSST_setcookie('jsst_addon_return_data' , $array , 0, COOKIEPATH);
+            $jsst_array['data'] = array();
+            $jsst_array['status'] = 0;
+            $jsst_array['message'] = esc_html(__('Addon Installation Failed','js-support-ticket')).'!';
+            $jsst_array['transactionkey'] = $jsst_post_data['transactionkey'];
+            $jsst_array = wp_json_encode( $jsst_array );
+            $jsst_array = jssupportticketphplib::JSST_safe_encoding($jsst_array);
+            jssupportticketphplib::JSST_setcookie('jsst_addon_return_data' , $jsst_array , 0, COOKIEPATH);
             if ( SITECOOKIEPATH != COOKIEPATH ){
-                jssupportticketphplib::JSST_setcookie('jsst_addon_return_data' , $array , 0, SITECOOKIEPATH);
+                jssupportticketphplib::JSST_setcookie('jsst_addon_return_data' , $jsst_array , 0, SITECOOKIEPATH);
             }
 
-            $url = admin_url("admin.php?page=premiumplugin&jstlay=step1");
-            wp_redirect($url);
+            $jsst_url = admin_url("admin.php?page=premiumplugin&jstlay=step1");
+            wp_safe_redirect($jsst_url);
             exit;
         }
-        $url = admin_url("admin.php?page=premiumplugin&jstlay=step3");
-        wp_redirect($url);
+        $jsst_url = admin_url("admin.php?page=premiumplugin&jstlay=step3");
+        wp_safe_redirect($jsst_url);
     }
 
-    function install_plugin( $plugin_zip ) {
+    function install_plugin( $jsst_plugin_zip ) {
 
         do_action('jssupportticket_load_wp_admin_file');
         WP_Filesystem();
 
-        $tmpfile = download_url( $plugin_zip);
+        $jsst_tmpfile = download_url( $jsst_plugin_zip);
 
-        if ( !is_wp_error( $tmpfile ) && $tmpfile ) {
-            $plugin_path = WP_CONTENT_DIR;
-            $plugin_path = $plugin_path.'/plugins/';
-            $path = JSST_PLUGIN_PATH.'addon.zip';
+        if ( !is_wp_error( $jsst_tmpfile ) && $jsst_tmpfile ) {
+            $jsst_plugin_path = WP_CONTENT_DIR;
+            $jsst_plugin_path = $jsst_plugin_path.'/plugins/';
+            $jsst_path = JSST_PLUGIN_PATH.'addon.zip';
 
-            copy( $tmpfile, $path );
+            copy( $jsst_tmpfile, $jsst_path );
 
-            $unzipfile = unzip_file( $path, $plugin_path);
+            $jsst_unzipfile = unzip_file( $jsst_path, $jsst_plugin_path);
 
-            if ( file_exists( $path ) ) {
-                wp_delete_file( $path ); // must unlink afterwards
+            if ( file_exists( $jsst_path ) ) {
+                wp_delete_file( $jsst_path ); // must unlink afterwards
             }
-            if ( file_exists( $tmpfile ) ) {
-                wp_delete_file( $tmpfile ); // must unlink afterwards
+            if ( file_exists( $jsst_tmpfile ) ) {
+                wp_delete_file( $jsst_tmpfile ); // must unlink afterwards
             }
 
-            if ( is_wp_error( $unzipfile ) ) {
-                $array['data'] = array();
-                $array['status'] = 0;
-                $array['message'] = esc_html(__('Addon installation failed, Directory permission error','js-support-ticket')).'!';
-                $array['transactionkey'] = $post_data['transactionkey'];
-                $array = wp_json_encode( $array );
-                $array = jssupportticketphplib::JSST_safe_encoding($array);
-                jssupportticketphplib::JSST_setcookie('jsst_addon_return_data' , $array , 0, COOKIEPATH);
+            if ( is_wp_error( $jsst_unzipfile ) ) {
+                $jsst_array['data'] = array();
+                $jsst_array['status'] = 0;
+                $jsst_array['message'] = esc_html(__('Addon installation failed, Directory permission error','js-support-ticket')).'!';
+                $jsst_array['transactionkey'] = $jsst_post_data['transactionkey'];
+                $jsst_array = wp_json_encode( $jsst_array );
+                $jsst_array = jssupportticketphplib::JSST_safe_encoding($jsst_array);
+                jssupportticketphplib::JSST_setcookie('jsst_addon_return_data' , $jsst_array , 0, COOKIEPATH);
                 if ( SITECOOKIEPATH != COOKIEPATH ){
-                    jssupportticketphplib::JSST_setcookie('jsst_addon_return_data' , $array , 0, SITECOOKIEPATH);
+                    jssupportticketphplib::JSST_setcookie('jsst_addon_return_data' , $jsst_array , 0, SITECOOKIEPATH);
                 }
 
-                $url = admin_url("admin.php?page=premiumplugin&jstlay=step1");
-                wp_redirect($url);
+                $jsst_url = admin_url("admin.php?page=premiumplugin&jstlay=step1");
+                wp_safe_redirect($jsst_url);
                 exit;
             } else {
                 return true;
             }
         }else{
-            $array['data'] = array();
-            $array['status'] = 0;
-            $error_string = $tmpfile->get_error_message();
-            $array['message'] = esc_html(__('Addon Installation Failed, File download error','js-support-ticket')).'! '.$error_string;
-            $array['transactionkey'] = $post_data['transactionkey'];
-            $array = wp_json_encode( $array );
-            $array = jssupportticketphplib::JSST_safe_encoding($array);
-            jssupportticketphplib::JSST_setcookie('jsst_addon_return_data' , $array , 0, COOKIEPATH);
+            $jsst_array['data'] = array();
+            $jsst_array['status'] = 0;
+            $jsst_error_string = $jsst_tmpfile->get_error_message();
+            $jsst_array['message'] = esc_html(__('Addon Installation Failed, File download error','js-support-ticket')).'! '.$jsst_error_string;
+            $jsst_array['transactionkey'] = $jsst_post_data['transactionkey'];
+            $jsst_array = wp_json_encode( $jsst_array );
+            $jsst_array = jssupportticketphplib::JSST_safe_encoding($jsst_array);
+            jssupportticketphplib::JSST_setcookie('jsst_addon_return_data' , $jsst_array , 0, COOKIEPATH);
             if ( SITECOOKIEPATH != COOKIEPATH ){
-                jssupportticketphplib::JSST_setcookie('jsst_addon_return_data' , $array , 0, SITECOOKIEPATH);
+                jssupportticketphplib::JSST_setcookie('jsst_addon_return_data' , $jsst_array , 0, SITECOOKIEPATH);
             }
-            $url = admin_url("admin.php?page=premiumplugin&jstlay=step1");
-            wp_redirect($url);
+            $jsst_url = admin_url("admin.php?page=premiumplugin&jstlay=step1");
+            wp_safe_redirect($jsst_url);
             exit;
         }
     }

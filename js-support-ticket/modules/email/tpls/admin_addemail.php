@@ -3,31 +3,31 @@
     die('Restricted Access');
 ?>
 <?php
-    $smtphost = array(
+    $jsst_smtphost = array(
         (object) array('id' => '1', 'text' => esc_html(__('Gmail', 'js-support-ticket'))),
         (object) array('id' => '2', 'text' => esc_html(__('Yahoo', 'js-support-ticket'))),
         (object) array('id' => '3', 'text' => esc_html(__('Hotmail', 'js-support-ticket'))),
         (object) array('id' => '4', 'text' => esc_html(__('Aol', 'js-support-ticket'))),
         (object) array('id' => '5', 'text' => esc_html(__('Other', 'js-support-ticket')))
     );
-    $emailtype = array(
+    $jsst_emailtype = array(
         (object) array('id' => '0', 'text' => esc_html(__('Default', 'js-support-ticket'))),
         (object) array('id' => '1', 'text' => esc_html(__('SMTP', 'js-support-ticket')))
     );
-    $truefalse = array(
+    $jsst_truefalse = array(
         (object) array('id' => '0', 'text' => esc_html(__('False', 'js-support-ticket'))),
         (object) array('id' => '1', 'text' => esc_html(__('True', 'js-support-ticket')))
     );
-    $securesmtp = array(
+    $jsst_securesmtp = array(
         (object) array('id' => '1', 'text' => esc_html(__('TLS', 'js-support-ticket'))),
         (object) array('id' => '0', 'text' => esc_html(__('SSL', 'js-support-ticket')))
     );
-    $jssupportticket_js ='
+    $jsst_jssupportticket_js ='
         jQuery(document).ready(function ($) {
             $.validate();
         });
     ';
-    wp_add_inline_script('js-support-ticket-main-js',$jssupportticket_js);
+    wp_add_inline_script('js-support-ticket-main-js',$jsst_jssupportticket_js);
 ?>
 <div id="jsstadmin-wrapper">
     <div id="jsstadmin-leftmenu">
@@ -38,20 +38,20 @@
             <div id="jsstadmin-wrapper-top-left">
                 <div id="jsstadmin-breadcrunbs">
                     <ul>
-                        <li><a href="?page=jssupportticket" title="<?php echo esc_html(__('Dashboard','js-support-ticket')); ?>"><?php echo esc_html(__('Dashboard','js-support-ticket')); ?></a></li>
+                        <li><a href="?page=jssupportticket" title="<?php echo esc_attr(__('Dashboard','js-support-ticket')); ?>"><?php echo esc_html(__('Dashboard','js-support-ticket')); ?></a></li>
                         <li><?php echo esc_html(__('Add Email','js-support-ticket')); ?></li>
                     </ul>
                 </div>
             </div>
             <div id="jsstadmin-wrapper-top-right">
                 <div id="jsstadmin-config-btn">
-                    <a title="<?php echo esc_html(__('Configuration','js-support-ticket')); ?>" href="<?php echo esc_url(admin_url("admin.php?page=configuration")); ?>">
-                        <img alt="<?php echo esc_html(__('Configuration','js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/config.png" />
+                    <a title="<?php echo esc_attr(__('Configuration','js-support-ticket')); ?>" href="<?php echo esc_url(admin_url("admin.php?page=configuration")); ?>">
+                        <img alt = "<?php echo esc_attr(__('Configuration','js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/config.png" />
                     </a>
                 </div>
                 <div id="jsstadmin-config-btn" class="jssticketadmin-help-btn">
-                    <a href="<?php echo esc_url(admin_url("admin.php?page=jssupportticket&jstlay=help")); ?>" title="<?php echo esc_html(__('Help','js-support-ticket')); ?>">
-                        <img alt="<?php echo esc_html(__('Help','js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/help.png" />
+                    <a href="<?php echo esc_url(admin_url("admin.php?page=jssupportticket&jstlay=help")); ?>" title="<?php echo esc_attr(__('Help','js-support-ticket')); ?>">
+                        <img alt = "<?php echo esc_attr(__('Help','js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/help.png" />
                     </a>
                 </div>
                 <div id="jsstadmin-vers-txt">
@@ -64,48 +64,48 @@
             <h1 class="jsstadmin-head-text"><?php echo esc_html(__('Add Email', 'js-support-ticket')); ?></h1>
         </div>
         <div id="jsstadmin-data-wrp">
-            <?php $nonce_id = isset(jssupportticket::$_data[0]->id) ? jssupportticket::$_data[0]->id : '';?>
-            <form class="jsstadmin-form" method="post" action="<?php echo esc_url(wp_nonce_url(admin_url("?page=email&task=saveemail"),"save-email-".$nonce_id)); ?>">
+            <?php $jsst_nonce_id = isset(jssupportticket::$jsst_data[0]->id) ? jssupportticket::$jsst_data[0]->id : '';?>
+            <form class="jsstadmin-form" method="post" action="<?php echo esc_url(wp_nonce_url(admin_url("?page=email&task=saveemail"),"save-email-".$jsst_nonce_id)); ?>">
                 <div class="js-form-wrapper">
                     <div class="js-form-title"><?php echo esc_html(__('Email', 'js-support-ticket')); ?>&nbsp;<span style="color: red;" >*</span></div>
-                    <div class="js-form-field"><?php echo wp_kses(JSSTformfield::text('email', isset(jssupportticket::$_data[0]->email) ? jssupportticket::$_data[0]->email : '', array('class' => 'inputbox js-form-input-field', 'data-validation' => 'required email')), JSST_ALLOWED_TAGS) ?></div>
+                    <div class="js-form-field"><?php echo wp_kses(JSSTformfield::text('email', isset(jssupportticket::$jsst_data[0]->email) ? jssupportticket::$jsst_data[0]->email : '', array('class' => 'inputbox js-form-input-field', 'data-validation' => 'required email')), JSST_ALLOWED_TAGS) ?></div>
                 </div>
                 <?php if(in_array('smtp', jssupportticket::$_active_addons)){ ?>
                     <div class="js-form-wrapper">
                         <div class="js-form-title"><?php echo esc_html(__('Send Email By', 'js-support-ticket')); ?></div>
-                        <div class="js-form-field"><?php echo wp_kses(JSSTformfield::select('smtpemailauth', $emailtype , isset(jssupportticket::$_data[0]->email) ? jssupportticket::$_data[0]->smtpemailauth : '' , esc_html(__('Select Type', 'js-support-ticket')) , array('class' => 'js-smtp-select js-form-select-field')), JSST_ALLOWED_TAGS)?></div>
+                        <div class="js-form-field"><?php echo wp_kses(JSSTformfield::select('smtpemailauth', $jsst_emailtype , isset(jssupportticket::$jsst_data[0]->email) ? jssupportticket::$jsst_data[0]->smtpemailauth : '' , esc_html(__('Select Type', 'js-support-ticket')) , array('class' => 'js-smtp-select js-form-select-field')), JSST_ALLOWED_TAGS)?></div>
                     </div>
                     <div id="smtpauthselect" style="display: none;">
                         <div class="js-form-wrapper">
                             <div class="js-form-title"><?php echo esc_html(__('SMTP host type', 'js-support-ticket')); ?></div>
-                            <div class="js-form-field"><?php echo wp_kses(JSSTformfield::select('smtphosttype', $smtphost , isset(jssupportticket::$_data[0]->email) ? jssupportticket::$_data[0]->smtphosttype : '', esc_html(__('Select Type', 'js-support-ticket')) , array('class' => 'js-smtp-select js-form-select-field')), JSST_ALLOWED_TAGS)?></div>
+                            <div class="js-form-field"><?php echo wp_kses(JSSTformfield::select('smtphosttype', $jsst_smtphost , isset(jssupportticket::$jsst_data[0]->email) ? jssupportticket::$jsst_data[0]->smtphosttype : '', esc_html(__('Select Type', 'js-support-ticket')) , array('class' => 'js-smtp-select js-form-select-field')), JSST_ALLOWED_TAGS)?></div>
                         </div>
                         <div class="js-form-wrapper">
                             <div class="js-form-title"><?php echo esc_html(__('SMTP host', 'js-support-ticket')); ?>&nbsp;<span style="color: red;" >*</span></div>
-                            <div class="js-form-field"><?php echo wp_kses(JSSTformfield::text('smtphost', isset(jssupportticket::$_data[0]->email) ? jssupportticket::$_data[0]->smtphost : '', array('class' => 'inputbox js-form-select-field')), JSST_ALLOWED_TAGS) ?></div>
+                            <div class="js-form-field"><?php echo wp_kses(JSSTformfield::text('smtphost', isset(jssupportticket::$jsst_data[0]->email) ? jssupportticket::$jsst_data[0]->smtphost : '', array('class' => 'inputbox js-form-select-field')), JSST_ALLOWED_TAGS) ?></div>
                         </div>
                         <div class="js-form-wrapper">
                             <div class="js-form-title"><?php echo esc_html(__('SMTP Authentication', 'js-support-ticket')); ?>&nbsp;<span style="color: red;" >*</span></div>
-                            <div class="js-form-field"><?php echo wp_kses(JSSTformfield::select('smtpauthencation', $truefalse , isset(jssupportticket::$_data[0]->email) ? jssupportticket::$_data[0]->smtpauthencation : '' , esc_html(__('Select Type', 'js-support-ticket')) , array('class' => 'js-smtp-select js-form-select-field')), JSST_ALLOWED_TAGS)?></div>
+                            <div class="js-form-field"><?php echo wp_kses(JSSTformfield::select('smtpauthencation', $jsst_truefalse , isset(jssupportticket::$jsst_data[0]->email) ? jssupportticket::$jsst_data[0]->smtpauthencation : '' , esc_html(__('Select Type', 'js-support-ticket')) , array('class' => 'js-smtp-select js-form-select-field')), JSST_ALLOWED_TAGS)?></div>
                         </div>
                         <div class="js-form-wrapper">
                             <div class="js-form-title"><?php echo esc_html(__('Username', 'js-support-ticket')); ?>&nbsp;<span style="color: red;" >*</span></div>
-                            <div class="js-form-field"><?php echo wp_kses(JSSTformfield::text('name', isset(jssupportticket::$_data[0]->email) ? jssupportticket::$_data[0]->name : '', array('class' => 'inputbox js-form-input-field')), JSST_ALLOWED_TAGS) ?></div>
+                            <div class="js-form-field"><?php echo wp_kses(JSSTformfield::text('name', isset(jssupportticket::$jsst_data[0]->email) ? jssupportticket::$jsst_data[0]->name : '', array('class' => 'inputbox js-form-input-field')), JSST_ALLOWED_TAGS) ?></div>
                         </div>
                         <div class="js-form-wrapper">
                             <div class="js-form-title"><?php echo esc_html(__('Password', 'js-support-ticket')); ?>&nbsp;<span style="color: red;" >*</span></div>
-                            <div class="js-form-field"><?php echo wp_kses(JSSTformfield::password('password', isset(jssupportticket::$_data[0]->email) ? jssupportticket::$_data[0]->password : '', array('class' => 'inputbox js-form-input-field')), JSST_ALLOWED_TAGS) ?></div>
+                            <div class="js-form-field"><?php echo wp_kses(JSSTformfield::password('password', isset(jssupportticket::$jsst_data[0]->email) ? jssupportticket::$jsst_data[0]->password : '', array('class' => 'inputbox js-form-input-field')), JSST_ALLOWED_TAGS) ?></div>
                         </div>
                         <div class="js-form-wrapper">
                             <div class="js-form-title"><?php echo esc_html(__('SMTP Secure', 'js-support-ticket')); ?>&nbsp;<span style="color: red;" >*</span></div>
-                            <div class="js-form-field"><?php echo wp_kses(JSSTformfield::select('smtpsecure', $securesmtp , isset(jssupportticket::$_data[0]->email) ? jssupportticket::$_data[0]->smtpsecure : '' , esc_html(__('Select Type', 'js-support-ticket')) , array('class' => 'js-smtp-select js-form-select-field')), JSST_ALLOWED_TAGS)?></div>
+                            <div class="js-form-field"><?php echo wp_kses(JSSTformfield::select('smtpsecure', $jsst_securesmtp , isset(jssupportticket::$jsst_data[0]->email) ? jssupportticket::$jsst_data[0]->smtpsecure : '' , esc_html(__('Select Type', 'js-support-ticket')) , array('class' => 'js-smtp-select js-form-select-field')), JSST_ALLOWED_TAGS)?></div>
                         </div>
                         <div class="js-form-wrapper">
                             <div class="js-form-title"><?php echo esc_html(__('SMTP Port', 'js-support-ticket')); ?>&nbsp;<span style="color: red;" >*</span></div>
-                            <div class="js-form-field"><?php echo wp_kses(JSSTformfield::text('mailport', isset(jssupportticket::$_data[0]->email) ? jssupportticket::$_data[0]->mailport : '', array('class' => 'inputbox js-form-input-field')), JSST_ALLOWED_TAGS) ?></div>
+                            <div class="js-form-field"><?php echo wp_kses(JSSTformfield::text('mailport', isset(jssupportticket::$jsst_data[0]->email) ? jssupportticket::$jsst_data[0]->mailport : '', array('class' => 'inputbox js-form-input-field')), JSST_ALLOWED_TAGS) ?></div>
                         </div>
                         <div class="js-col-md-12 js-col-md-offset-2 js-admin-ticketviaemail-wrapper-checksetting">
-                            <a title="<?php echo esc_html(__('Check Settings','js-support-ticket')); ?>" href="#" id="js-admin-ticketviaemail"><img alt="<?php echo esc_html(__('check','js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/tick_ticketviaemail.png" /><?php echo esc_html(__('Check Settings','js-support-ticket')); ?></a>
+                            <a title="<?php echo esc_attr(__('Check Settings','js-support-ticket')); ?>" href="#" id="js-admin-ticketviaemail"><img alt = "<?php echo esc_attr(__('check','js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/tick_ticketviaemail.png" /><?php echo esc_html(__('Check Settings','js-support-ticket')); ?></a>
                             <div id="js-admin-ticketviaemail-bar"></div>
                             <div class="js-col-md-12" id="js-admin-ticketviaemail-text"><?php echo esc_html(__('If the system doesnot respond in 30 seconds','js-support-ticket')).', '. esc_html(__('it means system unable to connect email server','js-support-ticket')); ?></div>
                             <div class="js-col-md-12">
@@ -116,15 +116,15 @@
                 <?php } ?>
                 <div class="js-form-wrapper">
                     <div class="js-form-title"><?php echo esc_html(__('Auto Response', 'js-support-ticket')); ?></div>
-                    <div class="js-form-field"><?php echo wp_kses(JSSTformfield::radiobutton('autoresponse', array('1' => esc_html(__('Yes', 'js-support-ticket')), '0' => esc_html(__('No', 'js-support-ticket'))), isset(jssupportticket::$_data[0]->autoresponse) ? jssupportticket::$_data[0]->autoresponse : '1', array('class' => 'radiobutton js-form-radio-field')), JSST_ALLOWED_TAGS); ?></div>
+                    <div class="js-form-field"><?php echo wp_kses(JSSTformfield::radiobutton('autoresponse', array('1' => esc_html(__('Yes', 'js-support-ticket')), '0' => esc_html(__('No', 'js-support-ticket'))), isset(jssupportticket::$jsst_data[0]->autoresponse) ? jssupportticket::$jsst_data[0]->autoresponse : '1', array('class' => 'radiobutton js-form-radio-field')), JSST_ALLOWED_TAGS); ?></div>
                 </div>
                 <div class="js-form-wrapper">
                     <div class="js-form-title"><?php echo esc_html(__('Status', 'js-support-ticket')); ?></div>
-                    <div class="js-form-field"><?php echo wp_kses(JSSTformfield::radiobutton('status', array('1' => esc_html(__('Active', 'js-support-ticket')), '0' => esc_html(__('Disabled', 'js-support-ticket'))), isset(jssupportticket::$_data[0]->status) ? jssupportticket::$_data[0]->status : '1', array('class' => 'radiobutton js-form-radio-field')), JSST_ALLOWED_TAGS); ?></div>
+                    <div class="js-form-field"><?php echo wp_kses(JSSTformfield::radiobutton('status', array('1' => esc_html(__('Active', 'js-support-ticket')), '0' => esc_html(__('Disabled', 'js-support-ticket'))), isset(jssupportticket::$jsst_data[0]->status) ? jssupportticket::$jsst_data[0]->status : '1', array('class' => 'radiobutton js-form-radio-field')), JSST_ALLOWED_TAGS); ?></div>
                 </div>
-                <?php echo wp_kses(JSSTformfield::hidden('id', isset(jssupportticket::$_data[0]->id) ? jssupportticket::$_data[0]->id : '' ), JSST_ALLOWED_TAGS); ?>
-                <?php echo wp_kses(JSSTformfield::hidden('created', isset(jssupportticket::$_data[0]->created) ? jssupportticket::$_data[0]->created : '' ), JSST_ALLOWED_TAGS); ?>
-                <?php echo wp_kses(JSSTformfield::hidden('updated', isset(jssupportticket::$_data[0]->updated) ? jssupportticket::$_data[0]->updated : '' ), JSST_ALLOWED_TAGS); ?>
+                <?php echo wp_kses(JSSTformfield::hidden('id', isset(jssupportticket::$jsst_data[0]->id) ? jssupportticket::$jsst_data[0]->id : '' ), JSST_ALLOWED_TAGS); ?>
+                <?php echo wp_kses(JSSTformfield::hidden('created', isset(jssupportticket::$jsst_data[0]->created) ? jssupportticket::$jsst_data[0]->created : '' ), JSST_ALLOWED_TAGS); ?>
+                <?php echo wp_kses(JSSTformfield::hidden('updated', isset(jssupportticket::$jsst_data[0]->updated) ? jssupportticket::$jsst_data[0]->updated : '' ), JSST_ALLOWED_TAGS); ?>
                 <?php echo wp_kses(JSSTformfield::hidden('action', 'email_saveemail'), JSST_ALLOWED_TAGS); ?>
                 <?php echo wp_kses(JSSTformfield::hidden('form_request', 'jssupportticket'), JSST_ALLOWED_TAGS); ?>
                 <div class="js-form-button">
@@ -135,7 +135,7 @@
     </div>
 </div>
 <?php
-$jssupportticket_js ='
+$jsst_jssupportticket_js ='
     jQuery(document).ready(function($){
         smtpAuthSelect();
         if(jQuery("#host").val() == "")
@@ -225,5 +225,5 @@ $jssupportticket_js ='
         });
     });
 ';
-    wp_add_inline_script('js-support-ticket-main-js',$jssupportticket_js);
+    wp_add_inline_script('js-support-ticket-main-js',$jsst_jssupportticket_js);
 ?>

@@ -10,25 +10,25 @@ class JSSTreplyController {
     }
 
     function handleRequest() {
-        $layout = JSSTrequest::getLayout('jstlay', null, 'replies');
-        $task = JSSTrequest::getLayout('task', null, 'replies_replies');
-        jssupportticket::$_data['sanitized_args']['jsst_nonce'] = esc_html(wp_create_nonce('jsst_nonce'));
-        if (self::canaddfile($layout)) {
-            $module = (is_admin()) ? 'page' : 'jstmod';
-            $module = JSSTrequest::getVar($module, null, 'reply');
-            JSSTincluder::include_file($layout, $module);
+        $jsst_layout = JSSTrequest::getLayout('jstlay', null, 'replies');
+        $jsst_task = JSSTrequest::getLayout('task', null, 'replies_replies');
+        jssupportticket::$jsst_data['sanitized_args']['jsst_nonce'] = esc_html(wp_create_nonce('jsst_nonce'));
+        if (self::canaddfile($jsst_layout)) {
+            $jsst_module = (is_admin()) ? 'page' : 'jstmod';
+            $jsst_module = JSSTrequest::getVar($jsst_module, null, 'reply');
+            JSSTincluder::include_file($jsst_layout, $jsst_module);
         }
     }
 
-    function canaddfile($layout) {
-        $nonce_value = JSSTrequest::getVar('jsst_nonce');
-        if ( wp_verify_nonce( $nonce_value, 'jsst_nonce') ) {
+    function canaddfile($jsst_layout) {
+        $jsst_nonce_value = JSSTrequest::getVar('jsst_nonce');
+        if ( wp_verify_nonce( $jsst_nonce_value, 'jsst_nonce') ) {
             if (isset($_POST['form_request']) && $_POST['form_request'] == 'jssupportticket') {
                 return false;
             } elseif (isset($_GET['action']) && $_GET['action'] == 'jstask') {
                 return false;
             } else {
-                if(!is_admin() && jssupportticketphplib::JSST_strpos($layout, 'admin_') === 0){
+                if(!is_admin() && jssupportticketphplib::JSST_strpos($jsst_layout, 'admin_') === 0){
                     return false;
                 }
                 return true;
@@ -37,59 +37,59 @@ class JSSTreplyController {
     }
 
     static function savereply() {
-        $ticketid = JSSTrequest::getVar('ticketid');
-        $nonce = JSSTrequest::getVar('_wpnonce');
-        if (! wp_verify_nonce( $nonce, 'save-reply-'.$ticketid) ) {
+        $jsst_ticketid = JSSTrequest::getVar('ticketid');
+        $jsst_nonce = JSSTrequest::getVar('_wpnonce');
+        if (! wp_verify_nonce( $jsst_nonce, 'save-reply-'.$jsst_ticketid) ) {
             die( 'Security check Failed' );
         }
-        $data = JSSTrequest::get('post');
-        JSSTincluder::getJSModel('reply')->storeReplies($data);
+        $jsst_data = JSSTrequest::get('post');
+        JSSTincluder::getJSModel('reply')->storeReplies($jsst_data);
         if (is_admin()) {
-            $url = admin_url("admin.php?page=ticket&jstlay=ticketdetail&jssupportticketid=" . $ticketid);
+            $jsst_url = admin_url("admin.php?page=ticket&jstlay=ticketdetail&jssupportticketid=" . $jsst_ticketid);
         } else {
-            $url = jssupportticket::makeUrl(array('jstmod'=>'ticket','jstlay'=>'ticketdetail','jssupportticketid'=>$ticketid));
+            $jsst_url = jssupportticket::makeUrl(array('jstmod'=>'ticket','jstlay'=>'ticketdetail','jssupportticketid'=>$jsst_ticketid));
         }
-        wp_redirect($url);
+        wp_safe_redirect($jsst_url);
         exit;
     }
 
     static function saveeditedreply() {
-        $tikcetid = JSSTrequest::getVar('reply-tikcetid');
-        $nonce = JSSTrequest::getVar('_wpnonce');
-        if (! wp_verify_nonce( $nonce, 'save-edited-reply-'.$tikcetid) ) {
+        $jsst_tikcetid = JSSTrequest::getVar('reply-tikcetid');
+        $jsst_nonce = JSSTrequest::getVar('_wpnonce');
+        if (! wp_verify_nonce( $jsst_nonce, 'save-edited-reply-'.$jsst_tikcetid) ) {
             die( 'Security check Failed' );
         }
-        $data = JSSTrequest::get('post');
-        JSSTincluder::getJSModel('reply')->editReply($data);
+        $jsst_data = JSSTrequest::get('post');
+        JSSTincluder::getJSModel('reply')->editReply($jsst_data);
         if (current_user_can('manage_options') || current_user_can('jsst_support_ticket_tickets')) {
-            $url = admin_url("admin.php?page=ticket&jstlay=ticketdetail&jssupportticketid=" . esc_attr($data['reply-tikcetid']));
+            $jsst_url = admin_url("admin.php?page=ticket&jstlay=ticketdetail&jssupportticketid=" . esc_attr($jsst_data['reply-tikcetid']));
         } else {
-            $url = jssupportticket::makeUrl(array('jstmod'=>'ticket','jstlay'=>'ticketdetail','jssupportticketid'=>$data['reply-tikcetid'],'jsstpageid'=>jssupportticket::getPageid()));
+            $jsst_url = jssupportticket::makeUrl(array('jstmod'=>'ticket','jstlay'=>'ticketdetail','jssupportticketid'=>$jsst_data['reply-tikcetid'],'jsstpageid'=>jssupportticket::getPageid()));
         }
-        wp_redirect($url);
+        wp_safe_redirect($jsst_url);
         exit;
     }
 
     static function saveeditedtime() {
-        $data = JSSTrequest::get('post');
-        $nonce = JSSTrequest::getVar('_wpnonce');
-        if (! wp_verify_nonce( $nonce, 'save-edited-time-'.$data['reply-tikcetid']) ) {
+        $jsst_data = JSSTrequest::get('post');
+        $jsst_nonce = JSSTrequest::getVar('_wpnonce');
+        if (! wp_verify_nonce( $jsst_nonce, 'save-edited-time-'.$jsst_data['reply-tikcetid']) ) {
             die( 'Security check Failed' );
         }
         if(!in_array('timetracking', jssupportticket::$_active_addons)){
             return;
         }
-        JSSTincluder::getJSModel('timetracking')->editTime($data);
+        JSSTincluder::getJSModel('timetracking')->editTime($jsst_data);
         if (current_user_can('manage_options') || current_user_can('jsst_support_ticket_tickets')) {
-            $url = admin_url("admin.php?page=ticket&jstlay=ticketdetail&jssupportticketid=" . esc_attr($data['reply-tikcetid']));
+            $jsst_url = admin_url("admin.php?page=ticket&jstlay=ticketdetail&jssupportticketid=" . esc_attr($jsst_data['reply-tikcetid']));
         } else {
-            $url = jssupportticket::makeUrl(array('jstmod'=>'ticket','jstlay'=>'ticketdetail','jssupportticketid'=>$data['reply-tikcetid'],'jsstpageid'=>jssupportticket::getPageid()));
+            $jsst_url = jssupportticket::makeUrl(array('jstmod'=>'ticket','jstlay'=>'ticketdetail','jssupportticketid'=>$jsst_data['reply-tikcetid'],'jsstpageid'=>jssupportticket::getPageid()));
         }
-        wp_redirect($url);
+        wp_safe_redirect($jsst_url);
         exit;
     }
 
 }
 
-$replyController = new JSSTreplyController();
+$jsst_replyController = new JSSTreplyController();
 ?>

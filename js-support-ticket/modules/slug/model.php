@@ -13,52 +13,52 @@ class JSSTslugModel {
 
     function getSlug() {
         // Filter
-        $slug = jssupportticket::$_search['slug']['slug'];
+        $jsst_slug = jssupportticket::$_search['slug']['slug'];
 
-        $inquery = '';
-        if ($slug != null){
-            $inquery .= " AND slug.slug LIKE '%".esc_sql($slug)."%'";
+        $jsst_inquery = '';
+        if ($jsst_slug != null){
+            $jsst_inquery .= " AND slug.slug LIKE '%".esc_sql($jsst_slug)."%'";
         }
-        jssupportticket::$_data['slug'] = $slug;
+        jssupportticket::$jsst_data['slug'] = $jsst_slug;
 
         // Pagination
-        $query = "SELECT COUNT(id) FROM ".jssupportticket::$_db->prefix."js_ticket_slug AS slug WHERE slug.status = 1 ";
-        $query .= $inquery;
-        $total = jssupportticket::$_db->get_var($query);
+        $jsst_query = "SELECT COUNT(id) FROM ".jssupportticket::$_db->prefix."js_ticket_slug AS slug WHERE slug.status = 1 ";
+        $jsst_query .= $jsst_inquery;
+        $jsst_total = jssupportticket::$_db->get_var($jsst_query);
 
-        jssupportticket::$_data['total'] = $total;
-        jssupportticket::$_data[1] = JSSTpagination::getPagination($total);
+        jssupportticket::$jsst_data['total'] = $jsst_total;
+        jssupportticket::$jsst_data[1] = JSSTpagination::getPagination($jsst_total);
 
         //Data
-        $query = "SELECT *
+        $jsst_query = "SELECT *
                   FROM ".jssupportticket::$_db->prefix ."js_ticket_slug AS slug WHERE slug.status = 1 ";
-        $query .= $inquery;
-        $query .= " LIMIT " . JSSTpagination::getOffset() . ", " . JSSTpagination::getLimit();
-        jssupportticket::$_data[0] = jssupportticket::$_db->get_results($query);
+        $jsst_query .= $jsst_inquery;
+        $jsst_query .= " LIMIT " . JSSTpagination::getOffset() . ", " . JSSTpagination::getLimit();
+        jssupportticket::$jsst_data[0] = jssupportticket::$_db->get_results($jsst_query);
 
         return;
     }
 
 
-    function storeSlug($data) {
-        if (empty($data)) {
+    function storeSlug($jsst_data) {
+        if (empty($jsst_data)) {
             return false;
         }
         if (!current_user_can('manage_options')) { //only admin can change it.
             return false;
         }
-        $row = JSSTincluder::getJSTable('slug');
-        foreach ($data as $id => $slug) {
-            if($id != '' && is_numeric($id)){
-                $slug = sanitize_title($slug);
-                if($slug != ''){
-                    $query = "SELECT COUNT(id) FROM " . jssupportticket::$_db->prefix . "js_ticket_slug
-                            WHERE slug = '" . esc_sql($slug)."' ";
-                    $slug_flag = jssupportticket::$_db->get_var($query);
-                    if($slug_flag > 0){
+        $jsst_row = JSSTincluder::getJSTable('slug');
+        foreach ($jsst_data as $jsst_id => $jsst_slug) {
+            if($jsst_id != '' && is_numeric($jsst_id)){
+                $jsst_slug = sanitize_title($jsst_slug);
+                if($jsst_slug != ''){
+                    $jsst_query = "SELECT COUNT(id) FROM " . jssupportticket::$_db->prefix . "js_ticket_slug
+                            WHERE slug = '" . esc_sql($jsst_slug)."' ";
+                    $jsst_slug_flag = jssupportticket::$_db->get_var($jsst_query);
+                    if($jsst_slug_flag > 0){
                         continue;
                     }else{
-                        $row->update(array('id' => $id, 'slug' => $slug));
+                        $jsst_row->update(array('id' => $jsst_id, 'slug' => $jsst_slug));
                     }
                 }
             }
@@ -68,19 +68,19 @@ class JSSTslugModel {
         return;
     }
 
-    function savePrefix($data) {
-        if (empty($data)) {
+    function savePrefix($jsst_data) {
+        if (empty($jsst_data)) {
             return false;
         }
-        $data['prefix'] = ($data['prefix']);
-        if($data['prefix'] == ''){
+        $jsst_data['prefix'] = ($jsst_data['prefix']);
+        if($jsst_data['prefix'] == ''){
             JSSTmessage::setMessage(esc_html(__('Prefix has not been stored', 'js-support-ticket')), 'error');
             return;
         }
-        $query = "UPDATE " . jssupportticket::$_db->prefix . "js_ticket_config
-                    SET configvalue = '".esc_sql($data['prefix'])."'
+        $jsst_query = "UPDATE " . jssupportticket::$_db->prefix . "js_ticket_config
+                    SET configvalue = '".esc_sql($jsst_data['prefix'])."'
                     WHERE configname = 'slug_prefix'";
-        if(jssupportticket::$_db->query($query)){
+        if(jssupportticket::$_db->query($jsst_query)){
             update_option('rewrite_rules', '');
             JSSTmessage::setMessage(esc_html(__('Prefix has been stored', 'js-support-ticket')), 'updated');
             return;
@@ -91,19 +91,19 @@ class JSSTslugModel {
         }
     }
 
-    function saveHomePrefix($data) {
-        if (empty($data)) {
+    function saveHomePrefix($jsst_data) {
+        if (empty($jsst_data)) {
             return false;
         }
-        $data['prefix'] = ($data['prefix']);
-        if($data['prefix'] == ''){
+        $jsst_data['prefix'] = ($jsst_data['prefix']);
+        if($jsst_data['prefix'] == ''){
             JSSTmessage::setMessage(esc_html(__('Prefix has not been stored', 'js-support-ticket')), 'error');
             return;
         }
-        $query = "UPDATE " . jssupportticket::$_db->prefix . "js_ticket_config
-                    SET configvalue = '".esc_sql($data['prefix'])."'
+        $jsst_query = "UPDATE " . jssupportticket::$_db->prefix . "js_ticket_config
+                    SET configvalue = '".esc_sql($jsst_data['prefix'])."'
                     WHERE configname = 'home_slug_prefix'";
-        if(jssupportticket::$_db->query($query)){
+        if(jssupportticket::$_db->query($jsst_query)){
             update_option('rewrite_rules', '');
             JSSTmessage::setMessage(esc_html(__('Prefix has been stored', 'js-support-ticket')), 'updated');
             return;
@@ -115,9 +115,9 @@ class JSSTslugModel {
     }
 
     function resetAllSlugs() {
-        $query = "UPDATE " . jssupportticket::$_db->prefix . "js_ticket_slug
+        $jsst_query = "UPDATE " . jssupportticket::$_db->prefix . "js_ticket_slug
                     SET slug = defaultslug ";
-        if(jssupportticket::$_db->query($query)){
+        if(jssupportticket::$_db->query($jsst_query)){
             update_option('rewrite_rules', '');
             JSSTmessage::setMessage(esc_html(__('Slug(s) has been stored', 'js-support-ticket')), 'updated');
             return;
@@ -132,83 +132,83 @@ class JSSTslugModel {
         if(!current_user_can('manage_options')){
             return false;
         }
-        $id = JSSTrequest::getVar('id');
-        $nonce = JSSTrequest::getVar('_wpnonce');
-        if (! wp_verify_nonce( $nonce, 'get-options-for-edit-slug-'.$id) ) {
+        $jsst_id = JSSTrequest::getVar('id');
+        $jsst_nonce = JSSTrequest::getVar('_wpnonce');
+        if (! wp_verify_nonce( $jsst_nonce, 'get-options-for-edit-slug-'.$jsst_id) ) {
             die( 'Security check Failed' );
         }
-        $slug = JSSTrequest::getVar('slug');
-        $html = '<span class="userpopup-top">
+        $jsst_slug = JSSTrequest::getVar('slug');
+        $jsst_html = '<span class="userpopup-top">
                     <span id="userpopup-heading" class="userpopup-heading" >' . esc_html(__("Edit","js-support-ticket"))." ". esc_html(__("Slug", "js-support-ticket")) . '</span>
                         <img alt="'. esc_html(__("Close","js-support-ticket")).'" onClick="closePopup();" class="userpopup-close" src="'. esc_url(JSST_PLUGIN_URL).'includes/images/close-icon-white.png" />
                     </span>';
-        $html .= '<div class="userpopup-search">
+        $jsst_html .= '<div class="userpopup-search">
                     <div class="popup-field-title">' . esc_html(__('Slug','js-support-ticket')).' '. esc_html(__('Name','js-support-ticket')) . ' <span style="color: red;"> *</span></div>
-                         <div class="popup-field-obj">' . JSSTformfield::text('slugedit', isset($slug) ? jssupportticketphplib::JSST_trim($slug) : 'text', '', array('class' => 'inputbox one', 'data-validation' => 'required')) . '</div>
+                         <div class="popup-field-obj">' . JSSTformfield::text('slugedit', isset($jsst_slug) ? jssupportticketphplib::JSST_trim($jsst_slug) : 'text', '', array('class' => 'inputbox one', 'data-validation' => 'required')) . '</div>
                     </div>';
-        $html .='<div class="popup-act-btn-wrp">
+        $jsst_html .='<div class="popup-act-btn-wrp">
                     ' . JSSTformfield::button('save', esc_html(__('Save', 'js-support-ticket')), array('class' => 'button savebutton popup-act-btn','onClick'=>'getFieldValue();'));
-        $html .='</div>';
-        $html = jssupportticketphplib::JSST_htmlentities($html);
-        return wp_json_encode($html);
+        $jsst_html .='</div>';
+        $jsst_html = jssupportticketphplib::JSST_htmlentities($jsst_html);
+        return wp_json_encode($jsst_html);
     }
 
-    function getDefaultSlugFromSlug($layout) {
-        $query = "SELECT  defaultslug FROM `".jssupportticket::$_db->prefix."js_ticket_slug` WHERE slug = '".esc_sql($layout)."'";
-        $val = jssupportticket::$_db->get_var($query);
-        return sanitize_title($val);
+    function getDefaultSlugFromSlug($jsst_layout) {
+        $jsst_query = "SELECT  defaultslug FROM `".jssupportticket::$_db->prefix."js_ticket_slug` WHERE slug = '".esc_sql($jsst_layout)."'";
+        $jsst_val = jssupportticket::$_db->get_var($jsst_query);
+        return sanitize_title($jsst_val);
     }
 
-    function getSlugFromFileName($layout,$module) {
-        $query = "SELECT slug FROM `".jssupportticket::$_db->prefix."js_ticket_slug` WHERE filename = '".esc_sql($layout)."'";
-        $val = jssupportticket::$_db->get_var($query);
-        return $val;
+    function getSlugFromFileName($jsst_layout,$jsst_module) {
+        $jsst_query = "SELECT slug FROM `".jssupportticket::$_db->prefix."js_ticket_slug` WHERE filename = '".esc_sql($jsst_layout)."'";
+        $jsst_val = jssupportticket::$_db->get_var($jsst_query);
+        return $jsst_val;
     }
 
-    function getSlugString($home_page = 0) {
+    function getSlugString($jsst_home_page = 0) {
         global $wp_rewrite;
-        $rules = wp_json_encode($wp_rewrite->rules);
-        $query = "SELECT slug AS value FROM `".jssupportticket::$_db->prefix."js_ticket_slug`";
-        $val = jssupportticket::$_db->get_results($query);
-        $string = '';
-        $bstring = '';
-        //$rules = wp_json_encode($rules);
-        $prefix = JSSTincluder::getJSModel('configuration')->getConfigValue('slug_prefix');
-        $homeprefix = JSSTincluder::getJSModel('configuration')->getConfigValue('home_slug_prefix');
-        foreach ($val as $slug) {
-            if($home_page == 1){
-                $slug->value = $homeprefix.$slug->value;
+        $jsst_rules = wp_json_encode($wp_rewrite->rules);
+        $jsst_query = "SELECT slug AS value FROM `".jssupportticket::$_db->prefix."js_ticket_slug`";
+        $jsst_val = jssupportticket::$_db->get_results($jsst_query);
+        $jsst_string = '';
+        $jsst_bstring = '';
+        //$jsst_rules = wp_json_encode($jsst_rules);
+        $jsst_prefix = JSSTincluder::getJSModel('configuration')->getConfigValue('slug_prefix');
+        $jsst_homeprefix = JSSTincluder::getJSModel('configuration')->getConfigValue('home_slug_prefix');
+        foreach ($jsst_val as $jsst_slug) {
+            if($jsst_home_page == 1){
+                $jsst_slug->value = $jsst_homeprefix.$jsst_slug->value;
             }
-            if(jssupportticketphplib::JSST_strpos($rules,$slug->value) === false){
-                $string .= $bstring. $slug->value;
+            if(jssupportticketphplib::JSST_strpos($jsst_rules,$jsst_slug->value) === false){
+                $jsst_string .= $jsst_bstring. $jsst_slug->value;
             }else{
-                $string .= $bstring.$prefix. $slug->value;
+                $jsst_string .= $jsst_bstring.$jsst_prefix. $jsst_slug->value;
             }
-            $bstring = '|';
+            $jsst_bstring = '|';
         }
-        return $string;
+        return $jsst_string;
     }
 
     function getRedirectCanonicalArray() {
         global $wp_rewrite;
-        $slug_prefix = JSSTincluder::getJSModel('configuration')->getConfigValue('slug_prefix');
-        $homeprefix = JSSTincluder::getJSModel('configuration')->getConfigValue('home_slug_prefix');
-        $rules = wp_json_encode($wp_rewrite->rules);
-        $query = "SELECT slug AS value FROM `".jssupportticket::$_db->prefix."js_ticket_slug`";
-        $val = jssupportticket::$_db->get_results($query);
-        $string = array();
-        $bstring = '';
-        foreach ($val as $slug) {
-            $slug->value = $homeprefix.$slug->value;
-            $string[] = $bstring.$slug->value;
-            $bstring = '/';
+        $jsst_slug_prefix = JSSTincluder::getJSModel('configuration')->getConfigValue('slug_prefix');
+        $jsst_homeprefix = JSSTincluder::getJSModel('configuration')->getConfigValue('home_slug_prefix');
+        $jsst_rules = wp_json_encode($wp_rewrite->rules);
+        $jsst_query = "SELECT slug AS value FROM `".jssupportticket::$_db->prefix."js_ticket_slug`";
+        $jsst_val = jssupportticket::$_db->get_results($jsst_query);
+        $jsst_string = array();
+        $jsst_bstring = '';
+        foreach ($jsst_val as $jsst_slug) {
+            $jsst_slug->value = $jsst_homeprefix.$jsst_slug->value;
+            $jsst_string[] = $jsst_bstring.$jsst_slug->value;
+            $jsst_bstring = '/';
         }
-        return $string;
+        return $jsst_string;
     }
 
     function getAdminSearchFormDataSlug(){
-        $nonce = JSSTrequest::getVar('_wpnonce');
-        if (! wp_verify_nonce( $nonce, 'slug') ) {
+        $jsst_nonce = JSSTrequest::getVar('_wpnonce');
+        if (! wp_verify_nonce( $jsst_nonce, 'slug') ) {
             die( 'Security check Failed' );
         }
         $jsst_search_array = array();

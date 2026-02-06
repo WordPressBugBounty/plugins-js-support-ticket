@@ -1,35 +1,35 @@
 <?php
 if (!defined('ABSPATH')) die('Restricted Access');
-$yesno = array(
+$jsst_yesno = array(
     (object) array('id' => '1', 'text' => esc_html(__('Yes', 'js-support-ticket'))),
     (object) array('id' => '2', 'text' => esc_html(__('No', 'js-support-ticket')))
     );
-$ticketidsequence = array(
+$jsst_ticketidsequence = array(
     (object) array('id' => '1', 'text' => esc_html(__('Random', 'js-support-ticket'))),
     (object) array('id' => '2', 'text' => esc_html(__('Sequential', 'js-support-ticket')))
     );
-$owncaptchaoparend = array(
+$jsst_owncaptchaoparend = array(
     (object) array('id' => '2', 'text' => esc_html(__('2', 'js-support-ticket'))),
     (object) array('id' => '3', 'text' => esc_html(__('3', 'js-support-ticket')))
     );
-$tran_opt = JSSTincluder::getJSModel('jssupportticket')->getInstalledTranslationKey();
+$jsst_tran_opt = JSSTincluder::getJSModel('jssupportticket')->getInstalledTranslationKey();
 ?>
 <div id="js-tk-admin-wrapper">
     <div id="js-tk-cparea">
         <div id="jsst-main-wrapper" class="post-installation">
             <div class="post-installtion-content-wrapper">
                 <div class="js-admin-title-installtion">
-                        <div class="jsst-installation-lftsection">
-                            <div class="jsst-installationlogo">
-                                <img class="start" src="<?php echo esc_url(JSST_PLUGIN_URL).'includes/images/postinstallation/installer-logo.png';?>" />
-                            </div>
-                            <span class="jsst_heading"><?php echo esc_html(__("Let's Get your Configuration Setup",'js-support-ticket')); ?></span>
+                    <div class="jsst-installation-lftsection">
+                        <div class="jsst-installationlogo">
+                            <img class="start" src="<?php echo esc_url(JSST_PLUGIN_URL).'includes/images/postinstallation/installer-logo.png';?>" />
                         </div>
-                        <div class="close-button-bottom">
-                            <a href="?page=jssupportticket" class="close-button">
-                                <img alt="image" src="<?php echo esc_url(JSST_PLUGIN_URL).'includes/images/postinstallation/close-icon.png';?>" />
-                            </a>
-                        </div>
+                        <span class="jsst_heading"><?php echo esc_html(__("Let's Get your Configuration Setup",'js-support-ticket')); ?></span>
+                    </div>
+                    <div class="close-button-bottom">
+                        <a href="?page=jssupportticket" class="close-button">
+                            <img alt="<?php echo esc_attr(__('image','js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL).'includes/images/postinstallation/close-icon.png';?>" />
+                        </a>
+                    </div>
                 </div>
                 <div class="post-installtion-content-header">
                     <ul class="update-header-img step-1">
@@ -85,17 +85,17 @@ $tran_opt = JSSTincluder::getJSModel('jssupportticket')->getInstalledTranslation
                     <div class="jsst-config-topheading">
                         <span class="heading-post-ins jsst-configurations-heading"><?php echo esc_html(__('Ticket Configurations','js-support-ticket'));?></span>
                         <?php
-                            if($tran_opt && in_array('feedback', jssupportticket::$_active_addons)){
-                                $step = '5';
-                            }else if(!$tran_opt && !in_array('feedback', jssupportticket::$_active_addons)){
-                                $step = '3';
+                            if($jsst_tran_opt && in_array('feedback', jssupportticket::$_active_addons)){
+                                $jsst_step = '5';
+                            }else if(!$jsst_tran_opt && !in_array('feedback', jssupportticket::$_active_addons)){
+                                $jsst_step = '3';
                             }else{
-                                $step = '4';
+                                $jsst_step = '4';
                             }
-                            $steps = esc_html(__('Step 2 of ','js-support-ticket'));
-                            $steps .= $step;
+                            $jsst_steps = esc_html(__('Step 2 of ','js-support-ticket'));
+                            $jsst_steps .= $jsst_step;
                         ?>
-                        <span class="heading-post-ins jsst-config-steps"><?php echo esc_html($steps); ?></span>
+                        <span class="heading-post-ins jsst-config-steps"><?php echo esc_html($jsst_steps); ?></span>
                     </div>
                     <div class="post-installtion-content">
                         <form id="jssupportticket-form-ins" method="post" action="<?php echo esc_url(wp_nonce_url(admin_url("admin.php?page=postinstallation&task=save&action=jstask"),"save")); ?>">
@@ -104,7 +104,7 @@ $tran_opt = JSSTincluder::getJSModel('jssupportticket')->getInstalledTranslation
                                     <?php echo esc_html(__('Visitor can create ticket','js-support-ticket')); ?><?php echo esc_html(__(':', 'js-support-ticket'));?>
                                 </div>
                                 <div class="field">
-                                    <?php echo wp_kses(JSSTformfield::select('visitor_can_create_ticket', $yesno , isset(jssupportticket::$_data[0]['visitor_can_create_ticket']) ? jssupportticket::$_data[0]['visitor_can_create_ticket'] : '', esc_html(__('Select Type', 'js-support-ticket')) , array('class' => 'inputbox jsst-postsetting js-select jsst-postsetting ')), JSST_ALLOWED_TAGS);?>
+                                    <?php echo wp_kses(JSSTformfield::select('visitor_can_create_ticket', $jsst_yesno , isset(jssupportticket::$jsst_data[0]['visitor_can_create_ticket']) ? jssupportticket::$jsst_data[0]['visitor_can_create_ticket'] : '', esc_html(__('Select Type', 'js-support-ticket')) , array('class' => 'inputbox jsst-postsetting js-select jsst-postsetting ')), JSST_ALLOWED_TAGS);?>
                                     <div class="desc">
                                         <?php echo esc_html(__("Enable/Disable Open Ticket", "js-support-ticket")); ?>
                                     </div>
@@ -115,7 +115,7 @@ $tran_opt = JSSTincluder::getJSModel('jssupportticket')->getInstalledTranslation
                                     <?php echo esc_html(__('Ticket ID sequence','js-support-ticket')); ?>:
                                 </div>
                                 <div class="field">
-                                    <?php echo wp_kses(JSSTformfield::select('ticketid_sequence', $ticketidsequence , isset(jssupportticket::$_data[0]['ticketid_sequence']) ? jssupportticket::$_data[0]['ticketid_sequence'] : '', esc_html(__('Select Type', 'js-support-ticket')) , array('class' => 'inputbox jsst-postsetting js-select jsst-postsetting ')), JSST_ALLOWED_TAGS);?>
+                                    <?php echo wp_kses(JSSTformfield::select('ticketid_sequence', $jsst_ticketidsequence , isset(jssupportticket::$jsst_data[0]['ticketid_sequence']) ? jssupportticket::$jsst_data[0]['ticketid_sequence'] : '', esc_html(__('Select Type', 'js-support-ticket')) , array('class' => 'inputbox jsst-postsetting js-select jsst-postsetting ')), JSST_ALLOWED_TAGS);?>
                                     <div class="desc">
                                         <?php echo esc_html(__("Set ticket id sequential or random",'js-support-ticket')); ?>&nbsp;
                                     </div>
@@ -126,7 +126,7 @@ $tran_opt = JSSTincluder::getJSModel('jssupportticket')->getInstalledTranslation
                                     <?php echo esc_html(__('Maximum Tickets','js-support-ticket')); ?>:
                                 </div>
                                 <div class="field">
-                                    <?php echo wp_kses(JSSTformfield::text('maximum_tickets', isset(jssupportticket::$_data[0]['maximum_tickets']) ? jssupportticket::$_data[0]['maximum_tickets'] : '', array('class' => 'inputbox jsst-postsetting', 'data-validation' => 'required')), JSST_ALLOWED_TAGS) ?>
+                                    <?php echo wp_kses(JSSTformfield::text('maximum_tickets', isset(jssupportticket::$jsst_data[0]['maximum_tickets']) ? jssupportticket::$jsst_data[0]['maximum_tickets'] : '', array('class' => 'inputbox jsst-postsetting', 'data-validation' => 'required')), JSST_ALLOWED_TAGS) ?>
                                     <div class="desc">
                                         <?php echo esc_html(__("Set Maximum Ticket Per user", "js-support-ticket")); ?>
                                     </div>
@@ -137,7 +137,7 @@ $tran_opt = JSSTincluder::getJSModel('jssupportticket')->getInstalledTranslation
                                     <?php echo esc_html(__('Maximum Open Ticket','js-support-ticket')); ?>:
                                 </div>
                                 <div class="field">
-                                    <?php echo wp_kses(JSSTformfield::text('maximum_open_tickets', isset(jssupportticket::$_data[0]['maximum_open_tickets']) ? jssupportticket::$_data[0]['maximum_open_tickets'] : '', array('class' => 'inputbox jsst-postsetting', 'data-validation' => 'required')), JSST_ALLOWED_TAGS) ?>
+                                    <?php echo wp_kses(JSSTformfield::text('maximum_open_tickets', isset(jssupportticket::$jsst_data[0]['maximum_open_tickets']) ? jssupportticket::$jsst_data[0]['maximum_open_tickets'] : '', array('class' => 'inputbox jsst-postsetting', 'data-validation' => 'required')), JSST_ALLOWED_TAGS) ?>
                                     <div class="desc">
                                         <?php echo esc_html(__("Maximum Open Ticket",'js-support-ticket')); ?>
                                     </div>
@@ -148,7 +148,7 @@ $tran_opt = JSSTincluder::getJSModel('jssupportticket')->getInstalledTranslation
                                     <?php echo esc_html(__('Reopen ticket within Days','js-support-ticket')); ?>:
                                 </div>
                                 <div class="field">
-                                    <?php echo wp_kses(JSSTformfield::text('reopen_ticket_within_days', isset(jssupportticket::$_data[0]['reopen_ticket_within_days']) ? jssupportticket::$_data[0]['reopen_ticket_within_days'] : '', array('class' => 'inputbox jsst-postsetting', 'data-validation' => 'required')), JSST_ALLOWED_TAGS) ?>
+                                    <?php echo wp_kses(JSSTformfield::text('reopen_ticket_within_days', isset(jssupportticket::$jsst_data[0]['reopen_ticket_within_days']) ? jssupportticket::$jsst_data[0]['reopen_ticket_within_days'] : '', array('class' => 'inputbox jsst-postsetting', 'data-validation' => 'required')), JSST_ALLOWED_TAGS) ?>
                                     <div class="desc">
                                         <?php echo esc_html(__("The ticket can be reopened within a given number of days",'js-support-ticket')); ?>&nbsp;
                                     </div>
@@ -159,7 +159,7 @@ $tran_opt = JSSTincluder::getJSModel('jssupportticket')->getInstalledTranslation
                                     <?php echo esc_html(__('Show Captcha to visitor on ticket form','js-support-ticket')); ?>:
                                 </div>
                                 <div class="field">
-                                    <?php echo wp_kses(JSSTformfield::select('show_captcha_on_visitor_from_ticket', $yesno , isset(jssupportticket::$_data[0]['show_captcha_on_visitor_from_ticket']) ? jssupportticket::$_data[0]['show_captcha_on_visitor_from_ticket'] : '', esc_html(__('Select Type', 'js-support-ticket')) , array('class' => 'inputbox jsst-postsetting js-select jsst-postsetting ')), JSST_ALLOWED_TAGS);?>
+                                    <?php echo wp_kses(JSSTformfield::select('show_captcha_on_visitor_from_ticket', $jsst_yesno , isset(jssupportticket::$jsst_data[0]['show_captcha_on_visitor_from_ticket']) ? jssupportticket::$jsst_data[0]['show_captcha_on_visitor_from_ticket'] : '', esc_html(__('Select Type', 'js-support-ticket')) , array('class' => 'inputbox jsst-postsetting js-select jsst-postsetting ')), JSST_ALLOWED_TAGS);?>
                                     <div class="desc">
                                         <?php echo esc_html(__("Enable/Disable Captcha on Ticket Form",'js-support-ticket')); ?>
                                     </div>
@@ -170,7 +170,7 @@ $tran_opt = JSSTincluder::getJSModel('jssupportticket')->getInstalledTranslation
                                     <?php echo esc_html(__('Own Captcha operands','js-support-ticket')); ?>:
                                 </div>
                                 <div class="field">
-                                    <?php echo wp_kses(JSSTformfield::select('owncaptcha_totaloperand', $owncaptchaoparend , isset(jssupportticket::$_data[0]['owncaptcha_totaloperand']) ? jssupportticket::$_data[0]['owncaptcha_totaloperand'] : '', esc_html(__('Select Type', 'js-support-ticket')) , array('class' => 'inputbox jsst-postsetting js-select jsst-postsetting ')), JSST_ALLOWED_TAGS);?>
+                                    <?php echo wp_kses(JSSTformfield::select('owncaptcha_totaloperand', $jsst_owncaptchaoparend , isset(jssupportticket::$jsst_data[0]['owncaptcha_totaloperand']) ? jssupportticket::$jsst_data[0]['owncaptcha_totaloperand'] : '', esc_html(__('Select Type', 'js-support-ticket')) , array('class' => 'inputbox jsst-postsetting js-select jsst-postsetting ')), JSST_ALLOWED_TAGS);?>
                                     <div class="desc">
                                         <?php echo esc_html(__("Select the total operands to be given",'js-support-ticket')); ?>
                                     </div>
@@ -181,7 +181,7 @@ $tran_opt = JSSTincluder::getJSModel('jssupportticket')->getInstalledTranslation
                                     <?php echo esc_html(__('Own captcha subtraction answer positive','js-support-ticket')); ?><?php echo esc_html(__(' :','js-support-ticket'));?>
                                 </div>
                                 <div class="field">
-                                    <?php echo wp_kses(JSSTformfield::select('owncaptcha_subtractionans', $yesno , isset(jssupportticket::$_data[0]['owncaptcha_subtractionans']) ? jssupportticket::$_data[0]['owncaptcha_subtractionans'] : '', esc_html(__('Select Type', 'js-support-ticket')) , array('class' => 'inputbox jsst-postsetting js-select jsst-postsetting ')), JSST_ALLOWED_TAGS);?>
+                                    <?php echo wp_kses(JSSTformfield::select('owncaptcha_subtractionans', $jsst_yesno , isset(jssupportticket::$jsst_data[0]['owncaptcha_subtractionans']) ? jssupportticket::$jsst_data[0]['owncaptcha_subtractionans'] : '', esc_html(__('Select Type', 'js-support-ticket')) , array('class' => 'inputbox jsst-postsetting js-select jsst-postsetting ')), JSST_ALLOWED_TAGS);?>
                                     <div class="desc">
                                         <?php echo esc_html(__("Enable/Disable Own Captcha subtraction", "js-support-ticket")); ?>
                                     </div>
@@ -192,7 +192,7 @@ $tran_opt = JSSTincluder::getJSModel('jssupportticket')->getInstalledTranslation
                                     <?php echo esc_html(__('Enable Print Ticket','js-support-ticket')); ?>:
                                 </div>
                                 <div class="field">
-                                    <?php echo wp_kses(JSSTformfield::select('print_ticket_user', $yesno , isset(jssupportticket::$_data[0]['print_ticket_user']) ? jssupportticket::$_data[0]['print_ticket_user'] : '', esc_html(__('Select Type', 'js-support-ticket')) , array('class' => 'inputbox jsst-postsetting js-select jsst-postsetting ')), JSST_ALLOWED_TAGS);?>
+                                    <?php echo wp_kses(JSSTformfield::select('print_ticket_user', $jsst_yesno , isset(jssupportticket::$jsst_data[0]['print_ticket_user']) ? jssupportticket::$jsst_data[0]['print_ticket_user'] : '', esc_html(__('Select Type', 'js-support-ticket')) , array('class' => 'inputbox jsst-postsetting js-select jsst-postsetting ')), JSST_ALLOWED_TAGS);?>
                                     <div class="desc">
                                         <?php echo esc_html(__("Enable/Disable Print Ticket", "js-support-ticket")); ?>
                                     </div>
@@ -200,13 +200,13 @@ $tran_opt = JSSTincluder::getJSModel('jssupportticket')->getInstalledTranslation
                             </div>
                             <div class="pic-button-part">
                                 <a class="back" href="<?php echo esc_url(admin_url('admin.php?page=postinstallation&jstlay=stepone')); ?>">
-                                    <img class="backbtn-black-icon" alt="image" src="<?php echo esc_url(JSST_PLUGIN_URL).'includes/images/postinstallation/back-arrow.png';?>">
-                                    <img class="backbtn-white-icon" alt="image" src="<?php echo esc_url(JSST_PLUGIN_URL).'includes/images/postinstallation/back-arrow-w.png';?>">
+                                    <img class="backbtn-black-icon" alt="<?php echo esc_attr(__('image','js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL).'includes/images/postinstallation/back-arrow.png';?>">
+                                    <img class="backbtn-white-icon" alt="<?php echo esc_attr(__('image','js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL).'includes/images/postinstallation/back-arrow-w.png';?>">
                                     <?php echo esc_html(__('Back','js-support-ticket')); ?>
                                 </a>
                                 <a class="next-step" href="#" onclick="document.getElementById('jssupportticket-form-ins').submit();" >
                                     <?php echo esc_html(__('Save & Next','js-support-ticket')); ?>
-                                    <img alt="image" src="<?php echo esc_url(JSST_PLUGIN_URL).'includes/images/postinstallation/next-arrow.png';?>">
+                                    <img alt="<?php echo esc_attr(__('image','js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL).'includes/images/postinstallation/next-arrow.png';?>">
                                 </a>
                             </div>
                             <?php echo wp_kses(JSSTformfield::hidden('action', 'postinstallation_save'), JSST_ALLOWED_TAGS); ?>

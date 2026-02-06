@@ -5,22 +5,22 @@
 <div class="jsst-main-up-wrapper">
 <?php
 if (jssupportticket::$_config['offline'] == 2) {
-    if (jssupportticket::$_data['permission_granted'] == 1) {
+    if (jssupportticket::$jsst_data['permission_granted'] == 1) {
         if (JSSTincluder::getObjectClass('user')->uid() != 0) {
             if ( in_array('agent',jssupportticket::$_active_addons) && JSSTincluder::getJSModel('agent')->isUserStaff()) {
-                if (jssupportticket::$_data['staff_enabled']) { ?>
+                if (jssupportticket::$jsst_data['staff_enabled']) { ?>
     <!-- admin -->
 <?php
 wp_enqueue_script('jquery-ui-datepicker');
-wp_enqueue_style('jquery-ui-css', JSST_PLUGIN_URL . 'includes/css/jquery-ui-smoothness.css');
-$js_scriptdateformat = JSSTincluder::getJSModel('jssupportticket')->getJSSTDateFormat();
-wp_enqueue_script('ticket-google-charts', JSST_PLUGIN_URL . 'includes/js/google-charts.js');
-wp_register_script( 'ticket-google-charts-handle', '' );
+wp_enqueue_style('jquery-ui-css', JSST_PLUGIN_URL . 'includes/css/jquery-ui-smoothness.css', array(), jssupportticket::$_config['productversion']);
+$jsst_js_scriptdateformat = JSSTincluder::getJSModel('jssupportticket')->getJSSTDateFormat();
+wp_enqueue_script('ticket-google-charts', JSST_PLUGIN_URL . 'includes/js/google-charts.js', array(), jssupportticket::$_config['productversion'], true);
+wp_register_script( 'ticket-google-charts-handle', '', array(), jssupportticket::$_config['productversion'], true );
 wp_enqueue_script( 'ticket-google-charts-handle' );
-$jssupportticket_js ="
+$jsst_jssupportticket_js ="
     jQuery(document).ready(function ($) {
         $('.custom_date').datepicker({
-            dateFormat: '". $js_scriptdateformat ."'
+            dateFormat: '". $jsst_js_scriptdateformat ."'
         });
     });
 
@@ -30,8 +30,8 @@ $jssupportticket_js ="
         return true;
     }
     ";
-wp_add_inline_script('js-support-ticket-main-js',$jssupportticket_js);
-    $jssupportticket_js ="
+wp_add_inline_script('js-support-ticket-main-js',$jsst_jssupportticket_js);
+    $jsst_jssupportticket_js ="
     google.load('visualization', '1', {packages:['corechart']});
     google.setOnLoadCallback(drawChart);
 
@@ -44,7 +44,7 @@ wp_add_inline_script('js-support-ticket-main-js',$jssupportticket_js);
         data.addColumn('number', '". esc_html(__('Overdue','js-support-ticket')) ."');
         data.addColumn('number', '". esc_html(__('Closed','js-support-ticket')) ."');
         data.addRows([
-            ". wp_kses(jssupportticket::$_data['line_chart_json_array'], JSST_ALLOWED_TAGS) ."
+            ". wp_kses(jssupportticket::$jsst_data['line_chart_json_array'], JSST_ALLOWED_TAGS) ."
         ]);
 
         var options = {
@@ -61,7 +61,7 @@ wp_add_inline_script('js-support-ticket-main-js',$jssupportticket_js);
         chart.draw(data, options);
     }
 ";
-wp_add_inline_script('ticket-google-charts-handle',$jssupportticket_js);
+wp_add_inline_script('ticket-google-charts-handle',$jsst_jssupportticket_js);
 ?>
 
 <?php /* JSSTbreadcrumbs::getBreadcrumbs(); */ ?>
@@ -69,19 +69,19 @@ wp_add_inline_script('ticket-google-charts-handle',$jssupportticket_js);
 <div class="js-ticket-staff-report-wrapper">
     <div class="js-ticket-top-search-wrp">
         <div class="js-ticket-search-fields-wrp">
-            <form class="js-filter-form" name="jssupportticketform" id="jssupportticketform" method="POST" action="<?php echo esc_url(wp_nonce_url(jssupportticket::makeUrl(array('jstmod'=>'reports', 'jstlay'=>'staffdetailreport','jsst-id'=>jssupportticket::$_data['staff_report']->id)),"staff-detail-report")); ?>">
+            <form class="js-filter-form" name="jssupportticketform" id="jssupportticketform" method="POST" action="<?php echo esc_url(wp_nonce_url(jssupportticket::makeUrl(array('jstmod'=>'reports', 'jstlay'=>'staffdetailreport','jsst-id'=>jssupportticket::$jsst_data['staff_report']->id)),"staff-detail-report")); ?>">
                 <?php
-                $curdate = date_i18n('Y-m-d');
-                $enddate = date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime("now -1 month"));
-                $date_start = !empty(jssupportticket::$_data['filter']['jsst-date-start']) ? jssupportticket::$_data['filter']['jsst-date-start'] : $curdate;
-                $date_end = !empty(jssupportticket::$_data['filter']['jsst-date-end']) ? jssupportticket::$_data['filter']['jsst-date-end'] : $enddate; ?>
-                <?php echo wp_kses("<input type='hidden' name='jsst-id' value='" . esc_attr(jssupportticket::$_data['staff_report']->id) . "'/>", JSST_ALLOWED_TAGS); ?>
+                $jsst_curdate = date_i18n('Y-m-d');
+                $jsst_enddate = date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime("now -1 month"));
+                $jsst_date_start = !empty(jssupportticket::$jsst_data['filter']['jsst-date-start']) ? jssupportticket::$jsst_data['filter']['jsst-date-start'] : $jsst_curdate;
+                $jsst_date_end = !empty(jssupportticket::$jsst_data['filter']['jsst-date-end']) ? jssupportticket::$jsst_data['filter']['jsst-date-end'] : $jsst_enddate; ?>
+                <?php echo wp_kses("<input type='hidden' name='jsst-id' value='" . esc_attr(jssupportticket::$jsst_data['staff_report']->id) . "'/>", JSST_ALLOWED_TAGS); ?>
                 <div class="js-ticket-fields-wrp">
                     <div class="js-ticket-form-field">
-                        <?php echo wp_kses(JSSTformfield::text('jsst-date-start', date_i18n(jssupportticket::$_config['date_format'], jssupportticketphplib::JSST_strtotime($date_start)), array('class' => 'custom_date js-ticket-field-input','placeholder' => esc_html(__('Start Date','js-support-ticket')))), JSST_ALLOWED_TAGS); ?>
+                        <?php echo wp_kses(JSSTformfield::text('jsst-date-start', date_i18n(jssupportticket::$_config['date_format'], jssupportticketphplib::JSST_strtotime($jsst_date_start)), array('class' => 'custom_date js-ticket-field-input','placeholder' => esc_html(__('Start Date','js-support-ticket')))), JSST_ALLOWED_TAGS); ?>
                     </div>
                     <div class="js-ticket-form-field">
-                        <?php echo wp_kses(JSSTformfield::text('jsst-date-end', date_i18n(jssupportticket::$_config['date_format'], jssupportticketphplib::JSST_strtotime($date_end)), array('class' => 'custom_date js-ticket-field-input','placeholder' => esc_html(__('End Date','js-support-ticket')))), JSST_ALLOWED_TAGS); ?>
+                        <?php echo wp_kses(JSSTformfield::text('jsst-date-end', date_i18n(jssupportticket::$_config['date_format'], jssupportticketphplib::JSST_strtotime($jsst_date_end)), array('class' => 'custom_date js-ticket-field-input','placeholder' => esc_html(__('End Date','js-support-ticket')))), JSST_ALLOWED_TAGS); ?>
                     </div>
                 </div>
                 <div class="js-ticket-search-form-btn-wrp">
@@ -102,79 +102,79 @@ wp_add_inline_script('ticket-google-charts-handle',$jssupportticket_js);
         <?php echo esc_html(__('Agent Report', 'js-support-ticket')); ?>
     </div>
     <?php
-        $agent = jssupportticket::$_data['staff_report'];
-        if(!empty($agent)){ ?>
+        $jsst_agent = jssupportticket::$jsst_data['staff_report'];
+        if(!empty($jsst_agent)){ ?>
             <div class="js-admin-staff-wrapper padding">
                 <div class="js-col-md-4 nopadding js-festaffreport-img">
                     <div class="js-report-staff-image-wrapper">
                         <?php
-                            if($agent->photo){
-                                $maindir = wp_upload_dir();
-                                $path = $maindir['baseurl'];
+                            if($jsst_agent->photo){
+                                $jsst_maindir = wp_upload_dir();
+                                $jsst_path = $jsst_maindir['baseurl'];
 
-                                $imageurl = $path."/".jssupportticket::$_config['data_directory']."/staffdata/staff_".esc_attr($agent->id)."/".esc_attr($agent->photo);
+                                $jsst_imageurl = $jsst_path."/".jssupportticket::$_config['data_directory']."/staffdata/staff_".esc_attr($jsst_agent->id)."/".esc_attr($jsst_agent->photo);
                             }else{
-                                $imageurl = JSST_PLUGIN_URL."includes/images/defaultprofile.png";
+                                $jsst_imageurl = JSST_PLUGIN_URL."includes/images/defaultprofile.png";
                             }
                         ?>
-                        <img alt="image" class="js-report-staff-pic" src="<?php echo esc_url($imageurl); ?>" />
+                        <img alt="<?php echo esc_attr(__('image','js-support-ticket')); ?>" class="js-report-staff-pic" src="<?php echo esc_url($jsst_imageurl); ?>" />
                     </div>
                     <div class="js-report-staff-cnt">
                         <div class="js-report-staff-name">
                             <?php
-                                if($agent->firstname && $agent->lastname){
-                                    $agentname = $agent->firstname . ' ' . $agent->lastname;
+                                if($jsst_agent->firstname && $jsst_agent->lastname){
+                                    $jsst_agentname = $jsst_agent->firstname . ' ' . $jsst_agent->lastname;
                                 }else{
-                                    $agentname = $agent->display_name;
+                                    $jsst_agentname = $jsst_agent->display_name;
                                 }
-                                echo esc_html($agentname);
+                                echo esc_html($jsst_agentname);
                             ?>
                         </div>
                         <div class="js-report-staff-username">
                             <?php
-                                if($agent->display_name){
-                                    $username = $agent->display_name;
+                                if($jsst_agent->display_name){
+                                    $jsst_username = $jsst_agent->display_name;
                                 }else{
-                                    $username = $agent->user_nicename;
+                                    $jsst_username = $jsst_agent->user_nicename;
                                 }
-                                echo esc_html($username);
+                                echo esc_html($jsst_username);
                             ?>
                         </div>
                         <div class="js-report-staff-email">
                             <?php
-                                if($agent->email){
-                                    $email = $agent->email;
+                                if($jsst_agent->email){
+                                    $jsst_email = $jsst_agent->email;
                                 }else{
-                                    $email = $agent->user_email;
+                                    $jsst_email = $jsst_agent->user_email;
                                 }
-                                echo esc_html($email);
+                                echo esc_html($jsst_email);
                             ?>
                         </div>
                     </div>
                 </div>
                 <div class="js-col-md-8 nopadding js-festaffreport-data">
                     <div class="js-col-md-2 js-col-md-offset-1 js-admin-report-box box1">
-                        <span class="js-report-box-number"><?php echo esc_html($agent->openticket); ?></span>
+                        <span class="js-report-box-number"><?php echo esc_html($jsst_agent->openticket); ?></span>
                         <span class="js-report-box-title"><?php echo esc_html(__('New','js-support-ticket')); ?></span>
                         <div class="js-report-box-color"></div>
                     </div>
                     <div class="js-col-md-2 js-admin-report-box box2">
-                        <span class="js-report-box-number"><?php echo esc_html($agent->answeredticket); ?></span>
+                        <span class="js-report-box-number"><?php echo esc_html($jsst_agent->answeredticket); ?></span>
                         <span class="js-report-box-title"><?php echo esc_html(__('Answered','js-support-ticket')); ?></span>
                         <div class="js-report-box-color"></div>
                     </div>
                     <div class="js-col-md-2 js-admin-report-box box3">
-                        <span class="js-report-box-number"><?php echo esc_html($agent->pendingticket); ?></span>
+                        <span class="js-report-box-number"><?php echo esc_html($jsst_agent->pendingticket); ?></span>
                         <span class="js-report-box-title"><?php echo esc_html(__('Pending','js-support-ticket')); ?></span>
                         <div class="js-report-box-color"></div>
                     </div>
                     <div class="js-col-md-2 js-admin-report-box box4">
-                        <span class="js-report-box-number"><?php echo esc_html($agent->overdueticket); ?></span>
+                        <span class="js-report-box-number"><?php echo esc_html($jsst_agent->overdueticket); ?></span>
                         <span class="js-report-box-title"><?php echo esc_html(__('Overdue','js-support-ticket')); ?></span>
                         <div class="js-report-box-color"></div>
                     </div>
                     <div class="js-col-md-2 js-admin-report-box box5">
-                        <span class="js-report-box-number"><?php echo esc_html($agent->closeticket); ?></span>
+                        <span class="js-report-box-number"><?php echo esc_html($jsst_agent->closeticket); ?></span>
                         <span class="js-report-box-title"><?php echo esc_html(__('Closed','js-support-ticket')); ?></span>
                         <div class="js-report-box-color"></div>
                     </div>
@@ -184,7 +184,7 @@ wp_add_inline_script('ticket-google-charts-handle',$jssupportticket_js);
         } ?>
 </div>
 <?php
-    if(!empty(jssupportticket::$_data['staff_tickets'])){ ?>
+    if(!empty(jssupportticket::$jsst_data['staff_tickets'])){ ?>
         <div class="js-ticket-downloads-wrp">
             <div class="js-ticket-downloads-heading-wrp">
                 <?php echo esc_html(__('Agent Tickets', 'js-support-ticket')); ?>
@@ -199,11 +199,11 @@ wp_add_inline_script('ticket-google-charts-handle',$jssupportticket_js);
                     </div>
                     <div class="js-ticket-table-body">
                         <?php
-                            foreach(jssupportticket::$_data['staff_tickets'] AS $ticket){ ?>
+                            foreach(jssupportticket::$jsst_data['staff_tickets'] AS $jsst_ticket){ ?>
                             <div class="js-ticket-data-row">
                                 <div class="js-ticket-table-body-col js-col-md-4 js-col-xs-4">
                                     <span class="js-ticket-display-block"><?php echo esc_html(__('Subject','js-support-ticket')); ?>:</span>
-                                    <span class="js-ticket-title"><a class="js-ticket-title-anchor" target="_blank" href="<?php echo esc_url(jssupportticket::makeUrl(array('jstmod'=>'ticket','jstlay'=>'ticketdetail','jssupportticketid'=>$ticket->id))); ?>"><?php echo esc_html($ticket->subject); ?></a></span>
+                                    <span class="js-ticket-title"><a class="js-ticket-title-anchor" target="_blank" href="<?php echo esc_url(jssupportticket::makeUrl(array('jstmod'=>'ticket','jstlay'=>'ticketdetail','jssupportticketid'=>$jsst_ticket->id))); ?>"><?php echo esc_html($jsst_ticket->subject); ?></a></span>
                                 </div>
                                 <div class="js-ticket-table-body-col js-col-md-3 js-col-xs-3">
                                     <span class="js-ticket-display-block"><?php echo esc_html(__('Status','js-support-ticket')); ?>:</span>
@@ -213,55 +213,55 @@ wp_add_inline_script('ticket-google-charts-handle',$jssupportticket_js);
                                         // 3 -> in progress
                                         // 4 -> waiting for customer reply
                                         // 5 -> close ticket
-                                        /*switch($ticket->status){
+                                        /*switch($jsst_ticket->status){
                                             case 0:
-                                                $status = '<font color="#1EADD8">'. esc_html(__('New','js-support-ticket')).'</font>';
-                                                if($ticket->isoverdue == 1)
-                                                    $status = '<font color="#DB624C">'. esc_html(__('Overdue','js-support-ticket')).'</font>';
+                                                $jsst_status = '<font color="#1EADD8">'. esc_html(__('New','js-support-ticket')).'</font>';
+                                                if($jsst_ticket->isoverdue == 1)
+                                                    $jsst_status = '<font color="#DB624C">'. esc_html(__('Overdue','js-support-ticket')).'</font>';
                                             break;
                                             case 1:
-                                                $status = '<font color="#D98E11">'. esc_html(__('Pending','js-support-ticket')).'</font>';
-                                                if($ticket->isoverdue == 1)
-                                                    $status = '<font color="#DB624C">'. esc_html(__('Overdue','js-support-ticket')).'</font>';
+                                                $jsst_status = '<font color="#D98E11">'. esc_html(__('Pending','js-support-ticket')).'</font>';
+                                                if($jsst_ticket->isoverdue == 1)
+                                                    $jsst_status = '<font color="#DB624C">'. esc_html(__('Overdue','js-support-ticket')).'</font>';
                                             break;
                                             case 2:
-                                                $status = '<font color="#D98E11">'. esc_html(__('In Progress','js-support-ticket')).'</font>';
-                                                if($ticket->isoverdue == 1)
-                                                    $status = '<font color="#DB624C">'. esc_html(__('Overdue','js-support-ticket')).'</font>';
+                                                $jsst_status = '<font color="#D98E11">'. esc_html(__('In Progress','js-support-ticket')).'</font>';
+                                                if($jsst_ticket->isoverdue == 1)
+                                                    $jsst_status = '<font color="#DB624C">'. esc_html(__('Overdue','js-support-ticket')).'</font>';
                                             break;
                                             case 3:
-                                                $status = '<font color="#179650">'. esc_html(__('Answered','js-support-ticket')).'</font>';
-                                                if($ticket->isoverdue == 1)
-                                                    $status = '<font color="#DB624C">'. esc_html(__('Overdue','js-support-ticket')).'</font>';
+                                                $jsst_status = '<font color="#179650">'. esc_html(__('Answered','js-support-ticket')).'</font>';
+                                                if($jsst_ticket->isoverdue == 1)
+                                                    $jsst_status = '<font color="#DB624C">'. esc_html(__('Overdue','js-support-ticket')).'</font>';
                                             break;
                                             case 4:
-                                                $status = '<font color="#5F3BBB">'. esc_html(__('Closed','js-support-ticket')).'</font>';
+                                                $jsst_status = '<font color="#5F3BBB">'. esc_html(__('Closed','js-support-ticket')).'</font>';
                                             break;
                                             case 5:
-                                                $status = '<font color="#5F3BBB">'. esc_html(__('Merged','js-support-ticket')).'</font>';
+                                                $jsst_status = '<font color="#5F3BBB">'. esc_html(__('Merged','js-support-ticket')).'</font>';
                                             break;
                                         }*/
-                                        if (!in_array($ticket->status, [5, 6]) && $ticket->isoverdue == 1) {
-                                            $status = __('Overdue','js-support-ticket');
-                                            $color = '#FFFFFF';
-                                            $bgcolor = '#DB624C';
+                                        if (!in_array($jsst_ticket->status, [5, 6]) && $jsst_ticket->isoverdue == 1) {
+                                            $jsst_status = __('Overdue','js-support-ticket');
+                                            $jsst_color1 = '#FFFFFF';
+                                            $jsst_bgcolor = '#DB624C';
                                         } else {
-                                            $status = $ticket->statustitle;
-                                            $color = $ticket->statuscolour;
-                                            $bgcolor = $ticket->statusbgcolour;
+                                            $jsst_status = $jsst_ticket->statustitle;
+                                            $jsst_color1 = $jsst_ticket->statuscolour;
+                                            $jsst_bgcolor = $jsst_ticket->statusbgcolour;
                                         }
                                     ?>
-                                    <span class="js-ticket-priority" style="background:<?php echo esc_attr($bgcolor); ?>;color:<?php echo esc_attr($color); ?>">
-                                        <?php echo esc_html($status); ?>
+                                    <span class="js-ticket-priority" style="background:<?php echo esc_attr($jsst_bgcolor); ?>;color:<?php echo esc_attr($jsst_color1); ?>">
+                                        <?php echo esc_html($jsst_status); ?>
                                     </span>
                                 </div>
                                 <div class="js-ticket-table-body-col js-col-md-3 js-col-xs-3">
                                     <span class="js-ticket-display-block"><?php echo esc_html(__('Priority','js-support-ticket')); ?>:</span>
-                                    <span class="js-ticket-priority" style="background-color:<?php echo esc_attr($ticket->prioritycolour); ?>;"><?php echo esc_html(jssupportticket::JSST_getVarValue($ticket->priority)); ?></span>
+                                    <span class="js-ticket-priority" style="background-color:<?php echo esc_attr($jsst_ticket->prioritycolour); ?>;"><?php echo esc_html(jssupportticket::JSST_getVarValue($jsst_ticket->priority)); ?></span>
                                 </div>
                                 <div class="js-ticket-table-body-col js-col-md-2 js-col-xs-2">
                                     <span class="js-ticket-display-block"><?php echo esc_html(__('Created','js-support-ticket')); ?>:</span>
-                                    <?php echo esc_html(date_i18n(jssupportticket::$_config['date_format'], jssupportticketphplib::JSST_strtotime($ticket->created))); ?>
+                                    <?php echo esc_html(date_i18n(jssupportticket::$_config['date_format'], jssupportticketphplib::JSST_strtotime($jsst_ticket->created))); ?>
                                 </div>
                             </div>
                         <?php } ?>
@@ -270,8 +270,8 @@ wp_add_inline_script('ticket-google-charts-handle',$jssupportticket_js);
             </div>
         </div>
         <?php
-        if (jssupportticket::$_data[1]) {
-            echo '<div class="tablenav"><div class="tablenav-pages">' . wp_kses_post(jssupportticket::$_data[1]) . '</div></div>';
+        if (jssupportticket::$jsst_data[1]) {
+            echo '<div class="tablenav"><div class="tablenav-pages">' . wp_kses_post(jssupportticket::$jsst_data[1]) . '</div></div>';
         }
     } else {
         JSSTlayout::getNoRecordFound();
@@ -286,9 +286,9 @@ wp_add_inline_script('ticket-google-charts-handle',$jssupportticket_js);
                 JSSTlayout::getNotStaffMember();
             }
         } else {
-            $redirect_url = jssupportticket::makeUrl(array('jstmod'=>'reports','jstlay'=>'staffreports'));
-            $redirect_url = jssupportticketphplib::JSST_safe_encoding($redirect_url);
-            JSSTlayout::getUserGuest($redirect_url);
+            $jsst_redirect_url = jssupportticket::makeUrl(array('jstmod'=>'reports','jstlay'=>'staffreports'));
+            $jsst_redirect_url = jssupportticketphplib::JSST_safe_encoding($jsst_redirect_url);
+            JSSTlayout::getUserGuest($jsst_redirect_url);
         }
     } else { // User permission not granted
         JSSTlayout::getPermissionNotGranted();

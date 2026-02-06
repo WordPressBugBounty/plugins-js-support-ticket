@@ -10,49 +10,49 @@ class JSSTdepartmentController {
     }
 
     function handleRequest() {
-        $layout = JSSTrequest::getLayout('jstlay', null, 'departments');
-        jssupportticket::$_data['sanitized_args']['jsst_nonce'] = esc_html(wp_create_nonce('jsst_nonce'));
-        if (self::canaddfile($layout)) {
-            switch ($layout) {
+        $jsst_layout = JSSTrequest::getLayout('jstlay', null, 'departments');
+        jssupportticket::$jsst_data['sanitized_args']['jsst_nonce'] = esc_html(wp_create_nonce('jsst_nonce'));
+        if (self::canaddfile($jsst_layout)) {
+            switch ($jsst_layout) {
                 case 'admin_departments':
                 case 'departments':
-                    jssupportticket::$_data['permission_granted'] = true;
+                    jssupportticket::$jsst_data['permission_granted'] = true;
                     if ( in_array('agent',jssupportticket::$_active_addons) && JSSTincluder::getJSModel('agent')->isUserStaff()) {
-                        jssupportticket::$_data['permission_granted'] = JSSTincluder::getJSModel('userpermissions')->checkPermissionGrantedForTask('View Department');
+                        jssupportticket::$jsst_data['permission_granted'] = JSSTincluder::getJSModel('userpermissions')->checkPermissionGrantedForTask('View Department');
                     }
-                    if (jssupportticket::$_data['permission_granted']) {
+                    if (jssupportticket::$jsst_data['permission_granted']) {
                         JSSTincluder::getJSModel('department')->getDepartments();
                     }
                     break;
                 case 'admin_adddepartment':
                 case 'adddepartment':
-                    $id = JSSTrequest::getVar('jssupportticketid');
-                    jssupportticket::$_data['permission_granted'] = true;
+                    $jsst_id = JSSTrequest::getVar('jssupportticketid');
+                    jssupportticket::$jsst_data['permission_granted'] = true;
                     if ( in_array('agent',jssupportticket::$_active_addons) && JSSTincluder::getJSModel('agent')->isUserStaff()) {
-                        $per_task = ($id == null) ? 'Add Department' : 'Edit Department';
-                        jssupportticket::$_data['permission_granted'] = JSSTincluder::getJSModel('userpermissions')->checkPermissionGrantedForTask($per_task);
+                        $jsst_per_task = ($jsst_id == null) ? 'Add Department' : 'Edit Department';
+                        jssupportticket::$jsst_data['permission_granted'] = JSSTincluder::getJSModel('userpermissions')->checkPermissionGrantedForTask($jsst_per_task);
                     }
-                    if (jssupportticket::$_data['permission_granted'])
-                        JSSTincluder::getJSModel('department')->getDepartmentForForm($id);
+                    if (jssupportticket::$jsst_data['permission_granted'])
+                        JSSTincluder::getJSModel('department')->getDepartmentForForm($jsst_id);
                     break;
                 default:
                     exit;
             }
-            $module = (is_admin()) ? 'page' : 'jstmod';
-            $module = JSSTrequest::getVar($module, null, 'department');
-            JSSTincluder::include_file($layout, $module);
+            $jsst_module = (is_admin()) ? 'page' : 'jstmod';
+            $jsst_module = JSSTrequest::getVar($jsst_module, null, 'department');
+            JSSTincluder::include_file($jsst_layout, $jsst_module);
         }
     }
 
-    function canaddfile($layout) {
-        $nonce_value = JSSTrequest::getVar('jsst_nonce');
-        if ( wp_verify_nonce( $nonce_value, 'jsst_nonce') ) {
+    function canaddfile($jsst_layout) {
+        $jsst_nonce_value = JSSTrequest::getVar('jsst_nonce');
+        if ( wp_verify_nonce( $jsst_nonce_value, 'jsst_nonce') ) {
             if (isset($_POST['form_request']) && $_POST['form_request'] == 'jssupportticket') {
                 return false;
             } elseif (isset($_GET['action']) && $_GET['action'] == 'jstask') {
                 return false;
             } else {
-                if(!is_admin() && jssupportticketphplib::JSST_strpos($layout, 'admin_') === 0){
+                if(!is_admin() && jssupportticketphplib::JSST_strpos($jsst_layout, 'admin_') === 0){
                     return false;
                 }
                 return true;
@@ -61,85 +61,85 @@ class JSSTdepartmentController {
     }
 
     static function savedepartment() {
-        $id = JSSTrequest::getVar('id');
-        $nonce = JSSTrequest::getVar('_wpnonce');
-        if (! wp_verify_nonce( $nonce, 'save-department-'.$id) ) {
+        $jsst_id = JSSTrequest::getVar('id');
+        $jsst_nonce = JSSTrequest::getVar('_wpnonce');
+        if (! wp_verify_nonce( $jsst_nonce, 'save-department-'.$jsst_id) ) {
             die( 'Security check Failed' );
         }
-        $data = JSSTrequest::get('post');
-        JSSTincluder::getJSModel('department')->storeDepartment($data);
+        $jsst_data = JSSTrequest::get('post');
+        JSSTincluder::getJSModel('department')->storeDepartment($jsst_data);
         if (is_admin()) {
-            $url = admin_url("admin.php?page=department&jstlay=departments");
+            $jsst_url = admin_url("admin.php?page=department&jstlay=departments");
         } else {
-            $url = jssupportticket::makeUrl(array('jstmod'=>'department', 'jstlay'=>'departments'));
+            $jsst_url = jssupportticket::makeUrl(array('jstmod'=>'department', 'jstlay'=>'departments'));
         }
-        wp_redirect($url);
+        wp_safe_redirect($jsst_url);
         exit;
     }
 
     static function deletedepartment() {
-        $id = JSSTrequest::getVar('departmentid');
-        $nonce = JSSTrequest::getVar('_wpnonce');
-        if (! wp_verify_nonce( $nonce, 'delete-department-'.$id) ) {
+        $jsst_id = JSSTrequest::getVar('departmentid');
+        $jsst_nonce = JSSTrequest::getVar('_wpnonce');
+        if (! wp_verify_nonce( $jsst_nonce, 'delete-department-'.$jsst_id) ) {
             die( 'Security check Failed' );
         }
-        JSSTincluder::getJSModel('department')->removeDepartment($id);
+        JSSTincluder::getJSModel('department')->removeDepartment($jsst_id);
         if (is_admin()) {
-            $url = admin_url("admin.php?page=department&jstlay=departments");
+            $jsst_url = admin_url("admin.php?page=department&jstlay=departments");
         } else {
-            $url = jssupportticket::makeUrl(array('jstmod'=>'department', 'jstlay'=>'departments'));
+            $jsst_url = jssupportticket::makeUrl(array('jstmod'=>'department', 'jstlay'=>'departments'));
         }
-        wp_redirect($url);
+        wp_safe_redirect($jsst_url);
         exit;
     }
 
     static function changestatus() {
-        $id = JSSTrequest::getVar('departmentid');
-        $nonce = JSSTrequest::getVar('_wpnonce');
-        if (! wp_verify_nonce( $nonce, 'change-status-'.$id) ) {
+        $jsst_id = JSSTrequest::getVar('departmentid');
+        $jsst_nonce = JSSTrequest::getVar('_wpnonce');
+        if (! wp_verify_nonce( $jsst_nonce, 'change-status-'.$jsst_id) ) {
             die( 'Security check Failed' );
         }
-        JSSTincluder::getJSModel('department')->changeStatus($id);
-        $url = admin_url("admin.php?page=department&jstlay=departments");
-        $pagenum = JSSTrequest::getVar('pagenum');
-        if ($pagenum)
-            $url .= '&pagenum=' . $pagenum;
-        wp_redirect($url);
+        JSSTincluder::getJSModel('department')->changeStatus($jsst_id);
+        $jsst_url = admin_url("admin.php?page=department&jstlay=departments");
+        $jsst_pagenum = JSSTrequest::getVar('pagenum');
+        if ($jsst_pagenum)
+            $jsst_url .= '&pagenum=' . $jsst_pagenum;
+        wp_safe_redirect($jsst_url);
         exit;
     }
 
     static function changedefault() {
-        $id = JSSTrequest::getVar('departmentid');
-        $nonce = JSSTrequest::getVar('_wpnonce');
-        if (! wp_verify_nonce( $nonce, 'change-default-'.$id) ) {
+        $jsst_id = JSSTrequest::getVar('departmentid');
+        $jsst_nonce = JSSTrequest::getVar('_wpnonce');
+        if (! wp_verify_nonce( $jsst_nonce, 'change-default-'.$jsst_id) ) {
             die( 'Security check Failed' );
         }
-        $default = JSSTrequest::getVar('default',null,0);
-        JSSTincluder::getJSModel('department')->changeDefault($id,$default);
-        $url = admin_url("admin.php?page=department&jstlay=departments");
-        $pagenum = JSSTrequest::getVar('pagenum');
-        if ($pagenum)
-            $url .= '&pagenum=' . $pagenum;
-        wp_redirect($url);
+        $jsst_default = JSSTrequest::getVar('default',null,0);
+        JSSTincluder::getJSModel('department')->changeDefault($jsst_id,$jsst_default);
+        $jsst_url = admin_url("admin.php?page=department&jstlay=departments");
+        $jsst_pagenum = JSSTrequest::getVar('pagenum');
+        if ($jsst_pagenum)
+            $jsst_url .= '&pagenum=' . $jsst_pagenum;
+        wp_safe_redirect($jsst_url);
         exit;
     }
 
     static function ordering() {
-        $nonce = JSSTrequest::getVar('_wpnonce');
-        if (! wp_verify_nonce( $nonce, 'ordering') ) {
+        $jsst_nonce = JSSTrequest::getVar('_wpnonce');
+        if (! wp_verify_nonce( $jsst_nonce, 'ordering') ) {
             die( 'Security check Failed' );
         }
-        $id = JSSTrequest::getVar('departmentid');
-        JSSTincluder::getJSModel('department')->setOrdering($id);
-        $pagenum = JSSTrequest::getVar('pagenum');
-        $url = "admin.php?page=department&jstlay=departments";
-        if ($pagenum)
-            $url .= '&pagenum=' . $pagenum;
-        wp_redirect($url);
+        $jsst_id = JSSTrequest::getVar('departmentid');
+        JSSTincluder::getJSModel('department')->setOrdering($jsst_id);
+        $jsst_pagenum = JSSTrequest::getVar('pagenum');
+        $jsst_url = "admin.php?page=department&jstlay=departments";
+        if ($jsst_pagenum)
+            $jsst_url .= '&pagenum=' . $jsst_pagenum;
+        wp_safe_redirect($jsst_url);
         exit;
     }
 
 }
 
-$departmentController = new JSSTdepartmentController();
+$jsst_departmentController = new JSSTdepartmentController();
 ?>

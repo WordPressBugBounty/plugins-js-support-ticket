@@ -7,7 +7,7 @@ if (!defined('ABSPATH')) die('Restricted Access'); ?>
                 <span class="jsst_heading"><?php echo esc_html(__('JS Support Ticket Settings','js-support-ticket')); ?></span>
                 <div class="close-button-bottom">
                     <a href="?page=jssupportticket" class="close-button">
-                        <img alt="image" src="<?php echo esc_url(JSST_PLUGIN_URL).'includes/images/postinstallation/close-icon.png';?>" />
+                        <img alt="<?php echo esc_attr(__('image','js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL).'includes/images/postinstallation/close-icon.png';?>" />
                     </a>
                 </div>
             </div>

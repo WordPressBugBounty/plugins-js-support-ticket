@@ -8765,3 +8765,45 @@ msgstr "Сохранить и следующий"
 
 msgid "For enhanced security change encryption method in %1$s on line %2$s"
 msgstr "Для улучшенного метода шифрования изменений в %1 $ s на линии %2 $ s"
+
+msgid "Changes may require cache clearing to take effect."
+msgstr "Для вступления изменений в силу может потребоваться очистка кэша."
+
+msgid "How Long Will My Support Stay Active?"
+msgstr "Как долго моя поддержка будет оставаться активной?"
+
+msgid "I Can’t Log Into My Account"
+msgstr "Я не могу войти в свою учетную запись"
+
+msgid "I Want to Upgrade My Plan — How Can I Do It?"
+msgstr "Я хочу обновить свой план — как мне это сделать?"
+
+msgid "I’m Not Getting Access to My Subscription"
+msgstr "Я не получаю доступ к своей подписке"
+
+msgid "Ticket ID Or Email Address Or Subject"
+msgstr "Идентификатор билета, адрес электронной почты или тема"
+
+msgid "Sophie Martinez"
+msgstr "Софи Мартинес"
+
+msgid "Daniel Brooks"
+msgstr "Дэниел Брукс"
+
+msgid "Liam Turner"
+msgstr "Лиам Тернер"
+
+msgid "Emily Harper"
+msgstr "Эмили Харпер"
+
+msgid "Noah Bennett"
+msgstr "Ной Беннетт"
+
+msgid "Olivia Chase"
+msgstr "Оливия Чейз"
+
+msgid "Maya Collins"
+msgstr "Майя Коллинз"
+
+msgid "Ethan Reynolds"
+msgstr "Итан Рейнольдс"

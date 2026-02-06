@@ -5,21 +5,21 @@ if (!defined('ABSPATH'))
 JSSTincluder::getJSModel('jssupportticket')->checkIfMainCssFileIsEnqued();
 JSSTincluder::getJSModel('jssupportticket')->jsst_get_theme_colors();
 
-$color1 = jssupportticket::$_colors['color1'];
-$color2 = jssupportticket::$_colors['color2'];
-$color3 = jssupportticket::$_colors['color3'];
-$color4 = jssupportticket::$_colors['color4'];
-$color5 = jssupportticket::$_colors['color5'];
-$color6 = jssupportticket::$_colors['color6'];
-$color7 = jssupportticket::$_colors['color7'];
-$color8 = jssupportticket::$_colors['color8'];
-$color9 = jssupportticket::$_colors['color9'];
+$jsst_color1 = jssupportticket::$jsst_colors['color1'];
+$jsst_color2 = jssupportticket::$jsst_colors['color2'];
+$jsst_color3 = jssupportticket::$jsst_colors['color3'];
+$jsst_color4 = jssupportticket::$jsst_colors['color4'];
+$jsst_color5 = jssupportticket::$jsst_colors['color5'];
+$jsst_color6 = jssupportticket::$jsst_colors['color6'];
+$jsst_color7 = jssupportticket::$jsst_colors['color7'];
+$jsst_color8 = jssupportticket::$jsst_colors['color8'];
+$jsst_color9 = jssupportticket::$jsst_colors['color9'];
 
 
-$jssupportticket_css = '';
+$jsst_jssupportticket_css = '';
 
 /*Code for Css*/
-$jssupportticket_css .= '
+$jsst_jssupportticket_css .= '
 
     /* Main Wrappers */
     div.js-ticket-mail-wrapper,
@@ -54,7 +54,7 @@ $jssupportticket_css .= '
         text-decoration: none;
         outline: 0;
         border-radius: 8px;
-        border: 1px solid '. $color5 .';
+        border: 1px solid '. $jsst_color5 .';
         transition: background-color 0.2s ease, border-color 0.2s ease;
         font-weight: 600;
     }
@@ -76,7 +76,7 @@ $jssupportticket_css .= '
     div.js-ticket-detail-box {
         display: flex;
         width: 100%;
-        border: 1px solid '. $color5 .';
+        border: 1px solid '. $jsst_color5 .';
         border-radius: 12px;
         box-shadow: 0 4px 6px rgba(0,0,0,0.04);
         background: #fff;
@@ -89,7 +89,7 @@ $jssupportticket_css .= '
         flex: 0 0 200px; /* Fixed width for the user info panel */
         padding: 1.5rem;
         text-align: center;
-        border-right: 1px solid ' . $color5 . ';
+        border-right: 1px solid ' . $jsst_color5 . ';
     }
 
     div.js-ticket-detail-left div.js-ticket-user-img-wrp {
@@ -158,7 +158,7 @@ $jssupportticket_css .= '
         border-radius: 8px;
         height: auto;
         line-height: 1.5;
-        border: 1px solid '. $color5 .';
+        border: 1px solid '. $jsst_color5 .';
         cursor: pointer;
         transition: opacity 0.2s ease, background-color 0.2s ease;
         text-decoration: none;
@@ -171,7 +171,7 @@ $jssupportticket_css .= '
         width: 100%;
         padding: 12px 18px;
         min-height:52px;
-        border: 1px solid '. $color5 .';
+        border: 1px solid '. $jsst_color5 .';
         border-radius: 8px;
         line-height: 1.5;
         box-sizing: border-box;
@@ -187,59 +187,59 @@ $jssupportticket_css .= '
 
 ';
 /*Code For Colors*/
-$jssupportticket_css .= '
+$jsst_jssupportticket_css .= '
     div.js-ticket-mails-btn-wrp div.js-ticket-mail-btn a.js-add-link {
         background-color: #f5f2f5;
-        border: 1px solid ' . $color5 . ';
-        color: ' . $color2 . ';
+        border: 1px solid ' . $jsst_color5 . ';
+        color: ' . $jsst_color2 . ';
     }
     div.js-ticket-mails-btn-wrp div.js-ticket-mail-btn a.js-add-link:hover,
     div.js-ticket-mails-btn-wrp div.js-ticket-mail-btn a.js-add-link.active {
-        background-color: ' . $color1 . ';
-        border-color: ' . $color1 . ';
-        color: ' . $color7 . ';
+        background-color: ' . $jsst_color1 . ';
+        border-color: ' . $jsst_color1 . ';
+        color: ' . $jsst_color7 . ';
     }
     div.js-ticket-post-reply-wrapper div.js-ticket-thread-heading {
-        background-color: ' . $color2 . ';
-        color: ' . $color7 . ';
+        background-color: ' . $jsst_color2 . ';
+        color: ' . $jsst_color7 . ';
     }
     div.js-ticket-detail-box {
-        border-color: ' . $color5 . ';
+        border-color: ' . $jsst_color5 . ';
     }
     div.js-ticket-detail-box div.js-ticket-detail-left {
-        border-color: ' . $color5 . ';
+        border-color: ' . $jsst_color5 . ';
     }
     div.js-ticket-detail-left div.js-ticket-user-name-wrp,
     div.js-ticket-detail-left div.js-ticket-user-email-wrp,
     div.js-ticket-detail-right div.js-ticket-row div.js-ticket-field-value {
-        color: ' . $color4 . ';
+        color: ' . $jsst_color4 . ';
     }
     div.js-ticket-detail-right div.js-ticket-row div.js-ticket-field-title {
-        color: ' . $color1 . ';
+        color: ' . $jsst_color1 . ';
     }
     div.js-ticket-form-btn-wrp input.js-ticket-save-button {
-        background: ' . $color1 . ' !important;
-        color: ' . $color7 . ' !important;
-        border-color: ' . $color1 . ';
+        background: ' . $jsst_color1 . ' !important;
+        color: ' . $jsst_color7 . ' !important;
+        border-color: ' . $jsst_color1 . ';
     }
     div.js-ticket-form-btn-wrp input.js-ticket-save-button:hover {
-        background: ' . $color2 . ' !important;
-        border-color: ' . $color2 . ';
+        background: ' . $jsst_color2 . ' !important;
+        border-color: ' . $jsst_color2 . ';
     }
     div.js-ticket-form-btn-wrp a.js-ticket-cancel-button {
         background-color: #f5f2f5;
         color: #636363;
-        border: 1px solid '. $color5 .';
+        border: 1px solid '. $jsst_color5 .';
     }
     div.js-ticket-form-btn-wrp a.js-ticket-cancel-button:hover {
-        background: ' . $color2 . ' !important;
-        border-color: ' . $color2 . ';
-        color:' . $color7 . ';
+        background: ' . $jsst_color2 . ' !important;
+        border-color: ' . $jsst_color2 . ';
+        color:' . $jsst_color7 . ';
     }
 ';
 
 
-wp_add_inline_style('jssupportticket-main-css', $jssupportticket_css);
+wp_add_inline_style('jssupportticket-main-css', $jsst_jssupportticket_css);
 
 
 ?>

@@ -2,8 +2,8 @@
 if(!defined('ABSPATH'))
     die('Restricted Access');
 wp_enqueue_script('jquery-ui-datepicker');
-wp_enqueue_style('jquery-ui-css', JSST_PLUGIN_URL . 'includes/css/jquery-ui-smoothness.css');
-$jssupportticket_js ="
+wp_enqueue_style('jquery-ui-css', JSST_PLUGIN_URL . 'includes/css/jquery-ui-smoothness.css', array(), jssupportticket::$_config['productversion']);
+$jsst_jssupportticket_js ="
     var nextorid = 1;
     var nextandid = 1;
     ajaxurl = '".esc_url(admin_url('admin-ajax.php'))."';
@@ -225,7 +225,7 @@ $jssupportticket_js ="
         disableDefaultValueFieldDueToValues();
     }
 ";
-wp_add_inline_script('js-support-ticket-main-js',$jssupportticket_js);
+wp_add_inline_script('js-support-ticket-main-js',$jsst_jssupportticket_js);
 ?>
 <div id="jsstadmin-wrapper">
     <div id="jsstadmin-leftmenu">
@@ -236,9 +236,9 @@ wp_add_inline_script('js-support-ticket-main-js',$jssupportticket_js);
             <div id="jsstadmin-wrapper-top-left">
                 <div id="jsstadmin-breadcrunbs">
                     <ul>
-                        <li><a href="?page=jssupportticket" title="<?php echo esc_html(__('Dashboard','js-support-ticket')); ?>"><?php echo esc_html(__('Dashboard','js-support-ticket')); ?></a></li>
+                        <li><a href="?page=jssupportticket" title="<?php echo esc_attr(__('Dashboard','js-support-ticket')); ?>"><?php echo esc_html(__('Dashboard','js-support-ticket')); ?></a></li>
                         <?php if(in_array('multiform', jssupportticket::$_active_addons)){ ?>
-                            <li><a href="?page=multiform" title="<?php echo esc_html(__('Multiform','js-support-ticket')); ?>"><?php echo esc_html(__('Multiform','js-support-ticket')); ?></a></li>
+                            <li><a href="?page=multiform" title="<?php echo esc_attr(__('Multiform','js-support-ticket')); ?>"><?php echo esc_html(__('Multiform','js-support-ticket')); ?></a></li>
                         <?php } ?>
                         <li><?php echo esc_html(__('Add Field','js-support-ticket')); ?></li>
                     </ul>
@@ -246,13 +246,13 @@ wp_add_inline_script('js-support-ticket-main-js',$jssupportticket_js);
             </div>
             <div id="jsstadmin-wrapper-top-right">
                 <div id="jsstadmin-config-btn">
-                    <a title="<?php echo esc_html(__('Configuration','js-support-ticket')); ?>" href="<?php echo esc_url(admin_url("admin.php?page=configuration")); ?>">
-                        <img alt="<?php echo esc_html(__('Configuration','js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/config.png" />
+                    <a title="<?php echo esc_attr(__('Configuration','js-support-ticket')); ?>" href="<?php echo esc_url(admin_url("admin.php?page=configuration")); ?>">
+                        <img alt = "<?php echo esc_attr(__('Configuration','js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/config.png" />
                     </a>
                 </div>
                 <div id="jsstadmin-config-btn" class="jssticketadmin-help-btn">
-                    <a href="<?php echo esc_url(admin_url("admin.php?page=jssupportticket&jstlay=help")); ?>" title="<?php echo esc_html(__('Help','js-support-ticket')); ?>">
-                        <img alt="<?php echo esc_html(__('Help','js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/help.png" />
+                    <a href="<?php echo esc_url(admin_url("admin.php?page=jssupportticket&jstlay=help")); ?>" title="<?php echo esc_attr(__('Help','js-support-ticket')); ?>">
+                        <img alt = "<?php echo esc_attr(__('Help','js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/help.png" />
                     </a>
                 </div>
                 <div id="jsstadmin-vers-txt">
@@ -264,28 +264,28 @@ wp_add_inline_script('js-support-ticket-main-js',$jssupportticket_js);
         <div id="jsstadmin-head">
             <h1 class="jsstadmin-head-text">
                 <?php
-                    $heading = isset(jssupportticket::$_data[0]['fieldvalues']) ? esc_html(__('Edit', 'js-support-ticket')) : esc_html(__('Add', 'js-support-ticket'));
-                    echo esc_html($heading) . '&nbsp' . esc_html(__('Field', 'js-support-ticket'));
+                    $jsst_heading = isset(jssupportticket::$jsst_data[0]['fieldvalues']) ? esc_html(__('Edit', 'js-support-ticket')) : esc_html(__('Add', 'js-support-ticket'));
+                    echo esc_html($jsst_heading) . '&nbsp' . esc_html(__('Field', 'js-support-ticket'));
                 ?>
-                <?php if(isset(jssupportticket::$_data['multiFormTitle'])){ ?>
+                <?php if(isset(jssupportticket::$jsst_data['multiFormTitle'])){ ?>
                     <span class="jsstadmin-head-sub-text">
-                        <?php echo ' ('.esc_html(jssupportticket::$_data["multiFormTitle"]).')'; ?>
+                        <?php echo ' ('.esc_html(jssupportticket::$jsst_data["multiFormTitle"]).')'; ?>
                     </span>
                 <?php }?>
             </h1>
         </div>
         <?php
-        $yesno = array(
+        $jsst_yesno = array(
             (object) array('id' => 1, 'text' => esc_html(__('Yes', 'js-support-ticket'))),
             (object) array('id' => 0, 'text' => esc_html(__('No', 'js-support-ticket'))));
-        $equalnotequal = array(
+        $jsst_equalnotequal = array(
             (object) array('id' => 1, 'text' => esc_html(__('Equal', 'js-support-ticket'))),
             (object) array('id' => 0, 'text' => esc_html(__('Not Equal', 'js-support-ticket'))));
-        $visibleLogics = array(
+        $jsst_visibleLogics = array(
             (object) array('id' => 'AND', 'text' => esc_html(__('AND', 'js-support-ticket'))),
             (object) array('id' => 'OR', 'text' => esc_html(__('OR', 'js-support-ticket'))));
-        if(isset(jssupportticket::$_data[0]['userfield']->userfieldtype) && jssupportticket::$_data[0]['userfield']->userfieldtype != 'depandant_field'){
-            $fieldtypes = array(
+        if(isset(jssupportticket::$jsst_data[0]['userfield']->userfieldtype) && jssupportticket::$jsst_data[0]['userfield']->userfieldtype != 'depandant_field'){
+            $jsst_fieldtypes = array(
                 (object) array('id' => 'text', 'text' => esc_html(__('Text Field', 'js-support-ticket'))),
                 (object) array('id' => 'checkbox', 'text' => esc_html(__('Check Box', 'js-support-ticket'))),
                 (object) array('id' => 'date', 'text' => esc_html(__('Date', 'js-support-ticket'))),
@@ -297,7 +297,7 @@ wp_add_inline_script('js-support-ticket-main-js',$jssupportticket_js);
                 (object) array('id' => 'multiple', 'text' => esc_html(__('Multi Select', 'js-support-ticket'))),
                 (object) array('id' => 'termsandconditions', 'text' => esc_html(__('Terms and Conditions', 'js-support-ticket'))));
         }else{
-            $fieldtypes = array(
+            $jsst_fieldtypes = array(
                 (object) array('id' => 'text', 'text' => esc_html(__('Text Field', 'js-support-ticket'))),
                 (object) array('id' => 'checkbox', 'text' => esc_html(__('Check Box', 'js-support-ticket'))),
                 (object) array('id' => 'date', 'text' => esc_html(__('Date', 'js-support-ticket'))),
@@ -310,31 +310,31 @@ wp_add_inline_script('js-support-ticket-main-js',$jssupportticket_js);
                 (object) array('id' => 'multiple', 'text' => esc_html(__('Multi Select', 'js-support-ticket'))),
                 (object) array('id' => 'termsandconditions', 'text' => esc_html(__('Terms and Conditions', 'js-support-ticket'))));
         }
-        $fieldsize = array(
+        $jsst_fieldsize = array(
              (object) array('id' => 50, 'text' => esc_html(__('50%', 'js-support-ticket'))),
             (object) array('id' => 100, 'text' => esc_html(__('100%', 'js-support-ticket'))));
         ?>
-        <?php $nonce_id = isset(jssupportticket::$_data[0]['userfield']->id) ? jssupportticket::$_data[0]['userfield']->id : '';?>
+        <?php $jsst_nonce_id = isset(jssupportticket::$jsst_data[0]['userfield']->id) ? jssupportticket::$jsst_data[0]['userfield']->id : '';?>
         <div id="jsstadmin-data-wrp">
-            <?php if(isset(jssupportticket::$_data['formid'])){ $mformid = jssupportticket::$_data['formid']; }else{ $mformid = JSSTincluder::getJSModel('ticket')->getDefaultMultiFormId(); } ?>
-            <form class="jsstadmin-form" id="adminForm" method="post" action="<?php echo esc_url(wp_nonce_url(admin_url("admin.php?page=fieldordering&task=saveuserfeild&formid=$mformid"),"save-userfeild-".$nonce_id)); ?>">
-                <?php if (empty(jssupportticket::$_data[0]['userfield']->id) || (!empty(jssupportticket::$_data[0]['userfield']->id) && !empty(jssupportticket::$_data[0]['userfield']->isuserfield))) { ?>
+            <?php if(isset(jssupportticket::$jsst_data['formid'])){ $jsst_mformid = jssupportticket::$jsst_data['formid']; }else{ $jsst_mformid = JSSTincluder::getJSModel('ticket')->getDefaultMultiFormId(); } ?>
+            <form class="jsstadmin-form" id="adminForm" method="post" action="<?php echo esc_url(wp_nonce_url(admin_url("admin.php?page=fieldordering&task=saveuserfeild&formid=$jsst_mformid"),"save-userfeild-".$jsst_nonce_id)); ?>">
+                <?php if (empty(jssupportticket::$jsst_data[0]['userfield']->id) || (!empty(jssupportticket::$jsst_data[0]['userfield']->id) && !empty(jssupportticket::$jsst_data[0]['userfield']->isuserfield))) { ?>
                     <div class="js-form-wrapper">
                         <div class="js-form-title"><?php echo esc_html(__('Field Type', 'js-support-ticket')); ?><font class="required-notifier">*</font></div>
-                        <div class="js-form-value"><?php echo wp_kses(JSSTformfield::select('userfieldtype', $fieldtypes, isset(jssupportticket::$_data[0]['userfield']->userfieldtype) ? jssupportticket::$_data[0]['userfield']->userfieldtype : 'text', '', array('class' => 'inputbox one js-form-select-field', 'data-validation' => 'required', 'onchange' => 'toggleType(this.options[this.selectedIndex].value);')), JSST_ALLOWED_TAGS); ?></div>
+                        <div class="js-form-value"><?php echo wp_kses(JSSTformfield::select('userfieldtype', $jsst_fieldtypes, isset(jssupportticket::$jsst_data[0]['userfield']->userfieldtype) ? jssupportticket::$jsst_data[0]['userfield']->userfieldtype : 'text', '', array('class' => 'inputbox one js-form-select-field', 'data-validation' => 'required', 'onchange' => 'toggleType(this.options[this.selectedIndex].value);')), JSST_ALLOWED_TAGS); ?></div>
                     </div>
                     <?php
                 } ?>
                 <div class="js-form-wrapper">
                     <div class="js-form-title"><?php echo esc_html(__('Field Title', 'js-support-ticket')); ?><font class="required-notifier">*</font></div>
-                    <div class="js-form-value"><?php echo wp_kses(JSSTformfield::text('fieldtitle', isset(jssupportticket::$_data[0]['userfield']->fieldtitle) ? jssupportticket::$_data[0]['userfield']->fieldtitle : '', array('class' => 'inputbox one js-form-input-field', 'data-validation' => 'required')), JSST_ALLOWED_TAGS); ?></div>
+                    <div class="js-form-value"><?php echo wp_kses(JSSTformfield::text('fieldtitle', isset(jssupportticket::$jsst_data[0]['userfield']->fieldtitle) ? jssupportticket::$jsst_data[0]['userfield']->fieldtitle : '', array('class' => 'inputbox one js-form-input-field', 'data-validation' => 'required')), JSST_ALLOWED_TAGS); ?></div>
                 </div>
                 <div class="js-form-wrapper for-terms-condtions-hide" id="for-combo-wrapper" style="display:none;">
                     <div class="js-form-title"><?php echo esc_html(__('Select','js-support-ticket')) .'&nbsp;'. esc_html(__('Parent Field', 'js-support-ticket')); ?><font class="required-notifier">*</font></div>
                     <div class="js-form-value" id="for-combo"></div>
                 </div>
                 <?php 
-                if (empty(jssupportticket::$_data[0]['userfield']->id) || (!empty(jssupportticket::$_data[0]['userfield']->field) && !in_array(jssupportticket::$_data[0]['userfield']->field, ['termsandconditions1','termsandconditions2','termsandconditions3']))) { ?>
+                if (empty(jssupportticket::$jsst_data[0]['userfield']->id) || (!empty(jssupportticket::$jsst_data[0]['userfield']->field) && !in_array(jssupportticket::$jsst_data[0]['userfield']->field, ['termsandconditions1','termsandconditions2','termsandconditions3']))) { ?>
                     <div class="js-form-wrapper for-terms-condtions-hide">
                         <div class="js-form-title">
                             <?php echo esc_html(__('Default Value', 'js-support-ticket')); ?>
@@ -347,27 +347,27 @@ wp_add_inline_script('js-support-ticket-main-js',$jssupportticket_js);
                         </div>
                         <div class="js-form-value">
                             <span class="defaultvalue_select" style="display:none;">
-                                <?php echo wp_kses(JSSTformfield::select('defaultvalue_select', '', isset(jssupportticket::$_data[0]['userfield']->defaultvalue) ? jssupportticket::$_data[0]['userfield']->defaultvalue : '', esc_html(__('Select Default Value', 'js-support-ticket')), array('class' => 'inputbox one js-form-select-field')), JSST_ALLOWED_TAGS); ?>
+                                <?php echo wp_kses(JSSTformfield::select('defaultvalue_select', '', isset(jssupportticket::$jsst_data[0]['userfield']->defaultvalue) ? jssupportticket::$jsst_data[0]['userfield']->defaultvalue : '', esc_html(__('Select Default Value', 'js-support-ticket')), array('class' => 'inputbox one js-form-select-field')), JSST_ALLOWED_TAGS); ?>
                             </span>
                             <span class="defaultvalue_input">
-                                <?php echo wp_kses(JSSTformfield::text('defaultvalue_input', isset(jssupportticket::$_data[0]['userfield']->defaultvalue) ? jssupportticket::$_data[0]['userfield']->defaultvalue : '', array('class' => 'inputbox one js-form-input-field')), JSST_ALLOWED_TAGS); ?>
+                                <?php echo wp_kses(JSSTformfield::text('defaultvalue_input', isset(jssupportticket::$jsst_data[0]['userfield']->defaultvalue) ? jssupportticket::$jsst_data[0]['userfield']->defaultvalue : '', array('class' => 'inputbox one js-form-input-field')), JSST_ALLOWED_TAGS); ?>
                             </span>
                         </div>
                     </div>
                     <?php 
                 }
-                if (empty(jssupportticket::$_data[0]['userfield']->cannotunpublish)) { ?>
+                if (empty(jssupportticket::$jsst_data[0]['userfield']->cannotunpublish)) { ?>
                     <div class="js-form-wrapper for-terms-condtions-hide">
                         <div class="js-form-title"><?php echo esc_html(__('User Published', 'js-support-ticket')); ?></div>
-                        <div class="js-form-value"><?php echo wp_kses(JSSTformfield::select('published', $yesno, isset(jssupportticket::$_data[0]['userfield']->published) ? jssupportticket::$_data[0]['userfield']->published : 1, '', array('class' => 'inputbox one js-form-select-field')), JSST_ALLOWED_TAGS); ?></div>
+                        <div class="js-form-value"><?php echo wp_kses(JSSTformfield::select('published', $jsst_yesno, isset(jssupportticket::$jsst_data[0]['userfield']->published) ? jssupportticket::$jsst_data[0]['userfield']->published : 1, '', array('class' => 'inputbox one js-form-select-field')), JSST_ALLOWED_TAGS); ?></div>
                     </div>
                     <div class="js-form-wrapper for-terms-condtions-hide for-admin-only-hide">
                         <div class="js-form-title"><?php echo esc_html(__('Visitor Published', 'js-support-ticket')); ?></div>
-                        <div class="js-form-value"><?php echo wp_kses(JSSTformfield::select('isvisitorpublished', $yesno, isset(jssupportticket::$_data[0]['userfield']->isvisitorpublished) ? jssupportticket::$_data[0]['userfield']->isvisitorpublished : 1, '', array('class' => 'inputbox one js-form-select-field')), JSST_ALLOWED_TAGS); ?></div>
+                        <div class="js-form-value"><?php echo wp_kses(JSSTformfield::select('isvisitorpublished', $jsst_yesno, isset(jssupportticket::$jsst_data[0]['userfield']->isvisitorpublished) ? jssupportticket::$jsst_data[0]['userfield']->isvisitorpublished : 1, '', array('class' => 'inputbox one js-form-select-field')), JSST_ALLOWED_TAGS); ?></div>
                     </div>
                     <?php
                 }
-                if (empty(jssupportticket::$_data[0]['userfield']->cannotsearch)) { ?>
+                if (empty(jssupportticket::$jsst_data[0]['userfield']->cannotsearch)) { ?>
                     <div class="js-form-wrapper for-terms-condtions-hide">
                         <div class="js-form-title">
                             <?php echo esc_html(__('Admin Search', 'js-support-ticket')); ?>
@@ -375,7 +375,7 @@ wp_add_inline_script('js-support-ticket-main-js',$jssupportticket_js);
                                 <?php echo esc_html(__('This option is not available in this case', 'js-support-ticket')); ?>
                             </span>
                         </div>
-                        <div class="js-form-value"><?php echo wp_kses(JSSTformfield::select('search_admin', $yesno, isset(jssupportticket::$_data[0]['userfield']->search_admin) ? jssupportticket::$_data[0]['userfield']->search_admin : 1, '', array('class' => 'inputbox one js-form-select-field')), JSST_ALLOWED_TAGS); ?></div>
+                        <div class="js-form-value"><?php echo wp_kses(JSSTformfield::select('search_admin', $jsst_yesno, isset(jssupportticket::$jsst_data[0]['userfield']->search_admin) ? jssupportticket::$jsst_data[0]['userfield']->search_admin : 1, '', array('class' => 'inputbox one js-form-select-field')), JSST_ALLOWED_TAGS); ?></div>
                     </div>
                     <div class="js-form-wrapper for-terms-condtions-hide">
                         <div class="js-form-title">
@@ -384,21 +384,21 @@ wp_add_inline_script('js-support-ticket-main-js',$jssupportticket_js);
                                 <?php echo esc_html(__('This option is not available in this case', 'js-support-ticket')); ?>
                             </span>
                         </div>
-                        <div class="js-form-value"><?php echo wp_kses(JSSTformfield::select('search_user', $yesno, isset(jssupportticket::$_data[0]['userfield']->search_user) ? jssupportticket::$_data[0]['userfield']->search_user : 1, '', array('class' => 'inputbox one js-form-select-field')), JSST_ALLOWED_TAGS); ?></div>
+                        <div class="js-form-value"><?php echo wp_kses(JSSTformfield::select('search_user', $jsst_yesno, isset(jssupportticket::$jsst_data[0]['userfield']->search_user) ? jssupportticket::$jsst_data[0]['userfield']->search_user : 1, '', array('class' => 'inputbox one js-form-select-field')), JSST_ALLOWED_TAGS); ?></div>
                     </div>
                     <?php
                 }
-                if (empty(jssupportticket::$_data[0]['userfield']->cannotshowonlisting)) { ?>
+                if (empty(jssupportticket::$jsst_data[0]['userfield']->cannotshowonlisting)) { ?>
                     <div class="js-form-wrapper for-terms-condtions-hide">
                         <div class="js-form-title"><?php echo esc_html(__('Show On Listing', 'js-support-ticket')); ?></div>
-                        <div class="js-form-value"><?php echo wp_kses(JSSTformfield::select('showonlisting', $yesno, isset(jssupportticket::$_data[0]['userfield']->showonlisting) ? jssupportticket::$_data[0]['userfield']->showonlisting : 0, '', array('class' => 'inputbox one js-form-select-field')), JSST_ALLOWED_TAGS); ?></div>
+                        <div class="js-form-value"><?php echo wp_kses(JSSTformfield::select('showonlisting', $jsst_yesno, isset(jssupportticket::$jsst_data[0]['userfield']->showonlisting) ? jssupportticket::$jsst_data[0]['userfield']->showonlisting : 0, '', array('class' => 'inputbox one js-form-select-field')), JSST_ALLOWED_TAGS); ?></div>
                     </div>
                     <?php
                 }
-                if (empty(jssupportticket::$_data[0]['userfield']->id) || (!empty(jssupportticket::$_data[0]['userfield']->field) && !in_array(jssupportticket::$_data[0]['userfield']->field, ['termsandconditions1','termsandconditions2','termsandconditions3']))) { ?>
+                if (empty(jssupportticket::$jsst_data[0]['userfield']->id) || (!empty(jssupportticket::$jsst_data[0]['userfield']->field) && !in_array(jssupportticket::$jsst_data[0]['userfield']->field, ['termsandconditions1','termsandconditions2','termsandconditions3']))) { ?>
                     <div class="js-form-wrapper for-terms-condtions-hide">
                         <div class="js-form-title"><?php echo esc_html(__('Required', 'js-support-ticket')); ?></div>
-                        <div class="js-form-value"><?php echo wp_kses(JSSTformfield::select('required', $yesno, isset(jssupportticket::$_data[0]['userfield']->required) ? jssupportticket::$_data[0]['userfield']->required : 0, '', array('class' => 'inputbox one js-form-select-field')), JSST_ALLOWED_TAGS); ?></div>
+                        <div class="js-form-value"><?php echo wp_kses(JSSTformfield::select('required', $jsst_yesno, isset(jssupportticket::$jsst_data[0]['userfield']->required) ? jssupportticket::$jsst_data[0]['userfield']->required : 0, '', array('class' => 'inputbox one js-form-select-field')), JSST_ALLOWED_TAGS); ?></div>
                     </div>
                     <?php
                 } ?>
@@ -408,10 +408,10 @@ wp_add_inline_script('js-support-ticket-main-js',$jssupportticket_js);
                 // visitor search is not in use
                 /*<div class="js-form-wrapper for-terms-condtions-hide for-admin-only-hide">
                     <div class="js-form-title"><?php echo esc_html(__('Visitor Search', 'js-support-ticket')); </div>
-                    <div class="js-form-value"><?php echo wp_kses(JSSTformfield::select('search_visitor', $yesno, isset(jssupportticket::$_data[0]['userfield']->search_visitor) ? jssupportticket::$_data[0]['userfield']->search_visitor : 1, '', array('class' => 'inputbox one js-form-select-field')), JSST_ALLOWED_TAGS); </div>
+                    <div class="js-form-value"><?php echo wp_kses(JSSTformfield::select('search_visitor', $jsst_yesno, isset(jssupportticket::$jsst_data[0]['userfield']->search_visitor) ? jssupportticket::$jsst_data[0]['userfield']->search_visitor : 1, '', array('class' => 'inputbox one js-form-select-field')), JSST_ALLOWED_TAGS); </div>
                 </div>
                 */
-                if (!empty(jssupportticket::$_data[0]['userfield']->field) && !in_array(jssupportticket::$_data[0]['userfield']->field, ['termsandconditions1','termsandconditions2','termsandconditions3'])) { ?>
+                if (!empty(jssupportticket::$jsst_data[0]['userfield']->field) && !in_array(jssupportticket::$jsst_data[0]['userfield']->field, ['termsandconditions1','termsandconditions2','termsandconditions3'])) { ?>
                     <div class="js-form-wrapper for-terms-condtions-hide">
                         <div class="js-form-title">
                             <?php echo esc_html(__('Place Holder', 'js-support-ticket')); ?>
@@ -419,11 +419,11 @@ wp_add_inline_script('js-support-ticket-main-js',$jssupportticket_js);
                                 <?php echo esc_html(__('This option is not available in this case', 'js-support-ticket')); ?>
                             </span>
                         </div>
-                        <div class="js-form-value"><?php echo wp_kses(JSSTformfield::text('placeholder', isset(jssupportticket::$_data[0]['userfield']->placeholder) ? jssupportticket::$_data[0]['userfield']->placeholder : '', array('class' => 'inputbox one js-form-input-field','maxlength'=>225)), JSST_ALLOWED_TAGS); ?></div>
+                        <div class="js-form-value"><?php echo wp_kses(JSSTformfield::text('placeholder', isset(jssupportticket::$jsst_data[0]['userfield']->placeholder) ? jssupportticket::$jsst_data[0]['userfield']->placeholder : '', array('class' => 'inputbox one js-form-input-field','maxlength'=>225)), JSST_ALLOWED_TAGS); ?></div>
                     </div>
                     <div class="js-form-wrapper for-terms-condtions-hide">
                         <div class="js-form-title"><?php echo esc_html(__('Description', 'js-support-ticket')); ?></div>
-                        <div class="js-form-value"><?php echo wp_kses(JSSTformfield::text('description', isset(jssupportticket::$_data[0]['userfield']->description) ? jssupportticket::$_data[0]['userfield']->description : '', array('class' => 'inputbox one js-form-input-field','maxlength'=>225)), JSST_ALLOWED_TAGS); ?></div>
+                        <div class="js-form-value"><?php echo wp_kses(JSSTformfield::text('description', isset(jssupportticket::$jsst_data[0]['userfield']->description) ? jssupportticket::$jsst_data[0]['userfield']->description : '', array('class' => 'inputbox one js-form-input-field','maxlength'=>225)), JSST_ALLOWED_TAGS); ?></div>
                     </div>
                     <div class="js-form-wrapper for-terms-condtions-hide">
                         <div class="js-form-title">
@@ -432,64 +432,64 @@ wp_add_inline_script('js-support-ticket-main-js',$jssupportticket_js);
                                 <?php echo esc_html(__('This option is not available in this case', 'js-support-ticket')); ?>
                             </span>
                         </div>
-                        <div class="js-form-value"><?php echo wp_kses(JSSTformfield::select('readonly', $yesno, isset(jssupportticket::$_data[0]['userfield']->readonly) ? jssupportticket::$_data[0]['userfield']->readonly : 0, '', array('class' => 'inputbox one js-form-select-field')), JSST_ALLOWED_TAGS); ?></div>
+                        <div class="js-form-value"><?php echo wp_kses(JSSTformfield::select('readonly', $jsst_yesno, isset(jssupportticket::$jsst_data[0]['userfield']->readonly) ? jssupportticket::$jsst_data[0]['userfield']->readonly : 0, '', array('class' => 'inputbox one js-form-select-field')), JSST_ALLOWED_TAGS); ?></div>
                     </div>
                     <?php 
-                    if (empty(jssupportticket::$_data[0]['userfield']->cannotunpublish)) { ?>
+                    if (empty(jssupportticket::$jsst_data[0]['userfield']->cannotunpublish)) { ?>
                         <div class="js-form-wrapper for-terms-condtions-hide">
                             <div class="js-form-title"><?php echo esc_html(__('Admin/Agent Only', 'js-support-ticket')); ?></div>
-                            <div class="js-form-value"><?php echo wp_kses(JSSTformfield::select('adminonly', $yesno, isset(jssupportticket::$_data[0]['userfield']->adminonly) ? jssupportticket::$_data[0]['userfield']->adminonly : 0, '', array('class' => 'inputbox one js-form-select-field')), JSST_ALLOWED_TAGS); ?></div>
+                            <div class="js-form-value"><?php echo wp_kses(JSSTformfield::select('adminonly', $jsst_yesno, isset(jssupportticket::$jsst_data[0]['userfield']->adminonly) ? jssupportticket::$jsst_data[0]['userfield']->adminonly : 0, '', array('class' => 'inputbox one js-form-select-field')), JSST_ALLOWED_TAGS); ?></div>
                         </div>
                         <?php 
                     }
                 }
-                if (empty(jssupportticket::$_data[0]['userfield']->id) || (!empty(jssupportticket::$_data[0]['userfield']->id) && !empty(jssupportticket::$_data[0]['userfield']->isuserfield))) { ?>
+                if (empty(jssupportticket::$jsst_data[0]['userfield']->id) || (!empty(jssupportticket::$jsst_data[0]['userfield']->id) && !empty(jssupportticket::$jsst_data[0]['userfield']->isuserfield))) { ?>
                     <div class="js-form-wrapper for-terms-condtions-hide">
                         <div class="js-form-title"><?php echo esc_html(__('Field Size', 'js-support-ticket')); ?></div>
-                        <div class="js-form-value"><?php echo wp_kses(JSSTformfield::select('size', $fieldsize, isset(jssupportticket::$_data[0]['userfield']->size) ? jssupportticket::$_data[0]['userfield']->size : 0, '', array('class' => 'inputbox one js-form-select-field')), JSST_ALLOWED_TAGS); ?></div>
+                        <div class="js-form-value"><?php echo wp_kses(JSSTformfield::select('size', $jsst_fieldsize, isset(jssupportticket::$jsst_data[0]['userfield']->size) ? jssupportticket::$jsst_data[0]['userfield']->size : 0, '', array('class' => 'inputbox one js-form-select-field')), JSST_ALLOWED_TAGS); ?></div>
                     </div>
                     <?php
                 }
                  /*
                 <div class="js-form-wrapper">
                     <div class="js-form-title"><?php echo esc_html(__('Java Script', 'js-support-ticket')); ?></div>
-                    <div class="js-form-value"><?php echo wp_kses(JSSTformfield::textarea('j_script', isset(jssupportticket::$_data[0]['userfield']->j_script) ? jssupportticket::$_data[0]['userfield']->j_script : '', array('class' => 'inputbox one jsstadmin-form-textarea-field')), JSST_ALLOWED_TAGS); ?></div>
+                    <div class="js-form-value"><?php echo wp_kses(JSSTformfield::textarea('j_script', isset(jssupportticket::$jsst_data[0]['userfield']->j_script) ? jssupportticket::$jsst_data[0]['userfield']->j_script : '', array('class' => 'inputbox one jsstadmin-form-textarea-field')), JSST_ALLOWED_TAGS); ?></div>
                 </div>
                 */ ?>
                 <div id="for-combo-options" >
                     <?php
-                    $arraynames = '';
-                    $comma = '';
-                    if (isset(jssupportticket::$_data[0]['userfieldparams']) && jssupportticket::$_data[0]['userfield']->userfieldtype == 'depandant_field') {
-                        foreach (jssupportticket::$_data[0]['userfieldparams'] as $key => $val) {
-                            $textvar = $key;
-                            $textvar = jssupportticketphplib::JSST_str_replace(' ','__',$textvar);
-                            $textvar = jssupportticketphplib::JSST_str_replace('.','___',$textvar);
-                            $divid = $textvar;
-                            $textvar .='[]';
-                            $arraynames .= $comma . "$key";
-                            $comma = '_JSST_Unique_88a9e3_';
+                    $jsst_arraynames = '';
+                    $jsst_comma = '';
+                    if (isset(jssupportticket::$jsst_data[0]['userfieldparams']) && jssupportticket::$jsst_data[0]['userfield']->userfieldtype == 'depandant_field') {
+                        foreach (jssupportticket::$jsst_data[0]['userfieldparams'] as $jsst_key => $jsst_val) {
+                            $jsst_textvar = $jsst_key;
+                            $jsst_textvar = jssupportticketphplib::JSST_str_replace(' ','__',$jsst_textvar);
+                            $jsst_textvar = jssupportticketphplib::JSST_str_replace('.','___',$jsst_textvar);
+                            $jsst_divid = $jsst_textvar;
+                            $jsst_textvar .='[]';
+                            $jsst_arraynames .= $jsst_comma . "$jsst_key";
+                            $jsst_comma = '_JSST_Unique_88a9e3_';
                             ?>
                             <div class="jsst-user-dd-field-wrap">
                                 <div class="jsst-user-dd-field-title">
-                                    <?php echo esc_html($key); ?>
+                                    <?php echo esc_html($jsst_key); ?>
                                 </div>
-                                <div class="jsst-user-dd-field-value combo-options-fields" id="<?php echo esc_attr($divid); ?>">
+                                <div class="jsst-user-dd-field-value combo-options-fields" id="<?php echo esc_attr($jsst_divid); ?>">
                                     <?php
-                                    if (!empty($val)) {
-                                        foreach ($val as $each) {
+                                    if (!empty($jsst_val)) {
+                                        foreach ($jsst_val as $jsst_each) {
                                             ?>
                                             <span class="input-field-wrapper">
-                                                <input name="<?php echo esc_attr($textvar); ?>" id="<?php echo esc_attr($textvar); ?>" value="<?php echo esc_attr($each); ?>" class="inputbox one user-field" type="text">
-                                                <img alt="<?php echo esc_html(__('Delete', 'js-support-ticket')); ?>" class="input-field-remove-img" src="<?php echo esc_url(JSST_PLUGIN_URL) ?>includes/images/delete.png">
+                                                <input name="<?php echo esc_attr($jsst_textvar); ?>" id="<?php echo esc_attr($jsst_textvar); ?>" value="<?php echo esc_attr($jsst_each); ?>" class="inputbox one user-field" type="text">
+                                                <img alt = "<?php echo esc_attr(__('Delete', 'js-support-ticket')); ?>" class="input-field-remove-img" src="<?php echo esc_url(JSST_PLUGIN_URL) ?>includes/images/delete.png">
                                             </span><?php
                                         }
                                     }
-                                    // $safe_divid = wp_json_encode($divid, JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP);
-                                    $js_value = esc_js($divid);
-                                    $js_value = ($divid);
+                                    // $jsst_safe_divid = wp_json_encode($jsst_divid, JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP);
+                                    $jsst_js_value = esc_js($jsst_divid);
+                                    $jsst_js_value = ($jsst_divid);
                                     ?>
-                                    <input id="depandant-field-button" class="jsst-button-link button user-field-val-button" onclick="getNextField('<?php echo esc_js($js_value); ?>', this);" value="<?php echo esc_html(__('Add More', 'js-support-ticket')); ?>" type="button">
+                                    <input id="depandant-field-button" class="jsst-button-link button user-field-val-button" onclick="getNextField('<?php echo esc_js($jsst_js_value); ?>', this);" value="<?php echo esc_attr(__('Add More', 'js-support-ticket')); ?>" type="button">
                                 </div>
                             </div><?php
                         }
@@ -497,38 +497,38 @@ wp_add_inline_script('js-support-ticket-main-js',$jssupportticket_js);
                     ?>
                 </div>
                 <?php 
-                if (empty(jssupportticket::$_data[0]['userfield']->id) || (!empty(jssupportticket::$_data[0]['userfield']->id) && !empty(jssupportticket::$_data[0]['userfield']->isuserfield))) { ?>
+                if (empty(jssupportticket::$jsst_data[0]['userfield']->id) || (!empty(jssupportticket::$jsst_data[0]['userfield']->id) && !empty(jssupportticket::$jsst_data[0]['userfield']->isuserfield))) { ?>
                     <div id="divText" class="js-form-wrapper">
                         <div class="js-form-title"><?php echo esc_html(__('Max Length', 'js-support-ticket')); ?></div>
-                        <div class="js-form-value"><?php echo wp_kses(JSSTformfield::text('maxlength', isset(jssupportticket::$_data[0]['userfield']->maxlength) ? jssupportticket::$_data[0]['userfield']->maxlength : '', array('class' => 'inputbox one js-form-input-field')), JSST_ALLOWED_TAGS); ?></div>
+                        <div class="js-form-value"><?php echo wp_kses(JSSTformfield::text('maxlength', isset(jssupportticket::$jsst_data[0]['userfield']->maxlength) ? jssupportticket::$jsst_data[0]['userfield']->maxlength : '', array('class' => 'inputbox one js-form-input-field')), JSST_ALLOWED_TAGS); ?></div>
                     </div>
                     <?php 
                 } ?>
                 <div class="js-form-wrapper divColsRows">
                     <div class="js-form-title"><?php echo esc_html(__('Columns', 'js-support-ticket')); ?></div>
-                    <div class="js-form-value"><?php echo wp_kses(JSSTformfield::text('cols', isset(jssupportticket::$_data[0]['userfield']->cols) ? jssupportticket::$_data[0]['userfield']->cols : '', array('class' => 'inputbox one js-form-input-field')), JSST_ALLOWED_TAGS); ?></div>
+                    <div class="js-form-value"><?php echo wp_kses(JSSTformfield::text('cols', isset(jssupportticket::$jsst_data[0]['userfield']->cols) ? jssupportticket::$jsst_data[0]['userfield']->cols : '', array('class' => 'inputbox one js-form-input-field')), JSST_ALLOWED_TAGS); ?></div>
                 </div>
                 <div class="js-form-wrapper divColsRows">
                     <div class="js-form-title"><?php echo esc_html(__('Rows', 'js-support-ticket')); ?></div>
-                    <div class="js-form-value"><?php echo wp_kses(JSSTformfield::text('rows', isset(jssupportticket::$_data[0]['userfield']->rows) ? jssupportticket::$_data[0]['userfield']->rows : '', array('class' => 'inputbox one js-form-input-field')), JSST_ALLOWED_TAGS); ?></div>
+                    <div class="js-form-value"><?php echo wp_kses(JSSTformfield::text('rows', isset(jssupportticket::$jsst_data[0]['userfield']->rows) ? jssupportticket::$jsst_data[0]['userfield']->rows : '', array('class' => 'inputbox one js-form-input-field')), JSST_ALLOWED_TAGS); ?></div>
                 </div>
                 <?php
-                if(!empty(jssupportticket::$_data[0]['userfield']->field) && in_array(jssupportticket::$_data[0]['userfield']->field, ['termsandconditions1','termsandconditions2','termsandconditions3']) || empty(jssupportticket::$_data[0]['userfield']->id) || !empty(jssupportticket::$_data[0]['userfield']->isuserfield)) { ?>
+                if(!empty(jssupportticket::$jsst_data[0]['userfield']->field) && in_array(jssupportticket::$jsst_data[0]['userfield']->field, ['termsandconditions1','termsandconditions2','termsandconditions3']) || empty(jssupportticket::$jsst_data[0]['userfield']->id) || !empty(jssupportticket::$jsst_data[0]['userfield']->isuserfield)) { ?>
                     <div class="for-terms-condtions-show" >
                         <?php
-                        $termsandconditions_text = '';
-                        $termsandconditions_linktype = '';
-                        $termsandconditions_link = '';
-                        $termsandconditions_page = '';
-                        if( isset(jssupportticket::$_data[0]['userfieldparams']) && jssupportticket::$_data[0]['userfieldparams'] != '' && is_array(jssupportticket::$_data[0]['userfieldparams']) && !empty(jssupportticket::$_data[0]['userfieldparams'])){
-                            $termsandconditions_text = isset(jssupportticket::$_data[0]['userfieldparams']['termsandconditions_text']) ? jssupportticket::$_data[0]['userfieldparams']['termsandconditions_text'] :'' ;
-                            $termsandconditions_linktype = isset(jssupportticket::$_data[0]['userfieldparams']['termsandconditions_linktype']) ? jssupportticket::$_data[0]['userfieldparams']['termsandconditions_linktype'] :'' ;
-                            $termsandconditions_link = isset(jssupportticket::$_data[0]['userfieldparams']['termsandconditions_link']) ? jssupportticket::$_data[0]['userfieldparams']['termsandconditions_link'] :'' ;
-                            $termsandconditions_page = isset(jssupportticket::$_data[0]['userfieldparams']['termsandconditions_page']) ? jssupportticket::$_data[0]['userfieldparams']['termsandconditions_page'] :'' ;
+                        $jsst_termsandconditions_text = '';
+                        $jsst_termsandconditions_linktype = '';
+                        $jsst_termsandconditions_link = '';
+                        $jsst_termsandconditions_page = '';
+                        if( isset(jssupportticket::$jsst_data[0]['userfieldparams']) && jssupportticket::$jsst_data[0]['userfieldparams'] != '' && is_array(jssupportticket::$jsst_data[0]['userfieldparams']) && !empty(jssupportticket::$jsst_data[0]['userfieldparams'])){
+                            $jsst_termsandconditions_text = isset(jssupportticket::$jsst_data[0]['userfieldparams']['termsandconditions_text']) ? jssupportticket::$jsst_data[0]['userfieldparams']['termsandconditions_text'] :'' ;
+                            $jsst_termsandconditions_linktype = isset(jssupportticket::$jsst_data[0]['userfieldparams']['termsandconditions_linktype']) ? jssupportticket::$jsst_data[0]['userfieldparams']['termsandconditions_linktype'] :'' ;
+                            $jsst_termsandconditions_link = isset(jssupportticket::$jsst_data[0]['userfieldparams']['termsandconditions_link']) ? jssupportticket::$jsst_data[0]['userfieldparams']['termsandconditions_link'] :'' ;
+                            $jsst_termsandconditions_page = isset(jssupportticket::$jsst_data[0]['userfieldparams']['termsandconditions_page']) ? jssupportticket::$jsst_data[0]['userfieldparams']['termsandconditions_page'] :'' ;
                         } ?>
                         <div class="js-form-wrapper ">
                             <div class="js-form-title"><?php echo esc_html(__('Terms and Conditions Text', 'js-support-ticket')); ?></div>
-                            <div class="js-form-value"><?php echo wp_kses(JSSTformfield::text('termsandconditions_text', $termsandconditions_text , array('class' => 'inputbox one js-form-input-field')), JSST_ALLOWED_TAGS); ?></div>
+                            <div class="js-form-value"><?php echo wp_kses(JSSTformfield::text('termsandconditions_text', $jsst_termsandconditions_text , array('class' => 'inputbox one js-form-input-field')), JSST_ALLOWED_TAGS); ?></div>
                             <div class="js-form-desc">
                                 <?php echo esc_html(__("e.g ' I have read and agree to the [link] Terms and Conditions[/link].  ' The text between [link] and [/link] will be linked to provided url or wordpress page.", 'js-support-ticket')); ?>
                             </div>
@@ -536,58 +536,58 @@ wp_add_inline_script('js-support-ticket-main-js',$jssupportticket_js);
                         <div class="js-form-wrapper ">
                             <div class="js-form-title"><?php echo esc_html(__('Terms and Conditions Link Type', 'js-support-ticket')); ?></div>
                             <?php
-                            $linktype = array(
+                            $jsst_linktype = array(
                                 (object) array('id' => 1, 'text' => esc_html(__('Direct Link', 'js-support-ticket'))),
                                 (object) array('id' => 2, 'text' => esc_html(__('Wordpress Page', 'js-support-ticket'))),
                                 (object) array('id' => 3, 'text' => esc_html(__('None', 'js-support-ticket'))));
                             ?>
-                            <div class="js-form-value"><?php echo wp_kses(JSSTformfield::select('termsandconditions_linktype', $linktype, $termsandconditions_linktype, esc_html(__('Select Link Type', 'js-support-ticket')), array('class' => 'inputbox one js-form-select-field')), JSST_ALLOWED_TAGS); ?></div>
+                            <div class="js-form-value"><?php echo wp_kses(JSSTformfield::select('termsandconditions_linktype', $jsst_linktype, $jsst_termsandconditions_linktype, esc_html(__('Select Link Type', 'js-support-ticket')), array('class' => 'inputbox one js-form-select-field')), JSST_ALLOWED_TAGS); ?></div>
                         </div>
                         <div class="js-form-wrapper for-terms-condtions-linktype1" style="display: none;">
                             <div class="js-form-title"><?php echo esc_html(__('Terms and Conditions Link', 'js-support-ticket')); ?></div>
-                            <div class="js-form-value"><?php echo wp_kses(JSSTformfield::text('termsandconditions_link', $termsandconditions_link , array('class' => 'inputbox one js-form-input-field')), JSST_ALLOWED_TAGS); ?></div>
+                            <div class="js-form-value"><?php echo wp_kses(JSSTformfield::text('termsandconditions_link', $jsst_termsandconditions_link , array('class' => 'inputbox one js-form-input-field')), JSST_ALLOWED_TAGS); ?></div>
                         </div>
                         <div class="js-form-wrapper for-terms-condtions-linktype2" style="display: none;">
                             <div class="js-form-title"><?php echo esc_html(__('Terms and Conditions Page', 'js-support-ticket')); ?></div>
-                            <div class="js-form-value"><?php echo wp_kses(JSSTformfield::select('termsandconditions_page', JSSTincluder::getJSModel('configuration')->getPageList(), $termsandconditions_page, esc_html(__('Select Wordpress page','js-support-ticket')), array('class' => 'inputbox one js-form-select-field')), JSST_ALLOWED_TAGS); ?></div>
+                            <div class="js-form-value"><?php echo wp_kses(JSSTformfield::select('termsandconditions_page', JSSTincluder::getJSModel('configuration')->getPageList(), $jsst_termsandconditions_page, esc_html(__('Select Wordpress page','js-support-ticket')), array('class' => 'inputbox one js-form-select-field')), JSST_ALLOWED_TAGS); ?></div>
                         </div>
                     </div>
                     <?php 
                 } ?>
-                <?php if (empty(jssupportticket::$_data[0]['userfield']->id) || (!empty(jssupportticket::$_data[0]['userfield']->id) && !empty(jssupportticket::$_data[0]['userfield']->isuserfield))) { ?>
+                <?php if (empty(jssupportticket::$jsst_data[0]['userfield']->id) || (!empty(jssupportticket::$jsst_data[0]['userfield']->id) && !empty(jssupportticket::$jsst_data[0]['userfield']->isuserfield))) { ?>
                     <div class="js-form-wrapper js-form-visible-wrapper" style="border: unset;background: unset;font-size: 17px;margin: 0;">
                         <?php echo esc_html(__('Visibility conditions', 'js-support-ticket')); ?>
                     </div>
                     <?php 
-                    if( empty(jssupportticket::$_data[0]['userfield']->visibleparams)) { ?>
+                    if( empty(jssupportticket::$jsst_data[0]['userfield']->visibleparams)) { ?>
                         <div class="js-form-wrapper js-form-visible-wrapper" id="js_and_row_0">
                             <div class="js-form-value" id="js_or_row_0">
-                                <?php echo wp_kses(JSSTformfield::select('visibleParent[]', JSSTincluder::getJSModel('fieldordering')->getFieldsForVisibleCombobox(jssupportticket::$_data['fieldfor'], $mformid, isset(jssupportticket::$_data[0]['userfield']->field) ? jssupportticket::$_data[0]['userfield']->field : '', isset(jssupportticket::$_data[0]['userfield']->id) ? jssupportticket::$_data[0]['userfield']->id : ''), '', esc_html(__('Select Parent', 'js-support-ticket')), array('class' => 'inputbox js-form-select-field js-form-input-field-visible', 'onchange' => 'getChildForVisibleCombobox(this.value, 0);getConditionsForVisibleCombobox(this.value, 0);')), JSST_ALLOWED_TAGS); ?>
+                                <?php echo wp_kses(JSSTformfield::select('visibleParent[]', JSSTincluder::getJSModel('fieldordering')->getFieldsForVisibleCombobox(jssupportticket::$jsst_data['fieldfor'], $jsst_mformid, isset(jssupportticket::$jsst_data[0]['userfield']->field) ? jssupportticket::$jsst_data[0]['userfield']->field : '', isset(jssupportticket::$jsst_data[0]['userfield']->id) ? jssupportticket::$jsst_data[0]['userfield']->id : ''), '', esc_html(__('Select Parent', 'js-support-ticket')), array('class' => 'inputbox js-form-select-field js-form-input-field-visible', 'onchange' => 'getChildForVisibleCombobox(this.value, 0);getConditionsForVisibleCombobox(this.value, 0);')), JSST_ALLOWED_TAGS); ?>
                                 <span class="visibleValueWrp">
                                     <?php echo wp_kses(JSSTformfield::select('visibleValue[]', '', '', esc_html(__('Select Child', 'js-support-ticket')), array('class' => 'inputbox one js-form-select-field js-form-input-field-visible')), JSST_ALLOWED_TAGS); ?>
                                 </span>
                                 <span class="visibleConditionWrp">
-                                    <?php echo wp_kses(JSSTformfield::select('visibleCondition[]', $equalnotequal, '', esc_html(__('Select Condition', 'js-support-ticket')), array('class' => 'inputbox one js-form-select-field js-form-input-field-visible')), JSST_ALLOWED_TAGS); ?>
+                                    <?php echo wp_kses(JSSTformfield::select('visibleCondition[]', $jsst_equalnotequal, '', esc_html(__('Select Condition', 'js-support-ticket')), array('class' => 'inputbox one js-form-select-field js-form-input-field-visible')), JSST_ALLOWED_TAGS); ?>
                                 </span>
                                 <?php echo wp_kses(JSSTformfield::hidden('visibleLogic[]', 'AND'), JSST_ALLOWED_TAGS); ?>
                             </div>
                             <div class="js-form-visible-or-row"></div>
                             <div class="js-visible-conditions-addbtn-wrp">
-                                <span class="js-form-visible-addmore" onclick="getMoreORRow(this, <?php echo esc_js( jssupportticket::$_data['fieldfor'] ); ?>, <?php echo esc_js( $mformid ); ?>, '<?php echo isset( jssupportticket::$_data[0]['userfield']->field ) ? esc_js( jssupportticket::$_data[0]['userfield']->field ) : ''; ?>', '<?php echo isset( jssupportticket::$_data[0]['userfield']->id ) ? esc_js( jssupportticket::$_data[0]['userfield']->id ) : ''; ?>')">
-                                    <img alt="<?php echo esc_html(__('OR', 'js-support-ticket')); ?>" class="input-field-remove-img" src="<?php echo esc_url(JSST_PLUGIN_URL) ?>includes/images/plus-icon.png">
+                                <span class="js-form-visible-addmore" onclick="getMoreORRow(this, <?php echo esc_js( jssupportticket::$jsst_data['fieldfor'] ); ?>, <?php echo esc_js( $jsst_mformid ); ?>, '<?php echo isset( jssupportticket::$jsst_data[0]['userfield']->field ) ? esc_js( jssupportticket::$jsst_data[0]['userfield']->field ) : ''; ?>', '<?php echo isset( jssupportticket::$jsst_data[0]['userfield']->id ) ? esc_js( jssupportticket::$jsst_data[0]['userfield']->id ) : ''; ?>')">
+                                    <img alt = "<?php echo esc_attr(__('OR', 'js-support-ticket')); ?>" class="input-field-remove-img" src="<?php echo esc_url(JSST_PLUGIN_URL) ?>includes/images/plus-icon.png">
                                     <?php echo esc_html(__('OR', 'js-support-ticket')); ?>
                                 </span>
                             </div>
                         </div>
                         <?php 
                     } else {
-                        if (!empty(jssupportticket::$_data[0]['userfield']->visibleparams)) {
-                            $androws = json_decode(jssupportticket::$_data[0]['userfield']->visibleparams);
-                            $nextorid = 0;
-                            foreach ($androws as $androwindex => $androw) { ?>
-                                <div class="js-form-visible-andwrp" id="js_and_row_<?php echo esc_attr( $androwindex ); ?>">
+                        if (!empty(jssupportticket::$jsst_data[0]['userfield']->visibleparams)) {
+                            $jsst_androws = json_decode(jssupportticket::$jsst_data[0]['userfield']->visibleparams);
+                            $jsst_nextorid = 0;
+                            foreach ($jsst_androws as $jsst_androwindex => $jsst_androw) { ?>
+                                <div class="js-form-visible-andwrp" id="js_and_row_<?php echo esc_attr( $jsst_androwindex ); ?>">
                                     <?php
-                                    if ($androwindex != 0) { ?>
+                                    if ($jsst_androwindex != 0) { ?>
                                         <div class="js-form-visible-subheading">
                                             <?php echo esc_html(__('AND', 'js-support-ticket')); ?>
                                         </div>
@@ -595,61 +595,61 @@ wp_add_inline_script('js-support-ticket-main-js',$jssupportticket_js);
                                     } ?>
                                     <div class="js-form-wrapper js-form-visible-wrapper">
                                         <?php 
-                                        foreach ($androw as $orrowindex => $orrow) { ?>
-                                            <div id="js_or_row_<?php echo esc_attr( $nextorid ); ?>" >
+                                        foreach ($jsst_androw as $jsst_orrowindex => $jsst_orrow) { ?>
+                                            <div id="js_or_row_<?php echo esc_attr( $jsst_nextorid ); ?>" >
                                                 <?php
-                                                if ($orrowindex != 0) { ?>
+                                                if ($jsst_orrowindex != 0) { ?>
                                                     <div class="js-form-visible-subheading">
                                                         <?php echo esc_html(__('OR', 'js-support-ticket')); ?>
                                                     </div>
                                                     <?php 
                                                 } ?>
                                                 <div class="js-form-value">
-                                                    <?php echo wp_kses(JSSTformfield::select('visibleParent[]', JSSTincluder::getJSModel('fieldordering')->getFieldsForVisibleCombobox(jssupportticket::$_data['fieldfor'], $mformid, jssupportticket::$_data[0]['userfield']->field, jssupportticket::$_data[0]['userfield']->id), $orrow->visibleParent, esc_html(__('Select Parent', 'js-support-ticket')), array('class' => 'inputbox js-form-select-field js-form-input-field-visible', 'onchange' => 'getChildForVisibleCombobox(this.value, '.$nextorid.');getConditionsForVisibleCombobox(this.value, '.$nextorid.');')), JSST_ALLOWED_TAGS); ?>
+                                                    <?php echo wp_kses(JSSTformfield::select('visibleParent[]', JSSTincluder::getJSModel('fieldordering')->getFieldsForVisibleCombobox(jssupportticket::$jsst_data['fieldfor'], $jsst_mformid, jssupportticket::$jsst_data[0]['userfield']->field, jssupportticket::$jsst_data[0]['userfield']->id), $jsst_orrow->visibleParent, esc_html(__('Select Parent', 'js-support-ticket')), array('class' => 'inputbox js-form-select-field js-form-input-field-visible', 'onchange' => 'getChildForVisibleCombobox(this.value, '.$jsst_nextorid.');getConditionsForVisibleCombobox(this.value, '.$jsst_nextorid.');')), JSST_ALLOWED_TAGS); ?>
                                                     <span class="visibleValueWrp">
-                                                        <?php echo wp_kses(html_entity_decode(JSSTincluder::getJSModel('fieldordering')->getChildForVisibleCombobox($orrow->visibleParent, $orrow->visibleValue)), JSST_ALLOWED_TAGS); ?>
+                                                        <?php echo wp_kses(html_entity_decode(JSSTincluder::getJSModel('fieldordering')->getChildForVisibleCombobox($jsst_orrow->visibleParent, $jsst_orrow->visibleValue)), JSST_ALLOWED_TAGS); ?>
                                                     </span>
                                                     <span class="visibleConditionWrp">
-                                                        <?php echo wp_kses(html_entity_decode(JSSTincluder::getJSModel('fieldordering')->getConditionsForVisibleCombobox($orrow->visibleParent, $orrow->visibleCondition)), JSST_ALLOWED_TAGS); ?>
+                                                        <?php echo wp_kses(html_entity_decode(JSSTincluder::getJSModel('fieldordering')->getConditionsForVisibleCombobox($jsst_orrow->visibleParent, $jsst_orrow->visibleCondition)), JSST_ALLOWED_TAGS); ?>
                                                     </span>
                                                     <div class="js-visible-conditions-body-row">
                                                         <div class="js-visible-conditions-body-value">
-                                                            <span onclick='deleteOrRow("js_or_row_<?php echo esc_js( $nextorid ); ?>")' class="js-visible-conditions-delbtn">
+                                                            <span onclick='deleteOrRow("js_or_row_<?php echo esc_js( $jsst_nextorid ); ?>")' class="js-visible-conditions-delbtn">
                                                                 <img class="input-field-remove-img" src="<?php echo esc_url( JSST_PLUGIN_URL . 'includes/images/delete-2.png' ); ?>" />
                                                             </span>
                                                         </div>
                                                     </div>
-                                                    <?php echo wp_kses(JSSTformfield::hidden('visibleLogic[]', $orrow->visibleLogic), JSST_ALLOWED_TAGS); ?>
+                                                    <?php echo wp_kses(JSSTformfield::hidden('visibleLogic[]', $jsst_orrow->visibleLogic), JSST_ALLOWED_TAGS); ?>
                                                 </div>
                                             </div>
                                             <?php
-                                            $nextorid++;
-                                            $jssupportticket_js = "
+                                            $jsst_nextorid++;
+                                            $jsst_jssupportticket_js = "
                                                 nextorid++;
                                             ";
-                                            wp_add_inline_script('js-support-ticket-main-js',$jssupportticket_js);
+                                            wp_add_inline_script('js-support-ticket-main-js',$jsst_jssupportticket_js);
                                         } ?>
                                         <div class="js-form-visible-or-row"></div>
                                         <div class="js-visible-conditions-addbtn-wrp">
-                                            <span class="js-form-visible-addmore" onclick="getMoreORRow(this, <?php echo esc_js( jssupportticket::$_data['fieldfor'] ); ?>, <?php echo esc_js( $mformid ); ?>, '<?php echo isset( jssupportticket::$_data[0]['userfield']->field ) ? esc_js( jssupportticket::$_data[0]['userfield']->field ) : ''; ?>', '<?php echo isset( jssupportticket::$_data[0]['userfield']->id ) ? esc_js( jssupportticket::$_data[0]['userfield']->id ) : ''; ?>')">
-                                                <img alt="<?php echo esc_html(__('OR', 'js-support-ticket')); ?>" class="input-field-remove-img" src="<?php echo esc_url(JSST_PLUGIN_URL) ?>includes/images/plus-icon.png">
+                                            <span class="js-form-visible-addmore" onclick="getMoreORRow(this, <?php echo esc_js( jssupportticket::$jsst_data['fieldfor'] ); ?>, <?php echo esc_js( $jsst_mformid ); ?>, '<?php echo isset( jssupportticket::$jsst_data[0]['userfield']->field ) ? esc_js( jssupportticket::$jsst_data[0]['userfield']->field ) : ''; ?>', '<?php echo isset( jssupportticket::$jsst_data[0]['userfield']->id ) ? esc_js( jssupportticket::$jsst_data[0]['userfield']->id ) : ''; ?>')">
+                                                <img alt = "<?php echo esc_attr(__('OR', 'js-support-ticket')); ?>" class="input-field-remove-img" src="<?php echo esc_url(JSST_PLUGIN_URL) ?>includes/images/plus-icon.png">
                                                 <?php echo esc_html(__('OR', 'js-support-ticket')); ?>
                                             </span>
                                         </div>
                                     </div>
                                 </div>
                                 <?php
-                                $jssupportticket_js = "
+                                $jsst_jssupportticket_js = "
                                     nextandid++;
                                 ";
-                                wp_add_inline_script('js-support-ticket-main-js',$jssupportticket_js);
+                                wp_add_inline_script('js-support-ticket-main-js',$jsst_jssupportticket_js);
                             }
                         }
                     } ?>
                     <div class="js-form-visible-add-row"></div>
                     <div class="js-visible-conditions-addbtn-wrp">
-                        <span class="js-form-visible-addmore" onclick="getMoreANDRow(<?php echo esc_js( jssupportticket::$_data['fieldfor'] ); ?>, <?php echo esc_js( $mformid ); ?>, '<?php echo esc_js( isset( jssupportticket::$_data[0]['userfield']->field ) ? jssupportticket::$_data[0]['userfield']->field : '' ); ?>', '<?php echo esc_js( isset( jssupportticket::$_data[0]['userfield']->id ) ? jssupportticket::$_data[0]['userfield']->id : '' ); ?>')">
-                            <img alt="<?php echo esc_html(__('AND', 'js-support-ticket')); ?>" class="input-field-remove-img" src="<?php echo esc_url(JSST_PLUGIN_URL) ?>includes/images/plus-icon.png">
+                        <span class="js-form-visible-addmore" onclick="getMoreANDRow(<?php echo esc_js( jssupportticket::$jsst_data['fieldfor'] ); ?>, <?php echo esc_js( $jsst_mformid ); ?>, '<?php echo esc_js( isset( jssupportticket::$jsst_data[0]['userfield']->field ) ? jssupportticket::$jsst_data[0]['userfield']->field : '' ); ?>', '<?php echo esc_js( isset( jssupportticket::$jsst_data[0]['userfield']->id ) ? jssupportticket::$jsst_data[0]['userfield']->id : '' ); ?>')">
+                            <img alt = "<?php echo esc_attr(__('AND', 'js-support-ticket')); ?>" class="input-field-remove-img" src="<?php echo esc_url(JSST_PLUGIN_URL) ?>includes/images/plus-icon.png">
                             <?php echo esc_html(__('Add new', 'js-support-ticket')).' "'.esc_html(__('AND', 'js-support-ticket')).'" '.esc_html(__('visibility condition', 'js-support-ticket')); ?>
                         </span>
                     </div>
@@ -659,49 +659,49 @@ wp_add_inline_script('js-support-ticket-main-js',$jssupportticket_js);
                     <div class="page-actions no-margin">
                         <div id="user-field-values" class="white-background" class="no-padding">
                             <?php
-                            if (isset(jssupportticket::$_data[0]['userfield']) && jssupportticket::$_data[0]['userfield']->userfieldtype != 'depandant_field') {
-                                if (isset(jssupportticket::$_data[0]['userfieldparams']) && !empty(jssupportticket::$_data[0]['userfieldparams'])) {
-                                    foreach (jssupportticket::$_data[0]['userfieldparams'] as $key => $val) {
+                            if (isset(jssupportticket::$jsst_data[0]['userfield']) && jssupportticket::$jsst_data[0]['userfield']->userfieldtype != 'depandant_field') {
+                                if (isset(jssupportticket::$jsst_data[0]['userfieldparams']) && !empty(jssupportticket::$jsst_data[0]['userfieldparams'])) {
+                                    foreach (jssupportticket::$jsst_data[0]['userfieldparams'] as $jsst_key => $jsst_val) {
                                         ?>
                                         <span class="input-field-wrapper">
-                                            <?php echo wp_kses(JSSTformfield::text('values['.esc_attr($val).']', isset($val) ? $val : '', array('class' => 'inputbox one user-field', 'onchange' => 'updateSelectOptionsForDefaultValues()')), JSST_ALLOWED_TAGS); ?>
-                                            <img alt="<?php echo esc_html(__('Delete', 'js-support-ticket')); ?>" class="input-field-remove-img" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/delete.png" />
+                                            <?php echo wp_kses(JSSTformfield::text('values['.esc_attr($jsst_val).']', isset($jsst_val) ? $jsst_val : '', array('class' => 'inputbox one user-field', 'onchange' => 'updateSelectOptionsForDefaultValues()')), JSST_ALLOWED_TAGS); ?>
+                                            <img alt = "<?php echo esc_attr(__('Delete', 'js-support-ticket')); ?>" class="input-field-remove-img" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/delete.png" />
                                         </span>
                                     <?php
                                     }
                                 } else {
-                                    $val = isset($val) ? $val : '';
+                                    $jsst_val = isset($jsst_val) ? $jsst_val : '';
                                     ?>
                                     <span class="input-field-wrapper">
-                                    <?php echo wp_kses(JSSTformfield::text('values['.esc_attr($val).']', $val, array('class' => 'inputbox one user-field', 'onchange' => 'updateSelectOptionsForDefaultValues()')), JSST_ALLOWED_TAGS); ?>
-                                        <img alt="<?php echo esc_html(__('Delete', 'js-support-ticket')); ?>" class="input-field-remove-img" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/delete.png" />
+                                    <?php echo wp_kses(JSSTformfield::text('values['.esc_attr($jsst_val).']', $jsst_val, array('class' => 'inputbox one user-field', 'onchange' => 'updateSelectOptionsForDefaultValues()')), JSST_ALLOWED_TAGS); ?>
+                                        <img alt = "<?php echo esc_attr(__('Delete', 'js-support-ticket')); ?>" class="input-field-remove-img" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/delete.png" />
                                     </span>
                                 <?php
                                 }
                             }
                             ?>
-                            <a title="<?php echo esc_html(__('Add Value', 'js-support-ticket')); ?>" class="jsst-button-link button user-field-val-button" id="user-field-val-button" onclick="insertNewRow();"><?php echo esc_html(__('Add Value', 'js-support-ticket')); ?></a>
+                            <a title="<?php echo esc_attr(__('Add Value', 'js-support-ticket')); ?>" class="jsst-button-link button user-field-val-button" id="user-field-val-button" onclick="insertNewRow();"><?php echo esc_html(__('Add Value', 'js-support-ticket')); ?></a>
                         </div>
                     </div>
                 </div>
-                <?php echo wp_kses(JSSTformfield::hidden('multiformid', $mformid), JSST_ALLOWED_TAGS); ?>
-                <?php echo wp_kses(JSSTformfield::hidden('id', isset(jssupportticket::$_data[0]['userfield']->id) ? jssupportticket::$_data[0]['userfield']->id : ''), JSST_ALLOWED_TAGS); ?>
-                <?php echo wp_kses(JSSTformfield::hidden('fieldfor', jssupportticket::$_data['fieldfor']), JSST_ALLOWED_TAGS); ?>
-                <?php echo wp_kses(JSSTformfield::hidden('ordering', isset(jssupportticket::$_data[0]['userfield']->ordering) ? jssupportticket::$_data[0]['userfield']->ordering : '' ), JSST_ALLOWED_TAGS); ?>
+                <?php echo wp_kses(JSSTformfield::hidden('multiformid', $jsst_mformid), JSST_ALLOWED_TAGS); ?>
+                <?php echo wp_kses(JSSTformfield::hidden('id', isset(jssupportticket::$jsst_data[0]['userfield']->id) ? jssupportticket::$jsst_data[0]['userfield']->id : ''), JSST_ALLOWED_TAGS); ?>
+                <?php echo wp_kses(JSSTformfield::hidden('fieldfor', jssupportticket::$jsst_data['fieldfor']), JSST_ALLOWED_TAGS); ?>
+                <?php echo wp_kses(JSSTformfield::hidden('ordering', isset(jssupportticket::$jsst_data[0]['userfield']->ordering) ? jssupportticket::$jsst_data[0]['userfield']->ordering : '' ), JSST_ALLOWED_TAGS); ?>
                 <?php echo wp_kses(JSSTformfield::hidden('form_request', 'jssupportticket'), JSST_ALLOWED_TAGS); ?>
-                <?php echo wp_kses(JSSTformfield::hidden('isuserfield', isset(jssupportticket::$_data[0]['userfield']->id) ? jssupportticket::$_data[0]['userfield']->isuserfield : 1), JSST_ALLOWED_TAGS); ?>
-                <?php echo wp_kses(JSSTformfield::hidden('fieldname', isset(jssupportticket::$_data[0]['userfield']->field) ? jssupportticket::$_data[0]['userfield']->field : '' ), JSST_ALLOWED_TAGS); ?>
-                <?php echo wp_kses(JSSTformfield::hidden('depandant_field', isset(jssupportticket::$_data[0]['userfield']->depandant_field) ? jssupportticket::$_data[0]['userfield']->depandant_field : '' ), JSST_ALLOWED_TAGS); ?>
-                <?php echo wp_kses(JSSTformfield::hidden('field', isset(jssupportticket::$_data[0]['userfield']->field) ? jssupportticket::$_data[0]['userfield']->field : '' ), JSST_ALLOWED_TAGS); ?>
-                <?php echo wp_kses(JSSTformfield::hidden('arraynames2', $arraynames), JSST_ALLOWED_TAGS); ?>
+                <?php echo wp_kses(JSSTformfield::hidden('isuserfield', isset(jssupportticket::$jsst_data[0]['userfield']->id) ? jssupportticket::$jsst_data[0]['userfield']->isuserfield : 1), JSST_ALLOWED_TAGS); ?>
+                <?php echo wp_kses(JSSTformfield::hidden('fieldname', isset(jssupportticket::$jsst_data[0]['userfield']->field) ? jssupportticket::$jsst_data[0]['userfield']->field : '' ), JSST_ALLOWED_TAGS); ?>
+                <?php echo wp_kses(JSSTformfield::hidden('depandant_field', isset(jssupportticket::$jsst_data[0]['userfield']->depandant_field) ? jssupportticket::$jsst_data[0]['userfield']->depandant_field : '' ), JSST_ALLOWED_TAGS); ?>
+                <?php echo wp_kses(JSSTformfield::hidden('field', isset(jssupportticket::$jsst_data[0]['userfield']->field) ? jssupportticket::$jsst_data[0]['userfield']->field : '' ), JSST_ALLOWED_TAGS); ?>
+                <?php echo wp_kses(JSSTformfield::hidden('arraynames2', $jsst_arraynames), JSST_ALLOWED_TAGS); ?>
                 <div class="js-form-button">
                     <?php echo wp_kses(JSSTformfield::submitbutton('save', esc_html(__('Save Field', 'js-support-ticket')), array('class' => 'button js-form-save')), JSST_ALLOWED_TAGS); ?>
                 </div>
             </form>
         </div>
         <?php
-        $js_scriptdateformat = JSSTincluder::getJSModel('jssupportticket')->getJSSTDateFormat();
-        $jssupportticket_js ='
+        $jsst_js_scriptdateformat = JSSTincluder::getJSModel('jssupportticket')->getJSSTDateFormat();
+        $jsst_jssupportticket_js ='
             jQuery(document).ready(function () {
                 toggleType(jQuery("select#userfieldtype").val());
                 updateSelectOptionsForDefaultValues();
@@ -748,7 +748,7 @@ wp_add_inline_script('js-support-ticket-main-js',$jssupportticket_js);
                     // enableDefaultValueField();
                     if(type == "date") {
                         jQuery("#defaultvalue_input").addClass("custom_date js-form-date-field");
-                        jQuery(".custom_date").datepicker({dateFormat: "'. esc_html($js_scriptdateformat) .'"});
+                        jQuery(".custom_date").datepicker({dateFormat: "'. esc_html($jsst_js_scriptdateformat) .'"});
                         enableDefaultValueField();
                     } else if (type == "depandant_field") {
                         disableDefaultValueField();
@@ -996,44 +996,44 @@ wp_add_inline_script('js-support-ticket-main-js',$jssupportticket_js);
                 });
             });
         ';
-        wp_add_inline_script('js-support-ticket-main-js',$jssupportticket_js);
+        wp_add_inline_script('js-support-ticket-main-js',$jsst_jssupportticket_js);
         // in case of system fields
         // in case of custom fields
-        if (isset(jssupportticket::$_data[0]['userfield']->field)) {
+        if (isset(jssupportticket::$jsst_data[0]['userfield']->field)) {
             // system fields where "default value" is not in use
-            $jssupportticket_js ='';
-            if (in_array(jssupportticket::$_data[0]['userfield']->field, ['users', 'department', 'helptopic', 'priority', 'premade', 'attachments', 'product', 'eddorderid', 'envatopurchasecode', 'eddproductid'])) {
-                $jssupportticket_js .='
+            $jsst_jssupportticket_js ='';
+            if (in_array(jssupportticket::$jsst_data[0]['userfield']->field, ['users', 'department', 'helptopic', 'priority', 'premade', 'attachments', 'product', 'eddorderid', 'envatopurchasecode', 'eddproductid'])) {
+                $jsst_jssupportticket_js .='
                     jQuery(document).ready(function () {
                         disableDefaultValueField();
                     });
                 ';
             }
             // system fields where "placeholder" is not in use
-            if (in_array(jssupportticket::$_data[0]['userfield']->field, ['department', 'helptopic', 'priority', 'issuesummary', 'attachments', 'product', 'eddorderid', 'envatopurchasecode', 'eddproductid'])) {
-                $jssupportticket_js .='
+            if (in_array(jssupportticket::$jsst_data[0]['userfield']->field, ['department', 'helptopic', 'priority', 'issuesummary', 'attachments', 'product', 'eddorderid', 'envatopurchasecode', 'eddproductid'])) {
+                $jsst_jssupportticket_js .='
                     jQuery(document).ready(function () {
                         disablePlaceholderField();
                     });
                 ';
             }
             // system fields where "read only" is not in use
-            if (in_array(jssupportticket::$_data[0]['userfield']->field, ['premade'])) {
-                $jssupportticket_js .='
+            if (in_array(jssupportticket::$jsst_data[0]['userfield']->field, ['premade'])) {
+                $jsst_jssupportticket_js .='
                     jQuery(document).ready(function () {
                         disableReadOnlyField();
                     });
                 ';
             }
             // custom fields where "placeholder" is not in use
-            if (in_array(jssupportticket::$_data[0]['userfield']->userfieldtype, ['checkbox', 'combo', 'radio', 'depandant_field', 'file', 'multiple', 'termsandconditions'])) {
-                $jssupportticket_js .='
+            if (in_array(jssupportticket::$jsst_data[0]['userfield']->userfieldtype, ['checkbox', 'combo', 'radio', 'depandant_field', 'file', 'multiple', 'termsandconditions'])) {
+                $jsst_jssupportticket_js .='
                     jQuery(document).ready(function () {
                         disablePlaceholderField();
                     });
                 ';
             }
-            wp_add_inline_script('js-support-ticket-main-js',$jssupportticket_js);
+            wp_add_inline_script('js-support-ticket-main-js',$jsst_jssupportticket_js);
         }
         ?>
     </div>

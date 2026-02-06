@@ -10,11 +10,11 @@ class jssupportticketController {
     }
 
     function handleRequest() {
-        $module = JSSTrequest::getVar('jstmod', null, 'jssupportticket');
-        JSSTincluder::include_file($module);
+        $jsst_module = JSSTrequest::getVar('jstmod', null, 'jssupportticket');
+        JSSTincluder::include_file($jsst_module);
     }
 
 }
 
-$jssupportticketController = new jssupportticketController();
+$jsst_jssupportticketController = new jssupportticketController();
 ?>

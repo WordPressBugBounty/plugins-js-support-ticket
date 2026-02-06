@@ -10,35 +10,35 @@ class JSSTproductController {
     }
 
     function handleRequest() {
-        $layout = JSSTrequest::getLayout('jstlay', null, 'products');
-        jssupportticket::$_data['sanitized_args']['jsst_nonce'] = esc_html(wp_create_nonce('jsst_nonce'));
-        if (self::canaddfile($layout)) {
-            switch ($layout) {
+        $jsst_layout = JSSTrequest::getLayout('jstlay', null, 'products');
+        jssupportticket::$jsst_data['sanitized_args']['jsst_nonce'] = esc_html(wp_create_nonce('jsst_nonce'));
+        if (self::canaddfile($jsst_layout)) {
+            switch ($jsst_layout) {
                 case 'admin_products':
                     JSSTincluder::getJSModel('product')->getProducts();
                     break;
                 case 'admin_addproduct':
-                    $id = JSSTrequest::getVar('jssupportticketid', 'get');
-                    JSSTincluder::getJSModel('product')->getProductForForm($id);
+                    $jsst_id = JSSTrequest::getVar('jssupportticketid', 'get');
+                    JSSTincluder::getJSModel('product')->getProductForForm($jsst_id);
                     break;
                 default:
                     exit;
             }
-            $module = (is_admin()) ? 'page' : 'jstmod';
-            $module = JSSTrequest::getVar($module, null, 'product');
-            JSSTincluder::include_file($layout, $module);
+            $jsst_module = (is_admin()) ? 'page' : 'jstmod';
+            $jsst_module = JSSTrequest::getVar($jsst_module, null, 'product');
+            JSSTincluder::include_file($jsst_layout, $jsst_module);
         }
     }
 
-    function canaddfile($layout) {
-        $nonce_value = JSSTrequest::getVar('jsst_nonce');
-        if ( wp_verify_nonce( $nonce_value, 'jsst_nonce') ) {
+    function canaddfile($jsst_layout) {
+        $jsst_nonce_value = JSSTrequest::getVar('jsst_nonce');
+        if ( wp_verify_nonce( $jsst_nonce_value, 'jsst_nonce') ) {
             if (isset($_POST['form_request']) && $_POST['form_request'] == 'jssupportticket') {
                 return false;
             } elseif (isset($_GET['action']) && $_GET['action'] == 'jstask') {
                 return false;
             } else {
-                if(!is_admin() && jssupportticketphplib::JSST_strpos($layout, 'admin_') === 0){
+                if(!is_admin() && jssupportticketphplib::JSST_strpos($jsst_layout, 'admin_') === 0){
                     return false;
                 }
                 return true;
@@ -47,72 +47,72 @@ class JSSTproductController {
     }
 
     static function saveproduct() {
-        $id = JSSTrequest::getVar('id');
-        $nonce = JSSTrequest::getVar('_wpnonce');
-        if (! wp_verify_nonce( $nonce, 'save-product-'.$id) ) {
+        $jsst_id = JSSTrequest::getVar('id');
+        $jsst_nonce = JSSTrequest::getVar('_wpnonce');
+        if (! wp_verify_nonce( $jsst_nonce, 'save-product-'.$jsst_id) ) {
             die( 'Security check Failed' );
         }
         if (!current_user_can('manage_options')) { //only admin can change it.
             return false;
         }
-        $data = JSSTrequest::get('post');
-        JSSTincluder::getJSModel('product')->storeProduct($data);
+        $jsst_data = JSSTrequest::get('post');
+        JSSTincluder::getJSModel('product')->storeProduct($jsst_data);
         if (is_admin()) {
-            $url = admin_url("admin.php?page=product&jstlay=products");
+            $jsst_url = admin_url("admin.php?page=product&jstlay=products");
         } else {
-            $url = jssupportticket::makeUrl(array('jstmod'=>'product','jstlay'=>'products'));
+            $jsst_url = jssupportticket::makeUrl(array('jstmod'=>'product','jstlay'=>'products'));
         }
-        wp_redirect($url);
+        wp_safe_redirect($jsst_url);
         exit;
     }
 
     static function deleteproduct() {
-        $id = JSSTrequest::getVar('productid');
-        $nonce = JSSTrequest::getVar('_wpnonce');
-        if (! wp_verify_nonce( $nonce, 'delete-product-'.$id) ) {
+        $jsst_id = JSSTrequest::getVar('productid');
+        $jsst_nonce = JSSTrequest::getVar('_wpnonce');
+        if (! wp_verify_nonce( $jsst_nonce, 'delete-product-'.$jsst_id) ) {
             die( 'Security check Failed' );
         }
-        JSSTincluder::getJSModel('product')->removeProduct($id);
+        JSSTincluder::getJSModel('product')->removeProduct($jsst_id);
         if (is_admin()) {
-            $url = admin_url("admin.php?page=product&jstlay=products");
+            $jsst_url = admin_url("admin.php?page=product&jstlay=products");
         } else {
-            $url = jssupportticket::makeUrl(array('jstmod'=>'product','jstlay'=>'products'));
+            $jsst_url = jssupportticket::makeUrl(array('jstmod'=>'product','jstlay'=>'products'));
         }
-        wp_redirect($url);
+        wp_safe_redirect($jsst_url);
         exit;
     }
 
     static function changestatus() {
-        $id = JSSTrequest::getVar('productid');
-        $nonce = JSSTrequest::getVar('_wpnonce');
-        if (! wp_verify_nonce( $nonce, 'change-status-'.$id) ) {
+        $jsst_id = JSSTrequest::getVar('productid');
+        $jsst_nonce = JSSTrequest::getVar('_wpnonce');
+        if (! wp_verify_nonce( $jsst_nonce, 'change-status-'.$jsst_id) ) {
             die( 'Security check Failed' );
         }
-        JSSTincluder::getJSModel('product')->changeStatus($id);
-        $url = admin_url("admin.php?page=product&jstlay=products");
-        $pagenum = JSSTrequest::getVar('pagenum');
-        if ($pagenum)
-            $url .= '&pagenum=' . $pagenum;
-        wp_redirect($url);
+        JSSTincluder::getJSModel('product')->changeStatus($jsst_id);
+        $jsst_url = admin_url("admin.php?page=product&jstlay=products");
+        $jsst_pagenum = JSSTrequest::getVar('pagenum');
+        if ($jsst_pagenum)
+            $jsst_url .= '&pagenum=' . $jsst_pagenum;
+        wp_safe_redirect($jsst_url);
         exit;
     }
 
     static function ordering() {
-        $nonce = JSSTrequest::getVar('_wpnonce');
-        if (! wp_verify_nonce( $nonce, 'ordering') ) {
+        $jsst_nonce = JSSTrequest::getVar('_wpnonce');
+        if (! wp_verify_nonce( $jsst_nonce, 'ordering') ) {
             die( 'Security check Failed' );
         }
-        $id = JSSTrequest::getVar('productid');
-        JSSTincluder::getJSModel('product')->setOrdering($id);
-        $pagenum = JSSTrequest::getVar('pagenum');
-        $url = "admin.php?page=product&jstlay=products";
-        if ($pagenum)
-            $url .= '&pagenum=' . $pagenum;
-        wp_redirect($url);
+        $jsst_id = JSSTrequest::getVar('productid');
+        JSSTincluder::getJSModel('product')->setOrdering($jsst_id);
+        $jsst_pagenum = JSSTrequest::getVar('pagenum');
+        $jsst_url = "admin.php?page=product&jstlay=products";
+        if ($jsst_pagenum)
+            $jsst_url .= '&pagenum=' . $jsst_pagenum;
+        wp_safe_redirect($jsst_url);
         exit;
     }
 
 }
 
-$productController = new JSSTproductController();
+$jsst_productController = new JSSTproductController();
 ?>

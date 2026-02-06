@@ -15,18 +15,18 @@ class JSSTformhandler {
      */
 
     function checkFormRequest() {
-        $formrequest = JSSTrequest::getVar('form_request', 'post');
-        if ($formrequest == 'jssupportticket') {
+        $jsst_formrequest = JSSTrequest::getVar('form_request', 'post');
+        if ($jsst_formrequest == 'jssupportticket') {
             //handle the request
-            $page_id = JSSTRequest::getVar('page_id', 'GET');
-            jssupportticket::setPageID($page_id);
-            $modulename = (is_admin()) ? 'page' : 'jstmod';
-            $module = JSSTrequest::getVar($modulename);
-            JSSTincluder::include_file($module);
-            $class = 'JSST' . $module . "Controller";
-            $task = JSSTrequest::getVar('task');
-            $obj = new $class;
-            $obj->$task();
+            $jsst_page_id = JSSTRequest::getVar('page_id', 'GET');
+            jssupportticket::setPageID($jsst_page_id);
+            $jsst_modulename = (is_admin()) ? 'page' : 'jstmod';
+            $jsst_module = JSSTrequest::getVar($jsst_modulename);
+            JSSTincluder::include_file($jsst_module);
+            $jsst_class = 'JSST' . $jsst_module . "Controller";
+            $jsst_task = JSSTrequest::getVar('task');
+            $jsst_obj = new $jsst_class;
+            $jsst_obj->$jsst_task();
         }
     }
 
@@ -35,19 +35,19 @@ class JSSTformhandler {
      */
 
     function checkDeleteRequest() {
-        $jssupportticket_action = JSSTrequest::getVar('action', 'get');
-        if ($jssupportticket_action == 'jstask') {
+        $jsst_jssupportticket_action = JSSTrequest::getVar('action', 'get');
+        if ($jsst_jssupportticket_action == 'jstask') {
             //handle the request
-            $page_id = JSSTRequest::getVar('page_id', 'GET');
-            jssupportticket::setPageID($page_id);
-            $modulename = (is_admin()) ? 'page' : 'jstmod';
-            $module = JSSTrequest::getVar($modulename,'','');
-            if($module != ''){
-                JSSTincluder::include_file($module);
-                $class = 'JSST' . $module . "Controller";
-                $action = JSSTrequest::getVar('task');
-                $obj = new $class;
-                $obj->$action();
+            $jsst_page_id = JSSTRequest::getVar('page_id', 'GET');
+            jssupportticket::setPageID($jsst_page_id);
+            $jsst_modulename = (is_admin()) ? 'page' : 'jstmod';
+            $jsst_module = JSSTrequest::getVar($jsst_modulename,'','');
+            if($jsst_module != ''){
+                JSSTincluder::include_file($jsst_module);
+                $jsst_class = 'JSST' . $jsst_module . "Controller";
+                $jsst_action = JSSTrequest::getVar('task');
+                $jsst_obj = new $jsst_class;
+                $jsst_obj->$jsst_action();
             }else{
                 error_log( print_r( $_REQUEST, true ) );// temporary code to get the case when problem occurs(there are errors in log but no way to find the case that causes them)
             }
@@ -56,5 +56,5 @@ class JSSTformhandler {
 
 }
 
-$formhandler = new JSSTformhandler();
+$jsst_formhandler = new JSSTformhandler();
 ?>

@@ -86,45 +86,45 @@ function getDataForVisibleField(wpnonce, val, fieldname, conditionGroups) {
                                             ? "select#" + condition.visibleParent
                                             : "select#" + condition.visibleParent + "id";
 
-                                        $field = jQuery(selector);
+                                        $jsst_field = jQuery(selector);
                                         // If not found, fallback to checkbox group selector
-                                        if ($field.length === 0) {
-                                            $field = jQuery("input[type='checkbox'][id^='" + condition.visibleParent + "_']");
+                                        if ($jsst_field.length === 0) {
+                                            $jsst_field = jQuery("input[type='checkbox'][id^='" + condition.visibleParent + "_']");
                                         }
                                         // If not found, fallback to radiobutton group selector
-                                        if ($field.length === 0) {
-                                            $field = jQuery("input[type='radio'][id^='" + condition.visibleParent + "_']");
+                                        if ($jsst_field.length === 0) {
+                                            $jsst_field = jQuery("input[type='radio'][id^='" + condition.visibleParent + "_']");
                                         }
                                         // If not found, fallback to multiselect group selector
-                                        if ($field.length === 0) {
-                                            $field = jQuery("select[id^='" + condition.visibleParent + "[]']");
+                                        if ($jsst_field.length === 0) {
+                                            $jsst_field = jQuery("select[id^='" + condition.visibleParent + "[]']");
                                         }
                                         // If not found, fallback to multiselect group selector
-                                        if ($field.length === 0) {
-                                            $field = false;
+                                        if ($jsst_field.length === 0) {
+                                            $jsst_field = false;
                                         }
                                         
                                         let fieldval = null;
 
-                                        if ($field. length > 0) {
-                                            var tag = $field.prop("tagName").toLowerCase();
-                                            var type = $field.attr("type");
+                                        if ($jsst_field. length > 0) {
+                                            var tag = $jsst_field.prop("tagName").toLowerCase();
+                                            var type = $jsst_field.attr("type");
 
                                             if (tag === "select") {
                                                 // Handles both single and multi-select dropdowns
-                                                var isMultiSelect = $field.prop("multiple") === true;
+                                                var isMultiSelect = $jsst_field.prop("multiple") === true;
                                                 if (isMultiSelect) {
                                                     fieldval = [];
-                                                    $field.find("option:selected").each(function () {
+                                                    $jsst_field.find("option:selected").each(function () {
                                                         fieldval.push(this.value);
                                                     });
                                                 } else {
-                                                    fieldval = $field.val(); // jQuery returns array for multi-select
+                                                    fieldval = $jsst_field.val(); // jQuery returns array for multi-select
                                                 }
                                             } else if (type === "checkbox") {
                                                 // Handle checkbox group (collect all checked values)
                                                 fieldval = [];
-                                                $field.filter(":checked").each(function () {
+                                                $jsst_field.filter(":checked").each(function () {
                                                     fieldval.push(this.value);
                                                 });
                                             } else if (type === "radio") {
@@ -132,7 +132,7 @@ function getDataForVisibleField(wpnonce, val, fieldname, conditionGroups) {
                                                 fieldval = jQuery("input[name='" + condition.visibleParent + "']:checked").val();
                                             } else {
                                                 // Fallback for other input types
-                                                fieldval = $field.val();
+                                                fieldval = $jsst_field.val();
                                             }
                                         }
 

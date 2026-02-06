@@ -1,10 +1,10 @@
 <?php
 if (!defined('ABSPATH')) die('Restricted Access');
-$ticketidsequence = array(
+$jsst_ticketidsequence = array(
     (object) array('id' => '0', 'text' => esc_html(__('Random', 'js-support-ticket'))),
     (object) array('id' => '1', 'text' => esc_html(__('Sequential', 'js-support-ticket')))
     );
-$type = array(
+$jsst_type = array(
     (object) array('id' => '0', 'text' => esc_html(__('Days', 'js-support-ticket'))),
     (object) array('id' => '1', 'text' => esc_html(__('Hours', 'js-support-ticket')))
     );
@@ -17,7 +17,7 @@ $type = array(
                 <span class="jsst_heading"><?php echo esc_html(__('JS Support Ticket Settings','js-support-ticket')); ?></span>
                 <div class="close-button-bottom">
                     <a href="#" class="close-button">
-                        <img alt="image" src="<?php echo esc_url(JSST_PLUGIN_URL).'includes/images/postinstallation/close-icon.png';?>" />
+                        <img alt="<?php echo esc_attr(__('image','js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL).'includes/images/postinstallation/close-icon.png';?>" />
                     </a>
                 </div>
             </div>
@@ -70,7 +70,7 @@ $type = array(
                                     <?php echo esc_html(__('Feedback Email Delay Type','js-support-ticket')); ?><?php echo esc_html(__(':', 'js-support-ticket'));?>
                                 </div>
                                 <div class="field">
-                                     <?php echo wp_kses(JSSTformfield::select('feedback_email_delay_type', $type , isset(jssupportticket::$_data[0]['feedback_email_delay_type']) ? jssupportticket::$_data[0]['feedback_email_delay_type'] : '', esc_html(__('Select Type', 'js-support-ticket')) , array('class' => 'inputbox jsst-postsetting js-select jsst-postsetting ')), JSST_ALLOWED_TAGS);?>
+                                     <?php echo wp_kses(JSSTformfield::select('feedback_email_delay_type', $jsst_type , isset(jssupportticket::$jsst_data[0]['feedback_email_delay_type']) ? jssupportticket::$jsst_data[0]['feedback_email_delay_type'] : '', esc_html(__('Select Type', 'js-support-ticket')) , array('class' => 'inputbox jsst-postsetting js-select jsst-postsetting ')), JSST_ALLOWED_TAGS);?>
                                 </div>
                                 <div class="desc">
                                     <?php echo esc_html(__('Set Email Delay Time', "js-support-ticket")); ?>
@@ -81,7 +81,7 @@ $type = array(
                                     <?php echo esc_html(__('Feedback Email Delay','js-support-ticket')); ?><?php echo esc_html(__(' :','js-support-ticket'));?>
                                 </div>
                                 <div class="field">
-                                    <?php echo wp_kses(JSSTformfield::text('feedback_email_delay', isset(jssupportticket::$_data[0]['feedback_email_delay']) ? jssupportticket::$_data[0]['feedback_email_delay'] : '', array('class' => 'inputbox jsst-postsetting js-select jsst-postsetting', 'data-validation' => 'required')), JSST_ALLOWED_TAGS) ?>
+                                    <?php echo wp_kses(JSSTformfield::text('feedback_email_delay', isset(jssupportticket::$jsst_data[0]['feedback_email_delay']) ? jssupportticket::$jsst_data[0]['feedback_email_delay'] : '', array('class' => 'inputbox jsst-postsetting js-select jsst-postsetting', 'data-validation' => 'required')), JSST_ALLOWED_TAGS) ?>
                                 </div>
                                 <div class="desc">
                                     <?php echo esc_html(__('Set Email Delay','js-support-ticket')); ?>
@@ -90,10 +90,10 @@ $type = array(
                              <div class="pic-button-part">
                                 <a class="next-step" href="#" onclick="document.getElementById('jssupportticket-form-ins').submit();" >
                                     <?php echo esc_html(__('Save & Next','js-support-ticket')); ?>
-                                     <img alt="image" src="<?php echo esc_url(JSST_PLUGIN_URL).'includes/images/postinstallation/next-arrow.png';?>">
+                                     <img alt="<?php echo esc_attr(__('image','js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL).'includes/images/postinstallation/next-arrow.png';?>">
                                 </a>
                                 <a class="back" href="<?php echo esc_url(admin_url('admin.php?page=postinstallation&jstlay=steptwo')); ?>">
-                                    <img alt="image" src="<?php echo esc_url(JSST_PLUGIN_URL).'includes/images/postinstallation/back-arrow.png';?>">
+                                    <img alt="<?php echo esc_attr(__('image','js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL).'includes/images/postinstallation/back-arrow.png';?>">
                                     <?php echo esc_html(__('Back','js-support-ticket')); ?>
                                 </a>
                             </div>

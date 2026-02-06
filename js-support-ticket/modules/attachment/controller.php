@@ -10,32 +10,32 @@ class JSSTattachmentController {
     }
 
     function handleRequest() {
-        $layout = JSSTrequest::getLayout('jstlay', null, 'getattachments');
-        jssupportticket::$_data['sanitized_args']['jsst_nonce'] = esc_html(wp_create_nonce('jsst_nonce'));
-        if (self::canaddfile($layout)) {
-            switch ($layout) {
+        $jsst_layout = JSSTrequest::getLayout('jstlay', null, 'getattachments');
+        jssupportticket::$jsst_data['sanitized_args']['jsst_nonce'] = esc_html(wp_create_nonce('jsst_nonce'));
+        if (self::canaddfile($jsst_layout)) {
+            switch ($jsst_layout) {
                 case 'getattachments':
-                    $id = JSSTrequest::getVar('jssupportticketid', 'get', null);
-                    JSSTincluder::getJSModel('replies')->getrepliesForForm($id);
+                    $jsst_id = JSSTrequest::getVar('jssupportticketid', 'get', null);
+                    JSSTincluder::getJSModel('replies')->getrepliesForForm($jsst_id);
                     break;
                 default:
                     exit;
             }
-            $module = (is_admin()) ? 'page' : 'jstmod';
-            $module = JSSTrequest::getVar($module, null, 'attachment');
-            JSSTincluder::include_file($layout, $module);
+            $jsst_module = (is_admin()) ? 'page' : 'jstmod';
+            $jsst_module = JSSTrequest::getVar($jsst_module, null, 'attachment');
+            JSSTincluder::include_file($jsst_layout, $jsst_module);
         }
     }
 
-    function canaddfile($layout) {
-        $nonce_value = JSSTrequest::getVar('jsst_nonce');
-        if ( wp_verify_nonce( $nonce_value, 'jsst_nonce') ) {
+    function canaddfile($jsst_layout) {
+        $jsst_nonce_value = JSSTrequest::getVar('jsst_nonce');
+        if ( wp_verify_nonce( $jsst_nonce_value, 'jsst_nonce') ) {
             if (isset($_POST['form_request']) && $_POST['form_request'] == 'jssupportticket') {
                 return false;
             } elseif (isset($_GET['action']) && $_GET['action'] == 'jstask') {
                 return false;
             } else {
-                if(!is_admin() && jssupportticketphplib::JSST_strpos($layout, 'admin_') === 0){
+                if(!is_admin() && jssupportticketphplib::JSST_strpos($jsst_layout, 'admin_') === 0){
                     return false;
                 }
                 return true;
@@ -44,39 +44,39 @@ class JSSTattachmentController {
     }
 
     static function saveattachments() {
-        $data = JSSTrequest::get('post');
-        JSSTincluder::getJSModel('attachment')->storeAttachments($data);
+        $jsst_data = JSSTrequest::get('post');
+        JSSTincluder::getJSModel('attachment')->storeAttachments($jsst_data);
         if (is_admin()) {
-            $url = admin_url("admin.php?page=ticket&jstlay=ticketdetail&jssupportticketid=" . JSSTrequest::getVar('ticketid'));
+            $jsst_url = admin_url("admin.php?page=ticket&jstlay=ticketdetail&jssupportticketid=" . JSSTrequest::getVar('ticketid'));
         } else {
-            $url = jssupportticket::makeUrl(array('jstmod'=>'replies', 'jstlay'=>'replies'));
+            $jsst_url = jssupportticket::makeUrl(array('jstmod'=>'replies', 'jstlay'=>'replies'));
         }
-        wp_redirect($url);
+        wp_safe_redirect($jsst_url);
         exit;
     }
 
     static function deleteattachment() {
-        $id = JSSTrequest::getVar('id');
-        $nonce = JSSTrequest::getVar('_wpnonce');
-        if (! wp_verify_nonce( $nonce, 'delete-attachement-'.$id)  && !is_admin()) {
+        $jsst_id = JSSTrequest::getVar('id');
+        $jsst_nonce = JSSTrequest::getVar('_wpnonce');
+        if (! wp_verify_nonce( $jsst_nonce, 'delete-attachement-'.$jsst_id)  && !is_admin()) {
             die( 'Security check Failed' );
         }
-        $call_from = JSSTrequest::getVar('call_from','',1);
-        JSSTincluder::getJSModel('attachment')->removeAttachment($id);
+        $jsst_call_from = JSSTrequest::getVar('call_from','',1);
+        JSSTincluder::getJSModel('attachment')->removeAttachment($jsst_id);
         if (is_admin()) {
-            $url = admin_url("admin.php?page=ticket&jstlay=addticket&jssupportticketid=" . JSSTrequest::getVar('ticketid'));
+            $jsst_url = admin_url("admin.php?page=ticket&jstlay=addticket&jssupportticketid=" . JSSTrequest::getVar('ticketid'));
         } else {
-            if($call_from == 2){
-                $url = jssupportticket::makeUrl(array('jstmod'=>'agent', 'jstlay'=>'staffaddticket','jssupportticketid'=>JSSTrequest::getVar('ticketid')));
+            if($jsst_call_from == 2){
+                $jsst_url = jssupportticket::makeUrl(array('jstmod'=>'agent', 'jstlay'=>'staffaddticket','jssupportticketid'=>JSSTrequest::getVar('ticketid')));
             }else{
-                $url = jssupportticket::makeUrl(array('jstmod'=>'replies', 'jstlay'=>'replies'));
+                $jsst_url = jssupportticket::makeUrl(array('jstmod'=>'replies', 'jstlay'=>'replies'));
             }
         }
-        wp_redirect($url);
+        wp_safe_redirect($jsst_url);
         exit;
     }
 
 }
 
-$attachmentController = new JSSTattachmentController();
+$jsst_attachmentController = new JSSTattachmentController();
 ?>

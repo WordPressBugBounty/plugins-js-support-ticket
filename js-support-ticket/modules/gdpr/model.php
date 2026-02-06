@@ -6,87 +6,87 @@ if (!defined('ABSPATH'))
 class JSSTgdprModel {
 
 	function getGDPRFeilds(){
-		$query = "SELECT * FROM `" . jssupportticket::$_db->prefix . "js_ticket_fieldsordering` WHERE fieldfor = 3 ORDER BY ordering ";
-		jssupportticket::$_data[0] = jssupportticket::$_db->get_results($query);
+		$jsst_query = "SELECT * FROM `" . jssupportticket::$_db->prefix . "js_ticket_fieldsordering` WHERE fieldfor = 3 ORDER BY ordering ";
+		jssupportticket::$jsst_data[0] = jssupportticket::$_db->get_results($jsst_query);
 		if (jssupportticket::$_db->last_error != null) {
 		    JSSTincluder::getJSModel('systemerror')->addSystemError();
 		}
 	}
 
 	function getEraseDataRequests(){
-		$query = "SELECT * FROM `" . jssupportticket::$_db->prefix . "js_ticket_erasedatarequests`";
-		jssupportticket::$_data[0] = jssupportticket::$_db->get_results($query);
+		$jsst_query = "SELECT * FROM `" . jssupportticket::$_db->prefix . "js_ticket_erasedatarequests`";
+		jssupportticket::$jsst_data[0] = jssupportticket::$_db->get_results($jsst_query);
 		if (jssupportticket::$_db->last_error != null) {
 		    JSSTincluder::getJSModel('systemerror')->addSystemError();
 		}
 
-        $email = jssupportticket::$_search['gdpr']['email'];
-        $email = jssupportticket::parseSpaces($email);
-        $inquery = '';
-        if ($email != null)
-            $inquery .= " WHERE user.user_email = '".esc_sql($email)."'";
+        $jsst_email = jssupportticket::$_search['gdpr']['email'];
+        $jsst_email = jssupportticket::parseSpaces($jsst_email);
+        $jsst_inquery = '';
+        if ($jsst_email != null)
+            $jsst_inquery .= " WHERE user.user_email = '".esc_sql($jsst_email)."'";
 
-        jssupportticket::$_data['filter']['email'] = $email;
+        jssupportticket::$jsst_data['filter']['email'] = $jsst_email;
 
         // Pagination
-        $query = "SELECT COUNT(request.id)
+        $jsst_query = "SELECT COUNT(request.id)
                     FROM `" . jssupportticket::$_db->prefix . "js_ticket_erasedatarequests` AS request
                     LEFT JOIN `" . jssupportticket::$_db->prefix . "js_ticket_users` AS user ON user.id = request.uid
                     ";
-        $query .= $inquery;
-        $total = jssupportticket::$_db->get_var($query);
-        jssupportticket::$_data['total'] = $total;
-        jssupportticket::$_data[1] = JSSTpagination::getPagination($total);
+        $jsst_query .= $jsst_inquery;
+        $jsst_total = jssupportticket::$_db->get_var($jsst_query);
+        jssupportticket::$jsst_data['total'] = $jsst_total;
+        jssupportticket::$jsst_data[1] = JSSTpagination::getPagination($jsst_total);
 
         // Data
-        $query = "SELECT request.*, user.user_email
+        $jsst_query = "SELECT request.*, user.user_email
                     FROM `" . jssupportticket::$_db->prefix . "js_ticket_erasedatarequests` AS request
                     LEFT JOIN `" . jssupportticket::$_db->prefix . "js_ticket_users` AS user ON user.id = request.uid
                     ";
-        $query .= $inquery;
-        $query .= " ORDER BY request.created DESC LIMIT " . JSSTpagination::getOffset() . ", " . JSSTpagination::getLimit();
-        jssupportticket::$_data[0] = jssupportticket::$_db->get_results($query);
+        $jsst_query .= $jsst_inquery;
+        $jsst_query .= " ORDER BY request.created DESC LIMIT " . JSSTpagination::getOffset() . ", " . JSSTpagination::getLimit();
+        jssupportticket::$jsst_data[0] = jssupportticket::$_db->get_results($jsst_query);
         if (jssupportticket::$_db->last_error != null) {
             JSSTincluder::getJSModel('systemerror')->addSystemError();
         }
 	}
 
     function getUserEraseDataRequest(){
-        $uid = JSSTincluder::getObjectClass('user')->uid();
-        if($uid == 0){
+        $jsst_uid = JSSTincluder::getObjectClass('user')->uid();
+        if($jsst_uid == 0){
             return;
         }
-        $query = "SELECT * FROM `" . jssupportticket::$_db->prefix . "js_ticket_erasedatarequests` WHERE uid = ".esc_sql($uid);
-        jssupportticket::$_data[0] = jssupportticket::$_db->get_row($query);
+        $jsst_query = "SELECT * FROM `" . jssupportticket::$_db->prefix . "js_ticket_erasedatarequests` WHERE uid = ".esc_sql($jsst_uid);
+        jssupportticket::$jsst_data[0] = jssupportticket::$_db->get_row($jsst_query);
         if (jssupportticket::$_db->last_error != null) {
             JSSTincluder::getJSModel('systemerror')->addSystemError();
         }
     }
 
-    function storeUserEraseRequest($data){
-        $id = isset($data['id']) ? $data['id'] : '';
-        $nonce = JSSTrequest::getVar('_wpnonce');
-        if (! wp_verify_nonce( $nonce, 'save-usereraserequest-'.$id) ) {
+    function storeUserEraseRequest($jsst_data){
+        $jsst_id = isset($jsst_data['id']) ? $jsst_data['id'] : '';
+        $jsst_nonce = JSSTrequest::getVar('_wpnonce');
+        if (! wp_verify_nonce( $jsst_nonce, 'save-usereraserequest-'.$jsst_id) ) {
             die( 'Security check Failed' );
         }
-    	if (!$data['id']) { //new
-    	    $data['created'] = date_i18n('Y-m-d H:i:s');
-            $data['uid'] = JSSTincluder::getObjectClass('user')->uid();
-            $data['status'] = 1;
+    	if (!$jsst_data['id']) { //new
+    	    $jsst_data['created'] = date_i18n('Y-m-d H:i:s');
+            $jsst_data['uid'] = JSSTincluder::getObjectClass('user')->uid();
+            $jsst_data['status'] = 1;
     	}
-    	$data = jssupportticket::JSST_sanitizeData($data); // JSST_sanitizeData() function uses wordpress santize functions
-    	$data['message'] = JSSTincluder::getJSModel('jssupportticket')->getSanitizedEditorData($_POST['message']);
-    	$row = JSSTincluder::getJSTable('erasedatarequests');
-    	$data = JSSTincluder::getJSmodel('jssupportticket')->stripslashesFull($data);// remove slashes with quotes.
-    	$error = 0;
-    	if (!$row->bind($data)) {
-            $error = 1;
+    	$jsst_data = jssupportticket::JSST_sanitizeData($jsst_data); // JSST_sanitizeData() function uses wordpress santize functions
+    	$jsst_data['message'] = JSSTincluder::getJSModel('jssupportticket')->getSanitizedEditorData($_POST['message']);
+    	$jsst_row = JSSTincluder::getJSTable('erasedatarequests');
+    	$jsst_data = JSSTincluder::getJSmodel('jssupportticket')->stripslashesFull($jsst_data);// remove slashes with quotes.
+    	$jsst_error = 0;
+    	if (!$jsst_row->bind($jsst_data)) {
+            $jsst_error = 1;
     	}
-    	if (!$row->store()) {
-            $error = 1;
+    	if (!$jsst_row->store()) {
+            $jsst_error = 1;
     	}
 
-    	if ($error == 0) {
+    	if ($jsst_error == 0) {
     	    JSSTmessage::setMessage(esc_html(__('Erasing data request has been stored', 'js-support-ticket')), 'updated');
     	} else {
     	    JSSTincluder::getJSModel('systemerror')->addSystemError(); // if there is an error add it to system errorrs
@@ -95,13 +95,13 @@ class JSSTgdprModel {
         return;
     }
 
-    function deleteUserEraseRequest($id){
-        if(!is_numeric($id)){
+    function deleteUserEraseRequest($jsst_id){
+        if(!is_numeric($jsst_id)){
             return false;
         }
-        if($this->checkCanDelete($id)){
-            $row = JSSTincluder::getJSTable('erasedatarequests');
-            if ($row->delete($id)) {
+        if($this->checkCanDelete($jsst_id)){
+            $jsst_row = JSSTincluder::getJSTable('erasedatarequests');
+            if ($jsst_row->delete($jsst_id)) {
                 JSSTmessage::setMessage(esc_html(__('Erase data request withdrawn', 'js-support-ticket')), 'updated');
             } else {
                 JSSTincluder::getJSModel('systemerror')->addSystemError(); // if there is an error add it to system errorrs
@@ -111,376 +111,405 @@ class JSSTgdprModel {
         return;
     }
 
-    function checkCanDelete($id){
-        if(!is_numeric($id)) return false;
+    function checkCanDelete($jsst_id){
+        if(!is_numeric($jsst_id)) return false;
         if(current_user_can('manage_options')){ // allow admin to delete ??
             return true;
         }
 
-        $uid = JSSTincluder::getObjectClass('user')->uid();
-        $query = "SELECT uid FROM `" . jssupportticket::$_db->prefix . "js_ticket_erasedatarequests` WHERE id = ".esc_sql($id);
-        $db_uid = jssupportticket::$_db->get_var($query);
-        if( $db_uid == $uid){
+        $jsst_uid = JSSTincluder::getObjectClass('user')->uid();
+        $jsst_query = "SELECT uid FROM `" . jssupportticket::$_db->prefix . "js_ticket_erasedatarequests` WHERE id = ".esc_sql($jsst_id);
+        $jsst_db_uid = jssupportticket::$_db->get_var($jsst_query);
+        if( $jsst_db_uid == $jsst_uid){
             return true;
         }else{
             return false;
         }
     }
 
-    private function getUserDetailReportByUserId( $uid = 0){
-        $curdate = JSSTrequest::getVar('date_start', 'get');
-        $fromdate = JSSTrequest::getVar('date_end', 'get');
-        if($uid == 0 || $uid == ''){
-            $id = JSSTrequest::getVar('uid', 'get');
+    private function getUserDetailReportByUserId( $jsst_uid = 0){
+        $jsst_curdate = JSSTrequest::getVar('date_start', 'get');
+        $jsst_fromdate = JSSTrequest::getVar('date_end', 'get');
+        if($jsst_uid == 0 || $jsst_uid == ''){
+            $jsst_id = JSSTrequest::getVar('uid', 'get');
         }else{
-            $id = $uid;
-            $query = "SELECT created FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE uid = ".esc_sql($id) ." ORDER BY created ASC LIMIT 1";
-            $curdate = jssupportticket::$_db->get_var($query);
+            $jsst_id = $jsst_uid;
+            $jsst_query = "SELECT created FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE uid = ".esc_sql($jsst_id) ." ORDER BY created ASC LIMIT 1";
+            $jsst_curdate = jssupportticket::$_db->get_var($jsst_query);
 
-            $fromdate = date_i18n('Y-m-d h:i:s');
+            $jsst_fromdate = date_i18n('Y-m-d h:i:s');
         }
 
-        if( empty($curdate) OR empty($fromdate))
+        if( empty($jsst_curdate) OR empty($jsst_fromdate))
             return null;
-        if(! is_numeric($id))
+        if(! is_numeric($jsst_id))
             return null;
 
-        $result['curdate'] = $curdate;
-        $result['fromdate'] = $fromdate;
-        $result['id'] = $id;
+        $jsst_result['curdate'] = $jsst_curdate;
+        $jsst_result['fromdate'] = $jsst_fromdate;
+        $jsst_result['id'] = $jsst_id;
 
         //Query to get Data
-        $query = "SELECT created FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE status = 1 AND (lastreply = '0000-00-00 00:00:00' OR lastreply = '') AND created >= '" . esc_sql($curdate) . "' AND created <= '" . esc_sql($fromdate) . "'";
-        if($id) $query .= " AND uid = ".esc_sql($id);
-        $result['openticket'] = jssupportticket::$_db->get_results($query);
+        $jsst_query = "SELECT created FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE status = 1 AND (lastreply = '0000-00-00 00:00:00' OR lastreply = '') AND created >= '" . esc_sql($jsst_curdate) . "' AND created <= '" . esc_sql($jsst_fromdate) . "'";
+        if($jsst_id) $jsst_query .= " AND uid = ".esc_sql($jsst_id);
+        $jsst_result['openticket'] = jssupportticket::$_db->get_results($jsst_query);
 
-        $query = "SELECT created FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE status = 5 AND created >= '" . esc_sql($curdate) . "' AND created <= '" . esc_sql($fromdate) . "'";
-        if($id) $query .= " AND uid = ".esc_sql($id);
-        $result['closeticket'] = jssupportticket::$_db->get_results($query);
+        $jsst_query = "SELECT created FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE status = 5 AND created >= '" . esc_sql($jsst_curdate) . "' AND created <= '" . esc_sql($jsst_fromdate) . "'";
+        if($jsst_id) $jsst_query .= " AND uid = ".esc_sql($jsst_id);
+        $jsst_result['closeticket'] = jssupportticket::$_db->get_results($jsst_query);
 
-        $query = "SELECT created FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE isanswered = 1 AND status != 5 AND status != 1 AND created >= '" . esc_sql($curdate) . "' AND created <= '" . esc_sql($fromdate) . "'";
-        if($id) $query .= " AND uid = ".esc_sql($id);
-        $result['answeredticket'] = jssupportticket::$_db->get_results($query);
+        $jsst_query = "SELECT created FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE isanswered = 1 AND status != 5 AND status != 1 AND created >= '" . esc_sql($jsst_curdate) . "' AND created <= '" . esc_sql($jsst_fromdate) . "'";
+        if($jsst_id) $jsst_query .= " AND uid = ".esc_sql($jsst_id);
+        $jsst_result['answeredticket'] = jssupportticket::$_db->get_results($jsst_query);
 
-        $query = "SELECT created FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE isoverdue = 1 AND status != 5 AND created >= '" . esc_sql($curdate) . "' AND created <= '" . esc_sql($fromdate) . "'";
-        if($id) $query .= " AND uid = ".esc_sql($id);
-        $result['overdueticket'] = jssupportticket::$_db->get_results($query);
+        $jsst_query = "SELECT created FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE isoverdue = 1 AND status != 5 AND created >= '" . esc_sql($jsst_curdate) . "' AND created <= '" . esc_sql($jsst_fromdate) . "'";
+        if($jsst_id) $jsst_query .= " AND uid = ".esc_sql($jsst_id);
+        $jsst_result['overdueticket'] = jssupportticket::$_db->get_results($jsst_query);
 
-        $query = "SELECT created FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE isanswered != 1 AND status != 5 AND (lastreply != '0000-00-00 00:00:00' AND lastreply != '') AND created >= '" . esc_sql($curdate) . "' AND created <= '" . esc_sql($fromdate) . "'";
-        if($id) $query .= " AND uid = ".esc_sql($id);
-        $result['pendingticket'] = jssupportticket::$_db->get_results($query);
+        $jsst_query = "SELECT created FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE isanswered != 1 AND status != 5 AND (lastreply != '0000-00-00 00:00:00' AND lastreply != '') AND created >= '" . esc_sql($jsst_curdate) . "' AND created <= '" . esc_sql($jsst_fromdate) . "'";
+        if($jsst_id) $jsst_query .= " AND uid = ".esc_sql($jsst_id);
+        $jsst_result['pendingticket'] = jssupportticket::$_db->get_results($jsst_query);
         //user detail
-        $query = "SELECT user.display_name,user.user_email,user.user_nicename,user.id,
-                    (SELECT COUNT(id) FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE status = 1  AND (lastreply = '0000-00-00 00:00:00' OR lastreply = '') AND created >= '" . esc_sql($curdate) . "' AND created <= '" . esc_sql($fromdate) . "' AND uid = user.id) AS openticket,
-                    (SELECT COUNT(id) FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE status = 5 AND created >= '" . esc_sql($curdate) . "' AND created <= '" . esc_sql($fromdate) . "' AND uid = user.id) AS closeticket,
-                    (SELECT COUNT(id) FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE isanswered = 1 AND status != 5 AND status != 1 AND created >= '" . esc_sql($curdate) . "' AND created <= '" . esc_sql($fromdate) . "' AND uid = user.id) AS answeredticket,
-                    (SELECT COUNT(id) FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE isoverdue = 1 AND status != 5 AND created >= '" . esc_sql($curdate) . "' AND created <= '" . esc_sql($fromdate) . "' AND uid = user.id) AS overdueticket,
-                    (SELECT COUNT(id) FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE isanswered != 1 AND status != 5 AND isoverdue = 1 AND (lastreply != '0000-00-00 00:00:00' AND lastreply != '') AND created >= '" . esc_sql($curdate) . "' AND created <= '" . esc_sql($fromdate) . "' AND uid = user.id) AS pendingticket
+        $jsst_query = "SELECT user.display_name,user.user_email,user.user_nicename,user.id,
+                    (SELECT COUNT(id) FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE status = 1  AND (lastreply = '0000-00-00 00:00:00' OR lastreply = '') AND created >= '" . esc_sql($jsst_curdate) . "' AND created <= '" . esc_sql($jsst_fromdate) . "' AND uid = user.id) AS openticket,
+                    (SELECT COUNT(id) FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE status = 5 AND created >= '" . esc_sql($jsst_curdate) . "' AND created <= '" . esc_sql($jsst_fromdate) . "' AND uid = user.id) AS closeticket,
+                    (SELECT COUNT(id) FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE isanswered = 1 AND status != 5 AND status != 1 AND created >= '" . esc_sql($jsst_curdate) . "' AND created <= '" . esc_sql($jsst_fromdate) . "' AND uid = user.id) AS answeredticket,
+                    (SELECT COUNT(id) FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE isoverdue = 1 AND status != 5 AND created >= '" . esc_sql($jsst_curdate) . "' AND created <= '" . esc_sql($jsst_fromdate) . "' AND uid = user.id) AS overdueticket,
+                    (SELECT COUNT(id) FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE isanswered != 1 AND status != 5 AND isoverdue = 1 AND (lastreply != '0000-00-00 00:00:00' AND lastreply != '') AND created >= '" . esc_sql($jsst_curdate) . "' AND created <= '" . esc_sql($jsst_fromdate) . "' AND uid = user.id) AS pendingticket
                     FROM `".jssupportticket::$_wpprefixforuser."js_ticket_users` AS user
-                    WHERE user.id = ".esc_sql($id);
-        $user = jssupportticket::$_db->get_row($query);
-        $result['users'] = $user;
+                    WHERE user.id = ".esc_sql($jsst_id);
+        $jsst_user = jssupportticket::$_db->get_row($jsst_query);
+        $jsst_result['users'] = $jsst_user;
         //Tickets
         do_action('jsstFeedbackQueryStaff');// to prepare any addon based query
-        $query = "SELECT ticket.*,priority.priority, priority.prioritycolour,status.status AS statustitle ". jssupportticket::$_addon_query['select'] ."
+        $jsst_query = "SELECT ticket.*,priority.priority, priority.prioritycolour,status.status AS statustitle ". jssupportticket::$_addon_query['select'] ."
                     FROM `".jssupportticket::$_db->prefix."js_ticket_tickets` AS ticket
                     LEFT JOIN `".jssupportticket::$_db->prefix."js_ticket_priorities` AS priority ON priority.id = ticket.priorityid
                     JOIN `" . jssupportticket::$_db->prefix . "js_ticket_statuses` AS status ON ticket.status = status.id
                     ". jssupportticket::$_addon_query['join'] . "
-                    WHERE uid = ".esc_sql($id)." AND ticket.created >= '" . esc_sql($curdate) . "' AND ticket.created <= '" . esc_sql($fromdate) . "' ";
+                    WHERE uid = ".esc_sql($jsst_id)." AND ticket.created >= '" . esc_sql($jsst_curdate) . "' AND ticket.created <= '" . esc_sql($jsst_fromdate) . "' ";
 
-        $result['tickets'] = jssupportticket::$_db->get_results($query);
+        $jsst_result['tickets'] = jssupportticket::$_db->get_results($jsst_query);
 
 
-        do_action('reset_jsst_aadon_query');
+        do_action('jsst_reset_aadon_query');
         if(in_array('timetracking', jssupportticket::$_active_addons)){
-            foreach ($result['tickets'] as $ticket) {
-                 $ticket->time = JSSTincluder::getJSModel('timetracking')->getTimeTakenByTicketId($ticket->id);
+            foreach ($jsst_result['tickets'] as $jsst_ticket) {
+                 $jsst_ticket->time = JSSTincluder::getJSModel('timetracking')->getTimeTakenByTicketId($jsst_ticket->id);
             }
         }
 
-        return $result;
+        return $jsst_result;
     }
 
-    function setUserExportByuid($uid = 0){
-        $tb = "\t";
-        $nl = "\n";
-        $result = $this->getUserDetailReportByUserId($uid);
+    function setUserExportByuid($jsst_uid = 0){
+        $jsst_tb = "\t";
+        $jsst_nl = "\n";
+        $jsst_result = $this->getUserDetailReportByUserId($jsst_uid);
 
-        if(empty($result))
+        if(empty($jsst_result))
             return '';
 
-        $fromdate = date_i18n('Y-m-d',strtotime($result['curdate']));
-        $todate = date_i18n('Y-m-d',strtotime($result['fromdate']));
+        $jsst_fromdate = date_i18n('Y-m-d',strtotime($jsst_result['curdate']));
+        $jsst_todate = date_i18n('Y-m-d',strtotime($jsst_result['fromdate']));
 
-        $data = esc_html(__('User Report', 'js-support-ticket')).' '. esc_html(__('From', 'js-support-ticket')).' '.$fromdate.' - '.$todate.$nl.$nl;
+        $jsst_data = esc_html(__('User Report', 'js-support-ticket')).' '. esc_html(__('From', 'js-support-ticket')).' '.$jsst_fromdate.' - '.$jsst_todate.$jsst_nl.$jsst_nl;
 
         // By 1 month
-        $data .= esc_html(__('Ticket status by days', 'js-support-ticket')).$nl.$nl;
-        $data .= esc_html(__('Date', 'js-support-ticket')).$tb. esc_html(__('New', 'js-support-ticket')).$tb. esc_html(__('Answered', 'js-support-ticket')).$tb. esc_html(__('Closed', 'js-support-ticket')).$tb. esc_html(__('Pending', 'js-support-ticket')).$tb. esc_html(__('Overdue', 'js-support-ticket')).$nl;
-        while (strtotime($fromdate) <= jssupportticketphplib::JSST_strtotime($todate)) {
-            $openticket = 0;
-            $closeticket = 0;
-            $answeredticket = 0;
-            $overdueticket = 0;
-            $pendingticket = 0;
-            foreach ($result['openticket'] as $ticket) {
-                $ticket_date = date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($ticket->created));
-                if($ticket_date == $fromdate)
-                    $openticket += 1;
+        $jsst_data .= esc_html(__('Ticket status by days', 'js-support-ticket')).$jsst_nl.$jsst_nl;
+        $jsst_data .= esc_html(__('Date', 'js-support-ticket')).$jsst_tb. esc_html(__('New', 'js-support-ticket')).$jsst_tb. esc_html(__('Answered', 'js-support-ticket')).$jsst_tb. esc_html(__('Closed', 'js-support-ticket')).$jsst_tb. esc_html(__('Pending', 'js-support-ticket')).$jsst_tb. esc_html(__('Overdue', 'js-support-ticket')).$jsst_nl;
+        while (strtotime($jsst_fromdate) <= jssupportticketphplib::JSST_strtotime($jsst_todate)) {
+            $jsst_openticket = 0;
+            $jsst_closeticket = 0;
+            $jsst_answeredticket = 0;
+            $jsst_overdueticket = 0;
+            $jsst_pendingticket = 0;
+            foreach ($jsst_result['openticket'] as $jsst_ticket) {
+                $jsst_ticket_date = date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($jsst_ticket->created));
+                if($jsst_ticket_date == $jsst_fromdate)
+                    $jsst_openticket += 1;
             }
-            foreach ($result['closeticket'] as $ticket) {
-                $ticket_date = date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($ticket->created));
-                if($ticket_date == $fromdate)
-                    $closeticket += 1;
+            foreach ($jsst_result['closeticket'] as $jsst_ticket) {
+                $jsst_ticket_date = date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($jsst_ticket->created));
+                if($jsst_ticket_date == $jsst_fromdate)
+                    $jsst_closeticket += 1;
             }
-            foreach ($result['answeredticket'] as $ticket) {
-                $ticket_date = date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($ticket->created));
-                if($ticket_date == $fromdate)
-                    $answeredticket += 1;
+            foreach ($jsst_result['answeredticket'] as $jsst_ticket) {
+                $jsst_ticket_date = date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($jsst_ticket->created));
+                if($jsst_ticket_date == $jsst_fromdate)
+                    $jsst_answeredticket += 1;
             }
-            foreach ($result['overdueticket'] as $ticket) {
-                $ticket_date = date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($ticket->created));
-                if($ticket_date == $fromdate)
-                    $overdueticket += 1;
+            foreach ($jsst_result['overdueticket'] as $jsst_ticket) {
+                $jsst_ticket_date = date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($jsst_ticket->created));
+                if($jsst_ticket_date == $jsst_fromdate)
+                    $jsst_overdueticket += 1;
             }
-            foreach ($result['pendingticket'] as $ticket) {
-                $ticket_date = date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($ticket->created));
-                if($ticket_date == $fromdate)
-                    $pendingticket += 1;
+            foreach ($jsst_result['pendingticket'] as $jsst_ticket) {
+                $jsst_ticket_date = date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($jsst_ticket->created));
+                if($jsst_ticket_date == $jsst_fromdate)
+                    $jsst_pendingticket += 1;
             }
-            $data .= '"'.$fromdate.'"'.$tb.'"'.$openticket.'"'.$tb.'"'.$answeredticket.'"'.$tb.'"'.$closeticket.'"'.$tb.'"'.$pendingticket.'"'.$tb.'"'.$overdueticket.'"'.$nl;
-            $fromdate = date_i18n("Y-m-d", jssupportticketphplib::JSST_strtotime("+1 day", jssupportticketphplib::JSST_strtotime($fromdate)));
+            $jsst_data .= '"'.$jsst_fromdate.'"'.$jsst_tb.'"'.$jsst_openticket.'"'.$jsst_tb.'"'.$jsst_answeredticket.'"'.$jsst_tb.'"'.$jsst_closeticket.'"'.$jsst_tb.'"'.$jsst_pendingticket.'"'.$jsst_tb.'"'.$jsst_overdueticket.'"'.$jsst_nl;
+            $jsst_fromdate = date_i18n("Y-m-d", jssupportticketphplib::JSST_strtotime("+1 day", jssupportticketphplib::JSST_strtotime($jsst_fromdate)));
         }
-        $data .= $nl.$nl.$nl;
+        $jsst_data .= $jsst_nl.$jsst_nl.$jsst_nl;
         // END By 1 month
 
         // by staffs
-        $data .= esc_html(__('Users Tickets', 'js-support-ticket')).$nl.$nl;
-        if(!empty($result['users'])){
-            $data .= esc_html(__('Name', 'js-support-ticket')).$tb. esc_html(__('Username', 'js-support-ticket')).$tb. esc_html(__('Email', 'js-support-ticket')).$tb. esc_html(__('New', 'js-support-ticket')).$tb. esc_html(__('Answered', 'js-support-ticket')).$tb. esc_html(__('Closed', 'js-support-ticket')).$tb. esc_html(__('Pending', 'js-support-ticket')).$tb. esc_html(__('Overdue', 'js-support-ticket')).$nl;
-            $key = $result['users'];
-            $agentname = $key->display_name;
-            $username = $key->user_nicename;
-            $email = $key->user_email;
+        $jsst_data .= esc_html(__('Users Tickets', 'js-support-ticket')).$jsst_nl.$jsst_nl;
+        if(!empty($jsst_result['users'])){
+            $jsst_data .= esc_html(__('Name', 'js-support-ticket')).$jsst_tb. esc_html(__('Username', 'js-support-ticket')).$jsst_tb. esc_html(__('Email', 'js-support-ticket')).$jsst_tb. esc_html(__('New', 'js-support-ticket')).$jsst_tb. esc_html(__('Answered', 'js-support-ticket')).$jsst_tb. esc_html(__('Closed', 'js-support-ticket')).$jsst_tb. esc_html(__('Pending', 'js-support-ticket')).$jsst_tb. esc_html(__('Overdue', 'js-support-ticket')).$jsst_nl;
+            $jsst_key = $jsst_result['users'];
+            $jsst_agentname = $jsst_key->display_name;
+            $jsst_username = $jsst_key->user_nicename;
+            $jsst_email = $jsst_key->user_email;
 
-            $data .= '"'.$agentname.'"'.$tb.'"'.$username.'"'.$tb.'"'.$email.'"'.$tb.'"'.$key->openticket.'"'.$tb.'"'.$key->answeredticket.'"'.$tb.'"'.$key->closeticket.'"'.$tb.'"'.$key->pendingticket.'"'.$tb.'"'.$key->overdueticket.'"'.$nl;
+            $jsst_data .= '"'.$jsst_agentname.'"'.$jsst_tb.'"'.$jsst_username.'"'.$jsst_tb.'"'.$jsst_email.'"'.$jsst_tb.'"'.$jsst_key->openticket.'"'.$jsst_tb.'"'.$jsst_key->answeredticket.'"'.$jsst_tb.'"'.$jsst_key->closeticket.'"'.$jsst_tb.'"'.$jsst_key->pendingticket.'"'.$jsst_tb.'"'.$jsst_key->overdueticket.'"'.$jsst_nl;
 
-            $data .= $nl.$nl.$nl;
+            $jsst_data .= $jsst_nl.$jsst_nl.$jsst_nl;
         }
 
         // by priorits tickets
-        $data .= esc_html(__('Tickets', 'js-support-ticket')).$nl.$nl;
-        if(!empty($result['tickets'])){
-            $data .= esc_html(__('Subject', 'js-support-ticket')).$tb. esc_html(__('Status', 'js-support-ticket')).$tb. esc_html(__('Priority', 'js-support-ticket')).$tb. esc_html(__('Created', 'js-support-ticket'));
+        $jsst_data .= esc_html(__('Tickets', 'js-support-ticket')).$jsst_nl.$jsst_nl;
+        if(!empty($jsst_result['tickets'])){
+            $jsst_data .= esc_html(__('Subject', 'js-support-ticket')).$jsst_tb. esc_html(__('Status', 'js-support-ticket')).$jsst_tb. esc_html(__('Priority', 'js-support-ticket')).$jsst_tb. esc_html(__('Created', 'js-support-ticket'));
 
              if(in_array('feedback', jssupportticket::$_active_addons)){
-                $data .= $tb. esc_html(__('Rating', 'js-support-ticket'));
+                $jsst_data .= $jsst_tb. esc_html(__('Rating', 'js-support-ticket'));
             }
             if(in_array('timetracking', jssupportticket::$_active_addons)){
-                $data .= $tb. esc_html(__('Time', 'js-support-ticket'));
+                $jsst_data .= $jsst_tb. esc_html(__('Time', 'js-support-ticket'));
             }
-            $data .= $nl;
-            $status = '';
-            foreach ($result['tickets'] as $ticket) {
+            $jsst_data .= $jsst_nl;
+            $jsst_status = '';
+            foreach ($jsst_result['tickets'] as $jsst_ticket) {
                 if(in_array('timetracking', jssupportticket::$_active_addons)){
-                    $hours = floor($ticket->time / 3600);
-                    $mins = floor($ticket->time / 60);
-                    $mins = floor($mins % 60);
-                    $secs = floor($ticket->time % 60);
-                    $time = sprintf('%02d:%02d:%02d', esc_html($hours), esc_html($mins), esc_html($secs));
+                    $jsst_hours = floor($jsst_ticket->time / 3600);
+                    $jsst_mins = floor($jsst_ticket->time / 60);
+                    $jsst_mins = floor($jsst_mins % 60);
+                    $jsst_secs = floor($jsst_ticket->time % 60);
+                    $jsst_time = sprintf('%02d:%02d:%02d', esc_html($jsst_hours), esc_html($jsst_mins), esc_html($jsst_secs));
                 }
-                /*switch($ticket->status){
+                /*switch($jsst_ticket->status){
                     case 0:
-                        $status = esc_html(__('New','js-support-ticket'));
-                        if($ticket->isoverdue == 1)
-                            $status = esc_html(__('Overdue','js-support-ticket'));
+                        $jsst_status = esc_html(__('New','js-support-ticket'));
+                        if($jsst_ticket->isoverdue == 1)
+                            $jsst_status = esc_html(__('Overdue','js-support-ticket'));
                     break;
                     case 1:
-                        $status = esc_html(__('Pending','js-support-ticket'));
-                        if($ticket->isoverdue == 1)
-                            $status = esc_html(__('Overdue','js-support-ticket'));
+                        $jsst_status = esc_html(__('Pending','js-support-ticket'));
+                        if($jsst_ticket->isoverdue == 1)
+                            $jsst_status = esc_html(__('Overdue','js-support-ticket'));
                     break;
                     case 2:
-                        $status = esc_html(__('In Progress','js-support-ticket'));
-                        if($ticket->isoverdue == 1)
-                            $status = esc_html(__('Overdue','js-support-ticket'));
+                        $jsst_status = esc_html(__('In Progress','js-support-ticket'));
+                        if($jsst_ticket->isoverdue == 1)
+                            $jsst_status = esc_html(__('Overdue','js-support-ticket'));
                     break;
                     case 3:
-                        $status = esc_html(__('Answered','js-support-ticket'));
-                        if($ticket->isoverdue == 1)
-                            $status = esc_html(__('Overdue','js-support-ticket'));
+                        $jsst_status = esc_html(__('Answered','js-support-ticket'));
+                        if($jsst_ticket->isoverdue == 1)
+                            $jsst_status = esc_html(__('Overdue','js-support-ticket'));
                     break;
                     case 4:
-                        $status = esc_html(__('Closed','js-support-ticket'));
+                        $jsst_status = esc_html(__('Closed','js-support-ticket'));
                     break;
                     case 5:
-                        $status = esc_html(__('Merged','js-support-ticket'));
+                        $jsst_status = esc_html(__('Merged','js-support-ticket'));
                     break;
                 }*/
-                if (!in_array($ticket->status, [5, 6]) && $ticket->isoverdue == 1) {
-                    $status = __('Overdue', 'js-support-ticket');
+                if (!in_array($jsst_ticket->status, [5, 6]) && $jsst_ticket->isoverdue == 1) {
+                    $jsst_status = __('Overdue', 'js-support-ticket');
                 } else {
-                    $status = $ticket->statustitle;
+                    $jsst_status = $jsst_ticket->statustitle;
                 }
-                $created = date_i18n('Y-m-d',strtotime($ticket->created));
-                $data .= '"'.$ticket->subject.'"'.$tb.'"'.$status.'"'.$tb.'"'.$ticket->priority.'"'.$tb.'"'.$created.'"';
+                $jsst_created = date_i18n('Y-m-d',strtotime($jsst_ticket->created));
+                $jsst_data .= '"'.$jsst_ticket->subject.'"'.$jsst_tb.'"'.$jsst_status.'"'.$jsst_tb.'"'.$jsst_ticket->priority.'"'.$jsst_tb.'"'.$jsst_created.'"';
 
                 if(in_array('feedback', jssupportticket::$_active_addons)){
-                    $data .= $tb.'"'.$ticket->rating.'"';
+                    $jsst_data .= $jsst_tb.'"'.$jsst_ticket->rating.'"';
                 }
                 if(in_array('timetracking', jssupportticket::$_active_addons)){
-                    $data .= $tb.'"'.$time.'"';
+                    $jsst_data .= $jsst_tb.'"'.$jsst_time.'"';
                 }
-                $data .= $nl;
+                $jsst_data .= $jsst_nl;
             }
-            $data .= $nl.$nl.$nl;
+            $jsst_data .= $jsst_nl.$jsst_nl.$jsst_nl;
         }
-        return $data;
+        return $jsst_data;
     }
 
-    function anonymizeUserData($uid){
-        if(!is_numeric($uid) || $uid == 0){
+    function anonymizeUserData($jsst_uid){
+        if(!is_numeric($jsst_uid) || $jsst_uid == 0){
             return false;
         }
-        $query = "SELECT id FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE uid = ".esc_sql($uid);
-        $uids = jssupportticket::$_db->get_results($query);
+        global $wpdb, $wp_filesystem; // Use global wpdb and filesystem
+        if (!function_exists('wp_handle_upload')) {
+            do_action('jssupportticket_load_wp_file');
+        }
+        if ( ! WP_Filesystem() ) {
+            return false;
+        }
+        $jsst_wp_filesystem = $wp_filesystem;
 
-        foreach ($uids as $ticket) { // erase tickets data
+        $jsst_query = "SELECT id FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE uid = ".esc_sql($jsst_uid);
+        $jsst_uids = jssupportticket::$_db->get_results($jsst_query);
+
+        foreach ($jsst_uids as $jsst_ticket) { 
             // ticket data
-            $row = JSSTincluder::getJSTable('tickets');
-            $row->update(array('id' => $ticket->id, 'email'=>'---', 'subject'=>'---', 'message'=>'---', 'phone'=>'', 'phoneext'=>'', 'params' => ''));
+            $jsst_row = JSSTincluder::getJSTable('tickets');
+            $jsst_row->update(array('id' => $jsst_ticket->id, 'email'=>'---', 'subject'=>'---', 'message'=>'---', 'phone'=>'', 'phoneext'=>'', 'params' => ''));
 
             // erase replies data
-            $query = "SELECT replies.id AS replyid
+            $jsst_query = "SELECT replies.id AS replyid
                         FROM `" . jssupportticket::$_db->prefix . "js_ticket_replies` AS replies
-                        WHERE replies.ticketid = ".esc_sql($ticket->id);
-            $replies = jssupportticket::$_db->get_results($query);
-            foreach ($replies as $reply) {
-                $row = JSSTincluder::getJSTable('replies');
-                $row->update(array('id' => $reply->replyid, 'message' => '---'));
+                        WHERE replies.ticketid = ".esc_sql($jsst_ticket->id);
+            $jsst_replies = jssupportticket::$_db->get_results($jsst_query);
+            foreach ($jsst_replies as $jsst_reply) {
+                $jsst_row = JSSTincluder::getJSTable('replies');
+                $jsst_row->update(array('id' => $jsst_reply->replyid, 'message' => '---'));
             }
 
             // erase internal note data
             if(in_array('note', jssupportticket::$_active_addons)){
-                $query = "SELECT notes.id AS noteid
+                $jsst_query = "SELECT notes.id AS noteid
                             FROM `" . jssupportticket::$_db->prefix . "js_ticket_notes` AS notes
-                            WHERE notes.ticketid = ".esc_sql($ticket->id);
-                $notes = jssupportticket::$_db->get_results($query);
-                foreach ($notes as $note) {
-                    $row = JSSTincluder::getJSTable('note');
-                    $row->update(array('id' => $note->noteid, 'title' => '---', 'note' => '---'));
+                            WHERE notes.ticketid = ".esc_sql($jsst_ticket->id);
+                $jsst_notes = jssupportticket::$_db->get_results($jsst_query);
+                foreach ($jsst_notes as $jsst_note) {
+                    $jsst_row = JSSTincluder::getJSTable('note');
+                    $jsst_row->update(array('id' => $jsst_note->noteid, 'title' => '---', 'note' => '---'));
                 }
             }
             //activity log for ticket
             if(in_array('tickethistory', jssupportticket::$_active_addons)){
-                $query = "DELETE
+                $jsst_query = "DELETE
                         FROM `" . jssupportticket::$_db->prefix . "js_ticket_activity_log`
-                        WHERE eventfor = 1 AND referenceid = ".esc_sql($ticket->id);
-                jssupportticket::$_db->query($query);
+                        WHERE eventfor = 1 AND referenceid = ".esc_sql($jsst_ticket->id);
+                jssupportticket::$_db->query($jsst_query);
 
             }
             // private credentails for ticket
             if(in_array('privatecredentials',jssupportticket::$_active_addons)){
-                JSSTincluder::getJSModel('privatecredentials')->deleteCredentialsOnCloseTicket($ticket->id);
+                JSSTincluder::getJSModel('privatecredentials')->deleteCredentialsOnCloseTicket($jsst_ticket->id);
             }
-            // ticket attachments.
-            $datadirectory = jssupportticket::$_config['data_directory'];
-            $maindir = wp_upload_dir();
-            $mainpath = $maindir['basedir'];
-            $mainpath = $mainpath .'/'.$datadirectory;
-            $mainpath = $mainpath . '/attachmentdata';
-            $query = "SELECT ticket.attachmentdir
-                        FROM `".jssupportticket::$_db->prefix."js_ticket_tickets` AS ticket
-                        WHERE ticket.id = ".esc_sql($ticket->id);
-            $foldername = jssupportticket::$_db->get_var($query);
-            if(!empty($foldername)){
-                $folder = $mainpath . '/ticket/'.$foldername;
-                if(file_exists($folder)){
-                    $path = $mainpath . '/ticket/'.$foldername.'/*.*';
-                    $files = glob($path);
-                    array_map('unlink', $files);//deleting files
-                    rmdir($folder);
+            // Ticket attachments section
+            $jsst_datadirectory = jssupportticket::$_config['data_directory'];
+            $jsst_maindir = wp_upload_dir();
+            $jsst_mainpath = $jsst_maindir['basedir'] . '/' . $jsst_datadirectory . '/attachmentdata';
+
+            $jsst_query = "SELECT ticket.attachmentdir FROM `".jssupportticket::$_db->prefix."js_ticket_tickets` AS ticket WHERE ticket.id = ".esc_sql($jsst_ticket->id);
+            $jsst_foldername = jssupportticket::$_db->get_var($jsst_query);
+
+            if(!empty($jsst_foldername)){
+                $jsst_folder_path = $jsst_mainpath . '/ticket/' . $jsst_foldername;
+
+                // Use WP_Filesystem instead of file_exists, unlink, and rmdir
+                if($jsst_wp_filesystem->exists($jsst_folder_path)){
+                    // Setting the second parameter to 'true' deletes the folder and all files inside recursively
+                    $jsst_wp_filesystem->delete($jsst_folder_path, true);
                 }
             }
-            $query = "DELETE FROM `".jssupportticket::$_db->prefix."js_ticket_attachments` WHERE ticketid = ".esc_sql($ticket->id);
-            jssupportticket::$_db->query($query);
+
+            $jsst_query = $wpdb->prepare( "DELETE FROM `" . esc_sql( jssupportticket::$_db->prefix ) . "js_ticket_attachments` WHERE ticketid = %d", $jsst_ticket->id ) ;
+            jssupportticket::$_db->query($jsst_query);
         }
-        $query = "UPDATE `" . jssupportticket::$_db->prefix . "js_ticket_erasedatarequests` SET status = 2 WHERE uid = ".esc_sql($uid);
-        jssupportticket::$_db->query($query);
+
+        // Use prepare for final status update
+        jssupportticket::$_db->update(
+            jssupportticket::$_db->prefix . 'js_ticket_erasedatarequests',
+            ['status' => 2],
+            ['uid' => (int) $jsst_uid]
+        );
+
         JSSTmessage::setMessage(esc_html(__('User identifying data erased', 'js-support-ticket')), 'updated');
-        $user_data = get_user_by('ID',$uid);
-        $email = $user_data->user_email;
-        $name = $user_data->display_name;
-        jssupportticket::$_data['mail_data']['email'] = $email;
-        jssupportticket::$_data['mail_data']['name'] = $name;
+        $jsst_user_data = get_user_by('ID',$jsst_uid);
+        $jsst_email = $jsst_user_data->user_email;
+        $jsst_name = $jsst_user_data->display_name;
+        jssupportticket::$jsst_data['mail_data']['email'] = $jsst_email;
+        jssupportticket::$jsst_data['mail_data']['name'] = $jsst_name;
         JSSTincluder::getJSModel('email')->sendMail(4, 1); // Mailfor, Delete Ticket
         return;
     }
 
-    function deleteUserData($uid){
-        if(!is_numeric($uid) || $uid == 0){
-            return false;
-        }
-        $query = "SELECT id FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE uid = ".esc_sql($uid);
-        $uids = jssupportticket::$_db->get_results($query);
-
-        foreach ($uids as $ticket) { // erase tickets data
-            // ticket data
-
-            $row = JSSTincluder::getJSTable('tickets');
-            $row->delete($ticket->id);
-
-            if(in_array('note', jssupportticket::$_active_addons)){
-                // delete internal notes
-                JSSTincluder::getJSModel('note')->removeTicketInternalNote($ticket->id);
-            }
-            // delete replies
-            JSSTincluder::getJSModel('reply')->removeTicketReplies($ticket->id);
-
-            // private credentails for ticket
-            if(in_array('privatecredentials',jssupportticket::$_active_addons)){
-                JSSTincluder::getJSModel('privatecredentials')->deleteCredentialsOnCloseTicket($ticket->id);
-            }
-            // ticket attachments.
-            $datadirectory = jssupportticket::$_config['data_directory'];
-            $maindir = wp_upload_dir();
-            $mainpath = $maindir['basedir'];
-            $mainpath = $mainpath .'/'.$datadirectory;
-            $mainpath = $mainpath . '/attachmentdata';
-            $query = "SELECT ticket.attachmentdir
-                        FROM `".jssupportticket::$_db->prefix."js_ticket_tickets` AS ticket
-                        WHERE ticket.id = ".esc_sql($ticket->id);
-            $foldername = jssupportticket::$_db->get_var($query);
-            if(!empty($foldername)){
-                $folder = $mainpath . '/ticket/'.$foldername;
-                if(file_exists($folder)){
-                    $path = $mainpath . '/ticket/'.$foldername.'/*.*';
-                    $files = glob($path);
-                    array_map('unlink', $files);//deleting files
-                    rmdir($folder);
-                }
-            }
-            $query = "DELETE FROM `".jssupportticket::$_db->prefix."js_ticket_attachments` WHERE ticketid = ".esc_sql($ticket->id);
-            jssupportticket::$_db->query($query);
-        }
-        $query = "UPDATE `" . jssupportticket::$_db->prefix . "js_ticket_erasedatarequests` SET status = 3 WHERE uid = ".esc_sql($uid);
-        jssupportticket::$_db->query($query);
-
-        $user_data = get_user_by('ID',$uid);
-
-        JSSTmessage::setMessage(esc_html(__('User data Deleted', 'js-support-ticket')), 'updated');
-        $user_data = get_user_by('ID',$uid);
-        $email = $user_data->user_email;
-        $name = $user_data->display_name;
-        jssupportticket::$_data['mail_data']['email'] = $email;
-        jssupportticket::$_data['mail_data']['name'] = $name;
-        JSSTincluder::getJSModel('email')->sendMail(4, 1); // Mailfor, Delete Ticket
+function deleteUserData($jsst_uid){
+    if(!is_numeric($jsst_uid) || $jsst_uid == 0){
+        return false;
     }
+    $jsst_query = "SELECT id FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE uid = ".esc_sql($jsst_uid);
+    $jsst_uids = jssupportticket::$_db->get_results($jsst_query);
+
+    foreach ($jsst_uids as $jsst_ticket) { // erase tickets data
+        // ticket data
+
+        $jsst_row = JSSTincluder::getJSTable('tickets');
+        $jsst_row->delete($jsst_ticket->id);
+
+        if(in_array('note', jssupportticket::$_active_addons)){
+            // delete internal notes
+            JSSTincluder::getJSModel('note')->removeTicketInternalNote($jsst_ticket->id);
+        }
+        // delete replies
+        JSSTincluder::getJSModel('reply')->removeTicketReplies($jsst_ticket->id);
+
+        // private credentails for ticket
+        if(in_array('privatecredentials',jssupportticket::$_active_addons)){
+            JSSTincluder::getJSModel('privatecredentials')->deleteCredentialsOnCloseTicket($jsst_ticket->id);
+        }
+        // --- TICKET ATTACHMENTS DELETION ---
+        $jsst_datadirectory = jssupportticket::$_config['data_directory'];
+        $jsst_maindir = wp_upload_dir();
+        $jsst_mainpath = $jsst_maindir['basedir'] . '/' . $jsst_datadirectory . '/attachmentdata';
+
+        // Using prepare for secure query with your required prefix format
+        $jsst_query = jssupportticket::$_db->prepare(
+            "SELECT attachmentdir FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE id = %d",
+            $jsst_ticket->id
+        );
+        $jsst_foldername = jssupportticket::$_db->get_var($jsst_query);
+
+        if (!empty($jsst_foldername)) {
+            $jsst_folder_path = $jsst_mainpath . '/ticket/' . $jsst_foldername;
+
+            // --- INITIALIZE WP_FILESYSTEM ---
+            global $wp_filesystem;
+            if (!function_exists('wp_handle_upload')) {
+                do_action('jssupportticket_load_wp_file');
+            }
+            if ( ! WP_Filesystem() ) {
+                return false;
+            }
+            $jsst_wp_filesystem = $wp_filesystem;
+
+            // Use WP_Filesystem exists() and delete()
+            if ($jsst_wp_filesystem->exists($jsst_folder_path)) {
+                /**
+                 * The second parameter 'true' makes the delete recursive.
+                 * This single line replaces glob(), array_map('unlink'), and rmdir().
+                 */
+                $jsst_wp_filesystem->delete($jsst_folder_path, true);
+            }
+        }
+        $jsst_query = "DELETE FROM `".jssupportticket::$_db->prefix."js_ticket_attachments` WHERE ticketid = ".esc_sql($jsst_ticket->id);
+        jssupportticket::$_db->query($jsst_query);
+    }
+    $jsst_query = "UPDATE `" . jssupportticket::$_db->prefix . "js_ticket_erasedatarequests` SET status = 3 WHERE uid = ".esc_sql($jsst_uid);
+    jssupportticket::$_db->query($jsst_query);
+
+    $jsst_user_data = get_user_by('ID',$jsst_uid);
+
+    JSSTmessage::setMessage(esc_html(__('User data Deleted', 'js-support-ticket')), 'updated');
+    $jsst_user_data = get_user_by('ID',$jsst_uid);
+    $jsst_email = $jsst_user_data->user_email;
+    $jsst_name = $jsst_user_data->display_name;
+    jssupportticket::$jsst_data['mail_data']['email'] = $jsst_email;
+    jssupportticket::$jsst_data['mail_data']['name'] = $jsst_name;
+    JSSTincluder::getJSModel('email')->sendMail(4, 1); // Mailfor, Delete Ticket
+}
 
     function getAdminSearchFormDataGDPR(){
-        $nonce = JSSTrequest::getVar('_wpnonce');
-        if (! wp_verify_nonce( $nonce, 'erase-data-requests') ) {
+        $jsst_nonce = JSSTrequest::getVar('_wpnonce');
+        if (! wp_verify_nonce( $jsst_nonce, 'erase-data-requests') ) {
             die( 'Security check Failed' );
         }
         $jsst_search_array = array();

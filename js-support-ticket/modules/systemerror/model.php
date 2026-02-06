@@ -6,60 +6,60 @@ if (!defined('ABSPATH'))
 class JSSTsystemerrorModel {
 
     function getSystemErrors() {
-        $inquery = '';
+        $jsst_inquery = '';
         // Pagination
-        $query = "SELECT COUNT(`id`) FROM `" . jssupportticket::$_db->prefix . "js_ticket_system_errors`";
-        $query .= $inquery;
-        $total = jssupportticket::$_db->get_var($query);
-        jssupportticket::$_data[1] = JSSTpagination::getPagination($total);
+        $jsst_query = "SELECT COUNT(`id`) FROM `" . jssupportticket::$_db->prefix . "js_ticket_system_errors`";
+        $jsst_query .= $jsst_inquery;
+        $jsst_total = jssupportticket::$_db->get_var($jsst_query);
+        jssupportticket::$jsst_data[1] = JSSTpagination::getPagination($jsst_total);
 
         // Data
-        $query = " SELECT systemerror.*
+        $jsst_query = " SELECT systemerror.*
 					FROM `" . jssupportticket::$_db->prefix . "js_ticket_system_errors` AS systemerror ";
-        $query .= $inquery;
-        $query .= " ORDER BY systemerror.created DESC LIMIT " . JSSTpagination::getOffset() . ", " . JSSTpagination::getLimit();
-        jssupportticket::$_data[0] = jssupportticket::$_db->get_results($query);
+        $jsst_query .= $jsst_inquery;
+        $jsst_query .= " ORDER BY systemerror.created DESC LIMIT " . JSSTpagination::getOffset() . ", " . JSSTpagination::getLimit();
+        jssupportticket::$jsst_data[0] = jssupportticket::$_db->get_results($jsst_query);
         if (jssupportticket::$_db->last_error != null) {
             $this->addSystemError();
         }
         return;
     }
 
-    function addSystemError($error = null) {
-        if($error == null) $error = jssupportticket::$_db->last_error;
-        $query_array = array('error' => $error,
+    function addSystemError($jsst_error = null) {
+        if($jsst_error == null) $jsst_error = jssupportticket::$_db->last_error;
+        $jsst_query_array = array('error' => $jsst_error,
             'uid' => JSSTincluder::getObjectClass('user')->uid(),
             'isview' => 0,
             'created' => date_i18n('Y-m-d H:i:s')
         );
-        jssupportticket::$_db->replace(jssupportticket::$_db->prefix . 'js_ticket_system_errors', $query_array);
+        jssupportticket::$_db->replace(jssupportticket::$_db->prefix . 'js_ticket_system_errors', $jsst_query_array);
         // if (jssupportticket::$_db->last_error != null) {
         //     $this->addSystemError();
         // }
         return;
     }
 
-    function updateIsView($id) {
-        if (!is_numeric($id))
+    function updateIsView($jsst_id) {
+        if (!is_numeric($jsst_id))
             return false;
-        $query = "UPDATE " . jssupportticket::$_db->prefix . "`js_ticket_system_errors` set isview = 1 WHERE id = " . esc_sql($id);
-        jssupportticket::$_db->Query($query);
+        $jsst_query = "UPDATE " . jssupportticket::$_db->prefix . "`js_ticket_system_errors` set isview = 1 WHERE id = " . esc_sql($jsst_id);
+        jssupportticket::$_db->Query($jsst_query);
         if (jssupportticket::$_db->last_error != null) {
             $this->addSystemError();
         }
     }
 
-    function removeSystemError($id) {
-        if ($id == 'all') {
-            $query = "DELETE FROM `" . jssupportticket::$_db->prefix . "js_ticket_system_errors` ";
-            jssupportticket::$_db->query($query);
+    function removeSystemError($jsst_id) {
+        if ($jsst_id == 'all') {
+            $jsst_query = "DELETE FROM `" . jssupportticket::$_db->prefix . "js_ticket_system_errors` ";
+            jssupportticket::$_db->query($jsst_query);
             JSSTmessage::setMessage(esc_html(__('System error has been deleted', 'js-support-ticket')), 'updated');
         }else{
-            if (!is_numeric($id)){
+            if (!is_numeric($jsst_id)){
                 return false;
             }
-            $row = JSSTincluder::getJSTable('system_errors');
-            if ($row->delete($id)) {
+            $jsst_row = JSSTincluder::getJSTable('system_errors');
+            if ($jsst_row->delete($jsst_id)) {
                 JSSTmessage::setMessage(esc_html(__('System error has been deleted', 'js-support-ticket')), 'updated');
             } else {
                 JSSTmessage::setMessage(esc_html(__('System error has not been deleted', 'js-support-ticket')), 'error');

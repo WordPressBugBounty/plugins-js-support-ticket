@@ -8765,3 +8765,45 @@ msgstr "Simpan & Berikutnya"
 
 msgid "For enhanced security change encryption method in %1$s on line %2$s"
 msgstr "Untuk metode enkripsi perubahan keamanan yang ditingkatkan dalam %1 $ S ON Line %2 $ S"
+
+msgid "Changes may require cache clearing to take effect."
+msgstr "Perubahan mungkin memerlukan pembersihan cache agar dapat diterapkan."
+
+msgid "How Long Will My Support Stay Active?"
+msgstr "Berapa Lama Dukungan Saya Akan Tetap Aktif?"
+
+msgid "I Can’t Log Into My Account"
+msgstr "Saya Tidak Bisa Masuk ke Akun Saya"
+
+msgid "I Want to Upgrade My Plan — How Can I Do It?"
+msgstr "Saya Ingin Meningkatkan Paket Saya — Bagaimana Cara Melakukannya?"
+
+msgid "I’m Not Getting Access to My Subscription"
+msgstr "Saya Tidak Mendapatkan Akses ke Langganan Saya"
+
+msgid "Ticket ID Or Email Address Or Subject"
+msgstr "ID Tiket Atau Alamat Email Atau Subjek"
+
+msgid "Sophie Martinez"
+msgstr "Sophie Martinez"
+
+msgid "Daniel Brooks"
+msgstr "Daniel Brooks"
+
+msgid "Liam Turner"
+msgstr "Liam Turner"
+
+msgid "Emily Harper"
+msgstr "Emily Harper"
+
+msgid "Noah Bennett"
+msgstr "Nuh Bennett"
+
+msgid "Olivia Chase"
+msgstr "Olivia Mengejar"
+
+msgid "Maya Collins"
+msgstr "Maya Collins"
+
+msgid "Ethan Reynolds"
+msgstr "Ethan Reynolds"

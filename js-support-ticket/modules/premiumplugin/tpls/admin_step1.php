@@ -16,20 +16,20 @@ if(isset($_SESSION['jsst_addon_install_data'])){
                 <div id="jsstadmin-wrapper-top-left">
                     <div id="jsstadmin-breadcrunbs">
                         <ul>
-                            <li><a href="?page=jssupportticket" title="<?php echo esc_html(__('Dashboard','js-support-ticket')); ?>"><?php echo esc_html(__('Dashboard','js-support-ticket')); ?></a></li>
+                            <li><a href="?page=jssupportticket" title="<?php echo esc_attr(__('Dashboard','js-support-ticket')); ?>"><?php echo esc_html(__('Dashboard','js-support-ticket')); ?></a></li>
                             <li><?php echo esc_html(__('Install Addons','js-support-ticket')); ?></li>
                         </ul>
                     </div>
                 </div>
                 <div id="jsstadmin-wrapper-top-right">
                     <div id="jsstadmin-config-btn">
-                        <a title="<?php echo esc_html(__('Configuration','js-support-ticket')); ?>" href="<?php echo esc_url(admin_url("admin.php?page=configuration")); ?>">
-                            <img alt="<?php echo esc_html(__('Configuration','js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/config.png" />
+                        <a title="<?php echo esc_attr(__('Configuration','js-support-ticket')); ?>" href="<?php echo esc_url(admin_url("admin.php?page=configuration")); ?>">
+                            <img alt = "<?php echo esc_attr(__('Configuration','js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/config.png" />
                         </a>
                     </div>
                 <div id="jsstadmin-config-btn" class="jssticketadmin-help-btn">
-                    <a href="<?php echo esc_url(admin_url("admin.php?page=jssupportticket&jstlay=help")); ?>" title="<?php echo esc_html(__('Help','js-support-ticket')); ?>">
-                        <img alt="<?php echo esc_html(__('Help','js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/help.png" />
+                    <a href="<?php echo esc_url(admin_url("admin.php?page=jssupportticket&jstlay=help")); ?>" title="<?php echo esc_attr(__('Help','js-support-ticket')); ?>">
+                        <img alt = "<?php echo esc_attr(__('Help','js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/help.png" />
                     </a>
                 </div>
                     <div id="jsstadmin-vers-txt">
@@ -42,7 +42,7 @@ if(isset($_SESSION['jsst_addon_install_data'])){
                 <div id="jssupportticket-content">
                     <div id="black_wrapper_translation"></div>
                     <div id="jstran_loading">
-                        <img alt="image" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/spinning-wheel.gif" />
+                        <img alt="<?php echo esc_attr(__('image','js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/spinning-wheel.gif" />
                     </div>
                     <div id="jsst-lower-wrapper">
                         <div class="jsst-addon-installer-wrapper" >
@@ -60,22 +60,22 @@ if(isset($_SESSION['jsst_addon_install_data'])){
                                         </div>
 
                                         <?php
-                                        $error_message = '';
-                                        $transactionkey = '';
+                                        $jsst_error_message = '';
+                                        $jsst_transactionkey = '';
                                         if(isset($_COOKIE['jsst_addon_return_data'])){
-                                            $jsst_addon_return_data = json_decode(base64_decode(jssupportticket::JSST_sanitizeData($_COOKIE['jsst_addon_return_data'])),true); // JSST_sanitizeData() function uses wordpress santize functions
+                                            $jsst_addon_return_data = json_decode(base64_decode(jssupportticket::JSST_sanitizeData(wp_unslash($_COOKIE['jsst_addon_return_data']))),true); // JSST_sanitizeData() function uses wordpress santize functions
                                             $jsst_error_msg = $jsst_addon_return_data;
                                             if(isset($jsst_addon_return_data['status']) && $jsst_addon_return_data['status'] == 0){
-                                                $error_message = $jsst_addon_return_data['message'];
-                                                $transactionkey = $jsst_addon_return_data['transactionkey'];
+                                                $jsst_error_message = $jsst_addon_return_data['message'];
+                                                $jsst_transactionkey = $jsst_addon_return_data['transactionkey'];
                                             }
                                             unset($jsst_addon_return_data);
                                         }
                                         ?>
                                         <div class="jsst-addon-installer-right-key-field" >
-                                            <input type="text" name="transactionkey" id="transactionkey" class="jsst_key_field" value="<?php echo esc_attr($transactionkey);?>" placeholder="<?php echo esc_html(__('Activation key','js-support-ticket')); ?>"/>
-                                            <?php if($error_message != '' ){ ?>
-                                                <div class="jsst-addon-installer-right-key-field-message" > <img alt="image" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/icon.png" /> <?php echo wp_kses_post($error_message);?></div>
+                                            <input type="text" name="transactionkey" id="transactionkey" class="jsst_key_field" value="<?php echo esc_attr($jsst_transactionkey);?>" placeholder="<?php echo esc_attr(__('Activation key','js-support-ticket')); ?>"/>
+                                            <?php if($jsst_error_message != '' ){ ?>
+                                                <div class="jsst-addon-installer-right-key-field-message" > <img alt="<?php echo esc_attr(__('image','js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/icon.png" /> <?php echo wp_kses_post($jsst_error_message);?></div>
                                             <?php } ?>
                                         </div>
                                         <div class="jsst-addon-installer-right-key-button" >
@@ -98,7 +98,7 @@ if(isset($_SESSION['jsst_addon_install_data'])){
 
 
 <?php
-$jssupportticket_js ="
+$jsst_jssupportticket_js ="
     jQuery(document).ready(function(){
         jQuery('#jsticketfrom').on('submit', function() {
             jsShowLoading();
@@ -110,5 +110,5 @@ $jssupportticket_js ="
         jQuery('div#jstran_loading').show();
     }
     ";
-    wp_add_inline_script('js-support-ticket-main-js',$jssupportticket_js);
+    wp_add_inline_script('js-support-ticket-main-js',$jsst_jssupportticket_js);
 ?>

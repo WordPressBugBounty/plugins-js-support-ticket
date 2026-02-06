@@ -8767,3 +8767,45 @@ msgstr "Αποθήκευση & Επόμενο"
 
 msgid "For enhanced security change encryption method in %1$s on line %2$s"
 msgstr "Για ενισχυμένη μέθοδο κρυπτογράφησης αλλαγής ασφαλείας σε %1 $ s on line %2 $ s"
+
+msgid "Changes may require cache clearing to take effect."
+msgstr "Οι αλλαγές ενδέχεται να απαιτούν εκκαθάριση της προσωρινής μνήμης για να τεθούν σε ισχύ."
+
+msgid "How Long Will My Support Stay Active?"
+msgstr "Πόσο καιρό θα παραμείνει ενεργή η υποστήριξή μου;"
+
+msgid "I Can’t Log Into My Account"
+msgstr "Δεν μπορώ να συνδεθώ στον λογαριασμό μου"
+
+msgid "I Want to Upgrade My Plan — How Can I Do It?"
+msgstr "Θέλω να αναβαθμίσω το σχέδιό μου — Πώς μπορώ να το κάνω;"
+
+msgid "I’m Not Getting Access to My Subscription"
+msgstr "Δεν έχω πρόσβαση στη συνδρομή μου"
+
+msgid "Ticket ID Or Email Address Or Subject"
+msgstr "Αναγνωριστικό εισιτηρίου ή διεύθυνση email ή θέμα"
+
+msgid "Sophie Martinez"
+msgstr "Σοφί Μαρτίνεζ"
+
+msgid "Daniel Brooks"
+msgstr "Ντάνιελ Μπρουκς"
+
+msgid "Liam Turner"
+msgstr "Λίαμ Τέρνερ"
+
+msgid "Emily Harper"
+msgstr "Έμιλι Χάρπερ"
+
+msgid "Noah Bennett"
+msgstr "Νόα Μπένετ"
+
+msgid "Olivia Chase"
+msgstr "Ολίβια Τσέις"
+
+msgid "Maya Collins"
+msgstr "Μάγια Κόλινς"
+
+msgid "Ethan Reynolds"
+msgstr "Ίθαν Ρέινολντς"
