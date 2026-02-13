@@ -510,18 +510,39 @@ class JSSTreplyModel {
         // Verify nonce
         check_ajax_referer('get-filtered-replies', '_wpnonce');
 
-        $jsst_ticket_id = intval(JSSTrequest::getVar('ticket_id'));
+        // Secure the ID (Stops SQL Injection)
+        $jsst_ticket_id = JSSTrequest::getVar('ticket_id', null, 0, 'int');
 
         if (!$jsst_ticket_id) {
             wp_send_json_error(['message' => __('Ticket ID is required.', 'js-support-ticket')]);
         }
+
+        // 1. Check if the user is a Agent
+        $is_staff = (in_array('agent', jssupportticket::$_active_addons) && JSSTincluder::getJSModel('agent')->isUserStaff());
+
+        // 2. If they are staff, check if they LACK the specific AI permission
+        if ($is_staff) {
+            $has_ai_permission = JSSTincluder::getJSModel('userpermissions')->checkPermissionGrantedForTask('Use AI Powered Reply Feature');
+            if (!$has_ai_permission) { // Note the "!" (NOT)
+                wp_send_json_error(['message' => __('You do not have permission to use AI features.', 'js-support-ticket')]);
+            }
+        } 
+        // 3. If they are NOT staff, check if they are an Administrator
+        else if (!current_user_can('manage_options')) {
+            // If they aren't staff and aren't an admin, they are a normal user or guest
+            wp_send_json_error(['message' => __('Access denied.', 'js-support-ticket')]);
+        }
+
+        // If it reaches here, the user is either:
+        // - Staff WITH AI permissions
+        // - An Administrator
 
         $jsst_uids = $this->get_allowed_support_user_ids();
         if (empty($jsst_uids)) {
             wp_send_json_success(['replies' => [], 'count' => 0]);
         }
 
-        $jsst_uids_str = implode(',', array_map('intval', $jsst_uids)); // Ensure integers
+        $jsst_uids_str = implode(',', array_map('absint', $jsst_uids)); // Ensure integers
 
         $jsst_query = "
         SELECT r.*

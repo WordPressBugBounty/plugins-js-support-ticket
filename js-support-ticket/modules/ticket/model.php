@@ -3015,14 +3015,15 @@ class JSSTticketModel {
             die('Security check Failed');
         }
 
-        $jsst_id = JSSTrequest::getVar('ticketId');
-        $jsst_subject = JSSTrequest::getVar('ticketSubject');
+        // Explicitly cast to integer to kill SQL Injection payloads
+        $jsst_id = absint(JSSTrequest::getVar('ticketId')); 
+        $jsst_subject = sanitize_text_field(JSSTrequest::getVar('ticketSubject'));
 
         $jsst_agentquery = "";
         if (in_array('agent', jssupportticket::$_active_addons) && JSSTincluder::getJSModel('agent')->isUserStaff()) {
             $jsst_allowed = JSSTincluder::getJSModel('userpermissions')->checkPermissionGrantedForTask('Limit AI Replies to Agent-Assigned Tickets');
             if ($jsst_allowed) {
-                $jsst_staffid = JSSTincluder::getJSModel('agent')->getStaffId(JSSTincluder::getObjectClass('user')->uid());
+                $jsst_staffid = absint(JSSTincluder::getJSModel('agent')->getStaffId(JSSTincluder::getObjectClass('user')->uid()));
                 $jsst_agentquery = " AND (t.staffid = " . esc_sql($jsst_staffid) . " OR t.departmentid IN (
                     SELECT dept.departmentid
                     FROM `" . jssupportticket::$_db->prefix . "js_ticket_acl_user_access_departments` AS dept
@@ -3038,6 +3039,9 @@ class JSSTticketModel {
             FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` AS ticket
             WHERE ticket.id = " . esc_sql($jsst_id);
         $jsst_ticket_data = jssupportticket::$_db->get_row($jsst_query);
+        
+        if (!$jsst_ticket_data) return json_encode([]);
+
         $jsst_message = wp_strip_all_tags($jsst_ticket_data->message);
 
         // Break the subject and message into words for partial matching
