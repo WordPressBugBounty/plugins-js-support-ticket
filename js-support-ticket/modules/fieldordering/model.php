@@ -11,7 +11,7 @@ class JSSTfieldorderingModel {
         }
 	    $jsst_formid = jssupportticket::$jsst_data['formid'];
         if (isset($jsst_formid) && $jsst_formid != null) {
-            $jsst_inquery = " AND multiformid = ".esc_sql($jsst_formid);
+            $jsst_inquery = " AND multiformid = ".intval($jsst_formid);
         }
     	else{
             $jsst_inquery = " AND multiformid = ".JSSTincluder::getJSModel('ticket')->getDefaultMultiFormId();
@@ -162,7 +162,7 @@ class JSSTfieldorderingModel {
         }
         $jsst_query = "SELECT  * FROM `" . jssupportticket::$_db->prefix . "js_ticket_fieldsordering` WHERE ".$jsst_published." AND fieldfor =  " . esc_sql($jsst_fieldfor);
         if ($jsst_fieldfor == 1) {
-            $jsst_query .= " AND multiformid =  " . esc_sql($jsst_formid);
+            $jsst_query .= " AND multiformid =  " . intval($jsst_formid);
         }
         $jsst_query .=  esc_sql($jsst_adminonly) . " ORDER BY ordering ";
         jssupportticket::$jsst_data['fieldordering'] = jssupportticket::$_db->get_results($jsst_query);
@@ -178,7 +178,7 @@ class JSSTfieldorderingModel {
         } else {
             $jsst_published = ' published = 1 ';
         }
-        $jsst_query = "SELECT required FROM `" . jssupportticket::$_db->prefix . "js_ticket_fieldsordering` WHERE ".$jsst_published." AND fieldfor =  1 AND  field =  '".esc_sql($jsst_field)."' AND multiformid =  " . esc_sql($jsst_formid);
+        $jsst_query = "SELECT required FROM `" . jssupportticket::$_db->prefix . "js_ticket_fieldsordering` WHERE ".$jsst_published." AND fieldfor =  1 AND  field =  '".esc_sql($jsst_field)."' AND multiformid =  " . intval($jsst_formid);
         $jsst_required = jssupportticket::$_db->get_var($jsst_query);
         return $jsst_required;
     }
@@ -601,7 +601,7 @@ class JSSTfieldorderingModel {
             $jsst_parent = jssupportticket::$_db->get_var($jsst_query);
             $jsst_wherequery = ' OR id = '.esc_sql($jsst_parent);
         }
-        $jsst_query = "SELECT fieldtitle AS text ,id FROM " . jssupportticket::$_db->prefix . "js_ticket_fieldsordering WHERE fieldfor = ".esc_sql($jsst_fieldfor)." AND multiformid = ".esc_sql($jsst_formid)." AND (userfieldtype = 'radio' OR userfieldtype = 'combo' OR userfieldtype = 'depandant_field') AND (depandant_field = '' ".esc_sql($jsst_wherequery)." ) ";
+        $jsst_query = "SELECT fieldtitle AS text ,id FROM " . jssupportticket::$_db->prefix . "js_ticket_fieldsordering WHERE fieldfor = ".esc_sql($jsst_fieldfor)." AND multiformid = ".intval($jsst_formid)." AND (userfieldtype = 'radio' OR userfieldtype = 'combo' OR userfieldtype = 'depandant_field') AND (depandant_field = '' ".esc_sql($jsst_wherequery)." ) ";
         $jsst_data = jssupportticket::$_db->get_results($jsst_query);
         if(isset($jsst_parentfield) && $jsst_parentfield !='' ){
             $jsst_query = "SELECT id FROM " . jssupportticket::$_db->prefix . "js_ticket_fieldsordering WHERE fieldfor = ".esc_sql($jsst_fieldfor)." AND (userfieldtype = 'radio' OR userfieldtype = 'combo'OR userfieldtype = 'depandant_field') AND depandant_field = '" . esc_sql($jsst_parentfield) . "' ";
@@ -1029,7 +1029,7 @@ class JSSTfieldorderingModel {
             $jsst_defaultformid = JSSTincluder::getJSModel('ticket')->getDefaultMultiFormId();
             $jsst_inquery = " AND multiformid = ".esc_sql($jsst_defaultformid);
         } elseif (isset($jsst_formid) && $jsst_formid != '') {
-            $jsst_inquery = " AND multiformid = ".esc_sql($jsst_formid);
+            $jsst_inquery = " AND multiformid = ".intval($jsst_formid);
         }
         $jsst_query = "SELECT field,fieldtitle FROM `" . jssupportticket::$_db->prefix . "js_ticket_fieldsordering` WHERE fieldfor = " . esc_sql($jsst_fieldfor) . $jsst_published;
         $jsst_query .= $jsst_inquery;
@@ -1069,7 +1069,7 @@ class JSSTfieldorderingModel {
             $jsst_defaultformid = JSSTincluder::getJSModel('ticket')->getDefaultMultiFormId();
             $jsst_inquery = " AND multiformid = ".esc_sql($jsst_defaultformid);
         } elseif (isset($jsst_formid) && $jsst_formid != '') {
-            $jsst_inquery = " AND multiformid = ".esc_sql($jsst_formid);
+            $jsst_inquery = " AND multiformid = ".intval($jsst_formid);
         }
         $jsst_query = "SELECT field, showonlisting FROM " . jssupportticket::$_db->prefix . "js_ticket_fieldsordering WHERE showonlisting = 1 AND fieldfor =  " . esc_sql($jsst_fieldfor) . esc_sql($jsst_published);
         $jsst_query .= $jsst_inquery;
@@ -1088,7 +1088,7 @@ class JSSTfieldorderingModel {
             $jsst_query .= " ORDER BY m.is_default DESC, f.ordering ASC";
         } else {
             $jsst_formid = JSSTincluder::getJSModel('ticket')->getDefaultMultiFormId();
-            $jsst_formFilter = " AND f.multiformid = " . esc_sql($jsst_formid);
+            $jsst_formFilter = " AND f.multiformid = " . intval($jsst_formid);
             $jsst_query = "SELECT f.field, f.fieldtitle FROM " . jssupportticket::$_db->prefix . "js_ticket_fieldsordering f WHERE f.search_admin = 1 AND f.published = 1 AND (f.isuserfield IS NULL OR f.isuserfield != 1) ";
             $jsst_query .= $jsst_formFilter;
             $jsst_query .= " ORDER BY f.ordering ASC";
@@ -1118,7 +1118,7 @@ class JSSTfieldorderingModel {
             $jsst_query .= " ORDER BY m.is_default DESC, f.ordering ASC";
         } else {
             $jsst_formid = JSSTincluder::getJSModel('ticket')->getDefaultMultiFormId();
-            $jsst_formFilter = " AND f.multiformid = " . esc_sql($jsst_formid);
+            $jsst_formFilter = " AND f.multiformid = " . intval($jsst_formid);
             // Query with LEFT JOIN and ordering to prioritize default form
             $jsst_query = "SELECT f.field, f.fieldtitle FROM " . jssupportticket::$_db->prefix . "js_ticket_fieldsordering f WHERE f.search_user = 1 AND ".$jsst_published." AND (f.isuserfield IS NULL OR f.isuserfield != 1)";
             $jsst_query .= $jsst_formFilter;
@@ -1147,7 +1147,7 @@ class JSSTfieldorderingModel {
         } else {
             $jsst_published = ' published = 1 ';
         }
-        $jsst_query = "SELECT field, showonlisting FROM " . jssupportticket::$_db->prefix . "js_ticket_fieldsordering WHERE ".$jsst_published." AND fieldfor = 1 AND multiformid =  " . esc_sql($jsst_formid) ;
+        $jsst_query = "SELECT field, showonlisting FROM " . jssupportticket::$_db->prefix . "js_ticket_fieldsordering WHERE ".$jsst_published." AND fieldfor = 1 AND multiformid =  " . intval($jsst_formid) ;
         $jsst_fields = jssupportticket::$_db->get_results($jsst_query);
         $jsst_fielddata = array();
         foreach ($jsst_fields AS $jsst_field) {
