@@ -4,6 +4,17 @@
 ?>
 <?php
 JSSTmessage::getMessage();
+?>
+<style>
+    /* Zywrap World-Class Inline Button Styles */
+    .zywrap-btn-primary { background: #eff6ff; color: #1d4ed8; border: 1px solid #bfdbfe; border-radius: 6px; padding: 0 12px; height: 30px; font-size: 12px; font-weight: 600; cursor: pointer; display: flex; align-items: center; gap: 6px; box-shadow: 0 1px 2px rgba(0,0,0,0.05); transition: all 0.2s; white-space: nowrap; }
+    .zywrap-btn-primary:hover { background: #dbeafe; border-color: #93c5fd; }
+    
+    .zywrap-btn-icon { background: #fff; color: #64748b; border: 1px solid #e2e8f0; border-radius: 6px; width: 30px; height: 30px; padding: 0; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.2s; box-shadow: 0 1px 2px rgba(0,0,0,0.02); }
+    .zywrap-btn-icon:hover { background: #f1f5f9; border-color: #cbd5e1; color: #0f172a; }
+    .zywrap-btn-icon .dashicons { font-size: 16px; width: 16px; height: 16px; display: flex; align-items: center; justify-content: center; }
+</style>
+<?php
 wp_enqueue_script('file_validate.js', JSST_PLUGIN_URL . 'includes/js/file_validate.js', array(), jssupportticket::$_config['productversion'], true);
 wp_enqueue_script('jquery-ui-tabs');
 wp_enqueue_style('jquery-ui-css', JSST_PLUGIN_URL . 'includes/css/jquery-ui-smoothness.css', array(), jssupportticket::$_config['productversion']);
@@ -17,6 +28,13 @@ if (in_array('aipoweredreply', jssupportticket::$_active_addons)){
     $jsst_jstmod = 'ticket';
     $jsst_jstreplymod = 'reply';
 }
+
+// --- ZYWRAP GLOBAL SETUP ---
+$zywrap_api_key = get_option('jsst_zywrap_api_key', '');
+$zywrap_is_active = !empty($zywrap_api_key);
+$zywrap_default_lang = get_option('jsst_zywrap_default_lang', 'English');
+// ---------------------------
+
 $jsst_jssupportticket_js ="
     var timer_flag = 0;
             var seconds = 0;
@@ -1660,6 +1678,43 @@ $jsst_yesno = array(
                                     <?php echo wp_kses_post(jssupportticket::$jsst_data[0]->message);
                                     ?>
                                 </div>
+
+                                <?php
+                                //zywrap ai
+                                // We check if the user is a customer so we don't put buttons on our own replies
+                                if (isset($is_customer) ? $is_customer : true) : 
+                                    // Pass the active state to the HTML
+                                    $active_flag = $zywrap_is_active ? '1' : '0';
+                                ?>
+                                    <div class="zywrap-inline-actions" style="clear:both; width:100%; float:none; margin-top:15px; padding-top:12px; border-top:1px dashed #cbd5e1; display:flex; flex-wrap:wrap; gap:8px; align-items:center; box-sizing:border-box;">
+        
+                                        <?php if (isset($is_latest_overall) ? $is_latest_overall : (isset($is_latest) ? $is_latest : false)) : ?>
+                                            <button type="button" class="zywrap-open-tab-btn zywrap-btn-primary" data-tab="compose" data-active="<?php echo esc_attr($active_flag); ?>">
+                                                <span class="dashicons dashicons-edit" style="font-size:14px; width:14px; height:14px;"></span> Reply with Co-Pilot
+                                            </button>
+                                            
+                                            <button type="button" class="zywrap-open-tab-btn zywrap-btn-icon" data-tab="ask_info" data-active="<?php echo esc_attr($active_flag); ?>" title="<?php echo esc_attr__('Ask for Info', 'js-support-ticket'); ?>">
+                                                <span class="dashicons dashicons-format-chat"></span>
+                                            </button>
+                                            
+                                            <div style="width:1px; height:18px; background:#cbd5e1; margin:0 4px; display:inline-block;"></div>
+                                        <?php endif; ?>
+
+                                        <button type="button" class="zywrap-inline-ai-btn zywrap-btn-icon" data-wrapper="ts_support_ticket_condensed_summary_base" data-active="<?php echo esc_attr($active_flag); ?>" title="<?php echo esc_attr__('Summarize', 'js-support-ticket'); ?>">
+                                            <span class="dashicons dashicons-text-page"></span>
+                                        </button>
+                                        
+                                        <button type="button" class="zywrap-inline-ai-btn zywrap-btn-icon" data-wrapper="ee_support_ticket_detail_extraction_base" data-active="<?php echo esc_attr($active_flag); ?>" title="<?php echo esc_attr__('Extract Details', 'js-support-ticket'); ?>">
+                                            <span class="dashicons dashicons-search"></span>
+                                        </button>
+                                        
+                                        <button type="button" class="zywrap-inline-ai-btn zywrap-btn-icon" data-wrapper="tl_supp_tick_tran_loca_926d_base" data-lang="<?php echo esc_attr($zywrap_default_lang); ?>" data-active="<?php echo esc_attr($active_flag); ?>" title="<?php echo esc_attr__('Translate to', 'js-support-ticket'); ?> <?php echo esc_attr($zywrap_default_lang); ?>">
+                                            <span class="dashicons dashicons-translation"></span>
+                                        </button>
+                                    </div>
+                                    <div class="zywrap-inline-result" style="display:none; clear:both; width:100%; margin-top:12px; background:#f8fafc; border:1px solid #e2e8f0; border-left:4px solid #3b82f6; padding:15px; font-size:13px; color:#334155; border-radius:6px; line-height:1.6; box-sizing:border-box;"></div>
+                                <?php endif; ?>
+
                                 <?php
                                     if (!empty(jssupportticket::$jsst_data['ticket_attachment'])) {
                                         $jsst_datadirectory = jssupportticket::$_config['data_directory'];
@@ -1692,7 +1747,7 @@ $jsst_yesno = array(
                         <?php
                             $jsst_color1ed = "colored";
                             if (!empty(jssupportticket::$jsst_data[4]))
-                                foreach (jssupportticket::$jsst_data[4] AS $jsst_reply) {
+                                foreach (jssupportticket::$jsst_data[4] AS $key => $jsst_reply) {
                                 if ($jsst_cur_uid == $jsst_reply->uid)
                                     $jsst_color1ed = '';
                                 ?>
@@ -1752,6 +1807,45 @@ $jsst_yesno = array(
                                         <div class="js-ticket-thread-data note-msg">
                                             <?php echo wp_kses_post(html_entity_decode($jsst_reply->message)); ?>
                                         </div>
+                                        <?php
+                                            // Zywrap AI Inline Actions (Threaded Replies)
+                                            $is_customer = ($jsst_reply->uid == jssupportticket::$jsst_data[0]->uid); 
+                                            $is_latest = ($key == count(jssupportticket::$jsst_data[4]) - 1); 
+
+                                            // Upsell Logic: Only hide if it's NOT a customer. If it is a customer, show buttons but track active state.
+                                            if ($is_customer) : 
+                                                $active_flag = $zywrap_is_active ? '1' : '0';
+                                            ?>
+                                                <div class="zywrap-inline-actions" style="clear:both; width:100%; float:none; margin-top:20px; padding-top:12px; border-top:1px dashed #cbd5e1; display:flex; flex-wrap:wrap; gap:8px; align-items:center; box-sizing:border-box;">
+                                                    
+                                                    <?php if ($is_latest) : ?>
+                                                        <button type="button" class="zywrap-open-tab-btn zywrap-btn-primary" data-tab="compose" data-active="<?php echo esc_attr($active_flag); ?>">
+                                                            <span class="dashicons dashicons-edit" style="font-size:14px; width:14px; height:14px;"></span> Reply with Co-Pilot
+                                                        </button>
+                                                        
+                                                        <button type="button" class="zywrap-open-tab-btn zywrap-btn-icon" data-tab="ask_info" data-active="<?php echo esc_attr($active_flag); ?>" title="<?php echo esc_attr__('Ask for Info', 'js-support-ticket'); ?>">
+                                                            <span class="dashicons dashicons-format-chat"></span>
+                                                        </button>
+                                                        
+                                                        <div style="width:1px; height:18px; background:#cbd5e1; margin:0 4px; display:inline-block;"></div>
+                                                    <?php endif; ?>
+
+                                                    <button type="button" class="zywrap-inline-ai-btn zywrap-btn-icon" data-wrapper="ts_support_ticket_condensed_summary_base" data-active="<?php echo esc_attr($active_flag); ?>" title="<?php echo esc_attr__('Summarize', 'js-support-ticket'); ?>">
+                                                        <span class="dashicons dashicons-text-page"></span>
+                                                    </button>
+                                                    
+                                                    <button type="button" class="zywrap-inline-ai-btn zywrap-btn-icon" data-wrapper="ee_support_ticket_detail_extraction_base" data-active="<?php echo esc_attr($active_flag); ?>" title="<?php echo esc_attr__('Extract Details', 'js-support-ticket'); ?>">
+                                                        <span class="dashicons dashicons-search"></span>
+                                                    </button>
+                                                    
+                                                    <button type="button" class="zywrap-inline-ai-btn zywrap-btn-icon" data-wrapper="tl_supp_tick_tran_loca_926d_base" data-lang="<?php echo esc_attr($zywrap_default_lang); ?>" data-active="<?php echo esc_attr($active_flag); ?>" title="<?php echo esc_attr__('Translate to', 'js-support-ticket'); ?> <?php echo esc_attr($zywrap_default_lang); ?>">
+                                                        <span class="dashicons dashicons-translation"></span>
+                                                    </button>
+                                                </div>
+                                                
+                                                <div class="zywrap-inline-result" style="display:none; clear:both; width:100%; margin-top:12px; background:#f8fafc; border:1px solid #e2e8f0; border-left:4px solid #3b82f6; padding:15px; font-size:13px; color:#334155; border-radius:6px; line-height:1.6; box-sizing:border-box;"></div>
+                                            <?php endif; ?>
+
                                         <?php
                                             if (!empty($jsst_reply->attachments)) {
                                                 foreach ($jsst_reply->attachments AS $jsst_attachment) {
@@ -1877,10 +1971,40 @@ $jsst_yesno = array(
                                         <?php echo wp_kses(JSSTformfield::hidden('timer_edit_desc',''), JSST_ALLOWED_TAGS); ?>
                                     </div>
                                 <?php } ?>
+                                <?php
+                                $active_flag = $zywrap_is_active ? '1' : '0';
+                                ?>
+                                <div style="background: #eff6ff; border: 1px solid #bfdbfe; border-radius: 8px; padding: 16px 20px; margin-bottom: 20px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 1px 3px rgba(0,0,0,0.02); clear: both;">
+                                    <div style="display: flex; align-items: center; gap: 15px;">
+                                        <div style="background: #2563eb; color: #fff; width: 42px; height: 42px; border-radius: 10px; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 6px -1px rgba(37, 99, 235, 0.3);">
+                                            <span class="dashicons dashicons-superhero-alt" style="font-size: 22px; width: 22px; height: 22px;"></span>
+                                        </div>
+                                        <div>
+                                            <div style="font-weight: 700; font-size: 15px; color: #1e3a8a; margin-bottom: 2px;">Zywrap Co-Pilot</div>
+                                            <div style="font-size: 12px; color: #3b82f6; font-weight: 500;"><?php echo esc_attr(__('Call AI by Code. Zero Prompt Engineering.','js-support-ticket')); ?></div>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <button type="button" id="jsst-open-zywrap-modal" class="zywrap-open-tab-btn button button-primary" data-tab="compose" data-active="<?php echo esc_attr($active_flag); ?>" style="background: #2563eb; border-color: #1d4ed8; box-shadow: 0 2px 4px rgba(37,99,235,0.2); display: flex; align-items: center; gap: 6px; padding: 0 20px; height: 38px; border-radius: 6px; font-weight: 600; text-shadow: none;">
+                                            <span class="dashicons dashicons-edit" style="font-size: 16px; width: 16px; height: 16px; margin-top: 2px;"></span> <?php echo esc_attr(__('Open AI Copilot','js-support-ticket')); ?>
+                                        </button>
+                                    </div>
+                                </div>
                                 <div class="js-form-wrapper">
-                                    <div class="js-form-title"><label id="responcemsg" for="responce"><?php echo esc_html(__('Response', 'js-support-ticket')); ?><span style="color: red;" >*</span></label></div>
+                                    <div class="js-form-title" style="padding-bottom:10px;">
+                                        <label id="responcemsg" for="responce"><?php echo esc_html(__('Response', 'js-support-ticket')); ?><span style="color: red;" >*</span></label>
+                                    </div>
                                     <div class="js-form-value"><?php wp_editor('', 'jsticket_message', array('media_buttons' => false)); ?></div>
                                 </div>
+
+                                <?php 
+                                // Include the Modal UI at the bottom of the file
+                                $modal_path = JSST_PLUGIN_PATH . 'modules/zywrap/tpls/admin_modal.php';
+                                if(file_exists($modal_path)) {
+                                    include_once($modal_path);
+                                }
+                                ?>
+                                ?>
                                 <div class="js-form-wrapper">
                                     <div class="js-ticket-ai-powered-reply-wrapper">
                                         <div class="js-ticket-ai-powered-reply-icon">

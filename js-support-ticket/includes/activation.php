@@ -201,8 +201,8 @@ class JSSTactivation {
                     ('tplink_faqs_user', '0', 'tplink', 'faq'),
                     ('show_breadcrumbs', '1', 'default', NULL),
                     ('productcode', 'jsticket', 'default', NULL),
-                    ('versioncode', '3.0.6', 'default', NULL),
-                    ('productversion', '306', 'default', NULL),
+                    ('versioncode', '3.0.7', 'default', NULL),
+                    ('productversion', '307', 'default', NULL),
                     ('producttype', 'free', 'default', NULL),
                     ('tve_enabled', '2', 'default', NULL),
                     ('tve_mailreadtype', '3', 'default', NULL),
@@ -549,6 +549,9 @@ class JSSTactivation {
                                 FULLTEXT KEY `message` (`message`)
                             ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;";
             jssupportticket::$_db->query($jsst_query);
+
+
+
             $jsst_query = "CREATE TABLE IF NOT EXISTS `" . jssupportticket::$_db->prefix . "js_ticket_fieldsordering` (
                         `id` int(11) NOT NULL AUTO_INCREMENT,
                         `field` varchar(50) NOT NULL,
@@ -716,6 +719,106 @@ class JSSTactivation {
               (56, 'agent-export', 'export', 'export', 'slug for export page', 1);";
 
             jssupportticket::$_db->query($jsst_query);
+
+            // --- START ZYWRAP V1 ENGINE NATIVE HELPDESK SCHEMA ---
+
+        // 1. Categories Table
+        $jsst_query = "CREATE TABLE IF NOT EXISTS `" . jssupportticket::$_db->prefix . "js_ticket_zywrap_categories` (
+            `code` varchar(255) NOT NULL,
+            `name` varchar(255) NOT NULL,
+            `status` tinyint(1) DEFAULT '1',
+            `ordering` int(11) DEFAULT NULL,
+            PRIMARY KEY (`code`)
+        ) ENGINE=MyISAM DEFAULT CHARSET=utf8;";
+        jssupportticket::$_db->query($jsst_query);
+
+        // 2. AI Models Table
+        $jsst_query = "CREATE TABLE IF NOT EXISTS `" . jssupportticket::$_db->prefix . "js_ticket_zywrap_ai_models` (
+            `code` varchar(255) NOT NULL,
+            `name` varchar(255) NOT NULL,
+            `status` tinyint(1) DEFAULT '1',
+            `ordering` int(11) DEFAULT NULL,
+            PRIMARY KEY (`code`)
+        ) ENGINE=MyISAM DEFAULT CHARSET=utf8;";
+        jssupportticket::$_db->query($jsst_query);
+
+        // 3. Languages Table
+        $jsst_query = "CREATE TABLE IF NOT EXISTS `" . jssupportticket::$_db->prefix . "js_ticket_zywrap_languages` (
+            `code` varchar(10) NOT NULL,
+            `name` varchar(255) NOT NULL,
+            `status` tinyint(1) DEFAULT '1',
+            `ordering` int(11) DEFAULT NULL,
+            PRIMARY KEY (`code`)
+        ) ENGINE=MyISAM DEFAULT CHARSET=utf8;";
+        jssupportticket::$_db->query($jsst_query);
+
+        // 4. Use Cases Table (Contains the Dynamic JSON Schemas)
+        $jsst_query = "CREATE TABLE IF NOT EXISTS `" . jssupportticket::$_db->prefix . "js_ticket_zywrap_use_cases` (
+            `code` varchar(255) NOT NULL,
+            `name` varchar(255) NOT NULL,
+            `description` text,
+            `category_code` varchar(255) DEFAULT NULL,
+            `schema_data` longtext,
+            `status` tinyint(1) DEFAULT '1',
+            `ordering` bigint(20) DEFAULT NULL,
+            PRIMARY KEY (`code`),
+            KEY `category_code` (`category_code`)
+        ) ENGINE=MyISAM DEFAULT CHARSET=utf8;";
+        jssupportticket::$_db->query($jsst_query);
+
+        // 5. Wrappers Table (The AI Styles/Presets)
+        $jsst_query = "CREATE TABLE IF NOT EXISTS `" . jssupportticket::$_db->prefix . "js_ticket_zywrap_wrappers` (
+            `code` varchar(255) NOT NULL,
+            `name` varchar(255) NOT NULL,
+            `description` text,
+            `use_case_code` varchar(255) DEFAULT NULL,
+            `featured` tinyint(1) DEFAULT '0',
+            `base` tinyint(1) DEFAULT '0',
+            `status` tinyint(1) DEFAULT '1',
+            `ordering` bigint(20) DEFAULT NULL,
+            PRIMARY KEY (`code`),
+            KEY `use_case_code` (`use_case_code`)
+        ) ENGINE=MyISAM DEFAULT CHARSET=utf8;";
+        jssupportticket::$_db->query($jsst_query);
+
+        // 6. Block Templates (Tones, Styles, Formats)
+        $jsst_query = "CREATE TABLE IF NOT EXISTS `" . jssupportticket::$_db->prefix . "js_ticket_zywrap_block_templates` (
+            `type` varchar(50) NOT NULL,
+            `code` varchar(255) NOT NULL,
+            `name` varchar(255) NOT NULL,
+            `status` tinyint(1) DEFAULT '1',
+            PRIMARY KEY (`type`,`code`)
+        ) ENGINE=MyISAM DEFAULT CHARSET=utf8;";
+        jssupportticket::$_db->query($jsst_query);
+
+        // 7. Internal Settings
+        $jsst_query = "CREATE TABLE IF NOT EXISTS `" . jssupportticket::$_db->prefix . "js_ticket_zywrap_settings` (
+            `setting_key` varchar(255) NOT NULL,
+            `setting_value` text,
+            PRIMARY KEY (`setting_key`)
+        ) ENGINE=MyISAM DEFAULT CHARSET=utf8;";
+        jssupportticket::$_db->query($jsst_query);
+
+        // 8. Usage Logs (For tracking Agent Credit Consumption)
+        $jsst_query = "CREATE TABLE IF NOT EXISTS `" . jssupportticket::$_db->prefix . "js_ticket_zywrap_usage_logs` (
+            `id` bigint(20) NOT NULL AUTO_INCREMENT,
+            `trace_id` varchar(255) DEFAULT NULL,
+            `wrapper_code` varchar(255) DEFAULT NULL,
+            `model_code` varchar(255) DEFAULT NULL,
+            `prompt_tokens` int(11) DEFAULT '0',
+            `completion_tokens` int(11) DEFAULT '0',
+            `total_tokens` int(11) DEFAULT '0',
+            `credits_used` bigint(20) DEFAULT '0',
+            `latency_ms` int(11) DEFAULT '0',
+            `status` varchar(50) DEFAULT 'success',
+            `error_message` text,
+            `created_at` datetime DEFAULT NULL,
+            PRIMARY KEY (`id`),
+            KEY `wrapper_idx` (`wrapper_code`),
+            KEY `model_idx` (`model_code`)
+        ) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;";
+        jssupportticket::$_db->query($jsst_query);
+        // --- END ZYWRAP V1 ENGINE NATIVE HELPDESK SCHEMA ---
         }
     }
 

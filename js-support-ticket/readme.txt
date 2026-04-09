@@ -4,7 +4,7 @@ Donate link: https://jshelpdesk.com/pricing/
 Tags: helpdesk, ticketing system, AI support, support ticket, knowledgebase
 Requires at least: 5.5
 Tested up to: 6.9
-Stable tag: 3.0.6
+Stable tag: 3.0.7
 Requires PHP: 7.4
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
@@ -12,7 +12,9 @@ License URI: https://www.gnu.org/licenses/gpl-3.0.html
 Professional, beautiful, complete and powerful help desk & support system for WordPress.
 
 == Description ==
-JS Help Desk is a professional, AI-enhanced helpdesk and customer support system for WordPress. It offers a complete ticketing solution with front-end submission, guest tickets, and AI-powered reply suggestions to boost accuracy and efficiency—all 100% free.
+JS Help Desk is a professional, AI-enhanced helpdesk and customer support system for WordPress. It offers a complete ticketing solution with front-end submission, guest tickets, and a native AI Copilot to boost agent efficiency. 
+
+Powered by Zywrap, the AI Copilot brings top-tier large language models directly into your ticket editor. Call AI by Code. Zero Prompt Engineering.
 
 = Key Resources =
 * [JS Help Desk Demo](http://demo.jshelpdesk.com)
@@ -28,6 +30,14 @@ JS Help Desk is a professional, AI-enhanced helpdesk and customer support system
 - **Priority Management**: Highlight urgent issues with custom colors.
 - **Internal Notes**: Agents can add private notes for internal collaboration.
 - **Custom Statuses**: Track ticket progress with clear status messages.
+
+**Zywrap AI Copilot (New!)**
+- **Zero Prompt Engineering:** Agents don't need to write prompts. Simply select a Support Intent (e.g., "Ask for Info" or "Escalate") and the AI does the rest.
+- **1-Click Summaries:** Instantly summarize long, complex ticket threads to get up to speed in seconds.
+- **Smart Data Extraction:** Automatically extract error codes, browser versions, and URLs from customer messages into clean, readable Data Cards.
+- **Instant Translation:** Break language barriers by translating customer messages or agent replies with a single click.
+- **Auto-Draft Replies:** Generate complete, professional responses based on the context of the entire ticket history.
+- **Dynamic Routing:** Automatically routes requests through the best available AI models (OpenAI, Anthropic, Gemini, Groq) via the Zywrap API.
 
 **User & Agent Experience**
 - **Front-end Submission**: Users create and track tickets without accessing the dashboard.
@@ -128,6 +138,16 @@ Download the zip file and upload the folder to your `/wp-content/plugins/` direc
 21. Internal Mails
 
 == Changelog ==
+= 3.0.7 =
+* FEATURE: Introduced the Zywrap AI Copilot directly inside the ticket editor.
+* FEATURE: Added 1-click Ticket Summarization for long support threads.
+* FEATURE: Added Smart Data Extraction to automatically pull environment/error data into UI cards.
+* FEATURE: Added 1-click Translations for global customer support.
+* FEATURE: Added the Zywrap Dashboard with API usage stats and token tracking.
+* FEATURE: Added AI Test Playground for administrators.
+* ENHANCEMENT: Rebuilt the AI response formatting with Marked.js for perfect HTML and Plain Text rendering.
+* ENHANCEMENT: Added automated Database Sync for dynamic AI Wrapper templates.
+
 = 3.0.6 =
 * Security Updates.
 
@@ -155,6 +175,13 @@ Download the zip file and upload the folder to your `/wp-content/plugins/` direc
 * Introduced AI-Powered reply suggestions.
 * Added SupportCandy import functionality.
 * Added configuration base user avatar.
+
+== Privacy & Third-Party Service Disclosure ==
+To provide advanced AI functionalities, JS Help Desk integrates with the **Zywrap Cloud API** (a third-party service). 
+
+* **Data Transmission:** When an agent actively uses an AI feature (such as "Generate Reply", "Summarize", "Extract Details", or "Translate"), the content of the specific ticket thread and the customer's message are securely transmitted to the Zywrap API to generate the response. 
+* **Opt-In Required:** The AI Copilot is completely disabled by default. No data is transmitted unless an Administrator explicitly registers for a Zywrap account, inputs their API Key in the settings, and an agent clicks an AI action button.
+* **Data Usage:** Data sent to the Zywrap API is used strictly for generating the requested AI text in real-time. Please review the [Zywrap Privacy Policy](https://zywrap.com/privacy) for full details on data handling.
 
 == Frequently Asked Questions ==
 

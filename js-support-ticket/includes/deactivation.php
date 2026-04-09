@@ -40,6 +40,14 @@ class JSSTdeactivation {
            $wpdb->prefix."js_ticket_multiform",
            $wpdb->prefix."js_ticket_slug",
            $wpdb->prefix."js_ticket_jshdsessiondata",
+           $wpdb->prefix."js_ticket_zywrap_categories",
+           $wpdb->prefix."js_ticket_zywrap_ai_models",
+           $wpdb->prefix."js_ticket_zywrap_languages",
+           $wpdb->prefix."js_ticket_zywrap_use_cases",
+           $wpdb->prefix."js_ticket_zywrap_wrappers",
+           $wpdb->prefix."js_ticket_zywrap_block_templates",
+           $wpdb->prefix."js_ticket_zywrap_settings",
+           $wpdb->prefix."js_ticket_zywrap_usage_logs",
         );
         return $jsst_tables;
     }

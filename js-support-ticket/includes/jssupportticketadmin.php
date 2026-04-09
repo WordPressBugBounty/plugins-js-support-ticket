@@ -72,6 +72,13 @@ class jssupportticketadmin {
                     array($this, 'showAdminPage') // function name
             );
             add_submenu_page('jssupportticket', // parent slug
+                    esc_html(__('Zywrap AI', 'js-support-ticket')), // Page title
+                    esc_html(__('Zywrap AI', 'js-support-ticket')), // menu title
+                    'jsst_support_ticket', // capability
+                    'zywrap', //menu slug
+                    array($this, 'showAdminPage') // function name
+            ); 
+            add_submenu_page('jssupportticket', // parent slug
                     esc_html(__('Priorities', 'js-support-ticket')), // Page title
                     esc_html(__('Priority', 'js-support-ticket')), // menu title
                     'jsst_support_ticket', // capability

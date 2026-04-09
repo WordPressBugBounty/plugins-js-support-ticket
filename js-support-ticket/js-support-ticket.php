@@ -3,14 +3,14 @@
 /**
  * @package JS Help Desk
  * @author Ahmad Bilal
- * @version 3.0.6
+ * @version 3.0.7
  */
 /*
   Plugin Name: JS Help Desk – AI-Powered Support & Ticketing System
   Plugin URI: https://www.jshelpdesk.com
   Description: JS Help Desk is a trusted open source ticket system. JS Help Desk is a simple, easy to use, web-based customer support system. User can create ticket from front-end. JS Help Desk comes packed with lot features than most of the expensive(and complex) support ticket system on market. JS Help Desk provide you best industry help desk system.
   Author: JS Help Desk
-  Version: 3.0.6
+  Version: 3.0.7
   Text Domain: js-support-ticket
   License: GPLv3
   Author URI: https://www.jshelpdesk.com
@@ -67,7 +67,7 @@ class jssupportticket {
         self::$jsst_data = array();
         self::$_search = array();
         self::$_captcha = array();
-        self::$_currentversion = '306';
+        self::$_currentversion = '307';
         self::$_addon_query = array('select'=>'','join'=>'','where'=>'');
         self::$_jshdsession = JSSTincluder::getObjectClass('wphdsession');
         global $wpdb;
@@ -147,7 +147,7 @@ class jssupportticket {
                     // restore colors data end
                     update_option('jsst_currentversion', self::$_currentversion);
                     include_once JSST_PLUGIN_PATH . 'includes/updates/updates.php';
-                    JSSTupdates::checkUpdates('306');
+                    JSSTupdates::checkUpdates('307');
                     JSSTincluder::getJSModel('jssupportticket')->updateColorFile();
                     JSSTincluder::getJSModel('jssupportticket')->jsst_check_license_status();
                     JSSTincluder::getJSModel('jssupportticket')->JSSTAddonsAutoUpdate();
@@ -1592,6 +1592,44 @@ function JSSTCheckPluginInfo($jsst_slug){
         $jsst_availability = "0";
     }
     return array("text" => $jsst_text, "disabled" => $jsst_disabled, "class" => $jsst_class, "availability" => $jsst_availability);
+}
+
+// =========================================================================
+// ADD SETTINGS LINK TO PLUGIN PAGE
+// =========================================================================
+add_filter('plugin_action_links_' . plugin_basename(__FILE__), 'jsst_add_plugin_action_links');
+
+function jsst_add_plugin_action_links($links) {
+    // 1. Define the exact URL to your Zywrap Global Settings page
+    $settings_url = admin_url('admin.php?page=configuration');
+    $zywrap_url = admin_url('admin.php?page=zywrap&jstlay=zywrap');
+    
+    // 2. Create the HTML link safely
+    $settings_link = '<a href="' . esc_url($settings_url) . '" style="font-weight: 600; color: #2563eb;">' . esc_html__('Settings', 'js-support-ticket') . '</a>';
+    
+    $zywrap_link = '<a href="' . esc_url($zywrap_url) . '" style="font-weight: 600; color: #2563eb;">' . esc_html__('Zywrap AI', 'js-support-ticket') . '</a>';
+
+    // 3. Add it to the beginning of the array so it appears first
+    array_unshift($links, $settings_link);
+    array_unshift($links, $zywrap_link);
+    
+    return $links;
+}
+
+// =========================================================================
+// LOAD PLUGIN TRANSLATIONS (AUTO-FALLBACK TO PLUGIN LANGUAGES FOLDER)
+// =========================================================================
+add_action('plugins_loaded', 'jsst_load_plugin_textdomain');
+
+function jsst_load_plugin_textdomain() {
+    $domain = 'js-support-ticket'; // Your exact text domain
+    
+    // Path to your plugin's languages folder
+    $languages_path = dirname(plugin_basename(__FILE__)) . '/languages/';
+    
+    // WordPress will check the global WP languages folder first.
+    // If not found, it will automatically look inside your plugin's $languages_path.
+    load_plugin_textdomain($domain, false, $languages_path);
 }
 
 ?>
