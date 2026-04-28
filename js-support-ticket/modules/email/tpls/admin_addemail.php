@@ -77,11 +77,11 @@
                     </div>
                     <div id="smtpauthselect" style="display: none;">
                         <div class="js-form-wrapper">
-                            <div class="js-form-title"><?php echo esc_html(__('SMTP host type', 'js-support-ticket')); ?></div>
+                            <div class="js-form-title"><?php echo esc_html(__('SMTP Host Type', 'js-support-ticket')); ?></div>
                             <div class="js-form-field"><?php echo wp_kses(JSSTformfield::select('smtphosttype', $jsst_smtphost , isset(jssupportticket::$jsst_data[0]->email) ? jssupportticket::$jsst_data[0]->smtphosttype : '', esc_html(__('Select Type', 'js-support-ticket')) , array('class' => 'js-smtp-select js-form-select-field')), JSST_ALLOWED_TAGS)?></div>
                         </div>
                         <div class="js-form-wrapper">
-                            <div class="js-form-title"><?php echo esc_html(__('SMTP host', 'js-support-ticket')); ?>&nbsp;<span style="color: red;" >*</span></div>
+                            <div class="js-form-title"><?php echo esc_html(__('SMTP Host', 'js-support-ticket')); ?>&nbsp;<span style="color: red;" >*</span></div>
                             <div class="js-form-field"><?php echo wp_kses(JSSTformfield::text('smtphost', isset(jssupportticket::$jsst_data[0]->email) ? jssupportticket::$jsst_data[0]->smtphost : '', array('class' => 'inputbox js-form-select-field')), JSST_ALLOWED_TAGS) ?></div>
                         </div>
                         <div class="js-form-wrapper">
@@ -107,7 +107,7 @@
                         <div class="js-col-md-12 js-col-md-offset-2 js-admin-ticketviaemail-wrapper-checksetting">
                             <a title="<?php echo esc_attr(__('Check Settings','js-support-ticket')); ?>" href="#" id="js-admin-ticketviaemail"><img alt = "<?php echo esc_attr(__('check','js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/tick_ticketviaemail.png" /><?php echo esc_html(__('Check Settings','js-support-ticket')); ?></a>
                             <div id="js-admin-ticketviaemail-bar"></div>
-                            <div class="js-col-md-12" id="js-admin-ticketviaemail-text"><?php echo esc_html(__('If the system doesnot respond in 30 seconds','js-support-ticket')).', '. esc_html(__('it means system unable to connect email server','js-support-ticket')); ?></div>
+                            <div class="js-col-md-12" id="js-admin-ticketviaemail-text"><?php echo esc_html(__('If the system does not respond in 30 seconds','js-support-ticket')).', '. esc_html(__('it means system unable to connect email server','js-support-ticket')); ?></div>
                             <div class="js-col-md-12">
                                <div id="js-admin-ticketviaemail-msg"></div>
                            </div>
@@ -197,7 +197,7 @@ $jsst_jssupportticket_js ='
                     if(hostname != ""){
                         var hostname = jQuery("input#hostname").val();
                     }else{
-                        alert("'. esc_html(__("Please enter the hostname first","js-support-ticket")).'");
+                        alert("'. esc_html(__("Please enter the host name first","js-support-ticket")).'");
                         return;
                     }
                 }

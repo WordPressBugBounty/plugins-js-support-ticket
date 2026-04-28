@@ -108,7 +108,7 @@
                                 <a title="<?php echo esc_attr(__('Erase identifying data', 'js-support-ticket'));?>" class="action-btn" onclick="return confirm('<?php echo esc_js(__('Are you sure to erase identifying data', 'js-support-ticket')); ?>');" href="<?php echo esc_url(wp_nonce_url('?page=gdpr&task=eraseidentifyinguserdata&action=jstask&jssupportticketid='.esc_attr($jsst_request->uid),'erase-userdata'));?>">
                                     <?php echo esc_html(__('Erase identifying data', 'js-support-ticket'));?>
                                 </a>
-                                <a title="<?php echo esc_attr(__('Delete data', 'js-support-ticket'));?>" class="action-btn" onclick="return confirm('<?php echo esc_js(__('Are you sure you want to delete it?', 'js-support-ticket')); ?>');" href="<?php echo esc_url(wp_nonce_url('?page=gdpr&task=deleteuserdata&action=jstask&jssupportticketid='.esc_attr($jsst_request->uid),'delete-userdata'));?>">
+                                <a title="<?php echo esc_attr(__('Delete data', 'js-support-ticket'));?>" class="action-btn" onclick="return confirm('<?php echo esc_js(__('Are you sure you want to delete?', 'js-support-ticket')); ?>');" href="<?php echo esc_url(wp_nonce_url('?page=gdpr&task=deleteuserdata&action=jstask&jssupportticketid='.esc_attr($jsst_request->uid),'delete-userdata'));?>">
                                     <?php echo esc_html(__('Delete data', 'js-support-ticket'));?>
                                 </a>
                             </td>

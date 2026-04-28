@@ -83,11 +83,11 @@ $jsst_layout = JSSTrequest::getVar('jstlay', null);
         case 'reports':
             switch ($jsst_layout) {
                 case 'staffdetailreport':
-                    $jsst_array[] = array('link' => jssupportticket::makeUrl(array('jstmod'=>$jsst_module, 'jstlay'=>'staffreports')), 'text' => esc_html(__('Staff reports', 'js-support-ticket')));
-                    $jsst_array[] = array('link' => jssupportticket::makeUrl(array('jstmod'=>$jsst_module, 'jstlay'=>$jsst_layout)), 'text' => esc_html(__('Staff report', 'js-support-ticket')));
+                    $jsst_array[] = array('link' => jssupportticket::makeUrl(array('jstmod'=>$jsst_module, 'jstlay'=>'staffreports')), 'text' => esc_html(__('Agent Reports', 'js-support-ticket')));
+                    $jsst_array[] = array('link' => jssupportticket::makeUrl(array('jstmod'=>$jsst_module, 'jstlay'=>$jsst_layout)), 'text' => esc_html(__('Agent Reports', 'js-support-ticket')));
                     break;
                 case 'staffreports':
-                    $jsst_array[] = array('link' => jssupportticket::makeUrl(array('jstmod'=>$jsst_module, 'jstlay'=>$jsst_layout)), 'text' => esc_html(__('Staff reports', 'js-support-ticket')));
+                    $jsst_array[] = array('link' => jssupportticket::makeUrl(array('jstmod'=>$jsst_module, 'jstlay'=>$jsst_layout)), 'text' => esc_html(__('Agent Reports', 'js-support-ticket')));
                     break;
                 case 'departmentreports':
                     $jsst_array[] = array('link' => jssupportticket::makeUrl(array('jstmod'=>$jsst_module, 'jstlay'=>$jsst_layout)), 'text' => esc_html(__('Departments report', 'js-support-ticket')));
@@ -114,20 +114,20 @@ $jsst_layout = JSSTrequest::getVar('jstlay', null);
             switch ($jsst_layout) {
                 case 'addfaq':
                     $jsst_layout1 = ( in_array('agent',jssupportticket::$_active_addons) && JSSTincluder::getJSModel('agent')->isUserStaff()) ? 'stafffaqs' : 'faqs';
-                    $jsst_array[] = array('link' => jssupportticket::makeUrl(array('jstmod'=>$jsst_module, 'jstlay'=>$jsst_layout1)), 'text' => esc_html(__("FAQ's", 'js-support-ticket')));
+                    $jsst_array[] = array('link' => jssupportticket::makeUrl(array('jstmod'=>$jsst_module, 'jstlay'=>$jsst_layout1)), 'text' => esc_html(__("FAQs", 'js-support-ticket')));
                     $jsst_text = ($jsst_isnew) ? esc_html(__('Add FAQ', 'js-support-ticket')) : esc_html(__('Edit FAQ', 'js-support-ticket'));
                     $jsst_array[] = array('link' => jssupportticket::makeUrl(array('jstmod'=>$jsst_module, 'jstlay'=>$jsst_layout)), 'text' => $jsst_text);
                     break;
                 case 'faqdetails':
                     $jsst_layout1 = ( in_array('agent',jssupportticket::$_active_addons) && JSSTincluder::getJSModel('agent')->isUserStaff()) ? 'stafffaqs' : 'faqs';
-                    $jsst_array[] = array('link' => jssupportticket::makeUrl(array('jstmod'=>$jsst_module, 'jstlay'=>$jsst_layout1)), 'text' => esc_html(__("FAQ's", 'js-support-ticket')));
+                    $jsst_array[] = array('link' => jssupportticket::makeUrl(array('jstmod'=>$jsst_module, 'jstlay'=>$jsst_layout1)), 'text' => esc_html(__("FAQs", 'js-support-ticket')));
                     $jsst_array[] = array('link' => '#', 'text' => esc_html(__('FAQ Detail', 'js-support-ticket')));
                     break;
                 case 'faqs':
-                    $jsst_array[] = array('link' => jssupportticket::makeUrl(array('jstmod'=>$jsst_module, 'jstlay'=>$jsst_layout)), 'text' => esc_html(__("FAQ's", 'js-support-ticket')));
+                    $jsst_array[] = array('link' => jssupportticket::makeUrl(array('jstmod'=>$jsst_module, 'jstlay'=>$jsst_layout)), 'text' => esc_html(__("FAQs", 'js-support-ticket')));
                     break;
                 case 'stafffaqs':
-                    $jsst_array[] = array('link' => jssupportticket::makeUrl(array('jstmod'=>$jsst_module, 'jstlay'=>$jsst_layout)), 'text' => esc_html(__("FAQ's", 'js-support-ticket')));
+                    $jsst_array[] = array('link' => jssupportticket::makeUrl(array('jstmod'=>$jsst_module, 'jstlay'=>$jsst_layout)), 'text' => esc_html(__("FAQs", 'js-support-ticket')));
                     break;
             }
             break;
@@ -141,7 +141,7 @@ $jsst_layout = JSSTrequest::getVar('jstlay', null);
         case 'feedback':
             switch ($jsst_layout) {
                 case 'feedbacks':
-                    $jsst_array[] = array('link' => jssupportticket::makeUrl(array('jstmod'=>$jsst_module, 'jstlay'=>$jsst_layout)), 'text' => esc_html(__('Feedbacks', 'js-support-ticket')));
+                    $jsst_array[] = array('link' => jssupportticket::makeUrl(array('jstmod'=>$jsst_module, 'jstlay'=>$jsst_layout)), 'text' => esc_html(__('Feedback', 'js-support-ticket')));
                     break;
             }
             break;
@@ -210,7 +210,7 @@ $jsst_layout = JSSTrequest::getVar('jstlay', null);
                     break;
                 case 'rolepermission':
                     $jsst_array[] = array('link' => jssupportticket::makeUrl(array('jstmod'=>$jsst_module, 'jstlay'=>'roles')), 'text' => esc_html(__('Roles', 'js-support-ticket')));
-                    $jsst_array[] = array('link' => jssupportticket::makeUrl(array('jstmod'=>$jsst_module, 'jstlay'=>$jsst_layout)), 'text' => esc_html(__('Role permissions', 'js-support-ticket')));
+                    $jsst_array[] = array('link' => jssupportticket::makeUrl(array('jstmod'=>$jsst_module, 'jstlay'=>$jsst_layout)), 'text' => esc_html(__('Role Permissions', 'js-support-ticket')));
                     break;
                 case 'roles':
                     $jsst_array[] = array('link' => jssupportticket::makeUrl(array('jstmod'=>$jsst_module, 'jstlay'=>$jsst_layout)), 'text' => esc_html(__('Roles', 'js-support-ticket')));
@@ -225,7 +225,7 @@ $jsst_layout = JSSTrequest::getVar('jstlay', null);
                     $jsst_array[] = array('link' => jssupportticket::makeUrl(array('jstmod'=>$jsst_module, 'jstlay'=>$jsst_layout)), 'text' => $jsst_text);
                     break;
                 case 'staffpermissions':
-                    $jsst_array[] = array('link' => jssupportticket::makeUrl(array('jstmod'=>$jsst_module, 'jstlay'=>$jsst_layout)), 'text' => esc_html(__('Staff Permissions', 'js-support-ticket')));
+                    $jsst_array[] = array('link' => jssupportticket::makeUrl(array('jstmod'=>$jsst_module, 'jstlay'=>$jsst_layout)), 'text' => esc_html(__('Agent Permissions', 'js-support-ticket')));
                     break;
                 case 'staffs':
                     $jsst_array[] = array('link' => jssupportticket::makeUrl(array('jstmod'=>$jsst_module, 'jstlay'=>$jsst_layout)), 'text' => esc_html(__('Staffs', 'js-support-ticket')));
@@ -262,7 +262,7 @@ $jsst_layout = JSSTrequest::getVar('jstlay', null);
                     $jsst_layout1 = ( in_array('agent',jssupportticket::$_active_addons) && JSSTincluder::getJSModel('agent')->isUserStaff()) ? 'staffmyticket' : 'myticket';
                     $jsst_module1 = ( in_array('agent',jssupportticket::$_active_addons) && JSSTincluder::getJSModel('agent')->isUserStaff()) ? 'agent':'ticket';
                     $jsst_array[] = array('link' => jssupportticket::makeUrl(array('jstmod'=>$jsst_module1, 'jstlay'=>$jsst_layout1)), 'text' => esc_html(__('My Tickets', 'js-support-ticket')));
-                    $jsst_array[] = array('link' => '#', 'text' => esc_html(__('Ticket Detail', 'js-support-ticket')));
+                    $jsst_array[] = array('link' => '#', 'text' => esc_html(__('Ticket Details', 'js-support-ticket')));
                     break;
                 case 'ticketstatus':
                     $jsst_array[] = array('link' => jssupportticket::makeUrl(array('jstmod'=>'ticket', 'jstlay'=>'ticketstatus')), 'text' => esc_html(__('Ticket Status', 'js-support-ticket')));
@@ -351,7 +351,7 @@ if (jssupportticket::$_config['tplink_login_logout_' . $jsst_linkname] == 1) {
         $jsst_title = esc_html(__('Login', 'js-support-ticket'));
     } else {
         $jsst_imgsrc = JSST_PLUGIN_URL . 'includes/images/dashboard-icon/header-icon/logout.png';
-        $jsst_title = esc_html(__('Log out', 'js-support-ticket'));
+        $jsst_title = esc_html(__('Log Out', 'js-support-ticket'));
         $jsst_hreflink = wp_logout_url(jssupportticket::makeUrl(array('jstmod' => 'jssupportticket', 'jstlay' => 'controlpanel')));
 
         if (isset($_COOKIE['jssupportticket-socialmedia']) && !empty($_COOKIE['jssupportticket-socialmedia'])) {

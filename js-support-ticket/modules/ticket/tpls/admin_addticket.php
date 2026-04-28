@@ -261,7 +261,7 @@ wp_add_inline_script('js-support-ticket-main-js',$jsst_jssupportticket_js);
             <div id="userpopup" style="display:none;">
                 <div class="userpopup-top">
                     <div class="userpopup-heading">
-                        <?php echo esc_html(__('Select user','js-support-ticket')); ?>
+                        <?php echo esc_html(__('Select User','js-support-ticket')); ?>
                     </div>
                     <img alt = "<?php echo esc_attr(__('Close','js-support-ticket')); ?>" class="userpopup-close" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/close-icon-white.png" />
                 </div>
@@ -547,7 +547,7 @@ wp_add_inline_script('js-support-ticket-main-js',$jsst_jssupportticket_js);
                                         <div class="js-form-wrapper">
                                             <div class="js-form-title">
                                                 <a target="blank" href="https://www.youtube.com/watch?v=p3vT2vhSkjk" class="js-tkt-det-hdg-img js-cp-video-internal-note">
-                                                    <img title="<?php echo esc_attr(__('watch video','js-support-ticket')); ?>" alt = "<?php echo esc_attr(__('watch video','js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL) ?>/includes/images/watch-video-icon.png" />
+                                                    <img title="<?php echo esc_attr(__('Watch Video','js-support-ticket')); ?>" alt = "<?php echo esc_attr(__('Watch Video','js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL) ?>/includes/images/watch-video-icon.png" />
                                                 </a>
                                                 <?php echo esc_html(jssupportticket::JSST_getVarValue($jsst_field->fieldtitle)); ?><?php if($jsst_field->required == 1) echo '&nbsp;<span style="color: red;" >*</span>'; ?></div>
                                             <div class="js-form-value">
@@ -567,7 +567,7 @@ wp_add_inline_script('js-support-ticket-main-js',$jsst_jssupportticket_js);
                                             <div class="js-form-title"><?php echo esc_html(__('Internal Note', 'js-support-ticket')); ?></div>
                                             <div class="js-form-value">
                                                 <?php if (isset(jssupportticket::$jsst_data[0]->id)) { ?>
-                                                    <div class="js-form-title"><?php echo esc_html(__('Reason for edit', 'js-support-ticket')); ?><br></div>
+                                                    <div class="js-form-title"><?php echo esc_html(__('Reason For Edit', 'js-support-ticket')); ?><br></div>
                                                 <?php } ?>
                                                 <?php
                                                     if(isset($jsst_formdata['internalnote'])) $jsst_internalnote = $jsst_formdata['internalnote'];

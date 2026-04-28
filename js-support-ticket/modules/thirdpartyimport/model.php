@@ -822,7 +822,7 @@ class JSSTthirdpartyimportModel {
                 if (!empty($jsst_body) && isset($jsst_body->slug)) {
                     switch ($jsst_body->slug) {
                         case 'assigned_agent':
-                            $jsst_eventtype = __('Assign ticket to agent', 'js-support-ticket');
+                            $jsst_eventtype = __('assign Ticket To Agent', 'js-support-ticket');
                             $jsst_message = __('Ticket is assigned to agent by', 'js-support-ticket') . " ( $jsst_currentUserName )";
                             break;
                         case 'status':
@@ -834,7 +834,7 @@ class JSSTthirdpartyimportModel {
                             break;
                         case 'priority':
                             $jsst_eventtype = __('Change Priority', 'js-support-ticket');
-                            $jsst_message = __('Ticket priority is changed by', 'js-support-ticket') . " ( $jsst_currentUserName )";
+                            $jsst_message = __('Ticket Priority Is Changed By', 'js-support-ticket') . " ( $jsst_currentUserName )";
                             break;
                         case 'category':
                             $jsst_eventtype = __('Ticket department transfer', 'js-support-ticket');

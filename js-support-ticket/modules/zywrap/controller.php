@@ -6,25 +6,29 @@ class JSSTzywrapController {
     // --- ADD THESE TWO FUNCTIONS FOR THE MENU ROUTING ---
     function __construct() {
         self::handleRequest();
-
     }
 
     function handleRequest() {
         $jsst_layout = JSSTrequest::getLayout('jstlay', null, 'zywrap');
         jssupportticket::$jsst_data['sanitized_args']['jsst_nonce'] = esc_html(wp_create_nonce('jsst_nonce'));
+        
         if (self::canaddfile($jsst_layout)) {
             switch ($jsst_layout) {
                 case 'admin_zywrap':
                     include_once JSST_PLUGIN_PATH . 'includes/updates/updates.php';
-                    JSSTupdates::checkUpdates('307');
+                    JSSTupdates::checkUpdates('308');
                     JSSTincluder::getJSModel('zywrap')->getDashboardStats();
                     break;
+
                 case 'admin_zywrap_settings':
+                    // Settings usually just load the view, model logic handled via AJAX save
                     break;
+
                 case 'admin_zywrap_playground':
                     // No model function needed, the playground queries directly via AJAX
                     $jsst_layout = 'admin_zywrap_playground'; 
                     break;
+
                 case 'admin_zywrap_logs':
                     JSSTincluder::getJSModel('zywrap')->getLogs();
                     $jsst_layout = 'admin_zywrap_logs'; // Force load the admin template
@@ -58,10 +62,10 @@ class JSSTzywrapController {
                 return true;
             }
         }
+        return false;
     }
     
     static function delete_log() {
-
         // SECURITY: ONLY ADMINS CAN DELETE LOGS
         if (!current_user_can('manage_options')) {
             wp_die('Security Error: Administrators only.');
@@ -82,12 +86,11 @@ class JSSTzywrapController {
         if ($jsst_pagenum) {
             $jsst_url .= '&pagenum=' . $jsst_pagenum;
         }
+
         wp_safe_redirect($jsst_url);
         exit;
     }
 
 }
 
-
-$jsst_ticketController = new JSSTzywrapController();
-
+$jsst_zywrapController = new JSSTzywrapController();

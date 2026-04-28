@@ -29,7 +29,7 @@ if (!defined('ABSPATH')) die('Restricted Access'); ?>
                         <li class="header-parts third-part">
                            <a href="<?php echo esc_url(admin_url("admin.php?page=postinstallation&jstlay=stepthree")); ?>" title="link" class="tab_icon">
                                <img class="start" src="<?php echo esc_url(JSST_PLUGIN_URL).'includes/images/postinstallation/ticket.png';?>" />
-                                <span class="text"><?php echo esc_html(__('Ticket Setting','js-support-ticket')); ?></span>
+                                <span class="text"><?php echo esc_html(__('Ticket Settings','js-support-ticket')); ?></span>
                             </a>
                         </li>
                         <li class="header-parts forth-part">
@@ -41,7 +41,7 @@ if (!defined('ABSPATH')) die('Restricted Access'); ?>
                     </ul>
                 </div>
                 <div class="post-installtion-content_wrapper_right">
-                    <span class="heading-post-ins"><?php echo esc_html(__('Setting Complete','js-support-ticket'));?></span>
+                    <span class="heading-post-ins"><?php echo esc_html(__('Configurations Complete','js-support-ticket'));?></span>
                     <div class="post-installtion-content">
                         <form id="jslearnmanager-form-ins" method="post" action="#">
                             <div class="jsst_setting_complete_heading"><h1 class="Jsst_heading"><?php echo esc_html(__('Setting Completed','js-support-ticket')); ?></h1></div>

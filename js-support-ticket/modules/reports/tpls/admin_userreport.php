@@ -232,7 +232,7 @@ $jsst_link_export = admin_url('admin.php?page=export&task='.$jsst_t_name.'&actio
 				?>
 				<div class="js-ticket-count">
 				    <div class="js-ticket-link">
-				        <a class="js-ticket-link js-ticket-green" href="#" data-tab-number="1" title="<?php echo esc_attr(__('Open Ticket','js-support-ticket')); ?>">
+				        <a class="js-ticket-link js-ticket-green" href="#" data-tab-number="1" title="<?php echo esc_attr(__('Open Tickets','js-support-ticket')); ?>">
 				            <div class="js-ticket-cricle-wrp" data-per="<?php echo esc_attr($jsst_open_percentage); ?>" data-tab-number="1">
 				                <div class="js-mr-rp" data-progress="<?php echo esc_attr($jsst_open_percentage); ?>">
 				                    <div class="circle">
@@ -258,7 +258,7 @@ $jsst_link_export = admin_url('admin.php?page=export&task='.$jsst_t_name.'&actio
 				        </a>
 				    </div>
 				    <div class="js-ticket-link">
-				        <a class="js-ticket-link js-ticket-brown" href="#" data-tab-number="2" title="<?php echo esc_attr(__('answered ticket','js-support-ticket')); ?>">
+				        <a class="js-ticket-link js-ticket-brown" href="#" data-tab-number="2" title="<?php echo esc_attr(__('Answered Tickets','js-support-ticket')); ?>">
 				            <div class="js-ticket-cricle-wrp" data-per="<?php echo esc_attr($jsst_answered_percentage); ?>" >
 				                <div class="js-mr-rp" data-progress="<?php echo esc_attr($jsst_answered_percentage); ?>">
 				                    <div class="circle">
@@ -284,7 +284,7 @@ $jsst_link_export = admin_url('admin.php?page=export&task='.$jsst_t_name.'&actio
 				        </a>
 				    </div>
 				    <div class="js-ticket-link">
-	                    <a class="js-ticket-link js-ticket-blue" href="#" data-tab-number="3" title="<?php echo esc_attr(__('pending ticket','js-support-ticket')); ?>">
+	                    <a class="js-ticket-link js-ticket-blue" href="#" data-tab-number="3" title="<?php echo esc_attr(__('Pending Tickets','js-support-ticket')); ?>">
 	                        <div class="js-ticket-cricle-wrp" data-per="<?php echo esc_attr($jsst_pending_percentage); ?>">
 	                            <div class="js-mr-rp" data-progress="<?php echo esc_attr($jsst_pending_percentage); ?>">
 	                                <div class="circle">
@@ -310,7 +310,7 @@ $jsst_link_export = admin_url('admin.php?page=export&task='.$jsst_t_name.'&actio
 	                    </a>
 	                </div>
 				    <div class="js-ticket-link">
-				        <a class="js-ticket-link js-ticket-orange" href="#" data-tab-number="4" title="<?php echo esc_attr(__('overdue ticket','js-support-ticket')); ?>">
+				        <a class="js-ticket-link js-ticket-orange" href="#" data-tab-number="4" title="<?php echo esc_attr(__('Overdue Tickets','js-support-ticket')); ?>">
 				            <div class="js-ticket-cricle-wrp" data-per="<?php echo esc_attr($jsst_overdue_percentage); ?>" >
 				                <div class="js-mr-rp" data-progress="<?php echo esc_attr($jsst_overdue_percentage); ?>">
 				                    <div class="circle">
@@ -452,7 +452,7 @@ $jsst_link_export = admin_url('admin.php?page=export&task='.$jsst_t_name.'&actio
 										?>
 										<div class="js-ticket-count">
 										    <div class="js-ticket-link">
-										        <a class="js-ticket-link js-ticket-green" href="#" data-tab-number="1" title="<?php echo esc_attr(__('Open Ticket', 'js-support-ticket')); ?>">
+										        <a class="js-ticket-link js-ticket-green" href="#" data-tab-number="1" title="<?php echo esc_attr(__('Open Tickets', 'js-support-ticket')); ?>">
 										            <div class="js-ticket-cricle-wrp" data-per="<?php echo esc_attr($jsst_open_percentage); ?>" data-tab-number="1">
 										                <div class="js-mr-rp" data-progress="<?php echo esc_attr($jsst_open_percentage); ?>">
 										                    <div class="circle">
@@ -478,7 +478,7 @@ $jsst_link_export = admin_url('admin.php?page=export&task='.$jsst_t_name.'&actio
 										        </a>
 										    </div>
 										    <div class="js-ticket-link">
-										        <a class="js-ticket-link js-ticket-brown" href="#" data-tab-number="2" title="<?php echo esc_attr(__('answered ticket', 'js-support-ticket')); ?>">
+										        <a class="js-ticket-link js-ticket-brown" href="#" data-tab-number="2" title="<?php echo esc_attr(__('Answered Tickets', 'js-support-ticket')); ?>">
 										            <div class="js-ticket-cricle-wrp" data-per="<?php echo esc_attr($jsst_answered_percentage); ?>" >
 										                <div class="js-mr-rp" data-progress="<?php echo esc_attr($jsst_answered_percentage); ?>">
 										                    <div class="circle">
@@ -504,7 +504,7 @@ $jsst_link_export = admin_url('admin.php?page=export&task='.$jsst_t_name.'&actio
 										        </a>
 										    </div>
 										    <div class="js-ticket-link">
-							                    <a class="js-ticket-link js-ticket-blue" href="#" data-tab-number="3" title="<?php echo esc_attr(__('pending ticket', 'js-support-ticket')); ?>">
+							                    <a class="js-ticket-link js-ticket-blue" href="#" data-tab-number="3" title="<?php echo esc_attr(__('Pending Tickets', 'js-support-ticket')); ?>">
 							                        <div class="js-ticket-cricle-wrp" data-per="<?php echo esc_attr($jsst_pending_percentage); ?>">
 							                            <div class="js-mr-rp" data-progress="<?php echo esc_attr($jsst_pending_percentage); ?>">
 							                                <div class="circle">
@@ -530,7 +530,7 @@ $jsst_link_export = admin_url('admin.php?page=export&task='.$jsst_t_name.'&actio
 							                    </a>
 							                </div>
 										    <div class="js-ticket-link">
-										        <a class="js-ticket-link js-ticket-orange" href="#" data-tab-number="4" title="<?php echo esc_attr(__('overdue ticket', 'js-support-ticket')); ?>">
+										        <a class="js-ticket-link js-ticket-orange" href="#" data-tab-number="4" title="<?php echo esc_attr(__('Overdue Tickets', 'js-support-ticket')); ?>">
 										            <div class="js-ticket-cricle-wrp" data-per="<?php echo esc_attr($jsst_overdue_percentage); ?>" >
 										                <div class="js-mr-rp" data-progress="<?php echo esc_attr($jsst_overdue_percentage); ?>">
 										                    <div class="circle">

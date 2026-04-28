@@ -530,7 +530,7 @@ class JSSTreplyModel {
         // 3. If they are NOT staff, check if they are an Administrator
         else if (!current_user_can('manage_options')) {
             // If they aren't staff and aren't an admin, they are a normal user or guest
-            wp_send_json_error(['message' => __('Access denied.', 'js-support-ticket')]);
+            wp_send_json_error(['message' => __('Access Denied.', 'js-support-ticket')]);
         }
 
         // If it reaches here, the user is either:

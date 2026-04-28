@@ -11,8 +11,8 @@ if (!defined('ABSPATH'))
                         alt="logo" />
                 </div>
                 <div class="post-installtion-wllecome-pgetxt">
-                    <span class="post-installtion-wllecome-pgetitle"><?php echo esc_html(__('Welcome to JS Support Ticket', 'js-support-ticket')); ?></span>
-                    <p class="post-installtion-wllecome-pgedisc"><?php echo esc_html(__('Lets Get Your Configurations Set Up', 'js-support-ticket')); ?></p>
+                    <span class="post-installtion-wllecome-pgetitle"><?php echo esc_html(__('Welcome To JS Support Ticket', 'js-support-ticket')); ?></span>
+                    <p class="post-installtion-wllecome-pgedisc"><?php echo esc_html(__("Let's Get Your Configuration Set Up", 'js-support-ticket')); ?></p>
                 </div>
                 <div class="post-installtion-wllecome-settingbtnwrp">
                     <a href="<?php echo esc_url(admin_url("admin.php?page=postinstallation&jstlay=stepone")); ?>"

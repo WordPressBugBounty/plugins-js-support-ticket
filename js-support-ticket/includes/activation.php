@@ -201,8 +201,8 @@ class JSSTactivation {
                     ('tplink_faqs_user', '0', 'tplink', 'faq'),
                     ('show_breadcrumbs', '1', 'default', NULL),
                     ('productcode', 'jsticket', 'default', NULL),
-                    ('versioncode', '3.0.7', 'default', NULL),
-                    ('productversion', '307', 'default', NULL),
+                    ('versioncode', '3.0.8', 'default', NULL),
+                    ('productversion', '308', 'default', NULL),
                     ('producttype', 'free', 'default', NULL),
                     ('tve_enabled', '2', 'default', NULL),
                     ('tve_mailreadtype', '3', 'default', NULL),
@@ -454,7 +454,7 @@ class JSSTactivation {
                     (3, 'In Progress', '#FFFFFF', '#69d2e7', 1, 3),
                     (4, 'Replied', '#FFFFFF', '#186e83', 1, 4),
                     (5, 'Closed', '#FFFFFF', '#ed1c24', 1, 5),
-                    (6, 'Close due to merge', '#FFFFFF', '#ed1c24', 1, 6);";
+                    (6, 'Close Due To Merge', '#FFFFFF', '#ed1c24', 1, 6);";
             jssupportticket::$_db->query($jsst_query);
 
             $jsst_query = "CREATE TABLE IF NOT EXISTS `" . jssupportticket::$_db->prefix . "js_ticket_products` (
@@ -614,9 +614,9 @@ class JSSTactivation {
             (22, 'eddlicensekey', 'License Key', 20, '10', NULL, NULL, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, NULL), 
             (23, 'envatopurchasecode', 'Envato Purchase Code', 18, '10', NULL, NULL, 1, 1, 0, 0, 0, 1, 0, 1, 0, 0, 1, NULL),
             (24, 'product', 'Product', 4, '10', NULL, NULL, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, NULL),
-            (25, 'termsandconditions1', 'terms and conditions 1', 25, '10', NULL, NULL, 1, 1, 0, 0, 1, 1, 0, 1, 0, 0, 1, '{\"termsandconditions_text\":\"I agree to the terms and conditions.\",\"termsandconditions_linktype\":\"3\"}'),
-            (26, 'termsandconditions2', 'terms and conditions 2', 26, '10', NULL, NULL, 1, 0, 0, 0, 1, 1, 0, 1, 0, 0, 0, '{\"termsandconditions_text\":\"I understand my personal info may be stored.\",\"termsandconditions_linktype\":\"3\"}'),
-            (27, 'termsandconditions3', 'terms and conditions 3', 27, '10', NULL, NULL, 1, 0, 0, 0, 1, 1, 0, 1, 0, 0, 0, '{\"termsandconditions_text\":\"I acknowledge response times may vary.\",\"termsandconditions_linktype\":\"3\"}');";
+            (25, 'termsandconditions1', 'Terms And Conditions 1', 25, '10', NULL, NULL, 1, 1, 0, 0, 1, 1, 0, 1, 0, 0, 1, '{\"termsandconditions_text\":\"I agree to the terms and conditions.\",\"termsandconditions_linktype\":\"3\"}'),
+            (26, 'termsandconditions2', 'Terms And Conditions 2', 26, '10', NULL, NULL, 1, 0, 0, 0, 1, 1, 0, 1, 0, 0, 0, '{\"termsandconditions_text\":\"I understand my personal info may be stored.\",\"termsandconditions_linktype\":\"3\"}'),
+            (27, 'termsandconditions3', 'Terms And Conditions 3', 27, '10', NULL, NULL, 1, 0, 0, 0, 1, 1, 0, 1, 0, 0, 0, '{\"termsandconditions_text\":\"I acknowledge response times may vary.\",\"termsandconditions_linktype\":\"3\"}');";
 
             jssupportticket::$_db->query($jsst_query);
             $jsst_query = "CREATE TABLE IF NOT EXISTS `" . jssupportticket::$_db->prefix . "js_ticket_erasedatarequests` (

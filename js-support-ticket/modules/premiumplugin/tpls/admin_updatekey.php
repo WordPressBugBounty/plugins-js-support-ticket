@@ -56,7 +56,7 @@
                         <?php
                     } ?>
                     <div class="jsstadmin-update-key-slctall-addonswrp">
-                        <span class="jsstadmin-update-key-slctall-addon-title"><?php echo esc_html(__("Select Addons to Update with New Activation Key", 'js-support-ticket')); ?></span>
+                        <span class="jsstadmin-update-key-slctall-addon-title"><?php echo esc_html(__("Select Addons To Update With New Activation Key", 'js-support-ticket')); ?></span>
                         <div class="jsstadmin-update-key-slctall-addon-checkbox-wrp">
                             <input class="jsstadmin-update-key-checkbox"id="select-all" type="checkbox">
                             <?php echo esc_html(__("Select All Addons", 'js-support-ticket')); ?>

@@ -629,7 +629,7 @@ if (jssupportticket::$_config['offline'] == 2) {
                                             echo ' (' . esc_html(jssupportticket::$_config['file_maximum_size']); ?>KB)<br><?php echo esc_html(__('File Extension Type', 'js-support-ticket'));
                                             echo ' (' . esc_html(jssupportticket::$_config['file_extension']) . ')'; ?>
                                     </span>
-                                    <span id="tk_attachment_add" data-ident="tk_attachment_user_reply_wrapper" class="tk_attachments_addform"><?php echo esc_html(__('Add more','js-support-ticket')); ?></span>
+                                    <span id="tk_attachment_add" data-ident="tk_attachment_user_reply_wrapper" class="tk_attachments_addform"><?php echo esc_html(__('Add More','js-support-ticket')); ?></span>
                                 </div>
                                 <?php 
                                 if (!empty(jssupportticket::$jsst_data[5])) {
@@ -1026,7 +1026,7 @@ if (jssupportticket::$_config['offline'] == 2) {
                             </div>
                             <div class="js-ticket-from-field">
                                 <?php
-                                if (jssupportticket::$_config['captcha_selection'] == 1) { // Google recaptcha
+                                if (jssupportticket::$_config['captcha_selection'] == 1) { // Google reCaptcha
                                     $jsst_error = null;
                                     if (jssupportticket::$_config['recaptcha_version'] == 1) {
                                         echo '<div class="g-recaptcha" data-sitekey="'.esc_attr(jssupportticket::$_config['recaptcha_publickey']).'"></div>';

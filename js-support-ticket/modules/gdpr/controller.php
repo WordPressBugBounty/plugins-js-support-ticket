@@ -137,7 +137,7 @@ class JSSTgdprController {
             print wp_kses($jsst_return_value, JSST_ALLOWED_TAGS);
             exit;
         }
-        JSSTmessage::setMessage(esc_html(__('There was no record found', 'js-support-ticket')), 'error');
+        JSSTmessage::setMessage(esc_html(__('No Record Found', 'js-support-ticket')), 'error');
         if (is_admin()) {
             $jsst_url = admin_url("admin.php?page=gdpr&jstlay=erasedatarequests");
         } else {

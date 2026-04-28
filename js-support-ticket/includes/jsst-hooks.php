@@ -99,7 +99,7 @@ function jsst_add_new_member()
             jsst_errors()->add('password_mismatch', esc_html(__('Passwords do not match', 'js-support-ticket')));
         }
         if (jssupportticket::$_config['captcha_on_registration'] == 1) {
-            if (jssupportticket::$_config['captcha_selection'] == 1) { // Google recaptcha
+            if (jssupportticket::$_config['captcha_selection'] == 1) { // Google reCaptcha
                 $jsst_gresponse = jssupportticket::JSST_sanitizeData($_POST['g-recaptcha-response']); // JSST_sanitizeData() function uses wordpress santize functions
                 $jsst_resp = JSSTGoogleRecaptchaHTTPPost(jssupportticket::$_config['recaptcha_privatekey'], $jsst_gresponse);
                 if (!$jsst_resp) {

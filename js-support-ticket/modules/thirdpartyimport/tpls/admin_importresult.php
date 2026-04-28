@@ -85,15 +85,15 @@ if(!defined('ABSPATH'))
                                     <td><?php echo esc_html(jssupportticket::JSST_getVarValue($jsst_label)); ?></td>
 
                                     <td class="jsst-import-data-result-success">
-                                        <?php echo esc_html( $jsst_imported .' '. __('imported.','js-support-ticket') ); ?>
+                                        <?php echo esc_html( $jsst_imported .' '. __('Imported','js-support-ticket') ); ?>
                                     </td>
 
                                     <td class="jsst-import-data-result-similar">
-                                        <?php echo esc_html( $jsst_skipped .' '. __('skipped.','js-support-ticket') ); ?>
+                                        <?php echo esc_html( $jsst_skipped .' '. __('Skipped','js-support-ticket') ); ?>
                                     </td>
 
                                     <td class="jsst-import-data-result-failed">
-                                        <?php echo esc_html( $jsst_failed .' '. __('failed.','js-support-ticket') ); ?>
+                                        <?php echo esc_html( $jsst_failed .' '. __('Failed','js-support-ticket') ); ?>
                                     </td>
                                 </tr>
                                 <?php 

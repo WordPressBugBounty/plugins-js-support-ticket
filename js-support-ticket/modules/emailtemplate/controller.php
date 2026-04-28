@@ -58,7 +58,7 @@ class JSSTemailtemplateController {
         $jsst_data = JSSTrequest::get('post');
         if (!empty($jsst_data['lang_id'])) {
             if($jsst_data['lang_id'] == '' || $jsst_data['subject'] == '' || $jsst_data['body'] == ''){
-                JSSTmessage::setMessage(esc_html(__('Required Fields are not filled', 'js-support-ticket')), 'error');
+                JSSTmessage::setMessage(esc_html(__('Required Field(s) are not filled', 'js-support-ticket')), 'error');
             }else{
                 JSSTincluder::getJSModel('multilanguageemailtemplates')->storeMultiLanguageEmailTemplate($jsst_data);
             }

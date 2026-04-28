@@ -87,7 +87,7 @@ class jssupportticketadmin {
             );
             add_submenu_page('jssupportticket_hide', // parent slug
                     esc_html(__('Statuses', 'js-support-ticket')), // Page title
-                    esc_html(__('status', 'js-support-ticket')), // menu title
+                    esc_html(__('Status', 'js-support-ticket')), // menu title
                     'jsst_support_ticket', // capability
                     'status', //menu slug
                     array($this, 'showAdminPage') // function name
@@ -272,8 +272,8 @@ class jssupportticketadmin {
 
             if(in_array('feedback', jssupportticket::$_active_addons)){
                 add_submenu_page('jssupportticket_hide', // parent slug
-                        esc_html(__('Feedbacks', 'js-support-ticket')), // Page title
-                        esc_html(__('Feedbacks', 'js-support-ticket')), // menu title
+                        esc_html(__('Feedback', 'js-support-ticket')), // Page title
+                        esc_html(__('Feedback', 'js-support-ticket')), // menu title
                         'jsst_support_ticket', // capability
                         'feedback', //menu slug
                         array($this, 'showAdminPage') // function name
@@ -303,8 +303,8 @@ class jssupportticketadmin {
 
             if(in_array('emailcc', jssupportticket::$_active_addons)){
                 add_submenu_page('jssupportticket_hide', // parent slug
-                        esc_html(__("Emailcc", 'js-support-ticket')), // Page title
-                        esc_html(__("Emailcc", 'js-support-ticket')), // menu title
+                        esc_html(__("Email CC", 'js-support-ticket')), // Page title
+                        esc_html(__("Email CC", 'js-support-ticket')), // menu title
                         'jsst_support_ticket', // capability
                         'emailcc', //menu slug
                         array($this, 'showAdminPage') // function name

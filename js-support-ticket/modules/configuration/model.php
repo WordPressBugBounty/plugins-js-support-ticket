@@ -456,7 +456,7 @@ class JSSTconfigurationModel {
         }
 
         if ($jsst_error) {
-            JSSTmessage::setMessage(esc_html(__('Something went wrong!', 'js-support-ticket')), 'error');
+            JSSTmessage::setMessage(esc_html(__('Something went wrong. Please try again.', 'js-support-ticket')), 'error');
             return WPJOBPORTAL_SAVE_ERROR;
         } else {
             JSSTmessage::setMessage(esc_html(__('The setting has been stored.', 'js-support-ticket')), 'updated');

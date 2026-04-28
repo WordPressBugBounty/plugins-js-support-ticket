@@ -46,7 +46,7 @@
     				<div class="jssticketadmin-help-top-left-cnt-info">
     					<h2><?php echo esc_html(__('We are here to help you','js-support-ticket')); ?></h2>
     					<p><?php echo esc_html(__('JS Help Desk is a professional, simple, easy to use and complete customer support system.','js-support-ticket')); ?></p>
-    					<a href="https://www.youtube.com/channel/UCTZ5RPtOzGcsRwRbOTjypmA" target="_blank" class="jssticketadmin-help-top-middle-action" title="<?php echo esc_attr(__('View all videos','js-support-ticket')); ?>"><img alt = "<?php echo esc_attr(__('Video icon','js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/help-page/play-icon.jpg" /><?php echo esc_html(__('View All Videos','js-support-ticket')); ?></a>
+    					<a href="https://www.youtube.com/channel/UCTZ5RPtOzGcsRwRbOTjypmA" target="_blank" class="jssticketadmin-help-top-middle-action" title="<?php echo esc_attr(__('View All Videos','js-support-ticket')); ?>"><img alt = "<?php echo esc_attr(__('Video icon','js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/help-page/play-icon.jpg" /><?php echo esc_html(__('View All Videos','js-support-ticket')); ?></a>
     				</div>
     			</div>
     			<div class="jssticketadmin-help-top-right">
@@ -56,7 +56,7 @@
     				<div class="jssticketadmin-help-top-right-cnt-info">
     					<h2><?php echo esc_html(__('JS Help Desk Support','js-support-ticket')); ?></h2>
     					<p><?php echo esc_html(__("JS Help Desk delivers timely customer support if you have any query then we're here to show you the way.",'js-support-ticket')); ?></p>
-    					<a target="_blank" href="https://jshelpdesk.com/support/" class="jssticketadmin-help-top-middle-action second" title="<?php echo esc_attr(__('Submit ticket','js-support-ticket')); ?>"><img alt = "<?php echo esc_attr(__('Video icon','js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/help-page/ticket.png" /><?php echo esc_html(__('Submit Ticket','js-support-ticket')); ?></a>
+    					<a target="_blank" href="https://jshelpdesk.com/support/" class="jssticketadmin-help-top-middle-action second" title="<?php echo esc_attr(__('Submit Ticket','js-support-ticket')); ?>"><img alt = "<?php echo esc_attr(__('Video icon','js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/help-page/ticket.png" /><?php echo esc_html(__('Submit Ticket','js-support-ticket')); ?></a>
     				</div>
     			</div>
     		</div>
@@ -67,10 +67,10 @@
                     <div class="jssticketadmin-help-btm-cnt">
                         <a href="https://www.youtube.com/watch?v=zmQ4bpqSYnk" class="jssticketadmin-help-btm-link"  target="_blank">
                             <div class="jssticketadmin-help-btm-cnt-img">
-                                <img alt = "<?php echo esc_attr(__('Ticket Creation','js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/help-page/video-icon.jpg" />
+                                <img alt = "<?php echo esc_attr(__('Ticket creation','js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/help-page/video-icon.jpg" />
                             </div>
                             <div class="jssticketadmin-help-btm-cnt-title">
-                                <span><?php echo esc_html(__('Ticket Creation','js-support-ticket')); ?></span>
+                                <span><?php echo esc_html(__('Ticket creation','js-support-ticket')); ?></span>
                             </div>
                         </a>
                     </div>
@@ -274,14 +274,14 @@
                                 <img alt = "<?php echo esc_attr(__('Configuration','js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/help-page/video-icon.jpg" />
                             </div>
                             <div class="jssticketadmin-help-btm-cnt-title">
-                                <span><?php echo esc_html(__('Agent Auto Assign','js-support-ticket')); ?></span>
+                                <span><?php echo esc_html(__('Agent auto assign','js-support-ticket')); ?></span>
                             </div>
                         </a>
                     </div>
                     <div class="jssticketadmin-help-btm-cnt">
                         <a href="https://www.youtube.com/watch?v=ZtCivvtAURU" class="jssticketadmin-help-btm-link"  target="_blank">
                             <div class="jssticketadmin-help-btm-cnt-img">
-                                <img alt = "<?php echo esc_attr(__('Manually assign ticket to agen','js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/help-page/video-icon.jpg" />
+                                <img alt = "<?php echo esc_attr(__('Manually assign ticket to agent','js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/help-page/video-icon.jpg" />
                             </div>
                             <div class="jssticketadmin-help-btm-cnt-title">
                                 <span><?php echo esc_html(__('Manually assign ticket to agent','js-support-ticket')); ?></span>
@@ -449,10 +449,10 @@
     				<div class="jssticketadmin-help-btm-cnt">
     					<a href="https://www.youtube.com/watch?v=mN6xsD2u2CI" class="jssticketadmin-help-btm-link" target="_blank">
                             <div class="jssticketadmin-help-btm-cnt-img">
-                                <img alt = "<?php echo esc_attr(__('How to add Shortcode','js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/help-page/video-icon.jpg" />
+                                <img alt = "<?php echo esc_attr(__('How to add shortcodes','js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/help-page/video-icon.jpg" />
                             </div>
                             <div class="jssticketadmin-help-btm-cnt-title">
-                                <span><?php echo esc_html(__('How to add Shortcode','js-support-ticket')); ?></span>
+                                <span><?php echo esc_html(__('How to add shortcodes','js-support-ticket')); ?></span>
                             </div>
     					</a>
     				</div>
@@ -469,10 +469,10 @@
                     <div class="jssticketadmin-help-btm-cnt">
                         <a href="https://www.youtube.com/watch?v=sQwVewHk9Lg" class="jssticketadmin-help-btm-link" target="_blank">
                             <div class="jssticketadmin-help-btm-cnt-img">
-                                <img alt = "<?php echo esc_attr(__('How to Desktop Notifications','js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/help-page/video-icon.jpg" />
+                                <img alt = "<?php echo esc_attr(__('How to enable desktop notifications','js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/help-page/video-icon.jpg" />
                             </div>
                             <div class="jssticketadmin-help-btm-cnt-title">
-                                <span><?php echo esc_html(__('How to Desktop Notifications','js-support-ticket')); ?></span>
+                                <span><?php echo esc_html(__('How to enable desktop notifications','js-support-ticket')); ?></span>
                             </div>
                         </a>
                     </div>
@@ -489,7 +489,7 @@
     			</div>
     			<!-- knowledge-base,downloads,announcements,FAQ -->
                 <div class="jssticketadmin-help-btm-wrp jssticketadmin-help-sub-category">
-                    <h2 class="jssticketadmin-help-btm-title"><?php echo esc_html(__('Knowledgebase','js-support-ticket')).', '. esc_html(__('Downloads','js-support-ticket')).', '. esc_html(__('Announcements','js-support-ticket')).', '. esc_html(__('FAQs','js-support-ticket')); ?></h2>
+                    <h2 class="jssticketadmin-help-btm-title"><?php echo esc_html(__('Knowledge Base','js-support-ticket')).', '. esc_html(__('Downloads','js-support-ticket')).', '. esc_html(__('Announcements','js-support-ticket')).', '. esc_html(__('FAQs','js-support-ticket')); ?></h2>
                     <div class="jssticketadmin-help-btm-cnt">
                         <a href="https://www.youtube.com/watch?v=sQBflPjxPEw" class="jssticketadmin-help-btm-link" target="_blank">
                             <div class="jssticketadmin-help-btm-cnt-img">

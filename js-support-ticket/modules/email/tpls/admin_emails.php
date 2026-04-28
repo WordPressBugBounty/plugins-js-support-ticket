@@ -57,7 +57,7 @@
                 <?php echo wp_kses(JSSTformfield::submitbutton('go', esc_html(__('Search', 'js-support-ticket')), array('class' => 'button js-form-search')), JSST_ALLOWED_TAGS); ?>
                 <?php echo wp_kses(JSSTformfield::button('reset', esc_html(__('Reset', 'js-support-ticket')), array('class' => 'button js-form-reset', 'onclick' => 'resetFrom();')), JSST_ALLOWED_TAGS); ?>
             </form>
-            <span id="js-systemail" class="js-admin-infotitle"><img alt = "<?php echo esc_attr(__('info','js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/infoicon.png" /><?php echo esc_html(__('System email used for sending email', 'js-support-ticket')); ?></span>
+            <span id="js-systemail" class="js-admin-infotitle"><img alt = "<?php echo esc_attr(__('Info','js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/infoicon.png" /><?php echo esc_html(__('System email used for sending email', 'js-support-ticket')); ?></span>
             <?php if (!empty(jssupportticket::$jsst_data[0])) { ?>
             <table id="js-support-ticket-table">
                 <tr class="js-support-ticket-table-heading">
@@ -81,7 +81,7 @@
                 echo " : "; ?></span><?php echo esc_html(date_i18n(jssupportticket::$_config['date_format'], jssupportticketphplib::JSST_strtotime($jsst_email->created))); ?></td>
                         <td >
                             <a title="<?php echo esc_attr(__('Edit','js-support-ticket')); ?>" class="action-btn" href="?page=email&jstlay=addemail&jssupportticketid=<?php echo esc_attr($jsst_email->id); ?>"><img alt = "<?php echo esc_attr(__('Edit','js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/edit.png" /></a>
-                            <a title="<?php echo esc_attr(__('Delete','js-support-ticket')); ?>" class="action-btn" onclick="return confirm('<?php echo esc_js(__('Are you sure you want to delete it?', 'js-support-ticket')); ?>');" href="<?php echo esc_url(wp_nonce_url('?page=email&task=deleteemail&action=jstask&emailid=' .esc_attr($jsst_email->id),'delete-email-'.$jsst_email->id)); ?>"><img alt = "<?php echo esc_attr(__('Delete','js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/delete.png" /></a>
+                            <a title="<?php echo esc_attr(__('Delete','js-support-ticket')); ?>" class="action-btn" onclick="return confirm('<?php echo esc_js(__('Are you sure you want to delete?', 'js-support-ticket')); ?>');" href="<?php echo esc_url(wp_nonce_url('?page=email&task=deleteemail&action=jstask&emailid=' .esc_attr($jsst_email->id),'delete-email-'.$jsst_email->id)); ?>"><img alt = "<?php echo esc_attr(__('Delete','js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/delete.png" /></a>
                         </td>
                     </tr>
                 <?php }

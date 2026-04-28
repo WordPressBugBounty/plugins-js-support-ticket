@@ -16,7 +16,7 @@ class JSSTlayout {
 					    	' . esc_html(__('Sorry', 'js-support-ticket')) . '!
 						</span>
 						<span class="js-ticket-messages-block_text">
-					    	' . esc_html(__('No record found', 'js-support-ticket')) . '...!
+					    	' . esc_html(__('No Record Found', 'js-support-ticket')) . '...!
 						</span>
 					</div>
 				</div>
@@ -31,10 +31,10 @@ class JSSTlayout {
 					</div>
 					<div class="js-ticket-messages-data-wrapper">
 						<span class="js-ticket-messages-main-text">
-					    	' . esc_html(__('Sorry!', 'js-support-ticket')) . '
+					    	' . esc_html(__('Sorry', 'js-support-ticket')) . '
 						</span>
 						<span class="js-ticket-messages-block_text">
-					    	' . esc_html(__('No record found ...!', 'js-support-ticket')) . '
+					    	' . esc_html(__('No Record Found', 'js-support-ticket')) . '
 						</span>
 					</div>
 				</div>
@@ -55,7 +55,7 @@ class JSSTlayout {
 					</div>
 					<div class="js-ticket-messages-data-wrapper">
 						<span class="js-ticket-messages-main-text">
-					    	' . esc_html(__('Access Denied', 'js-support-ticket')) . '
+					    	' . esc_html(__('Access Denied.', 'js-support-ticket')) . '
 						</span>
 						<span class="js-ticket-messages-block_text">
 					    	' . esc_html(__('You have no permission to access this page', 'js-support-ticket')) . '
@@ -97,7 +97,7 @@ class JSSTlayout {
 					</div>
 					<div class="js-ticket-messages-data-wrapper">
 						<span class="js-ticket-messages-main-text">
-					    	' . esc_html(__('Access Denied', 'js-support-ticket')) . '
+					    	' . esc_html(__('Access Denied.', 'js-support-ticket')) . '
 						</span>
 						<span class="js-ticket-messages-block_text">
 					    	' . esc_html(__('User is not allowed to access this page.', 'js-support-ticket')) . '
@@ -116,7 +116,7 @@ class JSSTlayout {
 					</div>
 					<div class="js-ticket-messages-data-wrapper">
 						<span class="js-ticket-messages-main-text">
-					    	' . esc_html(__('Sorry!', 'js-support-ticket')) . '
+					    	' . esc_html(__('Sorry', 'js-support-ticket')) . '
 						</span>
 						<span class="js-ticket-messages-block_text">
 					    	' . esc_html(__('You are already Logged In.', 'js-support-ticket')) . '
@@ -135,7 +135,7 @@ class JSSTlayout {
 					</div>
 					<div class="js-ticket-messages-data-wrapper">
 						<span class="js-ticket-messages-main-text">
-					    	' . esc_html(__('Access Denied!', 'js-support-ticket')) . '
+					    	' . esc_html(__('Access Denied.', 'js-support-ticket')) . '
 						</span>
 						<span class="js-ticket-messages-block_text">
 					    	' . esc_html(__('Your account has been disabled, please contact the administrator.', 'js-support-ticket')) . '
@@ -218,7 +218,7 @@ class JSSTlayout {
 					</div>
 					<div class="js-ticket-messages-data-wrapper">
 						<span class="js-ticket-messages-main-text">
-					    	' . esc_html(__('Sorry!', 'js-support-ticket')) . '
+					    	' . esc_html(__('Sorry', 'js-support-ticket')) . '
 						</span>
 						<span class="js-ticket-messages-block_text">
 					    	' . esc_html(__('User is not allowed to view this Ticket', 'js-support-ticket')) . '
@@ -237,7 +237,7 @@ class JSSTlayout {
 					</div>
 					<div class="js-ticket-messages-data-wrapper">
 						<span class="js-ticket-messages-main-text">
-					    	' . esc_html(__('Sorry!', 'js-support-ticket')) . '
+					    	' . esc_html(__('Sorry', 'js-support-ticket')) . '
 						</span>
 						<span class="js-ticket-messages-block_text">
 					    	' . esc_html(__('Registration has been disabled by admin, please contact the system administrator.', 'js-support-ticket')) . '
@@ -251,15 +251,15 @@ class JSSTlayout {
     static function getFeedbackMessages($jsst_msg_type) {
     	if($jsst_msg_type == 2){
     		$jsst_img_var = '3.png';
-    		$jsst_text_var_1 = esc_html(__('Sorry!', 'js-support-ticket'));
+    		$jsst_text_var_1 = esc_html(__('Sorry', 'js-support-ticket'));
     		$jsst_text_var_2 = esc_html(__('You have already given the feedback for this ticket.', 'js-support-ticket'));
     	}elseif($jsst_msg_type == 3){
     		$jsst_img_var = 'no-record-icon.png';
-    		$jsst_text_var_1 = esc_html(__('Sorry!', 'js-support-ticket'));
-    		$jsst_text_var_2 = esc_html(__('Ticket not found...!', 'js-support-ticket'));
+    		$jsst_text_var_1 = esc_html(__('Sorry', 'js-support-ticket'));
+    		$jsst_text_var_2 = esc_html(__('Ticket not found.', 'js-support-ticket'));
     	}else{
     		$jsst_img_var = 'not-permission-icondd.png';
-    		$jsst_text_var_1 = esc_html(__('Sorry!', 'js-support-ticket'));
+    		$jsst_text_var_1 = esc_html(__('Sorry', 'js-support-ticket'));
     		$jsst_text_var_2 = esc_html(__('User is not allowed to view this page', 'js-support-ticket'));
     	}
     	if($jsst_msg_type == 4){

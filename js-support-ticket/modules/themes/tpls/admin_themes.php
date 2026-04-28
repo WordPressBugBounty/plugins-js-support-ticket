@@ -550,7 +550,7 @@ JSSTmessage::getMessage();
                                     <div
                                         class="js-col-xs-12 js-col-md-12 js-ticket-padding-xs js-ticket-body-data-elipses">
                                         <a class="js-ticket-title-anchor"
-                                            href="#"><?php echo esc_html(__('I’m Not Getting Access to My Subscription', 'js-support-ticket')); ?></a>
+                                            href="#"><?php echo esc_html(__('I am Not Getting Access to My Subscription', 'js-support-ticket')); ?></a>
                                     </div>
                                     <div
                                         class="js-col-xs-12 js-col-md-12 js-ticket-padding-xs js-ticket-body-data-elipses">
@@ -570,13 +570,13 @@ JSSTmessage::getMessage();
                                         <div class="js-ticket-data-tit">
                                             <?php echo esc_html(__('Ticket ID', 'js-support-ticket')); ?>: </div>
                                         <div class="js-ticket-data-val">
-                                            <?php echo esc_html(__('D48ym7TJY', 'js-support-ticket')); ?></div>
+                                            <?php echo esc_html('D48ym7TJY'); ?></div>
                                     </div>
                                     <div class="js-ticket-data-row">
                                         <div class="js-ticket-data-tit">
                                             <?php echo esc_html(__('Created', 'js-support-ticket')); ?>: </div>
                                         <div class="js-ticket-data-val">
-                                            <?php echo esc_html(__('26-11-2025', 'js-support-ticket')); ?></div>
+                                            <?php echo esc_html('26-11-2025'); ?></div>
                                     </div>
                                     <div class="js-ticket-data-row">
                                         <div class="js-ticket-data-tit">
@@ -630,7 +630,7 @@ JSSTmessage::getMessage();
                                         <div class="js-ticket-data-tit">
                                             <?php echo esc_html(__('Created', 'js-support-ticket')); ?>: </div>
                                         <div class="js-ticket-data-val">
-                                            <?php echo esc_html(__('26-11-2025', 'js-support-ticket')); ?></div>
+                                            <?php echo esc_html('26-11-2025'); ?></div>
                                     </div>
                                     <div class="js-ticket-data-row">
                                         <div class="js-ticket-data-tit">
@@ -684,7 +684,7 @@ JSSTmessage::getMessage();
                                         <div class="js-ticket-data-tit">
                                             <?php echo esc_html(__('Created', 'js-support-ticket')); ?>: </div>
                                         <div class="js-ticket-data-val">
-                                            <?php echo esc_html(__('26-11-2025', 'js-support-ticket')); ?></div>
+                                            <?php echo esc_html('26-11-2025'); ?></div>
                                     </div>
                                     <div class="js-ticket-data-row">
                                         <div class="js-ticket-data-tit">
@@ -738,7 +738,7 @@ JSSTmessage::getMessage();
                                         <div class="js-ticket-data-tit">
                                             <?php echo esc_html(__('Created', 'js-support-ticket')); ?>: </div>
                                         <div class="js-ticket-data-val">
-                                            <?php echo esc_html(__('26-11-2025', 'js-support-ticket')); ?></div>
+                                            <?php echo esc_html('26-11-2025'); ?></div>
                                     </div>
                                     <div class="js-ticket-data-row">
                                         <div class="js-ticket-data-tit">

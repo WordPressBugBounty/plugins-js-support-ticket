@@ -144,7 +144,7 @@ wp_add_inline_script('js-support-ticket-main-js',$jsst_jssupportticket_js);
                                                 $jsst_buffer = curl_exec($jsst_curl_handle);<br>
                                                 curl_close($jsst_curl_handle);<br>
                                                 if (empty($jsst_buffer))<br>
-                                                &nbsp;&nbsp;&nbsp;&nbsp;echo "' . esc_html(__('Sorry the cron job didnot work','js-support-ticket')) . '";<br>
+                                                &nbsp;&nbsp;&nbsp;&nbsp;echo "' . esc_html(__('Sorry, the cron job did not work','js-support-ticket')) . '";<br>
                                                 else<br>
                                                 &nbsp;&nbsp;&nbsp;&nbsp;echo esc_attr($jsst_buffer);<br>
                                                 ', JSST_ALLOWED_TAGS);
@@ -264,7 +264,7 @@ wp_add_inline_script('js-support-ticket-main-js',$jsst_jssupportticket_js);
                                                 $jsst_buffer = curl_exec($jsst_curl_handle);<br>
                                                 curl_close($jsst_curl_handle);<br>
                                                 if (empty($jsst_buffer))<br>
-                                                &nbsp;&nbsp;&nbsp;&nbsp;echo "' . esc_html(__('Sorry the cron job didnot work','js-support-ticket')) . '";<br>
+                                                &nbsp;&nbsp;&nbsp;&nbsp;echo "' . esc_html(__('Sorry, the cron job did not work','js-support-ticket')) . '";<br>
                                                 else<br>
                                                 &nbsp;&nbsp;&nbsp;&nbsp;echo esc_attr($jsst_buffer);<br>
                                                 ', JSST_ALLOWED_TAGS);

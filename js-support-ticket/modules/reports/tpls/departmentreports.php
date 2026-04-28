@@ -21,7 +21,7 @@ if (jssupportticket::$_config['offline'] == 2) {
                         $jsst_jssupportticket_js .="
                         function drawPie3d1Chart() {
                             var data = google.visualization.arrayToDataTable([
-                              ['". esc_html(__('Departments','js-support-ticket')) ."', '". esc_html(__('Tickets By Department','js-support-ticket')) ."'],
+                              ['". esc_html(__('Departments','js-support-ticket')) ."', '". esc_html(__('Tickets By Departments','js-support-ticket')) ."'],
                               ". wp_kses(jssupportticket::$jsst_data['pie3d_chart1'], JSST_ALLOWED_TAGS) ."
                             ]);
 

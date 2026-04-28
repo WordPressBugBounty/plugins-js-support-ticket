@@ -242,7 +242,7 @@ class JSSTjssupportticketModel {
             jssupportticket::$jsst_data['agent_workload'] = jssupportticket::$_db->get_results($jsst_query);
         }
         
-        // Section 10: Tickets by Status
+        // Section 10: Tickets By Statuses
         $jsst_query = "SELECT s.status, s.statusbgcolour, COUNT(t.id) AS ticket_count
                     FROM ".jssupportticket::$_db->prefix."js_ticket_statuses AS s
                     LEFT JOIN ".jssupportticket::$_db->prefix."js_ticket_tickets AS t ON s.id = t.status
@@ -266,7 +266,7 @@ class JSSTjssupportticketModel {
             'colors' => $jsst_color1s,
         ];
 
-        // Section 11: Tickets by Department
+        // Section 11: Tickets By Departments
         $jsst_query = "SELECT d.departmentname, COUNT(t.id) AS ticket_count
                     FROM ".jssupportticket::$_db->prefix."js_ticket_departments AS d
                     LEFT JOIN ".jssupportticket::$_db->prefix."js_ticket_tickets AS t ON d.id = t.departmentid
@@ -321,7 +321,7 @@ class JSSTjssupportticketModel {
         ];
 
 
-// Section 13: Tickets by Products
+// Section 13: Tickets By Products
 $jsst_query = "SELECT product.product, COUNT(t.id) AS ticket_count
             FROM ".jssupportticket::$_db->prefix."js_ticket_products AS product
             LEFT JOIN ".jssupportticket::$_db->prefix."js_ticket_tickets AS t ON product.id = t.productid
@@ -361,7 +361,7 @@ $jsst_query = "SELECT product.product, COUNT(t.id) AS ticket_count
             jssupportticket::$jsst_data['saved_replies'] = jssupportticket::$_db->get_results($jsst_query);
         }
         
-        // Section 15: Open Tickets by Age
+        // Section 15: Open Tickets By Age
         $jsst_today       = date_i18n('Y-m-d');
         $jsst_yesterday   = date_i18n('Y-m-d', strtotime('-1 day'));
         $jsst_two_days    = date_i18n('Y-m-d', strtotime('-2 days'));
@@ -1119,7 +1119,7 @@ $jsst_query = "SELECT product.product, COUNT(t.id) AS ticket_count
                 $jsst_input_html .= '</div>';
             }
             $jsst_result['input'] = jssupportticketphplib::JSST_htmlentities($jsst_input_html);
-            $jsst_result['path'] = esc_html(__('Language code', 'js-support-ticket'));
+            $jsst_result['path'] = esc_html(__('Language Code', 'js-support-ticket'));
         }
 
         return wp_json_encode($jsst_result);
@@ -2165,7 +2165,7 @@ $jsst_query = "SELECT product.product, COUNT(t.id) AS ticket_count
             }
 
             if ( is_wp_error( $jsst_unzipfile ) ) {
-                $jsst_result['error'] = esc_html(__('Addon installation failed','js-support-ticket')).'.';
+                $jsst_result['error'] = esc_html(__('Addon Installation Failed','js-support-ticket')).'.';
                 $jsst_result['error'] .= " ".esc_html(jssupportticket::JSST_getVarValue($jsst_unzipfile->get_error_message()));
                 $jsst_result = wp_json_encode($jsst_result);
                 return $jsst_result;

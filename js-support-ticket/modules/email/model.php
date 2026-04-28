@@ -946,7 +946,7 @@ class JSSTemailModel {
                             $this->sendEmail($Email, $jsst_msgSubject, $jsst_msgBody, $jsst_senderEmail, $jsst_senderName, $jsst_attachments, $jsst_action);
                         }
                         break;
-                    case 9: // Mark in progress Ticket
+                    case 9: // Mark In Progress Ticket
                         $jsst_ticketRecord = $this->getRecordByTablenameAndId('js_ticket_tickets', $jsst_id);
                         $TrackingId = $jsst_ticketRecord->ticketid;
                         $DepName = $jsst_ticketRecord->departmentname;
@@ -1045,7 +1045,7 @@ class JSSTemailModel {
                             $this->sendEmail($Email, $jsst_msgSubject, $jsst_msgBody, $jsst_senderEmail, $jsst_senderName, $jsst_attachments, $jsst_action);
                         }
                         break;
-                    case 10: // Ban email and close Ticket
+                    case 10: // Ban Email And Close Ticket
                         $jsst_ticketRecord = $this->getRecordByTablenameAndId('js_ticket_tickets', $jsst_id);
                         $TrackingId = $jsst_ticketRecord->ticketid;
                         $DepName = $jsst_ticketRecord->departmentname;

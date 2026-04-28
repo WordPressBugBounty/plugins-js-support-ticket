@@ -61,7 +61,7 @@
                     <span class="combo" id="js_combo"></span>
                     <span class="button" id="jsdownloadbutton"><img alt = "<?php echo esc_attr(__('Download', 'js-support-ticket')); ?>" style="width:14px; height:auto;" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/download-icon.png" /><?php echo esc_html(__('Download', 'js-support-ticket')); ?></span>
                     <div id="jscodeinputbox" class="js-some-disc"></div>
-                    <div class="js-some-disc"><img alt = "<?php echo esc_attr(__('info','js-support-ticket')); ?>" style="width:18px; height:auto;" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/info-icon.png" /><?php echo esc_html(__('When WordPress language change to fr, JS Help Desk language will auto change to fr','js-support-ticket')); ?></div>
+                    <div class="js-some-disc"><img alt = "<?php echo esc_attr(__('Info','js-support-ticket')); ?>" style="width:18px; height:auto;" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/info-icon.png" /><?php echo esc_html(__('When WordPress language change to fr, JS Help Desk language will auto change to fr','js-support-ticket')); ?></div>
                 </div>
                 <div id="js-emessage-wrapper">
                     <img alt = "<?php echo esc_attr(__('c error','js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/c_error.png" />

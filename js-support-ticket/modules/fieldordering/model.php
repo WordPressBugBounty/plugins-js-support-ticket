@@ -859,7 +859,7 @@ class JSSTfieldorderingModel {
         }
 
         $jsst_html .= '<div class="popup-field-wrapper">
-                <div class="popup-field-title">' . esc_html(__('Place Holder', 'js-support-ticket')) . '</div>
+                <div class="popup-field-title">' . esc_html(__('Placeholder', 'js-support-ticket')) . '</div>
                 <div class="popup-field-obj">' . JSSTformfield::text('placeholder', isset($jsst_data->placeholder) ? $jsst_data->placeholder : '', array('class' => 'inputbox one','maxlength'=>225)) . '</div>
             </div>';
 

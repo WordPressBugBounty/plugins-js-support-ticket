@@ -102,7 +102,7 @@ if (jssupportticket::$_config['offline'] == 2) {
                             </div>
                             <div class="js-ticket-from-field">
                                 <?php
-                                if (jssupportticket::$_config['captcha_selection'] == 1) { // Google recaptcha
+                                if (jssupportticket::$_config['captcha_selection'] == 1) { // Google reCaptcha
                                     $jsst_error = null;
                                     if (jssupportticket::$_config['recaptcha_version'] == 1) {
                                         echo '<div class="g-recaptcha" data-sitekey="'.wp_kses_post(jssupportticket::$_config['recaptcha_publickey']).'"></div>';

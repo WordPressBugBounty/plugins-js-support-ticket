@@ -279,7 +279,7 @@ class JS_SUPPORTTICKETUpdater {
 						update_option('transaction_key_for_'.$jsst_value,$jsst_token);
 					}
 				}else{
-					update_option( 'jsst-addon-key-error-message','Something went wrong');
+					update_option( 'jsst-addon-key-error-message','Something went wrong. Please try again.');
 				}
 			}
 		}else{
@@ -347,7 +347,7 @@ class JS_SUPPORTTICKETUpdater {
 		if (is_array($jsst_response) && isset($jsst_response['verfication_status']) && $jsst_response['verfication_status'] == 1 ) {
 			return $jsst_response['token'];
 		}else{
-			$jsst_error_message = esc_html(__('Something went wrong','js-support-ticket'));
+			$jsst_error_message = esc_html(__('Something went wrong. Please try again.','js-support-ticket'));
 			if(is_array($jsst_response) && isset($jsst_response['error'])){
 				$jsst_error_message = $jsst_response['error'];
 			}

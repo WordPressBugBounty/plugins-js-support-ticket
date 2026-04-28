@@ -171,7 +171,7 @@ function JSST_PrintAddoneStatus($jsst_name, $jsst_title, $jsst_img, $jsst_versio
             '.$jsst_msg.'
         </div>
         <div class="jsst-admin-addon-status-addonstatus-wrp">
-            <span>'. esc_html(__('Status: ','js-support-ticket')) .'</span>
+            <span>'. esc_html(__('Status','js-support-ticket')).': ' .'</span>
             <span class="jsst-admin-adons-status-Active" href="#">
                 '. jssupportticket::JSST_getVarValue($jsst_addoneinfo["status"]) .'
             </span>

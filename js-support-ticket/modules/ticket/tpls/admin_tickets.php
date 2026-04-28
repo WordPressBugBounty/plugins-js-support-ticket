@@ -137,7 +137,7 @@ JSSTmessage::getMessage();
             ?>
             <div class="js-ticket-count">
                 <div class="js-ticket-link">
-                    <a class="js-ticket-link <?php echo esc_attr($jsst_open); ?> js-ticket-green" href="#" data-tab-number="1" title="<?php echo esc_attr(__('Open Ticket','js-support-ticket')); ?>">
+                    <a class="js-ticket-link <?php echo esc_attr($jsst_open); ?> js-ticket-green" href="#" data-tab-number="1" title="<?php echo esc_attr(__('Open Tickets','js-support-ticket')); ?>">
                         <div class="js-ticket-cricle-wrp" data-per="<?php echo esc_attr($jsst_open_percentage); ?>" >
                             <div class="js-mr-rp" data-progress="<?php echo esc_attr($jsst_open_percentage); ?>">
                                 <div class="circle">
@@ -192,7 +192,7 @@ JSSTmessage::getMessage();
                 </div>
                 <?php if(in_array('overdue', jssupportticket::$_active_addons)){ ?>
                     <div class="js-ticket-link">
-                        <a class="js-ticket-link <?php echo esc_attr($jsst_overdue); ?> js-ticket-orange" href="#" data-tab-number="3" title="<?php echo esc_attr(__('overdue ticket','js-support-ticket')); ?>">
+                        <a class="js-ticket-link <?php echo esc_attr($jsst_overdue); ?> js-ticket-orange" href="#" data-tab-number="3" title="<?php echo esc_attr(__('Overdue Tickets','js-support-ticket')); ?>">
                             <div class="js-ticket-cricle-wrp" data-per="<?php echo esc_attr($jsst_overdue_percentage); ?>" >
                                 <div class="js-mr-rp" data-progress="<?php echo esc_attr($jsst_overdue_percentage); ?>">
                                     <div class="circle">
@@ -569,7 +569,7 @@ JSSTmessage::getMessage();
                             <?php /*<span class="js-ticket-created"><?php echo esc_html(__('Created', 'js-support-ticket')); ?>&nbsp;:&nbsp;<?php echo esc_html(date_i18n(jssupportticket::$_config['date_format'], jssupportticketphplib::JSST_strtotime($jsst_ticket->created))); ?></span>*/ ?>
                             <div class="js-ticket-datapart-buttons-action">
                                 <a class="js-ticket-datapart-action-btn button" title="<?php echo esc_attr(__('Edit Ticket', 'js-support-ticket')); ?>" href="?page=ticket&jstlay=addticket&jssupportticketid=<?php echo esc_attr($jsst_ticket->id); ?>"><img alt="<?php echo esc_attr(__('image','js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/edit-2.png" /><?php echo esc_html(__('Edit Ticket', 'js-support-ticket')); ?></a>
-                                <a class="js-ticket-datapart-action-btn button" title="<?php echo esc_attr(__('Delete Ticket', 'js-support-ticket')); ?>"  onclick="return confirm('<?php echo esc_js(__('Are you sure you want to delete it?', 'js-support-ticket')); ?>');" href="<?php echo esc_url(wp_nonce_url('?page=ticket&task=deleteticket&action=jstask&ticketid='.esc_attr($jsst_ticket->id),'delete-ticket-'.$jsst_ticket->id));?>">
+                                <a class="js-ticket-datapart-action-btn button" title="<?php echo esc_attr(__('Delete Ticket', 'js-support-ticket')); ?>"  onclick="return confirm('<?php echo esc_js(__('Are you sure you want to delete?', 'js-support-ticket')); ?>');" href="<?php echo esc_url(wp_nonce_url('?page=ticket&task=deleteticket&action=jstask&ticketid='.esc_attr($jsst_ticket->id),'delete-ticket-'.$jsst_ticket->id));?>">
                                     <img alt = "<?php echo esc_attr(__('Delete', 'js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/delete-2.png" />
                                     <?php echo esc_html(__('Delete Ticket', 'js-support-ticket')); ?></a>
                                 <a title="<?php echo esc_attr(__('Enforce delete', 'js-support-ticket')); ?>" class="js-ticket-datapart-action-btn button"  onclick="return confirm('<?php echo esc_js(__('Are you sure to enforce delete', 'js-support-ticket')); ?>');" href="<?php echo esc_url(wp_nonce_url('?page=ticket&task=enforcedeleteticket&action=jstask&ticketid='.esc_attr($jsst_ticket->id),'enforce-delete-ticket-'.$jsst_ticket->id))?>"><img src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/forced-delete.png" alt = "<?php echo esc_attr(__('Enforce delete', 'js-support-ticket')); ?>" /><?php echo esc_html(__('Enforce delete', 'js-support-ticket')); ?></a>

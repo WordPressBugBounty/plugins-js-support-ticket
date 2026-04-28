@@ -203,7 +203,7 @@ if (jssupportticket::$_config['offline'] == 2) {
                         if (in_array('faq', jssupportticket::$_active_addons) &&  jssupportticket::$_config['cplink_faqs_user'] == 1):
                             $jsst_count ++;
                             $jsst_menu_url = esc_url(jssupportticket::makeUrl(array('jstmod'=>'faq', 'jstlay'=>'faqs')));
-                            $jsst_menu_title =  esc_html(__("FAQ's", 'js-support-ticket'));
+                            $jsst_menu_title =  esc_html(__("FAQs", 'js-support-ticket'));
                             ?>
                             <li>
                                 <a href="<?php echo esc_url($jsst_menu_url); ?>">
@@ -482,7 +482,7 @@ if (jssupportticket::$_config['offline'] == 2) {
                         if (in_array('faq', jssupportticket::$_active_addons) && jssupportticket::$_config['cplink_faq_staff'] == 1):
                             $jsst_count ++;
                             $jsst_menu_url = esc_url(jssupportticket::makeUrl(array('jstmod'=>'faq', 'jstlay'=>'stafffaqs')));
-                            $jsst_menu_title =  esc_html(__("FAQ's", 'js-support-ticket'));
+                            $jsst_menu_title =  esc_html(__("FAQs", 'js-support-ticket'));
                             ?>
                             <li>
                                 <a href=<?php echo esc_url($jsst_menu_url); ?>>
@@ -562,7 +562,7 @@ if (jssupportticket::$_config['offline'] == 2) {
                         if (in_array('feedback', jssupportticket::$_active_addons) && jssupportticket::$_config['cplink_feedback_staff'] == 1):
                             $jsst_count ++;
                             $jsst_menu_url = esc_url(jssupportticket::makeUrl(array('jstmod'=>'feedback', 'jstlay'=>'feedbacks')));
-                            $jsst_menu_title =  esc_html(__('Agent Feedbacks', 'js-support-ticket'));
+                            $jsst_menu_title =  esc_html(__('Agent Feedback', 'js-support-ticket'));
                             ?>
                             <li>
                                 <a href=<?php echo esc_url($jsst_menu_url); ?>>
@@ -665,7 +665,7 @@ if (jssupportticket::$_config['offline'] == 2) {
                         ?>
                         <div>
                             <span>
-                                <?php echo esc_html__('Welcome back to', 'js-support-ticket'); ?>
+                                <?php echo esc_html__('Welcome Back To', 'js-support-ticket'); ?>
                                 <?php echo ', '.esc_html(jssupportticket::$_config['title']).'!'; ?>
                             </span>
                             <p><?php echo esc_html__('As a visitor, you can easily create a support ticket by sharing your issue details.', 'js-support-ticket'); ?></p>
@@ -681,7 +681,7 @@ if (jssupportticket::$_config['offline'] == 2) {
                             $jsst_id = "id=multiformpopup";
                         }
                     ?>
-                    <span><?php echo esc_html__('Have an issue?', 'js-support-ticket'); ?></span>
+                    <span><?php echo esc_html__('Have An Issue?', 'js-support-ticket'); ?></span>
                     <p><?php echo esc_html__('Our support team is here to help. Create a new ticket to get started.', 'js-support-ticket'); ?></p>
                     <a <?php echo esc_attr($jsst_id); ?> href="<?php echo esc_url(jssupportticket::makeUrl(array('jstmod'=>'ticket', 'jstlay'=>'addticket'))); ?>" class="js-ticket-button">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -710,20 +710,20 @@ if (jssupportticket::$_config['offline'] == 2) {
                         echo wp_kses(jsst_get_avatar($jsst_uid, 'js-ticket-welcome-avatar'), JSST_ALLOWED_TAGS);
                         ?>
                         <div>
-                            <span><?php echo esc_html( __( 'Welcome back,', 'js-support-ticket' ) ).' '.esc_html(jssupportticket::$jsst_data[0]['user-name']).'!'; ?></span>
+                            <span><?php echo esc_html( __( 'Welcome Back', 'js-support-ticket' ) ).', '.esc_html(jssupportticket::$jsst_data[0]['user-name']).'!'; ?></span>
                             <p>
                                 <?php
                                 if ($jsst_data['count']['openticket'] > 0) {
                                     // Translators: %s is the number of open tickets.
                                     echo wp_kses_post( __( 'You have', 'js-support-ticket' ) . ' ' );
                                     echo wp_kses_post(
-                                        '<strong>' . intval( $jsst_data['count']['openticket'] ) . ' ' . __( 'open tickets', 'js-support-ticket' ) . '</strong>'
+                                        '<strong>' . intval( $jsst_data['count']['openticket'] ) . ' ' . __( 'Open Tickets', 'js-support-ticket' ) . '</strong>'
                                     );
                                 } else {
-                                    // Translators: The <strong> tags should be kept around "No open ticket".
+                                    // Translators: The <strong> tags should be kept around "no open ticket".
                                     echo wp_kses_post( __( 'You have', 'js-support-ticket' ) . ' ' );
                                     echo wp_kses_post(
-                                        '<strong>' . __( 'No open ticket', 'js-support-ticket' ) . '</strong>'
+                                        '<strong>' . __( 'no open ticket', 'js-support-ticket' ) . '</strong>'
                                     );
                                 }
                                 if (in_array('agent',jssupportticket::$_active_addons) && JSSTincluder::getJSModel('agent')->isUserStaff()) {
@@ -776,14 +776,14 @@ if (jssupportticket::$_config['offline'] == 2) {
                         $jsst_show_block  = true;
                         $jsst_heading     = __( 'Need to assist a user?', 'js-support-ticket' );
                         $jsst_description = __( 'Quickly create a new ticket on behalf of a user to provide support and track their request.', 'js-support-ticket' );
-                        $jsst_button_text = __( 'Open ticket for user', 'js-support-ticket' );
+                        $jsst_button_text = __( 'Open Ticket For User', 'js-support-ticket' );
                         $jsst_menu_url    = esc_url(jssupportticket::makeUrl(array('jstmod'=>'agent', 'jstlay'=>'staffaddticket')));
                     }
 
                     // User case
                     if (!$jsst_is_staff && !empty(jssupportticket::$_config['cplink_openticket_user']) && jssupportticket::$_config['cplink_openticket_user'] == 1) {
                         $jsst_show_block  = true;
-                        $jsst_heading     = __( 'Have an issue?', 'js-support-ticket' );
+                        $jsst_heading     = __( 'Have An Issue?', 'js-support-ticket' );
                         $jsst_description = __( 'Our support team is here to help. Create a new ticket to get started.', 'js-support-ticket' );
                         $jsst_button_text = __( 'Create New Ticket', 'js-support-ticket' );
                         $jsst_menu_url    = esc_url(jssupportticket::makeUrl(array('jstmod' => 'ticket', 'jstlay' => 'addticket')));
@@ -891,7 +891,7 @@ if (jssupportticket::$_config['offline'] == 2) {
                         <div class="js-ticket-stats-card">
                             <span class="js-ticket-stats-card-heading"><?php echo esc_html( __( 'Your Ticket Stats', 'js-support-ticket' ) ); ?></span>
                             <div class="js-ticket-stats-list">
-                                <a title="<?php echo esc_attr(__('Open Ticket','js-support-ticket')); ?>" href="<?php echo esc_url($jsst_tkt_url); ?>" data-tab-number="1" class="js-ticket-stat-item js-ticket-link">
+                                <a title="<?php echo esc_attr(__('Open Tickets','js-support-ticket')); ?>" href="<?php echo esc_url($jsst_tkt_url); ?>" data-tab-number="1" class="js-ticket-stat-item js-ticket-link">
                                     <span class="js-ticket-stat-item-label">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
                                         <span><?php echo esc_html( __( 'Open Tickets', 'js-support-ticket' ) ); ?></span>
@@ -935,7 +935,7 @@ if (jssupportticket::$_config['offline'] == 2) {
                                 <?php
                                 if (in_array('agent',jssupportticket::$_active_addons) && JSSTincluder::getJSModel('agent')->isUserStaff()) { ?>
                                     <?php if(isset($jsst_data['count']['overdue'])){ ?>
-                                        <a href="<?php echo esc_url($jsst_tkt_url); ?>" data-tab-number="5" title="<?php echo esc_attr(__('overdue ticket','js-support-ticket')); ?>" class="js-ticket-stat-item js-ticket-link">
+                                        <a href="<?php echo esc_url($jsst_tkt_url); ?>" data-tab-number="5" title="<?php echo esc_attr(__('Overdue Tickets','js-support-ticket')); ?>" class="js-ticket-stat-item js-ticket-link">
                                             <span class="js-ticket-stat-item-label">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#ef4444" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
                                                 <span><?php echo esc_html( __( 'Overdue Tickets', 'js-support-ticket' ) ); ?></span>
@@ -949,7 +949,7 @@ if (jssupportticket::$_config['offline'] == 2) {
                                             } ?>
                                         </a>
                                     <?php } else { ?>
-                                        <a href="<?php echo esc_url($jsst_tkt_url); ?>" data-tab-number="4" title="<?php echo esc_attr(__('all ticket','js-support-ticket')); ?>" class="js-ticket-stat-item js-ticket-link">
+                                        <a href="<?php echo esc_url($jsst_tkt_url); ?>" data-tab-number="4" title="<?php echo esc_attr(__('All Tickets','js-support-ticket')); ?>" class="js-ticket-stat-item js-ticket-link">
                                             <span class="js-ticket-stat-item-label">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#ef4444" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
                                                 <span><?php echo esc_html( __( 'All Tickets', 'js-support-ticket' ) ); ?></span>
@@ -1025,7 +1025,7 @@ if (jssupportticket::$_config['offline'] == 2) {
                                                     endif;
                                                     echo esc_html( human_time_diff( strtotime( $jsst_ticket->last_reply_created ), current_time( 'timestamp' ) ) ); ?> <?php echo esc_html( __( 'ago', 'js-support-ticket' ) );
                                                 else:
-                                                    echo esc_html( __( 'No replies yet', 'js-support-ticket' ) );
+                                                    echo esc_html( __( 'No Replies Yet', 'js-support-ticket' ) );
                                                 endif;
                                                 ?>
                                             </div>
@@ -1105,7 +1105,7 @@ if (jssupportticket::$_config['offline'] == 2) {
                                                     endif;
                                                     echo esc_html( human_time_diff( strtotime( $jsst_ticket->last_reply_created ), current_time( 'timestamp' ) ) ); ?> <?php echo esc_html( __( 'ago', 'js-support-ticket' ) );
                                                 else:
-                                                    echo esc_html( __( 'No replies yet', 'js-support-ticket' ) );
+                                                    echo esc_html( __( 'No Replies Yet', 'js-support-ticket' ) );
                                                 endif;
                                                 ?>
                                             </div>
@@ -1252,7 +1252,7 @@ if (jssupportticket::$_config['offline'] == 2) {
                     </div>
                     <?php if(isset($jsst_data['count']['overdue'])){ ?>
                     <div class="js-ticket-link">
-                        <a class="js-ticket-link js-ticket-orange" href="<?php echo esc_url($jsst_tkt_url); ?>" data-tab-number="5" title="<?php echo esc_attr(__('overdue ticket','js-support-ticket')); ?>">
+                        <a class="js-ticket-link js-ticket-orange" href="<?php echo esc_url($jsst_tkt_url); ?>" data-tab-number="5" title="<?php echo esc_attr(__('Overdue Tickets','js-support-ticket')); ?>">
                             <div class="js-ticket-cricle-wrp" data-per="<?php echo esc_attr($jsst_overdue_percentage); ?>" >
                                 <div class="js-mr-rp" data-progress="<?php echo esc_attr($jsst_overdue_percentage); ?>">
                                     <div class="circle">
@@ -1282,7 +1282,7 @@ if (jssupportticket::$_config['offline'] == 2) {
                     </div>
                     <?php }else{ ?>
                     <div class="js-ticket-link">
-                        <a class="js-ticket-link js-ticket-orange" href="<?php echo esc_url($jsst_tkt_url); ?>" data-tab-number="4" title="<?php echo esc_attr(__('overdue ticket','js-support-ticket')); ?>">
+                        <a class="js-ticket-link js-ticket-orange" href="<?php echo esc_url($jsst_tkt_url); ?>" data-tab-number="4" title="<?php echo esc_attr(__('Overdue Tickets','js-support-ticket')); ?>">
                             <div class="js-ticket-cricle-wrp" data-per="<?php echo esc_attr($jsst_allticket_percentage); ?>" >
                                 <div class="js-mr-rp" data-progress="<?php echo esc_attr($jsst_allticket_percentage); ?>">
                                     <div class="circle">
@@ -1397,7 +1397,7 @@ if (jssupportticket::$_config['offline'] == 2) {
                                                     <a href="<?php echo esc_url(jssupportticket::makeUrl(array('jstmod'=>'announcement', 'jstlay'=>'addannouncement', 'jssupportticketid'=>$jsst_announcement->id))); ?>" class="js-ticket-action-btn">
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>
                                                     </a>
-                                                    <a onclick="return confirm('<?php echo esc_js(__('Are you sure you want to delete', 'js-support-ticket')); ?>');" href="<?php echo esc_url(wp_nonce_url(jssupportticket::makeUrl(array('jstmod'=>'announcement', 'task'=>'deleteannouncement', 'action'=>'jstask', 'announcementid'=>$jsst_announcement->id, 'jsstpageid'=>get_the_ID())),'delete-announcement-'.$jsst_announcement->id)); ?>" class="js-ticket-action-btn">
+                                                    <a onclick="return confirm('<?php echo esc_js(__('Are you sure you want to delete?', 'js-support-ticket')); ?>');" href="<?php echo esc_url(wp_nonce_url(jssupportticket::makeUrl(array('jstmod'=>'announcement', 'task'=>'deleteannouncement', 'action'=>'jstask', 'announcementid'=>$jsst_announcement->id, 'jsstpageid'=>get_the_ID())),'delete-announcement-'.$jsst_announcement->id)); ?>" class="js-ticket-action-btn">
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg>
                                                     </a>
                                                 </div>
@@ -1432,7 +1432,7 @@ if (jssupportticket::$_config['offline'] == 2) {
                                                     <a href="<?php echo esc_url(jssupportticket::makeUrl(array('jstmod'=>'knowledgebase', 'jstlay'=>'addarticle', 'jssupportticketid'=>$jsst_article->articleid))); ?>" class="js-ticket-action-btn">
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>
                                                     </a>
-                                                    <a onclick="return confirm('<?php echo esc_js(__('Are you sure you want to delete', 'js-support-ticket')); ?>');" href="<?php echo esc_url(wp_nonce_url(jssupportticket::makeUrl(array('jstmod'=>'knowledgebase', 'task'=>'deletearticle', 'action'=>'jstask', 'articleid'=>$jsst_article->articleid, 'jsstpageid'=>get_the_ID())),'delete-article-'.$jsst_article->articleid)); ?>" class="js-ticket-action-btn">
+                                                    <a onclick="return confirm('<?php echo esc_js(__('Are you sure you want to delete?', 'js-support-ticket')); ?>');" href="<?php echo esc_url(wp_nonce_url(jssupportticket::makeUrl(array('jstmod'=>'knowledgebase', 'task'=>'deletearticle', 'action'=>'jstask', 'articleid'=>$jsst_article->articleid, 'jsstpageid'=>get_the_ID())),'delete-article-'.$jsst_article->articleid)); ?>" class="js-ticket-action-btn">
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg>
                                                     </a>
                                                 </div>
@@ -1468,7 +1468,7 @@ if (jssupportticket::$_config['offline'] == 2) {
                                                     <a href="<?php echo esc_url(jssupportticket::makeUrl(array('jstmod'=>'faq', 'jstlay'=>'addfaq', 'jssupportticketid'=>$jsst_faq->id))); ?>" class="js-ticket-action-btn">
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>
                                                     </a>
-                                                    <a onclick="return confirm('<?php echo esc_js(__('Are you sure you want to delete', 'js-support-ticket')); ?>');" href="<?php echo esc_url(wp_nonce_url(jssupportticket::makeUrl(array('jstmod'=>'faq', 'task'=>'deletefaq', 'action'=>'jstask', 'faqid'=>$jsst_faq->id, 'jsstpageid'=>get_the_ID())),'delete-faq-'.$jsst_faq->id)); ?>" class="js-ticket-action-btn">
+                                                    <a onclick="return confirm('<?php echo esc_js(__('Are you sure you want to delete?', 'js-support-ticket')); ?>');" href="<?php echo esc_url(wp_nonce_url(jssupportticket::makeUrl(array('jstmod'=>'faq', 'task'=>'deletefaq', 'action'=>'jstask', 'faqid'=>$jsst_faq->id, 'jsstpageid'=>get_the_ID())),'delete-faq-'.$jsst_faq->id)); ?>" class="js-ticket-action-btn">
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg>
                                                     </a>
                                                 </div>
@@ -1503,7 +1503,7 @@ if (jssupportticket::$_config['offline'] == 2) {
                                                     <a href="<?php echo esc_url(jssupportticket::makeUrl(array('jstmod'=>'download', 'jstlay'=>'adddownload', 'jssupportticketid'=>$jsst_download->downloadid))); ?>" class="js-ticket-action-btn">
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>
                                                     </a>
-                                                    <a onclick="return confirm('<?php echo esc_js(__('Are you sure you want to delete', 'js-support-ticket')); ?>');" href="<?php echo esc_url(wp_nonce_url(jssupportticket::makeUrl(array('jstmod'=>'download', 'task'=>'deletedownload', 'action'=>'jstask', 'downloadid'=>$jsst_download->downloadid, 'jsstpageid'=>get_the_ID())),'delete-download-'.$jsst_download->downloadid)); ?>" class="js-ticket-action-btn">
+                                                    <a onclick="return confirm('<?php echo esc_js(__('Are you sure you want to delete?', 'js-support-ticket')); ?>');" href="<?php echo esc_url(wp_nonce_url(jssupportticket::makeUrl(array('jstmod'=>'download', 'task'=>'deletedownload', 'action'=>'jstask', 'downloadid'=>$jsst_download->downloadid, 'jsstpageid'=>get_the_ID())),'delete-download-'.$jsst_download->downloadid)); ?>" class="js-ticket-action-btn">
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg>
                                                     </a>
                                                 </div>

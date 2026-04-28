@@ -330,7 +330,7 @@ class JSSTdepartmentModel {
         if(!empty($jsst_list)){
             foreach($jsst_list as $jsst_premade){
                 $jsst_html .= '<div class="js-form-perm-msg" onclick="getpremade('.esc_js($jsst_premade->id).');">
-                    <a href="#" title="'. esc_html(__('Canned response','js-support-ticket')).'">'.wp_kses($jsst_premade->text, JSST_ALLOWED_TAGS).'</a>
+                    <a href="#" title="'. esc_html(__('Canned Response','js-support-ticket')).'">'.wp_kses($jsst_premade->text, JSST_ALLOWED_TAGS).'</a>
                 </div>';
 
 

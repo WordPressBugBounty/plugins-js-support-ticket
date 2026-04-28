@@ -15,7 +15,7 @@ jQuery(document).ready(function ($) {
 	google.setOnLoadCallback(drawBarChart);
 	function drawBarChart() {
 		var data = google.visualization.arrayToDataTable([
-         ['". esc_html(__('Status','js-support-ticket')) ."', '". esc_html(__('Tickets By Status','js-support-ticket')) ."', { role: 'style' }],
+         ['". esc_html(__('Status','js-support-ticket')) ."', '". esc_html(__('Tickets By Statuses','js-support-ticket')) ."', { role: 'style' }],
          ". wp_kses(jssupportticket::$jsst_data['bar_chart'], JSST_ALLOWED_TAGS)."
         ]);
         var view = new google.visualization.DataView(data);
@@ -58,7 +58,7 @@ jQuery(document).ready(function ($) {
 	google.setOnLoadCallback(drawPie3d1Chart);
 	function drawPie3d1Chart() {
         var data = google.visualization.arrayToDataTable([
-          ['". esc_html(__('Departments','js-support-ticket')). "', '". esc_html(__('Tickets By Department','js-support-ticket')) ."'],
+          ['". esc_html(__('Departments','js-support-ticket')). "', '". esc_html(__('Tickets By Departments','js-support-ticket')) ."'],
           ". wp_kses(jssupportticket::$jsst_data['pie3d_chart1'], JSST_ALLOWED_TAGS)."
         ]);
 
@@ -75,7 +75,7 @@ jQuery(document).ready(function ($) {
 	google.setOnLoadCallback(drawPie3d2Chart);
 	function drawPie3d2Chart() {
         var data = google.visualization.arrayToDataTable([
-          ['". esc_html(__('Priorities','js-support-ticket')) ."', '". esc_html(__('Tickets By Priority','js-support-ticket')) ."'],
+          ['". esc_html(__('Priorities','js-support-ticket')) ."', '". esc_html(__('Tickets By Priorities','js-support-ticket')) ."'],
           ".wp_kses(jssupportticket::$jsst_data['pie3d_chart2'], JSST_ALLOWED_TAGS)."
         ]);
 
@@ -117,7 +117,7 @@ if(isset(jssupportticket::$jsst_data['slice_chart'])) {
     google.setOnLoadCallback(drawSliceChart);
     function drawSliceChart() {
         var data = google.visualization.arrayToDataTable([
-            ['". esc_html(__('Tickets','js-support-ticket')) ."', '". esc_html(__('Staff Member Tickets','js-support-ticket')) ."'],
+            ['". esc_html(__('Tickets','js-support-ticket')) ."', '". esc_html(__('Agent Tickets','js-support-ticket')) ."'],
             ". wp_kses(jssupportticket::$jsst_data['slice_chart'], JSST_ALLOWED_TAGS)."
         ]);
 
@@ -202,7 +202,7 @@ JSSTmessage::getMessage();
             ?>
             <div class="js-ticket-count">
                 <div class="js-ticket-link">
-                    <a class="js-ticket-link js-ticket-green" href="#" data-tab-number="1" title="<?php echo esc_attr(__('Open Ticket','js-support-ticket')); ?>">
+                    <a class="js-ticket-link js-ticket-green" href="#" data-tab-number="1" title="<?php echo esc_attr(__('Open Tickets','js-support-ticket')); ?>">
                         <div class="js-ticket-cricle-wrp" data-per="<?php echo esc_attr($jsst_open_percentage); ?>" >
                             <div class="js-mr-rp" data-progress="<?php echo esc_attr($jsst_open_percentage); ?>">
                                 <div class="circle">
@@ -255,7 +255,7 @@ JSSTmessage::getMessage();
                 </div>
                 <?php if(in_array('overdue', jssupportticket::$_active_addons)){ ?>
                   <div class="js-ticket-link">
-                      <a class="js-ticket-link js-ticket-orange" href="#" data-tab-number="3" title="<?php echo esc_attr(__('overdue ticket','js-support-ticket')); ?>">
+                      <a class="js-ticket-link js-ticket-orange" href="#" data-tab-number="3" title="<?php echo esc_attr(__('Overdue Tickets','js-support-ticket')); ?>">
                           <div class="js-ticket-cricle-wrp" data-per="<?php echo esc_attr($jsst_overdue_percentage); ?>" >
                               <div class="js-mr-rp" data-progress="<?php echo esc_attr($jsst_overdue_percentage); ?>">
                                   <div class="circle">
@@ -308,7 +308,7 @@ JSSTmessage::getMessage();
                     </a>
                 </div>
                 <div class="js-ticket-link">
-                    <a class="js-ticket-link js-ticket-blue" href="#" data-tab-number="5" title="<?php echo esc_attr(__('all ticket','js-support-ticket')); ?>">
+                    <a class="js-ticket-link js-ticket-blue" href="#" data-tab-number="5" title="<?php echo esc_attr(__('All Tickets','js-support-ticket')); ?>">
                         <div class="js-ticket-cricle-wrp" data-per="<?php echo esc_attr($jsst_allticket_percentage); ?>">
                             <div class="js-mr-rp" data-progress="<?php echo esc_attr($jsst_allticket_percentage); ?>">
                                 <div class="circle">
@@ -335,7 +335,7 @@ JSSTmessage::getMessage();
                 </div>
             </div>
             <div class="js-admin-report">
-                <div class="js-admin-subtitle"><?php echo esc_html(__('Tickets By Status And Priorities','js-support-ticket')); ?></div>
+                <div class="js-admin-subtitle"><?php echo esc_html(__('Tickets By Statuses And Priorities','js-support-ticket')); ?></div>
                 <div class="js-admin-rep-graph" id="stack_chart_horizontal" style="float:left; height:400px;width:100%; "></div>
             </div>
             <div class="js-admin-report halfwidth">
@@ -347,11 +347,11 @@ JSSTmessage::getMessage();
             	<div class="js-admin-rep-graph" id="pie3d_chart2" style="height:400px;width:100%;"></div>
             </div>
             <div class="js-admin-report halfwidth">
-            	<div class="js-admin-subtitle box3"><?php echo esc_html(__('Tickets By Status','js-support-ticket')); ?></div>
+            	<div class="js-admin-subtitle box3"><?php echo esc_html(__('Tickets By Statuses','js-support-ticket')); ?></div>
             	<div class="js-admin-rep-graph" id="bar_chart" style="height:400px;width:100%;"></div>
             </div>
             <div class="js-admin-report halfwidth">
-              <div class="js-admin-subtitle box4"><?php echo esc_html(__('Tickets By Channel','js-support-ticket')); ?></div>
+              <div class="js-admin-subtitle box4"><?php echo esc_html(__('Tickets By Channels','js-support-ticket')); ?></div>
               <div class="js-admin-rep-graph" id="stack_chart" style="height:400px;width:100%;"></div>
             </div>
             <?php if(in_array('agent', jssupportticket::$_active_addons)){ ?>

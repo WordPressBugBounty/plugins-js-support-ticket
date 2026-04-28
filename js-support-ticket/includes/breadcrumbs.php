@@ -77,10 +77,10 @@ class JSSTbreadcrumbs {
                     case 'reports':
                         switch ($jsst_layout) {
                             case 'staffdetailreport':
-                                $jsst_array[] = array('link' => jssupportticket::makeUrl(array('jstmod'=>$jsst_module, 'jstlay'=>$jsst_layout)), 'text' => esc_html(__('Staff report', 'js-support-ticket')));
+                                $jsst_array[] = array('link' => jssupportticket::makeUrl(array('jstmod'=>$jsst_module, 'jstlay'=>$jsst_layout)), 'text' => esc_html(__('Agent Reports', 'js-support-ticket')));
                                 break;
                             case 'staffreports':
-                                $jsst_array[] = array('link' => jssupportticket::makeUrl(array('jstmod'=>$jsst_module, 'jstlay'=>$jsst_layout)), 'text' => esc_html(__('Staff reports', 'js-support-ticket')));
+                                $jsst_array[] = array('link' => jssupportticket::makeUrl(array('jstmod'=>$jsst_module, 'jstlay'=>$jsst_layout)), 'text' => esc_html(__('Agent Reports', 'js-support-ticket')));
                                 break;
                             case 'departmentreports':
                                 $jsst_array[] = array('link' => jssupportticket::makeUrl(array('jstmod'=>$jsst_module, 'jstlay'=>$jsst_layout)), 'text' => esc_html(__('Departments report', 'js-support-ticket')));
@@ -107,7 +107,7 @@ class JSSTbreadcrumbs {
                         switch ($jsst_layout) {
                             case 'addfaq':
                                 $jsst_layout1 = ( in_array('agent',jssupportticket::$_active_addons) && JSSTincluder::getJSModel('agent')->isUserStaff()) ? 'stafffaqs' : 'faqs';
-                                $jsst_array[] = array('link' => jssupportticket::makeUrl(array('jstmod'=>$jsst_module, 'jstlay'=>$jsst_layout1)), 'text' => esc_html(__("FAQ's", 'js-support-ticket')));
+                                $jsst_array[] = array('link' => jssupportticket::makeUrl(array('jstmod'=>$jsst_module, 'jstlay'=>$jsst_layout1)), 'text' => esc_html(__("FAQs", 'js-support-ticket')));
                                 $jsst_text = ($jsst_isnew) ? esc_html(__('Add FAQ', 'js-support-ticket')) : esc_html(__('Edit FAQ', 'js-support-ticket'));
                                 $jsst_array[] = array('link' => jssupportticket::makeUrl(array('jstmod'=>$jsst_module, 'jstlay'=>$jsst_layout)), 'text' => $jsst_text);
                                 break;
@@ -115,17 +115,17 @@ class JSSTbreadcrumbs {
                                 $jsst_array[] = array('link' => jssupportticket::makeUrl(array('jstmod'=>$jsst_module, 'jstlay'=>$jsst_layout)), 'text' => esc_html(__('FAQ Detail', 'js-support-ticket')));
                                 break;
                             case 'faqs':
-                                $jsst_array[] = array('link' => jssupportticket::makeUrl(array('jstmod'=>$jsst_module, 'jstlay'=>$jsst_layout)), 'text' => esc_html(__("FAQ's", 'js-support-ticket')));
+                                $jsst_array[] = array('link' => jssupportticket::makeUrl(array('jstmod'=>$jsst_module, 'jstlay'=>$jsst_layout)), 'text' => esc_html(__("FAQs", 'js-support-ticket')));
                                 break;
                             case 'stafffaqs':
-                                $jsst_array[] = array('link' => jssupportticket::makeUrl(array('jstmod'=>$jsst_module, 'jstlay'=>$jsst_layout)), 'text' => esc_html(__("FAQ's", 'js-support-ticket')));
+                                $jsst_array[] = array('link' => jssupportticket::makeUrl(array('jstmod'=>$jsst_module, 'jstlay'=>$jsst_layout)), 'text' => esc_html(__("FAQs", 'js-support-ticket')));
                                 break;
                         }
                         break;
                     case 'feedback':
                         switch ($jsst_layout) {
                             case 'feedbacks':
-                                $jsst_array[] = array('link' => jssupportticket::makeUrl(array('jstmod'=>'feedback', 'jstlay'=>'feedbacks')), 'text' => esc_html(__("Feedbacks", 'js-support-ticket')));
+                                $jsst_array[] = array('link' => jssupportticket::makeUrl(array('jstmod'=>'feedback', 'jstlay'=>'feedbacks')), 'text' => esc_html(__("Feedback", 'js-support-ticket')));
                                 break;
                         }
                         break;
@@ -194,7 +194,7 @@ class JSSTbreadcrumbs {
                                 break;
                             case 'rolepermission':
                                 $jsst_array[] = array('link' => jssupportticket::makeUrl(array('jstmod'=>$jsst_module, 'jstlay'=>'roles')), 'text' => esc_html(__('Roles', 'js-support-ticket')));
-                                $jsst_array[] = array('link' => jssupportticket::makeUrl(array('jstmod'=>$jsst_module, 'jstlay'=>$jsst_layout)), 'text' => esc_html(__('Role permissions', 'js-support-ticket')));
+                                $jsst_array[] = array('link' => jssupportticket::makeUrl(array('jstmod'=>$jsst_module, 'jstlay'=>$jsst_layout)), 'text' => esc_html(__('Role Permissions', 'js-support-ticket')));
                                 break;
                             case 'roles':
                                 $jsst_array[] = array('link' => jssupportticket::makeUrl(array('jstmod'=>$jsst_module, 'jstlay'=>$jsst_layout)), 'text' => esc_html(__('Roles', 'js-support-ticket')));
@@ -205,11 +205,11 @@ class JSSTbreadcrumbs {
                         switch ($jsst_layout) {
                             case 'addstaff':
                                 $jsst_array[] = array('link' => jssupportticket::makeUrl(array('jstmod'=>$jsst_module, 'jstlay'=>'staffs')), 'text' => esc_html(__('Staffs', 'js-support-ticket')));
-                                $jsst_text = ($jsst_isnew) ? esc_html(__('Add Staff', 'js-support-ticket')) : esc_html(__('Edit Staff', 'js-support-ticket'));
+                                $jsst_text = ($jsst_isnew) ? esc_html(__('Add Agent', 'js-support-ticket')) : esc_html(__('Edit Agent', 'js-support-ticket'));
                                 $jsst_array[] = array('link' => jssupportticket::makeUrl(array('jstmod'=>$jsst_module, 'jstlay'=>$jsst_layout)), 'text' => $jsst_text);
                                 break;
                             case 'staffpermissions':
-                                $jsst_array[] = array('link' => jssupportticket::makeUrl(array('jstmod'=>$jsst_module, 'jstlay'=>$jsst_layout)), 'text' => esc_html(__('Staff Permissions', 'js-support-ticket')));
+                                $jsst_array[] = array('link' => jssupportticket::makeUrl(array('jstmod'=>$jsst_module, 'jstlay'=>$jsst_layout)), 'text' => esc_html(__('Agent Permissions', 'js-support-ticket')));
                                 break;
                             case 'staffs':
                                 $jsst_array[] = array('link' => jssupportticket::makeUrl(array('jstmod'=>$jsst_module, 'jstlay'=>$jsst_layout)), 'text' => esc_html(__('Staffs', 'js-support-ticket')));
@@ -243,7 +243,7 @@ class JSSTbreadcrumbs {
                                 $jsst_layout1 = ( in_array('agent',jssupportticket::$_active_addons) && JSSTincluder::getJSModel('agent')->isUserStaff()) ? 'staffmyticket' : 'myticket';
                                 $jsst_module1 = ( in_array('agent',jssupportticket::$_active_addons) && JSSTincluder::getJSModel('agent')->isUserStaff()) ? 'agent' : 'ticket';
                                 $jsst_array[] = array('link' => jssupportticket::makeUrl(array('jstmod'=>$jsst_module1, 'jstlay'=>$jsst_layout1)), 'text'=>esc_html(__('My Tickets','js-support-ticket')));
-                                $jsst_array[] = array('link' => jssupportticket::makeUrl(array('jstmod'=>'ticket', 'jstlay'=>'ticketdetail')), 'text' => esc_html(__('Ticket Detail', 'js-support-ticket')));
+                                $jsst_array[] = array('link' => jssupportticket::makeUrl(array('jstmod'=>'ticket', 'jstlay'=>'ticketdetail')), 'text' => esc_html(__('Ticket Details', 'js-support-ticket')));
                                 break;
                             case 'ticketstatus':
                                 $jsst_array[] = array('link' => jssupportticket::makeUrl(array('jstmod'=>'ticket', 'jstlay'=>'ticketstatus')), 'text' => esc_html(__('Ticket Status', 'js-support-ticket')));

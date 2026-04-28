@@ -1,0 +1,6941 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: 2026-04-22 17:36+0500\n"
+"PO-Revision-Date: 2026-04-22 17:36+0500\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: tl_PH\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.9\n"
+"X-Poedit-Basepath: lang\n X-Poedit-KeywordsList: __;esc_html__;esc_attr__;_e\n"
+"X-Poedit-SearchPath-0: .\n"
+
+msgid "You are not allowed"
+msgstr "Wala kang pahintulot"
+
+msgid "The ticket has been locked"
+msgstr "Na-lock ang tiket"
+
+msgid "Successfully"
+msgstr "Matagumpay"
+
+msgid "The ticket has not been locked"
+msgstr "Hindi na-lock ang tiket"
+
+msgid "Error"
+msgstr "Error"
+
+msgid "Lock Ticket"
+msgstr "I-lock ang tiket"
+
+msgid "The ticket is locked by"
+msgstr "Ang tiket ay naka-lock ni"
+
+msgid "The ticket has been unlocked"
+msgstr "Na-unlock ang tiket"
+
+msgid "The ticket has not been unlocked"
+msgstr "Hindi na-unlock ang tiket"
+
+msgid "Unlock Ticket"
+msgstr "I-unlock ang tiket"
+
+msgid "The ticket is unlocked by"
+msgstr "Ang tiket ay na-unlock ni"
+
+msgid "User already an agent"
+msgstr "Ang gumagamit ay ahente na"
+
+msgid "The agent has not been stored"
+msgstr "Hindi na-save ang ahente"
+
+msgid "The agent has been stored"
+msgstr "Na-save ang ahente"
+
+msgid "The agent has been deleted"
+msgstr "Natanggal ang ahente"
+
+msgid "The agent has not been deleted"
+msgstr "Hindi natanggal ang ahente"
+
+msgid "The agent in use cannot delete"
+msgstr "Hindi matatanggal ang ahenteng ginagamit"
+
+msgid "Agent"
+msgstr "Ahente"
+
+msgid "status has been changed"
+msgstr "Nabago ang katayuan"
+
+msgid "status has not been changed"
+msgstr "Hindi nabago ang katayuan"
+
+msgid "User ID"
+msgstr "ID ng gumagamit"
+
+msgid "User Name"
+msgstr "Pangalan ng gumagamit"
+
+msgid "Email Address"
+msgstr "Email address"
+
+msgid "Name"
+msgstr "Pangalan"
+
+msgid "Email"
+msgstr "Email"
+
+msgid "Previous"
+msgstr "Nakaraan"
+
+msgid "Next"
+msgstr "Susunod"
+
+msgid "Active"
+msgstr "Aktibo"
+
+msgid "Disabled"
+msgstr "Hindi pinagana"
+
+msgid "Uploaded file extension error."
+msgstr "Error sa extension ng na-upload na file."
+
+msgid "Select User"
+msgstr "Pumili ng gumagamit"
+
+msgid "Username"
+msgstr "Username"
+
+msgid "Search"
+msgstr "Maghanap"
+
+msgid "Reset"
+msgstr "I-reset"
+
+msgid "Use search feature to select the user"
+msgstr "Gamitin ang tampok sa paghahanap upang piliin ang gumagamit"
+
+msgid "WP User ID"
+msgstr "WP user ID"
+
+msgid "WP Username"
+msgstr "WP username"
+
+msgid "WP Full Name"
+msgstr "WP buong pangalan"
+
+msgid "WP Email Address"
+msgstr "WP Email Address"
+
+msgid "User"
+msgstr "Gumagamit"
+
+msgid "Roles"
+msgstr "Mga tungkulin"
+
+msgid "Select Role"
+msgstr "Pumili ng tungkulin"
+
+msgid "First Name"
+msgstr "Pangalan"
+
+msgid "Last Name"
+msgstr "Apelyido"
+
+msgid "Office Phone"
+msgstr "Telepono sa opisina"
+
+msgid "Extension"
+msgstr "Extension"
+
+msgid "Mobile No"
+msgstr "Mobile no."
+
+msgid "Picture"
+msgstr "Larawan"
+
+msgid "Maximum File Size"
+msgstr "Pinakamalaking laki ng file"
+
+msgid "File Extension Type"
+msgstr "Uri ng extension ng file"
+
+msgid "Append Signature"
+msgstr "Idagdag ang lagda"
+
+msgid "Append signature with a reply"
+msgstr "Idagdag ang lagda sa tugon"
+
+msgid "Signature"
+msgstr "Lagda"
+
+msgid "Account Status"
+msgstr "Katayuan ng account"
+
+msgid "Select Status"
+msgstr "Pumili ng katayuan"
+
+msgid "Save"
+msgstr "I-save"
+
+msgid "Cancel"
+msgstr "Kanselahin"
+
+msgid "Close"
+msgstr "Isara"
+
+msgid "Dashboard"
+msgstr "Dashboard"
+
+msgid "Add Agent"
+msgstr "Magdagdag ng ahente"
+
+msgid "Configuration"
+msgstr "Configuration"
+
+msgid "Help"
+msgstr "Tulong"
+
+msgid "Version"
+msgstr "Bersyon"
+
+msgid "User Detail"
+msgstr "Detalye ng gumagamit"
+
+msgid "image"
+msgstr "larawan"
+
+msgid "Append"
+msgstr "Idagdag"
+
+msgid "Add Permissions"
+msgstr "Magdagdag ng mga pahintulot"
+
+msgid "Permissions"
+msgstr "Mga pahintulot"
+
+msgid "Department Section"
+msgstr "Seksyon ng departamento"
+
+msgid "Ticket Section"
+msgstr "Seksyon ng tiket"
+
+msgid "Agent Section"
+msgstr "Seksyon ng ahente"
+
+msgid "Knowledge Base Section"
+msgstr "Seksyon ng Knowledge Base"
+
+msgid "FAQ Section"
+msgstr "Seksyon ng FAQ"
+
+msgid "Download Section"
+msgstr "Seksyon ng download"
+
+msgid "Announcement Section"
+msgstr "Seksyon ng anunsyo"
+
+msgid "Mail Section"
+msgstr "Seksyon ng mail"
+
+msgid "Help Topic Section"
+msgstr "Seksyon ng paksa ng tulong"
+
+msgid "Canned Response Section"
+msgstr "Seksyon ng nakahandang tugon"
+
+msgid "AI Reply Section"
+msgstr "Seksyon ng AI na tugon"
+
+msgid "Select / Deselect All"
+msgstr "Piliin / alisin ang lahat"
+
+msgid "Save Permissions"
+msgstr "I-save ang mga pahintulot"
+
+msgid "Agents"
+msgstr "Mga ahente"
+
+msgid "Add"
+msgstr "Magdagdag"
+
+msgid "Full Name"
+msgstr "Buong pangalan"
+
+msgid "Phone"
+msgstr "Telepono"
+
+msgid "Role"
+msgstr "Tungkulin"
+
+msgid "Status"
+msgstr "Katayuan"
+
+msgid "Created"
+msgstr "Nalikha"
+
+msgid "Action"
+msgstr "Aksyon"
+
+msgid "Staff"
+msgstr "Kawani"
+
+msgid "Change Status"
+msgstr "Baguhin ang katayuan"
+
+msgid "Edit"
+msgstr "I-edit"
+
+msgid "Delete"
+msgstr "Tanggalin"
+
+msgid "Are you sure you want to delete?"
+msgstr "Sigurado ka bang gusto mong tanggalin?"
+
+msgid "Something went wrong. Please try again."
+msgstr "May nangyaring mali. Pakisubukang muli."
+
+msgid "My Profile"
+msgstr "Aking profile"
+
+msgid "Upload Image"
+msgstr "Mag-upload ng larawan"
+
+msgid "Phone No"
+msgstr "Numero ng telepono"
+
+msgid "Upload file limit exceeds"
+msgstr "Lumampas sa limitasyon ng pag-upload ng file"
+
+msgid "No help topic found"
+msgstr "Walang nahanap na paksa ng tulong"
+
+msgid "Error file size too large"
+msgstr "Error: masyadong malaki ang file"
+
+msgid "Select"
+msgstr "Piliin"
+
+msgid "Add More"
+msgstr "Magdagdag pa"
+
+msgid "Remove"
+msgstr "Alisin"
+
+msgid "Reason For Edit"
+msgstr "Dahilan ng pag-edit"
+
+msgid "Internal Note"
+msgstr "Panloob na tala"
+
+msgid "Order id found"
+msgstr "Nahanap ang order ID"
+
+msgid "Order id not found"
+msgstr "Hindi nahanap ang order ID"
+
+msgid "Dated"
+msgstr "May petsang"
+
+msgid "Assign To Me"
+msgstr "Italaga sa akin"
+
+msgid "Submit Ticket"
+msgstr "Isumite ang tiket"
+
+msgid "Show Less"
+msgstr "Magpakita ng mas kaunti"
+
+msgid "Show All"
+msgstr "Ipakita lahat"
+
+msgid "Open"
+msgstr "Bukas"
+
+msgid "Closed"
+msgstr "Sarado"
+
+msgid "Answered"
+msgstr "Nasagot"
+
+msgid "Overdue"
+msgstr "Lampas sa takdang oras"
+
+msgid "All Tickets"
+msgstr "Lahat ng tiket"
+
+msgid "Or"
+msgstr "O"
+
+msgid "Ticket ID"
+msgstr "ID ng tiket"
+
+msgid "From"
+msgstr "Mula sa"
+
+msgid "Select Agent"
+msgstr "Pumili ng ahente"
+
+msgid "Start Date"
+msgstr "Petsa ng simula"
+
+msgid "End Date"
+msgstr "Petsa ng pagtatapos"
+
+msgid "Assigned To Me"
+msgstr "Naka-assign sa akin"
+
+msgid "Priority"
+msgstr "Priyoridad"
+
+msgid "sort"
+msgstr "pag-uuri"
+
+msgid "Created via Email"
+msgstr "Nilikha sa pamamagitan ng email"
+
+msgid "The ticket is locked"
+msgstr "Naka-lock ang tiket"
+
+msgid "The ticket marks as overdue"
+msgstr "Minarkahan ang tiket bilang overdue"
+
+msgid "Last Reply"
+msgstr "Huling tugon"
+
+msgid "Assign To"
+msgstr "Italaga kay"
+
+msgid "Search By Username"
+msgstr "Maghanap ayon sa username"
+
+msgid "Already exists"
+msgstr "Umiiral na"
+
+msgid "The role has been stored"
+msgstr "Na-save ang tungkulin"
+
+msgid "The role has not been stored"
+msgstr "Hindi na-save ang tungkulin"
+
+msgid "The role has been deleted"
+msgstr "Natanggal ang tungkulin"
+
+msgid "The role has not been deleted"
+msgstr "Hindi natanggal ang tungkulin"
+
+msgid "The role in use cannot be deleting"
+msgstr "Hindi maaaring tanggalin ang tungkulin dahil ginagamit ito"
+
+msgid "Save Role"
+msgstr "I-save ang tungkulin"
+
+msgid "Add Agent Role"
+msgstr "Magdagdag ng tungkulin ng ahente"
+
+msgid "Role Permissions"
+msgstr "Mga pahintulot ng tungkulin"
+
+msgid "Agent Roles"
+msgstr "Mga tungkulin ng ahente"
+
+msgid "Role Name"
+msgstr "Pangalan ng tungkulin"
+
+msgid "Role Permission"
+msgstr "Pahintulot ng tungkulin"
+
+msgid "Add Role"
+msgstr "Magdagdag ng tungkulin"
+
+msgid "Agent permissions have been stored"
+msgstr "Na-save ang mga pahintulot ng ahente"
+
+msgid "Select Condition Operator"
+msgstr "Piliin ang condition operator"
+
+msgid "Select Department"
+msgstr "Pumili ng departamento"
+
+msgid "Select Priority"
+msgstr "Pumili ng priyoridad"
+
+msgid "Select Submit Type"
+msgstr "Pumili ng uri ng pagsusumite"
+
+msgid "'s Department permission has been changed"
+msgstr "Nabago ang 's departamento pahintulot"
+
+msgid "Rule has been stored"
+msgstr "Na-save ang rule"
+
+msgid "Rule has not been stored"
+msgstr "Hindi na-save ang rule"
+
+msgid "Rule has been deleted"
+msgstr "Natanggal ang rule"
+
+msgid "Rule has not been deleted"
+msgstr "Hindi natanggal ang rule"
+
+msgid "Rule"
+msgstr "Panuntunan"
+
+msgid "in use cannot deleted"
+msgstr "ginagamit hindi maaari natanggal"
+
+msgid "Select Condition Title"
+msgstr "Pumili ng condition pamagat"
+
+msgid "Select Condition Value"
+msgstr "Pumili ng condition halaga"
+
+msgid "Delete Condition"
+msgstr "Tanggalin ang condition"
+
+msgid "No Operator found"
+msgstr "Hindi Operator found"
+
+msgid "No Value found"
+msgstr "Hindi Halaga found"
+
+msgid "Conditions"
+msgstr "Mga kondisyon"
+
+msgid "Add Rule"
+msgstr "Magdagdag ng rule"
+
+msgid "Rule Title"
+msgstr "Rule Pamagat"
+
+msgid "Condition Title"
+msgstr "Condition Pamagat"
+
+msgid "Condition Operator"
+msgstr "Operator ng kondisyon"
+
+msgid "Condition Value"
+msgstr "Condition Halaga"
+
+msgid "+ Add More Condition"
+msgstr "+ magdagdag Higit pa Condition"
+
+msgid "Save Rule"
+msgstr "I-save ang rule"
+
+msgid "Add Conditions"
+msgstr "Magdagdag ng conditions"
+
+msgid "Records per page"
+msgstr "Mga tala bawat pahina"
+
+msgid "Sr#"
+msgstr "Sr#"
+
+msgid "Save Ordering"
+msgstr "I-save ang pagkakasunod-sunod"
+
+msgid "Ticket ID is required."
+msgstr "Kailangan ang ID ng tiket."
+
+msgid "Ticket not found."
+msgstr "Tiket hindi nahanap."
+
+msgid "Database error occurred."
+msgstr "Nagkaroon ng error sa database."
+
+msgid "An announcement has been stored"
+msgstr "Na-save ang isang anunsyo"
+
+msgid "An announcement has not been stored"
+msgstr "Hindi na-save ang isang anunsyo"
+
+msgid "An announcement has been deleted"
+msgstr "Natanggal ang isang anunsyo"
+
+msgid "An announcement has not been deleted"
+msgstr "Hindi natanggal ang isang anunsyo"
+
+msgid "Announcement"
+msgstr "Anunsyo"
+
+msgid "ordering has been changed"
+msgstr "Nabago ang pagkakasunod-sunod"
+
+msgid "ordering has not changed"
+msgstr "pagkakasunod-sunod has not nabago"
+
+msgid "Public"
+msgstr "Pampubliko"
+
+msgid "Private"
+msgstr "Pribado"
+
+msgid "Title"
+msgstr "Pamagat"
+
+msgid "Parent Category"
+msgstr "Parent Kategorya"
+
+msgid "Select Category"
+msgstr "Pumili ng kategorya"
+
+msgid "Description"
+msgstr "Paglalarawan"
+
+msgid "Select Visible"
+msgstr "Pumili ng nakikita"
+
+msgid "Logged-in User / Visitor"
+msgstr "Logged-in Gumagamit / Visitor"
+
+msgid "Logged-in Users Only"
+msgstr "Logged-in Mga gumagamit Lamang"
+
+msgid "Visible"
+msgstr "Nakikita"
+
+msgid "View Announcement"
+msgstr "Tingnan ang anunsyo"
+
+msgid "Save Announcement"
+msgstr "I-save ang anunsyo"
+
+msgid "Add Announcement"
+msgstr "Magdagdag ng anunsyo"
+
+msgid "Category"
+msgstr "Kategorya"
+
+msgid "Announcements"
+msgstr "Mga anunsyo"
+
+msgid "Watch Video"
+msgstr "Manood ng video"
+
+msgid "arrow"
+msgstr "arrow"
+
+msgid "Ordering"
+msgstr "Pagkakasunod-sunod"
+
+msgid "Category Name"
+msgstr "Kategorya Pangalan"
+
+msgid "Categories"
+msgstr "Mga kategorya"
+
+msgid "Banned Email Log List"
+msgstr "Listahan ng log ng mga naka-ban na email"
+
+msgid "Logger Email"
+msgstr "Email ng logger"
+
+msgid "Log"
+msgstr "Log"
+
+msgid "Logger"
+msgstr "Logger"
+
+msgid "IP Address"
+msgstr "IP address"
+
+msgid "Ban email has been stored"
+msgstr "Na-save ang ban email"
+
+msgid "Ban email has not been stored"
+msgstr "Hindi na-save ang ban email"
+
+msgid "Ban email has been deleted"
+msgstr "Natanggal ang ban email"
+
+msgid "Ban email has not been deleted"
+msgstr "Hindi natanggal ang ban email"
+
+msgid "Ban email does not exist"
+msgstr "Hindi umiiral ang naka-ban na email"
+
+msgid "Add Banned Email"
+msgstr "Magdagdag ng naka-ban na email"
+
+msgid "Save Banned Email"
+msgstr "I-save ang naka-ban na email"
+
+msgid "Banned Emails"
+msgstr "Mga naka-ban na email"
+
+msgid "Emails"
+msgstr "Mga email"
+
+msgid "Submitter"
+msgstr "Nagsumite"
+
+msgid "Canned response message has been stored"
+msgstr "Na-save ang nakahandang tugon mensahe"
+
+msgid "Canned response message has not been stored"
+msgstr "Hindi na-save ang nakahandang tugon mensahe"
+
+msgid "Premade department message has been deleted"
+msgstr "Natanggal ang premade departamento mensahe"
+
+msgid "Premade department message has not been deleted"
+msgstr "Hindi natanggal ang premade departamento mensahe"
+
+msgid "Canned Response"
+msgstr "Nakahandang tugon"
+
+msgid "Department"
+msgstr "Departamento"
+
+msgid "Response"
+msgstr "Tugon"
+
+msgid "Save Canned Response"
+msgstr "I-save ang nakahandang tugon"
+
+msgid "Add Canned Response"
+msgstr "Magdagdag ng nakahandang tugon"
+
+msgid "The department under which the answer will be made is available"
+msgstr "Available ang departamentong gagamitin para sa sagot"
+
+msgid "Offline"
+msgstr "Offline"
+
+msgid "Canned Responses"
+msgstr "Mga nakahandang tugon"
+
+msgid "Last Updated"
+msgstr "Huli na-i-update"
+
+msgid "Not updated"
+msgstr "Not na-i-update"
+
+msgid "Latest Tickets"
+msgstr "Pinakabago Mga tiket"
+
+msgid "Subject"
+msgstr "Paksa"
+
+msgid "Last Month Ticket Stats"
+msgstr "Huli Month Tiket Stats"
+
+msgid "New"
+msgstr "Bago"
+
+msgid "Pending"
+msgstr "Nakabinbin"
+
+msgid "The attachment has been removed"
+msgstr "Ang kalakip ay na removed"
+
+msgid "The attachment has not been removed"
+msgstr "Ang kalakip ay hindi na removed"
+
+msgid "The download has been stored"
+msgstr "Na-save ang download"
+
+msgid "The download has not been stored"
+msgstr "Hindi na-save ang download"
+
+msgid "Download"
+msgstr "I-download"
+
+msgid "The download has been deleted"
+msgstr "Natanggal ang download"
+
+msgid "The download has not been deleted"
+msgstr "Hindi natanggal ang download"
+
+msgid "Download All"
+msgstr "Download Lahat"
+
+msgid "Attachments"
+msgstr "Mga kalakip"
+
+msgid "Save Download"
+msgstr "I-save ang download"
+
+msgid "Add Download"
+msgstr "Magdagdag ng download"
+
+msgid "Delete Download"
+msgstr "Tanggalin ang download"
+
+msgid "Add More File"
+msgstr "Magdagdag ng higit pa file"
+
+msgid "Delete Attachment"
+msgstr "Tanggalin ang kalakip"
+
+msgid "Downloads"
+msgstr "Mga download"
+
+msgid "grab"
+msgstr "kunin"
+
+msgid "Attachment"
+msgstr "Kalakip"
+
+msgid "Files"
+msgstr "Mga file"
+
+msgid "Help Desk"
+msgstr "Tulong desk"
+
+msgid "Get Help"
+msgstr "Get Tulong"
+
+msgid "Select Product"
+msgstr "Pumili ng produkto"
+
+msgid "Select license key"
+msgstr "Pumili ng license key"
+
+msgid "Email CC has been stored"
+msgstr "Na-save ang email cc"
+
+msgid "Email CC has not been stored"
+msgstr "Hindi na-save ang email cc"
+
+msgid "Email CC has been deleted"
+msgstr "Natanggal ang email cc"
+
+msgid "Email CC has not been deleted"
+msgstr "Hindi natanggal ang email cc"
+
+msgid "Email CC "
+msgstr "Email CC"
+
+msgid "Email CC"
+msgstr "Email CC"
+
+msgid "Template Type"
+msgstr "Uri ng template"
+
+msgid "Select Template Type"
+msgstr "Pumili ng uri ng template"
+
+msgid "Delete Row"
+msgstr "Tanggalin ang row"
+
+msgid "Add Email CC"
+msgstr "Magdagdag ng Email CC"
+
+msgid "Template For"
+msgstr "Para sa template"
+
+msgid "Select Template For"
+msgstr "Pumili ng para sa template"
+
+msgid "Template Title"
+msgstr "Pamagat ng template"
+
+msgid "Add More Row"
+msgstr "Magdagdag ng higit pa row"
+
+msgid "Save Email CC"
+msgstr "I-save ang Email CC"
+
+msgid "Service is running, please close the pag"
+msgstr "Tumatakbo ang serbisyo, pakisara ang pahina"
+
+msgid "Admin email address and email piping address cannot be the same, your email piping will not be work."
+msgstr "Hindi maaaring magkapareho ang admin email address at Email Piping address; hindi gagana ang iyong Email Piping."
+
+msgid "Your setting is working please this."
+msgstr "Gumagana ang iyong setting. Pakisuri ito."
+
+msgid "Connection established but the system cannot read any email"
+msgstr "Naitatag ang koneksyon ngunit hindi makabasa ng anumang email ang system."
+
+msgid "IMAP is either not installed or not enabled in your server. Contact to hosting company"
+msgstr "Hindi naka-install o hindi naka-enable ang IMAP sa iyong server. Makipag-ugnayan sa hosting company."
+
+msgid "The configuration has been stored"
+msgstr "Na-save ang configuration"
+
+msgid "The configuration not has been stored"
+msgstr "Na-save ang configuration not"
+
+msgid "Email address already exist"
+msgstr "Umiiral na ang email address"
+
+msgid "Email for email piping has been stored"
+msgstr "Na-save ang email para sa email piping"
+
+msgid "Email for email piping has not been stored"
+msgstr "Hindi na-save ang email para sa email piping"
+
+msgid "The email has been deleted"
+msgstr "Natanggal ang email"
+
+msgid "The email has not been deleted"
+msgstr "Hindi natanggal ang email"
+
+msgid "Enabled"
+msgstr "Pinagana"
+
+msgid "Only New Tickets"
+msgstr "Lamang Bago Mga tiket"
+
+msgid "Only Replies"
+msgstr "Lamang Mga tugon"
+
+msgid "Both"
+msgstr "Pareho"
+
+msgid "Gmail"
+msgstr "Gmail"
+
+msgid "Yahoo"
+msgstr "Yahoo"
+
+msgid "Aol"
+msgstr "Aol"
+
+msgid "Hotmail"
+msgstr "Hotmail"
+
+msgid "Other"
+msgstr "Iba pa"
+
+msgid "Yes"
+msgstr "Oo"
+
+msgid "No"
+msgstr "Hindi"
+
+msgid "Please enter the host name first"
+msgstr "Pakilagay muna ang host name"
+
+msgid "Please enable email piping setting first"
+msgstr "Pakipagana muna ang setting ng Email Piping"
+
+msgid "Add Email Piping"
+msgstr "Magdagdag ng Email Piping"
+
+msgid "Enable email piping"
+msgstr "Paganahin ang Email Piping"
+
+msgid "Ticket Type"
+msgstr "Uri ng tiket"
+
+msgid "Which email type to read"
+msgstr "Aling uri ng email ang babasahin"
+
+msgid "Save attachments if found in an email"
+msgstr "I-save ang mga kalakip kung mayroon sa email"
+
+msgid "Host Type"
+msgstr "Uri ng host"
+
+msgid "Select your email service provider"
+msgstr "Piliin ang iyong email service provider"
+
+msgid "Host Name"
+msgstr "Host name"
+
+msgid "Enabled SSL"
+msgstr "Pinaganang SSL"
+
+msgid "Do you have enabled SSL on your domain?"
+msgstr "Pinagana ba ang SSL sa iyong domain?"
+
+msgid "Host Port Number"
+msgstr "Numero ng host port"
+
+msgid "Host port number to read an email from"
+msgstr "Host port number na gagamitin sa pagbasa ng email"
+
+msgid "Email address to read emails"
+msgstr "Email address na pagbabasahan ng mga email"
+
+msgid "Password"
+msgstr "Password"
+
+msgid "Password for a given email address"
+msgstr "Password para sa ibinigay na email address"
+
+msgid "check"
+msgstr "suriin"
+
+msgid "Check Settings"
+msgstr "Suriin ang mga setting"
+
+msgid "If the system does not respond in 30 seconds"
+msgstr "Kung hindi tumugon ang system sa loob ng 30 segundo"
+
+msgid "it means system unable to connect email server"
+msgstr "ibig sabihin nito ay hindi makakonekta ang system sa email server"
+
+msgid "Save Settings"
+msgstr "I-save ang mga setting"
+
+msgid "Cron Job"
+msgstr "Cron Job"
+
+msgid "Web Cron Job"
+msgstr "Web Cron Job"
+
+msgid "Wget"
+msgstr "Wget"
+
+msgid "Curl"
+msgstr "Curl"
+
+msgid "PHP Script"
+msgstr "PHP Script"
+
+msgid "URL"
+msgstr "URL"
+
+msgid "Configuration of a backup job with webcron org"
+msgstr "Configuration ng backup job gamit ang webcron org"
+
+msgid "Name of cron job"
+msgstr "Pangalan ng Cron Job"
+
+msgid "Log in to webcron org in the cron area click on"
+msgstr "Mag-log in sa webcron.org; sa Cron area, i-click ang"
+
+msgid "Timeout"
+msgstr "Timeout"
+
+msgid "180 secs if the does not completely increase it most sites will work with a setting of 180 600"
+msgstr "180 segundo. Kung hindi ito nakukumpleto, dagdagan ito; karamihan sa mga site ay gagana sa setting na 180-600."
+
+msgid "URL you want to execute"
+msgstr "URL na gusto mong patakbuhin"
+
+msgid "Login"
+msgstr "Mag-login"
+
+msgid "Leave this blank"
+msgstr "Iwan itong blangko"
+
+msgid "Execution time"
+msgstr "Oras ng pagpapatakbo"
+
+msgid "That the grid below the other options select when and how"
+msgstr "Iyon ang grid below ang other options pumili when at how"
+
+msgid "Alerts"
+msgstr "Mga alerto"
+
+msgid "If you have already set up alerts methods in webcron org interface we recommend choosing an alert"
+msgstr "Kung nakapag-set up ka na ng alert methods sa interface ng webcron.org, inirerekomenda naming pumili ng alert."
+
+msgid "Cron scheduling using wget"
+msgstr "Pag-iskedyul ng Cron gamit ang wget"
+
+msgid "Cron scheduling using Curl"
+msgstr "Pag-iskedyul ng Cron gamit ang Curl"
+
+msgid "Custom PHP script to run the cron job"
+msgstr "Custom PHP script sa run ang cron job"
+
+msgid "Sorry, the cron job did not work"
+msgstr "Paumanhin, hindi gumana ang Cron Job"
+
+msgid "URL for use with your own scripts and third party"
+msgstr "URL na gagamitin sa sarili mong scripts at third party"
+
+msgid "Recommended run script hourly"
+msgstr "Inirerekomendang patakbuhin ang script kada oras"
+
+msgid "Email Piping"
+msgstr "Email Piping"
+
+msgid "Ticket Email Type"
+msgstr "Uri ng email ng tiket"
+
+msgid "ticket email"
+msgstr "email ng tiket"
+
+msgid "Overall Reports"
+msgstr "Pangkalahatang mga ulat"
+
+msgid "Agents Report"
+msgstr "Ulat ng mga ahente"
+
+msgid "Department Report"
+msgstr "Ulat ng departamento"
+
+msgid "Departments Report"
+msgstr "Ulat ng mga departamento"
+
+msgid "Tickets"
+msgstr "Mga tiket"
+
+msgid "JS Support Ticket Overall Reports"
+msgstr "JS Tiket ng suporta Overall Reports"
+
+msgid "Tickets By Statuses"
+msgstr "Mga tiket ayon sa katayuan"
+
+msgid "Tickets By Departments"
+msgstr "Mga tiket ayon sa departamento"
+
+msgid "Tickets By Priorities"
+msgstr "Mga tiket ayon sa priyoridad"
+
+msgid "Tickets By Channels"
+msgstr "Mga tiket ayon sa channel"
+
+msgid "Direct"
+msgstr "Direkta"
+
+msgid "Direct reply"
+msgstr "Direct tugon"
+
+msgid "Email reply"
+msgstr "Tugon sa email"
+
+msgid "Tickets By staff"
+msgstr "Mga tiket Ni kawani"
+
+msgid "Report By"
+msgstr "Ulat Ni"
+
+msgid "staff member"
+msgstr "kawani member"
+
+msgid "To"
+msgstr "Sa"
+
+msgid "Report By Staff Members"
+msgstr "Ulat Ni Kawani Members"
+
+msgid "Ticket status by days"
+msgstr "Katayuan ng tiket ni araw"
+
+msgid "Date"
+msgstr "Petsa"
+
+msgid "Tickets Staff"
+msgstr "Mga tiket Kawani"
+
+msgid "Average Rating"
+msgstr "Average na rating"
+
+msgid "Average Time"
+msgstr "Average na oras"
+
+msgid "Report By Staff Member"
+msgstr "Ulat Ni Kawani Member"
+
+msgid "Rating"
+msgstr "Rating"
+
+msgid "Time"
+msgstr "Oras"
+
+msgid "Report By department"
+msgstr "Ulat Ni departamento"
+
+msgid "Department Name"
+msgstr "Departamento Pangalan"
+
+msgid "User report"
+msgstr "Gumagamit ulat"
+
+msgid "Users report"
+msgstr "Mga gumagamit ulat"
+
+msgid "Users Tickets"
+msgstr "Mga gumagamit Mga tiket"
+
+msgid "User Report"
+msgstr "Ulat ng gumagamit"
+
+msgid "Report By Departments"
+msgstr "Ulat Ni Mga departamento"
+
+msgid "Tickets Data"
+msgstr "Mga tiket Data"
+
+msgid "Message"
+msgstr "Mensahe"
+
+msgid "Assigned To"
+msgstr "Assigned Sa"
+
+msgid "Updated"
+msgstr "Na-update"
+
+msgid "Due Date"
+msgstr "Takdang petsa"
+
+msgid "Closed Date"
+msgstr "Petsa ng pagsasara"
+
+msgid "Closed Time"
+msgstr "Oras ng pagsasara"
+
+msgid "Requester User Name"
+msgstr "Requester pangalan ng gumagamit"
+
+msgid "Requester Name"
+msgstr "Requester Pangalan"
+
+msgid "Requester Email"
+msgstr "Email ng humiling"
+
+msgid "Requester Phone"
+msgstr "Requester Telepono"
+
+msgid "Requester help Topic"
+msgstr "Requester paksa ng tulong"
+
+msgid "Ticket Attachment"
+msgstr "Tiket Kalakip"
+
+msgid "Posted By"
+msgstr "Posted Ni"
+
+msgid "Note Title"
+msgstr "Tala Pamagat"
+
+msgid "Note Message"
+msgstr "Tala Mensahe"
+
+msgid "Posted Date"
+msgstr "Posted Petsa"
+
+msgid "Note Attachment"
+msgstr "Tala Kalakip"
+
+msgid "User Time"
+msgstr "Gumagamit Oras"
+
+msgid "System Time"
+msgstr "System Oras"
+
+msgid "Edit Reason"
+msgstr "I-edit ang reason"
+
+msgid "Reply Date"
+msgstr "Tugon Petsa"
+
+msgid "Reply By"
+msgstr "Tugon Ni"
+
+msgid "Reply Attachment"
+msgstr "Tugon Kalakip"
+
+msgid "Total Tracking Time"
+msgstr "Total Tracking Oras"
+
+msgid "In Progress"
+msgstr "Sa Progress"
+
+msgid "Export"
+msgstr "I-export"
+
+msgid "Ticket Status"
+msgstr "Katayuan ng tiket"
+
+msgid "Select Ticket Status"
+msgstr "Pumili ng katayuan ng tiket"
+
+msgid "Ticket Overdue"
+msgstr "Tiket Overdue"
+
+msgid "Select Ticket Overdue Status"
+msgstr "Pumili ng tiket overdue katayuan"
+
+msgid "Export Style"
+msgstr "I-export Style"
+
+msgid "Single Header"
+msgstr "Isang header"
+
+msgid "Multiple Header"
+msgstr "Maramihang header"
+
+msgid "FAQ has been stored"
+msgstr "Na-save ang faq"
+
+msgid "FAQ has not been stored"
+msgstr "Hindi na-save ang faq"
+
+msgid "FAQ has been deleted"
+msgstr "Natanggal ang faq"
+
+msgid "FAQ has not been deleted"
+msgstr "Hindi natanggal ang faq"
+
+msgid "FAQ"
+msgstr "FAQ"
+
+msgid "Save FAQ"
+msgstr "I-save ang faq"
+
+msgid "Add FAQ"
+msgstr "Magdagdag ng faq"
+
+msgid "Content"
+msgstr "Nilalaman"
+
+msgid "FAQ'S"
+msgstr "Mga FAQ"
+
+msgid "Search Title"
+msgstr "Maghanap Pamagat"
+
+msgid "Search Keywords"
+msgstr "Maghanap Keywords"
+
+msgid "FAQs"
+msgstr "Mga FAQ"
+
+msgid "Subcategory FAQs"
+msgstr "Subcategory Mga FAQ"
+
+msgid "Feedback has been stored"
+msgstr "Na-save ang feedback"
+
+msgid "Feedback has not been stored"
+msgstr "Hindi na-save ang feedback"
+
+msgid "user image"
+msgstr "gumagamit larawan"
+
+msgid "feedback image"
+msgstr "feedback larawan"
+
+msgid "Feedback"
+msgstr "Feedback"
+
+msgid "Latest Feedback"
+msgstr "Pinakabago Feedback"
+
+msgid "Submit Feedback"
+msgstr "Isumite Feedback"
+
+msgid "Help topic has been stored"
+msgstr "Na-save ang paksa ng tulong"
+
+msgid "Help topic has not been stored"
+msgstr "Hindi na-save ang paksa ng tulong"
+
+msgid "Help topic has been deleted"
+msgstr "Natanggal ang paksa ng tulong"
+
+msgid "Help topic has not been deleted"
+msgstr "Hindi natanggal ang paksa ng tulong"
+
+msgid "Help topic in use cannot be deleting"
+msgstr "Hindi maaaring tanggalin ang paksa ng tulong dahil ginagamit ito"
+
+msgid "Help topic"
+msgstr "Paksa ng tulong"
+
+msgid "Help Topic"
+msgstr "Paksa ng tulong"
+
+msgid "Save Help Topic"
+msgstr "I-save ang paksa ng tulong"
+
+msgid "Add Help Topic"
+msgstr "Magdagdag ng paksa ng tulong"
+
+msgid "Help Topics"
+msgstr "Mga paksa ng tulong"
+
+msgid "The category has been stored"
+msgstr "Na-save ang kategorya"
+
+msgid "The category has not been stored"
+msgstr "Hindi na-save ang kategorya"
+
+msgid "The category has been deleted"
+msgstr "Natanggal ang kategorya"
+
+msgid "The category has not been deleted"
+msgstr "Hindi natanggal ang kategorya"
+
+msgid "The category in use cannot be deleting"
+msgstr "Hindi maaaring tanggalin ang kategorya dahil ginagamit ito"
+
+msgid "Knowledgebase article has been stored"
+msgstr "Na-save ang knowledgebase artikulo"
+
+msgid "Knowledgebase article has not been stored"
+msgstr "Hindi na-save ang knowledgebase artikulo"
+
+msgid "The article has been deleted"
+msgstr "Natanggal ang artikulo"
+
+msgid "The article has not been deleted"
+msgstr "Hindi natanggal ang artikulo"
+
+msgid "Article"
+msgstr "Artikulo"
+
+msgid "The parent category does not have this type."
+msgstr "Walang ganitong uri ang parent category."
+
+msgid "Would you like to add this type to Parent Category?"
+msgstr "Gusto mo bang idagdag ang uring ito sa parent category?"
+
+msgid "Child category has this type,"
+msgstr "Child kategorya has ito type,"
+
+msgid "You cannot unmark it."
+msgstr "Ikaw hindi maaari unmark ito."
+
+msgid "Draft"
+msgstr "Draft"
+
+msgid "Meta Description"
+msgstr "Meta Paglalarawan"
+
+msgid "Meta Keywords"
+msgstr "Meta keyword"
+
+msgid "Save Knowledge Base"
+msgstr "I-save ang knowledge base"
+
+msgid "Please select at least one category for"
+msgstr "Paki-pumili at least one kategorya para sa"
+
+msgid "Category For"
+msgstr "Kategorya Para sa"
+
+msgid "Knowledge Base"
+msgstr "Knowledge Base"
+
+msgid "Logo"
+msgstr "Logo"
+
+msgid "Save Category"
+msgstr "I-save ang kategorya"
+
+msgid "Add Knowledge Base"
+msgstr "Magdagdag ng knowledge base"
+
+msgid "Meta Data Options"
+msgstr "Mga opsyon sa metadata"
+
+msgid "Add Category"
+msgstr "Magdagdag ng kategorya"
+
+msgid "Category Title"
+msgstr "Kategorya Pamagat"
+
+msgid "Article Attachments"
+msgstr "Artikulo Mga kalakip"
+
+msgid "Article Attachment"
+msgstr "Artikulo Kalakip"
+
+msgid "Subcategory Knowledge Base"
+msgstr "Subcategory knowledge base"
+
+msgid "Mail has not been marked as read"
+msgstr "Mail ay hindi na marked bilang read"
+
+msgid "Mail has been marked as read"
+msgstr "Mail ay na marked bilang read"
+
+msgid "Message field cannot be empty"
+msgstr "Hindi maaaring walang laman ang field ng mensahe"
+
+msgid "Mail has been sent"
+msgstr "Mail ay na sent"
+
+msgid "Mail has not been sent"
+msgstr "Mail ay hindi na sent"
+
+msgid "Mail has been deleted"
+msgstr "Natanggal ang mail"
+
+msgid "Mail has not been deleted"
+msgstr "Hindi natanggal ang mail"
+
+msgid "Mail"
+msgstr "Mail"
+
+msgid "is in use cannot be delete"
+msgstr "Ginagamit ito at hindi maaaring tanggalin"
+
+msgid "Mail cannot mark as to read"
+msgstr "Mail hindi maaari mark bilang sa read"
+
+msgid "Mail cannot mark as unread"
+msgstr "Mail hindi maaari mark bilang unread"
+
+msgid "Mail has been marked as unread"
+msgstr "Mail ay na marked bilang unread"
+
+msgid "Compose"
+msgstr "Gumawa"
+
+msgid "Inbox"
+msgstr "Inbox"
+
+msgid "Outbox"
+msgstr "Outbox"
+
+msgid "Send"
+msgstr "Ipadala"
+
+msgid "Read"
+msgstr "Nabasa"
+
+msgid "Unread"
+msgstr "Hindi pa nababasa"
+
+msgid "Select Type"
+msgstr "Pumili ng uri"
+
+msgid "To use this feature you must be agent"
+msgstr "Upang magamit ang tampok na ito, kailangan mong maging ahente ng suporta"
+
+msgid "To use this feature you must have agents addon."
+msgstr "Upang magamit ang tampok na ito, kailangan mong magkaroon ng Add-on para sa mga ahente ng suporta."
+
+msgid "Re"
+msgstr "Re"
+
+msgid "mark read"
+msgstr "markahan bilang nabasa"
+
+msgid "mark unread"
+msgstr "markahan bilang hindi nabasa"
+
+msgid "Replied By"
+msgstr "Replied Ni"
+
+msgid "Reply"
+msgstr "Tugon"
+
+msgid "Type Message"
+msgstr "I-type ang mensahe"
+
+msgid "Replies"
+msgstr "Mga tugon"
+
+msgid "Limit exceeds maximum tickets"
+msgstr "Limit exceeds maximum mga tiket"
+
+msgid "The maximum number of open tickets limit has been exceeded."
+msgstr "Ang maximum number ng bukas mga tiket limit ay na exceeded."
+
+msgid "Ticket has been closed due to merged with"
+msgstr "Tiket ay na sarado due sa merged kasama ang"
+
+msgid "Ticket"
+msgstr "Tiket"
+
+msgid "has been merged into"
+msgstr "ay na merged into"
+
+msgid "Merge Ticket"
+msgstr "Pagsamahin Tiket"
+
+msgid "Search ticket to merge into"
+msgstr "Maghanap tiket sa pagsamahin into"
+
+msgid "Edit Last Reply"
+msgstr "I-edit ang huling tugon"
+
+msgid "Merge Ticket Latest Reply"
+msgstr "Pagsamahin Tiket Pinakabago Tugon"
+
+msgid "Merge"
+msgstr "Pagsamahin"
+
+msgid "Ticket has been merged"
+msgstr "Tiket ay na merged"
+
+msgid "Ticket has not been merged"
+msgstr "Tiket ay hindi na merged"
+
+msgid "Disabled form cannot be set as default"
+msgstr "Hindi maaaring set bilang default ang hindi pinagana form"
+
+msgid "Form has been stored"
+msgstr "Na-save ang form"
+
+msgid "Form has not been stored"
+msgstr "Hindi na-save ang form"
+
+msgid "Multiform has been deleted"
+msgstr "Natanggal ang multiform"
+
+msgid "Multiform has not been deleted"
+msgstr "Hindi natanggal ang multiform"
+
+msgid "Multiform in use"
+msgstr "Multiform ginagamit"
+
+msgid " cannot deleted"
+msgstr "hindi maaari natanggal"
+
+msgid "Default form cannot be set as disabled"
+msgstr "Hindi maaaring set bilang hindi pinagana ang default form"
+
+msgid "Multiform"
+msgstr "Multiform"
+
+msgid "default has not been changed"
+msgstr "Hindi nabago ang default"
+
+msgid "default has been changed"
+msgstr "Nabago ang default"
+
+msgid "Create Ticket"
+msgstr "Gumawa Tiket"
+
+msgid "Email template has not been stored"
+msgstr "Hindi na-save ang template ng email"
+
+msgid "Required Field(s) are not filled"
+msgstr "Hindi napunan ang mga kinakailangang field"
+
+msgid "Email template already exist"
+msgstr "Umiiral na ang template ng email"
+
+msgid "Email template has been stored"
+msgstr "Na-save ang template ng email"
+
+msgid "Add Multiform"
+msgstr "Magdagdag ng multiform"
+
+msgid "Default"
+msgstr "Default"
+
+msgid "Save Multiform"
+msgstr "I-save ang multiform"
+
+msgid "Fields"
+msgstr "Mga field"
+
+msgid "Edit Fields"
+msgstr "I-edit ang mga field"
+
+msgid "spinning wheel"
+msgstr "umiikot na wheel"
+
+msgid "Select Languages"
+msgstr "Pumili ng languages"
+
+msgid "Select Language"
+msgstr "Pumili ng wika"
+
+msgid "Email Template has been successfully deleted"
+msgstr "Matagumpay na natanggal ang template ng email"
+
+msgid "The internal note has been posted"
+msgstr "Ang panloob na tala ay na posted"
+
+msgid "The internal note has not been posted"
+msgstr "Ang panloob na tala ay hindi na posted"
+
+msgid "Post Internal Note"
+msgstr "Post panloob na tala"
+
+msgid "The internal note is posted by"
+msgstr "Ang panloob na tala ay nai-post ni"
+
+msgid "Ticket Notification"
+msgstr "Tiket Abiso"
+
+msgid "Once Weekly"
+msgstr "Minsan bawat linggo"
+
+msgid "JS Support Ticket"
+msgstr "JS Tiket ng suporta"
+
+msgid "Thanks for subscribing!"
+msgstr "Thanks para sa subscribing!"
+
+msgid "Ticket already marked overdue"
+msgstr "Namarkahan na ang tiket bilang lampas sa takdang oras"
+
+msgid "The ticket has been marked as overdue"
+msgstr "Ang tiket ay na marked bilang overdue"
+
+msgid "The ticket has not been marked as overdue"
+msgstr "Ang tiket ay hindi na marked bilang overdue"
+
+msgid "System"
+msgstr "System"
+
+msgid "Mark Overdue"
+msgstr "Markahan bilang lampas sa takdang oras"
+
+msgid "The ticket is marked as overdue by"
+msgstr "Ang tiket ay minarkahang lampas sa takdang oras ni"
+
+msgid "The ticket has been unmarked as overdue"
+msgstr "Ang tiket ay na unmarked bilang overdue"
+
+msgid "The ticket has not been unmarked as overdue"
+msgstr "Ang tiket ay hindi na unmarked bilang overdue"
+
+msgid "Unmark Overdue"
+msgstr "Alisin ang markang lampas sa takdang oras"
+
+msgid "The ticket is unmarked as overdue by"
+msgstr "Ang markang lampas sa takdang oras ng tiket ay inalis ni"
+
+msgid "Paid Support"
+msgstr "Bayad na suporta"
+
+msgid "Check if you want to use this product for paid support"
+msgstr "Lagyan ng check kung gusto mong gamitin ang produktong ito para sa bayad na suporta"
+
+msgid "Paid support type"
+msgstr "Uri ng bayad na suporta"
+
+msgid "One-off Support"
+msgstr "Isahang suporta"
+
+msgid "Subscription Support"
+msgstr "Suporta sa subscription"
+
+msgid "Number of tickets"
+msgstr "Number ng mga tiket"
+
+msgid "Enter allowed number of tickets that customer can post. Enter -1 for unlimited tickets."
+msgstr "Ilagay ang pinapayagang bilang ng mga tiket na maaaring isumite ng kliyente. Ilagay ang -1 para sa walang limitasyong tiket."
+
+msgid "Credential Type"
+msgstr "Uri ng kredensyal"
+
+msgid "Additional Info"
+msgstr "Karagdagang impormasyon"
+
+msgid "Please insert values"
+msgstr "Paki-insert mga halaga"
+
+msgid "Visitor"
+msgstr "Bisita"
+
+msgid "By"
+msgstr "Ni"
+
+msgid "Credential removed on ticket close"
+msgstr "Credential removed sa tiket isara"
+
+msgid "Failed to retrieve data"
+msgstr "Nabigo sa retrieve data"
+
+msgid "Social Login"
+msgstr "Social Pag-login"
+
+msgid "Facebook user"
+msgstr "Facebook gumagamit"
+
+msgid "Linkedin user"
+msgstr "Linkedin gumagamit"
+
+msgid "You are logged in"
+msgstr "Naka-log in ka"
+
+msgid "You are logged out"
+msgstr "Naka-log out ka"
+
+msgid "The new theme has been applied"
+msgstr "Ang bago theme ay na applied"
+
+msgid "Error applying the new theme"
+msgstr "Nagkaroon ng error sa paglalapat ng bagong tema"
+
+msgid "Themes"
+msgstr "Mga tema"
+
+msgid "Color Chooser"
+msgstr "Kulay Chooser"
+
+msgid "Preset Theme"
+msgstr "Preset na tema"
+
+msgid "Color 1"
+msgstr "Kulay 1"
+
+msgid "Top menu heading background"
+msgstr "Itaas menu heading background"
+
+msgid "Color 2"
+msgstr "Kulay 2"
+
+msgid "Top header line color"
+msgstr "Itaas header line kulay"
+
+msgid "Button Hover"
+msgstr "Hover ng button"
+
+msgid "Heading text"
+msgstr "Teksto ng heading"
+
+msgid "Color 3"
+msgstr "Kulay 3"
+
+msgid "Content Background Color"
+msgstr "Nilalaman Background Kulay"
+
+msgid "Color 4"
+msgstr "Kulay 4"
+
+msgid "Content Text Color"
+msgstr "Nilalaman Text Kulay"
+
+msgid "Color 5"
+msgstr "Kulay 5"
+
+msgid "Border color"
+msgstr "Border kulay"
+
+msgid "Lines"
+msgstr "Mga linya"
+
+msgid "Color 6"
+msgstr "Kulay 6"
+
+msgid "Button Color"
+msgstr "Button Kulay"
+
+msgid "Color 7"
+msgstr "Kulay 7"
+
+msgid "Top header text color"
+msgstr "Itaas header text kulay"
+
+msgid "Save Theme"
+msgstr "I-save ang tema"
+
+msgid "Color Effect Preview"
+msgstr "Preview ng epekto ng kulay"
+
+msgid "Blue"
+msgstr "Asul"
+
+msgid "Red"
+msgstr "Pula"
+
+msgid "Greenish"
+msgstr "Maberde"
+
+msgid "Purple"
+msgstr "Lila"
+
+msgid "Orange"
+msgstr "Orange"
+
+msgid "Green"
+msgstr "Berde"
+
+msgid "Black"
+msgstr "Itim"
+
+msgid "Mail Notification Widget"
+msgstr "Widget ng notification sa email"
+
+msgid "Show newly and reply mail notifications"
+msgstr "Ipakita ang mga bagong abiso at tugon sa mail"
+
+msgid "New mail from"
+msgstr "Bagong mail mula kay"
+
+msgid "Mail Notification"
+msgstr "Abiso sa mail"
+
+msgid "Layout"
+msgstr "Layout"
+
+msgid "Vertical"
+msgstr "Patayo"
+
+msgid "Horizontal"
+msgstr "Pahalang"
+
+msgid "Max Record"
+msgstr "Pinakamaraming record"
+
+msgid "My Ticket Widget"
+msgstr "Widget ng aking tiket"
+
+msgid "Show unanswered tickets"
+msgstr "Ipakita ang mga hindi nasagutang tiket"
+
+msgid "Waiting Reply"
+msgstr "Naghihintay ng tugon"
+
+msgid "My Tickets"
+msgstr "Aking mga tiket"
+
+msgid "Order tickets"
+msgstr "Ayusin ang mga tiket"
+
+msgid "Product"
+msgstr "Produkto"
+
+msgid "Order"
+msgstr "Order"
+
+msgid "Please select %1$s and Enter your license key and hit to authenticate. A valid key is required for updates."
+msgstr "Pakipili ang %1$s, ilagay ang iyong license key, at i-authenticate. Kailangan ang valid na key para sa mga update."
+
+msgid "Lost your key? %s."
+msgstr "Nawala ang iyong key? %s."
+
+msgid "Retrieve it here"
+msgstr "Kunin ito dito"
+
+msgid "Control Panel"
+msgstr "Control Panel"
+
+msgid "Announcement Detail"
+msgstr "Detalye ng anunsyo"
+
+msgid "Edit Announcement"
+msgstr "I-edit ang anunsyo"
+
+msgid "Departments"
+msgstr "Mga departamento"
+
+msgid "Add Department"
+msgstr "Magdagdag ng departamento"
+
+msgid "Edit Department"
+msgstr "I-edit ang departamento"
+
+msgid "Agent Reports"
+msgstr "Mga ulat ng ahente"
+
+msgid "Departments report"
+msgstr "Mga departamento ulat"
+
+msgid "Edit Download"
+msgstr "I-edit ang download"
+
+msgid "Edit FAQ"
+msgstr "I-edit ang FAQ"
+
+msgid "FAQ Detail"
+msgstr "Detalye ng FAQ"
+
+msgid "Edit Knowledge Base"
+msgstr "I-edit ang Knowledge Base"
+
+msgid "Edit Category"
+msgstr "I-edit ang kategorya"
+
+msgid "Knowledge Base Detail"
+msgstr "Detalye ng Knowledge Base"
+
+msgid "Send Message"
+msgstr "Magpadala ng mensahe"
+
+msgid "Edit Role"
+msgstr "I-edit ang tungkulin"
+
+msgid "Staffs"
+msgstr "Mga kawani"
+
+msgid "Edit Agent"
+msgstr "I-edit ang ahente"
+
+msgid "Agent Permissions"
+msgstr "Mga pahintulot ng ahente"
+
+msgid "Add Ticket"
+msgstr "Magdagdag ng tiket"
+
+msgid "Edit Ticket"
+msgstr "I-edit ang tiket"
+
+msgid "Ticket Details"
+msgstr "Mga detalye ng tiket"
+
+msgid "home icon"
+msgstr "icon ng home"
+
+msgid "Plus"
+msgstr "Dagdag"
+
+msgid "Equals"
+msgstr "Katumbas"
+
+msgid "Minus"
+msgstr "Bawas"
+
+msgid "stars"
+msgstr "mga bituin"
+
+msgid "Please write appreciated review at WP Extension Directory"
+msgstr "Mangyaring magsulat ng review sa WP Extension Directory"
+
+msgid "We'd love to hear from you. It'll only take 2 minutes of your time, and will really help us spread the word"
+msgstr "Gusto naming marinig ang iyong opinyon. Aabutin lamang ito ng 2 minuto at makakatulong sa amin na maipakalat ang balita"
+
+msgid "love"
+msgstr "pagmamahal"
+
+msgid "I'd love to help :)"
+msgstr "I'd love sa tulong :)"
+
+msgid "Sad"
+msgstr "Malungkot"
+
+msgid "Not this time"
+msgstr "Hindi ngayon"
+
+msgid "Happy"
+msgstr "Masaya"
+
+msgid "I've already rated you"
+msgstr "I've na rated you"
+
+msgid "thanks"
+msgstr "salamat"
+
+msgid "You are awesome !......"
+msgstr "Napakahusay mo!......"
+
+msgid "Thanks for your support, we really appreciate it."
+msgstr "Thanks para sa iyong support, kami really appreciate ito."
+
+msgid "JS Help Desk Team"
+msgstr "JS Help Desk Team"
+
+msgid "Remind you about this later?"
+msgstr "Remind ikaw about ito later?"
+
+msgid "Remind me in 3 days"
+msgstr "Remind me sa 3 araw"
+
+msgid "Remind me in 10 days"
+msgstr "Remind me sa 10 araw"
+
+msgid "Remind me in 30 days"
+msgstr "Remind me sa 30 araw"
+
+msgid "Don't remind me about this"
+msgstr "Don't remind me about ito"
+
+msgid "JS HelpDesk System"
+msgstr "JS HelpDesk System"
+
+msgid "JS HelpDesk"
+msgstr "JS HelpDesk"
+
+msgid "Main"
+msgstr "Pangunahin"
+
+msgid "Translations"
+msgstr "Mga pagsasalin"
+
+msgid "System Errors"
+msgstr "Mga error sa system"
+
+msgid "Slug"
+msgstr "slug"
+
+msgid "Ticket Management"
+msgstr "Tiket Management"
+
+msgid "Priorities"
+msgstr "Mga priyoridad"
+
+msgid "Add Priority"
+msgstr "Magdagdag ng priyoridad"
+
+msgid "Ticket Statuses"
+msgstr "Tiket Statuses"
+
+msgid "Add Status"
+msgstr "Magdagdag ng katayuan"
+
+msgid "Add Ticket Status"
+msgstr "Magdagdag ng katayuan ng tiket"
+
+msgid "Feedback Fields"
+msgstr "Mga field ng feedback"
+
+msgid "User Management"
+msgstr "Gumagamit Management"
+
+msgid "Agent Auto Assign"
+msgstr "Ahente Auto Italaga"
+
+msgid "Agent auto assign"
+msgstr "Ahente auto italaga"
+
+msgid "Auto Assign"
+msgstr "Auto Italaga"
+
+msgid "Configurations"
+msgstr "Mga configuration"
+
+msgid "Cron Job URLs"
+msgstr "Mga URL ng Cron Job"
+
+msgid "Zywrap AI"
+msgstr "Zywrap AI"
+
+msgid "Zywrap Dashboard"
+msgstr "Zywrap Dashboard"
+
+msgid "Settings"
+msgstr "Mga setting"
+
+msgid "Playground"
+msgstr "Playground"
+
+msgid "Audit Logs"
+msgstr "Mga audit log"
+
+msgid "API Errors"
+msgstr "Mga API error"
+
+msgid "Addons"
+msgstr "Mga Add-on"
+
+msgid "Install Addons"
+msgstr "Mag-install ng mga Add-on"
+
+msgid "Addons Status"
+msgstr "Addons Katayuan"
+
+msgid "Update Key"
+msgstr "I-update Key"
+
+msgid "Addons List"
+msgstr "Listahan ng mga Add-on"
+
+msgid "Content & Knowledge"
+msgstr "Nilalaman & Knowledge"
+
+msgid "FAQ's"
+msgstr "Mga FAQ"
+
+msgid "Email & Communication"
+msgstr "Email at komunikasyon"
+
+msgid "System Emails"
+msgstr "Mga system email"
+
+msgid "Add Email"
+msgstr "Magdagdag ng email"
+
+msgid "Email Templates"
+msgstr "Mga template ng email"
+
+msgid "New Ticket"
+msgstr "Bago Tiket"
+
+msgid "Agent Ticket"
+msgstr "Ahente Tiket"
+
+msgid "New Agent"
+msgstr "Bago Ahente"
+
+msgid "Reassign Ticket"
+msgstr "Reassign Tiket"
+
+msgid "Close Ticket"
+msgstr "Isara Tiket"
+
+msgid "Delete Ticket"
+msgstr "Tanggalin ang tiket"
+
+msgid "Ban Email"
+msgstr "I-ban ang email"
+
+msgid "Ban email try to create ticket"
+msgstr "Naka-ban na email na sumusubok gumawa ng tiket"
+
+msgid "Department Transfer"
+msgstr "Departamento Transfer"
+
+msgid "Ban Email And Close Ticket"
+msgstr "I-ban ang email at isara ang tiket"
+
+msgid "Duedate Ticket"
+msgstr "Duedate Tiket"
+
+msgid "New Ticket Notification"
+msgstr "Bago Tiket Abiso"
+
+msgid "Edit Own Time"
+msgstr "I-edit ang sarili oras"
+
+msgid "View Feedback"
+msgstr "Tingnan ang feedback"
+
+msgid "Ticket Merge"
+msgstr "Tiket Pagsamahin"
+
+msgid "View Credentials"
+msgstr "Tingnan ang credentials"
+
+msgid "Delete Credentials"
+msgstr "Tanggalin ang credentials"
+
+msgid "Edit Credentials"
+msgstr "I-edit ang credentials"
+
+msgid "Add Credentials"
+msgstr "Magdagdag ng credentials"
+
+msgid "Link To Paid Support"
+msgstr "Link papunta sa bayad na suporta"
+
+msgid "Change Ticket Status"
+msgstr "Baguhin katayuan ng tiket"
+
+msgid "Assign Role Permissions"
+msgstr "Italaga Tungkulin Mga pahintulot"
+
+msgid "Assign Role To User"
+msgstr "Italaga Tungkulin Sa Gumagamit"
+
+msgid "Add User"
+msgstr "Magdagdag ng gumagamit"
+
+msgid "Edit User"
+msgstr "I-edit ang gumagamit"
+
+msgid "Assign User Permissions"
+msgstr "Italaga Gumagamit Mga pahintulot"
+
+msgid "Delete Department"
+msgstr "Tanggalin ang departamento"
+
+msgid "View Department"
+msgstr "Tingnan ang departamento"
+
+msgid "Delete Role"
+msgstr "Tanggalin ang tungkulin"
+
+msgid "Delete User"
+msgstr "Tanggalin ang gumagamit"
+
+msgid "Mail To Agent"
+msgstr "Mail Sa Ahente"
+
+msgid "View Role"
+msgstr "Tingnan ang tungkulin"
+
+msgid "View User"
+msgstr "Tingnan ang gumagamit"
+
+msgid "View Agent Reports"
+msgstr "Tingnan ang mga ulat ng ahente"
+
+msgid "View Department Reports"
+msgstr "Tingnan ang mga ulat ng departamento"
+
+msgid "Delete Category"
+msgstr "Tanggalin ang kategorya"
+
+msgid "View Category"
+msgstr "Tingnan ang kategorya"
+
+msgid "View Knowledge Base"
+msgstr "Tingnan ang knowledge base"
+
+msgid "Delete Knowledge Base"
+msgstr "Tanggalin ang knowledge base"
+
+msgid "View FAQ"
+msgstr "Tingnan ang faq"
+
+msgid "Delete FAQ"
+msgstr "Tanggalin ang faq"
+
+msgid "View Download"
+msgstr "Tingnan ang download"
+
+msgid "Delete Announcement"
+msgstr "Tanggalin ang anunsyo"
+
+msgid "Allow Mail System"
+msgstr "Payagan ang mail system"
+
+msgid "Edit Help Topic"
+msgstr "I-edit ang paksa ng tulong"
+
+msgid "View Help Topic"
+msgstr "Tingnan ang paksa ng tulong"
+
+msgid "Delete Help Topic"
+msgstr "Tanggalin ang paksa ng tulong"
+
+msgid "Edit Canned Response"
+msgstr "I-edit ang nakahandang tugon"
+
+msgid "View Canned Response"
+msgstr "Tingnan ang nakahandang tugon"
+
+msgid "Delete Canned Response"
+msgstr "Tanggalin ang nakahandang tugon"
+
+msgid "Use AI Powered Reply Feature"
+msgstr "Gamitin ang tampok na tugon na pinapagana ng AI"
+
+msgid "Set AI Reply Mode for Ticket"
+msgstr "Set AI Tugon Mode para sa Tiket"
+
+msgid "Set AI Reply Mode for Reply"
+msgstr "Set AI Tugon Mode para sa Tugon"
+
+msgid "Limit AI Replies to Agent-Assigned Tickets"
+msgstr "Limit AI Mga tugon sa Agent-Assigned Mga tiket"
+
+msgid "Mark Non Premium"
+msgstr "Markahan bilang hindi premium"
+
+msgid "Release Ticket"
+msgstr "Release Tiket"
+
+msgid "Unban Email"
+msgstr "Alisin sa ban ang email"
+
+msgid "Response Ticket"
+msgstr "Tiket ng tugon"
+
+msgid "Reply Ticket"
+msgstr "Tugon Tiket"
+
+msgid "New Ticket Admin Alert"
+msgstr "Bago Tiket Admin Alert"
+
+msgid "In Progress Ticket"
+msgstr "Sa Progress Tiket"
+
+msgid "Ticket Priority Is Changed By"
+msgstr "Ang prayoridad ng tiket ay binago ni"
+
+msgid "New Mail Received"
+msgstr "Bago Mail Received"
+
+msgid "New Mail Message Received"
+msgstr "Bago Mail Mensahe Received"
+
+msgid "Feedback Email To User"
+msgstr "Feedback email sa gumagamit"
+
+msgid "User Reply On Closed Ticket"
+msgstr "Gumagamit Tugon Sa Sarado Tiket"
+
+msgid "Ban Emails"
+msgstr "I-ban ang mga email"
+
+msgid "Products & Sales"
+msgstr "Mga produkto & Sales"
+
+msgid "Products"
+msgstr "Mga produkto"
+
+msgid "Add Product"
+msgstr "Magdagdag ng produkto"
+
+msgid "System & Settings"
+msgstr "System at mga setting"
+
+msgid "Shortcodes"
+msgstr "Mga shortcode"
+
+msgid "Import Data"
+msgstr "Mag-import ng data"
+
+msgid "GDPR"
+msgstr "GDPR"
+
+msgid "GDPR Fields"
+msgstr "Mga field ng GDPR"
+
+msgid "Erase Data Requests"
+msgstr "Mga kahilingan sa pagbura ng data"
+
+msgid "Reports"
+msgstr "Mga ulat"
+
+msgid "Overall Statistics"
+msgstr "Overall Estadistika"
+
+msgid "Department Reports"
+msgstr "Mga ulat ng departamento"
+
+msgid "User Reports"
+msgstr "Mga ulat ng gumagamit"
+
+msgid "Satisfaction Report"
+msgstr "Ulat ng kasiyahan"
+
+msgid "Select Form"
+msgstr "Pumili ng form"
+
+msgid "No Record Found"
+msgstr "Hindi Record Found"
+
+msgid "Log Out"
+msgstr "Mag-logout"
+
+msgid "div"
+msgstr "div"
+
+msgid "iframe"
+msgstr "iframe"
+
+msgid "Username / password is incorrect"
+msgstr "Mali ang username o password"
+
+msgid "Username already taken"
+msgstr "Nakuha na ang username"
+
+msgid "Invalid username"
+msgstr "Hindi wastong username"
+
+msgid "Please enter a username"
+msgstr "Paki-enter isang username"
+
+msgid "Invalid email"
+msgstr "Hindi wastong email"
+
+msgid "Email already registered"
+msgstr "Nakarehistro na ang email"
+
+msgid "Please enter a password"
+msgstr "Paki-enter isang password"
+
+msgid "Passwords do not match"
+msgstr "Hindi magkatugma ang mga password"
+
+msgid "Invalid captcha"
+msgstr "Hindi wastong CAPTCHA"
+
+msgid "User has been successfully registered"
+msgstr "Gumagamit ay na matagumpay registered"
+
+msgid "Could not subscribe to the newsletter"
+msgstr "Could not subscribe sa ang newsletter"
+
+msgid "Please check confirmation email to complete your subscription for the newsletter"
+msgstr "Pakisuri ang confirmation email upang makumpleto ang iyong subscription sa newsletter"
+
+msgid "You have successfully subscribed to the newsletter"
+msgstr "Ikaw have matagumpay subscribed sa ang newsletter"
+
+msgid "JS Help Desk"
+msgstr "JS Help Desk"
+
+msgid "JS Help Desk Control Panel"
+msgstr "Control Panel ng JS Help Desk"
+
+msgid "Statuses"
+msgstr "Mga katayuan"
+
+msgid "product"
+msgstr "produkto"
+
+msgid "System Error"
+msgstr "Error sa system"
+
+msgid "User Fields"
+msgstr "Gumagamit Fields"
+
+msgid "Ban list log"
+msgstr "Log ng listahan ng ban"
+
+msgid "Field Ordering"
+msgstr "Pagkakasunod-sunod ng field"
+
+msgid "Post Installation"
+msgstr "Pagkatapos ng pag-install"
+
+msgid "Premium Addon"
+msgstr "Premium Add-on"
+
+msgid "Sorry"
+msgstr "Paumanhin"
+
+msgid "Access Denied."
+msgstr "Tinanggihan ang access."
+
+msgid "You have no permission to access this page"
+msgstr "You have no permission na access ito pahina"
+
+msgid "Register"
+msgstr "Magrehistro"
+
+msgid "User is not allowed to access this page."
+msgstr "Hindi pinapayagan ang gumagamit na ma-access ang pahinang ito."
+
+msgid "You are already Logged In."
+msgstr "Naka-log in ka na."
+
+msgid "Your account has been disabled, please contact the administrator."
+msgstr "Na-disable ang iyong account. Makipag-ugnayan sa administrator."
+
+msgid "You are not logged In"
+msgstr "Hindi ka naka-log in"
+
+msgid "To access the page, Please login"
+msgstr "Na access ang pahina, Pakisuyo pag-login"
+
+msgid "User is not allowed to view this Ticket"
+msgstr "Hindi pinapayagang makita ng gumagamit ang tiket na ito"
+
+msgid "Registration has been disabled by admin, please contact the system administrator."
+msgstr "Na-disable ng admin ang pagpaparehistro. Makipag-ugnayan sa system administrator."
+
+msgid "You have already given the feedback for this ticket."
+msgstr "You have na given ang feedback para sa ito tiket."
+
+msgid "User is not allowed to view this page"
+msgstr "Hindi pinapayagan ang gumagamit na makita ang pahinang ito"
+
+msgid "Thank you so much for your feedback"
+msgstr "Thank ikaw so much para sa iyong feedback"
+
+msgid "JS Help Desk Pages"
+msgstr "Mga pahina ng JS Help Desk"
+
+msgid "List Downloads"
+msgstr "List Mga download"
+
+msgid "Latest Downloads"
+msgstr "Pinakabago Mga download"
+
+msgid "Popular Downloads"
+msgstr "Popular Mga download"
+
+msgid "List Knowledge Base"
+msgstr "List knowledge base"
+
+msgid "Latest Knowledge Base"
+msgstr "Pinakabago knowledge base"
+
+msgid "Popular Knowledge Base"
+msgstr "Popular knowledge base"
+
+msgid "List FAQs"
+msgstr "List Mga FAQ"
+
+msgid "Latest FAQs"
+msgstr "Pinakabago Mga FAQ"
+
+msgid "Popular FAQs"
+msgstr "Popular Mga FAQ"
+
+msgid "List Announcements"
+msgstr "List Mga anunsyo"
+
+msgid "Latest Announcements"
+msgstr "Pinakabago Mga anunsyo"
+
+msgid "Popular Announcements"
+msgstr "Popular Mga anunsyo"
+
+msgid "Your JS Support Ticket license key has expired or is invalid. Please update it to continue receiving support and updates."
+msgstr "Nag-expire o hindi wasto ang license key ng JS Support Ticket. Paki-update ito upang patuloy na makatanggap ng suporta at mga update."
+
+msgid "Action Required: Addon Updates Needed"
+msgstr "Kailangan ng aksyon: kailangang i-update ang mga Add-on"
+
+msgid "Major changes have been introduced. All JS Support Ticket addons must be updated immediately to prevent system errors and broken functionality."
+msgstr "May malalaking pagbabagong ipinakilala. Dapat i-update agad ang lahat ng Add-on ng JS Support Ticket upang maiwasan ang mga error sa system at sirang functionality."
+
+msgid "Update All Addons Now"
+msgstr "I-update Lahat Addons Now"
+
+msgid "Form submission failed!"
+msgstr "Form submission nabigo!"
+
+msgid "You have not answered all required fields"
+msgstr "You have hindi answered all required fields"
+
+msgid "You have not given a correct time"
+msgstr "Ikaw have not given isang correct oras"
+
+msgid "You have not given a correct e-mail address"
+msgstr "Ikaw have not given isang correct e-mail address"
+
+msgid "You have not given a correct phone number"
+msgstr "Ikaw have not given isang correct telepono number"
+
+msgid "You have not given a correct answer to the security question"
+msgstr "Ikaw have not given isang correct answer sa ang security question"
+
+msgid "You have not given a correct date"
+msgstr "Ikaw have not given isang correct petsa"
+
+msgid "The input value must be between "
+msgstr "Ang input value ay dapat nasa pagitan ng "
+
+msgid " characters"
+msgstr "characters"
+
+msgid "The input value is longer than "
+msgstr "Mas mahaba ang input value kaysa "
+
+msgid "The input value is shorter than "
+msgstr "Mas maikli ang input value kaysa "
+
+msgid "Input values could not be confirmed"
+msgstr "Hindi makumpirma ang mga input value"
+
+msgid "Incorrect domain value"
+msgstr "Incorrect domain halaga"
+
+msgid "The input value is not a correct URL"
+msgstr "Hindi tamang URL ang input value"
+
+msgid "The input value is incorrect"
+msgstr "Hindi tama ang input value"
+
+msgid "The input value was not a correct number"
+msgstr "Hindi tamang numero ang input value"
+
+msgid "Your social security number was incorrect"
+msgstr "Mali ang iyong social security number"
+
+msgid "Incorrect UK VAT Number"
+msgstr "Maling UK VAT number"
+
+msgid "The password isn't strong enough"
+msgstr "Ang password isn't strong enough"
+
+msgid "You have to choose at least "
+msgstr "Ikaw have sa choose at least"
+
+msgid " answers"
+msgstr "answers"
+
+msgid "The input value can only contain alphanumeric characters "
+msgstr "Ang input halaga can lamang naglalaman alphanumeric characters"
+
+msgid " and "
+msgstr "at"
+
+msgid "The file you are trying to upload is too large"
+msgstr "Masyadong malaki ang file na sinusubukan mong i-upload"
+
+msgid "The file you are trying to upload is of the wrong type"
+msgstr "Mali ang uri ng file na sinusubukan mong i-upload"
+
+msgid "Please choose between "
+msgstr "Paki-choose between"
+
+msgid "Please choose at least "
+msgstr "Paki-choose at least"
+
+msgid "Please choose a maximum of "
+msgstr "Paki-choose isang maximum ng"
+
+msgid " item(s)"
+msgstr "item(s)"
+
+msgid "The credit card number is not correct"
+msgstr "Hindi tama ang credit card number"
+
+msgid "The CVV number was not correct"
+msgstr "Hindi tama ang CVV number"
+
+msgid "Lost your password"
+msgstr "Lost iyong password"
+
+msgid "Activated"
+msgstr "Na-activate"
+
+msgid "Active Now"
+msgstr "Aktibo Now"
+
+msgid "Install Now"
+msgstr "I-install ngayon"
+
+msgid "Pagination default page size not saved"
+msgstr "Hindi na-save ang default na laki ng pahina para sa pagination"
+
+msgid "Data directory cannot empty."
+msgstr "Data directory hindi maaari empty."
+
+msgid "Data directory is not proper."
+msgstr "Hindi wasto ang data directory."
+
+msgid "Data directory is not writable."
+msgstr "Hindi nasusulatan ang data directory."
+
+msgid "System slug not be empty."
+msgstr "Hindi maaaring walang laman ang system slug."
+
+msgid "System slug is conflicted with post or page slug."
+msgstr "May conflict ang system slug sa post o page slug."
+
+msgid "The setting has been stored."
+msgstr "Na-save ang setting."
+
+msgid "Days"
+msgstr "Mga araw"
+
+msgid "Hours"
+msgstr "Mga oras"
+
+msgid "Google reCaptcha"
+msgstr "Google reCaptcha"
+
+msgid "Own Captcha"
+msgstr "Sarili Captcha"
+
+msgid "Any"
+msgstr "Alinman"
+
+msgid "Addition"
+msgstr "Pagdaragdag"
+
+msgid "Subtraction"
+msgstr "Pagbabawas"
+
+msgid "Google reCAPTCHA v2"
+msgstr "Google reCAPTCHA v2"
+
+msgid "Google reCAPTCHA v3"
+msgstr "Google reCAPTCHA v3"
+
+msgid "Show"
+msgstr "Ipakita"
+
+msgid "Hide"
+msgstr "Itago"
+
+msgid "JS Help Desk Login Page"
+msgstr "Pahina ng pag-login ng JS Help Desk"
+
+msgid "WordPress Default Login Page"
+msgstr "Default na pahina ng pag-login ng WordPress"
+
+msgid "Custom"
+msgstr "Custom"
+
+msgid "JS Help Desk Register Page"
+msgstr "Pahina ng pagpaparehistro ng JS Help Desk"
+
+msgid "WordPress Default Register Page"
+msgstr "Default na pahina ng pagpaparehistro ng WordPress"
+
+msgid "Top left"
+msgstr "Itaas kaliwa"
+
+msgid "Top right"
+msgstr "Itaas kanan"
+
+msgid "Middle left"
+msgstr "Gitna kaliwa"
+
+msgid "Middle right"
+msgstr "Gitna kanan"
+
+msgid "Bottom left"
+msgstr "Ibaba kaliwa"
+
+msgid "Bottom right"
+msgstr "Ibaba kanan"
+
+msgid "Random"
+msgstr "Random"
+
+msgid "Sequence"
+msgstr "Sequence"
+
+msgid "Oldest First"
+msgstr "Pinakaluma muna"
+
+msgid "Newest First"
+msgstr "Pinakabago muna"
+
+msgid "Ascending"
+msgstr "Pataas"
+
+msgid "Descending"
+msgstr "Pababa"
+
+msgid "menu"
+msgstr "menu"
+
+msgid "Select Configuration"
+msgstr "Pumili ng configuration"
+
+msgid "General"
+msgstr "Pangkalahatan"
+
+msgid "General Settings"
+msgstr "Mga pangkalahatang setting"
+
+msgid "Support Icon"
+msgstr "Icon ng suporta"
+
+msgid "Ticket Settings"
+msgstr "Mga setting ng tiket"
+
+msgid "Ticket Listing"
+msgstr "Listahan ng tiket"
+
+msgid "Visitor Ticket Setting"
+msgstr "Setting ng tiket ng bisita"
+
+msgid "Captcha"
+msgstr "CAPTCHA"
+
+msgid "Email Settings"
+msgstr "Mga setting ng email"
+
+msgid "Ban Email New Ticket"
+msgstr "I-ban ang email sa bagong tiket"
+
+msgid "Ticket Operations Email Setting"
+msgstr "Setting ng email para sa mga operasyon ng tiket"
+
+msgid "Agent Menu"
+msgstr "Menu ng ahente"
+
+msgid "Dashboard Links"
+msgstr "Mga link ng dashboard"
+
+msgid "Top Menu Links"
+msgstr "Mga link sa top menu"
+
+msgid "User Menu"
+msgstr "Menu ng gumagamit"
+
+msgid "Feedback Settings"
+msgstr "Mga setting ng feedback"
+
+msgid "Push Notifications"
+msgstr "Push Mga abiso"
+
+msgid "Firebase Notifications"
+msgstr "Firebase Mga abiso"
+
+msgid "Private Credentials"
+msgstr "Pribadong kredensyal"
+
+msgid "Envato Validation"
+msgstr "Pag-validate ng Envato"
+
+msgid "Mailchimp"
+msgstr "Mailchimp"
+
+msgid "Easy Digital Downloads"
+msgstr "Easy Digital Downloads"
+
+msgid "Facebook"
+msgstr "Facebook"
+
+msgid "Linkedin"
+msgstr "Linkedin"
+
+msgid "Set the heading of your plugin"
+msgstr "Set ang heading ng iyong plugin"
+
+msgid "Ticket Default Page"
+msgstr "Default na pahina ng tiket"
+
+msgid "Select Page"
+msgstr "Pumili ng pahina"
+
+msgid "Select JS Help Desk default page, on the action system, will redirect on the selected page. If not select the default page, email links, and support icon might not work."
+msgstr "Piliin ang default na pahina ng JS Help Desk. Sa system action, ire-redirect ito sa napiling pahina. Kung walang napiling default na pahina, maaaring hindi gumana ang mga email link at support icon."
+
+msgid "Data Directory"
+msgstr "Data directory"
+
+msgid "Set the name for your data directory"
+msgstr "Itakda ang pangalan ng iyong data directory"
+
+msgid "You need to rename the existing data directory in the file system before changing the data directory name"
+msgstr "Ikaw need sa rename ang existing data directory sa ang file system bago changing ang data directory pangalan"
+
+msgid "Date Format"
+msgstr "Format ng petsa"
+
+msgid "DD-MM-YYYY"
+msgstr "DD-MM-YYYY"
+
+msgid "MM-DD-YYYY"
+msgstr "MM-DD-YYYY"
+
+msgid "YYYY-MM-DD"
+msgstr "YYYY-MM-DD"
+
+msgid "Set the default date format"
+msgstr "Itakda ang default na format ng petsa"
+
+msgid "Pagination Default Page Size"
+msgstr "Default na laki ng pahina sa pagination"
+
+msgid "Set the no. of record per page"
+msgstr "Itakda ang bilang ng record bawat pahina"
+
+msgid "Top Header"
+msgstr "Top header"
+
+msgid "Show hide Top Header"
+msgstr "Ipakita o itago ang top header"
+
+msgid "Show User Avatar"
+msgstr "Ipakita ang avatar ng gumagamit"
+
+msgid "Showing avatars may slightly slow down page loading"
+msgstr "Showing avatars may slightly slow down pahina loading"
+
+msgid "Show Count On My Tickets"
+msgstr "Ipakita ang count sa my mga tiket"
+
+msgid "Show number of the open, closed, answered ticket in my ticket and dashboard"
+msgstr "Ipakita ang bilang ng bukas, sarado, at nasagutang tiket sa Aking tiket at dashboard"
+
+msgid "Default Wp Role For New Users"
+msgstr "Default Wp Tungkulin Para sa Bago Mga gumagamit"
+
+msgid "Select the role you want to assign to new users"
+msgstr "Pumili ng ang tungkulin ikaw want sa italaga sa bago mga gumagamit"
+
+msgid "Number Of Attachments"
+msgstr "Number Ng Mga kalakip"
+
+msgid "Number of attachments allowed at a time"
+msgstr "Bilang ng mga kalakip na pinapayagan sa isang pagkakataon"
+
+msgid "File Maximum Size"
+msgstr "Pinakamalaking laki ng file"
+
+msgid "Kb"
+msgstr "Kb"
+
+msgid "File Extension"
+msgstr "Extension ng file"
+
+msgid "File extension allowed to attach"
+msgstr "File extension na pinapayagang ikalakip"
+
+msgid "Set Login Link"
+msgstr "Set Pag-login Link"
+
+msgid "Set Login Link Default or Custom"
+msgstr "Set Pag-login Link Default o Custom"
+
+msgid "Set Register Link"
+msgstr "Set Pagrehistro Link"
+
+msgid "Set register Link Default or Custom"
+msgstr "Set pagrehistro Link Default o Custom"
+
+msgid " To enable registrations, WordPress admin > General > Settings > Membership: Anyone can register"
+msgstr "Upang paganahin ang pagpaparehistro, pumunta sa WordPress admin > General > Settings > Membership: Anyone can register"
+
+msgid "Screen Tag"
+msgstr "Screen tag"
+
+msgid "Enable / disable your support icon"
+msgstr "Paganahin o huwag paganahin ang iyong support icon"
+
+msgid "Custom Image"
+msgstr "Custom Larawan"
+
+msgid "Set custom support image"
+msgstr "Itakda ang custom na larawan ng suporta"
+
+msgid "Custom Text"
+msgstr "Custom na teksto"
+
+msgid "Set custom support text"
+msgstr "Itakda ang custom na teksto ng suporta"
+
+msgid "Support Icon Position"
+msgstr "Posisyon ng icon ng suporta"
+
+msgid "Screen Tag Position"
+msgstr "Posisyon ng screen tag"
+
+msgid "Select position for your support icon"
+msgstr "Piliin ang posisyon ng iyong support icon"
+
+msgid "Online"
+msgstr "Online"
+
+msgid "Set your plugin offline for front end"
+msgstr "Set iyong plugin offline para sa front end"
+
+msgid "Offline Message"
+msgstr "Offline Mensahe"
+
+msgid "Set the offline message for your user"
+msgstr "Set ang offline mensahe para sa iyong gumagamit"
+
+msgid "Woocommerce Category"
+msgstr "Woocommerce Kategorya"
+
+msgid "Select category to display only products of this category on the WooCommerce shop page."
+msgstr "Pumili ng kategorya sa display lamang mga produkto ng ito kategorya sa ang woocommerce shop page."
+
+msgid "Ticketid Prefix"
+msgstr "Prefix ng ID ng tiket"
+
+msgid "Set prefix for custom ticketid"
+msgstr "Set prefix para sa custom ticketid"
+
+msgid "Ticketid sequence"
+msgstr "Sequence ng ID ng tiket"
+
+msgid "Set ticketid sequential or random .e.g "
+msgstr "Set ticketid sequential o random .e.g"
+
+msgid "Pad Zeros"
+msgstr "Magdagdag ng mga zero sa unahan"
+
+msgid "To pad an integer with leading zeros to a specific length"
+msgstr "Sa pad isang integer kasama ang leading zeros sa isang partikular haba"
+
+msgid "Ticketid Suffix"
+msgstr "Suffix ng ID ng tiket"
+
+msgid "Set suffix for custom ticketid"
+msgstr "Set suffix para sa custom ticketid"
+
+msgid "Maximum Tickets"
+msgstr "Maximum Mga tiket"
+
+msgid "Maximum ticket per user"
+msgstr "Maximum tiket per gumagamit"
+
+msgid "Maximum Open Tickets"
+msgstr "Maximum Bukas Mga tiket"
+
+msgid "Maximum opened tickets per user"
+msgstr "Maximum binuksan mga tiket per gumagamit"
+
+msgid "Reopen Ticket Within Days"
+msgstr "Buksang muli Tiket sa loob ng Days"
+
+msgid "The ticket can be reopened within a given number of days"
+msgstr "Maaaring muling buksan ang tiket sa loob ng itinakdang bilang ng mga araw"
+
+msgid "Multiforms Popup For New Tickets"
+msgstr "Multiforms Popup Para sa Bago Mga tiket"
+
+msgid "Show or hide the multiform popup when creating a new ticket. if you hide them, the system will open the default form."
+msgstr "Ipakita o itago ang multiform popup kapag gumagawa ng bagong tiket. Kung itatago ito, bubuksan ng system ang default na form."
+
+msgid "User Can Print Ticket"
+msgstr "Gumagamit Can i-print ang tiket"
+
+msgid "Can user print ticket from ticket detail or not"
+msgstr "Can gumagamit i-print ang tiket mula sa tiket detalye o not"
+
+msgid "Allow Users To Reply Via Email On Closed Ticket"
+msgstr "Payagan ang mga gumagamit na tumugon sa pamamagitan ng email sa saradong tiket"
+
+msgid "Select whether users can reply to closed email piping ticket or not"
+msgstr "Piliin kung maaaring tumugon ang mga gumagamit sa saradong tiket mula sa Email Piping o hindi"
+
+msgid "Show Admin OR Agent Email On Ticket Reply"
+msgstr "Ipakita ang email ng admin o ahente ng suporta sa tugon sa tiket"
+
+msgid "Select whether users can see the email of administrator or agent on ticket reply"
+msgstr "Piliin kung makikita ng mga gumagamit ang email ng administrator o ahente ng suporta sa tugon sa tiket"
+
+msgid "Ticket Replies Ordering"
+msgstr "Tiket Mga tugon Pagkakasunod-sunod"
+
+msgid "Set the default ordering for ticket replies in the detail page."
+msgstr "Set ang default pagkakasunod-sunod para sa tiket mga tugon sa ang detalye page."
+
+msgid "Show Anonymous Name On Ticket Reply"
+msgstr "Ipakita ang anonymous pangalan sa tiket tugon"
+
+msgid "Select whether users can see the name of administrator or agent on ticket reply"
+msgstr "Pumili ng kung mga gumagamit maaaring see ang name of administrator o ahente ng suporta sa tiket tugon"
+
+msgid "Show Message Read Icon For Admin On Ticket Detail"
+msgstr "Ipakita ang detalye ng mensahe read icon para sa admin sa tiket"
+
+msgid "Select whether the message read icon is displayed to the administrator on ticket detail."
+msgstr "Piliin kung ipapakita sa administrator ang icon ng nabasang mensahe sa detalye ng tiket."
+
+msgid "Show Message Read Icon For Agents On Ticket Detail"
+msgstr "Ipakita ang detalye ng mensahe read icon para sa mga ahente sa tiket"
+
+msgid "Select whether the message read icon is displayed to agents on ticket detail."
+msgstr "Piliin kung ipapakita sa mga ahente ng suporta ang icon ng nabasang mensahe sa detalye ng tiket."
+
+msgid "Show Message Read Icon For Users On Ticket Detail"
+msgstr "Ipakita ang detalye ng mensahe read icon para sa mga gumagamit sa tiket"
+
+msgid "Select whether the message read icon is displayed to users on the ticket detail."
+msgstr "Piliin kung ipapakita sa mga gumagamit ang icon ng nabasang mensahe sa detalye ng tiket."
+
+msgid "Ticket Auto Close"
+msgstr "Tiket Auto Isara"
+
+msgid "Ticket auto-close if user does not respond within given days"
+msgstr "Awtomatikong isasara ang tiket kung hindi tumugon ang gumagamit sa loob ng itinakdang araw"
+
+msgid "Show Ticket Delete Button"
+msgstr "Ipakita ang tiket tanggalin button"
+
+msgid "Select whether users can see the ticket delete button"
+msgstr "Pumili ng kung mga gumagamit maaaring see ang tiket tanggalin button"
+
+msgid "New ticket message"
+msgstr "Bago tiket mensahe"
+
+msgid "This message will show on the new ticket"
+msgstr "Ipapakita ang mensaheng ito sa bagong tiket"
+
+msgid "Ticket Listing Ordering"
+msgstr "Tiket Listing Pagkakasunod-sunod"
+
+msgid "Set default ordering for ticket listing"
+msgstr "Set default pagkakasunod-sunod para sa tiket listing"
+
+msgid "Ticket Listing Sorting"
+msgstr "Tiket Listing Sorting"
+
+msgid "Set default sorting for ticket listing"
+msgstr "Set default sorting para sa tiket listing"
+
+msgid "Show Closure Info On Admin Tickets"
+msgstr "Ipakita ang closure info sa admin mga tiket"
+
+msgid "By enabling this option, an admin can know who closed the ticket and when that ticket closed."
+msgstr "Ni enabling ito option, isang admin can know who sarado ang tiket at when iyon tiket sarado."
+
+msgid "Show Closure Info on Agent Tickets"
+msgstr "Ipakita ang closure info sa ahente mga tiket"
+
+msgid "By enabling this option, an agent can know who closed the ticket and when that ticket closed."
+msgstr "Ni enabling ito option, isang ahente can know who sarado ang tiket at when iyon tiket sarado."
+
+msgid "Show Closure Info on User Tickets"
+msgstr "Ipakita ang closure info sa gumagamit mga tiket"
+
+msgid "By enabling this option, a user can know who closed the ticket and when that ticket closed."
+msgstr "Ni enabling ito option, isang gumagamit can know who sarado ang tiket at when iyon tiket sarado."
+
+msgid "Assigned Info. On Admin Tickets"
+msgstr "Assigned Info. Sa Admin Mga tiket"
+
+msgid "By enabling this option, an admin can know to whom the ticket has been assigned."
+msgstr "Ni enabling ito option, isang admin can know sa whom ang tiket ay na assigned."
+
+msgid "Assigned Info. On Agent Tickets"
+msgstr "Assigned Info. Sa Ahente Mga tiket"
+
+msgid "By enabling this option, an agent can know to whom the ticket has been assigned."
+msgstr "Ni enabling ito option, isang ahente can know sa whom ang tiket ay na assigned."
+
+msgid "Assigned Info. On User Tickets"
+msgstr "Assigned Info. Sa Gumagamit Mga tiket"
+
+msgid "By enabling this option, a user can know to whom the ticket has been assigned."
+msgstr "Ni enabling ito option, isang gumagamit can know sa whom ang tiket ay na assigned."
+
+msgid "Visitor Can Create Ticket"
+msgstr "Visitor Can gumawa Tiket"
+
+msgid "Can visitor create ticket or not"
+msgstr "Can visitor gumawa tiket o not"
+
+msgid "Visitor ticket creation message"
+msgstr "Visitor tiket creation mensahe"
+
+msgid "This text will appear whenever a visitor creates a ticket"
+msgstr "Lalabas ang tekstong ito tuwing gumagawa ng tiket ang bisita"
+
+msgid "Default Alert Email"
+msgstr "Default na alert email"
+
+msgid "If ticket department email is not selected then this email is used to send emails"
+msgstr "Kung hindi napili ang email ng departamento ng tiket, gagamitin ang email na ito sa pagpapadala ng mga email"
+
+msgid "Default Admin Email"
+msgstr "Default na admin email"
+
+msgid "Admin email address to receive emails"
+msgstr "Admin email address na tatanggap ng mga email"
+
+msgid "Department Email"
+msgstr "Email ng departamento"
+
+msgid "Send email to all departments on ticket create"
+msgstr "Magpadala ng email sa lahat ng departamento kapag ginawa ang tiket"
+
+msgid "Mail To Admin"
+msgstr "Mail Sa Admin"
+
+msgid "Email sends to admin when banned email try to create a ticket"
+msgstr "Magpapadala ng email sa admin kapag sinubukan ng naka-ban na email na gumawa ng tiket"
+
+msgid "Admin"
+msgstr "Admin"
+
+msgid "Ticket Reassign"
+msgstr "Tiket Reassign"
+
+msgid "Ticket Close"
+msgstr "Tiket Isara"
+
+msgid "Ticket Delete"
+msgstr "Tiket tanggalin"
+
+msgid "Ticket Marked As Overdue"
+msgstr "Tiket Marked Bilang Overdue"
+
+msgid "Ticket Ban Email"
+msgstr "Email para sa pag-ban ng tiket"
+
+msgid "Ticket Department Transfer"
+msgstr "Tiket Departamento Transfer"
+
+msgid "Ticket Reply User"
+msgstr "Tiket Tugon Gumagamit"
+
+msgid "Ticket Response Agent"
+msgstr "Ahente ng suporta para sa tugon sa tiket"
+
+msgid "Ticket Ban Email And Close Ticket"
+msgstr "Email para sa pag-ban ng tiket at pagsasara ng tiket"
+
+msgid "Ticket Unban Email"
+msgstr "Email para sa pag-alis ng ban sa tiket"
+
+msgid "Ticket Lock"
+msgstr "Tiket Lock"
+
+msgid "Ticket Unlock"
+msgstr "Tiket Unlock"
+
+msgid "Ticket Change Priority"
+msgstr "Tiket baguhin Priyoridad"
+
+msgid "Mark Ticket In Progress"
+msgstr "Mark Tiket Sa Progress"
+
+msgid "Reply To A Closed Ticket By Email"
+msgstr "Tumugon sa saradong tiket sa pamamagitan ng email"
+
+msgid "Send Feedback Email To User"
+msgstr "Magpadala ng feedback email sa gumagamit"
+
+msgid "Open Tickets"
+msgstr "Bukas Mga tiket"
+
+msgid "Login / Logout Button"
+msgstr "Pag-login / Pag-logout Button"
+
+msgid "Ticket Total Count"
+msgstr "Tiket Total Count"
+
+msgid "Ticket Statistics"
+msgstr "Tiket Estadistika"
+
+msgid "Erase Agent Data"
+msgstr "Erase Ahente Data"
+
+msgid "Export Ticket"
+msgstr "I-export Tiket"
+
+msgid "Home"
+msgstr "Home"
+
+msgid "Check Ticket Status"
+msgstr "Check katayuan ng tiket"
+
+msgid "Registration"
+msgstr "Pagrehistro"
+
+msgid "Erase User Data"
+msgstr "Erase Gumagamit Data"
+
+msgid "Feedback Email Delay Type"
+msgstr "Uri ng pagkaantala ng feedback email"
+
+msgid "Select delay type for feedback email"
+msgstr "Piliin ang uri ng pagkaantala para sa feedback email"
+
+msgid "Feedback Email Delay"
+msgstr "Pagkaantala ng feedback email"
+
+msgid "Set no. of days or hours to send feedback email after a ticket is closed"
+msgstr "Itakda ang bilang ng araw o oras bago ipadala ang feedback email pagkatapos maisara ang tiket"
+
+msgid "Success message after submitting feedback"
+msgstr "Tagumpay mensahe pagkatapos submitting feedback"
+
+msgid "This text will appear whenever anyone submits feedback"
+msgstr "Lalabas ang tekstong ito tuwing may magsusumite ng feedback"
+
+msgid "Login With Facebook"
+msgstr "Pag-login Kasama ang Facebook"
+
+msgid "Facebook user can login in js support ticket"
+msgstr "Facebook gumagamit maaaring pag-login in js tiket ng suporta"
+
+msgid "Secret"
+msgstr "Secret"
+
+msgid "Secret Key"
+msgstr "Secret key"
+
+msgid "API Key"
+msgstr "API key"
+
+msgid "API key is required for facebook app"
+msgstr "Kailangan ang API key para sa Facebook app"
+
+msgid "Login with linkedin"
+msgstr "Pag-login kasama ang linkedin"
+
+msgid "API key is required for linkedin app"
+msgstr "Kailangan ang API key para sa LinkedIn app"
+
+msgid "UTF Auto Switch"
+msgstr "UTF auto switch"
+
+msgid "Create User via email"
+msgstr "Gumawa ng gumagamit sa pamamagitan ng email"
+
+msgid "JS Help Desk Desktop Notifications plugin is not installed. Please install the plugin to enable desktop notifications"
+msgstr "Hindi naka-install ang JS Help Desk Desktop Notifications plugin. I-install ang plugin upang paganahin ang desktop notifications"
+
+msgid "Click here to insert Install."
+msgstr "Mag-click dito upang ipasok ang Install."
+
+msgid "JS Help Desk Desktop Notifications plugin is not active."
+msgstr "JS Help Desk Desktop Mga abiso plugin hindi aktibo."
+
+msgid "Find and add firebase api's keys"
+msgstr "Find at magdagdag firebase api's keys"
+
+msgid "Click here to get firebae api keys."
+msgstr "Mag-click dito upang kunin ang Firebase API keys."
+
+msgid "API Key For User"
+msgstr "API Key Para sa Gumagamit"
+
+msgid "Firebase api key for front user"
+msgstr "Firebase API key para sa front gumagamit"
+
+msgid "Auth Domain"
+msgstr "Domain ng authentication"
+
+msgid "Firebase Auth Domain"
+msgstr "Firebase auth domain"
+
+msgid "Database URL"
+msgstr "Database URL"
+
+msgid "Firebase Database URL"
+msgstr "Firebase database URL"
+
+msgid "Project Id"
+msgstr "Project ID"
+
+msgid "Firebase Project Id"
+msgstr "Firebase project ID"
+
+msgid "Bucket Storage"
+msgstr "Bucket storage"
+
+msgid "Firebase Bucket Storage"
+msgstr "Firebase bucket storage"
+
+msgid "Message Sender Id"
+msgstr "Mensahe Sender Id"
+
+msgid "Firebase Message Sender Id"
+msgstr "Firebase Mensahe Sender Id"
+
+msgid "Private Server Key"
+msgstr "Pribado Server Key"
+
+msgid "Firebase Server Key"
+msgstr "Firebase server key"
+
+msgid "Logo Image For Desktop Notifications"
+msgstr "Logo Larawan Para sa Desktop Mga abiso"
+
+msgid "Remove Image"
+msgstr "Remove Larawan"
+
+msgid "Remove Logo"
+msgstr "Alisin ang logo"
+
+msgid "No Firebase Notification Logo"
+msgstr "Hindi Firebase Abiso Logo"
+
+msgid "Private Credentials Encryption Key changing this value will discard all existing credentials "
+msgstr "Private Credentials Encryption Key: ang pagbabago ng halagang ito ay magtatapon sa lahat ng umiiral na kredensyal "
+
+msgid "Second Level Security"
+msgstr "Ikalawang antas ng seguridad"
+
+msgid "For enhanced security change encryption method in %1$s on line %2$s"
+msgstr "Para sa enhanced security baguhin encryption method sa %1$s sa line %2$s"
+
+msgid "Enter Envato api key "
+msgstr "Enter Envato API key"
+
+msgid "Click here to generate an api key"
+msgstr "Mag-click dito upang gumawa ng API key"
+
+msgid "License Mandatory"
+msgstr "Lisensya Mandatory"
+
+msgid "Prevent users from submitting a ticket without a valid license for one of your product"
+msgstr "Prevent mga gumagamit mula sa submitting isang tiket nang walang isang valid lisensya para sa one ng iyong produkto"
+
+msgid "Product ID"
+msgstr "Produkto ID"
+
+msgid "A comma-separated list of Envato product ids"
+msgstr "ISANG comma-separated list ng Envato produkto ids"
+
+msgid "Enter MailChimp API key "
+msgstr "Enter MailChimp API key"
+
+msgid "Audience ID"
+msgstr "Audience ID"
+
+msgid "Find Audience ID in your MailChimp account"
+msgstr "Find Audience ID sa iyong MailChimp account"
+
+msgid "Enable Double Opt-in"
+msgstr "Paganahin Double Opt-in"
+
+msgid "You must also enable double opt-in in your MailChimp account"
+msgstr "Ikaw must also paganahin double opt-in sa iyong MailChimp account"
+
+msgid "Welcome Email"
+msgstr "Welcome email"
+
+msgid "You can enable Final Welcome Email in your MailChimp account"
+msgstr "Maaari mong paganahin ang Final Welcome Email sa iyong MailChimp account"
+
+msgid "Verify License On Ticket Creation"
+msgstr "Verify Lisensya Sa Tiket Creation"
+
+msgid "Captcha Setting"
+msgstr "Setting ng CAPTCHA"
+
+msgid "Show Captcha On Registration Form"
+msgstr "Ipakita ang captcha sa pagrehistro form"
+
+msgid "Select whether you want to show captcha on the registration form or not"
+msgstr "Pumili ng kung you want na show captcha sa ang registration form o hindi"
+
+msgid "Show Captcha On The Visitor Ticket Form"
+msgstr "Ipakita ang captcha sa ang visitor tiket form"
+
+msgid "Show captcha when a visitor wants to create a ticket"
+msgstr "Ipakita ang captcha when isang visitor wants sa gumawa isang tiket"
+
+msgid "Captcha selection"
+msgstr "Pagpili ng CAPTCHA"
+
+msgid "Which captcha you want to add"
+msgstr "Which captcha ikaw want sa magdagdag"
+
+msgid "Google reCaptcha version"
+msgstr "Google reCaptcha bersyon"
+
+msgid "Select the Google reCaptcha version"
+msgstr "Pumili ng ang google recaptcha bersyon"
+
+msgid "Google reCaptcha Site Key"
+msgstr "Google reCaptcha site key"
+
+msgid "Please enter the google re-captcha site key from"
+msgstr "Paki-enter ang google re-captcha site key mula sa"
+
+msgid "Google reCaptcha Secret Key"
+msgstr "Google reCaptcha secret key"
+
+msgid "Please enter the google re-captcha secret key from"
+msgstr "Paki-enter ang google re-captcha secret key mula sa"
+
+msgid "Own Captcha Calculation Type"
+msgstr "Uri ng own captcha calculation"
+
+msgid "Select calculation type addition or subtraction"
+msgstr "Piliin ang uri ng kalkulasyon: pagdaragdag o pagbabawas"
+
+msgid "Own Captcha Operands"
+msgstr "Sarili Captcha Operands"
+
+msgid "Select the total operands to be given"
+msgstr "Piliin ang kabuuang operand na ibibigay"
+
+msgid "Own Captcha Subtraction Answer Positive"
+msgstr "Sarili Captcha Subtraction Answer Positive"
+
+msgid "Is subtraction answer should be positive"
+msgstr "Dapat bang positibo ang sagot sa pagbabawas"
+
+msgid "Save Configurations"
+msgstr "I-save ang mga configuration"
+
+msgid "Ticket via email"
+msgstr "Tiket sa pamamagitan ng email"
+
+msgid "OR"
+msgstr "O"
+
+msgid "Update ticket status"
+msgstr "I-update katayuan ng tiket"
+
+msgid "Recommended run script daily"
+msgstr "Inirerekomendang patakbuhin ang script araw-araw"
+
+msgid "You cannot use this email, it is used in email piping"
+msgstr "Hindi mo magagamit ang email na ito dahil ginagamit ito sa Email Piping"
+
+msgid "The department has been stored"
+msgstr "Na-save ang departamento"
+
+msgid "The department has not been stored"
+msgstr "Hindi na-save ang departamento"
+
+msgid "The department has been deleted"
+msgstr "Natanggal ang departamento"
+
+msgid "The department has not been deleted"
+msgstr "Hindi natanggal ang departamento"
+
+msgid "The department in use cannot be delete"
+msgstr "Hindi maaaring tanggalin ang ang departamento ginagamit"
+
+msgid "Select Help Topic"
+msgstr "Pumili ng paksa ng tulong"
+
+msgid "Outgoing Email"
+msgstr "Papalabas na email"
+
+msgid "Select Email"
+msgstr "Pumili ng email"
+
+msgid "Tickets of this department will receive emails from this email"
+msgstr "Ang mga tiket ng departamentong ito ay tatanggap ng mga email mula sa email na ito"
+
+msgid "Receive Email"
+msgstr "Tumanggap ng email"
+
+msgid "Default with auto assign"
+msgstr "Default kasama ang auto italaga"
+
+msgid "Save Department"
+msgstr "I-save ang departamento"
+
+msgid "Add New Email"
+msgstr "Magdagdag ng bagong email"
+
+msgid "The user of this department will receive email on the new ticket"
+msgstr "Makakatanggap ng email ang gumagamit ng departamentong ito kapag may bagong tiket"
+
+msgid "Outgoing"
+msgstr "Papalabas"
+
+msgid "Click here to give us feedback"
+msgstr "Mag-click dito upang magbigay ng feedback"
+
+msgid "Email Already Exist"
+msgstr "Umiiral na ang email"
+
+msgid "The email has been stored"
+msgstr "Na-save ang email"
+
+msgid "The email has not been stored"
+msgstr "Hindi na-save ang email"
+
+msgid "Ticket History"
+msgstr "Tiket History"
+
+msgid "SMTP"
+msgstr "SMTP"
+
+msgid "False"
+msgstr "Mali"
+
+msgid "True"
+msgstr "Totoo"
+
+msgid "TLS"
+msgstr "TLS"
+
+msgid "SSL"
+msgstr "SSL"
+
+msgid "Send Email By"
+msgstr "Magpadala ng email sa pamamagitan ng"
+
+msgid "SMTP Host Type"
+msgstr "Uri ng SMTP host"
+
+msgid "SMTP Host"
+msgstr "SMTP host"
+
+msgid "SMTP Authentication"
+msgstr "SMTP authentication"
+
+msgid "SMTP Secure"
+msgstr "SMTP secure"
+
+msgid "SMTP Port"
+msgstr "SMTP port"
+
+msgid "Auto Response"
+msgstr "Awtomatikong tugon"
+
+msgid "Save Email"
+msgstr "I-save ang email"
+
+msgid "Some values are not acceptable please retry"
+msgstr "May ilang halagang hindi katanggap-tanggap. Pakisubukang muli"
+
+msgid "Info"
+msgstr "Impormasyon"
+
+msgid "System email used for sending email"
+msgstr "System email na ginagamit sa pagpapadala ng email"
+
+msgid "Email tempate has been deleted"
+msgstr "Natanggal ang template ng email"
+
+msgid "Email tempate has not been deleted"
+msgstr "Hindi natanggal ang template ng email"
+
+msgid "Ban Email Try To Create Ticket"
+msgstr "Naka-ban na email na sumusubok gumawa ng tiket"
+
+msgid "Data Deleted"
+msgstr "Data natanggal"
+
+msgid "Default Email Template"
+msgstr "Default na template ng email"
+
+msgid "This template is used for all forms and languages unless a specific custom template is created."
+msgstr "Ginagamit ang template na ito para sa lahat ng form at wika maliban kung gumawa ng partikular na custom template."
+
+msgid "This template is used for all forms unless a specific form template is created."
+msgstr "Ginagamit ang template na ito para sa lahat ng form maliban kung gumawa ng partikular na template ng form."
+
+msgid "This template is used for all languages unless a specific language template is created."
+msgstr "Ginagamit ang template na ito para sa lahat ng wika maliban kung gumawa ng partikular na template ng wika."
+
+msgid "View/Edit Default Template"
+msgstr "Tingnan/I-edit Default Template"
+
+msgid "Form & Language-Specific Email Templates"
+msgstr "Mga template ng email na partikular sa form at wika"
+
+msgid "Form-Specific Email Templates"
+msgstr "Mga template ng email na partikular sa form"
+
+msgid "Language-Specific Email Templates"
+msgstr "Mga template ng email na partikular sa wika"
+
+msgid "Customize email content for individual form, for specific language, or a combination of both. If no custom template exists for a given form or language, the default template will be used."
+msgstr "Customize email content para sa individual form, para sa specific language, o a combination of both. kung no custom template exists para sa a given form o language, ang default template will be used."
+
+msgid "Customize email content for individual form. If no custom template exists for a form, the default template will be used."
+msgstr "Customize email content para sa individual form. kung no custom template exists para sa a form, ang default template will be used."
+
+msgid "Customize email content for specific language. If no custom template exists for a language, the default template will be used."
+msgstr "Customize email content para sa specific language. kung no custom template exists para sa a language, ang default template will be used."
+
+msgid "Select a Form"
+msgstr "Pumili ng form"
+
+msgid "Select a Language"
+msgstr "Pumili ng wika"
+
+msgid "Create Template"
+msgstr "Gumawa ng template"
+
+msgid "Existing Custom Templates"
+msgstr "Mga kasalukuyang custom template"
+
+msgid "Form Name"
+msgstr "Pangalan ng form"
+
+msgid "Language"
+msgstr "Wika"
+
+msgid "Actions"
+msgstr "Mga aksyon"
+
+msgid "Are you sure you want to delete"
+msgstr "Sigurado ka bang gusto mong tanggalin"
+
+msgid "Preview"
+msgstr "Preview"
+
+msgid "Form"
+msgstr "Form"
+
+msgid "Body"
+msgstr "Katawan"
+
+msgid "Parameters"
+msgstr "Mga parameter"
+
+msgid "Tracking ID"
+msgstr "Tracking ID"
+
+msgid "Ticket URL"
+msgstr "URL ng tiket"
+
+msgid "Ticket Priority"
+msgstr "Priyoridad ng tiket"
+
+msgid "Department title"
+msgstr "Pamagat ng departamento"
+
+msgid "Group Title"
+msgstr "Pamagat ng grupo"
+
+msgid "Agent name"
+msgstr "Pangalan ng ahente"
+
+msgid "Help topic title"
+msgstr "Pamagat ng paksa ng tulong"
+
+msgid "Feedback URL"
+msgstr "Feedback URL"
+
+msgid "Ticket Subject"
+msgstr "Paksa ng tiket"
+
+msgid "Ticket Tracking ID"
+msgstr "Tracking ID ng tiket"
+
+msgid "Close Date"
+msgstr "Petsa ng pagsasara"
+
+msgid "Save Email Template"
+msgstr "I-save ang template ng email"
+
+msgid "Note"
+msgstr "Tala"
+
+msgid "Features marked with"
+msgstr "Features marked may"
+
+msgid "are only available with its own addon."
+msgstr "ay available lamang gamit ang sarili nitong Addon."
+
+msgid "Field mark as published"
+msgstr "Field na minarkahan bilang naka-publish"
+
+msgid "Field mark as unpublished"
+msgstr "Field na minarkahan bilang hindi naka-publish"
+
+msgid "Field cannot be mark as published"
+msgstr "Field hindi maaaring be mark as published"
+
+msgid "Field mark as required"
+msgstr "Field na minarkahan bilang kinakailangan"
+
+msgid "Field mark as not required"
+msgstr "Field mark as hindi required"
+
+msgid "Field ordering down"
+msgstr "Ibaba ang pagkakasunod-sunod ng field"
+
+msgid "Field ordering up"
+msgstr "Itaas ang pagkakasunod-sunod ng field"
+
+msgid "Please Insert At least one value for every option"
+msgstr "Paki-Insert At least one halaga para sa every option"
+
+msgid "Parent field has not been stored"
+msgstr "Hindi na-save ang parent field"
+
+msgid "Field has not been stored"
+msgstr "Hindi na-save ang field"
+
+msgid "Field has been stored"
+msgstr "Na-save ang field"
+
+msgid "Child fields has not been stored"
+msgstr "Hindi na-save ang child fields"
+
+msgid "Field has been updated"
+msgstr "Na-update ang field"
+
+msgid "Parent Field"
+msgstr "Parent field"
+
+msgid "Equal"
+msgstr "Katumbas"
+
+msgid "Not Equal"
+msgstr "Not Katumbas"
+
+msgid "Contain"
+msgstr "Naglalaman"
+
+msgid "Not Contain"
+msgstr "Not Naglalaman"
+
+msgid "Edit Field"
+msgstr "I-edit ang field"
+
+msgid "Field Title"
+msgstr "Pamagat ng field"
+
+msgid "User Published"
+msgstr "Gumagamit Naka-publish"
+
+msgid "Visitor Published"
+msgstr "Visitor Naka-publish"
+
+msgid "Placeholder"
+msgstr "Placeholder"
+
+msgid "Required"
+msgstr "Kinakailangan"
+
+msgid "User Search"
+msgstr "Gumagamit Maghanap"
+
+msgid "Admin Search"
+msgstr "Admin Maghanap"
+
+msgid "Show On Listing"
+msgstr "Ipakita ang sa listing"
+
+msgid "Advanced"
+msgstr "Advanced"
+
+msgid "Field has not been deleted"
+msgstr "Hindi natanggal ang field"
+
+msgid "Field has been deleted"
+msgstr "Natanggal ang field"
+
+msgid "Select Parent"
+msgstr "Pumili ng parent"
+
+msgid "Select Child"
+msgstr "Pumili ng child"
+
+msgid "Select Condition"
+msgstr "Pumili ng condition"
+
+msgid "AND"
+msgstr "AT"
+
+msgid "Add Field"
+msgstr "Magdagdag ng field"
+
+msgid "Field"
+msgstr "Field"
+
+msgid "Text Field"
+msgstr "Text field"
+
+msgid "Check Box"
+msgstr "Check box"
+
+msgid "Drop Down"
+msgstr "Drop-down"
+
+msgid "Text Area"
+msgstr "Text area"
+
+msgid "Radio Button"
+msgstr "Radio button"
+
+msgid "Upload File"
+msgstr "Mag-upload ng file"
+
+msgid "Multi Select"
+msgstr "Maramihang pagpili"
+
+msgid "Terms and Conditions"
+msgstr "Mga tuntunin at kondisyon"
+
+msgid "Dependent Field"
+msgstr "Dependent field"
+
+msgid "Field Type"
+msgstr "Uri ng field"
+
+msgid "Default Value"
+msgstr "Default na halaga"
+
+msgid "To choose a default value, first add values in the area below"
+msgstr "Sa choose isang default halaga, una magdagdag mga halaga sa ang area below"
+
+msgid "This option is not available in this case"
+msgstr "ito option is hindi available in ito case"
+
+msgid "Select Default Value"
+msgstr "Pumili ng default na halaga"
+
+msgid "Read Only"
+msgstr "Read-only"
+
+msgid "Admin/Agent Only"
+msgstr "Admin/Ahente Lamang"
+
+msgid "Field Size"
+msgstr "Laki ng field"
+
+msgid "Max Length"
+msgstr "Pinakamahabang haba"
+
+msgid "Columns"
+msgstr "Mga column"
+
+msgid "Rows"
+msgstr "Mga row"
+
+msgid "Terms and Conditions Text"
+msgstr "Terms at Conditions Text"
+
+msgid "e.g ' I have read and agree to the [link] Terms and Conditions[/link]. ' The text between [link] and [/link] will be linked to provided url or wordpress page."
+msgstr "e.g ' I have read at agree sa ang [link] Terms at Conditions[/link]. ' Ang text between [link] at [/link] ay magiging linked sa provided url o wordpress page."
+
+msgid "Terms and Conditions Link Type"
+msgstr "Uri ng terms at conditions link"
+
+msgid "Direct Link"
+msgstr "Direktang link"
+
+msgid "WordPress Page"
+msgstr "WordPress page"
+
+msgid "None"
+msgstr "Wala"
+
+msgid "Select Link Type"
+msgstr "Pumili ng uri ng link"
+
+msgid "Terms and Conditions Link"
+msgstr "Terms at Conditions Link"
+
+msgid "Terms and Conditions Page"
+msgstr "Pahina ng terms at conditions"
+
+msgid "Select WordPress page"
+msgstr "Pumili ng wordpress pahina"
+
+msgid "Visibility conditions"
+msgstr "Mga kondisyon sa visibility"
+
+msgid "Add new"
+msgstr "Magdagdag ng bago"
+
+msgid "visibility condition"
+msgstr "kondisyon sa visibility"
+
+msgid "Use the table below to add new values"
+msgstr "Gamitin ang table below na add new values"
+
+msgid "Add Value"
+msgstr "Magdagdag ng halaga"
+
+msgid "Save Field"
+msgstr "I-save ang field"
+
+msgid "S.No"
+msgstr "S.Hindi"
+
+msgid "Published"
+msgstr "Naka-publish"
+
+msgid "Unpublished"
+msgstr "Hindi naka-publish"
+
+msgid "Not required"
+msgstr "Hindi kinakailangan"
+
+msgid "users popup"
+msgstr "mga gumagamit popup"
+
+msgid "Can Not Unpublished"
+msgstr "Hindi maaari Hindi naka-publish"
+
+msgid "good"
+msgstr "maganda"
+
+msgid "cross"
+msgstr "cross"
+
+msgid "can not mark as not required"
+msgstr "hindi maaari mark bilang not kinakailangan"
+
+msgid "Cannot unpublished field"
+msgstr "hindi maaaring unpublished field"
+
+msgid "File upload fields and Check box fields cannot be made required."
+msgstr "File upload fields at Check box fields hindi maaaring be made required."
+
+msgid "Please fill required fields."
+msgstr "Paki-fill kinakailangan mga field."
+
+msgid "User Data"
+msgstr "Gumagamit Data"
+
+msgid "Erasing data request has been stored"
+msgstr "Na-save ang erasing data request"
+
+msgid "Failed while storing"
+msgstr "Nabigo while storing"
+
+msgid "Erase data request withdrawn"
+msgstr "Nabawi ang kahilingan sa pagbura ng data"
+
+msgid "Failed while performing action"
+msgstr "Nabigo while performing aksyon"
+
+msgid "User identifying data erased"
+msgstr "Gumagamit identifying data erased"
+
+msgid "User data Deleted"
+msgstr "Gumagamit data natanggal"
+
+msgid "Export Your Data"
+msgstr "I-export Iyong Data"
+
+msgid "You have filed a request to remove your data."
+msgstr "Ikaw have filed isang request sa remove iyong data."
+
+msgid "To withdraw erases data request"
+msgstr "Sa withdraw erases data request"
+
+msgid "Request data removal from the system."
+msgstr "Request data removal mula sa ang system."
+
+msgid "Add GDPR Field"
+msgstr "Magdagdag ng gdpr field"
+
+msgid "Field Text"
+msgstr "Teksto ng field"
+
+msgid "Link Type"
+msgstr "Uri ng link"
+
+msgid "Link Page"
+msgstr "Pahina ng link"
+
+msgid "User Email"
+msgstr "Email ng gumagamit"
+
+msgid "Request Status"
+msgstr "Request Katayuan"
+
+msgid "Awaiting response"
+msgstr "Naghihintay ng tugon"
+
+msgid "Erased identifying data"
+msgstr "Nabura ang data na pagkakakilanlan"
+
+msgid "Deleted"
+msgstr "Natanggal"
+
+msgid "Erase identifying data"
+msgstr "Burahin ang data na pagkakakilanlan"
+
+msgid "Are you sure to erase identifying data"
+msgstr "Are you sure na erase identifying data"
+
+msgid "Delete data"
+msgstr "Tanggalin ang data"
+
+msgid "Link"
+msgstr "Link"
+
+msgid "Direct URL"
+msgstr "Direktang URL"
+
+msgid "Page Title or URL"
+msgstr "Url ng pahina pamagat o"
+
+msgid "AI Powered Reply"
+msgstr "AI Powered Tugon"
+
+msgid "Ticket Actions"
+msgstr "Tiket Mga aksyon"
+
+msgid "Max Tickets"
+msgstr "Max Mga tiket"
+
+msgid "User Options"
+msgstr "Gumagamit Options"
+
+msgid "User options"
+msgstr "Gumagamit options"
+
+msgid "Internal Mail"
+msgstr "Panloob na mail"
+
+msgid "Private Note"
+msgstr "Pribadong tala"
+
+msgid "WooCommerce"
+msgstr "WooCommerce"
+
+msgid "Merge Tickets"
+msgstr "Pagsamahin Mga tiket"
+
+msgid "Time Tracking"
+msgstr "Oras Tracking"
+
+msgid "Desktop Notification"
+msgstr "Desktop Abiso"
+
+msgid "Admin Widgets"
+msgstr "Mga widget ng admin"
+
+msgid "Front-End Widgets"
+msgstr "Mga widget sa front-end"
+
+msgid "Multi Language Email Templates"
+msgstr "Mga template ng email para sa maraming wika"
+
+msgid "Dir is not writable"
+msgstr "Hindi nasusulatan ang directory"
+
+msgid "Unable to connect to the server"
+msgstr "Unable sa connect sa ang server"
+
+msgid "Language is not installed"
+msgstr "Language is hindi naka-install"
+
+msgid "Language directory is not writable"
+msgstr "Language directory is hindi writable"
+
+msgid "Required language is not installed but similar language like"
+msgstr "Required language is hindi naka-install but similar language like"
+
+msgid "is found in your system"
+msgstr "ay nakita sa iyong system"
+
+msgid "Language Code"
+msgstr "Wika Code"
+
+msgid "Empty values"
+msgstr "Empty mga halaga"
+
+msgid "File is not writable"
+msgstr "Hindi nasusulatan ang file"
+
+msgid "File successfully downloaded"
+msgstr "File matagumpay downloaded"
+
+msgid "Invalid response from server"
+msgstr "Hindi wastong response mula sa server"
+
+msgid "Ordering updated"
+msgstr "Pagkakasunod-sunod na-i-update"
+
+msgid "Missing user(s) added successfully!"
+msgstr "Missing gumagamit(s) added matagumpay!"
+
+msgid "No missing user found!"
+msgstr "Hindi missing gumagamit found!"
+
+msgid "Deactivate"
+msgstr "I-deactivate"
+
+msgid "Deactivated"
+msgstr "Na-deactivate"
+
+msgid "Activate"
+msgstr "I-activate"
+
+msgid "Not Installed"
+msgstr "Hindi naka-install"
+
+msgid "Addon Installation Failed"
+msgstr "Addon Installation Nabigo"
+
+msgid "Addon Installed Successfully"
+msgstr "Addon naka-install Matagumpay"
+
+msgid "Addon Installation Failed, File download error"
+msgstr "Addon Installation Nabigo, File pag-download error"
+
+msgid "Please insert activation key to proceed"
+msgstr "Paki-insert activation key sa proceed"
+
+msgid "About Us"
+msgstr "Tungkol sa amin"
+
+msgid "Auto Update Add-Ons"
+msgstr "Auto i-update magdagdag-Ons"
+
+msgid "Auto Update"
+msgstr "Auto i-update"
+
+msgid "Addon will automatically update to the newest version"
+msgstr "Addon will automatically update na ang newest version"
+
+msgid "On"
+msgstr "On"
+
+msgid "Off"
+msgstr "Off"
+
+msgid "Add-Ons"
+msgstr "Magdagdag-Ons"
+
+msgid "New Update Version"
+msgstr "Bago i-update Bersyon"
+
+msgid "is Available"
+msgstr "ay available"
+
+msgid "Customize"
+msgstr "I-customize"
+
+msgid "Quick Actions"
+msgstr "Quick Mga aksyon"
+
+msgid "Easily access your main tasks from here."
+msgstr "Easily access iyong main tasks mula sa dito."
+
+msgid "Create A Ticket"
+msgstr "Gumawa ISANG Tiket"
+
+msgid "Add WP Users"
+msgstr "Magdagdag ng wp mga gumagamit"
+
+msgid "New Tickets"
+msgstr "Bago Mga tiket"
+
+msgid "Pending Tickets"
+msgstr "Pending Mga tiket"
+
+msgid "Answered Tickets"
+msgstr "Answered Mga tiket"
+
+msgid "Closed Tickets"
+msgstr "Sarado Mga tiket"
+
+msgid "New Addon Update Available"
+msgstr "New Addon Update available"
+
+msgid "Install the latest version to unlock new features and security patches."
+msgstr "Install ang pinakabago bersyon sa unlock bago features at security patches."
+
+msgid "Update Now"
+msgstr "I-update Now"
+
+msgid "Daily Ticket Flow"
+msgstr "Daily Tiket Flow"
+
+msgid "Here's a summary of today's ticket activity. This helps in tracking our daily progress and workload."
+msgstr "Here's isang buod ng today's tiket activity. Ito helps sa tracking our daily progress at workload."
+
+msgid "Created Tickets"
+msgstr "Nalikha Mga tiket"
+
+msgid "Your activation key has expired."
+msgstr "Iyong activation key nag-expire na."
+
+msgid "Please reactivate your key to continue receiving product updates, addons, and support."
+msgstr "Paki-reactivate iyong key sa continue receiving produkto updates, addons, at support."
+
+msgid "Reactivate Activation Key"
+msgstr "I-reactivate ang activation key"
+
+msgid "Ticket Analysis (Last 7 Days)"
+msgstr "Tiket Analysis (Huli 7 Araw)"
+
+msgid "Ticket Distribution (Today)"
+msgstr "Tiket Distribution (Ngayon)"
+
+msgid "Recent Tickets"
+msgstr "Kamakailan Mga tiket"
+
+msgid "ago"
+msgstr "nakaraan"
+
+msgid "No Recent Tickets"
+msgstr "Hindi Kamakailan Mga tiket"
+
+msgid "New tickets will be displayed in this section."
+msgstr "Bago mga tiket ay magiging displayed sa ito section."
+
+msgid "View All Tickets"
+msgstr "Tingnan ang lahat ng tiket"
+
+msgid "Unassigned Tickets"
+msgstr "Unassigned Mga tiket"
+
+msgid "All Tickets Assigned"
+msgstr "Lahat Mga tiket Assigned"
+
+msgid "Great job! There are no unassigned tickets."
+msgstr "Great job! There are no unassigned mga tiket."
+
+msgid "Ticket Action History"
+msgstr "Tiket Aksyon History"
+
+msgid "No Recent Actions"
+msgstr "Hindi Kamakailan Mga aksyon"
+
+msgid "Ticket updates and changes will appear here."
+msgstr "Tiket updates at changes will appear dito."
+
+msgid "Recently Replied"
+msgstr "Kamakailang sinagot"
+
+msgid "No Replies Yet"
+msgstr "Hindi Mga tugon Yet"
+
+msgid "Recently replied tickets will be shown here."
+msgstr "Recently replied mga tiket ay magiging shown dito."
+
+msgid "View All Replied Tickets"
+msgstr "Tingnan ang lahat replied mga tiket"
+
+msgid "Recently Closed"
+msgstr "Recently Sarado"
+
+msgid "No Closed Tickets"
+msgstr "Hindi Sarado Mga tiket"
+
+msgid "Recently closed tickets will be listed here."
+msgstr "Recently sarado mga tiket ay magiging listed dito."
+
+msgid "View All Closed Tickets"
+msgstr "Tingnan ang lahat sarado mga tiket"
+
+msgid "Agent Performance"
+msgstr "Ahente Performance"
+
+msgid "Assigned"
+msgstr "Naitalaga"
+
+msgid "No Agent Performance Data"
+msgstr "Hindi Ahente Performance Data"
+
+msgid "Performance metrics will be displayed here."
+msgstr "Performance metrics ay magiging displayed dito."
+
+msgid "Recent Canned Responses"
+msgstr "Kamakailan Canned Responses"
+
+msgid "No Canned Responses"
+msgstr "Hindi Canned Responses"
+
+msgid "Recent canned responses will be listed here."
+msgstr "Kamakailan canned responses ay magiging listed dito."
+
+msgid "Active Timers"
+msgstr "Aktibo Timers"
+
+msgid "No Active Timers"
+msgstr "Hindi Aktibo Timers"
+
+msgid "Timers started by agent will be shown here."
+msgstr "Timers started ni ahente ay magiging shown dito."
+
+msgid "Open Tickets By Age"
+msgstr "Bukas Mga tiket Ni Age"
+
+msgid "Most Active Customers"
+msgstr "Most Aktibo Mga kustomer"
+
+msgid "No Customer Activity"
+msgstr "Hindi Kustomer Activity"
+
+msgid "Customers with the most tickets will be listed here."
+msgstr "Mga kustomer kasama ang ang most mga tiket ay magiging listed dito."
+
+msgid "Tickets By Products"
+msgstr "Mga tiket Ni Mga produkto"
+
+msgid "Add agents and assign roles and permissions to provide assistance and support to customer support tickets."
+msgstr "Magdagdag ng mga ahente ng suporta at italaga mga tungkulin at permissions na provide assistance at support na kliyente support mga tiket."
+
+msgid "Get AI-powered, context-based suggestions to effortlessly create clear, relevant, and helpful replies."
+msgstr "Get AI-powered, context-based suggestions sa effortlessly gumawa clear, relevant, at helpful mga tugon."
+
+msgid "Define rules for ticket to auto close. Ticket will be auto close after specific interval of time which can be set by admin."
+msgstr "Define rules para sa tiket na auto isara. Tiket will be auto isara after specific interval of time which maaaring be set ni admin."
+
+msgid "Get the survey from your customers on ticket closing to improve your quality of services and assistance."
+msgstr "Get ang survey mula sa iyong mga kustomer sa tiket closing sa improve iyong quality ng services at assistance."
+
+msgid "Help topics help users to find and select the area with which they need assistance."
+msgstr "Tulong topics tulong mga gumagamit sa find at pumili ang area kasama ang which they need assistance."
+
+msgid "The private note is used as reminders or to give other agents insights into the ticket issue. User Would not see the private notes."
+msgstr "ang private note is used as reminders o na give other mga ahente ng suporta insights into ang tiket issue. Gumagamit Would hindi see ang private notes."
+
+msgid "Stop losing productivity on repetitive queries,Build your knowledge base, group solutions by topics to facilitate users."
+msgstr "Stop losing productivity sa repetitive queries,Build iyong knowledge base, group solutions ni topics sa facilitate mga gumagamit."
+
+msgid "Enables admin to set N numbers of tickets for users to create and set N numbers of Ticket to open for agents separately."
+msgstr "Enables admin sa set N numbers ng mga tiket para sa mga gumagamit sa gumawa at set N numbers ng Tiket sa bukas para sa mga ahente separately."
+
+msgid "Enables agents to merge two tickets of the same user into one instead of dealing with the same issue on many tickets."
+msgstr "Enables mga ahente sa pagsamahin two mga tiket ng ang same gumagamit into one instead ng dealing kasama ang ang same isyu sa many mga tiket."
+
+msgid "Defines rules or set specific intervals of time to make ticket auto overdue.The ticket can overdue by type or overdue by Cronjob."
+msgstr "Defines rules o set specific intervals of time na make tiket auto overdue.ang tiket maaaring overdue ni type o overdue ni Cronjob."
+
+msgid "SMTP allows you to use a custom mail server to send emails from JS Help Desk."
+msgstr "SMTP allows you na gamitin a custom mail server na ipadala emails mula sa JS Help Desk."
+
+msgid "Displays complete ticket history along with the ticket status, currently assigned user and other actions performed on each ticket."
+msgstr "Displays complete tiket history along kasama ang ang katayuan ng tiket, currently assigned gumagamit at other mga aksyon performed sa each tiket."
+
+msgid "Canned Responses are pre-populated messages that allows support agents to respond quickly to customer issues."
+msgstr "Canned Responses are pre-populated mga mensahe iyon allows support mga ahente ng suporta na respond quickly na kliyente issues."
+
+msgid "Enables users to reply to the tickets via email without the need to login to the support system first."
+msgstr "Enables mga gumagamit na tugon na ang mga tiket sa pamamagitan ng email walang ang need na pag-login na ang support system first."
+
+msgid "Track the time spent on each ticket by each agent and each reply. Report the admin on how much time is spent on each ticket."
+msgstr "Track ang time spent sa each tiket ni each ahente ng suporta at each tugon. Report ang admin sa how much time is spent sa each tiket."
+
+msgid "User options enable you to add Google Re-captcha or JS Help Desk Re-captcha for a registration form."
+msgstr "Gumagamit options paganahin ikaw sa magdagdag Google Re-captcha o JS Help Desk Re-captcha para sa isang pagrehistro form."
+
+msgid "Get multiple action options on each ticket like Print Ticket, Lock Ticket, Transfer ticket, etc."
+msgstr "Get multiple aksyon options sa each tiket like i-print ang tiket, Lock Tiket, Transfer tiket, etc."
+
+msgid "Make unlimited announcements associated with support system to get customer interaction."
+msgstr "Make unlimited mga anunsyo associated may support system na get kliyente interaction."
+
+msgid "Ban Email allows you to block email of any user to restrict him to create new tickets."
+msgstr "Ban Email allows you na block email of any gumagamit na restrict him na create new mga tiket."
+
+msgid "The Desktop notifications will keep you up to date about anything happens on your support system."
+msgstr "ang Desktop notifications will keep you up na date about anything happens sa your support system."
+
+msgid "Save the ticket as a PDF in your system or the admin will also be able to export all the data inside of Ticket."
+msgstr "I-save ang ang tiket as a pdf in your system o ang admin will also be able na pag-export all ang data inside of tiket."
+
+msgid "Create downloads to ensure the user to get downloads from downloads."
+msgstr "Gumawa mga download sa ensure ang gumagamit sa get mga download mula sa mga download."
+
+msgid "Tired of getting tickets about the same problems? Add FAQs to drastically reduce the number of common questions from users."
+msgstr "Tired ng getting mga tiket about ang same problems? magdagdag Mga FAQ sa drastically reduce ang number ng common questions mula sa mga gumagamit."
+
+msgid "Dashboard Widgets"
+msgstr "Mga widget ng dashboard"
+
+msgid "Get immediate data of your support operations as soon as you log into your WordPress administration area."
+msgstr "Kunin agad ang data ng iyong support operations sa sandaling mag-log in ka sa WordPress administration area."
+
+msgid "Use internal email to send emails to one agent to another agent with in support ticket."
+msgstr "Gamitin internal email na ipadala emails na one ahente ng suporta na another ahente ng suporta may in tiket ng suporta."
+
+msgid "Widgets in WordPress allow you to add content and features in the widgetized areas of your theme."
+msgstr "Widgets in WordPress payagan you na add content at features in ang widgetized areas of your theme."
+
+msgid "JS Help Desk WooCommerce provides the much-needed bridge between your WooCommerce store and the JS Help Desk."
+msgstr "JS Help Desk WooCommerce provides ang much-needed bridge between iyong WooCommerce store at ang JS Help Desk."
+
+msgid "Without a valid Envato license, clients will not be able to open a new ticket."
+msgstr "walang a valid Envato license, clients will hindi be able na bukas a new tiket."
+
+msgid "Adds the option to the registration form for prompting new users to subscribe to your email list."
+msgstr "Adds ang option na ang registration form para sa prompting new mga gumagamit na subscribe na your email listahan."
+
+msgid "Paid Support is the easiest way to integrate and manage payments for your tickets."
+msgstr "Paid Support is ang easiest way na integrate at manage payments para sa your mga tiket."
+
+msgid "EDD offers customers to open new tickets just one click from their EDD account."
+msgstr "EDD offers mga kliyente na bukas new mga tiket just one i-click mula sa their EDD account."
+
+msgid "It allows to create language-based email templates for all JS Help Desk email templates."
+msgstr "It allows na create language-based email templates para sa all JS Help Desk email templates."
+
+msgid "CC(Carbon Copy) - the people who should know about the information which is being shared and the people included are able to see who is there in the list."
+msgstr "CC(Carbon Copy) - ang people who should know about ang information which is being shared at ang people included are able na see who is there in ang listahan."
+
+msgid "It allows user to add more than one form based on requirements."
+msgstr "Ito allows gumagamit sa magdagdag higit pa than one form based sa requirements."
+
+msgid "When auto assignment is enabled and a ticket is created, an appropriate agent is automatically assigned to the ticket and it is moved to the Assigned state."
+msgstr "When auto assignment is pinagana at a tiket is nilikha, an appropriate ahente ng suporta is automatically assigned na ang tiket at it is moved na ang Assigned state."
+
+msgid "Available Addons"
+msgstr "Mga available na Add-on"
+
+msgid "View Details"
+msgstr "Tingnan ang mga detalye"
+
+msgid "View All Addons"
+msgstr "Tingnan ang lahat addons"
+
+msgid "Quick Installation Guide"
+msgstr "Mabilisang gabay sa pag-install"
+
+msgid "How To Setup Of The Help Desk"
+msgstr "Paano Setup Ng Ang tulong desk"
+
+msgid "Video thumbnail"
+msgstr "Thumbnail ng video"
+
+msgid "Learn how to set up your Help Desk quickly and get it ready for use."
+msgstr "Learn how sa set up iyong tulong desk quickly at get ito ready para sa use."
+
+msgid "How To Setup System Emails"
+msgstr "Mga email ng how na setup system"
+
+msgid "Learn how to setup out going notification in the best Help Desk plugin for WordPress"
+msgstr "Learn how sa setup out going abiso sa ang best tulong desk plugin para sa WordPress"
+
+msgid "How To Create A Ticket"
+msgstr "Paano gumawa ISANG Tiket"
+
+msgid "A simple walkthrough of the ticket creation process for both user and administrator."
+msgstr "ISANG simple walkthrough ng ang tiket creation process para sa pareho gumagamit at administrator."
+
+msgid "How To Set Email Notifications"
+msgstr "How Na Set Email Notifications"
+
+msgid "Configure your email notification settings to stay updated on ticket activity."
+msgstr "Configure your email notification mga setting na stay na-update sa tiket activity."
+
+msgid "How To Setup Custom Fields"
+msgstr "How Na Setup Custom Fields"
+
+msgid "Learn how to add custom fields to your ticket forms to collect more specific information."
+msgstr "Learn how na add custom fields na your tiket forms na collect more specific information."
+
+msgid "Customize Dashboard"
+msgstr "I-customize ang dashboard"
+
+msgid "Number of Tickets"
+msgstr "Bilang ng mga tiket"
+
+msgid "Today"
+msgstr "Ngayon"
+
+msgid "Yesterday"
+msgstr "Kahapon"
+
+msgid "2 days ago"
+msgstr "2 araw ago"
+
+msgid "3 days ago"
+msgstr "3 araw ago"
+
+msgid "4 days ago"
+msgstr "4 araw ago"
+
+msgid "5 days ago"
+msgstr "5 araw ago"
+
+msgid "6+ days ago"
+msgstr "6+ araw ago"
+
+msgid "Number of Open Tickets"
+msgstr "Bilang ng mga bukas na tiket"
+
+msgid "Collect your customer"
+msgstr "Kolektahin ang iyong kustomer"
+
+msgid "Help icon"
+msgstr "Icon ng tulong"
+
+msgid "We are here to help you"
+msgstr "Narito kami upang tulungan ka"
+
+msgid "JS Help Desk is a professional, simple, easy to use and complete customer support system."
+msgstr "JS Help Desk is a professional, simple, easy na gamitin at complete kliyente support system."
+
+msgid "View All Videos"
+msgstr "Tingnan lahat ng video"
+
+msgid "Video icon"
+msgstr "Icon ng video"
+
+msgid "Help Desk icon"
+msgstr "Icon ng Help Desk"
+
+msgid "JS Help Desk Support"
+msgstr "Suporta ng JS Help Desk"
+
+msgid "JS Help Desk delivers timely customer support if you have any query then we're here to show you the way."
+msgstr "JS Help Desk delivers timely kliyente support kung you have any query then we're dito na show you ang way."
+
+msgid "Ticket creation"
+msgstr "Paglikha ng tiket"
+
+msgid "Visitor ticket creation"
+msgstr "Paglikha ng tiket ng bisita"
+
+msgid "How to set ticket auto close"
+msgstr "Paano itakda ang auto close ng tiket"
+
+msgid "How to reopen closed ticket"
+msgstr "Paano buksang muli ang saradong tiket"
+
+msgid "How to lock a ticket"
+msgstr "Paano i-lock ang tiket"
+
+msgid "How to add private note"
+msgstr "Paano magdagdag ng pribadong tala"
+
+msgid "View ticket history"
+msgstr "Tingnan ang kasaysayan ng tiket"
+
+msgid "How to setup custom fields"
+msgstr "How na setup custom fields"
+
+msgid "Set ticket auto overdue"
+msgstr "Itakda ang auto overdue ng tiket"
+
+msgid "Manually set ticket overdue"
+msgstr "Manu-manong itakda ang tiket bilang overdue"
+
+msgid "How to merge tickets"
+msgstr "Paano pagsamahin ang mga tiket"
+
+msgid "How to export tickets"
+msgstr "Paano i-export ang mga tiket"
+
+msgid "How use help topic"
+msgstr "Paano gamitin ang paksa ng tulong"
+
+msgid "How to change department"
+msgstr "Paano palitan ang departamento"
+
+msgid "How to use multi-forms"
+msgstr "Paano gamitin ang multi-forms"
+
+msgid "How to paid support"
+msgstr "How na paid support"
+
+msgid "How to use canned response"
+msgstr "Paano gamitin ang nakahandang tugon"
+
+msgid "How to add private credentials"
+msgstr "Paano magdagdag ng pribadong kredensyal"
+
+msgid "How to ban/unban user"
+msgstr "Paano i-ban/i-unban ang gumagamit"
+
+msgid "Agent system"
+msgstr "System ng ahente"
+
+msgid "Manually assign ticket to agent"
+msgstr "Manu-manong italaga ang tiket sa ahente"
+
+msgid "How to edit time"
+msgstr "Paano i-edit ang oras"
+
+msgid "How to use time tracking"
+msgstr "Paano gamitin ang time tracking"
+
+msgid "How to set max open ticket"
+msgstr "Paano itakda ang maximum na bukas na tiket"
+
+msgid "How to show counts"
+msgstr "Paano ipakita ang mga bilang"
+
+msgid "How to set Captcha"
+msgstr "Paano itakda ang Captcha"
+
+msgid "How to set login redirect"
+msgstr "Paano itakda ang login redirect"
+
+msgid "How to set fields ordering"
+msgstr "How na set fields ordering"
+
+msgid "How to enable social login"
+msgstr "Paano paganahin ang social login"
+
+msgid "Setup"
+msgstr "Pag-setup"
+
+msgid "How to setup"
+msgstr "Paano i-setup"
+
+msgid "How to enable email piping"
+msgstr "How na enable email piping"
+
+msgid "How to set SMTP"
+msgstr "Paano itakda ang SMTP"
+
+msgid "How to solve email notification problem"
+msgstr "How na solve email notification problem"
+
+msgid "How to translate"
+msgstr "Paano magsalin"
+
+msgid "How to set colors"
+msgstr "Paano itakda ang mga kulay"
+
+msgid "How to add shortcodes"
+msgstr "Paano magdagdag ng mga shortcode"
+
+msgid "How to install addons"
+msgstr "How na install addons"
+
+msgid "How to enable desktop notifications"
+msgstr "Paano paganahin ang desktop notifications"
+
+msgid "How to use knowledge base"
+msgstr "How na gamitin knowledge base"
+
+msgid "How to use downloads"
+msgstr "How na gamitin mga pag-pag-download"
+
+msgid "How to add announcement"
+msgstr "Paano magdagdag anunsyo"
+
+msgid "How to create FAQ"
+msgstr "Paano gumawa FAQ"
+
+msgid "Misc"
+msgstr "Iba pa"
+
+msgid "How to use email cc"
+msgstr "How na gamitin email cc"
+
+msgid "How to use internal mail"
+msgstr "How na gamitin internal mail"
+
+msgid "Use front-end widgets"
+msgstr "Gumamit ng mga widget sa front-end"
+
+msgid "How to enable admin widgets"
+msgstr "How na enable admin widgets"
+
+msgid "JS Help Desk / JS Support Ticket Control Panel"
+msgstr "JS Help Desk / JS Tiket ng suporta Control Panel"
+
+msgid "JS Help Desk / JS Support Ticket main control panel"
+msgstr "JS Help Desk / JS Tiket ng suporta main control panel"
+
+msgid "Add new ticket form for both user and agent"
+msgstr "Magdagdag ng bago tiket form para sa pareho gumagamit at ahente"
+
+msgid "Add Ticket Using Multiform"
+msgstr "Magdagdag ng tiket using multiform"
+
+msgid "My tickets for both user and agent"
+msgstr "My mga tiket para sa pareho gumagamit at ahente"
+
+msgid "List downloads"
+msgstr "List mga download"
+
+msgid "Show latest downloads. Options"
+msgstr "Ipakita ang pinakabago mga download. options"
+
+msgid "and"
+msgstr "at"
+
+msgid "i.e."
+msgstr "ibig sabihin"
+
+msgid "Show popular downloads. Options"
+msgstr "Ipakita ang popular mga download. options"
+
+msgid "List knowledge base"
+msgstr "Ilista ang knowledge base"
+
+msgid "Show latest knowledge base. Options"
+msgstr "Ipakita ang pinakabago knowledge base. options"
+
+msgid "Show popular knowledge base. Options"
+msgstr "Ipakita ang popular knowledge base. options"
+
+msgid "Show latest FAQs. Options"
+msgstr "Ipakita ang pinakabago mga faq. options"
+
+msgid "Show popular FAQs. Options"
+msgstr "Ipakita ang popular mga faq. options"
+
+msgid "List announcements"
+msgstr "List mga anunsyo"
+
+msgid "Show latest announcements. Options"
+msgstr "Ipakita ang pinakabago mga anunsyo. options"
+
+msgid "Show popular announcements. Options"
+msgstr "Ipakita ang popular mga anunsyo. options"
+
+msgid "Get"
+msgstr "Kunin"
+
+msgid "Translation"
+msgstr "Pagsasalin"
+
+msgid "When WordPress language change to fr, JS Help Desk language will auto change to fr"
+msgstr "When WordPress language change na fr, JS Help Desk language will auto change na fr"
+
+msgid "c error"
+msgstr "c error"
+
+msgid "saved"
+msgstr "na-save"
+
+msgid "Contribute In Translation"
+msgstr "Contribute Sa Translation"
+
+msgid "translate"
+msgstr "isalin"
+
+msgid "Manual Download"
+msgstr "Manu-manong pag-download"
+
+msgid "Tickets Over Time"
+msgstr "Mga tiket Over Oras"
+
+msgid "Log In"
+msgstr "Mag-login"
+
+msgid "Agent Feedback"
+msgstr "Ahente Feedback"
+
+msgid "Welcome Back To"
+msgstr "Welcome Back Sa"
+
+msgid "As a visitor, you can easily create a support ticket by sharing your issue details."
+msgstr "As a visitor, you maaaring easily create a tiket ng suporta ni sharing your issue details."
+
+msgid "Have An Issue?"
+msgstr "Have Isang Isyu?"
+
+msgid "Our support team is here to help. Create a new ticket to get started."
+msgstr "Our support team is dito na help. Create a new tiket na get started."
+
+msgid "Create New Ticket"
+msgstr "Gumawa Bago Tiket"
+
+msgid "Enter your information to check the status of your existing ticket."
+msgstr "Enter iyong information sa check ang katayuan ng iyong existing tiket."
+
+msgid "Welcome Back"
+msgstr "Maligayang pagbabalik"
+
+msgid "You have"
+msgstr "Ikaw have"
+
+msgid "no open ticket"
+msgstr "hindi bukas tiket"
+
+msgid ", and"
+msgstr ", at"
+
+msgid "is awaiting your reply."
+msgstr "is awaiting your tugon."
+
+msgid "Need to assist a user?"
+msgstr "Need sa assist isang gumagamit?"
+
+msgid "Quickly create a new ticket on behalf of a user to provide support and track their request."
+msgstr "Quickly create a new tiket sa behalf of a gumagamit na provide support at track their request."
+
+msgid "Open Ticket For User"
+msgstr "Bukas Tiket Para sa Gumagamit"
+
+msgid "OR Create a"
+msgstr "O gumawa isang"
+
+msgid "Your Ticket Stats"
+msgstr "Iyong Tiket Stats"
+
+msgid "closed ticket"
+msgstr "sarado tiket"
+
+msgid "answered ticket"
+msgstr "answered tiket"
+
+msgid "Overdue Tickets"
+msgstr "Overdue Mga tiket"
+
+msgid "View All"
+msgstr "Tingnan ang lahat"
+
+msgid "You replied"
+msgstr "Ikaw replied"
+
+msgid "Reply from"
+msgstr "Tugon mula sa"
+
+msgid "Open Ticket"
+msgstr "Bukas Tiket"
+
+msgid "keep me login"
+msgstr "keep me pag-login"
+
+msgid "Repeat Password"
+msgstr "Ulitin ang password"
+
+msgid "Subscribe to the newsletter"
+msgstr "Subscribe sa ang newsletter"
+
+msgid "has been changed"
+msgstr "ay na nabago"
+
+msgid "has not been changed"
+msgstr "ay hindi na nabago"
+
+msgid "Let's Get your Configuration Setup"
+msgstr "Let's Get iyong Configuration Setup"
+
+msgid "Complete"
+msgstr "Kumpleto"
+
+msgid "Configurations Complete"
+msgstr "Mga configuration Complete"
+
+msgid "Setting Completed"
+msgstr "Nakumpleto ang setting"
+
+msgid "Setting you applied has been saved successfully."
+msgstr "Setting you applied has been saved matagumpay."
+
+msgid "Finish"
+msgstr "Tapusin"
+
+msgid "JS Support Ticket Settings"
+msgstr "Mga setting ng js tiket ng suporta"
+
+msgid "General Configurations"
+msgstr "Pangkalahatan Mga configuration"
+
+msgid "Step 1 of "
+msgstr "Step 1 ng"
+
+msgid "Enter the site title"
+msgstr "Enter ang site pamagat"
+
+msgid "Date format for plugin"
+msgstr "Petsa format para sa plugin"
+
+msgid "Upload file size in KB's"
+msgstr "Upload file size sa KB's"
+
+msgid "Show navigation in breadcrumbs"
+msgstr "Ipakita ang navigation sa breadcrumbs"
+
+msgid "Save & Next"
+msgstr "I-save ang & susunod"
+
+msgid "Sequential"
+msgstr "Sunod-sunod"
+
+msgid "Feedback Configurations"
+msgstr "Feedback Mga configuration"
+
+msgid "Step 4 of 5"
+msgstr "Step 4 ng 5"
+
+msgid "Set Email Delay Time"
+msgstr "Itakda ang oras ng pagkaantala ng email"
+
+msgid "Set Email Delay"
+msgstr "Itakda ang pagkaantala ng email"
+
+msgid "Back"
+msgstr "Bumalik"
+
+msgid "Ticket Configurations"
+msgstr "Tiket Mga configuration"
+
+msgid "Step 2 of "
+msgstr "Step 2 ng"
+
+msgid "Enable / Disable Open Ticket"
+msgstr "Paganahin / huwag paganahin Bukas Tiket"
+
+msgid "Ticket ID sequence"
+msgstr "Tiket ID sequence"
+
+msgid "Set ticket id sequential or random"
+msgstr "Set ID ng tiket sequential o random"
+
+msgid "Set Maximum Ticket Per user"
+msgstr "Set Maximum Tiket Per gumagamit"
+
+msgid "Enable / Disable Captcha on Ticket Form"
+msgstr "Paganahin / huwag paganahin Captcha sa Tiket Form"
+
+msgid "Enable / Disable Own Captcha subtraction"
+msgstr "Paganahin / huwag paganahin Sarili Captcha subtraction"
+
+msgid "Enable Print Ticket"
+msgstr "Paganahin i-print ang tiket"
+
+msgid "Enable / Disable Print Ticket"
+msgstr "Paganahin / huwag paganahin i-print ang tiket"
+
+msgid "Download Translation File"
+msgstr "I-download ang file ng pagsasalin"
+
+msgid "Want to download translation file? Click on download. It will take sometime."
+msgstr "Want na pag-download translation file? I-i-click sa pag-download. It will take sometime."
+
+msgid "Download & Next"
+msgstr "Download & Susunod"
+
+msgid "Skip this step"
+msgstr "Skip ito step"
+
+msgid "Welcome To JS Support Ticket"
+msgstr "Welcome Na JS Tiket ng suporta"
+
+msgid "Let's Get Your Configuration Set Up"
+msgstr "Let's Get Iyong Configuration Set Up"
+
+msgid "Plugin Quick Settings"
+msgstr "Mga setting ng plugin quick"
+
+msgid "Move to Dashboard"
+msgstr "Move na Dashboard"
+
+msgid "Please select at least one addon!"
+msgstr "Paki-pumili at least one addon!"
+
+msgid "Addon(s) Installed successfully!"
+msgstr "Addon(s) Installed matagumpay!"
+
+msgid "Addon(s) Installation Failed"
+msgstr "Addon(s) Installation nabigo"
+
+msgid "No unused keys were found."
+msgstr "Walang nakitang hindi nagamit na key."
+
+msgid "unused key has been deleted successfully!"
+msgstr "unused key ay na natanggal matagumpay!"
+
+msgid "unused keys have been deleted successfully!"
+msgstr "unused keys have been natanggal matagumpay!"
+
+msgid "Addon installation failed, Directory permission error"
+msgstr "Addon installation nabigo, Directory permission error"
+
+msgid "left image"
+msgstr "kaliwa larawan"
+
+msgid "right image"
+msgstr "kanan larawan"
+
+msgid "Add-On’s For Help Desk"
+msgstr "Mga Add-on para sa Help Desk"
+
+msgid "Get trusted WordPress add on’s. Guaranteed to work fast, safe to use, beautifully coded, packed with features and easy to use."
+msgstr "Kunin ang mapagkakatiwalaang WordPress Add-ons. Garantisadong mabilis gumana, ligtas gamitin, maayos ang pagkakagawa, maraming feature, at madaling gamitin."
+
+msgid "Save big with an exclusive membership plan today!"
+msgstr "I-save ang big kasama ang isang exclusive membership plan ngayon!"
+
+msgid "show bundle pack"
+msgstr "ipakita bundle pack"
+
+msgid "buy now"
+msgstr "bumili ngayon"
+
+msgid "private note"
+msgstr "pribadong tala"
+
+msgid "Desktop Notifications"
+msgstr "Desktop Mga abiso"
+
+msgid "frontend widget"
+msgstr "widget sa frontend"
+
+msgid "Collect your customers private data, sensitive information from credit card to health information, and store them encrypted."
+msgstr "Collect iyong mga kustomer pribado data, sensitive information mula sa credit card sa health information, at store them encrypted."
+
+msgid "WooCommerce Support"
+msgstr "Suporta sa WooCommerce"
+
+msgid "Paid Support is the easiest way to integrate and manage payments for your support tickets."
+msgstr "Paid Support is ang easiest way na integrate at manage payments para sa your support mga tiket."
+
+msgid "Envato"
+msgstr "Envato"
+
+msgid "The Mail Chimp add-on adds a new checkbox to the registration form for prompting new users to subscribe your email-list."
+msgstr "Ang Mail Chimp magdagdag-on adds isang bago checkbox sa ang pagrehistro form para sa prompting bago mga gumagamit sa subscribe iyong email-list."
+
+msgid "EDD offers customers to open new tickets just one click from their EDD account with optionally validating the license keys."
+msgstr "EDD offers mga kliyente na bukas new mga tiket just one i-click mula sa their EDD account may optionally validating ang license keys."
+
+msgid "Multiform allows user to add more than one form based on requirements."
+msgstr "Multiform allows gumagamit sa magdagdag higit pa than one form based sa requirements."
+
+msgid "Users can login from their social media accounts. They can create a new account or use social media accounts."
+msgstr "Mga gumagamit maaaring pag-login mula sa their social media accounts. They maaaring create a new account o gamitin social media accounts."
+
+msgid "JS Help Desk Add-Ons Bundle Pack"
+msgstr "JS Help Desk magdagdag-Ons Bundle Pack"
+
+msgid "Basic"
+msgstr "Basic"
+
+msgid "Unlimited Agents"
+msgstr "Unlimited Mga ahente"
+
+msgid "Standard"
+msgstr "Standard"
+
+msgid "Everything in basic included and"
+msgstr "Everything sa basic included at"
+
+msgid "Professional"
+msgstr "Professional"
+
+msgid "Everything in standard included and"
+msgstr "Everything sa standard included at"
+
+msgid "All Future Addons"
+msgstr "Lahat Future Addons"
+
+msgid "Premium Addons"
+msgstr "Mga premium Add-on"
+
+msgid "addon in no longer active"
+msgstr "addon in no longer aktibo"
+
+msgid "JS Help Desk Addon Installer"
+msgstr "Installer ng Add-on ng JS Help Desk"
+
+msgid "Please Insert Your Activation key"
+msgstr "Paki-Insert Iyong Activation key"
+
+msgid "Activation key"
+msgstr "Activation key"
+
+msgid "Proceed"
+msgstr "Magpatuloy"
+
+msgid "All allowed add ons are already installed"
+msgstr "All allowed add ons are na naka-install"
+
+msgid "You are not allowed to install any add on"
+msgstr "You are hindi allowed na install any add sa"
+
+msgid "Select Addons for download"
+msgstr "Pumili ng addons para sa download"
+
+msgid "Select All Addons"
+msgstr "Pumili ng lahat addons"
+
+msgid "Add ons installed and activated successfully"
+msgstr "Magdagdag ng ons installed at activated matagumpay"
+
+msgid "Add ons for JS Help Desk have been installed and activated successfully. "
+msgstr "Magdagdag ng ons para sa js help desk have been naka-install at activated matagumpay."
+
+msgid "JS Helpdesk Activation Key"
+msgstr "Activation key ng JS Helpdesk"
+
+msgid "XXXXX-XXXXX-XXXXX-XXXXX"
+msgstr "XXXXX-XXXXX-XXXXX-XXXXX"
+
+msgid "The highlighted addons are not included in your current license. Please adjust your selection accordingly."
+msgstr "ang highlighted addons are hindi included in your current license. Pakisuyo adjust your selection accordingly."
+
+msgid "Select Addons To Update With New Activation Key"
+msgstr "Pumili ng addons sa i-update kasama ang bago activation key"
+
+msgid "No Addon Installed!"
+msgstr "No Addon naka-install!"
+
+msgid "This will replace the old key with the new one."
+msgstr "ito will replace ang old key may ang new one."
+
+msgid "Manage Unused Keys"
+msgstr "Pamahalaan ang hindi nagamit na mga key"
+
+msgid "unused key(s) that can be safely removed."
+msgstr "unused key(s) iyon maaaring be safely removed."
+
+msgid "Delete All Unused Keys"
+msgstr "Tanggalin ang lahat unused keys"
+
+msgid "Page Not Found !!"
+msgstr "Pahina hindi Found !!"
+
+msgid "Priority Title Already Exist"
+msgstr "Prayoridad Pamagat Na Exist"
+
+msgid "Priority has been stored"
+msgstr "Na-save ang priyoridad"
+
+msgid "Priority has not been stored"
+msgstr "Hindi na-save ang priyoridad"
+
+msgid "Priority has been deleted"
+msgstr "Natanggal ang priyoridad"
+
+msgid "Priority has not been deleted"
+msgstr "Hindi natanggal ang priyoridad"
+
+msgid "Default priority cannot delete"
+msgstr "Default priyoridad hindi maaaring tanggalin"
+
+msgid "Priority has been make default"
+msgstr "Priyoridad ay na make default"
+
+msgid "Priority has not been make default"
+msgstr "Priyoridad ay hindi na make default"
+
+msgid "Color"
+msgstr "Kulay"
+
+msgid "Ticket Overdue Interval Type"
+msgstr "Uri ng tiket overdue interval"
+
+msgid "Save Priority"
+msgstr "I-save ang priyoridad"
+
+msgid "Date Interval"
+msgstr "Petsa Interval"
+
+msgid "Product Title Already Exist"
+msgstr "Produkto Pamagat Na Exist"
+
+msgid "Product has been stored"
+msgstr "Na-save ang produkto"
+
+msgid "Product has not been stored"
+msgstr "Hindi na-save ang produkto"
+
+msgid "Product has been deleted"
+msgstr "Natanggal ang produkto"
+
+msgid "Product has not been deleted"
+msgstr "Hindi natanggal ang produkto"
+
+msgid "Save Product"
+msgstr "I-save ang produkto"
+
+msgid "Reply posted"
+msgstr "Tugon posted"
+
+msgid "Reply posted on ticket"
+msgstr "Tugon posted sa tiket"
+
+msgid "Guest"
+msgstr "Bisita"
+
+msgid "Ticket is replied by"
+msgstr "Tiket is replied ni"
+
+msgid "Reply Has been Posted"
+msgstr "Tugon ay na Posted"
+
+msgid "Reply Has Not been Posted"
+msgstr "Tugon ay hindi na Posted"
+
+msgid "You do not have permission to use AI features."
+msgstr "You do hindi have permission na gamitin AI features."
+
+msgid "Dates"
+msgstr "Mga petsa"
+
+msgid "Department Detail Report"
+msgstr "Ulat ng detalye ng departamento"
+
+msgid "Export Data"
+msgstr "I-export Data"
+
+msgid "Department Statistics"
+msgstr "Departamento Estadistika"
+
+msgid "Time Taken"
+msgstr "Oras Taken"
+
+msgid "Out of"
+msgstr "Out ng"
+
+msgid "Overall Report"
+msgstr "Pangkalahatang ulat"
+
+msgid "Ticket by departments"
+msgstr "Tiket ni mga departamento"
+
+msgid "Agent Tickets"
+msgstr "Ahente Mga tiket"
+
+msgid "Tickets By Statuses And Priorities"
+msgstr "Mga tiket Ni Statuses At Mga priyoridad"
+
+msgid "Tickets By Agents"
+msgstr "Mga tiket Ni Mga ahente"
+
+msgid "Based on"
+msgstr "Based sa"
+
+msgid "Customer Satisfaction"
+msgstr "Kasiyahan ng kustomer"
+
+msgid "satisfaction image"
+msgstr "kasiyahan larawan"
+
+msgid "Excellent"
+msgstr "Mahusay"
+
+msgid "NA"
+msgstr "NA"
+
+msgid "Normal"
+msgstr "Normal"
+
+msgid "bad"
+msgstr "hindi maganda"
+
+msgid "Angry"
+msgstr "Galit"
+
+msgid "Agent Detail Report"
+msgstr "Ulat ng detalye ng ahente"
+
+msgid "Agent Statistics"
+msgstr "Ahente Estadistika"
+
+msgid "agent image"
+msgstr "ahente larawan"
+
+msgid "Tickets not assigned to the agent"
+msgstr "Mga tiket not assigned sa ang ahente"
+
+msgid "Minutes"
+msgstr "Mga minuto"
+
+msgid "User Detail Report"
+msgstr "Ulat ng detalye ng gumagamit"
+
+msgid "User Statistics"
+msgstr "Gumagamit Estadistika"
+
+msgid "Users"
+msgstr "Mga gumagamit"
+
+msgid "Ticket Status By Departments"
+msgstr "Katayuan ng tiket Ni Mga departamento"
+
+msgid "Agent Report"
+msgstr "Ulat ng ahente"
+
+msgid "Reports Statistics"
+msgstr "Mga ulat Estadistika"
+
+msgid "Slug(s) has been stored"
+msgstr "Na-save ang slug(s)"
+
+msgid "Prefix has not been stored"
+msgstr "Hindi na-save ang prefix"
+
+msgid "Prefix has been stored"
+msgstr "Na-save ang prefix"
+
+msgid "Reset All"
+msgstr "I-reset Lahat"
+
+msgid "Home Slug"
+msgstr "Home slug"
+
+msgid "Prefix"
+msgstr "Prefix"
+
+msgid "This prefix will be added to slug incase of homepage links"
+msgstr "Ito prefix ay magiging added sa slug incase ng homepage mga link"
+
+msgid "This prefix will be added to slug incase of conflict"
+msgstr "Ito prefix ay magiging added sa slug incase ng conflict"
+
+msgid "Search By Slug"
+msgstr "Maghanap Ni Slug"
+
+msgid "Slug List"
+msgstr "Listahan ng slug"
+
+msgid "This button will only save slugs on current page"
+msgstr "ito button will only i-save slugs sa current pahina"
+
+msgid "Status Title Already Exist"
+msgstr "Katayuan Pamagat Na Exist"
+
+msgid "Status has been stored"
+msgstr "Na-save ang katayuan"
+
+msgid "Status has not been stored"
+msgstr "Hindi na-save ang katayuan"
+
+msgid "Status has been deleted"
+msgstr "Natanggal ang katayuan"
+
+msgid "Status has not been deleted"
+msgstr "Hindi natanggal ang katayuan"
+
+msgid "Text Color"
+msgstr "Text Kulay"
+
+msgid "Background Color"
+msgstr "Background Kulay"
+
+msgid "Save Status"
+msgstr "I-save ang katayuan"
+
+msgid "System error has been deleted"
+msgstr "Natanggal ang system error"
+
+msgid "System error has not been deleted"
+msgstr "Hindi natanggal ang system error"
+
+msgid "Remove All"
+msgstr "Remove Lahat"
+
+msgid "Theme Chooser"
+msgstr "Tagapili ng tema"
+
+msgid "Changes may require cache clearing to take effect. "
+msgstr "Changes may require cache clearing sa take effect."
+
+msgid "Ticket ID Or Email Address Or Subject"
+msgstr "Tiket ID o Email Address o Subject"
+
+msgid "Support"
+msgstr "Suporta"
+
+msgid "Low"
+msgstr "Mababa"
+
+msgid "High"
+msgstr "Mataas"
+
+msgid "Urgent"
+msgstr "Agarang kailangan"
+
+msgid "Sophie Martinez"
+msgstr "Sophie Martinez"
+
+msgid "I am Not Getting Access to My Subscription"
+msgstr "I am Not Getting Access sa My Subscription"
+
+msgid "Replied"
+msgstr "Nasagot"
+
+msgid "Daniel Brooks"
+msgstr "Daniel Brooks"
+
+msgid "Liam Turner"
+msgstr "Liam Turner"
+
+msgid "I Want to Upgrade My Plan — How Can I Do It?"
+msgstr "Gusto kong i-upgrade ang aking plan — paano ko ito gagawin?"
+
+msgid "ZJ6YydCNF"
+msgstr "ZJ6YydCNF"
+
+msgid "Emily Harper"
+msgstr "Emily Harper"
+
+msgid "Noah Bennett"
+msgstr "Noah Bennett"
+
+msgid "I Can’t Log Into My Account"
+msgstr "Hindi ako makapag-log in sa aking account"
+
+msgid "yTbM7qDmH"
+msgstr "yTbM7qDmH"
+
+msgid "Olivia Chase"
+msgstr "Olivia Chase"
+
+msgid "Maya Collins"
+msgstr "Maya Collins"
+
+msgid "How Long Will My Support Stay Active?"
+msgstr "How Long Will My Support Stay Aktibo?"
+
+msgid "GxvdTBWMY"
+msgstr "GxvdTBWMY"
+
+msgid "Ethan Reynolds"
+msgstr "Ethan Reynolds"
+
+msgid "Assign Ticket To Agent"
+msgstr "Italaga ang tiket sa ahente"
+
+msgid "Ticket is assigned to agent by"
+msgstr "Ang tiket ay itinalaga sa ahente ni"
+
+msgid "Ticket status change"
+msgstr "Pagbabago ng katayuan ng tiket"
+
+msgid "The status is changed by"
+msgstr "Ang katayuan ay binago ni"
+
+msgid "Change Priority"
+msgstr "Baguhin ang priyoridad"
+
+msgid "Ticket department transfer"
+msgstr "Paglipat ng departamento ng tiket"
+
+msgid "The department is transferred by"
+msgstr "Ang departamento ay inilipat ni"
+
+msgid "REPLIED_TICKET"
+msgstr "REPLIED_TIKET"
+
+msgid "by"
+msgstr "ni"
+
+msgid "icon"
+msgstr "icon"
+
+msgid "Plugin not installed"
+msgstr "Hindi naka-install ang plugin"
+
+msgid "Fetch Data"
+msgstr "Kunin ang data"
+
+msgid "found"
+msgstr "nahanap"
+
+msgid "Private Credentials Addon missing, ticket private credentials data will not be imported!"
+msgstr "Private Credentials Addon nawawala, tiket private credentials data will hindi be imported!"
+
+msgid "Ticket History Addon missing, full ticket history will not be imported!"
+msgstr "Tiket History Addon nawawala, full tiket history will hindi be imported!"
+
+msgid "Time Tracking Addon missing, ticket time tracking data will not be imported!"
+msgstr "Time Tracking Addon nawawala, tiket time tracking data will hindi be imported!"
+
+msgid "Note Addon missing, ticket internal note data will not be imported!"
+msgstr "Note Addon nawawala, tiket panloob na tala data will hindi be imported!"
+
+msgid "Addon not installed please install addon first."
+msgstr "Hindi naka-install ang Addon. Paki-install muna ang Addon."
+
+msgid "Import Data Report"
+msgstr "Ulat ng pag-import ng data"
+
+msgid "Entity"
+msgstr "Entity"
+
+msgid "Imported"
+msgstr "Na-import"
+
+msgid "Similar Found"
+msgstr "May katulad na nahanap"
+
+msgid "Not Imported"
+msgstr "Hindi na-import"
+
+msgid "Skipped"
+msgstr "Nilaktawan"
+
+msgid "Failed"
+msgstr "Nabigo"
+
+msgid "Fields are only available in the default form."
+msgstr "Fields are only available in ang default form."
+
+msgid "Support for this Envato license has expired"
+msgstr "Nag-expire na ang suporta para sa Envato license na ito"
+
+msgid "Record not found"
+msgstr "Hindi nahanap ang record"
+
+msgid "Banned email cannot create ticket"
+msgstr "Banned email hindi maaaring create tiket"
+
+msgid "Incorrect Captcha code"
+msgstr "Maling Captcha code"
+
+msgid "Please select paid support item"
+msgstr "Pakipili ang paid support item"
+
+msgid "No purchase found with that code"
+msgstr "Walang purchase na nahanap gamit ang code na iyon"
+
+msgid "Provide a valid license key to create a ticket."
+msgstr "Magbigay ng valid na license key upang makalikha ng tiket."
+
+msgid "Your license has expired."
+msgstr "Nag-expire na ang iyong lisensya."
+
+msgid "Your license is not active, activate your license."
+msgstr "Hindi aktibo ang iyong lisensya; i-activate ang iyong lisensya."
+
+msgid "Due date error is not valid"
+msgstr "Due date error is hindi valid"
+
+msgid "Ticket has not been created"
+msgstr "Hindi nalikha ang tiket"
+
+msgid "Ticket created"
+msgstr "Nalikha ang tiket"
+
+msgid "Ticket is updated by"
+msgstr "Ang tiket ay na-update ni"
+
+msgid "Ticket is created by"
+msgstr "Ang tiket ay nilikha ni"
+
+msgid "Ticket has been deleted"
+msgstr "Natanggal ang tiket"
+
+msgid "Ticket has not been deleted"
+msgstr "Hindi natanggal ang tiket"
+
+msgid "in use cannot be deleted"
+msgstr "Hindi maaaring natanggal ang ginagamit"
+
+msgid "Ticket already closed"
+msgstr "Sarado na ang tiket"
+
+msgid "Ticket has been closed"
+msgstr "Naisara ang tiket"
+
+msgid "Ticket has not been closed"
+msgstr "Hindi naisara ang tiket"
+
+msgid "Ticket is closed by"
+msgstr "Tiket is sarado ni"
+
+msgid "Your are not allowed"
+msgstr "Your are hindi allowed"
+
+msgid "The status has been changed"
+msgstr "Nabago ang katayuan"
+
+msgid "The status has not been changed"
+msgstr "Hindi nabago ang katayuan"
+
+msgid "The department has been transferred"
+msgstr "Ang departamento ay na transferred"
+
+msgid "The department has not been transferred"
+msgstr "Ang departamento ay hindi na transferred"
+
+msgid "Assigned to agent"
+msgstr "Assigned sa ahente"
+
+msgid "Not assigned to agent"
+msgstr "Not assigned sa ahente"
+
+msgid "Ticket already have same priority"
+msgstr "Tiket na have same prayoridad"
+
+msgid "Priority has been changed"
+msgstr "Nabago ang priyoridad"
+
+msgid "Priority has not been changed"
+msgstr "Hindi nabago ang priyoridad"
+
+msgid "Email already banned"
+msgstr "Naka-ban na ang email"
+
+msgid "The email has been banned"
+msgstr "ang email has been banned"
+
+msgid "The email has not been banned"
+msgstr "ang email has hindi been banned"
+
+msgid "Email is banned by"
+msgstr "Email is banned ni"
+
+msgid "The ticket has been reopened"
+msgstr "Nabuksang muli ang tiket"
+
+msgid "The ticket has not been reopened"
+msgstr "Hindi nabuksang muli ang tiket"
+
+msgid "Reopen Ticket"
+msgstr "Buksang muli Tiket"
+
+msgid "The ticket is reopened by"
+msgstr "ang tiket is muling binuksan ni"
+
+msgid "The ticket reopens time limit end"
+msgstr "Ang tiket reopens oras limit end"
+
+msgid "Email has been unbanned"
+msgstr "Naalis na sa ban ang email"
+
+msgid "Email has not been unbanned"
+msgstr "Email has hindi been unbanned"
+
+msgid "Unbanned Email"
+msgstr "Email na inalis sa ban"
+
+msgid "Email is unbanned by"
+msgstr "Email is unbanned ni"
+
+msgid "Email cannot be unbanned"
+msgstr "Email hindi maaaring be unbanned"
+
+msgid "Ticket already marked in progress"
+msgstr "Tiket na marked in progress"
+
+msgid "The ticket has been marked as in progress"
+msgstr "Ang tiket ay na marked bilang sa progress"
+
+msgid "The ticket has not been marked as in progress"
+msgstr "Ang tiket ay hindi na marked bilang sa progress"
+
+msgid "The ticket is marked as in progress by"
+msgstr "ang tiket is marked as in progress ni"
+
+msgid "File upload limit exceeds"
+msgstr "Lumampas sa limitasyon ang pag-upload ng file"
+
+msgid "The uploaded file extension not valid"
+msgstr "Ang uploaded file extension not valid"
+
+msgid "Paid support info"
+msgstr "Impormasyon sa bayad na suporta"
+
+msgid "Order ID"
+msgstr "ID ng order"
+
+msgid "Product Name"
+msgstr "Pangalan ng produkto"
+
+msgid "Total Tickets"
+msgstr "Total Mga tiket"
+
+msgid "Remaining Tickets"
+msgstr "Remaining Mga tiket"
+
+msgid "Unlimited"
+msgstr "Walang limitasyon"
+
+msgid "You have not purchased any supported item"
+msgstr "Ikaw have not purchased alinman supported item"
+
+msgid "Go to shop"
+msgstr "Go sa shop"
+
+msgid "No canned response found"
+msgstr "Hindi nakahandang tugon found"
+
+msgid "premade"
+msgstr "nakahanda na"
+
+msgid "Are you sure to mark this ticket non-premium?"
+msgstr "Are you sure na mark ito tiket non-premium?"
+
+msgid "Copied to clipboard!"
+msgstr "Copied sa clipboard!"
+
+msgid "Failed to copy!"
+msgstr "Nabigo sa copy!"
+
+msgid "Failed to copy to clipboard. Please copy manually."
+msgstr "Nabigo na copy na clipboard. Pakisuyo copy manually."
+
+msgid "Reply content appended!"
+msgstr "Tugon nilalaman appended!"
+
+msgid "No ticket selected!"
+msgstr "Hindi tiket selected!"
+
+msgid "Error fetching replies."
+msgstr "Error fetching mga tugon."
+
+msgid "Failed to fetch replies. Please try again."
+msgstr "Nabigo sa fetch mga tugon. pakisubukang muli."
+
+msgid "Error fetching matching tickets:"
+msgstr "Error fetching matching mga tiket:"
+
+msgid "No matching tickets found."
+msgstr "Hindi matching mga tiket found."
+
+msgid "Replies for:"
+msgstr "Mga tugon para sa:"
+
+msgid "No replies found for this ticket."
+msgstr "Hindi mga tugon found para sa ito tiket."
+
+msgid "Copy"
+msgstr "Kopyahin"
+
+msgid "Edit Reply"
+msgstr "I-edit ang tugon"
+
+msgid "Edit Time"
+msgstr "I-edit ang oras"
+
+msgid "Reason For Editing The Timer"
+msgstr "Reason Para sa Editing Ang Timer"
+
+msgid "Reason For Editing"
+msgstr "Reason Para sa Editing"
+
+msgid "Resolve Conflict"
+msgstr "Resolbahin ang conflict"
+
+msgid "Add New Credential"
+msgstr "Magdagdag ng bago credential"
+
+msgid "Post New Internal Note"
+msgstr "Post Bago panloob na tala"
+
+msgid "play"
+msgstr "i-play"
+
+msgid "pause"
+msgstr "i-pause"
+
+msgid "stop"
+msgstr "itigil"
+
+msgid "Close On Reply"
+msgstr "Isara Sa Tugon"
+
+msgid "Change"
+msgstr "Baguhin"
+
+msgid "Transfer"
+msgstr "Ilipat"
+
+msgid "Reason For"
+msgstr "Reason Para sa"
+
+msgid "Assign To Agent"
+msgstr "Italaga Sa Ahente"
+
+msgid "Assign"
+msgstr "Italaga"
+
+msgid "View all"
+msgstr "Tingnan ang lahat"
+
+msgid "tickets by"
+msgstr "mga tiket ni"
+
+msgid "Show History"
+msgstr "Ipakita ang history"
+
+msgid "Print Ticket"
+msgstr "I-print ang tiket"
+
+msgid "Mark In Progress"
+msgstr "Mark Sa Progress"
+
+msgid "Change Ticket Priority"
+msgstr "Baguhin priyoridad ng tiket"
+
+msgid "Ticket Thread"
+msgstr "Tiket Thread"
+
+msgid "Reply with Co-Pilot"
+msgstr "Tugon kasama ang Co-Pilot"
+
+msgid "Ask for Info"
+msgstr "Ask para sa Info"
+
+msgid "Summarize"
+msgstr "Ibuod"
+
+msgid "Extract Details"
+msgstr "Mga detalye ng extract"
+
+msgid "Translate to"
+msgstr "Translate sa"
+
+msgid "View Image"
+msgstr "Tingnan ang larawan"
+
+msgid "Viewed By"
+msgstr "Viewed Ni"
+
+msgid "View"
+msgstr "Tingnan"
+
+msgid "AI-Powered Reply Mode"
+msgstr "AI-Powered Tugon Mode"
+
+msgid "Control how this individual reply influences the AI search and response generation process for future queries."
+msgstr "Control how ito individual tugon influences ang AI maghanap at response generation process para sa future queries."
+
+msgid "Default: reply included in all AI search queries."
+msgstr "Default: tugon included sa lahat AI maghanap queries."
+
+msgid "Enable: reply used in AI queries only when the Enable Tickets filter is active."
+msgstr "Paganahin: tugon used sa AI queries lamang when ang paganahin Mga tiket filter aktibo."
+
+msgid "Enable"
+msgstr "Paganahin"
+
+msgid "Disable: reply excluded from AI queries."
+msgstr "Huwag paganahin: tugon excluded mula sa AI queries."
+
+msgid "Disable"
+msgstr "Huwag paganahin"
+
+msgid "Post Reply"
+msgstr "Post Tugon"
+
+msgid "Zywrap Co-Pilot"
+msgstr "Zywrap Co-Pilot"
+
+msgid "Call AI by Code. Zero Prompt Engineering."
+msgstr "Call AI ni Code. Zero Prompt Engineering."
+
+msgid "Open AI Copilot"
+msgstr "Bukas AI Copilot"
+
+msgid "AI Icon"
+msgstr "AI icon"
+
+msgid "Get context-based suggestions to effortlessly create clear and relevant replies."
+msgstr "Get context-based suggestions sa effortlessly gumawa clear at relevant mga tugon."
+
+msgid "Suggested Response"
+msgstr "Iminungkahing tugon"
+
+msgid "Matching Tickets"
+msgstr "Matching Mga tiket"
+
+msgid "Filter"
+msgstr "Filter"
+
+msgid "Enable Tickets"
+msgstr "Paganahin Mga tiket"
+
+msgid "All Replies"
+msgstr "Lahat Mga tugon"
+
+msgid "Enable Replies"
+msgstr "Paganahin Mga tugon"
+
+msgid "OK"
+msgstr "OK"
+
+msgid "Own Signature"
+msgstr "Sarili Lagda"
+
+msgid "Add Signature"
+msgstr "Magdagdag ng lagda"
+
+msgid "No Last Reply"
+msgstr "Hindi Huli Tugon"
+
+msgid "Closed By"
+msgstr "Sarado Ni"
+
+msgid "Closed On"
+msgstr "Sarado Sa"
+
+msgid "Copied"
+msgstr "Nakopya"
+
+msgid "Lock"
+msgstr "I-lock"
+
+msgid "Control how this ticket and its replies influence AI search and response generation for future queries."
+msgstr "Control how ito tiket at its mga tugon influence AI maghanap at response generation para sa future queries."
+
+msgid "Default: ticket and replies included in all AI queries."
+msgstr "Default: tiket at mga tugon included sa lahat AI queries."
+
+msgid "Enable: ticket and replies used only when the “Enable Tickets” filter is active."
+msgstr "Paganahin: gagamitin lang ang mga tiket at tugon kapag aktibo ang filter na “Enable Tickets”."
+
+msgid "Disable: ticket and replies excluded from AI queries."
+msgstr "Huwag paganahin: tiket at mga tugon excluded mula sa AI queries."
+
+msgid "set"
+msgstr "itakda"
+
+msgid "Ticket Assign and Transfer"
+msgstr "Tiket Italaga at Transfer"
+
+msgid "Ticket assigned to"
+msgstr "Tiket assigned sa"
+
+msgid "Total Time Taken"
+msgstr "Total Oras Taken"
+
+msgid "Other Tickets"
+msgstr "Other Mga tiket"
+
+msgid "View Ticket"
+msgstr "Tingnan ang tiket"
+
+msgid "Woocommerce Order"
+msgstr "WooCommerce order"
+
+msgid "Envato License"
+msgstr "Envato Lisensya"
+
+msgid "Item"
+msgstr "Item"
+
+msgid "Buyer"
+msgstr "Mamimili"
+
+msgid "License Type"
+msgstr "Uri ng license"
+
+msgid "License"
+msgstr "Lisensya"
+
+msgid "Purchase Date"
+msgstr "Purchase Petsa"
+
+msgid "Supported Until"
+msgstr "Sinusuportahan hanggang"
+
+msgid "Paid Support Details"
+msgstr "Mga detalye ng bayad na suporta"
+
+msgid "Subscription"
+msgstr "Subscription"
+
+msgid "Subscribed On"
+msgstr "Subscribed Sa"
+
+msgid "Support Expiry"
+msgstr "Petsa ng pagtatapos ng suporta"
+
+msgid "No expiration"
+msgstr "Hindi expiration"
+
+msgid "Non-premium support"
+msgstr "Hindi premium na suporta"
+
+msgid "Check this box if this ticket should NOT apply against the paid support"
+msgstr "Check ito box kung ito tiket should NOT apply against ang paid support"
+
+msgid "Remaining"
+msgstr "Natitira"
+
+msgid "Link ticket to paid support"
+msgstr "Link tiket na paid support"
+
+msgid "Ticket Creator"
+msgstr "Tiket Creator"
+
+msgid "From Date"
+msgstr "Mula sa Petsa"
+
+msgid "To Date"
+msgstr "Sa Petsa"
+
+msgid "This ticket is marked as overdue"
+msgstr "ito tiket is marked as overdue"
+
+msgid "Enforce delete"
+msgstr "Enforce tanggalin"
+
+msgid "Are you sure to enforce delete"
+msgstr "Are you sure na enforce tanggalin"
+
+msgid "Message Logs"
+msgstr "Mensahe Logs"
+
+msgid "Edit Timer"
+msgstr "I-edit ang timer"
+
+msgid "Type Note for"
+msgstr "Type Note para sa"
+
+msgid "Assigning Note"
+msgstr "Assigning Tala"
+
+msgid "Time Track"
+msgstr "Oras Track"
+
+msgid "Type Internal Note"
+msgstr "Type Panloob na tala"
+
+msgid "tickets"
+msgstr "mga tiket"
+
+msgid "Reopen"
+msgstr "Buksang muli"
+
+msgid "History"
+msgstr "Kasaysayan"
+
+msgid "Print"
+msgstr "I-print"
+
+msgid "Are you sure to close this ticket"
+msgstr "Are you sure na isara ito tiket"
+
+msgid "Unlock"
+msgstr "I-unlock"
+
+msgid "Reply A Message"
+msgstr "Tugon ISANG Mensahe"
+
+msgid "Get context-aware suggestions for your response."
+msgstr "Get context-aware suggestions para sa your response."
+
+msgid "Assign Ticket"
+msgstr "Italaga Tiket"
+
+msgid ": "
+msgstr ":"
+
+msgid "Assigned To Agent"
+msgstr "Assigned Sa Ahente"
+
+msgid "agent photo"
+msgstr "ahente photo"
+
+msgid "View All Orders"
+msgstr "Tingnan ang lahat orders"
+
+msgid "Token"
+msgstr "Token"
+
+msgid "Check Status"
+msgstr "Check Katayuan"
+
+msgid "Remember Your Ticket Token for Tracking (Save It!)"
+msgstr "Remember Iyong Tiket Token para sa Tracking (i-save Ito!)"
+
+msgid "You've received a token number to track your support ticket status. This is one-time code, so please save it carefully. "
+msgstr "You've received a token number na track your tiket ng suporta katayuan. ito is one-time code, so pakisuyo i-save it carefully."
+
+msgid "Copy Token"
+msgstr "Kopyahin ang token"
+
+msgid "Security check Failed"
+msgstr "Security check nabigo"
+
+msgid "Security Error: Unauthorized access. Administrators only."
+msgstr "Security Error: Unauthorized access. Administrators lamang."
+
+msgid "API Key cannot be empty"
+msgstr "Hindi maaaring walang laman ang key ng api"
+
+msgid "API Key saved successfully."
+msgstr "API Key saved matagumpay."
+
+msgid "Preferences saved successfully."
+msgstr "Preferences saved matagumpay."
+
+msgid "Please save your API key first."
+msgstr "Paki-i-save iyong API key una."
+
+msgid "Sync failed"
+msgstr "Sync nabigo"
+
+msgid "API Error: Invalid response code "
+msgstr "API Error: hindi wasto response code"
+
+msgid "Failed to parse Sync JSON data."
+msgstr "Nabigo sa parse Sync JSON data."
+
+msgid "Download failed: "
+msgstr "Download nabigo:"
+
+msgid "Download rejected. HTTP Code:"
+msgstr "Tinanggihan ang pag-download. HTTP Code:"
+
+msgid "Unzip failed:"
+msgstr "Unzip nabigo:"
+
+msgid "zywrap-data.json not found in bundle."
+msgstr "zywrap-data.json hindi nahanap sa bundle."
+
+msgid "Failed to parse bundle JSON data."
+msgstr "Nabigo sa parse bundle JSON data."
+
+msgid "Unknown Sync Mode."
+msgstr "Hindi kilalang sync mode."
+
+msgid "AI Data Synced Successfully!"
+msgstr "AI Data Synced matagumpay!"
+
+msgid "Mode"
+msgstr "Mode"
+
+msgid "API Key is missing."
+msgstr "Nawawala ang API key."
+
+msgid "Please select an AI action."
+msgstr "Paki-pumili isang AI aksyon."
+
+msgid "Connection Error: "
+msgstr "Connection Error:"
+
+msgid "Unknown API Error"
+msgstr "Hindi kilalang API error"
+
+msgid "Parse Error:"
+msgstr "Parse error:"
+
+msgid "Global AI Settings saved successfully."
+msgstr "Global AI Mga setting saved matagumpay."
+
+msgid "Log deleted successfully."
+msgstr "Log natanggal matagumpay."
+
+msgid "Failed to delete log."
+msgstr "Nabigo sa tanggalin log."
+
+msgid "API Key is not configured."
+msgstr "Hindi naka-configure ang API key."
+
+msgid "Server Connection Error: "
+msgstr "Server Connection Error:"
+
+msgid "API Error (HTTP "
+msgstr "API Error (HTTP"
+
+msgid "Support Intent"
+msgstr "Layunin ng suporta"
+
+msgid "Ask Info"
+msgstr "Humingi ng impormasyon"
+
+msgid "Escalate"
+msgstr "I-escalate"
+
+msgid "Library"
+msgstr "Library"
+
+msgid "Ticket Thread Reply Composer"
+msgstr "Tiket Thread Tugon Composer"
+
+msgid "Reads the thread and drafts the best response."
+msgstr "Reads ang thread at drafts ang best response."
+
+msgid "Search full library..."
+msgstr "Maghanap full library..."
+
+msgid "Model: Default (Auto)"
+msgstr "Model: default (auto)"
+
+msgid "Tone: Default"
+msgstr "Tone: default"
+
+msgid "Tone"
+msgstr "Tono"
+
+msgid "Select a Support Intent from the left menu to load variables."
+msgstr "Pumili ng a support intent mula sa ang left menu na load variables."
+
+msgid "Key Points to Include"
+msgstr "Key Points sa Include"
+
+msgid "(Optional)"
+msgstr "(Opsyonal)"
+
+msgid "Add any specific facts, business decisions, or links the AI should mention."
+msgstr "Magdagdag ng alinman partikular facts, business decisions, o mga link ang ai should mention."
+
+msgid "e.g., Approve the refund, offer a 20% discount, or let them know this will be fixed in v4.0..."
+msgstr "e.g., Approve ang refund, offer isang 20% discount, o let them know ito ay magiging fixed sa v4.0..."
+
+msgid "AI Generated Draft"
+msgstr "Draft na ginawa ng AI"
+
+msgid "AI generated response will appear here..."
+msgstr "AI generated response will appear dito..."
+
+msgid "Generate Draft"
+msgstr "Gumawa ng draft"
+
+msgid "Insert into Editor"
+msgstr "Ipasok sa editor"
+
+msgid "No specific entities found."
+msgstr "Hindi partikular entities found."
+
+msgid "Zywrap AI Co-Pilot is not configured! Please navigate to Zywrap AI Settings to connect your API key and unlock AI Auto-Replies."
+msgstr "Zywrap AI Co-Pilot is hindi configured! Pakisuyo navigate na Zywrap AI Mga setting na connect your API key at unlock AI Auto-Mga tugon."
+
+msgid "Loading context securely from database..."
+msgstr "Naglo-load context securely mula sa database..."
+
+msgid "No wrapper variations found. Please sync data."
+msgstr "No wrapper variations found. Pakisuyo sync data."
+
+msgid "No extra context variables required. Ready to generate."
+msgstr "Hindi extra context variables kinakailangan. Ready sa generate."
+
+msgid "Drafting response..."
+msgstr "Gumagawa ng draft na tugon..."
+
+msgid "System Error parsing response. Check console."
+msgstr "Error sa system sa pag-parse ng tugon. Suriin ang console."
+
+msgid "Unlock AI Features"
+msgstr "I-unlock ang mga feature ng AI"
+
+msgid "Connect your Zywrap API key in settings to unlock 1-click summaries, translations, and data extraction."
+msgstr "Connect your Zywrap API key in mga setting na unlock 1-i-click summaries, translations, at data extraction."
+
+msgid "Configure Zywrap AI &rarr;"
+msgstr "I-configure ang Zywrap AI &rarr;"
+
+msgid "AI is executing:"
+msgstr "Pinapatakbo ng AI:"
+
+msgid "AI Insight:"
+msgstr "AI insight:"
+
+msgid "Zywrap AI Dashboard"
+msgstr "Dashboard ng Zywrap AI"
+
+msgid "Zero Prompt Engineering"
+msgstr "Zero Prompt Engineering"
+
+msgid "The Ultimate AI Copilot"
+msgstr "Ang Ultimate AI Copilot"
+
+msgid "for JS Help Desk."
+msgstr "para sa JS Help Desk."
+
+msgid "Equip your agents with top-tier AI models natively inside the ticket editor. Automate translations, summarize threads, and draft perfect replies in seconds."
+msgstr "Equip your mga ahente ng suporta may top-tier AI models natively inside ang tiket editor. Automate translations, summarize threads, at draft perfect mga tugon in seconds."
+
+msgid "Claim 10,000 Free Credits →"
+msgstr "Kunin ang 10,000 libreng credits →"
+
+msgid "Connect API Key"
+msgstr "Ikonekta ang API key"
+
+msgid "System Active"
+msgstr "Aktibo ang system"
+
+msgid "API Connected"
+msgstr "Nakakonekta ang API"
+
+msgid "Disconnected"
+msgstr "Nadiskonekta"
+
+msgid "Setup Required"
+msgstr "Kailangan ang setup"
+
+msgid "Total API Requests"
+msgstr "Kabuuang API requests"
+
+msgid "Tokens Processed"
+msgstr "Mga token na naproseso"
+
+msgid "Recent AI Activity"
+msgstr "Kamakailang aktibidad ng AI"
+
+msgid "View All Logs"
+msgstr "Tingnan lahat ng log"
+
+msgid "Wrapper Called"
+msgstr "Wrapper na tinawag"
+
+msgid "AI Model"
+msgstr "AI model"
+
+msgid "Tokens"
+msgstr "Mga token"
+
+msgid "Latency"
+msgstr "Latency"
+
+msgid "No activity logged yet. Start replying to tickets!"
+msgstr "Wala pang na-log na aktibidad. Simulan ang pagtugon sa mga tiket!"
+
+msgid "Auto Select"
+msgstr "Auto Pumili"
+
+msgid "Success"
+msgstr "Tagumpay"
+
+msgid "Navigation"
+msgstr "Navigation"
+
+msgid "Global Settings"
+msgstr "Mga setting ng global"
+
+msgid "Documentation"
+msgstr "Dokumentasyon"
+
+msgid "Database Sync"
+msgstr "Database sync"
+
+msgid "Last Synced"
+msgstr "Huling na-sync"
+
+msgid "Never"
+msgstr "Hindi kailanman"
+
+msgid "Run Delta Sync"
+msgstr "Patakbuhin ang delta sync"
+
+msgid "Zywrap Errors"
+msgstr "Mga error ng Zywrap"
+
+msgid "Zywrap API Errors"
+msgstr "Mga API error ng Zywrap"
+
+msgid "Action / Wrapper"
+msgstr "Aksyon / Wrapper"
+
+msgid "Error Message"
+msgstr "Error Mensahe"
+
+msgid "Agent / UID"
+msgstr "Ahente / UID"
+
+msgid "Delete Log"
+msgstr "Tanggalin ang log"
+
+msgid "No API errors logged! System is running perfectly."
+msgstr "No API errors logged! System is tumatakbo perfectly."
+
+msgid "Zywrap API Logs"
+msgstr "Mga log ng Zywrap API"
+
+msgid "Zywrap API Audit Logs"
+msgstr "Mga audit log ng Zywrap API"
+
+msgid "Search Trace ID"
+msgstr "Maghanap ng Trace ID"
+
+msgid "Trace ID"
+msgstr "Trace ID"
+
+msgid "Model"
+msgstr "Model"
+
+msgid "Auto-Select"
+msgstr "Auto-pumili"
+
+msgid "Zywrap Advanced Playground"
+msgstr "Advanced Playground ng Zywrap"
+
+msgid "1. Category"
+msgstr "1. Kategorya"
+
+msgid "Loading..."
+msgstr "Naglo-load..."
+
+msgid "2. AI Solution"
+msgstr "2. AI solution"
+
+msgid "Select Category First"
+msgstr "Pumili muna ng kategorya"
+
+msgid "3. Configuration Style"
+msgstr "3. Style ng configuration"
+
+msgid "Select Solution First"
+msgstr "Pumili muna ng solution"
+
+msgid "4. AI Model"
+msgstr "4. AI model"
+
+msgid "5. Target Language"
+msgstr "5. Target na wika"
+
+msgid "Advanced Overrides"
+msgstr "Advanced overrides"
+
+msgid "Style"
+msgstr "Style"
+
+msgid "Formatting"
+msgstr "Formatting"
+
+msgid "Complexity"
+msgstr "Complexity"
+
+msgid "Length"
+msgstr "Haba"
+
+msgid "Audience"
+msgstr "Audience"
+
+msgid "Goal"
+msgstr "Layunin"
+
+msgid "Output Type"
+msgstr "Uri ng output"
+
+msgid "Prompt / Additional Context"
+msgstr "Prompt / karagdagang context"
+
+msgid "Type your request or additional instructions here..."
+msgstr "I-type dito ang iyong request o karagdagang instruction..."
+
+msgid "Generate Response"
+msgstr "Gumawa ng tugon"
+
+msgid "AI Response"
+msgstr "Tugon ng AI"
+
+msgid "Output will appear here..."
+msgstr "Lalabas dito ang output..."
+
+msgid "Default Model (Auto)"
+msgstr "Default na model (Auto)"
+
+msgid "English (Default)"
+msgstr "English (default)"
+
+msgid "Select a Solution"
+msgstr "Pumili ng solution"
+
+msgid "Select a Style"
+msgstr "Pumili ng style"
+
+msgid "Base Template"
+msgstr "Base template"
+
+msgid "Variation"
+msgstr "Variation"
+
+msgid "Additional Free-form Instructions"
+msgstr "Karagdagang free-form instructions"
+
+msgid "Core Inputs"
+msgstr "Core inputs"
+
+msgid "Additional Context"
+msgstr "Karagdagang context"
+
+msgid "Please select a wrapper."
+msgstr "Pumili ng wrapper."
+
+msgid "Executing..."
+msgstr "Isinasagawa..."
+
+msgid "Generating..."
+msgstr "Gumagawa..."
+
+msgid "Error:"
+msgstr "Error:"
+
+msgid "System Error. Check Console."
+msgstr "System error. Tingnan ang console."
+
+msgid "Zywrap AI Settings"
+msgstr "Mga setting ng zywrap ai"
+
+msgid "Config"
+msgstr "Configuration"
+
+msgid "How to get your key"
+msgstr "Paano kunin ang iyong key"
+
+msgid "Create a free account at"
+msgstr "Gumawa ng libreng account sa"
+
+msgid "Receive 10,000 Free Credits instantly."
+msgstr "Makatanggap agad ng 10,000 libreng credits."
+
+msgid "Navigate to API Keys in your dashboard to generate a secret key."
+msgstr "Navigate na API Keys in your dashboard na generate a secret key."
+
+msgid "API Authentication"
+msgstr "API authentication"
+
+msgid "Save Key"
+msgstr "I-save ang key"
+
+msgid "Database Synchronization"
+msgstr "Database synchronization"
+
+msgid "To use the Co-Pilot, you must sync your local database with the Zywrap Cloud. This downloads the latest Prompts and Scenarios."
+msgstr "Na gamitin ang Co-Pilot, you must sync your local database may ang Zywrap Cloud. ito mga pag-pag-download ang latest Prompts at Scenarios."
+
+msgid "Important:"
+msgstr "Mahalaga:"
+
+msgid "The initial sync may take 3 to 5 minutes. Please do not close or refresh this page."
+msgstr "ang initial sync may take 3 na 5 minutes. Pakisuyo do hindi isara o refresh ito pahina."
+
+msgid "Download & Sync Data"
+msgstr "I-download at i-sync ang data"
+
+msgid "Initializing sync..."
+msgstr "Sinisimulan ang sync..."
+
+msgid "Save API Key to enable sync."
+msgstr "I-save ang API key upang paganahin ang sync."
+
+msgid "Global Preferences"
+msgstr "Global preferences"
+
+msgid "Default AI Model"
+msgstr "Default na AI model"
+
+msgid "Platform Auto-Select"
+msgstr "Platform Auto-Pumili"
+
+msgid "Used automatically unless overridden."
+msgstr "Awtomatikong ginagamit maliban kung na-override."
+
+msgid "Translation Language"
+msgstr "Wika ng pagsasalin"
+
+msgid "English"
+msgstr "English"
+
+msgid "1-click ticket translation target."
+msgstr "1-i-click tiket translation target."
+
+msgid "Save Preferences"
+msgstr "I-save ang preferences"
+
+msgid "Missing"
+msgstr "Nawawala"
+
+msgid "API Status"
+msgstr "Katayuan ng API"
+
+msgid "Wrappers Synced"
+msgstr "Mga wrapper na na-sync"
+
+msgid "Saving..."
+msgstr "Sine-save..."
+
+msgid "Syncing Engine..."
+msgstr "Sini-sync ang engine..."
+
+msgid "Connecting to Zywrap Cloud..."
+msgstr "Kumokonekta sa Zywrap Cloud..."
+
+msgid "Extracting schemas..."
+msgstr "Kinukuha ang schemas..."
+
+msgid "Optimizing database..."
+msgstr "Ino-optimize ang database..."
+
+msgid "Sync Complete!"
+msgstr "Tapos na ang sync!"
+
+msgid "Synced"
+msgstr "Na-sync"
+
+msgid "Sync Failed"
+msgstr "Nabigo ang sync"
+
+msgid "Try Again"
+msgstr "Subukang muli"
+
+msgid "A system error occurred."
+msgstr "May naganap na system error."
+
+msgid "Server timeout."
+msgstr "Nag-timeout ang server."
+
+msgid "slug for ticket page"
+msgstr "slug para sa pahina ng tiket"
+
+msgid "slug for agent add ticket page"
+msgstr "slug para sa pahina ng ahente magdagdag tiket"
+
+msgid "slug for rolepermission page"
+msgstr "slug para sa pahina ng rolepermission"
+
+msgid "slug for add announcement"
+msgstr "slug para sa magdagdag anunsyo"
+
+msgid "slug for add department page"
+msgstr "slug para sa pahina ng magdagdag departamento"
+
+msgid "slug for add download page"
+msgstr "slug para sa pahina ng magdagdag download"
+
+msgid "slug for faq page"
+msgstr "slug para sa pahina ng FAQ"
+
+msgid "slug for add article page"
+msgstr "slug para sa pahina ng magdagdag artikulo"
+
+msgid "slug for add category page"
+msgstr "slug para sa pahina ng magdagdag kategorya"
+
+msgid "slug for user knowledgebase articles page"
+msgstr "slug para sa pahina ng gumagamit knowledgebase mga artikulo"
+
+msgid "slug for article detail page"
+msgstr "slug para sa pahina ng artikulo detalye"
+
+msgid "slug for add role page"
+msgstr "slug para sa pahina ng magdagdag tungkulin"
+
+msgid "slug for add agent page"
+msgstr "slug para sa pahina ng magdagdag ahente"
+
+msgid "slug for agent permissions page"
+msgstr "slug para sa pahina ng ahente mga pahintulot"
+
+msgid "slug for my tickets page"
+msgstr "slug para sa pahina ng my mga tiket"
+
+msgid "slug for agent my tickets page"
+msgstr "slug para sa pahina ng ahente my mga tiket"
+
+msgid "slug for knowledgebase page"
+msgstr "slug para sa pahina ng knowledgebase"
+
+msgid "slug for agent categories page"
+msgstr "slug para sa pahina ng ahente mga kategorya"
+
+msgid "slug for agent kb articles page"
+msgstr "slug para sa pahina ng ahente kb mga artikulo"
+
+msgid "slug for agent announcements page"
+msgstr "slug para sa pahina ng ahente mga anunsyo"
+
+msgid "slug for agent downloads page"
+msgstr "slug para sa pahina ng ahente mga download"
+
+msgid "slug for agent faqs page"
+msgstr "slug para sa pahina ng ahente mga FAQ"
+
+msgid "slug for add ticket page"
+msgstr "slug para sa pahina ng magdagdag tiket"
+
+msgid "slug for ticket status page"
+msgstr "slug para sa pahina ng katayuan ng tiket"
+
+msgid "slug for controlpanel"
+msgstr "slug para sa controlpanel"
+
+msgid "slug for agent report detail page"
+msgstr "slug para sa pahina ng ahente ulat detalye"
+
+msgid "slug for agent reports page"
+msgstr "slug para sa pahina ng ahente mga ulat"
+
+msgid "slug for department reports page"
+msgstr "slug para sa pahina ng departamento mga ulat"
+
+msgid "slug for announcement detail page"
+msgstr "slug para sa pahina ng anunsyo detalye"
+
+msgid "slug for feedback page"
+msgstr "slug para sa pahina ng feedback"
+
+msgid "slug for agent feedbacks page"
+msgstr "slug para sa pahina ng ahente feedbacks"
+
+msgid "slug for visitor message page"
+msgstr "slug para sa pahina ng visitor mensahe"
+
+msgid "slug for add help topic page"
+msgstr "slug para sa pahina ng magdagdag paksa ng tulong"
+
+msgid "slug for agent help topics page"
+msgstr "slug para sa pahina ng ahente tulong topics"
+
+msgid "slug for add canned response page"
+msgstr "slug para sa pahina ng magdagdag nakahandang tugon"
+
+msgid "slug for agent canned responses page"
+msgstr "slug para sa pahina ng ahente canned responses"
+
+msgid "slug for gdpr data compliance actions page"
+msgstr "slug para sa pahina ng gdpr data compliance mga aksyon"
+
+msgid "slug for print ticket page"
+msgstr "slug para sa pahina ng pag-print ng tiket"
+
+msgid "slug for my profile page"
+msgstr "slug para sa pahina ng aking profile"
+
+msgid "slug for login page"
+msgstr "slug para sa pahina ng pag-login"
+
+msgid "slug for user register page"
+msgstr "slug para sa pahina ng pagrehistro ng gumagamit"
+
+msgid "slug for add message page"
+msgstr "slug para sa pahina ng pagdagdag ng mensahe"
+
+msgid "slug for message detail page"
+msgstr "slug para sa pahina ng detalye ng mensahe"
+
+msgid "slug for message inbox page"
+msgstr "slug para sa pahina ng inbox ng mensahe"
+
+msgid "slug for message outbox page"
+msgstr "slug para sa pahina ng outbox ng mensahe"
+
+msgid "slug for roles page"
+msgstr "slug para sa pahina ng mga tungkulin"
+
+msgid "slug for agent page"
+msgstr "slug para sa pahina ng ahente"
+
+msgid "slug for departments page"
+msgstr "slug para sa pahina ng mga departamento"
+
+msgid "slug for announcements page"
+msgstr "slug para sa pahina ng mga anunsyo"
+
+msgid "slug for downloads page"
+msgstr "slug para sa pahina ng mga download"
+
+msgid "slug for faqs page"
+msgstr "slug para sa pahina ng mga FAQ"
+
+msgid "slug for export page"
+msgstr "slug para sa pahina ng pag-export"
+
+msgid "Close Due To Merge"
+msgstr "Isara Due Sa Pagsamahin"
+
+msgid "Issue Summary"
+msgstr "Buod ng isyu"
+
+msgid "Internal Note Title"
+msgstr "Pamagat ng panloob na tala"
+
+msgid "Remarks"
+msgstr "Mga komento"
+
+msgid "WC Product"
+msgstr "WC produkto"
+
+msgid "EDD Order ID"
+msgstr "EDD order ID"
+
+msgid "EDD Product"
+msgstr "EDD produkto"
+
+msgid "License Key"
+msgstr "License key"
+
+msgid "Envato Purchase Code"
+msgstr "Envato purchase code"
+
+msgid "Terms And Conditions 1"
+msgstr "Mga tuntunin at kondisyon 1"
+
+msgid "Terms And Conditions 2"
+msgstr "Mga tuntunin at kondisyon 2"
+
+msgid "Terms And Conditions 3"
+msgstr "Mga tuntunin at kondisyon 3"
+
+msgid "Submit Type"
+msgstr "Uri ng pagsusumite"
+
+msgid "Admin New Ticket Received"
+msgstr "Admin: May natanggap na bagong ticket"
+
+msgid "Staff New Ticket Received"
+msgstr "Staff: May natanggap na bagong ticket"
+
+msgid "New Department Received"
+msgstr "Bagong departamento ang natanggap"
+
+msgid "New Group Received"
+msgstr "Bagong grupo ang natanggap"
+
+msgid "New Agent Received"
+msgstr "Bagong agent ang natanggap"
+
+msgid "New Help Topic Received"
+msgstr "Bagong paksa ng tulong ang natanggap"
+
+msgid "Admin Reassign Ticket"
+msgstr "Admin: Muling italaga ang ticket"
+
+msgid "Staff Reassign Ticket"
+msgstr "Staff: Muling italaga ang ticket"
+
+msgid "Admin Close Ticket"
+msgstr "Admin: Isara ang ticket"
+
+msgid "Staff Close Ticket"
+msgstr "Staff: Isara ang ticket"
+
+msgid "Admin Delete Ticket"
+msgstr "Admin: Burahin ang ticket"
+
+msgid "Staff Delete Ticket"
+msgstr "Staff: Burahin ang ticket"
+
+msgid "Admin Overdue Ticket"
+msgstr "Admin: Lampas na sa takdang panahon ang ticket"
+
+msgid "Staff Overdue Ticket"
+msgstr "Staff: Lampas na sa takdang panahon ang ticket"
+
+msgid "Admin Email Banned"
+msgstr "Admin: Na-ban ang email"
+
+msgid "Staff Email Banned"
+msgstr "Staff: Na-ban ang email"
+
+msgid "Admin Ticket Transferred To Department"
+msgstr "Admin: Inilipat ang ticket sa departamento"
+
+msgid "Staff Ticket Transferred To Department"
+msgstr "Staff: Inilipat ang ticket sa departamento"
+
+msgid "Admin Email Banned And Ticket Closed"
+msgstr "Admin: Na-ban ang email at isinara ang ticket"
+
+msgid "Staff Email Banned And Ticket Closed"
+msgstr "Staff: Na-ban ang email at isinara ang ticket"
+
+msgid "Admin Email Unbanned"
+msgstr "Admin: Tinanggal ang ban sa email"
+
+msgid "Staff Email Unbanned"
+msgstr "Staff: Tinanggal ang ban sa email"
+
+msgid "Admin Ticket Reply"
+msgstr "Admin: Sagot sa ticket"
+
+msgid "Staff Ticket Reply"
+msgstr "Staff: Sagot sa ticket"
+
+msgid "Ticket Received"
+msgstr "Natanggap na ang ticket"
+
+msgid "Banemail Try New Ticket"
+msgstr "Pagtatangkang gumawa ng bagong ticket mula sa ban na email"
+
+msgid "Admin Ticket Has Been Locked"
+msgstr "Admin: Naka-lock na ang ticket"
+
+msgid "Staff Ticket Has Been Locked"
+msgstr "Staff: Naka-lock na ang ticket"
+
+msgid "Admin Ticket Has Been Unlocked"
+msgstr "Admin: Hindi na naka-lock ang ticket"
+
+msgid "Staff Ticket Has Been Unlocked"
+msgstr "Staff: Hindi na naka-lock ang ticket"
+
+msgid "Admin In Progress Ticket"
+msgstr "Admin: Kasalukuyang ginagawa ang ticket"
+
+msgid "Staff In Progress Ticket"
+msgstr "Staff: Kasalukuyang ginagawa ang ticket"
+
+msgid "Admin Ticket Priority Changed"
+msgstr "Admin: Binago ang prayoridad ng ticket"
+
+msgid "Staff Ticket Priority Changed"
+msgstr "Staff: Binago ang prayoridad ng ticket"
+
+msgid "New Mail Has Been Sent"
+msgstr "Naipadala na ang bagong mail"
+
+msgid "New Reply Has Been Sent"
+msgstr "Naipadala na ang bagong sagot"
+
+msgid "Delete User Data"
+msgstr "Burahin ang data ng user"

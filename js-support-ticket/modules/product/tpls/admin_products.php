@@ -116,7 +116,7 @@ JSSTmessage::getMessage(); ?>
                                 <td>
                                     <a title="<?php echo esc_attr(__('Edit','js-support-ticket')); ?>" class="action-btn" href="?page=product&jstlay=addproduct&jssupportticketid=<?php echo esc_attr($jsst_product->id); ?>"><img alt = "<?php echo esc_attr(__('Edit','js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/edit.png" /></a>
                                     &nbsp;&nbsp;
-                                    <a title="<?php echo esc_attr(__('Delete','js-support-ticket')); ?>" class="action-btn" onclick="return confirm('<?php echo esc_js(__('Are you sure you want to delete it?', 'js-support-ticket')); ?>');" href="<?php echo esc_url(wp_nonce_url('?page=product&task=deleteproduct&action=jstask&productid='.esc_attr($jsst_product->id),'delete-product-'.$jsst_product->id));?>"><img alt = "<?php echo esc_attr(__('Delete','js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/delete.png" /></a>
+                                    <a title="<?php echo esc_attr(__('Delete','js-support-ticket')); ?>" class="action-btn" onclick="return confirm('<?php echo esc_js(__('Are you sure you want to delete?', 'js-support-ticket')); ?>');" href="<?php echo esc_url(wp_nonce_url('?page=product&task=deleteproduct&action=jstask&productid='.esc_attr($jsst_product->id),'delete-product-'.$jsst_product->id));?>"><img alt = "<?php echo esc_attr(__('Delete','js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/delete.png" /></a>
                                 </td>
                             </tr>
                         <?php

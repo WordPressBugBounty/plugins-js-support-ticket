@@ -104,7 +104,7 @@
                                     <?php echo esc_html(__('Link Type', 'js-support-ticket')); echo " : "; ?>
                                 </span>
                                 <?php if($jsst_termsandconditions_linktype == 2){
-                                    echo esc_html(__('Wordpress Page','js-support-ticket'));
+                                    echo esc_html(__('WordPress Page','js-support-ticket'));
                                 }else if($jsst_termsandconditions_linktype == 1){
                                     echo esc_html(__('Direct URL','js-support-ticket'));
                                 }else{
@@ -119,7 +119,7 @@
                             </td>
                             <td>
                                 <a title="<?php echo esc_attr(__('Edit','js-support-ticket')); ?>" class="action-btn" href="?page=gdpr&jstlay=addgdprfield&jssupportticketid=<?php echo esc_attr($jsst_field->id); ?>"><img alt = "<?php echo esc_attr(__('Edit','js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/edit.png" /></a>&nbsp;&nbsp;
-                                <a title="<?php echo esc_attr(__('Delete','js-support-ticket')); ?>" class="action-btn" onclick="return confirm('<?php echo esc_js(__('Are you sure you want to delete it?', 'js-support-ticket')); ?>');" href="<?php echo esc_url(wp_nonce_url('?page=gdpr&task=deletegdpr&action=jstask&gdprid='.esc_attr($jsst_field->id),'delete-gdpr'));?>"><img alt = "<?php echo esc_attr(__('Delete','js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/delete.png" /></a>
+                                <a title="<?php echo esc_attr(__('Delete','js-support-ticket')); ?>" class="action-btn" onclick="return confirm('<?php echo esc_js(__('Are you sure you want to delete?', 'js-support-ticket')); ?>');" href="<?php echo esc_url(wp_nonce_url('?page=gdpr&task=deletegdpr&action=jstask&gdprid='.esc_attr($jsst_field->id),'delete-gdpr'));?>"><img alt = "<?php echo esc_attr(__('Delete','js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/delete.png" /></a>
                             </td>
                         </tr>
                     <?php

@@ -109,26 +109,26 @@
 					<div class="jsst-shortcode-3"><?php echo esc_html(__("Show latest knowledge base. Options",'js-support-ticket')).': text_color="'.esc_attr($jsst_color3).'" '. esc_html(__("and",'js-support-ticket')).' background_color="'.esc_attr($jsst_color1).'" '. esc_html(__("i.e.",'js-support-ticket')).' [jssupportticket_knowledgebase_latest text_color="'.esc_attr($jsst_color3).'" background_color="'.esc_attr($jsst_color1).'"]'; ?></div>
 				</div>
 				<div id="jsst-shortcode-wrapper">
-					<div class="jsst-shortcode-1"><?php echo esc_html(__('Popular knowledge base','js-support-ticket')); ?></div>
+					<div class="jsst-shortcode-1"><?php echo esc_html(__('Popular Knowledge Base','js-support-ticket')); ?></div>
 					<div class="jsst-shortcode-2"><?php echo "[jssupportticket_knowledgebase_popular]"; ?></div>
 					<div class="jsst-shortcode-3"><?php echo esc_html(__("Show popular knowledge base. Options",'js-support-ticket')).': text_color="'.esc_attr($jsst_color3).'" '. esc_html(__("and",'js-support-ticket')).' background_color="'.esc_attr($jsst_color1).'" '. esc_html(__("i.e.",'js-support-ticket')).' [jssupportticket_knowledgebase_popular text_color="'.esc_attr($jsst_color3).'" background_color="'.esc_attr($jsst_color1).'"]'; ?></div>
 				</div>
 			<?php } ?>
 			<?php if(in_array('faq', jssupportticket::$_active_addons)){ ?>
 				<div id="jsst-shortcode-wrapper">
-					<div class="jsst-shortcode-1"><?php echo esc_html(__("FAQ's",'js-support-ticket')); ?></div>
+					<div class="jsst-shortcode-1"><?php echo esc_html(__("FAQs",'js-support-ticket')); ?></div>
 					<div class="jsst-shortcode-2"><?php echo "[jssupportticket_faqs]"; ?></div>
-					<div class="jsst-shortcode-3"><?php echo esc_html(__("List FAQ's",'js-support-ticket')); ?></div>
+					<div class="jsst-shortcode-3"><?php echo esc_html(__("List FAQs",'js-support-ticket')); ?></div>
 				</div>
 				<div id="jsst-shortcode-wrapper">
-					<div class="jsst-shortcode-1"><?php echo esc_html(__("Latest FAQ's",'js-support-ticket')); ?></div>
+					<div class="jsst-shortcode-1"><?php echo esc_html(__("Latest FAQs",'js-support-ticket')); ?></div>
 					<div class="jsst-shortcode-2"><?php echo "[jssupportticket_faqs_latest]"; ?></div>
-					<div class="jsst-shortcode-3"><?php echo esc_html(__("Show latest FAQ's. Options",'js-support-ticket')).': text_color="'.esc_attr($jsst_color3).'" '. esc_html(__("and",'js-support-ticket')).' background_color="'.esc_attr($jsst_color1).'" '. esc_html(__("i.e.",'js-support-ticket')).' [jssupportticket_faqs_latest text_color="'.esc_attr($jsst_color3).'" background_color="'.esc_attr($jsst_color1).'"]'; ?></div>
+					<div class="jsst-shortcode-3"><?php echo esc_html(__("Show latest FAQs. Options",'js-support-ticket')).': text_color="'.esc_attr($jsst_color3).'" '. esc_html(__("and",'js-support-ticket')).' background_color="'.esc_attr($jsst_color1).'" '. esc_html(__("i.e.",'js-support-ticket')).' [jssupportticket_faqs_latest text_color="'.esc_attr($jsst_color3).'" background_color="'.esc_attr($jsst_color1).'"]'; ?></div>
 				</div>
 				<div id="jsst-shortcode-wrapper">
-					<div class="jsst-shortcode-1"><?php echo esc_html(__("Popular FAQ's",'js-support-ticket')); ?></div>
+					<div class="jsst-shortcode-1"><?php echo esc_html(__("Popular FAQs",'js-support-ticket')); ?></div>
 					<div class="jsst-shortcode-2"><?php echo "[jssupportticket_faqs_popular]"; ?></div>
-					<div class="jsst-shortcode-3"><?php echo esc_html(__("Show popular FAQ's. Options",'js-support-ticket')).': text_color="'.esc_attr($jsst_color3).'" '. esc_html(__("and",'js-support-ticket')).' background_color="'.esc_attr($jsst_color1).'" '. esc_html(__("i.e.",'js-support-ticket')).' [jssupportticket_faqs_popular text_color="'.esc_attr($jsst_color3).'" background_color="'.esc_attr($jsst_color1).'"]'; ?></div>
+					<div class="jsst-shortcode-3"><?php echo esc_html(__("Show popular FAQs. Options",'js-support-ticket')).': text_color="'.esc_attr($jsst_color3).'" '. esc_html(__("and",'js-support-ticket')).' background_color="'.esc_attr($jsst_color1).'" '. esc_html(__("i.e.",'js-support-ticket')).' [jssupportticket_faqs_popular text_color="'.esc_attr($jsst_color3).'" background_color="'.esc_attr($jsst_color1).'"]'; ?></div>
 				</div>
 			<?php } ?>
 			<?php if(in_array('announcement', jssupportticket::$_active_addons)){ ?>

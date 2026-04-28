@@ -131,7 +131,7 @@ if(!defined('ABSPATH'))
                                         }
                                         if(!in_array('note', jssupportticket::$_active_addons)){ ?>
                                             <br>
-                                            <span class="jsst-import-data-addon-message"><?php echo esc_html(__('Note Addon missing, ticket internal note  data will not be imported!','js-support-ticket')); ?></span>
+                                            <span class="jsst-import-data-addon-message"><?php echo esc_html(__('Note Addon missing, ticket internal note data will not be imported!','js-support-ticket')); ?></span>
                                             <?php
                                         }
                                     }
@@ -155,7 +155,7 @@ if(!defined('ABSPATH'))
                                 <?php echo esc_html($jsst_plugin['name']); ?>
                             </span>
                             <div class="jsst-singleplugin-imprt-datadisc">
-                                <?php echo esc_html(__('No Data Found!','js-support-ticket')); ?>
+                                <?php echo esc_html(__('No Record Found','js-support-ticket')); ?>
                             </div>
                         </div>
                         <?php

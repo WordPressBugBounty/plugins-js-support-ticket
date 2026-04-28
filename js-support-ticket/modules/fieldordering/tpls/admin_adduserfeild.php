@@ -311,8 +311,8 @@ wp_add_inline_script('js-support-ticket-main-js',$jsst_jssupportticket_js);
                 (object) array('id' => 'termsandconditions', 'text' => esc_html(__('Terms and Conditions', 'js-support-ticket'))));
         }
         $jsst_fieldsize = array(
-             (object) array('id' => 50, 'text' => esc_html(__('50%', 'js-support-ticket'))),
-            (object) array('id' => 100, 'text' => esc_html(__('100%', 'js-support-ticket'))));
+             (object) array('id' => 50, 'text' => esc_html('50%')),
+            (object) array('id' => 100, 'text' => esc_html('100%')));
         ?>
         <?php $jsst_nonce_id = isset(jssupportticket::$jsst_data[0]['userfield']->id) ? jssupportticket::$jsst_data[0]['userfield']->id : '';?>
         <div id="jsstadmin-data-wrp">
@@ -414,7 +414,7 @@ wp_add_inline_script('js-support-ticket-main-js',$jsst_jssupportticket_js);
                 if (!empty(jssupportticket::$jsst_data[0]['userfield']->field) && !in_array(jssupportticket::$jsst_data[0]['userfield']->field, ['termsandconditions1','termsandconditions2','termsandconditions3'])) { ?>
                     <div class="js-form-wrapper for-terms-condtions-hide">
                         <div class="js-form-title">
-                            <?php echo esc_html(__('Place Holder', 'js-support-ticket')); ?>
+                            <?php echo esc_html(__('Placeholder', 'js-support-ticket')); ?>
                             <span class="js-form-subtitle" id="placeholder_not_available" style="display:none;">
                                 <?php echo esc_html(__('This option is not available in this case', 'js-support-ticket')); ?>
                             </span>
@@ -530,7 +530,7 @@ wp_add_inline_script('js-support-ticket-main-js',$jsst_jssupportticket_js);
                             <div class="js-form-title"><?php echo esc_html(__('Terms and Conditions Text', 'js-support-ticket')); ?></div>
                             <div class="js-form-value"><?php echo wp_kses(JSSTformfield::text('termsandconditions_text', $jsst_termsandconditions_text , array('class' => 'inputbox one js-form-input-field')), JSST_ALLOWED_TAGS); ?></div>
                             <div class="js-form-desc">
-                                <?php echo esc_html(__("e.g ' I have read and agree to the [link] Terms and Conditions[/link].  ' The text between [link] and [/link] will be linked to provided url or wordpress page.", 'js-support-ticket')); ?>
+                                <?php echo esc_html(__("e.g ' I have read and agree to the [link] Terms and Conditions[/link]. ' The text between [link] and [/link] will be linked to provided url or wordpress page.", 'js-support-ticket')); ?>
                             </div>
                         </div>
                         <div class="js-form-wrapper ">
@@ -538,7 +538,7 @@ wp_add_inline_script('js-support-ticket-main-js',$jsst_jssupportticket_js);
                             <?php
                             $jsst_linktype = array(
                                 (object) array('id' => 1, 'text' => esc_html(__('Direct Link', 'js-support-ticket'))),
-                                (object) array('id' => 2, 'text' => esc_html(__('Wordpress Page', 'js-support-ticket'))),
+                                (object) array('id' => 2, 'text' => esc_html(__('WordPress Page', 'js-support-ticket'))),
                                 (object) array('id' => 3, 'text' => esc_html(__('None', 'js-support-ticket'))));
                             ?>
                             <div class="js-form-value"><?php echo wp_kses(JSSTformfield::select('termsandconditions_linktype', $jsst_linktype, $jsst_termsandconditions_linktype, esc_html(__('Select Link Type', 'js-support-ticket')), array('class' => 'inputbox one js-form-select-field')), JSST_ALLOWED_TAGS); ?></div>
@@ -549,7 +549,7 @@ wp_add_inline_script('js-support-ticket-main-js',$jsst_jssupportticket_js);
                         </div>
                         <div class="js-form-wrapper for-terms-condtions-linktype2" style="display: none;">
                             <div class="js-form-title"><?php echo esc_html(__('Terms and Conditions Page', 'js-support-ticket')); ?></div>
-                            <div class="js-form-value"><?php echo wp_kses(JSSTformfield::select('termsandconditions_page', JSSTincluder::getJSModel('configuration')->getPageList(), $jsst_termsandconditions_page, esc_html(__('Select Wordpress page','js-support-ticket')), array('class' => 'inputbox one js-form-select-field')), JSST_ALLOWED_TAGS); ?></div>
+                            <div class="js-form-value"><?php echo wp_kses(JSSTformfield::select('termsandconditions_page', JSSTincluder::getJSModel('configuration')->getPageList(), $jsst_termsandconditions_page, esc_html(__('Select WordPress page','js-support-ticket')), array('class' => 'inputbox one js-form-select-field')), JSST_ALLOWED_TAGS); ?></div>
                         </div>
                     </div>
                     <?php 

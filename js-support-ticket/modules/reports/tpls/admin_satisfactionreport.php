@@ -67,7 +67,7 @@
 						<?php echo esc_html($jsst_percentage).'%'; ?>
 					</div>
 					<span class="total-feedbacks" >
-						<?php echo esc_html(__('Based on','js-support-ticket')).'&nbsp;'. esc_html(jssupportticket::$jsst_data[0]['result'][6]).'&nbsp;'. esc_html(__('Feedbacks','js-support-ticket'));?>
+						<?php echo esc_html(__('Based on','js-support-ticket')).'&nbsp;'. esc_html(jssupportticket::$jsst_data[0]['result'][6]).'&nbsp;'. esc_html(__('Feedback','js-support-ticket'));?>
 					</span>
 					<div class="top-text" >
 						<?php echo esc_html(__('Customer Satisfaction','js-support-ticket')); ?>

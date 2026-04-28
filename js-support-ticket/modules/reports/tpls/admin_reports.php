@@ -47,7 +47,7 @@
             <a class="js-admin-report-wrapper" href="<?php echo esc_url(admin_url('admin.php?page=reports&jstlay=staffreport')); ?>" >
                 <div class="js-admin-staff-report-type-wrapper">
                     <img alt="<?php echo esc_attr(__('image','js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/report/staff.png" />
-                    <span class="js-admin-staff-report-type-label"><?php echo esc_html(__('Staff Reports','js-support-ticket')); ?></span>
+                    <span class="js-admin-staff-report-type-label"><?php echo esc_html(__('Agent Reports','js-support-ticket')); ?></span>
                 </div>
             </a>
             <a class="js-admin-report-wrapper" href="<?php echo esc_url(admin_url('admin.php?page=reports&jstlay=departmentreport')); ?>" >

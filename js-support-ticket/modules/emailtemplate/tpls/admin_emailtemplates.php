@@ -48,11 +48,11 @@
                 <span class="js-email-menu-link <?php if (jssupportticket::$jsst_data[1] == 'rs-tk') echo 'selected'; ?>"><a class="js-email-link" href="?page=emailtemplate&for=rs-tk" title="<?php echo esc_attr(__('Reassign Ticket','js-support-ticket')); ?>"><?php echo esc_html(__('Reassign Ticket', 'js-support-ticket')); ?><?php if (!in_array('agent', jssupportticket::$_active_addons)) { ?><span style="color: red;"> *</span><?php } ?></a></span>
                 <span class="js-email-menu-link <?php if (jssupportticket::$jsst_data[1] == 'cl-tk') echo 'selected'; ?>"><a class="js-email-link" href="?page=emailtemplate&for=cl-tk" title="<?php echo esc_attr(__('Close Ticket','js-support-ticket')); ?>"><?php echo esc_html(__('Close Ticket', 'js-support-ticket')); ?></a></span>
                 <span class="js-email-menu-link <?php if (jssupportticket::$jsst_data[1] == 'dl-tk') echo 'selected'; ?>"><a class="js-email-link" href="?page=emailtemplate&for=dl-tk" title="<?php echo esc_attr(__('Delete Ticket','js-support-ticket')); ?>"><?php echo esc_html(__('Delete Ticket', 'js-support-ticket')); ?></a></span>
-                <span class="js-email-menu-link <?php if (jssupportticket::$jsst_data[1] == 'mo-tk') echo 'selected'; ?>"><a class="js-email-link" href="?page=emailtemplate&for=mo-tk" title="<?php echo esc_attr(__('Mark overdue','js-support-ticket')); ?>"><?php echo esc_html(__('Mark Overdue', 'js-support-ticket')); ?><?php if (!in_array('overdue', jssupportticket::$_active_addons)) { ?><span style="color: red;"> *</span><?php } ?></a></span>
+                <span class="js-email-menu-link <?php if (jssupportticket::$jsst_data[1] == 'mo-tk') echo 'selected'; ?>"><a class="js-email-link" href="?page=emailtemplate&for=mo-tk" title="<?php echo esc_attr(__('Mark Overdue','js-support-ticket')); ?>"><?php echo esc_html(__('Mark Overdue', 'js-support-ticket')); ?><?php if (!in_array('overdue', jssupportticket::$_active_addons)) { ?><span style="color: red;"> *</span><?php } ?></a></span>
                 <span class="js-email-menu-link <?php if (jssupportticket::$jsst_data[1] == 'be-tk') echo 'selected'; ?>"><a class="js-email-link" href="?page=emailtemplate&for=be-tk" title="<?php echo esc_attr(__('Ban Email','js-support-ticket')); ?>"><?php echo esc_html(__('Ban Email', 'js-support-ticket')); ?><?php if (!in_array('banemail', jssupportticket::$_active_addons)) { ?><span style="color: red;"> *</span><?php } ?></a></span>
                 <span class="js-email-menu-link <?php if (jssupportticket::$jsst_data[1] == 'be-trtk') echo 'selected'; ?>"><a class="js-email-link" href="?page=emailtemplate&for=be-trtk" title="<?php echo esc_attr(__('Ban Email Try To Create Ticket','js-support-ticket')); ?>"><?php echo esc_html(__('Ban Email Try To Create Ticket', 'js-support-ticket')); ?><?php if (!in_array('banemail', jssupportticket::$_active_addons)) { ?><span style="color: red;"> *</span><?php } ?></a></span>
                 <span class="js-email-menu-link <?php if (jssupportticket::$jsst_data[1] == 'dt-tk') echo 'selected'; ?>"><a class="js-email-link" href="?page=emailtemplate&for=dt-tk" title="<?php echo esc_attr(__('Department Transfer','js-support-ticket')); ?>"><?php echo esc_html(__('Department Transfer', 'js-support-ticket')); ?><?php if (!in_array('actions', jssupportticket::$_active_addons)) { ?><span style="color: red;"> *</span><?php } ?></a></span>
-                <span class="js-email-menu-link <?php if (jssupportticket::$jsst_data[1] == 'ebct-tk') echo 'selected'; ?>"><a class="js-email-link" href="?page=emailtemplate&for=ebct-tk" title="<?php echo esc_attr(__('Ban Email and Close Ticket', 'js-support-ticket')); ?>"><?php echo esc_html(__('Ban Email and Close Ticket', 'js-support-ticket')); ?><?php if (!in_array('banemail', jssupportticket::$_active_addons)) { ?><span style="color: red;"> *</span><?php } ?></a></span>
+                <span class="js-email-menu-link <?php if (jssupportticket::$jsst_data[1] == 'ebct-tk') echo 'selected'; ?>"><a class="js-email-link" href="?page=emailtemplate&for=ebct-tk" title="<?php echo esc_attr(__('Ban Email And Close Ticket', 'js-support-ticket')); ?>"><?php echo esc_html(__('Ban Email And Close Ticket', 'js-support-ticket')); ?><?php if (!in_array('banemail', jssupportticket::$_active_addons)) { ?><span style="color: red;"> *</span><?php } ?></a></span>
                 <span class="js-email-menu-link <?php if (jssupportticket::$jsst_data[1] == 'ube-tk') echo 'selected'; ?>"><a class="js-email-link" href="?page=emailtemplate&for=ube-tk" title="<?php echo esc_attr(__('Unban Email', 'js-support-ticket')); ?>"><?php echo esc_html(__('Unban Email', 'js-support-ticket')); ?><?php if (!in_array('banemail', jssupportticket::$_active_addons)) { ?><span style="color: red;"> *</span><?php } ?></a></span>
                 <span class="js-email-menu-link <?php if (jssupportticket::$jsst_data[1] == 'rsp-tk') echo 'selected'; ?>"><a class="js-email-link" href="?page=emailtemplate&for=rsp-tk" title="<?php echo esc_attr(__('Response Ticket', 'js-support-ticket')); ?>"><?php echo esc_html(__('Response Ticket', 'js-support-ticket')); ?><?php if (!in_array('agent', jssupportticket::$_active_addons)) { ?><span style="color: red;"> *</span><?php } ?></a></span>
                 <span class="js-email-menu-link <?php if (jssupportticket::$jsst_data[1] == 'rpy-tk') echo 'selected'; ?>"><a class="js-email-link" href="?page=emailtemplate&for=rpy-tk" title="<?php echo esc_attr(__('Reply Ticket', 'js-support-ticket')); ?>"><?php echo esc_html(__('Reply Ticket', 'js-support-ticket')); ?></a></span>
@@ -121,10 +121,10 @@
                         <form class="js-ticket-form" method="post" action="<?php echo esc_url(wp_nonce_url(jssupportticket::makeUrl(array('jstmod'=>'emailtemplate', 'task'=>'savecustomemailtemplate')),"save-form-email-template")); ?>">
                             <?php
                             if ($jsst_showformdata) {
-                                echo wp_kses(JSSTformfield::select('multiformid', JSSTincluder::getJSModel('multiform')->getMultiFormForCombobox(jssupportticket::$jsst_data[0]->templatefor), '', esc_html(__('-- Select a Form --', 'js-support-ticket')), array('class' => 'inputbox one js-ticket-select-form')), JSST_ALLOWED_TAGS);                            
+                                echo wp_kses(JSSTformfield::select('multiformid', JSSTincluder::getJSModel('multiform')->getMultiFormForCombobox(jssupportticket::$jsst_data[0]->templatefor), '', esc_html(__('Select a Form', 'js-support-ticket')), array('class' => 'inputbox one js-ticket-select-form')), JSST_ALLOWED_TAGS);                            
                             }
                             if (in_array('multilanguageemailtemplates', jssupportticket::$_active_addons)) {
-                                echo wp_kses(JSSTformfield::select("language_id", JSSTincluder::getJSModel("multilanguageemailtemplates")->getLangForCombobox() ,'',__("-- Select a Language --", "js-support-ticket"), array("class" => "inputbox one js-ticket-select-form")), JSST_ALLOWED_TAGS);
+                                echo wp_kses(JSSTformfield::select("language_id", JSSTincluder::getJSModel("multilanguageemailtemplates")->getLangForCombobox() ,'',__("Select a Language", "js-support-ticket"), array("class" => "inputbox one js-ticket-select-form")), JSST_ALLOWED_TAGS);
                             } ?>
                             <?php echo wp_kses(JSSTformfield::submitbutton('save', esc_html(__('Create Template', 'js-support-ticket')), array('class' => 'js-ticket-button js-ticket-create-edit-template')), JSST_ALLOWED_TAGS); ?>
                             <?php echo wp_kses(JSSTformfield::hidden('id', ''), JSST_ALLOWED_TAGS); ?>
@@ -216,7 +216,7 @@
                                     </div>
                                     <div class="js-ticket-card-content">
                                         <div class="js-ticket-card-label">
-                                            <?php echo esc_html(__('Form:', 'js-support-ticket')); ?>
+                                            <?php echo esc_html(__('Form', 'js-support-ticket')).':'; ?>
                                         </div>
                                         <div class="js-ticket-card-value js-ticket-card-value-bold">
                                             <?php echo esc_html(jssupportticket::$jsst_data[0]->multiformname); ?>
@@ -232,7 +232,7 @@
                                     </div>
                                     <div class="js-ticket-card-content">
                                         <div class="js-ticket-card-label">
-                                            <?php echo esc_html(__('Language:', 'js-support-ticket')); ?>
+                                            <?php echo esc_html(__('Language', 'js-support-ticket').':'); ?>
                                         </div>
                                         <div class="js-ticket-card-value js-ticket-card-value-bold">
                                             <?php echo esc_html(jssupportticket::$jsst_data[0]->language_name); ?>
@@ -535,7 +535,7 @@
                         <div class="js-sugestion-alert-wrp js-email-msg">
                             <div class="js-sugestion-alert">
                                 <strong>
-                                    <?php echo esc_html(__('Note:', 'js-support-ticket')); ?>
+                                    <?php echo esc_html(__('Note', 'js-support-ticket')).':'; ?>
                                 </strong>
                                 <?php echo esc_html(__('Features marked with', 'js-support-ticket')); ?>
                                 <span>*</span>

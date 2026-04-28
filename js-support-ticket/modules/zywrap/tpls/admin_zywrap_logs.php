@@ -3,7 +3,7 @@ if(!defined('ABSPATH')) die('Restricted Access');
 
 JSSTmessage::getMessage(); 
 ?>
-<div id="jsstadmin-wrapper">
+<div id="jsstadmin-wrapper" class="js-ticket-zywrap-logs-page">
     <div id="jsstadmin-leftmenu">
         <?php JSSTincluder::getClassesInclude('jsstadminsidemenu'); ?>
     </div>
@@ -12,7 +12,7 @@ JSSTmessage::getMessage();
             <div id="jsstadmin-wrapper-top-left">
                 <div id="jsstadmin-breadcrunbs">
                     <ul>
-                        <li><a href="?page=jssupportticket" title="<?php echo esc_attr(__('Dashboard','js-support-ticket')); ?>"><?php echo esc_html(__('Dashboard','js-support-ticket')); ?></a></li>
+                        <li><a href="<?php echo esc_url(admin_url('admin.php?page=jssupportticket')); ?>" title="<?php echo esc_attr(__('Dashboard','js-support-ticket')); ?>"><?php echo esc_html(__('Dashboard','js-support-ticket')); ?></a></li>
                         <li><?php echo esc_html(__('Zywrap API Logs','js-support-ticket')); ?></li>
                     </ul>
                 </div>
@@ -28,7 +28,7 @@ JSSTmessage::getMessage();
         <div id="jsstadmin-head">
             <h1 class="jsstadmin-head-text"><?php echo esc_html(__('Zywrap API Audit Logs', 'js-support-ticket')); ?></h1>
         </div>
-        <div id="jsstadmin-data-wrp" class="p0 bg-n bs-n">
+        <div id="jsstadmin-data-wrp" class="p0 bg-n bs-n js-ticket-zywrap-padding-20">
             
             <form class="js-filter-form" name="jssupportticketform" id="jssupportticketform" method="post" action="<?php echo esc_url(wp_nonce_url(admin_url("admin.php?page=zywrap&jstlay=zywrap_logs"),"zywrap_logs")); ?>">
                 <?php echo wp_kses(JSSTformfield::text('trace_id', isset(jssupportticket::$jsst_data['filter']['trace_id']) ? jssupportticket::$jsst_data['filter']['trace_id'] : '', array('placeholder' => esc_html(__('Search Trace ID', 'js-support-ticket')),'class' => 'js-form-input-field')), JSST_ALLOWED_TAGS); ?>
@@ -40,47 +40,49 @@ JSSTmessage::getMessage();
 
             <?php if (!empty(jssupportticket::$jsst_data[0])) { ?>
                 <form class="jsstadmin-form" method="post" action="#">
-                    <table id="js-support-ticket-table">
-                        <thead>
-                            <tr class="js-support-ticket-table-heading">
-                                <th class="left"><?php echo esc_html(__('Trace ID', 'js-support-ticket')); ?></th>
-                                <th class="left"><?php echo esc_html(__('Action / Wrapper', 'js-support-ticket')); ?></th>
-                                <th><?php echo esc_html(__('Model', 'js-support-ticket')); ?></th>
-                                <th><?php echo esc_html(__('Tokens', 'js-support-ticket')); ?></th>
-                                <th><?php echo esc_html(__('Latency', 'js-support-ticket')); ?></th>
-                                <th><?php echo esc_html(__('Date', 'js-support-ticket')); ?></th>
-                                <th><?php echo esc_html(__('Status', 'js-support-ticket')); ?></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                        <?php foreach (jssupportticket::$jsst_data[0] AS $log) { ?>
-                            <tr>
-                                <td class="left jsst-left-row" style="font-family:monospace; color:#475569; font-size:12px;">
-                                    <?php echo esc_html(substr($log->trace_id, 0, 18)) . '...'; ?>
-                                </td>
-                                <td class="left">
-                                    <strong><?php echo esc_html(str_replace('_', ' ', ucwords($log->wrapper_code))); ?></strong>
-                                    <div style="font-size:11px; color:#94a3b8;"><?php echo esc_html($log->wrapper_code); ?></div>
-                                </td>
-                                <td>
-                                    <span style="background:#f1f5f9; border:1px solid #e2e8f0; padding:3px 8px; border-radius:12px; font-size:11px; color:#475569;">
-                                        <?php echo esc_html($log->model_code == 'default' ? 'Auto-Select' : $log->model_code); ?>
-                                    </span>
-                                </td>
-                                <td>
-                                    <span style="background:#eff6ff; color:#1d4ed8; padding:3px 8px; border-radius:12px; font-size:11px; font-weight:600;">
-                                        <?php echo number_format($log->total_tokens); ?>
-                                    </span>
-                                </td>
-                                <td><?php echo number_format($log->latency_ms); ?> ms</td>
-                                <td><?php echo esc_html(date_i18n(jssupportticket::$_config['date_format'] . ' H:i:s', jssupportticketphplib::JSST_strtotime($log->created_at))); ?></td>
-                                <td>
-                                    <img alt="Success" src="<?php echo esc_url(JSST_PLUGIN_URL) . 'includes/images/good.png'; ?>" title="Success" />
-                                </td>
-                            </tr>
-                        <?php } ?>
-                        </tbody>
-                    </table>
+                    <div class="js-ticket-zywrap-table-responsive">
+                        <table id="js-support-ticket-table" class="js-ticket-zywrap-table">
+                            <thead>
+                                <tr class="js-support-ticket-table-heading">
+                                    <th class="left"><?php echo esc_html(__('Trace ID', 'js-support-ticket')); ?></th>
+                                    <th class="left"><?php echo esc_html(__('Action / Wrapper', 'js-support-ticket')); ?></th>
+                                    <th><?php echo esc_html(__('Model', 'js-support-ticket')); ?></th>
+                                    <th><?php echo esc_html(__('Tokens', 'js-support-ticket')); ?></th>
+                                    <th><?php echo esc_html(__('Latency', 'js-support-ticket')); ?></th>
+                                    <th><?php echo esc_html(__('Date', 'js-support-ticket')); ?></th>
+                                    <th><?php echo esc_html(__('Status', 'js-support-ticket')); ?></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            <?php foreach (jssupportticket::$jsst_data[0] AS $log) { ?>
+                                <tr>
+                                    <td class="left jsst-left-row js-ticket-zywrap-trace-cell">
+                                        <?php echo esc_html(substr($log->trace_id, 0, 18)) . '...'; ?>
+                                    </td>
+                                    <td class="left">
+                                        <strong class="js-ticket-zywrap-log-title"><?php echo esc_html(str_replace('_', ' ', ucwords($log->wrapper_code))); ?></strong>
+                                        <div class="js-ticket-zywrap-log-code"><?php echo esc_html($log->wrapper_code); ?></div>
+                                    </td>
+                                    <td>
+                                        <span class="js-ticket-zywrap-model-tag">
+                                            <?php echo esc_html($log->model_code == 'default' ? __('Auto-Select', 'js-support-ticket') : $log->model_code); ?>
+                                        </span>
+                                    </td>
+                                    <td>
+                                        <span class="js-ticket-zywrap-token-tag">
+                                            <?php echo esc_html(number_format($log->total_tokens)); ?>
+                                        </span>
+                                    </td>
+                                    <td class="js-ticket-zywrap-latency-cell"><?php echo esc_html(number_format($log->latency_ms)); ?> ms</td>
+                                    <td class="js-ticket-zywrap-date-cell"><?php echo esc_html(date_i18n(jssupportticket::$_config['date_format'] . ' H:i:s', jssupportticketphplib::JSST_strtotime($log->created_at))); ?></td>
+                                    <td>
+                                        <img alt="<?php echo esc_attr(__('Success', 'js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL) . 'includes/images/good.png'; ?>" title="<?php echo esc_attr(__('Success', 'js-support-ticket')); ?>" />
+                                    </td>
+                                </tr>
+                            <?php } ?>
+                            </tbody>
+                        </table>
+                    </div>
                 </form>
                 <?php
                 if (isset(jssupportticket::$jsst_data[1])) {

@@ -42,7 +42,7 @@ JSSTmessage::getMessage();
         </div>
         <div id="jsstadmin-head">
             <h1 class="jsstadmin-head-text"><?php echo esc_html(__('Slug','js-support-ticket')); ?></h1>
-            <a class="jsstadmin-add-link button" title="<?php echo esc_attr(__('reset','js-support-ticket')); ?>" href="<?php echo esc_url(admin_url("admin.php?page=slug&task=resetallslugs&action=jstask")); ?>">
+            <a class="jsstadmin-add-link button" title="<?php echo esc_attr(__('Reset','js-support-ticket')); ?>" href="<?php echo esc_url(admin_url("admin.php?page=slug&task=resetallslugs&action=jstask")); ?>">
                 <?php echo esc_html(__('Reset All','js-support-ticket')); ?>
             </a>
         </div>
@@ -153,8 +153,8 @@ JSSTmessage::getMessage();
                                             </td>
                                             <td>
                                                 <?php $jsst_nonce = wp_create_nonce("get-options-for-edit-slug-".$jsst_row->id); ?>
-                                                <a class="action-btn" href="#" onclick="showPopupAndSetValues('<?php echo esc_js($jsst_nonce); ?>' ,<?php echo esc_js($jsst_row->id); ?>)" title="<?php echo esc_attr(__('edit','js-support-ticket')); ?>">
-                                                    <img src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/edit.png" alt = "<?php echo esc_attr(__('edit','js-support-ticket')); ?>">
+                                                <a class="action-btn" href="#" onclick="showPopupAndSetValues('<?php echo esc_js($jsst_nonce); ?>' ,<?php echo esc_js($jsst_row->id); ?>)" title="<?php echo esc_attr(__('Edit','js-support-ticket')); ?>">
+                                                    <img src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/edit.png" alt = "<?php echo esc_attr(__('Edit','js-support-ticket')); ?>">
                                                 </a>
                                             </td>
                                         </tr>

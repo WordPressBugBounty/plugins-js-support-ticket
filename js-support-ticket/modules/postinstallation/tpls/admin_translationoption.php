@@ -22,7 +22,7 @@ $jsst_tran_data = json_decode(jssupportticket::$jsst_data[0]['jstran']);
                 <div class="post-installtion-content-header">
                     <ul class="update-header-img step-1">
                         <li class="header-parts first-part">
-                            <a href="<?php echo esc_url(admin_url("admin.php?page=postinstallation&jstlay=stepone")); ?>" title="General" class="tab_icon">
+                            <a href="<?php echo esc_url(admin_url("admin.php?page=postinstallation&jstlay=stepone")); ?>" title="<?php echo esc_html(__('General','js-support-ticket')); ?>" class="tab_icon">
                                 <div class="jsst-post-installationcard-iconwrp">
                                     <img class="start jsst-post-installationcard-black-icon" src="<?php echo esc_url(JSST_PLUGIN_URL).'includes/images/postinstallation/general-settings.png';?>" />
                                     <img class="start jsst-post-installationcard-white-icon" src="<?php echo esc_url(JSST_PLUGIN_URL).'includes/images/postinstallation/general-settings-w.png';?>" />
@@ -31,7 +31,7 @@ $jsst_tran_data = json_decode(jssupportticket::$jsst_data[0]['jstran']);
                             </a>
                         </li>
                         <li class="header-parts second-part">
-                            <a href="<?php echo esc_url(admin_url("admin.php?page=postinstallation&jstlay=steptwo")); ?>" title="Ticket Settings" class="tab_icon">
+                            <a href="<?php echo esc_url(admin_url("admin.php?page=postinstallation&jstlay=steptwo")); ?>" title="<?php echo esc_html(__('Ticket Settings','js-support-ticket')); ?>" class="tab_icon">
                                 <div class="jsst-post-installationcard-iconwrp">
                                     <img class="start jsst-post-installationcard-black-icon" src="<?php echo esc_url(JSST_PLUGIN_URL).'includes/images/postinstallation/ticket.png';?>" />
                                     <img class="start jsst-post-installationcard-white-icon" src="<?php echo esc_url(JSST_PLUGIN_URL).'includes/images/postinstallation/ticket-w.png';?>" />
@@ -41,7 +41,7 @@ $jsst_tran_data = json_decode(jssupportticket::$jsst_data[0]['jstran']);
                         </li>
                         <?php if($jsst_tran_data){ ?>
                             <li class="header-parts third-part active">
-                                <a href="<?php echo esc_url(admin_url("admin.php?page=postinstallation&jstlay=translationoption")); ?>" title="Translation" class="tab_icon">
+                                <a href="<?php echo esc_url(admin_url("admin.php?page=postinstallation&jstlay=translationoption")); ?>" title="<?php echo esc_html(__('Translation','js-support-ticket')); ?>" class="tab_icon">
                                     <div class="jsst-post-installationcard-iconwrp">
                                         <img class="start jsst-post-installationcard-black-icon" src="<?php echo esc_url(JSST_PLUGIN_URL).'includes/images/postinstallation/translation.png';?>" />
                                         <img class="start jsst-post-installationcard-white-icon" src="<?php echo esc_url(JSST_PLUGIN_URL).'includes/images/postinstallation/translation-w.png';?>" />
@@ -52,14 +52,14 @@ $jsst_tran_data = json_decode(jssupportticket::$jsst_data[0]['jstran']);
                         <?php } ?>
                         <?php if(in_array('feedback', jssupportticket::$_active_addons)){ ?>
                             <li class="header-parts third-part">
-                                <a href="<?php echo esc_url(admin_url("admin.php?page=postinstallation&jstlay=stepthree")); ?>" title="Feedback Settings" class="tab_icon">
+                                <a href="<?php echo esc_url(admin_url("admin.php?page=postinstallation&jstlay=stepthree")); ?>" title="<?php echo esc_html(__('Feedback Settings','js-support-ticket')); ?>" class="tab_icon">
                                     <img class="start" src="<?php echo esc_url(JSST_PLUGIN_URL).'includes/images/postinstallation/feedback.png';?>" />
                                     <span class="text"><?php echo esc_html(__('Feedback Settings','js-support-ticket')); ?></span>
                                 </a>
                             </li>
                         <?php } ?>
                         <li class="header-parts forth-part">
-                            <a href="<?php echo esc_url(admin_url("admin.php?page=postinstallation&jstlay=settingcomplete")); ?>" title="Complete" class="tab_icon">
+                            <a href="<?php echo esc_url(admin_url("admin.php?page=postinstallation&jstlay=settingcomplete")); ?>" title="<?php echo esc_html(__('Complete','js-support-ticket')); ?>" class="tab_icon">
                                 <div class="jsst-post-installationcard-iconwrp">
                                     <img class="start jsst-post-installationcard-black-icon" src="<?php echo esc_url(JSST_PLUGIN_URL).'includes/images/postinstallation/complete.png';?>" />
                                     <img class="start jsst-post-installationcard-white-icon" src="<?php echo esc_url(JSST_PLUGIN_URL).'includes/images/postinstallation/complete-w.png';?>" />
@@ -81,7 +81,7 @@ $jsst_tran_data = json_decode(jssupportticket::$jsst_data[0]['jstran']);
                         <form id="jssupportticket-form-ins" method="post" action="<?php echo esc_url(wp_nonce_url(admin_url("admin.php?page=postinstallation&task=save&action=jstask"),"save")); ?>">
                             <div class="pic-config">
                                 <div class="title">
-                                    <?php echo esc_html(__('Language code','js-support-ticket'));?>:
+                                    <?php echo esc_html(__('Language Code','js-support-ticket'));?>:
                                 </div>
                                 <div class="field">
                                     <?php echo wp_kses(JSSTformfield::text('codelang', isset($jsst_tran_data->code) ? $jsst_tran_data->lang_fullname . " (" . esc_attr($jsst_tran_data->code) . ")" : '' , array('class' => 'inputbox jsst-postsetting', 'data-validation' => 'required' , 'readonly' => true)), JSST_ALLOWED_TAGS) ?>

@@ -35,7 +35,7 @@ $jsst_tran_opt = JSSTincluder::getJSModel('jssupportticket')->getInstalledTransl
                 <div class="post-installtion-content-header">
                     <ul class="update-header-img step-1">
                         <li class="header-parts first-part active">
-                            <a href="<?php echo esc_url(admin_url("admin.php?page=postinstallation&jstlay=stepone")); ?>" title="General" class="tab_icon">
+                            <a href="<?php echo esc_url(admin_url("admin.php?page=postinstallation&jstlay=stepone")); ?>" title="<?php echo esc_html(__('General','js-support-ticket')); ?>" class="tab_icon">
                                 <div class="jsst-post-installationcard-iconwrp">
                                     <img class="start jsst-post-installationcard-black-icon" src="<?php echo esc_url(JSST_PLUGIN_URL).'includes/images/postinstallation/general-settings.png';?>" />
                                     <img class="start jsst-post-installationcard-white-icon" src="<?php echo esc_url(JSST_PLUGIN_URL).'includes/images/postinstallation/general-settings-w.png';?>" />
@@ -44,7 +44,7 @@ $jsst_tran_opt = JSSTincluder::getJSModel('jssupportticket')->getInstalledTransl
                             </a>
                         </li>
                         <li class="header-parts second-part">
-                            <a href="<?php echo esc_url(admin_url("admin.php?page=postinstallation&jstlay=steptwo")); ?>" title="Ticket Settings" class="tab_icon">
+                            <a href="<?php echo esc_url(admin_url("admin.php?page=postinstallation&jstlay=steptwo")); ?>" title="<?php echo esc_html(__('Ticket Settings','js-support-ticket')); ?>" class="tab_icon">
                                 <div class="jsst-post-installationcard-iconwrp">
                                     <img class="start jsst-post-installationcard-black-icon" src="<?php echo esc_url(JSST_PLUGIN_URL).'includes/images/postinstallation/ticket.png';?>" />
                                     <img class="start jsst-post-installationcard-white-icon" src="<?php echo esc_url(JSST_PLUGIN_URL).'includes/images/postinstallation/ticket-w.png';?>" />
@@ -54,7 +54,7 @@ $jsst_tran_opt = JSSTincluder::getJSModel('jssupportticket')->getInstalledTransl
                         </li>
                         <?php  if(JSSTincluder::getJSModel('jssupportticket')->getInstalledTranslationKey()){ ?>
                             <li class="header-parts third-part">
-                                <a href="<?php echo esc_url(admin_url("admin.php?page=postinstallation&jstlay=translationoption")); ?>" title="Translation" class="tab_icon">
+                                <a href="<?php echo esc_url(admin_url("admin.php?page=postinstallation&jstlay=translationoption")); ?>" title="<?php echo esc_html(__('Translation','js-support-ticket')); ?>" class="tab_icon">
                                     <div class="jsst-post-installationcard-iconwrp">
                                         <img class="start jsst-post-installationcard-black-icon" src="<?php echo esc_url(JSST_PLUGIN_URL).'includes/images/postinstallation/translation.png';?>" />
                                         <img class="start jsst-post-installationcard-white-icon" src="<?php echo esc_url(JSST_PLUGIN_URL).'includes/images/postinstallation/translation-w.png';?>" />
@@ -65,14 +65,14 @@ $jsst_tran_opt = JSSTincluder::getJSModel('jssupportticket')->getInstalledTransl
                         <?php } ?>
                         <?php if(in_array('feedback', jssupportticket::$_active_addons)){ ?>
                             <li class="header-parts third-part">
-                                <a href="<?php echo esc_url(admin_url("admin.php?page=postinstallation&jstlay=stepthree")); ?>" title="Feedback Settings" class="tab_icon">
+                                <a href="<?php echo esc_url(admin_url("admin.php?page=postinstallation&jstlay=stepthree")); ?>" title="<?php echo esc_html(__('Feedback Settings','js-support-ticket')); ?>" class="tab_icon">
                                     <img class="start" src="<?php echo esc_url(JSST_PLUGIN_URL).'includes/images/postinstallation/feedback.png';?>" />
                                     <span class="text"><?php echo esc_html(__('Feedback Settings','js-support-ticket')); ?></span>
                                 </a>
                             </li>
                         <?php } ?>
                         <li class="header-parts forth-part">
-                            <a href="<?php echo esc_url(admin_url("admin.php?page=postinstallation&jstlay=settingcomplete")); ?>" title="Complete" class="tab_icon">
+                            <a href="<?php echo esc_url(admin_url("admin.php?page=postinstallation&jstlay=settingcomplete")); ?>" title="<?php echo esc_html(__('Complete','js-support-ticket')); ?>" class="tab_icon">
                                 <div class="jsst-post-installationcard-iconwrp">
                                     <img class="start jsst-post-installationcard-black-icon" src="<?php echo esc_url(JSST_PLUGIN_URL).'includes/images/postinstallation/complete.png';?>" />
                                     <img class="start jsst-post-installationcard-white-icon" src="<?php echo esc_url(JSST_PLUGIN_URL).'includes/images/postinstallation/complete-w.png';?>" />
@@ -133,7 +133,7 @@ $jsst_tran_opt = JSSTincluder::getJSModel('jssupportticket')->getInstalledTransl
                             </div>
                             <div class="pic-config">
                                 <div class="title">
-                                    <?php echo esc_html(__('Ticket auto close','js-support-ticket'));?>:
+                                    <?php echo esc_html(__('Ticket Auto Close','js-support-ticket'));?>:
                                 </div>
                                 <div class="field">
                                     <?php echo wp_kses(JSSTformfield::text('ticket_auto_close', isset(jssupportticket::$jsst_data[0]['ticket_auto_close']) ? jssupportticket::$jsst_data[0]['ticket_auto_close'] : '', array('class' => 'inputbox jsst-postsetting', 'data-validation' => 'required')), JSST_ALLOWED_TAGS) ?>
@@ -155,7 +155,7 @@ $jsst_tran_opt = JSSTincluder::getJSModel('jssupportticket')->getInstalledTransl
                             </div>*/?>
                             <div class="pic-config">
                                 <div class="title">
-                                    <?php echo esc_html(__('File maximum size','js-support-ticket'));?>:
+                                    <?php echo esc_html(__('File Maximum Size','js-support-ticket'));?>:
                                 </div>
                                 <div class="field">
                                     <?php echo wp_kses(JSSTformfield::text('file_maximum_size', isset(jssupportticket::$jsst_data[0]['file_maximum_size']) ? jssupportticket::$jsst_data[0]['file_maximum_size'] : '', array('class' => 'inputbox jsst-postsetting', 'data-validation' => 'required')), JSST_ALLOWED_TAGS) ?>
@@ -177,7 +177,7 @@ $jsst_tran_opt = JSSTincluder::getJSModel('jssupportticket')->getInstalledTransl
                             </div>
                             <div class="pic-config">
                                 <div class="title">
-                                    <?php echo esc_html(__('Show count on my tickets','js-support-ticket'));?>:
+                                    <?php echo esc_html(__('Show Count On My Tickets','js-support-ticket'));?>:
                                 </div>
                                 <div class="field">
                                     <?php echo wp_kses(JSSTformfield::select('count_on_myticket', $jsst_yesno , isset(jssupportticket::$jsst_data[0]['count_on_myticket']) ? jssupportticket::$jsst_data[0]['count_on_myticket'] : '', esc_html(__('Select Type', 'js-support-ticket')) , array('class' => 'inputbox jsst-postsetting js-select jsst-postsetting ')), JSST_ALLOWED_TAGS);?>

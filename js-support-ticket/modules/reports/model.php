@@ -168,7 +168,7 @@ class JSSTreportsModel {
         foreach($jsst_department AS $jsst_dept){
             if($jsst_dept->totalticket == 0)
                 $jsst_i += 1;
-            jssupportticket::$jsst_data['pie3d_chart1'] .= "['".$jsst_dept->departmentname."',$jsst_dept->totalticket],";
+            jssupportticket::$jsst_data['pie3d_chart1'] .= "['".jssupportticket::JSST_getVarValue($jsst_dept->departmentname)."',$jsst_dept->totalticket],";
         }
 
         if(count($jsst_department) == $jsst_i)

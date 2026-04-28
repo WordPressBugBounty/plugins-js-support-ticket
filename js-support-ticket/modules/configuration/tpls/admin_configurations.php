@@ -208,7 +208,7 @@ $jsst_jssupportticket_js ='
 wp_add_inline_script('js-support-ticket-main-js',$jsst_jssupportticket_js);
 
 $jsst_captchaselection = array(
-    (object) array('id' => '1', 'text' => esc_html(__('Google Recaptcha', 'js-support-ticket'))),
+    (object) array('id' => '1', 'text' => esc_html(__('Google reCaptcha', 'js-support-ticket'))),
     (object) array('id' => '2', 'text' => esc_html(__('Own Captcha', 'js-support-ticket')))
 );
 $jsst_owncaptchaoparend = array(
@@ -221,8 +221,8 @@ $jsst_owncaptchatype = array(
     (object) array('id' => '2', 'text' => esc_html(__('Subtraction', 'js-support-ticket')))
 );
 $jsst_recaptcha_version = array(
-    (object) array('id' => '1', 'text' => esc_html(__('Recaptcha Version 2', 'js-support-ticket'))),
-    (object) array('id' => '2', 'text' => esc_html(__('Recaptcha Version 3', 'js-support-ticket')))
+    (object) array('id' => '1', 'text' => esc_html(__('Google reCAPTCHA v2', 'js-support-ticket'))),
+    (object) array('id' => '2', 'text' => esc_html(__('Google reCAPTCHA v3', 'js-support-ticket')))
 );
 $jsst_yesno = array(
     (object) array('id' => '1', 'text' => esc_html(__('Yes', 'js-support-ticket'))),
@@ -266,12 +266,12 @@ $jsst_sequence = array(
 );
 
 $jsst_padZeros = array(
-    (object) array('id' => '1', 'text' => esc_html(__('1', 'js-support-ticket'))),
-    (object) array('id' => '2', 'text' => esc_html(__('2', 'js-support-ticket'))),
-    (object) array('id' => '3', 'text' => esc_html(__('3', 'js-support-ticket'))),
-    (object) array('id' => '4', 'text' => esc_html(__('4', 'js-support-ticket'))),
-    (object) array('id' => '5', 'text' => esc_html(__('5', 'js-support-ticket'))),
-    (object) array('id' => '6', 'text' => esc_html(__('6', 'js-support-ticket')))
+    (object) array('id' => '1', 'text' => esc_html('1')),
+    (object) array('id' => '2', 'text' => esc_html('2')),
+    (object) array('id' => '3', 'text' => esc_html('3')),
+    (object) array('id' => '4', 'text' => esc_html('4')),
+    (object) array('id' => '5', 'text' => esc_html('5')),
+    (object) array('id' => '6', 'text' => esc_html('6'))
 );
 
 $jsst_hosttype = array(
@@ -355,7 +355,7 @@ $jsst_plugin_array = get_option('active_plugins');
                       <li><a href="?page=configuration&jsstconfigid=general#TicketDefault"><?php echo esc_html(__('Attachments', 'js-support-ticket')); ?></a></li>
                       <li><a href="?page=configuration&jsstconfigid=general#login"><?php echo esc_html(__('Login', 'js-support-ticket')); ?></a></li>
                       <li><a href="?page=configuration&jsstconfigid=general#register"><?php echo esc_html(__('Register', 'js-support-ticket')); ?></a></li>
-                      <li><a href="?page=configuration&jsstconfigid=general#SupportIcons"><?php echo esc_html(__('Support Icons', 'js-support-ticket')); ?></a></li>
+                      <li><a href="?page=configuration&jsstconfigid=general#SupportIcons"><?php echo esc_html(__('Support Icon', 'js-support-ticket')); ?></a></li>
                       <li><a href="?page=configuration&jsstconfigid=general#Offline"><?php echo esc_html(__('Offline', 'js-support-ticket')); ?></a></li>
                       <?php if(in_array('paidsupport', jssupportticket::$_active_addons) && in_array('woocommerce/woocommerce.php', $jsst_plugin_array)){ ?>
                         <li><a href="?page=configuration&jsstconfigid=general#PaidSupport"><?php echo esc_html(__('Paid Support', 'js-support-ticket')); ?></a></li>
@@ -482,12 +482,12 @@ $jsst_plugin_array = get_option('active_plugins');
                 <?php } ?>
                 <?php if(in_array('mailchimp', jssupportticket::$_active_addons)){ ?>
                   <li class="treeview" id="cn_mc">
-                      <a href="?page=configuration&jsstconfigid=mailchimp" title="<?php echo esc_attr(__('MailChimp' , 'js-support-ticket')); ?>">
-                          <img class="jsst_menu-icon" alt = "<?php echo esc_attr(__('MailChimp' , 'js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL).'includes/images/config-icons/mail-chimp.png'; ?>"/>
-                          <span class="jsst_text"><?php echo esc_html(__('MailChimp' , 'js-support-ticket')); ?> </span>
+                      <a href="?page=configuration&jsstconfigid=mailchimp" title="<?php echo esc_attr(__('Mailchimp' , 'js-support-ticket')); ?>">
+                          <img class="jsst_menu-icon" alt = "<?php echo esc_attr(__('Mailchimp' , 'js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL).'includes/images/config-icons/mail-chimp.png'; ?>"/>
+                          <span class="jsst_text"><?php echo esc_html(__('Mailchimp' , 'js-support-ticket')); ?> </span>
                       </a>
                       <ul class="jsstadmin-sidebar-submenu treeview-menu">
-                        <li><a href="?page=configuration&jsstconfigid=mailchimp"><?php echo esc_html(__('MailChimp', 'js-support-ticket')); ?></a></li>
+                        <li><a href="?page=configuration&jsstconfigid=mailchimp"><?php echo esc_html(__('Mailchimp', 'js-support-ticket')); ?></a></li>
                       </ul>
                   </li>
                 <?php } ?>
@@ -524,7 +524,7 @@ $jsst_plugin_array = get_option('active_plugins');
                       <li class="tab-link" data-jsst-tab="ticketsettig"><a href="#TicketDefault"><?php echo esc_html(__('Attachments', 'js-support-ticket')); ?></a></li>
                       <li class="tab-link" data-jsst-tab="ticketsettig"><a href="#login"><?php echo esc_html(__('Login', 'js-support-ticket')); ?></a></li>
                       <li class="tab-link" data-jsst-tab="ticketsettig"><a href="#register"><?php echo esc_html(__('Register', 'js-support-ticket')); ?></a></li>
-                      <li class="tab-link" data-jsst-tab="defaultemail"><a href="#SupportIcons"><?php echo esc_html(__('Support Icons', 'js-support-ticket')); ?></a></li>
+                      <li class="tab-link" data-jsst-tab="defaultemail"><a href="#SupportIcons"><?php echo esc_html(__('Support Icon', 'js-support-ticket')); ?></a></li>
                       <li class="tab-link" data-jsst-tab="mailsetting"><a href="#Offline"><?php echo esc_html(__('Offline', 'js-support-ticket')); ?></a></li>
                       <?php if(in_array('paidsupport', jssupportticket::$_active_addons) && in_array('woocommerce/woocommerce.php', $jsst_plugin_array)){ ?>
                         <li class="tab-link" data-jsst-tab="paidsupport"><a href="#PaidSupport"><?php echo esc_html(__('Paid Support', 'js-support-ticket')); ?></a></li>
@@ -551,7 +551,7 @@ $jsst_plugin_array = get_option('active_plugins');
                     if(isset(jssupportticket::$jsst_data[0]['data_directory'])){
                       $jsst_title = esc_html(__('Data Directory', 'js-support-ticket'));
                       $jsst_field = JSSTformfield::text('data_directory', jssupportticket::$jsst_data[0]['data_directory'], array('class' => 'inputbox'));
-                      $jsst_description =  esc_html(__('Set the name for your data directory', 'js-support-ticket')) .'<br>' . esc_html(__('You need to rename the existing data directory in the file system before changing the data directory name', 'js-support-ticket')) ; ?><?php //echo esc_html(__('You need to rename the existing data directory in file system before changing the data directory name', 'js-support-ticket')));
+                      $jsst_description =  esc_html(__('Set the name for your data directory', 'js-support-ticket')) .'<br>' . esc_html(__('You need to rename the existing data directory in the file system before changing the data directory name', 'js-support-ticket')) ; ?><?php //echo esc_html(__('You need to rename the existing data directory in the file system before changing the data directory name', 'js-support-ticket')));
                       JSST_printConfigFieldSingle($jsst_title, $jsst_field, $jsst_description);
                     }
 
@@ -563,7 +563,7 @@ $jsst_plugin_array = get_option('active_plugins');
                     }
 
                     if(isset(jssupportticket::$jsst_data[0]['pagination_default_page_size'])){
-                      $jsst_title = esc_html(__('Pagination default page size', 'js-support-ticket'));
+                      $jsst_title = esc_html(__('Pagination Default Page Size', 'js-support-ticket'));
                       $jsst_field = JSSTformfield::text('pagination_default_page_size', jssupportticket::$jsst_data[0]['pagination_default_page_size'], array('class' => 'inputbox'));
                       $jsst_description =  esc_html(__('Set the no. of record per page', 'js-support-ticket'));
                       JSST_printConfigFieldSingle($jsst_title, $jsst_field, $jsst_description);
@@ -591,20 +591,20 @@ $jsst_plugin_array = get_option('active_plugins');
                     }
 
                     if(isset(jssupportticket::$jsst_data[0]['count_on_myticket'])){
-                      $jsst_title = esc_html(__('Show count on my tickets', 'js-support-ticket'));
+                      $jsst_title = esc_html(__('Show Count On My Tickets', 'js-support-ticket'));
                       $jsst_field = JSSTformfield::select('count_on_myticket', $jsst_yesno, jssupportticket::$jsst_data[0]['count_on_myticket']);
                       $jsst_description =  esc_html(__('Show number of the open, closed, answered ticket in my ticket and dashboard', 'js-support-ticket'));
                       $jsst_video = '9ORIFf6jPPg';
-                      $jsst_videotext = 'Show count on my tickets';
+                      $jsst_videotext = 'Show Count On My Tickets';
                       JSST_printConfigFieldSingle($jsst_title, $jsst_field, $jsst_description, $jsst_video, '', $jsst_videotext);
                     }
 
                     if(isset(jssupportticket::$jsst_data[0]['wp_default_role'])){
-                      $jsst_title = esc_html(__('Default wp role for new users', 'js-support-ticket'));
+                      $jsst_title = esc_html(__('Default Wp Role For New Users', 'js-support-ticket'));
                       $jsst_field = JSSTformfield::select('wp_default_role', $jsst_userroles, jssupportticket::$jsst_data[0]['wp_default_role']);
                       $jsst_description =  esc_html(__('Select the role you want to assign to new users', 'js-support-ticket'));
                       $jsst_video = '';
-                      $jsst_videotext = 'Default wp role for new users';
+                      $jsst_videotext = 'Default Wp Role For New Users';
                       if(in_array('useroptions', jssupportticket::$_active_addons)){
                           $jsst_video = 'T3HRojY2UN4';
                       }
@@ -616,21 +616,21 @@ $jsst_plugin_array = get_option('active_plugins');
                   <h2><?php echo esc_html(__('Attachments', 'js-support-ticket')); ?></h2>
                   <?php
                     if(isset(jssupportticket::$jsst_data[0]['no_of_attachement'])){
-                      $jsst_title = esc_html(__('No. of attachment', 'js-support-ticket'));
+                      $jsst_title = esc_html(__('Number Of Attachments', 'js-support-ticket'));
                       $jsst_field = JSSTformfield::text('no_of_attachement', jssupportticket::$jsst_data[0]['no_of_attachement'], array('class' => 'inputbox'));
-                      $jsst_description =  esc_html(__('No. of attachment allowed at a time', 'js-support-ticket'));
+                      $jsst_description =  esc_html(__('Number of attachments allowed at a time', 'js-support-ticket'));
                       JSST_printConfigFieldSingle($jsst_title, $jsst_field, $jsst_description);
                     }
 
                    if(isset(jssupportticket::$jsst_data[0]['file_maximum_size'])){
-                      $jsst_title = esc_html(__('File maximum size', 'js-support-ticket'));
+                      $jsst_title = esc_html(__('File Maximum Size', 'js-support-ticket'));
                       $jsst_field = JSSTformfield::text('file_maximum_size', jssupportticket::$jsst_data[0]['file_maximum_size'], array('class' => 'inputbox')) ?><?php //echo esc_html(__('Kb', 'js-support-ticket'));
                       $jsst_description =  esc_html(__('Kb', 'js-support-ticket'));
                       JSST_printConfigFieldSingle($jsst_title, $jsst_field,$jsst_description);
                     }
 
                     if(isset(jssupportticket::$jsst_data[0]['file_extension'])){
-                      $jsst_title = esc_html(__('File extension', 'js-support-ticket'));
+                      $jsst_title = esc_html(__('File Extension', 'js-support-ticket'));
                       $jsst_field = JSSTformfield::textarea('file_extension', jssupportticket::$jsst_data[0]['file_extension'], array('class' => 'inputbox'));
                       $jsst_description =  esc_html(__('File extension allowed to attach', 'js-support-ticket'));
                       JSST_printConfigFieldSingle($jsst_title, $jsst_field, $jsst_description);
@@ -643,7 +643,7 @@ $jsst_plugin_array = get_option('active_plugins');
                     // Configuration not in use
                     /*
                     if(isset(jssupportticket::$jsst_data[0]['login_redirect'])){
-                      $jsst_title = esc_html(__('Login redirect', 'js-support-ticket'));
+                      $jsst_title = esc_html(__('Login Redirect', 'js-support-ticket'));
                       $jsst_field = JSSTformfield::select('login_redirect', $jsst_yesno, jssupportticket::$jsst_data[0]['login_redirect']);
                       $jsst_description =  esc_html(__('Redirect user on log in', 'js-support-ticket'));
                       $jsst_video = 'Hq1UzmUqFIA';
@@ -671,7 +671,7 @@ $jsst_plugin_array = get_option('active_plugins');
                   <?php
 
                     if(isset(jssupportticket::$jsst_data[0]['set_register_link'])){
-                      $jsst_title = esc_html(__('Set register Link', 'js-support-ticket'));
+                      $jsst_title = esc_html(__('Set Register Link', 'js-support-ticket'));
                       $jsst_field = JSSTformfield::select('set_register_link', $jsst_defaultregisterpage, jssupportticket::$jsst_data[0]['set_register_link']);
                       $jsst_description =  esc_html(__('Set register Link Default or Custom','js-support-ticket')).'.<br />'.esc_html(__(' To enable registrations, WordPress admin > General > Settings > Membership: Anyone can register', 'js-support-ticket'));
                       $jsst_childfield = '';
@@ -683,7 +683,7 @@ $jsst_plugin_array = get_option('active_plugins');
                   ?>
               </div>
               <div class="jsst_gen_body" id="SupportIcons">
-                  <h2><?php echo esc_html(__('Support Icons', 'js-support-ticket')); ?></h2>
+                  <h2><?php echo esc_html(__('Support Icon', 'js-support-ticket')); ?></h2>
                   <?php
                     if(isset(jssupportticket::$jsst_data[0]['support_screentag'])){
                       $jsst_title = esc_html(__('Support Icon', 'js-support-ticket'));
@@ -718,7 +718,7 @@ $jsst_plugin_array = get_option('active_plugins');
                     <?php }
 
                     if(isset(jssupportticket::$jsst_data[0]['support_custom_txt'])){
-                        $jsst_title = esc_html(__('custom text', 'js-support-ticket'));
+                        $jsst_title = esc_html(__('Custom Text', 'js-support-ticket'));
                         $jsst_field = JSSTformfield::text('support_custom_txt', jssupportticket::$jsst_data[0]['support_custom_txt'], array('class' => 'inputbox'));
                         $jsst_description =  esc_html(__('Set custom support text', 'js-support-ticket'));
                         JSST_printConfigFieldSingle($jsst_title, $jsst_field, $jsst_description);
@@ -822,7 +822,7 @@ $jsst_plugin_array = get_option('active_plugins');
                     }
 
                     if(isset(jssupportticket::$jsst_data[0]['maximum_tickets'])){
-                      $jsst_title = esc_html(__('Maximum tickets', 'js-support-ticket'));
+                      $jsst_title = esc_html(__('Maximum Tickets', 'js-support-ticket'));
                       $jsst_field = JSSTformfield::text('maximum_tickets', jssupportticket::$jsst_data[0]['maximum_tickets'], array('class' => 'inputbox'));
                       $jsst_description =  esc_html(__('Maximum ticket per user', 'js-support-ticket'));
                       $jsst_video = 'LoALnBJnT48';
@@ -831,7 +831,7 @@ $jsst_plugin_array = get_option('active_plugins');
                     }
 
                     if(isset(jssupportticket::$jsst_data[0]['maximum_open_tickets'])){
-                      $jsst_title = esc_html(__('Maximum open tickets', 'js-support-ticket'));
+                      $jsst_title = esc_html(__('Maximum Open Tickets', 'js-support-ticket'));
                       $jsst_field = JSSTformfield::text('maximum_open_tickets', jssupportticket::$jsst_data[0]['maximum_open_tickets'], array('class' => 'inputbox'));
                       $jsst_description =  esc_html(__('Maximum opened tickets per user', 'js-support-ticket'));
                       $jsst_video = 'SJjHk50buw0';
@@ -840,11 +840,11 @@ $jsst_plugin_array = get_option('active_plugins');
                     }
 
                     if(isset(jssupportticket::$jsst_data[0]['reopen_ticket_within_days'])){
-                      $jsst_title = esc_html(__('Reopen ticket within days', 'js-support-ticket'));
+                      $jsst_title = esc_html(__('Reopen Ticket Within Days', 'js-support-ticket'));
                       $jsst_field = JSSTformfield::text('reopen_ticket_within_days', jssupportticket::$jsst_data[0]['reopen_ticket_within_days'], array('class' => 'inputbox'));
                       $jsst_description =  esc_html(__('The ticket can be reopened within a given number of days', 'js-support-ticket'));
                       $jsst_video = 'S7KWbUHvmmk';
-                      $jsst_videotext = 'Reopen ticket within days';
+                      $jsst_videotext = 'Reopen Ticket Within Days';
                       JSST_printConfigFieldSingle($jsst_title, $jsst_field, $jsst_description, $jsst_video, '', $jsst_videotext);
                     }
 
@@ -858,14 +858,14 @@ $jsst_plugin_array = get_option('active_plugins');
                     }
 
                     if(isset(jssupportticket::$jsst_data[0]['print_ticket_user'])){
-                      $jsst_title = esc_html(__('User can print ticket', 'js-support-ticket'));
+                      $jsst_title = esc_html(__('User Can Print Ticket', 'js-support-ticket'));
                       $jsst_field = JSSTformfield::select('print_ticket_user', $jsst_yesno, jssupportticket::$jsst_data[0]['print_ticket_user']);
                       $jsst_description =  esc_html(__('Can user print ticket from ticket detail or not', 'js-support-ticket'));
                       JSST_printConfigFieldSingle($jsst_title, $jsst_field, $jsst_description);
                     }
 
                     if(isset(jssupportticket::$jsst_data[0]['reply_to_closed_ticket'])){
-                      $jsst_title = esc_html(__('Allow Users To Reply via Email On Closed Ticket', 'js-support-ticket'));
+                      $jsst_title = esc_html(__('Allow Users To Reply Via Email On Closed Ticket', 'js-support-ticket'));
                       $jsst_field = JSSTformfield::select('reply_to_closed_ticket', $jsst_yesno, jssupportticket::$jsst_data[0]['reply_to_closed_ticket']);
                       $jsst_description =  esc_html(__('Select whether users can reply to closed email piping ticket or not','js-support-ticket'));
                       JSST_printConfigFieldSingle($jsst_title, $jsst_field, $jsst_description);
@@ -879,7 +879,7 @@ $jsst_plugin_array = get_option('active_plugins');
                     }
 
                     if(isset(jssupportticket::$jsst_data[0]['ticket_replies_ordering'])){
-                      $jsst_title = esc_html(__('Ticket Replies ordering', 'js-support-ticket'));
+                      $jsst_title = esc_html(__('Ticket Replies Ordering', 'js-support-ticket'));
                       $jsst_field = JSSTformfield::select('ticket_replies_ordering', $jsst_repliesordering, jssupportticket::$jsst_data[0]['ticket_replies_ordering']);
                       $jsst_description =  esc_html(__('Set the default ordering for ticket replies in the detail page.', 'js-support-ticket'));
                       JSST_printConfigFieldSingle($jsst_title, $jsst_field, $jsst_description);
@@ -888,19 +888,19 @@ $jsst_plugin_array = get_option('active_plugins');
                     if(isset(jssupportticket::$jsst_data[0]['anonymous_name_on_ticket_reply'])){
                         $jsst_title = esc_html(__('Show Anonymous Name On Ticket Reply', 'js-support-ticket'));
                         $jsst_field = JSSTformfield::select('anonymous_name_on_ticket_reply', $jsst_yesno, jssupportticket::$jsst_data[0]['anonymous_name_on_ticket_reply']);
-                        $jsst_description =  esc_html(__('Select whether users can see the name of administrator or staff member on ticket reply','js-support-ticket'));
+                        $jsst_description =  esc_html(__('Select whether users can see the name of administrator or agent on ticket reply','js-support-ticket'));
                         JSST_printConfigFieldSingle($jsst_title, $jsst_field, $jsst_description);
                     }
 
                     if(isset(jssupportticket::$jsst_data[0]['show_read_receipt_to_admin_on_reply'])){
-                        $jsst_title = esc_html(__('Show Message Read Icon for Admin On Ticket Detail', 'js-support-ticket'));
+                        $jsst_title = esc_html(__('Show Message Read Icon For Admin On Ticket Detail', 'js-support-ticket'));
                         $jsst_field = JSSTformfield::select('show_read_receipt_to_admin_on_reply', $jsst_yesno, jssupportticket::$jsst_data[0]['show_read_receipt_to_admin_on_reply']);
                         $jsst_description =  esc_html(__('Select whether the message read icon is displayed to the administrator on ticket detail.','js-support-ticket'));
                         JSST_printConfigFieldSingle($jsst_title, $jsst_field, $jsst_description);
                     }
 
                     if(isset(jssupportticket::$jsst_data[0]['show_read_receipt_to_agent_on_reply'])){
-                        $jsst_title = esc_html(__('Show Message Read Icon For Agents on Ticket Detail', 'js-support-ticket'));
+                        $jsst_title = esc_html(__('Show Message Read Icon For Agents On Ticket Detail', 'js-support-ticket'));
                         $jsst_field = JSSTformfield::select('show_read_receipt_to_agent_on_reply', $jsst_yesno, jssupportticket::$jsst_data[0]['show_read_receipt_to_agent_on_reply']);
                         $jsst_description =  esc_html(__('Select whether the message read icon is displayed to agents on ticket detail.','js-support-ticket'));
                         JSST_printConfigFieldSingle($jsst_title, $jsst_field, $jsst_description);
@@ -914,16 +914,16 @@ $jsst_plugin_array = get_option('active_plugins');
                     }
 
                     if(isset(jssupportticket::$jsst_data[0]['ticket_auto_close'])){
-                        $jsst_title = esc_html(__('Ticket auto close', 'js-support-ticket'));
+                        $jsst_title = esc_html(__('Ticket Auto Close', 'js-support-ticket'));
                         $jsst_field = JSSTformfield::text('ticket_auto_close', jssupportticket::$jsst_data[0]['ticket_auto_close'], array('class' => 'inputbox'));
                         $jsst_description = '<span class="js-ticket-configuration-sml-txt">'. esc_html(__('Days','js-support-ticket')).'</span>' . esc_html(__('Ticket auto-close if user does not respond within given days', 'js-support-ticket'));
                         $jsst_video = 'Yi3zPvGdGG4';
-                        $jsst_videotext = 'Ticket auto close';
+                        $jsst_videotext = 'Ticket Auto Close';
                         JSST_printConfigFieldSingle($jsst_title, $jsst_field, $jsst_description, $jsst_video, '', $jsst_videotext);
                     }
 
                     if(isset(jssupportticket::$jsst_data[0]['show_ticket_delete_button'])){
-                      $jsst_title = esc_html(__('Show ticket delete button', 'js-support-ticket'));
+                      $jsst_title = esc_html(__('Show Ticket Delete Button', 'js-support-ticket'));
                       $jsst_field = JSSTformfield::select('show_ticket_delete_button', $jsst_yesno, jssupportticket::$jsst_data[0]['show_ticket_delete_button']);
                       $jsst_description =  esc_html(__('Select whether users can see the ticket delete button','js-support-ticket'));
                       JSST_printConfigFieldSingle($jsst_title, $jsst_field, $jsst_description);
@@ -947,7 +947,7 @@ $jsst_plugin_array = get_option('active_plugins');
                     <h2><?php echo esc_html(__('Ticket Listing', 'js-support-ticket')); ?></h2>
                     <?php
                     if(isset(jssupportticket::$jsst_data[0]['tickets_ordering'])){
-                      $jsst_title = esc_html(__('Ticket listing ordering', 'js-support-ticket'));
+                      $jsst_title = esc_html(__('Ticket Listing Ordering', 'js-support-ticket'));
                       $jsst_field = JSSTformfield::select('tickets_ordering', $jsst_ticketordering, jssupportticket::$jsst_data[0]['tickets_ordering']);
                       $jsst_description =  esc_html(__('Set default ordering for ticket listing', 'js-support-ticket'));
                       $jsst_video = 'qloE9WQM4rE';
@@ -956,49 +956,49 @@ $jsst_plugin_array = get_option('active_plugins');
                     }
 
                     if(isset(jssupportticket::$jsst_data[0]['tickets_sorting'])){
-                      $jsst_title = esc_html(__('Ticket listing sorting', 'js-support-ticket'));
+                      $jsst_title = esc_html(__('Ticket Listing Sorting', 'js-support-ticket'));
                       $jsst_field = JSSTformfield::select('tickets_sorting', $jsst_ticketsorting, jssupportticket::$jsst_data[0]['tickets_sorting']);
                       $jsst_description =  esc_html(__('Set default sorting for ticket listing', 'js-support-ticket'));
                       JSST_printConfigFieldSingle($jsst_title, $jsst_field, $jsst_description);
                     }
 
                     if(isset(jssupportticket::$jsst_data[0]['show_closedby_on_admin_tickets'])){
-                      $jsst_title = esc_html(__('Closed info. on admin closed tickets', 'js-support-ticket'));
+                      $jsst_title = esc_html(__('Show Closure Info On Admin Tickets', 'js-support-ticket'));
                       $jsst_field = JSSTformfield::select('show_closedby_on_admin_tickets', $jsst_showhide, jssupportticket::$jsst_data[0]['show_closedby_on_admin_tickets']);
                       $jsst_description =  esc_html(__('By enabling this option, an admin can know who closed the ticket and when that ticket closed.','js-support-ticket'));
                       JSST_printConfigFieldSingle($jsst_title, $jsst_field, $jsst_description);
                     }
 
                     if(isset(jssupportticket::$jsst_data[0]['show_closedby_on_agent_tickets'])){
-                      $jsst_title = esc_html(__('Closed info. on agent closed tickets', 'js-support-ticket'));
+                      $jsst_title = esc_html(__('Show Closure Info on Agent Tickets', 'js-support-ticket'));
                       $jsst_field = JSSTformfield::select('show_closedby_on_agent_tickets', $jsst_showhide, jssupportticket::$jsst_data[0]['show_closedby_on_agent_tickets']);
                       $jsst_description =  esc_html(__('By enabling this option, an agent can know who closed the ticket and when that ticket closed.','js-support-ticket'));
                       JSST_printConfigFieldSingle($jsst_title, $jsst_field, $jsst_description);
                     }
 
                     if(isset(jssupportticket::$jsst_data[0]['show_closedby_on_user_tickets'])){
-                      $jsst_title = esc_html(__('Closed info. on user closed tickets', 'js-support-ticket'));
+                      $jsst_title = esc_html(__('Show Closure Info on User Tickets', 'js-support-ticket'));
                       $jsst_field = JSSTformfield::select('show_closedby_on_user_tickets', $jsst_showhide, jssupportticket::$jsst_data[0]['show_closedby_on_user_tickets']);
                       $jsst_description =  esc_html(__('By enabling this option, a user can know who closed the ticket and when that ticket closed.','js-support-ticket'));
                       JSST_printConfigFieldSingle($jsst_title, $jsst_field, $jsst_description);
                     }
 
                     if(isset(jssupportticket::$jsst_data[0]['show_assignto_on_admin_tickets'])){
-                      $jsst_title = esc_html(__('Assigned info. on admin tickets', 'js-support-ticket'));
+                      $jsst_title = esc_html(__('Assigned Info. On Admin Tickets', 'js-support-ticket'));
                       $jsst_field = JSSTformfield::select('show_assignto_on_admin_tickets', $jsst_showhide, jssupportticket::$jsst_data[0]['show_assignto_on_admin_tickets']);
                       $jsst_description =  esc_html(__('By enabling this option, an admin can know to whom the ticket has been assigned.','js-support-ticket'));
                       JSST_printConfigFieldSingle($jsst_title, $jsst_field, $jsst_description);
                     }
 
                     if(isset(jssupportticket::$jsst_data[0]['show_assignto_on_agent_tickets'])){
-                      $jsst_title = esc_html(__('Assigned info. on agent tickets', 'js-support-ticket'));
+                      $jsst_title = esc_html(__('Assigned Info. On Agent Tickets', 'js-support-ticket'));
                       $jsst_field = JSSTformfield::select('show_assignto_on_agent_tickets', $jsst_showhide, jssupportticket::$jsst_data[0]['show_assignto_on_agent_tickets']);
                       $jsst_description =  esc_html(__('By enabling this option, an agent can know to whom the ticket has been assigned.','js-support-ticket'));
                       JSST_printConfigFieldSingle($jsst_title, $jsst_field, $jsst_description);
                     }
 
                     if(isset(jssupportticket::$jsst_data[0]['show_assignto_on_user_tickets'])){
-                      $jsst_title = esc_html(__('Assigned info. on user tickets', 'js-support-ticket'));
+                      $jsst_title = esc_html(__('Assigned Info. On User Tickets', 'js-support-ticket'));
                       $jsst_field = JSSTformfield::select('show_assignto_on_user_tickets', $jsst_showhide, jssupportticket::$jsst_data[0]['show_assignto_on_user_tickets']);
                       $jsst_description =  esc_html(__('By enabling this option, a user can know to whom the ticket has been assigned.','js-support-ticket'));
                       JSST_printConfigFieldSingle($jsst_title, $jsst_field, $jsst_description);
@@ -1009,11 +1009,11 @@ $jsst_plugin_array = get_option('active_plugins');
                   <h2><?php echo esc_html(__('Visitor Ticket Setting', 'js-support-ticket')); ?></h2>
                   <?php
                     if(isset(jssupportticket::$jsst_data[0]['visitor_can_create_ticket'])){
-                      $jsst_title = esc_html(__('Visitor can create ticket', 'js-support-ticket'));
+                      $jsst_title = esc_html(__('Visitor Can Create Ticket', 'js-support-ticket'));
                       $jsst_field = JSSTformfield::select('visitor_can_create_ticket', $jsst_yesno, jssupportticket::$jsst_data[0]['visitor_can_create_ticket']);
                       $jsst_description =  esc_html(__('Can visitor create ticket or not', 'js-support-ticket'));
                       $jsst_video = 'Gcss-ybwiXk';
-                      $jsst_videotext = 'Visitor can create ticket';
+                      $jsst_videotext = 'Visitor Can Create Ticket';
                       JSST_printConfigFieldSingle($jsst_title, $jsst_field, $jsst_description, $jsst_video, '',$jsst_videotext);
                     }
 
@@ -1044,7 +1044,7 @@ $jsst_plugin_array = get_option('active_plugins');
                   <?php
 
                    if(isset(jssupportticket::$jsst_data[0]['default_alert_email'])){
-                      $jsst_title = esc_html(__('Default alert email', 'js-support-ticket'));
+                      $jsst_title = esc_html(__('Default Alert Email', 'js-support-ticket'));
                       $jsst_field = JSSTformfield::select('default_alert_email', jssupportticket::$jsst_data[1], jssupportticket::$jsst_data[0]['default_alert_email']);
                       $jsst_description = esc_html(__('If ticket department email is not selected then this email is used to send emails', 'js-support-ticket'));
                       $jsst_video = 'dNYnZw8WK0M';
@@ -1054,7 +1054,7 @@ $jsst_plugin_array = get_option('active_plugins');
                     }
 
                     if(isset(jssupportticket::$jsst_data[0]['default_admin_email'])){
-                      $jsst_title = esc_html(__('Default admin email', 'js-support-ticket'));
+                      $jsst_title = esc_html(__('Default Admin Email', 'js-support-ticket'));
                       $jsst_field = JSSTformfield::select('default_admin_email', jssupportticket::$jsst_data[1], jssupportticket::$jsst_data[0]['default_admin_email']);
                       $jsst_description = esc_html(__('Admin email address to receive emails', 'js-support-ticket'));
                       $jsst_video = 'LvsrMtEqRms';
@@ -1086,7 +1086,7 @@ $jsst_plugin_array = get_option('active_plugins');
                 <div class="jsst_gen_body" id="BanEmailNewTicket">
                     <h2><?php echo esc_html(__('Ban Email New Ticket', 'js-support-ticket')); ?></h2>
                     <?php
-                      $jsst_title = esc_html(__('Mail to admin', 'js-support-ticket'));
+                      $jsst_title = esc_html(__('Mail To Admin', 'js-support-ticket'));
                       $jsst_field = JSSTformfield::select('banemail_mail_to_admin', $jsst_enableddisabled, jssupportticket::$jsst_data[0]['banemail_mail_to_admin']);;
                       $jsst_description = esc_html(__('Email sends to admin when banned email try to create a ticket', 'js-support-ticket'));
                       JSST_printConfigFieldSingle($jsst_title, $jsst_field, $jsst_description);
@@ -1107,7 +1107,7 @@ $jsst_plugin_array = get_option('active_plugins');
                   <?php
 
                   if(isset(jssupportticket::$jsst_data[0]['new_ticket_mail_to_admin'])){
-                    $jsst_title = esc_html(__('New ticket', 'js-support-ticket'));
+                    $jsst_title = esc_html(__('New Ticket', 'js-support-ticket'));
                     $jsst_field1 = JSSTformfield::select('new_ticket_mail_to_admin', $jsst_enableddisabled, jssupportticket::$jsst_data[0]['new_ticket_mail_to_admin']);
                     if(in_array('agent', jssupportticket::$_active_addons)){
                       $jsst_field2 = JSSTformfield::select('new_ticket_mail_to_staff_members', $jsst_enableddisabled, jssupportticket::$jsst_data[0]['new_ticket_mail_to_staff_members']);
@@ -1119,7 +1119,7 @@ $jsst_plugin_array = get_option('active_plugins');
                   }
 
                   if(isset(jssupportticket::$jsst_data[0]['ticket_reassign_admin'])){
-                    $jsst_title = esc_html(__('Ticket reassign', 'js-support-ticket'));
+                    $jsst_title = esc_html(__('Ticket Reassign', 'js-support-ticket'));
                     $jsst_field1 = JSSTformfield::select('ticket_reassign_admin', $jsst_enableddisabled, jssupportticket::$jsst_data[0]['ticket_reassign_admin']);
                     if(in_array('agent', jssupportticket::$_active_addons)){
                       $jsst_field2 = JSSTformfield::select('ticket_reassign_staff', $jsst_enableddisabled, jssupportticket::$jsst_data[0]['ticket_reassign_staff']);
@@ -1131,7 +1131,7 @@ $jsst_plugin_array = get_option('active_plugins');
                   }
 
                   if(isset(jssupportticket::$jsst_data[0]['ticket_close_admin'])){
-                    $jsst_title = esc_html(__('Ticket close', 'js-support-ticket'));
+                    $jsst_title = esc_html(__('Ticket Close', 'js-support-ticket'));
                     $jsst_field1 = JSSTformfield::select('ticket_close_admin', $jsst_enableddisabled, jssupportticket::$jsst_data[0]['ticket_close_admin']);
                     if(in_array('agent', jssupportticket::$_active_addons)){
                       $jsst_field2 = JSSTformfield::select('ticket_close_staff', $jsst_enableddisabled, jssupportticket::$jsst_data[0]['ticket_close_staff']);
@@ -1143,7 +1143,7 @@ $jsst_plugin_array = get_option('active_plugins');
                   }
 
                   if(isset(jssupportticket::$jsst_data[0]['ticket_delete_admin'])){
-                    $jsst_title = esc_html(__('Ticket delete', 'js-support-ticket'));
+                    $jsst_title = esc_html(__('Ticket Delete', 'js-support-ticket'));
                     $jsst_field1 = JSSTformfield::select('ticket_delete_admin', $jsst_enableddisabled, jssupportticket::$jsst_data[0]['ticket_delete_admin']);
                     if(in_array('agent', jssupportticket::$_active_addons)){
                       $jsst_field2 = JSSTformfield::select('ticket_delete_staff', $jsst_enableddisabled, jssupportticket::$jsst_data[0]['ticket_delete_staff']);
@@ -1155,7 +1155,7 @@ $jsst_plugin_array = get_option('active_plugins');
                   }
 
                   if(isset(jssupportticket::$jsst_data[0]['ticket_mark_overdue_admin'])){
-                    $jsst_title = esc_html(__('Ticket marked as overdue', 'js-support-ticket'));
+                    $jsst_title = esc_html(__('Ticket Marked As Overdue', 'js-support-ticket'));
                     $jsst_field1 = JSSTformfield::select('ticket_mark_overdue_admin', $jsst_enableddisabled, jssupportticket::$jsst_data[0]['ticket_mark_overdue_admin']);
                     if(in_array('agent', jssupportticket::$_active_addons)){
                       $jsst_field2 = JSSTformfield::select('ticket_mark_overdue_staff', $jsst_enableddisabled, jssupportticket::$jsst_data[0]['ticket_mark_overdue_staff']);
@@ -1167,7 +1167,7 @@ $jsst_plugin_array = get_option('active_plugins');
                   }
 
                   if(isset(jssupportticket::$jsst_data[0]['ticket_ban_email_admin'])){
-                    $jsst_title = esc_html(__('Ticket ban email', 'js-support-ticket'));
+                    $jsst_title = esc_html(__('Ticket Ban Email', 'js-support-ticket'));
                     $jsst_field1 = JSSTformfield::select('ticket_ban_email_admin', $jsst_enableddisabled, jssupportticket::$jsst_data[0]['ticket_ban_email_admin']);
                     if(in_array('agent', jssupportticket::$_active_addons)){
                       $jsst_field2 = JSSTformfield::select('ticket_ban_email_staff', $jsst_enableddisabled, jssupportticket::$jsst_data[0]['ticket_ban_email_staff']);
@@ -1179,7 +1179,7 @@ $jsst_plugin_array = get_option('active_plugins');
                   }
 
                   if(isset(jssupportticket::$jsst_data[0]['ticket_department_transfer_admin'])){
-                    $jsst_title = esc_html(__('Ticket department transfer', 'js-support-ticket'));
+                    $jsst_title = esc_html(__('Ticket Department Transfer', 'js-support-ticket'));
                     $jsst_field1 = JSSTformfield::select('ticket_department_transfer_admin', $jsst_enableddisabled, jssupportticket::$jsst_data[0]['ticket_department_transfer_admin']);
                     if(in_array('agent', jssupportticket::$_active_addons)){
                       $jsst_field2 = JSSTformfield::select('ticket_department_transfer_staff', $jsst_enableddisabled, jssupportticket::$jsst_data[0]['ticket_department_transfer_staff']);
@@ -1191,7 +1191,7 @@ $jsst_plugin_array = get_option('active_plugins');
                   }
 
                   if(isset(jssupportticket::$jsst_data[0]['ticket_reply_ticket_user_admin'])){
-                    $jsst_title = esc_html(__('Ticket reply User', 'js-support-ticket'));
+                    $jsst_title = esc_html(__('Ticket Reply User', 'js-support-ticket'));
                     $jsst_field1 = JSSTformfield::select('ticket_reply_ticket_user_admin', $jsst_enableddisabled, jssupportticket::$jsst_data[0]['ticket_reply_ticket_user_admin']);
                     if(in_array('agent', jssupportticket::$_active_addons)){
                       $jsst_field2 = JSSTformfield::select('ticket_reply_ticket_user_staff', $jsst_enableddisabled, jssupportticket::$jsst_data[0]['ticket_reply_ticket_user_staff']);
@@ -1215,7 +1215,7 @@ $jsst_plugin_array = get_option('active_plugins');
                   }
 
                   if(isset(jssupportticket::$jsst_data[0]['ticker_ban_eamil_and_close_ticktet_admin'])){
-                    $jsst_title = esc_html(__('Ticket ban email and close ticket', 'js-support-ticket'));
+                    $jsst_title = esc_html(__('Ticket Ban Email And Close Ticket', 'js-support-ticket'));
                     $jsst_field1 = JSSTformfield::select('ticker_ban_eamil_and_close_ticktet_admin', $jsst_enableddisabled, jssupportticket::$jsst_data[0]['ticker_ban_eamil_and_close_ticktet_admin']);
                     if(in_array('agent', jssupportticket::$_active_addons)){
                       $jsst_field2 = JSSTformfield::select('ticker_ban_eamil_and_close_ticktet_staff', $jsst_enableddisabled, jssupportticket::$jsst_data[0]['ticker_ban_eamil_and_close_ticktet_staff']);
@@ -1227,7 +1227,7 @@ $jsst_plugin_array = get_option('active_plugins');
                   }
 
                   if(isset(jssupportticket::$jsst_data[0]['unban_email_admin'])){
-                    $jsst_title = esc_html(__('Ticket unban email', 'js-support-ticket'));
+                    $jsst_title = esc_html(__('Ticket Unban Email', 'js-support-ticket'));
                     $jsst_field1 = JSSTformfield::select('unban_email_admin', $jsst_enableddisabled, jssupportticket::$jsst_data[0]['unban_email_admin']);
                     if(in_array('agent', jssupportticket::$_active_addons)){
                       $jsst_field2 = JSSTformfield::select('unban_email_staff', $jsst_enableddisabled, jssupportticket::$jsst_data[0]['unban_email_staff']);
@@ -1239,7 +1239,7 @@ $jsst_plugin_array = get_option('active_plugins');
                   }
 
                   if(isset(jssupportticket::$jsst_data[0]['ticket_lock_admin'])){
-                    $jsst_title = esc_html(__('Ticket lock', 'js-support-ticket'));
+                    $jsst_title = esc_html(__('Ticket Lock', 'js-support-ticket'));
                     $jsst_field1 = JSSTformfield::select('ticket_lock_admin', $jsst_enableddisabled, jssupportticket::$jsst_data[0]['ticket_lock_admin']);
                     if(in_array('agent', jssupportticket::$_active_addons)){
                       $jsst_field2 = JSSTformfield::select('ticket_lock_staff', $jsst_enableddisabled, jssupportticket::$jsst_data[0]['ticket_lock_staff']);
@@ -1251,7 +1251,7 @@ $jsst_plugin_array = get_option('active_plugins');
                   }
 
                   if(isset(jssupportticket::$jsst_data[0]['ticket_unlock_admin'])){
-                    $jsst_title = esc_html(__('Ticket unlock', 'js-support-ticket'));
+                    $jsst_title = esc_html(__('Ticket Unlock', 'js-support-ticket'));
                     $jsst_field1 = JSSTformfield::select('ticket_unlock_admin', $jsst_enableddisabled, jssupportticket::$jsst_data[0]['ticket_unlock_admin']);
                     if(in_array('agent', jssupportticket::$_active_addons)){
                       $jsst_field2 = JSSTformfield::select('ticket_unlock_staff', $jsst_enableddisabled, jssupportticket::$jsst_data[0]['ticket_unlock_staff']);
@@ -1320,7 +1320,7 @@ $jsst_plugin_array = get_option('active_plugins');
                   <?php
 
                     if(isset(jssupportticket::$jsst_data[0]['cplink_openticket_staff'])){
-                        $jsst_title = esc_html(__('Open Ticket', 'js-support-ticket'));
+                        $jsst_title = esc_html(__('Open Tickets', 'js-support-ticket'));
                         $jsst_field = JSSTformfield::select('cplink_openticket_staff', $jsst_showhide, jssupportticket::$jsst_data[0]['cplink_openticket_staff']);
                         JSST_printConfigFieldSingle($jsst_title, $jsst_field);
                     }
@@ -1437,7 +1437,7 @@ $jsst_plugin_array = get_option('active_plugins');
 
 
                     if(isset(jssupportticket::$jsst_data[0]['cplink_faq_staff'])){
-                        $jsst_title =  esc_html(__("FAQ's", 'js-support-ticket'));
+                        $jsst_title =  esc_html(__("FAQs", 'js-support-ticket'));
                         $jsst_field = JSSTformfield::select('cplink_faq_staff', $jsst_showhide, jssupportticket::$jsst_data[0]['cplink_faq_staff']);
                         JSST_printConfigFieldSingle($jsst_title, $jsst_field);
                     }
@@ -1461,19 +1461,19 @@ $jsst_plugin_array = get_option('active_plugins');
                     }
 
                     if(isset(jssupportticket::$jsst_data[0]['cplink_department_report_staff'])){
-                        $jsst_title =  esc_html(__('Department reports', 'js-support-ticket'));
+                        $jsst_title =  esc_html(__('Department Reports', 'js-support-ticket'));
                         $jsst_field = JSSTformfield::select('cplink_department_report_staff', $jsst_showhide, jssupportticket::$jsst_data[0]['cplink_department_report_staff']);
                         JSST_printConfigFieldSingle($jsst_title, $jsst_field);
                     }
 
                     if(isset(jssupportticket::$jsst_data[0]['cplink_feedback_staff'])){
-                        $jsst_title = esc_html(__('Feedbacks', 'js-support-ticket'));
+                        $jsst_title = esc_html(__('Feedback', 'js-support-ticket'));
                         $jsst_field = JSSTformfield::select('cplink_feedback_staff', $jsst_showhide, jssupportticket::$jsst_data[0]['cplink_feedback_staff']);
                         JSST_printConfigFieldSingle($jsst_title, $jsst_field);
                     }
 
                     if(isset(jssupportticket::$jsst_data[0]['cplink_login_logout_staff'])){
-                        $jsst_title =  esc_html(__('Login/Logout Button', 'js-support-ticket'));
+                        $jsst_title =  esc_html(__('Login / Logout Button', 'js-support-ticket'));
                         $jsst_field = JSSTformfield::select('cplink_login_logout_staff', $jsst_showhide, jssupportticket::$jsst_data[0]['cplink_login_logout_staff']);
                         JSST_printConfigFieldSingle($jsst_title, $jsst_field);
                     }
@@ -1517,7 +1517,7 @@ $jsst_plugin_array = get_option('active_plugins');
                     }
 
                     if(isset(jssupportticket::$jsst_data[0]['cplink_helptopic_agent'])){
-                        $jsst_title = esc_html(__('Help Topic', 'js-support-ticket'));
+                        $jsst_title = esc_html(__('Help Topics', 'js-support-ticket'));
                         $jsst_field = JSSTformfield::select('cplink_helptopic_agent', $jsst_showhide, jssupportticket::$jsst_data[0]['cplink_helptopic_agent']);
                         JSST_printConfigFieldSingle($jsst_title, $jsst_field);
                     }
@@ -1555,13 +1555,13 @@ $jsst_plugin_array = get_option('active_plugins');
                     }
 
                     if(isset(jssupportticket::$jsst_data[0]['tplink_openticket_staff'])){
-                        $jsst_title = esc_html(__('Open Ticket', 'js-support-ticket'));
+                        $jsst_title = esc_html(__('Open Tickets', 'js-support-ticket'));
                         $jsst_field =  JSSTformfield::select('tplink_openticket_staff', $jsst_showhide, jssupportticket::$jsst_data[0]['tplink_openticket_staff']);
                         JSST_printConfigFieldSingle($jsst_title, $jsst_field);
                     }
 
                     if(isset(jssupportticket::$jsst_data[0]['tplink_login_logout_staff'])){
-                      $jsst_title = esc_html(__('Login/Logout Button', 'js-support-ticket'));
+                      $jsst_title = esc_html(__('Login / Logout Button', 'js-support-ticket'));
                       $jsst_field = JSSTformfield::select('tplink_login_logout_staff', $jsst_showhide, jssupportticket::$jsst_data[0]['tplink_login_logout_staff']);
                       JSST_printConfigFieldSingle($jsst_title, $jsst_field);
                     }
@@ -1582,7 +1582,7 @@ $jsst_plugin_array = get_option('active_plugins');
                   <h2><?php echo esc_html(__('Dashboard Links', 'js-support-ticket')); ?></h2>
                   <?php
                     if(isset(jssupportticket::$jsst_data[0]['cplink_openticket_user'])){
-                        $jsst_title = esc_html(__('Open Ticket', 'js-support-ticket'));
+                        $jsst_title = esc_html(__('Open Tickets', 'js-support-ticket'));
                         $jsst_field = JSSTformfield::select('cplink_openticket_user', $jsst_showhide, jssupportticket::$jsst_data[0]['cplink_openticket_user']);
                         JSST_printConfigFieldSingle($jsst_title, $jsst_field);
                     }
@@ -1612,7 +1612,7 @@ $jsst_plugin_array = get_option('active_plugins');
                     }
 
                     if(isset(jssupportticket::$jsst_data[0]['cplink_faqs_user'])){
-                        $jsst_title = esc_html(__("FAQ's", 'js-support-ticket'));
+                        $jsst_title = esc_html(__("FAQs", 'js-support-ticket'));
                         $jsst_field = JSSTformfield::select('cplink_faqs_user', $jsst_showhide, jssupportticket::$jsst_data[0]['cplink_faqs_user']);
                         JSST_printConfigFieldSingle($jsst_title, $jsst_field);
                     }
@@ -1624,7 +1624,7 @@ $jsst_plugin_array = get_option('active_plugins');
                     }
 
                     if(isset(jssupportticket::$jsst_data[0]['cplink_login_logout_user'])){
-                        $jsst_title = esc_html(__('Login/Logout Button', 'js-support-ticket'));
+                        $jsst_title = esc_html(__('Login / Logout Button', 'js-support-ticket'));
                         $jsst_field = JSSTformfield::select('cplink_login_logout_user', $jsst_showhide, jssupportticket::$jsst_data[0]['cplink_login_logout_user']);
                         JSST_printConfigFieldSingle($jsst_title, $jsst_field);
                     }
@@ -1692,13 +1692,13 @@ $jsst_plugin_array = get_option('active_plugins');
                     }
 
                     if(isset(jssupportticket::$jsst_data[0]['tplink_openticket_user'])){
-                      $jsst_title = esc_html(__('Open Ticket', 'js-support-ticket'));
+                      $jsst_title = esc_html(__('Open Tickets', 'js-support-ticket'));
                       $jsst_field = JSSTformfield::select('tplink_openticket_user', $jsst_showhide, jssupportticket::$jsst_data[0]['tplink_openticket_user']);
                       JSST_printConfigFieldSingle($jsst_title, $jsst_field);
                     }
 
                     if(isset(jssupportticket::$jsst_data[0]['tplink_login_logout_user'])){
-                      $jsst_title = esc_html(__('Login/Logout Button', 'js-support-ticket'));
+                      $jsst_title = esc_html(__('Login / Logout Button', 'js-support-ticket'));
                       $jsst_field = JSSTformfield::select('tplink_login_logout_user', $jsst_showhide, jssupportticket::$jsst_data[0]['tplink_login_logout_user']);
                       JSST_printConfigFieldSingle($jsst_title, $jsst_field);
                     }
@@ -1763,7 +1763,7 @@ $jsst_plugin_array = get_option('active_plugins');
                       if (isset(jssupportticket::$jsst_data[0]['loginwithfacebook'])) {
                           $jsst_loginwithfacebook = jssupportticket::$jsst_data[0]['loginwithfacebook'];
                       }
-                      $jsst_title = esc_html(__('Login with facebook', 'js-support-ticket'));
+                      $jsst_title = esc_html(__('Login With Facebook', 'js-support-ticket'));
                       $jsst_field = JSSTformfield::select('loginwithfacebook', array((object)array('id' => '1', 'text' => esc_html(__('Yes', 'js-support-ticket'))), (object)array('id' => '2', 'text' => esc_html(__('No', 'js-support-ticket')))), $jsst_loginwithfacebook);
                       $jsst_description = esc_html(__('Facebook user can login in js support ticket', 'js-support-ticket'));
                       JSST_printConfigFieldSingle($jsst_title, $jsst_field, $jsst_description);
@@ -1773,7 +1773,7 @@ $jsst_plugin_array = get_option('active_plugins');
                       // }
                       $jsst_title = esc_html(__('Secret', 'js-support-ticket'));
                       $jsst_field = JSSTformfield::text('clientsecretfacebook', jssupportticket::$jsst_data[0]['clientsecretfacebook'], array('class' => 'inputbox'));
-                      $jsst_description = esc_html(__('secret key', 'js-support-ticket'));
+                      $jsst_description = esc_html(__('Secret Key', 'js-support-ticket'));
                       JSST_printConfigFieldSingle($jsst_title, $jsst_field, $jsst_description);
 
                       // if (isset(jssupportticket::$jsst_data[0]['clientsecretfacebook'])) {
@@ -1804,7 +1804,7 @@ $jsst_plugin_array = get_option('active_plugins');
                       }
                       $jsst_title = esc_html(__('Secret', 'js-support-ticket'));
                       $jsst_field = JSSTformfield::text('clientsecretlinkedin',  jssupportticket::$jsst_data[0]['clientsecretlinkedin'], array('class' => 'inputbox'));
-                      $jsst_description = esc_html(__('secret key', 'js-support-ticket'));
+                      $jsst_description = esc_html(__('Secret Key', 'js-support-ticket'));
                       JSST_printConfigFieldSingle($jsst_title, $jsst_field, $jsst_description);
 
                       if (isset(jssupportticket::$jsst_data[0]['clientsecretlinkedin'])) {
@@ -1870,7 +1870,7 @@ $jsst_plugin_array = get_option('active_plugins');
                     </div>
                     <?php
                       if(isset(jssupportticket::$jsst_data[0]['apiKey_firebase'])){
-                        $jsst_title = esc_html(__('API key for user', 'js-support-ticket'));
+                        $jsst_title = esc_html(__('API Key For User', 'js-support-ticket'));
                         $jsst_field = JSSTformfield::text('apiKey_firebase', jssupportticket::$jsst_data[0]['apiKey_firebase'], array('class' => 'inputbox'));
                         $jsst_description =  esc_html(__('Firebase api key for front user', 'js-support-ticket'));
                         JSST_printConfigFieldSingle($jsst_title, $jsst_field, $jsst_description);
@@ -1884,7 +1884,7 @@ $jsst_plugin_array = get_option('active_plugins');
                       }
 
                       if(isset(jssupportticket::$jsst_data[0]['databaseURL_firebase'])){
-                        $jsst_title = esc_html(__('Database Url', 'js-support-ticket'));
+                        $jsst_title = esc_html(__('Database URL', 'js-support-ticket'));
                         $jsst_field = JSSTformfield::text('databaseURL_firebase', jssupportticket::$jsst_data[0]['databaseURL_firebase'], array('class' => 'inputbox'));
                         $jsst_description =  esc_html(__('Firebase Database URL', 'js-support-ticket'));
                         JSST_printConfigFieldSingle($jsst_title, $jsst_field, $jsst_description);
@@ -1919,7 +1919,7 @@ $jsst_plugin_array = get_option('active_plugins');
                       }
 
                       if(isset(jssupportticket::$jsst_data[0]['logo_for_desktop_notfication_url'])){
-                        $jsst_title = esc_html(__('Logo Image for Desktop Notifications', 'js-support-ticket'));
+                        $jsst_title = esc_html(__('Logo Image For Desktop Notifications', 'js-support-ticket'));
                         $jsst_value = '<input type="file" name="logo_for_desktop_notfication" id="logo_for_desktop_notfication">';
                         $jsst_description = '';
                         if(jssupportticket::$_config['logo_for_desktop_notfication_url'] != ''){
@@ -1927,7 +1927,7 @@ $jsst_plugin_array = get_option('active_plugins');
                           $jsst_path = $jsst_maindir['baseurl'].'/'.jssupportticket::$_config['data_directory'].'/attachmentdata';
                           $jsst_description = '<img alt="'. esc_html(__('Remove Image','js-support-ticket')).'" height="60px" width="60px;" src="'.esc_attr($jsst_path).'/'.esc_attr(jssupportticket::$_config['logo_for_desktop_notfication_url']).'"/> <label><input type="checkbox" name="del_logo_for_desktop_notfication" value="1">'. esc_html(__('Remove Logo','js-support-ticket')).'</label>';
                         }else{
-                          $jsst_description = esc_html(__('No Firebase Notificaiton Logo', 'js-support-ticket'));
+                          $jsst_description = esc_html(__('No Firebase Notification Logo', 'js-support-ticket'));
                         }
                         JSST_printConfigFieldSingle($jsst_title, $jsst_value, $jsst_description);
                       }
@@ -1978,7 +1978,7 @@ $jsst_plugin_array = get_option('active_plugins');
                     <h2><?php echo esc_html(__('Envato Validation', 'js-support-ticket')); ?></h2>
                     <?php
                       if(isset(jssupportticket::$jsst_data[0]['envato_api_key'])){
-                          $jsst_title = esc_html(__('Api Key', 'js-support-ticket'));
+                          $jsst_title = esc_html(__('API Key', 'js-support-ticket'));
                           $jsst_field = JSSTformfield::text('envato_api_key', jssupportticket::$jsst_data[0]['envato_api_key'], array('class' => 'inputbox'));
                           $jsst_description =  esc_html(__('Enter Envato api key ', 'js-support-ticket'));
                           $jsst_description.= '<a title="'. esc_html(__("Click here to generate an api key",'js-support-ticket')).'" target="_blank" href="https://build.envato.com/create-token/">'. esc_html(__("Click here to generate an api key",'js-support-ticket')).'</a>';
@@ -2005,14 +2005,14 @@ $jsst_plugin_array = get_option('active_plugins');
               <?php if(in_array('mailchimp', jssupportticket::$_active_addons)){ ?>
                 <div class="tabs config-tabs" id="tabs">
                   <ul class="jsst_tabs">
-                      <li class="tab-link jsst_current_tab" data-jsst-tab="general"><a href="#MailChimp"><?php echo esc_html(__('MailChimp', 'js-support-ticket')); ?></a></li>
+                      <li class="tab-link jsst_current_tab" data-jsst-tab="general"><a href="#MailChimp"><?php echo esc_html(__('Mailchimp', 'js-support-ticket')); ?></a></li>
                   </ul>
                 </div>
                 <div class="jsst_gen_body" id="MailChimp">
-                    <h2><?php echo esc_html(__('MailChimp', 'js-support-ticket')); ?></h2>
+                    <h2><?php echo esc_html(__('Mailchimp', 'js-support-ticket')); ?></h2>
                     <?php
                       if(isset(jssupportticket::$jsst_data[0]['mailchimp_api_key'])){
-                          $jsst_title = esc_html(__('Api Key', 'js-support-ticket'));
+                          $jsst_title = esc_html(__('API Key', 'js-support-ticket'));
                           $jsst_field = JSSTformfield::text('mailchimp_api_key', jssupportticket::$jsst_data[0]['mailchimp_api_key'], array('class' => 'inputbox'));
                           $jsst_description =  esc_html(__('Enter MailChimp API key ', 'js-support-ticket'));
                           JSST_printConfigFieldSingle($jsst_title, $jsst_field, $jsst_description);
@@ -2024,12 +2024,12 @@ $jsst_plugin_array = get_option('active_plugins');
                           JSST_printConfigFieldSingle($jsst_title, $jsst_field, $jsst_description);
                       }
                       if(isset(jssupportticket::$jsst_data[0]['mailchimp_double_optin'])){
-                          $jsst_title = esc_html(__('Enable double opt-in', 'js-support-ticket'));
+                          $jsst_title = esc_html(__('Enable Double Opt-in', 'js-support-ticket'));
                           $jsst_field = JSSTformfield::select('mailchimp_double_optin', $jsst_yesno, jssupportticket::$jsst_data[0]['mailchimp_double_optin']);
                           $jsst_description =  esc_html(__('You must also enable double opt-in in your MailChimp account', 'js-support-ticket'));
                           JSST_printConfigFieldSingle($jsst_title, $jsst_field, $jsst_description);
                       }
-                      $jsst_title = esc_html(__('Welcome email', 'js-support-ticket'));
+                      $jsst_title = esc_html(__('Welcome Email', 'js-support-ticket'));
                       $jsst_field = esc_html(__('You can enable Final Welcome Email in your MailChimp account', 'js-support-ticket'));
                       $jsst_description = '';
                       JSST_printConfigFieldSingle($jsst_title, $jsst_field, $jsst_description);
@@ -2069,18 +2069,18 @@ $jsst_plugin_array = get_option('active_plugins');
                     <?php
         
                     if(isset(jssupportticket::$jsst_data[0]['captcha_on_registration'])){
-                      $jsst_title = esc_html(__('Show captcha on registration form', 'js-support-ticket'));
+                      $jsst_title = esc_html(__('Show Captcha On Registration Form', 'js-support-ticket'));
                       $jsst_field = JSSTformfield::select('captcha_on_registration', $jsst_yesno, jssupportticket::$jsst_data[0]['captcha_on_registration']);
                       $jsst_description =  esc_html(__('Select whether you want to show captcha on the registration form or not', 'js-support-ticket'));
                       JSST_printConfigFieldSingle($jsst_title, $jsst_field, $jsst_description);
                     }
 
                     if(isset(jssupportticket::$jsst_data[0]['show_captcha_on_visitor_from_ticket'])){
-                      $jsst_title = esc_html(__('Show captcha on the visitor ticket form', 'js-support-ticket'));
+                      $jsst_title = esc_html(__('Show Captcha On The Visitor Ticket Form', 'js-support-ticket'));
                       $jsst_field = JSSTformfield::select('show_captcha_on_visitor_from_ticket', $jsst_yesno, jssupportticket::$jsst_data[0]['show_captcha_on_visitor_from_ticket']);
                       $jsst_description =  esc_html(__('Show captcha when a visitor wants to create a ticket', 'js-support-ticket'));
                       $jsst_video = '-78pMXbZy8o';
-                      $jsst_videotext = 'Show captcha on the visitor ticket form';
+                      $jsst_videotext = 'Show Captcha On The Visitor Ticket Form';
                       JSST_printConfigFieldSingle($jsst_title, $jsst_field, $jsst_description, $jsst_video, '', $jsst_videotext);
                     }
 
@@ -2097,21 +2097,21 @@ $jsst_plugin_array = get_option('active_plugins');
                     
                     <?php
                     if(isset(jssupportticket::$jsst_data[0]['recaptcha_version'])){
-                      $jsst_title = esc_html(__('Google ReCaptcha version', 'js-support-ticket'));
+                      $jsst_title = esc_html(__('Google reCaptcha version', 'js-support-ticket'));
                       $jsst_field = JSSTformfield::select('recaptcha_version', $jsst_recaptcha_version, jssupportticket::$jsst_data[0]['recaptcha_version']);
-                      $jsst_description =  esc_html(__('Select the Google ReCaptcha version','js-support-ticket'));
+                      $jsst_description =  esc_html(__('Select the Google reCaptcha version','js-support-ticket'));
                       JSST_printConfigFieldSingle($jsst_title, $jsst_field, $jsst_description);
                     }
 
                     if(isset(jssupportticket::$jsst_data[0]['recaptcha_publickey'])){
-                      $jsst_title = esc_html(__('Google recaptcha site key', 'js-support-ticket'));
+                      $jsst_title = esc_html(__('Google reCaptcha Site Key', 'js-support-ticket'));
                       $jsst_field = JSSTformfield::text('recaptcha_publickey', jssupportticket::$jsst_data[0]['recaptcha_publickey'], array('class' => 'inputbox'));
                       $jsst_description =  esc_html(__('Please enter the google re-captcha site key from','js-support-ticket')).' https://www.google.com/recaptcha/admin ';
                       JSST_printConfigFieldSingle($jsst_title, $jsst_field, $jsst_description);
                     }
 
                     if(isset(jssupportticket::$jsst_data[0]['recaptcha_privatekey'])){
-                      $jsst_title = esc_html(__('Google recaptcha secret key', 'js-support-ticket'));
+                      $jsst_title = esc_html(__('Google reCaptcha Secret Key', 'js-support-ticket'));
                       $jsst_field = JSSTformfield::text('recaptcha_privatekey', jssupportticket::$jsst_data[0]['recaptcha_privatekey'], array('class' => 'inputbox'));
                       $jsst_description =  esc_html(__('Please enter the google re-captcha secret key from','js-support-ticket')).' https://www.google.com/recaptcha/admin ';
                       JSST_printConfigFieldSingle($jsst_title, $jsst_field, $jsst_description);
@@ -2122,21 +2122,21 @@ $jsst_plugin_array = get_option('active_plugins');
                     
                     <?php
                     if(isset(jssupportticket::$jsst_data[0]['owncaptcha_calculationtype'])){
-                      $jsst_title = esc_html(__('Own captcha calculation type', 'js-support-ticket'));
+                      $jsst_title = esc_html(__('Own Captcha Calculation Type', 'js-support-ticket'));
                       $jsst_field = JSSTformfield::select('owncaptcha_calculationtype', $jsst_owncaptchatype, jssupportticket::$jsst_data[0]['owncaptcha_calculationtype']);
                       $jsst_description =  esc_html(__('Select calculation type addition or subtraction', 'js-support-ticket'));
                       JSST_printConfigFieldSingle($jsst_title, $jsst_field, $jsst_description);
                     }
 
                    if(isset(jssupportticket::$jsst_data[0]['owncaptcha_totaloperand'])){
-                      $jsst_title = esc_html(__('Own captcha operands', 'js-support-ticket'));
+                      $jsst_title = esc_html(__('Own Captcha Operands', 'js-support-ticket'));
                       $jsst_field = JSSTformfield::select('owncaptcha_totaloperand', $jsst_owncaptchaoparend, jssupportticket::$jsst_data[0]['owncaptcha_totaloperand']);
                       $jsst_description =  esc_html(__('Select the total operands to be given', 'js-support-ticket'));
                       JSST_printConfigFieldSingle($jsst_title, $jsst_field, $jsst_description);
                     }
 
                     if(isset(jssupportticket::$jsst_data[0]['owncaptcha_subtractionans'])){
-                      $jsst_title = esc_html(__('Own captcha subtraction answer positive', 'js-support-ticket'));
+                      $jsst_title = esc_html(__('Own Captcha Subtraction Answer Positive', 'js-support-ticket'));
                       $jsst_field = JSSTformfield::select('owncaptcha_subtractionans', $jsst_yesno, jssupportticket::$jsst_data[0]['owncaptcha_subtractionans']);
                       $jsst_description =  esc_html(__('Is subtraction answer should be positive', 'js-support-ticket'));
                       JSST_printConfigFieldSingle($jsst_title, $jsst_field, $jsst_description);
@@ -2174,7 +2174,7 @@ $jsst_plugin_array = get_option('active_plugins');
                 if(isset($jsst_video) && $jsst_video != ''){
                     $jsst_html .= '<div class="js-ticket-configuration-video">
                       <a target="blank" href="https://www.youtube.com/watch?v='.esc_attr($jsst_video).'" class="js-tkt-det-hdg-img js-cp-video-'.esc_attr($jsst_video).'">
-                        <img title="'. esc_html(__('watch video','js-support-ticket')) .'" alt="'. esc_html(__('watch video','js-support-ticket')).'" src="'. JSST_PLUGIN_URL . '/includes/images/watch-video-icon-config.png" />
+                        <img title="'. esc_html(__('Watch Video','js-support-ticket')) .'" alt="'. esc_html(__('Watch Video','js-support-ticket')).'" src="'. JSST_PLUGIN_URL . '/includes/images/watch-video-icon-config.png" />
                         <span></span>
                       </a>';
                       if(isset($jsst_actionbtn) && $jsst_actionbtn != ''){

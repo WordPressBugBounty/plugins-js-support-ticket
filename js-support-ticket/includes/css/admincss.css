@@ -965,6 +965,295 @@ div.jsst-merge-popup-wrapper .js-form-button-wrapper input.button.js-merge-cance
 .js-ticket-textarea {width: 100%;padding: 16px;border: 1px solid #cbd5e1;border-radius: 8px;resize: vertical;min-height: 150px;transition: border-color 0.2s ease, box-shadow 0.2s ease;}
 .js-ticket-textarea:focus {outline: none;border-color: #3b82f6;box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.5);}
 .js-ticket-button-group {display: flex;flex-direction: column;gap: 12px;margin-top: 16px;}
+
+/* ============================================================
+   ZYWRAP CORE & GLOBAL COMPONENTS
+   ============================================================ */
+.js-ticket-zywrap-btn-primary { background: #eff6ff; color: #1d4ed8; border: 1px solid #bfdbfe; border-radius: 6px; padding: 0 12px; height: 30px; font-size: 12px; font-weight: 600; cursor: pointer; display: flex; align-items: center; gap: 6px; box-shadow: 0 1px 2px rgba(0,0,0,0.05); transition: all 0.2s; white-space: nowrap; }
+.js-ticket-zywrap-btn-primary:hover { background: #dbeafe; border-color: #93c5fd; }
+.js-ticket-zywrap-btn-icon { background: #fff; color: #64748b; border: 1px solid #e2e8f0; border-radius: 6px; width: 30px; height: 30px; padding: 0; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.2s; box-shadow: 0 1px 2px rgba(0,0,0,0.02); }
+.js-ticket-zywrap-btn-icon:hover { background: #f1f5f9; border-color: #cbd5e1; color: #0f172a; }
+.js-ticket-zywrap-btn-icon .dashicons { font-size: 16px; width: 16px; height: 16px; display: flex; align-items: center; justify-content: center; }
+
+.js-ticket-zywrap-inline-actions { width: 100%; margin-top: 20px; padding-top: 12px; border-top: 1px dashed #cbd5e1; display: flex; flex-wrap: wrap; gap: 8px; align-items: center; box-sizing: border-box; }
+.js-ticket-zywrap-divider { width: 1px; height: 18px; background: #cbd5e1; margin: 0 4px; display: inline-block; }
+.js-ticket-zywrap-inline-result { width: 100%; margin-top: 12px; background: #f8fafc; border: 1px solid #e2e8f0; border-left: 4px solid #3b82f6; padding: 15px; font-size: 13px; color: #334155; border-radius: 6px; line-height: 1.6; box-sizing: border-box; }
+
+.js-ticket-zywrap-btn-primary .dashicons,
+.js-ticket-zywrap-open-tab-btn .dashicons { font-size: 16px; width: 16px; height: 16px; vertical-align: middle; margin-right: 4px; }
+.js-ticket-zywrap-screen-reader-text { border: 0; clip: rect(1px, 1px, 1px, 1px); clip-path: inset(50%); height: 1px; margin: -1px; overflow: hidden; padding: 0; position: absolute; width: 1px; word-wrap: normal !important; }
+
+/* Form Components */
+.js-ticket-zywrap-form-title { padding-bottom: 10px; }
+.js-ticket-zywrap-required { color: #dc2626; margin-left: 4px; }
+.js-ticket-zywrap-text-center { text-align: center !important; }
+.js-ticket-zywrap-text-red { color: #dc2626 !important; }
+.js-ticket-zywrap-text-green { color: #16a34a !important; }
+
+/* ============================================================
+   ZYWRAP DASHBOARD & HERO
+   ============================================================ */
+.js-ticket-zywrap-dashboard { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif; color: #334155; }
+.js-ticket-zywrap-main-content { padding: 25px; }
+.js-ticket-zywrap-card { background: #fff; border: 1px solid #e2e8f0; border-radius: 8px; padding: 25px; box-shadow: 0 1px 3px rgba(0,0,0,0.05); margin-bottom: 0; }
+.js-ticket-zywrap-card:hover { transform: translateY(-2px); box-shadow: 0 10px 15px -3px rgba(0,0,0,0.05); }
+.js-ticket-zywrap-p24 { padding: 24px; }
+.js-ticket-zywrap-overflow-hidden { overflow: hidden; }
+
+.js-ticket-zywrap-hero { position: relative; overflow: hidden; background: linear-gradient(135deg, #020617 0%, #0f172a 100%); border-radius: 16px; padding: 45px 50px; color: #fff; margin-bottom: 30px; border: 1px solid #1e293b; }
+.js-ticket-zywrap-hero-bg { position: absolute; top: -50%; right: -10%; width: 600px; height: 600px; background: radial-gradient(circle, rgba(59,130,246,0.15) 0%, rgba(0,0,0,0) 70%); border-radius: 50%; pointer-events: none; }
+.js-ticket-zywrap-hero-content { position: relative; z-index: 10; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 30px; }
+.js-ticket-zywrap-hero-text { max-width: 650px; }
+.js-ticket-zywrap-hero-h2 { margin: 0 0 15px 0; font-size: 34px; font-weight: 800; color: #f8fafc; letter-spacing: -0.5px; line-height: 1.2; }
+.js-ticket-zywrap-hero-p { margin: 0 0 25px 0; font-size: 15.5px; color: #cbd5e1; font-weight: 400; line-height: 1.6; }
+.js-ticket-zywrap-badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(59, 130, 246, 0.1); border: 1px solid rgba(59, 130, 246, 0.2); color: #60a5fa; padding: 6px 14px; border-radius: 999px; font-size: 11px; font-weight: 700; text-transform: uppercase; margin-bottom: 18px; }
+.js-ticket-zywrap-text-blue { color: #60a5fa; }
+
+/* Status Indicators */
+.js-ticket-zywrap-status-wrapper { text-align: right; min-width: 220px; }
+.js-ticket-zywrap-status-card { padding: 25px; text-align: center; border-radius: 14px; backdrop-filter: blur(8px); }
+.js-ticket-zywrap-status-active { background: rgba(16, 185, 129, 0.08); border: 1px solid rgba(16, 185, 129, 0.2); }
+.js-ticket-zywrap-status-inactive { background: rgba(255,255,255,0.02); border: 1px dashed rgba(255,255,255,0.15); }
+.js-ticket-zywrap-status-icon { display: inline-flex; align-items: center; justify-content: center; width: 56px; height: 56px; border-radius: 50%; margin-bottom: 15px; }
+.js-ticket-zywrap-status-active .js-ticket-zywrap-status-icon { background: rgba(16, 185, 129, 0.15); box-shadow: 0 0 15px rgba(16, 185, 129, 0.2); }
+.js-ticket-zywrap-status-active .dashicons { color: #34d399; font-size: 32px; width: 32px; height: 32px; }
+.js-ticket-zywrap-status-label { font-size: 15px; font-weight: 700; margin-bottom: 6px; letter-spacing: 0.5px; text-transform: uppercase; }
+.js-ticket-zywrap-status-subtext { font-size: 13px; color: #94a3b8; font-weight: 500; }
+
+/* Dashboard Stat Boxes */
+.js-ticket-zywrap-stats-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 25px; margin-bottom: 30px; }
+.js-ticket-zywrap-stat-box { padding: 24px; display: flex; align-items: center; justify-content: space-between; }
+.js-ticket-zywrap-stat-label { color: #64748b; font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px; }
+.js-ticket-zywrap-stat-number { font-size: 32px; font-weight: 800; color: #0f172a; letter-spacing: -0.5px; }
+.js-ticket-zywrap-stat-icon-wrap { width: 56px; height: 56px; border-radius: 14px; display: flex; align-items: center; justify-content: center; }
+.js-ticket-zywrap-bg-blue { background: #eff6ff; color: #3b82f6; }
+.js-ticket-zywrap-bg-green { background: #f0fdf4; color: #16a34a; }
+.js-ticket-zywrap-bg-red { background: #fef2f2; color: #dc2626; }
+
+/* ============================================================
+   ZYWRAP SETTING PAGE
+   ============================================================ */
+.js-ticket-zywrap-settings-page { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+.js-ticket-zywrap-padding-25 { padding: 25px; }
+.js-ticket-zywrap-settings-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 25px; }
+.js-ticket-zywrap-flex-align { display: flex; align-items: center; gap: 8px; }
+
+.js-ticket-zywrap-info-box { background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 20px; }
+.js-ticket-zywrap-info-title { font-size: 14px; margin: 0 0 15px 0; color: #1e293b; display: flex; align-items: center; }
+.js-ticket-zywrap-info-list { margin: 0 0 0 20px; font-size: 13px; color: #475569; line-height: 1.6; }
+.js-ticket-zywrap-info-list li { margin-bottom: 8px; }
+.js-ticket-zywrap-info-list li a { text-decoration: none; font-weight: 600; color: #2563eb; }
+
+.js-ticket-zywrap-card-title { margin-top: 0; font-size: 16px; border-bottom: 1px solid #f1f5f9; padding-bottom: 10px; margin-bottom: 20px; display: flex; align-items: center; }
+.js-ticket-zywrap-step-number { background: #2563eb; color: #fff; width: 24px; height: 24px; display: inline-flex; align-items: center; justify-content: center; border-radius: 50%; font-size: 12px; margin-right: 8px; flex-shrink: 0; }
+
+.js-ticket-zywrap-form-group { margin-bottom: 15px; }
+.js-ticket-zywrap-label { display: block; font-weight: 600; margin-bottom: 6px; color: #334155; }
+.js-ticket-zywrap-input-group { display: flex; gap: 10px; max-width: 500px; }
+.js-ticket-zywrap-input-group input { width: 100%; padding: 8px 12px; border: 1px solid #cbd5e1; border-radius: 4px; font-family: monospace; }
+.js-ticket-zywrap-prefs-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-top: 15px; }
+.js-ticket-zywrap-prefs-grid select { width: 100%; padding: 8px 12px; border: 1px solid #cbd5e1; border-radius: 4px; background: #f8fafc; }
+.js-ticket-zywrap-hint { font-size: 12px; color: #64748b; margin-top: 6px; margin-bottom: 0; }
+.js-ticket-zywrap-footer-actions { margin-top: 20px; padding-top: 15px; border-top: 1px solid #f1f5f9; display: flex; align-items: center; gap: 15px; }
+
+.js-ticket-zywrap-warning-box { background: #fffbeb; border-left: 3px solid #f59e0b; padding: 12px 15px; border-radius: 4px; margin-bottom: 22px; font-size: 12.5px; color: #92400e; display: flex; gap: 10px; align-items: flex-start; }
+.js-ticket-zywrap-progress-wrap { display: none; margin-top: 15px; text-align: left; width: 100%; max-width: 400px; }
+.js-ticket-zywrap-progress-bar { width: 100%; background: #e2e8f0; border-radius: 999px; height: 8px; overflow: hidden; margin-bottom: 8px; }
+.js-ticket-zywrap-progress-fill { width: 0%; height: 100%; background: #2563eb; transition: width 1s linear; }
+.js-ticket-zywrap-progress-meta { display: flex; justify-content: space-between; font-size: 12px; font-weight: 600; color: #64748b; }
+
+.js-ticket-zywrap-sidebar-column { display: flex; flex-direction: column; gap: 20px; }
+.js-ticket-zywrap-mini-card { background: #fff; border: 1px solid #e2e8f0; border-radius: 8px; padding: 30px 20px; box-shadow: 0 1px 3px rgba(0,0,0,0.05); text-align: center; }
+.js-ticket-zywrap-mini-val { font-size: 32px; font-weight: 700; color: #0f172a; margin-bottom: 20px; }
+.js-ticket-zywrap-mini-label { font-size: 12px; font-weight: 600; color: #64748b; text-transform: uppercase; letter-spacing: 0.5px; }
+
+.js-ticket-zywrap-dimmed { opacity: 0.5; pointer-events: none; transition: opacity 0.3s; }
+.js-ticket-zywrap-font-small { font-size: 14px !important; }
+.js-ticket-zywrap-btn-large { height: 48px; width: 100%; font-size: 15px; display: inline-flex; align-items: center; justify-content: center; gap: 8px; }
+.js-ticket-zywrap-form-column { display: flex; flex-direction: column; gap: 25px; }
+.js-ticket-zywrap-form-column > div { width: 100%; box-sizing: border-box; }
+.js-ticket-zywrap-sync-action-area { text-align: left; width: 100%; max-width: 400px; }
+.js-ticket-zywrap-msg { margin-top: 10px; font-size: 13px; font-weight: 600; }
+
+/* ============================================================
+   ZYWRAP COPILOT BANNER
+   ============================================================ */
+.js-ticket-zywrap-copilot-banner { background: #eff6ff; border: 1px solid #bfdbfe; border-radius: 8px; padding: 16px 20px; margin-bottom: 20px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 1px 3px rgba(0,0,0,0.02); clear: both; }
+.js-ticket-zywrap-copilot-info { display: flex; align-items: center; gap: 15px; }
+.js-ticket-zywrap-copilot-icon-box { background: #2563eb; color: #fff; width: 42px; height: 42px; border-radius: 10px; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 6px -1px rgba(37, 99, 235, 0.3); }
+.js-ticket-zywrap-copilot-icon-box .dashicons { font-size: 22px; width: 22px; height: 22px; }
+.js-ticket-zywrap-copilot-title { font-weight: 700; font-size: 15px; color: #1e3a8a; margin-bottom: 2px; }
+.js-ticket-zywrap-copilot-subtitle { font-size: 12px; color: #3b82f6; font-weight: 500; }
+.js-ticket-zywrap-open-tab-btn.button-primary { background: #2563eb !important; border-color: #1d4ed8 !important; box-shadow: 0 2px 4px rgba(37,99,235,0.2); display: flex; align-items: center; gap: 6px; padding: 0 20px !important; height: 38px !important; line-height: 36px !important; border-radius: 6px; font-weight: 600; text-shadow: none; transition: all 0.2s ease; }
+.js-ticket-zywrap-open-tab-btn.button-primary:hover { background: #1d4ed8 !important; border-color: #1e40af !important; transform: translateY(-1px); }
+
+/* ============================================================
+   ZYWRAP PLAYGROUND PAGE
+   ============================================================ */
+.js-ticket-zywrap-padding-20 { padding: 20px; }
+.js-ticket-zywrap-playground-grid { display: grid; grid-template-columns: 1fr 1.8fr; gap: 30px; }
+.js-ticket-zywrap-column { display: flex; flex-direction: column; gap: 0; }
+.js-ticket-zywrap-pg-card { background: #fff; border-radius: 8px; border: 1px solid #e2e8f0; box-shadow: 0 1px 3px rgba(0,0,0,0.05); padding: 20px; margin-bottom: 20px; }
+.js-ticket-zywrap-pg-title { font-size: 16px; font-weight: 600; margin-top: 0; margin-bottom: 15px; color: #0f172a; border-bottom: 1px solid #f1f5f9; padding-bottom: 10px; }
+.js-ticket-zywrap-pg-form-group { margin-bottom: 15px; }
+.js-ticket-zywrap-pg-label { display: block; font-size: 13px; font-weight: 600; margin-bottom: 5px; color: #334155; }
+.js-ticket-zywrap-pg-select, 
+.js-ticket-zywrap-pg-input, 
+.js-ticket-zywrap-pg-textarea { width: 100%; padding: 8px 12px; border: 1px solid #cbd5e1; border-radius: 6px; font-size: 13px; background: #f8fafc; box-sizing: border-box; }
+.js-ticket-zywrap-pg-select:focus, 
+.js-ticket-zywrap-pg-input:focus, 
+.js-ticket-zywrap-pg-textarea:focus { outline: none; border-color: #2563eb; background: #fff; }
+.js-ticket-zywrap-pg-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+.js-ticket-zywrap-pg-schema-section { background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 6px; padding: 15px; margin-bottom: 15px; }
+.js-ticket-zywrap-pg-schema-title { font-size: 13px; font-weight: 600; border-bottom: 1px solid #cbd5e1; padding-bottom: 8px; margin-top: 0; margin-bottom: 12px; color: #475569; }
+.js-ticket-zywrap-pg-run-btn { width: 100%; height: 42px !important; background: #2563eb !important; border-color: #1d4ed8 !important; font-size: 15px !important; display: flex !important; align-items: center; justify-content: center; gap: 8px; }
+.js-ticket-zywrap-pg-output-box { background: #1e293b; color: #f8fafc; padding: 20px; border-radius: 6px; font-family: monospace; font-size: 13px; min-height: 250px; white-space: pre-wrap; margin: 0; overflow-x: auto; }
+
+/* ============================================================
+   ZYWRAP LOGS & TABLES
+   ============================================================ */
+.js-ticket-zywrap-table-responsive { width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+.js-ticket-zywrap-table { width: 100%; border-collapse: collapse; text-align: left; font-size: 13px; }
+.js-ticket-zywrap-table th{ background: #f8fafc;color: #64748b; font-weight: 600; text-transform: uppercase; font-size: 11px; letter-spacing: 0.5px; padding: 14px 24px; border-bottom: 1px solid #e2e8f0; }
+.js-ticket-zywrap-table td{ padding: 16px 24px; border-bottom: 1px solid #f1f5f9; vertical-align: middle; transition: background 0.1s; }
+.js-ticket-zywrap-table td.js-ticket-zywrap-empty-td{ padding: 50px; text-align: center; color: #94a3b8; font-size: 14px;background: #fff; }
+.js-ticket-zywrap-table td span.dashicons.dashicons-format-aside{ font-size: 32px;width: 32px; height: 32px; margin-bottom: 10px; color: #cbd5e1; }
+.js-ticket-zywrap-trace-cell { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace !important; color: #475569 !important; font-size: 12px !important; }
+.js-ticket-zywrap-log-title { display: block; color: #1e293b; font-size: 14px; font-weight: 600; margin-bottom: 3px; }
+.js-ticket-zywrap-log-code { font-size: 11px; color: #94a3b8; margin-top: 2px; font-family: monospace; }
+.js-ticket-zywrap-model-tag { background: #f1f5f9; border: 1px solid #e2e8f0; padding: 3px 8px; border-radius: 12px; font-size: 11px; color: #475569; display: inline-block; white-space: nowrap; font-weight: 500; }
+.js-ticket-zywrap-token-tag { background: #eff6ff; color: #1d4ed8; padding: 3px 8px; border-radius: 12px; font-size: 11px; font-weight: 600; display: inline-block; }
+.js-ticket-zywrap-latency-cell { font-size: 13px; color: #64748b; white-space: nowrap; }
+.js-ticket-zywrap-date-cell { font-size: 12px; color: #64748b; white-space: nowrap; }
+.js-filter-form { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin-bottom: 20px; }
+.js-right { margin-left: auto; }
+
+/* Dashboard Activity Log Header */
+.js-ticket-zywrap-content-grid { display: grid; grid-template-columns: 3.2fr 1fr; gap: 30px; }
+.js-ticket-zywrap-card-header { padding: 20px 24px; border-bottom: 1px solid #f1f5f9; display: flex; justify-content: space-between; align-items: center; }
+.js-ticket-zywrap-card-h2 { margin: 0; font-size: 16px; color: #0f172a; font-weight: 700; }
+.js-ticket-zywrap-btn-small { font-size: 13px; text-decoration: none; color: #2563eb; font-weight: 600; background: #eff6ff; padding: 6px 12px; border-radius: 6px; transition: background 0.2s; }
+.js-ticket-zywrap-btn-small:hover { background: #dbeafe; }
+
+/* Status Tags */
+.js-ticket-zywrap-status-tag { display: inline-flex; align-items: center; gap: 4px; padding: 4px 10px; border-radius: 6px; font-size: 11px; font-weight: 700; }
+.js-ticket-zywrap-status-tag-success { background: #dcfce7; color: #166534; }
+.js-ticket-zywrap-status-tag-error { background: #fee2e2; color: #991b1b; cursor: help; border-bottom: 1px dotted #991b1b; }
+.js-ticket-zywrap-empty-td { padding: 50px !important; text-align: center; color: #94a3b8; font-size: 14px; background: #fff; }
+
+/* Sidebar Navigation */
+.js-ticket-zywrap-sidebar { display: flex; flex-direction: column; gap: 25px; }
+.js-ticket-zywrap-sidebar-h3 { margin-top: 0; font-size: 14px; font-weight: 700; margin-bottom: 15px; color: #0f172a; text-transform: uppercase; letter-spacing: 0.5px; }
+.js-ticket-zywrap-sidebar-links { display: flex; flex-direction: column; gap: 8px; }
+.js-ticket-zywrap-link-card { display: flex; align-items: center; gap: 12px; text-decoration: none; color: #475569; padding: 14px 16px; border-radius: 8px; transition: all 0.2s; border: 1px solid transparent; font-weight: 500; font-size: 13.5px; }
+.js-ticket-zywrap-link-card:hover { background: #f8fafc; border-color: #e2e8f0; color: #2563eb; }
+.js-ticket-zywrap-link-card .dashicons { color: #64748b; transition: color 0.2s; }
+.js-ticket-zywrap-link-card:hover .dashicons { color: #2563eb; }
+.js-ticket-zywrap-bg-gradient-sync { background: linear-gradient(180deg, #fff 0%, #f8fafc 100%); text-align: center; }
+.js-ticket-zywrap-sync-icon-box { width: 48px; height: 48px; background: #e2e8f0; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; margin-bottom: 15px; }
+.js-ticket-zywrap-sync-text { font-size: 12.5px; color: #64748b; margin-bottom: 18px; line-height: 1.5; }
+.js-ticket-zywrap-text-slate { color: #475569; }
+.js-ticket-zywrap-btn-sync { display: inline-block; width: 100%; font-size: 13px; font-weight: 600; color: #2563eb; text-decoration: none; border: 1px solid #bfdbfe; background: #eff6ff; padding: 10px 0; border-radius: 8px; transition: background 0.2s; text-align: center; }
+.js-ticket-zywrap-btn-sync:hover { background: #dbeafe; }
+
+/* Error Page Specifics */
+.js-ticket-zywrap-wrapper-code { color: #1e293b; font-size: 13px; }
+.js-ticket-zywrap-error-msg-box { background: #fee2e2; color: #991b1b; padding: 6px 10px; border-radius: 4px; font-size: 12px; border-left: 3px solid #dc2626; line-height: 1.5; }
+.js-ticket-zywrap-empty-success-state { padding: 40px; text-align: center; color: #16a34a; font-size: 16px; background: #fff; border: 1px solid #e2e8f0; border-radius: 8px; margin-top: 20px; }
+.js-ticket-zywrap-empty-success-state .dashicons { font-size: 32px; width: 32px; height: 32px; margin-bottom: 10px; }
+
+/* Modal Layout */
+.js-ticket-zywrap-backdrop { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(15, 23, 42, 0.75); z-index: 99998; backdrop-filter: blur(3px); }
+.js-ticket-zywrap-modal { position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 1250px; max-width: 95vw; height: 85vh; max-height: 850px; z-index: 99999; }
+.js-ticket-zywrap-modal-inner { background: #f8fafc; border-radius: 12px; box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25); display: flex; flex-direction: column; overflow: hidden; width: 100%; height: 100%; }
+.js-ticket-zywrap-modal-header { background: linear-gradient(135deg, #1e40af 0%, #2563eb 100%); padding: 15px 25px; color: #fff; display: flex; justify-content: space-between; align-items: center; flex-shrink: 0; }
+.js-ticket-zywrap-modal-title { margin: 0 0 4px 0; color: #fff !important; font-size: 18px; font-weight: 600; display: flex; align-items: center; gap: 8px; }
+.js-ticket-zywrap-modal-subtitle { font-size: 12px; color: #bfdbfe; font-weight: 500; }
+.js-ticket-zywrap-modal-close { color: #fff !important; text-decoration: none; display: flex; align-items: center; justify-content: center; width: 32px; height: 32px; border-radius: 8px; background: rgba(255,255,255,0.15); transition: background 0.2s; }
+.js-ticket-zywrap-modal-close:hover { background: rgba(255,255,255,0.25) !important; }
+.js-ticket-zywrap-modal-body { display: flex; flex-grow: 1; overflow: hidden; }
+.js-ticket-zywrap-modal-sidebar { width: 380px; background: #fff; border-right: 1px solid #e2e8f0; display: flex; flex-direction: column; flex-shrink: 0; }
+.js-ticket-zywrap-intent-header { padding: 20px; border-bottom: 1px solid #f1f5f9; background: #f8fafc; }
+.js-ticket-zywrap-intent-label { font-weight: 600; display: block; margin-bottom: 10px; color: #64748b; font-size: 12px; text-transform: uppercase; letter-spacing: 0.5px; }
+.js-ticket-zywrap-intent-tabs { display: flex; gap: 8px; flex-wrap: wrap; }
+.js-ticket-zywrap-action-list { overflow-y: auto; flex-grow: 1; padding: 15px; }
+.js-ticket-zywrap-card-featured { border: 2px solid #2563eb; background: #eff6ff; padding: 12px 15px; border-radius: 8px; cursor: pointer; margin-bottom: 10px; position: relative; }
+.js-ticket-zywrap-badge-default { position: absolute; top: -8px; right: 12px; background: #2563eb; color: #fff; font-size: 10px; font-weight: bold; padding: 2px 8px; border-radius: 10px; text-transform: uppercase; }
+.js-ticket-zywrap-action-title { margin: 0 0 4px 0; color: #1e3a8a; font-size: 14px; display: flex; align-items: center; gap: 6px; }
+.js-ticket-zywrap-action-desc { margin: 0; font-size: 12px; color: #3b82f6; line-height: 1.4; }
+.js-ticket-zywrap-card-list { border: 1px solid #cbd5e1; background: #fff; padding: 10px 15px; border-radius: 6px; cursor: pointer; transition: all 0.2s; }
+.js-ticket-zywrap-card-compact { padding: 10px; border-bottom: 1px solid #f1f5f9; cursor: pointer; }
+.js-ticket-zywrap-action-title-small { margin: 0; color: #334155; font-size: 13px; }
+.js-ticket-zywrap-modal-workspace { flex: 1; display: flex; flex-direction: column; background: #f8fafc; overflow: hidden; }
+.js-ticket-zywrap-workspace-header { padding: 15px 25px; background: #fff; border-bottom: 1px solid #e2e8f0; display: flex; justify-content: space-between; align-items: center; }
+.js-ticket-zywrap-workspace-h2 { margin: 0; font-size: 16px; color: #0f172a; font-weight: 600; }
+.js-ticket-zywrap-modal-select { padding: 6px 12px !important; border: 1px solid #cbd5e1 !important; border-radius: 6px !important; font-size: 12px !important; background: #f8fafc !important; box-shadow: none !important; }
+.js-ticket-zywrap-workspace-content { flex-grow: 1; padding: 25px; overflow-y: auto; display: flex; flex-direction: column; gap: 20px; }
+.js-ticket-zywrap-empty-prompt { text-align: center; padding: 30px; color: #64748b; background: #f1f5f9; border-radius: 8px; border: 1px dashed #cbd5e1; }
+.js-ticket-zywrap-instructions-card { background: #fff; border: 1px solid #e2e8f0; border-radius: 8px; padding: 20px; box-shadow: 0 1px 2px rgba(0,0,0,0.05); }
+.js-ticket-zywrap-textarea-small { width: 100%; padding: 10px; border: 1px solid #cbd5e1; border-radius: 6px; font-family: inherit; font-size: 13px; resize: vertical; background: #f8fafc; box-sizing: border-box; }
+.js-ticket-zywrap-textarea-draft { flex-grow: 1; min-height: 150px; width: 100%; padding: 20px; font-family: monospace; border: 1px solid #cbd5e1; border-radius: 8px; resize: none; background: #fff; box-shadow: inset 0 1px 3px rgba(0,0,0,0.05); box-sizing: border-box; line-height: 1.6; font-size: 13px; }
+.js-ticket-zywrap-modal-footer { padding: 15px 25px; background: #fff; border-top: 1px solid #e2e8f0; display: flex; justify-content: space-between; align-items: center; }
+.js-ticket-zywrap-btn-gen { padding: 0 25px !important; height: 42px !important; font-size: 14px !important; }
+.js-ticket-zywrap-btn-insert { background: #2563eb !important; border-color: #1d4ed8 !important; padding: 0 30px !important; height: 42px !important; font-size: 14px !important; display: flex; align-items: center; gap: 8px; }
+.js-ticket-zywrap-hide { display: none; }
+.js-ticket-zywrap-flex-align { display: flex; align-items: center; gap: 10px; }
+.js-ticket-zywrap-flex-gap-10 { display: flex; gap: 10px; }
+.js-ticket-zywrap-flex-gap-12 { display: flex; gap: 12px; }
+.js-ticket-zywrap-flex-column-gap { display: flex; flex-direction: column; gap: 8px; }
+.js-ticket-zywrap-flex-column-gap-small { display: flex; flex-direction: column; gap: 5px; }
+.js-ticket-zywrap-flex-between { display: flex; justify-content: space-between; }
+.js-ticket-zywrap-label-bold { font-weight: 600; display: block; margin-bottom: 8px; color: #0f172a; font-size: 14px; }
+.js-ticket-zywrap-label-opt { font-weight: normal; font-size: 11px; color: #64748b; }
+.js-ticket-zywrap-p-hint { margin: 0 0 10px 0; font-size: 11px; color: #64748b; }
+.js-ticket-zywrap-text-status { color: #2563eb; font-size: 12px; font-weight: 500; }
+.js-ticket-zywrap-search-input { width: 100%; padding: 10px; margin-bottom: 15px; border: 1px solid #cbd5e1; border-radius: 6px; box-sizing: border-box; }
+.zywrap-intent-tab { padding: 6px 12px; border-radius: 15px; border: 1px solid #cbd5e1; background: #fff; color: #475569; font-weight: 600; font-size: 12px; cursor: pointer; }
+.zywrap-intent-tab { border: 1px solid #cbd5e1; background: #fff; color: #475569; padding: 6px 12px; border-radius: 15px;  font-weight: 600; font-size: 12px; cursor: pointer; }
+.zywrap-intent-tab.active { border: 1px solid #2563eb; background: #eff6ff; color: #1d4ed8; }
+#zywrap-generate-btn span { margin-top: 4px; margin-right: 5px; }
+#zywrap-insert-btn span { margin-top: 4px; margin-right: 5px; }
+
+/* ============================================================
+   RESPONSIVE LOGIC (CONSOLIDATED)
+   ============================================================ */
+
+@media (max-width: 1100px) {
+    .js-ticket-zywrap-stats-grid { grid-template-columns: 1fr; }
+    .js-ticket-zywrap-content-grid { grid-template-columns: 1fr; }
+    .js-ticket-zywrap-sidebar { width: 100%; }
+}
+
+
+@media (max-width: 1024px) {
+    .js-ticket-zywrap-playground-grid { grid-template-columns: 1fr; gap: 0; }
+}
+
+@media (max-width: 900px) {
+    .js-ticket-zywrap-form-column { width: 100%; }
+    .js-ticket-zywrap-settings-grid { grid-template-columns: 1fr; }
+    .js-ticket-zywrap-prefs-grid { grid-template-columns: 1fr; gap: 15px; }
+    .js-ticket-zywrap-sidebar-column { flex-direction: row; flex-wrap: wrap; }
+    .js-ticket-zywrap-mini-card { flex: 1; min-width: 150px; }
+}
+
+@media (max-width: 782px) {
+    .js-ticket-zywrap-hero { padding: 30px; }
+    .js-ticket-zywrap-hero-h2 { font-size: 24px; }
+    .js-ticket-zywrap-status-wrapper { text-align: center; width: 100%; margin-top: 15px; }
+    .js-filter-form { flex-direction: column; align-items: stretch; }
+    .js-right { margin-left: 0; }
+    .js-ticket-zywrap-padding-20 { padding: 10px; }
+    .js-ticket-zywrap-table th, .js-ticket-zywrap-table td { padding: 10px 8px; }
+    .js-ticket-zywrap-errors-page #jsstadmin-data-wrp { padding: 15px !important; }
+}
+
+@media (max-width: 600px) {
+    .js-ticket-zywrap-copilot-banner { flex-direction: column; align-items: flex-start; gap: 15px; }
+    .js-ticket-zywrap-copilot-action, .js-ticket-zywrap-open-tab-btn.button-primary { width: 100% !important; justify-content: center; }
+    .js-ticket-zywrap-pg-grid-2 { grid-template-columns: 1fr; }
+}
+
 @media (min-width: 640px) {.js-ticket-button-group {flex-direction: row;gap: 16px;margin-top: 0;}}
 .js-ticket-button {display: block;margin-bottom: 25px;padding: 12px 24px;border-radius: 8px;font-weight: 500;transition: background-color 0.2s ease, box-shadow 0.2s ease;box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);color: #ffffff;border: none;cursor: pointer;}
 .js-ticket-post-reply-button {background-color: #2563eb;}

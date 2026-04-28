@@ -131,7 +131,7 @@ JSSTmessage::getMessage(); ?>
                                     <a title="<?php echo esc_attr(__('Edit','js-support-ticket')); ?>" class="action-btn" href="?page=status&jstlay=addstatus&jssupportticketid=<?php echo esc_attr($jsst_status->id); ?>"><img alt = "<?php echo esc_attr(__('Edit','js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/edit.png" /></a>
                                     <?php if($jsst_status->sys != 1) { ?>
                                     &nbsp;&nbsp;
-                                        <a title="<?php echo esc_attr(__('Delete','js-support-ticket')); ?>" class="action-btn" onclick="return confirm('<?php echo esc_js(__('Are you sure you want to delete it?', 'js-support-ticket')); ?>');" href="<?php echo esc_url(wp_nonce_url('?page=status&task=deletestatus&action=jstask&statusid='.esc_attr($jsst_status->id),'delete-status-'.$jsst_status->id));?>"><img alt = "<?php echo esc_attr(__('Delete','js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/delete.png" /></a>
+                                        <a title="<?php echo esc_attr(__('Delete','js-support-ticket')); ?>" class="action-btn" onclick="return confirm('<?php echo esc_js(__('Are you sure you want to delete?', 'js-support-ticket')); ?>');" href="<?php echo esc_url(wp_nonce_url('?page=status&task=deletestatus&action=jstask&statusid='.esc_attr($jsst_status->id),'delete-status-'.$jsst_status->id));?>"><img alt = "<?php echo esc_attr(__('Delete','js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/delete.png" /></a>
                                     <?php } ?>
                                 </td>
                             </tr>

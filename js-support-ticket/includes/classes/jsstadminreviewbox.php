@@ -49,11 +49,11 @@ class JSSTreviewbox {
                                 <?php echo esc_html(__("I'd love to help :)",'js-support-ticket')); ?>
                             </a>
                             <a class="jssupportticket-premio-review-box-future-btn review-sad" href="javascript:;">
-                                <img alt="<?php echo esc_attr(__('sad','js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/review/sad.png">
+                                <img alt="<?php echo esc_attr(__('Sad','js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/review/sad.png">
                                 <?php echo esc_html(__("Not this time",'js-support-ticket')); ?>
                             </a>
                             <a data-mode="happy" class="jssupportticket-premio-review-box-hide-btn review-happy" href="javascript:;">
-                                <img alt="<?php echo esc_attr(__('happy','js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/review/happy.png">
+                                <img alt="<?php echo esc_attr(__('Happy','js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/review/happy.png">
                                 <?php echo esc_html(__("I've already rated you",'js-support-ticket')); ?>
                             </a>
                         </div>
@@ -61,7 +61,7 @@ class JSSTreviewbox {
                 </div>
                 <img  class="js-ticket-review-default-img" alt="<?php echo esc_attr(__('stars','js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/review/star.png">
                 <a href="javascript:;" class="dismiss-btn jssupportticket-premio-review-dismiss-btn">
-                    <img alt="<?php echo esc_attr(__('close','js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/review/close_icon.png">
+                    <img alt="<?php echo esc_attr(__('Close','js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/review/close_icon.png">
                 </a>
             </div>
             <div class="js-ticket-review-thanks-box" id="review-thanks-jssupportticket">
@@ -69,7 +69,7 @@ class JSSTreviewbox {
                     <div class="jssupportticket-thanks-box-popup-content">
                         <div class="jssupportticket-thanks-box-popup-content-wrp">
                             <button class="jssupportticket-close-thanks-btn js-ticket-review-thanks-btn">
-                                <img alt="<?php echo esc_attr(__('close','js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/review/close_icon.png">
+                                <img alt="<?php echo esc_attr(__('Close','js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/review/close_icon.png">
                             </button>
                             <div class="js-ticket-review-thanks-img">
                                 <img alt="<?php echo esc_attr(__('thanks','js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/review/thank_you.png">
@@ -93,7 +93,7 @@ class JSSTreviewbox {
                     </div>
                     <div class="jssupportticket-review-box-popup-content-right">
                         <button class="jssupportticket-close-review-box-popup">
-                            <img alt="<?php echo esc_attr(__('close','js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/review/close_icon.png">
+                            <img alt="<?php echo esc_attr(__('Close','js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/review/close_icon.png">
                         </button>
                         <div class="jssupportticket-review-box-title">
                             <?php echo esc_html(__("Remind you about this later?",'js-support-ticket')); ?>

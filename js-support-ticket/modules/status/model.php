@@ -68,7 +68,7 @@ class JSSTstatusModel {
                     3 => 'In Progress',
                     4 => 'Replied',
                     5 => 'Closed',
-                    6 => 'Close due to merge'
+                    6 => 'Close Due To Merge'
                 ];
                 // add custom status
                 $jsst_result->custom_status = isset($jsst_customStatuses[$jsst_result->id]) ? $jsst_customStatuses[$jsst_result->id] : '';

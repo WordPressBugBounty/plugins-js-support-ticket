@@ -978,7 +978,7 @@ class JSSTticketModel {
         if ($jsst_counts > 0) {
             $jsst_data['loggeremail'] = $jsst_emailaddress;
             $jsst_data['title'] = esc_html(__('Ban Email', 'js-support-ticket'));
-            $jsst_data['log'] = esc_html(__('Ban email try to create ticket', 'js-support-ticket'));
+            $jsst_data['log'] = esc_html(__('Ban Email Try To Create Ticket', 'js-support-ticket'));
             $jsst_current_user = JSSTincluder::getObjectClass('user')->getJSSTCurrentUser(); // to get current user name
             $jsst_currentUserName = $jsst_current_user->display_name;
             $jsst_data['logger'] = $jsst_currentUserName;
@@ -1028,7 +1028,7 @@ class JSSTticketModel {
     function captchaValidate() {
         if (JSSTincluder::getObjectClass('user')->isguest()) {
             if (jssupportticket::$_config['show_captcha_on_visitor_from_ticket'] == 1) {
-                if (jssupportticket::$_config['captcha_selection'] == 1) { // Google recaptcha
+                if (jssupportticket::$_config['captcha_selection'] == 1) { // Google reCaptcha
                     $jsst_gresponse = jssupportticket::JSST_sanitizeData($_POST['g-recaptcha-response']); // JSST_sanitizeData() function uses wordpress santize functions
                     $jsst_resp = JSSTGoogleRecaptchaHTTPPost(jssupportticket::$_config['recaptcha_privatekey'],$jsst_gresponse);
 
@@ -1336,7 +1336,7 @@ class JSSTticketModel {
         if($jsst_data['id'] == '' && $jsst_sendnotification == true && in_array('notification', jssupportticket::$_active_addons)){
             $jsst_dataarray = array();
             $jsst_dataarray['title'] = $jsst_data['subject'];
-            $jsst_dataarray['body'] = esc_html(__("created","js-support-ticket"));
+            $jsst_dataarray['body'] = esc_html(__("Created","js-support-ticket"));
 
             //send notification to admin
             $jsst_devicetoken = JSSTincluder::getJSModel('notification')->checkSubscriptionForAdmin();
@@ -1404,7 +1404,7 @@ class JSSTticketModel {
         }else{
             $jsst_currentUserName = esc_html(__('Guest','js-support-ticket'));
         }
-        $jsst_eventtype = esc_html(__('New ticket', 'js-support-ticket'));
+        $jsst_eventtype = esc_html(__('New Ticket', 'js-support-ticket'));
         if (isset($jsst_data['id']) && is_numeric($jsst_data['id'])) {
             $jsst_message = esc_html(__('Ticket is updated by', 'js-support-ticket')) . " ( " . $jsst_currentUserName . " ) ";
         } else {
@@ -2044,7 +2044,7 @@ class JSSTticketModel {
         /* for activity log */
         $jsst_current_user = JSSTincluder::getObjectClass('user')->getJSSTCurrentUser(); // to get current user name
         $jsst_currentUserName = isset($jsst_current_user->display_name) ? $jsst_current_user->display_name : esc_html(__('Guest', 'js-support-ticket'));
-        $jsst_eventtype = esc_html(__('Assign ticket to agent', 'js-support-ticket'));
+        $jsst_eventtype = esc_html(__('Assign Ticket To Agent', 'js-support-ticket'));
         $jsst_message = esc_html(__('Ticket is assigned to agent by', 'js-support-ticket')) . " ( " . esc_html($jsst_currentUserName) . " ) ";
         if(in_array('tickethistory', jssupportticket::$_active_addons)){
             JSSTincluder::getJSModel('tickethistory')->addActivityLog($jsst_ticketid, 1, $jsst_eventtype, $jsst_message, $jsst_messagetype);
@@ -2100,7 +2100,7 @@ class JSSTticketModel {
         $jsst_current_user = JSSTincluder::getObjectClass('user')->getJSSTCurrentUser(); // to get current user name
         $jsst_currentUserName = $jsst_current_user->display_name;
         $jsst_eventtype = esc_html(__('Change Priority', 'js-support-ticket'));
-        $jsst_message = esc_html(__('Ticket priority is changed by', 'js-support-ticket')) . " ( " . esc_html($jsst_currentUserName) . " ) ";
+        $jsst_message = esc_html(__('Ticket Priority Is Changed By', 'js-support-ticket')) . " ( " . esc_html($jsst_currentUserName) . " ) ";
         if(in_array('tickethistory', jssupportticket::$_active_addons)){
             JSSTincluder::getJSModel('tickethistory')->addActivityLog($jsst_id, 1, $jsst_eventtype, $jsst_message, $jsst_messagetype);
         }
@@ -2379,7 +2379,7 @@ class JSSTticketModel {
         /* for activity log */
         $jsst_current_user = JSSTincluder::getObjectClass('user')->getJSSTCurrentUser(); // to get current user name
         $jsst_currentUserName = $jsst_current_user->display_name;
-        $jsst_eventtype = esc_html(__('In progress ticket', 'js-support-ticket'));
+        $jsst_eventtype = esc_html(__('In Progress Ticket', 'js-support-ticket'));
         $jsst_message = esc_html(__('The ticket is marked as in progress by', 'js-support-ticket')) . " ( " . esc_html($jsst_currentUserName) . " ) ";
         if(in_array('tickethistory', jssupportticket::$_active_addons)){
             JSSTincluder::getJSModel('tickethistory')->addActivityLog($jsst_ticketid, 1, $jsst_eventtype, $jsst_message, $jsst_messagetype);

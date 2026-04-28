@@ -83,7 +83,7 @@ if(isset($_SESSION['jsst_addon_install_data'])){
                                         </div>
                                         <div class="jsst-addon-installer-right-description" >
                                             >> <a class="jsst-addon-installer-install-btn" href="?page=premiumplugin&jstlay=addonfeatures" class="jsst-addon-installer-addon-list-link" >
-                                                <?php echo esc_html(__("Add on list","js-support-ticket")); ?>
+                                                <?php echo esc_html(__("Addons List","js-support-ticket")); ?>
                                             </a> <<
                                         </div>
                                     </div>

@@ -119,8 +119,8 @@ $jsst_type = array(
                         <th><?php echo esc_html(__('Ordering', 'js-support-ticket')); ?></th>
                         <th><?php echo esc_html(__('S.No', 'js-support-ticket')); ?></th>
                         <th class="left"><?php echo esc_html(__('Field Title', 'js-support-ticket')); ?></th>
-                        <th><?php echo esc_html(__('User Publish', 'js-support-ticket')); ?></th>
-                        <th><?php echo esc_html(__('Visitor Publish', 'js-support-ticket')); ?></th>
+                        <th><?php echo esc_html(__('User Published', 'js-support-ticket')); ?></th>
+                        <th><?php echo esc_html(__('Visitor Published', 'js-support-ticket')); ?></th>
                         <th><?php echo esc_html(__('Required', 'js-support-ticket')); ?></th>
                         <th><?php echo esc_html(__('Action', 'js-support-ticket')); ?></th>
                     </tr>
@@ -196,7 +196,7 @@ $jsst_type = array(
                                 ?>
                             </td>
                             <td>
-                            <span class="js-support-ticket-table-responsive-heading"><?php echo esc_html(__('User Publish','js-support-ticket')); ?>:</span>
+                            <span class="js-support-ticket-table-responsive-heading"><?php echo esc_html(__('User Published','js-support-ticket')); ?>:</span>
                                 <?php if ($jsst_field->cannotunpublish == 1) { ?>
                                     <img height="15" width="15" src="<?php echo esc_url(JSST_PLUGIN_URL) . 'includes/images/good.png'; ?>" title="<?php echo esc_attr(__('Can Not Unpublished','js-support-ticket')); ?>" alt = "<?php echo esc_attr(__('good','js-support-ticket')); ?>" />
                                 <?php }elseif ($jsst_field->published == 1) {
@@ -210,7 +210,7 @@ $jsst_type = array(
                                 <?php } ?>
                             </td>
                             <td>
-                            <span class="js-support-ticket-table-responsive-heading"><?php echo esc_html(__('Visitor Publish','js-support-ticket')); ?>:</span>
+                            <span class="js-support-ticket-table-responsive-heading"><?php echo esc_html(__('Visitor Published','js-support-ticket')); ?>:</span>
                                 <?php if ($jsst_field->cannotunpublish == 1) { ?>
                                     <img height="15" width="15" src="<?php echo esc_url(JSST_PLUGIN_URL) . 'includes/images/good.png'; ?>" title="<?php echo esc_attr(__('Can Not Unpublished','js-support-ticket')); ?>" />
                                 <?php }elseif ($jsst_field->isvisitorpublished == 1) {
@@ -242,7 +242,7 @@ $jsst_type = array(
                                 <?php
                                     echo wp_kses('<a title="'. esc_html(__('Edit','js-support-ticket')).'" class="action-btn" href="?page=fieldordering&jstlay=adduserfeild&jssupportticketid='.esc_attr($jsst_field->id).'&fieldfor='.jssupportticket::$jsst_data['fieldfor'].'&formid='.esc_attr($jsst_field->multiformid).'"><img alt="'. esc_html(__('Edit','js-support-ticket')).'" src="'.esc_url(JSST_PLUGIN_URL).'includes/images/edit.png" /></a>&nbsp;', JSST_ALLOWED_TAGS);
                                     if($jsst_field->isuserfield==1){
-                                        echo wp_kses('<a title="'. esc_html(__('Delete','js-support-ticket')).'" class="action-btn" onclick="return confirm(\''. esc_html(__('Are you sure you want to delete it?','js-support-ticket')).'\');" href="'.esc_url(wp_nonce_url('?page=fieldordering&task=removeuserfeild&action=jstask&jssupportticketid='.esc_attr($jsst_field->id).'&fieldfor='.jssupportticket::$jsst_data['fieldfor'].'&formid='.esc_attr($jsst_field->multiformid),'remove-userfeild-'.$jsst_field->id)).'"><img alt="'. esc_html(__('Delete','js-support-ticket')).'" src="'.esc_url(JSST_PLUGIN_URL).'includes/images/delete.png" /></a>', JSST_ALLOWED_TAGS);
+                                        echo wp_kses('<a title="'. esc_html(__('Delete','js-support-ticket')).'" class="action-btn" onclick="return confirm(\''. esc_html(__('Are you sure you want to delete?','js-support-ticket')).'\');" href="'.esc_url(wp_nonce_url('?page=fieldordering&task=removeuserfeild&action=jstask&jssupportticketid='.esc_attr($jsst_field->id).'&fieldfor='.jssupportticket::$jsst_data['fieldfor'].'&formid='.esc_attr($jsst_field->multiformid),'remove-userfeild-'.$jsst_field->id)).'"><img alt="'. esc_html(__('Delete','js-support-ticket')).'" src="'.esc_url(JSST_PLUGIN_URL).'includes/images/delete.png" /></a>', JSST_ALLOWED_TAGS);
                                     }
                                 ?>
                             </td>

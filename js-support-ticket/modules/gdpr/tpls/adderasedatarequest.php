@@ -26,7 +26,7 @@
                 <div class="js-ticket-top-search-wrp">
                     <div class="js-ticket-search-heading-wrp">
                         <div class="js-ticket-heading-left">
-                            <?php echo esc_html(__('Export your data', 'js-support-ticket')); ?>
+                            <?php echo esc_html(__('Export Your Data', 'js-support-ticket')); ?>
                         </div>
                         <div class="js-ticket-heading-right">
                             <!-- jssupportticketid removed due to security reasons -->

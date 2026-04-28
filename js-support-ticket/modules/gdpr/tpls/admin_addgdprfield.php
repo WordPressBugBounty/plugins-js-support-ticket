@@ -94,7 +94,7 @@ $jsst_jssupportticket_js ="
                     <div class="js-form-title"><?php echo esc_html(__('Field Text', 'js-support-ticket')); ?>&nbsp;<span style="color: red;" >*</span></div>
                     <div class="js-form-value"><?php echo wp_kses(JSSTformfield::text('termsandconditions_text', $jsst_termsandconditions_text, array('class' => 'inputbox js-form-input-field', 'data-validation' => 'required')), JSST_ALLOWED_TAGS) ?></div>
                     <div class="js-form-desc">
-                        <?php echo esc_html(__("e.g ' I have read and agree to the [link] Terms and Conditions[/link].  ' The text between [link] and [/link] will be linked to provided url or wordpress page.", 'js-support-ticket')); ?>
+                        <?php echo esc_html(__("e.g ' I have read and agree to the [link] Terms and Conditions[/link]. ' The text between [link] and [/link] will be linked to provided url or wordpress page.", 'js-support-ticket')); ?>
                     </div>
                 </div>
                 <?php
@@ -111,7 +111,7 @@ $jsst_jssupportticket_js ="
                 */
                 $jsst_linktype = array(
                     (object) array('id' => 1, 'text' => esc_html(__('Direct Link', 'js-support-ticket'))),
-                    (object) array('id' => 2, 'text' => esc_html(__('Wordpress Page', 'js-support-ticket'))),
+                    (object) array('id' => 2, 'text' => esc_html(__('WordPress Page', 'js-support-ticket'))),
                     (object) array('id' => 3, 'text' => esc_html(__('None', 'js-support-ticket'))));
                 ?>
                 <div class="js-form-wrapper">

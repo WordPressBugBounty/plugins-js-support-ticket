@@ -1,0 +1,6943 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: 2026-04-22 17:36+0500\n"
+"PO-Revision-Date: 2026-04-22 17:36+0500\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Poedit 3.9\n"
+"X-Poedit-Basepath: lang\n"
+"X-Poedit-KeywordsList: __;esc_html__;esc_attr__;_e\n"
+"X-Poedit-SearchPath-0: .\n"
+
+msgid "You are not allowed"
+msgstr "您无权执行此操作"
+
+msgid "The ticket has been locked"
+msgstr "工单已锁定"
+
+msgid "Successfully"
+msgstr "成功"
+
+msgid "The ticket has not been locked"
+msgstr "工单未能锁定"
+
+msgid "Error"
+msgstr "错误"
+
+msgid "Lock Ticket"
+msgstr "锁定工单"
+
+msgid "The ticket is locked by"
+msgstr "工单已由以下人员锁定"
+
+msgid "The ticket has been unlocked"
+msgstr "工单已解锁"
+
+msgid "The ticket has not been unlocked"
+msgstr "工单未能解锁"
+
+msgid "Unlock Ticket"
+msgstr "解锁工单"
+
+msgid "The ticket is unlocked by"
+msgstr "工单已由以下人员解锁"
+
+msgid "User already an agent"
+msgstr "该用户已经是客服人员"
+
+msgid "The agent has not been stored"
+msgstr "客服人员未能保存"
+
+msgid "The agent has been stored"
+msgstr "客服人员已保存"
+
+msgid "The agent has been deleted"
+msgstr "客服人员已删除"
+
+msgid "The agent has not been deleted"
+msgstr "客服人员未能删除"
+
+msgid "The agent in use cannot delete"
+msgstr "正在使用的客服人员无法删除"
+
+msgid "Agent"
+msgstr "客服人员"
+
+msgid "status has been changed"
+msgstr "状态已更改"
+
+msgid "status has not been changed"
+msgstr "状态未能更改"
+
+msgid "User ID"
+msgstr "用户 ID"
+
+msgid "User Name"
+msgstr "用户名"
+
+msgid "Email Address"
+msgstr "电子邮件地址"
+
+msgid "Name"
+msgstr "名称"
+
+msgid "Email"
+msgstr "电子邮件"
+
+msgid "Previous"
+msgstr "上一页"
+
+msgid "Next"
+msgstr "下一页"
+
+msgid "Active"
+msgstr "启用"
+
+msgid "Disabled"
+msgstr "已禁用"
+
+msgid "Uploaded file extension error."
+msgstr "已上传文件扩展名错误."
+
+msgid "Select User"
+msgstr "选择用户"
+
+msgid "Username"
+msgstr "用户名"
+
+msgid "Search"
+msgstr "搜索"
+
+msgid "Reset"
+msgstr "重置"
+
+msgid "Use search feature to select the user"
+msgstr "使用搜索功能选择用户"
+
+msgid "WP User ID"
+msgstr "WP 用户ID"
+
+msgid "WP Username"
+msgstr "WP 用户名"
+
+msgid "WP Full Name"
+msgstr "WP 全名"
+
+msgid "WP Email Address"
+msgstr "WP 电子邮件地址"
+
+msgid "User"
+msgstr "用户"
+
+msgid "Roles"
+msgstr "角色"
+
+msgid "Select Role"
+msgstr "选择角色"
+
+msgid "First Name"
+msgstr "名"
+
+msgid "Last Name"
+msgstr "姓"
+
+msgid "Office Phone"
+msgstr "办公电话"
+
+msgid "Extension"
+msgstr "分机"
+
+msgid "Mobile No"
+msgstr "手机号码"
+
+msgid "Picture"
+msgstr "图片"
+
+msgid "Maximum File Size"
+msgstr "最大文件大小"
+
+msgid "File Extension Type"
+msgstr "文件扩展名类型"
+
+msgid "Append Signature"
+msgstr "追加签名"
+
+msgid "Append signature with a reply"
+msgstr "在回复中追加签名"
+
+msgid "Signature"
+msgstr "签名"
+
+msgid "Account Status"
+msgstr "账户状态"
+
+msgid "Select Status"
+msgstr "选择状态"
+
+msgid "Save"
+msgstr "保存"
+
+msgid "Cancel"
+msgstr "取消"
+
+msgid "Close"
+msgstr "关闭"
+
+msgid "Dashboard"
+msgstr "仪表盘"
+
+msgid "Add Agent"
+msgstr "添加客服人员"
+
+msgid "Configuration"
+msgstr "配置"
+
+msgid "Help"
+msgstr "帮助"
+
+msgid "Version"
+msgstr "版本"
+
+msgid "User Detail"
+msgstr "用户详情"
+
+msgid "image"
+msgstr "图片"
+
+msgid "Append"
+msgstr "追加"
+
+msgid "Add Permissions"
+msgstr "添加权限"
+
+msgid "Permissions"
+msgstr "权限"
+
+msgid "Department Section"
+msgstr "部门部分"
+
+msgid "Ticket Section"
+msgstr "工单部分"
+
+msgid "Agent Section"
+msgstr "客服人员部分"
+
+msgid "Knowledge Base Section"
+msgstr "知识库部分"
+
+msgid "FAQ Section"
+msgstr "FAQ部分"
+
+msgid "Download Section"
+msgstr "下载部分"
+
+msgid "Announcement Section"
+msgstr "公告部分"
+
+msgid "Mail Section"
+msgstr "邮件部分"
+
+msgid "Help Topic Section"
+msgstr "帮助主题部分"
+
+msgid "Canned Response Section"
+msgstr "预设回复部分"
+
+msgid "AI Reply Section"
+msgstr "AI回复部分"
+
+msgid "Select / Deselect All"
+msgstr "全选/取消全选"
+
+msgid "Save Permissions"
+msgstr "保存权限"
+
+msgid "Agents"
+msgstr "客服人员"
+
+msgid "Add"
+msgstr "添加"
+
+msgid "Full Name"
+msgstr "全名"
+
+msgid "Phone"
+msgstr "电话"
+
+msgid "Role"
+msgstr "角色"
+
+msgid "Status"
+msgstr "状态"
+
+msgid "Created"
+msgstr "已创建"
+
+msgid "Action"
+msgstr "操作"
+
+msgid "Staff"
+msgstr "员工"
+
+msgid "Change Status"
+msgstr "更改状态"
+
+msgid "Edit"
+msgstr "编辑"
+
+msgid "Delete"
+msgstr "删除"
+
+msgid "Are you sure you want to delete?"
+msgstr "确定要删除吗？"
+
+msgid "Something went wrong. Please try again."
+msgstr "出现问题。请重试。"
+
+msgid "My Profile"
+msgstr "我的个人资料"
+
+msgid "Upload Image"
+msgstr "上传图片"
+
+msgid "Phone No"
+msgstr "电话号码"
+
+msgid "Upload file limit exceeds"
+msgstr "上传文件超过限制"
+
+msgid "No help topic found"
+msgstr "未找到帮助主题"
+
+msgid "Error file size too large"
+msgstr "错误：文件大小过大"
+
+msgid "Select"
+msgstr "选择"
+
+msgid "Add More"
+msgstr "添加更多"
+
+msgid "Remove"
+msgstr "移除"
+
+msgid "Reason For Edit"
+msgstr "编辑原因"
+
+msgid "Internal Note"
+msgstr "内部备注"
+
+msgid "Order id found"
+msgstr "已找到订单 ID"
+
+msgid "Order id not found"
+msgstr "未找到订单 ID"
+
+msgid "Dated"
+msgstr "日期"
+
+msgid "Assign To Me"
+msgstr "分配给我"
+
+msgid "Submit Ticket"
+msgstr "提交工单"
+
+msgid "Show Less"
+msgstr "显示更少"
+
+msgid "Show All"
+msgstr "显示全部"
+
+msgid "Open"
+msgstr "打开"
+
+msgid "Closed"
+msgstr "已关闭"
+
+msgid "Answered"
+msgstr "已回复"
+
+msgid "Overdue"
+msgstr "逾期"
+
+msgid "All Tickets"
+msgstr "所有工单"
+
+msgid "Or"
+msgstr "或"
+
+msgid "Ticket ID"
+msgstr "工单ID"
+
+msgid "From"
+msgstr "来自"
+
+msgid "Select Agent"
+msgstr "选择客服人员"
+
+msgid "Start Date"
+msgstr "开始日期"
+
+msgid "End Date"
+msgstr "结束日期"
+
+msgid "Assigned To Me"
+msgstr "分配给我"
+
+msgid "Priority"
+msgstr "优先级"
+
+msgid "sort"
+msgstr "排序"
+
+msgid "Created via Email"
+msgstr "通过电子邮件创建"
+
+msgid "The ticket is locked"
+msgstr "工单已锁定"
+
+msgid "The ticket marks as overdue"
+msgstr "工单已标记为逾期"
+
+msgid "Last Reply"
+msgstr "最后回复"
+
+msgid "Assign To"
+msgstr "分配给"
+
+msgid "Search By Username"
+msgstr "按用户名搜索"
+
+msgid "Already exists"
+msgstr "已存在"
+
+msgid "The role has been stored"
+msgstr "角色已保存"
+
+msgid "The role has not been stored"
+msgstr "角色未能保存"
+
+msgid "The role has been deleted"
+msgstr "角色已删除"
+
+msgid "The role has not been deleted"
+msgstr "角色未能删除"
+
+msgid "The role in use cannot be deleting"
+msgstr "正在使用的角色无法删除"
+
+msgid "Save Role"
+msgstr "保存角色"
+
+msgid "Add Agent Role"
+msgstr "添加客服人员角色"
+
+msgid "Role Permissions"
+msgstr "角色权限"
+
+msgid "Agent Roles"
+msgstr "客服人员角色"
+
+msgid "Role Name"
+msgstr "角色名称"
+
+msgid "Role Permission"
+msgstr "角色权限"
+
+msgid "Add Role"
+msgstr "添加角色"
+
+msgid "Agent permissions have been stored"
+msgstr "客服人员权限已 已已保存"
+
+msgid "Select Condition Operator"
+msgstr "选择条件运算符"
+
+msgid "Select Department"
+msgstr "选择部门"
+
+msgid "Select Priority"
+msgstr "选择优先级"
+
+msgid "Select Submit Type"
+msgstr "选择提交类型"
+
+msgid "'s Department permission has been changed"
+msgstr "的部门权限已更改"
+
+msgid "Rule has been stored"
+msgstr "规则已保存"
+
+msgid "Rule has not been stored"
+msgstr "规则未能保存"
+
+msgid "Rule has been deleted"
+msgstr "规则已删除"
+
+msgid "Rule has not been deleted"
+msgstr "规则未能删除"
+
+msgid "Rule"
+msgstr "规则"
+
+msgid "in use cannot deleted"
+msgstr "正在使用不能已删除"
+
+msgid "Select Condition Title"
+msgstr "选择条件标题"
+
+msgid "Select Condition Value"
+msgstr "选择条件值"
+
+msgid "Delete Condition"
+msgstr "删除条件"
+
+msgid "No Operator found"
+msgstr "未找到运算符"
+
+msgid "No Value found"
+msgstr "未找到值"
+
+msgid "Conditions"
+msgstr "条件"
+
+msgid "Add Rule"
+msgstr "添加规则"
+
+msgid "Rule Title"
+msgstr "规则标题"
+
+msgid "Condition Title"
+msgstr "条件标题"
+
+msgid "Condition Operator"
+msgstr "条件运算符"
+
+msgid "Condition Value"
+msgstr "条件值"
+
+msgid "+ Add More Condition"
+msgstr "+ 添加更多条件"
+
+msgid "Save Rule"
+msgstr "保存规则"
+
+msgid "Add Conditions"
+msgstr "添加条件"
+
+msgid "Records per page"
+msgstr "每页记录数"
+
+msgid "Sr#"
+msgstr "序号"
+
+msgid "Save Ordering"
+msgstr "保存排序"
+
+msgid "Ticket ID is required."
+msgstr "工单ID为必填项。"
+
+msgid "Ticket not found."
+msgstr "未找到工单。"
+
+msgid "Database error occurred."
+msgstr "发生数据库错误。"
+
+msgid "An announcement has been stored"
+msgstr "公告已保存"
+
+msgid "An announcement has not been stored"
+msgstr "公告未能保存"
+
+msgid "An announcement has been deleted"
+msgstr "公告已删除"
+
+msgid "An announcement has not been deleted"
+msgstr "公告未能删除"
+
+msgid "Announcement"
+msgstr "公告"
+
+msgid "ordering has been changed"
+msgstr "排序已更改"
+
+msgid "ordering has not changed"
+msgstr "排序已 不已更改"
+
+msgid "Public"
+msgstr "公开"
+
+msgid "Private"
+msgstr "私有"
+
+msgid "Title"
+msgstr "标题"
+
+msgid "Parent Category"
+msgstr "父级分类"
+
+msgid "Select Category"
+msgstr "选择分类"
+
+msgid "Description"
+msgstr "描述"
+
+msgid "Select Visible"
+msgstr "选择可见"
+
+msgid "Logged-in User / Visitor"
+msgstr "已登录用户 / 访客"
+
+msgid "Logged-in Users Only"
+msgstr "已登录用户仅"
+
+msgid "Visible"
+msgstr "可见"
+
+msgid "View Announcement"
+msgstr "查看公告"
+
+msgid "Save Announcement"
+msgstr "保存公告"
+
+msgid "Add Announcement"
+msgstr "添加公告"
+
+msgid "Category"
+msgstr "分类"
+
+msgid "Announcements"
+msgstr "公告"
+
+msgid "Watch Video"
+msgstr "观看视频"
+
+msgid "arrow"
+msgstr "箭头"
+
+msgid "Ordering"
+msgstr "排序"
+
+msgid "Category Name"
+msgstr "分类名称"
+
+msgid "Categories"
+msgstr "分类"
+
+msgid "Banned Email Log List"
+msgstr "被封禁电子邮件日志列表"
+
+msgid "Logger Email"
+msgstr "记录器电子邮件"
+
+msgid "Log"
+msgstr "日志"
+
+msgid "Logger"
+msgstr "记录器"
+
+msgid "IP Address"
+msgstr "IP 地址"
+
+msgid "Ban email has been stored"
+msgstr "封禁电子邮件已保存"
+
+msgid "Ban email has not been stored"
+msgstr "封禁电子邮件未能保存"
+
+msgid "Ban email has been deleted"
+msgstr "封禁电子邮件已删除"
+
+msgid "Ban email has not been deleted"
+msgstr "封禁电子邮件未能删除"
+
+msgid "Ban email does not exist"
+msgstr "封禁电子邮件不 存在"
+
+msgid "Add Banned Email"
+msgstr "添加被封禁电子邮件"
+
+msgid "Save Banned Email"
+msgstr "保存被封禁电子邮件"
+
+msgid "Banned Emails"
+msgstr "被封禁电子邮件"
+
+msgid "Emails"
+msgstr "电子邮件"
+
+msgid "Submitter"
+msgstr "提交者"
+
+msgid "Canned response message has been stored"
+msgstr "预设回复消息已保存"
+
+msgid "Canned response message has not been stored"
+msgstr "预设回复消息未能保存"
+
+msgid "Premade department message has been deleted"
+msgstr "预设部门消息已删除"
+
+msgid "Premade department message has not been deleted"
+msgstr "预设部门消息未能删除"
+
+msgid "Canned Response"
+msgstr "预设回复"
+
+msgid "Department"
+msgstr "部门"
+
+msgid "Response"
+msgstr "回复"
+
+msgid "Save Canned Response"
+msgstr "保存预设回复"
+
+msgid "Add Canned Response"
+msgstr "添加预设回复"
+
+msgid "The department under which the answer will be made is available"
+msgstr "可选择用于提交回复的部门"
+
+msgid "Offline"
+msgstr "离线"
+
+msgid "Canned Responses"
+msgstr "预设回复"
+
+msgid "Last Updated"
+msgstr "最后更新"
+
+msgid "Not updated"
+msgstr "未更新"
+
+msgid "Latest Tickets"
+msgstr "最新工单"
+
+msgid "Subject"
+msgstr "主题"
+
+msgid "Last Month Ticket Stats"
+msgstr "上月工单统计"
+
+msgid "New"
+msgstr "新建"
+
+msgid "Pending"
+msgstr "待处理"
+
+msgid "The attachment has been removed"
+msgstr "附件已移除"
+
+msgid "The attachment has not been removed"
+msgstr "附件未能移除"
+
+msgid "The download has been stored"
+msgstr "下载已保存"
+
+msgid "The download has not been stored"
+msgstr "下载未能保存"
+
+msgid "Download"
+msgstr "下载"
+
+msgid "The download has been deleted"
+msgstr "下载已删除"
+
+msgid "The download has not been deleted"
+msgstr "下载未能删除"
+
+msgid "Download All"
+msgstr "全部下载"
+
+msgid "Attachments"
+msgstr "附件"
+
+msgid "Save Download"
+msgstr "保存下载"
+
+msgid "Add Download"
+msgstr "添加下载"
+
+msgid "Delete Download"
+msgstr "删除下载"
+
+msgid "Add More File"
+msgstr "添加更多文件"
+
+msgid "Delete Attachment"
+msgstr "删除附件"
+
+msgid "Downloads"
+msgstr "下载"
+
+msgid "grab"
+msgstr "抓取"
+
+msgid "Attachment"
+msgstr "附件"
+
+msgid "Files"
+msgstr "文件"
+
+msgid "Help Desk"
+msgstr "帮助台"
+
+msgid "Get Help"
+msgstr "获取帮助"
+
+msgid "Select Product"
+msgstr "选择产品"
+
+msgid "Select license key"
+msgstr "选择许可证密钥"
+
+msgid "Email CC has been stored"
+msgstr "电子邮件抄送已保存"
+
+msgid "Email CC has not been stored"
+msgstr "电子邮件抄送未能保存"
+
+msgid "Email CC has been deleted"
+msgstr "电子邮件抄送已删除"
+
+msgid "Email CC has not been deleted"
+msgstr "电子邮件抄送未能删除"
+
+msgid "Email CC "
+msgstr "电子邮件抄送 "
+
+msgid "Email CC"
+msgstr "电子邮件抄送"
+
+msgid "Template Type"
+msgstr "模板类型"
+
+msgid "Select Template Type"
+msgstr "选择模板类型"
+
+msgid "Delete Row"
+msgstr "删除行"
+
+msgid "Add Email CC"
+msgstr "添加电子邮件抄送"
+
+msgid "Template For"
+msgstr "模板适用对象"
+
+msgid "Select Template For"
+msgstr "选择模板适用对象"
+
+msgid "Template Title"
+msgstr "模板标题"
+
+msgid "Add More Row"
+msgstr "添加更多行"
+
+msgid "Save Email CC"
+msgstr "保存电子邮件抄送"
+
+msgid "Service is running, please close the pag"
+msgstr "服务正在运行, 请关闭页面"
+
+msgid "Admin email address and email piping address cannot be the same, your email piping will not be work."
+msgstr "管理员电子邮件地址和 Email Piping 地址不能相同，否则 Email Piping 将无法工作。"
+
+msgid "Your setting is working please this."
+msgstr "您的设置是 工作中请 此."
+
+msgid "Connection established but the system cannot read any email"
+msgstr "连接已建立但 系统不能读取任意电子邮件"
+
+msgid "IMAP is either not installed or not enabled in your server. Contact to hosting company"
+msgstr "IMAP 是任一不 已安装或 不启用在 您的服务器. 联系到 主机服务公司"
+
+msgid "The configuration has been stored"
+msgstr "配置已保存"
+
+msgid "The configuration not has been stored"
+msgstr "配置不已保存"
+
+msgid "Email address already exist"
+msgstr "电子邮件地址已经存在"
+
+msgid "Email for email piping has been stored"
+msgstr "Email Piping 邮箱已保存"
+
+msgid "Email for email piping has not been stored"
+msgstr "Email Piping 邮箱未能保存"
+
+msgid "The email has been deleted"
+msgstr "电子邮件已删除"
+
+msgid "The email has not been deleted"
+msgstr "电子邮件未能删除"
+
+msgid "Enabled"
+msgstr "已启用"
+
+msgid "Only New Tickets"
+msgstr "仅新工单"
+
+msgid "Only Replies"
+msgstr "仅回复"
+
+msgid "Both"
+msgstr "两者"
+
+msgid "Gmail"
+msgstr "Gmail"
+
+msgid "Yahoo"
+msgstr "Yahoo"
+
+msgid "Aol"
+msgstr "Aol"
+
+msgid "Hotmail"
+msgstr "Hotmail"
+
+msgid "Other"
+msgstr "其他"
+
+msgid "Yes"
+msgstr "是"
+
+msgid "No"
+msgstr "否"
+
+msgid "Please enter the host name first"
+msgstr "请输入主机名称第一"
+
+msgid "Please enable email piping setting first"
+msgstr "请先启用 Email Piping 设置"
+
+msgid "Add Email Piping"
+msgstr "添加Email Piping"
+
+msgid "Enable email piping"
+msgstr "启用 Email Piping"
+
+msgid "Ticket Type"
+msgstr "工单类型"
+
+msgid "Which email type to read"
+msgstr "其电子邮件类型到 读取"
+
+msgid "Save attachments if found in an email"
+msgstr "保存附件如果找到在 电子邮件"
+
+msgid "Host Type"
+msgstr "主机类型"
+
+msgid "Select your email service provider"
+msgstr "选择您的电子邮件服务提供商"
+
+msgid "Host Name"
+msgstr "主机名称"
+
+msgid "Enabled SSL"
+msgstr "启用 SSL"
+
+msgid "Do you have enabled SSL on your domain?"
+msgstr "您已 启用 SSL 在您的域名?"
+
+msgid "Host Port Number"
+msgstr "主机端口数字"
+
+msgid "Host port number to read an email from"
+msgstr "主机端口数字到 读取电子邮件来自"
+
+msgid "Email address to read emails"
+msgstr "电子邮件地址到 读取电子邮件"
+
+msgid "Password"
+msgstr "密码"
+
+msgid "Password for a given email address"
+msgstr "密码用于指定电子邮件地址"
+
+msgid "check"
+msgstr "检查"
+
+msgid "Check Settings"
+msgstr "检查设置"
+
+msgid "If the system does not respond in 30 seconds"
+msgstr "如果系统不 响应在 30 秒"
+
+msgid "it means system unable to connect email server"
+msgstr "它表示系统无法到 连接电子邮件服务器"
+
+msgid "Save Settings"
+msgstr "保存设置"
+
+msgid "Cron Job"
+msgstr "Cron Job"
+
+msgid "Web Cron Job"
+msgstr "Web Cron Job"
+
+msgid "Wget"
+msgstr "Wget"
+
+msgid "Curl"
+msgstr "Curl"
+
+msgid "PHP Script"
+msgstr "PHP 脚本"
+
+msgid "URL"
+msgstr "URL"
+
+msgid "Configuration of a backup job with webcron org"
+msgstr "使用 webcron.org 配置备份任务"
+
+msgid "Name of cron job"
+msgstr "名称的 Cron 任务"
+
+msgid "Log in to webcron org in the cron area click on"
+msgstr "登录 webcron.org 后，在 Cron 区域点击"
+
+msgid "Timeout"
+msgstr "超时"
+
+msgid "180 secs if the does not completely increase it most sites will work with a setting of 180 600"
+msgstr "180 秒；如果未能完整执行，请适当增加。大多数站点使用 180 到 600 的设置即可正常工作"
+
+msgid "URL you want to execute"
+msgstr "URL 您想要到 执行"
+
+msgid "Login"
+msgstr "登录"
+
+msgid "Leave this blank"
+msgstr "请留空"
+
+msgid "Execution time"
+msgstr "执行时间"
+
+msgid "That the grid below the other options select when and how"
+msgstr "该网格下方其他选项选择何时和 如何"
+
+msgid "Alerts"
+msgstr "提醒"
+
+msgid "If you have already set up alerts methods in webcron org interface we recommend choosing an alert"
+msgstr "如果您已在 webcron.org 界面中设置提醒方式，建议选择提醒"
+
+msgid "Cron scheduling using wget"
+msgstr "Cron 计划任务使用 wget"
+
+msgid "Cron scheduling using Curl"
+msgstr "Cron 计划任务使用 Curl"
+
+msgid "Custom PHP script to run the cron job"
+msgstr "自定义 PHP 脚本到 运行 Cron 任务"
+
+msgid "Sorry, the cron job did not work"
+msgstr "抱歉, Cron 任务已 不工作"
+
+msgid "URL for use with your own scripts and third party"
+msgstr "供您自己的脚本和第三方服务使用的 URL"
+
+msgid "Recommended run script hourly"
+msgstr "建议运行脚本每小时"
+
+msgid "Email Piping"
+msgstr "Email Piping"
+
+msgid "Ticket Email Type"
+msgstr "工单电子邮件类型"
+
+msgid "ticket email"
+msgstr "工单电子邮件"
+
+msgid "Overall Reports"
+msgstr "总体报告"
+
+msgid "Agents Report"
+msgstr "客服人员报告"
+
+msgid "Department Report"
+msgstr "部门报告"
+
+msgid "Departments Report"
+msgstr "部门报告"
+
+msgid "Tickets"
+msgstr "工单"
+
+msgid "JS Support Ticket Overall Reports"
+msgstr "JS 支持工单总体报告"
+
+msgid "Tickets By Statuses"
+msgstr "工单由 状态"
+
+msgid "Tickets By Departments"
+msgstr "工单由 部门"
+
+msgid "Tickets By Priorities"
+msgstr "工单由 优先级"
+
+msgid "Tickets By Channels"
+msgstr "按渠道统计工单"
+
+msgid "Direct"
+msgstr "直接"
+
+msgid "Direct reply"
+msgstr "直接回复"
+
+msgid "Email reply"
+msgstr "电子邮件回复"
+
+msgid "Tickets By staff"
+msgstr "按员工统计工单"
+
+msgid "Report By"
+msgstr "报告由"
+
+msgid "staff member"
+msgstr "员工"
+
+msgid "To"
+msgstr "到"
+
+msgid "Report By Staff Members"
+msgstr "按员工报告"
+
+msgid "Ticket status by days"
+msgstr "按天统计工单状态"
+
+msgid "Date"
+msgstr "日期"
+
+msgid "Tickets Staff"
+msgstr "员工工单"
+
+msgid "Average Rating"
+msgstr "平均评分"
+
+msgid "Average Time"
+msgstr "平均时间"
+
+msgid "Report By Staff Member"
+msgstr "按员工报告"
+
+msgid "Rating"
+msgstr "评分"
+
+msgid "Time"
+msgstr "时间"
+
+msgid "Report By department"
+msgstr "按部门报告"
+
+msgid "Department Name"
+msgstr "部门名称"
+
+msgid "User report"
+msgstr "用户报告"
+
+msgid "Users report"
+msgstr "用户报告"
+
+msgid "Users Tickets"
+msgstr "用户工单"
+
+msgid "User Report"
+msgstr "用户报告"
+
+msgid "Report By Departments"
+msgstr "报告由 部门"
+
+msgid "Tickets Data"
+msgstr "工单数据"
+
+msgid "Message"
+msgstr "消息"
+
+msgid "Assigned To"
+msgstr "已分配到"
+
+msgid "Updated"
+msgstr "已更新"
+
+msgid "Due Date"
+msgstr "由于日期"
+
+msgid "Closed Date"
+msgstr "已关闭日期"
+
+msgid "Closed Time"
+msgstr "已关闭时间"
+
+msgid "Requester User Name"
+msgstr "请求者用户名"
+
+msgid "Requester Name"
+msgstr "请求者名称"
+
+msgid "Requester Email"
+msgstr "请求者电子邮件"
+
+msgid "Requester Phone"
+msgstr "请求者电话"
+
+msgid "Requester help Topic"
+msgstr "请求者帮助主题"
+
+msgid "Ticket Attachment"
+msgstr "工单附件"
+
+msgid "Posted By"
+msgstr "已发布由"
+
+msgid "Note Title"
+msgstr "备注标题"
+
+msgid "Note Message"
+msgstr "备注消息"
+
+msgid "Posted Date"
+msgstr "已发布日期"
+
+msgid "Note Attachment"
+msgstr "备注附件"
+
+msgid "User Time"
+msgstr "用户时间"
+
+msgid "System Time"
+msgstr "系统时间"
+
+msgid "Edit Reason"
+msgstr "编辑原因"
+
+msgid "Reply Date"
+msgstr "回复日期"
+
+msgid "Reply By"
+msgstr "回复人"
+
+msgid "Reply Attachment"
+msgstr "回复附件"
+
+msgid "Total Tracking Time"
+msgstr "总计跟踪时间"
+
+msgid "In Progress"
+msgstr "在进度"
+
+msgid "Export"
+msgstr "导出"
+
+msgid "Ticket Status"
+msgstr "工单状态"
+
+msgid "Select Ticket Status"
+msgstr "选择工单状态"
+
+msgid "Ticket Overdue"
+msgstr "工单逾期"
+
+msgid "Select Ticket Overdue Status"
+msgstr "选择工单逾期状态"
+
+msgid "Export Style"
+msgstr "导出样式"
+
+msgid "Single Header"
+msgstr "单页眉"
+
+msgid "Multiple Header"
+msgstr "多页眉"
+
+msgid "FAQ has been stored"
+msgstr "FAQ已保存"
+
+msgid "FAQ has not been stored"
+msgstr "FAQ未能保存"
+
+msgid "FAQ has been deleted"
+msgstr "FAQ已删除"
+
+msgid "FAQ has not been deleted"
+msgstr "FAQ未能删除"
+
+msgid "FAQ"
+msgstr "FAQ"
+
+msgid "Save FAQ"
+msgstr "保存FAQ"
+
+msgid "Add FAQ"
+msgstr "添加FAQ"
+
+msgid "Content"
+msgstr "内容"
+
+msgid "FAQ'S"
+msgstr "FAQ"
+
+msgid "Search Title"
+msgstr "搜索标题"
+
+msgid "Search Keywords"
+msgstr "搜索关键词"
+
+msgid "FAQs"
+msgstr "FAQ"
+
+msgid "Subcategory FAQs"
+msgstr "子分类 FAQ"
+
+msgid "Feedback has been stored"
+msgstr "反馈已保存"
+
+msgid "Feedback has not been stored"
+msgstr "反馈未能保存"
+
+msgid "user image"
+msgstr "用户图片"
+
+msgid "feedback image"
+msgstr "反馈图片"
+
+msgid "Feedback"
+msgstr "反馈"
+
+msgid "Latest Feedback"
+msgstr "最新反馈"
+
+msgid "Submit Feedback"
+msgstr "提交反馈"
+
+msgid "Help topic has been stored"
+msgstr "帮助主题已保存"
+
+msgid "Help topic has not been stored"
+msgstr "帮助主题未能保存"
+
+msgid "Help topic has been deleted"
+msgstr "帮助主题已删除"
+
+msgid "Help topic has not been deleted"
+msgstr "帮助主题未能删除"
+
+msgid "Help topic in use cannot be deleting"
+msgstr "正在使用的帮助主题无法删除"
+
+msgid "Help topic"
+msgstr "帮助主题"
+
+msgid "Help Topic"
+msgstr "帮助主题"
+
+msgid "Save Help Topic"
+msgstr "保存帮助主题"
+
+msgid "Add Help Topic"
+msgstr "添加帮助主题"
+
+msgid "Help Topics"
+msgstr "帮助主题"
+
+msgid "The category has been stored"
+msgstr "分类已保存"
+
+msgid "The category has not been stored"
+msgstr "分类未能保存"
+
+msgid "The category has been deleted"
+msgstr "分类已删除"
+
+msgid "The category has not been deleted"
+msgstr "分类未能删除"
+
+msgid "The category in use cannot be deleting"
+msgstr "正在使用的分类无法删除"
+
+msgid "Knowledgebase article has been stored"
+msgstr "知识库文章已保存"
+
+msgid "Knowledgebase article has not been stored"
+msgstr "知识库文章未能保存"
+
+msgid "The article has been deleted"
+msgstr "文章已删除"
+
+msgid "The article has not been deleted"
+msgstr "文章未能删除"
+
+msgid "Article"
+msgstr "文章"
+
+msgid "The parent category does not have this type."
+msgstr "父级分类不 已此 类型."
+
+msgid "Would you like to add this type to Parent Category?"
+msgstr "是否您 想要到 添加此 类型到 父级分类?"
+
+msgid "Child category has this type,"
+msgstr "子级分类已 此类型,"
+
+msgid "You cannot unmark it."
+msgstr "您无法取消标记。"
+
+msgid "Draft"
+msgstr "草稿"
+
+msgid "Meta Description"
+msgstr "元描述"
+
+msgid "Meta Keywords"
+msgstr "元关键词"
+
+msgid "Save Knowledge Base"
+msgstr "保存知识库"
+
+msgid "Please select at least one category for"
+msgstr "请选择至少至少一个分类用于"
+
+msgid "Category For"
+msgstr "分类用于"
+
+msgid "Knowledge Base"
+msgstr "知识库"
+
+msgid "Logo"
+msgstr "徽标"
+
+msgid "Save Category"
+msgstr "保存分类"
+
+msgid "Add Knowledge Base"
+msgstr "添加知识库"
+
+msgid "Meta Data Options"
+msgstr "元数据选项"
+
+msgid "Add Category"
+msgstr "添加分类"
+
+msgid "Category Title"
+msgstr "分类标题"
+
+msgid "Article Attachments"
+msgstr "文章附件"
+
+msgid "Article Attachment"
+msgstr "文章附件"
+
+msgid "Subcategory Knowledge Base"
+msgstr "子分类知识库"
+
+msgid "Mail has not been marked as read"
+msgstr "邮件未能标记作为读取"
+
+msgid "Mail has been marked as read"
+msgstr "邮件已 标记作为读取"
+
+msgid "Message field cannot be empty"
+msgstr "消息字段不能为空"
+
+msgid "Mail has been sent"
+msgstr "邮件已 已发送"
+
+msgid "Mail has not been sent"
+msgstr "邮件未能已发送"
+
+msgid "Mail has been deleted"
+msgstr "邮件已删除"
+
+msgid "Mail has not been deleted"
+msgstr "邮件未能删除"
+
+msgid "Mail"
+msgstr "邮件"
+
+msgid "is in use cannot be delete"
+msgstr "是正在使用无法删除"
+
+msgid "Mail cannot mark as to read"
+msgstr "邮件不能标记作为到 读取"
+
+msgid "Mail cannot mark as unread"
+msgstr "邮件不能标记作为未读"
+
+msgid "Mail has been marked as unread"
+msgstr "邮件已 标记作为未读"
+
+msgid "Compose"
+msgstr "撰写"
+
+msgid "Inbox"
+msgstr "收件箱"
+
+msgid "Outbox"
+msgstr "发件箱"
+
+msgid "Send"
+msgstr "发送"
+
+msgid "Read"
+msgstr "已读"
+
+msgid "Unread"
+msgstr "未读"
+
+msgid "Select Type"
+msgstr "选择类型"
+
+msgid "To use this feature you must be agent"
+msgstr "到使用此 功能您 必须被 客服人员"
+
+msgid "To use this feature you must have agents addon."
+msgstr "到使用此 功能您 必须已 客服人员 Addon."
+
+msgid "Re"
+msgstr "Re"
+
+msgid "mark read"
+msgstr "标记读取"
+
+msgid "mark unread"
+msgstr "标记未读"
+
+msgid "Replied By"
+msgstr "回复人"
+
+msgid "Reply"
+msgstr "回复"
+
+msgid "Type Message"
+msgstr "输入消息"
+
+msgid "Replies"
+msgstr "回复"
+
+msgid "Limit exceeds maximum tickets"
+msgstr "限制超过最大工单"
+
+msgid "The maximum number of open tickets limit has been exceeded."
+msgstr "最大数字的 打开工单限制已 超过."
+
+msgid "Ticket has been closed due to merged with"
+msgstr "工单已 已关闭由于到 合并带有"
+
+msgid "Ticket"
+msgstr "工单"
+
+msgid "has been merged into"
+msgstr "已合并到"
+
+msgid "Merge Ticket"
+msgstr "合并工单"
+
+msgid "Search ticket to merge into"
+msgstr "搜索工单到 合并到"
+
+msgid "Edit Last Reply"
+msgstr "编辑最后回复"
+
+msgid "Merge Ticket Latest Reply"
+msgstr "合并工单最新回复"
+
+msgid "Merge"
+msgstr "合并"
+
+msgid "Ticket has been merged"
+msgstr "工单已 合并"
+
+msgid "Ticket has not been merged"
+msgstr "工单未能合并"
+
+msgid "Disabled form cannot be set as default"
+msgstr "禁用表单无法设为默认"
+
+msgid "Form has been stored"
+msgstr "表单已保存"
+
+msgid "Form has not been stored"
+msgstr "表单未能保存"
+
+msgid "Multiform has been deleted"
+msgstr "多表单已删除"
+
+msgid "Multiform has not been deleted"
+msgstr "多表单未能删除"
+
+msgid "Multiform in use"
+msgstr "多表单正在使用"
+
+msgid " cannot deleted"
+msgstr "不能已删除"
+
+msgid "Default form cannot be set as disabled"
+msgstr "默认表单无法设为禁用"
+
+msgid "Multiform"
+msgstr "多表单"
+
+msgid "default has not been changed"
+msgstr "默认未能更改"
+
+msgid "default has been changed"
+msgstr "默认已更改"
+
+msgid "Create Ticket"
+msgstr "创建工单"
+
+msgid "Email template has not been stored"
+msgstr "电子邮件模板未能保存"
+
+msgid "Required Field(s) are not filled"
+msgstr "必填字段(s) 是不 填写"
+
+msgid "Email template already exist"
+msgstr "电子邮件模板已经存在"
+
+msgid "Email template has been stored"
+msgstr "电子邮件模板已保存"
+
+msgid "Add Multiform"
+msgstr "添加多表单"
+
+msgid "Default"
+msgstr "默认"
+
+msgid "Save Multiform"
+msgstr "保存多表单"
+
+msgid "Fields"
+msgstr "字段"
+
+msgid "Edit Fields"
+msgstr "编辑字段"
+
+msgid "spinning wheel"
+msgstr "加载动画"
+
+msgid "Select Languages"
+msgstr "选择语言"
+
+msgid "Select Language"
+msgstr "选择语言"
+
+msgid "Email Template has been successfully deleted"
+msgstr "电子邮件模板已 成功已删除"
+
+msgid "The internal note has been posted"
+msgstr "内部备注已 已发布"
+
+msgid "The internal note has not been posted"
+msgstr "内部备注未能已发布"
+
+msgid "Post Internal Note"
+msgstr "发布内部备注"
+
+msgid "The internal note is posted by"
+msgstr "内部备注是 已发布由"
+
+msgid "Ticket Notification"
+msgstr "工单通知"
+
+msgid "Once Weekly"
+msgstr "每周一次"
+
+msgid "JS Support Ticket"
+msgstr "JS 支持工单"
+
+msgid "Thanks for subscribing!"
+msgstr "感谢订阅！"
+
+msgid "Ticket already marked overdue"
+msgstr "工单已经标记逾期"
+
+msgid "The ticket has been marked as overdue"
+msgstr "工单已 标记作为逾期"
+
+msgid "The ticket has not been marked as overdue"
+msgstr "工单未能标记作为逾期"
+
+msgid "System"
+msgstr "系统"
+
+msgid "Mark Overdue"
+msgstr "标记逾期"
+
+msgid "The ticket is marked as overdue by"
+msgstr "工单是 标记作为逾期由"
+
+msgid "The ticket has been unmarked as overdue"
+msgstr "工单已 取消标记作为逾期"
+
+msgid "The ticket has not been unmarked as overdue"
+msgstr "工单未能取消标记作为逾期"
+
+msgid "Unmark Overdue"
+msgstr "取消逾期标记"
+
+msgid "The ticket is unmarked as overdue by"
+msgstr "工单是 取消标记作为逾期由"
+
+msgid "Paid Support"
+msgstr "付费支持"
+
+msgid "Check if you want to use this product for paid support"
+msgstr "检查如果您 想要到 使用此 产品用于付费支持"
+
+msgid "Paid support type"
+msgstr "付费支持类型"
+
+msgid "One-off Support"
+msgstr "一次性支持"
+
+msgid "Subscription Support"
+msgstr "订阅支持"
+
+msgid "Number of tickets"
+msgstr "数字的 工单"
+
+msgid "Enter allowed number of tickets that customer can post. Enter -1 for unlimited tickets."
+msgstr "输入允许数字的 工单该 客户可以发布. 输入 -1 用于无限工单."
+
+msgid "Credential Type"
+msgstr "凭据类型"
+
+msgid "Additional Info"
+msgstr "其他信息"
+
+msgid "Please insert values"
+msgstr "请插入值"
+
+msgid "Visitor"
+msgstr "访客"
+
+msgid "By"
+msgstr "由"
+
+msgid "Credential removed on ticket close"
+msgstr "凭据已移除在 工单关闭"
+
+msgid "Failed to retrieve data"
+msgstr "获取数据失败"
+
+msgid "Social Login"
+msgstr "社交登录"
+
+msgid "Facebook user"
+msgstr "Facebook 用户"
+
+msgid "Linkedin user"
+msgstr "Linkedin 用户"
+
+msgid "You are logged in"
+msgstr "您是 已登录在"
+
+msgid "You are logged out"
+msgstr "您是 已登录退出"
+
+msgid "The new theme has been applied"
+msgstr "新主题已 应用"
+
+msgid "Error applying the new theme"
+msgstr "应用新主题时出错"
+
+msgid "Themes"
+msgstr "主题"
+
+msgid "Color Chooser"
+msgstr "颜色选择器"
+
+msgid "Preset Theme"
+msgstr "预设主题"
+
+msgid "Color 1"
+msgstr "颜色 1"
+
+msgid "Top menu heading background"
+msgstr "顶部菜单标题背景"
+
+msgid "Color 2"
+msgstr "颜色 2"
+
+msgid "Top header line color"
+msgstr "顶部页眉线条颜色"
+
+msgid "Button Hover"
+msgstr "按钮悬停"
+
+msgid "Heading text"
+msgstr "标题文本"
+
+msgid "Color 3"
+msgstr "颜色 3"
+
+msgid "Content Background Color"
+msgstr "内容背景颜色"
+
+msgid "Color 4"
+msgstr "颜色 4"
+
+msgid "Content Text Color"
+msgstr "内容文本颜色"
+
+msgid "Color 5"
+msgstr "颜色 5"
+
+msgid "Border color"
+msgstr "边框颜色"
+
+msgid "Lines"
+msgstr "线条"
+
+msgid "Color 6"
+msgstr "颜色 6"
+
+msgid "Button Color"
+msgstr "按钮颜色"
+
+msgid "Color 7"
+msgstr "颜色 7"
+
+msgid "Top header text color"
+msgstr "顶部页眉文本颜色"
+
+msgid "Save Theme"
+msgstr "保存主题"
+
+msgid "Color Effect Preview"
+msgstr "颜色效果预览"
+
+msgid "Blue"
+msgstr "蓝色"
+
+msgid "Red"
+msgstr "红色"
+
+msgid "Greenish"
+msgstr "偏绿色"
+
+msgid "Purple"
+msgstr "紫色"
+
+msgid "Orange"
+msgstr "橙色"
+
+msgid "Green"
+msgstr "绿色"
+
+msgid "Black"
+msgstr "黑色"
+
+msgid "Mail Notification Widget"
+msgstr "邮件通知小工具"
+
+msgid "Show newly and reply mail notifications"
+msgstr "显示新邮件和回复邮件通知"
+
+msgid "New mail from"
+msgstr "新邮件来自"
+
+msgid "Mail Notification"
+msgstr "邮件通知"
+
+msgid "Layout"
+msgstr "布局"
+
+msgid "Vertical"
+msgstr "垂直"
+
+msgid "Horizontal"
+msgstr "水平"
+
+msgid "Max Record"
+msgstr "最大记录"
+
+msgid "My Ticket Widget"
+msgstr "我的工单小工具"
+
+msgid "Show unanswered tickets"
+msgstr "显示未回复工单"
+
+msgid "Waiting Reply"
+msgstr "等待回复"
+
+msgid "My Tickets"
+msgstr "我的工单"
+
+msgid "Order tickets"
+msgstr "订单工单"
+
+msgid "Product"
+msgstr "产品"
+
+msgid "Order"
+msgstr "订单"
+
+msgid "Please select %1$s and Enter your license key and hit to authenticate. A valid key is required for updates."
+msgstr "请选择 %1$s 和输入您的许可证密钥和 点击到 验证. 有效密钥是 必填用于更新."
+
+msgid "Lost your key? %s."
+msgstr "丢失您的密钥? %s."
+
+msgid "Retrieve it here"
+msgstr "在此处获取"
+
+msgid "Control Panel"
+msgstr "控制面板"
+
+msgid "Announcement Detail"
+msgstr "公告详情"
+
+msgid "Edit Announcement"
+msgstr "编辑公告"
+
+msgid "Departments"
+msgstr "部门"
+
+msgid "Add Department"
+msgstr "添加部门"
+
+msgid "Edit Department"
+msgstr "编辑部门"
+
+msgid "Agent Reports"
+msgstr "客服人员报告"
+
+msgid "Departments report"
+msgstr "部门报告"
+
+msgid "Edit Download"
+msgstr "编辑下载"
+
+msgid "Edit FAQ"
+msgstr "编辑FAQ"
+
+msgid "FAQ Detail"
+msgstr "FAQ详情"
+
+msgid "Edit Knowledge Base"
+msgstr "编辑知识库"
+
+msgid "Edit Category"
+msgstr "编辑分类"
+
+msgid "Knowledge Base Detail"
+msgstr "知识库详情"
+
+msgid "Send Message"
+msgstr "发送消息"
+
+msgid "Edit Role"
+msgstr "编辑角色"
+
+msgid "Staffs"
+msgstr "员工"
+
+msgid "Edit Agent"
+msgstr "编辑客服人员"
+
+msgid "Agent Permissions"
+msgstr "客服人员权限"
+
+msgid "Add Ticket"
+msgstr "添加工单"
+
+msgid "Edit Ticket"
+msgstr "编辑工单"
+
+msgid "Ticket Details"
+msgstr "工单详情"
+
+msgid "home icon"
+msgstr "首页图标"
+
+msgid "Plus"
+msgstr "加号"
+
+msgid "Equals"
+msgstr "等号"
+
+msgid "Minus"
+msgstr "减号"
+
+msgid "stars"
+msgstr "星级"
+
+msgid "Please write appreciated review at WP Extension Directory"
+msgstr "请在 WP 扩展目录中留下好评"
+
+msgid "We'd love to hear from you. It'll only take 2 minutes of your time, and will really help us spread the word"
+msgstr "我们很希望听到您的反馈。只需花费您 2 分钟时间，也将帮助我们推广这款插件"
+
+msgid "love"
+msgstr "希望"
+
+msgid "I'd love to help :)"
+msgstr "I'd 希望到 帮助 :)"
+
+msgid "Sad"
+msgstr "不满意"
+
+msgid "Not this time"
+msgstr "不此 时间"
+
+msgid "Happy"
+msgstr "满意"
+
+msgid "I've already rated you"
+msgstr "我已经评分了"
+
+msgid "thanks"
+msgstr "感谢"
+
+msgid "You are awesome !......"
+msgstr "您太棒了！......"
+
+msgid "Thanks for your support, we really appreciate it."
+msgstr "感谢您的支持，我们非常感激。"
+
+msgid "JS Help Desk Team"
+msgstr "JS Help Desk Team"
+
+msgid "Remind you about this later?"
+msgstr "提醒您 关于此 稍后?"
+
+msgid "Remind me in 3 days"
+msgstr "提醒我 在 3 天"
+
+msgid "Remind me in 10 days"
+msgstr "提醒我 在 10 天"
+
+msgid "Remind me in 30 days"
+msgstr "提醒我 在 30 天"
+
+msgid "Don't remind me about this"
+msgstr "不再提醒我"
+
+msgid "JS HelpDesk System"
+msgstr "JS HelpDesk 系统"
+
+msgid "JS HelpDesk"
+msgstr "JS HelpDesk"
+
+msgid "Main"
+msgstr "主要"
+
+msgid "Translations"
+msgstr "翻译"
+
+msgid "System Errors"
+msgstr "系统错误"
+
+msgid "Slug"
+msgstr "slug"
+
+msgid "Ticket Management"
+msgstr "工单管理"
+
+msgid "Priorities"
+msgstr "优先级"
+
+msgid "Add Priority"
+msgstr "添加优先级"
+
+msgid "Ticket Statuses"
+msgstr "工单状态"
+
+msgid "Add Status"
+msgstr "添加状态"
+
+msgid "Add Ticket Status"
+msgstr "添加工单状态"
+
+msgid "Feedback Fields"
+msgstr "反馈字段"
+
+msgid "User Management"
+msgstr "用户管理"
+
+msgid "Agent Auto Assign"
+msgstr "客服人员自动分配"
+
+msgid "Agent auto assign"
+msgstr "客服人员自动分配"
+
+msgid "Auto Assign"
+msgstr "自动分配"
+
+msgid "Configurations"
+msgstr "配置"
+
+msgid "Cron Job URLs"
+msgstr "Cron Job URLs"
+
+msgid "Zywrap AI"
+msgstr "Zywrap AI"
+
+msgid "Zywrap Dashboard"
+msgstr "Zywrap Dashboard"
+
+msgid "Settings"
+msgstr "设置"
+
+msgid "Playground"
+msgstr "测试台"
+
+msgid "Audit Logs"
+msgstr "审计日志"
+
+msgid "API Errors"
+msgstr "API 错误"
+
+msgid "Addons"
+msgstr "扩展组件"
+
+msgid "Install Addons"
+msgstr "安装 Addons"
+
+msgid "Addons Status"
+msgstr "Addons 状态"
+
+msgid "Update Key"
+msgstr "更新密钥"
+
+msgid "Addons List"
+msgstr "Addons 列表"
+
+msgid "Content & Knowledge"
+msgstr "内容与知识库"
+
+msgid "FAQ's"
+msgstr "FAQ's"
+
+msgid "Email & Communication"
+msgstr "电子邮件与沟通"
+
+msgid "System Emails"
+msgstr "系统电子邮件"
+
+msgid "Add Email"
+msgstr "添加电子邮件"
+
+msgid "Email Templates"
+msgstr "电子邮件模板"
+
+msgid "New Ticket"
+msgstr "新工单"
+
+msgid "Agent Ticket"
+msgstr "客服人员工单"
+
+msgid "New Agent"
+msgstr "新客服人员"
+
+msgid "Reassign Ticket"
+msgstr "重新分配工单"
+
+msgid "Close Ticket"
+msgstr "关闭工单"
+
+msgid "Delete Ticket"
+msgstr "删除工单"
+
+msgid "Ban Email"
+msgstr "封禁电子邮件"
+
+msgid "Ban email try to create ticket"
+msgstr "封禁电子邮件尝试到 创建工单"
+
+msgid "Department Transfer"
+msgstr "部门转移"
+
+msgid "Ban Email And Close Ticket"
+msgstr "封禁电子邮件和 关闭工单"
+
+msgid "Duedate Ticket"
+msgstr "工单截止日期"
+
+msgid "New Ticket Notification"
+msgstr "新工单通知"
+
+msgid "Edit Own Time"
+msgstr "编辑自己的时间"
+
+msgid "View Feedback"
+msgstr "查看反馈"
+
+msgid "Ticket Merge"
+msgstr "工单合并"
+
+msgid "View Credentials"
+msgstr "查看凭据"
+
+msgid "Delete Credentials"
+msgstr "删除凭据"
+
+msgid "Edit Credentials"
+msgstr "编辑凭据"
+
+msgid "Add Credentials"
+msgstr "添加凭据"
+
+msgid "Link To Paid Support"
+msgstr "链接到 付费支持"
+
+msgid "Change Ticket Status"
+msgstr "更改工单状态"
+
+msgid "Assign Role Permissions"
+msgstr "分配角色权限"
+
+msgid "Assign Role To User"
+msgstr "分配角色到 用户"
+
+msgid "Add User"
+msgstr "添加用户"
+
+msgid "Edit User"
+msgstr "编辑用户"
+
+msgid "Assign User Permissions"
+msgstr "分配用户权限"
+
+msgid "Delete Department"
+msgstr "删除部门"
+
+msgid "View Department"
+msgstr "查看部门"
+
+msgid "Delete Role"
+msgstr "删除角色"
+
+msgid "Delete User"
+msgstr "删除用户"
+
+msgid "Mail To Agent"
+msgstr "邮件到 客服人员"
+
+msgid "View Role"
+msgstr "查看角色"
+
+msgid "View User"
+msgstr "查看用户"
+
+msgid "View Agent Reports"
+msgstr "查看客服人员报告"
+
+msgid "View Department Reports"
+msgstr "查看部门报告"
+
+msgid "Delete Category"
+msgstr "删除分类"
+
+msgid "View Category"
+msgstr "查看分类"
+
+msgid "View Knowledge Base"
+msgstr "查看知识库"
+
+msgid "Delete Knowledge Base"
+msgstr "删除知识库"
+
+msgid "View FAQ"
+msgstr "查看FAQ"
+
+msgid "Delete FAQ"
+msgstr "删除FAQ"
+
+msgid "View Download"
+msgstr "查看下载"
+
+msgid "Delete Announcement"
+msgstr "删除公告"
+
+msgid "Allow Mail System"
+msgstr "允许邮件系统"
+
+msgid "Edit Help Topic"
+msgstr "编辑帮助主题"
+
+msgid "View Help Topic"
+msgstr "查看帮助主题"
+
+msgid "Delete Help Topic"
+msgstr "删除帮助主题"
+
+msgid "Edit Canned Response"
+msgstr "编辑预设回复"
+
+msgid "View Canned Response"
+msgstr "查看预设回复"
+
+msgid "Delete Canned Response"
+msgstr "删除预设回复"
+
+msgid "Use AI Powered Reply Feature"
+msgstr "使用 AI 驱动回复功能"
+
+msgid "Set AI Reply Mode for Ticket"
+msgstr "设置 AI 回复模式用于工单"
+
+msgid "Set AI Reply Mode for Reply"
+msgstr "设置 AI 回复模式用于回复"
+
+msgid "Limit AI Replies to Agent-Assigned Tickets"
+msgstr "仅允许 AI 回复已分配客服人员的工单"
+
+msgid "Mark Non Premium"
+msgstr "标记非 高级"
+
+msgid "Release Ticket"
+msgstr "释放工单"
+
+msgid "Unban Email"
+msgstr "解除封禁电子邮件"
+
+msgid "Response Ticket"
+msgstr "回复工单"
+
+msgid "Reply Ticket"
+msgstr "回复工单"
+
+msgid "New Ticket Admin Alert"
+msgstr "新工单 Admin 提醒"
+
+msgid "In Progress Ticket"
+msgstr "在进度工单"
+
+msgid "Ticket Priority Is Changed By"
+msgstr "工单优先级是 已更改由"
+
+msgid "New Mail Received"
+msgstr "新邮件已接收"
+
+msgid "New Mail Message Received"
+msgstr "新邮件消息已接收"
+
+msgid "Feedback Email To User"
+msgstr "反馈电子邮件到 用户"
+
+msgid "User Reply On Closed Ticket"
+msgstr "用户回复在 已关闭工单"
+
+msgid "Ban Emails"
+msgstr "封禁电子邮件"
+
+msgid "Products & Sales"
+msgstr "产品与销售"
+
+msgid "Products"
+msgstr "产品"
+
+msgid "Add Product"
+msgstr "添加产品"
+
+msgid "System & Settings"
+msgstr "系统 &设置"
+
+msgid "Shortcodes"
+msgstr "短代码"
+
+msgid "Import Data"
+msgstr "导入数据"
+
+msgid "GDPR"
+msgstr "GDPR"
+
+msgid "GDPR Fields"
+msgstr "GDPR 字段"
+
+msgid "Erase Data Requests"
+msgstr "擦除数据请求"
+
+msgid "Reports"
+msgstr "报告"
+
+msgid "Overall Statistics"
+msgstr "总体统计"
+
+msgid "Department Reports"
+msgstr "部门报告"
+
+msgid "User Reports"
+msgstr "用户报告"
+
+msgid "Satisfaction Report"
+msgstr "满意度报告"
+
+msgid "Select Form"
+msgstr "选择表单"
+
+msgid "No Record Found"
+msgstr "未找到记录"
+
+msgid "Log Out"
+msgstr "日志退出"
+
+msgid "div"
+msgstr "div"
+
+msgid "iframe"
+msgstr "iframe"
+
+msgid "Username / password is incorrect"
+msgstr "用户名 / 密码是 不正确"
+
+msgid "Username already taken"
+msgstr "用户名已经花费"
+
+msgid "Invalid username"
+msgstr "无效用户名"
+
+msgid "Please enter a username"
+msgstr "请输入用户名"
+
+msgid "Invalid email"
+msgstr "无效电子邮件"
+
+msgid "Email already registered"
+msgstr "电子邮件已经已注册"
+
+msgid "Please enter a password"
+msgstr "请输入密码"
+
+msgid "Passwords do not match"
+msgstr "密码不匹配"
+
+msgid "Invalid captcha"
+msgstr "无效验证码"
+
+msgid "User has been successfully registered"
+msgstr "用户已 成功已注册"
+
+msgid "Could not subscribe to the newsletter"
+msgstr "无法不 订阅到 新闻通讯"
+
+msgid "Please check confirmation email to complete your subscription for the newsletter"
+msgstr "请查看确认邮件以完成新闻通讯订阅"
+
+msgid "You have successfully subscribed to the newsletter"
+msgstr "您已成功订阅新闻通讯"
+
+msgid "JS Help Desk"
+msgstr "JS Help Desk"
+
+msgid "JS Help Desk Control Panel"
+msgstr "JS Help Desk 控制面板"
+
+msgid "Statuses"
+msgstr "状态"
+
+msgid "product"
+msgstr "产品"
+
+msgid "System Error"
+msgstr "系统错误"
+
+msgid "User Fields"
+msgstr "用户字段"
+
+msgid "Ban list log"
+msgstr "封禁列表日志"
+
+msgid "Field Ordering"
+msgstr "字段排序"
+
+msgid "Post Installation"
+msgstr "发布安装"
+
+msgid "Premium Addon"
+msgstr "高级 Addon"
+
+msgid "Sorry"
+msgstr "抱歉"
+
+msgid "Access Denied."
+msgstr "访问被拒绝。"
+
+msgid "You have no permission to access this page"
+msgstr "您已 无权限到 访问此 页面"
+
+msgid "Register"
+msgstr "注册"
+
+msgid "User is not allowed to access this page."
+msgstr "用户是 不允许到 访问此 页面."
+
+msgid "You are already Logged In."
+msgstr "您是 已经已登录在."
+
+msgid "Your account has been disabled, please contact the administrator."
+msgstr "您的账户已 禁用, 请联系管理员."
+
+msgid "You are not logged In"
+msgstr "您是 不已登录在"
+
+msgid "To access the page, Please login"
+msgstr "到访问页面, 请登录"
+
+msgid "User is not allowed to view this Ticket"
+msgstr "用户是 不允许到 查看此 工单"
+
+msgid "Registration has been disabled by admin, please contact the system administrator."
+msgstr "注册已 禁用由 管理员, 请联系系统管理员."
+
+msgid "You have already given the feedback for this ticket."
+msgstr "您已 已经指定反馈用于此 工单."
+
+msgid "User is not allowed to view this page"
+msgstr "用户是 不允许到 查看此 页面"
+
+msgid "Thank you so much for your feedback"
+msgstr "感谢您 如此非常用于您的反馈"
+
+msgid "JS Help Desk Pages"
+msgstr "JS Help Desk 页面"
+
+msgid "List Downloads"
+msgstr "列表下载"
+
+msgid "Latest Downloads"
+msgstr "最新下载"
+
+msgid "Popular Downloads"
+msgstr "热门下载"
+
+msgid "List Knowledge Base"
+msgstr "列表知识库"
+
+msgid "Latest Knowledge Base"
+msgstr "最新知识库"
+
+msgid "Popular Knowledge Base"
+msgstr "热门知识库"
+
+msgid "List FAQs"
+msgstr "列表 FAQ"
+
+msgid "Latest FAQs"
+msgstr "最新 FAQ"
+
+msgid "Popular FAQs"
+msgstr "热门 FAQ"
+
+msgid "List Announcements"
+msgstr "列表公告"
+
+msgid "Latest Announcements"
+msgstr "最新公告"
+
+msgid "Popular Announcements"
+msgstr "热门公告"
+
+msgid "Your JS Support Ticket license key has expired or is invalid. Please update it to continue receiving support and updates."
+msgstr "您的 JS Support Ticket 许可证密钥已过期或无效。请更新密钥以继续接收支持和更新。"
+
+msgid "Action Required: Addon Updates Needed"
+msgstr "需要操作：请更新扩展组件"
+
+msgid "Major changes have been introduced. All JS Support Ticket addons must be updated immediately to prevent system errors and broken functionality."
+msgstr "已引入重大变更。所有 JS Support Ticket 扩展组件必须立即更新，以防止系统错误和功能损坏。"
+
+msgid "Update All Addons Now"
+msgstr "更新全部 Addons 现在"
+
+msgid "Form submission failed!"
+msgstr "表单提交失败！"
+
+msgid "You have not answered all required fields"
+msgstr "您已 不已回复全部必填字段"
+
+msgid "You have not given a correct time"
+msgstr "您已 不指定正确时间"
+
+msgid "You have not given a correct e-mail address"
+msgstr "您输入的电子邮件地址不正确"
+
+msgid "You have not given a correct phone number"
+msgstr "您已 不指定正确电话数字"
+
+msgid "You have not given a correct answer to the security question"
+msgstr "您已 不指定正确答案到 安全问题"
+
+msgid "You have not given a correct date"
+msgstr "您已 不指定正确日期"
+
+msgid "The input value must be between "
+msgstr "输入值 必须被 之间"
+
+msgid " characters"
+msgstr "字符"
+
+msgid "The input value is longer than "
+msgstr "输入值 是更长比"
+
+msgid "The input value is shorter than "
+msgstr "输入值长度不足"
+
+msgid "Input values could not be confirmed"
+msgstr "无法确认输入值"
+
+msgid "Incorrect domain value"
+msgstr "不正确域名值"
+
+msgid "The input value is not a correct URL"
+msgstr "输入值 是不 正确 URL"
+
+msgid "The input value is incorrect"
+msgstr "输入值 是不正确"
+
+msgid "The input value was not a correct number"
+msgstr "输入值 是不 正确数字"
+
+msgid "Your social security number was incorrect"
+msgstr "您的社交安全数字是 不正确"
+
+msgid "Incorrect UK VAT Number"
+msgstr "UK VAT 号码不正确"
+
+msgid "The password isn't strong enough"
+msgstr "密码强度不够"
+
+msgid "You have to choose at least "
+msgstr "您已 到选择至少至少"
+
+msgid " answers"
+msgstr " 个回答"
+
+msgid "The input value can only contain alphanumeric characters "
+msgstr "输入值只能包含字母和数字字符"
+
+msgid " and "
+msgstr "和"
+
+msgid "The file you are trying to upload is too large"
+msgstr "您尝试上传的文件过大"
+
+msgid "The file you are trying to upload is of the wrong type"
+msgstr "您尝试上传的文件类型不正确"
+
+msgid "Please choose between "
+msgstr "请选择之间"
+
+msgid "Please choose at least "
+msgstr "请选择至少至少"
+
+msgid "Please choose a maximum of "
+msgstr "请选择最大的"
+
+msgid " item(s)"
+msgstr "项目(s)"
+
+msgid "The credit card number is not correct"
+msgstr "信用卡 数字是 不正确"
+
+msgid "The CVV number was not correct"
+msgstr "CVV 数字是 不正确"
+
+msgid "Lost your password"
+msgstr "丢失您的密码"
+
+msgid "Activated"
+msgstr "已激活"
+
+msgid "Active Now"
+msgstr "启用现在"
+
+msgid "Install Now"
+msgstr "安装现在"
+
+msgid "Pagination default page size not saved"
+msgstr "分页默认页面大小不 已保存"
+
+msgid "Data directory cannot empty."
+msgstr "数据目录不能为空."
+
+msgid "Data directory is not proper."
+msgstr "数据目录不正确。"
+
+msgid "Data directory is not writable."
+msgstr "数据目录是 不可写."
+
+msgid "System slug not be empty."
+msgstr "系统 slug 不被 为空."
+
+msgid "System slug is conflicted with post or page slug."
+msgstr "系统 slug 与文章或页面 slug 冲突。"
+
+msgid "The setting has been stored."
+msgstr "设置已 已保存."
+
+msgid "Days"
+msgstr "天"
+
+msgid "Hours"
+msgstr "小时"
+
+msgid "Google reCaptcha"
+msgstr "Google reCAPTCHA"
+
+msgid "Own Captcha"
+msgstr "自己的验证码"
+
+msgid "Any"
+msgstr "任意"
+
+msgid "Addition"
+msgstr "加法"
+
+msgid "Subtraction"
+msgstr "减法"
+
+msgid "Google reCAPTCHA v2"
+msgstr "Google reCAPTCHA v2"
+
+msgid "Google reCAPTCHA v3"
+msgstr "Google reCAPTCHA v3"
+
+msgid "Show"
+msgstr "显示"
+
+msgid "Hide"
+msgstr "隐藏"
+
+msgid "JS Help Desk Login Page"
+msgstr "JS Help Desk 登录页面"
+
+msgid "WordPress Default Login Page"
+msgstr "WordPress 默认登录页面"
+
+msgid "Custom"
+msgstr "自定义"
+
+msgid "JS Help Desk Register Page"
+msgstr "JS Help Desk 注册页面"
+
+msgid "WordPress Default Register Page"
+msgstr "WordPress 默认注册页面"
+
+msgid "Top left"
+msgstr "顶部左侧"
+
+msgid "Top right"
+msgstr "顶部右侧"
+
+msgid "Middle left"
+msgstr "中间左侧"
+
+msgid "Middle right"
+msgstr "中间右侧"
+
+msgid "Bottom left"
+msgstr "底部左侧"
+
+msgid "Bottom right"
+msgstr "底部右侧"
+
+msgid "Random"
+msgstr "随机"
+
+msgid "Sequence"
+msgstr "顺序"
+
+msgid "Oldest First"
+msgstr "最旧优先"
+
+msgid "Newest First"
+msgstr "最新优先"
+
+msgid "Ascending"
+msgstr "升序"
+
+msgid "Descending"
+msgstr "降序"
+
+msgid "menu"
+msgstr "菜单"
+
+msgid "Select Configuration"
+msgstr "选择配置"
+
+msgid "General"
+msgstr "常规"
+
+msgid "General Settings"
+msgstr "常规设置"
+
+msgid "Support Icon"
+msgstr "支持图标"
+
+msgid "Ticket Settings"
+msgstr "工单设置"
+
+msgid "Ticket Listing"
+msgstr "工单列表"
+
+msgid "Visitor Ticket Setting"
+msgstr "访客工单设置"
+
+msgid "Captcha"
+msgstr "验证码"
+
+msgid "Email Settings"
+msgstr "电子邮件设置"
+
+msgid "Ban Email New Ticket"
+msgstr "封禁电子邮件新 工单"
+
+msgid "Ticket Operations Email Setting"
+msgstr "工单操作电子邮件设置"
+
+msgid "Agent Menu"
+msgstr "客服人员菜单"
+
+msgid "Dashboard Links"
+msgstr "Dashboard 链接"
+
+msgid "Top Menu Links"
+msgstr "顶部菜单链接"
+
+msgid "User Menu"
+msgstr "用户菜单"
+
+msgid "Feedback Settings"
+msgstr "反馈设置"
+
+msgid "Push Notifications"
+msgstr "推送通知"
+
+msgid "Firebase Notifications"
+msgstr "Firebase 通知"
+
+msgid "Private Credentials"
+msgstr "私有凭据"
+
+msgid "Envato Validation"
+msgstr "Envato Validation"
+
+msgid "Mailchimp"
+msgstr "Mailchimp"
+
+msgid "Easy Digital Downloads"
+msgstr "Easy Digital Downloads"
+
+msgid "Facebook"
+msgstr "Facebook"
+
+msgid "Linkedin"
+msgstr "Linkedin"
+
+msgid "Set the heading of your plugin"
+msgstr "设置标题的 您的插件"
+
+msgid "Ticket Default Page"
+msgstr "工单默认页面"
+
+msgid "Select Page"
+msgstr "选择页面"
+
+msgid "Select JS Help Desk default page, on the action system, will redirect on the selected page. If not select the default page, email links, and support icon might not work."
+msgstr "选择JS Help Desk 默认页面, 在操作系统, 将重定向在 所选页面. 如果不 选择默认页面, 电子邮件链接, 和支持图标可能不 工作."
+
+msgid "Data Directory"
+msgstr "数据目录"
+
+msgid "Set the name for your data directory"
+msgstr "设置名称用于您的数据目录"
+
+msgid "You need to rename the existing data directory in the file system before changing the data directory name"
+msgstr "您需要到 重命名现有数据目录在 文件系统之前更改数据目录名称"
+
+msgid "Date Format"
+msgstr "日期格式"
+
+msgid "DD-MM-YYYY"
+msgstr "DD-MM-YYYY"
+
+msgid "MM-DD-YYYY"
+msgstr "MM-DD-YYYY"
+
+msgid "YYYY-MM-DD"
+msgstr "YYYY-MM-DD"
+
+msgid "Set the default date format"
+msgstr "设置默认日期格式"
+
+msgid "Pagination Default Page Size"
+msgstr "分页默认页面大小"
+
+msgid "Set the no. of record per page"
+msgstr "设置无. 的记录每 页面"
+
+msgid "Top Header"
+msgstr "顶部页眉"
+
+msgid "Show hide Top Header"
+msgstr "显示隐藏顶部页眉"
+
+msgid "Show User Avatar"
+msgstr "显示用户头像"
+
+msgid "Showing avatars may slightly slow down page loading"
+msgstr "显示头像可能略微减慢降低页面加载中"
+
+msgid "Show Count On My Tickets"
+msgstr "显示计数在 我的工单"
+
+msgid "Show number of the open, closed, answered ticket in my ticket and dashboard"
+msgstr "显示数字的 打开, 已关闭, 已回复工单在 我的工单和 Dashboard"
+
+msgid "Default Wp Role For New Users"
+msgstr "默认 Wp 角色用于新 用户"
+
+msgid "Select the role you want to assign to new users"
+msgstr "选择角色您 想要到 分配给新 用户"
+
+msgid "Number Of Attachments"
+msgstr "数字的 附件"
+
+msgid "Number of attachments allowed at a time"
+msgstr "数字的 附件允许至少时间"
+
+msgid "File Maximum Size"
+msgstr "文件最大大小"
+
+msgid "Kb"
+msgstr "Kb"
+
+msgid "File Extension"
+msgstr "文件扩展名"
+
+msgid "File extension allowed to attach"
+msgstr "允许附加的文件扩展名"
+
+msgid "Set Login Link"
+msgstr "设置登录链接"
+
+msgid "Set Login Link Default or Custom"
+msgstr "设置登录链接默认或 自定义"
+
+msgid "Set Register Link"
+msgstr "设置注册链接"
+
+msgid "Set register Link Default or Custom"
+msgstr "设置注册链接默认或 自定义"
+
+msgid " To enable registrations, WordPress admin > General > Settings > Membership: Anyone can register"
+msgstr "要启用注册，请前往 WordPress 管理后台 > 常规 > 设置 > 成员资格，并勾选“任何人都可以注册”"
+
+msgid "Screen Tag"
+msgstr "屏幕标签"
+
+msgid "Enable / disable your support icon"
+msgstr "启用 / 禁用您的支持图标"
+
+msgid "Custom Image"
+msgstr "自定义图片"
+
+msgid "Set custom support image"
+msgstr "设置自定义支持图片"
+
+msgid "Custom Text"
+msgstr "自定义文本"
+
+msgid "Set custom support text"
+msgstr "设置自定义支持文本"
+
+msgid "Support Icon Position"
+msgstr "支持图标位置"
+
+msgid "Screen Tag Position"
+msgstr "屏幕标签位置"
+
+msgid "Select position for your support icon"
+msgstr "选择位置用于您的支持图标"
+
+msgid "Online"
+msgstr "在线"
+
+msgid "Set your plugin offline for front end"
+msgstr "设置您的插件离线用于前端端"
+
+msgid "Offline Message"
+msgstr "离线消息"
+
+msgid "Set the offline message for your user"
+msgstr "设置离线消息用于您的用户"
+
+msgid "Woocommerce Category"
+msgstr "Woocommerce 分类"
+
+msgid "Select category to display only products of this category on the WooCommerce shop page."
+msgstr "选择分类到 显示仅 产品的 此分类在 WooCommerce 商店页面."
+
+msgid "Ticketid Prefix"
+msgstr "工单ID 前缀"
+
+msgid "Set prefix for custom ticketid"
+msgstr "设置前缀用于自定义工单ID"
+
+msgid "Ticketid sequence"
+msgstr "工单ID 顺序"
+
+msgid "Set ticketid sequential or random .e.g "
+msgstr "设置工单ID 顺序或 随机 .e.g"
+
+msgid "Pad Zeros"
+msgstr "补零"
+
+msgid "To pad an integer with leading zeros to a specific length"
+msgstr "用前导零将整数补齐到指定长度"
+
+msgid "Ticketid Suffix"
+msgstr "工单 ID 后缀"
+
+msgid "Set suffix for custom ticketid"
+msgstr "设置自定义工单 ID 的后缀"
+
+msgid "Maximum Tickets"
+msgstr "最大工单"
+
+msgid "Maximum ticket per user"
+msgstr "最大工单每 用户"
+
+msgid "Maximum Open Tickets"
+msgstr "最大打开工单"
+
+msgid "Maximum opened tickets per user"
+msgstr "最大已打开工单每 用户"
+
+msgid "Reopen Ticket Within Days"
+msgstr "重新打开工单在...内天"
+
+msgid "The ticket can be reopened within a given number of days"
+msgstr "工单可以被 已重新打开在...内指定数字的 天"
+
+msgid "Multiforms Popup For New Tickets"
+msgstr "新工单的多表单弹窗"
+
+msgid "Show or hide the multiform popup when creating a new ticket. if you hide them, the system will open the default form."
+msgstr "显示或隐藏多表单弹窗何时创建新 工单. 如果您 隐藏它们, 系统将 打开默认表单."
+
+msgid "User Can Print Ticket"
+msgstr "用户可以打印工单"
+
+msgid "Can user print ticket from ticket detail or not"
+msgstr "可以用户打印工单来自工单详情或 不"
+
+msgid "Allow Users To Reply Via Email On Closed Ticket"
+msgstr "允许用户到 回复通过电子邮件在 已关闭工单"
+
+msgid "Select whether users can reply to closed email piping ticket or not"
+msgstr "选择用户是否可以回复已关闭的 Email Piping 工单"
+
+msgid "Show Admin OR Agent Email On Ticket Reply"
+msgstr "显示Admin 或客服人员电子邮件在 工单回复"
+
+msgid "Select whether users can see the email of administrator or agent on ticket reply"
+msgstr "选择是否用户可以查看电子邮件的 管理员或 客服人员在 工单回复"
+
+msgid "Ticket Replies Ordering"
+msgstr "工单回复排序"
+
+msgid "Set the default ordering for ticket replies in the detail page."
+msgstr "设置默认排序用于工单回复在 详情页面."
+
+msgid "Show Anonymous Name On Ticket Reply"
+msgstr "在工单回复中显示匿名名称"
+
+msgid "Select whether users can see the name of administrator or agent on ticket reply"
+msgstr "选择是否用户可以查看名称的 管理员或 客服人员在 工单回复"
+
+msgid "Show Message Read Icon For Admin On Ticket Detail"
+msgstr "显示消息读取图标用于 Admin 在工单详情"
+
+msgid "Select whether the message read icon is displayed to the administrator on ticket detail."
+msgstr "选择是否消息读取图标是 显示到 管理员在 工单详情."
+
+msgid "Show Message Read Icon For Agents On Ticket Detail"
+msgstr "显示消息读取图标用于客服人员在 工单详情"
+
+msgid "Select whether the message read icon is displayed to agents on ticket detail."
+msgstr "选择是否消息读取图标是 显示到 客服人员在 工单详情."
+
+msgid "Show Message Read Icon For Users On Ticket Detail"
+msgstr "显示消息读取图标用于用户在 工单详情"
+
+msgid "Select whether the message read icon is displayed to users on the ticket detail."
+msgstr "选择是否消息读取图标是 显示到 用户在 工单详情."
+
+msgid "Ticket Auto Close"
+msgstr "工单自动关闭"
+
+msgid "Ticket auto-close if user does not respond within given days"
+msgstr "如果用户在指定天数内未回复，自动关闭工单"
+
+msgid "Show Ticket Delete Button"
+msgstr "显示工单删除按钮"
+
+msgid "Select whether users can see the ticket delete button"
+msgstr "选择是否用户可以查看工单删除按钮"
+
+msgid "New ticket message"
+msgstr "新工单消息"
+
+msgid "This message will show on the new ticket"
+msgstr "此消息将 显示在 新工单"
+
+msgid "Ticket Listing Ordering"
+msgstr "工单列表排序"
+
+msgid "Set default ordering for ticket listing"
+msgstr "设置默认排序用于工单列表"
+
+msgid "Ticket Listing Sorting"
+msgstr "工单列表排序"
+
+msgid "Set default sorting for ticket listing"
+msgstr "设置工单列表的默认排序"
+
+msgid "Show Closure Info On Admin Tickets"
+msgstr "显示关闭信息在 Admin 工单"
+
+msgid "By enabling this option, an admin can know who closed the ticket and when that ticket closed."
+msgstr "由启用此 选项, 管理员可以知道谁 已关闭工单和 何时该 工单已关闭."
+
+msgid "Show Closure Info on Agent Tickets"
+msgstr "显示关闭信息在 客服人员工单"
+
+msgid "By enabling this option, an agent can know who closed the ticket and when that ticket closed."
+msgstr "由启用此 选项, 客服人员可以知道谁 已关闭工单和 何时该 工单已关闭."
+
+msgid "Show Closure Info on User Tickets"
+msgstr "显示关闭信息在 用户工单"
+
+msgid "By enabling this option, a user can know who closed the ticket and when that ticket closed."
+msgstr "由启用此 选项, 用户可以知道谁 已关闭工单和 何时该 工单已关闭."
+
+msgid "Assigned Info. On Admin Tickets"
+msgstr "已分配信息. 在 Admin 工单"
+
+msgid "By enabling this option, an admin can know to whom the ticket has been assigned."
+msgstr "由启用此 选项, 管理员可以知道到 谁工单已 已分配."
+
+msgid "Assigned Info. On Agent Tickets"
+msgstr "已分配信息. 在客服人员工单"
+
+msgid "By enabling this option, an agent can know to whom the ticket has been assigned."
+msgstr "由启用此 选项, 客服人员可以知道到 谁工单已 已分配."
+
+msgid "Assigned Info. On User Tickets"
+msgstr "已分配信息. 在用户工单"
+
+msgid "By enabling this option, a user can know to whom the ticket has been assigned."
+msgstr "由启用此 选项, 用户可以知道到 谁工单已 已分配."
+
+msgid "Visitor Can Create Ticket"
+msgstr "访客可以创建工单"
+
+msgid "Can visitor create ticket or not"
+msgstr "可以访客创建工单或 不"
+
+msgid "Visitor ticket creation message"
+msgstr "访客工单创建消息"
+
+msgid "This text will appear whenever a visitor creates a ticket"
+msgstr "访客创建工单时将显示此文本"
+
+msgid "Default Alert Email"
+msgstr "默认提醒电子邮件"
+
+msgid "If ticket department email is not selected then this email is used to send emails"
+msgstr "如果工单部门电子邮件是 不所选然后此 电子邮件是 使用到 发送电子邮件"
+
+msgid "Default Admin Email"
+msgstr "默认 Admin 电子邮件"
+
+msgid "Admin email address to receive emails"
+msgstr "Admin 电子邮件地址到 接收电子邮件"
+
+msgid "Department Email"
+msgstr "部门电子邮件"
+
+msgid "Send email to all departments on ticket create"
+msgstr "发送电子邮件到 全部部门在 工单创建"
+
+msgid "Mail To Admin"
+msgstr "邮件到 Admin"
+
+msgid "Email sends to admin when banned email try to create a ticket"
+msgstr "被封禁的电子邮件尝试创建工单时向管理员发送邮件"
+
+msgid "Admin"
+msgstr "Admin"
+
+msgid "Ticket Reassign"
+msgstr "工单重新分配"
+
+msgid "Ticket Close"
+msgstr "工单关闭"
+
+msgid "Ticket Delete"
+msgstr "工单删除"
+
+msgid "Ticket Marked As Overdue"
+msgstr "工单标记作为逾期"
+
+msgid "Ticket Ban Email"
+msgstr "工单封禁电子邮件"
+
+msgid "Ticket Department Transfer"
+msgstr "工单部门转移"
+
+msgid "Ticket Reply User"
+msgstr "工单回复用户"
+
+msgid "Ticket Response Agent"
+msgstr "工单回复客服人员"
+
+msgid "Ticket Ban Email And Close Ticket"
+msgstr "工单封禁电子邮件和 关闭工单"
+
+msgid "Ticket Unban Email"
+msgstr "工单解除封禁电子邮件"
+
+msgid "Ticket Lock"
+msgstr "工单锁定"
+
+msgid "Ticket Unlock"
+msgstr "工单解锁"
+
+msgid "Ticket Change Priority"
+msgstr "工单更改优先级"
+
+msgid "Mark Ticket In Progress"
+msgstr "标记工单在 进度"
+
+msgid "Reply To A Closed Ticket By Email"
+msgstr "回复到 已关闭工单由 电子邮件"
+
+msgid "Send Feedback Email To User"
+msgstr "发送反馈电子邮件到 用户"
+
+msgid "Open Tickets"
+msgstr "打开工单"
+
+msgid "Login / Logout Button"
+msgstr "登录 / 退出登录按钮"
+
+msgid "Ticket Total Count"
+msgstr "工单总计计数"
+
+msgid "Ticket Statistics"
+msgstr "工单统计"
+
+msgid "Erase Agent Data"
+msgstr "擦除客服人员数据"
+
+msgid "Export Ticket"
+msgstr "导出工单"
+
+msgid "Home"
+msgstr "首页"
+
+msgid "Check Ticket Status"
+msgstr "检查工单状态"
+
+msgid "Registration"
+msgstr "注册"
+
+msgid "Erase User Data"
+msgstr "擦除用户数据"
+
+msgid "Feedback Email Delay Type"
+msgstr "反馈电子邮件延迟类型"
+
+msgid "Select delay type for feedback email"
+msgstr "选择延迟类型用于反馈电子邮件"
+
+msgid "Feedback Email Delay"
+msgstr "反馈电子邮件延迟"
+
+msgid "Set no. of days or hours to send feedback email after a ticket is closed"
+msgstr "设置无. 的天 或小时到 发送反馈电子邮件之后工单是 已关闭"
+
+msgid "Success message after submitting feedback"
+msgstr "成功消息之后提交反馈"
+
+msgid "This text will appear whenever anyone submits feedback"
+msgstr "任何人提交反馈时将显示此文本"
+
+msgid "Login With Facebook"
+msgstr "登录带有 Facebook"
+
+msgid "Facebook user can login in js support ticket"
+msgstr "Facebook 用户可以登录 JS 支持工单"
+
+msgid "Secret"
+msgstr "密钥"
+
+msgid "Secret Key"
+msgstr "密钥密钥"
+
+msgid "API Key"
+msgstr "API 密钥"
+
+msgid "API key is required for facebook app"
+msgstr "API 密钥是 必填用于 Facebook 应用"
+
+msgid "Login with linkedin"
+msgstr "登录带有 Linkedin"
+
+msgid "API key is required for linkedin app"
+msgstr "API 密钥是 必填用于 Linkedin 应用"
+
+msgid "UTF Auto Switch"
+msgstr "UTF 自动切换"
+
+msgid "Create User via email"
+msgstr "创建用户通过电子邮件"
+
+msgid "JS Help Desk Desktop Notifications plugin is not installed. Please install the plugin to enable desktop notifications"
+msgstr "JS Help Desk 桌面通知插件是 不已安装. 请安装插件到 启用桌面通知"
+
+msgid "Click here to insert Install."
+msgstr "点击此处到 插入安装."
+
+msgid "JS Help Desk Desktop Notifications plugin is not active."
+msgstr "JS Help Desk 桌面通知插件未启用."
+
+msgid "Find and add firebase api's keys"
+msgstr "查找并添加 Firebase API 密钥"
+
+msgid "Click here to get firebae api keys."
+msgstr "点击此处获取 Firebase API 密钥。"
+
+msgid "API Key For User"
+msgstr "API 密钥用于用户"
+
+msgid "Firebase api key for front user"
+msgstr "Firebase API 密钥用于前端用户"
+
+msgid "Auth Domain"
+msgstr "认证域名"
+
+msgid "Firebase Auth Domain"
+msgstr "Firebase 认证域名"
+
+msgid "Database URL"
+msgstr "数据库 URL"
+
+msgid "Firebase Database URL"
+msgstr "Firebase 数据库 URL"
+
+msgid "Project Id"
+msgstr "项目 ID"
+
+msgid "Firebase Project Id"
+msgstr "Firebase 项目 ID"
+
+msgid "Bucket Storage"
+msgstr "存储桶存储"
+
+msgid "Firebase Bucket Storage"
+msgstr "Firebase 存储桶存储"
+
+msgid "Message Sender Id"
+msgstr "消息发送者 ID"
+
+msgid "Firebase Message Sender Id"
+msgstr "Firebase 消息发送者 ID"
+
+msgid "Private Server Key"
+msgstr "私有服务器密钥"
+
+msgid "Firebase Server Key"
+msgstr "Firebase 服务器密钥"
+
+msgid "Logo Image For Desktop Notifications"
+msgstr "桌面通知的徽标图片"
+
+msgid "Remove Image"
+msgstr "移除图片"
+
+msgid "Remove Logo"
+msgstr "移除徽标"
+
+msgid "No Firebase Notification Logo"
+msgstr "无 Firebase 通知徽标"
+
+msgid "Private Credentials Encryption Key changing this value will discard all existing credentials "
+msgstr "私有凭据加密密钥；更改此值将丢弃所有现有凭据"
+
+msgid "Second Level Security"
+msgstr "二级安全"
+
+msgid "For enhanced security change encryption method in %1$s on line %2$s"
+msgstr "为增强安全性，请在 %1$s 的第 %2$s 行更改加密方法"
+
+msgid "Enter Envato api key "
+msgstr "输入 Envato API 密钥"
+
+msgid "Click here to generate an api key"
+msgstr "点击此处到 生成 API 密钥"
+
+msgid "License Mandatory"
+msgstr "许可证必填"
+
+msgid "Prevent users from submitting a ticket without a valid license for one of your product"
+msgstr "防止用户来自提交工单不带有效许可证用于一个的 您的产品"
+
+msgid "Product ID"
+msgstr "产品 ID"
+
+msgid "A comma-separated list of Envato product ids"
+msgstr "以逗号分隔的 Envato 产品 ID 列表"
+
+msgid "Enter MailChimp API key "
+msgstr "输入 MailChimp API 密钥"
+
+msgid "Audience ID"
+msgstr "受众 ID"
+
+msgid "Find Audience ID in your MailChimp account"
+msgstr "查找受众 ID 在您的 MailChimp 账户"
+
+msgid "Enable Double Opt-in"
+msgstr "启用双重确认订阅"
+
+msgid "You must also enable double opt-in in your MailChimp account"
+msgstr "您还必须在 MailChimp 账户中启用双重确认订阅"
+
+msgid "Welcome Email"
+msgstr "欢迎电子邮件"
+
+msgid "You can enable Final Welcome Email in your MailChimp account"
+msgstr "您可以在 MailChimp 账户中启用最终欢迎邮件"
+
+msgid "Verify License On Ticket Creation"
+msgstr "创建工单时验证许可证"
+
+msgid "Captcha Setting"
+msgstr "验证码设置"
+
+msgid "Show Captcha On Registration Form"
+msgstr "显示验证码在 注册表单"
+
+msgid "Select whether you want to show captcha on the registration form or not"
+msgstr "选择是否您 想要到 显示验证码在 注册表单或 不"
+
+msgid "Show Captcha On The Visitor Ticket Form"
+msgstr "显示验证码在 访客工单表单"
+
+msgid "Show captcha when a visitor wants to create a ticket"
+msgstr "访客创建工单时显示验证码"
+
+msgid "Captcha selection"
+msgstr "验证码选择"
+
+msgid "Which captcha you want to add"
+msgstr "其验证码您 想要到 添加"
+
+msgid "Google reCaptcha version"
+msgstr "Google reCAPTCHA 版本"
+
+msgid "Select the Google reCaptcha version"
+msgstr "选择Google reCAPTCHA 版本"
+
+msgid "Google reCaptcha Site Key"
+msgstr "Google reCAPTCHA 站点密钥"
+
+msgid "Please enter the google re-captcha site key from"
+msgstr "请输入来自 Google reCAPTCHA 的站点密钥"
+
+msgid "Google reCaptcha Secret Key"
+msgstr "Google reCAPTCHA 密钥密钥"
+
+msgid "Please enter the google re-captcha secret key from"
+msgstr "请输入来自 Google reCAPTCHA 的密钥"
+
+msgid "Own Captcha Calculation Type"
+msgstr "自定义验证码计算类型"
+
+msgid "Select calculation type addition or subtraction"
+msgstr "选择计算类型：加法或减法"
+
+msgid "Own Captcha Operands"
+msgstr "自定义验证码操作数"
+
+msgid "Select the total operands to be given"
+msgstr "选择要提供的操作数总数"
+
+msgid "Own Captcha Subtraction Answer Positive"
+msgstr "自己的验证码减法答案正数"
+
+msgid "Is subtraction answer should be positive"
+msgstr "是减法答案应 被正数"
+
+msgid "Save Configurations"
+msgstr "保存配置"
+
+msgid "Ticket via email"
+msgstr "工单通过电子邮件"
+
+msgid "OR"
+msgstr "或"
+
+msgid "Update ticket status"
+msgstr "更新工单状态"
+
+msgid "Recommended run script daily"
+msgstr "建议运行脚本每日"
+
+msgid "You cannot use this email, it is used in email piping"
+msgstr "您不能使用此电子邮件，它已用于 Email Piping"
+
+msgid "The department has been stored"
+msgstr "部门已保存"
+
+msgid "The department has not been stored"
+msgstr "部门未能保存"
+
+msgid "The department has been deleted"
+msgstr "部门已删除"
+
+msgid "The department has not been deleted"
+msgstr "部门未能删除"
+
+msgid "The department in use cannot be delete"
+msgstr "部门正在使用无法删除"
+
+msgid "Select Help Topic"
+msgstr "选择帮助主题"
+
+msgid "Outgoing Email"
+msgstr "外发电子邮件"
+
+msgid "Select Email"
+msgstr "选择电子邮件"
+
+msgid "Tickets of this department will receive emails from this email"
+msgstr "工单的 此部门将 接收电子邮件来自此 电子邮件"
+
+msgid "Receive Email"
+msgstr "接收电子邮件"
+
+msgid "Default with auto assign"
+msgstr "默认带有自动分配"
+
+msgid "Save Department"
+msgstr "保存部门"
+
+msgid "Add New Email"
+msgstr "添加新电子邮件"
+
+msgid "The user of this department will receive email on the new ticket"
+msgstr "用户的 此部门将 接收电子邮件在 新工单"
+
+msgid "Outgoing"
+msgstr "外发"
+
+msgid "Click here to give us feedback"
+msgstr "点击此处到 提供我们反馈"
+
+msgid "Email Already Exist"
+msgstr "电子邮件已经存在"
+
+msgid "The email has been stored"
+msgstr "电子邮件已保存"
+
+msgid "The email has not been stored"
+msgstr "电子邮件未能保存"
+
+msgid "Ticket History"
+msgstr "工单历史记录"
+
+msgid "SMTP"
+msgstr "SMTP"
+
+msgid "False"
+msgstr "假"
+
+msgid "True"
+msgstr "真"
+
+msgid "TLS"
+msgstr "TLS"
+
+msgid "SSL"
+msgstr "SSL"
+
+msgid "Send Email By"
+msgstr "发送电子邮件由"
+
+msgid "SMTP Host Type"
+msgstr "SMTP 主机类型"
+
+msgid "SMTP Host"
+msgstr "SMTP 主机"
+
+msgid "SMTP Authentication"
+msgstr "SMTP 身份验证"
+
+msgid "SMTP Secure"
+msgstr "SMTP 安全连接"
+
+msgid "SMTP Port"
+msgstr "SMTP 端口"
+
+msgid "Auto Response"
+msgstr "自动回复"
+
+msgid "Save Email"
+msgstr "保存电子邮件"
+
+msgid "Some values are not acceptable please retry"
+msgstr "部分值不可接受，请重试"
+
+msgid "Info"
+msgstr "信息"
+
+msgid "System email used for sending email"
+msgstr "用于发送电子邮件的系统邮箱"
+
+msgid "Email tempate has been deleted"
+msgstr "电子邮件模板已删除"
+
+msgid "Email tempate has not been deleted"
+msgstr "电子邮件模板未能删除"
+
+msgid "Ban Email Try To Create Ticket"
+msgstr "封禁电子邮件尝试到 创建工单"
+
+msgid "Data Deleted"
+msgstr "数据已删除"
+
+msgid "Default Email Template"
+msgstr "默认电子邮件模板"
+
+msgid "This template is used for all forms and languages unless a specific custom template is created."
+msgstr "此模板是 使用用于全部表单和 语言除非特定自定义模板是 已创建."
+
+msgid "This template is used for all forms unless a specific form template is created."
+msgstr "此模板是 使用用于全部表单除非特定表单模板是 已创建."
+
+msgid "This template is used for all languages unless a specific language template is created."
+msgstr "此模板是 使用用于全部语言除非特定语言模板是 已创建."
+
+msgid "View/Edit Default Template"
+msgstr "查看/编辑默认模板"
+
+msgid "Form & Language-Specific Email Templates"
+msgstr "表单与特定语言电子邮件模板"
+
+msgid "Form-Specific Email Templates"
+msgstr "特定表单电子邮件模板"
+
+msgid "Language-Specific Email Templates"
+msgstr "特定语言电子邮件模板"
+
+msgid "Customize email content for individual form, for specific language, or a combination of both. If no custom template exists for a given form or language, the default template will be used."
+msgstr "自定义电子邮件内容用于单独表单, 用于特定语言, 或组合的 两者. 如果无 自定义模板存在用于指定表单或 语言, 默认模板将被使用."
+
+msgid "Customize email content for individual form. If no custom template exists for a form, the default template will be used."
+msgstr "自定义电子邮件内容用于单独表单. 如果无 自定义模板存在用于表单, 默认模板将被使用."
+
+msgid "Customize email content for specific language. If no custom template exists for a language, the default template will be used."
+msgstr "自定义电子邮件内容用于特定语言. 如果无 自定义模板存在用于语言, 默认模板将被使用."
+
+msgid "Select a Form"
+msgstr "选择表单"
+
+msgid "Select a Language"
+msgstr "选择语言"
+
+msgid "Create Template"
+msgstr "创建模板"
+
+msgid "Existing Custom Templates"
+msgstr "现有自定义模板"
+
+msgid "Form Name"
+msgstr "表单名称"
+
+msgid "Language"
+msgstr "语言"
+
+msgid "Actions"
+msgstr "操作"
+
+msgid "Are you sure you want to delete"
+msgstr "确定要删除"
+
+msgid "Preview"
+msgstr "预览"
+
+msgid "Form"
+msgstr "表单"
+
+msgid "Body"
+msgstr "正文"
+
+msgid "Parameters"
+msgstr "参数"
+
+msgid "Tracking ID"
+msgstr "跟踪 ID"
+
+msgid "Ticket URL"
+msgstr "工单 URL"
+
+msgid "Ticket Priority"
+msgstr "工单优先级"
+
+msgid "Department title"
+msgstr "部门标题"
+
+msgid "Group Title"
+msgstr "分组标题"
+
+msgid "Agent name"
+msgstr "客服人员名称"
+
+msgid "Help topic title"
+msgstr "帮助主题标题"
+
+msgid "Feedback URL"
+msgstr "反馈 URL"
+
+msgid "Ticket Subject"
+msgstr "工单主题"
+
+msgid "Ticket Tracking ID"
+msgstr "工单跟踪 ID"
+
+msgid "Close Date"
+msgstr "关闭日期"
+
+msgid "Save Email Template"
+msgstr "保存电子邮件模板"
+
+msgid "Note"
+msgstr "备注"
+
+msgid "Features marked with"
+msgstr "功能标记带有"
+
+msgid "are only available with its own addon."
+msgstr "是仅 可用带有其 自己的 Addon."
+
+msgid "Field mark as published"
+msgstr "字段标记作为已发布"
+
+msgid "Field mark as unpublished"
+msgstr "字段标记作为未发布"
+
+msgid "Field cannot be mark as published"
+msgstr "字段不能被 标记作为已发布"
+
+msgid "Field mark as required"
+msgstr "字段标记作为必填"
+
+msgid "Field mark as not required"
+msgstr "字段标记作为不 必填"
+
+msgid "Field ordering down"
+msgstr "字段排序降低"
+
+msgid "Field ordering up"
+msgstr "字段排序设置"
+
+msgid "Please Insert At least one value for every option"
+msgstr "请为每个选项至少输入一个值"
+
+msgid "Parent field has not been stored"
+msgstr "父级字段未能保存"
+
+msgid "Field has not been stored"
+msgstr "字段未能保存"
+
+msgid "Field has been stored"
+msgstr "字段已保存"
+
+msgid "Child fields has not been stored"
+msgstr "子级字段未能保存"
+
+msgid "Field has been updated"
+msgstr "字段已更新"
+
+msgid "Parent Field"
+msgstr "父级字段"
+
+msgid "Equal"
+msgstr "等于"
+
+msgid "Not Equal"
+msgstr "不等于"
+
+msgid "Contain"
+msgstr "包含"
+
+msgid "Not Contain"
+msgstr "不包含"
+
+msgid "Edit Field"
+msgstr "编辑字段"
+
+msgid "Field Title"
+msgstr "字段标题"
+
+msgid "User Published"
+msgstr "用户已发布"
+
+msgid "Visitor Published"
+msgstr "访客已发布"
+
+msgid "Placeholder"
+msgstr "占位符"
+
+msgid "Required"
+msgstr "必填"
+
+msgid "User Search"
+msgstr "用户搜索"
+
+msgid "Admin Search"
+msgstr "Admin 搜索"
+
+msgid "Show On Listing"
+msgstr "显示在列表"
+
+msgid "Advanced"
+msgstr "高级"
+
+msgid "Field has not been deleted"
+msgstr "字段未能删除"
+
+msgid "Field has been deleted"
+msgstr "字段已删除"
+
+msgid "Select Parent"
+msgstr "选择父级"
+
+msgid "Select Child"
+msgstr "选择子级"
+
+msgid "Select Condition"
+msgstr "选择条件"
+
+msgid "AND"
+msgstr "和"
+
+msgid "Add Field"
+msgstr "添加字段"
+
+msgid "Field"
+msgstr "字段"
+
+msgid "Text Field"
+msgstr "文本字段"
+
+msgid "Check Box"
+msgstr "复选框"
+
+msgid "Drop Down"
+msgstr "下拉列表"
+
+msgid "Text Area"
+msgstr "文本区域"
+
+msgid "Radio Button"
+msgstr "单选按钮"
+
+msgid "Upload File"
+msgstr "上传文件"
+
+msgid "Multi Select"
+msgstr "多选"
+
+msgid "Terms and Conditions"
+msgstr "条款和 条件"
+
+msgid "Dependent Field"
+msgstr "依赖字段"
+
+msgid "Field Type"
+msgstr "字段类型"
+
+msgid "Default Value"
+msgstr "默认值"
+
+msgid "To choose a default value, first add values in the area below"
+msgstr "到选择默认值, 第一添加值 在区域下方"
+
+msgid "This option is not available in this case"
+msgstr "此情况下该选项不可用"
+
+msgid "Select Default Value"
+msgstr "选择默认值"
+
+msgid "Read Only"
+msgstr "读取仅"
+
+msgid "Admin/Agent Only"
+msgstr "Admin/客服人员仅"
+
+msgid "Field Size"
+msgstr "字段大小"
+
+msgid "Max Length"
+msgstr "最大长度"
+
+msgid "Columns"
+msgstr "列"
+
+msgid "Rows"
+msgstr "行"
+
+msgid "Terms and Conditions Text"
+msgstr "条款和 条件文本"
+
+msgid "e.g ' I have read and agree to the [link] Terms and Conditions[/link]. ' The text between [link] and [/link] will be linked to provided url or wordpress page."
+msgstr "e.g ' I 已读取和 同意到 [link] 条款和 条件[/link]. ' 文本之间 [link] 和 [/link] 将被链接到 提供的 URL 或 WordPress 页面."
+
+msgid "Terms and Conditions Link Type"
+msgstr "条款和 条件链接类型"
+
+msgid "Direct Link"
+msgstr "直接链接"
+
+msgid "WordPress Page"
+msgstr "WordPress 页面"
+
+msgid "None"
+msgstr "无"
+
+msgid "Select Link Type"
+msgstr "选择链接类型"
+
+msgid "Terms and Conditions Link"
+msgstr "条款和 条件链接"
+
+msgid "Terms and Conditions Page"
+msgstr "条款和 条件页面"
+
+msgid "Select WordPress page"
+msgstr "选择WordPress 页面"
+
+msgid "Visibility conditions"
+msgstr "可见性条件"
+
+msgid "Add new"
+msgstr "添加新建"
+
+msgid "visibility condition"
+msgstr "可见性条件"
+
+msgid "Use the table below to add new values"
+msgstr "使用下表添加新值"
+
+msgid "Add Value"
+msgstr "添加值"
+
+msgid "Save Field"
+msgstr "保存字段"
+
+msgid "S.No"
+msgstr "S.无"
+
+msgid "Published"
+msgstr "已发布"
+
+msgid "Unpublished"
+msgstr "未发布"
+
+msgid "Not required"
+msgstr "不必填"
+
+msgid "users popup"
+msgstr "用户弹窗"
+
+msgid "Can Not Unpublished"
+msgstr "不能未发布"
+
+msgid "good"
+msgstr "良好"
+
+msgid "cross"
+msgstr "叉号"
+
+msgid "can not mark as not required"
+msgstr "不能标记作为不 必填"
+
+msgid "Cannot unpublished field"
+msgstr "不能未发布字段"
+
+msgid "File upload fields and Check box fields cannot be made required."
+msgstr "文件上传字段和复选框字段不能设为必填。"
+
+msgid "Please fill required fields."
+msgstr "请填写必填字段."
+
+msgid "User Data"
+msgstr "用户数据"
+
+msgid "Erasing data request has been stored"
+msgstr "数据擦除请求已保存"
+
+msgid "Failed while storing"
+msgstr "保存时失败"
+
+msgid "Erase data request withdrawn"
+msgstr "数据擦除请求已撤回"
+
+msgid "Failed while performing action"
+msgstr "执行操作时失败"
+
+msgid "User identifying data erased"
+msgstr "用户识别数据已擦除"
+
+msgid "User data Deleted"
+msgstr "用户数据已删除"
+
+msgid "Export Your Data"
+msgstr "导出您的数据"
+
+msgid "You have filed a request to remove your data."
+msgstr "您已提交删除个人数据的请求。"
+
+msgid "To withdraw erases data request"
+msgstr "撤回数据擦除请求"
+
+msgid "Request data removal from the system."
+msgstr "请求从系统中删除数据。"
+
+msgid "Add GDPR Field"
+msgstr "添加GDPR 字段"
+
+msgid "Field Text"
+msgstr "字段文本"
+
+msgid "Link Type"
+msgstr "链接类型"
+
+msgid "Link Page"
+msgstr "链接页面"
+
+msgid "User Email"
+msgstr "用户电子邮件"
+
+msgid "Request Status"
+msgstr "请求状态"
+
+msgid "Awaiting response"
+msgstr "等待回复"
+
+msgid "Erased identifying data"
+msgstr "已擦除识别数据"
+
+msgid "Deleted"
+msgstr "已删除"
+
+msgid "Erase identifying data"
+msgstr "擦除识别数据"
+
+msgid "Are you sure to erase identifying data"
+msgstr "是您 确定到 擦除识别数据"
+
+msgid "Delete data"
+msgstr "删除数据"
+
+msgid "Link"
+msgstr "链接"
+
+msgid "Direct URL"
+msgstr "直接 URL"
+
+msgid "Page Title or URL"
+msgstr "页面标题或 URL"
+
+msgid "AI Powered Reply"
+msgstr "AI 驱动回复"
+
+msgid "Ticket Actions"
+msgstr "工单操作"
+
+msgid "Max Tickets"
+msgstr "最大工单"
+
+msgid "User Options"
+msgstr "用户选项"
+
+msgid "User options"
+msgstr "用户选项"
+
+msgid "Internal Mail"
+msgstr "内部邮件"
+
+msgid "Private Note"
+msgstr "私有备注"
+
+msgid "WooCommerce"
+msgstr "WooCommerce"
+
+msgid "Merge Tickets"
+msgstr "合并工单"
+
+msgid "Time Tracking"
+msgstr "时间跟踪"
+
+msgid "Desktop Notification"
+msgstr "桌面通知"
+
+msgid "Admin Widgets"
+msgstr "Admin 小工具"
+
+msgid "Front-End Widgets"
+msgstr "前端小工具"
+
+msgid "Multi Language Email Templates"
+msgstr "多语言电子邮件模板"
+
+msgid "Dir is not writable"
+msgstr "目录不可写"
+
+msgid "Unable to connect to the server"
+msgstr "无法到 连接到 服务器"
+
+msgid "Language is not installed"
+msgstr "语言是 不已安装"
+
+msgid "Language directory is not writable"
+msgstr "语言目录是 不可写"
+
+msgid "Required language is not installed but similar language like"
+msgstr "所需语言未安装，但存在相似语言，如"
+
+msgid "is found in your system"
+msgstr "是找到在 您的系统"
+
+msgid "Language Code"
+msgstr "语言代码"
+
+msgid "Empty values"
+msgstr "为空值"
+
+msgid "File is not writable"
+msgstr "文件是 不可写"
+
+msgid "File successfully downloaded"
+msgstr "文件已成功下载"
+
+msgid "Invalid response from server"
+msgstr "无效回复来自服务器"
+
+msgid "Ordering updated"
+msgstr "排序已更新"
+
+msgid "Missing user(s) added successfully!"
+msgstr "缺失用户(s) 已添加成功!"
+
+msgid "No missing user found!"
+msgstr "无缺失用户找到!"
+
+msgid "Deactivate"
+msgstr "停用"
+
+msgid "Deactivated"
+msgstr "已停用"
+
+msgid "Activate"
+msgstr "启用"
+
+msgid "Not Installed"
+msgstr "不已安装"
+
+msgid "Addon Installation Failed"
+msgstr "Addon 安装失败"
+
+msgid "Addon Installed Successfully"
+msgstr "Addon 已安装成功"
+
+msgid "Addon Installation Failed, File download error"
+msgstr "Addon 安装失败, 文件下载错误"
+
+msgid "Please insert activation key to proceed"
+msgstr "请输入激活密钥以继续"
+
+msgid "About Us"
+msgstr "关于我们"
+
+msgid "Auto Update Add-Ons"
+msgstr "自动更新扩展组件"
+
+msgid "Auto Update"
+msgstr "自动更新"
+
+msgid "Addon will automatically update to the newest version"
+msgstr "扩展组件将自动更新到最新版本"
+
+msgid "On"
+msgstr "在"
+
+msgid "Off"
+msgstr "关"
+
+msgid "Add-Ons"
+msgstr "扩展组件"
+
+msgid "New Update Version"
+msgstr "新更新版本"
+
+msgid "is Available"
+msgstr "是可用"
+
+msgid "Customize"
+msgstr "自定义"
+
+msgid "Quick Actions"
+msgstr "快速操作"
+
+msgid "Easily access your main tasks from here."
+msgstr "您可以从这里快速访问主要任务。"
+
+msgid "Create A Ticket"
+msgstr "创建工单"
+
+msgid "Add WP Users"
+msgstr "添加WP 用户"
+
+msgid "New Tickets"
+msgstr "新工单"
+
+msgid "Pending Tickets"
+msgstr "待处理工单"
+
+msgid "Answered Tickets"
+msgstr "已回复工单"
+
+msgid "Closed Tickets"
+msgstr "已关闭工单"
+
+msgid "New Addon Update Available"
+msgstr "新 Addon 更新可用"
+
+msgid "Install the latest version to unlock new features and security patches."
+msgstr "安装最新版本以解锁新功能和安全补丁。"
+
+msgid "Update Now"
+msgstr "更新现在"
+
+msgid "Daily Ticket Flow"
+msgstr "每日工单流量"
+
+msgid "Here's a summary of today's ticket activity. This helps in tracking our daily progress and workload."
+msgstr "以下是今天工单活动的摘要，可帮助跟踪每日进度和工作量。"
+
+msgid "Created Tickets"
+msgstr "已创建工单"
+
+msgid "Your activation key has expired."
+msgstr "您的激活密钥已过期."
+
+msgid "Please reactivate your key to continue receiving product updates, addons, and support."
+msgstr "请重新激活您的密钥到 继续接收产品更新, Addons, 和支持."
+
+msgid "Reactivate Activation Key"
+msgstr "重新激活激活密钥"
+
+msgid "Ticket Analysis (Last 7 Days)"
+msgstr "工单分析（最近 7 天）"
+
+msgid "Ticket Distribution (Today)"
+msgstr "工单分布（今天）"
+
+msgid "Recent Tickets"
+msgstr "最近工单"
+
+msgid "ago"
+msgstr "前"
+
+msgid "No Recent Tickets"
+msgstr "无最近工单"
+
+msgid "New tickets will be displayed in this section."
+msgstr "新工单将显示在此部分。"
+
+msgid "View All Tickets"
+msgstr "查看所有工单"
+
+msgid "Unassigned Tickets"
+msgstr "未分配工单"
+
+msgid "All Tickets Assigned"
+msgstr "全部工单已分配"
+
+msgid "Great job! There are no unassigned tickets."
+msgstr "做得好！目前没有未分配的工单。"
+
+msgid "Ticket Action History"
+msgstr "工单操作历史记录"
+
+msgid "No Recent Actions"
+msgstr "无最近操作"
+
+msgid "Ticket updates and changes will appear here."
+msgstr "工单更新和 变更将 显示此处."
+
+msgid "Recently Replied"
+msgstr "最近已回复"
+
+msgid "No Replies Yet"
+msgstr "尚无回复"
+
+msgid "Recently replied tickets will be shown here."
+msgstr "最近已回复工单将被显示此处."
+
+msgid "View All Replied Tickets"
+msgstr "查看全部已回复工单"
+
+msgid "Recently Closed"
+msgstr "最近已关闭"
+
+msgid "No Closed Tickets"
+msgstr "无已关闭工单"
+
+msgid "Recently closed tickets will be listed here."
+msgstr "最近已关闭工单将被列出此处."
+
+msgid "View All Closed Tickets"
+msgstr "查看全部已关闭工单"
+
+msgid "Agent Performance"
+msgstr "客服人员绩效"
+
+msgid "Assigned"
+msgstr "已分配"
+
+msgid "No Agent Performance Data"
+msgstr "无客服人员绩效数据"
+
+msgid "Performance metrics will be displayed here."
+msgstr "绩效指标将显示在这里。"
+
+msgid "Recent Canned Responses"
+msgstr "最近预设回复"
+
+msgid "No Canned Responses"
+msgstr "无预设回复"
+
+msgid "Recent canned responses will be listed here."
+msgstr "最近预设回复将被列出此处."
+
+msgid "Active Timers"
+msgstr "启用计时器"
+
+msgid "No Active Timers"
+msgstr "无启用计时器"
+
+msgid "Timers started by agent will be shown here."
+msgstr "计时器已启动由 客服人员将被显示此处."
+
+msgid "Open Tickets By Age"
+msgstr "按时长统计未关闭工单"
+
+msgid "Most Active Customers"
+msgstr "大多数启用客户"
+
+msgid "No Customer Activity"
+msgstr "无客户活动"
+
+msgid "Customers with the most tickets will be listed here."
+msgstr "客户带有大多数工单将被列出此处."
+
+msgid "Tickets By Products"
+msgstr "工单由 产品"
+
+msgid "Add agents and assign roles and permissions to provide assistance and support to customer support tickets."
+msgstr "添加客服人员并分配角色和权限，以便处理客户支持工单。"
+
+msgid "Get AI-powered, context-based suggestions to effortlessly create clear, relevant, and helpful replies."
+msgstr "获取 AI-驱动, 基于上下文建议到 轻松地创建清晰, 相关, 和有帮助回复."
+
+msgid "Define rules for ticket to auto close. Ticket will be auto close after specific interval of time which can be set by admin."
+msgstr "定义工单自动关闭规则。管理员可设置时间间隔，超过该时间后工单将自动关闭。"
+
+msgid "Get the survey from your customers on ticket closing to improve your quality of services and assistance."
+msgstr "在工单关闭时向客户收集调查反馈，以提升服务和支持质量。"
+
+msgid "Help topics help users to find and select the area with which they need assistance."
+msgstr "帮助主题可帮助用户查找并选择需要协助的领域。"
+
+msgid "The private note is used as reminders or to give other agents insights into the ticket issue. User Would not see the private notes."
+msgstr "私有备注可用作提醒，或为其他客服人员提供工单问题的背景信息。用户不会看到私有备注。"
+
+msgid "Stop losing productivity on repetitive queries,Build your knowledge base, group solutions by topics to facilitate users."
+msgstr "不要再让重复问题降低效率；构建知识库，并按主题整理解决方案，方便用户自助查找。"
+
+msgid "Enables admin to set N numbers of tickets for users to create and set N numbers of Ticket to open for agents separately."
+msgstr "允许管理员分别设置用户可创建的工单数量，以及客服人员可处理的未关闭工单数量。"
+
+msgid "Enables agents to merge two tickets of the same user into one instead of dealing with the same issue on many tickets."
+msgstr "允许客服人员将同一用户的两个工单合并为一个，避免在多个工单中处理相同问题。"
+
+msgid "Defines rules or set specific intervals of time to make ticket auto overdue.The ticket can overdue by type or overdue by Cronjob."
+msgstr "定义规则或设置特定时间间隔，使工单自动逾期。工单可按类型或通过 Cron Job 设为逾期。"
+
+msgid "SMTP allows you to use a custom mail server to send emails from JS Help Desk."
+msgstr "SMTP 允许您 到使用自定义邮件服务器到 发送电子邮件来自 JS Help Desk."
+
+msgid "Displays complete ticket history along with the ticket status, currently assigned user and other actions performed on each ticket."
+msgstr "显示完整工单历史记录以及带有工单状态, 当前已分配用户和 其他操作执行在 每个工单."
+
+msgid "Canned Responses are pre-populated messages that allows support agents to respond quickly to customer issues."
+msgstr "预设回复是预先编写的消息，可帮助客服人员快速响应客户问题。"
+
+msgid "Enables users to reply to the tickets via email without the need to login to the support system first."
+msgstr "允许用户无需先登录支持系统，即可通过电子邮件回复工单。"
+
+msgid "Track the time spent on each ticket by each agent and each reply. Report the admin on how much time is spent on each ticket."
+msgstr "跟踪每位客服人员和每条回复在各工单上花费的时间，并向管理员报告每个工单的耗时。"
+
+msgid "User options enable you to add Google Re-captcha or JS Help Desk Re-captcha for a registration form."
+msgstr "用户选项允许您为注册表单添加 Google reCAPTCHA 或 JS Help Desk reCAPTCHA。"
+
+msgid "Get multiple action options on each ticket like Print Ticket, Lock Ticket, Transfer ticket, etc."
+msgstr "为每个工单提供多个操作选项，例如打印工单、锁定工单、转移工单等。"
+
+msgid "Make unlimited announcements associated with support system to get customer interaction."
+msgstr "创建不限数量的公告并关联到支持系统，以促进客户互动。"
+
+msgid "Ban Email allows you to block email of any user to restrict him to create new tickets."
+msgstr "封禁电子邮件可阻止指定用户的邮箱创建新工单。"
+
+msgid "The Desktop notifications will keep you up to date about anything happens on your support system."
+msgstr "桌面通知会让您及时了解支持系统中发生的事项。"
+
+msgid "Save the ticket as a PDF in your system or the admin will also be able to export all the data inside of Ticket."
+msgstr "将工单以 PDF 保存到系统中，管理员也可以导出工单中的全部数据。"
+
+msgid "Create downloads to ensure the user to get downloads from downloads."
+msgstr "创建下载内容，方便用户在下载区获取文件。"
+
+msgid "Tired of getting tickets about the same problems? Add FAQs to drastically reduce the number of common questions from users."
+msgstr "厌倦了反复收到相同问题的工单？添加 FAQ 可大幅减少用户的常见问题数量。"
+
+msgid "Dashboard Widgets"
+msgstr "仪表盘小工具"
+
+msgid "Get immediate data of your support operations as soon as you log into your WordPress administration area."
+msgstr "登录 WordPress 管理区后即可立即查看支持运营数据。"
+
+msgid "Use internal email to send emails to one agent to another agent with in support ticket."
+msgstr "使用内部电子邮件在支持工单内的客服人员之间发送邮件。"
+
+msgid "Widgets in WordPress allow you to add content and features in the widgetized areas of your theme."
+msgstr "WordPress 小工具允许您在主题的小工具区域添加内容和功能。"
+
+msgid "JS Help Desk WooCommerce provides the much-needed bridge between your WooCommerce store and the JS Help Desk."
+msgstr "JS Help Desk WooCommerce 在您的 WooCommerce 商店与 JS Help Desk 之间提供必要的连接。"
+
+msgid "Without a valid Envato license, clients will not be able to open a new ticket."
+msgstr "没有有效的 Envato 许可证，客户将无法创建新工单。"
+
+msgid "Adds the option to the registration form for prompting new users to subscribe to your email list."
+msgstr "在注册表单中添加选项，提示新用户订阅您的电子邮件列表。"
+
+msgid "Paid Support is the easiest way to integrate and manage payments for your tickets."
+msgstr "付费支持是为工单集成和管理付款的最简单方式。"
+
+msgid "EDD offers customers to open new tickets just one click from their EDD account."
+msgstr "EDD 允许客户从其 EDD 账户一键创建新工单。"
+
+msgid "It allows to create language-based email templates for all JS Help Desk email templates."
+msgstr "它允许为所有 JS Help Desk 电子邮件模板创建基于语言的模板。"
+
+msgid "CC(Carbon Copy) - the people who should know about the information which is being shared and the people included are able to see who is there in the list."
+msgstr "CC（抄送）- 用于向需要了解共享信息的人员发送副本；被抄送人员可以看到列表中的其他收件人。"
+
+msgid "It allows user to add more than one form based on requirements."
+msgstr "它允许用户到 添加更多比 一个表单基于在 需求."
+
+msgid "When auto assignment is enabled and a ticket is created, an appropriate agent is automatically assigned to the ticket and it is moved to the Assigned state."
+msgstr "启用自动分配后，创建工单时系统会自动将合适的客服人员分配给该工单，并将其移至“已分配”状态。"
+
+msgid "Available Addons"
+msgstr "可用 Addons"
+
+msgid "View Details"
+msgstr "查看详情"
+
+msgid "View All Addons"
+msgstr "查看全部 Addons"
+
+msgid "Quick Installation Guide"
+msgstr "快速安装指南"
+
+msgid "How To Setup Of The Help Desk"
+msgstr "如何设置的 帮助台"
+
+msgid "Video thumbnail"
+msgstr "视频缩略图"
+
+msgid "Learn how to set up your Help Desk quickly and get it ready for use."
+msgstr "了解如何到 设置设置您的帮助台快速和 获取它 准备好用于使用."
+
+msgid "How To Setup System Emails"
+msgstr "如何设置系统电子邮件"
+
+msgid "Learn how to setup out going notification in the best Help Desk plugin for WordPress"
+msgstr "了解如何在这款优秀的 WordPress 帮助台插件中设置外发通知"
+
+msgid "How To Create A Ticket"
+msgstr "如何创建工单"
+
+msgid "A simple walkthrough of the ticket creation process for both user and administrator."
+msgstr "面向用户和管理员的工单创建流程简要指南。"
+
+msgid "How To Set Email Notifications"
+msgstr "如何设置电子邮件通知"
+
+msgid "Configure your email notification settings to stay updated on ticket activity."
+msgstr "配置电子邮件通知设置，以便随时了解工单活动。"
+
+msgid "How To Setup Custom Fields"
+msgstr "如何设置自定义字段"
+
+msgid "Learn how to add custom fields to your ticket forms to collect more specific information."
+msgstr "了解如何向工单表单添加自定义字段，以收集更具体的信息。"
+
+msgid "Customize Dashboard"
+msgstr "自定义 Dashboard"
+
+msgid "Number of Tickets"
+msgstr "数字的 工单"
+
+msgid "Today"
+msgstr "今天"
+
+msgid "Yesterday"
+msgstr "昨天"
+
+msgid "2 days ago"
+msgstr "2 天前"
+
+msgid "3 days ago"
+msgstr "3 天前"
+
+msgid "4 days ago"
+msgstr "4 天前"
+
+msgid "5 days ago"
+msgstr "5 天前"
+
+msgid "6+ days ago"
+msgstr "6+ 天前"
+
+msgid "Number of Open Tickets"
+msgstr "未关闭工单数量"
+
+msgid "Collect your customer"
+msgstr "收集您的客户"
+
+msgid "Help icon"
+msgstr "帮助图标"
+
+msgid "We are here to help you"
+msgstr "我们随时为您提供帮助"
+
+msgid "JS Help Desk is a professional, simple, easy to use and complete customer support system."
+msgstr "JS Help Desk 是一套专业、简洁、易用且完整的客户支持系统。"
+
+msgid "View All Videos"
+msgstr "查看所有视频"
+
+msgid "Video icon"
+msgstr "视频图标"
+
+msgid "Help Desk icon"
+msgstr "帮助台图标"
+
+msgid "JS Help Desk Support"
+msgstr "JS Help Desk 支持"
+
+msgid "JS Help Desk delivers timely customer support if you have any query then we're here to show you the way."
+msgstr "JS Help Desk 提供及时的客户支持；如有任何疑问，我们会为您提供帮助。"
+
+msgid "Ticket creation"
+msgstr "工单创建"
+
+msgid "Visitor ticket creation"
+msgstr "访客工单创建"
+
+msgid "How to set ticket auto close"
+msgstr "如何设置工单自动关闭"
+
+msgid "How to reopen closed ticket"
+msgstr "如何重新打开已关闭工单"
+
+msgid "How to lock a ticket"
+msgstr "如何锁定工单"
+
+msgid "How to add private note"
+msgstr "如何添加私有备注"
+
+msgid "View ticket history"
+msgstr "查看工单历史记录"
+
+msgid "How to setup custom fields"
+msgstr "如何设置自定义字段"
+
+msgid "Set ticket auto overdue"
+msgstr "设置工单自动逾期"
+
+msgid "Manually set ticket overdue"
+msgstr "手动设置工单逾期"
+
+msgid "How to merge tickets"
+msgstr "如何合并工单"
+
+msgid "How to export tickets"
+msgstr "如何导出工单"
+
+msgid "How use help topic"
+msgstr "如何使用帮助主题"
+
+msgid "How to change department"
+msgstr "如何更改部门"
+
+msgid "How to use multi-forms"
+msgstr "如何使用多表单"
+
+msgid "How to paid support"
+msgstr "如何付费支持"
+
+msgid "How to use canned response"
+msgstr "如何使用预设回复"
+
+msgid "How to add private credentials"
+msgstr "如何添加私有凭据"
+
+msgid "How to ban/unban user"
+msgstr "如何封禁/解封用户"
+
+msgid "Agent system"
+msgstr "客服人员系统"
+
+msgid "Manually assign ticket to agent"
+msgstr "手动分配工单到 客服人员"
+
+msgid "How to edit time"
+msgstr "如何编辑时间"
+
+msgid "How to use time tracking"
+msgstr "如何使用时间跟踪"
+
+msgid "How to set max open ticket"
+msgstr "如何设置最大打开工单"
+
+msgid "How to show counts"
+msgstr "如何显示数量"
+
+msgid "How to set Captcha"
+msgstr "如何设置验证码"
+
+msgid "How to set login redirect"
+msgstr "如何设置登录重定向"
+
+msgid "How to set fields ordering"
+msgstr "如何设置字段排序"
+
+msgid "How to enable social login"
+msgstr "如何启用社交登录"
+
+msgid "Setup"
+msgstr "设置"
+
+msgid "How to setup"
+msgstr "如何设置"
+
+msgid "How to enable email piping"
+msgstr "如何启用 Email Piping"
+
+msgid "How to set SMTP"
+msgstr "如何设置 SMTP"
+
+msgid "How to solve email notification problem"
+msgstr "如何解决电子邮件通知问题"
+
+msgid "How to translate"
+msgstr "如何翻译"
+
+msgid "How to set colors"
+msgstr "如何设置颜色"
+
+msgid "How to add shortcodes"
+msgstr "如何添加 shortcodes"
+
+msgid "How to install addons"
+msgstr "如何安装 Addons"
+
+msgid "How to enable desktop notifications"
+msgstr "如何启用桌面通知"
+
+msgid "How to use knowledge base"
+msgstr "如何使用知识库"
+
+msgid "How to use downloads"
+msgstr "如何使用下载"
+
+msgid "How to add announcement"
+msgstr "如何添加公告"
+
+msgid "How to create FAQ"
+msgstr "如何创建 FAQ"
+
+msgid "Misc"
+msgstr "杂项"
+
+msgid "How to use email cc"
+msgstr "如何使用电子邮件抄送"
+
+msgid "How to use internal mail"
+msgstr "如何使用内部邮件"
+
+msgid "Use front-end widgets"
+msgstr "使用前端小工具"
+
+msgid "How to enable admin widgets"
+msgstr "如何启用管理员小工具"
+
+msgid "JS Help Desk / JS Support Ticket Control Panel"
+msgstr "JS Help Desk / JS 支持工单控制面板"
+
+msgid "JS Help Desk / JS Support Ticket main control panel"
+msgstr "JS Help Desk / JS 支持工单主要控制面板"
+
+msgid "Add new ticket form for both user and agent"
+msgstr "添加新工单表单用于两者用户和 客服人员"
+
+msgid "Add Ticket Using Multiform"
+msgstr "添加工单使用多表单"
+
+msgid "My tickets for both user and agent"
+msgstr "我的工单用于两者用户和 客服人员"
+
+msgid "List downloads"
+msgstr "列表下载"
+
+msgid "Show latest downloads. Options"
+msgstr "显示最新下载. 选项"
+
+msgid "and"
+msgstr "和"
+
+msgid "i.e."
+msgstr "i.e."
+
+msgid "Show popular downloads. Options"
+msgstr "显示热门下载. 选项"
+
+msgid "List knowledge base"
+msgstr "列表知识库"
+
+msgid "Show latest knowledge base. Options"
+msgstr "显示最新知识库. 选项"
+
+msgid "Show popular knowledge base. Options"
+msgstr "显示热门知识库. 选项"
+
+msgid "Show latest FAQs. Options"
+msgstr "显示最新 FAQ. 选项"
+
+msgid "Show popular FAQs. Options"
+msgstr "显示热门 FAQ. 选项"
+
+msgid "List announcements"
+msgstr "列表公告"
+
+msgid "Show latest announcements. Options"
+msgstr "显示最新公告. 选项"
+
+msgid "Show popular announcements. Options"
+msgstr "显示热门公告. 选项"
+
+msgid "Get"
+msgstr "获取"
+
+msgid "Translation"
+msgstr "翻译"
+
+msgid "When WordPress language change to fr, JS Help Desk language will auto change to fr"
+msgstr "当 WordPress 语言切换为 fr 时，JS Help Desk 语言也会自动切换为 fr"
+
+msgid "c error"
+msgstr "c 错误"
+
+msgid "saved"
+msgstr "已保存"
+
+msgid "Contribute In Translation"
+msgstr "参与翻译"
+
+msgid "translate"
+msgstr "翻译"
+
+msgid "Manual Download"
+msgstr "手动下载"
+
+msgid "Tickets Over Time"
+msgstr "工单趋势"
+
+msgid "Log In"
+msgstr "日志在"
+
+msgid "Agent Feedback"
+msgstr "客服人员反馈"
+
+msgid "Welcome Back To"
+msgstr "欢迎返回到"
+
+msgid "As a visitor, you can easily create a support ticket by sharing your issue details."
+msgstr "作为访客，您可以通过填写问题详情轻松创建支持工单。"
+
+msgid "Have An Issue?"
+msgstr "遇到问题？"
+
+msgid "Our support team is here to help. Create a new ticket to get started."
+msgstr "我们的支持团队随时为您提供帮助。创建新工单即可开始。"
+
+msgid "Create New Ticket"
+msgstr "创建新工单"
+
+msgid "Enter your information to check the status of your existing ticket."
+msgstr "输入您的信息以检查现有工单的状态。"
+
+msgid "Welcome Back"
+msgstr "欢迎返回"
+
+msgid "You have"
+msgstr "您已"
+
+msgid "no open ticket"
+msgstr "无打开工单"
+
+msgid ", and"
+msgstr ", 和"
+
+msgid "is awaiting your reply."
+msgstr "是等待您的回复."
+
+msgid "Need to assist a user?"
+msgstr "需要协助用户？"
+
+msgid "Quickly create a new ticket on behalf of a user to provide support and track their request."
+msgstr "代表用户快速创建新工单，以提供支持并跟踪其请求。"
+
+msgid "Open Ticket For User"
+msgstr "打开工单用于用户"
+
+msgid "OR Create a"
+msgstr "或创建"
+
+msgid "Your Ticket Stats"
+msgstr "您的工单统计"
+
+msgid "closed ticket"
+msgstr "已关闭工单"
+
+msgid "answered ticket"
+msgstr "已回复工单"
+
+msgid "Overdue Tickets"
+msgstr "逾期工单"
+
+msgid "View All"
+msgstr "查看全部"
+
+msgid "You replied"
+msgstr "您已回复"
+
+msgid "Reply from"
+msgstr "回复来自"
+
+msgid "Open Ticket"
+msgstr "打开工单"
+
+msgid "keep me login"
+msgstr "保持我 登录"
+
+msgid "Repeat Password"
+msgstr "重复密码"
+
+msgid "Subscribe to the newsletter"
+msgstr "订阅新闻通讯"
+
+msgid "has been changed"
+msgstr "已已更改"
+
+msgid "has not been changed"
+msgstr "未能已更改"
+
+msgid "Let's Get your Configuration Setup"
+msgstr "开始完成您的配置设置"
+
+msgid "Complete"
+msgstr "完整"
+
+msgid "Configurations Complete"
+msgstr "配置完整"
+
+msgid "Setting Completed"
+msgstr "设置已完成"
+
+msgid "Setting you applied has been saved successfully."
+msgstr "设置您 应用已 已保存成功."
+
+msgid "Finish"
+msgstr "完成"
+
+msgid "JS Support Ticket Settings"
+msgstr "JS 支持工单设置"
+
+msgid "General Configurations"
+msgstr "常规配置"
+
+msgid "Step 1 of "
+msgstr "第 1 步，共 "
+
+msgid "Enter the site title"
+msgstr "输入站点标题"
+
+msgid "Date format for plugin"
+msgstr "日期格式用于插件"
+
+msgid "Upload file size in KB's"
+msgstr "上传文件大小（KB）"
+
+msgid "Show navigation in breadcrumbs"
+msgstr "在面包屑中显示导航"
+
+msgid "Save & Next"
+msgstr "保存并下一步"
+
+msgid "Sequential"
+msgstr "顺序"
+
+msgid "Feedback Configurations"
+msgstr "反馈配置"
+
+msgid "Step 4 of 5"
+msgstr "第 4 步，共 5 步"
+
+msgid "Set Email Delay Time"
+msgstr "设置电子邮件延迟时间"
+
+msgid "Set Email Delay"
+msgstr "设置电子邮件延迟"
+
+msgid "Back"
+msgstr "返回"
+
+msgid "Ticket Configurations"
+msgstr "工单配置"
+
+msgid "Step 2 of "
+msgstr "第 2 步，共 "
+
+msgid "Enable / Disable Open Ticket"
+msgstr "启用 / 禁用打开工单"
+
+msgid "Ticket ID sequence"
+msgstr "工单 ID 顺序"
+
+msgid "Set ticket id sequential or random"
+msgstr "设置工单ID 顺序或 随机"
+
+msgid "Set Maximum Ticket Per user"
+msgstr "设置最大工单每 用户"
+
+msgid "Enable / Disable Captcha on Ticket Form"
+msgstr "启用/禁用工单表单验证码"
+
+msgid "Enable / Disable Own Captcha subtraction"
+msgstr "启用 / 禁用自己的验证码减法"
+
+msgid "Enable Print Ticket"
+msgstr "启用打印工单"
+
+msgid "Enable / Disable Print Ticket"
+msgstr "启用 / 禁用打印工单"
+
+msgid "Download Translation File"
+msgstr "下载翻译文件"
+
+msgid "Want to download translation file? Click on download. It will take sometime."
+msgstr "想下载翻译文件？点击下载。可能需要一些时间。"
+
+msgid "Download & Next"
+msgstr "下载 & 下一页"
+
+msgid "Skip this step"
+msgstr "跳过此步骤"
+
+msgid "Welcome To JS Support Ticket"
+msgstr "欢迎到 JS 支持工单"
+
+msgid "Let's Get Your Configuration Set Up"
+msgstr "开始完成您的配置设置"
+
+msgid "Plugin Quick Settings"
+msgstr "插件快速设置"
+
+msgid "Move to Dashboard"
+msgstr "前往仪表盘"
+
+msgid "Please select at least one addon!"
+msgstr "请选择至少至少一个 Addon!"
+
+msgid "Addon(s) Installed successfully!"
+msgstr "Addon(s) 已安装成功!"
+
+msgid "Addon(s) Installation Failed"
+msgstr "扩展组件安装失败"
+
+msgid "No unused keys were found."
+msgstr "未找到未使用的密钥。"
+
+msgid "unused key has been deleted successfully!"
+msgstr "未使用密钥已 已删除成功!"
+
+msgid "unused keys have been deleted successfully!"
+msgstr "未使用密钥已 已已删除成功!"
+
+msgid "Addon installation failed, Directory permission error"
+msgstr "Addon 安装失败, 目录权限错误"
+
+msgid "left image"
+msgstr "左侧图片"
+
+msgid "right image"
+msgstr "右侧图片"
+
+msgid "Add-On’s For Help Desk"
+msgstr "帮助台扩展组件"
+
+msgid "Get trusted WordPress add on’s. Guaranteed to work fast, safe to use, beautifully coded, packed with features and easy to use."
+msgstr "获取可信赖的 WordPress 扩展组件。保证运行快速、使用安全、代码优雅、功能丰富且易于使用。"
+
+msgid "Save big with an exclusive membership plan today!"
+msgstr "立即购买专属会员计划，节省更多！"
+
+msgid "show bundle pack"
+msgstr "显示捆绑包包"
+
+msgid "buy now"
+msgstr "立即购买"
+
+msgid "private note"
+msgstr "私有备注"
+
+msgid "Desktop Notifications"
+msgstr "桌面通知"
+
+msgid "frontend widget"
+msgstr "前端小工具"
+
+msgid "Collect your customers private data, sensitive information from credit card to health information, and store them encrypted."
+msgstr "收集客户的私有数据和敏感信息（从信用卡信息到健康信息），并以加密方式存储。"
+
+msgid "WooCommerce Support"
+msgstr "WooCommerce 支持"
+
+msgid "Paid Support is the easiest way to integrate and manage payments for your support tickets."
+msgstr "付费支持是 最简单方式到 集成和 管理付款用于您的支持工单."
+
+msgid "Envato"
+msgstr "Envato"
+
+msgid "The Mail Chimp add-on adds a new checkbox to the registration form for prompting new users to subscribe your email-list."
+msgstr "Mailchimp 扩展组件会在注册表单中添加一个复选框，提示新用户订阅您的电子邮件列表。"
+
+msgid "EDD offers customers to open new tickets just one click from their EDD account with optionally validating the license keys."
+msgstr "EDD 允许客户从其 EDD 账户一键创建新工单，并可选择验证许可证密钥。"
+
+msgid "Multiform allows user to add more than one form based on requirements."
+msgstr "多表单允许用户到 添加更多比 一个表单基于在 需求."
+
+msgid "Users can login from their social media accounts. They can create a new account or use social media accounts."
+msgstr "用户可以使用社交媒体账户登录。他们可以创建新账户，也可以使用社交媒体账户。"
+
+msgid "JS Help Desk Add-Ons Bundle Pack"
+msgstr "JS Help Desk 扩展组件捆绑包"
+
+msgid "Basic"
+msgstr "基础"
+
+msgid "Unlimited Agents"
+msgstr "无限客服人员"
+
+msgid "Standard"
+msgstr "Standard"
+
+msgid "Everything in basic included and"
+msgstr "全部在 基础包含和"
+
+msgid "Professional"
+msgstr "Professional"
+
+msgid "Everything in standard included and"
+msgstr "包含标准版的所有内容，并且"
+
+msgid "All Future Addons"
+msgstr "全部未来 Addons"
+
+msgid "Premium Addons"
+msgstr "高级 Addons"
+
+msgid "addon in no longer active"
+msgstr "扩展组件已不再启用"
+
+msgid "JS Help Desk Addon Installer"
+msgstr "JS Help Desk 扩展组件安装器"
+
+msgid "Please Insert Your Activation key"
+msgstr "请输入您的激活密钥"
+
+msgid "Activation key"
+msgstr "激活密钥"
+
+msgid "Proceed"
+msgstr "继续"
+
+msgid "All allowed add ons are already installed"
+msgstr "所有允许的扩展组件均已安装"
+
+msgid "You are not allowed to install any add on"
+msgstr "您无权安装任何扩展组件"
+
+msgid "Select Addons for download"
+msgstr "选择要下载的扩展组件"
+
+msgid "Select All Addons"
+msgstr "选择所有扩展组件"
+
+msgid "Add ons installed and activated successfully"
+msgstr "扩展组件已成功安装并启用"
+
+msgid "Add ons for JS Help Desk have been installed and activated successfully. "
+msgstr "JS Help Desk 扩展组件已成功安装并启用。"
+
+msgid "JS Helpdesk Activation Key"
+msgstr "JS Helpdesk 激活密钥"
+
+msgid "XXXXX-XXXXX-XXXXX-XXXXX"
+msgstr "XXXXX-XXXXX-XXXXX-XXXXX"
+
+msgid "The highlighted addons are not included in your current license. Please adjust your selection accordingly."
+msgstr "突出显示的扩展组件不包含在您当前的许可证中。请相应调整您的选择。"
+
+msgid "Select Addons To Update With New Activation Key"
+msgstr "选择Addons 到更新带有新 激活密钥"
+
+msgid "No Addon Installed!"
+msgstr "未安装扩展组件！"
+
+msgid "This will replace the old key with the new one."
+msgstr "这将使用新密钥替换旧密钥。"
+
+msgid "Manage Unused Keys"
+msgstr "管理未使用密钥"
+
+msgid "unused key(s) that can be safely removed."
+msgstr "个可安全删除的未使用密钥。"
+
+msgid "Delete All Unused Keys"
+msgstr "删除全部未使用密钥"
+
+msgid "Page Not Found !!"
+msgstr "页面未找到！！"
+
+msgid "Priority Title Already Exist"
+msgstr "优先级标题已经存在"
+
+msgid "Priority has been stored"
+msgstr "优先级已保存"
+
+msgid "Priority has not been stored"
+msgstr "优先级未能保存"
+
+msgid "Priority has been deleted"
+msgstr "优先级已删除"
+
+msgid "Priority has not been deleted"
+msgstr "优先级未能删除"
+
+msgid "Default priority cannot delete"
+msgstr "默认优先级无法删除"
+
+msgid "Priority has been make default"
+msgstr "优先级已 使默认"
+
+msgid "Priority has not been make default"
+msgstr "优先级未能使 默认"
+
+msgid "Color"
+msgstr "颜色"
+
+msgid "Ticket Overdue Interval Type"
+msgstr "工单逾期间隔类型"
+
+msgid "Save Priority"
+msgstr "保存优先级"
+
+msgid "Date Interval"
+msgstr "日期间隔"
+
+msgid "Product Title Already Exist"
+msgstr "产品标题已经存在"
+
+msgid "Product has been stored"
+msgstr "产品已保存"
+
+msgid "Product has not been stored"
+msgstr "产品未能保存"
+
+msgid "Product has been deleted"
+msgstr "产品已删除"
+
+msgid "Product has not been deleted"
+msgstr "产品未能删除"
+
+msgid "Save Product"
+msgstr "保存产品"
+
+msgid "Reply posted"
+msgstr "回复已发布"
+
+msgid "Reply posted on ticket"
+msgstr "回复已发布到工单"
+
+msgid "Guest"
+msgstr "访客"
+
+msgid "Ticket is replied by"
+msgstr "工单是 已回复由"
+
+msgid "Reply Has been Posted"
+msgstr "回复已 已发布"
+
+msgid "Reply Has Not been Posted"
+msgstr "回复未能已发布"
+
+msgid "You do not have permission to use AI features."
+msgstr "您不 已权限到 使用 AI 功能."
+
+msgid "Dates"
+msgstr "日期"
+
+msgid "Department Detail Report"
+msgstr "部门详情报告"
+
+msgid "Export Data"
+msgstr "导出数据"
+
+msgid "Department Statistics"
+msgstr "部门统计"
+
+msgid "Time Taken"
+msgstr "耗时"
+
+msgid "Out of"
+msgstr "退出的"
+
+msgid "Overall Report"
+msgstr "总体报告"
+
+msgid "Ticket by departments"
+msgstr "工单由 部门"
+
+msgid "Agent Tickets"
+msgstr "客服人员工单"
+
+msgid "Tickets By Statuses And Priorities"
+msgstr "工单由 状态和 优先级"
+
+msgid "Tickets By Agents"
+msgstr "按客服人员统计工单"
+
+msgid "Based on"
+msgstr "基于在"
+
+msgid "Customer Satisfaction"
+msgstr "客户满意度"
+
+msgid "satisfaction image"
+msgstr "满意度图片"
+
+msgid "Excellent"
+msgstr "优秀"
+
+msgid "NA"
+msgstr "NA"
+
+msgid "Normal"
+msgstr "普通"
+
+msgid "bad"
+msgstr "差"
+
+msgid "Angry"
+msgstr "愤怒"
+
+msgid "Agent Detail Report"
+msgstr "客服人员详情报告"
+
+msgid "Agent Statistics"
+msgstr "客服人员统计"
+
+msgid "agent image"
+msgstr "客服人员图片"
+
+msgid "Tickets not assigned to the agent"
+msgstr "工单不 已分配到 客服人员"
+
+msgid "Minutes"
+msgstr "分钟"
+
+msgid "User Detail Report"
+msgstr "用户详情报告"
+
+msgid "User Statistics"
+msgstr "用户统计"
+
+msgid "Users"
+msgstr "用户"
+
+msgid "Ticket Status By Departments"
+msgstr "工单状态由 部门"
+
+msgid "Agent Report"
+msgstr "客服人员报告"
+
+msgid "Reports Statistics"
+msgstr "报告统计"
+
+msgid "Slug(s) has been stored"
+msgstr "slug(s)已保存"
+
+msgid "Prefix has not been stored"
+msgstr "前缀未能保存"
+
+msgid "Prefix has been stored"
+msgstr "前缀已保存"
+
+msgid "Reset All"
+msgstr "重置全部"
+
+msgid "Home Slug"
+msgstr "首页 slug"
+
+msgid "Prefix"
+msgstr "前缀"
+
+msgid "This prefix will be added to slug incase of homepage links"
+msgstr "对于首页链接，将把此前缀添加到 slug"
+
+msgid "This prefix will be added to slug incase of conflict"
+msgstr "发生冲突时，将把此前缀添加到 slug"
+
+msgid "Search By Slug"
+msgstr "搜索由 slug"
+
+msgid "Slug List"
+msgstr "slug 列表"
+
+msgid "This button will only save slugs on current page"
+msgstr "此按钮将 仅保存 slugs 在当前页面"
+
+msgid "Status Title Already Exist"
+msgstr "状态标题已经存在"
+
+msgid "Status has been stored"
+msgstr "状态已保存"
+
+msgid "Status has not been stored"
+msgstr "状态未能保存"
+
+msgid "Status has been deleted"
+msgstr "状态已删除"
+
+msgid "Status has not been deleted"
+msgstr "状态未能删除"
+
+msgid "Text Color"
+msgstr "文本颜色"
+
+msgid "Background Color"
+msgstr "背景颜色"
+
+msgid "Save Status"
+msgstr "保存状态"
+
+msgid "System error has been deleted"
+msgstr "系统错误已删除"
+
+msgid "System error has not been deleted"
+msgstr "系统错误未能删除"
+
+msgid "Remove All"
+msgstr "移除全部"
+
+msgid "Theme Chooser"
+msgstr "主题选择器"
+
+msgid "Changes may require cache clearing to take effect. "
+msgstr "变更可能需要清除缓存后才会生效。"
+
+msgid "Ticket ID Or Email Address Or Subject"
+msgstr "工单 ID 或电子邮件地址或 主题"
+
+msgid "Support"
+msgstr "支持"
+
+msgid "Low"
+msgstr "低"
+
+msgid "High"
+msgstr "高"
+
+msgid "Urgent"
+msgstr "紧急"
+
+msgid "Sophie Martinez"
+msgstr "Sophie Martinez"
+
+msgid "I am Not Getting Access to My Subscription"
+msgstr "我无法访问我的订阅"
+
+msgid "Replied"
+msgstr "已回复"
+
+msgid "Daniel Brooks"
+msgstr "Daniel Brooks"
+
+msgid "Liam Turner"
+msgstr "Liam Turner"
+
+msgid "I Want to Upgrade My Plan — How Can I Do It?"
+msgstr "我想升级套餐——该怎么做？"
+
+msgid "ZJ6YydCNF"
+msgstr "ZJ6YydCNF"
+
+msgid "Emily Harper"
+msgstr "Emily Harper"
+
+msgid "Noah Bennett"
+msgstr "Noah Bennett"
+
+msgid "I Can’t Log Into My Account"
+msgstr "我无法登录我的账户"
+
+msgid "yTbM7qDmH"
+msgstr "yTbM7qDmH"
+
+msgid "Olivia Chase"
+msgstr "Olivia Chase"
+
+msgid "Maya Collins"
+msgstr "Maya Collins"
+
+msgid "How Long Will My Support Stay Active?"
+msgstr "我的支持服务将保持有效多久？"
+
+msgid "GxvdTBWMY"
+msgstr "GxvdTBWMY"
+
+msgid "Ethan Reynolds"
+msgstr "Ethan Reynolds"
+
+msgid "Assign Ticket To Agent"
+msgstr "分配工单到 客服人员"
+
+msgid "Ticket is assigned to agent by"
+msgstr "工单已由以下人员分配给客服人员"
+
+msgid "Ticket status change"
+msgstr "工单状态更改"
+
+msgid "The status is changed by"
+msgstr "状态是 已更改由"
+
+msgid "Change Priority"
+msgstr "更改优先级"
+
+msgid "Ticket department transfer"
+msgstr "工单部门转移"
+
+msgid "The department is transferred by"
+msgstr "部门是 转移由"
+
+msgid "REPLIED_TICKET"
+msgstr "已回复_工单"
+
+msgid "by"
+msgstr "由"
+
+msgid "icon"
+msgstr "图标"
+
+msgid "Plugin not installed"
+msgstr "插件不 已安装"
+
+msgid "Fetch Data"
+msgstr "获取数据"
+
+msgid "found"
+msgstr "找到"
+
+msgid "Private Credentials Addon missing, ticket private credentials data will not be imported!"
+msgstr "缺少私有凭据扩展组件，工单私有凭据数据将不会导入！"
+
+msgid "Ticket History Addon missing, full ticket history will not be imported!"
+msgstr "缺少工单历史记录扩展组件，完整工单历史记录将不会导入！"
+
+msgid "Time Tracking Addon missing, ticket time tracking data will not be imported!"
+msgstr "缺少时间跟踪扩展组件，工单时间跟踪数据将不会导入！"
+
+msgid "Note Addon missing, ticket internal note data will not be imported!"
+msgstr "缺少备注扩展组件，工单内部备注数据将不会导入！"
+
+msgid "Addon not installed please install addon first."
+msgstr "Addon 不已安装请 安装 Addon 第一."
+
+msgid "Import Data Report"
+msgstr "导入数据报告"
+
+msgid "Entity"
+msgstr "实体"
+
+msgid "Imported"
+msgstr "导入"
+
+msgid "Similar Found"
+msgstr "发现相似项"
+
+msgid "Not Imported"
+msgstr "不导入"
+
+msgid "Skipped"
+msgstr "已跳过"
+
+msgid "Failed"
+msgstr "失败"
+
+msgid "Fields are only available in the default form."
+msgstr "字段是 仅可用在 默认表单."
+
+msgid "Support for this Envato license has expired"
+msgstr "支持用于此 Envato 许可证已过期"
+
+msgid "Record not found"
+msgstr "记录未找到"
+
+msgid "Banned email cannot create ticket"
+msgstr "已封禁电子邮件不能创建工单"
+
+msgid "Incorrect Captcha code"
+msgstr "不正确验证码代码"
+
+msgid "Please select paid support item"
+msgstr "请选择付费支持项目"
+
+msgid "No purchase found with that code"
+msgstr "未找到与该代码匹配的购买记录"
+
+msgid "Provide a valid license key to create a ticket."
+msgstr "请提供有效的许可证密钥以创建工单。"
+
+msgid "Your license has expired."
+msgstr "您的许可证已过期."
+
+msgid "Your license is not active, activate your license."
+msgstr "您的许可证未启用，请激活许可证。"
+
+msgid "Due date error is not valid"
+msgstr "截止日期无效"
+
+msgid "Ticket has not been created"
+msgstr "工单未能创建"
+
+msgid "Ticket created"
+msgstr "工单已创建"
+
+msgid "Ticket is updated by"
+msgstr "工单已由以下人员更新"
+
+msgid "Ticket is created by"
+msgstr "工单已由以下人员创建"
+
+msgid "Ticket has been deleted"
+msgstr "工单已删除"
+
+msgid "Ticket has not been deleted"
+msgstr "工单未能删除"
+
+msgid "in use cannot be deleted"
+msgstr "正在使用无法删除"
+
+msgid "Ticket already closed"
+msgstr "工单已经已关闭"
+
+msgid "Ticket has been closed"
+msgstr "工单已关闭"
+
+msgid "Ticket has not been closed"
+msgstr "工单未能关闭"
+
+msgid "Ticket is closed by"
+msgstr "工单已由以下人员关闭"
+
+msgid "Your are not allowed"
+msgstr "您的是 不允许"
+
+msgid "The status has been changed"
+msgstr "状态已更改"
+
+msgid "The status has not been changed"
+msgstr "状态未能更改"
+
+msgid "The department has been transferred"
+msgstr "部门已 转移"
+
+msgid "The department has not been transferred"
+msgstr "部门未能转移"
+
+msgid "Assigned to agent"
+msgstr "已分配到 客服人员"
+
+msgid "Not assigned to agent"
+msgstr "不已分配到 客服人员"
+
+msgid "Ticket already have same priority"
+msgstr "工单已经已 相同优先级"
+
+msgid "Priority has been changed"
+msgstr "优先级已更改"
+
+msgid "Priority has not been changed"
+msgstr "优先级未能更改"
+
+msgid "Email already banned"
+msgstr "电子邮件已经已封禁"
+
+msgid "The email has been banned"
+msgstr "电子邮件已 已封禁"
+
+msgid "The email has not been banned"
+msgstr "电子邮件未能已封禁"
+
+msgid "Email is banned by"
+msgstr "电子邮件已由以下人员封禁"
+
+msgid "The ticket has been reopened"
+msgstr "工单已重新打开"
+
+msgid "The ticket has not been reopened"
+msgstr "工单未能重新打开"
+
+msgid "Reopen Ticket"
+msgstr "重新打开工单"
+
+msgid "The ticket is reopened by"
+msgstr "工单是 已重新打开由"
+
+msgid "The ticket reopens time limit end"
+msgstr "工单重新打开的时间限制已结束"
+
+msgid "Email has been unbanned"
+msgstr "电子邮件已 已解除封禁"
+
+msgid "Email has not been unbanned"
+msgstr "电子邮件未能已解除封禁"
+
+msgid "Unbanned Email"
+msgstr "已解除封禁电子邮件"
+
+msgid "Email is unbanned by"
+msgstr "电子邮件已由以下人员解除封禁"
+
+msgid "Email cannot be unbanned"
+msgstr "电子邮件不能被 已解除封禁"
+
+msgid "Ticket already marked in progress"
+msgstr "工单已经标记在 进度"
+
+msgid "The ticket has been marked as in progress"
+msgstr "工单已 标记作为在 进度"
+
+msgid "The ticket has not been marked as in progress"
+msgstr "工单未能标记作为在 进度"
+
+msgid "The ticket is marked as in progress by"
+msgstr "工单是 标记作为在 进度由"
+
+msgid "File upload limit exceeds"
+msgstr "文件上传限制超过"
+
+msgid "The uploaded file extension not valid"
+msgstr "已上传文件扩展名不 有效"
+
+msgid "Paid support info"
+msgstr "付费支持信息"
+
+msgid "Order ID"
+msgstr "订单 ID"
+
+msgid "Product Name"
+msgstr "产品名称"
+
+msgid "Total Tickets"
+msgstr "总计工单"
+
+msgid "Remaining Tickets"
+msgstr "剩余工单"
+
+msgid "Unlimited"
+msgstr "无限"
+
+msgid "You have not purchased any supported item"
+msgstr "您尚未购买任何受支持的项目"
+
+msgid "Go to shop"
+msgstr "前往商店"
+
+msgid "No canned response found"
+msgstr "未找到预设回复"
+
+msgid "premade"
+msgstr "预设"
+
+msgid "Are you sure to mark this ticket non-premium?"
+msgstr "确定要将此工单标记为非高级支持吗？"
+
+msgid "Copied to clipboard!"
+msgstr "已复制到剪贴板！"
+
+msgid "Failed to copy!"
+msgstr "复制失败！"
+
+msgid "Failed to copy to clipboard. Please copy manually."
+msgstr "复制到剪贴板失败。请手动复制。"
+
+msgid "Reply content appended!"
+msgstr "回复内容已追加！"
+
+msgid "No ticket selected!"
+msgstr "未选择工单！"
+
+msgid "Error fetching replies."
+msgstr "获取回复时出错。"
+
+msgid "Failed to fetch replies. Please try again."
+msgstr "获取回复失败。请重试。"
+
+msgid "Error fetching matching tickets:"
+msgstr "获取匹配工单时出错："
+
+msgid "No matching tickets found."
+msgstr "未找到匹配工单。"
+
+msgid "Replies for:"
+msgstr "回复用于:"
+
+msgid "No replies found for this ticket."
+msgstr "此工单未找到回复。"
+
+msgid "Copy"
+msgstr "复制"
+
+msgid "Edit Reply"
+msgstr "编辑回复"
+
+msgid "Edit Time"
+msgstr "编辑时间"
+
+msgid "Reason For Editing The Timer"
+msgstr "原因用于编辑计时器"
+
+msgid "Reason For Editing"
+msgstr "原因用于编辑"
+
+msgid "Resolve Conflict"
+msgstr "解决冲突"
+
+msgid "Add New Credential"
+msgstr "添加新凭据"
+
+msgid "Post New Internal Note"
+msgstr "发布新 内部备注"
+
+msgid "play"
+msgstr "播放"
+
+msgid "pause"
+msgstr "暂停"
+
+msgid "stop"
+msgstr "停止"
+
+msgid "Close On Reply"
+msgstr "关闭在 回复"
+
+msgid "Change"
+msgstr "更改"
+
+msgid "Transfer"
+msgstr "转移"
+
+msgid "Reason For"
+msgstr "原因用于"
+
+msgid "Assign To Agent"
+msgstr "分配给客服人员"
+
+msgid "Assign"
+msgstr "分配"
+
+msgid "View all"
+msgstr "查看全部"
+
+msgid "tickets by"
+msgstr "工单由"
+
+msgid "Show History"
+msgstr "显示历史记录"
+
+msgid "Print Ticket"
+msgstr "打印工单"
+
+msgid "Mark In Progress"
+msgstr "标记在 进度"
+
+msgid "Change Ticket Priority"
+msgstr "更改工单优先级"
+
+msgid "Ticket Thread"
+msgstr "工单线程"
+
+msgid "Reply with Co-Pilot"
+msgstr "使用 Co-Pilot 回复"
+
+msgid "Ask for Info"
+msgstr "请求用于信息"
+
+msgid "Summarize"
+msgstr "总结"
+
+msgid "Extract Details"
+msgstr "提取详情"
+
+msgid "Translate to"
+msgstr "翻译为"
+
+msgid "View Image"
+msgstr "查看图片"
+
+msgid "Viewed By"
+msgstr "查看者"
+
+msgid "View"
+msgstr "查看"
+
+msgid "AI-Powered Reply Mode"
+msgstr "AI-驱动回复模式"
+
+msgid "Control how this individual reply influences the AI search and response generation process for future queries."
+msgstr "控制此单条回复如何影响未来查询中的 AI 搜索和回复生成流程。"
+
+msgid "Default: reply included in all AI search queries."
+msgstr "默认：回复包含在所有 AI 搜索查询中。"
+
+msgid "Enable: reply used in AI queries only when the Enable Tickets filter is active."
+msgstr "启用：仅当“启用工单”筛选器处于活动状态时，回复才用于 AI 查询。"
+
+msgid "Enable"
+msgstr "启用"
+
+msgid "Disable: reply excluded from AI queries."
+msgstr "禁用：回复从 AI 查询中排除。"
+
+msgid "Disable"
+msgstr "禁用"
+
+msgid "Post Reply"
+msgstr "发布回复"
+
+msgid "Zywrap Co-Pilot"
+msgstr "Zywrap Co-Pilot"
+
+msgid "Call AI by Code. Zero Prompt Engineering."
+msgstr "通过代码调用 AI，无需提示词工程。"
+
+msgid "Open AI Copilot"
+msgstr "打开 AI Copilot"
+
+msgid "AI Icon"
+msgstr "AI 图标"
+
+msgid "Get context-based suggestions to effortlessly create clear and relevant replies."
+msgstr "获取基于上下文建议到 轻松地创建清晰和 相关回复."
+
+msgid "Suggested Response"
+msgstr "建议回复"
+
+msgid "Matching Tickets"
+msgstr "匹配工单"
+
+msgid "Filter"
+msgstr "筛选器"
+
+msgid "Enable Tickets"
+msgstr "启用工单"
+
+msgid "All Replies"
+msgstr "全部回复"
+
+msgid "Enable Replies"
+msgstr "启用回复"
+
+msgid "OK"
+msgstr "确定"
+
+msgid "Own Signature"
+msgstr "自己的签名"
+
+msgid "Add Signature"
+msgstr "添加签名"
+
+msgid "No Last Reply"
+msgstr "无最后回复"
+
+msgid "Closed By"
+msgstr "已关闭由"
+
+msgid "Closed On"
+msgstr "已关闭在"
+
+msgid "Copied"
+msgstr "已复制"
+
+msgid "Lock"
+msgstr "锁定"
+
+msgid "Control how this ticket and its replies influence AI search and response generation for future queries."
+msgstr "控制此工单及其回复如何影响未来查询中的 AI 搜索和回复生成。"
+
+msgid "Default: ticket and replies included in all AI queries."
+msgstr "默认：工单和回复包含在所有 AI 查询中。"
+
+msgid "Enable: ticket and replies used only when the “Enable Tickets” filter is active."
+msgstr "启用：仅当“启用工单”筛选器处于活动状态时，工单和回复才会使用。"
+
+msgid "Disable: ticket and replies excluded from AI queries."
+msgstr "禁用：工单和回复从 AI 查询中排除。"
+
+msgid "set"
+msgstr "设置"
+
+msgid "Ticket Assign and Transfer"
+msgstr "工单分配和 转移"
+
+msgid "Ticket assigned to"
+msgstr "工单已分配到"
+
+msgid "Total Time Taken"
+msgstr "总计时间花费"
+
+msgid "Other Tickets"
+msgstr "其他工单"
+
+msgid "View Ticket"
+msgstr "查看工单"
+
+msgid "Woocommerce Order"
+msgstr "Woocommerce 订单"
+
+msgid "Envato License"
+msgstr "Envato 许可证"
+
+msgid "Item"
+msgstr "项目"
+
+msgid "Buyer"
+msgstr "买家"
+
+msgid "License Type"
+msgstr "许可证类型"
+
+msgid "License"
+msgstr "许可证"
+
+msgid "Purchase Date"
+msgstr "购买日期"
+
+msgid "Supported Until"
+msgstr "支持有效期至"
+
+msgid "Paid Support Details"
+msgstr "付费支持详情"
+
+msgid "Subscription"
+msgstr "订阅"
+
+msgid "Subscribed On"
+msgstr "订阅日期"
+
+msgid "Support Expiry"
+msgstr "支持到期"
+
+msgid "No expiration"
+msgstr "无到期日期"
+
+msgid "Non-premium support"
+msgstr "非高级支持"
+
+msgid "Check this box if this ticket should NOT apply against the paid support"
+msgstr "如果此工单不应计入付费支持，请勾选此框"
+
+msgid "Remaining"
+msgstr "剩余"
+
+msgid "Link ticket to paid support"
+msgstr "链接工单到 付费支持"
+
+msgid "Ticket Creator"
+msgstr "工单创建者"
+
+msgid "From Date"
+msgstr "来自日期"
+
+msgid "To Date"
+msgstr "到日期"
+
+msgid "This ticket is marked as overdue"
+msgstr "此工单已标记为逾期"
+
+msgid "Enforce delete"
+msgstr "强制删除"
+
+msgid "Are you sure to enforce delete"
+msgstr "确定要强制删除吗"
+
+msgid "Message Logs"
+msgstr "消息日志"
+
+msgid "Edit Timer"
+msgstr "编辑计时器"
+
+msgid "Type Note for"
+msgstr "类型备注用于"
+
+msgid "Assigning Note"
+msgstr "分配备注"
+
+msgid "Time Track"
+msgstr "时间跟踪"
+
+msgid "Type Internal Note"
+msgstr "类型内部备注"
+
+msgid "tickets"
+msgstr "工单"
+
+msgid "Reopen"
+msgstr "重新打开"
+
+msgid "History"
+msgstr "历史记录"
+
+msgid "Print"
+msgstr "打印"
+
+msgid "Are you sure to close this ticket"
+msgstr "确定要关闭此工单吗"
+
+msgid "Unlock"
+msgstr "解锁"
+
+msgid "Reply A Message"
+msgstr "回复消息"
+
+msgid "Get context-aware suggestions for your response."
+msgstr "获取与上下文相关的回复建议。"
+
+msgid "Assign Ticket"
+msgstr "分配工单"
+
+msgid ": "
+msgstr ":"
+
+msgid "Assigned To Agent"
+msgstr "已分配到 客服人员"
+
+msgid "agent photo"
+msgstr "客服人员照片"
+
+msgid "View All Orders"
+msgstr "查看所有订单"
+
+msgid "Token"
+msgstr "令牌"
+
+msgid "Check Status"
+msgstr "检查状态"
+
+msgid "Remember Your Ticket Token for Tracking (Save It!)"
+msgstr "请记住您的工单跟踪令牌（请保存！）"
+
+msgid "You've received a token number to track your support ticket status. This is one-time code, so please save it carefully. "
+msgstr "您已收到用于跟踪支持工单状态的令牌编号。这是一次性代码，请妥善保存。"
+
+msgid "Copy Token"
+msgstr "复制令牌"
+
+msgid "Security check Failed"
+msgstr "安全检查失败"
+
+msgid "Security Error: Unauthorized access. Administrators only."
+msgstr "安全错误：未授权访问。仅限管理员。"
+
+msgid "API Key cannot be empty"
+msgstr "API 密钥不能为空"
+
+msgid "API Key saved successfully."
+msgstr "API 密钥已成功保存。"
+
+msgid "Preferences saved successfully."
+msgstr "偏好设置已成功保存。"
+
+msgid "Please save your API key first."
+msgstr "请先保存您的 API 密钥。"
+
+msgid "Sync failed"
+msgstr "同步失败"
+
+msgid "API Error: Invalid response code "
+msgstr "API 错误: 无效回复代码"
+
+msgid "Failed to parse Sync JSON data."
+msgstr "解析同步 JSON 数据失败。"
+
+msgid "Download failed: "
+msgstr "下载失败:"
+
+msgid "Download rejected. HTTP Code:"
+msgstr "下载被拒绝。HTTP 代码："
+
+msgid "Unzip failed:"
+msgstr "解压失败："
+
+msgid "zywrap-data.json not found in bundle."
+msgstr "在捆绑包中未找到 zywrap-data.json。"
+
+msgid "Failed to parse bundle JSON data."
+msgstr "解析捆绑包 JSON 数据失败。"
+
+msgid "Unknown Sync Mode."
+msgstr "未知同步模式."
+
+msgid "AI Data Synced Successfully!"
+msgstr "AI 数据已成功同步！"
+
+msgid "Mode"
+msgstr "模式"
+
+msgid "API Key is missing."
+msgstr "API 密钥是 缺失."
+
+msgid "Please select an AI action."
+msgstr "请选择 AI 操作。"
+
+msgid "Connection Error: "
+msgstr "连接错误："
+
+msgid "Unknown API Error"
+msgstr "未知 API 错误"
+
+msgid "Parse Error:"
+msgstr "解析错误："
+
+msgid "Global AI Settings saved successfully."
+msgstr "全局 AI 设置已成功保存。"
+
+msgid "Log deleted successfully."
+msgstr "日志已删除成功."
+
+msgid "Failed to delete log."
+msgstr "失败到 删除日志."
+
+msgid "API Key is not configured."
+msgstr "未配置 API 密钥。"
+
+msgid "Server Connection Error: "
+msgstr "服务器连接错误："
+
+msgid "API Error (HTTP "
+msgstr "API 错误 (HTTP"
+
+msgid "Support Intent"
+msgstr "支持意图"
+
+msgid "Ask Info"
+msgstr "请求信息"
+
+msgid "Escalate"
+msgstr "升级处理"
+
+msgid "Library"
+msgstr "知识库"
+
+msgid "Ticket Thread Reply Composer"
+msgstr "工单会话回复编辑器"
+
+msgid "Reads the thread and drafts the best response."
+msgstr "读取会话并草拟最佳回复。"
+
+msgid "Search full library..."
+msgstr "搜索完整知识库..."
+
+msgid "Model: Default (Auto)"
+msgstr "模型: 默认 (自动)"
+
+msgid "Tone: Default"
+msgstr "语气：默认"
+
+msgid "Tone"
+msgstr "语气"
+
+msgid "Select a Support Intent from the left menu to load variables."
+msgstr "从左侧菜单选择支持意图以加载变量。"
+
+msgid "Key Points to Include"
+msgstr "要包含的关键点"
+
+msgid "(Optional)"
+msgstr "(可选)"
+
+msgid "Add any specific facts, business decisions, or links the AI should mention."
+msgstr "添加 AI 应提及的具体事实、业务决策或链接。"
+
+msgid "e.g., Approve the refund, offer a 20% discount, or let them know this will be fixed in v4.0..."
+msgstr "例如：批准退款、提供 20% 折扣，或告知他们此问题将在 v4.0 中修复..."
+
+msgid "AI Generated Draft"
+msgstr "AI 生成的草稿"
+
+msgid "AI generated response will appear here..."
+msgstr "AI 生成的回复将显示在这里..."
+
+msgid "Generate Draft"
+msgstr "生成草稿"
+
+msgid "Insert into Editor"
+msgstr "插入到编辑器"
+
+msgid "No specific entities found."
+msgstr "未找到特定实体。"
+
+msgid "Zywrap AI Co-Pilot is not configured! Please navigate to Zywrap AI Settings to connect your API key and unlock AI Auto-Replies."
+msgstr "Zywrap AI Co-Pilot 未配置！请前往 Zywrap AI 设置连接您的 API 密钥，并解锁 AI 自动回复。"
+
+msgid "Loading context securely from database..."
+msgstr "正在从数据库安全加载上下文..."
+
+msgid "No wrapper variations found. Please sync data."
+msgstr "未找到包装器变体。请同步数据。"
+
+msgid "No extra context variables required. Ready to generate."
+msgstr "无需额外上下文变量。已准备生成。"
+
+msgid "Drafting response..."
+msgstr "正在草拟回复..."
+
+msgid "System Error parsing response. Check console."
+msgstr "解析回复时发生系统错误。请检查控制台。"
+
+msgid "Unlock AI Features"
+msgstr "解锁 AI 功能"
+
+msgid "Connect your Zywrap API key in settings to unlock 1-click summaries, translations, and data extraction."
+msgstr "在设置中连接您的 Zywrap API 密钥，以解锁一键摘要、翻译和数据提取。"
+
+msgid "Configure Zywrap AI &rarr;"
+msgstr "配置 Zywrap AI &rarr;"
+
+msgid "AI is executing:"
+msgstr "AI 是执行中:"
+
+msgid "AI Insight:"
+msgstr "AI 洞察："
+
+msgid "Zywrap AI Dashboard"
+msgstr "Zywrap AI Dashboard"
+
+msgid "Zero Prompt Engineering"
+msgstr "零提示词工程"
+
+msgid "The Ultimate AI Copilot"
+msgstr "终极 AI Copilot"
+
+msgid "for JS Help Desk."
+msgstr "用于 JS Help Desk."
+
+msgid "Equip your agents with top-tier AI models natively inside the ticket editor. Automate translations, summarize threads, and draft perfect replies in seconds."
+msgstr "在工单编辑器中为客服人员原生配备顶级 AI 模型。自动翻译、总结会话，并在数秒内草拟高质量回复。"
+
+msgid "Claim 10,000 Free Credits →"
+msgstr "领取 10,000 个免费额度 →"
+
+msgid "Connect API Key"
+msgstr "连接 API 密钥"
+
+msgid "System Active"
+msgstr "系统启用"
+
+msgid "API Connected"
+msgstr "API 已连接"
+
+msgid "Disconnected"
+msgstr "未连接"
+
+msgid "Setup Required"
+msgstr "设置必填"
+
+msgid "Total API Requests"
+msgstr "API 请求总数"
+
+msgid "Tokens Processed"
+msgstr "已处理令牌"
+
+msgid "Recent AI Activity"
+msgstr "最近 AI 活动"
+
+msgid "View All Logs"
+msgstr "查看所有日志"
+
+msgid "Wrapper Called"
+msgstr "已调用包装器"
+
+msgid "AI Model"
+msgstr "AI 模型"
+
+msgid "Tokens"
+msgstr "令牌"
+
+msgid "Latency"
+msgstr "延迟"
+
+msgid "No activity logged yet. Start replying to tickets!"
+msgstr "尚无活动记录。开始回复工单吧！"
+
+msgid "Auto Select"
+msgstr "自动选择"
+
+msgid "Success"
+msgstr "成功"
+
+msgid "Navigation"
+msgstr "导航"
+
+msgid "Global Settings"
+msgstr "全局设置"
+
+msgid "Documentation"
+msgstr "文档"
+
+msgid "Database Sync"
+msgstr "数据库同步"
+
+msgid "Last Synced"
+msgstr "上次同步"
+
+msgid "Never"
+msgstr "从未"
+
+msgid "Run Delta Sync"
+msgstr "运行增量同步"
+
+msgid "Zywrap Errors"
+msgstr "Zywrap 错误"
+
+msgid "Zywrap API Errors"
+msgstr "Zywrap API 错误"
+
+msgid "Action / Wrapper"
+msgstr "操作 / 包装器"
+
+msgid "Error Message"
+msgstr "错误消息"
+
+msgid "Agent / UID"
+msgstr "客服人员 / UID"
+
+msgid "Delete Log"
+msgstr "删除日志"
+
+msgid "No API errors logged! System is running perfectly."
+msgstr "未记录 API 错误！系统运行正常。"
+
+msgid "Zywrap API Logs"
+msgstr "Zywrap API 日志"
+
+msgid "Zywrap API Audit Logs"
+msgstr "Zywrap API 审计日志"
+
+msgid "Search Trace ID"
+msgstr "搜索跟踪 ID"
+
+msgid "Trace ID"
+msgstr "跟踪 ID"
+
+msgid "Model"
+msgstr "模型"
+
+msgid "Auto-Select"
+msgstr "自动选择"
+
+msgid "Zywrap Advanced Playground"
+msgstr "Zywrap 高级测试台"
+
+msgid "1. Category"
+msgstr "1. 分类"
+
+msgid "Loading..."
+msgstr "正在加载..."
+
+msgid "2. AI Solution"
+msgstr "2. AI 解决方案"
+
+msgid "Select Category First"
+msgstr "请先选择分类"
+
+msgid "3. Configuration Style"
+msgstr "3. 配置样式"
+
+msgid "Select Solution First"
+msgstr "请先选择解决方案"
+
+msgid "4. AI Model"
+msgstr "4. AI 模型"
+
+msgid "5. Target Language"
+msgstr "5. 目标语言"
+
+msgid "Advanced Overrides"
+msgstr "高级覆盖"
+
+msgid "Style"
+msgstr "样式"
+
+msgid "Formatting"
+msgstr "格式"
+
+msgid "Complexity"
+msgstr "复杂度"
+
+msgid "Length"
+msgstr "长度"
+
+msgid "Audience"
+msgstr "受众"
+
+msgid "Goal"
+msgstr "目标"
+
+msgid "Output Type"
+msgstr "输出类型"
+
+msgid "Prompt / Additional Context"
+msgstr "提示词 / 其他上下文"
+
+msgid "Type your request or additional instructions here..."
+msgstr "在此输入您的请求或其他说明..."
+
+msgid "Generate Response"
+msgstr "生成回复"
+
+msgid "AI Response"
+msgstr "AI 回复"
+
+msgid "Output will appear here..."
+msgstr "输出将显示在这里..."
+
+msgid "Default Model (Auto)"
+msgstr "默认模型 (自动)"
+
+msgid "English (Default)"
+msgstr "英语（默认）"
+
+msgid "Select a Solution"
+msgstr "选择解决方案"
+
+msgid "Select a Style"
+msgstr "选择样式"
+
+msgid "Base Template"
+msgstr "基础模板"
+
+msgid "Variation"
+msgstr "变体"
+
+msgid "Additional Free-form Instructions"
+msgstr "其他自由格式说明"
+
+msgid "Core Inputs"
+msgstr "核心输入"
+
+msgid "Additional Context"
+msgstr "其他上下文"
+
+msgid "Please select a wrapper."
+msgstr "请选择包装器。"
+
+msgid "Executing..."
+msgstr "执行中..."
+
+msgid "Generating..."
+msgstr "正在生成..."
+
+msgid "Error:"
+msgstr "错误:"
+
+msgid "System Error. Check Console."
+msgstr "系统错误。请检查控制台。"
+
+msgid "Zywrap AI Settings"
+msgstr "Zywrap AI 设置"
+
+msgid "Config"
+msgstr "配置"
+
+msgid "How to get your key"
+msgstr "如何获取您的密钥"
+
+msgid "Create a free account at"
+msgstr "创建免费账户："
+
+msgid "Receive 10,000 Free Credits instantly."
+msgstr "立即获得 10,000 免费额度。"
+
+msgid "Navigate to API Keys in your dashboard to generate a secret key."
+msgstr "前往仪表盘中的 API Keys 生成密钥。"
+
+msgid "API Authentication"
+msgstr "API 身份验证"
+
+msgid "Save Key"
+msgstr "保存密钥"
+
+msgid "Database Synchronization"
+msgstr "数据库同步"
+
+msgid "To use the Co-Pilot, you must sync your local database with the Zywrap Cloud. This downloads the latest Prompts and Scenarios."
+msgstr "要使用 Co-Pilot，您必须将本地数据库与 Zywrap Cloud 同步。这会下载最新的提示词和场景。"
+
+msgid "Important:"
+msgstr "重要："
+
+msgid "The initial sync may take 3 to 5 minutes. Please do not close or refresh this page."
+msgstr "初始同步可能需要 3 到 5 分钟。请不要关闭或刷新此页面。"
+
+msgid "Download & Sync Data"
+msgstr "下载并同步数据"
+
+msgid "Initializing sync..."
+msgstr "正在初始化同步..."
+
+msgid "Save API Key to enable sync."
+msgstr "保存 API 密钥以启用同步。"
+
+msgid "Global Preferences"
+msgstr "全局偏好设置"
+
+msgid "Default AI Model"
+msgstr "默认 AI 模型"
+
+msgid "Platform Auto-Select"
+msgstr "平台自动选择"
+
+msgid "Used automatically unless overridden."
+msgstr "除非覆盖，否则自动使用。"
+
+msgid "Translation Language"
+msgstr "翻译语言"
+
+msgid "English"
+msgstr "英语"
+
+msgid "1-click ticket translation target."
+msgstr "一键工单翻译目标语言。"
+
+msgid "Save Preferences"
+msgstr "保存偏好设置"
+
+msgid "Missing"
+msgstr "缺失"
+
+msgid "API Status"
+msgstr "API 状态"
+
+msgid "Wrappers Synced"
+msgstr "已同步的包装器"
+
+msgid "Saving..."
+msgstr "正在保存..."
+
+msgid "Syncing Engine..."
+msgstr "正在同步引擎..."
+
+msgid "Connecting to Zywrap Cloud..."
+msgstr "正在连接到 Zywrap Cloud..."
+
+msgid "Extracting schemas..."
+msgstr "正在提取架构..."
+
+msgid "Optimizing database..."
+msgstr "正在优化数据库..."
+
+msgid "Sync Complete!"
+msgstr "同步完成！"
+
+msgid "Synced"
+msgstr "已同步"
+
+msgid "Sync Failed"
+msgstr "同步失败"
+
+msgid "Try Again"
+msgstr "重试"
+
+msgid "A system error occurred."
+msgstr "发生系统错误。"
+
+msgid "Server timeout."
+msgstr "服务器超时。"
+
+msgid "slug for ticket page"
+msgstr "工单页面 slug"
+
+msgid "slug for agent add ticket page"
+msgstr "客服人员添加工单页面 slug"
+
+msgid "slug for rolepermission page"
+msgstr "角色权限页面 slug"
+
+msgid "slug for add announcement"
+msgstr "添加公告页面 slug"
+
+msgid "slug for add department page"
+msgstr "添加部门页面 slug"
+
+msgid "slug for add download page"
+msgstr "添加下载页面 slug"
+
+msgid "slug for faq page"
+msgstr "FAQ 页面 slug"
+
+msgid "slug for add article page"
+msgstr "添加文章页面 slug"
+
+msgid "slug for add category page"
+msgstr "添加分类页面 slug"
+
+msgid "slug for user knowledgebase articles page"
+msgstr "用户知识库文章页面 slug"
+
+msgid "slug for article detail page"
+msgstr "文章详情页面 slug"
+
+msgid "slug for add role page"
+msgstr "添加角色页面 slug"
+
+msgid "slug for add agent page"
+msgstr "添加客服人员页面 slug"
+
+msgid "slug for agent permissions page"
+msgstr "客服人员权限页面 slug"
+
+msgid "slug for my tickets page"
+msgstr "我的工单页面 slug"
+
+msgid "slug for agent my tickets page"
+msgstr "客服人员“我的工单”页面 slug"
+
+msgid "slug for knowledgebase page"
+msgstr "知识库页面 slug"
+
+msgid "slug for agent categories page"
+msgstr "客服人员分类页面 slug"
+
+msgid "slug for agent kb articles page"
+msgstr "客服人员知识库文章页面 slug"
+
+msgid "slug for agent announcements page"
+msgstr "客服人员公告页面 slug"
+
+msgid "slug for agent downloads page"
+msgstr "客服人员下载页面 slug"
+
+msgid "slug for agent faqs page"
+msgstr "客服人员 FAQ 页面 slug"
+
+msgid "slug for add ticket page"
+msgstr "添加工单页面 slug"
+
+msgid "slug for ticket status page"
+msgstr "工单状态页面 slug"
+
+msgid "slug for controlpanel"
+msgstr "控制面板 slug"
+
+msgid "slug for agent report detail page"
+msgstr "客服人员报告详情页面 slug"
+
+msgid "slug for agent reports page"
+msgstr "客服人员报告页面 slug"
+
+msgid "slug for department reports page"
+msgstr "部门报告页面 slug"
+
+msgid "slug for announcement detail page"
+msgstr "公告详情页面 slug"
+
+msgid "slug for feedback page"
+msgstr "反馈页面 slug"
+
+msgid "slug for agent feedbacks page"
+msgstr "客服人员反馈页面 slug"
+
+msgid "slug for visitor message page"
+msgstr "访客消息页面 slug"
+
+msgid "slug for add help topic page"
+msgstr "添加帮助主题页面 slug"
+
+msgid "slug for agent help topics page"
+msgstr "客服人员帮助主题页面 slug"
+
+msgid "slug for add canned response page"
+msgstr "添加预设回复页面 slug"
+
+msgid "slug for agent canned responses page"
+msgstr "客服人员预设回复页面 slug"
+
+msgid "slug for gdpr data compliance actions page"
+msgstr "GDPR 数据合规操作页面 slug"
+
+msgid "slug for print ticket page"
+msgstr "打印工单页面 slug"
+
+msgid "slug for my profile page"
+msgstr "我的个人资料页面 slug"
+
+msgid "slug for login page"
+msgstr "登录页面 slug"
+
+msgid "slug for user register page"
+msgstr "用户注册页面 slug"
+
+msgid "slug for add message page"
+msgstr "添加消息页面 slug"
+
+msgid "slug for message detail page"
+msgstr "消息详情页面 slug"
+
+msgid "slug for message inbox page"
+msgstr "消息收件箱页面 slug"
+
+msgid "slug for message outbox page"
+msgstr "消息发件箱页面 slug"
+
+msgid "slug for roles page"
+msgstr "角色页面 slug"
+
+msgid "slug for agent page"
+msgstr "客服人员页面 slug"
+
+msgid "slug for departments page"
+msgstr "部门页面 slug"
+
+msgid "slug for announcements page"
+msgstr "公告页面 slug"
+
+msgid "slug for downloads page"
+msgstr "下载页面 slug"
+
+msgid "slug for faqs page"
+msgstr "FAQ 页面 slug"
+
+msgid "slug for export page"
+msgstr "导出页面 slug"
+
+msgid "Close Due To Merge"
+msgstr "因合并而关闭"
+
+msgid "Issue Summary"
+msgstr "问题摘要"
+
+msgid "Internal Note Title"
+msgstr "内部备注标题"
+
+msgid "Remarks"
+msgstr "备注"
+
+msgid "WC Product"
+msgstr "WC 产品"
+
+msgid "EDD Order ID"
+msgstr "EDD 订单 ID"
+
+msgid "EDD Product"
+msgstr "EDD 产品"
+
+msgid "License Key"
+msgstr "许可证密钥"
+
+msgid "Envato Purchase Code"
+msgstr "Envato 购买代码"
+
+msgid "Terms And Conditions 1"
+msgstr "条款与条件 1"
+
+msgid "Terms And Conditions 2"
+msgstr "条款与条件 2"
+
+msgid "Terms And Conditions 3"
+msgstr "条款与条件 3"
+
+msgid "Submit Type"
+msgstr "提交类型"
+
+msgid "Admin New Ticket Received"
+msgstr "管理员：收到新工单"
+
+msgid "Staff New Ticket Received"
+msgstr "员工：收到新工单"
+
+msgid "New Department Received"
+msgstr "收到新部门"
+
+msgid "New Group Received"
+msgstr "收到新组"
+
+msgid "New Agent Received"
+msgstr "收到新代理"
+
+msgid "New Help Topic Received"
+msgstr "收到新帮助主题"
+
+msgid "Admin Reassign Ticket"
+msgstr "管理员：重新分配工单"
+
+msgid "Staff Reassign Ticket"
+msgstr "员工：重新分配工单"
+
+msgid "Admin Close Ticket"
+msgstr "管理员：关闭工单"
+
+msgid "Staff Close Ticket"
+msgstr "员工：关闭工单"
+
+msgid "Admin Delete Ticket"
+msgstr "管理员：删除工单"
+
+msgid "Staff Delete Ticket"
+msgstr "员工：删除工单"
+
+msgid "Admin Overdue Ticket"
+msgstr "管理员：逾期工单"
+
+msgid "Staff Overdue Ticket"
+msgstr "员工：逾期工单"
+
+msgid "Admin Email Banned"
+msgstr "管理员：邮箱已封禁"
+
+msgid "Staff Email Banned"
+msgstr "员工：邮箱已封禁"
+
+msgid "Admin Ticket Transferred To Department"
+msgstr "管理员：工单已转移至部门"
+
+msgid "Staff Ticket Transferred To Department"
+msgstr "员工：工单已转移至部门"
+
+msgid "Admin Email Banned And Ticket Closed"
+msgstr "管理员：邮箱已封禁且工单已关闭"
+
+msgid "Staff Email Banned And Ticket Closed"
+msgstr "员工：邮箱已封禁且工单已关闭"
+
+msgid "Admin Email Unbanned"
+msgstr "管理员：邮箱已解封"
+
+msgid "Staff Email Unbanned"
+msgstr "员工：邮箱已解封"
+
+msgid "Admin Ticket Reply"
+msgstr "管理员：工单回复"
+
+msgid "Staff Ticket Reply"
+msgstr "员工：工单回复"
+
+msgid "Ticket Received"
+msgstr "工单已收到"
+
+msgid "Banemail Try New Ticket"
+msgstr "被封禁邮箱尝试创建新工单"
+
+msgid "Admin Ticket Has Been Locked"
+msgstr "管理员：工单已被锁定"
+
+msgid "Staff Ticket Has Been Locked"
+msgstr "员工：工单已被锁定"
+
+msgid "Admin Ticket Has Been Unlocked"
+msgstr "管理员：工单已解锁"
+
+msgid "Staff Ticket Has Been Unlocked"
+msgstr "员工：工单已解锁"
+
+msgid "Admin In Progress Ticket"
+msgstr "管理员：处理中的工单"
+
+msgid "Staff In Progress Ticket"
+msgstr "员工：处理中的工单"
+
+msgid "Admin Ticket Priority Changed"
+msgstr "管理员：工单优先级已更改"
+
+msgid "Staff Ticket Priority Changed"
+msgstr "员工：工单优先级已更改"
+
+msgid "New Mail Has Been Sent"
+msgstr "新邮件已发送"
+
+msgid "New Reply Has Been Sent"
+msgstr "新回复已发送"
+
+msgid "Delete User Data"
+msgstr "删除用户数据"

@@ -151,7 +151,7 @@ foreach ($jsst_allPlugins as $jsst_key => $jsst_value) {
                                                 <?php
                                             }
                                         }else{
-                                            $jsst_error_message = esc_html(__('Something went wrong','js-support-ticket')).'!';
+                                            $jsst_error_message = esc_html(__('Something went wrong. Please try again.','js-support-ticket'));
                                             $jsst_url = admin_url("admin.php?page=premiumplugin&jstlay=step1");
 
                                             echo '<div class="jsst-addon-go-back-messsage-wrap">';

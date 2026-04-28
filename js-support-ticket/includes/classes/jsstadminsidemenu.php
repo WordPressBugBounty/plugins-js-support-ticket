@@ -153,16 +153,16 @@ $jsst_jssupportticket_js = '
     </li>
     <?php if(in_array('feedback', jssupportticket::$_active_addons)){ ?>
         <li class="treeview <?php if($jsst_c == 'feedback'  || ($jsst_c == 'fieldordering' && $jsst_ff == 2) ) echo 'active'; ?>">
-            <a class="" href="#" title="<?php echo esc_attr(__('Feedbacks','js-support-ticket')); ?>">
+            <a class="" href="#" title="<?php echo esc_attr(__('Feedback','js-support-ticket')); ?>">
                 <svg xmlns="http://www.w3.org/2000/svg" class="jsst_menu-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                      <path stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M17 16h.01" />
                 </svg>
-                <span class="jsst_text"><?php echo esc_html(__('Feedbacks', 'js-support-ticket')); ?></span>
+                <span class="jsst_text"><?php echo esc_html(__('Feedback', 'js-support-ticket')); ?></span>
             </a>
             <ul class="jsstadmin-sidebar-submenu treeview-menu">
                 <li class="<?php if($jsst_c == 'feedback' && ($jsst_layout == 'feedbacks')) echo 'active'; ?>">
-                    <a href="?page=feedback&jstlay=feedbacks" title="<?php echo esc_attr(__('Feedbacks','js-support-ticket')); ?>">
-                        <?php echo esc_html(__('Feedbacks','js-support-ticket')); ?>
+                    <a href="?page=feedback&jstlay=feedbacks" title="<?php echo esc_attr(__('Feedback','js-support-ticket')); ?>">
+                        <?php echo esc_html(__('Feedback','js-support-ticket')); ?>
                     </a>
                 </li>
                 <li class="<?php if($jsst_c == 'fieldordering') echo 'active'; ?>">
@@ -174,9 +174,9 @@ $jsst_jssupportticket_js = '
         </li>
     <?php } else { ?>
         <li class="disabled-menu treeview menu-item-feedbacks">
-            <a href="javascript:void(0);" title="<?php echo esc_attr__('Feedbacks', 'js-support-ticket'); ?>"><svg class="jsst_menu-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M17 16h.01" /></svg><span class="jsst_text"><?php echo esc_html__('Feedbacks', 'js-support-ticket'); ?></span></a>
+            <a href="javascript:void(0);" title="<?php echo esc_attr__('Feedback', 'js-support-ticket'); ?>"><svg class="jsst_menu-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M17 16h.01" /></svg><span class="jsst_text"><?php echo esc_html__('Feedback', 'js-support-ticket'); ?></span></a>
             <ul class="jsstadmin-sidebar-submenu treeview-menu">
-                <li class="<?php if ($jsst_c == 'feedback' && ($jsst_layout == 'feedbacks')) echo 'active'; ?>"><a href="<?php echo esc_url(admin_url('?page=feedback&jstlay=feedbacks')); ?>" title="<?php echo esc_attr__('Feedbacks', 'js-support-ticket'); ?>"><?php echo esc_html__('Feedbacks', 'js-support-ticket'); ?></a></li>
+                <li class="<?php if ($jsst_c == 'feedback' && ($jsst_layout == 'feedbacks')) echo 'active'; ?>"><a href="<?php echo esc_url(admin_url('?page=feedback&jstlay=feedbacks')); ?>" title="<?php echo esc_attr__('Feedback', 'js-support-ticket'); ?>"><?php echo esc_html__('Feedback', 'js-support-ticket'); ?></a></li>
             </ul>
         </li>
     <?php } ?>
@@ -353,7 +353,7 @@ $jsst_jssupportticket_js = '
         </li>
     <?php } else { ?>
         <li class="disabled-menu treeview menu-item-helptopic">
-            <a href="javascript:void(0);" title="<?php echo esc_attr__('Helptopic', 'js-support-ticket'); ?>">
+            <a href="javascript:void(0);" title="<?php echo esc_attr__('Help Topic', 'js-support-ticket'); ?>">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" 
                     viewBox="0 0 26 24" stroke="currentColor" stroke-width="2"  class="jsst_menu-icon" width="22" height="22">
                     <path stroke-linecap="round" stroke-linejoin="round" 
@@ -442,9 +442,9 @@ $jsst_jssupportticket_js = '
             <li class="<?php if($jsst_c == 'emailtemplate' && $jsst_for == 'dl-tk') echo 'active'; ?>"><a href="<?php echo esc_url(admin_url('admin.php?page=emailtemplate&for=dl-tk')); ?>" title="<?php echo esc_attr__('Delete Ticket', 'js-support-ticket'); ?>"><?php echo esc_html__('Delete Ticket', 'js-support-ticket'); ?></a></li>
             <li class="<?php if($jsst_c == 'emailtemplate' && $jsst_for == 'mo-tk') echo 'active'; ?>"><a href="<?php echo esc_url(admin_url('admin.php?page=emailtemplate&for=mo-tk')); ?>" title="<?php echo esc_attr__('Mark Overdue', 'js-support-ticket'); ?>"><?php echo esc_html__('Mark Overdue', 'js-support-ticket'); ?></a></li>
             <li class="<?php if($jsst_c == 'emailtemplate' && $jsst_for == 'be-tk') echo 'active'; ?>"><a href="<?php echo esc_url(admin_url('admin.php?page=emailtemplate&for=be-tk')); ?>" title="<?php echo esc_attr__('Ban Email', 'js-support-ticket'); ?>"><?php echo esc_html__('Ban Email', 'js-support-ticket'); ?></a></li>
-            <li class="<?php if($jsst_c == 'emailtemplate' && $jsst_for == 'be-trtk') echo 'active'; ?>"><a href="<?php echo esc_url(admin_url('admin.php?page=emailtemplate&for=be-trtk')); ?>" title="<?php echo esc_attr__('Ban email try to create ticket', 'js-support-ticket'); ?>"><?php echo esc_html__('Ban email try to create ticket', 'js-support-ticket'); ?></a></li>
+            <li class="<?php if($jsst_c == 'emailtemplate' && $jsst_for == 'be-trtk') echo 'active'; ?>"><a href="<?php echo esc_url(admin_url('admin.php?page=emailtemplate&for=be-trtk')); ?>" title="<?php echo esc_attr__('Ban Email Try To Create Ticket', 'js-support-ticket'); ?>"><?php echo esc_html__('Ban Email Try To Create Ticket', 'js-support-ticket'); ?></a></li>
             <li class="<?php if($jsst_c == 'emailtemplate' && $jsst_for == 'dt-tk') echo 'active'; ?>"><a href="<?php echo esc_url(admin_url('admin.php?page=emailtemplate&for=dt-tk')); ?>" title="<?php echo esc_attr__('Department Transfer', 'js-support-ticket'); ?>"><?php echo esc_html__('Department Transfer', 'js-support-ticket'); ?></a></li>
-            <li class="<?php if($jsst_c == 'emailtemplate' && $jsst_for == 'ebct-tk') echo 'active'; ?>"><a href="<?php echo esc_url(admin_url('admin.php?page=emailtemplate&for=ebct-tk')); ?>" title="<?php echo esc_attr__('Ban Email and Close Ticket', 'js-support-ticket'); ?>"><?php echo esc_html__('Ban Email and Close Ticket', 'js-support-ticket'); ?></a></li>
+            <li class="<?php if($jsst_c == 'emailtemplate' && $jsst_for == 'ebct-tk') echo 'active'; ?>"><a href="<?php echo esc_url(admin_url('admin.php?page=emailtemplate&for=ebct-tk')); ?>" title="<?php echo esc_attr__('Ban Email And Close Ticket', 'js-support-ticket'); ?>"><?php echo esc_html__('Ban Email And Close Ticket', 'js-support-ticket'); ?></a></li>
             <li class="<?php if($jsst_c == 'emailtemplate' && $jsst_for == 'ube-tk') echo 'active'; ?>"><a href="<?php echo esc_url(admin_url('admin.php?page=emailtemplate&for=ube-tk')); ?>" title="<?php echo esc_attr__('Unban Email', 'js-support-ticket'); ?>"><?php echo esc_html__('Unban Email', 'js-support-ticket'); ?></a></li>
             <li class="<?php if($jsst_c == 'emailtemplate' && $jsst_for == 'rsp-tk') echo 'active'; ?>"><a href="<?php echo esc_url(admin_url('admin.php?page=emailtemplate&for=rsp-tk')); ?>" title="<?php echo esc_attr__('Response Ticket', 'js-support-ticket'); ?>"><?php echo esc_html__('Response Ticket', 'js-support-ticket'); ?></a></li>
             <li class="<?php if($jsst_c == 'emailtemplate' && $jsst_for == 'rpy-tk') echo 'active'; ?>"><a href="<?php echo esc_url(admin_url('admin.php?page=emailtemplate&for=rpy-tk')); ?>" title="<?php echo esc_attr__('Reply Ticket', 'js-support-ticket'); ?>"><?php echo esc_html__('Reply Ticket', 'js-support-ticket'); ?></a></li>
@@ -452,7 +452,7 @@ $jsst_jssupportticket_js = '
             <li class="<?php if($jsst_c == 'emailtemplate' && $jsst_for == 'lk-tk') echo 'active'; ?>"><a href="<?php echo esc_url(admin_url('admin.php?page=emailtemplate&for=lk-tk')); ?>" title="<?php echo esc_attr__('Lock Ticket', 'js-support-ticket'); ?>"><?php echo esc_html__('Lock Ticket', 'js-support-ticket'); ?></a></li>
             <li class="<?php if($jsst_c == 'emailtemplate' && $jsst_for == 'ulk-tk') echo 'active'; ?>"><a href="<?php echo esc_url(admin_url('admin.php?page=emailtemplate&for=ulk-tk')); ?>" title="<?php echo esc_attr__('Unlock Ticket', 'js-support-ticket'); ?>"><?php echo esc_html__('Unlock Ticket', 'js-support-ticket'); ?></a></li>
             <li class="<?php if($jsst_c == 'emailtemplate' && $jsst_for == 'minp-tk') echo 'active'; ?>"><a href="<?php echo esc_url(admin_url('admin.php?page=emailtemplate&for=minp-tk')); ?>" title="<?php echo esc_attr__('In Progress Ticket', 'js-support-ticket'); ?>"><?php echo esc_html__('In Progress Ticket', 'js-support-ticket'); ?></a></li>
-            <li class="<?php if($jsst_c == 'emailtemplate' && $jsst_for == 'pc-tk') echo 'active'; ?>"><a href="<?php echo esc_url(admin_url('admin.php?page=emailtemplate&for=pc-tk')); ?>" title="<?php echo esc_attr__('Ticket priority is changed by', 'js-support-ticket'); ?>"><?php echo esc_html__('Ticket priority is changed by', 'js-support-ticket'); ?></a></li>
+            <li class="<?php if($jsst_c == 'emailtemplate' && $jsst_for == 'pc-tk') echo 'active'; ?>"><a href="<?php echo esc_url(admin_url('admin.php?page=emailtemplate&for=pc-tk')); ?>" title="<?php echo esc_attr__('Ticket Priority Is Changed By', 'js-support-ticket'); ?>"><?php echo esc_html__('Ticket Priority Is Changed By', 'js-support-ticket'); ?></a></li>
             <li class="<?php if($jsst_c == 'emailtemplate' && $jsst_for == 'ml-ew') echo 'active'; ?>"><a href="<?php echo esc_url(admin_url('admin.php?page=emailtemplate&for=ml-ew')); ?>" title="<?php echo esc_attr__('New Mail Received', 'js-support-ticket'); ?>"><?php echo esc_html__('New Mail Received', 'js-support-ticket'); ?></a></li>
             <li class="<?php if($jsst_c == 'emailtemplate' && $jsst_for == 'ml-rp') echo 'active'; ?>"><a href="<?php echo esc_url(admin_url('admin.php?page=emailtemplate&for=ml-rp')); ?>" title="<?php echo esc_attr__('New Mail Message Received', 'js-support-ticket'); ?>"><?php echo esc_html__('New Mail Message Received', 'js-support-ticket'); ?></a></li>
             <li class="<?php if($jsst_c == 'emailtemplate' && $jsst_for == 'fd-bk') echo 'active'; ?>"><a href="<?php echo esc_url(admin_url('admin.php?page=emailtemplate&for=fd-bk')); ?>" title="<?php echo esc_attr__('Feedback Email To User', 'js-support-ticket'); ?>"><?php echo esc_html__('Feedback Email To User', 'js-support-ticket'); ?></a></li>
@@ -572,15 +572,15 @@ $jsst_jssupportticket_js = '
         </ul>
     </li>
     <li class="treeview <?php if($jsst_c == 'jssupportticket' && $jsst_layout == 'help') echo 'active'; ?> menu-item-help">
-        <a href="#" title="<?php echo esc_attr__('help', 'js-support-ticket'); ?>">
+        <a href="#" title="<?php echo esc_attr__('Help', 'js-support-ticket'); ?>">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"  stroke="currentColor" stroke-width="2" class="jsst_menu-icon" width=" 22" height="22">
                 <circle cx="12" cy="12" r="10"></circle>
                 <polygon points="10,8 16,12 10,16" fill="currentColor"></polygon>
             </svg>
-            <span class="jsst_text"><?php echo esc_html__('help', 'js-support-ticket'); ?></span>
+            <span class="jsst_text"><?php echo esc_html__('Help', 'js-support-ticket'); ?></span>
         </a>
         <ul class="jsstadmin-sidebar-submenu treeview-menu">
-            <li class="<?php if($jsst_c == 'jssupportticket' && $jsst_layout == 'help') echo 'active'; ?>"><a href="<?php echo esc_url(admin_url('admin.php?page=jssupportticket&jstlay=help')); ?>" title="<?php echo esc_attr__('help', 'js-support-ticket'); ?>"><?php echo esc_html__('help', 'js-support-ticket'); ?></a></li>
+            <li class="<?php if($jsst_c == 'jssupportticket' && $jsst_layout == 'help') echo 'active'; ?>"><a href="<?php echo esc_url(admin_url('admin.php?page=jssupportticket&jstlay=help')); ?>" title="<?php echo esc_attr__('Help', 'js-support-ticket'); ?>"><?php echo esc_html__('Help', 'js-support-ticket'); ?></a></li>
         </ul>
     </li>
 </ul>

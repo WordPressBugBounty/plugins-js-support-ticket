@@ -252,7 +252,7 @@ wp_add_inline_script('ticket-google-charts-handle',$jsst_jssupportticket_js);
                                         }
                                     ?>
                                     <span class="js-ticket-priority" style="background:<?php echo esc_attr($jsst_bgcolor); ?>;color:<?php echo esc_attr($jsst_color1); ?>">
-                                        <?php echo esc_html($jsst_status); ?>
+                                        <?php echo esc_html(jssupportticket::JSST_getVarValue($jsst_status)); ?>
                                     </span>
                                 </div>
                                 <div class="js-ticket-table-body-col js-col-md-3 js-col-xs-3">
