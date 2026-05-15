@@ -4,7 +4,7 @@ Donate link: https://jshelpdesk.com/pricing/
 Tags: helpdesk, ticketing system, AI support, support ticket, knowledgebase
 Requires at least: 5.5
 Tested up to: 6.9
-Stable tag: 3.0.8
+Stable tag: 3.0.9
 Requires PHP: 7.4
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
@@ -138,6 +138,9 @@ Download the zip file and upload the folder to your `/wp-content/plugins/` direc
 21. Internal Mails
 
 == Changelog ==
+= 3.0.9 =
+* Security enhancement: Improved request validation, nonce verification, capability checks, and hardened task dispatcher execution to prevent unauthorized access and arbitrary action execution.
+
 = 3.0.8 =
 * Improved language files.
 * Improved Zywrap AI.

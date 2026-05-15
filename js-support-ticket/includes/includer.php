@@ -14,6 +14,16 @@ class JSSTincluder {
      */
 
     public static function include_file($jsst_filename, $jsst_module_name = null) {
+        $allowed_modules = array(
+            'activitylog','attachment','configuration','department','email','emailtemplate','fieldordering','gdpr','jssupportticket','postinstallation','premiumplugin','priority','product','reply','reports','slug','status','systemerror','themes','thirdpartyimport','ticket','actions','agent','role','roleaccessdepartments','rolepermissions','useraccessdepartments','userpermissions','agentautoassign','aipoweredreply','announcement','autoclose','banemail','banemaillog','cannedresponses','dashboardwidgets','download','easydigitaldownloads','emailcc','emailpiping','envatovalidation','export','faq','feedback','helptopic','knowledgebase','mail','mailchimp','maxticket','mergeticket','multiform','multilanguageemailtemplates','note','notification','overdue','paidsupport','privatecredentials','smtp','sociallogin','themes','tickethistory','timetracking','useroptions','widgets','woocommerce','downloadattachment','articleattachmet','actions','actions','actions','actions','actions',
+        );
+
+        if (
+            null === $jsst_module_name &&
+            ! in_array( $jsst_filename, $allowed_modules, true )
+        ) {
+            return;
+        }
         $jsst_filename = jssupportticketphplib::JSST_clean_file_path($jsst_filename);
         $jsst_module_name = jssupportticketphplib::JSST_clean_file_path($jsst_module_name);
         if ($jsst_module_name != null) {

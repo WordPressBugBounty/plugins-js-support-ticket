@@ -69,8 +69,11 @@ class JSSTattachmentModel {
     }
 
     function removeAttachment($jsst_id) {
-        if (!is_numeric($jsst_id))
+        $jsst_id = absint( $jsst_id );
+
+        if ( empty( $jsst_id ) ) {
             return false;
+        }
         $jsst_query = $jsst_query = "SELECT ticket.attachmentdir AS foldername,ticket.id AS ticketid,attach.filename  "
                 . " FROM `".jssupportticket::$_db->prefix."js_ticket_attachments` AS attach "
                 . " JOIN `".jssupportticket::$_db->prefix."js_ticket_tickets` AS ticket ON ticket.id = attach.ticketid "

@@ -15,7 +15,7 @@ class JSSTrequest {
                 if(is_array($_GET[$jsst_variable_name])){
                     $jsst_value = Self::recursive_sanitize_text_field($_GET[$jsst_variable_name]);
                 }else{
-                    $jsst_value = sanitize_text_field($_GET[$jsst_variable_name]);
+                    $jsst_value = sanitize_text_field( wp_unslash( $_GET[$jsst_variable_name] ) );
                 }
             } elseif (isset($_POST[$jsst_variable_name])) {
                 if(is_array($_POST[$jsst_variable_name])){
@@ -44,7 +44,7 @@ class JSSTrequest {
                         if(is_array($_GET[$jsst_variable_name])){
                             $jsst_value = Self::recursive_sanitize_text_field($_GET[$jsst_variable_name]);
                         }else{
-                            $jsst_value = sanitize_text_field($_GET[$jsst_variable_name]);
+                            $jsst_value = sanitize_text_field( wp_unslash( $_GET[$jsst_variable_name] ) );
                         }
                     break;
             }

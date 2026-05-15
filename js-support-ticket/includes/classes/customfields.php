@@ -563,7 +563,12 @@ class JSSTcustomfields {
         if($jsst_field->userfieldtype=='file'){
 
            if($jsst_fvalue !=null){
-                $jsst_path = admin_url("?page=ticket&action=jstask&task=downloadbyname&id=".jssupportticket::$jsst_data['custom']['ticketid']."&name=".$jsst_fvalue);
+                if (is_admin()) {
+                    $jsst_path = admin_url("?page=ticket&action=jstask&task=downloadbyname&id=".jssupportticket::$jsst_data['custom']['ticketid']."&name=".$jsst_fvalue);
+                } else {
+                    $jsst_path = jssupportticket::makeUrl(array('jstmod'=>'ticket', 'action'=>'jstask', 'task'=>'downloadbyname', 'id'=>jssupportticket::$jsst_data['custom']['ticketid'], 'name'=>$jsst_fvalue, 'jsstpageid'=>get_the_ID()));
+                }
+
                 $jsst_html = '
                     <div class="js_ticketattachment">
                         ' .  $jsst_fvalue . '
