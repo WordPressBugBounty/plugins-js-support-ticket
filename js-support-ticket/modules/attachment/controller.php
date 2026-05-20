@@ -55,7 +55,7 @@ class JSSTattachmentController {
         exit;
     }
 
-        static function deleteattachment() {
+    static function deleteattachment() {
 
         $jsst_id        = absint( JSSTrequest::getVar( 'id' ) );
         $jsst_ticket_id = absint( JSSTrequest::getVar( 'ticketid' ) );

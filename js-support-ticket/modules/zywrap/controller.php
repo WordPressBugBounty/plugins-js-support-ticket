@@ -16,7 +16,7 @@ class JSSTzywrapController {
             switch ($jsst_layout) {
                 case 'admin_zywrap':
                     include_once JSST_PLUGIN_PATH . 'includes/updates/updates.php';
-                    JSSTupdates::checkUpdates('309');
+                    JSSTupdates::checkUpdates('310');
                     JSSTincluder::getJSModel('zywrap')->getDashboardStats();
                     break;
 

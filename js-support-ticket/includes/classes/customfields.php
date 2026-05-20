@@ -610,7 +610,7 @@ class JSSTcustomfields {
         if (!is_admin()) {
             $jsst_inquery .= ' AND adminonly != 1 ';
         }
-        $jsst_query = "SELECT field,fieldtitle,isuserfield,userfieldtype,userfieldparams,multiformid  FROM " . jssupportticket::$_db->prefix . "js_ticket_fieldsordering WHERE isuserfield = 1 AND " . $jsst_published . " AND fieldfor =" . esc_sql($jsst_fieldfor) . $jsst_inquery. " AND multiformid =" . esc_sql($jsst_multiformid). " ORDER BY ordering";
+        $jsst_query = "SELECT field,fieldtitle,isuserfield,userfieldtype,userfieldparams,multiformid  FROM " . jssupportticket::$_db->prefix . "js_ticket_fieldsordering WHERE isuserfield = 1 AND " . $jsst_published . " AND fieldfor =" . intval($jsst_fieldfor) . $jsst_inquery. " AND multiformid =" . intval($jsst_multiformid). " ORDER BY ordering";
         $jsst_data = jssupportticket::$_db->get_results($jsst_query);
         return $jsst_data;
     }
@@ -628,7 +628,7 @@ class JSSTcustomfields {
             $jsst_inquery .= " AND adminonly != 1";
         }
 
-        $jsst_query = "SELECT `rows`,`cols`,required,field,fieldtitle,isuserfield,userfieldtype,userfieldparams,depandant_field  FROM " . jssupportticket::$_db->prefix . "js_ticket_fieldsordering WHERE isuserfield = 1 AND " . $jsst_inquery . " AND fieldfor =" . esc_sql($jsst_fieldfor) ." ORDER BY ordering ";
+        $jsst_query = "SELECT `rows`,`cols`,required,field,fieldtitle,isuserfield,userfieldtype,userfieldparams,depandant_field  FROM " . jssupportticket::$_db->prefix . "js_ticket_fieldsordering WHERE isuserfield = 1 AND " . $jsst_inquery . " AND fieldfor =" . intval($jsst_fieldfor) ." ORDER BY ordering ";
         $jsst_data = jssupportticket::$_db->get_results($jsst_query);
         return $jsst_data;
     }
@@ -638,7 +638,7 @@ class JSSTcustomfields {
             return false;
         }
 
-        $jsst_query = "SELECT `rows`,`cols`,required,field,fieldtitle,isuserfield,userfieldtype,userfieldparams,depandant_field  FROM " . jssupportticket::$_db->prefix . "js_ticket_fieldsordering WHERE isuserfield = 1 AND published = 1 AND search_admin =1 AND fieldfor =" . esc_sql($jsst_fieldfor) ." ORDER BY ordering ";
+        $jsst_query = "SELECT `rows`,`cols`,required,field,fieldtitle,isuserfield,userfieldtype,userfieldparams,depandant_field  FROM " . jssupportticket::$_db->prefix . "js_ticket_fieldsordering WHERE isuserfield = 1 AND published = 1 AND search_admin =1 AND fieldfor =" . intval($jsst_fieldfor) ." ORDER BY ordering ";
         $jsst_data = jssupportticket::$_db->get_results($jsst_query);
         return $jsst_data;
     }

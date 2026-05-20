@@ -70,7 +70,7 @@ class JSSTemailtemplateModel {
             $jsst_query = "SELECT * FROM `" . jssupportticket::$_db->prefix . "js_ticket_emailtemplates` WHERE templatefor = '" . esc_sql($jsst_tempatefor) . "'";
         }
         if (!empty($jsst_formid)) {
-            $jsst_query .= " AND multiformid = " . esc_sql($jsst_formid);
+            $jsst_query .= " AND multiformid = " . intval($jsst_formid);
         } else {
             $jsst_query .= " AND (multiformid IS NULL OR multiformid = '')";
         }

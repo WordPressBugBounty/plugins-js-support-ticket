@@ -12,7 +12,7 @@ class JSSTpermissions {
         $jsst_query = "SELECT perm_allowed.status
 					FROM `" . jsjobs::$_db->prefix . "jsjobs_permissions` AS perm
 					JOIN `" . jsjobs::$_db->prefix . "jsjobs_permissions_allowed` AS perm_allowed ON perm_allowed.permissionid = perm.id
-					WHERE perm.permissions = '".esc_sql($jsst_permissionfor)."' AND perm_allowed.userid = ".esc_sql($jsst_userid);
+					WHERE perm.permissions = '".esc_sql($jsst_permissionfor)."' AND perm_allowed.userid = ".intval($jsst_userid);
         $jsst_result = jsjobs::$_db->get_var($jsst_query);
         return $jsst_result;
     }

@@ -51,7 +51,7 @@ class JSSTdepartmentModel {
             $jsst_query = "SELECT department.*,email.email AS outgoingemail
                         FROM `" . jssupportticket::$_db->prefix . "js_ticket_departments` AS department
                         JOIN `" . jssupportticket::$_db->prefix . "js_ticket_email` AS email ON email.id = department.emailid
-                        WHERE department.id = " . esc_sql($jsst_id);
+                        WHERE department.id = " . intval($jsst_id);
             jssupportticket::$jsst_data[0] = jssupportticket::$_db->get_row($jsst_query);
             if (jssupportticket::$_db->last_error != null) {
                 JSSTincluder::getJSModel('systemerror')->addSystemError(); // if there is an error add it to system errorrs
@@ -94,7 +94,7 @@ class JSSTdepartmentModel {
                 $jsst_emailaddresses = array();
             }
             $jsst_query = "SELECT email FROM `" . jssupportticket::$_db->prefix . "js_ticket_email`
-                WHERE id = ".esc_sql($jsst_data['emailid']);
+                WHERE id = ".intval($jsst_data['emailid']);
             $jsst_email = jssupportticket::$_db->get_var($jsst_query);
 
             foreach ($jsst_emailaddresses as $jsst_edata) {
@@ -161,7 +161,7 @@ class JSSTdepartmentModel {
             $jsst_order = "<";
             $jsst_direction = "DESC";
         }
-        $jsst_query = "SELECT t.ordering,t.id,t2.ordering AS ordering2 FROM `" . jssupportticket::$_db->prefix . "js_ticket_departments` AS t,`" . jssupportticket::$_db->prefix . "js_ticket_departments` AS t2 WHERE t.ordering $jsst_order t2.ordering AND t2.id = ".esc_sql($jsst_id)." ORDER BY t.ordering $jsst_direction LIMIT 1";
+        $jsst_query = "SELECT t.ordering,t.id,t2.ordering AS ordering2 FROM `" . jssupportticket::$_db->prefix . "js_ticket_departments` AS t,`" . jssupportticket::$_db->prefix . "js_ticket_departments` AS t2 WHERE t.ordering $jsst_order t2.ordering AND t2.id = ".intval($jsst_id)." ORDER BY t.ordering $jsst_direction LIMIT 1";
         $jsst_result = jssupportticket::$_db->get_row($jsst_query);
 
         $jsst_row = JSSTincluder::getJSTable('departments');
@@ -191,7 +191,7 @@ class JSSTdepartmentModel {
                 if(in_array('agent',jssupportticket::$_active_addons)){
                     $jsst_query = "DELETE
                                 FROM `".jssupportticket::$_db->prefix . "js_ticket_acl_role_access_departments`
-                                WHERE departmentid = ".esc_sql($jsst_id);
+                                WHERE departmentid = ".intval($jsst_id);
                     jssupportticket::$_db->query($jsst_query);
                 }
                 JSSTmessage::setMessage(esc_html(__('The department has been deleted', 'js-support-ticket')), 'updated');
@@ -209,19 +209,19 @@ class JSSTdepartmentModel {
         if (!is_numeric($jsst_id))
             return false;
         $jsst_query = "SELECT (
-                    (SELECT COUNT(id) FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE departmentid = " . esc_sql($jsst_id) . ")
-                    + (SELECT COUNT(id) FROM `" . jssupportticket::$_db->prefix . "js_ticket_departments` WHERE id = " . esc_sql($jsst_id) . " AND isdefault = 1) ";
+                    (SELECT COUNT(id) FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE departmentid = " . intval($jsst_id) . ")
+                    + (SELECT COUNT(id) FROM `" . jssupportticket::$_db->prefix . "js_ticket_departments` WHERE id = " . intval($jsst_id) . " AND isdefault = 1) ";
 
                     if(in_array('agent', jssupportticket::$_active_addons)){
-                        $jsst_query .= " + (SELECT COUNT(id) FROM `" . jssupportticket::$_db->prefix . "js_ticket_acl_user_access_departments` WHERE departmentid = " . esc_sql($jsst_id) . ") ";
+                        $jsst_query .= " + (SELECT COUNT(id) FROM `" . jssupportticket::$_db->prefix . "js_ticket_acl_user_access_departments` WHERE departmentid = " . intval($jsst_id) . ") ";
                     }
 
                     if(in_array('helptopic', jssupportticket::$_active_addons)){
-                        $jsst_query .= " + (SELECT COUNT(id) FROM `" . jssupportticket::$_db->prefix . "js_ticket_help_topics` WHERE departmentid = " . esc_sql($jsst_id) . ") ";
+                        $jsst_query .= " + (SELECT COUNT(id) FROM `" . jssupportticket::$_db->prefix . "js_ticket_help_topics` WHERE departmentid = " . intval($jsst_id) . ") ";
                     }
 
                     if(in_array('cannedresponses', jssupportticket::$_active_addons)){
-                        $jsst_query .= " + (SELECT COUNT(id) FROM `" . jssupportticket::$_db->prefix . "js_ticket_department_message_premade` WHERE departmentid = " . esc_sql($jsst_id) . ")";
+                        $jsst_query .= " + (SELECT COUNT(id) FROM `" . jssupportticket::$_db->prefix . "js_ticket_department_message_premade` WHERE departmentid = " . intval($jsst_id) . ")";
                     }
 
                     $jsst_query .= " ) AS total";
@@ -251,7 +251,7 @@ class JSSTdepartmentModel {
     function changeStatus($jsst_id) {
         if (!is_numeric($jsst_id))
             return false;
-        $jsst_query = "SELECT status  FROM `" . jssupportticket::$_db->prefix . "js_ticket_departments` WHERE id=" . esc_sql($jsst_id);
+        $jsst_query = "SELECT status  FROM `" . jssupportticket::$_db->prefix . "js_ticket_departments` WHERE id=" . intval($jsst_id);
            $jsst_status = jssupportticket::$_db->get_var($jsst_query);
        $jsst_status = 1 - $jsst_status;
 
@@ -269,10 +269,10 @@ class JSSTdepartmentModel {
         if (!is_numeric($jsst_id))
             return false;
 
-        $jsst_query = "UPDATE `" . jssupportticket::$_db->prefix . "js_ticket_departments` SET isdefault = 0 WHERE id != " . esc_sql($jsst_id);
+        $jsst_query = "UPDATE `" . jssupportticket::$_db->prefix . "js_ticket_departments` SET isdefault = 0 WHERE id != " . intval($jsst_id);
         jssupportticket::$_db->query($jsst_query);
 
-        $jsst_query = "UPDATE `" . jssupportticket::$_db->prefix . "js_ticket_departments` SET isdefault = 1 - $jsst_default WHERE id=" . esc_sql($jsst_id);
+        $jsst_query = "UPDATE `" . jssupportticket::$_db->prefix . "js_ticket_departments` SET isdefault = 1 - $jsst_default WHERE id=" . intval($jsst_id);
         jssupportticket::$_db->query($jsst_query);
 
         if (jssupportticket::$_db->last_error == null) {
@@ -298,7 +298,7 @@ class JSSTdepartmentModel {
             return false;
         }
 
-        $jsst_query = "SELECT id, topic AS text FROM `" . jssupportticket::$_db->prefix . "js_ticket_help_topics` WHERE status = 1 AND departmentid = " . esc_sql($jsst_departmentid) . " ORDER BY ordering ASC";
+        $jsst_query = "SELECT id, topic AS text FROM `" . jssupportticket::$_db->prefix . "js_ticket_help_topics` WHERE status = 1 AND departmentid = " . intval($jsst_departmentid) . " ORDER BY ordering ASC";
         $jsst_list = jssupportticket::$_db->get_results($jsst_query);
 
         $jsst_query = "SELECT required FROM `" . jssupportticket::$_db->prefix . "js_ticket_fieldsordering` WHERE field='helptopic'";
@@ -322,7 +322,7 @@ class JSSTdepartmentModel {
         $jsst_departmentid = JSSTrequest::getVar('val');
         if (!is_numeric($jsst_departmentid))
             return false;
-        $jsst_query = "SELECT id, title AS text FROM `" . jssupportticket::$_db->prefix . "js_ticket_department_message_premade` WHERE status = 1 AND departmentid = " . esc_sql($jsst_departmentid);
+        $jsst_query = "SELECT id, title AS text FROM `" . jssupportticket::$_db->prefix . "js_ticket_department_message_premade` WHERE status = 1 AND departmentid = " . intval($jsst_departmentid);
         $jsst_query .= " ORDER BY title ASC ";
         $jsst_list = jssupportticket::$_db->get_results($jsst_query);
         $jsst_combobox = false;
@@ -352,7 +352,7 @@ class JSSTdepartmentModel {
     function getSignatureByID($jsst_id) {
         if (!is_numeric($jsst_id))
             return false;
-        $jsst_query = "SELECT departmentsignature FROM `" . jssupportticket::$_db->prefix . "js_ticket_departments` WHERE id = " . esc_sql($jsst_id);
+        $jsst_query = "SELECT departmentsignature FROM `" . jssupportticket::$_db->prefix . "js_ticket_departments` WHERE id = " . intval($jsst_id);
         $jsst_signature = jssupportticket::$_db->get_var($jsst_query);
         return $jsst_signature;
     }
@@ -360,7 +360,7 @@ class JSSTdepartmentModel {
     function getDepartmentById($jsst_id) {
         if (!is_numeric($jsst_id))
             return false;
-        $jsst_query = "SELECT departmentname FROM `" . jssupportticket::$_db->prefix . "js_ticket_departments` WHERE id = " . esc_sql($jsst_id);
+        $jsst_query = "SELECT departmentname FROM `" . jssupportticket::$_db->prefix . "js_ticket_departments` WHERE id = " . intval($jsst_id);
         $jsst_departmentname = jssupportticket::$_db->get_var($jsst_query);
         return $jsst_departmentname;
     }

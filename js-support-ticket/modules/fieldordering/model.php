@@ -26,7 +26,7 @@ class JSSTfieldorderingModel {
 
         // Data
 //        $jsst_query = "SELECT * FROM `".jssupportticket::$_db->prefix."js_ticket_fieldsordering` WHERE published = 1 AND fieldfor = 1 ORDER BY ordering LIMIT ".JSSTpagination::getOffset().", ".JSSTpagination::getLimit();
-        $jsst_query = "SELECT * FROM `" . jssupportticket::$_db->prefix . "js_ticket_fieldsordering` WHERE fieldfor = ".esc_sql($jsst_fieldfor);
+        $jsst_query = "SELECT * FROM `" . jssupportticket::$_db->prefix . "js_ticket_fieldsordering` WHERE fieldfor = ".intval($jsst_fieldfor);
         $jsst_query .= $jsst_inquery." ORDER BY ordering ";
 
         jssupportticket::$jsst_data[0] = jssupportticket::$_db->get_results($jsst_query);
@@ -40,14 +40,14 @@ class JSSTfieldorderingModel {
         if (!is_numeric($jsst_id))
             return false;
         if ($jsst_status == 'publish') {
-            $jsst_query = "UPDATE `" . jssupportticket::$_db->prefix . "js_ticket_fieldsordering` SET published = 1 WHERE id = " . esc_sql($jsst_id) . " AND cannotunpublish = 0";
+            $jsst_query = "UPDATE `" . jssupportticket::$_db->prefix . "js_ticket_fieldsordering` SET published = 1 WHERE id = " . intval($jsst_id) . " AND cannotunpublish = 0";
             jssupportticket::$_db->query($jsst_query);
             if (jssupportticket::$_db->last_error != null) {
                 JSSTincluder::getJSModel('systemerror')->addSystemError();
             }
             JSSTmessage::setMessage(esc_html(__('Field mark as published', 'js-support-ticket')),'updated');
         } elseif ($jsst_status == 'unpublish') {
-            $jsst_query = "UPDATE `" . jssupportticket::$_db->prefix . "js_ticket_fieldsordering` SET published = 0 WHERE id = " . esc_sql($jsst_id) . " AND cannotunpublish = 0";
+            $jsst_query = "UPDATE `" . jssupportticket::$_db->prefix . "js_ticket_fieldsordering` SET published = 0 WHERE id = " . intval($jsst_id) . " AND cannotunpublish = 0";
             jssupportticket::$_db->query($jsst_query);
             if (jssupportticket::$_db->last_error != null) {
                 JSSTincluder::getJSModel('systemerror')->addSystemError();
@@ -61,12 +61,12 @@ class JSSTfieldorderingModel {
         if (!is_numeric($jsst_id))
             return false;
         if ($jsst_status == 'publish') {
-            $jsst_query = "SELECT adminonly FROM " . jssupportticket::$_db->prefix . "js_ticket_fieldsordering WHERE id = " . esc_sql($jsst_id);
+            $jsst_query = "SELECT adminonly FROM " . jssupportticket::$_db->prefix . "js_ticket_fieldsordering WHERE id = " . intval($jsst_id);
             $jsst_adminonly = jssupportticket::$_db->get_var($jsst_query);
             if(!empty($jsst_adminonly)){
                 JSSTmessage::setMessage(esc_html(__('Field cannot be mark as published', 'js-support-ticket')),'error');
             }else{
-                $jsst_query = "UPDATE `" . jssupportticket::$_db->prefix . "js_ticket_fieldsordering` SET isvisitorpublished = 1 WHERE id = " . esc_sql($jsst_id) . " AND cannotunpublish = 0";
+                $jsst_query = "UPDATE `" . jssupportticket::$_db->prefix . "js_ticket_fieldsordering` SET isvisitorpublished = 1 WHERE id = " . intval($jsst_id) . " AND cannotunpublish = 0";
                 jssupportticket::$_db->query($jsst_query);
                 if (jssupportticket::$_db->last_error != null) {
                     JSSTincluder::getJSModel('systemerror')->addSystemError();
@@ -74,7 +74,7 @@ class JSSTfieldorderingModel {
                 JSSTmessage::setMessage(esc_html(__('Field mark as published', 'js-support-ticket')),'updated');
             }
         } elseif ($jsst_status == 'unpublish') {
-            $jsst_query = "UPDATE `" . jssupportticket::$_db->prefix . "js_ticket_fieldsordering` SET isvisitorpublished = 0 WHERE id = " . esc_sql($jsst_id) . " AND cannotunpublish = 0";
+            $jsst_query = "UPDATE `" . jssupportticket::$_db->prefix . "js_ticket_fieldsordering` SET isvisitorpublished = 0 WHERE id = " . intval($jsst_id) . " AND cannotunpublish = 0";
             jssupportticket::$_db->query($jsst_query);
             if (jssupportticket::$_db->last_error != null) {
                 JSSTincluder::getJSModel('systemerror')->addSystemError();
@@ -88,23 +88,23 @@ class JSSTfieldorderingModel {
         if (!is_numeric($jsst_id))
             return false;
 
-        // $jsst_query = "SELECT field FROM `".jssupportticket::$_db->prefix."js_ticket_fieldsordering` WHERE id =".esc_sql($jsst_id);
+        // $jsst_query = "SELECT field FROM `".jssupportticket::$_db->prefix."js_ticket_fieldsordering` WHERE id =".intval($jsst_id);
         // $jsst_child = jssupportticket::$_db->get_var($jsst_query);
-        // $jsst_query = "SELECT count(id) FROM `".jssupportticket::$_db->prefix."js_ticket_fieldsordering` WHERE visible_field = '".esc_sql($jsst_child)."'";
+        // $jsst_query = "SELECT count(id) FROM `".jssupportticket::$_db->prefix."js_ticket_fieldsordering` WHERE visible_field = '".intval($jsst_child)."'";
         // $jsst_count = jssupportticket::$_db->get_var($jsst_query);
         // if ($jsst_count > 0) {
         //     JSSTmessage::setMessage(esc_html(__('Field cannot mark as required', 'js-support-ticket')), 'error');
         //     return;
         // }
         if ($jsst_status == 'required') {
-            $jsst_query = "UPDATE `" . jssupportticket::$_db->prefix . "js_ticket_fieldsordering` SET required = 1 WHERE id = " . esc_sql($jsst_id) . " AND cannotunpublish = 0";
+            $jsst_query = "UPDATE `" . jssupportticket::$_db->prefix . "js_ticket_fieldsordering` SET required = 1 WHERE id = " . intval($jsst_id) . " AND cannotunpublish = 0";
             jssupportticket::$_db->query($jsst_query);
             if (jssupportticket::$_db->last_error != null) {
                 JSSTincluder::getJSModel('systemerror')->addSystemError();
             }
             JSSTmessage::setMessage(esc_html(__('Field mark as required', 'js-support-ticket')),'updated');
         } elseif ($jsst_status == 'unrequired') {
-            $jsst_query = "UPDATE `" . jssupportticket::$_db->prefix . "js_ticket_fieldsordering` SET required = 0 WHERE id = " . esc_sql($jsst_id) . " AND cannotunpublish = 0";
+            $jsst_query = "UPDATE `" . jssupportticket::$_db->prefix . "js_ticket_fieldsordering` SET required = 0 WHERE id = " . intval($jsst_id) . " AND cannotunpublish = 0";
             jssupportticket::$_db->query($jsst_query);
             if (jssupportticket::$_db->last_error != null) {
                 JSSTincluder::getJSModel('systemerror')->addSystemError();
@@ -120,16 +120,16 @@ class JSSTfieldorderingModel {
         if ($jsst_action == 'down') {
             $jsst_query = "UPDATE `" . jssupportticket::$_db->prefix . "js_ticket_fieldsordering` AS f1, `" . jssupportticket::$_db->prefix . "js_ticket_fieldsordering` AS f2
                         SET f1.ordering = f1.ordering - 1 WHERE f1.ordering = f2.ordering + 1 AND f1.fieldfor = f2.fieldfor
-                        AND f2.id = " . esc_sql($jsst_id);
+                        AND f2.id = " . intval($jsst_id);
             jssupportticket::$_db->query($jsst_query);
-            $jsst_query = " UPDATE `" . jssupportticket::$_db->prefix . "js_ticket_fieldsordering` SET ordering = ordering + 1 WHERE id = " . esc_sql($jsst_id);
+            $jsst_query = " UPDATE `" . jssupportticket::$_db->prefix . "js_ticket_fieldsordering` SET ordering = ordering + 1 WHERE id = " . intval($jsst_id);
             jssupportticket::$_db->query($jsst_query);
             JSSTmessage::setMessage(esc_html(__('Field ordering down', 'js-support-ticket')),'updated');
         } elseif ($jsst_action == 'up') {
             $jsst_query = "UPDATE `" . jssupportticket::$_db->prefix . "js_ticket_fieldsordering` AS f1, `" . jssupportticket::$_db->prefix . "js_ticket_fieldsordering` AS f2 SET f1.ordering = f1.ordering + 1
-                        WHERE f1.ordering = f2.ordering - 1 AND f1.fieldfor = f2.fieldfor AND f2.id = " . esc_sql($jsst_id);
+                        WHERE f1.ordering = f2.ordering - 1 AND f1.fieldfor = f2.fieldfor AND f2.id = " . intval($jsst_id);
             jssupportticket::$_db->query($jsst_query);
-            $jsst_query = " UPDATE `" . jssupportticket::$_db->prefix . "js_ticket_fieldsordering` SET ordering = ordering - 1 WHERE id = " . esc_sql($jsst_id);
+            $jsst_query = " UPDATE `" . jssupportticket::$_db->prefix . "js_ticket_fieldsordering` SET ordering = ordering - 1 WHERE id = " . intval($jsst_id);
             jssupportticket::$_db->query($jsst_query);
             JSSTmessage::setMessage(esc_html(__('Field ordering up', 'js-support-ticket')),'updated');
         }
@@ -160,7 +160,7 @@ class JSSTfieldorderingModel {
                 $jsst_adminonly = ' AND adminonly != 1 ';
             }
         }
-        $jsst_query = "SELECT  * FROM `" . jssupportticket::$_db->prefix . "js_ticket_fieldsordering` WHERE ".$jsst_published." AND fieldfor =  " . esc_sql($jsst_fieldfor);
+        $jsst_query = "SELECT  * FROM `" . jssupportticket::$_db->prefix . "js_ticket_fieldsordering` WHERE ".$jsst_published." AND fieldfor =  " . intval($jsst_fieldfor);
         if ($jsst_fieldfor == 1) {
             $jsst_query .= " AND multiformid =  " . intval($jsst_formid);
         }
@@ -195,7 +195,7 @@ class JSSTfieldorderingModel {
         if ($jsst_data['isuserfield'] == 1) {
             // value to add as field ordering
             if ($jsst_data['id'] == '') { // only for new
-                $jsst_query = "SELECT max(ordering) FROM " . jssupportticket::$_db->prefix . "js_ticket_fieldsordering WHERE fieldfor=".esc_sql($jsst_data['fieldfor']);
+                $jsst_query = "SELECT max(ordering) FROM " . jssupportticket::$_db->prefix . "js_ticket_fieldsordering WHERE fieldfor=".intval($jsst_data['fieldfor']);
                 $jsst_var = jssupportticket::$_db->get_var($jsst_query);
                 $jsst_data['ordering'] = $jsst_var + 1;
                 if(isset($jsst_data['userfieldtype']) && ($jsst_data['userfieldtype'] == 'file' || $jsst_data['userfieldtype'] == 'termsandconditions' ) ){
@@ -271,7 +271,7 @@ class JSSTfieldorderingModel {
                 // new start
 
                 if (!empty($jsst_data['id'])) {
-                    $jsst_query = "SELECT id, visible_field FROM " . jssupportticket::$_db->prefix . "js_ticket_fieldsordering WHERE visible_field LIKE '%" . esc_sql($jsst_fieldname) . "%' AND multiformid = ".esc_sql($jsst_data['multiformid']);
+                    $jsst_query = "SELECT id, visible_field FROM " . jssupportticket::$_db->prefix . "js_ticket_fieldsordering WHERE visible_field LIKE '%" . esc_sql($jsst_fieldname) . "%' AND multiformid = ".intval($jsst_data['multiformid']);
                     $jsst_query_results = jssupportticket::$_db->get_results($jsst_query);
                     
                     if (!empty($jsst_query_results)) {
@@ -279,7 +279,7 @@ class JSSTfieldorderingModel {
                             $jsst_query_fieldname = $jsst_query_result->visible_field;
                             $jsst_query_fieldname = jssupportticketphplib::JSST_str_replace(',' . $jsst_fieldname, '', $jsst_query_fieldname);
                             $jsst_query_fieldname = jssupportticketphplib::JSST_str_replace($jsst_fieldname, '', $jsst_query_fieldname);
-                            $jsst_query = "UPDATE `" . jssupportticket::$_db->prefix . "js_ticket_fieldsordering` SET visible_field = '" . esc_sql($jsst_query_fieldname) . "' WHERE id = " . esc_sql($jsst_query_result->id) . " AND multiformid = ".esc_sql($jsst_data['multiformid']);
+                            $jsst_query = "UPDATE `" . jssupportticket::$_db->prefix . "js_ticket_fieldsordering` SET visible_field = '" . esc_sql($jsst_query_fieldname) . "' WHERE id = " . esc_sql($jsst_query_result->id) . " AND multiformid = ".intval($jsst_data['multiformid']);
                             jssupportticket::$_db->query($jsst_query);
                         }
                     }
@@ -325,7 +325,7 @@ class JSSTfieldorderingModel {
                         }
 
                         // --- your database update code ---
-                        $jsst_query = "SELECT visible_field FROM " . jssupportticket::$_db->prefix . "js_ticket_fieldsordering WHERE field = '" . esc_sql($jsst_visibleParents[$jsst_index]) . "' AND multiformid = ".esc_sql($jsst_data['multiformid']);
+                        $jsst_query = "SELECT visible_field FROM " . jssupportticket::$_db->prefix . "js_ticket_fieldsordering WHERE field = '" . esc_sql($jsst_visibleParents[$jsst_index]) . "' AND multiformid = ".intval($jsst_data['multiformid']);
                         $jsst_old_fieldname = jssupportticket::$_db->get_var($jsst_query);
                         $jsst_new_fieldname = $jsst_fieldname;
 
@@ -338,7 +338,7 @@ class JSSTfieldorderingModel {
                             $jsst_new_fieldname = $jsst_old_fieldname . ',' . $jsst_new_fieldname;
                         }
 
-                        $jsst_query = "UPDATE `" . jssupportticket::$_db->prefix . "js_ticket_fieldsordering` SET visible_field = '" . esc_sql($jsst_new_fieldname) . "' WHERE field = '" . esc_sql($jsst_visibleParents[$jsst_index]) . "' AND multiformid = ".esc_sql($jsst_data['multiformid']);
+                        $jsst_query = "UPDATE `" . jssupportticket::$_db->prefix . "js_ticket_fieldsordering` SET visible_field = '" . esc_sql($jsst_new_fieldname) . "' WHERE field = '" . esc_sql($jsst_visibleParents[$jsst_index]) . "' AND multiformid = ".intval($jsst_data['multiformid']);
                         jssupportticket::$_db->query($jsst_query);
 
                         if (jssupportticket::$_db->last_error != null) {
@@ -359,7 +359,7 @@ class JSSTfieldorderingModel {
                 if ($jsst_data['fieldfor'] != 3) {
                     $jsst_data['visibleparams'] = '';
                     // If editing old field
-                    $jsst_query = "SELECT id, visible_field FROM " . jssupportticket::$_db->prefix . "js_ticket_fieldsordering WHERE visible_field LIKE '%" . esc_sql($jsst_fieldname) . "%' AND multiformid = ".esc_sql($jsst_data['multiformid']);
+                    $jsst_query = "SELECT id, visible_field FROM " . jssupportticket::$_db->prefix . "js_ticket_fieldsordering WHERE visible_field LIKE '%" . esc_sql($jsst_fieldname) . "%' AND multiformid = ".intval($jsst_data['multiformid']);
                     $jsst_query_results = jssupportticket::$_db->get_results($jsst_query);
                     if (!empty($jsst_query_results)) {
                         foreach ($jsst_query_results as $jsst_query_result) {
@@ -466,7 +466,7 @@ class JSSTfieldorderingModel {
                 
                 /* get parent saved data */
                 $jsst_query = "SELECT * FROM " . jssupportticket::$_db->prefix . "js_ticket_fieldsordering where
-                id = '". esc_sql($jsst_data['id'])."'";
+                id = '". intval($jsst_data['id'])."'";
                 $jsst_parent = jssupportticket::$_db->get_row($jsst_query);
                 /* get parent saved data */
                 
@@ -494,11 +494,11 @@ class JSSTfieldorderingModel {
             $jsst_clasue = ' , ';
         }
         if(isset($jsst_data['published']) && $jsst_data['published'] != null){
-            $jsst_inquery .= $jsst_clasue." published = ". esc_sql($jsst_data['published']);
+            $jsst_inquery .= $jsst_clasue." published = ". intval($jsst_data['published']);
             $jsst_clasue = ' , ';
         }
         if(isset($jsst_data['isvisitorpublished']) && $jsst_data['isvisitorpublished'] != null){
-            $jsst_inquery .= $jsst_clasue." isvisitorpublished = ". esc_sql($jsst_data['isvisitorpublished']);
+            $jsst_inquery .= $jsst_clasue." isvisitorpublished = ". intval($jsst_data['isvisitorpublished']);
             $jsst_clasue = ' , ';
         }
         if(isset($jsst_data['placeholder']) && $jsst_data['placeholder'] != null){
@@ -510,27 +510,27 @@ class JSSTfieldorderingModel {
             $jsst_clasue = ' , ';
         }
         if(isset($jsst_data['required']) && $jsst_data['required'] != null){
-            $jsst_inquery .= $jsst_clasue." required = ". esc_sql($jsst_data['required']);
+            $jsst_inquery .= $jsst_clasue." required = ". intval($jsst_data['required']);
             $jsst_clasue = ' , ';
         }
         if(isset($jsst_data['search_user']) && $jsst_data['search_user'] != null){
-            $jsst_inquery .= $jsst_clasue." search_user = ". esc_sql($jsst_data['search_user']);
+            $jsst_inquery .= $jsst_clasue." search_user = ". intval($jsst_data['search_user']);
             $jsst_clasue = ' , ';
         }
         if(isset($jsst_data['search_admin']) && $jsst_data['search_admin'] != null){
-            $jsst_inquery .= $jsst_clasue." search_admin = ". esc_sql($jsst_data['search_admin']);
+            $jsst_inquery .= $jsst_clasue." search_admin = ". intval($jsst_data['search_admin']);
             $jsst_clasue = ' , ';
         }
         if(isset($jsst_data['search_visitor']) && $jsst_data['search_visitor'] != null){
-            $jsst_inquery .= $jsst_clasue." search_visitor = ". esc_sql($jsst_data['search_visitor']);
+            $jsst_inquery .= $jsst_clasue." search_visitor = ". intval($jsst_data['search_visitor']);
             $jsst_clasue = ' , ';
         }
         if(isset($jsst_data['showonlisting']) && $jsst_data['showonlisting'] != null){
-            $jsst_inquery .= $jsst_clasue." showonlisting = ". esc_sql($jsst_data['showonlisting']);
+            $jsst_inquery .= $jsst_clasue." showonlisting = ". intval($jsst_data['showonlisting']);
             $jsst_clasue = ' , ';
         }
 
-        $jsst_query = "UPDATE `" . jssupportticket::$_db->prefix . "js_ticket_fieldsordering` SET ".$jsst_inquery." WHERE id = " . esc_sql($jsst_data['id']) ;
+        $jsst_query = "UPDATE `" . jssupportticket::$_db->prefix . "js_ticket_fieldsordering` SET ".$jsst_inquery." WHERE id = " . intval($jsst_data['id']) ;
         jssupportticket::$_db->query($jsst_query);
         if (jssupportticket::$_db->last_error != null) {
             JSSTincluder::getJSModel('systemerror')->addSystemError();
@@ -545,7 +545,7 @@ class JSSTfieldorderingModel {
         if(!is_numeric($jsst_parentfield)) return false;
         if(empty($jsst_field)) return false;
 
-        $jsst_query = "UPDATE `" . jssupportticket::$_db->prefix . "js_ticket_fieldsordering` SET depandant_field = '" . esc_sql($jsst_field) . "' WHERE id = " . esc_sql($jsst_parentfield)." AND fieldfor = ".esc_sql($jsst_fieldfor);
+        $jsst_query = "UPDATE `" . jssupportticket::$_db->prefix . "js_ticket_fieldsordering` SET depandant_field = '" . esc_sql($jsst_field) . "' WHERE id = " . intval($jsst_parentfield)." AND fieldfor = ".intval($jsst_fieldfor);
         jssupportticket::$_db->query($jsst_query);
         if (jssupportticket::$_db->last_error != null) {
             JSSTincluder::getJSModel('systemerror')->addSystemError();
@@ -577,7 +577,7 @@ class JSSTfieldorderingModel {
         //$jsst_childNew = wp_json_encode( stripslashes_deep($jsst_childNew) );
         $jsst_childNew = wp_json_encode( $jsst_childNew  );
         $jsst_child->userfieldparams = $jsst_childNew;
-        $jsst_query = "UPDATE `" . jssupportticket::$_db->prefix . "js_ticket_fieldsordering` SET userfieldparams = '" . esc_sql($jsst_childNew) . "' WHERE id = " . esc_sql($jsst_child->id);
+        $jsst_query = "UPDATE `" . jssupportticket::$_db->prefix . "js_ticket_fieldsordering` SET userfieldparams = '" . esc_sql($jsst_childNew) . "' WHERE id = " . intval($jsst_child->id);
         jssupportticket::$_db->query($jsst_query);
         if (jssupportticket::$_db->last_error != null) {
 
@@ -597,14 +597,14 @@ class JSSTfieldorderingModel {
         if(!is_numeric($jsst_fieldfor)) return false;
         $jsst_wherequery = '';
         if(isset($jsst_parentfield) && $jsst_parentfield !='' ){
-            $jsst_query = "SELECT id FROM " . jssupportticket::$_db->prefix . "js_ticket_fieldsordering WHERE fieldfor = ".esc_sql($jsst_fieldfor)." AND (userfieldtype = 'radio' OR userfieldtype = 'combo'OR userfieldtype = 'depandant_field') AND depandant_field = '" . esc_sql($jsst_parentfield) . "' ";
+            $jsst_query = "SELECT id FROM " . jssupportticket::$_db->prefix . "js_ticket_fieldsordering WHERE fieldfor = ".intval($jsst_fieldfor)." AND (userfieldtype = 'radio' OR userfieldtype = 'combo'OR userfieldtype = 'depandant_field') AND depandant_field = '" . esc_sql($jsst_parentfield) . "' ";
             $jsst_parent = jssupportticket::$_db->get_var($jsst_query);
-            $jsst_wherequery = ' OR id = '.esc_sql($jsst_parent);
+            $jsst_wherequery = ' OR id = '.intval($jsst_parent);
         }
-        $jsst_query = "SELECT fieldtitle AS text ,id FROM " . jssupportticket::$_db->prefix . "js_ticket_fieldsordering WHERE fieldfor = ".esc_sql($jsst_fieldfor)." AND multiformid = ".intval($jsst_formid)." AND (userfieldtype = 'radio' OR userfieldtype = 'combo' OR userfieldtype = 'depandant_field') AND (depandant_field = '' ".esc_sql($jsst_wherequery)." ) ";
+        $jsst_query = "SELECT fieldtitle AS text ,id FROM " . jssupportticket::$_db->prefix . "js_ticket_fieldsordering WHERE fieldfor = ".intval($jsst_fieldfor)." AND multiformid = ".intval($jsst_formid)." AND (userfieldtype = 'radio' OR userfieldtype = 'combo' OR userfieldtype = 'depandant_field') AND (depandant_field = '' ".esc_sql($jsst_wherequery)." ) ";
         $jsst_data = jssupportticket::$_db->get_results($jsst_query);
         if(isset($jsst_parentfield) && $jsst_parentfield !='' ){
-            $jsst_query = "SELECT id FROM " . jssupportticket::$_db->prefix . "js_ticket_fieldsordering WHERE fieldfor = ".esc_sql($jsst_fieldfor)." AND (userfieldtype = 'radio' OR userfieldtype = 'combo'OR userfieldtype = 'depandant_field') AND depandant_field = '" . esc_sql($jsst_parentfield) . "' ";
+            $jsst_query = "SELECT id FROM " . jssupportticket::$_db->prefix . "js_ticket_fieldsordering WHERE fieldfor = ".intval($jsst_fieldfor)." AND (userfieldtype = 'radio' OR userfieldtype = 'combo'OR userfieldtype = 'depandant_field') AND depandant_field = '" . esc_sql($jsst_parentfield) . "' ";
             $jsst_parent = jssupportticket::$_db->get_var($jsst_query);
         }
         $jsst_nonce = wp_create_nonce("get-section-to-fill-values-".$jsst_fieldfor);
@@ -619,15 +619,15 @@ class JSSTfieldorderingModel {
         if(!is_numeric($jsst_fieldfor)) return false;
         $jsst_wherequery = '';
         if(isset($jsst_field) && $jsst_field !='' ){
-            $jsst_query = "SELECT id FROM " . jssupportticket::$_db->prefix . "js_ticket_fieldsordering WHERE fieldfor = ".esc_sql($jsst_fieldfor)." AND (userfieldtype IN ( 'combo', 'text', 'checkbox', 'date', 'email', 'radio', 'multiple') ) AND visible_field = '" . esc_sql($jsst_field) . "' ";
+            $jsst_query = "SELECT id FROM " . jssupportticket::$_db->prefix . "js_ticket_fieldsordering WHERE fieldfor = ".intval($jsst_fieldfor)." AND (userfieldtype IN ( 'combo', 'text', 'checkbox', 'date', 'email', 'radio', 'multiple') ) AND visible_field = '" . esc_sql($jsst_field) . "' ";
             $jsst_parent = jssupportticket::$_db->get_var($jsst_query);
             if ($jsst_parent) {
-                $jsst_wherequery = ' OR id = '.esc_sql($jsst_parent);
+                $jsst_wherequery = ' OR id = '.intval($jsst_parent);
             }
         }
         $jsst_wherequeryforedit = '';
         if(isset($jsst_cid) && $jsst_cid !='' ){
-            $jsst_wherequeryforedit = ' AND id != '.esc_sql($jsst_cid);
+            $jsst_wherequeryforedit = ' AND id != '.intval($jsst_cid);
         }
         
         // Base fields always included
@@ -646,14 +646,14 @@ class JSSTfieldorderingModel {
         SELECT fieldtitle AS text, field AS id 
             FROM " . jssupportticket::$_db->prefix . "js_ticket_fieldsordering 
             WHERE (
-                fieldfor = " . esc_sql($jsst_fieldfor) . " 
-                AND multiformid = '" . esc_sql($jsst_multiformid) . "' 
+                fieldfor = " . intval($jsst_fieldfor) . " 
+                AND multiformid = '" . intval($jsst_multiformid) . "' 
                 AND field IN ($jsst_builtin_fields_sql) 
                 $jsst_wherequeryforedit $jsst_wherequery
             ) 
             OR (
-                fieldfor = " . esc_sql($jsst_fieldfor) . " 
-                AND multiformid = '" . esc_sql($jsst_multiformid) . "' 
+                fieldfor = " . intval($jsst_fieldfor) . " 
+                AND multiformid = '" . intval($jsst_multiformid) . "' 
                 AND userfieldtype IN ('combo', 'text', 'checkbox', 'date', 'email', 'radio', 'multiple') 
                 $jsst_wherequeryforedit $jsst_wherequery
             )";
@@ -764,7 +764,7 @@ class JSSTfieldorderingModel {
         if(!is_numeric($jsst_field)){
             return false;
         }
-        $jsst_query = "SELECT userfieldparams FROM " . jssupportticket::$_db->prefix . "js_ticket_fieldsordering WHERE id=".esc_sql($jsst_field);
+        $jsst_query = "SELECT userfieldparams FROM " . jssupportticket::$_db->prefix . "js_ticket_fieldsordering WHERE id=".intval($jsst_field);
         $jsst_data = jssupportticket::$_db->get_var($jsst_query);
         $jsst_datas = json_decode($jsst_data);
         $jsst_html = '';
@@ -831,7 +831,7 @@ class JSSTfieldorderingModel {
             (object) array('id' => 1, 'text' => esc_html(__('Yes', 'js-support-ticket'))),
             (object) array('id' => 0, 'text' => esc_html(__('No', 'js-support-ticket'))));
 
-        $jsst_query = "SELECT * FROM " . jssupportticket::$_db->prefix . "js_ticket_fieldsordering WHERE id=".esc_sql($jsst_field);
+        $jsst_query = "SELECT * FROM " . jssupportticket::$_db->prefix . "js_ticket_fieldsordering WHERE id=".intval($jsst_field);
         $jsst_data = jssupportticket::$_db->get_row($jsst_query);
 
         $jsst_html = '<div class="userpopup-top">
@@ -916,7 +916,7 @@ class JSSTfieldorderingModel {
     function deleteUserField($jsst_id){
         if (is_numeric($jsst_id) == false)
            return false;
-        $jsst_query = "SELECT field,field,fieldfor FROM `".jssupportticket::$_db->prefix."js_ticket_fieldsordering` WHERE id = ".esc_sql($jsst_id);
+        $jsst_query = "SELECT field,field,fieldfor FROM `".jssupportticket::$_db->prefix."js_ticket_fieldsordering` WHERE id = ".intval($jsst_id);
         $jsst_result = jssupportticket::$_db->get_row($jsst_query);
         if ($this->userFieldCanDelete($jsst_result) == true) {
             $jsst_row = JSSTincluder::getJSTable('fieldsordering');
@@ -931,7 +931,7 @@ class JSSTfieldorderingModel {
                     $jsst_visible_field =  jssupportticketphplib::JSST_str_replace(','.$jsst_result->field, '', $jsst_visible_field);
                     $jsst_visible_field =  jssupportticketphplib::JSST_str_replace($jsst_result->field, '', $jsst_visible_field);
 
-                    $jsst_query = "UPDATE `" . jssupportticket::$_db->prefix . "js_ticket_fieldsordering` SET visible_field = '".esc_sql($jsst_visible_field)."' WHERE id = ".esc_sql($jsst_value->id);
+                    $jsst_query = "UPDATE `" . jssupportticket::$_db->prefix . "js_ticket_fieldsordering` SET visible_field = '".esc_sql($jsst_visible_field)."' WHERE id = ".intval($jsst_value->id);
                     jssupportticket::$_db->query($jsst_query);
                     if (jssupportticket::$_db->last_error != null) {
 
@@ -941,7 +941,7 @@ class JSSTfieldorderingModel {
                 $jsst_query = "SELECT id FROM `" . jssupportticket::$_db->prefix . "js_ticket_fieldsordering` WHERE depandant_field = '".esc_sql($jsst_result->field)."'";
                 $jsst_result = jssupportticket::$_db->get_var($jsst_query);
                 if (isset($jsst_result)) {
-                    $jsst_query = "UPDATE `" . jssupportticket::$_db->prefix . "js_ticket_fieldsordering` SET depandant_field = '' WHERE id = ".esc_sql($jsst_result);
+                    $jsst_query = "UPDATE `" . jssupportticket::$_db->prefix . "js_ticket_fieldsordering` SET depandant_field = '' WHERE id = ".intval($jsst_result);
                     jssupportticket::$_db->query($jsst_query);
                 }
                 JSSTmessage::setMessage(esc_html(__('Field has been deleted', 'js-support-ticket')),'updated');
@@ -955,7 +955,7 @@ class JSSTfieldorderingModel {
     function enforceDeleteUserField($jsst_id){
         if (is_numeric($jsst_id) == false)
            return false;
-        $jsst_query = "SELECT field,fieldfor FROM `".jssupportticket::$_db->prefix."js_ticket_fieldsordering` WHERE id = ".esc_sql($jsst_id);
+        $jsst_query = "SELECT field,fieldfor FROM `".jssupportticket::$_db->prefix."js_ticket_fieldsordering` WHERE id = ".intval($jsst_id);
         $jsst_result = jssupportticket::$_db->get_row($jsst_query);
         if ($this->userFieldCanDelete($jsst_result) == true) {
             $jsst_row = JSSTincluder::getJSTable('fieldsordering');
@@ -983,20 +983,31 @@ class JSSTfieldorderingModel {
             return true;
     }
 
-    function getUserfieldsfor($jsst_fieldfor,$jsst_multiformid='') {
-        if (!is_numeric($jsst_fieldfor))
+    function getUserfieldsfor($jsst_fieldfor, $jsst_multiformid = '') {
+        // 1. Strict numeric check for $jsst_fieldfor (Cast to integer for safety)
+        if (!is_numeric($jsst_fieldfor)) {
             return false;
+        }
+        $jsst_fieldfor = intval($jsst_fieldfor);
+
+        // 2. Determine visibility criteria
         if (JSSTincluder::getObjectClass('user')->isguest()) {
             $jsst_published = ' isvisitorpublished = 1 ';
         } else {
             $jsst_published = ' published = 1 ';
         }
+
+        // 3. Securely handle the optional multiformid via integer casting
         $jsst_inquery = '';
-        if (isset($jsst_multiformid) && $jsst_multiformid != '') {
-            $jsst_inquery = " AND multiformid = ".esc_sql($jsst_multiformid);
+        if (isset($jsst_multiformid) && $jsst_multiformid !== '') {
+            $jsst_inquery = " AND multiformid = " . intval($jsst_multiformid);
         }
-        $jsst_query = "SELECT field,userfieldparams,userfieldtype,fieldtitle FROM `" . jssupportticket::$_db->prefix . "js_ticket_fieldsordering` WHERE fieldfor = " . esc_sql($jsst_fieldfor) . " AND isuserfield = 1 AND " . $jsst_published;
-        $jsst_query .= $jsst_inquery." ORDER BY field ";
+
+        // 4. Construct the query using the safe, casted integers
+        $jsst_query = "SELECT field, userfieldparams, userfieldtype, fieldtitle FROM `" . jssupportticket::$_db->prefix . "js_ticket_fieldsordering` WHERE fieldfor = " . intval($jsst_fieldfor) . " AND isuserfield = 1 AND " . $jsst_published;
+        $jsst_query .= $jsst_inquery . " ORDER BY field ";
+
+        // 5. Execute query
         $jsst_fields = jssupportticket::$_db->get_results($jsst_query);
         return $jsst_fields;
     }
@@ -1009,7 +1020,7 @@ class JSSTfieldorderingModel {
         } else {
             $jsst_published = ' published = 0 ';
         }
-        $jsst_query = "SELECT field FROM `" . jssupportticket::$_db->prefix . "js_ticket_fieldsordering` WHERE fieldfor = " . esc_sql($jsst_fieldfor) . " AND isuserfield = 1 AND " . $jsst_published;
+        $jsst_query = "SELECT field FROM `" . jssupportticket::$_db->prefix . "js_ticket_fieldsordering` WHERE fieldfor = " . intval($jsst_fieldfor) . " AND isuserfield = 1 AND " . $jsst_published;
         $jsst_fields = jssupportticket::$_db->get_results($jsst_query);
         return $jsst_fields;
     }
@@ -1027,11 +1038,11 @@ class JSSTfieldorderingModel {
         $jsst_inquery = '';
         if (isset($jsst_formid) && $jsst_formid == 0) {
             $jsst_defaultformid = JSSTincluder::getJSModel('ticket')->getDefaultMultiFormId();
-            $jsst_inquery = " AND multiformid = ".esc_sql($jsst_defaultformid);
+            $jsst_inquery = " AND multiformid = ".intval($jsst_defaultformid);
         } elseif (isset($jsst_formid) && $jsst_formid != '') {
             $jsst_inquery = " AND multiformid = ".intval($jsst_formid);
         }
-        $jsst_query = "SELECT field,fieldtitle FROM `" . jssupportticket::$_db->prefix . "js_ticket_fieldsordering` WHERE fieldfor = " . esc_sql($jsst_fieldfor) . $jsst_published;
+        $jsst_query = "SELECT field,fieldtitle FROM `" . jssupportticket::$_db->prefix . "js_ticket_fieldsordering` WHERE fieldfor = " . intval($jsst_fieldfor) . $jsst_published;
         $jsst_query .= $jsst_inquery;
         $jsst_fields = jssupportticket::$_db->get_results($jsst_query);
         $jsst_fielddata = array();
@@ -1045,7 +1056,7 @@ class JSSTfieldorderingModel {
         if ($jsst_id) {
             if (is_numeric($jsst_id) == false)
                 return false;
-            $jsst_query = "SELECT * FROM " . jssupportticket::$_db->prefix . "js_ticket_fieldsordering WHERE id = " . esc_sql($jsst_id);
+            $jsst_query = "SELECT * FROM " . jssupportticket::$_db->prefix . "js_ticket_fieldsordering WHERE id = " . intval($jsst_id);
             jssupportticket::$jsst_data[0]['userfield'] = jssupportticket::$_db->get_row($jsst_query);
             $jsst_params = jssupportticket::$jsst_data[0]['userfield']->userfieldparams;
             $jsst_visibleparams = jssupportticket::$jsst_data[0]['userfield']->visibleparams;
@@ -1067,11 +1078,11 @@ class JSSTfieldorderingModel {
         $jsst_inquery = '';
         if (isset($jsst_formid) && $jsst_formid == 0) {
             $jsst_defaultformid = JSSTincluder::getJSModel('ticket')->getDefaultMultiFormId();
-            $jsst_inquery = " AND multiformid = ".esc_sql($jsst_defaultformid);
+            $jsst_inquery = " AND multiformid = ".intval($jsst_defaultformid);
         } elseif (isset($jsst_formid) && $jsst_formid != '') {
             $jsst_inquery = " AND multiformid = ".intval($jsst_formid);
         }
-        $jsst_query = "SELECT field, showonlisting FROM " . jssupportticket::$_db->prefix . "js_ticket_fieldsordering WHERE showonlisting = 1 AND fieldfor =  " . esc_sql($jsst_fieldfor) . esc_sql($jsst_published);
+        $jsst_query = "SELECT field, showonlisting FROM " . jssupportticket::$_db->prefix . "js_ticket_fieldsordering WHERE showonlisting = 1 AND fieldfor = " . intval($jsst_fieldfor) . esc_sql($jsst_published);
         $jsst_query .= $jsst_inquery;
         $jsst_query .= " ORDER BY ordering";
         $jsst_fields = jssupportticket::$_db->get_results($jsst_query);

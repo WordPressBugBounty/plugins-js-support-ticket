@@ -351,7 +351,7 @@ class JSSTreplyModel {
         if (isset($jsst_data['ticketviaemail']) && $jsst_data['ticketviaemail'] == 1) {
             $jsst_inquery .= " AND ticketviaemail = 1";
         }
-        $jsst_query = "SELECT created FROM `" . jssupportticket::$_db->prefix . "js_ticket_replies` WHERE ticketid = '" . esc_sql($jsst_data['ticketid']) . "' AND uid = '" . esc_sql($jsst_data['uid']) . "' ORDER BY created DESC LIMIT 1";
+        $jsst_query = "SELECT created FROM `" . jssupportticket::$_db->prefix . "js_ticket_replies` WHERE ticketid = '" . intval($jsst_data['ticketid']) . "' AND uid = '" . intval($jsst_data['uid']) . "' ORDER BY created DESC LIMIT 1";
         $jsst_query .= $jsst_inquery;
         $jsst_datetime = jssupportticket::$_db->get_var($jsst_query);
         if($jsst_datetime){

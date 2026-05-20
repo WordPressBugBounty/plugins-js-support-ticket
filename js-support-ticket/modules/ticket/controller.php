@@ -334,14 +334,39 @@ class JSSTticketController {
     }
 
     static function changepriority() {
-        $jsst_id = JSSTrequest::getVar('ticketid');
-        $jsst_priorityid = JSSTrequest::getVar('priority');
+        $jsst_id         = absint(JSSTrequest::getVar('ticketid'));
+        $jsst_priorityid = absint(JSSTrequest::getVar('priority'));
+        $jsst_nonce      = JSSTrequest::getVar('_wpnonce');
+
+        if ( in_array('agent',jssupportticket::$_active_addons) && JSSTincluder::getJSModel('agent')->isUserStaff()) {
+            $jsst_allow = JSSTincluder::getJSModel('userpermissions')->checkPermissionGrantedForTask('Change Ticket Priority');
+            if ($jsst_allow == 0) {
+                wp_die( esc_html__( 'You are not allowed', 'js-support-ticket' ) );
+            }
+        }
+
+        if ( ! is_user_logged_in() ) {
+            wp_die( esc_html__( 'You must be logged in.', 'js-support-ticket' ), esc_html__( 'Access Denied', 'js-support-ticket' ), array( 'response' => 403 ) );
+        }
+
+        if ( ! wp_verify_nonce( $jsst_nonce, 'action-ticket-' . $jsst_id ) ) {
+            wp_die( esc_html__( 'Security check failed.', 'js-support-ticket' ), esc_html__( 'Security Error', 'js-support-ticket' ), array( 'response' => 403 ) );
+        }
+        if (!is_numeric($jsst_id)){
+            wp_die( esc_html__( 'You are not allowed', 'js-support-ticket' ) );
+        }
+        if (!is_numeric($jsst_priorityid)){
+            wp_die( esc_html__( 'You are not allowed', 'js-support-ticket' ) );
+        }
+
         JSSTincluder::getJSModel('ticket')->changeTicketPriority($jsst_id, $jsst_priorityid);
+
         if (is_admin()) {
             $jsst_url = admin_url("admin.php?page=ticket&jstlay=ticketdetail&jssupportticketid=" . esc_attr($jsst_id));
         } else {
             $jsst_url = jssupportticket::makeUrl(array('jstmod'=>'ticket', 'jstlay'=>'ticketdetail', 'jssupportticketid'=>$jsst_id));
         }
+
         wp_safe_redirect($jsst_url);
         exit;
     }
@@ -493,16 +518,26 @@ class JSSTticketController {
     }
 
     static function downloadall() {
-        $jsst_id = JSSTrequest::getVar('id');
+        $jsst_id         = absint( JSSTrequest::getVar( 'id' ) );
+        $jsst_downloadid = absint( JSSTrequest::getVar('downloadid') );
+        $jsst_nonce      = JSSTrequest::getVar('_wpnonce');
+
+        if ( ! wp_verify_nonce( $jsst_nonce, 'download-all-' . $jsst_downloadid ) ) {
+            wp_die( esc_html__( 'Security check failed.', 'js-support-ticket' ), esc_html__( 'Security Error', 'js-support-ticket' ), array( 'response' => 403 ) );
+        }
+
         JSSTincluder::getJSModel('attachment')->getAllDownloads();
+
         if (is_admin()) {
             $jsst_url = admin_url("admin.php?page=ticket&jstlay=ticketdetail");
         } else {
-            $jsst_url = jssupportticket::makeUrl(array('jstmod'=>'ticket','jstlay'=>'ticketdetail','jssupportticketid'=>'$jsst_id','jsstpageid'=>jssupportticket::getPageid()));
+            $jsst_url = jssupportticket::makeUrl(array('jstmod'=>'ticket','jstlay'=>'ticketdetail','jssupportticketid'=>$jsst_id,'jsstpageid'=>jssupportticket::getPageid()));
         }
+        
         wp_safe_redirect($jsst_url);
         exit;
     }
+
     static function downloadallforreply() {
         $jsst_downloadid = JSSTrequest::getVar('downloadid');
         $jsst_nonce = JSSTrequest::getVar('_wpnonce');

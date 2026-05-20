@@ -110,7 +110,7 @@ class JSSTemailModel {
                                     FROM `".jssupportticket::$_db->prefix."js_ticket_tickets` AS ticket
                                     LEFT JOIN `".jssupportticket::$_db->prefix."js_ticket_departments` AS dept ON dept.id = ticket.departmentid
                                     LEFT JOIN `".jssupportticket::$_db->prefix."js_ticket_email` AS email ON email.id = dept.emailid
-                                    WHERE ticket.id = ".esc_sql($jsst_id);
+                                    WHERE ticket.id = ".intval($jsst_id);
                         $jsst_dept_result = jssupportticket::$_db->get_row($jsst_query);
                         if($jsst_dept_result){
                             if(isset($jsst_dept_result->sendmail) && $jsst_dept_result->sendmail == 1){
@@ -1880,19 +1880,19 @@ class JSSTemailModel {
             $jsst_query = "SELECT mail.subject,mail.message,CONCAT(staff.firstname,' ',staff.lastname) AS sendername, staff.uid as staffuid
                         FROM `" . jssupportticket::$_db->prefix . "js_ticket_staff_mail` AS mail
                         JOIN `" . jssupportticket::$_db->prefix . "js_ticket_staff` AS staff ON staff.id = mail.fromid
-                        WHERE mail.id = " . esc_sql($jsst_id);
+                        WHERE mail.id = " . intval($jsst_id);
         } else {
             $jsst_query = "SELECT mail.subject,reply.message,CONCAT(staff.firstname,' ',staff.lastname) AS sendername, staff.uid as staffuid
                         FROM `" . jssupportticket::$_db->prefix . "js_ticket_staff_mail` AS reply
                         JOIN `" . jssupportticket::$_db->prefix . "js_ticket_staff_mail` AS mail ON mail.id = reply.replytoid
                         JOIN `" . jssupportticket::$_db->prefix . "js_ticket_staff` AS staff ON staff.id = reply.fromid
-                        WHERE reply.id = " . esc_sql($jsst_id);
+                        WHERE reply.id = " . intval($jsst_id);
         }
         $jsst_result = jssupportticket::$_db->get_row($jsst_query);
             $jsst_query = "SELECT staff.email
                         FROM `" . jssupportticket::$_db->prefix . "js_ticket_staff_mail` AS mail
                         JOIN `" . jssupportticket::$_db->prefix . "js_ticket_staff` AS staff ON staff.id = mail.toid
-                        WHERE mail.id = " . esc_sql($jsst_id);
+                        WHERE mail.id = " . intval($jsst_id);
         $jsst_email = jssupportticket::$_db->get_var($jsst_query);
         $jsst_result->receveremail = $jsst_email;
         return $jsst_result;
@@ -1903,7 +1903,7 @@ class JSSTemailModel {
             return false;
         $jsst_query = "SELECT staff.email
                     FROM `" . jssupportticket::$_db->prefix . "js_ticket_staff` AS staff
-                    WHERE staff.id = " . esc_sql($jsst_id);
+                    WHERE staff.id = " . intval($jsst_id);
         $jsst_emailaddress = jssupportticket::$_db->get_var($jsst_query);
         return $jsst_emailaddress;
     }
@@ -1913,7 +1913,7 @@ class JSSTemailModel {
             return false;
         $jsst_query = "SELECT staff.uid
                     FROM `" . jssupportticket::$_db->prefix . "js_ticket_staff` AS staff
-                    WHERE staff.id = " . esc_sql($jsst_id);
+                    WHERE staff.id = " . intval($jsst_id);
         $jsst_emailaddress = jssupportticket::$_db->get_var($jsst_query);
         return $jsst_emailaddress;
     }
@@ -1921,7 +1921,7 @@ class JSSTemailModel {
     private function getLatestReplyByTicketId($jsst_id) {
         if (!is_numeric($jsst_id))
             return false;
-        $jsst_query = "SELECT reply.message FROM `" . jssupportticket::$_db->prefix . "js_ticket_replies` AS reply WHERE reply.ticketid = " . esc_sql($jsst_id) . " ORDER BY reply.created DESC LIMIT 1";
+        $jsst_query = "SELECT reply.message FROM `" . jssupportticket::$_db->prefix . "js_ticket_replies` AS reply WHERE reply.ticketid = " . intval($jsst_id) . " ORDER BY reply.created DESC LIMIT 1";
         $jsst_message = jssupportticket::$_db->get_var($jsst_query);
         if (jssupportticket::$_db->last_error != null) {
             JSSTincluder::getJSModel('systemerror')->addSystemError();
@@ -2013,7 +2013,7 @@ class JSSTemailModel {
                         FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` AS ticket
                         JOIN `" . jssupportticket::$_db->prefix . "js_ticket_departments` AS department ON department.id = ticket.departmentid
                         JOIN `" . jssupportticket::$_db->prefix . "js_ticket_email` AS email ON email.id = department.emailid
-                        WHERE ticket.id = " . esc_sql($jsst_id);
+                        WHERE ticket.id = " . intval($jsst_id);
             $jsst_email = jssupportticket::$_db->get_row($jsst_query);
             if (jssupportticket::$_db->last_error != null) {
                 JSSTincluder::getJSModel('systemerror')->addSystemError();
@@ -2030,7 +2030,7 @@ class JSSTemailModel {
     private function getDefaultSenderEmailAndName() {
         $jsst_emailid = jssupportticket::$_config['default_alert_email'];
         if(!is_numeric($jsst_emailid)) return false;
-        $jsst_query = "SELECT email,name FROM `" . jssupportticket::$_db->prefix . "js_ticket_email` WHERE id = " . esc_sql($jsst_emailid);
+        $jsst_query = "SELECT email,name FROM `" . jssupportticket::$_db->prefix . "js_ticket_email` WHERE id = " . intval($jsst_emailid);
         $jsst_email = jssupportticket::$_db->get_row($jsst_query);
         return $jsst_email;
     }
@@ -2040,7 +2040,7 @@ class JSSTemailModel {
 
         // If multiformid is provided
         if (!empty($jsst_multiformid)) {
-            $jsst_query .= " AND multiformid = " . esc_sql($jsst_multiformid);
+            $jsst_query .= " AND multiformid = " . intval($jsst_multiformid);
             $jsst_template = jssupportticket::$_db->get_row($jsst_query);
 
             // If no form-specific template is found, fallback to default
@@ -2075,7 +2075,7 @@ class JSSTemailModel {
                     . " LEFT JOIN `" . jssupportticket::$_db->prefix . "js_ticket_departments` AS department ON department.id = ticket.departmentid "
                     . jssupportticket::$_addon_query['join']
                     . " LEFT JOIN `" . jssupportticket::$_db->prefix . "js_ticket_priorities` AS priority ON priority.id = ticket.priorityid "
-                    . " WHERE ticket.id = " . esc_sql($jsst_id);
+                    . " WHERE ticket.id = " . intval($jsst_id);
                 do_action('jsst_reset_aadon_query');
             break;
             default:

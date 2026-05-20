@@ -92,8 +92,19 @@ class JSSTslugController {
     }
 
     function resetallslugs() {
-        $jsst_data = JSSTrequest::get('post');
-        $jsst_result = JSSTincluder::getJSModel('slug')->resetAllSlugs();
+        $jsst_nonce = JSSTrequest::getVar('_wpnonce');
+
+        if ( ! current_user_can( 'manage_options' ) ) {
+            wp_die( esc_html__( 'You do not have permission to reset slugs.', 'js-support-ticket' ), esc_html__( 'Access Denied', 'js-support-ticket' ), array( 'response' => 403 ) );
+        }
+
+        if ( ! wp_verify_nonce( $jsst_nonce, 'reset-all-slugs' ) ) {
+            wp_die( esc_html__( 'Security check failed.', 'js-support-ticket' ), esc_html__( 'Security Error', 'js-support-ticket' ), array( 'response' => 403 ) );
+        }
+
+        // $jsst_data = JSSTrequest::get('post'); // Unused variable removed
+        JSSTincluder::getJSModel('slug')->resetAllSlugs();
+        
         $jsst_url = admin_url("admin.php?page=slug");
         wp_safe_redirect($jsst_url);
         exit;

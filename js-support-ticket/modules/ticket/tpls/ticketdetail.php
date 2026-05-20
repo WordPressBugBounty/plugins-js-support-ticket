@@ -1180,7 +1180,7 @@ if (jssupportticket::$_config['offline'] == 2) {
                     </div>
                 </div>
             </div>
-            <form id="jsst-reply-form" style="display:none" method="post" action="<?php echo esc_url(wp_nonce_url(admin_url("admin.php?page=reply&task=saveeditedreply&action=jstask"),"save-edited-reply-".jssupportticket::$jsst_data[0]->id)); ?>" >
+            <form id="jsst-reply-form" style="display:none" method="post" action="<?php echo esc_url(wp_nonce_url(jssupportticket::makeUrl(array('jstmod'=>'reply','task'=>'saveeditedreply')),"save-edited-reply-".jssupportticket::$jsst_data[0]->id)); ?>" >
                 <div class="js-ticket-edit-form-wrp">
                     <div class="js-ticket-form-field-wrp">
                         <?php wp_editor('', 'jsticket_replytext', array('media_buttons' => false,'editor_height' => 200, 'textarea_rows' => 20,)); ?>
@@ -1190,11 +1190,14 @@ if (jssupportticket::$_config['offline'] == 2) {
                     <?php echo wp_kses(JSSTformfield::submitbutton('ppok', esc_html(__('Save', 'js-support-ticket')), array('class' => 'js-ticket-priorty-save')), JSST_ALLOWED_TAGS); ?>
                     <?php echo wp_kses(JSSTformfield::button('canceleeeee', esc_html(__('Cancel', 'js-support-ticket')), array('class' => 'js-ticket-priorty-cancel','onclick'=>'closePopup();')), JSST_ALLOWED_TAGS); ?>
                 </div>
+                <?php echo wp_kses(JSSTformfield::hidden('action', 'reply_saveeditedreply'), JSST_ALLOWED_TAGS); ?>
+                <?php echo wp_kses(JSSTformfield::hidden('form_request', 'jssupportticket'), JSST_ALLOWED_TAGS); ?>
+                <?php echo wp_kses(JSSTformfield::hidden('jsstpageid', get_the_ID()), JSST_ALLOWED_TAGS); ?>
                 <?php echo wp_kses(JSSTformfield::hidden('reply-replyid', ''), JSST_ALLOWED_TAGS); ?>
                 <?php echo wp_kses(JSSTformfield::hidden('reply-tikcetid',jssupportticket::$jsst_data[0]->id), JSST_ALLOWED_TAGS); ?>
             </form>
             <?php if(in_array('timetracking', jssupportticket::$_active_addons)){ ?>
-                <form id="jsst-time-edit-form" style="display:none" method="post" action="<?php echo esc_url(wp_nonce_url(admin_url("admin.php?page=reply&task=saveeditedtime&action=jstask"),"save-edited-time-".jssupportticket::$jsst_data[0]->id)); ?>" >
+                <form id="jsst-time-edit-form" style="display:none" method="post" action="<?php echo esc_url(wp_nonce_url(jssupportticket::makeUrl(array('jstmod'=>'reply','task'=>'saveeditedtime')),"save-edited-time-".jssupportticket::$jsst_data[0]->id)); ?>" >
                     <div class="js-ticket-edit-form-wrp">
                         <div class="js-ticket-edit-field-title">
                             <?php echo esc_html(__('Time', 'js-support-ticket')); ?>&nbsp;<span style="color: red">*</span>
@@ -1223,11 +1226,14 @@ if (jssupportticket::$_config['offline'] == 2) {
                             <?php echo wp_kses(JSSTformfield::button('canceleeeeee', esc_html(__('Cancel', 'js-support-ticket')), array('class' => 'js-ticket-priorty-cancel','onclick'=>'closePopup();')), JSST_ALLOWED_TAGS); ?>
                         </div>
                     </div>
+                    <?php echo wp_kses(JSSTformfield::hidden('action', 'reply_saveeditedtime'), JSST_ALLOWED_TAGS); ?>
+                    <?php echo wp_kses(JSSTformfield::hidden('form_request', 'jssupportticket'), JSST_ALLOWED_TAGS); ?>
+                    <?php echo wp_kses(JSSTformfield::hidden('jsstpageid', get_the_ID()), JSST_ALLOWED_TAGS); ?>
                     <?php echo wp_kses(JSSTformfield::hidden('reply-replyid', ''), JSST_ALLOWED_TAGS); ?>
                     <?php echo wp_kses(JSSTformfield::hidden('reply-tikcetid',jssupportticket::$jsst_data[0]->id), JSST_ALLOWED_TAGS); ?>
                     <?php echo wp_kses(JSSTformfield::hidden('time-confilct',''), JSST_ALLOWED_TAGS); ?>
                 </form>
-                <form id="jsst-note-edit-form" style="display:none" method="post" action="<?php echo esc_url(wp_nonce_url(admin_url("admin.php?page=note&task=saveeditedtime&action=jstask"),"save-edited-time-".jssupportticket::$jsst_data[0]->id)); ?>" >
+                <form id="jsst-note-edit-form" style="display:none" method="post" action="<?php echo esc_url(wp_nonce_url(jssupportticket::makeUrl(array('jstmod'=>'note','task'=>'saveeditedtime')),"save-edited-time-".jssupportticket::$jsst_data[0]->id)); ?>" >
                     <div class="js-col-md-12 js-form-wrapper">
                         <div class="js-col-md-12 js-form-title"><?php echo esc_html(__('Time', 'js-support-ticket')); ?></div>
                         <div class="js-col-md-12 js-form-value"><?php echo wp_kses(JSSTformfield::text('edited_time', '', array('class' => 'inputbox')), JSST_ALLOWED_TAGS) ?></div>
@@ -1248,6 +1254,9 @@ if (jssupportticket::$_config['offline'] == 2) {
                         <?php echo wp_kses(JSSTformfield::submitbutton('ppppok', esc_html(__('Save', 'js-support-ticket')), array('class' => 'button')),JSST_ALLOWED_TAGS); ?>
                         <?php echo wp_kses(JSSTformfield::button('cancele', esc_html(__('Cancel', 'js-support-ticket')), array('class' => 'button', 'onclick'=>'closePopup();')), JSST_ALLOWED_TAGS); ?>
                     </div>
+                    <?php echo wp_kses(JSSTformfield::hidden('action', 'note_saveeditedtime'), JSST_ALLOWED_TAGS); ?>
+                    <?php echo wp_kses(JSSTformfield::hidden('form_request', 'jssupportticket'), JSST_ALLOWED_TAGS); ?>
+                    <?php echo wp_kses(JSSTformfield::hidden('jsstpageid', get_the_ID()), JSST_ALLOWED_TAGS); ?>
                     <?php echo wp_kses(JSSTformfield::hidden('note-noteid', ''), JSST_ALLOWED_TAGS); ?>
                     <?php echo wp_kses(JSSTformfield::hidden('note-tikcetid',jssupportticket::$jsst_data[0]->id), JSST_ALLOWED_TAGS); ?>
                     <?php echo wp_kses(JSSTformfield::hidden('time-confilct',''), JSST_ALLOWED_TAGS); ?>
@@ -1812,7 +1821,7 @@ if (jssupportticket::$_config['offline'] == 2) {
                                                             <span class="js-ticket-download-file-title">
                                                                 <?php echo esc_html($jsst_note->filename); echo '(' . esc_html($jsst_note->filesize / 1024) . ')'; ?>
                                                             </span>
-                                                            <a class="js-download-button" target="_blank" href="<?php echo esc_url(admin_url('?page=note&action=jstask&task=downloadbyid&id='.esc_attr($jsst_note->id))); ?>">
+                                                            <a class="js-download-button" target="_blank" href="<?php echo esc_url(jssupportticket::makeUrl(array('jstmod'=>'note','task'=>'downloadbyid','action'=>'jstask','id'=> $jsst_note->id ,'jsstpageid'=>get_the_ID()))); ?>">
                                                                 <img alt="<?php echo esc_attr(__('image','js-support-ticket')); ?>" class="js-ticket-download-img" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>/includes/images/ticket-detail/download.png">
                                                             </a>
                                                         </div>
@@ -1897,7 +1906,8 @@ if (jssupportticket::$_config['offline'] == 2) {
                                                     echo '</div>';
 
                                                 }
-                                                echo '<a class="js-all-download-button" target="_blank" href="' . esc_url(jssupportticket::makeUrl(array('jstmod'=>'ticket', 'task'=>'downloadall', 'action'=>'jstask', 'downloadid'=>jssupportticket::$jsst_data[0]->id , 'jsstpageid'=>get_the_ID()))) . '" >'. esc_html(__('Download All', 'js-support-ticket')) . '</a>';?>
+                                                $jsst_nonce = wp_create_nonce("download-all-".jssupportticket::$jsst_data[0]->id);
+                                                echo '<a class="js-all-download-button" target="_blank" href="' . esc_url(jssupportticket::makeUrl(array('jstmod'=>'ticket', 'task'=>'downloadall', 'action'=>'jstask', 'downloadid'=>jssupportticket::$jsst_data[0]->id, '_wpnonce'=>$jsst_nonce , 'jsstpageid'=>get_the_ID()))) . '" >'. esc_html(__('Download All', 'js-support-ticket')) . '</a>';?>
                                          </div>
                                      <?php } ?>
                                 </div>

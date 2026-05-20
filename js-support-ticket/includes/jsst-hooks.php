@@ -287,7 +287,7 @@ function jsst_update_user_profile($jsst_user_id) {
     if(!is_numeric($jsst_user_id)){
         return false;
     }
-    $jsst_query = "SELECT * FROM `" . jssupportticket::$_db->prefix . "users` WHERE id = " . esc_sql($jsst_user_id);
+    $jsst_query = "SELECT * FROM `" . jssupportticket::$_db->prefix . "users` WHERE id = " . intval($jsst_user_id);
     $jsst_user = jssupportticket::$_db->get_row($jsst_query);
 
     $jsst_uid = "";
@@ -299,7 +299,7 @@ function jsst_update_user_profile($jsst_user_id) {
 	
 	if(isset($_POST['user_id'])) $jsst_post_user_id = jssupportticket::JSST_sanitizeData($_POST['user_id']); // JSST_sanitizeData() function uses wordpress santize functions
     if ($jsst_post_user_id == $jsst_user_id) {
-        $jsst_query = "SELECT id FROM `" . jssupportticket::$_db->prefix . "js_ticket_users` WHERE wpuid = " . esc_sql($jsst_user_id);
+        $jsst_query = "SELECT id FROM `" . jssupportticket::$_db->prefix . "js_ticket_users` WHERE wpuid = " . intval($jsst_user_id);
         $jsst_id = jssupportticket::$_db->get_var($jsst_query);
     }
 	$jsst_name = "";

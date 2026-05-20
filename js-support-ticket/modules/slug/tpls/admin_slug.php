@@ -42,7 +42,7 @@ JSSTmessage::getMessage();
         </div>
         <div id="jsstadmin-head">
             <h1 class="jsstadmin-head-text"><?php echo esc_html(__('Slug','js-support-ticket')); ?></h1>
-            <a class="jsstadmin-add-link button" title="<?php echo esc_attr(__('Reset','js-support-ticket')); ?>" href="<?php echo esc_url(admin_url("admin.php?page=slug&task=resetallslugs&action=jstask")); ?>">
+            <a class="jsstadmin-add-link button" title="<?php echo esc_attr(__('Reset','js-support-ticket')); ?>" href="<?php echo esc_url(wp_nonce_url(admin_url("admin.php?page=slug&task=resetallslugs&action=jstask"),"reset-all-slugs")); ?>">
                 <?php echo esc_html(__('Reset All','js-support-ticket')); ?>
             </a>
         </div>

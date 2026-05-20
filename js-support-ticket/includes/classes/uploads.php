@@ -23,7 +23,7 @@ class JSSTuploads {
             if($this->jsst_uploadfor == 'ticket'){
                 if(!is_numeric($this->jsst_ticketid)) return false;
                 $jsst_path = $jsst_path . '/ticket';
-                $jsst_query = "SELECT attachmentdir FROM `".jssupportticket::$_db->prefix."js_ticket_tickets` WHERE id = ".esc_sql($this->jsst_ticketid);
+                $jsst_query = "SELECT attachmentdir FROM `".jssupportticket::$_db->prefix."js_ticket_tickets` WHERE id = ".intval($this->jsst_ticketid);
                 $jsst_foldername = jssupportticket::$_db->get_var($jsst_query);
             }elseif($this->jsst_uploadfor == 'article'){
                 $jsst_path = $jsst_path . '/articles/article_'.$this->jsst_articleid;
