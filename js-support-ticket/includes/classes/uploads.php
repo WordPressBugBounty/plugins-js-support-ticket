@@ -406,6 +406,7 @@ class JSSTuploads {
         if(!isset($_FILES[$jsst_field])){
             return;
         }
+        $jsst_filename = '';
         if (!function_exists('wp_handle_upload')) {
             do_action('jssupportticket_load_wp_file');
         }

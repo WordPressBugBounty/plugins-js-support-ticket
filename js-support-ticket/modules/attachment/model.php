@@ -198,6 +198,33 @@ class JSSTattachmentModel {
             return false;
         }
 
+        // --- ADDED SECURITY CHECK: Copied from getDownloadAttachmentById ---
+        $jsst_ticketid = intval($jsst_id);
+        $jsst_download = false;
+        
+        if(!JSSTincluder::getObjectClass('user')->isguest()){
+            if(current_user_can('manage_options') || current_user_can('jsst_support_ticket_tickets') ){
+                $jsst_download = true;
+            }else{
+                if( in_array('agent',jssupportticket::$_active_addons) && JSSTincluder::getJSModel('agent')->isUserStaff()){
+                    $jsst_download = true;
+                }else{
+                    if(JSSTincluder::getJSModel('ticket')->validateTicketDetailForUser($jsst_ticketid)){
+                        $jsst_download = true;
+                    }
+                }
+            }
+        }else{ // user is visitor
+            $jsst_download = JSSTincluder::getJSModel('ticket')->validateTicketDetailForVisitor($jsst_ticketid);
+        }
+
+        // If the user fails all checks, block the download and show a 404 page
+        if ($jsst_download != true) {
+            include( get_query_template( '404' ) );
+            exit;
+        }
+        // -------------------------------------------------------------------
+
         $jsst_filename = jssupportticketphplib::JSST_str_replace(' ', '_', $jsst_file_name);
         $jsst_filename = jssupportticketphplib::JSST_clean_file_path($jsst_filename);
 
@@ -253,7 +280,7 @@ class JSSTattachmentModel {
         flush();
 
         // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-        echo $wp_filesystem->get_contents($jsst_file);
+        echo $jsst_wp_filesystem->get_contents($jsst_file);
         exit;
     }
 
