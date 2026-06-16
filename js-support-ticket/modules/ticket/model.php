@@ -1135,7 +1135,10 @@ class JSSTticketModel {
         }
 
         $jsst_sendEmail = true;
+        $jsst_isedit = false;
+        $jsst_existing_attachmentdir = '';
         if (isset($jsst_data['id']) && is_numeric($jsst_data['id'])) {
+            $jsst_isedit = true;
             $jsst_sendEmail = false;
             $jsst_updated = date_i18n('Y-m-d H:i:s');
             $jsst_created = $jsst_data['created'];
@@ -1152,10 +1155,18 @@ class JSSTticketModel {
                     }
                 }
             }
-            //to check hash
-            $jsst_query = "SELECT hash,uid FROM `".jssupportticket::$_db->prefix."js_ticket_tickets` WHERE ticketid='".intval($jsst_data['ticketid'])."'";
+            //to check hash and keep server-side attachment folder for edit case
+            $jsst_query = "SELECT hash,uid,attachmentdir FROM `".jssupportticket::$_db->prefix."js_ticket_tickets` WHERE id=".intval($jsst_data['id']);
             $jsst_row = jssupportticket::$_db->get_row($jsst_query);
+            if(empty($jsst_row)){
+                return false;
+            }
             $jsst_edituid = $jsst_row->uid;
+            $jsst_existing_attachmentdir = isset($jsst_row->attachmentdir) ? $jsst_row->attachmentdir : '';
+            if($jsst_existing_attachmentdir == '' || preg_match('/^[A-Za-z]{7}$/', $jsst_existing_attachmentdir) !== 1){
+                JSSTmessage::setMessage(esc_html(__('Invalid attachment folder', 'js-support-ticket')), 'error');
+                return false;
+            }
             if( $jsst_row->hash != $this->generateHash($jsst_data['id']) ){
                 return false;
             }//end
@@ -1165,9 +1176,15 @@ class JSSTticketModel {
             $jsst_data['token'] = $this->generateTicketToken();
             $jsst_data['customticketno'] = $jsst_idresult['customticketno'];
 
-            $jsst_data['attachmentdir'] = $this->getRandomFolderName();
             $jsst_created = date_i18n('Y-m-d H:i:s');
             $jsst_updated = '';
+        }
+
+        // Do not trust attachmentdir from POST. It is a filesystem folder name and must stay server-controlled.
+        if($jsst_isedit == true){
+            $jsst_data['attachmentdir'] = $jsst_existing_attachmentdir;
+        }else{
+            $jsst_data['attachmentdir'] = $this->getRandomFolderName();
         }
 
         if(isset($jsst_data['assigntome']) && $jsst_data['assigntome'] == 1){
