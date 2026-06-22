@@ -181,8 +181,11 @@ div.js-ticket-wrapper div.js-ticket-toparea div.js-ticket-data1 {float: left;}
 .js-ticket-wrapper .js-ticket-bottom-data-part .js-ticket-datapart-buttons-action {float: right !important;}
 .js-ticket-wrapper .js-ticket-bottom-data-part .js-ticket-datapart-buttons-action .js-ticket-datapart-action-btn {margin-right: 0 !important;margin-left: 5px;float: right !important;}
 .js-ticket-wrapper .js-ticket-bottom-data-part .js-ticket-datapart-buttons-action .js-ticket-datapart-action-btn img {margin-right: 0 !important;margin-left: 3px !important;}
-
+.jsst-support-system-error-icon-badge,
+.jsst-ai-badge {margin-right: 0;margin-left: 12px;}
 /* ticket detail */
+.jsst-attachment-purged .jsst-purged-icon {margin-right: 0;margin-left: 8px;}
+.jsst-purged-reason {margin-left: 0;margin-right: 4px;}
 .js-tkt-det-left {float: right;padding-right: 0;padding-left: 30px;}
 .js-tkt-det-user .js-tkt-det-user-image {float: right;}
 .js-tkt-det-user .js-tkt-det-user-cnt {padding-right: 10px;}

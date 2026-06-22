@@ -346,12 +346,12 @@ if (jssupportticket::$_config['offline'] == 2) {
                     jQuery.post(ajaxurl, {action: 'jsticket_ajax', jstmod: 'mergeticket', task: 'getTicketsForMerging', name: name, email: email,ticketid:ticketid, '_wpnonce': nonce}, function (data) {
                         data=jQuery.parseJSON(data);
                        if(data !== 'undefined') {
-							if(data !== '') {
-								jQuery('div#popup-record-data').html('');
-								jQuery('div#popup-record-data').html(jsstDecodeHTML(data['data']));
-							}else{
-								jQuery('div#popup-record-data').html('');
-							}
+                            if(data !== '') {
+                                jQuery('div#popup-record-data').html('');
+                                jQuery('div#popup-record-data').html(jsstDecodeHTML(data['data']));
+                            }else{
+                                jQuery('div#popup-record-data').html('');
+                            }
                         }else{
                             jQuery('div#popup-record-data').html('');
                         }
@@ -1021,21 +1021,21 @@ if (jssupportticket::$_config['offline'] == 2) {
                                         }
                                         ?>
                                     <td class=""><?php 
-										if(in_array('agent',jssupportticket::$_active_addons) && JSSTincluder::getJSModel('agent')->isUserStaff()){ //agent
-											echo wp_kses_post($jsst_history->message); 
-										}else{
-											if($jsst_message == 'member'){ // message by the user, so show full message to user
-												echo wp_kses_post($jsst_history->message); 
-											}else{
-												if (jssupportticket::$_config['anonymous_name_on_ticket_reply'] == 1) { 
-													$jsst_historymessage = $jsst_history->message;
-													echo wp_kses_post(jssupportticketphplib::JSST_preg_replace("/\([^)]+\)/","( ".__("Agent", "js-support-ticket")." )",$jsst_historymessage));
-												}else{
-													echo wp_kses_post($jsst_history->message); 
-												}
-											}
-										}											
-									?></td>
+                                        if(in_array('agent',jssupportticket::$_active_addons) && JSSTincluder::getJSModel('agent')->isUserStaff()){ //agent
+                                            echo wp_kses_post($jsst_history->message); 
+                                        }else{
+                                            if($jsst_message == 'member'){ // message by the user, so show full message to user
+                                                echo wp_kses_post($jsst_history->message); 
+                                            }else{
+                                                if (jssupportticket::$_config['anonymous_name_on_ticket_reply'] == 1) { 
+                                                    $jsst_historymessage = $jsst_history->message;
+                                                    echo wp_kses_post(jssupportticketphplib::JSST_preg_replace("/\([^)]+\)/","( ".__("Agent", "js-support-ticket")." )",$jsst_historymessage));
+                                                }else{
+                                                    echo wp_kses_post($jsst_history->message); 
+                                                }
+                                            }
+                                        }                                           
+                                    ?></td>
                                   </tr>
                                 <?php } ?>
                             </tbody>
@@ -1278,82 +1278,82 @@ if (jssupportticket::$_config['offline'] == 2) {
             ?>
 
             <?php if(!empty($jsst_field_array['department']) && in_array('actions',jssupportticket::$_active_addons)){ 
-				if(JSSTincluder::getJSModel('userpermissions')->checkPermissionGrantedForTask('Ticket Department Transfer')){
-				?>
-				<div id="popupfordepartmenttransfer" style="display:none" >
-					<div class="jsst-popup-header" >
-						<div class="popup-header-text" >
-							<?php echo esc_html(jssupportticket::JSST_getVarValue($jsst_field_array['department'])) ." ". esc_html(__('Transfer', 'js-support-ticket')); ?>
-						</div>
-						<div class="popup-header-close-img" >
-						</div>
-					</div>
-					<div>
-						<form method="post" action="<?php echo esc_url(wp_nonce_url(jssupportticket::makeUrl(array('jstmod'=>'ticket','task'=>'transferdepartment')),"transfer-department-".jssupportticket::$jsst_data[0]->id)); ?>" enctype="multipart/form-data">
-							<div class="js-ticket-premade-msg-wrp"><!-- Select Department Wrapper -->
-								<div class="js-ticket-premade-field-title"><?php echo esc_html(__('Select', 'js-support-ticket')) ." ". esc_html(jssupportticket::JSST_getVarValue($jsst_field_array['department'])); ?></div>
-								<div class="js-ticket-premade-field-wrp">
-									<?php echo wp_kses(JSSTformfield::select('departmentid', JSSTincluder::getJSModel('department')->getDepartmentForCombobox(), isset(jssupportticket::$jsst_data[0]->departmentid) ? jssupportticket::$jsst_data[0]->departmentid : '', esc_html(__('Select', 'js-support-ticket')) ." ". esc_html(jssupportticket::JSST_getVarValue($jsst_field_array['department'])), array('class' => 'js-ticket-premade-select')), JSST_ALLOWED_TAGS); ?>
+                if(JSSTincluder::getJSModel('userpermissions')->checkPermissionGrantedForTask('Ticket Department Transfer')){
+                ?>
+                <div id="popupfordepartmenttransfer" style="display:none" >
+                    <div class="jsst-popup-header" >
+                        <div class="popup-header-text" >
+                            <?php echo esc_html(jssupportticket::JSST_getVarValue($jsst_field_array['department'])) ." ". esc_html(__('Transfer', 'js-support-ticket')); ?>
+                        </div>
+                        <div class="popup-header-close-img" >
+                        </div>
+                    </div>
+                    <div>
+                        <form method="post" action="<?php echo esc_url(wp_nonce_url(jssupportticket::makeUrl(array('jstmod'=>'ticket','task'=>'transferdepartment')),"transfer-department-".jssupportticket::$jsst_data[0]->id)); ?>" enctype="multipart/form-data">
+                            <div class="js-ticket-premade-msg-wrp"><!-- Select Department Wrapper -->
+                                <div class="js-ticket-premade-field-title"><?php echo esc_html(__('Select', 'js-support-ticket')) ." ". esc_html(jssupportticket::JSST_getVarValue($jsst_field_array['department'])); ?></div>
+                                <div class="js-ticket-premade-field-wrp">
+                                    <?php echo wp_kses(JSSTformfield::select('departmentid', JSSTincluder::getJSModel('department')->getDepartmentForCombobox(), isset(jssupportticket::$jsst_data[0]->departmentid) ? jssupportticket::$jsst_data[0]->departmentid : '', esc_html(__('Select', 'js-support-ticket')) ." ". esc_html(jssupportticket::JSST_getVarValue($jsst_field_array['department'])), array('class' => 'js-ticket-premade-select')), JSST_ALLOWED_TAGS); ?>
 
-								</div>
-							</div>
-							<?php if(in_array('note', jssupportticket::$_active_addons)){ ?>
-								<div class="js-ticket-text-editor-wrp">
-									<div class="js-ticket-text-editor-field-title"><?php echo esc_html(__('Type Note for', 'js-support-ticket')) ." ". esc_html(jssupportticket::JSST_getVarValue($jsst_field_array['department'])); ?></div>
-									<div class="js-ticket-text-editor-field"><?php wp_editor('', 'departmenttranfernote', array('media_buttons' => false)); ?></div>
-								</div>
-							<?php } ?>
-							<div class="js-ticket-reply-form-button-wrp">
-								<?php echo wp_kses(JSSTformfield::submitbutton('departmenttransferbutton', esc_html(__('Transfer', 'js-support-ticket')), array('class' => 'button js-ticket-save-button', 'onclick' => "return checktinymcebyid('departmenttranfernote');")), JSST_ALLOWED_TAGS); ?>
-							</div>
-							<?php echo wp_kses(JSSTformfield::hidden('ticketid', jssupportticket::$jsst_data[0]->id), JSST_ALLOWED_TAGS); ?>
-							<?php echo wp_kses(JSSTformfield::hidden('uid', JSSTincluder::getObjectClass('user')->uid()), JSST_ALLOWED_TAGS); ?>
-							<?php echo wp_kses(JSSTformfield::hidden('action', 'ticket_transferdepartment'), JSST_ALLOWED_TAGS); ?>
-							<?php echo wp_kses(JSSTformfield::hidden('form_request', 'jssupportticket'), JSST_ALLOWED_TAGS); ?>
-							<?php echo wp_kses(JSSTformfield::hidden('jsstpageid', get_the_ID()), JSST_ALLOWED_TAGS); ?>
-						</form>
-					</div> <!-- end of departmenttransfer div -->
-				</div>
-				<?php } ?>
+                                </div>
+                            </div>
+                            <?php if(in_array('note', jssupportticket::$_active_addons)){ ?>
+                                <div class="js-ticket-text-editor-wrp">
+                                    <div class="js-ticket-text-editor-field-title"><?php echo esc_html(__('Type Note for', 'js-support-ticket')) ." ". esc_html(jssupportticket::JSST_getVarValue($jsst_field_array['department'])); ?></div>
+                                    <div class="js-ticket-text-editor-field"><?php wp_editor('', 'departmenttranfernote', array('media_buttons' => false)); ?></div>
+                                </div>
+                            <?php } ?>
+                            <div class="js-ticket-reply-form-button-wrp">
+                                <?php echo wp_kses(JSSTformfield::submitbutton('departmenttransferbutton', esc_html(__('Transfer', 'js-support-ticket')), array('class' => 'button js-ticket-save-button', 'onclick' => "return checktinymcebyid('departmenttranfernote');")), JSST_ALLOWED_TAGS); ?>
+                            </div>
+                            <?php echo wp_kses(JSSTformfield::hidden('ticketid', jssupportticket::$jsst_data[0]->id), JSST_ALLOWED_TAGS); ?>
+                            <?php echo wp_kses(JSSTformfield::hidden('uid', JSSTincluder::getObjectClass('user')->uid()), JSST_ALLOWED_TAGS); ?>
+                            <?php echo wp_kses(JSSTformfield::hidden('action', 'ticket_transferdepartment'), JSST_ALLOWED_TAGS); ?>
+                            <?php echo wp_kses(JSSTformfield::hidden('form_request', 'jssupportticket'), JSST_ALLOWED_TAGS); ?>
+                            <?php echo wp_kses(JSSTformfield::hidden('jsstpageid', get_the_ID()), JSST_ALLOWED_TAGS); ?>
+                        </form>
+                    </div> <!-- end of departmenttransfer div -->
+                </div>
+                <?php } ?>
             <?php } ?>
 
             <?php if(in_array('agent',jssupportticket::$_active_addons)){ 
-				if(JSSTincluder::getJSModel('userpermissions')->checkPermissionGrantedForTask('Assign Ticket To Agent')){
-				?>
-				<div id="popupforagenttransfer" style="display:none" >
-					<div class="jsst-popup-header" >
-						<div class="popup-header-text" >
-							<?php echo esc_html(__('Assign To Agent', 'js-support-ticket')); ?>
-						</div>
-						<div class="popup-header-close-img" >
-						</div>
-					</div>
-					<div>
-						<form method="post" action="<?php echo esc_url(wp_nonce_url(jssupportticket::makeUrl(array('jstmod'=>'ticket','task'=>'assigntickettostaff')),"assign-ticket-to-staff-".jssupportticket::$jsst_data[0]->id)); ?>" enctype="multipart/form-data">
-							<div class="js-ticket-premade-msg-wrp"><!-- Select Department Wrapper -->
-								<div class="js-ticket-premade-field-title"><?php echo esc_html(__('Agent', 'js-support-ticket')); ?></div>
-								<div class="js-ticket-premade-field-wrp">
-									<?php echo wp_kses(JSSTformfield::select('staffid', JSSTincluder::getJSModel('agent')->getStaffForCombobox(), jssupportticket::$jsst_data[0]->staffid, esc_html(__('Select Agent', 'js-support-ticket')), array('class' => 'inputbox js-ticket-premade-select')), JSST_ALLOWED_TAGS); ?>
-								</div>
-							</div>
-							<?php if(in_array('note', jssupportticket::$_active_addons)){ ?>
-								<div class="js-ticket-text-editor-wrp">
-									<div class="js-ticket-text-editor-field-title"><?php echo esc_html(__('Assigning Note', 'js-support-ticket')); ?></div>
-									<div class="js-ticket-text-editor-field"><?php wp_editor('', 'assignnote', array('media_buttons' => false)); ?></div>
-								</div>
-							<?php } ?>
-							<div class="js-ticket-reply-form-button-wrp">
-								<?php echo wp_kses(JSSTformfield::submitbutton('assigntostaff', esc_html(__('Assign', 'js-support-ticket')), array('class' => 'button js-ticket-save-button', 'onclick' => "return checktinymcebyid('assignnote');")), JSST_ALLOWED_TAGS); ?>
-							</div>
-							<?php echo wp_kses(JSSTformfield::hidden('ticketid', jssupportticket::$jsst_data[0]->id), JSST_ALLOWED_TAGS); ?>
-							<?php echo wp_kses(JSSTformfield::hidden('uid', JSSTincluder::getObjectClass('user')->uid()), JSST_ALLOWED_TAGS); ?>
-							<?php echo wp_kses(JSSTformfield::hidden('action', 'ticket_assigntickettostaff'), JSST_ALLOWED_TAGS); ?>
-							<?php echo wp_kses(JSSTformfield::hidden('form_request', 'jssupportticket'), JSST_ALLOWED_TAGS); ?>
-							<?php echo wp_kses(JSSTformfield::hidden('jsstpageid', get_the_ID()), JSST_ALLOWED_TAGS); ?>
-						</form>
-					</div> <!-- end of assigntostaff div -->
-				</div>
-				<?php } ?>
+                if(JSSTincluder::getJSModel('userpermissions')->checkPermissionGrantedForTask('Assign Ticket To Agent')){
+                ?>
+                <div id="popupforagenttransfer" style="display:none" >
+                    <div class="jsst-popup-header" >
+                        <div class="popup-header-text" >
+                            <?php echo esc_html(__('Assign To Agent', 'js-support-ticket')); ?>
+                        </div>
+                        <div class="popup-header-close-img" >
+                        </div>
+                    </div>
+                    <div>
+                        <form method="post" action="<?php echo esc_url(wp_nonce_url(jssupportticket::makeUrl(array('jstmod'=>'ticket','task'=>'assigntickettostaff')),"assign-ticket-to-staff-".jssupportticket::$jsst_data[0]->id)); ?>" enctype="multipart/form-data">
+                            <div class="js-ticket-premade-msg-wrp"><!-- Select Department Wrapper -->
+                                <div class="js-ticket-premade-field-title"><?php echo esc_html(__('Agent', 'js-support-ticket')); ?></div>
+                                <div class="js-ticket-premade-field-wrp">
+                                    <?php echo wp_kses(JSSTformfield::select('staffid', JSSTincluder::getJSModel('agent')->getStaffForCombobox(), jssupportticket::$jsst_data[0]->staffid, esc_html(__('Select Agent', 'js-support-ticket')), array('class' => 'inputbox js-ticket-premade-select')), JSST_ALLOWED_TAGS); ?>
+                                </div>
+                            </div>
+                            <?php if(in_array('note', jssupportticket::$_active_addons)){ ?>
+                                <div class="js-ticket-text-editor-wrp">
+                                    <div class="js-ticket-text-editor-field-title"><?php echo esc_html(__('Assigning Note', 'js-support-ticket')); ?></div>
+                                    <div class="js-ticket-text-editor-field"><?php wp_editor('', 'assignnote', array('media_buttons' => false)); ?></div>
+                                </div>
+                            <?php } ?>
+                            <div class="js-ticket-reply-form-button-wrp">
+                                <?php echo wp_kses(JSSTformfield::submitbutton('assigntostaff', esc_html(__('Assign', 'js-support-ticket')), array('class' => 'button js-ticket-save-button', 'onclick' => "return checktinymcebyid('assignnote');")), JSST_ALLOWED_TAGS); ?>
+                            </div>
+                            <?php echo wp_kses(JSSTformfield::hidden('ticketid', jssupportticket::$jsst_data[0]->id), JSST_ALLOWED_TAGS); ?>
+                            <?php echo wp_kses(JSSTformfield::hidden('uid', JSSTincluder::getObjectClass('user')->uid()), JSST_ALLOWED_TAGS); ?>
+                            <?php echo wp_kses(JSSTformfield::hidden('action', 'ticket_assigntickettostaff'), JSST_ALLOWED_TAGS); ?>
+                            <?php echo wp_kses(JSSTformfield::hidden('form_request', 'jssupportticket'), JSST_ALLOWED_TAGS); ?>
+                            <?php echo wp_kses(JSSTformfield::hidden('jsstpageid', get_the_ID()), JSST_ALLOWED_TAGS); ?>
+                        </form>
+                    </div> <!-- end of assigntostaff div -->
+                </div>
+                <?php } ?>
             <?php } ?>
 
             <?php if(in_array('note',jssupportticket::$_active_addons)){ ?>
@@ -1520,9 +1520,9 @@ if (jssupportticket::$_config['offline'] == 2) {
                                     <a class="js-tkt-det-other-tkt-btn" href="<?php echo esc_url($jsst_url); ?>">
                                         <?php
                                         if(in_array('agent', jssupportticket::$_active_addons) && jssupportticket::$jsst_data['user_staff']){
-											echo esc_html(__('View all','js-support-ticket')).' '.esc_html(jssupportticket::$jsst_data['nticket']).' '. esc_html(__('tickets by','js-support-ticket')).' '.esc_html(jssupportticket::$jsst_data[0]->name);
+                                            echo esc_html(__('View all','js-support-ticket')).' '.esc_html(jssupportticket::$jsst_data['nticket']).' '. esc_html(__('tickets by','js-support-ticket')).' '.esc_html(jssupportticket::$jsst_data[0]->name);
                                         }else{
-											echo esc_html(__('View all','js-support-ticket')).' '.esc_html(jssupportticket::$jsst_data['nticket']).' '. esc_html(__('tickets','js-support-ticket'));
+                                            echo esc_html(__('View all','js-support-ticket')).' '.esc_html(jssupportticket::$jsst_data['nticket']).' '. esc_html(__('tickets','js-support-ticket'));
                                         }
                                         ?>
                                     </a>
@@ -1813,20 +1813,32 @@ if (jssupportticket::$_config['offline'] == 2) {
                                                     <span class="js-ticket-thread-time"><?php echo esc_html($jsst_time); ?></span>
                                                 </div>
                                                 <?php } ?>
-
-                                                <?php
-                                                if($jsst_note->filesize > 0 && !empty($jsst_note->filename)){ ?>
-                                                    <div class="js-ticket-attachments-wrp">
-                                                        <div class="js_ticketattachment">
-                                                            <span class="js-ticket-download-file-title">
-                                                                <?php echo esc_html($jsst_note->filename); echo '(' . esc_html($jsst_note->filesize / 1024) . ')'; ?>
+                                                    <?php
+                                                    if ( $jsst_note->filedeleted == 1 ) { ?>
+                                                        <div class="jsst-attachment-purged">
+                                                            <svg class="jsst-purged-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                                                                <path d="M6.854 7.146a.5.5 0 1 0-.708.708L7.293 9l-1.147 1.146a.5.5 0 0 0 .708.708L8 9.707l1.146 1.147a.5.5 0 0 0 .708-.708L8.707 9l1.147-1.146a.5.5 0 0 0-.708-.708L8 8.293 6.854 7.146z"/>
+                                                                <path d="M14 14V4.5L9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2zM9.5 3A1.5 1.5 0 0 0 11 4.5h2V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h5.5v2z"/>
+                                                            </svg>
+                                                            <span>
+                                                                <span class="jsst-purged-filename"><?php echo esc_html( $jsst_note->filename ); ?></span>
+                                                                <span class="jsst-purged-reason"><?php echo esc_html__( '(Removed automatically to save space)', 'js-support-ticket' ); ?></span>
                                                             </span>
-                                                            <a class="js-download-button" target="_blank" href="<?php echo esc_url(jssupportticket::makeUrl(array('jstmod'=>'note','task'=>'downloadbyid','action'=>'jstask','id'=> $jsst_note->id ,'jsstpageid'=>get_the_ID()))); ?>">
-                                                                <img alt="<?php echo esc_attr(__('image','js-support-ticket')); ?>" class="js-ticket-download-img" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>/includes/images/ticket-detail/download.png">
-                                                            </a>
                                                         </div>
-                                                    </div>
-                                                <?php } ?>
+                                                        <?php
+                                                    } elseif($jsst_note->filesize > 0 && !empty($jsst_note->filename)){ ?>
+                                                        <div class="js-ticket-attachments-wrp">
+                                                            <div class="js_ticketattachment">
+                                                                <span class="js-ticket-download-file-title">
+                                                                    <?php echo esc_html($jsst_note->filename); echo '(' . esc_html($jsst_note->filesize / 1024) . ')'; ?>
+                                                                </span>
+                                                                <a class="js-download-button" target="_blank" href="<?php echo esc_url(jssupportticket::makeUrl(array('jstmod'=>'note','task'=>'downloadbyid','action'=>'jstask','id'=> $jsst_note->id ,'jsstpageid'=>get_the_ID()))); ?>">
+                                                                    <img alt="<?php echo esc_attr(__('image','js-support-ticket')); ?>" class="js-ticket-download-img" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>/includes/images/ticket-detail/download.png">
+                                                                </a>
+                                                            </div>
+                                                        </div>
+                                                        <?php
+                                                    } ?>
                                             </div>
                                             <div class="js-ticket-time-stamp-wrp">
                                                 <span class="js-ticket-ticket-created-date">
@@ -1883,14 +1895,31 @@ if (jssupportticket::$_config['offline'] == 2) {
                                 <div class="js-ticket-thread-data note-msg">
                                     <?php echo wp_kses_post(jssupportticket::$jsst_data[0]->message); ?>
                                     <?php
-                                     if (!empty(jssupportticket::$jsst_data['ticket_attachment'])) { ?>
-                                         <div class="js-ticket-attachments-wrp">
-                                             <?php foreach (jssupportticket::$jsst_data['ticket_attachment'] AS $jsst_attachment) {
+                                    if (!empty(jssupportticket::$jsst_data['ticket_attachment'])) { ?>
+                                        <div class="js-ticket-attachments-wrp">
+                                            <?php 
+                                            $jsst_ticketdata = '';
+                                            $jsst_active_count = 0;
+                                            foreach (jssupportticket::$jsst_data['ticket_attachment'] AS $jsst_attachment) {
+                                                // Check if the file was deleted by the Auto Cleanup Cron
+                                                if ( $jsst_attachment->deleted == 1 ) {
+                                                    $jsst_ticketdata .= '<div class="jsst-attachment-purged">';
+                                                        $jsst_ticketdata .= '<svg class="jsst-purged-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">';
+                                                            $jsst_ticketdata .= '<path d="M6.854 7.146a.5.5 0 1 0-.708.708L7.293 9l-1.147 1.146a.5.5 0 0 0 .708.708L8 9.707l1.146 1.147a.5.5 0 0 0 .708-.708L8.707 9l1.147-1.146a.5.5 0 0 0-.708-.708L8 8.293 6.854 7.146z"/>';
+                                                            $jsst_ticketdata .= '<path d="M14 14V4.5L9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2zM9.5 3A1.5 1.5 0 0 0 11 4.5h2V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h5.5v2z"/>';
+                                                        $jsst_ticketdata .= '</svg>';
+                                                        $jsst_ticketdata .= '<span>';
+                                                            $jsst_ticketdata .= '<span class="jsst-purged-filename">'. esc_html( $jsst_attachment->filename ) .'</span>';
+                                                            $jsst_ticketdata .= '<span class="jsst-purged-reason">'. esc_html__( '(Removed automatically to save space)', 'js-support-ticket' ) .'</span>';
+                                                        $jsst_ticketdata .= '</span>';
+                                                    $jsst_ticketdata .= '</div>';
+                                                } else {
+                                                    $jsst_active_count++;
                                                     $jsst_path = jssupportticket::makeUrl(array('jstmod'=>'ticket','task'=>'downloadbyid','action'=>'jstask','id'=> $jsst_attachment->id ,'jsstpageid'=>get_the_ID()));
                                                     $jsst_data = wp_check_filetype($jsst_attachment->filename);
                                                     $jsst_type = $jsst_data['type'];
 
-                                                    echo '
+                                                    $jsst_ticketdata .= '
                                                     <div class="js_ticketattachment">
                                                         <span class="js_ticketattachment_fname">
                                                             ' . esc_html($jsst_attachment->filename) . '
@@ -1899,17 +1928,24 @@ if (jssupportticket::$_config['offline'] == 2) {
                                                             . esc_html(__('Download', 'js-support-ticket')).'
                                                         </a>';
                                                         if(jssupportticketphplib::JSST_strpos($jsst_type, "image") !== false) {
-                                                            echo '<a data-gall="gallery-ticket-thread" class="js-download-button venobox" data-vbtype="image" title="'. esc_html(__('View','js-support-ticket')).'" href="'. esc_url(JSSTincluder::getJSModel('attachment')->getAttachmentImage($jsst_attachment->id)) .'"  target="_blank">
+                                                            $jsst_ticketdata .= '<a data-gall="gallery-ticket-thread" class="js-download-button venobox" data-vbtype="image" title="'. esc_html(__('View','js-support-ticket')).'" href="'. esc_url(JSSTincluder::getJSModel('attachment')->getAttachmentImage($jsst_attachment->id)) .'"  target="_blank">
                                                             <img alt="'. esc_html(__('View Image','js-support-ticket')).'" src="' . esc_url(JSST_PLUGIN_URL) . 'includes/images/ticket-detail/view.png" />
                                                                 </a>';
                                                         }
-                                                    echo '</div>';
-
+                                                        $jsst_ticketdata .= '
+                                                    </div>';
                                                 }
+                                            }
+                                            // Only show "Download All" if there is at least one active file
+                                            if ( $jsst_active_count > 0 ) {
                                                 $jsst_nonce = wp_create_nonce("download-all-".jssupportticket::$jsst_data[0]->id);
-                                                echo '<a class="js-all-download-button" target="_blank" href="' . esc_url(jssupportticket::makeUrl(array('jstmod'=>'ticket', 'task'=>'downloadall', 'action'=>'jstask', 'downloadid'=>jssupportticket::$jsst_data[0]->id, '_wpnonce'=>$jsst_nonce , 'jsstpageid'=>get_the_ID()))) . '" >'. esc_html(__('Download All', 'js-support-ticket')) . '</a>';?>
-                                         </div>
-                                     <?php } ?>
+                                                $jsst_ticketdata .= '<a class="js-all-download-button" target="_blank" href="' . esc_url(jssupportticket::makeUrl(array('jstmod'=>'ticket', 'task'=>'downloadall', 'action'=>'jstask', 'downloadid'=>jssupportticket::$jsst_data[0]->id, '_wpnonce'=>$jsst_nonce , 'jsstpageid'=>get_the_ID()))) . '" >'. esc_html(__('Download All', 'js-support-ticket')) . '</a>';
+                                            }
+                                            // Echo the entire sanitized string at the end
+                                            echo wp_kses($jsst_ticketdata, JSST_ALLOWED_TAGS); 
+                                            ?>
+                                        </div>
+                                    <?php } ?>
                                 </div>
                                 <div class="js-ticket-thread-cnt-btm">
                                     <span class="js-ticket-thread-date">
@@ -1931,7 +1967,7 @@ if (jssupportticket::$_config['offline'] == 2) {
                                             // } ?>
                                         </div>
                                         <div class="js-ticket-thread-cnt"><!-- Right Side Ticket Data -->
-											<div class="js-ticket-thread-data">
+                                            <div class="js-ticket-thread-data">
                                                 <?php
                                                 if(!empty($jsst_field_array['fullname'])) { ?>
                                                     <span class="js-ticket-thread-person">
@@ -1940,22 +1976,22 @@ if (jssupportticket::$_config['offline'] == 2) {
                                                             if(jssupportticket::$jsst_data[0]->uid  != $jsst_reply->uid){ //reply by staff, need anonymous
                                                                 echo esc_html(jssupportticket::$_config['title']);
                                                             }else{ // reply by user   
-    															if($jsst_reply->name == ""){
-    																// name field value is empty in some old tickets
-    																$jsst_replyname = JSSTincluder::getJSModel('reply')->getUserNameFromReplyById($jsst_reply->replyid);
-    																echo esc_html($jsst_replyname); 
-    															}else{
-    																echo esc_html($jsst_reply->name); 
-    															}
+                                                                if($jsst_reply->name == ""){
+                                                                    // name field value is empty in some old tickets
+                                                                    $jsst_replyname = JSSTincluder::getJSModel('reply')->getUserNameFromReplyById($jsst_reply->replyid);
+                                                                    echo esc_html($jsst_replyname); 
+                                                                }else{
+                                                                    echo esc_html($jsst_reply->name); 
+                                                                }
                                                             }
                                                         }elseif(jssupportticket::$_config['anonymous_name_on_ticket_reply'] == 2){
-    														if($jsst_reply->name == ""){
-    															// name field value is empty in some old tickets
-    															$jsst_replyname = JSSTincluder::getJSModel('reply')->getUserNameFromReplyById($jsst_reply->replyid);
-    															echo esc_html($jsst_replyname); 
-    														}else{
-    															echo esc_html($jsst_reply->name); 
-    														}
+                                                            if($jsst_reply->name == ""){
+                                                                // name field value is empty in some old tickets
+                                                                $jsst_replyname = JSSTincluder::getJSModel('reply')->getUserNameFromReplyById($jsst_reply->replyid);
+                                                                echo esc_html($jsst_replyname); 
+                                                            }else{
+                                                                echo esc_html($jsst_reply->name); 
+                                                            }
                                                         }
                                                         ?>
                                                     </span>
@@ -2002,13 +2038,13 @@ if (jssupportticket::$_config['offline'] == 2) {
                                                     <?php 
                                                 }
                                                  ?>
-											</div>
+                                            </div>
                                             <?php
-											if (jssupportticket::$_config['show_email_on_ticket_reply'] == 1 && !empty($jsst_field_array['email'])) {
+                                            if (jssupportticket::$_config['show_email_on_ticket_reply'] == 1 && !empty($jsst_field_array['email'])) {
                                                 if(isset($jsst_reply->staffemail)){ ?>
-													<div class="js-ticket-thread-data">
-														<span class="js-ticket-thread-email"><?php echo esc_html($jsst_reply->staffemail); ?></span>
-													</div>
+                                                    <div class="js-ticket-thread-data">
+                                                        <span class="js-ticket-thread-email"><?php echo esc_html($jsst_reply->staffemail); ?></span>
+                                                    </div>
                                                     <?php
                                                 } elseif(isset($jsst_reply->useremail)){ ?>
                                                     <div class="js-ticket-thread-data">
@@ -2016,16 +2052,34 @@ if (jssupportticket::$_config['offline'] == 2) {
                                                     </div>
                                                     <?php
                                                 }
-										    }	
-											?>
+                                            }   
+                                            ?>
                                             <div class="js-ticket-thread-data">
                                                 <?php echo ($jsst_reply->ticketviaemail == 1) ? esc_html(__('Created via Email', 'js-support-ticket')) : ''; ?>
                                             </div>
                                             <div class="js-ticket-thread-data note-msg">
-                                                <?php echo wp_kses_post(html_entity_decode($jsst_reply->message)); ?>
+                                                <?php echo wp_kses_post(html_entity_decode($jsst_reply->message));
+                                                $jsst_active_count = 0; // Counter for active attachments
+                                                ?>
                                                 <?php if (!empty($jsst_reply->attachments)) { ?>
                                                     <div class="js-ticket-attachments-wrp">
                                                         <?php foreach ($jsst_reply->attachments AS $jsst_attachment) {
+                                                            // Check if the file was deleted by the Auto Cleanup Cron
+                                                            if ( $jsst_attachment->deleted == 1 ) { ?>
+                                                                <div class="jsst-attachment-purged">
+                                                                    <svg class="jsst-purged-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                                                                        <path d="M6.854 7.146a.5.5 0 1 0-.708.708L7.293 9l-1.147 1.146a.5.5 0 0 0 .708.708L8 9.707l1.146 1.147a.5.5 0 0 0 .708-.708L8.707 9l1.147-1.146a.5.5 0 0 0-.708-.708L8 8.293 6.854 7.146z"/>
+                                                                        <path d="M14 14V4.5L9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2zM9.5 3A1.5 1.5 0 0 0 11 4.5h2V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h5.5v2z"/>
+                                                                    </svg>
+                                                                    <span>
+                                                                        <span class="jsst-purged-filename"><?php echo esc_html( $jsst_attachment->filename ); ?></span>
+                                                                        <span class="jsst-purged-reason"><?php echo esc_html__( '(Removed automatically to save space)', 'js-support-ticket' ); ?></span>
+                                                                    </span>
+                                                                </div>
+                                                                <?php
+                                                            } else {
+                                                                $jsst_active_count++; // Increment the active counter
+                                                                // Render Standard Downloadable File
                                                                 $jsst_path = jssupportticket::makeUrl(array('jstmod'=>'ticket','task'=>'downloadbyid','action'=>'jstask','id'=> $jsst_attachment->id ,'jsstpageid'=>get_the_ID()));
                                                                 $jsst_data = wp_check_filetype($jsst_attachment->filename);
                                                                 $jsst_type = $jsst_data['type'];
@@ -2045,9 +2099,13 @@ if (jssupportticket::$_config['offline'] == 2) {
                                                                         }
                                                                 echo '</div>';
                                                                 }
-                                                            $jsst_nonce = wp_create_nonce("download-all-for-reply-".$jsst_reply->replyid);
-                                                            echo wp_kses('
-                                                                <a class="js-all-download-button" target="_blank" href="' . esc_url(jssupportticket::makeUrl(array('jstmod'=>'ticket', 'task'=>'downloadallforreply', 'action'=>'jstask', 'downloadid'=>$jsst_reply->replyid, '_wpnonce'=>$jsst_nonce , 'jsstpageid'=>get_the_ID()))) . '" onclick="" target="_blank">'. esc_html(__('Download All', 'js-support-ticket')) . '</a>', JSST_ALLOWED_TAGS);?>
+                                                            }
+                                                            // Only show "Download All" if there is at least one active file
+                                                            if ( $jsst_active_count > 0 ) {
+                                                                $jsst_nonce = wp_create_nonce("download-all-for-reply-".$jsst_reply->replyid);
+                                                                echo wp_kses('
+                                                                <a class="js-all-download-button" target="_blank" href="' . esc_url(jssupportticket::makeUrl(array('jstmod'=>'ticket', 'task'=>'downloadallforreply', 'action'=>'jstask', 'downloadid'=>$jsst_reply->replyid, '_wpnonce'=>$jsst_nonce , 'jsstpageid'=>get_the_ID()))) . '" onclick="" target="_blank">'. esc_html(__('Download All', 'js-support-ticket')) . '</a>', JSST_ALLOWED_TAGS);
+                                                            } ?>
                                                     </div>
                                                 <?php } ?>
                                             </div>
@@ -2107,17 +2165,17 @@ if (jssupportticket::$_config['offline'] == 2) {
                                                                             <?php echo esc_html(__('Edit Time','js-support-ticket'));?>
                                                                         </a>
                                                                         <?php
-                                                                	}
-                                                    			}
-                                                			?>
+                                                                    }
+                                                                }
+                                                            ?>
                                                             </div>
                                                         </div>
                                                 <?php } ?>
-											<div class="js-ticket-thread-cnt-btm">
-												<span class="js-ticket-thread-date">
-													 <?php echo esc_html(date_i18n("l F d, Y, H:i:s", jssupportticketphplib::JSST_strtotime($jsst_reply->created))); ?>
-												</span>
-											</div>
+                                            <div class="js-ticket-thread-cnt-btm">
+                                                <span class="js-ticket-thread-date">
+                                                     <?php echo esc_html(date_i18n("l F d, Y, H:i:s", jssupportticketphplib::JSST_strtotime($jsst_reply->created))); ?>
+                                                </span>
+                                            </div>
 
                                         </div>
                                     </div>
@@ -2552,10 +2610,10 @@ if (jssupportticket::$_config['offline'] == 2) {
                                 <?php
                                 if (in_array('agent',jssupportticket::$_active_addons) && jssupportticket::$jsst_data['user_staff'] && jssupportticket::$jsst_data[0]->status != 6) {
                                     if(JSSTincluder::getJSModel('userpermissions')->checkPermissionGrantedForTask('Change Ticket Status')){
-									?>
-										<a class="js-tkt-det-hdg-btn" href="#" id="changestatus">
-											<?php echo esc_html(__('Change','js-support-ticket')); ?>
-										</a>
+                                    ?>
+                                        <a class="js-tkt-det-hdg-btn" href="#" id="changestatus">
+                                            <?php echo esc_html(__('Change','js-support-ticket')); ?>
+                                        </a>
                                         <div id="userpopupforchangestatus" style="display:none" >
                                             <div class="jsst-popup-header" >
                                                 <div class="popup-header-text" >
@@ -2584,7 +2642,7 @@ if (jssupportticket::$_config['offline'] == 2) {
                                             </div> <!-- end of changestatus div -->
                                         </div>
                                     <?php
-									}
+                                    }
                                 }
                                 ?>
                             </div>
@@ -2707,12 +2765,12 @@ if (jssupportticket::$_config['offline'] == 2) {
                                             ?>
                                         </div>
                                         <?php if(jssupportticket::$jsst_data['user_staff']){ 
-												if(JSSTincluder::getJSModel('userpermissions')->checkPermissionGrantedForTask('Assign Ticket To Agent')){
-												?>
-													<a class="js-tkt-det-hdg-btn" href="#" id="agenttransfer">
-														<?php echo esc_html(__('Change','js-support-ticket')); ?>
-													</a>
-												<?php } ?>
+                                                if(JSSTincluder::getJSModel('userpermissions')->checkPermissionGrantedForTask('Assign Ticket To Agent')){
+                                                ?>
+                                                    <a class="js-tkt-det-hdg-btn" href="#" id="agenttransfer">
+                                                        <?php echo esc_html(__('Change','js-support-ticket')); ?>
+                                                    </a>
+                                                <?php } ?>
                                         <?php } ?>
                                     </div>
                                     <?php } ?>
@@ -2734,40 +2792,40 @@ if (jssupportticket::$_config['offline'] == 2) {
                                             </div>
                                             <div class="js-tkt-det-user-cnt">
                                                 <div class="js-tkt-det-user-data"><?php 
-													if (jssupportticket::$_config['anonymous_name_on_ticket_reply'] == 1) {
-														echo esc_html(jssupportticket::$_config['title']);
-													}else{
-														echo esc_html(jssupportticket::$jsst_data[0]->staffname); 
-													}
-												?></div>
+                                                    if (jssupportticket::$_config['anonymous_name_on_ticket_reply'] == 1) {
+                                                        echo esc_html(jssupportticket::$_config['title']);
+                                                    }else{
+                                                        echo esc_html(jssupportticket::$jsst_data[0]->staffname); 
+                                                    }
+                                                ?></div>
                                                 <div class="js-tkt-det-user-data agent-email"><?php 
-												if (jssupportticket::$_config['show_email_on_ticket_reply'] == 1) {
-													echo esc_html(jssupportticket::$jsst_data[0]->staffemail); 
-												}
-												?></div>
+                                                if (jssupportticket::$_config['show_email_on_ticket_reply'] == 1) {
+                                                    echo esc_html(jssupportticket::$jsst_data[0]->staffemail); 
+                                                }
+                                                ?></div>
                                                 <div class="js-tkt-det-user-data"><?php 
-													if (jssupportticket::$_config['show_email_on_ticket_reply'] == 2) {
-														echo esc_html(jssupportticket::$jsst_data[0]->staffphone);
-													}
-												?></div>
+                                                    if (jssupportticket::$_config['show_email_on_ticket_reply'] == 2) {
+                                                        echo esc_html(jssupportticket::$jsst_data[0]->staffphone);
+                                                    }
+                                                ?></div>
                                             </div>
                                         </div>
                                         <?php } ?>
                                         <?php if($jsst_departmentflag){ ?>
-											<div class="js-tkt-det-trsfer-dep">
-												<div class="js-tkt-det-trsfer-dep-txt">
-													<span class="js-tkt-det-trsfer-dep-txt-tit"><?php echo esc_html(jssupportticket::JSST_getVarValue($jsst_field_array['department'])).': '; ?> </span>
-													<?php echo esc_html(jssupportticket::$jsst_data[0]->departmentname); ?>
-												</div>
-												<?php if(jssupportticket::$jsst_data['user_staff']){ 
-														if(JSSTincluder::getJSModel('userpermissions')->checkPermissionGrantedForTask('Ticket Department Transfer')){
-													?>
-															<a title="<?php echo esc_attr(__('Change','js-support-ticket')); ?>" href="#" class="js-tkt-det-hdg-btn" id="departmenttransfer">
-																<?php echo esc_html(__('Change','js-support-ticket')); ?>
-															</a>
-													<?php } ?>
-												<?php } ?>
-											</div>
+                                            <div class="js-tkt-det-trsfer-dep">
+                                                <div class="js-tkt-det-trsfer-dep-txt">
+                                                    <span class="js-tkt-det-trsfer-dep-txt-tit"><?php echo esc_html(jssupportticket::JSST_getVarValue($jsst_field_array['department'])).': '; ?> </span>
+                                                    <?php echo esc_html(jssupportticket::$jsst_data[0]->departmentname); ?>
+                                                </div>
+                                                <?php if(jssupportticket::$jsst_data['user_staff']){ 
+                                                        if(JSSTincluder::getJSModel('userpermissions')->checkPermissionGrantedForTask('Ticket Department Transfer')){
+                                                    ?>
+                                                            <a title="<?php echo esc_attr(__('Change','js-support-ticket')); ?>" href="#" class="js-tkt-det-hdg-btn" id="departmenttransfer">
+                                                                <?php echo esc_html(__('Change','js-support-ticket')); ?>
+                                                            </a>
+                                                    <?php } ?>
+                                                <?php } ?>
+                                            </div>
                                         <?php } ?>
                                     </div>
                                 </div>
@@ -2892,7 +2950,7 @@ if (jssupportticket::$_config['offline'] == 2) {
                         <?php } ?>
 
                         <!-- Woocomerece -->
-						<?php apply_filters( 'js_support_ticket_admin_details_right_middle', jssupportticket::$jsst_data[0]->id ); ?>
+                        <?php apply_filters( 'js_support_ticket_admin_details_right_middle', jssupportticket::$jsst_data[0]->id ); ?>
                         <?php
                         if( class_exists('WooCommerce') && in_array('woocommerce', jssupportticket::$_active_addons)){
                             $jsst_order = wc_get_order(jssupportticket::$jsst_data[0]->wcorderid);
@@ -3206,7 +3264,7 @@ if (jssupportticket::$_config['offline'] == 2) {
                             }
                         }
                         ?>
-						<?php apply_filters('js_support_ticket_admin_details_right_last', jssupportticket::$jsst_data[0]->id); ?>
+                        <?php apply_filters('js_support_ticket_admin_details_right_last', jssupportticket::$jsst_data[0]->id); ?>
                     </div>
                 </div>
                 <?php

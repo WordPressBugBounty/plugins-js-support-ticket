@@ -408,6 +408,17 @@ if (!defined('JSST_ALLOWED_TAGS')) {
             'style' => array(),),
         '&nbsp' => array(),
     ));
+    define(
+        'JSST_DEFAULT_LANGUAGES',
+        array(
+            'ar',
+            'de_DE',
+            'es_ES',
+            'fr_FR',
+            'it_IT',
+            'pt_BR',
+        )
+    );
 }
 define('JSST_PLUGIN_PATH', plugin_dir_path( __DIR__ ));
 define('JSST_PLUGIN_URL', plugin_dir_url( __DIR__ ));

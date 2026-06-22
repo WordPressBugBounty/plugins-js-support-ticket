@@ -1603,7 +1603,19 @@ $jsst_yesno = array(
                                                 <div class="js-ticket-thread-data note-msg">
                                                 <?php
                                                     echo wp_kses_post($jsst_note->note);
-                                                    if($jsst_note->filesize > 0 && !empty($jsst_note->filename)){
+                                                    if ( $jsst_note->filedeleted == 1 ) { ?>
+                                                        <div class="jsst-attachment-purged">
+                                                            <svg class="jsst-purged-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                                                                <path d="M6.854 7.146a.5.5 0 1 0-.708.708L7.293 9l-1.147 1.146a.5.5 0 0 0 .708.708L8 9.707l1.146 1.147a.5.5 0 0 0 .708-.708L8.707 9l1.147-1.146a.5.5 0 0 0-.708-.708L8 8.293 6.854 7.146z"/>
+                                                                <path d="M14 14V4.5L9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2zM9.5 3A1.5 1.5 0 0 0 11 4.5h2V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h5.5v2z"/>
+                                                            </svg>
+                                                            <span>
+                                                                <span class="jsst-purged-filename"><?php echo esc_html( $jsst_note->filename ); ?></span>
+                                                                <span class="jsst-purged-reason"><?php echo esc_html__( '(Removed automatically to save space)', 'js-support-ticket' ); ?></span>
+                                                            </span>
+                                                        </div>
+                                                        <?php
+                                                    } elseif($jsst_note->filesize > 0 && !empty($jsst_note->filename)){
                                                         echo wp_kses('<div class="js_ticketattachment">
                                                                 <span class="js_ticketattachment_fname">'
                                                                     . esc_html($jsst_note->filename) . /*' (' . ($jsst_note->filesize / 1024 ) . ')&nbsp;&nbsp*/'
@@ -1718,14 +1730,28 @@ $jsst_yesno = array(
                                         $jsst_path = $jsst_path . '/attachmentdata';
                                         $jsst_path = $jsst_path . '/ticket/ticket_' . jssupportticket::$jsst_data[0]->id . '/';
                                         foreach (jssupportticket::$jsst_data['ticket_attachment'] AS $jsst_attachment) {
-                                            $jsst_path = admin_url("?page=ticket&action=jstask&task=downloadbyid&id=".esc_attr($jsst_attachment->id));
-                                            echo wp_kses('
-                                            <div class="js_ticketattachment">
-                                                <span class="js_ticketattachment_fname">
-                                                  ' . esc_html($jsst_attachment->filename) . /*' ( ' . esc_html($jsst_attachment->filesize) . ' ) ' . */'
-                                                </span>
-                                                <a title="'. esc_html(__('Download','js-support-ticket')).'" class="button" target="_blank" href="' . esc_url($jsst_path) . '">' . esc_html(__('Download', 'js-support-ticket')) . '</a>
-                                            </div>', JSST_ALLOWED_TAGS);
+                                            if ( $jsst_attachment->deleted == 1 ) { ?>
+                                                <div class="jsst-attachment-purged">
+                                                    <svg class="jsst-purged-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                                                        <path d="M6.854 7.146a.5.5 0 1 0-.708.708L7.293 9l-1.147 1.146a.5.5 0 0 0 .708.708L8 9.707l1.146 1.147a.5.5 0 0 0 .708-.708L8.707 9l1.147-1.146a.5.5 0 0 0-.708-.708L8 8.293 6.854 7.146z"/>
+                                                        <path d="M14 14V4.5L9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2zM9.5 3A1.5 1.5 0 0 0 11 4.5h2V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h5.5v2z"/>
+                                                    </svg>
+                                                    <span>
+                                                        <span class="jsst-purged-filename"><?php echo esc_html( $jsst_attachment->filename ); ?></span>
+                                                        <span class="jsst-purged-reason"><?php echo esc_html__( '(Removed automatically to save space)', 'js-support-ticket' ); ?></span>
+                                                    </span>
+                                                </div>
+                                                <?php
+                                            } else {
+                                                $jsst_path = admin_url("?page=ticket&action=jstask&task=downloadbyid&id=".esc_attr($jsst_attachment->id));
+                                                echo wp_kses('
+                                                <div class="js_ticketattachment">
+                                                    <span class="js_ticketattachment_fname">
+                                                      ' . esc_html($jsst_attachment->filename) . /*' ( ' . esc_html($jsst_attachment->filesize) . ' ) ' . */'
+                                                    </span>
+                                                    <a title="'. esc_html(__('Download','js-support-ticket')).'" class="button" target="_blank" href="' . esc_url($jsst_path) . '">' . esc_html(__('Download', 'js-support-ticket')) . '</a>
+                                                </div>', JSST_ALLOWED_TAGS);
+                                            }
                                         }
                                     }
                                 ?>
@@ -1842,24 +1868,40 @@ $jsst_yesno = array(
                                         <?php
                                             if (!empty($jsst_reply->attachments)) {
                                                 foreach ($jsst_reply->attachments AS $jsst_attachment) {
-                                                    $jsst_imgpath = $jsst_attachment->filename;
-                                                    $jsst_data = wp_check_filetype($jsst_attachment->filename);
-                                                    $jsst_type = $jsst_data['type'];
-                                                    $jsst_count = 0;
-                                                    $jsst_path = esc_url(admin_url("?page=ticket&action=jstask&task=downloadbyid&id=".esc_attr($jsst_attachment->id)));
-                                                    echo wp_kses('
-                                                    <div class="js_ticketattachment">
-                                                        <span class="js_ticketattachment_fname">
-                                                        ' . esc_html($jsst_attachment->filename) . /*' ( ' . esc_html($jsst_attachment->filesize) . ' ) ' .*/ '
-                                                        </span>
-                                                        <a title="'. esc_html(__('Download','js-support-ticket')).'" class="button" target="_blank" href="' . esc_url($jsst_path) . '">' . esc_html(__('Download', 'js-support-ticket')) . '</a>', JSST_ALLOWED_TAGS);
-                                                        if(jssupportticketphplib::JSST_strpos($jsst_type, "image") !== false) {
-                                                            $jsst_path = JSSTincluder::getJSModel('attachment')->getAttachmentImage($jsst_attachment->id);
-                                                            echo wp_kses('<a data-gall="gallery-'.esc_attr($jsst_reply->replyid).'" class="button venobox" data-vbtype="image" title="'. esc_html(__('View','js-support-ticket')).'" href="'. esc_attr($jsst_path) .'"  target="_blank">
-                                                                <img alt="'. esc_html(__('View Image','js-support-ticket')).'" src="' . esc_url(JSST_PLUGIN_URL) . 'includes/images/ticket-detail/view.png" />
-                                                            </a>', JSST_ALLOWED_TAGS);
-                                                        }
-                                                    echo '</div>';
+                                                    // Check if the file was deleted by the Auto Cleanup Cron
+                                                    if ( $jsst_attachment->deleted == 1 ) { ?>
+                                                        <div class="jsst-attachment-purged">
+                                                            <svg class="jsst-purged-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                                                                <path d="M6.854 7.146a.5.5 0 1 0-.708.708L7.293 9l-1.147 1.146a.5.5 0 0 0 .708.708L8 9.707l1.146 1.147a.5.5 0 0 0 .708-.708L8.707 9l1.147-1.146a.5.5 0 0 0-.708-.708L8 8.293 6.854 7.146z"/>
+                                                                <path d="M14 14V4.5L9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2zM9.5 3A1.5 1.5 0 0 0 11 4.5h2V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h5.5v2z"/>
+                                                            </svg>
+                                                            <span>
+                                                                <span class="jsst-purged-filename"><?php echo esc_html( $jsst_attachment->filename ); ?></span>
+                                                                <span class="jsst-purged-reason"><?php echo esc_html__( '(Removed automatically to save space)', 'js-support-ticket' ); ?></span>
+                                                            </span>
+                                                        </div>
+                                                        <?php
+                                                    } else {
+                                                        // Render Standard Downloadable File
+                                                        $jsst_imgpath = $jsst_attachment->filename;
+                                                        $jsst_data = wp_check_filetype($jsst_attachment->filename);
+                                                        $jsst_type = $jsst_data['type'];
+                                                        $jsst_count = 0;
+                                                        $jsst_path = esc_url(admin_url("?page=ticket&action=jstask&task=downloadbyid&id=".esc_attr($jsst_attachment->id)));
+                                                        echo wp_kses('
+                                                        <div class="js_ticketattachment">
+                                                            <span class="js_ticketattachment_fname">
+                                                            ' . esc_html($jsst_attachment->filename) . /*' ( ' . esc_html($jsst_attachment->filesize) . ' ) ' .*/ '
+                                                            </span>
+                                                            <a title="'. esc_html(__('Download','js-support-ticket')).'" class="button" target="_blank" href="' . esc_url($jsst_path) . '">' . esc_html(__('Download', 'js-support-ticket')) . '</a>', JSST_ALLOWED_TAGS);
+                                                            if(jssupportticketphplib::JSST_strpos($jsst_type, "image") !== false) {
+                                                                $jsst_path = JSSTincluder::getJSModel('attachment')->getAttachmentImage($jsst_attachment->id);
+                                                                echo wp_kses('<a data-gall="gallery-'.esc_attr($jsst_reply->replyid).'" class="button venobox" data-vbtype="image" title="'. esc_html(__('View','js-support-ticket')).'" href="'. esc_attr($jsst_path) .'"  target="_blank">
+                                                                    <img alt="'. esc_html(__('View Image','js-support-ticket')).'" src="' . esc_url(JSST_PLUGIN_URL) . 'includes/images/ticket-detail/view.png" />
+                                                                </a>', JSST_ALLOWED_TAGS);
+                                                            }
+                                                        echo '</div>';
+                                                    }
                                                 }
                                             }
                                         ?>

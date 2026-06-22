@@ -329,5 +329,192 @@ function jsst_update_user_profile($jsst_user_id) {
 add_action('edit_user_profile_update', 'jsst_update_user_profile');
 add_action('user_register', 'jsst_update_user_profile'); // creating a new user
 
+// Language Related Hooks
+add_action('plugins_loaded', 'JSST_check_and_download_languages');
 
+function JSST_check_and_download_languages() {
+
+    if (!current_user_can('manage_options') && !wp_doing_cron()) {
+        return; // Skip download attempt for non-privileged contexts
+    }
+
+    $locale = determine_locale();
+    if ($locale === 'en_US') return;
+
+    $status = get_option('jssupportticket_translation_status_' . $locale);
+    if ($status === 'verified' || $status === 'failed') {
+        return;
+    }
+
+    $textdomain   = 'js-support-ticket';
+    $default_list = JSST_DEFAULT_LANGUAGES;
+    $target_dir   = JSST_PLUGIN_PATH . 'languages/';
+    $extensions   = in_array($locale, $default_list) ? array('po') : array('mo', 'po');
+
+    $all_exist = true;
+    foreach ($extensions as $ext) {
+        if (!file_exists($target_dir . "{$textdomain}-{$locale}.{$ext}")) {
+            $all_exist = false;
+            break;
+        }
+    }
+
+    if ($all_exist) {
+        update_option('jssupportticket_translation_status_' . $locale, 'verified');
+        return;
+    }
+
+    JSST_execute_download_process_for_languagefiles($locale, $extensions);
+}
+
+function JSST_execute_download_process_for_languagefiles($locale, $extensions) {
+    global $wp_filesystem;
+
+    // Initialize WP_Filesystem safely
+    if (empty($wp_filesystem)) {
+        require_once(ABSPATH . 'wp-admin/includes/file.php');
+        if ( ! WP_Filesystem() ) {
+            return; // Exit if Filesystem credentials are required but unavailable
+        }
+    }
+
+    $textdomain = 'js-support-ticket';
+    $cdn_base   = 'https://d2l808guy26fxz.cloudfront.net/'; // Retaining your secure CloudFront endpoint
+
+    $target_dir = JSST_PLUGIN_PATH . 'languages/';
+
+    $locales_to_try = array($locale);
+    $fallback_locale = JSST_get_fallback_locale($locale);
+
+    if ($fallback_locale) {
+        $locales_to_try[] = $fallback_locale;
+    }
+
+    $download_successful = false;
+    $downloaded_locale = '';
+
+    foreach ($locales_to_try as $attempt_locale) {
+        $all_extensions_downloaded = true;
+
+        foreach ($extensions as $ext) {
+            $remote_filename = "{$textdomain}-{$attempt_locale}.{$ext}";
+            $local_filename  = "{$textdomain}-{$locale}.{$ext}";
+
+            // Safe remote call wrapper with fallback timeouts
+            $response = wp_remote_get($cdn_base . $remote_filename, array(
+                'timeout' => 15
+            ));
+
+            if (!is_wp_error($response) && wp_remote_retrieve_response_code($response) === 200) {
+                if (!$wp_filesystem->is_dir($target_dir)) {
+                    $wp_filesystem->mkdir($target_dir, FS_CHMOD_DIR);
+                }
+                $saved = $wp_filesystem->put_contents($target_dir . $local_filename, wp_remote_retrieve_body($response));
+                if (!$saved) {
+                    $all_extensions_downloaded = false;
+                    break;
+                }
+            } else {
+                $all_extensions_downloaded = false;
+                break;
+            }
+        }
+
+        if ($all_extensions_downloaded) {
+            $download_successful = true;
+            $downloaded_locale = $attempt_locale;
+            break;
+        }
+    }
+
+    // Determine notice type and save to transient
+    if ($download_successful) {
+        update_option('jssupportticket_translation_status_' . $locale, 'verified');
+
+        $notice_type = ($downloaded_locale === $locale) ? 'exact_success' : 'fallback_success';
+        set_transient('jssupportticket_lang_notice', array(
+            'type'     => $notice_type,
+            'original' => $locale,
+            'fallback' => $downloaded_locale
+        ), 60);
+
+    } else {
+        update_option('jssupportticket_translation_status_' . $locale, 'failed');
+
+        set_transient('jssupportticket_lang_notice', array(
+            'type'     => 'failed',
+            'original' => $locale,
+        ), 300);
+    }
+}
+
+function JSST_get_fallback_locale($locale) {
+    $base_lang = substr($locale, 0, 2);
+
+    // Comprehensive fallback map based on standard WordPress locales
+    $fallbacks = array(
+        'ar' => 'ar',          // Arabic
+        'cs' => 'cs_CZ',       // Czech
+        'de' => 'de_DE',       // German
+        'el' => 'el',          // Greek
+        'en' => 'en_US',       // English
+        'es' => 'es_ES',       // Spanish
+        'fa' => 'fa_IR',       // Persian
+        'fr' => 'fr_FR',       // French
+        'hu' => 'hu_HU',       // Hungarian
+        'id' => 'id_ID',       // Indonesian
+        'it' => 'it_IT',       // Italian
+        'ja' => 'ja_JP',       // Japanese
+        'ko' => 'ko_KR',       // Korean
+        'ms' => 'ms_MY',       // Malay
+        'nl' => 'nl_NL',       // Dutch
+        'pl' => 'pl_PL',       // Polish
+        'pt' => 'pt_BR',       // Brazil
+        'ro' => 'ro_RO',       // Romanian
+        'ru' => 'ru_RU',       // Russian
+        'sv' => 'sv',          // Swedish
+        'th' => 'th_TH',       // Thai
+        'tl' => 'tl_PH',       // Filipino
+        'tr' => 'tr_TR',       // Turkish
+        'zh' => 'zh_CN'        // Chinese (Simplified)
+    );
+
+    if (isset($fallbacks[$base_lang]) && $fallbacks[$base_lang] !== $locale) {
+        return $fallbacks[$base_lang];
+    }
+
+    return false;
+}
+
+add_action('admin_notices', 'JSST_display_language_download_notice');
+
+function JSST_display_language_download_notice() {
+    // Only show to users who can manage the site
+    if (!current_user_can('manage_options')) {
+        return;
+    }
+
+    $notice = get_transient('jssupportticket_lang_notice');
+    if (!$notice) {
+        return;
+    }
+
+    // Clear the transient immediately so it only shows once
+    delete_transient('jssupportticket_lang_notice');
+
+    $type     = $notice['type'];
+    $original = esc_html($notice['original']);
+
+    if ($type === 'exact_success') {
+        echo '<div class="notice notice-success is-dismissible">';
+        echo '<p><strong>' . esc_html(__('JS Support Ticket', 'js-support-ticket')) . ':</strong> ' . sprintf(esc_html(__('Language files for %s successfully downloaded.', 'js-support-ticket')), '<code>' . $original . '</code>') . '</p>';
+        echo '</div>';
+    }
+    elseif ($type === 'fallback_success') {
+        $fallback = esc_html($notice['fallback']);
+        echo '<div class="notice notice-warning is-dismissible">';
+        echo '<p><strong>' . esc_html(__('JS Support Ticket', 'js-support-ticket')) . ':</strong> ' . sprintf(esc_html(__('Alternate language file downloaded. We tried to find %1$s, but downloaded %2$s as a fallback.', 'js-support-ticket')), '<code>' . $original . '</code>', '<code>' . $fallback . '</code>') . '</p>';
+        echo '</div>';
+    }
+}
 ?>

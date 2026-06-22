@@ -51,29 +51,72 @@
                 ?>
                 <table id="js-support-ticket-table">
                     <tr class="js-support-ticket-table-heading">
-                        <th class="left w70"><?php echo esc_html(__('Error', 'js-support-ticket')); ?></th>
+                        <th class="left w70"><?php echo esc_html(__('Error Details', 'js-support-ticket')); ?></th>
                         <th><?php echo esc_html(__('Created', 'js-support-ticket')); ?></th>
                         <th><?php echo esc_html(__('Action', 'js-support-ticket')); ?></th>
                     </tr>
                     <?php
                     foreach (jssupportticket::$jsst_data[0] AS $jsst_systemerror) {
-                        $jsst_isview = ($jsst_systemerror->isview == 1) ? 'close.png' : 'good.png';
                         ?>
                         <tr>
-                            <td class="left w70"><span class="js-support-ticket-table-responsive-heading"><?php
-                                    echo esc_html(__('Error', 'js-support-ticket'));
-                                    echo " : ";
-                                    ?></span><?php echo esc_html($jsst_systemerror->error); ?></td>
-                            <td><span class="js-support-ticket-table-responsive-heading"><?php
-                            echo esc_html(__('Created', 'js-support-ticket'));
-                            echo " : ";
-                                    ?></span><?php echo esc_html(date_i18n(jssupportticket::$_config['date_format'], jssupportticketphplib::JSST_strtotime($jsst_systemerror->created))); ?></td>
+                            <td class="left w70">
+                                <span class="js-support-ticket-table-responsive-heading">
+                                    <?php echo esc_html(__('Error', 'js-support-ticket')); echo " : "; ?>
+                                </span>
+                                <?php
+                                $jsst_raw_error = $jsst_systemerror->error;
+                                $jsst_error_data = json_decode($jsst_raw_error, true);
+
+                                if (is_array($jsst_error_data)) : ?>
+                                    <div class="jsst-system-error-card">
+                                        <div class="jsst-system-error-row">
+                                            <span class="jsst-support-system-error-icon-badge system-error-badge-rose"><?php echo esc_html(__('Error', 'js-support-ticket')); ?></span>
+                                            <span class="jsst-system-error-txt"><?php echo esc_html(isset($jsst_error_data['error']) ? $jsst_error_data['error'] : __('Unknown Error', 'js-support-ticket')); ?></span>
+                                        </div>
+                                        <div class="jsst-system-error-row">
+                                            <span class="jsst-ai-badge"><?php echo esc_html(__('URL', 'js-support-ticket')); ?></span>
+                                            <span class="jsst-system-error-url"><?php echo esc_html(isset($jsst_error_data['url']) ? $jsst_error_data['url'] : __('N/A', 'js-support-ticket')); ?></span>
+                                        </div>
+                                        <details class="jsst-system-error-details">
+                                            <summary>
+                                                <span><?php echo esc_html(__('View Query & Trace', 'js-support-ticket')); ?></span>
+                                            </summary>
+                                            <div class="jsst-system-error-expanded">
+                                                <div class="jsst-system-error-group">
+                                                    <div class="jsst-system-error-title"><?php echo esc_html(__('Path Execution Trace', 'js-support-ticket')); ?></div>
+                                                    <div class="jsst-system-error-code"><?php echo esc_html(isset($jsst_error_data['path']) ? $jsst_error_data['path'] : __('N/A', 'js-support-ticket')); ?></div>
+                                                </div>
+                                                <div class="jsst-system-error-group">
+                                                    <div class="jsst-system-error-title"><?php echo esc_html(__('Database Query', 'js-support-ticket')); ?></div>
+                                                    <div class="jsst-system-error-code"><?php echo esc_html(isset($jsst_error_data['query']) ? $jsst_error_data['query'] : __('N/A', 'js-support-ticket')); ?></div>
+                                                </div>
+                                            </div>
+                                        </details>
+                                    </div>
+                                <?php elseif (!empty($jsst_raw_error)) : ?>
+                                    <div class="jsst-system-error-card">
+                                        <div class="jsst-system-error-row">
+                                            <span class="jsst-support-system-error-icon-badge system-error-badge-rose"><?php echo esc_html(__('Legacy Log', 'js-support-ticket')); ?></span>
+                                        </div>
+                                        <div class="jsst-system-error-code">
+                                            <?php echo esc_html($jsst_raw_error); ?>
+                                        </div>
+                                    </div>
+                                <?php else : ?>
+                                    <span><?php echo esc_html(__('No error metadata tracking data recorded.', 'js-support-ticket')); ?></span>
+                                <?php endif; ?>
+                            </td>
+                            <td>
+                                <span class="js-support-ticket-table-responsive-heading">
+                                    <?php echo esc_html(__('Created', 'js-support-ticket')); echo " : "; ?>
+                                </span>
+                                <?php echo esc_html(date_i18n(jssupportticket::$_config['date_format'], jssupportticketphplib::JSST_strtotime($jsst_systemerror->created))); ?>
+                            </td>
                             <td>
                                 <a title="<?php echo esc_attr(__('Delete','js-support-ticket')); ?>" class="action-btn" onclick="return confirm('<?php echo esc_js(__('Are you sure you want to delete?', 'js-support-ticket')); ?>');" href="<?php echo esc_url(wp_nonce_url('?page=systemerror&task=deletesystemerror&action=jstask&systemerrorid='.esc_attr($jsst_systemerror->id),'delete-systemerror-'.$jsst_systemerror->id));?>"><img alt = "<?php echo esc_attr(__('Delete','js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/delete.png" /></a>
                             </td>
                         </tr>
-                <?php }
-                ?>
+                    <?php } ?>
                 </table>
                 <?php
                 if (jssupportticket::$jsst_data[1]) {

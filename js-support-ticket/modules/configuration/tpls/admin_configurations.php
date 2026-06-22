@@ -71,6 +71,9 @@ $jsst_jssupportticket_js ='
         }else if (jsstconfigid == "captcha") {
             jQuery("#captcha").css("display","inline-block");
             jQuery("#cn_cap").addClass("active");
+        }else if (jsstconfigid == "autocleanup") {
+            jQuery("#autocleanup").css("display","inline-block");
+            jQuery("#cn_ac").addClass("active");
         }else{
             jQuery("#general").css("display","inline-block");
             jQuery("#cn_gen").addClass("active");
@@ -492,15 +495,26 @@ $jsst_plugin_array = get_option('active_plugins');
                   </li>
                 <?php } ?>
                 <?php if(in_array('easydigitaldownloads', jssupportticket::$_active_addons)){ ?>
-                  <li class="treeview" id="cn_edd">
-                      <a href="?page=configuration&jsstconfigid=easydigitaldownloads" title="<?php echo esc_attr(__('Easy Digital Downloads' , 'js-support-ticket')); ?>">
-                          <img class="jsst_menu-icon" alt = "<?php echo esc_attr(__('Easy Digital Downloads' , 'js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL).'includes/images/config-icons/easy-digital-downloads.png'; ?>"/>
-                          <span class="jsst_text"><?php echo esc_html(__('Easy Digital Downloads' , 'js-support-ticket')); ?> </span>
-                      </a>
-                      <ul class="jsstadmin-sidebar-submenu treeview-menu">
-                        <li><a href="?page=configuration&jsstconfigid=easydigitaldownloads"><?php echo esc_html(__('Easy Digital Downloads', 'js-support-ticket')); ?></a></li>
-                      </ul>
-                  </li>
+                    <li class="treeview" id="cn_edd">
+                        <a href="?page=configuration&jsstconfigid=easydigitaldownloads" title="<?php echo esc_attr(__('Easy Digital Downloads' , 'js-support-ticket')); ?>">
+                            <img class="jsst_menu-icon" alt = "<?php echo esc_attr(__('Easy Digital Downloads' , 'js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL).'includes/images/config-icons/easy-digital-downloads.png'; ?>"/>
+                            <span class="jsst_text"><?php echo esc_html(__('Easy Digital Downloads' , 'js-support-ticket')); ?> </span>
+                        </a>
+                        <ul class="jsstadmin-sidebar-submenu treeview-menu">
+                            <li><a href="?page=configuration&jsstconfigid=easydigitaldownloads"><?php echo esc_html(__('Easy Digital Downloads', 'js-support-ticket')); ?></a></li>
+                        </ul>
+                    </li>
+                <?php } ?>
+                <?php if(in_array('autocleanup', jssupportticket::$_active_addons)){ ?>
+                    <li class="treeview" id="cn_ac">
+                        <a href="?page=configuration&jsstconfigid=autocleanup" title="<?php echo esc_attr(__('Auto Cleanup' , 'js-support-ticket')); ?>">
+                            <img class="jsst_menu-icon" alt = "<?php echo esc_attr(__('Auto Cleanup' , 'js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL).'includes/images/config-icons/auto-cleanup.svg'; ?>"/>
+                            <span class="jsst_text"><?php echo esc_html(__('Auto Cleanup' , 'js-support-ticket')); ?> </span>
+                        </a>
+                        <ul class="jsstadmin-sidebar-submenu treeview-menu">
+                            <li><a href="?page=configuration&jsstconfigid=autocleanup"><?php echo esc_html(__('Auto Cleanup', 'js-support-ticket')); ?></a></li>
+                        </ul>
+                    </li>
                 <?php } ?>
                 <?php if(in_array('sociallogin', jssupportticket::$_active_addons)){ ?>
                   <li class="treeview" id="cn_sl" style="display:none;">
@@ -2056,6 +2070,59 @@ $jsst_plugin_array = get_option('active_plugins');
                     ?>
                 </div>
               <?php } ?>
+            </div>
+            <!-- .....Auto Cleanup..... -->
+            <div id="autocleanup" class="jsstadmin-hide-config">
+                <?php if(in_array('autocleanup', jssupportticket::$_active_addons)){ ?>
+                    <div class="tabs config-tabs" id="tabs">
+                        <ul class="jsst_tabs">
+                            <li class="tab-link jsst_current_tab" data-jsst-tab="general"><a href="#AutoCleanupSettings"><?php echo esc_html(__('Auto Cleanup', 'js-support-ticket')); ?></a></li>
+                        </ul>
+                    </div>
+                    <div class="jsst_gen_body" id="AutoCleanupSettings">
+                        <h2><?php echo esc_html(__('Auto Cleanup Settings', 'js-support-ticket')); ?></h2>
+                        <?php
+                        if(isset(jssupportticket::$jsst_data[0]['autocleanup_attachment_interval'])){
+                            $jsst_title = esc_html(__('Delete Old Attachments', 'js-support-ticket'));
+                            $jsst_options = array(
+                                (object) array('id' => '0', 'text' => esc_html(__('Never', 'js-support-ticket'))),
+                                (object) array('id' => '1', 'text' => esc_html(__('After 1 Month', 'js-support-ticket'))),
+                                (object) array('id' => '3', 'text' => esc_html(__('After 3 Months', 'js-support-ticket'))),
+                                (object) array('id' => '6', 'text' => esc_html(__('After 6 Months', 'js-support-ticket'))),
+                                (object) array('id' => '12', 'text' => esc_html(__('After 1 Year', 'js-support-ticket')))
+                            );
+                            $jsst_field = JSSTformfield::select('autocleanup_attachment_interval', $jsst_options, jssupportticket::$jsst_data[0]['autocleanup_attachment_interval']);
+                            $jsst_description =  esc_html(__('Automatically delete attachments from closed tickets to save storage space.', 'js-support-ticket'));
+                            JSST_printConfigFieldSingle($jsst_title, $jsst_field, $jsst_description);
+                        }
+
+                        if(isset(jssupportticket::$jsst_data[0]['autocleanup_ticket_interval'])){
+                            $jsst_title = esc_html(__('Delete Old Tickets', 'js-support-ticket'));
+                            $jsst_options = array(
+                                (object) array('id' => '0', 'text' => esc_html(__('Never', 'js-support-ticket'))),
+                                (object) array('id' => '12', 'text' => esc_html(__('After 1 Year', 'js-support-ticket'))),
+                                (object) array('id' => '24', 'text' => esc_html(__('After 2 Years', 'js-support-ticket'))),
+                                (object) array('id' => '36', 'text' => esc_html(__('After 3 Years', 'js-support-ticket')))
+                            );
+                            $jsst_field = JSSTformfield::select('autocleanup_ticket_interval', $jsst_options, jssupportticket::$jsst_data[0]['autocleanup_ticket_interval']);
+                            $jsst_description =  esc_html(__('Permanently delete closed tickets and all their associated data after this time period.', 'js-support-ticket'));
+                            JSST_printConfigFieldSingle($jsst_title, $jsst_field, $jsst_description);
+                        }
+
+                        if(isset(jssupportticket::$jsst_data[0]['autocleanup_cron_frequency'])){
+                            $jsst_title = esc_html(__('Cron Frequency', 'js-support-ticket'));
+                            $jsst_options = array(
+                                (object) array('id' => 'daily', 'text' => esc_html(__('Daily', 'js-support-ticket'))),
+                                (object) array('id' => 'weekly', 'text' => esc_html(__('Weekly', 'js-support-ticket'))),
+                                (object) array('id' => 'monthly', 'text' => esc_html(__('Monthly', 'js-support-ticket')))
+                            );
+                            $jsst_field = JSSTformfield::select('autocleanup_cron_frequency', $jsst_options, jssupportticket::$jsst_data[0]['autocleanup_cron_frequency']);
+                            $jsst_description =  esc_html(__('How often the background cleanup task should execute.', 'js-support-ticket'));
+                            JSST_printConfigFieldSingle($jsst_title, $jsst_field, $jsst_description);
+                        }
+                        ?>
+                    </div>
+                <?php } ?>
             </div>
             <!-- .....Captcha..... -->
             <div id="captcha" class="jsstadmin-hide-config">

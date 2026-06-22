@@ -996,6 +996,14 @@ JSSTmessage::getMessage();
                     'icon_bg' => 'js-hlpdsk-addon-icon-bg-teal',
                     'icon_svg' => '<svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="3"/><path d="M6 21v-2a6 6 0 0112 0v2"/><path d="M19.4 15a2 2 0 010-6"/><path d="M4.6 9a2 2 0 010 6"/></svg>',
                 ],
+                'autocleanup' => [
+                    'title' => __('Auto Cleanup', 'js-support-ticket'),
+                    'description' => __('Automatically deletes old attachments and permanently removes closed tickets based on your configured retention periods to optimize server storage.', 'js-support-ticket'),
+                    'plugin_file' => 'js-support-ticket-autocleanup/js-support-ticket-autocleanup.php',
+                    'url' => 'https://jshelpdesk.com/product/autocleanup/',
+                    'icon_bg' => 'js-hlpdsk-addon-icon-bg-purple',
+                    'icon_svg' => '<svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" /></svg>',
+                ],
             ];
 
             // Filter out active addons to get a list of inactive ones

@@ -58,6 +58,10 @@
 	div.js-ticket-detail-box div.js-ticket-detail-right {width: 70%;}
 	div#usercredentailspopup {width: 90%;}
 	div#js-ticket-main-popup {width: 85%;}
+/* Auto Cleanup */
+	div.jsst-main-up-wrapper .jsst-attachment-purged {padding: 8px;font-size: 12px;}
+    div.jsst-main-up-wrapper .jsst-attachment-purged .jsst-purged-icon {width: 14px;height: 14px;margin-top: 1px;}
+    div.jsst-main-up-wrapper .jsst-purged-reason {display: block;margin-left: 0;margin-top: 2px;font-size: 11.5px;}
 /* User Roles*/
 	div.js-ticket-role-wrp div.js-ticket-add-role-field-wrp{width: calc(100% / 2 - 10px);margin-bottom: 10px;}
 /* Staff Reports*/

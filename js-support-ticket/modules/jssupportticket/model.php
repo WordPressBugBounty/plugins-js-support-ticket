@@ -538,6 +538,7 @@ $jsst_query = "SELECT product.product, COUNT(t.id) AS ticket_count
             'js-support-ticket-paidsupport'  => array('title' => esc_html(__('Paid Support','js-support-ticket')), 'price' => 0, 'status' => 1),
             'js-support-ticket-easydigitaldownloads' => array('title' => esc_html(__('Easy Digital Downloads','js-support-ticket')), 'price' => 0, 'status' => 1),
             'js-support-ticket-multilanguageemailtemplates'  => array('title' => esc_html(__('Multi Language Email Templates','js-support-ticket')), 'price' => 0, 'status' => 1),
+            'js-support-ticket-autocleanup'  => array('title' => esc_html(__('Auto Cleanup','js-support-ticket')), 'price' => 0, 'status' => 1),
         );
     }
 

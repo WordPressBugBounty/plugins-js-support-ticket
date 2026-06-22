@@ -236,12 +236,8 @@
 	div.jsst-main-up-wrapper input{margin-top: 15px;}
 	div.jsst-main-up-wrapper input {margin-top: 0px;}
 	div.frontend.error {background: url(../images/notsaved.png) 100% 21px no-repeat #ffd2d3 !important}
-	 div.frontend.updated {
-    background: url(../images/saved.png) 100% 22px no-repeat #d4ffcd;}  
-    div.js-ticket-add-form-wrapper div.js-ticket-from-field-wrp {
-    float: right;
-    text-align: right;
-    width: 100%;}
+	div.frontend.updated {background: url(../images/saved.png) 100% 22px no-repeat #d4ffcd;}  
+    div.js-ticket-add-form-wrapper div.js-ticket-from-field-wrp {float: right;text-align: right;width: 100%;}
     span.js-ticket-apend-radio-btn {margin-top: 0;}
     div.js-ticket-premade-msg-wrp div.js-ticket-premade-field-wrp select.js-ticket-premade-select {
     float: left !important;}
@@ -266,6 +262,8 @@
     /* div.js-admin-staff-wrapper div.js-festaffreport-img {
     width: 98%;} */
     div.js-ticket-profile-wrp div.js-ticket-profile-left {padding-right: 0;}
+    div.jsst-main-up-wrapper  .jsst-attachment-purged .jsst-purged-icon {margin-right: 0;margin-left: 8px;}
+	div.jsst-main-up-wrapper .jsst-purged-reason {margin-left: 0;margin-right: 4px;}
 
    
 

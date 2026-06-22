@@ -23,7 +23,7 @@ class JSSTattachmentModel {
             return false;
         if (!is_numeric($jsst_replyattachmentid))
             return false;
-        $jsst_query = "SELECT filename,filesize,id
+        $jsst_query = "SELECT filename,filesize,deleted,id
                     FROM `" . jssupportticket::$_db->prefix . "js_ticket_attachments`
                     WHERE ticketid = " . intval($jsst_id) . " AND replyattachmentid = " . intval($jsst_replyattachmentid);
         $jsst_result = jssupportticket::$_db->get_results($jsst_query);

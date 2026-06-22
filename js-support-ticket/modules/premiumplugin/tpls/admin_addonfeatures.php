@@ -313,6 +313,13 @@
                             <div class="add-on-txt"><?php echo esc_html(__('When auto assignment is enabled and a ticket is created, an appropriate agent is automatically assigned to the ticket and it is moved to the Assigned state.','js-support-ticket')); ?></div>
                             <a title="<?php echo esc_attr(__('buy now','js-support-ticket')); ?>" href="https://jshelpdesk.com/product/agent-auto-assign/" class="add-on-btn"><?php echo esc_html(__('buy now','js-support-ticket')); ?></a>
                         </div>
+                        <div class="add-on-item autocleanup">
+                            <img class="add-on-img" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/add-on-list/autocleanup.png" alt="<?php echo esc_attr(__('Auto Cleanup', 'js-support-ticket')); ?>" />
+                            <div class="add-on-name"><?php echo esc_html(__('Auto Cleanup', 'js-support-ticket')); ?></div>
+
+                            <div class="add-on-txt"><?php echo esc_html(__('Automatically deletes old attachments and permanently removes closed tickets based on your configured retention periods to optimize server storage.', 'js-support-ticket')); ?></div>
+                            <a title="<?php echo esc_attr(__('buy now', 'js-support-ticket')); ?>" href="https://jshelpdesk.com/product/autocleanup/" class="add-on-btn"><?php echo esc_html(__('buy now', 'js-support-ticket')); ?></a>
+                        </div>
                         <div class="add-on-item sociallogin">
                             <img class="add-on-img" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/add-on-list/sociallogin.png" alt="login" />
                             <div class="add-on-name"><?php echo esc_html(__('Social Login','js-support-ticket')); ?></div>
