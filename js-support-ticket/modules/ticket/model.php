@@ -3050,11 +3050,37 @@ class JSSTticketModel {
             die('Security check Failed');
         }
 
+        // --- SECURITY & PERMISSION FIX ---
+        $is_admin = current_user_can('manage_options');
+        $has_access = false;
+
+        if ($is_admin) {
+            $has_access = true;
+        } else {
+            // Check if user is an agent
+            if (in_array('agent', jssupportticket::$_active_addons)) {
+                $agent_model = JSSTincluder::getJSModel('agent');
+                if ($agent_model && method_exists($agent_model, 'isUserStaff') && $agent_model->isUserStaff()) {
+                    // Check specific permission for agents
+                    if (JSSTincluder::getJSModel('userpermissions')->checkPermissionGrantedForTask('Use AI Powered Reply Feature')) {
+                        $has_access = true;
+                    }
+                }
+            }
+        }
+
+        // If the user is neither an admin nor an authorized agent, block access immediately
+        if (!$has_access) {
+            return json_encode([]); 
+        }
+        // --- END PERMISSION FIX ---
+
         // Explicitly cast to integer to kill SQL Injection payloads
         $jsst_id = absint(JSSTrequest::getVar('ticketId')); 
         $jsst_subject = sanitize_text_field(JSSTrequest::getVar('ticketSubject'));
 
         $jsst_agentquery = "";
+        // Original logic to limit agents to their assigned tickets (kept intact)
         if (in_array('agent', jssupportticket::$_active_addons) && JSSTincluder::getJSModel('agent')->isUserStaff()) {
             $jsst_allowed = JSSTincluder::getJSModel('userpermissions')->checkPermissionGrantedForTask('Limit AI Replies to Agent-Assigned Tickets');
             if ($jsst_allowed) {
@@ -3178,7 +3204,7 @@ class JSSTticketModel {
                 $jsst_is_custom_score_above_threshold = ($jsst_ticket->custom_score > 0 && $jsst_ticket->custom_score >= $jsst_custom_score_threshold_value);
 
                 // Condition 2: Check if total_relevance is above its threshold
-                $jsst_is_total_relevance_above_threshold = $jsst_ticket->total_relevance >= $jsst_total_relevance_threshold_value;
+                $jsst_is_total_relevance_above_threshold = ($jsst_ticket->total_relevance >= $jsst_total_relevance_threshold_value);
 
                 // Condition 3: Handle cases where both scores are very low (similar to original code)
                 // If custom_score is 0, total_relevance must meet the minimum relevance.

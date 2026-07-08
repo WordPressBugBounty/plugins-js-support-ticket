@@ -43,17 +43,7 @@ class JSSTattachmentController {
         }
     }
 
-    static function saveattachments() {
-        $jsst_data = JSSTrequest::get('post');
-        JSSTincluder::getJSModel('attachment')->storeAttachments($jsst_data);
-        if (is_admin()) {
-            $jsst_url = admin_url("admin.php?page=ticket&jstlay=ticketdetail&jssupportticketid=" . JSSTrequest::getVar('ticketid'));
-        } else {
-            $jsst_url = jssupportticket::makeUrl(array('jstmod'=>'replies', 'jstlay'=>'replies'));
-        }
-        wp_safe_redirect($jsst_url);
-        exit;
-    }
+    // this function was not in use
 
     static function deleteattachment() {
 

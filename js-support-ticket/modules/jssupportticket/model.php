@@ -1500,8 +1500,6 @@ $jsst_query = "SELECT product.product, COUNT(t.id) AS ticket_count
         return $jsst_result;
     }
 
-
-
     function getuserlistajax($jsst_ajaxCall = 1){
         if ($jsst_ajaxCall == 1) {
             $jsst_nonce = JSSTrequest::getVar('_wpnonce');
@@ -1509,11 +1507,34 @@ $jsst_query = "SELECT product.product, COUNT(t.id) AS ticket_count
                 die( 'Security check Failed' );
             }
         }
-        $jsst_userlimit = JSSTrequest::getVar('userlimit',null,0);
+
+        // --- SECURITY & PERMISSION FIX ---
+        // Restrict access strictly to Admins and Agents
+        $is_admin = current_user_can('manage_options');
+        $is_agent = false;
+
+        if (!$is_admin) {
+            if (in_array('agent', jssupportticket::$_active_addons)) {
+                $agent_model = JSSTincluder::getJSModel('agent');
+                if ($agent_model && method_exists($agent_model, 'isUserStaff') && $agent_model->isUserStaff()) {
+                    $is_agent = true;
+                }
+            }
+        }
+
+        // If the user is neither an admin nor an agent, block access immediately
+        if (!$is_admin && !$is_agent) {
+            die('Security check Failed: Insufficient permissions');
+        }
+        // --- END PERMISSION FIX ---
+
+        // SECURITY FIX: Cast to integer to prevent SQL injection in the LIMIT clause
+        $jsst_userlimit = absint(JSSTrequest::getVar('userlimit', null, 0)); 
         $jsst_maxrecorded = 4;
+        
         $jsst_query = "SELECT DISTINCT COUNT(user.id)
                     FROM `" . jssupportticket::$_wpprefixforuser . "js_ticket_users` AS user 
-					WHERE user.status = 1 ";
+                    WHERE user.status = 1 ";
                     if(in_array('agent',jssupportticket::$_active_addons)){
                         $jsst_query .= " AND NOT EXISTS( SELECT staff.id FROM `" . jssupportticket::$_db->prefix . "js_ticket_staff` AS staff WHERE user.id = staff.uid) ";
                     }
@@ -1523,20 +1544,21 @@ $jsst_query = "SELECT product.product, COUNT(t.id) AS ticket_count
         if($jsst_limit >= $jsst_total){
             $jsst_limit = 0;
         }
+        
         $jsst_query = "SELECT DISTINCT user.id AS userid, user.name AS username, user.user_email AS useremail,
                     user.display_name AS userdisplayname
                     FROM `" . jssupportticket::$_wpprefixforuser . "js_ticket_users` AS user 
-					WHERE user.status = 1";
+                    WHERE user.status = 1";
                     if(in_array('agent',jssupportticket::$_active_addons)){
                         $jsst_query .= " AND NOT EXISTS( SELECT staff.id FROM `" . jssupportticket::$_db->prefix . "js_ticket_staff` AS staff WHERE user.id = staff.uid) ";
                     }
                     $jsst_query .= " LIMIT $jsst_limit, $jsst_maxrecorded";
+                    
         $jsst_users = jssupportticket::$_db->get_results($jsst_query);
         $jsst_html = $this->makeUserList($jsst_users,$jsst_total,$jsst_maxrecorded,$jsst_userlimit);
+        
         return $jsst_html;
-
     }
-
 
     function makeUserList($jsst_users,$jsst_total,$jsst_maxrecorded,$jsst_userlimit){
         $jsst_html = '';

@@ -408,6 +408,32 @@ class JSSTreplyModel {
     function editReply($jsst_data) {
         if (empty($jsst_data))
             return false;
+
+        // --- SECURITY & PERMISSION FIX ---
+        $is_admin = current_user_can('manage_options');
+        $has_access = false;
+
+        if ($is_admin) {
+            $has_access = true;
+        } else {
+            // Check if user is an agent
+            if (in_array('agent', jssupportticket::$_active_addons)) {
+                $agent_model = JSSTincluder::getJSModel('agent');
+                if ($agent_model && method_exists($agent_model, 'isUserStaff') && $agent_model->isUserStaff()) {
+                    // Check specific permission for agents
+                    if (JSSTincluder::getJSModel('userpermissions')->checkPermissionGrantedForTask('Edit Reply')) {
+                        $has_access = true;
+                    }
+                }
+            }
+        }
+
+        // If the user is neither an admin nor an authorized agent, block access immediately
+        if (!$has_access) {
+            return false; 
+        }
+        // --- END PERMISSION FIX ---
+
         $jsst_desc = JSSTincluder::getJSModel('jssupportticket')->getSanitizedEditorData($jsst_data['jsticket_replytext']); // use jsticket_message to avoid conflict
 
         $jsst_row = JSSTincluder::getJSTable('replies');
