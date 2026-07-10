@@ -5,7 +5,7 @@
   Plugin URI: https://www.jshelpdesk.com
   Description: JS Help Desk is a trusted open source ticket system. JS Help Desk is a simple, easy to use, web-based customer support system. User can create ticket from front-end. JS Help Desk comes packed with lot features than most of the expensive(and complex) support ticket system on market. JS Help Desk provide you best industry help desk system.
   Author: JS Help Desk
-  Version: 3.1.4
+  Version: 3.1.5
   Text Domain: js-support-ticket
   Domain Path: /languages
   License: GPLv3
@@ -63,7 +63,7 @@ class jssupportticket {
         self::$jsst_data = array();
         self::$_search = array();
         self::$_captcha = array();
-        self::$_currentversion = '314';
+        self::$_currentversion = '315';
         self::$_addon_query = array('select'=>'','join'=>'','where'=>'');
         self::$_jshdsession = JSSTincluder::getObjectClass('wphdsession');
         global $wpdb;
@@ -143,7 +143,7 @@ class jssupportticket {
                     // restore colors data end
                     update_option('jsst_currentversion', self::$_currentversion);
                     include_once JSST_PLUGIN_PATH . 'includes/updates/updates.php';
-                    JSSTupdates::checkUpdates('314');
+                    JSSTupdates::checkUpdates('315');
                     JSSTincluder::getJSModel('jssupportticket')->updateColorFile();
                     JSSTincluder::getJSModel('jssupportticket')->jsst_check_license_status();
                     JSSTincluder::getJSModel('jssupportticket')->JSSTAddonsAutoUpdate();

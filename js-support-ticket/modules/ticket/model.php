@@ -697,6 +697,17 @@ class JSSTticketModel {
         if ($jsst_id) {
             if (!is_numeric($jsst_id))
                 return false;
+            // Editing an existing ticket is an admin/agent action, not a customer self-service one.
+            if (!current_user_can('manage_options')) {
+                if (in_array('agent', jssupportticket::$_active_addons) && JSSTincluder::getJSModel('agent')->isUserStaff()) {
+                    $jsst_allow = JSSTincluder::getJSModel('userpermissions')->checkPermissionGrantedForTask('Edit Ticket');
+                    if ($jsst_allow != true) {
+                        return false;
+                    }
+                } else {
+                    return false;
+                }
+            }
             $jsst_query = "SELECT ticket.*,department.departmentname AS departmentname ,priority.priority AS priority,priority.prioritycolour AS prioritycolour,user.name AS user_login, product.product AS producttitle
                         FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` AS ticket
                         LEFT JOIN `" . jssupportticket::$_db->prefix . "js_ticket_departments` AS department ON ticket.departmentid = department.id

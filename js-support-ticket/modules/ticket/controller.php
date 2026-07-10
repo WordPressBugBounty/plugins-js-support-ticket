@@ -44,7 +44,20 @@ class JSSTticketController {
                             $jsst_id = NULL;
                         }
                     }
-                    jssupportticket::$jsst_data['permission_granted'] = true;
+                    // Creating a new ticket is open to everyone; editing an existing one is admin/agent-with-permission only.
+                    if ($jsst_id == null) {
+                        jssupportticket::$jsst_data['permission_granted'] = true;
+                    } elseif (current_user_can('manage_options')) {
+                        jssupportticket::$jsst_data['permission_granted'] = true;
+                    } elseif (in_array('agent', jssupportticket::$_active_addons) && JSSTincluder::getJSModel('agent')->isUserStaff()) {
+                        jssupportticket::$jsst_data['permission_granted'] = JSSTincluder::getJSModel('userpermissions')->checkPermissionGrantedForTask('Edit Ticket');
+                    } else {
+                        jssupportticket::$jsst_data['permission_granted'] = false;
+                    }
+
+                    if (!jssupportticket::$jsst_data['permission_granted']) {
+                        JSSTmessage::setMessage(esc_html(__('You are not allowed to edit this ticket', 'js-support-ticket')), 'error');
+                    }
 
                     if (jssupportticket::$jsst_data['permission_granted']) {
                         JSSTincluder::getJSModel('ticket')->getTicketsForForm($jsst_id,$jsst_formid);
