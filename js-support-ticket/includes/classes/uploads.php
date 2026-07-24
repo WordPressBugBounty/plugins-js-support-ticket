@@ -23,7 +23,7 @@ class JSSTuploads {
             if($this->jsst_uploadfor == 'ticket'){
                 if(!is_numeric($this->jsst_ticketid)) return false;
                 $jsst_path = $jsst_path . '/ticket';
-                $jsst_query = "SELECT attachmentdir FROM `".jssupportticket::$_db->prefix."js_ticket_tickets` WHERE id = ".intval($this->jsst_ticketid);
+                $jsst_query = jssupportticket::$_db->prepare("SELECT attachmentdir FROM `".jssupportticket::$_db->prefix."js_ticket_tickets` WHERE id = %d", $this->jsst_ticketid);
                 $jsst_foldername = jssupportticket::$_db->get_var($jsst_query);
             }elseif($this->jsst_uploadfor == 'article'){
                 $jsst_path = $jsst_path . '/articles/article_'.$this->jsst_articleid;
@@ -116,10 +116,26 @@ class JSSTuploads {
         // generate index file
         if (!empty($jsst_file_directory)) {
             JSSTincluder::getJSModel('jssupportticket')->generateIndexFile($jsst_file_directory);
+            $this->protectTicketAttachmentDirectory($jsst_file_directory);
         }
         // Set everything back to normal.
         remove_filter( 'upload_dir', array($this,'jssupportticket_upload_dir'));
         return;
+    }
+
+    // Ticket attachments are only ever served via the ownership-checked PHP download
+    // endpoints, never by direct URL, so block direct web access to the storage folder.
+    private function protectTicketAttachmentDirectory($jsst_file_directory){
+        global $wp_filesystem;
+        if (empty($wp_filesystem)) {
+            return;
+        }
+        $jsst_ticket_dir = dirname($jsst_file_directory);
+        $jsst_htaccess_file = $jsst_ticket_dir . '/.htaccess';
+        if (!$wp_filesystem->exists($jsst_htaccess_file)) {
+            $jsst_htaccess_contents = "<IfModule mod_authz_core.c>\nRequire all denied\n</IfModule>\n<IfModule !mod_authz_core.c>\nDeny from all\n</IfModule>\n";
+            $wp_filesystem->put_contents($jsst_htaccess_file, $jsst_htaccess_contents, FS_CHMOD_FILE);
+        }
     }
 
     function storeTicketViaEmailAttachment($jsst_idsarray,$jsst_key,$jsst_value){
@@ -141,16 +157,27 @@ class JSSTuploads {
         if (!file_exists($jsst_path)) { // create user directory
             JSSTincluder::getJSModel('jssupportticket')->makeDir($jsst_path);
         }
-        $jsst_query = "SELECT attachmentdir FROM `".jssupportticket::$_db->prefix."js_ticket_tickets` WHERE id = ".esc_sql($jsst_idsarray[0]);
+        $jsst_query = jssupportticket::$_db->prepare("SELECT attachmentdir FROM `".jssupportticket::$_db->prefix."js_ticket_tickets` WHERE id = %d", $jsst_idsarray[0]);
         $jsst_foldername = jssupportticket::$_db->get_var($jsst_query);
 
         $jsst_path = $jsst_path . '/' . $jsst_foldername;
         if (!file_exists($jsst_path)) { // create user directory
             JSSTincluder::getJSModel('jssupportticket')->makeDir($jsst_path);
         }
+        $this->protectTicketAttachmentDirectoryPlain(dirname($jsst_path));
 
-        file_put_contents($jsst_path . '/' . $jsst_key, $jsst_value); // save the file
+        file_put_contents($jsst_path . '/' . sanitize_file_name($jsst_key), $jsst_value); // save the file
         return true;
+    }
+
+    // Same protection as protectTicketAttachmentDirectory() but for call sites that
+    // don't have WP_Filesystem initialized.
+    private function protectTicketAttachmentDirectoryPlain($jsst_ticket_dir){
+        $jsst_htaccess_file = $jsst_ticket_dir . '/.htaccess';
+        if (!file_exists($jsst_htaccess_file)) {
+            $jsst_htaccess_contents = "<IfModule mod_authz_core.c>\nRequire all denied\n</IfModule>\n<IfModule !mod_authz_core.c>\nDeny from all\n</IfModule>\n";
+            @file_put_contents($jsst_htaccess_file, $jsst_htaccess_contents);
+        }
     }
 
     function storeArticleAttachment($jsst_data, $jsst_caller){
@@ -450,6 +477,7 @@ class JSSTuploads {
                     $jsst_file_directory = dirname($jsst_result['file']);
                     // generate index file
                     JSSTincluder::getJSModel('jssupportticket')->generateIndexFile($jsst_file_directory);
+                    $this->protectTicketAttachmentDirectory($jsst_file_directory);
                 }
             }
         }
@@ -510,6 +538,7 @@ class JSSTuploads {
                     $jsst_file_directory = dirname($jsst_result['file']);
                     // generate index file
                     JSSTincluder::getJSModel('jssupportticket')->generateIndexFile($jsst_file_directory);
+                    $this->protectTicketAttachmentDirectory($jsst_file_directory);
 				}
             }
         }

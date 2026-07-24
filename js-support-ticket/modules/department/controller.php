@@ -26,7 +26,7 @@ class JSSTdepartmentController {
                     break;
                 case 'admin_adddepartment':
                 case 'adddepartment':
-                    $jsst_id = JSSTrequest::getVar('jssupportticketid');
+                    $jsst_id = absint( JSSTrequest::getVar('jssupportticketid') );
                     jssupportticket::$jsst_data['permission_granted'] = true;
                     if ( in_array('agent',jssupportticket::$_active_addons) && JSSTincluder::getJSModel('agent')->isUserStaff()) {
                         $jsst_per_task = ($jsst_id == null) ? 'Add Department' : 'Edit Department';
@@ -83,7 +83,7 @@ class JSSTdepartmentController {
         if (! wp_verify_nonce( $jsst_nonce, 'delete-department-'.$jsst_id) ) {
             die( 'Security check Failed' );
         }
-        JSSTincluder::getJSModel('department')->removeDepartment($jsst_id);
+        JSSTincluder::getJSModel('department')->removeDepartment( absint( $jsst_id ) );
         if (is_admin()) {
             $jsst_url = admin_url("admin.php?page=department&jstlay=departments");
         } else {
@@ -99,7 +99,7 @@ class JSSTdepartmentController {
         if (! wp_verify_nonce( $jsst_nonce, 'change-status-'.$jsst_id) ) {
             die( 'Security check Failed' );
         }
-        JSSTincluder::getJSModel('department')->changeStatus($jsst_id);
+        JSSTincluder::getJSModel('department')->changeStatus( absint( $jsst_id ) );
         $jsst_url = admin_url("admin.php?page=department&jstlay=departments");
         $jsst_pagenum = JSSTrequest::getVar('pagenum');
         if ($jsst_pagenum)
@@ -114,8 +114,8 @@ class JSSTdepartmentController {
         if (! wp_verify_nonce( $jsst_nonce, 'change-default-'.$jsst_id) ) {
             die( 'Security check Failed' );
         }
-        $jsst_default = JSSTrequest::getVar('default',null,0);
-        JSSTincluder::getJSModel('department')->changeDefault($jsst_id,$jsst_default);
+        $jsst_default = absint( JSSTrequest::getVar('default',null,0) );
+        JSSTincluder::getJSModel('department')->changeDefault( absint( $jsst_id ), $jsst_default);
         $jsst_url = admin_url("admin.php?page=department&jstlay=departments");
         $jsst_pagenum = JSSTrequest::getVar('pagenum');
         if ($jsst_pagenum)
@@ -130,7 +130,7 @@ class JSSTdepartmentController {
             die( 'Security check Failed' );
         }
         $jsst_id = JSSTrequest::getVar('departmentid');
-        JSSTincluder::getJSModel('department')->setOrdering($jsst_id);
+        JSSTincluder::getJSModel('department')->setOrdering( absint( $jsst_id ) );
         $jsst_pagenum = JSSTrequest::getVar('pagenum');
         $jsst_url = "admin.php?page=department&jstlay=departments";
         if ($jsst_pagenum)

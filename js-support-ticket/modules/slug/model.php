@@ -17,7 +17,7 @@ class JSSTslugModel {
 
         $jsst_inquery = '';
         if ($jsst_slug != null){
-            $jsst_inquery .= " AND slug.slug LIKE '%".esc_sql($jsst_slug)."%'";
+            $jsst_inquery .= jssupportticket::$_db->prepare(" AND slug.slug LIKE %s", '%'.$jsst_slug.'%');
         }
         jssupportticket::$jsst_data['slug'] = $jsst_slug;
 
@@ -52,8 +52,8 @@ class JSSTslugModel {
             if($jsst_id != '' && is_numeric($jsst_id)){
                 $jsst_slug = sanitize_title($jsst_slug);
                 if($jsst_slug != ''){
-                    $jsst_query = "SELECT COUNT(id) FROM " . jssupportticket::$_db->prefix . "js_ticket_slug
-                            WHERE slug = '" . esc_sql($jsst_slug)."' ";
+                    $jsst_query = jssupportticket::$_db->prepare("SELECT COUNT(id) FROM " . jssupportticket::$_db->prefix . "js_ticket_slug
+                            WHERE slug = %s ", $jsst_slug);
                     $jsst_slug_flag = jssupportticket::$_db->get_var($jsst_query);
                     if($jsst_slug_flag > 0){
                         continue;
@@ -72,14 +72,14 @@ class JSSTslugModel {
         if (empty($jsst_data)) {
             return false;
         }
-        $jsst_data['prefix'] = ($jsst_data['prefix']);
+        $jsst_data['prefix'] = sanitize_title($jsst_data['prefix']);
         if($jsst_data['prefix'] == ''){
             JSSTmessage::setMessage(esc_html(__('Prefix has not been stored', 'js-support-ticket')), 'error');
             return;
         }
-        $jsst_query = "UPDATE " . jssupportticket::$_db->prefix . "js_ticket_config
-                    SET configvalue = '".esc_sql($jsst_data['prefix'])."'
-                    WHERE configname = 'slug_prefix'";
+        $jsst_query = jssupportticket::$_db->prepare("UPDATE " . jssupportticket::$_db->prefix . "js_ticket_config
+                    SET configvalue = %s
+                    WHERE configname = 'slug_prefix'", $jsst_data['prefix']);
         if(jssupportticket::$_db->query($jsst_query)){
             update_option('rewrite_rules', '');
             JSSTmessage::setMessage(esc_html(__('Prefix has been stored', 'js-support-ticket')), 'updated');
@@ -95,14 +95,14 @@ class JSSTslugModel {
         if (empty($jsst_data)) {
             return false;
         }
-        $jsst_data['prefix'] = ($jsst_data['prefix']);
+        $jsst_data['prefix'] = sanitize_title($jsst_data['prefix']);
         if($jsst_data['prefix'] == ''){
             JSSTmessage::setMessage(esc_html(__('Prefix has not been stored', 'js-support-ticket')), 'error');
             return;
         }
-        $jsst_query = "UPDATE " . jssupportticket::$_db->prefix . "js_ticket_config
-                    SET configvalue = '".esc_sql($jsst_data['prefix'])."'
-                    WHERE configname = 'home_slug_prefix'";
+        $jsst_query = jssupportticket::$_db->prepare("UPDATE " . jssupportticket::$_db->prefix . "js_ticket_config
+                    SET configvalue = %s
+                    WHERE configname = 'home_slug_prefix'", $jsst_data['prefix']);
         if(jssupportticket::$_db->query($jsst_query)){
             update_option('rewrite_rules', '');
             JSSTmessage::setMessage(esc_html(__('Prefix has been stored', 'js-support-ticket')), 'updated');
@@ -154,13 +154,13 @@ class JSSTslugModel {
     }
 
     function getDefaultSlugFromSlug($jsst_layout) {
-        $jsst_query = "SELECT  defaultslug FROM `".jssupportticket::$_db->prefix."js_ticket_slug` WHERE slug = '".esc_sql($jsst_layout)."'";
+        $jsst_query = jssupportticket::$_db->prepare("SELECT  defaultslug FROM `".jssupportticket::$_db->prefix."js_ticket_slug` WHERE slug = %s", $jsst_layout);
         $jsst_val = jssupportticket::$_db->get_var($jsst_query);
         return sanitize_title($jsst_val);
     }
 
     function getSlugFromFileName($jsst_layout,$jsst_module) {
-        $jsst_query = "SELECT slug FROM `".jssupportticket::$_db->prefix."js_ticket_slug` WHERE filename = '".esc_sql($jsst_layout)."'";
+        $jsst_query = jssupportticket::$_db->prepare("SELECT slug FROM `".jssupportticket::$_db->prefix."js_ticket_slug` WHERE filename = %s", $jsst_layout);
         $jsst_val = jssupportticket::$_db->get_var($jsst_query);
         return $jsst_val;
     }

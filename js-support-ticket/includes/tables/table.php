@@ -114,7 +114,7 @@ class JSSTtable {
 
     function load($jsst_id){
         if(!is_numeric($jsst_id)) return false;
-        $jsst_query = "SELECT * FROM `".$this->tablename."` WHERE ".$this->primarykey." = ".esc_sql($jsst_id);
+        $jsst_query = jssupportticket::$_db->prepare("SELECT * FROM `".$this->tablename."` WHERE ".$this->primarykey." = %d", $jsst_id);
         $jsst_result = jssupportticket::$_db->get_row($jsst_query);
         $jsst_array = get_object_vars($this);
         unset($jsst_array['isnew']);

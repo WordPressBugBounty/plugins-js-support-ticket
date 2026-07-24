@@ -23,7 +23,7 @@ class JSSTmessage {
         if (isset($jsst_notificationdata) && !empty($jsst_notificationdata)) {
             $jsst_data = $jsst_notificationdata;
             for ($jsst_i = 0; $jsst_i < COUNT($jsst_data['msg']); $jsst_i++){
-                $jsst_divHtml .= '<div class=" ' . esc_attr($jsst_frontend) . ' ' . esc_attr($jsst_data['type'][$jsst_i]) . '"><p>' . $jsst_data['msg'][$jsst_i] . '</p></div>';
+                $jsst_divHtml .= '<div class=" ' . esc_attr($jsst_frontend) . ' ' . esc_attr($jsst_data['type'][$jsst_i]) . '"><p>' . esc_html($jsst_data['msg'][$jsst_i]) . '</p></div>';
             }
         }
         echo wp_kses($jsst_divHtml, JSST_ALLOWED_TAGS);

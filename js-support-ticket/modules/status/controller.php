@@ -18,7 +18,7 @@ class JSSTstatusController {
                     JSSTincluder::getJSModel('status')->getStatuses();
                     break;
                 case 'admin_addstatus':
-                    $jsst_id = JSSTrequest::getVar('jssupportticketid', 'get');
+                    $jsst_id = absint( JSSTrequest::getVar('jssupportticketid', 'get') );
                     JSSTincluder::getJSModel('status')->getStatusForForm($jsst_id);
                     break;
                 default:
@@ -72,7 +72,7 @@ class JSSTstatusController {
         if (! wp_verify_nonce( $jsst_nonce, 'delete-status-'.$jsst_id) ) {
             die( 'Security check Failed' );
         }
-        JSSTincluder::getJSModel('status')->removeStatus($jsst_id);
+        JSSTincluder::getJSModel('status')->removeStatus( absint( $jsst_id ) );
         if (is_admin()) {
             $jsst_url = admin_url("admin.php?page=status&jstlay=statuses");
         } else {
@@ -88,7 +88,7 @@ class JSSTstatusController {
             die( 'Security check Failed' );
         }
         $jsst_id = JSSTrequest::getVar('statusid');
-        JSSTincluder::getJSModel('status')->setOrdering($jsst_id);
+        JSSTincluder::getJSModel('status')->setOrdering( absint( $jsst_id ) );
         $jsst_pagenum = JSSTrequest::getVar('pagenum');
         $jsst_url = "admin.php?page=status&jstlay=statuses";
         if ($jsst_pagenum)

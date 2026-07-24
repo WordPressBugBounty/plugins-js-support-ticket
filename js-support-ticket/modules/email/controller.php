@@ -19,7 +19,7 @@ class JSSTemailController {
                     break;
 
                 case 'admin_addemail':
-                    $jsst_id = JSSTrequest::getVar('jssupportticketid', 'get');
+                    $jsst_id = absint( JSSTrequest::getVar('jssupportticketid', 'get') );
                     JSSTincluder::getJSModel('email')->getEmailForForm($jsst_id);
                     break;
                 default:
@@ -68,12 +68,15 @@ class JSSTemailController {
     }
 
     static function deleteemail() {
+        if (!current_user_can('manage_options')) { //only admin can change it.
+            return false;
+        }
         $jsst_id = JSSTrequest::getVar('emailid');
         $jsst_nonce = JSSTrequest::getVar('_wpnonce');
         if (! wp_verify_nonce( $jsst_nonce, 'delete-email-'.$jsst_id) ) {
             die( 'Security check Failed' );
         }
-        JSSTincluder::getJSModel('email')->removeEmail($jsst_id);
+        JSSTincluder::getJSModel('email')->removeEmail( absint( $jsst_id ) );
         if (is_admin()) {
             $jsst_url = admin_url("admin.php?page=email&jstlay=emails");
         } else {

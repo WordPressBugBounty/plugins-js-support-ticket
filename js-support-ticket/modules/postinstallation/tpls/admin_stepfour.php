@@ -46,7 +46,7 @@ if (!defined('ABSPATH')) die('Restricted Access'); ?>
                         <form id="jslearnmanager-form-ins" method="post" action="#">
                             <div class="jsst_setting_complete_heading"><h1 class="Jsst_heading"><?php echo esc_html(__('Setting Completed','js-support-ticket')); ?></h1></div>
                             <div class="jsst_img_wrp">
-                                <img  src="<?php echo esc_url(JSST_PLUGIN_URL).'includes/images/postinstallation/complete-setting.png';?>" alt="Seting Log" title="Setting Logo">
+                                <img  src="<?php echo esc_url(JSST_PLUGIN_URL).'includes/images/postinstallation/complete-setting.png';?>" alt="<?php echo esc_attr__('Setting Logo', 'js-support-ticket'); ?>" title="<?php echo esc_attr__('Setting Logo', 'js-support-ticket'); ?>">
                             </div>
                             <div class="jsst_text_below_img">
                                 <?php echo esc_html(__('Setting you applied has been saved successfully.','js-support-ticket'));?>

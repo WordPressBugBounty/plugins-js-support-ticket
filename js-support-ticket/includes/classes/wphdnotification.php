@@ -96,7 +96,7 @@ class JSSTwphdnotification {
     public function getNotificationDatabySessionId($jsst_sessionfor , $jsst_deldata = false){
         if(jssupportticket::$_jshdsession->jsst_sessionid == '')
             return false;
-        $jsst_query = "SELECT sessionmsg FROM `" . jssupportticket::$_db->prefix . "js_ticket_jshdsessiondata` WHERE usersessionid = '" . esc_sql(jssupportticket::$_jshdsession->jsst_sessionid) . "' AND sessionfor = '" . esc_sql($jsst_sessionfor) . "' AND sessionexpire > '" . time() . "'";
+        $jsst_query = jssupportticket::$_db->prepare("SELECT sessionmsg FROM `" . jssupportticket::$_db->prefix . "js_ticket_jshdsessiondata` WHERE usersessionid = %s AND sessionfor = %s AND sessionexpire > %d", jssupportticket::$_jshdsession->jsst_sessionid, $jsst_sessionfor, time());
         $jsst_data = jssupportticket::$_db->get_var($jsst_query);
         if(!empty($jsst_data)){
             $jsst_data = jssupportticketphplib::JSST_safe_decoding($jsst_data);

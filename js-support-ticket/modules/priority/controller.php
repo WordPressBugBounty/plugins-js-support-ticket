@@ -18,7 +18,7 @@ class JSSTpriorityController {
                     JSSTincluder::getJSModel('priority')->getPriorities();
                     break;
                 case 'admin_addpriority':
-                    $jsst_id = JSSTrequest::getVar('jssupportticketid', 'get');
+                    $jsst_id = absint( JSSTrequest::getVar('jssupportticketid', 'get') );
                     JSSTincluder::getJSModel('priority')->getPriorityForForm($jsst_id);
                     break;
                 default:
@@ -72,7 +72,7 @@ class JSSTpriorityController {
         if (! wp_verify_nonce( $jsst_nonce, 'delete-priority-'.$jsst_id) ) {
             die( 'Security check Failed' );
         }
-        JSSTincluder::getJSModel('priority')->removePriority($jsst_id);
+        JSSTincluder::getJSModel('priority')->removePriority( absint( $jsst_id ) );
         if (is_admin()) {
             $jsst_url = admin_url("admin.php?page=priority&jstlay=priorities");
         } else {
@@ -88,7 +88,7 @@ class JSSTpriorityController {
         if (! wp_verify_nonce( $jsst_nonce, 'make-default-'.$jsst_id) ) {
             die( 'Security check Failed' );
         }
-        JSSTincluder::getJSModel('priority')->makeDefault($jsst_id);
+        JSSTincluder::getJSModel('priority')->makeDefault( absint( $jsst_id ) );
         $jsst_pagenum = JSSTrequest::getVar('pagenum');
         $jsst_url = "admin.php?page=priority&jstlay=priorities";
         if ($jsst_pagenum)
@@ -103,7 +103,7 @@ class JSSTpriorityController {
             die( 'Security check Failed' );
         }
         $jsst_id = JSSTrequest::getVar('priorityid');
-        JSSTincluder::getJSModel('priority')->setOrdering($jsst_id);
+        JSSTincluder::getJSModel('priority')->setOrdering( absint( $jsst_id ) );
         $jsst_pagenum = JSSTrequest::getVar('pagenum');
         $jsst_url = "admin.php?page=priority&jstlay=priorities";
         if ($jsst_pagenum)

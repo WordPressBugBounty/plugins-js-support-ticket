@@ -31,12 +31,12 @@ class JSSTreportsController {
                 case 'staffdetailreport':
                     if(in_array('agent',jssupportticket::$_active_addons)){
                         if(is_admin()){
-                            $jsst_id = JSSTrequest::getVar('id');
+                            $jsst_id = absint( JSSTrequest::getVar('id') );
                             JSSTincluder::getJSModel('reports')->getStaffDetailReportByStaffId($jsst_id);
                         }else{
                             jssupportticket::$jsst_data['permission_granted'] = JSSTincluder::getJSModel('userpermissions')->checkPermissionGrantedForTask('View Agent Reports');
                             if (jssupportticket::$jsst_data['permission_granted']) {
-                                $jsst_id = JSSTrequest::getVar('jsst-id');
+                                $jsst_id = absint( JSSTrequest::getVar('jsst-id') );
                                 $jsst_return = JSSTincluder::getJSModel('reports')->getStaffDetailReportByStaffId($jsst_id);
                                 if(isset($jsst_return) AND $jsst_return === false)
                                     jssupportticket::$jsst_data['permission_granted'] = false;
@@ -46,18 +46,18 @@ class JSSTreportsController {
                     }
                 break;
                 case 'admin_departmentdetailreport':
-                        $jsst_id = JSSTrequest::getVar('id');
+                        $jsst_id = absint( JSSTrequest::getVar('id') );
                         JSSTincluder::getJSModel('reports')->getDepartmentDetailReportByDepartmentId($jsst_id);
                 break;
                 case 'admin_stafftimereport':
                     if(in_array('agent',jssupportticket::$_active_addons) && in_array('timetracking',jssupportticket::$_active_addons)){
 
-                        $jsst_id = JSSTrequest::getVar('id');
+                        $jsst_id = absint( JSSTrequest::getVar('id') );
                         JSSTincluder::getJSModel('reports')->getStaffTimingReportById($jsst_id);
                     }
                 break;
                 case 'admin_userdetailreport':
-                    $jsst_id = JSSTrequest::getVar('id');
+                    $jsst_id = absint( JSSTrequest::getVar('id') );
                     JSSTincluder::getJSModel('reports')->getStaffDetailReportByUserId($jsst_id);
                 break;
                 case 'admin_overallreport':

@@ -78,7 +78,7 @@ class JSSTzywrapController {
             die('Security check Failed');
         }
         
-        JSSTincluder::getJSModel('zywrap')->deleteLog($jsst_id);
+        JSSTincluder::getJSModel('zywrap')->deleteLog( absint( $jsst_id ) );
         
         // Redirect back to the errors page
         $jsst_url = admin_url("admin.php?page=zywrap&jstlay=zywrap_errors");

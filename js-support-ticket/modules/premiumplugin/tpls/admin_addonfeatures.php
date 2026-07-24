@@ -292,7 +292,7 @@
                             <div class="add-on-txt"><?php echo esc_html(__('EDD offers customers to open new tickets just one click from their EDD account with optionally validating the license keys.','js-support-ticket')); ?></div>
                             <a title="<?php echo esc_attr(__('buy now','js-support-ticket')); ?>" href="https://jshelpdesk.com/product/easy-digital-download/" class="add-on-btn"><?php echo esc_html(__('buy now','js-support-ticket')); ?></a>
                         </div>
-			<div class="add-on-item email-cc">
+			            <div class="add-on-item email-cc">
                             <img class="add-on-img" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/add-on-list/emailcc.png" alt = "<?php echo esc_attr(__('Email CC','js-support-ticket')); ?>" />
                             <div class="add-on-name"><?php echo esc_html(__('Email CC','js-support-ticket')); ?></div>
 

@@ -25,7 +25,8 @@ class JSSTreplyModel {
                     LEFT JOIN `" . jssupportticket::$_db->prefix . "js_ticket_users` AS user ON  replies.uid = user.id
                     LEFT JOIN `" . jssupportticket::$_db->prefix . "js_ticket_users` AS viewer ON  replies.viewed_by = viewer.id
                     ".jssupportticket::$_addon_query['join']."
-                    WHERE tickets.id = " . esc_sql($jsst_id) . " ORDER By replies.id ".esc_sql($jsst_ordering);
+                    WHERE tickets.id = %d ORDER By replies.id ".$jsst_ordering;
+        $jsst_query = jssupportticket::$_db->prepare($jsst_query, $jsst_id);
         jssupportticket::$jsst_data[4] = jssupportticket::$_db->get_results($jsst_query);
         do_action('jsst_reset_aadon_query');
         if (jssupportticket::$_db->last_error != null) {
@@ -65,7 +66,7 @@ class JSSTreplyModel {
             }
             // Execute the query if an update is required
             if ($jsst_update_required) {
-                $jsst_query = "UPDATE `" . jssupportticket::$_db->prefix . "js_ticket_replies` SET viewed_by = " . esc_sql($jsst_viewed_by) . ", viewed_on = '" . esc_sql(date_i18n('Y-m-d H:i:s')) . "' WHERE id = " . esc_sql($jsst_reply->replyid);
+                $jsst_query = jssupportticket::$_db->prepare("UPDATE `" . jssupportticket::$_db->prefix . "js_ticket_replies` SET viewed_by = %d, viewed_on = %s WHERE id = %d", $jsst_viewed_by, date_i18n('Y-m-d H:i:s'), $jsst_reply->replyid);
                 jssupportticket::$_db->query($jsst_query);
             }
         }
@@ -88,8 +89,21 @@ class JSSTreplyModel {
             $jsst_query = "SELECT replies.*,tickets.id
                         FROM `" . jssupportticket::$_db->prefix . "js_ticket_replies` AS replies
                         JOIN `" . jssupportticket::$_db->prefix . "js_ticket_tickets` AS tickets ON  replies.ticketid = tickets.id
-                        WHERE replies.id = " . esc_sql($jsst_id);
-            jssupportticket::$jsst_data[0] = jssupportticket::$_db->get_row($jsst_query);
+                        WHERE replies.id = %d";
+            $jsst_query = jssupportticket::$_db->prepare($jsst_query, $jsst_id);
+            $jsst_row = jssupportticket::$_db->get_row($jsst_query);
+            if (!$jsst_row) {
+                return false;
+            }
+            if (!current_user_can('manage_options') && !(in_array('agent', jssupportticket::$_active_addons) && JSSTincluder::getJSModel('agent')->isUserStaff())) {
+                $jsst_owns_ticket = (!JSSTincluder::getObjectClass('user')->isguest())
+                    ? JSSTincluder::getJSModel('ticket')->validateTicketDetailForUser($jsst_row->id)
+                    : JSSTincluder::getJSModel('ticket')->validateTicketDetailForVisitor($jsst_row->id);
+                if (!$jsst_owns_ticket) {
+                    return false;
+                }
+            }
+            jssupportticket::$jsst_data[0] = $jsst_row;
             if (jssupportticket::$_db->last_error != null) {
                 JSSTincluder::getJSModel('systemerror')->addSystemError(); // if there is an error add it to system errorrs
             }
@@ -105,8 +119,8 @@ class JSSTreplyModel {
         //validate reply for break down
         $jsst_ticketid   = $jsst_data['ticketrandomid'];
         $jsst_hash       = $jsst_data['hash'];
-        $jsst_query = "SELECT id FROM `".jssupportticket::$_db->prefix."js_ticket_tickets` WHERE ticketid='".esc_sql($jsst_ticketid)."'
-        AND IF(`hash` is NULL,true,`hash`='".esc_sql($jsst_hash)."') ";
+        $jsst_query = jssupportticket::$_db->prepare("SELECT id FROM `".jssupportticket::$_db->prefix."js_ticket_tickets` WHERE ticketid=%s
+        AND IF(`hash` is NULL,true,`hash`=%s) ", $jsst_ticketid, $jsst_hash);
         $jsst_id = jssupportticket::$_db->get_var($jsst_query);
         if($jsst_id != $jsst_data['ticketid']){
             return;
@@ -172,6 +186,8 @@ class JSSTreplyModel {
         $jsst_tempmessage = $jsst_data['jsticket_message'];
         $jsst_data = jssupportticket::JSST_sanitizeData($jsst_data); // JSST_sanitizeData() function uses wordpress santize functions
         if(isset($jsst_data['ticketviaemail']) && $jsst_data['ticketviaemail'] == 1){
+            $jsst_data['message'] = $jsst_tempmessage;
+        }elseif(isset($jsst_data['ticketviaautopilot']) && $jsst_data['ticketviaautopilot'] == 1){
             $jsst_data['message'] = $jsst_tempmessage;
         }else{
             $jsst_data['message'] = JSSTincluder::getJSModel('jssupportticket')->getSanitizedEditorData(wp_unslash($_POST['jsticket_message'] ?? ''));
@@ -327,12 +343,12 @@ class JSSTreplyModel {
 
         // Send Emails
         if ($jsst_sendEmail == true) {
-            if (is_admin()) {
+            if (current_user_can('manage_options') || (in_array('agent', jssupportticket::$_active_addons) && JSSTincluder::getJSModel('agent')->isUserStaff())) {
                 JSSTincluder::getJSModel('email')->sendMail(1, 4, $jsst_ticketid); // Mailfor, Reply Ticket
             } else {
                 JSSTincluder::getJSModel('email')->sendMail(1, 5, $jsst_ticketid); // Mailfor, Reply Ticket
             }
-            $jsst_ticketreplyobject = jssupportticket::$_db->get_row("SELECT * FROM `" . jssupportticket::$_db->prefix . "js_ticket_replies` WHERE id = " . esc_sql($jsst_replyid));
+            $jsst_ticketreplyobject = jssupportticket::$_db->get_row(jssupportticket::$_db->prepare("SELECT * FROM `" . jssupportticket::$_db->prefix . "js_ticket_replies` WHERE id = %d", $jsst_replyid));
             do_action('jsst-ticketreply', $jsst_ticketreplyobject);
         }
         // if Close on reply is cheked
@@ -351,7 +367,7 @@ class JSSTreplyModel {
         if (isset($jsst_data['ticketviaemail']) && $jsst_data['ticketviaemail'] == 1) {
             $jsst_inquery .= " AND ticketviaemail = 1";
         }
-        $jsst_query = "SELECT created FROM `" . jssupportticket::$_db->prefix . "js_ticket_replies` WHERE ticketid = '" . intval($jsst_data['ticketid']) . "' AND uid = '" . intval($jsst_data['uid']) . "' ORDER BY created DESC LIMIT 1";
+        $jsst_query = jssupportticket::$_db->prepare("SELECT created FROM `" . jssupportticket::$_db->prefix . "js_ticket_replies` WHERE ticketid = %d AND uid = %d ORDER BY created DESC LIMIT 1", $jsst_data['ticketid'], $jsst_data['uid']);
         $jsst_query .= $jsst_inquery;
         $jsst_datetime = jssupportticket::$_db->get_var($jsst_query);
         if($jsst_datetime){
@@ -366,7 +382,7 @@ class JSSTreplyModel {
     function getLastReply($jsst_ticketid) {
         if (!is_numeric($jsst_ticketid))
             return false;
-        $jsst_query = "SELECT created FROM `" . jssupportticket::$_db->prefix . "js_ticket_replies` WHERE ticketid =  " . esc_sql($jsst_ticketid) . " ORDER BY created desc";
+        $jsst_query = jssupportticket::$_db->prepare("SELECT created FROM `" . jssupportticket::$_db->prefix . "js_ticket_replies` WHERE ticketid =  %d ORDER BY created desc", $jsst_ticketid);
         $jsst_lastreply = jssupportticket::$_db->get_var($jsst_query);
         if (jssupportticket::$_db->last_error != null) {
             JSSTincluder::getJSModel('systemerror')->addSystemError(); // if there is an error add it to system errorrs
@@ -387,9 +403,33 @@ class JSSTreplyModel {
             die( 'Security check Failed' );
         }
         if(!is_numeric($jsst_replyid)) return false;
+        // --- SECURITY & PERMISSION FIX ---
+        $is_admin = current_user_can('manage_options');
+        $has_access = false;
+
+        if ($is_admin) {
+            $has_access = true;
+        } else {
+            // Check if user is an agent
+            if (in_array('agent', jssupportticket::$_active_addons)) {
+                $agent_model = JSSTincluder::getJSModel('agent');
+                if ($agent_model && method_exists($agent_model, 'isUserStaff') && $agent_model->isUserStaff()) {
+                    // Check specific permission for agents
+                    if (JSSTincluder::getJSModel('userpermissions')->checkPermissionGrantedForTask('Edit Reply')) {
+                        $has_access = true;
+                    }
+                }
+            }
+        }
+
+        // If the user is neither an admin nor an authorized agent, block access immediately
+        if (!$has_access) {
+            return false; 
+        }
         $jsst_query = "SELECT reply.id AS replyid, reply.message AS message
                     FROM `" . jssupportticket::$_db->prefix . "js_ticket_replies` AS reply
-                    WHERE reply.id =  " . esc_sql($jsst_replyid) ;
+                    WHERE reply.id =  %d";
+        $jsst_query = jssupportticket::$_db->prepare($jsst_query, $jsst_replyid);
         $jsst_lastreply = jssupportticket::$_db->get_row($jsst_query);
         $jsst_lastreply->message = jssupportticketphplib::JSST_htmlentities(($jsst_lastreply->message));
 
@@ -398,10 +438,20 @@ class JSSTreplyModel {
 
     function getAttachmentByReplyId($jsst_id){
         if(!is_numeric($jsst_id)) return false;
-        $jsst_query = "SELECT attachment.filename , ticket.attachmentdir
+        $jsst_query = "SELECT attachment.filename , ticket.attachmentdir, ticket.id AS jsst_ticketid
                     FROM `" . jssupportticket::$_db->prefix . "js_ticket_attachments` AS attachment
-                    JOIN `" . jssupportticket::$_db->prefix . "js_ticket_tickets` AS ticket ON ticket.id = attachment.ticketid AND attachment.replyattachmentid = ".esc_sql($jsst_id) ;
+                    JOIN `" . jssupportticket::$_db->prefix . "js_ticket_tickets` AS ticket ON ticket.id = attachment.ticketid AND attachment.replyattachmentid = %d";
+        $jsst_query = jssupportticket::$_db->prepare($jsst_query, $jsst_id);
         $jsst_replyattachments = jssupportticket::$_db->get_results($jsst_query);
+        if (!empty($jsst_replyattachments) && !current_user_can('manage_options') && !(in_array('agent', jssupportticket::$_active_addons) && JSSTincluder::getJSModel('agent')->isUserStaff())) {
+            $jsst_ticketid = $jsst_replyattachments[0]->jsst_ticketid;
+            $jsst_owns_ticket = (!JSSTincluder::getObjectClass('user')->isguest())
+                ? JSSTincluder::getJSModel('ticket')->validateTicketDetailForUser($jsst_ticketid)
+                : JSSTincluder::getJSModel('ticket')->validateTicketDetailForVisitor($jsst_ticketid);
+            if (!$jsst_owns_ticket) {
+                return array();
+            }
+        }
         return $jsst_replyattachments;
     }
 
@@ -430,10 +480,18 @@ class JSSTreplyModel {
 
         // If the user is neither an admin nor an authorized agent, block access immediately
         if (!$has_access) {
+            die('456');
             return false; 
         }
         // --- END PERMISSION FIX ---
 
+        
+        if (!is_numeric($jsst_data['reply-replyid']) || !is_numeric($jsst_data['reply-tikcetid']))
+            return false;
+        $jsst_query = jssupportticket::$_db->prepare("SELECT ticketid FROM `" . jssupportticket::$_db->prefix . "js_ticket_replies` WHERE id = %d", $jsst_data['reply-replyid']);
+        $jsst_actual_ticketid = jssupportticket::$_db->get_var($jsst_query);
+        if ($jsst_actual_ticketid != $jsst_data['reply-tikcetid'])
+            return false;
         $jsst_desc = JSSTincluder::getJSModel('jssupportticket')->getSanitizedEditorData($jsst_data['jsticket_replytext']); // use jsticket_message to avoid conflict
 
         $jsst_row = JSSTincluder::getJSTable('replies');
@@ -472,7 +530,7 @@ class JSSTreplyModel {
     function getTicketLastReplyById($jsst_ticketid) {
         if (!is_numeric($jsst_ticketid))
             return false;
-        $jsst_query = "SELECT message FROM `" . jssupportticket::$_db->prefix . "js_ticket_replies` WHERE ticketid =  " . esc_sql($jsst_ticketid) . " ORDER BY created desc LIMIT 1";
+        $jsst_query = jssupportticket::$_db->prepare("SELECT message FROM `" . jssupportticket::$_db->prefix . "js_ticket_replies` WHERE ticketid =  %d ORDER BY created desc LIMIT 1", $jsst_ticketid);
         $jsst_lastreply = jssupportticket::$_db->get_var($jsst_query);
         if (jssupportticket::$_db->last_error != null) {
             JSSTincluder::getJSModel('systemerror')->addSystemError(); // if there is an error add it to system errorrs
@@ -483,11 +541,20 @@ class JSSTreplyModel {
         if (!is_numeric($jsst_replyid))
             return false;
 		$jsst_name = "";
-        $jsst_query = "SELECT user.* 
+        $jsst_query = "SELECT user.*, reply.ticketid AS jsst_reply_ticketid
 			FROM `" . jssupportticket::$_db->prefix . "js_ticket_replies` AS reply
 			JOIN `" . jssupportticket::$_db->prefix . "js_ticket_users` AS user ON reply.uid = user.id
-			WHERE reply.id =  " . esc_sql($jsst_replyid);
+			WHERE reply.id =  %d";
+        $jsst_query = jssupportticket::$_db->prepare($jsst_query, $jsst_replyid);
         $jsst_replyuser = jssupportticket::$_db->get_row($jsst_query);
+        if ($jsst_replyuser && !current_user_can('manage_options') && !(in_array('agent', jssupportticket::$_active_addons) && JSSTincluder::getJSModel('agent')->isUserStaff())) {
+            $jsst_owns_ticket = (!JSSTincluder::getObjectClass('user')->isguest())
+                ? JSSTincluder::getJSModel('ticket')->validateTicketDetailForUser($jsst_replyuser->jsst_reply_ticketid)
+                : JSSTincluder::getJSModel('ticket')->validateTicketDetailForVisitor($jsst_replyuser->jsst_reply_ticketid);
+            if (!$jsst_owns_ticket) {
+                return "";
+            }
+        }
         if (jssupportticket::$_db->last_error != null) {
             JSSTincluder::getJSModel('systemerror')->addSystemError(); // if there is an error add it to system errorrs
         }
@@ -522,10 +589,21 @@ class JSSTreplyModel {
 
         $jsst_table = ($jsst_type === 'ticket') ? 'js_ticket_tickets' : 'js_ticket_replies';
 
-        // Since we cast to (int) above, these variables are now 100% safe to concatenate
-        $jsst_query = "UPDATE `" . jssupportticket::$_db->prefix . "$jsst_table` 
-                       SET aireplymode = $jsst_status 
-                       WHERE id = $jsst_id";
+        $jsst_ticketid = $jsst_id;
+        if ($jsst_type === 'reply') {
+            $jsst_ticketid = jssupportticket::$_db->get_var(jssupportticket::$_db->prepare("SELECT ticketid FROM `" . jssupportticket::$_db->prefix . "js_ticket_replies` WHERE id = %d", $jsst_id));
+        }
+        if (!current_user_can('jsst_support_ticket') && !current_user_can('jsst_support_ticket_tickets')) {
+            $jsst_owns_ticket = (!JSSTincluder::getObjectClass('user')->isguest()) ? JSSTincluder::getJSModel('ticket')->validateTicketDetailForUser($jsst_ticketid) : JSSTincluder::getJSModel('ticket')->validateTicketDetailForVisitor($jsst_ticketid);
+            if (!$jsst_owns_ticket) {
+                return false;
+            }
+        }
+
+        $jsst_query = jssupportticket::$_db->prepare(
+            "UPDATE `" . jssupportticket::$_db->prefix . "$jsst_table`
+                       SET aireplymode = %d
+                       WHERE id = %d", $jsst_status, $jsst_id);
 
         $jsst_result = jssupportticket::$_db->query($jsst_query);
 
@@ -573,8 +651,9 @@ class JSSTreplyModel {
         $jsst_query = "
         SELECT r.*
             FROM `" . jssupportticket::$_db->prefix . "js_ticket_replies` AS r
-            WHERE r.ticketid = " . esc_sql($jsst_ticket_id) . "
+            WHERE r.ticketid = %d
             AND r.uid IN ($jsst_uids_str)";
+        $jsst_query = jssupportticket::$_db->prepare($jsst_query, $jsst_ticket_id);
 
         $jsst_query .= " ORDER BY r.created ASC LIMIT 50";
         $jsst_replies = jssupportticket::$_db->get_results($jsst_query);

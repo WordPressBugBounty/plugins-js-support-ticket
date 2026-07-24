@@ -27,7 +27,7 @@ class JSSTticketController {
                 case 'addticket':
 
                     $jsst_id = JSSTrequest::getVar('jssupportticketid','',null);
-                    $jsst_formid = JSSTrequest::getVar('formid');
+                    $jsst_formid = absint( JSSTrequest::getVar('formid') );
 					
                     if($jsst_formid == null){
                         $jsst_formid = JSSTincluder::getJSModel('ticket')->getDefaultMultiFormId();
@@ -64,7 +64,7 @@ class JSSTticketController {
 
                         if(in_array('paidsupport', jssupportticket::$_active_addons) && class_exists('WooCommerce') && !is_admin() && !JSSTincluder::getObjectClass('user')->isguest()){
                             $jsst_selected = false;
-                            $jsst_paidsupportid = JSSTrequest::getVar('paidsupportid',null,0);
+                            $jsst_paidsupportid = absint( JSSTrequest::getVar('paidsupportid',null,0) );
                             if($jsst_paidsupportid){
                                 //$jsst_paidsupport = JSSTincluder::getJSModel('paidsupport')->getPaidSupportList(JSSTincluder::getObjectClass('user')->uid(), $jsst_paidsupportid);
 								$jsst_paidsupport = JSSTincluder::getJSModel('paidsupport')->getPaidSupportList(JSSTincluder::getObjectClass('user')->wpuid(), $jsst_paidsupportid);
@@ -94,7 +94,7 @@ class JSSTticketController {
                     break;
                 case 'admin_ticketdetail':
                 case 'ticketdetail':
-                    $jsst_id = JSSTrequest::getVar('jssupportticketid');
+                    $jsst_id = absint( JSSTrequest::getVar('jssupportticketid') );
                     jssupportticket::$jsst_data['permission_granted'] = true;
                     jssupportticket::$jsst_data['user_staff'] = false;
                     if ( in_array('agent',jssupportticket::$_active_addons) && JSSTincluder::getJSModel('agent')->isUserStaff()) {
@@ -153,7 +153,7 @@ class JSSTticketController {
         if (! wp_verify_nonce( $jsst_nonce, 'close-ticket-'.$jsst_id) ) {
             die( 'Security check Failed' );
         }
-        JSSTincluder::getJSModel('ticket')->closeTicket($jsst_id);
+        JSSTincluder::getJSModel('ticket')->closeTicket( absint( $jsst_id ) );
         if (is_admin()) {
             $jsst_url = admin_url("admin.php?page=ticket&jstlay=tickets");
         } else {
@@ -165,7 +165,14 @@ class JSSTticketController {
 
     function lockticket() {
         $jsst_id = JSSTrequest::getVar('ticketid');
-        JSSTincluder::getJSModel('ticket')->lockTicket($jsst_id);
+        $jsst_nonce = JSSTrequest::getVar('_wpnonce');
+        if (! wp_verify_nonce( $jsst_nonce, 'lock-ticket-'.$jsst_id) ) {
+            die( 'Security check Failed' );
+        }
+        if (!current_user_can('manage_options')) {
+            return false;
+        }
+        JSSTincluder::getJSModel('ticket')->lockTicket( absint( $jsst_id ) );
         if (is_admin()) {
             $jsst_url = admin_url("admin.php?page=ticket&jstlay=ticketdetail&jssupportticketid=" . esc_attr($jsst_id));
         } else {
@@ -177,7 +184,14 @@ class JSSTticketController {
 
     function unlockticket() {
         $jsst_id = JSSTrequest::getVar('ticketid');
-        JSSTincluder::getJSModel('ticket')->unLockTicket($jsst_id);
+        $jsst_nonce = JSSTrequest::getVar('_wpnonce');
+        if (! wp_verify_nonce( $jsst_nonce, 'unlock-ticket-'.$jsst_id) ) {
+            die( 'Security check Failed' );
+        }
+        if (!current_user_can('manage_options')) {
+            return false;
+        }
+        JSSTincluder::getJSModel('ticket')->unLockTicket( absint( $jsst_id ) );
         if (is_admin()) {
             $jsst_url = admin_url("admin.php?page=ticket&jstlay=ticketdetail&jssupportticketid=" . esc_attr($jsst_id));
         } else {
@@ -299,7 +313,7 @@ class JSSTticketController {
         if (! wp_verify_nonce( $jsst_nonce, 'delete-ticket-'.$jsst_id) ) {
             die( 'Security check Failed' );
         }
-        JSSTincluder::getJSModel('ticket')->removeTicket($jsst_id);
+        JSSTincluder::getJSModel('ticket')->removeTicket( absint( $jsst_id ) );
         if (is_admin()) {
             $jsst_url = admin_url("admin.php?page=ticket&jstlay=tickets");
         } elseif ( in_array('agent',jssupportticket::$_active_addons) && JSSTincluder::getJSModel('agent')->isUserStaff()) {
@@ -390,7 +404,7 @@ class JSSTticketController {
         if (! wp_verify_nonce( $jsst_nonce, 'reopen-ticket-'.$jsst_ticketid) ) {
             die( 'Security check Failed' );
         }
-        $jsst_data['ticketid'] = $jsst_ticketid;
+        $jsst_data['ticketid'] = absint( $jsst_ticketid );
         JSSTincluder::getJSModel('ticket')->reopenTicket($jsst_data);
         $jsst_url = "&jstlay=ticketdetail&jssupportticketid=" . esc_attr($jsst_data['ticketid']);
         if (is_admin()) {
@@ -486,7 +500,7 @@ class JSSTticketController {
             if (! wp_verify_nonce( $jsst_nonce, 'show-ticket-status') ) {
                 //die( 'Security check Failed' );
             }
-            $jsst_emailaddress = JSSTrequest::getVar('email');
+            $jsst_emailaddress = sanitize_email( JSSTrequest::getVar('email') );
             $jsst_trackingid = JSSTrequest::getVar('ticketid');
             $jsst_tickettoken = JSSTrequest::getVar('tickettoken');
             if(!empty($jsst_emailaddress) AND !empty($jsst_trackingid)){
@@ -568,14 +582,14 @@ class JSSTticketController {
     }
 
     function downloadbyid(){
-        $jsst_id = JSSTrequest::getVar('id');
+        $jsst_id = absint( JSSTrequest::getVar('id') );
         JSSTincluder::getJSModel('attachment')->getDownloadAttachmentById($jsst_id);
     }
 
 
     function downloadbyname(){
         $jsst_name = JSSTrequest::getVar('name');
-        $jsst_id = JSSTrequest::getVar('id');
+        $jsst_id = absint( JSSTrequest::getVar('id') );
         $jsst_name = jssupportticketphplib::JSST_clean_file_path($jsst_name);
         JSSTincluder::getJSModel('attachment')->getDownloadAttachmentByName($jsst_name,$jsst_id);
     }

@@ -459,8 +459,8 @@ class JSSTthirdpartyimportModel {
 
                 $jsst_jshd_ticketid = $jsst_row->id;
                 $jsst_hash = JSSTincluder::getJSModel('ticket')->generateHash($jsst_jshd_ticketid);
-                $jsst_query = "UPDATE `" . jssupportticket::$_db->prefix . "js_ticket_tickets` SET `hash`='" . esc_sql($jsst_hash) . "' WHERE id=" . esc_sql($jsst_jshd_ticketid);
-                jssupportticket::$_db->query($jsst_query);
+                $jsst_query = "UPDATE `" . jssupportticket::$_db->prefix . "js_ticket_tickets` SET `hash`=%s WHERE id=%d";
+                jssupportticket::$_db->query(jssupportticket::$_db->prepare($jsst_query, $jsst_hash, $jsst_jshd_ticketid));
 
                 if(in_array('note', jssupportticket::$_active_addons)){
                     $this->getSupportCandyTicketNotes($jsst_jshd_ticketid, $jsst_ticket->id, $jsst_attachmentdir);
@@ -942,9 +942,10 @@ class JSSTthirdpartyimportModel {
             FROM `" . jssupportticket::$_db->prefix . "psmsc_customers` AS customer
             INNER JOIN `" . jssupportticket::$_db->prefix . "js_ticket_users` AS user
                 ON user.wpuid = customer.user
-            WHERE customer.id = " . esc_sql($jsst_customerId) . "
+            WHERE customer.id = %d
             LIMIT 1
         ";
+        $jsst_query = jssupportticket::$_db->prepare($jsst_query, $jsst_customerId);
 
         $jsst_data = jssupportticket::$_db->get_row($jsst_query);
 
@@ -968,9 +969,10 @@ class JSSTthirdpartyimportModel {
                 ON user.wpuid = sc_agent.user
             INNER JOIN `" . jssupportticket::$_db->prefix . "js_ticket_staff` AS agent
                 ON agent.uid = user.id
-            WHERE sc_agent.id = " . esc_sql($jsst_sc_agent_id) . "
+            WHERE sc_agent.id = %d
             LIMIT 1
         ";
+        $jsst_query = jssupportticket::$_db->prepare($jsst_query, $jsst_sc_agent_id);
 
         $jsst_jshd_agent = jssupportticket::$_db->get_row($jsst_query);
 
@@ -994,8 +996,8 @@ class JSSTthirdpartyimportModel {
 
         // Securely query agent by UID
         $jsst_query = "
-            SELECT id FROM `" . jssupportticket::$_db->prefix . "js_ticket_staff` WHERE uid = ".$jsst_uid;
-            $jsst_jshd_agent_id = jssupportticket::$_db->get_var($jsst_query);
+            SELECT id FROM `" . jssupportticket::$_db->prefix . "js_ticket_staff` WHERE uid = %d";
+            $jsst_jshd_agent_id = jssupportticket::$_db->get_var(jssupportticket::$_db->prepare($jsst_query, $jsst_uid));
 
         return $jsst_jshd_agent_id ? (int)$jsst_jshd_agent_id : null;
     }
@@ -1007,15 +1009,15 @@ class JSSTthirdpartyimportModel {
 
         // Get department (category) name from old table
         $jsst_query = "
-            SELECT name FROM `" . jssupportticket::$_db->prefix . "psmsc_categories` WHERE id = ".$jsst_categoryId;
-        $jsst_category_name = jssupportticket::$_db->get_var($jsst_query);
+            SELECT name FROM `" . jssupportticket::$_db->prefix . "psmsc_categories` WHERE id = %d";
+        $jsst_category_name = jssupportticket::$_db->get_var(jssupportticket::$_db->prepare($jsst_query, $jsst_categoryId));
 
         if (empty($jsst_category_name)) return null;
 
         // Match department by name (case-insensitive)
         $jsst_query = "
-            SELECT id FROM `" . jssupportticket::$_db->prefix . "js_ticket_departments` WHERE LOWER(departmentname) = '".jssupportticketphplib::JSST_strtolower(jssupportticketphplib::JSST_trim(esc_sql($jsst_category_name)))."'";
-        $jsst_jshd_department_id = jssupportticket::$_db->get_var($jsst_query);
+            SELECT id FROM `" . jssupportticket::$_db->prefix . "js_ticket_departments` WHERE LOWER(departmentname) = %s";
+        $jsst_jshd_department_id = jssupportticket::$_db->get_var(jssupportticket::$_db->prepare($jsst_query, jssupportticketphplib::JSST_strtolower(jssupportticketphplib::JSST_trim($jsst_category_name))));
 
         return $jsst_jshd_department_id ? (int)$jsst_jshd_department_id : null;
     }
@@ -1027,14 +1029,14 @@ class JSSTthirdpartyimportModel {
 
         // Get status name from source table
         $jsst_query = "
-            SELECT name FROM `" . jssupportticket::$_db->prefix . "psmsc_statuses` WHERE id = ".$jsst_statusId;
-        $jsst_status_name = jssupportticket::$_db->get_var($jsst_query);
+            SELECT name FROM `" . jssupportticket::$_db->prefix . "psmsc_statuses` WHERE id = %d";
+        $jsst_status_name = jssupportticket::$_db->get_var(jssupportticket::$_db->prepare($jsst_query, $jsst_statusId));
 
         if (empty($jsst_status_name)) return null;
 
         // Find matching status in destination table
-        $jsst_query = "SELECT id FROM `" . jssupportticket::$_db->prefix . "js_ticket_statuses` WHERE LOWER(status) = '".jssupportticketphplib::JSST_strtolower(jssupportticketphplib::JSST_trim(esc_sql($jsst_status_name)))."'";
-        $jsst_jshd_status_id = jssupportticket::$_db->get_var($jsst_query);
+        $jsst_query = "SELECT id FROM `" . jssupportticket::$_db->prefix . "js_ticket_statuses` WHERE LOWER(status) = %s";
+        $jsst_jshd_status_id = jssupportticket::$_db->get_var(jssupportticket::$_db->prepare($jsst_query, jssupportticketphplib::JSST_strtolower(jssupportticketphplib::JSST_trim($jsst_status_name))));
 
         return $jsst_jshd_status_id ? (int)$jsst_jshd_status_id : null;
     }
@@ -1047,17 +1049,17 @@ class JSSTthirdpartyimportModel {
         // Fetch priority from source table
         $jsst_query = "
             SELECT name
-            FROM `" . jssupportticket::$_db->prefix . "psmsc_priorities` 
-            WHERE id = ".$jsst_priorityId;
-        $jsst_priority_name = jssupportticket::$_db->get_var($jsst_query);
+            FROM `" . jssupportticket::$_db->prefix . "psmsc_priorities`
+            WHERE id = %d";
+        $jsst_priority_name = jssupportticket::$_db->get_var(jssupportticket::$_db->prepare($jsst_query, $jsst_priorityId));
 
         if (empty($jsst_priority_name)) return null;
 
         // Find corresponding priority in destination table
         $jsst_query = "
-            SELECT id FROM `" . jssupportticket::$_db->prefix . "js_ticket_priorities` 
-                WHERE LOWER(priority) = '".jssupportticketphplib::JSST_strtolower(jssupportticketphplib::JSST_trim(esc_sql($jsst_priority_name)))."'";
-            $jsst_jshd_priority_id = jssupportticket::$_db->get_var($jsst_query);
+            SELECT id FROM `" . jssupportticket::$_db->prefix . "js_ticket_priorities`
+                WHERE LOWER(priority) = %s";
+            $jsst_jshd_priority_id = jssupportticket::$_db->get_var(jssupportticket::$_db->prepare($jsst_query, jssupportticketphplib::JSST_strtolower(jssupportticketphplib::JSST_trim($jsst_priority_name))));
 
         return $jsst_jshd_priority_id ? (int)$jsst_jshd_priority_id : null;
     }
@@ -1072,9 +1074,9 @@ class JSSTthirdpartyimportModel {
         if (!empty($jsst_role_label)) {
             // Prepare and execute safe SQL query
             $jsst_query = "SELECT id
-                FROM `" . jssupportticket::$_db->prefix . "js_ticket_acl_roles` 
-                WHERE LOWER(name) = '" . jssupportticketphplib::JSST_strtolower(esc_sql($jsst_role_label)) . "'";
-            $jsst_jshd_roleid = jssupportticket::$_db->get_var($jsst_query);
+                FROM `" . jssupportticket::$_db->prefix . "js_ticket_acl_roles`
+                WHERE LOWER(name) = %s";
+            $jsst_jshd_roleid = jssupportticket::$_db->get_var(jssupportticket::$_db->prepare($jsst_query, jssupportticketphplib::JSST_strtolower($jsst_role_label)));
 
             return $jsst_jshd_roleid ? (int)$jsst_jshd_roleid : null;
         }
@@ -1236,8 +1238,8 @@ class JSSTthirdpartyimportModel {
                     $jsst_fieldtype = "text"; break;
             }
 
-            $jsst_query = "SELECT id,field FROM `" . jssupportticket::$_db->prefix . "js_ticket_fieldsordering` WHERE isuserfield = 1 AND LOWER(fieldtitle) ='".esc_sql(jssupportticketphplib::JSST_strtolower($jsst_custom_field->name))."' AND userfieldtype ='".esc_sql($jsst_fieldtype)."' AND fieldfor = 1";
-            $jsst_field_record = jssupportticket::$_db->get_row($jsst_query);
+            $jsst_query = "SELECT id,field FROM `" . jssupportticket::$_db->prefix . "js_ticket_fieldsordering` WHERE isuserfield = 1 AND LOWER(fieldtitle) =%s AND userfieldtype =%s AND fieldfor = 1";
+            $jsst_field_record = jssupportticket::$_db->get_row(jssupportticket::$_db->prepare($jsst_query, jssupportticketphplib::JSST_strtolower($jsst_custom_field->name), $jsst_fieldtype));
 
             if(!empty($jsst_field_record)){ // this will make sure
                 $this->jsst_support_candy_import_count['field']['skipped'] += 1;
@@ -1376,8 +1378,8 @@ class JSSTthirdpartyimportModel {
             if (!empty($jsst_ticket_field_options[$jsst_slug]['visibility'])) {
                 $jsst_visibility_conditions = json_decode($jsst_ticket_field_options[$jsst_slug]['visibility']);
                 $jsst_field = $this->getTicketCustomFieldId($jsst_custom_field->name);
-                $jsst_query = "SELECT * FROM `" . jssupportticket::$_db->prefix . "js_ticket_fieldsordering` WHERE field = '".esc_sql($jsst_field)."' LIMIT 1";
-                $jsst_jshd_field = jssupportticket::$_db->get_row($jsst_query);
+                $jsst_query = "SELECT * FROM `" . jssupportticket::$_db->prefix . "js_ticket_fieldsordering` WHERE field = %s LIMIT 1";
+                $jsst_jshd_field = jssupportticket::$_db->get_row(jssupportticket::$_db->prepare($jsst_query, $jsst_field));
                 if (empty($jsst_jshd_field)) {
                     continue;
                 }
@@ -1664,9 +1666,8 @@ class JSSTthirdpartyimportModel {
         $jsst_permissionIds = [];
         foreach ($jsst_permissionMap as $jsst_label => $_) {
             if (in_array('agent', jssupportticket::$_active_addons) ) {
-                $jsst_escapedLabel = esc_sql($jsst_label);
-                $jsst_sql = "SELECT id FROM `" . jssupportticket::$_db->prefix . "js_ticket_acl_permissions` WHERE permission = '{$jsst_escapedLabel}' LIMIT 1";
-                $jsst_permissionIds[$jsst_label] = (int) jssupportticket::$_db->get_var($jsst_sql);
+                $jsst_sql = "SELECT id FROM `" . jssupportticket::$_db->prefix . "js_ticket_acl_permissions` WHERE permission = %s LIMIT 1";
+                $jsst_permissionIds[$jsst_label] = (int) jssupportticket::$_db->get_var(jssupportticket::$_db->prepare($jsst_sql, $jsst_label));
             }
         }
 
@@ -1682,8 +1683,8 @@ class JSSTthirdpartyimportModel {
                 continue;
             }
             $jsst_query = "SELECT count(id)
-                    FROM `" . jssupportticket::$_db->prefix . "js_ticket_acl_roles` WHERE name ='".esc_sql($jsst_role['label'])."'";
-            $jsst_agent_role = jssupportticket::$_db->get_var($jsst_query);
+                    FROM `" . jssupportticket::$_db->prefix . "js_ticket_acl_roles` WHERE name =%s";
+            $jsst_agent_role = jssupportticket::$_db->get_var(jssupportticket::$_db->prepare($jsst_query, $jsst_role['label']));
 
             if($jsst_agent_role == 0){
                 $jsst_output = [];
@@ -1760,9 +1761,9 @@ class JSSTthirdpartyimportModel {
             $jsst_check_query = "
                 SELECT department.*
                 FROM `" . jssupportticket::$_db->prefix . "js_ticket_departments` AS department
-                WHERE LOWER(department.departmentname) = '".esc_sql($jsst_name)."'
+                WHERE LOWER(department.departmentname) = %s
             ";
-            $jsst_existing = jssupportticket::$_db->get_row($jsst_check_query);
+            $jsst_existing = jssupportticket::$_db->get_row(jssupportticket::$_db->prepare($jsst_check_query, $jsst_name));
 
             if (!$jsst_existing) {
                 $jsst_row = JSSTincluder::getJSTable('departments');
@@ -1833,10 +1834,10 @@ class JSSTthirdpartyimportModel {
             $jsst_check_query = "
                 SELECT priority.*
                 FROM `" . jssupportticket::$_db->prefix . "js_ticket_priorities` AS priority
-                WHERE LOWER(priority.priority) = '" . esc_sql($jsst_name) . "'
+                WHERE LOWER(priority.priority) = %s
                 LIMIT 1
             ";
-            $jsst_jshd_priority = jssupportticket::$_db->get_row($jsst_check_query);
+            $jsst_jshd_priority = jssupportticket::$_db->get_row(jssupportticket::$_db->prepare($jsst_check_query, $jsst_name));
 
             if (!$jsst_jshd_priority) {
                 $jsst_row = JSSTincluder::getJSTable('priorities');
@@ -1906,10 +1907,10 @@ class JSSTthirdpartyimportModel {
             $jsst_check_query = "
                 SELECT premade.*
                 FROM `" . jssupportticket::$_db->prefix . "js_ticket_department_message_premade` AS premade
-                WHERE LOWER(premade.title) = '" . esc_sql($jsst_title) . "'
+                WHERE LOWER(premade.title) = %s
                 LIMIT 1
             ";
-            $jsst_jshd_canned_reply = jssupportticket::$_db->get_row($jsst_check_query);
+            $jsst_jshd_canned_reply = jssupportticket::$_db->get_row(jssupportticket::$_db->prepare($jsst_check_query, $jsst_title));
 
             if (!$jsst_jshd_canned_reply) {
 
@@ -1920,18 +1921,18 @@ class JSSTthirdpartyimportModel {
                     $jsst_category_query = "
                         SELECT category.name
                         FROM `" . jssupportticket::$_db->prefix . "psmsc_categories` AS category
-                        WHERE category.id = " . esc_sql($jsst_canned_reply->categories) . "
+                        WHERE category.id = %d
                     ";
-                    $jsst_category = jssupportticket::$_db->get_row($jsst_category_query);
+                    $jsst_category = jssupportticket::$_db->get_row(jssupportticket::$_db->prepare($jsst_category_query, $jsst_canned_reply->categories));
 
                     if ($jsst_category) {
                         $jsst_department_query = "
                             SELECT department.id
                             FROM `" . jssupportticket::$_db->prefix . "js_ticket_departments` AS department
-                            WHERE LOWER(department.departmentname) = '" . jssupportticketphplib::JSST_strtolower(esc_sql($jsst_category->name)) . "'
+                            WHERE LOWER(department.departmentname) = %s
                             LIMIT 1
                         ";
-                        $jsst_department = jssupportticket::$_db->get_row($jsst_department_query);
+                        $jsst_department = jssupportticket::$_db->get_row(jssupportticket::$_db->prepare($jsst_department_query, jssupportticketphplib::JSST_strtolower($jsst_category->name)));
                         if ($jsst_department) {
                             $jsst_departmentid = $jsst_department->id;
                         }
@@ -2477,8 +2478,8 @@ class JSSTthirdpartyimportModel {
         if (empty($jsst_missingUsers)) return;
 
         foreach ($jsst_missingUsers as $jsst_missingUser) {
-            $jsst_query = "SELECT * FROM `" . jssupportticket::$_db->prefix . "users` WHERE id = " . esc_sql($jsst_missingUser);
-            $jsst_customer = jssupportticket::$_db->get_row($jsst_query);
+            $jsst_query = "SELECT * FROM `" . jssupportticket::$_db->prefix . "users` WHERE id = %d";
+            $jsst_customer = jssupportticket::$_db->get_row(jssupportticket::$_db->prepare($jsst_query, $jsst_missingUser));
 
             $jsst_customer_id = intval($jsst_customer->ID);
             $jsst_wpuid       = intval($jsst_customer->ID);
@@ -2564,8 +2565,8 @@ class JSSTthirdpartyimportModel {
             $jsst_check_query = "
                 SELECT department.*
                 FROM `" . jssupportticket::$_db->prefix . "js_ticket_departments` AS department
-                WHERE LOWER(department.departmentname) = '". esc_sql($jsst_name) ."'";
-            $jsst_existing = jssupportticket::$_db->get_row($jsst_check_query);
+                WHERE LOWER(department.departmentname) = %s";
+            $jsst_existing = jssupportticket::$_db->get_row(jssupportticket::$_db->prepare($jsst_check_query, $jsst_name));
 
             if (!$jsst_existing) { // not exists
                 $jsst_row = JSSTincluder::getJSTable('departments');
@@ -2646,10 +2647,10 @@ class JSSTthirdpartyimportModel {
             $jsst_check_query = "
                 SELECT priority.*
                 FROM `" . jssupportticket::$_db->prefix . "js_ticket_priorities` AS priority
-                WHERE LOWER(priority.priority) = '" . esc_sql($jsst_name) . "'
+                WHERE LOWER(priority.priority) = %s
                 LIMIT 1
             ";
-            $jsst_jshd_priority = jssupportticket::$_db->get_row($jsst_check_query);
+            $jsst_jshd_priority = jssupportticket::$_db->get_row(jssupportticket::$_db->prepare($jsst_check_query, $jsst_name));
 
             if (!$jsst_jshd_priority) {
                 $jsst_row = JSSTincluder::getJSTable('priorities');
@@ -2825,10 +2826,10 @@ class JSSTthirdpartyimportModel {
             $jsst_check_query = "
                 SELECT premade.*
                 FROM `" . jssupportticket::$_db->prefix . "js_ticket_department_message_premade` AS premade
-                WHERE LOWER(premade.title) = '" . esc_sql($jsst_title) . "'
+                WHERE LOWER(premade.title) = %s
                 LIMIT 1
             ";
-            $jsst_jshd_canned_reply = jssupportticket::$_db->get_row($jsst_check_query);
+            $jsst_jshd_canned_reply = jssupportticket::$_db->get_row(jssupportticket::$_db->prepare($jsst_check_query, $jsst_title));
 
             if (!$jsst_jshd_canned_reply) {
             
@@ -2903,10 +2904,10 @@ class JSSTthirdpartyimportModel {
             $jsst_check_query = "
                 SELECT product.*
                 FROM `" . jssupportticket::$_db->prefix . "js_ticket_products` AS product
-                WHERE LOWER(product.product) = '".esc_sql($jsst_name) ."'
+                WHERE LOWER(product.product) = %s
                 LIMIT 1
             ";
-            $jsst_jshd_product = jssupportticket::$_db->get_row($jsst_check_query);
+            $jsst_jshd_product = jssupportticket::$_db->get_row(jssupportticket::$_db->prepare($jsst_check_query, $jsst_name));
 
             if(!$jsst_jshd_product){
                 $jsst_row = JSSTincluder::getJSTable('products');
@@ -3140,8 +3141,8 @@ class JSSTthirdpartyimportModel {
 
                 //update hash value against ticket
                 $jsst_hash = JSSTincluder::getJSModel('ticket')->generateHash($jsst_jshd_ticketid);
-                $jsst_query = "UPDATE `" . jssupportticket::$_db->prefix . "js_ticket_tickets` SET `hash`='" . esc_sql($jsst_hash) . "' WHERE id=" . esc_sql($jsst_jshd_ticketid);
-                jssupportticket::$_db->query($jsst_query);
+                $jsst_query = "UPDATE `" . jssupportticket::$_db->prefix . "js_ticket_tickets` SET `hash`=%s WHERE id=%d";
+                jssupportticket::$_db->query(jssupportticket::$_db->prepare($jsst_query, $jsst_hash, $jsst_jshd_ticketid));
                 
                 $this->getAwesomeSupportTicketReplies($jsst_jshd_ticketid, $jsst_ticket->ID, $jsst_attachmentdir);
                 $this->getAwesomeSupportTicketAttachments($jsst_jshd_ticketid, "", $jsst_ticket->ID, "", $jsst_attachmentdir);
@@ -3448,7 +3449,7 @@ class JSSTthirdpartyimportModel {
         foreach($jsst_posts AS $jsst_post){
             $jsst_post_meta = get_post_meta($jsst_post->ID);
             if(isset($jsst_post_meta["_wp_attachment_metadata"][0])){
-                $jsst_attachment = unserialize($jsst_post_meta["_wp_attachment_metadata"][0]);
+                $jsst_attachment = unserialize($jsst_post_meta["_wp_attachment_metadata"][0], ['allowed_classes' => false]);
                 $jsst_file_name = basename($jsst_attachment["file"]);         
                 
             
@@ -3533,10 +3534,10 @@ class JSSTthirdpartyimportModel {
         $jsst_query = "
             SELECT customer.name, customer.user_email, customer.id AS jshd_uid
             FROM `" . jssupportticket::$_db->prefix . "js_ticket_users` AS customer
-            WHERE customer.wpuid = ". esc_sql($jsst_customerId) ."
+            WHERE customer.wpuid = %d
             LIMIT 1
         ";
-        $jsst_data = jssupportticket::$_db->get_row($jsst_query);
+        $jsst_data = jssupportticket::$_db->get_row(jssupportticket::$_db->prepare($jsst_query, $jsst_customerId));
 
         return [
             "jshd_uid"       => $jsst_data->jshd_uid ?? "",
@@ -3765,8 +3766,8 @@ class JSSTthirdpartyimportModel {
         
         $jsst_query = "
             SELECT id FROM `" . jssupportticket::$_db->prefix . "js_ticket_departments`
-                WHERE LOWER(departmentname) = '".jssupportticketphplib::JSST_strtolower(jssupportticketphplib::JSST_trim(esc_sql($jsst_name)))."'";
-        $jsst_jshd_department_id = jssupportticket::$_db->get_var($jsst_query);
+                WHERE LOWER(departmentname) = %s";
+        $jsst_jshd_department_id = jssupportticket::$_db->get_var(jssupportticket::$_db->prepare($jsst_query, jssupportticketphplib::JSST_strtolower(jssupportticketphplib::JSST_trim($jsst_name))));
         
         return $jsst_jshd_department_id ? (int)$jsst_jshd_department_id : null;
     }
@@ -3786,8 +3787,8 @@ class JSSTthirdpartyimportModel {
         $jsst_name = $jsst_priority_term[0]->name;
         $jsst_query = "
             SELECT id FROM `" . jssupportticket::$_db->prefix . "js_ticket_priorities`
-                WHERE LOWER(priority) = '".jssupportticketphplib::JSST_strtolower(jssupportticketphplib::JSST_trim(esc_sql($jsst_name)))."'";;
-        $jsst_jshd_priority_id = jssupportticket::$_db->get_var($jsst_query);
+                WHERE LOWER(priority) = %s";
+        $jsst_jshd_priority_id = jssupportticket::$_db->get_var(jssupportticket::$_db->prepare($jsst_query, jssupportticketphplib::JSST_strtolower(jssupportticketphplib::JSST_trim($jsst_name))));
         
         return $jsst_jshd_priority_id ? (int)$jsst_jshd_priority_id : null;
     }
@@ -3799,8 +3800,8 @@ class JSSTthirdpartyimportModel {
         if (empty($jsst_custom_status[$jsst_ticket_status])) return null;
 
         // Find matching status in destination table
-        $jsst_query = "SELECT id FROM `" . jssupportticket::$_db->prefix . "js_ticket_statuses` WHERE LOWER(status) = '".jssupportticketphplib::JSST_strtolower(jssupportticketphplib::JSST_trim(esc_sql($jsst_custom_status[$jsst_ticket_status])))."'";
-        $jsst_jshd_status_id = jssupportticket::$_db->get_var($jsst_query);
+        $jsst_query = "SELECT id FROM `" . jssupportticket::$_db->prefix . "js_ticket_statuses` WHERE LOWER(status) = %s";
+        $jsst_jshd_status_id = jssupportticket::$_db->get_var(jssupportticket::$_db->prepare($jsst_query, jssupportticketphplib::JSST_strtolower(jssupportticketphplib::JSST_trim($jsst_custom_status[$jsst_ticket_status]))));
 
         return $jsst_jshd_status_id ? (int)$jsst_jshd_status_id : null;
     }
@@ -3844,9 +3845,9 @@ class JSSTthirdpartyimportModel {
         $jsst_name = $jsst_product_term[0]->name;
         $jsst_query = "
             SELECT id FROM `" . jssupportticket::$_db->prefix . "js_ticket_products`
-                WHERE LOWER(product) = '".jssupportticketphplib::JSST_strtolower(jssupportticketphplib::JSST_trim(esc_sql($jsst_name)))."'";
-        $jsst_jshd_product_id = jssupportticket::$_db->get_var($jsst_query);
-        
+                WHERE LOWER(product) = %s";
+        $jsst_jshd_product_id = jssupportticket::$_db->get_var(jssupportticket::$_db->prepare($jsst_query, jssupportticketphplib::JSST_strtolower(jssupportticketphplib::JSST_trim($jsst_name))));
+
         return $jsst_jshd_product_id ? (int)$jsst_jshd_product_id : null;
     }
 
@@ -3951,8 +3952,8 @@ class JSSTthirdpartyimportModel {
     private function getFaqCategoryIdByAwesomeSupport($jsst_name){
         $jsst_query = "
             SELECT id FROM `" . jssupportticket::$_db->prefix . "js_ticket_categories`
-                WHERE LOWER(name) = '".jssupportticketphplib::JSST_strtolower(jssupportticketphplib::JSST_trim(esc_sql($jsst_name)))."'";
-        $jsst_jshd_category_id = jssupportticket::$_db->get_var($jsst_query);
+                WHERE LOWER(name) = %s";
+        $jsst_jshd_category_id = jssupportticket::$_db->get_var(jssupportticket::$_db->prepare($jsst_query, jssupportticketphplib::JSST_strtolower(jssupportticketphplib::JSST_trim($jsst_name))));
         if (empty($jsst_jshd_category_id)) {
 
             $jsst_data['id'] = '';
@@ -4219,8 +4220,8 @@ class JSSTthirdpartyimportModel {
 
                 $jsst_jshd_ticketid = $jsst_row->id;
                 $jsst_hash = JSSTincluder::getJSModel('ticket')->generateHash($jsst_jshd_ticketid);
-                $jsst_query = "UPDATE `" . jssupportticket::$_db->prefix . "js_ticket_tickets` SET `hash`='" . esc_sql($jsst_hash) . "' WHERE id=" . esc_sql($jsst_jshd_ticketid);
-                jssupportticket::$_db->query($jsst_query);
+                $jsst_query = "UPDATE `" . jssupportticket::$_db->prefix . "js_ticket_tickets` SET `hash`=%s WHERE id=%d";
+                jssupportticket::$_db->query(jssupportticket::$_db->prepare($jsst_query, $jsst_hash, $jsst_jshd_ticketid));
 
                 if(in_array('note', jssupportticket::$_active_addons)){
                     $this->getFluentSupportTicketNotes($jsst_jshd_ticketid, $jsst_ticket->id, $jsst_attachmentdir);
@@ -4252,7 +4253,7 @@ class JSSTthirdpartyimportModel {
 
         if (!$jsst_custom_fields_serializeed) return;
 
-        $jsst_custom_fields = unserialize($jsst_custom_fields_serializeed->value);
+        $jsst_custom_fields = unserialize($jsst_custom_fields_serializeed->value, ['allowed_classes' => false]);
         
 
         if (!$jsst_custom_fields) return;
@@ -4279,8 +4280,8 @@ class JSSTthirdpartyimportModel {
                     $jsst_fieldtype = "text"; break;
             }
 
-            $jsst_query = "SELECT id,field FROM `" . jssupportticket::$_db->prefix . "js_ticket_fieldsordering` WHERE isuserfield = 1 AND LOWER(fieldtitle) ='".esc_sql(jssupportticketphplib::JSST_strtolower($jsst_custom_field['label']))."' AND userfieldtype ='".esc_sql($jsst_fieldtype)."' AND fieldfor = 1";
-            $jsst_field_record = jssupportticket::$_db->get_row($jsst_query);
+            $jsst_query = "SELECT id,field FROM `" . jssupportticket::$_db->prefix . "js_ticket_fieldsordering` WHERE isuserfield = 1 AND LOWER(fieldtitle) =%s AND userfieldtype =%s AND fieldfor = 1";
+            $jsst_field_record = jssupportticket::$_db->get_row(jssupportticket::$_db->prepare($jsst_query, jssupportticketphplib::JSST_strtolower($jsst_custom_field['label']), $jsst_fieldtype));
 
             if(!empty($jsst_field_record)){ // this will make sure
                 $this->jsst_fluent_support_import_count['field']['skipped'] += 1;
@@ -4375,8 +4376,8 @@ class JSSTthirdpartyimportModel {
 
         foreach ($jsst_custom_fields as $jsst_custom_field) {
             $jsst_field = $this->getTicketCustomFieldId($jsst_custom_field['label']);
-            $jsst_query = "SELECT * FROM `" . jssupportticket::$_db->prefix . "js_ticket_fieldsordering` WHERE field = '".esc_sql($jsst_field)."' LIMIT 1";
-            $jsst_jshd_field = jssupportticket::$_db->get_row($jsst_query);
+            $jsst_query = "SELECT * FROM `" . jssupportticket::$_db->prefix . "js_ticket_fieldsordering` WHERE field = %s LIMIT 1";
+            $jsst_jshd_field = jssupportticket::$_db->get_row(jssupportticket::$_db->prepare($jsst_query, $jsst_field));
             if (empty($jsst_jshd_field)) {
                 continue;
             }
@@ -4498,8 +4499,8 @@ class JSSTthirdpartyimportModel {
         
         $jsst_query = "
             SELECT userfieldtype FROM `" . jssupportticket::$_db->prefix . "js_ticket_fieldsordering`
-                WHERE LOWER(field) = '".jssupportticketphplib::JSST_strtolower(jssupportticketphplib::JSST_trim(esc_sql($jsst_field)))."'";
-        $jsst_userfieldtype = jssupportticket::$_db->get_var($jsst_query);
+                WHERE LOWER(field) = %s";
+        $jsst_userfieldtype = jssupportticket::$_db->get_var(jssupportticket::$_db->prepare($jsst_query, jssupportticketphplib::JSST_strtolower(jssupportticketphplib::JSST_trim($jsst_field))));
         
         return $jsst_userfieldtype ? $jsst_userfieldtype : null;
     }
@@ -4508,8 +4509,8 @@ class JSSTthirdpartyimportModel {
         
         $jsst_query = "
             SELECT field FROM `" . jssupportticket::$_db->prefix . "js_ticket_fieldsordering`
-                WHERE LOWER(fieldtitle) = '".jssupportticketphplib::JSST_strtolower(jssupportticketphplib::JSST_trim(esc_sql($jsst_fieldtitle)))."'";
-        $jsst_jshd_field_id = jssupportticket::$_db->get_var($jsst_query);
+                WHERE LOWER(fieldtitle) = %s";
+        $jsst_jshd_field_id = jssupportticket::$_db->get_var(jssupportticket::$_db->prepare($jsst_query, jssupportticketphplib::JSST_strtolower(jssupportticketphplib::JSST_trim($jsst_fieldtitle))));
         
         return $jsst_jshd_field_id ? $jsst_jshd_field_id : null;
     }
@@ -4957,9 +4958,10 @@ class JSSTthirdpartyimportModel {
                 ON user.wpuid = fs_agent.user_id
             INNER JOIN `" . jssupportticket::$_db->prefix . "js_ticket_staff` AS agent
                 ON agent.uid = user.id
-            WHERE fs_agent.person_type = 'agent' AND fs_agent.id = " . esc_sql($jsst_fs_agent_id) . "
+            WHERE fs_agent.person_type = 'agent' AND fs_agent.id = %d
             LIMIT 1
         ";
+        $jsst_query = jssupportticket::$_db->prepare($jsst_query, $jsst_fs_agent_id);
 
         $jsst_jshd_agent = jssupportticket::$_db->get_row($jsst_query);
 
@@ -4983,10 +4985,11 @@ class JSSTthirdpartyimportModel {
             FROM `" . jssupportticket::$_db->prefix . "fs_persons` AS customer
             INNER JOIN `" . jssupportticket::$_db->prefix . "js_ticket_users` AS user
                 ON user.wpuid = customer.user_id
-            WHERE customer.id = " . esc_sql($jsst_customerId) . "
+            WHERE customer.id = %d
             AND customer.person_type = 'customer'
             LIMIT 1
         ";
+        $jsst_query = jssupportticket::$_db->prepare($jsst_query, $jsst_customerId);
 
         $jsst_data = jssupportticket::$_db->get_row($jsst_query);
 
@@ -5011,9 +5014,9 @@ class JSSTthirdpartyimportModel {
                 ON user.wpuid = person.user_id
             INNER JOIN `" . jssupportticket::$_db->prefix . "js_ticket_staff` AS agent
                 ON agent.uid = user.id
-                    WHERE person.id = " . esc_sql($jsst_customerId) . "
+                    WHERE person.id = %d
                     AND person.person_type = 'agent';";
-        $jsst_jshd_agent = jssupportticket::$_db->get_var($jsst_query);
+        $jsst_jshd_agent = jssupportticket::$_db->get_var(jssupportticket::$_db->prepare($jsst_query, $jsst_customerId));
 
         return $jsst_jshd_agent ?: null;
     }
@@ -5026,19 +5029,19 @@ class JSSTthirdpartyimportModel {
         // Fetch product from source table
         $jsst_query = "
             SELECT title
-            FROM `" . jssupportticket::$_db->prefix . "fs_products` 
-            WHERE id = ".$jsst_productId;
-        $jsst_product_name = jssupportticket::$_db->get_var($jsst_query);
+            FROM `" . jssupportticket::$_db->prefix . "fs_products`
+            WHERE id = %d";
+        $jsst_product_name = jssupportticket::$_db->get_var(jssupportticket::$_db->prepare($jsst_query, $jsst_productId));
 
         if (empty($jsst_product_name)) return null;
 
         // Find corresponding product in destination table
-        
+
         $jsst_name = $jsst_product_name;
         $jsst_query = "
             SELECT id FROM `" . jssupportticket::$_db->prefix . "js_ticket_products`
-                WHERE LOWER(product) = '".jssupportticketphplib::JSST_strtolower(jssupportticketphplib::JSST_trim(esc_sql($jsst_name)))."'";;
-        $jsst_jshd_product_id = jssupportticket::$_db->get_var($jsst_query);
+                WHERE LOWER(product) = %s";
+        $jsst_jshd_product_id = jssupportticket::$_db->get_var(jssupportticket::$_db->prepare($jsst_query, jssupportticketphplib::JSST_strtolower(jssupportticketphplib::JSST_trim($jsst_name))));
         
         return $jsst_jshd_product_id ? (int)$jsst_jshd_product_id : null;
     }
@@ -5047,9 +5050,9 @@ class JSSTthirdpartyimportModel {
         
         // Find corresponding priority in destination table
         $jsst_query = "
-            SELECT id FROM `" . jssupportticket::$_db->prefix . "js_ticket_priorities` 
-                WHERE LOWER(priority) = '".jssupportticketphplib::JSST_strtolower(jssupportticketphplib::JSST_trim(esc_sql($jsst_prioritName)))."'";
-        $jsst_jshd_priority_id = jssupportticket::$_db->get_var($jsst_query);
+            SELECT id FROM `" . jssupportticket::$_db->prefix . "js_ticket_priorities`
+                WHERE LOWER(priority) = %s";
+        $jsst_jshd_priority_id = jssupportticket::$_db->get_var(jssupportticket::$_db->prepare($jsst_query, jssupportticketphplib::JSST_strtolower(jssupportticketphplib::JSST_trim($jsst_prioritName))));
 
         return $jsst_jshd_priority_id ? (int)$jsst_jshd_priority_id : null;
     }
@@ -5074,8 +5077,8 @@ class JSSTthirdpartyimportModel {
             }else{
                 $jsst_query = "SELECT user.ID
                     FROM `" . jssupportticket::$_db->prefix . "users` AS user
-                    WHERE user.user_email = '".esc_sql($jsst_customer->email)."'";
-                $jsst_user = jssupportticket::$_db->get_row($jsst_query);
+                    WHERE user.user_email = %s";
+                $jsst_user = jssupportticket::$_db->get_row(jssupportticket::$_db->prepare($jsst_query, $jsst_customer->email));
                 if($jsst_user) $jsst_wpuid = intval($jsst_user->ID);
             }
             if (empty($jsst_wpuid)) {
@@ -5317,8 +5320,8 @@ class JSSTthirdpartyimportModel {
         JSSTincluder::getJSModel('role')->storeRole($jsst_data);
 
         // Retrieve role ID
-        $jsst_query = 'SELECT id FROM `' . jssupportticket::$_db->prefix . 'js_ticket_acl_roles` WHERE name = "' . esc_sql($jsst_name) . '"';
-        $jsst_id = jssupportticket::$_db->get_var($jsst_query);
+        $jsst_query = 'SELECT id FROM `' . jssupportticket::$_db->prefix . 'js_ticket_acl_roles` WHERE name = %s';
+        $jsst_id = jssupportticket::$_db->get_var(jssupportticket::$_db->prepare($jsst_query, $jsst_name));
         return $jsst_id;
     }
 
@@ -5355,10 +5358,10 @@ class JSSTthirdpartyimportModel {
             $jsst_check_query = "
                 SELECT product.*
                 FROM `" . jssupportticket::$_db->prefix . "js_ticket_products` AS product
-                WHERE LOWER(product.product) = '".esc_sql($jsst_name) ."'
+                WHERE LOWER(product.product) = %s
                 LIMIT 1
             ";
-            $jsst_jshd_product = jssupportticket::$_db->get_row($jsst_check_query);
+            $jsst_jshd_product = jssupportticket::$_db->get_row(jssupportticket::$_db->prepare($jsst_check_query, $jsst_name));
 
             if(!$jsst_jshd_product){
                 $jsst_row = JSSTincluder::getJSTable('products');
@@ -5421,10 +5424,10 @@ class JSSTthirdpartyimportModel {
             $jsst_check_query = "
                 SELECT priority.*
                 FROM `" . jssupportticket::$_db->prefix . "js_ticket_priorities` AS priority
-                WHERE LOWER(priority.priority) = '" . esc_sql($jsst_name) . "'
+                WHERE LOWER(priority.priority) = %s
                 LIMIT 1
             ";
-            $jsst_jshd_priority = jssupportticket::$_db->get_row($jsst_check_query);
+            $jsst_jshd_priority = jssupportticket::$_db->get_row(jssupportticket::$_db->prepare($jsst_check_query, $jsst_name));
 
             if (!$jsst_jshd_priority) {
                 $jsst_row = JSSTincluder::getJSTable('priorities');
@@ -5499,10 +5502,10 @@ class JSSTthirdpartyimportModel {
             $jsst_check_query = "
                 SELECT premade.*
                 FROM `" . jssupportticket::$_db->prefix . "js_ticket_department_message_premade` AS premade
-                WHERE LOWER(premade.title) = '" . esc_sql($jsst_title) . "'
+                WHERE LOWER(premade.title) = %s
                 LIMIT 1
             ";
-            $jsst_jshd_canned_reply = jssupportticket::$_db->get_row($jsst_check_query);
+            $jsst_jshd_canned_reply = jssupportticket::$_db->get_row(jssupportticket::$_db->prepare($jsst_check_query, $jsst_title));
 
             if (!$jsst_jshd_canned_reply) {
                 $jsst_departmentid = '';
@@ -5642,7 +5645,7 @@ class JSSTthirdpartyimportModel {
             WHERE object_type = 'option' AND `key` = '_ticket_custom_fields';";
             $jsst_custom_fields_serializeed = jssupportticket::$_db->get_row($jsst_query);
             if (!empty($jsst_custom_fields_serializeed)) {
-                $jsst_custom_fields = unserialize($jsst_custom_fields_serializeed->value);
+                $jsst_custom_fields = unserialize($jsst_custom_fields_serializeed->value, ['allowed_classes' => false]);
                 $jsst_count = count($jsst_custom_fields);
                 if ($jsst_count > 0) $jsst_entity_counts['field'] = $jsst_count;
             }

@@ -8,10 +8,18 @@ class JSSTattachmentModel {
     function getAttachmentForForm($jsst_id) {
         if (!is_numeric($jsst_id))
             return false;
+        if (!current_user_can('manage_options') && !(in_array('agent', jssupportticket::$_active_addons) && JSSTincluder::getJSModel('agent')->isUserStaff())) {
+            $jsst_owns_ticket = (!JSSTincluder::getObjectClass('user')->isguest())
+                ? JSSTincluder::getJSModel('ticket')->validateTicketDetailForUser($jsst_id)
+                : JSSTincluder::getJSModel('ticket')->validateTicketDetailForVisitor($jsst_id);
+            if (!$jsst_owns_ticket) {
+                return false;
+            }
+        }
         $jsst_query = "SELECT filename,filesize,id
                     FROM `" . jssupportticket::$_db->prefix . "js_ticket_attachments`
-                    WHERE ticketid = " . intval($jsst_id) . " and replyattachmentid = 0";
-        jssupportticket::$jsst_data[5] = jssupportticket::$_db->get_results($jsst_query);
+                    WHERE ticketid = %d and replyattachmentid = 0";
+        jssupportticket::$jsst_data[5] = jssupportticket::$_db->get_results(jssupportticket::$_db->prepare($jsst_query, $jsst_id));
         if (jssupportticket::$_db->last_error != null) {
             JSSTincluder::getJSModel('systemerror')->addSystemError();
         }
@@ -23,10 +31,18 @@ class JSSTattachmentModel {
             return false;
         if (!is_numeric($jsst_replyattachmentid))
             return false;
+        if (!current_user_can('manage_options') && !(in_array('agent', jssupportticket::$_active_addons) && JSSTincluder::getJSModel('agent')->isUserStaff())) {
+            $jsst_owns_ticket = (!JSSTincluder::getObjectClass('user')->isguest())
+                ? JSSTincluder::getJSModel('ticket')->validateTicketDetailForUser($jsst_id)
+                : JSSTincluder::getJSModel('ticket')->validateTicketDetailForVisitor($jsst_id);
+            if (!$jsst_owns_ticket) {
+                return false;
+            }
+        }
         $jsst_query = "SELECT filename,filesize,deleted,id
                     FROM `" . jssupportticket::$_db->prefix . "js_ticket_attachments`
-                    WHERE ticketid = " . intval($jsst_id) . " AND replyattachmentid = " . intval($jsst_replyattachmentid);
-        $jsst_result = jssupportticket::$_db->get_results($jsst_query);
+                    WHERE ticketid = %d AND replyattachmentid = %d";
+        $jsst_result = jssupportticket::$_db->get_results(jssupportticket::$_db->prepare($jsst_query, $jsst_id, $jsst_replyattachmentid));
         if (jssupportticket::$_db->last_error != null) {
             JSSTincluder::getJSModel('systemerror')->addSystemError();
         }
@@ -74,11 +90,27 @@ class JSSTattachmentModel {
         if ( empty( $jsst_id ) ) {
             return false;
         }
-        $jsst_query = $jsst_query = "SELECT ticket.attachmentdir AS foldername,ticket.id AS ticketid,attach.filename  "
+        $jsst_query = "SELECT ticket.attachmentdir AS foldername,ticket.id AS ticketid,attach.filename  "
                 . " FROM `".jssupportticket::$_db->prefix."js_ticket_attachments` AS attach "
                 . " JOIN `".jssupportticket::$_db->prefix."js_ticket_tickets` AS ticket ON ticket.id = attach.ticketid "
-                . " WHERE attach.id = ". intval($jsst_id);
-        $jsst_obj = jssupportticket::$_db->get_row($jsst_query);
+                . " WHERE attach.id = %d";
+        $jsst_obj = jssupportticket::$_db->get_row(jssupportticket::$_db->prepare($jsst_query, $jsst_id));
+        if (empty($jsst_obj)) {
+            return false;
+        }
+        if(!current_user_can('manage_options') && !(in_array('agent',jssupportticket::$_active_addons) && JSSTincluder::getJSModel('agent')->isUserStaff())){
+            if (!JSSTincluder::getObjectClass('user')->isguest()) {
+                $jsst_current_uid = JSSTincluder::getObjectClass('user')->uid();
+                $jsst_ticket_uid = JSSTincluder::getJSModel('ticket')->getUIdById($jsst_obj->ticketid);
+                if ($jsst_current_uid != $jsst_ticket_uid) {
+                    return false;
+                }
+            } else {
+                if (!JSSTincluder::getJSModel('ticket')->validateTicketDetailForVisitor($jsst_obj->ticketid)) {
+                    return false;
+                }
+            }
+        }
         $jsst_filename = $jsst_obj->filename;
         $jsst_foldername = $jsst_obj->foldername;
 
@@ -107,8 +139,19 @@ class JSSTattachmentModel {
         $jsst_query = "SELECT ticket.attachmentdir AS foldername,ticket.id AS ticketid,attach.filename  "
                 . " FROM `".jssupportticket::$_db->prefix."js_ticket_attachments` AS attach "
                 . " JOIN `".jssupportticket::$_db->prefix."js_ticket_tickets` AS ticket ON ticket.id = attach.ticketid "
-                . " WHERE attach.id = ". intval($jsst_id);
-        $jsst_object = jssupportticket::$_db->get_row($jsst_query);
+                . " WHERE attach.id = %d";
+        $jsst_object = jssupportticket::$_db->get_row(jssupportticket::$_db->prepare($jsst_query, $jsst_id));
+        if (!$jsst_object) {
+            return false;
+        }
+        if (!current_user_can('manage_options') && !(in_array('agent', jssupportticket::$_active_addons) && JSSTincluder::getJSModel('agent')->isUserStaff())) {
+            $jsst_owns_ticket = (!JSSTincluder::getObjectClass('user')->isguest())
+                ? JSSTincluder::getJSModel('ticket')->validateTicketDetailForUser($jsst_object->ticketid)
+                : JSSTincluder::getJSModel('ticket')->validateTicketDetailForVisitor($jsst_object->ticketid);
+            if (!$jsst_owns_ticket) {
+                return false;
+            }
+        }
         $jsst_datadirectory = jssupportticket::$_config['data_directory'];
         $jsst_foldername = $jsst_object->foldername;
         $jsst_filename = $jsst_object->filename;
@@ -128,8 +171,8 @@ class JSSTattachmentModel {
         $jsst_query = "SELECT ticket.attachmentdir AS foldername,ticket.id AS ticketid,attach.filename  "
                 . " FROM `".jssupportticket::$_db->prefix."js_ticket_attachments` AS attach "
                 . " JOIN `".jssupportticket::$_db->prefix."js_ticket_tickets` AS ticket ON ticket.id = attach.ticketid "
-                . " WHERE attach.id = ". intval($jsst_id);
-        $jsst_object = jssupportticket::$_db->get_row($jsst_query);
+                . " WHERE attach.id = %d";
+        $jsst_object = jssupportticket::$_db->get_row(jssupportticket::$_db->prepare($jsst_query, $jsst_id));
         $jsst_foldername = $jsst_object->foldername;
         $jsst_ticketid = $jsst_object->ticketid;
         $jsst_filename = $jsst_object->filename;
@@ -285,7 +328,7 @@ class JSSTattachmentModel {
     }
 
     function getAllDownloads() {
-        $jsst_downloadid = JSSTrequest::getVar('downloadid');
+        $jsst_downloadid = absint( JSSTrequest::getVar('downloadid') );
         //if not admin and agent
         // check for ticket owner only in case of user
         if(!current_user_can('manage_options') && !(in_array('agent',jssupportticket::$_active_addons) && JSSTincluder::getJSModel('agent')->isUserStaff())){
@@ -388,7 +431,24 @@ class JSSTattachmentModel {
     }
 
     function getAllReplyDownloads() {
-        $jsst_downloadid = JSSTrequest::getVar('downloadid');
+        $jsst_downloadid = absint( JSSTrequest::getVar('downloadid') );
+        if (!is_numeric($jsst_downloadid)) {
+            return;
+        }
+        if(!current_user_can('manage_options') && !(in_array('agent',jssupportticket::$_active_addons) && JSSTincluder::getJSModel('agent')->isUserStaff())){
+            $jsst_reply_ticketid = jssupportticket::$_db->get_var(jssupportticket::$_db->prepare("SELECT ticketid FROM `" . jssupportticket::$_db->prefix . "js_ticket_replies` WHERE id = %d", $jsst_downloadid));
+            if (!JSSTincluder::getObjectClass('user')->isguest()) {
+                $jsst_current_uid = JSSTincluder::getObjectClass('user')->uid();
+                $jsst_ticket_uid = JSSTincluder::getJSModel('ticket')->getUIdById($jsst_reply_ticketid);
+                if ($jsst_current_uid != $jsst_ticket_uid) {
+                    return;
+                }
+            } else {
+                if (!JSSTincluder::getJSModel('ticket')->validateTicketDetailForVisitor($jsst_reply_ticketid)) {
+                    return;
+                }
+            }
+        }
         $jsst_replyattachment = JSSTincluder::getJSModel('reply')->getAttachmentByReplyId($jsst_downloadid);
         
         if(!class_exists('PclZip')){

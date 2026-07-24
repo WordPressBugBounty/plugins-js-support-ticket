@@ -615,7 +615,7 @@ JSSTmessage::getMessage();
                                     </div>
                                     <span class="js-ticket-wrapper-textcolor" style="background:#ed8e00;">
                                         <?php echo esc_html(__('High', 'js-support-ticket')); ?></span>
-                                    <img decoding="async" class="ticketstatusimage one" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/lock.png" title="The ticket is locked">
+                                    <img decoding="async" class="ticketstatusimage one" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/lock.png" title="<?php echo esc_attr__('The ticket is locked', 'js-support-ticket'); ?>">
                                     <span class="js-ticket-status" style="background-color: #69d2e7;color:#FFFFFF;">
                                         <?php echo esc_html(__('In Progress', 'js-support-ticket')); ?></span>
                                 </div>
@@ -669,7 +669,7 @@ JSSTmessage::getMessage();
                                     </div>
                                     <span class="js-ticket-wrapper-textcolor" style="background:#86f793;">
                                         <?php echo esc_html(__('Low', 'js-support-ticket')); ?></span>
-                                    <img decoding="async" class="ticketstatusimage one" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/over-due.png" title="This ticket is marked as overdue">
+                                    <img decoding="async" class="ticketstatusimage one" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/over-due.png" title="<?php echo esc_attr__('This ticket is marked as overdue', 'js-support-ticket'); ?>">
                                     <span class="js-ticket-status" style="background-color: #28abe3;color:#FFFFFF;">
                                         <?php echo esc_html(__('Waiting Reply', 'js-support-ticket')); ?></span>
                                 </div>

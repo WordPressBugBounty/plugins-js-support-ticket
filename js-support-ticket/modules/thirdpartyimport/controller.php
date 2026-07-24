@@ -15,7 +15,7 @@ class JSSTthirdpartyimportController {
         if (self::canaddfile($jsst_layout)) {
             switch ($jsst_layout) {
                 case 'admin_importdata':
-                    $jsst_selected_plugin = JSSTrequest::getVar('selected_plugin', '', 0);
+                    $jsst_selected_plugin = absint( JSSTrequest::getVar('selected_plugin', '', 0) );
                     jssupportticket::$jsst_data['count_for'] = $jsst_selected_plugin;
                     if($jsst_selected_plugin == 1){
                         // prepare data for supportcandy plugin
@@ -57,11 +57,10 @@ class JSSTthirdpartyimportController {
     }
 
     function importPluginData() {
-        // $jsst_id = JSSTrequest::getVar('id');
-        // $jsst_nonce = JSSTrequest::getVar('_wpnonce');
-        // if (! wp_verify_nonce( $jsst_nonce, 'save-status-'.$jsst_id) ) {
-        //     die( 'Security check Failed' );
-        // }
+        $jsst_nonce = JSSTrequest::getVar('_wpnonce');
+        if (! wp_verify_nonce( $jsst_nonce, 'importPluginData') ) {
+            die( 'Security check Failed' );
+        }
         if (!current_user_can('manage_options')) { //only admin can change it.
             return false;
         }
@@ -85,7 +84,10 @@ class JSSTthirdpartyimportController {
         if (! wp_verify_nonce( $jsst_nonce, 'delete-status-'.$jsst_id) ) {
             die( 'Security check Failed' );
         }
-        JSSTincluder::getJSModel('thirdpartyimport')->getSupportCandyDataStats($jsst_id);
+        if (!current_user_can('manage_options')) {
+            return false;
+        }
+        JSSTincluder::getJSModel('thirdpartyimport')->getSupportCandyDataStats( absint( $jsst_id ) );
         $jsst_url = admin_url("admin.php?page=thirdpartyimport&jstlay=importresult");
         wp_safe_redirect($jsst_url);
         exit;
@@ -97,7 +99,10 @@ class JSSTthirdpartyimportController {
         if (! wp_verify_nonce( $jsst_nonce, 'delete-status-'.$jsst_id) ) {
             die( 'Security check Failed' );
         }
-        JSSTincluder::getJSModel('thirdpartyimport')->getFluentSupportStats($jsst_id);
+        if (!current_user_can('manage_options')) {
+            return false;
+        }
+        JSSTincluder::getJSModel('thirdpartyimport')->getFluentSupportStats( absint( $jsst_id ) );
         $jsst_url = admin_url("admin.php?page=thirdpartyimport&jstlay=importresult");
         wp_safe_redirect($jsst_url);
         exit;

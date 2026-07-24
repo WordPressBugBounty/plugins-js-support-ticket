@@ -12,7 +12,7 @@ class JSSTpriorityModel {
         $jsst_inquery = '';
 
         if ($jsst_prioritytitle != null){
-            $jsst_inquery .= " WHERE priority.priority LIKE '%".esc_sql($jsst_prioritytitle)."%'";
+            $jsst_inquery .= jssupportticket::$_db->prepare(" WHERE priority.priority LIKE %s", '%'.$jsst_prioritytitle.'%');
         }
 
         jssupportticket::$jsst_data['filter']['title'] = $jsst_prioritytitle;
@@ -75,7 +75,8 @@ class JSSTpriorityModel {
                 return false;
             $jsst_query = "SELECT priority.*
 						FROM `" . jssupportticket::$_db->prefix . "js_ticket_priorities` AS priority
-						WHERE priority.id = " . esc_sql($jsst_id);
+						WHERE priority.id = %d";
+            $jsst_query = jssupportticket::$_db->prepare($jsst_query, $jsst_id);
             $jsst_result = jssupportticket::$_db->get_row($jsst_query);
             if (jssupportticket::$_db->last_error != null) {
                 JSSTincluder::getJSModel('systemerror')->addSystemError(); // if there is an error add it to system errorrs
@@ -126,14 +127,14 @@ class JSSTpriorityModel {
         if ($jsst_id) {
             if (!is_numeric($jsst_id))
                 return false;
-            $jsst_query = "SELECT priority FROM `" . jssupportticket::$_db->prefix . "js_ticket_priorities` WHERE id = " . esc_sql($jsst_id);
+            $jsst_query = jssupportticket::$_db->prepare("SELECT priority FROM `" . jssupportticket::$_db->prefix . "js_ticket_priorities` WHERE id = %d", $jsst_id);
             $jsst_result = jssupportticket::$_db->get_var($jsst_query);
             if ($jsst_result == $jsst_priority) {
                 return true;
             }
         }
 
-        $jsst_query = 'SELECT COUNT(id) FROM `' . jssupportticket::$_db->prefix . 'js_ticket_priorities` WHERE priority = "' . esc_sql($jsst_priority) . '"';
+        $jsst_query = jssupportticket::$_db->prepare('SELECT COUNT(id) FROM `' . jssupportticket::$_db->prefix . 'js_ticket_priorities` WHERE priority = %s', $jsst_priority);
         $jsst_result = jssupportticket::$_db->get_var($jsst_query);
         if (jssupportticket::$_db->last_error != null) {
             JSSTincluder::getJSModel('systemerror')->addSystemError();
@@ -158,13 +159,15 @@ class JSSTpriorityModel {
             return false;
         $jsst_query = "UPDATE `" . jssupportticket::$_db->prefix . "js_ticket_priorities` SET isdefault = 2";
         jssupportticket::$_db->query($jsst_query);
-        $jsst_query = "UPDATE `" . jssupportticket::$_db->prefix . "js_ticket_priorities` SET isdefault = 1 WHERE id = " . esc_sql($jsst_id);
+        $jsst_query = jssupportticket::$_db->prepare("UPDATE `" . jssupportticket::$_db->prefix . "js_ticket_priorities` SET isdefault = 1 WHERE id = %d", $jsst_id);
         jssupportticket::$_db->query($jsst_query);
         return;
     }
 
     function removePriority($jsst_id) {
         if (!is_numeric($jsst_id))
+            return false;
+        if (!current_user_can('manage_options'))
             return false;
         $jsst_canremove = $this->canRemovePriority($jsst_id);
         if ($jsst_canremove == 1) {
@@ -186,11 +189,13 @@ class JSSTpriorityModel {
     function makeDefault($jsst_id) {
         if (!is_numeric($jsst_id))
             return false;
+        if (!current_user_can('manage_options'))
+            return false;
         //Reset all priorities to non-default
         $jsst_query = "UPDATE `" . jssupportticket::$_db->prefix . 'js_ticket_priorities` SET isdefault = 0';
         jssupportticket::$_db->query($jsst_query);
         //Make the selected priority as default
-        $jsst_query = "UPDATE `" . jssupportticket::$_db->prefix . 'js_ticket_priorities` SET isdefault = 1 WHERE id = ' . esc_sql($jsst_id);
+        $jsst_query = jssupportticket::$_db->prepare("UPDATE `" . jssupportticket::$_db->prefix . 'js_ticket_priorities` SET isdefault = 1 WHERE id = %d', $jsst_id);
         jssupportticket::$_db->query($jsst_query);
         if (jssupportticket::$_db->last_error == null) {
             JSSTmessage::setMessage(esc_html(__('Priority has been make default', 'js-support-ticket')), 'updated');
@@ -204,6 +209,8 @@ class JSSTpriorityModel {
     function setOrdering($jsst_id) {
         if (!is_numeric($jsst_id))
             return false;
+        if (!current_user_can('manage_options'))
+            return false;
         $jsst_order = JSSTrequest::getVar('order', 'get');
         if ($jsst_order == 'down') {
             $jsst_order = ">";
@@ -212,11 +219,11 @@ class JSSTpriorityModel {
             $jsst_order = "<";
             $jsst_direction = "DESC";
         }
-        $jsst_query = "SELECT t.ordering,t.id,t2.ordering AS ordering2 FROM `" . jssupportticket::$_db->prefix . "js_ticket_priorities` AS t,`" . jssupportticket::$_db->prefix . "js_ticket_priorities` AS t2 WHERE t.ordering $jsst_order t2.ordering AND t2.id = ".esc_sql($jsst_id)." ORDER BY t.ordering $jsst_direction LIMIT 1";
+        $jsst_query = jssupportticket::$_db->prepare("SELECT t.ordering,t.id,t2.ordering AS ordering2 FROM `" . jssupportticket::$_db->prefix . "js_ticket_priorities` AS t,`" . jssupportticket::$_db->prefix . "js_ticket_priorities` AS t2 WHERE t.ordering $jsst_order t2.ordering AND t2.id = %d ORDER BY t.ordering $jsst_direction LIMIT 1", $jsst_id);
         $jsst_result = jssupportticket::$_db->get_row($jsst_query);
-        $jsst_query = "UPDATE `" . jssupportticket::$_db->prefix . "js_ticket_priorities` SET ordering = " . esc_sql($jsst_result->ordering) . " WHERE id = " . esc_sql($jsst_id);
+        $jsst_query = jssupportticket::$_db->prepare("UPDATE `" . jssupportticket::$_db->prefix . "js_ticket_priorities` SET ordering = %d WHERE id = %d", $jsst_result->ordering, $jsst_id);
         jssupportticket::$_db->query($jsst_query);
-        $jsst_query = "UPDATE `" . jssupportticket::$_db->prefix . "js_ticket_priorities` SET ordering = " . esc_sql($jsst_result->ordering2) . " WHERE id = " . esc_sql($jsst_result->id);
+        $jsst_query = jssupportticket::$_db->prepare("UPDATE `" . jssupportticket::$_db->prefix . "js_ticket_priorities` SET ordering = %d WHERE id = %d", $jsst_result->ordering2, $jsst_result->id);
         jssupportticket::$_db->query($jsst_query);
 
         $jsst_row = JSSTincluder::getJSTable('priorities');
@@ -232,15 +239,15 @@ class JSSTpriorityModel {
     private function canRemovePriority($jsst_id) {
         if (!is_numeric($jsst_id))
             return false;
-        $jsst_query = "SELECT (
-					(SELECT COUNT(id) FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE priorityid = " . esc_sql($jsst_id) . ")
-					) AS total";
+        $jsst_query = jssupportticket::$_db->prepare("SELECT (
+					(SELECT COUNT(id) FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE priorityid = %d)
+					) AS total", $jsst_id);
         $jsst_result = jssupportticket::$_db->get_var($jsst_query);
         if (jssupportticket::$_db->last_error != null) {
             JSSTincluder::getJSModel('systemerror')->addSystemError();
         }
         if ($jsst_result == 0) {
-            $jsst_query = "SELECT COUNT(id) FROM `" . jssupportticket::$_db->prefix . "js_ticket_priorities` WHERE isdefault = 1 AND id = " . esc_sql($jsst_id);
+            $jsst_query = jssupportticket::$_db->prepare("SELECT COUNT(id) FROM `" . jssupportticket::$_db->prefix . "js_ticket_priorities` WHERE isdefault = 1 AND id = %d", $jsst_id);
             $jsst_result = jssupportticket::$_db->get_var($jsst_query);
             if (jssupportticket::$_db->last_error != null) {
                 JSSTincluder::getJSModel('systemerror')->addSystemError();
@@ -256,7 +263,7 @@ class JSSTpriorityModel {
     function getPriorityById($jsst_id) {
         if (!is_numeric($jsst_id))
             return false;
-        $jsst_query = "SELECT priority FROM `" . jssupportticket::$_db->prefix . "js_ticket_priorities` WHERE id = ". esc_sql($jsst_id);
+        $jsst_query = jssupportticket::$_db->prepare("SELECT priority FROM `" . jssupportticket::$_db->prefix . "js_ticket_priorities` WHERE id = %d", $jsst_id);
         $jsst_priority = jssupportticket::$_db->get_var($jsst_query);
         return $jsst_priority;
     }

@@ -16,7 +16,7 @@ class JSSTemailtemplateController {
             switch ($jsst_layout) {
                 case 'admin_emailtemplates':
                     $jsst_tempfor = JSSTrequest::getVar('for', null, 'tk-nw');
-                    $jsst_formid = JSSTrequest::getVar('formid', null, '');
+                    $jsst_formid = absint( JSSTrequest::getVar('formid', null, '') );
                     $jsst_langcode = JSSTrequest::getVar('langcode', null, '');
                     jssupportticket::$jsst_data[1] = $jsst_tempfor;
                     JSSTincluder::getJSModel('emailtemplate')->getTemplate($jsst_tempfor, $jsst_formid, $jsst_langcode);
@@ -93,13 +93,16 @@ class JSSTemailtemplateController {
     }
 
     static function deleteformemailtemplate() {
+        if (!current_user_can('manage_options')) { //only admin can change it.
+            return false;
+        }
         $jsst_id = JSSTrequest::getVar('templateid');
         $jsst_source = JSSTrequest::getVar('source');
         $jsst_nonce = JSSTrequest::getVar('_wpnonce');
         if (! wp_verify_nonce( $jsst_nonce, 'delete-template-'.$jsst_id) ) {
             die( 'Security check Failed' );
         }
-        JSSTincluder::getJSModel('emailtemplate')->removeFormEmailTemplate($jsst_id, $jsst_source);
+        JSSTincluder::getJSModel('emailtemplate')->removeFormEmailTemplate( absint( $jsst_id ), $jsst_source);
         $jsst_url = admin_url("admin.php?page=emailtemplate&for=" . JSSTrequest::getVar('for'));
         wp_safe_redirect($jsst_url);
         exit;

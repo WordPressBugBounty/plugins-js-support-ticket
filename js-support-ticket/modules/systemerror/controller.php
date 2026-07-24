@@ -19,7 +19,7 @@ class JSSTsystemerrorController {
                     break;
 
                 case 'admin_addsystemerror':
-                    $jsst_id = JSSTrequest::getVar('jssupportticketid', 'get');
+                    $jsst_id = absint( JSSTrequest::getVar('jssupportticketid', 'get') );
                     JSSTincluder::getJSModel('systemerror')->getsystemerrorForForm($jsst_id);
                     break;
                 default:
@@ -48,6 +48,13 @@ class JSSTsystemerrorController {
     }
 
     static function savesystemerror() {
+        $jsst_nonce = JSSTrequest::getVar('_wpnonce');
+        if (! wp_verify_nonce( $jsst_nonce, 'save-systemerror') ) {
+            die( 'Security check Failed' );
+        }
+        if (!current_user_can('manage_options')) {
+            return false;
+        }
         $jsst_data = JSSTrequest::get('post');
         JSSTincluder::getJSModel('systemerror')->storesystemerror($jsst_data);
         if (is_admin()) {
@@ -60,12 +67,15 @@ class JSSTsystemerrorController {
     }
 
     static function deletesystemerror() {
+        if (!current_user_can('manage_options')) { //only admin can change it.
+            return false;
+        }
         $jsst_id = JSSTrequest::getVar('systemerrorid');
         $jsst_nonce = JSSTrequest::getVar('_wpnonce');
         if (! wp_verify_nonce( $jsst_nonce, 'delete-systemerror-'.$jsst_id) ) {
             die( 'Security check Failed' );
         }
-        JSSTincluder::getJSModel('systemerror')->removeSystemError($jsst_id);
+        JSSTincluder::getJSModel('systemerror')->removeSystemError( $jsst_id );
         if (is_admin()) {
             $jsst_url = admin_url("admin.php?page=systemerror&jstlay=systemerrors");
         } else {

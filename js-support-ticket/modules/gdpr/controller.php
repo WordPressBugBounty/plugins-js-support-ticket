@@ -18,7 +18,7 @@ class JSSTgdprController {
                     JSSTincluder::getJSModel('gdpr')->getGDPRFeilds();
                     break;
                 case 'admin_addgdprfield':
-                    $jsst_id = JSSTrequest::getVar('jssupportticketid');
+                    $jsst_id = absint( JSSTrequest::getVar('jssupportticketid') );
                     JSSTincluder::getJSModel('fieldordering')->getUserFieldbyId($jsst_id,3);
                     break;
                 case 'admin_erasedatarequests':
@@ -94,7 +94,7 @@ class JSSTgdprController {
             die( 'Security check Failed' );
         }
         $jsst_id = JSSTrequest::getVar('gdprid');
-        JSSTincluder::getJSModel('fieldordering')->deleteUserField($jsst_id);
+        JSSTincluder::getJSModel('fieldordering')->deleteUserField( absint( $jsst_id ) );
         if (is_admin()) {
             $jsst_url = admin_url("admin.php?page=gdpr&jstlay=gdprfields");
         } else {
@@ -110,7 +110,7 @@ class JSSTgdprController {
             die( 'Security check Failed' );
         }
         $jsst_id = JSSTrequest::getVar('jssupportticketid');
-        JSSTincluder::getJSModel('gdpr')->deleteUserEraseRequest($jsst_id);
+        JSSTincluder::getJSModel('gdpr')->deleteUserEraseRequest( absint( $jsst_id ) );
         $jsst_url = jssupportticket::makeUrl(array('jstmod'=>'gdpr', 'jstlay'=>'adderasedatarequest'));
         wp_safe_redirect($jsst_url);
         exit;
@@ -148,12 +148,15 @@ class JSSTgdprController {
     }
 
     static function deleteuserdata() {
+        if (!current_user_can('manage_options')) { //only admin can change it.
+            return false;
+        }
         $jsst_nonce = JSSTrequest::getVar('_wpnonce');
 
         if (! wp_verify_nonce( $jsst_nonce, 'delete-userdata') ) {
             die( 'Security check Failed' );
         }
-        $jsst_uid  = JSSTrequest::getVar('jssupportticketid');
+        $jsst_uid  = absint( JSSTrequest::getVar('jssupportticketid') );
         $jsst_return_value = JSSTincluder::getJSModel('gdpr')->deleteUserData($jsst_uid);
         $jsst_url = admin_url("admin.php?page=gdpr&jstlay=erasedatarequests");
         wp_safe_redirect($jsst_url);
@@ -161,11 +164,14 @@ class JSSTgdprController {
     }
 
     static function eraseidentifyinguserdata() {
+        if (!current_user_can('manage_options')) { //only admin can change it.
+            return false;
+        }
         $jsst_nonce = JSSTrequest::getVar('_wpnonce');
         if (! wp_verify_nonce( $jsst_nonce, 'erase-userdata') ) {
             die( 'Security check Failed' );
         }
-        $jsst_uid  = JSSTrequest::getVar('jssupportticketid');
+        $jsst_uid  = absint( JSSTrequest::getVar('jssupportticketid') );
         $jsst_return_value = JSSTincluder::getJSModel('gdpr')->anonymizeUserData($jsst_uid);
         $jsst_url = admin_url("admin.php?page=gdpr&jstlay=erasedatarequests");
         wp_safe_redirect($jsst_url);

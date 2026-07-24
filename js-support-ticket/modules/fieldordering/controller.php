@@ -25,7 +25,7 @@ class JSSTfieldorderingController {
                         jssupportticket::$jsst_data['formid'] = $jsst_formid;
                         do_action('jsst_multiform_name_for_list' , $jsst_formid);
                     }
-                    JSSTincluder::getJSModel('fieldordering')->getFieldOrderingForList($jsst_fieldfor);
+                    JSSTincluder::getJSModel('fieldordering')->getFieldOrderingForList( absint( $jsst_fieldfor ) );
                     break;
                 case 'admin_adduserfeild':
                     $jsst_id = JSSTrequest::getVar('jssupportticketid');
@@ -45,7 +45,7 @@ class JSSTfieldorderingController {
                         do_action('jsst_multiform_name_for_list' , $jsst_formid);
                     }
                     // 
-                    JSSTincluder::getJSModel('fieldordering')->getUserFieldbyId($jsst_id,1);
+                    JSSTincluder::getJSModel('fieldordering')->getUserFieldbyId( absint( $jsst_id ),1);
                     break;
                 default:
                     exit;
@@ -84,7 +84,7 @@ class JSSTfieldorderingController {
         }
         $jsst_formid = JSSTrequest::getVar('formid');
         $jsst_action = JSSTrequest::getVar('order');
-        JSSTincluder::getJSModel('fieldordering')->changeOrder($jsst_id, $jsst_action);
+        JSSTincluder::getJSModel('fieldordering')->changeOrder( absint( $jsst_id ), $jsst_action);
         $jsst_url = admin_url("admin.php?page=fieldordering&jstlay=fieldordering&fieldfor=".esc_attr($jsst_fieldfor)."&formid=".esc_attr($jsst_formid));
         wp_safe_redirect($jsst_url);
         exit;
@@ -102,7 +102,7 @@ class JSSTfieldorderingController {
         }
         $jsst_formid = JSSTrequest::getVar('formid');
         $jsst_status = JSSTrequest::getVar('status');
-        JSSTincluder::getJSModel('fieldordering')->changePublishStatus($jsst_id, $jsst_status);
+        JSSTincluder::getJSModel('fieldordering')->changePublishStatus( absint( $jsst_id ), $jsst_status);
         $jsst_url = admin_url("admin.php?page=fieldordering&jstlay=fieldordering&fieldfor=".esc_attr($jsst_fieldfor)."&formid=".esc_attr($jsst_formid));
         wp_safe_redirect($jsst_url);
         exit;
@@ -120,7 +120,7 @@ class JSSTfieldorderingController {
         }
         $jsst_formid = JSSTrequest::getVar('formid');
         $jsst_status = JSSTrequest::getVar('status');
-        JSSTincluder::getJSModel('fieldordering')->changeVisitorPublishStatus($jsst_id, $jsst_status);
+        JSSTincluder::getJSModel('fieldordering')->changeVisitorPublishStatus( absint( $jsst_id ), $jsst_status);
         $jsst_url = admin_url("admin.php?page=fieldordering&jstlay=fieldordering&fieldfor=".esc_attr($jsst_fieldfor)."&formid=".esc_attr($jsst_formid));
         wp_safe_redirect($jsst_url);
         exit;
@@ -138,7 +138,7 @@ class JSSTfieldorderingController {
         }
         $jsst_formid = JSSTrequest::getVar('formid');
         $jsst_status = JSSTrequest::getVar('status');
-        JSSTincluder::getJSModel('fieldordering')->changeRequiredStatus($jsst_id, $jsst_status);
+        JSSTincluder::getJSModel('fieldordering')->changeRequiredStatus( absint( $jsst_id ), $jsst_status);
         $jsst_url = admin_url("admin.php?page=fieldordering&jstlay=fieldordering&fieldfor=".esc_attr($jsst_fieldfor)."&formid=".esc_attr($jsst_formid));
         wp_safe_redirect($jsst_url);
         exit;
@@ -230,7 +230,7 @@ class JSSTfieldorderingController {
             $jsst_fieldfor = jssupportticket::$jsst_data['fieldfor'];
         }
         $jsst_formid = JSSTrequest::getVar('formid');
-        JSSTincluder::getJSModel('fieldordering')->deleteUserField($jsst_id);
+        JSSTincluder::getJSModel('fieldordering')->deleteUserField( absint( $jsst_id ) );
         if (is_admin()) {
             $jsst_url = admin_url("admin.php?page=fieldordering&fieldfor=".esc_attr($jsst_fieldfor)."&formid=".esc_attr($jsst_formid));
         } else {

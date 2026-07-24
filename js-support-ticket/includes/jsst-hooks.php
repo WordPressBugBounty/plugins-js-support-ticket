@@ -287,7 +287,7 @@ function jsst_update_user_profile($jsst_user_id) {
     if(!is_numeric($jsst_user_id)){
         return false;
     }
-    $jsst_query = "SELECT * FROM `" . jssupportticket::$_db->prefix . "users` WHERE id = " . intval($jsst_user_id);
+    $jsst_query = jssupportticket::$_db->prepare("SELECT * FROM `" . jssupportticket::$_db->prefix . "users` WHERE id = %d", $jsst_user_id);
     $jsst_user = jssupportticket::$_db->get_row($jsst_query);
 
     $jsst_uid = "";
@@ -299,7 +299,7 @@ function jsst_update_user_profile($jsst_user_id) {
 	
 	if(isset($_POST['user_id'])) $jsst_post_user_id = jssupportticket::JSST_sanitizeData($_POST['user_id']); // JSST_sanitizeData() function uses wordpress santize functions
     if ($jsst_post_user_id == $jsst_user_id) {
-        $jsst_query = "SELECT id FROM `" . jssupportticket::$_db->prefix . "js_ticket_users` WHERE wpuid = " . intval($jsst_user_id);
+        $jsst_query = jssupportticket::$_db->prepare("SELECT id FROM `" . jssupportticket::$_db->prefix . "js_ticket_users` WHERE wpuid = %d", $jsst_user_id);
         $jsst_id = jssupportticket::$_db->get_var($jsst_query);
     }
 	$jsst_name = "";
@@ -507,13 +507,21 @@ function JSST_display_language_download_notice() {
 
     if ($type === 'exact_success') {
         echo '<div class="notice notice-success is-dismissible">';
-        echo '<p><strong>' . esc_html(__('JS Support Ticket', 'js-support-ticket')) . ':</strong> ' . sprintf(esc_html(__('Language files for %s successfully downloaded.', 'js-support-ticket')), '<code>' . $original . '</code>') . '</p>';
+        echo '<p><strong>' . esc_html( __( 'JS Support Ticket', 'js-support-ticket' ) ) . ':</strong> ' .
+        /* translators: %s: the language/locale code or name for which language files were downloaded */
+        sprintf( esc_html__( 'Language files for %s successfully downloaded.', 'js-support-ticket' ), '<code>' . esc_html( $original ) . '</code>' ) . '</p>';
         echo '</div>';
     }
     elseif ($type === 'fallback_success') {
         $fallback = esc_html($notice['fallback']);
         echo '<div class="notice notice-warning is-dismissible">';
-        echo '<p><strong>' . esc_html(__('JS Support Ticket', 'js-support-ticket')) . ':</strong> ' . sprintf(esc_html(__('Alternate language file downloaded. We tried to find %1$s, but downloaded %2$s as a fallback.', 'js-support-ticket')), '<code>' . $original . '</code>', '<code>' . $fallback . '</code>') . '</p>';
+        echo '<p><strong>' . esc_html__( 'JS Support Ticket', 'js-support-ticket' ) . ':</strong> ' .
+        sprintf(
+            /* translators: 1: the language/locale code that was originally requested, 2: the fallback language/locale code that was downloaded instead */
+            esc_html__( 'Alternate language file downloaded. We tried to find %1$s, but downloaded %2$s as a fallback.', 'js-support-ticket' ),
+            '<code>' . esc_html( $original ) . '</code>',
+            '<code>' . esc_html( $fallback ) . '</code>'
+        ) . '</p>';
         echo '</div>';
     }
 }

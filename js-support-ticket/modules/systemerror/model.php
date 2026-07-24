@@ -43,6 +43,7 @@ class JSSTsystemerrorModel {
             $jsst_failed_query = jssupportticket::$_db->last_query;
 
             // Generate a mid-level execution trace (up to 5 levels deep)
+            // phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_debug_backtrace -- intentional: builds the call path stored in the plugin's own system-error log (admin-only), not debug output; DEBUG_BACKTRACE_IGNORE_ARGS avoids capturing argument values.
             $jsst_raw_backtrace = debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS, 5);
             $jsst_trace_path    = array();
 
@@ -84,7 +85,7 @@ class JSSTsystemerrorModel {
     function updateIsView($jsst_id) {
         if (!is_numeric($jsst_id))
             return false;
-        $jsst_query = "UPDATE " . jssupportticket::$_db->prefix . "`js_ticket_system_errors` set isview = 1 WHERE id = " . esc_sql($jsst_id);
+        $jsst_query = jssupportticket::$_db->prepare("UPDATE " . jssupportticket::$_db->prefix . "`js_ticket_system_errors` set isview = 1 WHERE id = %d", $jsst_id);
         jssupportticket::$_db->Query($jsst_query);
         if (jssupportticket::$_db->last_error != null) {
             $this->addSystemError();

@@ -110,7 +110,8 @@ class JSSTemailModel {
                                     FROM `".jssupportticket::$_db->prefix."js_ticket_tickets` AS ticket
                                     LEFT JOIN `".jssupportticket::$_db->prefix."js_ticket_departments` AS dept ON dept.id = ticket.departmentid
                                     LEFT JOIN `".jssupportticket::$_db->prefix."js_ticket_email` AS email ON email.id = dept.emailid
-                                    WHERE ticket.id = ".intval($jsst_id);
+                                    WHERE ticket.id = %d";
+                        $jsst_query = jssupportticket::$_db->prepare($jsst_query, $jsst_id);
                         $jsst_dept_result = jssupportticket::$_db->get_row($jsst_query);
                         if($jsst_dept_result){
                             if(isset($jsst_dept_result->sendmail) && $jsst_dept_result->sendmail == 1){
@@ -464,7 +465,7 @@ class JSSTemailModel {
                             $this->sendEmail($jsst_agentEmail, $jsst_msgSubject, $jsst_msgBody, $jsst_senderEmail, $jsst_senderName, $jsst_attachments, $jsst_action, 'reply-tk-staff');
                         }
                         // New ticket mail to User
-                        $jsst_template = $this->getTemplateForEmail('responce-tk');
+                        $jsst_defaulttemplate = $this->getTemplateForEmail('responce-tk');
                         if (jssupportticket::$_config['ticket_response_to_staff_user'] == 1) {
                             //token encrption
                             $jsst_tokenarray['emailaddress']=$Email;
@@ -476,7 +477,7 @@ class JSSTemailModel {
                             $jsst_encryptedtext = $jsst_encoder->encrypt($jsst_token);
                             // end token encryotion
                             $jsst_link = esc_url(jssupportticket::makeUrl(array('jstmod'=>'ticket', 'task'=>'showticketstatus','action'=>'jstask','token'=>$jsst_encryptedtext,'jsstpageid'=>jssupportticket::getPageid())));
-                            $jsst_template = apply_filters( 'jsst_get_email_template_by_user_defined_language','','reply-tk' , $Email , $jsst_ticketRecord->uid, $jsst_ticketRecord->multiformid);
+                            $jsst_template = apply_filters( 'jsst_get_email_template_by_user_defined_language','','responce-tk' , $Email , $jsst_ticketRecord->uid, $jsst_ticketRecord->multiformid);
                             if($jsst_template == '' && empty($jsst_template)){
                                 $jsst_template = $jsst_defaulttemplate;
                             }
@@ -578,6 +579,7 @@ class JSSTemailModel {
                             $this->sendEmail($jsst_agentEmail, $jsst_msgSubject, $jsst_msgBody, $jsst_senderEmail, $jsst_senderName, $jsst_attachments, $jsst_action, 'reply-tk-staff');
                         }
                         // New ticket mail to User
+                        $jsst_defaulttemplate = $this->getTemplateForEmail('responce-tk');
                         if (jssupportticket::$_config['ticket_reply_ticket_user_user'] == 1) {
                             //token encrption
                             $jsst_tokenarray['emailaddress']=$Email;
@@ -590,11 +592,10 @@ class JSSTemailModel {
                             // end token encryotion
                             $jsst_link = esc_url(jssupportticket::makeUrl(array('jstmod'=>'ticket' ,'task'=>'showticketstatus','action'=>'jstask','token'=>$jsst_encryptedtext,'jsstpageid'=>jssupportticket::getPageid())));
                             $jsst_matcharray['{TICKETURL}'] = $jsst_link;
-                            $jsst_template = apply_filters( 'jsst_get_email_template_by_user_defined_language','','reply-tk' ,$Email ,$jsst_ticketRecord->uid, $jsst_ticketRecord->multiformid);
+                            $jsst_template = apply_filters( 'jsst_get_email_template_by_user_defined_language','','responce-tk' ,$Email ,$jsst_ticketRecord->uid, $jsst_ticketRecord->multiformid);
                             if($jsst_template == '' && empty($jsst_template)){
                                 $jsst_template = $jsst_defaulttemplate;
                             }
-
                             $jsst_msgSubject = $jsst_template->subject;
                             $jsst_msgBody = $jsst_template->body;
                             $this->replaceMatches($jsst_msgSubject, $jsst_matcharray);
@@ -1877,22 +1878,22 @@ class JSSTemailModel {
         if (!is_numeric($jsst_id))
             return false;
         if ($jsst_replyto == null) {
-            $jsst_query = "SELECT mail.subject,mail.message,CONCAT(staff.firstname,' ',staff.lastname) AS sendername, staff.uid as staffuid
+            $jsst_query = jssupportticket::$_db->prepare("SELECT mail.subject,mail.message,CONCAT(staff.firstname,' ',staff.lastname) AS sendername, staff.uid as staffuid
                         FROM `" . jssupportticket::$_db->prefix . "js_ticket_staff_mail` AS mail
                         JOIN `" . jssupportticket::$_db->prefix . "js_ticket_staff` AS staff ON staff.id = mail.fromid
-                        WHERE mail.id = " . intval($jsst_id);
+                        WHERE mail.id = %d", $jsst_id);
         } else {
-            $jsst_query = "SELECT mail.subject,reply.message,CONCAT(staff.firstname,' ',staff.lastname) AS sendername, staff.uid as staffuid
+            $jsst_query = jssupportticket::$_db->prepare("SELECT mail.subject,reply.message,CONCAT(staff.firstname,' ',staff.lastname) AS sendername, staff.uid as staffuid
                         FROM `" . jssupportticket::$_db->prefix . "js_ticket_staff_mail` AS reply
                         JOIN `" . jssupportticket::$_db->prefix . "js_ticket_staff_mail` AS mail ON mail.id = reply.replytoid
                         JOIN `" . jssupportticket::$_db->prefix . "js_ticket_staff` AS staff ON staff.id = reply.fromid
-                        WHERE reply.id = " . intval($jsst_id);
+                        WHERE reply.id = %d", $jsst_id);
         }
         $jsst_result = jssupportticket::$_db->get_row($jsst_query);
-            $jsst_query = "SELECT staff.email
+            $jsst_query = jssupportticket::$_db->prepare("SELECT staff.email
                         FROM `" . jssupportticket::$_db->prefix . "js_ticket_staff_mail` AS mail
                         JOIN `" . jssupportticket::$_db->prefix . "js_ticket_staff` AS staff ON staff.id = mail.toid
-                        WHERE mail.id = " . intval($jsst_id);
+                        WHERE mail.id = %d", $jsst_id);
         $jsst_email = jssupportticket::$_db->get_var($jsst_query);
         $jsst_result->receveremail = $jsst_email;
         return $jsst_result;
@@ -1901,9 +1902,9 @@ class JSSTemailModel {
     private function getStaffEmailAddressByStaffId($jsst_id) {
         if (!is_numeric($jsst_id))
             return false;
-        $jsst_query = "SELECT staff.email
+        $jsst_query = jssupportticket::$_db->prepare("SELECT staff.email
                     FROM `" . jssupportticket::$_db->prefix . "js_ticket_staff` AS staff
-                    WHERE staff.id = " . intval($jsst_id);
+                    WHERE staff.id = %d", $jsst_id);
         $jsst_emailaddress = jssupportticket::$_db->get_var($jsst_query);
         return $jsst_emailaddress;
     }
@@ -1911,9 +1912,9 @@ class JSSTemailModel {
     private function getStaffUidByStaffId($jsst_id) {
         if (!is_numeric($jsst_id))
             return false;
-        $jsst_query = "SELECT staff.uid
+        $jsst_query = jssupportticket::$_db->prepare("SELECT staff.uid
                     FROM `" . jssupportticket::$_db->prefix . "js_ticket_staff` AS staff
-                    WHERE staff.id = " . intval($jsst_id);
+                    WHERE staff.id = %d", $jsst_id);
         $jsst_emailaddress = jssupportticket::$_db->get_var($jsst_query);
         return $jsst_emailaddress;
     }
@@ -1921,7 +1922,7 @@ class JSSTemailModel {
     private function getLatestReplyByTicketId($jsst_id) {
         if (!is_numeric($jsst_id))
             return false;
-        $jsst_query = "SELECT reply.message FROM `" . jssupportticket::$_db->prefix . "js_ticket_replies` AS reply WHERE reply.ticketid = " . intval($jsst_id) . " ORDER BY reply.created DESC LIMIT 1";
+        $jsst_query = jssupportticket::$_db->prepare("SELECT reply.message FROM `" . jssupportticket::$_db->prefix . "js_ticket_replies` AS reply WHERE reply.ticketid = %d ORDER BY reply.created DESC LIMIT 1", $jsst_id);
         $jsst_message = jssupportticket::$_db->get_var($jsst_query);
         if (jssupportticket::$_db->last_error != null) {
             JSSTincluder::getJSModel('systemerror')->addSystemError();
@@ -2009,11 +2010,11 @@ class JSSTemailModel {
         if ($jsst_id) {
             if (!is_numeric($jsst_id))
                 return false;
-            $jsst_query = "SELECT email.email,email.name
+            $jsst_query = jssupportticket::$_db->prepare("SELECT email.email,email.name
                         FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` AS ticket
                         JOIN `" . jssupportticket::$_db->prefix . "js_ticket_departments` AS department ON department.id = ticket.departmentid
                         JOIN `" . jssupportticket::$_db->prefix . "js_ticket_email` AS email ON email.id = department.emailid
-                        WHERE ticket.id = " . intval($jsst_id);
+                        WHERE ticket.id = %d", $jsst_id);
             $jsst_email = jssupportticket::$_db->get_row($jsst_query);
             if (jssupportticket::$_db->last_error != null) {
                 JSSTincluder::getJSModel('systemerror')->addSystemError();
@@ -2030,30 +2031,30 @@ class JSSTemailModel {
     private function getDefaultSenderEmailAndName() {
         $jsst_emailid = jssupportticket::$_config['default_alert_email'];
         if(!is_numeric($jsst_emailid)) return false;
-        $jsst_query = "SELECT email,name FROM `" . jssupportticket::$_db->prefix . "js_ticket_email` WHERE id = " . intval($jsst_emailid);
+        $jsst_query = jssupportticket::$_db->prepare("SELECT email,name FROM `" . jssupportticket::$_db->prefix . "js_ticket_email` WHERE id = %d", $jsst_emailid);
         $jsst_email = jssupportticket::$_db->get_row($jsst_query);
         return $jsst_email;
     }
 
     private function getTemplateForEmail($jsst_templatefor, $jsst_multiformid = '') {
-        $jsst_query = "SELECT * FROM `" . jssupportticket::$_db->prefix . "js_ticket_emailtemplates` WHERE templatefor = '" . esc_sql($jsst_templatefor) . "'";
+        $jsst_query = "SELECT * FROM `" . jssupportticket::$_db->prefix . "js_ticket_emailtemplates` WHERE templatefor = %s";
 
         // If multiformid is provided
         if (!empty($jsst_multiformid)) {
-            $jsst_query .= " AND multiformid = " . intval($jsst_multiformid);
-            $jsst_template = jssupportticket::$_db->get_row($jsst_query);
+            $jsst_query .= " AND multiformid = %d";
+            $jsst_template = jssupportticket::$_db->get_row(jssupportticket::$_db->prepare($jsst_query, $jsst_templatefor, $jsst_multiformid));
 
             // If no form-specific template is found, fallback to default
             if (empty($jsst_template)) {
-                $jsst_query = "SELECT * FROM `" . jssupportticket::$_db->prefix . "js_ticket_emailtemplates` 
-                          WHERE templatefor = '" . esc_sql($jsst_templatefor) . "'
+                $jsst_query = "SELECT * FROM `" . jssupportticket::$_db->prefix . "js_ticket_emailtemplates`
+                          WHERE templatefor = %s
                           AND (multiformid IS NULL OR multiformid = '')";
-                $jsst_template = jssupportticket::$_db->get_row($jsst_query);
+                $jsst_template = jssupportticket::$_db->get_row(jssupportticket::$_db->prepare($jsst_query, $jsst_templatefor));
             }
         } else {
             // No multiformid passed — get default template
             $jsst_query .= " AND (multiformid IS NULL OR multiformid = '')";
-            $jsst_template = jssupportticket::$_db->get_row($jsst_query);
+            $jsst_template = jssupportticket::$_db->get_row(jssupportticket::$_db->prepare($jsst_query, $jsst_templatefor));
         }
 
         // Handle DB error
@@ -2075,11 +2076,12 @@ class JSSTemailModel {
                     . " LEFT JOIN `" . jssupportticket::$_db->prefix . "js_ticket_departments` AS department ON department.id = ticket.departmentid "
                     . jssupportticket::$_addon_query['join']
                     . " LEFT JOIN `" . jssupportticket::$_db->prefix . "js_ticket_priorities` AS priority ON priority.id = ticket.priorityid "
-                    . " WHERE ticket.id = " . intval($jsst_id);
+                    . " WHERE ticket.id = %d";
+                $jsst_query = jssupportticket::$_db->prepare($jsst_query, $jsst_id);
                 do_action('jsst_reset_aadon_query');
             break;
             default:
-                $jsst_query = "SELECT * FROM `" . jssupportticket::$_db->prefix . $jsst_tablename . "` WHERE id = " . esc_sql($jsst_id);
+                $jsst_query = jssupportticket::$_db->prepare("SELECT * FROM `" . jssupportticket::$_db->prefix . $jsst_tablename . "` WHERE id = %d", $jsst_id);
             break;
         }
         $jsst_record = jssupportticket::$_db->get_row($jsst_query);
@@ -2094,7 +2096,7 @@ class JSSTemailModel {
         $jsst_email = jssupportticket::$_search['email']['email'];
         $jsst_inquery = '';
         if ($jsst_email != null)
-            $jsst_inquery .= " WHERE email.email LIKE '%".esc_sql($jsst_email)."%'";
+            $jsst_inquery .= jssupportticket::$_db->prepare(" WHERE email.email LIKE %s", '%'.$jsst_email.'%');
 
         jssupportticket::$jsst_data['filter']['email'] = $jsst_email;
 
@@ -2131,12 +2133,14 @@ class JSSTemailModel {
         if ($jsst_id) {
             if (!is_numeric($jsst_id))
                 return false;
-            $jsst_query = "SELECT email.id, email.email, email.autoresponse, email.created, email.updated,email.status,email.smtpemailauth,email.smtphosttype,email.smtphost,email.smtpauthencation,email.name,email.password,email.smtpsecure,email.mailport
+            $jsst_query = jssupportticket::$_db->prepare("SELECT email.id, email.email, email.autoresponse, email.created, email.updated,email.status,email.smtpemailauth,email.smtphosttype,email.smtphost,email.smtpauthencation,email.name,email.password,email.smtpsecure,email.mailport
                         FROM `" . jssupportticket::$_db->prefix . "js_ticket_email` AS email
-                        WHERE email.id = " . esc_sql($jsst_id);
+                        WHERE email.id = %d", $jsst_id);
             jssupportticket::$jsst_data[0] = jssupportticket::$_db->get_row($jsst_query);
             if(isset(jssupportticket::$jsst_data[0]->password) && jssupportticket::$jsst_data[0]->password != ''){
-                jssupportticket::$jsst_data[0]->password = jssupportticketphplib::JSST_safe_decoding(jssupportticket::$jsst_data[0]->password);
+                include_once JSST_PLUGIN_PATH . 'includes/encoder.php';
+                $jsst_encoder = new JSSTEncoder();
+                jssupportticket::$jsst_data[0]->password = $jsst_encoder->decrypt(jssupportticket::$jsst_data[0]->password);
             }
             if (jssupportticket::$_db->last_error != null) {
                 JSSTincluder::getJSModel('systemerror')->addSystemError(); // if there is an error add it to system errorrs
@@ -2161,7 +2165,9 @@ class JSSTemailModel {
             $jsst_data['created'] = date_i18n('Y-m-d H:i:s');
         }
         if(isset($jsst_data['password']) && $jsst_data['password'] != ''){
-            $jsst_data['password'] = jssupportticketphplib::JSST_safe_encoding($jsst_data['password']);
+            include_once JSST_PLUGIN_PATH . 'includes/encoder.php';
+            $jsst_encoder = new JSSTEncoder();
+            $jsst_data['password'] = $jsst_encoder->encrypt($jsst_data['password']);
         }
 
         $jsst_data = jssupportticket::JSST_sanitizeData($jsst_data); // JSST_sanitizeData() function uses wordpress santize functions
@@ -2187,7 +2193,7 @@ class JSSTemailModel {
     }
 
     function checkAlreadyExist($jsst_email){
-        $jsst_query = "SELECT COUNT(id) FROM`" . jssupportticket::$_db->prefix . "js_ticket_email`  WHERE email = '".esc_sql($jsst_email)."'";
+        $jsst_query = jssupportticket::$_db->prepare("SELECT COUNT(id) FROM`" . jssupportticket::$_db->prefix . "js_ticket_email`  WHERE email = %s", $jsst_email);
         $jsst_result = jssupportticket::$_db->get_var($jsst_query);
         if($jsst_result > 0)
             return true;
@@ -2215,11 +2221,11 @@ class JSSTemailModel {
     private function canRemoveEmail($jsst_id) {
         if (!is_numeric($jsst_id))
             return false;
-        $jsst_query = "SELECT (
-                        (SELECT COUNT(id) FROM `" . jssupportticket::$_db->prefix . "js_ticket_departments` WHERE emailid = " . esc_sql($jsst_id) . ")
-                        + (SELECT COUNT(*) FROM `" . jssupportticket::$_db->prefix . "js_ticket_config` WHERE configname = 'default_alert_email' AND configvalue = " . esc_sql($jsst_id) . ")
-                        + (SELECT COUNT(*) FROM `" . jssupportticket::$_db->prefix . "js_ticket_config` WHERE configname = 'default_admin_email' AND configvalue = " . esc_sql($jsst_id) . ")
-                        ) AS total";
+        $jsst_query = jssupportticket::$_db->prepare("SELECT (
+                        (SELECT COUNT(id) FROM `" . jssupportticket::$_db->prefix . "js_ticket_departments` WHERE emailid = %d)
+                        + (SELECT COUNT(*) FROM `" . jssupportticket::$_db->prefix . "js_ticket_config` WHERE configname = 'default_alert_email' AND configvalue = %d)
+                        + (SELECT COUNT(*) FROM `" . jssupportticket::$_db->prefix . "js_ticket_config` WHERE configname = 'default_admin_email' AND configvalue = %d)
+                        ) AS total", $jsst_id, $jsst_id, $jsst_id);
         $jsst_result = jssupportticket::$_db->get_var($jsst_query);
         if (jssupportticket::$_db->last_error != null) {
             JSSTincluder::getJSModel('systemerror')->addSystemError();
@@ -2242,7 +2248,7 @@ class JSSTemailModel {
     function getEmailById($jsst_id) {
         if (!is_numeric($jsst_id))
             return false;
-        $jsst_query = "SELECT email  FROM `" . jssupportticket::$_db->prefix . "js_ticket_email` WHERE id = " . esc_sql($jsst_id);
+        $jsst_query = jssupportticket::$_db->prepare("SELECT email  FROM `" . jssupportticket::$_db->prefix . "js_ticket_email` WHERE id = %d", $jsst_id);
         $jsst_email = jssupportticket::$_db->get_var($jsst_query);
         if (jssupportticket::$_db->last_error != null) {
             JSSTincluder::getJSModel('systemerror')->addSystemError();
@@ -2256,7 +2262,7 @@ class JSSTemailModel {
         }
         if(!is_string($jsst_senderemail))
             return false;
-        $jsst_query = "SELECT COUNT(id) FROM `" . jssupportticket::$_db->prefix . "js_ticket_email` WHERE email = '".esc_sql($jsst_senderemail). "' AND smtpemailauth = 1"; // 1 For smtp 0 for default
+        $jsst_query = jssupportticket::$_db->prepare("SELECT COUNT(id) FROM `" . jssupportticket::$_db->prefix . "js_ticket_email` WHERE email = %s AND smtpemailauth = 1", $jsst_senderemail); // 1 For smtp 0 for default
         $jsst_total = jssupportticket::$_db->get_var($jsst_query);
         if($jsst_total > 0){
             return true;
@@ -2266,12 +2272,15 @@ class JSSTemailModel {
     }
 
     function getSMTPEmailConfig($jsst_senderemail){
-        $jsst_query = "SELECT * FROM  `" . jssupportticket::$_db->prefix . "js_ticket_email` WHERE email = '".esc_sql($jsst_senderemail)."'";
+        $jsst_query = jssupportticket::$_db->prepare("SELECT * FROM  `" . jssupportticket::$_db->prefix . "js_ticket_email` WHERE email = %s", $jsst_senderemail);
         $jsst_emailconfig = jssupportticket::$_db->get_row($jsst_query);
         return $jsst_emailconfig;
     }
 
     function sendTestEmail(){
+        if (!current_user_can('manage_options')) { //only admin can change it.
+            return false;
+        }
         $jsst_nonce = JSSTrequest::getVar('_wpnonce');
         if (! wp_verify_nonce( $jsst_nonce, 'send-test-email') ) {
             die( 'Security check Failed' );
@@ -2279,8 +2288,8 @@ class JSSTemailModel {
         $jsst_hosttype = JSSTrequest::getVar('hosttype');
         $jsst_hostname = JSSTrequest::getVar('hostname');
         $jsst_ssl = JSSTrequest::getVar('ssl');
-        $jsst_hostportnumber = JSSTrequest::getVar('hostportnumber');
-        $jsst_emailaddress = JSSTrequest::getVar('emailaddress');
+        $jsst_hostportnumber = absint( JSSTrequest::getVar('hostportnumber') );
+        $jsst_emailaddress = sanitize_email( JSSTrequest::getVar('emailaddress') );
         $jsst_password = JSSTrequest::getVar('password');
         $jsst_smtpauthencation = JSSTrequest::getVar('smtpauthencation');
 
@@ -2338,10 +2347,10 @@ class JSSTemailModel {
         if ($jsst_id) {
             if (!is_numeric($jsst_id))
                 return false;
-            $jsst_query = "SELECT replies.*,replies.id AS replyid,tickets.id 
+            $jsst_query = jssupportticket::$_db->prepare("SELECT replies.*,replies.id AS replyid,tickets.id
                     FROM `" . jssupportticket::$_db->prefix . "js_ticket_replies` AS replies
                     JOIN `" . jssupportticket::$_db->prefix . "js_ticket_tickets` AS tickets ON  replies.ticketid = tickets.id
-                    WHERE tickets.id = " . esc_sql($jsst_id) . " ORDER By replies.id DESC";
+                    WHERE tickets.id = %d ORDER By replies.id DESC", $jsst_id);
             $jsst_replies = jssupportticket::$_db->get_results($jsst_query);
             foreach ($jsst_replies as $jsst_key => $jsst_reply) {
                 if ($jsst_key == 0) {

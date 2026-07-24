@@ -102,6 +102,13 @@ class JSSTpostinstallationController {
     }
 
     function savesampledata(){
+        if(!current_user_can('manage_options')){
+            return false;
+        }
+        $jsst_nonce = JSSTrequest::getVar('_wpnonce');
+        if (! wp_verify_nonce( $jsst_nonce, 'savesampledata') ) {
+            die( 'Security check Failed' );
+        }
         $jsst_data = JSSTrequest::get('post');
         $jsst_sampledata = $jsst_data['sampledata'];
         $jsst_jsmenu = $jsst_data['jsmenu'];

@@ -19,7 +19,7 @@ class JSSTupdates {
 			$jsst_query = "SELECT configvalue FROM `".jssupportticket::$_db->prefix."js_ticket_config` WHERE configname='versioncode'";
 			$jsst_versioncode = jssupportticket::$_db->get_var($jsst_query);
 			$jsst_versioncode = jssupportticketphplib::JSST_str_replace('.','',$jsst_versioncode);
-			$jsst_query = "UPDATE `".jssupportticket::$_db->prefix."js_ticket_config` SET configvalue = '".esc_sql($jsst_versioncode)."' WHERE configname = 'last_version';";
+			$jsst_query = jssupportticket::$_db->prepare("UPDATE `".jssupportticket::$_db->prefix."js_ticket_config` SET configvalue = %s WHERE configname = 'last_version';", $jsst_versioncode);
 			jssupportticket::$_db->query($jsst_query);
             $jsst_from = $jsst_installedversion + 1;
             $jsst_to = $jsst_cversion;

@@ -1,56 +1,12 @@
 /* remove this in the 3.0.3 */
-.jsst-admin-alert {
-    background: #fff7ed;
-    border-left: 6px solid #ea580c;
-    padding: 16px 20px;
-    margin: 20px 0;
-    box-shadow: 0 8px 20px rgba(0,0,0,0.08);
-    border-radius: 8px;
-}
-
-.jsst-alert-content {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    flex-wrap: wrap;
-}
-
-.jsst-alert-icon {
-    font-size: 34px;
-    line-height: 1;
-}
-
-.jsst-alert-text h2 {
-    margin: 0;
-    font-size: 18px;
-    font-weight: 700;
-    color: #9a3412;
-}
-
-.jsst-alert-text p {
-    margin: 4px 0 0;
-    color: #7c2d12;
-    font-size: 14px;
-}
-
-.jsst-alert-action {
-    margin-left: auto;
-}
-
-.jsst-alert-btn {
-    background: #ea580c;
-    color: #fff;
-    padding: 10px 18px;
-    border-radius: 6px;
-    font-weight: 600;
-    text-decoration: none;
-    white-space: nowrap;
-}
-
-.jsst-alert-btn:hover {
-    background: #c2410c;
-    color: #fff;
-}
+.jsst-admin-alert {background: #fff7ed;border-left: 6px solid #ea580c;padding: 16px 20px;margin: 20px 0;box-shadow: 0 8px 20px rgba(0,0,0,0.08);border-radius: 8px;}
+.jsst-alert-content {display: flex;align-items: center;gap: 16px;flex-wrap: wrap;}
+.jsst-alert-icon {font-size: 34px;line-height: 1;}
+.jsst-alert-text h2 {margin: 0;font-size: 18px;font-weight: 700;color: #9a3412;}
+.jsst-alert-text p {margin: 4px 0 0;color: #7c2d12;font-size: 14px;}
+.jsst-alert-action {margin-left: auto;}
+.jsst-alert-btn {background: #ea580c;color: #fff;padding: 10px 18px;border-radius: 6px;font-weight: 600;text-decoration: none;white-space: nowrap;}
+.jsst-alert-btn:hover {background: #c2410c;color: #fff;}
 /* remove this in the 3.0.3 */
 /* common */
 div#jsstadmin-wrapper {position: relative;float: left;width: 100%;margin-top: 10px;display: flex;}
@@ -475,6 +431,12 @@ table#js-support-ticket-table.js-admin-report-tickets tr td a {display: inline-b
 .jsst_gen_body .js-ticket-configuration-row .js-ticket-configuration-btn:hover{text-decoration: underline;}
 .jsst_gen_body .js-ticket-configuration-row .js-ticket-configuration-video a.js-tkt-det-hdg-img {margin-left: 5px;float: left;display: inline-block;border: 2px solid #efced5;padding: 12px 15px;text-decoration: none;color: #606062;background-color: #fff6f6;width: auto;height: 45px;margin-top:0;border-radius: 4px}
 .jsst_gen_body .js-ticket-configuration-row .js-ticket-configuration-video a.js-tkt-det-hdg-img img {margin-top: -4px;margin-right: 0px;}
+/* AI Autopilot Checkbox Groups */
+.jsst_gen_body .js-ticket-configuration-row .jsst-checkbox-group {display: flex;gap: 15px;}
+.jsst_gen_body .js-ticket-configuration-row .jsst-checkbox-group label{display: flex !important;gap: 5px;margin-bottom:8px}
+.jsst_gen_body .js-ticket-configuration-row .jsst-checkbox-group input[type="checkbox"] {width: 16px !important;height: 16px !important;margin: 0;cursor: pointer;}
+.jsst_gen_body .js-ticket-configuration-row .jsst-checkbox-group input[type=checkbox]:checked::before {background-color: #4f46e5;width: 16px !important;height: 16px !important;border-radius: 2px;margin: 0;}
+.jsst_gen_body .js-ticket-configuration-row .jsst-checkbox-group label:hover {background-color: #f9f9f9;}
 #jsstadmin-data-wrp .js-support-ticket-configurations .jsstadmin-hide-config{display: none;float: left;width: 100%;}
 
 /* permissions */
@@ -497,6 +459,8 @@ table#js-support-ticket-table.js-admin-report-tickets tr td a {display: inline-b
 #tk_form_wraper .js-form-wrapper .js-form-value input {display: inline-block;width: 100%;height: 41px;padding: 10px;border: 1px solid #ebecec;background: #f8fafc;color: #6c757d;box-shadow: unset;}
 
 /* configurations */
+.jsst-autopilot-settings-wrapper.jsst-settings-disabled {pointer-events: none;opacity: 0.45;filter: grayscale(40%);user-select: none;position: relative;}
+.jsst-settings-disabled-overlay {text-align: center;padding: 15px;margin-top: -30px;margin-bottom: 20px;background: #f3f4f6;border: 1px dashed #d1d5db;border-radius: 6px;color: #6b7280;font-size: 14px;font-weight: 500;position: relative;z-index: 1;display: flex;}
 .js-ticket-font-bold{font-weight: bold;}
 .js-support-ticket-configurations {float: left;width: 100%;}
 .js-support-ticket-configurations .js-support-ticket-configurations-left{float: left;width: 260px;display: inline-block;background: #fff;box-shadow: 4px 4px 4px 0 rgb(0 0 0 / 20%);transition: all 500ms;height: calc(100% - 125px);min-height: 1000px;padding-top: 8px;}
@@ -1827,6 +1791,10 @@ div.jsstadmin-add-on-page-wrp div.add-on-page-cnt div.add-on-list div.add-on-ite
 div.jsstadmin-add-on-page-wrp div.add-on-page-cnt div.add-on-list div.add-on-item.sociallogin a.add-on-btn:hover {border-color: #0f8029;color: #0f8029 !important;background: #fff;}
 div.jsstadmin-add-on-page-wrp div.add-on-page-cnt div.add-on-list div.add-on-item.autocleanup a.add-on-btn {background: #2c7be5;}
 div.jsstadmin-add-on-page-wrp div.add-on-page-cnt div.add-on-list div.add-on-item.autocleanup a.add-on-btn:hover {border-color: #2c7be5;color: #2c7be5 !important;background: #fff;}
+div.jsstadmin-add-on-page-wrp div.add-on-page-cnt div.add-on-list div.add-on-item.instantfix a.add-on-btn {background: #e8912f;}
+div.jsstadmin-add-on-page-wrp div.add-on-page-cnt div.add-on-list div.add-on-item.instantfix a.add-on-btn:hover {border-color: #e8912f;color: #e8912f !important;background: #fff;}
+div.jsstadmin-add-on-page-wrp div.add-on-page-cnt div.add-on-list div.add-on-item.aiticketautopilot a.add-on-btn {background: #8b6fce;}
+div.jsstadmin-add-on-page-wrp div.add-on-page-cnt div.add-on-list div.add-on-item.aiticketautopilot a.add-on-btn:hover {border-color: #8b6fce;color: #8b6fce !important;background: #fff;}
 
 
 .jsst-addon-go-back-messsage-wrap {display: inline-block;width: 100%;text-align: center;padding: 30px;}

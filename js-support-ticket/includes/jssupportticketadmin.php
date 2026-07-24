@@ -350,6 +350,30 @@ class jssupportticketadmin {
                 $this->addMissingAddonPage('download');
             }
 
+            if(in_array('instantfix', jssupportticket::$_active_addons)){
+                add_submenu_page('jssupportticket_hide', // parent slug
+                    esc_html(__('Instant Fix', 'js-support-ticket')), // Page title
+                    esc_html(__('Instant Fix', 'js-support-ticket')), // menu title
+                    'jsst_support_ticket', // capability
+                    'instantfix', //menu slug
+                    array($this, 'showAdminPage') // function name
+                );
+            }else{
+                $this->addMissingAddonPage('instantfix');
+            }
+
+            if(in_array('aiticketautopilot', jssupportticket::$_active_addons)){
+                add_submenu_page('jssupportticket_hide', // parent slug
+                    esc_html(__('AI Autopilot', 'js-support-ticket')), // Page title
+                    esc_html(__('AI Autopilot', 'js-support-ticket')), // menu title
+                    'jsst_support_ticket', // capability
+                    'aiticketautopilot', //menu slug
+                    array($this, 'showAdminPage') // function name
+                );
+            }else{
+                $this->addMissingAddonPage('aiticketautopilot');
+            }
+
             add_submenu_page('jssupportticket', // parent slug
                     esc_html(__('Install Addons', 'js-support-ticket')), // Page title
                     esc_html(__('Install Addons', 'js-support-ticket')), // menu title

@@ -14,7 +14,7 @@ if (!defined('ABSPATH'))
             $jsst_post_data['response'] = $jsst_grresponse;
             $jsst_post_data['remoteip'] = $jsst_ip;
 
-            $jsst_response = wp_remote_post( $jsst_google_url, array('body' => $jsst_post_data,'timeout'=>7,'sslverify'=>false));
+            $jsst_response = wp_remote_post( $jsst_google_url, array('body' => $jsst_post_data,'timeout'=>7,'sslverify'=>true));
             if( !is_wp_error($jsst_response) && $jsst_response['response']['code'] == 200 && isset($jsst_response['body']) ){
                 $jsst_result = $jsst_response['body'];
             }else{

@@ -25,7 +25,7 @@ $jsst_jssupportticket_js ='
         }
         $jsst_jssupportticket_js .='
 
-        var jsstconfigid = "'. $jsst_jsstconfigid .'";
+        var jsstconfigid = "'. esc_js($jsst_jsstconfigid) .'";
         if (jsstconfigid == "general") {
             jQuery("#general").css("display","inline-block");
             jQuery("#cn_gen").addClass("active");

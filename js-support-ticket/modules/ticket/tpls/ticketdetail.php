@@ -1618,7 +1618,7 @@ if (jssupportticket::$_config['offline'] == 2) {
                                         if(in_array('privatecredentials',jssupportticket::$_active_addons) && $jsst_credentialpermission){ ?>
                                             <?php $jsst_nonce = wp_create_nonce('get-private-credentials-'.jssupportticket::$jsst_data[0]->id) ?>
                                             <a class="js-tkt-det-actn-btn" href="javascript:return false;" id="private-credentials-button" onclick="getCredentails(<?php echo esc_js(jssupportticket::$jsst_data[0]->id); ?>, '<?php echo esc_js($jsst_nonce); ?>')">
-                                                <?php $jsst_query = "SELECT count(id) FROM `" . jssupportticket::$_db->prefix . "js_ticket_privatecredentials` WHERE status = 1 AND ticketid = ".esc_sql(jssupportticket::$jsst_data[0]->id);
+                                                <?php $jsst_query = jssupportticket::$_db->prepare("SELECT count(id) FROM `" . jssupportticket::$_db->prefix . "js_ticket_privatecredentials` WHERE status = 1 AND ticketid = %d", jssupportticket::$jsst_data[0]->id);
                                                 $jsst_cred_count = jssupportticket::$_db->get_var($jsst_query);
                                                 if ($jsst_cred_count>0) {
                                                     $jsst_img_name = 'private-credentials-exist.png';
@@ -1672,7 +1672,7 @@ if (jssupportticket::$_config['offline'] == 2) {
                                             if(in_array('privatecredentials',jssupportticket::$_active_addons) && jssupportticket::$jsst_data[0]->status != 5 && jssupportticket::$jsst_data[0]->status != 6){ ?>
                                                 <?php $jsst_nonce = wp_create_nonce('get-private-credentials-'.jssupportticket::$jsst_data[0]->id) ?>
                                                 <a class="js-tkt-det-actn-btn" href="javascript:return false;" id="private-credentials-button" onclick="getCredentails(<?php echo esc_js(jssupportticket::$jsst_data[0]->id); ?>, '<?php echo esc_js($jsst_nonce); ?>')">
-                                                    <?php $jsst_query = "SELECT count(id) FROM `" . jssupportticket::$_db->prefix . "js_ticket_privatecredentials` WHERE status = 1 AND ticketid = ".esc_sql(jssupportticket::$jsst_data[0]->id);
+                                                    <?php $jsst_query = jssupportticket::$_db->prepare("SELECT count(id) FROM `" . jssupportticket::$_db->prefix . "js_ticket_privatecredentials` WHERE status = 1 AND ticketid = %d", jssupportticket::$jsst_data[0]->id);
                                                     $jsst_cred_count = jssupportticket::$_db->get_var($jsst_query);
                                                     if ($jsst_cred_count>0) {
                                                         $jsst_img_name = 'private-credentials-exist.png';
@@ -1701,17 +1701,22 @@ if (jssupportticket::$_config['offline'] == 2) {
                                         <?php } ?>
                                         <?php if(in_array('banemail', jssupportticket::$_active_addons)){ ?>
                                             <?php
-                                                if (JSSTincluder::getJSModel('banemail')->isEmailBan(jssupportticket::$jsst_data[0]->email)) { ?>
+                                                $jsst_manageoptions = current_user_can('manage_options');
+                                                if (JSSTincluder::getJSModel('banemail')->isEmailBan(jssupportticket::$jsst_data[0]->email)) {
+                                                    if ($jsst_manageoptions || JSSTincluder::getJSModel('userpermissions')->checkPermissionGrantedForTask('Unban Email')) { ?>
                                                     <a class="js-tkt-det-actn-btn" href="#" onclick="actionticket(7);">
                                                         <img alt="<?php echo esc_attr(__('image','js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/ticket-detail/un-ban.png" title="<?php echo esc_attr(__('Unban Email', 'js-support-ticket')); ?>" />
                                                         <span><?php echo esc_html(__('Unban Email', 'js-support-ticket')); ?></span>
                                                     </a>
-                                                <?php } else { ?>
+                                                    <?php }
+                                                } else {
+                                                    if ($jsst_manageoptions || JSSTincluder::getJSModel('userpermissions')->checkPermissionGrantedForTask('Ban Email And Close Ticket')) { ?>
                                                     <a class="js-tkt-det-actn-btn" href="#" onclick="actionticket(6);">
                                                         <img alt="<?php echo esc_attr(__('image','js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/ticket-detail/ban.png" title="<?php echo esc_attr(__('Ban Email', 'js-support-ticket')); ?>" />
                                                         <span><?php echo esc_html(__('Ban Email', 'js-support-ticket')); ?></span>
                                                     </a>
-                                                <?php } ?>
+                                                    <?php }
+                                                } ?>
                                         <?php } ?>
                                         <?php if(in_array('overdue', jssupportticket::$_active_addons)){ ?>
                                             <?php if (jssupportticket::$jsst_data[0]->isoverdue == 1) { ?>
@@ -1726,13 +1731,13 @@ if (jssupportticket::$_config['offline'] == 2) {
                                                 </a>
                                             <?php } ?>
                                         <?php } ?>
-                                        <?php if (in_array('actions',jssupportticket::$_active_addons)) { ?>
+                                        <?php if (in_array('actions',jssupportticket::$_active_addons) && ( current_user_can('manage_options') || JSSTincluder::getJSModel('userpermissions')->checkPermissionGrantedForTask('Mark In Progress') ) ) { ?>
                                             <a class="js-tkt-det-actn-btn" href="#" onclick="actionticket(9);">
                                                 <img alt="<?php echo esc_attr(__('image','js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL) . 'includes/images/ticket-detail/in-progress.png'; ?>" title="<?php echo esc_attr(__('Mark In Progress', 'js-support-ticket')); ?>" />
                                                 <span><?php echo esc_html(__('Mark In Progress', 'js-support-ticket'));?></span>
                                             </a>
                                         <?php } ?>
-                                        <?php if(in_array('banemail', jssupportticket::$_active_addons)){ ?>
+                                        <?php if(in_array('banemail', jssupportticket::$_active_addons) && ( current_user_can('manage_options') || JSSTincluder::getJSModel('userpermissions')->checkPermissionGrantedForTask('Ban Email And Close Ticket') ) ){ ?>
                                             <a class="js-tkt-det-actn-btn" href="#" onclick="actionticket(10);">
                                                 <img alt="<?php echo esc_attr(__('image','js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL) . 'includes/images/ticket-detail/ban-email-close-ticket.png'; ?>" title="<?php echo esc_attr(__('Ban Email And Close Ticket', 'js-support-ticket')); ?>" />
                                                 <span><?php echo esc_html(__('Ban Email And Close Ticket', 'js-support-ticket')); ?></span>

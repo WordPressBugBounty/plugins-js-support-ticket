@@ -15,7 +15,7 @@ class JSSTuser
             $jsst_wpuserid = get_current_user_id();
             if (!is_numeric($jsst_wpuserid))
                 return false;
-            $jsst_query = "SELECT * FROM `".jssupportticket::$_db->prefix."js_ticket_users` WHERE wpuid = " . intval($jsst_wpuserid);
+            $jsst_query = jssupportticket::$_db->prepare("SELECT * FROM `".jssupportticket::$_db->prefix."js_ticket_users` WHERE wpuid = %d", $jsst_wpuserid);
             $jsst_currentuser = jssupportticket::$_db->get_row($jsst_query);
             $jsst_jssupportticket_registerform = JSSTrequest::getVar('jsst_support_register_nonce', 'post', '');
             $jsst_registerform = JSSTrequest::getVar('jssupportticket_registerform', 'post', 0);
@@ -66,7 +66,7 @@ class JSSTuser
                 $jsst_row->store();
 
                 if (is_numeric($jsst_row->id)) {
-                    $jsst_query = "SELECT * FROM `".jssupportticket::$_db->prefix."js_ticket_users` WHERE id = " . intval($jsst_row->id);
+                    $jsst_query = jssupportticket::$_db->prepare("SELECT * FROM `".jssupportticket::$_db->prefix."js_ticket_users` WHERE id = %d", $jsst_row->id);
                     $jsst_currentuser = jssupportticket::$_db->get_results($jsst_query);
                 }
             }
@@ -76,7 +76,7 @@ class JSSTuser
 
             if (in_array('sociallogin', jssupportticket::$_active_addons)){
                 if (isset($_COOKIE['jssupportticket-socialid']) && !empty($_COOKIE['jssupportticket-socialid'])) { // social user is logged in
-                    $jsst_query = "SELECT * FROM `".jssupportticket::$_db->prefix."js_ticket_users` WHERE socialid = '" . jssupportticket::JSST_sanitizeData($_COOKIE['jssupportticket-socialid']) . "'"; // JSST_sanitizeData() function uses wordpress santize functions
+                    $jsst_query = jssupportticket::$_db->prepare("SELECT * FROM `".jssupportticket::$_db->prefix."js_ticket_users` WHERE socialid = %s", jssupportticket::JSST_sanitizeData($_COOKIE['jssupportticket-socialid'])); // JSST_sanitizeData() function uses wordpress santize functions
                     $this->jsst_currentuser = jssupportticket::$_db->get_row($jsst_query);
 
                     $this->jsst_socialmedia = isset($_COOKIE['jssupportticket-socialmedia']) ? jssupportticket::JSST_sanitizeData($_COOKIE['jssupportticket-socialmedia']) : ''; // JSST_sanitizeData() function uses wordpress santize functions
@@ -168,7 +168,7 @@ class JSSTuser
             $jsst_wpuserid = JSSTincluder::getObjectClass('user')->uid();
             if (!is_numeric($jsst_wpuserid))
                 return false;
-            $jsst_query = "SELECT COUNT(id) FROM `".jssupportticket::$_db->prefix."js_ticket_users` WHERE wpuid = " . intval($jsst_wpuserid);
+            $jsst_query = jssupportticket::$_db->prepare("SELECT COUNT(id) FROM `".jssupportticket::$_db->prefix."js_ticket_users` WHERE wpuid = %d", $jsst_wpuserid);
             $jsst_result = jssupportticket::$_db->get_results($jsst_query);
             if ($jsst_result > 0) {
                 return true;
@@ -200,7 +200,7 @@ class JSSTuser
     function getjssupportticketuidbyuserid($jsst_userid)
     {
         if (!is_numeric($jsst_userid)) return false;
-        $jsst_query = "SELECT id FROM `".jssupportticket::$_db->prefix."js_ticket_users` WHERE wpuid = " . intval($jsst_userid);
+        $jsst_query = jssupportticket::$_db->prepare("SELECT id FROM `".jssupportticket::$_db->prefix."js_ticket_users` WHERE wpuid = %d", $jsst_userid);
         $jsst_uid = jssupportticket::$_db->get_results($jsst_query);
         return $jsst_uid;
     }
@@ -213,7 +213,7 @@ class JSSTuser
         if (!is_numeric($jsst_uid)) return false;
 
         $jsst_model = JSSTincluder::getJSModel('ticket');
-        $jsst_query = "SELECT id, ticketid FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE wpuid = " . intval($jsst_uid);
+        $jsst_query = jssupportticket::$_db->prepare("SELECT id, ticketid FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE wpuid = %d", $jsst_uid);
         $jsst_tickets = jssupportticket::$_db->get_results($jsst_query);
 
         do_action('jsst_addon_deletequery_for_user');
@@ -225,12 +225,13 @@ class JSSTuser
             LEFT JOIN `" . jssupportticket::$_db->prefix . "js_ticket_activity_log` AS activity_log ON activity_log.uid = user.id
             LEFT JOIN `" . jssupportticket::$_db->prefix . "js_ticket_erasedatarequests` AS erasedatarequests ON erasedatarequests.uid = user.id
             " . jssupportticket::$_addon_query['join'] . "
-            WHERE user.id = " . intval($jsst_uid);
+            WHERE user.id = %d";
+        $jsst_query = jssupportticket::$_db->prepare($jsst_query, $jsst_uid);
         jssupportticket::$_db->query($jsst_query);
 
         do_action('jsst_reset_aadon_query');
-        $jsst_query = "DELETE user FROM `" . jssupportticket::$_db->prefix . "js_ticket_users` AS user WHERE wpuid = " . intval($jsst_uid);
-        
+        $jsst_query = jssupportticket::$_db->prepare("DELETE user FROM `" . jssupportticket::$_db->prefix . "js_ticket_users` AS user WHERE wpuid = %d", $jsst_uid);
+
         if (jssupportticket::$_db->query($jsst_query)) {
             // --- START FILESYSTEM FIX ---
             global $wp_filesystem;
@@ -262,7 +263,7 @@ class JSSTuser
         if (!is_numeric($jsst_wpuid))
             return false;
 
-        $jsst_query = "SELECT id FROM `".jssupportticket::$_db->prefix."js_ticket_users` WHERE wpuid = " . intval($jsst_wpuid);
+        $jsst_query = jssupportticket::$_db->prepare("SELECT id FROM `".jssupportticket::$_db->prefix."js_ticket_users` WHERE wpuid = %d", $jsst_wpuid);
         $jsst_result = jssupportticket::$_db->get_var($jsst_query);
         return $jsst_result;
     }
@@ -271,7 +272,7 @@ class JSSTuser
         if (!is_numeric($jsst_uid))
             return false;
 
-        $jsst_query = "SELECT display_name,user_nicename FROM `".jssupportticket::$_db->prefix."js_ticket_users` WHERE id = " . intval($jsst_uid);
+        $jsst_query = jssupportticket::$_db->prepare("SELECT display_name,user_nicename FROM `".jssupportticket::$_db->prefix."js_ticket_users` WHERE id = %d", $jsst_uid);
         $jsst_result = jssupportticket::$_db->get_row($jsst_query);
         return $jsst_result;
     }

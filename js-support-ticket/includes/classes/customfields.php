@@ -610,7 +610,7 @@ class JSSTcustomfields {
         if (!is_admin()) {
             $jsst_inquery .= ' AND adminonly != 1 ';
         }
-        $jsst_query = "SELECT field,fieldtitle,isuserfield,userfieldtype,userfieldparams,multiformid  FROM " . jssupportticket::$_db->prefix . "js_ticket_fieldsordering WHERE isuserfield = 1 AND " . $jsst_published . " AND fieldfor =" . intval($jsst_fieldfor) . $jsst_inquery. " AND multiformid =" . intval($jsst_multiformid). " ORDER BY ordering";
+        $jsst_query = jssupportticket::$_db->prepare("SELECT field,fieldtitle,isuserfield,userfieldtype,userfieldparams,multiformid  FROM " . jssupportticket::$_db->prefix . "js_ticket_fieldsordering WHERE isuserfield = 1 AND " . $jsst_published . " AND fieldfor =%d" . $jsst_inquery. " AND multiformid =%d ORDER BY ordering", $jsst_fieldfor, $jsst_multiformid);
         $jsst_data = jssupportticket::$_db->get_results($jsst_query);
         return $jsst_data;
     }
@@ -628,7 +628,7 @@ class JSSTcustomfields {
             $jsst_inquery .= " AND adminonly != 1";
         }
 
-        $jsst_query = "SELECT `rows`,`cols`,required,field,fieldtitle,isuserfield,userfieldtype,userfieldparams,depandant_field  FROM " . jssupportticket::$_db->prefix . "js_ticket_fieldsordering WHERE isuserfield = 1 AND " . $jsst_inquery . " AND fieldfor =" . intval($jsst_fieldfor) ." ORDER BY ordering ";
+        $jsst_query = jssupportticket::$_db->prepare("SELECT `rows`,`cols`,required,field,fieldtitle,isuserfield,userfieldtype,userfieldparams,depandant_field  FROM " . jssupportticket::$_db->prefix . "js_ticket_fieldsordering WHERE isuserfield = 1 AND " . $jsst_inquery . " AND fieldfor =%d ORDER BY ordering ", $jsst_fieldfor);
         $jsst_data = jssupportticket::$_db->get_results($jsst_query);
         return $jsst_data;
     }
@@ -638,7 +638,7 @@ class JSSTcustomfields {
             return false;
         }
 
-        $jsst_query = "SELECT `rows`,`cols`,required,field,fieldtitle,isuserfield,userfieldtype,userfieldparams,depandant_field  FROM " . jssupportticket::$_db->prefix . "js_ticket_fieldsordering WHERE isuserfield = 1 AND published = 1 AND search_admin =1 AND fieldfor =" . intval($jsst_fieldfor) ." ORDER BY ordering ";
+        $jsst_query = jssupportticket::$_db->prepare("SELECT `rows`,`cols`,required,field,fieldtitle,isuserfield,userfieldtype,userfieldparams,depandant_field  FROM " . jssupportticket::$_db->prefix . "js_ticket_fieldsordering WHERE isuserfield = 1 AND published = 1 AND search_admin =1 AND fieldfor =%d ORDER BY ordering ", $jsst_fieldfor);
         $jsst_data = jssupportticket::$_db->get_results($jsst_query);
         return $jsst_data;
     }
@@ -651,7 +651,7 @@ class JSSTcustomfields {
         }
         $jsst_value = '';
         $jsst_returnarray = array();
-        $jsst_query = "SELECT field from " . jssupportticket::$_db->prefix . "js_ticket_fieldsordering WHERE isuserfield = 1 AND " . $jsst_published . " AND depandant_field ='" . esc_sql($jsst_fieldfor) . "'";
+        $jsst_query = jssupportticket::$_db->prepare("SELECT field from " . jssupportticket::$_db->prefix . "js_ticket_fieldsordering WHERE isuserfield = 1 AND " . $jsst_published . " AND depandant_field =%s", $jsst_fieldfor);
         $jsst_field = jssupportticket::$_db->get_var($jsst_query);
         if ($jsst_data != null) {
             foreach ($jsst_data as $jsst_key => $jsst_val) {
@@ -661,7 +661,7 @@ class JSSTcustomfields {
                 }
             }
         }
-        $jsst_query = "SELECT userfieldparams from " . jssupportticket::$_db->prefix . "js_ticket_fieldsordering WHERE isuserfield = 1 AND " . $jsst_published . " AND field ='" . esc_sql($jsst_fieldfor) . "'";
+        $jsst_query = jssupportticket::$_db->prepare("SELECT userfieldparams from " . jssupportticket::$_db->prefix . "js_ticket_fieldsordering WHERE isuserfield = 1 AND " . $jsst_published . " AND field =%s", $jsst_fieldfor);
         $jsst_field = jssupportticket::$_db->get_var($jsst_query);
         $jsst_fieldarray = json_decode($jsst_field);
         foreach ($jsst_fieldarray as $jsst_key => $jsst_val) {

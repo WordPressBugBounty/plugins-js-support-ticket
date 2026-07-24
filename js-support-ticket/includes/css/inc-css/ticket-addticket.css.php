@@ -182,9 +182,37 @@ $jsst_jssupportticket_css .= '
             z-index: 2;
             bottom: 15px !important;
     }
-     .js-ticket-from-field.js-ticket-form-field-select.has-error span.jsst-help-block.form-error {
-        bottom: -10px !important;
-}
+    .js-ticket-from-field.js-ticket-form-field-select.has-error span.jsst-help-block.form-error {bottom: -10px !important;}
+    #jsst-instant-fix-wrapper {background-color: #f8f9fb;border: 1px solid '. $jsst_color5 .';border-left: 4px solid ' . $jsst_color1 . ';border-radius: 4px;padding: 15px;margin-top: 15px;margin-bottom: 15px;transition: all 0.3s ease;}
+    #jsst-instant-fix-wrapper p {color: ' . $jsst_color4 . ';}
+    #jsst-instant-fix-wrapper .js-ticket-from-field-title {font-size: 20px;display: flex;align-items: center;gap: 8px;}
+    #jsst-instant-fix-wrapper .jsst-fix-loading {text-align: center;padding: 15px;color: #666;font-size: 15px;}
+    #jsst-instant-fix-wrapper .jsst-fix-loading img {vertical-align: middle;margin-right: 8px;width: 20px;height: 20px;}
+    #jsst-instant-fix-wrapper .jsst-fix-grid {display: grid;grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));gap: 12px;margin-bottom: 15px;width: 100%;}
+    #jsst-instant-fix-wrapper .jsst-fix-card {display: flex;background: ' . $jsst_color3 . ';border: 1px solid '. $jsst_color5 .';border-radius: 4px;text-decoration: none;color: inherit;transition: box-shadow 0.2s ease, border-color 0.2s ease;overflow: hidden;}
+    #jsst-instant-fix-wrapper .jsst-fix-card:hover {box-shadow: 0 4px 10px rgba(0,0,0,0.08);border-color: ' . $jsst_color1 . ';text-decoration: none;color: inherit;}
+    #jsst-instant-fix-wrapper .jsst-fix-thumb {flex-shrink: 0;width: 80px;min-height: 80px;background-color: #f0f2f5;display: flex;align-items: center;justify-content: center;overflow: hidden;}
+    #jsst-instant-fix-wrapper .jsst-fix-thumb img {width: 100%;height: 100%;object-fit: cover;}
+    #jsst-instant-fix-wrapper .jsst-fix-content {padding: 10px 12px;flex: 1;display: flex;flex-direction: column;justify-content: center;min-width: 0;}
+    #jsst-instant-fix-wrapper .jsst-fix-type {font-size: 13px;text-transform: uppercase;color: ' . $jsst_color4 . ';margin-bottom: 8px;font-weight: 600;display: flex;align-items: center;}
+    #jsst-instant-fix-wrapper .jsst-fix-timestamp {background: #eef2ff;color: ' . $jsst_color1 . ';padding: 2px 6px;border-radius: 3px;font-size: 12px;margin-inline-start: 6px;text-transform: none;font-weight: 500;}
+    #jsst-instant-fix-wrapper .jsst-fix-title {font-weight: 600;color: ' . $jsst_color2 . ';margin: 0 0 5px 0;line-height: 1.3;display: -webkit-box;-webkit-line-clamp: 2;-webkit-box-orient: vertical;overflow: hidden;}
+    #jsst-instant-fix-wrapper .jsst-fix-excerpt {font-size: 14px;color: #666;margin: 0;line-height: 1.4;display: -webkit-box;-webkit-line-clamp: 2;-webkit-box-orient: vertical;overflow: hidden;}
+    #jsst-instant-fix-wrapper .jsst-fix-footer {text-align: center;padding-top: 12px;border-top: 1px dashed #d1d5db;margin-top: 5px;}
+    #jsst-instant-fix-wrapper .jsst-fix-footer .button {background: ' . $jsst_color1 . ';color: ' . $jsst_color7 . ';border: none;padding: 8px 20px;border-radius: 4px;cursor: pointer;font-size: 15px;font-weight: 500;transition: background 0.2s;box-shadow: none;text-shadow: none;}
+    #jsst-instant-fix-wrapper .jsst-fix-footer .button:hover {background: ' . $jsst_color2 . ';}
+    #jsst-instant-fix-wrapper .jsst-ai-card {background: linear-gradient(135deg, #f8fafc 0%, #eff6ff 100%) !important;border: 1px solid #bfdbfe !important;border-left: 4px solid #3b82f6 !important;padding: 15px !important;display: flex !important;align-items: flex-start !important;gap: 15px;grid-column: 1 / -1;cursor: default !important;}
+    #jsst-instant-fix-wrapper .jsst-ai-icon-wrp {flex-shrink: 0;min-width: 40px;width: 40px;height: 40px;background: linear-gradient(135deg, #3b82f6, #8b5cf6);border-radius: 50%;display: flex;align-items: center;justify-content: center;box-shadow: 0 4px 6px -1px rgba(59, 130, 246, 0.3);}
+    #jsst-instant-fix-wrapper .jsst-ai-sparkle {width: 22px;height: 22px;color: ' . $jsst_color7 . ';}
+    #jsst-instant-fix-wrapper .jsst-ai-content {flex: 1;padding: 0 !important;}
+    #jsst-instant-fix-wrapper .jsst-ai-badge {display: inline-block;font-size: 10px;font-weight: 700;text-transform: uppercase;color: #3b82f6;background: #dbeafe;padding: 3px 8px;border-radius: 4px;margin-bottom: 8px;letter-spacing: 0.5px;}
+    #jsst-instant-fix-wrapper .jsst-ai-text {font-size: 14px;color: #1e3a8a;margin: 0;line-height: 1.6;white-space: pre-line;display: block; -webkit-line-clamp: unset;-webkit-box-orient: unset;overflow: visible;}
+    html[dir="rtl"] #jsst-instant-fix-wrapper {border-left: 1px solid '. $jsst_color5 .';border-right: 4px solid ' . $jsst_color1 . ';}
+    html[dir="rtl"] #jsst-instant-fix-wrapper .jsst-fix-loading img {margin-right: 0;margin-left: 8px;}
+    html[dir="rtl"] #jsst-instant-fix-wrapper .jsst-ai-card {border-left: 1px solid #bfdbfe !important;border-right: 4px solid #3b82f6 !important;}
+    html[dir="rtl"] #jsst-instant-fix-wrapper .jsst-fix-card {flex-direction: row-reverse;}
+    html[dir="rtl"] #jsst-instant-fix-wrapper .jsst-fix-content {text-align: right;}
+
 .js-attachment-field .tk_attachment_value_wrapper .tk_attachment_value_text.has-error span.jsst-help-block.form-error {
     bottom: -232px !important;}
     @keyframes slideInFromTop {
@@ -448,6 +476,13 @@ $jsst_jssupportticket_css .= '
         div.tk_attachment_value_wrapperform span.tk_attachment_value_text{
             width: calc(50% - 20px); /* Two columns on tablets */
         }
+        #jsst-instant-fix-wrapper .jsst-fix-grid {grid-template-columns: 1fr;}
+        #jsst-instant-fix-wrapper .jsst-fix-thumb {width: 60px;min-height: 60px;}
+        #jsst-instant-fix-wrapper .jsst-fix-title {font-size: 14px;}
+        #jsst-instant-fix-wrapper .jsst-ai-card {padding: 12px !important;gap: 10px;}
+        #jsst-instant-fix-wrapper .jsst-ai-icon-wrp {width: 32px;height: 32px;}
+        #jsst-instant-fix-wrapper .jsst-ai-sparkle {width: 18px;height: 18px;}
+        #jsst-instant-fix-wrapper .jsst-ai-text {font-size: 13px !important;}
     }
     @media (max-width: 480px) {
         div.tk_attachment_value_wrapperform span.tk_attachment_value_text{

@@ -65,20 +65,20 @@ class JSSTemailtemplateModel {
                 break;
         }
         if (!empty($jsst_langcode)) {
-            $jsst_query = "SELECT * FROM `" . jssupportticket::$_db->prefix . "js_ticket_multilanguageemailtemplates` WHERE templatefor = '" . esc_sql($jsst_tempatefor) . "' AND language_id = '" . esc_sql($jsst_langcode) . "'";
+            $jsst_query = jssupportticket::$_db->prepare("SELECT * FROM `" . jssupportticket::$_db->prefix . "js_ticket_multilanguageemailtemplates` WHERE templatefor = %s AND language_id = %s", $jsst_tempatefor, $jsst_langcode);
         } else {
-            $jsst_query = "SELECT * FROM `" . jssupportticket::$_db->prefix . "js_ticket_emailtemplates` WHERE templatefor = '" . esc_sql($jsst_tempatefor) . "'";
+            $jsst_query = jssupportticket::$_db->prepare("SELECT * FROM `" . jssupportticket::$_db->prefix . "js_ticket_emailtemplates` WHERE templatefor = %s", $jsst_tempatefor);
         }
         if (!empty($jsst_formid)) {
-            $jsst_query .= " AND multiformid = " . intval($jsst_formid);
+            $jsst_query .= jssupportticket::$_db->prepare(" AND multiformid = %d", $jsst_formid);
         } else {
             $jsst_query .= " AND (multiformid IS NULL OR multiformid = '')";
         }
         jssupportticket::$jsst_data[0] = jssupportticket::$_db->get_row(($jsst_query));
         $jsst_multiformname = '';
         if(in_array('multiform', jssupportticket::$_active_addons) && !empty(jssupportticket::$jsst_data[0]->multiformid)){
-            $jsst_query = "SELECT title
-                FROM `" . jssupportticket::$_db->prefix . "js_ticket_multiform` WHERE id = ".esc_sql(jssupportticket::$jsst_data[0]->multiformid);
+            $jsst_query = jssupportticket::$_db->prepare("SELECT title
+                FROM `" . jssupportticket::$_db->prefix . "js_ticket_multiform` WHERE id = %d", jssupportticket::$jsst_data[0]->multiformid);
             $jsst_multiformname = jssupportticket::$_db->get_var($jsst_query);
         }
         jssupportticket::$jsst_data[0]->multiformname = $jsst_multiformname;
@@ -96,6 +96,7 @@ class JSSTemailtemplateModel {
         if (in_array('multiform', jssupportticket::$_active_addons) || in_array('multilanguageemailtemplates', jssupportticket::$_active_addons)) {
             
             $jsst_query = '';
+            $jsst_args = array();
             if(in_array('multiform', jssupportticket::$_active_addons)){
                 $jsst_query = "
                     (
@@ -111,9 +112,10 @@ class JSSTemailtemplateModel {
                             ON tmpl.multiformid = form.id
                         LEFT JOIN `" . jssupportticket::$_db->prefix . "js_ticket_departments` AS department
                             ON form.departmentid = department.id
-                        WHERE tmpl.templatefor = '" . esc_sql($jsst_tempatefor) . "'
+                        WHERE tmpl.templatefor = %s
                     )
                 ";
+                $jsst_args[] = $jsst_tempatefor;
             }
             if (in_array('multiform', jssupportticket::$_active_addons) && in_array('multilanguageemailtemplates', jssupportticket::$_active_addons)) {
                 $jsst_query .= " UNION ALL ";
@@ -135,9 +137,10 @@ class JSSTemailtemplateModel {
                                 ON ltmpl.multiformid = form.id
                             LEFT JOIN `" . jssupportticket::$_db->prefix . "js_ticket_departments` AS department
                                 ON form.departmentid = department.id
-                            WHERE ltmpl.templatefor = '" . esc_sql($jsst_tempatefor) . "'
+                            WHERE ltmpl.templatefor = %s
                         )
                     ";
+                    $jsst_args[] = $jsst_tempatefor;
                 } else {
                     $jsst_query .= "
                         (
@@ -147,12 +150,14 @@ class JSSTemailtemplateModel {
                                 ltmpl.language_id AS language,
                                 'multi' AS source
                             FROM `" . jssupportticket::$_db->prefix . "js_ticket_multilanguageemailtemplates` AS ltmpl
-                            WHERE ltmpl.templatefor = '" . esc_sql($jsst_tempatefor) . "'
+                            WHERE ltmpl.templatefor = %s
                         )
                     ";
+                    $jsst_args[] = $jsst_tempatefor;
                 }
             }
 
+            $jsst_query = jssupportticket::$_db->prepare($jsst_query, $jsst_args);
             $jsst_list = jssupportticket::$_db->get_results($jsst_query);
 
             $jsst_langLookup = [];
@@ -193,8 +198,8 @@ class JSSTemailtemplateModel {
 
     //For the Email template
     function storeEmailTemplate($jsst_data) {
-        $jsst_data['title'] = isset($jsst_data['title']) ? $jsst_data['title'] : '';
-        $jsst_data['status'] = isset($jsst_data['status']) ? $jsst_data['status'] : 1;
+        $jsst_data['title'] = isset($jsst_data['title']) ? sanitize_text_field($jsst_data['title']) : '';
+        $jsst_data['status'] = isset($jsst_data['status']) ? absint($jsst_data['status']) : 1;
 
         $jsst_row = JSSTincluder::getJSTable('emailtemplates');
 
@@ -208,7 +213,7 @@ class JSSTemailtemplateModel {
         if ($jsst_error == 0) {
             JSSTmessage::setMessage(esc_html(__('Email template has been stored', 'js-support-ticket')), 'updated');
             if(isset($jsst_data['multiformid']) && empty($jsst_data['multiformid'])) {
-                $jsst_query = "UPDATE `" . jssupportticket::$_db->prefix . "js_ticket_emailtemplates` SET multiformid = NULL WHERE multiformid = '0' AND id = ".$jsst_row->id;
+                $jsst_query = jssupportticket::$_db->prepare("UPDATE `" . jssupportticket::$_db->prefix . "js_ticket_emailtemplates` SET multiformid = NULL WHERE multiformid = '0' AND id = %d", $jsst_row->id);
                 jssupportticket::$_db->query($jsst_query);
             }
         } else {
@@ -219,12 +224,15 @@ class JSSTemailtemplateModel {
     }
 
     function getDefaultEmailTemplate() {
+        if (!current_user_can('manage_options')) {
+            return false;
+        }
         $jsst_nonce = JSSTrequest::getVar('_wpnonce');
         if (! wp_verify_nonce( $jsst_nonce, 'list-email-template') ) {
             die( 'Security check Failed' );
         }
         $jsst_templatefor = JSSTrequest::getVar('templatefor');
-        $jsst_query = "SELECT * FROM `" . jssupportticket::$_db->prefix . "js_ticket_emailtemplates` WHERE templatefor = '" . esc_sql($jsst_templatefor) . "'";
+        $jsst_query = jssupportticket::$_db->prepare("SELECT * FROM `" . jssupportticket::$_db->prefix . "js_ticket_emailtemplates` WHERE templatefor = %s", $jsst_templatefor);
         $jsst_result = jssupportticket::$_db->get_row($jsst_query);
         $jsst_data =  array('defaultsubject'=>htmlentities($jsst_result->subject),'defaultbody'=>htmlentities($jsst_result->body) , 'defaultid'=>htmlentities($jsst_result->id));
         return wp_json_encode($jsst_data);

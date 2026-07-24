@@ -18,7 +18,7 @@ class JSSTproductController {
                     JSSTincluder::getJSModel('product')->getProducts();
                     break;
                 case 'admin_addproduct':
-                    $jsst_id = JSSTrequest::getVar('jssupportticketid', 'get');
+                    $jsst_id = absint( JSSTrequest::getVar('jssupportticketid', 'get') );
                     JSSTincluder::getJSModel('product')->getProductForForm($jsst_id);
                     break;
                 default:
@@ -72,7 +72,7 @@ class JSSTproductController {
         if (! wp_verify_nonce( $jsst_nonce, 'delete-product-'.$jsst_id) ) {
             die( 'Security check Failed' );
         }
-        JSSTincluder::getJSModel('product')->removeProduct($jsst_id);
+        JSSTincluder::getJSModel('product')->removeProduct( absint( $jsst_id ) );
         if (is_admin()) {
             $jsst_url = admin_url("admin.php?page=product&jstlay=products");
         } else {
@@ -88,7 +88,7 @@ class JSSTproductController {
         if (! wp_verify_nonce( $jsst_nonce, 'change-status-'.$jsst_id) ) {
             die( 'Security check Failed' );
         }
-        JSSTincluder::getJSModel('product')->changeStatus($jsst_id);
+        JSSTincluder::getJSModel('product')->changeStatus( absint( $jsst_id ) );
         $jsst_url = admin_url("admin.php?page=product&jstlay=products");
         $jsst_pagenum = JSSTrequest::getVar('pagenum');
         if ($jsst_pagenum)
@@ -103,7 +103,7 @@ class JSSTproductController {
             die( 'Security check Failed' );
         }
         $jsst_id = JSSTrequest::getVar('productid');
-        JSSTincluder::getJSModel('product')->setOrdering($jsst_id);
+        JSSTincluder::getJSModel('product')->setOrdering( absint( $jsst_id ) );
         $jsst_pagenum = JSSTrequest::getVar('pagenum');
         $jsst_url = "admin.php?page=product&jstlay=products";
         if ($jsst_pagenum)

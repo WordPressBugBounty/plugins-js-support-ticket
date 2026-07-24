@@ -22,7 +22,7 @@ class JSSTjssupportticketController {
                 case 'controlpanel':
                     JSSTincluder::getJSModel('jssupportticket')->getControlPanelData();
                     include_once JSST_PLUGIN_PATH . 'includes/updates/updates.php';
-                    JSSTupdates::checkUpdates('315');
+                    JSSTupdates::checkUpdates('316');
                     JSSTincluder::getJSModel('jssupportticket')->updateColorFile();
                     //JSSTincluder::getJSModel('jssupportticket')->getStaffControlPanelData();
                     break;
@@ -70,6 +70,9 @@ class JSSTjssupportticketController {
     static function addmissingusers() {
         if(!is_admin())
             return false;
+        if (!current_user_can('manage_options')) {
+            return false;
+        }
         $jsst_nonce = JSSTrequest::getVar('_wpnonce');
         if (! wp_verify_nonce( $jsst_nonce, 'add-missing-users') ) {
             die( 'Security check Failed' );
@@ -84,6 +87,9 @@ class JSSTjssupportticketController {
         $jsst_nonce = JSSTrequest::getVar('_wpnonce');
         if (! wp_verify_nonce( $jsst_nonce, 'save-ordering') ) {
             die( 'Security check Failed' );
+        }
+        if (!current_user_can('manage_options')) {
+            return false;
         }
         $jsst_post = JSSTrequest::get('post');
 

@@ -28,7 +28,7 @@ class JSSTconfigurationModel {
 
     function getConfigurationByFor($jsst_for) {
 		if($jsst_for == 'ticketviaemail'){
-			$jsst_query = "SELECT COUNT(configname) FROM `" . jssupportticket::$_db->prefix . "js_ticket_config` WHERE configfor = '".esc_sql($jsst_for)."'";
+			$jsst_query = jssupportticket::$_db->prepare("SELECT COUNT(configname) FROM `" . jssupportticket::$_db->prefix . "js_ticket_config` WHERE configfor = %s", $jsst_for);
 			$jsst_count = jssupportticket::$_db->get_var($jsst_query);
 			if($jsst_count < 5){
 				$jsst_query = "SELECT configname,configvalue
@@ -46,8 +46,8 @@ class JSSTconfigurationModel {
                 return;
 			}
 		}
-        $jsst_query = "SELECT configname,configvalue
-					FROM `" . jssupportticket::$_db->prefix . "js_ticket_config` WHERE configfor = '".esc_sql($jsst_for)."'";
+        $jsst_query = jssupportticket::$_db->prepare("SELECT configname,configvalue
+					FROM `" . jssupportticket::$_db->prefix . "js_ticket_config` WHERE configfor = %s", $jsst_for);
         $jsst_data = jssupportticket::$_db->get_results($jsst_query);
         if (jssupportticket::$_db->last_error != null) {
             JSSTincluder::getJSModel('systemerror')->addSystemError();
@@ -62,11 +62,11 @@ class JSSTconfigurationModel {
     }
     function getCountByConfigFor($jsst_for) {
         if (( in_array('agent',jssupportticket::$_active_addons) && JSSTincluder::getJSModel('agent')->isUserStaff())) {
-            $jsst_query = "SELECT COUNT(configvalue)
-                    FROM `" . jssupportticket::$_db->prefix . "js_ticket_config` WHERE configfor = '".esc_sql($jsst_for). "' AND configname LIKE '%staff' AND configvalue = 1 " ;
+            $jsst_query = jssupportticket::$_db->prepare("SELECT COUNT(configvalue)
+                    FROM `" . jssupportticket::$_db->prefix . "js_ticket_config` WHERE configfor = %s AND configname LIKE '%%staff' AND configvalue = 1 ", $jsst_for);
         }else{
-            $jsst_query = "SELECT COUNT(configvalue)
-                    FROM `" . jssupportticket::$_db->prefix . "js_ticket_config` WHERE configfor = '".esc_sql($jsst_for) . "' AND configname LIKE '%user' AND configvalue = 1 " ;
+            $jsst_query = jssupportticket::$_db->prepare("SELECT COUNT(configvalue)
+                    FROM `" . jssupportticket::$_db->prefix . "js_ticket_config` WHERE configfor = %s AND configname LIKE '%%user' AND configvalue = 1 ", $jsst_for);
         }
         $jsst_data = jssupportticket::$_db->get_var($jsst_query);
         if (jssupportticket::$_db->last_error != null) {
@@ -76,7 +76,7 @@ class JSSTconfigurationModel {
     }
 
     function storeDesktopNotificationLogo($jsst_filename) {
-        jssupportticket::$_db->query("UPDATE `" . jssupportticket::$_db->prefix . "js_ticket_config` SET configvalue = '" . esc_sql($jsst_filename) . "' WHERE configname = 'logo_for_desktop_notfication_url' ");
+        jssupportticket::$_db->query(jssupportticket::$_db->prepare("UPDATE `" . jssupportticket::$_db->prefix . "js_ticket_config` SET configvalue = %s WHERE configname = 'logo_for_desktop_notfication_url' ", $jsst_filename));
     }
 
     function deleteDesktopNotificationsLogo() {
@@ -197,7 +197,7 @@ class JSSTconfigurationModel {
                     continue;
                 }
                 $jsst_value = jssupportticketphplib::JSST_str_replace(' ', '-', $jsst_value);
-                $jsst_query = 'SELECT COUNT(ID) FROM `'.jssupportticket::$_db->prefix.'posts` WHERE post_name = "'.esc_sql($jsst_value).'"';
+                $jsst_query = jssupportticket::$_db->prepare('SELECT COUNT(ID) FROM `'.jssupportticket::$_db->prefix.'posts` WHERE post_name = %s', $jsst_value);
                 $jsst_countslug = jssupportticket::$_db->get_var($jsst_query);
                 if($jsst_countslug >= 1){
                     JSSTmessage::setMessage(esc_html(__('System slug is conflicted with post or page slug.', 'js-support-ticket')), 'error');
@@ -311,6 +311,9 @@ class JSSTconfigurationModel {
 
     function deleteSupportCustomImage() {
 
+        if (!current_user_can('manage_options')) {
+            return false;
+        }
         $jsst_nonce = JSSTrequest::getVar('_wpnonce');
         if (!wp_verify_nonce($jsst_nonce, 'delete-support-customimage')) {
             die('Security check Failed');
@@ -376,7 +379,7 @@ class JSSTconfigurationModel {
 
     function genearateCronKey() {
         $jsst_key = jssupportticketphplib::JSST_md5(gmdate('Y-m-d'));
-        $jsst_query = "UPDATE `".jssupportticket::$_db->prefix."js_ticket_config` SET configvalue = '".esc_sql($jsst_key)."' WHERE configname = 'ck'" ;
+        $jsst_query = jssupportticket::$_db->prepare("UPDATE `".jssupportticket::$_db->prefix."js_ticket_config` SET configvalue = %s WHERE configname = 'ck'", $jsst_key);
         jssupportticket::$_db->query($jsst_query);
         return true;
     }
@@ -392,7 +395,7 @@ class JSSTconfigurationModel {
     }
 
     function getConfigValue($jsst_configname){
-        $jsst_query = "SELECT configvalue FROM `".jssupportticket::$_db->prefix."js_ticket_config` WHERE configname = '".esc_sql($jsst_configname)."'";
+        $jsst_query = jssupportticket::$_db->prepare("SELECT configvalue FROM `".jssupportticket::$_db->prefix."js_ticket_config` WHERE configname = %s", $jsst_configname);
         $jsst_configvalue = jssupportticket::$_db->get_var($jsst_query);
         return $jsst_configvalue;
     }
@@ -425,8 +428,8 @@ class JSSTconfigurationModel {
     }
 
     function getConfigurationByConfigName($jsst_configname) {
-        $jsst_query = "SELECT configvalue
-                  FROM  `".jssupportticket::$_db->prefix."js_ticket_config` WHERE configname ='" . esc_sql($jsst_configname) . "'";
+        $jsst_query = jssupportticket::$_db->prepare("SELECT configvalue
+                  FROM  `".jssupportticket::$_db->prefix."js_ticket_config` WHERE configname =%s", $jsst_configname);
         $jsst_result = jssupportticket::$_db->get_var($jsst_query);
         return $jsst_result;
     }
@@ -450,7 +453,7 @@ class JSSTconfigurationModel {
         }
 
         $jsst_error = false;
-        $jsst_query = "UPDATE `" . jssupportticket::$_db->prefix . "js_ticket_config` SET `configvalue` = ".esc_sql($jsst_configvalue)." WHERE `configname`= 'jsst_addons_auto_update'";
+        $jsst_query = jssupportticket::$_db->prepare("UPDATE `" . jssupportticket::$_db->prefix . "js_ticket_config` SET `configvalue` = %d WHERE `configname`= 'jsst_addons_auto_update'", $jsst_configvalue);
         if (false === jssupportticket::$_db->query($jsst_query)) {
             $jsst_error = true;
         }

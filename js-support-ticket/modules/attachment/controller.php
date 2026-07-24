@@ -15,7 +15,7 @@ class JSSTattachmentController {
         if (self::canaddfile($jsst_layout)) {
             switch ($jsst_layout) {
                 case 'getattachments':
-                    $jsst_id = JSSTrequest::getVar('jssupportticketid', 'get', null);
+                    $jsst_id = absint( JSSTrequest::getVar('jssupportticketid', 'get', null) );
                     JSSTincluder::getJSModel('replies')->getrepliesForForm($jsst_id);
                     break;
                 default:
@@ -43,7 +43,41 @@ class JSSTattachmentController {
         }
     }
 
-    // this function was not in use
+    static function saveattachments() {
+        $jsst_ticketid = absint( JSSTrequest::getVar( 'ticketid' ) );
+        $jsst_nonce    = sanitize_text_field( wp_unslash( JSSTrequest::getVar( '_wpnonce' ) ) );
+
+        if ( ! wp_verify_nonce( $jsst_nonce, 'save-attachment-' . $jsst_ticketid ) ) {
+            wp_die(
+                esc_html__( 'Security check failed.', 'js-support-ticket' ),
+                esc_html__( 'Security Error', 'js-support-ticket' ),
+                array( 'response' => 403 )
+            );
+        }
+
+        if ( ! current_user_can('manage_options') && ! ( in_array('agent', jssupportticket::$_active_addons) && JSSTincluder::getJSModel('agent')->isUserStaff() ) ) {
+            $jsst_owns_ticket = (!JSSTincluder::getObjectClass('user')->isguest())
+                ? JSSTincluder::getJSModel('ticket')->validateTicketDetailForUser($jsst_ticketid)
+                : JSSTincluder::getJSModel('ticket')->validateTicketDetailForVisitor($jsst_ticketid);
+            if ( ! $jsst_owns_ticket ) {
+                wp_die(
+                    esc_html__( 'You are not allowed to perform this action.', 'js-support-ticket' ),
+                    esc_html__( 'Access Denied', 'js-support-ticket' ),
+                    array( 'response' => 403 )
+                );
+            }
+        }
+
+        $jsst_data = JSSTrequest::get('post');
+        JSSTincluder::getJSModel('attachment')->storeAttachments($jsst_data);
+        if (is_admin()) {
+            $jsst_url = admin_url("admin.php?page=ticket&jstlay=ticketdetail&jssupportticketid=" . $jsst_ticketid);
+        } else {
+            $jsst_url = jssupportticket::makeUrl(array('jstmod'=>'replies', 'jstlay'=>'replies'));
+        }
+        wp_safe_redirect($jsst_url);
+        exit;
+    }
 
     static function deleteattachment() {
 

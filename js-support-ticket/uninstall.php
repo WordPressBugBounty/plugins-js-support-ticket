@@ -31,8 +31,9 @@ if(function_exists('is_multisite') && is_multisite()){
 }else{
     $jsst_tablestodrop = JSSTdeactivation::jssupportticket_tables_to_drop();
 
-    foreach ($jsst_tablestodrop as $jsst_tablename) {
-        // Escape the table name using esc_sql() to satisfy security scanners
-        $wpdb->query( "DROP TABLE IF EXISTS ".$jsst_tablename );
+    foreach ( $jsst_tablestodrop as $jsst_tablename ) {
+        $jsst_tablename = esc_sql( $jsst_tablename );
+        // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
+        $wpdb->query( "DROP TABLE IF EXISTS `{$jsst_tablename}`" );
     }
 }

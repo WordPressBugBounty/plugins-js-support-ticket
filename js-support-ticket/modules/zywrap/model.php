@@ -68,7 +68,9 @@ class JSSTzywrapModel {
             wp_send_json_error(array('message' => __('Please save your API key first.', 'js-support-ticket')));
         }
 
+        // phpcs:ignore Squiz.PHP.DiscouragedFunctions.Discouraged -- admin-only, manual bundle sync can process a large dataset; best-effort raise, silently ignored on restricted hosts.
         @ini_set('memory_limit', '768M');
+        // phpcs:ignore Squiz.PHP.DiscouragedFunctions.Discouraged -- same admin-only sync operation; download/extract/process can exceed default execution time on large bundles.
         @set_time_limit(700);
 
         // Fetch the local version to see if we qualify for a Delta Update
@@ -77,7 +79,7 @@ class JSSTzywrapModel {
         $sync_url = 'https://api.zywrap.com/v1/sdk/v1/sync?fromVersion=' . urlencode($local_version);
         $response = wp_remote_get($sync_url, array(
             'timeout' => 600,
-            'sslverify' => false,
+            'sslverify' => true,
             'headers' => array(
                 'Authorization' => 'Bearer ' . $api_key,
                 'Accept' => 'application/json'
@@ -112,7 +114,7 @@ class JSSTzywrapModel {
             // 2. Stream the download directly to the disk (Bypasses RAM limits)
             $zip_response = wp_remote_get($download_url, array(
                 'timeout'   => 600, // Generous timeout for large files
-                'sslverify' => false,
+                'sslverify' => true,
                 'headers'   => array('Authorization' => 'Bearer ' . $api_key),
                 'stream'    => true,
                 'filename'  => $temp_file
@@ -205,9 +207,10 @@ class JSSTzywrapModel {
         if (!empty($data['categories'])) {
             $cats = $this->extract_tabular($data['categories']);
             foreach ($cats as $c) {
-                $jsst_query = "INSERT INTO `" . $prefix . "zywrap_categories` (`code`, `name`, `ordering`) VALUES (
-                    '" . esc_sql($c['code']) . "', '" . esc_sql($c['name']) . "', " . (int)($c['ordering'] ?? 9999) . "
-                )";
+                $jsst_query = jssupportticket::$_db->prepare(
+                    "INSERT INTO `" . $prefix . "zywrap_categories` (`code`, `name`, `ordering`) VALUES (%s, %s, %d)",
+                    $c['code'], $c['name'], ($c['ordering'] ?? 9999)
+                );
                 jssupportticket::$_db->query($jsst_query);
             }
         }
@@ -221,21 +224,22 @@ class JSSTzywrapModel {
             $chunks = array_chunk($ucs, $chunk_size);
             
             foreach ($chunks as $chunk) {
+                $placeholders = array();
                 $values = array();
                 foreach ($chunk as $uc) {
                     $schemaJson = !empty($uc['schema']) ? wp_json_encode($uc['schema']) : null;
-                    $values[] = "(
-                        '" . esc_sql($uc['code']) . "', 
-                        '" . esc_sql($uc['name']) . "', 
-                        '" . esc_sql($uc['desc'] ?? '') . "', 
-                        '" . esc_sql($uc['cat'] ?? '') . "', 
-                        '" . esc_sql($schemaJson) . "', 
-                        " . (int)($uc['ordering'] ?? 9999) . "
-                    )";
+                    $placeholders[] = "(%s, %s, %s, %s, %s, %d)";
+                    $values[] = $uc['code'];
+                    $values[] = $uc['name'];
+                    $values[] = ($uc['desc'] ?? '');
+                    $values[] = ($uc['cat'] ?? '');
+                    $values[] = $schemaJson;
+                    $values[] = ($uc['ordering'] ?? 9999);
                 }
-                
+
                 // Construct a single query with multiple values
-                $jsst_query = "INSERT INTO `" . $prefix . "zywrap_use_cases` (`code`, `name`, `description`, `category_code`, `schema_data`, `ordering`) VALUES " . implode(', ', $values);
+                $jsst_query = "INSERT INTO `" . $prefix . "zywrap_use_cases` (`code`, `name`, `description`, `category_code`, `schema_data`, `ordering`) VALUES " . implode(', ', $placeholders);
+                $jsst_query = jssupportticket::$_db->prepare($jsst_query, $values);
                 jssupportticket::$_db->query($jsst_query);
             }
         }
@@ -249,21 +253,22 @@ class JSSTzywrapModel {
             $chunks = array_chunk($wrappers, $chunk_size);
             
             foreach ($chunks as $chunk) {
+                $placeholders = array();
                 $values = array();
                 foreach ($chunk as $w) {
-                    $values[] = "(
-                        '" . esc_sql($w['code']) . "', 
-                        '" . esc_sql($w['name']) . "', 
-                        '" . esc_sql($w['desc'] ?? '') . "', 
-                        '" . esc_sql($w['usecase'] ?? '') . "', 
-                        " . (!empty($w['featured']) ? 1 : 0) . ", 
-                        " . (!empty($w['base']) ? 1 : 0) . ", 
-                        " . (int)($w['ordering'] ?? 9999) . "
-                    )";
+                    $placeholders[] = "(%s, %s, %s, %s, %d, %d, %d)";
+                    $values[] = $w['code'];
+                    $values[] = $w['name'];
+                    $values[] = ($w['desc'] ?? '');
+                    $values[] = ($w['usecase'] ?? '');
+                    $values[] = (!empty($w['featured']) ? 1 : 0);
+                    $values[] = (!empty($w['base']) ? 1 : 0);
+                    $values[] = ($w['ordering'] ?? 9999);
                 }
-                
+
                 // Construct a single query with 1000 rows
-                $jsst_query = "INSERT INTO `" . $prefix . "zywrap_wrappers` (`code`, `name`, `description`, `use_case_code`, `featured`, `base`, `ordering`) VALUES " . implode(', ', $values);
+                $jsst_query = "INSERT INTO `" . $prefix . "zywrap_wrappers` (`code`, `name`, `description`, `use_case_code`, `featured`, `base`, `ordering`) VALUES " . implode(', ', $placeholders);
+                $jsst_query = jssupportticket::$_db->prepare($jsst_query, $values);
                 jssupportticket::$_db->query($jsst_query);
             }
         }
@@ -271,9 +276,10 @@ class JSSTzywrapModel {
         if (!empty($data['aiModels'])) {
             $models = $this->extract_tabular($data['aiModels']);
             foreach ($models as $m) {
-                $jsst_query = "INSERT INTO `" . $prefix . "zywrap_ai_models` (`code`, `name`, `ordering`) VALUES (
-                    '" . esc_sql($m['code']) . "', '" . esc_sql($m['name']) . "', " . (int)($m['ordering'] ?? 9999) . "
-                )";
+                $jsst_query = jssupportticket::$_db->prepare(
+                    "INSERT INTO `" . $prefix . "zywrap_ai_models` (`code`, `name`, `ordering`) VALUES (%s, %s, %d)",
+                    $m['code'], $m['name'], ($m['ordering'] ?? 9999)
+                );
                 jssupportticket::$_db->query($jsst_query);
             }
         }
@@ -281,9 +287,10 @@ class JSSTzywrapModel {
         if (!empty($data['languages'])) {
             $langs = $this->extract_tabular($data['languages']);
             foreach ($langs as $l) {
-                $jsst_query = "INSERT INTO `" . $prefix . "zywrap_languages` (`code`, `name`, `ordering`) VALUES (
-                    '" . esc_sql($l['code']) . "', '" . esc_sql($l['name']) . "', " . (int)($l['ordering'] ?? 9999) . "
-                )";
+                $jsst_query = jssupportticket::$_db->prepare(
+                    "INSERT INTO `" . $prefix . "zywrap_languages` (`code`, `name`, `ordering`) VALUES (%s, %s, %d)",
+                    $l['code'], $l['name'], ($l['ordering'] ?? 9999)
+                );
                 jssupportticket::$_db->query($jsst_query);
             }
         }
@@ -292,9 +299,10 @@ class JSSTzywrapModel {
             foreach ($data['templates'] as $type => $tabular) {
                 $templates = $this->extract_tabular($tabular);
                 foreach ($templates as $t) {
-                    $jsst_query = "INSERT INTO `" . $prefix . "zywrap_block_templates` (`type`, `code`, `name`) VALUES (
-                        '" . esc_sql($type) . "', '" . esc_sql($t['code']) . "', '" . esc_sql($t['name']) . "'
-                    )";
+                    $jsst_query = jssupportticket::$_db->prepare(
+                        "INSERT INTO `" . $prefix . "zywrap_block_templates` (`type`, `code`, `name`) VALUES (%s, %s, %s)",
+                        $type, $t['code'], $t['name']
+                    );
                     jssupportticket::$_db->query($jsst_query);
                 }
             }
@@ -311,9 +319,12 @@ class JSSTzywrapModel {
             foreach ($json['metadata']['categories'] as $r) {
                 $status = (!isset($r['status']) || $r['status']) ? 1 : 0;
                 $ordering = $r['position'] ?? $r['displayOrder'] ?? $r['ordering'] ?? 9999;
-                $jsst_query = "INSERT INTO `" . $prefix . "zywrap_categories` (`code`, `name`, `status`, `ordering`) 
-                               VALUES ('" . esc_sql($r['code']) . "', '" . esc_sql($r['name']) . "', " . (int)$status . ", " . (int)$ordering . ") 
-                               ON DUPLICATE KEY UPDATE `name`=VALUES(`name`), `status`=VALUES(`status`), `ordering`=VALUES(`ordering`)";
+                $jsst_query = jssupportticket::$_db->prepare(
+                    "INSERT INTO `" . $prefix . "zywrap_categories` (`code`, `name`, `status`, `ordering`)
+                               VALUES (%s, %s, %d, %d)
+                               ON DUPLICATE KEY UPDATE `name`=VALUES(`name`), `status`=VALUES(`status`), `ordering`=VALUES(`ordering`)",
+                    $r['code'], $r['name'], $status, $ordering
+                );
                 jssupportticket::$_db->query($jsst_query);
             }
         }
@@ -322,9 +333,12 @@ class JSSTzywrapModel {
             foreach ($json['metadata']['languages'] as $r) {
                 $status = (!isset($r['status']) || $r['status']) ? 1 : 0;
                 $ordering = $r['ordering'] ?? 9999;
-                $jsst_query = "INSERT INTO `" . $prefix . "zywrap_languages` (`code`, `name`, `status`, `ordering`) 
-                               VALUES ('" . esc_sql($r['code']) . "', '" . esc_sql($r['name']) . "', " . (int)$status . ", " . (int)$ordering . ") 
-                               ON DUPLICATE KEY UPDATE `name`=VALUES(`name`), `status`=VALUES(`status`), `ordering`=VALUES(`ordering`)";
+                $jsst_query = jssupportticket::$_db->prepare(
+                    "INSERT INTO `" . $prefix . "zywrap_languages` (`code`, `name`, `status`, `ordering`)
+                               VALUES (%s, %s, %d, %d)
+                               ON DUPLICATE KEY UPDATE `name`=VALUES(`name`), `status`=VALUES(`status`), `ordering`=VALUES(`ordering`)",
+                    $r['code'], $r['name'], $status, $ordering
+                );
                 jssupportticket::$_db->query($jsst_query);
             }
         }
@@ -333,9 +347,12 @@ class JSSTzywrapModel {
             foreach ($json['metadata']['aiModels'] as $r) {
                 $status = (!isset($r['status']) || $r['status']) ? 1 : 0;
                 $ordering = $r['displayOrder'] ?? $r['ordering'] ?? 9999;
-                $jsst_query = "INSERT INTO `" . $prefix . "zywrap_ai_models` (`code`, `name`, `status`, `ordering`) 
-                               VALUES ('" . esc_sql($r['code']) . "', '" . esc_sql($r['name']) . "', " . (int)$status . ", " . (int)$ordering . ") 
-                               ON DUPLICATE KEY UPDATE `name`=VALUES(`name`), `status`=VALUES(`status`), `ordering`=VALUES(`ordering`)";
+                $jsst_query = jssupportticket::$_db->prepare(
+                    "INSERT INTO `" . $prefix . "zywrap_ai_models` (`code`, `name`, `status`, `ordering`)
+                               VALUES (%s, %s, %d, %d)
+                               ON DUPLICATE KEY UPDATE `name`=VALUES(`name`), `status`=VALUES(`status`), `ordering`=VALUES(`ordering`)",
+                    $r['code'], $r['name'], $status, $ordering
+                );
                 jssupportticket::$_db->query($jsst_query);
             }
         }
@@ -345,9 +362,12 @@ class JSSTzywrapModel {
                 foreach ($items as $item) {
                     $status = (!isset($item['status']) || $item['status']) ? 1 : 0;
                     $name = $item['label'] ?? $item['name'] ?? '';
-                    $jsst_query = "INSERT INTO `" . $prefix . "zywrap_block_templates` (`type`, `code`, `name`, `status`) 
-                                   VALUES ('" . esc_sql($type) . "', '" . esc_sql($item['code']) . "', '" . esc_sql($name) . "', " . (int)$status . ") 
-                                   ON DUPLICATE KEY UPDATE `name`=VALUES(`name`), `status`=VALUES(`status`)";
+                    $jsst_query = jssupportticket::$_db->prepare(
+                        "INSERT INTO `" . $prefix . "zywrap_block_templates` (`type`, `code`, `name`, `status`)
+                                   VALUES (%s, %s, %s, %d)
+                                   ON DUPLICATE KEY UPDATE `name`=VALUES(`name`), `status`=VALUES(`status`)",
+                        $type, $item['code'], $name, $status
+                    );
                     jssupportticket::$_db->query($jsst_query);
                 }
             }
@@ -358,16 +378,19 @@ class JSSTzywrapModel {
                 $schemaJson = !empty($uc['schema']) ? wp_json_encode($uc['schema']) : null;
                 $status = (!isset($uc['status']) || $uc['status']) ? 1 : 0;
                 $ordering = $uc['displayOrder'] ?? $uc['ordering'] ?? 9999;
-                $jsst_query = "INSERT INTO `" . $prefix . "zywrap_use_cases` (`code`, `name`, `description`, `category_code`, `schema_data`, `status`, `ordering`) 
-                               VALUES ('" . esc_sql($uc['code']) . "', '" . esc_sql($uc['name']) . "', '" . esc_sql($uc['description'] ?? '') . "', '" . esc_sql($uc['categoryCode'] ?? '') . "', '" . esc_sql($schemaJson) . "', " . (int)$status . ", " . (int)$ordering . ") 
-                               ON DUPLICATE KEY UPDATE `name`=VALUES(`name`), `description`=VALUES(`description`), `category_code`=VALUES(`category_code`), `schema_data`=VALUES(`schema_data`), `status`=VALUES(`status`), `ordering`=VALUES(`ordering`)";
+                $jsst_query = jssupportticket::$_db->prepare(
+                    "INSERT INTO `" . $prefix . "zywrap_use_cases` (`code`, `name`, `description`, `category_code`, `schema_data`, `status`, `ordering`)
+                               VALUES (%s, %s, %s, %s, %s, %d, %d)
+                               ON DUPLICATE KEY UPDATE `name`=VALUES(`name`), `description`=VALUES(`description`), `category_code`=VALUES(`category_code`), `schema_data`=VALUES(`schema_data`), `status`=VALUES(`status`), `ordering`=VALUES(`ordering`)",
+                    $uc['code'], $uc['name'], ($uc['description'] ?? ''), ($uc['categoryCode'] ?? ''), $schemaJson, $status, $ordering
+                );
                 jssupportticket::$_db->query($jsst_query);
             }
         }
 
         if (!empty($json['useCases']['deletes'])) {
             foreach ($json['useCases']['deletes'] as $code) {
-                $jsst_query = "DELETE FROM `" . $prefix . "zywrap_use_cases` WHERE `code` = '" . esc_sql($code) . "'";
+                $jsst_query = jssupportticket::$_db->prepare("DELETE FROM `" . $prefix . "zywrap_use_cases` WHERE `code` = %s", $code);
                 jssupportticket::$_db->query($jsst_query);
             }
         }
@@ -378,16 +401,19 @@ class JSSTzywrapModel {
                 $base = !empty($w['base'] ?? $w['isBaseWrapper']) ? 1 : 0;
                 $status = (!isset($w['status']) || $w['status']) ? 1 : 0;
                 $ordering = $w['displayOrder'] ?? $w['ordering'] ?? 9999;
-                $jsst_query = "INSERT INTO `" . $prefix . "zywrap_wrappers` (`code`, `name`, `description`, `use_case_code`, `featured`, `base`, `status`, `ordering`) 
-                               VALUES ('" . esc_sql($w['code']) . "', '" . esc_sql($w['name']) . "', '" . esc_sql($w['description'] ?? '') . "', '" . esc_sql($w['useCaseCode'] ?? $w['categoryCode'] ?? '') . "', " . (int)$featured . ", " . (int)$base . ", " . (int)$status . ", " . (int)$ordering . ") 
-                               ON DUPLICATE KEY UPDATE `name`=VALUES(`name`), `description`=VALUES(`description`), `use_case_code`=VALUES(`use_case_code`), `featured`=VALUES(`featured`), `base`=VALUES(`base`), `status`=VALUES(`status`), `ordering`=VALUES(`ordering`)";
+                $jsst_query = jssupportticket::$_db->prepare(
+                    "INSERT INTO `" . $prefix . "zywrap_wrappers` (`code`, `name`, `description`, `use_case_code`, `featured`, `base`, `status`, `ordering`)
+                               VALUES (%s, %s, %s, %s, %d, %d, %d, %d)
+                               ON DUPLICATE KEY UPDATE `name`=VALUES(`name`), `description`=VALUES(`description`), `use_case_code`=VALUES(`use_case_code`), `featured`=VALUES(`featured`), `base`=VALUES(`base`), `status`=VALUES(`status`), `ordering`=VALUES(`ordering`)",
+                    $w['code'], $w['name'], ($w['description'] ?? ''), ($w['useCaseCode'] ?? $w['categoryCode'] ?? ''), $featured, $base, $status, $ordering
+                );
                 jssupportticket::$_db->query($jsst_query);
             }
         }
 
         if (!empty($json['wrappers']['deletes'])) {
             foreach ($json['wrappers']['deletes'] as $code) {
-                $jsst_query = "DELETE FROM `" . $prefix . "zywrap_wrappers` WHERE `code` = '" . esc_sql($code) . "'";
+                $jsst_query = jssupportticket::$_db->prepare("DELETE FROM `" . $prefix . "zywrap_wrappers` WHERE `code` = %s", $code);
                 jssupportticket::$_db->query($jsst_query);
             }
         }
@@ -411,19 +437,22 @@ class JSSTzywrapModel {
         $usage = isset($body_json['usage']) ? $body_json['usage'] : array();
         $cost = isset($body_json['cost']) ? $body_json['cost'] : array();
         
-        $jsst_query = "INSERT INTO `" . jssupportticket::$_db->prefix . "js_ticket_zywrap_usage_logs` (
+        $jsst_query = jssupportticket::$_db->prepare(
+            "INSERT INTO `" . jssupportticket::$_db->prefix . "js_ticket_zywrap_usage_logs` (
             `trace_id`, `wrapper_code`, `model_code`, `prompt_tokens`, `completion_tokens`, `total_tokens`, `credits_used`, `latency_ms`, `created_at`
         ) VALUES (
-            '" . esc_sql($body_json['id'] ?? '') . "',
-            '" . esc_sql($wrapper_code) . "',
-            '" . esc_sql($body_json['model'] ?? '') . "',
-            " . (int)($usage['prompt_tokens'] ?? 0) . ",
-            " . (int)($usage['completion_tokens'] ?? 0) . ",
-            " . (int)($usage['total_tokens'] ?? 0) . ",
-            " . (float)($cost['credits_used'] ?? 0) . ",
-            " . (int)$latency_ms . ",
-            '" . current_time('mysql', 1) . "'
-        )";
+            %s, %s, %s, %d, %d, %d, %f, %d, %s
+        )",
+            ($body_json['id'] ?? ''),
+            $wrapper_code,
+            ($body_json['model'] ?? ''),
+            ($usage['prompt_tokens'] ?? 0),
+            ($usage['completion_tokens'] ?? 0),
+            ($usage['total_tokens'] ?? 0),
+            ($cost['credits_used'] ?? 0),
+            $latency_ms,
+            current_time('mysql', 1)
+        );
         jssupportticket::$_db->query($jsst_query);
     }
     /**
@@ -450,9 +479,9 @@ class JSSTzywrapModel {
      */
     function getWrappersByUseCase($use_case_code) {
         $prefix = jssupportticket::$_db->prefix . "js_ticket_";
-        $jsst_query = "SELECT code, name, base FROM `" . $prefix . "zywrap_wrappers` 
-                       WHERE use_case_code = '" . esc_sql($use_case_code) . "' AND status = 1 
-                       ORDER BY base DESC, ordering ASC"; // Base wrapper shows first
+        $jsst_query = jssupportticket::$_db->prepare("SELECT code, name, base FROM `" . $prefix . "zywrap_wrappers`
+                       WHERE use_case_code = %s AND status = 1
+                       ORDER BY base DESC, ordering ASC", $use_case_code); // Base wrapper shows first
                           
         $jsst_results = jssupportticket::$_db->get_results($jsst_query);
         if (jssupportticket::$_db->last_error != null) {
@@ -507,13 +536,13 @@ class JSSTzywrapModel {
         */
 
         $use_case_code = JSSTrequest::getVar('use_case_code');
-        $ticket_id = JSSTrequest::getVar('ticket_id'); // We now receive the Ticket ID
+        $ticket_id = absint( JSSTrequest::getVar('ticket_id') ); // We now receive the Ticket ID
 
         $model_instance = new self();
         $wrappers = $model_instance->getWrappersByUseCase($use_case_code);
 
         $prefix = jssupportticket::$_db->prefix . "js_ticket_";
-        $jsst_query = "SELECT schema_data FROM `" . $prefix . "zywrap_use_cases` WHERE code = '" . esc_sql($use_case_code) . "'";
+        $jsst_query = jssupportticket::$_db->prepare("SELECT schema_data FROM `" . $prefix . "zywrap_use_cases` WHERE code = %s", $use_case_code);
         $schema_json = jssupportticket::$_db->get_var($jsst_query);
         $schema = !empty($schema_json) ? json_decode($schema_json, true) : null;
 
@@ -624,8 +653,8 @@ class JSSTzywrapModel {
                 'Content-Type'  => 'application/json'
             ),
             'body'      => wp_json_encode($body),
-            'timeout'   => 600, 
-            'sslverify' => false,
+            'timeout'   => 600,
+            'sslverify' => true,
         ));
         $latency_ms = round((microtime(true) - $start_time) * 1000);
 
@@ -693,7 +722,7 @@ class JSSTzywrapModel {
         $prefix = jssupportticket::$_db->prefix . "js_ticket_";
 
         // Fetch Main Ticket
-        $jsst_query = "SELECT subject, message, uid FROM `{$prefix}tickets` WHERE id = " . (int)$ticket_id;
+        $jsst_query = jssupportticket::$_db->prepare("SELECT subject, message, uid FROM `{$prefix}tickets` WHERE id = %d", $ticket_id);
         $ticket = jssupportticket::$_db->get_row($jsst_query);
         if (!$ticket) {
             return array('subject' => '', 'initialMsg' => '', 'fullThread' => '', 'latestCustomerMsg' => '');
@@ -706,7 +735,7 @@ class JSSTzywrapModel {
         $history = "CUSTOMER (Initial Issue):\n" . $initialMsg . "\n\n";
 
         // The column name in js_ticket_replies is 'message', not 'reply'
-        $jsst_query = "SELECT message, uid FROM `{$prefix}replies` WHERE ticketid = " . (int)$ticket_id . " ORDER BY created ASC";
+        $jsst_query = jssupportticket::$_db->prepare("SELECT message, uid FROM `{$prefix}replies` WHERE ticketid = %d ORDER BY created ASC", $ticket_id);
         $replies = jssupportticket::$_db->get_results($jsst_query);
 
         if (!empty($replies)) {
@@ -767,7 +796,7 @@ class JSSTzywrapModel {
         $jsst_trace_id = jssupportticket::parseSpaces($jsst_trace_id);
         $jsst_inquery = "";
         if ($jsst_trace_id != null) {
-            $jsst_inquery .= " WHERE trace_id LIKE '%" . esc_sql($jsst_trace_id) . "%'";
+            $jsst_inquery .= jssupportticket::$_db->prepare(" WHERE trace_id LIKE %s", '%'.$jsst_trace_id.'%');
         }
 
         jssupportticket::$jsst_data['filter']['trace_id'] = $jsst_trace_id;
@@ -833,7 +862,7 @@ class JSSTzywrapModel {
     function deleteLog($jsst_id) {
         if (!is_numeric($jsst_id)) return false;
 
-        $jsst_query = "DELETE FROM `" . jssupportticket::$_db->prefix . "js_ticket_zywrap_usage_logs` WHERE id = " . (int)$jsst_id;
+        $jsst_query = jssupportticket::$_db->prepare("DELETE FROM `" . jssupportticket::$_db->prefix . "js_ticket_zywrap_usage_logs` WHERE id = %d", $jsst_id);
         jssupportticket::$_db->query($jsst_query);
 
         if (jssupportticket::$_db->last_error == null) {
@@ -862,6 +891,10 @@ class JSSTzywrapModel {
     // =========================================================
 
     function pgGetCategories() {
+        if (!current_user_can('manage_options')) {
+            wp_send_json_error(array('message' => __('Security Error: Unauthorized access. Administrators only.', 'js-support-ticket')));
+            return;
+        }
         $jsst_query = "SELECT code, name FROM `" . jssupportticket::$_db->prefix . "js_ticket_zywrap_categories` WHERE status = 1 ORDER BY ordering ASC";
         $jsst_results = jssupportticket::$_db->get_results($jsst_query);
         if (jssupportticket::$_db->last_error != null) {
@@ -871,8 +904,12 @@ class JSSTzywrapModel {
     }
 
     function pgGetUseCases() {
+        if (!current_user_can('manage_options')) {
+            wp_send_json_error(array('message' => __('Security Error: Unauthorized access. Administrators only.', 'js-support-ticket')));
+            return;
+        }
         $cat = sanitize_text_field(JSSTrequest::getVar('category'));
-        $jsst_query = "SELECT code, name FROM `" . jssupportticket::$_db->prefix . "js_ticket_zywrap_use_cases` WHERE category_code = '" . esc_sql($cat) . "' AND status = 1 ORDER BY ordering ASC";
+        $jsst_query = jssupportticket::$_db->prepare("SELECT code, name FROM `" . jssupportticket::$_db->prefix . "js_ticket_zywrap_use_cases` WHERE category_code = %s AND status = 1 ORDER BY ordering ASC", $cat);
         $jsst_results = jssupportticket::$_db->get_results($jsst_query);
         if (jssupportticket::$_db->last_error != null) {
             JSSTincluder::getJSModel('systemerror')->addSystemError();
@@ -881,8 +918,12 @@ class JSSTzywrapModel {
     }
 
     function pgGetWrappers() {
+        if (!current_user_can('manage_options')) {
+            wp_send_json_error(array('message' => __('Security Error: Unauthorized access. Administrators only.', 'js-support-ticket')));
+            return;
+        }
         $uc = sanitize_text_field(JSSTrequest::getVar('usecase'));
-        $jsst_query = "SELECT code, name, featured, base FROM `" . jssupportticket::$_db->prefix . "js_ticket_zywrap_wrappers` WHERE use_case_code = '" . esc_sql($uc) . "' AND status = 1 ORDER BY ordering ASC";
+        $jsst_query = jssupportticket::$_db->prepare("SELECT code, name, featured, base FROM `" . jssupportticket::$_db->prefix . "js_ticket_zywrap_wrappers` WHERE use_case_code = %s AND status = 1 ORDER BY ordering ASC", $uc);
         $jsst_results = jssupportticket::$_db->get_results($jsst_query);
         if (jssupportticket::$_db->last_error != null) {
             JSSTincluder::getJSModel('systemerror')->addSystemError();
@@ -891,8 +932,12 @@ class JSSTzywrapModel {
     }
 
     function pgGetSchema() {
+        if (!current_user_can('manage_options')) {
+            wp_send_json_error(array('message' => __('Security Error: Unauthorized access. Administrators only.', 'js-support-ticket')));
+            return;
+        }
         $w = sanitize_text_field(JSSTrequest::getVar('wrapper'));
-        $jsst_query = "SELECT uc.schema_data FROM `" . jssupportticket::$_db->prefix . "js_ticket_zywrap_use_cases` uc JOIN `" . jssupportticket::$_db->prefix . "js_ticket_zywrap_wrappers` w ON w.use_case_code = uc.code WHERE w.code = '" . esc_sql($w) . "'";
+        $jsst_query = jssupportticket::$_db->prepare("SELECT uc.schema_data FROM `" . jssupportticket::$_db->prefix . "js_ticket_zywrap_use_cases` uc JOIN `" . jssupportticket::$_db->prefix . "js_ticket_zywrap_wrappers` w ON w.use_case_code = uc.code WHERE w.code = %s", $w);
         $res = jssupportticket::$_db->get_var($jsst_query);
         if (jssupportticket::$_db->last_error != null) {
             JSSTincluder::getJSModel('systemerror')->addSystemError();
@@ -901,6 +946,10 @@ class JSSTzywrapModel {
     }
 
     function pgGetLanguages() {
+        if (!current_user_can('manage_options')) {
+            wp_send_json_error(array('message' => __('Security Error: Unauthorized access. Administrators only.', 'js-support-ticket')));
+            return;
+        }
         $jsst_query = "SELECT code, name FROM `" . jssupportticket::$_db->prefix . "js_ticket_zywrap_languages` WHERE status = 1 ORDER BY ordering ASC";
         $jsst_results = jssupportticket::$_db->get_results($jsst_query);
         if (jssupportticket::$_db->last_error != null) {
@@ -910,6 +959,10 @@ class JSSTzywrapModel {
     }
 
     function pgGetModels() {
+        if (!current_user_can('manage_options')) {
+            wp_send_json_error(array('message' => __('Security Error: Unauthorized access. Administrators only.', 'js-support-ticket')));
+            return;
+        }
         $jsst_query = "SELECT code, name FROM `" . jssupportticket::$_db->prefix . "js_ticket_zywrap_ai_models` WHERE status = 1 ORDER BY ordering ASC";
         $jsst_results = jssupportticket::$_db->get_results($jsst_query);
         if (jssupportticket::$_db->last_error != null) {
@@ -919,6 +972,10 @@ class JSSTzywrapModel {
     }
 
     function pgGetBlockTemplates() {
+        if (!current_user_can('manage_options')) {
+            wp_send_json_error(array('message' => __('Security Error: Unauthorized access. Administrators only.', 'js-support-ticket')));
+            return;
+        }
         $jsst_query = "SELECT type, code, name FROM `" . jssupportticket::$_db->prefix . "js_ticket_zywrap_block_templates` WHERE status = 1 ORDER BY type, name ASC";
         $res = jssupportticket::$_db->get_results($jsst_query);
         if (jssupportticket::$_db->last_error != null) {
@@ -965,28 +1022,25 @@ class JSSTzywrapModel {
         if (!empty($overrides)) $payloadData = array_merge($payloadData, $overrides);
 
         $startTime = microtime(true);
-        $ch = curl_init('https://api.zywrap.com/v1/proxy');
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_POST, true);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($payloadData));
-        curl_setopt($ch, CURLOPT_TIMEOUT, 600);
-        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0); // FIX: Prevent SSL blocking on some WordPress hosts
-        curl_setopt($ch, CURLOPT_HTTPHEADER, [
-            'Content-Type: application/json', 
-            'Authorization: Bearer ' . $apiKey
+        $response = wp_remote_post('https://api.zywrap.com/v1/proxy', [
+            'timeout' => 600,
+            'sslverify' => true,
+            'headers' => [
+                'Content-Type' => 'application/json',
+                'Authorization' => 'Bearer ' . $apiKey,
+            ],
+            'body' => wp_json_encode($payloadData),
         ]);
 
-        $rawResponse = curl_exec($ch);
-        $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-        $curlError = curl_error($ch);
-        curl_close($ch);
-        
         $latencyMs = round((microtime(true) - $startTime) * 1000);
 
         // --- IMPROVED ERROR CATCHING & PARSING ---
-        if ($rawResponse === false) {
-            wp_send_json_error(['message' => __('Server Connection Error: ', 'js-support-ticket') . $curlError]);
+        if (is_wp_error($response)) {
+            wp_send_json_error(['message' => __('Server Connection Error: ', 'js-support-ticket') . $response->get_error_message()]);
         }
+
+        $rawResponse = wp_remote_retrieve_body($response);
+        $httpCode = wp_remote_retrieve_response_code($response);
 
         $finalJson = null;
         $responseData = null;
@@ -1025,21 +1079,24 @@ class JSSTzywrapModel {
 
         // --- LOG USAGE ---
         try {
-            $jsst_query = "INSERT INTO `" . jssupportticket::$_db->prefix . "js_ticket_zywrap_usage_logs` (
+            $jsst_query = jssupportticket::$_db->prepare(
+                "INSERT INTO `" . jssupportticket::$_db->prefix . "js_ticket_zywrap_usage_logs` (
                 trace_id, wrapper_code, model_code, prompt_tokens, completion_tokens, total_tokens, credits_used, latency_ms, status, error_message, created_at
             ) VALUES (
-                '" . esc_sql($responseData['id'] ?? null) . "', 
-                '" . esc_sql($wrapperCode) . "', 
-                '" . esc_sql($model ?: 'default') . "',
-                " . (int)($responseData['usage']['prompt_tokens'] ?? 0) . ", 
-                " . (int)($responseData['usage']['completion_tokens'] ?? 0) . ",
-                " . (int)($responseData['usage']['total_tokens'] ?? 0) . ", 
-                " . (float)($responseData['cost']['credits_used'] ?? 0) . ",
-                " . (int)$latencyMs . ", 
-                '" . esc_sql($status) . "', 
-                '" . esc_sql($errorMessage) . "', 
-                '" . current_time('mysql') . "'
-            )";
+                %s, %s, %s, %d, %d, %d, %f, %d, %s, %s, %s
+            )",
+                ($responseData['id'] ?? null),
+                $wrapperCode,
+                ($model ?: 'default'),
+                ($responseData['usage']['prompt_tokens'] ?? 0),
+                ($responseData['usage']['completion_tokens'] ?? 0),
+                ($responseData['usage']['total_tokens'] ?? 0),
+                ($responseData['cost']['credits_used'] ?? 0),
+                $latencyMs,
+                $status,
+                $errorMessage,
+                current_time('mysql')
+            );
             jssupportticket::$_db->query($jsst_query);
         } catch (Exception $e) {}
 
@@ -1091,5 +1148,80 @@ class JSSTzywrapModel {
 
         // Pass data to the View
         jssupportticket::$jsst_data['dashboard_stats'] = $dashboard_data;
+    }
+
+    /**
+     * Call the Zywrap AI Engine for RAG / Instant Deflection
+     *
+     * @param string $api_key The Zywrap API key.
+     * @param array  $payload The payload containing 'wrapper_code' and 'prompt'.
+     * @return string|false The AI output string on success, false on failure.
+    */
+    public function callZywrapEngine($api_key, $payload) {
+        $api_url = 'https://api.zywrap.com/v1/proxy';
+        $start_time = microtime(true); // Start timing for latency tracking
+
+        // Prepare the API request body
+        $body = array(
+            'wrapperCodes' => array($payload['wrapper_code']),
+            'source'       => 'js-help-desk', // Changed from majestic-support to match JS Help Desk
+            'prompt'       => $payload['prompt']
+        );
+
+        $args = array(
+            'headers'   => array(
+                'Authorization' => 'Bearer ' . $api_key, 
+                'Content-Type'  => 'application/json'
+            ),
+            'body'      => wp_json_encode($body),
+            'timeout'   => 600,
+            'sslverify' => true,
+        );
+
+        $response = wp_remote_post($api_url, $args);
+        $latency_ms = round((microtime(true) - $start_time) * 1000);
+
+        // Handle connection errors
+        if (is_wp_error($response)) {
+            $error_msg = __('Zywrap API connection error', 'js-support-ticket') . ': ' . $response->get_error_message();
+            
+            // Use JS Help Desk's native system error logging
+            JSSTincluder::getJSModel('systemerror')->addSystemError($error_msg);
+            return false;
+        }
+
+        $raw_response = wp_remote_retrieve_body($response);
+
+        // Stream Parser (matching the expected Zywrap response format)
+        $lines = explode("\n", $raw_response);
+        $finalJson = null;
+        foreach ($lines as $line) {
+            $line = trim($line);
+            if (strpos($line, 'data: ') === 0) {
+                $data = json_decode(substr($line, 6), true);
+                if ($data && (isset($data['output']) || isset($data['error']))) {
+                    $finalJson = substr($line, 6);
+                }
+            }
+        }
+
+        $body_json = $finalJson ? json_decode($finalJson, true) : null;
+
+        // Handle API Structural Errors (e.g., Insufficient credits, invalid wrapper code)
+        if ($body_json && isset($body_json['error'])) {
+            /* translators: %s: the error message returned by the Zywrap Engine API */
+            $error_msg = sprintf( esc_html__( 'Zywrap Engine API Error: %s', 'js-support-ticket' ), esc_html( $body_json['error'] ) );
+            
+            // Push the clean string trace message to your system error logs layout view
+            JSSTincluder::getJSModel('systemerror')->addSystemError($error_msg);
+            return false;
+        }
+
+        // Handle Success
+        if ($body_json && isset($body_json['output'])) {
+            return $body_json['output'];
+        }
+
+        return false;
     }
 }

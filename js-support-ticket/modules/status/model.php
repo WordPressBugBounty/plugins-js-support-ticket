@@ -12,7 +12,7 @@ class JSSTstatusModel {
         $jsst_inquery = '';
 
         if ($jsst_statustitle != null){
-            $jsst_inquery .= " WHERE status.status LIKE '%".esc_sql($jsst_statustitle)."%'";
+            $jsst_inquery .= jssupportticket::$_db->prepare(" WHERE status.status LIKE %s", '%'.$jsst_statustitle.'%');
         }
 
         jssupportticket::$jsst_data['filter']['title'] = $jsst_statustitle;
@@ -59,7 +59,8 @@ class JSSTstatusModel {
                 return false;
             $jsst_query = "SELECT status.*
 						FROM `" . jssupportticket::$_db->prefix . "js_ticket_statuses` AS status
-						WHERE status.id = " . esc_sql($jsst_id);
+						WHERE status.id = %d";
+            $jsst_query = jssupportticket::$_db->prepare($jsst_query, $jsst_id);
             $jsst_result = jssupportticket::$_db->get_row($jsst_query);
             if ($jsst_result) {
                 $jsst_customStatuses = [
@@ -120,14 +121,14 @@ class JSSTstatusModel {
         if ($jsst_id) {
             if (!is_numeric($jsst_id))
                 return false;
-            $jsst_query = "SELECT status FROM `" . jssupportticket::$_db->prefix . "js_ticket_statuses` WHERE id = " . esc_sql($jsst_id);
+            $jsst_query = jssupportticket::$_db->prepare("SELECT status FROM `" . jssupportticket::$_db->prefix . "js_ticket_statuses` WHERE id = %d", $jsst_id);
             $jsst_result = jssupportticket::$_db->get_var($jsst_query);
             if ($jsst_result == $jsst_status) {
                 return true;
             }
         }
 
-        $jsst_query = 'SELECT COUNT(id) FROM `' . jssupportticket::$_db->prefix . 'js_ticket_statuses` WHERE status = "' . esc_sql($jsst_status) . '"';
+        $jsst_query = jssupportticket::$_db->prepare('SELECT COUNT(id) FROM `' . jssupportticket::$_db->prefix . 'js_ticket_statuses` WHERE status = %s', $jsst_status);
         $jsst_result = jssupportticket::$_db->get_var($jsst_query);
         if (jssupportticket::$_db->last_error != null) {
             JSSTincluder::getJSModel('systemerror')->addSystemError();
@@ -150,6 +151,8 @@ class JSSTstatusModel {
     function removeStatus($jsst_id) {
         if (!is_numeric($jsst_id))
             return false;
+        if (!current_user_can('manage_options'))
+            return false;
         $jsst_canremove = $this->canRemoveStatus($jsst_id);
         if ($jsst_canremove == 1) {
             $jsst_row = JSSTincluder::getJSTable('statuses');
@@ -168,6 +171,8 @@ class JSSTstatusModel {
     function setOrdering($jsst_id) {
         if (!is_numeric($jsst_id))
             return false;
+        if (!current_user_can('manage_options'))
+            return false;
         $jsst_order = JSSTrequest::getVar('order', 'get');
         if ($jsst_order == 'down') {
             $jsst_order = ">";
@@ -176,11 +181,11 @@ class JSSTstatusModel {
             $jsst_order = "<";
             $jsst_direction = "DESC";
         }
-        $jsst_query = "SELECT t.ordering,t.id,t2.ordering AS ordering2 FROM `" . jssupportticket::$_db->prefix . "js_ticket_statuses` AS t,`" . jssupportticket::$_db->prefix . "js_ticket_statuses` AS t2 WHERE t.ordering $jsst_order t2.ordering AND t2.id = ".esc_sql($jsst_id)." ORDER BY t.ordering $jsst_direction LIMIT 1";
+        $jsst_query = jssupportticket::$_db->prepare("SELECT t.ordering,t.id,t2.ordering AS ordering2 FROM `" . jssupportticket::$_db->prefix . "js_ticket_statuses` AS t,`" . jssupportticket::$_db->prefix . "js_ticket_statuses` AS t2 WHERE t.ordering $jsst_order t2.ordering AND t2.id = %d ORDER BY t.ordering $jsst_direction LIMIT 1", $jsst_id);
         $jsst_result = jssupportticket::$_db->get_row($jsst_query);
-        $jsst_query = "UPDATE `" . jssupportticket::$_db->prefix . "js_ticket_statuses` SET ordering = " . esc_sql($jsst_result->ordering) . " WHERE id = " . esc_sql($jsst_id);
+        $jsst_query = jssupportticket::$_db->prepare("UPDATE `" . jssupportticket::$_db->prefix . "js_ticket_statuses` SET ordering = %d WHERE id = %d", $jsst_result->ordering, $jsst_id);
         jssupportticket::$_db->query($jsst_query);
-        $jsst_query = "UPDATE `" . jssupportticket::$_db->prefix . "js_ticket_statuses` SET ordering = " . esc_sql($jsst_result->ordering2) . " WHERE id = " . esc_sql($jsst_result->id);
+        $jsst_query = jssupportticket::$_db->prepare("UPDATE `" . jssupportticket::$_db->prefix . "js_ticket_statuses` SET ordering = %d WHERE id = %d", $jsst_result->ordering2, $jsst_result->id);
         jssupportticket::$_db->query($jsst_query);
 
         $jsst_row = JSSTincluder::getJSTable('statuses');
@@ -196,9 +201,9 @@ class JSSTstatusModel {
     private function canRemoveStatus($jsst_id) {
         if (!is_numeric($jsst_id))
             return false;
-        $jsst_query = "SELECT (
-					(SELECT COUNT(id) FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE status = " . esc_sql($jsst_id) . ")
-					) AS total";
+        $jsst_query = jssupportticket::$_db->prepare("SELECT (
+					(SELECT COUNT(id) FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE status = %d)
+					) AS total", $jsst_id);
         $jsst_result = jssupportticket::$_db->get_var($jsst_query);
         if (jssupportticket::$_db->last_error != null) {
             JSSTincluder::getJSModel('systemerror')->addSystemError();
@@ -212,7 +217,7 @@ class JSSTstatusModel {
     function getStatusById($jsst_id) {
         if (!is_numeric($jsst_id))
             return false;
-        $jsst_query = "SELECT status FROM `" . jssupportticket::$_db->prefix . "js_ticket_statuses` WHERE id = ". esc_sql($jsst_id);
+        $jsst_query = jssupportticket::$_db->prepare("SELECT status FROM `" . jssupportticket::$_db->prefix . "js_ticket_statuses` WHERE id = %d", $jsst_id);
         $jsst_status = jssupportticket::$_db->get_var($jsst_query);
         return $jsst_status;
     }

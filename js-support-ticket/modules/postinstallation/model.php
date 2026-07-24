@@ -34,7 +34,7 @@ class JSSTPostinstallationModel {
         }
 
         foreach ($jsst_data as $jsst_key => $jsst_value) {
-            $jsst_query = "UPDATE `" . jssupportticket::$_db->prefix . "js_ticket_config` SET `configvalue` = '" . esc_sql($jsst_value) . "' WHERE `configname`= '" . esc_sql($jsst_key) . "'";
+            $jsst_query = jssupportticket::$_db->prepare("UPDATE `" . jssupportticket::$_db->prefix . "js_ticket_config` SET `configvalue` = %s WHERE `configname`= %s", $jsst_value, $jsst_key);
             jssupportticket::$_db->query($jsst_query);
 
             // Track status for error handling

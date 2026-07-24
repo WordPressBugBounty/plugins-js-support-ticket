@@ -12,7 +12,7 @@ class JSSTdeactivation {
         $jsst_timestamp = wp_next_scheduled( 'jsst_delete_expire_session_data' );
         wp_unschedule_event( $jsst_timestamp, 'jsst_delete_expire_session_data' );
         $jsst_id = jssupportticket::getPageid();
-        jssupportticket::$_db->get_var("UPDATE `" . jssupportticket::$_db->prefix . "posts` SET post_status = 'draft' WHERE ID = ".esc_sql($jsst_id));
+        jssupportticket::$_db->get_var(jssupportticket::$_db->prepare("UPDATE `" . jssupportticket::$_db->prefix . "posts` SET post_status = 'draft' WHERE ID = %d", $jsst_id));
 
         //Delete capabilities
         $jsst_role = get_role( 'administrator' );

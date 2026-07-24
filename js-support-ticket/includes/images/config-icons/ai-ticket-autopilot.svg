@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 26 26" fill="none" stroke="#E36953" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <!-- Centered to fit 26x26 perfectly -->
+    <g transform="translate(1, 1)">
+        <!-- Ticket body with side notches -->
+        <path d="M2 9a3 3 0 0 1 0 6v2a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-2a3 3 0 0 1 0-6V7a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2Z"></path>
+        <!-- Auto-pilot loop arrow (automation) -->
+        <path d="M15.2 9.6a3.2 3.2 0 1 0 .8 2.4"></path>
+        <polyline points="16.3 7.2 16.3 9.6 13.9 9.6"></polyline>
+    </g>
+</svg>

@@ -21,11 +21,20 @@ class JSSTformhandler {
             $jsst_page_id = JSSTRequest::getVar('page_id', 'GET');
             jssupportticket::setPageID($jsst_page_id);
             $jsst_modulename = (is_admin()) ? 'page' : 'jstmod';
-            $jsst_module = JSSTRequest::getVar($jsst_modulename);
+            $jsst_module = sanitize_key(JSSTRequest::getVar($jsst_modulename));
+            $jsst_task = sanitize_key(JSSTRequest::getVar('task'));
+            if (empty($jsst_module) || empty($jsst_task) || 0 === strpos($jsst_task, '__') || 0 === strpos($jsst_task, '_')) {
+                return;
+            }
             JSSTincluder::include_file($jsst_module);
             $jsst_class = 'JSST' . $jsst_module . "Controller";
-            $jsst_task = JSSTRequest::getVar('task');
+            if (!class_exists($jsst_class)) {
+                return;
+            }
             $jsst_obj = new $jsst_class;
+            if (!is_callable(array($jsst_obj, $jsst_task))) {
+                return;
+            }
             $jsst_obj->$jsst_task();
         }
     }

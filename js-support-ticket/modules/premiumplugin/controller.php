@@ -52,6 +52,9 @@ class JSSTpremiumpluginController {
     }
 
     function verifytransactionkey(){
+        if (!current_user_can('install_plugins')) {
+            return false;
+        }
         $jsst_nonce = JSSTrequest::getVar('_wpnonce');
         if (! wp_verify_nonce( $jsst_nonce, 'verify-transaction-key') ) {
             die( 'Security check Failed' );
@@ -66,7 +69,7 @@ class JSSTpremiumpluginController {
 
             $jsst_url = 'https://jshelpdesk.com/setup/index.php';
 
-            $jsst_response = wp_remote_post( $jsst_url, array('body' => $jsst_post_data,'timeout'=>7,'sslverify'=>false));
+            $jsst_response = wp_remote_post( $jsst_url, array('body' => $jsst_post_data,'timeout'=>7,'sslverify'=>true));
             if( !is_wp_error($jsst_response) && $jsst_response['response']['code'] == 200 && isset($jsst_response['body']) ){
                 $jsst_result = $jsst_response['body'];
                 $jsst_result = json_decode($jsst_result,true);
@@ -116,6 +119,9 @@ class JSSTpremiumpluginController {
     }
 
     function updatetransactionkey(){
+        if (!current_user_can('install_plugins')) {
+            return false;
+        }
         $jsst_nonce = JSSTrequest::getVar('_wpnonce');
         if (! wp_verify_nonce( $jsst_nonce, 'update-transaction-key') ) {
             die( 'Security check Failed' );
@@ -150,7 +156,7 @@ class JSSTpremiumpluginController {
 
             $jsst_url = 'https://jshelpdesk.com/setup/index.php';
 
-            $jsst_response = wp_remote_post( $jsst_url, array('body' => $jsst_post_data,'timeout'=>7,'sslverify'=>false));
+            $jsst_response = wp_remote_post( $jsst_url, array('body' => $jsst_post_data,'timeout'=>7,'sslverify'=>true));
             if( !is_wp_error($jsst_response) && $jsst_response['response']['code'] == 200 && isset($jsst_response['body']) ){
                 $jsst_result = $jsst_response['body'];
                 $jsst_result = json_decode($jsst_result,true);
@@ -230,6 +236,9 @@ class JSSTpremiumpluginController {
     }
 
     function jssupportticket_remove_unused_keys() {
+        if (!current_user_can('install_plugins')) {
+            return false;
+        }
         $jsst_nonce = JSSTrequest::getVar('_wpnonce');
         if (! wp_verify_nonce( $jsst_nonce, 'delete-transaction-key') ) {
             die( 'Security check Failed' );
@@ -250,6 +259,9 @@ class JSSTpremiumpluginController {
     }
 
     function downloadandinstalladdons(){
+        if (!current_user_can('install_plugins')) {
+            return false;
+        }
         $jsst_nonce = JSSTrequest::getVar('_wpnonce');
         if (! wp_verify_nonce( $jsst_nonce, 'download-and-install-addons') ) {
             die( 'Security check Failed' );

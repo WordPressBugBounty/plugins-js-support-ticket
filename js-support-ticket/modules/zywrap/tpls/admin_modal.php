@@ -183,8 +183,18 @@ window.ZywrapFormatter = {
             .replace(/([^\\s\\n])\\s+(-\\s+[A-Z0-9])/g, '\$1\\n\$2');
     },
 
+    escapeHTML: function(text) {
+        if (!text) return '';
+        return String(text)
+            .replace(/&/g, '&amp;')
+            .replace(/</g, '&lt;')
+            .replace(/>/g, '&gt;')
+            .replace(/\"/g, '&quot;')
+            .replace(/'/g, '&#39;');
+    },
+
     toHTML: function(markdownText) {
-        var preppedText = this.cleanRawMarkdown(markdownText);
+        var preppedText = this.cleanRawMarkdown(this.escapeHTML(markdownText));
         if (typeof marked !== 'undefined') {
             return marked.parse(preppedText, { breaks: true, gfm: true });
         }
@@ -225,7 +235,7 @@ window.ZywrapFormatter = {
             var cleanKey = key.replace(/_/g, ' ').replace(/\\b\\w/g, function(l){ return l.toUpperCase(); });
 
             html += '<div class=\"js-ticket-zywrap-json-card\">';
-            html += '<div class=\"js-ticket-zywrap-json-header\">' + cleanKey + '</div>';
+            html += '<div class=\"js-ticket-zywrap-json-header\">' + this.escapeHTML(cleanKey) + '</div>';
             html += '<div class=\"js-ticket-zywrap-json-body\">';
 
             if (Array.isArray(val)) {
@@ -235,13 +245,13 @@ window.ZywrapFormatter = {
                         for(var subK in item) {
                             var subVal = item[subK];
                             if(Array.isArray(subVal)) {
-                                subVal.forEach(function(sv) { html += '<li>' + sv + '</li>'; });
+                                subVal.forEach(function(sv) { html += '<li>' + ZywrapFormatter.escapeHTML(sv) + '</li>'; });
                             } else if (subVal !== null && subVal !== '') {
-                                html += '<li>' + subVal + '</li>';
+                                html += '<li>' + ZywrapFormatter.escapeHTML(subVal) + '</li>';
                             }
                         }
                     } else {
-                        html += '<li>' + item + '</li>';
+                        html += '<li>' + ZywrapFormatter.escapeHTML(item) + '</li>';
                     }
                 });
                 html += '</ul>';
@@ -252,11 +262,11 @@ window.ZywrapFormatter = {
                     if (subVal === null || subVal === '' || (Array.isArray(subVal) && subVal.length===0)) continue;
                     var cleanSubKey = subKey.replace(/_/g, ' ').replace(/\\b\\w/g, function(l){ return l.toUpperCase(); });
                     var displayVal = Array.isArray(subVal) ? subVal.join(', ') : subVal;
-                    html += '<div class=\"js-ticket-zywrap-json-item\"><strong>' + cleanSubKey + ':</strong> ' + displayVal + '</div>';
+                    html += '<div class=\"js-ticket-zywrap-json-item\"><strong>' + this.escapeHTML(cleanSubKey) + ':</strong> ' + this.escapeHTML(displayVal) + '</div>';
                 }
                 html += '</div>';
             } else {
-                html += val;
+                html += this.escapeHTML(val);
             }
             html += '</div></div>';
         }
