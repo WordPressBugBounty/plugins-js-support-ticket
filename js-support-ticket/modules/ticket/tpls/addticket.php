@@ -4,6 +4,20 @@
 if (JSSTincluder::getObjectClass('user')->isguest() && jssupportticket::$_config['show_captcha_on_visitor_from_ticket'] == 1 && jssupportticket::$_config['captcha_selection'] == 1) {
     wp_enqueue_script( 'ticket-recaptcha', 'https://www.google.com/recaptcha/api.js', array(), jssupportticket::$_config['productversion'], true );
 }
+
+// Mirrors getInstantResolveSearch() exactly: an absent row means on, and any
+// value other than 1 means off. Resolved here, at the top of the template, so
+// the script block and the panel markup below cannot disagree about it.
+$jsst_ir_on = !isset(jssupportticket::$_config['instantresolve_enable'])
+           || jssupportticket::$_config['instantresolve_enable'] == 1;
+
+// Click and view tracking needs the addon: it owns the module the events post
+// to, and it is the only thing that reads instantresolve_analytics or writes
+// the analytics table. The second half mirrors logDeflectionEvent()'s own gate,
+// so the browser stops sending exactly when the endpoint would stop recording.
+$jsst_ir_track = in_array('instantresolve', jssupportticket::$_active_addons)
+              && (!isset(jssupportticket::$_config['instantresolve_analytics'])
+                  || jssupportticket::$_config['instantresolve_analytics'] == 1);
 ?>
 <div class="jsst-main-up-wrapper">
 <?php
@@ -14,7 +28,300 @@ if (jssupportticket::$_config['offline'] == 2) {
         wp_enqueue_script('file_validate.js', JSST_PLUGIN_URL . 'includes/js/file_validate.js', array(), jssupportticket::$_config['productversion'], true);
 
 		wp_enqueue_style('jquery-ui-css', JSST_PLUGIN_URL . 'includes/css/jquery-ui-smoothness.css', array(), jssupportticket::$_config['productversion']);
-        $jsst_jssupportticket_js ="
+        // Emitted only while suggestions are on. These handlers used to bind
+        // regardless, and jsstRunInstantResolve() reveals the panel before the
+        // request comes back - so with the feature switched off every blur still
+        // cost a round trip and flashed "Searching for solutions..." until the
+        // empty reply hid it again. Not sending the code is the only fix that
+        // also stops the request.
+        $jsst_jssupportticket_js = "";
+        if ($jsst_ir_on) {
+        $jsst_jssupportticket_js .="
+            var jsst_instantresolve_timer;
+            var jsst_instantresolve_last = '';
+            var jsst_instantresolve_xhr = null;
+            var jsst_instantresolve_composing = false;
+            function jsstReadInstantResolve() {
+                var editor = (typeof tinyMCE !== 'undefined') ? tinyMCE.get('jsticket_message') : null;
+                var message = (editor && !editor.isHidden())
+                    ? editor.getContent({format: 'text'})
+                    : (jQuery('#jsticket_message').val() || '');
+
+                return { subject: jQuery('#subject').val() || '', message: message };
+            }
+            function jsstRunInstantResolve(withAnswer) {
+                var text = jsstReadInstantResolve();
+
+                if ((text.subject.length + text.message.length) < 15) {
+                    jQuery('#jsst-instant-fix-wrapper').hide();
+                    jQuery('#jsst-instant-fix-container').empty();
+                    jsst_instantresolve_last = '';
+                    return;
+                }
+
+                // Unchanged text returns identical links and, with the AI layer
+                // on, pays for the same answer a second time.
+                var signature = (withAnswer ? 'A|' : 'L|') + text.subject + '|' + text.message;
+                if (signature === jsst_instantresolve_last) return;
+                jsst_instantresolve_last = signature;
+
+                // A reply to text the customer has already moved past is not
+                // worth rendering, and out-of-order responses overwrite newer
+                // results with older ones.
+                if (jsst_instantresolve_xhr) jsst_instantresolve_xhr.abort();
+
+                jQuery('#jsst-instant-fix-container').html('<div class=\"jsst-fix-loading\"><img src=\"". esc_url(JSST_PLUGIN_URL) ."includes/images/loading.gif\" alt=\"".esc_html(__("Loading...", "js-support-ticket")) ."\" />". esc_html(__("Searching for solutions...", "js-support-ticket")) ."</div>');
+                jQuery('#jsst-instant-fix-wrapper').show();
+
+                jsst_instantresolve_xhr = jQuery.post(ajaxurl, {
+                    action: 'jsticket_ajax',
+                    jstmod: 'ticket',
+                    task: 'getInstantResolveSearch',
+                    subject: text.subject,
+                    message: text.message,
+                    summary: withAnswer ? 1 : 0,
+                    '_wpnonce': '". esc_attr(wp_create_nonce("get-instantresolve-search")) ."'
+                }, function(data) {
+                    jsst_instantresolve_xhr = null;
+                    if(data) {
+                        var results = JSON.parse(data);
+                        jsstRenderInstantResolve(results);
+                    }
+                });
+            }
+
+            /* Typing: links only, debounced. No AI call, no tokens. */
+            function jsstTriggerInstantResolve() {
+                // Mid-composition text is not a question yet. Typing Japanese,
+                // Chinese or Korean emits an event per keystroke while the
+                // candidate is still being assembled, and searching on those
+                // fragments is both wasted work and, briefly, wrong.
+                if (jsst_instantresolve_composing) return;
+
+                clearTimeout(jsst_instantresolve_timer);
+                jsst_instantresolve_timer = setTimeout(function() {
+                    jsstRunInstantResolve(false);
+                }, 800);
+            }
+
+            /* Finished with a field: one request that may include the answer. */
+            function jsstTriggerInstantResolveAnswer() {
+                clearTimeout(jsst_instantresolve_timer);
+                jsstRunInstantResolve(true);
+            }
+
+            var jsst_viewed_instantresolve = [];
+            var jsst_instantresolve_events = [];
+
+            /*
+             * Tracking posts to jstmod 'instantresolve', and that module ships
+             * with the addon. getPluginPath() only resolves a module name that
+             * is in \$_active_addons, so without the addon the request falls
+             * through to a core modules/instantresolve/ that does not exist and
+             * getJSModel() warns on the include before failing on the class.
+             *
+             * The functions still have to exist either way - the rendered cards
+             * call them from onclick - so the switch is here rather than around
+             * their definitions.
+             */
+            var jsst_instantresolve_track = ". ($jsst_ir_track ? 'true' : 'false') .";
+
+            function jsstTrackInstantResolveEvent(type, id, action) {
+                if (!jsst_instantresolve_track) return;
+                jsst_instantresolve_events.push({ type: type, id: id, action: action });
+            }
+
+            function jsstSendInstantResolveEvents() {
+                if (!jsst_instantresolve_track) return;
+                if (jsst_instantresolve_events.length === 0) return;
+                var events_to_send = jsst_instantresolve_events.slice();
+                jsst_instantresolve_events = [];
+
+                jQuery.post(ajaxurl, {
+                    action: 'jsticket_ajax',
+                    jstmod: 'instantresolve',
+                    task: 'logInstantResolveEvent',
+                    events: JSON.stringify(events_to_send),
+                    '_wpnonce': '". esc_attr(wp_create_nonce("log-instantresolve-event")) ."'
+                });
+            }
+
+            // Send events every 5 seconds or when leaving the page. Not even
+            // registered when there is nothing to send them to, so no timer
+            // wakes up every 5s to do nothing.
+            if (jsst_instantresolve_track) {
+                setInterval(jsstSendInstantResolveEvents, 5000);
+                jQuery(window).on('beforeunload', jsstSendInstantResolveEvents);
+            }
+
+            function jsstRenderInstantResolve(results) {
+                var container = jQuery('#jsst-instant-fix-container');
+                container.empty();
+                
+                if(results.length === 0) {
+                    jQuery('#jsst-instant-fix-wrapper').hide();
+                    return;
+                }
+
+                var html = '<div class=\"jsst-fix-grid\">';
+                jQuery.each(results, function(index, item) {
+                    if(item.type === 'ai_suggestion') {
+                        html += '<div class=\"jsst-fix-card jsst-ai-card\" data-type=\"ai_suggestion\" data-id=\"0\">';
+                        html += '<div class=\"jsst-ai-icon-wrp\">';
+                        html += '<svg class=\"jsst-ai-sparkle\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"currentColor\"><path d=\"M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09l2.846.813-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 00-2.456 2.456zM16.894 20.567L16.5 21.75l-.394-1.183a2.25 2.25 0 00-1.423-1.423L13.5 18.75l1.183-.394a2.25 2.25 0 001.423-1.423l.394-1.183.394 1.183a2.25 2.25 0 001.423 1.423l1.183.394-1.183.394a2.25 2.25 0 00-1.423 1.423z\"></path></svg>';
+                        html += '</div>';
+                        html += '<div class=\"jsst-fix-content jsst-ai-content\">';
+                        /* The addon sends this already translated and escaped,
+                           naming the assistant rather than the engine behind it.
+                           The fallback only matters if something produces an AI
+                           card without one. */
+                        html += '<span class=\"jsst-ai-badge\">' + (item.badge || '". esc_html(__('Powered by AI', 'js-support-ticket')) ."') + '</span>';
+                        html += '<p class=\"jsst-ai-text\">' + item.excerpt + '</p>';
+                        html += '</div>';
+                        html += '</div>';
+                        return; // Skip to next item in loop
+                    }
+
+                    // --- STANDARD RENDERING FOR KB/FAQ/EXTERNAL ---
+                    var thumbHtml = '';
+                    if(item.thumbnail) {
+                        thumbHtml = '<div class=\"jsst-fix-thumb\"><img src=\"' + item.thumbnail + '\" alt=\"\" /></div>';
+                    }
+                    
+                    var timestampHtml = '';
+                    if(item.timestamp) {
+                        timestampHtml = '<span class=\"jsst-fix-timestamp\">⏱️ ' + item.timestamp + '</span>';
+                    }
+
+                    /*
+                     * Three names for the same idea, so all three are tried.
+                     * The addon sends display_type to separate a video from a
+                     * web page inside the one 'scraped' source; core's free
+                     * search sends only content_type. Reading item.type alone
+                     * labelled every video - and every free-tier result - as an
+                     * article. item.type is left to tracking, which records the
+                     * source rather than the kind of document.
+                     */
+                    var kind = item.display_type || item.type || item.content_type;
+
+                    var typeLabel = '📄 Article';
+                    if(kind === 'video' || kind === 'video_timestamp') typeLabel = '🎥 Video';
+                    else if(kind === 'kb') typeLabel = '📚 Knowledge Base';
+                    else if(kind === 'faq') typeLabel = '❓ FAQ';
+
+                    html += '<a href=\"' + item.url + '\" target=\"_blank\" class=\"jsst-fix-card\" data-type=\"' + item.type + '\" data-id=\"' + item.id + '\" onclick=\"jsstTrackInstantResolveEvent(\'' + item.type + '\', ' + item.id + ', \'click\'); jsstSendInstantResolveEvents();\">';
+                    html += thumbHtml;
+                    html += '<div class=\"jsst-fix-content\">';
+                    html += '<span class=\"jsst-fix-type\">' + typeLabel + ' ' + timestampHtml + '</span>';
+                    html += '<h4 class=\"jsst-fix-title\">' + item.title + '</h4>';
+                    html += '<p class=\"jsst-fix-excerpt\">' + item.excerpt + '</p>';
+                    html += '</div>';
+                    html += '</a>';
+                    // Track View (only once per item per session)
+                    var viewKey = item.type + '_' + item.id;
+                    if (jQuery.inArray(viewKey, jsst_viewed_instantresolve) === -1) {
+                        jsst_viewed_instantresolve.push(viewKey);
+                        jsstTrackInstantResolveEvent(item.type, item.id, 'view');
+                    }
+                });
+                html += '</div>';
+                
+                // Add 'Did this solve your issue?' button
+                html += '<div class=\"jsst-fix-footer\"><button type=\"button\" class=\"button js-form-save\" onclick=\"jsstMarkSolved()\">". esc_html(__('Yes, this solved my issue!', 'js-support-ticket')) ."</button></div>';
+                
+                container.html(html);
+            }
+
+            function jsstMarkSolved() {
+                // Track solve for all currently viewed items
+                jQuery('.jsst-fix-card').each(function() {
+                    var type = jQuery(this).data('type');
+                    var id = jQuery(this).data('id');
+                    if(type && id !== undefined) {
+                        jsstTrackInstantResolveEvent(type, id, 'solve');
+                    }
+                });
+                jsstSendInstantResolveEvents();
+                
+                alert('". esc_html(__('Great! You can close this tab or submit a new ticket if you need more help.', 'js-support-ticket')) ."');
+                jQuery('#jsst-instant-fix-wrapper').hide();
+            }
+
+            // Bind to inputs
+            function jsstBindInstantResolveEditor(editor) {
+                if (!editor || editor.jsstInstantResolveBound) return;
+                editor.jsstInstantResolveBound = true;
+
+                editor.on('keyup change undo redo', jsstTriggerInstantResolve);
+
+                // Paste, cut and drop fire before the content lands in the
+                // editor, so reading it now returns the previous text.
+                editor.on('paste cut drop', function() {
+                    setTimeout(jsstTriggerInstantResolve, 0);
+                });
+
+                editor.on('blur', jsstTriggerInstantResolveAnswer);
+            }
+
+            /*
+             * Wait for the editor rather than for an event announcing it.
+             *
+             * tinyMCE.on('AddEditor') only reports editors added after it is
+             * registered. wp_editor() initialises this field during the same
+             * document-ready cycle, so by the time a handler here binds, that
+             * event has usually already fired for jsticket_message and will
+             * never fire again - which is why binding through it alone silently
+             * never binds at all. Polling for the instance does not care which
+             * of the two ran first, and stops the moment it finds one.
+             */
+            function jsstWatchInstantResolveEditor(attempt) {
+                if (typeof tinyMCE === 'undefined') return;
+
+                var jsst_list = tinyMCE.editors || [];
+                for (var jsst_i = 0; jsst_i < jsst_list.length; jsst_i++) {
+                    jsstBindInstantResolveEditor(jsst_list[jsst_i]);
+                }
+
+                // ~10s, then give up: the Text tab has no editor to wait for.
+                if (!tinyMCE.get('jsticket_message') && attempt < 40) {
+                    setTimeout(function() {
+                        jsstWatchInstantResolveEditor(attempt + 1);
+                    }, 250);
+                }
+            }
+
+            jQuery(document).ready(function() {
+                // 'input' alone, not 'input keyup'. For a text field input
+                // fires for everything keyup does and for what it does not -
+                // paste from the mouse, drag-drop, autofill, undo - so binding
+                // both only meant calling the handler twice per keystroke.
+                var jsst_fields = '#subject, #jsticket_message';
+
+                jQuery(document).on('input', jsst_fields, jsstTriggerInstantResolve);
+
+                // The expensive request happens once, when they leave a field.
+                jQuery(document).on('blur', jsst_fields, jsstTriggerInstantResolveAnswer);
+
+                // An IME is composing; the field holds a half-built character.
+                jQuery(document).on('compositionstart', jsst_fields, function() {
+                    jsst_instantresolve_composing = true;
+                });
+                jQuery(document).on('compositionend', jsst_fields, function() {
+                    jsst_instantresolve_composing = false;
+                    jsstTriggerInstantResolve();
+                });
+
+                if (typeof tinyMCE === 'undefined') return;
+
+                tinyMCE.on('AddEditor', function(e) {
+                    jsstBindInstantResolveEditor(e.editor);
+                });
+                jsstWatchInstantResolveEditor(0);
+            });
+            // instant fix end
+        ";
+        }
+        $jsst_jssupportticket_js .="
             var ajaxurl ='".esc_url(admin_url('admin-ajax.php'))."';
             function onSubmit(token) {
                 document.getElementById('adminTicketform').submit();
@@ -238,6 +545,7 @@ if (jssupportticket::$_config['offline'] == 2) {
                 $jsst_fieldcounter = 0;
                 $jsst_eddorderid = '';
                 apply_filters('js_support_ticket_frontend_ticket_form_start',1);
+                $jsst_suggestion_target = in_array('issuesummary', array_column(jssupportticket::$jsst_data['fieldordering'], 'field')) ? 'issuesummary' : 'subject';
                 foreach (jssupportticket::$jsst_data['fieldordering'] AS $jsst_field):
                     $jsst_readonlyclass = $jsst_field->readonly ? " js-form-ticket-readonly " : "";
                     $jsst_visibleclass = "";
@@ -924,6 +1232,20 @@ if (jssupportticket::$_config['offline'] == 2) {
                     }
 
                     //do_action_ref_array('jsst_ticket_form_field_loop', array($jsst_field, &$jsst_fieldcounter));
+                    if ($jsst_ir_on && $jsst_field->field === $jsst_suggestion_target) { ?>
+                        <?php // Element ids and classes below are deliberately unchanged - stylesheets key off them. ?>
+                        <!-- SUGGESTIONS CONTAINER -->
+                        <div id="jsst-instant-fix-wrapper" class="js-ticket-from-field-wrp js-ticket-from-field-wrp-full-width" style="display:none; margin-top: 15px;">
+                            <div class="js-ticket-from-field-title">
+                                <i class="js-icon-bulb"></i>
+                                <?php echo esc_html(__('Suggested Answers', 'js-support-ticket')); ?>
+                            </div>
+                            <div class="js-ticket-from-field" id="jsst-instant-fix-container">
+                                <!-- Results will be injected here via JS -->
+                            </div>
+                        </div>
+                        <?php
+                    }
 
                 endforeach;
                 if($jsst_fieldcounter != 0){

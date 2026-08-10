@@ -4188,6 +4188,114 @@ div.jsst-ticket-detail-timer-wrapper div.timer-right div.timer-buttons span.time
 }
     ';
 
+/*
+ * AI draft panel (Instant Resolve addon).
+ *
+ * The same markup renders in wp-admin, where the equivalent rules live in
+ * admincss.css with fixed colours. Here it sits inside the site theme, whose
+ * palette the admin can change, so every colour comes from the theme variables.
+ * Keep the two copies in step - they are one component shown in two places.
+ */
+$jsst_jssupportticket_css .= '
+    .jsst-ir-draft {
+        display: flex;
+        flex-wrap: wrap;
+        box-sizing: border-box;
+        margin: 18px 0;
+        padding: 16px 18px;
+        border: 1px solid ' . esc_attr($jsst_color5) . ';
+        border-left: 4px solid ' . esc_attr($jsst_color1) . ';
+        border-radius: 6px;
+        background: ' . esc_attr($jsst_color3) . ';
+        font-size: 14px;
+        line-height: 1.6;
+        color: ' . esc_attr($jsst_color2) . ';
+        text-align: left;
+    }
+    .jsst-ir-draft * { box-sizing: border-box; }
+    .jsst-ir-draft-head {
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-bottom: 10px;
+    }
+    .jsst-ir-draft-badge {
+        display: inline-block;
+        padding: 2px 8px;
+        border-radius: 10px;
+        background: ' . esc_attr($jsst_color1) . ';
+        color: ' . esc_attr($jsst_color7) . ';
+        font-size: 11px;
+        font-weight: 600;
+        letter-spacing: .04em;
+        line-height: 1.6;
+    }
+    .jsst-ir-draft-title { font-size: 14px; font-weight: 600; color: ' . esc_attr($jsst_color2) . '; }
+    .jsst-ir-draft-note { font-size: 12px; color: ' . esc_attr($jsst_color4) . '; font-style: italic; }
+    .jsst-ir-draft-body {
+        padding: 12px 14px;
+        border: 1px solid ' . esc_attr($jsst_color5) . ';
+        border-radius: 4px;
+        background: ' . esc_attr($jsst_color7) . ';
+        color: ' . esc_attr($jsst_color2) . ';
+        /* A long generated reply must not stretch the thread. */
+        max-height: 320px;
+        overflow-y: auto;
+        word-wrap: break-word;
+    }
+    .jsst-ir-draft-body p:first-child { margin-top: 0; }
+    .jsst-ir-draft-body p:last-child { margin-bottom: 0; }
+    .jsst-ir-draft-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-top: 12px;
+    }
+    .jsst-ir-draft .jsst-ir-btn {
+        display: inline-block;
+        margin: 0;
+        padding: 7px 14px;
+        border: 1px solid ' . esc_attr($jsst_color5) . ';
+        border-radius: 4px;
+        background: ' . esc_attr($jsst_color7) . ';
+        box-shadow: none;
+        color: ' . esc_attr($jsst_color2) . ';
+        font-family: inherit;
+        font-size: 13px;
+        font-weight: 500;
+        line-height: 1.4;
+        text-decoration: none;
+        cursor: pointer;
+        transition: background .15s ease, border-color .15s ease;
+    }
+    .jsst-ir-draft .jsst-ir-btn:hover {
+        background: ' . esc_attr($jsst_color3) . ';
+        border-color: ' . esc_attr($jsst_color4) . ';
+    }
+    .jsst-ir-draft .jsst-ir-btn-primary {
+        border-color: ' . esc_attr($jsst_color1) . ';
+        background: ' . esc_attr($jsst_color1) . ';
+        color: ' . esc_attr($jsst_color7) . ';
+    }
+    /* Darkened from the theme colour rather than hardcoded, so the hover still
+       reads as the same button whatever the admin picks. */
+    .jsst-ir-draft .jsst-ir-btn-primary:hover {
+        background: ' . esc_attr($jsst_color1) . ';
+        border-color: ' . esc_attr($jsst_color1) . ';
+        filter: brightness(.9);
+    }
+    /* Discard is destructive and stays red: the palette has no danger colour,
+       and tinting it with the brand would make it read as an ordinary button. */
+    .jsst-ir-draft .jsst-ir-btn-quiet { color: #b32d2e; }
+    .jsst-ir-draft .jsst-ir-btn-quiet:hover { background: #fcf0f0; border-color: #b32d2e; }
+    .jsst-ir-draft .jsst-ir-btn[disabled] { opacity: .55; cursor: default; }
+    @media (max-width: 600px) {
+        .jsst-ir-draft-actions { flex-direction: column; align-items: stretch; }
+        .jsst-ir-draft .jsst-ir-btn { width: 100%; text-align: center; }
+    }
+    ';
+
 wp_add_inline_style('jssupportticket-main-css', $jsst_jssupportticket_css);
 
 

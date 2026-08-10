@@ -13,16 +13,19 @@ if(in_array('notification', jssupportticket::$_active_addons)){
         do_action('jsst_ticket-notify-generate-token');
     }
 }
+if(isset(jssupportticket::$jsst_data["jsstconfigid"])){
+    $jsst_jsstconfigid = jssupportticket::$jsst_data["jsstconfigid"];
+} else {
+    $jsst_jsstconfigid =  "";
+}
 $jsst_jssupportticket_js ='
     jQuery(document).ready(function () {
         jQuery(".js-support-ticket-configurations-toggle").click(function(){
       	    jQuery(".js-support-ticket-configurations .js-support-ticket-configurations-left").toggle();
+        });
+        jQuery("form.js-support-ticket-configurations").on("submit", function(e) {
+            var jsstconfigid = "'. esc_js($jsst_jsstconfigid) .'";
         });';
-        if(isset(jssupportticket::$jsst_data["jsstconfigid"])){
-            $jsst_jsstconfigid = jssupportticket::$jsst_data["jsstconfigid"];
-        } else {
-            $jsst_jsstconfigid =  "";
-        }
         $jsst_jssupportticket_js .='
 
         var jsstconfigid = "'. esc_js($jsst_jsstconfigid) .'";
@@ -74,6 +77,9 @@ $jsst_jssupportticket_js ='
         }else if (jsstconfigid == "autocleanup") {
             jQuery("#autocleanup").css("display","inline-block");
             jQuery("#cn_ac").addClass("active");
+        }else if (jsstconfigid == "instantresolve") {
+            jQuery("#instantresolve").css("display","inline-block");
+            jQuery("#cn_ir").addClass("active");
         }else{
             jQuery("#general").css("display","inline-block");
             jQuery("#cn_gen").addClass("active");
@@ -516,6 +522,21 @@ $jsst_plugin_array = get_option('active_plugins');
                         </ul>
                     </li>
                 <?php } ?>
+                <?php // Suggestions is core's own feature, so this section is not gated on the addon. ?>
+                    <li class="treeview" id="cn_ir">
+                        <a href="?page=configuration&jsstconfigid=instantresolve" title="<?php echo esc_attr(__('Instant Resolve' , 'js-support-ticket')); ?>">
+                            <svg class="jsst_menu-icon" viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
+                            <span class="jsst_text"><?php echo esc_html(__('Instant Resolve' , 'js-support-ticket')); ?> </span>
+                        </a>
+                        <ul class="jsstadmin-sidebar-submenu treeview-menu">
+                            <li><a href="?page=configuration&jsstconfigid=instantresolve#InstantResolveSuggestions"><?php echo esc_html(__('Suggestions', 'js-support-ticket')); ?></a></li>
+                            <?php if(in_array('instantresolve', jssupportticket::$_active_addons)){ ?>
+                                <li><a href="?page=configuration&jsstconfigid=instantresolve#InstantResolveAI"><?php echo esc_html(__('AI Assistant', 'js-support-ticket')); ?></a></li>
+                                <li><a href="?page=configuration&jsstconfigid=instantresolve#InstantResolveReplies"><?php echo esc_html(__('Automatic Replies', 'js-support-ticket')); ?></a></li>
+                                <li><a href="?page=configuration&jsstconfigid=instantresolve#InstantResolveAdvanced"><?php echo esc_html(__('Advanced', 'js-support-ticket')); ?></a></li>
+                            <?php } ?>
+                        </ul>
+                    </li>
                 <?php if(in_array('sociallogin', jssupportticket::$_active_addons)){ ?>
                   <li class="treeview" id="cn_sl" style="display:none;">
                       <a href="?page=configuration&jsstconfigid=sociallogin" title="<?php echo esc_attr(__('Social Login' , 'js-support-ticket')); ?>">
@@ -2123,6 +2144,455 @@ $jsst_plugin_array = get_option('active_plugins');
                         ?>
                     </div>
                 <?php } ?>
+            </div>
+
+
+            <!-- .....Instant Resolve..... -->
+            <div id="instantresolve" class="jsstadmin-hide-config">
+                <?php
+                // Suggestions is core's own: getInstantResolveSearch() falls back to
+                // getBasicFixSuggestions() when no addon claims the search filter, so
+                // the feature runs - and must stay configurable - with nothing
+                // installed. Only the AI half below belongs to the addon.
+                $jsst_ir_addon = in_array('instantresolve', jssupportticket::$_active_addons);
+                ?>
+                    <div class="tabs config-tabs" id="tabs">
+                        <ul class="jsst_tabs">
+                            <li class="tab-link jsst_current_tab" data-jsst-tab="general"><a href="#InstantResolveSuggestions"><?php echo esc_html(__('Suggestions', 'js-support-ticket')); ?></a></li>
+                            <?php if($jsst_ir_addon){ ?>
+                                <li class="tab-link jsst_current_tab" data-jsst-tab="general"><a href="#InstantResolveAI"><?php echo esc_html(__('AI Assistant', 'js-support-ticket')); ?></a></li>
+                                <li class="tab-link jsst_current_tab" data-jsst-tab="general"><a href="#InstantResolveReplies"><?php echo esc_html(__('Automatic Replies', 'js-support-ticket')); ?></a></li>
+                                <li class="tab-link jsst_current_tab" data-jsst-tab="general"><a href="#InstantResolveAdvanced"><?php echo esc_html(__('Advanced', 'js-support-ticket')); ?></a></li>
+                            <?php } ?>
+                        </ul>
+                    </div>
+
+                    <?php
+                    // Multi-value settings are stored as JSON in a single row.
+                    // Checkboxes are far clearer than six yes/no dropdowns, so
+                    // they post into a hidden field that JS keeps in sync.
+                    $jsst_ir_sources_on = isset(jssupportticket::$jsst_data[0]['instantresolve_sources'])
+                        ? json_decode(jssupportticket::$jsst_data[0]['instantresolve_sources'], true) : array();
+                    if (!is_array($jsst_ir_sources_on)) $jsst_ir_sources_on = array();
+                    ?>
+
+                    <!-- ===================== SUGGESTIONS ===================== -->
+                    <div class="jsst_gen_body" id="InstantResolveSuggestions">
+                        <h2><?php echo esc_html(__('Suggestions', 'js-support-ticket')); ?></h2>
+                        <p class="description"><?php echo esc_html(__('Shown on the ticket form while a customer types, so they can find the answer without opening a ticket at all.', 'js-support-ticket')); ?></p>
+                        <?php
+                        if(isset(jssupportticket::$jsst_data[0]['instantresolve_enable'])){
+                            $jsst_title = esc_html(__('Show suggestions', 'js-support-ticket'));
+                            $jsst_field = JSSTformfield::select('instantresolve_enable', $jsst_yesno, jssupportticket::$jsst_data[0]['instantresolve_enable']);
+                            $jsst_description = esc_html(__('Search your content as the customer types and offer matching answers.', 'js-support-ticket'));
+                            JSST_printConfigFieldSingle($jsst_title, $jsst_field, $jsst_description);
+                        }
+                        if(isset(jssupportticket::$jsst_data[0]['instantresolve_min_chars'])){
+                            $jsst_title = esc_html(__('Start searching after', 'js-support-ticket'));
+                            $jsst_field = JSSTformfield::text('instantresolve_min_chars', jssupportticket::$jsst_data[0]['instantresolve_min_chars'], array('class' => 'inputbox'));
+                            $jsst_description = esc_html(__('Characters typed across the subject and message before searching begins. 15 is a good default.', 'js-support-ticket'));
+                            JSST_printConfigFieldSingle($jsst_title, $jsst_field, $jsst_description);
+                        }
+                        if(isset(jssupportticket::$jsst_data[0]['instantresolve_sources'])){
+                            // 'addon' names the sibling addon that owns the content, matching
+                            // getSourceDefinitions() in the addon's retriever and $jsst_tables
+                            // in getBasicFixSuggestions(). Both already skip a source whose
+                            // addon is inactive, so an unqualified tickbox here promises a
+                            // search that will not happen.
+                            $jsst_ir_source_opts = array(
+                                'kb'      => array('label' => __('Knowledgebase articles', 'js-support-ticket'),
+                                                   'addon' => 'knowledgebase',
+                                                   'owner' => __('Knowledgebase', 'js-support-ticket')),
+                                'faq'     => array('label' => __('FAQs', 'js-support-ticket'),
+                                                   'addon' => 'faq',
+                                                   'owner' => __('FAQ', 'js-support-ticket')),
+                                'canned'  => array('label' => __('Canned responses', 'js-support-ticket'),
+                                                   'addon' => 'cannedresponses',
+                                                   'owner' => __('Canned Responses', 'js-support-ticket')),
+                                'posts'   => array('label' => __('WordPress posts and pages', 'js-support-ticket'),
+                                                   'addon' => null, 'owner' => ''),
+                            );
+                            // Scraped documentation and past tickets are indexed by the
+                            // addon, so offering them without it would be a tickbox that
+                            // silently searches nothing.
+                            if($jsst_ir_addon){
+                                $jsst_ir_source_opts['scraped'] = array('label' => __('Indexed documentation and videos', 'js-support-ticket'),
+                                                                        'addon' => null, 'owner' => '');
+                                $jsst_ir_source_opts['tickets'] = array('label' => __('Previously resolved tickets', 'js-support-ticket'),
+                                                                        'addon' => null, 'owner' => '');
+                            }
+                            $jsst_field = '<div class="jsst-ir-checks" data-jsst-ir-target="instantresolve_sources">';
+                            foreach ($jsst_ir_source_opts as $jsst_ir_k => $jsst_ir_opt) {
+                                // Disabled rather than hidden, and it keeps its tick. The sync
+                                // script rebuilds the hidden field from the boxes it can see,
+                                // so dropping one would erase that source from the saved value
+                                // the next time any other box was touched - and it would stay
+                                // erased after the addon came back. A disabled box is still
+                                // matched by :checked, so the setting survives untouched.
+                                $jsst_ir_off = ($jsst_ir_opt['addon'] !== null)
+                                            && !in_array($jsst_ir_opt['addon'], jssupportticket::$_active_addons);
+                                $jsst_field .= '<label' . ($jsst_ir_off ? ' class="jsst-ir-off"' : '') . '>'
+                                            . '<input type="checkbox" value="' . esc_attr($jsst_ir_k) . '"'
+                                            . (in_array($jsst_ir_k, $jsst_ir_sources_on, true) ? ' checked' : '')
+                                            . ($jsst_ir_off ? ' disabled' : '') . '> '
+                                            . esc_html($jsst_ir_opt['label']);
+                                if ($jsst_ir_off) {
+                                    $jsst_field .= ' <span class="jsst-ir-off-note">' . esc_html(sprintf(
+                                        /* translators: %s: name of the addon that owns this content */
+                                        __('needs the %s addon', 'js-support-ticket'), $jsst_ir_opt['owner']
+                                    )) . '</span>';
+                                }
+                                $jsst_field .= '</label>';
+                            }
+                            $jsst_field .= '<input type="hidden" name="instantresolve_sources" id="instantresolve_sources" value="'
+                                        . esc_attr(jssupportticket::$jsst_data[0]['instantresolve_sources']) . '"></div>';
+                            $jsst_title = esc_html(__('Search these', 'js-support-ticket'));
+                            // Without the addon there is no AI reading this content, so the
+                            // field governs suggestions and nothing else. Describing it as
+                            // what "the AI is allowed to answer from" would point at a
+                            // feature that is not installed.
+                            $jsst_description = $jsst_ir_addon
+                                ? esc_html(__('The same content the AI is allowed to answer from. Anything unticked is invisible to both.', 'js-support-ticket'))
+                                : esc_html(__('Where suggestions are searched for. Anything unticked is never shown.', 'js-support-ticket'));
+                            JSST_printConfigFieldSingle($jsst_title, $jsst_field, $jsst_description);
+                        }
+                        if(isset(jssupportticket::$jsst_data[0]['instantresolve_max_results'])){
+                            $jsst_title = esc_html(__('How many to show', 'js-support-ticket'));
+                            $jsst_field = JSSTformfield::text('instantresolve_max_results', jssupportticket::$jsst_data[0]['instantresolve_max_results'], array('class' => 'inputbox'));
+                            $jsst_description = esc_html(__('Maximum suggestions on the ticket form, between 1 and 10.', 'js-support-ticket'));
+                            JSST_printConfigFieldSingle($jsst_title, $jsst_field, $jsst_description);
+                        }
+                        // Addon-gated even though the row is core's. Nothing in core writes
+                        // the analytics table and nothing reads this setting, so without the
+                        // addon it is a switch wired to nothing - pointing, in its own
+                        // description, at an Overview screen the side menu does not render.
+                        // storeConfiguration() only walks the keys that were posted, so
+                        // leaving the field out preserves the stored value rather than
+                        // clearing it.
+                        if($jsst_ir_addon && isset(jssupportticket::$jsst_data[0]['instantresolve_analytics'])){
+                            $jsst_title = esc_html(__('Record what was shown', 'js-support-ticket'));
+                            $jsst_field = JSSTformfield::select('instantresolve_analytics', $jsst_yesno, jssupportticket::$jsst_data[0]['instantresolve_analytics']);
+                            $jsst_description = esc_html(__('Track which suggestions customers saw and opened, for the Instant Resolve overview.', 'js-support-ticket'));
+                            JSST_printConfigFieldSingle($jsst_title, $jsst_field, $jsst_description);
+                        }
+                        ?>
+                    </div>
+
+                <?php if($jsst_ir_addon){ ?>
+
+                    <?php
+                    // Option lists used below. Built here rather than inline so
+                    // the field definitions stay readable.
+                    $jsst_ir_tones = array(
+                        (object) array('id' => 'professional', 'text' => esc_html(__('Professional', 'js-support-ticket'))),
+                        (object) array('id' => 'friendly',     'text' => esc_html(__('Friendly', 'js-support-ticket'))),
+                        (object) array('id' => 'concise',      'text' => esc_html(__('Concise', 'js-support-ticket'))),
+                        (object) array('id' => 'empathetic',   'text' => esc_html(__('Empathetic', 'js-support-ticket'))),
+                    );
+                    $jsst_ir_modes = array(
+                        (object) array('id' => 'strict_kb',    'text' => esc_html(__('Only answer from my content (recommended)', 'js-support-ticket'))),
+                        (object) array('id' => 'kb_preferred', 'text' => esc_html(__('Prefer my content, allow drafts without it', 'js-support-ticket'))),
+                        (object) array('id' => 'open',         'text' => esc_html(__('Let the AI answer freely (not recommended)', 'js-support-ticket'))),
+                    );
+                    $jsst_ir_delays = array(
+                        (object) array('id' => '0',  'text' => esc_html(__('Immediately', 'js-support-ticket'))),
+                        (object) array('id' => '1',  'text' => esc_html(__('After 1 minute', 'js-support-ticket'))),
+                        (object) array('id' => '2',  'text' => esc_html(__('After 2 minutes', 'js-support-ticket'))),
+                        (object) array('id' => '5',  'text' => esc_html(__('After 5 minutes', 'js-support-ticket'))),
+                        (object) array('id' => '10', 'text' => esc_html(__('After 10 minutes', 'js-support-ticket'))),
+                        (object) array('id' => '15', 'text' => esc_html(__('After 15 minutes', 'js-support-ticket'))),
+                        (object) array('id' => '30', 'text' => esc_html(__('After 30 minutes', 'js-support-ticket'))),
+                    );
+                    $jsst_ir_fallbacks = array(
+                        (object) array('id' => 'draft_reply', 'text' => esc_html(__('Save it as a draft for an agent', 'js-support-ticket'))),
+                        (object) array('id' => 'nothing',     'text' => esc_html(__('Do nothing', 'js-support-ticket'))),
+                    );
+                    $jsst_ir_providers = array();
+                    if (class_exists('JSSTInstantResolveProviderFactory')) {
+                        foreach (JSSTInstantResolveProviderFactory::getAvailableProviders() as $jsst_ir_pid => $jsst_ir_plabel) {
+                            $jsst_ir_providers[] = (object) array('id' => $jsst_ir_pid, 'text' => esc_html($jsst_ir_plabel));
+                        }
+                    }
+
+                    // Multi-value settings are stored as JSON in a single row.
+                    // Checkboxes are far clearer than a row of yes/no dropdowns,
+                    // so they post into a hidden field that JS keeps in sync.
+                    // instantresolve_sources is read further up, with the
+                    // Suggestions section that uses it.
+                    $jsst_ir_users_on = isset(jssupportticket::$jsst_data[0]['instantresolve_autopilot_target_users'])
+                        ? json_decode(jssupportticket::$jsst_data[0]['instantresolve_autopilot_target_users'], true) : array();
+                    if (!is_array($jsst_ir_users_on)) $jsst_ir_users_on = array();
+
+                    $jsst_ir_depts_on = isset(jssupportticket::$jsst_data[0]['instantresolve_autopilot_target_departments'])
+                        ? json_decode(jssupportticket::$jsst_data[0]['instantresolve_autopilot_target_departments'], true) : array();
+                    if (!is_array($jsst_ir_depts_on)) $jsst_ir_depts_on = array();
+
+                    // Zywrap is the only engine, so with no key every AI feature
+                    // below is inert - the provider refuses before it calls out,
+                    // the ticket form simply shows no written answer and Autopilot
+                    // logs an error nobody is watching. Switching the settings on
+                    // and seeing nothing happen is the whole failure, so it is
+                    // said here rather than left to be discovered.
+                    //
+                    // Read the same two places the provider reads, in the same
+                    // order, or the notice could disagree with what actually runs.
+                    $jsst_ir_key = !empty(jssupportticket::$jsst_data[0]['zywrap_api_key'])
+                        ? jssupportticket::$jsst_data[0]['zywrap_api_key']
+                        : get_option('jsst_zywrap_api_key');
+
+                    $jsst_ir_nokey = '';
+                    if (empty($jsst_ir_key)) {
+                        $jsst_ir_nokey = '<div class="jsst-ir-warn"><strong>'
+                            . esc_html(__('No Zywrap API key', 'js-support-ticket')) . '</strong> '
+                            . esc_html(__('Everything on this tab needs one, and nothing here will run until it is set. Suggestions from your own content keep working.', 'js-support-ticket'))
+                            . ' <a href="' . esc_url(admin_url('admin.php?page=zywrap&jstlay=zywrap_settings')) . '">'
+                            . esc_html(__('Add your key', 'js-support-ticket')) . '</a></div>';
+                    }
+                    ?>
+
+                    <!-- ===================== AI ASSISTANT ===================== -->
+                    <div class="jsst_gen_body" id="InstantResolveAI">
+                        <h2><?php echo esc_html(__('AI Assistant', 'js-support-ticket')); ?></h2>
+                        <p class="description"><?php echo esc_html(__('Settings shared by the written answer on the ticket form and the automatic replies.', 'js-support-ticket')); ?></p>
+                        <?php
+                        // Repeated on the Replies tab below: the tabs hide one
+                        // another, so an admin who lands on that one would never
+                        // see a notice shown only here.
+                        echo wp_kses_post($jsst_ir_nokey);
+                        ?>
+                        <?php
+                        if(isset(jssupportticket::$jsst_data[0]['instantresolve_ai_enable'])){
+                            $jsst_title = esc_html(__('Write an answer on the ticket form', 'js-support-ticket'));
+                            $jsst_field = JSSTformfield::select('instantresolve_ai_enable', $jsst_yesno, jssupportticket::$jsst_data[0]['instantresolve_ai_enable']);
+                            $jsst_description = esc_html(__('Show a short written answer above the suggested links, based only on the content that was found.', 'js-support-ticket'));
+                            JSST_printConfigFieldSingle($jsst_title, $jsst_field, $jsst_description);
+                        }
+                        if(isset(jssupportticket::$jsst_data[0]['instantresolve_ai_sources_limit'])){
+                            $jsst_title = esc_html(__('Sources per answer', 'js-support-ticket'));
+                            $jsst_field = JSSTformfield::text('instantresolve_ai_sources_limit', jssupportticket::$jsst_data[0]['instantresolve_ai_sources_limit'], array('class' => 'inputbox'));
+                            $jsst_description = esc_html(__('How many matching passages the AI may use when writing that answer, between 1 and 8.', 'js-support-ticket'));
+                            JSST_printConfigFieldSingle($jsst_title, $jsst_field, $jsst_description);
+                        }
+                        if(isset(jssupportticket::$jsst_data[0]['instantresolve_ai_tone'])){
+                            $jsst_title = esc_html(__('Tone', 'js-support-ticket'));
+                            $jsst_field = JSSTformfield::select('instantresolve_ai_tone', $jsst_ir_tones, jssupportticket::$jsst_data[0]['instantresolve_ai_tone']);
+                            $jsst_description = esc_html(__('How replies should read. Used everywhere the AI writes.', 'js-support-ticket'));
+                            JSST_printConfigFieldSingle($jsst_title, $jsst_field, $jsst_description);
+                        }
+                        if(isset(jssupportticket::$jsst_data[0]['instantresolve_ai_language'])){
+                            $jsst_title = esc_html(__('Language', 'js-support-ticket'));
+                            $jsst_field = JSSTformfield::text('instantresolve_ai_language', jssupportticket::$jsst_data[0]['instantresolve_ai_language'], array('class' => 'inputbox'));
+                            $jsst_description = esc_html(__('Enter a language name, or "auto" to reply in whichever language the customer wrote in.', 'js-support-ticket'));
+                            JSST_printConfigFieldSingle($jsst_title, $jsst_field, $jsst_description);
+                        }
+                        if(isset(jssupportticket::$jsst_data[0]['instantresolve_ai_provider']) && !empty($jsst_ir_providers)){
+                            $jsst_title = esc_html(__('AI engine', 'js-support-ticket'));
+                            $jsst_field = JSSTformfield::select('instantresolve_ai_provider', $jsst_ir_providers, jssupportticket::$jsst_data[0]['instantresolve_ai_provider']);
+                            $jsst_description = esc_html(__('The hosted engine needs a Zywrap API key.', 'js-support-ticket'));
+                            JSST_printConfigFieldSingle($jsst_title, $jsst_field, $jsst_description);
+                        }
+                        ?>
+                    </div>
+
+                    <!-- ===================== AUTOMATIC REPLIES ===================== -->
+                    <div class="jsst_gen_body" id="InstantResolveReplies">
+                        <h2><?php echo esc_html(__('Automatic Replies', 'js-support-ticket')); ?></h2>
+                        <p class="description"><?php echo esc_html(__('What happens after a ticket is submitted. Replies below the confidence level are saved as drafts for an agent rather than sent.', 'js-support-ticket')); ?></p>
+                        <?php echo wp_kses_post($jsst_ir_nokey); ?>
+                        <?php
+                        if(isset(jssupportticket::$jsst_data[0]['instantresolve_autopilot_enable'])){
+                            $jsst_title = esc_html(__('Answer tickets automatically', 'js-support-ticket'));
+                            $jsst_field = JSSTformfield::select('instantresolve_autopilot_enable', $jsst_yesno, jssupportticket::$jsst_data[0]['instantresolve_autopilot_enable']);
+                            $jsst_description = esc_html(__('Try to answer new tickets from your own content. Start with this off and review the drafts first.', 'js-support-ticket'));
+                            JSST_printConfigFieldSingle($jsst_title, $jsst_field, $jsst_description);
+                        }
+                        if(isset(jssupportticket::$jsst_data[0]['instantresolve_autopilot_display_name'])){
+                            $jsst_title = esc_html(__('Signed as', 'js-support-ticket'));
+                            $jsst_field = JSSTformfield::text('instantresolve_autopilot_display_name', jssupportticket::$jsst_data[0]['instantresolve_autopilot_display_name'], array('class' => 'inputbox'));
+                            $jsst_description = esc_html(__('The name customers see wherever the AI speaks - signed on an automatic reply, and on the suggested answer shown while they type. Something clearly not a person, such as "AI Assistant", is the honest choice.', 'js-support-ticket'));
+                            JSST_printConfigFieldSingle($jsst_title, $jsst_field, $jsst_description);
+                        }
+                        if(isset(jssupportticket::$jsst_data[0]['instantresolve_autopilot_min_confidence'])){
+                            $jsst_title = esc_html(__('Send only when confident', 'js-support-ticket'));
+                            $jsst_field = JSSTformfield::text('instantresolve_autopilot_min_confidence', jssupportticket::$jsst_data[0]['instantresolve_autopilot_min_confidence'], array('class' => 'inputbox'));
+                            $jsst_description = esc_html(__('Percentage from 0 to 100. Anything below this becomes a draft. 85 is a cautious starting point.', 'js-support-ticket'));
+                            JSST_printConfigFieldSingle($jsst_title, $jsst_field, $jsst_description);
+                        }
+                        if(isset(jssupportticket::$jsst_data[0]['instantresolve_autopilot_max_replies'])){
+                            $jsst_title = esc_html(__('Replies per ticket', 'js-support-ticket'));
+                            $jsst_field = JSSTformfield::text('instantresolve_autopilot_max_replies', jssupportticket::$jsst_data[0]['instantresolve_autopilot_max_replies'], array('class' => 'inputbox'));
+                            $jsst_description = esc_html(__('How many times the AI may reply to the same ticket before it stops and waits for a person.', 'js-support-ticket'));
+                            JSST_printConfigFieldSingle($jsst_title, $jsst_field, $jsst_description);
+                        }
+                        if(isset(jssupportticket::$jsst_data[0]['instantresolve_autopilot_delay'])){
+                            $jsst_title = esc_html(__('Reply', 'js-support-ticket'));
+                            $jsst_field = JSSTformfield::select('instantresolve_autopilot_delay', $jsst_ir_delays, jssupportticket::$jsst_data[0]['instantresolve_autopilot_delay']);
+                            $jsst_description = esc_html(__('A short delay makes the reply feel less abrupt and gives an agent time to step in first.', 'js-support-ticket'));
+                            JSST_printConfigFieldSingle($jsst_title, $jsst_field, $jsst_description);
+                        }
+                        if(isset(jssupportticket::$jsst_data[0]['instantresolve_autopilot_fallback'])){
+                            $jsst_title = esc_html(__('When not confident enough', 'js-support-ticket'));
+                            $jsst_field = JSSTformfield::select('instantresolve_autopilot_fallback', $jsst_ir_fallbacks, jssupportticket::$jsst_data[0]['instantresolve_autopilot_fallback']);
+                            $jsst_description = esc_html(__('A draft appears on the ticket for an agent to send, edit or discard. The customer never sees it.', 'js-support-ticket'));
+                            JSST_printConfigFieldSingle($jsst_title, $jsst_field, $jsst_description);
+                        }
+                        if(isset(jssupportticket::$jsst_data[0]['instantresolve_autopilot_target_users'])){
+                            $jsst_ir_user_opts = array(
+                                'logged_in' => __('Registered customers', 'js-support-ticket'),
+                                'guest'     => __('Guests', 'js-support-ticket'),
+                            );
+                            $jsst_field = '<div class="jsst-ir-checks" data-jsst-ir-target="instantresolve_autopilot_target_users">';
+                            foreach ($jsst_ir_user_opts as $jsst_ir_k => $jsst_ir_label) {
+                                $jsst_field .= '<label><input type="checkbox" value="' . esc_attr($jsst_ir_k) . '"'
+                                            . (in_array($jsst_ir_k, $jsst_ir_users_on, true) ? ' checked' : '') . '> '
+                                            . esc_html($jsst_ir_label) . '</label>';
+                            }
+                            $jsst_field .= '<input type="hidden" name="instantresolve_autopilot_target_users" id="instantresolve_autopilot_target_users" value="'
+                                        . esc_attr(jssupportticket::$jsst_data[0]['instantresolve_autopilot_target_users']) . '"></div>';
+                            $jsst_title = esc_html(__('Answer tickets from', 'js-support-ticket'));
+                            $jsst_description = esc_html(__('Guests are only ever answered from content that is public, never from articles restricted to logged-in users.', 'js-support-ticket'));
+                            JSST_printConfigFieldSingle($jsst_title, $jsst_field, $jsst_description);
+                        }
+                        if(isset(jssupportticket::$jsst_data[0]['instantresolve_autopilot_target_departments'])){
+                            $jsst_ir_depts = jssupportticket::$_db->get_results(
+                                "SELECT id, departmentname FROM `" . jssupportticket::$_db->prefix . "js_ticket_departments` WHERE status = 1"
+                            );
+                            $jsst_field = '<div class="jsst-ir-checks" data-jsst-ir-target="instantresolve_autopilot_target_departments">';
+                            if (empty($jsst_ir_depts)) {
+                                $jsst_field .= '<em>' . esc_html(__('No departments found.', 'js-support-ticket')) . '</em>';
+                            } else {
+                                foreach ($jsst_ir_depts as $jsst_ir_d) {
+                                    $jsst_field .= '<label><input type="checkbox" value="' . esc_attr($jsst_ir_d->id) . '"'
+                                                . (in_array((string) $jsst_ir_d->id, array_map('strval', $jsst_ir_depts_on), true) ? ' checked' : '') . '> '
+                                                . esc_html($jsst_ir_d->departmentname) . '</label>';
+                                }
+                            }
+                            $jsst_field .= '<input type="hidden" name="instantresolve_autopilot_target_departments" id="instantresolve_autopilot_target_departments" value="'
+                                        . esc_attr(jssupportticket::$jsst_data[0]['instantresolve_autopilot_target_departments']) . '"></div>';
+                            $jsst_title = esc_html(__('Only these departments', 'js-support-ticket'));
+                            $jsst_description = esc_html(__('Leave all unticked to cover every department.', 'js-support-ticket'));
+                            JSST_printConfigFieldSingle($jsst_title, $jsst_field, $jsst_description);
+                        }
+                        if(isset(jssupportticket::$jsst_data[0]['instantresolve_autopilot_blacklist_keywords'])){
+                            $jsst_title = esc_html(__('Never answer if it mentions', 'js-support-ticket'));
+                            $jsst_field = JSSTformfield::textarea('instantresolve_autopilot_blacklist_keywords', jssupportticket::$jsst_data[0]['instantresolve_autopilot_blacklist_keywords'], array('class' => 'inputbox', 'rows' => '3'));
+                            $jsst_description = esc_html(__('Comma separated. A ticket containing any of these always goes to a person. Refunds, cancellations and angry wording belong here.', 'js-support-ticket'));
+                            JSST_printConfigFieldSingle($jsst_title, $jsst_field, $jsst_description);
+                        }
+                        if(isset(jssupportticket::$jsst_data[0]['instantresolve_autopilot_blacklist_emails'])){
+                            $jsst_title = esc_html(__('Never answer these senders', 'js-support-ticket'));
+                            $jsst_field = JSSTformfield::textarea('instantresolve_autopilot_blacklist_emails', jssupportticket::$jsst_data[0]['instantresolve_autopilot_blacklist_emails'], array('class' => 'inputbox', 'rows' => '2'));
+                            $jsst_description = esc_html(__('Comma separated addresses or domains, for example @keyclient.com.', 'js-support-ticket'));
+                            JSST_printConfigFieldSingle($jsst_title, $jsst_field, $jsst_description);
+                        }
+                        ?>
+                    </div>
+
+                    <!-- ===================== ADVANCED ===================== -->
+                    <div class="jsst_gen_body" id="InstantResolveAdvanced">
+                        <h2><?php echo esc_html(__('Advanced', 'js-support-ticket')); ?></h2>
+                        <p class="description"><?php echo esc_html(__('These control how strictly the AI is held to your content. The defaults are deliberately cautious; use Test Retrieval to see the effect of any change before saving it.', 'js-support-ticket')); ?></p>
+                        <?php
+                        if(isset(jssupportticket::$jsst_data[0]['instantresolve_grounding_mode'])){
+                            $jsst_title = esc_html(__('Where answers may come from', 'js-support-ticket'));
+                            $jsst_field = JSSTformfield::select('instantresolve_grounding_mode', $jsst_ir_modes, jssupportticket::$jsst_data[0]['instantresolve_grounding_mode']);
+                            $jsst_description = esc_html(__('Answering freely is how an AI invents steps that do not exist. Leave this on the first option unless you have a specific reason not to.', 'js-support-ticket'));
+                            JSST_printConfigFieldSingle($jsst_title, $jsst_field, $jsst_description);
+                        }
+                        if(isset(jssupportticket::$jsst_data[0]['instantresolve_min_coverage_deflect'])){
+                            $jsst_title = esc_html(__('Match needed for a suggestion', 'js-support-ticket'));
+                            $jsst_field = JSSTformfield::text('instantresolve_min_coverage_deflect', jssupportticket::$jsst_data[0]['instantresolve_min_coverage_deflect'], array('class' => 'inputbox'));
+                            $jsst_description = esc_html(__('Percentage of the question a page must cover to be suggested, from 10 to 100. A loose value is fine here, since the customer can simply ignore a poor suggestion.', 'js-support-ticket'));
+                            JSST_printConfigFieldSingle($jsst_title, $jsst_field, $jsst_description);
+                        }
+                        if(isset(jssupportticket::$jsst_data[0]['instantresolve_min_coverage_reply'])){
+                            $jsst_title = esc_html(__('Match needed for a reply', 'js-support-ticket'));
+                            $jsst_field = JSSTformfield::text('instantresolve_min_coverage_reply', jssupportticket::$jsst_data[0]['instantresolve_min_coverage_reply'], array('class' => 'inputbox'));
+                            $jsst_description = esc_html(__('The same measure, but for content the AI may state as fact, from 20 to 100. Keep this higher than the suggestion threshold.', 'js-support-ticket'));
+                            JSST_printConfigFieldSingle($jsst_title, $jsst_field, $jsst_description);
+                        }
+                        if(isset(jssupportticket::$jsst_data[0]['instantresolve_require_citation'])){
+                            $jsst_title = esc_html(__('Require sources', 'js-support-ticket'));
+                            $jsst_field = JSSTformfield::select('instantresolve_require_citation', $jsst_yesno, jssupportticket::$jsst_data[0]['instantresolve_require_citation']);
+                            $jsst_description = esc_html(__('Reject a reply that cites nothing, or cites something that was not given to it. Models invent references as readily as they invent facts.', 'js-support-ticket'));
+                            JSST_printConfigFieldSingle($jsst_title, $jsst_field, $jsst_description);
+                        }
+                        if(isset(jssupportticket::$jsst_data[0]['instantresolve_min_overlap'])){
+                            $jsst_title = esc_html(__('Minimum grounding overlap', 'js-support-ticket'));
+                            $jsst_field = JSSTformfield::text('instantresolve_min_overlap', jssupportticket::$jsst_data[0]['instantresolve_min_overlap'], array('class' => 'inputbox'));
+                            $jsst_description = esc_html(__('How many of a reply\'s specifics - button names, menu paths, time limits - must appear in your own content, from 0 to 100. A reply below this is held as a draft instead of being sent. Leave at 0 at first: the overview records this figure, so you can pick a threshold from your own replies instead of guessing.', 'js-support-ticket'));
+                            JSST_printConfigFieldSingle($jsst_title, $jsst_field, $jsst_description);
+                        }
+                        if(isset(jssupportticket::$jsst_data[0]['instantresolve_max_chunks'])){
+                            $jsst_title = esc_html(__('Passages per reply', 'js-support-ticket'));
+                            $jsst_field = JSSTformfield::text('instantresolve_max_chunks', jssupportticket::$jsst_data[0]['instantresolve_max_chunks'], array('class' => 'inputbox'));
+                            $jsst_description = esc_html(__('How many pieces of your content the AI may be shown when writing a reply, from 1 to 8.', 'js-support-ticket'));
+                            JSST_printConfigFieldSingle($jsst_title, $jsst_field, $jsst_description);
+                        }
+                        if(isset(jssupportticket::$jsst_data[0]['instantresolve_char_budget'])){
+                            $jsst_title = esc_html(__('Total characters', 'js-support-ticket'));
+                            $jsst_field = JSSTformfield::text('instantresolve_char_budget', jssupportticket::$jsst_data[0]['instantresolve_char_budget'], array('class' => 'inputbox'));
+                            $jsst_description = esc_html(__('Largest amount of a single document that may be extracted as one passage, from 1000 to 20000. The overall size of a reply prompt is set by the token budget below.', 'js-support-ticket'));
+                            JSST_printConfigFieldSingle($jsst_title, $jsst_field, $jsst_description);
+                        }
+                        if(isset(jssupportticket::$jsst_data[0]['instantresolve_token_budget'])){
+                            $jsst_title = esc_html(__('Token budget per reply', 'js-support-ticket'));
+                            $jsst_field = JSSTformfield::text('instantresolve_token_budget', jssupportticket::$jsst_data[0]['instantresolve_token_budget'], array('class' => 'inputbox'));
+                            $jsst_description = esc_html(__('Most tokens of your own content that may be sent with one reply, from 200 to 8000. This is what the AI engine actually charges for, so it is the setting that controls cost. Lower it to spend less per ticket; the best-matching passages are kept and the weakest are dropped first.', 'js-support-ticket'));
+                            JSST_printConfigFieldSingle($jsst_title, $jsst_field, $jsst_description);
+                        }
+                        if(isset(jssupportticket::$jsst_data[0]['instantresolve_mmr_lambda'])){
+                            $jsst_title = esc_html(__('Prefer variety', 'js-support-ticket'));
+                            $jsst_field = JSSTformfield::text('instantresolve_mmr_lambda', jssupportticket::$jsst_data[0]['instantresolve_mmr_lambda'], array('class' => 'inputbox'));
+                            $jsst_description = esc_html(__('From 30 to 100. At 100 the highest scoring passages are used even when they repeat each other, which on a large documentation site often means four versions of the same page. Lower values spend the budget on passages that add something new.', 'js-support-ticket'));
+                            JSST_printConfigFieldSingle($jsst_title, $jsst_field, $jsst_description);
+                        }
+                        if(isset(jssupportticket::$jsst_data[0]['instantresolve_chunk_chars'])){
+                            $jsst_title = esc_html(__('Passage size', 'js-support-ticket'));
+                            $jsst_field = JSSTformfield::text('instantresolve_chunk_chars', jssupportticket::$jsst_data[0]['instantresolve_chunk_chars'], array('class' => 'inputbox'));
+                            $jsst_description = esc_html(__('Characters per indexed passage, from 300 to 2400. Smaller passages are more precise but can separate step three of a procedure from steps one and two. Changing this rebuilds the search index.', 'js-support-ticket'));
+                            JSST_printConfigFieldSingle($jsst_title, $jsst_field, $jsst_description);
+                        }
+                        if(isset(jssupportticket::$jsst_data[0]['instantresolve_chunk_overlap'])){
+                            $jsst_title = esc_html(__('Passage overlap', 'js-support-ticket'));
+                            $jsst_field = JSSTformfield::text('instantresolve_chunk_overlap', jssupportticket::$jsst_data[0]['instantresolve_chunk_overlap'], array('class' => 'inputbox'));
+                            $jsst_description = esc_html(__('Characters repeated between neighbouring passages, up to a third of the passage size. Overlap stops an answer that spans a boundary from being lost by both sides. Changing this rebuilds the search index.', 'js-support-ticket'));
+                            JSST_printConfigFieldSingle($jsst_title, $jsst_field, $jsst_description);
+                        }
+                        ?>
+                    </div>
+
+                <?php } // end of the addon-only sections ?>
+
+                    <?php
+                    // Outside the addon gate on purpose: the Suggestions "Search
+                    // these" field is a checkbox group too, and it is shown with
+                    // no addon installed.
+                    ?>
+                    <script type="text/javascript">
+                    (function () {
+                        // Checkbox groups post as JSON in one hidden field, because
+                        // the settings save writes each field to a single config row
+                        // and cannot take an array.
+                        var groups = document.querySelectorAll('.jsst-ir-checks');
+
+                        Array.prototype.forEach.call(groups, function (group) {
+                            var hidden = group.querySelector('input[type="hidden"]');
+                            if (!hidden) return;
+
+                            function sync() {
+                                var picked = [];
+                                Array.prototype.forEach.call(
+                                    group.querySelectorAll('input[type="checkbox"]:checked'),
+                                    function (box) { picked.push(box.value); }
+                                );
+                                hidden.value = JSON.stringify(picked);
+                            }
+
+                            group.addEventListener('change', sync);
+                        });
+                    })();
+                    </script>
             </div>
             <!-- .....Captcha..... -->
             <div id="captcha" class="jsstadmin-hide-config">

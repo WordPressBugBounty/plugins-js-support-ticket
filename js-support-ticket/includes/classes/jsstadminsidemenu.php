@@ -197,6 +197,39 @@ $jsst_jssupportticket_js = '
             </ul>
         </li>
     <?php } ?>
+    <!-- ===== INSTANT RESOLVE ADDON MENU ===== -->
+    <?php
+    // One entry covering what used to be two addons. The separate Instant Fix
+    // and AI Autopilot menus are gone: while Instant Resolve is active those
+    // addons stand down, so their screens would lead nowhere useful.
+    $jsst_ir_active = in_array('instantresolve', jssupportticket::$_active_addons);
+    ?>
+    <?php if($jsst_ir_active){ ?>
+        <li class="treeview <?php if($jsst_c == 'instantresolve') echo 'active'; ?> menu-item-instantresolve">
+            <a href="#" title="<?php echo esc_attr__('Instant Resolve', 'js-support-ticket'); ?>">
+                <svg class="jsst_menu-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09l2.846.813-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 00-2.456 2.456z" />
+                </svg>
+                <span class="jsst_text"><?php echo esc_html__('Instant Resolve', 'js-support-ticket'); ?></span>
+            </a>
+            <ul class="jsstadmin-sidebar-submenu treeview-menu">
+                <li class="<?php if($jsst_c == 'instantresolve' && $jsst_layout == '') echo 'active'; ?>"><a href="<?php echo esc_url(admin_url('admin.php?page=instantresolve')); ?>" title="<?php echo esc_attr__('Overview', 'js-support-ticket'); ?>"><?php echo esc_html__('Overview', 'js-support-ticket'); ?></a></li>
+                <li class="<?php if($jsst_layout == 'admin_instantresolve_sources') echo 'active'; ?>"><a href="<?php echo esc_url(admin_url('admin.php?page=instantresolve&jstlay=instantresolve_sources')); ?>" title="<?php echo esc_attr__('Content Sources', 'js-support-ticket'); ?>"><?php echo esc_html__('Content Sources', 'js-support-ticket'); ?></a></li>
+                <li class="<?php if($jsst_layout == 'admin_instantresolve_tester') echo 'active'; ?>"><a href="<?php echo esc_url(admin_url('admin.php?page=instantresolve&jstlay=instantresolve_tester')); ?>" title="<?php echo esc_attr__('Test Retrieval', 'js-support-ticket'); ?>"><?php echo esc_html__('Test Retrieval', 'js-support-ticket'); ?></a></li>
+            </ul>
+        </li>
+    <?php } else { ?>
+        <li class="disabled-menu treeview menu-item-instantresolve">
+            <a href="javascript:void(0);" title="<?php echo esc_attr__('Instant Resolve', 'js-support-ticket'); ?>">
+                <svg class="jsst_menu-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09l2.846.813-2.846.813a4.5 4.5 0 00-3.09 3.09z" />
+                </svg>
+                <span class="jsst_text"><?php echo esc_html__('Instant Resolve', 'js-support-ticket'); ?></span>
+            </a>
+            <ul class="jsstadmin-sidebar-submenu treeview-menu"></ul>
+        </li>
+    <?php } ?>
+    <!-- ====== END INSTANT RESOLVE ====== -->
     <li class="menu-header"><?php echo esc_html__('User Management', 'js-support-ticket'); ?></li>
     <?php if(in_array('agent', jssupportticket::$_active_addons)){ ?>
         <li class="treeview <?php if($jsst_c == 'agent' || $jsst_c == 'agentautoassign') echo 'active'; ?> menu-item-agents">

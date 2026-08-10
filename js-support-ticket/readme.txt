@@ -4,7 +4,7 @@ Donate link: https://jshelpdesk.com/pricing/
 Tags: helpdesk, ticketing system, AI support, support ticket, knowledgebase
 Requires at least: 5.5
 Tested up to: 7.0
-Stable tag: 3.1.6
+Stable tag: 3.1.7
 Requires PHP: 7.4
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
@@ -47,6 +47,7 @@ Powered by Zywrap, the AI Copilot brings top-tier large language models directly
 - **Multiple Attachments**: Admin-controlled size and file type limits.
 
 **Automation & AI**
+- **Instant Answers (New!)**: As a customer describes their problem, matching knowledge base articles, FAQs and canned responses surface right on the ticket form - so the simple questions get answered before a ticket is ever filed.
 - **AI-Powered Reply Suggestions**: Generate context-aware smart responses to save time.
 - **Email Notifications**: Automated alerts for new tickets, replies, and status changes.
 - **Field & Email Managers**: Full control over 12+ custom fields and HTML email templates.
@@ -138,6 +139,17 @@ Download the zip file and upload the folder to your `/wp-content/plugins/` direc
 21. Internal Mails
 
 == Changelog ==
+= 3.1.7 =
+**New, free**
+* Answer customers before they file. Matching articles, FAQs and canned responses appear on the ticket form as they type.
+
+**New, with the Instant Resolve add-on**
+* A written AI answer above the suggestions, built only from your own content.
+* Tickets answered automatically when the AI is confident. Anything less waits as a draft for an agent to send, edit or discard.
+* Add your own web pages, videos and past resolved tickets to what the AI can use.
+* Keep the AI out of the wrong tickets: by department, customer type, keyword or sender.
+* See every decision and why it was made, and test any question before customers do.
+
 = 3.1.6 =
 * Security Updated.
 

@@ -350,28 +350,22 @@ class jssupportticketadmin {
                 $this->addMissingAddonPage('download');
             }
 
-            if(in_array('instantfix', jssupportticket::$_active_addons)){
-                add_submenu_page('jssupportticket_hide', // parent slug
-                    esc_html(__('Instant Fix', 'js-support-ticket')), // Page title
-                    esc_html(__('Instant Fix', 'js-support-ticket')), // menu title
-                    'jsst_support_ticket', // capability
-                    'instantfix', //menu slug
-                    array($this, 'showAdminPage') // function name
-                );
-            }else{
-                $this->addMissingAddonPage('instantfix');
-            }
+            // ===== INSTANT RESOLVE =====
+            // Supersedes Instant Fix and AI Ticket Autopilot. While it is
+            // active the two older addons stand down, so their pages are not
+            // registered even if their plugins are still switched on.
+            $jsst_ir_active = in_array('instantresolve', jssupportticket::$_active_addons);
 
-            if(in_array('aiticketautopilot', jssupportticket::$_active_addons)){
+            if($jsst_ir_active){
                 add_submenu_page('jssupportticket_hide', // parent slug
-                    esc_html(__('AI Autopilot', 'js-support-ticket')), // Page title
-                    esc_html(__('AI Autopilot', 'js-support-ticket')), // menu title
+                    esc_html(__('Instant Resolve', 'js-support-ticket')), // Page title
+                    esc_html(__('Instant Resolve', 'js-support-ticket')), // menu title
                     'jsst_support_ticket', // capability
-                    'aiticketautopilot', //menu slug
+                    'instantresolve', //menu slug
                     array($this, 'showAdminPage') // function name
                 );
             }else{
-                $this->addMissingAddonPage('aiticketautopilot');
+                $this->addMissingAddonPage('instantresolve');
             }
 
             add_submenu_page('jssupportticket', // parent slug

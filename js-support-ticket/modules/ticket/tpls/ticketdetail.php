@@ -2185,6 +2185,20 @@ if (jssupportticket::$_config['offline'] == 2) {
                                         </div>
                                     </div>
                         <?php endforeach; ?>
+                        <?php
+                        // Agent-side extras after the thread, matching
+                        // admin_ticketdetail.php. This template is shared by the
+                        // customer and the agent, so the hook is fired only for
+                        // staff - a customer must never be shown an AI reply
+                        // that is still being held back for review.
+                        $jsst_ir_is_staff = current_user_can('manage_options')
+                            || (in_array('agent', jssupportticket::$_active_addons)
+                                && JSSTincluder::getJSModel('agent')->isUserStaff());
+
+                        if ($jsst_ir_is_staff) {
+                            do_action('jsst_after_ticket_replies', jssupportticket::$jsst_data[0]->id);
+                        }
+                        ?>
                         <!-- User post Reply Form Section -->
                         <div class="js-ticket-reply-forms-wrapper"><!-- Ticket Reply Forms Wrapper -->
                             <?php if($jsst_printflag == false){

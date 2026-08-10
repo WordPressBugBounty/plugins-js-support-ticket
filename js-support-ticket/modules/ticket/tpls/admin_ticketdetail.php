@@ -1970,7 +1970,9 @@ $jsst_yesno = array(
                                         </div>
                                     </div>
                                 </div>
-                        <?php } ?>
+                                <?php
+                            }
+                            do_action('jsst_after_ticket_replies', jssupportticket::$jsst_data[0]->id); ?>
                         <!-- Post Reply Area -->
                         <div id="postreply" class="js-det-tkt-rply-frm">
                             <form class="js-det-tkt-form" method="post" action="<?php echo esc_url(wp_nonce_url(admin_url("admin.php?page=reply&task=savereply"),"save-reply-".jssupportticket::$jsst_data[0]->id)); ?>"  enctype="multipart/form-data">

@@ -201,7 +201,7 @@ $jsst_jssupportticket_css .= '
     #jsst-instant-fix-wrapper .jsst-fix-footer {text-align: center;padding-top: 12px;border-top: 1px dashed #d1d5db;margin-top: 5px;}
     #jsst-instant-fix-wrapper .jsst-fix-footer .button {background: ' . $jsst_color1 . ';color: ' . $jsst_color7 . ';border: none;padding: 8px 20px;border-radius: 4px;cursor: pointer;font-size: 15px;font-weight: 500;transition: background 0.2s;box-shadow: none;text-shadow: none;}
     #jsst-instant-fix-wrapper .jsst-fix-footer .button:hover {background: ' . $jsst_color2 . ';}
-    #jsst-instant-fix-wrapper .jsst-ai-card {background: linear-gradient(135deg, #f8fafc 0%, #eff6ff 100%) !important;border: 1px solid #bfdbfe !important;border-left: 4px solid #3b82f6 !important;padding: 15px !important;display: flex !important;align-items: flex-start !important;gap: 15px;grid-column: 1 / -1;cursor: default !important;}
+    #jsst-instant-fix-wrapper .jsst-ai-card {background: linear-gradient(135deg, #f8fafc 0%, #eff6ff 100%) !important;border: 1px solid #bfdbfe !important;border-left: 4px solid #3b82f6 !important;padding: 15px !important;display: flex !important;align-items: flex-start !important;gap: 15px;grid-column: 1 / -1;cursor: default !important;flex-direction: column;}
     #jsst-instant-fix-wrapper .jsst-ai-icon-wrp {flex-shrink: 0;min-width: 40px;width: 40px;height: 40px;background: linear-gradient(135deg, #3b82f6, #8b5cf6);border-radius: 50%;display: flex;align-items: center;justify-content: center;box-shadow: 0 4px 6px -1px rgba(59, 130, 246, 0.3);}
     #jsst-instant-fix-wrapper .jsst-ai-sparkle {width: 22px;height: 22px;color: ' . $jsst_color7 . ';}
     #jsst-instant-fix-wrapper .jsst-ai-content {flex: 1;padding: 0 !important;}

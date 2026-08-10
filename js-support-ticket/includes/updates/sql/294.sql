@@ -209,8 +209,3 @@ FROM (
 ) AS forms
 LEFT JOIN `#__js_ticket_fieldsordering` fo ON fo.multiformid = forms.multiformid
 GROUP BY forms.multiformid;
-
-
-
-
-

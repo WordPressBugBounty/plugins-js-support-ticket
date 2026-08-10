@@ -320,6 +320,13 @@
                             <div class="add-on-txt"><?php echo esc_html(__('Automatically deletes old attachments and permanently removes closed tickets based on your configured retention periods to optimize server storage.', 'js-support-ticket')); ?></div>
                             <a title="<?php echo esc_attr(__('buy now', 'js-support-ticket')); ?>" href="https://jshelpdesk.com/product/autocleanup/" class="add-on-btn"><?php echo esc_html(__('buy now', 'js-support-ticket')); ?></a>
                         </div>
+                        <div class="add-on-item instantresolve">
+                            <img class="add-on-img" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/add-on-list/instantresolve.png" alt="<?php echo esc_attr(__('Instant Resolve', 'js-support-ticket')); ?>" />
+                            <div class="add-on-name"><?php echo esc_html(__('Instant Resolve', 'js-support-ticket')); ?></div>
+
+                            <div class="add-on-txt"><?php echo esc_html(__('Suggests answers from your knowledgebase as customers type, then auto-replies to tickets using only your own content.', 'js-support-ticket')); ?></div>
+                            <a title="<?php echo esc_attr(__('buy now', 'js-support-ticket')); ?>" href="https://jshelpdesk.com/product/instantresolve/" class="add-on-btn"><?php echo esc_html(__('buy now', 'js-support-ticket')); ?></a>
+                        </div>
                         <div class="add-on-item sociallogin">
                             <img class="add-on-img" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/add-on-list/sociallogin.png" alt="login" />
                             <div class="add-on-name"><?php echo esc_html(__('Social Login','js-support-ticket')); ?></div>

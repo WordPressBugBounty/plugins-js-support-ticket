@@ -371,7 +371,7 @@ table#js-support-ticket-table tr td a.action-btn:hover {border-color: #4f46e5;}
 table#js-support-ticket-table tr td img {display: inline-block;max-width: 100%;height: auto;width: auto;vertical-align: middle;}
 table#js-support-ticket-table tr .left {text-align: left;}
 table#js-support-ticket-table tr span.js-ticket-admin-prirrity-color {display: inline-block;padding: 7px 12px;}
-div.jsstadmin-help-msg {float: left;width: 100%;padding: 20px 15px;}
+div.jsstadmin-help-msg {float: left;width: 100%;padding: 20px 15px;background: #fff;}
 div#js-field-ordering-notice {width: calc(100% - 40px);display: inline-block;padding: 8px 10px;float: left;border: 1px solid #ddd;background: #FFF;color: #333333;margin: 10px 20px 5px;box-shadow: 0 0 3px 1px rgba(0,0,0,0.2)}
 table#js-support-ticket-table.js-admin-report-tickets tr td a {display: inline-block;color: #23282d;width: auto !important;}
 
@@ -437,7 +437,79 @@ table#js-support-ticket-table.js-admin-report-tickets tr td a {display: inline-b
 .jsst_gen_body .js-ticket-configuration-row .jsst-checkbox-group input[type="checkbox"] {width: 16px !important;height: 16px !important;margin: 0;cursor: pointer;}
 .jsst_gen_body .js-ticket-configuration-row .jsst-checkbox-group input[type=checkbox]:checked::before {background-color: #4f46e5;width: 16px !important;height: 16px !important;border-radius: 2px;margin: 0;}
 .jsst_gen_body .js-ticket-configuration-row .jsst-checkbox-group label:hover {background-color: #f9f9f9;}
+/* Instant Resolve checkbox groups. The rule above sizes every input in a config
+   row like a text field, which renders a checkbox as a full width blue box, so
+   the boxes are put back to normal here rather than weakening that rule. */
+.jsst_gen_body .js-ticket-configuration-row .js-ticket-configuration-value .jsst-ir-checks{display: grid;grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));gap: 8px 24px;padding: 6px 0;}
+.jsst_gen_body .js-ticket-configuration-row .js-ticket-configuration-value .jsst-ir-checks label{display: flex;align-items: center;gap: 8px;margin: 0;line-height: 1.6;cursor: pointer;}
+.jsst_gen_body .js-ticket-configuration-row .js-ticket-configuration-value .jsst-ir-checks input[type="checkbox"]{width: 16px !important;height: 16px !important;min-width: 16px;max-width: 16px !important;flex: 0 0 auto;margin: 0;padding: 0;background-color: #fff !important;border-color: #8c8f94;cursor: pointer;}
+/* The tick itself is a white SVG that WordPress fills in over the checked
+   background, so the checked state must stay dark or the tick disappears. */
+.jsst_gen_body .js-ticket-configuration-row .js-ticket-configuration-value .jsst-ir-checks input[type="checkbox"]:checked{background-color: #4f46e5 !important;border-color: #4f46e5 !important;}
+/* A source whose owning addon is inactive. Shown, and still ticked if it was
+   ticked, so the setting is visibly preserved rather than looking switched off. */
+.jsst_gen_body .js-ticket-configuration-row .js-ticket-configuration-value .jsst-ir-checks label.jsst-ir-off{opacity: 0.55;cursor: default;}
+.jsst_gen_body .js-ticket-configuration-row .js-ticket-configuration-value .jsst-ir-checks label.jsst-ir-off input[type="checkbox"]{cursor: default;}
+.jsst_gen_body .js-ticket-configuration-row .js-ticket-configuration-value .jsst-ir-checks .jsst-ir-off-note{font-size: 11px;font-style: italic;color: #646970;}
 #jsstadmin-data-wrp .js-support-ticket-configurations .jsstadmin-hide-config{display: none;float: left;width: 100%;}
+
+/* Missing-prerequisite notice inside a settings tab. Amber rather than red:
+   nothing is broken, a feature simply cannot run yet. */
+.jsst_gen_body .jsst-ir-warn{box-sizing:border-box;margin:0 0 16px;padding:12px 14px;background:#fcf3e3;border:1px solid #f0d9ae;border-left:4px solid #d98e04;border-radius:4px;font-size:13px;line-height:1.6;color:#4a3a17;}
+.jsst_gen_body .jsst-ir-warn strong{color:#8a5a02;}
+.jsst_gen_body .jsst-ir-warn a{color:#8a5a02;font-weight:600;text-decoration:underline;}
+
+/* AI draft panel (Instant Resolve addon), wp-admin copy.
+   The same component also renders on the front-end ticket detail for agents,
+   where inc-css/ticket-ticketdetail.css.php repeats these rules against the
+   theme colour variables. wp-admin is not themed, so the colours are fixed
+   here. Keep the two copies in step. */
+.jsst-ir-draft{display: flex;flex-wrap: wrap;box-sizing: border-box;margin: 18px 0;padding: 16px 18px;border: 1px solid #d7ddea;border-left: 4px solid #4a6cf7;border-radius: 6px;background: #f7f9fd;font-size: 14px;line-height: 1.6;color: #23282d;text-align: left;}
+.jsst-ir-draft *{box-sizing: border-box;}
+.jsst-ir-draft-head{display: flex;align-items: center;flex-wrap: wrap;gap: 8px;margin-bottom: 10px;}
+.jsst-ir-draft-badge{display: inline-block;padding: 2px 8px;border-radius: 10px;background: #4a6cf7;color: #fff;font-size: 11px;font-weight: 600;letter-spacing: .04em;line-height: 1.6;}
+.jsst-ir-draft-title{font-size: 14px;font-weight: 600;color: #1d2327;}
+.jsst-ir-draft-note{font-size: 12px;color: #646970;font-style: italic;}
+/* A long generated reply must not stretch the thread. */
+.jsst-ir-draft-body{padding: 12px 14px;border: 1px solid #e3e8f0;border-radius: 4px;background: #fff;color: #23282d;max-height: 320px;overflow-y: auto;word-wrap: break-word;}
+.jsst-ir-draft-body p:first-child{margin-top: 0;}
+.jsst-ir-draft-body p:last-child{margin-bottom: 0;}
+.jsst-ir-draft-actions{display: flex;flex-wrap: wrap;gap: 8px;margin-top: 12px;}
+.jsst-ir-draft .jsst-ir-btn{display: inline-block;margin: 0;padding: 7px 14px;border: 1px solid #c3c8d1;border-radius: 4px;background: #fff;box-shadow: none;color: #2c3338;font-family: inherit;font-size: 13px;font-weight: 500;line-height: 1.4;text-decoration: none;cursor: pointer;transition: background .15s ease, border-color .15s ease;}
+.jsst-ir-draft .jsst-ir-btn:hover{background: #f2f4f7;border-color: #a7aeb8;}
+.jsst-ir-draft .jsst-ir-btn-primary{border-color: #4a6cf7;background: #4a6cf7;color: #fff;}
+.jsst-ir-draft .jsst-ir-btn-primary:hover{background: #3b58d4;border-color: #3b58d4;}
+.jsst-ir-draft .jsst-ir-btn-quiet{color: #b32d2e;}
+.jsst-ir-draft .jsst-ir-btn-quiet:hover{background: #fcf0f0;border-color: #b32d2e;}
+.jsst-ir-draft .jsst-ir-btn[disabled]{opacity: .55;cursor: default;}
+@media (max-width: 600px){
+    .jsst-ir-draft-actions{flex-direction: column;align-items: stretch;}
+    .jsst-ir-draft .jsst-ir-btn{width: 100%;text-align: center;}
+}
+
+/* Instant Resolve search index panel (Content Sources) */
+.jsst-ir-index{float: left;width: 100%;box-sizing: border-box;margin-bottom: 15px;padding: 18px 20px;background: #fff;border: 1px solid #ebecec;border-radius: 4px;}
+.jsst-ir-index-head{display: flex;align-items: center;flex-wrap: wrap;gap: 10px;}
+.jsst-ir-index-head h3{margin: 0;padding: 0;font-size: 16px;line-height: 1.4;color: #23282d;}
+.jsst-ir-index-note{margin: 8px 0 0 0;max-width: 760px;font-size: 13px;line-height: 1.6;color: #6c757d;}
+.jsst-ir-pill{display: inline-flex;align-items: center;gap: 6px;padding: 3px 10px;border-radius: 12px;font-size: 12px;font-weight: 600;line-height: 1.6;}
+.jsst-ir-pill .jsst-ir-dot{width: 7px;height: 7px;border-radius: 50%;background: currentColor;}
+.jsst-ir-pill-ready{color: #1e7f4f;background: #e8f5ee;}
+.jsst-ir-pill-building{color: #3f38c9;background: #ecebfb;}
+.jsst-ir-pill-empty{color: #8a5a00;background: #fdf3de;}
+.jsst-ir-stats{display: flex;flex-wrap: wrap;gap: 12px;margin-top: 16px;}
+.jsst-ir-stat{flex: 0 1 200px;min-width: 140px;padding: 12px 14px;background: #f8fafc;border: 1px solid #eef1f5;border-radius: 4px;}
+.jsst-ir-stat-val{display: block;font-size: 26px;font-weight: 600;line-height: 1.2;color: #23282d;}
+.jsst-ir-stat-lbl{display: block;margin-top: 2px;font-size: 12px;line-height: 1.5;color: #6c757d;}
+.jsst-ir-meter-wrap{margin-top: 16px;max-width: 520px;}
+.jsst-ir-meter-top{display: flex;justify-content: space-between;align-items: baseline;gap: 12px;font-size: 12px;color: #23282d;}
+.jsst-ir-meter-top .jsst-ir-meter-num{color: #6c757d;}
+.jsst-ir-meter{margin-top: 6px;height: 6px;border-radius: 3px;background: #e4e6fb;overflow: hidden;}
+.jsst-ir-meter > span{display: block;height: 100%;border-radius: 3px;background: #4f46e5;}
+.jsst-ir-chips{display: flex;flex-wrap: wrap;gap: 8px;margin-top: 16px;}
+.jsst-ir-chip{display: inline-flex;flex-direction: column;padding: 7px 12px;background: #fff;border: 1px solid #ebecec;border-radius: 4px;line-height: 1.5;}
+.jsst-ir-chip b{font-size: 13px;font-weight: 600;color: #23282d;}
+.jsst-ir-chip small{font-size: 12px;color: #6c757d;}
 
 /* permissions */
 #tk_form_wraper {float: left;width: 100%;}
@@ -1791,10 +1863,8 @@ div.jsstadmin-add-on-page-wrp div.add-on-page-cnt div.add-on-list div.add-on-ite
 div.jsstadmin-add-on-page-wrp div.add-on-page-cnt div.add-on-list div.add-on-item.sociallogin a.add-on-btn:hover {border-color: #0f8029;color: #0f8029 !important;background: #fff;}
 div.jsstadmin-add-on-page-wrp div.add-on-page-cnt div.add-on-list div.add-on-item.autocleanup a.add-on-btn {background: #2c7be5;}
 div.jsstadmin-add-on-page-wrp div.add-on-page-cnt div.add-on-list div.add-on-item.autocleanup a.add-on-btn:hover {border-color: #2c7be5;color: #2c7be5 !important;background: #fff;}
-div.jsstadmin-add-on-page-wrp div.add-on-page-cnt div.add-on-list div.add-on-item.instantfix a.add-on-btn {background: #e8912f;}
-div.jsstadmin-add-on-page-wrp div.add-on-page-cnt div.add-on-list div.add-on-item.instantfix a.add-on-btn:hover {border-color: #e8912f;color: #e8912f !important;background: #fff;}
-div.jsstadmin-add-on-page-wrp div.add-on-page-cnt div.add-on-list div.add-on-item.aiticketautopilot a.add-on-btn {background: #8b6fce;}
-div.jsstadmin-add-on-page-wrp div.add-on-page-cnt div.add-on-list div.add-on-item.aiticketautopilot a.add-on-btn:hover {border-color: #8b6fce;color: #8b6fce !important;background: #fff;}
+div.jsstadmin-add-on-page-wrp div.add-on-page-cnt div.add-on-list div.add-on-item.instantresolve a.add-on-btn {background: #e8912f;}
+div.jsstadmin-add-on-page-wrp div.add-on-page-cnt div.add-on-list div.add-on-item.instantresolve a.add-on-btn:hover {border-color: #e8912f;color: #e8912f !important;background: #fff;}
 
 
 .jsst-addon-go-back-messsage-wrap {display: inline-block;width: 100%;text-align: center;padding: 30px;}

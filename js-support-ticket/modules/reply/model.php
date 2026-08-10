@@ -25,7 +25,7 @@ class JSSTreplyModel {
                     LEFT JOIN `" . jssupportticket::$_db->prefix . "js_ticket_users` AS user ON  replies.uid = user.id
                     LEFT JOIN `" . jssupportticket::$_db->prefix . "js_ticket_users` AS viewer ON  replies.viewed_by = viewer.id
                     ".jssupportticket::$_addon_query['join']."
-                    WHERE tickets.id = %d ORDER By replies.id ".$jsst_ordering;
+                    WHERE replies.is_ai_draft = 0 AND tickets.id = %d ORDER By replies.id ".$jsst_ordering;
         $jsst_query = jssupportticket::$_db->prepare($jsst_query, $jsst_id);
         jssupportticket::$jsst_data[4] = jssupportticket::$_db->get_results($jsst_query);
         do_action('jsst_reset_aadon_query');
@@ -178,6 +178,12 @@ class JSSTreplyModel {
         if(isset($jsst_data['ticketviaemail'])){
             if($jsst_data['ticketviaemail'] == 1)
                 $jsst_currentUserName = $jsst_data['name'];
+        }
+        // An autopilot reply is stored while impersonating an administrator, so
+        // without this the customer sees that administrator's display name on a
+        // machine-written message and the configured autopilot name is ignored.
+        if(isset($jsst_data['ticketviaautopilot']) && $jsst_data['ticketviaautopilot'] == 1){
+            $jsst_currentUserName = $jsst_data['name'];
         }
         $jsst_data['id'] = isset($jsst_data['id']) ? $jsst_data['id'] : '';
         $jsst_data['status'] = isset($jsst_data['status']) ? $jsst_data['status'] : '';

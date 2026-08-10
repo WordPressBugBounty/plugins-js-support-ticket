@@ -18,6 +18,8 @@ class JSSTrepliesTable extends JSSTtable {
 	public $viewed_by = '';
 	public $viewed_on = '';
 	public $aireplymode = '';
+	public $is_ai_draft = '';
+	public $ticketviaautopilot = ''; // bind() only carries declared properties
 
 	function __construct() {
 		parent::__construct('replies', 'id'); // tablename, primarykey

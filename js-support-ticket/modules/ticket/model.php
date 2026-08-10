@@ -3390,6 +3390,357 @@ class JSSTticketModel {
 
         return json_encode($jsst_results);
     }
+
+    // ==========================================
+    // 2. ADVANCED NLP SEARCH LOGIC (Front-End AJAX)
+    // ==========================================
+    /**
+     * Suggested answers for the ticket form, before a ticket is created.
+     *
+     * Core keeps a deliberately small free search over content the help desk
+     * already holds. The Instant Resolve addon replaces it wholesale through
+     * the filter below - adding indexed documentation, resolved tickets and the
+     * AI layer - so exactly one retriever decides what a customer is shown and
+     * what the AI is later allowed to answer from. Two implementations is how
+     * you end up showing somebody three relevant articles and then telling them
+     * there is nothing on the topic.
+     */
+    public function getInstantResolveSearch() {
+        $jsst_nonce = JSSTrequest::getVar('_wpnonce');
+        if (!wp_verify_nonce($jsst_nonce, 'get-instantresolve-search')) {
+            die('Security check Failed');
+        }
+
+        if (isset(jssupportticket::$_config['instantresolve_enable'])
+            && jssupportticket::$_config['instantresolve_enable'] != 1) {
+            echo wp_json_encode(array());
+            wp_die();
+        }
+
+        $jsst_subject = sanitize_text_field(JSSTrequest::getVar('subject'));
+        $jsst_message = sanitize_textarea_field(JSSTrequest::getVar('message'));
+
+        $jsst_text = trim(preg_replace('/\s+/', ' ', $jsst_subject . ' ' . wp_strip_all_tags($jsst_message)));
+
+        $jsst_min = isset(jssupportticket::$_config['instantresolve_min_chars'])
+            ? intval(jssupportticket::$_config['instantresolve_min_chars']) : 15;
+
+        if (jssupportticketphplib::JSST_strlen($jsst_text) < $jsst_min) {
+            echo wp_json_encode(array());
+            wp_die();
+        }
+
+        // Retrieval is a database query; the written AI answer is a charged
+        // generation. The form asks for the answer only once the customer stops
+        // typing, so a request made mid-sentence must not pay for one.
+        $jsst_summary = (intval(JSSTrequest::getVar('summary')) === 1);
+
+        // Out of answer budget: fall back to the links rather than to nothing.
+        // The throttle exists to protect the expensive half, and a customer who
+        // shares an office address with a heavy user should still get the
+        // suggestions that cost a query.
+        if ($jsst_summary && !$this->checkInstantResolveRate(true)) {
+            $jsst_summary = false;
+        }
+
+        // A summary request performs retrieval too, so it is counted here as
+        // well - the two buckets are not alternatives.
+        if (!$this->checkInstantResolveRate(false)) {
+            echo wp_json_encode(array());
+            wp_die();
+        }
+
+        $jsst_opts = array('summary' => $jsst_summary);
+
+        // Null, not an empty array, means "nobody handled this" - an addon that
+        // legitimately found nothing must be able to say so without core
+        // second-guessing it and running its own search on top.
+        $jsst_results = apply_filters('jsst_instantresolve_search_results', null, $jsst_text, $jsst_opts);
+
+        if (!is_array($jsst_results)) {
+            $jsst_results = $this->getBasicFixSuggestions($jsst_text);
+        }
+
+        echo wp_json_encode($jsst_results);
+        wp_die();
+    }
+
+    /**
+     * Throttle the suggestion endpoint.
+     *
+     * This is reachable by guests, and the ticket form calls it while somebody
+     * types, so in normal use the only thing bounding it is an 800ms debounce
+     * in the browser - which a client that is not the browser simply ignores.
+     * The nonce does not help either: a guest can load the form and read one.
+     *
+     * The two request kinds are counted separately because they cost different
+     * things. A links request is a FULLTEXT query across the configured
+     * sources; a summary request is additionally a charged model generation,
+     * so it gets a much smaller budget over a much longer window.
+     *
+     * Limits are deliberately generous. Logged-in visitors are keyed by user
+     * id, but guests can only be keyed by address, and behind a shared proxy or
+     * a company NAT that is one key for the whole building - so the ceiling has
+     * to sit far above what a room full of people writing tickets can reach.
+     *
+     * @param bool $jsst_summary Count against the answer budget, not the search one.
+     * @return bool True when the request may proceed.
+     */
+    private function checkInstantResolveRate($jsst_summary) {
+        $jsst_uid = get_current_user_id();
+
+        if ($jsst_uid > 0) {
+            $jsst_who = 'u' . $jsst_uid;
+        } else {
+            // REMOTE_ADDR only. X-Forwarded-For and friends are supplied by the
+            // caller, so honouring them would let anyone clear their own
+            // counter by changing a header - which is worse than no limit,
+            // because it looks like one is in place.
+            $jsst_ip  = isset($_SERVER['REMOTE_ADDR'])
+                ? sanitize_text_field(wp_unslash($_SERVER['REMOTE_ADDR'])) : '';
+            $jsst_who = 'g' . md5($jsst_ip);
+        }
+
+        $jsst_kind   = $jsst_summary ? 'ai' : 'search';
+        $jsst_limit  = $jsst_summary ? 12 : 40;
+        $jsst_window = $jsst_summary ? 300 : 60;
+
+        $jsst_limit  = intval(apply_filters('jsst_instantresolve_rate_limit', $jsst_limit, $jsst_kind));
+        $jsst_window = intval(apply_filters('jsst_instantresolve_rate_window', $jsst_window, $jsst_kind));
+
+        // A filter may switch the limit off outright; a nonsensical window
+        // must not silently become a one-second lockout.
+        if ($jsst_limit < 1 || $jsst_window < 1) return true;
+
+        $jsst_key = 'jsst_ir_rate_' . $jsst_kind . '_' . $jsst_who;
+        $jsst_now = time();
+
+        // A fixed window, not a rolling expiry. Re-setting the transient with
+        // the full window on every request would keep pushing the reset out, so
+        // a customer who hit the ceiling while genuinely working would stay
+        // locked out until they stopped typing for the whole window.
+        $jsst_bucket = get_transient($jsst_key);
+        if (!is_array($jsst_bucket)
+            || !isset($jsst_bucket['start'], $jsst_bucket['count'])
+            || ($jsst_now - intval($jsst_bucket['start'])) >= $jsst_window) {
+            $jsst_bucket = array('start' => $jsst_now, 'count' => 0);
+        }
+
+        if (intval($jsst_bucket['count']) >= $jsst_limit) return false;
+
+        $jsst_bucket['count'] = intval($jsst_bucket['count']) + 1;
+
+        // Expire with the window it represents, plus a second, so the row
+        // cannot disappear a tick before the window has actually closed.
+        $jsst_ttl = $jsst_window - ($jsst_now - intval($jsst_bucket['start'])) + 1;
+        set_transient($jsst_key, $jsst_bucket, $jsst_ttl);
+
+        return true;
+    }
+
+    /**
+     * Whether a table carries a single-column FULLTEXT index on both columns.
+     *
+     * Cached for a few minutes because the answer changes only when an addon is
+     * installed or updated, while the question is asked on every search. The
+     * cache is short rather than permanent so an index created later is picked
+     * up on its own, without an admin knowing to clear anything.
+     *
+     * @return bool True when MATCH() can be used on both columns.
+     */
+    private function hasSuggestionIndexes($jsst_table, $jsst_title, $jsst_body) {
+        $jsst_key    = 'jsst_ir_ftidx_' . md5($jsst_table . '|' . $jsst_title . '|' . $jsst_body);
+        $jsst_cached = get_transient($jsst_key);
+        if ($jsst_cached !== false) return ($jsst_cached === 'yes');
+
+        $jsst_rows = jssupportticket::$_db->get_results(
+            "SHOW INDEX FROM `" . $jsst_table . "` WHERE Index_type = 'FULLTEXT'"
+        );
+
+        // Group the columns of each index, then look for one made of exactly the
+        // title and one made of exactly the body. A combined (title, body) index
+        // satisfies neither, which is the whole reason this check exists.
+        $jsst_byname = array();
+        foreach ((array) $jsst_rows as $jsst_row) {
+            $jsst_byname[$jsst_row->Key_name][] = $jsst_row->Column_name;
+        }
+
+        $jsst_has_title = false;
+        $jsst_has_body  = false;
+        foreach ($jsst_byname as $jsst_cols) {
+            if ($jsst_cols === array($jsst_title)) $jsst_has_title = true;
+            if ($jsst_cols === array($jsst_body))  $jsst_has_body  = true;
+        }
+
+        $jsst_ok = ($jsst_has_title && $jsst_has_body);
+        set_transient($jsst_key, $jsst_ok ? 'yes' : 'no', 5 * MINUTE_IN_SECONDS);
+
+        return $jsst_ok;
+    }
+
+    /**
+     * Free-tier suggestions: knowledgebase, FAQs, canned responses and site
+     * content, ranked by FULLTEXT relevance with a bonus for a subject match.
+     *
+     * Intentionally modest. There is no grounding gate and no AI here, because
+     * a suggestion the customer can ignore does not need one - anything that
+     * feeds text to a model belongs in the addon, behind its gates.
+     */
+    private function getBasicFixSuggestions($jsst_text) {
+        $jsst_is_guest = JSSTincluder::getObjectClass('user')->isguest();
+        $jsst_results  = array();
+
+        $jsst_enabled = isset(jssupportticket::$_config['instantresolve_sources'])
+            ? json_decode(jssupportticket::$_config['instantresolve_sources'], true)
+            : null;
+        if (!is_array($jsst_enabled) || empty($jsst_enabled)) {
+            $jsst_enabled = array('kb', 'faq', 'canned', 'posts');
+        }
+
+        $jsst_limit = isset(jssupportticket::$_config['instantresolve_max_results'])
+            ? intval(jssupportticket::$_config['instantresolve_max_results']) : 5;
+        if ($jsst_limit < 1 || $jsst_limit > 10) $jsst_limit = 5;
+
+        // Subject matches count for more than body matches, and an exact phrase
+        // in the subject outranks everything.
+        $jsst_w_title = 3;
+        $jsst_w_body  = 1;
+        $jsst_w_exact = 10;
+
+        $jsst_tables = array(
+            'kb' => array(
+                'addon'   => 'knowledgebase',
+                'table'   => 'js_ticket_articles',
+                'title'   => 'subject',
+                'body'    => 'content',
+                'where'   => 'status = 1',
+                'guest'   => 'visible <> 2',
+                'route'   => array('knowledgebase', 'articledetails'),
+            ),
+            'faq' => array(
+                'addon'   => 'faq',
+                'table'   => 'js_ticket_faqs',
+                'title'   => 'subject',
+                'body'    => 'content',
+                'where'   => 'status = 1',
+                'guest'   => 'visible <> 2',
+                'route'   => array('faq', 'faqdetails'),
+            ),
+            'canned' => array(
+                'addon'   => 'cannedresponses',
+                'table'   => 'js_ticket_department_message_premade',
+                'title'   => 'title',
+                'body'    => 'answer',
+                'where'   => '',
+                'guest'   => '',
+                'route'   => null,
+            ),
+        );
+
+        foreach ($jsst_tables as $jsst_key => $jsst_def) {
+            if (!in_array($jsst_key, $jsst_enabled, true)) continue;
+            if (!in_array($jsst_def['addon'], jssupportticket::$_active_addons)) continue;
+
+            $jsst_full = jssupportticket::$_db->prefix . $jsst_def['table'];
+            if (jssupportticket::$_db->get_var("SHOW TABLES LIKE '" . esc_sql($jsst_full) . "'") != $jsst_full) {
+                continue;
+            }
+
+            // MySQL resolves MATCH(col) only against an index whose column list
+            // is exactly that column, so a table without both per-column indexes
+            // makes the query below fail rather than return nothing. Checking
+            // first keeps that out of the error log: this runs on every keystroke
+            // once a customer starts typing, and the alternative was one logged
+            // database error per source per search, forever.
+            if (!$this->hasSuggestionIndexes($jsst_full, $jsst_def['title'], $jsst_def['body'])) {
+                continue;
+            }
+
+            $jsst_where = array();
+            if ($jsst_def['where'] !== '') $jsst_where[] = $jsst_def['where'];
+            if ($jsst_is_guest && $jsst_def['guest'] !== '') $jsst_where[] = $jsst_def['guest'];
+
+            $jsst_sql = "SELECT id, `" . $jsst_def['title'] . "` AS title,
+                    SUBSTRING(`" . $jsst_def['body'] . "`, 1, 200) AS excerpt,
+                    ( (" . $jsst_w_title . " * IFNULL(MATCH(`" . $jsst_def['title'] . "`) AGAINST (%s IN NATURAL LANGUAGE MODE), 0)) +
+                      (" . $jsst_w_body . " * IFNULL(MATCH(`" . $jsst_def['body'] . "`) AGAINST (%s IN NATURAL LANGUAGE MODE), 0)) +
+                      (CASE WHEN `" . $jsst_def['title'] . "` LIKE %s THEN " . $jsst_w_exact . " ELSE 0 END)
+                    ) AS total_relevance
+                FROM `" . $jsst_full . "`"
+                . (!empty($jsst_where) ? ' WHERE ' . implode(' AND ', $jsst_where) : '')
+                . " HAVING total_relevance > 0 ORDER BY total_relevance DESC LIMIT 3";
+
+            $jsst_rows = jssupportticket::$_db->get_results(
+                jssupportticket::$_db->prepare($jsst_sql, $jsst_text, $jsst_text, '%' . $jsst_text . '%')
+            );
+
+            // A missing FULLTEXT index makes MATCH fail outright; skip that
+            // source rather than letting one bad table break the whole panel.
+            if (jssupportticket::$_db->last_error != null || !is_array($jsst_rows)) continue;
+
+            foreach ($jsst_rows as $jsst_row) {
+                $jsst_row->content_type = $jsst_key;
+                $jsst_row->thumbnail    = '';
+                $jsst_row->timestamp    = null;
+                $jsst_row->url          = '';
+
+                if ($jsst_def['route'] !== null && method_exists('jssupportticket', 'makeUrl')) {
+                    $jsst_row->url = jssupportticket::makeUrl(array(
+                        'jstmod'            => $jsst_def['route'][0],
+                        'jstlay'            => $jsst_def['route'][1],
+                        'jssupportticketid' => intval($jsst_row->id),
+                        'jsstpageid'        => jssupportticket::getPageid(),
+                    ));
+                }
+
+                $jsst_row->excerpt = wp_strip_all_tags((string) $jsst_row->excerpt);
+                $jsst_results[]    = $jsst_row;
+            }
+        }
+
+        // Published WP content, through WP_Query rather than a FULLTEXT index:
+        // wp_posts is shared with every other plugin on the site and indexing
+        // it is not this plugin's decision to make.
+        if (in_array('posts', $jsst_enabled, true)) {
+            $jsst_query = new WP_Query(array(
+                's'                      => $jsst_text,
+                'post_type'              => array('post', 'page'),
+                'post_status'            => 'publish',
+                'posts_per_page'         => 3,
+                'ignore_sticky_posts'    => true,
+                'no_found_rows'          => true,
+                'update_post_meta_cache' => false,
+                'update_post_term_cache' => false,
+            ));
+
+            foreach ($jsst_query->posts as $jsst_post) {
+                if (post_password_required($jsst_post)) continue;
+
+                $jsst_results[] = (object) array(
+                    'id'              => $jsst_post->ID,
+                    'title'           => get_the_title($jsst_post),
+                    'excerpt'         => wp_html_excerpt(wp_strip_all_tags($jsst_post->post_content), 200, '…'),
+                    'url'             => get_permalink($jsst_post),
+                    'thumbnail'       => '',
+                    'timestamp'       => null,
+                    'content_type'    => 'posts',
+                    // WP_Query exposes no comparable relevance number, so these
+                    // sit below any FULLTEXT hit that scored at all.
+                    'total_relevance' => 0.5,
+                );
+            }
+            wp_reset_postdata();
+        }
+
+        usort($jsst_results, function ($jsst_a, $jsst_b) {
+            $jsst_x = isset($jsst_a->total_relevance) ? $jsst_a->total_relevance : 0;
+            $jsst_y = isset($jsst_b->total_relevance) ? $jsst_b->total_relevance : 0;
+            if ($jsst_x == $jsst_y) return 0;
+            return ($jsst_x > $jsst_y) ? -1 : 1;
+        });
+
+        return array_slice($jsst_results, 0, $jsst_limit);
+    }
     
 }
 ?>

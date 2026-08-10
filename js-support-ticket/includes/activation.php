@@ -200,9 +200,14 @@ class JSSTactivation {
                     ('tplink_downloads_user', '1', 'tplink', NULL),
                     ('tplink_faqs_user', '0', 'tplink', 'faq'),
                     ('show_breadcrumbs', '1', 'default', NULL),
+                    ('instantresolve_enable', '1', 'instantresolve', NULL),
+                    ('instantresolve_min_chars', '15', 'instantresolve', NULL),
+                    ('instantresolve_sources', '[\"kb\",\"faq\",\"canned\",\"posts\"]', 'instantresolve', NULL),
+                    ('instantresolve_max_results', '5', 'instantresolve', NULL),
+                    ('instantresolve_analytics', '1', 'instantresolve', NULL),
                     ('productcode', 'jsticket', 'default', NULL),
-                    ('versioncode', '3.1.6', 'default', NULL),
-                    ('productversion', '316', 'default', NULL),
+                    ('versioncode', '3.1.7', 'default', NULL),
+                    ('productversion', '317', 'default', NULL),
                     ('producttype', 'free', 'default', NULL),
                     ('tve_enabled', '2', 'default', NULL),
                     ('tve_mailreadtype', '3', 'default', NULL),
@@ -483,6 +488,8 @@ class JSSTactivation {
                                 `viewed_by` int(11) DEFAULT NULL,
                                 `viewed_on` datetime DEFAULT NULL,
                                 `aireplymode` tinyint(4) DEFAULT 0,
+                                `is_ai_draft` tinyint(1) NOT NULL DEFAULT '0',
+                                `ticketviaautopilot` tinyint(1) NOT NULL DEFAULT '0',
                                 PRIMARY KEY (`id`),
                                 FULLTEXT KEY `message` (`message`)
                                 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;";
@@ -549,7 +556,8 @@ class JSSTactivation {
                                 `aireplymode` tinyint(4) DEFAULT 0,
                                 PRIMARY KEY (`id`),
                                 FULLTEXT KEY `subject` (`subject`),
-                                FULLTEXT KEY `message` (`message`)
+                                FULLTEXT KEY `message` (`message`),
+                                FULLTEXT KEY `jsst_ir_ft` (`subject`, `message`)
                             ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;";
             jssupportticket::$_db->query($jsst_query);
 
