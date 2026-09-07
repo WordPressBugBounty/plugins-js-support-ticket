@@ -21,7 +21,16 @@ if (!defined('JSST_ALLOWED_TAGS')) {
             'data-per' => array(),
             'data-nonce' => array(),
             'style' => array(),
+            // Human verification markup. (Roadmap 4.0-SEC-01)
+            'data-token' => array(),
+            'data-bits' => array(),
+            'data-solved' => array(),
+            'aria-hidden' => array(),
         ),
+        // The self-hosted verification falls back to the arithmetic question
+        // when JavaScript is off, which needs <noscript> to survive kses.
+        // (Roadmap 4.0-SEC-01)
+        'noscript'   => array(),
         'button'      => array(
             'class'  => array(),
             'id' => array(),
@@ -77,6 +86,10 @@ if (!defined('JSST_ALLOWED_TAGS')) {
             'id' => array(),
             'aria-hidden' => array(),
             'style' => array(),
+            // Verification status line. (Roadmap 4.0-SEC-01)
+            'role' => array(),
+            'data-done' => array(),
+            'data-failed' => array(),
         ),
         'input'      => array(
             'type'  => array(),
@@ -97,6 +110,7 @@ if (!defined('JSST_ALLOWED_TAGS')) {
             'disabled' => array(),
             'readonly' => array(),
             'credit_userid' => array(),
+            'tabindex' => array(), // honeypot field is skipped by keyboard users (Roadmap 4.0-SEC-01)
             'data-dismiss' => array(),
             'data-validation-optional' => array(),
             'data-callback' => array(),

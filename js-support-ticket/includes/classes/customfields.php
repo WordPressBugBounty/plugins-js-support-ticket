@@ -398,6 +398,28 @@ class JSSTcustomfields {
                 $jsst_html .= JSSTformfield::textarea($jsst_field->field, $jsst_value, array('class' => 'inputbox js-form-input-field one', 'data-validation' => $jsst_cssclass, 'rows' => $jsst_field->rows, 'cols' => $jsst_field->cols, $jsst_readonly));
                 break;
             case 'checkbox':
+                /* In the admin filter bar this is a multi-select, not a row of
+                   tick boxes. Every other control on that bar is one 227px box
+                   on a floated line, and a variable number of tick boxes cannot
+                   be: they stack inside a box fixed at 45px and spill over the
+                   controls beneath. The `multiple` field type, which stores the
+                   same array of values, has always been a multi-select here, so
+                   this follows the convention rather than inventing one — and it
+                   submits `field[]` exactly as the tick boxes did, so the search
+                   clause is untouched. The ticket form is unaffected: that is
+                   formCustomFields(), not this. */
+                if ($jsst_isadmin == 1) {
+                    $jsst_comboOptions = array();
+                    if (!empty($jsst_field->userfieldparams)) {
+                        $jsst_obj_option = json_decode($jsst_field->userfieldparams);
+                        foreach ($jsst_obj_option as $jsst_opt) {
+                            $jsst_opt = html_entity_decode($jsst_opt);
+                            $jsst_comboOptions[] = (object) array('id' => $jsst_opt, 'text' => $jsst_opt);
+                        }
+                    }
+                    $jsst_html .= JSSTformfield::select($jsst_field->field . '[]', $jsst_comboOptions, $jsst_value, esc_html(__('Select', 'js-support-ticket')) . ' ' . esc_attr($jsst_field->fieldtitle), array('data-validation' => $jsst_cssclass, 'multiple' => 'multiple', 'class' => 'inputbox js-form-multi-select-field'));
+                    break;
+                }
                 if (!empty($jsst_field->userfieldparams)) {
                     $jsst_comboOptions = array();
                     $jsst_obj_option = json_decode($jsst_field->userfieldparams);
@@ -433,12 +455,19 @@ class JSSTcustomfields {
                 break;
             case 'radio':
                 if($jsst_isadmin == 1){
+                    /* A select, for the same reason as the tick boxes above,
+                       and matching `combo` — which filters on one value out of a
+                       list exactly as this does. The loop here also reused
+                       $jsst_i, which arrives by reference and numbers the ids of
+                       every field on the bar; resetting it to zero gave the
+                       fields rendered after a radio duplicate ids, so clicking a
+                       later label toggled the wrong control. */
                     $jsst_comboOptions = array();
                     if (!empty($jsst_field->userfieldparams)) {
                         $jsst_obj_option = json_decode($jsst_field->userfieldparams);
-                        for ($jsst_i = 0; $jsst_i < count($jsst_obj_option); $jsst_i++) {
-                            $jsst_obj_option[$jsst_i] = html_entity_decode($jsst_obj_option[$jsst_i]);
-                            $jsst_comboOptions[$jsst_obj_option[$jsst_i]] = "$jsst_obj_option[$jsst_i]";
+                        foreach ($jsst_obj_option as $jsst_opt) {
+                            $jsst_opt = html_entity_decode($jsst_opt);
+                            $jsst_comboOptions[] = (object) array('id' => $jsst_opt, 'text' => $jsst_opt);
                         }
                     }
                     $jsst_jsFunction = '';
@@ -446,9 +475,7 @@ class JSSTcustomfields {
                         $jsst_wpnonce = wp_create_nonce("data-for-depandant-field-".$jsst_field->depandant_field);
                         $jsst_jsFunction = "getDataForDepandantField('".$jsst_wpnonce."','" . $jsst_field->field . "','" . $jsst_field->depandant_field . "',2);";
                     }
-                    $jsst_html .= '<div class="js-form-cust-rad-fld-wrp">';
-                    $jsst_html .= JSSTformfield::radiobutton($jsst_field->field, $jsst_comboOptions, $jsst_value, array('data-validation' => $jsst_cssclass, "autocomplete" => "off", 'onclick' => $jsst_jsFunction));
-                    $jsst_html .= '</div>';
+                    $jsst_html .= JSSTformfield::select($jsst_field->field, $jsst_comboOptions, $jsst_value, esc_html(__('Select', 'js-support-ticket')) . ' ' . esc_attr($jsst_field->fieldtitle), array('data-validation' => $jsst_cssclass, 'onchange' => $jsst_jsFunction, 'class' => 'inputbox js-form-select-field one'));
                 }else{
                     $jsst_comboOptions = array();
                     if (!empty($jsst_field->userfieldparams)) {
@@ -461,7 +488,9 @@ class JSSTcustomfields {
                         {
                             $jsst_field_width = 'style = " width:calc(100% / 3 - 4px); margin:2px 2px;"';
                         }
-                        $jsst_i = 0;
+                        /* A counter of its own. $jsst_i is the caller's, by
+                           reference, and numbers ids across every field. */
+                        $jsst_optindex = 0;
                         $jsst_jsFunction = '';
                         if ($jsst_field->depandant_field != null) {
                             $jsst_wpnonce = wp_create_nonce("data-for-depandant-field-".$jsst_field->depandant_field);
@@ -476,10 +505,10 @@ class JSSTcustomfields {
                                 $jsst_check = 'checked';
                             }
                             $jsst_html .= '<div class="js-ticket-radio-box" '.$jsst_field_width.'>';
-                                $jsst_html .= '<input type="radio" ' . esc_attr($jsst_check) . ' class="radiobutton js-ticket-radio-btn '.esc_attr($jsst_cssclass).'" value="' . esc_attr($jsst_option) . '" id="' . esc_attr($jsst_field->field) . '_' . esc_attr($jsst_i) . '" name="' . esc_attr($jsst_field->field) . '" data-validation ="'.esc_attr($jsst_cssclass).'" onclick = "'.$jsst_jsFunction.'"> ';
-                                $jsst_html .= '<label for="' . esc_attr($jsst_field->field) . '_' . esc_attr($jsst_i) . '" id="foruf_checkbox1">' . esc_html($jsst_option) . '</label>';
+                                $jsst_html .= '<input type="radio" ' . esc_attr($jsst_check) . ' class="radiobutton js-ticket-radio-btn '.esc_attr($jsst_cssclass).'" value="' . esc_attr($jsst_option) . '" id="' . esc_attr($jsst_field->field) . '_' . esc_attr($jsst_optindex) . '" name="' . esc_attr($jsst_field->field) . '" data-validation ="'.esc_attr($jsst_cssclass).'" onclick = "'.$jsst_jsFunction.'"> ';
+                                $jsst_html .= '<label for="' . esc_attr($jsst_field->field) . '_' . esc_attr($jsst_optindex) . '" id="foruf_checkbox1">' . esc_html($jsst_option) . '</label>';
                             $jsst_html .= '</div>';
-                            $jsst_i++;
+                            $jsst_optindex++;
                         }
                         $jsst_html .= '</div>';
                     }
@@ -610,6 +639,14 @@ class JSSTcustomfields {
         if (!is_admin()) {
             $jsst_inquery .= ' AND adminonly != 1 ';
         }
+        /* A terms-and-conditions field is a consent tick on the ticket form, not
+           a piece of ticket data, and it renders as "Terms And Conditions 1 : 1"
+           wherever it is shown. Every other path already leaves it out — the
+           ticket form hides it from staff, and the filter bar excludes it
+           outright — so this, which feeds the ticket detail screens and the two
+           ticket lists, was the one place it still appeared. The answer is still
+           stored on the ticket, so nothing is lost; it is simply not displayed. */
+        $jsst_inquery .= " AND userfieldtype != 'termsandconditions' ";
         $jsst_query = jssupportticket::$_db->prepare("SELECT field,fieldtitle,isuserfield,userfieldtype,userfieldparams,multiformid  FROM " . jssupportticket::$_db->prefix . "js_ticket_fieldsordering WHERE isuserfield = 1 AND " . $jsst_published . " AND fieldfor =%d" . $jsst_inquery. " AND multiformid =%d ORDER BY ordering", $jsst_fieldfor, $jsst_multiformid);
         $jsst_data = jssupportticket::$_db->get_results($jsst_query);
         return $jsst_data;

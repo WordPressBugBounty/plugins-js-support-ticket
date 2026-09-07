@@ -64,6 +64,17 @@ class JSSTtable {
             if (jssupportticket::$_db->last_error == null) {
                 $this->{$this->primarykey} = jssupportticket::$_db->insert_id;
                 $jsst_id = jssupportticket::$_db->insert_id;
+                /* Every insert the plugin makes comes through here, which is why
+                   a migration records what it created from this one place rather
+                   than from each importer in turn — one hook covers the importers
+                   that exist and the ones written later. Only tables keyed on a
+                   plain `id` are journalled, because a rollback deletes by id and
+                   could not find the row otherwise. Recording is off unless a
+                   migration slice is actually running, so the cost on an ordinary
+                   insert is a static integer test. (Roadmap 4.0-DATA-01) */
+                if ($this->primarykey === 'id' && class_exists('JSSTmigration') && JSSTmigration::isRecording()) {
+                    JSSTmigration::journal($this->tablename, $jsst_id);
+                }
                 //activity log //1 for insert
                 //JSSTincluder::getJSModel('tickethistory')->storeActivity(1, $this->tablename, $this->columns, $jsst_id);
             } else {

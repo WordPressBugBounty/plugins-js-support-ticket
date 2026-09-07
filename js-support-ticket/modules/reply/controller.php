@@ -61,7 +61,12 @@ class JSSTreplyController {
         }
         $jsst_data = JSSTrequest::get('post');
         JSSTincluder::getJSModel('reply')->editReply($jsst_data);
-        if (current_user_can('manage_options') || current_user_can('jsst_support_ticket_tickets')) {
+        // Where the agent was, not what the agent may do: an agent has
+        // jsst_support_ticket_tickets on both sides, so this sent every edit made
+        // from the help desk pages into wp-admin. The form posts to the URL of the
+        // side it was rendered on, so is_admin() is the honest answer - and it is
+        // what savereply() next door already uses. (Roadmap 4.0-CORE-05)
+        if (is_admin()) {
             $jsst_url = admin_url("admin.php?page=ticket&jstlay=ticketdetail&jssupportticketid=" . esc_attr($jsst_data['reply-tikcetid']));
         } else {
             $jsst_url = jssupportticket::makeUrl(array('jstmod'=>'ticket','jstlay'=>'ticketdetail','jssupportticketid'=>$jsst_data['reply-tikcetid'],'jsstpageid'=>jssupportticket::getPageid()));
@@ -80,7 +85,12 @@ class JSSTreplyController {
             return;
         }
         JSSTincluder::getJSModel('timetracking')->editTime($jsst_data);
-        if (current_user_can('manage_options') || current_user_can('jsst_support_ticket_tickets')) {
+        // Where the agent was, not what the agent may do: an agent has
+        // jsst_support_ticket_tickets on both sides, so this sent every edit made
+        // from the help desk pages into wp-admin. The form posts to the URL of the
+        // side it was rendered on, so is_admin() is the honest answer - and it is
+        // what savereply() next door already uses. (Roadmap 4.0-CORE-05)
+        if (is_admin()) {
             $jsst_url = admin_url("admin.php?page=ticket&jstlay=ticketdetail&jssupportticketid=" . esc_attr($jsst_data['reply-tikcetid']));
         } else {
             $jsst_url = jssupportticket::makeUrl(array('jstmod'=>'ticket','jstlay'=>'ticketdetail','jssupportticketid'=>$jsst_data['reply-tikcetid'],'jsstpageid'=>jssupportticket::getPageid()));

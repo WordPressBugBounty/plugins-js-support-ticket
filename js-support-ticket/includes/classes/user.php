@@ -213,7 +213,11 @@ class JSSTuser
         if (!is_numeric($jsst_uid)) return false;
 
         $jsst_model = JSSTincluder::getJSModel('ticket');
-        $jsst_query = jssupportticket::$_db->prepare("SELECT id, ticketid FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE wpuid = %d", $jsst_uid);
+        // $jsst_uid is a plugin user id (js_ticket_users.id), not a WordPress
+        // one, and js_ticket_tickets has no `wpuid` column at all — this read
+        // `WHERE wpuid = %d` and so raised "Unknown column" on every call,
+        // leaving $jsst_tickets empty and the attachment folders behind.
+        $jsst_query = jssupportticket::$_db->prepare("SELECT id, ticketid FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE uid = %d", $jsst_uid);
         $jsst_tickets = jssupportticket::$_db->get_results($jsst_query);
 
         do_action('jsst_addon_deletequery_for_user');
@@ -230,7 +234,8 @@ class JSSTuser
         jssupportticket::$_db->query($jsst_query);
 
         do_action('jsst_reset_aadon_query');
-        $jsst_query = jssupportticket::$_db->prepare("DELETE user FROM `" . jssupportticket::$_db->prefix . "js_ticket_users` AS user WHERE wpuid = %d", $jsst_uid);
+        // Same ID space again: keyed on `id`, to match the join above.
+        $jsst_query = jssupportticket::$_db->prepare("DELETE user FROM `" . jssupportticket::$_db->prefix . "js_ticket_users` AS user WHERE id = %d", $jsst_uid);
 
         if (jssupportticket::$_db->query($jsst_query)) {
             // --- START FILESYSTEM FIX ---
@@ -245,6 +250,10 @@ class JSSTuser
 
             $jsst_maindir = wp_upload_dir();
             $jsst_path = $jsst_maindir['basedir'] . '/' . jssupportticket::$_config['data_directory'] . '/attachmentdata/ticket';
+
+            if (empty($jsst_tickets)) {
+                return true;
+            }
 
             foreach ($jsst_tickets as $jsst_key) {
                 $jsst_userpath = $jsst_path . '/' . $jsst_key->ticketid;
@@ -266,6 +275,21 @@ class JSSTuser
         $jsst_query = jssupportticket::$_db->prepare("SELECT id FROM `".jssupportticket::$_db->prefix."js_ticket_users` WHERE wpuid = %d", $jsst_wpuid);
         $jsst_result = jssupportticket::$_db->get_var($jsst_query);
         return $jsst_result;
+    }
+
+    /*
+     * Ticket count for a WordPress user id, for the delete-user screen: it has
+     * to answer "does this user have help desk content?" before the plugin
+     * user id is known, so the join happens here rather than in two lookups.
+     */
+    function getTicketCountByWPUid($jsst_wpuid) {
+        if (!is_numeric($jsst_wpuid))
+            return 0;
+
+        $jsst_query = jssupportticket::$_db->prepare("SELECT COUNT(ticket.id) FROM `".jssupportticket::$_db->prefix."js_ticket_tickets` AS ticket"
+            ." INNER JOIN `".jssupportticket::$_db->prefix."js_ticket_users` AS user ON user.id = ticket.uid"
+            ." WHERE user.wpuid = %d", $jsst_wpuid);
+        return (int) jssupportticket::$_db->get_var($jsst_query);
     }
 
     function getUserNameByUid($jsst_uid) {

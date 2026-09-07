@@ -135,9 +135,19 @@ class JSSTreplyModel {
         if ( in_array('agent',jssupportticket::$_active_addons) && JSSTincluder::getJSModel('agent')->isUserStaff()) {
             $jsst_allowed = JSSTincluder::getJSModel('userpermissions')->checkPermissionGrantedForTask('Reply Ticket');
             if ($jsst_allowed != true) {
-                JSSTmessage::setMessage(esc_html(__('You are not allowed', 'js-support-ticket')), 'error');
+                JSSTmessage::setMessage(esc_html(__('You are not allowed', 'js-support-ticket')), 'error', 'agent-permissions');
                 return;
             }
+        }
+        /* A light agent holds the queue capability but not the reply one: they
+           read tickets and write internal notes, and nothing they write ever
+           reaches a customer. Only people who work the queue are tested — a
+           customer holds neither capability and gets here through their own
+           ticket, whose ownership the id and hash check above has already
+           established. (Roadmap 4.0-SEC-04) */
+        if (current_user_can(JSSTroles::CAP_TICKETS) && !JSSTroles::canReplyPublicly()) {
+            JSSTmessage::setMessage(esc_html(__('You are not allowed to reply to the customer on this ticket.', 'js-support-ticket')), 'error');
+            return;
         }
         // check whether ticket is closed or not incase of ticket viw email
         if(isset($jsst_data['ticketviaemail']) && $jsst_data['ticketviaemail'] == 1){
@@ -224,6 +234,11 @@ class JSSTreplyModel {
 
         $jsst_data = JSSTincluder::getJSmodel('jssupportticket')->stripslashesFull($jsst_data);// remove slashes with quotes.
         $jsst_error = 0;
+        // Returned at the end. Email piping stores the attachments that arrived
+        // with a mailed reply itself, after this returns, and had no id to hang
+        // them on: every one of them was filed against reply 0 and never
+        // appeared under the reply it came with. (Roadmap 4.0-OPS-01)
+        $jsst_replyid = 0;
         if (!$jsst_row->bind($jsst_data)) {
             $jsst_error = 1;
         }
@@ -255,6 +270,13 @@ class JSSTreplyModel {
                 }
             }
             JSSTincluder::getJSModel('ticket')->updateLastReply($jsst_data['ticketid']);
+            // The reply is stored, so the draft of it is no longer a draft.
+            // Leaving it would offer the agent their own sent text back as a
+            // recovered draft, which reads like the reply failed to send.
+            // (Roadmap 4.0-UX-04)
+            if (class_exists('JSSTdraft')) {
+                JSSTdraft::discardForTicket(get_current_user_id(), $jsst_data['ticketid']);
+            }
             JSSTmessage::setMessage(esc_html(__('Reply posted', 'js-support-ticket')), 'updated');
             $jsst_messagetype = esc_html(__('Successfully', 'js-support-ticket'));
 
@@ -343,7 +365,7 @@ class JSSTreplyModel {
         $jsst_currentUserName = isset($jsst_current_user->display_name) ? $jsst_current_user->display_name : esc_html(__('Guest', 'js-support-ticket'));
         $jsst_eventtype = 'REPLIED_TICKET';
         $jsst_message = esc_html(__('Ticket is replied by', 'js-support-ticket')) . " ( " . esc_html($jsst_currentUserName) . " ) ";
-        if(in_array('tickethistory', jssupportticket::$_active_addons)){
+        if(JSSTmergedaddon::featureEnabled('tickethistory')){
             JSSTincluder::getJSModel('tickethistory')->addActivityLog($jsst_ticketid, 1, $jsst_eventtype, $jsst_message, $jsst_messagetype);
         }
 
@@ -361,6 +383,7 @@ class JSSTreplyModel {
         if ($jsst_data['closeonreply'] == 1) {
             JSSTincluder::getJSModel('ticket')->closeTicket($jsst_ticketid);
         }
+        return $jsst_replyid;
 
         return;
     }
@@ -410,26 +433,9 @@ class JSSTreplyModel {
         }
         if(!is_numeric($jsst_replyid)) return false;
         // --- SECURITY & PERMISSION FIX ---
-        $is_admin = current_user_can('manage_options');
-        $has_access = false;
-
-        if ($is_admin) {
-            $has_access = true;
-        } else {
-            // Check if user is an agent
-            if (in_array('agent', jssupportticket::$_active_addons)) {
-                $agent_model = JSSTincluder::getJSModel('agent');
-                if ($agent_model && method_exists($agent_model, 'isUserStaff') && $agent_model->isUserStaff()) {
-                    // Check specific permission for agents
-                    if (JSSTincluder::getJSModel('userpermissions')->checkPermissionGrantedForTask('Edit Reply')) {
-                        $has_access = true;
-                    }
-                }
-            }
-        }
-
-        // If the user is neither an admin nor an authorized agent, block access immediately
-        if (!$has_access) {
+        // Administrators, agents the add-on grants 'Edit Reply' to, and roles
+        // holding CAP_EDIT. Nobody else amends a reply that has already gone out.
+        if (!JSSTroles::canEditReply()) {
             return false; 
         }
         $jsst_query = "SELECT reply.id AS replyid, reply.message AS message
@@ -466,28 +472,11 @@ class JSSTreplyModel {
             return false;
 
         // --- SECURITY & PERMISSION FIX ---
-        $is_admin = current_user_can('manage_options');
-        $has_access = false;
-
-        if ($is_admin) {
-            $has_access = true;
-        } else {
-            // Check if user is an agent
-            if (in_array('agent', jssupportticket::$_active_addons)) {
-                $agent_model = JSSTincluder::getJSModel('agent');
-                if ($agent_model && method_exists($agent_model, 'isUserStaff') && $agent_model->isUserStaff()) {
-                    // Check specific permission for agents
-                    if (JSSTincluder::getJSModel('userpermissions')->checkPermissionGrantedForTask('Edit Reply')) {
-                        $has_access = true;
-                    }
-                }
-            }
-        }
-
-        // If the user is neither an admin nor an authorized agent, block access immediately
-        if (!$has_access) {
-            die('456');
-            return false; 
+        // Administrators, agents the add-on grants 'Edit Reply' to, and roles
+        // holding CAP_EDIT. Nobody else amends a reply that has already gone out.
+        if (!JSSTroles::canEditReply()) {
+            JSSTmessage::setMessage(esc_html(__('You are not allowed to edit this reply', 'js-support-ticket')), 'error');
+            return false;
         }
         // --- END PERMISSION FIX ---
 

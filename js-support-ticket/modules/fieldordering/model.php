@@ -146,6 +146,13 @@ class JSSTfieldorderingModel {
     }
 
     function getFieldsOrderingforForm($jsst_fieldfor,$jsst_formid='') {
+        // Set before the early returns below. Every caller renders a form by
+        // looping over this key, and a bail-out that left it undefined turned
+        // "this form has no configurable fields" into a pair of PHP warnings
+        // printed at the top of the form. An empty list is the honest answer.
+        if (!isset(jssupportticket::$jsst_data['fieldordering']) || !is_array(jssupportticket::$jsst_data['fieldordering'])) {
+            jssupportticket::$jsst_data['fieldordering'] = array();
+        }
         if (!is_numeric($jsst_fieldfor))
             return false;
         if (JSSTincluder::getObjectClass('user')->isguest()) {
@@ -177,7 +184,8 @@ class JSSTfieldorderingModel {
         }
         $jsst_query = jssupportticket::$_db->prepare($jsst_query, $jsst_query_args);
         $jsst_query .=  $jsst_adminonly . " ORDER BY ordering ";
-        jssupportticket::$jsst_data['fieldordering'] = jssupportticket::$_db->get_results($jsst_query);
+        $jsst_rows = jssupportticket::$_db->get_results($jsst_query);
+        jssupportticket::$jsst_data['fieldordering'] = is_array($jsst_rows) ? $jsst_rows : array();
         return;
     }
 
@@ -660,7 +668,7 @@ class JSSTfieldorderingModel {
         $jsst_builtin_fields = ['email', 'fullname', 'phone', 'subject', 'department', 'priority'];
 
         // Conditionally add 'helptopic' if the addon is active
-        /*if (in_array('helptopic', jssupportticket::$_active_addons)) {
+        /*if (JSSTmergedaddon::featureEnabled('helptopic')) {
             $jsst_builtin_fields[] = 'helptopic';
         }*/
 
@@ -721,6 +729,10 @@ class JSSTfieldorderingModel {
             $jsst_fieldtypes = jssupportticket::$_db->get_results($jsst_query);
         } else if ($jsst_fieldType->field == 'helptopic') {
             $jsst_showComboBox = true;
+            // The field-ordering screen reads the topics table directly, and is
+            // reachable before any topic screen has been opened.
+            // (Roadmap 4.0-CORE-19)
+            JSSTmergedaddon::ensureSchema('helptopic');
             $jsst_query = "SELECT id, topic AS text FROM `" . jssupportticket::$_db->prefix . "js_ticket_help_topics` WHERE status = 1";
             $jsst_query.= "  ORDER BY ordering ASC";
             $jsst_fieldtypes = jssupportticket::$_db->get_results($jsst_query);

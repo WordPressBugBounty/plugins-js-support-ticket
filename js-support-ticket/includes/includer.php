@@ -15,7 +15,7 @@ class JSSTincluder {
 
     public static function include_file($jsst_filename, $jsst_module_name = null) {
         $allowed_modules = array(
-            'activitylog','attachment','configuration','department','email','emailtemplate','fieldordering','gdpr','jssupportticket','postinstallation','premiumplugin','priority','product','reply','reports','slug','status','systemerror','themes','thirdpartyimport','ticket','actions','agent','role','roleaccessdepartments','rolepermissions','useraccessdepartments','userpermissions','agentautoassign','aipoweredreply','announcement','autoclose','banemail','banemaillog','cannedresponses','dashboardwidgets','download','zywrap','easydigitaldownloads','emailcc','emailpiping','envatovalidation','export','faq','feedback','helptopic','knowledgebase','mail','mailchimp','maxticket','mergeticket','multiform','multilanguageemailtemplates','note','notification','overdue','paidsupport','privatecredentials','smtp','sociallogin','themes','tickethistory','timetracking','useroptions','widgets','woocommerce','downloadattachment','articleattachmet','instantresolve',
+            'activitylog','attachment','configuration','department','email','emailtemplate','fieldordering','gdpr','jssupportticket','postinstallation','premiumplugin','priority','product','reply','reports','slug','status','systemerror','themes','thirdpartyimport','ticket','actions','agent','role','roleaccessdepartments','rolepermissions','useraccessdepartments','userpermissions','agentautoassign','aipoweredreply','announcement','autoclose','banemail','banemaillog','cannedresponses','dashboardwidgets','download','zywrap','easydigitaldownloads','emailcc','emailpiping','envatovalidation','export','faq','feedback','helptopic','knowledgebase','mail','mailchimp','maxticket','mergeticket','multiform','multilanguageemailtemplates','note','notification','overdue','paidsupport','privatecredentials','smtp','sociallogin','themes','tickethistory','timetracking','useroptions','widgets','woocommerce','downloadattachment','articleattachmet','instantresolve','copilot'
         );
 
         if (
@@ -135,7 +135,15 @@ class JSSTincluder {
 		$jsst_new_addon_layoutname = "";
 		$jsst_new_addon_layoutname = apply_filters('jsst_ticket_include_thirdparty_addon_layoutname',false);
 
-        if(in_array($jsst_module, jssupportticket::$_active_addons)){
+        // A merged capability's own module, and any sub-module of one, is served
+        // from core whenever core ships the file. (Roadmap 4.0-CORE-19)
+        $jsst_core_owns_file = false;
+        if (class_exists('JSSTmergedaddon') && JSSTmergedaddon::mergedOwner($jsst_module) != '') {
+            $jsst_core_file = JSSTincluder::corePath($jsst_module, $jsst_type, $jsst_file_name);
+            $jsst_core_owns_file = ($jsst_core_file != '' && file_exists($jsst_core_file));
+        }
+
+        if(in_array($jsst_module, jssupportticket::$_active_addons) && !$jsst_core_owns_file){
             $jsst_path = WP_PLUGIN_DIR.'/'.'js-support-ticket-'.$jsst_module.'/';
             switch ($jsst_type) {
                 case 'file':
@@ -159,7 +167,8 @@ class JSSTincluder {
                     break;
             }
 
-        }elseif(in_array($jsst_module, $jsst_addons_secondry)){ // to handle the case of modules that are submodules for some addon
+
+        }elseif(in_array($jsst_module, $jsst_addons_secondry) && !$jsst_core_owns_file){ // to handle the case of modules that are submodules for some addon
             $jsst_parent_module = '';
             switch ($jsst_module) {// to identify addon for submodules.
                 case 'articles':
@@ -225,29 +234,41 @@ class JSSTincluder {
                 $jsst_file_path = JSSTincluder::getPluginPath('premiumplugin','file');
             }
         }else{
-            $jsst_path = JSST_PLUGIN_PATH;
-            switch ($jsst_type) {
-                case 'file':
-                    if($jsst_file_name != ''){
-                        $jsst_file_path = $jsst_path . 'modules/' . $jsst_module . '/tpls/' . $jsst_file_name . '.php';
-                    }else{
-                        $jsst_file_path = $jsst_path . 'modules/' . $jsst_module . '/controller.php';
-                    }
-                    break;
-                case 'model':
-                        $jsst_file_path = $jsst_path . 'modules/' . $jsst_module . '/model.php';
-                    break;
+            $jsst_file_path = JSSTincluder::corePath($jsst_module, $jsst_type, $jsst_file_name);
+        }
+        return $jsst_file_path;
+    }
 
-                case 'class':
-                    $jsst_file_path = $jsst_path . 'includes/classes/' . $jsst_module . '.php';
-                    break;
-                case 'controller':
-                        $jsst_file_path = $jsst_path . 'modules/' . $jsst_module . '/controller.php';
-                    break;
-                case 'table':
-                    $jsst_file_path = $jsst_path . 'includes/tables/' . $jsst_module . '.php';;
-                    break;
-            }
+    /*
+     * Where core keeps a module's own file, whatever else is installed beside it.
+     * Split out of getPluginPath() so the merged-add-on check above can ask
+     * whether core ships a given file without duplicating these paths.
+     * (Roadmap 4.0-CORE-19)
+     */
+
+    public static function corePath($jsst_module, $jsst_type, $jsst_file_name = '') {
+        $jsst_path = JSST_PLUGIN_PATH;
+        $jsst_file_path = '';
+        switch ($jsst_type) {
+            case 'file':
+                if($jsst_file_name != ''){
+                    $jsst_file_path = $jsst_path . 'modules/' . $jsst_module . '/tpls/' . $jsst_file_name . '.php';
+                }else{
+                    $jsst_file_path = $jsst_path . 'modules/' . $jsst_module . '/controller.php';
+                }
+                break;
+            case 'model':
+                $jsst_file_path = $jsst_path . 'modules/' . $jsst_module . '/model.php';
+                break;
+            case 'class':
+                $jsst_file_path = $jsst_path . 'includes/classes/' . $jsst_module . '.php';
+                break;
+            case 'controller':
+                $jsst_file_path = $jsst_path . 'modules/' . $jsst_module . '/controller.php';
+                break;
+            case 'table':
+                $jsst_file_path = $jsst_path . 'includes/tables/' . $jsst_module . '.php';
+                break;
         }
         return $jsst_file_path;
     }

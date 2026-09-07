@@ -112,10 +112,27 @@ class JSSTformhandler {
         }
 
         /*
-         * Optional:
-         * Require capability for admin requests.
+         * Can this person reach the help desk in wp-admin at all?
+         *
+         * A coarse door, not the permission check. Every task behind it makes
+         * its own decision — the canned-response status toggle asks
+         * canReplyPublicly(), a ticket action asks canChangeTicketState(), and
+         * the Agents add-on asks its own per-agent question. This only refuses
+         * people who have no business on these screens in the first place.
+         *
+         * It used to demand manage_options, which is administrator and nobody
+         * else, so every link-style action on every help-desk screen answered an
+         * agent with a 403 — including actions the code behind them would have
+         * allowed. The capabilities named here are the same two the help-desk
+         * admin menu is built from, so whoever can see a screen can now use the
+         * links on it, and the real decision is made where it always was.
          */
-        if ( is_admin() && ! current_user_can( 'manage_options' ) ) {
+        $jsst_may_reach = current_user_can( 'manage_options' );
+        if ( ! $jsst_may_reach && class_exists( 'JSSTroles' ) ) {
+            $jsst_may_reach = current_user_can( JSSTroles::CAP_ADMIN )
+                    || current_user_can( JSSTroles::CAP_TICKETS );
+        }
+        if ( is_admin() && ! $jsst_may_reach ) {
             wp_die(
                 esc_html__( 'You are not allowed to access this resource.', 'js-support-ticket' ),
                 esc_html__( 'Access Denied', 'js-support-ticket' ),

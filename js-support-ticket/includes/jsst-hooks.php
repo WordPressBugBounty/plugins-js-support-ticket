@@ -98,19 +98,14 @@ function jsst_add_new_member()
             // passwords do not match
             jsst_errors()->add('password_mismatch', esc_html(__('Passwords do not match', 'js-support-ticket')));
         }
-        if (jssupportticket::$_config['captcha_on_registration'] == 1) {
-            if (jssupportticket::$_config['captcha_selection'] == 1) { // Google reCaptcha
-                $jsst_gresponse = jssupportticket::JSST_sanitizeData($_POST['g-recaptcha-response']); // JSST_sanitizeData() function uses wordpress santize functions
-                $jsst_resp = JSSTGoogleRecaptchaHTTPPost(jssupportticket::$_config['recaptcha_privatekey'], $jsst_gresponse);
-                if (!$jsst_resp) {
-                    jsst_errors()->add('invalid_captcha', esc_html(__('Invalid captcha', 'js-support-ticket')));
-                }
-            } else { // own captcha
-                $jsst_captcha = new JSSTcaptcha;
-                $jsst_result = $jsst_captcha->checkCaptchaUserForm();
-                if ($jsst_result != 1) {
-                    jsst_errors()->add('invalid_captcha', esc_html(__('Invalid captcha', 'js-support-ticket')));
-                }
+        // Registration is rate limited and verified through the same pluggable
+        // provider as the ticket form. (Roadmap 4.0-SEC-01)
+        if (!JSSTratelimit::check('register')) {
+            jsst_errors()->add('rate_limited', JSSTratelimit::message());
+        } elseif (jssupportticket::$_config['captcha_on_registration'] == 1) {
+            $jsst_verification = JSSTincluder::getObjectClass('verification');
+            if (!$jsst_verification->verify('register')) {
+                jsst_errors()->add('invalid_captcha', $jsst_verification->lastError());
             }
         }
 
@@ -120,10 +115,10 @@ function jsst_add_new_member()
         // only create the user in if there are no errors
         if (empty($jsst_errors)) {
             // handled for useroptions addon
-            $jsst_default_role = jssupportticket::$_config['wp_default_role'];
-            if ($jsst_default_role == 0) {
-                $jsst_default_role = 'subscriber';
-            }
+            // Never trust the stored value: the row may predate the safety rule,
+            // or have come from an import or a direct database edit. An unsafe
+            // role becomes Subscriber. (Roadmap 4.0-CORE-07)
+            $jsst_default_role = JSSTregistrationrole::configured();
 
             $jsst_wperrors = register_new_user($jsst_user_login, $jsst_user_email);
             $jsst_new_user_id = "";
@@ -259,23 +254,180 @@ function jsst_save_admin_signature_field($jsst_uid)
 
 // ---------------Remove wp user ---------------
 
+/*
+ * We deliberately do not answer users_have_additional_content. That filter is
+ * the only switch on core's content radio, and answering yes on account of
+ * tickets put the radio in front of an admin for a customer who owns no post,
+ * page or media item at all — a question about content that does not exist,
+ * asked right above the ticket question that does apply. Each control now
+ * appears only when it has something to govern: core's when WordPress finds
+ * posts or links, ours when the customer has tickets.
+ *
+ * Staying out has one cost, and jsst_delete_user_form() below pays it. Core is
+ * binary (wp-admin/users.php:396-408): with no content it hides the radio and
+ * prints "This user does not have any content.", which is untrue of someone
+ * holding a support history. That sentence is corrected there. The hidden
+ * delete_option=delete core posts in the same breath is harmless — core only
+ * takes that branch once it has established there are no posts or links to
+ * delete, and tickets are decided by our own field, never by that one.
+ */
+
+/*
+ * The plugin asks about tickets separately from WordPress's own radio, which
+ * governs posts and links only: "Delete all content" is not consent to lose a
+ * support history, and that history is often the part a site is obliged to
+ * keep once the account is gone. Rendered per user, like the core control, so
+ * a bulk deletion can keep one customer's tickets and drop another's.
+ */
+add_action('delete_user_form', 'jsst_delete_user_form', 10, 2);
+
+function jsst_delete_user_form($jsst_current_user, $jsst_user_ids)
+{
+    if (empty($jsst_user_ids) || !is_array($jsst_user_ids)) {
+        return;
+    }
+
+    $jsst_js_class = JSSTincluder::getObjectClass('user');
+    $jsst_rows = array();
+    foreach ($jsst_user_ids AS $jsst_user_id) {
+        $jsst_count = $jsst_js_class->getTicketCountByWPUid($jsst_user_id);
+        if ($jsst_count > 0) {
+            $jsst_rows[(int) $jsst_user_id] = $jsst_count;
+        }
+    }
+    if (empty($jsst_rows)) { // nothing of ours is at stake, stay off the screen
+        return;
+    }
+    ?>
+    <h2 class="jsst-delete-user-heading"><?php echo esc_html(__('JS Help Desk', 'js-support-ticket')); ?></h2>
+    <?php
+    foreach ($jsst_rows AS $jsst_user_id => $jsst_count) {
+        $jsst_user = get_userdata($jsst_user_id);
+        $jsst_login = ($jsst_user === false) ? '' : $jsst_user->user_login;
+        ?>
+        <fieldset class="jsst-ticket-choice">
+            <legend>
+                <?php
+                printf(
+                    /* translators: 1: User login, 2: User ID, 3: Number of support tickets. */
+                    esc_html(_n(
+                        '%1$s (ID #%2$s) has %3$s support ticket. What should be done with it?',
+                        '%1$s (ID #%2$s) has %3$s support tickets. What should be done with them?',
+                        $jsst_count,
+                        'js-support-ticket'
+                    )),
+                    '<strong>' . esc_html($jsst_login) . '</strong>',
+                    (int) $jsst_user_id,
+                    number_format_i18n($jsst_count)
+                );
+                ?>
+            </legend>
+            <p class="description"><?php echo esc_html(__('These options apply to support tickets, including their replies and attachments.', 'js-support-ticket')); ?></p>
+            <ul>
+                <li>
+                    <input type="radio" id="jsst_keep_tickets_<?php echo esc_attr($jsst_user_id); ?>" name="jsst_delete_tickets[<?php echo esc_attr($jsst_user_id); ?>]" value="keep" checked="checked" />
+                    <label for="jsst_keep_tickets_<?php echo esc_attr($jsst_user_id); ?>"><?php echo esc_html(_n('Keep the ticket and its history.', 'Keep the tickets and their history.', $jsst_count, 'js-support-ticket')); ?></label>
+                </li>
+                <li>
+                    <input type="radio" id="jsst_delete_tickets_<?php echo esc_attr($jsst_user_id); ?>" name="jsst_delete_tickets[<?php echo esc_attr($jsst_user_id); ?>]" value="delete" />
+                    <label for="jsst_delete_tickets_<?php echo esc_attr($jsst_user_id); ?>"><?php echo esc_html(_n('Delete the ticket, along with its replies and attachments.', 'Delete the tickets, along with their replies and attachments.', $jsst_count, 'js-support-ticket')); ?></label>
+                </li>
+            </ul>
+        </fieldset>
+        <?php
+    }
+
+    /*
+     * Everything WordPress prints above -- its content question, or the line
+     * it shows when a user owns no posts -- is core's own screen, and is left
+     * exactly as core renders it. What follows only styles this plugin's
+     * markup: core floats the legend on this form (float: inline-start, in
+     * wp-admin/css/common.css) and clears only a fieldset's ul and nested
+     * fieldsets, so our note would otherwise ride up alongside our own
+     * heading and share its line. Start alignment rather than left keeps an
+     * RTL admin reading correctly.
+     */
+    ?>
+    <style>
+    .jsst-delete-user-heading,
+    .jsst-ticket-choice legend {
+        text-align: start;
+    }
+    .jsst-ticket-choice .description {
+        clear: both;
+        text-align: start;
+    }
+    </style>
+    <?php
+}
+
+/*
+ * True only when an admin ticked "delete" for this user on the delete-users
+ * screen. Everything else — a reassign, a programmatic wp_delete_user(), WP-CLI,
+ * REST, a multisite removal — has no such field and gets the answer no, so the
+ * destructive path is never the one taken by default.
+ */
+function jsst_should_delete_user_tickets($jsst_user_id)
+{
+    if (empty($_POST['jsst_delete_tickets']) || !is_array($_POST['jsst_delete_tickets'])) {
+        return false;
+    }
+    if (!isset($_POST['jsst_delete_tickets'][$jsst_user_id])) {
+        return false;
+    }
+    // The field only means anything inside the real form. Re-checking the
+    // nonce and the capability keeps a stray POST somewhere else in wp-admin
+    // from reaching the delete.
+    if (!isset($_REQUEST['_wpnonce']) || !wp_verify_nonce(sanitize_key(wp_unslash($_REQUEST['_wpnonce'])), 'delete-users')) {
+        return false;
+    }
+    if (!current_user_can('delete_users')) {
+        return false;
+    }
+    return sanitize_key(wp_unslash($_POST['jsst_delete_tickets'][$jsst_user_id])) === 'delete';
+}
+
 function jsst_remove_user($jsst_user_id)
 {
+    if (!is_numeric($jsst_user_id)) {
+        return;
+    }
+
     $jsst_js_class = JSSTIncluder::getObjectClass('user');
     $jsst_userid = $jsst_js_class->getUserIDByWPUid($jsst_user_id);
 
-    if (isset($_POST['delete_option']) and $_POST['delete_option'] == 'delete') {
+    // Saved queue views belong to the WordPress user who saved them, so they go
+    // when that user does — whichever way their tickets are dealt with below.
+    // (Roadmap 4.0-CORE-18)
+    JSSTqueue::removeUserViews($jsst_user_id);
 
-        $jsst_row = JSSTincluder::getJSTable('users');
-        $jsst_data['id'] = $jsst_userid;
-        $jsst_data['wpuid'] = 0;
-        $jsst_data['status'] = 0;
-        $jsst_row->bind($jsst_data);
-        $jsst_row->store();
-
-        // for future use to delete user relevent record call function below
-        // $jsst_result = $jsst_js_class->deleteUserRecords($jsst_userid, true);
+    // No help desk record for this WordPress user. Returning matters: an empty
+    // id makes JSSTtable::bind() treat the store below as an insert, which
+    // would add a junk row on every deletion of a user who never used the
+    // help desk.
+    if (empty($jsst_userid)) {
+        return;
     }
+
+    if (jsst_should_delete_user_tickets($jsst_user_id)) {
+        $jsst_js_class->deleteUserRecords($jsst_userid, true);
+        return;
+    }
+
+    /* Otherwise detach rather than delete, so the tickets keep the name and
+       address they were filed under and the queue still reads correctly. The
+       row stays with wpuid = 0 and status = 0; it is no longer tied to a
+       WordPress account and cannot log in. This branch used to be gated on
+       $_POST['delete_option'] == 'delete', but WordPress posts delete_option as
+       an array keyed by user id, so the comparison was array == string — false
+       on every path, and the record was left pointing at a WordPress user that
+       no longer existed. */
+    $jsst_row = JSSTincluder::getJSTable('users');
+    $jsst_data['id'] = $jsst_userid;
+    $jsst_data['wpuid'] = 0;
+    $jsst_data['status'] = 0;
+    $jsst_row->bind($jsst_data);
+    $jsst_row->store();
 }
 
 add_action('delete_user', 'jsst_remove_user');

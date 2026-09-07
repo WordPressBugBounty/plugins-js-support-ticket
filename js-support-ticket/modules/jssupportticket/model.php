@@ -95,6 +95,91 @@ class JSSTjssupportticketModel {
         }
     }
 
+    /**
+     * How many days the dashboard reports cover: 7 or 30. (Roadmap 4.0-CORE-09)
+     *
+     * Stored per administrator, because two people looking at the same site
+     * usually want different windows.
+     */
+    public static function dashboardRangeDays() {
+        $jsst_days = (int) get_user_meta(get_current_user_id(), 'jsst_dashboard_range', true);
+        return ($jsst_days === 30) ? 30 : 7;
+    }
+
+    /**
+     * New, pending, answered and closed counts per day for the last N days.
+     *
+     * One grouped query per measure instead of one query per day per measure: the
+     * old code ran four queries for every day on the chart, which is 28 at a
+     * 7-day range and would have been 120 once 30 days were offered.
+     * (Roadmap 4.0-CORE-09, 4.0-PERF-01)
+     */
+    function getTicketTrends($jsst_days = 7) {
+        $jsst_days = (int) $jsst_days;
+        if ($jsst_days < 1) {
+            $jsst_days = 7;
+        }
+        if ($jsst_days > 366) {
+            $jsst_days = 366;
+        }
+        $jsst_table = jssupportticket::$_db->prefix . 'js_ticket_tickets';
+        // Site time: DATE(created) is stored via date_i18n(), so bucketing by UTC
+        // days put tickets in the wrong column for any site off UTC.
+        $jsst_from = date_i18n('Y-m-d', strtotime('-' . ($jsst_days - 1) . ' days'));
+
+        // Every day in the range, so a day with no tickets still plots as zero.
+        $jsst_dates = array();
+        $jsst_index = array();
+        for ($jsst_i = $jsst_days - 1; $jsst_i >= 0; $jsst_i--) {
+            $jsst_date = date_i18n('Y-m-d', strtotime("-$jsst_i days"));
+            $jsst_index[$jsst_date] = count($jsst_dates);
+            $jsst_dates[] = $jsst_date;
+        }
+        $jsst_zero = array_fill(0, count($jsst_dates), 0);
+        $jsst_series = array(
+            'new'      => $jsst_zero,
+            'pending'  => $jsst_zero,
+            'answered' => $jsst_zero,
+            'closed'   => $jsst_zero,
+        );
+
+        // The four measures the chart draws, as their WHERE clauses. Kept
+        // identical to what the per-day queries asked for.
+        $jsst_measures = array(
+            'new'      => "status != 5 AND status != 6",
+            'pending'  => "isanswered != 1 AND status != 5 AND status != 6 AND lastreply != '0000-00-00 00:00:00'",
+            'answered' => "isanswered = 1 AND status != 5 AND status != 6 AND status != 1",
+            'closed'   => "status IN (5,6)",
+        );
+        foreach ($jsst_measures AS $jsst_key => $jsst_where) {
+            $jsst_query = jssupportticket::$_db->prepare(
+                "SELECT DATE(created) AS created_day, COUNT(id) AS total
+                    FROM `" . $jsst_table . "`
+                    WHERE DATE(created) >= %s AND " . $jsst_where . "
+                    GROUP BY DATE(created)",
+                $jsst_from
+            );
+            $jsst_rows = jssupportticket::$_db->get_results($jsst_query);
+            if (!is_array($jsst_rows)) {
+                continue;
+            }
+            foreach ($jsst_rows AS $jsst_row) {
+                if (isset($jsst_index[$jsst_row->created_day])) {
+                    $jsst_series[$jsst_key][$jsst_index[$jsst_row->created_day]] = (int) $jsst_row->total;
+                }
+            }
+        }
+
+        return array(
+            'dates'    => $jsst_dates,
+            'days'     => $jsst_days,
+            'new'      => $jsst_series['new'],
+            'pending'  => $jsst_series['pending'],
+            'answered' => $jsst_series['answered'],
+            'closed'   => $jsst_series['closed'],
+        );
+    }
+
     function getControlPanelDataAdmin(){
         $jsst_curdate = date_i18n('Y-m-d');
         $jsst_cur_datetime = date_i18n('Y-m-d H:i:s');
@@ -135,39 +220,20 @@ class JSSTjssupportticketModel {
         jssupportticket::$jsst_data['unassigned_tickets'] = jssupportticket::$_db->get_results($jsst_query);
 
         // Section 4: Ticket Action History
-        if(in_array('tickethistory', jssupportticket::$_active_addons)) {
-            $jsst_query = "SELECT al.id, al.eventtype, al.message, al.referenceid, tic.ticketid, user.display_name AS name, al.datetime 
+        if(JSSTmergedaddon::featureEnabled('tickethistory')) {
+            JSSTmergedaddon::ensureSchema('tickethistory');
+            $jsst_query = "SELECT al.id, al.eventtype, al.message, al.referenceid, tic.ticketid, user.display_name AS name, al.datetime
                         FROM ".jssupportticket::$_db->prefix."js_ticket_activity_log AS al
                         JOIN ".jssupportticket::$_db->prefix."js_ticket_tickets AS tic ON al.referenceid = tic.id
                         LEFT JOIN `" . jssupportticket::$_db->prefix . "js_ticket_users` AS user ON  al.uid = user.id
-                        LEFT JOIN ".jssupportticket::$_db->prefix."js_ticket_staff AS staff ON tic.staffid = staff.id
                         WHERE al.eventfor = 1 AND al.event = 'ticket'
                         ORDER BY al.datetime DESC LIMIT 8";
             jssupportticket::$jsst_data['ticket_action_history'] = jssupportticket::$_db->get_results($jsst_query);
         }
 
-        // Section 5: Ticket Trends (Last 7 Days)
-        $jsst_dates = [];
-        $jsst_new_tickets_data = [];
-        $jsst_pending_tickets_data = [];
-        $jsst_answered_tickets_data = [];
-        for ($jsst_i = 6; $jsst_i >= 0; $jsst_i--) {
-            $jsst_date = gmdate('Y-m-d', strtotime("-$jsst_i days"));
-            $jsst_dates[] = $jsst_date;
-            $jsst_query_new = "SELECT COUNT(id) FROM ".jssupportticket::$_db->prefix."js_ticket_tickets WHERE DATE(created) = '$jsst_date' AND status != 5 AND status != 6";
-            $jsst_new_tickets_data[] = (int) jssupportticket::$_db->get_var($jsst_query_new);
-            $jsst_query_pending = "SELECT COUNT(id) FROM ".jssupportticket::$_db->prefix."js_ticket_tickets WHERE isanswered != 1 AND status != 5 AND status != 6 AND (lastreply != '0000-00-00 00:00:00') AND DATE(created) = '$jsst_date'";
-            $jsst_pending_tickets_data[] = (int) jssupportticket::$_db->get_var($jsst_query_pending);
-            $jsst_query_answered = "SELECT COUNT(id) FROM ".jssupportticket::$_db->prefix."js_ticket_tickets WHERE isanswered = 1 AND status != 5 AND status != 6 AND status != 1 AND DATE(created) = '$jsst_date'";
-            $jsst_answered_tickets_data[] = (int) jssupportticket::$_db->get_var($jsst_query_answered);
-            $jsst_query_closed = "SELECT COUNT(id) FROM ".jssupportticket::$_db->prefix."js_ticket_tickets WHERE status IN (5,6) AND DATE(created) = '$jsst_date'";
-            $jsst_closed_tickets_data[] = (int) jssupportticket::$_db->get_var($jsst_query_closed);
-        }
-        jssupportticket::$jsst_data['ticket_trends']['dates'] = $jsst_dates;
-        jssupportticket::$jsst_data['ticket_trends']['new'] = $jsst_new_tickets_data;
-        jssupportticket::$jsst_data['ticket_trends']['pending'] = $jsst_pending_tickets_data;
-        jssupportticket::$jsst_data['ticket_trends']['answered'] = $jsst_answered_tickets_data;
-        jssupportticket::$jsst_data['ticket_trends']['closed'] = $jsst_closed_tickets_data;
+        // Section 5: Ticket trends over the chosen range. (Roadmap 4.0-CORE-09)
+        jssupportticket::$jsst_data['ticket_trends'] = $this->getTicketTrends(self::dashboardRangeDays());
+
 
         // Section 6: Today's Ticket Distribution (Chart Data)
         $jsst_query_new_today = jssupportticket::$_db->prepare("SELECT COUNT(id) FROM ".jssupportticket::$_db->prefix."js_ticket_tickets WHERE DATE(created) = %s AND status = 1", $jsst_curdate);
@@ -356,7 +422,8 @@ $jsst_query = "SELECT product.product, COUNT(t.id) AS ticket_count
         ];
         
         // Section 14: List of Saved Replies (Canned Responses)
-        if(in_array('cannedresponses', jssupportticket::$_active_addons)) {
+        if(JSSTmergedaddon::featureEnabled('cannedresponses')) {
+            JSSTmergedaddon::ensureSchema('cannedresponses');
             $jsst_query = "SELECT id, title FROM ".jssupportticket::$_db->prefix."js_ticket_department_message_premade LIMIT 6";
             jssupportticket::$jsst_data['saved_replies'] = jssupportticket::$_db->get_results($jsst_query);
         }
@@ -1428,12 +1495,34 @@ $jsst_query = "SELECT product.product, COUNT(t.id) AS ticket_count
         return $jsst_username;
     }
 
+    /**
+     * May the current user browse the customer list behind the "Select user"
+     * popup? Administrators may, and so may somebody on the Agents list — the
+     * popup is how an agent picks the customer on an export or a new ticket.
+     *
+     * Asked from both halves of that popup, the listing and the search, because
+     * a popup that lists customers but finds none when you search it looks like
+     * a site with no customers rather than a refusal.
+     */
+    private function canBrowseUserList() {
+        if (current_user_can('manage_options')) {
+            return true;
+        }
+        if (in_array('agent', jssupportticket::$_active_addons)) {
+            $jsst_agent_model = JSSTincluder::getJSModel('agent');
+            if ($jsst_agent_model && method_exists($jsst_agent_model, 'isUserStaff') && $jsst_agent_model->isUserStaff()) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     function getusersearchajax() {
         $jsst_nonce = JSSTrequest::getVar('_wpnonce');
         if (! wp_verify_nonce( $jsst_nonce, 'get-usersearch-ajax') ) {
             die( 'Security check Failed' );
         }
-        if (!current_user_can('manage_options')) {
+        if (!$this->canBrowseUserList()) {
             return '';
         }
         $jsst_username = JSSTrequest::getVar('username');
@@ -1521,25 +1610,10 @@ $jsst_query = "SELECT product.product, COUNT(t.id) AS ticket_count
             }
         }
 
-        // --- SECURITY & PERMISSION FIX ---
-        // Restrict access strictly to Admins and Agents
-        $is_admin = current_user_can('manage_options');
-        $is_agent = false;
-
-        if (!$is_admin) {
-            if (in_array('agent', jssupportticket::$_active_addons)) {
-                $agent_model = JSSTincluder::getJSModel('agent');
-                if ($agent_model && method_exists($agent_model, 'isUserStaff') && $agent_model->isUserStaff()) {
-                    $is_agent = true;
-                }
-            }
-        }
-
-        // If the user is neither an admin nor an agent, block access immediately
-        if (!$is_admin && !$is_agent) {
+        // Administrators and agents only.
+        if (!$this->canBrowseUserList()) {
             die('Security check Failed: Insufficient permissions');
         }
-        // --- END PERMISSION FIX ---
 
         // SECURITY FIX: Cast to integer to prevent SQL injection in the LIMIT clause
         $jsst_userlimit = absint(JSSTrequest::getVar('userlimit', null, 0)); 
@@ -1949,15 +2023,21 @@ $jsst_query = "SELECT product.product, COUNT(t.id) AS ticket_count
     function checkIfMainCssFileIsEnqued(){
         global $wp_styles;
         if (!in_array('jssupportticket-main-css',$wp_styles->queue)) {
-            wp_enqueue_style('jssupportticket-main-css', JSST_PLUGIN_URL . 'includes/css/style.css', array(), jssupportticket::$_config['productversion']);
+            // assetVersion(), not the bare product version. This is the copy that
+            // actually runs on the front end - jsst_register_plugin_styles() only
+            // enqueues directly when $wp_styles->queue is unset and otherwise
+            // delegates here - so leaving it on 'productversion' meant every
+            // front-end stylesheet shipped as ?ver=400 and stayed in the browser
+            // cache across edits, which reads as "the latest changes are missing".
+            wp_enqueue_style('jssupportticket-main-css', JSST_PLUGIN_URL . 'includes/css/style.css', array(), jssupportticket::assetVersion('includes/css/style.css'));
             // responsive style sheets
-            wp_enqueue_style('jssupportticket-tablet-css', JSST_PLUGIN_URL . 'includes/css/style_tablet.css', array(), jssupportticket::$_config['productversion'], '(min-width: 668px) and (max-width: 782px)');
-            wp_enqueue_style('jssupportticket-mobile-css', JSST_PLUGIN_URL . 'includes/css/style_mobile.css', array(), jssupportticket::$_config['productversion'], '(min-width: 481px) and (max-width: 667px)');
-            wp_enqueue_style('jssupportticket-oldmobile-css', JSST_PLUGIN_URL . 'includes/css/style_oldmobile.css', array(), jssupportticket::$_config['productversion'], '(max-width: 480px)');
+            wp_enqueue_style('jssupportticket-tablet-css', JSST_PLUGIN_URL . 'includes/css/style_tablet.css', array(), jssupportticket::assetVersion('includes/css/style_tablet.css'), '(min-width: 668px) and (max-width: 782px)');
+            wp_enqueue_style('jssupportticket-mobile-css', JSST_PLUGIN_URL . 'includes/css/style_mobile.css', array(), jssupportticket::assetVersion('includes/css/style_mobile.css'), '(min-width: 481px) and (max-width: 667px)');
+            wp_enqueue_style('jssupportticket-oldmobile-css', JSST_PLUGIN_URL . 'includes/css/style_oldmobile.css', array(), jssupportticket::assetVersion('includes/css/style_oldmobile.css'), '(max-width: 480px)');
             //wp_enqueue_style('jssupportticket-main-css');
             if(is_rtl()){
                 //wp_register_style('jssupportticket-main-css-rtl', JSST_PLUGIN_URL . 'includes/css/stylertl.css');
-                wp_enqueue_style('jssupportticket-main-css-rtl', JSST_PLUGIN_URL . 'includes/css/stylertl.css', array(), jssupportticket::$_config['productversion']);
+                wp_enqueue_style('jssupportticket-main-css-rtl', JSST_PLUGIN_URL . 'includes/css/stylertl.css', array(), jssupportticket::assetVersion('includes/css/stylertl.css'));
                 //wp_enqueue_style('jssupportticket-main-css-rtl');
             }
             $jsst_color1 = require_once(JSST_PLUGIN_PATH . 'includes/css/style.php');
@@ -1984,53 +2064,71 @@ $jsst_query = "SELECT product.product, COUNT(t.id) AS ticket_count
         return $jsst_network_site_url;
     }
 
+    /**
+     * Copy WordPress users who have no help desk record into js_ticket_users.
+     *
+     * Nothing is created in WordPress: this is a one-way repair that gives an
+     * existing WordPress account the help desk record every other route already
+     * creates for it (registration, first login, an import), so accounts that
+     * predate the plugin can be picked as a ticket owner. Running it twice adds
+     * nothing the second time.
+     */
     function addMissingUsers($jsst_show_message = 1){
-        $jsst_missingUser = 0;
-        $jsst_query = "SELECT id FROM `" . jssupportticket::$_db->prefix . "users`";
-        $jsst_users = jssupportticket::$_db->get_results($jsst_query);
-        $jsst_wpUsers = array();
-        $jsst_jsstUsers = array();
-        foreach ($jsst_users as $jsst_key => $jsst_user) {
-            $jsst_wpUsers[] = $jsst_user->id;
+        $jsst_added = 0;
+        // wpdb::$users, not the site prefix: the users table is network-wide on
+        // multisite, where a prefixed name is a table that does not exist. The
+        // help desk's own table stays on the site prefix, which is where
+        // JSSTusersTable writes.
+        $jsst_wp_users_table = jssupportticket::$_db->users;
+        $jsst_jsst_users_table = jssupportticket::$_db->prefix . 'js_ticket_users';
+
+        $jsst_wpUsers = jssupportticket::$_db->get_col("SELECT ID FROM `" . $jsst_wp_users_table . "`");
+        $jsst_jsstUsers = jssupportticket::$_db->get_col("SELECT wpuid FROM `" . $jsst_jsst_users_table . "`");
+        if (jssupportticket::$_db->last_error != null) {
+            JSSTincluder::getJSModel('systemerror')->addSystemError();
         }
-        $jsst_query = " SELECT wpuid FROM `" . jssupportticket::$_db->prefix . "js_ticket_users`";
-        $jsst_users = jssupportticket::$_db->get_results($jsst_query);
-        foreach ($jsst_users as $jsst_key => $jsst_user) {
-            $jsst_jsstUsers[] = $jsst_user->wpuid;
+        if (!is_array($jsst_wpUsers)) {
+            $jsst_wpUsers = array();
+        }
+        if (!is_array($jsst_jsstUsers)) {
+            $jsst_jsstUsers = array();
         }
 
-        $jsst_missingUsers = array_diff($jsst_wpUsers,$jsst_jsstUsers);
+        $jsst_missingUsers = array_diff($jsst_wpUsers, $jsst_jsstUsers);
         foreach ($jsst_missingUsers as $jsst_missingUser) {
-            $jsst_query = jssupportticket::$_db->prepare("SELECT count(id) FROM `" . jssupportticket::$_db->prefix . "js_ticket_users` WHERE wpuid = %d", $jsst_missingUser);
-            $jsst_total = jssupportticket::$_db->get_var($jsst_query);
-            if ($jsst_total == 0) {
-                $jsst_query = jssupportticket::$_db->prepare("SELECT * FROM `" . jssupportticket::$_db->prefix . "users` WHERE id = %d", $jsst_missingUser);
-                $jsst_user = jssupportticket::$_db->get_row($jsst_query);
-                if (isset($jsst_user)) {
-                    $jsst_row = JSSTincluder::getJSTable('users');
-                    $jsst_data['wpuid'] = $jsst_user->ID;
-                    $jsst_data['name'] = $jsst_user->display_name;
-                    $jsst_data['display_name'] = $jsst_user->display_name;
-                    $jsst_data['user_nicename'] = $jsst_user->user_nicename;
-                    $jsst_data['user_email'] = $jsst_user->user_email;
-                    $jsst_data['issocial'] = 0;
-                    $jsst_data['socialid'] = null;
-                    $jsst_data['status'] = 1;
-                    $jsst_data['created'] = date_i18n('Y-m-d H:i:s');
-                    $jsst_row->bind($jsst_data);
-                    $jsst_row->store();
-                    $jsst_missingUser = 1;
-                }
+            $jsst_query = jssupportticket::$_db->prepare("SELECT * FROM `" . $jsst_wp_users_table . "` WHERE ID = %d", $jsst_missingUser);
+            $jsst_user = jssupportticket::$_db->get_row($jsst_query);
+            if (!isset($jsst_user)) {
+                continue;
+            }
+            $jsst_row = JSSTincluder::getJSTable('users');
+            $jsst_data = array();
+            $jsst_data['wpuid'] = $jsst_user->ID;
+            $jsst_data['name'] = $jsst_user->display_name;
+            $jsst_data['display_name'] = $jsst_user->display_name;
+            $jsst_data['user_nicename'] = $jsst_user->user_nicename;
+            $jsst_data['user_email'] = $jsst_user->user_email;
+            $jsst_data['issocial'] = 0;
+            $jsst_data['socialid'] = null;
+            $jsst_data['status'] = 1;
+            $jsst_data['autogenerated'] = 0;
+            $jsst_data['created'] = date_i18n('Y-m-d H:i:s');
+            $jsst_row->bind($jsst_data);
+            if ($jsst_row->store()) {
+                // Counted, rather than flagged: the old flag shared its variable
+                // with the loop, so the message depended on the last row seen.
+                $jsst_added++;
             }
         }
         if ($jsst_show_message == 1) {
-            if ($jsst_missingUser == 1) {
-                JSSTmessage::setMessage(esc_html(__('Missing user(s) added successfully!', 'js-support-ticket')), 'updated');
+            if ($jsst_added > 0) {
+                /* translators: %d: number of WordPress users copied into the help desk. */
+                JSSTmessage::setMessage(sprintf(esc_html(_n('%d WordPress user added to the help desk.', '%d WordPress users added to the help desk.', $jsst_added, 'js-support-ticket')), $jsst_added), 'updated');
             } else {
-                JSSTmessage::setMessage(esc_html(__('No missing user found!', 'js-support-ticket')), 'error');
+                JSSTmessage::setMessage(esc_html(__('Every WordPress user already has a help desk record.', 'js-support-ticket')), 'updated');
             }
         }
-        return;
+        return $jsst_added;
     }
 
     function jsstremovetags($jsst_message){

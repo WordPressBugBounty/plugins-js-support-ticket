@@ -49,7 +49,7 @@ if (jssupportticket::$_config['offline'] == 2) {
             var timer_flag = 0;
             var seconds = 0;
             function getpremade(val) {
-                jQuery.post(ajaxurl, {action: 'jsticket_ajax', val: val, jstmod: 'cannedresponses', task: 'getpremadeajax', '_wpnonce':'". esc_attr(wp_create_nonce('get-premade-ajax')) ."'}, function (data) {
+                jQuery.post(ajaxurl, {action: 'jsticket_ajax', val: val, jstmod: 'cannedresponses', task: 'getpremadeajax', ticketid: '". esc_js(jssupportticket::$jsst_data[0]->id) ."', '_wpnonce':'". esc_attr(wp_create_nonce('get-premade-ajax')) ."'}, function (data) {
                     if (data) {
                         var append = jQuery('input#append_premade1:checked').length;
                         if (append == 1) {
@@ -422,6 +422,26 @@ if (jssupportticket::$_config['offline'] == 2) {
                 }
                 jQuery('#mergeticketselection').hide();
                 getTicketdataForMerging(mergeticketid,mergewithticketid,mergeNonce);
+            }
+
+            /* Multi-select merge: every ticket ticked in the candidate list is
+               merged into the ticket being viewed. (Roadmap 4.0-CORE-04) */
+            function jsstPreviewMergeSelection(primaryticket, previewNonce){
+                var picked = [];
+                jQuery('.jsst-merge-source:checked').each(function(){
+                    picked.push(jQuery(this).val());
+                });
+                if(picked.length === 0){
+                    alert('". esc_js(__('Tick at least one ticket to merge into this one.', 'js-support-ticket')) ."');
+                    return false;
+                }
+                jQuery.post(ajaxurl, {action: 'jsticket_ajax', jstmod: 'mergeticket', task: 'previewMergeSelection', primaryticket: primaryticket, sources: picked.join(','), '_wpnonce': previewNonce}, function (data) {
+                    if(data){
+                        data = jQuery.parseJSON(data);
+                        jQuery('div#popup-record-data').html('');
+                        jQuery('div#popup-record-data').html(jsstDecodeHTML(data['data']));
+                    }
+                });
             }
 
             function getTicketdataForMerging(mergeticketid,mergewithticketid,mergeNonce){
@@ -1277,7 +1297,7 @@ if (jssupportticket::$_config['offline'] == 2) {
         if($jsst_printflag == false && jssupportticket::$jsst_data['user_staff'] && jssupportticket::$jsst_data[0]->status != 5 && jssupportticket::$jsst_data[0]->status != 6){
             ?>
 
-            <?php if(!empty($jsst_field_array['department']) && in_array('actions',jssupportticket::$_active_addons)){ 
+            <?php if(!empty($jsst_field_array['department']) && JSSTmergedaddon::featureEnabled('actions')){ 
                 if(JSSTincluder::getJSModel('userpermissions')->checkPermissionGrantedForTask('Ticket Department Transfer')){
                 ?>
                 <div id="popupfordepartmenttransfer" style="display:none" >
@@ -1297,7 +1317,7 @@ if (jssupportticket::$_config['offline'] == 2) {
 
                                 </div>
                             </div>
-                            <?php if(in_array('note', jssupportticket::$_active_addons)){ ?>
+                            <?php if(JSSTmergedaddon::featureEnabled('note')){ ?>
                                 <div class="js-ticket-text-editor-wrp">
                                     <div class="js-ticket-text-editor-field-title"><?php echo esc_html(__('Type Note for', 'js-support-ticket')) ." ". esc_html(jssupportticket::JSST_getVarValue($jsst_field_array['department'])); ?></div>
                                     <div class="js-ticket-text-editor-field"><?php wp_editor('', 'departmenttranfernote', array('media_buttons' => false)); ?></div>
@@ -1336,7 +1356,7 @@ if (jssupportticket::$_config['offline'] == 2) {
                                     <?php echo wp_kses(JSSTformfield::select('staffid', JSSTincluder::getJSModel('agent')->getStaffForCombobox(), jssupportticket::$jsst_data[0]->staffid, esc_html(__('Select Agent', 'js-support-ticket')), array('class' => 'inputbox js-ticket-premade-select')), JSST_ALLOWED_TAGS); ?>
                                 </div>
                             </div>
-                            <?php if(in_array('note', jssupportticket::$_active_addons)){ ?>
+                            <?php if(JSSTmergedaddon::featureEnabled('note')){ ?>
                                 <div class="js-ticket-text-editor-wrp">
                                     <div class="js-ticket-text-editor-field-title"><?php echo esc_html(__('Assigning Note', 'js-support-ticket')); ?></div>
                                     <div class="js-ticket-text-editor-field"><?php wp_editor('', 'assignnote', array('media_buttons' => false)); ?></div>
@@ -1356,7 +1376,7 @@ if (jssupportticket::$_config['offline'] == 2) {
                 <?php } ?>
             <?php } ?>
 
-            <?php if(in_array('note',jssupportticket::$_active_addons)){ ?>
+            <?php if(JSSTmergedaddon::featureEnabled('note')){ ?>
             <div id="popupforinternalnote" style="display:none" >
                 <div class="jsst-popup-header" >
                     <div class="popup-header-text" >
@@ -1564,7 +1584,9 @@ if (jssupportticket::$_config['offline'] == 2) {
                                         $jsst_mergepermission = false;
                                     if (in_array('agent',jssupportticket::$_active_addons) && jssupportticket::$jsst_data['user_staff'] && jssupportticket::$jsst_data[0]->status != 6 ) {
                                         $jsst_printpermission = JSSTincluder::getJSModel('userpermissions')->checkPermissionGrantedForTask('Print Ticket');
-                                        $jsst_mergepermission = JSSTincluder::getJSModel('userpermissions')->checkPermissionGrantedForTask('Ticket Merge');
+                                        // Same answer the merge action itself uses, so the button
+                                        // cannot offer what the action will refuse. (Roadmap 4.0-CORE-04)
+                                        $jsst_mergepermission = JSSTroles::canMergeTickets();
 
                                         ?>
                                         <a class="js-tkt-det-actn-btn" href="<?php echo esc_url(jssupportticket::makeUrl(array('jstmod'=>'agent','jstlay'=>'staffaddticket','jssupportticketid'=>jssupportticket::$jsst_data[0]->id))); ?>" title="<?php echo esc_attr(__('Edit Ticket', 'js-support-ticket')); ?>">
@@ -1582,13 +1604,13 @@ if (jssupportticket::$_config['offline'] == 2) {
                                                 <span><?php echo esc_html(__('Reopen', 'js-support-ticket')); ?></span>
                                             </a>
                                         <?php } ?>
-                                        <?php if(in_array('tickethistory', jssupportticket::$_active_addons)){ ?>
+                                        <?php if(JSSTmergedaddon::featureEnabled('tickethistory')){ ?>
                                             <a class="js-tkt-det-actn-btn" href="#" id="showhistory">
                                                 <img alt="<?php echo esc_attr(__('image','js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/ticket-detail/history.png" title="<?php echo esc_attr(__('History', 'js-support-ticket')); ?>" />
                                                 <span><?php echo esc_html(__('Ticket History', 'js-support-ticket')); ?></span>
                                             </a>
                                         <?php }?>
-                                        <?php if(in_array('mergeticket',jssupportticket::$_active_addons) && $jsst_mergepermission) {
+                                        <?php if(in_array('mergeticket', jssupportticket::$_active_addons) && $jsst_mergepermission) {
                                             if (jssupportticket::$jsst_data[0]->status != 5 && jssupportticket::$jsst_data[0]->status != 6) {
                                                 $jsst_nonce = wp_create_nonce("get-tickets-for-merging-".jssupportticket::$jsst_data[0]->id) ?>
                                                 <a class="js-tkt-det-actn-btn" href="#" id="mergeticket" onclick="return showPopupAndFillValues(<?php echo esc_js(jssupportticket::$jsst_data[0]->id);?>,4, '<?php echo esc_js($jsst_nonce);?>')">
@@ -1597,7 +1619,7 @@ if (jssupportticket::$_config['offline'] == 2) {
                                                 </a>
                                             <?php }/*Merge Ticket*/
                                         } ?>
-                                        <?php if(in_array('actions',jssupportticket::$_active_addons)){ ?>
+                                        <?php if(JSSTmergedaddon::featureEnabled('actions')){ ?>
                                             <?php if($jsst_printpermission && jssupportticket::$jsst_data[0]->status != 6) { ?>
                                                 <a class="js-tkt-det-actn-btn" href="#" id="print-link" data-ticketid="<?php echo esc_attr(jssupportticket::$jsst_data[0]->id); ?>">
                                                     <img alt="<?php echo esc_attr(__('image','js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/ticket-detail/print.png" title= "<?php echo esc_attr(__('Print', 'js-support-ticket')); ?>" />
@@ -1637,7 +1659,7 @@ if (jssupportticket::$_config['offline'] == 2) {
                                                         <img alt="<?php echo esc_attr(__('image','js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/ticket-detail/close.png" title="<?php echo esc_attr(__('Close', 'js-support-ticket')); ?>" />
                                                         <span><?php echo esc_html(__('Close', 'js-support-ticket')); ?></span>
                                                     </a>
-                                                    <?php if(in_array('tickethistory', jssupportticket::$_active_addons)){ ?>
+                                                    <?php if(JSSTmergedaddon::featureEnabled('tickethistory')){ ?>
                                                         <a class="js-tkt-det-actn-btn js-margin-right" href="#" id="showhistory">
                                                             <img alt="<?php echo esc_attr(__('image','js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/ticket-detail/history.png" title="<?php echo esc_attr(__('Ticket History', 'js-support-ticket')); ?>" />
                                                             <span><?php echo esc_html(__('Ticket History', 'js-support-ticket')); ?></span>
@@ -1661,7 +1683,7 @@ if (jssupportticket::$_config['offline'] == 2) {
                                             <?php } ?>
                                             <?php
                                             if(jssupportticket::$_config['print_ticket_user'] == 1 ){
-                                                if(in_array('actions',jssupportticket::$_active_addons)){ ?>
+                                                if(JSSTmergedaddon::featureEnabled('actions')){ ?>
                                                     <a class="js-tkt-det-actn-btn" href="#" id="print-link" data-ticketid="<?php echo esc_attr(jssupportticket::$jsst_data[0]->id); ?>">
                                                         <img alt="<?php echo esc_attr(__('image','js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/ticket-detail/print.png" title= "<?php echo esc_attr(__('Print', 'js-support-ticket')); ?>" />
                                                         <span><?php echo esc_html(__('Print', 'js-support-ticket')); ?></span>
@@ -1686,7 +1708,7 @@ if (jssupportticket::$_config['offline'] == 2) {
                                             }
                                         } ?>
                                         <?php if (in_array('agent',jssupportticket::$_active_addons) && jssupportticket::$jsst_data['user_staff'] && jssupportticket::$jsst_data[0]->status != 6) { ?>
-                                        <?php if (in_array('actions',jssupportticket::$_active_addons)) { ?>
+                                        <?php if (JSSTmergedaddon::featureEnabled('actions')) { ?>
                                             <?php if (jssupportticket::$jsst_data[0]->lock == 1) { ?>
                                                 <a class="js-tkt-det-actn-btn" href="#" onclick="actionticket(5);" title="<?php echo esc_attr(__('Unlock Ticket', 'js-support-ticket')); ?>">
                                                     <img alt="<?php echo esc_attr(__('image','js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/ticket-detail/unlock.png" title="<?php echo esc_attr(__('Unlock', 'js-support-ticket')); ?>" />
@@ -1699,7 +1721,7 @@ if (jssupportticket::$_config['offline'] == 2) {
                                                 </a>
                                             <?php } ?>
                                         <?php } ?>
-                                        <?php if(in_array('banemail', jssupportticket::$_active_addons)){ ?>
+                                        <?php if(JSSTmergedaddon::featureEnabled('banemail')){ ?>
                                             <?php
                                                 $jsst_manageoptions = current_user_can('manage_options');
                                                 if (JSSTincluder::getJSModel('banemail')->isEmailBan(jssupportticket::$jsst_data[0]->email)) {
@@ -1731,13 +1753,13 @@ if (jssupportticket::$_config['offline'] == 2) {
                                                 </a>
                                             <?php } ?>
                                         <?php } ?>
-                                        <?php if (in_array('actions',jssupportticket::$_active_addons) && ( current_user_can('manage_options') || JSSTincluder::getJSModel('userpermissions')->checkPermissionGrantedForTask('Mark In Progress') ) ) { ?>
+                                        <?php if (JSSTmergedaddon::featureEnabled('actions') && ( current_user_can('manage_options') || JSSTincluder::getJSModel('userpermissions')->checkPermissionGrantedForTask('Mark In Progress') ) ) { ?>
                                             <a class="js-tkt-det-actn-btn" href="#" onclick="actionticket(9);">
                                                 <img alt="<?php echo esc_attr(__('image','js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL) . 'includes/images/ticket-detail/in-progress.png'; ?>" title="<?php echo esc_attr(__('Mark In Progress', 'js-support-ticket')); ?>" />
                                                 <span><?php echo esc_html(__('Mark In Progress', 'js-support-ticket'));?></span>
                                             </a>
                                         <?php } ?>
-                                        <?php if(in_array('banemail', jssupportticket::$_active_addons) && ( current_user_can('manage_options') || JSSTincluder::getJSModel('userpermissions')->checkPermissionGrantedForTask('Ban Email And Close Ticket') ) ){ ?>
+                                        <?php if(JSSTmergedaddon::featureEnabled('banemail') && ( current_user_can('manage_options') || JSSTincluder::getJSModel('userpermissions')->checkPermissionGrantedForTask('Ban Email And Close Ticket') ) ){ ?>
                                             <a class="js-tkt-det-actn-btn" href="#" onclick="actionticket(10);">
                                                 <img alt="<?php echo esc_attr(__('image','js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL) . 'includes/images/ticket-detail/ban-email-close-ticket.png'; ?>" title="<?php echo esc_attr(__('Ban Email And Close Ticket', 'js-support-ticket')); ?>" />
                                                 <span><?php echo esc_html(__('Ban Email And Close Ticket', 'js-support-ticket')); ?></span>
@@ -1754,7 +1776,7 @@ if (jssupportticket::$_config['offline'] == 2) {
                         </div>
                         <?php
                         if (in_array('agent',jssupportticket::$_active_addons) && jssupportticket::$jsst_data['user_staff']) {
-                            if (in_array('note', jssupportticket::$_active_addons)) {
+                            if (JSSTmergedaddon::featureEnabled('note')) {
                                 ?>
                                 <!-- Ticket Detail Internal Note -->
                                 <div class="js-tkt-det-title">
@@ -2063,7 +2085,8 @@ if (jssupportticket::$_config['offline'] == 2) {
                                                 <?php echo ($jsst_reply->ticketviaemail == 1) ? esc_html(__('Created via Email', 'js-support-ticket')) : ''; ?>
                                             </div>
                                             <div class="js-ticket-thread-data note-msg">
-                                                <?php echo wp_kses_post(html_entity_decode($jsst_reply->message));
+                                                <?php // A ticket link in a stored reply belongs to whoever is reading it. (Roadmap 4.0-CORE-01)
+                                                echo wp_kses_post(JSSTticketlink::resolve(html_entity_decode($jsst_reply->message)));
                                                 $jsst_active_count = 0; // Counter for active attachments
                                                 ?>
                                                 <?php if (!empty($jsst_reply->attachments)) { ?>
@@ -2309,7 +2332,7 @@ if (jssupportticket::$_config['offline'] == 2) {
                                                 </div>
                                             <?php } ?>
                                             <?php
-                                            if(isset($jsst_field_array['premade']) && in_array('cannedresponses', jssupportticket::$_active_addons)){ ?>
+                                            if(isset($jsst_field_array['premade']) && JSSTmergedaddon::featureEnabled('cannedresponses')){ ?>
                                                 <div class="js-ticket-premade-msg-wrp"><!-- Premade Message Wrapper -->
                                                     <div class="js-ticket-premade-field-title"><?php echo esc_html(jssupportticket::JSST_getVarValue($jsst_field_array['premade'])); ?>&nbsp;<?php echo esc_html(__('Message','js-support-ticket')); ?></div>
                                                     <div class="js-ticket-premade-field-wrp">
@@ -2495,11 +2518,11 @@ if (jssupportticket::$_config['offline'] == 2) {
                         <div class="js-tkt-det-cnt js-tkt-det-tkt-info"> <!-- Ticket Info -->
                             <?php
                                 if (jssupportticket::$jsst_data[0]->status == 1) {
-                                    $jsst_ticketmessage = esc_html(__('Open', 'js-support-ticket'));
+                                    $jsst_ticketmessage = __('Open', 'js-support-ticket');
                                     $jsst_bgcolor = '#5bb12f';
                                     $jsst_color1 = '#FFFFFF';
                                 } else {
-                                    $jsst_ticketmessage = esc_html(jssupportticket::JSST_getVarValue(jssupportticket::$jsst_data[0]->statustitle));
+                                    $jsst_ticketmessage = jssupportticket::JSST_getVarValue(jssupportticket::$jsst_data[0]->statustitle);
                                     $jsst_bgcolor = jssupportticket::$jsst_data[0]->statusbgcolour;
                                     $jsst_color1 = jssupportticket::$jsst_data[0]->statuscolour;
                                 }
@@ -2571,13 +2594,77 @@ if (jssupportticket::$_config['offline'] == 2) {
                                     </div>
                                 </div>
                                 <?php
-                                if(isset($jsst_field_array['helptopic']) && in_array('helptopic', jssupportticket::$_active_addons)){ ?>
+                                if(isset($jsst_field_array['helptopic']) && JSSTmergedaddon::featureEnabled('helptopic')){ ?>
                                     <div class="js-tkt-det-info-data">
                                         <div class="js-tkt-det-info-tit">
                                             <?php echo esc_html(jssupportticket::JSST_getVarValue($jsst_field_array['helptopic'])); ?><?php echo esc_html(__(': ','js-support-ticket'));?>
                                         </div>
                                         <div class="js-tkt-det-info-val">
                                             <?php echo esc_html(jssupportticket::JSST_getVarValue(jssupportticket::$jsst_data[0]->helptopic)); ?>
+                                        </div>
+                                    </div>
+                                <?php } ?>
+                                <?php
+                                // Ticket tags are an internal classification, so the portal
+                                // shows them to staff only — a customer never sees how their
+                                // ticket was filed. (Roadmap 4.0-CORE-17)
+                                if (!empty(jssupportticket::$jsst_data['user_staff'])) {
+                                    $jsst_tags = isset(jssupportticket::$jsst_data['tags']) ? jssupportticket::$jsst_data['tags'] : array();
+                                    $jsst_tagnames = array();
+                                    foreach ($jsst_tags AS $jsst_tag) {
+                                        $jsst_tagnames[] = $jsst_tag->name;
+                                    }
+                                    $jsst_cantag = (JSSTincluder::getJSModel('userpermissions')->checkPermissionGrantedForTask('Edit Ticket') == 1);
+                                    ?>
+                                    <div class="js-tkt-det-info-data jsst-ticket-tags">
+                                        <div class="js-tkt-det-info-tit">
+                                            <?php echo esc_html(__('Tags','js-support-ticket')); ?><?php echo esc_html(__(': ','js-support-ticket'));?>
+                                        </div>
+                                        <div class="js-tkt-det-info-val">
+                                            <?php
+                                            if (!$jsst_cantag) { ?>
+                                                <span class="jsst-tag-list">
+                                                    <?php if (empty($jsst_tagnames)) { ?>
+                                                        <span class="jsst-tag-empty"><?php echo esc_html(__('None','js-support-ticket')); ?></span>
+                                                    <?php } else {
+                                                        foreach ($jsst_tagnames AS $jsst_tagname) { ?>
+                                                            <span class="jsst-tag-chip"><?php echo esc_html($jsst_tagname); ?></span>
+                                                        <?php }
+                                                    } ?>
+                                                </span>
+                                            <?php } else { ?>
+                                                <details class="jsst-tagbox">
+                                                    <summary class="jsst-tagbox-summary">
+                                                        <span class="jsst-tag-list">
+                                                            <?php foreach ($jsst_tagnames AS $jsst_tagname) { ?>
+                                                                <span class="jsst-tag-chip"><?php echo esc_html($jsst_tagname); ?></span>
+                                                            <?php } ?>
+                                                        </span>
+                                                        <span class="jsst-tag-chip jsst-tag-add"><?php
+                                                            echo esc_html(empty($jsst_tagnames)
+                                                                ? __('Add tags','js-support-ticket')
+                                                                : __('Edit','js-support-ticket'));
+                                                        ?></span>
+                                                    </summary>
+                                                    <form class="jsst-tag-form" method="post" action="<?php echo esc_url(wp_nonce_url(jssupportticket::makeUrl(array('jstmod'=>'ticket','task'=>'savetickettags')),"ticket-tags-".jssupportticket::$jsst_data[0]->id)); ?>">
+                                                        <div class="jsst-tag-row">
+                                                            <input type="text" id="jsst-tag-input" name="tickettags" class="inputbox jsst-tag-input" value="<?php echo esc_attr(implode(', ', $jsst_tagnames)); ?>" placeholder="<?php echo esc_attr(__('billing, urgent, refund','js-support-ticket')); ?>" list="jsst-tag-suggestions" autocomplete="off" />
+                                                            <?php echo wp_kses(JSSTformfield::submitbutton('savetickettags', esc_html(__('Save','js-support-ticket')), array('class' => 'button jsst-tag-save')), JSST_ALLOWED_TAGS); ?>
+                                                        </div>
+                                                        <datalist id="jsst-tag-suggestions">
+                                                            <?php foreach (JSSTincluder::getJSModel('tag')->getTagsForCombobox() AS $jsst_known) { ?>
+                                                                <option value="<?php echo esc_attr($jsst_known->text); ?>"></option>
+                                                            <?php } ?>
+                                                        </datalist>
+                                                        <p class="jsst-tag-hint"><?php echo esc_html(__('Separate with commas. Saving replaces the whole list, so keep the ones you want.','js-support-ticket')); ?></p>
+                                                        <?php echo wp_kses(JSSTformfield::hidden('ticketid', jssupportticket::$jsst_data[0]->id), JSST_ALLOWED_TAGS); ?>
+                                                        <?php
+                                                        echo wp_kses(JSSTformfield::hidden('form_request', 'jssupportticket'), JSST_ALLOWED_TAGS); ?>
+                                                        <?php
+                                                        echo wp_kses(JSSTformfield::hidden('jsstpageid', get_the_ID()), JSST_ALLOWED_TAGS); ?>
+                                                    </form>
+                                                </details>
+                                            <?php } ?>
                                         </div>
                                     </div>
                                 <?php } ?>
@@ -2600,18 +2687,25 @@ if (jssupportticket::$_config['offline'] == 2) {
                                        <?php
                                             if (jssupportticket::$jsst_data[0]->status == 5 || jssupportticket::$jsst_data[0]->status == 6 ||
                                                 jssupportticket::$jsst_data[0]->status == 3) {
-                                                $jsst_ticketmessage = esc_html(jssupportticket::$jsst_data[0]->statustitle);
+                                                $jsst_ticketmessage = jssupportticket::$jsst_data[0]->statustitle;
                                             } else {
-                                                $jsst_ticketmessage = esc_html(__('Open', 'js-support-ticket'));
+                                                $jsst_ticketmessage = __('Open', 'js-support-ticket');
                                             }
-                                            $jsst_printstatus = 1;
+                                            /* Lock and Overdue are two notes shown in place of the
+                                               status. The comma separates them, so it belongs between
+                                               them and not after the last one — a ticket that is locked
+                                               but not overdue used to read "Lock ,". */
+                                            $jsst_statusnotes = array();
                                             if (jssupportticket::$jsst_data[0]->lock == 1) {
-                                                echo '<div class="js-ticket-status-note">' . esc_html(__('Lock', 'js-support-ticket')).' '. esc_html(',') . '</div>';
-                                                $jsst_printstatus = 0;
+                                                $jsst_statusnotes[] = __('Lock', 'js-support-ticket');
                                             }
                                             if (jssupportticket::$jsst_data[0]->isoverdue == 1) {
-                                                echo '<div class="js-ticket-status-note">' . esc_html(__('Overdue', 'js-support-ticket')) . '</div>';
-                                                $jsst_printstatus = 0;
+                                                $jsst_statusnotes[] = __('Overdue', 'js-support-ticket');
+                                            }
+                                            $jsst_printstatus = empty($jsst_statusnotes) ? 1 : 0;
+                                            $jsst_lastnote = count($jsst_statusnotes) - 1;
+                                            foreach ($jsst_statusnotes AS $jsst_noteindex => $jsst_statusnote) {
+                                                echo '<div class="js-ticket-status-note">' . esc_html($jsst_statusnote) . (($jsst_noteindex < $jsst_lastnote) ? esc_html(',') : '') . '</div>';
                                             }
                                             if ($jsst_printstatus == 1) {
                                                 echo esc_html($jsst_ticketmessage);
@@ -2760,7 +2854,7 @@ if (jssupportticket::$_config['offline'] == 2) {
                         <?php } ?>
                         <?php
                         $jsst_agentflag = in_array('agent', jssupportticket::$_active_addons) && $jsst_printflag == false && jssupportticket::$jsst_data[0]->status != 5 && jssupportticket::$jsst_data[0]->status != 6;
-                        $jsst_departmentflag = in_array('actions', jssupportticket::$_active_addons) && $jsst_printflag == false && jssupportticket::$jsst_data[0]->status != 5 && jssupportticket::$jsst_data[0]->status != 6 && isset($jsst_field_array['department']);
+                        $jsst_departmentflag = JSSTmergedaddon::featureEnabled('actions') && $jsst_printflag == false && jssupportticket::$jsst_data[0]->status != 5 && jssupportticket::$jsst_data[0]->status != 6 && isset($jsst_field_array['department']);
                         if($jsst_agentflag || $jsst_departmentflag){
                             ?>
                             <div class="js-tkt-det-cnt js-tkt-det-tkt-assign"> <!-- Ticket Assign -->
@@ -2940,18 +3034,22 @@ if (jssupportticket::$_config['offline'] == 2) {
                                                         if ($jsst_userticket->status == 5 || 
                                                             $jsst_userticket->status == 6 ||
                                                             $jsst_userticket->status == 3) {
-                                                            $jsst_userticketmessage = esc_html($jsst_userticket->statustitle);
+                                                            $jsst_userticketmessage = $jsst_userticket->statustitle;
                                                         } else {
-                                                            $jsst_userticketmessage = esc_html(__('Open', 'js-support-ticket'));
+                                                            $jsst_userticketmessage = __('Open', 'js-support-ticket');
                                                         }
-                                                        $jsst_userticketprintstatus = 1;
+                                                        // Same separator rule as the ticket's own status above.
+                                                        $jsst_usernotes = array();
                                                         if ($jsst_userticket->lock == 1) {
-                                                            echo wp_kses('<span class="js-ticket-status-note">' . esc_html(__('Lock', 'js-support-ticket')).' '. esc_html(',') . '</span>', JSST_ALLOWED_TAGS);
-                                                            $jsst_userticketprintstatus = 0;
+                                                            $jsst_usernotes[] = __('Lock', 'js-support-ticket');
                                                         }
                                                         if ($jsst_userticket->isoverdue == 1) {
-                                                            echo wp_kses('<span class="js-ticket-status-note">' . esc_html(__('Overdue', 'js-support-ticket')) . '</span>', JSST_ALLOWED_TAGS);
-                                                            $jsst_userticketprintstatus = 0;
+                                                            $jsst_usernotes[] = __('Overdue', 'js-support-ticket');
+                                                        }
+                                                        $jsst_userticketprintstatus = empty($jsst_usernotes) ? 1 : 0;
+                                                        $jsst_userlastnote = count($jsst_usernotes) - 1;
+                                                        foreach ($jsst_usernotes AS $jsst_usernoteindex => $jsst_usernote) {
+                                                            echo wp_kses('<span class="js-ticket-status-note">' . esc_html($jsst_usernote) . (($jsst_usernoteindex < $jsst_userlastnote) ? esc_html(',') : '') . '</span>', JSST_ALLOWED_TAGS);
                                                         }
                                                         if ($jsst_userticketprintstatus == 1) {
                                                             echo esc_html($jsst_userticketmessage);

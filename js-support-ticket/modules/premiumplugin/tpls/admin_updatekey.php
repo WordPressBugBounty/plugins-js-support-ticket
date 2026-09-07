@@ -115,13 +115,22 @@
                         }
                         ?>
                     </div>
-                    <div class="jsstadmin-update-key-infomsgwrp">
-                        <img alt = "<?php echo esc_attr(__("Info", 'js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/installer/info-icon.png" />
-                        <?php echo esc_html(__("This will replace the old key with the new one.", 'js-support-ticket')); ?>
-                    </div>
-                    <div class="jsstadmin-update-key-updtebtn-wrp">
-                        <button class="jsstadmin-update-key-updtebtn" type="submit"><?php echo esc_html(__("Update Key", 'js-support-ticket')); ?></button>
-                    </div>
+                    <?php
+                    // With no add-on installed there is nothing for the key to
+                    // be applied to, so neither the warning about replacing the
+                    // old key nor the button that would do it belongs on the
+                    // screen. The "No Addon Installed!" line above is the whole
+                    // message in that case.
+                    if (!empty($jsst_addon_array)) { ?>
+                        <div class="jsstadmin-update-key-infomsgwrp">
+                            <img alt = "<?php echo esc_attr(__("Info", 'js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/installer/info-icon.png" />
+                            <?php echo esc_html(__("This will replace the old key with the new one.", 'js-support-ticket')); ?>
+                        </div>
+                        <div class="jsstadmin-update-key-updtebtn-wrp">
+                            <button class="jsstadmin-update-key-updtebtn" type="submit"><?php echo esc_html(__("Update Key", 'js-support-ticket')); ?></button>
+                        </div>
+                        <?php
+                    } ?>
                 </div>
             </form>
         </div>

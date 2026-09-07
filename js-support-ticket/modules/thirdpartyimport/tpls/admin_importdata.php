@@ -91,47 +91,42 @@ if(!defined('ABSPATH'))
                             <span class="jsst-singleplugin-imprt-datatitle">
                                 <?php echo esc_html($jsst_plugin['name']); ?>
                             </span>
-                            <?php foreach ($jsst_entity_counts as $jsst_entity_val => $jsst_entity_val) {
-                                $jsst_entity_val = ucwords(str_replace('_', ' ', $jsst_entity_val));
-                                if($jsst_entity_val == 'Priority' && $jsst_entity_val > 1){
-                                    $jsst_entity_val = 'Priorities';
-                                }elseif($jsst_entity_val == 'Status' && $jsst_entity_val > 1){
-                                    $jsst_entity_val = 'Statuses';
+                            <?php foreach ($jsst_entity_counts as $jsst_entity_key => $jsst_entity_val) {
+                                $jsst_entity_key = ucwords(str_replace('_', ' ', $jsst_entity_key));
+                                if($jsst_entity_key == 'Priority' && $jsst_entity_val > 1){
+                                    $jsst_entity_key = 'Priorities';
+                                }elseif($jsst_entity_key == 'Status' && $jsst_entity_val > 1){
+                                    $jsst_entity_key = 'Statuses';
                                 }elseif($jsst_entity_val > 1){
-                                    $jsst_entity_val = $jsst_entity_val.'s';
+                                    $jsst_entity_key = $jsst_entity_key.'s';
                                 }
                                 $jsst_extr_clss = '';
-                                if (in_array(strtolower($jsst_entity_val), ['agent', 'agent role', 'agents', 'agent roles'])) {
+                                if (in_array(strtolower($jsst_entity_key), ['agent', 'agent role', 'agents', 'agent roles'])) {
                                     if(!in_array('agent', jssupportticket::$_active_addons)){
                                         $jsst_extr_clss = 'jsst-singleplugin-imprt-data-addonnot-instllwrp';
                                     }
-                                } elseif (in_array(strtolower($jsst_entity_val), ['canned response', 'canned responses'])) {
-                                    if(!in_array('cannedresponses', jssupportticket::$_active_addons)){
+                                } elseif (in_array(strtolower($jsst_entity_key), ['canned response', 'canned responses'])) {
+                                    // Canned responses are part of the free core in 4.0, so they
+                                    // always import. (Roadmap 4.0-CORE-03)
+                                    if(!JSSTmergedaddon::featureEnabled('cannedresponses')){
                                         $jsst_extr_clss = 'jsst-singleplugin-imprt-data-addonnot-instllwrp';
                                     }
                                 } ?>
                                 <div class="jsst-singleplugin-imprt-datadisc <?php echo esc_attr($jsst_extr_clss);?>">
-                                    <?php echo esc_html($jsst_entity_val).'&nbsp;'.esc_html(jssupportticket::JSST_getVarValue($jsst_entity_val)).'&nbsp;'.esc_html(__('found','js-support-ticket'));
+                                    <?php echo esc_html($jsst_entity_val).'&nbsp;'.esc_html(jssupportticket::JSST_getVarValue($jsst_entity_key)).'&nbsp;'.esc_html(__('found','js-support-ticket'));
 
-                                    if (in_array(strtolower($jsst_entity_val), ['ticket', 'tickets'])) {
+                                    if (in_array(strtolower($jsst_entity_key), ['ticket', 'tickets'])) {
                                         if($jsst_plugin["internalid"] != 3 && !in_array('privatecredentials', jssupportticket::$_active_addons)){ ?>
                                             <br>
                                             <span class="jsst-import-data-addon-message"><?php echo esc_html(__('Private Credentials Addon missing, ticket private credentials data will not be imported!','js-support-ticket')); ?></span>
                                             <?php
                                         }
-                                        if(!in_array('tickethistory', jssupportticket::$_active_addons)){ ?>
-                                            <br>
-                                            <span class="jsst-import-data-addon-message"><?php echo esc_html(__('Ticket History Addon missing, full ticket history will not be imported!','js-support-ticket')); ?></span>
-                                            <?php
-                                        }
+                                        // Ticket history and internal notes are part of the free core in
+                                        // 4.0, so they always import — there is nothing to warn about.
+                                        // (Roadmap 4.0-CORE-01, 4.0-CORE-02)
                                         if(!in_array('timetracking', jssupportticket::$_active_addons)){ ?>
                                             <br>
                                             <span class="jsst-import-data-addon-message"><?php echo esc_html(__('Time Tracking Addon missing, ticket time tracking data will not be imported!','js-support-ticket')); ?></span>
-                                            <?php
-                                        }
-                                        if(!in_array('note', jssupportticket::$_active_addons)){ ?>
-                                            <br>
-                                            <span class="jsst-import-data-addon-message"><?php echo esc_html(__('Note Addon missing, ticket internal note data will not be imported!','js-support-ticket')); ?></span>
                                             <?php
                                         }
                                     }

@@ -302,3 +302,46 @@ div.jsst-main-up-wrapper .jsst-attachment-purged .jsst-purged-icon {flex-shrink:
 div.jsst-main-up-wrapper .jsst-attachment-purged span {flex-grow: 1;}
 div.jsst-main-up-wrapper .jsst-purged-filename {font-weight: 600;color: #495057;word-break: break-word;}
 div.jsst-main-up-wrapper .jsst-purged-reason {font-style: italic;color: #868e96;margin-left: 4px;}
+
+/* Human verification. (Roadmap 4.0-SEC-01) */
+.jsst-verification {display: block;}
+.jsst-verification-hp {position: absolute !important;left: -9999px;top: auto;width: 1px;height: 1px;overflow: hidden;}
+.jsst-verification-work {display: block;margin: 6px 0;}
+.jsst-verification-status {display: inline-block;font-size: 13px;opacity: .8;}
+.jsst-verification-notice {font-size: 12px;opacity: .75;margin-top: 4px;}
+div.js-ticket-add-form-wrapper div.js-ticket-from-field-wrp.jsst-verification-quiet {margin-bottom: 0;}
+
+/* Merging: duplicate suggestions, multi-select and preview.
+   (Roadmap 4.0-CORE-04) */
+.jsst-merge-likely-duplicate {box-shadow: inset 3px 0 0 #f0a132;}
+.jsst-merge-duplicate-badge {display: inline-block;margin: 8px 0 0 10px;padding: 2px 8px;border-radius: 10px;background: #fdf1dd;color: #8a5a10;font-size: 12px;font-weight: 600;}
+.jsst-merge-duplicate-badge .jsst-merge-duplicate-score {opacity: .75;font-weight: 400;}
+.jsst-merge-pick {padding: 6px 10px 10px;}
+.jsst-merge-pick label {display: inline-flex;align-items: center;gap: 6px;cursor: pointer;}
+.jsst-merge-preview {padding: 12px;}
+.jsst-merge-preview-sources {margin: 0 0 12px 18px;}
+.jsst-merge-summary {float: left; width:100% ;margin: 12px;padding: 12px;border: 1px solid #ebecec;border-radius: 6px;background: #fbfbfb;}
+.jsst-merge-summary-title {font-weight: 600;margin-bottom: 4px;}
+.jsst-merge-summary-changes, .jsst-merge-summary-kept {margin: 0 0 10px 18px;}
+.jsst-merge-empty {padding: 18px;}
+
+/* Ticket tags on the portal, staff side only. (Roadmap 4.0-CORE-17) */
+.jsst-tag-chip {display: inline-block;margin: 0 4px 4px 0;padding: 2px 9px;border-radius: 10px;background: #eef2ff;color: #3730a3;font-size: 12px;line-height: 18px;text-decoration: none;}
+a.jsst-tag-chip:hover {background: #e0e7ff;color: #312e81;text-decoration: none;}
+.jsst-tag-empty {color: #868e96;font-size: 12px;}
+.jsst-tag-form {display: flex;flex-wrap: wrap;gap: 6px;align-items: center;margin-top: 6px;}
+.jsst-tag-input {min-width: 180px;flex: 1 1 180px;}
+.jsst-placeholders .jsst-placeholders-intro {margin: 0 0 12px;color: #6a6d6f;font-size: 13px;line-height: 1.6;text-align: start;}
+.jsst-placeholders .jsst-placeholder-list {display: grid;grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));gap: 8px 20px;margin: 0;padding: 0;list-style: none;}
+.jsst-placeholders .jsst-placeholder-list li {display: flex;align-items: baseline;gap: 8px;margin: 0;padding: 0;list-style: none;text-align: start;}
+.jsst-placeholders .jsst-placeholder-token {flex: 0 0 auto;direction: ltr;unicode-bidi: isolate;margin: 0;padding: 3px 8px;background: #f6f7f7;border: 1px solid #dcdfe3;border-radius: 5px;color: #3730a3;font-family: Consolas, Monaco, "Courier New", monospace;font-size: 12px;line-height: 18px;cursor: pointer;box-shadow: none;transition: background .15s ease, border-color .15s ease;}
+.jsst-placeholders .jsst-placeholder-token:hover {background: #eef2ff;border-color: #4f46e5;}
+.jsst-placeholders .jsst-placeholder-token:active {background: #e0e5ff;}
+.jsst-placeholders .jsst-placeholder-token:focus-visible {outline: 2px solid #4f46e5;outline-offset: 2px;}
+.jsst-placeholders .jsst-placeholder-desc {color: #6a6d6f;font-size: 13px;line-height: 1.5;}
+/* Reserves its line so the "Copied" confirmation cannot shift the list. */
+.jsst-placeholders .jsst-placeholder-copied {display: block;min-height: 20px;margin-top: 10px;color: #0f7d4b;font-size: 13px;line-height: 20px;font-weight: 600;text-align: start;}
+@media (max-width: 600px) {
+    .jsst-placeholders .jsst-placeholder-list {grid-template-columns: 1fr;gap: 10px;}
+    .jsst-placeholders .jsst-placeholder-list li {flex-wrap: wrap;gap: 4px 8px;}
+}

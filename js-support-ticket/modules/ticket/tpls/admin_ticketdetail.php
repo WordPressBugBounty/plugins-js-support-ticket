@@ -37,7 +37,7 @@ $jsst_jssupportticket_js ="
         return true;
     }
 	function getpremade(val) {
-        jQuery.post(ajaxurl, {action: 'jsticket_ajax', val: val, jstmod: 'cannedresponses', task: 'getpremadeajax', '_wpnonce':'". esc_attr(wp_create_nonce('get-premade-ajax')) ."'}, function (data) {
+        jQuery.post(ajaxurl, {action: 'jsticket_ajax', val: val, jstmod: 'cannedresponses', task: 'getpremadeajax', ticketid: '". esc_js(jssupportticket::$jsst_data[0]->id) ."', '_wpnonce':'". esc_attr(wp_create_nonce('get-premade-ajax')) ."'}, function (data) {
             if (data) {
                 var append = jQuery('input#append_premade1:checked').length;
                 if (append == 1) {
@@ -72,24 +72,41 @@ $jsst_jssupportticket_js ="
             }
         });
         jQuery('#tabs').tabs();
+        /* The attachment counter used to be jQuery('input[type=file]').length,
+           which counts every file field on the page - and this page also carries
+           the internal note composer's hidden one. The append was just as wide:
+           jQuery('.tk_attachment_value_wrapperform') matches both wrappers, so
+           every click added a field to the note composer too and the count grew
+           by two at a time. A limit of five therefore stopped the reply form at
+           three. Both are scoped to the wrapper that belongs to the clicked
+           button now, so the configured number is the number the admin gets. */
         jQuery('#tk_attachment_add').click(function () {
             var obj = this;
-            var current_files = jQuery('input[type=\'file\']').length;
-            var total_allow =". esc_attr(jssupportticket::$_config['no_of_attachement']) .";
-            var append_text = '<span class=\'tk_attachment_value_text\'><input name=\'filename[]\' type=\'file\' onchange=\'uploadfile(this,\'". esc_js(jssupportticket::$_config['file_maximum_size']) ."\',\'". esc_js(jssupportticket::$_config['file_extension']) ."\');\' size=\'20\' maxlenght=\'30\'  /><span  class=\'tk_attachment_remove\'></span></span>';
+            var wrapper = jQuery(obj).closest('.js-form-field').find('.tk_attachment_value_wrapperform').first();
+            var current_files = wrapper.find('input[type=\'file\']').length;
+            var total_allow = ". absint(jssupportticket::$_config['no_of_attachement']) .";
+            /* The onchange attribute was quoted with single quotes and its
+               arguments were too, so the browser ended the attribute at the
+               first inner quote and every added field lost its size and
+               extension check. Double quotes outside, single quotes inside. */
+            var append_text = '<span class=\"tk_attachment_value_text\"><input class=\"inputbox\" name=\"filename[]\" type=\"file\" onchange=\"uploadfile(this, \'". esc_js(jssupportticket::$_config['file_maximum_size']) ."\', \'". esc_js(jssupportticket::$_config['file_extension']) ."\');\" size=\"20\" /><span class=\"tk_attachment_remove\"></span></span>';
             if (current_files < total_allow) {
-                jQuery('.tk_attachment_value_wrapperform').append(append_text);
-            } else if ((current_files === total_allow) || (current_files > total_allow)) {
+                wrapper.append(append_text);
+                if ((current_files + 1) >= total_allow) {
+                    jQuery(obj).hide();
+                }
+            } else {
                 alert('". esc_html(__('File upload limit exceeds', 'js-support-ticket')) ."');
-                obj.hide();
+                jQuery(obj).hide();
             }
         });
         jQuery(document).delegate('.tk_attachment_remove', 'click', function (e) {
+            var wrapper = jQuery(this).closest('.tk_attachment_value_wrapperform');
             jQuery(this).parent().remove();
-            var current_files = jQuery('input[type=\'file\']').length;
-            var total_allow =". esc_attr(jssupportticket::$_config['no_of_attachement']) .";
+            var current_files = wrapper.find('input[type=\'file\']').length;
+            var total_allow = ". absint(jssupportticket::$_config['no_of_attachement']) .";
             if (current_files < total_allow) {
-                jQuery('#tk_attachment_add').show();
+                wrapper.closest('.js-form-field').find('#tk_attachment_add').show();
             }
         });
         jQuery('a#showhidedetail').click(function (e) {
@@ -102,19 +119,16 @@ $jsst_jssupportticket_js ="
         var height = jQuery(window).height();
         jQuery('a#showhistory').click(function (e) {
             e.preventDefault();
-            jQuery('div#userpopup').slideDown('slow');
+            jQuery('div#jsst-history-popup').slideDown('slow');
             jQuery('div#userpopupblack').show();
         });
+        /* The Post New Internal Note link no longer opens a modal — it switches
+           the composer into its internal mode and puts the caret in it. The link
+           and its id are kept so the n shortcut and any existing markup still
+           find it. (Roadmap 4.0-UX-03) */
         jQuery('a#int-note').click(function (e) {
             e.preventDefault();
-            jQuery('div#internalnotes-popup').slideDown('slow');
-            jQuery('div#internalnotespopupblack').show();
-        });
-        jQuery('.internalnotespopup-close, div#internalnotespopupblack').click(function (e) {
-            jQuery('div#internalnotes-popup').slideUp('slow', function () {
-                jQuery('div#internalnotespopupblack').hide();
-            });
-
+            jsstSetComposerMode('internal', true);
         });
         jQuery('a#chng-status').click(function (e) {
             e.preventDefault();
@@ -162,7 +176,7 @@ $jsst_jssupportticket_js ="
         });
 
         jQuery('div#userpopupblack,div.jsst-popup-background,.close-history,.close-credentails').click(function (e) {
-            jQuery('div#userpopup').slideUp('slow');
+            jQuery('div#userpopup, div#jsst-history-popup').slideUp('slow');
             jQuery('#usercredentailspopup').slideUp('slow');
             setTimeout(function () {
                 jQuery('div#userpopupblack').hide();
@@ -181,6 +195,20 @@ $jsst_jssupportticket_js ="
             });
             ";
         }
+        /* Presence and shortcut sentences, prepared here rather than inline in
+           the script string below, so every placeholder can carry the
+           translators note on the line above it. */
+        /* translators: %s: display name of the agent viewing the ticket. */
+        $jsst_presence_one = __('%s is viewing this ticket.', 'js-support-ticket');
+        /* translators: %s: display name of the agent writing a reply. */
+        $jsst_presence_one_replying = __('%s is replying to this ticket.', 'js-support-ticket');
+        /* translators: 1: display name of an agent, 2: display name of a second agent. */
+        $jsst_presence_two = __('%1$s and %2$s have this ticket open.', 'js-support-ticket');
+        /* translators: 1: display name of an agent, 2: number of further agents with the ticket open. */
+        $jsst_presence_many = __('%1$s and %2$s others have this ticket open.', 'js-support-ticket');
+        /* translators: %s: label of the ticket action being confirmed, such as Lock or Close. */
+        $jsst_shortcut_ask = __('%s now? The customer is notified by e-mail.', 'js-support-ticket');
+
         $jsst_jssupportticket_js .='
         jQuery(document).delegate("#ticketpopupsearch","submit", function (e) {
             var ticketid = jQuery("#ticketidformerge").val();
@@ -631,6 +659,349 @@ $jsst_jssupportticket_js ="
         jQuery("#mergeticketselection").hide();
         getTicketdataForMerging(mergeticketid,mergewithticketid,mergeNonce);
     }
+    /* The two composer modes. (Roadmap 4.0-UX-03)
+
+       Declared as a global function because the internal-note link, the n
+       shortcut and the mode tabs all reach for it, and they are bound in
+       different ready() blocks.
+
+       Switching mode only ever shows a different panel. Neither form is touched,
+       so nothing an agent has already typed into the other one is lost - and
+       because they are two separate forms posting to two separate actions, text
+       written in internal mode cannot be submitted as a public reply. That
+       separation is the safety property; the colour is what makes it visible. */
+    function jsstSetComposerMode(mode, focusEditor) {
+        var composer = jQuery("#jsst-composer");
+        if (!composer.length) { return; }
+        if (mode !== "internal" || !composer.find(".jsst-composer-panel-internal").length) { mode = "public"; }
+        composer.removeClass("jsst-composer-public jsst-composer-internal").addClass("jsst-composer-" + mode);
+        composer.find(".jsst-composer-mode").each(function(){
+            var btn = jQuery(this);
+            var on = btn.attr("data-mode") === mode;
+            btn.toggleClass("active", on).attr("aria-selected", on ? "true" : "false");
+        });
+        if (focusEditor) {
+            /* Scroll the composer into view first: in internal mode especially,
+               an agent needs to see the banner they are about to type under. */
+            var node = composer.get(0);
+            if (node && node.scrollIntoView) {
+                var host = node.parentNode;
+                if (host && host.style) {
+                    var room = Math.ceil(window.innerHeight - node.getBoundingClientRect().height - 40);
+                    host.style.paddingBottom = (room > 0) ? (room + "px") : "";
+                }
+                node.scrollIntoView({block: "start"});
+            }
+            var editorid = (mode === "internal") ? "internalnote" : "jsticket_message";
+            if (window.tinymce && window.tinymce.get(editorid)) {
+                window.tinymce.get(editorid).focus();
+            } else {
+                jQuery("#" + editorid).focus();
+            }
+        }
+    }
+    jQuery(document).ready(function(){
+        jQuery("#jsst-composer").on("click", ".jsst-composer-mode", function(){
+            jsstSetComposerMode(jQuery(this).attr("data-mode"), true);
+        });
+        /* Read the starting mode off the element the server rendered rather than
+           assuming public: a light agent has no public panel, and the composer
+           comes back marked internal. (Roadmap 4.0-SEC-04) */
+        jsstSetComposerMode(jQuery("#jsst-composer").hasClass("jsst-composer-internal") ? "internal" : "public", false);
+    });
+
+    /* What is currently written in one of the two editors.
+
+       Shared, because the drafts autosave and the presence heartbeat both need
+       it and TinyMCE is the reason it is not one line: while the visual editor
+       is active the textarea holds whatever was there when it was initialised,
+       not what the agent has typed. (Roadmap 4.0-UX-04, 4.0-UX-05) */
+    function jsstEditorBody(id){
+        if (window.tinymce && window.tinymce.get(id)) { return window.tinymce.get(id).getContent(); }
+        var el = document.getElementById(id);
+        return el ? el.value : "";
+    }
+
+    /* Drafts. (Roadmap 4.0-UX-04)
+
+       Two layers with different failure modes. The browser copy is written on
+       every keystroke pause and survives a crash or a stray back button; the
+       server copy goes every 20 seconds and is the only one that survives the
+       browser itself.
+
+       Nothing is ever pasted into the composer automatically. A recovered draft
+       is offered and the agent chooses, because silently restoring abandoned
+       text is how a half-finished reply gets sent. */
+    jQuery(document).ready(function(){
+        var composer = jQuery("#jsst-composer");
+        if (!composer.length) { return; }
+        var ticketid = jQuery("#jsst-draft-ticketid").val();
+        var nonce = jQuery("#jsst-draft-nonce").val();
+        if (!ticketid) { return; }
+        var editors = {"public": "jsticket_message", "internal": "internalnote"};
+        var localKey = function(mode){ return "jsstDraft:" + ticketid + ":" + mode; };
+        var lastSent = {"public": null, "internal": null};
+
+        function bodyOf(mode){ return jsstEditorBody(editors[mode]); }
+        function setBody(mode, html){
+            var id = editors[mode];
+            if (window.tinymce && window.tinymce.get(id)) { window.tinymce.get(id).setContent(html); return; }
+            var el = document.getElementById(id);
+            if (el) { el.value = html; }
+        }
+        function keepLocally(mode){
+            try { window.localStorage.setItem(localKey(mode), bodyOf(mode)); } catch (err) {}
+        }
+        function keepOnServer(mode){
+            var body = bodyOf(mode);
+            if (body === lastSent[mode]) { return; }
+            lastSent[mode] = body;
+            jQuery.post(ajaxurl, {action: "jsst_save_draft", ticketid: ticketid, mode: mode, body: body, _wpnonce: nonce});
+        }
+        function currentMode(){ return composer.hasClass("jsst-composer-internal") ? "internal" : "public"; }
+
+        /* The browser copy, on a short idle after typing stops. */
+        var typingTimer = null;
+        jQuery(document).on("keyup change", "#jsticket_message, #internalnote", function(){
+            var mode = currentMode();
+            window.clearTimeout(typingTimer);
+            typingTimer = window.setTimeout(function(){ keepLocally(mode); }, 800);
+        });
+        /* TinyMCE writes into an iframe, so its own event is the only reliable one. */
+        if (window.tinymce) {
+            jQuery.each(editors, function(mode, id){
+                var ed = window.tinymce.get(id);
+                if (ed) { ed.on("keyup change", function(){ keepLocally(mode); }); }
+            });
+        }
+
+        /* The server copy. */
+        window.setInterval(function(){
+            keepOnServer("public");
+            if (composer.find(".jsst-composer-panel-internal").length) { keepOnServer("internal"); }
+        }, 20000);
+
+        /* Offer, never apply. */
+        composer.on("click", ".jsst-draft-restore-btn", function(){
+            var row = jQuery(this).closest(".jsst-draft-restore");
+            var mode = row.attr("data-mode");
+            jsstSetComposerMode(mode, true);
+            setBody(mode, row.attr("data-body"));
+            row.remove();
+        });
+        composer.on("click", ".jsst-draft-discard-btn", function(){
+            var row = jQuery(this).closest(".jsst-draft-restore");
+            var mode = row.attr("data-mode");
+            jQuery.post(ajaxurl, {action: "jsst_discard_draft", ticketid: ticketid, mode: mode, _wpnonce: nonce});
+            try { window.localStorage.removeItem(localKey(mode)); } catch (err) {}
+            row.remove();
+        });
+
+        /* Submitting means it is no longer a draft. The server side clears its
+           own copy; this clears the browser copy so a refresh afterwards does
+           not offer the text back. */
+        composer.on("submit", "form", function(){
+            try {
+                window.localStorage.removeItem(localKey("public"));
+                window.localStorage.removeItem(localKey("internal"));
+            } catch (err) {}
+        });
+    });
+
+    /* Who else is on this ticket. (Roadmap 4.0-UX-05)
+
+       Two warnings, because they catch different collisions. The bar says who
+       else has the ticket open and whether they are writing - that is a warning
+       in time to stop. The stale notice says a reply landed after this page was
+       drawn - that is the one that matters, because it catches the colleague who
+       arrived, answered and left inside the gap between two heartbeats, and the
+       agent who has had the tab open since this morning.
+
+       Nothing here blocks the reply. An agent who has read the warning and still
+       means to send is usually right, and a confirm() on every submit would be
+       ignored within a week. */
+    jQuery(document).ready(function(){
+        var composer = jQuery("#jsst-composer");
+        var nonceEl = jQuery("#jsst-presence-nonce");
+        var ticketid = jQuery("#jsst-draft-ticketid").val();
+        /* Absent for anyone not allowed to be told, so this simply does not run
+           rather than heartbeating its way to a 403 every half minute. */
+        if (!composer.length || !nonceEl.length || !ticketid) { return; }
+
+        var nonce = nonceEl.val();
+        var bar = composer.find(".jsst-presence").not(".jsst-presence-stale").first();
+        var stale = composer.find(".jsst-presence-stale").first();
+        var drawnAt = parseInt(jQuery("#jsst-presence-latestreply").val(), 10) || 0;
+        var warned = false;
+        var editors = {"public": "jsticket_message", "internal": "internalnote"};
+
+        /* Whole sentences rather than assembled fragments, because word order is
+           not the same in every language. Two people are named; three or more
+           become a name and a count, since a bar listing six names is no longer
+           a bar. */
+        var tplOne = "'. esc_js($jsst_presence_one) .'";
+        var tplOneReplying = "'. esc_js($jsst_presence_one_replying) .'";
+        var tplTwo = "'. esc_js($jsst_presence_two) .'";
+        var tplMany = "'. esc_js($jsst_presence_many) .'";
+        var tplAlsoReplying = "'. esc_js(__('One of them is replying.', 'js-support-ticket')) .'";
+
+        /* Function replacements, so a display name containing a dollar sign is
+           not read as a backreference. */
+        function fill(tpl, values){
+            var out = tpl;
+            jQuery.each(values, function(i, value){
+                out = out.replace(i === 0 ? /%(1\$)?s/ : /%2\$s/, function(){ return value; });
+            });
+            return out;
+        }
+
+        /* Writing, not merely present. Tags are stripped because an empty
+           TinyMCE still reports a paragraph and a line break. */
+        function isReplying(){
+            var mode = composer.hasClass("jsst-composer-internal") ? "internal" : "public";
+            var text = jsstEditorBody(editors[mode]).replace(/<[^>]*>/g, "").replace(/&nbsp;/g, " ");
+            return jQuery.trim(text) !== "";
+        }
+
+        function render(others){
+            if (!others.length) { bar.hide().empty(); return; }
+            var names = [];
+            var replying = false;
+            jQuery.each(others, function(i, other){
+                names.push(other.name);
+                if (other.state === "replying") { replying = true; }
+            });
+            var text;
+            if (names.length === 1) {
+                text = fill(replying ? tplOneReplying : tplOne, [names[0]]);
+            } else {
+                text = (names.length === 2)
+                    ? fill(tplTwo, [names[0], names[1]])
+                    : fill(tplMany, [names[0], names.length - 1]);
+                if (replying) { text = text + " " + tplAlsoReplying; }
+            }
+            bar.text(text).toggleClass("jsst-presence-replying", replying).show();
+        }
+
+        function beat(){
+            /* A background tab is not somebody about to reply. Skipping the beat
+               lets the entry expire, so they drop off the bar everybody else
+               sees. */
+            if (document.hidden) { return; }
+            jQuery.post(ajaxurl, {
+                action: "jsst_presence",
+                ticketid: ticketid,
+                state: isReplying() ? "replying" : "viewing",
+                _wpnonce: nonce
+            }, function(res){
+                if (!res || !res.success || !res.data) { return; }
+                render(res.data.others || []);
+                if (!warned && (parseInt(res.data.latestReply, 10) || 0) > drawnAt) {
+                    warned = true;
+                    stale.show();
+                }
+            });
+        }
+
+        beat();
+        window.setInterval(beat, 30000);
+
+        /* Coming back to the tab beats at once rather than waiting out the rest
+           of the interval. A ticket opened in a background tab and read half a
+           minute later would otherwise show nothing at the moment the agent
+           starts reading it, which is exactly the moment it has to be right. */
+        jQuery(document).on("visibilitychange", function(){
+            if (!document.hidden) { beat(); }
+        });
+
+        stale.on("click", ".jsst-presence-reload", function(){ window.location.reload(); });
+
+        /* Leaving the page. sendBeacon because an ordinary request issued during
+           unload is cancelled as often as it is delivered; if the browser has no
+           sendBeacon the entry expires on its own in a little over a minute. */
+        jQuery(window).on("beforeunload", function(){
+            if (!navigator.sendBeacon || !window.FormData) { return; }
+            var payload = new FormData();
+            payload.append("action", "jsst_presence");
+            payload.append("ticketid", ticketid);
+            payload.append("leaving", "1");
+            payload.append("_wpnonce", nonce);
+            navigator.sendBeacon(ajaxurl, payload);
+        });
+    });
+
+    /* i and l take effect the moment the key is pressed, and both send the
+       customer an e-mail - lock/unlock through mail template 6/7, in progress
+       through 9. Every other shortcut only opens a panel, where the agent still
+       has to confirm. The ticket state is easy to put back; the e-mail already
+       sitting in the customer inbox is not, so these two ask first.
+       Clicking the button is a deliberate act and stays unconfirmed.
+       (Roadmap 4.0-UX-03) */
+    function jsstConfirmShortcut(selector){
+        var button = jQuery(selector).first();
+        /* Nothing on screen means the action is not available to this agent or
+           not valid for this ticket. Stay silent rather than ask about an
+           action that would not happen anyway. */
+        if (!button.length) { return; }
+        /* Named from the button that actually rendered, so the question reads
+           correctly for lock and unlock without hardcoding either. */
+        var label = jQuery.trim(button.attr("title") || button.find("span").first().text());
+        var ask = "' . esc_js($jsst_shortcut_ask) . '".replace("%s", label);
+        if (window.confirm(ask)) { button.click(); }
+    }
+
+    /* Keyboard access to the ticket actions. (Roadmap 4.0-CORE-05)
+       Single keys, ignored while the agent is typing and while a popup is open,
+       so they never fight with the reply editor. Each shortcut activates the
+       control that is actually on screen, so a key does nothing when the action
+       is not available to this agent or not valid for this ticket. */
+    jQuery(document).ready(function(){
+        var shortcuts = {
+            /* r and n are now the two halves of the same question - which mode
+               is the composer in - rather than one focusing a box and the other
+               opening a modal. (Roadmap 4.0-UX-03) */
+            r: function(){ jsstSetComposerMode("public", true); },
+            /* The only two that act at once rather than opening a panel, so
+               they are the only two that ask first. */
+            i: function(){ jsstConfirmShortcut(".jsst-shortcut-inprogress"); },
+            l: function(){ jsstConfirmShortcut(".jsst-shortcut-lock"); },
+            h: function(){ jQuery("a#showhistory").first().click(); },
+            n: function(){ jQuery("a#int-note").first().click(); },
+            m: function(){ jQuery("a#mergeticket").first().click(); },
+            p: function(){ jQuery("a#chng-prority").first().click(); },
+            s: function(){ jQuery("a#chng-status").first().click(); }
+        };
+        jQuery(document).on("keydown", function(e){
+            if (e.ctrlKey || e.metaKey || e.altKey) { return; }
+            var tag = (e.target && e.target.tagName) ? e.target.tagName.toLowerCase() : "";
+            if (tag === "input" || tag === "textarea" || tag === "select" || (e.target && e.target.isContentEditable)) { return; }
+            if (jQuery(".jsst-popup-wrapper:visible, #userpopup:visible").length) { return; }
+            var key = (e.key || "").toLowerCase();
+            if (shortcuts[key]) {
+                e.preventDefault();
+                shortcuts[key]();
+            }
+        });
+    });
+    /* Multi-select merge: every ticket ticked in the candidate list is merged
+       into the ticket being viewed. (Roadmap 4.0-CORE-04) */
+    function jsstPreviewMergeSelection(primaryticket, previewNonce){
+        var picked = [];
+        jQuery(".jsst-merge-source:checked").each(function(){
+            picked.push(jQuery(this).val());
+        });
+        if(picked.length === 0){
+            alert("' . esc_js(__('Tick at least one ticket to merge into this one.', 'js-support-ticket')) . '");
+            return false;
+        }
+        jQuery.post(ajaxurl, {action: "jsticket_ajax", jstmod: "mergeticket", task: "previewMergeSelection", primaryticket: primaryticket, sources: picked.join(","), isadmin: 1, "_wpnonce": previewNonce}, function (data) {
+            if(data){
+                data=jQuery.parseJSON(data);
+                jQuery("div#popup-record-data").html("");
+                jQuery("div#popup-record-data").html(jsstDecodeHTML(data["data"]));
+            }
+        });
+    }
 
     function getTicketdataForMerging(mergeticketid,mergewithticketid,mergeNonce){
         jQuery.post(ajaxurl, {action: "jsticket_ajax",jstmod: "mergeticket", task: "getLatestReplyForMerging", mergeid:mergeticketid,mergewith:mergewithticketid,isadmin:1, "_wpnonce": mergeNonce}, function (data) {
@@ -804,7 +1175,9 @@ $jsst_jssupportticket_js ="
     }
 
     jQuery("div.popup-header-close-img,div.jsst-popup-background,input#cancel").click(function (e) {
-        jQuery("div.jsst-popup-wrapper:not(#internalnotes-popup)").slideUp("slow");
+        /* The internal-note popup is gone; there is nothing to exclude any
+           more. (Roadmap 4.0-UX-03) */
+        jQuery("div.jsst-popup-wrapper").slideUp("slow");
         jQuery("div.jsst-merge-popup-wrapper").slideUp("slow");
         setTimeout(function () {
             jQuery("div.jsst-popup-background").hide();
@@ -936,7 +1309,7 @@ $jsst_yesno = array(
             <?php echo wp_kses(JSSTformfield::hidden('reply-tikcetid',jssupportticket::$jsst_data[0]->id), JSST_ALLOWED_TAGS); ?>
             <?php echo wp_kses(JSSTformfield::hidden('time-confilct',''), JSST_ALLOWED_TAGS); ?>
         </form>
-        <?php if(in_array('note', jssupportticket::$_active_addons) && in_array('timetracking', jssupportticket::$_active_addons)){ ?>
+        <?php if(JSSTmergedaddon::featureEnabled('note') && in_array('timetracking', jssupportticket::$_active_addons)){ ?>
         <form id="jsst-note-edit-form" style="display:none" method="post" action="<?php echo esc_url(wp_nonce_url(admin_url("admin.php?page=note&task=saveeditedtime&action=jstask"),"save-edited-time-".jssupportticket::$jsst_data[0]->id)); ?>" >
             <div class="js-form-wrapper-popup">
                 <div class="js-form-title-popup"><?php echo esc_html(__('Time', 'js-support-ticket')); ?></div>
@@ -967,13 +1340,13 @@ $jsst_yesno = array(
     </div>
 </div>
 <div id="jsstadmin-wrapper">
-    <div id="jsstadmin-leftmenu">
-        <?php
-        if(current_user_can('jsst_support_ticket')){
-            JSSTincluder::getClassesInclude('jsstadminsidemenu');
-        }
-        ?>
-    </div>
+    <?php
+    /* The full side menu is administration, so agents do not get it — they get
+       their own short menu, and the container collapses when there is nothing
+       at all to show. JSSTsidemenu holds that decision for every screen.
+       (Roadmap 4.0-SEC-04) */
+    JSSTsidemenu::render();
+    ?>
     <div id="jsstadmin-data">
         <div id="jsstadmin-wrapper-top">
             <div id="jsstadmin-wrapper-top-left">
@@ -1013,7 +1386,6 @@ $jsst_yesno = array(
                 ?>
 
                 <div id="userpopupblack" style="display:none;"> </div>
-                <div id="internalnotespopupblack" style="display:none;"> </div>
                 <?php
                 $jsst_jssupportticket_js ="
                     jQuery(document).ready(function(){
@@ -1114,8 +1486,7 @@ $jsst_yesno = array(
                     <div class="js-ticket-usercredentails-form-wrap" >
                     </div>
                 </div>
-                <div id="userpopupblack" style="display:none;"></div>
-                <div id="userpopup" class="srch-hist-popup" style="display:none;">
+                <div id="jsst-history-popup" class="jsst-popup-wrapper srch-hist-popup" style="display:none;">
                     <div class="userpopup-top">
                         <div class="userpopup-heading">
                             <?php echo esc_html(__('Ticket History', 'js-support-ticket')); ?>
@@ -1124,13 +1495,51 @@ $jsst_yesno = array(
                     </div>
                     <div id="userpopup-records-wrp">
                         <div id="userpopup-records">
+                            <?php
+                            // Timeline filters: event type and source. Filtering happens in the
+                            // browser so the popup stays open and the page is not reloaded.
+                            // (Roadmap 4.0-CORE-01)
+                            $jsst_history_filters = isset(jssupportticket::$jsst_data['history_filters']) ? jssupportticket::$jsst_data['history_filters'] : array('eventtype' => array(), 'source' => array());
+                            if (!empty($jsst_history_filters['eventtype']) || !empty($jsst_history_filters['source'])) { ?>
+                                <div class="jsst-timeline-filters">
+                                    <span class="jsst-timeline-filter-field">
+                                        <label for="jsst-timeline-event"><?php echo esc_html(__('Event', 'js-support-ticket')); ?></label>
+                                        <select id="jsst-timeline-event" class="jsst-timeline-filter" data-filter="event">
+                                            <option value=""><?php echo esc_html(__('All events', 'js-support-ticket')); ?></option>
+                                            <?php foreach ($jsst_history_filters['eventtype'] AS $jsst_eventtype) { ?>
+                                                <option value="<?php echo esc_attr($jsst_eventtype); ?>"><?php echo esc_html($jsst_eventtype); ?></option>
+                                            <?php } ?>
+                                        </select>
+                                    </span>
+                                    <span class="jsst-timeline-filter-field">
+                                        <label for="jsst-timeline-source"><?php echo esc_html(__('Source', 'js-support-ticket')); ?></label>
+                                        <select id="jsst-timeline-source" class="jsst-timeline-filter" data-filter="source">
+                                            <option value=""><?php echo esc_html(__('All sources', 'js-support-ticket')); ?></option>
+                                            <?php foreach ($jsst_history_filters['source'] AS $jsst_source) { ?>
+                                                <option value="<?php echo esc_attr($jsst_source); ?>"><?php echo esc_html($jsst_source); ?></option>
+                                            <?php } ?>
+                                        </select>
+                                    </span>
+                                    <?php // Both only appear once a filter is actually narrowing the list. ?>
+                                    <button type="button" class="jsst-timeline-clear" style="display:none;"><?php echo esc_html(__('Clear', 'js-support-ticket')); ?></button>
+                                    <span class="jsst-timeline-shown" role="status" aria-live="polite"></span>
+                                </div>
+                            <?php } ?>
                             <div class="userpopup-search-history">
                                 <?php // data[5] holds the tickect history
                                     $jsst_field_array = JSSTincluder::getJSModel('fieldordering')->getFieldTitleByFieldfor(1, jssupportticket::$jsst_data[0]->multiformid);
-                                if ((!empty(jssupportticket::$jsst_data[5]))) {
-                                    ?>
-                                    <?php foreach (jssupportticket::$jsst_data[5] AS $jsst_history) { ?>
-                                        <div class="userpopup-search-history-row">
+                                if ((!empty(jssupportticket::$jsst_data[5]))) { ?>
+                                    <div class="userpopup-search-history-row userpopup-search-history-head" aria-hidden="true">
+                                        <div class="userpopup-search-history-col date"><?php echo esc_html(__('Date', 'js-support-ticket')); ?></div>
+                                        <div class="userpopup-search-history-col time"><?php echo esc_html(__('Time', 'js-support-ticket')); ?></div>
+                                        <div class="userpopup-search-history-col msg"><?php echo esc_html(__('Event', 'js-support-ticket')); ?></div>
+                                    </div>
+                                    <?php foreach (jssupportticket::$jsst_data[5] AS $jsst_history) {
+                                        $jsst_event_type = isset($jsst_history->eventtype) ? $jsst_history->eventtype : '';
+                                        $jsst_event_source = isset($jsst_history->source) ? $jsst_history->source : '';
+                                        $jsst_actor_name = isset($jsst_history->actorname) ? $jsst_history->actorname : '';
+                                        ?>
+                                        <div class="userpopup-search-history-row jsst-timeline-row" data-event="<?php echo esc_attr($jsst_event_type); ?>" data-source="<?php echo esc_attr($jsst_event_source); ?>">
                                             <div class="userpopup-search-history-col date">
                                                 <?php echo esc_html(date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime($jsst_history->datetime))); ?>
                                             </div>
@@ -1148,111 +1557,91 @@ $jsst_yesno = array(
                                             ?>
                                             <div class="userpopup-search-history-col msg <?php echo esc_attr($jsst_message); ?>">
                                                 <?php echo wp_kses_post($jsst_history->message); ?>
+                                                <?php
+                                                // Field diffs are shown as their own line so a value
+                                                // change is readable without parsing the message.
+                                                if (isset($jsst_history->fieldname) && $jsst_history->fieldname != '') { ?>
+                                                    <span class="jsst-timeline-diff">
+                                                        <span class="jsst-timeline-field"><?php echo esc_html($jsst_history->fieldname); ?></span>
+                                                        <span class="jsst-timeline-old"><?php echo esc_html($jsst_history->oldvalue); ?></span>
+                                                        <span class="jsst-timeline-arrow">&rarr;</span>
+                                                        <span class="jsst-timeline-new"><?php echo esc_html($jsst_history->newvalue); ?></span>
+                                                    </span>
+                                                <?php } ?>
+                                                <?php if ($jsst_actor_name != '' || $jsst_event_source != '') { ?>
+                                                    <span class="jsst-timeline-meta">
+                                                        <?php if ($jsst_actor_name != '') { ?>
+                                                            <span class="jsst-timeline-actor"><?php echo esc_html($jsst_actor_name); ?></span>
+                                                        <?php } ?>
+                                                        <?php if ($jsst_event_source != '') { ?>
+                                                            <span class="jsst-timeline-source"><?php echo esc_html($jsst_event_source); ?></span>
+                                                        <?php } ?>
+                                                    </span>
+                                                <?php } ?>
                                             </div>
                                         </div>
                                     <?php } ?>
+                                <?php } else { ?>
+                                    <div class="userpopup-records-desc"><?php echo esc_html(__('Nothing has happened on this ticket yet.', 'js-support-ticket')); ?></div>
                                 <?php } ?>
                             </div>
+                            <p class="jsst-timeline-empty" style="display:none;"><?php echo esc_html(__('No events match the selected filters.', 'js-support-ticket')); ?></p>
                         </div>
                     </div>
+                    <script>
+                    (function(){
+                        var filters = document.querySelectorAll('.jsst-timeline-filter');
+                        if (!filters.length) { return; }
+                        function apply(){
+                            var event = document.getElementById('jsst-timeline-event');
+                            var source = document.getElementById('jsst-timeline-source');
+                            var wantEvent = event ? event.value : '';
+                            var wantSource = source ? source.value : '';
+                            var rows = document.querySelectorAll('.jsst-timeline-row');
+                            var shown = 0;
+                            for (var i = 0; i < rows.length; i++) {
+                                var row = rows[i];
+                                var ok = (!wantEvent || row.getAttribute('data-event') === wantEvent)
+                                      && (!wantSource || row.getAttribute('data-source') === wantSource);
+                                row.style.display = ok ? '' : 'none';
+                                if (ok) { shown++; }
+                            }
+                            var empty = document.querySelector('.jsst-timeline-empty');
+                            if (empty) { empty.style.display = shown ? 'none' : ''; }
+
+                            /* Say so when the list is narrowed. A filtered timeline that
+                               looks exactly like a complete one is how an agent concludes
+                               a ticket has no history. */
+                            var on = wantEvent || wantSource;
+                            for (var f = 0; f < filters.length; f++) {
+                                filters[f].className = 'jsst-timeline-filter' + (filters[f].value ? ' jsst-timeline-filter-on' : '');
+                            }
+                            var clear = document.querySelector('.jsst-timeline-clear');
+                            if (clear) { clear.style.display = on ? '' : 'none'; }
+                            var shownEl = document.querySelector('.jsst-timeline-shown');
+                            if (shownEl) {
+                                shownEl.textContent = on
+                                    ? '<?php echo esc_js(__('Showing', 'js-support-ticket')); ?> ' + shown + ' / ' + rows.length
+                                    : '';
+                            }
+                        }
+                        for (var i = 0; i < filters.length; i++) {
+                            filters[i].addEventListener('change', apply);
+                        }
+                        var clearBtn = document.querySelector('.jsst-timeline-clear');
+                        if (clearBtn) {
+                            clearBtn.addEventListener('click', function(){
+                                for (var c = 0; c < filters.length; c++) { filters[c].value = ''; }
+                                apply();
+                            });
+                        }
+                        apply();
+                    })();
+                    </script>
                 </div>
                 <!-- inrternal notes popup -->
-                <div id="internalnotes-popup" class="jsst-popup-wrapper" style="display: none;">
-                    <?php if(in_array('note', jssupportticket::$_active_addons)){ ?>
-                        <div class="userpopup-top">
-                            <div class="userpopup-heading">
-                                <?php echo esc_html(__('Post New Internal Note','js-support-ticket')); ?>
-                            </div>
-                            <img alt = "<?php echo esc_attr(__('Close','js-support-ticket')); ?>" class="internalnotespopup-close" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/close-icon-white.png" />
-                        </div>
-                        <div class="js-admin-popup-cnt">  <!--  postinternalnote Area   -->
-                            <form class="js-det-tkt-form" method="post" action="<?php echo esc_url(wp_nonce_url(admin_url("admin.php?page=note&task=savenote"),"save-note-".jssupportticket::$jsst_data[0]->id)); ?>"  enctype="multipart/form-data">
-                                <?php if(in_array('timetracking', jssupportticket::$_active_addons)){ ?>
-                                    <div class="jsst-ticket-detail-timer-wrapper"> <!-- Top Timer Section -->
-                                        <div class="timer-left" >
-                                            <div class="timer-total-time" >
-                                                <?php
-                                                    $jsst_hours = floor(jssupportticket::$jsst_data['time_taken'] / 3600);
-                                                    $jsst_mins = floor(jssupportticket::$jsst_data['time_taken'] / 60);
-                                                    $jsst_mins = floor($jsst_mins % 60);
-                                                    $jsst_secs = floor(jssupportticket::$jsst_data['time_taken'] % 60);
-                                                    echo esc_html(__('Time Taken','js-support-ticket')).':&nbsp;'.sprintf('%02d:%02d:%02d', esc_html($jsst_hours), esc_html($jsst_mins), esc_html($jsst_secs));
-                                                ?>
-                                            </div>
-                                        </div>
-                                        <div class="timer-right" >
-                                            <div class="timer" >
-                                                00:00:00
-                                            </div>
-                                            <div class="timer-buttons" >
-                                                <?php if(in_array('agent', jssupportticket::$_active_addons) && JSSTincluder::getJSModel('userpermissions')->checkPermissionGrantedForTask('Edit Time')){ ?>
-                                                    <span class="timer-button" onclick="showEditTimerPopup()" >
-                                                        <img alt = "<?php echo esc_attr(__('Edit','js-support-ticket')); ?>" class="default-show" alt="<?php echo esc_attr(__('image','js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/ticket-detail/edit-time-1.png"/>
-                                                        <img alt = "<?php echo esc_attr(__('Edit','js-support-ticket')); ?>" class="default-hide" alt="<?php echo esc_attr(__('image','js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/ticket-detail/edit-time.png"/>
-                                                    </span>
-                                                <?php } ?>
-                                                <span class="timer-button cls_1" onclick="changeTimerStatus(1)" >
-                                                    <img alt = "<?php echo esc_attr(__('play','js-support-ticket')); ?>" class="default-show" alt="<?php echo esc_attr(__('image','js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/ticket-detail/play-time-1.png"/>
-                                                    <img alt = "<?php echo esc_attr(__('play','js-support-ticket')); ?>" class="default-hide" alt="<?php echo esc_attr(__('image','js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/ticket-detail/play-time.png"/>
-                                                </span>
-                                                <span class="timer-button cls_2" onclick="changeTimerStatus(2)" >
-                                                    <img alt = "<?php echo esc_attr(__('pause','js-support-ticket')); ?>" class="default-show" alt="<?php echo esc_attr(__('image','js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/ticket-detail/pause-time-1.png"/>
-                                                    <img alt = "<?php echo esc_attr(__('pause','js-support-ticket')); ?>" class="default-hide" alt="<?php echo esc_attr(__('image','js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/ticket-detail/pause-time.png"/>
-                                                </span>
-                                                <span class="timer-button cls_3" onclick="changeTimerStatus(3)" >
-                                                    <img alt = "<?php echo esc_attr(__('stop','js-support-ticket')); ?>" class="default-show" alt="<?php echo esc_attr(__('image','js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/ticket-detail/stop-time-1.png"/>
-                                                    <img alt = "<?php echo esc_attr(__('stop','js-support-ticket')); ?>" class="default-hide" alt="<?php echo esc_attr(__('image','js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/ticket-detail/stop-time.png"/>
-                                                </span>
-                                            </div>
-                                        </div>
-                                        <?php echo wp_kses(JSSTformfield::hidden('timer_time_in_seconds',''), JSST_ALLOWED_TAGS); ?>
-
-                                        <?php echo wp_kses(JSSTformfield::hidden('timer_edit_desc',''), JSST_ALLOWED_TAGS); ?>
-                                    </div>
-                                <?php } ?>
-                                <div class="js-form-wrapper">
-                                    <div class="js-form-title"><?php echo esc_html(__('Note Title', 'js-support-ticket')); ?></div>
-                                    <div class="js-form-value"><?php echo wp_kses(JSSTformfield::text('internalnotetitle', '', array('class' => 'inputbox js-admin-popup-input-field')), JSST_ALLOWED_TAGS) ?></div>
-                                </div>
-                                <div class="js-form-wrapper">
-                                    <div class="js-form-title"><label id="responcemsg" for="responce"><?php echo esc_html(__('Internal Note', 'js-support-ticket')); ?></label></div>
-                                    <div class="js-form-value"><?php wp_editor('', 'internalnote', array('media_buttons' => false)); ?></div>
-                                </div>
-                                <div class="js-form-wrapper">
-                                    <div class="js-form-title"><?php echo esc_html(__('Ticket', 'js-support-ticket')); echo ' '; echo esc_html(__('Status', 'js-support-ticket')); ?></div>
-                                    <div class="js-form-value">
-                                        <div class="jsst-formfield-radio-button-wrap">
-                                            <?php echo wp_kses(JSSTformfield::checkbox('closeonreply', array('1' => esc_html(__('Close On Reply', 'js-support-ticket'))), '', array('class' => 'radiobutton')), JSST_ALLOWED_TAGS); ?>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="js-form-wrapper">
-                                    <div class="js-form-title"><?php echo esc_html(__('Attachments', 'js-support-ticket')); ?></div>
-                                    <div class="js-form-value">
-                                        <div class="tk_attachment_value_wrapperform">
-                                            <span class="tk_attachment_value_text">
-                                                <input type="file" class="inputbox" name="note_attachment" onchange="uploadfile(this, '<?php echo esc_js(jssupportticket::$_config['file_maximum_size']); ?>', '<?php echo esc_js(jssupportticket::$_config['file_extension']); ?>');" size="20" maxlenght='30'/>
-                                                <span class='tk_attachment_remove'></span>
-                                            </span>
-                                        </div>
-                                        <span class="tk_attachments_configform">
-                                            <small><?php esc_html(__('Maximum File Size','js-support-ticket'));
-                                            echo ' (' . esc_html(jssupportticket::$_config['file_maximum_size']); ?>KB)<br><?php esc_html(__('File Extension Type','js-support-ticket'));
-                                            echo ' (' . esc_html(jssupportticket::$_config['file_extension']) . ')'; ?></small>
-                                        </span>
-                                    </div>
-                                </div>
-                                <div class="js-form-button">
-                                    <?php echo wp_kses(JSSTformfield::submitbutton('postinternalnote', esc_html(__('Post Internal Note','js-support-ticket')), array('class' => 'button js-admin-pop-btn-block', 'onclick' => "return checktinymcebyid('internalnote');")), JSST_ALLOWED_TAGS); ?>
-                                </div>
-                                <?php echo wp_kses(JSSTformfield::hidden('ticketid', jssupportticket::$jsst_data[0]->id), JSST_ALLOWED_TAGS); ?>
-                                <?php echo wp_kses(JSSTformfield::hidden('uid', JSSTincluder::getObjectClass('user')->uid()), JSST_ALLOWED_TAGS); ?>
-                                <?php echo wp_kses(JSSTformfield::hidden('action', 'note_savenote'), JSST_ALLOWED_TAGS); ?>
-                                <?php echo wp_kses(JSSTformfield::hidden('form_request', 'jssupportticket'), JSST_ALLOWED_TAGS); ?>
-                            </form>
-                        </div>
-                    <?php } ?>
-                </div>
+                <?php /* The internal-note form is no longer a modal — it is the
+                   composer's internal mode. (Roadmap 4.0-UX-03) */ ?>
                 <!-- change status popup -->
                 <div id="changestatus-popup" class="jsst-popup-wrapper" style="display: none;">
                     <div class="userpopup-top">
@@ -1313,7 +1702,7 @@ $jsst_yesno = array(
                 </div>
                 <!-- change department popup -->
                 <div id="changedept-popup" class="jsst-popup-wrapper" style="display: none;">
-                    <?php if ( in_array('actions',jssupportticket::$_active_addons)) { ?>
+                    <?php if ( JSSTmergedaddon::featureEnabled('actions')) { ?>
                         <div class="userpopup-top">
                             <div class="userpopup-heading">
                                 <?php echo esc_html(jssupportticket::JSST_getVarValue($jsst_field_array['department'])) ." ".esc_html(__('Transfer','js-support-ticket')); ?>
@@ -1328,7 +1717,7 @@ $jsst_yesno = array(
                                         <?php echo wp_kses(JSSTformfield::select('departmentid', JSSTincluder::getJSModel('department')->getDepartmentForCombobox(), jssupportticket::$jsst_data[0]->departmentid, esc_html(__('Select', 'js-support-ticket')) ." ".esc_html(jssupportticket::JSST_getVarValue($jsst_field_array['department'])), array('class' => 'inputbox js-admin-popup-select-field')), JSST_ALLOWED_TAGS); ?>
                                     </div>
                                 </div>
-                                <?php if(in_array('note', jssupportticket::$_active_addons)){ ?>
+                                <?php if(JSSTmergedaddon::featureEnabled('note')){ ?>
                                     <div class="js-form-wrapper">
                                         <div class="js-form-title"><label id="responcemsg" for="responce"><?php echo esc_html(__('Reason For', 'js-support-ticket')) ." ".esc_html(jssupportticket::JSST_getVarValue($jsst_field_array['department'])) ." ".esc_html(__('Transfer', 'js-support-ticket')); ?></label></div>
                                         <div class="js-form-value"><?php wp_editor('', 'departmenttranfernote', array('media_buttons' => false)); ?></div>
@@ -1362,7 +1751,7 @@ $jsst_yesno = array(
                                          <?php echo wp_kses(JSSTformfield::select('staffid', JSSTincluder::getJSModel('agent')->getstaffForCombobox(), jssupportticket::$jsst_data[0]->staffid, esc_html(__('Select Agent', 'js-support-ticket')), array('class' => 'inputbox js-admin-popup-select-field','required' => true)), JSST_ALLOWED_TAGS); ?>
                                     </div>
                                 </div>
-                                <?php if(in_array('note', jssupportticket::$_active_addons)){ ?>
+                                <?php if(JSSTmergedaddon::featureEnabled('note')){ ?>
                                     <div class="js-form-wrapper">
                                         <div class="js-form-title"><label id="responcemsg" for="responce"><?php echo esc_html(__('Internal Note', 'js-support-ticket')); ?></label></div>
                                         <div class="js-form-value"><?php wp_editor('', 'assignnote', array('media_buttons' => false)); ?></div>
@@ -1434,11 +1823,16 @@ $jsst_yesno = array(
                             }
                             ?>
                             <div class="js-tkt-det-actn-btn-wrp">
+                                <?php /* The button used to render for anybody who could open the ticket,
+                                         while the backend refused the edit — so an agent got a button
+                                         that answered "You are not allowed to edit this ticket". */ ?>
+                                <?php if (JSSTroles::canEditTicketContent()) { ?>
                                 <a title="<?php echo esc_attr(__('Edit Ticket','js-support-ticket')); ?>" class="js-tkt-det-actn-btn" href="?page=ticket&jstlay=addticket&jssupportticketid=<?php echo esc_attr(jssupportticket::$jsst_data[0]->id); ?>">
                                     <img alt = "<?php echo esc_attr(__('Edit Ticket','js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/ticket-detail/edit.png" />
                                     <span><?php echo esc_html(__('Edit Ticket','js-support-ticket')); ?></span>
                                 </a>
-                                <?php if(in_array('tickethistory', jssupportticket::$_active_addons)){ ?>
+                                <?php } ?>
+                                <?php if(JSSTmergedaddon::featureEnabled('tickethistory')){ ?>
                                     <a title="<?php echo esc_attr(__('Show History','js-support-ticket')); ?>" class="js-tkt-det-actn-btn" href="#" id="showhistory">
                                         <img alt = "<?php echo esc_attr(__('Show History','js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/ticket-detail/history.png" />
                                         <span><?php echo esc_html(__('Show History','js-support-ticket')); ?></span>
@@ -1446,7 +1840,47 @@ $jsst_yesno = array(
                                 <?php } ?>
                                 <form method="post" action="<?php echo esc_url(wp_nonce_url(admin_url("admin.php?page=ticket&task=actionticket"),"action-ticket-".jssupportticket::$jsst_data[0]->id)); ?>" id="adminTicketform" enctype="multipart/form-data">
                                     <?php
-                                        if (jssupportticket::$jsst_data[0]->status != 6) { // merged closed ticket can not be reopend.
+                                    // Optional reason, recorded on the timeline with whichever
+                                    // action is taken from this form. (Roadmap 4.0-CORE-05)
+                                    ?>
+                                    <div class="jsst-action-reason">
+                                        <label class="jsst-action-reason-label" for="jsst-action-reason">
+                                            <?php echo esc_html(__('Reason', 'js-support-ticket')); ?>
+                                            <span class="jsst-action-reason-optional"><?php echo esc_html(__('optional', 'js-support-ticket')); ?></span>
+                                        </label>
+                                        <div class="jsst-action-reason-field">
+                                            <input type="text" class="inputbox" id="jsst-action-reason" name="actionreason" maxlength="500" value="" placeholder="<?php echo esc_attr(__('Why are you doing this? Recorded on the ticket history.', 'js-support-ticket')); ?>" />
+                                            <span class="jsst-action-reason-count" aria-hidden="true">500</span>
+                                        </div>
+                                        <p class="jsst-action-reason-note"><?php echo esc_html(__('Saved to the ticket history with whichever action you choose below.', 'js-support-ticket')); ?></p>
+                                    </div>
+                                    <script>
+                                    /* Remaining characters, so the 500 limit is visible rather than
+                                       something an agent discovers by being cut off. */
+                                    (function(){
+                                        var field = document.getElementById("jsst-action-reason");
+                                        if (!field) { return; }
+                                        var count = field.parentNode.querySelector(".jsst-action-reason-count");
+                                        if (!count) { return; }
+                                        var max = parseInt(field.getAttribute("maxlength"), 10) || 500;
+                                        var sync = function(){
+                                            var left = max - field.value.length;
+                                            count.textContent = left;
+                                            count.className = "jsst-action-reason-count" + (left <= 50 ? " jsst-action-reason-count-low" : "");
+                                        };
+                                        field.addEventListener("input", sync);
+                                        sync();
+                                    })();
+                                    </script>
+                                    <p class="jsst-shortcut-hint">
+                                        <?php echo esc_html(__('Keyboard: R reply · I in progress · L lock · P priority · S status · N note · H history · M merge', 'js-support-ticket')); ?>
+                                    </p>
+                                    <?php
+                                        /* Closing and reopening are state changes, so the buttons
+                                           follow the same capability the server enforces. A light
+                                           agent is not shown a control that would be refused.
+                                           (Roadmap 4.0-SEC-04) */
+                                        if (JSSTroles::canChangeTicketState() && jssupportticket::$jsst_data[0]->status != 6) { // merged closed ticket can not be reopend.
                                             if (jssupportticket::$jsst_data[0]->status != 5) { ?>
                                                 <a title="<?php echo esc_attr(__('Close Ticket','js-support-ticket')); ?>" class="js-tkt-det-actn-btn" href="#" onclick="actionticket(2);">
                                                     <img alt = "<?php echo esc_attr(__('Close Ticket','js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/ticket-detail/close.png" />
@@ -1461,13 +1895,15 @@ $jsst_yesno = array(
                                         }
                                         jssupportticket::$jsst_data['custom']['ticketid'] = jssupportticket::$jsst_data[0]->id;
                                     ?>
-                                    <?php if (  in_array('actions',jssupportticket::$_active_addons) && jssupportticket::$jsst_data[0]->status != 5 && jssupportticket::$jsst_data[0]->status != 6 ) { ?>
+                                    <?php if (  JSSTmergedaddon::featureEnabled('actions') && jssupportticket::$jsst_data[0]->status != 5 && jssupportticket::$jsst_data[0]->status != 6 ) { ?>
                                         <a title="<?php echo esc_attr(__('Print Ticket','js-support-ticket')); ?>" class="js-tkt-det-actn-btn" href="#" id="print-link" data-ticketid="<?php echo esc_attr(jssupportticket::$jsst_data[0]->id); ?>">
                                             <img alt = "<?php echo esc_attr(__('Print Ticket','js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/ticket-detail/print.png" />
                                             <span><?php echo esc_html(__('Print Ticket','js-support-ticket')); ?></span>
                                         </a>
                                     <?php } ?>
-                                    <?php if (  in_array('mergeticket',jssupportticket::$_active_addons) && jssupportticket::$jsst_data[0]->status != 5 && jssupportticket::$jsst_data[0]->status != 6 ) {
+                                    <?php // The admin screen is reachable by an agent too, so it asks the same
+                                          // question as the action. (Roadmap 4.0-CORE-04)
+                                          if (  in_array('mergeticket', jssupportticket::$_active_addons) && JSSTroles::canMergeTickets() && jssupportticket::$jsst_data[0]->status != 5 && jssupportticket::$jsst_data[0]->status != 6 ) {
                                         $jsst_nonce = wp_create_nonce("get-tickets-for-merging-".jssupportticket::$jsst_data[0]->id) ?>
                                         <a title="<?php echo esc_attr(__('Merge Ticket','js-support-ticket')); ?>" class="js-tkt-det-actn-btn" href="#" id="mergeticket" data-ticketid="<?php echo esc_attr(jssupportticket::$jsst_data[0]->id); ?>" onclick="return showPopupAndFillValues(<?php echo esc_js(jssupportticket::$jsst_data[0]->id) ?>,4, '<?php echo esc_js($jsst_nonce);?>')" >
                                             <img alt = "<?php echo esc_attr(__('Merge Ticket','js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/ticket-detail/merge-ticket.png" />
@@ -1489,20 +1925,20 @@ $jsst_yesno = array(
                                     </a>
                                     <?php } ?>
                                     <?php
-                                        if(in_array('actions', jssupportticket::$_active_addons)){
+                                        if(JSSTmergedaddon::featureEnabled('actions')){
                                             if (jssupportticket::$jsst_data[0]->lock == 1) { ?>
-                                                <a title="<?php echo esc_attr(__('Unlock Ticket','js-support-ticket')); ?>" class="js-tkt-det-actn-btn" href="#" onclick="actionticket(5);">
+                                                <a title="<?php echo esc_attr(__('Unlock Ticket','js-support-ticket')); ?>" class="js-tkt-det-actn-btn jsst-shortcut-lock" aria-keyshortcuts="l" href="#" onclick="actionticket(5);">
                                                     <img alt = "<?php echo esc_attr(__('Unlock Ticket','js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/ticket-detail/unlock.png" />
                                                     <span><?php echo esc_html(__('Unlock Ticket','js-support-ticket')); ?></span>
                                                 </a>
                                             <?php } else { ?>
-                                                <a title="<?php echo esc_attr(__('Lock Ticket','js-support-ticket')); ?>" class="js-tkt-det-actn-btn" href="#" onclick="actionticket(4);">
+                                                <a title="<?php echo esc_attr(__('Lock Ticket','js-support-ticket')); ?>" class="js-tkt-det-actn-btn jsst-shortcut-lock" aria-keyshortcuts="l" href="#" onclick="actionticket(4);">
                                                     <img alt = "<?php echo esc_attr(__('Lock Ticket','js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/ticket-detail/lock.png" />
                                                     <span><?php echo esc_html(__('Lock Ticket','js-support-ticket')); ?></span>
                                                 </a>
                                             <?php }
                                         }
-                                        if(in_array('banemail', jssupportticket::$_active_addons)){
+                                        if(JSSTmergedaddon::featureEnabled('banemail')){
                                             $jsst_manageoptions = current_user_can('manage_options');
                                             $jsst_isagentstaff = in_array('agent', jssupportticket::$_active_addons) && JSSTincluder::getJSModel('agent')->isUserStaff();
                                             if (JSSTincluder::getJSModel('banemail')->isEmailBan(jssupportticket::$jsst_data[0]->email)) {
@@ -1539,16 +1975,16 @@ $jsst_yesno = array(
                                         }
                                     ?>
                                     <?php
-                                        $jsst_canmarkinprogress = current_user_can('manage_options') || ( in_array('agent', jssupportticket::$_active_addons) && JSSTincluder::getJSModel('agent')->isUserStaff() && JSSTincluder::getJSModel('userpermissions')->checkPermissionGrantedForTask('Mark In Progress') );
-                                        if(in_array('actions', jssupportticket::$_active_addons) && $jsst_canmarkinprogress){ ?>
-                                        <a title="<?php echo esc_attr(__('Mark In Progress','js-support-ticket')); ?>" class="js-tkt-det-actn-btn" href="#" onclick="actionticket(9);">
+                                        $jsst_canmarkinprogress = JSSTroles::canChangeTicketState() || ( in_array('agent', jssupportticket::$_active_addons) && JSSTincluder::getJSModel('agent')->isUserStaff() && JSSTincluder::getJSModel('userpermissions')->checkPermissionGrantedForTask('Mark In Progress') );
+                                        if(JSSTmergedaddon::featureEnabled('actions') && $jsst_canmarkinprogress){ ?>
+                                        <a title="<?php echo esc_attr(__('Mark In Progress','js-support-ticket')); ?>" class="js-tkt-det-actn-btn jsst-shortcut-inprogress" aria-keyshortcuts="i" href="#" onclick="actionticket(9);">
                                             <img alt = "<?php echo esc_attr(__('Mark In Progress','js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/ticket-detail/in-progress.png" />
                                             <span><?php echo esc_html(__('Mark In Progress','js-support-ticket')); ?></span>
                                         </a>
                                     <?php } ?>
                                     <?php
                                         $jsst_canbanandclose = current_user_can('manage_options') || ( in_array('agent', jssupportticket::$_active_addons) && JSSTincluder::getJSModel('agent')->isUserStaff() && JSSTincluder::getJSModel('userpermissions')->checkPermissionGrantedForTask('Ban Email And Close Ticket') );
-                                        if(in_array('banemail', jssupportticket::$_active_addons) && $jsst_canbanandclose){ ?>
+                                        if(JSSTmergedaddon::featureEnabled('banemail') && $jsst_canbanandclose){ ?>
                                             <a title="<?php echo esc_attr(__('Ban Email And Close Ticket','js-support-ticket')); ?>" class="js-tkt-det-actn-btn" href="#" onclick="actionticket(10);">
                                                 <img alt = "<?php echo esc_attr(__('Ban Email And Close Ticket','js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/ticket-detail/ban-email-close-ticket.png" />
                                                 <span><?php echo esc_html(__('Ban Email And Close Ticket','js-support-ticket')); ?></span>
@@ -1565,10 +2001,65 @@ $jsst_yesno = array(
                                 </form>
                             </div>
                         </div>
+                        <?php
+                        // Tickets merged into this one. Listed here so a merge is never a
+                        // dead end: each source stays reachable and can be separated
+                        // Provided by the Merge Ticket add-on.
+                        if (in_array('mergeticket', jssupportticket::$_active_addons)) {
+                            $jsst_merged_sources = JSSTincluder::getJSModel('mergeticket')->getMergedSources(jssupportticket::$jsst_data[0]->id);
+                            if (!empty($jsst_merged_sources)) { ?>
+                                <div class="js-tkt-det-title">
+                                    <?php echo esc_html(__('Merged Tickets', 'js-support-ticket')); ?>
+                                    <span class="jsst-merged-count"><?php echo esc_html(count($jsst_merged_sources)); ?></span>
+                                </div>
+                                <div class="jsst-merged-sources">
+                                    <div class="jsst-merged-sources-intro">
+                                        <?php echo esc_html(__('These tickets were merged into this one. Each keeps its own replies and attachments, and can be separated again.', 'js-support-ticket')); ?>
+                                    </div>
+                                    <?php foreach ($jsst_merged_sources AS $jsst_merged_source) {
+                                        $jsst_unmerge_url = wp_nonce_url(
+                                            admin_url('admin.php?page=ticket&task=unmergeticket&action=jstask&sourceticket=' . (int) $jsst_merged_source->id . '&primaryticket=' . (int) jssupportticket::$jsst_data[0]->id),
+                                            'unmerge-ticket-' . (int) $jsst_merged_source->id
+                                        ); ?>
+                                        <div class="jsst-merged-source">
+                                            <span class="jsst-merged-source-icon" aria-hidden="true">
+                                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="18" r="3"></circle><circle cx="6" cy="6" r="3"></circle><path d="M6 21V9a9 9 0 0 0 9 9"></path></svg>
+                                            </span>
+                                            <span class="jsst-merged-source-body">
+                                                <a class="jsst-merged-source-link" href="<?php echo esc_url(admin_url('admin.php?page=ticket&jstlay=ticketdetail&jssupportticketid=' . (int) $jsst_merged_source->id)); ?>">
+                                                    <span class="jsst-merged-source-id">#<?php echo esc_html($jsst_merged_source->ticketid); ?></span>
+                                                    <span class="jsst-merged-source-subject"><?php echo esc_html($jsst_merged_source->subject); ?></span>
+                                                </a>
+                                                <span class="jsst-merged-source-meta">
+                                                <?php
+                                                if ($jsst_merged_source->mergedbyname != '') {
+                                                    echo esc_html(sprintf(
+                                                        /* translators: 1: user name, 2: date */
+                                                        __('merged by %1$s on %2$s', 'js-support-ticket'),
+                                                        $jsst_merged_source->mergedbyname,
+                                                        date_i18n(get_option('date_format'), jssupportticketphplib::JSST_strtotime($jsst_merged_source->mergedate))
+                                                    ));
+                                                } else {
+                                                    echo esc_html(sprintf(
+                                                        /* translators: %s: date */
+                                                        __('merged on %s', 'js-support-ticket'),
+                                                        date_i18n(get_option('date_format'), jssupportticketphplib::JSST_strtotime($jsst_merged_source->mergedate))
+                                                    ));
+                                                }
+                                                ?>
+                                                </span>
+                                            </span>
+                                            <a class="jsst-merged-source-undo" href="<?php echo esc_url($jsst_unmerge_url); ?>" title="<?php echo esc_attr(__('Separate this ticket from this one', 'js-support-ticket')); ?>" onclick="return confirm('<?php echo esc_js(__('Separate this ticket again? It will reopen with the status it had before the merge.', 'js-support-ticket')); ?>');"><?php echo esc_html(__('Unmerge', 'js-support-ticket')); ?></a>
+                                        </div>
+                                    <?php } ?>
+                                </div>
+                            <?php }
+                        }
+                        ?>
                         <!-- Tickect internal Note Area -->
                         <?php
                             $jsst_color1ed = "colored";
-                            if(in_array('note', jssupportticket::$_active_addons)){ ?>
+                            if(JSSTmergedaddon::featureEnabled('note')){ ?>
                                 <div class="js-tkt-det-title"><?php echo esc_html(__('Internal Note', 'js-support-ticket')); ?></div>
                                 <?php if (!empty(jssupportticket::$jsst_data[6])) {
                                     foreach (jssupportticket::$jsst_data[6] AS $jsst_note) {
@@ -1835,7 +2326,8 @@ $jsst_yesno = array(
                                             </span>
                                         </div>
                                         <div class="js-ticket-thread-data note-msg">
-                                            <?php echo wp_kses_post(html_entity_decode($jsst_reply->message)); ?>
+                                            <?php // A ticket link in a stored reply belongs to whoever is reading it. (Roadmap 4.0-CORE-01)
+                                            echo wp_kses_post(JSSTticketlink::resolve(html_entity_decode($jsst_reply->message))); ?>
                                         </div>
                                         <?php
                                         // Zywrap AI Inline Actions (Threaded Replies)
@@ -1958,7 +2450,7 @@ $jsst_yesno = array(
                                                     <?php
                                                     }
                                                 }
-                                                if($jsst_reply->staffid != 0){
+                                                if($jsst_reply->staffid != 0 && JSSTroles::canEditReply()){
                                                     $jsst_nonce = wp_create_nonce('get-reply-data-by-id-'.$jsst_reply->replyid); ?>
                                                     <a title="<?php echo esc_attr(__('Edit Reply','js-support-ticket')); ?>" class="js-ticket-thread-actn-btn ticket-edit-reply-button" href="#" onclick="return showPopupAndFillValues(<?php echo esc_js($jsst_reply->replyid);?>,1, '<?php echo esc_js($jsst_nonce);?>')" >
                                                        <img alt = "<?php echo esc_attr(__('Edit Reply','js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/ticket-detail/edit-reply.png" />
@@ -1974,6 +2466,103 @@ $jsst_yesno = array(
                             }
                             do_action('jsst_after_ticket_replies', jssupportticket::$jsst_data[0]->id); ?>
                         <!-- Post Reply Area -->
+                        <?php
+                        /* One composer, two modes. (Roadmap 4.0-UX-03)
+                         *
+                         * Posting an internal note used to mean opening a modal that looked nothing
+                         * like the reply box and sat on top of the conversation. Two different-looking
+                         * writing surfaces for the same act of typing into a ticket is how a note
+                         * meant for colleagues gets sent to the customer — the trust incident this
+                         * screen exists to avoid.
+                         *
+                         * Both forms are exactly the ones that were there before: same action URLs,
+                         * same nonces, same field names, same submit handlers. Only where they sit and
+                         * how loudly they say what they are has changed. The mode is stated three ways
+                         * at once — the selected tab, a banner, and the colour of the whole composer —
+                         * because one of them alone is the sort of thing an agent stops seeing.
+                         */
+                        $jsst_notes_enabled = JSSTmergedaddon::featureEnabled('note');
+                        /* A light agent may not answer the customer, so the public
+                           tab and its form are not rendered for them at all — the
+                           server refuses the post either way, and offering a box
+                           that will be rejected is not a permission model.
+                           (Roadmap 4.0-SEC-04) */
+                        $jsst_can_reply = JSSTroles::canReplyPublicly();
+                        $jsst_composer_mode = $jsst_can_reply ? 'public' : 'internal';
+                        ?>
+                        <div id="jsst-composer" class="jsst-composer jsst-composer-<?php echo esc_attr($jsst_composer_mode); ?>">
+                        <?php // What the draft script needs. (Roadmap 4.0-UX-04) ?>
+                        <input type="hidden" id="jsst-draft-ticketid" value="<?php echo esc_attr(jssupportticket::$jsst_data[0]->id); ?>" />
+                        <input type="hidden" id="jsst-draft-nonce" value="<?php echo esc_attr(wp_create_nonce('jsst-draft')); ?>" />
+                        <?php
+                        /* Who else is here. (Roadmap 4.0-UX-05)
+                         *
+                         * Printed empty and filled in by the heartbeat, so a ticket
+                         * nobody else is on shows nothing at all and the composer keeps
+                         * the height it has always had. The reply id is stamped now,
+                         * while the page is being built, because the whole point of the
+                         * second signal is to compare what the agent is looking at
+                         * against what the ticket has since become.
+                         */
+                        if (class_exists('JSSTpresence') && JSSTpresence::mayWatch()) { ?>
+                            <input type="hidden" id="jsst-presence-nonce" value="<?php echo esc_attr(wp_create_nonce('jsst-presence')); ?>" />
+                            <input type="hidden" id="jsst-presence-latestreply" value="<?php echo esc_attr(JSSTpresence::latestReplyId(jssupportticket::$jsst_data[0]->id)); ?>" />
+                            <div class="jsst-presence" role="status" aria-live="polite" style="display:none"></div>
+                            <div class="jsst-presence jsst-presence-stale" role="alert" style="display:none">
+                                <span class="jsst-presence-text"><?php echo esc_html(__('Somebody else replied to this ticket while you were writing. Reload before you send, or the customer gets two answers.', 'js-support-ticket')); ?></span>
+                                <button type="button" class="button jsst-presence-reload"><?php echo esc_html(__('Reload the ticket', 'js-support-ticket')); ?></button>
+                            </div>
+                        <?php } ?>
+                            <div class="jsst-composer-modes" role="tablist" aria-label="<?php echo esc_attr(__('What kind of message', 'js-support-ticket')); ?>">
+                                <?php if ($jsst_can_reply) { ?>
+                                    <button type="button" class="jsst-composer-mode jsst-composer-mode-public" data-mode="public" role="tab" aria-selected="true">
+                                        <?php echo esc_html(__('Public reply', 'js-support-ticket')); ?>
+                                    </button>
+                                <?php } ?>
+                                <?php if ($jsst_notes_enabled) { ?>
+                                    <button type="button" class="jsst-composer-mode jsst-composer-mode-internal" data-mode="internal" role="tab" aria-selected="false">
+                                        <?php echo esc_html(__('Internal note', 'js-support-ticket')); ?>
+                                    </button>
+                                <?php } ?>
+                            </div>
+                            <?php if ($jsst_can_reply) { ?>
+                                <div class="jsst-composer-banner jsst-composer-banner-public" role="status" aria-live="polite">
+                                    <?php echo esc_html(__('The customer will see this reply and be notified of it.', 'js-support-ticket')); ?>
+                                </div>
+                            <?php } ?>
+                            <?php if ($jsst_notes_enabled) { ?>
+                                <div class="jsst-composer-banner jsst-composer-banner-internal" role="status" aria-live="polite">
+                                    <strong><?php echo esc_html(__('Internal note — the customer cannot see this.', 'js-support-ticket')); ?></strong>
+                                    <?php echo esc_html(__('It is visible to agents only, and no notification is sent to the customer.', 'js-support-ticket')); ?>
+                                </div>
+                            <?php } ?>
+                            <?php
+                        // A draft the server kept, offered rather than applied.
+                        // (Roadmap 4.0-UX-04)
+                        $jsst_draft_ticketid = (int) jssupportticket::$jsst_data[0]->id;
+                        $jsst_drafts = array();
+                        if (class_exists('JSSTdraft')) {
+                            foreach (array('public', 'internal') as $jsst_dmode) {
+                                $jsst_d = JSSTdraft::get(get_current_user_id(), $jsst_draft_ticketid, $jsst_dmode);
+                                if (!empty($jsst_d['body'])) {
+                                    $jsst_drafts[$jsst_dmode] = $jsst_d;
+                                }
+                            }
+                        }
+                        foreach ($jsst_drafts AS $jsst_dmode => $jsst_d) { ?>
+                            <div class="jsst-draft-restore" data-mode="<?php echo esc_attr($jsst_dmode); ?>" data-body="<?php echo esc_attr($jsst_d['body']); ?>">
+                                <span class="jsst-draft-text"><?php echo esc_html(sprintf(
+                                    /* translators: 1: public reply or internal note, 2: when it was saved */
+                                    __('You have an unsent %1$s from %2$s.', 'js-support-ticket'),
+                                    ($jsst_dmode === 'internal') ? __('internal note', 'js-support-ticket') : __('reply', 'js-support-ticket'),
+                                    date_i18n(jssupportticket::$_config['date_format'] . ' H:i', (int) $jsst_d['saved'])
+                                )); ?></span>
+                                <button type="button" class="button jsst-draft-restore-btn"><?php echo esc_html(__('Restore it', 'js-support-ticket')); ?></button>
+                                <button type="button" class="button jsst-draft-discard-btn"><?php echo esc_html(__('Discard', 'js-support-ticket')); ?></button>
+                            </div>
+                        <?php } ?>
+                        <?php if ($jsst_can_reply) { ?>
+                        <div class="jsst-composer-panel jsst-composer-panel-public">
                         <div id="postreply" class="js-det-tkt-rply-frm">
                             <form class="js-det-tkt-form" method="post" action="<?php echo esc_url(wp_nonce_url(admin_url("admin.php?page=reply&task=savereply"),"save-reply-".jssupportticket::$jsst_data[0]->id)); ?>"  enctype="multipart/form-data">
                                 <div class="js-tkt-det-title"><?php echo esc_html(__('Post Reply', 'js-support-ticket')); ?></div>
@@ -2131,7 +2720,7 @@ $jsst_yesno = array(
                                     </div>
                                 </div>
                                 <?php
-                                if(in_array('cannedresponses', jssupportticket::$_active_addons)){
+                                if(JSSTmergedaddon::featureEnabled('cannedresponses')){
                                     $jsst_cannedresponses = JSSTincluder::getJSModel('cannedresponses')->getPreMadeMessageForCombobox();
                                     ?>
                                     <div class="js-form-wrapper">
@@ -2220,6 +2809,97 @@ $jsst_yesno = array(
                                 <?php echo wp_kses(JSSTformfield::hidden('form_request', 'jssupportticket'), JSST_ALLOWED_TAGS); ?>
                             </form>
                         </div> <!-- end of postreply div -->
+                            </div>
+                            <?php } ?>
+                            <?php if ($jsst_notes_enabled) { ?>
+                                <div class="jsst-composer-panel jsst-composer-panel-internal">
+<form class="js-det-tkt-form" method="post" action="<?php echo esc_url(wp_nonce_url(admin_url("admin.php?page=note&task=savenote"),"save-note-".jssupportticket::$jsst_data[0]->id)); ?>"  enctype="multipart/form-data">
+                                <?php if(in_array('timetracking', jssupportticket::$_active_addons)){ ?>
+                                    <div class="jsst-ticket-detail-timer-wrapper"> <!-- Top Timer Section -->
+                                        <div class="timer-left" >
+                                            <div class="timer-total-time" >
+                                                <?php
+                                                    $jsst_hours = floor(jssupportticket::$jsst_data['time_taken'] / 3600);
+                                                    $jsst_mins = floor(jssupportticket::$jsst_data['time_taken'] / 60);
+                                                    $jsst_mins = floor($jsst_mins % 60);
+                                                    $jsst_secs = floor(jssupportticket::$jsst_data['time_taken'] % 60);
+                                                    echo esc_html(__('Time Taken','js-support-ticket')).':&nbsp;'.sprintf('%02d:%02d:%02d', esc_html($jsst_hours), esc_html($jsst_mins), esc_html($jsst_secs));
+                                                ?>
+                                            </div>
+                                        </div>
+                                        <div class="timer-right" >
+                                            <div class="timer" >
+                                                00:00:00
+                                            </div>
+                                            <div class="timer-buttons" >
+                                                <?php if(in_array('agent', jssupportticket::$_active_addons) && JSSTincluder::getJSModel('userpermissions')->checkPermissionGrantedForTask('Edit Time')){ ?>
+                                                    <span class="timer-button" onclick="showEditTimerPopup()" >
+                                                        <img alt = "<?php echo esc_attr(__('Edit','js-support-ticket')); ?>" class="default-show" alt="<?php echo esc_attr(__('image','js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/ticket-detail/edit-time-1.png"/>
+                                                        <img alt = "<?php echo esc_attr(__('Edit','js-support-ticket')); ?>" class="default-hide" alt="<?php echo esc_attr(__('image','js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/ticket-detail/edit-time.png"/>
+                                                    </span>
+                                                <?php } ?>
+                                                <span class="timer-button cls_1" onclick="changeTimerStatus(1)" >
+                                                    <img alt = "<?php echo esc_attr(__('play','js-support-ticket')); ?>" class="default-show" alt="<?php echo esc_attr(__('image','js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/ticket-detail/play-time-1.png"/>
+                                                    <img alt = "<?php echo esc_attr(__('play','js-support-ticket')); ?>" class="default-hide" alt="<?php echo esc_attr(__('image','js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/ticket-detail/play-time.png"/>
+                                                </span>
+                                                <span class="timer-button cls_2" onclick="changeTimerStatus(2)" >
+                                                    <img alt = "<?php echo esc_attr(__('pause','js-support-ticket')); ?>" class="default-show" alt="<?php echo esc_attr(__('image','js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/ticket-detail/pause-time-1.png"/>
+                                                    <img alt = "<?php echo esc_attr(__('pause','js-support-ticket')); ?>" class="default-hide" alt="<?php echo esc_attr(__('image','js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/ticket-detail/pause-time.png"/>
+                                                </span>
+                                                <span class="timer-button cls_3" onclick="changeTimerStatus(3)" >
+                                                    <img alt = "<?php echo esc_attr(__('stop','js-support-ticket')); ?>" class="default-show" alt="<?php echo esc_attr(__('image','js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/ticket-detail/stop-time-1.png"/>
+                                                    <img alt = "<?php echo esc_attr(__('stop','js-support-ticket')); ?>" class="default-hide" alt="<?php echo esc_attr(__('image','js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/ticket-detail/stop-time.png"/>
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <?php echo wp_kses(JSSTformfield::hidden('timer_time_in_seconds',''), JSST_ALLOWED_TAGS); ?>
+
+                                        <?php echo wp_kses(JSSTformfield::hidden('timer_edit_desc',''), JSST_ALLOWED_TAGS); ?>
+                                    </div>
+                                <?php } ?>
+                                <div class="js-form-wrapper">
+                                    <div class="js-form-title"><?php echo esc_html(__('Note Title', 'js-support-ticket')); ?></div>
+                                    <div class="js-form-value"><?php echo wp_kses(JSSTformfield::text('internalnotetitle', '', array('class' => 'inputbox js-admin-popup-input-field')), JSST_ALLOWED_TAGS) ?></div>
+                                </div>
+                                <div class="js-form-wrapper">
+                                    <div class="js-form-title"><label id="responcemsg" for="responce"><?php echo esc_html(__('Internal Note', 'js-support-ticket')); ?></label></div>
+                                    <div class="js-form-value"><?php wp_editor('', 'internalnote', array('media_buttons' => false)); ?></div>
+                                </div>
+                                <div class="js-form-wrapper">
+                                    <div class="js-form-title"><?php echo esc_html(__('Ticket', 'js-support-ticket')); echo ' '; echo esc_html(__('Status', 'js-support-ticket')); ?></div>
+                                    <div class="js-form-value">
+                                        <div class="jsst-formfield-radio-button-wrap">
+                                            <?php echo wp_kses(JSSTformfield::checkbox('closeonreply', array('1' => esc_html(__('Close On Reply', 'js-support-ticket'))), '', array('class' => 'radiobutton')), JSST_ALLOWED_TAGS); ?>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="js-form-wrapper">
+                                    <div class="js-form-title"><?php echo esc_html(__('Attachments', 'js-support-ticket')); ?></div>
+                                    <div class="js-form-value">
+                                        <div class="tk_attachment_value_wrapperform">
+                                            <span class="tk_attachment_value_text">
+                                                <input type="file" class="inputbox" name="note_attachment" onchange="uploadfile(this, '<?php echo esc_js(jssupportticket::$_config['file_maximum_size']); ?>', '<?php echo esc_js(jssupportticket::$_config['file_extension']); ?>');" size="20" maxlenght='30'/>
+                                                <span class='tk_attachment_remove'></span>
+                                            </span>
+                                        </div>
+                                        <span class="tk_attachments_configform">
+                                            <small><?php esc_html(__('Maximum File Size','js-support-ticket'));
+                                            echo ' (' . esc_html(jssupportticket::$_config['file_maximum_size']); ?>KB)<br><?php esc_html(__('File Extension Type','js-support-ticket'));
+                                            echo ' (' . esc_html(jssupportticket::$_config['file_extension']) . ')'; ?></small>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="js-form-button">
+                                    <?php echo wp_kses(JSSTformfield::submitbutton('postinternalnote', esc_html(__('Post Internal Note','js-support-ticket')), array('class' => 'button js-admin-pop-btn-block', 'onclick' => "return checktinymcebyid('internalnote');")), JSST_ALLOWED_TAGS); ?>
+                                </div>
+                                <?php echo wp_kses(JSSTformfield::hidden('ticketid', jssupportticket::$jsst_data[0]->id), JSST_ALLOWED_TAGS); ?>
+                                <?php echo wp_kses(JSSTformfield::hidden('uid', JSSTincluder::getObjectClass('user')->uid()), JSST_ALLOWED_TAGS); ?>
+                                <?php echo wp_kses(JSSTformfield::hidden('action', 'note_savenote'), JSST_ALLOWED_TAGS); ?>
+                                <?php echo wp_kses(JSSTformfield::hidden('form_request', 'jssupportticket'), JSST_ALLOWED_TAGS); ?>
+                            </form>
+                                </div>
+                            <?php } ?>
+                        </div>
                     </div>
                     <!-- ticket detail right side -->
                     <div class="js-tkt-det-right">
@@ -2231,9 +2911,9 @@ $jsst_yesno = array(
                                 jssupportticket::$jsst_data[0]->status == 6) {
                                 $jsst_stylecolor = jssupportticket::$jsst_data[0]->statuscolour;
                                 $jsst_stylebgcolor = jssupportticket::$jsst_data[0]->statusbgcolour;
-                                $jsst_ticketmessage = esc_html(jssupportticket::$jsst_data[0]->statustitle);
+                                $jsst_ticketmessage = jssupportticket::$jsst_data[0]->statustitle;
                             } else {
-                                $jsst_ticketmessage = esc_html(__('Open', 'js-support-ticket'));
+                                $jsst_ticketmessage = __('Open', 'js-support-ticket');
                                 $jsst_stylecolor = '#FFFFFF';
                                 $jsst_stylebgcolor = '#5bb12f';
                             } ?>
@@ -2275,13 +2955,13 @@ $jsst_yesno = array(
                                         ?>
                                     </span>
                                 </div> */?>
-                                <?php if(in_array('helptopic', jssupportticket::$_active_addons)){ ?>
+                                <?php if(JSSTmergedaddon::featureEnabled('helptopic')){ ?>
                                     <div class="js-tkt-det-info-data">
                                         <span class="js-tkt-det-info-tit">
                                             <?php echo esc_html(jssupportticket::JSST_getVarValue($jsst_field_array['helptopic'])). ' : '; ?>
                                         </span>
                                         <span class="js-tkt-det-info-val">
-                                            <?php if(in_array('helptopic',jssupportticket::$_active_addons)){ ?>
+                                            <?php if(JSSTmergedaddon::featureEnabled('helptopic')){ ?>
                                                 <?php 
                                                     if (!empty(jssupportticket::$jsst_data[0]) && isset(jssupportticket::$jsst_data[0]->helptopic)) {
                                                         echo wp_kses_post(jssupportticket::$jsst_data[0]->helptopic);
@@ -2291,6 +2971,73 @@ $jsst_yesno = array(
                                         </span>
                                     </div>
                                 <?php } ?>
+                                <?php
+                                    // Ticket tags. Read-only for anyone who cannot edit the
+                                    // ticket, editable inline for those who can.
+                                    // (Roadmap 4.0-CORE-17)
+                                    $jsst_tags = isset(jssupportticket::$jsst_data['tags']) ? jssupportticket::$jsst_data['tags'] : array();
+                                    $jsst_cantag = JSSTroles::canChangeTicketState();
+                                    if (!$jsst_cantag && !empty(jssupportticket::$jsst_data['user_staff'])) {
+                                        $jsst_cantag = (JSSTincluder::getJSModel('userpermissions')->checkPermissionGrantedForTask('Edit Ticket') == 1);
+                                    }
+                                    $jsst_tagnames = array();
+                                    foreach ($jsst_tags AS $jsst_tag) {
+                                        $jsst_tagnames[] = $jsst_tag->name;
+                                    }
+                                ?>
+                                <div class="js-tkt-det-info-data jsst-ticket-tags">
+                                    <span class="js-tkt-det-info-tit">
+                                        <?php echo esc_html(__('Tags','js-support-ticket')). ' : '; ?>
+                                    </span>
+                                    <span class="js-tkt-det-info-val jsst-tagbox-val">
+                                        <?php
+                                        /* The tags themselves are the resting state; the field that
+                                           edits them is behind a <details>. Showing both at once
+                                           printed every tag twice — once as a chip and again as
+                                           comma text in the box — which reads as two different
+                                           values rather than one. <details> rather than script so
+                                           it still opens with JavaScript off. */
+                                        if (!$jsst_cantag) { ?>
+                                            <span class="jsst-tag-list">
+                                                <?php if (empty($jsst_tagnames)) { ?>
+                                                    <span class="jsst-tag-empty"><?php echo esc_html(__('None','js-support-ticket')); ?></span>
+                                                <?php } else {
+                                                    foreach ($jsst_tagnames AS $jsst_tagname) { ?>
+                                                        <span class="jsst-tag-chip"><?php echo esc_html($jsst_tagname); ?></span>
+                                                    <?php }
+                                                } ?>
+                                            </span>
+                                        <?php } else { ?>
+                                            <details class="jsst-tagbox">
+                                                <summary class="jsst-tagbox-summary">
+                                                    <span class="jsst-tag-list">
+                                                        <?php foreach ($jsst_tagnames AS $jsst_tagname) { ?>
+                                                            <span class="jsst-tag-chip"><?php echo esc_html($jsst_tagname); ?></span>
+                                                        <?php } ?>
+                                                    </span>
+                                                    <span class="jsst-tag-chip jsst-tag-add"><?php
+                                                        echo esc_html(empty($jsst_tagnames)
+                                                            ? __('Add tags','js-support-ticket')
+                                                            : __('Edit','js-support-ticket'));
+                                                    ?></span>
+                                                </summary>
+                                                <form class="jsst-tag-form" method="post" action="<?php echo esc_url(wp_nonce_url(admin_url("admin.php?page=ticket&task=savetickettags&action=jstask"),"ticket-tags-".jssupportticket::$jsst_data[0]->id)); ?>">
+                                                    <div class="jsst-tag-row">
+                                                        <input type="text" id="jsst-tag-input" name="tickettags" class="inputbox jsst-tag-input" value="<?php echo esc_attr(implode(', ', $jsst_tagnames)); ?>" placeholder="<?php echo esc_attr(__('billing, urgent, refund','js-support-ticket')); ?>" list="jsst-tag-suggestions" autocomplete="off" />
+                                                        <?php echo wp_kses(JSSTformfield::submitbutton('savetickettags', esc_html(__('Save','js-support-ticket')), array('class' => 'button jsst-tag-save')), JSST_ALLOWED_TAGS); ?>
+                                                    </div>
+                                                    <datalist id="jsst-tag-suggestions">
+                                                        <?php foreach (JSSTincluder::getJSModel('tag')->getTagsForCombobox() AS $jsst_known) { ?>
+                                                            <option value="<?php echo esc_attr($jsst_known->text); ?>"></option>
+                                                        <?php } ?>
+                                                    </datalist>
+                                                    <p class="jsst-tag-hint"><?php echo esc_html(__('Separate with commas. Saving replaces the whole list, so keep the ones you want.','js-support-ticket')); ?></p>
+                                                    <?php echo wp_kses(JSSTformfield::hidden('ticketid', jssupportticket::$jsst_data[0]->id), JSST_ALLOWED_TAGS); ?>
+                                                </form>
+                                            </details>
+                                        <?php } ?>
+                                    </span>
+                                </div>
                                 <div class="js-tkt-det-info-data">
                                     <span class="js-tkt-det-info-tit">
                                         <?php echo esc_html(jssupportticket::JSST_getVarValue($jsst_field_array['product'])). ' : '; ?>
@@ -2354,7 +3101,7 @@ $jsst_yesno = array(
                                                 $jsst_printstatus = 0;
                                             }
                                             if ($jsst_printstatus == 1) {
-                                                echo wp_kses_post($jsst_ticketmessage);
+                                                echo esc_html($jsst_ticketmessage);
                                             }
                                         ?>
                                     </span>
@@ -2367,9 +3114,11 @@ $jsst_yesno = array(
                                 <div class="js-tkt-det-hdg-txt">
                                     <?php echo esc_html(__('Status','js-support-ticket')); ?>
                                 </div>
+                                <?php if (JSSTroles::canChangeTicketState()) { ?>
                                 <a title="<?php echo esc_attr(__('Change','js-support-ticket')); ?>" href="#" class="js-tkt-det-hdg-btn" id="chng-status">
                                     <?php echo esc_html(__('Change','js-support-ticket')); ?>
                                 </a>
+                                <?php } ?>
                             </div>
                             <?php
                                 if (!empty(jssupportticket::$jsst_data[0]->status)) { ?>
@@ -2424,9 +3173,11 @@ $jsst_yesno = array(
                                     <!-- Display heading based on field order  -->
                                     <?php echo esc_html(jssupportticket::JSST_getVarValue($jsst_field_array['priority'])); ?>
                                 </div>
+                                <?php if (JSSTroles::canChangeTicketState()) { ?>
                                 <a title="<?php echo esc_attr(__('Change','js-support-ticket')); ?>" href="#" class="js-tkt-det-hdg-btn" id="chng-prority">
                                     <?php echo esc_html(__('Change','js-support-ticket')); ?>
                                 </a>
+                                <?php } ?>
                             </div>
                             
                                 <?php
@@ -2448,7 +3199,7 @@ $jsst_yesno = array(
                         <!-- ticket detail assign to staff -->
                         <?php
                         $jsst_agentflag = in_array('agent', jssupportticket::$_active_addons);
-                        $jsst_departmentflag = in_array('actions', jssupportticket::$_active_addons);
+                        $jsst_departmentflag = JSSTmergedaddon::featureEnabled('actions');
                         if($jsst_agentflag || $jsst_departmentflag){
                             ?>
                             <div class="js-tkt-det-cnt js-tkt-det-tkt-assign">
@@ -2474,9 +3225,11 @@ $jsst_yesno = array(
                                             }
                                             ?>
                                         </div>
+                                        <?php if (JSSTroles::canChangeTicketState()) { ?>
                                         <a title="<?php echo esc_attr(__('Change','js-support-ticket')); ?>" href="#" class="js-tkt-det-hdg-btn" id="asgn-staff">
                                             <?php echo esc_html(__('Change','js-support-ticket')); ?>
                                         </a>
+                                        <?php } ?>
                                     </div>
                                     <?php } ?>
                                     <div class="js-tkt-det-info-wrp">
@@ -2501,9 +3254,11 @@ $jsst_yesno = array(
                                                 <!-- Display heading based on field order  -->
                                                 <?php echo esc_html(jssupportticket::JSST_getVarValue($jsst_field_array['department'])); ?>: <?php echo esc_html(jssupportticket::JSST_getVarValue(jssupportticket::$jsst_data[0]->departmentname)); ?>
                                             </div>
+                                            <?php if (JSSTroles::canChangeTicketState()) { ?>
                                             <a title="<?php echo esc_attr(__('Change','js-support-ticket')); ?>" href="#" class="js-tkt-det-hdg-btn" id="chng-dept">
                                                 <?php echo esc_html(__('Change','js-support-ticket')); ?>
                                             </a>
+                                            <?php } ?>
                                         </div>
                                         <?php } ?>
                                     </div>
@@ -2587,9 +3342,9 @@ $jsst_yesno = array(
                                                             if ($jsst_usertickets->status == 5 || 
                                                                 $jsst_usertickets->status == 3 || 
                                                                 $jsst_usertickets->status == 6) {
-                                                                $jsst_ticketmessage = esc_html($jsst_usertickets->statustitle);
+                                                                $jsst_ticketmessage = $jsst_usertickets->statustitle;
                                                             } else {
-                                                                $jsst_ticketmessage = esc_html(__('Open', 'js-support-ticket'));
+                                                                $jsst_ticketmessage = __('Open', 'js-support-ticket');
                                                             }
                                                             echo esc_html($jsst_ticketmessage);
                                                         ?>

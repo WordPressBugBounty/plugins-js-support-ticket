@@ -86,6 +86,9 @@
                 ?>
                 <?php
                     foreach ($jsst_jssupportticket_addons as $jsst_key1 => $jsst_value1) {
+                        if (JSSTmergedaddon::isMerged(str_replace("js-support-ticket-", "", $jsst_key1))) {
+                            continue;
+                        }
                         $jsst_matched = 0;
                         $jsst_version = "";
                         foreach ($jsst_installed_plugins as $jsst_name => $jsst_value) {

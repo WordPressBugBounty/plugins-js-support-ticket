@@ -378,7 +378,7 @@ class JSSTgdprModel {
             }
 
             // erase internal note data
-            if(in_array('note', jssupportticket::$_active_addons)){
+            if(JSSTmergedaddon::featureEnabled('note')){
                 $jsst_query = jssupportticket::$_db->prepare("SELECT notes.id AS noteid
                             FROM `" . jssupportticket::$_db->prefix . "js_ticket_notes` AS notes
                             WHERE notes.ticketid = %d", $jsst_ticket->id);
@@ -389,7 +389,7 @@ class JSSTgdprModel {
                 }
             }
             //activity log for ticket
-            if(in_array('tickethistory', jssupportticket::$_active_addons)){
+            if(JSSTmergedaddon::featureEnabled('tickethistory')){
                 $jsst_query = jssupportticket::$_db->prepare("DELETE
                         FROM `" . jssupportticket::$_db->prefix . "js_ticket_activity_log`
                         WHERE eventfor = 1 AND referenceid = %d", $jsst_ticket->id);
@@ -452,7 +452,7 @@ function deleteUserData($jsst_uid){
         $jsst_row = JSSTincluder::getJSTable('tickets');
         $jsst_row->delete($jsst_ticket->id);
 
-        if(in_array('note', jssupportticket::$_active_addons)){
+        if(JSSTmergedaddon::featureEnabled('note')){
             // delete internal notes
             JSSTincluder::getJSModel('note')->removeTicketInternalNote($jsst_ticket->id);
         }

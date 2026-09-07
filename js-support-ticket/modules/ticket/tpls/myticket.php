@@ -300,7 +300,7 @@ if (jssupportticket::$_config['offline'] == 2) {
                                 </div>
                                 <?php
                             }
-                            if(!empty($jsst_search_field_array['helptopic']) && in_array('helptopic', jssupportticket::$_active_addons)) { ?>
+                            if(!empty($jsst_search_field_array['helptopic']) && JSSTmergedaddon::featureEnabled('helptopic')) { ?>
                                 <div class="js-col-md-3 js-filter-field-wrp">
                                     <?php echo wp_kses(JSSTformfield::select('jsst-helptopicid', JSSTincluder::getJSModel('helptopic')->getHelpTopicsForCombobox(), isset(jssupportticket::$jsst_data['filter']['helptopicid']) ? jssupportticket::$jsst_data['filter']['helptopicid'] : '', esc_html(__('Select', 'js-support-ticket')).' '.esc_attr($jsst_search_field_array['helptopic'])), JSST_ALLOWED_TAGS); ?>
                                 </div>
@@ -492,7 +492,7 @@ if (jssupportticket::$_config['offline'] == 2) {
                                         <?php
                                         break;
                                     case 'helptopic': 
-                                        if (in_array('helptopic', jssupportticket::$_active_addons)) { ?>
+                                        if (JSSTmergedaddon::featureEnabled('helptopic')) { ?>
                                             <div class="js-col-xs-12 js-col-md-12 js-ticket-padding-xs js-ticket-body-data-elipses">
                                                 <span class="js-ticket-field-title"><?php echo esc_html(jssupportticket::JSST_getVarValue($jsst_field_array['helptopic'])); ?>:&nbsp;</span>
                                                 <span class="js-ticket-value"><?php echo esc_html(jssupportticket::JSST_getVarValue($jsst_ticket->topic)); ?></span>

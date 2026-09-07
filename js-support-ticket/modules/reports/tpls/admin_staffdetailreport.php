@@ -93,7 +93,9 @@ $jsst_link_export = admin_url('admin.php?page=export&task='.esc_attr($jsst_t_nam
     	</div>
         <div id="jsstadmin-head">
             <h1 class="jsstadmin-head-text"><?php echo esc_html(__("Agent Detail Report", 'js-support-ticket')); ?></h1>
-    		<?php if(in_array('export', jssupportticket::$_active_addons)){ ?>
+    		<?php // The ticket export is core from 4.0; these report-summary exports are still
+                    // served by the add-on until 4.0-CORE-10b moves them onto the CSV writer.
+                    if(JSSTmergedaddon::legacyActive('export')){ ?>
 				<a title="<?php echo esc_attr(__('Export Data', 'js-support-ticket')); ?>" id="jsexport-link" class="jsstadmin-add-link button" href="<?php echo esc_url($jsst_link_export); ?>"><img alt = "<?php echo esc_attr(__('Export','js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/export-icon.png" /><?php echo esc_html(__('Export Data', 'js-support-ticket')); ?></a>
 			<?php } ?>
         </div>

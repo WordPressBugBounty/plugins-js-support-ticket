@@ -191,6 +191,10 @@ $jsst_jssupportticket_css .= '
     #jsst-instant-fix-wrapper .jsst-fix-grid {display: grid;grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));gap: 12px;margin-bottom: 15px;width: 100%;}
     #jsst-instant-fix-wrapper .jsst-fix-card {display: flex;background: ' . $jsst_color3 . ';border: 1px solid '. $jsst_color5 .';border-radius: 4px;text-decoration: none;color: inherit;transition: box-shadow 0.2s ease, border-color 0.2s ease;overflow: hidden;}
     #jsst-instant-fix-wrapper .jsst-fix-card:hover {box-shadow: 0 4px 10px rgba(0,0,0,0.08);border-color: ' . $jsst_color1 . ';text-decoration: none;color: inherit;}
+    /* A suggestion with no page of its own is not a link, so it does not
+       take the pointer or the lift that says one is there. */
+    #jsst-instant-fix-wrapper .jsst-fix-card-static {cursor: default;}
+    #jsst-instant-fix-wrapper .jsst-fix-card-static:hover {box-shadow: none;border-color: '. $jsst_color5 .';}
     #jsst-instant-fix-wrapper .jsst-fix-thumb {flex-shrink: 0;width: 80px;min-height: 80px;background-color: #f0f2f5;display: flex;align-items: center;justify-content: center;overflow: hidden;}
     #jsst-instant-fix-wrapper .jsst-fix-thumb img {width: 100%;height: 100%;object-fit: cover;}
     #jsst-instant-fix-wrapper .jsst-fix-content {padding: 10px 12px;flex: 1;display: flex;flex-direction: column;justify-content: center;min-width: 0;}

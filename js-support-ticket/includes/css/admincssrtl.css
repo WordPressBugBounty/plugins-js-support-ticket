@@ -98,6 +98,7 @@ div.js-admin-sorting {float: left;}
 div.js-admin-sorting select.js-admin-sort-select {float: right;}
 div.js-admin-sorting a.js-admin-sort-btn {transform: scaleX(-1);}
 form.js-filter-form .js-form-select-field {background-position: 10px 15px;float: right;}
+form.js-filter-form .js-form-multi-select-field {float: right;}
 #jssupportticketform #userpopup {float: right;}
 
 /* forms */
@@ -150,15 +151,24 @@ div#userpopup .userpopup-search form .userpopup-fields-wrp .userpopup-btn-wrp in
 .js-ticket-table-wrp .js-ticket-table-header .js-ticket-table-header-col {float: right;}
 .js-ticket-table-wrp .js-ticket-table-body .js-ticket-data-row .js-ticket-table-body-col {float: right;}
 .jsst_userpages {text-align: left;}
-.userpopup-search-history-row .userpopup-search-history-col {float: right;border-left: 1px solid #ebecec;border-right: 0;}
-.userpopup-search-history-row .userpopup-search-history-col:last-child {text-align: right;}
+.userpopup-search-history-row .userpopup-search-history-col {float: none;border-left: 0;border-right: 0;}
+.userpopup-search-history-row .userpopup-search-history-col:last-child {text-align: start;}
 .jsst-popup-wrapper .userpopup-top .userpopup-close {float: left;}
 .jsst-popup-wrapper .userpopup-top .internalnotespopup-close {float: left;}
 .jsst-merge-popup-wrapper .js-ticket-wrapper .js-ticket-data .js-ticket-title {margin-right: 0;margin-left: 3px;}
 .jsst-merge-popup-wrapper .js-ticket-wrapper .js-ticket-data1 .js-row .js-col-md-6 {float: right;}
-.jsst-merge-popup-wrapper form .js-form-wrapper .js-merge-form-wrp {float: right;}
-.jsst-merge-popup-wrapper form .js-form-wrapper .js-merge-form-wrp .js-merge-form-value {float: right;margin-right: 0;margin-left: 5px;}
-.jsst-merge-popup-wrapper form .js-form-wrapper .js-merge-form-btn-wrp .js-merge-btn {float: right;margin-right: 0;margin-left: 5px;}
+/* These carry the div. prefix on purpose. admincss.css writes this block as
+   "div.jsst-merge-popup-wrapper form .js-form-wrapper .js-merge-form-wrp",
+   which is (0,3,2); without the prefix the mirror rule is (0,3,1) and loses, so
+   the popup was never actually mirrored in RTL — it kept the LTR floats. With
+   the prefix the two are equal and this sheet, enqueued after admincss, wins.
+   The filter fields and buttons are flex rows now, so the writing direction
+   orders them and the gap replaces the margins; the old float/margin mirroring
+   would fight that and bring back the uneven widths. */
+div.jsst-merge-popup-wrapper form .js-form-wrapper .js-merge-form-wrp {float: right;}
+div.jsst-merge-popup-wrapper form .js-form-wrapper .js-merge-form-btn-wrp {float: right;}
+div.jsst-merge-popup-wrapper form .js-form-wrapper .js-merge-form-wrp .js-merge-form-value {float: none;margin-right: 0;margin-left: 0;}
+div.jsst-merge-popup-wrapper form .js-form-wrapper .js-merge-form-btn-wrp .js-merge-btn {float: none;margin-right: 0;margin-left: 0;}
 .jsst-ticket-detail-timer-wrapper .timer-left {float: right;}
 .jsst-ticket-detail-timer-wrapper .timer-right {float: left;}
 .jsst-ticket-detail-timer-wrapper .timer {float: right;}
@@ -238,10 +248,6 @@ div.jsst-statifacetion-report-wrapper div.jsst-satisfaction-report-bottom div.in
 
 /* add-ons list */
 div.jsst-addon-installer-wrapper div.jsst-addon-installer-left-section-wrap {float: right;}
-div.jsstadmin-add-on-page-wrp div.add-on-page-cnt div.add-on-msg .add-on-msg-txt {float: right;}
-div.jsstadmin-add-on-page-wrp div.add-on-page-cnt div.add-on-msg a.add-on-msg-btn {float: left;}
-div.jsstadmin-add-on-page-wrp div.add-on-page-cnt div.add-on-list div.add-on-item {float: right;}
-div.jsstadmin-add-on-page-wrp div.add-on-page-cnt div.add-on-bundle-pack-list div.add-on-bundle-pack-item {float: right;}
 div.jsstadmin-add-on-page-wrp div.add-on-page-cnt div.add-on-bundle-pack-list div.add-on-bundle-pack-item div.add-on-bundle-pack-price span {margin-left: unset;margin-right: 3px;}
 /* update key */
 div.jsstadmin-addons-list-data .jsstadmin-autoupdte-addons-cardwrp .jsstadmin-autoupdte-addons-card-btn{margin-right: 0;margin-left: 10px;}
@@ -421,7 +427,6 @@ div#jsst-main-wrapper div.jsst-config-topheading span.jsst-config-steps{margin-l
     .jsst-ticket-detail-timer-wrapper .timer-right {float: right;}
 
     /* addon list */
-    .jsstadmin-add-on-page-wrp .add-on-page-cnt .add-on-msg .add-on-msg-btn {float: right;}
 
     /* help page */
     div#jsstadmin-data-wrp .jssticketadmin-help-btm .jssticketadmin-help-btm-wrp .jssticketadmin-help-btm-cnt {margin: 0 0 10px 0 !important; }
@@ -529,3 +534,85 @@ div#jsstadmin-wrapper div.js-other-products-wrp div.js-other-products-detail div
 div#jsstadmin-wrapper div.js-other-products-wrp div.js-other-products-detail div.js-other-products-image div.js-other-products-bottom {}
 div#jsstadmin-wrapper div.js-other-products-wrp div.js-other-products-detail div.js-other-products-image div.js-other-products-bottom div.js-product-bottom-btn span.js-product-view-btn a {margin-right: unset;margin-left: 5px;}
 div#jsstadmin-wrapper div.js-other-products-wrp div.js-other-products-detail div.js-other-products-image div.js-other-products-bottom img {transform: scaleX(-1);}
+
+/* Ticket activity timeline in RTL. (Roadmap 4.0-CORE-01) */
+.jsst-timeline-diff .jsst-timeline-field {margin-right: 0;margin-left: 6px;}
+.jsst-timeline-meta .jsst-timeline-source {margin: 0;}
+
+/* Merging in RTL. (Roadmap 4.0-CORE-04) */
+.jsst-merge-likely-duplicate {border-right: 3px solid #f0a132 !important;border-left: 1px solid #ebecec !important;}
+.jsst-merge-duplicate-badge {margin: 8px 10px 0 0;}
+.jsst-merge-preview-sources, .jsst-merge-summary-changes, .jsst-merge-summary-kept {margin-left: 0;margin-right: 18px;}
+/* The row uses margin-inline-start now, which flips on its own. */
+
+/* Ticket actions in RTL. (Roadmap 4.0-CORE-05) */
+.jsst-bulk-pick {float: right;padding: 10px 10px 0 0;}
+.jsst-action-reason, .jsst-shortcut-hint {float: right;}
+
+/* Ticket tags in RTL. (Roadmap 4.0-CORE-17)
+   The chip row and the editor row are both flex with gap, so direction already
+   orders them; the old per-chip margin would now double the spacing. */
+.jsst-tag-chip {margin: 0;}
+
+/* Core queue capabilities in RTL. (Roadmap 4.0-CORE-18)
+   The tab row and the two control bars are flex, so the page's own direction
+   already orders them right to left; only the float the shared RTL rules put
+   on the tabs has to be taken back off. */
+#jsstadmin-data-wrp div.js-ticket-count div.js-ticket-link {float: none;}
+form.js-filter-form .jsst-queue-search {float: right;}
+form.jsst-queue-saveview {float: right;}
+
+/* Topics upgrade in RTL. (Roadmap 4.0-CORE-20) */
+.jsst-topic-default {margin-left: 0;margin-right: 6px;}
+form.jsstadmin-form div.js-form-wrapper.jsst-default-topic div.jsst-default-topic-choice {float: right;}
+form.jsstadmin-form div.js-form-wrapper.jsst-default-topic div.jsst-default-topic-choice input[type="checkbox"] {float: right;margin: 2px 0 0 5px;}
+
+/* Modern ticket list in RTL. (Roadmap 4.0-UX-02)
+   The toolbar is flex, so the page's own direction orders it; the table's
+   left-alignment and the focused row's edge marker have to be mirrored. */
+table.jsst-queue-table tr td, table.jsst-queue-table tr th {text-align: right;}
+.jsst-kbd-hint {margin-left: 0;margin-right: auto;}
+table.jsst-queue-table tbody tr.jsst-row-focused td:first-child {box-shadow: inset -3px 0 0 #4f46e5, inset 0 0 0 9999px rgba(79, 70, 229, 0.04);}
+
+/* Composer modes in RTL. (Roadmap 4.0-UX-03)
+   The switch itself is flex and needs nothing. Only the banner's accent edge is
+   sided — it moves to the right and hands its 1px back to the left. */
+.jsst-composer-internal .jsst-composer-banner-internal {border-left: 1px solid #f0dcbb;border-right: 4px solid #b45309;}
+
+/* Email health in RTL. (Roadmap 4.0-OPS-01) */
+.jsst-health-card {border-left: 1px solid #ebecec;border-right: 4px solid #ebecec;}
+.jsst-health-card.jsst-health-ok {border-right-color: #14a76c;}
+.jsst-health-card.jsst-health-warn {border-right-color: #b45309;}
+.jsst-health-card.jsst-health-bad {border-right-color: #a02c2c;}
+
+/* Five-minute setup in RTL. (Roadmap 4.0-UX-01) */
+.jsst-setup-step {border-left: 1px solid #ebecec;border-right: 4px solid #d5d7da;}
+.jsst-setup-step-done {border-right-color: #14a76c;}
+.jsst-setup-step-todo {border-right-color: #4f46e5;}
+.jsst-setup-footer-note {margin-left: 0;margin-right: 8px;}
+
+/* Agent Access in RTL. (Roadmap 4.0-SEC-04) */
+.jsst-access-card {border-left: 1px solid #ebecec;border-right: 4px solid #14a76c;}
+.jsst-access-card.jsst-access-warn {border-right-color: #b45309;}
+.jsst-access-alert {border-left: 0;border-right: 4px solid #b45309;}
+
+/* System status in RTL. (Roadmap 4.0-OPS-02) */
+.jsst-status-card {border-left: 1px solid #ebecec;border-right: 4px solid #ebecec;}
+.jsst-status-card.jsst-status-ok {border-right-color: #14a76c;}
+.jsst-status-card.jsst-status-warn {border-right-color: #b45309;}
+.jsst-status-correlation {margin-left: 0;margin-right: 12px;}
+
+/* Listing meta line in RTL. (Roadmap 4.0-UX-02) */
+.jsst-row-field-label::after {margin-right: 0;margin-left: 3px;}
+
+
+/* Configurations page - RTL mirroring (4.0-UX-01) */
+.jsst-config-search-box {margin-right: 0;margin-left: auto;}
+.jsst-config-search-icon {left: auto;right: 14px;}
+.js-support-ticket-configurations input.jsst-config-search-input {padding: 0 40px 0 78px !important;}
+.jsst-config-search-kbd {right: auto;left: 12px;}
+.jsst-config-search-clear {right: auto;left: 10px;}
+.js-support-ticket-configurations .js-form-button.jsst-config-savebar {justify-content: flex-start;text-align: left;}
+.js-support-ticket-configurations .jsst_gen_body .js-ticket-configuration-title {padding: 11px 0 0 20px;}
+.js-support-ticket-configurations .jsst_gen_body .js-ticket-configuration-row.jsst-config-dirty,
+.js-support-ticket-configurations .jsst_gen_body .js-ticket-configuration-row-mail.jsst-config-dirty {box-shadow: inset -3px 0 0 #f59e0b;}

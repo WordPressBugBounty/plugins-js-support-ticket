@@ -639,3 +639,6 @@
 }
 	
 /* end salman */
+
+/* Ticket tags in RTL. (Roadmap 4.0-CORE-17) */
+.jsst-tag-chip {margin: 0 0 4px 4px;}

@@ -91,6 +91,25 @@ $jsst_jssupportticket_js = '
         <a href="#" title="<?php echo esc_attr__('Dashboard', 'js-support-ticket'); ?>"><svg class="jsst_menu-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6A2.25 2.25 0 016 3.75h2.25A2.25 2.25 0 0110.5 6v2.25a2.25 2.25 0 01-2.25 2.25H6a2.25 2.25 0 01-2.25-2.25V6zM3.75 15.75A2.25 2.25 0 016 13.5h2.25a2.25 2.25 0 012.25 2.25V18a2.25 2.25 0 01-2.25 2.25H6A2.25 2.25 0 013.75 18v-2.25zM13.5 6a2.25 2.25 0 012.25-2.25H18A2.25 2.25 0 0120.25 6v2.25A2.25 2.25 0 0118 10.5h-2.25a2.25 2.25 0 01-2.25-2.25V6zM13.5 15.75a2.25 2.25 0 012.25-2.25H18a2.25 2.25 0 012.25 2.25V18A2.25 2.25 0 0118 20.25h-2.25A2.25 2.25 0 0113.5 18v-2.25z" /></svg><span class="jsst_text"><?php echo esc_html__('Dashboard', 'js-support-ticket'); ?></span></a>
         <ul class="jsstadmin-sidebar-submenu treeview-menu">
             <li class="<?php if($jsst_c == 'jssupportticket' && ($jsst_layout == 'controlpanel' || $jsst_layout == '')) echo 'active'; ?>"><a href="<?php echo esc_url(admin_url('admin.php?page=jssupportticket')); ?>" title="<?php echo esc_attr__('Dashboard', 'js-support-ticket'); ?>"><?php echo esc_html__('Dashboard', 'js-support-ticket'); ?></a></li>
+            <?php
+            // Setup. Shown until it is finished or put away, with the count of
+            // what is left, so an unfinished install says so rather than
+            // waiting to be discovered. (Roadmap 4.0-UX-01)
+            if (class_exists('JSSTsetup') && !JSSTsetup::dismissed()) {
+                $jsst_setupprogress = JSSTsetup::progress();
+                if ($jsst_setupprogress['done'] < $jsst_setupprogress['total']) { ?>
+                    <li class="<?php if($jsst_c == 'postinstallation' && $jsst_layout == 'setup') echo 'active'; ?>"><a href="<?php echo esc_url(admin_url('admin.php?page=postinstallation&jstlay=setup')); ?>" title="<?php echo esc_attr__('Setup', 'js-support-ticket'); ?>"><?php echo esc_html__('Setup', 'js-support-ticket'); ?> <span class="jsst-setup-badge"><?php echo esc_html($jsst_setupprogress['total'] - $jsst_setupprogress['done']); ?></span></a></li>
+                <?php }
+            }
+            ?>
+            <?php // Roadmap 4.0-SEC-04 ?>
+            <li class="<?php if($jsst_c == 'jssupportticket' && $jsst_layout == 'agentaccess') echo 'active'; ?>"><a href="<?php echo esc_url(admin_url('admin.php?page=jssupportticket&jstlay=agentaccess')); ?>" title="<?php echo esc_attr__('Agent Access', 'js-support-ticket'); ?>"><?php echo esc_html__('Agent Access', 'js-support-ticket'); ?></a></li>
+            <?php // Roadmap 4.0-OPS-02 ?>
+            <li class="<?php if($jsst_c == 'jssupportticket' && $jsst_layout == 'systemstatus') echo 'active'; ?>"><a href="<?php echo esc_url(admin_url('admin.php?page=jssupportticket&jstlay=systemstatus')); ?>" title="<?php echo esc_attr__('System Status', 'js-support-ticket'); ?>"><?php echo esc_html__('System Status', 'js-support-ticket'); ?></a></li>
+            <?php /* (Roadmap 4.0-PERF-03) */ ?>
+            <li class="<?php if($jsst_c == 'jssupportticket' && $jsst_layout == 'storageengine') echo 'active'; ?>"><a href="<?php echo esc_url(admin_url('admin.php?page=jssupportticket&jstlay=storageengine')); ?>" title="<?php echo esc_attr__('Storage Engine', 'js-support-ticket'); ?>"><?php echo esc_html__('Storage Engine', 'js-support-ticket'); ?></a></li>
+            <?php /* (Roadmap 4.0-OPS-03) */ ?>
+            <li class="<?php if($jsst_c == 'jssupportticket' && $jsst_layout == 'diagnostics') echo 'active'; ?>"><a href="<?php echo esc_url(admin_url('admin.php?page=jssupportticket&jstlay=diagnostics')); ?>" title="<?php echo esc_attr__('When Something Goes Wrong', 'js-support-ticket'); ?>"><?php echo esc_html__('When Something Goes Wrong', 'js-support-ticket'); ?></a></li>
             <li class="<?php if($jsst_c == 'jssupportticket' && $jsst_layout == 'translations') echo 'active'; ?>"><a href="<?php echo esc_url(admin_url('admin.php?page=jssupportticket&jstlay=translations')); ?>" title="<?php echo esc_attr__('Translations', 'js-support-ticket'); ?>"><?php echo esc_html__('Translations', 'js-support-ticket'); ?></a></li>
             <li class="<?php if($jsst_c == 'systemerror') echo 'active'; ?>"><a href="<?php echo esc_url(admin_url('admin.php?page=systemerror')); ?>" title="<?php echo esc_attr__('System Errors', 'js-support-ticket'); ?>"><?php echo esc_html__('System Errors', 'js-support-ticket'); ?></a></li>
             <li class="<?php if($jsst_c == 'slug' && ($jsst_layout == 'slug')) echo 'active'; ?>"><a href="<?php echo esc_url(admin_url('admin.php?page=slug&jstlay=slug')); ?>" title="<?php echo esc_attr__('Slug', 'js-support-ticket'); ?>"><?php echo esc_html__('Slug', 'js-support-ticket'); ?></a></li>
@@ -114,8 +133,15 @@ $jsst_jssupportticket_js = '
             <?php if (!in_array('multiform', jssupportticket::$_active_addons)) { ?>
                 <li class="<?php if($jsst_c == 'fieldordering') echo 'active'; ?>"><a href="<?php echo esc_url(admin_url('admin.php?page=fieldordering&fieldfor=1&formid=' . JSSTincluder::getJSModel('ticket')->getDefaultMultiFormId())); ?>" title="<?php echo esc_attr__('Fields', 'js-support-ticket'); ?>"><?php echo esc_html__('Fields', 'js-support-ticket'); ?></a></li>
             <?php } ?>
-            <?php if (in_array('export', jssupportticket::$_active_addons)) { ?>
-                <li class="<?php if($jsst_c == 'export') echo 'active'; ?>"><a href="<?php echo esc_url(admin_url('admin.php?page=export')); ?>" title="<?php echo esc_attr__('Export', 'js-support-ticket'); ?>"><?php echo esc_html__('Export', 'js-support-ticket'); ?></a></li>
+            <?php if (JSSTmergedaddon::featureEnabled('export')) { ?>
+                <li class="<?php if($jsst_c == 'export' && $jsst_layout != 'csvimport') echo 'active'; ?>"><a href="<?php echo esc_url(admin_url('admin.php?page=export')); ?>" title="<?php echo esc_attr__('Export', 'js-support-ticket'); ?>"><?php echo esc_html__('Export', 'js-support-ticket'); ?></a></li>
+            <?php }
+            /* The other half of the same job, so it sits beside it. Shown on
+               every site: core serves page=export now even where the legacy
+               Export add-on is still active, so the import screen behind this
+               link is core's. (Roadmap 4.0-DATA-02, 4.0-CORE-19) */
+            { ?>
+                <li class="<?php if($jsst_c == 'export' && $jsst_layout == 'csvimport') echo 'active'; ?>"><a href="<?php echo esc_url(admin_url('admin.php?page=export&jstlay=csvimport')); ?>" title="<?php echo esc_attr__('Import from CSV', 'js-support-ticket'); ?>"><?php echo esc_html__('Import from CSV', 'js-support-ticket'); ?></a></li>
             <?php } ?>
             <?php if (in_array('multiform', jssupportticket::$_active_addons)) { ?>
                 <li class="<?php if($jsst_c == 'multiform' || $jsst_c == 'fieldordering') echo 'active'; ?>"><a href="<?php echo esc_url(admin_url('admin.php?page=multiform')); ?>" title="<?php echo esc_attr__('Multiform', 'js-support-ticket'); ?>"><?php echo esc_html__('Multiform', 'js-support-ticket'); ?></a></li>
@@ -180,7 +206,7 @@ $jsst_jssupportticket_js = '
             </ul>
         </li>
     <?php } ?>
-    <?php if(in_array('cannedresponses', jssupportticket::$_active_addons)){ ?>
+    <?php if(JSSTmergedaddon::featureEnabled('cannedresponses')){ ?>
         <li class="treeview <?php if($jsst_c == 'cannedresponses') echo 'active'; ?> menu-item-cannedresponses">
             <a href="#" title="<?php echo esc_attr__('Canned Responses', 'js-support-ticket'); ?>"><svg class="jsst_menu-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M20.25 7.5l-.625 10.632a2.25 2.25 0 01-2.247 2.118H6.622a2.25 2.25 0 01-2.247-2.118L3.75 7.5M10 11.25h4M3.375 7.5h17.25c.621 0 1.125-.504 1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125H3.375c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125z" /></svg><span class="jsst_text"><?php echo esc_html__('Canned Responses', 'js-support-ticket'); ?></span></a>
             <ul class="jsstadmin-sidebar-submenu treeview-menu">
@@ -324,7 +350,22 @@ $jsst_jssupportticket_js = '
             </li>
         </ul>
     </li>
-    
+
+    <?php /* The free copilot, beside the paid wrapper rather than inside it —
+             they are two different things and a site may run either, both or
+             neither. (Roadmap 4.0-AI-01) */ ?>
+    <li class="treeview <?php if($jsst_c == 'copilot') echo 'active'; ?> menu-item-copilot">
+        <a href="#" title="<?php echo esc_attr__('AI Copilot', 'js-support-ticket'); ?>">
+            <svg class="jsst_menu-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 3v2.25m6.364.386l-1.591 1.591M21 12h-2.25m-.386 6.364l-1.591-1.591M12 18.75V21m-4.773-3.227l-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z" />
+            </svg>
+            <span class="jsst_text"><?php echo esc_html__('AI Copilot', 'js-support-ticket'); ?></span>
+        </a>
+        <ul class="jsstadmin-sidebar-submenu treeview-menu">
+            <li class="<?php if($jsst_c == 'copilot') echo 'active'; ?>"><a href="<?php echo esc_url(admin_url('admin.php?page=copilot&jstlay=copilot')); ?>" title="<?php echo esc_attr__('AI Copilot', 'js-support-ticket'); ?>"><?php echo esc_html__('Settings & Usage', 'js-support-ticket'); ?></a></li>
+        </ul>
+    </li>
+
     <li class="treeview <?php if($jsst_c == 'premiumplugin' || $jsst_layout == 'addonstatus') echo 'active'; ?> menu-item-addons">
         <a href="#" title="<?php echo esc_attr__('Addons', 'js-support-ticket'); ?>"><svg class="jsst_menu-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 21v-7.5c0-.938.468-1.822 1.25-2.386l4-3.5a1.875 1.875 0 000-3.228l-4-3.5A1.875 1.875 0 0013.5 3V1.5m-3 19.5v-7.5c0-.938-.468-1.822-1.25-2.386l-4-3.5a1.875 1.875 0 010-3.228l4-3.5A1.875 1.875 0 0110.5 3V1.5" /></svg><span class="jsst_text"><?php echo esc_html__('Addons', 'js-support-ticket'); ?></span></a>
         <ul class="jsstadmin-sidebar-submenu treeview-menu">
@@ -356,9 +397,9 @@ $jsst_jssupportticket_js = '
             <ul class="jsstadmin-sidebar-submenu treeview-menu"></ul>
         </li>
     <?php } ?>
-    <?php if(in_array('helptopic', jssupportticket::$_active_addons)){ ?>
+    <?php if(JSSTmergedaddon::featureEnabled('helptopic')){ ?>
         <li class="treeview <?php if($jsst_c == 'helptopic') echo 'active'; ?>">
-            <a class="" href="<?php echo esc_url('#'); ?>" title="<?php echo esc_attr__('Help Topics', 'js-support-ticket'); ?>" title="<?php echo esc_attr(__('Help Topics' , 'js-support-ticket')); ?>">
+            <a class="" href="<?php echo esc_url('#'); ?>" title="<?php echo esc_attr__('Topics', 'js-support-ticket'); ?>" title="<?php echo esc_attr(__('Topics' , 'js-support-ticket')); ?>">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" 
                     viewBox="0 0 26 24" stroke="currentColor" stroke-width="2" 
                     class="jsst_menu-icon" width="22" height="22">
@@ -369,24 +410,24 @@ $jsst_jssupportticket_js = '
                         l5.448-1.742c1.284.877 2.843 1.378 4.48 1.378
                         5.52 0 10-3.582 10-8z"/>
                 </svg>
-                <span class="jsst_text"><?php echo esc_html(__('Help Topics' , 'js-support-ticket')); ?></span>
+                <span class="jsst_text"><?php echo esc_html(__('Topics' , 'js-support-ticket')); ?></span>
             </a>
             <ul class="jsstadmin-sidebar-submenu treeview-menu">
                 <li class="<?php if($jsst_c == 'helptopic' && ($jsst_layout == '')) echo 'active'; ?>">
-                    <a href="?page=helptopic" title="<?php echo esc_attr(__('Help Topics' , 'js-support-ticket')); ?>">
-                        <?php echo esc_html(__('Help Topics', 'js-support-ticket')); ?>
+                    <a href="?page=helptopic" title="<?php echo esc_attr(__('Topics' , 'js-support-ticket')); ?>">
+                        <?php echo esc_html(__('Topics', 'js-support-ticket')); ?>
                     </a>
                 </li>
                 <li class="<?php if($jsst_c == 'helptopic' && ($jsst_layout == 'addhelptopic')) echo 'active'; ?>">
-                    <a href="?page=helptopic&jstlay=addhelptopic" title="<?php echo esc_attr(__('Add Help Topic' , 'js-support-ticket')); ?>">
-                        <?php echo esc_html(__('Add Help Topic', 'js-support-ticket')); ?>
+                    <a href="?page=helptopic&jstlay=addhelptopic" title="<?php echo esc_attr(__('Add Topic' , 'js-support-ticket')); ?>">
+                        <?php echo esc_html(__('Add Topic', 'js-support-ticket')); ?>
                     </a>
                 </li>
             </ul>
         </li>
     <?php } else { ?>
         <li class="disabled-menu treeview menu-item-helptopic">
-            <a href="javascript:void(0);" title="<?php echo esc_attr__('Help Topic', 'js-support-ticket'); ?>">
+            <a href="javascript:void(0);" title="<?php echo esc_attr__('Topic', 'js-support-ticket'); ?>">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" 
                     viewBox="0 0 26 24" stroke="currentColor" stroke-width="2"  class="jsst_menu-icon" width="22" height="22">
                     <path stroke-linecap="round" stroke-linejoin="round" 
@@ -396,10 +437,10 @@ $jsst_jssupportticket_js = '
                         l5.448-1.742c1.284.877 2.843 1.378 4.48 1.378
                         5.52 0 10-3.582 10-8z"/>
                 </svg>
-                <span class="jsst_text"><?php echo esc_html__('Help Topics', 'js-support-ticket'); ?></span>
+                <span class="jsst_text"><?php echo esc_html__('Topics', 'js-support-ticket'); ?></span>
             </a>
             <ul class="jsstadmin-sidebar-submenu treeview-menu">
-                <li class="<?php if ($jsst_c == 'helptopic' && ($jsst_layout == '')) echo 'active'; ?>"><a href="<?php echo esc_url(admin_url('?page=helptopic&jstlay=helptopic')); ?>" title="<?php echo esc_attr__('Help Topics', 'js-support-ticket'); ?>"><?php echo esc_html__('Help Topics', 'js-support-ticket'); ?></a></li>
+                <li class="<?php if ($jsst_c == 'helptopic' && ($jsst_layout == '')) echo 'active'; ?>"><a href="<?php echo esc_url(admin_url('?page=helptopic&jstlay=helptopic')); ?>" title="<?php echo esc_attr__('Topics', 'js-support-ticket'); ?>"><?php echo esc_html__('Topics', 'js-support-ticket'); ?></a></li>
             </ul>
         </li>
     <?php } ?>
@@ -462,6 +503,8 @@ $jsst_jssupportticket_js = '
         <ul class="jsstadmin-sidebar-submenu treeview-menu">
             <li class="<?php if($jsst_c == 'email' && $jsst_layout == '') echo 'active'; ?>"><a href="<?php echo esc_url(admin_url('admin.php?page=email')); ?>" title="<?php echo esc_attr__('System Emails', 'js-support-ticket'); ?>"><?php echo esc_html__('System Emails', 'js-support-ticket'); ?></a></li>
             <li class="<?php if($jsst_c == 'email' && $jsst_layout == 'addemail') echo 'active'; ?>"><a href="<?php echo esc_url(admin_url('admin.php?page=email&jstlay=addemail')); ?>" title="<?php echo esc_attr__('Add Email', 'js-support-ticket'); ?>"><?php echo esc_html__('Add Email', 'js-support-ticket'); ?></a></li>
+            <?php // Roadmap 4.0-OPS-01 ?>
+            <li class="<?php if($jsst_c == 'email' && $jsst_layout == 'emailhealth') echo 'active'; ?>"><a href="<?php echo esc_url(admin_url('admin.php?page=email&jstlay=emailhealth')); ?>" title="<?php echo esc_attr__('Email Health', 'js-support-ticket'); ?>"><?php echo esc_html__('Email Health', 'js-support-ticket'); ?></a></li>
         </ul>
     </li>
     <li class="treeview <?php if($jsst_c == 'emailtemplate') echo 'active'; ?> menu-item-emailtemplates">
@@ -518,12 +561,15 @@ $jsst_jssupportticket_js = '
             <ul class="jsstadmin-sidebar-submenu treeview-menu"></ul>
         </li>
     <?php } ?>
-    <?php if(in_array('banemail', jssupportticket::$_active_addons)){ ?>
+    <?php if(JSSTmergedaddon::featureEnabled('banemail')){ ?>
         <li class="treeview <?php if($jsst_c == 'banemail' || $jsst_c == 'banemaillog') echo 'active'; ?> menu-item-banemails">
             <a href="#" title="<?php echo esc_attr__('Ban Emails', 'js-support-ticket'); ?>"><svg class="jsst_menu-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636" /></svg><span class="jsst_text"><?php echo esc_html__('Ban Emails', 'js-support-ticket'); ?></span></a>
             <ul class="jsstadmin-sidebar-submenu treeview-menu">
                 <li class="<?php if($jsst_c == 'banemail' && $jsst_layout == '') echo 'active'; ?>"><a href="<?php echo esc_url(admin_url('admin.php?page=banemail')); ?>" title="<?php echo esc_attr__('Banned Emails', 'js-support-ticket'); ?>"><?php echo esc_html__('Banned Emails', 'js-support-ticket'); ?></a></li>
+                <?php // The ban log is a Pro feature. (Roadmap 4.0-CORE-12)
+                if (JSSTmergedaddon::featureEnabled('banemail')) { ?>
                 <li class="<?php if($jsst_c == 'banemaillog') echo 'active'; ?>"><a href="<?php echo esc_url(admin_url('admin.php?page=banemaillog')); ?>" title="<?php echo esc_attr__('Banned Email Log List', 'js-support-ticket'); ?>"><?php echo esc_html__('Banned Email Log List', 'js-support-ticket'); ?></a></li>
+                <?php } ?>
             </ul>
         </li>
     <?php } else { ?>
@@ -580,7 +626,17 @@ $jsst_jssupportticket_js = '
     <li class="treeview <?php if($jsst_c == 'thirdpartyimport') echo 'active'; ?> menu-item-import">
         <a href="#" title="<?php echo esc_attr__('Import Data', 'js-support-ticket'); ?>"><svg class="jsst_menu-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3" /></svg><span class="jsst_text"><?php echo esc_html__('Import Data', 'js-support-ticket'); ?></span></a>
         <ul class="jsstadmin-sidebar-submenu treeview-menu">
-            <li class="<?php if($jsst_c == 'thirdpartyimport' && ($jsst_layout == 'importdata' || $jsst_layout == 'importdata')) echo 'active'; ?>"><a href="<?php echo esc_url(admin_url('admin.php?page=thirdpartyimport&jstlay=importdata')); ?>" title="<?php echo esc_attr__('Import Data', 'js-support-ticket'); ?>"><?php echo esc_html__('Import Data', 'js-support-ticket'); ?></a></li>
+            <?php /* The counted preview and its report. (Roadmap 4.0-DATA-01)
+
+               The original Import Data screen is no longer listed here. It runs
+               the same importers this does and nothing else — no source count
+               beforehand, no journal, no rollback — so offering both was
+               offering the same import twice, once without a way back. The
+               screen itself is untouched and still answers at
+               ?page=thirdpartyimport&jstlay=importdata for anyone who has it
+               bookmarked or is part way through an import on it. */ ?>
+            <li class="<?php if($jsst_c == 'thirdpartyimport' && $jsst_layout == 'migrationpreview') echo 'active'; ?>"><a href="<?php echo esc_url(admin_url('admin.php?page=thirdpartyimport&jstlay=migrationpreview')); ?>" title="<?php echo esc_attr__('Import with Preview', 'js-support-ticket'); ?>"><?php echo esc_html__('Import with Preview', 'js-support-ticket'); ?></a></li>
+            <li class="<?php if($jsst_c == 'thirdpartyimport' && $jsst_layout == 'migrationresult') echo 'active'; ?>"><a href="<?php echo esc_url(admin_url('admin.php?page=thirdpartyimport&jstlay=migrationresult')); ?>" title="<?php echo esc_attr__('Import Report', 'js-support-ticket'); ?>"><?php echo esc_html__('Import Report', 'js-support-ticket'); ?></a></li>
         </ul>
     </li>
     <li class="treeview <?php if($jsst_c == 'gdpr') echo 'active'; ?> menu-item-gdpr">

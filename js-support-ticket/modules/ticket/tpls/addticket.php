@@ -1,8 +1,12 @@
 <?php
    if(!defined('ABSPATH'))
     die('Restricted Access');
-if (JSSTincluder::getObjectClass('user')->isguest() && jssupportticket::$_config['show_captcha_on_visitor_from_ticket'] == 1 && jssupportticket::$_config['captcha_selection'] == 1) {
-    wp_enqueue_script( 'ticket-recaptcha', 'https://www.google.com/recaptcha/api.js', array(), jssupportticket::$_config['productversion'], true );
+// The verification provider registers its own script — Turnstile, hCaptcha,
+// either reCAPTCHA, or the self-hosted check. (Roadmap 4.0-SEC-01)
+$jsst_verification = null;
+if (JSSTincluder::getObjectClass('user')->isguest() && jssupportticket::$_config['show_captcha_on_visitor_from_ticket'] == 1) {
+    $jsst_verification = JSSTincluder::getObjectClass('verification');
+    $jsst_verification->scripts();
 }
 
 // Mirrors getInstantResolveSearch() exactly: an absent row means on, and any
@@ -208,20 +212,28 @@ if (jssupportticket::$_config['offline'] == 2) {
                     if(kind === 'video' || kind === 'video_timestamp') typeLabel = '🎥 Video';
                     else if(kind === 'kb') typeLabel = '📚 Knowledge Base';
                     else if(kind === 'faq') typeLabel = '❓ FAQ';
+                    else if(kind === 'canned') typeLabel = '💬 Saved reply';
 
-                    html += '<a href=\"' + item.url + '\" target=\"_blank\" class=\"jsst-fix-card\" data-type=\"' + item.type + '\" data-id=\"' + item.id + '\" onclick=\"jsstTrackInstantResolveEvent(\'' + item.type + '\', ' + item.id + ', \'click\'); jsstSendInstantResolveEvents();\">';
+                    var source = item.type || item.content_type || '';
+                    var hasUrl = (typeof item.url === 'string' && item.url !== '');
+
+                    if(hasUrl) {
+                        html += '<a href=\"' + item.url + '\" target=\"_blank\" class=\"jsst-fix-card\" data-type=\"' + source + '\" data-id=\"' + item.id + '\" onclick=\"jsstTrackInstantResolveEvent(\'' + source + '\', ' + item.id + ', \'click\'); jsstSendInstantResolveEvents();\">';
+                    } else {
+                        html += '<div class=\"jsst-fix-card jsst-fix-card-static\" data-type=\"' + source + '\" data-id=\"' + item.id + '\">';
+                    }
                     html += thumbHtml;
                     html += '<div class=\"jsst-fix-content\">';
                     html += '<span class=\"jsst-fix-type\">' + typeLabel + ' ' + timestampHtml + '</span>';
                     html += '<h4 class=\"jsst-fix-title\">' + item.title + '</h4>';
                     html += '<p class=\"jsst-fix-excerpt\">' + item.excerpt + '</p>';
                     html += '</div>';
-                    html += '</a>';
+                    html += hasUrl ? '</a>' : '</div>';
                     // Track View (only once per item per session)
-                    var viewKey = item.type + '_' + item.id;
+                    var viewKey = source + '_' + item.id;
                     if (jQuery.inArray(viewKey, jsst_viewed_instantresolve) === -1) {
                         jsst_viewed_instantresolve.push(viewKey);
-                        jsstTrackInstantResolveEvent(item.type, item.id, 'view');
+                        jsstTrackInstantResolveEvent(source, item.id, 'view');
                     }
                 });
                 html += '</div>';
@@ -327,6 +339,38 @@ if (jssupportticket::$_config['offline'] == 2) {
                 document.getElementById('adminTicketform').submit();
             }
             jQuery(document).ready(function ($) {
+                /*
+                 * Roadmap 3.2-CORE-03 - keep submission working behind a page cache.
+                 *
+                 * The form nonce is part of the action URL, so on a cached site
+                 * every visitor gets the same nonce and, once it expires, every
+                 * guest submission is rejected. Ask for a fresh one over
+                 * admin-ajax, which caching plugins do not cache.
+                 *
+                 * This is an enhancement, not a requirement: if the request
+                 * fails, times out, or JavaScript is unavailable, the form still
+                 * posts with the nonce it was rendered with, and the server
+                 * returns the customer to the form with their input intact.
+                 * Only the create-ticket form is refreshed; edits keep theirs.
+                 */
+                var jsstTicketForm = document.getElementById('adminTicketform');
+                var jsstIdField = jsstTicketForm ? jsstTicketForm.querySelector('input[name=\"id\"]') : null;
+                var jsstIsNewTicket = !jsstIdField || jsstIdField.value === '';
+                if (jsstTicketForm && jsstIsNewTicket) {
+                    $.ajax({
+                        url: ajaxurl,
+                        type: 'POST',
+                        timeout: 8000,
+                        data: {action: 'jsticket_ajax', jstmod: 'ticket', task: 'refreshTicketFormNonce'}
+                    }).done(function (nonce) {
+                        nonce = $.trim(String(nonce));
+                        if (!/^[A-Za-z0-9]{6,64}$/.test(nonce)) {
+                            return; // unexpected body (a login wall, an error page) - keep the rendered nonce
+                        }
+                        jsstTicketForm.action = jsstTicketForm.action.replace(/([?&]_wpnonce=)[^&]*/, '$1' + nonce);
+                    });
+                }
+
                 $('.custom_date').datepicker({
                     dateFormat: 'yy-mm-dd'
                 });
@@ -354,11 +398,13 @@ if (jssupportticket::$_config['offline'] == 2) {
             });
             // to get premade and append to isssue summery
             function getHelpTopicByDepartment(val) {
-                jQuery.post(ajaxurl, {action: 'jsticket_ajax', val: val, jstmod: 'department', task: 'getHelpTopicByDepartment', '_wpnonce':'".esc_attr(wp_create_nonce('get-help-topic-by-department')) ."'}, function (data) {
-                    if (data != false) {
+                // context tells the endpoint which form it is answering, so the
+                // select it returns carries this form's classes and placeholder.
+                // The empty state comes back from the server too, so both forms
+                // show the same thing for a department with no topics.
+                jQuery.post(ajaxurl, {action: 'jsticket_ajax', val: val, jstmod: 'department', task: 'getHelpTopicByDepartment', context: 'front', '_wpnonce':'".esc_attr(wp_create_nonce('get-help-topic-by-department')) ."'}, function (data) {
+                    if (data) {
                         jQuery('div#helptopic').html(data);
-                    }else{
-                        jQuery('div#helptopic').html( '". esc_html(__('No help topic found','js-support-ticket')) ."');
                     }
                 });//jquery closed
             }
@@ -546,6 +592,31 @@ if (jssupportticket::$_config['offline'] == 2) {
                 $jsst_eddorderid = '';
                 apply_filters('js_support_ticket_frontend_ticket_form_start',1);
                 $jsst_suggestion_target = in_array('issuesummary', array_column(jssupportticket::$jsst_data['fieldordering'], 'field')) ? 'issuesummary' : 'subject';
+                // The topic this form opens on, and the department and priority it
+                // routes to. Resolved before the field loop because the fields
+                // can be ordered either way round, and because a topic the
+                // *server* chose - the one marked default - has to fill the same
+                // blanks that picking a topic by hand does. Without it the form
+                // shows an empty Priority while saveticket() quietly applies the
+                // topic's own through applyFormRules(), so what the customer sees
+                // is not what gets saved. (Roadmap 4.0-CORE-20)
+                $jsst_topicmodel = JSSTincluder::getJSModel('helptopic');
+                if(isset($jsst_formdata['helptopicid'])) $jsst_formtopicid = $jsst_formdata['helptopicid'];
+                elseif(isset(jssupportticket::$jsst_data[0]->helptopicid)) $jsst_formtopicid = jssupportticket::$jsst_data[0]->helptopicid;
+                elseif(JSSTrequest::getVar('helptopicid','get',0) > 0) $jsst_formtopicid = JSSTrequest::getVar('helptopicid','get');
+                // Guarded because on a site still running the legacy Help Topic
+                // add-on this model is the add-on's and has neither method.
+                // (Roadmap 4.0-CORE-19)
+                elseif(method_exists($jsst_topicmodel, 'getDefaultTopicId') && $jsst_topicmodel->getDefaultTopicId() > 0) $jsst_formtopicid = $jsst_topicmodel->getDefaultTopicId();
+                else $jsst_formtopicid = '';
+                $jsst_topicrouting = method_exists($jsst_topicmodel, 'getRouting') ? $jsst_topicmodel->getRouting($jsst_formtopicid) : array();
+                /* Which of the two the form filled in by itself rather than being
+                   told. Only these may be rewritten when the topic changes; a value
+                   that came from the submitted form, from the ticket being edited or
+                   from the URL is somebody's decision and is left alone. */
+                $jsst_autofilled = array();
+                if(!isset($jsst_formdata['departmentid']) && !isset(jssupportticket::$jsst_data[0]->departmentid) && !(JSSTrequest::getVar('departmentid','get',0) > 0)) $jsst_autofilled[] = 'departmentid';
+                if(!isset($jsst_formdata['priorityid']) && !isset(jssupportticket::$jsst_data[0]->priorityid)) $jsst_autofilled[] = 'priorityid';
                 foreach (jssupportticket::$jsst_data['fieldordering'] AS $jsst_field):
                     $jsst_readonlyclass = $jsst_field->readonly ? " js-form-ticket-readonly " : "";
                     $jsst_visibleclass = "";
@@ -691,6 +762,7 @@ if (jssupportticket::$_config['offline'] == 2) {
                                         if(isset($jsst_formdata['departmentid'])) $jsst_departmentid = $jsst_formdata['departmentid'];
                                         elseif(isset(jssupportticket::$jsst_data[0]->departmentid)) $jsst_departmentid = jssupportticket::$jsst_data[0]->departmentid;
                                         elseif(JSSTrequest::getVar('departmentid','get',0) > 0) $jsst_departmentid = JSSTrequest::getVar('departmentid','get');
+                                        elseif(!empty($jsst_topicrouting['departmentid'])) $jsst_departmentid = $jsst_topicrouting['departmentid'];
                                         else $jsst_departmentid = JSSTincluder::getJSModel('department')->getDefaultDepartmentID();
 										if(isset(jssupportticket::$jsst_data['formid'])){
 											if(in_array('multiform',jssupportticket::$_active_addons)){
@@ -737,7 +809,7 @@ if (jssupportticket::$_config['offline'] == 2) {
                             <?php
                             break;
                         case 'helptopic':
-                            if(!in_array('helptopic', jssupportticket::$_active_addons)){
+                            if(!JSSTmergedaddon::featureEnabled('helptopic')){
                                 break;
                             }
                             if($jsst_fieldcounter % 2 == 0){
@@ -752,16 +824,26 @@ if (jssupportticket::$_config['offline'] == 2) {
                                 <div class="js-ticket-from-field-title"><?php echo esc_html(jssupportticket::JSST_getVarValue($jsst_field->fieldtitle)); ?>&nbsp;<?php if($jsst_field->required == 1) echo '&nbsp;<span style="color:red">*</span>'; ?></div>
                                 <div class="js-ticket-from-field js-ticket-form-field-select" id="helptopic">
                                     <?php
-                                        if(isset($jsst_formdata['helptopicid'])) $jsst_helptopicid = $jsst_formdata['helptopicid'];
-                                        elseif(isset(jssupportticket::$jsst_data[0]->helptopicid)) $jsst_helptopicid = jssupportticket::$jsst_data[0]->helptopicid;
-                                        elseif(JSSTrequest::getVar('helptopicid','get',0) > 0) $jsst_helptopicid = JSSTrequest::getVar('helptopicid','get');
-                                        else $jsst_helptopicid = '';
-                                        if (isset($jsst_departmentid)) {
+                                        // Resolved above the field loop, together with the department
+                                        // and priority this topic routes to. (Roadmap 4.0-CORE-20)
+                                        $jsst_helptopicid = $jsst_formtopicid;
+                                        /* Filter the topic list by a department somebody actually
+                                           chose. A department this form filled in by itself - from
+                                           the default topic's own routing, or the site default -
+                                           must not narrow the list, or the topic that set it becomes
+                                           the only one reachable and every topic belonging to
+                                           another department vanishes. */
+                                        if (isset($jsst_departmentid) && !in_array('departmentid', $jsst_autofilled, true)) {
                                             $jsst_dep_id = $jsst_departmentid;
                                         } else{
                                             $jsst_dep_id = 0;
                                         }
-                                        echo wp_kses(JSSTformfield::select('helptopicid', JSSTincluder::getJSModel('helptopic')->getHelpTopicsForCombobox($jsst_dep_id), $jsst_helptopicid, esc_html(__('Select', 'js-support-ticket')).' '.esc_html($jsst_field->fieldtitle), array('class ' => 'js-ticket-select-field' .esc_attr($jsst_readonlyclass), 'data-validation' => ($jsst_field->required) ? 'required' : '', 'onchange' => $jsst_jsVisibleFunction) + ($jsst_field->readonly ? ['tabindex' => '-1'] : [])), JSST_ALLOWED_TAGS);
+                                        echo wp_kses(JSSTformfield::select('helptopicid', $jsst_topicmodel->getHelpTopicsForCombobox($jsst_dep_id), $jsst_helptopicid, esc_html(__('Select', 'js-support-ticket')).' '.esc_html($jsst_field->fieldtitle), array('class' => 'inputbox js-ticket-select-field' .esc_attr($jsst_readonlyclass), 'data-validation' => ($jsst_field->required) ? 'required' : '', 'onchange' => $jsst_jsVisibleFunction) + ($jsst_field->readonly ? ['tabindex' => '-1'] : [])), JSST_ALLOWED_TAGS);
+                                        // Choosing a topic fills the department and priority the form
+                                        // has not already set. (Roadmap 4.0-CORE-20)
+                                        if (method_exists($jsst_topicmodel, 'formRulesScript')) {
+                                            echo $jsst_topicmodel->formRulesScript($jsst_autofilled); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- built here from wp_json_encode()
+                                        }
                                     ?>
                                 </div>
                                 <?php if(!empty($jsst_field->description)): ?>
@@ -814,6 +896,7 @@ if (jssupportticket::$_config['offline'] == 2) {
                                     <?php
                                         if(isset($jsst_formdata['priorityid'])) $jsst_priorityid = $jsst_formdata['priorityid'];
                                         elseif(isset(jssupportticket::$jsst_data[0]->priorityid)) $jsst_priorityid = jssupportticket::$jsst_data[0]->priorityid;
+                                        elseif(!empty($jsst_topicrouting['priorityid'])) $jsst_priorityid = $jsst_topicrouting['priorityid'];
                                         else $jsst_priorityid = JSSTincluder::getJSModel('priority')->getDefaultPriorityID();
                                         if (!empty($jsst_visibleparams)) {
                                             $jsst_wpnonce = wp_create_nonce("is-field-required-" . $jsst_field->visible_field);
@@ -880,7 +963,10 @@ if (jssupportticket::$_config['offline'] == 2) {
                                     <?php
                                         if(isset($jsst_formdata['message'])) $jsst_message = JSSTincluder::getJSModel('jssupportticket')->getSanitizedEditorData($jsst_formdata['message']);
                                         elseif(isset(jssupportticket::$jsst_data[0]->message)) $jsst_message = jssupportticket::$jsst_data[0]->message;
-                                        else $jsst_message = $jsst_field->defaultvalue;
+                                        // defaultvalue is a nullable column, and an unset default arrives
+                                        // here as null. wp_editor() runs its first argument through
+                                        // stripos(), which is deprecated on null from PHP 8.1.
+                                        else $jsst_message = (string) $jsst_field->defaultvalue;
                                         // $jsst_message = '';
                                         if ($jsst_field->readonly) {
                                             echo wp_kses(JSSTformfield::textarea('jsticket_message', $jsst_message, array('class' => 'inputbox js-form-textarea-field one', 'rows' => 5, 'cols' => 25, 'placeholder'=> jssupportticket::JSST_getVarValue($jsst_field->placeholder), 'readonly'=> 'readonly')), JSST_ALLOWED_TAGS);
@@ -1338,45 +1424,39 @@ if (jssupportticket::$_config['offline'] == 2) {
                             break;
                     }
                 endforeach;
-                // captcha
-                $jsst_google_recaptcha_3 = false;
-                if (JSSTincluder::getObjectClass('user')->isguest()) {
-                    if (jssupportticket::$_config['show_captcha_on_visitor_from_ticket'] == 1) {  ?>
-                        <div class="js-ticket-from-field-wrp js-ticket-from-field-wrp-full-width">
+                // Human verification. The provider decides what, if anything, the
+                // visitor sees. (Roadmap 4.0-SEC-01)
+                $jsst_verification_markup = '';
+                if ($jsst_verification !== null) {
+                    $jsst_verification_markup = $jsst_verification->field('ticket');
+                }
+                if ($jsst_verification_markup != '') { ?>
+                        <div class="js-ticket-from-field-wrp js-ticket-from-field-wrp-full-width<?php echo JSSTverification::hasVisibleField() ? '' : ' jsst-verification-quiet'; ?>">
+                            <?php // The built-in check shows the visitor nothing, so a heading
+                            // here would sit over an empty box. (Roadmap 4.0-SEC-01)
+                            if (JSSTverification::hasVisibleField()) { ?>
                             <div class="js-ticket-from-field-title">
-                                <?php echo esc_html(__('Captcha', 'js-support-ticket')); ?>
+                                <?php echo esc_html(__('Security check', 'js-support-ticket')); ?>
                             </div>
+                            <?php } ?>
                             <div class="js-ticket-from-field">
-                                <?php
-                                if (jssupportticket::$_config['captcha_selection'] == 1) { // Google reCaptcha
-                                    $jsst_error = null;
-                                    if (jssupportticket::$_config['recaptcha_version'] == 1) {
-                                        echo '<div class="g-recaptcha" data-sitekey="'.esc_attr(jssupportticket::$_config['recaptcha_publickey']).'"></div>';
-                                    } else {
-                                        $jsst_google_recaptcha_3 = true;
-                                    }
-                                } else { // own captcha
-                                    // echo esc_attr(jssupportticket::$_captcha['captcha']);
-                                    $jsst_captcha = new JSSTcaptcha;
-                                    echo wp_kses($jsst_captcha->getCaptchaForForm(), JSST_ALLOWED_TAGS);
-                                }
-                                ?>
+                                <?php echo wp_kses($jsst_verification_markup, JSST_ALLOWED_TAGS); ?>
                             </div>
                         </div>
                     <?php
-                    }
                 }
                 ?>
                 <div class="js-ticket-form-btn-wrp">
-                    <?php
-                    if($jsst_google_recaptcha_3 == true && JSSTincluder::getObjectClass('user')->isguest()){ // to handle case of google recpatcha version 3
-                        echo wp_kses(JSSTformfield::button('save', esc_html(__('Submit Ticket', 'js-support-ticket')), array('class' => 'js-ticket-save-button g-recaptcha', 'data-callback' => 'onSubmit', 'data-action' => 'submit', 'data-sitekey' => esc_attr(jssupportticket::$_config['recaptcha_publickey']))), JSST_ALLOWED_TAGS);
-                    } else {
-                        echo wp_kses(JSSTformfield::submitbutton('save', esc_html(__('Submit Ticket', 'js-support-ticket')), array('class' => 'js-ticket-save-button')), JSST_ALLOWED_TAGS);
-                    } ?>
+                    <?php echo wp_kses(JSSTformfield::submitbutton('save', esc_html(__('Submit Ticket', 'js-support-ticket')), array('class' => 'js-ticket-save-button')), JSST_ALLOWED_TAGS); ?>
                     <a href="<?php echo esc_url(jssupportticket::makeUrl(array('jstmod'=>'jssupportticket', 'jstlay'=>'controlpanel')));?>" class="js-ticket-cancel-button"><?php echo esc_html(__('Cancel','js-support-ticket'));?></a>
                 </div>
             </form>
+            <?php
+            // reCAPTCHA v3 has to mint its token as the form is submitted.
+            if ($jsst_verification !== null) {
+                echo $jsst_verification->recaptchaV3Script('adminTicketform', 'jsst_ticket'); // phpcs:ignore WordPress.Security.EscapeOutput -- inline script built from wp_json_encode'd values
+            }
+            ?>
             <?php endif; ?>
         </div>
         <?php

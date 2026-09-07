@@ -183,7 +183,7 @@ class JSSTdepartmentModel {
         if ( in_array('agent',jssupportticket::$_active_addons) && JSSTincluder::getJSModel('agent')->isUserStaff()) {
             $jsst_allowed = JSSTincluder::getJSModel('userpermissions')->checkPermissionGrantedForTask('Delete Department');
             if ($jsst_allowed != true) {
-                JSSTmessage::setMessage(esc_html(__('You are not allowed', 'js-support-ticket')), 'error');
+                JSSTmessage::setMessage(esc_html(__('You are not allowed', 'js-support-ticket')), 'error', 'agent-permissions');
                 return;
             }
         } else if (!current_user_can('manage_options')) { //only admin can change it.
@@ -223,12 +223,20 @@ class JSSTdepartmentModel {
                         $jsst_args[] = $jsst_id;
                     }
 
-                    if(in_array('helptopic', jssupportticket::$_active_addons)){
+                    if(JSSTmergedaddon::featureEnabled('helptopic')){
+                        // Counted straight from the table rather than through
+                        // the module that owns it, so nothing else would have
+                        // created it on a site that never had the legacy addon
+                        // and deleting any department would fail.
+                        // (Roadmap 4.0-CORE-19)
+                        JSSTmergedaddon::ensureSchema('helptopic');
                         $jsst_query .= " + (SELECT COUNT(id) FROM `" . jssupportticket::$_db->prefix . "js_ticket_help_topics` WHERE departmentid = %d) ";
                         $jsst_args[] = $jsst_id;
                     }
 
-                    if(in_array('cannedresponses', jssupportticket::$_active_addons)){
+                    if(JSSTmergedaddon::featureEnabled('cannedresponses')){
+                        // Same shape as the topics count above.
+                        JSSTmergedaddon::ensureSchema('cannedresponses');
                         $jsst_query .= " + (SELECT COUNT(id) FROM `" . jssupportticket::$_db->prefix . "js_ticket_department_message_premade` WHERE departmentid = %d)";
                         $jsst_args[] = $jsst_id;
                     }
@@ -303,7 +311,7 @@ class JSSTdepartmentModel {
         if (! wp_verify_nonce( $jsst_nonce, 'get-help-topic-by-department') ) {
             die( 'Security check Failed' );
         }
-        if(!in_array('helptopic', jssupportticket::$_active_addons)){
+        if(!JSSTmergedaddon::featureEnabled('helptopic')){
             return;
         }
 
@@ -312,17 +320,49 @@ class JSSTdepartmentModel {
             return false;
         }
 
-        $jsst_query = jssupportticket::$_db->prepare("SELECT id, topic AS text FROM `" . jssupportticket::$_db->prefix . "js_ticket_help_topics` WHERE status = 1 AND departmentid = %d ORDER BY ordering ASC", $jsst_departmentid);
-        $jsst_list = jssupportticket::$_db->get_results($jsst_query);
+        // Asks the topic model rather than querying the table directly, so the
+        // select this rebuilds after a department change is the same select the
+        // form rendered — same order, same nesting, same indent. It used to run
+        // its own flat query, which quietly dropped the tree the moment a
+        // customer picked a department. (Roadmap 4.0-CORE-20)
+        $jsst_list = JSSTincluder::getJSModel('helptopic')->getHelpTopicsForCombobox($jsst_departmentid);
 
-        $jsst_query = "SELECT required FROM `" . jssupportticket::$_db->prefix . "js_ticket_fieldsordering` WHERE field='helptopic'";
-        $jsst_isRequired = jssupportticket::$_db->get_var($jsst_query);
+        $jsst_query = "SELECT required, fieldtitle FROM `" . jssupportticket::$_db->prefix . "js_ticket_fieldsordering` WHERE field='helptopic'";
+        $jsst_fieldrow = jssupportticket::$_db->get_row($jsst_query);
+        $jsst_isRequired = isset($jsst_fieldrow->required) ? $jsst_fieldrow->required : 0;
 
-        $jsst_combobox = false;
-        if(!empty($jsst_list)){
-            $jsst_combobox = JSSTformfield::select('helptopicid', $jsst_list, '', esc_html(__('Select Help Topic', 'js-support-ticket')), array('class' => 'inputbox js-ticket-select-field','data-validation'=>($jsst_isRequired ? 'required' : '')));
+        /* One endpoint rebuilds this select for two forms that style their
+           fields differently, so it has to be told which it is answering.
+           Without it the admin form's topic select silently swapped to the
+           front-end class the first time somebody changed department, and
+           looked wrong from then on. Anything that is not the backend asks as
+           a customer would. (Roadmap 4.0-CORE-20) */
+        $jsst_context = JSSTrequest::getVar('context');
+        $jsst_class = ($jsst_context === 'admin')
+            ? 'inputbox js-form-select-field'
+            : 'inputbox js-ticket-select-field';
+
+        /* The same placeholder the form rendered in the first place. This read
+           "Select Topic" while every first render says "Select Help Topic", so
+           the label changed under the customer merely for having picked a
+           department. */
+        $jsst_fieldtitle = (isset($jsst_fieldrow->fieldtitle) && $jsst_fieldrow->fieldtitle !== '')
+            ? jssupportticket::JSST_getVarValue($jsst_fieldrow->fieldtitle)
+            : esc_html(__('Help Topic', 'js-support-ticket'));
+        $jsst_title = esc_html(__('Select', 'js-support-ticket')) . ' ' . esc_html($jsst_fieldtitle);
+
+        /* Both forms render the empty state from here now, rather than each
+           writing its own markup in its own JavaScript - they disagreed, so a
+           department with no topics looked like two different things depending
+           on who was looking at it. */
+        if (empty($jsst_list)) {
+            return '<div class="helptopic-no-rec">' . esc_html(__('No help topic found', 'js-support-ticket')) . '</div>';
         }
-        return $jsst_combobox;
+
+        return JSSTformfield::select('helptopicid', $jsst_list, '', $jsst_title, array(
+            'class'           => $jsst_class,
+            'data-validation' => ($jsst_isRequired ? 'required' : ''),
+        ));
     }
 
     function getPremadeByDepartment() {
@@ -330,7 +370,7 @@ class JSSTdepartmentModel {
         if (! wp_verify_nonce( $jsst_nonce, 'get-premade-by-department') ) {
             die( 'Security check Failed' );
         }
-        if(!in_array('cannedresponses', jssupportticket::$_active_addons)){
+        if(!JSSTmergedaddon::featureEnabled('cannedresponses')){
             return false;
         }
         $jsst_departmentid = JSSTrequest::getVar('val');

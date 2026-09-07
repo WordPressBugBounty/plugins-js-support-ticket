@@ -45,7 +45,7 @@ class JSSTemailModel {
                         $TrackingId = $jsst_ticketRecord->ticketid;
                         $Email = $jsst_ticketRecord->email;
                         $DepName = $jsst_ticketRecord->departmentname;
-                        if(in_array('helptopic', jssupportticket::$_active_addons)){
+                        if(JSSTmergedaddon::featureEnabled('helptopic')){
                             $HelptopicName = $jsst_ticketRecord->topic;
                         }else{
                             $HelptopicName = '';
@@ -202,7 +202,7 @@ class JSSTemailModel {
                         $TrackingId = $jsst_ticketRecord->ticketid;
                         $Email = $jsst_ticketRecord->email;
                         $DepName = $jsst_ticketRecord->departmentname;
-                        if(in_array('helptopic', jssupportticket::$_active_addons)){
+                        if(JSSTmergedaddon::featureEnabled('helptopic')){
                             $HelptopicName = $jsst_ticketRecord->topic;
                         }else{
                             $HelptopicName = '';
@@ -382,7 +382,7 @@ class JSSTemailModel {
                         $Subject = $jsst_ticketRecord->subject;
                         $TrackingId = $jsst_ticketRecord->ticketid;
                         $DepName = $jsst_ticketRecord->departmentname;
-                        if(in_array('helptopic', jssupportticket::$_active_addons)){
+                        if(JSSTmergedaddon::featureEnabled('helptopic')){
                             $HelptopicName = $jsst_ticketRecord->topic;
                         }else{
                             $HelptopicName = '';
@@ -497,7 +497,7 @@ class JSSTemailModel {
                         $Subject = $jsst_ticketRecord->subject;
                         $TrackingId = $jsst_ticketRecord->ticketid;
                         $DepName = $jsst_ticketRecord->departmentname;
-                        if(in_array('helptopic', jssupportticket::$_active_addons)){
+                        if(JSSTmergedaddon::featureEnabled('helptopic')){
                             $HelptopicName = $jsst_ticketRecord->topic;
                         }else{
                             $HelptopicName = '';
@@ -611,7 +611,7 @@ class JSSTemailModel {
                         $Subject = $jsst_ticketRecord->subject;
                         $TrackingId = $jsst_ticketRecord->ticketid;
                         $DepName = $jsst_ticketRecord->departmentname;
-                        if(in_array('helptopic', jssupportticket::$_active_addons)){
+                        if(JSSTmergedaddon::featureEnabled('helptopic')){
                             $HelptopicName = $jsst_ticketRecord->topic;
                         }else{
                             $HelptopicName = '';
@@ -712,7 +712,7 @@ class JSSTemailModel {
                         $Subject = $jsst_ticketRecord->subject;
                         $TrackingId = $jsst_ticketRecord->ticketid;
                         $DepName = $jsst_ticketRecord->departmentname;
-                        if(in_array('helptopic', jssupportticket::$_active_addons)){
+                        if(JSSTmergedaddon::featureEnabled('helptopic')){
                             $HelptopicName = $jsst_ticketRecord->topic;
                         }else{
                             $HelptopicName = '';
@@ -813,7 +813,7 @@ class JSSTemailModel {
                         $jsst_ticketRecord = $this->getRecordByTablenameAndId('js_ticket_tickets', $jsst_id);
                         $TrackingId = $jsst_ticketRecord->ticketid;
                         $DepName = $jsst_ticketRecord->departmentname;
-                        if(in_array('helptopic', jssupportticket::$_active_addons)){
+                        if(JSSTmergedaddon::featureEnabled('helptopic')){
                             $HelptopicName = $jsst_ticketRecord->topic;
                         }else{
                             $HelptopicName = '';
@@ -951,7 +951,7 @@ class JSSTemailModel {
                         $jsst_ticketRecord = $this->getRecordByTablenameAndId('js_ticket_tickets', $jsst_id);
                         $TrackingId = $jsst_ticketRecord->ticketid;
                         $DepName = $jsst_ticketRecord->departmentname;
-                        if(in_array('helptopic', jssupportticket::$_active_addons)){
+                        if(JSSTmergedaddon::featureEnabled('helptopic')){
                             $HelptopicName = $jsst_ticketRecord->topic;
                         }else{
                             $HelptopicName = '';
@@ -1050,7 +1050,7 @@ class JSSTemailModel {
                         $jsst_ticketRecord = $this->getRecordByTablenameAndId('js_ticket_tickets', $jsst_id);
                         $TrackingId = $jsst_ticketRecord->ticketid;
                         $DepName = $jsst_ticketRecord->departmentname;
-                        if(in_array('helptopic', jssupportticket::$_active_addons)){
+                        if(JSSTmergedaddon::featureEnabled('helptopic')){
                             $HelptopicName = $jsst_ticketRecord->topic;
                         }else{
                             $HelptopicName = '';
@@ -1140,7 +1140,7 @@ class JSSTemailModel {
                         $TrackingId = $jsst_ticketRecord->ticketid;
                         $Subject = $jsst_ticketRecord->subject;
                         $DepName = $jsst_ticketRecord->departmentname;
-                        if(in_array('helptopic', jssupportticket::$_active_addons)){
+                        if(JSSTmergedaddon::featureEnabled('helptopic')){
                             $HelptopicName = $jsst_ticketRecord->topic;
                         }else{
                             $HelptopicName = '';
@@ -1238,7 +1238,7 @@ class JSSTemailModel {
                         $TrackingId = $jsst_ticketRecord->ticketid;
                         $Subject = $jsst_ticketRecord->subject;
                         $DepName = $jsst_ticketRecord->departmentname;
-                        if(in_array('helptopic', jssupportticket::$_active_addons)){
+                        if(JSSTmergedaddon::featureEnabled('helptopic')){
                             $HelptopicName = $jsst_ticketRecord->topic;
                         }else{
                             $HelptopicName = '';
@@ -1375,7 +1375,7 @@ class JSSTemailModel {
                         $jsst_ticketRecord = $this->getRecordByTablenameAndId('js_ticket_tickets', $jsst_id);
                         $TrackingId = $jsst_ticketRecord->ticketid;
                         $DepName = $jsst_ticketRecord->departmentname;
-                        if(in_array('helptopic', jssupportticket::$_active_addons)){
+                        if(JSSTmergedaddon::featureEnabled('helptopic')){
                             $HelptopicName = $jsst_ticketRecord->topic;
                         }else{
                             $HelptopicName = '';
@@ -1616,6 +1616,9 @@ class JSSTemailModel {
             case 2: // Ban Email
                 switch ($jsst_action) {
                     case 1: // Ban Email
+                        // The ban notification reads the block list directly.
+                        // (Roadmap 4.0-CORE-19)
+                        JSSTmergedaddon::ensureSchema('banemail');
                         if ($jsst_tablename != null)
                             $jsst_banemailRecord = $this->getRecordByTablenameAndId($jsst_tablename, $jsst_id);
                         else
@@ -1989,9 +1992,23 @@ class JSSTemailModel {
         // $jsst_body = jssupportticketphplib::JSST_str_replace(array("\r\n", "\r", "\n"), "<br/>", $jsst_body);
         // $jsst_body = nl2br($jsst_body);
 		if($jsst_recevierEmail){
-			if(!wp_mail($jsst_recevierEmail, $jsst_subject, $jsst_body, $jsst_headers, $jsst_attachments)){
-				if($GLOBALS['phpmailer']->ErrorInfo)
-					JSSTincluder::getJSModel('systemerror')->addSystemError($GLOBALS['phpmailer']->ErrorInfo);
+			$jsst_sent = wp_mail($jsst_recevierEmail, $jsst_subject, $jsst_body, $jsst_headers, $jsst_attachments);
+			$jsst_mailerror = '';
+			if(!$jsst_sent){
+				// $GLOBALS['phpmailer'] only exists once WordPress has built the
+				// mailer. On a site where something short-circuits wp_mail it may
+				// never be set, and reading ->ErrorInfo off nothing is a fatal on
+				// exactly the sites this screen exists to diagnose.
+				if(isset($GLOBALS['phpmailer']) && !empty($GLOBALS['phpmailer']->ErrorInfo)){
+					$jsst_mailerror = $GLOBALS['phpmailer']->ErrorInfo;
+					JSSTincluder::getJSModel('systemerror')->addSystemError($jsst_mailerror);
+				}
+			}
+			// Remember how it went, so Email Health can answer "did the last one
+			// work?" without an administrator reproducing the failure first.
+			// (Roadmap 4.0-OPS-01)
+			if(class_exists('JSSTmailhealth')){
+				JSSTmailhealth::recordResult($jsst_sent, $jsst_recevierEmail, $jsst_mailerror);
 			}
 		}else{
 			JSSTincluder::getJSModel('systemerror')->addSystemError("No recipient email for ".$jsst_subject);
@@ -2026,6 +2043,21 @@ class JSSTemailModel {
             $jsst_email = $this->getDefaultSenderEmailAndName();
         }
         return $jsst_email;
+    }
+
+    /**
+     * The address notifications are sent as, for the Email Health screen.
+     *
+     * A public reader for the private resolver below: the health screen needs to
+     * know what the site sends as in order to say anything useful about whether
+     * it will be delivered. (Roadmap 4.0-OPS-01)
+     */
+    public function getDefaultSender() {
+        $jsst_sender = $this->getDefaultSenderEmailAndName();
+        return array(
+            'email' => (is_object($jsst_sender) && isset($jsst_sender->email)) ? $jsst_sender->email : '',
+            'name'  => (is_object($jsst_sender) && isset($jsst_sender->name)) ? $jsst_sender->name : '',
+        );
     }
 
     private function getDefaultSenderEmailAndName() {

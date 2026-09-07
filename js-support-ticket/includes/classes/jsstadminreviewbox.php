@@ -1,6 +1,19 @@
 <?php
 if (!defined('ABSPATH'))
     die('Restricted Access');
+
+/*
+ * These classes are loaded from the plugin bootstrap with include_once. That
+ * normally guarantees one declaration, but it deduplicates by resolved path, so
+ * anything that reaches this file by a second spelling of the same path - or any
+ * route that runs the bootstrap twice - redeclares the class and takes the whole
+ * site down with a fatal. Returning early costs nothing and makes the file safe
+ * to include however many times and by whatever route. (Roadmap 4.0-CORE-19)
+ */
+if (class_exists('JSSTjsstadminreviewbox')) {
+    return;
+}
+
 class JSSTreviewbox {
 
     public function __construct() {

@@ -49,7 +49,7 @@ div.jsstadmin-addons-list-wrp div.jsst-admin-addon-status.jsst-admin-addons-stat
 div.jsstadmin-addons-list-wrp div.jsst-admin-addon-status div.jsst-addon-status-image-wrp{float: left;width: 5%;text-align: center;}
 div.jsstadmin-addons-list-wrp div.jsst-admin-addon-status div.jsst-addon-status-image-wrp img{width: 80%;margin: auto;}
 div.jsstadmin-addons-list-wrp div.jsst-admin-addon-status div.jsst-admin-addon-status-title-wrp{float: left;width:calc(45% - 20px);margin:0 10px 0 10px;}
-div.jsstadmin-addons-list-wrp div.jsst-admin-addon-status div.jsst-admin-addon-status-title-wrp h2{float: left;margin: 5px 0 16px 0;width: 100%;color: #4b4b4d;font-size: 18px;white-space: nowrap;overflow: hidden;text-overflow: ellipsis;}
+div.jsstadmin-addons-list-wrp div.jsst-admin-addon-status div.jsst-admin-addon-status-title-wrp h2{float: left;margin: 5px 0 16px 0;width: 100%;color: #4b4b4d;font-size: 18px;font-weight: 600;white-space: nowrap;overflow: hidden;text-overflow: ellipsis;}
 div.jsstadmin-addons-list-wrp div.jsst-admin-addon-status div.jsst-admin-addon-status-title-wrp .jsst-admin-adons-status-Deactive{ font-weight: bold;color: #8c0202;}
 div.jsstadmin-addons-list-wrp div.jsst-admin-addon-status div.jsst-admin-addon-status-addonstatus-wrp .jsst-admin-adons-status-Deactive{ font-weight: bold;}
 div.jsstadmin-addons-list-wrp div.jsst-admin-addon-status div.jsst-admin-addon-status-title-wrp .jsst-admin-adons-status-Active{color:#235700;font-weight: bold;}
@@ -202,7 +202,7 @@ form.jsstadmin-form div.js-form-wrapper .js-form-textarea-field {display: block;
 form.jsstadmin-form div.js-form-wrapper .ticket_overdue_type_text {display: inline-block;width: 100%;margin-top: 5px;color: #6c757d;}
 form.jsstadmin-form div.js-form-wrapper .js-form-date-field {float: left;width: 100%;margin: 0;height: 45px;padding: 10px;box-shadow: unset;color: #6c757d;background: #f8fafc;border: 1px solid #ebecec;}
 form.jsstadmin-form div.js-form-wrapper .js-form-select-field,
-div.js-email-body div.js-form-wrapper div.a-js-form-field select.js-ticket-select-field {float: left;width: 100%;height: 45px;padding: 10px;margin: 0;box-shadow: unset;color: #6c757d;background: #f8fafc;border: 1px solid #ebecec;background-image: url('../images/selecticon.png');background-repeat: no-repeat;background-position: calc(100% - 15px);-webkit-appearance: none;-moz-appearance: none;appearance: none;background-size: 16px;max-width: 100%;}
+div.js-email-body div.js-form-wrapper div.a-js-form-field select.js-ticket-select-field {float: left;width: 100%;height: 45px;padding: 10px;margin: 0;box-shadow: unset;color: #6c757d;background: #f8fafc;border: 1px solid #ebecec;background-image: url('../images/selecticon.png');background-repeat: no-repeat;background-position: calc(100% - 15px);-webkit-appearance: none;-moz-appearance: none;appearance: none;background-size: 16px;max-width: 100%;line-height: 1.5;}
 select.js-form-select-field.jsstadmin-select-link{float: right;height: 40px;margin-top: -2px;border-radius: 0;}
 form.jsstadmin-form div.js-form-wrapper #userpopup {position: absolute;top: 0;right: 0;padding: 12px;text-decoration: none;min-width: 30%;text-align: center;height: 44px;background: #4f46e5;border: 1px solid #4f46e5;color: #fff;}
 form.jsstadmin-form div.js-form-wrapper #userpopup:hover {background: #fff;color: #4f46e5;}
@@ -595,8 +595,8 @@ table#js-support-ticket-table.js-admin-report-tickets tr td a {display: inline-b
 
 /* filter form */
 form.js-filter-form {float: left;width: 100%;padding: 20px;margin-bottom: 20px;background: #fff;border: 1px solid #ebecec;}
-form.js-filter-form .js-form-input-field {float: left;height: 45px;width: 227px;padding: 10px;margin: 3px;box-shadow: unset;color: #6c757d;background: #f8fafc;border: 1px solid #ebecec;}
-form.js-filter-form .js-form-select-field {float: left;height: 45px;width: 227px;padding: 10px;margin: 3px;box-shadow: unset;color: #6c757d;background: #f8fafc;border: 1px solid #ebecec;background-image: url('../images/selecticon.png');background-repeat: no-repeat;background-position: calc(100% - 15px);-webkit-appearance: none;-moz-appearance: none;   appearance: none;background-size: 16px;}
+form.js-filter-form .js-form-input-field {float: left;height: 45px;width: 227px;padding: 10px;margin: 3px;box-shadow: unset;color: #6c757d;background: #f8fafc;border: 1px solid #ebecec;line-height: 1.5;}
+form.js-filter-form .js-form-select-field {float: left;height: 45px;width: 227px;padding: 10px;margin: 3px;box-shadow: unset;color: #6c757d;background: #f8fafc;border: 1px solid #ebecec;background-image: url('../images/selecticon.png');background-repeat: no-repeat;background-position: calc(100% - 15px);-webkit-appearance: none;-moz-appearance: none;   appearance: none;background-size: 16px;line-height: 1.5;}
 form.js-filter-form .js-form-input-field.js-right{float:right;}
 form.js-filter-form .js-form-date-field {float: left;height: 45px;width: 227px;padding: 10px;margin: 3px;box-shadow: unset;color: #6c757d;background: #f8fafc;border: 1px solid #ebecec;}
 form.js-filter-form .js-form-multi-select-field {float: left;height: 45px !important;width: 227px;padding: 10px;margin: 3px;box-shadow: unset;color: #6c757d;background: #f8fafc;border: 1px solid #ebecec;}
@@ -696,7 +696,7 @@ div.js-ticket-wrapper div.js-ticket-toparea div.js-ticket-data div.js-ticket-lef
 div.js-ticket-wrapper div.js-ticket-toparea div.js-ticket-data div.js-ticket-left div.js-ticket-data-row span.js-ticket-user {display: inline-block;color: #6c757d;text-transform: capitalize;}
 div.js-ticket-wrapper div.js-ticket-toparea div.js-ticket-data div.js-ticket-left div.js-ticket-data-row span.js-ticket-closedby-wrp{position: relative;font-size: 14px;}
 div.js-ticket-wrapper div.js-ticket-toparea div.js-ticket-data div.js-ticket-left div.js-ticket-data-row span.js-ticket-closedby{display: inline-block;color: #463e8f;text-transform: capitalize;border: 1px solid #817cb3;padding: 0 8px;cursor:pointer;margin-left: 5px;}
-div.js-ticket-wrapper div.js-ticket-toparea div.js-ticket-data div.js-ticket-left div.js-ticket-data-row span.js-ticket-closed-date{color: #3f3f41;border: 1px solid #e6e5e5;padding: 0 8px;position: absolute;background-image: linear-gradient(to top, #d3d3d2, #f6f6f6);top: 30px;display:none;min-width: 160px;}
+div.js-ticket-wrapper div.js-ticket-toparea div.js-ticket-data div.js-ticket-left div.js-ticket-data-row span.js-ticket-closed-date{color: #3f3f41;border: 1px solid #e6e5e5;padding: 0 8px;position: absolute;background-image: linear-gradient(to top, #d3d3d2, #f6f6f6);top: 30px;display:none;min-width: 160px;z-index: 2147483647;}
 div.js-ticket-wrapper div.js-ticket-toparea div.js-ticket-data div.js-ticket-left div.js-ticket-data-row a.js-ticket-det-link {display: inline-block;width: 95%;height: 17px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;font-size: 15px;text-decoration: underline;text-transform: capitalize;color: #4f46e5;font-weight: 500;}
 div.js-ticket-wrapper div.js-ticket-toparea div.js-ticket-data div.js-ticket-left div.js-ticket-data-row span.js-ticket-title {display: inline-block;margin-right: 5px;color: #23282d;}
 div.js-ticket-wrapper div.js-ticket-toparea div.js-ticket-data div.js-ticket-left div.js-ticket-data-row span.js-ticket-value {display: inline-block;color: #6c757d;}
@@ -789,6 +789,28 @@ div.js-tkt-det-user div.js-tkt-det-user-cnt div.js-tkt-det-user-data .js-tkt-det
 .js-ticket-thread .js-ticket-thread-cnt .js-ticket-thread-data .js-ticket-thread-read-status-detail .js-ticket-thread-read-status-row {float: left;width: 100%;color: #575455;line-height: 1.8;}
 .js-ticket-thread .js-ticket-thread-cnt .js-ticket-thread-data.note-msg {color: #575455;line-height: 1.8;}
 .js-ticket-thread .js-ticket-thread-cnt .js-ticket-thread-data.note-msg p {color: #575455;line-height: 1.8;margin: 10px 0 20px;}
+.js-ticket-thread .js-ticket-thread-cnt .js-ticket-thread-data.note-msg h1,
+.js-ticket-thread .js-ticket-thread-cnt .js-ticket-thread-data.note-msg h2,
+.js-ticket-thread .js-ticket-thread-cnt .js-ticket-thread-data.note-msg h3,
+.js-ticket-thread .js-ticket-thread-cnt .js-ticket-thread-data.note-msg h4,
+.js-ticket-thread .js-ticket-thread-cnt .js-ticket-thread-data.note-msg h5,
+.js-ticket-thread .js-ticket-thread-cnt .js-ticket-thread-data.note-msg h6 {color: #1d2327;font-weight: 600;line-height: 1.3;margin: 1em 0 0.5em;}
+.js-ticket-thread .js-ticket-thread-cnt .js-ticket-thread-data.note-msg h1 {font-size: 2em;}
+.js-ticket-thread .js-ticket-thread-cnt .js-ticket-thread-data.note-msg h2 {font-size: 1.6em;}
+.js-ticket-thread .js-ticket-thread-cnt .js-ticket-thread-data.note-msg h3 {font-size: 1.35em;}
+.js-ticket-thread .js-ticket-thread-cnt .js-ticket-thread-data.note-msg h4 {font-size: 1.15em;}
+.js-ticket-thread .js-ticket-thread-cnt .js-ticket-thread-data.note-msg h5 {font-size: 1em;}
+.js-ticket-thread .js-ticket-thread-cnt .js-ticket-thread-data.note-msg h6 {font-size: 0.9em;}
+.js-ticket-thread .js-ticket-thread-cnt .js-ticket-thread-data.note-msg > h1:first-child,
+.js-ticket-thread .js-ticket-thread-cnt .js-ticket-thread-data.note-msg > h2:first-child,
+.js-ticket-thread .js-ticket-thread-cnt .js-ticket-thread-data.note-msg > h3:first-child,
+.js-ticket-thread .js-ticket-thread-cnt .js-ticket-thread-data.note-msg > h4:first-child,
+.js-ticket-thread .js-ticket-thread-cnt .js-ticket-thread-data.note-msg > h5:first-child,
+.js-ticket-thread .js-ticket-thread-cnt .js-ticket-thread-data.note-msg > h6:first-child {margin-top: 0;}
+.js-ticket-thread .js-ticket-thread-cnt .js-ticket-thread-data.note-msg ul {list-style: disc outside;margin: 1em 0;padding-left: 2.5em;}
+.js-ticket-thread .js-ticket-thread-cnt .js-ticket-thread-data.note-msg ol {list-style: decimal outside;margin: 1em 0;padding-left: 2.5em;}
+.js-ticket-thread .js-ticket-thread-cnt .js-ticket-thread-data.note-msg ul ul {list-style-type: circle;}
+.js-ticket-thread .js-ticket-thread-cnt .js-ticket-thread-data.note-msg li {margin: 0.25em 0;}
 .js-ticket-thread .js-ticket-thread-cnt-btm {float: left;width: 100%;padding: 10px 0 0;border-top: 1px solid #ebecec;}
 .js-ticket-thread .js-ticket-thread-cnt-btm .js-ticket-thread-date {float: left;padding: 10px 0;}
 .js-ticket-thread .js-ticket-thread-actions {float: right;}
@@ -831,7 +853,7 @@ div#jsstadmin-wrapper .jsst-ticket-detail-timer-wrapper .timer-buttons .timer-bu
 .js-det-tkt-form .js-form-wrapper .js-form-title {float: left;width: 100%;margin-bottom: 8px;color: #575455;}
 .js-det-tkt-form .js-form-wrapper .js-form-value {float: left;width: 100%;color: #a6a4a4;}
 .js-det-tkt-form .js-form-wrapper .js-form-value .js-admin-popup-input-field {display: inline-block;width: 100%;height: 45px;padding: 10px;margin: 0;box-shadow: unset;color: #6c757d;background: #f8fafc;border: 1px solid #ebecec;}
-.js-det-tkt-form .js-form-wrapper .js-form-value .js-admin-popup-select-field {display: inline-block;width: 100%;height: 45px;padding: 10px;margin: 0;box-shadow: unset;color: #6c757d;background: #f8fafc;border: 1px solid #ebecec;background-image: url('../images/selecticon.png');background-repeat: no-repeat;background-position: calc(100% - 15px);-webkit-appearance: none;-moz-appearance: none;appearance: none;background-size: 16px;}
+.js-det-tkt-form .js-form-wrapper .js-form-value .js-admin-popup-select-field {display: inline-block;width: 100%;height: 45px;padding: 10px;margin: 0;box-shadow: unset;color: #6c757d;background: #f8fafc;border: 1px solid #ebecec;background-image: url('../images/selecticon.png');background-repeat: no-repeat;background-position: calc(100% - 15px);-webkit-appearance: none;-moz-appearance: none;appearance: none;background-size: 16px;line-height: 1.5;}
 .js-det-tkt-form .js-form-wrapper .tk_attachment_value_wrapperform .tk_attachment_value_text {float: left;width: calc(33.33% - 5px);margin-right: 5px;background: #fff;}
 .js-det-tkt-form .js-form-wrapper .tk_attachments_configform {float: left;width: 100%;}
 .js-det-tkt-form .js-form-wrapper .tk_attachments_addform {display: inline-block;padding: 10px 15px;line-height: inherit;border-radius: 0;height: auto;border: 1px solid #ebecec;color: #fff;background: #4f46e5;cursor: pointer;margin: 10px 0;}
@@ -862,15 +884,41 @@ div#jsstadmin-wrapper .jsst-ticket-detail-timer-wrapper .timer-buttons .timer-bu
 .jsst-popup-wrapper .userpopup-top .userpopup-heading {display: inline-block;color: #fff;font-weight: bold;font-size: 20px;line-height: initial;text-transform: capitalize;}
 .jsst-popup-wrapper .userpopup-top .userpopup-close {float: right;cursor: pointer;}
 .jsst-popup-wrapper .userpopup-top .internalnotespopup-close {float: right;cursor: pointer;}
+.jsst-popup-wrapper .jsst-popup-header {display: flex;align-items: center;justify-content: space-between;gap: 12px;background: #4f46e5;padding: 15px;position: sticky;top: 0;z-index: 2;}
+.jsst-popup-wrapper .jsst-popup-header .popup-header-text {color: #fff;font-weight: bold;font-size: 20px;line-height: 1.3;text-transform: capitalize;}
+.jsst-popup-wrapper .jsst-popup-header .popup-header-close-img {flex: 0 0 auto;width: 24px;height: 24px;cursor: pointer;opacity: .9;background-image: url('data:image/svg+xml,%3csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="%23ffffff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"%3e%3cline x1="18" y1="6" x2="6" y2="18"%3e%3c/line%3e%3cline x1="6" y1="6" x2="18" y2="18"%3e%3c/line%3e%3c/svg%3e');background-repeat: no-repeat;background-position: center;background-size: contain;transition: transform .2s ease, opacity .2s ease;}
+.jsst-popup-wrapper .jsst-popup-header .popup-header-close-img:hover {opacity: 1;transform: rotate(90deg);}
+.jsst-popup-wrapper .jsst-popup-header .popup-header-close-img:focus-visible {outline: 2px solid #fff;outline-offset: 2px;}
 .jsst-popup-wrapper .js-admin-popup-cnt {float: left;width: 100%;padding: 10px;}
 .jsst-popup-wrapper .js-admin-popup-cnt .js-form-button {border-top: 0;padding: 0;}
 .jsst-popup-wrapper .js-admin-popup-cnt .js-form-button .button {background: #4f46e5;color: #fff;border: 1px solid #4f46e5;}
 .jsst-popup-wrapper .js-admin-popup-cnt .js-form-button .button:hover {background: #fff;color: #4f46e5;border-color: #4f46e5;}
 .jsst-popup-wrapper .js-admin-popup-cnt .js-form-button .button.js-admin-pop-btn-block {width: 100%;}
-.userpopup-search-history {float: left;width: 100%;padding: 10px;}
-.userpopup-search-history .userpopup-search-history-row {float: left;width: 100%;border-bottom: 1px solid #ebecec;}
-.userpopup-search-history-row .userpopup-search-history-col {float: left;width: 15%;color: #606262;border-right: 1px solid #ebecec;padding: 10px 0;text-align: center;}
-.userpopup-search-history-row .userpopup-search-history-col:last-child {width: 70%;border: 0;padding: 10px;text-align: left;}
+.srch-hist-popup {display: flex;flex-direction: column;overflow: hidden;border-radius: 8px;box-shadow: 0 18px 44px rgba(15,23,42,0.30);}
+.srch-hist-popup .userpopup-top {flex: 0 0 auto;display: flex;align-items: center;justify-content: space-between;gap: 12px;}
+.srch-hist-popup .userpopup-top .userpopup-heading {float: none;}
+.srch-hist-popup .userpopup-top .userpopup-close {float: none;flex: 0 0 auto;}
+.srch-hist-popup #userpopup-records-wrp {flex: 1 1 auto;min-height: 0;overflow-y: auto;overflow-x: hidden;}
+.srch-hist-popup .userpopup-records-desc {padding: 40px 15px;color: #6a6d6f;text-align: center;}
+.userpopup-search-history {padding: 0;}
+.userpopup-search-history .userpopup-search-history-row {display: grid;grid-template-columns: 118px 96px minmax(0, 1fr);align-items: stretch;border-bottom: 1px solid #eef0f2;}
+.userpopup-search-history .userpopup-search-history-row:last-child {border-bottom: 0;}
+.userpopup-search-history .jsst-timeline-row:hover {background: #f7f8ff;}
+.userpopup-search-history-row .userpopup-search-history-col {width: auto;padding: 12px 14px;border-right: 0;border-inline-end: 1px solid #eef0f2;color: #606262;text-align: start;line-height: 20px;}
+.userpopup-search-history-row .userpopup-search-history-col.date {color: #3c434a;font-weight: 600;font-variant-numeric: tabular-nums;}
+.userpopup-search-history-row .userpopup-search-history-col.time {color: #8a8f8f;font-variant-numeric: tabular-nums;}
+.userpopup-search-history-row .userpopup-search-history-col.msg,
+.userpopup-search-history-row .userpopup-search-history-col:last-child {width: auto;padding: 12px 14px;border-inline-end: 0;text-align: start;}
+/* Sticky inside the list rather than the popup, so it pins under the filters. */
+.userpopup-search-history-row.userpopup-search-history-head {position: sticky;top: 0;z-index: 1;background: #f8fafc;border-bottom: 1px solid #e6e8eb;}
+.userpopup-search-history-row.userpopup-search-history-head .userpopup-search-history-col {padding-block: 9px;color: #6a6d6f;font-size: 12px;font-weight: 600;line-height: 18px;text-transform: uppercase;letter-spacing: .02em;}
+@media screen and (max-width: 600px) {
+    .userpopup-search-history .userpopup-search-history-row {grid-template-columns: 96px minmax(0, 1fr);}
+    .userpopup-search-history-row .userpopup-search-history-col.time {border-inline-end: 0;}
+    .userpopup-search-history-row .userpopup-search-history-col.msg,
+    .userpopup-search-history-row .userpopup-search-history-col:last-child {grid-column: 1 / -1;border-block-start: 1px dashed #eef0f2;}
+    .userpopup-search-history-row.userpopup-search-history-head .userpopup-search-history-col.msg {display: none;}
+}
 .js-ticket-usercredentails-wrp {float: left;width: 100%;padding: 15px;}
 .js-ticket-usercredentails-wrp .js-ticket-usercredentails-credentails-wrp {float: left;width: 100%;padding-bottom: 10px;}
 .js-ticket-usercredentails-credentails-wrp .js-ticket-usercredentails-single {display: inline-block;width: 100%;padding: 15px 10px 20px;background: #fff;border: 1px solid #d1d1d1;margin-bottom: 15px;}
@@ -958,30 +1006,81 @@ div.jsst-merge-popup-wrapper div.js-ticket-wrapper div.js-ticket-data1 .js-ticke
 div.jsst-merge-popup-wrapper .js-tickets-list-wrp {float: left;width: 100%;border-top: 2px solid #d4d4d5;padding-top: 10px;background-color: #f0f0f0;border-bottom: 1px solid #4f46e5;padding-bottom: 25px;}
 div.jsst-merge-popup-wrapper form {display: inline-block;width: 100%;padding: 0 15px;}
 div.jsst-merge-popup-wrapper form .js-form-wrapper {display: inline-block;width: 100%;padding: 5px 10px;}
-div.jsst-merge-popup-wrapper form .js-form-wrapper .js-form-title {display: inline-block;width: 100%;float: left;color: #23282d;margin-bottom: 10px;}
+/* Both section headings — "Search ticket to merge into" here and "Merge Ticket
+   Latest Reply" on the confirm screen — rendered at the same weight and size as
+   the body text around them, so neither read as a heading and each ran into the
+   block beneath it. The markup asks for js-bold-text, but no such class exists
+   anywhere in the plugin's CSS. Giving them real weight and room is the fix. */
+div.jsst-merge-popup-wrapper form .js-form-wrapper .js-form-title,
+div.jsst-merge-popup-wrapper .js-view-last-tickets .js-heading-text {display: block;width: 100%;float: left;color: #23282d;font-size: 15px;font-weight: 600;line-height: 1.4;margin-bottom: 14px;}
 div.jsst-merge-popup-wrapper form .js-form-wrapper .js-merge-form-wrp {float: left;width: 73%;}
-div.jsst-merge-popup-wrapper form .js-form-wrapper .js-merge-form-wrp .js-merge-form-value {float: left;width: calc(100% / 2 - 5px);padding: 0;margin-right: 5px;}
-div.jsst-merge-popup-wrapper form .js-form-wrapper .js-merge-form-wrp .js-merge-form-value .js-merge-field {padding: 15px;border-radius: 0px;border: 1px solid #ebecec;display: inline-block;width: 100%;}
-div.jsst-merge-popup-wrapper form .js-form-wrapper .js-merge-form-btn-wrp {float: left;width: 26%;}
-div.jsst-merge-popup-wrapper form .js-form-wrapper .js-merge-form-btn-wrp .js-merge-btn {float: left;display: inline-block;width: calc(100% / 2 - 5px);margin-right: 5px;}
-div.jsst-merge-popup-wrapper form .js-form-wrapper .js-merge-form-btn-wrp .js-merge-btn .js-merge-button {padding: 10px 0px;width: 100%;margin: 0 5px;height: 100%;box-shadow: unset;}
+/* The filter row used floats with width:calc(100%/2 - 5px) on each wrapper while
+   the button inside it took width:100% plus margin:0 5px — so every button
+   overflowed its own wrapper by 10px and the pair ended up visibly different
+   widths. height:100% on an auto-height parent resolved to nothing, so they did
+   not line up with the fields either. Flex with a gap gives two genuinely equal
+   columns and needs no arithmetic. Scoped to the merge popup. */
+div.jsst-merge-popup-wrapper form .js-form-wrapper .js-merge-form-wrp {display: flex;flex-wrap: wrap;gap: 5px;}
+div.jsst-merge-popup-wrapper form .js-form-wrapper .js-merge-form-wrp .js-merge-form-value {float: none;flex: 1 1 0;min-width: 0;width: auto;padding: 0;margin: 0;}
+div.jsst-merge-popup-wrapper form .js-form-wrapper .js-merge-form-wrp .js-merge-form-value .js-merge-field {box-sizing: border-box;height: 48px;padding: 0 12px;border-radius: 0px;border: 1px solid #ebecec;display: block;width: 100%;}
+div.jsst-merge-popup-wrapper form .js-form-wrapper .js-merge-form-btn-wrp {float: left;width: 26%;display: flex;flex-wrap: wrap;gap: 5px;}
+div.jsst-merge-popup-wrapper form .js-form-wrapper .js-merge-form-btn-wrp .js-merge-btn {float: none;display: flex;flex: 1 1 0;min-width: 0;width: auto;margin: 0;}
+div.jsst-merge-popup-wrapper form .js-form-wrapper .js-merge-form-btn-wrp .js-merge-btn .js-merge-button {box-sizing: border-box;width: 100%;height: 48px;min-height: 48px;margin: 0;padding: 0 8px;line-height: normal;box-shadow: unset;}
 div.jsst-merge-popup-wrapper form .js-form-wrapper .js-merge-form-btn-wrp .js-merge-btn .js-merge-button.js-search {background-color: #4f46e5;color: #fff;}
 div.jsst-merge-popup-wrapper .js-view-tickets {float: left;width: calc(100% - 30px);border-top: 1px solid #4f46e5;margin-top: 23px;margin-left: 15px;margin-right: 15px;padding: 10px 0px 0px 0px;}
-div.jsst-merge-popup-wrapper .js-merge-ticket-overlay {position: relative;}
-div.jsst-merge-popup-wrapper .js-merge-ticket-overlay .js-over-lay {height: 100%;background: rgba(0,0,0,.5);text-align: center;padding: 0;opacity: 0;-webkit-transition: opacity .25s ease;-moz-transition: opacity .25s ease;position: absolute;top: 0;left: 0;width: 100%;}
-div.jsst-merge-popup-wrapper .js-merge-ticket-overlay .js-over-lay .js-merge-btn {position: absolute;top: 50%;left: 50%;transform: translate(-50%,-50%);color: #fff;background-color: #4f46e5;display: inline-block;padding: 5px 10px;min-width: 100px;text-decoration: none;}
-div.jsst-merge-popup-wrapper .js-merge-ticket-overlay:hover .js-over-lay {opacity: 1;}
-div.jsst-merge-popup-wrapper .js-view-last-tickets .js-heading-text {float: left;width: 100%;margin-bottom: 10px;color: #23282d;}
+/* Choosing a ticket to merge used to drop a 50%-black sheet over the whole row
+   on hover and centre the action on top of it — so the moment you pointed at a
+   candidate, the subject and email you were reading to make the decision were
+   the first things hidden. It was also hover-only, which put the action out of
+   reach on touch and for keyboard users.
+   The sheet is gone. The row tints and the action sits at the end of it, always
+   present, so nothing is ever covered and the control is always reachable. */
+div.jsst-merge-popup-wrapper .js-merge-ticket-overlay {position: relative;display: flex;flex-wrap: wrap;align-items: stretch;transition: background-color .15s ease;}
+div.jsst-merge-popup-wrapper .js-merge-ticket-overlay:hover,
+div.jsst-merge-popup-wrapper .js-merge-ticket-overlay:focus-within {background-color: #f5f6ff;}
+div.jsst-merge-popup-wrapper .js-merge-ticket-overlay > div.js-ticket-toparea {flex: 1 1 100%;}
+div.jsst-merge-popup-wrapper .js-merge-ticket-overlay .jsst-merge-pick {order: 1;flex: 1 1 auto;display: flex;align-items: center;margin: 0;padding: 10px 12px;border-top: 1px solid #ebecec;}
+div.jsst-merge-popup-wrapper .js-merge-ticket-overlay .jsst-merge-pick label {font-size: 13px;line-height: 1.3;}
+div.jsst-merge-popup-wrapper .js-merge-ticket-overlay .js-over-lay {order: 2;position: static;display: flex;justify-content: flex-end;align-items: center;flex: 0 0 auto;height: auto;width: auto;background: none;border-top: 1px solid #ebecec;padding: 10px 12px;opacity: 1;}
+div.jsst-merge-popup-wrapper .js-merge-ticket-overlay .js-over-lay .js-merge-btn {position: static;transform: none;box-sizing: border-box;display: inline-flex;align-items: center;justify-content: center;min-height: 34px;min-width: 100px;padding: 6px 14px;border-radius: 6px;background-color: #4f46e5;color: #fff;font-size: 13px;line-height: 1.3;text-align: center;text-decoration: none;transition: background-color .15s ease;}
+div.jsst-merge-popup-wrapper .js-merge-ticket-overlay .js-over-lay .js-merge-btn:hover,
+div.jsst-merge-popup-wrapper .js-merge-ticket-overlay .js-over-lay .js-merge-btn:focus {background-color: #4338ca;color: #fff;text-decoration: none;}
+div.jsst-merge-popup-wrapper .js-merge-ticket-overlay .js-over-lay .js-merge-btn:focus-visible {outline: 2px solid #23282d;outline-offset: 2px;}
+/* Typography for this heading is set with .js-form-title above; the old
+   standalone rule sat later in the file and would win back the 10px margin. */
 div.jsst-merge-popup-wrapper .js-edit-msg-field-wrp {float: left;width: 100%;}
 div.jsst-merge-popup-wrapper .js-edit-msg-field-wrp .js-edit-msg-heading {float: left;width: 100%;color: #23282d;margin-bottom: 10px;}
-div.jsst-merge-popup-wrapper .js-edit-msg-field-wrp textarea.js-merge-field {display: inline-block;min-height: 100px;width: 100%;}
+div.jsst-merge-popup-wrapper .js-edit-msg-field-wrp textarea.js-merge-field {display: inline-block;min-height: 100px;width: 100%;border: 1px solid #ebecec;padding: 10px;}
 div.jsst-merge-popup-wrapper .jsst_userpages {float: left;width: calc(100% - 30px);border-top: 1px solid #4f46e5;margin-top: 23px;margin-left: 15px;margin-right: 15px;padding: 10px 0px 0px 0px;text-align: center;}
 div.jsst-merge-popup-wrapper .jsst_userpages .jsst_userlink {display: inline-block;margin-right: 5px;padding: 5px 15px;border: 1px solid #ebecec;}
 div.jsst-merge-popup-wrapper .jsst_userpages .jsst_userlink.selected {background: #4f46e5;color: #ffffff;}
 div.jsst-merge-popup-wrapper .js-form-button-wrapper {text-align: center;border-top: 1px solid #ebecec;width: 94%;margin: 0px 3%;}
 div.jsst-merge-popup-wrapper .js-form-button-wrapper.js-form-button-wrapper-merge {border-top: none !important;margin-top: 0px !important;display: inline-block;}
-div.jsst-merge-popup-wrapper .js-form-button-wrapper input.button {display: inline-block;float: none;padding: 5px 20px;border-radius: 2px;margin-top: 15px;margin-bottom: 15px;min-width: 100px;}
-div.jsst-merge-popup-wrapper .js-form-button-wrapper input.button.js-merge-cancel-btn {padding: 0px;}
+/* The action pair was uneven too: the shared rule gave 5px 20px padding and the
+   cancel button then overrode it to 0, so Cancel rendered noticeably smaller
+   than Merge. Both get one size. min-height is restated because WordPress's
+   .wp-core-ui .button sets 40px and min-height beats height. */
+div.jsst-merge-popup-wrapper .js-form-button-wrapper input.button {box-sizing: border-box;display: inline-block;float: none;height: 40px;min-height: 40px;padding: 0 20px;border-radius: 6px;margin-top: 15px;margin-bottom: 15px;min-width: 120px;line-height: normal;}
+div.jsst-merge-popup-wrapper .js-form-button-wrapper input.button.js-merge-cancel-btn {padding: 0 20px;}
+div.jsst-merge-popup-wrapper .js-form-button-wrapper input.button.js-merge-save-btn {background: #4f46e5;border-color: #4f46e5;color: #fff;font-weight: 600;}
+div.jsst-merge-popup-wrapper .js-form-button-wrapper input.button.js-merge-save-btn:hover,
+div.jsst-merge-popup-wrapper .js-form-button-wrapper input.button.js-merge-save-btn:focus {background: #4338ca;border-color: #4338ca;color: #fff;}
+div.jsst-merge-popup-wrapper .js-form-button-wrapper input.button.js-merge-save-btn:focus-visible {outline: 2px solid #23282d;outline-offset: 2px;}
+
+/* Below the WordPress admin breakpoint the 73/26 split leaves the two filter
+   buttons in a quarter of a phone screen. Stack instead. */
+@media screen and (max-width: 782px) {
+    div.jsst-merge-popup-wrapper form .js-form-wrapper .js-merge-form-wrp,
+    div.jsst-merge-popup-wrapper form .js-form-wrapper .js-merge-form-btn-wrp {float: none;width: 100%;}
+    div.jsst-merge-popup-wrapper form .js-form-wrapper .js-merge-form-wrp {margin-bottom: 5px;}
+    div.jsst-merge-popup-wrapper .js-merge-ticket-overlay .jsst-merge-pick {flex: 1 1 100%;padding: 10px;}
+    div.jsst-merge-popup-wrapper .js-merge-ticket-overlay .js-over-lay {flex: 1 1 100%;width: 100%;border-top: 0;padding: 0 10px 10px;}
+    div.jsst-merge-popup-wrapper .js-merge-ticket-overlay .js-over-lay .js-merge-btn {width: 100%;}
+}
+@media screen and (max-width: 480px) {
+    div.jsst-merge-popup-wrapper form .js-form-wrapper .js-merge-form-wrp .js-merge-form-value {flex: 1 1 100%;}
+    div.jsst-merge-popup-wrapper .js-form-button-wrapper input.button {width: 100%;margin-top: 8px;margin-bottom: 0;}
+}
 .popup-field-from {float: left;width: 100%;padding: 10px;}
 .popup-field-from .popup-field-wrapper {float: left;width: 100%;margin-bottom: 20px;}
 .popup-field-from .popup-field-wrapper .popup-field-title {float: left;width: 100%;margin-bottom: 8px;color: #23282d;}
@@ -1122,6 +1221,7 @@ div.jsst-merge-popup-wrapper .js-form-button-wrapper input.button.js-merge-cance
    ZYWRAP COPILOT BANNER
    ============================================================ */
 .js-ticket-zywrap-copilot-banner { background: #eff6ff; border: 1px solid #bfdbfe; border-radius: 8px; padding: 16px 20px; margin-bottom: 20px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 1px 3px rgba(0,0,0,0.02); clear: both; }
+.js-ticket-zywrap-copilot-banner .dashicons-edit{ line-height:1.0 !important; }
 .js-ticket-zywrap-copilot-info { display: flex; align-items: center; gap: 15px; }
 .js-ticket-zywrap-copilot-icon-box { background: #2563eb; color: #fff; width: 42px; height: 42px; border-radius: 10px; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 6px -1px rgba(37, 99, 235, 0.3); }
 .js-ticket-zywrap-copilot-icon-box .dashicons { font-size: 22px; width: 22px; height: 22px; }
@@ -1137,6 +1237,7 @@ div.jsst-merge-popup-wrapper .js-form-button-wrapper input.button.js-merge-cance
 .js-ticket-zywrap-playground-grid { display: grid; grid-template-columns: 1fr 1.8fr; gap: 30px; }
 .js-ticket-zywrap-column { display: flex; flex-direction: column; gap: 0; }
 .js-ticket-zywrap-pg-card { background: #fff; border-radius: 8px; border: 1px solid #e2e8f0; box-shadow: 0 1px 3px rgba(0,0,0,0.05); padding: 20px; margin-bottom: 20px; }
+.js-ticket-zywrap-pg-card #pg_run_btn .dashicons.dashicons-controls-play { line-height: 1.0 !important; }
 .js-ticket-zywrap-pg-title { font-size: 16px; font-weight: 600; margin-top: 0; margin-bottom: 15px; color: #0f172a; border-bottom: 1px solid #f1f5f9; padding-bottom: 10px; }
 .js-ticket-zywrap-pg-form-group { margin-bottom: 15px; }
 .js-ticket-zywrap-pg-label { display: block; font-size: 13px; font-weight: 600; margin-bottom: 5px; color: #334155; }
@@ -1710,25 +1811,27 @@ div.color_submit_button_hide{margin-bottom: 20px;display: inline-block;}
 div.jsstadmin-add-on-page-wrapper {padding-right: 0 !important;}
 div.jsstadmin-add-on-page-wrp {float: left;width: 100%;background: #fff;}
 div.jsstadmin-add-on-page-wrp div.add-on-banner {float: left;width: 100%;position: relative;height: 400px;text-align: center;padding: 3% 0;z-index: 0;background: url('../images/add-on-list/top-bg.png') no-repeat;background-size: cover;background-position: bottom left;}
-div.jsstadmin-add-on-page-wrp div.add-on-banner img.add-on-banner-left-img {max-width: 100%;height: 100%;position: absolute;left: 0;}
-div.jsstadmin-add-on-page-wrp div.add-on-banner img.add-on-banner-right-img {max-width: 100%;height: 100%;position: absolute;right: 0;z-index: -1;}
-div.jsstadmin-add-on-page-wrp div.add-on-page-cnt {float: left;width: 100%;padding: 0 30px 30px;}
-div.jsstadmin-add-on-page-wrp div.add-on-page-cnt div.add-on-sec-header {float: left;width: 100%;padding: 50px 0 30px;text-align: center;}
-div.jsstadmin-add-on-page-wrp div.add-on-page-cnt div.add-on-sec-header .add-on-header-tit {line-height: initial;margin: 0 0 15px;}
-div.jsstadmin-add-on-page-wrp div.add-on-page-cnt div.add-on-msg {float: left;width: 100%;padding: 15px;background: #f3f2ff;border-top: 2px solid #645ecf;border-bottom: 2px solid #e0e0e0;}
-div.jsstadmin-add-on-page-wrp div.add-on-page-cnt div.add-on-msg .add-on-msg-txt {float: left;margin: 10px 0;}
-div.jsstadmin-add-on-page-wrp div.add-on-page-cnt div.add-on-msg a.add-on-msg-btn {float: right;padding: 10px 15px;font-size: 16px;font-weight: bold;text-decoration: none !important;text-transform: capitalize;background: #fecb19;color: #444 !important;box-shadow: 0px 2px 0 0 rgba(0,0,0,0.5);}
-div.jsstadmin-add-on-page-wrp div.add-on-page-cnt div.add-on-list {float: left;width: 100%;padding: 15px 0 50px;border-bottom: 2px solid #dbdbda;}
-div.jsstadmin-add-on-page-wrp div.add-on-page-cnt div.add-on-list div.add-on-item {float: left;width: calc(100% / 3 - 20px);margin: 10px;padding: 20px 15px;height: 360px;text-align: center;background: #f1f1f1;border: 1px solid #ebebeb;transition: all .3s ease;}
-div.jsstadmin-add-on-page-wrp div.add-on-page-cnt div.add-on-list div.add-on-item:hover {border-color: #563d67;background: #fff;box-shadow: 0 0 25px 0 rgba(0,0,0,0.5	);}
-div.jsstadmin-add-on-page-wrp div.add-on-page-cnt div.add-on-list div.add-on-item img.add-on-img {margin-bottom: 20px;}
-div.jsstadmin-add-on-page-wrp div.add-on-page-cnt div.add-on-list div.add-on-item div.add-on-name {margin-bottom: 20px;font-size: 16px;color: #23282d;font-weight: bold;}
+div.jsstadmin-add-on-page-wrp div.add-on-banner img.add-on-banner-left-img {max-width: 100%;height: 100% !important;position: absolute;left: 0;}
+div.jsstadmin-add-on-page-wrp div.add-on-banner img.add-on-banner-right-img {max-width: 100%;height: 100%  !important;position: absolute;right: 0;z-index: -1;}
+div.jsstadmin-add-on-page-wrp div.add-on-page-cnt {float: left;width: 100%;padding: 0 30px 40px;box-sizing: border-box;}
+div.jsstadmin-add-on-page-wrp div.add-on-page-cnt div.add-on-sec-header {width: 100%;padding: 50px 0 30px;text-align: center;}
+div.jsstadmin-add-on-page-wrp div.add-on-page-cnt div.add-on-sec-header .add-on-header-tit {font-size: 32px;font-weight: 700;line-height: 1.25;margin: 0 0 15px;color: #23282d;}
+div.jsstadmin-add-on-page-wrp div.add-on-page-cnt div.add-on-sec-header .add-on-header-text {max-width: 760px;margin: 0 auto;color: #6a6d6f;font-size: 15px;line-height: 1.7;}
+div.jsstadmin-add-on-page-wrp div.add-on-page-cnt div.add-on-msg {display: flex;flex-wrap: wrap;align-items: center;justify-content: space-between;gap: 15px;width: 100%;padding: 18px 20px;box-sizing: border-box;background: #f3f2ff;border: 1px solid #ddd9f7;border-top: 3px solid #645ecf;border-radius: 10px;}
+div.jsstadmin-add-on-page-wrp div.add-on-page-cnt div.add-on-msg .add-on-msg-txt {margin: 0;font-size: 17px;font-weight: 700;line-height: 1.5;color: #23282d;}
+div.jsstadmin-add-on-page-wrp div.add-on-page-cnt div.add-on-msg a.add-on-msg-btn {flex: 0 0 auto;padding: 12px 20px;font-size: 15px;font-weight: bold;text-decoration: none !important;text-transform: capitalize;background: #fecb19;color: #444 !important;border-radius: 8px;box-shadow: 0 2px 0 0 rgba(0,0,0,0.25);transition: all .2s ease;}
+div.jsstadmin-add-on-page-wrp div.add-on-page-cnt div.add-on-msg a.add-on-msg-btn:hover {background: #ffd849;box-shadow: 0 1px 0 0 rgba(0,0,0,0.25);}
+div.jsstadmin-add-on-page-wrp div.add-on-page-cnt div.add-on-list {display: grid;grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));gap: 20px;width: 100%;padding: 30px 0 45px;border-bottom: 2px solid #dbdbda;}
+div.jsstadmin-add-on-page-wrp div.add-on-page-cnt div.add-on-list div.add-on-item {display: flex;flex-direction: column;margin: 0;padding: 25px 20px;text-align: center;background: #fafafa;border: 1px solid #e6e6e6;border-radius: 12px;transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease, background .2s ease;}
+div.jsstadmin-add-on-page-wrp div.add-on-page-cnt div.add-on-list div.add-on-item:hover {border-color: #563d67;background: #fff;transform: translateY(-4px);box-shadow: 0 12px 28px 0 rgba(0,0,0,0.14);}
+div.jsstadmin-add-on-page-wrp div.add-on-page-cnt div.add-on-list div.add-on-item img.add-on-img {margin: 0 auto 18px;max-width: 100%;height: auto;}
+div.jsstadmin-add-on-page-wrp div.add-on-page-cnt div.add-on-list div.add-on-item div.add-on-name {margin-bottom: 12px;font-size: 17px;color: #23282d;font-weight: bold;line-height: 1.4;}
 div.jsstadmin-add-on-page-wrp div.add-on-page-cnt div.add-on-list div.add-on-item div.add-on-price {margin-bottom: 25px;font-weight: 700;font-size: 45px;line-height: initial;}
-div.jsstadmin-add-on-page-wrp div.add-on-page-cnt div.add-on-list div.add-on-item div.add-on-txt {line-height: 1.8;min-height: 85px;color: #6a6d6f;font-size: 14px;}
-div.jsstadmin-add-on-page-wrp div.add-on-page-cnt div.add-on-list div.add-on-item a.add-on-btn {display: inline-block;padding: 15px;width: 100%;text-transform: uppercase;text-decoration: none !important;border: 1px solid transparent;color: #fff !important;transition: all .3s ease;font-weight: bold;}
-div.jsstadmin-add-on-page-wrp div.add-on-page-cnt div.add-on-bundle-pack-list {float: left;width: 100%;padding-top: 30px;}
-div.jsstadmin-add-on-page-wrp div.add-on-page-cnt div.add-on-bundle-pack-list div.add-on-bundle-pack-item {float: left;width: calc(100% / 3 - 20px);margin: 10px;text-align: center;border: 1px solid #ebebeb;transition: all .3s ease;}
-div.jsstadmin-add-on-page-wrp div.add-on-page-cnt div.add-on-bundle-pack-list div.add-on-bundle-pack-item:hover {box-shadow: 0 0 25px 0 rgba(0,0,0,0.5	);}
+div.jsstadmin-add-on-page-wrp div.add-on-page-cnt div.add-on-list div.add-on-item div.add-on-txt {flex: 1 1 auto;margin-bottom: 20px;line-height: 1.7;color: #6a6d6f;font-size: 14px;}
+div.jsstadmin-add-on-page-wrp div.add-on-page-cnt div.add-on-list div.add-on-item a.add-on-btn {display: block;margin-top: auto;padding: 14px;width: 100%;box-sizing: border-box;text-transform: uppercase;text-decoration: none !important;border: 1px solid transparent;border-radius: 8px;color: #fff !important;transition: all .3s ease;font-weight: bold;}
+div.jsstadmin-add-on-page-wrp div.add-on-page-cnt div.add-on-bundle-pack-list {display: grid;grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));gap: 20px;width: 100%;padding-top: 40px;}
+div.jsstadmin-add-on-page-wrp div.add-on-page-cnt div.add-on-bundle-pack-list div.add-on-bundle-pack-item {margin: 0;text-align: center;border: 1px solid #e6e6e6;border-radius: 12px;overflow: hidden;transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;}
+div.jsstadmin-add-on-page-wrp div.add-on-page-cnt div.add-on-bundle-pack-list div.add-on-bundle-pack-item:hover {transform: translateY(-4px);box-shadow: 0 12px 28px 0 rgba(0,0,0,0.14);}
 div.jsstadmin-add-on-page-wrp div.add-on-page-cnt div.add-on-bundle-pack-list div.add-on-bundle-pack-item div.add-on-bundle-pack-name {padding: 15px 0;position: relative;z-index: 2;font-weight: 700;font-size: 30px;line-height: 35px;}
 div.jsstadmin-add-on-page-wrp div.add-on-page-cnt div.add-on-bundle-pack-list div.add-on-bundle-pack-item div.add-on-bundle-pack-price {padding: 30px 0;position: relative;z-index: 2;font-weight: 700;font-size: 36px;line-height: initial;}
 div.jsstadmin-add-on-page-wrp div.add-on-page-cnt div.add-on-bundle-pack-list div.add-on-bundle-pack-item div.add-on-bundle-pack-price span {display: inline-block;margin-left: 3px;font-size: 18px;font-weight: normal;vertical-align: middle;}
@@ -1737,6 +1840,26 @@ div.jsstadmin-add-on-page-wrp div.add-on-page-cnt div.add-on-bundle-pack-list di
 div.jsstadmin-add-on-page-wrp div.add-on-page-cnt div.add-on-bundle-pack-list div.add-on-bundle-pack-item ul.add-on-bundle-pack-feat li a {text-transform: capitalize;text-decoration: underline;}
 div.jsstadmin-add-on-page-wrp div.add-on-page-cnt div.add-on-bundle-pack-list div.add-on-bundle-pack-item div.add-on-bundle-pack-btn {padding: 15px;}
 div.jsstadmin-add-on-page-wrp div.add-on-page-cnt div.add-on-bundle-pack-list div.add-on-bundle-pack-item div.add-on-bundle-pack-btn a {display: inline-block;padding: 15px;width: 100%;text-transform: uppercase;font-size: 16px;font-weight: 700;text-decoration: none !important;border: 2px solid ;color: #fff !important;transition: all .3s ease;}
+/* The float layout used to need a width override per breakpoint to change the
+   column count; the grid does that itself, so what is left here is only what a
+   small screen genuinely needs: less gutter, and headings that are not sized for
+   a desktop. */
+@media (max-width: 782px) {
+    div.jsstadmin-add-on-page-wrp div.add-on-page-cnt {padding: 0 20px 30px;}
+    div.jsstadmin-add-on-page-wrp div.add-on-page-cnt div.add-on-sec-header {padding: 30px 0 20px;}
+    div.jsstadmin-add-on-page-wrp div.add-on-page-cnt div.add-on-sec-header .add-on-header-tit {font-size: 26px;}
+    div.jsstadmin-add-on-page-wrp div.add-on-page-cnt div.add-on-list {padding: 20px 0 30px;}
+    div.jsstadmin-add-on-page-wrp div.add-on-page-cnt div.add-on-bundle-pack-list {padding-top: 25px;}
+}
+@media (max-width: 480px) {
+    div.jsstadmin-add-on-page-wrp div.add-on-page-cnt {padding: 0 12px 24px;}
+    div.jsstadmin-add-on-page-wrp div.add-on-page-cnt div.add-on-sec-header .add-on-header-tit {font-size: 22px;}
+    div.jsstadmin-add-on-page-wrp div.add-on-page-cnt div.add-on-msg {padding: 14px;}
+    div.jsstadmin-add-on-page-wrp div.add-on-page-cnt div.add-on-msg .add-on-msg-txt {font-size: 15px;}
+    div.jsstadmin-add-on-page-wrp div.add-on-page-cnt div.add-on-msg a.add-on-msg-btn {width: 100%;text-align: center;}
+    div.jsstadmin-add-on-page-wrp div.add-on-page-cnt div.add-on-list {gap: 14px;}
+    div.jsstadmin-add-on-page-wrp div.add-on-page-cnt div.add-on-bundle-pack-list {gap: 14px;}
+}
 div.jsstadmin-add-on-page-wrp div.add-on-page-cnt div.add-on-bundle-pack-list div.add-on-bundle-pack-item.basic:hover {border-color: #00a859;}
 div.jsstadmin-add-on-page-wrp div.add-on-page-cnt div.add-on-bundle-pack-list div.add-on-bundle-pack-item.basic div.add-on-bundle-pack-name {background: #0f874f;color: #fff;box-shadow: 0 3px 0px rgba(10, 128, 73);}
 div.jsstadmin-add-on-page-wrp div.add-on-page-cnt div.add-on-bundle-pack-list div.add-on-bundle-pack-item.basic div.add-on-bundle-pack-price {background: #00a859;color: #fff;}
@@ -1758,54 +1881,27 @@ div.jsstadmin-add-on-page-wrp div.add-on-page-cnt div.add-on-bundle-pack-list di
 div.jsstadmin-add-on-page-wrp div.add-on-page-cnt div.add-on-list div.add-on-item.announcements .add-on-price {color: #ed3237;}
 div.jsstadmin-add-on-page-wrp div.add-on-page-cnt div.add-on-list div.add-on-item.announcements a.add-on-btn {background: #ed3237;}
 div.jsstadmin-add-on-page-wrp div.add-on-page-cnt div.add-on-list div.add-on-item.announcements a.add-on-btn:hover {border-color: #ed3237;color: #ed3237 !important;background: #fff;}
-div.jsstadmin-add-on-page-wrp div.add-on-page-cnt div.add-on-list div.add-on-item.ban-email .add-on-price {color: #4683e8;}
-div.jsstadmin-add-on-page-wrp div.add-on-page-cnt div.add-on-list div.add-on-item.ban-email a.add-on-btn {background: #4683e8;}
-div.jsstadmin-add-on-page-wrp div.add-on-page-cnt div.add-on-list div.add-on-item.ban-email a.add-on-btn:hover {border-color: #4683e8;color: #4683e8 !important;background: #fff;}
 div.jsstadmin-add-on-page-wrp div.add-on-page-cnt div.add-on-list div.add-on-item.downloads .add-on-price {color: #3b3b3b;}
 div.jsstadmin-add-on-page-wrp div.add-on-page-cnt div.add-on-list div.add-on-item.downloads a.add-on-btn {background: #3b3b3b;}
 div.jsstadmin-add-on-page-wrp div.add-on-page-cnt div.add-on-list div.add-on-item.downloads a.add-on-btn:hover {border-color: #3b3b3b;color: #563d67 !important;background: #fff;}
-div.jsstadmin-add-on-page-wrp div.add-on-page-cnt div.add-on-list div.add-on-item.export .add-on-price {color: #ff6000;}
-div.jsstadmin-add-on-page-wrp div.add-on-page-cnt div.add-on-list div.add-on-item.export a.add-on-btn {background: #ff6000;}
-div.jsstadmin-add-on-page-wrp div.add-on-page-cnt div.add-on-list div.add-on-item.export a.add-on-btn:hover {border-color: #ff6000;color: #ff6000 !important;background: #fff;}
 div.jsstadmin-add-on-page-wrp div.add-on-page-cnt div.add-on-list div.add-on-item.faq .add-on-price {color: #337abf;}
 div.jsstadmin-add-on-page-wrp div.add-on-page-cnt div.add-on-list div.add-on-item.faq a.add-on-btn {background: #337abf;}
 div.jsstadmin-add-on-page-wrp div.add-on-page-cnt div.add-on-list div.add-on-item.faq a.add-on-btn:hover {border-color: #337abf;color: #337abf !important;background: #fff;}
 div.jsstadmin-add-on-page-wrp div.add-on-page-cnt div.add-on-list div.add-on-item.feedback .add-on-price {color: #c52a2f;}
 div.jsstadmin-add-on-page-wrp div.add-on-page-cnt div.add-on-list div.add-on-item.feedback a.add-on-btn {background: #c52a2f;}
 div.jsstadmin-add-on-page-wrp div.add-on-page-cnt div.add-on-list div.add-on-item.feedback a.add-on-btn:hover {border-color: #c52a2f;color: #c52a2f !important;background: #fff;}
-div.jsstadmin-add-on-page-wrp div.add-on-page-cnt div.add-on-list div.add-on-item.help-topic .add-on-price {color: #4f4670;}
-div.jsstadmin-add-on-page-wrp div.add-on-page-cnt div.add-on-list div.add-on-item.help-topic a.add-on-btn {background: #4f4670;}
-div.jsstadmin-add-on-page-wrp div.add-on-page-cnt div.add-on-list div.add-on-item.help-topic a.add-on-btn:hover {border-color: #4f4670;color: #4f4670 !important;background: #fff;}
-div.jsstadmin-add-on-page-wrp div.add-on-page-cnt div.add-on-list div.add-on-item.private-note .add-on-price {color: #00a859;}
-div.jsstadmin-add-on-page-wrp div.add-on-page-cnt div.add-on-list div.add-on-item.private-note a.add-on-btn {background: #00a859;}
-div.jsstadmin-add-on-page-wrp div.add-on-page-cnt div.add-on-list div.add-on-item.private-note a.add-on-btn:hover {border-color: #00a859;color: #00a859 !important;background: #fff;}
 div.jsstadmin-add-on-page-wrp div.add-on-page-cnt div.add-on-list div.add-on-item.kb .add-on-price {color: #ed3237;}
 div.jsstadmin-add-on-page-wrp div.add-on-page-cnt div.add-on-list div.add-on-item.kb a.add-on-btn {background: #ed3237;}
 div.jsstadmin-add-on-page-wrp div.add-on-page-cnt div.add-on-list div.add-on-item.kb a.add-on-btn:hover {border-color: #ed3237;color: #ed3237 !important;background: #fff;}
-div.jsstadmin-add-on-page-wrp div.add-on-page-cnt div.add-on-list div.add-on-item.merge-tkt .add-on-price {color: #ff4a00;}
-div.jsstadmin-add-on-page-wrp div.add-on-page-cnt div.add-on-list div.add-on-item.merge-tkt a.add-on-btn {background: #ff4a00;}
-div.jsstadmin-add-on-page-wrp div.add-on-page-cnt div.add-on-list div.add-on-item.merge-tkt a.add-on-btn:hover {border-color: #ff4a00;color: #ff4a00 !important;background: #fff;}
-div.jsstadmin-add-on-page-wrp div.add-on-page-cnt div.add-on-list div.add-on-item.canned-resp .add-on-price {color: #e7015e;}
-div.jsstadmin-add-on-page-wrp div.add-on-page-cnt div.add-on-list div.add-on-item.canned-resp a.add-on-btn {background: #e7015e;}
-div.jsstadmin-add-on-page-wrp div.add-on-page-cnt div.add-on-list div.add-on-item.canned-resp a.add-on-btn:hover {border-color: #e7015e;color: #e7015e !important;background: #fff;}
 div.jsstadmin-add-on-page-wrp div.add-on-page-cnt div.add-on-list div.add-on-item.overdue-tkt .add-on-price {color: #003953;}
 div.jsstadmin-add-on-page-wrp div.add-on-page-cnt div.add-on-list div.add-on-item.overdue-tkt a.add-on-btn {background: #003953;}
 div.jsstadmin-add-on-page-wrp div.add-on-page-cnt div.add-on-list div.add-on-item.overdue-tkt a.add-on-btn:hover {border-color: #003953;color: #003953 !important;background: #fff;}
-div.jsstadmin-add-on-page-wrp div.add-on-page-cnt div.add-on-list div.add-on-item.tkt-actions .add-on-price {color: #20864f;}
-div.jsstadmin-add-on-page-wrp div.add-on-page-cnt div.add-on-list div.add-on-item.tkt-actions a.add-on-btn {background: #20864f;}
-div.jsstadmin-add-on-page-wrp div.add-on-page-cnt div.add-on-list div.add-on-item.tkt-actions a.add-on-btn:hover {border-color: #20864f;color: #20864f !important;background: #fff;}
 div.jsstadmin-add-on-page-wrp div.add-on-page-cnt div.add-on-list div.add-on-item.smtp .add-on-price {color: #4683e8;}
 div.jsstadmin-add-on-page-wrp div.add-on-page-cnt div.add-on-list div.add-on-item.smtp a.add-on-btn {background: #4683e8;}
 div.jsstadmin-add-on-page-wrp div.add-on-page-cnt div.add-on-list div.add-on-item.smtp a.add-on-btn:hover {border-color: #4683e8;color: #4683e8 !important;background: #fff;}
 div.jsstadmin-add-on-page-wrp div.add-on-page-cnt div.add-on-list div.add-on-item.multilanguagetemplate .add-on-price {color: #63ea86;}
 div.jsstadmin-add-on-page-wrp div.add-on-page-cnt div.add-on-list div.add-on-item.multilanguagetemplate a.add-on-btn {background: #63ea86;}
 div.jsstadmin-add-on-page-wrp div.add-on-page-cnt div.add-on-list div.add-on-item.multilanguagetemplate a.add-on-btn:hover {border-color: #63ea86;color: #63ea86 !important;background: #fff;}
-div.jsstadmin-add-on-page-wrp div.add-on-page-cnt div.add-on-list div.add-on-item.themes .add-on-price {color: #563d67;}
-div.jsstadmin-add-on-page-wrp div.add-on-page-cnt div.add-on-list div.add-on-item.themes a.add-on-btn {background: #563d67;}
-div.jsstadmin-add-on-page-wrp div.add-on-page-cnt div.add-on-list div.add-on-item.themes a.add-on-btn:hover {border-color: #563d67;color: #563d67 !important;background: #fff;}
-div.jsstadmin-add-on-page-wrp div.add-on-page-cnt div.add-on-list div.add-on-item.tkt-histry .add-on-price {color: #ed4c5c;}
-div.jsstadmin-add-on-page-wrp div.add-on-page-cnt div.add-on-list div.add-on-item.tkt-histry a.add-on-btn {background: #ed4c5c;}
-div.jsstadmin-add-on-page-wrp div.add-on-page-cnt div.add-on-list div.add-on-item.tkt-histry a.add-on-btn:hover {border-color: #ed4c5c;color: #ed4c5c !important;background: #fff;}
 div.jsstadmin-add-on-page-wrp div.add-on-page-cnt div.add-on-list div.add-on-item.email-piping .add-on-price {color: #da4234;}
 div.jsstadmin-add-on-page-wrp div.add-on-page-cnt div.add-on-list div.add-on-item.email-piping a.add-on-btn {background: #da4234;}
 div.jsstadmin-add-on-page-wrp div.add-on-page-cnt div.add-on-list div.add-on-item.email-piping a.add-on-btn:hover {border-color: #da4234;color: #da4234 !important;background: #fff;}
@@ -1815,15 +1911,9 @@ div.jsstadmin-add-on-page-wrp div.add-on-page-cnt div.add-on-list div.add-on-ite
 div.jsstadmin-add-on-page-wrp div.add-on-page-cnt div.add-on-list div.add-on-item.close-tkt .add-on-price {color: #ee5151;}
 div.jsstadmin-add-on-page-wrp div.add-on-page-cnt div.add-on-list div.add-on-item.close-tkt a.add-on-btn {background: #ee5151;}
 div.jsstadmin-add-on-page-wrp div.add-on-page-cnt div.add-on-list div.add-on-item.close-tkt a.add-on-btn:hover {border-color: #ee5151;color: #ee5151 !important;background: #fff;}
-div.jsstadmin-add-on-page-wrp div.add-on-page-cnt div.add-on-list div.add-on-item.admin-widg .add-on-price {color: #36b549;}
-div.jsstadmin-add-on-page-wrp div.add-on-page-cnt div.add-on-list div.add-on-item.admin-widg a.add-on-btn {background: #36b549;}
-div.jsstadmin-add-on-page-wrp div.add-on-page-cnt div.add-on-list div.add-on-item.admin-widg a.add-on-btn:hover {border-color: #36b549;color: #36b549 !important;background: #fff;}
 div.jsstadmin-add-on-page-wrp div.add-on-page-cnt div.add-on-list div.add-on-item.internal-mail .add-on-price {color: #457faf;}
 div.jsstadmin-add-on-page-wrp div.add-on-page-cnt div.add-on-list div.add-on-item.internal-mail a.add-on-btn {background: #457faf;}
 div.jsstadmin-add-on-page-wrp div.add-on-page-cnt div.add-on-list div.add-on-item.internal-mail a.add-on-btn:hover {border-color: #457faf;color: #457faf !important;background: #fff;}
-div.jsstadmin-add-on-page-wrp div.add-on-page-cnt div.add-on-list div.add-on-item.max-tkt .add-on-price {color: #f2a326;}
-div.jsstadmin-add-on-page-wrp div.add-on-page-cnt div.add-on-list div.add-on-item.max-tkt a.add-on-btn {background: #f2a326;}
-div.jsstadmin-add-on-page-wrp div.add-on-page-cnt div.add-on-list div.add-on-item.max-tkt a.add-on-btn:hover {border-color: #f2a326;color: #f2a326 !important;background: #fff;}
 div.jsstadmin-add-on-page-wrp div.add-on-page-cnt div.add-on-list div.add-on-item.desk-notif .add-on-price {color: #eb1d24;}
 div.jsstadmin-add-on-page-wrp div.add-on-page-cnt div.add-on-list div.add-on-item.desk-notif a.add-on-btn {background: #eb1d24;}
 div.jsstadmin-add-on-page-wrp div.add-on-page-cnt div.add-on-list div.add-on-item.desk-notif a.add-on-btn:hover {border-color: #eb1d24;color: #eb1d24 !important;background: #fff;}
@@ -1832,9 +1922,6 @@ div.jsstadmin-add-on-page-wrp div.add-on-page-cnt div.add-on-list div.add-on-ite
 div.jsstadmin-add-on-page-wrp div.add-on-page-cnt div.add-on-list div.add-on-item.aipoweredreply a.add-on-btn:hover {border-color: #4ead96;color: #4ead96 !important;background: #fff;}
 div.jsstadmin-add-on-page-wrp div.add-on-page-cnt div.add-on-list div.add-on-item.agent a.add-on-btn {background: #3b4c56;}
 div.jsstadmin-add-on-page-wrp div.add-on-page-cnt div.add-on-list div.add-on-item.agent a.add-on-btn:hover {border-color: #3b4c56;color: #3b4c56 !important;background: #fff;}
-div.jsstadmin-add-on-page-wrp div.add-on-page-cnt div.add-on-list div.add-on-item.user-opt .add-on-price {color: #fa644f;}
-div.jsstadmin-add-on-page-wrp div.add-on-page-cnt div.add-on-list div.add-on-item.user-opt a.add-on-btn {background: #fa644f;}
-div.jsstadmin-add-on-page-wrp div.add-on-page-cnt div.add-on-list div.add-on-item.user-opt a.add-on-btn:hover {border-color: #fa644f;color: #fa644f !important;background: #fff;}
 div.jsstadmin-add-on-page-wrp div.add-on-page-cnt div.add-on-list div.add-on-item.fe-widget .add-on-price {color: #250d9e;}
 div.jsstadmin-add-on-page-wrp div.add-on-page-cnt div.add-on-list div.add-on-item.fe-widget a.add-on-btn {background: #250d9e;}
 div.jsstadmin-add-on-page-wrp div.add-on-page-cnt div.add-on-list div.add-on-item.fe-widget a.add-on-btn:hover {border-color: #250d9e;color: #250d9e !important;background: #fff;}
@@ -1850,8 +1937,6 @@ div.jsstadmin-add-on-page-wrp div.add-on-page-cnt div.add-on-list div.add-on-ite
 div.jsstadmin-add-on-page-wrp div.add-on-page-cnt div.add-on-list div.add-on-item.easy-digi-dwnlds .add-on-price {color: #30518d;}
 div.jsstadmin-add-on-page-wrp div.add-on-page-cnt div.add-on-list div.add-on-item.easy-digi-dwnlds a.add-on-btn {background: #30518d;}
 div.jsstadmin-add-on-page-wrp div.add-on-page-cnt div.add-on-list div.add-on-item.easy-digi-dwnlds a.add-on-btn:hover {border-color: #30518d;color: #30518d !important;background: #fff;}
-div.jsstadmin-add-on-page-wrp div.add-on-page-cnt div.add-on-list div.add-on-item.email-cc a.add-on-btn:hover {border-color: #cc9832;color: #cc9832 !important;background: #fff;}
-div.jsstadmin-add-on-page-wrp div.add-on-page-cnt div.add-on-list div.add-on-item.email-cc a.add-on-btn {background: #cc9832;}
 div.jsstadmin-add-on-page-wrp div.add-on-page-cnt div.add-on-list div.add-on-item.multiform .add-on-price {color: #78a2d2;}
 div.jsstadmin-add-on-page-wrp div.add-on-page-cnt div.add-on-list div.add-on-item.multiform a.add-on-btn:hover {border-color: #78a2d2;color: #78a2d2 !important;background: #fff;}
 div.jsstadmin-add-on-page-wrp div.add-on-page-cnt div.add-on-list div.add-on-item.multiform a.add-on-btn {background: #78a2d2;}
@@ -1861,10 +1946,14 @@ div.jsstadmin-add-on-page-wrp div.add-on-page-cnt div.add-on-list div.add-on-ite
 div.jsstadmin-add-on-page-wrp div.add-on-page-cnt div.add-on-list div.add-on-item.sociallogin .add-on-price {color: #30518d;}
 div.jsstadmin-add-on-page-wrp div.add-on-page-cnt div.add-on-list div.add-on-item.sociallogin a.add-on-btn {background: #0f8029;}
 div.jsstadmin-add-on-page-wrp div.add-on-page-cnt div.add-on-list div.add-on-item.sociallogin a.add-on-btn:hover {border-color: #0f8029;color: #0f8029 !important;background: #fff;}
-div.jsstadmin-add-on-page-wrp div.add-on-page-cnt div.add-on-list div.add-on-item.autocleanup a.add-on-btn {background: #2c7be5;}
-div.jsstadmin-add-on-page-wrp div.add-on-page-cnt div.add-on-list div.add-on-item.autocleanup a.add-on-btn:hover {border-color: #2c7be5;color: #2c7be5 !important;background: #fff;}
 div.jsstadmin-add-on-page-wrp div.add-on-page-cnt div.add-on-list div.add-on-item.instantresolve a.add-on-btn {background: #e8912f;}
 div.jsstadmin-add-on-page-wrp div.add-on-page-cnt div.add-on-list div.add-on-item.instantresolve a.add-on-btn:hover {border-color: #e8912f;color: #e8912f !important;background: #fff;}
+div.jsstadmin-add-on-page-wrp div.add-on-page-cnt div.add-on-list div.add-on-item.woocommerce .add-on-price {color: #7f54b3;}
+div.jsstadmin-add-on-page-wrp div.add-on-page-cnt div.add-on-list div.add-on-item.woocommerce a.add-on-btn {background: #7f54b3;}
+div.jsstadmin-add-on-page-wrp div.add-on-page-cnt div.add-on-list div.add-on-item.woocommerce a.add-on-btn:hover {border-color: #7f54b3;color: #7f54b3 !important;background: #fff;}
+div.jsstadmin-add-on-page-wrp div.add-on-page-cnt div.add-on-list div.add-on-item.private-credentials .add-on-price {color: #0f874f;}
+div.jsstadmin-add-on-page-wrp div.add-on-page-cnt div.add-on-list div.add-on-item.private-credentials a.add-on-btn {background: #0f874f;}
+div.jsstadmin-add-on-page-wrp div.add-on-page-cnt div.add-on-list div.add-on-item.private-credentials a.add-on-btn:hover {border-color: #0f874f;color: #0f874f !important;background: #fff;}
 
 
 .jsst-addon-go-back-messsage-wrap {display: inline-block;width: 100%;text-align: center;padding: 30px;}
@@ -2120,16 +2209,13 @@ div#jsst-main-wrapper div.post-installtion-content div.pic-button-part a.skip-st
 div#jsst-main-wrapper div.post-installtion-content div.pic-button-part a.skip-step:hover{background: #000;border-color: #000;color: #fff;}
 
 /*totalstatsAPI*/
-div#js-total-count-cp-dashbordapi{display: inline-block;}
-div#js-total-count-cp-dashbordapi a.js-total-count-dashbordapi{display: inline-block; float: left; width: calc(50% - 6px); padding: 9px 9px; margin-right: 6px; border: 1px solid #F1F1F1; background: #FFFFFF;box-sizing: border-box;}
+div#js-total-count-cp-dashbordapi{display: flex; flex-wrap: wrap; gap: 12px; width: 100%; box-sizing: border-box;}
+div#js-total-count-cp-dashbordapi a.js-total-count-dashbordapi{display: flex; align-items: center; flex: 1 1 calc(50% - 6px); min-width: 0; padding: 9px 9px; margin: 0; border: 1px solid #F1F1F1; background: #FFFFFF;box-sizing: border-box; text-decoration: none;}
 div#js-total-count-cp-dashbordapi a.js-total-count-dashbordapi:hover{border:1px solid #ececec;}
-div#js-total-count-cp-dashbordapi a.js-total-count-dashbordapi:nth-child(even){margin-left: 6px; margin-right: 0px;}
-div#js-total-count-cp-dashbordapi a.js-total-count-dashbordapi:nth-child(1){margin-bottom: 12px;}
-div#js-total-count-cp-dashbordapi a.js-total-count-dashbordapi:nth-child(2){margin-bottom: 12px;}
-div#js-total-count-cp-dashbordapi a.js-total-count-dashbordapi .img{ float: left; border-radius: 50%; }
-div#js-total-count-cp-dashbordapi a.js-total-count-dashbordapi .data-dashbordapi{display: inline-block; float: left; color: #757575; padding-left: 10px; }
-div#js-total-count-cp-dashbordapi a.js-total-count-dashbordapi .data-dashbordapi .jstotal-dashbordapi{display: block; font-weight: bold; font-size: 22px; padding-bottom: 8px; padding-top: 8px;}
-div#js-total-count-cp-dashbordapi a.js-total-count-dashbordapi .data-dashbordapi .jsstatus-dashbordapi{display: block; font-size: 14px;}
+div#js-total-count-cp-dashbordapi a.js-total-count-dashbordapi .img{ flex: 0 0 auto; border-radius: 50%; }
+div#js-total-count-cp-dashbordapi a.js-total-count-dashbordapi .data-dashbordapi{min-width: 0; color: #757575; padding-left: 10px; }
+div#js-total-count-cp-dashbordapi a.js-total-count-dashbordapi .data-dashbordapi .jstotal-dashbordapi{display: block; font-weight: bold; font-size: 22px; padding-bottom: 4px; line-height: 1.2;}
+div#js-total-count-cp-dashbordapi a.js-total-count-dashbordapi .data-dashbordapi .jsstatus-dashbordapi{display: block; font-size: 14px; line-height: 1.2; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;}
 img.jsticketstafflogo{max-width: 100px; max-height: 100%;}
 div#wp-jsticket_message-editor-container{border:1px solid #dddddd;}
 
@@ -2137,23 +2223,49 @@ div#wp-jsticket_message-editor-container{border:1px solid #dddddd;}
 #jssupportticket_addon_dashboard_widget {display: inline-block;}
 div.js-nullmargin {margin: 0px;}
 .js-row {margin-left: -15px;margin-right: -15px;}
-span.js-admin-title.color-black {background: #222222;margin-bottom: 0px;}
-span.js-admin-title {display: inline-block;padding: 10px;color: #ffffff;font-size: 16px;font-weight: bold;background: #428BCA;margin: 10px 0px;width: 100%;box-sizing: border-box;}
 div.js-nullpadding {padding: 5px !important;}
-div.js-ticket-admin-cp-data {display: inline-block;width: 100%;border-bottom: 1px solid #eee;padding-bottom: 2px;}
-div.js-ticket-admin-cp-tickets {display: inline-block;float: left;width: 100%;border: 1px solid #d4d4d5;border-top: none;background: #FFFFFF;box-sizing: border-box;}
-div.js-ticket-admin-cp-data div {white-space: nowrap;padding-right: 0px;overflow: hidden;text-overflow: ellipsis;}
-div.js-ticket-admin-cp-data div {border: 1px solid #FFFFFF;padding-top: 5px;padding-bottom: 5px;}
+
+/* Latest Tickets list. Restyled to sit with the WordPress admin palette rather
+   than against it: one dark section bar, a quiet grey column header and
+   hairline-separated rows, instead of two stacked saturated bars and a grid of
+   white 1px cell borders. All of these class names belong to this widget alone,
+   so the rules are edited in place rather than piled on top. */
+span.js-admin-title {display: block;padding: 9px 12px;color: #ffffff;font-size: 13px;font-weight: 600;line-height: 1.4;background: #428BCA;margin: 10px 0px 0px;width: 100%;box-sizing: border-box;border-radius: 3px 3px 0px 0px;}
+span.js-admin-title.color-black {background: #1d2327;margin-bottom: 0px;}
+/* The ticket list floated, so the widget box collapsed to the height of the
+   title above it and the table spilled out of the card. It is a plain block
+   now, and the head and data rows clear their own floated columns. */
+div.js-ticket-admin-cp-tickets {display: block;float: none;width: 100%;border: 1px solid #dcdcde;border-top: none;background: #FFFFFF;box-sizing: border-box;border-radius: 0px 0px 3px 3px;overflow: hidden;}
+div.js-ticket-admin-cp-tickets.js-nullpadding {padding: 0px !important;}
+div.js-ticket-admin-cp-head:after,
+div.js-ticket-admin-cp-data:after {content: "";display: table;clear: both;}
+
+/* Column header. The head columns were 33.33/25/16.66 while the rows below
+   them were 56/25/16.66, so no header sat over its own column. Both are on
+   54/22/24 now, which totals 100% and leaves the priority chip room for a word
+   like "Critical" without truncating it. */
+div.js-ticket-admin-cp-head.color-blue {background: #f6f7f7;margin: 0px;color: #50575e;border-bottom: 1px solid #dcdcde;}
+div.js-ticket-admin-cp-head div {border-right: 0;padding: 8px 10px;box-sizing: border-box;font-size: 11px;font-weight: 600;line-height: 16px;text-transform: uppercase;letter-spacing: 0.04em;white-space: nowrap;overflow: hidden;text-overflow: ellipsis;}
+div.js-ticket-admin-cp-head .js-col-md-7 {float: left;width: 54%;}
+div.js-ticket-admin-cp-head .js-col-md-3 {float: left;width: 22%;}
+div.js-ticket-admin-cp-head .js-col-md-2 {float: left;width: 24%;text-align: center;}
+
+/* Rows */
+div.js-ticket-admin-cp-data {display: block;width: 100%;padding: 0px;border-bottom: 1px solid #f0f0f1;box-sizing: border-box;}
+div.js-ticket-admin-cp-data:last-child {border-bottom: 0;}
+div.js-ticket-admin-cp-data:hover {background: #f6f7f7;}
+div.js-ticket-admin-cp-data div {border: 0;padding: 8px 10px;box-sizing: border-box;font-size: 13px;line-height: 20px;white-space: nowrap;overflow: hidden;text-overflow: ellipsis;}
 span.js-ticket-admin-cp-showhide {display: none;}
-div.js-ticket-admin-cp-data div.js-col-md-7 {float: left;width: 56%;}
-div.js-ticket-admin-cp-data div.js-col-md-3 {float: left;width: 25%;}
-div.js-ticket-admin-cp-data div.js-col-md-2 {float: left;width: 16.66666667%;text-align: center;}
-div.js-ticket-admin-cp-data div {white-space: nowrap;padding-right: 0px;overflow: hidden;text-overflow: ellipsis;}
-div.js-ticket-admin-cp-head.color-blue {background: #428BCA;margin: 10px 0px;color: #ffffff;}
-div.js-ticket-admin-cp-head div {border-right: 1px solid #FFFFFF;padding-top: 5px;padding-bottom: 5px;}
-div.js-ticket-admin-cp-head .js-col-md-7 {float: left;width: 33.333333%;}
-div.js-ticket-admin-cp-head .js-col-md-3 {float: left;width: 25%;}
-div.js-ticket-admin-cp-head .js-col-md-2 {float: left;width: 16.66666667%;border-right: 0;}
+div.js-ticket-admin-cp-data div.js-col-md-7 {float: left;width: 54%;}
+div.js-ticket-admin-cp-data div.js-col-md-7 a {color: #2271b1;text-decoration: none;font-weight: 500;}
+div.js-ticket-admin-cp-data div.js-col-md-7 a:hover {color: #135e96;text-decoration: underline;}
+div.js-ticket-admin-cp-data div.js-col-md-3 {float: left;width: 22%;color: #50575e;}
+/* The priority colour arrives as an inline background on the cell itself, so
+   the only way to shape it into a chip is to clip that background to the
+   content box - hence the !important, which is what it takes to beat the
+   inline `background` shorthand. The grey underneath shows through when a
+   priority has no colour set, which used to render white text on white. */
+div.js-ticket-admin-cp-data div.js-col-md-2 {float: left;width: 24%;text-align: center;background: #8c8f94;font-size: 11px;font-weight: 600;text-transform: uppercase;letter-spacing: 0.03em;border-radius: 999px;background-clip: content-box !important;}
 
 /* Multi Lang temp css */
 div.a-js-form-field div#deletebutton div.js-multilang-del-btn {float: left;width: 100%;}
@@ -2488,6 +2600,9 @@ input:checked + .toggle-switch-slider:before {transform: translateX(16px);}
 
 /* left menu */
 #jsstadmin-leftmenu {width: 280px;height: 100vh;background-color: #FFFFFF;font-family: 'Inter', sans-serif;color: #212529;display: flex;flex-direction: column;position:sticky;top: 42px;left: 0;overflow-y: auto;transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);overflow-x: hidden;padding: 16px;box-sizing: border-box;border-right: 1px solid #DEE2E6;flex-shrink: 0;z-index: 999;}
+/* Nothing to show: take no width rather than leaving a blank white column.
+   (Roadmap 4.0-SEC-04) */
+#jsstadmin-leftmenu.jsstadmin-leftmenu-empty {display: none;}
 #jsstadmin-logo {padding: 6px 8px;display: flex;justify-content: space-between;align-items: center;box-sizing: border-box;margin-bottom: 24px;background-color: #4f46e5;border-radius: 12px;}
 #jsstadmin-logo .jsst-anchor {display: flex;align-items: center;gap: 12px;text-decoration: none;cursor: pointer;}
 #jsstadmin-logo .jsst-anchor .logo-icon {width: 40px;height: 40px;border-radius: 10px;display: flex;align-items: center;justify-content: center;}
@@ -2699,9 +2814,6 @@ div.jsst-admin-dashboard-ticket-rightmain-wrp{width: calc(100% - 1rem - 40px);}
 	div.jsstadmin-add-on-page-wrp div.add-on-banner img.add-on-banner-left-img,
 	div.jsstadmin-add-on-page-wrp div.add-on-banner img.add-on-banner-right-img {display: none;}
 	div.jsstadmin-add-on-page-wrp div.add-on-banner img.add-on-banner-center-img {margin-top: 40px;}
-	div.jsstadmin-add-on-page-wrp div.add-on-page-cnt div.add-on-msg a.add-on-msg-btn {float: left;margin: 7px 0;}
-	div.jsstadmin-add-on-page-wrp div.add-on-page-cnt div.add-on-list div.add-on-item {width: calc(100% / 2 - 20px);}
-	div.jsstadmin-add-on-page-wrp div.add-on-page-cnt div.add-on-bundle-pack-list div.add-on-bundle-pack-item {width: calc(100% / 2 - 20px);}
 	/* admin-addons-status */
 	div#msadmin-data-wrp.jsstadmin-addons-list-data{padding: 30px 25px;}
 	div.jsstadmin-addons-list-wrp div.jsst-admin-addon-status{display: block;float: left;}
@@ -2758,6 +2870,7 @@ div.jsst-admin-dashboard-ticket-rightmain-wrp{width: calc(100% - 1rem - 40px);}
 	form.js-filter-form .js-form-input-field,
 	form.js-filter-form .js-form-select-field,
 	form.js-filter-form .js-form-date-field,
+	form.js-filter-form .js-form-multi-select-field,
 	form.js-filter-form .js-form-cust-rad-fld-wrp {width: 195px;}
 	form.js-filter-form .js-form-select-field {height: 45px !important;}
 	form.js-filter-form .js-form-cust-rad-fld-wrp input {height: 15px;width: 10px;}
@@ -2808,8 +2921,6 @@ div.jsst-admin-dashboard-ticket-rightmain-wrp{width: calc(100% - 1rem - 40px);}
 	/* addon list */
 	div.jsst-addon-installer-wrapper div.jsst-addon-installer-left-section-wrap {width: 100%;}
 	div.jsst-addon-installer-wrapper div.jsst-addon-installer-right-section-wrap {width: 100%;}
-	div.jsstadmin-add-on-page-wrp div.add-on-page-cnt div.add-on-list div.add-on-item {width: 100%;margin: 0 0 20px;}
-	div.jsstadmin-add-on-page-wrp div.add-on-page-cnt div.add-on-bundle-pack-list div.add-on-bundle-pack-item {width: 100%;margin: 0 0 20px;}
 	div.jsst-addon-installer-wrapper div.jsst-addon-installer-right-section-wrap div.jsst-addon-installer-right-addon-wrapper div.jsst-addon-installer-right-addon-section {height: auto;padding: 15px;}
 
 	div#jsstadmin-wrapper div.js-other-products-wrp div.js-other-products-detail div.js-other-products-image img{display: block;margin: auto;}
@@ -2966,8 +3077,6 @@ div.jsst-admin-dashboard-ticket-rightmain-wrp{width: calc(100% - 1rem - 40px);}
 	/* addon list */
 	div.jsst-addon-installer-wrapper div.jsst-addon-installer-left-section-wrap {width: 100%;}
 	div.jsst-addon-installer-wrapper div.jsst-addon-installer-right-section-wrap {width: 100%;}
-	div.jsstadmin-add-on-page-wrp div.add-on-page-cnt div.add-on-list div.add-on-item {width: 100%;margin: 0 0 20px;}
-	div.jsstadmin-add-on-page-wrp div.add-on-page-cnt div.add-on-bundle-pack-list div.add-on-bundle-pack-item {width: 100%;margin: 0 0 20px;}
 	div.jsst-addon-installer-wrapper div.jsst-addon-installer-right-section-wrap div.jsst-addon-installer-right-addon-wrapper div.jsst-addon-installer-right-addon-section {height: auto;padding: 15px;}
 	div.jsst-addon-installer-wrapper div.jsst-addon-installer-right-section-wrap div.jsst-addon-installer-right-addon-wrapper div.jsst-addon-installer-right-addon-section div.jsst-addon-installer-right-addon-single {width: 100%;height: auto;}
 
@@ -3050,11 +3159,10 @@ div.jsst-admin-dashboard-ticket-rightmain-wrp{width: calc(100% - 1rem - 40px);}
 	form.js-filter-form .js-form-input-field, 
 	form.js-filter-form .js-form-select-field, 
 	form.js-filter-form .js-form-date-field, 
+	form.js-filter-form .js-form-multi-select-field, 
 	form.js-filter-form .js-form-cust-rad-fld-wrp {width: 100%;}
 
 	/* add on list */
-	div.jsstadmin-add-on-page-wrp div.add-on-page-cnt div.add-on-list div.add-on-item {width: 100%;margin: 0 0 15px;}
-	div.jsstadmin-add-on-page-wrp div.add-on-page-cnt div.add-on-bundle-pack-list div.add-on-bundle-pack-item {width: 100%;margin: 0 0 15px;}
 
 	/* email piping */
 	#cron_job .crown_text_left,
@@ -3192,3 +3300,606 @@ div.jsst-admin-dashboard-ticket-rightmain-wrp{width: calc(100% - 1rem - 40px);}
 
 
 
+
+/* Ticket activity timeline: filters, field diffs and event metadata.
+   (Roadmap 4.0-CORE-01) */
+.jsst-timeline-filters {width: 100%;box-sizing: border-box;display: flex;flex-wrap: wrap;align-items: center;gap: 10px;padding: 12px 14px;background: #f8fafc;border-bottom: 1px solid #e6e8eb;}
+.jsst-timeline-filters .jsst-timeline-filter-field {display: inline-flex;align-items: center;gap: 7px;}
+.jsst-timeline-filters label {margin: 0;color: #6a6d6f;font-size: 12px;font-weight: 600;line-height: 18px;text-transform: uppercase;letter-spacing: .02em;white-space: nowrap;}
+.jsst-timeline-filters select.jsst-timeline-filter {height: 40px;max-width: 220px;box-sizing: border-box;margin: 0;padding-block: 5px;padding-inline: 10px 26px;background: #fff;border: 1px solid #dcdfe3;border-radius: 6px;box-shadow: none;color: #23282d;font-size: 13px;line-height: 22px;cursor: pointer;transition: border-color .15s ease, box-shadow .15s ease, background .15s ease;}
+.jsst-timeline-filters select.jsst-timeline-filter:hover {border-color: #b9bec4;}
+.jsst-timeline-filters select.jsst-timeline-filter:focus {border-color: #4f46e5;box-shadow: 0 0 0 3px rgba(79,70,229,0.15);outline: none;}
+/* Set to something other than "all", so the strip shows the list is narrowed. */
+.jsst-timeline-filters select.jsst-timeline-filter-on {background: #eef2ff;border-color: #4f46e5;color: #3730a3;font-weight: 600;}
+.jsst-timeline-filters .jsst-timeline-clear {height: 40px;box-sizing: border-box;padding-inline: 12px;background: #fff;border: 1px solid #dcdfe3;border-radius: 6px;box-shadow: none;color: #606262;font-size: 12px;font-weight: 600;line-height: 20px;cursor: pointer;transition: border-color .15s ease, color .15s ease;}
+.jsst-timeline-filters .jsst-timeline-clear:hover {border-color: #4f46e5;color: #3730a3;}
+.jsst-timeline-filters .jsst-timeline-clear:focus-visible {outline: 2px solid #4f46e5;outline-offset: 1px;}
+/* Trailing edge, so the count reads as status rather than another control. */
+.jsst-timeline-filters .jsst-timeline-shown {margin-inline-start: auto;color: #3730a3;font-size: 12px;font-weight: 600;line-height: 20px;white-space: nowrap;}
+@media (max-width: 600px) {
+    .jsst-timeline-filters {gap: 8px;padding: 10px 12px;}
+    .jsst-timeline-filters .jsst-timeline-filter-field {flex: 1 1 100%;}
+    .jsst-timeline-filters select.jsst-timeline-filter {flex: 1 1 auto;max-width: none;}
+    .jsst-timeline-filters .jsst-timeline-shown {margin-inline-start: 0;}
+}
+.jsst-timeline-diff {display: block;margin-top: 4px;color: #606262;}
+.jsst-timeline-diff .jsst-timeline-field {font-weight: 600;margin-right: 6px;}
+.jsst-timeline-diff .jsst-timeline-old {text-decoration: line-through;opacity: .75;}
+.jsst-timeline-diff .jsst-timeline-arrow {margin: 0 6px;}
+.jsst-timeline-diff .jsst-timeline-new {font-weight: 600;}
+.jsst-timeline-meta {display: flex;flex-wrap: wrap;align-items: center;gap: 8px;margin-top: 6px;font-size: 12px;color: #8a8f8f;}
+.jsst-timeline-meta .jsst-timeline-actor {color: #6a6d6f;font-weight: 600;}
+.jsst-timeline-meta .jsst-timeline-source {margin: 0;padding: 2px 8px;background: #eef2ff;border-radius: 999px;color: #3730a3;font-size: 11px;font-weight: 600;line-height: 16px;text-transform: uppercase;letter-spacing: .03em;}
+.jsst-timeline-empty {padding: 14px;color: #606262;}
+
+/* Merging: duplicate suggestions, multi-select, preview and rollback.
+   (Roadmap 4.0-CORE-04) */
+.jsst-merge-likely-duplicate {border-left: 3px solid #f0a132 !important;}
+.jsst-merge-duplicate-badge {display: inline-block;margin: 8px 0 0 10px;padding: 2px 8px;border-radius: 10px;background: #fdf1dd;color: #8a5a10;font-size: 12px;font-weight: 600;}
+.jsst-merge-duplicate-badge .jsst-merge-duplicate-score {opacity: .75;font-weight: 400;}
+.jsst-merge-pick {padding: 6px 10px 10px;}
+.jsst-merge-pick label {display: inline-flex;align-items: center;gap: 6px;cursor: pointer;}
+.jsst-merge-preview {padding: 20px;}
+.jsst-merge-preview-canonical {margin-bottom: 10px;font-size: 14px;line-height: 1.5;}
+.jsst-merge-preview-sources {margin: 0 0 16px;padding-inline-start: 20px;list-style: disc;}
+.jsst-merge-preview-sources li {margin-bottom: 4px;line-height: 1.5;}
+.jsst-merge-summary {margin: 12px;padding: 12px;border: 1px solid #ebecec;border-radius: 6px;background: #fbfbfb;float: left;width: 100%;}
+.jsst-merge-summary-title {font-weight: 600;margin-bottom: 4px;}
+.jsst-merge-summary-changes, .jsst-merge-summary-kept {margin: 0 0 10px 18px;}
+.jsst-merge-summary-kept {margin-bottom: 0;}
+.jsst-merge-empty {padding: 18px;}
+/* Tickets merged into this one. A card in the same idiom as the bulk bar
+   below, rather than bare rows on the page background: the section sits between
+   two dark-barred cards and read as unfinished markup without one.
+   (Roadmap 4.0-CORE-04) */
+.jsst-merged-sources {float: left;box-sizing: border-box;width: 100%;margin: 0 0 20px;padding: 4px 16px 8px;background: #fff;border: 1px solid #dcdfe3;border-inline-start: 3px solid #4f46e5;border-radius: 8px;box-shadow: 0 1px 2px rgba(16,24,40,0.05);}
+.jsst-merged-sources-intro {padding: 12px 2px 10px;color: #6b7280;font-size: 12.5px;line-height: 1.5;}
+.jsst-merged-source {display: flex;align-items: center;gap: 12px;padding: 12px 2px;border-top: 1px solid #eef0f2;transition: background-color .15s ease;}
+.jsst-merged-source:hover {background: #fafbfc;}
+.jsst-merged-source-icon {display: inline-flex;align-items: center;justify-content: center;flex: 0 0 auto;width: 30px;height: 30px;border-radius: 50%;background: #eef2ff;color: #4f46e5;}
+.jsst-merged-source-body {display: block;flex: 1 1 auto;min-width: 0;}
+.jsst-merged-source-link {display: block;color: #1d2327;font-size: 14px;font-weight: 600;line-height: 1.4;text-decoration: none;}
+.jsst-merged-source-link:hover, .jsst-merged-source-link:focus {color: #4f46e5;}
+.jsst-merged-source-id {display: inline-block;margin-inline-end: 8px;padding: 1px 7px;background: #f1f3f5;border-radius: 4px;color: #55595e;font-size: 11.5px;font-weight: 600;letter-spacing: .02em;vertical-align: 1px;}
+/* The subject is the long part; keep one line per merged ticket. */
+.jsst-merged-source-subject {display: inline;overflow-wrap: anywhere;}
+.jsst-merged-source-meta {display: block;margin-top: 3px;color: #8a8f8f;font-size: 12px;line-height: 1.4;}
+.jsst-merged-source-undo {flex: 0 0 auto;margin-inline-start: auto;padding: 6px 14px;background: #fff;border: 1px solid #dcdfe3;border-radius: 6px;color: #55595e;font-size: 12.5px;font-weight: 600;line-height: 1.3;text-decoration: none;white-space: nowrap;transition: color .15s ease, border-color .15s ease, background-color .15s ease;}
+/* Unmerging undoes somebody's decision, so the control warms up on hover
+   instead of sitting there as a plain link that is easy to hit by accident. */
+.jsst-merged-source-undo:hover, .jsst-merged-source-undo:focus {background: #fff7ed;border-color: #f0b27a;color: #b45309;}
+/* The count belongs to the heading bar, which is dark. */
+.js-tkt-det-title .jsst-merged-count {display: inline-block;min-width: 22px;margin-inline-start: 10px;padding: 1px 8px;background: rgba(255,255,255,0.16);border-radius: 999px;color: #fff;font-size: 13px;font-weight: 600;line-height: 1.6;text-align: center;vertical-align: 3px;}
+@media screen and (max-width: 640px) {
+    .jsst-merged-source {flex-wrap: wrap;}
+    .jsst-merged-source-undo {margin-inline-start: 42px;}
+}
+
+/* Ticket actions: bulk bar, reason capture and the keyboard hint.
+   (Roadmap 4.0-CORE-05) */
+.jsst-bulk-bar {float: left;width: 100%;box-sizing: border-box;margin: 0 0 12px;padding: 12px 14px;background: #fff;border: 1px solid #dcdfe3;border-inline-start: 3px solid #cbd0d6;border-radius: 8px;box-shadow: 0 1px 2px rgba(16,24,40,0.05);transition: border-color .15s ease, box-shadow .15s ease, background .15s ease;}
+.jsst-bulk-bar.jsst-bulk-active {background: #f8f9ff;border-color: #c7c9f5;border-inline-start-color: #4f46e5;box-shadow: 0 1px 3px rgba(79,70,229,0.14);}
+.jsst-bulk-bar .jsst-bulk-row {display: flex;flex-wrap: wrap;align-items: center;gap: 10px;}
+.jsst-bulk-bar .jsst-bulk-selectall {display: inline-flex;align-items: center;gap: 8px;height: 40px;box-sizing: border-box;padding-inline: 12px;background: #f6f7f9;border: 1px solid #dcdfe3;border-radius: 6px;color: #23282d;font-size: 13px;font-weight: 600;line-height: 20px;white-space: nowrap;cursor: pointer;-webkit-user-select: none;user-select: none;transition: background .15s ease, border-color .15s ease;}
+.jsst-bulk-bar .jsst-bulk-selectall:hover {background: #eef0f3;border-color: #b9bec4;}
+.jsst-bulk-bar .jsst-bulk-selectall input[type="checkbox"] {width: 16px;height: 16px;margin: 0;accent-color: #4f46e5;cursor: pointer;}
+.jsst-bulk-bar select.inputbox,
+.jsst-bulk-bar input[type="text"].inputbox {height: 40px;box-sizing: border-box;margin: 0;padding-block: 7px;padding-inline: 11px;background: #fff;border: 1px solid #dcdfe3;border-radius: 6px;box-shadow: none;color: #23282d;font-size: 13px;line-height: 22px;text-align: start;transition: border-color .15s ease, box-shadow .15s ease;}
+.jsst-bulk-bar select.inputbox:hover,
+.jsst-bulk-bar input[type="text"].inputbox:hover {border-color: #b9bec4;}
+.jsst-bulk-bar select.inputbox:focus,
+.jsst-bulk-bar input[type="text"].inputbox:focus {border-color: #4f46e5;box-shadow: 0 0 0 3px rgba(79,70,229,0.15);outline: none;}
+.jsst-bulk-bar input[type="text"].inputbox::placeholder {color: #9aa0a6;}
+.jsst-bulk-bar .jsst-bulk-action {min-width: 160px;}
+.jsst-bulk-bar .jsst-bulk-reason {flex: 1 1 240px;min-width: 180px;}
+.jsst-bulk-bar .jsst-bulk-apply {height: 40px;box-sizing: border-box;padding-inline: 20px;background: #4f46e5;border: 1px solid #4f46e5;border-radius: 6px;box-shadow: none;color: #fff;font-size: 13px;font-weight: 600;line-height: 22px;cursor: pointer;transition: background .15s ease, border-color .15s ease;}
+.jsst-bulk-bar .jsst-bulk-apply:hover {background: #4338ca;border-color: #4338ca;color: #fff;}
+.jsst-bulk-bar .jsst-bulk-apply:focus-visible {outline: 2px solid #4f46e5;outline-offset: 2px;}
+/* Pushed to the trailing edge, so the count reads as a status rather than
+   another control in the sequence. */
+.jsst-bulk-bar .jsst-bulk-count {margin-inline-start: auto;padding-inline: 10px;color: #3730a3;font-size: 12px;font-weight: 600;line-height: 20px;white-space: nowrap;}
+@media (max-width: 782px) {
+    .jsst-bulk-bar {padding: 10px 12px;}
+    .jsst-bulk-bar .jsst-bulk-row {gap: 8px;}
+    .jsst-bulk-bar .jsst-bulk-selectall,
+    .jsst-bulk-bar select.inputbox,
+    .jsst-bulk-bar input[type="text"].inputbox,
+    .jsst-bulk-bar .jsst-bulk-apply {width: 100%;flex: 1 1 100%;}
+    .jsst-bulk-bar .jsst-bulk-count {margin-inline-start: 0;padding-inline: 0;}
+}
+.jsst-bulk-pick {float: left;padding: 10px 0 0 10px;}
+.jsst-action-reason {float: left;width: 100%;box-sizing: border-box;margin: 4px 0 12px;padding: 12px 14px;background: #f8fafc;border: 1px solid #e6e8eb;border-inline-start: 3px solid #4f46e5;}
+.jsst-action-reason .jsst-action-reason-label {display: flex;align-items: center;gap: 8px;margin: 0 0 7px;color: #23282d;font-size: 13px;font-weight: 600;line-height: 18px;text-align: start;cursor: pointer;}
+.jsst-action-reason .jsst-action-reason-optional {padding: 1px 7px;background: #eef2ff;color: #3730a3;border-radius: 9px;font-size: 11px;font-weight: 600;line-height: 16px;text-transform: lowercase;}
+.jsst-action-reason .jsst-action-reason-field {position: relative;display: block;}
+.jsst-action-reason .jsst-action-reason-field input {display: block;width: 100%;height: 40px;box-sizing: border-box;margin: 0;padding-block: 8px;padding-inline: 12px 58px;background: #fff;border: 1px solid #dcdfe3;border-radius: 6px;box-shadow: none;color: #23282d;font-size: 14px;line-height: 22px;text-align: start;transition: border-color .15s ease, box-shadow .15s ease;}
+.jsst-action-reason .jsst-action-reason-field input::placeholder {color: #9aa0a6;}
+.jsst-action-reason .jsst-action-reason-field input:hover {border-color: #b9bec4;}
+.jsst-action-reason .jsst-action-reason-field input:focus {border-color: #4f46e5;box-shadow: 0 0 0 3px rgba(79,70,229,0.15);outline: none;}
+.jsst-action-reason .jsst-action-reason-field input:focus-visible {outline: 2px solid #4f46e5;outline-offset: 1px;}
+/* Sits inside the input's own inline-end padding, so it never overlaps typing. */
+.jsst-action-reason .jsst-action-reason-count {position: absolute;inset-block-start: 50%;inset-inline-end: 10px;transform: translateY(-50%);color: #9aa0a6;font-size: 11px;line-height: 16px;font-variant-numeric: tabular-nums;pointer-events: none;}
+.jsst-action-reason .jsst-action-reason-count-low {color: #b45309;font-weight: 600;}
+.jsst-action-reason .jsst-action-reason-note {margin: 7px 0 0;color: #8a8f8f;font-size: 12px;line-height: 1.5;text-align: start;}
+@media (max-width: 782px) {
+    .jsst-action-reason {max-width: 100%;padding: 10px 12px;}
+}
+.jsst-shortcut-hint {float: left;width: 100%;margin: 0 0 10px;color: #8a8f8f;font-size: 12px;}
+
+/* Dashboard report range switch. (Roadmap 4.0-CORE-09) */
+.jsst-range-switch {display: inline-flex;border: 1px solid #ebecec;border-radius: 6px;overflow: hidden;}
+.jsst-range-btn {padding: 4px 12px;border: 0;background: #fff;color: #606262;cursor: pointer;font-size: 13px;}
+.jsst-range-btn + .jsst-range-btn {border-left: 1px solid #ebecec;}
+.jsst-range-btn:hover {background: #f3f4f6;}
+.jsst-range-btn.jsst-range-current {background: #4f46e5;color: #fff;}
+
+/* Retention cleanup preview. (Roadmap 4.0-CORE-13) */
+.jsst-cleanup-preview {padding: 12px;border: 1px solid #ebecec;border-radius: 6px;background: #fbfbfb;margin-bottom: 14px;}
+.jsst-cleanup-figures {margin: 0 0 10px 18px;}
+.jsst-cleanup-figures li {margin-bottom: 6px;}
+.jsst-cleanup-cutoff {color: #8a8f8f;font-size: 12px;}
+.jsst-cleanup-exclusions {color: #606262;}
+.jsst-cleanup-sample {margin: 0 0 10px 18px;}
+.jsst-cleanup-warning {color: #8a5a10;background: #fdf1dd;padding: 8px 10px;border-radius: 4px;}
+.jsst-cleanup-lastrun {color: #606262;font-size: 13px;margin-bottom: 0;}
+
+/* Ticket tags. (Roadmap 4.0-CORE-17)
+   Borders and shadows are written out in full on every class here: the admin
+   ticket screens inject a reset after this file that zeroes border-width and
+   box-shadow on *, so a chip that relies on either loses it. */
+.jsst-tagbox-val {display: block;}
+.jsst-tag-list {display: inline-flex;flex-wrap: wrap;gap: 5px;vertical-align: middle;}
+.jsst-tag-chip {display: inline-block;margin: 0;padding: 2px 10px;border: 1px solid #dfe3f7;border-radius: 11px;background: #eef2ff;color: #3730a3;font-size: 12px;line-height: 18px;text-decoration: none;}
+a.jsst-tag-chip:hover {background: #e0e7ff;color: #312e81;text-decoration: none;}
+.jsst-tag-empty {color: #8a8f8f;font-size: 12px;}
+
+/* The whole resting row is the control: chips, then a dashed chip that opens
+   the editor. Dashed rather than solid so it reads as an affordance and not as
+   another tag. */
+.jsst-tagbox {display: block;}
+.jsst-tagbox-summary {display: flex;flex-wrap: wrap;gap: 5px;align-items: center;cursor: pointer;list-style: none;padding: 2px 0;border-radius: 4px;}
+.jsst-tagbox-summary::-webkit-details-marker {display: none;}
+.jsst-tagbox-summary:focus {outline: none;}
+.jsst-tagbox-summary:focus-visible {outline: 2px solid #4f46e5;outline-offset: 2px;}
+.jsst-tag-add {border: 1px dashed #b9bfd6;background: transparent;color: #4f46e5;font-weight: 600;}
+.jsst-tagbox-summary:hover .jsst-tag-add {border-color: #4f46e5;background: #f5f6ff;}
+.jsst-tagbox[open] .jsst-tag-add {border-style: solid;border-color: #4f46e5;background: #4f46e5;color: #fff;}
+
+.jsst-tag-form {margin: 8px 0 2px;padding: 10px 12px;background: #fafbfc;border: 1px solid #e4e6ea;border-radius: 6px;}
+.jsst-tag-row {display: flex;flex-wrap: wrap;gap: 6px;align-items: center;}
+/* The field carried only a height, so it rendered as a bare borderless box next
+   to every other control on the screen — there is no global .inputbox rule to
+   inherit from, and the admin's Tailwind reset zeroes border-width on *. These
+   are class selectors, which outrank that reset, and they follow the same field
+   language as .jsst-bulk-bar input[type="text"].inputbox above. */
+input.jsst-tag-input {box-sizing: border-box;flex: 1 1 170px;min-width: 150px;height: 34px;margin: 0;padding: 6px 10px;background: #fff;border: 1px solid #dcdfe3;border-radius: 6px;box-shadow: none;color: #23282d;font-size: 13px;line-height: 20px;text-align: start;transition: border-color .15s ease, box-shadow .15s ease;}
+input.jsst-tag-input::placeholder {color: #a7adb5;opacity: 1;}
+/* The field carries list="jsst-tag-suggestions", and Chrome draws a native
+   dropdown caret for any input bound to a datalist. On a free-text field that
+   takes a comma-separated list it reads as a select and invites people to pick
+   one value. Hiding the caret costs nothing: the suggestions still open as soon
+   as you type. */
+input.jsst-tag-input::-webkit-calendar-picker-indicator {display: none;}
+input.jsst-tag-input::-webkit-list-button {display: none;}
+input.jsst-tag-input:hover {border-color: #c3c8d0;}
+input.jsst-tag-input:focus {border-color: #4f46e5;box-shadow: 0 0 0 3px rgba(79,70,229,.14);outline: none;}
+/* Keyboard users still get a hard ring, in case the reset strips the shadow. */
+input.jsst-tag-input:focus-visible {outline: 2px solid #4f46e5;outline-offset: -1px;}
+/* .wp-core-ui .button is (0,2,0) and sets border-radius:2px plus min-height:40px,
+   so a plain .jsst-tag-save loses and the button ends up square-cornered and
+   taller than the field beside it. Qualifying with .wp-core-ui input takes it to
+   (0,2,1). min-height has to be restated: it beats height whatever the
+   specificity. Colours are left to WordPress — it should still read as a WP
+   button, it just has to line up with the field. */
+.wp-core-ui input.jsst-tag-save,
+input.jsst-tag-save {flex: 0 0 auto;box-sizing: border-box;height: 34px;min-height: 34px;padding: 0 14px;border-radius: 6px;line-height: 32px;font-size: 13px;}
+.jsst-tag-hint {margin: 7px 0 0;color: #8a8f8f;font-size: 12px;line-height: 1.5;}
+
+/* Core queue capabilities. (Roadmap 4.0-CORE-18) */
+
+/* The tabs size themselves to how many there are. Waiting on Agent and Waiting
+   on Customer join the row in 4.0, and Overdue only appears when its add-on is
+   active, so the fixed fraction of the width this used to be no longer fits. */
+#jsstadmin-data-wrp div.js-ticket-count {display: flex;flex-wrap: wrap;}
+#jsstadmin-data-wrp div.js-ticket-count div.js-ticket-link {float: none;width: auto;flex: 1 1 140px;}
+
+.js-ticket-teal {color: #0f8b8d;}
+.js-ticket-waitingagent {background-color: #9922d8;}
+.js-ticket-waitingcustomer {background-color: #0f8b8d;}
+div.js-ticket-count a.js-ticket-link.js-ticket-purple.active {border-color: #9922d8;}
+div.js-ticket-count a.js-ticket-link.js-ticket-teal.active {border-color: #0f8b8d;}
+div.js-ticket-count a.js-ticket-link.js-ticket-teal:hover {border-color: #0f8b8d;}
+
+/* The search box gets its own row above the field-by-field filters: it is the
+   control an agent reaches for, and it is worth more width than a filter. */
+form.js-filter-form .jsst-queue-search {float: left;width: 100%;display: flex;flex-wrap: wrap;gap: 6px;align-items: center;margin-bottom: 6px;}
+form.js-filter-form .jsst-queue-search .jsst-queue-keywords {float: none;flex: 1 1 320px;width: auto;margin: 0;}
+form.js-filter-form .jsst-queue-search .jsst-queue-view {float: none;width: auto;min-width: 180px;margin: 0;}
+.jsst-queue-view-delete {color: #a02c2c;font-size: 12px;text-decoration: none;}
+.jsst-queue-view-delete:hover {color: #7a1f1f;text-decoration: underline;}
+
+form.jsst-queue-saveview {float: left;width: 100%;display: flex;flex-wrap: wrap;gap: 8px;align-items: center;margin: 0 0 20px;padding: 10px;border: 1px solid #ebecec;border-radius: 6px;background: #fbfbfb;}
+form.jsst-queue-saveview .jsst-queue-viewname {flex: 1 1 260px;min-width: 180px;height: 38px;padding: 8px 10px;color: #6c757d;background: #fff;border: 1px solid #ebecec;box-shadow: unset;}
+form.jsst-queue-saveview .button {height: 38px;line-height: initial;border-radius: unset;box-shadow: unset;border: 1px solid #ebecec;}
+
+/* Topics upgrade. (Roadmap 4.0-CORE-20) */
+.js-form-note {margin-top: 6px;color: #8a8f8f;font-size: 12px;line-height: 1.5;float: left;width: 100%;}
+.jsst-topic-indent {display: inline-block;color: #b8b8b8;}
+.jsst-topic-default {display: inline-block;margin-left: 6px;padding: 1px 8px;border-radius: 10px;background: #eef2ff;color: #3730a3;font-size: 11px;line-height: 17px;}
+form.jsstadmin-form div.js-form-wrapper.jsst-default-topic div.jsst-default-topic-choice {float: left;width: 100%;height: 45px;padding: 10px;margin: 0;box-shadow: unset;color: #6c757d;background: #f8fafc;border: 1px solid #ebecec;}
+form.jsstadmin-form div.js-form-wrapper.jsst-default-topic div.jsst-default-topic-choice input[type="checkbox"] {float:left;width: 18px;height: 18px;margin: 2px 5px 0;cursor: pointer;border: 1px solid #ebecec;}
+.jsst-topic-owner-none {color: #8a8f8f;}
+
+/* Modern ticket list. (Roadmap 4.0-UX-02) */
+
+.jsst-queue-toolbar {float: left;width: 100%;display: flex;flex-wrap: wrap;align-items: center;gap: 10px;margin-bottom: 10px;}
+.jsst-density {display: inline-flex;}
+.jsst-queue-toolbar .jsst-density-btn {height: 30px;line-height: 28px;padding: 0 12px;border-radius: 0;box-shadow: none;border: 1px solid #ebecec;background: #fff;color: #606262;}
+.jsst-queue-toolbar .jsst-density-btn.active {background: #4f46e5;border-color: #4f46e5;color: #fff;}
+.jsst-kbd-hint {margin-left: auto;color: #8a8f8f;font-size: 12px;}
+
+.jsst-row-subject {font-weight: 600;overflow-wrap: anywhere;}
+.jsst-row-meta {margin-top: 4px;display: flex;flex-wrap: wrap;gap: 6px;align-items: center;}
+.jsst-row-ref {color: #8a8f8f;font-size: 12px;}
+.jsst-row-flag {padding: 1px 7px;border-radius: 10px;background: #f1f2f4;color: #606262;font-size: 11px;line-height: 17px;}
+.jsst-row-tags {margin-top: 6px;}
+.jsst-row-sub {color: #8a8f8f;font-size: 12px;}
+.jsst-row-none {color: #b8b8b8;}
+.jsst-row-customer, .jsst-row-department {cursor: pointer;border-bottom: 1px dotted #b8b8b8;}
+.jsst-row-customer:hover, .jsst-row-department:hover {color: #4f46e5;border-bottom-color: #4f46e5;}
+.jsst-row-customer:focus, .jsst-row-department:focus {outline: 2px solid #4f46e5;outline-offset: 2px;}
+.jsst-sla-overdue {padding: 1px 8px;border-radius: 10px;background: #fdecea;color: #a02c2c;font-size: 12px;line-height: 18px;}
+.jsst-sla-due {color: #606262;font-size: 12px;}
+
+
+
+
+/* One composer, two modes. (Roadmap 4.0-UX-03) */
+
+/* Not sticky. position:sticky with bottom:0 pulls an element UP into view
+   when its normal position is below the fold, and clamps it to the top of
+   its containing block - which here is the whole left column, so the
+   composer landed on top of the ticket details instead of under the
+   conversation. Making it stick properly needs the column restructured
+   into a flex layout, which is the rest of 4.0-UX-03. */
+.jsst-composer {float: left;width: 100%;background: #fff;border: 1px solid #ebecec;border-top-width: 3px;border-radius: 4px;box-shadow: 0 -2px 10px rgba(0,0,0,0.04);}
+/* A segmented switch rather than a row of tabs. Public and internal are not two
+   views of the same thing — one is sent to a customer and the other must never
+   be — so the control is shaped like a switch between two states, and each side
+   carries its own colour as a dot whether or not it is the one selected. An
+   agent should be able to tell the two apart before clicking, not after. */
+.jsst-composer-modes {display: inline-flex;gap: 3px;margin: 12px 16px 0;padding: 3px;background: #f1f2f4;border: 1px solid #e4e6ea;border-radius: 7px;}
+.jsst-composer-mode {display: inline-flex;align-items: center;gap: 7px;flex: 0 0 auto;padding: 6px 14px;border: 1px solid transparent;border-radius: 5px;background: none;color: #6b7076;font-size: 13px;font-weight: 600;line-height: 18px;cursor: pointer;box-shadow: none;}
+.jsst-composer-mode::before {content: "";width: 7px;height: 7px;border-radius: 50%;background: #c4c8cc;flex: 0 0 auto;}
+.jsst-composer-mode-public::before {background: #4f46e5;}
+.jsst-composer-mode-internal::before {background: #b45309;}
+.jsst-composer-mode:hover {color: #23282d;background: rgba(255,255,255,0.6);}
+.jsst-composer-mode:focus {outline: none;}
+.jsst-composer-mode:focus-visible {outline: 2px solid #4f46e5;outline-offset: 1px;}
+.jsst-composer-mode[aria-selected="true"] {background: #fff;border-color: #dcdfe3;box-shadow: 0 1px 2px rgba(16,24,40,0.06);}
+
+.jsst-composer-banner {display: none;margin: 10px 16px 0;padding: 9px 12px;border-radius: 5px;font-size: 13px;line-height: 1.5;}
+.jsst-composer-panel {display: none;padding: 0 4px;}
+
+/* Public: the product's ordinary indigo. Nothing shouts, because this is the
+   expected case. */
+.jsst-composer-public {border-top-color: #4f46e5;}
+.jsst-composer-public .jsst-composer-mode-public {color: #3730a3;}
+.jsst-composer-public .jsst-composer-banner-public {display: block;color: #4b5563;background: #f5f6ff;border: 1px solid #e0e3f7;border-left: 4px solid #3730a3;margin-bottom: 10px;}
+.jsst-composer-public .jsst-composer-panel-public {display: block;}
+
+/* Internal: amber, and applied to the whole composer rather than a corner of it.
+   The point is that an agent cannot be looking at the writing area without also
+   seeing which mode they are in. */
+.jsst-composer-internal {border-top-color: #b45309;background: #fffbf3;}
+.jsst-composer-internal .jsst-composer-modes {background: #f7eddd;border-color: #eadbc0;}
+.jsst-composer-internal .jsst-composer-mode-internal {color: #8a4009;}
+.jsst-composer-internal .jsst-composer-mode[aria-selected="true"] {border-color: #e3cda6;}
+.jsst-composer-internal .jsst-composer-mode:focus-visible {outline-color: #b45309;}
+.jsst-composer-internal .jsst-composer-banner-internal {display: block;color: #7c4a03;background: #fdf1dd;border: 1px solid #f0dcbb;border-left: 4px solid #b45309;margin-bottom: 10px;}
+.jsst-composer-internal .jsst-composer-panel-internal {display: block;}
+.jsst-composer-internal .js-form-button .button {background: #b45309;border-color: #b45309;color: #fff;}
+
+/* The composer keeps its own scrollbar rather than growing without limit: a
+   sticky element taller than the viewport stops being sticky in any useful
+   sense. Browsers without position:sticky fall back to the old inline
+   behaviour, which is what this screen did before. */
+
+
+/* Email health. (Roadmap 4.0-OPS-01) */
+.jsst-health-card {float: left;width: 100%;margin: 0 0 16px;padding: 16px 18px;background: #fff;border: 1px solid #ebecec;border-left: 4px solid #ebecec;border-radius: 4px;}
+.jsst-health-card.jsst-health-ok {border-left-color: #14a76c;}
+.jsst-health-card.jsst-health-warn {border-left-color: #b45309;}
+.jsst-health-card.jsst-health-bad {border-left-color: #a02c2c;}
+.jsst-health-title {font-size: 13px;font-weight: 700;text-transform: uppercase;letter-spacing: .03em;color: #8a8f8f;margin-bottom: 6px;}
+.jsst-health-value {font-size: 17px;color: #23282d;margin-bottom: 8px;word-break: break-word;}
+.jsst-health-note {color: #606262;font-size: 13px;line-height: 1.6;margin-top: 6px;}
+.jsst-health-error {margin-top: 8px;padding: 8px 10px;background: #fdecea;color: #a02c2c;border-radius: 3px;font-family: monospace;font-size: 12px;word-break: break-word;}
+.jsst-health-table {width: 100%;margin-top: 10px;border-collapse: collapse;}
+.jsst-health-table td {padding: 8px 0;border-bottom: 1px solid #f1f2f4;color: #23282d;font-size: 13px;}
+.jsst-health-table tr:last-child td {border-bottom: 0;}
+.jsst-health-flag {display: inline-block;padding: 2px 9px;border-radius: 10px;font-size: 12px;line-height: 18px;}
+.jsst-health-flag-ok {background: #e7f7f0;color: #14663f;}
+.jsst-health-flag-bad {background: #fdecea;color: #a02c2c;}
+.jsst-health-testform {display: flex;flex-wrap: wrap;gap: 8px;align-items: center;margin-top: 12px;}
+.jsst-health-testform .inputbox {flex: 1 1 280px;min-width: 200px;height: 38px;padding: 8px 10px;border: 1px solid #ebecec;background: #f8fafc;color: #6c757d;box-shadow: none;}
+.jsst-health-testform .button {height: 38px;line-height: initial;border-radius: 0;box-shadow: none;}
+
+/* Five-minute setup. (Roadmap 4.0-UX-01) */
+.jsst-setup-summary {float: left;width: 100%;margin: 0 0 18px;padding: 18px;background: #fff;border: 1px solid #ebecec;border-radius: 4px;}
+.jsst-setup-summary.jsst-setup-complete {border-color: #14a76c;}
+.jsst-setup-count {font-size: 18px;font-weight: 700;color: #23282d;margin-bottom: 10px;}
+.jsst-setup-bar {height: 8px;background: #f1f2f4;border-radius: 4px;overflow: hidden;}
+.jsst-setup-bar-fill {display: block;height: 100%;background: #4f46e5;transition: width .3s ease;}
+.jsst-setup-complete .jsst-setup-bar-fill {background: #14a76c;}
+.jsst-setup-lede {margin-top: 10px;color: #606262;font-size: 13px;line-height: 1.6;}
+.jsst-setup-step {float: left;width: 100%;display: flex;gap: 14px;align-items: flex-start;margin: 0 0 10px;padding: 16px 18px;background: #fff;border: 1px solid #ebecec;border-left: 4px solid #d5d7da;border-radius: 4px;}
+.jsst-setup-step-done {border-left-color: #14a76c;}
+.jsst-setup-step-todo {border-left-color: #4f46e5;}
+.jsst-setup-mark {flex: 0 0 24px;width: 24px;height: 24px;border-radius: 50%;border: 2px solid #d5d7da;text-align: center;line-height: 20px;color: #fff;font-weight: 700;}
+.jsst-setup-step-done .jsst-setup-mark {background: #14a76c;border-color: #14a76c;}
+.jsst-setup-body {flex: 1 1 auto;min-width: 0;}
+.jsst-setup-title {font-size: 15px;font-weight: 600;color: #23282d;}
+.jsst-setup-detail {margin-top: 4px;color: #23282d;font-size: 13px;}
+.jsst-setup-why {margin-top: 6px;color: #8a8f8f;font-size: 12px;line-height: 1.6;}
+.jsst-setup-action {flex: 0 0 auto;}
+.jsst-setup-action .button {height: 36px;line-height: 34px;border-radius: 0;box-shadow: none;}
+.jsst-setup-footer {float: left;width: 100%;margin-top: 14px;color: #8a8f8f;font-size: 12px;}
+.jsst-setup-footer-note {margin-left: 8px;}
+.jsst-setup-badge {display: inline-block;min-width: 18px;padding: 0 6px;border-radius: 9px;background: #4f46e5;color: #fff;font-size: 11px;line-height: 18px;text-align: center;}
+
+/* Agent Access. (Roadmap 4.0-SEC-04) */
+.jsst-access-lede {float: left;width: 100%;margin-bottom: 14px;color: #606262;font-size: 13px;line-height: 1.6;}
+.jsst-access-alert {float: left;width: 100%;margin-bottom: 16px;padding: 12px 14px;background: #fdf1dd;color: #7c4a03;border-left: 4px solid #b45309;border-radius: 3px;font-size: 13px;line-height: 1.6;}
+.jsst-access-card {float: left;width: 100%;margin: 0 0 12px;padding: 16px 18px;background: #fff;border: 1px solid #ebecec;border-left: 4px solid #14a76c;border-radius: 4px;}
+.jsst-access-card.jsst-access-warn {border-left-color: #b45309;}
+.jsst-access-head {display: flex;flex-wrap: wrap;gap: 8px;align-items: baseline;margin-bottom: 10px;}
+.jsst-access-name {font-size: 15px;font-weight: 600;color: #23282d;}
+.jsst-access-email {color: #8a8f8f;font-size: 12px;}
+.jsst-access-tag {padding: 1px 8px;border-radius: 10px;font-size: 11px;line-height: 18px;background: #f1f2f4;color: #606262;}
+.jsst-access-tag-admin {background: #eef2ff;color: #3730a3;}
+.jsst-access-tag-off {background: #fdecea;color: #a02c2c;}
+.jsst-access-table {width: 100%;border-collapse: collapse;}
+.jsst-access-table td {padding: 7px 0;border-bottom: 1px solid #f4f5f6;font-size: 13px;color: #23282d;vertical-align: top;}
+.jsst-access-table tr:last-child td {border-bottom: 0;}
+.jsst-access-table td:first-child {width: 170px;color: #8a8f8f;}
+.jsst-access-source {color: #8a8f8f;font-size: 12px;}
+.jsst-access-perm {display: inline-block;margin: 0 4px 4px 0;padding: 2px 9px;border-radius: 10px;font-size: 12px;line-height: 18px;background: #f1f2f4;color: #606262;}
+.jsst-access-perm-agent {background: #eef2ff;color: #3730a3;}
+.jsst-access-none {color: #a02c2c;font-size: 13px;}
+.jsst-access-warning {margin-top: 10px;padding: 8px 10px;background: #fdf1dd;color: #7c4a03;border-radius: 3px;font-size: 12px;line-height: 1.6;}
+
+/* System status. (Roadmap 4.0-OPS-02) */
+.jsst-status-card {float: left;width: 100%;margin: 0 0 14px;padding: 16px 18px;background: #fff;border: 1px solid #ebecec;border-left: 4px solid #ebecec;border-radius: 4px;}
+.jsst-status-card.jsst-status-ok {border-left-color: #14a76c;}
+.jsst-status-card.jsst-status-warn {border-left-color: #b45309;}
+.jsst-status-title {font-size: 13px;font-weight: 700;text-transform: uppercase;letter-spacing: .03em;color: #8a8f8f;margin-bottom: 8px;}
+.jsst-status-note {color: #606262;font-size: 13px;line-height: 1.6;margin-bottom: 8px;}
+.jsst-status-table {width: 100%;border-collapse: collapse;}
+.jsst-status-table td {padding: 7px 0;border-bottom: 1px solid #f4f5f6;font-size: 13px;color: #23282d;vertical-align: top;}
+.jsst-status-table tr:last-child td {border-bottom: 0;}
+.jsst-status-table td:first-child {width: 260px;color: #8a8f8f;}
+.jsst-status-path {color: #b8b8b8;font-size: 11px;font-family: monospace;word-break: break-all;}
+.jsst-status-flag {display: inline-block;padding: 2px 9px;border-radius: 10px;font-size: 12px;line-height: 18px;}
+.jsst-status-flag-ok {background: #e7f7f0;color: #14663f;}
+.jsst-status-flag-bad {background: #fdecea;color: #a02c2c;}
+.jsst-status-when {white-space: nowrap;color: #8a8f8f;font-size: 12px;}
+.jsst-status-error {font-family: monospace;font-size: 12px;color: #a02c2c;word-break: break-word;}
+.jsst-status-correlation {margin-left: 12px;color: #8a8f8f;font-size: 12px;}
+
+/* Diagnostic pages, and the link an error message carries to one. (Roadmap 4.0-OPS-03) */
+.jsst-doc {border-top: 1px solid #f4f5f6;padding: 8px 0;}
+.jsst-doc:first-of-type {border-top: 0;}
+.jsst-doc-summary {cursor: pointer;font-size: 13px;font-weight: 600;color: #23282d;padding: 4px 0;}
+.jsst-doc[open] .jsst-doc-summary {color: #14663f;}
+.jsst-doc .jsst-status-table td:first-child {width: 28px;color: #b8b8b8;}
+.jsst-doc-link {margin-left: 8px;font-size: 12px;white-space: nowrap;}
+
+/* The row of buttons that ends a migration or import card. (Roadmap 4.0-DATA-02) */
+.jsst-migration-actions {display: flex;flex-wrap: wrap;gap: 10px;align-items: center;margin-top: 12px;}
+.jsst-migration-actions input[type="file"] {font-size: 13px;color: #606262;}
+
+/* Draft recovery. (Roadmap 4.0-UX-04) */
+.jsst-draft-restore {display: flex;flex-wrap: wrap;gap: 8px;align-items: center;margin: 10px 12px;padding: 10px 12px;background: #eef2ff;border: 1px solid #c7d2fe;border-radius: 4px;}
+.jsst-draft-text {flex: 1 1 260px;color: #3730a3;font-size: 13px;}
+.jsst-draft-restore .button {height: 30px;line-height: 28px;border-radius: 0;box-shadow: none;}
+
+/* Who else is on this ticket. (Roadmap 4.0-UX-05)
+
+   Three states, escalating: somebody is here, somebody is writing, somebody has
+   already answered. Only the last one is red, because a colleague reading the
+   ticket is ordinary and colouring it like a problem is how a warning stops
+   being read. */
+.jsst-presence {display: flex;flex-wrap: wrap;gap: 8px;align-items: center;margin: 10px 12px;padding: 8px 12px;background: #f3f4f6;border: 1px solid #e5e7eb;border-radius: 4px;color: #4b5563;font-size: 13px;line-height: 1.5;}
+.jsst-presence-replying {background: #fdf1dd;border-color: #f0d9ae;color: #7c4a03;}
+.jsst-presence-stale {background: #fdecea;border-color: #f5c6c2;color: #8a1f16;font-weight: 600;}
+.jsst-presence-stale .jsst-presence-text {flex: 1 1 260px;}
+.jsst-presence-stale .button {height: 30px;line-height: 28px;border-radius: 0;box-shadow: none;}
+
+
+/* The card list. (Roadmap 4.0-UX-02) */
+.jsst-queue-cards {float: left;width: 100%;}
+.jsst-queue-cards .jsst-row {position: relative;}
+
+/* Keyboard focus is the only thing telling an agent which card Enter opens.
+   outline rather than border or box-shadow: this admin page has a third-party
+   reset injected after the plugin stylesheet that sets border-width and
+   box-shadow on *, so a focus ring built from those does not survive. */
+.jsst-queue-cards .jsst-row.jsst-row-focused {outline: 2px solid #4f46e5;outline-offset: -2px;}
+
+/* Compact tightens the cards so more tickets fit on a screen. Every rule here
+   reduces existing spacing rather than adding any - an earlier attempt put
+   padding on the wrapper, which had none, and made compact taller than
+   comfortable. */
+.jsst-queue-cards.jsst-density-compact div.js-ticket-wrapper {margin-bottom: 8px;}
+.jsst-queue-cards.jsst-density-compact div.js-ticket-wrapper div.js-ticket-toparea {padding: 6px 12px;}
+.jsst-queue-cards.jsst-density-compact div.js-ticket-wrapper div.js-ticket-toparea div.js-ticket-pic {display: none;}
+.jsst-queue-cards.jsst-density-compact div.js-ticket-wrapper div.js-ticket-toparea div.js-ticket-data div.js-ticket-left div.js-ticket-data-row {padding-bottom: 2px;}
+.jsst-queue-cards.jsst-density-compact div.js-ticket-wrapper div.js-ticket-bottom-data-part {padding: 4px 10px;}
+.jsst-queue-cards.jsst-density-compact .js-ticket-datapart-action-btn {height: 28px;line-height: 26px;}
+.jsst-placeholders .jsst-placeholders-intro {margin: 0 0 12px;color: #6a6d6f;font-size: 13px;line-height: 1.6;text-align: start;}
+.jsst-placeholders .jsst-placeholder-list {display: grid;gap: 8px 20px;margin: 0;padding: 0;list-style: none;}
+.jsst-placeholders .jsst-placeholder-list li {display: flex;align-items: baseline;gap: 8px;margin: 0;padding: 0;list-style: none;text-align: start;}
+.jsst-placeholders .jsst-placeholder-token {flex: 0 0 auto;direction: ltr;unicode-bidi: isolate;margin: 0;padding: 3px 8px;background: #f6f7f7;border: 1px solid #dcdfe3;border-radius: 5px;color: #3730a3;font-family: Consolas, Monaco, "Courier New", monospace;font-size: 12px;line-height: 18px;cursor: pointer;box-shadow: none;transition: background .15s ease, border-color .15s ease;}
+.jsst-placeholders .jsst-placeholder-token:hover {background: #eef2ff;border-color: #4f46e5;}
+.jsst-placeholders .jsst-placeholder-token:active {background: #e0e5ff;}
+.jsst-placeholders .jsst-placeholder-token:focus-visible {outline: 2px solid #4f46e5;outline-offset: 2px;}
+.jsst-placeholders .jsst-placeholder-desc {color: #6a6d6f;font-size: 13px;line-height: 1.5;}
+/* Reserves its line so the "Copied" confirmation cannot shift the list. */
+.jsst-placeholders .jsst-placeholder-copied {display: block;min-height: 20px;margin-top: 10px;color: #0f7d4b;font-size: 13px;line-height: 20px;font-weight: 600;text-align: start;}
+@media (max-width: 600px) {
+    .jsst-placeholders .jsst-placeholder-list {grid-template-columns: 1fr;gap: 10px;}
+    .jsst-placeholders .jsst-placeholder-list li {flex-wrap: wrap;gap: 4px 8px;}
+}
+
+
+/* ==========================================================================
+   Configurations page - search, navigation and visual system (4.0-UX-01)
+   Everything here is scoped to .js-support-ticket-configurations so the
+   ticket screens, which share .jsst_tabs, keep their own styling.
+   ========================================================================== */
+
+.js-support-ticket-configurations {
+    --jsst-accent: #4f46e5;
+    --jsst-accent-dark: #4338ca;
+    --jsst-accent-soft: #eef2ff;
+    --jsst-ink: #111827;
+    --jsst-ink-2: #374151;
+    --jsst-muted: #6b7280;
+    --jsst-faint: #9ca3af;
+    --jsst-line: #e3e6ea;
+    --jsst-hair: #eef0f3;
+    --jsst-surface: #fff;
+    --jsst-canvas: #f0f0f1;
+    --jsst-warn: #b45309;
+    --jsst-admin-bar: 32px;
+    --jsst-search-h: 72px;
+    /* The sticky save bar spans the whole form, so it overlaps the bottom of the
+       section menu beside it. Everything that has to stay clear of it measures
+       against this; the JS on the page replaces the default with the real
+       height. */
+    --jsst-savebar-h: 68px;
+}
+@media screen and (max-width: 782px) {.js-support-ticket-configurations {--jsst-admin-bar: 46px;}}
+
+/* --------------------------------------------------------------------------
+   Search toolbar - full-bleed white bar pinned under the page title
+   -------------------------------------------------------------------------- */
+.js-support-ticket-configurations .jsst-config-search {position: sticky;top: var(--jsst-admin-bar);z-index: 60;float: left;box-sizing: border-box;width: calc(100% + 40px);margin: 0 -20px 20px;padding: 14px 20px;background: var(--jsst-surface);border-bottom: 1px solid var(--jsst-line);transition: box-shadow .18s ease;}
+.js-support-ticket-configurations .jsst-config-search.jsst-is-stuck {box-shadow: 0 8px 20px -12px rgba(16,24,40,.4);}
+
+.jsst-config-search-box {position: relative;max-width: 560px;}
+.jsst-config-search-icon {position: absolute;left: 14px;top: 50%;transform: translateY(-50%);width: 17px;height: 17px;fill: none;stroke: var(--jsst-faint);stroke-width: 2;stroke-linecap: round;pointer-events: none;transition: stroke .15s ease;}
+.jsst-config-search-box:focus-within .jsst-config-search-icon {stroke: var(--jsst-accent);}
+
+.js-support-ticket-configurations input.jsst-config-search-input {box-sizing: border-box;width: 100% !important;max-width: 100% !important;height: 44px;margin: 0;padding: 0 78px 0 40px !important;border: 1px solid #d5d8de;border-radius: 10px;background: #f8f9fb !important;color: var(--jsst-ink);font-size: 14px;line-height: 42px;box-shadow: none;transition: border-color .15s ease, box-shadow .15s ease, background-color .15s ease;}
+.js-support-ticket-configurations input.jsst-config-search-input::placeholder {color: var(--jsst-faint);}
+.js-support-ticket-configurations input.jsst-config-search-input:focus {outline: none;border-color: var(--jsst-accent);background: var(--jsst-surface) !important;box-shadow: 0 0 0 3px rgba(79,70,229,.14);}
+
+/* "/" hint chip - hidden once the field is in use */
+.jsst-config-search-kbd {position: absolute;right: 12px;top: 50%;transform: translateY(-50%);padding: 3px 8px;border: 1px solid var(--jsst-line);border-bottom-width: 2px;border-radius: 6px;background: var(--jsst-surface);color: var(--jsst-faint);font-family: inherit;font-size: 11px;font-weight: 600;line-height: 1.4;pointer-events: none;transition: opacity .15s ease;}
+.jsst-config-search-box:focus-within .jsst-config-search-kbd,
+.jsst-config-search-box.jsst-has-query .jsst-config-search-kbd {opacity: 0;}
+
+.jsst-config-search-clear {position: absolute;right: 10px;top: 50%;transform: translateY(-50%);display: flex;align-items: center;justify-content: center;width: 24px;height: 24px;padding: 0;border: 0;border-radius: 50%;background: #e5e7eb;color: #4b5563;font-size: 16px;line-height: 1;cursor: pointer;transition: background-color .15s ease;}
+.jsst-config-search-clear:hover {background: #d1d5db;color: var(--jsst-ink);}
+
+/* --------------------------------------------------------------------------
+   Search results
+   -------------------------------------------------------------------------- */
+.jsst-config-search-results {position: absolute;z-index: 70;top: calc(100% + 8px);left: 0;width: 100%;max-height: 62vh;overflow-y: auto;overscroll-behavior: contain;box-sizing: border-box;padding: 6px;background: var(--jsst-surface);border: 1px solid var(--jsst-line);border-radius: 12px;box-shadow: 0 18px 44px -14px rgba(16,24,40,.34), 0 2px 6px rgba(16,24,40,.06);}
+.jsst-config-search-group {padding: 10px 10px 5px;font-size: 10.5px;font-weight: 700;letter-spacing: .06em;text-transform: uppercase;color: var(--jsst-faint);}
+.jsst-config-search-group:first-child {padding-top: 6px;}
+.jsst-config-search-hit {display: block;padding: 9px 10px;border-radius: 8px;font-size: 13.5px;font-weight: 500;line-height: 1.4;color: var(--jsst-ink-2);text-decoration: none;transition: background-color .12s ease, color .12s ease;}
+.jsst-config-search-hit:hover,
+.jsst-config-search-hit.jsst-config-search-active {background: var(--jsst-accent-soft);color: var(--jsst-accent);box-shadow: none;}
+.jsst-config-search-hit mark {background: #fde68a;color: inherit;padding: 0 2px;border-radius: 3px;font-weight: 700;}
+.jsst-config-search-empty {padding: 20px 12px;font-size: 13.5px;color: var(--jsst-muted);text-align: center;}
+.jsst-config-search-count {margin: 5px 4px 0;padding: 9px 6px 4px;border-top: 1px solid var(--jsst-hair);font-size: 11.5px;color: var(--jsst-faint);}
+
+/* --------------------------------------------------------------------------
+   Section menu
+   -------------------------------------------------------------------------- */
+.js-support-ticket-configurations .js-support-ticket-configurations-left {position: sticky;top: calc(var(--jsst-admin-bar) + var(--jsst-search-h));align-self: flex-start;height: auto;min-height: 0;max-height: calc(100vh - var(--jsst-admin-bar) - var(--jsst-search-h) - var(--jsst-savebar-h) - 24px);overflow-y: auto;overscroll-behavior: contain;padding: 8px 8px 14px;background: var(--jsst-surface);border: 1px solid var(--jsst-line);border-radius: 12px;box-shadow: 0 1px 2px rgba(16,24,40,.05);scrollbar-width: thin;}
+.js-support-ticket-configurations .js-support-ticket-configurations-left::-webkit-scrollbar {width: 8px;}
+.js-support-ticket-configurations .js-support-ticket-configurations-left::-webkit-scrollbar-thumb {background: #dfe2e7;border: 2px solid var(--jsst-surface);border-radius: 8px;}
+
+/* --------------------------------------------------------------------------
+   Tabs - segmented control instead of the old dark blocks
+   -------------------------------------------------------------------------- */
+.js-support-ticket-configurations .tabs.config-tabs {position: sticky;top: calc(var(--jsst-admin-bar) + var(--jsst-search-h));z-index: 50;width: 100%;box-sizing: border-box;padding: 0 0 12px;margin: 0;background: var(--jsst-canvas);}
+.js-support-ticket-configurations .config-tabs .jsst_tabs {display: flex;flex-wrap: nowrap;float: none;gap: 2px;width: 100%;box-sizing: border-box;margin: 0;padding: 4px;overflow-x: auto;overscroll-behavior-x: contain;list-style: none;background: var(--jsst-surface);border: 1px solid var(--jsst-line);border-radius: 10px;box-shadow: 0 1px 2px rgba(16,24,40,.05);scrollbar-width: none;}
+.js-support-ticket-configurations .config-tabs .jsst_tabs::-webkit-scrollbar {display: none;}
+.js-support-ticket-configurations .config-tabs .jsst_tabs .tab-link {flex: 0 0 auto;float: none;margin: 0;border: 0;background: transparent;text-align: center;}
+.js-support-ticket-configurations .config-tabs .jsst_tabs .tab-link a {display: block;width: auto;padding: 10px 16px;border-radius: 7px;color: var(--jsst-muted);font-size: 13.5px;font-weight: 600;line-height: 1.3;white-space: nowrap;text-decoration: none;transition: background-color .15s ease, color .15s ease;}
+.js-support-ticket-configurations .config-tabs .jsst_tabs .tab-link:hover {background: transparent;}
+.js-support-ticket-configurations .config-tabs .jsst_tabs .tab-link:hover a {background: #f3f4f6;color: var(--jsst-ink);}
+.js-support-ticket-configurations .config-tabs .jsst_tabs .tab-link.jsst_current_tab {background: transparent;border: 0;}
+.js-support-ticket-configurations .config-tabs .jsst_tabs .tab-link.jsst_current_tab a,
+.js-support-ticket-configurations .config-tabs .jsst_tabs .tab-link.jsst_current_tab:hover a {background: var(--jsst-accent);color: #fff;box-shadow: 0 1px 2px rgba(79,70,229,.35);}
+
+/* --------------------------------------------------------------------------
+   Setting cards
+   -------------------------------------------------------------------------- */
+.js-support-ticket-configurations .jsst_gen_body {box-sizing: border-box;margin: 0 0 20px;padding: 2px 22px 8px;background: var(--jsst-surface);border: 1px solid var(--jsst-line);border-radius: 12px;box-shadow: 0 1px 2px rgba(16,24,40,.05);scroll-margin-top: calc(var(--jsst-admin-bar) + var(--jsst-search-h) + 74px);}
+.js-support-ticket-configurations .jsst_gen_body h2 {margin: 0 0 6px;padding: 20px 0 14px;border-bottom: 1px solid var(--jsst-hair);color: var(--jsst-ink);font-size: 17px;font-weight: 700;letter-spacing: -.01em;line-height: 1.3;}
+
+.js-support-ticket-configurations .jsst_gen_body .js-ticket-configuration-row,
+.js-support-ticket-configurations .jsst_gen_body .js-ticket-configuration-row-mail {box-sizing: border-box;width: 100%;margin: 0;padding: 15px 10px !important;border-bottom: 1px solid var(--jsst-hair);border-radius: 8px;scroll-margin-top: calc(var(--jsst-admin-bar) + var(--jsst-search-h) + 86px);transition: background-color .15s ease;}
+.js-support-ticket-configurations .jsst_gen_body .js-ticket-configuration-row:hover,
+.js-support-ticket-configurations .jsst_gen_body .js-ticket-configuration-row-mail:hover {background: #fafbfc;}
+.js-support-ticket-configurations .jsst_gen_body > .js-ticket-configuration-row:last-child {border-bottom: 0;}
+.js-support-ticket-configurations .jsst_gen_body .js-ticket-configuration-title {padding: 11px 20px 0 0;color: var(--jsst-ink-2);font-size: 13.5px;font-weight: 600;line-height: 1.45;}
+.js-support-ticket-configurations .jsst_gen_body .js-ticket-configuration-description {margin-top: 7px;color: var(--jsst-muted);font-size: 12.5px !important;line-height: 1.6;}
+
+/* Form controls */
+.js-support-ticket-configurations .jsst_gen_body .js-ticket-configuration-value input:not([type="checkbox"]):not([type="radio"]),
+.js-support-ticket-configurations .jsst_gen_body .js-ticket-configuration-value select,
+.js-support-ticket-configurations .jsst_gen_body .js-ticket-configuration-value textarea {box-sizing: border-box;min-height: 42px;padding: 8px 12px;background-color: var(--jsst-surface) !important;border: 1px solid #d5d8de;border-radius: 8px;color: var(--jsst-ink);font-size: 14px;box-shadow: none;transition: border-color .15s ease, box-shadow .15s ease;}
+.js-support-ticket-configurations .jsst_gen_body .js-ticket-configuration-value input:not([type="checkbox"]):not([type="radio"]):focus,
+.js-support-ticket-configurations .jsst_gen_body .js-ticket-configuration-value select:focus,
+.js-support-ticket-configurations .jsst_gen_body .js-ticket-configuration-value textarea:focus {outline: none;border-color: var(--jsst-accent);box-shadow: 0 0 0 3px rgba(79,70,229,.14);}
+.js-support-ticket-configurations .jsst_gen_body .js-ticket-configuration-value textarea {min-height: 90px;line-height: 1.6;}
+
+/* --------------------------------------------------------------------------
+   Save bar
+   -------------------------------------------------------------------------- */
+.js-support-ticket-configurations .js-form-button.jsst-config-savebar {position: sticky;bottom: 0;z-index: 55;display: flex;align-items: center;justify-content: flex-end;gap: 14px;box-sizing: border-box;float: left;width: calc(100% + 40px);margin: 8px -20px 0;padding: 13px 20px;background: #fff;border-top: 1px solid var(--jsst-line);box-shadow: 0 -8px 20px -14px rgba(16,24,40,.45);text-align: right;}
+.js-support-ticket-configurations .js-form-button.jsst-config-savebar .button.js-form-save {min-width: 0;height: 42px;padding: 0 24px;background: var(--jsst-accent);border: 1px solid var(--jsst-accent);border-radius: 8px;color: #fff;font-size: 14px !important;font-weight: 600;line-height: 40px;box-shadow: 0 1px 2px rgba(16,24,40,.1);transition: background-color .15s ease, border-color .15s ease;}
+.js-support-ticket-configurations .js-form-button.jsst-config-savebar .button.js-form-save:hover {background: var(--jsst-accent-dark);border-color: var(--jsst-accent-dark);color: #fff;}
+
+.jsst-config-changecount {display: inline-flex;align-items: center;gap: 8px;padding: 6px 13px;background: #fffbeb;border: 1px solid #fde68a;border-radius: 999px;color: var(--jsst-warn);font-size: 12.5px;font-weight: 600;}
+.jsst-config-changecount::before {content: '';width: 7px;height: 7px;border-radius: 50%;background: #f59e0b;}
+.jsst-config-changecount:empty {display: none;}
+
+/* --------------------------------------------------------------------------
+   Changed-field marker and search jump highlight
+   -------------------------------------------------------------------------- */
+.js-support-ticket-configurations .jsst_gen_body .js-ticket-configuration-row.jsst-config-dirty,
+.js-support-ticket-configurations .jsst_gen_body .js-ticket-configuration-row-mail.jsst-config-dirty {position: relative;background: #fffdf7;box-shadow: inset 3px 0 0 #f59e0b;}
+.js-support-ticket-configurations .jsst_gen_body .jsst-config-dirty .js-ticket-configuration-title {color: var(--jsst-warn);}
+
+.jsst-config-flash {animation: jsstConfigFlash 1.8s ease-out;}
+@keyframes jsstConfigFlash {
+    0%, 40% {background-color: #fef3c7;box-shadow: inset 3px 0 0 var(--jsst-accent);}
+    100% {background-color: transparent;box-shadow: inset 3px 0 0 transparent;}
+}
+@media (prefers-reduced-motion: reduce) {
+    .jsst-config-flash {animation: none;background-color: #fef3c7;}
+    .js-support-ticket-configurations * {transition: none !important;}
+}
+
+/* --------------------------------------------------------------------------
+   Small screens - nothing sticks; 782px is where the plugin already collapses
+   the section menu behind the "Select Configuration" toggle.
+   -------------------------------------------------------------------------- */
+@media screen and (max-width: 782px) {
+    .js-support-ticket-configurations .jsst-config-search,
+    .js-support-ticket-configurations .js-support-ticket-configurations-left,
+    .js-support-ticket-configurations .tabs.config-tabs,
+    .js-support-ticket-configurations .js-form-button.jsst-config-savebar {position: static;max-height: none;}
+    .js-support-ticket-configurations .jsst-config-search,
+    .js-support-ticket-configurations .js-form-button.jsst-config-savebar {width: 100%;margin-left: 0;margin-right: 0;padding-left: 12px;padding-right: 12px;}
+    .jsst-config-search-box, .jsst-config-search-results {max-width: 100%;}
+    .js-support-ticket-configurations .jsst_gen_body {padding-left: 14px;padding-right: 14px;}
+}

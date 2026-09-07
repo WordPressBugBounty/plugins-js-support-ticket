@@ -1,12 +1,15 @@
 <?php
 if (!defined('ABSPATH'))
     die('Restricted Access');
-if (JSSTincluder::getObjectClass('user')->isguest() && jssupportticket::$_config['show_captcha_on_visitor_from_ticket'] == 1 && jssupportticket::$_config['captcha_selection'] == 1) {
-    wp_enqueue_script( 'ticket-recaptcha', 'https://www.google.com/recaptcha/api.js', array(), jssupportticket::$_config['productversion'], true );
+// The verification provider registers its own script. (Roadmap 4.0-SEC-01)
+$jsst_verification = null;
+if (JSSTincluder::getObjectClass('user')->isguest() && jssupportticket::$_config['captcha_on_registration'] == 1) {
+    $jsst_verification = JSSTincluder::getObjectClass('verification');
+    $jsst_verification->scripts();
 }
 $jsst_jssupportticket_js ="
     jQuery(document).ready(function ($) {
-        $.validate();    
+        $.validate();
     });
     function onSubmit(token) {
         document.getElementById('jsst_registration_form').submit();
@@ -94,41 +97,33 @@ if (jssupportticket::$_config['offline'] == 2) {
                     foreach (jssupportticket::$jsst_data['fieldordering'] as $jsst_field) {
                         JSSTincluder::getObjectClass('customfields')->formCustomFields($jsst_field);
                     }
-                    $jsst_google_recaptcha_3 = false;
-                    if (jssupportticket::$_config['captcha_on_registration'] == 1) { ?>
-                        <div class="js-ticket-from-field-wrp">
+                    $jsst_verification_markup = ($jsst_verification !== null) ? $jsst_verification->field('register') : '';
+                    if ($jsst_verification_markup != '') { ?>
+                        <div class="js-ticket-from-field-wrp<?php echo JSSTverification::hasVisibleField() ? '' : ' jsst-verification-quiet'; ?>">
+                            <?php // The built-in check shows the visitor nothing, so a heading
+                            // here would sit over an empty box. (Roadmap 4.0-SEC-01)
+                            if (JSSTverification::hasVisibleField()) { ?>
                             <div class="js-ticket-from-field-title">
-                                <?php echo esc_html(__('Captcha', 'js-support-ticket')); ?>
+                                <?php echo esc_html(__('Security check', 'js-support-ticket')); ?>
                             </div>
+                            <?php } ?>
                             <div class="js-ticket-from-field">
-                                <?php
-                                if (jssupportticket::$_config['captcha_selection'] == 1) { // Google reCaptcha
-                                    $jsst_error = null;
-                                    if (jssupportticket::$_config['recaptcha_version'] == 1) {
-                                        echo '<div class="g-recaptcha" data-sitekey="'.esc_attr(jssupportticket::$_config['recaptcha_publickey']).'"></div>';
-                                    } else {
-                                        $jsst_google_recaptcha_3 = true;
-                                    }
-                                } else { // own captcha
-                                    $jsst_captcha = new JSSTcaptcha;
-                                    echo wp_kses($jsst_captcha->getCaptchaForForm(), JSST_ALLOWED_TAGS);
-
-                                } ?>
+                                <?php echo wp_kses($jsst_verification_markup, JSST_ALLOWED_TAGS); ?>
                             </div>
                         </div>
                         <?php
                     } ?>
                     <input type="hidden" name="jsst_support_register_nonce" value="<?php echo esc_attr(wp_create_nonce('jsst-support-register-nonce')); ?>"/>
                     <div class="js-ticket-form-btn-wrp">
-                        <?php
-                        if($jsst_google_recaptcha_3 == true && JSSTincluder::getObjectClass('user')->isguest()){ // to handle case of google recpatcha version 3
-                            echo wp_kses(JSSTformfield::button('save', esc_html(__('Register', 'js-support-ticket')), array('class' => 'js-ticket-save-button g-recaptcha', 'data-callback' => 'onSubmit', 'data-action' => 'submit', 'data-sitekey' => esc_attr(jssupportticket::$_config['recaptcha_publickey']))), JSST_ALLOWED_TAGS);
-                        } else {
-                            echo wp_kses(JSSTformfield::submitbutton('save', esc_html(__('Register', 'js-support-ticket')), array('class' => 'js-ticket-save-button')), JSST_ALLOWED_TAGS);
-                        } ?>
+                        <?php echo wp_kses(JSSTformfield::submitbutton('save', esc_html(__('Register', 'js-support-ticket')), array('class' => 'js-ticket-save-button')), JSST_ALLOWED_TAGS); ?>
                         <a href="<?php echo esc_url(jssupportticket::makeUrl(array('jstmod'=>'jssupportticket', 'jstlay'=>'controlpanel')));?>" class="js-ticket-cancel-button"><?php echo esc_html(__('Cancel','js-support-ticket')); ?></a>
                     </div>
                 </form>
+                <?php
+                if ($jsst_verification !== null) {
+                    echo $jsst_verification->recaptchaV3Script('jsst_registration_form', 'jsst_register'); // phpcs:ignore WordPress.Security.EscapeOutput -- inline script built from wp_json_encode'd values
+                }
+                ?>
             </div>
         <?php
         } else {
@@ -138,8 +133,8 @@ if (jssupportticket::$_config['offline'] == 2) {
             JSSTlayout::getYouAreLoggedIn();
     }
 }
-if(isset($jsst_google_recaptcha) && $jsst_google_recaptcha){
-    wp_enqueue_script( 'ticket-recaptcha', 'https://www.google.com/recaptcha/api.js', array(), jssupportticket::$_config['productversion'], true );
-}
+// The provider script is registered by JSSTverification::scripts() at the top of
+// this template, so there is no second, unconditional reCAPTCHA enqueue here.
+// (Roadmap 4.0-SEC-01)
 ?>
 </div>

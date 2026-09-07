@@ -9,7 +9,11 @@ class JSSTwphdnotification {
 
     }
 
-    public function addSessionNotificationDataToTable($jsst_message, $jsst_msgtype, $jsst_sessiondatafor = 'notification',$jsst_ticketid = null){
+    /**
+     * @param string $jsst_doc id of a diagnostic page, carried beside the
+     *        message so a redirect does not lose it. (Roadmap 4.0-OPS-03)
+     */
+    public function addSessionNotificationDataToTable($jsst_message, $jsst_msgtype, $jsst_sessiondatafor = 'notification',$jsst_ticketid = null,$jsst_doc = ''){
         if($jsst_message == ''){
             if(!is_numeric($jsst_message))
                 return false;
@@ -23,11 +27,13 @@ class JSSTwphdnotification {
                 if(empty($jsst_data)){
                     $jsst_data['msg'][0] = $jsst_message;
                     $jsst_data['type'][0] = $jsst_msgtype;
+                    $jsst_data['doc'][0] = $jsst_doc;
                 }else{
                     $jsst_update = true;
                     $jsst_count = count($jsst_data['msg']);
                     $jsst_data['msg'][$jsst_count] = $jsst_message;
                     $jsst_data['type'][$jsst_count] = $jsst_msgtype;
+                    $jsst_data['doc'][$jsst_count] = $jsst_doc;
                 }
             }elseif($jsst_sessiondatafor == 'submitform'){
                 $jsst_data = $this->getNotificationDatabySessionId($jsst_sessiondatafor,true);

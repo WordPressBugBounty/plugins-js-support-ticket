@@ -3,12 +3,14 @@
 /**
  * JS Support Ticket Uninstall
  *
- * Uninstalling JS Support Ticket tables, and pages.
+ * What is removed and what is preserved is governed by the
+ * `data_retention_on_uninstall` setting. The contract is documented in the
+ * class comment of includes/deactivation.php. (Roadmap 3.2-CORE-02)
  *
  * @author 		Ahmed Bilal
  * @category 	Core
  * @package 	JS Support Ticket/Uninstaller
- * @version     1.0
+ * @version     4.0.0
  */
 if (!defined('WP_UNINSTALL_PLUGIN'))
     exit();
@@ -16,24 +18,19 @@ if (!defined('WP_UNINSTALL_PLUGIN'))
 global $wpdb;
 include_once 'includes/deactivation.php';
 
-if(function_exists('is_multisite') && is_multisite()){
-	$jsst_blogs = $wpdb->get_col("SELECT blog_id FROM $wpdb->blogs");
-    foreach($jsst_blogs as $jsst_blog_id){
-        switch_to_blog( $jsst_blog_id );
-		$jsst_tablestodrop = JSSTdeactivation::jssupportticket_tables_to_drop();
-        foreach($jsst_tablestodrop as $jsst_tablename){
-            $wpdb->query( 
-                "DROP TABLE IF EXISTS " . esc_sql( $jsst_tablename ) 
-            );
-        }
+$jsst_retention_mode = JSSTdeactivation::jssupportticket_get_retention_mode();
+
+if (function_exists('is_multisite') && is_multisite()) {
+    $jsst_blogs = $wpdb->get_col("SELECT blog_id FROM $wpdb->blogs");
+    foreach ($jsst_blogs as $jsst_blog_id) {
+        switch_to_blog($jsst_blog_id);
+        // Each site keeps its own setting, so read it per site rather than
+        // applying the network-main site's choice everywhere.
+        JSSTdeactivation::jssupportticket_uninstall_site(
+            JSSTdeactivation::jssupportticket_get_retention_mode()
+        );
         restore_current_blog();
     }
-}else{
-    $jsst_tablestodrop = JSSTdeactivation::jssupportticket_tables_to_drop();
-
-    foreach ( $jsst_tablestodrop as $jsst_tablename ) {
-        $jsst_tablename = esc_sql( $jsst_tablename );
-        // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
-        $wpdb->query( "DROP TABLE IF EXISTS `{$jsst_tablename}`" );
-    }
+} else {
+    JSSTdeactivation::jssupportticket_uninstall_site($jsst_retention_mode);
 }

@@ -462,7 +462,7 @@ class JSSTthirdpartyimportModel {
                 $jsst_query = "UPDATE `" . jssupportticket::$_db->prefix . "js_ticket_tickets` SET `hash`=%s WHERE id=%d";
                 jssupportticket::$_db->query(jssupportticket::$_db->prepare($jsst_query, $jsst_hash, $jsst_jshd_ticketid));
 
-                if(in_array('note', jssupportticket::$_active_addons)){
+                if(JSSTmergedaddon::featureEnabled('note')){
                     $this->getSupportCandyTicketNotes($jsst_jshd_ticketid, $jsst_ticket->id, $jsst_attachmentdir);
                 }
                 $this->getSupportCandyTicketReplies($jsst_jshd_ticketid, $jsst_ticket->id, $jsst_attachmentdir);
@@ -472,7 +472,7 @@ class JSSTthirdpartyimportModel {
                     $this->getSupportCandyTicketPrivateCredentials($jsst_jshd_ticketid, $jsst_userinfo["jshd_uid"], $jsst_ticket->pc_data);
                 }
 
-                if (in_array('tickethistory', jssupportticket::$_active_addons)) {
+                if (JSSTmergedaddon::featureEnabled('tickethistory')) {
                     $this->getSupportCandyTicketActivityLog($jsst_jshd_ticketid, $jsst_ticket->id);
                 }
 
@@ -483,7 +483,7 @@ class JSSTthirdpartyimportModel {
         }
 
         if (!empty($this->jsst_support_candy_ticket_ids)) {
-            update_option('js_support_ticket_support_candy_data_tickets', wp_json_encode($this->jsst_support_candy_ticket_ids));
+            update_option('js_support_ticket_support_candy_data_tickets', wp_json_encode(array_unique(array_merge($jsst_imported_tickets, $this->jsst_support_candy_ticket_ids))));
         }
     }
 
@@ -961,9 +961,10 @@ class JSSTthirdpartyimportModel {
         $jsst_sc_agent_id = intval($jsst_sc_agent_id);
         if ($jsst_sc_agent_id <= 0) return null;
 
-        // Secure SQL query using prepare()
+        /* agent.id, not agent.* — the one caller assigns the result straight
+           to a `staffid` column, and a row object there is not a staff id. */
         $jsst_query = "
-            SELECT agent.*
+            SELECT agent.id
             FROM `" . jssupportticket::$_db->prefix . "psmsc_agents` AS sc_agent
             INNER JOIN `" . jssupportticket::$_db->prefix . "js_ticket_users` AS user
                 ON user.wpuid = sc_agent.user
@@ -974,9 +975,9 @@ class JSSTthirdpartyimportModel {
         ";
         $jsst_query = jssupportticket::$_db->prepare($jsst_query, $jsst_sc_agent_id);
 
-        $jsst_jshd_agent = jssupportticket::$_db->get_row($jsst_query);
+        $jsst_jshd_agent_id = jssupportticket::$_db->get_var($jsst_query);
 
-        return $jsst_jshd_agent ?: null;
+        return $jsst_jshd_agent_id ? (int) $jsst_jshd_agent_id : null;
     }
 
     private function getTicketAgentIdBySupportCandy($jsst_customerId) {
@@ -1894,7 +1895,7 @@ class JSSTthirdpartyimportModel {
         foreach ($jsst_canned_replies as $jsst_canned_reply) {
             $jsst_title = jssupportticketphplib::JSST_trim(jssupportticketphplib::JSST_strtolower($jsst_canned_reply->title));
             // Failed if addon not installed
-            if (!in_array('cannedresponses', jssupportticket::$_active_addons) ) {
+            if (!JSSTmergedaddon::featureEnabled('cannedresponses') ) {
                 $this->jsst_support_candy_import_count['canned response']['failed']++;
                 continue;
             }
@@ -2056,7 +2057,7 @@ class JSSTthirdpartyimportModel {
 
         // Save updated list of imported statuses
         if (!empty($this->jsst_support_candy_status_ids)) {
-            update_option('js_support_ticket_support_candy_data_statuses', wp_json_encode($this->jsst_support_candy_status_ids));
+            update_option('js_support_ticket_support_candy_data_statuses', wp_json_encode(array_unique(array_merge($jsst_imported_statuses, $this->jsst_support_candy_status_ids))));
         }
     }
 
@@ -2167,7 +2168,11 @@ class JSSTthirdpartyimportModel {
         // Only for development – remove before pushing to production
         // $this->deletesupportcandyimporteddata();
 
-        // Reset previously imported IDs from options
+        /* Development only — these wipe the record of what has already been
+           imported, so every run started from nothing and imported the same
+           tickets again instead of skipping them. Left commented rather than
+           deleted, as they are in importSupportCandyData(), so they are still
+           there when a developer wants to force a clean re-import.
         update_option('js_support_ticket_awesome_support_data_statuses', '');
         update_option('js_support_ticket_awesome_support_data_priorities', '');
         update_option('js_support_ticket_awesome_support_data_users', '');
@@ -2177,6 +2182,7 @@ class JSSTthirdpartyimportModel {
         update_option('js_support_ticket_awesome_support_data_tickets', '');
         update_option('js_support_ticket_awesome_support_data_faqs', '');
         update_option('js_support_ticket_awesome_support_data_products', '');
+        */
         
         // Prepare filesystem and create necessary directories
         require_once ABSPATH . 'wp-admin/includes/class-wp-filesystem-base.php';
@@ -2782,7 +2788,7 @@ class JSSTthirdpartyimportModel {
 
         // Save updated list of imported statuses
         if (!empty($this->jsst_awesome_support_status_ids)) {
-            update_option('js_support_ticket_awesome_support_data_statuses', wp_json_encode($this->jsst_awesome_support_status_ids));
+            update_option('js_support_ticket_awesome_support_data_statuses', wp_json_encode(array_unique(array_merge($jsst_imported_statuses, $this->jsst_awesome_support_status_ids))));
         }
     }
 
@@ -2813,7 +2819,7 @@ class JSSTthirdpartyimportModel {
         foreach ($jsst_canned_replies as $jsst_canned_reply) {
             $jsst_title = jssupportticketphplib::JSST_trim(jssupportticketphplib::JSST_strtolower($jsst_canned_reply->post_title));
             // Failed if addon not installed
-            if (!in_array('cannedresponses', jssupportticket::$_active_addons) ) {
+            if (!JSSTmergedaddon::featureEnabled('cannedresponses') ) {
                 $this->jsst_awesome_support_import_count['canned response']['failed']++;
                 continue;
             }
@@ -3152,14 +3158,14 @@ class JSSTthirdpartyimportModel {
                     $this->getAwesomeSupportTicketPrivateCredentials($jsst_jshd_ticketid, $jsst_userinfo["jshd_uid"], $jsst_ticket->ID);
                 }
 
-                if (in_array('tickethistory', jssupportticket::$_active_addons)) {
+                if (JSSTmergedaddon::featureEnabled('tickethistory')) {
                     $this->getAwesomeSupportTicketActivityLog($jsst_jshd_ticketid, $jsst_ticket->ID);
                 }
             }
             
         }
         if (!empty($this->jsst_awesome_support_ticket_ids)) {
-            update_option('js_support_ticket_awesome_support_data_tickets', wp_json_encode($this->jsst_awesome_support_ticket_ids));
+            update_option('js_support_ticket_awesome_support_data_tickets', wp_json_encode(array_unique(array_merge($jsst_imported_tickets, $this->jsst_awesome_support_ticket_ids))));
         }
         
     }
@@ -3945,7 +3951,7 @@ class JSSTthirdpartyimportModel {
 
         // Save updated list of imported faqs
         if (!empty($this->awesome_support_faq_ids)) {
-            update_option('js_support_ticket_awesome_support_data_faqs', wp_json_encode($this->awesome_support_faq_ids));
+            update_option('js_support_ticket_awesome_support_data_faqs', wp_json_encode(array_unique(array_merge($jsst_imported_faqs, $this->awesome_support_faq_ids))));
         }
     }
 
@@ -4007,13 +4013,14 @@ class JSSTthirdpartyimportModel {
         // Only for development – remove before pushing to production
         // $this->deletesupportcandyimporteddata();
 
-        // Reset previously imported IDs from options
+        /* Development only — same reason as importAwesomeSupportData().
         update_option('js_support_ticket_fluent_support_data_priorities', '');
         update_option('js_support_ticket_fluent_support_data_users', '');
         update_option('js_support_ticket_fluent_support_data_premades', '');
         update_option('js_support_ticket_fluent_support_data_agents', '');
         update_option('js_support_ticket_fluent_support_data_products', '');
         update_option('js_support_ticket_fluent_support_data_tickets', '');
+        */
         
         // Prepare filesystem and create necessary directories
         require_once ABSPATH . 'wp-admin/includes/class-wp-filesystem-base.php';
@@ -4223,13 +4230,13 @@ class JSSTthirdpartyimportModel {
                 $jsst_query = "UPDATE `" . jssupportticket::$_db->prefix . "js_ticket_tickets` SET `hash`=%s WHERE id=%d";
                 jssupportticket::$_db->query(jssupportticket::$_db->prepare($jsst_query, $jsst_hash, $jsst_jshd_ticketid));
 
-                if(in_array('note', jssupportticket::$_active_addons)){
+                if(JSSTmergedaddon::featureEnabled('note')){
                     $this->getFluentSupportTicketNotes($jsst_jshd_ticketid, $jsst_ticket->id, $jsst_attachmentdir);
                 }
                 $this->getFluentSupportTicketReplies($jsst_jshd_ticketid, $jsst_ticket->id, $jsst_attachmentdir);
                 $this->getFluentSupportTicketAttachments($jsst_jshd_ticketid, $jsst_ticket->id, $jsst_attachmentdir);
 
-                if (in_array('tickethistory', jssupportticket::$_active_addons)) {
+                if (JSSTmergedaddon::featureEnabled('tickethistory')) {
                     $this->getFluentSupportTicketActivityLog($jsst_jshd_ticketid, $jsst_ticket->id);
                 }
 
@@ -4240,7 +4247,7 @@ class JSSTthirdpartyimportModel {
         }
 
         if (!empty($this->jsst_fluent_support_ticket_ids)) {
-            update_option('js_support_ticket_fluent_support_data_tickets', wp_json_encode($this->jsst_fluent_support_ticket_ids));
+            update_option('js_support_ticket_fluent_support_data_tickets', wp_json_encode(array_unique(array_merge($jsst_imported_tickets, $this->jsst_fluent_support_ticket_ids))));
         }
     }
 
@@ -4950,9 +4957,9 @@ class JSSTthirdpartyimportModel {
         $jsst_fs_agent_id = intval($jsst_fs_agent_id);
         if ($jsst_fs_agent_id <= 0) return null;
 
-        // Secure SQL query using prepare()
+        /* agent.id, not agent.* — same reason as the SupportCandy version. */
         $jsst_query = "
-            SELECT agent.*
+            SELECT agent.id
             FROM `" . jssupportticket::$_db->prefix . "fs_persons` AS fs_agent
             INNER JOIN `" . jssupportticket::$_db->prefix . "js_ticket_users` AS user
                 ON user.wpuid = fs_agent.user_id
@@ -4963,9 +4970,9 @@ class JSSTthirdpartyimportModel {
         ";
         $jsst_query = jssupportticket::$_db->prepare($jsst_query, $jsst_fs_agent_id);
 
-        $jsst_jshd_agent = jssupportticket::$_db->get_row($jsst_query);
+        $jsst_jshd_agent_id = jssupportticket::$_db->get_var($jsst_query);
 
-        return $jsst_jshd_agent ?: null;
+        return $jsst_jshd_agent_id ? (int) $jsst_jshd_agent_id : null;
     }
 
     private function getFluentSupportTicketCustomerInfo($jsst_customerId) {
@@ -5484,7 +5491,7 @@ class JSSTthirdpartyimportModel {
         foreach ($jsst_canned_replies as $jsst_canned_reply) {
             $jsst_title = jssupportticketphplib::JSST_trim(jssupportticketphplib::JSST_strtolower($jsst_canned_reply->title));
             // Failed if addon not installed
-            if (!in_array('cannedresponses', jssupportticket::$_active_addons) ) {
+            if (!JSSTmergedaddon::featureEnabled('cannedresponses') ) {
                 $this->jsst_fluent_support_import_count['canned response']['failed']++;
                 continue;
             }

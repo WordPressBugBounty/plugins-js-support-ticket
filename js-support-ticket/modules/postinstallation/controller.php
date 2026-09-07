@@ -18,6 +18,9 @@ class JSSTpostinstallationController {
                 case 'admin_quickconfig':
                     JSSTincluder::getJSModel('postinstallation')->getConfigurationValues();
                 break;
+                // The activation checklist. (Roadmap 4.0-UX-01)
+                case 'admin_setup':
+                    break;
                 case 'admin_wellcomepage':
                 break;
                 case 'admin_stepone':
@@ -72,6 +75,51 @@ class JSSTpostinstallationController {
                 return true;
             }
         }
+    }
+
+    /**
+     * Create the customer-facing portal page. (Roadmap 4.0-UX-01)
+     *
+     * The one setup step with no decision attached, so it is done from the
+     * checklist rather than sending an administrator to the Pages screen to
+     * paste a shortcode.
+     */
+    static function createportalpage(){
+        $jsst_nonce = JSSTrequest::getVar('_wpnonce');
+        if (! wp_verify_nonce( $jsst_nonce, 'jsst-setup-createportalpage') ) {
+            die( 'Security check Failed' );
+        }
+        if (!current_user_can('manage_options')) {
+            JSSTmessage::setMessage(esc_html(__('You are not allowed to do this', 'js-support-ticket')), 'error', 'agent-permissions');
+        } else {
+            $jsst_pageid = class_exists('JSSTsetup') ? JSSTsetup::createPortalPage() : false;
+            if ($jsst_pageid) {
+                JSSTmessage::setMessage(esc_html(__('The help desk page has been created and published.', 'js-support-ticket')), 'updated');
+            } else {
+                JSSTmessage::setMessage(esc_html(__('The page could not be created. Check that this account may publish pages.', 'js-support-ticket')), 'error');
+            }
+        }
+        wp_safe_redirect(admin_url('admin.php?page=postinstallation&jstlay=setup'));
+        exit;
+    }
+
+    /**
+     * Put the checklist away. (Roadmap 4.0-UX-01)
+     *
+     * Only hides the menu entry - the checks themselves keep working and the
+     * screen stays reachable, because a site that drifts out of a working state
+     * should still be able to find out why.
+     */
+    static function dismisssetup(){
+        $jsst_nonce = JSSTrequest::getVar('_wpnonce');
+        if (! wp_verify_nonce( $jsst_nonce, 'jsst-setup-dismiss') ) {
+            die( 'Security check Failed' );
+        }
+        if (current_user_can('manage_options')) {
+            if (class_exists('JSSTsetup')) { JSSTsetup::dismiss(); }
+        }
+        wp_safe_redirect(admin_url('admin.php?page=jssupportticket'));
+        exit;
     }
 
     function save(){

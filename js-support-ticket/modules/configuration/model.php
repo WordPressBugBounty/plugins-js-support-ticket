@@ -14,15 +14,17 @@ class JSSTconfigurationModel {
             JSSTincluder::getJSModel('systemerror')->addSystemError();
         }
         foreach ($jsst_data AS $jsst_config) {
-            if($jsst_config->addon == '' ||  in_array($jsst_config->addon, jssupportticket::$_active_addons)){
+            // A setting that belongs to a capability now merged into the free
+            // core has to stay editable even though no add-on is active — its
+            // `addon` column still names the add-on it arrived with.
+            // (Roadmap 4.0-CORE-19)
+            if($jsst_config->addon == '' ||  in_array($jsst_config->addon, jssupportticket::$_active_addons) || JSSTmergedaddon::isMerged($jsst_config->addon)){
                 jssupportticket::$jsst_data[0][$jsst_config->configname] = $jsst_config->configvalue;
             }
         }
 
         jssupportticket::$jsst_data[1] = JSSTincluder::getJSModel('email')->getAllEmailsForCombobox();
-        if(in_array('banemail', jssupportticket::$_active_addons)){
-            JSSTincluder::getJSModel('banemaillog')->checkbandata();
-        }
+        JSSTincluder::getJSModel('banemaillog')->checkbandata();
         return;
     }
 
@@ -40,9 +42,7 @@ class JSSTconfigurationModel {
 				foreach ($jsst_data AS $jsst_config) {
 					jssupportticket::$jsst_data[0][$jsst_config->configname] = $jsst_config->configvalue;
 				}
-				if(in_array('banemail', jssupportticket::$_active_addons)){
-                    JSSTincluder::getJSModel('banemaillog')->checkbandata();
-                }
+				JSSTincluder::getJSModel('banemaillog')->checkbandata();
                 return;
 			}
 		}
@@ -55,9 +55,7 @@ class JSSTconfigurationModel {
         foreach ($jsst_data AS $jsst_config) {
             jssupportticket::$jsst_data[0][$jsst_config->configname] = $jsst_config->configvalue;
         }
-        if(in_array('banemail', jssupportticket::$_active_addons)){
-            JSSTincluder::getJSModel('banemaillog')->checkbandata();
-        }
+        JSSTincluder::getJSModel('banemaillog')->checkbandata();
         return;
     }
     function getCountByConfigFor($jsst_for) {
@@ -191,6 +189,23 @@ class JSSTconfigurationModel {
                     continue;
                 }
             }
+            // The role handed to public registrations is a security control, so
+            // an unsafe value is refused here as well as being absent from the
+            // select. (Roadmap 4.0-CORE-07)
+            if ($jsst_key == 'wp_default_role') {
+                if (!JSSTregistrationrole::isSafe($jsst_value)) {
+                    JSSTmessage::setMessage(
+                        sprintf(
+                            /* translators: %s: the role that was rejected */
+                            esc_html(__('The registration role %s was not saved: registration is open to the public, so it cannot be a role that administers the site, manages users, publishes content or works tickets.', 'js-support-ticket')),
+                            esc_html((string) $jsst_value)
+                        ),
+                        'error'
+                    );
+                    continue;
+                }
+            }
+
             if ($jsst_key == 'system_slug') {
                 if(empty($jsst_value)){
                     JSSTmessage::setMessage(esc_html(__('System slug not be empty.', 'js-support-ticket')), 'error');

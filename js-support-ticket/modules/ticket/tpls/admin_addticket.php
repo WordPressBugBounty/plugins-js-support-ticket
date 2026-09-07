@@ -78,7 +78,7 @@ $jsst_jssupportticket_js ='
     });
     // to get premade and append to isssue summery
     function getpremade(val) {
-        jQuery.post(ajaxurl, {action: "jsticket_ajax", val: val, jstmod: "cannedresponses", task: "getpremadeajax", "_wpnonce":"'. esc_attr(wp_create_nonce("get-premade-ajax")) .'"}, function (data) {
+        jQuery.post(ajaxurl, {action: "jsticket_ajax", val: val, jstmod: "cannedresponses", task: "getpremadeajax", ticketid: "'. esc_js(isset(jssupportticket::$jsst_data[0]->id) ? jssupportticket::$jsst_data[0]->id : 0) .'", "_wpnonce":"'. esc_attr(wp_create_nonce("get-premade-ajax")) .'"}, function (data) {
             if (data) {
                 var append = jQuery("input#append1:checked").length;
                 if (append == 1) {
@@ -94,11 +94,13 @@ $jsst_jssupportticket_js ='
     }
     // to get premade and append to isssue summery
     function getHelpTopicByDepartment(val) {
-        jQuery.post(ajaxurl, {action: "jsticket_ajax", val: val, jstmod: "department", task: "getHelpTopicByDepartment", "_wpnonce":"'. esc_attr(wp_create_nonce("get-help-topic-by-department")) .'"}, function (data) {
-            if (data != false) {
+        // context tells the endpoint which form it is answering, so the select it
+        // returns carries this screen\'s classes and placeholder rather than the
+        // other form\'s. The empty state comes back from the server too, so both
+        // forms show the same thing for a department with no topics.
+        jQuery.post(ajaxurl, {action: "jsticket_ajax", val: val, jstmod: "department", task: "getHelpTopicByDepartment", context: "admin", "_wpnonce":"'. esc_attr(wp_create_nonce("get-help-topic-by-department")) .'"}, function (data) {
+            if (data) {
                 jQuery("div#helptopic").html(data);
-            }else{
-                jQuery("div#helptopic").html( "<div class=\'helptopic-no-rec\'>'. esc_html(__('No help topic found','js-support-ticket')).'</div>");
             }
         });//jquery closed
     }
@@ -215,13 +217,7 @@ wp_add_inline_script('js-support-ticket-main-js',$jsst_jssupportticket_js);
 <span style="display:none" id="filesize"><?php echo esc_html(__('Error file size too large', 'js-support-ticket')); ?></span>
 <span style="display:none" id="fileext"><?php echo esc_html(__('The uploaded file extension not valid', 'js-support-ticket')); ?></span>
 <div id="jsstadmin-wrapper">
-    <div id="jsstadmin-leftmenu">
-        <?php
-        if(current_user_can('jsst_support_ticket')){
-            JSSTincluder::getClassesInclude('jsstadminsidemenu');
-        }
-        ?>
-    </div>
+    <?php JSSTsidemenu::render(); ?>
     <div id="jsstadmin-data">
         <div id="jsstadmin-wrapper-top">
             <div id="jsstadmin-wrapper-top-left">
@@ -296,6 +292,32 @@ wp_add_inline_script('js-support-ticket-main-js',$jsst_jssupportticket_js);
             <form class="jsstadmin-form js-support-ticket-form" method="post" action="<?php echo esc_url(wp_nonce_url(admin_url("admin.php?page=ticket&task=saveticket"),"save-ticket-".$jsst_nonce_id)); ?>" id="adminTicketform" enctype="multipart/form-data">
                 <?php
                     $jsst_i = '';
+                    // The topic this form opens on, and the department and priority
+                    // it routes to. Resolved before the field loop because the
+                    // fields can be ordered either way round, and because a topic
+                    // the *server* chose - the one marked default - has to fill the
+                    // same blanks that picking a topic by hand does. Without it the
+                    // form showed an empty Priority while storeTickets() quietly
+                    // applied the topic's own through applyFormRules(), so what the
+                    // admin saw was not what got saved. (Roadmap 4.0-CORE-20)
+                    $jsst_topicmodel = JSSTincluder::getJSModel('helptopic');
+                    if(isset($jsst_formdata['helptopicid'])) $jsst_formtopicid = $jsst_formdata['helptopicid'];
+                    elseif(isset(jssupportticket::$jsst_data[0]->helptopicid)) $jsst_formtopicid = jssupportticket::$jsst_data[0]->helptopicid;
+                    elseif(JSSTrequest::getVar('helptopicid',0) > 0) $jsst_formtopicid = JSSTrequest::getVar('helptopicid');
+                    // Guarded because on a site still running the legacy Help Topic
+                    // add-on this model is the add-on's and has neither method.
+                    // (Roadmap 4.0-CORE-19)
+                    elseif(method_exists($jsst_topicmodel, 'getDefaultTopicId') && $jsst_topicmodel->getDefaultTopicId() > 0) $jsst_formtopicid = $jsst_topicmodel->getDefaultTopicId();
+                    else $jsst_formtopicid = '';
+                    $jsst_topicrouting = method_exists($jsst_topicmodel, 'getRouting') ? $jsst_topicmodel->getRouting($jsst_formtopicid) : array();
+                    /* Which of the two the form filled in by itself rather than
+                       being told. Only these may be rewritten when the topic
+                       changes; a value that came from the submitted form, from the
+                       ticket being edited or from the URL is somebody's decision. */
+                    $jsst_autofilled = array();
+                    if(!isset($jsst_formdata['departmentid']) && !isset(jssupportticket::$jsst_data[0]->departmentid) && !(JSSTrequest::getVar('departmentid',0) > 0)) $jsst_autofilled[] = 'departmentid';
+                    if(!isset($jsst_formdata['priorityid']) && !isset(jssupportticket::$jsst_data[0]->priorityid)) $jsst_autofilled[] = 'priorityid';
+                    if (!empty(jssupportticket::$jsst_data['fieldordering'])) {
                     foreach (jssupportticket::$jsst_data['fieldordering'] AS $jsst_field):
                         $jsst_readonlyclass = $jsst_field->readonly ? " js-form-ticket-readonly " : "";
                         $jsst_jsVisibleFunction = '';
@@ -423,6 +445,7 @@ wp_add_inline_script('js-support-ticket-main-js',$jsst_jssupportticket_js);
                                             if(isset($jsst_formdata['departmentid'])) $jsst_departmentid = $jsst_formdata['departmentid'];
                                             elseif(isset(jssupportticket::$jsst_data[0]->departmentid)) $jsst_departmentid = jssupportticket::$jsst_data[0]->departmentid;
                                             elseif(JSSTrequest::getVar('departmentid',0) > 0) $jsst_departmentid = JSSTrequest::getVar('departmentid');
+                                            elseif(!empty($jsst_topicrouting['departmentid'])) $jsst_departmentid = $jsst_topicrouting['departmentid'];
                                             else $jsst_departmentid = JSSTincluder::getJSModel('department')->getDefaultDepartmentID();
                                             // code for visible field
                                             if ($jsst_field->visible_field != null && !isset(jssupportticket::$jsst_data[0]->id)) {
@@ -441,7 +464,7 @@ wp_add_inline_script('js-support-ticket-main-js',$jsst_jssupportticket_js);
                                                     wp_add_inline_script('js-support-ticket-main-js', $jsst_jssupportticket_js);
                                                 }
                                             }
-                                            if(in_array('cannedresponses', jssupportticket::$_active_addons)){
+                                            if(JSSTmergedaddon::featureEnabled('cannedresponses')){
                                                 echo wp_kses(JSSTformfield::select('departmentid', JSSTincluder::getJSModel('department')->getDepartmentForCombobox(), $jsst_departmentid, esc_html(__('Select', 'js-support-ticket')).' '.esc_html($jsst_field->fieldtitle), array('class' => 'inputbox js-form-select-field' . esc_attr($jsst_readonlyclass), 'onchange' => $jsst_jsVisibleFunction.' getHelpTopicByDepartment(this.value);getPremadeByDepartment(this.value);', 'data-validation' => ($jsst_field->required) ? 'required':'') + ($jsst_field->readonly ? ['tabindex' => '-1'] : [])), JSST_ALLOWED_TAGS);
                                             }else{
                                                 echo wp_kses(JSSTformfield::select('departmentid', JSSTincluder::getJSModel('department')->getDepartmentForCombobox(), $jsst_departmentid, esc_html(__('Select', 'js-support-ticket')).' '.esc_html($jsst_field->fieldtitle), array('class' => 'inputbox js-form-select-field' . esc_attr($jsst_readonlyclass), 'onchange' => $jsst_jsVisibleFunction.' getHelpTopicByDepartment(this.value);', 'data-validation' => ($jsst_field->required) ? 'required':'') + ($jsst_field->readonly ? ['tabindex' => '-1'] : [])), JSST_ALLOWED_TAGS);
@@ -457,7 +480,7 @@ wp_add_inline_script('js-support-ticket-main-js',$jsst_jssupportticket_js);
                                 <?php
                                 break;
                             case 'helptopic':
-                                if(!in_array('helptopic', jssupportticket::$_active_addons)){
+                                if(!JSSTmergedaddon::featureEnabled('helptopic')){
                                     break;
                                 }
                                 ?>
@@ -465,16 +488,27 @@ wp_add_inline_script('js-support-ticket-main-js',$jsst_jssupportticket_js);
                                     <div class="js-form-title"><?php echo esc_html(jssupportticket::JSST_getVarValue($jsst_field->fieldtitle)); ?><?php if($jsst_field->required == 1) echo '&nbsp;<span style="color: red;" >*</span>'; ?></div>
                                     <div class="js-form-value" id="helptopic">
                                         <?php
-                                            if(isset($jsst_formdata['helptopicid'])) $jsst_helptopicid = $jsst_formdata['helptopicid'];
-                                            elseif(isset(jssupportticket::$jsst_data[0]->helptopicid)) $jsst_helptopicid = jssupportticket::$jsst_data[0]->helptopicid;
-                                            elseif(JSSTrequest::getVar('helptopicid',0) > 0) $jsst_helptopicid = JSSTrequest::getVar('helptopicid');
-                                            else $jsst_helptopicid = '';
-                                            if (isset($jsst_departmentid)) {
+                                            // Resolved above the field loop, together with the
+                                            // department and priority this topic routes to.
+                                            // (Roadmap 4.0-CORE-20)
+                                            $jsst_helptopicid = $jsst_formtopicid;
+                                            /* Filter the topic list by a department somebody actually
+                                               chose. A department this form filled in by itself - from
+                                               the default topic's own routing, or the site default -
+                                               must not narrow the list, or the topic that set it becomes
+                                               the only one reachable and every topic belonging to
+                                               another department vanishes. */
+                                            if (isset($jsst_departmentid) && !in_array('departmentid', $jsst_autofilled, true)) {
                                                 $jsst_dep_id = $jsst_departmentid;
                                             } else{
                                                 $jsst_dep_id = 0;
                                             }
-                                            echo wp_kses(JSSTformfield::select('helptopicid', JSSTincluder::getJSModel('helptopic')->getHelpTopicsForCombobox($jsst_dep_id), $jsst_helptopicid, esc_html(__('Select', 'js-support-ticket')).' '.esc_html($jsst_field->fieldtitle), array('class' => 'inputbox js-form-select-field' . esc_attr($jsst_readonlyclass),'data-validation'=>($jsst_field->required) ? 'required': '', 'onchange' => $jsst_jsVisibleFunction) + ($jsst_field->readonly ? ['tabindex' => '-1'] : [])), JSST_ALLOWED_TAGS);
+                                            echo wp_kses(JSSTformfield::select('helptopicid', $jsst_topicmodel->getHelpTopicsForCombobox($jsst_dep_id), $jsst_helptopicid, esc_html(__('Select', 'js-support-ticket')).' '.esc_html($jsst_field->fieldtitle), array('class' => 'inputbox js-form-select-field' . esc_attr($jsst_readonlyclass),'data-validation'=>($jsst_field->required) ? 'required': '', 'onchange' => $jsst_jsVisibleFunction) + ($jsst_field->readonly ? ['tabindex' => '-1'] : [])), JSST_ALLOWED_TAGS);
+                                            // Choosing a topic fills the department and priority the
+                                            // form has not already set. (Roadmap 4.0-CORE-20)
+                                            if (method_exists($jsst_topicmodel, 'formRulesScript')) {
+                                                echo $jsst_topicmodel->formRulesScript($jsst_autofilled); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- built here from wp_json_encode()
+                                            }
                                         ?>
                                     </div>
                                     <?php if(!empty($jsst_field->description)): ?>
@@ -513,6 +547,7 @@ wp_add_inline_script('js-support-ticket-main-js',$jsst_jssupportticket_js);
                                         <?php
                                             if(isset($jsst_formdata['priorityid'])) $jsst_priorityid = $jsst_formdata['priorityid'];
                                             elseif(isset(jssupportticket::$jsst_data[0]->priorityid)) $jsst_priorityid = jssupportticket::$jsst_data[0]->priorityid;
+                                            elseif(!empty($jsst_topicrouting['priorityid'])) $jsst_priorityid = $jsst_topicrouting['priorityid'];
                                             else $jsst_priorityid = JSSTincluder::getJSModel('priority')->getDefaultPriorityID();
 
                                             if (!empty($jsst_visibleparams) && !isset(jssupportticket::$jsst_data[0]->id)) {
@@ -540,7 +575,7 @@ wp_add_inline_script('js-support-ticket-main-js',$jsst_jssupportticket_js);
                                 <?php
                                 break;
                                 case 'internalnotetitle':
-                                    if(!in_array('note', jssupportticket::$_active_addons)){
+                                    if(!JSSTmergedaddon::featureEnabled('note')){
                                         break;
                                     }
                                         ?>
@@ -677,7 +712,7 @@ wp_add_inline_script('js-support-ticket-main-js',$jsst_jssupportticket_js);
                                 <?php
                                 break;
                             case 'premade':
-                                if(!in_array('cannedresponses', jssupportticket::$_active_addons)){
+                                if(!JSSTmergedaddon::featureEnabled('cannedresponses')){
                                     break;
                                 }
                                 // if($jsst_fieldcounter != 0){
@@ -720,7 +755,10 @@ wp_add_inline_script('js-support-ticket-main-js',$jsst_jssupportticket_js);
                                         <?php
                                             if(isset($jsst_formdata['message'])) $jsst_message = JSSTincluder::getJSModel('jssupportticket')->getSanitizedEditorData($jsst_formdata['message']);
                                             elseif(isset(jssupportticket::$jsst_data[0]->message)) $jsst_message = jssupportticket::$jsst_data[0]->message;
-                                            else $jsst_message = $jsst_field->defaultvalue;
+                                            // defaultvalue is a nullable column, and an unset default arrives
+                                            // here as null. wp_editor() runs its first argument through
+                                            // stripos(), which is deprecated on null from PHP 8.1.
+                                            else $jsst_message = (string) $jsst_field->defaultvalue;
                                             if ($jsst_field->readonly) {
                                                 echo wp_kses(JSSTformfield::textarea('jsticket_message', $jsst_message, array('class' => 'inputbox js-form-textarea-field one', 'rows' => 5, 'cols' => 25, 'placeholder'=> jssupportticket::JSST_getVarValue($jsst_field->placeholder), 'readonly'=> 'readonly')), JSST_ALLOWED_TAGS);
                                             } else {
@@ -984,6 +1022,7 @@ wp_add_inline_script('js-support-ticket-main-js',$jsst_jssupportticket_js);
                         }
                         //do_action('jsst_ticket_form_admin_field_loop', $jsst_field);
                     endforeach;
+                    }
                     echo wp_kses('<input type="hidden" id="userfeilds_total" name="userfeilds_total"  value="' . esc_attr($jsst_i) . '"  />', JSST_ALLOWED_TAGS);
                 ?>
                 <?php echo wp_kses(JSSTformfield::hidden('id', isset(jssupportticket::$jsst_data[0]->id) ? jssupportticket::$jsst_data[0]->id : ''), JSST_ALLOWED_TAGS) ?>

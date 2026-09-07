@@ -14,18 +14,14 @@ class JSSTactivation {
         JSSTincluder::getJSModel('jssupportticket')->addMissingUsers(0);
     }
 
+    /**
+     * Roles and capabilities are reconciled from a single canonical definition
+     * so that activation, upgrade and repair all produce the same result.
+     * (Roadmap 3.2-CORE-01)
+     */
     static private function addCapabilites() {
-		if($GLOBALS['wp_roles']->is_role( 'administrator' )){ // if role exists
-			$jsst_role = get_role( 'administrator' );
-			$jsst_role->add_cap( 'jsst_support_ticket' );
-			$jsst_role->add_cap( 'jsst_support_ticket_tickets' );
-		}
-		if($GLOBALS['wp_roles']->is_role( 'contributor' )){ // if role exists
-			$jsst_role2 = get_role( 'contributor' );
-			$jsst_role2->add_cap( 'jsst_support_ticket_tickets' );
-		}
-        $jsst_capabilities = array("jsst_support_ticket_tickets"=>true, "read"=> true);
-        add_role("js_support_ticket_admin_agent", "JS Help Desk agent (admin)",$jsst_capabilities);
+        include_once JSST_PLUGIN_PATH . 'includes/roles.php';
+        JSSTroles::reconcile();
     }
 
     static private function checkUpdates() {
@@ -139,6 +135,20 @@ class JSSTactivation {
                     ('owncaptcha_calculationtype', '1', 'default', NULL),
                     ('owncaptcha_totaloperand', '2', 'default', NULL),
                     ('owncaptcha_subtractionans', '1', 'default', NULL),
+                    ('captcha_provider', 'builtin', 'default', NULL),
+                    ('captcha_turnstile_sitekey', '', 'default', NULL),
+                    ('captcha_turnstile_secret', '', 'default', NULL),
+                    ('captcha_hcaptcha_sitekey', '', 'default', NULL),
+                    ('captcha_hcaptcha_secret', '', 'default', NULL),
+                    ('captcha_recaptcha3_sitekey', '', 'default', NULL),
+                    ('captcha_recaptcha3_secret', '', 'default', NULL),
+                    ('captcha_score_threshold', '0.5', 'default', NULL),
+                    ('captcha_min_submit_seconds', '3', 'default', NULL),
+                    ('captcha_pow_bits', '12', 'default', NULL),
+                    ('captcha_fail_open', '1', 'default', NULL),
+                    ('submission_rate_limit', '1', 'default', NULL),
+                    ('submission_rate_limit_max', '5', 'default', NULL),
+                    ('submission_rate_limit_window', '600', 'default', NULL),
                     ('ticket_lock_staff', '0', 'email', 'agent'),
                     ('ticket_lock_admin', '0', 'email', 'actions'),
                     ('ticket_lock_user', '0', 'email', 'actions'),
@@ -206,8 +216,8 @@ class JSSTactivation {
                     ('instantresolve_max_results', '5', 'instantresolve', NULL),
                     ('instantresolve_analytics', '1', 'instantresolve', NULL),
                     ('productcode', 'jsticket', 'default', NULL),
-                    ('versioncode', '3.1.7', 'default', NULL),
-                    ('productversion', '317', 'default', NULL),
+                    ('versioncode', '4.0.0', 'default', NULL),
+                    ('productversion', '400', 'default', NULL),
                     ('producttype', 'free', 'default', NULL),
                     ('tve_enabled', '2', 'default', NULL),
                     ('tve_mailreadtype', '3', 'default', NULL),
@@ -324,7 +334,10 @@ class JSSTactivation {
                     ('jsst_addons_auto_update', '1', 'default', NULL),
                     ('autocleanup_attachment_interval', '0', 'autocleanup', 'autocleanup'),
                     ('autocleanup_ticket_interval', '0', 'autocleanup', 'autocleanup'),
-                    ('autocleanup_cron_frequency', 'daily', 'autocleanup', 'autocleanup');";
+                    ('autocleanup_cron_frequency', 'daily', 'autocleanup', 'autocleanup'),
+                    ('autocleanup_exclude_departments', '', 'autocleanup', NULL),
+                    ('autocleanup_exclude_priorities', '', 'autocleanup', NULL),
+                    ('data_retention_on_uninstall', 'preserve', 'default', NULL);";
             jssupportticket::$_db->query($jsst_query);
 
             $jsst_query = "CREATE TABLE IF NOT EXISTS `" . jssupportticket::$_db->prefix . "js_ticket_departments` (
@@ -606,7 +619,7 @@ class JSSTactivation {
             (2, 'fullname', 'Full Name', 3, '10', NULL, NULL, 1, 1, 0, 0, 1, 0, 1, 0, 0, 1, 1, NULL),  
             (3, 'phone', 'Phone', 4, '10', NULL, NULL, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, NULL),  
             (4, 'department', 'Department', 5, '10', NULL, NULL, 1, 1, 0, 0, 0, 0, 1, 0, 1, 1, 1, NULL),  
-            (5, 'helptopic', 'Help Topic', 6, '10', NULL, NULL, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, NULL),  
+            (5, 'helptopic', 'Topic', 6, '10', NULL, NULL, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, NULL),
             (6, 'priority', 'Priority', 7, '10', NULL, NULL, 1, 1, 0, 0, 1, 0, 1, 0, 1, 1, 1, NULL),  
             (7, 'subject', 'Subject', 8, '10', NULL, NULL, 1, 1, 0, 1, 1, 0, NULL, 1, 1, 1, 1, NULL),  
             (8, 'premade', 'Canned Response', 9, '10', NULL, NULL, 1, 1, 0, 0, 0, 1, NULL, 1, 0, 0, 1, NULL),  
@@ -830,6 +843,249 @@ class JSSTactivation {
         ) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;";
         jssupportticket::$_db->query($jsst_query);
         // --- END ZYWRAP V1 ENGINE NATIVE HELPDESK SCHEMA ---
+
+        // --- START 4.0 CORE SCHEMA ---
+        // The tables 4.0 adds. Kept here as well as in includes/updates/sql/400.sql
+        // and in each model's ensureSchema() on purpose: a fresh install runs this
+        // file, an upgrade runs the SQL file, and a site whose files were replaced
+        // in place without either one running is repaired by ensureSchema() on the
+        // first read. All three routes have to produce the same table.
+        //
+        // No ENGINE clause and get_charset_collate() rather than the
+        // ENGINE=MyISAM DEFAULT CHARSET=utf8 used above, so that a table created
+        // here is the same table ensureSchema() and 400.sql create. Every
+        // statement is CREATE TABLE IF NOT EXISTS, so a table that already
+        // belongs to the matching stand-alone add-on is left exactly as it is
+        // and its data carries over. (Roadmap 4.0-CORE-19)
+        $jsst_charset = jssupportticket::$_db->get_charset_collate();
+
+        // 1. Activity log — ticket history in the free core. (Roadmap 4.0-CORE-01)
+        // Shared with the Ticket History add-on. The source/fieldname/oldvalue/
+        // newvalue columns are 4.0's; JSSTtickethistoryModel::ensureSchema() adds
+        // them to an older add-on table that does not have them.
+        $jsst_query = "CREATE TABLE IF NOT EXISTS `" . jssupportticket::$_db->prefix . "js_ticket_activity_log` (
+            `id` int(11) NOT NULL AUTO_INCREMENT,
+            `uid` int(11) DEFAULT NULL,
+            `referenceid` int(11) DEFAULT NULL,
+            `level` int(2) DEFAULT NULL,
+            `eventfor` int(2) DEFAULT NULL,
+            `event` varchar(255) DEFAULT NULL,
+            `eventtype` varchar(255) DEFAULT NULL,
+            `message` text,
+            `messagetype` varchar(255) DEFAULT NULL,
+            `datetime` timestamp NULL DEFAULT NULL,
+            `source` varchar(32) DEFAULT NULL,
+            `fieldname` varchar(191) DEFAULT NULL,
+            `oldvalue` text,
+            `newvalue` text,
+            PRIMARY KEY (`id`),
+            KEY `jsst_reference` (`referenceid`, `eventfor`),
+            KEY `jsst_datetime` (`datetime`)
+        ) " . $jsst_charset . ";";
+        jssupportticket::$_db->query($jsst_query);
+
+        // 2. Internal notes. (Roadmap 4.0-CORE-02)
+        // Shared with the Private Note add-on; the attachment columns are what an
+        // older add-on layout is missing and JSSTnoteModel::ensureSchema() adds.
+        $jsst_query = "CREATE TABLE IF NOT EXISTS `" . jssupportticket::$_db->prefix . "js_ticket_notes` (
+            `id` int(11) NOT NULL AUTO_INCREMENT,
+            `ticketid` int(11) DEFAULT NULL,
+            `staffid` int(11) DEFAULT NULL,
+            `title` varchar(255) DEFAULT NULL,
+            `note` text,
+            `status` tinyint(1) DEFAULT NULL,
+            `created` datetime DEFAULT NULL,
+            `filename` varchar(300) NULL,
+            `filesize` varchar(15) NULL,
+            `filedeleted` tinyint(1) NOT NULL DEFAULT '0',
+            PRIMARY KEY (`id`),
+            KEY `jsst_ticketid` (`ticketid`)
+        ) " . $jsst_charset . ";";
+        jssupportticket::$_db->query($jsst_query);
+
+        // 3. Canned responses. (Roadmap 4.0-CORE-03)
+        // Shared with the Canned Responses add-on. The full-text indexes Instant
+        // Answers needs are left to JSSTcannedresponsesModel::ensureSchema(),
+        // which suppresses errors on storage engines that cannot build them.
+        $jsst_query = "CREATE TABLE IF NOT EXISTS `" . jssupportticket::$_db->prefix . "js_ticket_department_message_premade` (
+            `id` int(11) NOT NULL AUTO_INCREMENT,
+            `departmentid` varchar(45) DEFAULT NULL,
+            `title` varchar(125) DEFAULT NULL,
+            `answer` text,
+            `created` datetime NOT NULL,
+            `updated` datetime DEFAULT NULL,
+            `status` tinyint(1) DEFAULT NULL,
+            PRIMARY KEY (`id`)
+        ) " . $jsst_charset . ";";
+        jssupportticket::$_db->query($jsst_query);
+
+        // 4. Help topics. (Roadmap 4.0-CORE-06)
+        // The add-on's layout, shared with it. The parentid, staffid and
+        // isdefault columns of 4.0-CORE-20 are added by
+        // JSSThelptopicModel::ensureSchema(), which must not alter a table that
+        // still belongs to the legacy add-on underneath it.
+        $jsst_query = "CREATE TABLE IF NOT EXISTS `" . jssupportticket::$_db->prefix . "js_ticket_help_topics` (
+            `id` int(11) NOT NULL AUTO_INCREMENT,
+            `isactive` tinyint(1) DEFAULT NULL,
+            `autoresponce` tinyint(1) DEFAULT NULL,
+            `departmentid` int(11) DEFAULT NULL,
+            `priorityid` int(11) DEFAULT NULL,
+            `topic` varchar(32) DEFAULT NULL,
+            `ordering` int(11) NOT NULL,
+            `created` datetime DEFAULT NULL,
+            `updated` datetime DEFAULT NULL,
+            `status` tinyint(1) DEFAULT NULL,
+            PRIMARY KEY (`id`),
+            KEY `jsst_department` (`departmentid`, `status`)
+        ) " . $jsst_charset . ";";
+        jssupportticket::$_db->query($jsst_query);
+
+        // 5. Blocked senders. (Roadmap 4.0-CORE-12)
+        // An entry is one address, or "@example.com" for a whole domain.
+        $jsst_query = "CREATE TABLE IF NOT EXISTS `" . jssupportticket::$_db->prefix . "js_ticket_email_banlist` (
+            `id` int(11) NOT NULL AUTO_INCREMENT,
+            `email` varchar(255) DEFAULT NULL,
+            `submitter` varchar(126) DEFAULT NULL,
+            `uid` int(11) NOT NULL,
+            `created` datetime DEFAULT NULL,
+            PRIMARY KEY (`id`),
+            KEY `jsst_email` (`email`)
+        ) " . $jsst_charset . ";";
+        jssupportticket::$_db->query($jsst_query);
+
+        // 6. What the block list actually stopped. Core from 4.0 as well: a block
+        // nobody can audit is a block an administrator cannot trust.
+        // (Roadmap 4.0-CORE-12)
+        $jsst_query = "CREATE TABLE IF NOT EXISTS `" . jssupportticket::$_db->prefix . "js_ticket_banlist_log` (
+            `id` int(11) NOT NULL AUTO_INCREMENT,
+            `loggeremail` varchar(255) DEFAULT NULL,
+            `title` varchar(255) DEFAULT NULL,
+            `log` text,
+            `logger` varchar(255) DEFAULT NULL,
+            `ipaddress` varchar(64) DEFAULT NULL,
+            `created` datetime DEFAULT NULL,
+            PRIMARY KEY (`id`),
+            KEY `jsst_created` (`created`)
+        ) " . $jsst_charset . ";";
+        jssupportticket::$_db->query($jsst_query);
+
+        // 7. Ticket tags. (Roadmap 4.0-CORE-17)
+        // New in 4.0, so there is no add-on layout to match. The slug is unique,
+        // which is what makes "Billing", "billing" and " BILLING " one tag
+        // instead of three.
+        $jsst_query = "CREATE TABLE IF NOT EXISTS `" . jssupportticket::$_db->prefix . "js_ticket_tags` (
+            `id` int(11) NOT NULL AUTO_INCREMENT,
+            `name` varchar(60) NOT NULL,
+            `slug` varchar(60) NOT NULL,
+            `created` datetime DEFAULT NULL,
+            `status` tinyint(1) NOT NULL DEFAULT '1',
+            PRIMARY KEY (`id`),
+            UNIQUE KEY `jsst_slug` (`slug`)
+        ) " . $jsst_charset . ";";
+        jssupportticket::$_db->query($jsst_query);
+
+        // 8. Which tickets carry which tags. The pair is unique, so tagging a
+        // ticket twice with the same tag is a no-op rather than a duplicate row.
+        $jsst_query = "CREATE TABLE IF NOT EXISTS `" . jssupportticket::$_db->prefix . "js_ticket_ticket_tags` (
+            `id` int(11) NOT NULL AUTO_INCREMENT,
+            `ticketid` int(11) NOT NULL,
+            `tagid` int(11) NOT NULL,
+            `created` datetime DEFAULT NULL,
+            PRIMARY KEY (`id`),
+            UNIQUE KEY `jsst_ticket_tag` (`ticketid`, `tagid`),
+            KEY `jsst_tagid` (`tagid`)
+        ) " . $jsst_charset . ";";
+        jssupportticket::$_db->query($jsst_query);
+
+        // 9. Saved queue views. (Roadmap 4.0-CORE-18)
+        // One row per named search, owned by the WordPress user who saved it. The
+        // filters are stored as JSON rather than a column each so that adding a
+        // filter to the queue later does not need a migration. The queue indexes
+        // 4.0 adds to js_ticket_tickets are not here: that table is created above
+        // and JSSTqueue::ensureSchema() checks for each index before adding it.
+        $jsst_query = "CREATE TABLE IF NOT EXISTS `" . jssupportticket::$_db->prefix . "js_ticket_saved_views` (
+            `id` int(11) NOT NULL AUTO_INCREMENT,
+            `uid` int(11) NOT NULL,
+            `name` varchar(60) NOT NULL,
+            `filters` text,
+            `created` datetime DEFAULT NULL,
+            `updated` datetime DEFAULT NULL,
+            PRIMARY KEY (`id`),
+            KEY `jsst_uid` (`uid`)
+        ) " . $jsst_charset . ";";
+        jssupportticket::$_db->query($jsst_query);
+
+        // 10. Background job queue.
+        // Not in 400.sql: the queue is created by JSSTjobs::ensureSchema() because
+        // an in-place file update runs no upgrade route at all and a job enqueued
+        // against a missing table is silently lost. Repeated here so a fresh
+        // install has it from the first request rather than from the first job.
+        $jsst_query = "CREATE TABLE IF NOT EXISTS `" . jssupportticket::$_db->prefix . "js_ticket_jobs` (
+            `id` bigint(20) NOT NULL AUTO_INCREMENT,
+            `hook` varchar(100) NOT NULL,
+            `args` longtext,
+            `groupname` varchar(50) NOT NULL DEFAULT '',
+            `status` varchar(20) NOT NULL DEFAULT 'pending',
+            `priority` tinyint(3) NOT NULL DEFAULT '10',
+            `scheduled` datetime DEFAULT NULL,
+            `claim` varchar(40) NOT NULL DEFAULT '',
+            `claimed` datetime DEFAULT NULL,
+            `attempts` tinyint(3) NOT NULL DEFAULT '0',
+            `lasterror` text,
+            `created` datetime DEFAULT NULL,
+            `updated` datetime DEFAULT NULL,
+            PRIMARY KEY (`id`),
+            KEY `jsst_due` (`status`, `scheduled`, `priority`),
+            KEY `jsst_claim` (`claim`),
+            KEY `jsst_group` (`groupname`, `status`)
+        ) " . $jsst_charset . ";";
+        jssupportticket::$_db->query($jsst_query);
+
+        // 11. Migration runs, and 12. the journal of what each one created.
+        // Same reason as the job queue: created by JSSTmigration::ensureSchema()
+        // rather than by 400.sql, and repeated here for the fresh-install route.
+        // A journal without its migration row cannot be rolled back, so the pair
+        // is always created together.
+        $jsst_query = "CREATE TABLE IF NOT EXISTS `" . jssupportticket::$_db->prefix . "js_ticket_migrations` (
+            `id` int(11) NOT NULL AUTO_INCREMENT,
+            `token` varchar(32) NOT NULL,
+            `source` varchar(30) NOT NULL,
+            `sourceversion` varchar(20) NOT NULL DEFAULT '',
+            `status` varchar(20) NOT NULL DEFAULT 'preview',
+            `cursorstate` longtext,
+            `counts` longtext,
+            `findings` longtext,
+            `notes` text,
+            `startedby` int(11) NOT NULL DEFAULT '0',
+            `started` datetime DEFAULT NULL,
+            `updated` datetime DEFAULT NULL,
+            `finished` datetime DEFAULT NULL,
+            PRIMARY KEY (`id`),
+            KEY `jsst_token` (`token`),
+            KEY `jsst_status` (`status`)
+        ) " . $jsst_charset . ";";
+        jssupportticket::$_db->query($jsst_query);
+
+        $jsst_query = "CREATE TABLE IF NOT EXISTS `" . jssupportticket::$_db->prefix . "js_ticket_migration_journal` (
+            `id` bigint(20) NOT NULL AUTO_INCREMENT,
+            `migrationid` int(11) NOT NULL,
+            `tablename` varchar(64) NOT NULL,
+            `rowid` bigint(20) NOT NULL,
+            PRIMARY KEY (`id`),
+            KEY `jsst_migration` (`migrationid`),
+            KEY `jsst_table` (`migrationid`, `tablename`)
+        ) " . $jsst_charset . ";";
+        jssupportticket::$_db->query($jsst_query);
+        // --- END 4.0 CORE SCHEMA ---
+        }
+
+        // Put the attachment directory protection in place now rather than
+        // waiting for the first upload. A site that is upgraded and then sits
+        // idle for a week still has its ticket attachments covered.
+        // Forced, because the data directory may have changed since the marker
+        // option was last written. (Roadmap 4.0-SEC-03)
+        if (class_exists('JSSTattachmentguard')) {
+            JSSTattachmentguard::ensureProtected(true);
         }
     }
 

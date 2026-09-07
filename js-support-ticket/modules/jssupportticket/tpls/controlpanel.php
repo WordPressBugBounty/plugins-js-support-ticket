@@ -492,10 +492,10 @@ if (jssupportticket::$_config['offline'] == 2) {
                             </li>
                             <?php
                         endif;
-                         if (in_array('helptopic', jssupportticket::$_active_addons) && jssupportticket::$_config['cplink_helptopic_agent'] == 1):
+                         if (JSSTmergedaddon::featureEnabled('helptopic') && jssupportticket::$_config['cplink_helptopic_agent'] == 1):
                             $jsst_count ++;
                             $jsst_menu_url = esc_url(jssupportticket::makeUrl(array('jstmod'=>'helptopic', 'jstlay'=>'agenthelptopics')));
-                            $jsst_menu_title =  esc_html(__("Help Topics", 'js-support-ticket'));
+                            $jsst_menu_title =  esc_html(__("Topics", 'js-support-ticket'));
                             ?>
                             <li>
                                 <a href=<?php echo esc_url($jsst_menu_url); ?>>
@@ -506,7 +506,7 @@ if (jssupportticket::$_config['offline'] == 2) {
                             <?php
                         endif;
 
-                        if (in_array('cannedresponses', jssupportticket::$_active_addons) && jssupportticket::$_config['cplink_cannedresponses_agent'] == 1):
+                        if (JSSTmergedaddon::featureEnabled('cannedresponses') && jssupportticket::$_config['cplink_cannedresponses_agent'] == 1):
                             $jsst_count ++;
                             $jsst_menu_url = esc_url(jssupportticket::makeUrl(array('jstmod'=>'cannedresponses', 'jstlay'=>'agentcannedresponses')));
                             $jsst_menu_title =  esc_html(__("Canned Responses", 'js-support-ticket'));
@@ -603,7 +603,7 @@ if (jssupportticket::$_config['offline'] == 2) {
                             </li>
                             <?php
                         endif;
-                        if (in_array('export', jssupportticket::$_active_addons) && jssupportticket::$_config['cplink_export_ticket_staff'] == 1):
+                        if (JSSTmergedaddon::featureEnabled('export') && jssupportticket::$_config['cplink_export_ticket_staff'] == 1):
                             $jsst_count ++;
                             $jsst_menu_url = esc_url(jssupportticket::makeUrl(array('jstmod'=>'export', 'jstlay'=>'export')));
                             $jsst_menu_title =  esc_html(__('Export Ticket', 'js-support-ticket'));
@@ -798,7 +798,7 @@ if (jssupportticket::$_config['offline'] == 2) {
                             (in_array('download', jssupportticket::$_active_addons) && jssupportticket::$_config['cplink_download_staff'] == 1) ||
                             (in_array('announcement', jssupportticket::$_active_addons) && jssupportticket::$_config['cplink_announcement_staff'] == 1) ||
                             (in_array('faq', jssupportticket::$_active_addons) && jssupportticket::$_config['cplink_faq_staff'] == 1) ||
-                            (in_array('helptopic', jssupportticket::$_active_addons) && jssupportticket::$_config['cplink_helptopic_agent'] == 1)
+                            (JSSTmergedaddon::featureEnabled('helptopic') && jssupportticket::$_config['cplink_helptopic_agent'] == 1)
                         );
                     }
 
@@ -866,9 +866,9 @@ if (jssupportticket::$_config['offline'] == 2) {
                                             </a>
                                         <?php endif; ?>
 
-                                        <?php if (in_array('helptopic', jssupportticket::$_active_addons) && jssupportticket::$_config['cplink_helptopic_agent'] == 1) : ?>
+                                        <?php if (JSSTmergedaddon::featureEnabled('helptopic') && jssupportticket::$_config['cplink_helptopic_agent'] == 1) : ?>
                                             <a href="<?php echo esc_url(jssupportticket::makeUrl(array('jstmod'=>'helptopic', 'jstlay'=>'addhelptopic'))); ?>" class="js-ticket-tag-btn">
-                                                <?php echo esc_html(__('Help Topic', 'js-support-ticket')); ?>
+                                                <?php echo esc_html(__('Topic', 'js-support-ticket')); ?>
                                             </a>
                                         <?php endif; ?>
                                     </div>

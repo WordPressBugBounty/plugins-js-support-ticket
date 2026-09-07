@@ -186,7 +186,7 @@ class jssupportticketadmin {
                     array($this, 'showAdminPage') // function name
             );
 
-            if(in_array('cannedresponses', jssupportticket::$_active_addons)){
+            if(JSSTmergedaddon::featureEnabled('cannedresponses')){
                 add_submenu_page('jssupportticket_hide', // parent slug
                         esc_html(__('Canned Responses', 'js-support-ticket')), // Page title
                         esc_html(__('Canned Responses', 'js-support-ticket')), // menu title
@@ -218,14 +218,21 @@ class jssupportticketadmin {
                 $this->addMissingAddonPage('mail');
             }
 
-            if(in_array('banemail', jssupportticket::$_active_addons)){
+            // The block list and its log are both core from 4.0, so both pages are
+            // registered whether or not the add-on is installed.
+            // (Roadmap 4.0-CORE-12)
+            if(JSSTmergedaddon::featureEnabled('banemail')){
                 add_submenu_page('jssupportticket_hide', // parent slug
-                        esc_html(__('Ban Email', 'js-support-ticket')), // Page title
-                        esc_html(__('Ban Emails', 'js-support-ticket')), // menu title
+                        esc_html(__('Blocked Senders', 'js-support-ticket')), // Page title
+                        esc_html(__('Blocked Senders', 'js-support-ticket')), // menu title
                         'jsst_support_ticket', // capability
                         'banemail', //menu slug
                         array($this, 'showAdminPage') // function name
                 );
+            }else{
+                $this->addMissingAddonPage('banemail');
+            }
+            if(JSSTmergedaddon::featureEnabled('banemail')){
                 add_submenu_page('jssupportticket_hide', // parent slug
                         esc_html(__('Ban list log', 'js-support-ticket')), // Page title
                         esc_html(__('Ban list log', 'js-support-ticket')), // menu title
@@ -234,7 +241,6 @@ class jssupportticketadmin {
                         array($this, 'showAdminPage') // function name
                 );
             }else{
-                $this->addMissingAddonPage('banemail');
                 $this->addMissingAddonPage('banemaillog');
             }
             add_submenu_page('jssupportticket_hide', // parent slug
@@ -258,7 +264,17 @@ class jssupportticketadmin {
             }
 
 
-            if(in_array('export', jssupportticket::$_active_addons)){
+            // The AI Copilot settings and usage screen. Free core, and separate
+            // from the Zywrap add-on. (Roadmap 4.0-AI-01)
+            add_submenu_page('jssupportticket_hide', // parent slug
+                    esc_html(__('AI Copilot', 'js-support-ticket')), // Page title
+                    esc_html(__('AI Copilot', 'js-support-ticket')), // menu title
+                    'jsst_support_ticket', // capability
+                    'copilot', //menu slug
+                    array($this, 'showAdminPage') // function name
+            );
+
+            if(JSSTmergedaddon::featureEnabled('export')){
                 add_submenu_page('jssupportticket_hide', // parent slug
                         esc_html(__('Export', 'js-support-ticket')), // Page title
                         esc_html(__('Export', 'js-support-ticket')), // menu title
@@ -406,10 +422,10 @@ class jssupportticketadmin {
             //     );
             // }
 
-            if(in_array('helptopic', jssupportticket::$_active_addons)){
+            if(JSSTmergedaddon::featureEnabled('helptopic')){
                 add_submenu_page('jssupportticket_hide', // parent slug
-                        esc_html(__('Help Topics', 'js-support-ticket')), // Page title
-                        esc_html(__('Help Topics', 'js-support-ticket')), // menu title
+                        esc_html(__('Topics', 'js-support-ticket')), // Page title
+                        esc_html(__('Topics', 'js-support-ticket')), // menu title
                         'jsst_support_ticket', // capability
                         'helptopic', //menu slug
                         array($this, 'showAdminPage') // function name
@@ -435,6 +451,9 @@ class jssupportticketadmin {
             );
 
         }else{
+            /* The agent menu. Everything above is gated on jsst_support_ticket,
+               which agents do not hold, so without this branch they get a single
+               unnamed entry and nothing else. (Roadmap 4.0-SEC-04) */
             add_menu_page(esc_html(__('JS Help Desk Control Panel', 'js-support-ticket')), // Page title
                     esc_html(__('JS Help Desk', 'js-support-ticket')), // menu title
                     'jsst_support_ticket_tickets', // capability
@@ -442,6 +461,36 @@ class jssupportticketadmin {
                     array($this, 'showAdminPage'), // function name
                   JSST_PLUGIN_URL.'includes/images/admin_ticket.png', 26
             );
+            add_submenu_page('ticket', // parent slug
+                    esc_html(__('Tickets', 'js-support-ticket')), // Page title
+                    esc_html(__('Tickets', 'js-support-ticket')), // menu title
+                    'jsst_support_ticket_tickets', // capability
+                    'ticket', //menu slug
+                    array($this, 'showAdminPage') // function name
+            );
+            /* Writing the replies you send over and over is the agent's own
+               work, not administration, so the screen belongs on their menu. */
+            if (JSSTmergedaddon::featureEnabled('cannedresponses')) {
+                add_submenu_page('ticket', // parent slug
+                        esc_html(__('Canned Responses', 'js-support-ticket')), // Page title
+                        esc_html(__('Canned Responses', 'js-support-ticket')), // menu title
+                        'jsst_support_ticket_reply', // capability — authoring the reply library goes with sending replies
+                        'cannedresponses', //menu slug
+                        array($this, 'showAdminPage') // function name
+                );
+            }
+            /* The answers an agent gives repeatedly, written down once. Same
+               argument as canned responses: writing the knowledge base is the
+               agent's own work, not administration of the help desk. */
+            if (in_array('knowledgebase', jssupportticket::$_active_addons)) {
+                add_submenu_page('ticket', // parent slug
+                        esc_html(__('Knowledge Base', 'js-support-ticket')), // Page title
+                        esc_html(__('Knowledge Base', 'js-support-ticket')), // menu title
+                        'jsst_support_ticket_kb', // capability
+                        'knowledgebase', //menu slug
+                        array($this, 'showAdminPage') // function name
+                );
+            }
         }
     }
 

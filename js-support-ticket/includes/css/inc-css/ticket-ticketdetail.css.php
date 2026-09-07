@@ -35,7 +35,7 @@ $jsst_jssupportticket_css .= '
     flex-direction: column;
 }
 div.js-ticket-thread-actions{
-    margin-left:auto;
+    margin-inline-start:auto;
     display:flex;
     flex-wrap:wrap;
     gap:10px;
@@ -1172,7 +1172,9 @@ button.js-ticket-usercredentail-data-add-new-button:hover{
     left: 50%;
     transform: translate(-50%, -50%);
     width: 1280px;
-    max-width: 100%; /* Increased width for better layout */
+    /* calc(), not 100%: at 100% the dialog is flush with both screen edges on a
+       phone and the rounded corners and shadow are cropped away. */
+    max-width: calc(100% - 32px);
     background-color: #fff;
     border-radius: 12px;
     box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
@@ -1183,13 +1185,39 @@ button.js-ticket-usercredentail-data-add-new-button:hover{
 }
 
 .jsst-merge-popup-wrapper .jsst-popup-header {
-    color: ' . esc_attr($jsst_color2) . ';
+    /* The header had no background of its own, so it inherited the near-white
+       body and read as a blank strip - the dialog looked like it started at the
+       search fields. The admin popup puts the brand colour here; matching it
+       gives the dialog a title bar and somewhere obvious for the close button. */
+    background-color: ' . esc_attr($jsst_color1) . ';
+    color: #fff;
     padding: 15px 25px;
     font-weight: 600;
-    border-bottom: 1px solid ' . esc_attr($jsst_color5) . ';
+    border-bottom: 1px solid ' . esc_attr($jsst_color1) . ';
     display: flex;
     justify-content: space-between;
     align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 2;
+}
+
+.jsst-merge-popup-wrapper .jsst-popup-header .popup-header-text {
+    font-size: 20px;
+    line-height: 1.3;
+    color: #fff;
+}
+
+/* The close control is a white-on-brand glyph now that the bar is dark. */
+.jsst-merge-popup-wrapper .jsst-popup-header .close-merge,
+.jsst-merge-popup-wrapper .jsst-popup-header .popup-header-close-img {
+    filter: brightness(0) invert(1);
+    opacity: .9;
+}
+
+.jsst-merge-popup-wrapper .jsst-popup-header .close-merge:hover,
+.jsst-merge-popup-wrapper .jsst-popup-header .popup-header-close-img:hover {
+    opacity: 1;
 }
 
 .jsst-merge-popup-wrapper .popup-header-close-img {
@@ -1204,7 +1232,7 @@ button.js-ticket-usercredentail-data-add-new-button:hover{
 }
 
 .jsst-merge-popup-wrapper .js-col-md-12.js-form-button-wrapper{
-    margin-left:0;
+    margin-inline-start:0;
 }
     
 .jsst-merge-popup-wrapper .popup-header-close-img:hover {
@@ -1304,7 +1332,7 @@ button.js-ticket-usercredentail-data-add-new-button:hover{
 
 #popup-record-data .js-ticket-data-row .js-ticket-created {
     flex-basis: 20%;
-    text-align: right;
+    text-align: end;
 }
 
 #popup-record-data .js-ticket-action input[type="radio"] {
@@ -1313,9 +1341,9 @@ button.js-ticket-usercredentail-data-add-new-button:hover{
     cursor: pointer;
 }
 
-.js-tkt-det-left {float: left;width: calc(70% - 20px);flex:1 1 auto; padding-left:0px;}
+.js-tkt-det-left {float: inline-start;width: calc(70% - 20px);flex:1 1 auto; padding-inline-start:0px;}
 #adminTicketform .js-tkt-det-left {width:100%;}
-.js-tkt-det-right {float: left;width: 30%;}
+.js-tkt-det-right {float: inline-start;width: 30%;}
 
 div.jsst-popup-background {
     background: rgba(0, 0, 0, 0.5);
@@ -1355,7 +1383,7 @@ div#userpopupforchangepriority
     z-index: 99999;
     overflow-y: auto;
     overflow-x: hidden;
-    text-align: left;
+    text-align: start;
     transform: translate(-50%, -50%);
 }
 div#userpopupforchangepriority {
@@ -1397,7 +1425,7 @@ div.jsst-main-up-wrapper .js-tkt-wc-order-item button{
     text-decoration: none;
     display: inline-block;
     letter-spacing: 0.5px;
-    margin-right: 0;
+    margin-inline-end: 0;
     background-color:' . $jsst_color1 . ';
     box-shadow:0 2px 10px rgba(' . hexdec(substr($jsst_color1, 1, 2)) . ', ' . hexdec(substr($jsst_color1, 3, 2)) . ', ' . hexdec(substr($jsst_color1, 5, 2)) . ', 0.4);
     border:unset;
@@ -1422,7 +1450,7 @@ div.jsst-main-up-wrapper .js-tkt-wc-order-item .js-tkt-wc-order-item-title{
     color:'. $jsst_color2 .';
 }
 div.jsst-main-up-wrapper .js-tkt-wc-order-item .js-tkt-wc-order-item-value{
-    margin-left:auto;
+    margin-inline-start:auto;
 }
 div.jsst-main-up-wrapper .js-tkt-wc-order-item-link{
     font-weight:600;
@@ -1484,7 +1512,10 @@ div.jsst-main-up-wrapper textarea{
     padding: 20px;
 }
 
-.jsst-merge-popup-wrapper .js-ticket-merge-white-bg {
+/* :not() keeps this off the candidate rows. They carry .js-ticket-merge-white-bg
+   too, and the !important here was overriding the card border they now draw for
+   themselves - leaving the footer strip divider floating with no box round it. */
+.jsst-merge-popup-wrapper .js-ticket-merge-white-bg:not(.js-merge-ticket-overlay) {
     background: #ffffff;
     border-radius: 12px;
     padding:0;
@@ -1505,7 +1536,11 @@ span.js-heading.js-heading-text{
     width:100%;
     padding-bottom:10px;
 }
-#popup-record-data .jsst-merge-popup-wrapper .js-col-md-12:not(:last-child){
+/* Strips the grid borders between stacked columns. The candidate rows are also
+   .js-col-md-12, so without the second :not() this reset (id + !important) also
+   erased the card border on every row but the last - which is why only the final
+   candidate looked like a card. */
+#popup-record-data .jsst-merge-popup-wrapper .js-col-md-12:not(:last-child):not(.js-merge-ticket-overlay){
     border:unset !important;
 }
 .jsst-main-up-wrapper .jsst-merge-popup-wrapper .js-col-xs-12.js-ticket-wrapper{
@@ -1514,7 +1549,11 @@ span.js-heading.js-heading-text{
 #popup-record-data .jsst-merge-popup-wrapper .js-merge-form-title.js-col-md-12{
     border-bottom:1px solid ' . $jsst_color5 . ' !important;
 }
-#popup-record-data .jsst-merge-popup-wrapper .js-col-md-12.js-ticket-toparea{
+/* Scoped to the "ticket you are merging into" preview at the top of the dialog.
+   Unscoped (and with an id plus !important) it also bordered every candidate
+   row, which now draws its own card on the row wrapper - the result was a
+   bordered box inside a bordered box. */
+#popup-record-data .jsst-merge-popup-wrapper .js-ticket-merge-ticket-wrapper .js-col-md-12.js-ticket-toparea{
     border:1px solid '. $jsst_color5 .' !important;
 }
 
@@ -1578,11 +1617,11 @@ span.js-heading.js-heading-text{
 }
 
 .jsst-merge-popup-wrapper .js-ticket-data1 {
-    text-align: left;
-    padding-left: 10px;
-    border-left: 1px solid ' . $jsst_color5 . ';
+    text-align: start;
+    padding-inline-start: 10px;
+    border-inline-start: 1px solid ' . $jsst_color5 . ';
     flex: 0 0 290px;
-    padding-right: 0;
+    padding-inline-end: 0;
 }
 
 .jsst-merge-popup-wrapper .js-nullpadding {
@@ -1635,8 +1674,7 @@ span.js-heading.js-heading-text{
     font-weight: 600;
     letter-spacing: 0.3px;
     margin-top: 16px;
-    margin-right: 10px;
-    margin-left: 10px;
+    margin-inline: 10px;
     max-width:100%;
 }
 
@@ -1733,43 +1771,116 @@ span.js-heading.js-heading-text{
     padding: 20px;
 }
 
+/* The merge button used to be a hover-only sheet covering the whole row
+   (position:absolute + display:none, revealed by :hover). That is unusable on a
+   phone or tablet: without a hover state the only control that merges a ticket
+   could not be reached at all, and a keyboard user tabbing to it got an
+   invisible target.
+   The button now lives in the row permanently. The card chrome moved up here
+   too: the border, radius and shadow used to sit on .js-ticket-toparea, so the
+   button and the merge checkbox rendered outside that box and read as loose
+   controls floating under a card. One card per candidate, with a footer strip
+   holding the checkbox at the inline start and the button at the inline end. */
 .jsst-merge-popup-wrapper .js-merge-ticket-overlay {
     position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: stretch;
     cursor: pointer;
+    background-color: #fff;
+    border: 1px solid ' . esc_attr($jsst_color5) . ';
+    border-radius: 12px;
+    box-shadow: 0 8px 32px rgba(0, 31, 63, 0.08);
+    overflow: hidden;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.jsst-merge-popup-wrapper .js-merge-ticket-overlay:hover,
+.jsst-merge-popup-wrapper .js-merge-ticket-overlay:focus-within {
+    border-color: ' . esc_attr($jsst_color1) . ';
+    box-shadow: 0 12px 36px rgba(0, 31, 63, 0.14);
+}
+
+/* No card inside a card, and no half-row lift: the whole row is the thing that
+   responds now, so the inner block gives up its own border, radius and shadow. */
+.jsst-merge-popup-wrapper .js-merge-ticket-overlay .js-ticket-toparea {
+    flex: 1 1 100%;
+    background-color: transparent;
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+    margin: 0;
+}
+
+.jsst-merge-popup-wrapper .js-merge-ticket-overlay .js-ticket-toparea:hover {
+    transform: none;
+    box-shadow: none;
+}
+
+.jsst-merge-popup-wrapper .js-merge-ticket-overlay .jsst-merge-pick {
+    order: 1;
+    flex: 1 1 auto;
+    display: flex;
+    align-items: center;
+    margin: 0;
+    padding: 12px 15px;
+    border-top: 1px solid ' . esc_attr($jsst_color5) . ';
+}
+
+.jsst-merge-popup-wrapper .js-merge-ticket-overlay .jsst-merge-pick label {
+    font-size: 0.95rem;
+    line-height: 1.4;
+    gap: 8px;
 }
 
 .jsst-merge-popup-wrapper .js-over-lay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    display: none;
-    justify-content: center;
-    align-items: center;
-    background-color: rgba(0, 0, 0, 0.2);
-    margin-bottom:30px;
-    border-radius: 12px;
-}
-
-.jsst-merge-popup-wrapper .js-merge-ticket-overlay:hover .js-over-lay {
+    order: 2;
+    position: static;
     display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    flex: 0 0 auto;
+    width: auto;
+    height: auto;
+    background-color: transparent;
+    border-radius: 0;
+    border-top: 1px solid ' . esc_attr($jsst_color5) . ';
+    margin-bottom: 0;
+    padding: 12px 15px;
+    box-sizing: border-box;
 }
 
 .jsst-merge-popup-wrapper .js-over-lay a.js-merge-btn {
-    background-color: ' . $jsst_color1 . ';
-    color: white;
-    padding: 12px 24px;
+    box-sizing: border-box;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 40px;
+    padding: 10px 22px;
+    background-color: ' . esc_attr($jsst_color1) . ';
+    color: #fff;
     border-radius: 8px;
     text-decoration: none;
+    font-size: 0.95rem;
     font-weight: 600;
+    line-height: 1.3;
+    text-align: center;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    transition: all 0.3s ease;
+    transition: background-color 0.2s ease, transform 0.2s ease;
 }
 
-.jsst-merge-popup-wrapper .js-over-lay a.js-merge-btn:hover {
-    background-color: ' . $jsst_color2 . ';
+.jsst-merge-popup-wrapper .js-over-lay a.js-merge-btn:hover,
+.jsst-merge-popup-wrapper .js-over-lay a.js-merge-btn:focus {
+    background-color: ' . esc_attr($jsst_color2) . ';
+    color: #fff;
+    text-decoration: none;
     transform: translateY(-2px);
+}
+
+/* Keyboard users need to see where they are; the row tint alone is too subtle. */
+.jsst-merge-popup-wrapper .js-over-lay a.js-merge-btn:focus-visible {
+    outline: 2px solid ' . esc_attr($jsst_color2) . ';
+    outline-offset: 2px;
 }
 
 /* Pagination */
@@ -1849,9 +1960,9 @@ div.jsst-main-up-wrapper .jsst-merge-popup-wrapper input.js-merge-save-btn:hover
 @media (max-width: 991px) {
     .jsst-merge-popup-wrapper div.js-ticket-wrapper div.js-ticket-data1 {
         padding-top: 15px;
-        padding-left: 0;
+        padding-inline-start: 0;
         margin-top: 15px;
-        border-left: none;
+        border-inline-start: none;
         border-top: 1px solid ' . $jsst_color5 . ';
     }
 
@@ -1861,6 +1972,27 @@ div.jsst-main-up-wrapper .jsst-merge-popup-wrapper input.js-merge-save-btn:hover
 }
 
 @media (max-width: 768px) {
+    /* The search row is a flex row of two fields plus two buttons; below this
+       width each one is too narrow to read its own placeholder. */
+    .jsst-merge-popup-wrapper .js-merge-form-wrp,
+    .jsst-merge-popup-wrapper .js-merge-form-btn-wrp {
+        flex-wrap: wrap;
+    }
+    .jsst-merge-popup-wrapper .js-merge-form-value {
+        flex: 1 1 100%;
+    }
+    .jsst-merge-popup-wrapper .js-merge-btn,
+    .jsst-merge-popup-wrapper .js-merge-btn input {
+        width: 100%;
+    }
+    /* Full-bleed tap target: 40px of button in the corner of a phone screen is
+       easy to miss and easy to mis-tap. */
+    .jsst-merge-popup-wrapper .js-over-lay {
+        padding: 0 10px 10px;
+    }
+    .jsst-merge-popup-wrapper .js-over-lay a.js-merge-btn {
+        width: 100%;
+    }
     .jsst-merge-popup-wrapper .js-ticket-toparea {
         flex-direction: column;
         align-items: flex-start;
@@ -1868,22 +2000,25 @@ div.jsst-main-up-wrapper .jsst-merge-popup-wrapper input.js-merge-save-btn:hover
 
     .jsst-merge-popup-wrapper .js-ticket-pic {
         margin-bottom: 16px;
-        padding-right: 5px;
+        padding-inline-end: 5px;
     }
 
     .jsst-merge-popup-wrapper .js-ticket-data {
-        padding-right: 0;
+        padding-inline-end: 0;
         margin-bottom: 24px;
         width: 100%;
     }
 
     .jsst-merge-popup-wrapper .js-ticket-data1 {
         width: 100%;
-        text-align: left;
-        padding-left: 0;
+        text-align: start;
+        padding-inline-start: 0;
         padding-top: 24px;
-        border-left: 10px;
-        border-top: 1px solid ' . $jsst_color5 . '
+        /* was `border-left: 10px`, a width with no style, so it drew nothing and
+           left the vertical divider from the desktop rule in place; the stacked
+           layout wants that divider gone and a horizontal one instead. */
+        border-inline-start: none;
+        border-top: 1px solid ' . $jsst_color5 . ';
     }
 
     .jsst-merge-popup-wrapper .js-merge-form-wrp {
@@ -3450,6 +3585,21 @@ span.js-tkt-det-prty {color:white;}
     flex-direction:column;
     align-items:flex-start;
 }
+.js-ticket-thread .js-ticket-thread-cnt .js-ticket-thread-data.note-msg > p,
+.js-ticket-thread .js-ticket-thread-cnt .js-ticket-thread-data.note-msg > h1,
+.js-ticket-thread .js-ticket-thread-cnt .js-ticket-thread-data.note-msg > h2,
+.js-ticket-thread .js-ticket-thread-cnt .js-ticket-thread-data.note-msg > h3,
+.js-ticket-thread .js-ticket-thread-cnt .js-ticket-thread-data.note-msg > h4,
+.js-ticket-thread .js-ticket-thread-cnt .js-ticket-thread-data.note-msg > h5,
+.js-ticket-thread .js-ticket-thread-cnt .js-ticket-thread-data.note-msg > h6,
+.js-ticket-thread .js-ticket-thread-cnt .js-ticket-thread-data.note-msg > ul,
+.js-ticket-thread .js-ticket-thread-cnt .js-ticket-thread-data.note-msg > ol,
+.js-ticket-thread .js-ticket-thread-cnt .js-ticket-thread-data.note-msg > blockquote,
+.js-ticket-thread .js-ticket-thread-cnt .js-ticket-thread-data.note-msg > pre,
+.js-ticket-thread .js-ticket-thread-cnt .js-ticket-thread-data.note-msg > hr,
+.js-ticket-thread .js-ticket-thread-cnt .js-ticket-thread-data.note-msg > div:not([class]){
+    align-self:stretch;
+}
 .js-ticket-thread .js-ticket-thread-cnt .js-ticket-thread-data.note-msg img{
     max-width:100%;
 }
@@ -4293,6 +4443,238 @@ $jsst_jssupportticket_css .= '
     @media (max-width: 600px) {
         .jsst-ir-draft-actions { flex-direction: column; align-items: stretch; }
         .jsst-ir-draft .jsst-ir-btn { width: 100%; text-align: center; }
+    }
+
+    /*
+     * =================================================================
+     * TICKET TAGS (right-hand info column)
+     * =================================================================
+     * The tag field and its Save button carried no front-end styling at all, so
+     * they fell back to the browser defaults - a 2px inset border, a grey
+     * bevelled button - and inherited the theme body size, which on a block
+     * theme is 22px. Next to 12px chips in a 280px column that reads as broken
+     * rather than plain. Everything here is sized explicitly and written with
+     * logical properties so the block mirrors under dir="rtl".
+     */
+    .jsst-ticket-tags .js-tkt-det-info-val {
+        display: block;
+    }
+
+    /* The field is behind a disclosure now, matching the admin screen. Closed,
+       the row is just chips plus an "Add tags"/"Edit" affordance; open, the
+       field appears underneath. */
+    .jsst-ticket-tags .jsst-tagbox {
+        display: block;
+    }
+
+    .jsst-ticket-tags .jsst-tagbox-summary {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+        align-items: center;
+        padding: 2px 0;
+        border-radius: 4px;
+        cursor: pointer;
+        list-style: none;
+    }
+
+    /* Both are needed: WebKit uses the pseudo-element, the standard property
+       covers the rest. Without them the browser draws its own triangle next to
+       the chips. */
+    .jsst-ticket-tags .jsst-tagbox-summary::-webkit-details-marker {
+        display: none;
+    }
+
+    .jsst-ticket-tags .jsst-tagbox-summary::marker {
+        content: none;
+    }
+
+    .jsst-ticket-tags .jsst-tagbox-summary:focus {
+        outline: none;
+    }
+
+    .jsst-ticket-tags .jsst-tagbox-summary:focus-visible {
+        outline: 2px solid ' . esc_attr($jsst_color1) . ';
+        outline-offset: 2px;
+    }
+
+    .jsst-ticket-tags .jsst-tag-list {
+        display: inline-flex;
+        flex-wrap: wrap;
+        gap: 6px;
+        align-items: center;
+    }
+
+    .jsst-ticket-tags .jsst-tag-chip.jsst-tag-add {
+        border: 1px solid ' . esc_attr($jsst_color1) . ';
+        background-color: ' . esc_attr($jsst_color1) . ';
+        color: ' . esc_attr($jsst_color7) . ';
+        font-weight: 600;
+    }
+
+    .jsst-ticket-tags .jsst-tagbox-summary:hover .jsst-tag-add {
+        border-color: ' . esc_attr($jsst_color1) . ';
+        color: ' . esc_attr($jsst_color1) . ';
+        background-color: ' . esc_attr($jsst_color3) . ';
+    }
+
+    /* Open state reads as "you are editing this" rather than "click to add". */
+    .jsst-ticket-tags .jsst-tagbox[open] .jsst-tag-add {
+        border-style: solid;
+        border-color: ' . esc_attr($jsst_color1) . ';
+        background-color: ' . esc_attr($jsst_color1) . ';
+        color: #fff;
+    }
+
+    .jsst-ticket-tags .jsst-tag-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        align-items: center;
+    }
+
+    .jsst-ticket-tags .jsst-tag-hint {
+        margin: 8px 0 0;
+        color: #8a8f8f;
+        font-size: 0.8rem;
+        line-height: 1.5;
+    }
+
+    .jsst-ticket-tags .jsst-tag-chip {
+        display: inline-block;
+        margin: 0;
+        padding: 3px 12px;
+        border: 1px solid ' . esc_attr($jsst_color5) . ';
+        border-radius: 12px;
+        /* color3, not color7. In this palette color7 is the contrast colour used
+           for text on dark fills - it is #ffffff on a default theme, so a chip
+           filled with it is white on white. color3 is the light surface slot the
+           action buttons already sit on. */
+        background-color: ' . esc_attr($jsst_color3) . ';
+        color: ' . esc_attr($jsst_color1) . ';
+        font-size: 0.875rem;
+        font-weight: 500;
+        line-height: 1.45;
+        text-decoration: none;
+    }
+
+    .jsst-ticket-tags a.jsst-tag-chip:hover {
+        background-color: ' . esc_attr($jsst_color1) . ';
+        color: #fff;
+        text-decoration: none;
+    }
+
+    .jsst-ticket-tags .jsst-tag-empty {
+        color: #8a8f8f;
+        font-size: 0.875rem;
+        line-height: 1.45;
+    }
+
+    .jsst-ticket-tags .jsst-tag-form {
+        display: block;
+        width: 100%;
+        margin-top: 8px;
+        padding: 12px;
+        background-color: #fafbfc;
+        border: 1px solid ' . esc_attr($jsst_color5) . ';
+        border-radius: 8px;
+    }
+
+    /* .inputbox is a shared front-end class, so this has to out-specify it
+       without !important - hence input.jsst-tag-input rather than the bare
+       class. */
+    .jsst-ticket-tags input.jsst-tag-input {
+        box-sizing: border-box;
+        flex: 1 1 160px;
+        min-width: 0;
+        height: 40px;
+        margin: 0;
+        padding: 8px 12px;
+        background-color: #fff;
+        border: 1px solid ' . esc_attr($jsst_color5) . ';
+        border-radius: 8px;
+        box-shadow: none;
+        color: ' . esc_attr($jsst_color4) . ';
+        font-size: 0.875rem;
+        line-height: 1.5;
+        text-align: start;
+        transition: border-color 0.15s ease, box-shadow 0.15s ease;
+        background-image: unset;
+    }
+
+    .jsst-ticket-tags input.jsst-tag-input::placeholder {
+        color: #a7adb5;
+        opacity: 1;
+    }
+
+    /* The field carries list="jsst-tag-suggestions"; Chrome draws its own
+       dropdown arrow inside the box on top of the text. */
+    .jsst-ticket-tags input.jsst-tag-input::-webkit-calendar-picker-indicator {
+        display: none;
+    }
+
+    .jsst-ticket-tags input.jsst-tag-input:hover {
+        border-color: ' . esc_attr($jsst_color2) . ';
+    }
+
+    .jsst-ticket-tags input.jsst-tag-input:focus {
+        border-color: ' . esc_attr($jsst_color1) . ';
+        box-shadow: 0 0 0 3px rgba(' . hexdec(substr($jsst_color1, 1, 2)) . ', ' . hexdec(substr($jsst_color1, 3, 2)) . ', ' . hexdec(substr($jsst_color1, 5, 2)) . ', 0.18);
+        outline: none;
+    }
+
+    .jsst-ticket-tags input.jsst-tag-save {
+        box-sizing: border-box;
+        flex: 0 0 auto;
+        height: 40px;
+        min-height: 40px;
+        margin: 0;
+        padding: 0 18px;
+        background-color: ' . esc_attr($jsst_color1) . ';
+        border: 1px solid ' . esc_attr($jsst_color1) . ';
+        border-radius: 8px;
+        box-shadow: none;
+        color: #fff;
+        font-size: 0.875rem;
+        font-weight: 600;
+        line-height: 38px;
+        cursor: pointer;
+        transition: background-color 0.2s ease, transform 0.2s ease;
+    }
+
+    .jsst-ticket-tags input.jsst-tag-save:hover {
+        background-color: ' . esc_attr($jsst_color2) . ';
+        border-color: ' . esc_attr($jsst_color2) . ';
+        color: #fff;
+        transform: translateY(-2px);
+    }
+
+    .jsst-ticket-tags input.jsst-tag-save:focus-visible {
+        outline: 2px solid ' . esc_attr($jsst_color2) . ';
+        outline-offset: 2px;
+    }
+
+    /* Below the tablet breakpoint the info column is full width and the field
+       and button read better stacked than squeezed onto one line. */
+    @media (max-width: 782px) {
+        .jsst-ticket-tags input.jsst-tag-input,
+        .jsst-ticket-tags input.jsst-tag-save {
+            flex: 1 1 100%;
+            width: 100%;
+        }
+    }
+
+    /*
+     * =================================================================
+     * TICKET ACTION BUTTONS
+     * =================================================================
+     * Twelve of these sit in a row and inherited the 22px theme body size,
+     * which made each one about as tall as a form field. The colours and the
+     * hover treatment are unchanged; only the type is brought back down.
+     */
+    .js-tkt-det-left .js-tkt-det-actn-btn-wrp .js-tkt-det-actn-btn {
+        font-size: 0.95rem;
+        line-height: 1.4;
     }
     ';
 

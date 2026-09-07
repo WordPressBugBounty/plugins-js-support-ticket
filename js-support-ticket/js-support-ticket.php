@@ -5,7 +5,9 @@
   Plugin URI: https://www.jshelpdesk.com
   Description: JS Help Desk is a trusted open source ticket system. JS Help Desk is a simple, easy to use, web-based customer support system. User can create ticket from front-end. JS Help Desk comes packed with lot features than most of the expensive(and complex) support ticket system on market. JS Help Desk provide you best industry help desk system.
   Author: JS Help Desk
-  Version: 3.1.7
+  Version: 4.0.0
+  Requires at least: 5.5
+  Requires PHP: 7.4
   Text Domain: js-support-ticket
   Domain Path: /languages
   License: GPLv3
@@ -58,12 +60,22 @@ class jssupportticket {
         self::includes();
         self::jsstLoadWpCoreFiles();
         self::registeractions();
+        JSSTmergedaddon::register(); // Roadmap 4.0-CORE-19
+        JSSTprivacy::register();     // Roadmap 4.0-SEC-02
+        JSSTdraft::registerHooks();  // Roadmap 4.0-UX-04
+        JSSTpresence::registerHooks(); // Roadmap 4.0-UX-05
+        // Core owns the widgets now; the legacy add-on's copies are unhooked by
+        // suppressLegacyHooks() above, so nothing renders twice.
+        // (Roadmap 4.0-CORE-09, 4.0-CORE-19)
+        if (is_admin() && JSSTmergedaddon::coreOwns('dashboardwidgets')) {
+            JSSTcoredashboardwidgets::register();
+        }
         self::$_path = plugin_dir_path(__FILE__);
         self::$_pluginpath = plugins_url('/', __FILE__);
         self::$jsst_data = array();
         self::$_search = array();
         self::$_captcha = array();
-        self::$_currentversion = '317';
+        self::$_currentversion = '400';
         self::$_addon_query = array('select'=>'','join'=>'','where'=>'');
         self::$_jshdsession = JSSTincluder::getObjectClass('wphdsession');
         global $wpdb;
@@ -87,7 +99,7 @@ class jssupportticket {
 
         // add_action('plugins_loaded', array($this, 'load_plugin_textdomain'));
         add_action('jssupporticket_updateticketstatus', array($this,'updateticketstatus'));
-        if(in_array('actions',jssupportticket::$_active_addons)){
+        if(JSSTmergedaddon::featureEnabled('actions')){
             add_action('template_redirect', array($this, 'printTicket'), 5); // Only for the print ticket in wordpress
         }
         add_action('admin_init', array($this, 'jssupportticket_activation_redirect'));
@@ -124,6 +136,20 @@ class jssupportticket {
         if (is_plugin_active( 'all-in-one-seo-pack/all_in_one_seo_pack.php' ) ){
             add_filter( 'aioseo_disable_shortcode_parsing', '__return_true' );
         }
+        // Roles and capabilities are reconciled from a canonical definition on
+        // activation and on every upgrade. reconcile() is idempotent and costs a
+        // single option read once the site is up to date. (Roadmap 3.2-CORE-01)
+        add_action('admin_init', array($this, 'jsst_reconcile_roles'), 1);
+        // Free-tier suggestion search: the ranking matches subject and body
+        // separately, which MySQL serves only from per-column FULLTEXT indexes,
+        // while every source table ships a composite one. Repaired from the
+        // admin side once per version - the search itself runs while a customer
+        // types and must never build an index.
+        add_action('admin_init', array($this, 'jsst_repair_suggestion_indexes'));
+        // Help-desk access for agents is derived from the agent list rather than
+        // stored on the user, so adding or removing an agent takes effect at
+        // once and an ex-agent cannot keep a stale capability. (Roadmap 3.2-CORE-01)
+        add_filter('user_has_cap', array('JSSTroles', 'grantAgentCapability'), 10, 4);
         add_action('admin_notices', array($this , 'jsst_show_expiry_error_notice') );
         /* remove this in the 3.0.3 */
         add_action('admin_notices', array($this , 'jsst_show_addon_update_global_notice') );
@@ -143,7 +169,7 @@ class jssupportticket {
                     // restore colors data end
                     update_option('jsst_currentversion', self::$_currentversion);
                     include_once JSST_PLUGIN_PATH . 'includes/updates/updates.php';
-                    JSSTupdates::checkUpdates('317');
+                    JSSTupdates::checkUpdates('400');
                     JSSTincluder::getJSModel('jssupportticket')->updateColorFile();
                     JSSTincluder::getJSModel('jssupportticket')->jsst_check_license_status();
                     JSSTincluder::getJSModel('jssupportticket')->JSSTAddonsAutoUpdate();
@@ -372,6 +398,46 @@ class jssupportticket {
                 // gdpr
                 jssupportticket::$_search['gdpr']['email'] = isset($jsst_search_array['email']) ? $jsst_search_array['email'] : null;
             break;
+            // Blocked senders and their log are core, so the search that drives
+            // both screens is handled here. It used to live on the add-on's
+            // init hook, which a merged add-on no longer gets to keep.
+            // (Roadmap 4.0-CORE-12)
+            case 'banemail':
+            case 'banemails':
+                if($jsst_callfrom == 1 && is_admin()){
+                    $jsst_search_array = JSSTincluder::getJSModel('banemail')->getAdminSearchFormDataBanEmail();
+                    $jsst_setcookies = true;
+                }elseif($jsst_callfrom == 2){
+                    if(isset($_COOKIE['jsst_ticket_search_data'])){
+                        $jsst_ticket_search_cookie_data = jssupportticket::JSST_sanitizeData($_COOKIE['jsst_ticket_search_data']); // JSST_sanitizeData() function uses wordpress santize functions
+                        $jsst_ticket_search_cookie_data = json_decode( jssupportticketphplib::JSST_safe_decoding($jsst_ticket_search_cookie_data) , true );
+                    }
+                    if($jsst_ticket_search_cookie_data != '' && isset($jsst_ticket_search_cookie_data['search_from_banemail'])){
+                        $jsst_search_array['email'] = $jsst_ticket_search_cookie_data['email'];
+                    }
+                }else{
+                    jssupportticket::removeusersearchcookies();
+                }
+                jssupportticket::$_search['banemail']['email'] = isset($jsst_search_array['email']) ? $jsst_search_array['email'] : null;
+            break;
+            case 'banemaillog':
+            case 'banemaillogs':
+                if($jsst_callfrom == 1 && is_admin()){
+                    $jsst_search_array = JSSTincluder::getJSModel('banemaillog')->getAdminSearchFormDataBanEmailLog();
+                    $jsst_setcookies = true;
+                }elseif($jsst_callfrom == 2){
+                    if(isset($_COOKIE['jsst_ticket_search_data'])){
+                        $jsst_ticket_search_cookie_data = jssupportticket::JSST_sanitizeData($_COOKIE['jsst_ticket_search_data']); // JSST_sanitizeData() function uses wordpress santize functions
+                        $jsst_ticket_search_cookie_data = json_decode( jssupportticketphplib::JSST_safe_decoding($jsst_ticket_search_cookie_data) , true );
+                    }
+                    if($jsst_ticket_search_cookie_data != '' && isset($jsst_ticket_search_cookie_data['search_from_banemaillog'])){
+                        $jsst_search_array['loggeremail'] = $jsst_ticket_search_cookie_data['loggeremail'];
+                    }
+                }else{
+                    jssupportticket::removeusersearchcookies();
+                }
+                jssupportticket::$_search['banemail']['loggeremail'] = isset($jsst_search_array['loggeremail']) ? $jsst_search_array['loggeremail'] : null;
+            break;
             case 'priorities':
             case 'priority':
                 if($jsst_callfrom == 1 && is_admin()){
@@ -590,6 +656,34 @@ class jssupportticket {
         }
     }
 
+    /**
+     * Reconcile roles and capabilities when the stored role version is behind.
+     * (Roadmap 3.2-CORE-01)
+     */
+    function jsst_reconcile_roles() {
+        include_once JSST_PLUGIN_PATH . 'includes/roles.php';
+        JSSTroles::reconcile();
+    }
+
+    /**
+     * Add any missing per-column FULLTEXT index on the instant-resolve source
+     * tables. One option read once the site is up to date; the work itself runs
+     * once per plugin version, because that is when a shipped schema or a newly
+     * activated add-on can have introduced a table without them.
+     */
+    function jsst_repair_suggestion_indexes() {
+        $jsst_version = (string) jssupportticket::$_currentversion;
+        if (get_option('jsst_ir_index_repair') === $jsst_version) {
+            return;
+        }
+        // Claimed before the work, not after: an admin page load and the
+        // heartbeat arrive together often enough that both would otherwise
+        // start building the same index. A run that fails leaves the sources
+        // skipped exactly as they were, and is retried on the next version.
+        update_option('jsst_ir_index_repair', $jsst_version, false);
+        JSSTincluder::getJSModel('ticket')->repairSuggestionIndexes();
+    }
+
     function jsst_show_expiry_error_notice() {
         // Check if the option is set and equals '1'
         if (get_option('jsst_show_key_expiry_msg') == '1') {
@@ -777,6 +871,53 @@ class jssupportticket {
     }
 
     function registeractions() {
+        // Deleting a customer must take their internal notes with them. The
+        // stand-alone Private Note add-on adds this join itself, so core only
+        // does it when core is the side serving notes — never both.
+        // (Roadmap 4.0-CORE-02, 4.0-CORE-19)
+        if (JSSTmergedaddon::coreOwns('note')) {
+            add_action('jsst_addon_deletequery_for_user', array($this, 'jsst_delete_user_ticket_related_notes'));
+        }
+        // Tag links are core-only, so this join always comes from here.
+        // (Roadmap 4.0-CORE-17)
+        add_action('jsst_addon_deletequery_for_user', array($this, 'jsst_delete_user_ticket_tags'));
+        // The canned-response library screens keep their filter across pages via
+        // a saved search. The add-on hooks its own copy of this handler, so core
+        // only registers when core is serving the feature.
+        // (Roadmap 4.0-CORE-03, 4.0-CORE-19)
+        if (JSSTmergedaddon::coreOwns('cannedresponses')) {
+            add_action('init', array($this, 'jsst_handle_cannedresponse_search_form_data'));
+            add_action('admin_init', array($this, 'jsst_handle_cannedresponse_search_form_data'));
+        }
+        // Topic name on ticket queries, and the topic list's saved search. The
+        // Help Topic add-on registers the same five hooks from its own main file,
+        // so core registers only when core is serving the feature — otherwise the
+        // same join would be added twice and every ticket query would fail.
+        // (Roadmap 4.0-CORE-06, 4.0-CORE-19)
+        // Cc/Bcc headers on outgoing mail, and the CC list's saved search. The
+        // Email CC add-on filters on its own, so core only registers when core is
+        // serving the feature — otherwise every notification would be copied
+        // twice. (Roadmap 4.0-CORE-08, 4.0-CORE-19)
+        // Retention cleanup. Only when core owns it: the add-on schedules the same
+        // hook, and two schedulers would delete two batches per tick.
+        // (Roadmap 4.0-CORE-13, 4.0-CORE-19)
+        if (JSSTmergedaddon::coreOwns('autocleanup')) {
+            add_filter('cron_schedules', array($this, 'jsst_autocleanup_intervals'));
+            add_action('init', array($this, 'jsst_autocleanup_schedule'));
+            add_action('jsst_daily_autocleanup_cron', array($this, 'jsst_autocleanup_run'));
+        }
+        /* Email CC is an add-on feature again. The add-on hooks
+           jsst_emailcc_send_email_to_cc and jsst_emailcc_send_smtp_email_to_cc
+           from its own plugin file, so core registers nothing for it. */
+        if (JSSTmergedaddon::coreOwns('helptopic')) {
+            add_action('jsst_get_mail_table_record_query', array($this, 'jsst_helptopic_list_query'));
+            add_action('jsst_addon_staff_admin_tickets', array($this, 'jsst_helptopic_list_query'));
+            add_action('jsst_addon_staff_my_tickets', array($this, 'jsst_helptopic_list_query'));
+            add_action('jsst_addon_user_my_tickets', array($this, 'jsst_helptopic_list_query'));
+            add_action('jsst_ticket_detail_query', array($this, 'jsst_helptopic_detail_query'));
+            add_action('init', array($this, 'jsst_handle_helptopic_search_form_data'));
+            add_action('admin_init', array($this, 'jsst_handle_helptopic_search_form_data'));
+        }
         //Extra Hooks
         //add_filter( 'login_redirect', array($this,'jsst_login_redirect'), 10, 3 );
         //Ticket Action Hooks
@@ -791,6 +932,108 @@ class jssupportticket {
         add_action('jsst-beforeemailticketreply', array($this, 'beforeemailticketreply'), 10, 4);
         add_action('jsst-beforeemailticketclose', array($this, 'beforeemailticketclose'), 10, 4);
         add_action('jsst-beforeemailticketdelete', array($this, 'beforeemailticketdelete'), 10, 4);
+    }
+
+    /**
+     * The weekly and monthly intervals retention can be scheduled on.
+     * (Roadmap 4.0-CORE-13)
+     */
+    function jsst_autocleanup_intervals($jsst_schedules) {
+        if (!isset($jsst_schedules['weekly'])) {
+            $jsst_schedules['weekly'] = array('interval' => 604800, 'display' => esc_html(__('Once Weekly', 'js-support-ticket')));
+        }
+        if (!isset($jsst_schedules['monthly'])) {
+            $jsst_schedules['monthly'] = array('interval' => 2635200, 'display' => esc_html(__('Once Monthly', 'js-support-ticket')));
+        }
+        return $jsst_schedules;
+    }
+
+    /**
+     * Keep the retention schedule in step with the configured frequency, and
+     * unschedule it entirely when both intervals are Never — a cron that wakes up
+     * to do nothing is a cron nobody notices is misconfigured.
+     * (Roadmap 4.0-CORE-13)
+     */
+    function jsst_autocleanup_schedule() {
+        $jsst_wanted = isset(jssupportticket::$_config['autocleanup_cron_frequency']) ? jssupportticket::$_config['autocleanup_cron_frequency'] : 'daily';
+        if (!in_array($jsst_wanted, array('daily', 'weekly', 'monthly'), true)) {
+            $jsst_wanted = 'daily';
+        }
+        // Through the includer, not the class name directly: this runs on init,
+        // before anything else has loaded the module's model file.
+        $jsst_cleanup = JSSTincluder::getJSModel('autocleanup');
+        $jsst_enabled = ($jsst_cleanup->ticketInterval() > 0 || $jsst_cleanup->attachmentInterval() > 0);
+        $jsst_scheduled = wp_next_scheduled('jsst_daily_autocleanup_cron');
+
+        if (!$jsst_enabled) {
+            if ($jsst_scheduled) {
+                wp_clear_scheduled_hook('jsst_daily_autocleanup_cron');
+            }
+            return;
+        }
+        if ($jsst_scheduled && wp_get_schedule('jsst_daily_autocleanup_cron') !== $jsst_wanted) {
+            wp_clear_scheduled_hook('jsst_daily_autocleanup_cron');
+            $jsst_scheduled = false;
+        }
+        if (!$jsst_scheduled) {
+            wp_schedule_event(time(), $jsst_wanted, 'jsst_daily_autocleanup_cron');
+        }
+    }
+
+    /**
+     * The scheduled retention run. (Roadmap 4.0-CORE-13)
+     */
+    function jsst_autocleanup_run() {
+        JSSTincluder::getJSModel('autocleanup')->executeCleanupRoutines();
+    }
+
+    /**
+     * Topic name on ticket list and mail queries. (Roadmap 4.0-CORE-06)
+     */
+    function jsst_helptopic_list_query() {
+        JSSTincluder::getJSModel('helptopic')->ticketListQuery();
+    }
+
+    /**
+     * Topic name on the ticket detail query. (Roadmap 4.0-CORE-06)
+     */
+    function jsst_helptopic_detail_query() {
+        JSSTincluder::getJSModel('helptopic')->ticketDetailQuery();
+    }
+
+    /**
+     * Read the topic list filter from the submitted form or the saved search
+     * cookie. (Roadmap 4.0-CORE-06)
+     */
+    function jsst_handle_helptopic_search_form_data() {
+        JSSTincluder::getJSModel('helptopic')->handleSearchFormData();
+    }
+
+    /**
+     * Read the canned-response library filter from the submitted form or the
+     * saved search cookie. (Roadmap 4.0-CORE-03)
+     */
+    function jsst_handle_cannedresponse_search_form_data() {
+        JSSTincluder::getJSModel('cannedresponses')->handleSearchFormData();
+    }
+
+    /**
+     * Add the notes table to the "delete everything belonging to this customer"
+     * query. Identical to what the Private Note add-on contributes, so the
+     * result is the same whichever side owns notes. (Roadmap 4.0-CORE-02)
+     */
+    function jsst_delete_user_ticket_related_notes() {
+        jssupportticket::$_addon_query['select'] .= " ,note";
+        jssupportticket::$_addon_query['join'] .= " LEFT JOIN `". jssupportticket::$_db->prefix ."js_ticket_notes` AS note ON note.ticketid = ticket.id ";
+    }
+
+    /**
+     * Tag links belong to the ticket, so they have to leave with it when a
+     * customer's records are erased. (Roadmap 4.0-CORE-17)
+     */
+    function jsst_delete_user_ticket_tags() {
+        jssupportticket::$_addon_query['select'] .= " ,tickettagmap";
+        jssupportticket::$_addon_query['join'] .= " LEFT JOIN `". jssupportticket::$_db->prefix ."js_ticket_ticket_tags` AS tickettagmap ON tickettagmap.ticketid = ticket.id ";
     }
 
     //Funtions for Ticket Hooks
@@ -853,7 +1096,7 @@ class jssupportticket {
     function includes() {
         if (is_admin()) {
             include_once 'includes/jssupportticketadmin.php';
-            include_once 'includes/classes/jsstadminreviewbox.php';
+            include_once __DIR__ . '/includes/classes/jsstadminreviewbox.php';
         }
         if(in_array('widgets', jssupportticket::$_active_addons)){
             include_once 'includes/pageswidget.php';
@@ -861,6 +1104,120 @@ class jssupportticket {
 
         include_once 'includes/captcha.php';
         include_once 'includes/recaptchalib.php';
+        // Decides whether a self-healing table actually needs repairing. Loaded
+        // before anything that owns one, and unconditionally, because every
+        // ensureSchema() in the plugin asks it first.
+        include_once __DIR__ . '/includes/classes/schemaguard.php';
+        // Compatibility layer for capabilities absorbed into the free core.
+        // Loaded unconditionally because its checks decide whether core or a
+        // still-active legacy add-on owns a feature. (Roadmap 4.0-CORE-19)
+        include_once __DIR__ . '/includes/classes/mergedaddon.php';
+        // Human verification and submission rate limits. Both are called
+        // statically from models, templates and the settings screen, so they are
+        // loaded here rather than through getObjectClass(). (Roadmap 4.0-SEC-01)
+        include_once __DIR__ . '/includes/classes/verification.php';
+        include_once __DIR__ . '/includes/classes/ratelimit.php';
+        // Shared ticket-action helpers. Called statically from core models and
+        // templates, and deliberately not on JSSTactionsModel — that class
+        // belongs to the legacy add-on on sites that still run it.
+        // (Roadmap 4.0-CORE-05, 4.0-CORE-19)
+        include_once __DIR__ . '/includes/classes/ticketaction.php';
+        // Ticket links that outlive the request that wrote them: a link stored in
+        // a reply has to resolve to the admin screen or the front-end screen
+        // depending on who is reading it. Called statically from the merge
+        // add-on's model and from both ticket detail templates.
+        // (Roadmap 4.0-CORE-01)
+        include_once __DIR__ . '/includes/classes/ticketlink.php';
+        // Queue search, the queue tabs and saved views. Called statically from
+        // the ticket model, the ticket controller and the list template, none of
+        // which owns it. (Roadmap 4.0-CORE-18)
+        include_once __DIR__ . '/includes/classes/queue.php';
+        // Attachment storage, validation and serving protection. Called
+        // statically from the upload path, the attachment model and activation.
+        // (Roadmap 4.0-SEC-03)
+        include_once __DIR__ . '/includes/classes/attachmentguard.php';
+        // Email delivery diagnostics. Called from the email model on every send
+        // and from the Email Health screen. (Roadmap 4.0-OPS-01)
+        include_once __DIR__ . '/includes/classes/mailhealth.php';
+        // What the last mailbox collection did. Written by the piping add-on
+        // while it runs, read by the Email Health screen. Loaded here rather
+        // than by the add-on so the record survives the add-on being switched
+        // off. (Roadmap 4.0-OPS-01)
+        include_once __DIR__ . '/includes/classes/pipinglog.php';
+        // The activation checklist. Read by the screen and by the side menu.
+        // (Roadmap 4.0-UX-01)
+        include_once __DIR__ . '/includes/classes/setup.php';
+        // WordPress privacy tools: export, erase and the retention statement.
+        // (Roadmap 4.0-SEC-02)
+        include_once __DIR__ . '/includes/classes/privacy.php';
+        // Effective agent access, for auditing. (Roadmap 4.0-SEC-04)
+        include_once __DIR__ . '/includes/classes/agentaccess.php';
+        // Which left menu each admin screen gets. (Roadmap 4.0-SEC-04)
+        include_once __DIR__ . '/includes/classes/jsstsidemenu.php';
+        // Diagnostics and the redacted debug bundle. (Roadmap 4.0-OPS-02)
+        include_once __DIR__ . '/includes/classes/systemstatus.php';
+        // Reply drafts, saved as an agent types. (Roadmap 4.0-UX-04)
+        include_once __DIR__ . '/includes/classes/draft.php';
+        // Who else is on this ticket, and whether a reply landed while this
+        // agent was writing. (Roadmap 4.0-UX-05)
+        include_once __DIR__ . '/includes/classes/presence.php';
+        // Which role a self-registered customer may be given. Free from 4.0, so
+        // it is validated rather than hidden. (Roadmap 4.0-CORE-07)
+        include_once __DIR__ . '/includes/classes/registrationrole.php';
+        // Streaming CSV output, used by the export module. (Roadmap 4.0-CORE-10)
+        include_once __DIR__ . '/includes/classes/csvwriter.php';
+        // The background queue. Loaded and registered on every request because
+        // the runner is a cron hook and the shutdown safety net has to be in
+        // place wherever work was queued from — a job enqueued by a front-end
+        // ticket submission is drained by whichever request comes next.
+        // (Roadmap 4.0-PERF-02)
+        include_once __DIR__ . '/includes/classes/jobs.php';
+        JSSTjobs::registerHooks();
+        // The migration record, its journal and rollback. Loaded on every
+        // request rather than in admin only, because JSSTtable::store() asks it
+        // whether a migration is recording on every insert the plugin makes —
+        // including a ticket raised on the front end. (Roadmap 4.0-DATA-01)
+        include_once __DIR__ . '/includes/classes/migration.php';
+        // What an import would do, counted before it runs, and the checks that
+        // run after it. Admin only — both are read by the migration screens and
+        // by nothing else. (Roadmap 4.0-DATA-01)
+        if (is_admin()) {
+            include_once __DIR__ . '/includes/classes/migrationpreview.php';
+            include_once __DIR__ . '/includes/classes/migrationvalidator.php';
+            // Converting the plugin's tables to InnoDB, a table at a time.
+            // Admin only: it is a maintenance screen and a System Status
+            // summary, and nothing on the front end asks it anything.
+            // (Roadmap 4.0-PERF-03)
+            include_once __DIR__ . '/includes/classes/storageengine.php';
+        }
+        // The documented CSV import format, read by the import screen, the
+        // template download and the importer. Loaded beside the migration it
+        // runs inside rather than under is_admin(), because the export module
+        // that carries it answers to the front end too and a task reaching it
+        // there would find the class missing. (Roadmap 4.0-DATA-02)
+        include_once __DIR__ . '/includes/classes/csvimport.php';
+        // The AI Copilot and the provider it talks to. Loaded outside is_admin()
+        // because the copilot runs against tickets from wherever a reply is
+        // written, not only from its settings screen. (Roadmap 4.0-AI-01)
+        include_once __DIR__ . '/includes/classes/copilotprovider.php';
+        include_once __DIR__ . '/includes/classes/copilot.php';
+        // The diagnostics catalogue every error message links into.
+        // (Roadmap 4.0-OPS-03)
+        include_once __DIR__ . '/includes/classes/docs.php';
+        /* The two WordPress dashboard widgets, and the dashboard report range.
+           (Roadmap 4.0-CORE-09)
+
+           This is the one merged capability that is not a module: every other one
+           lives in modules/<slug>/model.php and is resolved — to core's file first,
+           since 2026-08-27 — by getPluginPath(). This one is included straight from
+           the bootstrap, so it carries its own class name discipline instead: it
+           declares JSSTcoredashboardwidgets, because the stand-alone add-on already
+           holds JSSTDashboardwidgets (class names are case-insensitive) by the time
+           core loads. See the header of includes/classes/dashboardwidgets.php.
+           (Roadmap 4.0-CORE-19) */
+        if (is_admin() && JSSTmergedaddon::coreOwns('dashboardwidgets')) {
+            include_once __DIR__ . '/includes/classes/dashboardwidgets.php';
+        }
         include_once 'includes/layout.php';
         include_once 'includes/pagination.php';
         include_once 'includes/includer.php';
@@ -874,6 +1231,7 @@ class jssupportticket {
         include_once 'includes/message.php';
         include_once 'includes/ajax.php';
         include_once 'includes/jsst-hooks.php';
+        include_once 'includes/roles.php';
         require_once 'includes/constants.php';
         //include_once 'includes/addon-updater/jsstupdater.php';
     }
@@ -899,17 +1257,43 @@ class jssupportticket {
         return $jsst_content;
     }
 
+    /**
+     * Cache-busting version for a stylesheet or script the plugin ships.
+     *
+     * Everything used to be enqueued as ?ver=<productversion>, which is '400'
+     * for the whole of 4.0 and does not change when a file is edited. A browser
+     * that has the old copy therefore keeps it — through a plugin update, and
+     * through any fix to the CSS — until the visitor happens to hard-reload.
+     * Appending the file's modification time makes the URL change exactly when
+     * the file does, which is the only thing the cache should be keyed on.
+     *
+     * Falls back to the product version alone if the file cannot be stat'ed, so
+     * a packaging quirk can never stop a stylesheet loading.
+     */
+    public static function assetVersion($jsst_relative_path) {
+        $jsst_version = jssupportticket::$_config['productversion'];
+        $jsst_file = JSST_PLUGIN_PATH . ltrim($jsst_relative_path, '/');
+        if (!file_exists($jsst_file)) {
+            return $jsst_version;
+        }
+        $jsst_mtime = filemtime($jsst_file);
+        if (!$jsst_mtime) {
+            return $jsst_version;
+        }
+        return $jsst_version . '.' . $jsst_mtime;
+    }
+
     /*
      * function for the Style Sheets
      */
 
     static function addStyleSheets() {
         wp_enqueue_script('jquery');
-        wp_enqueue_script('commonjs',JSST_PLUGIN_URL.'includes/js/common.js', array(), jssupportticket::$_config['productversion'], true);
-        wp_enqueue_script('responsivetablejs',JSST_PLUGIN_URL.'includes/js/responsivetable.js', array(), jssupportticket::$_config['productversion'], true);
+        wp_enqueue_script('commonjs',JSST_PLUGIN_URL.'includes/js/common.js', array(), jssupportticket::assetVersion('includes/js/common.js'), true);
+        wp_enqueue_script('responsivetablejs',JSST_PLUGIN_URL.'includes/js/responsivetable.js', array(), jssupportticket::assetVersion('includes/js/responsivetable.js'), true);
         wp_enqueue_script('jquery-ui-accordion');
-        wp_enqueue_script('jsst-formvalidator',JSST_PLUGIN_URL.'includes/js/jquery.form-validator.js', array(), jssupportticket::$_config['productversion'], true);
-        wp_enqueue_script( 'js-support-ticket-main-js', JSST_PLUGIN_URL . 'includes/js/common.js', array( 'jquery' ), jssupportticket::$_config['productversion'], true );
+        wp_enqueue_script('jsst-formvalidator',JSST_PLUGIN_URL.'includes/js/jquery.form-validator.js', array(), jssupportticket::assetVersion('includes/js/jquery.form-validator.js'), true);
+        wp_enqueue_script( 'js-support-ticket-main-js', JSST_PLUGIN_URL . 'includes/js/common.js', array( 'jquery' ), jssupportticket::assetVersion('includes/js/common.js'), true );
         if(in_array('notification', jssupportticket::$_active_addons)){
             wp_localize_script('commonjs', 'common', array('apiKey_firebase' => jssupportticket::$_config['apiKey_firebase'],'authDomain_firebase'=> jssupportticket::$_config['authDomain_firebase'],'databaseURL_firebase'=>jssupportticket::$_config['databaseURL_firebase'], 'projectId_firebase' => jssupportticket::$_config['projectId_firebase'], 'storageBucket_firebase' => jssupportticket::$_config['storageBucket_firebase'], 'messagingSenderId_firebase' => jssupportticket::$_config['messagingSenderId_firebase']));
         }
@@ -955,15 +1339,15 @@ class jssupportticket {
     public static function jsst_register_plugin_styles(){
         global $wp_styles;
         if (!isset($wp_styles->queue)) {
-            wp_enqueue_style('jssupportticket-main-css', JSST_PLUGIN_URL . 'includes/css/style.css', array(), jssupportticket::$_config['productversion']);
+            wp_enqueue_style('jssupportticket-main-css', JSST_PLUGIN_URL . 'includes/css/style.css', array(), jssupportticket::assetVersion('includes/css/style.css'));
             // responsive style sheets
-            wp_enqueue_style('jssupportticket-tablet-css', JSST_PLUGIN_URL . 'includes/css/style_tablet.css', array(), jssupportticket::$_config['productversion'], '(min-width: 668px) and (max-width: 782px)');
-            wp_enqueue_style('jssupportticket-mobile-css', JSST_PLUGIN_URL . 'includes/css/style_mobile.css', array(), jssupportticket::$_config['productversion'], '(min-width: 481px) and (max-width: 667px)');
-            wp_enqueue_style('jssupportticket-oldmobile-css', JSST_PLUGIN_URL . 'includes/css/style_oldmobile.css', array(), jssupportticket::$_config['productversion'], '(max-width: 480px)');
+            wp_enqueue_style('jssupportticket-tablet-css', JSST_PLUGIN_URL . 'includes/css/style_tablet.css', array(), jssupportticket::assetVersion('includes/css/style_tablet.css'), '(min-width: 668px) and (max-width: 782px)');
+            wp_enqueue_style('jssupportticket-mobile-css', JSST_PLUGIN_URL . 'includes/css/style_mobile.css', array(), jssupportticket::assetVersion('includes/css/style_mobile.css'), '(min-width: 481px) and (max-width: 667px)');
+            wp_enqueue_style('jssupportticket-oldmobile-css', JSST_PLUGIN_URL . 'includes/css/style_oldmobile.css', array(), jssupportticket::assetVersion('includes/css/style_oldmobile.css'), '(max-width: 480px)');
             //wp_enqueue_style('jssupportticket-main-css');
             if(is_rtl()){
                 //wp_register_style('jssupportticket-main-css-rtl', JSST_PLUGIN_URL . 'includes/css/stylertl.css');
-                wp_enqueue_style('jssupportticket-main-css-rtl', JSST_PLUGIN_URL . 'includes/css/stylertl.css', array(), jssupportticket::$_config['productversion']);
+                wp_enqueue_style('jssupportticket-main-css-rtl', JSST_PLUGIN_URL . 'includes/css/stylertl.css', array(), jssupportticket::assetVersion('includes/css/stylertl.css'));
                 //wp_enqueue_style('jssupportticket-main-css-rtl');
             }
             $jsst_color1 = require_once(JSST_PLUGIN_PATH . 'includes/css/style.php');
@@ -977,16 +1361,16 @@ class jssupportticket {
         $jsst_page = JSSTrequest::getVar('page');
         // List of all your plugin pages
         $jsst_plugin_pages = array(
-            'jssupportticket','slug','ticket','fieldordering','agent','configuration','priority','status','thirdpartyimport','product','department','themes','reports','announcement','knowledgebase','email','systemerror','emailtemplate','translations','userfeild','cannedresponses','role','mail','banemail','banemaillog','emailpiping','export','feedback','postinstallation','faq','emailcc','agentautoassign','multiform','download','premiumplugin','shortcodes','help','helptopic','gdpr');
-        wp_register_style('jsticket-bootstrapcss', JSST_PLUGIN_URL . 'includes/css/bootstrap.min.css', array(), jssupportticket::$_config['productversion']);
-        wp_register_style('jsticket-admincss', JSST_PLUGIN_URL . 'includes/css/admincss.css', array(), jssupportticket::$_config['productversion']);
+            'jssupportticket','slug','ticket','fieldordering','agent','configuration','priority','status','thirdpartyimport','product','department','themes','reports','announcement','knowledgebase','email','systemerror','emailtemplate','translations','userfeild','cannedresponses','role','mail','banemail','banemaillog','emailpiping','export','feedback','postinstallation','faq','emailcc','agentautoassign','multiform','download','premiumplugin','shortcodes','help','helptopic','gdpr','copilot');
+        wp_register_style('jsticket-bootstrapcss', JSST_PLUGIN_URL . 'includes/css/bootstrap.min.css', array(), jssupportticket::assetVersion('includes/css/bootstrap.min.css'));
+        wp_register_style('jsticket-admincss', JSST_PLUGIN_URL . 'includes/css/admincss.css', array(), jssupportticket::assetVersion('includes/css/admincss.css'));
         // Only enqueue Tailwind if the current page is part of your plugin
         if (in_array($jsst_page, $jsst_plugin_pages)) {
             wp_enqueue_script('jsticket-tailwind', JSST_PLUGIN_URL . 'includes/js/tailwind.js', array(), '3.4.4', false);
         }
         wp_enqueue_style('jsticket-admincss');
         if(is_rtl()){
-            wp_register_style('jsticket-admincss-rtl', JSST_PLUGIN_URL . 'includes/css/admincssrtl.css', array(), jssupportticket::$_config['productversion']);
+            wp_register_style('jsticket-admincss-rtl', JSST_PLUGIN_URL . 'includes/css/admincssrtl.css', array(), jssupportticket::assetVersion('includes/css/admincssrtl.css'));
             wp_enqueue_style('jsticket-admincss-rtl');
         }
     }
@@ -1438,8 +1822,19 @@ class jssupportticket {
             JSSTincluder::getJSModel('ticket')->sendFeedbackMail();// this funtions handles the the feedback email
         }
         if(in_array('emailpiping', jssupportticket::$_active_addons)){
+            /*
+             * One collection, not two. registerReadEmails() arranges for the
+             * mailbox to be read at shutdown, after the response has been
+             * flushed — that is what lets the browser-triggered
+             * ?jsstcron=ticketviaemail URL answer immediately instead of holding
+             * the connection open for the length of an IMAP session. Calling the
+             * model here as well ran the whole collection a second time in the
+             * same request: every mailbox opened twice, and on a slow mailbox
+             * the run took twice as long for nothing. The messages themselves
+             * are marked read by the first pass, so the duplicate found nothing
+             * and stayed invisible.
+             */
             JSSTincluder::getJSController('emailpiping')->registerReadEmails();
-            JSSTincluder::getJSModel('emailpiping')->getAllEmailsForTickets();
         }
 /*
         $jsst_time = gmdate('H:i:s');
@@ -1521,11 +1916,11 @@ if(!empty(jssupportticket::$_active_addons)){
 
 //$jsst_jssupportticket = new jssupportticket();
 if(is_file('includes/updater/updater.php')){
-    include_once 'includes/updater/updater.php';
+    
 }
 // file for admin review
 if(is_admin() && is_file('includes/classes/jsstadminreviewbox.php')){
-    include_once 'includes/classes/jsstadminreviewbox.php';
+    include_once __DIR__ . '/includes/classes/jsstadminreviewbox.php';
 }
 
  //do_action('edd_purchase_history_header_after');

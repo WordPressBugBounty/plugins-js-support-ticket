@@ -85,17 +85,8 @@ $jsst_jssupportticket_js ='
             jQuery("#cn_gen").addClass("active");
         }
 
-        // new code
-
-        jQuery("ul.jsst_tabs li").click(function(){
-            var tab_id = jQuery(this).attr("data-jsst-tab");
-
-            jQuery("ul.jsst_tabs li").removeClass("jsst_current_tab");
-            jQuery(".jsst_tab_content").removeClass("jsst_current_tab");
-
-            jQuery(this).addClass("jsst_current_tab");
-            jQuery("#"+tab_id).addClass("jsst_current_tab");
-        });
+        // Tab highlighting is handled by the scrollspy in the config UX script below,
+        // which keys off each tab link href instead of the old data-jsst-tab attribute.
 
         jQuery("select#ticket_overdue_type").change(function(){
             var isselect = jQuery("select#ticket_overdue_type").val();
@@ -216,10 +207,452 @@ $jsst_jssupportticket_js ='
 ';
 wp_add_inline_script('js-support-ticket-main-js',$jsst_jssupportticket_js);
 
-$jsst_captchaselection = array(
-    (object) array('id' => '1', 'text' => esc_html(__('Google reCaptcha', 'js-support-ticket'))),
-    (object) array('id' => '2', 'text' => esc_html(__('Own Captcha', 'js-support-ticket')))
-);
+/* Configurations page usability layer: cross-section search, sticky navigation,
+   tab scrollspy and unsaved-change tracking. (Roadmap 4.0-UX-01) */
+$jsst_config_ux_js = <<<'JSSTUX'
+/* JS Help Desk - Configurations page usability layer.
+   Search across every setting, sticky navigation, tab scrollspy and an
+   unsaved-changes guard. All of it is progressive: if this script does not
+   run the page still renders and saves exactly as before. */
+(function ($) {
+    'use strict';
+
+    var $wrap = $('form.js-support-ticket-configurations');
+    if (!$wrap.length) { return; }
+
+    var $sections    = $wrap.find('.jsstadmin-hide-config');
+    var $sideItems   = $wrap.find('.js-support-ticket-configurations-left li.treeview');
+    var $searchInput = $('#jsst-config-search-input');
+    var $searchWrap  = $('.jsst-config-search');
+    var $results     = $('#jsst-config-search-results');
+    var $clearBtn    = $('.jsst-config-search-clear');
+    var $countLabel  = $('.jsst-config-changecount');
+
+    /* ---------- section <-> sidebar map ---------- */
+
+    var sectionMeta = {};   // section id -> {label, $li}
+
+    $sideItems.each(function () {
+        var $li   = $(this);
+        var href  = $li.children('a').attr('href') || '';
+        var match = href.match(/jsstconfigid=([a-z]+)/i);
+        if (!match) { return; }
+        sectionMeta[match[1]] = {
+            label: $.trim($li.children('a').find('.jsst_text').text()),
+            $li: $li
+        };
+    });
+
+    function currentSectionId() {
+        var id = 'general';
+        $sections.each(function () {
+            if ($(this).css('display') !== 'none') { id = this.id; return false; }
+        });
+        return id;
+    }
+
+    /* Show one section without reloading the page, so pending edits survive. */
+    function showSection(id, anchor) {
+        if (!document.getElementById(id)) { id = 'general'; }
+
+        $sections.each(function () {
+            this.style.display = (this.id === id) ? 'inline-block' : '';
+        });
+        $sideItems.removeClass('active');
+        if (sectionMeta[id]) { sectionMeta[id].$li.addClass('active'); }
+
+        try {
+            var url = new URL(window.location.href);
+            url.searchParams.set('jsstconfigid', id);
+            url.hash = anchor ? ('#' + anchor) : '';
+            window.history.replaceState(null, '', url.toString());
+        } catch (e) { /* older browsers just keep the old URL */ }
+
+        if (anchor) {
+            scrollToTarget(document.getElementById(anchor));
+        } else {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+        syncTabs();
+    }
+
+    /* The CSS ships sensible defaults for these; measuring keeps the sticky bars
+       aligned when the admin bar, the search box or the save bar render at
+       another height (zoom, larger base font, a translated label that wraps).
+       The save bar's height is what keeps the section menu from ending
+       underneath it, which hid its last entry. */
+    function syncStickyVars() {
+        var bar = document.getElementById('wpadminbar');
+        var el  = $wrap[0];
+        el.style.setProperty('--jsst-admin-bar', (bar ? bar.offsetHeight : 0) + 'px');
+        if ($searchWrap.length) {
+            el.style.setProperty('--jsst-search-h', $searchWrap[0].offsetHeight + 'px');
+        }
+        var $savebar = $wrap.find('.jsst-config-savebar').first();
+        if ($savebar.length) {
+            el.style.setProperty('--jsst-savebar-h', $savebar[0].offsetHeight + 'px');
+        }
+    }
+
+    function stickyOffset() {
+        var bar  = document.getElementById('wpadminbar');
+        var tabs = $('#' + currentSectionId()).find('.config-tabs').first()[0];
+        return (bar ? bar.offsetHeight : 0)
+             + ($searchWrap.length ? $searchWrap[0].offsetHeight : 0)
+             + (tabs ? tabs.offsetHeight : 0) + 12;
+    }
+
+    function scrollToTarget(el) {
+        if (!el) { return; }
+        var top = $(el).offset().top - stickyOffset();
+        window.scrollTo({ top: Math.max(top, 0), behavior: 'smooth' });
+    }
+
+    function flash(el) {
+        if (!el) { return; }
+        var $el = $(el);
+        $el.addClass('jsst-config-flash');
+        window.setTimeout(function () { $el.removeClass('jsst-config-flash'); }, 1600);
+    }
+
+    /* Sidebar links switch section in place instead of reloading. */
+    $wrap.on('click', '.js-support-ticket-configurations-left a[href*="jsstconfigid="]', function (e) {
+        var href  = $(this).attr('href') || '';
+        var match = href.match(/jsstconfigid=([a-z]+)/i);
+        if (!match) { return; }
+        e.preventDefault();
+        var hash = href.indexOf('#') > -1 ? href.split('#')[1] : '';
+        showSection(match[1], hash);
+        $searchWrap.removeClass('jsst-config-search-open');
+    });
+
+    /* ---------- tab links + scrollspy ---------- */
+
+    $wrap.on('click', '.jsst_tabs .tab-link a', function (e) {
+        var id = ($(this).attr('href') || '').replace('#', '');
+        var el = document.getElementById(id);
+        if (!el) { return; }
+        e.preventDefault();
+        scrollToTarget(el);
+    });
+
+    function syncTabs() {
+        var $section = $('#' + currentSectionId());
+        var $links   = $section.find('.jsst_tabs .tab-link');
+        if ($links.length < 2) { return; }
+
+        /* offset().top is document-relative, so the reading line has to be too. */
+        var line = (window.pageYOffset || document.documentElement.scrollTop) + stickyOffset() + 24;
+        var $active = $links.eq(0);
+
+        $links.each(function () {
+            var id = ($(this).find('a').attr('href') || '').replace('#', '');
+            var el = document.getElementById(id);
+            /* offsetParent is null while a section is hidden; measuring it then
+               would report top 0 for every heading and always pick the last tab. */
+            if (!el || el.offsetParent === null) { return; }
+            if ($(el).offset().top <= line) { $active = $(this); }
+        });
+
+        $links.removeClass('jsst_current_tab');
+        $active.addClass('jsst_current_tab');
+    }
+
+    /* ---------- search index ---------- */
+
+    var index = [];
+
+    $sections.each(function () {
+        var sectionId    = this.id;
+        var sectionLabel = sectionMeta[sectionId] ? sectionMeta[sectionId].label : sectionId;
+
+        $(this).find('.js-ticket-configuration-row, .js-ticket-configuration-row-mail').each(function (i) {
+            var $row   = $(this);
+            var title  = $.trim($row.find('.js-ticket-configuration-title').first().text());
+            if (!title) { return; }
+
+            var $body  = $row.closest('.jsst_gen_body');
+            var desc   = $.trim($row.find('.js-ticket-configuration-description').text());
+            var group  = $.trim($body.find('h2').first().text());
+
+            if (!$row.attr('id')) { $row.attr('id', 'jsst-cfg-row-' + sectionId + '-' + i); }
+
+            index.push({
+                id: $row.attr('id'),
+                title: title,
+                group: group,
+                section: sectionId,
+                sectionLabel: sectionLabel,
+                haystack: (title + ' ' + group + ' ' + sectionLabel + ' ' + desc).toLowerCase()
+            });
+        });
+    });
+
+    function escapeHtml(str) {
+        return String(str).replace(/[&<>"']/g, function (c) {
+            return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+        });
+    }
+
+    function highlight(text, terms) {
+        var out = escapeHtml(text);
+        terms.forEach(function (term) {
+            if (!term) { return; }
+            var re = new RegExp('(' + term.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + ')', 'ig');
+            out = out.replace(re, '<mark>$1</mark>');
+        });
+        return out;
+    }
+
+    var MAX_RESULTS = 40;
+
+    function search(query) {
+        var terms = query.toLowerCase().split(/\s+/).filter(Boolean);
+        if (!terms.length) { return []; }
+
+        var scored = [];
+        index.forEach(function (item) {
+            var all = terms.every(function (t) { return item.haystack.indexOf(t) > -1; });
+            if (!all) { return; }
+            /* Name matches rank above description-only matches. */
+            var lowerTitle = item.title.toLowerCase();
+            var score = terms.every(function (t) { return lowerTitle.indexOf(t) > -1; }) ? 0 : 1;
+            if (lowerTitle.indexOf(terms[0]) === 0) { score = -1; }
+            scored.push({ item: item, score: score });
+        });
+
+        scored.sort(function (a, b) { return a.score - b.score; });
+        scored = scored.slice(0, MAX_RESULTS);
+
+        /* Collect each group in the order its best hit appeared, so a heading is
+           printed once instead of every time the ranking flips back to it. */
+        var order = [], byGroup = {};
+        scored.forEach(function (s) {
+            var key = s.item.sectionLabel + ' › ' + s.item.group;
+            if (!byGroup[key]) { byGroup[key] = []; order.push(key); }
+            byGroup[key].push(s.item);
+        });
+
+        return order.map(function (key) { return { group: key, items: byGroup[key] }; });
+    }
+
+    function renderResults(query) {
+        var groups = search(query);
+        var terms  = query.toLowerCase().split(/\s+/).filter(Boolean);
+        var total  = groups.reduce(function (n, g) { return n + g.items.length; }, 0);
+
+        if (!total) {
+            $results.html('<div class="jsst-config-search-empty">%%NORESULTS%%</div>');
+        } else {
+            var html = '';
+            groups.forEach(function (group) {
+                html += '<div class="jsst-config-search-group">' + escapeHtml(group.group) + '</div>';
+                group.items.forEach(function (item) {
+                    html += '<a class="jsst-config-search-hit" role="option" href="#" ' +
+                            'data-section="' + escapeHtml(item.section) + '" ' +
+                            'data-row="' + escapeHtml(item.id) + '">' +
+                            highlight(item.title, terms) + '</a>';
+                });
+            });
+            html += '<div class="jsst-config-search-count">' +
+                    escapeHtml(total >= MAX_RESULTS
+                        ? '%%TOPN%%'.replace('%d', MAX_RESULTS)
+                        : '%%NMATCHES%%'.replace('%d', total)) +
+                    '</div>';
+            $results.html(html);
+        }
+
+        $results.prop('hidden', false);
+        $searchInput.attr('aria-expanded', 'true');
+        $searchWrap.addClass('jsst-config-search-open');
+    }
+
+    function closeResults() {
+        $results.prop('hidden', true).empty();
+        $searchInput.attr('aria-expanded', 'false');
+        $searchWrap.removeClass('jsst-config-search-open');
+    }
+
+    function gotoHit($hit) {
+        var section = $hit.data('section');
+        var rowId   = $hit.data('row');
+
+        if (section !== currentSectionId()) {
+            $sections.each(function () {
+                this.style.display = (this.id === section) ? 'inline-block' : '';
+            });
+            $sideItems.removeClass('active');
+            if (sectionMeta[section]) { sectionMeta[section].$li.addClass('active'); }
+            try {
+                var url = new URL(window.location.href);
+                url.searchParams.set('jsstconfigid', section);
+                window.history.replaceState(null, '', url.toString());
+            } catch (e) { /* no-op */ }
+        }
+
+        var row = document.getElementById(rowId);
+        scrollToTarget(row);
+        flash(row);
+        closeResults();
+        syncTabs();
+    }
+
+    var searchTimer = null;
+
+    $searchInput.on('input', function () {
+        var value = $.trim(this.value);
+        $clearBtn.prop('hidden', value === '');
+        $searchInput.closest('.jsst-config-search-box').toggleClass('jsst-has-query', value !== '');
+        window.clearTimeout(searchTimer);
+        if (value.length < 2) { closeResults(); return; }
+        searchTimer = window.setTimeout(function () { renderResults(value); }, 120);
+    });
+
+    /* "/" jumps to the search box, the way most search-first UIs behave. */
+    $(document).on('keydown', function (e) {
+        if (e.key !== '/' || e.ctrlKey || e.metaKey || e.altKey) { return; }
+        var tag = (e.target.tagName || '').toLowerCase();
+        if (tag === 'input' || tag === 'select' || tag === 'textarea' || e.target.isContentEditable) { return; }
+        e.preventDefault();
+        $searchInput.focus();
+    });
+
+    /* Enter inside the search box must never submit the configuration form. */
+    $searchInput.on('keydown', function (e) {
+        var $hits = $results.find('.jsst-config-search-hit');
+        var $cur  = $hits.filter('.jsst-config-search-active');
+
+        if (e.key === 'Enter') {
+            e.preventDefault();
+            if ($cur.length) { gotoHit($cur); }
+            else if ($hits.length) { gotoHit($hits.eq(0)); }
+            return;
+        }
+        if (e.key === 'Escape') { closeResults(); this.blur(); return; }
+        if (e.key !== 'ArrowDown' && e.key !== 'ArrowUp') { return; }
+        if (!$hits.length) { return; }
+
+        e.preventDefault();
+        var i = $hits.index($cur);
+        i = (e.key === 'ArrowDown') ? (i + 1) % $hits.length
+                                    : (i <= 0 ? $hits.length - 1 : i - 1);
+        $hits.removeClass('jsst-config-search-active');
+        $hits.eq(i).addClass('jsst-config-search-active')[0]
+             .scrollIntoView({ block: 'nearest' });
+    });
+
+    $results.on('click', '.jsst-config-search-hit', function (e) {
+        e.preventDefault();
+        gotoHit($(this));
+    });
+
+    $clearBtn.on('click', function () {
+        $searchInput.val('').focus();
+        $clearBtn.prop('hidden', true);
+        $searchInput.closest('.jsst-config-search-box').removeClass('jsst-has-query');
+        closeResults();
+    });
+
+    $(document).on('click', function (e) {
+        if (!$(e.target).closest('.jsst-config-search').length) { closeResults(); }
+    });
+
+    /* ---------- unsaved-changes tracking ---------- */
+
+    /* TinyMCE-backed textareas are left out: their value only syncs on submit,
+       so including them would report edits the admin never made. */
+    var $tracked = $wrap.find('input, select, textarea')
+        .not('[type="submit"], [type="button"], [type="hidden"], [type="file"], #jsst-config-search-input')
+        .filter(function () { return !$(this).closest('.wp-editor-wrap').length; });
+
+    function valueOf(el) {
+        if (el.type === 'checkbox' || el.type === 'radio') { return el.checked ? '1' : '0'; }
+        return el.value;
+    }
+
+    $tracked.each(function () { this.setAttribute('data-jsst-initial', valueOf(this)); });
+
+    var saving = false;
+
+    function refreshDirty() {
+        var dirty = 0;
+        $tracked.each(function () {
+            var changed = valueOf(this) !== this.getAttribute('data-jsst-initial');
+            $(this).closest('.js-ticket-configuration-row, .js-ticket-configuration-row-mail')
+                   .toggleClass('jsst-config-dirty', changed);
+            if (changed) { dirty++; }
+        });
+
+        $wrap.toggleClass('jsst-config-has-changes', dirty > 0);
+        $countLabel.text(dirty === 0 ? ''
+            : (dirty === 1 ? '%%ONECHANGE%%' : '%%NCHANGES%%'.replace('%d', dirty)));
+        // The pill can make the save bar taller, and the section menu sizes
+        // itself against that height.
+        syncStickyVars();
+        return dirty;
+    }
+
+    $wrap.on('change input', 'input, select, textarea', function () {
+        if (this.id === 'jsst-config-search-input') { return; }
+        refreshDirty();
+    });
+
+    $wrap.on('submit', function () { saving = true; });
+
+    $(window).on('beforeunload', function (e) {
+        if (saving || !$wrap.hasClass('jsst-config-has-changes')) { return; }
+        e.preventDefault();
+        e.originalEvent.returnValue = '';
+        return '';
+    });
+
+    /* ---------- boot ---------- */
+
+    /* The toolbar only casts a shadow once content scrolls beneath it. */
+    function syncStuck() {
+        if (!$searchWrap.length) { return; }
+        var bar = document.getElementById('wpadminbar');
+        var top = $searchWrap[0].getBoundingClientRect().top;
+        $searchWrap.toggleClass('jsst-is-stuck', top <= (bar ? bar.offsetHeight : 0) + 1);
+    }
+
+    var scrollTimer = null;
+    $(window).on('scroll resize', function () {
+        syncStuck();
+        window.clearTimeout(scrollTimer);
+        scrollTimer = window.setTimeout(function () { syncStickyVars(); syncTabs(); }, 60);
+    });
+
+    /* The legacy inline script above registers its ready handler first, so this
+       one runs after it - by then the jsstconfigid section is actually visible
+       and the tab positions can be measured. */
+    $(function () {
+        var id = currentSectionId();
+        if (sectionMeta[id]) { sectionMeta[id].$li.addClass('active'); }
+        syncStickyVars();
+        syncStuck();
+        syncTabs();
+        if (window.location.hash) {
+            var el = document.getElementById(window.location.hash.replace('#', ''));
+            if (el) { scrollToTarget(el); }
+        }
+    });
+
+}(jQuery));
+JSSTUX;
+
+$jsst_config_ux_js = strtr($jsst_config_ux_js, array(
+    '%%NORESULTS%%'  => esc_js(__('No setting matches your search.', 'js-support-ticket')),
+    /* translators: %d: number of settings matching the search. */
+    '%%NMATCHES%%'   => esc_js(__('%d settings found', 'js-support-ticket')),
+    /* translators: %d: number of matches shown out of a longer list. */
+    '%%TOPN%%'       => esc_js(__('Showing the first %d matches - keep typing to narrow them down', 'js-support-ticket')),
+    '%%ONECHANGE%%'  => esc_js(__('1 unsaved change', 'js-support-ticket')),
+    /* translators: %d: number of settings changed but not yet saved. */
+    '%%NCHANGES%%'   => esc_js(__('%d unsaved changes', 'js-support-ticket')),
+));
+wp_add_inline_script('js-support-ticket-main-js', $jsst_config_ux_js);
+
 $jsst_owncaptchaoparend = array(
     (object) array('id' => '2', 'text' => '2'),
     (object) array('id' => '3', 'text' => '3')
@@ -229,9 +662,14 @@ $jsst_owncaptchatype = array(
     (object) array('id' => '1', 'text' => esc_html(__('Addition', 'js-support-ticket'))),
     (object) array('id' => '2', 'text' => esc_html(__('Subtraction', 'js-support-ticket')))
 );
-$jsst_recaptcha_version = array(
-    (object) array('id' => '1', 'text' => esc_html(__('Google reCAPTCHA v2', 'js-support-ticket'))),
-    (object) array('id' => '2', 'text' => esc_html(__('Google reCAPTCHA v3', 'js-support-ticket')))
+// Human verification providers. (Roadmap 4.0-SEC-01)
+$jsst_captcha_providers = array(
+    (object) array('id' => 'builtin', 'text' => esc_html(__('Built-in invisible check (no third-party service)', 'js-support-ticket'))),
+    (object) array('id' => 'turnstile', 'text' => esc_html(__('Cloudflare Turnstile', 'js-support-ticket'))),
+    (object) array('id' => 'hcaptcha', 'text' => esc_html(__('hCaptcha', 'js-support-ticket'))),
+    (object) array('id' => 'recaptcha_v3', 'text' => esc_html(__('Google reCAPTCHA v3 (score)', 'js-support-ticket'))),
+    (object) array('id' => 'recaptcha_v2', 'text' => esc_html(__('Google reCAPTCHA v2 (checkbox)', 'js-support-ticket'))),
+    (object) array('id' => 'none', 'text' => esc_html(__('No verification', 'js-support-ticket')))
 );
 $jsst_yesno = array(
     (object) array('id' => '1', 'text' => esc_html(__('Yes', 'js-support-ticket'))),
@@ -303,13 +741,11 @@ $jsst_ticketsorting = array(
     (object) array('id' => '1', 'text' => esc_html(__('Ascending', 'js-support-ticket'))),
     (object) array('id' => '2', 'text' => esc_html(__('Descending', 'js-support-ticket')))
 );
-// wp roles combo for new user
-global $wp_roles;
-$jsst_roles = $wp_roles->get_names();
-$jsst_userroles = array();
-foreach ($jsst_roles as $jsst_key => $jsst_value) {
-    $jsst_userroles[] = (object) array('id' => $jsst_key, 'text' => $jsst_value);
-}
+// Roles offered for self-registration. Anything that can administer the site,
+// manage users, publish other people's content or work tickets is left out, and
+// the reason is shown under the field. (Roadmap 4.0-CORE-07)
+$jsst_userroles = JSSTregistrationrole::options();
+$jsst_refusedroles = JSSTregistrationrole::refusedNames();
 $jsst_plugin_array = get_option('active_plugins');
 ?>
 <div id="jsstadmin-wrapper">
@@ -352,6 +788,18 @@ $jsst_plugin_array = get_option('active_plugins');
                 <img class="jsst_menu-icon" alt = "<?php echo esc_attr(__('menu' , 'js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL).'includes/images/menu.png'; ?>"/>
                 <span class="jsst_text"><?php echo esc_html(__('Select Configuration' , 'js-support-ticket')); ?> </span>
               </div>
+            <?php // Search across every setting on the page, in all sections at once. ?>
+            <div class="jsst-config-search">
+              <div class="jsst-config-search-box">
+                <svg class="jsst-config-search-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="11" cy="11" r="7"></circle><line x1="16.5" y1="16.5" x2="21" y2="21"></line></svg>
+                <label class="screen-reader-text" for="jsst-config-search-input"><?php echo esc_html(__('Search settings', 'js-support-ticket')); ?></label>
+                <input type="text" id="jsst-config-search-input" class="jsst-config-search-input" autocomplete="off" role="combobox" aria-expanded="false" aria-controls="jsst-config-search-results" placeholder="<?php echo esc_attr(__('Search all settings by name or description…', 'js-support-ticket')); ?>" />
+                <kbd class="jsst-config-search-kbd" aria-hidden="true">/</kbd>
+                <button type="button" class="jsst-config-search-clear" hidden aria-label="<?php echo esc_attr(__('Clear search', 'js-support-ticket')); ?>">&times;</button>
+                <?php // Inside the box so it anchors to the input in both LTR and RTL. ?>
+                <div class="jsst-config-search-results" id="jsst-config-search-results" role="listbox" hidden></div>
+              </div>
+            </div>
             <div class="js-support-ticket-configurations-left">
               <ul class="jsstadmin-sidebar-menu tree accordion" data-widget="tree">
                 <li class="treeview" id="cn_gen">
@@ -511,7 +959,7 @@ $jsst_plugin_array = get_option('active_plugins');
                         </ul>
                     </li>
                 <?php } ?>
-                <?php if(in_array('autocleanup', jssupportticket::$_active_addons)){ ?>
+                <?php if(JSSTmergedaddon::featureEnabled('autocleanup')){ ?>
                     <li class="treeview" id="cn_ac">
                         <a href="?page=configuration&jsstconfigid=autocleanup" title="<?php echo esc_attr(__('Auto Cleanup' , 'js-support-ticket')); ?>">
                             <img class="jsst_menu-icon" alt = "<?php echo esc_attr(__('Auto Cleanup' , 'js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL).'includes/images/config-icons/auto-cleanup.svg'; ?>"/>
@@ -555,14 +1003,14 @@ $jsst_plugin_array = get_option('active_plugins');
             <div id="general" class="jsstadmin-hide-config">
               <div class="tabs config-tabs" id="tabs">
                   <ul class="jsst_tabs">
-                      <li class="tab-link jsst_current_tab" data-jsst-tab="general"><a href="#GeneralSetting"><?php echo esc_html(__('General Settings', 'js-support-ticket')); ?></a></li>
-                      <li class="tab-link" data-jsst-tab="ticketsettig"><a href="#TicketDefault"><?php echo esc_html(__('Attachments', 'js-support-ticket')); ?></a></li>
-                      <li class="tab-link" data-jsst-tab="ticketsettig"><a href="#login"><?php echo esc_html(__('Login', 'js-support-ticket')); ?></a></li>
-                      <li class="tab-link" data-jsst-tab="ticketsettig"><a href="#register"><?php echo esc_html(__('Register', 'js-support-ticket')); ?></a></li>
-                      <li class="tab-link" data-jsst-tab="defaultemail"><a href="#SupportIcons"><?php echo esc_html(__('Support Icon', 'js-support-ticket')); ?></a></li>
-                      <li class="tab-link" data-jsst-tab="mailsetting"><a href="#Offline"><?php echo esc_html(__('Offline', 'js-support-ticket')); ?></a></li>
+                      <li class="tab-link jsst_current_tab"><a href="#GeneralSetting"><?php echo esc_html(__('General Settings', 'js-support-ticket')); ?></a></li>
+                      <li class="tab-link"><a href="#TicketDefault"><?php echo esc_html(__('Attachments', 'js-support-ticket')); ?></a></li>
+                      <li class="tab-link"><a href="#login"><?php echo esc_html(__('Login', 'js-support-ticket')); ?></a></li>
+                      <li class="tab-link"><a href="#register"><?php echo esc_html(__('Register', 'js-support-ticket')); ?></a></li>
+                      <li class="tab-link"><a href="#SupportIcons"><?php echo esc_html(__('Support Icon', 'js-support-ticket')); ?></a></li>
+                      <li class="tab-link"><a href="#Offline"><?php echo esc_html(__('Offline', 'js-support-ticket')); ?></a></li>
                       <?php if(in_array('paidsupport', jssupportticket::$_active_addons) && in_array('woocommerce/woocommerce.php', $jsst_plugin_array)){ ?>
-                        <li class="tab-link" data-jsst-tab="paidsupport"><a href="#PaidSupport"><?php echo esc_html(__('Paid Support', 'js-support-ticket')); ?></a></li>
+                        <li class="tab-link"><a href="#PaidSupport"><?php echo esc_html(__('Paid Support', 'js-support-ticket')); ?></a></li>
                       <?php } ?>
                   </ul>
               </div>
@@ -635,16 +1083,35 @@ $jsst_plugin_array = get_option('active_plugins');
                     }
 
                     if(isset(jssupportticket::$jsst_data[0]['wp_default_role'])){
-                      $jsst_title = esc_html(__('Default Wp Role For New Users', 'js-support-ticket'));
-                      $jsst_field = JSSTformfield::select('wp_default_role', $jsst_userroles, jssupportticket::$jsst_data[0]['wp_default_role']);
-                      $jsst_description =  esc_html(__('Select the role you want to assign to new users', 'js-support-ticket'));
-                      $jsst_video = '';
-                      $jsst_videotext = 'Default Wp Role For New Users';
-                      if(in_array('useroptions', jssupportticket::$_active_addons)){
-                          $jsst_video = 'T3HRojY2UN4';
+                      $jsst_title = esc_html(__('Default WordPress Role For New Users', 'js-support-ticket'));
+                      $jsst_field = JSSTformfield::select('wp_default_role', $jsst_userroles, JSSTregistrationrole::configured());
+                      $jsst_description =  esc_html(__('The role given to anyone who registers through the support portal.', 'js-support-ticket'));
+                      if (!empty($jsst_refusedroles)) {
+                          $jsst_description .= ' ' . sprintf(
+                              /* translators: %s: comma-separated list of role names */
+                              esc_html(__('These roles are not offered, because registration is open to the public and they can administer the site, manage users, publish content or work tickets: %s.', 'js-support-ticket')),
+                              esc_html(implode(', ', $jsst_refusedroles))
+                          );
                       }
+                      $jsst_videotext = 'Default Wp Role For New Users';
+                      // The help video is part of core now, so it always shows.
+                      // (Roadmap 4.0-CORE-07)
+                      $jsst_video = 'T3HRojY2UN4';
                       JSST_printConfigFieldSingle($jsst_title, $jsst_field, $jsst_description, $jsst_video, '', $jsst_videotext);
                     }
+
+                    // Roadmap 3.2-CORE-02: the documented data-retention contract.
+                    if(isset(jssupportticket::$jsst_data[0]['data_retention_on_uninstall'])){
+                      $jsst_title = esc_html(__('Data When Uninstalling', 'js-support-ticket'));
+                      $jsst_retentionoptions = array(
+                          (object) array('id' => 'preserve', 'text' => esc_html(__('Keep all tickets, tables and files', 'js-support-ticket'))),
+                          (object) array('id' => 'delete', 'text' => esc_html(__('Delete all tickets, tables and files', 'js-support-ticket')))
+                      );
+                      $jsst_field = JSSTformfield::select('data_retention_on_uninstall', $jsst_retentionoptions, jssupportticket::$jsst_data[0]['data_retention_on_uninstall']);
+                      $jsst_description =  esc_html(__('What happens when the plugin is deleted from the Plugins screen. Deactivating never removes data. Deleting always removes this plugin\'s roles and capabilities; this setting decides whether it also drops the ticket tables, plugin options and the uploaded attachment directory. Deleting cannot be undone.', 'js-support-ticket'));
+                      JSST_printConfigFieldSingle($jsst_title, $jsst_field, $jsst_description);
+                    }
+
                   ?>
               </div>
               <div class="jsst_gen_body" id="TicketDefault">
@@ -809,9 +1276,9 @@ $jsst_plugin_array = get_option('active_plugins');
             <div id="ticketsettig" class="jsstadmin-hide-config">
                <div class="tabs config-tabs" id="tabs">
                   <ul class="jsst_tabs">
-                      <li class="tab-link jsst_current_tab" data-jsst-tab="general"><a href="#TicketSetting"><?php echo esc_html(__('Ticket Settings', 'js-support-ticket')); ?></a></li>
-                      <li class="tab-link" data-jsst-tab="general"><a href="#TicketListing"><?php echo esc_html(__('Ticket Listing', 'js-support-ticket')); ?></a></li>
-                      <li class="tab-link" data-jsst-tab="defaultemail"><a href="#TS_visitorTs"><?php echo esc_html(__('Visitor Ticket Setting', 'js-support-ticket')); ?></a></li>
+                      <li class="tab-link jsst_current_tab"><a href="#TicketSetting"><?php echo esc_html(__('Ticket Settings', 'js-support-ticket')); ?></a></li>
+                      <li class="tab-link"><a href="#TicketListing"><?php echo esc_html(__('Ticket Listing', 'js-support-ticket')); ?></a></li>
+                      <li class="tab-link"><a href="#TS_visitorTs"><?php echo esc_html(__('Visitor Ticket Setting', 'js-support-ticket')); ?></a></li>
                   </ul>
               </div>
               <div class="jsst_gen_body" id="TicketSetting">
@@ -1071,7 +1538,7 @@ $jsst_plugin_array = get_option('active_plugins');
             <div id="defaultemail" class="jsstadmin-hide-config">
                <div class="tabs config-tabs" id="tabs">
                   <ul class="jsst_tabs">
-                      <li class="tab-link jsst_current_tab" data-jsst-tab="general"><a href="#SystemEmail"><?php echo esc_html(__('System Emails', 'js-support-ticket')); ?></a></li>
+                      <li class="tab-link jsst_current_tab"><a href="#SystemEmail"><?php echo esc_html(__('System Emails', 'js-support-ticket')); ?></a></li>
                   </ul>
               </div>
               <div class="jsst_gen_body" id="SystemEmail">
@@ -1112,9 +1579,9 @@ $jsst_plugin_array = get_option('active_plugins');
               <div class="tabs config-tabs" id="tabs">
                   <ul class="jsst_tabs">
                       <?php if(isset(jssupportticket::$jsst_data[0]['banemail_mail_to_admin'])){ ?>
-                      <li class="tab-link jsst_current_tab" data-jsst-tab="general"><a href="#BanEmailNewTicket"><?php echo esc_html(__('Ban Email New Ticket', 'js-support-ticket')); ?></a></li>
+                      <li class="tab-link jsst_current_tab"><a href="#BanEmailNewTicket"><?php echo esc_html(__('Ban Email New Ticket', 'js-support-ticket')); ?></a></li>
                     <?php } ?>
-                      <li class="tab-link" data-jsst-tab="ticketsettig"><a href="#TicketOperationsEmailSetting"><?php echo esc_html(__('Ticket Operations Email Setting', 'js-support-ticket')); ?></a></li>
+                      <li class="tab-link"><a href="#TicketOperationsEmailSetting"><?php echo esc_html(__('Ticket Operations Email Setting', 'js-support-ticket')); ?></a></li>
                   </ul>
               </div>
               <?php if(isset(jssupportticket::$jsst_data[0]['banemail_mail_to_admin'])){ ?>
@@ -1346,8 +1813,8 @@ $jsst_plugin_array = get_option('active_plugins');
               <?php if(in_array('agent', jssupportticket::$_active_addons)){ ?>
                 <div class="tabs config-tabs" id="tabs">
                   <ul class="jsst_tabs">
-                      <li class="tab-link jsst_current_tab" data-jsst-tab="general"><a href="#DashboardLinks"><?php echo esc_html(__('Dashboard Links', 'js-support-ticket')); ?></a></li>
-                      <li class="tab-link" data-jsst-tab="ticketsettig"><a href="#TopMenuLinks"><?php echo esc_html(__('Top Menu Links', 'js-support-ticket')); ?></a></li>
+                      <li class="tab-link jsst_current_tab"><a href="#DashboardLinks"><?php echo esc_html(__('Dashboard Links', 'js-support-ticket')); ?></a></li>
+                      <li class="tab-link"><a href="#TopMenuLinks"><?php echo esc_html(__('Top Menu Links', 'js-support-ticket')); ?></a></li>
                   </ul>
                 </div>
                 <div class="jsst_gen_body" id="DashboardLinks">
@@ -1552,7 +2019,7 @@ $jsst_plugin_array = get_option('active_plugins');
                     }
 
                     if(isset(jssupportticket::$jsst_data[0]['cplink_helptopic_agent'])){
-                        $jsst_title = esc_html(__('Help Topics', 'js-support-ticket'));
+                        $jsst_title = esc_html(__('Topics', 'js-support-ticket'));
                         $jsst_field = JSSTformfield::select('cplink_helptopic_agent', $jsst_showhide, jssupportticket::$jsst_data[0]['cplink_helptopic_agent']);
                         JSST_printConfigFieldSingle($jsst_title, $jsst_field);
                     }
@@ -1609,8 +2076,8 @@ $jsst_plugin_array = get_option('active_plugins');
             <div id="usermenusetting" class="jsstadmin-hide-config">
                <div class="tabs config-tabs" id="tabs">
                   <ul class="jsst_tabs">
-                      <li class="tab-link jsst_current_tab" data-jsst-tab="general"><a href="#DashboardLinksUser"><?php echo esc_html(__('Dashboard Links', 'js-support-ticket')); ?></a></li>
-                      <li class="tab-link" data-jsst-tab="ticketsettig"><a href="#TopMenuLinksUser"><?php echo esc_html(__('Top Menu Links', 'js-support-ticket')); ?></a></li>
+                      <li class="tab-link jsst_current_tab"><a href="#DashboardLinksUser"><?php echo esc_html(__('Dashboard Links', 'js-support-ticket')); ?></a></li>
+                      <li class="tab-link"><a href="#TopMenuLinksUser"><?php echo esc_html(__('Top Menu Links', 'js-support-ticket')); ?></a></li>
                   </ul>
               </div>
               <div class="jsst_gen_body" id="DashboardLinksUser">
@@ -1745,7 +2212,7 @@ $jsst_plugin_array = get_option('active_plugins');
               <?php if(in_array('feedback', jssupportticket::$_active_addons)){ ?>
                  <div class="tabs config-tabs" id="tabs">
                   <ul class="jsst_tabs">
-                      <li class="tab-link jsst_current_tab" data-jsst-tab="general"><a href="#FeedbackSettings"><?php echo esc_html(__('Feedback Settings', 'js-support-ticket')); ?></a></li>
+                      <li class="tab-link jsst_current_tab"><a href="#FeedbackSettings"><?php echo esc_html(__('Feedback Settings', 'js-support-ticket')); ?></a></li>
                   </ul>
                 </div>
                 <div class="jsst_gen_body" id="FeedbackSettings">
@@ -1785,8 +2252,8 @@ $jsst_plugin_array = get_option('active_plugins');
               <?php if (in_array('sociallogin', jssupportticket::$_active_addons)) { ?>
                  <div class="tabs config-tabs" id="tabs">
                   <ul class="jsst_tabs">
-                      <li class="tab-link jsst_current_tab" data-jsst-tab="general"><a href="#Facebook"><?php echo esc_html(__('Facebook', 'js-support-ticket')); ?></a></li>
-                      <li class="tab-link" data-jsst-tab="general"><a href="#Linkedin"><?php echo esc_html(__('Linkedin', 'js-support-ticket')); ?></a></li>
+                      <li class="tab-link jsst_current_tab"><a href="#Facebook"><?php echo esc_html(__('Facebook', 'js-support-ticket')); ?></a></li>
+                      <li class="tab-link"><a href="#Linkedin"><?php echo esc_html(__('Linkedin', 'js-support-ticket')); ?></a></li>
                   </ul>
                 </div>
                 <div class="jsst_gen_body" id="Facebook">
@@ -1858,7 +2325,7 @@ $jsst_plugin_array = get_option('active_plugins');
               <?php if (in_array('emailpiping', jssupportticket::$_active_addons)) { ?>
                 <div class="tabs config-tabs" id="tabs">
                   <ul class="jsst_tabs">
-                      <li class="tab-link jsst_current_tab" data-jsst-tab="general"><a href="#EmailPiping"><?php echo esc_html(__('Email Piping', 'js-support-ticket')); ?></a></li>
+                      <li class="tab-link jsst_current_tab"><a href="#EmailPiping"><?php echo esc_html(__('Email Piping', 'js-support-ticket')); ?></a></li>
                   </ul>
                 </div>
                 <div class="jsst_gen_body" id="EmailPiping">
@@ -1883,7 +2350,7 @@ $jsst_plugin_array = get_option('active_plugins');
               <?php if(in_array('notification', jssupportticket::$_active_addons)){ ?>
                 <div class="tabs config-tabs" id="tabs">
                   <ul class="jsst_tabs">
-                      <li class="tab-link jsst_current_tab" data-jsst-tab="general"><a href="#FirebaseNotifications"><?php echo esc_html(__('Firebase Notifications', 'js-support-ticket')); ?></a></li>
+                      <li class="tab-link jsst_current_tab"><a href="#FirebaseNotifications"><?php echo esc_html(__('Firebase Notifications', 'js-support-ticket')); ?></a></li>
                   </ul>
                 </div>
               <div class="jsst_gen_body" id="FirebaseNotifications">
@@ -1975,7 +2442,7 @@ $jsst_plugin_array = get_option('active_plugins');
               <?php if(in_array('privatecredentials', jssupportticket::$_active_addons)){ ?>
                  <div class="tabs config-tabs" id="tabs">
                   <ul class="jsst_tabs">
-                      <li class="tab-link jsst_current_tab" data-jsst-tab="general"><a href="#PrivateCredentials"><?php echo esc_html(__('Private Credentials', 'js-support-ticket')); ?></a></li>
+                      <li class="tab-link jsst_current_tab"><a href="#PrivateCredentials"><?php echo esc_html(__('Private Credentials', 'js-support-ticket')); ?></a></li>
                   </ul>
                 </div>
                 <div class="jsst_gen_body" id="PrivateCredentials">
@@ -2006,7 +2473,7 @@ $jsst_plugin_array = get_option('active_plugins');
               <?php if(in_array('envatovalidation', jssupportticket::$_active_addons)){ ?>
                 <div class="tabs config-tabs" id="tabs">
                   <ul class="jsst_tabs">
-                      <li class="tab-link jsst_current_tab" data-jsst-tab="general"><a href="#EnvatoValidation"><?php echo esc_html(__('Envato Validation', 'js-support-ticket')); ?></a></li>
+                      <li class="tab-link jsst_current_tab"><a href="#EnvatoValidation"><?php echo esc_html(__('Envato Validation', 'js-support-ticket')); ?></a></li>
                   </ul>
                 </div>
                 <div class="jsst_gen_body" id="EnvatoValidation">
@@ -2040,7 +2507,7 @@ $jsst_plugin_array = get_option('active_plugins');
               <?php if(in_array('mailchimp', jssupportticket::$_active_addons)){ ?>
                 <div class="tabs config-tabs" id="tabs">
                   <ul class="jsst_tabs">
-                      <li class="tab-link jsst_current_tab" data-jsst-tab="general"><a href="#MailChimp"><?php echo esc_html(__('Mailchimp', 'js-support-ticket')); ?></a></li>
+                      <li class="tab-link jsst_current_tab"><a href="#MailChimp"><?php echo esc_html(__('Mailchimp', 'js-support-ticket')); ?></a></li>
                   </ul>
                 </div>
                 <div class="jsst_gen_body" id="MailChimp">
@@ -2077,7 +2544,7 @@ $jsst_plugin_array = get_option('active_plugins');
               <?php if(in_array('easydigitaldownloads', jssupportticket::$_active_addons)){ ?>
                 <div class="tabs config-tabs" id="tabs">
                   <ul class="jsst_tabs">
-                      <li class="tab-link jsst_current_tab" data-jsst-tab="general"><a href="#EasyDigitalDownloads"><?php echo esc_html(__('Easy Digital Downloads', 'js-support-ticket')); ?></a></li>
+                      <li class="tab-link jsst_current_tab"><a href="#EasyDigitalDownloads"><?php echo esc_html(__('Easy Digital Downloads', 'js-support-ticket')); ?></a></li>
                   </ul>
                 </div>
                 <div class="jsst_gen_body" id="EasyDigitalDownloads">
@@ -2094,10 +2561,13 @@ $jsst_plugin_array = get_option('active_plugins');
             </div>
             <!-- .....Auto Cleanup..... -->
             <div id="autocleanup" class="jsstadmin-hide-config">
-                <?php if(in_array('autocleanup', jssupportticket::$_active_addons)){ ?>
+                <?php if(JSSTmergedaddon::featureEnabled('autocleanup')){
+                    $jsst_cleanup_coreowns = JSSTmergedaddon::coreOwns('autocleanup');
+                    $jsst_cleanup = $jsst_cleanup_coreowns ? JSSTincluder::getJSModel('autocleanup') : null;
+                    ?>
                     <div class="tabs config-tabs" id="tabs">
                         <ul class="jsst_tabs">
-                            <li class="tab-link jsst_current_tab" data-jsst-tab="general"><a href="#AutoCleanupSettings"><?php echo esc_html(__('Auto Cleanup', 'js-support-ticket')); ?></a></li>
+                            <li class="tab-link jsst_current_tab"><a href="#AutoCleanupSettings"><?php echo esc_html(__('Auto Cleanup', 'js-support-ticket')); ?></a></li>
                         </ul>
                     </div>
                     <div class="jsst_gen_body" id="AutoCleanupSettings">
@@ -2141,7 +2611,164 @@ $jsst_plugin_array = get_option('active_plugins');
                             $jsst_description =  esc_html(__('How often the background cleanup task should execute.', 'js-support-ticket'));
                             JSST_printConfigFieldSingle($jsst_title, $jsst_field, $jsst_description);
                         }
+
+                        if ($jsst_cleanup_coreowns) {
+                        // Exclusions: departments and priorities that retention
+                        // never touches. (Roadmap 4.0-CORE-13)
+                        //
+                        // Picked by name from a checkbox group, never typed as ids:
+                        // nobody administering a help desk knows that Billing is
+                        // department 3, and a wrong number here does not fail - it
+                        // silently deletes the tickets it was meant to protect. The
+                        // group posts a JSON array through the hidden field that the
+                        // script at the foot of this screen keeps in sync.
+                        //
+                        // Disabled departments and priorities are listed as well.
+                        // Retention only ever reaches old closed tickets, which is
+                        // exactly where a retired priority still turns up; leaving
+                        // one out of the list would quietly drop it from the
+                        // exclusion the next time this form was saved.
+                        $jsst_cleanup_depts = jssupportticket::$_db->get_results(
+                            "SELECT id, departmentname AS name FROM `" . jssupportticket::$_db->prefix . "js_ticket_departments` ORDER BY ordering ASC"
+                        );
+                        $jsst_cleanup_prios = jssupportticket::$_db->get_results(
+                            "SELECT id, priority AS name FROM `" . jssupportticket::$_db->prefix . "js_ticket_priorities` ORDER BY ordering ASC"
+                        );
+                        $jsst_cleanup_deptnames = array();
+                        foreach ((array) $jsst_cleanup_depts as $jsst_cleanup_row) {
+                            $jsst_cleanup_deptnames[(int) $jsst_cleanup_row->id] = $jsst_cleanup_row->name;
+                        }
+                        $jsst_cleanup_prionames = array();
+                        foreach ((array) $jsst_cleanup_prios as $jsst_cleanup_row) {
+                            $jsst_cleanup_prionames[(int) $jsst_cleanup_row->id] = $jsst_cleanup_row->name;
+                        }
+
+                        if(isset(jssupportticket::$jsst_data[0]['autocleanup_exclude_departments'])){
+                            // Read back through the model, so what is ticked here is
+                            // by construction what the run would skip - including a
+                            // comma-separated value saved before 4.0.
+                            $jsst_cleanup_on = JSSTautocleanupModel::excludedDepartments();
+                            $jsst_title = esc_html(__('Never Delete These Departments', 'js-support-ticket'));
+                            $jsst_field = '<div class="jsst-ir-checks" data-jsst-ir-target="autocleanup_exclude_departments">';
+                            if (empty($jsst_cleanup_depts)) {
+                                $jsst_field .= '<em>' . esc_html(__('No departments found.', 'js-support-ticket')) . '</em>';
+                            } else {
+                                foreach ($jsst_cleanup_depts as $jsst_cleanup_row) {
+                                    $jsst_field .= '<label><input type="checkbox" value="' . esc_attr($jsst_cleanup_row->id) . '"'
+                                                . (in_array((int) $jsst_cleanup_row->id, $jsst_cleanup_on, true) ? ' checked' : '') . '> '
+                                                . esc_html($jsst_cleanup_row->name) . '</label>';
+                                }
+                            }
+                            $jsst_field .= '<input type="hidden" name="autocleanup_exclude_departments" id="autocleanup_exclude_departments" value="'
+                                        . esc_attr(json_encode($jsst_cleanup_on)) . '"></div>';
+                            $jsst_description = esc_html(__('Tickets in these departments are never deleted or stripped of attachments, whatever the intervals above say.', 'js-support-ticket'));
+                            JSST_printConfigFieldSingle($jsst_title, $jsst_field, $jsst_description);
+                        }
+                        if(isset(jssupportticket::$jsst_data[0]['autocleanup_exclude_priorities'])){
+                            $jsst_cleanup_on = JSSTautocleanupModel::excludedPriorities();
+                            $jsst_title = esc_html(__('Never Delete These Priorities', 'js-support-ticket'));
+                            $jsst_field = '<div class="jsst-ir-checks" data-jsst-ir-target="autocleanup_exclude_priorities">';
+                            if (empty($jsst_cleanup_prios)) {
+                                $jsst_field .= '<em>' . esc_html(__('No priorities found.', 'js-support-ticket')) . '</em>';
+                            } else {
+                                foreach ($jsst_cleanup_prios as $jsst_cleanup_row) {
+                                    $jsst_field .= '<label><input type="checkbox" value="' . esc_attr($jsst_cleanup_row->id) . '"'
+                                                . (in_array((int) $jsst_cleanup_row->id, $jsst_cleanup_on, true) ? ' checked' : '') . '> '
+                                                . esc_html($jsst_cleanup_row->name) . '</label>';
+                                }
+                            }
+                            $jsst_field .= '<input type="hidden" name="autocleanup_exclude_priorities" id="autocleanup_exclude_priorities" value="'
+                                        . esc_attr(json_encode($jsst_cleanup_on)) . '"></div>';
+                            $jsst_description = esc_html(__('Tickets at these priorities are never deleted or stripped of attachments.', 'js-support-ticket'));
+                            JSST_printConfigFieldSingle($jsst_title, $jsst_field, $jsst_description);
+                        }
                         ?>
+
+                        <?php
+                        // The dry run. Retention deletes permanently and on a
+                        // schedule, so the preview is the safety feature that makes
+                        // the rest of this screen usable. (Roadmap 4.0-CORE-13)
+                        $jsst_preview = $jsst_cleanup->preview();
+                        $jsst_lastrun = JSSTautocleanupModel::lastRun();
+                        ?>
+                        <h2><?php echo esc_html(__('What Would Be Deleted', 'js-support-ticket')); ?></h2>
+                        <div class="jsst-cleanup-preview">
+                            <?php if (!$jsst_preview['enabled']) { ?>
+                                <p><?php echo esc_html(__('Nothing is deleted at the moment: both intervals are set to Never.', 'js-support-ticket')); ?></p>
+                            <?php } else { ?>
+                                <ul class="jsst-cleanup-figures">
+                                    <li>
+                                        <strong><?php echo esc_html(number_format_i18n($jsst_preview['tickets'])); ?></strong>
+                                        <?php echo esc_html(__('tickets would be permanently deleted', 'js-support-ticket')); ?>
+                                        <?php if ($jsst_preview['ticket_cutoff'] !== '') { ?>
+                                            <span class="jsst-cleanup-cutoff"><?php echo esc_html(sprintf(
+                                                /* translators: %s: a date */
+                                                __('closed on or before %s', 'js-support-ticket'),
+                                                date_i18n(get_option('date_format'), jssupportticketphplib::JSST_strtotime($jsst_preview['ticket_cutoff']))
+                                            )); ?></span>
+                                        <?php } ?>
+                                    </li>
+                                    <li>
+                                        <strong><?php echo esc_html(number_format_i18n($jsst_preview['attachments'])); ?></strong>
+                                        <?php echo esc_html(__('attachments would be removed, freeing', 'js-support-ticket')); ?>
+                                        <strong><?php echo esc_html(JSSTautocleanupModel::formatBytes($jsst_preview['bytes'])); ?></strong>
+                                    </li>
+                                </ul>
+                                <?php if (!empty($jsst_preview['excluded_departments']) || !empty($jsst_preview['excluded_priorities'])) { ?>
+                                    <p class="jsst-cleanup-exclusions">
+                                        <?php echo esc_html(__('Exclusions in force:', 'js-support-ticket')); ?>
+                                        <?php
+                                        // Names here too. This line is read as a check
+                                        // that the right things are protected, and an
+                                        // id proves nothing to the person reading it.
+                                        // An id with no row left behind it is shown as
+                                        // itself rather than dropped - the exclusion is
+                                        // still in force.
+                                        if (!empty($jsst_preview['excluded_departments'])) {
+                                            $jsst_cleanup_shown = array();
+                                            foreach ($jsst_preview['excluded_departments'] as $jsst_cleanup_id) {
+                                                $jsst_cleanup_shown[] = isset($jsst_cleanup_deptnames[$jsst_cleanup_id]) ? $jsst_cleanup_deptnames[$jsst_cleanup_id] : '#' . $jsst_cleanup_id;
+                                            }
+                                            /* translators: %s: comma separated list of department names excluded from the cleanup. */
+                                            echo esc_html(sprintf(__('departments %s', 'js-support-ticket'), implode(', ', $jsst_cleanup_shown)));
+                                        }
+                                        if (!empty($jsst_preview['excluded_priorities'])) {
+                                            $jsst_cleanup_shown = array();
+                                            foreach ($jsst_preview['excluded_priorities'] as $jsst_cleanup_id) {
+                                                $jsst_cleanup_shown[] = isset($jsst_cleanup_prionames[$jsst_cleanup_id]) ? $jsst_cleanup_prionames[$jsst_cleanup_id] : '#' . $jsst_cleanup_id;
+                                            }
+                                            /* translators: %s: comma separated list of priority names excluded from the cleanup. */
+                                            echo esc_html(sprintf(__('priorities %s', 'js-support-ticket'), implode(', ', $jsst_cleanup_shown)));
+                                        }
+                                        ?>
+                                    </p>
+                                <?php } ?>
+                                <?php if (!empty($jsst_preview['sample'])) { ?>
+                                    <p><?php echo esc_html(__('The oldest of them:', 'js-support-ticket')); ?></p>
+                                    <ul class="jsst-cleanup-sample">
+                                        <?php foreach ($jsst_preview['sample'] AS $jsst_sample) { ?>
+                                            <li>
+                                                <a href="<?php echo esc_url(admin_url('admin.php?page=ticket&jstlay=ticketdetail&jssupportticketid=' . (int) $jsst_sample->id)); ?>">#<?php echo esc_html($jsst_sample->ticketid); ?></a>
+                                                <?php echo esc_html($jsst_sample->subject); ?>
+                                                <span class="jsst-cleanup-cutoff"><?php echo esc_html(date_i18n(get_option('date_format'), jssupportticketphplib::JSST_strtotime($jsst_sample->closed))); ?></span>
+                                            </li>
+                                        <?php } ?>
+                                    </ul>
+                                <?php } ?>
+                                <p class="jsst-cleanup-warning"><?php echo esc_html(__('Deletion cannot be undone. These figures are recalculated every time this screen is opened, and nothing is deleted by looking at them.', 'js-support-ticket')); ?></p>
+                            <?php } ?>
+                            <?php if (!empty($jsst_lastrun)) { ?>
+                                <p class="jsst-cleanup-lastrun">
+                                    <?php echo esc_html(sprintf(
+                                        /* translators: 1: date, 2: what the run did */
+                                        __('Last run %1$s: %2$s', 'js-support-ticket'),
+                                        $jsst_lastrun['when'],
+                                        $jsst_lastrun['message']
+                                    )); ?>
+                                </p>
+                            <?php } ?>
+                        </div>
+                        <?php } // end $jsst_cleanup_coreowns ?>
                     </div>
                 <?php } ?>
             </div>
@@ -2158,11 +2785,11 @@ $jsst_plugin_array = get_option('active_plugins');
                 ?>
                     <div class="tabs config-tabs" id="tabs">
                         <ul class="jsst_tabs">
-                            <li class="tab-link jsst_current_tab" data-jsst-tab="general"><a href="#InstantResolveSuggestions"><?php echo esc_html(__('Suggestions', 'js-support-ticket')); ?></a></li>
+                            <li class="tab-link jsst_current_tab"><a href="#InstantResolveSuggestions"><?php echo esc_html(__('Suggestions', 'js-support-ticket')); ?></a></li>
                             <?php if($jsst_ir_addon){ ?>
-                                <li class="tab-link jsst_current_tab" data-jsst-tab="general"><a href="#InstantResolveAI"><?php echo esc_html(__('AI Assistant', 'js-support-ticket')); ?></a></li>
-                                <li class="tab-link jsst_current_tab" data-jsst-tab="general"><a href="#InstantResolveReplies"><?php echo esc_html(__('Automatic Replies', 'js-support-ticket')); ?></a></li>
-                                <li class="tab-link jsst_current_tab" data-jsst-tab="general"><a href="#InstantResolveAdvanced"><?php echo esc_html(__('Advanced', 'js-support-ticket')); ?></a></li>
+                                <li class="tab-link"><a href="#InstantResolveAI"><?php echo esc_html(__('AI Assistant', 'js-support-ticket')); ?></a></li>
+                                <li class="tab-link"><a href="#InstantResolveReplies"><?php echo esc_html(__('Automatic Replies', 'js-support-ticket')); ?></a></li>
+                                <li class="tab-link"><a href="#InstantResolveAdvanced"><?php echo esc_html(__('Advanced', 'js-support-ticket')); ?></a></li>
                             <?php } ?>
                         </ul>
                     </div>
@@ -2198,7 +2825,8 @@ $jsst_plugin_array = get_option('active_plugins');
                             // getSourceDefinitions() in the addon's retriever and $jsst_tables
                             // in getBasicFixSuggestions(). Both already skip a source whose
                             // addon is inactive, so an unqualified tickbox here promises a
-                            // search that will not happen.
+                            // search that will not happen. A null 'addon' means core owns the
+                            // content and the source is always offered.
                             $jsst_ir_source_opts = array(
                                 'kb'      => array('label' => __('Knowledgebase articles', 'js-support-ticket'),
                                                    'addon' => 'knowledgebase',
@@ -2206,9 +2834,10 @@ $jsst_plugin_array = get_option('active_plugins');
                                 'faq'     => array('label' => __('FAQs', 'js-support-ticket'),
                                                    'addon' => 'faq',
                                                    'owner' => __('FAQ', 'js-support-ticket')),
+                                // Canned Responses was absorbed into the free core, so it is
+                                // no longer gated - the same as WordPress posts and pages.
                                 'canned'  => array('label' => __('Canned responses', 'js-support-ticket'),
-                                                   'addon' => 'cannedresponses',
-                                                   'owner' => __('Canned Responses', 'js-support-ticket')),
+                                                   'addon' => null, 'owner' => ''),
                                 'posts'   => array('label' => __('WordPress posts and pages', 'js-support-ticket'),
                                                    'addon' => null, 'owner' => ''),
                             );
@@ -2598,10 +3227,10 @@ $jsst_plugin_array = get_option('active_plugins');
             <div id="captcha" class="jsstadmin-hide-config">
               <div class="tabs config-tabs" id="tabs">
                 <ul class="jsst_tabs">
-                    <li class="tab-link jsst_current_tab" data-jsst-tab="general"><a href="#captcha"><?php echo esc_html(__('Captcha', 'js-support-ticket')); ?></a></li>
+                    <li class="tab-link jsst_current_tab"><a href="#CaptchaSetting"><?php echo esc_html(__('Captcha', 'js-support-ticket')); ?></a></li>
                 </ul>
               </div>
-              <div class="jsst_gen_body" id="captcha">
+              <div class="jsst_gen_body" id="CaptchaSetting">
                   <h2><?php echo esc_html(__('Captcha Setting', 'js-support-ticket')); ?></h2>
                     <?php
         
@@ -2621,25 +3250,133 @@ $jsst_plugin_array = get_option('active_plugins');
                       JSST_printConfigFieldSingle($jsst_title, $jsst_field, $jsst_description, $jsst_video, '', $jsst_videotext);
                     }
 
-                    if(isset(jssupportticket::$jsst_data[0]['captcha_selection'])){
-                      $jsst_title = esc_html(__('Captcha selection', 'js-support-ticket'));
-                      $jsst_field = JSSTformfield::select('captcha_selection', $jsst_captchaselection, jssupportticket::$jsst_data[0]['captcha_selection']);
-                      $jsst_description =  esc_html(__('Which captcha you want to add', 'js-support-ticket'));
-                      $jsst_video = 'rNZc8FjYTyM';
-                      $jsst_videotext = 'Captcha selection';
-                      JSST_printConfigFieldSingle($jsst_title, $jsst_field, $jsst_description, $jsst_video, '', $jsst_videotext);
-                    } ?>
-
-                    <h2><?php echo esc_html(__('Google reCaptcha', 'js-support-ticket')); ?></h2>
-                    
-                    <?php
-                    if(isset(jssupportticket::$jsst_data[0]['recaptcha_version'])){
-                      $jsst_title = esc_html(__('Google reCaptcha version', 'js-support-ticket'));
-                      $jsst_field = JSSTformfield::select('recaptcha_version', $jsst_recaptcha_version, jssupportticket::$jsst_data[0]['recaptcha_version']);
-                      $jsst_description =  esc_html(__('Select the Google reCaptcha version','js-support-ticket'));
+                    // Provider choice replaces the old two-way captcha_selection.
+                    // The row is still read to derive the provider for sites that
+                    // have not saved this screen since upgrading, so it stays in
+                    // the database untouched. (Roadmap 4.0-SEC-01)
+                    if(isset(jssupportticket::$jsst_data[0]['captcha_provider'])){
+                      $jsst_title = esc_html(__('Verification method', 'js-support-ticket'));
+                      $jsst_field = JSSTformfield::select('captcha_provider', $jsst_captcha_providers, JSSTverification::provider());
+                      $jsst_description =  esc_html(__('How visitors are checked to be human. The built-in method needs no account and no third-party request: it uses a hidden field, a submission-timing check and a small automatic browser calculation, and it shows a simple question only if JavaScript is switched off.', 'js-support-ticket'));
                       JSST_printConfigFieldSingle($jsst_title, $jsst_field, $jsst_description);
                     }
 
+                    if(isset(jssupportticket::$jsst_data[0]['captcha_min_submit_seconds'])){
+                      $jsst_title = esc_html(__('Minimum seconds before submit', 'js-support-ticket'));
+                      $jsst_field = JSSTformfield::text('captcha_min_submit_seconds', jssupportticket::$jsst_data[0]['captcha_min_submit_seconds'], array('class' => 'inputbox'));
+                      $jsst_description =  esc_html(__('A form sent faster than this is treated as automated. 3 seconds suits most forms. Built-in method only.', 'js-support-ticket'));
+                      JSST_printConfigFieldSingle($jsst_title, $jsst_field, $jsst_description);
+                    }
+
+                    if(isset(jssupportticket::$jsst_data[0]['captcha_pow_bits'])){
+                      $jsst_title = esc_html(__('Browser check difficulty', 'js-support-ticket'));
+                      $jsst_field = JSSTformfield::text('captcha_pow_bits', jssupportticket::$jsst_data[0]['captcha_pow_bits'], array('class' => 'inputbox'));
+                      $jsst_description =  esc_html(__('Work the visitor\'s browser does silently, in leading zero bits (0 to 24, in steps of 4). 12 takes a few milliseconds; 16 takes about a second on a slow phone. 0 turns the calculation off and leaves the hidden field and timing checks. Built-in method only.', 'js-support-ticket'));
+                      JSST_printConfigFieldSingle($jsst_title, $jsst_field, $jsst_description);
+                    }
+
+                    if(isset(jssupportticket::$jsst_data[0]['captcha_fail_open'])){
+                      $jsst_title = esc_html(__('Allow submissions if the provider is unreachable', 'js-support-ticket'));
+                      $jsst_field = JSSTformfield::select('captcha_fail_open', $jsst_yesno, jssupportticket::$jsst_data[0]['captcha_fail_open']);
+                      $jsst_description =  esc_html(__('When Turnstile, hCaptcha or reCAPTCHA cannot be reached, accept the ticket and record the failure rather than blocking the customer. Recommended.', 'js-support-ticket'));
+                      JSST_printConfigFieldSingle($jsst_title, $jsst_field, $jsst_description);
+                    }
+                    ?>
+
+                    <h2><?php echo esc_html(__('Submission Rate Limits', 'js-support-ticket')); ?></h2>
+
+                    <?php
+                    if(isset(jssupportticket::$jsst_data[0]['submission_rate_limit'])){
+                      $jsst_title = esc_html(__('Limit submissions per visitor', 'js-support-ticket'));
+                      $jsst_field = JSSTformfield::select('submission_rate_limit', $jsst_yesno, jssupportticket::$jsst_data[0]['submission_rate_limit']);
+                      $jsst_description =  esc_html(__('Caps how often one visitor can submit the ticket or registration form. Agents and administrators are never limited.', 'js-support-ticket'));
+                      JSST_printConfigFieldSingle($jsst_title, $jsst_field, $jsst_description);
+                    }
+
+                    if(isset(jssupportticket::$jsst_data[0]['submission_rate_limit_max'])){
+                      $jsst_title = esc_html(__('Submissions allowed', 'js-support-ticket'));
+                      $jsst_field = JSSTformfield::text('submission_rate_limit_max', jssupportticket::$jsst_data[0]['submission_rate_limit_max'], array('class' => 'inputbox'));
+                      $jsst_description =  esc_html(__('How many submissions one visitor may send inside the window below.', 'js-support-ticket'));
+                      JSST_printConfigFieldSingle($jsst_title, $jsst_field, $jsst_description);
+                    }
+
+                    if(isset(jssupportticket::$jsst_data[0]['submission_rate_limit_window'])){
+                      $jsst_title = esc_html(__('Window in seconds', 'js-support-ticket'));
+                      $jsst_field = JSSTformfield::text('submission_rate_limit_window', jssupportticket::$jsst_data[0]['submission_rate_limit_window'], array('class' => 'inputbox'));
+                      $jsst_description =  esc_html(__('Length of the rolling window the limit above applies to. 600 is ten minutes.', 'js-support-ticket'));
+                      JSST_printConfigFieldSingle($jsst_title, $jsst_field, $jsst_description);
+                    }
+                    ?>
+
+                    <h2><?php echo esc_html(__('Cloudflare Turnstile', 'js-support-ticket')); ?></h2>
+
+                    <?php
+                    if(isset(jssupportticket::$jsst_data[0]['captcha_turnstile_sitekey'])){
+                      $jsst_title = esc_html(__('Turnstile Site Key', 'js-support-ticket'));
+                      $jsst_field = JSSTformfield::text('captcha_turnstile_sitekey', jssupportticket::$jsst_data[0]['captcha_turnstile_sitekey'], array('class' => 'inputbox'));
+                      $jsst_description =  esc_html(__('From your Cloudflare dashboard under Turnstile.', 'js-support-ticket'));
+                      JSST_printConfigFieldSingle($jsst_title, $jsst_field, $jsst_description);
+                    }
+
+                    if(isset(jssupportticket::$jsst_data[0]['captcha_turnstile_secret'])){
+                      $jsst_title = esc_html(__('Turnstile Secret Key', 'js-support-ticket'));
+                      $jsst_field = JSSTformfield::text('captcha_turnstile_secret', jssupportticket::$jsst_data[0]['captcha_turnstile_secret'], array('class' => 'inputbox'));
+                      $jsst_description =  esc_html(__('Used only on the server to verify each submission.', 'js-support-ticket'));
+                      JSST_printConfigFieldSingle($jsst_title, $jsst_field, $jsst_description);
+                    }
+                    ?>
+
+                    <h2><?php echo esc_html(__('hCaptcha', 'js-support-ticket')); ?></h2>
+
+                    <?php
+                    if(isset(jssupportticket::$jsst_data[0]['captcha_hcaptcha_sitekey'])){
+                      $jsst_title = esc_html(__('hCaptcha Site Key', 'js-support-ticket'));
+                      $jsst_field = JSSTformfield::text('captcha_hcaptcha_sitekey', jssupportticket::$jsst_data[0]['captcha_hcaptcha_sitekey'], array('class' => 'inputbox'));
+                      $jsst_description =  esc_html(__('From your hCaptcha account.', 'js-support-ticket'));
+                      JSST_printConfigFieldSingle($jsst_title, $jsst_field, $jsst_description);
+                    }
+
+                    if(isset(jssupportticket::$jsst_data[0]['captcha_hcaptcha_secret'])){
+                      $jsst_title = esc_html(__('hCaptcha Secret Key', 'js-support-ticket'));
+                      $jsst_field = JSSTformfield::text('captcha_hcaptcha_secret', jssupportticket::$jsst_data[0]['captcha_hcaptcha_secret'], array('class' => 'inputbox'));
+                      $jsst_description =  esc_html(__('Used only on the server to verify each submission.', 'js-support-ticket'));
+                      JSST_printConfigFieldSingle($jsst_title, $jsst_field, $jsst_description);
+                    }
+                    ?>
+
+                    <h2><?php echo esc_html(__('Google reCAPTCHA v3', 'js-support-ticket')); ?></h2>
+
+                    <?php
+                    if(isset(jssupportticket::$jsst_data[0]['captcha_recaptcha3_sitekey'])){
+                      $jsst_title = esc_html(__('reCAPTCHA v3 Site Key', 'js-support-ticket'));
+                      $jsst_field = JSSTformfield::text('captcha_recaptcha3_sitekey', jssupportticket::$jsst_data[0]['captcha_recaptcha3_sitekey'], array('class' => 'inputbox'));
+                      $jsst_description =  esc_html(__('A v3 key is not interchangeable with a v2 key.', 'js-support-ticket')).' https://www.google.com/recaptcha/admin ';
+                      JSST_printConfigFieldSingle($jsst_title, $jsst_field, $jsst_description);
+                    }
+
+                    if(isset(jssupportticket::$jsst_data[0]['captcha_recaptcha3_secret'])){
+                      $jsst_title = esc_html(__('reCAPTCHA v3 Secret Key', 'js-support-ticket'));
+                      $jsst_field = JSSTformfield::text('captcha_recaptcha3_secret', jssupportticket::$jsst_data[0]['captcha_recaptcha3_secret'], array('class' => 'inputbox'));
+                      $jsst_description =  esc_html(__('Used only on the server to verify each submission.', 'js-support-ticket'));
+                      JSST_printConfigFieldSingle($jsst_title, $jsst_field, $jsst_description);
+                    }
+
+                    if(isset(jssupportticket::$jsst_data[0]['captcha_score_threshold'])){
+                      $jsst_title = esc_html(__('Minimum score to accept', 'js-support-ticket'));
+                      $jsst_field = JSSTformfield::text('captcha_score_threshold', jssupportticket::$jsst_data[0]['captcha_score_threshold'], array('class' => 'inputbox'));
+                      $jsst_description =  esc_html(__('Between 0 and 1. Google\'s own default is 0.5; raise it to be stricter, lower it if real customers are being turned away.', 'js-support-ticket'));
+                      JSST_printConfigFieldSingle($jsst_title, $jsst_field, $jsst_description);
+                    }
+                    ?>
+
+                    <h2><?php echo esc_html(__('Google reCaptcha v2', 'js-support-ticket')); ?></h2>
+                    
+                    <?php
+                    // The version is now part of the verification method above, so
+                    // there is no second control that can contradict it. The row is
+                    // left in place because it is what the provider is derived from
+                    // on a site that has not saved this screen since upgrading.
+                    // (Roadmap 4.0-SEC-01)
                     if(isset(jssupportticket::$jsst_data[0]['recaptcha_publickey'])){
                       $jsst_title = esc_html(__('Google reCaptcha Site Key', 'js-support-ticket'));
                       $jsst_field = JSSTformfield::text('recaptcha_publickey', jssupportticket::$jsst_data[0]['recaptcha_publickey'], array('class' => 'inputbox'));
@@ -2655,11 +3392,12 @@ $jsst_plugin_array = get_option('active_plugins');
                     }
                     ?>
 
-                    <h2><?php echo esc_html(__('Own Captcha', 'js-support-ticket')); ?></h2>
-                    
+                    <h2><?php echo esc_html(__('No-JavaScript Fallback Question', 'js-support-ticket')); ?></h2>
+                    <p class="jsst-config-note"><?php echo esc_html(__('The built-in method shows this arithmetic question only to visitors with JavaScript switched off. Everyone else is checked invisibly.', 'js-support-ticket')); ?></p>
+
                     <?php
                     if(isset(jssupportticket::$jsst_data[0]['owncaptcha_calculationtype'])){
-                      $jsst_title = esc_html(__('Own Captcha Calculation Type', 'js-support-ticket'));
+                      $jsst_title = esc_html(__('Fallback Calculation Type', 'js-support-ticket'));
                       $jsst_field = JSSTformfield::select('owncaptcha_calculationtype', $jsst_owncaptchatype, jssupportticket::$jsst_data[0]['owncaptcha_calculationtype']);
                       $jsst_description =  esc_html(__('Select calculation type addition or subtraction', 'js-support-ticket'));
                       JSST_printConfigFieldSingle($jsst_title, $jsst_field, $jsst_description);
@@ -2685,7 +3423,8 @@ $jsst_plugin_array = get_option('active_plugins');
             </div>
             <?php echo wp_kses(JSSTformfield::hidden('action', 'configuration_saveconfiguration'), JSST_ALLOWED_TAGS); ?>
             <?php echo wp_kses(JSSTformfield::hidden('form_request', 'jssupportticket'), JSST_ALLOWED_TAGS); ?>
-            <div class="js-form-button">
+            <div class="js-form-button jsst-config-savebar">
+              <span class="jsst-config-changecount" aria-live="polite"></span>
               <?php echo wp_kses(JSSTformfield::submitbutton('save', esc_html(__('Save Configurations', 'js-support-ticket')), array('class' => 'button js-form-save')), JSST_ALLOWED_TAGS); ?>
             </div>
           </form>

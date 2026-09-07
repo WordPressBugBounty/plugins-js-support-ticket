@@ -392,6 +392,7 @@ div.js-ticket-search-wrp div.js-ticket-form-wrp form.js-filter-form div.js-filte
 div.js-ticket-search-wrp div.js-ticket-form-wrp form.js-filter-form div.js-filter-field-wrp select#jsst-priorityid,
 div.js-ticket-search-wrp div.js-ticket-form-wrp form.js-filter-form div.js-filter-field-wrp select#jsst-productid,
 div.js-ticket-search-wrp div.js-ticket-form-wrp form.js-filter-form div.js-filter-field-wrp select#jsst-status,
+div.js-ticket-search-wrp div.js-ticket-form-wrp form.js-filter-form div.js-filter-field-wrp select#jsst-tagid,
 div.js-ticket-search-wrp div.js-ticket-form-wrp form.js-filter-form div.js-filter-field-wrp select#staffid,
 div.js-ticket-search-wrp div.js-ticket-form-wrp form.js-filter-form div.js-filter-wrapper div.js-filter-value select,
 div.js-ticket-search-wrp div.js-ticket-form-wrp form.js-filter-form div.js-filter-wrapper div.js-filter-value textarea{
@@ -451,6 +452,7 @@ div.js-ticket-search-wrp div.js-ticket-form-wrp form.js-filter-form div.js-filte
 div.js-ticket-search-wrp div.js-ticket-form-wrp form.js-filter-form div.js-filter-field-wrp select#jsst-priorityid,
 div.js-ticket-search-wrp div.js-ticket-form-wrp form.js-filter-form div.js-filter-field-wrp select#jsst-productid,
 div.js-ticket-search-wrp div.js-ticket-form-wrp form.js-filter-form div.js-filter-field-wrp select#jsst-status,
+div.js-ticket-search-wrp div.js-ticket-form-wrp form.js-filter-form div.js-filter-field-wrp select#jsst-tagid,
 div.js-ticket-search-wrp div.js-ticket-form-wrp form.js-filter-form div.js-filter-field-wrp select#staffid,
 div.js-ticket-search-wrp div.js-ticket-form-wrp form.js-filter-form div.js-filter-wrapper div.js-filter-value select{
     background: url("data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 24 24\' fill=\'%23' . substr($jsst_color4, 1) . '\'%3E%3Cpath d=\'M7 10l5 5 5-5z\'/%3E%3C/svg%3E") no-repeat right 15px center / 20px; /* Modern dropdown arrow */
@@ -1060,6 +1062,7 @@ $jsst_jssupportticket_css .= '
         div.js-ticket-search-wrp div.js-ticket-form-wrp form.js-filter-form div.js-filter-field-wrp select#jsst-priorityid{background-color:#fff !important;border:1px solid' . $jsst_color5 . ';color: ' . $jsst_color4 . ';}
         div.js-ticket-search-wrp div.js-ticket-form-wrp form.js-filter-form div.js-filter-field-wrp select#jsst-productid{background-color:#fff !important;border:1px solid' . $jsst_color5 . ';color: ' . $jsst_color4 . ';}
         div.js-ticket-search-wrp div.js-ticket-form-wrp form.js-filter-form div.js-filter-field-wrp select#jsst-status{background-color:#fff !important;border:1px solid' . $jsst_color5 . ';color: ' . $jsst_color4 . ';}
+        div.js-ticket-search-wrp div.js-ticket-form-wrp form.js-filter-form div.js-filter-field-wrp select#jsst-tagid{background-color:#fff !important;border:1px solid' . $jsst_color5 . ';color: ' . $jsst_color4 . ';}
         div.js-ticket-search-wrp div.js-ticket-form-wrp form.js-filter-form div.js-filter-field-wrp select#staffid{background-color:#fff;border:1px solid' . $jsst_color5 . ';}
         div#js-filter-wrapper-toggle-area div.js-filter-wrapper div.js-filter-value input.js-ticket-input-field{background-color:#fff;border:1px solid' . $jsst_color5 . ';}
         div#js-filter-wrapper-toggle-area div.js-filter-wrapper div.js-filter-value select#jsst-departmentid{background-color:#fff;border:1px solid' . $jsst_color5 . ';}
@@ -1087,7 +1090,64 @@ $jsst_jssupportticket_css .= '
         div.js-ticket-sorting-right div.js-ticket-sort a.js-admin-sort-btn {background: #fff;}
 
     /* My Tickets $ Staff My Tickets*/
-/* My Tickets */';
+/* My Tickets */
+
+    /*
+     * =================================================================
+     * TICKET TAGS IN THE QUEUE (Roadmap 4.0-CORE-17)
+     * =================================================================
+     * style.css carries a .jsst-tag-chip in fixed indigo at 12px. That was
+     * written before this screen rendered any chips: against a block theme body
+     * size it reads as tiny, and the fixed indigo ignores the palette every
+     * other control on this page follows. Restated here in theme colours and
+     * rem, so the chips scale with the reader rather than the theme prose size.
+     */
+    .jsst-tag-row {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 6px;
+    }
+
+    .jsst-tag-row .js-ticket-value {
+        display: inline-flex;
+        flex-wrap: wrap;
+        gap: 6px;
+        align-items: center;
+    }
+
+    .jsst-tag-row a.jsst-tag-chip {
+        display: inline-block;
+        margin: 0;
+        padding: 3px 12px;
+        border: 1px solid ' . esc_attr($jsst_color5) . ';
+        border-radius: 12px;
+        /* color3, not color7: color7 is the contrast colour for text on dark
+           fills (#ffffff by default), which would make the chip white on white. */
+        background-color: ' . esc_attr($jsst_color3) . ';
+        color: ' . esc_attr($jsst_color1) . ';
+        font-size: 0.875rem;
+        font-weight: 500;
+        line-height: 1.45;
+        text-decoration: none;
+        transition: background-color .15s ease, color .15s ease, border-color .15s ease;
+    }
+
+    .jsst-tag-row a.jsst-tag-chip:hover,
+    .jsst-tag-row a.jsst-tag-chip:focus {
+        background-color: ' . esc_attr($jsst_color1) . ';
+        border-color: ' . esc_attr($jsst_color1) . ';
+        color: #fff;
+        text-decoration: none;
+    }
+
+    /* A chip is a link that re-runs the queue search, so it has to be visible
+       to a keyboard user landing on it. */
+    .jsst-tag-row a.jsst-tag-chip:focus-visible {
+        outline: 2px solid ' . esc_attr($jsst_color2) . ';
+        outline-offset: 2px;
+    }
+';
 
 
 wp_add_inline_style('jssupportticket-main-css', $jsst_jssupportticket_css);
