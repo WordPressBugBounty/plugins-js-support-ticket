@@ -71,6 +71,31 @@ class JSSTPostinstallationModel {
     }
 
 
+    /**
+     * The quick-setup wizard's steps, in order, for this site.
+     *
+     * One list, so every screen numbers the steps the same way. Translation
+     * appears only when a language pack is offered and Feedback only with the
+     * feedback add-on - the same conditions the controller uses to skip those
+     * screens, so a step shown here is never one the controller skips.
+     *
+     * @return array key => array('label', 'layout')
+     */
+    function getWizardSteps() {
+        $jsst_steps = array(
+            'general' => array('label' => __('General', 'js-support-ticket'), 'layout' => 'stepone'),
+            'tickets' => array('label' => __('Tickets', 'js-support-ticket'), 'layout' => 'steptwo'),
+        );
+        if (class_exists('JSSTtranslations') && JSSTtranslations::siteLanguagePending()) {
+            $jsst_steps['translation'] = array('label' => __('Translation', 'js-support-ticket'), 'layout' => 'translationoption');
+        }
+        if (in_array('feedback', jssupportticket::$_active_addons)) {
+            $jsst_steps['feedback'] = array('label' => __('Feedback', 'js-support-ticket'), 'layout' => 'stepthree');
+        }
+        $jsst_steps['done'] = array('label' => __('Done', 'js-support-ticket'), 'layout' => 'settingcomplete');
+        return $jsst_steps;
+    }
+
     function getPageList() {
         $jsst_query = "SELECT ID AS id, post_title AS text FROM `" . jssupportticket::$_db->prefix . "posts` WHERE post_type = 'page' AND post_status = 'publish' ";
         $jsst_pages = jssupportticket::$_db->get_results($jsst_query);

@@ -173,17 +173,29 @@ class JSSTcsvimport {
      * that does not carry one is an error somebody has to go hunting for.
      */
     public static function check($jsst_path) {
-        if (!is_readable($jsst_path)) {
+        $jsst_csv = jssupportticketphplib::JSST_file_get($jsst_path);
+        if ($jsst_csv === false) {
             return new WP_Error('jsst_csv_unreadable', esc_html(__('That file could not be read.', 'js-support-ticket')));
         }
-        $jsst_handle = fopen($jsst_path, 'r');
+
+        /* The file itself is read through WP_Filesystem; what is left below is a
+           php:// memory stream, which is not a file at all and has no
+           WP_Filesystem equivalent. It is here because `fgetcsv()` is the only
+           correct way to read this format - a field may legitimately contain a
+           quoted newline, so splitting the text into lines first would corrupt
+           exactly the rows somebody pasted a paragraph into. */
+        $jsst_handle = fopen('php://temp', 'r+'); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_fopen -- php:// stream, not a file; the file was read through WP_Filesystem above.
         if (!$jsst_handle) {
             return new WP_Error('jsst_csv_unreadable', esc_html(__('That file could not be opened.', 'js-support-ticket')));
         }
+        fwrite($jsst_handle, $jsst_csv); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_fwrite -- php:// stream, not a file.
+        rewind($jsst_handle);
 
-        $jsst_headers = fgetcsv($jsst_handle);
+        // Escape `''` for RFC 4180, and named rather than defaulted: PHP 8.4
+        // deprecates the implicit default. Matches JSSTcsvwriter::row().
+        $jsst_headers = fgetcsv($jsst_handle, 0, ',', '"', '');
         if (!$jsst_headers) {
-            fclose($jsst_handle);
+            fclose($jsst_handle); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_fclose -- php:// stream, not a file.
             return new WP_Error('jsst_csv_empty', esc_html(__('That file has no header row.', 'js-support-ticket')));
         }
         // A file saved by a spreadsheet often opens with a byte order mark, which
@@ -195,7 +207,7 @@ class JSSTcsvimport {
 
         $jsst_map = self::mapHeaders($jsst_headers);
         if (is_wp_error($jsst_map)) {
-            fclose($jsst_handle);
+            fclose($jsst_handle); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_fclose -- php:// stream, not a file.
             return $jsst_map;
         }
 
@@ -204,7 +216,7 @@ class JSSTcsvimport {
         $jsst_problems = array();
         $jsst_line = 1;
 
-        while (($jsst_cells = fgetcsv($jsst_handle)) !== false) {
+        while (($jsst_cells = fgetcsv($jsst_handle, 0, ',', '"', '')) !== false) {
             $jsst_line++;
             // A trailing newline reads as one empty cell; not an error, just the
             // end of the file.
@@ -225,7 +237,7 @@ class JSSTcsvimport {
                 $jsst_rows[] = $jsst_row;
             }
         }
-        fclose($jsst_handle);
+        fclose($jsst_handle); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_fclose -- php:// stream, not a file.
 
         if (empty($jsst_rows) && empty($jsst_problems)) {
             return new WP_Error('jsst_csv_norows', esc_html(__('That file has a header row and nothing under it.', 'js-support-ticket')));
@@ -559,7 +571,7 @@ class JSSTcsvimport {
         $jsst_data = array(
             'id'            => '',
             'wpuid'         => $jsst_wpuid,
-            'name'          => $jsst_name,
+            'name'          => $jsst_user->user_login, // the username; the full name is display_name
             'display_name'  => $jsst_user->display_name,
             'user_nicename' => $jsst_user->user_nicename,
             'user_email'    => $jsst_user->user_email,

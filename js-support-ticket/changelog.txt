@@ -1,0 +1,304 @@
+JS Help Desk - full changelog
+=============================
+
+The readme lists what changed for site owners. This file keeps the complete,
+technical notes for every release.
+
+= 5.0.0 =
+**Add-On Consolidation**
+* Add-ons reissued as nine plugins: Agents & Teams, Service Levels & Automation, Email, Knowledge & Self-Service, AI Agent, Customer Experience, Commerce, Integrations, Reporting & Compliance. Same screens, settings, URLs and tables.
+* Old add-ons keep working after the update; once the pack that includes them is installed, the pack serves those features.
+* Ten JS Help Desk Pro screens moved into the matching bundle; old URLs redirect. Pro stands down per screen when the owning bundle is active.
+* When an add-on and its replacement are both active, the newer one serves the feature and the older one stands down. License & Add-ons > Finish upgrade switches the old add-ons off; deleting them afterwards is up to you.
+* Superseded add-ons no longer lose their settings on deactivation — settings are copied and restored.
+* Sites with none of the new plugins installed are unchanged.
+
+**AI Agent (replaces Instant Resolve, Zywrap AI, AI Copilot, AI Powered Reply)**
+* One AI Agent menu: feature overview, single settings screen, single audit log. Engine is selected once product-wide.
+* Three engine lanes — on-site (no data leaves the server), local model (Ollama, LM Studio, vLLM, llama.cpp) and hosted — plus a master switch enforced at request level.
+* Outbound redaction on local and hosted lanes: credentials, credentials + contact details, or strict. Stored credentials are never sent.
+* Audit log records request, engine, duration and outcome; no prompt or ticket text. Settings changes logged. Keys stored per engine, displayed as last four characters.
+* New Usage & Cost screen: enforcing budgets checked pre-request, separate counters for licence/own key/own hardware, unpriced models flagged, fallback engine on failure or budget exhaustion.
+* AI Powered Reply moved into the free plugin.
+
+**AI Safety & Knowledge**
+* Knowledge Sources: per-source and per-document allow/deny across knowledge base, FAQs, canned responses, posts, pages, resolved tickets and crawled docs. Exclusions also apply to free suggestions.
+* Retrieval console showing matches, passage scores and exclusions; calls no model.
+* Knowledge governance: draft, in review, published, retired. Drafts are never quoted to customers. Review intervals, stale-first listing, version history, agents-only articles, weekly owner digest.
+* Approvals queue for answers below confidence, citation or grounding floors, with supporting evidence. "Always ask a person first" overrides engine confidence.
+* Automatic answers can be withdrawn — struck through and marked, not deleted — reopening the ticket if the answer closed it.
+* Shadow mode compares AI drafts against agent replies on the same ticket. Go-live is blocked until shadow data is sufficient.
+* Autopilot scoping by audience and department, rehearsal over the last fifty tickets, pause switch affecting in-flight answers, and named refusal reasons.
+* Six-step guided setup, evaluated from site state.
+* Knowledge Gaps: five signals consolidated, separating missing content from insufficient content; entries clear as retrieval improves.
+* Every automatic answer discloses itself, states confidence in words and offers one-click handoff without sign-in. Wording is editable; disclosure cannot be removed.
+* Offline benchmark of 300 questions in four classes with build-failing gates. Money, law, identity and credentials are never answered automatically.
+* Copilot triage and mood buttons, suggest-only, disabled by default.
+* Canned responses gain folders, team scoping, approval, use counts and per-language versions. Existing responses count as approved.
+
+**Live Chat & Unified Conversations**
+* Chat widget answering from approved content with handoff to an agent; shares the engine, master switch, never-automate list and floors. "Talk to a person" is available from the first message. Out of hours it captures a message.
+* Tickets show the customer's conversations across email, chat and portal. Per-channel AI switches can only restrict.
+* Chats become tickets only when a person was requested and not reached, or when an agent keeps them. Transcripts have their own retention setting.
+* On-server language detection for questions and documents, preferring the customer's language with fallback. Single-language desks are unaffected.
+
+**Agents, Teams & Permissions**
+* Teams with members, lead, fallback, working hours in the team time zone and a team signature.
+* Availability with time off booked as whole days, named cover and handover of open tickets.
+* Agent roles define visibility as well as capability: department reach and own/team/all scope. Five preset roles, role comparison and per-agent role audit.
+* "Why Is This Allowed?" permission explainer for any agent and ticket.
+* Assignment strategies: round robin, least loaded, priority-weighted and skills match, with reasoning shown and a no-op rehearsal.
+* Collaboration: watchers and secondary agents in one list, recorded @mentions, notes restricted to named people, and reply approval.
+* Notification centre for assigned, followed, mentioned and approaching-breach items, with quiet hours and standards-based browser push.
+* Queue customisation: per-agent columns over the site default, mine/unassigned/all inbox buttons and shareable saved views.
+
+**Automation & Service Levels**
+* Automation rules on event, conditions and actions, with a run log recording actual against expected values. New rules start disabled and rehearsing. Six editable recipes included.
+* Agent Auto Assign retired; its rules migrate to Automation rules in order. Auto-assignment now applies to customer-raised tickets.
+* Tickets raised via form, email and chat now fire the creation event, so SLA clocks start.
+* Service levels: up to three targets, business-hours clocks, paused while awaiting the customer, pre-breach warnings, escalation ladder, customer tiers and rehearsal mode.
+* Recurring tickets and a background job board showing queue progress and failures.
+
+**API, Forms & Email**
+* REST API with 21 operations over 16 routes, authenticating as a real account with that account's permissions, plus a generated OpenAPI 3.1 document.
+* Signed outgoing webhooks with delivery log and backoff retries; inbound webhooks for ticket creation without a WordPress account.
+* Single form builder screen for fields, order, visibility and validation. Conditional and required rules are enforced server-side for API, email and chat submissions.
+* Gmail and Microsoft OAuth sign-in for mailboxes.
+* Email threading by standard mail headers instead of a body marker.
+* Mail loops, out-of-office replies and bounces are rejected rather than converted to tickets; soft failures are not treated as hard bounces.
+* Per-mailbox rules for department, priority, topic, assignee, aliases and refusals, each with its own fetch job. Messages are marked read only after processing.
+* Customer emails use the customer's locale with proper fallback and no cross-language chaining.
+
+**Commerce**
+* WooCommerce order panel in the ticket: orders with status and total, lifetime spend net of refunds, and automation conditions on order data.
+* Support credits as a ledger of purchase, use, refund, expiry and adjustment. Refunds reclaim the remaining balance; tickets spend the soonest-expiring credit.
+* Quotas by company, customer, product, plan or global, over any period, first match wins, shared across company members, with a rehearsal mode that logs refusals without refusing.
+* Companies are now a record in the free plugin: name, email domains, named members and a tier used by service-level policies. Named members override domain rules; public mail providers cannot be claimed.
+
+**Reporting & Compliance**
+* Analytics: volume trends, return-customer cohorts, per-agent and per-team rows, and an email digest.
+* Scheduled exports in real .xlsx and PDF, with anonymised variant and audit package. Large exports are queued with progress.
+* Retention gains legal hold with reason and owner, overriding all rules including later ones, and deletion approvals where cleanup proposes rather than deletes.
+* Satisfaction: one email on close with answers in the links, CSAT and NPS treated separately, response rate shown with the score, and low ratings exposed to automation and webhooks.
+* Time tracking: billable flag, rate captured at entry time, rounding applied once, optional approval, and targets and budgets in hours or money.
+* Entry-point inventory screen listing REST routes, AJAX actions and dispatcher tasks, read from source, with the guard on each.
+
+**Platform**
+* Encryption key now read from wp-config.php or the environment instead of the database; plain-text key field removed. AES-256-GCM, key rotation, expiry, one-time reads and access logging without values.
+* Marketing consent stores the exact wording shown at the time. Withdrawals are recorded as withdrawals. MailChimp moved into core; FluentCRM and Mailchimp recipes included.
+* Portal available as blocks, each rendering the existing shortcode. Mobile layout and installable as a web app.
+* White-label branding and an email identity applied at the plugin's sending point rather than site-wide.
+* Accessibility: visible keyboard focus rings in both desks, two greys darkened to 4.5:1, "Saved" announced to screen readers, and reduced-motion support.
+* Admin menu regrouped by subject; 35 screens moved out of Dashboard; new Integrations & API, Insights & Reports and Privacy & Security sections. No URLs changed.
+* Satisfaction ratings consolidated into one table, ending duplicate and conflicting scores.
+
+**Changed**
+* License and Install Add-ons are one page, License & Add-ons, at the top of the menu (and in WordPress's Help Desk menu and on the Plugins screen). The key field is always on it; each of the nine add-ons is a card with what it does, its state and one action - Install, Switch on, Update or Try again - done in place with progress, and Install all does the rest one by one. The old addresses lead to it.
+* Translations are no longer bundled with the plugin (the download is about 12 MB smaller). The translation for the site's language is installed from jshelpdesk.com into wp-content/languages/plugins/ by itself - on install and update, when the site language changes and daily for improvements - checked against its SHA-256 before it is written; .po and .mo only, never code. Help Desk > Configurations > Translations lists every language with Install, Update now and the files to download. JSST_TRANSLATIONS_AUTO switches it off.
+* Default status and priority colours darkened so their white text reads at 4.5:1 or better: Low #098717, Normal #5b5fc7, High #a86500, New #438323, Waiting Reply #167da9, In Progress #7c3aed, Closed #e7121a. Existing sites are changed only where the colour is still the untouched default.
+* The Envato Purchase Code ticket field starts unpublished on new installations.
+* Permission checks unified across admin screens, agent pages, portal and the underlying code.
+* New screens use a shared component set for cards, pills, counts and fields.
+* Reports now opens a report; the tile page remains at `page=reports&jstlay=reports`.
+* "Multiform" renamed Forms; "Priority" renamed Priorities.
+* Satisfaction Report retired and redirected to Satisfaction. Per-agent averages credit the agent who earned the score.
+* New plans: Free, Pro $99, Business $149, Agency $249 per year, each paid plan containing every Pro module and differing by site count. Existing licences are matched or improved; lifetime licences honoured.
+
+**Fixed**
+* The first page after installing Agents & Teams or Commerce showed "Translation loading for the js-support-ticket domain was triggered too early". Their scheduled sweeps are now set up on init, and the help desk's own cron interval labels are translated only once translations may load.
+* Adding a Downloads or Announcement category with no parent showed "Security check Failed" (Knowledge & Self-Service).
+* A disabled canned response could still be quoted by the AI. Now enforced for both agents and the engine.
+* Correct translated answers were flagged as ungrounded because grounding compared across languages.
+* The WooCommerce order panel never rendered — three registered hooks referenced methods that did not exist.
+* The audit log read Zywrap calls from a table and Copilot calls from an option, and could show neither local-lane calls nor cost.
+* Retrieval refusals now state that a canned response is disabled instead of omitting it silently.
+
+**Security**
+* Crawler hardening: redirect targets validated, all resolved addresses checked as public, IPv6 literals handled, response size cap, optional host allowlist, and connections limited to ports 80 and 443.
+* Department scoping was applied only on the front-end desk, so a department-restricted agent saw every ticket in the wp-admin queue.
+* A credential that failed to decrypt called `die()` and took down the ticket page.
+* Slack replies verified against the signing secret within a five-minute window; unlinked Slack accounts are refused.
+
+**Migration Notes**
+* No action is required before updating. Old add-ons and their replacements can run side by side; the newer one serves the feature.
+* Keep Instant Resolve installed until AI Agent is active; AI Agent adopts its sources, indexed pages, decision history and statistics on activation, after which Instant Resolve can be deactivated and deleted.
+* Agent Auto Assign rules convert to Automation rules once Service Levels & Automation is active, keeping order, and Automation is enabled if disabled. Rules that cannot be expressed exactly arrive disabled with a reason. The old URL opens Automation.
+* Satisfaction ratings migrate once Customer Experience is active, keeping original IDs. Time entries and support-credit balances are brought across from their own screens: the import on the Time screen (Agents & Teams) and "Import existing purchases" on the Credits screen (Commerce).
+* Published knowledge base content stays published; governance gates return "usable" until the new columns exist.
+* Ticket Overdue behaviour is written out as service-level policies, one per priority.
+* Old add-ons keep working until the pack that replaces them is installed; the pack then takes over. License & Add-ons > Finish upgrade installs the packs your license includes and switches the old add-ons off, keeping every setting. Add-ons now built into JS Help Desk are switched off the same way.
+* Nothing new is switched on for your visitors by the update: Live Chat, when the upgrade adds it, starts off.
+
+= 4.0.0 =
+**New (Free)**
+* Collision detection: the reply box names any other agent viewing the ticket and flags when one is typing. Nothing is stored.
+* A reply arriving while you write is announced with an offer to reload; sending is never blocked.
+* Draft autosave, in the browser as you type and on the server every 20 seconds, restored with its last-edited time. Public replies and internal notes are stored separately, drafts are private, and posting clears them.
+* System Status: versions and limits, scheduled job health, folder writability, what deletion removes, recent errors, and a Download debug file button that strips passwords, API keys and licence keys (default-deny).
+* Each page load carries a request ID recorded against any error it produces.
+* Setup: a six-point checklist evaluated against site state rather than clicks - a usable customer page, a sending address, a destination, an agent, proof that email leaves, and one end-to-end ticket. Shows a count in the menu and can be hidden.
+* Email Health: which plugin sends your mail (or a warning that PHP mail() is in use), the From address and whether it will pass receiver checks, the last send result with the mail service's own error, and whether mail collection jobs run - including WP-Cron disabled in wp-config.php with no replacement.
+* Test message to any address, sent down the real notification path, reporting the outcome.
+* Reply box with Public reply and Internal note tabs; internal mode turns the composer amber. Separate forms, so a note cannot post as a reply.
+* Ticket list Compact mode (about 20% more rows) and keyboard navigation: `j`/`k` move, `Enter` opens, `x` selects for bulk actions, suppressed while typing in search. Any field can be flagged "show on listing".
+* Help Topics renamed Topics, nested up to three levels, shown as a tree on the topics screen and the ticket form. Cyclic parents are refused with a reason; topics with children cannot be deleted.
+* Topics can name an owning agent, one can be the default, and a topic fills in department and priority the customer has not set. Enforced server-side, so email tickets route the same way.
+* Ticket queue search across subject, first message, replies, customer name, email and ticket ID. Multiple words require all, quotes search a phrase, and existing tab and filters still apply.
+* Two queues: Waiting on Agent and Waiting on Customer, derived from who replied last, so they work with renamed statuses.
+* Saved views storing tab, search and filters, personal to each agent. Shared and team views remain paid.
+* Ticket tags: comma-separated entry with suggestions, case and spelling deduplicated, shown on the list, click to filter, queue filter, recorded in history, never visible to customers.
+* Retention cleanup is now free with a dry-run preview: tickets and attachments in scope, storage freed, cutoff date, active exclusions and the oldest tickets, recalculated on open and deleting nothing. Departments and priorities can be excluded. Archive tiers, legal hold and deletion approvals remain paid.
+* Sender blocking is now free, including whole domains, with validation and duplicate refusal. Wildcards, regular expressions, imported lists, automation, ban log and reputation signals remain paid.
+* Per-customer ticket limits are now free - a lifetime cap and an open-ticket cap, each refusing with the number. Plan, product, customer and company quotas remain paid.
+* Ticket export is now free and produces real CSV, filtered by date range, department, agent, customer, priority, status or overdue, one row per ticket, streamed for large sets. Scheduled exports, XLSX, PDF, audit packages and anonymisation remain paid.
+* WordPress dashboard widgets are now free, and dashboard reports cover 7 or 30 days per administrator.
+* Help topics, ticket actions, canned responses, internal notes and ticket history are now free. Ticket actions gain a recorded reason, bulk lock/unlock/close/reopen/in-progress/re-prioritise/transfer with a reason each, and shortcuts (R, I, L, P, S, N, H, M). Folders, teams, permissions, approval, usage analytics, AI rewrite, @mentions, restricted notes, immutable audit export and long retention remain paid.
+* Registration settings are now free: the role assigned on sign-up and whether the form is verified. The role list excludes roles that can administer the site, manage users, publish content or work tickets, and states why.
+* Two agent tiers as ordinary WordPress roles - Help Desk Light Agent (read the queue, write internal notes) and Help Desk Agent (full queue work). Both get a tickets-only menu. Deleting and merging are in neither.
+* Merge Tickets: merge several at once, duplicate suggestions with a match score, a preview before confirming, and every merged ticket listed on the one kept with an Unmerge link. A merge moves and deletes nothing.
+* Modern spam protection, invisible by default: honeypot field, timing check and a browser-side calculation. No account, no third-party request. Visitors without JavaScript get an arithmetic question.
+* Cloudflare Turnstile and hCaptcha alongside reCAPTCHA v2 and v3, selected from one Verification method setting, verified server-side, with a configurable v3 score.
+* Per-visitor rate limits on the ticket and registration forms. Agents and administrators are exempt.
+
+**Changed**
+* The agent role is renamed Help Desk Agent, previously "JS Help Desk agent (admin)". Label only; assignments are kept.
+* JS Help Desk no longer runs its own mail stack - it reports which SMTP plugin is in charge instead. The SMTP add-on keeps working; nothing to migrate.
+* The dashboard trend chart is four queries rather than four per day, making a 30-day range practical.
+* The ticket list reads custom-field definitions once per page instead of once per ticket, and tab counts are one pass instead of one query per tab.
+* Clicking a tag searches all tickets carrying it, not only closed ones.
+* The ticket form's topic list keeps its nesting after a department is chosen.
+* The field is labelled "Topic" instead of "Help Topic", only where it was never renamed locally.
+* An unreachable verification service now accepts the ticket and logs the failure rather than rejecting the customer. Configurable.
+* "Captcha selection" and "Google reCaptcha version" are replaced by a single Verification method setting; behaviour is unchanged until you pick another option.
+
+**Fixed**
+* A failed notification could take down the page - the mailer error was read without checking it existed, which fails where a plugin intercepts mail.
+* Invisible verification rejected every ticket, being unable to distinguish an empty hidden field from a missing one. Anyone who tested a 4.0 pre-release should retest submission.
+* Bulk actions always returned "Choose an action to apply", and the priority and department selectors never appeared.
+* An action taken without a reason recorded "post" as its reason.
+* Retention cleanup could delete a closed ticket with no close date, as a missing date compared older than any cutoff.
+* A merged duplicate counted against the customer's open-ticket allowance.
+* Exported dates were rendered in UTC while tickets are stored in site time, offsetting every timestamp and allowing a date filter to miss edge days.
+* An exported value containing a quote, tab or line break shifted every following column. Values are now escaped, and values starting with =, +, - or @ are prefixed so spreadsheets treat them as text.
+* The Configurations screen went blank on sites running the Auto Cleanup add-on; the conflicting retention settings now stand down while it is active.
+* Bulk actions could take down the page on sites running the Ticket Actions add-on, and are no longer offered while it is active.
+* Tags could not be saved from the front-end ticket screen and returned a "page not found". Both fixed; the field now sits behind an Add tags button.
+* Tags never appeared on the agent ticket list and could not be filtered there, despite being loaded on every request.
+* Front-end stylesheets were cached indefinitely under a version that changed only with the plugin version, so styling fixes between releases never reached anyone.
+* On the Merge Ticket screen the merge button appeared only on hover, making it unreachable on a phone; the confirmation step had no title bar and weighted Merge and Cancel identically.
+
+**Security**
+* New Agent Access screen listing everyone who can reach the help desk and what they can do: workspace, WordPress role, help-desk role, departments and resulting permissions, each marked as inherited or granted directly, derived the same way the software derives it.
+* It flags two invalid states: access without being on the Agents list, and an agent whose WordPress user was deleted.
+* WordPress privacy tools are now supported. Export Personal Data returns the person's tickets, messages and replies; Erase Personal Data anonymises them. Matching is by email address, covering people who never had an account.
+* Erasure anonymises rather than deletes: name, email and telephone are removed and the ticket kept, since it also contains staff content.
+* The plugin contributes a privacy policy section, with retention wording generated from your cleanup settings.
+* Ticket attachments are no longer reachable by URL. They were served straight from the uploads folder with no permission check; every attachment now passes through the help desk.
+* Attachments are validated by content, not filename - a PHP script renamed .png, a text file claiming to be an image, an executable or a drawing carrying script are refused regardless of allowed types. Hook `jsst_attachment_scan` to add a scanner.
+* New attachment folders get a long random name, and folders are locked against direct access and listing on activation or upgrade rather than on first upload.
+* The registration role is validated on use as well as on selection: a stored setting naming Administrator now registers customers as Subscriber. Review the setting after upgrading if it was set deliberately.
+* Agent permissions could be granted to the wrong WordPress account - the Agents list stores an internal user ID that the permission code read as a WordPress ID, which only agree where every user arrived through the help desk. Review the Agent Access screen after upgrading.
+
+**Migration Notes**
+* Help Desk Light Agent is created on upgrade with no users assigned. Help Desk Agent keeps its users; only the label changed.
+* The single help-desk capability is split into several. A role granted the old capability by hand gains the reply and internal-note capabilities to match what it could already do, and nothing more.
+* The Topics rename is a label change only. Topics and ticket assignments are untouched; nesting, ownership and the default all start as before.
+* An active Ticket History, Private Note, Canned Responses, Ticket Actions, Help Topic, User Options, Admin Widgets, Export, Max Tickets, Ban Email or Auto Cleanup add-on stays in charge. Deactivate at any time - data stays and the built-in version takes over - and deleting it afterwards keeps the data rather than running its uninstaller.
+
+= 3.2.0 =
+**Security**
+* Fixed a privilege escalation: activation granted the help-desk capability to the WordPress Contributor role, which gave every Contributor on the site access to all tickets and customer email addresses. That grant has been removed.
+* Roles and capabilities are now reconciled from a single definition on activation and on every upgrade, so a correction reaches existing sites and not only new installs.
+* Help-desk access for agents is derived from your Agents list, so removing someone as an agent removes their access immediately.
+
+**Fixed**
+* Front-end ticket submission no longer fails silently. A banned sender or a customer over their ticket limit was reported as success without a ticket being created; a duplicate or a missing subject returned a blank form with no message; an expired security token ended on a blank "Security check Failed" page and lost the customer's text. All of these now return to the form with the entered details intact and an explanation.
+* The ticket form recovers a fresh security token automatically, so submission keeps working on sites behind a page cache.
+* Attachments that are too large or of a disallowed type are now reported by name instead of disappearing, and one rejected file no longer stops the remaining files from being attached.
+* Fixed a captcha error when the reCAPTCHA widget failed to load.
+
+**Changed**
+* Export downloads are now named `.tsv` and sent as `text/tab-separated-values`, which is what they have always contained. They previously carried an `.xls` name, which made spreadsheets warn about a corrupt file. The contents are unchanged and open directly in Excel, LibreOffice Calc and Google Sheets.
+* New setting under Configurations controlling what happens to your data when the plugin is deleted. Deactivating never removes data, and deleting preserves it unless you choose otherwise.
+
+**Migration notes**
+* On upgrade, the help-desk capability is removed from the Contributor role. Anyone on your Agents list keeps access. If a Contributor was working tickets without being on that list, add them on the Agents screen.
+
+= 3.1.7 =
+**New, free**
+* Answer customers before they file. Matching articles, FAQs and canned responses appear on the ticket form as they type.
+
+**New, with the Instant Resolve add-on**
+* A written AI answer above the suggestions, built only from your own content.
+* Tickets answered automatically when the AI is confident. Anything less waits as a draft for an agent to send, edit or discard.
+* Add your own web pages, videos and past resolved tickets to what the AI can use.
+* Keep the AI out of the wrong tickets: by department, customer type, keyword or sender.
+* See every decision and why it was made, and test any question before customers do.
+
+= 3.1.6 =
+* Security Updated.
+
+= 3.1.5 =
+* Security Updated.
+
+= 3.1.4 =
+* Security Updated.
+
+= 3.1.3 =
+* Added Auto Cleanup add-on for automated attachment and ticket deletion, complete with server performance controls, dedicated settings, and UI indicators.
+* Improved System Errors log with detailed execution traces, database queries, and URL tracking.
+* Improved language file downloads with smart fallback locales and CDN support.
+
+= 3.1.2 =
+* Security update.
+
+= 3.1.1 =
+* Security update.
+
+= 3.1.0 =
+* Security Fix: Implemented strict authorization and nonce verifications to prevent unauthorized access to ticket actions and attachment downloads.
+
+= 3.0.9 =
+* Security enhancement: Improved request validation, nonce verification, capability checks, and hardened task dispatcher execution to prevent unauthorized access and arbitrary action execution.
+
+= 3.0.8 =
+* Improved language files.
+* Improved Zywrap AI.
+
+= 3.0.7 =
+* FEATURE: Introduced the Zywrap AI Copilot directly inside the ticket editor.
+* FEATURE: Added 1-click Ticket Summarization for long support threads.
+* FEATURE: Added Smart Data Extraction to automatically pull environment/error data into UI cards.
+* FEATURE: Added 1-click Translations for global customer support.
+* FEATURE: Added the Zywrap Dashboard with API usage stats and token tracking.
+* FEATURE: Added AI Test Playground for administrators.
+* ENHANCEMENT: Rebuilt the AI response formatting with Marked.js for perfect HTML and Plain Text rendering.
+* ENHANCEMENT: Added automated Database Sync for dynamic AI Wrapper templates.
+
+= 3.0.6 =
+* Security Updates.
+
+= 3.0.5 =
+* Security Updates.
+
+= 3.0.4 =
+* Security Updates.
+
+= 3.0.3 =
+* Security Updates.
+
+= 3.0.2 =
+* Security Updates.
+
+= 3.0.1 =
+* Improved design of the Themes settings page.
+
+= 3.0.0 =
+* Revamped admin dashboard with richer insights.
+* Modernized user and agent pages.
+* Introduced form-based email templates.
+
+= 2.9.8 =
+* Introduced AI-Powered reply suggestions.
+* Added SupportCandy import functionality.
+* Added configuration base user avatar.

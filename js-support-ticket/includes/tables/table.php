@@ -75,15 +75,12 @@ class JSSTtable {
                 if ($this->primarykey === 'id' && class_exists('JSSTmigration') && JSSTmigration::isRecording()) {
                     JSSTmigration::journal($this->tablename, $jsst_id);
                 }
-                //activity log //1 for insert
-                //JSSTincluder::getJSModel('tickethistory')->storeActivity(1, $this->tablename, $this->columns, $jsst_id);
             } else {
                 JSSTincluder::getJSModel('systemerror')->addSystemError();
                 return false;
             }
         } else { // record updated
             jssupportticket::$_db->update($this->tablename, $this->columns, array($this->primarykey => $this->columns[$this->primarykey]));
-            //JSSTincluder::getJSModel('tickethistory')->storeActivity(2, $this->tablename, $this->columns);
             if (jssupportticket::$_db->last_error != null) {
                 JSSTincluder::getJSModel('systemerror')->addSystemError();
                 return false;
@@ -108,10 +105,8 @@ class JSSTtable {
         if (!is_numeric($jsst_id))
             return false;
         //data for delete
-        //$jsst_data = JSSTincluder::getJSModel('tickethistory')->getDeleteActionDataToStore($this->tablename, $jsst_id);
         jssupportticket::$_db->delete($this->tablename, array($this->primarykey => $jsst_id));
         if (jssupportticket::$_db->last_error == null) {
-            //JSSTincluder::getJSModel('tickethistory')->storeActivityLogForActionDelete($jsst_data, $jsst_id);
             return true;
         } else {
             JSSTincluder::getJSModel('systemerror')->addSystemError();

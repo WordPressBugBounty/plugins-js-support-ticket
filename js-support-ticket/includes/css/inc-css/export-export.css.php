@@ -268,7 +268,7 @@ div#userpopup .userpopup-top .userpopup-close {
     width: 24px;
     height: 24px;
     cursor: pointer;
-    background-image: url(' . esc_url(JSST_PLUGIN_URL) . 'includes/images/close-icon-black.png);
+    background-image: url(' . esc_url(JSST_PLUGIN_URL) . 'includes/images/close-icon-white.png);
     background-repeat: no-repeat;
     background-position: center;
     opacity: 0.7;
@@ -436,6 +436,38 @@ $jsst_jssupportticket_css .= '
     .jsst_userlink { color: ' . $jsst_color1 . '; background-color: #e9ecef; }
     .jsst_userlink.selected { background-color: ' . $jsst_color1 . '; color: ' . $jsst_color7 . '; }
 	/* --- End of Unchanged Colors --- */
+
+    /* The three questions this form grew in 6.5 - which of your own questions
+       go in the file, which format to write, and whether to leave the customers
+       out - each carry a line of explanation under them, and two of them are
+       ticks and radios rather than the selects the rest of this form is made
+       of. Styled here because this screen has its own stylesheet; the class is
+       the one the other front-end forms already use for the same thing.
+       (Roadmap 5.0-ANA-01, 6.5-DATA-05) */
+    .js-ticket-from-field .js-ticket-from-field-description{
+        display:block;
+        margin: 6px 0 0;
+        font-size: 13px;
+        line-height: 1.5;
+        color: ' . $jsst_color4 . ';
+        opacity: .85;
+    }
+    .js-ticket-from-field label{
+        display:block;
+        margin: 0 0 4px;
+        color: ' . $jsst_color4 . ';
+        cursor: pointer;
+    }
+    .js-ticket-from-field label input[type="checkbox"],
+    .js-ticket-from-field label input[type="radio"]{
+        margin-right: 6px;
+        vertical-align: middle;
+    }
+    .js-ticket-from-field .jsst-subchoice{
+        margin-top: 10px;
+        padding-left: 12px;
+        border-left: 2px solid ' . $jsst_color5 . ';
+    }
 ';
 
 wp_add_inline_style('jssupportticket-main-css', $jsst_jssupportticket_css);

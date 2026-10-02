@@ -35,17 +35,6 @@ JSSTmessage::getMessage();
     ?>
 
     /*new */
-    div#jsstadmin-data-wrp {
-        box-sizing: border-box;
-        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-        border: 1px solid #DEE2E6;
-        display: flex;
-        flex-direction: column;
-        height: 100%;
-        overflow: hidden;
-        font-family: 'Inter', sans-serif;
-        /* Ensure font inheritance */
-    }
 
     form.js-filter-form {
         padding: 0;
@@ -119,6 +108,15 @@ JSSTmessage::getMessage();
         transform: scale(1.02);
         box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     }
+    /* The transform above makes the row its own stacking context, which caps
+       the open colour picker inside it at the row's level - so the next row,
+       later in the page, was drawn over the picker while the mouse was on it.
+       Lifting the row that is hovered or holds the open picker keeps the
+       picker on top. */
+    div.js_themepreview_colorwrp:hover,
+    div.js_themepreview_colorwrp:focus-within {
+        z-index: 60;
+    }
 
     div.js_effect_preview div.js-ticket-wrapper div.js-ticket-toparea {
         padding: 0px;
@@ -126,7 +124,6 @@ JSSTmessage::getMessage();
     div.js-ticket-top-cirlce-count-wrp{display: flex;flex-wrap: wrap;row-gap: 10px;}
     div.js-ticket-myticket-link-myticket{min-width: fit-content;}
     .js-sugestion-alert svg{min-width: 25px;height: auto;}
-    #jsstadmin-wrapper .iris-picker{margin: 10px;border-radius: 12px;}
     .js_jobapply_main_wrapper{border-radius: 12px;}
     div.js-sugestion-alert-wrp{margin-top: 0;}
     div.js-myticket-link a.js-myticket-link.js-ticket-green.active{border-color: #2ECC71 !important;}
@@ -136,171 +133,127 @@ JSSTmessage::getMessage();
         <?php JSSTincluder::getClassesInclude('jsstadminsidemenu'); ?>
     </div>
     <div id="jsstadmin-data">
-        <div id="jsstadmin-wrapper-top">
-            <div id="jsstadmin-wrapper-top-left">
-                <div id="jsstadmin-breadcrunbs">
-                    <ul>
-                        <li><a href="?page=jssupportticket"
-                                title="<?php echo esc_attr(__('Dashboard', 'js-support-ticket')); ?>"><?php echo esc_html(__('Dashboard', 'js-support-ticket')); ?></a>
-                        </li>
-                        <li><?php echo esc_html(__('Themes', 'js-support-ticket')); ?></li>
-                    </ul>
-                </div>
-            </div>
-            <div id="jsstadmin-wrapper-top-right">
-                <div id="jsstadmin-config-btn">
-                    <a title="<?php echo esc_attr(__('Configuration', 'js-support-ticket')); ?>"
-                        href="<?php echo esc_url(admin_url("admin.php?page=configuration")); ?>">
-                        <img alt = "<?php echo esc_attr(__('Configuration', 'js-support-ticket')); ?>"
-                            src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/config.png" />
-                    </a>
-                </div>
-                <div id="jsstadmin-config-btn" class="jssticketadmin-help-btn">
-                    <a href="<?php echo esc_url(admin_url("admin.php?page=jssupportticket&jstlay=help")); ?>"
-                        title="<?php echo esc_attr(__('Help', 'js-support-ticket')); ?>">
-                        <img alt = "<?php echo esc_attr(__('Help', 'js-support-ticket')); ?>"
-                            src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/help.png" />
-                    </a>
-                </div>
-                <div id="jsstadmin-vers-txt">
-                    <?php echo esc_html(__("Version", 'js-support-ticket')); ?>:
-                    <span
-                        class="jsstadmin-ver"><?php echo esc_html(JSSTincluder::getJSModel('configuration')->getConfigValue('versioncode')); ?></span>
-                </div>
-            </div>
-        </div>
-        <div id="jsstadmin-head">
-            <h1 class="jsstadmin-head-text"><?php echo esc_html(__("Themes", 'js-support-ticket')); ?></h1>
-            <a target="blank" href="https://www.youtube.com/watch?v=oOOr869FOyA"
-                class="jsstadmin-add-link black-bg button js-cp-video-popup"
-                title="<?php echo esc_attr(__('Watch Video', 'js-support-ticket')); ?>">
-                <img alt = "<?php echo esc_attr(__('arrow', 'js-support-ticket')); ?>"
-                    src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/play-btn.png" />
-                <?php echo esc_html(__('Watch Video', 'js-support-ticket')); ?>
-            </a>
-        </div>
+        <?php JSSTlayout::adminPageHeader(array(
+            'title'   => __('Themes', 'js-support-ticket'),
+            'actions' => array(
+                array('text' => __('Watch Video', 'js-support-ticket'), 'url' => 'https://www.youtube.com/watch?v=oOOr869FOyA', 'style' => 'ghost', 'target' => '_blank'),
+                array('text' => __('Preset Theme', 'js-support-ticket'), 'url' => '#', 'style' => 'ghost', 'attrs' => array('id' => 'preset_theme')),
+            ),
+        )); ?>
         <div id="jsstadmin-data-wrp" class="">
             <?php do_action('jsst_cm_theme_colors_message', 'js-support-ticket'); ?>
-            <div id="theme_heading">
-                <div class="left_side">
-                    <span
-                        class="job_sharing_text"><?php echo esc_html(__('Theme Chooser', 'js-support-ticket')); ?></span>
-                </div>
-                <div class="right_side">
-                    <a href="#" id="preset_theme"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                            stroke-linecap="round" stroke-linejoin="round" data-lucide="leaf" size="14"
-                            class="lucide lucide-leaf">
-                            <path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z">
-                            </path>
-                            <path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"></path>
-                        </svg><span
-                            class="theme_presets_theme"><?php echo esc_html(__('Preset Theme', 'js-support-ticket')); ?></span></a>
-                </div>
-            </div>
             <div class="js_effect_preview_section_mainwrp">
                 <div class="js_theme_section">
                     <form
                         action="<?php echo esc_url(wp_nonce_url(admin_url('admin.php?page=themes&task=savetheme'), "save-theme")); ?>"
                         method="POST" name="adminForm" id="adminForm">
-                        <span class="js_theme_heading">
-                            <?php echo esc_html(__('Color Chooser', 'js-support-ticket')); ?>
-                        </span>
-                        <div class="color_portion">
-                            <span class="color_title"><?php echo esc_html(__('Color 1', 'js-support-ticket')); ?></span>
-                            <div class="js_themepreview_colorwrp">
-                                <span class="js_themepreview_color js_themepreview_color1"
-                                    style="background:<?php echo esc_attr(jssupportticket::$jsst_data[0]['color1']); ?>;border-color:<?php echo esc_attr(jssupportticket::$jsst_data[0]['color1']); ?>66;"></span>
-                                <input type="text" name="color1" id="color1"
-                                    value="<?php echo esc_attr(jssupportticket::$jsst_data[0]['color1']); ?>"
-                                    maxlength="15" />
-                            </div>
-                            <span class="color_location">
-                                <?php echo esc_html(__('Top menu heading background', 'js-support-ticket')); ?>
-                            </span>
-                        </div>
-                        <div class="color_portion">
-                            <span class="color_title"><?php echo esc_html(__('Color 2', 'js-support-ticket')); ?></span>
-                            <div class="js_themepreview_colorwrp">
-                                <span class="js_themepreview_color js_themepreview_color2"
-                                    style="background:<?php echo esc_attr(jssupportticket::$jsst_data[0]['color2']); ?>;border-color:<?php echo esc_attr(jssupportticket::$jsst_data[0]['color2']); ?>66;"></span>
-                                <input type="text" name="color2" id="color2"
-                                    value="<?php echo esc_attr(jssupportticket::$jsst_data[0]['color2']); ?>"
-                                    maxlength="15" />
-                            </div>
-                            <span class="color_location">
-                                <?php echo esc_html(__('Top header line color', 'js-support-ticket')); ?>,
+                        <div class="jsst-formpanel">
+                        <div class="jsst-formbody">
+                        <fieldset class="jsst-fieldset">
+                            <legend class="jsst-fieldset-legend"><?php echo esc_html(__('Color Chooser', 'js-support-ticket')); ?></legend>
+                            <div class="jsst-formgrid">
+                                <div class="jsst-frow jsst-frow-sm">
+                                    <label class="jsst-flabel" for="color1"><?php echo esc_html(__('Color 1', 'js-support-ticket')); ?></label>
+                                    <div class="jsst-fval">
+                                        <div class="js_themepreview_colorwrp">
+                                        <span class="js_themepreview_color js_themepreview_color1"
+                                            style="background:<?php echo esc_attr(jssupportticket::$jsst_data[0]['color1']); ?>;border-color:<?php echo esc_attr(jssupportticket::$jsst_data[0]['color1']); ?>66;"></span>
+                                        <input type="text" name="color1" id="color1"
+                                            value="<?php echo esc_attr(jssupportticket::$jsst_data[0]['color1']); ?>"
+                                            maxlength="15" />
+                                    </div>
+                                    </div>
+                                    <p class="jsst-fhelp"><?php echo esc_html(__('Top menu heading background', 'js-support-ticket')); ?></p>
+                                </div>
+                                <div class="jsst-frow jsst-frow-sm">
+                                    <label class="jsst-flabel" for="color2"><?php echo esc_html(__('Color 2', 'js-support-ticket')); ?></label>
+                                    <div class="jsst-fval">
+                                        <div class="js_themepreview_colorwrp">
+                                        <span class="js_themepreview_color js_themepreview_color2"
+                                            style="background:<?php echo esc_attr(jssupportticket::$jsst_data[0]['color2']); ?>;border-color:<?php echo esc_attr(jssupportticket::$jsst_data[0]['color2']); ?>66;"></span>
+                                        <input type="text" name="color2" id="color2"
+                                            value="<?php echo esc_attr(jssupportticket::$jsst_data[0]['color2']); ?>"
+                                            maxlength="15" />
+                                    </div>
+                                    </div>
+                                    <p class="jsst-fhelp"><?php echo esc_html(__('Top header line color', 'js-support-ticket')); ?>,
                                 <?php echo esc_html(__('Button Hover', 'js-support-ticket')); ?>,
-                                <?php echo esc_html(__('Heading text', 'js-support-ticket')); ?>
-                            </span>
-                        </div>
-                        <div class="color_portion">
-                            <span class="color_title"><?php echo esc_html(__('Color 3', 'js-support-ticket')); ?></span>
-                            <div class="js_themepreview_colorwrp">
-                                <span class="js_themepreview_color js_themepreview_color3"
-                                    style="background:<?php echo esc_attr(jssupportticket::$jsst_data[0]['color3']); ?>;border-color:<?php echo esc_attr(jssupportticket::$jsst_data[0]['color3']); ?>66;"></span>
-                                <input type="text" name="color3" id="color3"
-                                    value="<?php echo esc_attr(jssupportticket::$jsst_data[0]['color3']); ?>"
-                                    maxlength="15" />
-                            </div>
-                            <span
-                                class="color_location"><?php echo esc_html(__('Content Background Color', 'js-support-ticket')); ?></span>
-                        </div>
-                        <div class="color_portion">
-                            <span class="color_title"><?php echo esc_html(__('Color 4', 'js-support-ticket')); ?></span>
-                            <div class="js_themepreview_colorwrp">
-                                <span class="js_themepreview_color js_themepreview_color4"
-                                    style="background:<?php echo esc_attr(jssupportticket::$jsst_data[0]['color4']); ?>;border-color:<?php echo esc_attr(jssupportticket::$jsst_data[0]['color4']); ?>66;"></span>
-                                <input type="text" name="color4" id="color4"
-                                    value="<?php echo esc_attr(jssupportticket::$jsst_data[0]['color4']); ?>"
-                                    maxlength="15" />
-                            </div>
-                            <span
-                                class="color_location"><?php echo esc_html(__('Content Text Color', 'js-support-ticket')); ?></span>
-                        </div>
-                        <div class="color_portion">
-                            <span class="color_title"><?php echo esc_html(__('Color 5', 'js-support-ticket')); ?></span>
-                            <div class="js_themepreview_colorwrp">
-                                <span class="js_themepreview_color js_themepreview_color5"
-                                    style="background:<?php echo esc_attr(jssupportticket::$jsst_data[0]['color5']); ?>;border-color:<?php echo esc_attr(jssupportticket::$jsst_data[0]['color5']); ?>66;"></span>
-                                <input type="text" name="color5" id="color5"
-                                    value="<?php echo esc_attr(jssupportticket::$jsst_data[0]['color5']); ?>"
-                                    maxlength="15" />
-                            </div>
-                            <span class="color_location">
-                                <?php echo esc_html(__('Border color', 'js-support-ticket')); ?>,
-                                <?php echo esc_html(__('Lines', 'js-support-ticket')); ?>
-                            </span>
-                        </div>
-                        <div class="color_portion">
-                            <span class="color_title"><?php echo esc_html(__('Color 6', 'js-support-ticket')); ?></span>
-                            <div class="js_themepreview_colorwrp">
-                                <span class="js_themepreview_color js_themepreview_color6"
-                                    style="background:<?php echo esc_attr(jssupportticket::$jsst_data[0]['color6']); ?>;border-color:<?php echo esc_attr(jssupportticket::$jsst_data[0]['color6']); ?>66;"></span>
-                                <input type="text" name="color6" id="color6"
-                                    value="<?php echo esc_attr(jssupportticket::$jsst_data[0]['color6']); ?>"
-                                    maxlength="15" />
-                            </div>
-                            <span
-                                class="color_location"><?php echo esc_html(__('Button Color', 'js-support-ticket')); ?></span>
-                        </div>
-                        <div class="color_portion">
-                            <span class="color_title"><?php echo esc_html(__('Color 7', 'js-support-ticket')); ?></span>
-                            <div class="js_themepreview_colorwrp">
-                                <span class="js_themepreview_color js_themepreview_color7"
-                                    style="background:<?php echo esc_attr(jssupportticket::$jsst_data[0]['color7']); ?>;border-color:<?php echo esc_attr(jssupportticket::$jsst_data[0]['color7']); ?>66;"></span>
-                                <input type="text" name="color7" id="color7"
-                                    value="<?php echo esc_attr(jssupportticket::$jsst_data[0]['color7']); ?>"
-                                    maxlength="15" />
-                            </div>
-                            <span
-                                class="color_location"><?php echo esc_html(__('Top header text color', 'js-support-ticket')); ?></span>
-                        </div>
+                                <?php echo esc_html(__('Heading text', 'js-support-ticket')); ?></p>
+                                </div>
+                                <div class="jsst-frow jsst-frow-sm">
+                                    <label class="jsst-flabel" for="color3"><?php echo esc_html(__('Color 3', 'js-support-ticket')); ?></label>
+                                    <div class="jsst-fval">
+                                        <div class="js_themepreview_colorwrp">
+                                        <span class="js_themepreview_color js_themepreview_color3"
+                                            style="background:<?php echo esc_attr(jssupportticket::$jsst_data[0]['color3']); ?>;border-color:<?php echo esc_attr(jssupportticket::$jsst_data[0]['color3']); ?>66;"></span>
+                                        <input type="text" name="color3" id="color3"
+                                            value="<?php echo esc_attr(jssupportticket::$jsst_data[0]['color3']); ?>"
+                                            maxlength="15" />
+                                    </div>
+                                    </div>
+                                    <p class="jsst-fhelp"><?php echo esc_html(__('Content Background Color', 'js-support-ticket')); ?></p>
+                                </div>
+                                <div class="jsst-frow jsst-frow-sm">
+                                    <label class="jsst-flabel" for="color4"><?php echo esc_html(__('Color 4', 'js-support-ticket')); ?></label>
+                                    <div class="jsst-fval">
+                                        <div class="js_themepreview_colorwrp">
+                                        <span class="js_themepreview_color js_themepreview_color4"
+                                            style="background:<?php echo esc_attr(jssupportticket::$jsst_data[0]['color4']); ?>;border-color:<?php echo esc_attr(jssupportticket::$jsst_data[0]['color4']); ?>66;"></span>
+                                        <input type="text" name="color4" id="color4"
+                                            value="<?php echo esc_attr(jssupportticket::$jsst_data[0]['color4']); ?>"
+                                            maxlength="15" />
+                                    </div>
+                                    </div>
+                                    <p class="jsst-fhelp"><?php echo esc_html(__('Content Text Color', 'js-support-ticket')); ?></p>
+                                </div>
+                                <div class="jsst-frow jsst-frow-sm">
+                                    <label class="jsst-flabel" for="color5"><?php echo esc_html(__('Color 5', 'js-support-ticket')); ?></label>
+                                    <div class="jsst-fval">
+                                        <div class="js_themepreview_colorwrp">
+                                        <span class="js_themepreview_color js_themepreview_color5"
+                                            style="background:<?php echo esc_attr(jssupportticket::$jsst_data[0]['color5']); ?>;border-color:<?php echo esc_attr(jssupportticket::$jsst_data[0]['color5']); ?>66;"></span>
+                                        <input type="text" name="color5" id="color5"
+                                            value="<?php echo esc_attr(jssupportticket::$jsst_data[0]['color5']); ?>"
+                                            maxlength="15" />
+                                    </div>
+                                    </div>
+                                    <p class="jsst-fhelp"><?php echo esc_html(__('Border color', 'js-support-ticket')); ?>,
+                                <?php echo esc_html(__('Lines', 'js-support-ticket')); ?></p>
+                                </div>
+                                <div class="jsst-frow jsst-frow-sm">
+                                    <label class="jsst-flabel" for="color6"><?php echo esc_html(__('Color 6', 'js-support-ticket')); ?></label>
+                                    <div class="jsst-fval">
+                                        <div class="js_themepreview_colorwrp">
+                                        <span class="js_themepreview_color js_themepreview_color6"
+                                            style="background:<?php echo esc_attr(jssupportticket::$jsst_data[0]['color6']); ?>;border-color:<?php echo esc_attr(jssupportticket::$jsst_data[0]['color6']); ?>66;"></span>
+                                        <input type="text" name="color6" id="color6"
+                                            value="<?php echo esc_attr(jssupportticket::$jsst_data[0]['color6']); ?>"
+                                            maxlength="15" />
+                                    </div>
+                                    </div>
+                                    <p class="jsst-fhelp"><?php echo esc_html(__('Button Color', 'js-support-ticket')); ?></p>
+                                </div>
+                                <div class="jsst-frow jsst-frow-sm">
+                                    <label class="jsst-flabel" for="color7"><?php echo esc_html(__('Color 7', 'js-support-ticket')); ?></label>
+                                    <div class="jsst-fval">
+                                        <div class="js_themepreview_colorwrp">
+                                        <span class="js_themepreview_color js_themepreview_color7"
+                                            style="background:<?php echo esc_attr(jssupportticket::$jsst_data[0]['color7']); ?>;border-color:<?php echo esc_attr(jssupportticket::$jsst_data[0]['color7']); ?>66;"></span>
+                                        <input type="text" name="color7" id="color7"
+                                            value="<?php echo esc_attr(jssupportticket::$jsst_data[0]['color7']); ?>"
+                                            maxlength="15" />
+                                    </div>
+                                    </div>
+                                    <p class="jsst-fhelp"><?php echo esc_html(__('Top header text color', 'js-support-ticket')); ?></p>
+                                </div>
                         <div class="color_submit_button_hide">
                             <input type="hidden" name="form_request" value="jssupportticket" />
                         </div>
-                        <div class="color_submit_button">
-                        <a class="js-color-submit-button" href="#"
+                            </div>
+                        </fieldset>
+                        </div>
+                        <div class="jsst-formfoot">
+                        <a class="jsst-btn jsst-btn-primary js-color-submit-button" href="#"
                             onclick="document.getElementById('adminForm').submit();">
                             <?php echo esc_html(__('Save Theme', 'js-support-ticket')); ?>
                         </a>
@@ -310,6 +263,7 @@ JSSTmessage::getMessage();
                                 <?php echo esc_html(__('Changes may require cache clearing to take effect. ', 'js-support-ticket')); ?>
                             </div>
                         </div>
+                    </div>
                     </div>
                     </form>
                 </div>
@@ -613,10 +567,10 @@ JSSTmessage::getMessage();
                                         <span
                                             class="js-ticket-value"><?php echo esc_html(__('Support', 'js-support-ticket')); ?></span>
                                     </div>
-                                    <span class="js-ticket-wrapper-textcolor" style="background:#ed8e00;">
+                                    <span class="js-ticket-wrapper-textcolor" style="background:#a86500;">
                                         <?php echo esc_html(__('High', 'js-support-ticket')); ?></span>
                                     <img decoding="async" class="ticketstatusimage one" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/lock.png" title="<?php echo esc_attr__('The ticket is locked', 'js-support-ticket'); ?>">
-                                    <span class="js-ticket-status" style="background-color: #69d2e7;color:#FFFFFF;">
+                                    <span class="js-ticket-status" style="background-color: #7c3aed;color:#FFFFFF;">
                                         <?php echo esc_html(__('In Progress', 'js-support-ticket')); ?></span>
                                 </div>
                                 <div class="js-col-xs-12 js-col-md-4 js-ticket-data1 js-ticket-padding-left-xs">
@@ -667,10 +621,10 @@ JSSTmessage::getMessage();
                                         <span
                                             class="js-ticket-value"><?php echo esc_html(__('Support', 'js-support-ticket')); ?></span>
                                     </div>
-                                    <span class="js-ticket-wrapper-textcolor" style="background:#86f793;">
+                                    <span class="js-ticket-wrapper-textcolor" style="background:#098717;">
                                         <?php echo esc_html(__('Low', 'js-support-ticket')); ?></span>
                                     <img decoding="async" class="ticketstatusimage one" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/over-due.png" title="<?php echo esc_attr__('This ticket is marked as overdue', 'js-support-ticket'); ?>">
-                                    <span class="js-ticket-status" style="background-color: #28abe3;color:#FFFFFF;">
+                                    <span class="js-ticket-status" style="background-color: #167da9;color:#FFFFFF;">
                                         <?php echo esc_html(__('Waiting Reply', 'js-support-ticket')); ?></span>
                                 </div>
                                 <div class="js-col-xs-12 js-col-md-4 js-ticket-data1 js-ticket-padding-left-xs">
@@ -721,10 +675,10 @@ JSSTmessage::getMessage();
                                         <span
                                             class="js-ticket-value"><?php echo esc_html(__('Support', 'js-support-ticket')); ?></span>
                                     </div>
-                                    <span class="js-ticket-wrapper-textcolor" style="background:#c7cbf5;">
+                                    <span class="js-ticket-wrapper-textcolor" style="background:#5b5fc7;">
                                         <?php echo esc_html(__('Normal', 'js-support-ticket')); ?></span>
 
-                                    <span class="js-ticket-status" style="background-color: #5bb12f;color:#FFFFFF;">
+                                    <span class="js-ticket-status" style="background-color: #438323;color:#FFFFFF;">
                                         <?php echo esc_html(__('New', 'js-support-ticket')); ?></span>
                                 </div>
                                 <div class="js-col-xs-12 js-col-md-4 js-ticket-data1 js-ticket-padding-left-xs">

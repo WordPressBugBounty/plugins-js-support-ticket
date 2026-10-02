@@ -96,9 +96,20 @@ class JSSTticketModel {
             $jsst_inquery .= " AND ticket.productid = %d";
             $jsst_inquery_args[] = $jsst_productid;
         }
-        if ($jsst_staffid != null && is_numeric($jsst_staffid)){
-            $jsst_inquery .= " AND ticket.staffid = %d";
-            $jsst_inquery_args[] = $jsst_staffid;
+        if ($jsst_staffid !== '' && $jsst_staffid !== null && is_numeric($jsst_staffid)){
+            /* Zero means nobody, and nobody is stored two ways. Sites that have
+               been through several versions of this plugin have both a literal
+               0 and a NULL in this column depending on which code path left the
+               ticket unassigned, so a filter written as "= 0" finds some of the
+               unassigned queue and not the rest - which is worse than not
+               having the filter, because it looks like it worked.
+               (Roadmap 4.5-UX-01) */
+            if ((int) $jsst_staffid === 0) {
+                $jsst_inquery .= " AND (ticket.staffid IS NULL OR ticket.staffid = 0)";
+            } else {
+                $jsst_inquery .= " AND ticket.staffid = %d";
+                $jsst_inquery_args[] = $jsst_staffid;
+            }
         }
 
         if ($jsst_orderid != null && is_numeric($jsst_orderid)){
@@ -221,6 +232,10 @@ class JSSTticketModel {
         // Keeps the tag control showing what the queue is actually filtered by.
         // (Roadmap 4.0-CORE-17)
         jssupportticket::$jsst_data['filter']['tagid'] = jssupportticket::$_search['ticket']['tagid'];
+        // The team queue. (Roadmap 4.5-FE-05)
+        $jsst_teamid = isset(jssupportticket::$_search['ticket']['teamid']) ? jssupportticket::$_search['ticket']['teamid'] : '';
+        jssupportticket::$jsst_data['filter']['teamid'] = $jsst_teamid;
+        $jsst_inquery .= $this->teamFilterClause($jsst_teamid);
         // Same for the search box and the saved-view control, so a reload or a
         // page of results shows what the queue is actually constrained by.
         // (Roadmap 4.0-CORE-18)
@@ -252,13 +267,40 @@ class JSSTticketModel {
             $jsst_tagwhere = jssupportticket::$_db->prepare($jsst_tagfilter['where'], $jsst_tagfilter['args']);
         }
 
+        /* Company filter: the company's named people and its domains, by the
+           same rule the company screen counts with. Appended after prepare()
+           and beside the tag clause so the count and the page agree.
+           (Roadmap 5.5-COM-06) */
+        $jsst_companyid = isset(jssupportticket::$_search['ticket']['companyid']) ? jssupportticket::$_search['ticket']['companyid'] : '';
+        jssupportticket::$jsst_data['filter']['companyid'] = $jsst_companyid;
+        if ($jsst_companyid !== '' && $jsst_companyid !== null && is_numeric($jsst_companyid) && class_exists('JSSTcompanies')) {
+            $jsst_company = JSSTcompanies::get((int) $jsst_companyid);
+            $jsst_tagwhere .= $jsst_company ? ' AND ' . JSSTcompanies::ticketClause($jsst_company, 'ticket') . ' ' : ' AND 1 = 0 ';
+        }
+
+        /* Which tickets this person may see. The backend queue has never had
+           this clause, and the front-end agent queue always has - so an agent
+           scoped to one department saw that department in the portal and every
+           ticket on the site in wp-admin. The two workspaces disagreeing about
+           the same agent is the whole failure this release exists to end, and
+           between the two answers the narrow one is the correct one: it is
+           what the Agents screen was set to.
+
+           An administrator and an agent granted All Tickets both resolve to
+           the whole site here, so the clause is empty for them and nothing
+           about their queue changes. It is only ever a governed agent who is
+           narrowed, and only to what somebody already decided they should see.
+           (Roadmap 4.5-FE-04, 4.5-ARCH-01) */
+        $jsst_actor = JSSTcapability::actor();
+        $jsst_scopeclause = JSSTcapability::ticketScopeClause('ticket', $jsst_actor);
+
         // Pagination
         $jsst_query = "SELECT COUNT(ticket.id) "
                 . "FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` AS ticket "
                 . "LEFT JOIN `" . jssupportticket::$_db->prefix . "js_ticket_departments` AS department ON ticket.departmentid = department.id "
                 . "LEFT JOIN `" . jssupportticket::$_db->prefix . "js_ticket_priorities` AS priority ON ticket.priorityid = priority.id "
                 . $jsst_tagfilter['join']
-                . "WHERE 1 = 1";
+                . "WHERE 1 = 1" . $jsst_scopeclause;
         $jsst_query .= $jsst_inquery.$jsst_userquery.$jsst_tagwhere;
         $jsst_total = jssupportticket::$_db->get_var($jsst_query);
         jssupportticket::$jsst_data[1] = JSSTpagination::getPagination($jsst_total);
@@ -282,7 +324,7 @@ class JSSTticketModel {
                     LEFT JOIN `" . jssupportticket::$_db->prefix . "js_ticket_products` AS product ON ticket.productid = product.id
                     ".jssupportticket::$_addon_query['join']."
                     " . $jsst_tagfilter['join'] . "
-                    WHERE 1 = 1";
+                    WHERE 1 = 1" . $jsst_scopeclause;
 
         $jsst_query .= $jsst_inquery.$jsst_userquery.$jsst_tagwhere;
         $jsst_query .= " ORDER BY " . jssupportticket::$_ordering . " LIMIT " . JSSTpagination::getOffset() . ", " . JSSTpagination::getLimit();
@@ -320,28 +362,49 @@ class JSSTticketModel {
         if (jssupportticket::$_db->last_error != null) {
             JSSTincluder::getJSModel('systemerror')->addSystemError();
         }
-        // The number on every tab, in one pass over the table.
-        //
-        // This used to be one COUNT query per tab, each joining departments and
-        // priorities that no tab actually filters on. Adding Waiting on Agent
-        // and Waiting on Customer would have made that seven scans to draw one
-        // row of tabs. Counting with a CASE per tab is one scan for all of them,
-        // and the conditions come from JSSTqueue, so a tab and the number on it
-        // are the same definition. (Roadmap 4.0-CORE-18, 4.0-PERF-01)
-        $jsst_countselect = array();
-        foreach (JSSTqueue::countClauses() AS $jsst_countalias => $jsst_countclause) {
-            $jsst_countselect[] = "SUM(CASE WHEN " . $jsst_countclause . " THEN 1 ELSE 0 END) AS " . $jsst_countalias;
+        /* The number on every tab, counted under this person's own scope and
+           the queue's own filters, and cached until something happens to a
+           ticket. It was one CASE pass over the whole table - better than the
+           seven separate counts it replaced in 4.0, and still a scan on every
+           page load, and still counting tickets the list below would not show
+           a scoped agent. (Roadmap 4.5-UX-01, 4.5-FE-04, 4.0-PERF-01) */
+        $jsst_countfilters = array();
+        if ($jsst_uid != null && is_numeric($jsst_uid)) {
+            $jsst_countfilters['uid'] = (int) $jsst_uid;
         }
-        $jsst_query = "SELECT " . implode(', ', $jsst_countselect)
-                . " FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` AS ticket "
-                . "WHERE 1 = 1" . $jsst_userquery;
-        $jsst_counts = jssupportticket::$_db->get_row($jsst_query);
+        $jsst_counts = class_exists('JSSTqueueengine')
+            ? JSSTqueueengine::counts(array('actor' => $jsst_actor, 'filters' => $jsst_countfilters))
+            : array();
         foreach (array_keys(JSSTqueue::countClauses()) AS $jsst_countalias) {
-            // SUM() over no rows is NULL, so an empty queue reads 0 rather than
-            // an empty tab label.
-            jssupportticket::$jsst_data['count'][$jsst_countalias] = (isset($jsst_counts->$jsst_countalias)) ? (int) $jsst_counts->$jsst_countalias : 0;
+            jssupportticket::$jsst_data['count'][$jsst_countalias] = isset($jsst_counts[$jsst_countalias])
+                ? (int) $jsst_counts[$jsst_countalias] : 0;
         }
         return;
+    }
+
+    /**
+     * The team filter, as a WHERE fragment. (Roadmap 4.5-FE-05)
+     *
+     * Expanded to the team's members here rather than joined in SQL, because
+     * both queue queries already carry four joins and a fifth would change
+     * what each of them counts. A team is a handful of people, so the list is
+     * short and the expansion is one indexed read.
+     *
+     * A team id that names no team, or one whose membership is empty, narrows
+     * to nothing rather than being ignored. A filter that silently does
+     * nothing shows the whole queue under the word "team", which is worse than
+     * showing none of it.
+     */
+    private function teamFilterClause($jsst_teamid) {
+        if ($jsst_teamid === null || $jsst_teamid === '' || !is_numeric($jsst_teamid) || (int) $jsst_teamid <= 0) {
+            return '';
+        }
+        if (!class_exists('JSSTteams')) {
+            return '';
+        }
+        $jsst_members = JSSTteams::members((int) $jsst_teamid);
+        $jsst_clause = JSSTteams::memberClause('ticket', $jsst_members);
+        return ($jsst_clause === '') ? ' AND 1 = 0 ' : ' AND ' . $jsst_clause . ' ';
     }
 
     function getOrdering() {
@@ -446,9 +509,18 @@ class JSSTticketModel {
                 jssupportticket::$jsst_data['filter']['priorityid'] = $jsst_priorityid;
             }
             if(in_array('agent', jssupportticket::$_active_addons)){
-                if ($jsst_staffid != null && is_numeric($jsst_staffid)) {
-                    $jsst_inquery .= " AND ticket.staffid = %d";
-                    $jsst_inquery_args[] = $jsst_staffid;
+                if ($jsst_staffid !== '' && $jsst_staffid !== null && is_numeric($jsst_staffid)) {
+                    /* Zero is nobody, and nobody is stored both as 0 and as
+                       NULL depending on which version of this plugin left the
+                       ticket unassigned - so the obvious "= 0" finds part of
+                       the unassigned queue and looks like it worked.
+                       (Roadmap 4.5-UX-01) */
+                    if ((int) $jsst_staffid === 0) {
+                        $jsst_inquery .= " AND (ticket.staffid IS NULL OR ticket.staffid = 0)";
+                    } else {
+                        $jsst_inquery .= " AND ticket.staffid = %d";
+                        $jsst_inquery_args[] = $jsst_staffid;
+                    }
                     jssupportticket::$jsst_data['filter']['staffid'] = $jsst_staffid;
                 }
             }
@@ -612,14 +684,24 @@ class JSSTticketModel {
 
         $jsst_uid = JSSTincluder::getObjectClass('user')->uid();
         if ($jsst_uid && is_numeric($jsst_uid)) {
+            /* Whose tickets: this person's, and for a company supervisor their
+               colleagues' as well - the same rule the capability layer applies,
+               so a ticket listed here is a ticket that opens.
+               (Roadmap 5.5-COM-06) */
+            $jsst_owner = jssupportticket::$_db->prepare('ticket.uid = %d', $jsst_uid);
+            $jsst_shared = class_exists('JSSTcompanies')
+                ? JSSTcompanies::sharedScopeClause('ticket', JSSTcapability::actor()) : '';
+            if ($jsst_shared !== '') {
+                $jsst_owner = '(' . $jsst_owner . ' OR ' . $jsst_shared . ')';
+            }
+            jssupportticket::$jsst_data['company_supervisor'] = ($jsst_shared !== '');
             // Pagination
             $jsst_query = "SELECT COUNT(ticket.id)
                         FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` AS ticket
                         LEFT JOIN `" . jssupportticket::$_db->prefix . "js_ticket_departments` AS department ON ticket.departmentid = department.id
                         LEFT JOIN `" . jssupportticket::$_db->prefix . "js_ticket_priorities` AS priority ON ticket.priorityid = priority.id
                         JOIN `" . jssupportticket::$_db->prefix . "js_ticket_statuses` AS status ON ticket.status = status.id
-                        WHERE ticket.uid = %d";
-            $jsst_query = jssupportticket::$_db->prepare($jsst_query, $jsst_uid);
+                        WHERE " . $jsst_owner;
             $jsst_query .= $jsst_inquery;
             $jsst_total = jssupportticket::$_db->get_var($jsst_query);
             jssupportticket::$jsst_data[1] = JSSTpagination::getPagination($jsst_total,'myticket');
@@ -634,7 +716,7 @@ class JSSTticketModel {
                         LEFT JOIN `" . jssupportticket::$_db->prefix . "js_ticket_priorities` AS priority ON ticket.priorityid = priority.id
                         JOIN `" . jssupportticket::$_db->prefix . "js_ticket_statuses` AS status ON ticket.status = status.id
                         LEFT JOIN `" . jssupportticket::$_db->prefix . "js_ticket_products` AS product ON ticket.productid = product.id";
-            $jsst_query .= jssupportticket::$_db->prepare(" WHERE ticket.uid = %d", $jsst_uid) . $jsst_inquery;
+            $jsst_query .= " WHERE " . $jsst_owner . $jsst_inquery;
             $jsst_query .= " ORDER BY " . jssupportticket::$_ordering . " LIMIT " . JSSTpagination::getOffset() . ", " . JSSTpagination::getLimit();
             jssupportticket::$jsst_data[0] = jssupportticket::$_db->get_results($jsst_query);
             do_action('jsst_reset_aadon_query');
@@ -646,29 +728,29 @@ class JSSTticketModel {
                         . "FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` AS ticket "
                         . "LEFT JOIN `" . jssupportticket::$_db->prefix . "js_ticket_departments` AS department ON ticket.departmentid = department.id "
                         . "LEFT JOIN `" . jssupportticket::$_db->prefix . "js_ticket_priorities` AS priority ON ticket.priorityid = priority.id "
-                        . "WHERE ticket.uid = %d AND (ticket.status != 5 AND ticket.status != 6)";
-                jssupportticket::$jsst_data['count']['openticket'] = jssupportticket::$_db->get_var(jssupportticket::$_db->prepare($jsst_query, $jsst_uid));
+                        . "WHERE " . $jsst_owner . " AND (ticket.status != 5 AND ticket.status != 6)";
+                jssupportticket::$jsst_data['count']['openticket'] = jssupportticket::$_db->get_var($jsst_query);
 
                 $jsst_query = "SELECT COUNT(ticket.id) "
                         . "FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` AS ticket "
                         . "LEFT JOIN `" . jssupportticket::$_db->prefix . "js_ticket_departments` AS department ON ticket.departmentid = department.id "
                         . "LEFT JOIN `" . jssupportticket::$_db->prefix . "js_ticket_priorities` AS priority ON ticket.priorityid = priority.id "
-                        . "WHERE ticket.uid = %d AND ticket.status = 4 ";
-                jssupportticket::$jsst_data['count']['answeredticket'] = jssupportticket::$_db->get_var(jssupportticket::$_db->prepare($jsst_query, $jsst_uid));
+                        . "WHERE " . $jsst_owner . " AND ticket.status = 4 ";
+                jssupportticket::$jsst_data['count']['answeredticket'] = jssupportticket::$_db->get_var($jsst_query);
 
                 $jsst_query = "SELECT COUNT(ticket.id) "
                         . "FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` AS ticket "
                         . "LEFT JOIN `" . jssupportticket::$_db->prefix . "js_ticket_departments` AS department ON ticket.departmentid = department.id "
                         . "LEFT JOIN `" . jssupportticket::$_db->prefix . "js_ticket_priorities` AS priority ON ticket.priorityid = priority.id "
-                        . "WHERE ticket.uid = %d AND (ticket.status = 5 OR ticket.status = 6)";
-                jssupportticket::$jsst_data['count']['closedticket'] = jssupportticket::$_db->get_var(jssupportticket::$_db->prepare($jsst_query, $jsst_uid));
+                        . "WHERE " . $jsst_owner . " AND (ticket.status = 5 OR ticket.status = 6)";
+                jssupportticket::$jsst_data['count']['closedticket'] = jssupportticket::$_db->get_var($jsst_query);
 
                 $jsst_query = "SELECT COUNT(ticket.id) "
                         . "FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` AS ticket "
                         . "LEFT JOIN `" . jssupportticket::$_db->prefix . "js_ticket_departments` AS department ON ticket.departmentid = department.id "
                         . "LEFT JOIN `" . jssupportticket::$_db->prefix . "js_ticket_priorities` AS priority ON ticket.priorityid = priority.id "
-                        . "WHERE ticket.uid = %d";
-                jssupportticket::$jsst_data['count']['allticket'] = jssupportticket::$_db->get_var(jssupportticket::$_db->prepare($jsst_query, $jsst_uid));
+                        . "WHERE " . $jsst_owner;
+                jssupportticket::$jsst_data['count']['allticket'] = jssupportticket::$_db->get_var($jsst_query);
             // }
         }
         return;
@@ -693,43 +775,33 @@ class JSSTticketModel {
         if($jsst_lst != null) {
             jssupportticket::$_search['ticket']['list'] = $jsst_lst;
         }
-        $jsst_list = isset(jssupportticket::$_search['ticket']) ? jssupportticket::$_search['ticket']['list'] : 1; // assign for reference
+        /* The tab clauses come from JSSTqueue, exactly as the backend queue's
+           do. They used to be the switch below - five clauses, numbered 1 to 5
+           in this function's own order, where 2 was Closed and 3 was In
+           Progress. The rest of the plugin numbers the same tabs differently,
+           and the number is stored in a search state the two desks share, so
+           the same stored value picked a different queue depending on which one
+           read it. Normalising here and taking the clause from JSSTqueue means
+           there is one definition of every tab and no numbering of our own.
+           (Roadmap 4.5-UX-01) */
+        $jsst_list = isset(jssupportticket::$_search['ticket']) ? jssupportticket::$_search['ticket']['list'] : JSSTqueue::LIST_OPEN;
+        $jsst_list = JSSTqueue::normalizeList($jsst_list);
         jssupportticket::$jsst_data['list'] = $jsst_list;
-        switch ($jsst_list) {
-            // Ticket Default Status
-            // 1 -> Open Ticket
-            // 2 -> Waiting admin/staff reply
-            // 3 -> in progress
-            // 4 -> waiting for customer reply
-            // 5 -> close ticket
-            case 1:$jsst_inquery .= " AND (ticket.status != 5 AND ticket.status != 6)";
-                break;
-            case 2:$jsst_inquery .= " AND (ticket.status = 5 OR ticket.status = 6) ";
-                break;
-            case 3:$jsst_inquery .= " AND ticket.status = 4 ";
-                break;
-            case 4:$jsst_inquery .= " ";
-                break;
-            case 5:$jsst_inquery .= " AND ticket.isoverdue = 1 AND ticket.status != 5 AND ticket.status != 6 ";
-                break;
-        }
+        $jsst_inquery .= JSSTqueue::listClause($jsst_list);
 
         $jsst_uid = JSSTincluder::getObjectClass('user')->uid();
         if ($jsst_uid == 0 || !is_numeric($jsst_uid))
             return false;
-        $jsst_staffid = JSSTincluder::getJSModel('agent')->getStaffId($jsst_uid);
-
-        //to handle all tickets permissoin
-        $jsst_allowed = JSSTincluder::getJSModel('userpermissions')->checkPermissionGrantedForTask('All Tickets');
-        if($jsst_allowed == true){
-            $jsst_agent_conditions = "1 = 1";
-        }else{
-            if(is_numeric($jsst_staffid)) {
-                $jsst_agent_conditions = "ticket.staffid = ".(int)($jsst_staffid)." OR ticket.departmentid IN (SELECT dept.departmentid FROM `" . jssupportticket::$_db->prefix . "js_ticket_acl_user_access_departments` AS dept WHERE dept.staffid = " .intval($jsst_staffid).")";
-            } else {
-                return false;
-            }
-        }
+        /* Which tickets this agent may see, asked of the capability service
+           instead of worked out again here. The rule this replaces was
+           "assigned to me, or in one of my departments", written out as a
+           subquery; the service's rule is that plus "or I raised it", which is
+           the same rule the ticket page itself already enforces. The gap
+           between the two was a real one: an agent who raised a ticket could
+           open it by typing its number and could not find it in their own
+           queue. (Roadmap 4.5-ARCH-02, 4.5-UX-01) */
+        $jsst_actor = JSSTcapability::actor();
+        $jsst_scopeclause = JSSTcapability::ticketScopeClause('ticket', $jsst_actor);
         //show specific user's tickets
         $jsst_userquery = "";
         $jsst_uid = JSSTrequest::getVar('uid');
@@ -747,6 +819,15 @@ class JSSTticketModel {
             $jsst_tagwhere = jssupportticket::$_db->prepare($jsst_tagfilter['where'], $jsst_tagfilter['args']);
         }
         jssupportticket::$jsst_data['filter']['tagid'] = $jsst_searchtagid;
+        // The team queue, the same filter the backend queue uses.
+        // (Roadmap 4.5-FE-05)
+        $jsst_teamid = isset(jssupportticket::$_search['ticket']['teamid']) ? jssupportticket::$_search['ticket']['teamid'] : '';
+        jssupportticket::$jsst_data['filter']['teamid'] = $jsst_teamid;
+        $jsst_inquery .= $this->teamFilterClause($jsst_teamid);
+        // Which saved view produced this state, as on the backend queue, so the
+        // view picker keeps its choice and the template can offer Delete view.
+        // (Roadmap 4.5-UX-01)
+        jssupportticket::$jsst_data['filter']['viewid'] = isset(jssupportticket::$_search['ticket']['viewid']) ? jssupportticket::$_search['ticket']['viewid'] : '';
 
         // Pagination
         $jsst_query = "SELECT COUNT(DISTINCT ticket.id)
@@ -755,7 +836,7 @@ class JSSTticketModel {
                     LEFT JOIN `" . jssupportticket::$_db->prefix . "js_ticket_priorities` AS priority ON ticket.priorityid = priority.id
                     JOIN `" . jssupportticket::$_db->prefix . "js_ticket_statuses` AS status ON ticket.status = status.id
                     " . $jsst_tagfilter['join'] . "
-                    WHERE (".esc_sql($jsst_agent_conditions).") ";
+                    WHERE 1 = 1 " . $jsst_scopeclause;
         $jsst_query .= $jsst_inquery;
         $jsst_query .= $jsst_userquery;
         $jsst_query .= $jsst_tagwhere;
@@ -773,7 +854,7 @@ class JSSTticketModel {
                     LEFT JOIN `" . jssupportticket::$_db->prefix . "js_ticket_staff` AS assignstaff ON ticket.staffid = assignstaff.id
                     ".jssupportticket::$_addon_query['join']."
                     " . $jsst_tagfilter['join'] . "
-                    WHERE (".esc_sql($jsst_agent_conditions).") " . $jsst_inquery . $jsst_userquery . $jsst_tagwhere;
+                    WHERE 1 = 1 " . $jsst_scopeclause . $jsst_inquery . $jsst_userquery . $jsst_tagwhere;
         $jsst_query .= " ORDER BY " . jssupportticket::$_ordering . " LIMIT " . JSSTpagination::getOffset() . ", " . JSSTpagination::getLimit();
         jssupportticket::$jsst_data[0] = jssupportticket::$_db->get_results($jsst_query);
         do_action('jsst_reset_aadon_query');
@@ -788,43 +869,33 @@ class JSSTticketModel {
         if (jssupportticket::$_db->last_error != null) {
             JSSTincluder::getJSModel('systemerror')->addSystemError();
         }
-        // if(jssupportticket::$_config['count_on_myticket'] == 1){
-            $jsst_query = "SELECT COUNT(ticket.id)
-                        FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` AS ticket
-                        LEFT JOIN `" . jssupportticket::$_db->prefix . "js_ticket_departments` AS department ON ticket.departmentid = department.id
-                        LEFT JOIN `" . jssupportticket::$_db->prefix . "js_ticket_priorities` AS priority ON ticket.priorityid = priority.id
-                        WHERE (".esc_sql($jsst_agent_conditions).") AND (ticket.status != 5 AND ticket.status !=6) ".$jsst_userquery;
-            jssupportticket::$jsst_data['count']['openticket'] = jssupportticket::$_db->get_var($jsst_query);
+        /* The tab numbers, in one cached pass instead of five scans.
+           This used to be five COUNT queries, each joining departments and
+           priorities that none of them filtered on, run on every page of the
+           queue and every tab click - five scans of the ticket table to draw a
+           row of numbers, and slower exactly as a help desk succeeds. The
+           engine counts every tab in one pass and keeps the answer until
+           something actually happens to a ticket.
 
-            $jsst_query = "SELECT COUNT(ticket.id)
-                        FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` AS ticket
-                        LEFT JOIN `" . jssupportticket::$_db->prefix . "js_ticket_departments` AS department ON ticket.departmentid = department.id
-                        LEFT JOIN `" . jssupportticket::$_db->prefix . "js_ticket_priorities` AS priority ON ticket.priorityid = priority.id
-                        WHERE (".esc_sql($jsst_agent_conditions).") AND ticket.status = 4 ".$jsst_userquery;
-            jssupportticket::$jsst_data['count']['answeredticket'] = jssupportticket::$_db->get_var($jsst_query);;
-
-            $jsst_query = "SELECT COUNT(ticket.id)
-                        FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` AS ticket
-                        LEFT JOIN `" . jssupportticket::$_db->prefix . "js_ticket_departments` AS department ON ticket.departmentid = department.id
-                        LEFT JOIN `" . jssupportticket::$_db->prefix . "js_ticket_priorities` AS priority ON ticket.priorityid = priority.id
-                        WHERE (".esc_sql($jsst_agent_conditions).") AND (ticket.status = 5 OR ticket.status = 6) ".$jsst_userquery;
-            jssupportticket::$jsst_data['count']['closedticket'] = jssupportticket::$_db->get_var($jsst_query);;
-
-
-            $jsst_query = "SELECT COUNT(ticket.id)
-                        FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` AS ticket
-                        LEFT JOIN `" . jssupportticket::$_db->prefix . "js_ticket_departments` AS department ON ticket.departmentid = department.id
-                        LEFT JOIN `" . jssupportticket::$_db->prefix . "js_ticket_priorities` AS priority ON ticket.priorityid = priority.id
-                        WHERE (".esc_sql($jsst_agent_conditions).") AND ticket.isoverdue = 1 AND ticket.status != 5 AND ticket.status != 6 ".$jsst_userquery;
-            jssupportticket::$jsst_data['count']['overdue'] = jssupportticket::$_db->get_var($jsst_query);
-
-            $jsst_query = "SELECT COUNT(ticket.id)
-                        FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` AS ticket
-                        LEFT JOIN `" . jssupportticket::$_db->prefix . "js_ticket_departments` AS department ON ticket.departmentid = department.id
-                        LEFT JOIN `" . jssupportticket::$_db->prefix . "js_ticket_priorities` AS priority ON ticket.priorityid = priority.id
-                        WHERE (".esc_sql($jsst_agent_conditions).")  ".$jsst_userquery;
-            jssupportticket::$jsst_data['count']['allticket'] = jssupportticket::$_db->get_var($jsst_query);
-        // }
+           The keys are the ones JSSTqueue names, which is what the tab row
+           reads now. 'overdue' is kept alongside 'overdueticket' because this
+           screen has published that spelling since long before there was a
+           canonical one, and a template or add-on still reading it should not
+           start showing a blank. (Roadmap 4.5-UX-01, 4.0-PERF-01) */
+        $jsst_countfilters = array();
+        if (is_numeric($jsst_uid) && $jsst_uid > 0) {
+            /* Counted under the same customer filter the list is under, or the
+               tabs would advertise numbers the list below cannot show. */
+            $jsst_countfilters['uid'] = (int) $jsst_uid;
+        }
+        $jsst_counts = class_exists('JSSTqueueengine')
+            ? JSSTqueueengine::counts(array('actor' => $jsst_actor, 'filters' => $jsst_countfilters))
+            : array();
+        foreach (array_keys(JSSTqueue::countClauses()) AS $jsst_countalias) {
+            jssupportticket::$jsst_data['count'][$jsst_countalias] = isset($jsst_counts[$jsst_countalias])
+                ? (int) $jsst_counts[$jsst_countalias] : 0;
+        }
+        jssupportticket::$jsst_data['count']['overdue'] = jssupportticket::$jsst_data['count']['overdueticket'];
         return;
     }
 
@@ -917,8 +988,17 @@ class JSSTticketModel {
                     jssupportticket::$jsst_data['time_taken'] = JSSTincluder::getJSModel('timetracking')->getTimeTakenByTicketId($jsst_id);
                 }
             }
-            elseif (!JSSTincluder::getObjectClass('user')->isguest())
+            elseif (!JSSTincluder::getObjectClass('user')->isguest()) {
                 jssupportticket::$jsst_data['permission_granted'] = $this->validateTicketDetailForUser($jsst_id);
+                /* A company supervisor reading a colleague's ticket: shown, but
+                   read-only - the template hides reply, close and reopen, and
+                   the actions themselves still check the owner. */
+                if (!jssupportticket::$jsst_data['permission_granted'] && $this->supervisorReadsTicket($jsst_id)) {
+                    unset(jssupportticket::$jsst_data['error_message']);
+                    jssupportticket::$jsst_data['permission_granted'] = true;
+                    jssupportticket::$jsst_data['company_readonly'] = true;
+                }
+            }
             else
                 jssupportticket::$jsst_data['permission_granted'] = $this->validateTicketDetailForVisitor($jsst_id);
         }
@@ -1187,6 +1267,27 @@ class JSSTticketModel {
             }
         }
 
+        /* The last word on capacity, and the only one that is not a number in
+           the settings table: quotas by plan, product, customer or company,
+           with periods, warnings and per-customer overrides. Core asks and does
+           not answer - a desk with nothing listening is validated exactly as it
+           was. A listener refuses by returning the sentence the customer should
+           be shown, so the reason a ticket was turned away is written once, by
+           whoever knows it. (Roadmap 5.5-COM-05) */
+        $jsst_allowed = apply_filters('jsst_ticket_allowed', true, $jsst_emailaddress, array(
+            'productid'   => (int) JSSTrequest::getVar('productid', 'post', 0),
+            'departmentid'=> (int) JSSTrequest::getVar('departmentid', 'post', 0),
+            'helptopicid' => (int) JSSTrequest::getVar('helptopicid', 'post', 0),
+        ));
+        if ($jsst_allowed !== true) {
+            JSSTmessage::setMessage(
+                is_string($jsst_allowed) && $jsst_allowed !== ''
+                    ? esc_html($jsst_allowed)
+                    : esc_html(__('This account cannot open another ticket at the moment.', 'js-support-ticket')),
+                'error');
+            return false;
+        }
+
         return true;
     }
 
@@ -1229,15 +1330,12 @@ class JSSTticketModel {
             return false;
         }
 
-        if (isset($jsst_data['email'])) {
-            $jsst_checkduplicatetk = $this->checkIsTicketDuplicate($jsst_data['subject'],$jsst_data['email']);
-            if(!$jsst_checkduplicatetk){
-                // Previously this returned false with no message, so the form
-                // came back blank and the customer had no idea why.
-                JSSTmessage::setMessage(esc_html(__('That ticket looks like a duplicate of one you just submitted. Please check your tickets before sending it again.', 'js-support-ticket')), 'error');
-                return false;
-            }
-        }
+        /* Duplicate submissions are caught just before the row is written, by
+           JSSTsubmitguard - see there. The old check that stood here (same
+           email and subject within 15 seconds) missed a retry after 15 seconds
+           and two requests arriving together, and refused an EDIT made in the
+           first 15 seconds as a "duplicate". checkIsTicketDuplicate() stays for
+           anything outside that still calls it. */
         // Topic form rules. Ordered deliberately: an explicit choice wins, then
         // the topic fills what was left blank, and only then does department
         // auto-assign have anything to do. Running server-side means a ticket
@@ -1279,14 +1377,16 @@ class JSSTticketModel {
             }
         }
 
-        //paid support validation
-        if(in_array('paidsupport', jssupportticket::$_active_addons) && class_exists('WooCommerce')){
-            //ignore if admin or agent or visitor
+        /* The purchase a customer picked, linked to the ticket if it is really
+           theirs. Whether they may open the ticket at all is not decided here:
+           that is the support credits check on jsst_ticket_allowed above, which
+           the Paid Support screen's "require" switch turns on and off - one
+           gate, for guests and signed-in customers alike. */
+        if(in_array('paidsupport', jssupportticket::$_active_addons) && class_exists('WooCommerce') && !empty($jsst_data['paidsupportid'])){
             if(!JSSTincluder::getObjectClass('user')->isguest() && !is_admin() && !(in_array('agent',jssupportticket::$_active_addons) && JSSTincluder::getJSModel('agent')->isUserStaff())){
                 $jsst_paidsupport = JSSTincluder::getJSModel('paidsupport')->getPaidSupportList(JSSTincluder::getObjectClass('user')->wpuid(),$jsst_data['paidsupportid']);
                 if(empty($jsst_paidsupport)){
-                    JSSTmessage::setMessage(esc_html(__('Please select paid support item', 'js-support-ticket')), 'error');
-                    return false;
+                    unset($jsst_paidsupport);
                 }
             }
         }
@@ -1376,9 +1476,30 @@ class JSSTticketModel {
                 JSSTmessage::setMessage(esc_html(__('Invalid attachment folder', 'js-support-ticket')), 'error');
                 return false;
             }
-            if( $jsst_row->hash != $this->generateHash($jsst_data['id']) ){
+            /* SECURITY (reported 28 September 2026, CVSS 5.4): who may edit.
+               This branch used to authorise nothing - the owner id above was
+               read only to be written back, and the one guard was the hash
+               below, which is computed from the ticket id with no secret, so
+               anyone who knew an id passed it. Any signed-in Subscriber could
+               rewrite any ticket: subject, message, status, and the customer's
+               name, email and phone.
+               Editing a ticket is TICKET_EDIT: administrators, and agents whose
+               role and per-agent grants include "Edit Ticket" on a ticket in
+               their scope. Customers and guests never edit a ticket (their form
+               only ever creates one). Automations running asSystem() pass. */
+            $jsst_may_edit = JSSTcapability::assert(JSSTcapability::TICKET_EDIT, array('ticket' => (int) $jsst_data['id']));
+            if (true !== $jsst_may_edit) {
+                JSSTmessage::setMessage(esc_html(__('You are not allowed to edit this ticket.', 'js-support-ticket')), 'error');
+                return false;
+            }
+            if( !hash_equals((string) $this->generateHash($jsst_data['id']), (string) $jsst_row->hash) ){
                 return false;
             }//end
+            /* What identifies a ticket to its customer is never taken from a
+               form: the tracking id and the token are how a guest proves who
+               they are (see getTokenByEmailAndTrackingId), and an edit that
+               could set them could hand the ticket to whoever chose them. */
+            unset($jsst_data['ticketid'], $jsst_data['token'], $jsst_data['hash'], $jsst_data['customticketno']);
         } else {
             $jsst_idresult = $this->getRandomTicketId();
             $jsst_data['ticketid'] = $jsst_idresult['ticketid'];
@@ -1426,6 +1547,22 @@ class JSSTticketModel {
             return false;
         }
         $jsst_data = jssupportticket::JSST_sanitizeData($jsst_data); // JSST_sanitizeData() function uses wordpress santize functions
+        /* Everything the form itself insists on, asked of the server rather
+           than of the browser. Until now a required custom field was enforced
+           by the page's own validator and nowhere else, so a form posted with
+           JavaScript off - or by anything that is not a browser - saved with
+           every one of them empty and said nothing.
+
+           A filter rather than a call so that nothing in this model depends on
+           the forms class being loaded, and so an add-on can add a rule of its
+           own the same way. It is passed the whole submission after
+           sanitisation, custom answers included, and returns a sentence to
+           refuse with or an empty string to allow. (Roadmap 5.0-FORM-01) */
+        $jsst_refusal = apply_filters('jsst_validate_ticket_form', '', $jsst_data);
+        if (is_string($jsst_refusal) && $jsst_refusal !== '') {
+            JSSTmessage::setMessage(esc_html($jsst_refusal), 'error');
+            return false;
+        }
         if(isset($jsst_envatoData)){
             $jsst_data['envatodata'] = $jsst_envatoData;
         }
@@ -1505,6 +1642,30 @@ class JSSTticketModel {
         if ($jsst_isedit == true) {
             $jsst_fields_before = $this->getTimelineFieldValues($jsst_data['id']);
         }
+        /* One ticket per submission (JSSTsubmitguard): the same person sending
+           the same subject and message again within ten minutes - a double
+           click, a slow upload resent, a refreshed confirmation page - gets
+           the ticket the first request created, not a second one. New tickets
+           only; an edit is never a duplicate. */
+        $jsst_guardkey = '';
+        if ($jsst_isedit != true) {
+            include_once JSST_PLUGIN_PATH . 'includes/classes/submitguard.php';
+            $jsst_guardkey = JSSTsubmitguard::key('ticket', array(
+                (int) $jsst_data['uid'],
+                isset($jsst_data['email']) ? $jsst_data['email'] : '',
+                $jsst_data['subject'],
+                isset($jsst_data['message']) ? $jsst_data['message'] : '',
+            ));
+            $jsst_claim = JSSTsubmitguard::claim($jsst_guardkey);
+            if (true !== $jsst_claim) {
+                if ((int) $jsst_claim > 0) {
+                    JSSTmessage::setMessage(esc_html(__('We already received this ticket, so it was not created twice.', 'js-support-ticket')), 'updated');
+                    return (int) $jsst_claim;
+                }
+                JSSTmessage::setMessage(esc_html(__('This ticket is still being submitted. Please wait a moment and check your tickets before sending it again.', 'js-support-ticket')), 'error');
+                return false;
+            }
+        }
         $jsst_row = JSSTincluder::getJSTable('tickets');
         // this line make problem with custom field data (latin words)
         //$jsst_data = JSSTincluder::getJSmodel('jssupportticket')->stripslashesFull($jsst_data);// remove slashes with quotes.
@@ -1514,6 +1675,13 @@ class JSSTticketModel {
         }
         if (!$jsst_row->store()) {
             $jsst_error = 1;
+        }
+        if ('' !== $jsst_guardkey) {
+            if ($jsst_error == 1) {
+                JSSTsubmitguard::release($jsst_guardkey);
+            } else {
+                JSSTsubmitguard::done($jsst_guardkey, (int) $jsst_row->id);
+            }
         }
 
         if ($jsst_error == 1) {
@@ -1688,6 +1856,42 @@ class JSSTticketModel {
         if ($jsst_error != 1) {
             do_action('jsst-agentautoassign', $jsst_ticketid);
         }
+        /* The ticket exists, so say so. (Roadmap 4.5-ARCH-03)
+         *
+         * Emitted here rather than in JSSTticketservice::create(), which is
+         * where it used to be and where only some tickets go. The service is
+         * how the REST API, webhooks and recurring tickets create one; the
+         * form, e-mail piping and live chat all call this method directly, so
+         * the event that everything else in the product is built on was never
+         * announced for the tickets a desk actually receives.
+         *
+         * What that cost, before this line: SLA clocks are started by
+         * JSSTsla::onEvent() on this event and by nothing else, so a ticket
+         * raised on the form got no clock until somebody happened to change
+         * its priority or department. Assignment (JSSTrouting) and every
+         * workflow rule triggered on `ticket.created` had the same blind spot,
+         * which is why the auto-assign add-on had to keep its own hook on the
+         * line above rather than being a rule like everything else.
+         *
+         * The service reads what was emitted here rather than emitting again -
+         * one ticket, one event, whichever door it came through.
+         */
+        if ($jsst_error != 1 && class_exists('JSSTevents')) {
+            $jsst_fresh = jssupportticket::$_db->get_row(jssupportticket::$_db->prepare(
+                'SELECT ticketid, subject, departmentid, priorityid, uid, email
+                   FROM `' . jssupportticket::$_db->prefix . 'js_ticket_tickets` WHERE id = %d', $jsst_ticketid));
+            JSSTevents::emit(JSSTevents::TICKET_CREATED, array(
+                'ticket_id'    => (int) $jsst_ticketid,
+                'ticketid'     => $jsst_fresh ? $jsst_fresh->ticketid : '',
+                'subject'      => $jsst_fresh ? $jsst_fresh->subject : '',
+                'departmentid' => $jsst_fresh ? (int) $jsst_fresh->departmentid : 0,
+                'priorityid'   => $jsst_fresh ? (int) $jsst_fresh->priorityid : 0,
+                'uid'          => $jsst_fresh ? (int) $jsst_fresh->uid : 0,
+                'email'        => $jsst_fresh ? $jsst_fresh->email : '',
+                'source'       => isset(jssupportticket::$jsst_data['jsst_create_source'])
+                    ? jssupportticket::$jsst_data['jsst_create_source'] : '',
+            ));
+        }
         // 0 when the insert failed, so the caller can tell success from failure
         // without a sentinel value. (Roadmap 3.2-CORE-03)
         return $jsst_error == 1 ? false : $jsst_ticketid;
@@ -1736,6 +1940,11 @@ class JSSTticketModel {
             if ($jsst_row->delete($jsst_id)) {
                 $jsst_messagetype = esc_html(__('Successfully', 'js-support-ticket'));
                 JSSTmessage::setMessage(esc_html(__('Ticket has been deleted', 'js-support-ticket')), 'updated');
+                /* A deleted ticket was never answered, so its support credit
+                   goes back to the customer. */
+                if (class_exists('JSSTsupportcredits')) {
+                    JSSTsupportcredits::refundTicket($jsst_id, esc_html__('Given back: ticket deleted.', 'js-support-ticket'));
+                }
             } else {
                 JSSTincluder::getJSModel('systemerror')->addSystemError(); // if there is an error add it to system errorrs
                 JSSTmessage::setMessage(esc_html(__('Ticket has not been deleted', 'js-support-ticket')), 'error');
@@ -1793,6 +2002,11 @@ class JSSTticketModel {
         //$this->removeTicketAttachmentsByTicketid($jsst_id);
             $jsst_messagetype = esc_html(__('Successfully', 'js-support-ticket'));
             JSSTmessage::setMessage(esc_html(__('Ticket has been deleted', 'js-support-ticket')), 'updated');
+            /* A deleted ticket was never answered, so its support credit
+               goes back to the customer. */
+            if (class_exists('JSSTsupportcredits')) {
+                JSSTsupportcredits::refundTicket($jsst_id, esc_html__('Given back: ticket deleted.', 'js-support-ticket'));
+            }
         } else {
             JSSTincluder::getJSModel('systemerror')->addSystemError(); // if there is an error add it to system errorrs
             JSSTmessage::setMessage(esc_html(__('Ticket has not been deleted', 'js-support-ticket')), 'error');
@@ -2362,15 +2576,34 @@ class JSSTticketModel {
         $jsst_ticketid = $jsst_data['ticketid'];
         if (!is_numeric($jsst_ticketid) || !is_numeric($jsst_data['staffid']))
             return false;
-        if ( in_array('agent',jssupportticket::$_active_addons) && JSSTincluder::getJSModel('agent')->isUserStaff()) {
-            $jsst_allow = JSSTincluder::getJSModel('userpermissions')->checkPermissionGrantedForTask('Assign Ticket To Agent');
-            if ($jsst_allow != true) {
+        /* The desk assigning on its own behalf is not a person, and these two
+           checks are about a person. (Roadmap 4.5-ARCH-01)
+         *
+         * Both ask what the *current user* may do. On the path that matters
+         * most for automatic assignment there is no current user at all: a
+         * customer submits a ticket from the portal, the rule fires, and the
+         * desk gives it to an agent. Asked of a guest, `canChangeTicketState()`
+         * is false, so the assignment was refused and the ticket stayed
+         * unassigned - silently, because the refusal is a notice nobody sees
+         * on a form submission. That was as true of the Agent Auto Assign
+         * add-on as of a workflow rule: both call this method.
+         *
+         * `asSystem()` is the capability service's answer to exactly this, and
+         * the guard that let the automation get here has already been passed.
+         * Only automation can be inside it: nothing sets it for a request
+         * driven by a human. */
+        $jsst_bysystem = class_exists('JSSTcapability') && JSSTcapability::isSystem();
+        if (!$jsst_bysystem) {
+            if ( in_array('agent',jssupportticket::$_active_addons) && JSSTincluder::getJSModel('agent')->isUserStaff()) {
+                $jsst_allow = JSSTincluder::getJSModel('userpermissions')->checkPermissionGrantedForTask('Assign Ticket To Agent');
+                if ($jsst_allow != true) {
+                    JSSTmessage::setMessage(esc_html(__('You are not allowed', 'js-support-ticket')), 'error', 'agent-permissions');
+                    return;
+                }
+            } elseif (!JSSTroles::canChangeTicketState()) {
                 JSSTmessage::setMessage(esc_html(__('You are not allowed', 'js-support-ticket')), 'error', 'agent-permissions');
                 return;
             }
-        } elseif (!JSSTroles::canChangeTicketState()) {
-            JSSTmessage::setMessage(esc_html(__('You are not allowed', 'js-support-ticket')), 'error', 'agent-permissions');
-            return;
         }
         $jsst_sendEmail = true;
         $jsst_date = date_i18n('Y-m-d H:i:s');
@@ -2795,7 +3028,14 @@ class JSSTticketModel {
         }else{
             $jsst_intrval_string = " DATE_ADD(closed,INTERVAL " .(int) jssupportticket::$_config['feedback_email_delay'] . " HOUR) < '".date_i18n("Y-m-d H:i:s")."'";
         }
-        // select closed ticket
+        /* Closed, and 5 alone on purpose - this is the one place in the product
+           where 6 must NOT be treated as closed, so a sweep that adds it here
+           for consistency is making it wrong. 6 is Close Due To Merge: that
+           ticket was not resolved, it was folded into another one that is
+           probably still open, and asking its customer how satisfied they are
+           with the outcome asks about an outcome that has not happened. They
+           get the survey for the ticket it was merged into, when that one
+           closes. (Roadmap 5.0-ANA-05) */
         $jsst_query = "SELECT id FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE ".$jsst_intrval_string." AND status = 5 AND (feedbackemail != 1  OR feedbackemail IS NULL) AND closed IS NOT NULL";
         $jsst_ticketids = jssupportticket::$_db->get_results($jsst_query);
         if(!empty($jsst_ticketids)){
@@ -2826,14 +3066,39 @@ class JSSTticketModel {
         return ;
     }
 
-    function getTicketidForVisitor($jsst_token) {
-
+    /**
+     * What a visitor's token says, or false if it says nothing we can read.
+     *
+     * A token arrives from a link in an e-mail, which means it also arrives
+     * mistyped, truncated, line-wrapped by a mail client, or years old. For any
+     * of those decrypt() answers null or an empty string, json_decode() of that
+     * is null, and reading a key straight off it warned three times and then
+     * looked a ticket up with two empty strings. Both callers want the same
+     * thing from a token - a decoded payload or a clean no - so they ask here
+     * rather than each deciding for itself.
+     */
+    private function readVisitorToken($jsst_token) {
+        if (!is_string($jsst_token) || $jsst_token === '') {
+            return false;
+        }
         include_once JSST_PLUGIN_PATH . 'includes/encoder.php';
         $jsst_encoder = new JSSTEncoder();
         $jsst_decryptedtext = $jsst_encoder->decrypt($jsst_token);
+        if (!is_string($jsst_decryptedtext) || $jsst_decryptedtext === '') {
+            return false;
+        }
         $jsst_array = json_decode($jsst_decryptedtext, true);
-        $jsst_emailaddress = $jsst_array['emailaddress'];
-        $jsst_trackingid = $jsst_array['trackingid'];
+        return is_array($jsst_array) ? $jsst_array : false;
+    }
+
+    function getTicketidForVisitor($jsst_token) {
+
+        $jsst_array = $this->readVisitorToken($jsst_token);
+        if ($jsst_array === false) {
+            return false;
+        }
+        $jsst_emailaddress = isset($jsst_array['emailaddress']) ? $jsst_array['emailaddress'] : '';
+        $jsst_trackingid = isset($jsst_array['trackingid']) ? $jsst_array['trackingid'] : '';
         if (isset($jsst_array['sitelink']) && $jsst_array['sitelink'] != '') {
             $jsst_siteLink = $jsst_array['sitelink'];
             include_once JSST_PLUGIN_PATH . 'includes/encoder.php';
@@ -2854,12 +3119,14 @@ class JSSTticketModel {
     }
 
     function getTicketidForVisitorUsingToken($jsst_token) {
-        include_once JSST_PLUGIN_PATH . 'includes/encoder.php';
-        $jsst_encoder = new JSSTEncoder();
-        $jsst_decryptedtext = $jsst_encoder->decrypt($jsst_token);
-        $jsst_array = json_decode($jsst_decryptedtext, true);
-        $jsst_token = $jsst_array['token'];
+        $jsst_array = $this->readVisitorToken($jsst_token);
+        if ($jsst_array === false) {
+            return false;
+        }
+        $jsst_token = isset($jsst_array['token']) ? $jsst_array['token'] : '';
         if (isset($jsst_array['sitelink']) && $jsst_array['sitelink'] != '') {
+            include_once JSST_PLUGIN_PATH . 'includes/encoder.php';
+            $jsst_encoder = new JSSTEncoder();
             $jsst_siteLink = $jsst_array['sitelink'];
             $jsst_savedSiteLink = get_option('jsst_encripted_site_link');
             $jsst_decryptedSiteLink = $jsst_encoder->decrypt($jsst_siteLink);
@@ -2889,6 +3156,26 @@ class JSSTticketModel {
         return $jsst_token;
     }
 
+    /**
+     * Is this ticket outside what the signed-in agent may $jsst_action?
+     *
+     * Only answers for an agent a visibility rule governs (Agents & Teams:
+     * the agent's role or their own "Who can see what" record). For them the
+     * capability service decides, the same one that builds their queue, so a
+     * ticket missing from the queue cannot be opened, answered or noted by
+     * typing its id into the address bar. Everybody else gets false and keeps
+     * the checks they had.
+     */
+    function isOutOfScopeForAgent($jsst_ticketid, $jsst_action = 'ticket.view') {
+        if (!class_exists('JSSTcapability') || !class_exists('JSSTvisibility') || !is_numeric($jsst_ticketid)) {
+            return false;
+        }
+        if (!JSSTvisibility::governs(JSSTcapability::actor())) {
+            return false;
+        }
+        return !JSSTcapability::can($jsst_action, array('ticket' => (int) $jsst_ticketid));
+    }
+
     function validateTicketDetailForStaff($jsst_ticketid) {
         if(!in_array('agent', jssupportticket::$_active_addons)){
             return false;
@@ -2898,6 +3185,34 @@ class JSSTticketModel {
         $jsst_allowed = JSSTincluder::getJSModel('userpermissions')->checkPermissionGrantedForTask('All Tickets');
         if($jsst_allowed == true){
             return true;
+        }
+        /* An agent whose visibility is narrowed ("only tickets assigned to
+           them", "their team's") is answered by that rule, not by the
+           department check below, which would otherwise open every ticket in
+           their departments. */
+        if (class_exists('JSSTvisibility') && class_exists('JSSTcapability')
+                && JSSTvisibility::governs(JSSTcapability::actor())) {
+            return !$this->isOutOfScopeForAgent($jsst_ticketid, JSSTcapability::TICKET_VIEW);
+        }
+        /* A ticket somebody deliberately put this agent on. (Roadmap 4.5-FE-08)
+
+           This is the THIRD gate that has to know the same fact, and the one
+           that actually decides the wp-admin ticket page: the queue clause and
+           JSSTcapability's per-ticket check are the other two. Observed with
+           all three out of step - agent04 was notified they had been asked to
+           work a ticket, the link opened this page, and this hand-written
+           check (All Tickets, then the department ACL, then the assignment)
+           had never heard of collaborators and answered "No Record Found".
+
+           Asked through JSSTcollab so the answer is the same one the other two
+           give; `isInvited()` counts only `source = manual`, so an automatic
+           follow can still never become a grant. */
+        if (class_exists('JSSTcollab')) {
+            $jsst_actor = JSSTcapability::actor();
+            if (!empty($jsst_actor['staffid'])
+                    && JSSTcollab::isInvited($jsst_ticketid, $jsst_actor['staffid'])) {
+                return true;
+            }
         }
         // check in assign department
         $jsst_c_uid = JSSTincluder::getObjectClass('user')->uid();
@@ -2942,6 +3257,37 @@ class JSSTticketModel {
         }else {
             return false;
         }
+    }
+
+    /**
+     * May this signed-in customer *read* the ticket? Their own, or - for a
+     * company supervisor - a colleague's. Only for read paths: replying,
+     * closing and reopening keep using validateTicketDetailForUser().
+     * (Roadmap 5.5-COM-06)
+     */
+    function validateTicketReadForUser($jsst_id) {
+        if ($this->validateTicketDetailForUser($jsst_id)) {
+            return true;
+        }
+        if ($this->supervisorReadsTicket($jsst_id)) {
+            unset(jssupportticket::$jsst_data['error_message']);
+            return true;
+        }
+        return false;
+    }
+
+    /** Is the current user reading this ticket as their company's supervisor? */
+    function supervisorReadsTicket($jsst_id) {
+        if (!is_numeric($jsst_id) || !class_exists('JSSTcompanies')) {
+            return false;
+        }
+        $jsst_actor = JSSTcapability::actor();
+        if (empty($jsst_actor['email'])) {
+            return false;
+        }
+        $jsst_email = jssupportticket::$_db->get_var(jssupportticket::$_db->prepare(
+            "SELECT email FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE id = %d", $jsst_id));
+        return ($jsst_email !== null && JSSTcompanies::supervisorReads($jsst_actor['email'], $jsst_email));
     }
 
     function validateTicketDetailForVisitor($jsst_id) {
@@ -2994,7 +3340,13 @@ class JSSTticketModel {
                 break;
             case 'closeticket':
                 if(!is_numeric($jsst_id)) return false;
-                $jsst_result = jssupportticket::$_db->get_var(jssupportticket::$_db->prepare('SELECT COUNT(id) FROM `' . jssupportticket::$_db->prefix . 'js_ticket_tickets` WHERE id = %d AND status = 5', $jsst_id));
+                /* Both closed statuses. This asked about 5 alone, so a ticket
+                   closed by a merge answered "not closed yet" and was closed
+                   again - which overwrites status 6 with 5, losing the record
+                   that it was closed by a merge rather than by a person, and
+                   sends the customer a second closing e-mail for a ticket that
+                   closed when it was merged. (Roadmap 5.0-ANA-05) */
+                $jsst_result = jssupportticket::$_db->get_var(jssupportticket::$_db->prepare('SELECT COUNT(id) FROM `' . jssupportticket::$_db->prefix . 'js_ticket_tickets` WHERE id = %d AND (status = 5 OR status = 6)', $jsst_id));
                 break;
             case 'banemail':
                 // Read straight from the table; see getTicketsForAdmin().
@@ -3106,17 +3458,22 @@ class JSSTticketModel {
         return $jsst_attachments;
     }
 
+    /**
+     * Last month's totals for the dashboard. Closed is 5 and 6 here too, so a
+     * ticket closed by a merge is not also counted as answered, overdue and
+     * pending. (Roadmap 5.0-ANA-05)
+     */
     function getTotalStatsForDashboard(){
         $jsst_curdate = date_i18n('Y-m-d');
         $jsst_fromdate = date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime("now -1 month"));
 
         $jsst_query = "SELECT COUNT(id) FROM `".jssupportticket::$_db->prefix."js_ticket_tickets` WHERE status = 1 AND (lastreply IS NULL OR lastreply = '0000-00-00 00:00:00') AND date(created) >= %s AND date(created) <= %s";
         $jsst_result['open'] = jssupportticket::$_db->get_var(jssupportticket::$_db->prepare($jsst_query, $jsst_fromdate, $jsst_curdate));
-        $jsst_query = "SELECT COUNT(id) FROM `".jssupportticket::$_db->prefix."js_ticket_tickets` WHERE isanswered = 1 AND status != 5 AND status != 1 AND date(created) >= %s AND date(created) <= %s";
+        $jsst_query = "SELECT COUNT(id) FROM `".jssupportticket::$_db->prefix."js_ticket_tickets` WHERE isanswered = 1 AND status != 5 AND status != 6 AND status != 1 AND date(created) >= %s AND date(created) <= %s";
         $jsst_result['answered'] = jssupportticket::$_db->get_var(jssupportticket::$_db->prepare($jsst_query, $jsst_fromdate, $jsst_curdate));
-        $jsst_query = "SELECT COUNT(id) FROM `".jssupportticket::$_db->prefix."js_ticket_tickets` WHERE isoverdue = 1 AND status != 5 AND date(created) >= %s AND date(created) <= %s";
+        $jsst_query = "SELECT COUNT(id) FROM `".jssupportticket::$_db->prefix."js_ticket_tickets` WHERE isoverdue = 1 AND status != 5 AND status != 6 AND date(created) >= %s AND date(created) <= %s";
         $jsst_result['overdue'] = jssupportticket::$_db->get_var(jssupportticket::$_db->prepare($jsst_query, $jsst_fromdate, $jsst_curdate));
-        $jsst_query = "SELECT COUNT(id) FROM `".jssupportticket::$_db->prefix."js_ticket_tickets` WHERE isanswered != 1 AND status != 5 AND (lastreply IS NOT NULL AND lastreply != '0000-00-00 00:00:00') AND date(created) >= %s AND date(created) <= %s";
+        $jsst_query = "SELECT COUNT(id) FROM `".jssupportticket::$_db->prefix."js_ticket_tickets` WHERE isanswered != 1 AND status != 5 AND status != 6 AND (lastreply IS NOT NULL AND lastreply != '0000-00-00 00:00:00') AND date(created) >= %s AND date(created) <= %s";
         $jsst_result['pending'] = jssupportticket::$_db->get_var(jssupportticket::$_db->prepare($jsst_query, $jsst_fromdate, $jsst_curdate));
 
         return $jsst_result;
@@ -3240,7 +3597,7 @@ class JSSTticketModel {
     function getAdminTicketSearchFormData($jsst_search_userfields){
         $jsst_nonce = JSSTrequest::getVar('_wpnonce');
         if (! wp_verify_nonce( $jsst_nonce, 'my-ticket') ) {
-            die( 'Security check Failed' );
+            die( esc_html__( 'Security check Failed', 'js-support-ticket' ) );
         }
         $jsst_search_array = array();
         $jsst_search_userfields = JSSTincluder::getObjectClass('customfields')->adminFieldsForSearch(1);
@@ -3256,6 +3613,8 @@ class JSSTticketModel {
         $jsst_search_array['priority'] = jssupportticketphplib::JSST_trim(JSSTrequest::getVar('priority' , ''));
         $jsst_search_array['departmentid'] = jssupportticketphplib::JSST_trim(JSSTrequest::getVar('departmentid' , ''));
         $jsst_search_array['tagid'] = jssupportticketphplib::JSST_trim(JSSTrequest::getVar('tagid' , '')); // Roadmap 4.0-CORE-17
+        $jsst_search_array['teamid'] = jssupportticketphplib::JSST_trim(JSSTrequest::getVar('teamid' , '')); // Roadmap 4.5-FE-05
+        $jsst_search_array['companyid'] = jssupportticketphplib::JSST_trim(JSSTrequest::getVar('companyid' , '')); // Roadmap 5.5-COM-06
         $jsst_search_array['helptopicid'] = jssupportticketphplib::JSST_trim(JSSTrequest::getVar('helptopicid' , ''));
         $jsst_search_array['productid'] = jssupportticketphplib::JSST_trim(JSSTrequest::getVar('productid' , ''));
         $jsst_search_array['list'] = jssupportticketphplib::JSST_trim(JSSTrequest::getVar('list', null ,1));
@@ -3270,50 +3629,19 @@ class JSSTticketModel {
             }
         }
 
-        // A saved view replaces the filters rather than adding to them.
-        // (Roadmap 4.0-CORE-18)
-        //
-        // Choosing a view is one control on the same form as every other filter,
-        // so the request carries both what the agent picked and whatever the
-        // form happened to still be showing. The view is what they asked for, so
-        // it wins outright: every filter it does not set is cleared. Merging the
-        // two instead would mean a view showed a different queue depending on
-        // what the screen looked like when it was chosen.
-        $jsst_viewid = jssupportticketphplib::JSST_trim(JSSTrequest::getVar('viewid' , ''));
-        if ($jsst_viewid !== '' && is_numeric($jsst_viewid)) {
-            $jsst_viewfilters = JSSTqueue::getViewFilters($jsst_viewid);
-            if (!empty($jsst_viewfilters)) {
-                // The tab is the one exception to the view winning outright.
-                // Choosing a view clears the list field (see the script on the
-                // ticket list), so the view opens on its own tab; clicking a tab
-                // sets it, and then the tab is the newer instruction and keeps
-                // the view's other filters. Without this an agent could never
-                // look at the closed tickets inside a saved view.
-                $jsst_postedlist = jssupportticketphplib::JSST_trim(JSSTrequest::getVar('list', null, ''));
-                foreach (JSSTqueue::viewKeys() as $jsst_key) {
-                    $jsst_search_array[$jsst_key] = isset($jsst_viewfilters[$jsst_key]) ? $jsst_viewfilters[$jsst_key] : '';
-                }
-                if ($jsst_postedlist !== '') {
-                    $jsst_search_array['list'] = $jsst_postedlist;
-                }
-                // A view saved without a tab of its own opens on Open rather
-                // than on nothing.
-                if ($jsst_search_array['list'] === '') {
-                    $jsst_search_array['list'] = JSSTqueue::LIST_OPEN;
-                }
-                $jsst_search_array['viewid'] = (int) $jsst_viewid;
-            }
-        }
-        if (!isset($jsst_search_array['viewid'])) {
-            $jsst_search_array['viewid'] = '';
-        }
+        /* A saved view replaces the filters rather than adding to them, and
+           the rule for how is on JSSTqueue so that both desks apply the same
+           one. It used to be written out here, inside one of the two functions
+           that build a search state - which is why the front-end queue had no
+           saved views at all. (Roadmap 4.0-CORE-18, 4.5-UX-01) */
+        $jsst_search_array = JSSTqueue::applyView($jsst_search_array);
         return $jsst_search_array;
     }
 
     function getFrontSideTicketSearchFormData($jsst_search_userfields){
         $jsst_nonce = JSSTrequest::getVar('_wpnonce');
         if (! wp_verify_nonce( $jsst_nonce, 'my-ticket') ) {
-            die( 'Security check Failed' );
+            die( esc_html__( 'Security check Failed', 'js-support-ticket' ) );
         }$jsst_search_array = array();
         $jsst_search_userfields = JSSTincluder::getObjectClass('customfields')->userFieldsForSearch(1);
         $jsst_search_array['subject'] = jssupportticketphplib::JSST_trim(JSSTrequest::getVar('jsst-subject' , ''));
@@ -3328,6 +3656,12 @@ class JSSTticketModel {
         $jsst_search_array['priority'] = jssupportticketphplib::JSST_trim(JSSTrequest::getVar('jsst-priorityid' , ''));
         $jsst_search_array['departmentid'] = jssupportticketphplib::JSST_trim(JSSTrequest::getVar('jsst-departmentid' , ''));
         $jsst_search_array['tagid'] = jssupportticketphplib::JSST_trim(JSSTrequest::getVar('jsst-tagid' , '')); // Roadmap 4.0-CORE-17
+        /* The team queue posts a bare "teamid" from both desks. The front-end
+           form prefixes most of its fields with jsst- and this one is not,
+           because the scope descriptors name one field for both shells and a
+           descriptor that had to know which desk it was on would be back to
+           two implementations. (Roadmap 4.5-FE-05) */
+        $jsst_search_array['teamid'] = jssupportticketphplib::JSST_trim(JSSTrequest::getVar('teamid' , ''));
         $jsst_search_array['helptopicid'] = jssupportticketphplib::JSST_trim(JSSTrequest::getVar('jsst-helptopicid' , ''));
         $jsst_search_array['productid'] = jssupportticketphplib::JSST_trim(JSSTrequest::getVar('jsst-productid' , ''));
         $jsst_search_array['list'] = jssupportticketphplib::JSST_trim(JSSTrequest::getVar('list', null ,1));
@@ -3342,6 +3676,9 @@ class JSSTticketModel {
                 $jsst_search_array['jsst_ticket_custom_field'][$jsst_uf->field] = JSSTrequest::getVar($jsst_uf->field, 'post');
             }
         }
+        /* The same saved-view rule the backend queue uses, from the same
+           place. (Roadmap 4.5-UX-01) */
+        $jsst_search_array = JSSTqueue::applyView($jsst_search_array);
         return $jsst_search_array;
     }
 
@@ -3365,6 +3702,8 @@ class JSSTticketModel {
             $jsst_search_array['priority'] = $jsst_ticket_search_cookie_data['priority'];
             $jsst_search_array['departmentid'] = $jsst_ticket_search_cookie_data['departmentid'];
             $jsst_search_array['tagid'] = isset($jsst_ticket_search_cookie_data['tagid']) ? $jsst_ticket_search_cookie_data['tagid'] : null;
+            $jsst_search_array['teamid'] = isset($jsst_ticket_search_cookie_data['teamid']) ? $jsst_ticket_search_cookie_data['teamid'] : null;
+            $jsst_search_array['companyid'] = isset($jsst_ticket_search_cookie_data['companyid']) ? $jsst_ticket_search_cookie_data['companyid'] : null;
             $jsst_search_array['helptopicid'] = $jsst_ticket_search_cookie_data['helptopicid'];
             $jsst_search_array['productid'] = $jsst_ticket_search_cookie_data['productid'];
             $jsst_search_array['staffid'] = $jsst_ticket_search_cookie_data['staffid'];
@@ -3390,6 +3729,13 @@ class JSSTticketModel {
 
     function setSearchVariableForTicket($jsst_search_array,$jsst_search_userfields){
 
+        /* An inbox named in the address, applied here rather than in one of the
+           three functions that build a search state, so a link works whether
+           the state came from the form, from the cookie or from nothing at all.
+           This is what makes the desk home's "see the rest of them" links land
+           on the queue they promise. (Roadmap 4.5-FE-02) */
+        $jsst_search_array = JSSTqueue::applyScope($jsst_search_array);
+
         jssupportticket::$_search['ticket']['subject'] = isset($jsst_search_array['subject']) ? $jsst_search_array['subject'] : null;
         jssupportticket::$_search['ticket']['name'] = isset($jsst_search_array['name']) ? $jsst_search_array['name'] : null;
         jssupportticket::$_search['ticket']['phone'] = isset($jsst_search_array['phone']) ? $jsst_search_array['phone'] : null;
@@ -3403,6 +3749,8 @@ class JSSTticketModel {
         jssupportticket::$_search['ticket']['departmentid'] = isset($jsst_search_array['departmentid']) ? $jsst_search_array['departmentid'] : null;
         jssupportticket::$_search['ticket']['helptopicid'] = isset($jsst_search_array['helptopicid']) ? $jsst_search_array['helptopicid'] : null;
         jssupportticket::$_search['ticket']['tagid'] = isset($jsst_search_array['tagid']) ? $jsst_search_array['tagid'] : null;
+        jssupportticket::$_search['ticket']['teamid'] = isset($jsst_search_array['teamid']) ? $jsst_search_array['teamid'] : null;
+        jssupportticket::$_search['ticket']['companyid'] = isset($jsst_search_array['companyid']) ? $jsst_search_array['companyid'] : null;
         jssupportticket::$_search['ticket']['productid'] = isset($jsst_search_array['productid']) ? $jsst_search_array['productid'] : null;
         jssupportticket::$_search['ticket']['staffid'] = isset($jsst_search_array['staffid']) ? $jsst_search_array['staffid'] : null;
         jssupportticket::$_search['ticket']['status'] = isset($jsst_search_array['status']) ? $jsst_search_array['status'] : null;
@@ -3459,6 +3807,16 @@ class JSSTticketModel {
      *
      * Deliberately limited to the create-ticket action: it takes no input and
      * cannot be used to mint a nonce for editing an existing ticket.
+     *
+     * That last sentence was not true until 28 September 2026. saveticket()
+     * checked the nonce against the id in the QUERY STRING and edited the id in
+     * the POST body, so this nonce plus "?id=" edited any ticket (security
+     * report, CVSS 5.4). It now holds for two independent reasons: the nonce is
+     * checked against the id actually written, so an edit needs
+     * 'save-ticket-<id>', which only the edit form of a permitted user is given;
+     * and storeTickets() refuses an edit to anyone without TICKET_EDIT whatever
+     * nonce they hold. Staying on nopriv is safe on that basis - guests on a
+     * cached page need it to create a ticket.
      */
     function refreshTicketFormNonce(){
         return wp_create_nonce('save-ticket-');
@@ -3468,7 +3826,7 @@ class JSSTticketModel {
         $jsst_field = JSSTrequest::getVar('field');
         $jsst_nonce = JSSTrequest::getVar('_wpnonce');
         if (! wp_verify_nonce( $jsst_nonce, 'is-field-required-'.$jsst_field) ) {
-            die( 'Security check Failed' );
+            die( esc_html__( 'Security check Failed', 'js-support-ticket' ) );
         }
         $jsst_query = "SELECT required  FROM " . jssupportticket::$_db->prefix . "js_ticket_fieldsordering WHERE  field =%s";
         return jssupportticket::$_db->get_var(jssupportticket::$_db->prepare($jsst_query, $jsst_field));
@@ -3490,7 +3848,16 @@ class JSSTticketModel {
     function checkAIReplyTicketsBySubject() {
         $jsst_nonce = JSSTrequest::getVar('_wpnonce');
         if (!wp_verify_nonce($jsst_nonce, 'check-smart-reply')) {
-            die('Security check Failed');
+            die(esc_html__( 'Security check Failed', 'js-support-ticket' ));
+        }
+
+        /* The on-site lane's door on the ajax side. (Roadmap 4.0-AI-04) The
+           templates already hide these controls when the lane is shut, but an
+           endpoint that is only guarded by the markup that calls it is not
+           guarded - the URL survives in a bookmark, a stale tab and anybody's
+           browser history. */
+        if (class_exists('JSSTaipolicy') && !JSSTaipolicy::allows(JSSTaipolicy::LANE_ONSITE)) {
+            wp_send_json_error(array('message' => esc_html(__('Suggestions from past replies are switched off for this site.', 'js-support-ticket'))));
         }
 
         // --- SECURITY & PERMISSION FIX ---
@@ -3521,6 +3888,22 @@ class JSSTticketModel {
         // Explicitly cast to integer to kill SQL Injection payloads
         $jsst_id = absint(JSSTrequest::getVar('ticketId')); 
         $jsst_subject = sanitize_text_field(JSSTrequest::getVar('ticketSubject'));
+
+        /* What the agent marked, and what they told it to leave alone.
+           (Roadmap 6.0-AI-01)
+         *
+         * Every reply and every ticket carries `aireplymode` - 0 default, 1
+         * enable, 2 disable - set from the segmented control on the ticket
+         * screen. Until this was ported the control saved and nothing read it:
+         * the filter this screen sends ("All Tickets" / "Enable Tickets") was
+         * posted and dropped, and a reply an agent had explicitly disabled was
+         * still offered as a suggestion. The clauses below are the add-on's
+         * own, brought across when AI Powered Reply became part of free core -
+         * the search moved and this did not. */
+        $jsst_filter = sanitize_text_field((string) JSSTrequest::getVar('filter'));
+        $jsst_modeclause = ($jsst_filter === 'marked')
+            ? ' AND t.aireplymode = 1 '
+            : ' AND (t.aireplymode != 2 OR t.aireplymode IS NULL) ';
 
         $jsst_agentquery = "";
         if (in_array('agent', jssupportticket::$_active_addons) && JSSTincluder::getJSModel('agent')->isUserStaff()) {
@@ -3572,17 +3955,20 @@ class JSSTticketModel {
                     t.subject,
                     t.message,
                     t.created,
-                    3 * IFNULL(MATCH(t.subject) AGAINST(%s IN NATURAL LANGUAGE MODE), 0) AS subject_score,
-                    1 * IFNULL(MATCH(t.message) AGAINST(%s IN NATURAL LANGUAGE MODE), 0) AS message_score,
+                    3 * " . self::finiteMatch('t.subject') . " AS subject_score,
+                    1 * " . self::finiteMatch('t.message') . " AS message_score,
                     t.subject LIKE %s AS is_exact_subject_match,
                     t.message LIKE %s AS is_exact_message_match
                 FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` t
                 WHERE t.id != %d
-                " . $jsst_agentquery . "
+                " . $jsst_modeclause . $jsst_agentquery . "
             ) AS t_scores
             HAVING total_relevance > %f
             ORDER BY total_relevance DESC LIMIT 50";
-        $jsst_query = jssupportticket::$_db->prepare($jsst_query, $jsst_subject, $jsst_message, '%'.$jsst_subject.'%', '%'.$jsst_message.'%', $jsst_id, $jsst_min_relevance);
+        $jsst_query = jssupportticket::$_db->prepare($jsst_query,
+            $jsst_subject, $jsst_subject, $jsst_subject,    // finiteMatch() uses its term three times
+            $jsst_message, $jsst_message, $jsst_message,
+            '%'.$jsst_subject.'%', '%'.$jsst_message.'%', $jsst_id, $jsst_min_relevance);
 
         $jsst_tickets = jssupportticket::$_db->get_results($jsst_query);
 
@@ -3688,6 +4074,201 @@ class JSSTticketModel {
         return json_encode($jsst_results);
     }
 
+    /**
+     * The answers themselves, ranked, in one step. (Roadmap 6.0-AI-01)
+     *
+     * What an agent wants from this panel is a sentence they can send. What it
+     * asked them for was a ticket: pick one from a list of references and
+     * subjects, wait, read its replies, then append one - two panels, two
+     * filters, two Close buttons and a back-navigation between them, to arrive
+     * at the thing they were after all along. A reference number tells nobody
+     * anything, so the choosing step was a guess followed by a retreat.
+     *
+     * So this returns the replies. The ticket each one came from travels with
+     * it as context - subject, reference, how close the match was - which is
+     * the part of the old first panel that was actually worth reading, and it
+     * arrives already attached to an answer rather than in place of one.
+     *
+     * The matching is `checkAIReplyTicketsBySubject()`, unchanged and still
+     * used on its own: this is the same search with the second step folded in,
+     * not a second search that could disagree with the first.
+     */
+    function getAiSuggestedReplies() {
+        /* The whole corpus, not just old tickets. (Roadmap 6.0-AI-01, 6.0-AI-02)
+         *
+         * This panel used to search `js_ticket_tickets` and nothing else, so an
+         * agent got suggestions from past conversations while the automatic
+         * answer on the same desk was drawing on the knowledge base, the FAQs,
+         * the canned responses, the site's pages and the crawled
+         * documentation. The two disagreed by construction: the article that
+         * answers the question was invisible to the person typing, and visible
+         * to the robot.
+         *
+         * So it asks the same retriever the AI Agent asks, with the same
+         * profile, which means the same governance comes with it - only
+         * approved sources, only citable articles, the language rules, and the
+         * per-document exclusions from Knowledge Sources. A suggestion here is
+         * now something the desk would have been willing to say on its own.
+         *
+         * Nothing leaves the site: retrieval is a search of your own content.
+         * The engine is only involved when somebody asks it to write.
+         *
+         * The old ticket search stays as the fallback for a desk with no AI
+         * Agent installed - it is free-core behaviour and must not vanish
+         * because a paid add-on is absent. */
+        if (class_exists('JSSTaiagentretriever')
+                && (!class_exists('JSSTaipolicy') || JSSTaipolicy::allows(JSSTaipolicy::LANE_ONSITE))) {
+            $jsst_fromcorpus = $this->aiSuggestionsFromCorpus();
+            if ($jsst_fromcorpus !== null) {
+                return $jsst_fromcorpus;
+            }
+        }
+
+        $jsst_matches = json_decode((string) $this->checkAIReplyTicketsBySubject(), true);
+        if (!is_array($jsst_matches) || empty($jsst_matches)) {
+            return json_encode(array());
+        }
+
+        /* The best few, not everything the search would allow. Ten answers is a
+           reading task; three or four is a choice. */
+        $jsst_matches = array_slice($jsst_matches, 0, 5);
+        $jsst_byid = array();
+        foreach ($jsst_matches as $jsst_match) {
+            $jsst_byid[(int) $jsst_match['id']] = $jsst_match;
+        }
+        $jsst_ids = implode(',', array_map('absint', array_keys($jsst_byid)));
+
+        /* Agents only, and never a reply somebody switched off. The uid list is
+           the same one the single-ticket fetch uses, so the two cannot offer
+           different sets. */
+        $jsst_uids = JSSTincluder::getJSModel('reply')->get_allowed_support_user_ids();
+        if (empty($jsst_uids)) {
+            return json_encode(array());
+        }
+        $jsst_uids_str = implode(',', array_map('absint', $jsst_uids));
+
+        $jsst_replies = jssupportticket::$_db->get_results(
+            "SELECT r.id, r.ticketid, r.message, r.created
+               FROM `" . jssupportticket::$_db->prefix . "js_ticket_replies` AS r
+              WHERE r.ticketid IN ($jsst_ids)
+                AND r.uid IN ($jsst_uids_str)
+                AND (r.aireplymode != 2 OR r.aireplymode IS NULL)
+              ORDER BY r.ticketid ASC, r.id DESC");
+
+        /* One per ticket: the last thing an agent said on a matching ticket is
+           the answer that closed it, and the four before it are the working
+           out. */
+        $jsst_seen = array();
+        $jsst_out = array();
+        foreach ((array) $jsst_replies as $jsst_reply) {
+            $jsst_tid = (int) $jsst_reply->ticketid;
+            if (isset($jsst_seen[$jsst_tid]) || !isset($jsst_byid[$jsst_tid])) {
+                continue;
+            }
+            $jsst_seen[$jsst_tid] = true;
+            $jsst_text = wp_strip_all_tags((string) $jsst_reply->message);
+            if (jssupportticketphplib::JSST_trim($jsst_text) === '') {
+                continue;
+            }
+            $jsst_out[] = array(
+                'id'        => (int) $jsst_reply->id,
+                'text'      => $jsst_reply->message,
+                'plain'     => $jsst_text,
+                'created'   => $jsst_reply->created,
+                'ticket_id' => $jsst_tid,
+                'reference' => $jsst_byid[$jsst_tid]['ticketid'],
+                'subject'   => $jsst_byid[$jsst_tid]['text'],
+                'source'    => esc_html(__('An earlier ticket', 'js-support-ticket')),
+                'from'      => 'tickets',
+                'url'       => '',
+                'relevance' => $jsst_byid[$jsst_tid]['relevance'],
+            );
+        }
+        return json_encode($jsst_out);
+    }
+
+    /**
+     * Suggestions drawn from every source the AI Agent is allowed to read.
+     *
+     * Returns encoded JSON, or null when the retriever had nothing to say and
+     * the caller should fall back to the ticket search - "no engine" and "no
+     * answer" are different, and only the first is a reason to try the older
+     * path.
+     */
+    private function aiSuggestionsFromCorpus() {
+        $jsst_id = absint(JSSTrequest::getVar('ticketId'));
+        $jsst_subject = sanitize_text_field(JSSTrequest::getVar('ticketSubject'));
+        $jsst_ticket = jssupportticket::$_db->get_row(jssupportticket::$_db->prepare(
+            "SELECT subject, message, departmentid FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE id = %d",
+            $jsst_id));
+        if (!$jsst_ticket) {
+            return null;
+        }
+        /* Subject and message together: the subject is what the customer
+           called it and the message is what they actually asked, and a
+           retriever given only the first is answering a headline. */
+        $jsst_text = jssupportticketphplib::JSST_trim(
+            ($jsst_subject !== '' ? $jsst_subject : (string) $jsst_ticket->subject)
+            . "\n" . wp_strip_all_tags((string) $jsst_ticket->message));
+        if ($jsst_text === '') {
+            return null;
+        }
+
+        $jsst_retriever = new JSSTaiagentretriever();
+        $jsst_snippets = $jsst_retriever->retrieve($jsst_text, array(
+            'profile'  => JSSTaiagentretriever::PROFILE_REPLY,
+            'is_guest' => false,
+            /* The ticket's department, which narrows the canned responses in
+               the corpus to the ones the picker beside this panel is already
+               offering. Without it the two controls in one row answered the
+               same desk differently - the select hid another department's
+               replies and the AI Agent handed them straight back. A ticket
+               with no department set narrows nothing. (Roadmap 4.0-CORE-03) */
+            'department' => isset($jsst_ticket->departmentid) ? $jsst_ticket->departmentid : 0,
+        ));
+        if (empty($jsst_snippets)) {
+            return null;
+        }
+
+        $jsst_labels = array();
+        if (class_exists('JSSTaisources')) {
+            foreach (JSSTaisources::types() as $jsst_key => $jsst_def) {
+                $jsst_labels[$jsst_key] = $jsst_def['label'];
+            }
+        }
+
+        $jsst_out = array();
+        foreach ($jsst_snippets as $jsst_snippet) {
+            $jsst_passage = isset($jsst_snippet['passage']) ? (string) $jsst_snippet['passage'] : '';
+            if (jssupportticketphplib::JSST_trim($jsst_passage) === '') {
+                continue;
+            }
+            $jsst_type = isset($jsst_snippet['source_type']) ? (string) $jsst_snippet['source_type'] : '';
+            /* The name a person would use, never the key. `source_type` is
+               `kb`, `faq`, `canned`; `ref` is `KB-1`, a citation id the audit
+               trail needs and an agent has no use for. Showing either in front
+               of somebody choosing a sentence is showing them the plumbing. */
+            $jsst_label = isset($jsst_labels[$jsst_type]) ? $jsst_labels[$jsst_type] : '';
+            if ($jsst_label === '') {
+                $jsst_label = esc_html(__('Your content', 'js-support-ticket'));
+            }
+            $jsst_out[] = array(
+                'id'        => isset($jsst_snippet['source_id']) ? $jsst_snippet['source_id'] : 0,
+                'text'      => $jsst_passage,
+                'plain'     => $jsst_passage,
+                'created'   => '',
+                'ticket_id' => 0,
+                'reference' => '',
+                'subject'   => isset($jsst_snippet['title']) ? $jsst_snippet['title'] : '',
+                'source'    => $jsst_label,
+                'from'      => 'corpus',
+                'url'       => isset($jsst_snippet['url']) ? $jsst_snippet['url'] : '',
+                'relevance' => isset($jsst_snippet['score']) ? $jsst_snippet['score'] : 0,
+            );
+        }
+        return empty($jsst_out) ? null : json_encode($jsst_out);
+    }
+
     // ==========================================
     // 2. ADVANCED NLP SEARCH LOGIC (Front-End AJAX)
     // ==========================================
@@ -3704,12 +4285,12 @@ class JSSTticketModel {
      */
     public function getInstantResolveSearch() {
         $jsst_nonce = JSSTrequest::getVar('_wpnonce');
-        if (!wp_verify_nonce($jsst_nonce, 'get-instantresolve-search')) {
-            die('Security check Failed');
+        if (!wp_verify_nonce($jsst_nonce, 'get-aiagent-search')) {
+            die(esc_html__( 'Security check Failed', 'js-support-ticket' ));
         }
 
-        if (isset(jssupportticket::$_config['instantresolve_enable'])
-            && jssupportticket::$_config['instantresolve_enable'] != 1) {
+        if (isset(jssupportticket::$_config['aiagent_enable'])
+            && jssupportticket::$_config['aiagent_enable'] != 1) {
             echo wp_json_encode(array());
             wp_die();
         }
@@ -3719,8 +4300,20 @@ class JSSTticketModel {
 
         $jsst_text = trim(preg_replace('/\s+/', ' ', $jsst_subject . ' ' . wp_strip_all_tags($jsst_message)));
 
-        $jsst_min = isset(jssupportticket::$_config['instantresolve_min_chars'])
-            ? intval(jssupportticket::$_config['instantresolve_min_chars']) : 15;
+        /* The search runs on the subject and the start of the message, not on
+           everything: somebody who pastes a log or a long email would otherwise
+           send thousands of words into every FULLTEXT query, and the first few
+           sentences are what say what the problem is. Cut at a word boundary
+           so the last word is not half of one. */
+        $jsst_cap = 300;
+        if (mb_strlen($jsst_text) > $jsst_cap) {
+            $jsst_text = mb_substr($jsst_text, 0, $jsst_cap);
+            $jsst_space = strrpos($jsst_text, ' ');
+            if ($jsst_space !== false) $jsst_text = substr($jsst_text, 0, $jsst_space);
+        }
+
+        $jsst_min = isset(jssupportticket::$_config['aiagent_min_chars'])
+            ? intval(jssupportticket::$_config['aiagent_min_chars']) : 15;
 
         if (jssupportticketphplib::JSST_strlen($jsst_text) < $jsst_min) {
             echo wp_json_encode(array());
@@ -3731,6 +4324,13 @@ class JSSTticketModel {
         // generation. The form asks for the answer only once the customer stops
         // typing, so a request made mid-sentence must not pay for one.
         $jsst_summary = (intval(JSSTrequest::getVar('summary')) === 1);
+
+        /* Kept before the budget can downgrade it below, because it is also how
+           a settled question is told from a half-typed one: the form asks for
+           an answer when somebody stops typing, so this being set is the signal
+           that what arrived is a real question rather than three words of one.
+           (Roadmap 6.0-AI-12) */
+        $jsst_settled = $jsst_summary;
 
         // Out of answer budget: fall back to the links rather than to nothing.
         // The throttle exists to protect the expensive half, and a customer who
@@ -3752,14 +4352,82 @@ class JSSTticketModel {
         // Null, not an empty array, means "nobody handled this" - an addon that
         // legitimately found nothing must be able to say so without core
         // second-guessing it and running its own search on top.
-        $jsst_results = apply_filters('jsst_instantresolve_search_results', null, $jsst_text, $jsst_opts);
+        $jsst_results = apply_filters('jsst_aiagent_search_results', null, $jsst_text, $jsst_opts);
 
         if (!is_array($jsst_results)) {
-            $jsst_results = $this->getBasicFixSuggestions($jsst_text);
+            $jsst_results = $this->getBasicFixSuggestions($jsst_text, $jsst_settled, $jsst_subject);
+        }
+
+        /* Canned responses are written for agents to send, not for customers
+           to read, and have no page of their own to open: on the customer's
+           form "Refund processed" read as if a refund had been made. They are
+           listed for people who work tickets only - whichever search produced
+           the list - while the AI's written answer can still draw on them where
+           Knowledge Sources allows it. */
+        if (is_array($jsst_results) && !current_user_can(JSSTroles::CAP_TICKETS)) {
+            $jsst_results = $this->customerCannedOnly($jsst_results);
+        }
+
+        /* A question somebody finished typing that nothing could answer is the
+           purest gap signal in the product - their own words, before they gave
+           up and filed a ticket. Recorded only for a settled question, or the
+           table would fill with prefixes of one. (Roadmap 6.0-AI-12) */
+        if ($jsst_settled && empty($jsst_results) && class_exists('JSSTaigaps')) {
+            JSSTaigaps::record(JSSTaigaps::KIND_SEARCH, $jsst_text);
         }
 
         echo wp_json_encode($jsst_results);
         wp_die();
+    }
+
+    /**
+     * What a customer may see of the saved replies in a result list.
+     *
+     * Only the ones somebody ticked "Also suggest this to customers" on, and
+     * active; the rest are written to one customer about one ticket and stay
+     * agent-only. The ones kept are shown as the reply itself, with {site_name}
+     * filled and every other placeholder blank - not renderPlaceholders(),
+     * which fills {agent_name} from whoever is logged in, and on this form that
+     * is the customer - and more of the text than the 200-character excerpt,
+     * because a saved reply has no page of its own to open.
+     *
+     * The add-on returns arrays keyed 'type'; core's own search returns
+     * objects carrying 'content_type'. Both are read.
+     */
+    private function customerCannedOnly($jsst_results) {
+        $jsst_typeof = function ($jsst_item) {
+            $jsst_item = (array) $jsst_item;
+            return isset($jsst_item['type']) ? $jsst_item['type']
+                : (isset($jsst_item['content_type']) ? $jsst_item['content_type'] : '');
+        };
+
+        $jsst_ids = array();
+        foreach ($jsst_results as $jsst_item) {
+            if ($jsst_typeof($jsst_item) === 'canned') $jsst_ids[] = (int) ((array) $jsst_item)['id'];
+        }
+        $jsst_allowed = (!empty($jsst_ids) && class_exists('JSSTcannedresponsesModel'))
+            ? JSSTcannedresponsesModel::customerSuggestable($jsst_ids) : array();
+
+        $jsst_out = array();
+        foreach ($jsst_results as $jsst_item) {
+            if ($jsst_typeof($jsst_item) !== 'canned') { $jsst_out[] = $jsst_item; continue; }
+            $jsst_id = (int) ((array) $jsst_item)['id'];
+            if (!isset($jsst_allowed[$jsst_id])) continue;
+
+            $jsst_text = str_replace('{site_name}', get_bloginfo('name'), $jsst_allowed[$jsst_id]);
+            $jsst_text = preg_replace('/\{[a-z0-9_]+\}/i', '', $jsst_text);
+            $jsst_text = trim(preg_replace('/\s+([,.!?])/', '$1', preg_replace('/\s+/', ' ', wp_strip_all_tags($jsst_text))));
+            $jsst_text = wp_html_excerpt($jsst_text, 600, '…');
+            if (is_array($jsst_item)) {
+                $jsst_item['excerpt'] = $jsst_text;
+                unset($jsst_item['matched']);
+            } else {
+                $jsst_item->excerpt = $jsst_text;
+                unset($jsst_item->matched);
+            }
+            $jsst_out[] = $jsst_item;
+        }
+        return $jsst_out;
     }
 
     /**
@@ -3802,8 +4470,8 @@ class JSSTticketModel {
         $jsst_limit  = $jsst_summary ? 12 : 40;
         $jsst_window = $jsst_summary ? 300 : 60;
 
-        $jsst_limit  = intval(apply_filters('jsst_instantresolve_rate_limit', $jsst_limit, $jsst_kind));
-        $jsst_window = intval(apply_filters('jsst_instantresolve_rate_window', $jsst_window, $jsst_kind));
+        $jsst_limit  = intval(apply_filters('jsst_aiagent_rate_limit', $jsst_limit, $jsst_kind));
+        $jsst_window = intval(apply_filters('jsst_aiagent_rate_window', $jsst_window, $jsst_kind));
 
         // A filter may switch the limit off outright; a nonsensical window
         // must not silently become a one-second lockout.
@@ -3877,8 +4545,11 @@ class JSSTticketModel {
         );
     }
 
-    /** Whether one column carries a FULLTEXT index of its own, asked fresh. */
-    private function hasFulltextIndexOn($jsst_table, $jsst_column) {
+    /** Option listing the sources whose table and indexes the search can use. */
+    const SUGGESTION_READY_OPTION = 'jsst_ir_sources';
+
+    /** Each FULLTEXT index on a table, as index name => its column list. */
+    private function fulltextIndexes($jsst_table) {
         $jsst_rows = jssupportticket::$_db->get_results(
             "SHOW INDEX FROM `" . $jsst_table . "` WHERE Index_type = 'FULLTEXT'"
         );
@@ -3886,41 +4557,43 @@ class JSSTticketModel {
         foreach ((array) $jsst_rows as $jsst_row) {
             $jsst_byname[$jsst_row->Key_name][] = $jsst_row->Column_name;
         }
-        foreach ($jsst_byname as $jsst_cols) {
-            if ($jsst_cols === array($jsst_column)) return true;
-        }
-        return false;
-    }
-
-    /** Transient name holding the index verdict for one table and column pair. */
-    private static function suggestionIndexKey($jsst_table, $jsst_title, $jsst_body) {
-        return 'jsst_ir_ftidx_' . md5($jsst_table . '|' . $jsst_title . '|' . $jsst_body);
+        return $jsst_byname;
     }
 
     /**
-     * Create the per-column FULLTEXT indexes the suggestion query needs, on any
-     * source table that is missing them.
+     * Make every suggestion source searchable, and record which ones are.
      *
-     * The ranking weights title above body, so it matches the two columns
-     * separately, and MySQL serves MATCH(col) only from an index whose column
-     * list is exactly that column. Every table involved ships a *composite*
-     * index instead - core's canned responses, and the knowledgebase and FAQ
-     * add-ons, whose fresh-install schema comes from the licence server and so
-     * cannot be corrected from here at all. Without this repair those sources
-     * are not merely unranked, they are skipped outright by
-     * hasSuggestionIndexes(), and a clean install can only ever suggest
-     * WordPress posts.
+     * The search needs three FULLTEXT indexes on each source table:
+     *   (title, body)  finds the candidate rows. It is what lets the query read
+     *                  only the rows that match instead of scoring every row in
+     *                  the table on every search.
+     *   (title), (body) rank those candidates, title above body. MySQL serves
+     *                  MATCH(col) only from an index whose column list is
+     *                  exactly that column.
+     * The knowledgebase and FAQ add-ons ship the combined index but not always
+     * the single ones, and core's canned responses may have neither, so any
+     * that are missing are added here.
      *
-     * Called once per plugin version from admin_init - never from the search
-     * itself, which runs on a debounce while a customer types and must not
-     * build an index. Failures are hidden and logged: a server that cannot
-     * build a FULLTEXT index leaves the source skipped, which is the same
-     * behaviour as before.
+     * The sources that end up with all three are stored in
+     * SUGGESTION_READY_OPTION, and the search reads only that one autoloaded
+     * option. It never checks tables or indexes itself: it runs on a debounce
+     * while a customer types, and must neither build an index nor ask the
+     * schema on every request.
+     *
+     * Runs from admin_init whenever the plugin version or the set of active
+     * add-ons changes (jsst_repair_suggestion_indexes()), because that is when a
+     * source table can appear, disappear, or arrive without its indexes.
+     * Failures are logged and leave that source out of the stored list.
      *
      * @return array Table name => list of indexes created, for the caller's log.
      */
     public function repairSuggestionIndexes() {
+        // Canned responses are core data; on a site that never had the legacy
+        // add-on nothing else would have created the table yet.
+        JSSTmergedaddon::ensureSchema('cannedresponses');
+
         $jsst_created = array();
+        $jsst_ready   = array();
 
         foreach (self::instantResolveSources() as $jsst_key => $jsst_def) {
             $jsst_full = jssupportticket::$_db->prefix . $jsst_def['table'];
@@ -3928,101 +4601,79 @@ class JSSTticketModel {
                 continue;
             }
 
-            // Group each FULLTEXT index by name so a composite can be told from
-            // a single: only an index whose whole column list is the one column
-            // counts as present.
-            $jsst_rows = jssupportticket::$_db->get_results(
-                "SHOW INDEX FROM `" . $jsst_full . "` WHERE Index_type = 'FULLTEXT'"
+            // Names follow what the add-on schemas already use, so an install
+            // that has them is left alone by the column check below.
+            $jsst_needed = array(
+                'jsst_ir_ft'               => array($jsst_def['title'], $jsst_def['body']),
+                'ft_' . $jsst_def['title'] => array($jsst_def['title']),
+                'ft_' . $jsst_def['body']  => array($jsst_def['body']),
             );
-            $jsst_byname = array();
-            foreach ((array) $jsst_rows as $jsst_row) {
-                $jsst_byname[$jsst_row->Key_name][] = $jsst_row->Column_name;
-            }
 
-            foreach (array($jsst_def['title'], $jsst_def['body']) as $jsst_column) {
-                $jsst_have = false;
-                foreach ($jsst_byname as $jsst_cols) {
-                    if ($jsst_cols === array($jsst_column)) $jsst_have = true;
-                }
-                if ($jsst_have) continue;
-
-                // ft_<column>, which is what the add-on update files and the
-                // canned-responses schema already create; an install that took
-                // one of those paths is left alone by the check above.
-                $jsst_name = 'ft_' . $jsst_column;
-                if (isset($jsst_byname[$jsst_name])) continue;   // same name, other columns
+            $jsst_byname = $this->fulltextIndexes($jsst_full);
+            foreach ($jsst_needed as $jsst_name => $jsst_cols) {
+                // Present under any name counts; only the column list matters.
+                if (in_array($jsst_cols, $jsst_byname, true)) continue;
+                if (isset($jsst_byname[$jsst_name])) continue;   // name taken by other columns
 
                 jssupportticket::$_db->hide_errors();
                 jssupportticket::$_db->query('ALTER TABLE `' . $jsst_full . '` ADD FULLTEXT `'
-                    . $jsst_name . '` (`' . $jsst_column . '`)');
+                    . $jsst_name . '` (`' . implode('`, `', $jsst_cols) . '`)');
                 $jsst_error = jssupportticket::$_db->last_error;
                 jssupportticket::$_db->show_errors();
 
-                if ($jsst_error != null) {
-                    // Two admin requests can reach this at once - a page load
-                    // and the heartbeat, say - and the one that loses the race
-                    // is told "Duplicate key name" for an index that is now
-                    // there. Ask the table rather than the error: the index
-                    // existing is the outcome either way, and the log is for
-                    // the case where it really is not.
-                    if (!$this->hasFulltextIndexOn($jsst_full, $jsst_column)) {
-                        error_log(sprintf(
-                            'JS Help Desk: could not add FULLTEXT index %s on %s, instant-resolve source "%s" stays disabled: %s',
-                            $jsst_name, $jsst_full, $jsst_key, $jsst_error
-                        ));
-                    }
-                    continue;
+                // Two admin requests can race here (a page load and the
+                // heartbeat); the loser is told "Duplicate key name" for an
+                // index that now exists, so the table is asked again below
+                // rather than trusting the error.
+                if ($jsst_error == null) {
+                    $jsst_created[$jsst_full][] = $jsst_name;
                 }
-                $jsst_created[$jsst_full][] = $jsst_name;
             }
 
-            // The verdict is cached for five minutes; drop it so a source
-            // repaired here is searchable on the next keystroke rather than
-            // after the cache happens to expire.
-            delete_transient(self::suggestionIndexKey($jsst_full, $jsst_def['title'], $jsst_def['body']));
+            $jsst_byname = $this->fulltextIndexes($jsst_full);
+            $jsst_missing = array();
+            foreach ($jsst_needed as $jsst_name => $jsst_cols) {
+                if (!in_array($jsst_cols, $jsst_byname, true)) $jsst_missing[] = $jsst_name;
+            }
+            if (empty($jsst_missing)) {
+                $jsst_ready[] = $jsst_key;
+            } else {
+                error_log(sprintf(
+                    'JS Help Desk: could not add FULLTEXT index(es) %s on %s, suggestion source "%s" stays disabled.',
+                    implode(', ', $jsst_missing), $jsst_full, $jsst_key
+                ));
+            }
         }
+
+        update_option(self::SUGGESTION_READY_OPTION, $jsst_ready, true);
 
         return $jsst_created;
     }
 
     /**
-     * Whether a table carries a single-column FULLTEXT index on both columns.
+     * A MATCH() relevance that is always safe to do arithmetic on.
      *
-     * Cached for a few minutes because the answer changes only when an addon is
-     * installed or updated, while the question is asked on every search. The
-     * cache is short rather than permanent so an index created later is picked
-     * up on its own, without an admin knowing to clear anything.
+     * InnoDB can return +infinity for MATCH() in natural-language mode (seen on
+     * MySQL 8.0.33 against a one-row canned responses table). The value prints
+     * as 0 and even passes "> 0", but multiplying or adding it raises MySQL
+     * error 1690 (DOUBLE value is out of range), which fails the whole query.
      *
-     * @return bool True when MATCH() can be used on both columns.
+     * An infinite score still means the word was found, so it counts as an
+     * ordinary hit (1) instead of an overwhelming one: these scores are sorted
+     * alongside other sources, and a broken statistic must not outrank every
+     * real result. NULL and NaN count as no match.
+     *
+     * The returned SQL holds three %s placeholders, all for the same search
+     * term, so prepare() must be given that term three times.
+     *
+     * @param string $jsst_column A column reference, already quoted as needed.
+     * @return string
      */
-    private function hasSuggestionIndexes($jsst_table, $jsst_title, $jsst_body) {
-        $jsst_key    = self::suggestionIndexKey($jsst_table, $jsst_title, $jsst_body);
-        $jsst_cached = get_transient($jsst_key);
-        if ($jsst_cached !== false) return ($jsst_cached === 'yes');
-
-        $jsst_rows = jssupportticket::$_db->get_results(
-            "SHOW INDEX FROM `" . $jsst_table . "` WHERE Index_type = 'FULLTEXT'"
-        );
-
-        // Group the columns of each index, then look for one made of exactly the
-        // title and one made of exactly the body. A combined (title, body) index
-        // satisfies neither, which is the whole reason this check exists.
-        $jsst_byname = array();
-        foreach ((array) $jsst_rows as $jsst_row) {
-            $jsst_byname[$jsst_row->Key_name][] = $jsst_row->Column_name;
-        }
-
-        $jsst_has_title = false;
-        $jsst_has_body  = false;
-        foreach ($jsst_byname as $jsst_cols) {
-            if ($jsst_cols === array($jsst_title)) $jsst_has_title = true;
-            if ($jsst_cols === array($jsst_body))  $jsst_has_body  = true;
-        }
-
-        $jsst_ok = ($jsst_has_title && $jsst_has_body);
-        set_transient($jsst_key, $jsst_ok ? 'yes' : 'no', 5 * MINUTE_IN_SECONDS);
-
-        return $jsst_ok;
+    private static function finiteMatch($jsst_column) {
+        $jsst_match = 'MATCH(' . $jsst_column . ') AGAINST (%s IN NATURAL LANGUAGE MODE)';
+        return '(CASE WHEN ' . $jsst_match . ' >= 1000000 THEN 1'
+            . ' WHEN ' . $jsst_match . ' > 0 THEN ' . $jsst_match
+            . ' ELSE 0 END)';
     }
 
     /**
@@ -4032,20 +4683,53 @@ class JSSTticketModel {
      * Intentionally modest. There is no grounding gate and no AI here, because
      * a suggestion the customer can ignore does not need one - anything that
      * feeds text to a model belongs in the addon, behind its gates.
+     *
+     * Built to be cheap enough to run while somebody types: each table source
+     * is one indexed query that reads only the rows matching the text, and
+     * WordPress posts - which can only be searched by scanning wp_posts - are
+     * searched only once the question is settled.
+     *
+     * Only what it shares with the question counts. Common words ("the",
+     * "help", "not working") are taken out before searching, because in
+     * natural-language mode any shared word is a match and on a small site
+     * nearly every article shares one. What is left must actually overlap a
+     * result - one word in its title, or two in its text - and a result far
+     * below the best one is dropped, so nothing is shown rather than
+     * something unrelated.
+     *
+     * @param string $jsst_text    The search text, already capped by the caller.
+     * @param bool   $jsst_settled The customer finished a field; posts are searched too.
+     * @param string $jsst_subject The subject alone, which counts for more than the message.
      */
-    private function getBasicFixSuggestions($jsst_text) {
+    private function getBasicFixSuggestions($jsst_text, $jsst_settled = false, $jsst_subject = '') {
         $jsst_is_guest = JSSTincluder::getObjectClass('user')->isguest();
         $jsst_results  = array();
 
-        $jsst_enabled = isset(jssupportticket::$_config['instantresolve_sources'])
-            ? json_decode(jssupportticket::$_config['instantresolve_sources'], true)
-            : null;
-        if (!is_array($jsst_enabled) || empty($jsst_enabled)) {
-            $jsst_enabled = array('kb', 'faq', 'canned', 'posts');
+        $jsst_terms = self::suggestionTerms($jsst_text);
+        if (empty($jsst_terms)) return array();
+        $jsst_query = implode(' ', $jsst_terms);
+        $jsst_subjectterms = self::suggestionTerms($jsst_subject);
+        $jsst_subjectquery = implode(' ', $jsst_subjectterms);
+        $jsst_subjectphrase = trim(preg_replace('/\s+/', ' ', (string) $jsst_subject));
+
+        /* Which sources may be answered from is core's register since
+           6.0-AI-02, and it is asked rather than read out of the config row it
+           stores itself in - the register drops a key this build cannot
+           describe, which is what keeps an old value from reaching the loop
+           below. (Roadmap 6.0-AI-02) */
+        if (class_exists('JSSTaisources')) {
+            $jsst_enabled = JSSTaisources::approvedTypes();
+        } else {
+            $jsst_enabled = isset(jssupportticket::$_config['aiagent_feeds'])
+                ? json_decode(jssupportticket::$_config['aiagent_feeds'], true)
+                : null;
+            if (!is_array($jsst_enabled) || empty($jsst_enabled)) {
+                $jsst_enabled = array('kb', 'faq', 'canned', 'posts');
+            }
         }
 
-        $jsst_limit = isset(jssupportticket::$_config['instantresolve_max_results'])
-            ? intval(jssupportticket::$_config['instantresolve_max_results']) : 5;
+        $jsst_limit = isset(jssupportticket::$_config['aiagent_max_results'])
+            ? intval(jssupportticket::$_config['aiagent_max_results']) : 5;
         if ($jsst_limit < 1 || $jsst_limit > 10) $jsst_limit = 5;
 
         // Subject matches count for more than body matches, and an exact phrase
@@ -4053,20 +4737,16 @@ class JSSTticketModel {
         $jsst_w_title = 3;
         $jsst_w_body  = 1;
         $jsst_w_exact = 10;
+        $jsst_w_subject = 4;
 
-        $jsst_tables = self::instantResolveSources();
+        // Which tables exist with the indexes this query needs is worked out by
+        // repairSuggestionIndexes() on admin_init, not asked here on every
+        // request. Until it has run, no table source is searched.
+        $jsst_ready = (array) get_option(self::SUGGESTION_READY_OPTION, array());
 
-        // The canned responses table is core data now, and this method reads it
-        // directly rather than through the module that owns it - so on a site
-        // that never had the legacy addon nothing would have created it yet.
-        // ensureSchema() costs one option read once the schema is current, and
-        // does nothing at all while a legacy addon owns the table.
-        if (in_array('canned', $jsst_enabled, true)) {
-            JSSTmergedaddon::ensureSchema('cannedresponses');
-        }
-
-        foreach ($jsst_tables as $jsst_key => $jsst_def) {
+        foreach (self::instantResolveSources() as $jsst_key => $jsst_def) {
             if (!in_array($jsst_key, $jsst_enabled, true)) continue;
+            if (!in_array($jsst_key, $jsst_ready, true)) continue;
             // A source with no 'addon' is core's own and always available. The
             // rest go through featureEnabled(), which is the replacement for a
             // bare $_active_addons lookup: it answers yes for a capability core
@@ -4074,47 +4754,64 @@ class JSSTticketModel {
             if ($jsst_def['addon'] !== null && !JSSTmergedaddon::featureEnabled($jsst_def['addon'])) continue;
 
             $jsst_full = jssupportticket::$_db->prefix . $jsst_def['table'];
-            if (jssupportticket::$_db->get_var("SHOW TABLES LIKE '" . esc_sql($jsst_full) . "'") != $jsst_full) {
-                continue;
-            }
 
-            // MySQL resolves MATCH(col) only against an index whose column list
-            // is exactly that column, so a table without both per-column indexes
-            // makes the query below fail rather than return nothing. Checking
-            // first keeps that out of the error log: this runs on every keystroke
-            // once a customer starts typing, and the alternative was one logged
-            // database error per source per search, forever.
-            if (!$this->hasSuggestionIndexes($jsst_full, $jsst_def['title'], $jsst_def['body'])) {
-                continue;
-            }
-
-            $jsst_where = array();
+            // The combined index finds the candidates, so only rows that match
+            // the text are read and scored. Without it in the WHERE, every row
+            // of the table was scored on every search (EXPLAIN: type ALL).
+            $jsst_where = array("MATCH(`" . $jsst_def['title'] . "`, `" . $jsst_def['body'] . "`) AGAINST (%s IN NATURAL LANGUAGE MODE)");
             if ($jsst_def['where'] !== '') $jsst_where[] = $jsst_def['where'];
             if ($jsst_is_guest && $jsst_def['guest'] !== '') $jsst_where[] = $jsst_def['guest'];
 
+            /* Individual documents somebody excluded. Free suggestions are the
+               same content shown to the same customer, so a page ruled out for
+               the AI must not come back as a suggestion beside the ticket form
+               - governance that only half the product honours is worse than
+               none, because it reads as if it worked. (Roadmap 6.0-AI-02) */
+            if (class_exists('JSSTaisources')) {
+                $jsst_govern = ltrim(preg_replace('/^\s*AND\s+/i', '',
+                    JSSTaisources::sqlFilter($jsst_key, 'id')));
+                if ($jsst_govern !== '') $jsst_where[] = $jsst_govern;
+            }
+
+            /* The subject is what the customer chose to call the problem, so
+               a title that matches it counts on top of the whole-text match.
+               The exact bonus is the subject as typed, not the whole text:
+               a title never contains a subject plus three paragraphs. */
+            $jsst_args = array($jsst_query, $jsst_query, $jsst_query,    // finiteMatch() uses its term three times
+                               $jsst_query, $jsst_query, $jsst_query);
+            $jsst_subjectsql = '';
+            if ($jsst_subjectquery !== '') {
+                $jsst_subjectsql = " + (" . $jsst_w_subject . " * " . self::finiteMatch('`' . $jsst_def['title'] . '`') . ")";
+                array_push($jsst_args, $jsst_subjectquery, $jsst_subjectquery, $jsst_subjectquery);
+            }
+            $jsst_exactsql = '';
+            if (mb_strlen($jsst_subjectphrase) >= 4) {
+                $jsst_exactsql = " + (CASE WHEN `" . $jsst_def['title'] . "` LIKE %s THEN " . $jsst_w_exact . " ELSE 0 END)";
+                $jsst_args[] = '%' . jssupportticket::$_db->esc_like($jsst_subjectphrase) . '%';
+            }
+            $jsst_args[] = $jsst_query;                                  // the candidate MATCH in the WHERE
+
             $jsst_sql = "SELECT id, `" . $jsst_def['title'] . "` AS title,
                     SUBSTRING(`" . $jsst_def['body'] . "`, 1, 200) AS excerpt,
-                    ( (" . $jsst_w_title . " * IFNULL(MATCH(`" . $jsst_def['title'] . "`) AGAINST (%s IN NATURAL LANGUAGE MODE), 0)) +
-                      (" . $jsst_w_body . " * IFNULL(MATCH(`" . $jsst_def['body'] . "`) AGAINST (%s IN NATURAL LANGUAGE MODE), 0)) +
-                      (CASE WHEN `" . $jsst_def['title'] . "` LIKE %s THEN " . $jsst_w_exact . " ELSE 0 END)
+                    SUBSTRING(`" . $jsst_def['body'] . "`, 1, 4000) AS haystack,
+                    ( (" . $jsst_w_title . " * " . self::finiteMatch('`' . $jsst_def['title'] . '`') . ") +
+                      (" . $jsst_w_body . " * " . self::finiteMatch('`' . $jsst_def['body'] . '`') . ")"
+                      . $jsst_subjectsql . $jsst_exactsql . "
                     ) AS total_relevance
                 FROM `" . $jsst_full . "`"
                 . (!empty($jsst_where) ? ' WHERE ' . implode(' AND ', $jsst_where) : '')
                 . " HAVING total_relevance > 0 ORDER BY total_relevance DESC LIMIT 3";
 
             $jsst_rows = jssupportticket::$_db->get_results(
-                jssupportticket::$_db->prepare($jsst_sql, $jsst_text, $jsst_text, '%' . $jsst_text . '%')
+                jssupportticket::$_db->prepare($jsst_sql, $jsst_args)
             );
 
             /*
              * A broken source is skipped rather than allowed to take the whole
-             * panel down with it - but it is no longer skipped silently. This
-             * guard hid a hard database error for as long as it existed: an
-             * InnoDB FULLTEXT index whose relevance evaluates to an
-             * out-of-range DOUBLE makes the ranking arithmetic raise MySQL
-             * error 1690, which arrived here looking exactly like "nothing
-             * matched". The panel simply stayed empty and there was nothing
-             * anywhere to say why.
+             * panel down with it - but not silently, because a failed query
+             * otherwise looks exactly like "nothing matched". (The infinite
+             * relevance that used to fail here with MySQL error 1690 is now
+             * neutralised by finiteMatch() before any arithmetic.)
              *
              * Logged once per source per hour, because this endpoint runs on
              * a debounce while somebody types and an unthrottled log line
@@ -4138,6 +4835,13 @@ class JSSTticketModel {
             }
 
             foreach ($jsst_rows as $jsst_row) {
+                /* Shares enough with the question to be about it: one real
+                   word in the title, or two in the text. */
+                $jsst_overlap = self::suggestionOverlap($jsst_terms, (string) $jsst_row->title, (string) $jsst_row->haystack);
+                unset($jsst_row->haystack);
+                if ($jsst_overlap['title'] < 1 && $jsst_overlap['all'] < min(2, count($jsst_terms))) continue;
+                $jsst_row->matched = $jsst_overlap['words'];
+
                 $jsst_row->content_type = $jsst_key;
                 $jsst_row->thumbnail    = '';
                 $jsst_row->timestamp    = null;
@@ -4159,10 +4863,27 @@ class JSSTticketModel {
 
         // Published WP content, through WP_Query rather than a FULLTEXT index:
         // wp_posts is shared with every other plugin on the site and indexing
-        // it is not this plugin's decision to make.
-        if (in_array('posts', $jsst_enabled, true)) {
-            $jsst_query = new WP_Query(array(
-                's'                      => $jsst_text,
+        // it is not this plugin's decision to make. Without an index, WP_Query
+        // search is a LIKE scan of the site's largest table, so it runs only
+        // for a settled question, and on the few most specific words in titles
+        // and excerpts - WP_Query requires every term to match, so the whole
+        // message as terms (what this used to send) almost never matched
+        // anything anyway.
+        $jsst_keywords = array();
+        if ($jsst_settled && in_array('posts', $jsst_enabled, true)) {
+            $jsst_words = array_filter($jsst_terms, function ($jsst_word) {
+                return mb_strlen($jsst_word) >= 4;
+            });
+            // Longer words are the more specific ones ("password" over "help").
+            usort($jsst_words, function ($jsst_a, $jsst_b) {
+                return mb_strlen($jsst_b) - mb_strlen($jsst_a);
+            });
+            $jsst_keywords = array_slice($jsst_words, 0, 3);
+        }
+        if (!empty($jsst_keywords)) {
+            $jsst_postargs = array(
+                's'                      => implode(' ', $jsst_keywords),
+                'search_columns'         => array('post_title', 'post_excerpt'),
                 'post_type'              => array('post', 'page'),
                 'post_status'            => 'publish',
                 'posts_per_page'         => 3,
@@ -4170,7 +4891,25 @@ class JSSTticketModel {
                 'no_found_rows'          => true,
                 'update_post_meta_cache' => false,
                 'update_post_term_cache' => false,
-            ));
+            );
+
+            /* Site content is the source most often narrowed to a short
+               approved list, because most of what a site publishes is marketing
+               copy rather than documentation. An empty approved list has to be
+               post__in => array(0) and not an empty array: WP_Query ignores an
+               empty post__in, which would turn "nothing is approved" into
+               "everything is". (Roadmap 6.0-AI-02) */
+            if (class_exists('JSSTaisources')) {
+                if (JSSTaisources::mode('posts') === JSSTaisources::MODE_PICK) {
+                    $jsst_picked = JSSTaisources::idsWithVerdict('posts', JSSTaisources::RULE_ALLOW);
+                    $jsst_postargs['post__in'] = empty($jsst_picked) ? array(0) : $jsst_picked;
+                } else {
+                    $jsst_barred = JSSTaisources::idsWithVerdict('posts', JSSTaisources::RULE_DENY);
+                    if (!empty($jsst_barred)) $jsst_postargs['post__not_in'] = $jsst_barred;
+                }
+            }
+
+            $jsst_query = new WP_Query($jsst_postargs);
 
             foreach ($jsst_query->posts as $jsst_post) {
                 if (post_password_required($jsst_post)) continue;
@@ -4198,7 +4937,85 @@ class JSSTticketModel {
             return ($jsst_x > $jsst_y) ? -1 : 1;
         });
 
+        /* A result far below the best one is only there because it shares a
+           word; the best one is what the question is about. Posts carry a
+           fixed 0.5 and are kept by the word rules above instead. */
+        $jsst_top = empty($jsst_results) ? 0 : (float) $jsst_results[0]->total_relevance;
+        if ($jsst_top > 1) {
+            $jsst_floor = $jsst_top * self::SUGGESTION_FLOOR;
+            $jsst_results = array_values(array_filter($jsst_results, function ($jsst_row) use ($jsst_floor) {
+                return ($jsst_row->content_type === 'posts') || ((float) $jsst_row->total_relevance >= $jsst_floor);
+            }));
+        }
+
         return array_slice($jsst_results, 0, $jsst_limit);
+    }
+
+    /** A result must score at least this share of the best one to be shown. */
+    const SUGGESTION_FLOOR = 0.35;
+
+    /**
+     * Words that say nothing about which article answers a question. Shared by
+     * almost every ticket and every article, so matching on them is what made
+     * unrelated articles show up.
+     */
+    private static function suggestionStopwords() {
+        return apply_filters('jsst_suggestion_stopwords', array(
+            'the','and','for','are','but','not','you','your','yours','our','ours','with','this','that','these','those',
+            'have','has','had','was','were','been','being','from','they','them','their','there','here','what','when',
+            'where','which','who','whom','why','how','can','cant','cannot','could','would','should','will','wont',
+            'does','doesnt','did','didnt','dont','done','doing','its','into','onto','about','after','before','again',
+            'also','just','only','very','too','any','all','some','more','most','other','such','than','then','out',
+            'off','over','under','still','yet','get','got','getting','gets','make','made','use','used','using',
+            'want','wants','need','needs','needed','please','pls','thanks','thank','hello','hi','hey','dear','regards',
+            'help','issue','issues','problem','problems','question','questions','ticket','support','working','work',
+            'works','worked','anyone','someone','something','anything','nothing','know','try','tried','trying',
+            'able','unable','since','while','way','one','two','today','now','time','day','days','im','ive','am',
+        ));
+    }
+
+    /** The words of some text a search should use: lower case, 3+ letters, no stop words. */
+    private static function suggestionTerms($jsst_text) {
+        $jsst_words = preg_split('/[^\p{L}\p{N}]+/u', jssupportticketphplib::JSST_strtolower((string) $jsst_text), -1, PREG_SPLIT_NO_EMPTY);
+        $jsst_stop = self::suggestionStopwords();
+        $jsst_out = array();
+        foreach ((array) $jsst_words as $jsst_word) {
+            if (mb_strlen($jsst_word) < 3 || in_array($jsst_word, $jsst_stop, true)) continue;
+            $jsst_out[$jsst_word] = true;
+        }
+        return array_slice(array_keys($jsst_out), 0, 30);
+    }
+
+    /** How many of the question's words a result contains, in its title and anywhere. */
+    private static function suggestionOverlap($jsst_terms, $jsst_title, $jsst_body) {
+        $jsst_title = ' ' . implode(' ', self::suggestionTerms($jsst_title)) . ' ';
+        $jsst_all = $jsst_title . ' ' . implode(' ', self::suggestionTerms(wp_strip_all_tags($jsst_body))) . ' ';
+        $jsst_out = array('title' => 0, 'all' => 0, 'words' => array());
+        foreach ($jsst_terms as $jsst_term) {
+            /* A word counts if it or its stem appears, so "exports" finds
+               "export" and "password" finds "passwords". */
+            $jsst_stem = (mb_strlen($jsst_term) > 4) ? preg_replace('/(ing|ed|es|s)$/u', '', $jsst_term) : $jsst_term;
+            $jsst_pattern = '/ ' . preg_quote($jsst_stem, '/') . '[\p{L}]{0,3} /u';
+            if (preg_match($jsst_pattern, $jsst_title)) $jsst_out['title']++;
+            if (preg_match($jsst_pattern, $jsst_all)) {
+                $jsst_out['all']++;
+                $jsst_out['words'][] = $jsst_term;
+            }
+        }
+        return $jsst_out;
+    }
+
+    /**
+     * The free search as an administrator sees it, for the test on Knowledge
+     * Sources: what a customer typing this would be shown, with the words it
+     * searched on and the words each result shared.
+     */
+    public function previewBasicSuggestions($jsst_question) {
+        $jsst_question = trim(preg_replace('/\s+/', ' ', (string) $jsst_question));
+        return array(
+            'terms'   => self::suggestionTerms($jsst_question),
+            'results' => $this->getBasicFixSuggestions($jsst_question, true, $jsst_question),
+        );
     }
     
 }

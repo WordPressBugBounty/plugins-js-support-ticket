@@ -142,7 +142,7 @@ $intents = array(
                             <span class="js-ticket-zywrap-label-opt"><?php echo esc_html(__('(Optional)', 'js-support-ticket')); ?></span>
                         </label>
                         <p class="js-ticket-zywrap-p-hint"><?php echo esc_html(__('Add any specific facts, business decisions, or links the AI should mention.', 'js-support-ticket')); ?></p>
-                        <textarea id="zywrap-extra-instructions" class="js-ticket-zywrap-textarea-small" rows="2" placeholder="<?php echo esc_attr(__('e.g., Approve the refund, offer a 20% discount, or let them know this will be fixed in v4.0...', 'js-support-ticket')); ?>"></textarea>
+                        <textarea id="zywrap-extra-instructions" class="js-ticket-zywrap-textarea-small" rows="2" placeholder="<?php echo esc_attr(/* translators: The % sign is a literal percent sign, not a placeholder. */ __('e.g., Approve the refund, offer a 20% discount, or let them know this will be fixed in v4.0...', 'js-support-ticket')); ?>"></textarea>
                     </div>
 
                     <div class="js-ticket-zywrap-draft-container">
@@ -317,11 +317,14 @@ jQuery(document).ready(function(\$) {
         }
     }
 
-    \$('#jsst-open-zywrap-modal').off('click').on('click', function(e) {
-        e.preventDefault();
-        openZywrapModal(null);
-    });
-
+    /* One handler for these buttons, not two. The reply-form button carries
+       both the id this used to bind and the .zywrap-open-tab-btn class below,
+       so a click ran both: this one opened the modal without ever looking at
+       data-active, and then the delegated one - which the event reaches a
+       moment later, at the document - put the not-configured alert in front of
+       the modal it had just opened. It also threw away the button's own
+       data-tab, because it passed null. The delegated handler answers both
+       questions correctly, so it is the only one left. */
     \$(document).off('click', '.zywrap-open-tab-btn').on('click', '.zywrap-open-tab-btn', function(e) {
         e.preventDefault();
         if (\$(this).data('active') != '1') { alert(zy_i18n.unconfigured_alert); return; }
@@ -477,7 +480,7 @@ jQuery(document).ready(function(\$) {
 
         var resultBox = btn.closest('.zywrap-inline-actions').next('.zywrap-inline-result');
         if (btn.data('active') != '1') {
-            resultBox.html('<div class=\"js-ticket-zywrap-status-card js-ticket-zywrap-status-inactive\"><strong>' + zy_i18n.unlock_title + '</strong><br>' + zy_i18n.unlock_desc + '<br><a href=\"?page=zywrap&jstlay=zywrap_settings\">' + zy_i18n.configure_link + '</a></div>').slideDown(200);
+            resultBox.html('<div class=\"js-ticket-zywrap-status-card js-ticket-zywrap-status-inactive\"><strong>' + zy_i18n.unlock_title + '</strong><br>' + zy_i18n.unlock_desc + '<br><a href=\"?page=aiagent&jstlay=aiagent_settings\">' + zy_i18n.configure_link + '</a></div>').slideDown(200);
             return;
         }
 

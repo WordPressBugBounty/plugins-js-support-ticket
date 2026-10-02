@@ -1,99 +1,94 @@
 <?php
    if(!defined('ABSPATH'))
     die('Restricted Access');
+
+/**
+ * Add / edit a department.
+ *
+ * Two groups in one form panel: where a ticket goes, and how a reply signs
+ * off. `ispublic` is still posted as a hidden value.
+ */
 $jsst_jssupportticket_js ='
     jQuery(document).ready(function ($) {
         $.validate();
     });
 ';
 wp_add_inline_script('js-support-ticket-main-js',$jsst_jssupportticket_js);
-?>
 
+$jsst_dept    = isset(jssupportticket::$jsst_data[0]) ? jssupportticket::$jsst_data[0] : false;
+$jsst_isedit  = !empty($jsst_dept->id);
+$jsst_heading = $jsst_isedit ? __('Edit Department', 'js-support-ticket') : __('Add Department', 'js-support-ticket');
+$jsst_nonce_id = isset($jsst_dept->id) ? $jsst_dept->id : '';
+?>
 <div id="jsstadmin-wrapper">
     <div id="jsstadmin-leftmenu">
         <?php  JSSTincluder::getClassesInclude('jsstadminsidemenu'); ?>
     </div>
     <div id="jsstadmin-data">
-        <div id="jsstadmin-wrapper-top">
-            <div id="jsstadmin-wrapper-top-left">
-                <div id="jsstadmin-breadcrunbs">
-                    <ul>
-                        <li><a href="?page=jssupportticket" title="<?php echo esc_attr(__('Dashboard','js-support-ticket')); ?>"><?php echo esc_html(__('Dashboard','js-support-ticket')); ?></a></li>
-                        <li><?php echo esc_html(__('Add Department','js-support-ticket')); ?></li>
-                    </ul>
-                </div>
-            </div>
-            <div id="jsstadmin-wrapper-top-right">
-                <div id="jsstadmin-config-btn">
-                    <a title="<?php echo esc_attr(__('Configuration','js-support-ticket')); ?>" href="<?php echo esc_url(admin_url("admin.php?page=configuration")); ?>">
-                        <img alt = "<?php echo esc_attr(__('Configuration','js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/config.png" />
-                    </a>
-                </div>
-                <div id="jsstadmin-config-btn" class="jssticketadmin-help-btn">
-                    <a href="<?php echo esc_url(admin_url("admin.php?page=jssupportticket&jstlay=help")); ?>" title="<?php echo esc_attr(__('Help','js-support-ticket')); ?>">
-                        <img alt = "<?php echo esc_attr(__('Help','js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/help.png" />
-                    </a>
-                </div>
-                <div id="jsstadmin-vers-txt">
-                    <?php echo esc_html(__("Version",'js-support-ticket')); ?>:
-                    <span class="jsstadmin-ver"><?php echo esc_html(JSSTincluder::getJSModel('configuration')->getConfigValue('versioncode')); ?></span>
-                </div>
-            </div>
-        </div>
-        <div id="jsstadmin-head">
-            <h1 class="jsstadmin-head-text"><?php echo esc_html(__('Add Department', 'js-support-ticket')); ?></h1>
-        </div>
+        <?php JSSTlayout::adminPageHeader(array(
+            'title'  => $jsst_heading,
+            'crumbs' => array(array('text' => __('Departments', 'js-support-ticket'), 'url' => admin_url('admin.php?page=department&jstlay=departments'))),
+        )); ?>
         <div id="jsstadmin-data-wrp">
-            <?php $jsst_nonce_id = isset(jssupportticket::$jsst_data[0]->id) ? jssupportticket::$jsst_data[0]->id : ''; ?>
             <form class="jsstadmin-form" method="post" action="<?php echo esc_url(wp_nonce_url(admin_url("admin.php?page=department&task=savedepartment"),"save-department-".$jsst_nonce_id)); ?>">
-                <div class="js-form-wrapper">
-                    <div class="js-form-title"><?php echo esc_html(__('Title', 'js-support-ticket')); ?>&nbsp;<span style="color: red;" >*</span></div>
-                    <div class="js-form-value"><?php echo wp_kses(JSSTformfield::text('departmentname', isset(jssupportticket::$jsst_data[0]->departmentname) ? jssupportticket::$jsst_data[0]->departmentname : '', array('class' => 'inputbox js-form-input-field', 'data-validation' => 'required')), JSST_ALLOWED_TAGS) ?></div>
-                </div>
-                <div class="js-form-wrapper">
-                    <div class="js-form-title">
-                        <?php echo esc_html(__('Outgoing Email', 'js-support-ticket')); ?>&nbsp;<span style="color: red;" >*</span>
-                        <a title="<?php echo esc_attr(__('Add New Email','js-support-ticket')); ?>" class="js-form-link" href="?page=email&jstlay=addemail"><?php echo esc_html(__('Add New Email','js-support-ticket')); ?></a>
+                <div class="jsst-formpanel">
+                    <div class="jsst-formbody">
+                        <fieldset class="jsst-fieldset">
+                            <legend class="jsst-fieldset-legend"><?php echo esc_html(__('Where the ticket goes', 'js-support-ticket')); ?></legend>
+                            <div class="jsst-formgrid">
+                                <div class="jsst-frow jsst-frow-md">
+                                    <label class="jsst-flabel" for="departmentname"><?php echo esc_html(__('Title', 'js-support-ticket')); ?> <span class="jsst-req">*</span></label>
+                                    <div class="jsst-fval"><?php echo wp_kses(JSSTformfield::text('departmentname', isset($jsst_dept->departmentname) ? $jsst_dept->departmentname : '', array('data-validation' => 'required')), JSST_ALLOWED_TAGS) ?></div>
+                                </div>
+                                <div class="jsst-frow jsst-frow-md">
+                                    <div class="jsst-flabel-row">
+                                        <label class="jsst-flabel" for="emailid"><?php echo esc_html(__('Outgoing Email', 'js-support-ticket')); ?> <span class="jsst-req">*</span></label>
+                                        <a class="jsst-flabel-link" href="<?php echo esc_url(admin_url('admin.php?page=email&jstlay=addemail')); ?>"><?php echo esc_html(__('Add new email','js-support-ticket')); ?></a>
+                                    </div>
+                                    <div class="jsst-fval"><?php echo wp_kses(JSSTformfield::select('emailid', JSSTincluder::getJSModel('email')->getEmailForDepartment(), isset($jsst_dept->emailid) ? $jsst_dept->emailid : '', esc_html(__('Select Email', 'js-support-ticket')), array('data-validation' => 'required')), JSST_ALLOWED_TAGS); ?></div>
+                                    <p class="jsst-fhelp"><?php echo esc_html(__('New tickets in this department are sent from here.','js-support-ticket')); ?></p>
+                                </div>
+                                <div class="jsst-frow-break"></div>
+                                <div class="jsst-frow jsst-frow-sm">
+                                    <span class="jsst-flabel"><?php echo esc_html(__('Status', 'js-support-ticket')); ?></span>
+                                    <div class="jsst-fval"><div class="jsst-seg"><?php echo wp_kses(JSSTformfield::radiobutton('status', array('1' => esc_html(__('Enabled', 'js-support-ticket')), '0' => esc_html(__('Disabled', 'js-support-ticket'))), isset($jsst_dept->status) ? $jsst_dept->status : '1'), JSST_ALLOWED_TAGS); ?></div></div>
+                                </div>
+                                <div class="jsst-frow jsst-frow-sm">
+                                    <span class="jsst-flabel"><?php echo esc_html(__('Receive Email', 'js-support-ticket')); ?></span>
+                                    <div class="jsst-fval"><div class="jsst-seg"><?php echo wp_kses(JSSTformfield::radiobutton('sendmail', array('1' => esc_html(__('Yes', 'js-support-ticket')), '0' => esc_html(__('No', 'js-support-ticket'))), isset($jsst_dept->sendmail) ? $jsst_dept->sendmail : '0'), JSST_ALLOWED_TAGS); ?></div></div>
+                                </div>
+                                <div class="jsst-frow jsst-frow-lg">
+                                    <span class="jsst-flabel"><?php echo esc_html(__('Default', 'js-support-ticket')); ?></span>
+                                    <div class="jsst-fval"><div class="jsst-seg"><?php echo wp_kses(JSSTformfield::radiobutton('isdefault', array('2' => esc_html(__('Default with auto assign', 'js-support-ticket')), '1' => esc_html(__('Yes', 'js-support-ticket')), '0' => esc_html(__('No', 'js-support-ticket'))), isset($jsst_dept->isdefault) ? $jsst_dept->isdefault : '0'), JSST_ALLOWED_TAGS); ?></div></div>
+                                    <p class="jsst-fhelp"><?php echo esc_html(__('The department a ticket lands in when nobody picked one.','js-support-ticket')); ?></p>
+                                </div>
+                            </div>
+                        </fieldset>
+
+                        <fieldset class="jsst-fieldset">
+                            <legend class="jsst-fieldset-legend"><?php echo esc_html(__('How replies sign off', 'js-support-ticket')); ?></legend>
+                            <div class="jsst-formgrid">
+                                <div class="jsst-frow jsst-frow-full">
+                                    <span class="jsst-flabel"><?php echo esc_html(__('Signature', 'js-support-ticket')); ?></span>
+                                    <div class="jsst-fval"><?php wp_editor(isset($jsst_dept->departmentsignature) ? $jsst_dept->departmentsignature : '', 'departmentsignature', array('media_buttons' => false)); ?></div>
+                                </div>
+                                <div class="jsst-frow jsst-frow-full">
+                                    <span class="jsst-check"><?php echo wp_kses(JSSTformfield::checkbox('canappendsignature', array('1' => esc_html(__('Append this signature to every reply', 'js-support-ticket'))), isset($jsst_dept->canappendsignature) ? $jsst_dept->canappendsignature : '1'), JSST_ALLOWED_TAGS); ?></span>
+                                </div>
+                            </div>
+                        </fieldset>
                     </div>
-                    <div class="js-form-value"><?php echo wp_kses(JSSTformfield::select('emailid', JSSTincluder::getJSModel('email')->getEmailForDepartment(), isset(jssupportticket::$jsst_data[0]->emailid) ? jssupportticket::$jsst_data[0]->emailid : '', esc_html(__('Select Email', 'js-support-ticket')), array('class' => 'inputbox js-form-select-field', 'data-validation' => 'required')), JSST_ALLOWED_TAGS); ?>
+                    <?php echo wp_kses(JSSTformfield::hidden('ispublic', isset($jsst_dept->ispublic) ? $jsst_dept->ispublic : '1'), JSST_ALLOWED_TAGS); ?>
+                    <?php echo wp_kses(JSSTformfield::hidden('id', isset($jsst_dept->id) ? $jsst_dept->id : ''), JSST_ALLOWED_TAGS); ?>
+                    <?php echo wp_kses(JSSTformfield::hidden('created', isset($jsst_dept->created) ? $jsst_dept->created : ''), JSST_ALLOWED_TAGS); ?>
+                    <?php echo wp_kses(JSSTformfield::hidden('updated', isset($jsst_dept->updated) ? $jsst_dept->updated : ''), JSST_ALLOWED_TAGS); ?>
+                    <?php echo wp_kses(JSSTformfield::hidden('ordering', isset($jsst_dept->ordering) ? $jsst_dept->ordering : ''), JSST_ALLOWED_TAGS); ?>
+                    <?php echo wp_kses(JSSTformfield::hidden('form_request', 'jssupportticket'), JSST_ALLOWED_TAGS); ?>
+                    <div class="jsst-formfoot">
+                        <span class="jsst-formfoot-note"><?php echo esc_html(__('Required fields are marked', 'js-support-ticket')); ?> <span class="jsst-req" aria-hidden="true">*</span></span>
+                        <a class="jsst-btn" href="<?php echo esc_url(admin_url('admin.php?page=department&jstlay=departments')); ?>"><?php echo esc_html(__('Cancel', 'js-support-ticket')); ?></a>
+                        <?php echo wp_kses(JSSTformfield::submitbutton('save', esc_html(__('Save Department', 'js-support-ticket')), array('class' => 'jsst-btn jsst-btn-primary')), JSST_ALLOWED_TAGS); ?>
                     </div>
-                    <div class="js-form-desc">(<?php echo esc_html(__('The user of this department will receive email on the new ticket','js-support-ticket')); ?>)</div>
-                </div>
-                <div class="js-form-wrapper" style="display:none;">
-                    <div class="js-form-title"><?php echo esc_html(__('Public', 'js-support-ticket')); ?></div>
-                    <div class="js-form-value"><?php echo wp_kses(JSSTformfield::radiobutton('ispublic', array('1' => esc_html(__('Public', 'js-support-ticket')), '0' => esc_html(__('Private', 'js-support-ticket'))), isset(jssupportticket::$jsst_data[0]->ispublic) ? jssupportticket::$jsst_data[0]->ispublic : '1', array('class' => 'radiobutton')), JSST_ALLOWED_TAGS); ?></div>
-                </div>
-                <div class="js-form-wrapper" >
-                    <div class="js-form-title"><?php echo esc_html(__('Receive Email', 'js-support-ticket')); ?></div>
-                    <div class="js-form-value"><?php echo wp_kses(JSSTformfield::radiobutton('sendmail', array('1' => esc_html(__('Yes', 'js-support-ticket')), '0' => esc_html(__('No', 'js-support-ticket'))), isset(jssupportticket::$jsst_data[0]->sendmail) ? jssupportticket::$jsst_data[0]->sendmail : '0', array('class' => 'radiobutton')), JSST_ALLOWED_TAGS); ?></div>
-                </div>
-                <div class="js-form-wrapper fullwidth">
-                    <div class="js-form-title"><?php echo esc_html(__('Signature', 'js-support-ticket')); ?></div>
-                    <div class="js-form-value"><?php wp_editor(isset(jssupportticket::$jsst_data[0]->departmentsignature) ? jssupportticket::$jsst_data[0]->departmentsignature : '', 'departmentsignature', array('media_buttons' => false)); ?></div>
-                </div>
-                <div class="js-form-wrapper">
-                    <div class="js-form-title"><?php echo esc_html(__('Append Signature','js-support-ticket')); ?></div>
-                    <div class="js-form-value">
-                        <div class="js-form-chkbox-field">
-                            <?php echo wp_kses(JSSTformfield::checkbox('canappendsignature', array('1' => esc_html(__('Append signature with a reply', 'js-support-ticket'))), isset(jssupportticket::$jsst_data[0]->canappendsignature) ? jssupportticket::$jsst_data[0]->canappendsignature : '1', array('class' => 'radiobutton')), JSST_ALLOWED_TAGS); ?>
-                        </div>
-                    </div>
-                </div>
-                <div class="js-form-wrapper">
-                    <div class="js-form-title"><?php echo esc_html(__('Status', 'js-support-ticket')); ?></div>
-                    <div class="js-form-value"><?php echo wp_kses(JSSTformfield::radiobutton('status', array('1' => esc_html(__('Enabled', 'js-support-ticket')), '0' => esc_html(__('Disabled', 'js-support-ticket'))), isset(jssupportticket::$jsst_data[0]->status) ? jssupportticket::$jsst_data[0]->status : '1', array('class' => 'radiobutton')), JSST_ALLOWED_TAGS); ?></div>
-                </div>
-                <div class="js-form-wrapper" >
-                    <div class="js-form-title"><?php echo esc_html(__('Default', 'js-support-ticket')); ?></div>
-                    <div class="js-form-value"><?php echo wp_kses(JSSTformfield::radiobutton('isdefault', array('2' => esc_html(__('Default with auto assign', 'js-support-ticket')), '1' => esc_html(__('Yes', 'js-support-ticket')), '0' => esc_html(__('No', 'js-support-ticket'))), isset(jssupportticket::$jsst_data[0]->isdefault) ? jssupportticket::$jsst_data[0]->isdefault : '0', array('class' => 'radiobutton')), JSST_ALLOWED_TAGS); ?></div>
-                </div>
-                <?php echo wp_kses(JSSTformfield::hidden('id', isset(jssupportticket::$jsst_data[0]->id) ? jssupportticket::$jsst_data[0]->id : ''), JSST_ALLOWED_TAGS); ?>
-                <?php echo wp_kses(JSSTformfield::hidden('created', isset(jssupportticket::$jsst_data[0]->created) ? jssupportticket::$jsst_data[0]->created : ''), JSST_ALLOWED_TAGS); ?>
-                <?php echo wp_kses(JSSTformfield::hidden('updated', isset(jssupportticket::$jsst_data[0]->updated) ? jssupportticket::$jsst_data[0]->updated : ''), JSST_ALLOWED_TAGS); ?>
-                <?php echo wp_kses(JSSTformfield::hidden('ordering', isset(jssupportticket::$jsst_data[0]->ordering) ? jssupportticket::$jsst_data[0]->ordering : ''), JSST_ALLOWED_TAGS); ?>
-                <?php echo wp_kses(JSSTformfield::hidden('form_request', 'jssupportticket'), JSST_ALLOWED_TAGS); ?>
-                <div class="js-form-button">
-                    <?php echo wp_kses(JSSTformfield::submitbutton('save', esc_html(__('Save Department', 'js-support-ticket')), array('class' => 'button js-form-save')), JSST_ALLOWED_TAGS); ?>
                 </div>
             </form>
         </div>

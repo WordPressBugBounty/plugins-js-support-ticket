@@ -37,6 +37,7 @@ class JSSTdeactivation {
         wp_clear_scheduled_hook('jsst_auto_update_addons');
         wp_clear_scheduled_hook('jsst_delete_expire_session_data');
         wp_clear_scheduled_hook('jsst_daily_autocleanup_cron'); // Roadmap 4.0-CORE-13
+        wp_clear_scheduled_hook('jsst_translations_daily');
         $jsst_id = jssupportticket::getPageid();
         jssupportticket::$_db->get_var(jssupportticket::$_db->prepare("UPDATE `" . jssupportticket::$_db->prefix . "posts` SET post_status = 'draft' WHERE ID = %d", $jsst_id));
 
@@ -96,8 +97,86 @@ class JSSTdeactivation {
            $wpdb->prefix."js_ticket_tags",
            // So are saved queue views. (Roadmap 4.0-CORE-18)
            $wpdb->prefix."js_ticket_saved_views",
+           // Everything 4.5 added. These are as much the customer's data as a
+           // ticket is - a watcher list says who was working on what, a
+           // notification row carries a ticket's subject, and a push
+           // subscription is an endpoint somebody's browser handed us - so
+           // uninstalling in delete mode has to clear them too. Missing from
+           // this list they would survive the plugin being deleted, which is
+           // the one thing the retention setting promises will not happen.
+           // (Roadmap 4.5-FE-05, 4.5-FE-08, 4.5-UX-02)
+           $wpdb->prefix."js_ticket_teams",
+           $wpdb->prefix."js_ticket_team_members",
+           $wpdb->prefix."js_ticket_watchers",
+           $wpdb->prefix."js_ticket_mentions",
+           $wpdb->prefix."js_ticket_collab_drafts",
+           $wpdb->prefix."js_ticket_notifications",
+           $wpdb->prefix."js_ticket_push_subscriptions",
+           // These tables ship with addons now, and each addon's own uninstall
+           // drops what it owns. They stay on this list as well, because the
+           // two uninstalls answer different questions: an addon being deleted
+           // takes its own tables, and the whole desk being deleted in delete
+           // mode takes everything the desk ever stored - including the tables
+           // of an addon whose files are still sitting in the plugins folder.
+           // DROP IF EXISTS, so whichever runs first is right.
+           //
+           // And everything 5.0 added. Same reasoning as the 4.5 block above,
+           // and the same mistake avoided: an SLA clock carries a ticket's
+           // history, a survey carries what a customer wrote about somebody by
+           // name, a time entry says what was billed for, and a retention hold
+           // records why a ticket was kept out of a deletion. Left off this
+           // list they would all survive an uninstall that was asked to delete
+           // everything, which is the one thing the retention setting promises
+           // will not happen.
+           // (Roadmap 5.0-SLA-01, 5.0-AUT-01, 5.0-AUT-04, 5.0-API-02,
+           //  5.0-API-04, 5.0-ANA-02, 5.0-ANA-03, 5.0-ANA-04)
+           $wpdb->prefix."js_ticket_sla_policies",
+           $wpdb->prefix."js_ticket_sla_clocks",
+           $wpdb->prefix."js_ticket_workflows",
+           $wpdb->prefix."js_ticket_workflow_runs",
+           $wpdb->prefix."js_ticket_recurring",
+           $wpdb->prefix."js_ticket_webhooks",
+           $wpdb->prefix."js_ticket_webhook_deliveries",
+           $wpdb->prefix."js_ticket_jobs",
+           $wpdb->prefix."js_ticket_time_entries",
+           $wpdb->prefix."js_ticket_satisfaction",
+           $wpdb->prefix."js_ticket_retention_holds",
+           $wpdb->prefix."js_ticket_retention_runs",
+           // And 5.5. A company record names people by e-mail address and says
+           // which of them may read a colleague's ticket, which is personal
+           // data about a customer twice over; a connector log holds what this
+           // desk said to somebody else's server. Same reasoning as the two
+           // blocks above.
+           // (Roadmap 5.5-COM-06, 5.5-CH-04, 5.5-COM-05)
+           $wpdb->prefix."js_ticket_companies",
+           $wpdb->prefix."js_ticket_company_people",
+           $wpdb->prefix."js_ticket_connector_log",
+           $wpdb->prefix."js_ticket_entitlements",
+           $wpdb->prefix."js_ticket_entitlement_ledger",
+           // A consent record is what somebody agreed to and when. It is
+           // personal data, and it goes with everything else in delete mode.
+           // (Roadmap 5.5-SEC-02)
+           $wpdb->prefix."js_ticket_marketing_consent",
+           // And 6.0. The source register holds one row per document somebody
+           // decided the AI may or may not quote. It is a record of a human
+           // judgement rather than derived state, so nothing rebuilds it and it
+           // has to go with the rest in delete mode. (Roadmap 6.0-AI-02)
+           $wpdb->prefix."js_ticket_ai_rules",
+           // Every answer the AI proposed and what a person decided about it.
+           // A record of human judgement, not derived state. (Roadmap 6.0-AI-03)
+           $wpdb->prefix."js_ticket_ai_answers",
         );
-        return $jsst_tables;
+
+        // Plus every table that actually exists under the plugin's prefix. The
+        // list above is written by hand and the add-ons outgrew it: on a full
+        // 5.0.0 install 38 of 91 tables were missing from it (staff, articles,
+        // categories, the AI and chat tables...), so "delete" left them all
+        // behind. The explicit list stays for readability; this makes it
+        // complete. $wpdb->prefix is per site, so on multisite this only ever
+        // sees the current site's tables.
+        // phpcs:ignore WordPress.DB.DirectDatabaseQuery
+        $jsst_found = $wpdb->get_col($wpdb->prepare('SHOW TABLES LIKE %s', $wpdb->esc_like($wpdb->prefix . 'js_ticket_') . '%'));
+        return array_values(array_unique(array_merge($jsst_tables, (array) $jsst_found)));
     }
 
     /**
@@ -144,6 +223,144 @@ class JSSTdeactivation {
             'jsst_merged_addon_restored_cannedresponses',
             'jsst_merged_addon_restored_helptopic',
             'jsst_merged_addon_restored_emailcc',
+            // 4.5's settings and schema markers. The markers have to go with
+            // the tables in delete mode for the same reason jsst_sql_applied
+            // does: a marker left behind tells a later reinstall the table it
+            // names already exists, and the repair that would have created it
+            // never runs. (Roadmap 4.5-FE-04 onwards)
+            'jsst_teams_schema',
+            'jsst_collab_schema',
+            'jsst_notifications_schema',
+            'jsst_webpush_schema',
+            'jsst_visibility_agents',
+            'jsst_visibility_default',
+            'jsst_visibility_roles',
+            'jsst_availability_agents',
+            'jsst_availability_default',
+            'jsst_workload',
+            'jsst_notification_prefs',
+            'jsst_notification_digest_sent',
+            'jsst_webpush_keys',
+            'jsst_role_templates',
+            'jsst_brand',
+            'jsst_internalmail_migrated',
+            'jsst_queue_columns',
+            'jsst_recent_events',
+            // 5.0's settings and schema markers, listed as they are written
+            // rather than at the end of the release: the 4.5 block above was
+            // assembled afterwards and every one of them had been missed, which
+            // left push endpoints and notification history behind on an
+            // uninstall that was asked to delete everything.
+            // (Roadmap 5.0-SLA-01 onwards)
+            'jsst_sla_schema',
+            'jsst_sla_settings',
+            'jsst_sla_tiers',
+            'jsst_sla_migrated_policies',
+            'jsst_sla_overdue_snapshot',
+            'jsst_workflow_schema',
+            'jsst_workflow_settings',
+            'jsst_routing',
+            'jsst_routing_pointer',
+            'jsst_routing_log',
+            'jsst_recurring_schema',
+            'jsst_restapi_settings',
+            'jsst_webhooks_schema',
+            'jsst_webhooks_settings',
+            'jsst_webhook_site_secret',
+            'jsst_hooks_index',
+            'jsst_form_logic',
+            'jsst_form_validation',
+            'jsst_form_versions',
+            // The export screen keeps its schedules and its record of the
+            // files it produced in options rather than a table of its own, so
+            // they are cleared here; the files themselves live under the data
+            // directory, which jssupportticket_delete_data_directory() already
+            // removes wholesale. (Roadmap 5.0-ANA-01)
+            'jsst_export_schedules',
+            'jsst_export_files',
+            // The authorisation matrix's cached scan. (Roadmap 5.0-SEC-01)
+            'jsst_authmatrix',
+            // Time worked: how it is counted, what each person is expected to
+            // bill and what each customer agreed to. The entries themselves
+            // are a table and are dropped with the others. (Roadmap 5.0-ANA-02)
+            'jsst_time_settings',
+            'jsst_time_targets',
+            'jsst_time_budgets',
+            'jsst_time_adopted',
+            'jsst_time_schema',
+            // Satisfaction: how people are asked, and the flag that stops a
+            // fallen score being announced every hour. (Roadmap 5.0-ANA-03)
+            'jsst_satisfaction_settings',
+            'jsst_satisfaction_schema',
+            'jsst_satisfaction_alerted',
+            // Retention governance. The holds and the proposals are tables and
+            // are dropped with the others. (Roadmap 5.0-ANA-04)
+            'jsst_retention_settings',
+            'jsst_retention_schema',
+            // Analytics keeps no table: only the digest's cadence and the mark
+            // that stops a missed cron sending two. (Roadmap 5.0-ANA-05)
+            'jsst_analytics_settings',
+            'jsst_analytics_digest_sent',
+            // 5.5. The connector secrets are the reason this block matters more
+            // than the ones above it: leaving them behind leaves live API keys
+            // for somebody else's service in the database of a site whose owner
+            // asked for everything to be deleted.
+            // (Roadmap 5.5-COM-06, 5.5-CH-04, 5.5-CH-02, 5.5-COM-05)
+            'jsst_companies_schema',
+            'jsst_connectors_schema',
+            'jsst_connector_settings',
+            'jsst_connector_secrets',
+            'jsst_connector_health',
+            'jsst_entitlements_schema',
+            'jsst_entitlement_settings',
+            'jsst_entitlement_overrides',
+            'jsst_entitlement_refusals',
+            'jsst_chat_routes',
+            'jsst_chat_people',
+            'jsst_consent_schema',
+            'jsst_consent_settings',
+            'jsst_templatelocale_schema',
+            // 6.0. The engine keys belong on this list for exactly the reason
+            // the connector secrets above it do - they are somebody's paid API
+            // credentials, and leaving them in the options table of a site whose
+            // owner asked for everything to be deleted is the worst thing this
+            // file can get wrong. The Copilot's older option names are here too
+            // because JSSTaiengine still falls back to reading them, so deleting
+            // only the new ones would leave a working key behind under the name
+            // it had before the unification.
+            // (Roadmap 6.0-AI-01, 6.0-AI-02, 6.0-AI-08)
+            'jsst_ai_master',
+            'jsst_ai_lanes',
+            'jsst_ai_redact',
+            'jsst_ai_journal',
+            'jsst_ai_engine',
+            'jsst_ai_model',
+            'jsst_ai_key_zywrap',
+            'jsst_ai_key_anthropic',
+            'jsst_ai_key_local',
+            'jsst_ai_local_endpoint',
+            'jsst_ai_local_model',
+            'jsst_ai_local_timeout',
+            'jsst_copilot_api_key',
+            'jsst_copilot_provider',
+            'jsst_copilot_model',
+            'jsst_copilot_language',
+            'jsst_copilot_log',
+            'jsst_copilot_batches',
+            'jsst_zywrap_api_key',
+            // And the source register's bookkeeping. The schema marker goes
+            // with its table for the reason the 4.5 block sets out: a marker
+            // left behind tells a later reinstall the table already exists.
+            'jsst_ai_sources',
+            'jsst_ai_rules_schema',
+            'jsst_ai_answers_schema',
+            'jsst_ai_approval',
+            'jsst_ai_never_automate',
+            'jsst_ai_benchmark_fixture',
+            'jsst_ai_config_renamed',
+            'jsst_aiagent_adopted',
+            'jsst_ai_source_modes',
+            'jsst_ai_source_sync',
         );
     }
 
@@ -194,6 +411,43 @@ class JSSTdeactivation {
         }
 
         foreach (self::jssupportticket_options_to_delete() as $jsst_option) {
+            delete_option($jsst_option);
+        }
+
+        // Every option the plugin and its add-ons created, not only the ones
+        // listed: 28 were left behind by the list alone, among them the
+        // licence key, its state and token, so a "delete everything" uninstall
+        // came back already licensed on reinstall. Also 4.0.0's stored
+        // installer tokens and the plugin's transients.
+        //
+        // `jsst_` alone missed the add-ons' own rows, which are spelled with a
+        // hyphen (jsst-addon-<name>-version / -active-state), the licence
+        // state row, and the widget, review and post-installation settings -
+        // 76 rows on a full install - so each spelling is named here.
+        $jsst_patterns = array(
+            'jsst_',
+            'jsst-addon-',
+            'jsstnotification_',
+            'JSSTSocialLogin',
+            'jssupportticket_',
+            'jssupport_',
+            'widget_jsst',
+            'transaction_key_for_js-support-ticket',
+            'key_status_for_js-support-ticket',
+            '_transient_jsst_',
+            '_transient_timeout_jsst_',
+        );
+        $jsst_where = implode(' OR ', array_fill(0, count($jsst_patterns), 'option_name LIKE %s'));
+        $jsst_likes = array();
+        foreach ($jsst_patterns as $jsst_pattern) {
+            $jsst_likes[] = $wpdb->esc_like($jsst_pattern) . '%';
+        }
+        // phpcs:ignore WordPress.DB.DirectDatabaseQuery, WordPress.DB.PreparedSQL.InterpolatedNotPrepared -- the placeholders are generated above, one per pattern.
+        $jsst_names = $wpdb->get_col($wpdb->prepare(
+            "SELECT option_name FROM {$wpdb->options} WHERE " . $jsst_where,
+            $jsst_likes
+        ));
+        foreach ((array) $jsst_names as $jsst_option) {
             delete_option($jsst_option);
         }
 

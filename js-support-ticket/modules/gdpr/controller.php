@@ -59,7 +59,7 @@ class JSSTgdprController {
         $jsst_id = JSSTrequest::getVar('id');
         $jsst_nonce = JSSTrequest::getVar('_wpnonce');
         if (! wp_verify_nonce( $jsst_nonce, 'save-gdprfield-'.$jsst_id) ) {
-            die( 'Security check Failed' );
+            die( esc_html__( 'Security check Failed', 'js-support-ticket' ) );
         }
         $jsst_data = JSSTrequest::get('post');
         JSSTincluder::getJSModel('fieldordering')->storeUserField($jsst_data);
@@ -72,7 +72,7 @@ class JSSTgdprController {
         $jsst_id = JSSTrequest::getVar('id');
         $jsst_nonce = JSSTrequest::getVar('_wpnonce');
         if (! wp_verify_nonce( $jsst_nonce, 'save-usereraserequest-'.$jsst_id) ) {
-            die( 'Security check Failed' );
+            die( esc_html__( 'Security check Failed', 'js-support-ticket' ) );
         }
         $jsst_data = JSSTrequest::get('post');
         if($jsst_data['subject'] == "" || $jsst_data['message'] == ""){
@@ -91,7 +91,7 @@ class JSSTgdprController {
     static function deletegdpr() {
         $jsst_nonce = JSSTrequest::getVar('_wpnonce');
         if (! wp_verify_nonce( $jsst_nonce, 'delete-gdpr') ) {
-            die( 'Security check Failed' );
+            die( esc_html__( 'Security check Failed', 'js-support-ticket' ) );
         }
         $jsst_id = JSSTrequest::getVar('gdprid');
         JSSTincluder::getJSModel('fieldordering')->deleteUserField( absint( $jsst_id ) );
@@ -107,7 +107,7 @@ class JSSTgdprController {
     static function removeusereraserequest() {
         $jsst_nonce = JSSTrequest::getVar('_wpnonce');
         if (! wp_verify_nonce( $jsst_nonce, 'delete-usereraserequest') ) {
-            die( 'Security check Failed' );
+            die( esc_html__( 'Security check Failed', 'js-support-ticket' ) );
         }
         $jsst_id = JSSTrequest::getVar('jssupportticketid');
         JSSTincluder::getJSModel('gdpr')->deleteUserEraseRequest( absint( $jsst_id ) );
@@ -120,7 +120,7 @@ class JSSTgdprController {
         $jsst_nonce = JSSTrequest::getVar('_wpnonce');
 
         if (! wp_verify_nonce( $jsst_nonce, 'export-usereraserequest') ) {
-            die( 'Security check Failed' );
+            die( esc_html__( 'Security check Failed', 'js-support-ticket' ) );
         }
         // get current user ID by function due to security reasons
         $jsst_uid  = JSSTincluder::getObjectClass('user')->uid();
@@ -128,12 +128,13 @@ class JSSTgdprController {
         if (!empty($jsst_return_value)) {
             // Push the report now!
             $jsst_msg = esc_html(__('User Data', 'js-support-ticket'));
-            $jsst_name = 'export-overalll-reports';
+            /* Named for what it is - the person's own support data - and dated,
+               so a second export does not overwrite the first. */
+            $jsst_name = 'my-support-data-' . gmdate('Y-m-d');
             header("Content-type: application/octet-stream");
             header("Content-Disposition: attachment; filename=" . $jsst_name . ".xls");
             header("Pragma: no-cache");
             header("Expires: 0");
-            header("Lacation: excel.htm?id=yes");
             print wp_kses($jsst_return_value, JSST_ALLOWED_TAGS);
             exit;
         }
@@ -154,7 +155,7 @@ class JSSTgdprController {
         $jsst_nonce = JSSTrequest::getVar('_wpnonce');
 
         if (! wp_verify_nonce( $jsst_nonce, 'delete-userdata') ) {
-            die( 'Security check Failed' );
+            die( esc_html__( 'Security check Failed', 'js-support-ticket' ) );
         }
         $jsst_uid  = absint( JSSTrequest::getVar('jssupportticketid') );
         $jsst_return_value = JSSTincluder::getJSModel('gdpr')->deleteUserData($jsst_uid);
@@ -169,7 +170,7 @@ class JSSTgdprController {
         }
         $jsst_nonce = JSSTrequest::getVar('_wpnonce');
         if (! wp_verify_nonce( $jsst_nonce, 'erase-userdata') ) {
-            die( 'Security check Failed' );
+            die( esc_html__( 'Security check Failed', 'js-support-ticket' ) );
         }
         $jsst_uid  = absint( JSSTrequest::getVar('jssupportticketid') );
         $jsst_return_value = JSSTincluder::getJSModel('gdpr')->anonymizeUserData($jsst_uid);

@@ -229,7 +229,7 @@ class JSSTemailtemplateModel {
         }
         $jsst_nonce = JSSTrequest::getVar('_wpnonce');
         if (! wp_verify_nonce( $jsst_nonce, 'list-email-template') ) {
-            die( 'Security check Failed' );
+            die( esc_html__( 'Security check Failed', 'js-support-ticket' ) );
         }
         $jsst_templatefor = JSSTrequest::getVar('templatefor');
         $jsst_query = jssupportticket::$_db->prepare("SELECT * FROM `" . jssupportticket::$_db->prefix . "js_ticket_emailtemplates` WHERE templatefor = %s", $jsst_templatefor);

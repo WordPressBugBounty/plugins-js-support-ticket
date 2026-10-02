@@ -179,7 +179,7 @@ class JSSTsystemstatus {
                 'label'    => $jsst_label,
                 'path'     => $jsst_path,
                 'exists'   => is_dir($jsst_path),
-                'writable' => is_dir($jsst_path) && is_writable($jsst_path),
+                'writable' => is_dir($jsst_path) && jssupportticketphplib::JSST_is_writable($jsst_path),
             );
         }
         return $jsst_out;
@@ -193,12 +193,23 @@ class JSSTsystemstatus {
         if (class_exists('JSSTdeactivation') && method_exists('JSSTdeactivation', 'jssupportticket_get_retention_mode')) {
             $jsst_mode = JSSTdeactivation::jssupportticket_get_retention_mode();
         }
-        $jsst_cleanup_on = !empty(jssupportticket::$_config['autocleanup_enable']);
+        /* `autocleanup_enable` and `autocleanup_ticket_days` until now, and
+           neither name is written by anything or has a row - so this card said
+           "retention cleanup is off" on every site, including the ones it was
+           running on. The real settings are the two intervals below, and they
+           are months. JSSTprivacy::retentionSummary() carries the long version
+           of this note; it is the same bug, and it was published there.
+           (Roadmap 4.0-CORE-13) */
+        $jsst_tickets = isset(jssupportticket::$_config['autocleanup_ticket_interval'])
+            ? (int) jssupportticket::$_config['autocleanup_ticket_interval'] : 0;
+        $jsst_files = isset(jssupportticket::$_config['autocleanup_attachment_interval'])
+            ? (int) jssupportticket::$_config['autocleanup_attachment_interval'] : 0;
         return array(
-            'uninstall_mode' => $jsst_mode,
-            'uninstall_safe' => ($jsst_mode !== 'delete'),
-            'cleanup_on'     => $jsst_cleanup_on,
-            'cleanup_days'   => isset(jssupportticket::$_config['autocleanup_ticket_days']) ? (int) jssupportticket::$_config['autocleanup_ticket_days'] : 0,
+            'uninstall_mode'    => $jsst_mode,
+            'uninstall_safe'    => ($jsst_mode !== 'delete'),
+            'cleanup_on'        => ($jsst_tickets > 0 || $jsst_files > 0),
+            'cleanup_months'    => $jsst_tickets,
+            'attachment_months' => $jsst_files,
         );
     }
 
@@ -221,6 +232,61 @@ class JSSTsystemstatus {
     /**
      * Everything, for the screen.
      */
+    /**
+     * How much CSS debt is left. (Roadmap 4.0-UX-06)
+     *
+     * The design-system task is a continuous one - it is paid down alongside
+     * releases rather than in a single afternoon - and a continuous task with
+     * no number attached is one that quietly stops being worked on. So the
+     * debt is counted, here, where the rest of this site's state is reported
+     * and where it travels in the debug bundle.
+     *
+     * Four figures per stylesheet, and each is a specific claim:
+     *
+     *   important  Declarations that win by force. Every one is a rule some
+     *              future screen will have to fight.
+     *   float      The old layout. Each is a place flex or grid has not
+     *              reached yet.
+     *   tokens     Uses of a design token, which is the direction of travel.
+     *   motion     Transitions and animations, which is what the
+     *              reduced-motion block has to be able to cover.
+     */
+    public static function designDebt() {
+        $jsst_files = array('admincss.css', 'admincssrtl.css', 'style.css', 'stylertl.css');
+        $jsst_out = array('files' => array(), 'important' => 0, 'float' => 0, 'tokens' => 0, 'motion' => 0);
+        foreach ($jsst_files as $jsst_file) {
+            $jsst_path = JSST_PLUGIN_PATH . 'includes/css/' . $jsst_file;
+            if (!file_exists($jsst_path)) {
+                continue;
+            }
+            $jsst_css = (string) file_get_contents($jsst_path);
+            /* Comments out first. This file explains its own rules at length,
+               and several of those explanations contain the word !important -
+               counting them would report a debt larger than the one that
+               exists, which is the opposite of what publishing a number is
+               for. */
+            $jsst_css = preg_replace('#/\*.*?\*/#s', '', $jsst_css);
+            $jsst_row = array(
+                'important' => preg_match_all('/!important/i', $jsst_css),
+                'float'     => preg_match_all('/float\s*:\s*(left|right)/i', $jsst_css),
+                'tokens'    => preg_match_all('/var\(\s*--jsst-/i', $jsst_css),
+                'motion'    => preg_match_all('/(transition|animation)\s*:/i', $jsst_css),
+                'grid'      => preg_match_all('/display\s*:\s*(inline-)?grid/i', $jsst_css),
+                'flex'      => preg_match_all('/display\s*:\s*(inline-)?flex/i', $jsst_css),
+            );
+            $jsst_out['files'][$jsst_file] = $jsst_row;
+            foreach (array('important', 'float', 'tokens', 'motion') as $jsst_key) {
+                $jsst_out[$jsst_key] += (int) $jsst_row[$jsst_key];
+            }
+        }
+        /* Whether the accessibility half is actually in place, which is a yes
+           or no rather than a count. */
+        $jsst_admin = JSST_PLUGIN_PATH . 'includes/css/admincss.css';
+        $jsst_out['reducedmotion'] = file_exists($jsst_admin)
+            && strpos((string) file_get_contents($jsst_admin), 'prefers-reduced-motion') !== false;
+        return $jsst_out;
+    }
+
     public static function report() {
         return array(
             'environment' => self::environment(),
@@ -228,6 +294,21 @@ class JSSTsystemstatus {
             'permissions' => self::permissions(),
             'retention'   => self::retention(),
             'errors'      => self::recentErrors(),
+            /* Network-activated add-ons whose tables never got created on this
+               blog. Empty on a single site, which is why the bug it looks for
+               went unnoticed for so long. (Roadmap 4.5-ARCH-05) */
+            'modules'     => class_exists('JSSTmodule') ? JSSTmodule::health() : array(),
+            /* Where the two agent workspaces stand against each other. Here as
+               well as on its own screen because it belongs in the debug bundle:
+               "the portal does not do that" is a support answer that needs a
+               figure behind it, and the figure has to travel with the rest of
+               the site's state rather than being asked for separately.
+               (Roadmap 4.5-FE-01) */
+            'workspaces'  => class_exists('JSSTworkspace') ? JSSTworkspace::summary() : array(),
+            /* The CSS debt, for the same reason the parity figure is here: a
+               number that travels with a bug report is one somebody can act
+               on. (Roadmap 4.0-UX-06) */
+            'design'      => self::designDebt(),
             'correlation' => self::correlationId(),
         );
     }

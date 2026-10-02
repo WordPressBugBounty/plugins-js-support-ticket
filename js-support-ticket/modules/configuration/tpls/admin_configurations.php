@@ -77,8 +77,8 @@ $jsst_jssupportticket_js ='
         }else if (jsstconfigid == "autocleanup") {
             jQuery("#autocleanup").css("display","inline-block");
             jQuery("#cn_ac").addClass("active");
-        }else if (jsstconfigid == "instantresolve") {
-            jQuery("#instantresolve").css("display","inline-block");
+        }else if (jsstconfigid == "aiagent") {
+            jQuery("#aiagent").css("display","inline-block");
             jQuery("#cn_ir").addClass("active");
         }else{
             jQuery("#general").css("display","inline-block");
@@ -753,39 +753,13 @@ $jsst_plugin_array = get_option('active_plugins');
         <?php  JSSTincluder::getClassesInclude('jsstadminsidemenu'); ?>
     </div>
     <div id="jsstadmin-data">
-        <div id="jsstadmin-wrapper-top">
-            <div id="jsstadmin-wrapper-top-left">
-                <div id="jsstadmin-breadcrunbs">
-                    <ul>
-                        <li><a href="?page=jssupportticket" title="<?php echo esc_attr(__('Dashboard','js-support-ticket')); ?>"><?php echo esc_html(__('Dashboard','js-support-ticket')); ?></a></li>
-                        <li><?php echo esc_html(__('Configurations','js-support-ticket')); ?></li>
-                    </ul>
-                </div>
-            </div>
-            <div id="jsstadmin-wrapper-top-right">
-                <div id="jsstadmin-config-btn">
-                    <a title="<?php echo esc_attr(__('Configuration','js-support-ticket')); ?>" href="<?php echo esc_url(admin_url("admin.php?page=configuration")); ?>">
-                        <img alt="<?php echo esc_attr(__('Configuration','js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/config.png" />
-                    </a>
-                </div>
-                <div id="jsstadmin-config-btn" class="jssticketadmin-help-btn">
-                    <a href="<?php echo esc_url(admin_url("admin.php?page=jssupportticket&jstlay=help")); ?>" title="<?php echo esc_attr(__('Help','js-support-ticket')); ?>">
-                        <img alt = "<?php echo esc_attr(__('Help','js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/help.png" />
-                    </a>
-                </div>
-                <div id="jsstadmin-vers-txt">
-                    <?php echo esc_html(__("Version",'js-support-ticket')); ?>:
-                    <span class="jsstadmin-ver"><?php echo esc_html(JSSTincluder::getJSModel('configuration')->getConfigValue('versioncode')); ?></span>
-                </div>
-            </div>
-        </div>
-        <div id="jsstadmin-head">
-            <h1 class="jsstadmin-head-text jsstadmin-head-configurations-text"><?php echo esc_html(__("Configurations", 'js-support-ticket')) ?></h1>
-        </div>
+        <?php JSSTlayout::adminPageHeader(array(
+            'title' => __('Configurations', 'js-support-ticket'),
+        )); ?>
         <div id="jsstadmin-data-wrp" class="p0 bs-n bg-n">
             <form method="post" class="js-support-ticket-configurations" action="<?php echo esc_url(wp_nonce_url(admin_url("?page=configuration&task=saveconfiguration"),"save-configuration")); ?>" enctype="multipart/form-data">
               <div class="js-support-ticket-configurations-toggle">
-                <img class="jsst_menu-icon" alt = "<?php echo esc_attr(__('menu' , 'js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL).'includes/images/menu.png'; ?>"/>
+                <svg class="jsst_menu-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" /></svg>
                 <span class="jsst_text"><?php echo esc_html(__('Select Configuration' , 'js-support-ticket')); ?> </span>
               </div>
             <?php // Search across every setting on the page, in all sections at once. ?>
@@ -804,7 +778,7 @@ $jsst_plugin_array = get_option('active_plugins');
               <ul class="jsstadmin-sidebar-menu tree accordion" data-widget="tree">
                 <li class="treeview" id="cn_gen">
                     <a href="?page=configuration&jsstconfigid=general" title="<?php echo esc_attr(__('General' , 'js-support-ticket')); ?>">
-                        <img class="jsst_menu-icon" alt = "<?php echo esc_attr(__('General' , 'js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL).'includes/images/config-icons/config.png'; ?>"/>
+                        <svg class="jsst_menu-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M9.594 3.94c.09-.542.56-.94 1.11-.94h2.593c.55 0 1.02.398 1.11.94l.213 1.281c.063.374.313.686.645.87.074.04.147.083.22.127.324.196.72.257 1.075.124l1.217-.456a1.125 1.125 0 011.37.49l1.296 2.247a1.125 1.125 0 01-.26 1.431l-1.003.827c-.293.24-.438.613-.431.992a6.759 6.759 0 010 .255c-.007.378.138.75.43.99l1.005.828c.424.35.534.954.26 1.43l-1.298 2.247a1.125 1.125 0 01-1.369.491l-1.217-.456c-.355-.133-.75-.072-1.076.124a6.57 6.57 0 01-.22.128c-.331.183-.581.495-.644.869l-.213 1.28c-.09.543-.56.941-1.11.941h-2.594c-.55 0-1.02-.398-1.11-.94l-.213-1.281c-.062-.374-.312-.686-.644-.87a6.52 6.52 0 01-.22-.127c-.325-.196-.72-.257-1.076-.124l-1.217.456a1.125 1.125 0 01-1.369-.49l-1.297-2.247a1.125 1.125 0 01.26-1.431l1.004-.827c.292-.24.437-.613.43-.992a6.932 6.932 0 010-.255c.007-.378-.138-.75-.43-.99l-1.004-.828a1.125 1.125 0 01-.26-1.43l1.297-2.247a1.125 1.125 0 011.37-.491l1.216.456c.356.133.751.072 1.076-.124.072-.044.146-.087.22-.128.332-.183.582-.495.644-.869l.214-1.281z M15 12a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
                         <span class="jsst_text"><?php echo esc_html(__('General' , 'js-support-ticket')); ?> </span>
                     </a>
                     <ul class="jsstadmin-sidebar-submenu treeview-menu">
@@ -821,7 +795,7 @@ $jsst_plugin_array = get_option('active_plugins');
                 </li>
                 <li class="treeview" id="cn_ts">
                     <a href="?page=configuration&jsstconfigid=ticketsettig" title="<?php echo esc_attr(__('Ticket Settings' , 'js-support-ticket')); ?>">
-                        <img class="jsst_menu-icon" alt = "<?php echo esc_attr(__('Ticket Settings' , 'js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL).'includes/images/config-icons/tickets.png'; ?>"/>
+                        <svg class="jsst_menu-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M16.5 6v.75m0 3v.75m0 3v.75m0 3V18m-9-5.25h5.25M7.5 15h3M3.375 5.25c-.621 0-1.125.504-1.125 1.125v3.026a2.999 2.999 0 010 5.198v3.026c0 .621.504 1.125 1.125 1.125h17.25c.621 0 1.125-.504 1.125-1.125v-3.026a2.999 2.999 0 010-5.198V6.375c0-.621-.504-1.125-1.125-1.125H3.375z" /></svg>
                         <span class="jsst_text"><?php echo esc_html(__('Ticket Settings' , 'js-support-ticket')); ?> </span>
                     </a>
                     <ul class="jsstadmin-sidebar-submenu treeview-menu">
@@ -832,7 +806,7 @@ $jsst_plugin_array = get_option('active_plugins');
                 </li>
                 <li class="treeview" id="cn_dm">
                     <a href="?page=configuration&jsstconfigid=defaultemail" title="<?php echo esc_attr(__('System Emails' , 'js-support-ticket')); ?>">
-                        <img class="jsst_menu-icon" alt = "<?php echo esc_attr(__('System Emails' , 'js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL).'includes/images/config-icons/system-email.png'; ?>"/>
+                        <svg class="jsst_menu-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" /></svg>
                         <span class="jsst_text"><?php echo esc_html(__('System Emails' , 'js-support-ticket')); ?> </span>
                     </a>
                     <ul class="jsstadmin-sidebar-submenu treeview-menu">
@@ -841,7 +815,7 @@ $jsst_plugin_array = get_option('active_plugins');
                 </li>
                 <li class="treeview" id="cn_cap">
                     <a href="?page=configuration&jsstconfigid=captcha" title="<?php echo esc_attr(__('Captcha' , 'js-support-ticket')); ?>">
-                        <img class="jsst_menu-icon" alt = "<?php echo esc_attr(__('Captcha' , 'js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL).'includes/images/config-icons/captcha.png'; ?>"/>
+                        <svg class="jsst_menu-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z" /></svg>
                         <span class="jsst_text"><?php echo esc_html(__('Captcha' , 'js-support-ticket')); ?> </span>
                     </a>
                     <ul class="jsstadmin-sidebar-submenu treeview-menu">
@@ -850,7 +824,7 @@ $jsst_plugin_array = get_option('active_plugins');
                 </li>
                 <li class="treeview" id="cn_ms">
                     <a href="?page=configuration&jsstconfigid=mailsetting" title="<?php echo esc_attr(__('Email Settings' , 'js-support-ticket')); ?>">
-                        <img class="jsst_menu-icon" alt = "<?php echo esc_attr(__('Email Settings' , 'js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL).'includes/images/config-icons/email-settings.png'; ?>"/>
+                        <svg class="jsst_menu-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M6 12L3.269 3.125A59.769 59.769 0 0121.485 12 59.768 59.768 0 013.27 20.875L5.999 12zm0 0h7.5" /></svg>
                         <span class="jsst_text"><?php echo esc_html(__('Email Settings' , 'js-support-ticket')); ?> </span>
                     </a>
                     <ul class="jsstadmin-sidebar-submenu treeview-menu">
@@ -863,7 +837,7 @@ $jsst_plugin_array = get_option('active_plugins');
                 <?php if(in_array('agent', jssupportticket::$_active_addons)){ ?>
                   <li class="treeview" id="cn_sms">
                       <a href="?page=configuration&jsstconfigid=staffmenusetting" title="<?php echo esc_attr(__('Agent Menu' , 'js-support-ticket')); ?>">
-                          <img class="jsst_menu-icon" alt = "<?php echo esc_attr(__('Agent Menu' , 'js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL).'includes/images/config-icons/agent-menu.png'; ?>"/>
+                          <svg class="jsst_menu-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" /></svg>
                           <span class="jsst_text"><?php echo esc_html(__('Agent Menu' , 'js-support-ticket')); ?> </span>
                       </a>
                       <ul class="jsstadmin-sidebar-submenu treeview-menu">
@@ -874,7 +848,7 @@ $jsst_plugin_array = get_option('active_plugins');
                 <?php } ?>
                 <li class="treeview" id="cn_ums">
                     <a href="?page=configuration&jsstconfigid=usermenusetting" title="<?php echo esc_attr(__('User Menu' , 'js-support-ticket')); ?>">
-                        <img class="jsst_menu-icon" alt = "<?php echo esc_attr(__('User Menu' , 'js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL).'includes/images/config-icons/user-menu.png'; ?>"/>
+                        <svg class="jsst_menu-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19.128a9.38 9.38 0 002.625.372 9.337 9.337 0 004.121-.952 4.125 4.125 0 00-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 018.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0111.964-3.07M12 6.375a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zm8.25 2.25a2.625 2.625 0 11-5.25 0 2.625 2.625 0 015.25 0z" /></svg>
                         <span class="jsst_text"><?php echo esc_html(__('User Menu' , 'js-support-ticket')); ?> </span>
                     </a>
                     <ul class="jsstadmin-sidebar-submenu treeview-menu">
@@ -885,7 +859,7 @@ $jsst_plugin_array = get_option('active_plugins');
                 <?php if(in_array('feedback', jssupportticket::$_active_addons)){ ?>
                   <li class="treeview" id="cn_fb">
                       <a href="?page=configuration&jsstconfigid=feedback" title="<?php echo esc_attr(__('Feedback' , 'js-support-ticket')); ?>">
-                          <img class="jsst_menu-icon" alt = "<?php echo esc_attr(__('Feedback' , 'js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL).'includes/images/config-icons/feedback.png'; ?>"/>
+                          <svg class="jsst_menu-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M11.48 3.499a.562.562 0 011.04 0l2.125 5.111a.563.563 0 00.475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 00-.182.557l1.285 5.385a.562.562 0 01-.84.61l-4.725-2.885a.563.563 0 00-.586 0L6.982 20.54a.562.562 0 01-.84-.61l1.285-5.386a.562.562 0 00-.182-.557l-4.204-3.602a.563.563 0 01.321-.988l5.518-.442a.563.563 0 00.475-.345L11.48 3.5z" /></svg>
                           <span class="jsst_text"><?php echo esc_html(__('Feedback' , 'js-support-ticket')); ?> </span>
                       </a>
                       <ul class="jsstadmin-sidebar-submenu treeview-menu">
@@ -896,7 +870,7 @@ $jsst_plugin_array = get_option('active_plugins');
                 <?php if(in_array('emailpiping', jssupportticket::$_active_addons)){ ?>
                   <li class="treeview" id="cn_tve">
                       <a href="?page=configuration&jsstconfigid=ticketviaemail" title="<?php echo esc_attr(__('Email Piping' , 'js-support-ticket')); ?>">
-                          <img class="jsst_menu-icon" alt = "<?php echo esc_attr(__('Email Piping' , 'js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL).'includes/images/config-icons/email-piping.png'; ?>"/>
+                          <svg class="jsst_menu-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M9 3.75H6.912a2.25 2.25 0 00-2.15 1.588L2.35 13.177a2.25 2.25 0 00-.1.661V18a2.25 2.25 0 002.25 2.25h15A2.25 2.25 0 0021.75 18v-4.162c0-.224-.034-.447-.1-.661L19.24 5.338a2.25 2.25 0 00-2.15-1.588H15M2.25 13.5h3.86a2.25 2.25 0 012.012 1.244l.256.512a2.25 2.25 0 002.013 1.244h3.218a2.25 2.25 0 002.013-1.244l.256-.512a2.25 2.25 0 012.013-1.244h3.859M12 3v8.25m0 0l-3-3m3 3l3-3" /></svg>
                           <span class="jsst_text"><?php echo esc_html(__('Email Piping' , 'js-support-ticket')); ?> </span>
                       </a>
                       <ul class="jsstadmin-sidebar-submenu treeview-menu">
@@ -907,7 +881,7 @@ $jsst_plugin_array = get_option('active_plugins');
                 <?php if(in_array('notification', jssupportticket::$_active_addons)){ ?>
                   <li class="treeview" id="cn_pn">
                       <a href="?page=configuration&jsstconfigid=pushnotification" title="<?php echo esc_attr(__('Push Notifications' , 'js-support-ticket')); ?>">
-                          <img class="jsst_menu-icon" alt = "<?php echo esc_attr(__('Push Notifications' , 'js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL).'includes/images/config-icons/push-notifications.png'; ?>"/>
+                          <svg class="jsst_menu-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M14.857 17.082a23.848 23.848 0 005.454-1.31A8.967 8.967 0 0118 9.75v-.7V9A6 6 0 006 9v.75a8.967 8.967 0 01-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 01-5.714 0m5.714 0a3 3 0 11-5.714 0" /></svg>
                           <span class="jsst_text"><?php echo esc_html(__('Push Notifications' , 'js-support-ticket')); ?> </span>
                       </a>
                       <ul class="jsstadmin-sidebar-submenu treeview-menu">
@@ -918,7 +892,7 @@ $jsst_plugin_array = get_option('active_plugins');
                 <?php if(in_array('privatecredentials', jssupportticket::$_active_addons)){ ?>
                   <li class="treeview" id="cn_pc">
                       <a href="?page=configuration&jsstconfigid=privatecredentials" title="<?php echo esc_attr(__('Private Credentials' , 'js-support-ticket')); ?>">
-                          <img class="jsst_menu-icon" alt = "<?php echo esc_attr(__('Private Credentials' , 'js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL).'includes/images/config-icons/private-credentials.png'; ?>"/>
+                          <svg class="jsst_menu-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 5.25a3 3 0 013 3m3 0a6 6 0 01-7.029 5.912c-.563-.097-1.159.026-1.563.43L10.5 17.25H8.25v2.25H6v2.25H2.25v-2.818c0-.597.237-1.17.659-1.591l6.499-6.499c.404-.404.527-1 .43-1.563A6 6 0 1121.75 8.25z" /></svg>
                           <span class="jsst_text"><?php echo esc_html(__('Private Credentials' , 'js-support-ticket')); ?> </span>
                       </a>
                       <ul class="jsstadmin-sidebar-submenu treeview-menu">
@@ -929,7 +903,7 @@ $jsst_plugin_array = get_option('active_plugins');
                 <?php if(in_array('envatovalidation', jssupportticket::$_active_addons)){ ?>
                   <li class="treeview" id="cn_ev">
                       <a href="?page=configuration&jsstconfigid=envatovalidation" title="<?php echo esc_attr(__('Envato Validation' , 'js-support-ticket')); ?>">
-                          <img class="jsst_menu-icon" alt = "<?php echo esc_attr(__('Envato Validation' , 'js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL).'includes/images/config-icons/envato-validation.png'; ?>"/>
+                          <svg class="jsst_menu-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 01-1.043 3.296 3.745 3.745 0 01-3.296 1.043A3.745 3.745 0 0112 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 01-3.296-1.043 3.745 3.745 0 01-1.043-3.296A3.745 3.745 0 013 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 011.043-3.296 3.746 3.746 0 013.296-1.043A3.746 3.746 0 0112 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 013.296 1.043 3.746 3.746 0 011.043 3.296A3.745 3.745 0 0121 12z" /></svg>
                           <span class="jsst_text"><?php echo esc_html(__('Envato Validation' , 'js-support-ticket')); ?> </span>
                       </a>
                       <ul class="jsstadmin-sidebar-submenu treeview-menu">
@@ -940,7 +914,7 @@ $jsst_plugin_array = get_option('active_plugins');
                 <?php if(in_array('mailchimp', jssupportticket::$_active_addons)){ ?>
                   <li class="treeview" id="cn_mc">
                       <a href="?page=configuration&jsstconfigid=mailchimp" title="<?php echo esc_attr(__('Mailchimp' , 'js-support-ticket')); ?>">
-                          <img class="jsst_menu-icon" alt = "<?php echo esc_attr(__('Mailchimp' , 'js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL).'includes/images/config-icons/mail-chimp.png'; ?>"/>
+                          <svg class="jsst_menu-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M10.34 15.84c-.688-.06-1.386-.09-2.09-.09H7.5a4.5 4.5 0 110-9h.75c.704 0 1.402-.03 2.09-.09m0 9.18c.253.962.584 1.892.985 2.783.247.55.06 1.21-.463 1.511l-.657.38c-.551.318-1.26.117-1.527-.461a20.845 20.845 0 01-1.44-4.282m3.102.069a18.03 18.03 0 01-.59-4.59c0-1.586.205-3.124.59-4.59m0 9.18a23.848 23.848 0 018.835 2.535M10.34 6.66a23.847 23.847 0 008.835-2.535m0 0A23.74 23.74 0 0018.795 3m.38 1.125a23.91 23.91 0 011.014 5.395m-1.014 8.855c-.118.38-.245.754-.38 1.125m.38-1.125a23.91 23.91 0 001.014-5.395m0-3.46c.495.413.811 1.035.811 1.73 0 .695-.316 1.317-.811 1.73m0-3.46a24.347 24.347 0 010 3.46" /></svg>
                           <span class="jsst_text"><?php echo esc_html(__('Mailchimp' , 'js-support-ticket')); ?> </span>
                       </a>
                       <ul class="jsstadmin-sidebar-submenu treeview-menu">
@@ -951,7 +925,7 @@ $jsst_plugin_array = get_option('active_plugins');
                 <?php if(in_array('easydigitaldownloads', jssupportticket::$_active_addons)){ ?>
                     <li class="treeview" id="cn_edd">
                         <a href="?page=configuration&jsstconfigid=easydigitaldownloads" title="<?php echo esc_attr(__('Easy Digital Downloads' , 'js-support-ticket')); ?>">
-                            <img class="jsst_menu-icon" alt = "<?php echo esc_attr(__('Easy Digital Downloads' , 'js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL).'includes/images/config-icons/easy-digital-downloads.png'; ?>"/>
+                            <svg class="jsst_menu-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3" /></svg>
                             <span class="jsst_text"><?php echo esc_html(__('Easy Digital Downloads' , 'js-support-ticket')); ?> </span>
                         </a>
                         <ul class="jsstadmin-sidebar-submenu treeview-menu">
@@ -961,34 +935,31 @@ $jsst_plugin_array = get_option('active_plugins');
                 <?php } ?>
                 <?php if(JSSTmergedaddon::featureEnabled('autocleanup')){ ?>
                     <li class="treeview" id="cn_ac">
-                        <a href="?page=configuration&jsstconfigid=autocleanup" title="<?php echo esc_attr(__('Auto Cleanup' , 'js-support-ticket')); ?>">
-                            <img class="jsst_menu-icon" alt = "<?php echo esc_attr(__('Auto Cleanup' , 'js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL).'includes/images/config-icons/auto-cleanup.svg'; ?>"/>
-                            <span class="jsst_text"><?php echo esc_html(__('Auto Cleanup' , 'js-support-ticket')); ?> </span>
+                        <a href="?page=configuration&jsstconfigid=autocleanup" title="<?php echo esc_attr(__('Retention' , 'js-support-ticket')); ?>">
+                            <svg class="jsst_menu-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M20.25 7.5l-.625 10.632a2.25 2.25 0 01-2.247 2.118H6.622a2.25 2.25 0 01-2.247-2.118L3.75 7.5M10 11.25h4M3.375 7.5h17.25c.621 0 1.125-.504 1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125H3.375c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125z" /></svg>
+                            <span class="jsst_text"><?php echo esc_html(__('Retention' , 'js-support-ticket')); ?> </span>
                         </a>
-                        <ul class="jsstadmin-sidebar-submenu treeview-menu">
-                            <li><a href="?page=configuration&jsstconfigid=autocleanup"><?php echo esc_html(__('Auto Cleanup', 'js-support-ticket')); ?></a></li>
-                        </ul>
+                        <?php /* The single child repeated the parent, which is a
+                                 disclosure arrow that reveals the thing you just
+                                 clicked. Gone with the rename. */ ?>
                     </li>
                 <?php } ?>
-                <?php // Suggestions is core's own feature, so this section is not gated on the addon. ?>
+                <?php /* Kept in this list, with no children, because the entry is
+                         what somebody who knows these settings were here will look
+                         for - and the section it opens says where they went. The
+                         four sub-links are gone with the four tabs they pointed at;
+                         an anchor to a heading that no longer exists just leaves
+                         you at the top of the page wondering. (Roadmap 6.0-AI-01) */ ?>
                     <li class="treeview" id="cn_ir">
-                        <a href="?page=configuration&jsstconfigid=instantresolve" title="<?php echo esc_attr(__('Instant Resolve' , 'js-support-ticket')); ?>">
-                            <svg class="jsst_menu-icon" viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
-                            <span class="jsst_text"><?php echo esc_html(__('Instant Resolve' , 'js-support-ticket')); ?> </span>
+                        <a href="?page=configuration&jsstconfigid=aiagent" title="<?php echo esc_attr(__('AI Agent' , 'js-support-ticket')); ?>">
+                            <svg class="jsst_menu-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 00-2.456 2.456z" /></svg>
+                            <span class="jsst_text"><?php echo esc_html(__('AI Agent' , 'js-support-ticket')); ?> </span>
                         </a>
-                        <ul class="jsstadmin-sidebar-submenu treeview-menu">
-                            <li><a href="?page=configuration&jsstconfigid=instantresolve#InstantResolveSuggestions"><?php echo esc_html(__('Suggestions', 'js-support-ticket')); ?></a></li>
-                            <?php if(in_array('instantresolve', jssupportticket::$_active_addons)){ ?>
-                                <li><a href="?page=configuration&jsstconfigid=instantresolve#InstantResolveAI"><?php echo esc_html(__('AI Assistant', 'js-support-ticket')); ?></a></li>
-                                <li><a href="?page=configuration&jsstconfigid=instantresolve#InstantResolveReplies"><?php echo esc_html(__('Automatic Replies', 'js-support-ticket')); ?></a></li>
-                                <li><a href="?page=configuration&jsstconfigid=instantresolve#InstantResolveAdvanced"><?php echo esc_html(__('Advanced', 'js-support-ticket')); ?></a></li>
-                            <?php } ?>
-                        </ul>
                     </li>
                 <?php if(in_array('sociallogin', jssupportticket::$_active_addons)){ ?>
                   <li class="treeview" id="cn_sl" style="display:none;">
                       <a href="?page=configuration&jsstconfigid=sociallogin" title="<?php echo esc_attr(__('Social Login' , 'js-support-ticket')); ?>">
-                          <img class="jsst_menu-icon" alt = "<?php echo esc_attr(__('Social Login' , 'js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL).'includes/images/config-icons/social-login.png'; ?>"/>
+                          <svg class="jsst_menu-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M17.982 18.725A7.488 7.488 0 0012 15.75a7.488 7.488 0 00-5.982 2.975m11.964 0a9 9 0 10-11.963 0m11.963 0A8.966 8.966 0 0112 21a8.966 8.966 0 01-5.982-2.275M15 12a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
                           <span class="jsst_text"><?php echo esc_html(__('Social Login' , 'js-support-ticket')); ?> </span>
                       </a>
                       <ul class="jsstadmin-sidebar-submenu treeview-menu">
@@ -2019,7 +1990,7 @@ $jsst_plugin_array = get_option('active_plugins');
                     }
 
                     if(isset(jssupportticket::$jsst_data[0]['cplink_helptopic_agent'])){
-                        $jsst_title = esc_html(__('Topics', 'js-support-ticket'));
+                        $jsst_title = esc_html(__('Ticket Topics', 'js-support-ticket'));
                         $jsst_field = JSSTformfield::select('cplink_helptopic_agent', $jsst_showhide, jssupportticket::$jsst_data[0]['cplink_helptopic_agent']);
                         JSST_printConfigFieldSingle($jsst_title, $jsst_field);
                     }
@@ -2361,7 +2332,7 @@ $jsst_plugin_array = get_option('active_plugins');
                         <span style="color: #000;" class="jsst_msg" id="jsst_error_message"><?php echo esc_html(__("JS Help Desk Desktop Notifications plugin is not installed. Please install the plugin to enable desktop notifications","js-support-ticket"));?><a title="<?php echo esc_attr(__("Click here to insert Install.","js-support-ticket")); ?>" href="<?php echo esc_url(admin_url("admin.php?page=premiumplugin")); ?>"><?php echo esc_html(__("Click here to insert Install.","js-support-ticket")); ?></a></span>
                       </div>
                     <?php
-                    }elseif(!class_exists('JSSTNotification')){ ?>
+                    }elseif(!class_exists('JSSTNotification') && !class_exists('JSSTBundleNotification')){ ?>
                       <div class="jsst_error_messages" style="color: #000; margin-bottom: 15px;">
                           <span style="color: #000;" class="jsst_msg" id="jsst_success_message"><?php echo esc_html(__("JS Help Desk Desktop Notifications plugin is not active.","js-support-ticket"));?></span>
                       </div>
@@ -2448,22 +2419,32 @@ $jsst_plugin_array = get_option('active_plugins');
                 <div class="jsst_gen_body" id="PrivateCredentials">
                     <h2><?php echo esc_html(__('Private Credentials', 'js-support-ticket')); ?></h2>
                     <?php
-                      if(isset(jssupportticket::$jsst_data[0]['private_credentials_secretkey'])){
-                          $jsst_title = esc_html(__('Secret Key', 'js-support-ticket'));
-                          $jsst_field = JSSTformfield::text('private_credentials_secretkey', jssupportticket::$jsst_data[0]['private_credentials_secretkey'], array('class' => 'inputbox'));
-                          $jsst_description =  esc_html(__('Private Credentials Encryption Key changing this value will discard all existing credentials ', 'js-support-ticket'));
-                          JSST_printConfigFieldSingle($jsst_title, $jsst_field, $jsst_description);
-                        }
-                        $jsst_privatecredentialsurl = WP_PLUGIN_DIR.'/js-support-ticket-privatecredentials/classes/privatecredentials.php';
-                        $jsst_title = esc_html(__('Second Level Security', 'js-support-ticket'));
-                        $jsst_field = '';
+                    /* The encryption key used to be edited here, in a plain
+                       text field, which put it on screen in wp-admin and in
+                       every browser autofill store that saw the page - beside
+                       the ciphertext it protects, in the same database. Both
+                       of those are what 5.5-SEC-01 exists to end, so the field
+                       has gone and the key comes from wp-config.php or the
+                       environment. What is left is a pointer to the screen that
+                       says where this site's key is actually coming from and
+                       what to do about it. (Roadmap 5.5-SEC-01) */
+                    $jsst_title = esc_html(__('Encryption key', 'js-support-ticket'));
+                    $jsst_field = '';
+                    if (class_exists('JSSTcredentialvault')) {
+                        $jsst_where = JSSTcredentialvault::keySource();
+                        $jsst_field = '<a class="button" href="' . esc_url(admin_url('admin.php?page=privatecredentials&jstlay=vault')) . '">'
+                            . esc_html(__('Open the Credentials screen', 'js-support-ticket')) . '</a>';
                         $jsst_description = sprintf(
-                            /* translators: %1$s: File URL path, %2$s: Line number */
-                            esc_html__( 'For enhanced security change encryption method in %1$s on line %2$s', 'js-support-ticket' ),
-                            $jsst_privatecredentialsurl,
-                            10
-                        );
-                        JSST_printConfigFieldSingle($jsst_title, $jsst_field, $jsst_description);
+                            /* translators: %s: where the encryption key is coming from */
+                            esc_html__('This site is using: %s. The key is no longer editable here — it is read from wp-config.php or the environment, so that a copy of the database is not also a copy of the key.', 'js-support-ticket'),
+                            $jsst_where['label']);
+                        if (empty($jsst_where['safe'])) {
+                            $jsst_description .= ' ' . esc_html__('That is the fallback and it protects nothing against somebody holding a database dump. The Credentials screen says exactly what to paste into wp-config.php.', 'js-support-ticket');
+                        }
+                    } else {
+                        $jsst_description = esc_html__('Update the Private Credentials add-on to manage the encryption key.', 'js-support-ticket');
+                    }
+                    JSST_printConfigFieldSingle($jsst_title, $jsst_field, $jsst_description);
                     ?>
                 </div>
               <?php } ?>
@@ -2567,12 +2548,36 @@ $jsst_plugin_array = get_option('active_plugins');
                     ?>
                     <div class="tabs config-tabs" id="tabs">
                         <ul class="jsst_tabs">
-                            <li class="tab-link jsst_current_tab"><a href="#AutoCleanupSettings"><?php echo esc_html(__('Auto Cleanup', 'js-support-ticket')); ?></a></li>
+                            <li class="tab-link jsst_current_tab"><a href="#AutoCleanupSettings"><?php echo esc_html(__('Retention', 'js-support-ticket')); ?></a></li>
                         </ul>
                     </div>
                     <div class="jsst_gen_body" id="AutoCleanupSettings">
-                        <h2><?php echo esc_html(__('Auto Cleanup Settings', 'js-support-ticket')); ?></h2>
+                        <?php /* Named for the subject rather than the mechanism.
+                                 (Roadmap 5.0-ANA-04) "Auto cleanup" here and
+                                 "Retention" on the Reporting screen are two names
+                                 for one question - how long this desk keeps
+                                 things - and nothing on either screen said they
+                                 were related, so the rule and the governance of
+                                 the rule read as two unconnected features. */ ?>
+                        <h2><?php echo esc_html(__('Retention (auto cleanup)', 'js-support-ticket')); ?></h2>
+                        <p class="description"><?php echo esc_html(__('The rule itself: what is deleted, when, and what is never touched. This is the only place it is set.', 'js-support-ticket')); ?></p>
                         <?php
+                        /* And where the rest of the story is, when this site has
+                           it. The Retention screen never deletes anything - the
+                           deleting is this rule's, in JSSTautocleanupModel - but
+                           it decides which tickets survive it and whether a run
+                           happens at all, so a number set here can be overruled
+                           by something set there. Somebody reading "delete after
+                           24 months" with no idea a legal hold exists is the
+                           whole reason this line is here. (Roadmap 5.0-ANA-04) */
+                        if (class_exists('JSSTretention')) {
+                            $jsst_title = esc_html(__('Holds, approvals and reports', 'js-support-ticket'));
+                            $jsst_field = '<a class="button" href="'
+                                . esc_url(admin_url('admin.php?page=reporting&jstlay=retention'))
+                                . '">' . esc_html(__('Open Retention', 'js-support-ticket')) . '</a>';
+                            $jsst_description = esc_html(__('This site also has archive tiers, legal holds, deletion approvals and retention reports. A ticket under legal hold is kept whatever the rule below says, and where approvals are switched on a run waits for somebody to approve it. Those are set on Reporting > Retention.', 'js-support-ticket'));
+                            JSST_printConfigFieldSingle($jsst_title, $jsst_field, $jsst_description);
+                        }
                         if(isset(jssupportticket::$jsst_data[0]['autocleanup_attachment_interval'])){
                             $jsst_title = esc_html(__('Delete Old Attachments', 'js-support-ticket'));
                             $jsst_options = array(
@@ -2774,454 +2779,43 @@ $jsst_plugin_array = get_option('active_plugins');
             </div>
 
 
-            <!-- .....Instant Resolve..... -->
-            <div id="instantresolve" class="jsstadmin-hide-config">
+            <!-- .....AI Agent..... -->
+            <div id="aiagent" class="jsstadmin-hide-config">
                 <?php
-                // Suggestions is core's own: getInstantResolveSearch() falls back to
-                // getBasicFixSuggestions() when no addon claims the search filter, so
-                // the feature runs - and must stay configurable - with nothing
-                // installed. Only the AI half below belongs to the addon.
-                $jsst_ir_addon = in_array('instantresolve', jssupportticket::$_active_addons);
+                /* The AI Agent settings live on one screen now, and it is not
+                   this one. (Roadmap 6.0-AI-01)
+
+                   Four tabs of them were here - Suggestions, AI Assistant,
+                   Automatic Replies and Advanced - because they arrived as the
+                   Instant Resolve add-on's settings and pre-4.0 that is where an
+                   add-on put them. Meanwhile the things that decide whether any
+                   of it may run at all - the three lanes, the master switch, the
+                   redaction mode, the engine and its key - were on AI Agent >
+                   Settings, because they cannot be expressed as config rows: the
+                   key is write-only by design, and this screen round-trips every
+                   stored value back into the markup.
+
+                   So one feature had two homes, one called Settings and the
+                   other called Configuration, and which one held a given setting
+                   depended on the era it was written in. They are all on AI Agent
+                   > Settings now.
+
+                   What is left here is a pointer, not a redirect. `?page=configuration&jsstconfigid=aiagent`
+                   is in bookmarks, in support answers and in a menu entry beside
+                   sixteen others, and a link that silently lands somewhere else
+                   teaches nobody where the settings went. */
                 ?>
-                    <div class="tabs config-tabs" id="tabs">
-                        <ul class="jsst_tabs">
-                            <li class="tab-link jsst_current_tab"><a href="#InstantResolveSuggestions"><?php echo esc_html(__('Suggestions', 'js-support-ticket')); ?></a></li>
-                            <?php if($jsst_ir_addon){ ?>
-                                <li class="tab-link"><a href="#InstantResolveAI"><?php echo esc_html(__('AI Assistant', 'js-support-ticket')); ?></a></li>
-                                <li class="tab-link"><a href="#InstantResolveReplies"><?php echo esc_html(__('Automatic Replies', 'js-support-ticket')); ?></a></li>
-                                <li class="tab-link"><a href="#InstantResolveAdvanced"><?php echo esc_html(__('Advanced', 'js-support-ticket')); ?></a></li>
-                            <?php } ?>
-                        </ul>
-                    </div>
-
+                <div class="jsst_gen_body" id="AIAgentMoved">
+                    <h2><?php echo esc_html(__('AI Agent', 'js-support-ticket')); ?></h2>
                     <?php
-                    // Multi-value settings are stored as JSON in a single row.
-                    // Checkboxes are far clearer than six yes/no dropdowns, so
-                    // they post into a hidden field that JS keeps in sync.
-                    $jsst_ir_sources_on = isset(jssupportticket::$jsst_data[0]['instantresolve_sources'])
-                        ? json_decode(jssupportticket::$jsst_data[0]['instantresolve_sources'], true) : array();
-                    if (!is_array($jsst_ir_sources_on)) $jsst_ir_sources_on = array();
+                    $jsst_title = esc_html(__('Where these settings are now', 'js-support-ticket'));
+                    $jsst_field = '<a class="button" href="'
+                        . esc_url(admin_url('admin.php?page=aiagent&jstlay=aiagent_settings'))
+                        . '">' . esc_html(__('Open AI Agent Settings', 'js-support-ticket')) . '</a>';
+                    $jsst_description = esc_html(__('Suggestions, the AI Assistant, Automatic Replies and the Advanced retrieval settings have moved to AI Agent > Settings, where the lanes, the master switch and the answer engine already were. Nothing was reset — every value is exactly where you left it, on the new screen.', 'js-support-ticket'));
+                    JSST_printConfigFieldSingle($jsst_title, $jsst_field, $jsst_description);
                     ?>
-
-                    <!-- ===================== SUGGESTIONS ===================== -->
-                    <div class="jsst_gen_body" id="InstantResolveSuggestions">
-                        <h2><?php echo esc_html(__('Suggestions', 'js-support-ticket')); ?></h2>
-                        <p class="description"><?php echo esc_html(__('Shown on the ticket form while a customer types, so they can find the answer without opening a ticket at all.', 'js-support-ticket')); ?></p>
-                        <?php
-                        if(isset(jssupportticket::$jsst_data[0]['instantresolve_enable'])){
-                            $jsst_title = esc_html(__('Show suggestions', 'js-support-ticket'));
-                            $jsst_field = JSSTformfield::select('instantresolve_enable', $jsst_yesno, jssupportticket::$jsst_data[0]['instantresolve_enable']);
-                            $jsst_description = esc_html(__('Search your content as the customer types and offer matching answers.', 'js-support-ticket'));
-                            JSST_printConfigFieldSingle($jsst_title, $jsst_field, $jsst_description);
-                        }
-                        if(isset(jssupportticket::$jsst_data[0]['instantresolve_min_chars'])){
-                            $jsst_title = esc_html(__('Start searching after', 'js-support-ticket'));
-                            $jsst_field = JSSTformfield::text('instantresolve_min_chars', jssupportticket::$jsst_data[0]['instantresolve_min_chars'], array('class' => 'inputbox'));
-                            $jsst_description = esc_html(__('Characters typed across the subject and message before searching begins. 15 is a good default.', 'js-support-ticket'));
-                            JSST_printConfigFieldSingle($jsst_title, $jsst_field, $jsst_description);
-                        }
-                        if(isset(jssupportticket::$jsst_data[0]['instantresolve_sources'])){
-                            // 'addon' names the sibling addon that owns the content, matching
-                            // getSourceDefinitions() in the addon's retriever and $jsst_tables
-                            // in getBasicFixSuggestions(). Both already skip a source whose
-                            // addon is inactive, so an unqualified tickbox here promises a
-                            // search that will not happen. A null 'addon' means core owns the
-                            // content and the source is always offered.
-                            $jsst_ir_source_opts = array(
-                                'kb'      => array('label' => __('Knowledgebase articles', 'js-support-ticket'),
-                                                   'addon' => 'knowledgebase',
-                                                   'owner' => __('Knowledgebase', 'js-support-ticket')),
-                                'faq'     => array('label' => __('FAQs', 'js-support-ticket'),
-                                                   'addon' => 'faq',
-                                                   'owner' => __('FAQ', 'js-support-ticket')),
-                                // Canned Responses was absorbed into the free core, so it is
-                                // no longer gated - the same as WordPress posts and pages.
-                                'canned'  => array('label' => __('Canned responses', 'js-support-ticket'),
-                                                   'addon' => null, 'owner' => ''),
-                                'posts'   => array('label' => __('WordPress posts and pages', 'js-support-ticket'),
-                                                   'addon' => null, 'owner' => ''),
-                            );
-                            // Scraped documentation and past tickets are indexed by the
-                            // addon, so offering them without it would be a tickbox that
-                            // silently searches nothing.
-                            if($jsst_ir_addon){
-                                $jsst_ir_source_opts['scraped'] = array('label' => __('Indexed documentation and videos', 'js-support-ticket'),
-                                                                        'addon' => null, 'owner' => '');
-                                $jsst_ir_source_opts['tickets'] = array('label' => __('Previously resolved tickets', 'js-support-ticket'),
-                                                                        'addon' => null, 'owner' => '');
-                            }
-                            $jsst_field = '<div class="jsst-ir-checks" data-jsst-ir-target="instantresolve_sources">';
-                            foreach ($jsst_ir_source_opts as $jsst_ir_k => $jsst_ir_opt) {
-                                // Disabled rather than hidden, and it keeps its tick. The sync
-                                // script rebuilds the hidden field from the boxes it can see,
-                                // so dropping one would erase that source from the saved value
-                                // the next time any other box was touched - and it would stay
-                                // erased after the addon came back. A disabled box is still
-                                // matched by :checked, so the setting survives untouched.
-                                $jsst_ir_off = ($jsst_ir_opt['addon'] !== null)
-                                            && !in_array($jsst_ir_opt['addon'], jssupportticket::$_active_addons);
-                                $jsst_field .= '<label' . ($jsst_ir_off ? ' class="jsst-ir-off"' : '') . '>'
-                                            . '<input type="checkbox" value="' . esc_attr($jsst_ir_k) . '"'
-                                            . (in_array($jsst_ir_k, $jsst_ir_sources_on, true) ? ' checked' : '')
-                                            . ($jsst_ir_off ? ' disabled' : '') . '> '
-                                            . esc_html($jsst_ir_opt['label']);
-                                if ($jsst_ir_off) {
-                                    $jsst_field .= ' <span class="jsst-ir-off-note">' . esc_html(sprintf(
-                                        /* translators: %s: name of the addon that owns this content */
-                                        __('needs the %s addon', 'js-support-ticket'), $jsst_ir_opt['owner']
-                                    )) . '</span>';
-                                }
-                                $jsst_field .= '</label>';
-                            }
-                            $jsst_field .= '<input type="hidden" name="instantresolve_sources" id="instantresolve_sources" value="'
-                                        . esc_attr(jssupportticket::$jsst_data[0]['instantresolve_sources']) . '"></div>';
-                            $jsst_title = esc_html(__('Search these', 'js-support-ticket'));
-                            // Without the addon there is no AI reading this content, so the
-                            // field governs suggestions and nothing else. Describing it as
-                            // what "the AI is allowed to answer from" would point at a
-                            // feature that is not installed.
-                            $jsst_description = $jsst_ir_addon
-                                ? esc_html(__('The same content the AI is allowed to answer from. Anything unticked is invisible to both.', 'js-support-ticket'))
-                                : esc_html(__('Where suggestions are searched for. Anything unticked is never shown.', 'js-support-ticket'));
-                            JSST_printConfigFieldSingle($jsst_title, $jsst_field, $jsst_description);
-                        }
-                        if(isset(jssupportticket::$jsst_data[0]['instantresolve_max_results'])){
-                            $jsst_title = esc_html(__('How many to show', 'js-support-ticket'));
-                            $jsst_field = JSSTformfield::text('instantresolve_max_results', jssupportticket::$jsst_data[0]['instantresolve_max_results'], array('class' => 'inputbox'));
-                            $jsst_description = esc_html(__('Maximum suggestions on the ticket form, between 1 and 10.', 'js-support-ticket'));
-                            JSST_printConfigFieldSingle($jsst_title, $jsst_field, $jsst_description);
-                        }
-                        // Addon-gated even though the row is core's. Nothing in core writes
-                        // the analytics table and nothing reads this setting, so without the
-                        // addon it is a switch wired to nothing - pointing, in its own
-                        // description, at an Overview screen the side menu does not render.
-                        // storeConfiguration() only walks the keys that were posted, so
-                        // leaving the field out preserves the stored value rather than
-                        // clearing it.
-                        if($jsst_ir_addon && isset(jssupportticket::$jsst_data[0]['instantresolve_analytics'])){
-                            $jsst_title = esc_html(__('Record what was shown', 'js-support-ticket'));
-                            $jsst_field = JSSTformfield::select('instantresolve_analytics', $jsst_yesno, jssupportticket::$jsst_data[0]['instantresolve_analytics']);
-                            $jsst_description = esc_html(__('Track which suggestions customers saw and opened, for the Instant Resolve overview.', 'js-support-ticket'));
-                            JSST_printConfigFieldSingle($jsst_title, $jsst_field, $jsst_description);
-                        }
-                        ?>
-                    </div>
-
-                <?php if($jsst_ir_addon){ ?>
-
-                    <?php
-                    // Option lists used below. Built here rather than inline so
-                    // the field definitions stay readable.
-                    $jsst_ir_tones = array(
-                        (object) array('id' => 'professional', 'text' => esc_html(__('Professional', 'js-support-ticket'))),
-                        (object) array('id' => 'friendly',     'text' => esc_html(__('Friendly', 'js-support-ticket'))),
-                        (object) array('id' => 'concise',      'text' => esc_html(__('Concise', 'js-support-ticket'))),
-                        (object) array('id' => 'empathetic',   'text' => esc_html(__('Empathetic', 'js-support-ticket'))),
-                    );
-                    $jsst_ir_modes = array(
-                        (object) array('id' => 'strict_kb',    'text' => esc_html(__('Only answer from my content (recommended)', 'js-support-ticket'))),
-                        (object) array('id' => 'kb_preferred', 'text' => esc_html(__('Prefer my content, allow drafts without it', 'js-support-ticket'))),
-                        (object) array('id' => 'open',         'text' => esc_html(__('Let the AI answer freely (not recommended)', 'js-support-ticket'))),
-                    );
-                    $jsst_ir_delays = array(
-                        (object) array('id' => '0',  'text' => esc_html(__('Immediately', 'js-support-ticket'))),
-                        (object) array('id' => '1',  'text' => esc_html(__('After 1 minute', 'js-support-ticket'))),
-                        (object) array('id' => '2',  'text' => esc_html(__('After 2 minutes', 'js-support-ticket'))),
-                        (object) array('id' => '5',  'text' => esc_html(__('After 5 minutes', 'js-support-ticket'))),
-                        (object) array('id' => '10', 'text' => esc_html(__('After 10 minutes', 'js-support-ticket'))),
-                        (object) array('id' => '15', 'text' => esc_html(__('After 15 minutes', 'js-support-ticket'))),
-                        (object) array('id' => '30', 'text' => esc_html(__('After 30 minutes', 'js-support-ticket'))),
-                    );
-                    $jsst_ir_fallbacks = array(
-                        (object) array('id' => 'draft_reply', 'text' => esc_html(__('Save it as a draft for an agent', 'js-support-ticket'))),
-                        (object) array('id' => 'nothing',     'text' => esc_html(__('Do nothing', 'js-support-ticket'))),
-                    );
-                    $jsst_ir_providers = array();
-                    if (class_exists('JSSTInstantResolveProviderFactory')) {
-                        foreach (JSSTInstantResolveProviderFactory::getAvailableProviders() as $jsst_ir_pid => $jsst_ir_plabel) {
-                            $jsst_ir_providers[] = (object) array('id' => $jsst_ir_pid, 'text' => esc_html($jsst_ir_plabel));
-                        }
-                    }
-
-                    // Multi-value settings are stored as JSON in a single row.
-                    // Checkboxes are far clearer than a row of yes/no dropdowns,
-                    // so they post into a hidden field that JS keeps in sync.
-                    // instantresolve_sources is read further up, with the
-                    // Suggestions section that uses it.
-                    $jsst_ir_users_on = isset(jssupportticket::$jsst_data[0]['instantresolve_autopilot_target_users'])
-                        ? json_decode(jssupportticket::$jsst_data[0]['instantresolve_autopilot_target_users'], true) : array();
-                    if (!is_array($jsst_ir_users_on)) $jsst_ir_users_on = array();
-
-                    $jsst_ir_depts_on = isset(jssupportticket::$jsst_data[0]['instantresolve_autopilot_target_departments'])
-                        ? json_decode(jssupportticket::$jsst_data[0]['instantresolve_autopilot_target_departments'], true) : array();
-                    if (!is_array($jsst_ir_depts_on)) $jsst_ir_depts_on = array();
-
-                    // Zywrap is the only engine, so with no key every AI feature
-                    // below is inert - the provider refuses before it calls out,
-                    // the ticket form simply shows no written answer and Autopilot
-                    // logs an error nobody is watching. Switching the settings on
-                    // and seeing nothing happen is the whole failure, so it is
-                    // said here rather than left to be discovered.
-                    //
-                    // Read the same two places the provider reads, in the same
-                    // order, or the notice could disagree with what actually runs.
-                    $jsst_ir_key = !empty(jssupportticket::$jsst_data[0]['zywrap_api_key'])
-                        ? jssupportticket::$jsst_data[0]['zywrap_api_key']
-                        : get_option('jsst_zywrap_api_key');
-
-                    $jsst_ir_nokey = '';
-                    if (empty($jsst_ir_key)) {
-                        $jsst_ir_nokey = '<div class="jsst-ir-warn"><strong>'
-                            . esc_html(__('No Zywrap API key', 'js-support-ticket')) . '</strong> '
-                            . esc_html(__('Everything on this tab needs one, and nothing here will run until it is set. Suggestions from your own content keep working.', 'js-support-ticket'))
-                            . ' <a href="' . esc_url(admin_url('admin.php?page=zywrap&jstlay=zywrap_settings')) . '">'
-                            . esc_html(__('Add your key', 'js-support-ticket')) . '</a></div>';
-                    }
-                    ?>
-
-                    <!-- ===================== AI ASSISTANT ===================== -->
-                    <div class="jsst_gen_body" id="InstantResolveAI">
-                        <h2><?php echo esc_html(__('AI Assistant', 'js-support-ticket')); ?></h2>
-                        <p class="description"><?php echo esc_html(__('Settings shared by the written answer on the ticket form and the automatic replies.', 'js-support-ticket')); ?></p>
-                        <?php
-                        // Repeated on the Replies tab below: the tabs hide one
-                        // another, so an admin who lands on that one would never
-                        // see a notice shown only here.
-                        echo wp_kses_post($jsst_ir_nokey);
-                        ?>
-                        <?php
-                        if(isset(jssupportticket::$jsst_data[0]['instantresolve_ai_enable'])){
-                            $jsst_title = esc_html(__('Write an answer on the ticket form', 'js-support-ticket'));
-                            $jsst_field = JSSTformfield::select('instantresolve_ai_enable', $jsst_yesno, jssupportticket::$jsst_data[0]['instantresolve_ai_enable']);
-                            $jsst_description = esc_html(__('Show a short written answer above the suggested links, based only on the content that was found.', 'js-support-ticket'));
-                            JSST_printConfigFieldSingle($jsst_title, $jsst_field, $jsst_description);
-                        }
-                        if(isset(jssupportticket::$jsst_data[0]['instantresolve_ai_sources_limit'])){
-                            $jsst_title = esc_html(__('Sources per answer', 'js-support-ticket'));
-                            $jsst_field = JSSTformfield::text('instantresolve_ai_sources_limit', jssupportticket::$jsst_data[0]['instantresolve_ai_sources_limit'], array('class' => 'inputbox'));
-                            $jsst_description = esc_html(__('How many matching passages the AI may use when writing that answer, between 1 and 8.', 'js-support-ticket'));
-                            JSST_printConfigFieldSingle($jsst_title, $jsst_field, $jsst_description);
-                        }
-                        if(isset(jssupportticket::$jsst_data[0]['instantresolve_ai_tone'])){
-                            $jsst_title = esc_html(__('Tone', 'js-support-ticket'));
-                            $jsst_field = JSSTformfield::select('instantresolve_ai_tone', $jsst_ir_tones, jssupportticket::$jsst_data[0]['instantresolve_ai_tone']);
-                            $jsst_description = esc_html(__('How replies should read. Used everywhere the AI writes.', 'js-support-ticket'));
-                            JSST_printConfigFieldSingle($jsst_title, $jsst_field, $jsst_description);
-                        }
-                        if(isset(jssupportticket::$jsst_data[0]['instantresolve_ai_language'])){
-                            $jsst_title = esc_html(__('Language', 'js-support-ticket'));
-                            $jsst_field = JSSTformfield::text('instantresolve_ai_language', jssupportticket::$jsst_data[0]['instantresolve_ai_language'], array('class' => 'inputbox'));
-                            $jsst_description = esc_html(__('Enter a language name, or "auto" to reply in whichever language the customer wrote in.', 'js-support-ticket'));
-                            JSST_printConfigFieldSingle($jsst_title, $jsst_field, $jsst_description);
-                        }
-                        if(isset(jssupportticket::$jsst_data[0]['instantresolve_ai_provider']) && !empty($jsst_ir_providers)){
-                            $jsst_title = esc_html(__('AI engine', 'js-support-ticket'));
-                            $jsst_field = JSSTformfield::select('instantresolve_ai_provider', $jsst_ir_providers, jssupportticket::$jsst_data[0]['instantresolve_ai_provider']);
-                            $jsst_description = esc_html(__('The hosted engine needs a Zywrap API key.', 'js-support-ticket'));
-                            JSST_printConfigFieldSingle($jsst_title, $jsst_field, $jsst_description);
-                        }
-                        ?>
-                    </div>
-
-                    <!-- ===================== AUTOMATIC REPLIES ===================== -->
-                    <div class="jsst_gen_body" id="InstantResolveReplies">
-                        <h2><?php echo esc_html(__('Automatic Replies', 'js-support-ticket')); ?></h2>
-                        <p class="description"><?php echo esc_html(__('What happens after a ticket is submitted. Replies below the confidence level are saved as drafts for an agent rather than sent.', 'js-support-ticket')); ?></p>
-                        <?php echo wp_kses_post($jsst_ir_nokey); ?>
-                        <?php
-                        if(isset(jssupportticket::$jsst_data[0]['instantresolve_autopilot_enable'])){
-                            $jsst_title = esc_html(__('Answer tickets automatically', 'js-support-ticket'));
-                            $jsst_field = JSSTformfield::select('instantresolve_autopilot_enable', $jsst_yesno, jssupportticket::$jsst_data[0]['instantresolve_autopilot_enable']);
-                            $jsst_description = esc_html(__('Try to answer new tickets from your own content. Start with this off and review the drafts first.', 'js-support-ticket'));
-                            JSST_printConfigFieldSingle($jsst_title, $jsst_field, $jsst_description);
-                        }
-                        if(isset(jssupportticket::$jsst_data[0]['instantresolve_autopilot_display_name'])){
-                            $jsst_title = esc_html(__('Signed as', 'js-support-ticket'));
-                            $jsst_field = JSSTformfield::text('instantresolve_autopilot_display_name', jssupportticket::$jsst_data[0]['instantresolve_autopilot_display_name'], array('class' => 'inputbox'));
-                            $jsst_description = esc_html(__('The name customers see wherever the AI speaks - signed on an automatic reply, and on the suggested answer shown while they type. Something clearly not a person, such as "AI Assistant", is the honest choice.', 'js-support-ticket'));
-                            JSST_printConfigFieldSingle($jsst_title, $jsst_field, $jsst_description);
-                        }
-                        if(isset(jssupportticket::$jsst_data[0]['instantresolve_autopilot_min_confidence'])){
-                            $jsst_title = esc_html(__('Send only when confident', 'js-support-ticket'));
-                            $jsst_field = JSSTformfield::text('instantresolve_autopilot_min_confidence', jssupportticket::$jsst_data[0]['instantresolve_autopilot_min_confidence'], array('class' => 'inputbox'));
-                            $jsst_description = esc_html(__('Percentage from 0 to 100. Anything below this becomes a draft. 85 is a cautious starting point.', 'js-support-ticket'));
-                            JSST_printConfigFieldSingle($jsst_title, $jsst_field, $jsst_description);
-                        }
-                        if(isset(jssupportticket::$jsst_data[0]['instantresolve_autopilot_max_replies'])){
-                            $jsst_title = esc_html(__('Replies per ticket', 'js-support-ticket'));
-                            $jsst_field = JSSTformfield::text('instantresolve_autopilot_max_replies', jssupportticket::$jsst_data[0]['instantresolve_autopilot_max_replies'], array('class' => 'inputbox'));
-                            $jsst_description = esc_html(__('How many times the AI may reply to the same ticket before it stops and waits for a person.', 'js-support-ticket'));
-                            JSST_printConfigFieldSingle($jsst_title, $jsst_field, $jsst_description);
-                        }
-                        if(isset(jssupportticket::$jsst_data[0]['instantresolve_autopilot_delay'])){
-                            $jsst_title = esc_html(__('Reply', 'js-support-ticket'));
-                            $jsst_field = JSSTformfield::select('instantresolve_autopilot_delay', $jsst_ir_delays, jssupportticket::$jsst_data[0]['instantresolve_autopilot_delay']);
-                            $jsst_description = esc_html(__('A short delay makes the reply feel less abrupt and gives an agent time to step in first.', 'js-support-ticket'));
-                            JSST_printConfigFieldSingle($jsst_title, $jsst_field, $jsst_description);
-                        }
-                        if(isset(jssupportticket::$jsst_data[0]['instantresolve_autopilot_fallback'])){
-                            $jsst_title = esc_html(__('When not confident enough', 'js-support-ticket'));
-                            $jsst_field = JSSTformfield::select('instantresolve_autopilot_fallback', $jsst_ir_fallbacks, jssupportticket::$jsst_data[0]['instantresolve_autopilot_fallback']);
-                            $jsst_description = esc_html(__('A draft appears on the ticket for an agent to send, edit or discard. The customer never sees it.', 'js-support-ticket'));
-                            JSST_printConfigFieldSingle($jsst_title, $jsst_field, $jsst_description);
-                        }
-                        if(isset(jssupportticket::$jsst_data[0]['instantresolve_autopilot_target_users'])){
-                            $jsst_ir_user_opts = array(
-                                'logged_in' => __('Registered customers', 'js-support-ticket'),
-                                'guest'     => __('Guests', 'js-support-ticket'),
-                            );
-                            $jsst_field = '<div class="jsst-ir-checks" data-jsst-ir-target="instantresolve_autopilot_target_users">';
-                            foreach ($jsst_ir_user_opts as $jsst_ir_k => $jsst_ir_label) {
-                                $jsst_field .= '<label><input type="checkbox" value="' . esc_attr($jsst_ir_k) . '"'
-                                            . (in_array($jsst_ir_k, $jsst_ir_users_on, true) ? ' checked' : '') . '> '
-                                            . esc_html($jsst_ir_label) . '</label>';
-                            }
-                            $jsst_field .= '<input type="hidden" name="instantresolve_autopilot_target_users" id="instantresolve_autopilot_target_users" value="'
-                                        . esc_attr(jssupportticket::$jsst_data[0]['instantresolve_autopilot_target_users']) . '"></div>';
-                            $jsst_title = esc_html(__('Answer tickets from', 'js-support-ticket'));
-                            $jsst_description = esc_html(__('Guests are only ever answered from content that is public, never from articles restricted to logged-in users.', 'js-support-ticket'));
-                            JSST_printConfigFieldSingle($jsst_title, $jsst_field, $jsst_description);
-                        }
-                        if(isset(jssupportticket::$jsst_data[0]['instantresolve_autopilot_target_departments'])){
-                            $jsst_ir_depts = jssupportticket::$_db->get_results(
-                                "SELECT id, departmentname FROM `" . jssupportticket::$_db->prefix . "js_ticket_departments` WHERE status = 1"
-                            );
-                            $jsst_field = '<div class="jsst-ir-checks" data-jsst-ir-target="instantresolve_autopilot_target_departments">';
-                            if (empty($jsst_ir_depts)) {
-                                $jsst_field .= '<em>' . esc_html(__('No departments found.', 'js-support-ticket')) . '</em>';
-                            } else {
-                                foreach ($jsst_ir_depts as $jsst_ir_d) {
-                                    $jsst_field .= '<label><input type="checkbox" value="' . esc_attr($jsst_ir_d->id) . '"'
-                                                . (in_array((string) $jsst_ir_d->id, array_map('strval', $jsst_ir_depts_on), true) ? ' checked' : '') . '> '
-                                                . esc_html($jsst_ir_d->departmentname) . '</label>';
-                                }
-                            }
-                            $jsst_field .= '<input type="hidden" name="instantresolve_autopilot_target_departments" id="instantresolve_autopilot_target_departments" value="'
-                                        . esc_attr(jssupportticket::$jsst_data[0]['instantresolve_autopilot_target_departments']) . '"></div>';
-                            $jsst_title = esc_html(__('Only these departments', 'js-support-ticket'));
-                            $jsst_description = esc_html(__('Leave all unticked to cover every department.', 'js-support-ticket'));
-                            JSST_printConfigFieldSingle($jsst_title, $jsst_field, $jsst_description);
-                        }
-                        if(isset(jssupportticket::$jsst_data[0]['instantresolve_autopilot_blacklist_keywords'])){
-                            $jsst_title = esc_html(__('Never answer if it mentions', 'js-support-ticket'));
-                            $jsst_field = JSSTformfield::textarea('instantresolve_autopilot_blacklist_keywords', jssupportticket::$jsst_data[0]['instantresolve_autopilot_blacklist_keywords'], array('class' => 'inputbox', 'rows' => '3'));
-                            $jsst_description = esc_html(__('Comma separated. A ticket containing any of these always goes to a person. Refunds, cancellations and angry wording belong here.', 'js-support-ticket'));
-                            JSST_printConfigFieldSingle($jsst_title, $jsst_field, $jsst_description);
-                        }
-                        if(isset(jssupportticket::$jsst_data[0]['instantresolve_autopilot_blacklist_emails'])){
-                            $jsst_title = esc_html(__('Never answer these senders', 'js-support-ticket'));
-                            $jsst_field = JSSTformfield::textarea('instantresolve_autopilot_blacklist_emails', jssupportticket::$jsst_data[0]['instantresolve_autopilot_blacklist_emails'], array('class' => 'inputbox', 'rows' => '2'));
-                            $jsst_description = esc_html(__('Comma separated addresses or domains, for example @keyclient.com.', 'js-support-ticket'));
-                            JSST_printConfigFieldSingle($jsst_title, $jsst_field, $jsst_description);
-                        }
-                        ?>
-                    </div>
-
-                    <!-- ===================== ADVANCED ===================== -->
-                    <div class="jsst_gen_body" id="InstantResolveAdvanced">
-                        <h2><?php echo esc_html(__('Advanced', 'js-support-ticket')); ?></h2>
-                        <p class="description"><?php echo esc_html(__('These control how strictly the AI is held to your content. The defaults are deliberately cautious; use Test Retrieval to see the effect of any change before saving it.', 'js-support-ticket')); ?></p>
-                        <?php
-                        if(isset(jssupportticket::$jsst_data[0]['instantresolve_grounding_mode'])){
-                            $jsst_title = esc_html(__('Where answers may come from', 'js-support-ticket'));
-                            $jsst_field = JSSTformfield::select('instantresolve_grounding_mode', $jsst_ir_modes, jssupportticket::$jsst_data[0]['instantresolve_grounding_mode']);
-                            $jsst_description = esc_html(__('Answering freely is how an AI invents steps that do not exist. Leave this on the first option unless you have a specific reason not to.', 'js-support-ticket'));
-                            JSST_printConfigFieldSingle($jsst_title, $jsst_field, $jsst_description);
-                        }
-                        if(isset(jssupportticket::$jsst_data[0]['instantresolve_min_coverage_deflect'])){
-                            $jsst_title = esc_html(__('Match needed for a suggestion', 'js-support-ticket'));
-                            $jsst_field = JSSTformfield::text('instantresolve_min_coverage_deflect', jssupportticket::$jsst_data[0]['instantresolve_min_coverage_deflect'], array('class' => 'inputbox'));
-                            $jsst_description = esc_html(__('Percentage of the question a page must cover to be suggested, from 10 to 100. A loose value is fine here, since the customer can simply ignore a poor suggestion.', 'js-support-ticket'));
-                            JSST_printConfigFieldSingle($jsst_title, $jsst_field, $jsst_description);
-                        }
-                        if(isset(jssupportticket::$jsst_data[0]['instantresolve_min_coverage_reply'])){
-                            $jsst_title = esc_html(__('Match needed for a reply', 'js-support-ticket'));
-                            $jsst_field = JSSTformfield::text('instantresolve_min_coverage_reply', jssupportticket::$jsst_data[0]['instantresolve_min_coverage_reply'], array('class' => 'inputbox'));
-                            $jsst_description = esc_html(__('The same measure, but for content the AI may state as fact, from 20 to 100. Keep this higher than the suggestion threshold.', 'js-support-ticket'));
-                            JSST_printConfigFieldSingle($jsst_title, $jsst_field, $jsst_description);
-                        }
-                        if(isset(jssupportticket::$jsst_data[0]['instantresolve_require_citation'])){
-                            $jsst_title = esc_html(__('Require sources', 'js-support-ticket'));
-                            $jsst_field = JSSTformfield::select('instantresolve_require_citation', $jsst_yesno, jssupportticket::$jsst_data[0]['instantresolve_require_citation']);
-                            $jsst_description = esc_html(__('Reject a reply that cites nothing, or cites something that was not given to it. Models invent references as readily as they invent facts.', 'js-support-ticket'));
-                            JSST_printConfigFieldSingle($jsst_title, $jsst_field, $jsst_description);
-                        }
-                        if(isset(jssupportticket::$jsst_data[0]['instantresolve_min_overlap'])){
-                            $jsst_title = esc_html(__('Minimum grounding overlap', 'js-support-ticket'));
-                            $jsst_field = JSSTformfield::text('instantresolve_min_overlap', jssupportticket::$jsst_data[0]['instantresolve_min_overlap'], array('class' => 'inputbox'));
-                            $jsst_description = esc_html(__('How many of a reply\'s specifics - button names, menu paths, time limits - must appear in your own content, from 0 to 100. A reply below this is held as a draft instead of being sent. Leave at 0 at first: the overview records this figure, so you can pick a threshold from your own replies instead of guessing.', 'js-support-ticket'));
-                            JSST_printConfigFieldSingle($jsst_title, $jsst_field, $jsst_description);
-                        }
-                        if(isset(jssupportticket::$jsst_data[0]['instantresolve_max_chunks'])){
-                            $jsst_title = esc_html(__('Passages per reply', 'js-support-ticket'));
-                            $jsst_field = JSSTformfield::text('instantresolve_max_chunks', jssupportticket::$jsst_data[0]['instantresolve_max_chunks'], array('class' => 'inputbox'));
-                            $jsst_description = esc_html(__('How many pieces of your content the AI may be shown when writing a reply, from 1 to 8.', 'js-support-ticket'));
-                            JSST_printConfigFieldSingle($jsst_title, $jsst_field, $jsst_description);
-                        }
-                        if(isset(jssupportticket::$jsst_data[0]['instantresolve_char_budget'])){
-                            $jsst_title = esc_html(__('Total characters', 'js-support-ticket'));
-                            $jsst_field = JSSTformfield::text('instantresolve_char_budget', jssupportticket::$jsst_data[0]['instantresolve_char_budget'], array('class' => 'inputbox'));
-                            $jsst_description = esc_html(__('Largest amount of a single document that may be extracted as one passage, from 1000 to 20000. The overall size of a reply prompt is set by the token budget below.', 'js-support-ticket'));
-                            JSST_printConfigFieldSingle($jsst_title, $jsst_field, $jsst_description);
-                        }
-                        if(isset(jssupportticket::$jsst_data[0]['instantresolve_token_budget'])){
-                            $jsst_title = esc_html(__('Token budget per reply', 'js-support-ticket'));
-                            $jsst_field = JSSTformfield::text('instantresolve_token_budget', jssupportticket::$jsst_data[0]['instantresolve_token_budget'], array('class' => 'inputbox'));
-                            $jsst_description = esc_html(__('Most tokens of your own content that may be sent with one reply, from 200 to 8000. This is what the AI engine actually charges for, so it is the setting that controls cost. Lower it to spend less per ticket; the best-matching passages are kept and the weakest are dropped first.', 'js-support-ticket'));
-                            JSST_printConfigFieldSingle($jsst_title, $jsst_field, $jsst_description);
-                        }
-                        if(isset(jssupportticket::$jsst_data[0]['instantresolve_mmr_lambda'])){
-                            $jsst_title = esc_html(__('Prefer variety', 'js-support-ticket'));
-                            $jsst_field = JSSTformfield::text('instantresolve_mmr_lambda', jssupportticket::$jsst_data[0]['instantresolve_mmr_lambda'], array('class' => 'inputbox'));
-                            $jsst_description = esc_html(__('From 30 to 100. At 100 the highest scoring passages are used even when they repeat each other, which on a large documentation site often means four versions of the same page. Lower values spend the budget on passages that add something new.', 'js-support-ticket'));
-                            JSST_printConfigFieldSingle($jsst_title, $jsst_field, $jsst_description);
-                        }
-                        if(isset(jssupportticket::$jsst_data[0]['instantresolve_chunk_chars'])){
-                            $jsst_title = esc_html(__('Passage size', 'js-support-ticket'));
-                            $jsst_field = JSSTformfield::text('instantresolve_chunk_chars', jssupportticket::$jsst_data[0]['instantresolve_chunk_chars'], array('class' => 'inputbox'));
-                            $jsst_description = esc_html(__('Characters per indexed passage, from 300 to 2400. Smaller passages are more precise but can separate step three of a procedure from steps one and two. Changing this rebuilds the search index.', 'js-support-ticket'));
-                            JSST_printConfigFieldSingle($jsst_title, $jsst_field, $jsst_description);
-                        }
-                        if(isset(jssupportticket::$jsst_data[0]['instantresolve_chunk_overlap'])){
-                            $jsst_title = esc_html(__('Passage overlap', 'js-support-ticket'));
-                            $jsst_field = JSSTformfield::text('instantresolve_chunk_overlap', jssupportticket::$jsst_data[0]['instantresolve_chunk_overlap'], array('class' => 'inputbox'));
-                            $jsst_description = esc_html(__('Characters repeated between neighbouring passages, up to a third of the passage size. Overlap stops an answer that spans a boundary from being lost by both sides. Changing this rebuilds the search index.', 'js-support-ticket'));
-                            JSST_printConfigFieldSingle($jsst_title, $jsst_field, $jsst_description);
-                        }
-                        ?>
-                    </div>
-
-                <?php } // end of the addon-only sections ?>
-
-                    <?php
-                    // Outside the addon gate on purpose: the Suggestions "Search
-                    // these" field is a checkbox group too, and it is shown with
-                    // no addon installed.
-                    ?>
-                    <script type="text/javascript">
-                    (function () {
-                        // Checkbox groups post as JSON in one hidden field, because
-                        // the settings save writes each field to a single config row
-                        // and cannot take an array.
-                        var groups = document.querySelectorAll('.jsst-ir-checks');
-
-                        Array.prototype.forEach.call(groups, function (group) {
-                            var hidden = group.querySelector('input[type="hidden"]');
-                            if (!hidden) return;
-
-                            function sync() {
-                                var picked = [];
-                                Array.prototype.forEach.call(
-                                    group.querySelectorAll('input[type="checkbox"]:checked'),
-                                    function (box) { picked.push(box.value); }
-                                );
-                                hidden.value = JSON.stringify(picked);
-                            }
-
-                            group.addEventListener('change', sync);
-                        });
-                    })();
-                    </script>
+                </div>
             </div>
             <!-- .....Captcha..... -->
             <div id="captcha" class="jsstadmin-hide-config">

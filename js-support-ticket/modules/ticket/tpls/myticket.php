@@ -130,6 +130,11 @@ if (jssupportticket::$_config['offline'] == 2) {
         if(isset(jssupportticket::$jsst_data['count']) && isset(jssupportticket::$jsst_data['count']['allticket']) && jssupportticket::$jsst_data['count']['allticket'] != 0){
             $jsst_allticket_percentage = 100;
         }
+        /* Support credits: what is left and what happened to them, for a
+           customer who buys support. */
+        if (in_array('paidsupport', jssupportticket::$_active_addons) && class_exists('JSSTsupportcredits')) {
+            JSSTsupportcredits::accountPanel(JSSTincluder::getObjectClass('user')->getJSSTCurrentUser()->user_email);
+        }
         ?>
 
         <!-- Top Circle Count Boxes -->
@@ -372,14 +377,6 @@ if (jssupportticket::$_config['offline'] == 2) {
             $jsst_img = "sorting-2.png";
         ?>
         <div class="js-ticket-sorting js-col-md-12">
-            <?php /*
-            <span class="js-col-md-2 js-ticket-sorting-link"><a href="<?php echo esc_url(jssupportticket::$_sortlinks['subject']); ?>" class="jssortlink <?php if (jssupportticket::$_sorton == 'subject') echo 'selected' ?>"><?php echo esc_html($jsst_field_array['subject']); ?><?php if (jssupportticket::$_sorton == 'subject') { ?> <img alt="<?php echo esc_attr(__('image','js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL) . 'includes/images/ticketdetailicon/' . esc_attr($jsst_img) ?>"> <?php } ?></a></span>
-            <span class="js-col-md-2 js-ticket-sorting-link"><a href="<?php echo esc_url(jssupportticket::$_sortlinks['priority']); ?>" class="jssortlink <?php if (jssupportticket::$_sorton == 'priority') echo 'selected' ?>"><?php echo esc_html(jssupportticket::JSST_getVarValue($jsst_field_array['priority'])); ?><?php if (jssupportticket::$_sorton == 'priority') { ?> <img alt="<?php echo esc_attr(__('image','js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL) . 'includes/images/ticketdetailicon/' . esc_attr($jsst_img) ?>"> <?php } ?></a></span>
-            <span class="js-col-md-2 js-ticket-sorting-link"><a href="<?php echo esc_url(jssupportticket::$_sortlinks['ticketid']); ?>" class="jssortlink <?php if (jssupportticket::$_sorton == 'ticketid') echo 'selected' ?>"><?php echo esc_html(__('Ticket ID', 'js-support-ticket')); ?><?php if (jssupportticket::$_sorton == 'ticketid') { ?> <img alt="<?php echo esc_attr(__('image','js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL) . 'includes/images/ticketdetailicon/' . esc_attr($jsst_img) ?>"> <?php } ?></a></span>
-            <span class="js-col-md-2 js-ticket-sorting-link"><a href="<?php echo esc_url(jssupportticket::$_sortlinks['isanswered']); ?>" class="jssortlink <?php if (jssupportticket::$_sorton == 'isanswered') echo 'selected' ?>"><?php echo esc_html(__('Answered', 'js-support-ticket')); ?><?php if (jssupportticket::$_sorton == 'isanswered') { ?> <img alt="<?php echo esc_attr(__('image','js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL) . 'includes/images/ticketdetailicon/' . esc_attr($jsst_img) ?>"> <?php } ?></a></span>
-            <span class="js-col-md-2 js-ticket-sorting-link"><a href="<?php echo esc_url(jssupportticket::$_sortlinks['status']); ?>" class="jssortlink <?php if (jssupportticket::$_sorton == 'status') echo 'selected' ?>"><?php echo esc_html(__('Status', 'js-support-ticket')); ?><?php if (jssupportticket::$_sorton == 'status') { ?> <img alt="<?php echo esc_attr(__('image','js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL) . 'includes/images/ticketdetailicon/' . esc_attr($jsst_img) ?>"> <?php } ?></a></span>
-            <span class="js-col-md-2 js-ticket-sorting-link"><a href="<?php echo esc_url(jssupportticket::$_sortlinks['created']); ?>" class="jssortlink <?php if (jssupportticket::$_sorton == 'created') echo 'selected' ?>"><?php echo esc_html(__('Created', 'js-support-ticket')); ?><?php if (jssupportticket::$_sorton == 'created') { ?> <img alt="<?php echo esc_attr(__('image','js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL) . 'includes/images/ticketdetailicon/' . esc_attr($jsst_img) ?>"> <?php } ?></a></span>
-            */ ?>
             <div class="js-ticket-sorting-left">
                 <div class="js-ticket-sorting-heading">
                     <?php echo esc_html(__('All Tickets','js-support-ticket')); ?>
@@ -448,7 +445,7 @@ if (jssupportticket::$_config['offline'] == 2) {
                                             <?php 
                                             if ($jsst_ticket->closed != '0000-00-00 00:00:00') {?>
                                                 <span class="js-ticket-closed-date">
-                                                    <?php echo esc_html("Closed on"). " " . esc_html(date_i18n(jssupportticket::$_config['date_format'], jssupportticketphplib::JSST_strtotime($jsst_ticket->closed))); ?>
+                                                    <?php echo esc_html(__('Closed on', 'js-support-ticket')). " " . esc_html(date_i18n(jssupportticket::$_config['date_format'], jssupportticketphplib::JSST_strtotime($jsst_ticket->closed))); ?>
                                                 </span>
                                                 <?php 
                                             } ?>
@@ -460,7 +457,16 @@ if (jssupportticket::$_config['offline'] == 2) {
                             <div class="js-col-xs-12 js-col-md-12 js-ticket-padding-xs js-ticket-body-data-elipses">
                                 <a class="js-ticket-title-anchor" href="<?php echo esc_url(jssupportticket::makeUrl(array('jstmod'=>'ticket','jstlay'=>'ticketdetail','jssupportticketid'=> $jsst_ticket->id))); ?>"><?php echo esc_html($jsst_ticket->subject); ?></a>
                             </div>
-                            <?php 
+                            <?php
+                            /* A supervisor's list carries their colleagues' tickets too;
+                               say whose, and that it opens read-only. (Roadmap 5.5-COM-06) */
+                            if (!empty(jssupportticket::$jsst_data['company_supervisor'])
+                                    && (int) $jsst_ticket->uid !== (int) JSSTincluder::getObjectClass('user')->uid()) { ?>
+                                <div class="js-col-xs-12 js-col-md-12 js-ticket-padding-xs js-ticket-body-data-elipses">
+                                    <span class="js-ticket-field-title"><?php echo esc_html(__('Raised by colleague', 'js-support-ticket')); ?>:&nbsp;</span>
+                                    <span class="js-ticket-value"><?php echo esc_html($jsst_ticket->name !== '' ? $jsst_ticket->name : $jsst_ticket->email); ?> (<?php echo esc_html(__('read only', 'js-support-ticket')); ?>)</span>
+                                </div>
+                            <?php }
                             foreach ($jsst_show_on_listing_array AS $jsst_field_field => $jsst_field_title) {
                                 switch ($jsst_field_field) {
                                     case 'department': ?>
@@ -598,7 +604,11 @@ if (jssupportticket::$_config['offline'] == 2) {
             JSSTlayout::getNoRecordFound();
         }
     } else {// User is guest
-        $jsst_redirect_url = jssupportticket::makeUrl(array('jstmod'=>'ticket','jstlay'=>'myticket'));
+        /* Tagged rather than hard-coded to the customer address. Which My
+           Tickets this is depends on who logs in, and nobody has yet -
+           `JSSTloginredirect` decides it on `login_redirect`, when there is
+           finally somebody to decide it about. (Roadmap 4.5-FE-02) */
+        $jsst_redirect_url = JSSTloginredirect::destination('mytickets');
         $jsst_redirect_url = jssupportticketphplib::JSST_safe_encoding($jsst_redirect_url);
         JSSTlayout::getUserGuest($jsst_redirect_url);
     }

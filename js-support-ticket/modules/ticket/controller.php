@@ -147,7 +147,7 @@ class JSSTticketController {
         $jsst_id = JSSTrequest::getVar('ticketid');
         $jsst_nonce = JSSTrequest::getVar('_wpnonce');
         if (! wp_verify_nonce( $jsst_nonce, 'close-ticket-'.$jsst_id) ) {
-            die( 'Security check Failed' );
+            die( esc_html__( 'Security check Failed', 'js-support-ticket' ) );
         }
         JSSTincluder::getJSModel('ticket')->closeTicket( absint( $jsst_id ) );
         if (is_admin()) {
@@ -163,12 +163,12 @@ class JSSTticketController {
         $jsst_id = JSSTrequest::getVar('ticketid');
         $jsst_nonce = JSSTrequest::getVar('_wpnonce');
         if (! wp_verify_nonce( $jsst_nonce, 'lock-ticket-'.$jsst_id) ) {
-            die( 'Security check Failed' );
+            die( esc_html__( 'Security check Failed', 'js-support-ticket' ) );
         }
         if (!current_user_can('manage_options')) {
             return false;
         }
-        JSSTincluder::getJSModel('ticket')->lockTicket( absint( $jsst_id ) );
+        JSSTincluder::getJSModel('actions')->lockTicket( absint( $jsst_id ) );
         if (is_admin()) {
             $jsst_url = admin_url("admin.php?page=ticket&jstlay=ticketdetail&jssupportticketid=" . esc_attr($jsst_id));
         } else {
@@ -182,12 +182,12 @@ class JSSTticketController {
         $jsst_id = JSSTrequest::getVar('ticketid');
         $jsst_nonce = JSSTrequest::getVar('_wpnonce');
         if (! wp_verify_nonce( $jsst_nonce, 'unlock-ticket-'.$jsst_id) ) {
-            die( 'Security check Failed' );
+            die( esc_html__( 'Security check Failed', 'js-support-ticket' ) );
         }
         if (!current_user_can('manage_options')) {
             return false;
         }
-        JSSTincluder::getJSModel('ticket')->unLockTicket( absint( $jsst_id ) );
+        JSSTincluder::getJSModel('actions')->unLockTicket( absint( $jsst_id ) );
         if (is_admin()) {
             $jsst_url = admin_url("admin.php?page=ticket&jstlay=ticketdetail&jssupportticketid=" . esc_attr($jsst_id));
         } else {
@@ -226,9 +226,33 @@ class JSSTticketController {
     }
 
     static function saveticket() {
-        $jsst_id = JSSTrequest::getVar('id');
         $jsst_nonce = JSSTrequest::getVar('_wpnonce');
         $jsst_data = JSSTrequest::get('post');
+        /* SECURITY (reported 28 September 2026, CVSS 5.4): the nonce is checked
+           against the id that is WRITTEN, read once from the same place
+           storeTickets() reads it. It used to be getVar('id'), which prefers
+           the query string - so "?id=" in the URL made the check
+           'save-ticket-' (the new-ticket nonce, which anyone can obtain) while
+           the ticket edited was whatever id the POST body named. An id that is
+           present but not a plain number is refused, not defaulted. */
+        $jsst_id = isset($jsst_data['id']) ? trim((string) $jsst_data['id']) : '';
+        if ($jsst_id !== '' && !ctype_digit($jsst_id)) {
+            wp_die(esc_html__('Security check failed.', 'js-support-ticket'), esc_html__('Security Error', 'js-support-ticket'), array('response' => 403));
+        }
+        $jsst_data['id'] = $jsst_id;
+        /* Set by email piping, which calls the model directly. From a browser
+           it would skip the captcha and the banned-sender / ticket-limit
+           checks in storeTickets(). */
+        unset($jsst_data['ticketviaemail']);
+        /* Whose ticket it is comes from the session, not the form. The form's
+           hidden `uid` let a signed-in customer file a ticket in another
+           customer's name. Administrators and agents still choose the customer
+           when they open a ticket on someone's behalf; an edit keeps the stored
+           owner regardless (storeTickets). */
+        if (!current_user_can('manage_options')
+                && !(in_array('agent', jssupportticket::$_active_addons) && JSSTincluder::getJSModel('agent')->isUserStaff())) {
+            $jsst_data['uid'] = (int) JSSTincluder::getObjectClass('user')->uid();
+        }
         // The redirects below read multiformid unconditionally. A custom
         // template or a page builder that strips hidden inputs used to make that
         // a PHP notice on every failed submission. (Roadmap 3.2-CORE-03)
@@ -305,7 +329,7 @@ class JSSTticketController {
         $jsst_data = JSSTrequest::get('post');
         $jsst_nonce = JSSTrequest::getVar('_wpnonce');
         if (! wp_verify_nonce( $jsst_nonce, 'change-status-'.$jsst_data['ticketid']) ) {
-            die( 'Security check Failed' );
+            die( esc_html__( 'Security check Failed', 'js-support-ticket' ) );
         }
         JSSTincluder::getJSModel('ticket')->tickChangeStatus($jsst_data);
         if (is_admin()) {
@@ -321,7 +345,7 @@ class JSSTticketController {
         $jsst_data = JSSTrequest::get('post');
         $jsst_nonce = JSSTrequest::getVar('_wpnonce');
         if (! wp_verify_nonce( $jsst_nonce, 'transfer-department-'.$jsst_data['ticketid']) ) {
-            die( 'Security check Failed' );
+            die( esc_html__( 'Security check Failed', 'js-support-ticket' ) );
         }
         JSSTincluder::getJSModel('ticket')->tickDepartmentTransfer($jsst_data);
         if (is_admin()) {
@@ -337,7 +361,7 @@ class JSSTticketController {
         $jsst_data = JSSTrequest::get('post');
         $jsst_nonce = JSSTrequest::getVar('_wpnonce');
         if (! wp_verify_nonce( $jsst_nonce, 'assign-ticket-to-staff-'.$jsst_data['ticketid']) ) {
-            die( 'Security check Failed' );
+            die( esc_html__( 'Security check Failed', 'js-support-ticket' ) );
         }
         JSSTincluder::getJSModel('ticket')->assignTicketToStaff($jsst_data);
         if (is_admin()) {
@@ -349,11 +373,219 @@ class JSSTticketController {
         exit;
     }
 
+    /**
+     * Everything the collaboration panel does. (Roadmap 4.5-FE-08)
+     *
+     * One task rather than six, because they are six buttons on one panel
+     * about one ticket, and six nonces on one screen is six ways to get the
+     * spelling wrong. Each branch checks the permission that governs it - and
+     * they are existing permissions: following a ticket is seeing it, naming a
+     * secondary agent is assignment, approving a reply is replying.
+     */
+    static function savecollab() {
+        $jsst_ticketid = absint( JSSTrequest::getVar('ticketid', 'post', 0) );
+        $jsst_nonce = JSSTrequest::getVar('_wpnonce');
+        if (! wp_verify_nonce( $jsst_nonce, 'jsst-collab-' . $jsst_ticketid) ) {
+            die( esc_html__( 'Security check Failed', 'js-support-ticket' ) );
+        }
+        if (!class_exists('JSSTcollab') || $jsst_ticketid <= 0) {
+            wp_die(esc_html__('You are not allowed', 'js-support-ticket'));
+        }
+        $jsst_actor = JSSTcapability::actor();
+        $jsst_me = isset($jsst_actor['staffid']) ? (int) $jsst_actor['staffid'] : 0;
+        $jsst_isadmin = (isset($jsst_actor['kind']) && $jsst_actor['kind'] === JSSTcapability::ACTOR_ADMIN);
+        if (!JSSTcapability::can(JSSTcapability::TICKET_VIEW, array('ticket' => $jsst_ticketid), $jsst_actor)) {
+            wp_die(esc_html__('You are not allowed', 'js-support-ticket'));
+        }
+        $jsst_result = true;
+
+        if (JSSTrequest::getVar('collabfollow', 'post', '') !== '') {
+            /* Following and unfollowing yourself needs nothing beyond being
+               able to see the ticket, which was checked above. */
+            if ($jsst_me > 0) {
+                JSSTcollab::isWatching($jsst_ticketid, $jsst_me)
+                    ? JSSTcollab::removeWatcher($jsst_ticketid, $jsst_me)
+                    : JSSTcollab::addWatcher($jsst_ticketid, $jsst_me, JSSTcollab::ROLE_WATCHER, JSSTcollab::SOURCE_MANUAL, $jsst_me);
+                JSSTmessage::setMessage(esc_html(__('Saved.', 'js-support-ticket')), 'updated');
+            }
+        } elseif (JSSTrequest::getVar('collabadd', 'post', '') !== '') {
+            $jsst_who = absint( JSSTrequest::getVar('collabstaffid', 'post', 0) );
+            $jsst_role = (JSSTrequest::getVar('collabrole', 'post', '') === JSSTcollab::ROLE_SECONDARY)
+                ? JSSTcollab::ROLE_SECONDARY : JSSTcollab::ROLE_WATCHER;
+            /* Putting somebody else on a ticket as a second pair of hands is
+               assignment by another name, so it is governed by assignment. */
+            if ($jsst_role === JSSTcollab::ROLE_SECONDARY
+                    && !JSSTcapability::can(JSSTcapability::TICKET_ASSIGN, array('ticket' => $jsst_ticketid), $jsst_actor)) {
+                $jsst_result = esc_html(__('You may not put somebody else on this ticket.', 'js-support-ticket'));
+            } elseif ($jsst_who > 0) {
+                $jsst_result = JSSTcollab::addWatcher($jsst_ticketid, $jsst_who, $jsst_role, JSSTcollab::SOURCE_MANUAL, $jsst_me);
+                if ($jsst_result === true) {
+                    JSSTmessage::setMessage(esc_html(__('Added.', 'js-support-ticket')), 'updated');
+                    /* Tell them. (Roadmap 4.5-FE-08)
+
+                       `addWatcher()` writes a row and raises no event, so being
+                       put on a ticket used to reach the person only when
+                       something ELSE happened on it afterwards - and on a quiet
+                       ticket, never. The agent was on it and had no way to know.
+
+                       Sent here rather than from `addWatcher()` because this is
+                       the only place a PERSON does it: the automatic sources
+                       (answering, noting, being mentioned) already notify
+                       through their own events, and moving it down would tell
+                       everybody they had been added every time they replied.
+
+                       Not sent to yourself - nobody is told what they just did,
+                       which is the rule the rest of this system follows. */
+                    if (class_exists('JSSTnotifications') && $jsst_who !== $jsst_me) {
+                        JSSTnotifications::add(array(
+                            'staffid'   => $jsst_who,
+                            'category'  => JSSTnotifications::CAT_WATCHED,
+                            'eventname' => 'collab.watcher_added',
+                            'ticketid'  => $jsst_ticketid,
+                            'title'     => ($jsst_role === JSSTcollab::ROLE_SECONDARY)
+                                ? esc_html(__('You were asked to work a ticket', 'js-support-ticket'))
+                                : esc_html(__('You were added to a ticket', 'js-support-ticket')),
+                            'body'      => ($jsst_role === JSSTcollab::ROLE_SECONDARY)
+                                ? esc_html(__('Somebody put you on this ticket as a second pair of hands. It is not assigned to you.', 'js-support-ticket'))
+                                : esc_html(__('Somebody added you to this ticket so you are kept informed. It is not assigned to you.', 'js-support-ticket')),
+                            'actions'   => JSSTnotifications::actionsFor('collab.watcher_added', $jsst_ticketid, $jsst_who),
+                        ));
+                    }
+                }
+            }
+        } elseif (JSSTrequest::getVar('collabremove', 'post', '') !== '') {
+            $jsst_who = absint( JSSTrequest::getVar('collabremove', 'post', 0) );
+            /* Taking yourself off needs nothing; taking somebody else off is
+               the same decision as putting them on. */
+            if ($jsst_who !== $jsst_me
+                    && !JSSTcapability::can(JSSTcapability::TICKET_ASSIGN, array('ticket' => $jsst_ticketid), $jsst_actor)) {
+                $jsst_result = esc_html(__('You may not take somebody else off this ticket.', 'js-support-ticket'));
+            } else {
+                JSSTcollab::removeWatcher($jsst_ticketid, $jsst_who);
+                JSSTmessage::setMessage(esc_html(__('Removed.', 'js-support-ticket')), 'updated');
+            }
+        } elseif (JSSTrequest::getVar('collabshare', 'post', '') !== '') {
+            if (!JSSTcapability::can(JSSTcapability::TICKET_REPLY, array('ticket' => $jsst_ticketid), $jsst_actor)) {
+                $jsst_result = esc_html(__('You may not write a reply on this ticket.', 'js-support-ticket'));
+            } else {
+                $jsst_shared = JSSTcollab::shareDraft($jsst_ticketid, $jsst_me,
+                    JSSTincluder::getJSModel('jssupportticket')->getSanitizedEditorData(JSSTrequest::getVar('collabbody', 'post', '')),
+                    'reply', absint( JSSTrequest::getVar('collabapprover', 'post', 0) ));
+                if (is_numeric($jsst_shared)) {
+                    $jsst_approver = absint( JSSTrequest::getVar('collabapprover', 'post', 0) );
+                    JSSTmessage::setMessage($jsst_approver > 0
+                        ? esc_html(__('Sent for approval. Nothing has gone to the customer.', 'js-support-ticket'))
+                        : esc_html(__('Shared with the desk. Nothing has gone to the customer.', 'js-support-ticket')), 'updated');
+                    /* Tell the approver. (Roadmap 4.5-FE-08)
+
+                       `shareDraft()` writes the row and raises no event, so
+                       "Sent for approval" told the SENDER something had
+                       happened and told the approver nothing at all. The draft
+                       then sat in `js_ticket_collab_drafts` with nobody
+                       waiting on it, which is the worst shape for a queue that
+                       holds up a customer reply.
+
+                       CAT_MINE, not CAT_WATCHED: this is not news about a
+                       ticket somebody follows, it is a job that will not move
+                       until this person does something. */
+                    if (class_exists('JSSTnotifications') && $jsst_approver > 0 && $jsst_approver !== $jsst_me) {
+                        JSSTnotifications::add(array(
+                            'staffid'   => $jsst_approver,
+                            'category'  => JSSTnotifications::CAT_MINE,
+                            'eventname' => 'collab.approval_requested',
+                            'ticketid'  => $jsst_ticketid,
+                            'title'     => esc_html(__('A reply is waiting on you', 'js-support-ticket')),
+                            'body'      => esc_html(__('Somebody wrote a reply and asked you to look at it before it goes. Nothing has gone to the customer.', 'js-support-ticket')),
+                            'actions'   => JSSTnotifications::actionsFor('collab.approval_requested', $jsst_ticketid, $jsst_approver),
+                        ));
+                    }
+                } else {
+                    $jsst_result = $jsst_shared;
+                }
+            }
+        } elseif (JSSTrequest::getVar('collabdecide', 'post', '') !== '') {
+            $jsst_draftid = absint( JSSTrequest::getVar('collabdraft', 'post', 0) );
+            $jsst_approve = (JSSTrequest::getVar('collabdecide', 'post', '') === 'approve');
+            $jsst_result = JSSTcollab::decide($jsst_draftid, $jsst_approve, $jsst_me,
+                JSSTrequest::getVar('collabdecidenote', 'post', ''));
+            if ($jsst_result === true) {
+                JSSTmessage::setMessage($jsst_approve
+                    ? esc_html(__('Approved. It still has to be sent by whoever wrote it.', 'js-support-ticket'))
+                    : esc_html(__('Sent back with your note.', 'js-support-ticket')), 'updated');
+                /* And tell the person who wrote it. (Roadmap 4.5-FE-08)
+
+                   Approving deliberately does not send - the author still has
+                   to - so a decision nobody is told about stops the reply
+                   dead: the approver believes they have cleared it and the
+                   author never learns it was cleared. Read back from the draft
+                   rather than trusted from the request, because the author id
+                   is not in the form. */
+                $jsst_decided = JSSTcollab::draft($jsst_draftid);
+                $jsst_author = $jsst_decided ? (int) $jsst_decided->authorid : 0;
+                if (class_exists('JSSTnotifications') && $jsst_author > 0 && $jsst_author !== $jsst_me) {
+                    JSSTnotifications::add(array(
+                        'staffid'   => $jsst_author,
+                        'category'  => JSSTnotifications::CAT_MINE,
+                        'eventname' => 'collab.approval_decided',
+                        'ticketid'  => $jsst_ticketid,
+                        'title'     => $jsst_approve
+                            ? esc_html(__('Your reply was approved', 'js-support-ticket'))
+                            : esc_html(__('Your reply was sent back', 'js-support-ticket')),
+                        'body'      => $jsst_approve
+                            ? esc_html(__('It is cleared to go. It still has to be sent by you - approving does not send it.', 'js-support-ticket'))
+                            : esc_html(__('It was not approved. Open the ticket to read the note that came back with it.', 'js-support-ticket')),
+                        'actions'   => JSSTnotifications::actionsFor('collab.approval_decided', $jsst_ticketid, $jsst_author),
+                    ));
+                }
+            }
+        } elseif (JSSTrequest::getVar('collabdiscard', 'post', '') !== '') {
+            $jsst_result = JSSTcollab::discardDraft(absint( JSSTrequest::getVar('collabdiscard', 'post', 0) ),
+                $jsst_me, $jsst_isadmin);
+            if ($jsst_result === true) {
+                JSSTmessage::setMessage(esc_html(__('Discarded.', 'js-support-ticket')), 'updated');
+            }
+        }
+        if ($jsst_result !== true) {
+            JSSTmessage::setMessage($jsst_result, 'error');
+        }
+        if (is_admin()) {
+            $jsst_url = admin_url('admin.php?page=ticket&jstlay=ticketdetail&jssupportticketid=' . $jsst_ticketid);
+        } else {
+            $jsst_url = jssupportticket::makeUrl(array('jstmod' => 'ticket', 'jstlay' => 'ticketdetail', 'jssupportticketid' => $jsst_ticketid));
+        }
+        wp_safe_redirect($jsst_url);
+        exit;
+    }
+
     static function deleteticket() {
         $jsst_id = JSSTrequest::getVar('ticketid');
         $jsst_nonce = JSSTrequest::getVar('_wpnonce');
         if (! wp_verify_nonce( $jsst_nonce, 'delete-ticket-'.$jsst_id) ) {
-            die( 'Security check Failed' );
+            die( esc_html__( 'Security check Failed', 'js-support-ticket' ) );
+        }
+        /* Who may delete this ticket, asked here because this is the door.
+           (Roadmap 4.0-SEC-04)
+
+           There was no answer at this door at all: a nonce, and then the
+           deletion. `removeTicket()` does ask - but only inside
+           `in_array('agent', $_active_addons) && isUserStaff()`, so on a desk
+           without the Agents add-on, or for anybody holding a help desk role
+           without a `js_ticket_staff` row, the check was skipped and the ticket
+           went. A nonce proves the request came from our own form; it says
+           nothing about whether the person is allowed to make it, and hiding
+           the button is presentation rather than enforcement.
+
+           TICKET_DELETE is scoped, so the ticket is named: on a desk running
+           the add-on the answer varies by department and by who holds the
+           ticket. The model's own check stays where it is - two doors on one
+           room is the arrangement this codebase uses deliberately. */
+        if (class_exists('JSSTcapability')
+                && !JSSTcapability::can(JSSTcapability::TICKET_DELETE, array('ticket' => absint($jsst_id)))) {
+            JSSTmessage::setMessage(esc_html(__('You are not allowed to delete this ticket', 'js-support-ticket')), 'error', 'agent-permissions');
+            wp_safe_redirect(is_admin()
+                ? admin_url('admin.php?page=ticket&jstlay=tickets')
+                : jssupportticket::makeUrl(array('jstmod' => 'ticket', 'jstlay' => 'myticket')));
+            exit;
         }
         JSSTincluder::getJSModel('ticket')->removeTicket( absint( $jsst_id ) );
         if (is_admin()) {
@@ -373,19 +605,19 @@ class JSSTticketController {
         // Sanitize and validate ticket ID
         $jsst_id = JSSTrequest::getVar('ticketid');
         if (!is_numeric($jsst_id) || intval($jsst_id) <= 0) {
-            die('Invalid ticket ID');
+            die(esc_html__( 'Invalid ticket ID', 'js-support-ticket' ));
         }
         $jsst_id = absint($jsst_id); // Ensure positive integer
 
         // Validate Nonce
         $jsst_nonce = JSSTrequest::getVar('_wpnonce');
         if (!wp_verify_nonce($jsst_nonce, 'enforce-delete-ticket-' . $jsst_id)) {
-            die('Security check Failed');
+            die(esc_html__( 'Security check Failed', 'js-support-ticket' ));
         }
 
         // Only allow admins to delete any ticket
         if (!current_user_can('manage_options')) {
-            die('You do not have permission to delete this ticket');
+            die(esc_html__( 'You do not have permission to delete this ticket', 'js-support-ticket' ));
         }
 
         // Delete the ticket securely
@@ -444,7 +676,7 @@ class JSSTticketController {
         $jsst_ticketid = JSSTrequest::getVar('ticketid');
         $jsst_nonce = JSSTrequest::getVar('_wpnonce');
         if (! wp_verify_nonce( $jsst_nonce, 'reopen-ticket-'.$jsst_ticketid) ) {
-            die( 'Security check Failed' );
+            die( esc_html__( 'Security check Failed', 'js-support-ticket' ) );
         }
         $jsst_data['ticketid'] = absint( $jsst_ticketid );
         JSSTincluder::getJSModel('ticket')->reopenTicket($jsst_data);
@@ -462,7 +694,7 @@ class JSSTticketController {
         $jsst_data = JSSTrequest::get('post');
         $jsst_nonce = JSSTrequest::getVar('_wpnonce');
         if (! wp_verify_nonce( $jsst_nonce, 'action-ticket-'.$jsst_data['ticketid']) ) {
-            die( 'Security check Failed' );
+            die( esc_html__( 'Security check Failed', 'js-support-ticket' ) );
         }
         /* to handle actions */
         switch ($jsst_data['actionid']) {
@@ -515,8 +747,14 @@ class JSSTticketController {
                 }
                 break;
             case 10: /* ban Email & close ticket */
-                JSSTincluder::getJSModel('ticket')->banEmailAndCloseTicket($jsst_data);
-                $jsst_url = "&jstlay=ticketdetail&jssupportticketid=" . esc_attr($jsst_data['ticketid']);
+                /* Guarded like 6 and 7, which is where this was inconsistent:
+                   those two refuse when the ban list is not part of this site
+                   and this one ran regardless, so a POST could still ban an
+                   address on a desk that has no banning. */
+                if(JSSTmergedaddon::featureEnabled('banemail')){
+                    JSSTincluder::getJSModel('ticket')->banEmailAndCloseTicket($jsst_data);
+                    $jsst_url = "&jstlay=ticketdetail&jssupportticketid=" . esc_attr($jsst_data['ticketid']);
+                }
                 break;
             case 11: /* unMark over due */
                 if(in_array('overdue', jssupportticket::$_active_addons)){
@@ -659,7 +897,7 @@ class JSSTticketController {
         $jsst_downloadid = JSSTrequest::getVar('downloadid');
         $jsst_nonce = JSSTrequest::getVar('_wpnonce');
         if (! wp_verify_nonce( $jsst_nonce, 'download-all-for-reply-'.$jsst_downloadid) ) {
-            die( 'Security check Failed' );
+            die( esc_html__( 'Security check Failed', 'js-support-ticket' ) );
         }
         JSSTincluder::getJSModel('attachment')->getAllReplyDownloads();
         if (is_admin()) {
@@ -700,7 +938,7 @@ class JSSTticketController {
     function mergeticket() {
         $jsst_nonce = JSSTrequest::getVar('_wpnonce');
         if (! wp_verify_nonce( $jsst_nonce, 'merge-ticket') ) {
-            die( 'Security check Failed' );
+            die( esc_html__( 'Security check Failed', 'js-support-ticket' ) );
         }
         if (!in_array('mergeticket', jssupportticket::$_active_addons)) {
             wp_die(esc_html__('You are not allowed', 'js-support-ticket'));
@@ -732,7 +970,7 @@ class JSSTticketController {
     static function bulkaction() {
         $jsst_nonce = JSSTrequest::getVar('_wpnonce');
         if (! wp_verify_nonce( $jsst_nonce, 'jsst-bulk-action') ) {
-            die( 'Security check Failed' );
+            die( esc_html__( 'Security check Failed', 'js-support-ticket' ) );
         }
         $jsst_data = JSSTrequest::get('post');
         if (!JSSTmergedaddon::coreOwns('actions')) {
@@ -740,12 +978,11 @@ class JSSTticketController {
         } else {
             JSSTincluder::getJSModel('actions')->runBulkAction($jsst_data);
         }
-        if (is_admin()) {
-            $jsst_url = admin_url('admin.php?page=ticket');
-        } else {
-            $jsst_url = jssupportticket::makeUrl(array('jstmod'=>'ticket', 'jstlay'=>'myticket'));
-        }
-        wp_safe_redirect($jsst_url);
+        /* Back to the queue that ran it. An agent applying a bulk action from
+           the front-end desk used to land on the customer's "my tickets" page,
+           which is not their queue and does not show what they just did.
+           (Roadmap 4.5-UX-01) */
+        wp_safe_redirect(self::queueUrl());
         exit;
     }
 
@@ -762,23 +999,33 @@ class JSSTticketController {
     static function savequeueview() {
         $jsst_nonce = JSSTrequest::getVar('_wpnonce');
         if (! wp_verify_nonce( $jsst_nonce, 'jsst-queue-view') ) {
-            die( 'Security check Failed' );
+            die( esc_html__( 'Security check Failed', 'js-support-ticket' ) );
         }
-        if (!JSSTticketaction::canRun('View Ticket')) {
+        /* Asked of the capability service rather than of the Agents model.
+           JSSTticketaction::canRun() answers from whichever of the two
+           permission systems it happens to find first, which is the split this
+           release exists to close - and a saved view is a queue, so the
+           question is whether this person may open one. (Roadmap 4.5-UX-01) */
+        if (!JSSTcapability::can(JSSTcapability::QUEUE_VIEW)) {
             JSSTmessage::setMessage(esc_html(__('You are not allowed to do this', 'js-support-ticket')), 'error', 'agent-permissions');
-            wp_safe_redirect(admin_url('admin.php?page=ticket'));
+            wp_safe_redirect(self::queueUrl());
             exit;
         }
+        /* Sharing is a checkbox on the save form. JSSTqueue::saveView() asks
+           again whether this person may share, and quietly saves it privately
+           if not - the view is theirs either way. (Roadmap 4.5-UX-01) */
+        $jsst_share = JSSTrequest::getVar('viewshared', 'post', '');
         $jsst_result = JSSTqueue::saveView(
             JSSTrequest::getVar('viewname', 'post', ''),
-            JSSTqueue::filtersFromRequest()
+            JSSTqueue::filtersFromRequest(),
+            ($jsst_share !== '' && $jsst_share !== '0') ? JSSTqueue::VIEW_SHARED : JSSTqueue::VIEW_PRIVATE
         );
         if ($jsst_result === true) {
             JSSTmessage::setMessage(esc_html(__('View saved', 'js-support-ticket')), 'updated');
         } else {
             JSSTmessage::setMessage($jsst_result, 'error');
         }
-        wp_safe_redirect(admin_url('admin.php?page=ticket'));
+        wp_safe_redirect(self::queueUrl());
         exit;
     }
 
@@ -786,18 +1033,78 @@ class JSSTticketController {
      * Delete one saved view. (Roadmap 4.0-CORE-18)
      *
      * JSSTqueue::deleteView() scopes the delete to the current user, so a view
-     * id belonging to somebody else matches nothing.
+     * id belonging to somebody else matches nothing and is reported as such.
      */
     static function deletequeueview() {
         $jsst_viewid = absint( JSSTrequest::getVar('viewid') );
         $jsst_nonce = JSSTrequest::getVar('_wpnonce');
         if (! wp_verify_nonce( $jsst_nonce, 'jsst-delete-queue-view-'.$jsst_viewid) ) {
-            die( 'Security check Failed' );
+            die( esc_html__( 'Security check Failed', 'js-support-ticket' ) );
         }
-        JSSTqueue::deleteView($jsst_viewid);
-        JSSTmessage::setMessage(esc_html(__('View deleted', 'js-support-ticket')), 'updated');
-        wp_safe_redirect(admin_url('admin.php?page=ticket'));
+        if (JSSTqueue::deleteView($jsst_viewid)) {
+            JSSTmessage::setMessage(esc_html(__('View deleted', 'js-support-ticket')), 'updated');
+        } else {
+            JSSTmessage::setMessage(esc_html(__('This view could not be deleted', 'js-support-ticket')), 'error');
+        }
+        wp_safe_redirect(self::queueUrl());
         exit;
+    }
+
+    /**
+     * Remember which columns this agent wants in their queue. (Roadmap 4.5-UX-01)
+     *
+     * Per person, not per site. The listing configuration an administrator
+     * maintains stays the default for everybody who has not chosen; this only
+     * ever narrows or widens one agent's own view of the same queue, so it
+     * needs no permission beyond being able to open a queue at all.
+     */
+    static function savequeuecolumns() {
+        $jsst_nonce = JSSTrequest::getVar('_wpnonce');
+        if (! wp_verify_nonce( $jsst_nonce, 'jsst-queue-columns') ) {
+            die( esc_html__( 'Security check Failed', 'js-support-ticket' ) );
+        }
+        if (!JSSTcapability::can(JSSTcapability::QUEUE_VIEW)) {
+            JSSTmessage::setMessage(esc_html(__('You are not allowed to do this', 'js-support-ticket')), 'error', 'agent-permissions');
+            wp_safe_redirect(self::queueUrl());
+            exit;
+        }
+        $jsst_columns = JSSTrequest::getVar('queuecolumns', 'post', array());
+        if (JSSTrequest::getVar('resetcolumns', 'post', '') !== '') {
+            JSSTqueueengine::resetColumns(get_current_user_id());
+            JSSTmessage::setMessage(esc_html(__('Columns reset to this site\'s defaults', 'js-support-ticket')), 'updated');
+        } else {
+            $jsst_result = JSSTqueueengine::saveColumns(get_current_user_id(), (array) $jsst_columns);
+            if ($jsst_result === true) {
+                JSSTmessage::setMessage(esc_html(__('Columns saved', 'js-support-ticket')), 'updated');
+            } else {
+                JSSTmessage::setMessage($jsst_result, 'error');
+            }
+        }
+        wp_safe_redirect(self::queueUrl());
+        exit;
+    }
+
+    /**
+     * Back to the queue the request came from. (Roadmap 4.5-UX-01)
+     *
+     * The saved-view and column tasks are reachable from both desks now, and
+     * every one of them used to redirect to wp-admin regardless - which for an
+     * agent working in the portal meant saving a view and landing on a screen
+     * they may not be allowed to open at all.
+     */
+    private static function queueUrl() {
+        if (is_admin()) {
+            return admin_url('admin.php?page=ticket');
+        }
+        /* An agent's queue on the front end is the agent desk; a customer's is
+           their own ticket list. Sending a customer to the agent desk would be
+           a page they cannot open, and sending an agent to the customer list
+           would not show them what they just did. */
+        $jsst_isagent = in_array('agent', jssupportticket::$_active_addons)
+            && JSSTincluder::getJSModel('agent')->isUserStaff();
+        return $jsst_isagent
+            ? jssupportticket::makeUrl(array('jstmod' => 'agent', 'jstlay' => 'staffmyticket'))
+            : jssupportticket::makeUrl(array('jstmod' => 'ticket', 'jstlay' => 'myticket'));
     }
 
     /**
@@ -807,7 +1114,7 @@ class JSSTticketController {
         $jsst_sourceid = absint( JSSTrequest::getVar('sourceticket') );
         $jsst_nonce = JSSTrequest::getVar('_wpnonce');
         if (! wp_verify_nonce( $jsst_nonce, 'unmerge-ticket-'.$jsst_sourceid) ) {
-            die( 'Security check Failed' );
+            die( esc_html__( 'Security check Failed', 'js-support-ticket' ) );
         }
         if (!in_array('mergeticket', jssupportticket::$_active_addons)) {
             wp_die(esc_html__('You are not allowed', 'js-support-ticket'));

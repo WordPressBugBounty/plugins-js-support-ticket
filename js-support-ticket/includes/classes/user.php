@@ -53,7 +53,7 @@ class JSSTuser
                 $jsst_row = JSSTincluder::getJSTable('users');
                 $jsst_data['id'] = '';
                 $jsst_data['wpuid'] = $jsst_wpuserid;
-                $jsst_data['name'] = $jsst_profile['name'];
+                $jsst_data['name'] = $jsst_userdata->user_login; // the username; the full name is display_name
                 $jsst_data['display_name'] = $jsst_display_name;
                 $jsst_data['user_nicename'] = $jsst_userdata->user_nicename;
                 $jsst_data['user_email'] = $jsst_userdata->user_email;
@@ -66,8 +66,21 @@ class JSSTuser
                 $jsst_row->store();
 
                 if (is_numeric($jsst_row->id)) {
+                    /* get_row(), not get_results(). This is the branch that runs
+                       the very first time a WordPress user touches the help desk
+                       and gets a js_ticket_users row created for them, and it
+                       was loading that row back as an array of one object while
+                       the branch above - the ordinary "they already have a row"
+                       one - loads a single object. Everything that reads this
+                       property reads it as an object: uid(), wpuid(), status(),
+                       emailaddress(), the display name. So on a user's first
+                       request uid() returned nothing and every caller that asks
+                       "who is this" got a blank answer, which is how an action
+                       taken by a real administrator came to be attributed to
+                       nobody and refused. One spelling, and the two branches
+                       now hand back the same shape. */
                     $jsst_query = jssupportticket::$_db->prepare("SELECT * FROM `".jssupportticket::$_db->prefix."js_ticket_users` WHERE id = %d", $jsst_row->id);
-                    $jsst_currentuser = jssupportticket::$_db->get_results($jsst_query);
+                    $jsst_currentuser = jssupportticket::$_db->get_row($jsst_query);
                 }
             }
             $this->jsst_currentuser = $jsst_currentuser;
@@ -85,14 +98,20 @@ class JSSTuser
         }
     }
 
+    /**
+     * Is the visitor anonymous?
+     *
+     * A social-login cookie on its own proves nothing - anybody can send one.
+     * It counts only once the constructor has matched it to a help-desk user,
+     * which leaves the current user set. So with the add-on active the cookie
+     * gets no answer of its own here, and a cookie that matched nobody is a
+     * guest like any other visitor.
+     */
     function isguest()
     {
-        if (isset($_COOKIE['jssupportticket-socialid']) && !empty($_COOKIE['jssupportticket-socialid'])) {
-            if (in_array('sociallogin', jssupportticket::$_active_addons)) {
-                return false;
-            } else {
-                return true;
-            }
+        if (isset($_COOKIE['jssupportticket-socialid']) && !empty($_COOKIE['jssupportticket-socialid'])
+                && !in_array('sociallogin', jssupportticket::$_active_addons)) {
+            return true;
         } elseif ($this->jsst_currentuser == null && !is_user_logged_in()) { // current user is guest
             return true;
         } else {
@@ -141,9 +160,13 @@ class JSSTuser
         if ($this->jsst_currentuser == null) { // current user is guest
             return false;
         } else {
-            $jsst_name = $this->jsst_currentuser->name;
+            /* The display name first: js_ticket_users.name holds the username
+               (see the insert above), so reading it first signed every reply
+               "priya.shah" rather than "Priya Shah". The username is the
+               fallback it always was. (29 Sep 2026) */
+            $jsst_name = isset($this->jsst_currentuser->display_name) ? (string) $this->jsst_currentuser->display_name : '';
 			if($jsst_name == ""){
-				$jsst_name = $this->jsst_currentuser->display_name;
+				$jsst_name = $this->jsst_currentuser->name;
 			}
 			if($jsst_name == ""){
 				$jsst_name = $this->jsst_currentuser->user_nicename;
@@ -162,6 +185,13 @@ class JSSTuser
     }
 
 
+    /**
+     * Does the visitor have a help-desk user record?
+     *
+     * Counted with get_var(). This used get_results(), whose array compared
+     * as greater than 0 whatever it held, so any social-login cookie at all -
+     * one matching nobody included - was answered as a known user.
+     */
     function isJSsupportticketUser()
     {
         if (is_user_logged_in()) { // wp user logged in
@@ -169,23 +199,14 @@ class JSSTuser
             if (!is_numeric($jsst_wpuserid))
                 return false;
             $jsst_query = jssupportticket::$_db->prepare("SELECT COUNT(id) FROM `".jssupportticket::$_db->prefix."js_ticket_users` WHERE wpuid = %d", $jsst_wpuserid);
-            $jsst_result = jssupportticket::$_db->get_results($jsst_query);
-            if ($jsst_result > 0) {
-                return true;
-            } else {
-                return false;
-            }
+            return (int) jssupportticket::$_db->get_var($jsst_query) > 0;
         } else {
             if (isset($_COOKIE['jssupportticket-socialid']) && !empty($_COOKIE['jssupportticket-socialid'])) { // social user is logged in
-                $jsst_query = "SELECT COUNT(id) FROM `".jssupportticket::$_db->prefix."js_ticket_users` WHERE socialid = '" . jssupportticket::JSST_sanitizeData($_COOKIE['jssupportticket-socialid']) . "'"; // JSST_sanitizeData() function uses wordpress santize functions
-                $jsst_result = jssupportticket::$_db->get_results($jsst_query);
-                if ($jsst_result > 0) {
-                    return true;
-                } else {
-                    return false;
-                }
+                $jsst_query = jssupportticket::$_db->prepare("SELECT COUNT(id) FROM `".jssupportticket::$_db->prefix."js_ticket_users` WHERE socialid = %s", jssupportticket::JSST_sanitizeData($_COOKIE['jssupportticket-socialid'])); // JSST_sanitizeData() function uses wordpress santize functions
+                return (int) jssupportticket::$_db->get_var($jsst_query) > 0;
             }
         }
+        return false;
     }
 
     function isSocialLogin()

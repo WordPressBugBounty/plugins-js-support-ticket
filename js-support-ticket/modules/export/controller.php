@@ -98,7 +98,7 @@ class JSSTexportController {
     static function getticketsexport() {
         $jsst_nonce = JSSTrequest::getVar('_wpnonce');
         if (! wp_verify_nonce( $jsst_nonce, 'get-tickets-export') ) {
-            die( 'Security check Failed' );
+            die( esc_html__( 'Security check Failed', 'js-support-ticket' ) );
         }
         $jsst_model = JSSTincluder::getJSModel('export');
         if (!JSSTexportModel::canExport()) {
@@ -121,8 +121,60 @@ class JSSTexportController {
         if (function_exists('set_time_limit')) {
             @set_time_limit(0);
         }
-        $jsst_writer = new JSSTcsvwriter();
-        $jsst_writer->start($jsst_model->ticketFilename($jsst_filters));
+        /* The format is the caller's, and the writers take the same rows -
+           so this is a choice of writer and nothing else. An unavailable
+           format falls back to CSV inside writerFor() rather than failing:
+           somebody who asked for a spreadsheet on a host with no zip extension
+           should get their data, and the screen has already told them why the
+           option is not on offer. (Roadmap 5.0-ANA-01) */
+        $jsst_format = sanitize_key(JSSTrequest::getVar('exportformat', 'post', 'csv'));
+        $jsst_anonymise = (JSSTrequest::getVar('exportanonymise', 'post', '') !== '');
+
+        /* Asked to leave the customers out, and unable to. (Roadmap 6.5-DATA-05)
+         *
+         * The pseudonyms are `JSSTexports::anonymiseRow()`, which lives in the
+         * Reporting & Compliance bundle, so on a desk that does not have it
+         * installed this request cannot be honoured. It used to be skipped -
+         * `if ($jsst_anonymise && class_exists('JSSTexports'))` - and the export
+         * then ran with every name, login, address and telephone in it. The
+         * filename was built from `$jsst_anonymise` alone with no such guard, so
+         * what came back was a file called `...-anonymised.csv` containing the
+         * customers in full. Somebody sending that to an analyst has been told
+         * twice that it is safe.
+         *
+         * So this refuses instead of falling back, and that is the opposite of
+         * what `writerFor()` does one line below on purpose: a spreadsheet
+         * falling back to CSV loses a convenience, and an anonymised export
+         * falling back to an identifying one loses the entire reason the box was
+         * ticked. A fallback is only ever right when the lesser thing is still
+         * the thing that was asked for. */
+        if ($jsst_anonymise && !class_exists('JSSTexports')) {
+            JSSTmessage::setMessage(esc_html(__('This export was not run. Leaving the customers out needs the Reporting & Compliance add-on, which is not active on this site — and an export that quietly kept them in would be worse than none. Activate it, or clear that box to export with the customers named.', 'js-support-ticket')), 'error');
+            $jsst_url = is_admin()
+                ? admin_url('admin.php?page=export')
+                : jssupportticket::makeUrl(array('jstmod' => 'export', 'jstlay' => 'export'));
+            wp_safe_redirect($jsst_url);
+            exit;
+        }
+
+        $jsst_writer = class_exists('JSSTexports')
+            ? JSSTexports::writerFor($jsst_format) : new JSSTcsvwriter();
+        /* Unguarded: the refusal above is what makes the class certain here, and
+           re-testing for it would put the silent-skip path back. */
+        if ($jsst_anonymise) {
+            JSSTexports::anonymiseFrom();
+        }
+        /* A printed export keeps the eight columns a report is read by. Twenty
+           columns on a sheet of paper gives each of them about seven characters
+           and every value becomes an ellipsis. (Roadmap 5.0-ANA-01) */
+        if ($jsst_format === 'pdf' && class_exists('JSSTexports')) {
+            JSSTexports::slimFrom();
+        }
+        $jsst_name = $jsst_model->ticketFilename($jsst_filters) . ($jsst_anonymise ? '-anonymised' : '');
+        $jsst_writer->start($jsst_name);
+        if (method_exists($jsst_writer, 'title')) {
+            $jsst_writer->title($jsst_name);
+        }
         $jsst_model->streamTickets($jsst_filters, $jsst_writer);
         $jsst_writer->finish();
     }
@@ -140,7 +192,7 @@ class JSSTexportController {
      */
     function downloadcsvtemplate() {
         if (!wp_verify_nonce(JSSTrequest::getVar('_wpnonce'), 'jsst-csv-template')) {
-            die('Security check Failed');
+            die(esc_html__( 'Security check Failed', 'js-support-ticket' ));
         }
         if (!current_user_can('manage_options')) {
             return false;
@@ -150,9 +202,11 @@ class JSSTexportController {
         header('Content-Type: text/csv; charset=utf-8');
         header('Content-Disposition: attachment; filename="js-help-desk-ticket-import-template.csv"');
         $jsst_out = fopen('php://output', 'w');
-        fputcsv($jsst_out, $jsst_header);
-        fputcsv($jsst_out, $jsst_example);
-        fclose($jsst_out);
+        // Escape `''` for RFC 4180, and named rather than defaulted: PHP 8.4
+        // deprecates the implicit default. Matches JSSTcsvwriter::row().
+        fputcsv($jsst_out, $jsst_header, ',', '"', '');
+        fputcsv($jsst_out, $jsst_example, ',', '"', '');
+        fclose($jsst_out); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_fclose -- php:// stream, not a file: WP_Filesystem has no API for stream wrappers
         exit;
     }
 
@@ -166,7 +220,7 @@ class JSSTexportController {
      */
     function checkcsvfile() {
         if (!wp_verify_nonce(JSSTrequest::getVar('_wpnonce'), 'jsst-csv-check')) {
-            die('Security check Failed');
+            die(esc_html__( 'Security check Failed', 'js-support-ticket' ));
         }
         if (!current_user_can('manage_options')) {
             return false;
@@ -208,7 +262,7 @@ class JSSTexportController {
      */
     function runcsvimport() {
         if (!wp_verify_nonce(JSSTrequest::getVar('_wpnonce'), 'jsst-csv-import')) {
-            die('Security check Failed');
+            die(esc_html__( 'Security check Failed', 'js-support-ticket' ));
         }
         if (!current_user_can('manage_options')) {
             return false;
@@ -246,7 +300,7 @@ class JSSTexportController {
      */
     function rollbackcsvimport() {
         if (!wp_verify_nonce(JSSTrequest::getVar('_wpnonce'), 'jsst-csv-rollback')) {
-            die('Security check Failed');
+            die(esc_html__( 'Security check Failed', 'js-support-ticket' ));
         }
         if (!current_user_can('manage_options')) {
             return false;

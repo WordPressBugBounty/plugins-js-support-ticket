@@ -16,31 +16,17 @@ JSSTmessage::getMessage();
         <?php JSSTincluder::getClassesInclude('jsstadminsidemenu'); ?>
     </div>
     <div id="jsstadmin-data">
-        <div id="jsstadmin-wrapper-top">
-            <div id="jsstadmin-wrapper-top-left">
-                <div id="jsstadmin-breadcrunbs">
-                    <ul>
-                        <li><a href="?page=jssupportticket" title="<?php echo esc_attr(__('Dashboard','js-support-ticket')); ?>"><?php echo esc_html(__('Dashboard','js-support-ticket')); ?></a></li>
-                        <li><?php echo esc_html(__('System Status','js-support-ticket')); ?></li>
-                    </ul>
-                </div>
-            </div>
-            <div id="jsstadmin-wrapper-top-right">
-                <div id="jsstadmin-vers-txt">
-                    <?php echo esc_html(__("Version",'js-support-ticket')); ?>:
-                    <span class="jsstadmin-ver"><?php echo esc_html(JSSTincluder::getJSModel('configuration')->getConfigValue('versioncode')); ?></span>
-                </div>
-            </div>
-        </div>
-        <div id="jsstadmin-head">
-            <h1 class="jsstadmin-head-text"><?php echo esc_html(__('System Status', 'js-support-ticket')); ?></h1>
-        </div>
+        <?php JSSTlayout::adminPageHeader(array(
+            'title'  => __('System Status & Debug Report', 'js-support-ticket'),
+        )); ?>
         <div id="jsstadmin-data-wrp">
 
-            <div class="jsst-status-card">
-                <div class="jsst-status-title"><?php echo esc_html(__('Send this with a bug report', 'js-support-ticket')); ?></div>
-                <div class="jsst-status-note"><?php echo esc_html(__('A file with everything on this page plus your settings. Passwords, API keys and licence keys are removed before it is written — anything whose name looks like a credential, and anything that looks like one regardless of its name.', 'js-support-ticket')); ?></div>
-                <a class="button js-form-save" href="<?php echo esc_url(wp_nonce_url(admin_url('admin.php?page=jssupportticket&task=downloaddebugbundle&action=jstask'), 'jsst-debug-bundle')); ?>"><?php echo esc_html(__('Download debug file', 'js-support-ticket')); ?></a>
+            <?php /* The Plugin Support menu's "Debug Report" lands on this card by its
+               id, so the menu, this title and the button all say the same thing. */ ?>
+            <div class="jsst-status-card jsst-status-debugreport" id="jsst-debug-report">
+                <div class="jsst-status-title"><?php echo esc_html(__('Debug Report', 'js-support-ticket')); ?></div>
+                <div class="jsst-status-note"><?php echo esc_html(__('Download this file and attach it when you contact support. It holds everything on this page plus your settings. Passwords, API keys and licence keys are removed before it is written — anything whose name looks like a credential, and anything that looks like one regardless of its name.', 'js-support-ticket')); ?></div>
+                <a class="jsst-btn jsst-btn-primary" href="<?php echo esc_url(wp_nonce_url(admin_url('admin.php?page=jssupportticket&task=downloaddebugbundle&action=jstask'), 'jsst-debug-bundle')); ?>"><?php echo esc_html(__('Download Debug Report', 'js-support-ticket')); ?></a>
                 <span class="jsst-status-correlation"><?php echo esc_html(sprintf(
                     /* translators: %s: a short request identifier */
                     __('This page load is %s in the log.', 'js-support-ticket'),
@@ -122,17 +108,122 @@ JSSTmessage::getMessage();
                 </div>
                 <div class="jsst-status-note">
                     <?php
-                    echo esc_html(!empty($jsst_status['retention']['cleanup_on'])
-                            ? sprintf(
-                                /* translators: %d: days */
-                                __('Retention cleanup is on: closed tickets are removed after %d days.', 'js-support-ticket'),
-                                (int) $jsst_status['retention']['cleanup_days'])
-                            : __('Retention cleanup is off, so nothing is deleted automatically.', 'js-support-ticket'));
+                    /* Months, and the two intervals apart. They are set apart,
+                       and "keep the tickets, purge the files" is a real setting
+                       this line could not say while it knew about one number in
+                       the wrong unit under a name nothing writes. */
+                    $jsst_ret = $jsst_status['retention'];
+                    $jsst_ret_tickets = isset($jsst_ret['cleanup_months']) ? (int) $jsst_ret['cleanup_months'] : 0;
+                    $jsst_ret_files = isset($jsst_ret['attachment_months']) ? (int) $jsst_ret['attachment_months'] : 0;
+                    if (empty($jsst_ret['cleanup_on'])) {
+                        echo esc_html(__('Retention cleanup is off, so nothing is deleted automatically.', 'js-support-ticket'));
+                    } elseif ($jsst_ret_tickets > 0) {
+                        echo esc_html(sprintf(
+                            /* translators: %s: a number of months. */
+                            _n('Retention cleanup is on: closed tickets are removed %s month after they close.',
+                               'Retention cleanup is on: closed tickets are removed %s months after they close.',
+                               $jsst_ret_tickets, 'js-support-ticket'),
+                            number_format_i18n($jsst_ret_tickets)));
+                        if ($jsst_ret_files > 0 && $jsst_ret_files < $jsst_ret_tickets) {
+                            echo ' ' . esc_html(sprintf(
+                                /* translators: %s: a number of months. */
+                                _n('Their attachments go after %s month.', 'Their attachments go after %s months.',
+                                   $jsst_ret_files, 'js-support-ticket'),
+                                number_format_i18n($jsst_ret_files)));
+                        }
+                    } else {
+                        echo esc_html(sprintf(
+                            /* translators: %s: a number of months. */
+                            _n('Retention cleanup is on for attachments only: tickets are kept, and their files are removed %s month after the ticket closes.',
+                               'Retention cleanup is on for attachments only: tickets are kept, and their files are removed %s months after the ticket closes.',
+                               $jsst_ret_files, 'js-support-ticket'),
+                            number_format_i18n($jsst_ret_files)));
+                    }
                     ?>
                 </div>
             </div>
 
             <div class="jsst-status-card">
+                <?php /* Only ever non-empty on a multisite where a legacy
+                         add-on was network-activated and its tables were never
+                         created on this blog. (Roadmap 4.5-ARCH-05) */ ?>
+                <?php if (!empty($jsst_status['modules'])) { ?>
+                    <div class="jsst-status-title"><?php echo esc_html(__('Add-on tables missing on this site', 'js-support-ticket')); ?></div>
+                    <div class="jsst-status-card jsst-status-warn">
+                        <p><?php echo esc_html(__('These add-ons were activated across the whole network, but the tables they need were only ever created on one site — a known fault in the add-ons\' own activation, which creates them for whichever site happened to be current at the time. The features below will not work on this site until the tables exist. Deactivating and reactivating the add-on on this site alone creates them; moving the module to Pro avoids the fault entirely.', 'js-support-ticket')); ?></p>
+                        <table class="jsst-status-table">
+                            <?php foreach ($jsst_status['modules'] AS $jsst_gap) { ?>
+                                <tr>
+                                    <td><?php echo esc_html($jsst_gap['label']); ?></td>
+                                    <td><code><?php echo esc_html($jsst_gap['table']); ?></code></td>
+                                </tr>
+                            <?php } ?>
+                        </table>
+                    </div>
+                <?php } ?>
+
+                <?php /* The two agent desks, measured rather than asserted.
+                         (Roadmap 4.5-FE-01) */
+                if (!empty($jsst_status['workspaces']) && !empty($jsst_status['workspaces']['total'])) {
+                    $jsst_wp = $jsst_status['workspaces']; ?>
+                    <div class="jsst-status-title"><?php echo esc_html(__('Agent workspaces', 'js-support-ticket')); ?></div>
+                    <div class="jsst-status-note">
+                        <?php echo esc_html(sprintf(
+                            /* translators: 1: capabilities on the shared layer, 2: capabilities in total. */
+                            __('%1$s of %2$s agent capabilities go through the shared application layer in both the backend and the frontend desk.', 'js-support-ticket'),
+                            number_format_i18n($jsst_wp['done']), number_format_i18n($jsst_wp['total'])
+                        )); ?>
+                        <?php if (!empty($jsst_wp['gaps'])) {
+                            echo ' ' . esc_html(sprintf(
+                                /* translators: %s: number of capabilities. */
+                                _n('%s is in one desk and not the other.', '%s are in one desk and not the other.', $jsst_wp['gaps'], 'js-support-ticket'),
+                                number_format_i18n($jsst_wp['gaps'])
+                            ));
+                        } ?>
+                        <a href="<?php echo esc_url(admin_url('admin.php?page=jssupportticket&jstlay=workspaceparity')); ?>"><?php echo esc_html(__('Workspace Parity', 'js-support-ticket')); ?></a>
+                    </div>
+                <?php } ?>
+
+                <?php
+                /* The CSS debt, published for the same reason the parity figure
+                   is: the design system is paid down alongside releases rather
+                   than in one go, and a continuous task with no number attached
+                   is one that quietly stops being worked on. (Roadmap 4.0-UX-06) */
+                if (!empty($jsst_status['design'])) {
+                    $jsst_design = $jsst_status['design']; ?>
+                    <div class="jsst-status-title"><?php echo esc_html(__('Stylesheet debt', 'js-support-ticket')); ?></div>
+                    <div class="jsst-status-note">
+                        <?php echo esc_html(sprintf(
+                            /* translators: 1: !important count, 2: float count, 3: design token uses */
+                            __('%1$s declarations still win by force and %2$s rules still lay out with floats, against %3$s uses of a design token. Every one of the first two is somewhere a future screen has to fight the past; the third is the direction of travel.', 'js-support-ticket'),
+                            number_format_i18n($jsst_design['important']),
+                            number_format_i18n($jsst_design['float']),
+                            number_format_i18n($jsst_design['tokens'])
+                        )); ?>
+                        <?php echo esc_html($jsst_design['reducedmotion']
+                            ? __('Motion is switched off for anybody who has asked their system for that.', 'js-support-ticket')
+                            : __('Reduced motion is not handled.', 'js-support-ticket')); ?>
+                    </div>
+                    <table class="jsst-status-table">
+                        <tr>
+                            <th><?php echo esc_html(__('Stylesheet', 'js-support-ticket')); ?></th>
+                            <th><?php echo esc_html(__('By force', 'js-support-ticket')); ?></th>
+                            <th><?php echo esc_html(__('Floats', 'js-support-ticket')); ?></th>
+                            <th><?php echo esc_html(__('Flex or grid', 'js-support-ticket')); ?></th>
+                            <th><?php echo esc_html(__('Tokens', 'js-support-ticket')); ?></th>
+                        </tr>
+                        <?php foreach ($jsst_design['files'] AS $jsst_file => $jsst_row) { ?>
+                            <tr>
+                                <td><?php echo esc_html($jsst_file); ?></td>
+                                <td><?php echo esc_html(number_format_i18n($jsst_row['important'])); ?></td>
+                                <td><?php echo esc_html(number_format_i18n($jsst_row['float'])); ?></td>
+                                <td><?php echo esc_html(number_format_i18n($jsst_row['flex'] + $jsst_row['grid'])); ?></td>
+                                <td><?php echo esc_html(number_format_i18n($jsst_row['tokens'])); ?></td>
+                            </tr>
+                        <?php } ?>
+                    </table>
+                <?php } ?>
+
                 <div class="jsst-status-title"><?php echo esc_html(__('Recent errors', 'js-support-ticket')); ?></div>
                 <?php if (empty($jsst_status['errors'])) { ?>
                     <div class="jsst-status-note"><?php echo esc_html(__('Nothing has been logged.', 'js-support-ticket')); ?></div>

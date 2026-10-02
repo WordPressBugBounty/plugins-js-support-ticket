@@ -74,7 +74,7 @@ class JSSThelptopicController {
         $jsst_id = JSSTrequest::getVar('id');
         $jsst_nonce = JSSTrequest::getVar('_wpnonce');
         if (! wp_verify_nonce( $jsst_nonce, 'save-help-topic-'.$jsst_id) ) {
-            die( 'Security check Failed' );
+            die( esc_html__( 'Security check Failed', 'js-support-ticket' ) );
         }
         $jsst_data = JSSTrequest::get('post');
         JSSTincluder::getJSModel('helptopic')->storeHelpTopic($jsst_data);
@@ -91,7 +91,7 @@ class JSSThelptopicController {
         $jsst_id = JSSTrequest::getVar('helptopicid');
         $jsst_nonce = JSSTrequest::getVar('_wpnonce');
         if (! wp_verify_nonce( $jsst_nonce, 'delete-helptopic-'.$jsst_id) ) {
-            die( 'Security check Failed' );
+            die( esc_html__( 'Security check Failed', 'js-support-ticket' ) );
         }
         JSSTincluder::getJSModel('helptopic')->removeHelpTopic($jsst_id);
         if (is_admin()) {
@@ -107,7 +107,7 @@ class JSSThelptopicController {
         $jsst_id = JSSTrequest::getVar('helptopicid');
         $jsst_nonce = JSSTrequest::getVar('_wpnonce');
         if (! wp_verify_nonce( $jsst_nonce, 'change-status-'.$jsst_id) ) {
-            die( 'Security check Failed' );
+            die( esc_html__( 'Security check Failed', 'js-support-ticket' ) );
         }
         JSSTincluder::getJSModel('helptopic')->changeStatus($jsst_id);
         $jsst_url = admin_url("admin.php?page=helptopic&jstlay=helptopics");
@@ -121,7 +121,7 @@ class JSSThelptopicController {
     static function ordering() {
         $jsst_nonce = JSSTrequest::getVar('_wpnonce');
         if (! wp_verify_nonce( $jsst_nonce, 'ordering') ) {
-            die( 'Security check Failed' );
+            die( esc_html__( 'Security check Failed', 'js-support-ticket' ) );
         }
         $jsst_id = JSSTrequest::getVar('helptopicid');
         JSSTincluder::getJSModel('helptopic')->setOrdering($jsst_id);

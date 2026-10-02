@@ -9,13 +9,24 @@ class JSSTfieldorderingModel {
         if(!is_numeric($jsst_fieldfor)){
             return false;
         }
-	    $jsst_formid = jssupportticket::$jsst_data['formid'];
-        if (isset($jsst_formid) && $jsst_formid != null) {
+        /* A form is a ticket-form idea, so only the ticket list is scoped by
+           one. This is the rule `getFieldsOrderingforForm()` below has always
+           followed when it renders - `AND multiformid` is added there only for
+           `fieldfor` 1 - and this list did it unconditionally, so the screen
+           and the form it configures disagreed about which questions exist.
+           Feedback questions belong to no form; they were visible here only
+           because they happened to carry `multiformid` 1, and one written with
+           any other value vanished from the screen with nothing saying why.
+           (Roadmap 6.5-FORM-02) */
+        $jsst_inquery = '';
+        if ($jsst_fieldfor == 1) {
+            $jsst_formid = isset(jssupportticket::$jsst_data['formid'])
+                ? jssupportticket::$jsst_data['formid'] : null;
+            if ($jsst_formid === null || $jsst_formid === '') {
+                $jsst_formid = JSSTincluder::getJSModel('ticket')->getDefaultMultiFormId();
+            }
             $jsst_inquery = jssupportticket::$_db->prepare(" AND multiformid = %d", $jsst_formid);
         }
-    	else{
-            $jsst_inquery = jssupportticket::$_db->prepare(" AND multiformid = %d", JSSTincluder::getJSModel('ticket')->getDefaultMultiFormId());
-    	}
 
         // Pagination
         /*
@@ -623,7 +634,7 @@ class JSSTfieldorderingModel {
     function getFieldsForComboByFieldFor() {
         $jsst_nonce = JSSTrequest::getVar('_wpnonce');
         if (! wp_verify_nonce( $jsst_nonce, 'get-fields-for-combo-by-fieldfor') ) {
-            die( 'Security check Failed' );
+            die( esc_html__( 'Security check Failed', 'js-support-ticket' ) );
         }
         $jsst_formid = JSSTrequest::getVar('formid');
         $jsst_fieldfor = JSSTrequest::getVar('fieldfor');
@@ -643,7 +654,7 @@ class JSSTfieldorderingModel {
         }
         $jsst_nonce = wp_create_nonce("get-section-to-fill-values-".$jsst_fieldfor);
         $jsst_jsFunction = 'getDataOfSelectedField("'.$jsst_nonce.'");';
-        $jsst_html = JSSTformfield::select('parentfield', $jsst_data, (isset($jsst_parent) && $jsst_parent !='') ? $jsst_parent : '', esc_html(__('Select', 'js-support-ticket')) .'&nbsp;'. esc_html(__('Parent Field', 'js-support-ticket')), array('onchange' => $jsst_jsFunction, 'class' => 'inputbox one js-form-select-field', 'data-validation' => 'required'));
+        $jsst_html = JSSTformfield::select('parentfield', $jsst_data, (isset($jsst_parent) && $jsst_parent !='') ? $jsst_parent : '', esc_html(__('Select', 'js-support-ticket')) .'&nbsp;'. esc_html(__('Parent Field', 'js-support-ticket')), array('onchange' => $jsst_jsFunction, 'class' => 'jsst-select', 'data-validation' => 'required'));
         $jsst_html = jssupportticketphplib::JSST_htmlentities($jsst_html);
         $jsst_data = wp_json_encode($jsst_html);
         return $jsst_data;
@@ -700,7 +711,7 @@ class JSSTfieldorderingModel {
         if ($jsst_isAjaxCall == 1) {
             $jsst_nonce = JSSTrequest::getVar('_wpnonce');
             if (! wp_verify_nonce( $jsst_nonce, 'get-child-for-visible-combobox') ) {
-                die( 'Security check Failed' );
+                die( esc_html__( 'Security check Failed', 'js-support-ticket' ) );
             }
         }
         if ($jsst_perentid == null) {
@@ -745,9 +756,9 @@ class JSSTfieldorderingModel {
         //
         $jsst_combobox = false;
         if($jsst_showComboBox){
-            $jsst_combobox = JSSTformfield::select('visibleValue[]', $jsst_fieldtypes, isset($jsst_default) ? $jsst_default : '', '', array('class' => 'inputbox one js-form-select-field js-form-input-field-visible'));
+            $jsst_combobox = JSSTformfield::select('visibleValue[]', $jsst_fieldtypes, isset($jsst_default) ? $jsst_default : '', '', array('class' => 'jsst-select js-form-input-field-visible'));
         } else {
-            $jsst_combobox = JSSTformfield::text('visibleValue[]', isset($jsst_default) ? $jsst_default : '', array('class' => 'inputbox one js-form-input-field js-form-input-field-visible'));
+            $jsst_combobox = JSSTformfield::text('visibleValue[]', isset($jsst_default) ? $jsst_default : '', array('class' => 'jsst-input js-form-input-field-visible'));
         }
         return jssupportticketphplib::JSST_htmlentities($jsst_combobox);
     }
@@ -757,7 +768,7 @@ class JSSTfieldorderingModel {
         if ($jsst_isAjaxCall == 1) {
             $jsst_nonce = JSSTrequest::getVar('_wpnonce');
             if (! wp_verify_nonce( $jsst_nonce, 'get-conditions-for-visible-combobox') ) {
-                die( 'Security check Failed' );
+                die( esc_html__( 'Security check Failed', 'js-support-ticket' ) );
             }
         }
         if ($jsst_perentid == null) {
@@ -787,7 +798,7 @@ class JSSTfieldorderingModel {
         }
         $jsst_combobox = false;
         if(!empty($Conditions)){
-            $jsst_combobox = JSSTformfield::select('visibleCondition[]', $Conditions, isset($jsst_default) ? $jsst_default : '', '', array('class' => 'inputbox one js-form-select-field js-form-input-field-visible'));
+            $jsst_combobox = JSSTformfield::select('visibleCondition[]', $Conditions, isset($jsst_default) ? $jsst_default : '', '', array('class' => 'jsst-select js-form-input-field-visible'));
         }
         return jssupportticketphplib::JSST_htmlentities($jsst_combobox);
     }
@@ -796,7 +807,7 @@ class JSSTfieldorderingModel {
         $jsst_fieldfor = JSSTrequest::getVar('fieldfor');
         $jsst_nonce = JSSTrequest::getVar('_wpnonce');
         if (! wp_verify_nonce( $jsst_nonce, 'get-section-to-fill-values-'.$jsst_fieldfor) ) {
-            die( 'Security check Failed' );
+            die( esc_html__( 'Security check Failed', 'js-support-ticket' ) );
         }
         $jsst_field = JSSTrequest::getVar('pfield');
         if(!is_numeric($jsst_field)){
@@ -822,7 +833,7 @@ class JSSTfieldorderingModel {
                     $jsst_html .= "<div class='jsst-user-dd-field-title'>" . esc_html($jsst_data[$jsst_i]) . "</div>";
                     $jsst_html .= "<div class='jsst-user-dd-field-value combo-options-fields' id=" . esc_attr($jsst_divid) . ">
                                     <span class='input-field-wrapper'>
-                                        " . wp_kses(JSSTformfield::text($jsst_textvar, '', array('class' => 'inputbox one user-field')), JSST_ALLOWED_TAGS) . "
+                                        " . wp_kses(JSSTformfield::text($jsst_textvar, '', array('class' => 'jsst-input user-field')), JSST_ALLOWED_TAGS) . "
                                         <img class='input-field-remove-img' src='" . JSST_PLUGIN_URL . "includes/images/delete.png' />
                                     </span>
                                     <input type='button' class='jsst-button-link button user-field-val-button' id='depandant-field-button' onClick='getNextField(\"" . $jsst_js_value . "\", this);'  value='Add More' />
@@ -842,7 +853,7 @@ class JSSTfieldorderingModel {
                 $jsst_html .= "<div class='jsst-user-dd-field-title'>" . esc_html($jsst_data) . "</div>";
                 $jsst_html .= "<div class='jsst-user-dd-field-value combo-options-fields' id=" . esc_attr($jsst_divid) . ">
                                 <span class='input-field-wrapper'>
-                                    " . wp_kses(JSSTformfield::text($jsst_textvar, '', array('class' => 'inputbox one user-field')), JSST_ALLOWED_TAGS) . "
+                                    " . wp_kses(JSSTformfield::text($jsst_textvar, '', array('class' => 'jsst-input user-field')), JSST_ALLOWED_TAGS) . "
                                     <img class='input-field-remove-img' src='" . JSST_PLUGIN_URL . "includes/images/delete.png' />
                                 </span>
                                 <input type='button' class='jsst-button-link button user-field-val-button' id='depandant-field-button' onClick=\"getNextField('" . $jsst_js_value . "', this);\"  value='Add More' />
@@ -861,7 +872,7 @@ class JSSTfieldorderingModel {
     function getOptionsForFieldEdit() {
         $jsst_nonce = JSSTrequest::getVar('_wpnonce');
         if (! wp_verify_nonce( $jsst_nonce, 'get-options-for-field-edit') ) {
-            die( 'Security check Failed' );
+            die( esc_html__( 'Security check Failed', 'js-support-ticket' ) );
         }
         $jsst_field = JSSTrequest::getVar('field');
 		if(!is_numeric($jsst_field)) return false;
@@ -1224,7 +1235,7 @@ class JSSTfieldorderingModel {
         $jsst_childfield = JSSTrequest::getVar('child');
         $jsst_nonce = JSSTrequest::getVar('_wpnonce');
         if (! wp_verify_nonce( $jsst_nonce, 'data-for-depandant-field-'.$jsst_childfield) ) {
-            die( 'Security check Failed' );
+            die( esc_html__( 'Security check Failed', 'js-support-ticket' ) );
         }
         $jsst_val = JSSTrequest::getVar('fvalue');
         $jsst_query = "SELECT userfieldparams,fieldtitle,depandant_field,field FROM `".jssupportticket::$_db->prefix."js_ticket_fieldsordering` WHERE field = %s";
@@ -1326,7 +1337,7 @@ class JSSTfieldorderingModel {
     function getHtmlForORRow() {
         $jsst_nonce = JSSTrequest::getVar('_wpnonce');
         if (! wp_verify_nonce( $jsst_nonce, 'get-html-for-or-row') ) {
-            die( 'Security check Failed' );
+            die( esc_html__( 'Security check Failed', 'js-support-ticket' ) );
         }
         
         $jsst_orid = JSSTrequest::getVar("nextorid");
@@ -1339,25 +1350,21 @@ class JSSTfieldorderingModel {
             (object) array('id' => 0, 'text' => esc_html(__('Not Equal', 'js-support-ticket'))));
         $jsst_html = "
         <div id='js_or_row_". $jsst_orid ."'>
-            <div class='js-form-visible-subheading'>
+            <div class='js-form-visible-subheading jsst-vrule-join'>
                 ". esc_html(__('OR', 'js-support-ticket')) ."
             </div>
-            <div class='js-form-value'>
+            <div class='js-form-value jsst-vrule-row'>
                 ". wp_kses(JSSTformfield::hidden('visibleLogic[]', 'OR'), JSST_ALLOWED_TAGS) ."
-                ". wp_kses(JSSTformfield::select('visibleParent[]', JSSTincluder::getJSModel('fieldordering')->getFieldsForVisibleCombobox($jsst_fieldfor, $jsst_formid,$jsst_field,$jsst_id), '', esc_html(__('Select Parent', 'js-support-ticket')), array('class' => 'inputbox js-form-select-field js-form-input-field-visible', 'onchange' => 'getChildForVisibleCombobox(this.value, '.$jsst_orid.');getConditionsForVisibleCombobox(this.value, '.$jsst_orid.');')), JSST_ALLOWED_TAGS) ."
+                ". wp_kses(JSSTformfield::select('visibleParent[]', JSSTincluder::getJSModel('fieldordering')->getFieldsForVisibleCombobox($jsst_fieldfor, $jsst_formid,$jsst_field,$jsst_id), '', esc_html(__('Select Parent', 'js-support-ticket')), array('class' => 'jsst-select js-form-input-field-visible', 'onchange' => 'getChildForVisibleCombobox(this.value, '.$jsst_orid.');getConditionsForVisibleCombobox(this.value, '.$jsst_orid.');')), JSST_ALLOWED_TAGS) ."
                 <span class='visibleValueWrp'>
-                    ". wp_kses(JSSTformfield::select('visibleValue[]', '', '', esc_html(__('Select Child', 'js-support-ticket')), array('class' => 'inputbox one js-form-select-field js-form-input-field-visible')), JSST_ALLOWED_TAGS) ."
+                    ". wp_kses(JSSTformfield::select('visibleValue[]', '', '', esc_html(__('Select Child', 'js-support-ticket')), array('class' => 'jsst-select js-form-input-field-visible')), JSST_ALLOWED_TAGS) ."
                 </span>
                 <span class='visibleConditionWrp'>
-                    ". wp_kses(JSSTformfield::select('visibleCondition[]', $jsst_equalnotequal, '', esc_html(__('Select Condition', 'js-support-ticket')), array('class' => 'inputbox one js-form-select-field js-form-input-field-visible')), JSST_ALLOWED_TAGS) ."
+                    ". wp_kses(JSSTformfield::select('visibleCondition[]', $jsst_equalnotequal, '', esc_html(__('Select Condition', 'js-support-ticket')), array('class' => 'jsst-select js-form-input-field-visible')), JSST_ALLOWED_TAGS) ."
                 </span>
-                <div class='js-visible-conditions-body-row'>
-                    <div class='js-visible-conditions-body-value'>
-                        <span onclick=\"deleteOrRow('js_or_row_". $jsst_orid ."')\" class='js-visible-conditions-delbtn'>
-                            <img class='input-field-remove-img' src='" . JSST_PLUGIN_URL . "includes/images/delete-2.png' />
+                <span onclick=\"deleteOrRow('js_or_row_". $jsst_orid ."')\" class='jsst-act jsst-act-danger js-visible-conditions-delbtn'>
+                            ". esc_html(__('Remove', 'js-support-ticket')) ."
                         </span>
-                    </div>
-                </div>
             </div>
         </div>
         ";
@@ -1368,7 +1375,7 @@ class JSSTfieldorderingModel {
     function getHtmlForANDRow() {
         $jsst_nonce = JSSTrequest::getVar('_wpnonce');
         if (! wp_verify_nonce( $jsst_nonce, 'get-html-for-and-row') ) {
-            die( 'Security check Failed' );
+            die( esc_html__( 'Security check Failed', 'js-support-ticket' ) );
         }
         
         $jsst_andid = JSSTrequest::getVar("nextandid");
@@ -1383,31 +1390,26 @@ class JSSTfieldorderingModel {
 
         $jsst_html = "
         <div class='js-form-visible-andwrp' id='js_and_row_". $jsst_andid ."'>
-            <div class='js-form-visible-subheading'>
+            <div class='js-form-visible-subheading jsst-vrule-join'>
                 ". esc_html(__('AND', 'js-support-ticket')) ."
             </div>
-            <div class='js-form-wrapper js-form-visible-wrapper' >
-                <div class='js-form-value' id='js_or_row_". $jsst_orid ."'>
+            <div class='js-form-wrapper js-form-visible-wrapper jsst-vrule' >
+                <div class='js-form-value jsst-vrule-row' id='js_or_row_". $jsst_orid ."'>
                     ". wp_kses(JSSTformfield::hidden('visibleLogic[]', 'AND'), JSST_ALLOWED_TAGS) ."
-                    ". wp_kses(JSSTformfield::select('visibleParent[]', JSSTincluder::getJSModel('fieldordering')->getFieldsForVisibleCombobox($jsst_fieldfor, $jsst_formid,$jsst_field,$jsst_id), '', esc_html(__('Select Parent', 'js-support-ticket')), array('class' => 'inputbox js-form-select-field js-form-input-field-visible', 'onchange' => 'getChildForVisibleCombobox(this.value, '.$jsst_orid.');getConditionsForVisibleCombobox(this.value, '.$jsst_orid.');')), JSST_ALLOWED_TAGS) ."
+                    ". wp_kses(JSSTformfield::select('visibleParent[]', JSSTincluder::getJSModel('fieldordering')->getFieldsForVisibleCombobox($jsst_fieldfor, $jsst_formid,$jsst_field,$jsst_id), '', esc_html(__('Select Parent', 'js-support-ticket')), array('class' => 'jsst-select js-form-input-field-visible', 'onchange' => 'getChildForVisibleCombobox(this.value, '.$jsst_orid.');getConditionsForVisibleCombobox(this.value, '.$jsst_orid.');')), JSST_ALLOWED_TAGS) ."
                     <span class='visibleValueWrp'>
-                        ". wp_kses(JSSTformfield::select('visibleValue[]', '', '', esc_html(__('Select Child', 'js-support-ticket')), array('class' => 'inputbox one js-form-select-field js-form-input-field-visible')), JSST_ALLOWED_TAGS) ."
+                        ". wp_kses(JSSTformfield::select('visibleValue[]', '', '', esc_html(__('Select Child', 'js-support-ticket')), array('class' => 'jsst-select js-form-input-field-visible')), JSST_ALLOWED_TAGS) ."
                     </span>
                     <span class='visibleConditionWrp'>
-                        ". wp_kses(JSSTformfield::select('visibleCondition[]', $jsst_equalnotequal, '', esc_html(__('Select Condition', 'js-support-ticket')), array('class' => 'inputbox one js-form-select-field js-form-input-field-visible')), JSST_ALLOWED_TAGS) ."
+                        ". wp_kses(JSSTformfield::select('visibleCondition[]', $jsst_equalnotequal, '', esc_html(__('Select Condition', 'js-support-ticket')), array('class' => 'jsst-select js-form-input-field-visible')), JSST_ALLOWED_TAGS) ."
                     </span>
-                    <div class='js-visible-conditions-body-row'>
-                        <div class='js-visible-conditions-body-value'>
-                            <span onclick=\"deleteOrRow('js_or_row_". $jsst_orid ."')\" class='js-visible-conditions-delbtn'>
-                                <img class='input-field-remove-img' src='" . JSST_PLUGIN_URL . "includes/images/delete-2.png' />
+                    <span onclick=\"deleteOrRow('js_or_row_". $jsst_orid ."')\" class='jsst-act jsst-act-danger js-visible-conditions-delbtn'>
+                                ". esc_html(__('Remove', 'js-support-ticket')) ."
                             </span>
-                        </div>
-                    </div>
                 </div>
                 <div class='js-form-visible-or-row'></div>
-                <div class='js-visible-conditions-addbtn-wrp'>
-                    <span class='js-form-visible-addmore' onclick='getMoreORRow(this, ". esc_js($jsst_fieldfor) .", ". esc_js($jsst_formid) .")'>
-                        <img alt='". esc_html(__('OR', 'js-support-ticket')) ."' class='input-field-remove-img' src='". esc_url(JSST_PLUGIN_URL) ."includes/images/plus-icon.png'>
+                <div class='jsst-fhelp'>
+                    <span class='jsst-act js-form-visible-addmore' onclick='getMoreORRow(this, ". esc_js($jsst_fieldfor) .", ". esc_js($jsst_formid) .")'>
                         ". esc_html(__('OR', 'js-support-ticket')) ."
                     </span>
                 </div>

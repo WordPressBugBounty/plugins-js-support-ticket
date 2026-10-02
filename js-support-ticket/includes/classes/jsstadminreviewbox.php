@@ -10,7 +10,12 @@ if (!defined('ABSPATH'))
  * site down with a fatal. Returning early costs nothing and makes the file safe
  * to include however many times and by whatever route. (Roadmap 4.0-CORE-19)
  */
-if (class_exists('JSSTjsstadminreviewbox')) {
+/* The class, not the file. This guard read `JSSTjsstadminreviewbox` - this
+   file's basename with the prefix on it - which is not the name of anything,
+   so `class_exists()` was false on every route and the early return above was
+   unreachable. The declaration below is what has to be protected, and it is
+   `JSSTreviewbox`. (Roadmap 4.0-CORE-19) */
+if (class_exists('JSSTreviewbox')) {
     return;
 }
 

@@ -114,13 +114,17 @@ class JSSTattachmentguard {
         if (!is_readable($jsst_path)) {
             return '';
         }
-        $jsst_handle = @fopen($jsst_path, 'rb');
-        if (!$jsst_handle) {
+        /* Read through WP_Filesystem, then keep the head of it. WP_Filesystem
+           has no byte-range read, so this reads the whole file where a plain
+           fread() would have taken 4KB - the cost of going through the API
+           WordPress asks plugins to use. It is bounded by the attachment size
+           limit this class is enforcing in the first place, and a file too
+           large to hold is one the upload has already refused. */
+        $jsst_bytes = jssupportticketphplib::JSST_file_get($jsst_path);
+        if ($jsst_bytes === false) {
             return '';
         }
-        $jsst_bytes = @fread($jsst_handle, self::SNIFF_BYTES);
-        @fclose($jsst_handle);
-        return ($jsst_bytes === false) ? '' : $jsst_bytes;
+        return jssupportticketphplib::JSST_substr($jsst_bytes, 0, self::SNIFF_BYTES);
     }
 
     /**

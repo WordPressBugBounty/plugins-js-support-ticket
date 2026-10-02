@@ -37,12 +37,20 @@ class JSSTreplyController {
     }
 
     static function savereply() {
-        $jsst_ticketid = JSSTrequest::getVar('ticketid');
         $jsst_nonce = JSSTrequest::getVar('_wpnonce');
-        if (! wp_verify_nonce( $jsst_nonce, 'save-reply-'.$jsst_ticketid) ) {
-            die( 'Security check Failed' );
-        }
         $jsst_data = JSSTrequest::get('post');
+        /* The nonce is checked against the ticket the reply is WRITTEN to - the
+           POST body's ticketid, which storeReplies() uses - not getVar(), which
+           prefers the query string. Same split as saveticket() had (security
+           report, 28 September 2026): a nonce for one's own ticket in the URL,
+           another ticket's id in the body. */
+        $jsst_ticketid = isset($jsst_data['ticketid']) ? trim((string) $jsst_data['ticketid']) : '';
+        if ($jsst_ticketid === '' || !ctype_digit($jsst_ticketid) || ! wp_verify_nonce( $jsst_nonce, 'save-reply-'.$jsst_ticketid) ) {
+            die( esc_html__( 'Security check Failed', 'js-support-ticket' ) );
+        }
+        /* Set by email piping, which calls the model directly. From a browser
+           it would switch off the ownership and closed-ticket checks. */
+        unset($jsst_data['ticketviaemail'], $jsst_data['staffid']);
         JSSTincluder::getJSModel('reply')->storeReplies($jsst_data);
         if (is_admin()) {
             $jsst_url = admin_url("admin.php?page=ticket&jstlay=ticketdetail&jssupportticketid=" . $jsst_ticketid);
@@ -57,7 +65,7 @@ class JSSTreplyController {
         $jsst_tikcetid = JSSTrequest::getVar('reply-tikcetid');
         $jsst_nonce = JSSTrequest::getVar('_wpnonce');
         if (! wp_verify_nonce( $jsst_nonce, 'save-edited-reply-'.$jsst_tikcetid) ) {
-            die( 'Security check Failed' );
+            die( esc_html__( 'Security check Failed', 'js-support-ticket' ) );
         }
         $jsst_data = JSSTrequest::get('post');
         JSSTincluder::getJSModel('reply')->editReply($jsst_data);
@@ -79,7 +87,7 @@ class JSSTreplyController {
         $jsst_data = JSSTrequest::get('post');
         $jsst_nonce = JSSTrequest::getVar('_wpnonce');
         if (! wp_verify_nonce( $jsst_nonce, 'save-edited-time-'.$jsst_data['reply-tikcetid']) ) {
-            die( 'Security check Failed' );
+            die( esc_html__( 'Security check Failed', 'js-support-ticket' ) );
         }
         if(!in_array('timetracking', jssupportticket::$_active_addons)){
             return;

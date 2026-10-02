@@ -48,7 +48,7 @@ class JSSTslugController {
         }
         $jsst_nonce = JSSTrequest::getVar('_wpnonce');
         if (! wp_verify_nonce( $jsst_nonce, 'save-slug') ) {
-            die( 'Security check Failed' );
+            die( esc_html__( 'Security check Failed', 'js-support-ticket' ) );
         }
         $jsst_data = JSSTrequest::get('post');
         $jsst_result = JSSTincluder::getJSModel('slug')->storeSlug($jsst_data);
@@ -67,7 +67,7 @@ class JSSTslugController {
         }
         $jsst_nonce = JSSTrequest::getVar('_wpnonce');
         if (! wp_verify_nonce( $jsst_nonce, 'save-prefix') ) {
-            die( 'Security check Failed' );
+            die( esc_html__( 'Security check Failed', 'js-support-ticket' ) );
         }
         $jsst_data = JSSTrequest::get('post');
         $jsst_result = JSSTincluder::getJSModel('slug')->savePrefix($jsst_data);
@@ -82,7 +82,7 @@ class JSSTslugController {
         }
         $jsst_nonce = JSSTrequest::getVar('_wpnonce');
         if (! wp_verify_nonce( $jsst_nonce, 'save-home-prefix') ) {
-            die( 'Security check Failed' );
+            die( esc_html__( 'Security check Failed', 'js-support-ticket' ) );
         }
         $jsst_data = JSSTrequest::get('post');
         $jsst_result = JSSTincluder::getJSModel('slug')->saveHomePrefix($jsst_data);

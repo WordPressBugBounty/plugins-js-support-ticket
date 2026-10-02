@@ -86,7 +86,19 @@ $jsst_jssupportticket_js ='
 ';
 wp_add_inline_script('js-support-ticket-main-js',$jsst_jssupportticket_js);
 ?>
-<div class="jsst-main-up-wrapper js-ticket-dashboard-container">
+<?php
+/* The brand's own container. (Roadmap 4.5-FE-09)
+ *
+ * The safe-layout class is added only where an administrator asked for it,
+ * because it changes box sizing inside the desk and a site whose theme is
+ * already fine should not have that decided for it. The logo goes above
+ * everything, which is where a customer looks to find out whose desk this is.
+ */
+$jsst_hasbrand = class_exists('JSSTbrand');
+$jsst_brandrec = $jsst_hasbrand ? JSSTbrand::brand() : array('safelayout' => 0);
+?>
+<div class="jsst-main-up-wrapper js-ticket-dashboard-container<?php echo (!empty($jsst_brandrec['safelayout'])) ? ' jsst-safe' : ''; ?>">
+    <?php if ($jsst_hasbrand) { JSSTbrand::renderLogo(); } ?>
     <div class="js-ticket-dashboard-main-content">
 <?php
 
@@ -344,7 +356,16 @@ if (jssupportticket::$_config['offline'] == 2) {
 
         <!-- cp links for agent -->
         <?php
-            if ( in_array('agent',jssupportticket::$_active_addons) && JSSTincluder::getJSModel('agent')->isUserStaff()) { ?>
+            if ( in_array('agent',jssupportticket::$_active_addons) && JSSTincluder::getJSModel('agent')->isUserStaff()) {
+                /* The desk's navigation, for an agent standing on the control
+                   panel. The list of links below is every layout this plugin
+                   has; the strip is the seven places a working day goes, and it
+                   is the same strip the wp-admin desk draws.
+                   (Roadmap 4.5-FE-02) */
+                if (class_exists('JSSTnavigation')) {
+                    JSSTnavigation::renderNav();
+                }
+                ?>
                 <aside class="js-ticket-dashboard-left-menu">
                     <div class="js-ticket-menu-header"><?php echo esc_html( __( 'Dashboard Links', 'js-support-ticket' ) ); ?></div>
                     <ul class="js-ticket-menu-links">  <!-- Dashboard Links -->
@@ -495,7 +516,7 @@ if (jssupportticket::$_config['offline'] == 2) {
                          if (JSSTmergedaddon::featureEnabled('helptopic') && jssupportticket::$_config['cplink_helptopic_agent'] == 1):
                             $jsst_count ++;
                             $jsst_menu_url = esc_url(jssupportticket::makeUrl(array('jstmod'=>'helptopic', 'jstlay'=>'agenthelptopics')));
-                            $jsst_menu_title =  esc_html(__("Topics", 'js-support-ticket'));
+                            $jsst_menu_title =  esc_html(__("Ticket Topics", 'js-support-ticket'));
                             ?>
                             <li>
                                 <a href=<?php echo esc_url($jsst_menu_url); ?>>
@@ -664,11 +685,24 @@ if (jssupportticket::$_config['offline'] == 2) {
                         echo wp_kses(jsst_get_avatar($jsst_uid, 'js-ticket-welcome-avatar'), JSST_ALLOWED_TAGS);
                         ?>
                         <div>
+                            <?php /* One sentence with a placeholder, so each language can place the
+                                     name where it belongs. This header is shown to visitors who are
+                                     not logged in, so it welcomes them rather than "back". */ ?>
                             <span>
-                                <?php echo esc_html__('Welcome Back To', 'js-support-ticket'); ?>
-                                <?php echo ', '.esc_html(jssupportticket::$_config['title']).'!'; ?>
+                                <?php echo esc_html(sprintf(
+                                    /* translators: %s: the help desk's title, from Settings. */
+                                    __('Welcome to %s!', 'js-support-ticket'),
+                                    jssupportticket::$_config['title']
+                                )); ?>
                             </span>
-                            <p><?php echo esc_html__('As a visitor, you can easily create a support ticket by sharing your issue details.', 'js-support-ticket'); ?></p>
+                            <?php /* Only promise a visitor a ticket when visitors may raise one.
+                                     With the setting off, the Submit Ticket page asks them to log
+                                     in, so the home page says that instead of inviting them into
+                                     a login wall. */
+                            $jsst_guestcancreate = (jssupportticket::$_config['visitor_can_create_ticket'] == 1); ?>
+                            <p><?php echo esc_html($jsst_guestcancreate
+                                ? __('As a visitor, you can easily create a support ticket by sharing your issue details.', 'js-support-ticket')
+                                : __('Log in to create a support ticket and follow its progress.', 'js-support-ticket')); ?></p>
                         </div>
                     </div>
                     <div class="js-ticket-welcome-actions">
@@ -682,13 +716,15 @@ if (jssupportticket::$_config['offline'] == 2) {
                         }
                     ?>
                     <span><?php echo esc_html__('Have An Issue?', 'js-support-ticket'); ?></span>
-                    <p><?php echo esc_html__('Our support team is here to help. Create a new ticket to get started.', 'js-support-ticket'); ?></p>
+                    <p><?php echo esc_html($jsst_guestcancreate
+                        ? __('Our support team is here to help. Create a new ticket to get started.', 'js-support-ticket')
+                        : __('Our support team is here to help. Log in first, then create a new ticket.', 'js-support-ticket')); ?></p>
                     <a <?php echo esc_attr($jsst_id); ?> href="<?php echo esc_url(jssupportticket::makeUrl(array('jstmod'=>'ticket', 'jstlay'=>'addticket'))); ?>" class="js-ticket-button">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <line x1="12" y1="5" x2="12" y2="19"></line>
                             <line x1="5" y1="12" x2="19" y2="12"></line>
                         </svg>
-                        <?php echo esc_html__('Create New Ticket', 'js-support-ticket'); ?>
+                        <?php echo esc_html($jsst_guestcancreate ? __('Create New Ticket', 'js-support-ticket') : __('Log In to Create a Ticket', 'js-support-ticket')); ?>
                     </a>
                 </div>
                 <div class="js-ticket-card">
@@ -868,7 +904,7 @@ if (jssupportticket::$_config['offline'] == 2) {
 
                                         <?php if (JSSTmergedaddon::featureEnabled('helptopic') && jssupportticket::$_config['cplink_helptopic_agent'] == 1) : ?>
                                             <a href="<?php echo esc_url(jssupportticket::makeUrl(array('jstmod'=>'helptopic', 'jstlay'=>'addhelptopic'))); ?>" class="js-ticket-tag-btn">
-                                                <?php echo esc_html(__('Topic', 'js-support-ticket')); ?>
+                                                <?php echo esc_html(__('Ticket Topic', 'js-support-ticket')); ?>
                                             </a>
                                         <?php endif; ?>
                                     </div>
@@ -883,15 +919,24 @@ if (jssupportticket::$_config['offline'] == 2) {
                         $jsst_linkname = 'user';
                     }
                     if(isset($jsst_data['count']) && jssupportticket::$_config['cplink_totalcount_'. $jsst_linkname] == 1){
+                        /* Which tab each stat opens. The two lists number their tabs
+                           differently: the agent list takes its numbers from JSSTqueue
+                           (Open 1, Answered 2, Overdue 3, Closed 4, All 5), the
+                           customer list keeps its own (Open 1, Closed 2, Answered 3,
+                           All 4, Overdue 5). These links used the customer numbers for
+                           both, so on the agent side Closed opened Answered, Answered
+                           opened Overdue and Overdue opened All. */
                         if ( in_array('agent',jssupportticket::$_active_addons) && JSSTincluder::getJSModel('agent')->isUserStaff()){
                             $jsst_tkt_url = jssupportticket::makeUrl(array('jstmod'=>'agent', 'jstlay'=>'staffmyticket'));
+                            $jsst_tabs = array('open' => JSSTqueue::LIST_OPEN, 'closed' => JSSTqueue::LIST_CLOSED, 'answered' => JSSTqueue::LIST_ANSWERED, 'overdue' => JSSTqueue::LIST_OVERDUE, 'all' => JSSTqueue::LIST_ALL);
                         }else{
                             $jsst_tkt_url = jssupportticket::makeUrl(array('jstmod'=>'ticket', 'jstlay'=>'myticket'));
+                            $jsst_tabs = array('open' => 1, 'closed' => 2, 'answered' => 3, 'all' => 4, 'overdue' => 5);
                         }?>
                         <div class="js-ticket-stats-card">
                             <span class="js-ticket-stats-card-heading"><?php echo esc_html( __( 'Your Ticket Stats', 'js-support-ticket' ) ); ?></span>
                             <div class="js-ticket-stats-list">
-                                <a title="<?php echo esc_attr(__('Open Tickets','js-support-ticket')); ?>" href="<?php echo esc_url($jsst_tkt_url); ?>" data-tab-number="1" class="js-ticket-stat-item js-ticket-link">
+                                <a title="<?php echo esc_attr(__('Open Tickets','js-support-ticket')); ?>" href="<?php echo esc_url($jsst_tkt_url); ?>" data-tab-number="<?php echo esc_attr($jsst_tabs['open']); ?>" class="js-ticket-stat-item js-ticket-link">
                                     <span class="js-ticket-stat-item-label">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
                                         <span><?php echo esc_html( __( 'Open Tickets', 'js-support-ticket' ) ); ?></span>
@@ -905,7 +950,7 @@ if (jssupportticket::$_config['offline'] == 2) {
                                         <?php
                                     } ?>
                                 </a>
-                                <a href="<?php echo esc_url($jsst_tkt_url); ?>" data-tab-number="2" title="<?php echo esc_attr(__('closed ticket','js-support-ticket')); ?>" class="js-ticket-stat-item js-ticket-link">
+                                <a href="<?php echo esc_url($jsst_tkt_url); ?>" data-tab-number="<?php echo esc_attr($jsst_tabs['closed']); ?>" title="<?php echo esc_attr(__('closed ticket','js-support-ticket')); ?>" class="js-ticket-stat-item js-ticket-link">
                                     <span class="js-ticket-stat-item-label">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#6b7280" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
                                         <span><?php echo esc_html( __( 'Closed Tickets', 'js-support-ticket' ) ); ?></span>
@@ -919,7 +964,7 @@ if (jssupportticket::$_config['offline'] == 2) {
                                         <?php
                                     } ?>
                                 </a>
-                                <a href="<?php echo esc_url($jsst_tkt_url); ?>" data-tab-number="3" title="<?php echo esc_attr(__('answered ticket','js-support-ticket')); ?>" class="js-ticket-stat-item js-ticket-link">
+                                <a href="<?php echo esc_url($jsst_tkt_url); ?>" data-tab-number="<?php echo esc_attr($jsst_tabs['answered']); ?>" title="<?php echo esc_attr(__('answered ticket','js-support-ticket')); ?>" class="js-ticket-stat-item js-ticket-link">
                                     <span class="js-ticket-stat-item-label">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path><path d="m9 12 2 2 4-4"></path></svg>
                                         <span><?php echo esc_html( __( 'Answered Tickets', 'js-support-ticket' ) ); ?></span>
@@ -935,7 +980,7 @@ if (jssupportticket::$_config['offline'] == 2) {
                                 <?php
                                 if (in_array('agent',jssupportticket::$_active_addons) && JSSTincluder::getJSModel('agent')->isUserStaff()) { ?>
                                     <?php if(isset($jsst_data['count']['overdue'])){ ?>
-                                        <a href="<?php echo esc_url($jsst_tkt_url); ?>" data-tab-number="5" title="<?php echo esc_attr(__('Overdue Tickets','js-support-ticket')); ?>" class="js-ticket-stat-item js-ticket-link">
+                                        <a href="<?php echo esc_url($jsst_tkt_url); ?>" data-tab-number="<?php echo esc_attr($jsst_tabs['overdue']); ?>" title="<?php echo esc_attr(__('Overdue Tickets','js-support-ticket')); ?>" class="js-ticket-stat-item js-ticket-link">
                                             <span class="js-ticket-stat-item-label">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#ef4444" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
                                                 <span><?php echo esc_html( __( 'Overdue Tickets', 'js-support-ticket' ) ); ?></span>
@@ -949,7 +994,7 @@ if (jssupportticket::$_config['offline'] == 2) {
                                             } ?>
                                         </a>
                                     <?php } else { ?>
-                                        <a href="<?php echo esc_url($jsst_tkt_url); ?>" data-tab-number="4" title="<?php echo esc_attr(__('All Tickets','js-support-ticket')); ?>" class="js-ticket-stat-item js-ticket-link">
+                                        <a href="<?php echo esc_url($jsst_tkt_url); ?>" data-tab-number="<?php echo esc_attr($jsst_tabs['all']); ?>" title="<?php echo esc_attr(__('All Tickets','js-support-ticket')); ?>" class="js-ticket-stat-item js-ticket-link">
                                             <span class="js-ticket-stat-item-label">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#ef4444" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
                                                 <span><?php echo esc_html( __( 'All Tickets', 'js-support-ticket' ) ); ?></span>
@@ -1157,14 +1202,17 @@ if (jssupportticket::$_config['offline'] == 2) {
                 ?>
                 <div class="js-ticket-count" style="display:none;">
                     <?php
+                    // Tab numbers per list, as in "Your Ticket Stats" above.
                     if ( in_array('agent',jssupportticket::$_active_addons) && JSSTincluder::getJSModel('agent')->isUserStaff()){
                         $jsst_tkt_url = jssupportticket::makeUrl(array('jstmod'=>'agent', 'jstlay'=>'staffmyticket'));
+                        $jsst_tabs = array('open' => JSSTqueue::LIST_OPEN, 'closed' => JSSTqueue::LIST_CLOSED, 'answered' => JSSTqueue::LIST_ANSWERED, 'overdue' => JSSTqueue::LIST_OVERDUE, 'all' => JSSTqueue::LIST_ALL);
                     }else{
                         $jsst_tkt_url = jssupportticket::makeUrl(array('jstmod'=>'ticket', 'jstlay'=>'myticket'));
+                        $jsst_tabs = array('open' => 1, 'closed' => 2, 'answered' => 3, 'all' => 4, 'overdue' => 5);
                     }
                     ?>
                     <div class="js-ticket-link">
-                        <a class="js-ticket-link js-ticket-green" href="<?php echo esc_url($jsst_tkt_url); ?>" data-tab-number="1" title="<?php echo esc_attr(__('Open Ticket','js-support-ticket')); ?>">
+                        <a class="js-ticket-link js-ticket-green" href="<?php echo esc_url($jsst_tkt_url); ?>" data-tab-number="<?php echo esc_attr($jsst_tabs['open']); ?>" title="<?php echo esc_attr(__('Open Ticket','js-support-ticket')); ?>">
                             <div class="js-ticket-cricle-wrp" data-per="<?php echo esc_attr($jsst_open_percentage); ?>" >
                                 <div class="js-mr-rp" data-progress="<?php echo esc_attr($jsst_open_percentage); ?>">
                                     <div class="circle">
@@ -1193,7 +1241,7 @@ if (jssupportticket::$_config['offline'] == 2) {
                         </a>
                     </div>
                     <div class="js-ticket-link">
-                        <a class="js-ticket-link js-ticket-red" href="<?php echo esc_url($jsst_tkt_url); ?>" data-tab-number="2" title="<?php echo esc_attr(__('closed ticket','js-support-ticket')); ?>">
+                        <a class="js-ticket-link js-ticket-red" href="<?php echo esc_url($jsst_tkt_url); ?>" data-tab-number="<?php echo esc_attr($jsst_tabs['closed']); ?>" title="<?php echo esc_attr(__('closed ticket','js-support-ticket')); ?>">
                             <div class="js-ticket-cricle-wrp" data-per="<?php echo esc_attr($jsst_close_percentage); ?>" >
                                 <div class="js-mr-rp" data-progress="<?php echo esc_attr($jsst_close_percentage); ?>">
                                     <div class="circle">
@@ -1222,7 +1270,7 @@ if (jssupportticket::$_config['offline'] == 2) {
                         </a>
                     </div>
                     <div class="js-ticket-link">
-                        <a class="js-ticket-link js-ticket-brown" href="<?php echo esc_url($jsst_tkt_url); ?>" data-tab-number="3" title="<?php echo esc_attr(__('answered ticket','js-support-ticket')); ?>">
+                        <a class="js-ticket-link js-ticket-brown" href="<?php echo esc_url($jsst_tkt_url); ?>" data-tab-number="<?php echo esc_attr($jsst_tabs['answered']); ?>" title="<?php echo esc_attr(__('answered ticket','js-support-ticket')); ?>">
                             <div class="js-ticket-cricle-wrp" data-per="<?php echo esc_attr($jsst_answered_percentage); ?>" >
                                 <div class="js-mr-rp" data-progress="<?php echo esc_attr($jsst_answered_percentage); ?>">
                                     <div class="circle">
@@ -1252,7 +1300,7 @@ if (jssupportticket::$_config['offline'] == 2) {
                     </div>
                     <?php if(isset($jsst_data['count']['overdue'])){ ?>
                     <div class="js-ticket-link">
-                        <a class="js-ticket-link js-ticket-orange" href="<?php echo esc_url($jsst_tkt_url); ?>" data-tab-number="5" title="<?php echo esc_attr(__('Overdue Tickets','js-support-ticket')); ?>">
+                        <a class="js-ticket-link js-ticket-orange" href="<?php echo esc_url($jsst_tkt_url); ?>" data-tab-number="<?php echo esc_attr($jsst_tabs['overdue']); ?>" title="<?php echo esc_attr(__('Overdue Tickets','js-support-ticket')); ?>">
                             <div class="js-ticket-cricle-wrp" data-per="<?php echo esc_attr($jsst_overdue_percentage); ?>" >
                                 <div class="js-mr-rp" data-progress="<?php echo esc_attr($jsst_overdue_percentage); ?>">
                                     <div class="circle">
@@ -1282,7 +1330,7 @@ if (jssupportticket::$_config['offline'] == 2) {
                     </div>
                     <?php }else{ ?>
                     <div class="js-ticket-link">
-                        <a class="js-ticket-link js-ticket-orange" href="<?php echo esc_url($jsst_tkt_url); ?>" data-tab-number="4" title="<?php echo esc_attr(__('Overdue Tickets','js-support-ticket')); ?>">
+                        <a class="js-ticket-link js-ticket-orange" href="<?php echo esc_url($jsst_tkt_url); ?>" data-tab-number="<?php echo esc_attr($jsst_tabs['all']); ?>" title="<?php echo esc_attr(__('Overdue Tickets','js-support-ticket')); ?>">
                             <div class="js-ticket-cricle-wrp" data-per="<?php echo esc_attr($jsst_allticket_percentage); ?>" >
                                 <div class="js-mr-rp" data-progress="<?php echo esc_attr($jsst_allticket_percentage); ?>">
                                     <div class="circle">
@@ -1555,6 +1603,12 @@ if (jssupportticket::$_config['offline'] == 2) {
  ?>
 
     </div>
+    <?php
+    /* Whose name is on it. Printed by the class rather than written here so a
+       site that has turned it off, or replaced it through the filter, gets
+       that answer everywhere it appears. (Roadmap 4.5-FE-09) */
+    if ($jsst_hasbrand) { JSSTbrand::renderPoweredBy(); }
+    ?>
 </div>
 <?php
 $jsst_jssupportticket_js = "

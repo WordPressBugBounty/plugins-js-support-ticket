@@ -60,7 +60,7 @@ class JSSTbanemailController {
         $jsst_id = JSSTrequest::getVar('id');
         $jsst_nonce = JSSTrequest::getVar('_wpnonce');
         if (! wp_verify_nonce( $jsst_nonce, 'save-ban-email-'.$jsst_id) ) {
-            die( 'Security check Failed' );
+            die( esc_html__( 'Security check Failed', 'js-support-ticket' ) );
         }
         $jsst_data = JSSTrequest::get('post');
         JSSTincluder::getJSModel('banemail')->storeBanEmail($jsst_data);
@@ -73,7 +73,7 @@ class JSSTbanemailController {
         $jsst_id = JSSTrequest::getVar('banemailid');
         $jsst_nonce = JSSTrequest::getVar('_wpnonce');
         if (! wp_verify_nonce( $jsst_nonce, 'delete-banemail-'.$jsst_id) ) {
-            die( 'Security check Failed' );
+            die( esc_html__( 'Security check Failed', 'js-support-ticket' ) );
         }
         JSSTincluder::getJSModel('banemail')->removeBanEmail($jsst_id);
         $jsst_url = admin_url("admin.php?page=banemail&jstlay=banemails");

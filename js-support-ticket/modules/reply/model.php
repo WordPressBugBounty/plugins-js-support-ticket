@@ -70,7 +70,9 @@ class JSSTreplyModel {
                 jssupportticket::$_db->query($jsst_query);
             }
         }
-        return;
+        /* Templates read them from $jsst_data[4]; returned as well for callers
+           that are not a template, such as the REST API's replies endpoint. */
+        return jssupportticket::$jsst_data[4];
     }
 
     function getTicketNameForReplies() {
@@ -112,10 +114,10 @@ class JSSTreplyModel {
     }
 
     function storeReplies($jsst_data) {
-        $jsst_checkduplicatereplies = $this->checkIsReplyDuplicate($jsst_data);
-        if(!$jsst_checkduplicatereplies){
-            return false;
-        }
+        /* Duplicate replies are caught just before the row is written, by
+           JSSTsubmitguard. The old check here refused ANY second reply by the
+           same user within 7 seconds - a different message included - while a
+           retry after 7 seconds got through. */
         //validate reply for break down
         $jsst_ticketid   = $jsst_data['ticketrandomid'];
         $jsst_hash       = $jsst_data['hash'];
@@ -125,6 +127,27 @@ class JSSTreplyModel {
         if($jsst_id != $jsst_data['ticketid']){
             return;
         }//end
+
+        /* Ownership, proved rather than assumed. The check above matches the
+           tracking id and a hash computed from the ticket id with no secret, so
+           it proves only that the sender knows the tracking id - not that the
+           ticket is theirs (security report, 28 September 2026). A customer
+           replies to their own ticket, a guest to the ticket their tracking
+           token opened - the same two tests this model already applies before
+           showing a ticket. Staff, administrators, automations and email
+           piping (ticketviaemail, set only by the piping code; the web
+           controller strips it) are authorised further down / by their route. */
+        $jsst_viaemail = isset($jsst_data['ticketviaemail']) && $jsst_data['ticketviaemail'] == 1;
+        if (!$jsst_viaemail && !JSSTcapability::isSystem() && !current_user_can('manage_options')
+                && !(in_array('agent', jssupportticket::$_active_addons) && JSSTincluder::getJSModel('agent')->isUserStaff())) {
+            $jsst_owns_ticket = (!JSSTincluder::getObjectClass('user')->isguest())
+                ? JSSTincluder::getJSModel('ticket')->validateTicketDetailForUser($jsst_id)
+                : JSSTincluder::getJSModel('ticket')->validateTicketDetailForVisitor($jsst_id);
+            if (true !== $jsst_owns_ticket) {
+                JSSTmessage::setMessage(esc_html(__('You can only reply to your own tickets.', 'js-support-ticket')), 'error');
+                return;
+            }
+        }
 
         $jsst_ticketviaemailstaffid = 0;
         // set in Email Piping
@@ -136,6 +159,11 @@ class JSSTreplyModel {
             $jsst_allowed = JSSTincluder::getJSModel('userpermissions')->checkPermissionGrantedForTask('Reply Ticket');
             if ($jsst_allowed != true) {
                 JSSTmessage::setMessage(esc_html(__('You are not allowed', 'js-support-ticket')), 'error', 'agent-permissions');
+                return;
+            }
+            // The role may reply; this ticket has to be one the agent may see.
+            if (JSSTincluder::getJSModel('ticket')->isOutOfScopeForAgent($jsst_data['ticketid'], 'ticket.reply')) {
+                JSSTmessage::setMessage(esc_html(__('This ticket is outside the tickets you can work on.', 'js-support-ticket')), 'error', 'agent-permissions');
                 return;
             }
         }
@@ -199,20 +227,42 @@ class JSSTreplyModel {
         $jsst_data['status'] = isset($jsst_data['status']) ? $jsst_data['status'] : '';
         $jsst_data['closeonreply'] = isset($jsst_data['closeonreply']) ? $jsst_data['closeonreply'] : '';
         $jsst_data['ticketviaemail'] = isset($jsst_data['ticketviaemail']) ? $jsst_data['ticketviaemail'] : 0;
-        $jsst_tempmessage = $jsst_data['jsticket_message'];
+        $jsst_tempmessage = isset($jsst_data['jsticket_message']) ? $jsst_data['jsticket_message'] : '';
         $jsst_data = jssupportticket::JSST_sanitizeData($jsst_data); // JSST_sanitizeData() function uses wordpress santize functions
         if(isset($jsst_data['ticketviaemail']) && $jsst_data['ticketviaemail'] == 1){
             $jsst_data['message'] = $jsst_tempmessage;
         }elseif(isset($jsst_data['ticketviaautopilot']) && $jsst_data['ticketviaautopilot'] == 1){
             $jsst_data['message'] = $jsst_tempmessage;
         }else{
-            $jsst_data['message'] = JSSTincluder::getJSModel('jssupportticket')->getSanitizedEditorData(wp_unslash($_POST['jsticket_message'] ?? ''));
+            /* The form's own value first, exactly as before. A reply written by
+               code — an automation rule, the REST API, an inbound webhook —
+               arrives in $jsst_data and never in $_POST, and reading only the
+               request meant every one of those saved an empty body and was
+               refused as empty. (Roadmap 5.0-AUT-01, 5.0-API-01) */
+            $jsst_posted = wp_unslash($_POST['jsticket_message'] ?? '');
+            if ($jsst_posted === '' && $jsst_tempmessage !== '') {
+                $jsst_posted = $jsst_tempmessage;
+            }
+            $jsst_data['message'] = JSSTincluder::getJSModel('jssupportticket')->getSanitizedEditorData($jsst_posted);
         }
         if(empty($jsst_data['message'])){
             JSSTmessage::setMessage(esc_html(__('Message field cannot be empty', 'js-support-ticket')), 'error');
             return false;
         }
         //check signature
+        /* The admin reply form sends one radio choice, `signaturechoice`;
+           other forms still send the three separate boxes. Turned into the
+           three here so there is one path below. */
+        if (isset($jsst_data['signaturechoice'])) {
+            unset($jsst_data['ownsignature'], $jsst_data['departmentsignature'], $jsst_data['nonesignature']);
+            if ($jsst_data['signaturechoice'] === 'own') {
+                $jsst_data['ownsignature'] = 1;
+            } elseif ($jsst_data['signaturechoice'] === 'department') {
+                $jsst_data['departmentsignature'] = 1;
+            } else {
+                $jsst_data['nonesignature'] = 1;
+            }
+        }
         if (!isset($jsst_data['nonesignature'])) {
             if (isset($jsst_data['ownsignature']) && $jsst_data['ownsignature'] == 1) {
                 if (is_admin()) {
@@ -230,6 +280,28 @@ class JSSTreplyModel {
         $jsst_data['name'] = $jsst_currentUserName;
         $jsst_data['staffid'] = $jsst_staffid;
 
+        /* One reply per submission (JSSTsubmitguard): the same person sending
+           the same text to the same ticket again within ten minutes - a double
+           click, a slow upload resent - is recorded once. A different message
+           is always accepted. Guests are told apart by the address they reply
+           from, since they all share user id 0. */
+        include_once JSST_PLUGIN_PATH . 'includes/classes/submitguard.php';
+        $jsst_guardkey = JSSTsubmitguard::key('reply', array(
+            (int) $jsst_data['ticketid'],
+            isset($jsst_data['uid']) ? (int) $jsst_data['uid'] : 0,
+            isset($jsst_data['emailfrom']) ? $jsst_data['emailfrom'] : (isset($jsst_data['email']) ? $jsst_data['email'] : ''),
+            isset($jsst_data['message']) ? $jsst_data['message'] : '',
+        ));
+        $jsst_claim = JSSTsubmitguard::claim($jsst_guardkey);
+        if (true !== $jsst_claim) {
+            if ((int) $jsst_claim > 0) {
+                JSSTmessage::setMessage(esc_html(__('Your reply was already posted, so it was not added twice.', 'js-support-ticket')), 'updated');
+                return (int) $jsst_claim;
+            }
+            JSSTmessage::setMessage(esc_html(__('Your reply is still being posted. Please wait a moment and refresh the ticket before sending it again.', 'js-support-ticket')), 'error');
+            return false;
+        }
+
         $jsst_row = JSSTincluder::getJSTable('replies');
 
         $jsst_data = JSSTincluder::getJSmodel('jssupportticket')->stripslashesFull($jsst_data);// remove slashes with quotes.
@@ -244,6 +316,11 @@ class JSSTreplyModel {
         }
         if (!$jsst_row->store()) {
             $jsst_error = 1;
+        }
+        if ($jsst_error == 1) {
+            JSSTsubmitguard::release($jsst_guardkey);
+        } else {
+            JSSTsubmitguard::done($jsst_guardkey, (int) $jsst_row->id);
         }
 
         if ($jsst_error == 0) {
@@ -396,8 +473,10 @@ class JSSTreplyModel {
         if (isset($jsst_data['ticketviaemail']) && $jsst_data['ticketviaemail'] == 1) {
             $jsst_inquery .= " AND ticketviaemail = 1";
         }
-        $jsst_query = jssupportticket::$_db->prepare("SELECT created FROM `" . jssupportticket::$_db->prefix . "js_ticket_replies` WHERE ticketid = %d AND uid = %d ORDER BY created DESC LIMIT 1", $jsst_data['ticketid'], $jsst_data['uid']);
-        $jsst_query .= $jsst_inquery;
+        /* The piping condition belongs in the WHERE clause. It used to be
+           appended after ORDER BY ... LIMIT 1, which is not valid SQL, so for
+           piped replies this check never ran. */
+        $jsst_query = jssupportticket::$_db->prepare("SELECT created FROM `" . jssupportticket::$_db->prefix . "js_ticket_replies` WHERE ticketid = %d AND uid = %d" . $jsst_inquery . " ORDER BY created DESC LIMIT 1", $jsst_data['ticketid'], $jsst_data['uid']);
         $jsst_datetime = jssupportticket::$_db->get_var($jsst_query);
         if($jsst_datetime){
             $jsst_diff = jssupportticketphplib::JSST_strtotime($jsst_curdate) - jssupportticketphplib::JSST_strtotime($jsst_datetime);
@@ -429,7 +508,7 @@ class JSSTreplyModel {
         $jsst_replyid = JSSTrequest::getVar('val');
         $jsst_nonce = JSSTrequest::getVar('_wpnonce');
         if (! wp_verify_nonce( $jsst_nonce, 'get-reply-data-by-id-'.$jsst_replyid) ) {
-            die( 'Security check Failed' );
+            die( esc_html__( 'Security check Failed', 'js-support-ticket' ) );
         }
         if(!is_numeric($jsst_replyid)) return false;
         // --- SECURITY & PERMISSION FIX ---
@@ -458,7 +537,7 @@ class JSSTreplyModel {
         if (!empty($jsst_replyattachments) && !current_user_can('manage_options') && !(in_array('agent', jssupportticket::$_active_addons) && JSSTincluder::getJSModel('agent')->isUserStaff())) {
             $jsst_ticketid = $jsst_replyattachments[0]->jsst_ticketid;
             $jsst_owns_ticket = (!JSSTincluder::getObjectClass('user')->isguest())
-                ? JSSTincluder::getJSModel('ticket')->validateTicketDetailForUser($jsst_ticketid)
+                ? JSSTincluder::getJSModel('ticket')->validateTicketReadForUser($jsst_ticketid)
                 : JSSTincluder::getJSModel('ticket')->validateTicketDetailForVisitor($jsst_ticketid);
             if (!$jsst_owns_ticket) {
                 return array();
@@ -569,7 +648,7 @@ class JSSTreplyModel {
         $jsst_nonce = JSSTrequest::getVar('_wpnonce');
 
         if (!wp_verify_nonce($jsst_nonce, 'ai-powered-reply')) {
-            wp_die('Security check failed');
+            wp_die(esc_html__( 'Security check failed', 'js-support-ticket' ));
         }
 
         // Force both status and id to be integers using (int)
@@ -588,11 +667,30 @@ class JSSTreplyModel {
         if ($jsst_type === 'reply') {
             $jsst_ticketid = jssupportticket::$_db->get_var(jssupportticket::$_db->prepare("SELECT ticketid FROM `" . jssupportticket::$_db->prefix . "js_ticket_replies` WHERE id = %d", $jsst_id));
         }
-        if (!current_user_can('jsst_support_ticket') && !current_user_can('jsst_support_ticket_tickets')) {
-            $jsst_owns_ticket = (!JSSTincluder::getObjectClass('user')->isguest()) ? JSSTincluder::getJSModel('ticket')->validateTicketDetailForUser($jsst_ticketid) : JSSTincluder::getJSModel('ticket')->validateTicketDetailForVisitor($jsst_ticketid);
-            if (!$jsst_owns_ticket) {
+        /* Who may say whether a reply is a good example. (Roadmap 6.0-AI-01)
+         *
+         * Not the customer. The gate here let anybody through who *owned the
+         * ticket*, which is the right test for reading a ticket and the wrong
+         * one for this: the flag decides whether one of your agents' replies is
+         * offered to another agent on a different ticket, so a customer setting
+         * it would be reaching into work that is not theirs. Both screens have
+         * only ever drawn the control for staff, but a control hidden in the
+         * markup and open at the endpoint is not hidden - the URL survives in a
+         * bookmark and in anybody's history.
+         *
+         * And for staff it is role-based, which the portal's markup has always
+         * said and this endpoint never enforced: an agent whose role has "Set
+         * AI Reply Mode for Reply" withheld could still post one. Same shape as
+         * getFilteredReplies() - staff need the permission, administrators are
+         * through, everybody else is refused. */
+        $jsst_isstaff = (in_array('agent', jssupportticket::$_active_addons)
+            && JSSTincluder::getJSModel('agent')->isUserStaff());
+        if ($jsst_isstaff) {
+            if (!JSSTincluder::getJSModel('userpermissions')->checkPermissionGrantedForTask('Set AI Reply Mode for Reply')) {
                 return false;
             }
+        } elseif (!current_user_can('manage_options')) {
+            return false;
         }
 
         $jsst_query = jssupportticket::$_db->prepare(
@@ -608,6 +706,15 @@ class JSSTreplyModel {
     function getFilteredReplies() {
         // Verify nonce
         check_ajax_referer('get-filtered-replies', '_wpnonce');
+
+        /* The on-site lane's door on the ajax side. (Roadmap 4.0-AI-04) The
+           templates already hide these controls when the lane is shut, but an
+           endpoint that is only guarded by the markup that calls it is not
+           guarded - the URL survives in a bookmark, a stale tab and anybody's
+           browser history. */
+        if (class_exists('JSSTaipolicy') && !JSSTaipolicy::allows(JSSTaipolicy::LANE_ONSITE)) {
+            wp_send_json_error(array('message' => esc_html(__('Suggestions from past replies are switched off for this site.', 'js-support-ticket'))));
+        }
 
         // Secure the ID (Stops SQL Injection)
         $jsst_ticket_id = JSSTrequest::getVar('ticket_id', null, 0, 'int');
@@ -643,10 +750,19 @@ class JSSTreplyModel {
 
         $jsst_uids_str = implode(',', array_map('absint', $jsst_uids)); // Ensure integers
 
+        /* A reply the agent switched off is not offered as an example.
+           (Roadmap 6.0-AI-01)
+         *
+           2 is "disable" on the ticket screen's segmented control, and it is
+           the whole point of that control: somebody who knows a reply was
+           wrong, rude or specific to one customer marks it, and it stops being
+           suggested. NULL is let through - a reply written before the column
+           existed was never marked either way. */
         $jsst_query = "
         SELECT r.*
             FROM `" . jssupportticket::$_db->prefix . "js_ticket_replies` AS r
             WHERE r.ticketid = %d
+            AND (r.aireplymode != 2 OR r.aireplymode IS NULL)
             AND r.uid IN ($jsst_uids_str)";
         $jsst_query = jssupportticket::$_db->prepare($jsst_query, $jsst_ticket_id);
 

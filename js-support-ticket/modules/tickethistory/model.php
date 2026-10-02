@@ -19,6 +19,9 @@ class JSSTtickethistoryModel {
     /** Bumped when the table layout below changes. */
     const SCHEMA_VERSION = '400-CORE01';
 
+    /** Set once the table has been verified in this request. */
+    private static $jsst_schema_checked = false;
+
     /**
      * Create or upgrade the activity log table.
      *
@@ -30,6 +33,11 @@ class JSSTtickethistoryModel {
      * layout after the version was recorded is still repaired.
      */
     public static function ensureSchema() {
+        if (self::$jsst_schema_checked) {
+            return;
+        }
+        self::$jsst_schema_checked = true;
+
         $jsst_table = jssupportticket::$_db->prefix . 'js_ticket_activity_log';
         // Columns 4.0 adds to whatever layout is already there. Each one is
         // checked first so an existing add-on table is upgraded in place and
@@ -41,12 +49,24 @@ class JSSTtickethistoryModel {
             'newvalue'  => "ADD `newvalue` text",
         );
 
-        // The stored version is only a hint: this table is the one that proved
-        // why. It was dropped and recreated in the pre-4.0 layout with the
-        // option still reading 400, and every timeline read then died on
-        // Unknown column 'al.source' for good. (see JSSTschemaguard)
-        if (!JSSTschemaguard::needsRun('jsst_tickethistory_schema', self::SCHEMA_VERSION,
-                array('js_ticket_activity_log' => array_keys($jsst_wanted)))) {
+        // The schema option is a hint, never proof. The table can be dropped and
+        // recreated in the pre-4.0 layout by the stand-alone add-on, an import or
+        // a restore long after the option was written, and a version guard on its
+        // own then leaves the missing columns unrepaired for good — every read
+        // here selects `source`, so the timeline dies with "Unknown column
+        // 'al.source'" and no amount of reloading repairs it. One SHOW COLUMNS,
+        // once per request, is what it costs to know. Errors are suppressed
+        // around it because on a fresh install the table legitimately does not
+        // exist yet; wpdb clears last_error at the start of the next query, so
+        // the callers' own error checks are unaffected.
+        $jsst_suppress = jssupportticket::$_db->suppress_errors(true);
+        $jsst_columns = jssupportticket::$_db->get_col('SHOW COLUMNS FROM `' . $jsst_table . '`', 0);
+        jssupportticket::$_db->suppress_errors($jsst_suppress);
+        if (!is_array($jsst_columns)) {
+            $jsst_columns = array();
+        }
+        if (!array_diff(array_keys($jsst_wanted), $jsst_columns)
+                && get_option('jsst_tickethistory_schema') === self::SCHEMA_VERSION) {
             return;
         }
 
@@ -73,8 +93,8 @@ class JSSTtickethistoryModel {
                     KEY jsst_datetime (datetime)
                 ) " . $jsst_charset);
 
-        // The table may have just been created with the full layout, or may be
-        // an older one that still needs each column added.
+        // Re-read: the table may have just been created with the full layout, or
+        // may be an older one that still needs each column added.
         $jsst_columns = jssupportticket::$_db->get_col('SHOW COLUMNS FROM `' . $jsst_table . '`', 0);
         if (!is_array($jsst_columns)) {
             $jsst_columns = array();

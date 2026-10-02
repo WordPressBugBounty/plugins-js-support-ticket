@@ -54,10 +54,10 @@ if (jssupportticket::$_config['offline'] == 2) {
                         <div class="js-ticket-download-content-wrp">
                             <div class="js-ticket-table-heading-wrp">
                                 <div class="js-ticket-table-heading-left">
-                                    <?php echo esc_html(__('Topics', 'js-support-ticket')) ?>
+                                    <?php echo esc_html(__('Ticket Topics', 'js-support-ticket')) ?>
                                 </div>
                                 <div class="js-ticket-table-heading-right">
-                                    <a class="js-ticket-table-add-btn" href="<?php echo esc_url(jssupportticket::makeUrl(array('jstmod'=>'helptopic', 'jstlay'=>'addhelptopic'))); ?>"><span class="js-ticket-table-add-img-wrp"><img src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/add.png" alt="Add-image"></span><?php echo esc_html(__('Add Topic', 'js-support-ticket')) ?></a>
+                                    <a class="js-ticket-table-add-btn" href="<?php echo esc_url(jssupportticket::makeUrl(array('jstmod'=>'helptopic', 'jstlay'=>'addhelptopic'))); ?>"><span class="js-ticket-table-add-img-wrp"><img src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/add.png" alt=""></span><?php echo esc_html(__('Add Ticket Topic', 'js-support-ticket')) ?></a>
                                 </div>
                             </div>
                             <?php if (!empty(jssupportticket::$jsst_data[0])) { ?>

@@ -1127,7 +1127,7 @@ class JSSTthirdpartyimportModel {
             $jsst_data = [
                 'id'            => '',
                 'wpuid'         => $jsst_wpuid,
-                'name'          => $jsst_name,
+                'name'          => (($jsst_wpu = get_userdata($jsst_wpuid)) ? $jsst_wpu->user_login : $jsst_name), // username where there is a WordPress account
                 'display_name'  => $jsst_name,
                 'user_email'    => $jsst_email,
                 'status'        => 1,
@@ -2503,8 +2503,8 @@ class JSSTthirdpartyimportModel {
             $jsst_data = [
                 'id'            => '',
                 'wpuid'         => $jsst_wpuid,
-                'name'          => $jsst_name,
-                'display_name'  => '',
+                'name'          => ($jsst_customer->user_login ?? '') !== '' ? $jsst_customer->user_login : $jsst_name, // the username
+                'display_name'  => $jsst_name,
                 'user_email'    => $jsst_email,
                 'status'        => 1,
                 'issocial'      => 0,
@@ -5119,7 +5119,7 @@ class JSSTthirdpartyimportModel {
             $jsst_data = [
                 'id'            => '',
                 'wpuid'         => $jsst_wpuid,
-                'name'          => $jsst_name,
+                'name'          => (($jsst_wpu = get_userdata($jsst_wpuid)) ? $jsst_wpu->user_login : $jsst_name), // username where there is a WordPress account
                 'display_name'  => $jsst_name,
                 'user_email'    => $jsst_email,
                 'status'        => 1,

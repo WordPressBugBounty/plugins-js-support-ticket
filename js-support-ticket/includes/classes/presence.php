@@ -163,6 +163,14 @@ class JSSTpresence {
         if (current_user_can('manage_options')) {
             return true;
         }
+        /* An agent by role - Help Desk Agent, Light Agent, or anybody given the
+           capability - works the ticket screen without being on the Agents
+           add-on's staff list, so asking only that list left them out: never
+           shown to others and never told who else was there. */
+        if (class_exists('JSSTroles')
+                && (JSSTroles::canManageHelpDesk() || current_user_can(JSSTroles::CAP_TICKETS))) {
+            return true;
+        }
         return (in_array('agent', jssupportticket::$_active_addons)
                 && JSSTincluder::getJSModel('agent')->isUserStaff());
     }
@@ -181,6 +189,11 @@ class JSSTpresence {
         $jsst_ticketid = absint(JSSTrequest::getVar('ticketid', 'post', 0));
         if ($jsst_ticketid <= 0) {
             wp_send_json_error(array('message' => esc_html(__('No ticket', 'js-support-ticket'))), 400);
+        }
+        /* Who else has a ticket open is only for people who may open it. */
+        if (class_exists('JSSTcapability')
+                && !JSSTcapability::can(JSSTcapability::TICKET_VIEW, array('ticket' => $jsst_ticketid))) {
+            wp_send_json_error(array('message' => esc_html(__('Not allowed', 'js-support-ticket'))), 403);
         }
         $jsst_state = JSSTrequest::getVar('state', 'post', 'viewing');
         if (JSSTrequest::getVar('leaving', 'post', '') === '1') {

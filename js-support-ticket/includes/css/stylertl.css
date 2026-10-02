@@ -642,3 +642,175 @@
 
 /* Ticket tags in RTL. (Roadmap 4.0-CORE-17) */
 .jsst-tag-chip {margin: 0 0 4px 4px;}
+
+/* The queue engine on the front-end desk - RTL mirroring. (Roadmap 4.5-UX-01) */
+.jsst-queue-scopes-label {margin-right: 0;margin-left: 10px;}
+.jsst-queue-scope {margin-right: 0;margin-left: 8px;}
+.jsst-queue-column {margin-right: 0;margin-left: 16px;}
+@supports (gap: 1px) {
+    .jsst-queue-scopes-label, .jsst-queue-scope, .jsst-queue-column {margin: 0;}
+}
+.jsst-queue-column input {margin-right: 0;margin-left: 6px;}
+
+/* The bulk bar on the front-end desk - RTL mirroring. (Roadmap 4.5-UX-01) */
+.jsst-bulk-row > * {margin-right: 0;margin-left: 8px;}
+@supports (gap: 1px) {
+    .jsst-bulk-row > * {margin: 0;}
+}
+.jsst-bulk-selectall input {margin-right: 0;margin-left: 6px;}
+.jsst-bulk-pick {float: right;margin-right: 0;margin-left: 8px;}
+
+/* The desk in the portal - RTL mirroring. (Roadmap 4.5-FE-02) */
+.jsst-nav-item {margin-right: 0;margin-left: 4px;}
+.jsst-nav-count {margin-left: 0;margin-right: 7px;}
+.jsst-home-count {margin-left: 0;margin-right: 8px;}
+.jsst-home-row {padding-left: 0;padding-right: 11px;border-left: 0;border-right: 3px solid transparent;}
+.jsst-home-late {border-right-color: #b45309;}
+.jsst-home-ref, .jsst-people-ref {margin-right: 0;margin-left: 7px;}
+.jsst-people-search > * {margin-right: 0;margin-left: 8px;}
+.jsst-people-company {margin-right: 0;margin-left: 8px;}
+.jsst-people-paging > * {margin-right: 0;margin-left: 12px;}
+.jsst-people-guest {margin-left: 0;margin-right: 6px;}
+.jsst-people-table th, .jsst-people-table td {text-align: right;}
+.jsst-people-table tbody th {border-left: 0;border-right: 3px solid transparent;}
+.jsst-people-on th:first-child {border-right-color: #4f46e5;}
+@supports (gap: 1px) {
+    .jsst-nav-item, .jsst-people-search > *, .jsst-people-company, .jsst-people-paging > * {margin: 0;}
+}
+
+/* The role presets' one directional rule, mirrored. (Roadmap 4.5-FE-03)
+   Only the margin flips; everything else in the block is symmetric and stays in
+   style.css, which is the rule this file follows throughout. */
+.jsst-rolepreset-buttons .js-ticket-button {margin: 0 0 8px 8px;}
+@supports (gap: 1px) {
+    .jsst-rolepreset-buttons .js-ticket-button {margin: 0;}
+}
+
+/* --------------------------------------------------------------------------
+   The desk screens' furniture, mirrored. (Roadmap 4.5-FE-02)
+
+   Only what is directional. Everything symmetric stays in style.css, which is
+   the rule this file follows throughout, and the @supports blocks repeat
+   because a margin zeroed there has to be zeroed on this side too or the gap
+   is added to a margin that was never removed.
+   -------------------------------------------------------------------------- */
+.jsst-main-up-wrapper .jsst-card-half {
+	margin-right: 0;
+	margin-left: 16px;
+}
+
+.jsst-main-up-wrapper .jsst-card-half:last-child {
+	margin-left: 0;
+}
+
+.jsst-main-up-wrapper .jsst-field {
+	margin: 0 0 14px 14px;
+}
+
+.jsst-main-up-wrapper .jsst-field-wide {
+	margin-left: 0;
+}
+
+.jsst-main-up-wrapper .jsst-check input {
+	margin: 3px 0 0 8px;
+}
+
+.jsst-main-up-wrapper .jsst-actions > * {
+	margin: 0 0 0 8px;
+}
+
+.jsst-main-up-wrapper .jsst-dot {
+	margin-right: 0;
+	margin-left: 6px;
+}
+
+.jsst-main-up-wrapper .jsst-table th,
+.jsst-main-up-wrapper .jsst-table td {
+	text-align: right;
+}
+
+.jsst-main-up-wrapper .jsst-notif-dot {
+	margin: 7px 0 0 10px;
+}
+
+.jsst-main-up-wrapper .jsst-notif-actions {
+	margin-right: 12px;
+	margin-left: 0;
+}
+
+/* The waiting marker moves to the edge the eye starts from. */
+.jsst-main-up-wrapper .jsst-chat-waiting {
+	border-right: 3px solid #b45309;
+	border-left: 0;
+}
+
+/* And the two speakers swap sides with the reading direction, or your own line
+   is the one that looks like somebody else's. */
+.jsst-main-up-wrapper .jsst-chat-agent {
+	margin-right: 0;
+	margin-left: auto;
+}
+
+.jsst-main-up-wrapper .jsst-chat-mine {
+	margin-right: auto;
+	margin-left: 0;
+}
+
+.jsst-main-up-wrapper .jsst-chat-ticket,
+.jsst-main-up-wrapper .jsst-chat-end {
+	margin-right: 10px;
+	margin-left: 0;
+}
+
+.jsst-main-up-wrapper .jsst-chat-reply-body {
+	margin: 0 0 0 8px;
+}
+
+@supports ( gap: 1px ) {
+	.jsst-main-up-wrapper .jsst-card-half,
+	.jsst-main-up-wrapper .jsst-actions > * {
+		margin: 0;
+	}
+
+	.jsst-main-up-wrapper .jsst-field {
+		margin: 0 0 14px;
+	}
+
+	.jsst-main-up-wrapper .jsst-chat-reply-body {
+		margin: 0;
+	}
+}
+
+@media screen and ( max-width: 600px ) {
+	.jsst-main-up-wrapper .jsst-card-half,
+	.jsst-main-up-wrapper .jsst-field,
+	.jsst-main-up-wrapper .jsst-chat-reply-body {
+		margin-left: 0;
+	}
+
+	.jsst-main-up-wrapper .jsst-notif-actions {
+		margin: 8px 0 0;
+	}
+
+	.jsst-main-up-wrapper .jsst-chat-ticket,
+	.jsst-main-up-wrapper .jsst-chat-end {
+		margin: 6px 0 0;
+	}
+}
+
+/* The customers search row, mirrored. (Roadmap 4.5-FE-02)
+   The section panels and the button pair are symmetric; what is not is the
+   spacing between the controls, which style.css puts on the right. */
+.jsst-main-up-wrapper .jsst-people-search > * {
+	margin: 0 0 0 8px;
+}
+
+.jsst-main-up-wrapper .jsst-people-search > *:last-child {
+	margin-left: 0;
+}
+
+@supports ( gap: 1px ) {
+	.jsst-main-up-wrapper .jsst-people-search > * {
+		margin: 0;
+	}
+}

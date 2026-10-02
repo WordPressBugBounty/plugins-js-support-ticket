@@ -1,292 +1,159 @@
 <?php
-   if(!defined('ABSPATH'))
+if(!defined('ABSPATH'))
     die('Restricted Access');
-?>
-<?php
+
+/**
+ * The two addresses a scheduler has to call. (Roadmap 6.5-UI-09)
+ *
+ * This screen was two copies of the same 120-line block, one per job, and both
+ * copies used the same DOM ids - `id="tabs"`, `id="webcrown"`, `id="wget"`,
+ * `id="curl"`, `id="phpscript"`, `id="url"`, and `id="cron_job"` eleven times
+ * over. jQuery UI resolves a tab's panel by id, so the second set of tabs
+ * drove the first set's panels: clicking "Curl" under Update Ticket Status
+ * switched the block above it and left the block you were reading alone. One
+ * loop over the two jobs, ids derived from the job key, and the bug cannot
+ * come back by copy and paste.
+ *
+ * It also led with the thing nobody needs. The answer to "how do I set this
+ * up" is the URL; wget, curl and a PHP snippet are three ways of fetching a
+ * URL you already have. The URL is on the card with a copy button, and the
+ * three recipes are folded underneath it.
+ */
 JSSTmessage::getMessage();
-wp_enqueue_script('jquery-ui-tabs');
-$jsst_jssupportticket_js ='
-    jQuery(document).ready(function ($) {
-        jQuery(".tabs").tabs();
-    });
-';
-wp_add_inline_script('js-support-ticket-main-js',$jsst_jssupportticket_js);
+
+$jsst_jobs = array(
+    'ticketviaemail' => array(
+        'name'  => __('Ticket via email', 'js-support-ticket'),
+        'what'  => __('Reads the mailbox and turns new messages into tickets, and replies into replies.', 'js-support-ticket'),
+        'often' => __('Hourly', 'js-support-ticket'),
+    ),
+    'updateticketstatus' => array(
+        'name'  => __('Update ticket status', 'js-support-ticket'),
+        'what'  => __('Closes what has gone quiet and moves on anything whose promised time has passed.', 'js-support-ticket'),
+        'often' => __('Daily', 'js-support-ticket'),
+    ),
+);
 ?>
 <div id="jsstadmin-wrapper">
     <div id="jsstadmin-leftmenu">
         <?php  JSSTincluder::getClassesInclude('jsstadminsidemenu'); ?>
     </div>
     <div id="jsstadmin-data">
-        <div id="jsstadmin-wrapper-top">
-            <div id="jsstadmin-wrapper-top-left">
-                <div id="jsstadmin-breadcrunbs">
-                    <ul>
-                        <li><a href="?page=jssupportticket" title="<?php echo esc_attr(__('Dashboard','js-support-ticket')); ?>"><?php echo esc_html(__('Dashboard','js-support-ticket')); ?></a></li>
-                        <li><?php echo esc_html(__('Cron Job URLs','js-support-ticket')); ?></li>
-                    </ul>
-                </div>
-            </div>
-            <div id="jsstadmin-wrapper-top-right">
-                <div id="jsstadmin-config-btn">
-                    <a title="<?php echo esc_attr(__('Configuration','js-support-ticket')); ?>" href="<?php echo esc_url(admin_url("admin.php?page=configuration")); ?>">
-                        <img alt = "<?php echo esc_attr(__('Configuration','js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/config.png" />
-                    </a>
-                </div>
-                <div id="jsstadmin-config-btn" class="jssticketadmin-help-btn">
-                    <a href="<?php echo esc_url(admin_url("admin.php?page=jssupportticket&jstlay=help")); ?>" title="<?php echo esc_attr(__('Help','js-support-ticket')); ?>">
-                        <img alt = "<?php echo esc_attr(__('Help','js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/help.png" />
-                    </a>
-                </div>
-                <div id="jsstadmin-vers-txt">
-                    <?php echo esc_html(__("Version",'js-support-ticket')); ?>:
-                    <span class="jsstadmin-ver"><?php echo esc_html(JSSTincluder::getJSModel('configuration')->getConfigValue('versioncode')); ?></span>
-                </div>
-            </div>
-        </div>
-        <div id="jsstadmin-head">
-            <h1 class="jsstadmin-head-text"><?php echo esc_html(__('Cron Job URLs', 'js-support-ticket')); ?></h1>
-        </div>
-        <div id="jsstadmin-data-wrp" class="">
-            <!-- ticket via email cron -->
-            <div id="cp_wraper">
-                <?php $jsst_array = array('even', 'odd');
-                $jsst_k = 0; ?>
-                <div id="tabs" class="tabs">
-                    <ul>
-                        <li><a title="<?php echo esc_attr(__('Web Cron Job','js-support-ticket')); ?>" class="selected" data-css="controlpanel" href="#webcrown"><?php echo esc_html(__('Web Cron Job','js-support-ticket')); ?></a></li>
-                        <li><a title="<?php echo esc_attr(__('Wget','js-support-ticket')); ?>"  data-css="controlpanel" href="#wget"><?php echo esc_html(__('Wget','js-support-ticket')); ?></a></li>
-                        <li><a title="<?php echo esc_attr(__('Curl','js-support-ticket')); ?>"  data-css="controlpanel" href="#curl"><?php echo esc_html(__('Curl','js-support-ticket')); ?></a></li>
-                        <li><a title="<?php echo esc_attr(__('PHP Script','js-support-ticket')); ?>"  data-css="controlpanel" href="#phpscript"><?php echo esc_html(__('PHP Script','js-support-ticket')); ?></a></li>
-                        <li><a title="<?php echo esc_attr(__('URL','js-support-ticket')); ?>"  data-css="controlpanel" href="#url"><?php echo esc_html(__('URL','js-support-ticket')); ?></a></li>
-                    </ul>
-                    <div class="tabInner">
-                    <div id="webcrown">
-                        <div id="cron_job">
-                            <span class="crown_text"><?php echo esc_html(__('Configuration of a backup job with webcron org','js-support-ticket')); ?></span>
-                            <div id="cron_job_detail_wrapper" class="<?php echo esc_attr($jsst_array[$jsst_k]);$jsst_k = 1 - $jsst_k; ?>">
-                                <span class="crown_text_left">
-                                    <?php echo esc_html(__('Name of cron job','js-support-ticket')); ?>
-                                </span>
-                                <span class="crown_text_right"><?php echo esc_html(__('Ticket via email','js-support-ticket')); ?></span>
-                            </div>
-                            <div id="cron_job_detail_wrapper" class="<?php echo esc_attr($jsst_array[$jsst_k]);$jsst_k = 1 - $jsst_k; ?>">
-                                <span class="crown_text_left">
-                                    <?php echo esc_html(__('Timeout','js-support-ticket')); ?>
-                                </span>
-                                <span class="crown_text_right"><?php echo esc_html(__('180 secs if the does not completely increase it most sites will work with a setting of 180 600','js-support-ticket')); ?></span>
-                            </div>
-                            <div id="cron_job_detail_wrapper" class="<?php echo esc_attr($jsst_array[$jsst_k]);$jsst_k = 1 - $jsst_k; ?>">
-                                <span class="crown_text_left"><?php echo esc_html(__('URL you want to execute','js-support-ticket')); ?></span>
-                                <span class="crown_text_right">
-                                    <?php echo esc_html(jssupportticket::makeUrl(array('jsstcron'=>'ticketviaemail','jsstpageid'=>jssupportticket::getPageid()))); ?>
-                                </span>
-                            </div>
-                            <div id="cron_job_detail_wrapper" class="<?php echo esc_attr($jsst_array[$jsst_k]);$jsst_k = 1 - $jsst_k; ?>">
-                                <span class="crown_text_left"><?php echo esc_html(__('Login','js-support-ticket')); ?></span>
-                                <span class="crown_text_right">
-                                    <?php echo esc_html(__('Leave this blank','js-support-ticket')); ?>
-                                </span>
-                            </div>
-                            <div id="cron_job_detail_wrapper" class="<?php echo esc_attr($jsst_array[$jsst_k]);$jsst_k = 1 - $jsst_k; ?>">
-                                <span class="crown_text_left"><?php echo esc_html(__('Password','js-support-ticket')); ?></span>
-                                <span class="crown_text_right"><?php echo esc_html(__('Leave this blank','js-support-ticket')); ?></span>
-                            </div>
-                            <div id="cron_job_detail_wrapper" class="<?php echo esc_attr($jsst_array[$jsst_k]);$jsst_k = 1 - $jsst_k; ?>">
-                                <span class="crown_text_left">
-                                    <?php echo esc_html(__('Execution time','js-support-ticket')); ?>
-                                </span>
-                                <span class="crown_text_right">
-                                    <?php echo esc_html(__('That the grid below the other options select when and how','js-support-ticket')); ?>
-                                </span>
-                            </div>
-                            <div id="cron_job_detail_wrapper" class="<?php echo esc_attr($jsst_array[$jsst_k]);$jsst_k = 1 - $jsst_k; ?>">
-                                <span class="crown_text_left"><?php echo esc_html(__('Alerts','js-support-ticket')); ?></span>
-                                <span class="crown_text_right">
-                                <?php echo esc_html(__('If you have already set up alerts methods in webcron org interface we recommend choosing an alert','js-support-ticket')); ?>
-                                </span>
+        <?php JSSTlayout::adminPageHeader(array(
+            'title' => __('Cron Job URLs', 'js-support-ticket'),
+        )); ?>
+        <div id="jsstadmin-data-wrp">
+
+            <p class="jsst-lede"><?php echo esc_html(__('Two jobs run on a timer. Give each address below to whatever runs things on a schedule — your host\'s control panel, a cron line on the server, or a web cron service. Fetching the address is all a scheduler has to do.', 'js-support-ticket')); ?></p>
+
+            <?php foreach ($jsst_jobs AS $jsst_key => $jsst_job) {
+                $jsst_url = jssupportticket::makeUrl(array('jsstcron' => $jsst_key, 'jsstpageid' => jssupportticket::getPageid()));
+                ?>
+                <div class="jsst-card">
+                    <div class="jsst-card-head">
+                        <h2 class="jsst-card-title"><?php echo esc_html($jsst_job['name']); ?></h2>
+                        <p class="jsst-card-sub"><?php echo esc_html($jsst_job['what']); ?></p>
+                    </div>
+                    <div class="jsst-card-body">
+                        <div class="jsst-formgrid">
+                            <div class="jsst-frow jsst-frow-full">
+                                <span class="jsst-flabel"><?php echo esc_html(__('The address to call', 'js-support-ticket')); ?></span>
+                                <div class="jsst-sc-code">
+                                    <code><?php echo esc_html($jsst_url); ?></code>
+                                    <button type="button" class="button-link jsst-sc-copy" data-jsst-copy="<?php echo esc_attr($jsst_url); ?>"><?php echo esc_html(__('Copy', 'js-support-ticket')); ?></button>
+                                </div>
+                                <p class="jsst-fhelp"><?php
+                                    /* translators: %s: how often the job should run, e.g. "Hourly" */
+                                    echo esc_html(sprintf(__('Run it: %s. No login, no password — leave those blank wherever you are asked for them.', 'js-support-ticket'), $jsst_job['often'])); ?></p>
                             </div>
                         </div>
-                    </div>
-                    <div id="wget">
-                        <div id="cron_job">
-                            <span class="crown_text"><?php echo esc_html(__('Cron scheduling using wget','js-support-ticket')); ?></span>
-                            <div id="cron_job_detail_wrapper" class="even">
-                                <span class="crown_text_right fullwidth">
-                                <?php echo 'wget --max-redirect=10000 "' . esc_html(jssupportticket::makeUrl(array('jsstcron'=>'ticketviaemail','jsstpageid'=>jssupportticket::getPageid()))) .'" -O - 1>/dev/null 2>/dev/null '; ?>
-                                </span>
+
+                        <details class="jsst-details">
+                            <summary><?php echo esc_html(__('Ways to call it', 'js-support-ticket')); ?></summary>
+                            <div class="jsst-details-body">
+                                <p class="jsst-flabel"><?php echo esc_html(__('wget', 'js-support-ticket')); ?></p>
+                                <div class="jsst-sc-code">
+                                    <code><?php echo esc_html('wget --max-redirect=10000 "' . $jsst_url . '" -O - 1>/dev/null 2>/dev/null'); ?></code>
+                                    <button type="button" class="button-link jsst-sc-copy" data-jsst-copy="<?php echo esc_attr('wget --max-redirect=10000 "' . $jsst_url . '" -O - 1>/dev/null 2>/dev/null'); ?>"><?php echo esc_html(__('Copy', 'js-support-ticket')); ?></button>
+                                </div>
+
+                                <p class="jsst-flabel"><?php echo esc_html(__('curl', 'js-support-ticket')); ?></p>
+                                <div class="jsst-sc-code">
+                                    <code><?php echo esc_html('curl -L --max-redirs 1000 "' . $jsst_url . '" 1>/dev/null 2>/dev/null'); ?></code>
+                                    <button type="button" class="button-link jsst-sc-copy" data-jsst-copy="<?php echo esc_attr('curl -L --max-redirs 1000 "' . $jsst_url . '" 1>/dev/null 2>/dev/null'); ?>"><?php echo esc_html(__('Copy', 'js-support-ticket')); ?></button>
+                                </div>
+
+                                <p class="jsst-flabel"><?php echo esc_html(__('A PHP script of your own', 'js-support-ticket')); ?></p>
+                                <?php
+                                $jsst_php = "\$handle = curl_init();\n"
+                                    . "curl_setopt(\$handle, CURLOPT_URL, '" . $jsst_url . "');\n"
+                                    . "curl_setopt(\$handle, CURLOPT_FOLLOWLOCATION, true);\n"
+                                    . "curl_setopt(\$handle, CURLOPT_MAXREDIRS, 10000);\n"
+                                    . "curl_setopt(\$handle, CURLOPT_RETURNTRANSFER, 1);\n"
+                                    . "\$buffer = curl_exec(\$handle);\n"
+                                    . "curl_close(\$handle);\n"
+                                    . "echo empty(\$buffer) ? '" . esc_js(__('The cron job did not run', 'js-support-ticket')) . "' : \$buffer;";
+                                ?>
+                                <div class="jsst-sc-code">
+                                    <code class="jsst-codeblock"><?php echo esc_html($jsst_php); ?></code>
+                                    <button type="button" class="button-link jsst-sc-copy" data-jsst-copy="<?php echo esc_attr($jsst_php); ?>"><?php echo esc_html(__('Copy', 'js-support-ticket')); ?></button>
+                                </div>
+
+                                <p class="jsst-fhelp"><?php echo esc_html(__('Using a web cron service instead? Give it the address above, set the timeout to 180 seconds or more, and leave the login and password empty.', 'js-support-ticket')); ?></p>
                             </div>
-                        </div>
-                    </div>
-                    <div id="curl">
-                        <div id="cron_job">
-                            <span class="crown_text"><?php echo esc_html(__('Cron scheduling using Curl','js-support-ticket')); ?></span>
-                            <div id="cron_job_detail_wrapper" class="even">
-                                <span class="crown_text_right fullwidth">
-                                <?php echo 'curl "' . esc_html(jssupportticket::makeUrl(array('jsstcron'=>'ticketviaemail','jsstpageid'=>jssupportticket::getPageid()))).'"<br>' . esc_html(__('OR','js-support-ticket')) . '<br>'; ?>
-                                <?php echo 'curl -L --max-redirs 1000 -v "' . esc_html(jssupportticket::makeUrl(array('jsstcron'=>'ticketviaemail','jsstpageid'=>jssupportticket::getPageid()))).'" 1>/dev/null 2>/dev/null '; ?>
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-                    <div id="phpscript">
-                        <div id="cron_job">
-                            <span class="crown_text">
-                                    <?php echo esc_html(__('Custom PHP script to run the cron job','js-support-ticket')); ?>
-                            </span>
-                            <div id="cron_job_detail_wrapper" class="even">
-                                <span class="crown_text_right fullwidth">
-                                    <?php
-                                    echo wp_kses('  $jsst_curl_handle=curl_init();<br>
-                                                curl_setopt($jsst_curl_handle, CURLOPT_URL, \'' . jssupportticket::makeUrl(array('jsstcron'=>'ticketviaemail','jsstpageid'=>jssupportticket::getPageid())).'\');<br>
-                                                curl_setopt($jsst_curl_handle,CURLOPT_FOLLOWLOCATION, TRUE);<br>
-                                                curl_setopt($jsst_curl_handle,CURLOPT_MAXREDIRS, 10000);<br>
-                                                curl_setopt($jsst_curl_handle,CURLOPT_RETURNTRANSFER, 1);<br>
-                                                $jsst_buffer = curl_exec($jsst_curl_handle);<br>
-                                                curl_close($jsst_curl_handle);<br>
-                                                if (empty($jsst_buffer))<br>
-                                                &nbsp;&nbsp;&nbsp;&nbsp;echo "' . esc_html(__('Sorry, the cron job did not work','js-support-ticket')) . '";<br>
-                                                else<br>
-                                                &nbsp;&nbsp;&nbsp;&nbsp;echo esc_attr($jsst_buffer);<br>
-                                                ', JSST_ALLOWED_TAGS);
-                                    ?>
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-                    <div id="url">
-                        <div id="cron_job">
-                            <span class="crown_text"><?php echo esc_html(__('URL for use with your own scripts and third party','js-support-ticket')); ?></span>
-                            <div id="cron_job_detail_wrapper" class="even">
-                                <span class="crown_text_right fullwidth"><?php echo esc_html(jssupportticket::makeUrl(array('jsstcron'=>'ticketviaemail','jsstpageid'=>jssupportticket::getPageid()))); ?></span>
-                            </div>
-                        </div>
-                    </div>
-                    <div id="cron_job">
-                        <span class="cron_job_help_txt"><?php echo esc_html(__('Recommended run script hourly','js-support-ticket')); ?></span>
-                    </div>
+                        </details>
                     </div>
                 </div>
-            </div>
-            <!-- update ticket status cron -->
-            <div id="cp_wraper">
-                <?php $jsst_array = array('even', 'odd');
-                $jsst_k = 0; ?>
-                <div id="tabs" class="tabs">
-                    <ul>
-                        <li><a title="<?php echo esc_attr(__('Web Cron Job','js-support-ticket')); ?>" class="selected" data-css="controlpanel" href="#webcrown"><?php echo esc_html(__('Web Cron Job','js-support-ticket')); ?></a></li>
-                        <li><a title="<?php echo esc_attr(__('Wget','js-support-ticket')); ?>"  data-css="controlpanel" href="#wget"><?php echo esc_html(__('Wget','js-support-ticket')); ?></a></li>
-                        <li><a title="<?php echo esc_attr(__('Curl','js-support-ticket')); ?>"  data-css="controlpanel" href="#curl"><?php echo esc_html(__('Curl','js-support-ticket')); ?></a></li>
-                        <li><a title="<?php echo esc_attr(__('PHP Script','js-support-ticket')); ?>"  data-css="controlpanel" href="#phpscript"><?php echo esc_html(__('PHP Script','js-support-ticket')); ?></a></li>
-                        <li><a title="<?php echo esc_attr(__('URL','js-support-ticket')); ?>"  data-css="controlpanel" href="#url"><?php echo esc_html(__('URL','js-support-ticket')); ?></a></li>
-                    </ul>
-                    <div class="tabInner">
-                    <div id="webcrown">
-                        <div id="cron_job">
-                            <span class="crown_text"><?php echo esc_html(__('Configuration of a backup job with webcron org','js-support-ticket')); ?></span>
-                            <div id="cron_job_detail_wrapper" class="<?php echo esc_attr($jsst_array[$jsst_k]);$jsst_k = 1 - $jsst_k; ?>">
-                                <span class="crown_text_left">
-                                    <?php echo esc_html(__('Name of cron job','js-support-ticket')); ?>
-                                </span>
-                                <span class="crown_text_right"><?php echo esc_html(__('Update ticket status','js-support-ticket')); ?></span>
-                            </div>
-                            <div id="cron_job_detail_wrapper" class="<?php echo esc_attr($jsst_array[$jsst_k]);$jsst_k = 1 - $jsst_k; ?>">
-                                <span class="crown_text_left">
-                                    <?php echo esc_html(__('Timeout','js-support-ticket')); ?>
-                                </span>
-                                <span class="crown_text_right"><?php echo esc_html(__('180 secs if the does not completely increase it most sites will work with a setting of 180 600','js-support-ticket')); ?></span>
-                            </div>
-                            <div id="cron_job_detail_wrapper" class="<?php echo esc_attr($jsst_array[$jsst_k]);$jsst_k = 1 - $jsst_k; ?>">
-                                <span class="crown_text_left"><?php echo esc_html(__('URL you want to execute','js-support-ticket')); ?></span>
-                                <span class="crown_text_right">
-                                    <?php echo esc_html(jssupportticket::makeUrl(array('jsstcron'=>'updateticketstatus','jsstpageid'=>jssupportticket::getPageid()))); ?>
-                                </span>
-                            </div>
-                            <div id="cron_job_detail_wrapper" class="<?php echo esc_attr($jsst_array[$jsst_k]);$jsst_k = 1 - $jsst_k; ?>">
-                                <span class="crown_text_left"><?php echo esc_html(__('Login','js-support-ticket')); ?></span>
-                                <span class="crown_text_right">
-                                    <?php echo esc_html(__('Leave this blank','js-support-ticket')); ?>
-                                </span>
-                            </div>
-                            <div id="cron_job_detail_wrapper" class="<?php echo esc_attr($jsst_array[$jsst_k]);$jsst_k = 1 - $jsst_k; ?>">
-                                <span class="crown_text_left"><?php echo esc_html(__('Password','js-support-ticket')); ?></span>
-                                <span class="crown_text_right"><?php echo esc_html(__('Leave this blank','js-support-ticket')); ?></span>
-                            </div>
-                            <div id="cron_job_detail_wrapper" class="<?php echo esc_attr($jsst_array[$jsst_k]);$jsst_k = 1 - $jsst_k; ?>">
-                                <span class="crown_text_left">
-                                    <?php echo esc_html(__('Execution time','js-support-ticket')); ?>
-                                </span>
-                                <span class="crown_text_right">
-                                    <?php echo esc_html(__('That the grid below the other options select when and how','js-support-ticket')); ?>
-                                </span>
-                            </div>
-                            <div id="cron_job_detail_wrapper" class="<?php echo esc_attr($jsst_array[$jsst_k]);$jsst_k = 1 - $jsst_k; ?>">
-                                <span class="crown_text_left"><?php echo esc_html(__('Alerts','js-support-ticket')); ?></span>
-                                <span class="crown_text_right">
-                                <?php echo esc_html(__('If you have already set up alerts methods in webcron org interface we recommend choosing an alert','js-support-ticket')); ?>
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-                    <div id="wget">
-                        <div id="cron_job">
-                            <span class="crown_text"><?php echo esc_html(__('Cron scheduling using wget','js-support-ticket')); ?></span>
-                            <div id="cron_job_detail_wrapper" class="even">
-                                <span class="crown_text_right fullwidth">
-                                <?php echo 'wget --max-redirect=10000 "' . esc_html(jssupportticket::makeUrl(array('jsstcron'=>'updateticketstatus','jsstpageid'=>jssupportticket::getPageid()))) .'" -O - 1>/dev/null 2>/dev/null '; ?>
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-                    <div id="curl">
-                        <div id="cron_job">
-                            <span class="crown_text"><?php echo esc_html(__('Cron scheduling using Curl','js-support-ticket')); ?></span>
-                            <div id="cron_job_detail_wrapper" class="even">
-                                <span class="crown_text_right fullwidth">
-                                <?php echo 'curl "' . esc_html(jssupportticket::makeUrl(array('jsstcron'=>'updateticketstatus','jsstpageid'=>jssupportticket::getPageid()))).'"<br>' . esc_html(__('OR','js-support-ticket')) . '<br>'; ?>
-                                <?php echo 'curl -L --max-redirs 1000 -v "' . esc_html(jssupportticket::makeUrl(array('jsstcron'=>'updateticketstatus','jsstpageid'=>jssupportticket::getPageid()))).'" 1>/dev/null 2>/dev/null '; ?>
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-                    <div id="phpscript">
-                        <div id="cron_job">
-                            <span class="crown_text">
-                                    <?php echo esc_html(__('Custom PHP script to run the cron job','js-support-ticket')); ?>
-                            </span>
-                            <div id="cron_job_detail_wrapper" class="even">
-                                <span class="crown_text_right fullwidth">
-                                    <?php
-                                    echo wp_kses('  $jsst_curl_handle=curl_init();<br>
-                                                curl_setopt($jsst_curl_handle, CURLOPT_URL, \'' . jssupportticket::makeUrl(array('jsstcron'=>'updateticketstatus','jsstpageid'=>jssupportticket::getPageid())).'\');<br>
-                                                curl_setopt($jsst_curl_handle,CURLOPT_FOLLOWLOCATION, TRUE);<br>
-                                                curl_setopt($jsst_curl_handle,CURLOPT_MAXREDIRS, 10000);<br>
-                                                curl_setopt($jsst_curl_handle,CURLOPT_RETURNTRANSFER, 1);<br>
-                                                $jsst_buffer = curl_exec($jsst_curl_handle);<br>
-                                                curl_close($jsst_curl_handle);<br>
-                                                if (empty($jsst_buffer))<br>
-                                                &nbsp;&nbsp;&nbsp;&nbsp;echo "' . esc_html(__('Sorry, the cron job did not work','js-support-ticket')) . '";<br>
-                                                else<br>
-                                                &nbsp;&nbsp;&nbsp;&nbsp;echo esc_attr($jsst_buffer);<br>
-                                                ', JSST_ALLOWED_TAGS);
-                                    ?>
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-                    <div id="url">
-                        <div id="cron_job">
-                            <span class="crown_text"><?php echo esc_html(__('URL for use with your own scripts and third party','js-support-ticket')); ?></span>
-                            <div id="cron_job_detail_wrapper" class="even">
-                                <span class="crown_text_right fullwidth"><?php echo esc_html(jssupportticket::makeUrl(array('jsstcron'=>'updateticketstatus','jsstpageid'=>jssupportticket::getPageid()))); ?></span>
-                            </div>
-                        </div>
-                    </div>
-                    <div id="cron_job">
-                        <span class="cron_job_help_txt"><?php echo esc_html(__('Recommended run script daily','js-support-ticket')); ?></span>
-                    </div>
-                    </div>
-                </div>
-            </div>
+            <?php } ?>
+
         </div>
     </div>
 </div>
+<?php /* Copy, without jQuery and without a library - the same delegated
+         listener the Shortcodes screen uses, and for the same reason:
+         `navigator.clipboard` is refused outside a secure context, and plenty
+         of these desks are administered over plain http on a local network. */ ?>
+<script>
+(function () {
+    function jsstFlash(jsst_button, jsst_text) {
+        var jsst_was = jsst_button.getAttribute('data-jsst-was') || jsst_button.textContent;
+        jsst_button.setAttribute('data-jsst-was', jsst_was);
+        jsst_button.textContent = jsst_text;
+        jsst_button.classList.add('jsst-sc-copied');
+        window.setTimeout(function () {
+            jsst_button.textContent = jsst_was;
+            jsst_button.classList.remove('jsst-sc-copied');
+        }, 1600);
+    }
+    function jsstFallback(jsst_button) {
+        var jsst_code = jsst_button.parentNode ? jsst_button.parentNode.querySelector('code') : null;
+        if (!jsst_code) { return false; }
+        var jsst_range = document.createRange();
+        jsst_range.selectNodeContents(jsst_code);
+        var jsst_selection = window.getSelection();
+        jsst_selection.removeAllRanges();
+        jsst_selection.addRange(jsst_range);
+        var jsst_done = false;
+        try { jsst_done = document.execCommand('copy'); } catch (jsst_e) { jsst_done = false; }
+        if (jsst_done) { jsst_selection.removeAllRanges(); }
+        return jsst_done;
+    }
+    document.addEventListener('click', function (jsst_event) {
+        var jsst_button = jsst_event.target.closest ? jsst_event.target.closest('.jsst-sc-copy') : null;
+        if (!jsst_button) { return; }
+        jsst_event.preventDefault();
+        var jsst_value = jsst_button.getAttribute('data-jsst-copy') || '';
+        var jsst_ok = <?php echo wp_json_encode(__('Copied', 'js-support-ticket')); ?>;
+        var jsst_no = <?php echo wp_json_encode(__('Press Ctrl+C', 'js-support-ticket')); ?>;
+        if (navigator.clipboard && window.isSecureContext) {
+            navigator.clipboard.writeText(jsst_value).then(function () {
+                jsstFlash(jsst_button, jsst_ok);
+            }, function () {
+                jsstFlash(jsst_button, jsstFallback(jsst_button) ? jsst_ok : jsst_no);
+            });
+            return;
+        }
+        jsstFlash(jsst_button, jsstFallback(jsst_button) ? jsst_ok : jsst_no);
+    });
+})();
+</script>

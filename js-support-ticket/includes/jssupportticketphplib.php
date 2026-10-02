@@ -318,6 +318,85 @@ class jssupportticketphplib {
         return $jsst_path;
     }
 
+    /* ------------------------------------------------------------------ *
+     * WP_Filesystem
+     *
+     * WordPress asks plugins to read and write through WP_Filesystem rather
+     * than through PHP's own functions, so that a site running on FTP or SSH
+     * credentials works the same as one writing directly. These three wrap it
+     * once, in the shape `JSSTupdates::readSqlFile()` already established and
+     * documents: **ask WP_Filesystem first, and fall back to PHP**.
+     *
+     * The fallback is the whole point and is not laziness. WP_Filesystem()
+     * answers for a filesystem the site may hold no credentials for, and on
+     * such a host it returns false and its global is left holding an
+     * unconnected transport whose methods throw. A read that gave up there
+     * would be reporting "this file cannot be read" about a file PHP is
+     * reading perfectly well - so the plugin's own bundled files, and the
+     * uploads it has just been handed, are still reachable either way.
+     *
+     * Note WP_Filesystem() itself is only asked once per request: it is
+     * cheap after the first call, but the require of wp-admin/includes/file.php
+     * is not, and this runs on front-end requests too.
+     * ------------------------------------------------------------------ */
+
+    /** Whether WP_Filesystem is initialised and usable, asked once. */
+    private static $jsst_fs_ready = null;
+
+    private static function JSST_fs() {
+        global $wp_filesystem;
+        if (self::$jsst_fs_ready === null) {
+            if (!function_exists('WP_Filesystem')) {
+                if (!defined('ABSPATH') || !file_exists(ABSPATH . 'wp-admin/includes/file.php')) {
+                    self::$jsst_fs_ready = false;
+                    return null;
+                }
+                require_once ABSPATH . 'wp-admin/includes/file.php';
+            }
+            /* WP_Filesystem()'s own return value, not the global: a failed init
+               still populates the global with a transport that is not connected. */
+            self::$jsst_fs_ready = (bool) WP_Filesystem();
+        }
+        return (self::$jsst_fs_ready && !empty($wp_filesystem)) ? $wp_filesystem : null;
+    }
+
+    /**
+     * Read a whole file.
+     *
+     * @return string|false Contents, or false when there is no readable file.
+     */
+    public static function JSST_file_get($jsst_path) {
+        $jsst_fs = self::JSST_fs();
+        if ($jsst_fs !== null && $jsst_fs->exists($jsst_path)) {
+            $jsst_content = $jsst_fs->get_contents($jsst_path);
+            if ($jsst_content !== false) {
+                return $jsst_content;
+            }
+        }
+        if (!is_readable($jsst_path)) {
+            return false;
+        }
+        return file_get_contents($jsst_path); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents -- fallback for a host WP_Filesystem holds no credentials for; see the note above.
+    }
+
+    /** Whether a directory can be written to. */
+    public static function JSST_is_writable($jsst_path) {
+        $jsst_fs = self::JSST_fs();
+        if ($jsst_fs !== null) {
+            return (bool) $jsst_fs->is_writable($jsst_path);
+        }
+        return is_writable($jsst_path); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_is_writable -- fallback for a host WP_Filesystem holds no credentials for; see the note above.
+    }
+
+    /** Remove an empty directory. */
+    public static function JSST_rmdir($jsst_path) {
+        $jsst_fs = self::JSST_fs();
+        if ($jsst_fs !== null) {
+            return (bool) $jsst_fs->rmdir($jsst_path);
+        }
+        return rmdir($jsst_path); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_rmdir -- fallback for a host WP_Filesystem holds no credentials for; see the note above.
+    }
+
 
 }
 ?>

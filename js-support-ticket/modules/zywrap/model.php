@@ -21,7 +21,8 @@ class JSSTzywrapModel {
             wp_send_json_error(array('message' => __('API Key cannot be empty', 'js-support-ticket')));
         }
 
-        update_option('jsst_zywrap_api_key', sanitize_text_field($api_key));
+        // Through the engine registry, so AI Agent and this screen hold one key.
+        JSSTaiengine::saveKey('zywrap', sanitize_text_field($api_key));
         wp_send_json_success(array('message' => __('API Key saved successfully.', 'js-support-ticket')));
     }
 
@@ -643,6 +644,31 @@ class JSSTzywrapModel {
             if (!empty($val)) { $body[$override] = sanitize_text_field($val); }
         }
         
+        /* The master switch reaches here too. (Roadmap 4.0-AI-04, 6.0-AI-01)
+           This screen predates the policy and called the proxy directly, so
+           before this it was the one AI path in the product that a site could
+           not switch off - which is exactly the failure a kill switch exists to
+           prevent, and it is worth stating plainly rather than fixing quietly. */
+        if (class_exists('JSSTaipolicy') && !JSSTaipolicy::allows(JSSTaipolicy::LANE_HOSTED)) {
+            wp_send_json_error(array('message' => JSSTaipolicy::explain(JSSTaipolicy::LANE_HOSTED)['detail']));
+        }
+
+        /* The budget reaches here too, and it has to be asked before the
+           request rather than after it: this screen posts to the vendor itself
+           rather than through JSSTaiengine, so the meter that wraps every other
+           call in the product does not see it. (Roadmap 6.0-AI-07) */
+        if (class_exists('JSSTaiusage')) {
+            $jsst_meter = array(
+                'engine' => 'zywrap', 'model' => $model_code, 'lane' => 'hosted',
+                'funded' => JSSTaiusage::FUNDED_PLAN, 'feature' => 'reply',
+                'ticket' => absint(JSSTrequest::getVar('ticket_id')),
+            );
+            $jsst_allowed = JSSTaiusage::guard($jsst_meter);
+            if ($jsst_allowed['state'] !== 'ok') {
+                wp_send_json_error(array('message' => $jsst_allowed['detail']));
+            }
+        }
+
         // 5. Execute API Call
         $api_url = 'https://api.zywrap.com/v1/proxy';
         $start_time = microtime(true);
@@ -665,20 +691,23 @@ class JSSTzywrapModel {
         $http_code = wp_remote_retrieve_response_code($response);
         $raw_response = wp_remote_retrieve_body($response);
 
-        // 6. ZYWRAP V1 STREAM PARSER (From the PHP SDK)
-        $lines = explode("\n", $raw_response);
-        $finalJson = null;
-        foreach ($lines as $line) {
-            $line = trim($line);
-            if (strpos($line, 'data: ') === 0) {
-                $data = json_decode(substr($line, 6), true);
-                if ($data && (isset($data['output']) || isset($data['error']))) {
-                    $finalJson = substr($line, 6);
-                }
-            }
-        }
+        $body_json = $this->parseEngineResponse($raw_response);
 
-        $body_json = $finalJson ? json_decode($finalJson, true) : null;
+        /* Recorded whichever way it went. A request that was charged for and
+           then returned an error is exactly the spend nobody can otherwise
+           account for, so the failures are on the meter too. */
+        if (class_exists('JSSTaiusage')) {
+            $jsst_usage = (is_array($body_json) && isset($body_json['usage'])) ? $body_json['usage'] : array();
+            $jsst_meter['ms']    = (int) $latency_ms;
+            $jsst_meter['model'] = isset($body_json['model']) ? (string) $body_json['model'] : $model_code;
+            JSSTaiusage::record($jsst_meter, array(
+                'ok'        => ($http_code === 200 && $body_json && isset($body_json['output'])),
+                'intokens'  => isset($jsst_usage['prompt_tokens']) ? (int) $jsst_usage['prompt_tokens'] : 0,
+                'outtokens' => isset($jsst_usage['completion_tokens']) ? (int) $jsst_usage['completion_tokens'] : 0,
+                'error'     => (is_array($body_json) && isset($body_json['error']) && is_string($body_json['error']))
+                    ? $body_json['error'] : '',
+            ));
+        }
 
         // 7. Output Handling
         if ($http_code === 200 && $body_json && isset($body_json['output'])) {
@@ -773,11 +802,17 @@ class JSSTzywrapModel {
             wp_send_json_error(array('message' => __('Security check Failed', 'js-support-ticket')));
         }
 
+        // Changes the site's AI key, so administrators only - as saveApiKey() is.
+        if (!current_user_can('manage_options')) {
+            wp_send_json_error(array('message' => __('Security Error: Unauthorized access. Administrators only.', 'js-support-ticket')));
+        }
+
         $api_key = sanitize_text_field(JSSTrequest::getVar('api_key'));
         $default_model = sanitize_text_field(JSSTrequest::getVar('default_model'));
         $default_lang = sanitize_text_field(JSSTrequest::getVar('default_lang', 'English'));
 
-        update_option('jsst_zywrap_api_key', $api_key);
+        // Empty means "keep the stored key", never "delete it" (saveKey() rule).
+        JSSTaiengine::saveKey('zywrap', $api_key);
         update_option('jsst_zywrap_default_model', $default_model);
         update_option('jsst_zywrap_default_lang', $default_lang);
 
@@ -1021,6 +1056,27 @@ class JSSTzywrapModel {
         if (!empty($language)) $payloadData['language'] = $language;
         if (!empty($overrides)) $payloadData = array_merge($payloadData, $overrides);
 
+        /* The Prompt Lab is an administrator experimenting, not a customer's
+           ticket being answered - but it still posts text to somebody else's
+           server, so it answers to the same switch as everything else. */
+        if (class_exists('JSSTaipolicy') && !JSSTaipolicy::allows(JSSTaipolicy::LANE_HOSTED)) {
+            wp_send_json_error(array('message' => JSSTaipolicy::explain(JSSTaipolicy::LANE_HOSTED)['detail']));
+        }
+
+        /* Same meter, same reason as the reply modal above: the Prompt Lab
+           posts to the vendor itself, so the budget has to be asked here or it
+           is not asked at all. (Roadmap 6.0-AI-07) */
+        if (class_exists('JSSTaiusage')) {
+            $jsst_meter = array(
+                'engine' => 'zywrap', 'model' => $model, 'lane' => 'hosted',
+                'funded' => JSSTaiusage::FUNDED_PLAN, 'feature' => 'playground', 'ticket' => 0,
+            );
+            $jsst_allowed = JSSTaiusage::guard($jsst_meter);
+            if ($jsst_allowed['state'] !== 'ok') {
+                wp_send_json_error(array('message' => $jsst_allowed['detail']));
+            }
+        }
+
         $startTime = microtime(true);
         $response = wp_remote_post('https://api.zywrap.com/v1/proxy', [
             'timeout' => 600,
@@ -1036,6 +1092,10 @@ class JSSTzywrapModel {
 
         // --- IMPROVED ERROR CATCHING & PARSING ---
         if (is_wp_error($response)) {
+            if (class_exists('JSSTaiusage')) {
+                $jsst_meter['ms'] = (int) $latencyMs;
+                JSSTaiusage::record($jsst_meter, array('ok' => false, 'error' => $response->get_error_message()));
+            }
             wp_send_json_error(['message' => __('Server Connection Error: ', 'js-support-ticket') . $response->get_error_message()]);
         }
 
@@ -1075,6 +1135,19 @@ class JSSTzywrapModel {
                 // Also adjusted concatenation to avoid potential translation placeholder issues later
                 $errorMessage = __('API Error (HTTP ', 'js-support-ticket') . $httpCode . '): ' . substr(wp_strip_all_tags($rawResponse), 0, 200);
             }
+        }
+
+        /* On the product's own meter as well as Zywrap's, and both outcomes.
+           (Roadmap 6.0-AI-07) */
+        if (class_exists('JSSTaiusage')) {
+            $jsst_meter['ms']    = (int) $latencyMs;
+            $jsst_meter['model'] = isset($responseData['model']) ? (string) $responseData['model'] : $model;
+            JSSTaiusage::record($jsst_meter, array(
+                'ok'        => ($status === 'success'),
+                'intokens'  => isset($responseData['usage']['prompt_tokens']) ? (int) $responseData['usage']['prompt_tokens'] : 0,
+                'outtokens' => isset($responseData['usage']['completion_tokens']) ? (int) $responseData['usage']['completion_tokens'] : 0,
+                'error'     => (string) $errorMessage,
+            ));
         }
 
         // --- LOG USAGE ---
@@ -1157,7 +1230,48 @@ class JSSTzywrapModel {
      * @param array  $payload The payload containing 'wrapper_code' and 'prompt'.
      * @return string|false The AI output string on success, false on failure.
     */
+    /**
+     * Read a Zywrap proxy response, whichever shape it arrives in.
+     *
+     * The proxy answers with one JSON object ({"output": ...} or
+     * {"error": ...}); older SDK builds streamed it as server-sent "data: "
+     * lines. Both are accepted, plain JSON first. Reading only the streamed
+     * form made every call look empty and every AI feature fail silently.
+     *
+     * @return array|null the decoded object, or null when neither shape fits
+     */
+    /** Why the last callZywrapEngine() returned false, for the caller to show. */
+    public $jsst_lasterror = '';
+
+    private function parseEngineResponse($jsst_raw) {
+        $jsst_direct = json_decode((string) $jsst_raw, true);
+        if (is_array($jsst_direct) && (isset($jsst_direct['output']) || isset($jsst_direct['error']))) {
+            return $jsst_direct;
+        }
+        $jsst_found = null;
+        foreach (explode("\n", (string) $jsst_raw) as $jsst_line) {
+            $jsst_line = trim($jsst_line);
+            if (strpos($jsst_line, 'data: ') === 0) {
+                $jsst_data = json_decode(substr($jsst_line, 6), true);
+                if (is_array($jsst_data) && (isset($jsst_data['output']) || isset($jsst_data['error']))) {
+                    $jsst_found = $jsst_data;
+                }
+            }
+        }
+        return $jsst_found;
+    }
+
     public function callZywrapEngine($api_key, $payload) {
+        /* Asked again here even though JSSTaiengine::ask() has already asked.
+           This method is public and older than the policy, so it has callers
+           that never went through the engine registry; a chokepoint that only
+           holds for the callers you remembered is not a chokepoint. */
+        $this->jsst_lasterror = '';
+        if (class_exists('JSSTaipolicy') && !JSSTaipolicy::allows(JSSTaipolicy::LANE_HOSTED)) {
+            $this->jsst_lasterror = __('The hosted lane is switched off in AI Agent settings.', 'js-support-ticket');
+            return false;
+        }
+
         $api_url = 'https://api.zywrap.com/v1/proxy';
         $start_time = microtime(true); // Start timing for latency tracking
 
@@ -1187,25 +1301,12 @@ class JSSTzywrapModel {
             
             // Use JS Help Desk's native system error logging
             JSSTincluder::getJSModel('systemerror')->addSystemError($error_msg);
+            $this->jsst_lasterror = $error_msg;
             return false;
         }
 
         $raw_response = wp_remote_retrieve_body($response);
-
-        // Stream Parser (matching the expected Zywrap response format)
-        $lines = explode("\n", $raw_response);
-        $finalJson = null;
-        foreach ($lines as $line) {
-            $line = trim($line);
-            if (strpos($line, 'data: ') === 0) {
-                $data = json_decode(substr($line, 6), true);
-                if ($data && (isset($data['output']) || isset($data['error']))) {
-                    $finalJson = substr($line, 6);
-                }
-            }
-        }
-
-        $body_json = $finalJson ? json_decode($finalJson, true) : null;
+        $body_json = $this->parseEngineResponse($raw_response);
 
         // Handle API Structural Errors (e.g., Insufficient credits, invalid wrapper code)
         if ($body_json && isset($body_json['error'])) {
@@ -1214,6 +1315,7 @@ class JSSTzywrapModel {
             
             // Push the clean string trace message to your system error logs layout view
             JSSTincluder::getJSModel('systemerror')->addSystemError($error_msg);
+            $this->jsst_lasterror = $error_msg;
             return false;
         }
 
@@ -1222,6 +1324,15 @@ class JSSTzywrapModel {
             return $body_json['output'];
         }
 
+        /* Neither an answer nor an error: say what did come back rather than
+           returning empty with nothing written down. */
+        $this->jsst_lasterror = sprintf(
+            /* translators: 1: HTTP status code, 2: start of the response body */
+            __('Zywrap returned an unexpected response (HTTP %1$s): %2$s', 'js-support-ticket'),
+            wp_remote_retrieve_response_code($response),
+            substr(wp_strip_all_tags((string) $raw_response), 0, 200)
+        );
+        JSSTincluder::getJSModel('systemerror')->addSystemError($this->jsst_lasterror);
         return false;
     }
 }

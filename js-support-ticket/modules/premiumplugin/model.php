@@ -3,174 +3,99 @@
 if (!defined('ABSPATH'))
     die('Restricted Access');
 
+/**
+ * What installed add-ons ask of core, in 5.0.0.
+ *
+ * Every add-on - the nine 5.0.0 bundles and any 4.0.0-era add-on still on a
+ * site - calls into this class by name: to say it is activating, being
+ * switched off, being deleted, or updating its tables. Up to 4.0.0 each of
+ * those went to jshelpdesk.com/setup/ with the add-on's own key.
+ *
+ * 5.0.0 does not talk to /setup/ at all. The licence is one key on the new
+ * licence server (JSSTlicense); installing and updating go through it. So the
+ * methods here keep their names, because add-ons in the field depend on them,
+ * and do their work locally or not at all. Removed outright: the calls to
+ * /setup/ themselves, and the housekeeping for the old per-add-on keys.
+ * (Roadmap 6.5-ECO-02)
+ */
 class JSSTpremiumpluginModel {
 
-    private static $jsst_server_url = 'https://jshelpdesk.com/setup/index.php';
-
+    /** Activation check. No key is asked for in 5.0.0 - see updateDate(). */
     function verfifyAddonActivation($jsst_addon_name){
-        $jsst_option_name = 'transaction_key_for_js-support-ticket-'.$jsst_addon_name;
-        $jsst_transaction_key = JSSTincluder::getJSModel('jssupportticket')->getAddonTransationKey($jsst_option_name);
-        try {
-            if (! $jsst_transaction_key ) {
-                throw new Exception( 'License key not found' );
-            }
-            if ( empty( $jsst_transaction_key ) ) {
-                throw new Exception( 'License key not found' );
-            }
-            $jsst_activate_results = $this->activate( array(
-                'token'    => $jsst_transaction_key,
-                'plugin_slug'    => $jsst_addon_name
-            ) );
-            if ( false === $jsst_activate_results ) {
-                throw new Exception( 'Connection failed to the server' );
-            } elseif ( isset( $jsst_activate_results['error_code'] ) ) {
-                throw new Exception( $jsst_activate_results['error'] );
-            } elseif(isset($jsst_activate_results['verfication_status']) && $jsst_activate_results['verfication_status'] == 1 ){
-                return true;
-            }
-            throw new Exception( 'License could not activate. Please contact support.' );
-        } catch ( Exception $jsst_e ) {
-            echo '<div class="notice notice-error is-dismissible">
-                    <p>'.wp_kses_post($jsst_e->getMessage()).'.</p>
-                </div>';
-            return false;
-        }
+        return true;
     }
 
+    /** Was a report to /setup/. Nothing is reported to anyone now. */
     function logAddonDeactivation($jsst_addon_name){
-        $jsst_option_name = 'transaction_key_for_js-support-ticket-'.$jsst_addon_name;
-        $jsst_transaction_key = JSSTincluder::getJSModel('jssupportticket')->getAddonTransationKey($jsst_option_name);
-
-        $jsst_activate_results = $this->deactivate( array(
-            'token'    => $jsst_transaction_key,
-            'plugin_slug'    => $jsst_addon_name
-        ) );
     }
 
+    /** Was a report to /setup/. Nothing is reported to anyone now. */
     function logAddonDeletion($jsst_addon_name){
-        $jsst_option_name = 'transaction_key_for_js-support-ticket-'.$jsst_addon_name;
-        $jsst_transaction_key = JSSTincluder::getJSModel('jssupportticket')->getAddonTransationKey($jsst_option_name);
-        $jsst_activate_results = $this->delete( array(
-            'token'    => $jsst_transaction_key,
-            'plugin_slug'    => $jsst_addon_name
-        ) );
-    }
-
-    public static function activate( $jsst_args ) {
-        $jsst_site_url = JSSTincluder::getJSModel('jssupportticket')->getSiteUrl();
-        $jsst_defaults = array(
-            'request'  => 'activate',
-            'domain' => $jsst_site_url,
-            'activation_call' => 1
-        );
-
-        $jsst_args    = wp_parse_args( $jsst_defaults, $jsst_args );
-        $jsst_request = wp_remote_get( self::$jsst_server_url . '?' . http_build_query( $jsst_args, '', '&' ) );
-
-        if ( is_wp_error( $jsst_request ) ) {
-            return wp_json_encode( array( 'error_code' => $jsst_request->get_error_code(), 'error' => $jsst_request->get_error_message() ) );
-        }
-
-        if ( wp_remote_retrieve_response_code( $jsst_request ) != 200 ) {
-            return wp_json_encode( array( 'error_code' => wp_remote_retrieve_response_code( $jsst_request ), 'error' => 'Error code: ' . wp_remote_retrieve_response_code( $jsst_request ) ) );
-        }
-        $jsst_response =  wp_remote_retrieve_body( $jsst_request );
-        $jsst_response = json_decode($jsst_response,true);
-        return $jsst_response;
     }
 
     /**
-     * Attempt t deactivate a license
+     * The table SQL a 4.0.0-era add-on asks for on its first activation.
+     *
+     * Those add-ons shipped without their SQL and fetched it from /setup/ with
+     * their key. An add-on that was already set up on the site never asks, so
+     * a site updating from 4.0.0 is unaffected. The one that does ask is an old
+     * add-on being installed fresh onto 5.0.0 - and it gets a reason it can
+     * print, in the shape it already reads, rather than activating without its
+     * tables. Its features live in a 5.0.0 bundle now.
      */
-    public static function deactivate( $jsst_dargs ) {
-        $jsst_site_url = JSSTincluder::getJSModel('jssupportticket')->getSiteUrl();
-        $jsst_defaults = array(
-            'request'  => 'deactivate',
-            'domain' => $jsst_site_url
-        );
-
-        $jsst_args    = wp_parse_args( $jsst_defaults, $jsst_dargs );
-        $jsst_request = wp_remote_get( self::$jsst_server_url . '?' . http_build_query( $jsst_args, '', '&' ) );
-        if ( is_wp_error( $jsst_request ) || wp_remote_retrieve_response_code( $jsst_request ) != 200 ) {
-            return false;
-        } else {
-            return wp_remote_retrieve_body( $jsst_request );
-        }
+    function verifyAddonSqlFile($jsst_addon_name,$jsst_addon_version){
+        return wp_json_encode(array(
+            'error_code' => 'jsst_legacy_addon',
+            'error'      => __('This add-on is from JS Help Desk 4.0.0 or earlier and cannot be set up on 5.0.0. Its features are in one of the 5.0.0 bundles: install that from Install Add-ons instead.', 'js-support-ticket'),
+        ));
     }
-    /**
-     * Attempt t deactivate a license
-     */
-    public static function delete( $jsst_args ) {
-        $jsst_site_url = JSSTincluder::getJSModel('jssupportticket')->getSiteUrl();
-        $jsst_defaults = array(
-            'request'  => 'delete',
-            'domain' => $jsst_site_url,
-        );
 
-        $jsst_args    = wp_parse_args( $jsst_defaults, $jsst_args );
-        $jsst_request = wp_remote_get( self::$jsst_server_url . '?' . http_build_query( $jsst_args, '', '&' ) );
-        if ( is_wp_error( $jsst_request ) || wp_remote_retrieve_response_code( $jsst_request ) != 200 ) {
-            return false;
-        } else {
+
+    /**
+     * Run one statement from a legacy add-on's upgrade file. (Roadmap 6.5-ECO-01)
+     *
+     * These files are not idempotent: they `ALTER TABLE ... ADD COLUMN`, they
+     * `ADD FULLTEXT`, and they `INSERT` permission rows with explicit primary
+     * keys. Run a second time - which is exactly what happens on a desk that
+     * has both the old stand-alone add-ons and the new bundles installed, each
+     * running its own update check - every one of them fails with "Duplicate
+     * column name", "Duplicate key name" or "Duplicate entry".
+     *
+     * None of that is a problem: the column, the index and the row are already
+     * there, which is what the statement was trying to achieve. But wpdb writes
+     * every one into the log, and a customer mid-migration opens their error
+     * log to hundreds of lines that look like a broken install and are not.
+     *
+     * So the "it is already done" answers are swallowed and everything else is
+     * still reported. Swallowing the lot would be easier and would hide a real
+     * migration failure on the one day somebody needed to see it.
+     */
+    private function runUpgradeStatement($jsst_query) {
+        $jsst_db = jssupportticket::$_db;
+        $jsst_was = $jsst_db->suppress_errors(true);
+        $jsst_db->query($jsst_query);
+        $jsst_error = $jsst_db->last_error;
+        $jsst_db->suppress_errors($jsst_was);
+        if ($jsst_error === '') {
             return;
         }
-    }
-
-    function verifyAddonSqlFile($jsst_addon_name,$jsst_addon_version){
-        $jsst_option_name = 'transaction_key_for_js-support-ticket-'.$jsst_addon_name;
-        $jsst_transaction_key = JSSTincluder::getJSModel('jssupportticket')->getAddonTransationKey($jsst_option_name);
-        $jsst_network_site_url = JSSTincluder::getJSModel('jssupportticket')->getNetworkSiteUrl();
-        $jsst_site_url = JSSTincluder::getJSModel('jssupportticket')->getSiteUrl();
-        // $jsst_addonversion = jssupportticketphplib::JSST_str_replace('.', '', $jsst_addon_version);
-        $jsst_defaults = array(
-            'request'  => 'getactivatesql',
-            'domain' => $jsst_network_site_url,
-            'subsite' => $jsst_site_url,
-            'activation_call' => 1,
-            'plugin_slug' => $jsst_addon_name,
-            'addonversion' => $jsst_addon_version,
-            'token' => $jsst_transaction_key
+        $jsst_expected = array(
+            'Duplicate column name',
+            'Duplicate key name',
+            'Duplicate entry',
+            'already exists',
+            'Multiple primary key defined',
+            "Can't DROP",
         );
-        $jsst_request = wp_remote_get( self::$jsst_server_url . '?' . http_build_query( $jsst_defaults, '', '&' ) );
-        if ( is_wp_error( $jsst_request ) ) {
-            return wp_json_encode( array( 'error_code' => $jsst_request->get_error_code(), 'error' => $jsst_request->get_error_message() ) );
+        foreach ($jsst_expected as $jsst_known) {
+            if (stripos($jsst_error, $jsst_known) !== false) {
+                return;
+            }
         }
-
-        if ( wp_remote_retrieve_response_code( $jsst_request ) != 200 ) {
-            return wp_json_encode( array( 'error_code' => wp_remote_retrieve_response_code( $jsst_request ), 'error' => 'Error code: ' . wp_remote_retrieve_response_code( $jsst_request ) ) );
+        /* Not one of the expected ones, so it is worth somebody's attention. */
+        if (defined('WP_DEBUG') && WP_DEBUG) {
+            error_log('JS Help Desk: add-on upgrade statement failed - ' . $jsst_error);
         }
-
-        $jsst_response =  wp_remote_retrieve_body( $jsst_request );
-        return $jsst_response;
-    }
-
-    function getAddonSqlForUpdation($jsst_plugin_slug,$jsst_installed_version,$jsst_new_version){
-        $jsst_option_name = 'transaction_key_for_js-support-ticket-'.$jsst_plugin_slug;
-        $jsst_transaction_key = JSSTincluder::getJSModel('jssupportticket')->getAddonTransationKey($jsst_option_name);
-        $jsst_network_site_url = JSSTincluder::getJSModel('jssupportticket')->getNetworkSiteUrl();
-        $jsst_site_url = JSSTincluder::getJSModel('jssupportticket')->getSiteUrl();
-        $jsst_defaults = array(
-            'request'  => 'getupdatesql',
-            'domain' => $jsst_network_site_url,
-            'subsite' => $jsst_site_url,
-            'activation_call' => 1,
-            'plugin_slug' => $jsst_plugin_slug,
-            'installedversion' => $jsst_installed_version,
-            'newversion' => $jsst_new_version,
-            'token' => $jsst_transaction_key
-        );
-
-        $jsst_request = wp_remote_get( self::$jsst_server_url . '?' . http_build_query( $jsst_defaults, '', '&' ) );
-        if ( is_wp_error( $jsst_request ) ) {
-            return wp_json_encode( array( 'error_code' => $jsst_request->get_error_code(), 'error' => $jsst_request->get_error_message() ) );
-        }
-
-        if ( wp_remote_retrieve_response_code( $jsst_request ) != 200 ) {
-            return wp_json_encode( array( 'error_code' => wp_remote_retrieve_response_code( $jsst_request ), 'error' => 'Error code: ' . wp_remote_retrieve_response_code( $jsst_request ) ) );
-        }
-
-        $jsst_response =  wp_remote_retrieve_body( $jsst_request );
-        return $jsst_response;
     }
 
     function getAddonUpdateSqlFromUpdateDir($jsst_installedversion, $jsst_newversion, $jsst_directory) {
@@ -207,7 +132,7 @@ class JSSTpremiumpluginModel {
                             $jsst_query = jssupportticketphplib::JSST_str_replace("#__", jssupportticket::$_db->prefix, $jsst_query);
 
                             if (!empty($jsst_query)) {
-                                jssupportticket::$_db->query($jsst_query);
+                                $this->runUpgradeStatement($jsst_query);
                             }
                         }
                     }
@@ -216,95 +141,14 @@ class JSSTpremiumpluginModel {
         }
     }
 
+    /**
+     * Update SQL fetched from /setup/, for an add-on that did not ship its own.
+     *
+     * 5.0.0 bundles ship theirs in their sql/ folder, which
+     * getAddonUpdateSqlFromUpdateDir() reads; this is only reached when there
+     * is no such folder, which for a 5.0.0 release means no schema change.
+     */
     function getAddonUpdateSqlFromLive($jsst_installedversion,$jsst_newversion,$jsst_plugin_slug){
-        if($jsst_installedversion != "" && $jsst_newversion != "" && $jsst_plugin_slug != ""){
-            $jsst_addonsql = $this->getAddonSqlForUpdation($jsst_plugin_slug,$jsst_installedversion,$jsst_newversion);
-            $jsst_decodedata = json_decode($jsst_addonsql,true);
-            $jsst_delimiter = ';';
-            if(isset($jsst_decodedata['verfication_status']) && $jsst_decodedata['update_sql'] != ""){
-                $jsst_lines = jssupportticketphplib::JSST_explode(PHP_EOL, $jsst_addonsql);
-                if(!empty($jsst_lines)){
-                    foreach($jsst_lines as $jsst_line){
-                        $jsst_query[] = $jsst_line;
-                        if (preg_match('~' . preg_quote($jsst_delimiter, '~') . '\s*$~iS', end($jsst_query)) === 1) {
-                            $jsst_query = jssupportticketphplib::JSST_trim(implode('', $jsst_query));
-                            $jsst_query = jssupportticketphplib::JSST_str_replace("#__", jssupportticket::$_db->prefix, $jsst_query);
-                            if (!empty($jsst_query)) {
-                                jssupportticket::$_db->query($jsst_query);
-                            }
-                        }
-                        if (is_string($jsst_query) === true) {
-                            $jsst_query = array();
-                        }
-                    }
-                }
-            }
-        }
-    }
-
-    function jssupportticket_count_unused_keys() {
-        // Get all transaction keys
-        $jsst_query = "
-            SELECT option_name, option_value 
-            FROM `" . jssupportticket::$_db->prefix . "options`
-            WHERE option_name LIKE 'transaction_key_for_js-support-ticket%'
-        ";
-        $jsst_results = jssupportticket::$_db->get_results($jsst_query);
-
-        if (empty($jsst_results)) {
-            return 0;
-        }
-
-        $jsst_unused = [];
-
-        foreach ($jsst_results as $jsst_row) {
-            $jsst_addon_slug = str_replace('transaction_key_for_', '', $jsst_row->option_name);
-
-            // 🔹 Replace this with your own addon check
-            $jsst_is_installed = apply_filters(
-                'jssupportticket_is_addon_installed',
-                file_exists(WP_PLUGIN_DIR . '/' . $jsst_addon_slug)
-            );
-
-            if (!$jsst_is_installed && !empty($jsst_row->option_value)) {
-                $jsst_unused[] = $jsst_row->option_value;
-            }
-        }
-
-        return count(array_unique($jsst_unused));
-    }
-
-    function jssupportticket_remove_unused_keys() {
-        $jsst_query = "
-            SELECT option_name, option_value 
-            FROM `" . jssupportticket::$_db->prefix . "options`
-            WHERE option_name LIKE 'transaction_key_for_js-support-ticket%'
-        ";
-        $jsst_results = jssupportticket::$_db->get_results($jsst_query);
-
-        if (empty($jsst_results)) {
-            return 0;
-        }
-
-        $jsst_deleted_keys = array();
-
-        foreach ($jsst_results as $jsst_row) {
-            $jsst_addon_slug = str_replace('transaction_key_for_', '', $jsst_row->option_name);
-
-            // Replace with your own addon check
-            $jsst_is_installed = apply_filters(
-                'jssupportticket_is_addon_installed',
-                file_exists(WP_PLUGIN_DIR . '/' . $jsst_addon_slug)
-            );
-
-            if (!$jsst_is_installed) {
-                if (delete_option($jsst_row->option_name)) {
-                    $jsst_deleted_keys[$jsst_row->option_value] = true; // track by key, not slug
-                }
-            }
-        }
-
-        return count($jsst_deleted_keys); // unique keys removed
     }
 }
 

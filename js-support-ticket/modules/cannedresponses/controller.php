@@ -72,7 +72,7 @@ class JSSTcannedresponsesController {
         $jsst_id = JSSTrequest::getVar('id');
         $jsst_nonce = JSSTrequest::getVar('_wpnonce');
         if (! wp_verify_nonce( $jsst_nonce, 'save-premade-message-'.$jsst_id) ) {
-            die( 'Security check Failed' );
+            die( esc_html__( 'Security check Failed', 'js-support-ticket' ) );
         }
         $jsst_data = JSSTrequest::get('post');
         JSSTincluder::getJSModel('cannedresponses')->storePreMadeMessage($jsst_data);
@@ -89,7 +89,7 @@ class JSSTcannedresponsesController {
         $jsst_id = JSSTrequest::getVar('premademessageid');
         $jsst_nonce = JSSTrequest::getVar('_wpnonce');
         if (! wp_verify_nonce( $jsst_nonce, 'delete-premademessage-'.$jsst_id) ) {
-            die( 'Security check Failed' );
+            die( esc_html__( 'Security check Failed', 'js-support-ticket' ) );
         }
         JSSTincluder::getJSModel('cannedresponses')->removePreMadeMessage($jsst_id);
         if (is_admin()) {
@@ -105,7 +105,7 @@ class JSSTcannedresponsesController {
         $jsst_id = JSSTrequest::getVar('premadeid');
         $jsst_nonce = JSSTrequest::getVar('_wpnonce');
         if (! wp_verify_nonce( $jsst_nonce, 'change-status-'.$jsst_id) ) {
-            die( 'Security check Failed' );
+            die( esc_html__( 'Security check Failed', 'js-support-ticket' ) );
         }
         JSSTincluder::getJSModel('cannedresponses')->changeStatus($jsst_id);
         $jsst_url = admin_url("admin.php?page=cannedresponses&jstlay=premademessages");

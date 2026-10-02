@@ -143,6 +143,18 @@ div#multiformpopup div.js-ticket-table-body div.js-ticket-multiform-row {border:
 div#multiformpopup div.js-ticket-table-body div.js-ticket-multiform-row:hover {border: 1px solid {$jsst_color1};background: {$jsst_color7};}
 div#multiformpopup div.js-ticket-table-body div.js-ticket-multiform-row div.js-ticket-table-body-col{border-top: 1px solid {$jsst_color5};}
 div#multiformpopup div.js-ticket-table-body div.js-ticket-multiform-row div.js-ticket-table-body-col {color: {$jsst_color1};}
+/* The form picker's header and close button (JSSTlayout::adminFormPicker).
+   The front end shares that markup with wp-admin, but its styles lived only in
+   the admin sheet, so here the title and a bare browser button sat jammed in
+   the corner. Scoped to .jsst-formpick so no other popup changes. */
+div#multiformpopup.jsst-formpick {width: min(560px, 92vw);padding: 0;overflow-x: hidden;overflow-y: auto;}
+div#multiformpopup.jsst-formpick .jsst-popup-header {display: flex;align-items: center;justify-content: space-between;gap: 12px;margin: 0;padding: 16px 20px;background: {$jsst_color1};position: sticky;top: 0;z-index: 2;}
+div#multiformpopup.jsst-formpick .jsst-popup-header .popup-header-text {margin: 0;color: #fff;font-size: 18px;font-weight: 600;line-height: 1.3;}
+div#multiformpopup.jsst-formpick .jsst-popup-header button.jsst-popup-close {flex: 0 0 auto;width: 32px;height: 32px;min-height: 0;margin: 0;padding: 0;border: 0;border-radius: 50%;background: rgba(255,255,255,.18) url('data:image/svg+xml,%3csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22 fill=%22none%22 stroke=%22%23ffffff%22 stroke-width=%222.5%22 stroke-linecap=%22round%22%3e%3cline x1=%2218%22 y1=%226%22 x2=%226%22 y2=%2218%22/%3e%3cline x1=%226%22 y1=%226%22 x2=%2218%22 y2=%2218%22/%3e%3c/svg%3e') no-repeat center / 16px 16px;box-shadow: none;color: transparent;font-size: 0;line-height: 0;text-transform: none;cursor: pointer;transition: background-color .15s ease;}
+div#multiformpopup.jsst-formpick .jsst-popup-header button.jsst-popup-close:hover {background-color: rgba(255,255,255,.32);}
+div#multiformpopup.jsst-formpick .jsst-popup-header button.jsst-popup-close:focus-visible {outline: 2px solid #fff;outline-offset: 2px;}
+div#multiformpopup.jsst-formpick .jsst-formpick-body {padding: 16px 20px 20px;}
+div#multiformpopup.jsst-formpick div.js-ticket-table-body div.js-ticket-multiform-row {border-radius: 10px;cursor: pointer;}
 #wp-jsticket_message-wrap button, div.js-ticket-fields-wrp div.js-ticket-form-field select.js-ticket-field-input{border: 1px solid {$jsst_color5};}
 div#multiformpopup div.js-ticket-table-body div.js-ticket-multiform-row.selected div.js-ticket-table-body-col {color: {$jsst_color2};}
 div#multiformpopup .multiformpopup-search form .multiformpopup-fields-wrp .multiformpopup-btn-wrp .multiformpopup-reset-btn{border-color: {$jsst_color5};}
@@ -265,6 +277,7 @@ div.jsst-main-up-wrapper.jsst-widget-main-up-wrapper .js-ticket-body-row-text a{
 div.jsst-main-up-wrapper.jsst-widget-main-up-wrapper .js-ticket-body-row-text a:hover{color:{$jsst_color1};}
 div.jsst-main-up-wrapper.jsst-widget-main-up-wrapper .js-widget-download-right input{background-color:{$jsst_color1};color:{$jsst_color7};border-color:{$jsst_color1};}
 div.jsst-main-up-wrapper.jsst-widget-main-up-wrapper .js-widget-download-right input:hover{background-color:{$jsst_color2};color:{$jsst_color7};border-color:{$jsst_color2};}
+.jsst-rolepreset-buttons .js-ticket-button:hover {color: $jsst_color7;}
 
 
 

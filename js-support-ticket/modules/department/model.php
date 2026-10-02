@@ -74,7 +74,7 @@ class JSSTdepartmentModel {
         $jsst_id = JSSTrequest::getVar('id');
         $jsst_nonce = JSSTrequest::getVar('_wpnonce');
         if (! wp_verify_nonce( $jsst_nonce, 'save-department-'.$jsst_id) ) {
-            die( 'Security check Failed' );
+            die( esc_html__( 'Security check Failed', 'js-support-ticket' ) );
         }
         if ( in_array('agent',jssupportticket::$_active_addons) && JSSTincluder::getJSModel('agent')->isUserStaff()) {
             $jsst_task_allow = ($jsst_data['id'] == '') ? 'Add Department' : 'Edit Department';
@@ -309,7 +309,7 @@ class JSSTdepartmentModel {
     function getHelpTopicByDepartment() {
         $jsst_nonce = JSSTrequest::getVar('_wpnonce');
         if (! wp_verify_nonce( $jsst_nonce, 'get-help-topic-by-department') ) {
-            die( 'Security check Failed' );
+            die( esc_html__( 'Security check Failed', 'js-support-ticket' ) );
         }
         if(!JSSTmergedaddon::featureEnabled('helptopic')){
             return;
@@ -368,7 +368,7 @@ class JSSTdepartmentModel {
     function getPremadeByDepartment() {
         $jsst_nonce = JSSTrequest::getVar('_wpnonce');
         if (! wp_verify_nonce( $jsst_nonce, 'get-premade-by-department') ) {
-            die( 'Security check Failed' );
+            die( esc_html__( 'Security check Failed', 'js-support-ticket' ) );
         }
         if(!JSSTmergedaddon::featureEnabled('cannedresponses')){
             return false;
@@ -434,7 +434,7 @@ class JSSTdepartmentModel {
     function getAdminDepartmentSearchFormData(){
         $jsst_nonce = JSSTrequest::getVar('_wpnonce');
         if (! wp_verify_nonce( $jsst_nonce, 'departments') ) {
-            die( 'Security check Failed' );
+            die( esc_html__( 'Security check Failed', 'js-support-ticket' ) );
         }
         $jsst_search_array = array();
         $jsst_isadmin = is_admin();

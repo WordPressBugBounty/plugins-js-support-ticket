@@ -9,21 +9,12 @@ JSSTmessage::getMessage();
         <?php JSSTincluder::getClassesInclude('jsstadminsidemenu'); ?>
     </div>
     <div id="jsstadmin-data">
-        <div id="jsstadmin-wrapper-top">
-            <div id="jsstadmin-wrapper-top-left">
-                <div id="jsstadmin-breadcrunbs">
-                    <ul>
-                        <li><a href="<?php echo esc_url(admin_url('admin.php?page=jssupportticket')); ?>"><?php echo esc_html(__('Dashboard','js-support-ticket')); ?></a></li>
-                        <li><?php echo esc_html(__('Zywrap Advanced Playground','js-support-ticket')); ?></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-        <div id="jsstadmin-head">
-            <h1 class="jsstadmin-head-text"><?php echo esc_html(__('Zywrap Advanced Playground', 'js-support-ticket')); ?></h1>
-        </div>
+        <?php JSSTlayout::adminPageHeader(array(
+            'title' => __('Zywrap Advanced Prompt Lab', 'js-support-ticket'),
+        )); ?>
         
         <div id="jsstadmin-data-wrp" class="p0 bg-n bs-n js-ticket-zywrap-padding-20">
+            <?php if (class_exists('JSSTainav')) { JSSTainav::render('zywrap_playground'); } ?>
             <div class="js-ticket-zywrap-playground-grid">
                 
                 <div class="js-ticket-zywrap-column">
@@ -140,7 +131,7 @@ $jsst_jssupportticket_js = "
                 for (const [type, elId] of Object.entries(overrideMap)) {
                     if (templates[type]) populateSelect(\$('#' + elId), templates[type], '" . esc_js(__("Default", "js-support-ticket")) . "');
                 }
-            } catch (e) { console.error('Playground Init Failed', e); }
+            } catch (e) { console.error('Prompt Lab Init Failed', e); }
         }
 
         // Event Listeners

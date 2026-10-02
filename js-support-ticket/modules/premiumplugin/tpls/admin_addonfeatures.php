@@ -49,263 +49,79 @@
                         <h1 class="add-on-header-tit"><?php echo esc_html(__('Add-On’s For Help Desk','js-support-ticket')); ?></h1>
                         <div class="add-on-header-text"><?php echo esc_html(__('Get trusted WordPress add on’s. Guaranteed to work fast, safe to use, beautifully coded, packed with features and easy to use.','js-support-ticket')); ?></div>
                     </div>
+                    <?php /* This used to advertise the bundle pack, which no
+                             longer exists — the bundles are retired and every
+                             paid plan contains every module. A call to action
+                             pointing at something we have withdrawn is worse
+                             than none at all, so it now says the thing that is
+                             actually true. (Roadmap 4.5-PRO-03) */ ?>
                     <div class="add-on-msg">
-                        <h3 class="add-on-msg-txt"><?php echo esc_html(__('Save big with an exclusive membership plan today!','js-support-ticket')); ?></h3>
-                        <a title="<?php echo esc_attr(__('Show','js-support-ticket')); ?>" href="https://jshelpdesk.com/pricing/" class="add-on-msg-btn"><i class="fa fa-cart"></i> <?php echo esc_html(__('show bundle pack','js-support-ticket')); ?></a>
+                        <h3 class="add-on-msg-txt"><?php echo esc_html(__('Every one of these is included in every paid plan.','js-support-ticket')); ?></h3>
+                        <a title="<?php echo esc_attr(__('See the plans','js-support-ticket')); ?>" href="https://jshelpdesk.com/pricing/" class="add-on-msg-btn"><i class="fa fa-cart"></i> <?php echo esc_html(__('see the plans','js-support-ticket')); ?></a>
                     </div>
+                    <?php /* Nine tiles, from the one manifest. (Roadmap 6.5-ECO-01)
+                             This was twenty-five hand-written tiles, each with its
+                             own name, sentence and shop link, and every one of them
+                             a product that no longer exists on its own - so the
+                             screen whose whole job is to say what you can buy was
+                             selling the wrong thing in the wrong words.
+
+                             The names and the sentences are the manifest's, which
+                             the dashboard, the add-on status page and the Plugins
+                             screen also read, so a description edited once is
+                             edited everywhere.
+
+                             A bundle this desk already has says so instead of
+                             offering to sell it. */ ?>
                     <div class="add-on-list">
-                        <div class="add-on-item agent">
-                            <img class="add-on-img" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/add-on-list/agent.png" alt = "<?php echo esc_attr(__('Agent','js-support-ticket')); ?>" />
-                            <div class="add-on-name"><?php echo esc_html(__('Agents','js-support-ticket')); ?></div>
+                        <?php foreach (JSSTbundle::catalogue() as $jsst_file => $jsst_bundle) { ?>
+                            <div class="add-on-item <?php echo esc_attr($jsst_bundle['slug']); ?>">
+                                <img class="add-on-img" src="<?php echo esc_url(JSST_PLUGIN_URL . 'includes/images/add-on-list/' . $jsst_bundle['image']); ?>" alt="" />
+                                <div class="add-on-name"><?php echo esc_html($jsst_bundle['title']); ?></div>
 
-                            <div class="add-on-txt"><?php echo esc_html(__('Add agents and assign roles and permissions to provide assistance and support to customer support tickets.','js-support-ticket')); ?></div>
-                            <a title="<?php echo esc_attr(__('buy now','js-support-ticket')); ?>" href="https://jshelpdesk.com/product/agents/" class="add-on-btn"><?php echo esc_html(__('buy now','js-support-ticket')); ?></a>
-                        </div>
-                        <div class="add-on-item close-tkt">
-                            <img class="add-on-img" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/add-on-list/ticket-auto-close.png" alt = "<?php echo esc_attr(__('Ticket Auto Close','js-support-ticket')); ?>" />
-                            <div class="add-on-name"><?php echo esc_html(__('Ticket Auto Close','js-support-ticket')); ?></div>
-
-                            <div class="add-on-txt"><?php echo esc_html(__('Define rules for ticket to auto close. Ticket will be auto close after specific interval of time which can be set by admin.','js-support-ticket')); ?></div>
-                            <a title="<?php echo esc_attr(__('buy now','js-support-ticket')); ?>" href="https://jshelpdesk.com/product/close-ticket/" class="add-on-btn"><?php echo esc_html(__('buy now','js-support-ticket')); ?></a>
-                        </div>
-                        <div class="add-on-item feedback">
-                            <img class="add-on-img" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/add-on-list/feedback.png" alt = "<?php echo esc_attr(__('Feedback','js-support-ticket')); ?>" />
-                            <div class="add-on-name"><?php echo esc_html(__('Feedback','js-support-ticket')); ?></div>
-
-                            <div class="add-on-txt"><?php echo esc_html(__('Get the survey from your customers on ticket closing to improve your quality of services and assistance.','js-support-ticket')); ?></div>
-                            <a title="<?php echo esc_attr(__('buy now','js-support-ticket')); ?>" href="https://jshelpdesk.com/product/feedback/" class="add-on-btn"><?php echo esc_html(__('buy now','js-support-ticket')); ?></a>
-                        </div>
-                        <div class="add-on-item aipoweredreply">
-                            <img class="add-on-img" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/add-on-list/aipoweredreply.png" alt = "<?php echo esc_attr(__('AI Powered Reply','js-support-ticket')); ?>" />
-                            <div class="add-on-name"><?php echo esc_html(__('AI Powered Reply','js-support-ticket')); ?></div>
-
-                            <div class="add-on-txt"><?php echo esc_html(__('Get AI-powered, context-based suggestions to effortlessly create clear, relevant, and helpful replies.','js-support-ticket')); ?></div>
-                            <a title="<?php echo esc_attr(__('buy now','js-support-ticket')); ?>" href="https://jshelpdesk.com/product/ai-powered-reply/" class="add-on-btn"><?php echo esc_html(__('buy now','js-support-ticket')); ?></a>
-                        </div>
-                        <div class="add-on-item kb">
-                            <img class="add-on-img" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/add-on-list/kb.png" alt = "<?php echo esc_attr(__('Knowledge Base','js-support-ticket')); ?>" />
-                            <div class="add-on-name"><?php echo esc_html(__('Knowledge Base','js-support-ticket')); ?></div>
-
-                            <div class="add-on-txt"><?php echo esc_html(__('Stop losing productivity on repetitive queries,Build your knowledge base, group solutions by topics to facilitate users.','js-support-ticket')); ?></div>
-                            <a title="<?php echo esc_attr(__('buy now','js-support-ticket')); ?>" href="https://jshelpdesk.com/product/knowledge-base/" class="add-on-btn"><?php echo esc_html(__('buy now','js-support-ticket')); ?></a>
-                        </div>
-                        <div class="add-on-item merge-tkt">
-                            <img class="add-on-img" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/add-on-list/merge-tickets.png" alt = "<?php echo esc_attr(__('Merge Tickets','js-support-ticket')); ?>"/>
-                            <div class="add-on-name"><?php echo esc_html(__('Merge Tickets','js-support-ticket')); ?></div>
-
-                            <div class="add-on-txt"><?php echo esc_html(__('Enables agents to merge two tickets of the same user into one instead of dealing with the same issue on many tickets.','js-support-ticket')); ?></div>
-                            <a title="<?php echo esc_attr(__('buy now','js-support-ticket')); ?>" href="https://jshelpdesk.com/product/merge-ticket/" class="add-on-btn"><?php echo esc_html(__('buy now','js-support-ticket')); ?></a>
-                        </div>
-                        <div class="add-on-item overdue-tkt">
-                            <img class="add-on-img" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/add-on-list/ticket-overdue.png" alt = "<?php echo esc_attr(__('Ticket Overdue','js-support-ticket')); ?>" />
-                            <div class="add-on-name"><?php echo esc_html(__('Ticket Overdue','js-support-ticket')); ?></div>
-
-                            <div class="add-on-txt"><?php echo esc_html(__('Defines rules or set specific intervals of time to make ticket auto overdue.The ticket can overdue by type or overdue by Cronjob.','js-support-ticket')); ?></div>
-                            <a title="<?php echo esc_attr(__('buy now','js-support-ticket')); ?>" href="https://jshelpdesk.com/product/overdue/" class="add-on-btn"><?php echo esc_html(__('buy now','js-support-ticket')); ?></a>
-                        </div>
-                        <div class="add-on-item smtp">
-                            <img class="add-on-img" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/add-on-list/smtp.png" alt = "<?php echo esc_attr(__('SMTP','js-support-ticket')); ?>" />
-                            <div class="add-on-name"><?php echo esc_html(__('SMTP','js-support-ticket')); ?></div>
-
-                            <div class="add-on-txt"><?php echo esc_html(__('SMTP allows you to use a custom mail server to send emails from JS Help Desk.','js-support-ticket')); ?></div>
-                            <a title="<?php echo esc_attr(__('buy now','js-support-ticket')); ?>" href="https://jshelpdesk.com/product/smtp/" class="add-on-btn"><?php echo esc_html(__('buy now','js-support-ticket')); ?></a>
-                        </div>
-                        <div class="add-on-item multilanguagetemplate">
-                            <img class="add-on-img" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/add-on-list/multilanguageemailtemplates.png" alt = "<?php echo esc_attr(__('Multi Language Email Templates','js-support-ticket')); ?>" />
-                            <div class="add-on-name"><?php echo esc_html(__('Multi Language Email Templates','js-support-ticket')); ?></div>
-
-                            <div class="add-on-txt"><?php echo esc_html(__('It allows to create language-based email templates for all JS Help Desk email templates.','js-support-ticket')); ?></div>
-                            <a title="<?php echo esc_attr(__('buy now','js-support-ticket')); ?>" href="https://jshelpdesk.com/product/multi-language-email-templates" class="add-on-btn"><?php echo esc_html(__('buy now','js-support-ticket')); ?></a>
-                        </div>
-                        <div class="add-on-item email-piping">
-                            <img class="add-on-img" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/add-on-list/email-piping.png" alt = "<?php echo esc_attr(__('Email Piping','js-support-ticket')); ?>" />
-                            <div class="add-on-name"><?php echo esc_html(__('Email Piping','js-support-ticket')); ?></div>
-
-                            <div class="add-on-txt"><?php echo esc_html(__('Enables users to reply to the tickets via email without the need to login to the support system first.','js-support-ticket')); ?></div>
-                            <a title="<?php echo esc_attr(__('buy now','js-support-ticket')); ?>" href="https://jshelpdesk.com/product/email-piping/" class="add-on-btn"><?php echo esc_html(__('buy now','js-support-ticket')); ?></a>
-                        </div>
-                        <div class="add-on-item time-tracking">
-                            <img class="add-on-img" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/add-on-list/time-tracking.png" alt = "<?php echo esc_attr(__('Time Tracking','js-support-ticket')); ?>" />
-                            <div class="add-on-name"><?php echo esc_html(__('Time Tracking','js-support-ticket')); ?></div>
-
-                            <div class="add-on-txt"><?php echo esc_html(__('Track the time spent on each ticket by each agent and each reply. Report the admin on how much time is spent on each ticket.','js-support-ticket')); ?></div>
-                            <a title="<?php echo esc_attr(__('buy now','js-support-ticket')); ?>" href="https://jshelpdesk.com/product/time-tracking/" class="add-on-btn"><?php echo esc_html(__('buy now','js-support-ticket')); ?></a>
-                        </div>
-                        <div class="add-on-item announcements">
-                            <img class="add-on-img" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/add-on-list/announcments.png" alt = "<?php echo esc_attr(__('Announcements','js-support-ticket')); ?>" />
-                            <div class="add-on-name"><?php echo esc_html(__('Announcements','js-support-ticket')); ?></div>
-
-                            <div class="add-on-txt"><?php echo esc_html(__('Make unlimited announcements associated with support system to get customer interaction.','js-support-ticket')); ?></div>
-                            <a title="<?php echo esc_attr(__('buy now','js-support-ticket')); ?>" href="https://jshelpdesk.com/product/announcements/" class="add-on-btn"><?php echo esc_html(__('buy now','js-support-ticket')); ?></a>
-                        </div>
-                        <div class="add-on-item desk-notif">
-                            <img class="add-on-img" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/add-on-list/desktop-notifications.png" alt = "<?php echo esc_attr(__('Desktop Notifications','js-support-ticket')); ?>" />
-                            <div class="add-on-name"><?php echo esc_html(__('Desktop Notifications','js-support-ticket')); ?></div>
-
-                            <div class="add-on-txt"><?php echo esc_html(__('The Desktop notifications will keep you up to date about anything happens on your support system.','js-support-ticket')); ?></div>
-                            <a title="<?php echo esc_attr(__('buy now','js-support-ticket')); ?>" href="https://jshelpdesk.com/product/desktop-notification/" class="add-on-btn"><?php echo esc_html(__('buy now','js-support-ticket')); ?></a>
-                        </div>
-                        <div class="add-on-item downloads">
-                            <img class="add-on-img" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/add-on-list/downloads.png" alt = "<?php echo esc_attr(__('Downloads','js-support-ticket')); ?>"/>
-                            <div class="add-on-name"><?php echo esc_html(__('Downloads','js-support-ticket')); ?></div>
-
-                            <div class="add-on-txt"><?php echo esc_html(__('Create downloads to ensure the user to get downloads from downloads.','js-support-ticket')); ?></div>
-                            <a title="<?php echo esc_attr(__('buy now','js-support-ticket')); ?>" href="https://jshelpdesk.com/product/downloads/" class="add-on-btn"><?php echo esc_html(__('buy now','js-support-ticket')); ?></a>
-                        </div>
-                        <div class="add-on-item faq">
-                            <img class="add-on-img" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/add-on-list/faq.png" alt = "<?php echo esc_attr(__('FAQ','js-support-ticket')); ?>" />
-                            <div class="add-on-name"><?php echo esc_html(__('FAQ','js-support-ticket')); ?></div>
-
-                            <div class="add-on-txt"><?php echo esc_html(__('Tired of getting tickets about the same problems? Add FAQs to drastically reduce the number of common questions from users.','js-support-ticket')); ?></div>
-                            <a title="<?php echo esc_attr(__('buy now','js-support-ticket')); ?>" href="https://jshelpdesk.com/product/faq/" class="add-on-btn"><?php echo esc_html(__('buy now','js-support-ticket')); ?></a>
-                        </div>
-                        <div class="add-on-item internal-mail">
-                            <img class="add-on-img" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/add-on-list/internal-mail.png" alt = "<?php echo esc_attr(__('Internal Mail','js-support-ticket')); ?>" />
-                            <div class="add-on-name"><?php echo esc_html(__('Internal Mail','js-support-ticket')); ?></div>
-
-                            <div class="add-on-txt"><?php echo esc_html(__('Use internal email to send emails to one agent to another agent with in support ticket.','js-support-ticket')); ?></div>
-                            <a title="<?php echo esc_attr(__('buy now','js-support-ticket')); ?>" href="https://jshelpdesk.com/product/internal-mail/" class="add-on-btn"><?php echo esc_html(__('buy now','js-support-ticket')); ?></a>
-                        </div>
-
-                        <div class="add-on-item fe-widget">
-                            <img class="add-on-img" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/add-on-list/frontend-widget.png" alt = "<?php echo esc_attr(__('frontend widget','js-support-ticket')); ?>" />
-                            <div class="add-on-name"><?php echo esc_html(__('Front-End Widgets','js-support-ticket')); ?></div>
-
-                            <div class="add-on-txt"><?php echo esc_html(__('Widgets in WordPress allow you to add content and features in the widgetized areas of your theme.','js-support-ticket')); ?></div>
-                            <a title="<?php echo esc_attr(__('buy now','js-support-ticket')); ?>" href="https://jshelpdesk.com/product/widget/" class="add-on-btn"><?php echo esc_html(__('buy now','js-support-ticket')); ?></a>
-                        </div>
-
-                        <div class="add-on-item private-credentials">
-                            <img class="add-on-img" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/add-on-list/privatecredentials.png" alt = "<?php echo esc_attr(__('Private Credentials','js-support-ticket')); ?>" />
-                            <div class="add-on-name"><?php echo esc_html(__('Private Credentials','js-support-ticket')); ?></div>
-
-                            <div class="add-on-txt"><?php echo esc_html(__("Collect your customers private data, sensitive information from credit card to health information, and store them encrypted.",'js-support-ticket')); ?></div>
-                            <a title="<?php echo esc_attr(__('buy now','js-support-ticket')); ?>" href="https://jshelpdesk.com/product/private-credentials/" class="add-on-btn"><?php echo esc_html(__('buy now','js-support-ticket')); ?></a>
-                        </div>
-
-                        <div class="add-on-item woocommerce">
-                            <img class="add-on-img" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/add-on-list/woocommerce.png" alt = "<?php echo esc_attr(__('WooCommerce Support','js-support-ticket')); ?>" />
-                            <div class="add-on-name"><?php echo esc_html(__('WooCommerce Support','js-support-ticket')); ?></div>
-
-                            <div class="add-on-txt"><?php echo esc_html(__('JS Help Desk WooCommerce provides the much-needed bridge between your WooCommerce store and the JS Help Desk.','js-support-ticket')); ?></div>
-                            <a title="<?php echo esc_attr(__('buy now','js-support-ticket')); ?>" href="https://jshelpdesk.com/product/woocommerce/" class="add-on-btn"><?php echo esc_html(__('buy now','js-support-ticket')); ?></a>
-                        </div>
-
-                        <div class="add-on-item paid-support">
-                            <img class="add-on-img" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/add-on-list/paid-support.png" alt = "<?php echo esc_attr(__('Paid Support','js-support-ticket')); ?>" />
-                            <div class="add-on-name"><?php echo esc_html(__('Paid Support','js-support-ticket')); ?></div>
-
-                            <div class="add-on-txt"><?php echo esc_html(__('Paid Support is the easiest way to integrate and manage payments for your support tickets.','js-support-ticket')); ?></div>
-                            <a title="<?php echo esc_attr(__('buy now','js-support-ticket')); ?>" href="https://jshelpdesk.com/product/paid-support/" class="add-on-btn"><?php echo esc_html(__('buy now','js-support-ticket')); ?></a>
-                        </div>
-
-                        <div class="add-on-item envato">
-                            <img class="add-on-img" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/add-on-list/envato.png" alt = "<?php echo esc_attr(__('Envato','js-support-ticket')); ?>" />
-                            <div class="add-on-name"><?php echo esc_html(__('Envato','js-support-ticket')); ?></div>
-
-                            <div class="add-on-txt"><?php echo esc_html(__("Without a valid Envato license, clients will not be able to open a new ticket.",'js-support-ticket')); ?></div>
-                            <a title="<?php echo esc_attr(__('buy now','js-support-ticket')); ?>" href="https://jshelpdesk.com/product/envato/" class="add-on-btn"><?php echo esc_html(__('buy now','js-support-ticket')); ?></a>
-                        </div>
-
-                        <div class="add-on-item mail-chimp">
-                            <img class="add-on-img" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/add-on-list/mail-chimp.png" alt = "<?php echo esc_attr(__('Mailchimp','js-support-ticket')); ?>" />
-                            <div class="add-on-name"><?php echo esc_html(__('Mailchimp','js-support-ticket')); ?></div>
-
-                            <div class="add-on-txt"><?php echo esc_html(__('The Mail Chimp add-on adds a new checkbox to the registration form for prompting new users to subscribe your email-list.','js-support-ticket')); ?></div>
-                            <a title="<?php echo esc_attr(__('buy now','js-support-ticket')); ?>" href="https://jshelpdesk.com/product/mail-chimp/" class="add-on-btn"><?php echo esc_html(__('buy now','js-support-ticket')); ?></a>
-                        </div>
-
-                        <div class="add-on-item easy-digi-dwnlds">
-                            <img class="add-on-img" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/add-on-list/easy-digital-downloads.png" alt = "<?php echo esc_attr(__('Easy Digital Downloads','js-support-ticket')); ?>" />
-                            <div class="add-on-name"><?php echo esc_html(__('Easy Digital Downloads','js-support-ticket')); ?></div>
-
-                            <div class="add-on-txt"><?php echo esc_html(__('EDD offers customers to open new tickets just one click from their EDD account with optionally validating the license keys.','js-support-ticket')); ?></div>
-                            <a title="<?php echo esc_attr(__('buy now','js-support-ticket')); ?>" href="https://jshelpdesk.com/product/easy-digital-download/" class="add-on-btn"><?php echo esc_html(__('buy now','js-support-ticket')); ?></a>
-                        </div>
-			            <div class="add-on-item email-cc">
-                            <img class="add-on-img" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/add-on-list/emailcc.png" alt = "<?php echo esc_attr(__('Email CC','js-support-ticket')); ?>" />
-                            <div class="add-on-name"><?php echo esc_html(__('Email CC','js-support-ticket')); ?></div>
-
-                            <div class="add-on-txt"><?php echo esc_html(__('CC(Carbon Copy) - the people who should know about the information which is being shared and the people included are able to see who is there in the list.','js-support-ticket')); ?></div>
-                            <a title="<?php echo esc_attr(__('buy now','js-support-ticket')); ?>" href="https://jshelpdesk.com/product/email-cc/" class="add-on-btn"><?php echo esc_html(__('buy now','js-support-ticket')); ?></a>
-                        </div>
-                        <div class="add-on-item multiform">
-                            <img class="add-on-img" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/add-on-list/multiform.png" alt = "<?php echo esc_attr(__('Multiform','js-support-ticket')); ?>" />
-                            <div class="add-on-name"><?php echo esc_html(__('Multiform','js-support-ticket')); ?></div>
-
-                            <div class="add-on-txt"><?php echo esc_html(__('Multiform allows user to add more than one form based on requirements.','js-support-ticket')); ?></div>
-                            <a title="<?php echo esc_attr(__('buy now','js-support-ticket')); ?>" href="https://jshelpdesk.com/product/multi-forms/" class="add-on-btn"><?php echo esc_html(__('buy now','js-support-ticket')); ?></a>
-                        </div>
-                        <div class="add-on-item agentautoassign">
-                            <img class="add-on-img" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/add-on-list/agent-auto-assign.png" alt = "<?php echo esc_attr(__('Agent Auto Assign','js-support-ticket')); ?>" />
-                            <div class="add-on-name"><?php echo esc_html(__('Agent Auto Assign','js-support-ticket')); ?></div>
-
-                            <div class="add-on-txt"><?php echo esc_html(__('When auto assignment is enabled and a ticket is created, an appropriate agent is automatically assigned to the ticket and it is moved to the Assigned state.','js-support-ticket')); ?></div>
-                            <a title="<?php echo esc_attr(__('buy now','js-support-ticket')); ?>" href="https://jshelpdesk.com/product/agent-auto-assign/" class="add-on-btn"><?php echo esc_html(__('buy now','js-support-ticket')); ?></a>
-                        </div>
-                        <div class="add-on-item instantresolve">
-                            <img class="add-on-img" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/add-on-list/instantresolve.png" alt="<?php echo esc_attr(__('Instant Resolve', 'js-support-ticket')); ?>" />
-                            <div class="add-on-name"><?php echo esc_html(__('Instant Resolve', 'js-support-ticket')); ?></div>
-
-                            <div class="add-on-txt"><?php echo esc_html(__('Suggests answers from your knowledgebase as customers type, then auto-replies to tickets using only your own content.', 'js-support-ticket')); ?></div>
-                            <a title="<?php echo esc_attr(__('buy now', 'js-support-ticket')); ?>" href="https://jshelpdesk.com/product/instantresolve/" class="add-on-btn"><?php echo esc_html(__('buy now', 'js-support-ticket')); ?></a>
-                        </div>
-
+                                <div class="add-on-txt"><?php echo esc_html($jsst_bundle['description']); ?></div>
+                                <?php if (!empty($jsst_bundle['active'])) { ?>
+                                    <span class="add-on-btn add-on-btn-have"><?php echo esc_html(__('installed', 'js-support-ticket')); ?></span>
+                                <?php } else { ?>
+                                    <a title="<?php echo esc_attr(__('buy now', 'js-support-ticket')); ?>" href="<?php echo esc_url($jsst_bundle['url']); ?>" class="add-on-btn"><?php echo esc_html(__('buy now', 'js-support-ticket')); ?></a>
+                                <?php } ?>
+                            </div>
+                        <?php } ?>
                     </div>
-                    <div class="add-on-sec-header">
-                        <h1 class="add-on-header-tit"><?php echo esc_html(__('JS Help Desk Add-Ons Bundle Pack','js-support-ticket')); ?></h1>
-                        <div class="add-on-header-text"><?php echo esc_html(__('Save big with an exclusive membership plan today!','js-support-ticket')); ?></div>
+                    <?php /* ---------------------------------------------------
+                       The Basic, Standard and Professional bundles used to be
+                       listed here, three columns of which features each one
+                       unlocked. They are retired. (Roadmap 4.5-PRO-03)
+
+                       They are not replaced by a shorter version of the same
+                       idea: nothing is withheld from a cheaper paid plan any
+                       more, so there is no feature column to draw. What goes in
+                       their place is the honest comparison — what the free
+                       plugin contains and what Pro adds — generated from the
+                       manifests rather than typed, so it cannot claim a feature
+                       we have not shipped or omit one we have.
+
+                       Customers still holding a retired tier lose nothing:
+                       JSSTplans maps every one of them onto Pro, which contains
+                       every module all three of them ever did.
+                       --------------------------------------------------- */ ?>
+                    <?php /* The Free-and-Pro comparison, the plans and the
+                       guarantees moved onto the JS Help Desk Pro screen, which
+                       is where somebody asks what their licence covers. This
+                       page is the catalogue - what each add-on does and where
+                       to buy it - and two lists of the same modules on one
+                       screen is one list too many.
+
+                       "Publish this table" went with them and is not offered on
+                       a customer's screen at all: a JSON feed of our own pricing
+                       table is a tool for the shop that sells this product, not
+                       for the desk that runs it. JSSTplans::feedUrl() and
+                       export() are untouched, so anything already fetching the
+                       feed keeps working. (Roadmap 4.5-MKT-02, 4.5-PRO-01) */ ?>
+                    <div class="add-on-msg">
+                        <h3 class="add-on-msg-txt"><?php echo esc_html(__('What your license covers, and what is installed, is on the License screen.','js-support-ticket')); ?></h3>
+                        <a title="<?php echo esc_attr(__('License','js-support-ticket')); ?>" href="<?php echo esc_url(admin_url('admin.php?page=jssupportticket&jstlay=license')); ?>" class="add-on-msg-btn"><?php echo esc_html(__('License','js-support-ticket')); ?></a>
                     </div>
-                    <div class="add-on-bundle-pack-list">
-                        <div class="add-on-bundle-pack-item basic">
-                            <div class="add-on-bundle-pack-name"><?php echo esc_html(__('Basic','js-support-ticket')); ?></div>
-                            <?php /* <div class="add-on-bundle-pack-price">$69<span>/ year</span></div> */ ?>
-                            <ul class="add-on-bundle-pack-feat">
-                                <li><?php echo esc_html(__('Unlimited Agents','js-support-ticket')); ?></li>
-                                <li><?php echo esc_html(__('Ticket Actions','js-support-ticket')); ?></li>
-                                <li><?php echo esc_html(__('Ticket Auto Close','js-support-ticket')); ?></li>
-                                <li><?php echo esc_html(__('FAQ','js-support-ticket')); ?></li>
-                                <li><?php echo esc_html(__('Help Topic','js-support-ticket')); ?></li>
-                                <li><?php echo esc_html(__('Ticket History','js-support-ticket')); ?></li>
-                                <li><a title="<?php echo esc_attr(__('Show All','js-support-ticket')); ?>" target="_blank" href="https://jshelpdesk.com/pricing/#compare-wrap"><?php echo esc_html(__('Show All','js-support-ticket')); ?></a></li>
-                            </ul>
-                            <div class="add-on-bundle-pack-btn">
-                                <a title="<?php echo esc_attr(__('buy now','js-support-ticket')); ?>" target="_blank" href="https://jshelpdesk.com/pricing/"><?php echo esc_html(__('buy now','js-support-ticket')); ?></a>
-                            </div>
-                        </div>
-                        <div class="add-on-bundle-pack-item standard">
-                            <div class="add-on-bundle-pack-name"><?php echo esc_html(__('Standard','js-support-ticket')); ?></div>
-                            <?php /* <div class="add-on-bundle-pack-price">$99<span>/ year</span></div>*/ ?>
-                            <ul class="add-on-bundle-pack-feat">
-                                <li><strong><?php echo esc_html(__('Everything in basic included and','js-support-ticket')); ?> </strong></li>
-                                <li><?php echo esc_html(__('Export','js-support-ticket')); ?></li>
-                                <li><?php echo esc_html(__('Announcements','js-support-ticket')); ?></li>
-                                <li><?php echo esc_html(__('Internal Mail','js-support-ticket')); ?></li>
-                                <li><?php echo esc_html(__('Private Note','js-support-ticket')); ?></li>
-                                <li><?php echo esc_html(__('Canned Response','js-support-ticket')); ?></li>
-                                <li><a title="<?php echo esc_attr(__('Show All','js-support-ticket')); ?>" target="_blank" href="https://jshelpdesk.com/pricing/#compare-wrap"><?php echo esc_html(__('Show All','js-support-ticket')); ?></a></li>
-                            </ul>
-                            <div class="add-on-bundle-pack-btn">
-                                <a title="<?php echo esc_attr(__('buy now','js-support-ticket')); ?>" target="_blank" href="https://jshelpdesk.com/pricing/"><?php echo esc_html(__('buy now','js-support-ticket')); ?></a>
-                            </div>
-                        </div>
-                        <div class="add-on-bundle-pack-item professional">
-                            <div class="add-on-bundle-pack-name"><?php echo esc_html(__('Professional','js-support-ticket')); ?></div>
-                            <?php /* <div class="add-on-bundle-pack-price">$149<span>/ year</span></div>*/ ?>
-                            <ul class="add-on-bundle-pack-feat">
-                                <li><strong><?php echo esc_html(__('Everything in standard included and','js-support-ticket')); ?></strong></li>
-                                <li><?php echo esc_html(__('Feedback','js-support-ticket')); ?></li>
-                                <li><?php echo esc_html(__('Knowledge Base','js-support-ticket')); ?></li>
-                                <li><?php echo esc_html(__('Merge Tickets','js-support-ticket')); ?></li>
-                                <li><?php echo esc_html(__('Email Piping','js-support-ticket')); ?></li>
-                                <li><?php echo esc_html(__('Time Tracking','js-support-ticket')); ?></li>
-                                <li><strong><?php echo esc_html(__('All Future Addons','js-support-ticket')); ?></strong></li>
-                                <li><a title="<?php echo esc_attr(__('Show All','js-support-ticket')); ?>" target="_blank" href="https://jshelpdesk.com/pricing/#compare-wrap"><?php echo esc_html(__('Show All','js-support-ticket')); ?></a></li>
-                            </ul>
-                            <div class="add-on-bundle-pack-btn">
-                                <a title="<?php echo esc_attr(__('buy now','js-support-ticket')); ?>" target="_blank" href="https://jshelpdesk.com/pricing/"><?php echo esc_html(__('buy now','js-support-ticket')); ?></a>
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>

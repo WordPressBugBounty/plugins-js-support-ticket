@@ -50,7 +50,7 @@ class JSSTemailtemplateController {
         $jsst_id = JSSTrequest::getVar('id');
         $jsst_nonce = JSSTrequest::getVar('_wpnonce');
         if (! wp_verify_nonce( $jsst_nonce, 'save-email-template-'.$jsst_id) ) {
-            die( 'Security check Failed' );
+            die( esc_html__( 'Security check Failed', 'js-support-ticket' ) );
         }
         if (!current_user_can('manage_options')) { //only admin can change it.
             return false;
@@ -74,7 +74,7 @@ class JSSTemailtemplateController {
         $jsst_id = JSSTrequest::getVar('id');
         $jsst_nonce = JSSTrequest::getVar('_wpnonce');
         if (! wp_verify_nonce( $jsst_nonce, 'save-form-email-template') ) {
-            die( 'Security check Failed' );
+            die( esc_html__( 'Security check Failed', 'js-support-ticket' ) );
         }
         if (!current_user_can('manage_options')) { //only admin can change it.
             return false;
@@ -100,7 +100,7 @@ class JSSTemailtemplateController {
         $jsst_source = JSSTrequest::getVar('source');
         $jsst_nonce = JSSTrequest::getVar('_wpnonce');
         if (! wp_verify_nonce( $jsst_nonce, 'delete-template-'.$jsst_id) ) {
-            die( 'Security check Failed' );
+            die( esc_html__( 'Security check Failed', 'js-support-ticket' ) );
         }
         JSSTincluder::getJSModel('emailtemplate')->removeFormEmailTemplate( absint( $jsst_id ), $jsst_source);
         $jsst_url = admin_url("admin.php?page=emailtemplate&for=" . JSSTrequest::getVar('for'));

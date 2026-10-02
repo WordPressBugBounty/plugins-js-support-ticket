@@ -12,16 +12,27 @@ if (JSSTincluder::getObjectClass('user')->isguest() && jssupportticket::$_config
 // Mirrors getInstantResolveSearch() exactly: an absent row means on, and any
 // value other than 1 means off. Resolved here, at the top of the template, so
 // the script block and the panel markup below cannot disagree about it.
-$jsst_ir_on = !isset(jssupportticket::$_config['instantresolve_enable'])
-           || jssupportticket::$_config['instantresolve_enable'] == 1;
+$jsst_ir_on = !isset(jssupportticket::$_config['aiagent_enable'])
+           || jssupportticket::$_config['aiagent_enable'] == 1;
+
+// The same minimum getInstantResolveSearch() enforces, so the form does not
+// send requests the server will only answer with nothing.
+$jsst_ir_min = isset(jssupportticket::$_config['aiagent_min_chars'])
+    ? intval(jssupportticket::$_config['aiagent_min_chars']) : 15;
+
+// The same cap getBasicFixSuggestions() applies, so results added when the
+// customer leaves a field cannot push the panel past it.
+$jsst_ir_max = isset(jssupportticket::$_config['aiagent_max_results'])
+    ? intval(jssupportticket::$_config['aiagent_max_results']) : 5;
+if ($jsst_ir_max < 1 || $jsst_ir_max > 10) $jsst_ir_max = 5;
 
 // Click and view tracking needs the addon: it owns the module the events post
-// to, and it is the only thing that reads instantresolve_analytics or writes
+// to, and it is the only thing that reads aiagent_analytics or writes
 // the analytics table. The second half mirrors logDeflectionEvent()'s own gate,
 // so the browser stops sending exactly when the endpoint would stop recording.
-$jsst_ir_track = in_array('instantresolve', jssupportticket::$_active_addons)
-              && (!isset(jssupportticket::$_config['instantresolve_analytics'])
-                  || jssupportticket::$_config['instantresolve_analytics'] == 1);
+$jsst_ir_track = in_array('aiagent', jssupportticket::$_active_addons)
+              && (!isset(jssupportticket::$_config['aiagent_analytics'])
+                  || jssupportticket::$_config['aiagent_analytics'] == 1);
 ?>
 <div class="jsst-main-up-wrapper">
 <?php
@@ -41,10 +52,17 @@ if (jssupportticket::$_config['offline'] == 2) {
         $jsst_jssupportticket_js = "";
         if ($jsst_ir_on) {
         $jsst_jssupportticket_js .="
-            var jsst_instantresolve_timer;
-            var jsst_instantresolve_last = '';
-            var jsst_instantresolve_xhr = null;
-            var jsst_instantresolve_composing = false;
+            var jsst_aiagent_timer = null;
+            var jsst_aiagent_last = '';
+            var jsst_aiagent_busy = false;
+            var jsst_aiagent_queued = null;
+            var jsst_aiagent_composing = false;
+            var jsst_aiagent_min = ". intval($jsst_ir_min) .";
+            var jsst_aiagent_max = ". intval($jsst_ir_max) .";
+            // What the panel is showing, and for which words. Leaving a field
+            // with the words unchanged adds to this rather than replacing it.
+            var jsst_aiagent_shownwords = '';
+            var jsst_aiagent_shownkeys = [];
             function jsstReadInstantResolve() {
                 var editor = (typeof tinyMCE !== 'undefined') ? tinyMCE.get('jsticket_message') : null;
                 var message = (editor && !editor.isHidden())
@@ -53,43 +71,83 @@ if (jssupportticket::$_config['offline'] == 2) {
 
                 return { subject: jQuery('#subject').val() || '', message: message };
             }
+            /* The words the search would see. Typing a space, a comma or a full
+               stop does not change them, so it does not cost a request. */
+            function jsstInstantResolveWords(text) {
+                return (text.subject + ' ' + text.message).toLowerCase()
+                    .replace(/[^\\p{L}\\p{N}]+/gu, ' ').trim();
+            }
+            function jsstHideInstantResolve() {
+                jQuery('#jsst-instant-fix-wrapper').hide();
+                jQuery('#jsst-instant-fix-container').empty();
+            }
             function jsstRunInstantResolve(withAnswer) {
                 var text = jsstReadInstantResolve();
+                var words = jsstInstantResolveWords(text);
 
-                if ((text.subject.length + text.message.length) < 15) {
-                    jQuery('#jsst-instant-fix-wrapper').hide();
-                    jQuery('#jsst-instant-fix-container').empty();
-                    jsst_instantresolve_last = '';
+                if (words.length < jsst_aiagent_min) {
+                    jsstHideInstantResolve();
+                    jsst_aiagent_last = '';
                     return;
                 }
 
-                // Unchanged text returns identical links and, with the AI layer
-                // on, pays for the same answer a second time.
-                var signature = (withAnswer ? 'A|' : 'L|') + text.subject + '|' + text.message;
-                if (signature === jsst_instantresolve_last) return;
-                jsst_instantresolve_last = signature;
+                // Unchanged words return identical links and, with the AI layer
+                // on, pay for the same answer a second time.
+                var signature = (withAnswer ? 'A|' : 'L|') + words;
+                if (signature === jsst_aiagent_last) return;
 
-                // A reply to text the customer has already moved past is not
-                // worth rendering, and out-of-order responses overwrite newer
-                // results with older ones.
-                if (jsst_instantresolve_xhr) jsst_instantresolve_xhr.abort();
+                // One request at a time. Aborting in the browser does not stop
+                // the server, so a new search waits for the current one and then
+                // runs once, on whatever the text is by then. An answer request
+                // that had to wait is not downgraded to a links-only one.
+                if (jsst_aiagent_busy) {
+                    jsst_aiagent_queued = (jsst_aiagent_queued === true) || withAnswer;
+                    return;
+                }
+                jsst_aiagent_busy = true;
+                jsst_aiagent_last = signature;
 
-                jQuery('#jsst-instant-fix-container').html('<div class=\"jsst-fix-loading\"><img src=\"". esc_url(JSST_PLUGIN_URL) ."includes/images/loading.gif\" alt=\"".esc_html(__("Loading...", "js-support-ticket")) ."\" />". esc_html(__("Searching for solutions...", "js-support-ticket")) ."</div>');
-                jQuery('#jsst-instant-fix-wrapper').show();
+                // Results already on screen stay there until new ones replace
+                // them; the spinner is only for an empty panel.
+                var container = jQuery('#jsst-instant-fix-container');
+                if (container.children('.jsst-fix-grid').length === 0) {
+                    container.html('<div class=\"jsst-fix-loading\"><img src=\"". esc_url(JSST_PLUGIN_URL) ."includes/images/loading.gif\" alt=\"".esc_html(__("Loading...", "js-support-ticket")) ."\" />". esc_html(__("Searching for solutions...", "js-support-ticket")) ."</div>');
+                    jQuery('#jsst-instant-fix-wrapper').show();
+                }
 
-                jsst_instantresolve_xhr = jQuery.post(ajaxurl, {
-                    action: 'jsticket_ajax',
-                    jstmod: 'ticket',
-                    task: 'getInstantResolveSearch',
-                    subject: text.subject,
-                    message: text.message,
-                    summary: withAnswer ? 1 : 0,
-                    '_wpnonce': '". esc_attr(wp_create_nonce("get-instantresolve-search")) ."'
-                }, function(data) {
-                    jsst_instantresolve_xhr = null;
-                    if(data) {
-                        var results = JSON.parse(data);
-                        jsstRenderInstantResolve(results);
+                jQuery.ajax({
+                    url: ajaxurl,
+                    type: 'POST',
+                    dataType: 'json',
+                    // A server that does not answer must not leave the panel
+                    // saying 'Searching' for ever.
+                    timeout: 8000,
+                    data: {
+                        action: 'jsticket_ajax',
+                        jstmod: 'ticket',
+                        task: 'getInstantResolveSearch',
+                        subject: text.subject,
+                        message: text.message,
+                        summary: withAnswer ? 1 : 0,
+                        '_wpnonce': '". esc_attr(wp_create_nonce("get-aiagent-search")) ."'
+                    }
+                }).done(function(results) {
+                    jsstRenderInstantResolve(jQuery.isArray(results) ? results : [], { answer: withAnswer, words: words });
+                }).fail(function() {
+                    // Timeout, an expired nonce ('Security check Failed' is not
+                    // JSON), a PHP notice in the output: all end here. Nothing
+                    // useful can be shown, so a spinner is taken down rather than
+                    // left running, and the same text may be tried again.
+                    jsst_aiagent_last = '';
+                    if (jQuery('#jsst-instant-fix-container').children('.jsst-fix-grid').length === 0) {
+                        jsstHideInstantResolve();
+                    }
+                }).always(function() {
+                    jsst_aiagent_busy = false;
+                    if (jsst_aiagent_queued !== null) {
+                        var queued = jsst_aiagent_queued;
+                        jsst_aiagent_queued = null;
+                        jsstRunInstantResolve(queued);
                     }
                 });
             }
@@ -100,76 +158,117 @@ if (jssupportticket::$_config['offline'] == 2) {
                 // Chinese or Korean emits an event per keystroke while the
                 // candidate is still being assembled, and searching on those
                 // fragments is both wasted work and, briefly, wrong.
-                if (jsst_instantresolve_composing) return;
+                if (jsst_aiagent_composing) return;
 
-                clearTimeout(jsst_instantresolve_timer);
-                jsst_instantresolve_timer = setTimeout(function() {
+                clearTimeout(jsst_aiagent_timer);
+                jsst_aiagent_timer = setTimeout(function() {
                     jsstRunInstantResolve(false);
                 }, 800);
             }
 
-            /* Finished with a field: one request that may include the answer. */
+            /* Finished with a field: one request that may include the answer,
+               and the only one that searches WordPress posts. */
             function jsstTriggerInstantResolveAnswer() {
-                clearTimeout(jsst_instantresolve_timer);
+                clearTimeout(jsst_aiagent_timer);
                 jsstRunInstantResolve(true);
             }
 
-            var jsst_viewed_instantresolve = [];
-            var jsst_instantresolve_events = [];
+            var jsst_viewed_aiagent = [];
+            var jsst_aiagent_events = [];
 
             /*
-             * Tracking posts to jstmod 'instantresolve', and that module ships
+             * Tracking posts to jstmod 'aiagent', and that module ships
              * with the addon. getPluginPath() only resolves a module name that
              * is in \$_active_addons, so without the addon the request falls
-             * through to a core modules/instantresolve/ that does not exist and
+             * through to a core modules/aiagent/ that does not exist and
              * getJSModel() warns on the include before failing on the class.
              *
              * The functions still have to exist either way - the rendered cards
              * call them from onclick - so the switch is here rather than around
              * their definitions.
              */
-            var jsst_instantresolve_track = ". ($jsst_ir_track ? 'true' : 'false') .";
+            var jsst_aiagent_track = ". ($jsst_ir_track ? 'true' : 'false') .";
 
             function jsstTrackInstantResolveEvent(type, id, action) {
-                if (!jsst_instantresolve_track) return;
-                jsst_instantresolve_events.push({ type: type, id: id, action: action });
+                if (!jsst_aiagent_track) return;
+                jsst_aiagent_events.push({ type: type, id: id, action: action });
             }
 
             function jsstSendInstantResolveEvents() {
-                if (!jsst_instantresolve_track) return;
-                if (jsst_instantresolve_events.length === 0) return;
-                var events_to_send = jsst_instantresolve_events.slice();
-                jsst_instantresolve_events = [];
+                if (!jsst_aiagent_track) return;
+                if (jsst_aiagent_events.length === 0) return;
+                var events_to_send = jsst_aiagent_events.slice();
+                jsst_aiagent_events = [];
 
                 jQuery.post(ajaxurl, {
                     action: 'jsticket_ajax',
-                    jstmod: 'instantresolve',
+                    jstmod: 'aiagent',
                     task: 'logInstantResolveEvent',
                     events: JSON.stringify(events_to_send),
-                    '_wpnonce': '". esc_attr(wp_create_nonce("log-instantresolve-event")) ."'
+                    '_wpnonce': '". esc_attr(wp_create_nonce("log-aiagent-event")) ."'
                 });
             }
 
             // Send events every 5 seconds or when leaving the page. Not even
             // registered when there is nothing to send them to, so no timer
             // wakes up every 5s to do nothing.
-            if (jsst_instantresolve_track) {
+            if (jsst_aiagent_track) {
                 setInterval(jsstSendInstantResolveEvents, 5000);
                 jQuery(window).on('beforeunload', jsstSendInstantResolveEvents);
             }
 
-            function jsstRenderInstantResolve(results) {
-                var container = jQuery('#jsst-instant-fix-container');
-                container.empty();
-                
-                if(results.length === 0) {
-                    jQuery('#jsst-instant-fix-wrapper').hide();
-                    return;
-                }
+            /* Everything a result carries is text from a source table or a post,
+               so it is escaped before it goes into the page. */
+            function jsstEscInstantResolve(value) {
+                return String(value === null || value === undefined ? '' : value)
+                    .replace(/[&<>\"']/g, function(c) { return '&#' + c.charCodeAt(0) + ';'; });
+            }
+            function jsstUrlInstantResolve(value) {
+                return (typeof value === 'string' && /^https?:\/\//i.test(value)) ? jsstEscInstantResolve(value) : '';
+            }
 
-                var html = '<div class=\"jsst-fix-grid\">';
+            function jsstInstantResolveKey(item) {
+                if (item.type === 'ai_suggestion') return 'ai';
+                return String(item.type || item.content_type || '') + '_' + (parseInt(item.id, 10) || 0);
+            }
+
+            function jsstRenderInstantResolve(results, ctx) {
+                var container = jQuery('#jsst-instant-fix-container');
+                var grid = container.children('.jsst-fix-grid');
+
+                /* Leaving a field asks once more for the same words, and that
+                   request may find more (WordPress pages, a written answer).
+                   What the customer is already reading stays where it is: new
+                   results are added around it, and nothing new means nothing
+                   changes. Only different words replace the list. */
+                var merging = !!(ctx && ctx.answer && ctx.words === jsst_aiagent_shownwords && grid.length > 0);
+                if (merging) {
+                    var room = jsst_aiagent_max - grid.children('.jsst-fix-card').not('.jsst-ai-card').length;
+                    results = jQuery.grep(results, function(item) {
+                        if (jQuery.inArray(jsstInstantResolveKey(item), jsst_aiagent_shownkeys) !== -1) return false;
+                        if (item.type === 'ai_suggestion') return true;
+                        return (room-- > 0);
+                    });
+                    if (results.length === 0) return;
+                } else {
+                    container.empty();
+                    jsst_aiagent_shownkeys = [];
+                    jsst_aiagent_shownwords = (ctx && ctx.words) ? ctx.words : '';
+
+                    if(results.length === 0) {
+                        jQuery('#jsst-instant-fix-wrapper').hide();
+                        return;
+                    }
+                }
+                jQuery('#jsst-instant-fix-wrapper').show();
+
+                var aiHtml = '';
+                var html = '';
                 jQuery.each(results, function(index, item) {
+                    jsst_aiagent_shownkeys.push(jsstInstantResolveKey(item));
                     if(item.type === 'ai_suggestion') {
+                        var html_before_ai = html;
+                        html = '';
                         html += '<div class=\"jsst-fix-card jsst-ai-card\" data-type=\"ai_suggestion\" data-id=\"0\">';
                         html += '<div class=\"jsst-ai-icon-wrp\">';
                         html += '<svg class=\"jsst-ai-sparkle\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"currentColor\"><path d=\"M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09l2.846.813-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 00-2.456 2.456zM16.894 20.567L16.5 21.75l-.394-1.183a2.25 2.25 0 00-1.423-1.423L13.5 18.75l1.183-.394a2.25 2.25 0 001.423-1.423l.394-1.183.394 1.183a2.25 2.25 0 001.423 1.423l1.183.394-1.183.394a2.25 2.25 0 00-1.423 1.423z\"></path></svg>';
@@ -183,18 +282,18 @@ if (jssupportticket::$_config['offline'] == 2) {
                         html += '<p class=\"jsst-ai-text\">' + item.excerpt + '</p>';
                         html += '</div>';
                         html += '</div>';
+                        aiHtml += html;
+                        html = html_before_ai;
                         return; // Skip to next item in loop
                     }
 
                     // --- STANDARD RENDERING FOR KB/FAQ/EXTERNAL ---
-                    var thumbHtml = '';
-                    if(item.thumbnail) {
-                        thumbHtml = '<div class=\"jsst-fix-thumb\"><img src=\"' + item.thumbnail + '\" alt=\"\" /></div>';
-                    }
-                    
+                    var thumb = jsstUrlInstantResolve(item.thumbnail);
+                    var thumbHtml = thumb ? '<div class=\"jsst-fix-thumb\"><img src=\"' + thumb + '\" alt=\"\" /></div>' : '';
+
                     var timestampHtml = '';
                     if(item.timestamp) {
-                        timestampHtml = '<span class=\"jsst-fix-timestamp\">⏱️ ' + item.timestamp + '</span>';
+                        timestampHtml = '<span class=\"jsst-fix-timestamp\">⏱️ ' + jsstEscInstantResolve(item.timestamp) + '</span>';
                     }
 
                     /*
@@ -212,35 +311,44 @@ if (jssupportticket::$_config['offline'] == 2) {
                     if(kind === 'video' || kind === 'video_timestamp') typeLabel = '🎥 Video';
                     else if(kind === 'kb') typeLabel = '📚 Knowledge Base';
                     else if(kind === 'faq') typeLabel = '❓ FAQ';
-                    else if(kind === 'canned') typeLabel = '💬 Saved reply';
+                    else if(kind === 'canned') typeLabel = '💬 Quick answer';
 
-                    var source = item.type || item.content_type || '';
-                    var hasUrl = (typeof item.url === 'string' && item.url !== '');
+                    var source = jsstEscInstantResolve(item.type || item.content_type || '');
+                    var id = parseInt(item.id, 10) || 0;
+                    var url = jsstUrlInstantResolve(item.url);
 
-                    if(hasUrl) {
-                        html += '<a href=\"' + item.url + '\" target=\"_blank\" class=\"jsst-fix-card\" data-type=\"' + source + '\" data-id=\"' + item.id + '\" onclick=\"jsstTrackInstantResolveEvent(\'' + source + '\', ' + item.id + ', \'click\'); jsstSendInstantResolveEvents();\">';
+                    // Clicks are tracked by the delegated handler bound below,
+                    // not by an onclick built out of result data.
+                    if(url) {
+                        html += '<a href=\"' + url + '\" target=\"_blank\" rel=\"noopener\" class=\"jsst-fix-card\" data-type=\"' + source + '\" data-id=\"' + id + '\">';
                     } else {
-                        html += '<div class=\"jsst-fix-card jsst-fix-card-static\" data-type=\"' + source + '\" data-id=\"' + item.id + '\">';
+                        html += '<div class=\"jsst-fix-card jsst-fix-card-static\" data-type=\"' + source + '\" data-id=\"' + id + '\">';
                     }
                     html += thumbHtml;
                     html += '<div class=\"jsst-fix-content\">';
                     html += '<span class=\"jsst-fix-type\">' + typeLabel + ' ' + timestampHtml + '</span>';
-                    html += '<h4 class=\"jsst-fix-title\">' + item.title + '</h4>';
-                    html += '<p class=\"jsst-fix-excerpt\">' + item.excerpt + '</p>';
+                    html += '<h4 class=\"jsst-fix-title\">' + jsstEscInstantResolve(item.title) + '</h4>';
+                    html += '<p class=\"jsst-fix-excerpt\">' + jsstEscInstantResolve(item.excerpt) + '</p>';
                     html += '</div>';
-                    html += hasUrl ? '</a>' : '</div>';
+                    html += url ? '</a>' : '</div>';
                     // Track View (only once per item per session)
-                    var viewKey = source + '_' + item.id;
-                    if (jQuery.inArray(viewKey, jsst_viewed_instantresolve) === -1) {
-                        jsst_viewed_instantresolve.push(viewKey);
-                        jsstTrackInstantResolveEvent(source, item.id, 'view');
+                    var viewKey = source + '_' + id;
+                    if (jQuery.inArray(viewKey, jsst_viewed_aiagent) === -1) {
+                        jsst_viewed_aiagent.push(viewKey);
+                        jsstTrackInstantResolveEvent(source, id, 'view');
                     }
                 });
-                html += '</div>';
-                
+
+                if (merging) {
+                    grid.prepend(aiHtml);
+                    grid.append(html);
+                    return;
+                }
+                html = '<div class=\"jsst-fix-grid\">' + aiHtml + html + '</div>';
+
                 // Add 'Did this solve your issue?' button
                 html += '<div class=\"jsst-fix-footer\"><button type=\"button\" class=\"button js-form-save\" onclick=\"jsstMarkSolved()\">". esc_html(__('Yes, this solved my issue!', 'js-support-ticket')) ."</button></div>';
-                
+
                 container.html(html);
             }
 
@@ -311,15 +419,20 @@ if (jssupportticket::$_config['offline'] == 2) {
 
                 jQuery(document).on('input', jsst_fields, jsstTriggerInstantResolve);
 
+                jQuery(document).on('click', '#jsst-instant-fix-container a.jsst-fix-card', function() {
+                    jsstTrackInstantResolveEvent(jQuery(this).data('type'), jQuery(this).data('id'), 'click');
+                    jsstSendInstantResolveEvents();
+                });
+
                 // The expensive request happens once, when they leave a field.
                 jQuery(document).on('blur', jsst_fields, jsstTriggerInstantResolveAnswer);
 
                 // An IME is composing; the field holds a half-built character.
                 jQuery(document).on('compositionstart', jsst_fields, function() {
-                    jsst_instantresolve_composing = true;
+                    jsst_aiagent_composing = true;
                 });
                 jQuery(document).on('compositionend', jsst_fields, function() {
-                    jsst_instantresolve_composing = false;
+                    jsst_aiagent_composing = false;
                     jsstTriggerInstantResolve();
                 });
 
@@ -412,7 +525,7 @@ if (jssupportticket::$_config['offline'] == 2) {
             // woocommerce
             function jsst_wc_order_products(){
                 var orderid = jQuery('#wcorderid').val();
-				emptycombo = '<select name=\'wcproductid\' id=\'wcproductid\'  class=\'inputbox js-form-select-field js-ticket-select-field\' ><option value=\'\'>Select Product</option></select>';
+				emptycombo = '<select name=\'wcproductid\' id=\'wcproductid\'  class=\'inputbox js-form-select-field js-ticket-select-field\' ><option value=\'\'>" . esc_js(__('Select Product', 'js-support-ticket')) . "</option></select>';
 				jQuery('#wcproductid-wrap').html(emptycombo);
                 jQuery.post(
                     ajaxurl,
@@ -499,91 +612,27 @@ if (jssupportticket::$_config['offline'] == 2) {
             </div>
             <?php }
         ?>
+        <?php
+        /* Support credits, said before the form rather than only when it is
+           submitted: the balance, and no form at all when every department
+           needs credits and there are none left. New tickets only - an existing
+           ticket can always be edited. Above the form wrapper, which lays its
+           children out in a row. */
+        $jsst_credit_state = (!isset(jssupportticket::$jsst_data[0]->id) && in_array('paidsupport', jssupportticket::$_active_addons) && class_exists('JSSTsupportcredits'))
+            ? JSSTsupportcredits::formState($jsst_loginuser_email) : null;
+        /* The purchase this ticket will be linked to: the one the customer
+           picked, or their only one. With several and none picked, the form
+           offers them as an optional field instead. */
+        $jsst_paidsupport_row = isset(jssupportticket::$jsst_data['paidsupport']) ? jssupportticket::$jsst_data['paidsupport'] : null;
+        if ($jsst_paidsupport_row !== null) {
+            $jsst_paidsupportid = $jsst_paidsupport_row->itemid;
+        }
+        if ($jsst_credit_state !== null) {
+            JSSTsupportcredits::formBar($jsst_credit_state, $jsst_paidsupport_row);
+        } ?>
         <div class="js-ticket-add-form-wrapper">
-            <?php
-            $jsst_showform = true;
-            if(in_array('paidsupport', jssupportticket::$_active_addons) && class_exists('WooCommerce')){
-                if(isset(jssupportticket::$jsst_data['paidsupport'])){
-                    $jsst_row = jssupportticket::$jsst_data['paidsupport'];
-                    $jsst_paidsupportid = $jsst_row->itemid;
-                    ?>
-                    <h3><?php echo esc_html(__("Paid support info",'js-support-ticket')); ?></h3>
-                    <table border="1">
-                        <tr>
-                            <th><?php echo esc_html(__("Order ID",'js-support-ticket')); ?></th>
-                            <th><?php echo esc_html(__("Product Name",'js-support-ticket')); ?></th>
-                            <th><?php echo esc_html(__("Total Tickets",'js-support-ticket')); ?></th>
-                            <th><?php echo esc_html(__("Remaining Tickets",'js-support-ticket')); ?></th>
-                        </tr>
-                        <tr>
-                            <td>#<?php echo esc_html($jsst_row->orderid); ?></td>
-                            <td><?php
-                            echo esc_html($jsst_row->itemname);
-                            if($jsst_row->qty > 1){
-                                echo '<b> x '.esc_html($jsst_row->qty)."</b>";
-                            }
-                            ?></td>
-                            <td><?php if ($jsst_row->total == -1)  echo esc_html(__("Unlimited",'js-support-ticket')); else echo esc_html($jsst_row->total); ?></td>
-                            <td><?php if ($jsst_row->total == -1) echo esc_html(__("Unlimited",'js-support-ticket')); else echo esc_html($jsst_row->remaining); ?></td>
-                        </tr>
-                    </table>
-                    <?php
-                }elseif(isset(jssupportticket::$jsst_data['paidsupportitems'])){
-                    $jsst_showform = false;
-                    $jsst_paidsupportitems = jssupportticket::$jsst_data['paidsupportitems'];
-                    if(empty($jsst_paidsupportitems)){
-                        ?>
-                        <div class="js-ticket-error-message-wrapper">
-                            <div class="js-ticket-message-image-wrapper">
-                                <img class="js-ticket-message-image" alt="message image" src="<?php echo esc_url(JSST_PLUGIN_URL).'/includes/images/error/not-permission-icon.png'; ?>">
-                            </div>
-                            <div class="js-ticket-messages-data-wrapper">
-                                <span class="js-ticket-messages-main-text">
-                                    <?php echo esc_html(__("You have not purchased any supported item",'js-support-ticket')); ?>
-                                </span>
-                                <span class="js-ticket-user-login-btn-wrp">
-                                    <a class="js-ticket-login-btn" href="<?php echo esc_url(get_permalink( wc_get_page_id( 'shop' ) )); ?>"><?php echo esc_html(__("Go to shop",'js-support-ticket')); ?></a>
-                                </span>
-                            </div>
-                        </div>
-                        <?php
-                    }else{
-                        ?>
-                        <h3><?php echo esc_html(__("Please select paid support item",'js-support-ticket')); ?> <span style="color:red">*</span></h3>
-                        <table border="1">
-                            <tr>
-                                <th><?php echo esc_html(__("Order ID",'js-support-ticket')); ?></th>
-                                <th><?php echo esc_html(__("Product Name",'js-support-ticket')); ?></th>
-                                <th><?php echo esc_html(__("Total Tickets",'js-support-ticket')); ?></th>
-                                <th><?php echo esc_html(__("Remaining Tickets",'js-support-ticket')); ?></th>
-                                <th></th>
-                            </tr>
-                            <?php
-                            foreach($jsst_paidsupportitems as $jsst_row){
-                                ?>
-                                <tr>
-                                    <td>#<?php echo esc_html($jsst_row->orderid); ?></td>
-                                    <td><?php
-                                    echo esc_html($jsst_row->itemname);
-                                    if($jsst_row->qty > 1){
-                                        echo '<b> x '.esc_html($jsst_row->qty)."</b>";
-                                    }
-                                    ?></td>
-                                    <td><?php if($jsst_row->total == -1) echo esc_html(__("Unlimited",'js-support-ticket')); else echo esc_html($jsst_row->total); ?></td>
-                                    <td><?php if($jsst_row->total == -1) echo esc_html(__("Unlimited",'js-support-ticket')); else echo esc_html($jsst_row->remaining); ?></td>
-                                    <td><a href="<?php echo esc_url(jssupportticket::makeUrl(array('jstmod'=>'ticket','jstlay'=>'addticket','paidsupportid'=>$jsst_row->itemid))); ?>"><?php echo esc_html(__("Select",'js-support-ticket')); ?></a></td>
-                                </tr>
-                                <?php
-                            }
-                            ?>
-                        </table>
-                        <?php
-                    }
-                }
-            }
-            ?>
 
-            <?php if($jsst_showform): ?>
+            <?php if ($jsst_credit_state === null || !$jsst_credit_state['blocked']): ?>
             <?php $jsst_nonce_id = isset(jssupportticket::$jsst_data[0]->id) ?jssupportticket::$jsst_data[0]->id :''; ?>
             <form class="js-ticket-form js-support-ticket-form" method="post" action="<?php echo esc_url(wp_nonce_url(jssupportticket::makeUrl(array('jstmod'=>'ticket', 'task'=>'saveticket')),"save-ticket-".$jsst_nonce_id)); ?>" id="adminTicketform" enctype="multipart/form-data">
                 <?php
@@ -1351,7 +1400,20 @@ if (jssupportticket::$_config['offline'] == 2) {
                 <?php
                 if(isset($jsst_paidsupportid)){
                     echo wp_kses(JSSTformfield::hidden('paidsupportid', $jsst_paidsupportid), JSST_ALLOWED_TAGS);
-                }
+                } elseif (!empty(jssupportticket::$jsst_data['paidsupportitems'])) {
+                    $jsst_purchases = array();
+                    foreach (jssupportticket::$jsst_data['paidsupportitems'] AS $jsst_row) {
+                        $jsst_purchases[] = (object) array('id' => $jsst_row->itemid, 'text' => sprintf(
+                            /* translators: 1: WooCommerce order number, 2: product name */
+                            __('Order #%1$s · %2$s', 'js-support-ticket'), $jsst_row->orderid, $jsst_row->itemname));
+                    } ?>
+                    <div class="js-ticket-from-field-wrp">
+                        <div class="js-ticket-from-field-title"><?php echo esc_html(__('Purchase (optional)', 'js-support-ticket')); ?></div>
+                        <div class="js-ticket-from-field js-ticket-form-field-select">
+                            <?php echo wp_kses(JSSTformfield::select('paidsupportid', $jsst_purchases, '', esc_html(__('Select', 'js-support-ticket')), array('class' => 'inputbox js-ticket-select-field')), JSST_ALLOWED_TAGS); ?>
+                        </div>
+                    </div>
+                <?php }
                 ?>
                 <?php
                 foreach (jssupportticket::$jsst_data['fieldordering'] AS $jsst_field):

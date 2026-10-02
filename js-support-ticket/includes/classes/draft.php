@@ -107,6 +107,75 @@ class JSSTdraft {
         return $jsst_draft;
     }
 
+    /**
+     * Every draft this person has left unfinished. (Roadmap 4.5-FE-02)
+     *
+     * A draft has always been something you find by going back to the ticket
+     * you were writing on - which is fine until you have forgotten which ticket
+     * that was. The desk home asks the question the other way round, so the
+     * store has to be able to list itself.
+     *
+     * Read straight out of user meta rather than through get_user_meta() per
+     * ticket, because the caller does not know which tickets to ask about; that
+     * is the whole point of the question. Expired drafts are filtered here
+     * rather than deleted: this runs on a screen an agent is only looking at,
+     * and a read that quietly deletes rows is a bad thing to have behind a page
+     * load. get() clears them when the composer is next opened.
+     *
+     * @return array ticketid, mode, body, saved - newest first.
+     */
+    public static function forUser($jsst_userid, $jsst_limit = 0) {
+        $jsst_userid = (int) $jsst_userid;
+        if ($jsst_userid <= 0) {
+            return array();
+        }
+        $jsst_rows = jssupportticket::$_db->get_results(
+            jssupportticket::$_db->prepare(
+                'SELECT meta_key, meta_value FROM `' . jssupportticket::$_db->usermeta . '`'
+                . ' WHERE user_id = %d AND meta_key LIKE %s',
+                $jsst_userid,
+                jssupportticket::$_db->esc_like('jsst_draft_') . '%'
+            )
+        );
+        if (!is_array($jsst_rows)) {
+            return array();
+        }
+        $jsst_cutoff = time() - (self::MAX_AGE_DAYS * DAY_IN_SECONDS);
+        $jsst_out = array();
+        foreach ($jsst_rows as $jsst_row) {
+            if (!preg_match('/^jsst_draft_(\d+)_(public|internal)$/', $jsst_row->meta_key, $jsst_match)) {
+                continue;
+            }
+            $jsst_draft = maybe_unserialize($jsst_row->meta_value);
+            if (!is_array($jsst_draft) || empty($jsst_draft['body'])) {
+                continue;
+            }
+            $jsst_saved = isset($jsst_draft['saved']) ? (int) $jsst_draft['saved'] : 0;
+            if ($jsst_saved > 0 && $jsst_saved < $jsst_cutoff) {
+                continue;
+            }
+            $jsst_out[] = array(
+                'ticketid' => (int) $jsst_match[1],
+                'mode'     => $jsst_match[2],
+                'body'     => $jsst_draft['body'],
+                'saved'    => $jsst_saved,
+            );
+        }
+        usort($jsst_out, array(__CLASS__, 'compareSaved'));
+        if ($jsst_limit > 0) {
+            $jsst_out = array_slice($jsst_out, 0, (int) $jsst_limit);
+        }
+        return $jsst_out;
+    }
+
+    /** Newest first, so the draft an agent walked away from is at the top. */
+    private static function compareSaved($jsst_left, $jsst_right) {
+        if ($jsst_left['saved'] === $jsst_right['saved']) {
+            return 0;
+        }
+        return ($jsst_left['saved'] > $jsst_right['saved']) ? -1 : 1;
+    }
+
     public static function discard($jsst_userid, $jsst_ticketid, $jsst_mode) {
         delete_user_meta((int) $jsst_userid, self::metaKey($jsst_ticketid, $jsst_mode));
         return true;

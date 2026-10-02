@@ -18,11 +18,12 @@ $jsst_placeholders = JSSTincluder::getJSModel('cannedresponses')->placeholders()
  * different stylesheets, so the rules live in both admincss.css and style.css.
  */
 ?>
-<div class="js-form-wrapper fullwidth jsst-placeholders">
-    <div class="js-form-title">
+<?php /* The admin form uses the admin design system; the agent screen keeps its own form markup. */ ?>
+<div class="<?php echo esc_attr(is_admin() ? 'jsst-frow jsst-frow-full jsst-placeholders' : 'js-form-wrapper fullwidth jsst-placeholders'); ?>">
+    <div class="<?php echo esc_attr(is_admin() ? 'jsst-flabel' : 'js-form-title'); ?>">
         <?php echo esc_html(__('Placeholders', 'js-support-ticket')); ?>
     </div>
-    <div class="js-form-value">
+    <div class="<?php echo esc_attr(is_admin() ? 'jsst-fval' : 'js-form-value'); ?>">
         <p class="jsst-placeholders-intro"><?php echo esc_html(__('Type any of these into the response. Each one is replaced with the real value when an agent inserts the response into a reply. Click to copy.', 'js-support-ticket')); ?></p>
         <ul class="jsst-placeholder-list">
             <?php foreach ($jsst_placeholders AS $jsst_token => $jsst_description) { ?>

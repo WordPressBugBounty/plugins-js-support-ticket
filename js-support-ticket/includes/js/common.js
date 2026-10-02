@@ -8,17 +8,48 @@ function fillSpaces(string){
 	return string;
 }
 
-function getDataForDepandantField(wpnonce, parentf, childf, type) {
-    if (type == 1) {
-        var val = jQuery("select#" + parentf).val();
-    } else if (type == 2) {
-        var val = jQuery("input[name=\'" + parentf + "\']:checked").val();
+/**
+ * What the parent question is currently answered as.
+ *
+ * Asked of the control that is actually on the page rather than of a flag
+ * passed in from PHP. The flag said "1 for a select, 2 for radios", which meant
+ * a rendering decision taken in customfields.php had to be kept in step with a
+ * number written a few lines away from it - and it was not: the ticket listing
+ * filter draws a radio question as a dropdown, because radios with a dozen
+ * options make a mess of a filter bar, but went on passing 2. So it looked for
+ * `input[name=...]:checked`, found nothing on a page where the control is a
+ * select, sent an undefined value, and the dependent question simply stopped
+ * filling in - with nothing anywhere saying why.
+ *
+ * The DOM already knows which control it is. `type` is still accepted so that
+ * every existing caller keeps working, and is deliberately ignored.
+ */
+function jsstDepandantParentValue(parentf) {
+    var sel = jQuery("select[name='" + parentf + "']");
+    if (sel.length) {
+        var got = sel.val();
+        return jQuery.isArray(got) ? got.join(', ') : got;
     }
+    /* Radios and tick boxes: one checked value, or all of them where the
+       question takes more than one answer. */
+    var checked = jQuery("input[name='" + parentf + "']:checked, input[name='" + parentf + "[]']:checked");
+    if (checked.length) {
+        return checked.map(function () { return jQuery(this).val(); }).get().join(', ');
+    }
+    var any = jQuery("[name='" + parentf + "']").not(':checkbox').not(':radio');
+    return any.length ? any.val() : '';
+}
+
+function getDataForDepandantField(wpnonce, parentf, childf, type) {
+    var val = jsstDepandantParentValue(parentf);
 
     jQuery.post(ajaxurl, {action: 'jsticket_ajax', jstmod: 'fieldordering', task: 'DataForDepandantField', fvalue: val, child: childf, '_wpnonce':wpnonce}, function (data) {
         if (data) {
             var d = jQuery.parseJSON(data);
-            jQuery("select#" + childf).replaceWith(jsstDecodeHTML(d));
+            /* By id and by name: the id is what this has always used, and the
+               name is what survives a control being redrawn by something that
+               did not set one. */
+            jQuery("select#" + childf + ", select[name='" + childf + "']").first().replaceWith(jsstDecodeHTML(d));
         }
     });
 }
@@ -292,3 +323,48 @@ function jsReplyHideLoading(){
     jQuery('div#black_wrapper_ai_reply').hide();
     jQuery('div#js_ai_reply_loading').hide();
 }
+
+/*
+ * One click, one submission. Customers on slow connections pressed Submit again
+ * while the first request was still uploading, and got two tickets or two
+ * replies. Once a ticket or reply form really submits - after every other
+ * handler has run, so a form the validator stopped is left alone - its submit
+ * buttons are disabled until the page changes. The server refuses a repeat
+ * anyway (JSSTsubmitguard); this spares the customer the wait and the doubt.
+ * Buttons come back after 20 seconds in case the page never changes (a
+ * download, a network error), and when the page is shown again from the
+ * browser's back-forward cache.
+ */
+(function (jQuery) {
+    if (!jQuery) {
+        return;
+    }
+    var selector = 'form.js-support-ticket-form, form.js-det-tkt-form, form#adminTicketform';
+    var buttons = 'button[type="submit"], input[type="submit"], button:not([type])';
+
+    function release(form) {
+        jQuery(form).removeAttr('aria-busy').find(buttons).filter('[data-jsst-busy]').each(function () {
+            jQuery(this).prop('disabled', false).removeAttr('data-jsst-busy');
+        });
+    }
+
+    jQuery(document).on('submit', selector, function (event) {
+        var form = this;
+        setTimeout(function () {
+            var prevented = event.isDefaultPrevented() || (event.originalEvent && event.originalEvent.defaultPrevented);
+            if (prevented || jQuery(form).attr('aria-busy') === 'true') {
+                return;
+            }
+            jQuery(form).attr('aria-busy', 'true').find(buttons).each(function () {
+                if (!this.disabled) {
+                    jQuery(this).prop('disabled', true).attr('data-jsst-busy', '1');
+                }
+            });
+            setTimeout(function () { release(form); }, 20000);
+        }, 0);
+    });
+
+    window.addEventListener('pageshow', function () {
+        jQuery(selector).each(function () { release(this); });
+    });
+})(window.jQuery);

@@ -18,7 +18,18 @@ class JSSTconfigurationModel {
             // core has to stay editable even though no add-on is active — its
             // `addon` column still names the add-on it arrived with.
             // (Roadmap 4.0-CORE-19)
-            if($jsst_config->addon == '' ||  in_array($jsst_config->addon, jssupportticket::$_active_addons) || JSSTmergedaddon::isMerged($jsst_config->addon)){
+            //
+            // The tag is asked of JSSTbundle rather than looked up in the
+            // availability array directly, because three add-ons tag their rows
+            // with something that is not their slug and two of those write
+            // `email` — a string that array cannot be allowed to contain, since
+            // getPluginPath() would read it as a js-support-ticket-email plugin
+            // carrying core's own mail module. settingsTagActive() knows about
+            // the aliases without that side effect. (Roadmap 6.5-ECO-01)
+            $jsst_tagged = class_exists('JSSTbundle')
+                ? JSSTbundle::settingsTagActive($jsst_config->addon)
+                : ($jsst_config->addon == '' || in_array($jsst_config->addon, jssupportticket::$_active_addons));
+            if($jsst_tagged || JSSTmergedaddon::isMerged($jsst_config->addon)){
                 jssupportticket::$jsst_data[0][$jsst_config->configname] = $jsst_config->configvalue;
             }
         }
@@ -99,7 +110,7 @@ class JSSTconfigurationModel {
     function storeConfiguration($jsst_data) {
         $jsst_nonce = JSSTrequest::getVar('_wpnonce');
         if (! wp_verify_nonce( $jsst_nonce, 'save-configuration') ) {
-            die( 'Security check Failed' );
+            die( esc_html__( 'Security check Failed', 'js-support-ticket' ) );
         }
         if (!current_user_can('manage_options')) { //only admin can change it.
             return false;
@@ -331,7 +342,7 @@ class JSSTconfigurationModel {
         }
         $jsst_nonce = JSSTrequest::getVar('_wpnonce');
         if (!wp_verify_nonce($jsst_nonce, 'delete-support-customimage')) {
-            die('Security check Failed');
+            die(esc_html__( 'Security check Failed', 'js-support-ticket' ));
         }
 
         $jsst_maindir = wp_upload_dir();
@@ -409,9 +420,63 @@ class JSSTconfigurationModel {
             return false;
     }
 
+    /**
+     * One setting, by name.
+     *
+     * Returns null for a name that has no row, and null is indistinguishable
+     * from "switched off" at every call site: `getConfigValue('x') == 1` is
+     * false whether the setting is off or the name is a typo. That is not
+     * hypothetical - `JSSTcapability` asked for `allowguest` and
+     * `JSSTprivacy` for `autocleanup_ticket_days`, neither of which this product
+     * has ever written, and both read as a settled "no" for as long as they
+     * existed: guests refused by the API on a desk that accepts them, and a
+     * published privacy policy saying nothing was deleted while the cleanup cron
+     * deleted tickets.
+     *
+     * So a miss says so, once per name, under WP_DEBUG only. It is deliberately
+     * not an exception and not a customer-visible warning: a setting this site
+     * genuinely has not got yet is normal on an upgrade path, and the cost of
+     * being wrong about that must not be a broken screen. Whoever is developing
+     * against this sees the name they got wrong; everybody else sees nothing.
+     *
+     * It catches the shape above and not the other one - a bare
+     * `jssupportticket::$_config['name']` guarded by isset(), which is how the
+     * autocleanup pair were read. Nothing here can see those; they are an array
+     * subscript. Finding those needs a scan of the source against the table, the
+     * way JSSTdocs and JSSThooks read the files, and is worth doing separately.
+     * (Roadmap 4.0-CORE-13)
+     */
     function getConfigValue($jsst_configname){
         $jsst_query = jssupportticket::$_db->prepare("SELECT configvalue FROM `".jssupportticket::$_db->prefix."js_ticket_config` WHERE configname = %s", $jsst_configname);
         $jsst_configvalue = jssupportticket::$_db->get_var($jsst_query);
+        if ($jsst_configvalue === null && defined('WP_DEBUG') && WP_DEBUG) {
+            static $jsst_missing = array();
+            if (!isset($jsst_missing[$jsst_configname])) {
+                $jsst_missing[$jsst_configname] = true;
+                /* A null here does not yet mean the name is wrong, and the
+                   first cut of this check assumed it did - then said so about
+                   `login_link` and `register_link`, which are real settings
+                   that happen to be blank. `$wpdb::get_var()` ends in
+                   `'' !== $values[$x] ? $values[$x] : null`, so it hands back
+                   null for an empty string exactly as it does for no row at
+                   all. Which is worth knowing beyond this notice: it is part of
+                   why a name nothing writes is invisible here, because there is
+                   no return value that means "there is no such setting".
+                   So the row is counted before anything is claimed. The extra
+                   query costs nothing worth counting - WP_DEBUG only, once per
+                   name per request, and only on the null path. */
+                $jsst_exists = jssupportticket::$_db->get_var(jssupportticket::$_db->prepare(
+                    "SELECT COUNT(1) FROM `".jssupportticket::$_db->prefix."js_ticket_config` WHERE configname = %s",
+                    $jsst_configname));
+                if (!$jsst_exists) {
+                    /* phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_error_log -- WP_DEBUG only, and the point of it. */
+                    error_log(sprintf(
+                        'JS Help Desk: getConfigValue("%s") has no row in js_ticket_config, so it reads as empty on every site. If a feature depends on it, check the name.',
+                        $jsst_configname
+                    ));
+                }
+            }
+        }
         return $jsst_configvalue;
     }
 
@@ -436,6 +501,10 @@ class JSSTconfigurationModel {
         $jsst_cat_args['taxonomy'] = 'product_cat';
         $jsst_product_categories = get_terms( $jsst_cat_args );
         $jsst_catList = array();
+        // A WP_Error when WooCommerce is not loaded and product_cat is not registered.
+        if (is_wp_error($jsst_product_categories)) {
+            return $jsst_catList;
+        }
         foreach ($jsst_product_categories as $jsst_category) {
             $jsst_catList[] = (object) array('id' => $jsst_category->term_id, 'text' => $jsst_category->name);
         }
@@ -456,30 +525,61 @@ class JSSTconfigurationModel {
         return $jsst_result;
     }
 
-    function storeAutoUpdateConfig() {
-
-        if (!current_user_can('manage_options')) { //only admin can change it.
-            return false;
+    public static function normaliseChoiceValues() {
+        $jsst_table = jssupportticket::$_db->prefix . 'js_ticket_config';
+        $jsst_rules = array(
+            // Enabled / Disabled: 0 -> 2 (Disabled).
+            array('from' => '0', 'to' => '2', 'keys' => array(
+                'banemail_mail_to_admin', 'new_ticket_mail_to_staff_members',
+                'ticket_reassign_staff', 'ticket_close_staff', 'ticket_delete_staff',
+                'ticket_mark_overdue_admin', 'ticket_mark_overdue_staff',
+                'ticket_mark_overdue_user', 'ticket_ban_email_admin', 'ticket_ban_email_staff',
+                'ticket_ban_email_user', 'ticket_department_transfer_staff',
+                'ticket_reply_ticket_user_staff', 'ticket_response_to_staff_admin',
+                'ticket_response_to_staff_staff', 'ticket_response_to_staff_user',
+                'ticker_ban_eamil_and_close_ticktet_admin',
+                'ticker_ban_eamil_and_close_ticktet_staff',
+                'ticker_ban_eamil_and_close_ticktet_user', 'unban_email_admin',
+                'unban_email_staff', 'unban_email_user', 'ticket_lock_admin', 'ticket_lock_staff',
+                'ticket_lock_user', 'ticket_unlock_admin', 'ticket_unlock_staff',
+                'ticket_unlock_user', 'ticket_mark_progress_admin', 'ticket_mark_progress_staff',
+                'ticket_mark_progress_user', 'create_user_via_email'
+            )),
+            // Show / Hide: 2 -> 0 (Hide).
+            array('from' => '2', 'to' => '0', 'keys' => array(
+                'cplink_openticket_staff', 'cplink_myticket_staff', 'cplink_addrole_staff',
+                'cplink_roles_staff', 'cplink_addstaff_staff', 'cplink_staff_staff',
+                'cplink_adddepartment_staff', 'cplink_department_staff',
+                'cplink_addcategory_staff', 'cplink_category_staff', 'cplink_addkbarticle_staff',
+                'cplink_kbarticle_staff', 'cplink_adddownload_staff', 'cplink_download_staff',
+                'cplink_addannouncement_staff', 'cplink_announcement_staff', 'cplink_addfaq_staff',
+                'cplink_faq_staff', 'cplink_mail_staff', 'cplink_myprofile_staff',
+                'cplink_staff_report_staff', 'cplink_department_report_staff',
+                'cplink_login_logout_staff', 'cplink_totalcount_staff', 'cplink_ticketstats_staff',
+                'cplink_latesttickets_staff', 'cplink_latestdownloads_staff',
+                'cplink_latestannouncements_staff', 'cplink_latestkb_staff',
+                'cplink_latestfaqs_staff', 'tplink_home_staff', 'tplink_tickets_staff',
+                'cplink_downloads_user', 'cplink_announcements_user', 'cplink_faqs_user',
+                'cplink_knowledgebase_user', 'cplink_latestdownloads_user',
+                'cplink_latestannouncements_user', 'cplink_latestkb_user',
+                'cplink_latestfaqs_user'
+            )),
+            // Ticket-number padding: '' -> 1 (no padding, as before).
+            array('from' => '', 'to' => '1', 'keys' => array('padding_zeros_ticketid')),
+        );
+        $jsst_changed = 0;
+        foreach ($jsst_rules as $jsst_rule) {
+            $jsst_in = implode(', ', array_fill(0, count($jsst_rule['keys']), '%s'));
+            $jsst_args = array_merge(array($jsst_rule['to'], $jsst_rule['from']), $jsst_rule['keys']);
+            $jsst_result = jssupportticket::$_db->query(jssupportticket::$_db->prepare(
+                "UPDATE `" . $jsst_table . "` SET `configvalue` = %s WHERE `configvalue` = %s AND `configname` IN (" . $jsst_in . ")",
+                $jsst_args
+            ));
+            if ($jsst_result) {
+                $jsst_changed += (int) $jsst_result;
+            }
         }
-        $jsst_configvalue = JSSTrequest::getVar('jsst_addons_auto_update','','');
-
-        if (!is_numeric($jsst_configvalue)) { //can only have numric value
-            return false;
-        }
-
-        $jsst_error = false;
-        $jsst_query = jssupportticket::$_db->prepare("UPDATE `" . jssupportticket::$_db->prefix . "js_ticket_config` SET `configvalue` = %d WHERE `configname`= 'jsst_addons_auto_update'", $jsst_configvalue);
-        if (false === jssupportticket::$_db->query($jsst_query)) {
-            $jsst_error = true;
-        }
-
-        if ($jsst_error) {
-            JSSTmessage::setMessage(esc_html(__('Something went wrong. Please try again.', 'js-support-ticket')), 'error');
-            return WPJOBPORTAL_SAVE_ERROR;
-        } else {
-            JSSTmessage::setMessage(esc_html(__('The setting has been stored.', 'js-support-ticket')), 'updated');
-        }
-        return;
+        return $jsst_changed;
     }
 }
 

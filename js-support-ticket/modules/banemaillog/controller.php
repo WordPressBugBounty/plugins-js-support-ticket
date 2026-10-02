@@ -63,7 +63,7 @@ class JSSTbanemaillogController {
         $jsst_id = JSSTrequest::getVar('banemaillogid');
         $jsst_nonce = JSSTrequest::getVar('_wpnonce');
         if (! wp_verify_nonce( $jsst_nonce, 'delete-banemaillog-'.$jsst_id) ) {
-            die( 'Security check Failed' );
+            die( esc_html__( 'Security check Failed', 'js-support-ticket' ) );
         }
         JSSTincluder::getJSModel('banemaillog')->removeBanEmailLog($jsst_id);
         $jsst_url = admin_url("admin.php?page=banemaillog&jstlay=banemaillogs");

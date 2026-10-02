@@ -53,7 +53,16 @@ class JSSTmessage {
         if (isset($jsst_notificationdata) && !empty($jsst_notificationdata)) {
             $jsst_data = $jsst_notificationdata;
             for ($jsst_i = 0; $jsst_i < COUNT($jsst_data['msg']); $jsst_i++){
-                $jsst_divHtml .= '<div class=" ' . esc_attr($jsst_frontend) . ' ' . esc_attr($jsst_data['type'][$jsst_i]) . '"><p>' . esc_html($jsst_data['msg'][$jsst_i]);
+                /* Announced, not just shown. A screen reader is given no
+                   reason to revisit the top of the page after a save, so
+                   without a live region "Saved." and "You are not allowed" are
+                   both silence. An error interrupts; anything else waits for a
+                   pause, which is the difference between role=alert and
+                   role=status. (Roadmap 4.0-UX-08) */
+                $jsst_isError = (strpos((string) $jsst_data['type'][$jsst_i], 'error') !== false);
+                $jsst_divHtml .= '<div role="' . ($jsst_isError ? 'alert' : 'status') . '"'
+                    . ' aria-live="' . ($jsst_isError ? 'assertive' : 'polite') . '"'
+                    . ' class=" ' . esc_attr($jsst_frontend) . ' ' . esc_attr($jsst_data['type'][$jsst_i]) . '"><p>' . esc_html($jsst_data['msg'][$jsst_i]);
                 /* The page that explains this one, when the message named one
                    and the catalogue still has it. Admin only — the diagnostic
                    pages are written for whoever runs the site, and a customer

@@ -981,7 +981,7 @@ class JSSThelptopicModel {
         if($jsst_callfrom == 1){
             $jsst_nonce = JSSTrequest::getVar('_wpnonce');
             if (! wp_verify_nonce( $jsst_nonce, 'helptopic') ) {
-                die( 'Security check Failed' );
+                die( esc_html__( 'Security check Failed', 'js-support-ticket' ) );
             }
             $jsst_search_array['topic'] = JSSTrequest::getVar('topic');
             $jsst_search_array['status'] = JSSTrequest::getVar('status');

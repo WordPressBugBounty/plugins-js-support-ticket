@@ -64,7 +64,7 @@ class JSSTdepartmentController {
         $jsst_id = JSSTrequest::getVar('id');
         $jsst_nonce = JSSTrequest::getVar('_wpnonce');
         if (! wp_verify_nonce( $jsst_nonce, 'save-department-'.$jsst_id) ) {
-            die( 'Security check Failed' );
+            die( esc_html__( 'Security check Failed', 'js-support-ticket' ) );
         }
         $jsst_data = JSSTrequest::get('post');
         JSSTincluder::getJSModel('department')->storeDepartment($jsst_data);
@@ -81,7 +81,7 @@ class JSSTdepartmentController {
         $jsst_id = JSSTrequest::getVar('departmentid');
         $jsst_nonce = JSSTrequest::getVar('_wpnonce');
         if (! wp_verify_nonce( $jsst_nonce, 'delete-department-'.$jsst_id) ) {
-            die( 'Security check Failed' );
+            die( esc_html__( 'Security check Failed', 'js-support-ticket' ) );
         }
         JSSTincluder::getJSModel('department')->removeDepartment( absint( $jsst_id ) );
         if (is_admin()) {
@@ -97,7 +97,7 @@ class JSSTdepartmentController {
         $jsst_id = JSSTrequest::getVar('departmentid');
         $jsst_nonce = JSSTrequest::getVar('_wpnonce');
         if (! wp_verify_nonce( $jsst_nonce, 'change-status-'.$jsst_id) ) {
-            die( 'Security check Failed' );
+            die( esc_html__( 'Security check Failed', 'js-support-ticket' ) );
         }
         JSSTincluder::getJSModel('department')->changeStatus( absint( $jsst_id ) );
         $jsst_url = admin_url("admin.php?page=department&jstlay=departments");
@@ -112,7 +112,7 @@ class JSSTdepartmentController {
         $jsst_id = JSSTrequest::getVar('departmentid');
         $jsst_nonce = JSSTrequest::getVar('_wpnonce');
         if (! wp_verify_nonce( $jsst_nonce, 'change-default-'.$jsst_id) ) {
-            die( 'Security check Failed' );
+            die( esc_html__( 'Security check Failed', 'js-support-ticket' ) );
         }
         $jsst_default = absint( JSSTrequest::getVar('default',null,0) );
         JSSTincluder::getJSModel('department')->changeDefault( absint( $jsst_id ), $jsst_default);
@@ -127,7 +127,7 @@ class JSSTdepartmentController {
     static function ordering() {
         $jsst_nonce = JSSTrequest::getVar('_wpnonce');
         if (! wp_verify_nonce( $jsst_nonce, 'ordering') ) {
-            die( 'Security check Failed' );
+            die( esc_html__( 'Security check Failed', 'js-support-ticket' ) );
         }
         $jsst_id = JSSTrequest::getVar('departmentid');
         JSSTincluder::getJSModel('department')->setOrdering( absint( $jsst_id ) );

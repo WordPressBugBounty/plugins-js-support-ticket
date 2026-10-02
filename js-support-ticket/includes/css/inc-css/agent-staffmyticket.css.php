@@ -609,7 +609,7 @@ div#js-filter-wrapper-toggle-area {
         .js-ticket-wrapper{
             display: flex;
             flex-wrap:wrap;
-            align-items: center; /* Vertically align image and text */
+            align-items: flex-start;
             background-color: #ffffff;
             border-radius: 16px;
             box-shadow: 0 8px 32px rgba(0, 31, 63, 0.08);
@@ -690,7 +690,7 @@ div#js-filter-wrapper-toggle-area {
         .jsst-main-up-wrapper .js-ticket-data1 {
             flex: 0 0 240px; /* Fixed width */
             text-align: left; /* Changed from right */
-            padding-left: 12px;
+            padding-left: 18px;
             padding-right: 0px;
             border-left: 1px solid ' . $jsst_color5 . ';
         }
@@ -1024,27 +1024,45 @@ $jsst_jssupportticket_css .= '
         div.js-ticket-top-cirlce-count-wrp {border:1px solid' . $jsst_color5 . ';}
         div.js-myticket-link a.js-myticket-link{border:1px solid' . $jsst_color5 . ';}
         div.js-myticket-link a.js-myticket-link:hover{box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1); background-color: #f8f9fa; transform: translateY(-3px);}
+        /* The ring colour of each tab. Status hues are deliberately literal
+           rather than theme colours: green means open and red means closed
+           whichever of the seven palettes the site has picked, and a palette
+           that happened to be red would make Open read as a problem.
+           js-ticket-waitingagent and js-ticket-waitingcustomer are the two
+           tabs 4.5-UX-01 added; they had no colour here at all, which is why
+           both of their rings drew in the default grey. (Roadmap 4.5-UX-01) */
         .js-ticket-answer{background-color:#F7B731;} /* Vibrant Orange */
         .js-ticket-close{background-color:#E74C3C;} /* Strong Red */
         .js-ticket-allticket{background-color:#3498DB;} /* Bright Blue */
         .js-ticket-open{background-color:#2ECC71;} /* Emerald Green */
         .js-ticket-overdue{background-color:#E67E22;} /* Carrot Orange */
-        div.js-myticket-link a.js-myticket-link span.js-ticket-circle-count-text.js-ticket-blue{color:#F7B731;}
+        .js-ticket-waitingagent{background-color:#7C5CE6;} /* Indigo */
+        .js-ticket-waitingcustomer{background-color:#17A2B8;} /* Teal */
+        /* The label under each ring takes the colour of that ring. These used
+           to be shuffled - the blue tab was labelled amber and the orange one
+           blue - so a tile said one thing and drew another. */
+        div.js-myticket-link a.js-myticket-link span.js-ticket-circle-count-text.js-ticket-blue{color:#3498DB;}
         div.js-myticket-link a.js-myticket-link span.js-ticket-circle-count-text.js-ticket-red{color:#E74C3C;}
-        div.js-myticket-link a.js-myticket-link span.js-ticket-circle-count-text.js-ticket-orange{color:#3498DB;}
+        div.js-myticket-link a.js-myticket-link span.js-ticket-circle-count-text.js-ticket-orange{color:#E67E22;}
         div.js-myticket-link a.js-myticket-link span.js-ticket-circle-count-text.js-ticket-green{color:#2ECC71;}
         div.js-myticket-link a.js-myticket-link span.js-ticket-circle-count-text.js-ticket-pink{color:#E67E22;}
+        div.js-myticket-link a.js-myticket-link span.js-ticket-circle-count-text.js-ticket-purple{color:#7C5CE6;}
+        div.js-myticket-link a.js-myticket-link span.js-ticket-circle-count-text.js-ticket-teal{color:#17A2B8;}
         div.js-myticket-link a.js-myticket-link div.progress::after {border: 25px solid #e0e0e0;} /* Lighter grey for progress background */
         div.js-myticket-link a.js-myticket-link.js-ticket-green.active{border-color:#2ECC71; box-shadow: 0 4px 10px rgba(46, 204, 113, 0.3);}
-        div.js-myticket-link a.js-myticket-link.js-ticket-blue.active{border-color:#F7B731; box-shadow: 0 4px 10px rgba(247, 183, 49, 0.3);}
+        div.js-myticket-link a.js-myticket-link.js-ticket-blue.active{border-color:#3498DB; box-shadow: 0 4px 10px rgba(52, 152, 219, 0.3);}
         div.js-myticket-link a.js-myticket-link.js-ticket-red.active{border-color:#E74C3C; box-shadow: 0 4px 10px rgba(231, 76, 60, 0.3);}
-        div.js-myticket-link a.js-myticket-link.js-ticket-orange.active{border-color:#3498DB; box-shadow: 0 4px 10px rgba(52, 152, 219, 0.3);}
+        div.js-myticket-link a.js-myticket-link.js-ticket-orange.active{border-color:#E67E22; box-shadow: 0 4px 10px rgba(230, 126, 34, 0.3);}
         div.js-myticket-link a.js-myticket-link.js-ticket-pink.active{border-color:#E67E22; box-shadow: 0 4px 10px rgba(230, 126, 34, 0.3);}
+        div.js-myticket-link a.js-myticket-link.js-ticket-purple.active{border-color:#7C5CE6; box-shadow: 0 4px 10px rgba(124, 92, 230, 0.3);}
+        div.js-myticket-link a.js-myticket-link.js-ticket-teal.active{border-color:#17A2B8; box-shadow: 0 4px 10px rgba(23, 162, 184, 0.3);}
         div.js-myticket-link a.js-myticket-link.js-ticket-green:hover{border-color:#2ECC71;}
-        div.js-myticket-link a.js-myticket-link.js-ticket-blue:hover{border-color:#F7B731;}
+        div.js-myticket-link a.js-myticket-link.js-ticket-blue:hover{border-color:#3498DB;}
         div.js-myticket-link a.js-myticket-link.js-ticket-red:hover{border-color:#E74C3C;}
-        div.js-myticket-link a.js-myticket-link.js-ticket-orange:hover{border-color:#3498DB;}
+        div.js-myticket-link a.js-myticket-link.js-ticket-orange:hover{border-color:#E67E22;}
         div.js-myticket-link a.js-myticket-link.js-ticket-pink:hover{border-color:#E67E22;}
+        div.js-myticket-link a.js-myticket-link.js-ticket-purple:hover{border-color:#7C5CE6;}
+        div.js-myticket-link a.js-myticket-link.js-ticket-teal:hover{border-color:#17A2B8;}
         div.js-myticket-link a.js-myticket-link.js-ticket-brown.active{border-color:#6C7A89; box-shadow: 0 4px 10px rgba(108, 122, 137, 0.3);} /* A neutral brown/grey for All Tickets */
         div.js-myticket-link a.js-myticket-link.js-ticket-brown:hover{border-color:#6C7A89;}
 
@@ -1075,7 +1093,7 @@ $jsst_jssupportticket_css .= '
     /* My Tickets $ Staff My Tickets*/
         div.js-ticket-search-wrp div.js-ticket-form-wrp form.js-filter-form div.js-filter-wrapper div.js-filter-value select{background-color:#fff;border: 1px solid ' . $jsst_color5 . ';}
         div.js-ticket-search-wrp div.js-ticket-form-wrp form.js-filter-form div.js-filter-wrapper div.js-filter-value textarea{background-color:#fff;border: 1px solid ' . $jsst_color5 . ';}
-        div.js-ticket-wrapper div.js-ticket-pic{min-width: 80px;height: 80px;max-width: fit-content;}
+        div.js-ticket-wrapper div.js-ticket-pic{min-width: 80px;height: 80px;max-width: fit-content;margin-top:15px}
         div.js-ticket-wrapper div.js-ticket-pic img{width:80px;height:80px;}
         div.js-ticket-wrapper div.js-ticket-data .name span.js-ticket-value {color:' . $jsst_color4 . ';}
         div.js-ticket-wrapper div.js-ticket-data span.js-ticket-title{color:' . $jsst_color2 . ';}
@@ -1148,6 +1166,630 @@ $jsst_jssupportticket_css .= '
         outline-offset: 2px;
     }
 ';
+
+/* --------------------------------------------------------------------------
+   The queue controls added in 4.5 - saved views, the bulk bar, row selection,
+   the tab tiles and the workspace nav strip. (Roadmap 4.5-UX-01, 4.5-FE-02)
+
+   These shipped with class names and no stylesheet behind them, so the front
+   end rendered them as raw browser controls: a default grey button, a square
+   unstyled input, and two labels meant only for a screen reader showing as
+   full-size text. They belong here, in this page's own stylesheet, taking
+   their colours from the theme the way every other rule on this page does -
+   a hard-coded colour would ignore whichever of the seven palettes the site
+   has chosen.
+   -------------------------------------------------------------------------- */
+$jsst_jssupportticket_css .= '
+
+/* ---------------------------------------------------------------------------
+   Clear the floats first.
+
+   This page is built out of floats: the header wrapper, the tile row and the
+   search panel are all float:left. A component that arrives after one of them
+   and establishes its own formatting context - anything display:flex - is
+   laid out BESIDE the float rather than below it, and takes whatever width is
+   left over. Beside a float that is already the full width of the page, that
+   is nothing: the box is still there, still the right height, and 0px wide.
+
+   That is what the bulk bar did the moment its row stopped carrying an
+   explicit width, and what the workspace nav strip was doing on every portal
+   screen - an empty bordered panel with six invisible links stacked inside it.
+   The strip is cleared in style.css because it is printed on four layouts; the
+   rest are this page\'s own and are cleared here.
+   --------------------------------------------------------------------------- */
+.jsst-queue-scopes,
+details.jsst-queue-columns,
+.jsst-queue-views,
+.jsst-queue-bulk,
+div.js-ticket-sorting {
+    clear: both;
+}
+
+/* ---------------------------------------------------------------------------
+   The tab tiles.
+
+   The row was a float grid sized for five tiles - width: calc(100% / 5) - and
+   4.5-UX-01 made it six. The sixth wrapped onto a line of its own and, because
+   the tiles are not all the same height, it caught on the one above and left a
+   hole the height of a tile in the middle of the page. Floats also cannot make
+   a row of equal-height cards, which is what this is.
+
+   It is a flex row now. The tiles size themselves from a basis rather than a
+   fraction, so adding or removing a tab cannot break the row again: six fit
+   across a desk, three across a tablet, two across a phone.
+
+   min-width: 0 matters. A flex item defaults to min-width: auto, which is its
+   min-content width, and the ring inside each tile is 150px square - so six
+   tiles refused to shrink below 204px each, overflowed, and wrapped anyway.
+   --------------------------------------------------------------------------- */
+div.js-ticket-top-cirlce-count-wrp {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: stretch;
+    justify-content: center;
+    float: none;
+    width: 100%;
+}
+div.js-ticket-top-cirlce-count-wrp > div.js-myticket-link {
+    display: flex;
+    float: none;
+    width: auto;
+    min-width: 0;
+    max-width: 100%;
+    flex: 1 1 140px;
+    margin: 0 0 10px;
+}
+div.js-ticket-top-cirlce-count-wrp > div.js-myticket-link > a.js-myticket-link {
+    width: 100%;
+    min-width: 0;
+    padding: 16px 6px;
+}
+
+/* The ring is drawn at 150px by status_graph.css out of absolutely positioned
+   halves and clip: rect() values, so it cannot be resized by setting a width -
+   every one of those rects would have to be rewritten. Scaling from the top
+   left corner and giving the wrapper the finished size does it in two lines,
+   and keeps the ring out of the tile\'s min-content width. */
+div.js-ticket-top-cirlce-count-wrp div.js-ticket-cricle-wrp {
+    width: 108px;
+    height: 108px;
+    margin: 0 auto 12px;
+    overflow: visible;
+}
+div.js-ticket-top-cirlce-count-wrp div.js-ticket-cricle-wrp .js-mr-rp {
+    margin: 0;
+    -webkit-transform: scale(0.72);
+    -ms-transform: scale(0.72);
+    transform: scale(0.72);
+    -webkit-transform-origin: top left;
+    -ms-transform-origin: top left;
+    transform-origin: top left;
+}
+div.js-ticket-top-cirlce-count-wrp span.js-ticket-circle-count-text {
+    min-width: 0;
+    font-size: 0.7em;
+    line-height: 1.35;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    text-wrap: balance;
+}
+/* Never split a count from its brackets. */
+div.js-ticket-top-cirlce-count-wrp span.js-ticket-circle-count-num {
+    white-space: nowrap;
+}
+
+/* For a screen reader only. This class was used in the markup and defined
+   nowhere, which is why "Name for this view" and "Select ticket ..." were
+   being drawn on the page. Not display:none - that would take them away from
+   the screen readers they exist for. */
+.js-ticket-screen-reader-text {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+/* ---------------------------------------------------------------------------
+   The controls.
+
+   Every control this page already had is 52px tall with a white face, a
+   ' . $jsst_color5 . ' border, 12px 15px of padding and 5px of radius on a
+   field or 8px on a button. The 4.5 controls arrived at 33px, 37px and 44px
+   with three different borders, which is the whole of what "it does not look
+   like the rest of the page" means.
+
+   They also take their type size from the page rather than naming one. Every
+   other control here inherits it, so a theme that sets a 22px body - and the
+   one this was reported on does - had 22px text in the search box beside 14px
+   text in the bulk bar. font-size: inherit is what the rest of the page does;
+   the quieter labels are given a fraction of it so they stay in proportion
+   whatever the theme picks.
+   --------------------------------------------------------------------------- */
+.js-ticket-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    /* 2.5em rather than a pixel floor, for the same reason as the type size:
+       the buttons beside these are as tall as the page\'s own text makes them,
+       so a fixed 52px is right on a 22px theme and too tall on a 16px one. */
+    min-height: 2.5em;
+    height: auto;
+    padding: 12px 20px;
+    background: ' . $jsst_color1 . ';
+    border: 1px solid ' . $jsst_color1 . ';
+    border-radius: 8px;
+    color: ' . $jsst_color7 . ';
+    font-size: inherit;
+    font-weight: 600;
+    line-height: normal;
+    text-decoration: none;
+    cursor: pointer;
+}
+.js-ticket-btn:hover, .js-ticket-btn:focus {
+    background: ' . $jsst_color7 . ';
+    color: ' . $jsst_color1 . ';
+}
+
+/* The second button in a pair. "Back to the site default" undoes a choice and
+   "Save columns" makes one; drawn identically they read as two equal offers,
+   and the destructive-looking one is the one nobody meant to press. This is
+   the same pale secondary the Reset button beside the search box uses, so the
+   page has one idea of what a secondary button looks like rather than two. */
+.js-ticket-btn.js-ticket-btn-quiet {
+    background: #f5f2f5;
+    border-color: ' . $jsst_color5 . ';
+    color: ' . $jsst_color4 . ';
+}
+.js-ticket-btn.js-ticket-btn-quiet:hover,
+.js-ticket-btn.js-ticket-btn-quiet:focus {
+    background: ' . $jsst_color2 . ';
+    border-color: ' . $jsst_color5 . ';
+    color: ' . $jsst_color7 . ';
+}
+
+/* The shared field look, given to every 4.5 control on this page at once.
+   Named tag-and-class deep enough to beat the plugin\'s own input.inputbox
+   rules, which otherwise leave one field in a bar sized differently from the
+   one beside it. */
+.jsst-queue-views input.inputbox.jsst-queue-viewname,
+select.jsst-queue-view,
+.jsst-queue-bulk select.inputbox,
+.jsst-queue-bulk input[type="text"].inputbox {
+    box-sizing: border-box;
+    height: auto;
+    min-height: 52px;
+    padding: 12px 15px;
+    background-color: ' . $jsst_color7 . ';
+    border: 1px solid ' . $jsst_color5 . ';
+    border-radius: 5px;
+    color: ' . $jsst_color4 . ';
+    font-size: inherit;
+    font-weight: 500;
+    line-height: normal;
+}
+.jsst-queue-viewname::placeholder,
+.jsst-queue-bulk input[type="text"].inputbox::placeholder { color: ' . $jsst_color4 . '; }
+
+/* A select on this page draws its own arrow, because the theme takes the
+   native one away with appearance:none. Without this the bulk action select
+   is a text box that happens to open a menu. The arrow is the same one the
+   search panel\'s selects use, in the same place.
+
+   The saved-views picker is here for exactly that reason. The search panel
+   styles its own selects by naming each one by id - #jsst-departmentid,
+   #jsst-status and the rest - and #viewid is in neither that list nor this
+   one, so it kept the theme\'s appearance:none and nothing else: a 102px
+   native grey box with square corners and no arrow, sitting among fields that
+   are white, 52px and rounded. */
+select.jsst-queue-view,
+.jsst-queue-bulk select.inputbox {
+    background: ' . $jsst_color7 . ' url("data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 24 24\' fill=\'%23' . substr($jsst_color4, 1) . '\'%3E%3Cpath d=\'M7 10l5 5 5-5z\'/%3E%3C/svg%3E") no-repeat right 15px center / 20px;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    padding-right: 45px;
+}
+
+/* Saving a search as a view. */
+.jsst-queue-views {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    width: 100%;
+    box-sizing: border-box;
+    margin: 12px 0 0;
+    padding: 12px 14px;
+    background: ' . $jsst_color7 . ';
+    border: 1px solid ' . $jsst_color5 . ';
+    border-radius: 8px;
+}
+.jsst-queue-views > * {
+    min-width: 0;
+    margin: 0 10px 0 0;
+}
+.jsst-queue-viewname {
+    flex: 1 1 260px;
+    min-width: 0;
+    max-width: 420px;
+}
+/* Drawn as a field of its own - the same white, bordered, 52px box as the
+   name beside it - so the checkbox and its words read as one control inside
+   the strip rather than loose text floating on the tint. */
+.jsst-queue-share {
+    display: inline-flex;
+    align-items: center;
+    box-sizing: border-box;
+    min-width: 0;
+    min-height: 52px;
+    padding: 0 15px;
+    background-color: ' . $jsst_color7 . ';
+    border: 1px solid ' . $jsst_color5 . ';
+    border-radius: 5px;
+    font-size: 0.8em;
+    color: ' . $jsst_color4 . ';
+    cursor: pointer;
+}
+.jsst-queue-share input[type="checkbox"] {
+    flex: 0 0 auto;
+    width: 18px;
+    height: 18px;
+    margin: 0 8px 0 0;
+    accent-color: ' . $jsst_color1 . ';
+    cursor: pointer;
+}
+.jsst-queue-share span { min-width: 0; }
+.jsst-queue-view-delete {
+    align-self: center;
+    font-size: 0.75em;
+    color: ' . $jsst_color4 . ';
+    text-decoration: underline;
+}
+.jsst-queue-view-delete:hover, .jsst-queue-view-delete:focus { color: ' . $jsst_color2 . '; }
+
+/* ---------------------------------------------------------------------------
+   Choosing a view: a pair on the search panel\'s button row, not a band of
+   its own.
+
+   Two earlier attempts at this were both a full-width box holding one small
+   select. First the plain .jsst-queue-views card - white, fully bordered, 8px
+   radius - which floated between the panel and the save strip and broke the
+   flush bottom edge that strip is shaped for. Then the same width as a tinted
+   strip above the save strip, which fixed the edge and left the real problem
+   untouched: a 1038px band eighty per cent empty, stacked on another band, so
+   the panel ended in two grey slabs for two small controls.
+
+   The button row already had an empty right-hand half, and Search and Reset
+   are the right company - none of the three is a filter, all three act on the
+   search as a whole. `margin-left:auto` beats the row\'s justify-content and
+   parks the pair at the far end.
+   --------------------------------------------------------------------------- */
+.jsst-queue-viewpick {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    margin-left: auto;
+}
+select.jsst-queue-view {
+    width: auto;
+    min-width: 200px;
+    max-width: 260px;
+}
+
+/* ---------------------------------------------------------------------------
+   Saving one, as the search card\'s footer rather than a card inside it.
+
+   The form sits inside the search panel, and it was drawn with the panel\'s
+   own treatment - white, fully bordered, its own radius - so the page showed
+   a bordered white box inside a bordered white box, and a second text field
+   the same size as the search field directly under it. Two identical fields
+   stacked read as two filters, which is not what the second one is.
+
+   As a tinted strip along the bottom of the panel, with a hairline above it
+   and the panel\'s own bottom corners, it reads as what it is: something to
+   do with the search that has just been typed.
+   --------------------------------------------------------------------------- */
+.jsst-queue-views.jsst-queue-saveview {
+    margin: 0;
+    padding: 16px 20px;
+    background: ' . $jsst_color3 . ';
+    border: 0;
+    border-top: 1px solid ' . $jsst_color5 . ';
+    border-radius: 0 0 12px 12px;
+}
+.jsst-queue-saveview-label {
+    flex: 0 0 auto;
+    min-width: 0;
+    font-size: 0.8em;
+    font-weight: 600;
+    color: ' . $jsst_color4 . ';
+    cursor: pointer;
+}
+/* The name takes whatever the label, the share box and the button leave, so
+   the strip is filled edge to edge instead of ending in empty tint. */
+.jsst-queue-views.jsst-queue-saveview .jsst-queue-viewname {
+    flex: 1 1 220px;
+    max-width: none;
+}
+
+/* ---------------------------------------------------------------------------
+   The bulk bar and the tick on each row.
+
+   The row inside the form is the flex line, not the form itself - the form
+   also holds the hidden fields, and laying those out as flex items put gaps
+   where nothing was drawn.
+
+   jsst-bulk-selectall is the LABEL around the tick, not the tick: it was being
+   given the checkbox\'s 18x18, which squashed "Select all" into a two-line
+   sliver overlapping the select beside it. The admin desk has always read it
+   as a label; this is the front end catching up with it rather than a new
+   idea.
+   --------------------------------------------------------------------------- */
+.jsst-queue-bulk {
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+    margin: 12px 0;
+    padding: 12px 14px;
+    background: ' . $jsst_color3 . ';
+    border: 1px solid ' . $jsst_color5 . ';
+    border-radius: 8px;
+}
+.jsst-queue-bulk .jsst-bulk-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    width: 100%;
+}
+.jsst-queue-bulk .jsst-bulk-row > * { min-width: 0; margin: 0 10px 0 0; }
+.jsst-queue-bulk select.jsst-bulk-action { flex: 0 1 220px; }
+.jsst-queue-bulk .jsst-bulk-value { flex: 0 1 200px; }
+.jsst-queue-bulk input.jsst-bulk-reason { flex: 1 1 240px; min-width: 160px; }
+.jsst-queue-bulk .js-ticket-btn { flex: 0 0 auto; }
+.jsst-bulk-selectall {
+    display: inline-flex;
+    align-items: center;
+    flex: 0 0 auto;
+    min-width: 0;
+    white-space: nowrap;
+    font-size: 0.8em;
+    color: ' . $jsst_color4 . ';
+    cursor: pointer;
+}
+.jsst-bulk-count {
+    flex: 0 0 auto;
+    font-size: 0.75em;
+    color: ' . $jsst_color1 . ';
+}
+/* ---------------------------------------------------------------------------
+   The checkboxes.
+
+   A native checkbox is drawn by the browser and ignores nearly everything CSS
+   says about it, so the tick on each ticket was the operating system\'s own
+   square sitting against a card whose every other control has a face of its
+   own - and hard against the card\'s left border, because the ticket card
+   carries "padding: 15px 0 25px" and has no left padding to sit inside.
+
+   This page already had an answer to that: the "Assigned To Me" box in the
+   search panel is appearance:none with a white face, a ' . $jsst_color5 . '
+   border, a 2px radius and a white tick on ' . $jsst_color1 . ' when it is
+   ticked. The three checkboxes 4.5 added now look like that one rather than
+   like three different ideas.
+
+   The picker is also given a real target. It was a bare 18px box, which is
+   under half the 44px a finger is measured against, and it had nothing to
+   show it was clickable at all.
+   --------------------------------------------------------------------------- */
+.jsst-bulk-pick {
+    display: inline-flex;
+    align-self: flex-start;
+    flex: 0 0 auto;
+    float: none;
+    width: 26px;
+    min-height: 30px;
+    min-width: 0;
+    margin: 0 0 0 0px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+.jsst-bulk-pick:hover .jsst-bulk-ticket { border-color: ' . $jsst_color1 . '; }
+.jsst-bulk-pick .jsst-bulk-ticket { margin: 0; }
+div.js-ticket-wrapper .js-ticket-toparea {
+    width: auto;
+    min-width: 0;
+    flex: 1 1 0;
+    margin-top: 10px;
+}
+.jsst-bulk-ticket,
+.jsst-bulk-selectall input[type="checkbox"],
+.jsst-queue-share input[type="checkbox"],
+.jsst-queue-column input[type="checkbox"] {
+    position: relative;
+    flex: 0 0 auto;
+    box-sizing: border-box;
+    width: 18px;
+    height: 18px;
+    margin: 0 8px 0 0;
+    padding: 0;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background-color: ' . $jsst_color7 . ';
+    border: 1px solid ' . $jsst_color5 . ';
+    /* Rounded, not square. Everything else on a ticket card is soft - a 16px
+       card, a circular avatar, pill-shaped tags and status chips - and a hard
+       2px square in the middle of it was the one thing that looked borrowed
+       from another product. The inset shadow is the one the search fields on
+       this page already carry. */
+    border-radius: 5px;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.05);
+    cursor: pointer;
+    transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+/* The one on a ticket row is larger than the ones inside a bar: it sits on its
+   own beside a 110px avatar rather than next to its own label, and at 18px it
+   read as a stray mark rather than a control. */
+.jsst-bulk-pick .jsst-bulk-ticket {
+    width: 22px;
+    height: 22px;
+}
+.jsst-bulk-pick .jsst-bulk-ticket:checked:after {
+    background-size: 15px 15px;
+}
+.jsst-bulk-ticket:hover,
+.jsst-bulk-selectall input[type="checkbox"]:hover,
+.jsst-queue-share input[type="checkbox"]:hover,
+.jsst-queue-column input[type="checkbox"]:hover:not(:disabled) {
+    border-color: ' . $jsst_color1 . ';
+}
+.jsst-bulk-ticket:checked,
+.jsst-bulk-selectall input[type="checkbox"]:checked,
+.jsst-queue-share input[type="checkbox"]:checked,
+.jsst-queue-column input[type="checkbox"]:checked {
+    background-color: ' . $jsst_color1 . ';
+    border-color: ' . $jsst_color1 . ';
+}
+/* The reference and the subject cannot be turned off, so their boxes are
+   ticked and disabled. Shown as ticked-but-quiet rather than as an ordinary
+   tick, because a control that looks live and refuses to move is worse than
+   one that says it is fixed. */
+.jsst-queue-column input[type="checkbox"]:disabled {
+    background-color: ' . $jsst_color5 . ';
+    border-color: ' . $jsst_color5 . ';
+    cursor: not-allowed;
+}
+.jsst-queue-column input[type="checkbox"]:disabled + span { opacity: 0.75; }
+/* The tick. Drawn here rather than left to the browser, because appearance:
+   none takes the browser\'s own away and a filled square with nothing in it
+   is not a ticked checkbox. */
+.jsst-bulk-ticket:checked:after,
+.jsst-bulk-selectall input[type="checkbox"]:checked:after,
+.jsst-queue-share input[type="checkbox"]:checked:after,
+.jsst-queue-column input[type="checkbox"]:checked:after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 20 20\' fill=\'%23ffffff\'%3E%3Cpath fill-rule=\'evenodd\' d=\'M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z\' clip-rule=\'evenodd\' /%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 12px 12px;
+}
+
+/* A picked row says so. Progressive enhancement: a browser without :has()
+   simply does not draw it, and the tick still reads on its own. */
+.js-ticket-wrapper:has(.jsst-bulk-ticket:checked) {
+    border-color: ' . $jsst_color1 . ';
+    box-shadow: 0 0 0 1px ' . $jsst_color1 . ';
+}
+
+/* Where these controls are reached by keyboard, say so. */
+.js-ticket-btn:focus-visible,
+.jsst-queue-viewname:focus-visible,
+.jsst-queue-share input:focus-visible,
+.jsst-bulk-ticket:focus-visible,
+.jsst-bulk-selectall input:focus-visible,
+.jsst-queue-bulk select.inputbox:focus-visible,
+.jsst-queue-bulk input[type="text"].inputbox:focus-visible {
+    outline: 2px solid ' . $jsst_color1 . ';
+    outline-offset: 2px;
+}
+
+/* Gap where it is supported, with the margins above as the fallback - Chrome
+   before 84 ignores gap on flex and would otherwise pack these together. */
+@supports (gap: 1px) {
+    .jsst-queue-views, .jsst-queue-bulk .jsst-bulk-row { gap: 10px; }
+    .jsst-queue-views > *, .jsst-queue-bulk .jsst-bulk-row > * { margin: 0; }
+    div.js-ticket-top-cirlce-count-wrp { gap: 10px; }
+    div.js-ticket-top-cirlce-count-wrp > div.js-myticket-link { margin: 0; }
+}
+
+/* Three tiles across a tablet. Six at 140px each would fit, but a 108px ring
+   in a 140px tile leaves no room for a label like "Waiting on Customer". */
+@media (max-width: 991px) {
+    div.js-ticket-top-cirlce-count-wrp > div.js-myticket-link { flex: 1 1 30%; }
+}
+
+/* On a phone every one of these becomes its own row: a 240px input and a
+   button side by side inside a 320px screen is two half-controls. */
+@media (max-width: 768px) {
+    div.js-ticket-top-cirlce-count-wrp > div.js-myticket-link { flex: 1 1 45%; }
+    .jsst-queue-views, .jsst-queue-bulk { display: block; padding: 12px; }
+    .jsst-queue-bulk .jsst-bulk-row { display: block; }
+    .jsst-queue-views > *,
+    .jsst-queue-bulk .jsst-bulk-row > * { display: flex; width: 100%; margin: 0 0 10px; }
+    /* Everything in these bars becomes full width on a phone except the label
+       that is only there for a screen reader. Given the full width it is a
+       597px box hanging off the side of a 430px screen, and the whole page
+       scrolls sideways to reach text nobody can see. */
+    .jsst-queue-views > .js-ticket-screen-reader-text,
+    .jsst-queue-bulk .jsst-bulk-row > .js-ticket-screen-reader-text {
+        display: block;
+        width: 1px;
+        margin: -1px;
+    }
+    .jsst-queue-viewname,
+    select.jsst-queue-view,
+    .jsst-queue-bulk select.inputbox,
+    .jsst-queue-bulk input[type="text"].inputbox { max-width: 100%; width: 100%; min-width: 0; }
+    /* The label above its select rather than beside it, and the pair on its own
+       line under the buttons - there is no empty right-hand half to park it in
+       on a phone. */
+    .jsst-queue-viewpick {
+        display: flex;
+        flex-wrap: wrap;
+        width: 100%;
+        margin-left: 0;
+    }
+    .jsst-queue-viewpick > * { width: 100%; }
+    .js-ticket-btn { width: 100%; }
+    .jsst-queue-view-delete { justify-content: center; }
+    .jsst-bulk-count:empty { display: none; }
+}
+
+/* The narrowest phones keep two tiles across rather than one: a single tile
+   per row turns six tabs into a page of scrolling. */
+@media (max-width: 480px) {
+    div.js-ticket-top-cirlce-count-wrp > div.js-myticket-link { flex: 1 1 45%; }
+    div.js-ticket-top-cirlce-count-wrp span.js-ticket-circle-count-text { font-size: 0.62em; }
+}
+';
+
+/* The same rules mirrored for right-to-left, which is how this plugin handles
+   direction everywhere: the physical margins above are the ones that have to
+   swap, along with the side the select draws its arrow on. (Roadmap 4.0-UX-06) */
+if (is_rtl()) {
+    $jsst_jssupportticket_css .= '
+    .jsst-queue-views > *,
+    .jsst-queue-bulk .jsst-bulk-row > * { margin: 0 0 0 10px; }
+    .jsst-queue-share input[type="checkbox"],
+    .jsst-bulk-selectall input[type="checkbox"],
+    .jsst-queue-column input[type="checkbox"],
+    .jsst-bulk-ticket { margin: 0 0 0 8px; }
+    .jsst-bulk-pick { float: none; margin: 0 10px 0 0; }
+    .jsst-bulk-pick .jsst-bulk-ticket { margin: 0; }
+    .jsst-queue-bulk select.inputbox {
+        background-position: left 15px center;
+        padding-right: 15px;
+        padding-left: 45px;
+    }
+    @supports (gap: 1px) {
+        .jsst-queue-views > *, .jsst-queue-bulk .jsst-bulk-row > * { margin: 0; }
+        div.js-ticket-top-cirlce-count-wrp > div.js-myticket-link { margin: 0; }
+    }
+    @media (max-width: 768px) {
+        .jsst-queue-views > *,
+        .jsst-queue-bulk .jsst-bulk-row > * { margin: 0 0 10px; }
+    }
+    ';
+}
 
 
 wp_add_inline_style('jssupportticket-main-css', $jsst_jssupportticket_css);

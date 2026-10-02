@@ -15,8 +15,12 @@ class JSSTzywrapController {
         if (self::canaddfile($jsst_layout)) {
             switch ($jsst_layout) {
                 case 'admin_zywrap':
+                    /* The Zywrap dashboard's parts now live in AI Agent: status on
+                       Overview, the key (and a link to get one) in Settings,
+                       requests and errors under Activity. */
+                    JSSTincluder::moved(admin_url('admin.php?page=aiagent'));
                     include_once JSST_PLUGIN_PATH . 'includes/updates/updates.php';
-                    JSSTupdates::checkUpdates('311');
+                    JSSTupdates::checkUpdates('500');
                     JSSTincluder::getJSModel('zywrap')->getDashboardStats();
                     break;
 
@@ -68,14 +72,14 @@ class JSSTzywrapController {
     static function delete_log() {
         // SECURITY: ONLY ADMINS CAN DELETE LOGS
         if (!current_user_can('manage_options')) {
-            wp_die('Security Error: Administrators only.');
+            wp_die(esc_html__( 'Security Error: Administrators only.', 'js-support-ticket' ));
         }
         
         $jsst_id = JSSTrequest::getVar('id');
         $jsst_nonce = JSSTrequest::getVar('_wpnonce');
         
         if (!wp_verify_nonce($jsst_nonce, 'delete_log_'.$jsst_id)) {
-            die('Security check Failed');
+            die(esc_html__( 'Security check Failed', 'js-support-ticket' ));
         }
         
         JSSTincluder::getJSModel('zywrap')->deleteLog( absint( $jsst_id ) );

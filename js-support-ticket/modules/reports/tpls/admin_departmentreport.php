@@ -58,7 +58,20 @@ $jsst_jssupportticket_js ="
 	//     // redraw charts, dashboards, etc here
 	//     chart.draw(data, options);
 	// }
-	// jQuery(window).resize(resizeCharts);
+	/* The commented-out resizeCharts below was the same broken one Agent
+	   Reports had - it referenced drawChart's locals. Redrawing means calling
+	   drawChart() again, debounced. */
+	var jsstResizeTimer = null;
+	/* Guarded on the WIDTH, not on the event: a redraw changes the page
+	   height, which can toggle the vertical scrollbar, which fires resize
+	   again - a loop that pins the renderer. */
+	var jsstLastWidth = jQuery(window).width();
+	jQuery(window).resize(function () {
+	    if (jQuery(window).width() === jsstLastWidth) { return; }
+	    jsstLastWidth = jQuery(window).width();
+	    clearTimeout(jsstResizeTimer);
+	    jsstResizeTimer = setTimeout(function () { try { drawChart(); } catch (e) {} }, 200);
+	});
 ";
 wp_add_inline_script('ticket-google-charts-handle',$jsst_jssupportticket_js);
 JSSTmessage::getMessage();
@@ -70,247 +83,108 @@ $jsst_link_export = admin_url('admin.php?page=export&task='.esc_attr($jsst_t_nam
         <?php  JSSTincluder::getClassesInclude('jsstadminsidemenu'); ?>
     </div>
     <div id="jsstadmin-data">
-		<div id="jsstadmin-wrapper-top">
-		    <div id="jsstadmin-wrapper-top-left">
-		        <div id="jsstadmin-breadcrunbs">
-		            <ul>
-		                <li><a href="?page=jssupportticket" title="<?php echo esc_attr(__('Dashboard','js-support-ticket')); ?>"><?php echo esc_html(__('Dashboard','js-support-ticket')); ?></a></li>
-		                <li><?php echo esc_html(__('Department Reports','js-support-ticket')); ?></li>
-		            </ul>
-		        </div>
-		    </div>
-		    <div id="jsstadmin-wrapper-top-right">
-		        <div id="jsstadmin-config-btn">
-		            <a title="<?php echo esc_attr(__('Configuration','js-support-ticket')); ?>" href="<?php echo esc_url(admin_url("admin.php?page=configuration")); ?>">
-		                <img alt = "<?php echo esc_attr(__('Configuration','js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/config.png" />
-		            </a>
-		        </div>
-    	        <div id="jsstadmin-config-btn" class="jssticketadmin-help-btn">
-    	            <a href="<?php echo esc_url(admin_url("admin.php?page=jssupportticket&jstlay=help")); ?>" title="<?php echo esc_attr(__('Help','js-support-ticket')); ?>">
-    	                <img alt = "<?php echo esc_attr(__('Help','js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/help.png" />
-    	            </a>
-    	        </div>
-		        <div id="jsstadmin-vers-txt">
-		            <?php echo esc_html(__("Version",'js-support-ticket')); ?>:
-		            <span class="jsstadmin-ver"><?php echo esc_html(JSSTincluder::getJSModel('configuration')->getConfigValue('versioncode')); ?></span>
-		        </div>
-		    </div>
-		</div>
-    	<div id="jsstadmin-head">
-            <h1 class="jsstadmin-head-text"><?php echo esc_html(__("Department Reports", 'js-support-ticket')); ?></h1>
-            <?php // The ticket export is core from 4.0; these report-summary exports are still
-                    // served by the add-on until 4.0-CORE-10b moves them onto the CSV writer.
-                    if(JSSTmergedaddon::legacyActive('export')){ ?>
-	  			<a title="<?php echo esc_attr(__('Export Data','js-support-ticket')); ?>" id="jsexport-link" class="jsstadmin-add-link button" href="<?php echo esc_url($jsst_link_export); ?>"><img alt = "<?php echo esc_attr(__('Export','js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/export-icon.png" /><?php echo esc_html(__('Export Data', 'js-support-ticket')); ?></a>
-	  		<?php } ?>
+  <?php
+  /* The report exports are still served by the legacy add-on until
+     4.0-CORE-10b moves them onto the CSV writer, so the button only
+     appears when that add-on is there to answer it. */
+  $jsst_headactions = array();
+  if (JSSTmergedaddon::legacyActive('export')) {
+      $jsst_headactions[] = array('text' => __('Export Data', 'js-support-ticket'),
+          'url' => $jsst_link_export, 'style' => 'ghost', 'attrs' => array('id' => 'jsexport-link'));
+  }
+  JSSTlayout::adminPageHeader(array(
+      'title'   => __("Department Reports", 'js-support-ticket'),
+      'actions' => $jsst_headactions,
+  ));
+  ?>
+        <div id="jsstadmin-data-wrp">
+            <?php
+            require_once(dirname(__FILE__) . '/report_common.php');
+            $jsst_curdate    = date_i18n('Y-m-d');
+            $jsst_enddate    = date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime("now -1 month"));
+            $jsst_date_start = !empty(jssupportticket::$jsst_data['filter']['date_start']) ? jssupportticket::$jsst_data['filter']['date_start'] : $jsst_curdate;
+            $jsst_date_end   = !empty(jssupportticket::$jsst_data['filter']['date_end']) ? jssupportticket::$jsst_data['filter']['date_end'] : $jsst_enddate;
+            ?>
+
+            <p class="jsst-lede">
+                <?php echo esc_html(__('The same figures as the agent report, gathered by department instead of by person.', 'js-support-ticket')); ?>
+            </p>
+
+            <form class="js-filter-form js-report-form" name="jssupportticketform" id="jssupportticketform" method="post" action="<?php echo esc_url(wp_nonce_url(admin_url("admin.php?page=reports&jstlay=departmentreport"),"reports")); ?>">
+                <div class="jsst-card">
+                    <div class="jsst-card-body">
+                        <div class="jsst-formgrid">
+                            <div class="jsst-frow jsst-frow-sm">
+                                <label class="jsst-flabel" for="date_start"><?php echo esc_html(__('Start Date', 'js-support-ticket')); ?></label>
+                                <div class="jsst-fval"><?php echo wp_kses(JSSTformfield::text('date_start', date_i18n(jssupportticket::$_config['date_format'], jssupportticketphplib::JSST_strtotime($jsst_date_start)), array('class' => 'custom_date js-form-date-field')), JSST_ALLOWED_TAGS); ?></div>
+                            </div>
+                            <div class="jsst-frow jsst-frow-sm">
+                                <label class="jsst-flabel" for="date_end"><?php echo esc_html(__('End Date', 'js-support-ticket')); ?></label>
+                                <div class="jsst-fval"><?php echo wp_kses(JSSTformfield::text('date_end', date_i18n(jssupportticket::$_config['date_format'], jssupportticketphplib::JSST_strtotime($jsst_date_end)), array('class' => 'custom_date js-form-date-field')), JSST_ALLOWED_TAGS); ?></div>
+                            </div>
+                            <div class="jsst-frow jsst-frow-action">
+                                <?php echo wp_kses(JSSTformfield::submitbutton('go', esc_html(__('Search', 'js-support-ticket')), array('class' => 'jsst-btn jsst-btn-primary')), JSST_ALLOWED_TAGS); ?>
+                                <?php echo wp_kses(JSSTformfield::button('reset', esc_html(__('Reset', 'js-support-ticket')), array('class' => 'jsst-btn', 'onclick' => 'resetFrom();')), JSST_ALLOWED_TAGS); ?>
+                            </div>
+                        </div>
+                        <?php echo wp_kses(JSSTformfield::hidden('JSST_form_search', 'JSST_SEARCH'), JSST_ALLOWED_TAGS); ?>
+                    </div>
+                </div>
+            </form>
+
+            <?php jsst_report_section_open(__('Overall Report', 'js-support-ticket'));
+                  jsst_report_graph('curve_chart');
+                  jsst_report_section_close(); ?>
+
+            <?php jsst_report_section_open(__('Departments', 'js-support-ticket')); ?>
+                <?php if (!empty(jssupportticket::$jsst_data['depatments_report'])) {
+                    foreach (jssupportticket::$jsst_data['depatments_report'] AS $jsst_dept) {
+                        $jsst_all = isset($jsst_dept->allticket) ? (int) $jsst_dept->allticket : 0;
+                        $jsst_ppc = function ($jsst_v) use ($jsst_all) {
+                            return ($jsst_all === 0 || empty($jsst_v)) ? 0 : (int) round(((int) $jsst_v / $jsst_all) * 100);
+                        };
+                        $jsst_href = admin_url('admin.php?page=reports&jstlay=departmentdetailreport&id=' . esc_attr($jsst_dept->id)
+                            . '&date_start=' . jssupportticket::$jsst_data['filter']['date_start']
+                            . '&date_end=' . jssupportticket::$jsst_data['filter']['date_end']); ?>
+                        <div class="jsst-reprow">
+                            <a class="jsst-repwho" href="<?php echo esc_url($jsst_href); ?>" title="<?php echo esc_attr(__('Department', 'js-support-ticket')); ?>">
+                                <span>
+                                    <span class="jsst-repname"><?php echo esc_html($jsst_dept->departmentname); ?></span>
+                                    <span class="jsst-repsub"><?php echo esc_html($jsst_dept->email); ?></span>
+                                </span>
+                            </a>
+                            <div class="jsst-repstats">
+                                <div class="jsst-statrow">
+                                    <?php
+                                    jsst_report_tile(array('small' => true, 'pct' => $jsst_ppc($jsst_dept->openticket), 'fill' => 'js-ticket-open',
+                                        'tone' => 'js-ticket-green', 'count' => (int) $jsst_dept->openticket, 'label' => __('Open', 'js-support-ticket'),
+                                        'title' => __('Open Tickets', 'js-support-ticket')));
+                                    jsst_report_tile(array('small' => true, 'pct' => $jsst_ppc($jsst_dept->answeredticket), 'fill' => 'js-ticket-answer',
+                                        'tone' => 'js-ticket-brown', 'count' => (int) $jsst_dept->answeredticket, 'label' => __('Answered', 'js-support-ticket'),
+                                        'title' => __('answered ticket', 'js-support-ticket')));
+                                    jsst_report_tile(array('small' => true, 'pct' => $jsst_ppc($jsst_dept->pendingticket), 'fill' => 'js-ticket-allticket',
+                                        'tone' => 'js-ticket-blue', 'count' => (int) $jsst_dept->pendingticket, 'label' => __('Pending', 'js-support-ticket'),
+                                        'title' => __('Pending Tickets', 'js-support-ticket')));
+                                    if (in_array('overdue', jssupportticket::$_active_addons)) {
+                                        jsst_report_tile(array('small' => true, 'pct' => $jsst_ppc($jsst_dept->overdueticket), 'fill' => 'js-ticket-overdue',
+                                            'tone' => 'js-ticket-orange', 'count' => (int) $jsst_dept->overdueticket, 'label' => __('Overdue', 'js-support-ticket'),
+                                            'title' => __('Overdue Tickets', 'js-support-ticket')));
+                                    }
+                                    jsst_report_tile(array('small' => true, 'pct' => $jsst_ppc($jsst_dept->closeticket), 'fill' => 'js-ticket-close',
+                                        'tone' => 'js-ticket-red', 'count' => (int) $jsst_dept->closeticket, 'label' => __('Closed', 'js-support-ticket'),
+                                        'title' => __('Close Ticket', 'js-support-ticket')));
+                                    ?>
+                                </div>
+                            </div>
+                        </div>
+                    <?php }
+                    if (jssupportticket::$jsst_data[1]) {
+                        echo '<div class="tablenav"><div class="tablenav-pages">' . wp_kses_post(jssupportticket::$jsst_data[1]) . '</div></div>';
+                    }
+                } else {
+                    JSSTlayout::getNoRecordFound();
+                } ?>
+            <?php jsst_report_section_close(); ?>
         </div>
-        <div id="jsstadmin-data-wrp" class="p0 bg-n bs-n">
-        	<form class="js-filter-form js-report-form" name="jssupportticketform" id="jssupportticketform" method="post" action="<?php echo esc_url(wp_nonce_url(admin_url("admin.php?page=reports&jstlay=departmentreport"),"reports")); ?>">
-			    <?php
-			        $jsst_curdate = date_i18n('Y-m-d');
-			        $jsst_enddate = date_i18n('Y-m-d', jssupportticketphplib::JSST_strtotime("now -1 month"));
-			        $jsst_date_start = !empty(jssupportticket::$jsst_data['filter']['date_start']) ? jssupportticket::$jsst_data['filter']['date_start'] : $jsst_curdate;
-			        $jsst_date_end = !empty(jssupportticket::$jsst_data['filter']['date_end']) ? jssupportticket::$jsst_data['filter']['date_end'] : $jsst_enddate;
-			        $jsst_uid = !empty(jssupportticket::$jsst_data['filter']['uid']) ? jssupportticket::$jsst_data['filter']['uid'] : '';
-			    	echo wp_kses(JSSTformfield::text('date_start', date_i18n(jssupportticket::$_config['date_format'], jssupportticketphplib::JSST_strtotime($jsst_date_start)), array('class' => 'custom_date js-form-date-field','placeholder' => esc_html(__('Start Date','js-support-ticket')))), JSST_ALLOWED_TAGS);
-			    	echo wp_kses(JSSTformfield::text('date_end', date_i18n(jssupportticket::$_config['date_format'], jssupportticketphplib::JSST_strtotime($jsst_date_end)), array('class' => 'custom_date js-form-date-field','placeholder' => esc_html(__('End Date','js-support-ticket')))), JSST_ALLOWED_TAGS);
-			    	echo wp_kses(JSSTformfield::hidden('JSST_form_search', 'JSST_SEARCH'), JSST_ALLOWED_TAGS);
-				?>
-			    <?php echo wp_kses(JSSTformfield::submitbutton('go', esc_html(__('Search', 'js-support-ticket')), array('class' => 'button js-form-search')), JSST_ALLOWED_TAGS); ?>
-				<?php echo wp_kses(JSSTformfield::button('reset', esc_html(__('Reset', 'js-support-ticket')), array('class' => 'button js-form-reset', 'onclick' => 'resetFrom();')), JSST_ALLOWED_TAGS); ?>
-			</form>
-			<div class="js-admin-report">
-				<div class="js-admin-subtitle"><?php echo esc_html(__('Overall Report','js-support-ticket')); ?></div>
-				<div class="js-admin-rep-graph" id="curve_chart" style="height:400px;width:98%; "></div>
-			</div>
-			<div class="js-admin-report">
-				<div class="js-admin-subtitle"><?php echo esc_html(__('Departments','js-support-ticket')); ?></div>
-				<div class="js-admin-staff-list">
-					<?php
-					if(!empty(jssupportticket::$jsst_data['depatments_report'])){
-						foreach(jssupportticket::$jsst_data['depatments_report'] AS $jsst_dept){ ?>
-							<div class="js-admin-staff-wrapper dept-reprt">
-								<a href="<?php echo esc_url(admin_url('admin.php?page=reports&jstlay=departmentdetailreport&id='.esc_attr($jsst_dept->id).'&date_start='.jssupportticket::$jsst_data['filter']['date_start'].'&date_end='.jssupportticket::$jsst_data['filter']['date_end'])); ?>" class="js-admin-staff-anchor-wrapper" title="<?php echo esc_attr(__('Department','js-support-ticket')); ?>">
-									<div class="js-admin-staff-cnt">
-										<div class="js-report-staff-cnt">
-											<div class="js-report-staff-info js-report-staff-name">
-												<?php
-													echo esc_html($jsst_dept->departmentname);
-												?>
-											</div>
-											<div class="js-report-staff-info js-report-staff-email">
-												<?php
-													echo esc_html($jsst_dept->email);
-												?>
-											</div>
-										</div>
-									</div>
-									<div class="js-admin-staff-boxes">
-										<?php
-											$jsst_open_percentage = 0;
-											$jsst_close_percentage = 0;
-											$jsst_answered_percentage = 0;
-											$jsst_pending_percentage = 0;
-											$jsst_overdue_percentage = 0;
-											if(isset($jsst_dept) && isset($jsst_dept->allticket) && $jsst_dept->allticket != 0){
-											    $jsst_open_percentage = round(($jsst_dept->openticket / $jsst_dept->allticket) * 100);
-											    $jsst_close_percentage = round(($jsst_dept->closeticket / $jsst_dept->allticket) * 100);
-											    $jsst_overdue_percentage = round(($jsst_dept->overdueticket / $jsst_dept->allticket) * 100);
-											    $jsst_answered_percentage = round(($jsst_dept->answeredticket / $jsst_dept->allticket) * 100);
-											    $jsst_pending_percentage = round(($jsst_dept->pendingticket / $jsst_dept->allticket) * 100);
-											}
-											if(isset($jsst_dept) && isset($jsst_dept->allticket) && $jsst_dept->allticket != 0){
-											    $jsst_allticket_percentage = 100;
-											}
-										?>
-										<div class="js-ticket-count">
-										    <div class="js-ticket-link">
-										        <a class="js-ticket-link js-ticket-green" href="#" data-tab-number="1" title="<?php echo esc_attr(__('Open Tickets','js-support-ticket')); ?>">
-										            <div class="js-ticket-cricle-wrp" data-per="<?php echo esc_attr($jsst_open_percentage); ?>" data-tab-number="1">
-										                <div class="js-mr-rp" data-progress="<?php echo esc_attr($jsst_open_percentage); ?>">
-										                    <div class="circle">
-										                        <div class="mask full">
-										                             <div class="fill js-ticket-open"></div>
-										                        </div>
-										                        <div class="mask half">
-										                            <div class="fill js-ticket-open"></div>
-										                            <div class="fill fix"></div>
-										                        </div>
-										                        <div class="shadow"></div>
-										                    </div>
-										                    <div class="inset">
-										                    </div>
-										                </div>
-										            </div>
-										            <div class="js-ticket-link-text js-ticket-green">
-										                <?php
-										                    echo esc_html(__('Open', 'js-support-ticket'));
-										                    echo ' ( '.esc_html($jsst_dept->openticket).' )';
-										                ?>
-										            </div>
-										        </a>
-										    </div>
-										    <div class="js-ticket-link">
-										        <a class="js-ticket-link js-ticket-brown" href="#" data-tab-number="2" title="<?php echo esc_attr(__('answered ticket','js-support-ticket')); ?>">
-										            <div class="js-ticket-cricle-wrp" data-per="<?php echo esc_attr($jsst_answered_percentage); ?>" >
-										                <div class="js-mr-rp" data-progress="<?php echo esc_attr($jsst_answered_percentage); ?>">
-										                    <div class="circle">
-										                        <div class="mask full">
-										                             <div class="fill js-ticket-answer"></div>
-										                        </div>
-										                        <div class="mask half">
-										                            <div class="fill js-ticket-answer"></div>
-										                            <div class="fill fix"></div>
-										                        </div>
-										                        <div class="shadow"></div>
-										                    </div>
-										                    <div class="inset">
-										                    </div>
-										                </div>
-										            </div>
-										            <div class="js-ticket-link-text js-ticket-brown">
-										                <?php
-										                    echo esc_html(__('Answered', 'js-support-ticket'));
-										                    echo ' ( '. esc_html($jsst_dept->answeredticket).' )';
-										                ?>
-										            </div>
-										        </a>
-										    </div>
-										    <div class="js-ticket-link">
-							                    <a class="js-ticket-link js-ticket-blue" href="#" data-tab-number="3" title="<?php echo esc_attr(__('Pending Tickets','js-support-ticket')); ?>">
-							                        <div class="js-ticket-cricle-wrp" data-per="<?php echo esc_attr($jsst_pending_percentage); ?>">
-							                            <div class="js-mr-rp" data-progress="<?php echo esc_attr($jsst_pending_percentage); ?>">
-							                                <div class="circle">
-							                                    <div class="mask full">
-							                                         <div class="fill js-ticket-allticket"></div>
-							                                    </div>
-							                                    <div class="mask half">
-							                                        <div class="fill js-ticket-allticket"></div>
-							                                        <div class="fill fix"></div>
-							                                    </div>
-							                                    <div class="shadow"></div>
-							                                </div>
-							                                <div class="inset">
-							                                </div>
-							                            </div>
-							                        </div>
-							                        <div class="js-ticket-link-text js-ticket-blue">
-							                            <?php
-							                                echo esc_html(__('Pending', 'js-support-ticket'));
-							                                echo ' ( '. esc_html($jsst_dept->pendingticket).' )';
-							                            ?>
-							                        </div>
-							                    </a>
-							                </div>
-										    <div class="js-ticket-link">
-										        <a class="js-ticket-link js-ticket-orange" href="#" data-tab-number="4" title="<?php echo esc_attr(__('Overdue Tickets','js-support-ticket')); ?>">
-										            <div class="js-ticket-cricle-wrp" data-per="<?php echo esc_attr($jsst_overdue_percentage); ?>" >
-										                <div class="js-mr-rp" data-progress="<?php echo esc_attr($jsst_overdue_percentage); ?>">
-										                    <div class="circle">
-										                        <div class="mask full">
-										                             <div class="fill js-ticket-overdue"></div>
-										                        </div>
-										                        <div class="mask half">
-										                            <div class="fill js-ticket-overdue"></div>
-										                            <div class="fill fix"></div>
-										                        </div>
-										                        <div class="shadow"></div>
-										                    </div>
-										                    <div class="inset">
-										                    </div>
-										                </div>
-										            </div>
-										            <div class="js-ticket-link-text js-ticket-orange">
-										                <?php
-										                    echo esc_html(__('Overdue', 'js-support-ticket'));
-										                    echo ' ( '. esc_html($jsst_dept->overdueticket).' )';
-										                ?>
-										            </div>
-										        </a>
-										    </div>
-										    <div class="js-ticket-link">
-										        <a class="js-ticket-link js-ticket-red" href="#" data-tab-number="5" title="<?php echo esc_attr(__('Close Ticket','js-support-ticket')); ?>">
-										            <div class="js-ticket-cricle-wrp" data-per="<?php echo esc_attr($jsst_close_percentage); ?>" >
-										                <div class="js-mr-rp" data-progress="<?php echo esc_attr($jsst_close_percentage); ?>">
-										                    <div class="circle">
-										                        <div class="mask full">
-										                             <div class="fill js-ticket-close"></div>
-										                        </div>
-										                        <div class="mask half">
-										                            <div class="fill js-ticket-close"></div>
-										                            <div class="fill fix"></div>
-										                        </div>
-										                        <div class="shadow"></div>
-										                    </div>
-										                    <div class="inset">
-										                    </div>
-										                </div>
-										            </div>
-										            <div class="js-ticket-link-text js-ticket-red">
-										                <?php
-										                    echo esc_html(__('Closed', 'js-support-ticket'));
-										                    echo ' ( '. esc_html($jsst_dept->closeticket).' )';
-										                ?>
-										            </div>
-										        </a>
-										    </div>
-										</div>
-									</div>
-								</a>
-							</div>
-						<?php
-						}
-					} else {
-						JSSTlayout::getNoRecordFound();
-					} ?>
-				</div>
-			</div>
-			<?php
-			if(!empty(jssupportticket::$jsst_data['depatments_report'])){
-			    if (jssupportticket::$jsst_data[1]) {
-			        echo '<div class="tablenav"><div class="tablenav-pages">' . wp_kses_post(jssupportticket::$jsst_data[1]) . '</div></div>';
-			    }
-			} ?>
-		</div>
-	</div>
+    </div>
 </div>

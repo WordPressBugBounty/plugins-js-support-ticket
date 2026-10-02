@@ -47,7 +47,7 @@ class JSSTemailController {
     static function sendtestmail() {
         $jsst_nonce = JSSTrequest::getVar('_wpnonce');
         if (! wp_verify_nonce( $jsst_nonce, 'jsst-mail-health-test') ) {
-            die( 'Security check Failed' );
+            die( esc_html__( 'Security check Failed', 'js-support-ticket' ) );
         }
         if (!current_user_can('manage_options')) {
             JSSTmessage::setMessage(esc_html(__('You are not allowed to do this', 'js-support-ticket')), 'error', 'agent-permissions');
@@ -85,7 +85,7 @@ class JSSTemailController {
         $jsst_id = JSSTrequest::getVar('id');
         $jsst_nonce = JSSTrequest::getVar('_wpnonce');
         if (! wp_verify_nonce( $jsst_nonce, 'save-email-'.$jsst_id) ) {
-            die( 'Security check Failed' );
+            die( esc_html__( 'Security check Failed', 'js-support-ticket' ) );
         }
         if (!current_user_can('manage_options')) { //only admin can change it.
             return false;
@@ -108,7 +108,7 @@ class JSSTemailController {
         $jsst_id = JSSTrequest::getVar('emailid');
         $jsst_nonce = JSSTrequest::getVar('_wpnonce');
         if (! wp_verify_nonce( $jsst_nonce, 'delete-email-'.$jsst_id) ) {
-            die( 'Security check Failed' );
+            die( esc_html__( 'Security check Failed', 'js-support-ticket' ) );
         }
         JSSTincluder::getJSModel('email')->removeEmail( absint( $jsst_id ) );
         if (is_admin()) {

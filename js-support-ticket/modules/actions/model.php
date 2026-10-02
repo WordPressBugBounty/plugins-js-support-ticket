@@ -135,7 +135,21 @@ class JSSTactionsModel {
             JSSTmessage::setMessage(esc_html(__('Choose an action to apply.', 'js-support-ticket')), 'error');
             return $jsst_result;
         }
-        if (!self::canRun($jsst_actions[$jsst_action]['permission'])) {
+        /* The capability service decides, not this class. What was here asked
+           whichever of the two permission systems it reached first, so the
+           bulk bar and the batch behind it could answer differently - a button
+           offered by one and refused by the other. JSSTworkspace::queueBulk()
+           is what draws the bar, and it is asked again here so the two cannot
+           disagree. An action a third party added that the map does not know
+           still falls back to the old check, inside queueBulk().
+           (Roadmap 4.5-UX-01) */
+        if (class_exists('JSSTworkspace')) {
+            $jsst_allowedbulk = JSSTworkspace::queueBulk();
+            if (!isset($jsst_allowedbulk[$jsst_action])) {
+                JSSTmessage::setMessage(esc_html(__('You are not allowed', 'js-support-ticket')), 'error', 'agent-permissions');
+                return $jsst_result;
+            }
+        } elseif (!self::canRun($jsst_actions[$jsst_action]['permission'])) {
             JSSTmessage::setMessage(esc_html(__('You are not allowed', 'js-support-ticket')), 'error', 'agent-permissions');
             return $jsst_result;
         }

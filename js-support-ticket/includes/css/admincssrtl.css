@@ -17,12 +17,6 @@ div.js-update-alert-wrp {float: right;border: 2px solid #cac23d;border-right: 5p
 div.js-update-alert-wrp div.js-update-alert-image {float: right;}
 div.js-update-alert-wrp div.js-update-alert-cnt {float: right;padding: 13px 10px 0 0px;}
 div.js-update-alert-wrp a.js-update-alert-btn {float: left;}
-/* dashboard top */
-div#jsstadmin-wrapper-top div#jsstadmin-wrapper-top-left {float: right;}
-div#jsstadmin-wrapper-top div#jsstadmin-wrapper-top-right {float: left}
-/* dashboard header */
-div#jsstadmin-head .jsstadmin-head-text {float: right;}
-div#jsstadmin-head a.jsstadmin-add-link {float: left;}
 .js-support-ticket-customize-panel {left: 0; right: auto;}
 .js-ticket-customize-option-item label{margin-right: 0;margin-left: 1rem;}
 .js-customize-dashboard-btn {float: left;margin-left: 0;margin-right: 8px;}
@@ -33,14 +27,6 @@ div#js_ddl span#js_combo #translations {background-position: 10px;}
 #premade {float: right;}
 .jsstadmin-form .js-form-wrapper .js-form-perm-msg {float: right;margin-right: 0;margin-left: 8px;}
 .jsstadmin-form .js-form-wrapper .js-form-append {float: right;}
-.js-det-tkt-form .js-form-wrapper .js-ticket-detail-append-signature-xs {float: right;}
-#jsstadmin-wrapper-top-left {float: right;}
-#jsstadmin-wrapper-top-right {float: left;}
-#jsstadmin-config-btn {float: right;}
-div#jsstadmin-vers-txt {float: right;margin-left: unset;margin-right: 5px;}
-#jsstadmin-head .jsstadmin-head-text {float: right;}
-div#jsstadmin-head a.jsstadmin-add-link {margin-left: unset;margin-right: 8px;}
-div#jsstadmin-head a.jsstadmin-add-link img {margin-right: 0;margin-left: 3px;}
 div.js-cp-cnt-left {padding-right: 0;padding-left: 20px;}
 /*.js-ticket-count div.js-ticket-link {float: right;}*/
 /*#js-main-cp-wrapper .js-cp-cnt-title .js-cp-cnt-title-txt {float: right;}*/
@@ -139,9 +125,6 @@ div.js-ticket-sorting span.js-ticket-sorting-link {float: right;}
 div.js-ticket-wrapper div.js-ticket-data span.js-ticket-status {right: auto !important;left: 2%;}
 .jsstadmin-form .js-form-wrapper #helptopic select {background-position: 10px !important;}
 .input-field-wrapper {float: right;margin-right: 0;margin-left: 10px;}
-form.jsstadmin-form div.js-form-wrapper .js-visible-conditions-addbtn-wrp .js-form-visible-addmore{float: right;margin-right: 0;}
-form.jsstadmin-form div.js-visible-conditions-addbtn-wrp .js-form-visible-addmore{float: right;margin-left: 0;margin-right: 5px;}
-form.jsstadmin-form.has-validation-callback .js-visible-conditions-addbtn-wrp{margin-right: 5px;margin-left: 0;float: right;}
 
 /* popups */
 div#userpopup .userpopup-top .userpopup-heading {float: right;}
@@ -200,7 +183,6 @@ div.js-ticket-wrapper div.js-ticket-toparea div.js-ticket-data1 {float: left;}
 .js-tkt-det-user .js-tkt-det-user-image {float: right;}
 .js-tkt-det-user .js-tkt-det-user-cnt {padding-right: 10px;}
 .js-tkt-det-actn-btn-wrp .js-tkt-det-actn-btn {float: right;}
-.js-det-tkt-form .js-form-wrapper .js-tkt-det-perm-msg {float: right;margin-right: 0;margin-left: 5px;}
 .js-tkt-det-other-tkt .js-tkt-det-other-tkt-img {margin-left: 0;margin-right: 7px;}
 .js-add-signature {float: right;}
 .js-ticket-thread .js-ticket-thread-image {float: right;}
@@ -248,7 +230,6 @@ div.jsst-statifacetion-report-wrapper div.jsst-satisfaction-report-bottom div.in
 
 /* add-ons list */
 div.jsst-addon-installer-wrapper div.jsst-addon-installer-left-section-wrap {float: right;}
-div.jsstadmin-add-on-page-wrp div.add-on-page-cnt div.add-on-bundle-pack-list div.add-on-bundle-pack-item div.add-on-bundle-pack-price span {margin-left: unset;margin-right: 3px;}
 /* update key */
 div.jsstadmin-addons-list-data .jsstadmin-autoupdte-addons-cardwrp .jsstadmin-autoupdte-addons-card-btn{margin-right: 0;margin-left: 10px;}
 
@@ -275,21 +256,8 @@ span#js-systemail.js-admin-infotitle img {margin-right: 0;margin-left: 3px;}
 .js-ticket-thread-upperpart .js-ticket-thread-top span {float: right;margin-right: 0;margin-left: 5px;}
 .js-ticket-thread-upperpart .js-ticket-thread-middlepart .js-ticket-thread-title {float: right;margin-right: 0;margin-left: 5px;}
 .js-ticket-thread-upperpart .js-ticket-thread-middlepart .js-ticket-thread-msg {float: right;}
-.js-ticket-thread-reply .js-ticket-thread-pic {float: right;}
-
-/* email templates */
-div.js-email-menu,div.js-email-body,
-div.js-email-body div.js-form-wrapper,div.js-email-body div.js-form-wrapper div.a-js-form-field,
-div.js-email-body div.js-email-parameters,div.js-email-body div.js-email-parameters span.js-email-paramater,
-div.js-email-body div.js-email-parameters div.js-email-parameter-heading,
-div.js-email-body div.js-form-wrapper div.a-js-form-title,
-.js-form-button {float: right;}
-/*agent auto assign*/
-.js-conditions-main-wrapper .js-conditions-head .js-conditions-head-items {float: right;border-left: 1px solid #fff;border-right: none;}
-.js-conditions-main-wrapper .js-conditions-body .js-conditions-body-row-wrapper .js-conditions-body-row {float: right;}
-.js-conditions-main-wrapper .js-conditions-body .js-conditions-body-row-wrapper .js-conditions-body-row .js-conditions-body-value select {background-position: calc(100% - 95%);}
-.js-conditions-main-wrapper .js-conditions-body .js-conditions-addbtn-wrp {float: right;}
-form.jsstadmin-form div.js-form-wrapper .js-form-select-field, div.js-email-body div.js-form-wrapper div.a-js-form-field select.js-ticket-select-field {background-position: 15px;float: right;}
+.js-ticket-thread-reply .js-ticket-thread-pic {float: right;}.js-form-button {float: right;}/*agent auto assign*/
+form.jsstadmin-form div.js-form-wrapper .js-form-select-field {background-position: 15px;float: right;}
 form.jsstadmin-form div.js-form-wrapper {float: right;}
 form.jsstadmin-form div.js-form-wrapper .jsst-formfield-radio-button-wrap {float: right;}
 /*configuration*/
@@ -302,23 +270,6 @@ form.jsstadmin-form div.js-form-wrapper .jsst-formfield-radio-button-wrap {float
 .jsst_gen_body .js-ticket-configuration-row .js-ticket-configuration-value select{background-position: calc(100% - 98%);}
 .jsst_gen_body .js-ticket-configuration-row .js-ticket-configuration-video a.js-tkt-det-hdg-img {float: right;margin-left: unset;margin-right: 8px;}
 .jsst_gen_body .js-ticket-configuration-row .js-ticket-configuration-btn{float: right;}
-
-/* help page */
-div#jsstadmin-data-wrp .jssticketadmin-help-top,
-div#jsstadmin-data-wrp .jssticketadmin-help-btm,
-div#jsstadmin-data-wrp .jssticketadmin-help-btm .jssticketadmin-help-btm-wrp {float: right;}
-div#jsstadmin-data-wrp .jssticketadmin-help-top .jssticketadmin-help-top-left,
-div#jsstadmin-data-wrp .jssticketadmin-help-top .jssticketadmin-help-top-right {float: right;margin-left: 10px;margin-right: unset;}
-div#jsstadmin-data-wrp .jssticketadmin-help-top .jssticketadmin-help-top-right {margin-left: unset;margin-right: 10px;}
-div#jsstadmin-data-wrp .jssticketadmin-help-top .jssticketadmin-help-top-left .jssticketadmin-help-top-left-cnt-img,
-div#jsstadmin-data-wrp .jssticketadmin-help-top .jssticketadmin-help-top-right .jssticketadmin-help-top-right-cnt-img {float: right;}
-div#jsstadmin-data-wrp .jssticketadmin-help-top .jssticketadmin-help-top-left {padding-right: 10px;}
-div#jsstadmin-data-wrp .jssticketadmin-help-top .jssticketadmin-help-top-left .jssticketadmin-help-top-left-cnt-info,
-div#jsstadmin-data-wrp .jssticketadmin-help-top .jssticketadmin-help-top-right .jssticketadmin-help-top-right-cnt-info {float: right;padding: 20px 20px 20px 0px !important;}
-div#jsstadmin-data-wrp .jssticketadmin-help-top .jssticketadmin-help-top-left .jssticketadmin-help-top-left-cnt-info .jssticketadmin-help-top-middle-action img,
-div#jsstadmin-data-wrp .jssticketadmin-help-top .jssticketadmin-help-top-right .jssticketadmin-help-top-right-cnt-info .jssticketadmin-help-top-middle-action img {margin-right: unset;margin-left: 8px;}
-div#jsstadmin-data-wrp .jssticketadmin-help-btm .jssticketadmin-help-btm-wrp .jssticketadmin-help-btm-cnt {margin: 0 0px 10px 10px;float: right;}
-div#jsstadmin-data-wrp .jssticketadmin-help-btm .jssticketadmin-help-btm-wrp .jssticketadmin-help-btm-cnt a .jssticketadmin-help-btm-cnt-title span {padding: 25px 5px 0 0;}
 div.jssticketadmin-help-btn {margin-left: unset;margin-right: 5px;}
 /*review*/
 .js-ticket-review-default {margin-right: 0;margin-left: 5px;transform: scaleX(-1);}
@@ -347,14 +298,9 @@ div#jsstadmin-data-wrp .jsstadmin-update-key-form .jsstadmin-update-key-wrp .jss
 .js-ticket-list {text-align: right;}
 .js-ticket-filter-select {background-position: left 10px center;}
 .js-ticket-ai-powered-reply-content {text-align: right;}
-/* email template multifoam */
-.js-ticket-email-templates-wrapper{float: right;}
-div.js-ticket-card-label{margin-right: 0;margin-left: 5px;}
-.js-ticket-custom-templates-table th, .js-ticket-custom-templates-table td{text-align: right;}
 /* cp */
 #jsstadmin-wrapper .js-hlpdsk-legend-dot{margin-right:0;margin-left:0.4rem;}
 #jsstadmin-wrapper .js-hlpdsk-modern-table tr td::before {margin-right:0;margin-left:20px;}
-div.js-ticket-card-icon{margin-right: 0;margin-left: 12px;}
 /* installer */
 div#jsst-main-wrapper div.close-button-bottom{margin-left: unset;margin-right: auto;}
 div#jsst-main-wrapper div.jsst-config-topheading span.jsst-config-steps{margin-left: unset;margin-right: auto;}
@@ -400,12 +346,6 @@ div#jsst-main-wrapper div.jsst-config-topheading span.jsst-config-steps{margin-l
     .js-support-ticket-configurations-toggle img {float: right;}
     .js-support-ticket-configurations-toggle span {float: right;margin: 11px 11px 11px 0px;}
 
-    /* help page */
-    div#jsstadmin-data-wrp .jssticketadmin-help-top .jssticketadmin-help-top-left, div#jsstadmin-data-wrp .jssticketadmin-help-top .jssticketadmin-help-top-middle {float: left !important;}
-    div#jsstadmin-data-wrp .jssticketadmin-help-btm .jssticketadmin-help-btm-wrp .jssticketadmin-help-btm-cnt {margin: 0 0 10px 10px !important; }
-    div#jsstadmin-data-wrp .jssticketadmin-help-btm .jssticketadmin-help-btm-wrp .jssticketadmin-help-btm-cnt a img {margin-left: unset !important;}
-    div#jsstadmin-data-wrp .jssticketadmin-help-btm .jssticketadmin-help-btm-wrp .jssticketadmin-help-btm-cnt a .jssticketadmin-help-btm-cnt-title {text-align: right;padding-left: unset !important;padding-right: 10px;}
-
     /* dash bord */
     div.js-cp-cnt-left {padding: 0;}
     div#jsstadmin-wrapper div.js-other-products-wrp div.js-other-products-detail div.js-other-products-image {padding-left: unset !important;}
@@ -419,19 +359,10 @@ div#jsst-main-wrapper div.jsst-config-topheading span.jsst-config-steps{margin-l
 	div#jsstadmin-data {padding-right: unset;}
     div.menu-collasped-active div#jsstadmin-data {padding-right: unset;}
     
-    /* dashboard */
-    #jsstadmin-head .jsstadmin-add-link {float: right;}
     #jsreview-banner .review .lower {left: 0px;}
     .js-ticket-wrapper .js-ticket-toparea .js-ticket-data .js-ticket-right {text-align: right;}
     .js-ticket-wrapper .js-ticket-toparea .js-ticket-data1 .js-ticket-data1-row {text-align: right;}
     .jsst-ticket-detail-timer-wrapper .timer-right {float: right;}
-
-    /* addon list */
-
-    /* help page */
-    div#jsstadmin-data-wrp .jssticketadmin-help-btm .jssticketadmin-help-btm-wrp .jssticketadmin-help-btm-cnt {margin: 0 0 10px 0 !important; }
-    div#jsstadmin-data-wrp .jssticketadmin-help-btm .jssticketadmin-help-btm-wrp .jssticketadmin-help-btm-cnt a img {margin-left: unset !important;}
-    div#jsstadmin-data-wrp .jssticketadmin-help-btm .jssticketadmin-help-btm-wrp .jssticketadmin-help-btm-cnt a .jssticketadmin-help-btm-cnt-title {text-align: center;}
     /* admin theme page */
     .js-admin-theme-page div.js-ticket-search-wrp div.js-ticket-form-wrp form.js-filter-form div.js-filter-button-wrp input.js-ticket-reset-btn{margin-left: 0;}
     .js-admin-theme-page div.js-ticket-search-wrp div.js-ticket-form-wrp form.js-filter-form div.js-filter-button-wrp .js-search-filter-btn{margin-right: 1px;}
@@ -451,10 +382,6 @@ div#jsst-main-wrapper div.jsst-config-topheading span.jsst-config-steps{margin-l
     
     /* reports */
     .satisfaction-report-right {float: right;}
-
-    /* help page */
-    div#jsstadmin-data-wrp .jssticketadmin-help-btm .jssticketadmin-help-btm-wrp .jssticketadmin-help-btm-cnt {margin: 0 0 10px 0 !important; }
-    div#jsstadmin-data-wrp .jssticketadmin-help-btm .jssticketadmin-help-btm-wrp .jssticketadmin-help-btm-cnt a img {margin-left: unset !important;}
     /* admin theme pge */
     div.js_theme_section{float: initial;}
     .jsstadmin_themepaage_mainwrp div#jsstadmin-data{width: 100%;}
@@ -462,63 +389,85 @@ div#jsst-main-wrapper div.jsst-config-topheading span.jsst-config-steps{margin-l
     div.jsstadmin-addons-list-data .jsstadmin-autoupdte-addons-cardwrp .jsstadmin-autoupdte-addons-card-btn{margin-left: 0;}
     /* new cp addon update message */
     #jsstadmin-wrapper .js-hlpdeske-close-button{right: auto;left:10px;}
-}
-
-
-
-
-/*.....float right.....*/
+}/*.....float right.....*/
 div.js-cp-cnt-sec div.js-cp-cnt-left .js-ticket-count,
 div.js-cp-cnt-sec div.js-cp-cnt-left .js-ticket-count .js-ticket-link,
 div#js-main-cp-wrapper div.js-cp-cnt,
 div#js-main-cp-wrapper div.js-cp-cnt-title,
 div#jsstadmin-wrapper div.js-other-products-wrp div.js-other-products-detail div.js-other-products-image div.js-other-products-bottom,
 div#jsstadmin-wrapper div.js-other-products-wrp div.js-other-products-detail div.js-other-products-image div.js-other-products-bottom div.js-product-title,
-div#js-main-cp-wrapper,div#jsstadmin-wrapper-top,div#jsstadmin-config-btn,div#jsstadmin-head,
+div#js-main-cp-wrapper,
 div#jsreview-banner div.review,
 div#jsstadmin-wrapper div.js-other-products-wrp div.js-other-products-detail,
 div#jsstadmin-wrapper div.js-other-products-wrp div.js-other-products-detail div.js-other-products-image,
 div.js-cp-fed-ad-wrp,
 div#jsstadmin-wrapper div.js-other-products-wrp div.js-other-products-detail a,
-div.js-ticket-admin-cp-tickets,div.js-cp-tkt-list,
-div#jsstadmin-data-wrp,
-div.jssst-admin-about-us,div.js-admin-heading,div.jssst-admin-about-us-cnt,div.jssst-admin-about-author,
-div.jssst-admin-about-author div.jssst-author-tit,div.jssst-admin-about-author div.jssst-author-cnt,
+div.js-ticket-admin-cp-tickets,
+div.js-cp-tkt-list,
+div.jssst-admin-about-us,
+div.js-admin-heading,
+div.jssst-admin-about-us-cnt,
+div.jssst-admin-about-author,
+div.jssst-admin-about-author div.jssst-author-tit,
+div.jssst-admin-about-author div.jssst-author-cnt,
 div.jssst-admin-about-author div.jssst-author-cnt div.jssst-author-info,
 div.jssst-admin-about-author div.jssst-author-cnt div.jssst-author-info span.jssst-auth-info-value,
-div.jssst-admin-author-prdct,div#js-language-wrapper,div#js-lang-toserver,
-div#jsst-shortcode-wrapper,div#jsst-shortcode-wrapper div.jsst-shortcode-1,div#jsst-shortcode-wrapper div.jsst-shortcode-2,
-div#jsst-shortcode-wrapper div.jsst-shortcode-3,
-div.js-ticket-count,div.js-ticket-count div.js-ticket-link,div.js-ticket-count div.js-ticket-cricle-wrp,
+div.jssst-admin-author-prdct,
+div#js-language-wrapper,
+div#js-lang-toserver,
+div.js-ticket-count,
+div.js-ticket-count div.js-ticket-link,
+div.js-ticket-count div.js-ticket-cricle-wrp,
 form.js-filter-form,
-form.js-filter-form .button,div.js-admin-heading div.js-admin-head-txt,
+form.js-filter-form .button,
+div.js-admin-heading div.js-admin-head-txt,
 div.js-admin-sorting a.js-admin-sort-bt,
-div.js-ticket-wrapper,div.js-ticket-wrapper div.js-ticket-toparea,div.js-ticket-wrapper div.js-ticket-bottom-data-partm,
+div.js-ticket-wrapper,
+div.js-ticket-wrapper div.js-ticket-toparea,
+div.js-ticket-wrapper div.js-ticket-bottom-data-partm,
 .js-ticket-wrapper .js-ticket-toparea .js-ticket-pic,
 div.js-ticket-wrapper div.js-ticket-toparea div.js-ticket-data,
 div.js-ticket-wrapper div.js-ticket-bottom-data-part,
 form.jsstadmin-form div.js-form-wrapper .js-form-diabled-field,
 form.jsstadmin-form div.js-form-wrapper .js-form-input-field,
-form.jsstadmin-form div.js-form-wrapper div.js-form-title,#cp_wraper .tabs ul,
-div#jsstadmin-data-wrp .jssticketadmin-help-btm .jssticketadmin-help-btm-wrp .jssticketadmin-help-btm-cnt a .jssticketadmin-help-btm-cnt-img,
-div#jsstadmin-data-wrp .jssticketadmin-help-btm .jssticketadmin-help-btm-wrp .jssticketadmin-help-btm-cnt a .jssticketadmin-help-btm-cnt-title,
-div.js-cp-feedback-list,div.js-cp-feedback-list div.js-cp-feedback,
+form.jsstadmin-form div.js-form-wrapper div.js-form-title,
+#cp_wraper .tabs ul,
+div.js-cp-feedback-list,
+div.js-cp-feedback-list div.js-cp-feedback,
 div.js-cp-feedback div.js-cp-feedback-cnt,
-div.js-cp-feedback div.js-cp-feedback-cnt div.js-cp-feedback-row,div.js-cp-addon-list,
-div.js-cp-addon-list div.js-cp-addon,div.js-cp-addon-list div.js-cp-addon a.js-cp-addon-btn,
-div#jsreview-banner,div#jsstadmin-wrapper div.js-other-products-wrp div.js-other-product-title,
-#jsstadmin-wrapper div.tablenav,div.js-ticket-count .js-ticket-link-text,form.jsstadmin-form,
-.tk_attachment_value_wrapperform,.tk_attachments_desc,
-.js-export-wrapper,form.js-filter-form .js-form-input-field,
-ul.jsstadmin-sidebar-menu,.tabs,.tabs .jsst_tabs,.jsst_gen_tabs,.jsst_gen_body,.tabInner,#cron_job,
-#cron_job .crown_text,#cron_job #cron_job_detail_wrapper,.js-admin-report,.js-admin-staff-list,
-.js-admin-staff-wrapper,.js-admin-staff-wrapper .js-admin-staff-boxes,
-div.jsstadmin-add-on-page-wrp div.add-on-banner,div.jsstadmin-add-on-page-wrp div.add-on-page-cnt,
+div.js-cp-feedback div.js-cp-feedback-cnt div.js-cp-feedback-row,
+div.js-cp-addon-list,
+div.js-cp-addon-list div.js-cp-addon,
+div.js-cp-addon-list div.js-cp-addon a.js-cp-addon-btn,
+div#jsreview-banner,
+div#jsstadmin-wrapper div.js-other-products-wrp div.js-other-product-title,
+#jsstadmin-wrapper div.tablenav,
+div.js-ticket-count .js-ticket-link-text,
+form.jsstadmin-form,
+.tk_attachment_value_wrapperform,
+.tk_attachments_desc,
+.js-export-wrapper,
+form.js-filter-form .js-form-input-field,
+ul.jsstadmin-sidebar-menu,
+.tabs,
+.tabs .jsst_tabs,
+.jsst_gen_tabs,
+.jsst_gen_body,
+.tabInner,
+#cron_job,
+#cron_job .crown_text,
+#cron_job #cron_job_detail_wrapper,
+.js-admin-report,
+.js-admin-staff-list,
+.js-admin-staff-wrapper,
+.js-admin-staff-wrapper .js-admin-staff-boxes,
+div.jsstadmin-add-on-page-wrp div.add-on-banner,
+div.jsstadmin-add-on-page-wrp div.add-on-page-cnt,
 div.jsstadmin-add-on-page-wrp div.add-on-page-cnt div.add-on-sec-header,
 div.jsstadmin-add-on-page-wrp div.add-on-page-cnt div.add-on-msg,
 div.jsstadmin-add-on-page-wrp div.add-on-page-cnt div.add-on-list,
-div.jsstadmin-add-on-page-wrp div.add-on-page-cnt div.add-on-bundle-pack-list,
-span#js-systemail.js-admin-infotitle,.js-admin-content-button{float: right;}
+span#js-systemail.js-admin-infotitle,
+.js-admin-content-button {float: right;}
 
 /*.....float left.....*/
 div#jsstadmin-wrapper div.js-other-products-wrp div.js-other-products-detail div.js-other-products-image div.js-other-products-bottom div.js-product-bottom-btn {float: left;}
@@ -605,7 +554,6 @@ table.jsst-queue-table tbody tr.jsst-row-focused td:first-child {box-shadow: ins
 /* Listing meta line in RTL. (Roadmap 4.0-UX-02) */
 .jsst-row-field-label::after {margin-right: 0;margin-left: 3px;}
 
-
 /* Configurations page - RTL mirroring (4.0-UX-01) */
 .jsst-config-search-box {margin-right: 0;margin-left: auto;}
 .jsst-config-search-icon {left: auto;right: 14px;}
@@ -616,3 +564,269 @@ table.jsst-queue-table tbody tr.jsst-row-focused td:first-child {box-shadow: ins
 .js-support-ticket-configurations .jsst_gen_body .js-ticket-configuration-title {padding: 11px 0 0 20px;}
 .js-support-ticket-configurations .jsst_gen_body .js-ticket-configuration-row.jsst-config-dirty,
 .js-support-ticket-configurations .jsst_gen_body .js-ticket-configuration-row-mail.jsst-config-dirty {box-shadow: inset -3px 0 0 #f59e0b;}
+
+/* Permission inspector. (Roadmap 4.5-ARCH-04)
+   The stripe rules that used to live here drew with an inset box-shadow, which
+   Firefox does not paint on a collapsed table's cells; they are borders now and
+   are mirrored at the foot of this file alongside the rest of 4.5-PRO-02. */
+.jsst-inspector-table th {text-align: right;}
+.jsst-inspector-trace {padding-left: 0;padding-right: 18px;}
+
+/* JS Help Desk Pro - RTL mirroring. (Roadmap 4.5-PRO-01) */
+.jsst-pro-licence {border-left: 1px solid #ebecec;border-right: 4px solid #ebecec;}
+.jsst-pro-licence-active {border-left-color: #ebecec;border-right-color: #14a76c;}
+.jsst-pro-licence-grace {border-left-color: #ebecec;border-right-color: #b45309;}
+.jsst-pro-licence-expired, .jsst-pro-licence-invalid {border-left-color: #ebecec;border-right-color: #a02c2c;}
+.jsst-pro-facts dd {margin: 0 -20px 0 0;padding-left: 0;padding-right: 8px;}
+.jsst-pro-release {margin-left: 0;margin-right: auto;}
+.jsst-pro-tag {margin-left: 0;margin-right: auto;}
+.jsst-pro-legacy {box-shadow: inset -3px 0 0 #b45309;}
+.jsst-pro-on {box-shadow: inset -3px 0 0 #14a76c;}
+
+@media screen and (max-width: 782px) {
+    .jsst-pro-release {margin-right: 0;}
+}
+
+/* Your Add-ons - RTL mirroring. (Roadmap 4.5-PRO-02)
+   Only the directional properties; everything else is written so that both
+   engines lay it out the same way regardless of direction. */
+.jsst-legacy-preview {border-left: 1px solid #ebecec;border-right: 4px solid #4f46e5;}
+.jsst-legacy-steps {padding-left: 0;padding-right: 20px;}
+.jsst-legacy-row {border-left: 1px solid #ebecec;border-right: 4px solid #ebecec;}
+.jsst-legacy-ready {border-left-color: #ebecec;border-right-color: #4f46e5;}
+.jsst-legacy-migrated {border-left-color: #ebecec;border-right-color: #14a76c;}
+.jsst-legacy-waiting {border-left-color: #ebecec;border-right-color: #b45309;}
+.jsst-legacy-table th {text-align: right;}
+.jsst-legacy-table td:first-child {border-left: 0;border-right: 3px solid transparent;}
+.jsst-legacy-drift-gained td:first-child {border-right-color: #a02c2c;}
+.jsst-legacy-drift-lost td:first-child {border-right-color: #b45309;}
+
+/* Pro screen - the two rules added for the flex-gap fallback need mirroring
+   too, or the checkbox and its label sit the wrong way round in RTL. */
+.jsst-pro-module-head > * + * {margin-left: 0;margin-right: 9px;}
+.jsst-inspector-table td:first-child {border-left: 0;border-right: 3px solid transparent;}
+.jsst-inspector-yes td:first-child {border-right-color: #14a76c;}
+.jsst-inspector-no td:first-child {border-right-color: #a02c2c;}
+
+/* Plans and the Free/Pro matrix - RTL mirroring. (Roadmap 4.5-PRO-03) */
+.jsst-plan-per {margin-left: 0;margin-right: 5px;}
+.jsst-plan-facts li {padding-left: 0;padding-right: 17px;}
+.jsst-plan-facts li::before {left: auto;right: 3px;}
+.jsst-matrix th, .jsst-matrix td {text-align: right;}
+
+/* Workspace parity - RTL mirroring. (Roadmap 4.5-FE-01)
+   Only the directional properties: the verdict stripe moves to the other edge,
+   the flex-gap margin fallbacks flip, and the table aligns to the right. */
+.jsst-parity-figure {margin-right: 0;margin-left: 12px;}
+@supports (gap: 1px) {
+    .jsst-parity-figure {margin: 0;}
+}
+.jsst-parity-table th, .jsst-parity-table td {text-align: right;}
+.jsst-parity-table tbody th:first-child {border-left: 0;border-right: 3px solid transparent;}
+.jsst-parity-row-done th:first-child {border-right-color: #14a76c;}
+.jsst-parity-row-drift th:first-child {border-right-color: #b45309;}
+.jsst-parity-row-gap th:first-child {border-right-color: #a02c2c;}
+.jsst-parity-row-absent th:first-child {border-right-color: #c6c9c9;}
+.jsst-parity-keys li {margin-right: 0;margin-left: 10px;}
+@supports (gap: 1px) {
+    .jsst-parity-keys li {margin: 0;}
+}
+.jsst-parity-keys kbd {margin-right: 0;margin-left: 7px;}
+
+/* The queue engine - RTL mirroring. (Roadmap 4.5-UX-01)
+   Only the directional properties; the flex-gap margin fallbacks have to flip
+   with them or the inbox buttons and the column labels bunch to the wrong side. */
+.jsst-queue-scopes-label {margin-right: 0;margin-left: 10px;}
+.jsst-queue-scope {margin-right: 0;margin-left: 8px;}
+.jsst-queue-column {margin-right: 0;margin-left: 16px;}
+@supports (gap: 1px) {
+    .jsst-queue-scopes-label, .jsst-queue-scope, .jsst-queue-column {margin: 0;}
+}
+.jsst-queue-column input, .jsst-queue-share input {margin-right: 0;margin-left: 6px;}
+
+/* The desk - RTL mirroring. (Roadmap 4.5-FE-02) */
+.jsst-nav-item {margin-right: 0;margin-left: 4px;}
+.jsst-nav-count {margin-left: 0;margin-right: 7px;}
+.jsst-home-count {margin-left: 0;margin-right: 8px;}
+.jsst-home-row {padding-left: 0;padding-right: 11px;border-left: 0;border-right: 3px solid transparent;}
+.jsst-home-late {border-right-color: #b45309;}
+.jsst-home-ref, .jsst-people-ref {margin-right: 0;margin-left: 7px;}
+.jsst-people-search > *, .jsst-people-company, .jsst-people-paging > * {margin-right: 0;}
+.jsst-people-search > * {margin-left: 8px;}
+.jsst-people-company {margin-left: 8px;}
+.jsst-people-paging > * {margin-left: 12px;}
+.jsst-people-guest {margin-left: 0;margin-right: 6px;}
+.jsst-people-table th, .jsst-people-table td {text-align: right;}
+.jsst-people-table tbody th {border-left: 0;border-right: 3px solid transparent;}
+.jsst-people-on th:first-child {border-right-color: var(--jsst-accent, #4f46e5);}
+@supports (gap: 1px) {
+    .jsst-nav-item, .jsst-people-search > *, .jsst-people-company, .jsst-people-paging > * {margin: 0;}
+}
+
+/* The desk's shared furniture - RTL mirroring. (Roadmap 4.5-FE-06) */
+.jsst-card-half {margin-right: 0;margin-left: 16px;}
+.jsst-card-half:last-child {margin-left: 0;}
+.jsst-dot {margin-right: 0;margin-left: 6px;}
+.jsst-metric {margin-right: 0;margin-left: 28px;}
+.jsst-metric:last-child {margin-left: 0;}
+.jsst-facts dt {padding-right: 0;padding-left: 14px;}
+.jsst-table th, .jsst-table td {text-align: right;}
+.jsst-table tbody th:first-child, .jsst-table tbody td:first-child {border-left: 0;border-right: 3px solid transparent;}
+.jsst-row-on th:first-child, .jsst-row-on td:first-child {border-right-color: var(--jsst-accent, #4f46e5);}
+.jsst-row-differs th:first-child, .jsst-row-differs td:first-child {border-left-color: transparent;border-right-color: #d9a441;}
+.jsst-rowactions a {margin-right: 0;margin-left: 12px;}
+.jsst-rowactions a:last-child {margin-left: 0;}
+.jsst-field {margin-right: 0;margin-left: 14px;}
+.jsst-field-wide {margin-left: 0;}
+.jsst-check input {margin: 3px 0 0 8px;}
+.jsst-actions .button {margin: 0 0 0 8px;}
+.jsst-chip {margin: 0 0 6px 6px;}
+.jsst-checkcell {margin: 0 0 8px 8px;}
+.jsst-checkcell input {margin: 0 0 0 8px;}
+.jsst-week-name input {margin: 0 0 0 8px;}
+.jsst-week-day > * {margin: 0 0 0 8px;}
+.jsst-week-name input {margin: 0 0 0 8px;}
+.jsst-week-tools .button {margin: 0 0 0 8px;}
+@supports (gap: 1px) {
+    .jsst-card-half, .jsst-metric, .jsst-field, .jsst-chip, .jsst-checkcell {margin: 0;}
+    .jsst-actions .button, .jsst-week-tools .button, .jsst-week-day > * {margin: 0;}
+}
+@media screen and (max-width: 782px) {
+    /* The fallback margin, mirrored. Zeroed again where `gap` works, for the
+       same reason as in admincss.css: the column-gap set there is the whole
+       space between two metrics, and a margin on top of it doubles it. */
+    .jsst-metric {margin-left: 20px;}
+    @supports (gap: 1px) {
+        .jsst-metric {margin-left: 0;}
+    }
+}
+@media screen and (max-width: 600px) {
+    .jsst-metric {margin-right: 0;margin-left: 12px;}
+    @supports (gap: 1px) {
+        .jsst-metric {margin-left: 0;}
+    }
+}
+
+/* The routing verdict - RTL mirroring. (Roadmap 4.5-FE-07) */
+.jsst-reasons li {border-left: 1px solid #f0f1f1;border-right: 3px solid transparent;}
+.jsst-reason-on {border-left-color: #f0f1f1;border-right-color: #0b6b46;}
+
+/* Working on a ticket together - RTL mirroring. (Roadmap 4.5-FE-08) */
+.jsst-collab-draft-head > * {margin: 0 0 0 8px;}
+@supports (gap: 1px) {
+    .jsst-collab-draft-head > * {margin: 0;}
+}
+
+/* The notification list - RTL mirroring. (Roadmap 4.5-UX-02) */
+.jsst-notif {border-left: 0;border-right: 3px solid transparent;}
+.jsst-notif-new {border-right-color: var(--jsst-accent, #4f46e5);}
+.jsst-notif-main {margin: 0 0 0 12px;}
+.jsst-notif-title > * {margin: 0 0 0 8px;}
+.jsst-notif-actions form > * {margin: 0 0 0 8px;}
+@supports (gap: 1px) {
+    .jsst-notif-title > *, .jsst-notif-actions form > * {margin: 0;}
+}
+
+/* "Start from" - RTL mirroring. (Roadmap 4.5-FE-03) */
+.jsst-rolepreset-buttons .button {margin: 0 0 8px 8px;}
+@supports (gap: 1px) {
+    .jsst-rolepreset-buttons .button {margin: 0;}
+}
+
+/* The launch offer strip - RTL mirroring. (Roadmap 4.5-MKT-04)
+
+   Only the two gaps that have a side. The price line itself is flex, so it
+   reverses on its own with the document direction and needs nothing here. */
+.jsst-offer .jsst-card-title .jsst-pill {margin-left: 0;margin-right: 8px;}
+.jsst-offer-then {margin-left: 0;margin-right: 8px;}
+
+/* Controls inside a table, and the two cell layouts on the Forms screen -
+   RTL mirroring. (Roadmap 5.0-FORM-01)
+
+   Only the properties that have a side. The length row is flex and reverses
+   with the document direction on its own; what it needs is its gap moved to
+   the other edge, and the select's arrow room moved with it. */
+.jsst-table select {padding-right: 8px;padding-left: 24px;}
+.jsst-rule-len > * {margin-right: 0;margin-left: 6px;}
+
+/* Time panel on the ticket detail - RTL mirroring. (Roadmap 5.0-ANA-02)
+
+   Only the properties that have a side. The rows are flex and reverse with the
+   document direction on their own; what they need is the spacing moved to the
+   other edge. The spacing is a margin rather than a gap because Chrome before
+   84 ignores gap, and a margin has a side - which is the whole reason this
+   block exists where the AI draft panel beside it needed none. Inside
+   @supports the margins are zeroed and the gap does the work, so those rules
+   are mirrored to zero here too. */
+.jsst-tm-log {text-align: right;}
+.jsst-tm-log-head > * {margin-right: 0;margin-left: 8px;}
+.jsst-tm-log-fields > * {margin: 0 0 10px 10px;}
+.jsst-tm-log-check input {margin: 0 0 0 6px;}
+.jsst-tm-log-actions > * {margin-right: 0;margin-left: 10px;}
+@supports (gap: 1px){
+    .jsst-tm-log-head > * {margin-left: 0;}
+    .jsst-tm-log-fields > * {margin: 0;}
+    .jsst-tm-log-actions > * {margin-left: 0;}
+}
+
+/* Addons screen action bar and migration card - RTL mirroring, needed only
+   because the Chrome-<84 gap fallback uses a margin, which has a side.
+   (Roadmap 4.5-PRO-01) */
+.jsst-pro-actions > * {margin: 0 0 8px 8px;}
+.jsst-pro-legacy > * {margin: 0 0 0 10px;}
+@supports (gap: 1px) {
+    .jsst-pro-actions > * {margin: 0;}
+    .jsst-pro-legacy > * {margin: 0;}
+}
+
+/* Integrations - RTL mirroring, needed only for the margins the Chrome-<84 gap
+   fallback uses and for the list's selected edge. (Roadmap 5.5-CH-04) */
+.jsst-con-layout > * {margin: 0 0 16px 16px;}
+.jsst-con-item {border-left: 0;border-right: 3px solid transparent;}
+.jsst-con-item-on {border-right-color: #4f46e5;}
+.jsst-con-item-kind {margin-right: 0;margin-left: 8px;}
+.jsst-con-state > * {margin: 0 0 4px 8px;}
+@supports (gap: 1px) {
+    .jsst-con-layout > * {margin: 0;}
+    .jsst-con-state > * {margin: 0 0 4px 0;}
+}
+
+/* AI Agent - RTL mirror of the single directional property on the menu badge.
+   (Roadmap 6.0-AI-01) */
+.jsst-menu-badge {margin-left: 0;margin-right: 6px;}
+
+/* Quoted customer words - the rule that marks them is a left border, which in
+   an RTL desk has to sit on the side the text starts on or it reads as a stray
+   line at the end of every quote. (Roadmap 6.0-AI-12) */
+.jsst-quote {padding-left: 0;padding-right: 12px;border-left: 0;border-right: 3px solid var(--jsst-line, #ebecec);}
+.jsst-quote-more {border-right-color: transparent;}
+
+/* The triage strip's only directional property is the gap between its items,
+   which in an RTL desk has to fall on the other side. (Roadmap 6.0-AI-13) */
+.jsst-triage > * {margin-right: 0;margin-left: 8px;}
+.jsst-triage > *:last-child {margin-left: 0;}
+@supports (gap: 1px) {
+    .jsst-triage > * {margin-left: 0;}
+}
+
+/* The suggestions area's accent edge, mirrored. (Roadmap 6.0-AI-01)
+   A directional border needs its opposite here or it sits on the wrong side of
+   the block in Arabic and Hebrew. */
+.js-ticket-section.js-ticket-matching-tickets-section {border-left: 0;border-right: 3px solid var(--jsst-accent, #4f46e5);}
+.js-ticket-suggest-lead {margin-right: 0;margin-left: 10px;}
+.js-ticket-help-btn {margin: 0 0 0 8px;}
+.js-ticket-canned {margin: 0 0 0 8px;}
+.jsst-jumps-lead {margin: 0 0 6px 10px;}
+.jsst-jump {margin: 0 0 6px 6px;}
+/* The list hangs from the other edge, and the arrow-key marker moves to the
+   side the eye starts from. */
+.js-ticket-canned-list {left: auto;right: 0;}
+.js-ticket-canned-option.is-at {box-shadow: inset -2px 0 0 var(--jsst-accent, #1d5b8f);}
+.js-ticket-canned-append input {margin: 0 0 0 4px;}
+.js-ticket-suggestion-origin {margin-right: 0;margin-left: 6px;}
+.js-ticket-suggestion-origin::after {margin-left: 0;margin-right: 6px;}
+.js-ticket-suggestion-from {margin-right: 0;margin-left: 8px;}
+.js-ticket-suggestion-actions .js-ticket-reply-action-btn {margin-right: 0;margin-left: 8px;}
+@supports (gap: 1px) {
+    .js-ticket-suggestion-from, .js-ticket-suggestion-actions .js-ticket-reply-action-btn {margin-left: 0;}
+}

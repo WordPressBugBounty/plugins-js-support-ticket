@@ -60,9 +60,13 @@ JSSTmessage::getMessage();
         <?php  JSSTincluder::getClassesInclude('jsstadminsidemenu'); ?>
     </div>
     <div id="jsstadmin-data">
-    <span class="js-adminhead-title"> <a class="jsanchor-backlink" href="<?php echo esc_url(admin_url('admin.php?page=reports&jstlay=staffdetailreport&id='.esc_attr($jsst_id)));?>"><img alt="<?php echo esc_attr(__('image','js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/back-icon.png" /></a> <span class="jsheadtext"><?php echo esc_html(__("Report By Staff Member", 'js-support-ticket')); ?></span>
-    </span>
-    <a href="<?php echo esc_url(admin_url('admin.php?page=reports&jstlay=staffreport&date_start='.jssupportticket::$jsst_data['filter']['date_start'].'&date_end='.jssupportticket::$jsst_data['filter']['date_end'])); ?>"></a>
+    <?php JSSTlayout::adminPageHeader(array(
+        'title'  => __('Report By Staff Member', 'js-support-ticket'),
+        'crumbs' => array(
+            array('text' => __('Agent Reports', 'js-support-ticket'), 'url' => admin_url('admin.php?page=reports&jstlay=staffreport')),
+            array('text' => __('Agent Report', 'js-support-ticket'), 'url' => admin_url('admin.php?page=reports&jstlay=staffdetailreport&id=' . $jsst_id)),
+        ),
+    )); ?>
     <form class="js-filter-form js-report-form" name="jssupportticketform" id="jssupportticketform" method="post" action="<?php echo esc_url(wp_nonce_url(admin_url("admin.php?page=reports&jstlay=stafftimereport&id=".esc_attr($jsst_id)),"reports")); ?>">
         <?php
             $jsst_curdate = date_i18n('Y-m-d');

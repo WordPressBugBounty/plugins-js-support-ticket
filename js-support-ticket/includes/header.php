@@ -406,27 +406,7 @@ $jsst_div .= '</div></div></div>';
 echo wp_kses($jsst_div, JSST_ALLOWED_TAGS);
 ?>
 <?php if(in_array('multiform', jssupportticket::$_active_addons)){ ?>
-    <div id="multiformpopupblack" style="display:none;"></div>
-    <div id="multiformpopup" class="" style="display:none;"><!-- Select User Popup -->
-        <div class="jsst-multiformpopup-header">
-            <div class="multiformpopup-header-text">
-                <?php echo esc_html(__('Select Form','js-support-ticket')); ?>
-            </div>
-            <div class="multiformpopup-header-close-img">
-            </div>
-        </div>
-        <div id="records">
-            <div id="records-inner">
-                <div class="js-staff-searc-desc">
-                    <?php echo esc_html(__('No Record Found','js-support-ticket')); ?>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- add loading for multiform -->
-    <div id="jstran_loading">
-        <img alt = "<?php echo esc_attr(__('spinning wheel','js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/spinning-wheel.gif" />
-    </div>
+    <?php JSSTlayout::adminFormPicker(); ?>
 <?php }
 $jsst_jssupportticket_js ='
     jQuery(document).ready(function ($) {
@@ -448,17 +428,12 @@ $jsst_jssupportticket_js ='
             });
         });
 
-        jQuery("div#multiformpopupblack , div.multiformpopup-header-close-img").click(function (e) {
+        jQuery("div#multiformpopupblack , .multiformpopup-header-close-img").click(function (e) {
             jQuery("div#multiformpopup").slideUp("slow", function () {
                 jQuery("div#multiformpopupblack").hide();
             });
         });
     });
-
-    function makeFormSelected(divelement){
-        jQuery("div.js-ticket-multiform-row").removeClass("selected");
-        jQuery(divelement).addClass("selected");  
-    }
     function makeMultiFormUrl(id){
         var oldUrl = jQuery("a.js-multiformpopup-link").attr("id"); // Get current url
         var opt = "?";

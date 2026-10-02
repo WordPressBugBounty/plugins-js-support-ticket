@@ -11,6 +11,7 @@ if (jssupportticket::$_config['offline'] == 2) {
         <h1 class="jsst-missing-addon-message" >
             <?php echo esc_html(__('Page Not Found !!', 'js-support-ticket')); ?>
         </h1>
+    </div>
     <?php
 } else {
     JSSTlayout::getSystemOffline();

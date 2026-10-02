@@ -71,7 +71,7 @@ class JSSTdocs {
         $jsst_agents = admin_url('admin.php?page=jssupportticket&jstlay=agentaccess');
         $jsst_config = admin_url('admin.php?page=configuration');
         $jsst_import = admin_url('admin.php?page=thirdpartyimport&jstlay=importdata');
-        $jsst_copilot= admin_url('admin.php?page=copilot&jstlay=copilot');
+        $jsst_copilot= admin_url('admin.php?page=aiagent&jstlay=aiagent_settings');
 
         $jsst_pages = array(
 

@@ -30,25 +30,9 @@ $jsst_size = function ($jsst_bytes) {
         <?php JSSTincluder::getClassesInclude('jsstadminsidemenu'); ?>
     </div>
     <div id="jsstadmin-data">
-        <div id="jsstadmin-wrapper-top">
-            <div id="jsstadmin-wrapper-top-left">
-                <div id="jsstadmin-breadcrunbs">
-                    <ul>
-                        <li><a href="?page=jssupportticket" title="<?php echo esc_attr(__('Dashboard','js-support-ticket')); ?>"><?php echo esc_html(__('Dashboard','js-support-ticket')); ?></a></li>
-                        <li><?php echo esc_html(__('Storage Engine','js-support-ticket')); ?></li>
-                    </ul>
-                </div>
-            </div>
-            <div id="jsstadmin-wrapper-top-right">
-                <div id="jsstadmin-vers-txt">
-                    <?php echo esc_html(__("Version",'js-support-ticket')); ?>:
-                    <span class="jsstadmin-ver"><?php echo esc_html(JSSTincluder::getJSModel('configuration')->getConfigValue('versioncode')); ?></span>
-                </div>
-            </div>
-        </div>
-        <div id="jsstadmin-head">
-            <h1 class="jsstadmin-head-text"><?php echo esc_html(__('Storage Engine', 'js-support-ticket')); ?></h1>
-        </div>
+        <?php JSSTlayout::adminPageHeader(array(
+            'title'  => __('Storage Engine', 'js-support-ticket'),
+        )); ?>
         <div id="jsstadmin-data-wrp">
 
             <?php
@@ -135,13 +119,13 @@ $jsst_size = function ($jsst_bytes) {
                             number_format_i18n((int) $jsst_state['total'])
                         )); ?></div>
                         <div class="jsst-migration-actions">
-                            <a class="button js-form-save" href="<?php echo esc_url(wp_nonce_url(admin_url('admin.php?page=jssupportticket&task=continuestorageconversion&action=jstask'), 'jsst-storage-continue')); ?>"><?php echo esc_html(__('Continue', 'js-support-ticket')); ?></a>
-                            <a class="button js-form-cancel" href="<?php echo esc_url(wp_nonce_url(admin_url('admin.php?page=jssupportticket&task=cancelstorageconversion&action=jstask'), 'jsst-storage-cancel')); ?>"><?php echo esc_html(__('Stop here', 'js-support-ticket')); ?></a>
+                            <a class="jsst-btn jsst-btn-primary" href="<?php echo esc_url(wp_nonce_url(admin_url('admin.php?page=jssupportticket&task=continuestorageconversion&action=jstask'), 'jsst-storage-continue')); ?>"><?php echo esc_html(__('Continue', 'js-support-ticket')); ?></a>
+                            <a class="jsst-btn" href="<?php echo esc_url(wp_nonce_url(admin_url('admin.php?page=jssupportticket&task=cancelstorageconversion&action=jstask'), 'jsst-storage-cancel')); ?>"><?php echo esc_html(__('Stop here', 'js-support-ticket')); ?></a>
                         </div>
                     <?php } elseif (!empty($jsst_plan['pending'])) { ?>
                         <div class="jsst-status-note"><?php echo esc_html(__('Take a database backup first. A conversion rewrites tables in place, and while this puts back what it changed, a backup covers what it cannot.', 'js-support-ticket')); ?></div>
                         <div class="jsst-migration-actions">
-                            <a class="button js-form-save" href="<?php echo esc_url(wp_nonce_url(admin_url('admin.php?page=jssupportticket&task=startstorageconversion&action=jstask'), 'jsst-storage-start')); ?>"><?php echo esc_html(sprintf(
+                            <a class="jsst-btn jsst-btn-primary" href="<?php echo esc_url(wp_nonce_url(admin_url('admin.php?page=jssupportticket&task=startstorageconversion&action=jstask'), 'jsst-storage-start')); ?>"><?php echo esc_html(sprintf(
                                 /* translators: %s: number of tables to convert */
                                 _n('Convert %s table', 'Convert %s tables', count($jsst_plan['pending']), 'js-support-ticket'),
                                 number_format_i18n(count($jsst_plan['pending']))
@@ -156,7 +140,7 @@ $jsst_size = function ($jsst_bytes) {
                        somebody presses by reflex. */
                     if (!$jsst_running && !empty($jsst_state['done'])) { ?>
                         <div class="jsst-migration-actions">
-                            <a class="button js-form-cancel" href="<?php echo esc_url(wp_nonce_url(admin_url('admin.php?page=jssupportticket&task=startstorageconversion&action=jstask&direction=revert'), 'jsst-storage-start')); ?>"><?php echo esc_html(sprintf(
+                            <a class="jsst-btn jsst-btn-danger" href="<?php echo esc_url(wp_nonce_url(admin_url('admin.php?page=jssupportticket&task=startstorageconversion&action=jstask&direction=revert'), 'jsst-storage-start')); ?>"><?php echo esc_html(sprintf(
                                 /* translators: %s: number of tables that were converted */
                                 _n('Put %s table back on its old engine', 'Put %s tables back on their old engines', count($jsst_state['done']), 'js-support-ticket'),
                                 number_format_i18n(count($jsst_state['done']))

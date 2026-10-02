@@ -7,7 +7,7 @@ class JSSTthemesModel {
 
     function storeTheme($jsst_data) {
         if (!current_user_can('manage_options')){
-            die('Only Administrators can perform this action.');
+            die(esc_html__( 'Only Administrators can perform this action.', 'js-support-ticket' ));
         }
         $jsst_data = jssupportticket::JSST_sanitizeData($jsst_data);
         update_option('jsst_set_theme_colors', wp_json_encode($jsst_data));

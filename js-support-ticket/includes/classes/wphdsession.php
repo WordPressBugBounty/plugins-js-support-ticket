@@ -58,7 +58,17 @@ class JSSTwphdsession {
     }
 
     private function jshd_set_user_cookies(){
-        jssupportticketphplib::JSST_setcookie( '_wpjshd_session_', $this->jsst_sessionid . '/' . $this->jsst_sessionexpire . '/' . $this->jsst_nextsessionexpire , $this->jsst_sessionexpire, COOKIEPATH, COOKIE_DOMAIN);
+        /* WordPress defines the cookie constants part way through wp-settings,
+           after the mu-plugins have loaded and before the ordinary plugins do.
+           This class is constructed from the plugin bootstrap, which is
+           normally after that point and is not always: a copy dropped in
+           mu-plugins, and the WordPress test suite, both construct it earlier,
+           and an undefined constant is a fatal rather than a warning in PHP 8.
+           The defaults here are WordPress's own for a site at the domain root. */
+        $jsst_cookiepath   = defined('COOKIEPATH') ? COOKIEPATH : '/';
+        $jsst_cookiedomain = defined('COOKIE_DOMAIN') ? COOKIE_DOMAIN : '';
+
+        jssupportticketphplib::JSST_setcookie( '_wpjshd_session_', $this->jsst_sessionid . '/' . $this->jsst_sessionexpire . '/' . $this->jsst_nextsessionexpire , $this->jsst_sessionexpire, $jsst_cookiepath, $jsst_cookiedomain);
         $jsst_count = get_option( '_wpjshd_session_', 0 );
         update_option( '_wpjshd_session_', ++$jsst_count);
     }

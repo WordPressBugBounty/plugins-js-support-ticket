@@ -2,6 +2,19 @@
     if(!defined('ABSPATH'))
         die('Restricted Access');
 
+/**
+ * The questions a form asks, in the order it asks them. (Roadmap 6.5-FORM-02)
+ *
+ * One screen for both sets: the ticket form's questions (fieldfor 1) and the
+ * feedback form's (fieldfor 2). The three switches down the row - who sees it
+ * and whether it must be answered - used to be a green tick or a red cross
+ * you had to hover to read; they are words now, and the word is also the
+ * control, so there is nothing to decode.
+ *
+ * `id_<n>` row ids, `input#fields_ordering_new` and the `a#userpopup` /
+ * `close_popup()` pair that opens a field's options are unchanged - the
+ * ordering post and the options dialog both still work the way they did.
+ */
 $jsst_jssupportticket_js ='
     function resetFrom() {
         document.getElementById("title").value = "";
@@ -29,11 +42,12 @@ $jsst_jssupportticket_js ='
             });
 
         });
-        jQuery("table#js-support-ticket-table tbody").sortable({
-            handle : ".jsst-order-grab-column",
+        jQuery("table.jsst-table tbody").sortable({
+            handle : ".jsst-grab",
+            axis : "y",
             update  : function () {
-                jQuery(".js-form-button").slideDown("slow");
-                var abc =  jQuery("table#js-support-ticket-table tbody").sortable("serialize");
+                jQuery(".jsst-orderbar").slideDown("slow");
+                var abc =  jQuery("table.jsst-table tbody").sortable("serialize");
                 jQuery("input#fields_ordering_new").val(abc);
             }
         });
@@ -50,236 +64,162 @@ wp_add_inline_script('js-support-ticket-main-js',$jsst_jssupportticket_js);
 wp_enqueue_script('jquery-ui-sortable');
 wp_enqueue_style('jquery-ui-css', JSST_PLUGIN_URL . 'includes/css/jquery-ui-smoothness.css', array(), jssupportticket::$_config['productversion']);
 
-JSSTmessage::getMessage(); ?>
-<?php
-$jsst_type = array(
-    (object) array('id' => '1', 'text' => esc_html(__('Public', 'js-support-ticket'))),
-    (object) array('id' => '2', 'text' => esc_html(__('Private', 'js-support-ticket')))
-);
+JSSTmessage::getMessage();
+
+$jsst_fieldfor = jssupportticket::$jsst_data['fieldfor'];
+$jsst_mformid  = isset(jssupportticket::$jsst_data['formid']) ? jssupportticket::$jsst_data['formid'] : JSSTincluder::getJSModel('ticket')->getDefaultMultiFormId();
+$jsst_isfeedback = ((int) $jsst_fieldfor === 2);
+
+/* Rows this site cannot use are skipped rather than drawn greyed: a question
+   about a WooCommerce order on a desk with no WooCommerce is not a setting,
+   it is noise. Unchanged from before - only moved out of the markup. */
+$jsst_skip = function ($jsst_field) {
+    $jsst_f = $jsst_field->field;
+    if (in_array($jsst_f, array('wcorderid','wcproductid','wcitemid'), true)) {
+        if (!in_array('woocommerce', jssupportticket::$_active_addons) || !class_exists('WooCommerce')) { return true; }
+    }
+    if (in_array($jsst_f, array('eddorderid','eddproductid'), true)) {
+        if (!in_array('easydigitaldownloads', jssupportticket::$_active_addons) || !class_exists('Easy_Digital_Downloads')) { return true; }
+    }
+    if ($jsst_f === 'eddlicensekey') {
+        if (!in_array('easydigitaldownloads', jssupportticket::$_active_addons) || !class_exists('Easy_Digital_Downloads') || !class_exists('EDD_Software_Licensing')) { return true; }
+    }
+    if ($jsst_f === 'envatopurchasecode' && !in_array('envatovalidation', jssupportticket::$_active_addons)) { return true; }
+    /* Status, assignment and due date are set on the ticket, not asked for on
+       the form, so they are not questions this screen governs. */
+    if (in_array($jsst_f, array('wcitemid','status','assignto','duedate'), true)) { return true; }
+    return false;
+};
+
+/* A switch that is a word and a link at once. $jsst_on decides which way it
+   reads; $jsst_url is null when the field is one the form cannot do without,
+   and it then says so instead of offering a switch. */
+$jsst_toggle = function ($jsst_on, $jsst_url, $jsst_onword, $jsst_offword, $jsst_fixednote = '') {
+    if ($jsst_url === null) {
+        echo '<span class="jsst-mark jsst-mark-on" title="' . esc_attr($jsst_fixednote) . '">' . esc_html($jsst_onword) . '</span>';
+        return;
+    }
+    $jsst_cls = $jsst_on ? 'jsst-mark jsst-mark-on' : 'jsst-mark';
+    echo '<a class="' . esc_attr($jsst_cls) . '" href="' . esc_url($jsst_url) . '">' . esc_html($jsst_on ? $jsst_onword : $jsst_offword) . '</a>';
+};
 ?>
 <div id="jsstadmin-wrapper">
     <div id="jsstadmin-leftmenu">
         <?php  JSSTincluder::getClassesInclude('jsstadminsidemenu'); ?>
     </div>
     <div id="jsstadmin-data">
-        <div id="jsstadmin-wrapper-top">
-            <div id="jsstadmin-wrapper-top-left">
-                <div id="jsstadmin-breadcrunbs">
-                    <ul>
-                        <li><a href="?page=jssupportticket" title="<?php echo esc_attr(__('Dashboard','js-support-ticket')); ?>"><?php echo esc_html(__('Dashboard','js-support-ticket')); ?></a></li>
-                        <?php if(in_array('multiform', jssupportticket::$_active_addons)){ ?>
-                            <li><a href="?page=multiform" title="<?php echo esc_attr(__('Multiform','js-support-ticket')); ?>"><?php echo esc_html(__('Multiform','js-support-ticket')); ?></a></li>
-                        <?php } ?>
-                        <li><?php echo esc_html(__('Fields','js-support-ticket')); ?></li>
-                    </ul>
-                </div>
-            </div>
-            <div id="jsstadmin-wrapper-top-right">
-                <div id="jsstadmin-config-btn">
-                    <a title="<?php echo esc_attr(__('Configuration','js-support-ticket')); ?>" href="<?php echo esc_url(admin_url("admin.php?page=configuration")); ?>">
-                        <img alt = "<?php echo esc_attr(__('Configuration','js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/config.png" />
-                    </a>
-                </div>
-                <div id="jsstadmin-config-btn" class="jssticketadmin-help-btn">
-                    <a href="<?php echo esc_url(admin_url("admin.php?page=jssupportticket&jstlay=help")); ?>" title="<?php echo esc_attr(__('Help','js-support-ticket')); ?>">
-                        <img alt = "<?php echo esc_attr(__('Help','js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/help.png" />
-                    </a>
-                </div>
-                <div id="jsstadmin-vers-txt">
-                    <?php echo esc_html(__("Version",'js-support-ticket')); ?>:
-                    <span class="jsstadmin-ver"><?php echo esc_html(JSSTincluder::getJSModel('configuration')->getConfigValue('versioncode')); ?></span>
-                </div>
-            </div>
-        </div>
-        <div id="jsstadmin-head">
-            <h1 class="jsstadmin-head-text">
-                <?php echo esc_html(__('Fields','js-support-ticket')); ?>
-                <?php if(isset(jssupportticket::$jsst_data['multiFormTitle'])){ ?>
-                    <span class="jsstadmin-head-sub-text">
-                        <?php echo ' ('.esc_html(jssupportticket::$jsst_data["multiFormTitle"]).')'; ?>
-                    </span>
-                <?php }?>
-            </h1>
-	    <?php if(isset(jssupportticket::$jsst_data['formid']) && jssupportticket::$jsst_data['formid'] != null){ $jsst_mformid = jssupportticket::$jsst_data['formid'];}else{ $jsst_mformid = JSSTincluder::getJSModel('ticket')->getDefaultMultiFormId();} ?>
-            <a title="<?php echo esc_attr(__('Add','js-support-ticket')); ?>" class="jsstadmin-add-link button" href="?page=fieldordering&jstlay=adduserfeild&&fieldfor=<?php echo esc_attr(jssupportticket::$jsst_data['fieldfor']); ?>&formid=<?php echo esc_attr($jsst_mformid) ?>"><img alt = "<?php echo esc_attr(__('Add','js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/plus-icon.png" /><?php echo esc_html(__('Add Field', 'js-support-ticket')); ?></a>
-            <a target="blank" href="https://www.youtube.com/watch?v=c7whQ6F70yM" class="jsstadmin-add-link black-bg button js-cp-video-popup" title="<?php echo esc_attr(__('Watch Video', 'js-support-ticket')); ?>">
-                <img alt = "<?php echo esc_attr(__('arrow','js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/play-btn.png"/>
-                <?php echo esc_html(__('Watch Video','js-support-ticket')); ?>
-            </a>
-        </div>
-        <div id="userpopupblack" style="display:none;"></div>
-        <div id="userpopup" style="display:none;">
-        </div>
-        <div id="jsstadmin-data-wrp" class="p0">
+        <?php JSSTlayout::adminPageHeader(array(
+            'title'   => $jsst_isfeedback ? __('Feedback Fields','js-support-ticket') : __('Fields','js-support-ticket'),
+            'sub'     => isset(jssupportticket::$jsst_data['multiFormTitle']) ? jssupportticket::$jsst_data['multiFormTitle'] : '',
+            'actions' => array(
+                array('text' => __('Add Field', 'js-support-ticket'), 'url' => admin_url('admin.php?page=fieldordering&jstlay=adduserfeild&fieldfor=' . $jsst_fieldfor . '&formid=' . $jsst_mformid), 'icon' => 'plus'),
+            ),
+        )); ?>
+        <?php JSSTlayout::adminPopupShell(); ?>
+        <div id="jsstadmin-data-wrp">
             <?php if (!empty(jssupportticket::$jsst_data[0])) { ?>
                 <form class="jsstadmin-form" method="post" action="<?php echo esc_url(wp_nonce_url(admin_url("admin.php?page=jssupportticket&task=saveordering&formid=".esc_attr($jsst_mformid)),"save-ordering")); ?>">
-                <table id="js-support-ticket-table">
-                    <thead>
-                    <tr class="js-support-ticket-table-heading">
-                        <th><?php echo esc_html(__('Ordering', 'js-support-ticket')); ?></th>
-                        <th><?php echo esc_html(__('S.No', 'js-support-ticket')); ?></th>
-                        <th class="left"><?php echo esc_html(__('Field Title', 'js-support-ticket')); ?></th>
-                        <th><?php echo esc_html(__('User Published', 'js-support-ticket')); ?></th>
-                        <th><?php echo esc_html(__('Visitor Published', 'js-support-ticket')); ?></th>
-                        <th><?php echo esc_html(__('Required', 'js-support-ticket')); ?></th>
-                        <th><?php echo esc_html(__('Action', 'js-support-ticket')); ?></th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <?php
-                    $jsst_i = 0;
-                    $jsst_count = count(jssupportticket::$jsst_data[0]) - 1;
-                    foreach (jssupportticket::$jsst_data[0] AS $jsst_field) {
-                        if($jsst_field->field == 'wcorderid' || $jsst_field->field == 'wcproductid' || $jsst_field->field == 'wcitemid'){
-                            if(!in_array('woocommerce', jssupportticket::$_active_addons)){
-                                continue;
-                            }
-                            if(!class_exists('WooCommerce')){
-                                continue;
-                            }
-                        }
-
-                        if($jsst_field->field == 'eddorderid' || $jsst_field->field == 'eddproductid'){
-                            if(!in_array('easydigitaldownloads', jssupportticket::$_active_addons)){
-                                continue;
-                            }
-                            if(!class_exists('Easy_Digital_Downloads')){
-                                continue;
-                            }
-                        }
-
-                        if($jsst_field->field == 'eddlicensekey'){
-                            if(!in_array('easydigitaldownloads', jssupportticket::$_active_addons)){
-                                continue;
-                            }
-                            if(!class_exists('Easy_Digital_Downloads')){
-                                continue;
-                            }
-                            if(!class_exists('EDD_Software_Licensing')){
-                                continue;
-                            }
-                        }
-                        // hide status and assign and duedate to field
-                        if($jsst_field->field == 'wcitemid' || $jsst_field->field == 'status' || $jsst_field->field == 'assignto' || $jsst_field->field == 'duedate'){
-                            continue;
-                        }
-
-                        if($jsst_field->field == 'envatopurchasecode'){
-                            if(!in_array('envatovalidation', jssupportticket::$_active_addons)){
-                                continue;
-                            }
-                        }
-
-                        $jsst_alt = $jsst_field->published ? esc_html(__('Published','js-support-ticket')) : esc_html(__('Unpublished','js-support-ticket'));
-                        $jsst_reqalt = $jsst_field->required ? esc_html(__('Required','js-support-ticket')) : esc_html(__('Not required','js-support-ticket'));
-                        ?>
-                        <tr id="id_<?php echo esc_attr($jsst_field->id); ?>">
-                            <td class="js-textaligncenter jsst-order-grab-column">
-                                <span class="js-support-ticket-table-responsive-heading">
-                                    <?php echo esc_html(__('Ordering', 'js-support-ticket')); echo " : "; ?>
-                                </span>
-                                <img alt = "<?php echo esc_attr(__('grab','js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL) . 'includes/images/list-full.png'?>"/>
-                            </td>
-
-                            <td>
-                            <span class="js-support-ticket-table-responsive-heading"><?php echo esc_html(__('S.No','js-support-ticket')); ?>:</span>
-                            <?php echo esc_html($jsst_field->id); ?></td>
-                            <td class="left">
-                            <span class="js-support-ticket-table-responsive-heading"><?php echo esc_html(__('Field Title','js-support-ticket')); ?>:</span>
-                                <?php
-                                    if ($jsst_field->fieldtitle)
-                                        echo '<a title="'. esc_html(__('users popup','js-support-ticket')).'" href="?page=fieldordering&jstlay=adduserfeild&jssupportticketid='.esc_attr($jsst_field->id).'&fieldfor='.esc_attr(jssupportticket::$jsst_data['fieldfor']).'&formid='.esc_attr($jsst_field->multiformid).'" id="" data-id='.esc_attr($jsst_field->id).'>'.esc_html(jssupportticket::JSST_getVarValue($jsst_field->fieldtitle)).'</a>';
-                                    else echo esc_html($jsst_field->userfieldtitle);
-                                    if($jsst_field->cannotunpublish == 1){
-                                        echo '<font style="color:#1C6288;font-size:20px;margin:0px 5px;">*</font>';
-                                    }
-                                ?>
-                            </td>
-                            <td>
-                            <span class="js-support-ticket-table-responsive-heading"><?php echo esc_html(__('User Published','js-support-ticket')); ?>:</span>
-                                <?php if ($jsst_field->cannotunpublish == 1) { ?>
-                                    <img height="15" width="15" src="<?php echo esc_url(JSST_PLUGIN_URL) . 'includes/images/good.png'; ?>" title="<?php echo esc_attr(__('Can Not Unpublished','js-support-ticket')); ?>" alt = "<?php echo esc_attr(__('good','js-support-ticket')); ?>" />
-                                <?php }elseif ($jsst_field->published == 1) {
-                                    $jsst_url  = "?page=fieldordering&task=changepublishstatus&action=jstask&status=unpublish&fieldorderingid=".esc_attr($jsst_field->id).'&fieldfor='.esc_attr(jssupportticket::$jsst_data['fieldfor']).'&formid='.esc_attr($jsst_field->multiformid);
-                                         ?>
-                                        <a title="<?php echo esc_attr(__('good','js-support-ticket')); ?>" href="<?php echo esc_url(wp_nonce_url($jsst_url, 'change-publish-status-'.$jsst_field->id)); ?>" ><img height="15" width="15" src="<?php echo esc_url(JSST_PLUGIN_URL) . 'includes/images/good.png'; ?>" alt = "<?php echo esc_attr(__('good','js-support-ticket')); ?>" /></a>
-                                <?php }else{
-                                    $jsst_url  = "?page=fieldordering&task=changepublishstatus&action=jstask&status=publish&fieldorderingid=".esc_attr($jsst_field->id).'&fieldfor='.esc_attr(jssupportticket::$jsst_data['fieldfor']).'&formid='.esc_attr($jsst_field->multiformid);
-                                         ?>
-                                        <a title="<?php echo esc_attr(__('cross','js-support-ticket')); ?>" href="<?php echo esc_url(wp_nonce_url($jsst_url, 'change-publish-status-'.$jsst_field->id)); ?>" ><img height="15" width="15" src="<?php echo esc_url(JSST_PLUGIN_URL) . 'includes/images/close.png'; ?>" alt = "<?php echo esc_attr(__('cross','js-support-ticket')); ?>" /></a>
-                                <?php } ?>
-                            </td>
-                            <td>
-                            <span class="js-support-ticket-table-responsive-heading"><?php echo esc_html(__('Visitor Published','js-support-ticket')); ?>:</span>
-                                <?php if ($jsst_field->cannotunpublish == 1) { ?>
-                                    <img height="15" width="15" src="<?php echo esc_url(JSST_PLUGIN_URL) . 'includes/images/good.png'; ?>" title="<?php echo esc_attr(__('Can Not Unpublished','js-support-ticket')); ?>" />
-                                <?php }elseif ($jsst_field->isvisitorpublished == 1) {
-                                    $jsst_url  = "?page=fieldordering&task=changevisitorpublishstatus&action=jstask&status=unpublish&fieldorderingid=".esc_attr($jsst_field->id).'&fieldfor='.esc_attr(jssupportticket::$jsst_data['fieldfor']).'&formid='.esc_attr($jsst_field->multiformid);
-                                         ?>
-                                        <a title="<?php echo esc_attr(__('good','js-support-ticket')); ?>" href="<?php echo esc_url(wp_nonce_url($jsst_url, 'change-visitor-publish-status-'.$jsst_field->id)); ?>" ><img height="15" width="15" src="<?php echo esc_url(JSST_PLUGIN_URL) . 'includes/images/good.png'; ?>" alt = "<?php echo esc_attr(__('good','js-support-ticket')); ?>" /></a>
-                                <?php }else{
-                                    $jsst_url  = "?page=fieldordering&task=changevisitorpublishstatus&action=jstask&status=publish&fieldorderingid=".esc_attr($jsst_field->id).'&fieldfor='.esc_attr(jssupportticket::$jsst_data['fieldfor']).'&formid='.esc_attr($jsst_field->multiformid);
-                                         ?>
-                                        <a title="<?php echo esc_attr(__('cross','js-support-ticket')); ?>" href="<?php echo esc_url(wp_nonce_url($jsst_url, 'change-visitor-publish-status-'.$jsst_field->id)); ?>" ><img height="15" width="15" src="<?php echo esc_url(JSST_PLUGIN_URL) . 'includes/images/close.png'; ?>" alt = "<?php echo esc_attr(__('cross','js-support-ticket')); ?>" /></a>
-                                <?php } ?>
-                            </td>
-                            <td>
-                            <span class="js-support-ticket-table-responsive-heading"><?php echo esc_html(__('Required','js-support-ticket')); ?>:</span>
-                                <?php if ($jsst_field->cannotunpublish == 1 || $jsst_field->field == 'termsandconditions1' || $jsst_field->field == 'termsandconditions2' || $jsst_field->field == 'termsandconditions3' || ($jsst_field->userfieldtype == 'termsandconditions' && $jsst_field->required == 1) ) { ?>
-                                    <img height="15" width="15" src="<?php echo esc_url(JSST_PLUGIN_URL) . 'includes/images/good.png'; ?>" alt = "<?php echo esc_attr(__('good','js-support-ticket')); ?>" title="<?php echo esc_attr(__('can not mark as not required','js-support-ticket')); ?>" />
-                                <?php }elseif ($jsst_field->required == 1) {
-                                    $jsst_url  = "?page=fieldordering&task=changerequiredstatus&action=jstask&status=unrequired&fieldorderingid=".esc_attr($jsst_field->id).'&fieldfor='.esc_attr(jssupportticket::$jsst_data['fieldfor']).'&formid='.esc_attr($jsst_field->multiformid);
-                                         ?>
-                                        <a title="<?php echo esc_attr(__('good','js-support-ticket')); ?>" href="<?php echo esc_url(wp_nonce_url($jsst_url, 'change-required-status-'.$jsst_field->id)); ?>" ><img height="15" width="15" src="<?php echo esc_url(JSST_PLUGIN_URL) . 'includes/images/good.png'; ?>" alt = "<?php echo esc_attr(__('good','js-support-ticket')); ?>" /></a>
-                                <?php }else{
-                                    $jsst_url  = "?page=fieldordering&task=changerequiredstatus&action=jstask&status=required&fieldorderingid=".esc_attr($jsst_field->id).'&fieldfor='.esc_attr(jssupportticket::$jsst_data['fieldfor']).'&formid='.esc_attr($jsst_field->multiformid);
-                                         ?>
-                                        <a title="<?php echo esc_attr(__('Close','js-support-ticket')); ?>" href="<?php echo esc_url(wp_nonce_url($jsst_url, 'change-required-status-'.$jsst_field->id)); ?>" ><img height="15" width="15" src="<?php echo esc_url(JSST_PLUGIN_URL) . 'includes/images/close.png'; ?>" title="<?php echo esc_attr(__('Close','js-support-ticket')); ?>" /></a>
-                                <?php } ?>
-                            </td>
-                            <td>
-                            <span class="js-support-ticket-table-responsive-heading"><?php echo esc_html(__('Action','js-support-ticket')); ?>:</span>
-                                <?php
-                                    echo wp_kses('<a title="'. esc_html(__('Edit','js-support-ticket')).'" class="action-btn" href="?page=fieldordering&jstlay=adduserfeild&jssupportticketid='.esc_attr($jsst_field->id).'&fieldfor='.jssupportticket::$jsst_data['fieldfor'].'&formid='.esc_attr($jsst_field->multiformid).'"><img alt="'. esc_html(__('Edit','js-support-ticket')).'" src="'.esc_url(JSST_PLUGIN_URL).'includes/images/edit.png" /></a>&nbsp;', JSST_ALLOWED_TAGS);
-                                    if($jsst_field->isuserfield==1){
-                                        echo wp_kses('<a title="'. esc_html(__('Delete','js-support-ticket')).'" class="action-btn" onclick="return confirm(\''. esc_html(__('Are you sure you want to delete?','js-support-ticket')).'\');" href="'.esc_url(wp_nonce_url('?page=fieldordering&task=removeuserfeild&action=jstask&jssupportticketid='.esc_attr($jsst_field->id).'&fieldfor='.jssupportticket::$jsst_data['fieldfor'].'&formid='.esc_attr($jsst_field->multiformid),'remove-userfeild-'.$jsst_field->id)).'"><img alt="'. esc_html(__('Delete','js-support-ticket')).'" src="'.esc_url(JSST_PLUGIN_URL).'includes/images/delete.png" /></a>', JSST_ALLOWED_TAGS);
-                                    }
-                                ?>
-                            </td>
+                <div class="jsst-card">
+                    <div class="jsst-table-wrap">
+                    <table class="jsst-table">
+                        <thead>
+                        <tr>
+                            <th class="jsst-col-grab"><span class="screen-reader-text"><?php echo esc_html(__('Ordering', 'js-support-ticket')); ?></span></th>
+                            <th class="jsst-col-name"><?php echo esc_html(__('Field Title', 'js-support-ticket')); ?></th>
+                            <th class="jsst-col-fit"><?php echo esc_html(__('Signed-in users', 'js-support-ticket')); ?></th>
+                            <th class="jsst-col-fit"><?php echo esc_html(__('Visitors', 'js-support-ticket')); ?></th>
+                            <th class="jsst-col-fit"><?php echo esc_html(__('Required', 'js-support-ticket')); ?></th>
+                            <th class="jsst-col-act"><span class="screen-reader-text"><?php echo esc_html(__('Action', 'js-support-ticket')); ?></span></th>
                         </tr>
+                        </thead>
+                        <tbody>
                         <?php
-                        $jsst_i++;
-                    }
-                    ?>
-                 </tbody>
-                 </table>
-                 <?php echo wp_kses(JSSTformfield::hidden('fields_ordering_new', '123'), JSST_ALLOWED_TAGS); ?>
+                        foreach (jssupportticket::$jsst_data[0] AS $jsst_field) {
+                            if ($jsst_skip($jsst_field)) { continue; }
+
+                            $jsst_locked  = ((int) $jsst_field->cannotunpublish === 1);
+                            $jsst_istc    = in_array($jsst_field->field, array('termsandconditions1','termsandconditions2','termsandconditions3'), true)
+                                            || ($jsst_field->userfieldtype === 'termsandconditions' && (int) $jsst_field->required === 1);
+                            $jsst_editurl = '?page=fieldordering&jstlay=adduserfeild&jssupportticketid='.esc_attr($jsst_field->id).'&fieldfor='.esc_attr($jsst_fieldfor).'&formid='.esc_attr($jsst_field->multiformid);
+                            $jsst_base    = '&action=jstask&fieldorderingid='.esc_attr($jsst_field->id).'&fieldfor='.esc_attr($jsst_fieldfor).'&formid='.esc_attr($jsst_field->multiformid);
+                            ?>
+                            <tr id="id_<?php echo esc_attr($jsst_field->id); ?>">
+                                <td class="jsst-col-grab">
+                                    <span class="jsst-grab" role="img" aria-label="<?php echo esc_attr(__('Drag to reorder','js-support-ticket')); ?>" title="<?php echo esc_attr(__('Drag to reorder','js-support-ticket')); ?>"></span>
+                                </td>
+                                <th scope="row" class="jsst-col-name">
+                                    <span class="jsst-ident-text">
+                                        <?php if ($jsst_field->fieldtitle) { ?>
+                                            <a class="jsst-table-name" href="<?php echo esc_url($jsst_editurl); ?>" data-id="<?php echo esc_attr($jsst_field->id); ?>"><?php echo esc_html(jssupportticket::JSST_getVarValue($jsst_field->fieldtitle)); ?></a>
+                                        <?php } else { ?>
+                                            <span class="jsst-table-name"><?php echo esc_html($jsst_field->userfieldtitle); ?></span>
+                                        <?php } ?>
+                                        <span class="jsst-table-sub">
+                                            <?php echo esc_html($jsst_field->userfieldtype); ?>
+                                            <?php if ($jsst_locked) { ?>
+                                                &middot; <?php echo esc_html(__('the form needs this one', 'js-support-ticket')); ?>
+                                            <?php } ?>
+                                        </span>
+                                    </span>
+                                </th>
+                                <td class="jsst-col-fit"><?php
+                                    $jsst_toggle(
+                                        (int) $jsst_field->published === 1,
+                                        $jsst_locked ? null : wp_nonce_url('?page=fieldordering&task=changepublishstatus&status=' . ((int) $jsst_field->published === 1 ? 'unpublish' : 'publish') . $jsst_base, 'change-publish-status-'.$jsst_field->id),
+                                        __('Shown', 'js-support-ticket'), __('Hidden', 'js-support-ticket'),
+                                        __('This question cannot be turned off.', 'js-support-ticket')
+                                    ); ?></td>
+                                <td class="jsst-col-fit"><?php
+                                    $jsst_toggle(
+                                        (int) $jsst_field->isvisitorpublished === 1,
+                                        $jsst_locked ? null : wp_nonce_url('?page=fieldordering&task=changevisitorpublishstatus&status=' . ((int) $jsst_field->isvisitorpublished === 1 ? 'unpublish' : 'publish') . $jsst_base, 'change-visitor-publish-status-'.$jsst_field->id),
+                                        __('Shown', 'js-support-ticket'), __('Hidden', 'js-support-ticket'),
+                                        __('This question cannot be turned off.', 'js-support-ticket')
+                                    ); ?></td>
+                                <td class="jsst-col-fit"><?php
+                                    $jsst_toggle(
+                                        (int) $jsst_field->required === 1,
+                                        ($jsst_locked || $jsst_istc) ? null : wp_nonce_url('?page=fieldordering&task=changerequiredstatus&status=' . ((int) $jsst_field->required === 1 ? 'unrequired' : 'required') . $jsst_base, 'change-required-status-'.$jsst_field->id),
+                                        __('Required', 'js-support-ticket'), __('Optional', 'js-support-ticket'),
+                                        __('This question must always be answered.', 'js-support-ticket')
+                                    ); ?></td>
+                                <td class="jsst-col-act">
+                                    <span class="jsst-rowactions">
+                                        <a class="jsst-act" href="<?php echo esc_url($jsst_editurl); ?>"><?php echo esc_html(__('Edit','js-support-ticket')); ?></a>
+                                        <?php if ((int) $jsst_field->isuserfield === 1) { ?>
+                                            <a class="jsst-act jsst-act-danger" onclick="return confirm('<?php echo esc_js(__('Are you sure you want to delete?','js-support-ticket')); ?>');" href="<?php echo esc_url(wp_nonce_url('?page=fieldordering&task=removeuserfeild&action=jstask&jssupportticketid='.esc_attr($jsst_field->id).'&fieldfor='.esc_attr($jsst_fieldfor).'&formid='.esc_attr($jsst_field->multiformid),'remove-userfeild-'.$jsst_field->id)); ?>"><?php echo esc_html(__('Delete','js-support-ticket')); ?></a>
+                                        <?php } ?>
+                                    </span>
+                                </td>
+                            </tr>
+                        <?php } ?>
+                        </tbody>
+                    </table>
+                    </div>
+                </div>
+                    <?php echo wp_kses(JSSTformfield::hidden('fields_ordering_new', '123'), JSST_ALLOWED_TAGS); ?>
                     <?php echo wp_kses(JSSTformfield::hidden('form_request', 'jssupportticket'), JSST_ALLOWED_TAGS); ?>
                     <?php echo wp_kses(JSSTformfield::hidden('ordering_for', 'fieldordering'), JSST_ALLOWED_TAGS); ?>
-                    <?php echo wp_kses(JSSTformfield::hidden('fieldfor', jssupportticket::$jsst_data['fieldfor']), JSST_ALLOWED_TAGS); ?>
+                    <?php echo wp_kses(JSSTformfield::hidden('fieldfor', $jsst_fieldfor), JSST_ALLOWED_TAGS); ?>
                     <?php echo wp_kses(JSSTformfield::hidden('pagenum_for_ordering', JSSTrequest::getVar('pagenum', 'get', 1)), JSST_ALLOWED_TAGS); ?>
-                    <div class="js-form-button" style="display: none;">
-                        <?php echo wp_kses(JSSTformfield::submitbutton('save', esc_html(__('Save Ordering', 'js-support-ticket')), array('class' => 'button js-form-save')), JSST_ALLOWED_TAGS); ?>
+                    <div class="jsst-orderbar" style="display: none;">
+                        <span class="jsst-orderbar-note"><?php echo esc_html(__('You changed the order of this list.', 'js-support-ticket')); ?></span>
+                        <?php echo wp_kses(JSSTformfield::submitbutton('save', esc_html(__('Save Ordering', 'js-support-ticket')), array('class' => 'jsst-btn jsst-btn-primary')), JSST_ALLOWED_TAGS); ?>
                     </div>
                 </form>
-                <div class="jsstadmin-help-msg">
-                    <?php echo wp_kses('<font style="color:#1C6288;font-size:20px;margin:0px 5px;vertical-align: middle;">*</font>'. esc_html(__('Cannot unpublished field','js-support-ticket')), JSST_ALLOWED_TAGS); ?>
+                <p class="jsst-hint"><?php echo esc_html(__('Upload and tick-box questions cannot be made required. A question the form needs is marked as such and has no switch.', 'js-support-ticket')); ?></p>
+            <?php } else { ?>
+                <div class="jsst-card">
+                    <?php JSSTlayout::adminEmpty(
+                        __('No fields found.', 'js-support-ticket'),
+                        $jsst_isfeedback
+                            ? __('These are the questions asked when a customer rates a closed ticket.', 'js-support-ticket')
+                            : __('These are the questions the ticket form asks, in the order it asks them.', 'js-support-ticket'),
+                        __('Add field', 'js-support-ticket'),
+                        admin_url('admin.php?page=fieldordering&jstlay=adduserfeild&fieldfor=' . $jsst_fieldfor . '&formid=' . $jsst_mformid)
+                    ); ?>
                 </div>
-                <?php
-                /*
-                  if ( jssupportticket::$jsst_data[1] ) {
-                  echo '<div class="tablenav"><div class="tablenav-pages">' . wp_kses_post(jssupportticket::$jsst_data[1]) . '</div></div>';
-                  }
-                 */
-            } else {
-                JSSTlayout::getNoRecordFound();
-            }
-            ?>
+            <?php } ?>
         </div>
-        <?php if (!empty(jssupportticket::$jsst_data[0])) { ?>
-            <div id="js-field-ordering-notice">
-                <img src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/info-icon.png"> <?php echo esc_html(__('File upload fields and Check box fields cannot be made required.', 'js-support-ticket')); ?>
-            </div>
-        <?php } ?>
     </div>
 </div>

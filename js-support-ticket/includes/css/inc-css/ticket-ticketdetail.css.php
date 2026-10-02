@@ -1477,7 +1477,7 @@ div.jsst-main-up-wrapper .js-tkt-wc-order-item-link{
     display:flex;
     flex-wrap:wrap;
     padding:20px 0;
-    gap:20px;
+    gap:12px;
 }
 .jsst-merge-popup-wrapper .close-merge {
     cursor: pointer;
@@ -1548,6 +1548,8 @@ span.js-heading.js-heading-text{
 }
 #popup-record-data .jsst-merge-popup-wrapper .js-merge-form-title.js-col-md-12{
     border-bottom:1px solid ' . $jsst_color5 . ' !important;
+    margin:0;
+    padding:0 0 8px;
 }
 /* Scoped to the "ticket you are merging into" preview at the top of the dialog.
    Unscoped (and with an id plus !important) it also bordered every candidate
@@ -1688,9 +1690,26 @@ span.js-heading.js-heading-text{
 .jsst-merge-popup-wrapper .js-merge-form-title {
     font-size: 21px;
     font-weight: 600;
-    margin-bottom: 15px;
     color: #4e555f;
-    padding-bottom: 20px;
+    /* No side padding from .js-col-md-12, so it lines up with the text and
+       fields under it, and no extra space below: the gap on the wrapper already
+       separates the rows. */
+    margin: 0;
+    padding: 0 0 10px;
+}
+/* The line under the heading that says which ticket a merge closes. */
+.jsst-merge-popup-wrapper .jsst-merge-howto {
+    box-sizing: border-box;
+    width: 100%;
+    margin: 0;
+    padding: 10px 14px;
+    border: 1px solid ' . $jsst_color5 . ';
+    border-left: 3px solid ' . $jsst_color1 . ';
+    border-radius: 6px;
+    background: ' . $jsst_color3 . ';
+    color: ' . $jsst_color4 . ';
+    font-size: 16px;
+    line-height: 1.5;
 }
 
 .jsst-merge-popup-wrapper .js-merge-form-wrp {
@@ -1750,8 +1769,6 @@ span.js-heading.js-heading-text{
 .jsst-merge-popup-wrapper input.js-search:hover {
     transform: translateY(-2px);
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
-    background-color: ' . $jsst_color2 . ';
-
 }
 
 .jsst-merge-popup-wrapper input.js-cancel {
@@ -1760,7 +1777,6 @@ span.js-heading.js-heading-text{
 }
 
 .jsst-merge-popup-wrapper input.js-cancel:hover {
-    background-color: ' . $jsst_color2 . ';
     color: #fff;
     transform: translateY(-2px);
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
@@ -3097,7 +3113,7 @@ input#ppppok:hover {background-color: ' . esc_attr($jsst_color2) . ';color: ' . 
     /* Utility for hiding elements */
     .js-ticket-hidden {display: none;}
     /* Marked as AI-Powered Reply Feature  */
-    div.js-ticket-ai-reply-status-wrapper {float: left;width: 100%;padding: 15px 0px 0px;box-sizing: border-box;}
+    div.js-ticket-ai-reply-status-wrapper {float: left;width: 100%;padding: 0px 0px 0px;box-sizing: border-box;}
     div.js-ticket-ai-reply-status-wrapper label {display: inline-block;margin-bottom: 10px;font-weight: 600;color: #444;}
     div.js-ticket-segmented-control-wrp {padding: 15px 0;}
     div.js-ticket-segmented-control {display: flex;border: 1px solid '. $jsst_color5 .';border-radius: 6px;overflow: hidden;width: 100%;max-width: 100%;box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);flex-wrap: wrap;}
@@ -3633,11 +3649,61 @@ span.js-tkt-det-prty {color:white;}
 .js-ticket-thread .js-ticket-thread-actions .js-ticket-thread-actn-btn{
     gap:8px;
 }
+/* Whether a reply may be offered to the AI as an example. (Roadmap 6.0-AI-01)
+
+   A labelled switch in the reply header, always shown: a pill with a small
+   track and knob, the accent colour when the reply is used and grey when it
+   is not. A <button>, so the browser face comes off first. */
+.js-ticket-thread .js-ticket-ai-example {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin: 0 0 0 10px;
+    padding: 3px 10px 3px 4px;
+    border: 1px solid ' . esc_attr($jsst_color1) . ';
+    border-radius: 999px;
+    background: ' . esc_attr($jsst_color7) . ';
+    color: ' . esc_attr($jsst_color1) . ';
+    font: inherit;
+    font-size: 13px;
+    font-weight: 600;
+    line-height: 20px;
+    vertical-align: middle;
+    cursor: pointer;
+    box-shadow: none;
+    transition: background-color .15s ease, border-color .15s ease, color .15s ease;
+}
+/* The track and its knob, drawn with two pseudo-elements so the markup stays
+   one button and one label. */
+.js-ticket-thread .js-ticket-ai-example::before {
+    content: "";
+    flex: 0 0 auto;
+    width: 30px;
+    height: 18px;
+    border-radius: 999px;
+    background: ' . esc_attr($jsst_color1) . ' radial-gradient(circle at calc(100% - 9px) 50%, #fff 6px, transparent 6.5px);
+    transition: background .15s ease;
+}
+.js-ticket-thread .js-ticket-ai-example:hover {
+    background: ' . esc_attr($jsst_color3) . ';
+}
+.js-ticket-thread .js-ticket-ai-example:focus-visible {
+    outline: 2px solid ' . esc_attr($jsst_color1) . ';
+    outline-offset: 2px;
+}
+/* Off: grey, the knob on the left. */
+.js-ticket-thread .js-ticket-ai-example.js-ticket-ai-example-off {
+    border-color: ' . esc_attr($jsst_color5) . ';
+    color: ' . esc_attr($jsst_color4) . ';
+}
+.js-ticket-thread .js-ticket-ai-example.js-ticket-ai-example-off::before {
+    background: ' . esc_attr($jsst_color5) . ' radial-gradient(circle at 9px 50%, #fff 6px, transparent 6.5px);
+}
 .js-ticket-thread .js-ticket-thread-actions .js-ticket-thread-actn-btn, .js_ticketattachment .button {
     font-family: inherit;
    
 }
-.js-ticket-thread .js-ticket-thread-actions .js-ticket-thread-actn-btn, .js_ticketattachment .button:hover {
+.js-ticket-thread .js-ticket-thread-actions .js-ticket-thread-actn-btn:hover, .js_ticketattachment .button:hover {
     border-color: ' . esc_attr($jsst_color2) . ';
     background-color: ' . esc_attr($jsst_color2) . ';
     color: ' . esc_attr($jsst_color7) . ';
@@ -4087,6 +4153,9 @@ $jsst_jssupportticket_css .= '
  * Overrides for remaining classes to ensure a cohesive design.
  */
 .js-ticket-thread .js-ticket-thread-actions .js-ticket-thread-actn-btn:hover{background-color: ' . esc_attr($jsst_color1) . '; color:' . esc_attr($jsst_color7) . ';    border-color: ' . esc_attr($jsst_color1) . ';}
+/* The icons are grey, drawn for the light face at rest; on the filled hover face they turn white with the label. */
+.js-ticket-thread .js-ticket-thread-actions .js-ticket-thread-actn-btn:hover img,
+.js-ticket-thread .js-ticket-thread-actions .js-ticket-thread-actn-btn:focus-visible img{filter: brightness(0) invert(1);}
 .js-tkt-det-tkt-custm-flds .js-tkt-det-info-data{
     margin-bottom: 10px;
     align-items: flex-start;
@@ -4266,6 +4335,17 @@ div.jsst-ticket-detail-timer-wrapper div.timer-right div.timer-buttons span.time
     justify-content: center;
     margin-bottom: 15px;
 }
+
+        /* The line that stands where the Add button would be on a closed
+           ticket. A note, not a control: it must not read as something to
+           click. */
+        .js-ticket-usercredentail-data-add-new-button-wrap.jsst-credential-closed {
+            padding: 12px 15px;
+            text-align: center;
+            font-size: 13px;
+            line-height: 1.5;
+            color: #6b7280;
+        }
 
         /* Delete Button */
         .js-ticket-usercredentail-data-button-delete {
@@ -4673,12 +4753,297 @@ $jsst_jssupportticket_css .= '
      * hover treatment are unchanged; only the type is brought back down.
      */
     .js-tkt-det-left .js-tkt-det-actn-btn-wrp .js-tkt-det-actn-btn {
-        font-size: 0.95rem;
+        font-size: 1.15rem;
         line-height: 1.4;
     }
     ';
 
+/*
+ * Time panel on the ticket detail (Time Tracking addon). (Roadmap 5.0-ANA-02)
+ *
+ * The same markup renders in wp-admin, where the equivalent rules live in
+ * admincss.css with fixed colours. Here it sits inside the site theme, whose
+ * palette the admin can change, so every colour comes from the theme variables.
+ * Keep the two copies in step - they are one component shown in two places.
+ *
+ * The spacing is a margin with the gap layered on inside @supports, because
+ * Chrome before 84 ignores gap and would run the fields together; the fields
+ * hold inputs and are given min-width: 0, because the default min-width: auto
+ * resolves against an input's intrinsic size and Firefox and Chrome disagree
+ * about what that is. On the front end the panel also inherits a theme's body
+ * size, which on a block theme can be 22px, so every size here is explicit.
+ */
+$jsst_jssupportticket_css .= '
+    .jsst-tm-log {
+        box-sizing: border-box;
+        margin: 18px 0;
+        padding: 16px 18px;
+        border: 1px solid ' . esc_attr($jsst_color5) . ';
+        border-left: 4px solid ' . esc_attr($jsst_color1) . ';
+        border-radius: 6px;
+        background: ' . esc_attr($jsst_color3) . ';
+        font-size: 14px;
+        line-height: 1.6;
+        color: ' . esc_attr($jsst_color2) . ';
+        text-align: left;
+    }
+    .jsst-tm-log * { box-sizing: border-box; }
+    .jsst-tm-log-head {
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        margin-bottom: 10px;
+    }
+    .jsst-tm-log-head > * { margin-right: 8px; }
+    .jsst-tm-log-badge {
+        display: inline-block;
+        padding: 2px 8px;
+        border-radius: 10px;
+        background: ' . esc_attr($jsst_color1) . ';
+        color: ' . esc_attr($jsst_color7) . ';
+        font-size: 11px;
+        font-weight: 600;
+        letter-spacing: .04em;
+        text-transform: uppercase;
+    }
+    .jsst-tm-log-title { font-size: 14px; font-weight: 600; color: ' . esc_attr($jsst_color2) . '; }
+    .jsst-tm-log-note { font-size: 12px; color: ' . esc_attr($jsst_color4) . '; font-style: italic; }
+    .jsst-tm-log-fields {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: flex-end;
+    }
+    .jsst-tm-log-fields > * { margin: 0 10px 10px 0; }
+    .jsst-tm-log-field {
+        display: flex;
+        flex-direction: column;
+        min-width: 0;
+        flex: 0 1 150px;
+    }
+    .jsst-tm-log-field-wide { flex: 1 1 240px; }
+    .jsst-tm-log-field > span {
+        margin-bottom: 4px;
+        font-size: 12px;
+        font-weight: 600;
+        color: ' . esc_attr($jsst_color4) . ';
+    }
+    .jsst-tm-log-field input {
+        width: 100%;
+        min-width: 0;
+        padding: 5px 8px;
+        border: 1px solid ' . esc_attr($jsst_color5) . ';
+        border-radius: 4px;
+        background: #fff;
+        color: ' . esc_attr($jsst_color2) . ';
+        font-size: 13px;
+        line-height: 1.5;
+    }
+    .jsst-tm-log-check {
+        display: flex;
+        align-items: center;
+        min-width: 0;
+        padding-bottom: 6px;
+        font-size: 13px;
+        color: ' . esc_attr($jsst_color4) . ';
+    }
+    .jsst-tm-log-check input { margin: 0 6px 0 0; }
+    .jsst-tm-log-actions {
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+    }
+    .jsst-tm-log-actions > * { margin-right: 10px; }
+    .jsst-tm-log-said { min-width: 0; font-size: 12px; color: ' . esc_attr($jsst_color4) . '; }
+    .jsst-tm-log .jsst-tm-btn {
+        display: inline-block;
+        padding: 6px 14px;
+        border: 1px solid ' . esc_attr($jsst_color5) . ';
+        border-radius: 4px;
+        background: #fff;
+        color: ' . esc_attr($jsst_color2) . ';
+        font-size: 13px;
+        font-weight: 500;
+        line-height: 1.5;
+        cursor: pointer;
+    }
+    .jsst-tm-log .jsst-tm-btn:hover { border-color: ' . esc_attr($jsst_color1) . '; }
+    .jsst-tm-log .jsst-tm-btn-primary {
+        background: ' . esc_attr($jsst_color1) . ';
+        border-color: ' . esc_attr($jsst_color1) . ';
+        color: ' . esc_attr($jsst_color7) . ';
+    }
+    .jsst-tm-log .jsst-tm-btn[disabled] { opacity: .55; cursor: default; }
+    @supports (gap: 1px) {
+        .jsst-tm-log-head { gap: 8px; }
+        .jsst-tm-log-head > * { margin-right: 0; }
+        .jsst-tm-log-fields { gap: 10px; }
+        .jsst-tm-log-fields > * { margin: 0; }
+        .jsst-tm-log-actions { gap: 10px; }
+        .jsst-tm-log-actions > * { margin-right: 0; }
+    }
+    [dir="rtl"] .jsst-tm-log { text-align: right; }
+    [dir="rtl"] .jsst-tm-log-head > * { margin-right: 0; margin-left: 8px; }
+    [dir="rtl"] .jsst-tm-log-fields > * { margin: 0 0 10px 10px; }
+    [dir="rtl"] .jsst-tm-log-check input { margin: 0 0 0 6px; }
+    [dir="rtl"] .jsst-tm-log-actions > * { margin-right: 0; margin-left: 10px; }
+    @supports (gap: 1px) {
+        [dir="rtl"] .jsst-tm-log-head > * { margin-left: 0; }
+        [dir="rtl"] .jsst-tm-log-fields > * { margin: 0; }
+        [dir="rtl"] .jsst-tm-log-actions > * { margin-left: 0; }
+    }
+    @media (max-width: 600px) {
+        .jsst-tm-log-field, .jsst-tm-log-field-wide { flex: 1 1 100%; }
+        .jsst-tm-log .jsst-tm-btn { width: 100%; text-align: center; }
+    }
+    ';
+
+$jsst_jssupportticket_css .= '/*
+ * =================================================================
+ * THE COMPOSER ROW, AND THE ANSWERS IT OFFERS. (Roadmap 6.0-AI-01)
+ * =================================================================
+ *
+ * What this replaces, on this screen: canned responses in a titled block above
+ * the editor, and the AI suggestions in a bordered card below it - an icon, a
+ * product name and a sentence of marketing wrapped round one button - which
+ * opened a lavender panel with a violet heading, a green Close and action
+ * buttons in green, orange and blue. Every colour a literal from a different
+ * year, and none of them saying which action was the one to take.
+ *
+ * Now: one row above the box, both ways of not writing from scratch offered as
+ * two of a kind, and a flat list of answers in the theme colours the rest of
+ * the portal is drawn in.
+ */
+/* The controls below carry `div.jsst-main-up-wrapper` and nothing else here
+   does. style.css sets `font-size: inherit` on every input, button, select and
+   textarea inside that wrapper, at 0,1,2 - so a single class loses to it, and
+   what gets inherited is the theme body size, which on a block theme is 22px.
+   Two classes settle it without an !important. Sizes are stated rather than
+   inherited for the same reason wherever the theme would otherwise decide. */
+.js-ticket-suggest {display: flex;flex-wrap: wrap;align-items: center;margin: 0 0 10px;}
+/* The lead carries the row: it is the sentence the controls complete, so it is
+   the one thing here set heavier and a size up from them. */
+.js-ticket-suggest-lead {margin-right: 12px;font-size: 14px;font-weight: 700;color: ' . esc_attr($jsst_color1) . ';}
+div.jsst-main-up-wrapper .js-ticket-help-btn {display: inline-flex;align-items: center;gap: 6px;margin: 0 8px 0 0;padding: 6px 12px;
+    background: #fff;border: 1px solid ' . esc_attr($jsst_color5) . ';border-radius: 4px;
+    color: ' . esc_attr($jsst_color1) . ';font: inherit;font-size: 13px;line-height: 1.5;cursor: pointer;}
+div.jsst-main-up-wrapper .js-ticket-help-btn:hover {border-color: ' . esc_attr($jsst_color2) . ';}
+div.jsst-main-up-wrapper .js-ticket-help-btn:focus-visible {outline: 2px solid ' . esc_attr($jsst_color2) . ';outline-offset: 1px;}
+div.jsst-main-up-wrapper .js-ticket-help-btn-primary {background: ' . esc_attr($jsst_color2) . ';border-color: ' . esc_attr($jsst_color2) . ';color: ' . esc_attr($jsst_color7) . ';}
+div.jsst-main-up-wrapper .js-ticket-help-btn-primary:hover {opacity: .9;}
+/* Drawn rather than fetched: dashicons is a wp-admin font and the portal sits
+   in the site theme, which may load no icon font at all. Stroked so it takes
+   the button colour on both faces without a second rule. */
+.js-ticket-help-btn-icon {width: 15px;height: 15px;flex: none;fill: none;stroke: currentColor;stroke-width: 2;stroke-linecap: round;}
+/* A failure, which stays until something replaces it. Out of the row entirely
+   while there is nothing to say. */
+.js-ticket-suggest-status {flex: 1 1 100%;margin: 6px 0 0;font-size: 12px;line-height: 1.45;color: #8a1f11;}
+.js-ticket-suggest-status:empty {display: none;}
+
+/* The canned response box, and the list it drops. The wrapper is the
+   positioning context, so the list hangs under the input rather than pushing
+   the row apart. */
+.js-ticket-canned {display: inline-flex;align-items: center;flex-wrap: wrap;gap: 8px;margin: 0 8px 0 0;min-width: 0;}
+.js-ticket-canned-box {position: relative;display: inline-block;}
+div.jsst-main-up-wrapper input.js-ticket-canned-search {width: 220px;max-width: 100%;min-width: 0;box-sizing: border-box;margin: 0;
+    padding: 6px 10px;background: #fff;border: 1px solid ' . esc_attr($jsst_color5) . ';border-radius: 4px;
+    box-shadow: none;color: ' . esc_attr($jsst_color1) . ';font-size: 13px;line-height: 1.5;}
+div.jsst-main-up-wrapper input.js-ticket-canned-search:focus {border-color: ' . esc_attr($jsst_color2) . ';outline: 0;box-shadow: none;}
+/* Above the editor beneath it, and above the editor toolbar, which sets a
+   stacking context of its own a few pixels below this. */
+.js-ticket-canned-list {font-size: 13px;position: absolute;left: 0;top: calc(100% + 2px);z-index: 20;
+    width: 320px;max-width: 90vw;max-height: 240px;overflow-y: auto;margin: 0;padding: 4px 0;
+    background: #fff;border: 1px solid ' . esc_attr($jsst_color5) . ';border-radius: 4px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, .12);list-style: none;}
+.js-ticket-canned-option, .js-ticket-canned-none {margin: 0;padding: 6px 10px;font-size: 13px;line-height: 1.45;
+    color: ' . esc_attr($jsst_color1) . ';overflow-wrap: break-word;}
+.js-ticket-canned-option {cursor: pointer;}
+/* One highlight for both ways of pointing at a row, so arrowing and hovering
+   cannot both claim to be the current option at once. */
+.js-ticket-canned-option:hover, .js-ticket-canned-option.is-at {background: #f8fafc;}
+.js-ticket-canned-option.is-at {box-shadow: inset 2px 0 0 ' . esc_attr($jsst_color2) . ';}
+.js-ticket-canned-none {color: #8a8f8f;}
+.js-ticket-canned-append {display: inline-flex;align-items: center;font-size: 12px;}
+div.jsst-main-up-wrapper .js-ticket-canned-append input {margin: 0 4px 0 0;}
+.js-ticket-canned-append label {margin: 0;font-size: 12px;color: inherit;font-weight: normal;}
+
+/* The panel sits in the reply form now, so it does not need a card of its own,
+   and the list inside it does not need a second frame. Marked as an area
+   without being boxed in: a faint tint and one accent edge. */
+.js-ticket-container {padding: 0;background: none;border: 0;box-shadow: none;border-radius: 0;max-width: none;margin: 0 0 10px;}
+.js-ticket-section.js-ticket-matching-tickets-section {margin: 0 0 12px;padding: 10px 14px;background: #fafbfb;
+    border: 0;border-left: 3px solid ' . esc_attr($jsst_color2) . ';border-radius: 0;box-shadow: none;}
+/* The heading reads like the other headings on this screen instead of being
+   violet and clipped to 60% with an ellipsis. */
+.js-ticket-matching-tickets-section .js-ticket-section-heading {max-width: none;white-space: normal;overflow: visible;
+    margin: 0;font-size: 14px;font-weight: 600;color: ' . esc_attr($jsst_color1) . ';}
+.js-ticket-matching-tickets-section .js-ticket-close-button {background: none;border: 1px solid ' . esc_attr($jsst_color5) . ';
+    border-radius: 4px;padding: 4px 10px;font-size: 12px;font-weight: 400;color: ' . esc_attr($jsst_color1) . ';}
+.js-ticket-matching-tickets-section .js-ticket-close-button:hover {background: #f8fafc;border-color: ' . esc_attr($jsst_color2) . ';color: ' . esc_attr($jsst_color1) . ';}
+
+/* A flat row, not a card. Written with both classes on purpose: the row also
+   carries .js-ticket-list-item styling further up this file - a white face, a
+   border, a radius and a pointer cursor - and a single-class rule down here
+   would still lose to it on specificity. */
+.js-ticket-list .js-ticket-suggestion {display: block;margin: 0;padding: 12px 0;background: none;border: 0;
+    border-bottom: 1px solid #f4f5f6;border-radius: 0;box-shadow: none;cursor: default;}
+.js-ticket-list .js-ticket-suggestion:last-child {border-bottom: 0;}
+.js-ticket-list .js-ticket-suggestion:hover {background: none;}
+.js-ticket-suggestion-body {color: ' . esc_attr($jsst_color1) . ';font-size: 14px;line-height: 1.5;white-space: pre-wrap;overflow-wrap: break-word;}
+.js-ticket-suggestion-meta {display: flex;flex-wrap: wrap;align-items: baseline;margin: 10px 0 0;font-size: 12px;color: #8a8f8f;}
+.js-ticket-suggestion-origin {font-weight: 600;margin-right: 6px;white-space: nowrap;}
+.js-ticket-suggestion-from {min-width: 0;overflow-wrap: break-word;margin-right: 8px;}
+.js-ticket-suggestion-from a {color: ' . esc_attr($jsst_color2) . ';text-decoration: none;}
+.js-ticket-suggestion-from a:hover {text-decoration: underline;}
+.js-ticket-suggestion-actions {display: flex;flex-wrap: wrap;gap: 8px;margin: 10px 0 0;}
+/* "Use this" is the only filled button in the panel and Copy is quiet beside
+   it, so the one to take is the one that looks like it. */
+.js-ticket-suggestion .js-ticket-reply-action-btn {padding: 6px 12px;border-radius: 4px;font-size: 13px;
+    border: 1px solid ' . esc_attr($jsst_color5) . ';background: #fff;color: ' . esc_attr($jsst_color1) . ';}
+.js-ticket-suggestion .js-ticket-suggestion-use {background: ' . esc_attr($jsst_color2) . ';border-color: ' . esc_attr($jsst_color2) . ';
+    color: ' . esc_attr($jsst_color7) . ';font-weight: 600;}
+.js-ticket-suggestion .js-ticket-suggestion-use:hover {opacity: .9;background: ' . esc_attr($jsst_color2) . ';}
+.js-ticket-suggestion .js-ticket-suggestion-copy:hover {border-color: ' . esc_attr($jsst_color2) . ';background: #f8fafc;}
+/* A success, said on the control that did it: two seconds of a different
+   label, in the same box, so the row does not jump under the pointer. */
+.js-ticket-suggestion .js-ticket-reply-action-btn.is-done {background: #e7f5ef;border-color: #c3e3d5;color: #0b6b46;}
+@media (hover: hover) {
+    .js-ticket-suggestion .js-ticket-suggestion-actions {opacity: 0;transition: opacity .12s ease-in-out;}
+    .js-ticket-suggestion:hover .js-ticket-suggestion-actions,
+    .js-ticket-suggestion:focus-within .js-ticket-suggestion-actions,
+    .js-ticket-suggestion .js-ticket-reply-action-btn.is-done {opacity: 1;}
+}
+
+[dir="rtl"] .js-ticket-suggest-lead {margin-right: 0;margin-left: 12px;}
+[dir="rtl"] .js-ticket-help-btn {margin: 0 0 0 8px;}
+[dir="rtl"] .js-ticket-canned {margin: 0 0 0 8px;}
+[dir="rtl"] .js-ticket-canned-append input {margin: 0 0 0 4px;}
+[dir="rtl"] .js-ticket-canned-list {left: auto;right: 0;}
+[dir="rtl"] .js-ticket-canned-option.is-at {box-shadow: inset -2px 0 0 ' . esc_attr($jsst_color2) . ';}
+[dir="rtl"] .js-ticket-section.js-ticket-matching-tickets-section {border-left: 0;border-right: 3px solid ' . esc_attr($jsst_color2) . ';}
+[dir="rtl"] .js-ticket-suggestion-origin {margin-right: 0;margin-left: 6px;}
+[dir="rtl"] .js-ticket-suggestion-from {margin-right: 0;margin-left: 8px;}
+@media (max-width: 600px) {
+    .js-ticket-canned, .js-ticket-canned-box, input.js-ticket-canned-search {width: 100%;}
+    .js-ticket-canned-list {width: 100%;}
+}
+';
+
+/* Everything this file builds, handed over once - at the end, where the string
+   is finished. (Roadmap 4.0-UX-06)
+   The call used to sit two thirds of the way down, and three blocks were
+   appended to $jsst_jssupportticket_css after it: the Time Tracking panel, the
+   AI reply-mode control and the composer row below. All three were built on
+   every request and none of them was ever sent to the browser, which is not a
+   failure anything reports - the rules are simply absent and the markup falls
+   back to whatever the theme happens to say. Anything added to this file from
+   here on is emitted because this line is last. */
+$jsst_jssupportticket_css .= '
+select.js-ticket-ai-mode-select {box-sizing: border-box;width: 100%;max-width: 100%;min-width: 0;margin: 0;
+    padding: 8px 10px;background: #fff;border: 1px solid ' . esc_attr($jsst_color5) . ';border-radius: 4px;
+    box-shadow: none;color: ' . esc_attr($jsst_color2) . ';font-size: 14px;line-height: 1.5;height: auto;}
+select.js-ticket-ai-mode-select:focus {border-color: ' . esc_attr($jsst_color2) . ';outline: 0;box-shadow: none;}
+div.jsst-main-up-wrapper select.js-ticket-ai-mode-select {font-size: 14px;}
+.js-ticket-ai-mode-note {margin: 0;font-size: 12px;line-height: 1.45;color: #8a8f8f;font-weight: normal;text-align: left;}
+';
+
 wp_add_inline_style('jssupportticket-main-css', $jsst_jssupportticket_css);
-
-
-?>

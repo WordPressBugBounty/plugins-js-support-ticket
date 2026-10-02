@@ -50,7 +50,7 @@ if (jssupportticket::$_config['offline'] == 2) {
                                         <?php echo esc_html(__('Departments', 'js-support-ticket')); ?>
                                     </div>
                                     <div class="js-ticket-table-heading-right">
-                                        <a class="js-ticket-table-add-btn" href="<?php echo esc_url(jssupportticket::makeUrl(array('jstmod'=>'department', 'jstlay'=>'adddepartment'))); ?>"><span class="js-ticket-table-add-img-wrp"><img src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/add.png" alt="Add-image"></span><?php echo esc_html(__('Add Department', 'js-support-ticket')); ?></a>
+                                        <a class="js-ticket-table-add-btn" href="<?php echo esc_url(jssupportticket::makeUrl(array('jstmod'=>'department', 'jstlay'=>'adddepartment'))); ?>"><span class="js-ticket-table-add-img-wrp"><img src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/add.png" alt=""></span><?php echo esc_html(__('Add Department', 'js-support-ticket')); ?></a>
                                     </div>
                                 </div>
                                 <div class="js-ticket-table-wrp">

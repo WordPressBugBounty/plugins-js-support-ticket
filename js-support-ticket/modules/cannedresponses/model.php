@@ -22,7 +22,7 @@ if (!defined('ABSPATH'))
 class JSSTcannedresponsesModel {
 
     /** Bumped when the table layout below changes. */
-    const SCHEMA_VERSION = '400';
+    const SCHEMA_VERSION = '401';
 
     /**
      * Create the table if this site never had the add-on, and add whatever an
@@ -72,7 +72,45 @@ class JSSTcannedresponsesModel {
             }
         }
 
+        /* Whether a customer may be offered this reply as a suggestion on the
+           ticket form. Off unless somebody ticks it: most replies are written
+           to one customer about one ticket. (401) */
+        if (class_exists('JSSTschemaguard')) {
+            JSSTschemaguard::addColumns('js_ticket_department_message_premade',
+                array('customersuggest' => "TINYINT(1) NOT NULL DEFAULT '0'"));
+            delete_transient('jsst_canned_customersuggest');
+        }
+
         update_option('jsst_cannedresponses_schema', self::SCHEMA_VERSION, false);
+    }
+
+    /** Does the table have the customersuggest column yet? Cached for an hour. */
+    public static function customerSuggestReady() {
+        $jsst_have = get_transient('jsst_canned_customersuggest');
+        if ($jsst_have === false) {
+            $jsst_cols = jssupportticket::$_db->get_results("SHOW COLUMNS FROM `"
+                . jssupportticket::$_db->prefix . "js_ticket_department_message_premade` LIKE 'customersuggest'");
+            $jsst_have = empty($jsst_cols) ? 'no' : 'yes';
+            set_transient('jsst_canned_customersuggest', $jsst_have, HOUR_IN_SECONDS);
+        }
+        return ($jsst_have === 'yes');
+    }
+
+    /**
+     * The saved replies a customer may be offered on the ticket form: ticked
+     * "Also suggest to customers" and active. id => answer.
+     */
+    public static function customerSuggestable($jsst_ids) {
+        $jsst_ids = array_filter(array_map('intval', (array) $jsst_ids));
+        if (empty($jsst_ids) || !self::customerSuggestReady()) return array();
+        $jsst_rows = jssupportticket::$_db->get_results("SELECT id, answer FROM `"
+            . jssupportticket::$_db->prefix . "js_ticket_department_message_premade`
+            WHERE customersuggest = 1 AND status = 1 AND id IN (" . implode(',', $jsst_ids) . ")");
+        $jsst_out = array();
+        foreach ((array) $jsst_rows as $jsst_row) {
+            $jsst_out[(int) $jsst_row->id] = (string) $jsst_row->answer;
+        }
+        return $jsst_out;
     }
 
     /* ------------------------------------------------------------------ *
@@ -269,6 +307,13 @@ class JSSTcannedresponsesModel {
         }
 
         if ($jsst_error == 0) {
+            /* Written apart from the row, and only when the form carried the
+               box: other callers store replies too and know nothing of it. */
+            if (JSSTrequest::getVar('customersuggestbox', 'post', '') === '1' && self::customerSuggestReady()) {
+                jssupportticket::$_db->update(jssupportticket::$_db->prefix . 'js_ticket_department_message_premade',
+                    array('customersuggest' => (JSSTrequest::getVar('customersuggest', 'post', '') === '1') ? 1 : 0),
+                    array('id' => (int) $jsst_row->id), array('%d'), array('%d'));
+            }
             do_action('jsst_after_save_cannedresponse', $jsst_row->id);
             JSSTmessage::setMessage(esc_html(__('Canned response message has been stored', 'js-support-ticket')), 'updated');
         } else {
@@ -305,10 +350,48 @@ class JSSTcannedresponsesModel {
         return;
     }
 
-    function getPreMadeMessageForCombobox() {
+    /**
+     * The reply library, optionally narrowed to one department.
+     *
+     * A canned response belongs to exactly one department - the field is
+     * `required` on both edit forms - and the add-ticket screens have always
+     * asked for the chosen department's set through `getPremadeByDepartment()`.
+     * The screens where somebody *answers* a ticket asked for all of them, on a
+     * page that already knows which department the ticket is in, so an agent
+     * replying about a payment scrolled past Sales' and Onboarding's replies to
+     * find Billing's, with nothing on screen saying which was which.
+     *
+     * Passing the ticket's department is what closes that. It is a parameter
+     * with a default rather than a second function because four other screens
+     * call this one and none of them has a ticket to take a department from.
+     *
+     * **A response with no department at all is always included.** The column
+     * is nullable and was not always required, so a desk upgraded across
+     * several versions has rows holding NULL, '' and '0' - all three meaning
+     * "nobody ever chose". Those were visible everywhere until now, and a
+     * filter that hid them would read as canned responses going missing rather
+     * than as scoping. Same reasoning as the unassigned-tickets filter in
+     * `JSSTticketModel::getTickets()`: nought is stored several ways, so a
+     * clause that tests only one of them finds part of the set and looks like
+     * it worked. (Roadmap 4.0-CORE-03)
+     */
+    function getPreMadeMessageForCombobox($jsst_departmentid = '') {
         self::ensureSchema();
         $jsst_query = "SELECT id, title  AS text FROM `" . jssupportticket::$_db->prefix . "js_ticket_department_message_premade` WHERE status = 1";
+        $jsst_args = array();
+        if ($jsst_departmentid !== '' && $jsst_departmentid !== null && is_numeric($jsst_departmentid) && (int) $jsst_departmentid > 0) {
+            $jsst_query .= " AND (departmentid = %d OR departmentid IS NULL OR departmentid = '' OR departmentid = '0')";
+            $jsst_args[] = (int) $jsst_departmentid;
+        }
         $jsst_query .= " ORDER BY title ASC ";
+        if (!empty($jsst_args)) {
+            /* `%d` against a varchar column, which is what `getPremadeByDepartment()`
+               has always done: MySQL casts the column to a number for the
+               comparison, so '3' and 3 meet. Written the same way here on
+               purpose - two queries over one column that disagree about its type
+               is how a row shows up on one screen and not the other. */
+            $jsst_query = jssupportticket::$_db->prepare($jsst_query, $jsst_args);
+        }
         $jsst_list = jssupportticket::$_db->get_results($jsst_query);
         if (jssupportticket::$_db->last_error != null) {
             JSSTincluder::getJSModel('systemerror')->addSystemError();
@@ -323,7 +406,7 @@ class JSSTcannedresponsesModel {
     function getpremadeajax() {
         $jsst_nonce = JSSTrequest::getVar('_wpnonce');
         if (! wp_verify_nonce( $jsst_nonce, 'get-premade-ajax') ) {
-            die( 'Security check Failed' );
+            die( esc_html__( 'Security check Failed', 'js-support-ticket' ) );
         }
         /* Only someone who can work tickets may read the reply library — which
            now includes agents holding the core capability, not just
@@ -346,6 +429,13 @@ class JSSTcannedresponsesModel {
         if ($jsst_premade === null) {
             return '';
         }
+        /* Counted here, which is the only moment anybody actually uses one -
+           opening the dropdown is not using it, and counting that would make
+           the number measure how often agents scroll past. (Roadmap 6.0-KB-02) */
+        if (class_exists('JSSTcannedlibrary')) {
+            JSSTcannedlibrary::used($jsst_premadeid);
+        }
+
         $jsst_ticketid = JSSTrequest::getVar('ticketid');
         $jsst_ticketid = is_numeric($jsst_ticketid) ? (int) $jsst_ticketid : 0;
         return $this->renderPlaceholders($jsst_premade, $jsst_ticketid);
@@ -417,7 +507,7 @@ class JSSTcannedresponsesModel {
         if($jsst_callfrom == 1){
             $jsst_nonce = JSSTrequest::getVar('_wpnonce');
             if (! wp_verify_nonce( $jsst_nonce, 'canned-responses') ) {
-                die( 'Security check Failed' );
+                die( esc_html__( 'Security check Failed', 'js-support-ticket' ) );
             }
             $jsst_search_array['title'] = JSSTrequest::getVar('title');
             $jsst_search_array['status'] = JSSTrequest::getVar('status');

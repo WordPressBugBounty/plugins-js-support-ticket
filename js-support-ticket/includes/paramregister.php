@@ -150,6 +150,32 @@ function jsst_parse_request($q) {
                     jssupportticket::$jsst_data['sanitized_args']['jssupportticketid'] = jssupportticketphplib::JSST_str_replace('/', '',$q->query_vars['jst1']);
                 }
             break;
+            /* The desk destinations added after 4.5. (Roadmap 4.5-FE-02,
+               4.5-UX-02, 6.0-CH-01)
+
+               A route needs two things and these had neither: a row in
+               `js_ticket_slug`, so `makeUrl()` appends a segment instead of
+               handing back the page you are standing on, and a case here, so
+               the segment is turned back into a module and a layout. With the
+               row but no case the URL is correct, WordPress answers 200, and
+               the control panel renders - the page looks like it simply
+               ignored the click, which is exactly what an agent reported. */
+            case 'desk-home':
+                jssupportticket::$jsst_data['sanitized_args']['jstmod'] = 'jssupportticket';
+                jssupportticket::$jsst_data['sanitized_args']['jstlay'] = 'workspacehome';
+            break;
+            case 'staff-chat':
+                jssupportticket::$jsst_data['sanitized_args']['jstmod'] = 'livechat';
+                jssupportticket::$jsst_data['sanitized_args']['jstlay'] = 'staffchat';
+            break;
+            case 'customers':
+                jssupportticket::$jsst_data['sanitized_args']['jstmod'] = 'jssupportticket';
+                jssupportticket::$jsst_data['sanitized_args']['jstlay'] = 'customers';
+            break;
+            case 'notifications':
+                jssupportticket::$jsst_data['sanitized_args']['jstmod'] = 'jssupportticket';
+                jssupportticket::$jsst_data['sanitized_args']['jstlay'] = 'notifications';
+            break;
             case 'staff-feedbacks':
                 jssupportticket::$jsst_data['sanitized_args']['jstmod'] = 'feedback';
                 jssupportticket::$jsst_data['sanitized_args']['jstlay'] = 'feedbacks';

@@ -17,11 +17,6 @@ class JSSTsystemerrorController {
                 case 'admin_systemerrors':
                     JSSTincluder::getJSModel('systemerror')->getSystemErrors();
                     break;
-
-                case 'admin_addsystemerror':
-                    $jsst_id = absint( JSSTrequest::getVar('jssupportticketid', 'get') );
-                    JSSTincluder::getJSModel('systemerror')->getsystemerrorForForm($jsst_id);
-                    break;
                 default:
                     exit;
             }
@@ -47,25 +42,6 @@ class JSSTsystemerrorController {
         }
     }
 
-    static function savesystemerror() {
-        $jsst_nonce = JSSTrequest::getVar('_wpnonce');
-        if (! wp_verify_nonce( $jsst_nonce, 'save-systemerror') ) {
-            die( 'Security check Failed' );
-        }
-        if (!current_user_can('manage_options')) {
-            return false;
-        }
-        $jsst_data = JSSTrequest::get('post');
-        JSSTincluder::getJSModel('systemerror')->storesystemerror($jsst_data);
-        if (is_admin()) {
-            $jsst_url = admin_url("admin.php?page=systemerror&jstlay=systemerrors");
-        } else {
-            $jsst_url = jssupportticket::makeUrl(array('jstmod'=>'systemerror','jstlay'=>'systemerrors'));
-        }
-        wp_safe_redirect($jsst_url);
-        exit;
-    }
-
     static function deletesystemerror() {
         if (!current_user_can('manage_options')) { //only admin can change it.
             return false;
@@ -73,7 +49,7 @@ class JSSTsystemerrorController {
         $jsst_id = JSSTrequest::getVar('systemerrorid');
         $jsst_nonce = JSSTrequest::getVar('_wpnonce');
         if (! wp_verify_nonce( $jsst_nonce, 'delete-systemerror-'.$jsst_id) ) {
-            die( 'Security check Failed' );
+            die( esc_html__( 'Security check Failed', 'js-support-ticket' ) );
         }
         JSSTincluder::getJSModel('systemerror')->removeSystemError( $jsst_id );
         if (is_admin()) {

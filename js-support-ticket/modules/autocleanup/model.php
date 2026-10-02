@@ -132,7 +132,28 @@ class JSSTautocleanupModel {
             $jsst_where[] = $jsst_alias . '.priorityid NOT IN (' . implode(',', array_fill(0, count($jsst_priorities), '%d')) . ')';
             $jsst_args = array_merge($jsst_args, $jsst_priorities);
         }
-        return array('sql' => implode(' AND ', $jsst_where), 'args' => $jsst_args);
+        /*
+         * The last word on what may be deleted. (Roadmap 5.0-ANA-04)
+         *
+         * A filter and not a call, so this model depends on nothing: where the
+         * governance engine is present it adds the clause that keeps a ticket
+         * under legal hold out of every run, and where it is not, retention
+         * behaves exactly as it did in 4.0.
+         *
+         * It is applied here rather than in the two callers because the
+         * preview and the deletion share this one method - if a hold could be
+         * honoured by one and not the other, the dry run would be worse than
+         * no dry run at all, which is the whole reason this method exists.
+         */
+        $jsst_clause = apply_filters('jsst_retention_eligibility',
+            array('sql' => implode(' AND ', $jsst_where), 'args' => $jsst_args), $jsst_alias);
+        if (!is_array($jsst_clause) || !isset($jsst_clause['sql']) || !isset($jsst_clause['args'])) {
+            /* A filter that returned something unusable must never widen what
+               gets deleted. Fall back to our own clause, which is the strict
+               one. */
+            return array('sql' => implode(' AND ', $jsst_where), 'args' => $jsst_args);
+        }
+        return $jsst_clause;
     }
 
     /* ------------------------------------------------------------------ *
@@ -248,9 +269,26 @@ class JSSTautocleanupModel {
      * @param bool $jsst_dryrun When true, nothing is deleted and the report is
      *                          returned instead.
      */
-    function executeCleanupRoutines($jsst_dryrun = false) {
+    function executeCleanupRoutines($jsst_dryrun = false, $jsst_approved = false) {
         if ($jsst_dryrun) {
             return $this->preview();
+        }
+        /*
+         * Where the site has asked for deletions to be approved, the scheduled
+         * run stops here and the approved run - which passes $jsst_approved -
+         * is the only thing that gets past. (Roadmap 5.0-ANA-04)
+         *
+         * The check is a filter so this model still depends on nothing: with
+         * the governance engine absent, nothing hooks it, it returns false and
+         * retention behaves exactly as it did in 4.0.
+         *
+         * It is deliberately here rather than on the cron hook, because "from
+         * cron" is not the thing being gated - being unapproved is. A future
+         * caller of this method inherits the guard rather than having to
+         * remember it.
+         */
+        if (!$jsst_approved && apply_filters('jsst_retention_needs_approval', false)) {
+            return array('attachments' => 0, 'bytes' => 0, 'tickets' => 0, 'waiting' => true);
         }
         $jsst_result = array('attachments' => 0, 'bytes' => 0, 'tickets' => 0);
         $jsst_result['attachments'] = $this->purgeOldAttachments($jsst_bytes);

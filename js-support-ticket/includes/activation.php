@@ -56,7 +56,7 @@ class JSSTactivation {
                       PRIMARY KEY (`configname`),
                       FULLTEXT KEY `config_name` (`configname`),
                       FULLTEXT KEY `config_for` (`configfor`)
-                    ) ENGINE=MyISAM DEFAULT CHARSET=utf8;";
+                    ) ENGINE=InnoDB DEFAULT CHARSET=utf8;";
         jssupportticket::$_db->query($jsst_query);
         //$jsst_uid = JSSTincluder::getObjectClass('user')->uid(); no need it
         $jsst_runConfig = jssupportticket::$_db->get_var("SELECT COUNT(configname) FROM `" . jssupportticket::$_db->prefix . "js_ticket_config`");
@@ -72,7 +72,7 @@ class JSSTactivation {
                                 `status` tinyint(1) DEFAULT NULL,
                                 `created` datetime DEFAULT NULL,
                                 PRIMARY KEY (`id`)
-                                ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;";
+                                ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;";
             jssupportticket::$_db->query($jsst_query);
 
             $jsst_query = "INSERT INTO `" . jssupportticket::$_db->prefix . "js_ticket_config` (`configname`, `configvalue`, `configfor`, `addon`) VALUES
@@ -94,38 +94,51 @@ class JSSTactivation {
                     ('default_alert_email', '1', 'default', NULL),
                     ('default_admin_email', '1', 'default', NULL),
                     ('new_ticket_mail_to_admin', '1', 'default', ''),
-                    ('new_ticket_mail_to_staff_members', '0', 'default', 'agent'),
-                    ('banemail_mail_to_admin', '0', 'default', 'banemail'),
+                    ('new_ticket_mail_to_staff_members', '2', 'default', 'agent'),
+                    /* Which list of agents the new-ticket mail goes to when
+                       Automatic Assignment is running. There was no row for
+                       this, on any site, though the code has read it for
+                       releases: the settings screen only draws a field whose
+                       row exists, so the field never appeared and
+                       modules/email/model.php could never see anything but its
+                       default. Seeded as '1' because that is the branch every
+                       site has been taking, so adding the row changes no
+                       behaviour - it only makes the other branch reachable.
+                       Tagged `agentautoassign` because that is the only module
+                       whose presence makes the setting mean anything, and the
+                       settings screen filters rows by that tag. */
+                    ('department_email_on_ticket_create', '1', 'default', 'agentautoassign'),
+                    ('banemail_mail_to_admin', '2', 'default', 'banemail'),
                     ('ticket_reassign_admin', '1', 'default', 'agent'),
-                    ('ticket_reassign_staff', '0', 'default', 'agent'),
+                    ('ticket_reassign_staff', '2', 'default', 'agent'),
                     ('ticket_reassign_user', '1', 'default', 'agent'),
                     ('ticket_close_admin', '1', 'default', NULL),
-                    ('ticket_close_staff', '0', 'default', 'agent'),
+                    ('ticket_close_staff', '2', 'default', 'agent'),
                     ('ticket_close_user', '1', 'default', NULL),
                     ('ticket_delete_admin', '1', 'default', NULL),
-                    ('ticket_delete_staff', '0', 'default', 'agent'),
+                    ('ticket_delete_staff', '2', 'default', 'agent'),
                     ('ticket_delete_user', '1', 'default', NULL),
-                    ('ticket_mark_overdue_admin', '0', 'default', 'overdue'),
-                    ('ticket_mark_overdue_staff', '0', 'default', 'agent'),
-                    ('ticket_mark_overdue_user', '0', 'default', 'overdue'),
-                    ('ticket_ban_email_admin', '0', 'default', 'banemail'),
-                    ('ticket_ban_email_staff', '0', 'default', 'banemail'),
-                    ('ticket_ban_email_user', '0', 'default', 'banemail'),
+                    ('ticket_mark_overdue_admin', '2', 'default', 'overdue'),
+                    ('ticket_mark_overdue_staff', '2', 'default', 'agent'),
+                    ('ticket_mark_overdue_user', '2', 'default', 'overdue'),
+                    ('ticket_ban_email_admin', '2', 'default', 'banemail'),
+                    ('ticket_ban_email_staff', '2', 'default', 'banemail'),
+                    ('ticket_ban_email_user', '2', 'default', 'banemail'),
                     ('ticket_department_transfer_admin', '1', 'default', 'actions'),
-                    ('ticket_department_transfer_staff', '0', 'default', 'actions'),
+                    ('ticket_department_transfer_staff', '2', 'default', 'actions'),
                     ('ticket_department_transfer_user', '1', 'default', 'actions'),
                     ('ticket_reply_ticket_user_admin', '1', 'default', NULL),
-                    ('ticket_reply_ticket_user_staff', '0', 'default', 'agent'),
+                    ('ticket_reply_ticket_user_staff', '2', 'default', 'agent'),
                     ('ticket_reply_ticket_user_user', '1', 'default', NULL),
-                    ('ticket_response_to_staff_admin', '0', 'default', NULL),
-                    ('ticket_response_to_staff_staff', '0', 'default', 'agent'),
-                    ('ticket_response_to_staff_user', '0', 'default', NULL),
-                    ('ticker_ban_eamil_and_close_ticktet_admin', '0', 'default', 'banemail'),
-                    ('ticker_ban_eamil_and_close_ticktet_staff', '0', 'default', 'banemail'),
-                    ('ticker_ban_eamil_and_close_ticktet_user', '0', 'default', 'banemail'),
-                    ('unban_email_admin', '0', 'default', 'banemail'),
-                    ('unban_email_staff', '0', 'default', 'banemail'),
-                    ('unban_email_user', '0', 'default', 'banemail'),
+                    ('ticket_response_to_staff_admin', '2', 'default', NULL),
+                    ('ticket_response_to_staff_staff', '2', 'default', 'agent'),
+                    ('ticket_response_to_staff_user', '1', 'default', NULL),
+                    ('ticker_ban_eamil_and_close_ticktet_admin', '2', 'default', 'banemail'),
+                    ('ticker_ban_eamil_and_close_ticktet_staff', '2', 'default', 'banemail'),
+                    ('ticker_ban_eamil_and_close_ticktet_user', '2', 'default', 'banemail'),
+                    ('unban_email_admin', '2', 'default', 'banemail'),
+                    ('unban_email_staff', '2', 'default', 'banemail'),
+                    ('unban_email_user', '2', 'default', 'banemail'),
                     ('maximum_open_tickets', '25', 'deafult', 'maxticket'),
                     ('pagination_default_page_size', '10', 'deafult', NULL),
                     ('recaptcha_version', '1', 'default', NULL),
@@ -149,56 +162,56 @@ class JSSTactivation {
                     ('submission_rate_limit', '1', 'default', NULL),
                     ('submission_rate_limit_max', '5', 'default', NULL),
                     ('submission_rate_limit_window', '600', 'default', NULL),
-                    ('ticket_lock_staff', '0', 'email', 'agent'),
-                    ('ticket_lock_admin', '0', 'email', 'actions'),
-                    ('ticket_lock_user', '0', 'email', 'actions'),
-                    ('ticket_unlock_staff', '0', 'email', 'agent'),
-                    ('ticket_unlock_admin', '0', 'email', 'actions'),
-                    ('ticket_unlock_user', '0', 'email', 'actions'),
-                    ('ticket_mark_progress_staff', '0', 'email', 'agent'),
-                    ('ticket_mark_progress_admin', '0', 'email', 'actions'),
-                    ('ticket_mark_progress_user', '0', 'email', 'actions'),
+                    ('ticket_lock_staff', '2', 'email', 'agent'),
+                    ('ticket_lock_admin', '2', 'email', 'actions'),
+                    ('ticket_lock_user', '2', 'email', 'actions'),
+                    ('ticket_unlock_staff', '2', 'email', 'agent'),
+                    ('ticket_unlock_admin', '2', 'email', 'actions'),
+                    ('ticket_unlock_user', '2', 'email', 'actions'),
+                    ('ticket_mark_progress_staff', '2', 'email', 'agent'),
+                    ('ticket_mark_progress_admin', '2', 'email', 'actions'),
+                    ('ticket_mark_progress_user', '2', 'email', 'actions'),
                     ('ticket_priority_staff', '1', 'email', 'agent'),
                     ('ticket_priority_admin', '1', 'email', NULL),
                     ('ticket_priority_user', '1', 'email', NULL),
                     ('new_ticket_message', '', 'default', NULL),
-                    ('cplink_openticket_staff', '2', 'cplink', 'agent'),
-                    ('cplink_myticket_staff', '2', 'cplink', 'agent'),
-                    ('cplink_addrole_staff', '2', 'cplink', 'agent'),
-                    ('cplink_roles_staff', '2', 'cplink', 'agent'),
-                    ('cplink_addstaff_staff', '2', 'cplink', 'agent'),
-                    ('cplink_staff_staff', '2', 'cplink', 'agent'),
-                    ('cplink_adddepartment_staff', '2', 'cplink', 'agent'),
-                    ('cplink_department_staff', '2', 'cplink', 'agent'),
-                    ('cplink_addcategory_staff', '2', 'cplink', 'knowledgebase'),
-                    ('cplink_category_staff', '2', 'cplink', 'knowledgebase'),
-                    ('cplink_addkbarticle_staff', '2', 'cplink', 'knowledgebase'),
-                    ('cplink_kbarticle_staff', '2', 'cplink', 'knowledgebase'),
-                    ('cplink_adddownload_staff', '2', 'cplink', 'download'),
-                    ('cplink_download_staff', '2', 'cplink', 'download'),
-                    ('cplink_addannouncement_staff', '2', 'cplink', 'announcement'),
-                    ('cplink_announcement_staff', '2', 'cplink', 'announcement'),
-                    ('cplink_addfaq_staff', '2', 'cplink', 'faq'),
-                    ('cplink_faq_staff', '2', 'cplink', 'faq'),
-                    ('cplink_mail_staff', '2', 'cplink', 'mail'),
-                    ('cplink_myprofile_staff', '2', 'cplink', 'agent'),
+                    ('cplink_openticket_staff', '0', 'cplink', 'agent'),
+                    ('cplink_myticket_staff', '0', 'cplink', 'agent'),
+                    ('cplink_addrole_staff', '0', 'cplink', 'agent'),
+                    ('cplink_roles_staff', '0', 'cplink', 'agent'),
+                    ('cplink_addstaff_staff', '0', 'cplink', 'agent'),
+                    ('cplink_staff_staff', '0', 'cplink', 'agent'),
+                    ('cplink_adddepartment_staff', '0', 'cplink', 'agent'),
+                    ('cplink_department_staff', '0', 'cplink', 'agent'),
+                    ('cplink_addcategory_staff', '0', 'cplink', 'knowledgebase'),
+                    ('cplink_category_staff', '0', 'cplink', 'knowledgebase'),
+                    ('cplink_addkbarticle_staff', '0', 'cplink', 'knowledgebase'),
+                    ('cplink_kbarticle_staff', '0', 'cplink', 'knowledgebase'),
+                    ('cplink_adddownload_staff', '0', 'cplink', 'download'),
+                    ('cplink_download_staff', '0', 'cplink', 'download'),
+                    ('cplink_addannouncement_staff', '0', 'cplink', 'announcement'),
+                    ('cplink_announcement_staff', '0', 'cplink', 'announcement'),
+                    ('cplink_addfaq_staff', '0', 'cplink', 'faq'),
+                    ('cplink_faq_staff', '0', 'cplink', 'faq'),
+                    ('cplink_mail_staff', '0', 'cplink', 'mail'),
+                    ('cplink_myprofile_staff', '0', 'cplink', 'agent'),
                     ('cplink_openticket_user', '1', 'cplink', NULL),
                     ('cplink_myticket_user', '1', 'cplink', NULL),
                     ('cplink_checkticketstatus_user', '1', 'cplink', NULL),
-                    ('cplink_downloads_user', '2', 'cplink', 'download'),
-                    ('cplink_announcements_user', '2', 'cplink', 'announcement'),
-                    ('cplink_faqs_user', '2', 'cplink', 'faq'),
-                    ('cplink_latestdownloads_user', '2', 'cplink', 'download'),
-                    ('cplink_latestannouncements_user', '2', 'cplink', 'announcement'),
-                    ('cplink_latestkb_user', '2', 'cplink', 'knowledgebase'),
-                    ('cplink_latestfaqs_user', '2', 'cplink', 'faq'),
-                    ('cplink_latestdownloads_staff', '2', 'cplink', 'download'),
-                    ('cplink_latestannouncements_staff', '2', 'cplink', 'announcement'),
-                    ('cplink_latestkb_staff', '2', 'cplink', 'knowledgebase'),
-                    ('cplink_latestfaqs_staff', '2', 'cplink', 'faq'),
-                    ('cplink_knowledgebase_user', '2', 'cplink', 'knowledgebase'),
-                    ('tplink_home_staff', '2', 'tplink', 'agent'),
-                    ('tplink_tickets_staff', '2', 'tplink', 'agent'),
+                    ('cplink_downloads_user', '0', 'cplink', 'download'),
+                    ('cplink_announcements_user', '0', 'cplink', 'announcement'),
+                    ('cplink_faqs_user', '0', 'cplink', 'faq'),
+                    ('cplink_latestdownloads_user', '0', 'cplink', 'download'),
+                    ('cplink_latestannouncements_user', '0', 'cplink', 'announcement'),
+                    ('cplink_latestkb_user', '0', 'cplink', 'knowledgebase'),
+                    ('cplink_latestfaqs_user', '0', 'cplink', 'faq'),
+                    ('cplink_latestdownloads_staff', '0', 'cplink', 'download'),
+                    ('cplink_latestannouncements_staff', '0', 'cplink', 'announcement'),
+                    ('cplink_latestkb_staff', '0', 'cplink', 'knowledgebase'),
+                    ('cplink_latestfaqs_staff', '0', 'cplink', 'faq'),
+                    ('cplink_knowledgebase_user', '0', 'cplink', 'knowledgebase'),
+                    ('tplink_home_staff', '0', 'tplink', 'agent'),
+                    ('tplink_tickets_staff', '0', 'tplink', 'agent'),
                     ('tplink_knowledgebase_staff', '2', 'tplink', 'knowledgebase'),
                     ('tplink_announcements_staff', '2', 'tplink', 'announcement'),
                     ('tplink_downloads_staff', '2', 'tplink', 'download'),
@@ -210,14 +223,13 @@ class JSSTactivation {
                     ('tplink_downloads_user', '1', 'tplink', NULL),
                     ('tplink_faqs_user', '0', 'tplink', 'faq'),
                     ('show_breadcrumbs', '1', 'default', NULL),
-                    ('instantresolve_enable', '1', 'instantresolve', NULL),
-                    ('instantresolve_min_chars', '15', 'instantresolve', NULL),
-                    ('instantresolve_sources', '[\"kb\",\"faq\",\"canned\",\"posts\"]', 'instantresolve', NULL),
-                    ('instantresolve_max_results', '5', 'instantresolve', NULL),
-                    ('instantresolve_analytics', '1', 'instantresolve', NULL),
+                    ('aiagent_enable', '1', 'aiagent', NULL),
+                    ('aiagent_min_chars', '15', 'aiagent', NULL),
+                    ('aiagent_max_results', '5', 'aiagent', NULL),
+                    ('aiagent_analytics', '1', 'aiagent', NULL),
                     ('productcode', 'jsticket', 'default', NULL),
-                    ('versioncode', '4.0.0', 'default', NULL),
-                    ('productversion', '400', 'default', NULL),
+                    ('versioncode', '5.0.0', 'default', NULL),
+                    ('productversion', '500', 'default', NULL),
                     ('producttype', 'free', 'default', NULL),
                     ('tve_enabled', '2', 'default', NULL),
                     ('tve_mailreadtype', '3', 'default', NULL),
@@ -243,15 +255,15 @@ class JSSTactivation {
                     ('screentag_position', '1', 'default', NULL),
                     ('last_step_updater', '', 'default', NULL),
                     ('cplink_login_logout_user', '1', 'cplink', NULL),
-                    ('cplink_login_logout_staff', '2', 'cplink', 'agent'),
+                    ('cplink_login_logout_staff', '0', 'cplink', 'agent'),
                     ('ticketid_sequence', '1', 'default', NULL),
                     ('prefix_ticketid', '', 'customticketid', NULL), 
                     ('suffix_ticketid', '', 'customticketid', NULL),
-                    ('padding_zeros_ticketid', '', 'customticketid', NULL),
+                    ('padding_zeros_ticketid', '1', 'customticketid', NULL),
                     ('print_ticket_user', '1', 'ticket', 'actions'),
                     ('last_version', '211', 'default', NULL),
-                    ('cplink_staff_report_staff', '2', 'cplink', 'agent'),
-                    ('cplink_department_report_staff', '2', 'cplink', 'agent'),
+                    ('cplink_staff_report_staff', '0', 'cplink', 'agent'),
+                    ('cplink_department_report_staff', '0', 'cplink', 'agent'),
                     ('wp_default_role', 'subscriber', 'default', 'useroptions'),
                     ('captcha_on_registration', '1', 'default', 'useroptions'),
                     ('cplink_register_user', '1', 'default', NULL),
@@ -282,11 +294,11 @@ class JSSTactivation {
                     ('show_header', '1', 'default', NULL),
                     ('tplink_openticket_user', '1', 'tplink', NULL),
                     ('tplink_openticket_staff', '1', 'tplink', 'agent'),
-                    ('cplink_latesttickets_staff', '2', 'cplink', 'agent'),
+                    ('cplink_latesttickets_staff', '0', 'cplink', 'agent'),
                     ('cplink_latesttickets_user', '1', 'cplink', NULL),
-                    ('cplink_totalcount_staff', '2', 'cplink', 'agent'),
+                    ('cplink_totalcount_staff', '0', 'cplink', 'agent'),
                     ('cplink_totalcount_user', '1', 'cplink', NULL),
-                    ('cplink_ticketstats_staff', '2', 'cplink', 'agent'),
+                    ('cplink_ticketstats_staff', '0', 'cplink', 'agent'),
                     ('cplink_ticketstats_user', '1', 'cplink', NULL),
                     ('tplink_login_logout_user', '1', 'tplink', NULL),
                     ('tplink_login_logout_staff', '1', 'tplink', NULL),
@@ -313,7 +325,7 @@ class JSSTactivation {
                     ('cplink_erasedata_staff', '0', 'cplink', 'agent'),
                     ('cplink_erasedata_user', '1', 'cplink', NULL),
                     ('redirect_after_checkout', '', 'default', 'paidsupport'),
-                    ('create_user_via_email', '0', 'ticketviaemail', 'emailpiping'),
+                    ('create_user_via_email', '2', 'ticketviaemail', 'emailpiping'),
                     ('tickets_sorting', '2', 'default', NULL),
 					('apikeylinkedin' ,'' , 'linkedin', 'sociallogin'),
                     ('loginwithfacebook' ,'0' , 'login', 'sociallogin'),
@@ -359,7 +371,7 @@ class JSSTactivation {
                                 `isdefault` tinyint(1) DEFAULT NULL,
                                 `sendmail` tinyint NOT NULL DEFAULT '0',
                                 PRIMARY KEY (`id`)
-                                ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2;";
+                                ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2;";
             jssupportticket::$_db->query($jsst_query);
             $jsst_query = "INSERT INTO `" . jssupportticket::$_db->prefix . "js_ticket_departments` (`id`, `emailtemplateid`, `emailid`, `autoresponceemailid`, `managerid`, `departmentname`, `departmentsignature`, `ispublic`, `ticketautoresponce`, `messageautoresponce`, `canappendsignature`, `ordering`, `updated`, `created`, `status`) VALUES (1, NULL, 1, NULL, NULL, 'Support', '-- \n\n Support Department.', 1, NULL, NULL, 1, 1, '" . date_i18n('Y-m-d H:i:s') . "', '" . date_i18n('Y-m-d H:i:s') . "', 1);";
             jssupportticket::$_db->query($jsst_query);
@@ -392,7 +404,7 @@ class JSSTactivation {
                                 `created` datetime DEFAULT NULL,
                                 `updated` datetime DEFAULT NULL,
                                 PRIMARY KEY (`id`)
-                                ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2;";
+                                ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2;";
             jssupportticket::$_db->query($jsst_query);
             $jsst_systememail = get_option('admin_email');
             $jsst_query = "INSERT INTO `" . jssupportticket::$_db->prefix . "js_ticket_email` (`id`,`autoresponse`, `priorityid`, `email`, `name`, `uid`, `password`, `status`, `mailhost`, `mailprotocol`, `mailencryption`, `mailport`, `mailfetchfrequency`, `mailfetchmaximum`, `maildeleted`, `mailerrors`, `maillasterror`, `maillastfetch`, `smtpactive`, `smtphost`, `smtpport`, `smtpsecure`, `smtpauthencation`, `created`, `updated`) VALUES
@@ -409,7 +421,7 @@ class JSSTactivation {
                                 `status` tinyint(1) DEFAULT NULL,
                                 `multiformid` tinyint(4) DEFAULT NULL,
                                 PRIMARY KEY (`id`)
-                                ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=26;";
+                                ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=26;";
             jssupportticket::$_db->query($jsst_query);
             $jsst_query = "INSERT INTO `" . jssupportticket::$_db->prefix . "js_ticket_emailtemplates` (`id`, `templatefor`, `title`, `subject`, `body`, `created`, `status`) VALUES
                                 (1, 'ticket-new', '', '{SITETITLE}: New Ticket Received', '<div style=\"background-color: #f7f7f7; margin: 0; padding: 70px 0; width: 100%;\">\n<div style=\"border: 3px dotted #ebecec; width: 600px; display: block; margin: 0 auto; background: #fff;\">\n<div style=\"padding: 15px 20px; background: #3e4095; color: #fff; font-size: 16px; font-weight: bold; text-transform: uppercase; border-bottom: 1px solid #4b4b4d;\">JS Help Desk</div>\n<div style=\"padding: 30px; text-align: center; font-weight: bold; background: #576cf1; color: #fff; text-transform: capitalize; font-size: 22px;\">{SITETITLE}: New Ticket Received</div>\n<div style=\"padding: 40px 20px 20px;\">\n<div style=\"padding-bottom: 20px; border-bottom: 1px solid #ebecec;\">\n<div style=\"font-weight: bold; font-size: 18px; margin-bottom: 15px; color: #4b4b4d;\">Dear {USERNAME},</div>\n<div style=\"color: #727376; line-height: 2;\">Your support ticket (<strong style=\"color: #4b4b4d;\">{SUBJECT}</strong>) with ticket id (<strong style=\"color: #4b4b4d;\">{TRACKINGID}</strong>) has been submitted. We try to reply all tickets as soon as possible, usually within 24 hours.</div>\n</div>\n<div style=\"padding: 20px 0;\">\n<div style=\"font-weight: bold; font-size: 16px; margin-bottom: 10px; color: #4b4b4d;\">You will receive email notification when our agent replies to your ticket. You can view the status of your ticket here:</div>\n</div>\n<div style=\"padding: 0 0 30px; text-align: center;\"><a style=\"display: inline-block; padding: 15px; background: #576cf1; width: 40%; text-align: center; text-decoration: none; color: #ffff; text-transform: capitalize; border-bottom: 3px solid #4b4b4d;\" href=\"{TICKETURL}\">View Ticket</a></div>\n<div style=\"background: #fef2ef; padding: 15px; margin-bottom: 20px; border: 1px solid #eba7a8;\">\n<div style=\"font-weight: bold; font-size: 14px; margin-bottom: 5px; color: #983133; text-transform: uppercase;\">Do not reply TO this E-Mail</div>\n<div style=\"color: #727376; line-height: 2;\">This is an automated e-mail message sent from our support system. Do not reply to this e-mail as we cannot receive your reply!</div>\n</div>\n<div style=\"color: #727376; line-height: 2;\">This email was sent from <a href=\"https://www.jshelpdesk.com\"><span style=\"color: #3e4095; display: inline-block; text-decoration: underline; cursor: pointer;\">JS Help Desk System</span></a> to <span style=\"color: #606062; display: inline-block; text-decoration: underline;\">{EMAIL}</span></div>\n</div>\n<div style=\"background: #4b4b4d; padding: 20px; color: #fff; text-align: center; border-bottom: 5px solid #576cf1;\">© 2014-{CURRENT_YEAR} All rights reserved - <a href=\"https://www.jshelpdesk.com\"><span style=\"color: white; display: inline-block; text-decoration: underline; cursor: pointer;\">JS Help Desk System</span></a></div>\n</div>\n</div>', NULL, 0),
@@ -453,9 +465,9 @@ class JSSTactivation {
                                 `isdefault` tinyint(1) DEFAULT NULL,
                                 `status` tinyint(4) NOT NULL DEFAULT '0',
                                 PRIMARY KEY (`id`)
-                                ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5;";
+                                ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5;";
             jssupportticket::$_db->query($jsst_query);
-            $jsst_query = "INSERT INTO `" . jssupportticket::$_db->prefix . "js_ticket_priorities` (`id`, `priority`, `prioritycolour`, `priorityurgency`, `ispublic`, `overdueinterval`, `overduetypeid`, `ordering`, `isdefault`, `status`) VALUES (1, 'Low', '#86f793', 0, 1, 3, '1', 1, 1, 0),(2, 'High', '#ed8e00', 0, 1, 1, '1', 3, 0, 1),(3, 'Normal', '#c7cbf5', 0, 1, 2, '1', 2, 0, 1),(4, 'Urgent', '#c90000', 0, 1, 1, '1', 4, 0, 0);";
+            $jsst_query = "INSERT INTO `" . jssupportticket::$_db->prefix . "js_ticket_priorities` (`id`, `priority`, `prioritycolour`, `priorityurgency`, `ispublic`, `overdueinterval`, `overduetypeid`, `ordering`, `isdefault`, `status`) VALUES (1, 'Low', '#098717', 0, 1, 3, '1', 1, 1, 0),(2, 'High', '#a86500', 0, 1, 1, '1', 3, 0, 1),(3, 'Normal', '#5b5fc7', 0, 1, 2, '1', 2, 0, 1),(4, 'Urgent', '#c90000', 0, 1, 1, '1', 4, 0, 0);";
             jssupportticket::$_db->query($jsst_query);
 
             $jsst_query = "CREATE TABLE IF NOT EXISTS `" . jssupportticket::$_db->prefix . "js_ticket_statuses` (
@@ -466,16 +478,16 @@ class JSSTactivation {
                 `sys` int(1) DEFAULT NULL,
                 `ordering` int(11) NOT NULL,
                 PRIMARY KEY (`id`)
-                ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=7;";
+                ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=7;";
             jssupportticket::$_db->query($jsst_query);
             
             $jsst_query = "INSERT INTO `" . jssupportticket::$_db->prefix . "js_ticket_statuses` (`id`, `status`, `statuscolour`, `statusbgcolour`, `sys`, `ordering`)
-                VALUES (1, 'New', '#FFFFFF', '#5bb12f', 1, 1),
-                    (2, 'Waiting Reply', '#FFFFFF', '#28abe3', 1, 2),
-                    (3, 'In Progress', '#FFFFFF', '#69d2e7', 1, 3),
+                VALUES (1, 'New', '#FFFFFF', '#438323', 1, 1),
+                    (2, 'Waiting Reply', '#FFFFFF', '#167da9', 1, 2),
+                    (3, 'In Progress', '#FFFFFF', '#7c3aed', 1, 3),
                     (4, 'Replied', '#FFFFFF', '#186e83', 1, 4),
-                    (5, 'Closed', '#FFFFFF', '#ed1c24', 1, 5),
-                    (6, 'Close Due To Merge', '#FFFFFF', '#ed1c24', 1, 6);";
+                    (5, 'Closed', '#FFFFFF', '#e7121a', 1, 5),
+                    (6, 'Close Due To Merge', '#FFFFFF', '#e7121a', 1, 6);";
             jssupportticket::$_db->query($jsst_query);
 
             $jsst_query = "CREATE TABLE IF NOT EXISTS `" . jssupportticket::$_db->prefix . "js_ticket_products` (
@@ -484,7 +496,7 @@ class JSSTactivation {
                 `status` tinyint(1) DEFAULT NULL,
                 `ordering` int(11) NOT NULL,
                 PRIMARY KEY (`id`)
-                ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;";
+                ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;";
             jssupportticket::$_db->query($jsst_query);
             $jsst_query = "CREATE TABLE IF NOT EXISTS `" . jssupportticket::$_db->prefix . "js_ticket_replies` (
                                 `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -514,7 +526,7 @@ class JSSTactivation {
                                 `isview` tinyint(1) DEFAULT '0',
                                 `created` datetime DEFAULT NULL,
                                 PRIMARY KEY (`id`)
-                                ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;";
+                                ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;";
             jssupportticket::$_db->query($jsst_query);
             $jsst_query = "CREATE TABLE IF NOT EXISTS `" . jssupportticket::$_db->prefix . "js_ticket_tickets` (
                                 `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -568,6 +580,9 @@ class JSSTactivation {
                                 `productid` INT NULL,
                                 `aireplymode` tinyint(4) DEFAULT 0,
                                 PRIMARY KEY (`id`),
+                                KEY `jsst_queue_state` (`status`, `isanswered`),
+                                KEY `jsst_ticketid` (`ticketid`),
+                                KEY `jsst_email` (`email`),
                                 FULLTEXT KEY `subject` (`subject`),
                                 FULLTEXT KEY `message` (`message`),
                                 FULLTEXT KEY `jsst_ir_ft` (`subject`, `message`)
@@ -611,7 +626,7 @@ class JSSTactivation {
                         `adminonly` tinyint(1) DEFAULT 0,
                         `defaultvalue` varchar(255) DEFAULT NULL,
                         PRIMARY KEY (`id`),KEY `fieldordering_filedfor` (`fieldfor`))
-                        ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=14;";
+                        ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=14;";
             jssupportticket::$_db->query($jsst_query);
             $jsst_query = "INSERT INTO `" . jssupportticket::$_db->prefix . "js_ticket_fieldsordering` (`id`, `field`, `fieldtitle`, `ordering`, `section`, `placeholder`, `description`, `fieldfor`, `published`, `sys`, `cannotunpublish`, `required`,`cannotsearch`,`showonlisting`,`cannotshowonlisting`,`search_user`,`search_admin`,`isvisitorpublished`,`userfieldparams`) VALUES
             (1, 'email', 'Email Address', 2, '10', NULL, NULL, 1, 1, 0, 0, 1, 0, 0, 0, 1, 1, 1, NULL),  
@@ -636,7 +651,7 @@ class JSSTactivation {
             (20, 'eddorderid', 'EDD Order ID', 18, '10', NULL, NULL, 1, 1, 0, 0, 0, 0, 0, 0, 1, 0, 1, NULL), 
             (21, 'eddproductid', 'EDD Product', 19, '10', NULL, NULL, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 1, NULL), 
             (22, 'eddlicensekey', 'License Key', 20, '10', NULL, NULL, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, NULL), 
-            (23, 'envatopurchasecode', 'Envato Purchase Code', 18, '10', NULL, NULL, 1, 1, 0, 0, 0, 1, 0, 1, 0, 0, 1, NULL),
+            (23, 'envatopurchasecode', 'Envato Purchase Code', 18, '10', NULL, NULL, 1, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, NULL),
             (24, 'product', 'Product', 4, '10', NULL, NULL, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, NULL),
             (25, 'termsandconditions1', 'Terms And Conditions 1', 25, '10', NULL, NULL, 1, 1, 0, 0, 1, 1, 0, 1, 0, 0, 1, '{\"termsandconditions_text\":\"I agree to the terms and conditions.\",\"termsandconditions_linktype\":\"3\"}'),
             (26, 'termsandconditions2', 'Terms And Conditions 2', 26, '10', NULL, NULL, 1, 0, 0, 0, 1, 1, 0, 1, 0, 0, 0, '{\"termsandconditions_text\":\"I understand my personal info may be stored.\",\"termsandconditions_linktype\":\"3\"}'),
@@ -650,7 +665,7 @@ class JSSTactivation {
                       `message` text NOT NULL,
                       `status` int(11) NOT NULL,
                       `created` datetime NOT NULL
-                    ) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;";
+                    ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;";
             jssupportticket::$_db->query($jsst_query);
             $jsst_query = "CREATE TABLE IF NOT EXISTS `" . jssupportticket::$_db->prefix . "js_ticket_jshdsessiondata` (
               `id` int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
@@ -658,7 +673,7 @@ class JSSTactivation {
               `sessionmsg` text CHARACTER SET utf8 NOT NULL,
               `sessionexpire` bigint(32) NOT NULL,
               `sessionfor` varchar(125) NOT NULL
-            ) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;";
+            ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;";
             jssupportticket::$_db->query($jsst_query);
 
             $jsst_query = "CREATE TABLE IF NOT EXISTS `" . jssupportticket::$_db->prefix . "js_ticket_users` (
@@ -673,7 +688,7 @@ class JSSTactivation {
               `socialid` varchar(250) NOT NULL,
               `created` datetime NOT NULL,
               `autogenerated` int(2)
-            ) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;";
+            ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;";
             jssupportticket::$_db->query($jsst_query);
 
             $jsst_query = "CREATE TABLE IF NOT EXISTS `" . jssupportticket::$_db->prefix . "js_ticket_slug` (
@@ -740,7 +755,11 @@ class JSSTactivation {
               (53, 'announcements', 'announcements', 'announcements', 'slug for announcements page', 1),
               (54, 'downloads', 'downloads', 'downloads', 'slug for downloads page', 1),
               (55, 'faqs', 'faqs', 'faqs', 'slug for faqs page', 1),
-              (56, 'agent-export', 'export', 'export', 'slug for export page', 1);";
+              (56, 'agent-export', 'export', 'export', 'slug for export page', 1),
+              (57, 'desk-home', 'desk-home', 'workspacehome', 'slug for the agent desk home', 1),
+              (58, 'staff-chat', 'staff-chat', 'staffchat', 'slug for the agent chat console', 1),
+              (59, 'customers', 'customers', 'customers', 'slug for the customers page', 1),
+              (60, 'notifications', 'notifications', 'notifications', 'slug for the notifications page', 1);";
 
             jssupportticket::$_db->query($jsst_query);
 
@@ -753,7 +772,7 @@ class JSSTactivation {
             `status` tinyint(1) DEFAULT '1',
             `ordering` int(11) DEFAULT NULL,
             PRIMARY KEY (`code`)
-        ) ENGINE=MyISAM DEFAULT CHARSET=utf8;";
+        ) ENGINE=InnoDB DEFAULT CHARSET=utf8;";
         jssupportticket::$_db->query($jsst_query);
 
         // 2. AI Models Table
@@ -763,7 +782,7 @@ class JSSTactivation {
             `status` tinyint(1) DEFAULT '1',
             `ordering` int(11) DEFAULT NULL,
             PRIMARY KEY (`code`)
-        ) ENGINE=MyISAM DEFAULT CHARSET=utf8;";
+        ) ENGINE=InnoDB DEFAULT CHARSET=utf8;";
         jssupportticket::$_db->query($jsst_query);
 
         // 3. Languages Table
@@ -773,7 +792,7 @@ class JSSTactivation {
             `status` tinyint(1) DEFAULT '1',
             `ordering` int(11) DEFAULT NULL,
             PRIMARY KEY (`code`)
-        ) ENGINE=MyISAM DEFAULT CHARSET=utf8;";
+        ) ENGINE=InnoDB DEFAULT CHARSET=utf8;";
         jssupportticket::$_db->query($jsst_query);
 
         // 4. Use Cases Table (Contains the Dynamic JSON Schemas)
@@ -787,7 +806,7 @@ class JSSTactivation {
             `ordering` bigint(20) DEFAULT NULL,
             PRIMARY KEY (`code`),
             KEY `category_code` (`category_code`)
-        ) ENGINE=MyISAM DEFAULT CHARSET=utf8;";
+        ) ENGINE=InnoDB DEFAULT CHARSET=utf8;";
         jssupportticket::$_db->query($jsst_query);
 
         // 5. Wrappers Table (The AI Styles/Presets)
@@ -802,7 +821,7 @@ class JSSTactivation {
             `ordering` bigint(20) DEFAULT NULL,
             PRIMARY KEY (`code`),
             KEY `use_case_code` (`use_case_code`)
-        ) ENGINE=MyISAM DEFAULT CHARSET=utf8;";
+        ) ENGINE=InnoDB DEFAULT CHARSET=utf8;";
         jssupportticket::$_db->query($jsst_query);
 
         // 6. Block Templates (Tones, Styles, Formats)
@@ -812,7 +831,7 @@ class JSSTactivation {
             `name` varchar(255) NOT NULL,
             `status` tinyint(1) DEFAULT '1',
             PRIMARY KEY (`type`,`code`)
-        ) ENGINE=MyISAM DEFAULT CHARSET=utf8;";
+        ) ENGINE=InnoDB DEFAULT CHARSET=utf8;";
         jssupportticket::$_db->query($jsst_query);
 
         // 7. Internal Settings
@@ -820,7 +839,7 @@ class JSSTactivation {
             `setting_key` varchar(255) NOT NULL,
             `setting_value` text,
             PRIMARY KEY (`setting_key`)
-        ) ENGINE=MyISAM DEFAULT CHARSET=utf8;";
+        ) ENGINE=InnoDB DEFAULT CHARSET=utf8;";
         jssupportticket::$_db->query($jsst_query);
 
         // 8. Usage Logs (For tracking Agent Credit Consumption)
@@ -840,7 +859,7 @@ class JSSTactivation {
             PRIMARY KEY (`id`),
             KEY `wrapper_idx` (`wrapper_code`),
             KEY `model_idx` (`model_code`)
-        ) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;";
+        ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;";
         jssupportticket::$_db->query($jsst_query);
         // --- END ZYWRAP V1 ENGINE NATIVE HELPDESK SCHEMA ---
 
@@ -852,7 +871,7 @@ class JSSTactivation {
         // first read. All three routes have to produce the same table.
         //
         // No ENGINE clause and get_charset_collate() rather than the
-        // ENGINE=MyISAM DEFAULT CHARSET=utf8 used above, so that a table created
+        // ENGINE=InnoDB DEFAULT CHARSET=utf8 used above, so that a table created
         // here is the same table ensureSchema() and 400.sql create. Every
         // statement is CREATE TABLE IF NOT EXISTS, so a table that already
         // belongs to the matching stand-alone add-on is left exactly as it is
@@ -904,9 +923,11 @@ class JSSTactivation {
         jssupportticket::$_db->query($jsst_query);
 
         // 3. Canned responses. (Roadmap 4.0-CORE-03)
-        // Shared with the Canned Responses add-on. The full-text indexes Instant
-        // Answers needs are left to JSSTcannedresponsesModel::ensureSchema(),
-        // which suppresses errors on storage engines that cannot build them.
+        // Shared with the Canned Responses add-on, in its full 5.0 layout - the
+        // same columns JSSTcannedlibrary and JSSTcannedresponsesModel add lazily.
+        // The full-text indexes are separate statements with errors hidden, as
+        // the model adds them: a storage engine that cannot build one then loses
+        // the index, never the table.
         $jsst_query = "CREATE TABLE IF NOT EXISTS `" . jssupportticket::$_db->prefix . "js_ticket_department_message_premade` (
             `id` int(11) NOT NULL AUTO_INCREMENT,
             `departmentid` varchar(45) DEFAULT NULL,
@@ -915,15 +936,28 @@ class JSSTactivation {
             `created` datetime NOT NULL,
             `updated` datetime DEFAULT NULL,
             `status` tinyint(1) DEFAULT NULL,
-            PRIMARY KEY (`id`)
+            `folder` varchar(80) NULL,
+            `teamid` bigint(20) NULL,
+            `approved` tinyint(1) NULL,
+            `approvedby` bigint(20) NULL,
+            `language` varchar(8) NULL,
+            `translationof` bigint(20) NULL,
+            `customersuggest` tinyint(1) NOT NULL DEFAULT '0',
+            PRIMARY KEY (`id`),
+            KEY `jsst_department` (`departmentid`, `status`)
         ) " . $jsst_charset . ";";
         jssupportticket::$_db->query($jsst_query);
+        jssupportticket::$_db->hide_errors();
+        foreach (array('ADD FULLTEXT `jsst_ir_ft` (`title`, `answer`)', 'ADD FULLTEXT `ft_title` (`title`)', 'ADD FULLTEXT `ft_answer` (`answer`)') AS $jsst_ft) {
+            jssupportticket::$_db->query("ALTER TABLE `" . jssupportticket::$_db->prefix . "js_ticket_department_message_premade` " . $jsst_ft);
+        }
+        jssupportticket::$_db->show_errors();
 
         // 4. Help topics. (Roadmap 4.0-CORE-06)
-        // The add-on's layout, shared with it. The parentid, staffid and
-        // isdefault columns of 4.0-CORE-20 are added by
-        // JSSThelptopicModel::ensureSchema(), which must not alter a table that
-        // still belongs to the legacy add-on underneath it.
+        // The add-on's layout, shared with it, with the parentid, staffid and
+        // isdefault columns of 4.0-CORE-20. CREATE ... IF NOT EXISTS leaves a
+        // table the legacy add-on already made alone; JSSThelptopicModel::
+        // ensureSchema() adds the columns to that one.
         $jsst_query = "CREATE TABLE IF NOT EXISTS `" . jssupportticket::$_db->prefix . "js_ticket_help_topics` (
             `id` int(11) NOT NULL AUTO_INCREMENT,
             `isactive` tinyint(1) DEFAULT NULL,
@@ -935,8 +969,12 @@ class JSSTactivation {
             `created` datetime DEFAULT NULL,
             `updated` datetime DEFAULT NULL,
             `status` tinyint(1) DEFAULT NULL,
+            `parentid` int(11) DEFAULT NULL,
+            `staffid` int(11) DEFAULT NULL,
+            `isdefault` tinyint(1) NOT NULL DEFAULT '0',
             PRIMARY KEY (`id`),
-            KEY `jsst_department` (`departmentid`, `status`)
+            KEY `jsst_department` (`departmentid`, `status`),
+            KEY `jsst_parent` (`parentid`)
         ) " . $jsst_charset . ";";
         jssupportticket::$_db->query($jsst_query);
 
@@ -1001,17 +1039,19 @@ class JSSTactivation {
         // One row per named search, owned by the WordPress user who saved it. The
         // filters are stored as JSON rather than a column each so that adding a
         // filter to the queue later does not need a migration. The queue indexes
-        // 4.0 adds to js_ticket_tickets are not here: that table is created above
-        // and JSSTqueue::ensureSchema() checks for each index before adding it.
+        // on js_ticket_tickets are in that table's definition above;
+        // JSSTqueue::ensureSchema() adds them on an upgraded site.
         $jsst_query = "CREATE TABLE IF NOT EXISTS `" . jssupportticket::$_db->prefix . "js_ticket_saved_views` (
             `id` int(11) NOT NULL AUTO_INCREMENT,
             `uid` int(11) NOT NULL,
             `name` varchar(60) NOT NULL,
             `filters` text,
+            `visibility` tinyint(1) NOT NULL DEFAULT 0,
             `created` datetime DEFAULT NULL,
             `updated` datetime DEFAULT NULL,
             PRIMARY KEY (`id`),
-            KEY `jsst_uid` (`uid`)
+            KEY `jsst_uid` (`uid`),
+            KEY `jsst_visibility` (`visibility`)
         ) " . $jsst_charset . ";";
         jssupportticket::$_db->query($jsst_query);
 
@@ -1077,6 +1117,220 @@ class JSSTactivation {
         ) " . $jsst_charset . ";";
         jssupportticket::$_db->query($jsst_query);
         // --- END 4.0 CORE SCHEMA ---
+
+        /* --- 5.0 CORE SCHEMA ---------------------------------------------
+         *
+         * The tables core absorbed between 4.5 and 6.5, repeated here for the
+         * same reason every 4.0 table above is repeated: 500.sql is the upgrade
+         * route, and this is the install route. Both are needed. An upgrade from
+         * 4.0 runs the SQL file and never calls this; a fresh install runs this
+         * and reaches the file only through the current-release branch in
+         * JSSTupdates::checkUpdates(), which is one option away from not running
+         * at all. Every statement is CREATE TABLE IF NOT EXISTS, so a site that
+         * gets both pays for the second one in a single no-op.
+         *
+         * Each of these is a feature that used to be an add-on and is now free,
+         * which is the 4.0-CORE-19 contract applied to the 4.5-6.5 merges:
+         * core owns the feature outright, on every site.
+         */
+
+        // 13. The notification centre. The Desktop Notification add-on polled;
+        // this is the record of what happened while somebody was away.
+        // (Roadmap 4.5-UX-02)
+        $jsst_query = "CREATE TABLE IF NOT EXISTS `" . jssupportticket::$_db->prefix . "js_ticket_notifications` (
+            `id` int(11) NOT NULL AUTO_INCREMENT,
+            `staffid` int(11) NOT NULL,
+            `wpuid` bigint(20) NOT NULL DEFAULT 0,
+            `category` varchar(20) NOT NULL DEFAULT 'watched',
+            `eventname` varchar(60) NOT NULL DEFAULT '',
+            `ticketid` int(11) NOT NULL DEFAULT 0,
+            `title` varchar(255) NOT NULL DEFAULT '',
+            `body` text,
+            `url` varchar(255) NOT NULL DEFAULT '',
+            `actions` text,
+            `seen` tinyint(1) NOT NULL DEFAULT 0,
+            `held` tinyint(1) NOT NULL DEFAULT 0,
+            `created` datetime DEFAULT NULL,
+            PRIMARY KEY (`id`),
+            KEY `jsst_staff` (`staffid`),
+            KEY `jsst_seen` (`seen`),
+            KEY `jsst_held` (`held`)
+        ) " . $jsst_charset . ";";
+        jssupportticket::$_db->query($jsst_query);
+
+        // 14. Who a customer works for, and 15. who is named on the account.
+        // Until this landed a company was the part of an e-mail address after
+        // the @. The pair is always created together: a person row pointing at
+        // a company that does not exist is not a partial feature, it is a join
+        // that returns nothing. (Roadmap 5.5-COM-06)
+        $jsst_query = "CREATE TABLE IF NOT EXISTS `" . jssupportticket::$_db->prefix . "js_ticket_companies` (
+            `id` int(11) NOT NULL AUTO_INCREMENT,
+            `name` varchar(190) NOT NULL DEFAULT '',
+            `slug` varchar(190) NOT NULL DEFAULT '',
+            `domains` text,
+            `tier` varchar(100) NOT NULL DEFAULT '',
+            `contractref` varchar(190) NOT NULL DEFAULT '',
+            `contractstart` date DEFAULT NULL,
+            `contractend` date DEFAULT NULL,
+            `notes` text,
+            `status` tinyint(1) NOT NULL DEFAULT 1,
+            `created` datetime DEFAULT NULL,
+            `updated` datetime DEFAULT NULL,
+            PRIMARY KEY (`id`),
+            KEY `jsst_slug` (`slug`),
+            KEY `jsst_status` (`status`)
+        ) " . $jsst_charset . ";";
+        jssupportticket::$_db->query($jsst_query);
+
+        $jsst_query = "CREATE TABLE IF NOT EXISTS `" . jssupportticket::$_db->prefix . "js_ticket_company_people` (
+            `id` int(11) NOT NULL AUTO_INCREMENT,
+            `companyid` int(11) NOT NULL DEFAULT 0,
+            `email` varchar(190) NOT NULL DEFAULT '',
+            `uid` int(11) NOT NULL DEFAULT 0,
+            `personrole` varchar(20) NOT NULL DEFAULT 'contact',
+            `created` datetime DEFAULT NULL,
+            PRIMARY KEY (`id`),
+            KEY `jsst_company` (`companyid`),
+            KEY `jsst_email` (`email`),
+            KEY `jsst_uid` (`uid`)
+        ) " . $jsst_charset . ";";
+        jssupportticket::$_db->query($jsst_query);
+
+        // 16. Marketing consent, which is what the newsletter checkbox on the
+        // registration form should always have produced. Core reads that box
+        // now instead of the MailChimp add-on, and a record of who agreed to
+        // what, and when, is the whole point of retiring it into core.
+        // (Roadmap 5.5-SEC-02)
+        $jsst_query = "CREATE TABLE IF NOT EXISTS `" . jssupportticket::$_db->prefix . "js_ticket_marketing_consent` (
+            `id` int(11) NOT NULL AUTO_INCREMENT,
+            `uid` int(11) NOT NULL DEFAULT 0,
+            `email` varchar(190) NOT NULL DEFAULT '',
+            `name` varchar(190) NOT NULL DEFAULT '',
+            `granted` tinyint(1) NOT NULL DEFAULT 1,
+            `source` varchar(20) NOT NULL DEFAULT '',
+            `statement` text,
+            `created` datetime DEFAULT NULL,
+            PRIMARY KEY (`id`),
+            KEY `jsst_email` (`email`),
+            KEY `jsst_created` (`created`)
+        ) " . $jsst_charset . ";";
+        jssupportticket::$_db->query($jsst_query);
+        /* Core tables that used to be created only on demand, by each class's
+           ensureSchema(). Same definitions as there, so both routes build the
+           same table; the class guard stays as the repair path. */
+        // Which documents the AI may read. (Roadmap 6.0-AI-02)
+        $jsst_query = "CREATE TABLE IF NOT EXISTS `" . jssupportticket::$_db->prefix . "js_ticket_ai_rules` (
+            `id` bigint(20) NOT NULL AUTO_INCREMENT,
+            `sourcetype` varchar(20) NOT NULL DEFAULT '',
+            `sourceid` bigint(20) NOT NULL DEFAULT '0',
+            `verdict` tinyint(1) NOT NULL DEFAULT '0',
+            `note` varchar(255) NOT NULL DEFAULT '',
+            `setby` bigint(20) NOT NULL DEFAULT '0',
+            `updated` datetime DEFAULT NULL,
+            PRIMARY KEY (`id`),
+            UNIQUE KEY `jsst_doc` (`sourcetype`, `sourceid`),
+            KEY `jsst_type` (`sourcetype`, `verdict`)
+        ) " . $jsst_charset . ";";
+        jssupportticket::$_db->query($jsst_query);
+        // Knowledge base article revisions. (Roadmap 6.0-KB-01)
+        $jsst_query = "CREATE TABLE IF NOT EXISTS `" . jssupportticket::$_db->prefix . "js_ticket_kb_revisions` (
+            `id` bigint(20) NOT NULL AUTO_INCREMENT,
+            `articleid` bigint(20) NOT NULL DEFAULT '0',
+            `subject` varchar(255) NOT NULL DEFAULT '',
+            `content` longtext,
+            `savedby` bigint(20) NOT NULL DEFAULT '0',
+            `note` varchar(255) NOT NULL DEFAULT '',
+            `created` datetime DEFAULT NULL,
+            PRIMARY KEY (`id`),
+            KEY `jsst_kbrev_article` (`articleid`, `id`),
+            KEY `jsst_kbrev_when` (`created`)
+        ) " . $jsst_charset . ";";
+        jssupportticket::$_db->query($jsst_query);
+        // AI answers held for review, and what the agent sent instead. (Roadmap 6.0-AI-04)
+        $jsst_query = "CREATE TABLE IF NOT EXISTS `" . jssupportticket::$_db->prefix . "js_ticket_ai_answers` (
+            `id` bigint(20) NOT NULL AUTO_INCREMENT,
+            `ticketid` bigint(20) NOT NULL DEFAULT '0',
+            `replyid` bigint(20) NOT NULL DEFAULT '0',
+            `state` varchar(20) NOT NULL DEFAULT 'held',
+            `engine` varchar(50) NOT NULL DEFAULT '',
+            `confidence` tinyint(4) NOT NULL DEFAULT '0',
+            `coverage` tinyint(4) DEFAULT NULL,
+            `overlap` tinyint(4) DEFAULT NULL,
+            `body` longtext,
+            `sources` text,
+            `reason` varchar(255) NOT NULL DEFAULT '',
+            `note` varchar(255) NOT NULL DEFAULT '',
+            `decidedby` bigint(20) NOT NULL DEFAULT '0',
+            `created` datetime DEFAULT NULL,
+            `decided` datetime DEFAULT NULL,
+            `agentreply` bigint(20) NOT NULL DEFAULT '0',
+            `agentbody` longtext,
+            `agreement` tinyint(4) DEFAULT NULL,
+            `outcome` varchar(30) NOT NULL DEFAULT '',
+            `pairedat` datetime DEFAULT NULL,
+            PRIMARY KEY (`id`),
+            KEY `jsst_state` (`state`, `created`),
+            KEY `jsst_ticket` (`ticketid`),
+            KEY `jsst_reply` (`replyid`)
+        ) " . $jsst_charset . ";";
+        jssupportticket::$_db->query($jsst_query);
+        // AI calls, tokens and cost.
+        $jsst_query = "CREATE TABLE IF NOT EXISTS `" . jssupportticket::$_db->prefix . "js_ticket_ai_usage` (
+            `id` bigint(20) NOT NULL AUTO_INCREMENT,
+            `created` datetime DEFAULT NULL,
+            `engine` varchar(50) NOT NULL DEFAULT '',
+            `model` varchar(100) NOT NULL DEFAULT '',
+            `lane` varchar(20) NOT NULL DEFAULT '',
+            `funded` varchar(10) NOT NULL DEFAULT 'byok',
+            `feature` varchar(40) NOT NULL DEFAULT '',
+            `ticketid` bigint(20) NOT NULL DEFAULT '0',
+            `userid` bigint(20) NOT NULL DEFAULT '0',
+            `intokens` int(11) NOT NULL DEFAULT '0',
+            `outtokens` int(11) NOT NULL DEFAULT '0',
+            `tokensknown` tinyint(1) NOT NULL DEFAULT '1',
+            `cost` decimal(12,6) NOT NULL DEFAULT '0.000000',
+            `priced` tinyint(1) NOT NULL DEFAULT '1',
+            `ms` int(11) NOT NULL DEFAULT '0',
+            `ok` tinyint(1) NOT NULL DEFAULT '1',
+            `error` varchar(255) NOT NULL DEFAULT '',
+            PRIMARY KEY (`id`),
+            KEY `jsst_when` (`created`),
+            KEY `jsst_ticket` (`ticketid`),
+            KEY `jsst_funded` (`funded`, `created`)
+        ) " . $jsst_charset . ";";
+        jssupportticket::$_db->query($jsst_query);
+        // Questions the AI could not answer from the site's content.
+        $jsst_query = "CREATE TABLE IF NOT EXISTS `" . jssupportticket::$_db->prefix . "js_ticket_ai_gaps` (
+            `id` bigint(20) NOT NULL AUTO_INCREMENT,
+            `created` datetime DEFAULT NULL,
+            `kind` varchar(20) NOT NULL DEFAULT 'search',
+            `question` varchar(500) NOT NULL DEFAULT '',
+            `fingerprint` char(32) NOT NULL DEFAULT '',
+            `ticketid` bigint(20) NOT NULL DEFAULT '0',
+            `coverage` tinyint(4) DEFAULT NULL,
+            PRIMARY KEY (`id`),
+            KEY `jsst_when` (`created`),
+            KEY `jsst_kind` (`kind`, `created`),
+            KEY `jsst_print` (`fingerprint`)
+        ) " . $jsst_charset . ";";
+        jssupportticket::$_db->query($jsst_query);
+        // The current AI reading of each ticket: mood, risk, suggested routing.
+        $jsst_query = "CREATE TABLE IF NOT EXISTS `" . jssupportticket::$_db->prefix . "js_ticket_ai_triage` (
+            `ticketid` bigint(20) NOT NULL,
+            `score` tinyint(4) DEFAULT NULL,
+            `mood` varchar(20) NOT NULL DEFAULT '',
+            `atrisk` tinyint(1) NOT NULL DEFAULT '0',
+            `evidence` varchar(500) NOT NULL DEFAULT '',
+            `department` varchar(150) NOT NULL DEFAULT '',
+            `urgency` varchar(20) NOT NULL DEFAULT '',
+            `reason` varchar(500) NOT NULL DEFAULT '',
+            `updated` datetime DEFAULT NULL,
+            PRIMARY KEY (`ticketid`),
+            KEY `jsst_triage_score` (`score`),
+            KEY `jsst_triage_risk` (`atrisk`, `updated`)
+        ) " . $jsst_charset . ";";
+        jssupportticket::$_db->query($jsst_query);
+        // --- END 5.0 CORE SCHEMA ---
         }
 
         // Put the attachment directory protection in place now rather than

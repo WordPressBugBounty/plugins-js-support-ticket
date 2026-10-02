@@ -27,26 +27,10 @@ $jsst_listurl  = admin_url('admin.php?page=thirdpartyimport&jstlay=migrationprev
         <?php JSSTincluder::getClassesInclude('jsstadminsidemenu'); ?>
     </div>
     <div id="jsstadmin-data">
-        <div id="jsstadmin-wrapper-top">
-            <div id="jsstadmin-wrapper-top-left">
-                <div id="jsstadmin-breadcrunbs">
-                    <ul>
-                        <li><a href="?page=jssupportticket" title="<?php echo esc_attr(__('Dashboard','js-support-ticket')); ?>"><?php echo esc_html(__('Dashboard','js-support-ticket')); ?></a></li>
-                        <li><a href="<?php echo esc_url($jsst_listurl); ?>" title="<?php echo esc_attr(__('Import from Another Help Desk','js-support-ticket')); ?>"><?php echo esc_html(__('Import from Another Help Desk','js-support-ticket')); ?></a></li>
-                        <li><?php echo esc_html(__('Report','js-support-ticket')); ?></li>
-                    </ul>
-                </div>
-            </div>
-            <div id="jsstadmin-wrapper-top-right">
-                <div id="jsstadmin-vers-txt">
-                    <?php echo esc_html(__("Version",'js-support-ticket')); ?>:
-                    <span class="jsstadmin-ver"><?php echo esc_html(JSSTincluder::getJSModel('configuration')->getConfigValue('versioncode')); ?></span>
-                </div>
-            </div>
-        </div>
-        <div id="jsstadmin-head">
-            <h1 class="jsstadmin-head-text"><?php echo esc_html(__('Import Report', 'js-support-ticket')); ?></h1>
-        </div>
+        <?php JSSTlayout::adminPageHeader(array(
+            'title'  => __('Import Report', 'js-support-ticket'),
+            'crumbs' => array(array('text' => __('Import from Another Help Desk', 'js-support-ticket'), 'url' => $jsst_listurl)),
+        )); ?>
         <div id="jsstadmin-data-wrp">
 
             <?php
@@ -55,7 +39,7 @@ $jsst_listurl  = admin_url('admin.php?page=thirdpartyimport&jstlay=migrationprev
                     <div class="jsst-status-title"><?php echo esc_html(__('Nothing to report', 'js-support-ticket')); ?></div>
                     <div class="jsst-status-note"><?php echo esc_html(__('No import has been run yet.', 'js-support-ticket')); ?></div>
                     <div class="jsst-migration-actions">
-                        <a class="button js-form-save" href="<?php echo esc_url($jsst_listurl); ?>"><?php echo esc_html(__('Start one', 'js-support-ticket')); ?></a>
+                        <a class="jsst-btn jsst-btn-primary" href="<?php echo esc_url($jsst_listurl); ?>"><?php echo esc_html(__('Start one', 'js-support-ticket')); ?></a>
                     </div>
                 </div>
                 <?php
@@ -143,10 +127,10 @@ $jsst_listurl  = admin_url('admin.php?page=thirdpartyimport&jstlay=migrationprev
                 <div class="jsst-status-card">
                     <div class="jsst-migration-actions">
                         <?php if (!$jsst_rolledback && !empty($jsst_journal)) { ?>
-                            <a class="button js-form-cancel" href="<?php echo esc_url(wp_nonce_url(admin_url('admin.php?page=thirdpartyimport&task=rollbackmigration&action=jstask&token=' . rawurlencode($jsst_run->token)), 'jsst-migration-rollback')); ?>"><?php echo esc_html(__('Take this import back out', 'js-support-ticket')); ?></a>
+                            <a class="jsst-btn jsst-btn-danger" href="<?php echo esc_url(wp_nonce_url(admin_url('admin.php?page=thirdpartyimport&task=rollbackmigration&action=jstask&token=' . rawurlencode($jsst_run->token)), 'jsst-migration-rollback')); ?>"><?php echo esc_html(__('Take this import back out', 'js-support-ticket')); ?></a>
                             <span class="jsst-status-correlation"><?php echo esc_html(__('Removes exactly the rows listed above, newest first, and nothing else.', 'js-support-ticket')); ?></span>
                         <?php } ?>
-                        <a class="button js-form-save" href="<?php echo esc_url($jsst_listurl); ?>"><?php echo esc_html(__('Back to imports', 'js-support-ticket')); ?></a>
+                        <a class="jsst-btn jsst-btn-primary" href="<?php echo esc_url($jsst_listurl); ?>"><?php echo esc_html(__('Back to imports', 'js-support-ticket')); ?></a>
                     </div>
                 </div>
                 <?php

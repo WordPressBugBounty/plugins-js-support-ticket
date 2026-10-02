@@ -50,7 +50,7 @@ class JSSTpriorityController {
         $jsst_id = JSSTrequest::getVar('id');
         $jsst_nonce = JSSTrequest::getVar('_wpnonce');
         if (! wp_verify_nonce( $jsst_nonce, 'save-priority-'.$jsst_id) ) {
-            die( 'Security check Failed' );
+            die( esc_html__( 'Security check Failed', 'js-support-ticket' ) );
         }
         if (!current_user_can('manage_options')) { //only admin can change it.
             return false;
@@ -70,7 +70,7 @@ class JSSTpriorityController {
         $jsst_id = JSSTrequest::getVar('priorityid');
         $jsst_nonce = JSSTrequest::getVar('_wpnonce');
         if (! wp_verify_nonce( $jsst_nonce, 'delete-priority-'.$jsst_id) ) {
-            die( 'Security check Failed' );
+            die( esc_html__( 'Security check Failed', 'js-support-ticket' ) );
         }
         JSSTincluder::getJSModel('priority')->removePriority( absint( $jsst_id ) );
         if (is_admin()) {
@@ -86,7 +86,7 @@ class JSSTpriorityController {
         $jsst_id = JSSTrequest::getVar('priorityid');
         $jsst_nonce = JSSTrequest::getVar('_wpnonce');
         if (! wp_verify_nonce( $jsst_nonce, 'make-default-'.$jsst_id) ) {
-            die( 'Security check Failed' );
+            die( esc_html__( 'Security check Failed', 'js-support-ticket' ) );
         }
         JSSTincluder::getJSModel('priority')->makeDefault( absint( $jsst_id ) );
         $jsst_pagenum = JSSTrequest::getVar('pagenum');
@@ -100,7 +100,7 @@ class JSSTpriorityController {
     static function ordering() {
         $jsst_nonce = JSSTrequest::getVar('_wpnonce');
         if (! wp_verify_nonce( $jsst_nonce, 'ordering') ) {
-            die( 'Security check Failed' );
+            die( esc_html__( 'Security check Failed', 'js-support-ticket' ) );
         }
         $jsst_id = JSSTrequest::getVar('priorityid');
         JSSTincluder::getJSModel('priority')->setOrdering( absint( $jsst_id ) );

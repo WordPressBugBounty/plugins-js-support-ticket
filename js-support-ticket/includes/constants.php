@@ -107,6 +107,7 @@ if (!defined('JSST_ALLOWED_TAGS')) {
             'multiple' => array(),
             'rel' => array(),
             'maxlength' => array(),
+            'minlength' => array(),
             'disabled' => array(),
             'readonly' => array(),
             'credit_userid' => array(),
@@ -119,6 +120,9 @@ if (!defined('JSST_ALLOWED_TAGS')) {
             'style' => array(),
             'onchange' => array(),
             'tabindex' => array(),
+            'min' => array(),
+            'max' => array(),
+            'step' => array(),
         ),
         'textarea'     => array(
             'rows' => array(),
@@ -363,6 +367,20 @@ if (!defined('JSST_ALLOWED_TAGS')) {
             'class' => array(),
             'style' => array(),
         ),
+        /* A table built in PHP and echoed through wp_kses lost its <thead> and
+           <tbody>, and `.jsst-table thead th` is what makes a header row look
+           like one - so an ajax-built list came back unstyled while the same
+           markup in a template was fine. */
+        'thead'      => array(
+            'id' => array(),
+            'class'  => array(),
+            'style' => array(),
+        ),
+        'tbody'      => array(
+            'id' => array(),
+            'class'  => array(),
+            'style' => array(),
+        ),
         'tr'      => array(
             'id' => array(),
             'class' => array(),
@@ -422,17 +440,6 @@ if (!defined('JSST_ALLOWED_TAGS')) {
             'style' => array(),),
         '&nbsp' => array(),
     ));
-    define(
-        'JSST_DEFAULT_LANGUAGES',
-        array(
-            'ar',
-            'de_DE',
-            'es_ES',
-            'fr_FR',
-            'it_IT',
-            'pt_BR',
-        )
-    );
 }
 define('JSST_PLUGIN_PATH', plugin_dir_path( __DIR__ ));
 define('JSST_PLUGIN_URL', plugin_dir_url( __DIR__ ));

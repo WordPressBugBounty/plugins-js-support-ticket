@@ -25,7 +25,7 @@ class JSSTattachmentModel {
         }
         // Not staff: the ticket has to be their own.
         $jsst_owns_ticket = (!JSSTincluder::getObjectClass('user')->isguest())
-            ? JSSTincluder::getJSModel('ticket')->validateTicketDetailForUser($jsst_id)
+            ? JSSTincluder::getJSModel('ticket')->validateTicketReadForUser($jsst_id)
             : JSSTincluder::getJSModel('ticket')->validateTicketDetailForVisitor($jsst_id);
         return (bool) $jsst_owns_ticket;
     }
@@ -178,7 +178,7 @@ class JSSTattachmentModel {
         }
         if (!current_user_can('manage_options') && !(in_array('agent', jssupportticket::$_active_addons) && JSSTincluder::getJSModel('agent')->isUserStaff())) {
             $jsst_owns_ticket = (!JSSTincluder::getObjectClass('user')->isguest())
-                ? JSSTincluder::getJSModel('ticket')->validateTicketDetailForUser($jsst_object->ticketid)
+                ? JSSTincluder::getJSModel('ticket')->validateTicketReadForUser($jsst_object->ticketid)
                 : JSSTincluder::getJSModel('ticket')->validateTicketDetailForVisitor($jsst_object->ticketid);
             if (!$jsst_owns_ticket) {
                 return false;
@@ -236,7 +236,7 @@ class JSSTattachmentModel {
                 if( in_array('agent',jssupportticket::$_active_addons) && JSSTincluder::getJSModel('agent')->isUserStaff()){
                     $jsst_download = true;
                 }else{
-                    if(JSSTincluder::getJSModel('ticket')->validateTicketDetailForUser($jsst_ticketid)){
+                    if(JSSTincluder::getJSModel('ticket')->validateTicketReadForUser($jsst_ticketid)){
                         $jsst_download = true;
                     }
                 }
@@ -293,8 +293,7 @@ class JSSTattachmentModel {
                 exit();
             }
         }else{
-            include( get_query_template( '404' ) );
-            exit;
+            JSSTincluder::notFound();
         }
     }
 
@@ -314,7 +313,7 @@ class JSSTattachmentModel {
                 if( in_array('agent',jssupportticket::$_active_addons) && JSSTincluder::getJSModel('agent')->isUserStaff()){
                     $jsst_download = true;
                 }else{
-                    if(JSSTincluder::getJSModel('ticket')->validateTicketDetailForUser($jsst_ticketid)){
+                    if(JSSTincluder::getJSModel('ticket')->validateTicketReadForUser($jsst_ticketid)){
                         $jsst_download = true;
                     }
                 }
@@ -325,8 +324,7 @@ class JSSTattachmentModel {
 
         // If the user fails all checks, block the download and show a 404 page
         if ($jsst_download != true) {
-            include( get_query_template( '404' ) );
-            exit;
+            JSSTincluder::notFound();
         }
         // -------------------------------------------------------------------
 
@@ -442,7 +440,7 @@ class JSSTattachmentModel {
         $jsst_v_list = $jsst_archive->create($jsst_filelist, PCLZIP_OPT_REMOVE_PATH, $jsst_directory);
 
         if ($jsst_v_list == 0) {
-            die("Error : '" . wp_kses($jsst_archive->errorInfo(), JSST_ALLOWED_TAGS) . "'");
+            die(esc_html__('Error', 'js-support-ticket') . " : '" . wp_kses($jsst_archive->errorInfo(), JSST_ALLOWED_TAGS) . "'");
         }
 
         $jsst_file = $jsst_path . '/alldownloads.zip';
@@ -547,7 +545,7 @@ class JSSTattachmentModel {
         
         $jsst_v_list = $jsst_archive->create($jsst_filelist, PCLZIP_OPT_REMOVE_PATH, $jsst_directory);
         if ($jsst_v_list == 0) {
-            die("Error : '" . wp_kses($jsst_archive->errorInfo(), JSST_ALLOWED_TAGS) . "'");
+            die(esc_html__('Error', 'js-support-ticket') . " : '" . wp_kses($jsst_archive->errorInfo(), JSST_ALLOWED_TAGS) . "'");
         }
 
         $jsst_file = $jsst_path . '/alldownloads.zip';

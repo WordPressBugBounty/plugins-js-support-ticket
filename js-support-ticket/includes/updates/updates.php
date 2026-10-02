@@ -28,8 +28,10 @@ class JSSTupdates {
             // Fresh install, or a reactivation of a site whose current-release
             // file never ran. Applying just that file is safe however many
             // times it happens: every statement in it is CREATE TABLE IF NOT
-            // EXISTS, INSERT IGNORE or REPLACE, so it cannot conflict with what
-            // activation has already created or overwrite a configured value.
+            // EXISTS, INSERT IGNORE, REPLACE, or a column/index addition that
+            // runs only when information_schema says it is missing, so it
+            // cannot conflict with what activation has already created or
+            // overwrite a configured value.
             if ((string) $jsst_cversion === (string) jssupportticket::$_currentversion
                 && get_option(self::APPLIED_OPTION) !== (string) $jsst_cversion) {
                 // Marked only on success. Only a file that actually ran

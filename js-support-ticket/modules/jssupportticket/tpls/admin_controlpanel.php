@@ -54,6 +54,9 @@ JSSTmessage::getMessage();
                 </button>
             </div>
 
+            <?php // The loyalty renewal price, for a carried-over customer who has one. (1 Oct 2026)
+            if (class_exists('JSSTupgradeassistant')) { JSSTupgradeassistant::offerNotice(); } ?>
+
             <section id="quick-actions" class="bg-white p-6 rounded-xl shadow-lg flex flex-col md:flex-row justify-between items-center gap-6 flex-wrap">
                 <div class="flex-1 text-center md:text-left md:rtl:text-right">
                     <h2 class="text-2xl font-bold text-gray-900"><?php echo esc_html__('Quick Actions', 'js-support-ticket'); ?></h2>
@@ -155,31 +158,6 @@ JSSTmessage::getMessage();
                 </div>
             </div>
 
-            <?php if (jssupportticket::$jsst_data['update_avaliable_for_addons'] != 0) {?>
-                <section id="activation-key-expiry" class="bg-indigo-50 border-l-4 border-[#4f46e5] text-gray-700 p-6 rounded-xl shadow-lg flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
-                    <div class="flex items-center gap-4">
-                        <div class="flex-shrink-0 text-[#4f46e5]">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                              <polyline points="23 4 23 10 17 10"></polyline>
-                              <polyline points="1 20 1 14 7 14"></polyline>
-                              <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path>
-                            </svg>
-                        </div>
-                        <div>
-                            <h2 class="text-xl font-bold text-black"><?php echo esc_html(__('New Addon Update Available', 'js-support-ticket')); ?></h2>
-                            <p class="text-gray-600 text-sm mt-1">
-                                <?php echo esc_html(__('Install the latest version to unlock new features and security patches.', 'js-support-ticket')); ?>
-                            </p>
-                        </div>
-                    </div>
-                    <div class="flex-shrink-0 w-full sm:w-auto">
-                        <a href="?page=jssupportticket&jstlay=addonstatus" class="w-full sm:w-auto bg-[#4f46e5] text-white font-semibold py-2 px-4 rounded-lg hover:bg-[#4338ca] transition-colors whitespace-nowrap inline-block text-center hover:text-white">
-                            <?php echo esc_html__('Update Now', 'js-support-ticket'); ?>
-                        </a>
-                    </div>
-                </section>
-            <?php } ?>
-            
             <section id="daily-ticket-flow" class="bg-gradient-to-r from-indigo-500 to-indigo-700 text-white p-6 rounded-xl shadow-lg flex flex-col md:flex-row justify-between items-center gap-6 flex-wrap">
                 <div class="flex-1 text-center md:text-left md:rtl:text-right">
                     <h2 class="text-2xl font-bold text-white"><?php echo esc_html__('Daily Ticket Flow', 'js-support-ticket'); ?></h2>
@@ -209,32 +187,6 @@ JSSTmessage::getMessage();
                 </div>
             </section>
             
-            <?php if (get_option('jsst_show_key_expiry_msg') == '1') { ?>
-                <section id="activation-key-expiry" class="bg-rose-100 border-l-4 rtl:border-r-4 rtl:border-l-0 border-rose-500 text-rose-700 p-6 rounded-xl shadow-lg flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
-                    <div class="flex items-center gap-4">
-                        <div class="flex-shrink-0">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-8 h-8 text-rose-500">
-                                <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path>
-                                <line x1="12" y1="9" x2="12" y2="13"></line>
-                                <line x1="12" y1="17" x2="12.01" y2="17"></line>
-                            </svg>
-                        </div>
-                        <div>
-                            <h2 class="text-xl font-bold text-rose-800"><?php echo esc_html__('Your activation key has expired.', 'js-support-ticket'); ?></h2>
-                            <p class="text-rose-700 text-sm mt-1">
-                                <?php echo esc_html__('Please reactivate your key to continue receiving product updates, addons, and support.', 'js-support-ticket'); ?>
-                            </p>
-                        </div>
-                    </div>
-                    <div class="flex-shrink-0 w-full sm:w-auto">
-                        <a href="<?php echo esc_url(admin_url('admin.php?page=premiumplugin&jstlay=updatekey')); ?>" class="w-full sm:w-auto bg-rose-500 text-white font-semibold py-2 px-4 rounded-lg hover:bg-rose-600 transition-colors whitespace-nowrap inline-block text-center hover:text-white">
-                            <?php echo esc_html__('Reactivate Activation Key', 'js-support-ticket'); ?>
-                        </a>
-                    </div>
-                </section>
-                <?php
-            } ?>
-
             <section class="flex flex-col md:flex-row justify-between items-center gap-6 flex-wrap">
                 <div id="ticket-analysis" class="w-full bg-white p-5 rounded-xl shadow-lg flex-1">
                     <?php
@@ -727,233 +679,29 @@ JSSTmessage::getMessage();
             </section>
 
             <?php
-            // Define the dynamic list of available addons.
-            $jsst_available_addons = [
-                'agent' => [
-                    'title' => __('Agents', 'js-support-ticket'),
-                    'description' => __('Add agents and assign roles and permissions to provide assistance and support to customer support tickets.', 'js-support-ticket'),
-                    'plugin_file' => 'js-support-ticket-agent/js-support-ticket-agent.php',
-                    'url' => 'https://jshelpdesk.com/product/agents/',
-                    'icon_bg' => 'js-hlpdsk-addon-icon-bg-blue',
-                    'icon_svg' => '<svg focusable="false" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14c-4.418 0-8 2.239-8 5v1h16v-1c0-2.761-3.582-5-8-5z"/></svg>',
-                ],
-                'aipoweredreply' => [
-                    'title' => __('AI Powered Reply', 'js-support-ticket'),
-                    'description' => __('Get AI-powered, context-based suggestions to effortlessly create clear, relevant, and helpful replies.', 'js-support-ticket'),
-                    'plugin_file' => 'js-support-ticket-aipoweredreply/js-support-ticket-aipoweredreply.php',
-                    'url' => 'https://jshelpdesk.com/product/ai-powered-reply/',
-                    'icon_bg' => 'js-hlpdsk-addon-icon-bg-blue',
-                    'icon_svg' => '<svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-gray-600"
-                        fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                        <!-- Chat bubble -->
-                        <path stroke-linecap="round" stroke-linejoin="round" 
-                            d="M4 5h16v10H7l-3 3V5z"/>
-                        <!-- AI text -->
-                        <text x="12" y="12" font-size="7" text-anchor="middle" 
-                            fill="currentColor" font-weight="bold">AI</text>
-                    </svg>',
-                ],
-                'autoclose' => [
-                    'title' => __('Ticket Auto Close', 'js-support-ticket'),
-                    'description' => __('Define rules for ticket to auto close. Ticket will be auto close after specific interval of time which can be set by admin.', 'js-support-ticket'),
-                    'plugin_file' => 'js-support-ticket-autoclose/js-support-ticket-autoclose.php',
-                    'url' => 'https://jshelpdesk.com/product/close-ticket/',
-                    'icon_bg' => 'js-hlpdsk-addon-icon-bg-pink',
-                    'icon_svg' => '<svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>',
-                ],
-                'feedback' => [
-                    'title' => __('Feedback', 'js-support-ticket'),
-                    'description' => __('Get the survey from your customers on ticket closing to improve your quality of services and assistance.', 'js-support-ticket'),
-                    'plugin_file' => 'js-support-ticket-feedback/js-support-ticket-feedback.php',
-                    'url' => 'https://jshelpdesk.com/product/feedback/',
-                    'icon_bg' => 'js-hlpdsk-addon-icon-bg-teal',
-                    'icon_svg' => '<svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" /></svg>',
-                ],
-                'knowledgebase' => [
-                    'title' => __('Knowledge Base', 'js-support-ticket'),
-                    'description' => __('Stop losing productivity on repetitive queries,Build your knowledge base, group solutions by topics to facilitate users.', 'js-support-ticket'),
-                    'plugin_file' => 'js-support-ticket-knowledgebase/js-support-ticket-knowledgebase.php',
-                    'url' => 'https://jshelpdesk.com/product/knowledge-base/',
-                    'icon_bg' => 'js-hlpdsk-addon-icon-bg-teal',
-                    'icon_svg' => '<svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v13m0-13C10.832 5.405 9.172 5 7.5 5S4.168 5.405 3 6.253v13C4.168 18.405 5.828 18 7.5 18s3.332.405 4.5 1.253m0-13C13.168 5.405 14.828 5 16.5 5s3.332.405 4.5 1.253v13C19.832 18.405 18.172 18 16.5 18s-3.332.405-4.5 1.253" /></svg>',
-                ],
-                'mergeticket' => [
-                    'title' => __('Merge Tickets', 'js-support-ticket'),
-                    'description' => __('Enables agents to merge two tickets of the same user into one instead of dealing with the same issue on many tickets.', 'js-support-ticket'),
-                    'plugin_file' => 'js-support-ticket-mergeticket/js-support-ticket-mergeticket.php',
-                    'url' => 'https://jshelpdesk.com/product/merge-ticket/',
-                    'icon_bg' => 'js-hlpdsk-addon-icon-bg-pink',
-                    'icon_svg' => '<svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" /></svg>',
-                ],
-                'overdue' => [
-                    'title' => __('Overdue', 'js-support-ticket'),
-                    'description' => __('Defines rules or set specific intervals of time to make ticket auto overdue.The ticket can overdue by type or overdue by Cronjob.', 'js-support-ticket'),
-                    'plugin_file' => 'js-support-ticket-overdue/js-support-ticket-overdue.php',
-                    'url' => 'https://jshelpdesk.com/product/overdue/',
-                    'icon_bg' => 'js-hlpdsk-addon-icon-bg-teal',
-                    'icon_svg' => '<svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>',
-                ],
-                'smtp' => [
-                    'title' => __('SMTP', 'js-support-ticket'),
-                    'description' => __('SMTP allows you to use a custom mail server to send emails from JS Help Desk.', 'js-support-ticket'),
-                    'plugin_file' => 'js-support-ticket-smtp/js-support-ticket-smtp.php',
-                    'url' => 'https://jshelpdesk.com/product/smtp/',
-                    'icon_bg' => 'js-hlpdsk-addon-icon-bg-red',
-                    'icon_svg' => '<svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8m-18 8h18a2 2 0 002-2V6a2 2 0 00-2-2H3a2 2 0 00-2 2v8a2 2 0 002 2z" /></svg>',
-                ],
-                'emailpiping' => [
-                    'title' => __('Email Piping', 'js-support-ticket'),
-                    'description' => __('Enables users to reply to the tickets via email without the need to login to the support system first.', 'js-support-ticket'),
-                    'plugin_file' => 'js-support-ticket-emailpiping/js-support-ticket-emailpiping.php',
-                    'url' => 'https://jshelpdesk.com/product/email-piping/',
-                    'icon_bg' => 'js-hlpdsk-addon-icon-bg-blue',
-                    'icon_svg' => '<svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3 8l9 6 9-6v8a2 2 0 01-2 2H5a2 2 0 01-2-2V8z" /><path stroke-linecap="round" stroke-linejoin="round" d="M12 14v6m0 0l-2-2m2 2l2-2" /></svg>',
-                ],
-                'timetracking' => [
-                    'title' => __('Time Tracking', 'js-support-ticket'),
-                    'description' => __('Track the time spent on each ticket by each agent and each reply. Report the admin on how much time is spent on each ticket.', 'js-support-ticket'),
-                    'plugin_file' => 'js-support-ticket-timetracking/js-support-ticket-timetracking.php',
-                    'url' => 'https://jshelpdesk.com/product/time-tracking/',
-                    'icon_bg' => 'js-hlpdsk-addon-icon-bg-pink',
-                    'icon_svg' => '<svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>',
-                ],
-                'announcement' => [
-                    'title' => __('Announcements', 'js-support-ticket'),
-                    'description' => __('Make unlimited announcements associated with support system to get customer interaction.', 'js-support-ticket'),
-                    'plugin_file' => 'js-support-ticket-announcement/js-support-ticket-announcement.php',
-                    'url' => 'https://jshelpdesk.com/product/announcements/',
-                    'icon_bg' => 'js-hlpdsk-addon-icon-bg-orange',
-                    'icon_svg' => '<svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15 8.5V5a2 2 0 00-2-2l-7 4H3v6h3l7 4a2 2 0 002-2v-3.5M19 10v4m0-4a2 2 0 010 4" /></svg>',
-                ],
-                'notification' => [
-                    'title' => __('Desktop Notification', 'js-support-ticket'),
-                    'description' => __('The Desktop notifications will keep you up to date about anything happens on your support system.', 'js-support-ticket'),
-                    'plugin_file' => 'js-support-ticket-notification/js-support-ticket-notification.php',
-                    'url' => 'https://jshelpdesk.com/product/desktop-notification/',
-                    'icon_bg' => 'js-hlpdsk-addon-icon-bg-pink',
-                    'icon_svg' => '<svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V4a2 2 0 10-4 0v1.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" /></svg>',
-                ],
-                'download' => [
-                    'title' => __('Downloads', 'js-support-ticket'),
-                    'description' => __('Create downloads to ensure the user to get downloads from downloads.', 'js-support-ticket'),
-                    'plugin_file' => 'js-support-ticket-download/js-support-ticket-download.php',
-                    'url' => 'https://jshelpdesk.com/product/downloads/',
-                    'icon_bg' => 'js-hlpdsk-addon-icon-bg-red',
-                    'icon_svg' => '<svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3 7h5l2 2h11a1 1 0 011 1v8a2 2 0 01-2 2H5a2 2 0 01-2-2V7z" /><path stroke-linecap="round" stroke-linejoin="round" d="M12 10v6m0 0l-3-3m3 3l3-3" /></svg>',
-                ],
-                'faq' => [
-                    'title' => __("FAQs", 'js-support-ticket'),
-                    'description' => __('Tired of getting tickets about the same problems? Add FAQs to drastically reduce the number of common questions from users.', 'js-support-ticket'),
-                    'plugin_file' => 'js-support-ticket-faq/js-support-ticket-faq.php',
-                    'url' => 'https://jshelpdesk.com/product/faq/',
-                    'icon_bg' => 'js-hlpdsk-addon-icon-bg-orange',
-                    'icon_svg' => '<svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M7 8h10a2 2 0 012 2v7a2 2 0 01-2 2H9l-4 3v-3H5a2 2 0 01-2-2v-7a2 2 0 012-2z" /><path stroke-linecap="round" stroke-linejoin="round" d="M12 11.5a1.5 1.5 0 113 0c0 .75-.5 1.5-1.5 1.5v1m0 2h.01" /></svg>',
-                ],
-                'mail' => [
-                    'title' => __('Internal Mail', 'js-support-ticket'),
-                    'description' => __('Use internal email to send emails to one agent to another agent with in support ticket.', 'js-support-ticket'),
-                    'plugin_file' => 'js-support-ticket-mail/js-support-ticket-mail.php',
-                    'url' => 'https://jshelpdesk.com/product/internal-mail/',
-                    'icon_bg' => 'js-hlpdsk-addon-icon-bg-pink',
-                    'icon_svg' => '<svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3 8l9 6 9-6M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /><path stroke-linecap="round" stroke-linejoin="round" d="M15 12h4m0 0l-2-2m2 2l-2 2" /></svg>',
-                ],
-                'widgets' => [
-                    'title' => __('Front-End Widgets', 'js-support-ticket'),
-                    'description' => __('Widgets in WordPress allow you to add content and features in the widgetized areas of your theme.', 'js-support-ticket'),
-                    'plugin_file' => 'js-support-ticket-widgets/js-support-ticket-widgets.php',
-                    'url' => 'https://jshelpdesk.com/product/widget/',
-                    'icon_bg' => 'js-hlpdsk-addon-icon-bg-teal',
-                    'icon_svg' => '<svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1" /><rect x="14" y="3" width="7" height="7" rx="1" /><rect x="3" y="14" width="7" height="7" rx="1" /><rect x="14" y="14" width="7" height="7" rx="1" /></svg>',
-                ],
-                'woocommerce' => [
-                    'title' => __('WooCommerce', 'js-support-ticket'),
-                    'description' => __('JS Help Desk WooCommerce provides the much-needed bridge between your WooCommerce store and the JS Help Desk.', 'js-support-ticket'),
-                    'plugin_file' => 'js-support-ticket-woocommerce/js-support-ticket-woocommerce.php',
-                    'url' => 'https://jshelpdesk.com/product/woocommerce/',
-                    'icon_bg' => 'js-hlpdsk-addon-icon-bg-red',
-                    'icon_svg' => '<svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1" /><circle cx="20" cy="21" r="1" /><path stroke-linecap="round" stroke-linejoin="round" d="M1 1h4l2.68 13.39a2 2 0 002 1.61h9.72a2 2 0 002-1.61L23 6H6" /></svg>',
-                ],
-                'privatecredentials' => [
-                    'title' => __('Private Credentials', 'js-support-ticket'),
-                    'description' => __('Collect your customers private data, sensitive information from credit card to health information, and store them encrypted.', 'js-support-ticket'),
-                    'plugin_file' => 'js-support-ticket-privatecredentials/js-support-ticket-privatecredentials.php',
-                    'url' => 'https://jshelpdesk.com/product/private-credentials/',
-                    'icon_bg' => 'js-hlpdsk-addon-icon-bg-orange',
-                    'icon_svg' => '<svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 11c-1.657 0-3 1.343-3 3v4h6v-4c0-1.657-1.343-3-3-3z" /><path stroke-linecap="round" stroke-linejoin="round" d="M7 11V7a5 5 0 0110 0v4" /><rect x="5" y="11" width="14" height="10" rx="2" ry="2" /></svg>',
-                ],
-                'envatovalidation' => [
-                    'title' => __('Envato Validation', 'js-support-ticket'),
-                    'description' => __('Without a valid Envato license, clients will not be able to open a new ticket.', 'js-support-ticket'),
-                    'plugin_file' => 'js-support-ticket-envatovalidation/js-support-ticket-envatovalidation.php',
-                    'url' => 'https://jshelpdesk.com/product/envato/',
-                    'icon_bg' => 'js-hlpdsk-addon-icon-bg-blue',
-                    'icon_svg' => '<svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4" /><circle cx="12" cy="12" r="9" /></svg>',
-                ],
-                'mailchimp' => [
-                    'title' => __('Mailchimp', 'js-support-ticket'),
-                    'description' => __('Adds the option to the registration form for prompting new users to subscribe to your email list.', 'js-support-ticket'),
-                    'plugin_file' => 'js-support-ticket-mailchimp/js-support-ticket-mailchimp.php',
-                    'url' => 'https://jshelpdesk.com/product/mail-chimp/',
-                    'icon_bg' => 'js-hlpdsk-addon-icon-bg-pink',
-                    'icon_svg' => '<svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3 8l9 6 9-6M4 6h16a2 2 0 012 2v10a2 2 0 01-2 2H4a2 2 0 01-2-2V8a2 2 0 012-2z" /><path stroke-linecap="round" stroke-linejoin="round" d="M7 20l-2-2m12 2l2-2" /></svg>',
-                ],
-                'paidsupport' => [
-                    'title' => __('Paid Support', 'js-support-ticket'),
-                    'description' => __('Paid Support is the easiest way to integrate and manage payments for your tickets.', 'js-support-ticket'),
-                    'plugin_file' => 'js-support-ticket-paidsupport/js-support-ticket-paidsupport.php',
-                    'url' => 'https://jshelpdesk.com/product/paid-support/',
-                    'icon_bg' => 'js-hlpdsk-addon-icon-bg-teal',
-                    'icon_svg' => '<svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" /><path stroke-linecap="round" stroke-linejoin="round" d="M12 8v8m0 0c1.5 0 2.5-.5 2.5-1.5S13.5 13 12 13m0 3c-1.5 0-2.5-.5-2.5-1.5S10.5 13 12 13" /></svg>',
-                ],
-                'easydigitaldownloads' => [
-                    'title' => __('Easy Digital Downloads', 'js-support-ticket'),
-                    'description' => __('EDD offers customers to open new tickets just one click from their EDD account.', 'js-support-ticket'),
-                    'plugin_file' => 'js-support-ticket-easydigitaldownloads/js-support-ticket-easydigitaldownloads.php',
-                    'url' => 'https://jshelpdesk.com/product/easy-digital-download/',
-                    'icon_bg' => 'js-hlpdsk-addon-icon-bg-red',
-                    'icon_svg' => '<svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 12v6m0 0l-3-3m3 3l3-3m4-2V7a2 2 0 00-2-2h-4l-2-2H8a2 2 0 00-2 2v12a2 2 0 002 2h8" /></svg>',
-                ],
-                'multilanguageemailtemplates' => [
-                    'title' => __('Multi Language Email Templates', 'js-support-ticket'),
-                    'description' => __('It allows to create language-based email templates for all JS Help Desk email templates.', 'js-support-ticket'),
-                    'plugin_file' => 'js-support-ticket-multilanguageemailtemplates/js-support-ticket-multilanguageemailtemplates.php',
-                    'url' => 'https://jshelpdesk.com/product/multi-language-email-templates',
-                    'icon_bg' => 'js-hlpdsk-addon-icon-bg-orange',
-                    'icon_svg' => '<svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /><path stroke-linecap="round" stroke-linejoin="round" d="M7 4h4v3H7V4zm6 0h4v3h-4V4z" /></svg>',
-                ],
-                'emailcc' => [
-                    'title' => __('Email CC', 'js-support-ticket'),
-                    'description' => __('CC(Carbon Copy) - the people who should know about the information which is being shared and the people included are able to see who is there in the list.', 'js-support-ticket'),
-                    'plugin_file' => 'js-support-ticket-emailcc/js-support-ticket-emailcc.php',
-                    'url' => 'https://jshelpdesk.com/product/emailcc/',
-                    'icon_bg' => 'js-hlpdsk-addon-icon-bg-blue',
-                    'icon_svg' => '<svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /><circle cx="7" cy="19" r="2" /><circle cx="17" cy="19" r="2" /></svg>',
-                ],
-                'multiform' => [
-                    'title' => __('Multiform', 'js-support-ticket'),
-                    'description' => __('It allows user to add more than one form based on requirements.', 'js-support-ticket'),
-                    'plugin_file' => 'js-support-ticket-multiform/js-support-ticket-multiform.php',
-                    'url' => 'https://jshelpdesk.com/product/multi-forms/',
-                    'icon_bg' => 'js-hlpdsk-addon-icon-bg-pink',
-                    'icon_svg' => '<svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><rect x="4" y="4" width="12" height="12" rx="2" ry="2"/><rect x="8" y="8" width="12" height="12" rx="2" ry="2"/></svg>',
-                ],
-                'agentautoassign' => [
-                    'title' => __('Agent Auto Assign', 'js-support-ticket'),
-                    'description' => __('When auto assignment is enabled and a ticket is created, an appropriate agent is automatically assigned to the ticket and it is moved to the Assigned state.', 'js-support-ticket'),
-                    'plugin_file' => 'js-support-ticket-agentautoassign/js-support-ticket-agentautoassign.php',
-                    'url' => 'https://jshelpdesk.com/product/agentautoassign/',
-                    'icon_bg' => 'js-hlpdsk-addon-icon-bg-teal',
-                    'icon_svg' => '<svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="3"/><path d="M6 21v-2a6 6 0 0112 0v2"/><path d="M19.4 15a2 2 0 010-6"/><path d="M4.6 9a2 2 0 010 6"/></svg>',
-                ],
-                'instantresolve' => [
-                    'title' => __('Instant Resolve', 'js-support-ticket'),
-                    'description' => __('Suggests answers from your own knowledgebase while a customer is still typing, then replies to the tickets they do send. Every reply is written only from your content and is held for an agent whenever the answer is not there, so the AI never invents steps.', 'js-support-ticket'),
-                    'plugin_file' => 'js-support-ticket-instantresolve/js-support-ticket-instantresolve.php',
-                    'url' => 'https://jshelpdesk.com/product/instantresolve/',
-                    'icon_bg' => 'js-hlpdsk-addon-icon-bg-blue',
-                    'icon_svg' => '<svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" /></svg>',
-                ],
-            ];
+            /* What this desk could add, named once. (Roadmap 6.5-ECO-01)
+               This was a hand-written list of twenty-five add-ons with their own
+               copies of the names, the sentences and the shop links - all of them
+               products that were merged into the nine bundles, so the dashboard
+               went on offering things nobody can buy any more and describing the
+               things they can in nobody's words.
+
+               Read from JSSTbundle::catalogue() instead, which is the manifest
+               the Plugins screen, the Addons List and the status page also read.
+               The icon is the tile art that travels with each entry rather than
+               a hand-drawn SVG per row, because nine bundles with nine drawings
+               is nine more things to keep in step. */
+            $jsst_available_addons = [];
+            foreach (JSSTbundle::catalogue() as $jsst_file => $jsst_bundle) {
+                $jsst_available_addons[$jsst_bundle['slug']] = [
+                    'title'       => $jsst_bundle['title'],
+                    'description' => $jsst_bundle['description'],
+                    'plugin_file' => $jsst_bundle['plugin_file'],
+                    'url'         => $jsst_bundle['url'],
+                    'icon_bg'     => 'js-hlpdsk-addon-icon-bg-blue',
+                    'icon_img'    => JSST_PLUGIN_URL . 'includes/images/add-on-list/' . $jsst_bundle['image'],
+                ];
+            }
 
             // Filter out active addons to get a list of inactive ones. The
             // isMerged check is a backstop: the thirteen capabilities absorbed
@@ -995,7 +743,7 @@ JSSTmessage::getMessage();
                             <div class="bg-white p-5 rounded-xl shadow-lg flex flex-col items-start space-y-3 border border-gray-200">
                                 <div class="flex items-center space-x-3">
                                     <div class="bg-gray-100 p-3 rounded-lg">
-                                        <?php echo wp_kses( $jsst_addon['icon_svg'] , JSST_ALLOWED_TAGS); ?>
+                                        <img class="w-6 h-6" src="<?php echo esc_url($jsst_addon['icon_img']); ?>" alt="" />
                                     </div>
                                     <h4 class="font-bold text-gray-800">
                                         <?php echo esc_html($jsst_addon['title']); ?>
@@ -1011,7 +759,7 @@ JSSTmessage::getMessage();
                         <?php } ?>
                     </div>
                     <?php if (count($jsst_inactive_addons) > 6) { ?>
-                        <a href="?page=jssupportticket&jstlay=addonstatus" class="flex flex-col text-center w-full mt-4 bg-gray-100 text-gray-700 font-semibold py-2 px-4 rounded-lg hover:bg-gray-200 transition-colors"><?php echo esc_html__('View All Addons', 'js-support-ticket'); ?></a>
+                        <a href="?page=jssupportticket&jstlay=license" class="flex flex-col text-center w-full mt-4 bg-gray-100 text-gray-700 font-semibold py-2 px-4 rounded-lg hover:bg-gray-200 transition-colors"><?php echo esc_html__('View All Addons', 'js-support-ticket'); ?></a>
                     <?php } ?>
                 </section>
                 <?php

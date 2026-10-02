@@ -5,139 +5,92 @@
 $jsst_jssupportticket_js ="
     jQuery(document).ready(function ($) {
         $.validate();
-        jQuery('#termsandconditions_linktype').on('change', function() {
-            if(this.value == 1){
-                jQuery('.for-terms-condtions-linktype1').slideDown();
-                jQuery('.for-terms-condtions-linktype2').hide();
-            }else if(this.value == 2){
-                jQuery('.for-terms-condtions-linktype1').hide();
-                jQuery('.for-terms-condtions-linktype2').slideDown();
-            }else{
-                jQuery('.for-terms-condtions-linktype1').hide();
-                jQuery('.for-terms-condtions-linktype2').hide();
-            }
-        });";
-        if(isset(jssupportticket::$jsst_data[0]['userfield']->id)){
-            $jsst_jssupportticket_js .="
-            var intial_val = jQuery('#termsandconditions_linktype').val();
-            if(intial_val == 1){
-                jQuery('.for-terms-condtions-linktype1').slideDown();
-                jQuery('.for-terms-condtions-linktype2').hide();
-            }else if(intial_val == 2){
-                jQuery('.for-terms-condtions-linktype1').hide();
-                jQuery('.for-terms-condtions-linktype2').slideDown();
-            }else{
-                jQuery('.for-terms-condtions-linktype1').hide();
-                jQuery('.for-terms-condtions-linktype2').hide();
-            }";
+        function jsstGdprLinkType(value, animate) {
+            var show1 = (value == 1), show2 = (value == 2);
+            jQuery('.for-terms-condtions-linktype1')[show1 ? (animate ? 'slideDown' : 'show') : 'hide']();
+            jQuery('.for-terms-condtions-linktype2')[show2 ? (animate ? 'slideDown' : 'show') : 'hide']();
         }
-        $jsst_jssupportticket_js .="
+        jQuery('#termsandconditions_linktype').on('change', function() {
+            jsstGdprLinkType(this.value, true);
+        });
+        jsstGdprLinkType(jQuery('#termsandconditions_linktype').val(), false);
     });
 ";
-    wp_add_inline_script('js-support-ticket-main-js',$jsst_jssupportticket_js);
+wp_add_inline_script('js-support-ticket-main-js',$jsst_jssupportticket_js);
+
+$jsst_uf       = isset(jssupportticket::$jsst_data[0]['userfield']) ? jssupportticket::$jsst_data[0]['userfield'] : false;
+$jsst_heading  = !empty($jsst_uf->id) ? __('Edit GDPR Field', 'js-support-ticket') : __('Add GDPR Field', 'js-support-ticket');
+$jsst_nonce_id = isset($jsst_uf->id) ? $jsst_uf->id : '';
+$jsst_params   = (isset(jssupportticket::$jsst_data[0]['userfieldparams']) && is_array(jssupportticket::$jsst_data[0]['userfieldparams'])) ? jssupportticket::$jsst_data[0]['userfieldparams'] : array();
+$jsst_termsandconditions_text     = isset($jsst_params['termsandconditions_text']) ? $jsst_params['termsandconditions_text'] : '';
+$jsst_termsandconditions_linktype = isset($jsst_params['termsandconditions_linktype']) ? $jsst_params['termsandconditions_linktype'] : '';
+$jsst_termsandconditions_link     = isset($jsst_params['termsandconditions_link']) ? $jsst_params['termsandconditions_link'] : '';
+$jsst_termsandconditions_page     = isset($jsst_params['termsandconditions_page']) ? $jsst_params['termsandconditions_page'] : '';
+$jsst_linktype = array(
+    (object) array('id' => 1, 'text' => esc_html(__('Direct Link', 'js-support-ticket'))),
+    (object) array('id' => 2, 'text' => esc_html(__('WordPress Page', 'js-support-ticket'))),
+    (object) array('id' => 3, 'text' => esc_html(__('None', 'js-support-ticket'))));
 ?>
 <div id="jsstadmin-wrapper">
     <div id="jsstadmin-leftmenu">
         <?php  JSSTincluder::getClassesInclude('jsstadminsidemenu'); ?>
     </div>
     <div id="jsstadmin-data">
-        <div id="jsstadmin-wrapper-top">
-            <div id="jsstadmin-wrapper-top-left">
-                <div id="jsstadmin-breadcrunbs">
-                    <ul>
-                        <li><a href="?page=jssupportticket" title="<?php echo esc_attr(__('Dashboard','js-support-ticket')); ?>"><?php echo esc_html(__('Dashboard','js-support-ticket')); ?></a></li>
-                        <li><?php echo esc_html(__('Add GDPR Field','js-support-ticket')); ?></li>
-                    </ul>
-                </div>
-            </div>
-            <div id="jsstadmin-wrapper-top-right">
-                <div id="jsstadmin-config-btn">
-                    <a title="<?php echo esc_attr(__('Configuration','js-support-ticket')); ?>" href="<?php echo esc_url(admin_url("admin.php?page=configuration")); ?>">
-                        <img alt = "<?php echo esc_attr(__('Configuration','js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/config.png" />
-                    </a>
-                </div>
-                <div id="jsstadmin-config-btn" class="jssticketadmin-help-btn">
-                    <a href="<?php echo esc_url(admin_url("admin.php?page=jssupportticket&jstlay=help")); ?>" title="<?php echo esc_attr(__('Help','js-support-ticket')); ?>">
-                        <img alt = "<?php echo esc_attr(__('Help','js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/help.png" />
-                    </a>
-                </div>
-                <div id="jsstadmin-vers-txt">
-                    <?php echo esc_html(__("Version",'js-support-ticket')); ?>:
-                    <span class="jsstadmin-ver"><?php echo esc_html(JSSTincluder::getJSModel('configuration')->getConfigValue('versioncode')); ?></span>
-                </div>
-            </div>
-        </div>
-        <div id="jsstadmin-head">
-            <h1 class="jsstadmin-head-text">
-                <?php echo esc_html(__('Add GDPR Field', 'js-support-ticket')); ?>
-            </h1>
-        </div>
+        <?php JSSTlayout::adminPageHeader(array(
+            'title'  => $jsst_heading,
+            'crumbs' => array(array('text' => __('GDPR Fields', 'js-support-ticket'), 'url' => admin_url('admin.php?page=gdpr&jstlay=gdprfields'))),
+        )); ?>
         <div id="jsstadmin-data-wrp">
-            <?php $jsst_nonce_id = isset(jssupportticket::$jsst_data[0]['userfield']->id) ? jssupportticket::$jsst_data[0]['userfield']->id : '';?>
             <form class="jsstadmin-form" method="post" action="<?php echo esc_url(wp_nonce_url(admin_url("admin.php?page=gdpr&task=savegdprfield"),"save-gdprfield-".$jsst_nonce_id)); ?>">
-                <div class="js-form-wrapper">
-                    <div class="js-form-title"><?php echo esc_html(__('Field Title', 'js-support-ticket')); ?></div>
-                    <div class="js-form-value"><?php echo wp_kses(JSSTformfield::text('fieldtitle', isset(jssupportticket::$jsst_data[0]['userfield']->fieldtitle) ? jssupportticket::$jsst_data[0]['userfield']->fieldtitle : '', array('class' => 'inputbox js-form-input-field')), JSST_ALLOWED_TAGS) ?></div>
-                </div>
-                <?php
-                $jsst_termsandconditions_text = '';
-                $jsst_termsandconditions_linktype = '';
-                $jsst_termsandconditions_link = '';
-                $jsst_termsandconditions_page = '';
-                if( isset(jssupportticket::$jsst_data[0]['userfieldparams']) && jssupportticket::$jsst_data[0]['userfieldparams'] != '' && is_array(jssupportticket::$jsst_data[0]['userfieldparams']) && !empty(jssupportticket::$jsst_data[0]['userfieldparams'])){
-                    $jsst_termsandconditions_text = isset(jssupportticket::$jsst_data[0]['userfieldparams']['termsandconditions_text']) ? jssupportticket::$jsst_data[0]['userfieldparams']['termsandconditions_text'] :'' ;
-                    $jsst_termsandconditions_linktype = isset(jssupportticket::$jsst_data[0]['userfieldparams']['termsandconditions_linktype']) ? jssupportticket::$jsst_data[0]['userfieldparams']['termsandconditions_linktype'] :'' ;
-                    $jsst_termsandconditions_link = isset(jssupportticket::$jsst_data[0]['userfieldparams']['termsandconditions_link']) ? jssupportticket::$jsst_data[0]['userfieldparams']['termsandconditions_link'] :'' ;
-                    $jsst_termsandconditions_page = isset(jssupportticket::$jsst_data[0]['userfieldparams']['termsandconditions_page']) ? jssupportticket::$jsst_data[0]['userfieldparams']['termsandconditions_page'] :'' ;
-                } ?>
-                <div class="js-form-wrapper">
-                    <div class="js-form-title"><?php echo esc_html(__('Field Text', 'js-support-ticket')); ?>&nbsp;<span style="color: red;" >*</span></div>
-                    <div class="js-form-value"><?php echo wp_kses(JSSTformfield::text('termsandconditions_text', $jsst_termsandconditions_text, array('class' => 'inputbox js-form-input-field', 'data-validation' => 'required')), JSST_ALLOWED_TAGS) ?></div>
-                    <div class="js-form-desc">
-                        <?php echo esc_html(__("e.g ' I have read and agree to the [link] Terms and Conditions[/link]. ' The text between [link] and [/link] will be linked to provided url or wordpress page.", 'js-support-ticket')); ?>
+                <div class="jsst-formpanel">
+                    <div class="jsst-formbody">
+                        <fieldset class="jsst-fieldset">
+                            <legend class="jsst-fieldset-legend"><?php echo esc_html(__('The consent box', 'js-support-ticket')); ?></legend>
+                            <div class="jsst-formgrid">
+                                <div class="jsst-frow jsst-frow-md">
+                                    <label class="jsst-flabel" for="fieldtitle"><?php echo esc_html(__('Field Title', 'js-support-ticket')); ?></label>
+                                    <div class="jsst-fval"><?php echo wp_kses(JSSTformfield::text('fieldtitle', isset($jsst_uf->fieldtitle) ? $jsst_uf->fieldtitle : ''), JSST_ALLOWED_TAGS) ?></div>
+                                </div>
+                                <div class="jsst-frow jsst-frow-full">
+                                    <label class="jsst-flabel" for="termsandconditions_text"><?php echo esc_html(__('Field Text', 'js-support-ticket')); ?> <span class="jsst-req">*</span></label>
+                                    <div class="jsst-fval"><?php echo wp_kses(JSSTformfield::text('termsandconditions_text', $jsst_termsandconditions_text, array('data-validation' => 'required')), JSST_ALLOWED_TAGS) ?></div>
+                                    <p class="jsst-fhelp"><?php echo esc_html(__("e.g ' I have read and agree to the [link] Terms and Conditions[/link]. ' The text between [link] and [/link] will be linked to provided url or wordpress page.", 'js-support-ticket')); ?></p>
+                                </div>
+                            </div>
+                        </fieldset>
+                        <fieldset class="jsst-fieldset">
+                            <legend class="jsst-fieldset-legend"><?php echo esc_html(__('What it links to', 'js-support-ticket')); ?></legend>
+                            <div class="jsst-formgrid">
+                                <div class="jsst-frow jsst-frow-sm">
+                                    <label class="jsst-flabel" for="termsandconditions_linktype"><?php echo esc_html(__('Link Type', 'js-support-ticket')); ?></label>
+                                    <div class="jsst-fval"><?php echo wp_kses(JSSTformfield::select('termsandconditions_linktype', $jsst_linktype, $jsst_termsandconditions_linktype, esc_html(__('Select Link Type', 'js-support-ticket'))), JSST_ALLOWED_TAGS); ?></div>
+                                </div>
+                                <div class="jsst-frow jsst-frow-md for-terms-condtions-linktype2" style="display: none;">
+                                    <label class="jsst-flabel" for="termsandconditions_page"><?php echo esc_html(__('Link Page', 'js-support-ticket')); ?></label>
+                                    <div class="jsst-fval"><?php echo wp_kses(JSSTformfield::select('termsandconditions_page', JSSTincluder::getJSModel('configuration')->getPageList(), $jsst_termsandconditions_page, esc_html(__('Select Page', 'js-support-ticket'))), JSST_ALLOWED_TAGS); ?></div>
+                                </div>
+                                <div class="jsst-frow jsst-frow-lg for-terms-condtions-linktype1" style="display: none;">
+                                    <label class="jsst-flabel" for="termsandconditions_link"><?php echo esc_html(__('URL', 'js-support-ticket')); ?></label>
+                                    <div class="jsst-fval"><?php echo wp_kses(JSSTformfield::text('termsandconditions_link', $jsst_termsandconditions_link, array('placeholder' => 'https://')), JSST_ALLOWED_TAGS) ?></div>
+                                </div>
+                            </div>
+                        </fieldset>
                     </div>
-                </div>
-                <?php
-                $jsst_yesno = array(
-                    (object) array('id' => 1, 'text' => esc_html(__('Yes', 'js-support-ticket'))),
-                    (object) array('id' => 0, 'text' => esc_html(__('No', 'js-support-ticket'))));
-                /*
-                ?>
-                <div class="js-form-wrapper">
-                    <div class="js-form-title"><?php echo esc_html(__('Required', 'js-support-ticket')); ?>&nbsp;<span style="color: red;" >*</span> </div>
-                    <div class="js-form-value"><?php echo wp_kses(JSSTformfield::select('required', $jsst_yesno, isset(jssupportticket::$jsst_data[0]['userfield']->required) ? jssupportticket::$jsst_data[0]['userfield']->required : '', esc_html(__('Select Required', 'js-support-ticket')), array('class' => 'inputbox js-form-select-field')), JSST_ALLOWED_TAGS); ?></div>
-                </div>
-                <?php
-                */
-                $jsst_linktype = array(
-                    (object) array('id' => 1, 'text' => esc_html(__('Direct Link', 'js-support-ticket'))),
-                    (object) array('id' => 2, 'text' => esc_html(__('WordPress Page', 'js-support-ticket'))),
-                    (object) array('id' => 3, 'text' => esc_html(__('None', 'js-support-ticket'))));
-                ?>
-                <div class="js-form-wrapper">
-                    <div class="js-form-title"><?php echo esc_html(__('Link Type', 'js-support-ticket')); ?> </div>
-                    <div class="js-form-value"><?php echo wp_kses(JSSTformfield::select('termsandconditions_linktype', $jsst_linktype, $jsst_termsandconditions_linktype, esc_html(__('Select Link Type', 'js-support-ticket')), array('class' => 'inputbox js-form-select-field')), JSST_ALLOWED_TAGS); ?></div>
-                </div>
-                <div class="js-form-wrapper for-terms-condtions-linktype2" style="display: none;">
-                    <div class="js-form-title"><?php echo esc_html(__('Link Page', 'js-support-ticket')); ?></div>
-                    <div class="js-form-value"><?php echo wp_kses(JSSTformfield::select('termsandconditions_page', JSSTincluder::getJSModel('configuration')->getPageList(), $jsst_termsandconditions_page, esc_html(__('Select Page', 'js-support-ticket')), array('class' => 'inputbox js-form-select-field')), JSST_ALLOWED_TAGS); ?></div>
-                </div>
-                <div class="js-form-wrapper for-terms-condtions-linktype1" style="display: none;">
-                    <div class="js-form-title"><?php echo esc_html(__('URL', 'js-support-ticket')); ?></div>
-                    <div class="js-form-value"><?php echo wp_kses(JSSTformfield::text('termsandconditions_link', $jsst_termsandconditions_link, array('class' => 'inputbox js-form-input-field')), JSST_ALLOWED_TAGS) ?></div>
-                </div>
-                <?php echo wp_kses(JSSTformfield::hidden('id', isset(jssupportticket::$jsst_data[0]['userfield']->id) ? jssupportticket::$jsst_data[0]['userfield']->id : ''), JSST_ALLOWED_TAGS); ?>
-                <?php echo wp_kses(JSSTformfield::hidden('created', isset(jssupportticket::$jsst_data[0]['userfield']->created) ? jssupportticket::$jsst_data[0]['userfield']->created : ''), JSST_ALLOWED_TAGS); ?>
-                <?php echo wp_kses(JSSTformfield::hidden('ordering', isset(jssupportticket::$jsst_data[0]['userfield']->ordering) ? jssupportticket::$jsst_data[0]['userfield']->ordering : ''), JSST_ALLOWED_TAGS); ?>
-                <?php echo wp_kses(JSSTformfield::hidden('userfieldtype', 'termsandconditions'), JSST_ALLOWED_TAGS); ?>
-                <?php echo wp_kses(JSSTformfield::hidden('form_request', 'jssupportticket'), JSST_ALLOWED_TAGS); ?>
-                <?php echo wp_kses(JSSTformfield::hidden('isuserfield', 1), JSST_ALLOWED_TAGS); ?>
-                <?php echo wp_kses(JSSTformfield::hidden('fieldfor', 3), JSST_ALLOWED_TAGS); ?>
-                <?php echo wp_kses(JSSTformfield::hidden('published', 1), JSST_ALLOWED_TAGS); ?>
-                <?php echo wp_kses(JSSTformfield::hidden('required', 1), JSST_ALLOWED_TAGS); ?>
-                <?php echo wp_kses(JSSTformfield::hidden('isvisitorpublished', 1), JSST_ALLOWED_TAGS); ?>
-                <div class="js-form-button">
-                    <?php echo wp_kses(JSSTformfield::submitbutton('save', esc_html(__('Save', 'js-support-ticket')), array('class' => 'button js-form-save')), JSST_ALLOWED_TAGS); ?>
+                    <?php echo wp_kses(JSSTformfield::hidden('id', isset($jsst_uf->id) ? $jsst_uf->id : ''), JSST_ALLOWED_TAGS); ?>
+                    <?php echo wp_kses(JSSTformfield::hidden('created', isset($jsst_uf->created) ? $jsst_uf->created : ''), JSST_ALLOWED_TAGS); ?>
+                    <?php echo wp_kses(JSSTformfield::hidden('ordering', isset($jsst_uf->ordering) ? $jsst_uf->ordering : ''), JSST_ALLOWED_TAGS); ?>
+                    <?php echo wp_kses(JSSTformfield::hidden('userfieldtype', 'termsandconditions'), JSST_ALLOWED_TAGS); ?>
+                    <?php echo wp_kses(JSSTformfield::hidden('form_request', 'jssupportticket'), JSST_ALLOWED_TAGS); ?>
+                    <?php echo wp_kses(JSSTformfield::hidden('isuserfield', 1), JSST_ALLOWED_TAGS); ?>
+                    <?php echo wp_kses(JSSTformfield::hidden('fieldfor', 3), JSST_ALLOWED_TAGS); ?>
+                    <?php echo wp_kses(JSSTformfield::hidden('published', 1), JSST_ALLOWED_TAGS); ?>
+                    <?php echo wp_kses(JSSTformfield::hidden('required', 1), JSST_ALLOWED_TAGS); ?>
+                    <?php echo wp_kses(JSSTformfield::hidden('isvisitorpublished', 1), JSST_ALLOWED_TAGS); ?>
+                    <div class="jsst-formfoot">
+                        <span class="jsst-formfoot-note"><?php echo esc_html(__('Required fields are marked', 'js-support-ticket')); ?> <span class="jsst-req" aria-hidden="true">*</span></span>
+                        <a class="jsst-btn" href="<?php echo esc_url(admin_url('admin.php?page=gdpr&jstlay=gdprfields')); ?>"><?php echo esc_html(__('Cancel', 'js-support-ticket')); ?></a>
+                        <?php echo wp_kses(JSSTformfield::submitbutton('save', esc_html(__('Save', 'js-support-ticket')), array('class' => 'jsst-btn jsst-btn-primary')), JSST_ALLOWED_TAGS); ?>
+                    </div>
                 </div>
             </form>
         </div>

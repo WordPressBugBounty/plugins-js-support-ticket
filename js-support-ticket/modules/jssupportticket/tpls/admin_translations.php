@@ -1,170 +1,195 @@
 <?php
-   if(!defined('ABSPATH'))
-    die('Restricted Access');
+if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
-/* Note
-* WP auto translate it from it file, no need to add js-support-ticket as text domain
-*/
+/**
+ * Translations: which languages this help desk is installed in, and the files
+ * to download. The installing itself happens without anyone opening this
+ * screen (JSSTtranslations). (1 Oct 2026)
+ */
+$jsst_tr = isset(jssupportticket::$jsst_data['translations']) ? jssupportticket::$jsst_data['translations'] : JSSTtranslations::rows();
+$jsst_site = array_filter($jsst_tr['rows'], function ($jsst_r) { return $jsst_r['site']; });
+$jsst_offered = array_filter($jsst_tr['rows'], function ($jsst_r) { return !empty($jsst_r['entry']) && $jsst_r['entry']['locale'] === $jsst_r['locale']; });
+$jsst_result = isset($_GET['jsst_tr']) ? sanitize_key(wp_unslash($_GET['jsst_tr'])) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- the outcome of a nonce-checked action, only shown
+$jsst_date = function ($jsst_version) {
+    $jsst_t = strtotime((string) $jsst_version);
+    return $jsst_t ? wp_date(get_option('date_format'), $jsst_t) : (string) $jsst_version;
+};
 ?>
-<div id="jssupportticketadmin-wrapper">
-    <?php JSSTmessage::getMessage(); ?>
-
 <div id="jsstadmin-wrapper">
     <div id="jsstadmin-leftmenu">
-        <?php  JSSTincluder::getClassesInclude('jsstadminsidemenu'); ?>
+        <?php JSSTincluder::getClassesInclude('jsstadminsidemenu'); ?>
     </div>
     <div id="jsstadmin-data">
-        <div id="jsstadmin-wrapper-top">
-            <div id="jsstadmin-wrapper-top-left">
-                <div id="jsstadmin-breadcrunbs">
-                    <ul>
-                        <li><a href="?page=jssupportticket" title="<?php echo esc_attr(__('Dashboard','js-support-ticket')); ?>"><?php echo esc_html(__('Dashboard','js-support-ticket')); ?></a></li>
-                        <li><?php echo esc_html(__('Translations','js-support-ticket')); // (wp auto translate it) ?></li>
-                    </ul>
-                </div>
+        <?php JSSTlayout::adminPageHeader(array(
+            'title' => __('Translations', 'js-support-ticket'),
+        )); ?>
+        <div id="jsstadmin-data-wrp">
+
+            <?php
+            $jsst_trl = isset($_GET['jsst_trl']) ? sanitize_text_field(wp_unslash($_GET['jsst_trl'])) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- which language the nonce-checked action installed, only shown
+            if (('added' === $jsst_result || 'addednowp' === $jsst_result) && '' !== $jsst_trl) { ?>
+                <div class="notice notice-success inline"><p><?php
+                    echo esc_html(sprintf(
+                        /* translators: %s: a language name, e.g. Français */
+                        __('%s is installed.', 'js-support-ticket'),
+                        JSSTtranslations::languageName($jsst_trl, JSSTtranslations::entryFor($jsst_trl, get_site_transient(JSSTtranslations::T_MANIFEST)), true)
+                    )); ?>
+                    <?php if ('added' === $jsst_result) { ?>
+                        <a class="jsst-btn" href="<?php echo esc_url(JSSTtranslations::actionUrl('useme', $jsst_trl)); ?>"><?php echo esc_html(__('Use it for me', 'js-support-ticket')); ?></a>
+                        <a class="jsst-btn" href="<?php echo esc_url(admin_url('options-general.php#WPLANG')); ?>"><?php echo esc_html(__('Use it for the whole site', 'js-support-ticket')); ?></a>
+                    <?php } else { ?>
+                        <?php echo esc_html(__('WordPress itself has no language pack for it, so it cannot be chosen as the site language yet.', 'js-support-ticket')); ?>
+                    <?php } ?></p></div>
+            <?php } elseif ('useme' === $jsst_result) { ?>
+                <div class="notice notice-success inline"><p><?php echo esc_html(__('Your own language is changed. The rest of the site keeps its language.', 'js-support-ticket')); ?></p></div>
+            <?php } elseif ('done' === $jsst_result) { ?>
+                <div class="notice notice-success inline"><p><?php echo esc_html(__('Translations are up to date.', 'js-support-ticket')); ?></p></div>
+            <?php } elseif ('failed' === $jsst_result) { ?>
+                <div class="notice notice-error inline"><p><?php echo esc_html(__('Not every translation could be installed. The reason is shown beside it below.', 'js-support-ticket')); ?></p></div>
+            <?php } ?>
+
+            <?php if ('' !== $jsst_tr['listerror']) { ?>
+                <div class="notice notice-warning inline"><p><?php echo esc_html($jsst_tr['listerror']); ?></p></div>
+            <?php } ?>
+            <?php if (!JSSTtranslations::canWrite()) { ?>
+                <div class="notice notice-warning inline"><p><?php echo esc_html(__('This site does not allow plugins to install language files (DISALLOW_FILE_MODS). Download the files below and upload them to wp-content/languages/plugins/.', 'js-support-ticket')); ?></p></div>
+            <?php } elseif (!JSSTtranslations::automatic()) { ?>
+                <div class="notice notice-info inline"><p><?php echo esc_html(__('Automatic installation is switched off on this site (JSST_TRANSLATIONS_AUTO). Use Update now to install a language.', 'js-support-ticket')); ?></p></div>
+            <?php } ?>
+
+            <div class="jsst-status-card <?php echo esc_attr(empty($jsst_site) || !in_array('failed', wp_list_pluck($jsst_site, 'status'), true) ? 'jsst-status-ok' : 'jsst-status-warn'); ?>">
+                <div class="jsst-status-title"><?php echo esc_html(__('This site\'s languages', 'js-support-ticket')); ?></div>
+                <div class="jsst-status-note"><?php echo esc_html(__('The help desk installs the translation for your site\'s language, and for every language WordPress has installed for your users, by itself - when it is installed or updated, when the site language changes, and once a day for improvements.', 'js-support-ticket')); ?></div>
+                <?php if (empty($jsst_site)) { ?>
+                    <div class="jsst-status-note"><?php echo esc_html(__('This site is in English, so no translation is needed. To use another language, change the Site Language under Settings > General.', 'js-support-ticket')); ?></div>
+                <?php } else { ?>
+                    <table class="jsst-status-table">
+                        <thead><tr>
+                            <th><?php echo esc_html(__('Language', 'js-support-ticket')); ?></th>
+                            <th><?php echo esc_html(__('Status', 'js-support-ticket')); ?></th>
+                            <th><?php echo esc_html(__('Translation', 'js-support-ticket')); ?></th>
+                            <th></th>
+                        </tr></thead>
+                        <tbody>
+                        <?php foreach ($jsst_site as $jsst_r) {
+                            $jsst_e = $jsst_r['entry'];
+                            ?>
+                            <tr>
+                                <td><?php echo esc_html($jsst_r['name']); ?> <span class="jsst-status-path"><?php echo esc_html($jsst_r['locale']); ?></span></td>
+                                <td><?php
+                                    switch ($jsst_r['status']) {
+                                        case 'current':
+                                            echo '<span class="jsst-status-flag jsst-status-flag-ok">' . esc_html(__('Installed', 'js-support-ticket')) . '</span>';
+                                            break;
+                                        case 'update':
+                                            echo '<span class="jsst-status-flag jsst-status-flag-warn">' . esc_html(__('Update available', 'js-support-ticket')) . '</span>';
+                                            break;
+                                        case 'missing':
+                                            echo '<span class="jsst-status-flag jsst-status-flag-warn">' . esc_html(__('Not installed yet', 'js-support-ticket')) . '</span>';
+                                            break;
+                                        case 'failed':
+                                            echo '<span class="jsst-status-flag jsst-status-flag-bad">' . esc_html(__('Could not be installed', 'js-support-ticket')) . '</span>';
+                                            break;
+                                        case 'own':
+                                            echo '<span class="jsst-status-flag jsst-status-flag-ok">' . esc_html(__('Your own file', 'js-support-ticket')) . '</span>';
+                                            break;
+                                        default:
+                                            echo '<span class="jsst-status-flag">' . esc_html(__('No translation yet', 'js-support-ticket')) . '</span>';
+                                    }
+                                    if ('' !== $jsst_r['error'] && 'current' !== $jsst_r['status']) {
+                                        echo '<div class="jsst-status-error">' . esc_html($jsst_r['error']) . '</div>';
+                                    } ?></td>
+                                <td><?php
+                                    if ($jsst_e) {
+                                        echo esc_html(sprintf(
+                                            /* translators: 1: a percentage, 2: a date */
+                                            __('%1$d%% translated, updated %2$s', 'js-support-ticket'),
+                                            $jsst_e['percent'],
+                                            $jsst_date($jsst_e['version'])
+                                        ));
+                                        if ($jsst_e['locale'] !== $jsst_r['locale']) {
+                                            echo '<div class="jsst-status-when">' . esc_html(sprintf(
+                                                /* translators: %s: a language name, e.g. French (France) */
+                                                __('Using the %s translation, the nearest there is.', 'js-support-ticket'),
+                                                JSSTtranslations::languageName($jsst_e['locale'], $jsst_e, true)
+                                            )) . '</div>';
+                                        }
+                                    } elseif ('own' === $jsst_r['status']) {
+                                        echo esc_html(__('A file someone added to wp-content/languages/plugins/. It is used as it is.', 'js-support-ticket'));
+                                    } else {
+                                        echo esc_html(__('Nobody has translated the help desk into this language yet.', 'js-support-ticket'));
+                                    } ?></td>
+                                <td class="jsst-tr-actions"><?php
+                                    if ($jsst_e && JSSTtranslations::canWrite() && 'current' !== $jsst_r['status']) { ?>
+                                        <a class="jsst-btn jsst-btn-primary" href="<?php echo esc_url(JSSTtranslations::actionUrl('install', $jsst_r['locale'])); ?>"><?php echo esc_html('missing' === $jsst_r['status'] || 'failed' === $jsst_r['status'] ? __('Install now', 'js-support-ticket') : __('Update now', 'js-support-ticket')); ?></a>
+                                    <?php } elseif (get_user_locale() === $jsst_r['locale']) { ?>
+                                        <span class="jsst-status-when"><?php echo esc_html(__('Your language', 'js-support-ticket')); ?></span>
+                                    <?php } elseif (in_array($jsst_r['locale'], get_available_languages(), true)) { ?>
+                                        <a class="jsst-btn" href="<?php echo esc_url(JSSTtranslations::actionUrl('useme', $jsst_r['locale'])); ?>"><?php echo esc_html(__('Use it for me', 'js-support-ticket')); ?></a>
+                                    <?php } ?></td>
+                            </tr>
+                        <?php } ?>
+                        </tbody>
+                    </table>
+                <?php } ?>
+                <p>
+                    <a class="jsst-btn" href="<?php echo esc_url(JSSTtranslations::actionUrl('sync')); ?>"><?php echo esc_html(__('Check for updates', 'js-support-ticket')); ?></a>
+                    <?php if ('en_US' !== get_user_locale()) { ?>
+                        <a class="jsst-btn" href="<?php echo esc_url(JSSTtranslations::actionUrl('useme', 'en_US')); ?>"><?php echo esc_html(__('Use English for me', 'js-support-ticket')); ?></a>
+                    <?php } ?>
+                    <?php if ($jsst_tr['checked']) { ?>
+                        <span class="jsst-status-when"><?php echo esc_html(sprintf(
+                            /* translators: %s: a date and time */
+                            __('Last checked %s', 'js-support-ticket'),
+                            wp_date(get_option('date_format') . ' ' . get_option('time_format'), $jsst_tr['checked'])
+                        )); ?></span>
+                    <?php } ?>
+                </p>
             </div>
-            <div id="jsstadmin-wrapper-top-right">
-                <div id="jsstadmin-config-btn">
-                    <a title="<?php echo esc_attr(__('Configuration','js-support-ticket')); ?>" href="<?php echo esc_url(admin_url("admin.php?page=configuration")); ?>">
-                        <img alt = "<?php echo esc_attr(__('Configuration','js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/config.png" />
-                    </a>
+
+            <?php if (!empty($jsst_offered)) { ?>
+                <div class="jsst-status-card">
+                    <div class="jsst-status-title"><?php echo esc_html(__('All translations', 'js-support-ticket')); ?></div>
+                    <div class="jsst-status-note"><?php echo esc_html(__('Install adds a language to this site - WordPress\'s own and the help desk\'s - so it can be chosen for the whole site or for one person. The files are for a site that cannot download by itself, or to change the wording: the .po file is the one you edit (with Poedit or Loco Translate), the .mo file is what WordPress reads. Both go in wp-content/languages/plugins/.', 'js-support-ticket')); ?></div>
+                    <table class="jsst-status-table">
+                        <thead><tr>
+                            <th><?php echo esc_html(__('Language', 'js-support-ticket')); ?></th>
+                            <th><?php echo esc_html(__('Translated', 'js-support-ticket')); ?></th>
+                            <th><?php echo esc_html(__('Updated', 'js-support-ticket')); ?></th>
+                            <th><?php echo esc_html(__('Files', 'js-support-ticket')); ?></th>
+                            <th></th>
+                        </tr></thead>
+                        <tbody>
+                        <?php foreach ($jsst_offered as $jsst_r) {
+                            $jsst_e = $jsst_r['entry']; ?>
+                            <tr>
+                                <td><?php echo esc_html($jsst_r['name']); ?> <span class="jsst-status-path"><?php echo esc_html($jsst_r['locale']); ?></span></td>
+                                <td><?php echo esc_html($jsst_e['percent'] . '%'); ?></td>
+                                <td><?php echo esc_html($jsst_date($jsst_e['version'])); ?></td>
+                                <td class="jsst-tr-files">
+                                    <?php if ('' !== $jsst_e['po']) { ?><a href="<?php echo esc_url($jsst_e['po']); ?>" download>.po</a><?php } ?>
+                                    <?php if ('' !== $jsst_e['mo']) { ?><a href="<?php echo esc_url($jsst_e['mo']); ?>" download>.mo</a><?php } ?>
+                                    <a href="<?php echo esc_url($jsst_e['package']); ?>">.zip</a>
+                                </td>
+                                <td class="jsst-tr-actions"><?php
+                                    if ($jsst_r['site'] && 'current' === $jsst_r['status']) { ?>
+                                        <span class="jsst-status-flag jsst-status-flag-ok"><?php echo esc_html(__('Installed', 'js-support-ticket')); ?></span>
+                                    <?php } elseif (JSSTtranslations::canWrite()) { ?>
+                                        <a class="jsst-btn jsst-btn-primary" href="<?php echo esc_url(JSSTtranslations::actionUrl($jsst_r['site'] ? 'install' : 'add', $jsst_r['locale'])); ?>"><?php echo esc_html($jsst_r['site'] && 'update' === $jsst_r['status'] ? __('Update now', 'js-support-ticket') : __('Install', 'js-support-ticket')); ?></a>
+                                    <?php } ?></td>
+                            </tr>
+                        <?php } ?>
+                        </tbody>
+                    </table>
                 </div>
-                <div id="jsstadmin-config-btn" class="jssticketadmin-help-btn">
-                    <a href="<?php echo esc_url(admin_url("admin.php?page=jssupportticket&jstlay=help")); ?>" title="<?php echo esc_attr(__('Help','js-support-ticket')); ?>">
-                        <img alt = "<?php echo esc_attr(__('Help','js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/help.png" />
-                    </a>
-                </div>
-                <div id="jsstadmin-vers-txt">
-                    <?php echo esc_html(__("Version",'js-support-ticket')); ?>:
-                    <span class="jsstadmin-ver"><?php echo esc_html(JSSTincluder::getJSModel('configuration')->getConfigValue('versioncode')); ?></span>
-                </div>
+            <?php } ?>
+
+            <div class="jsst-status-card">
+                <div class="jsst-status-title"><?php echo esc_html(__('Changing the wording', 'js-support-ticket')); ?></div>
+                <div class="jsst-status-note"><?php echo esc_html(__('A newer translation replaces the files in wp-content/languages/plugins/, so wording you change there is lost at the next update. To keep your own wording, save it with Loco Translate in its Custom location, which updates never touch, or switch automatic updates off by adding define(\'JSST_TRANSLATIONS_AUTO\', false); to wp-config.php.', 'js-support-ticket')); ?></div>
+                <div class="jsst-status-note"><?php echo esc_html(__('Your language is missing, or a word is wrong? Open a ticket at jshelpdesk.com - corrections go into the next update for everyone.', 'js-support-ticket')); ?></div>
             </div>
+
         </div>
-        <div id="jsstadmin-head">
-            <h1 class="jsstadmin-head-text"><?php echo esc_html(__('Translations','js-support-ticket')); ?></h1>
-            <a target="blank" href="https://www.youtube.com/watch?v=Nnu2iJQ99Tk" class="jsstadmin-add-link black-bg button js-cp-video-popup" title="<?php echo esc_attr(__('Watch Video', 'js-support-ticket')); ?>">
-                <img alt = "<?php echo esc_attr(__('arrow','js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/play-btn.png"/>
-                <?php echo esc_html(__('Watch Video','js-support-ticket')); ?>
-            </a>
-        </div>
-        <div id="jsstadmin-data-wrp" class="p0">
-            <div id="black_wrapper_translation"></div>
-            <div id="jstran_loading">
-                <img alt = "<?php echo esc_attr(__('spinning wheel','js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/spinning-wheel.gif" />
-            </div>
-
-            <div id="js-language-wrapper">
-                <div class="jstopheading"><?php echo esc_html(__('Get', "js-support-ticket")).' JS Help Desk '. esc_html(__('Translations','js-support-ticket')); ?></div>
-                <div id="gettranslation" class="gettranslation"><img alt = "<?php echo esc_attr(__('Download', "js-support-ticket")); ?>" style="width:18px; height:auto;" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/download-icon.png" /><?php echo esc_html(__('Get', 'js-support-ticket')).' '. esc_html(__('Translations','js-support-ticket')); ?></div>
-                <div id="js_ddl">
-                    <span class="title"><?php echo esc_html(__('Select','js-support-ticket')).' '. esc_html(__('Translation','js-support-ticket')); ?>:</span>
-                    <span class="combo" id="js_combo"></span>
-                    <span class="button" id="jsdownloadbutton"><img alt = "<?php echo esc_attr(__('Download', 'js-support-ticket')); ?>" style="width:14px; height:auto;" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/download-icon.png" /><?php echo esc_html(__('Download', 'js-support-ticket')); ?></span>
-                    <div id="jscodeinputbox" class="js-some-disc"></div>
-                    <div class="js-some-disc"><img alt = "<?php echo esc_attr(__('Info','js-support-ticket')); ?>" style="width:18px; height:auto;" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/info-icon.png" /><?php echo esc_html(__('When WordPress language change to fr, JS Help Desk language will auto change to fr','js-support-ticket')); ?></div>
-                </div>
-                <div id="js-emessage-wrapper">
-                    <img alt = "<?php echo esc_attr(__('c error','js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/c_error.png" />
-                    <div id="jslang_em_text"></div>
-                </div>
-                <div id="js-emessage-wrapper_ok">
-                    <img alt = "<?php echo esc_attr(__('saved','js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/saved.png" />
-                    <div id="jslang_em_text_ok"></div>
-                </div>
-            </div>
-            <div id="js-lang-toserver">
-                <div class="col"><a class="anc one" href="https://www.transifex.com/joom-sky/js-support-ticket" target="_blank" title="<?php echo esc_attr(__('Contribute In Translation','js-support-ticket')); ?>"><img alt = "<?php echo esc_attr(__('translate','js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/translation-icon.png" /><?php echo esc_html(__('Contribute In Translation','js-support-ticket')); ?></a></div>
-                <div class="col"><a class="anc two" href="http://www.joomsky.com/translations.html" target="_blank" title="<?php echo esc_attr(__('Manual Download','js-support-ticket')); ?>"><img alt = "<?php echo esc_attr(__('Manual Download','js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/manual-download.png" /><?php echo esc_html(__('Manual Download','js-support-ticket')); ?></a></div>
-            </div>
-        </div>
-</div>
-
-<?php
-$jsst_jssupportticket_js ="
-    var ajaxurl = '".esc_url(admin_url('admin-ajax.php'))."';
-    jQuery(document).ready(function(){
-        jQuery('#gettranslation').click(function(){
-            jsShowLoading();
-            jQuery.post(ajaxurl, {action: 'jsticket_ajax', jstmod: 'jssupportticket', task: 'getListTranslations', '_wpnonce':'".esc_attr(wp_create_nonce('get-list-translations'))."'}, function (data) {
-                if (data) {
-                    console.log(data);
-                    jsHideLoading();
-                    data = JSON.parse(data);
-                    if(data['error']){
-                        jQuery('#js-emessage-wrapper div').html(data['error']);
-                        jQuery('#js-emessage-wrapper').show();
-                    }else{
-                        jQuery('#js-emessage-wrapper').hide();
-                        jQuery('#gettranslation').hide();
-                        jQuery('div#js_ddl').show();
-                        jQuery('span#js_combo').html(jsstDecodeHTML(data['data']));
-                    }
-                }
-            });
-        });
-
-        jQuery(document).on('change', 'select#translations' ,function() {
-            var lang_name = jQuery( this ).val();
-            if(lang_name != ''){
-                jQuery('#js-emessage-wrapper_ok').hide();
-                jsShowLoading();
-                jQuery.post(ajaxurl, {action: 'jsticket_ajax', jstmod: 'jssupportticket', task: 'validateandshowdownloadfilename',langname:lang_name, '_wpnonce':'".esc_attr(wp_create_nonce('validate-and-show-download-filename'))."'}, function (data) {
-                    console.log(data);
-                    if (data) {
-                        jsHideLoading();
-                        data = JSON.parse(data);
-                        if(data['error']){
-                            jQuery('#js-emessage-wrapper div').html(data['error']);
-                            jQuery('#js-emessage-wrapper').show();
-                            jQuery('#jscodeinputbox').slideUp('400' , 'swing' , function(){
-                                jQuery('input#languagecode').val('');
-                            });
-                        }else{
-                            jQuery('#js-emessage-wrapper').hide();
-                            jQuery('#jscodeinputbox').html(data['path']+': '+jsstDecodeHTML(data['input']));
-                            jQuery('#jscodeinputbox').slideDown();
-                        }
-                    }
-                });
-            }
-        });
-
-        jQuery('#jsdownloadbutton').click(function(){
-            jQuery('#js-emessage-wrapper_ok').hide();
-            var lang_name = jQuery('#translations').val();
-            var file_name = jQuery('#languagecode').val();
-            if(lang_name != '' && file_name != ''){
-                jsShowLoading();
-                jQuery.post(ajaxurl, {action: 'jsticket_ajax', jstmod: 'jssupportticket', task: 'getlanguagetranslation',langname:lang_name , filename: file_name,langname:lang_name , filename: file_name, '_wpnonce':'". esc_attr(wp_create_nonce('get-language-translation'))."'}, function (data) {
-                    if (data) {
-                        console.log(data);
-                        jsHideLoading();
-                        data = JSON.parse(data);
-                        if(data['error']){
-                            jQuery('#js-emessage-wrapper div').html(data['error']);
-                            jQuery('#js-emessage-wrapper').show();
-                        }else{
-                            jQuery('#js-emessage-wrapper').hide();
-                            jQuery('#js-emessage-wrapper_ok div').html(data['data']);
-                            jQuery('#js-emessage-wrapper_ok').slideDown();
-                        }
-                    }
-                });
-            }
-        });
-    });
-
-    function jsShowLoading(){
-        jQuery('div#black_wrapper_translation').show();
-        jQuery('div#jstran_loading').show();
-    }
-
-    function jsHideLoading(){
-        jQuery('div#black_wrapper_translation').hide();
-        jQuery('div#jstran_loading').hide();
-    }
-    ";
-    wp_add_inline_script('js-support-ticket-main-js',$jsst_jssupportticket_js);
-?>
-</div>
+    </div>
 </div>

@@ -50,7 +50,7 @@ class JSSTproductController {
         $jsst_id = JSSTrequest::getVar('id');
         $jsst_nonce = JSSTrequest::getVar('_wpnonce');
         if (! wp_verify_nonce( $jsst_nonce, 'save-product-'.$jsst_id) ) {
-            die( 'Security check Failed' );
+            die( esc_html__( 'Security check Failed', 'js-support-ticket' ) );
         }
         if (!current_user_can('manage_options')) { //only admin can change it.
             return false;
@@ -70,7 +70,7 @@ class JSSTproductController {
         $jsst_id = JSSTrequest::getVar('productid');
         $jsst_nonce = JSSTrequest::getVar('_wpnonce');
         if (! wp_verify_nonce( $jsst_nonce, 'delete-product-'.$jsst_id) ) {
-            die( 'Security check Failed' );
+            die( esc_html__( 'Security check Failed', 'js-support-ticket' ) );
         }
         JSSTincluder::getJSModel('product')->removeProduct( absint( $jsst_id ) );
         if (is_admin()) {
@@ -86,7 +86,7 @@ class JSSTproductController {
         $jsst_id = JSSTrequest::getVar('productid');
         $jsst_nonce = JSSTrequest::getVar('_wpnonce');
         if (! wp_verify_nonce( $jsst_nonce, 'change-status-'.$jsst_id) ) {
-            die( 'Security check Failed' );
+            die( esc_html__( 'Security check Failed', 'js-support-ticket' ) );
         }
         JSSTincluder::getJSModel('product')->changeStatus( absint( $jsst_id ) );
         $jsst_url = admin_url("admin.php?page=product&jstlay=products");
@@ -100,7 +100,7 @@ class JSSTproductController {
     static function ordering() {
         $jsst_nonce = JSSTrequest::getVar('_wpnonce');
         if (! wp_verify_nonce( $jsst_nonce, 'ordering') ) {
-            die( 'Security check Failed' );
+            die( esc_html__( 'Security check Failed', 'js-support-ticket' ) );
         }
         $jsst_id = JSSTrequest::getVar('productid');
         JSSTincluder::getJSModel('product')->setOrdering( absint( $jsst_id ) );

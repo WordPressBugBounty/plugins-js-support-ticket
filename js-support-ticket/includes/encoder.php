@@ -39,7 +39,21 @@ class JSSTEncoder {
             return $jsst_input;
         }
         if (function_exists('openssl_decrypt') && strpos($jsst_input, self::JSST_ENC_MARKER) === 0) {
-            $jsst_data = base64_decode(substr($jsst_input, strlen(self::JSST_ENC_MARKER)));
+            /* As a link carries it, not as it was made. These tokens travel in
+               query strings, unescaped (makeUrl() does not encode values), and a
+               "+" there is read back as a space - so the "Reply on your ticket"
+               link in a customer's email opened "Record not found" whenever the
+               token happened to contain one, and always once Amazon SES click
+               tracking had rewritten the link (live, 1 October 2026). Base64
+               never contains a space, so a space can only be a "+" that was
+               mangled; "-" and "_" are the URL-safe spellings of "+" and "/",
+               and a dropped "=" pad is restored. Repairs links in mail already
+               sent, which changing how links are written could not. */
+            $jsst_b64 = strtr(str_replace(' ', '+', substr($jsst_input, strlen(self::JSST_ENC_MARKER))), '-_', '+/');
+            if (strlen($jsst_b64) % 4) {
+                $jsst_b64 .= str_repeat('=', 4 - strlen($jsst_b64) % 4);
+            }
+            $jsst_data = base64_decode($jsst_b64);
             if ($jsst_data !== false) {
                 $jsst_ivlen = openssl_cipher_iv_length(self::JSST_ENC_CIPHER);
                 if (strlen($jsst_data) > $jsst_ivlen) {

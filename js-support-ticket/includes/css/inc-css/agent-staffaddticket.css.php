@@ -537,7 +537,10 @@ div.js-ticket-select-user-btn a#userpopup{
     box-sizing: border-box;
 }
 
-/* Popup Styling (Agent/Staff Specific) */
+/* The user picker (JSSTlayout::adminUserPicker), dressed like the form
+   picker the header opens on this same page, so the two dialogs share one
+   header, one close button and one width. Scoped to .jsst-userpick so the
+   rules of the form picker are left alone. */
 div#userpopupblack {
     background: rgba(0,0,0,0.7);
     position: fixed;
@@ -547,92 +550,40 @@ div#userpopupblack {
     left:0px;
     z-index: 9989;
 }
-div#userpopup {
+div#userpopup.jsst-userpick {
     position: fixed;
     top: 50%;
     left: 50%;
-    width: 60%;
-    max-height: 70%;
-    padding-top: 0px;
+    width: min(640px, 92vw);
+    max-height: 80vh;
+    padding: 0;
     z-index: 99999;
-    overflow-y: auto;
     overflow-x: hidden;
+    overflow-y: auto;
     transform: translate(-50%,-50%);
-    border-radius:15px;
+    border-radius: 15px;
+    background: #fff;
+    box-sizing: border-box;
 }
-.jsst-popup-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 16px 24px;
-    border-bottom: 1px solid ' . $jsst_color5 . ';
-}
-.popup-header-text {
-    font-size: 21px;
-    font-weight: 600;
-}
-.popup-header-close-img {
-    width: 28px;height: 28px;cursor: pointer;background-repeat: no-repeat;background-position: center;background-size: contain;transition: transform 0.3s ease;
-    background-image: url(\'data:image/svg+xml,%3csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="%234b5563" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"%3e%3cline x1="18" y1="6" x2="6" y2="18"%3e%3c/line%3e%3cline x1="6" y1="6" x2="18" y2="18"%3e%3c/line%3e%3c/svg%3e\') !important;
-    background-repeat: no-repeat;
-    background-position: center;
-    opacity: 0.7;
-    transition: opacity 0.2s ease;
-}
-.popup-header-close-img:hover {
-    opacity: 1;
-}
-.js-ticket-popup-search-wrp {
-   padding: 24px;
-    margin: 10px;
-}
-.js-ticket-search-top {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 16px;
-}
-.js-ticket-search-left {
-    flex: 3;
-}
-.js-ticket-search-fields-wrp {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 12px;
-    height:100%;
-}
-.js-ticket-search-input-fields {
-    flex: 1;
-    min-width: 150px;
-    padding: 12px 16px;
-    border-radius: 10px;
-    transition: border-color 0.2s ease, box-shadow 0.2s ease;
-}
-.js-ticket-search-input-fields:focus {
-    outline: none;
-    border-color: #80bdff;
-    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
-}
-.js-ticket-search-right {
-    flex: 1;
-    display: flex;
-    align-items: flex-start;
-}
-.js-ticket-search-btn-wrp {
-    display: flex;
-    gap: 12px;
-    width: 100%;
-}
-.js-ticket-search-btn,
-.js-ticket-reset-btn {
-    flex: 1;
-    padding: 12px 16px;
-    font-weight: 500;
-    border-radius: 10px;
-    border: 1px solid transparent;
-    cursor: pointer;
-    transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
-    white-space: nowrap;
-}
+div#userpopup.jsst-userpick * {box-sizing: border-box;}
+div#userpopup.jsst-userpick .jsst-popup-header {display: flex;align-items: center;justify-content: space-between;gap: 12px;margin: 0;padding: 16px 20px;background: ' . $jsst_color1 . ';border: 0;position: sticky;top: 0;z-index: 2;}
+div#userpopup.jsst-userpick .jsst-popup-header .popup-header-text {margin: 0;color: #fff;font-size: 18px;font-weight: 600;line-height: 1.3;}
+div#userpopup.jsst-userpick .jsst-popup-header button.jsst-popup-close {flex: 0 0 auto;width: 32px;height: 32px;min-height: 0;margin: 0;padding: 0;border: 0;border-radius: 50%;background: rgba(255,255,255,.18) url(\'data:image/svg+xml,%3csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22 fill=%22none%22 stroke=%22%23ffffff%22 stroke-width=%222.5%22 stroke-linecap=%22round%22%3e%3cline x1=%2218%22 y1=%226%22 x2=%226%22 y2=%2218%22/%3e%3cline x1=%226%22 y1=%226%22 x2=%2218%22 y2=%2218%22/%3e%3c/svg%3e\') no-repeat center / 16px 16px;box-shadow: none;color: transparent;font-size: 0;line-height: 0;text-transform: none;cursor: pointer;transition: background-color .15s ease;}
+div#userpopup.jsst-userpick .jsst-popup-header button.jsst-popup-close:hover {background-color: rgba(255,255,255,.32);}
+div#userpopup.jsst-userpick .jsst-popup-header button.jsst-popup-close:focus-visible {outline: 2px solid #fff;outline-offset: 2px;}
+div#userpopup.jsst-userpick .jsst-userpick-search {margin: 0;padding: 16px 20px 0;}
+div#userpopup.jsst-userpick .jsst-userpick-bar {display: flex;flex-wrap: wrap;gap: 10px;}
+div#userpopup.jsst-userpick input.jsst-userpick-q {flex: 1 1 220px;min-width: 0;min-height: 48px;margin: 0;padding: 12px 16px;border: 1px solid ' . $jsst_color5 . ';border-radius: 10px;background: #fff;color: ' . $jsst_color4 . ';}
+div#userpopup.jsst-userpick .jsst-userpick-bar .jsst-btn {min-height: 48px;margin: 0;padding: 12px 20px;border: 1px solid ' . $jsst_color5 . ';border-radius: 10px;background: #f5f2f5;color: ' . $jsst_color4 . ';font-weight: 500;line-height: 1;cursor: pointer;}
+div#userpopup.jsst-userpick .jsst-userpick-bar .jsst-btn:hover {background: ' . $jsst_color2 . ';border-color: ' . $jsst_color2 . ';color: ' . $jsst_color7 . ';}
+div#userpopup.jsst-userpick .jsst-userpick-bar .jsst-btn-primary {background: ' . $jsst_color1 . ';border-color: ' . $jsst_color1 . ';color: ' . $jsst_color7 . ';}
+div#userpopup.jsst-userpick .jsst-userpick-records {padding: 16px 20px 20px;}
+div#userpopup.jsst-userpick .jsst-userpick-records .jsst-hint {margin: 6px 0;color: ' . $jsst_color4 . ';}
+div#userpopup.jsst-userpick .jsst-userpick-name {display: block;font-weight: 600;color: ' . $jsst_color2 . ';}
+div#userpopup.jsst-userpick .jsst-userpick-sub {display: block;margin-top: 2px;font-size: 0.9em;color: ' . $jsst_color4 . ';word-break: break-word;}
+div#userpopup.jsst-userpick tbody tr {cursor: pointer;}
+div#userpopup.jsst-userpick tbody tr:hover td {background: ' . $jsst_color3 . ';}
+div#userpopup.jsst-userpick .jsst-num {text-align: right;white-space: nowrap;}
 #records {
     flex-grow: 1;
     overflow-y: auto;
@@ -768,14 +719,6 @@ $jsst_jssupportticket_css .= '
 	/* User Select Popup */
 	div.js-ticket-select-user-btn a#userpopup{background-color:' . $jsst_color1 . ';color:' . $jsst_color7 . ';border: 1px solid ' . $jsst_color1 . ';}
 	div.js-ticket-select-user-btn a#userpopup:hover{background-color:' . $jsst_color2 . '; border-color:' . $jsst_color2 . ';}
-	div#userpopup{background: #fff;}
-	div.jsst-popup-header{background-color: ' . $jsst_color3 . '; color:' . $jsst_color2 . ';}
-	div.js-ticket-popup-search-wrp {background-color:' . $jsst_color3 . '; border: 1px solid ' . $jsst_color5 . '!important;border-radius:10px;}
-	div.js-ticket-search-top div.js-ticket-search-left div.js-ticket-search-fields-wrp input.js-ticket-search-input-fields{border:1px solid ' . $jsst_color5 . ';background-color:#fff;color: ' . $jsst_color4 . ';height:100%;border-radius:10px;}
-	.js-ticket-search-btn{background-color: ' . $jsst_color1 . ';color:' . $jsst_color7 . ';}
-	.js-ticket-search-btn:hover{background-color:' . $jsst_color2 . ';}
-	.js-ticket-reset-btn{background-color: #f5f2f5;color: '. $jsst_color4 .';border: 1px solid ' . $jsst_color5 . ';}
-	.js-ticket-reset-btn:hover{background-color:'. $jsst_color2 .';color:'. $jsst_color7 .';}
 	div.js-ticket-table-header{background-color:' . $jsst_color3 . ';border-bottom:1px solid ' . $jsst_color5 . '; color:' . $jsst_color2 . ';}
 	div.js-ticket-data-row{border-bottom: 1px solid ' . $jsst_color5 . ';}
     .js-userpopup-link{color:' . $jsst_color2 . ';}

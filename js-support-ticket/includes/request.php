@@ -11,7 +11,14 @@ class JSSTrequest {
     static function getVar($jsst_variable_name, $jsst_method = null, $jsst_defaultvalue = null, $jsst_typecast = null) {
         $jsst_value = null;
         if ($jsst_method == null) {
-            if (isset($_GET[$jsst_variable_name])) {
+            /* A key present in the query string but EMPTY does not win over the
+               same key in the body. "?id=" used to take this branch, become ''
+               and then the default (null) below, so the caller saw nothing where
+               the POST body named a ticket - the collapse the 28 September 2026
+               security report used to turn the new-ticket nonce into an edit.
+               An empty value still ends as the default when nothing else has
+               one, exactly as before. */
+            if (isset($_GET[$jsst_variable_name]) && $_GET[$jsst_variable_name] !== '') {
                 if(is_array($_GET[$jsst_variable_name])){
                     $jsst_value = Self::recursive_sanitize_text_field($_GET[$jsst_variable_name]);
                 }else{
@@ -141,7 +148,32 @@ class JSSTrequest {
         }
 
         return $jsst_array;
-    }    
+    }
+
+    /**
+     * A multi-line posted field, line breaks kept.
+     *
+     * getVar() runs sanitize_text_field(), which folds a textarea onto one
+     * line. Headers, holidays, rule notes and recurring-ticket bodies are one
+     * entry per line, so they are read here instead. $jsst_path walks into a
+     * nested field, e.g. ('template', array('message')) for template[message].
+     * The caller verifies the nonce.
+     */
+    static function getLines($jsst_field, $jsst_path = array()) {
+        // phpcs:disable WordPress.Security.NonceVerification.Missing -- verified by the caller.
+        if (!isset($_POST[$jsst_field])) {
+            return '';
+        }
+        $jsst_value = wp_unslash($_POST[$jsst_field]);
+        // phpcs:enable WordPress.Security.NonceVerification.Missing
+        foreach ((array) $jsst_path as $jsst_key) {
+            if (!is_array($jsst_value) || !isset($jsst_value[$jsst_key])) {
+                return '';
+            }
+            $jsst_value = $jsst_value[$jsst_key];
+        }
+        return is_string($jsst_value) ? sanitize_textarea_field($jsst_value) : '';
+    }
 
 }
 

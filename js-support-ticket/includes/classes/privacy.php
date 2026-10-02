@@ -108,6 +108,14 @@ class JSSTprivacy {
             );
         }
 
+        /* Anything else in this product that holds personal data about the
+           same address adds it here. Only on the first page: what these
+           subscribers return is not paged, and adding it to every page would
+           repeat it once per twenty tickets. (Roadmap 5.5-SEC-02) */
+        if ($jsst_page === 1) {
+            $jsst_export = apply_filters('jsst_privacy_export', $jsst_export, $jsst_email);
+        }
+
         return array(
             'data' => $jsst_export,
             // Done when this page came back short: WordPress calls again with
@@ -226,28 +234,108 @@ class JSSTprivacy {
     }
 
     /**
+     * One retention interval, in months, as the cleanup itself reads it.
+     *
+     * Read by name rather than through JSSTautocleanupModel on purpose: while
+     * the stand-alone Auto Cleanup add-on is active, `getJSModel('autocleanup')`
+     * resolves into that add-on, which is a different class. The two share these
+     * setting names - the module's own docblock says so - so the name is the
+     * part that can be relied on. (Roadmap 4.0-CORE-13)
+     */
+    private static function retentionMonths($jsst_name) {
+        $jsst_value = isset(jssupportticket::$_config[$jsst_name]) ? jssupportticket::$_config[$jsst_name] : 0;
+        return is_numeric($jsst_value) ? (int) $jsst_value : 0;
+    }
+
+    /** Is anything held back from retention by department or by priority? */
+    private static function retentionExcludes() {
+        foreach (array('autocleanup_exclude_departments', 'autocleanup_exclude_priorities') as $jsst_name) {
+            $jsst_raw = isset(jssupportticket::$_config[$jsst_name]) ? (string) jssupportticket::$_config[$jsst_name] : '';
+            $jsst_decoded = json_decode($jsst_raw, true);
+            $jsst_pieces = is_array($jsst_decoded) ? $jsst_decoded : explode(',', $jsst_raw);
+            foreach ($jsst_pieces as $jsst_piece) {
+                if (is_scalar($jsst_piece) && is_numeric(trim((string) $jsst_piece)) && (int) $jsst_piece > 0) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    /**
      * How long tickets are kept, in the site's own terms.
      *
      * Reads the retention cleanup settings rather than asserting a policy the
-     * site may not be following.
+     * site may not be following - which is the whole idea, and which is exactly
+     * what it failed to do until now.
+     *
+     * It read `autocleanup_enable` and `autocleanup_ticket_days`. Neither name
+     * exists: nothing in this product writes either one and there is no row for
+     * either in `js_ticket_config`, so both reads came back null, the summary
+     * took its "no automatic deletion is switched on" branch on every site there
+     * has ever been, and a desk running the cleanup cron told its customers - in
+     * a published privacy policy - that nothing was being deleted while it was
+     * deleting their tickets on a schedule. A wrong sentence here is worse than
+     * a wrong number on an admin screen: it is the statement the site makes to
+     * the people whose data it is.
+     *
+     * The real names are `autocleanup_ticket_interval` and
+     * `autocleanup_attachment_interval`, and they are **months**, not days -
+     * the second half of the same mistake, and the half that would have
+     * survived a fix that only corrected the name.
+     *
+     * The two intervals are reported separately because they are set
+     * separately, and the common configuration is the one the old sentence
+     * could not express at all: keep the tickets, purge the files.
      */
     public static function retentionSummary() {
-        $jsst_enabled = 0;
-        $jsst_days = 0;
-        if (isset(jssupportticket::$_config['autocleanup_enable'])) {
-            $jsst_enabled = (int) jssupportticket::$_config['autocleanup_enable'];
+        $jsst_tickets = self::retentionMonths('autocleanup_ticket_interval');
+        $jsst_files   = self::retentionMonths('autocleanup_attachment_interval');
+
+        if ($jsst_tickets <= 0 && $jsst_files <= 0) {
+            return esc_html(__('Tickets on this site are kept until somebody removes them. No automatic deletion is switched on, so a ticket stays until it is deleted by hand or by a retention rule an administrator sets up later.', 'js-support-ticket'));
         }
-        if (isset(jssupportticket::$_config['autocleanup_ticket_days'])) {
-            $jsst_days = (int) jssupportticket::$_config['autocleanup_ticket_days'];
-        }
-        if ($jsst_enabled && $jsst_days > 0) {
-            return sprintf(
-                /* translators: %d: number of days */
-                esc_html(__('Closed tickets on this site are deleted automatically once they are %d days old, along with anything attached to them.', 'js-support-ticket')),
-                $jsst_days
+
+        $jsst_said = '';
+        if ($jsst_tickets > 0) {
+            /* Deleting the ticket takes its files with it, so a separate
+               sentence about attachments is only worth saying when they go
+               sooner than the ticket does. */
+            $jsst_said = sprintf(
+                /* translators: %s: a number of months, already formatted. */
+                esc_html(_n(
+                    'Closed tickets on this site are deleted automatically once they are %s month old, along with anything attached to them.',
+                    'Closed tickets on this site are deleted automatically once they are %s months old, along with anything attached to them.',
+                    $jsst_tickets, 'js-support-ticket')),
+                number_format_i18n($jsst_tickets)
+            );
+            if ($jsst_files > 0 && $jsst_files < $jsst_tickets) {
+                $jsst_said .= ' ' . sprintf(
+                    /* translators: %s: a number of months, already formatted. */
+                    esc_html(_n(
+                        'The files attached to them go sooner, once the ticket is %s month old.',
+                        'The files attached to them go sooner, once the ticket is %s months old.',
+                        $jsst_files, 'js-support-ticket')),
+                    number_format_i18n($jsst_files)
+                );
+            }
+        } else {
+            $jsst_said = sprintf(
+                /* translators: %s: a number of months, already formatted. */
+                esc_html(_n(
+                    'Closed tickets on this site are kept, but the files attached to them are deleted automatically once the ticket is %s month old.',
+                    'Closed tickets on this site are kept, but the files attached to them are deleted automatically once the ticket is %s months old.',
+                    $jsst_files, 'js-support-ticket')),
+                number_format_i18n($jsst_files)
             );
         }
-        return esc_html(__('Tickets on this site are kept until somebody removes them. No automatic deletion is switched on, so a ticket stays until it is deleted by hand or by a retention rule an administrator sets up later.', 'js-support-ticket'));
+
+        /* Said because the sentence above is otherwise a promise the site does
+           not keep for every ticket, and this is a privacy policy. */
+        if (self::retentionExcludes()) {
+            $jsst_said .= ' ' . esc_html(__('Tickets in some departments, or at some priorities, are held back from this and are kept until somebody removes them.', 'js-support-ticket'));
+        }
+        return $jsst_said;
     }
 
 }

@@ -21,20 +21,9 @@ JSSTmessage::getMessage();
     </div>
     
     <div id="jsstadmin-data">
-        <div id="jsstadmin-wrapper-top">
-            <div id="jsstadmin-wrapper-top-left">
-                <div id="jsstadmin-breadcrunbs">
-                    <ul>
-                        <li><a href="<?php echo esc_url(admin_url('admin.php?page=jssupportticket')); ?>"><?php echo esc_html(__('Dashboard','js-support-ticket')); ?></a></li>
-                        <li><?php echo esc_html(__('Zywrap Dashboard','js-support-ticket')); ?></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-        
-        <div id="jsstadmin-head">
-            <h1 class="jsstadmin-head-text"><?php echo esc_html(__('Zywrap AI Dashboard', 'js-support-ticket')); ?></h1>
-        </div>
+        <?php JSSTlayout::adminPageHeader(array(
+            'title' => __('Zywrap AI Dashboard', 'js-support-ticket'),
+        )); ?>
         
         <div id="jsstadmin-data-wrp" class="p0 bg-n bs-n js-ticket-zywrap-main-content">
             

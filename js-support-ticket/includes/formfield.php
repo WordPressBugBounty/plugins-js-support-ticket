@@ -17,6 +17,18 @@ class JSSTformfield {
         return $jsst_textfield;
     }
     /*
+     * Create the form number field (pass min, max and step in $jsst_extraattr)
+     */
+
+    static function number($jsst_name, $jsst_value, $jsst_extraattr = array()) {
+        $jsst_textfield = '<input type="number" name="' . esc_attr($jsst_name) . '" id="' . esc_attr($jsst_name) . '" value="' . esc_attr($jsst_value) . '" ';
+        if (!empty($jsst_extraattr))
+            foreach ($jsst_extraattr AS $jsst_key => $jsst_val)
+                $jsst_textfield .= ' ' . esc_attr($jsst_key) . '="' . esc_attr($jsst_val) . '"';
+        $jsst_textfield .= ' />';
+        return $jsst_textfield;
+    }
+    /*
      * Create the form text field
      */
 

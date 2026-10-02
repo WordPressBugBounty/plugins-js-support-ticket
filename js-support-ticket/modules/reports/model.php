@@ -3,6 +3,30 @@
 if (!defined('ABSPATH'))
     die('Restricted Access');
 
+/**
+ * Which statuses count as closed, and why every query in this file says so.
+ *
+ * There are two closed statuses: 5 `Closed` and 6 `Close Due To Merge`. This
+ * module was written when there was one, and only the three totals at the top
+ * of the overall report were ever updated - so on any desk that had merged a
+ * ticket, the reports contradicted each other and themselves:
+ *
+ *   - The Agents report's own summary counted a merged ticket as closed
+ *     (`status = 5 OR status = 6`) while the per-agent row beside it counted
+ *     `status = 5` alone. One said 1, the table under it said 0.
+ *   - The agent detail screen's Closed tile counted `status = 5` and said 0,
+ *     while the ticket list on the same screen filters by no status at all and
+ *     showed the merged ticket. Nothing on that page agreed with anything else.
+ *   - Worse than either: every open, answered, overdue and pending count
+ *     excluded 5 and not 6, so a merged and therefore closed ticket was being
+ *     reported as open, and as overdue, and as pending.
+ *
+ * All of them now read the same pair, which is the definition JSSTqueue uses
+ * for the queue tabs (see listClause()) and the one the Closed tab lists: a
+ * merged ticket is closed, is counted as closed, and is counted as nothing
+ * else. The listings are deliberately left unfiltered - a report lists what it
+ * is a report of. (Roadmap 5.0-ANA-05)
+ */
 class JSSTreportsModel {
 
     function getOverallReportData(){
@@ -20,10 +44,10 @@ class JSSTreportsModel {
         $jsst_query = "SELECT COUNT(id) FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE isanswered = 1 AND status != 5 AND status != 6 AND status != 1";
         $jsst_answeredticket = jssupportticket::$_db->get_var($jsst_query);
 
-        $jsst_query = "SELECT COUNT(id) FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE isoverdue = 1 AND status != 5";
+        $jsst_query = "SELECT COUNT(id) FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE isoverdue = 1 AND status != 5 AND status != 6";
         $jsst_overdueticket = jssupportticket::$_db->get_var($jsst_query);
 
-        $jsst_query = "SELECT COUNT(id) FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE isanswered != 1 AND status != 5 AND (lastreply != '0000-00-00 00:00:00')";
+        $jsst_query = "SELECT COUNT(id) FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE isanswered != 1 AND status != 5 AND status != 6 AND (lastreply != '0000-00-00 00:00:00')";
         $jsst_pendingticket = jssupportticket::$_db->get_var($jsst_query);
 
         jssupportticket::$jsst_data['ticket_total']['allticket'] = $jsst_allticket;
@@ -77,13 +101,13 @@ class JSSTreportsModel {
         $jsst_query = "SELECT priority.priority,(SELECT COUNT(id) FROM `".jssupportticket::$_db->prefix."js_ticket_tickets` WHERE priorityid = priority.id AND status = 1 AND (lastreply = '0000-00-00 00:00:00') ) AS totalticket
                     FROM `".jssupportticket::$_db->prefix."js_ticket_priorities` AS priority ORDER BY priority.priority";
         $jsst_openticket_pr = jssupportticket::$_db->get_results($jsst_query);
-        $jsst_query = "SELECT priority.priority,(SELECT COUNT(id) FROM `".jssupportticket::$_db->prefix."js_ticket_tickets` WHERE priorityid = priority.id AND isanswered = 1 AND status != 5 AND status != 1 ) AS totalticket
+        $jsst_query = "SELECT priority.priority,(SELECT COUNT(id) FROM `".jssupportticket::$_db->prefix."js_ticket_tickets` WHERE priorityid = priority.id AND isanswered = 1 AND status != 5 AND status != 6 AND status != 1 ) AS totalticket
                     FROM `".jssupportticket::$_db->prefix."js_ticket_priorities` AS priority ORDER BY priority.priority";
         $jsst_answeredticket_pr = jssupportticket::$_db->get_results($jsst_query);
-        $jsst_query = "SELECT priority.priority,(SELECT COUNT(id) FROM `".jssupportticket::$_db->prefix."js_ticket_tickets` WHERE priorityid = priority.id AND isoverdue = 1 AND status != 5 ) AS totalticket
+        $jsst_query = "SELECT priority.priority,(SELECT COUNT(id) FROM `".jssupportticket::$_db->prefix."js_ticket_tickets` WHERE priorityid = priority.id AND isoverdue = 1 AND status != 5 AND status != 6 ) AS totalticket
                     FROM `".jssupportticket::$_db->prefix."js_ticket_priorities` AS priority ORDER BY priority.priority";
         $jsst_overdueticket_pr = jssupportticket::$_db->get_results($jsst_query);
-        $jsst_query = "SELECT priority.priority,(SELECT COUNT(id) FROM `".jssupportticket::$_db->prefix."js_ticket_tickets` WHERE priorityid = priority.id AND isanswered != 1 AND status != 5 AND (lastreply != '0000-00-00 00:00:00') ) AS totalticket
+        $jsst_query = "SELECT priority.priority,(SELECT COUNT(id) FROM `".jssupportticket::$_db->prefix."js_ticket_tickets` WHERE priorityid = priority.id AND isanswered != 1 AND status != 5 AND status != 6 AND (lastreply != '0000-00-00 00:00:00') ) AS totalticket
                     FROM `".jssupportticket::$_db->prefix."js_ticket_priorities` AS priority ORDER BY priority.priority";
         $jsst_pendingticket_pr = jssupportticket::$_db->get_results($jsst_query);
         // jssupportticket::$jsst_data['stack_chart_horizontal']['title'] = "['". esc_html(__('Tickets','js-support-ticket'))."',";
@@ -187,10 +211,10 @@ class JSSTreportsModel {
 
         $jsst_query = "SELECT dept.departmentname,
             (SELECT COUNT(id) FROM `".jssupportticket::$_db->prefix."js_ticket_tickets` WHERE status = 1 AND (lastreply = '0000-00-00 00:00:00') AND departmentid = dept.id) AS openticket,
-            (SELECT COUNT(id) FROM `".jssupportticket::$_db->prefix."js_ticket_tickets` WHERE status = 5 AND departmentid = dept.id) AS closeticket,
-            (SELECT COUNT(id) FROM `".jssupportticket::$_db->prefix."js_ticket_tickets` WHERE isanswered = 1 AND status != 5 AND status != 1 AND departmentid = dept.id) AS answeredticket,
-            (SELECT COUNT(id) FROM `".jssupportticket::$_db->prefix."js_ticket_tickets` WHERE isoverdue = 1 AND status != 5 AND departmentid = dept.id) AS overdueticket,
-            (SELECT COUNT(id) FROM `".jssupportticket::$_db->prefix."js_ticket_tickets` WHERE isanswered != 1 AND status != 5 AND (lastreply != '0000-00-00 00:00:00') AND departmentid = dept.id) AS pendingticket
+            (SELECT COUNT(id) FROM `".jssupportticket::$_db->prefix."js_ticket_tickets` WHERE (status = 5 OR status = 6) AND departmentid = dept.id) AS closeticket,
+            (SELECT COUNT(id) FROM `".jssupportticket::$_db->prefix."js_ticket_tickets` WHERE isanswered = 1 AND status != 5 AND status != 6 AND status != 1 AND departmentid = dept.id) AS answeredticket,
+            (SELECT COUNT(id) FROM `".jssupportticket::$_db->prefix."js_ticket_tickets` WHERE isoverdue = 1 AND status != 5 AND status != 6 AND departmentid = dept.id) AS overdueticket,
+            (SELECT COUNT(id) FROM `".jssupportticket::$_db->prefix."js_ticket_tickets` WHERE isanswered != 1 AND status != 5 AND status != 6 AND (lastreply != '0000-00-00 00:00:00') AND departmentid = dept.id) AS pendingticket
             FROM `".jssupportticket::$_db->prefix."js_ticket_departments` AS dept
             JOIN `".jssupportticket::$_db->prefix."js_ticket_acl_user_access_departments` AS acl ON acl.departmentid = dept.id
             WHERE acl.staffid = %d AND dept.status=1";
@@ -239,31 +263,38 @@ class JSSTreportsModel {
         jssupportticket::$jsst_data['filter']['staffname'] = JSSTincluder::getJSModel('agent')->getMyName($jsst_staffid);
         $jsst_nextdate = $jsst_fromdate;
         //Query to get Data
-        $jsst_query = "SELECT COUNT(id) FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` ";
-        if($jsst_uid) { $jsst_query .= " WHERE staffid = %d"; $jsst_query = jssupportticket::$_db->prepare($jsst_query, $jsst_staffid); }
-        $jsst_allticket = jssupportticket::$_db->get_var($jsst_query);
+        /* Counted over the same date range as every other total beside it.
+           It was the one tile with no date clause at all, so on the Agents and
+           Customers reports "All" answered "ever" while Open, Closed, Answered,
+           Overdue and Pending answered "in this period". Narrow the range to a
+           week with no tickets in it and the row read 0, 0, 0, 0, 0 - and All.
+           (Roadmap 5.0-ANA-05) */
+        $jsst_query = "SELECT COUNT(id) FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE date(created) >= %s AND date(created) <= %s";
+        $jsst_query_args = array($jsst_curdate, $jsst_fromdate);
+        if($jsst_uid) { $jsst_query .= " AND staffid = %d"; $jsst_query_args[] = $jsst_staffid; }
+        $jsst_allticket = jssupportticket::$_db->get_var(jssupportticket::$_db->prepare($jsst_query, $jsst_query_args));
 
         $jsst_query = "SELECT created FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE status = 1 AND (lastreply = '0000-00-00 00:00:00') AND date(created) >= %s AND date(created) <= %s";
         $jsst_query_args = array($jsst_curdate, $jsst_fromdate);
         if($jsst_uid) { $jsst_query .= " AND staffid = %d"; $jsst_query_args[] = $jsst_staffid; }
         $jsst_openticket = jssupportticket::$_db->get_results(jssupportticket::$_db->prepare($jsst_query, $jsst_query_args));
 
-        $jsst_query = "SELECT created FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE status = 5 AND date(created) >= %s AND date(created) <= %s";
+        $jsst_query = "SELECT created FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE (status = 5 OR status = 6) AND date(created) >= %s AND date(created) <= %s";
         $jsst_query_args = array($jsst_curdate, $jsst_fromdate);
         if($jsst_uid) { $jsst_query .= " AND staffid = %d"; $jsst_query_args[] = $jsst_staffid; }
         $jsst_closeticket = jssupportticket::$_db->get_results(jssupportticket::$_db->prepare($jsst_query, $jsst_query_args));
 
-        $jsst_query = "SELECT created FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE isanswered = 1 AND status != 5 AND status != 1 AND date(created) >= %s AND date(created) <= %s";
+        $jsst_query = "SELECT created FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE isanswered = 1 AND status != 5 AND status != 6 AND status != 1 AND date(created) >= %s AND date(created) <= %s";
         $jsst_query_args = array($jsst_curdate, $jsst_fromdate);
         if($jsst_uid) { $jsst_query .= " AND staffid = %d"; $jsst_query_args[] = $jsst_staffid; }
         $jsst_answeredticket = jssupportticket::$_db->get_results(jssupportticket::$_db->prepare($jsst_query, $jsst_query_args));
 
-        $jsst_query = "SELECT created FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE isoverdue = 1 AND status != 5 AND date(created) >= %s AND date(created) <= %s";
+        $jsst_query = "SELECT created FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE isoverdue = 1 AND status != 5 AND status != 6 AND date(created) >= %s AND date(created) <= %s";
         $jsst_query_args = array($jsst_curdate, $jsst_fromdate);
         if($jsst_uid) { $jsst_query .= " AND staffid = %d"; $jsst_query_args[] = $jsst_staffid; }
         $jsst_overdueticket = jssupportticket::$_db->get_results(jssupportticket::$_db->prepare($jsst_query, $jsst_query_args));
 
-        $jsst_query = "SELECT created FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE isanswered != 1 AND status != 5 AND (lastreply != '0000-00-00 00:00:00') AND date(created) >= %s AND date(created) <= %s";
+        $jsst_query = "SELECT created FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE isanswered != 1 AND status != 5 AND status != 6 AND (lastreply != '0000-00-00 00:00:00') AND date(created) >= %s AND date(created) <= %s";
         $jsst_query_args = array($jsst_curdate, $jsst_fromdate);
         if($jsst_uid) { $jsst_query .= " AND staffid = %d"; $jsst_query_args[] = $jsst_staffid; }
         $jsst_pendingticket = jssupportticket::$_db->get_results(jssupportticket::$_db->prepare($jsst_query, $jsst_query_args));
@@ -351,13 +382,21 @@ class JSSTreportsModel {
         $jsst_query_args = array($jsst_curdate, $jsst_fromdate, $jsst_curdate, $jsst_fromdate, $jsst_curdate, $jsst_fromdate, $jsst_curdate, $jsst_fromdate, $jsst_curdate, $jsst_fromdate, $jsst_curdate, $jsst_fromdate);
         $jsst_query = "SELECT staff.photo,staff.id,staff.firstname,staff.lastname,staff.username,staff.email,user.display_name,user.user_email,user.user_nicename,
                     (SELECT COUNT(id) FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE status = 1 AND (lastreply = '0000-00-00 00:00:00') AND date(created) >= %s AND date(created) <= %s AND staffid = staff.id) AS openticket,
-                    (SELECT COUNT(id) FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE status = 5 AND date(created) >= %s AND date(created) <= %s AND staffid = staff.id) AS closeticket,
-                    (SELECT COUNT(id) FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE isanswered = 1 AND status != 5 AND status != 1 AND date(created) >= %s AND date(created) <= %s AND staffid = staff.id) AS answeredticket,
-                    (SELECT COUNT(id) FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE isoverdue = 1 AND status != 5 AND date(created) >= %s AND date(created) <= %s AND staffid = staff.id) AS overdueticket,
-                    (SELECT COUNT(id) FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE isanswered != 1 AND status != 5 AND (lastreply != '0000-00-00 00:00:00') AND date(created) >= %s AND date(created) <= %s AND staffid = staff.id) AS pendingticket,
+                    (SELECT COUNT(id) FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE (status = 5 OR status = 6) AND date(created) >= %s AND date(created) <= %s AND staffid = staff.id) AS closeticket,
+                    (SELECT COUNT(id) FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE isanswered = 1 AND status != 5 AND status != 6 AND status != 1 AND date(created) >= %s AND date(created) <= %s AND staffid = staff.id) AS answeredticket,
+                    (SELECT COUNT(id) FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE isoverdue = 1 AND status != 5 AND status != 6 AND date(created) >= %s AND date(created) <= %s AND staffid = staff.id) AS overdueticket,
+                    (SELECT COUNT(id) FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE isanswered != 1 AND status != 5 AND status != 6 AND (lastreply != '0000-00-00 00:00:00') AND date(created) >= %s AND date(created) <= %s AND staffid = staff.id) AS pendingticket,
                     (SELECT COUNT(id) FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE date(created) >= %s AND date(created) <= %s AND staffid = staff.id) AS allticket  ";
                     if(in_array('feedback', jssupportticket::$_active_addons)){
-                        $jsst_query .=    ",(SELECT AVG(feed.rating) FROM `" . jssupportticket::$_db->prefix . "js_ticket_feedbacks` AS feed JOIN `" . jssupportticket::$_db->prefix . "js_ticket_tickets` AS ticket ON ticket.id= feed.ticketid WHERE date(feed.created) >= %s AND date(feed.created) <= %s AND ticket.staffid = staff.id) AS avragerating ";
+                        /* The agent the score was given to, not the agent who
+                           happens to own the ticket now. `js_ticket_satisfaction`
+                           records `staffid` when the survey is created, so a
+                           ticket reassigned next month no longer rewrites last
+                           month's average - which the join to the tickets table
+                           did, silently. Answers only, or the -1 an unanswered
+                           survey carries would be averaged in as a score.
+                           (Roadmap 5.0-ANA-03) */
+                        $jsst_query .=    ",(SELECT AVG(feed.score) FROM `" . jssupportticket::$_db->prefix . "js_ticket_satisfaction` AS feed WHERE feed.state = 'answered' AND date(feed.created) >= %s AND date(feed.created) <= %s AND feed.staffid = staff.id) AS avragerating ";
                         $jsst_query_args[] = $jsst_curdate;
                         $jsst_query_args[] = $jsst_fromdate;
                     }
@@ -405,16 +444,16 @@ class JSSTreportsModel {
         $jsst_query = "SELECT created FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE status = 1 AND (lastreply = '0000-00-00 00:00:00') AND date(created) >= %s AND date(created) <= %s";
         $jsst_openticket = jssupportticket::$_db->get_results(jssupportticket::$_db->prepare($jsst_query, $jsst_curdate, $jsst_fromdate));
 
-        $jsst_query = "SELECT created FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE status = 5 AND date(created) >= %s AND date(created) <= %s";
+        $jsst_query = "SELECT created FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE (status = 5 OR status = 6) AND date(created) >= %s AND date(created) <= %s";
         $jsst_closeticket = jssupportticket::$_db->get_results(jssupportticket::$_db->prepare($jsst_query, $jsst_curdate, $jsst_fromdate));
 
-        $jsst_query = "SELECT created FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE isanswered = 1 AND status != 5 AND status != 1 AND date(created) >= %s AND date(created) <= %s";
+        $jsst_query = "SELECT created FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE isanswered = 1 AND status != 5 AND status != 6 AND status != 1 AND date(created) >= %s AND date(created) <= %s";
         $jsst_answeredticket = jssupportticket::$_db->get_results(jssupportticket::$_db->prepare($jsst_query, $jsst_curdate, $jsst_fromdate));
 
-        $jsst_query = "SELECT created FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE isoverdue = 1 AND status != 5 AND date(created) >= %s AND date(created) <= %s";
+        $jsst_query = "SELECT created FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE isoverdue = 1 AND status != 5 AND status != 6 AND date(created) >= %s AND date(created) <= %s";
         $jsst_overdueticket = jssupportticket::$_db->get_results(jssupportticket::$_db->prepare($jsst_query, $jsst_curdate, $jsst_fromdate));
 
-        $jsst_query = "SELECT created FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE isanswered != 1 AND status != 5 AND (lastreply != '0000-00-00 00:00:00') AND date(created) >= %s AND date(created) <= %s";
+        $jsst_query = "SELECT created FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE isanswered != 1 AND status != 5 AND status != 6 AND (lastreply != '0000-00-00 00:00:00') AND date(created) >= %s AND date(created) <= %s";
         $jsst_pendingticket = jssupportticket::$_db->get_results(jssupportticket::$_db->prepare($jsst_query, $jsst_curdate, $jsst_fromdate));
 
         $jsst_date_openticket = array();
@@ -498,10 +537,10 @@ class JSSTreportsModel {
         $jsst_query = "SELECT department.id,department.departmentname,email.email,
                     (SELECT COUNT(id) FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE departmentid = department.id) AS allticket,
                     (SELECT COUNT(id) FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE status = 1 AND (lastreply = '0000-00-00 00:00:00') AND date(created) >= %s AND date(created) <= %s AND departmentid = department.id) AS openticket,
-                    (SELECT COUNT(id) FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE status = 5 AND date(created) >= %s AND date(created) <= %s AND departmentid = department.id) AS closeticket,
-                    (SELECT COUNT(id) FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE isanswered = 1 AND status != 5 AND status != 1 AND date(created) >= %s AND date(created) <= %s AND departmentid = department.id) AS answeredticket,
-                    (SELECT COUNT(id) FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE isoverdue = 1 AND status != 5 AND date(created) >= %s AND date(created) <= %s AND departmentid = department.id) AS overdueticket,
-                    (SELECT COUNT(id) FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE isanswered != 1 AND status != 5 AND (lastreply != '0000-00-00 00:00:00') AND date(created) >= %s AND date(created) <= %s AND departmentid = department.id) AS pendingticket
+                    (SELECT COUNT(id) FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE (status = 5 OR status = 6) AND date(created) >= %s AND date(created) <= %s AND departmentid = department.id) AS closeticket,
+                    (SELECT COUNT(id) FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE isanswered = 1 AND status != 5 AND status != 6 AND status != 1 AND date(created) >= %s AND date(created) <= %s AND departmentid = department.id) AS answeredticket,
+                    (SELECT COUNT(id) FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE isoverdue = 1 AND status != 5 AND status != 6 AND date(created) >= %s AND date(created) <= %s AND departmentid = department.id) AS overdueticket,
+                    (SELECT COUNT(id) FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE isanswered != 1 AND status != 5 AND status != 6 AND (lastreply != '0000-00-00 00:00:00') AND date(created) >= %s AND date(created) <= %s AND departmentid = department.id) AS pendingticket
                     FROM `".jssupportticket::$_db->prefix."js_ticket_departments` AS department
                     JOIN `".jssupportticket::$_db->prefix."js_ticket_email` AS email ON department.emailid = email.id";
         $jsst_query = jssupportticket::$_db->prepare($jsst_query, $jsst_curdate, $jsst_fromdate, $jsst_curdate, $jsst_fromdate, $jsst_curdate, $jsst_fromdate, $jsst_curdate, $jsst_fromdate, $jsst_curdate, $jsst_fromdate);
@@ -563,19 +602,19 @@ class JSSTreportsModel {
         $jsst_query = jssupportticket::$_db->prepare($jsst_query, $jsst_curdate, $jsst_fromdate) . $jsst_dep_query;
         $jsst_openticket = jssupportticket::$_db->get_results($jsst_query);
 
-        $jsst_query = "SELECT ticket.created FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` AS ticket WHERE ticket.status = 5 AND date(ticket.created) >= %s AND date(ticket.created) <= %s";
+        $jsst_query = "SELECT ticket.created FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` AS ticket WHERE (ticket.status = 5 OR ticket.status = 6) AND date(ticket.created) >= %s AND date(ticket.created) <= %s";
         $jsst_query = jssupportticket::$_db->prepare($jsst_query, $jsst_curdate, $jsst_fromdate) . $jsst_dep_query;
         $jsst_closeticket = jssupportticket::$_db->get_results($jsst_query);
 
-        $jsst_query = "SELECT ticket.created FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` AS ticket WHERE ticket.isanswered = 1 AND ticket.status != 5 AND ticket.status != 1 AND date(ticket.created) >= %s AND date(ticket.created) <= %s";
+        $jsst_query = "SELECT ticket.created FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` AS ticket WHERE ticket.isanswered = 1 AND ticket.status != 5 AND ticket.status != 6 AND ticket.status != 1 AND date(ticket.created) >= %s AND date(ticket.created) <= %s";
         $jsst_query = jssupportticket::$_db->prepare($jsst_query, $jsst_curdate, $jsst_fromdate) . $jsst_dep_query;
         $jsst_answeredticket = jssupportticket::$_db->get_results($jsst_query);
 
-        $jsst_query = "SELECT ticket.created FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` AS ticket WHERE ticket.isoverdue = 1 AND ticket.status != 5 AND date(ticket.created) >= %s AND date(ticket.created) <= %s";
+        $jsst_query = "SELECT ticket.created FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` AS ticket WHERE ticket.isoverdue = 1 AND ticket.status != 5 AND ticket.status != 6 AND date(ticket.created) >= %s AND date(ticket.created) <= %s";
         $jsst_query = jssupportticket::$_db->prepare($jsst_query, $jsst_curdate, $jsst_fromdate) . $jsst_dep_query;
         $jsst_overdueticket = jssupportticket::$_db->get_results($jsst_query);
 
-        $jsst_query = "SELECT ticket.created FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` AS ticket WHERE ticket.isanswered != 1 AND ticket.status != 5 AND (ticket.lastreply != '0000-00-00 00:00:00') AND date(ticket.created) >= %s AND date(ticket.created) <= %s";
+        $jsst_query = "SELECT ticket.created FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` AS ticket WHERE ticket.isanswered != 1 AND ticket.status != 5 AND ticket.status != 6 AND (ticket.lastreply != '0000-00-00 00:00:00') AND date(ticket.created) >= %s AND date(ticket.created) <= %s";
         $jsst_query = jssupportticket::$_db->prepare($jsst_query, $jsst_curdate, $jsst_fromdate) . $jsst_dep_query;
         $jsst_pendingticket = jssupportticket::$_db->get_results($jsst_query);
 
@@ -662,10 +701,10 @@ class JSSTreportsModel {
         // data
         $jsst_query = "SELECT DISTINCT staff.photo,staff.id,staff.firstname,staff.lastname,staff.username,staff.email,user.display_name,user.user_email,user.user_nicename,
             (SELECT COUNT(ticket.id) FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` AS ticket WHERE ticket.status = 1 AND (ticket.lastreply = '0000-00-00 00:00:00') AND date(ticket.created) >= %s AND date(ticket.created) <= %s AND ticket.staffid = staff.id) AS openticket,
-            (SELECT COUNT(ticket.id) FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` AS ticket WHERE ticket.status = 5 AND date(ticket.created) >= %s AND date(ticket.created) <= %s AND ticket.staffid = staff.id) AS closeticket,
-            (SELECT COUNT(ticket.id) FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` AS ticket WHERE ticket.isanswered = 1 AND ticket.status != 5 AND ticket.status != 1 AND date(ticket.created) >= %s AND date(ticket.created) <= %s AND ticket.staffid = staff.id) AS answeredticket,
-            (SELECT COUNT(ticket.id) FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` AS ticket WHERE ticket.isoverdue = 1 AND ticket.status != 5 AND date(ticket.created) >= %s AND date(ticket.created) <= %s AND ticket.staffid = staff.id) AS overdueticket,
-            (SELECT COUNT(ticket.id) FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` AS ticket WHERE ticket.isanswered != 1 AND ticket.status != 5 AND (ticket.lastreply != '0000-00-00 00:00:00') AND date(ticket.created) >= %s AND date(ticket.created) <= %s AND ticket.staffid = staff.id) AS pendingticket
+            (SELECT COUNT(ticket.id) FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` AS ticket WHERE (ticket.status = 5 OR ticket.status = 6) AND date(ticket.created) >= %s AND date(ticket.created) <= %s AND ticket.staffid = staff.id) AS closeticket,
+            (SELECT COUNT(ticket.id) FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` AS ticket WHERE ticket.isanswered = 1 AND ticket.status != 5 AND ticket.status != 6 AND ticket.status != 1 AND date(ticket.created) >= %s AND date(ticket.created) <= %s AND ticket.staffid = staff.id) AS answeredticket,
+            (SELECT COUNT(ticket.id) FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` AS ticket WHERE ticket.isoverdue = 1 AND ticket.status != 5 AND ticket.status != 6 AND date(ticket.created) >= %s AND date(ticket.created) <= %s AND ticket.staffid = staff.id) AS overdueticket,
+            (SELECT COUNT(ticket.id) FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` AS ticket WHERE ticket.isanswered != 1 AND ticket.status != 5 AND ticket.status != 6 AND (ticket.lastreply != '0000-00-00 00:00:00') AND date(ticket.created) >= %s AND date(ticket.created) <= %s AND ticket.staffid = staff.id) AS pendingticket
             FROM `".jssupportticket::$_db->prefix."js_ticket_staff` AS staff
             JOIN `".jssupportticket::$_wpprefixforuser."js_ticket_users` AS user ON user.id = staff.uid
             LEFT JOIN `".jssupportticket::$_db->prefix . "js_ticket_acl_user_access_departments` AS dep ON dep.staffid = staff.id";
@@ -734,31 +773,38 @@ class JSSTreportsModel {
         jssupportticket::$jsst_data['filter']['username'] = JSSTincluder::getJSModel('jssupportticket')->getUserNameById($jsst_uid);
         $jsst_nextdate = $jsst_fromdate;
         //Query to get Data
-        $jsst_query = "SELECT count(id) FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` ";
-        if($jsst_uid) { $jsst_query .= " WHERE  uid = %d"; $jsst_query = jssupportticket::$_db->prepare($jsst_query, $jsst_uid); }
-        $jsst_allticket = jssupportticket::$_db->get_var($jsst_query);
+        /* Counted over the same date range as every other total beside it.
+           It was the one tile with no date clause at all, so on the Agents and
+           Customers reports "All" answered "ever" while Open, Closed, Answered,
+           Overdue and Pending answered "in this period". Narrow the range to a
+           week with no tickets in it and the row read 0, 0, 0, 0, 0 - and All.
+           (Roadmap 5.0-ANA-05) */
+        $jsst_query = "SELECT count(id) FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE date(created) >= %s AND date(created) <= %s";
+        $jsst_query_args = array($jsst_curdate, $jsst_fromdate);
+        if($jsst_uid) { $jsst_query .= " AND uid = %d"; $jsst_query_args[] = $jsst_uid; }
+        $jsst_allticket = jssupportticket::$_db->get_var(jssupportticket::$_db->prepare($jsst_query, $jsst_query_args));
 
         $jsst_query = "SELECT created FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE status = 1  AND (lastreply = '0000-00-00 00:00:00') AND date(created) >= %s AND date(created) <= %s";
         $jsst_query_args = array($jsst_curdate, $jsst_fromdate);
         if($jsst_uid) { $jsst_query .= " AND uid = %d"; $jsst_query_args[] = $jsst_uid; }
         $jsst_openticket = jssupportticket::$_db->get_results(jssupportticket::$_db->prepare($jsst_query, $jsst_query_args));
 
-        $jsst_query = "SELECT created FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE status = 5 AND date(created) >= %s AND date(created) <= %s";
+        $jsst_query = "SELECT created FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE (status = 5 OR status = 6) AND date(created) >= %s AND date(created) <= %s";
         $jsst_query_args = array($jsst_curdate, $jsst_fromdate);
         if($jsst_uid) { $jsst_query .= " AND uid = %d"; $jsst_query_args[] = $jsst_uid; }
         $jsst_closeticket = jssupportticket::$_db->get_results(jssupportticket::$_db->prepare($jsst_query, $jsst_query_args));
 
-        $jsst_query = "SELECT created FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE isanswered = 1 AND status != 5 AND status != 1 AND date(created) >= %s AND date(created) <= %s";
+        $jsst_query = "SELECT created FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE isanswered = 1 AND status != 5 AND status != 6 AND status != 1 AND date(created) >= %s AND date(created) <= %s";
         $jsst_query_args = array($jsst_curdate, $jsst_fromdate);
         if($jsst_uid) { $jsst_query .= " AND uid = %d"; $jsst_query_args[] = $jsst_uid; }
         $jsst_answeredticket = jssupportticket::$_db->get_results(jssupportticket::$_db->prepare($jsst_query, $jsst_query_args));
 
-        $jsst_query = "SELECT created FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE isoverdue = 1 AND status != 5 AND date(created) >= %s AND date(created) <= %s";
+        $jsst_query = "SELECT created FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE isoverdue = 1 AND status != 5 AND status != 6 AND date(created) >= %s AND date(created) <= %s";
         $jsst_query_args = array($jsst_curdate, $jsst_fromdate);
         if($jsst_uid) { $jsst_query .= " AND uid = %d"; $jsst_query_args[] = $jsst_uid; }
         $jsst_overdueticket = jssupportticket::$_db->get_results(jssupportticket::$_db->prepare($jsst_query, $jsst_query_args));
 
-        $jsst_query = "SELECT created FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE isanswered != 1 AND status != 5 AND (lastreply != '0000-00-00 00:00:00') AND date(created) >= %s AND date(created) <= %s";
+        $jsst_query = "SELECT created FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE isanswered != 1 AND status != 5 AND status != 6 AND (lastreply != '0000-00-00 00:00:00') AND date(created) >= %s AND date(created) <= %s";
         $jsst_query_args = array($jsst_curdate, $jsst_fromdate);
         if($jsst_uid) { $jsst_query .= " AND uid = %d"; $jsst_query_args[] = $jsst_uid; }
         $jsst_pendingticket = jssupportticket::$_db->get_results(jssupportticket::$_db->prepare($jsst_query, $jsst_query_args));
@@ -846,10 +892,10 @@ class JSSTreportsModel {
         $jsst_query = "SELECT user.display_name,user.user_email,user.user_nicename,user.id,
                     (SELECT COUNT(id) FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE uid = user.id) AS allticket,
                     (SELECT COUNT(id) FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE status = 1 AND (lastreply = '0000-00-00 00:00:00') AND date(created) >= %s AND date(created) <= %s AND uid = user.id) AS openticket,
-                    (SELECT COUNT(id) FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE status = 5 AND date(created) >= %s AND date(created) <= %s AND uid = user.id) AS closeticket,
-                    (SELECT COUNT(id) FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE isanswered = 1 AND status != 5 AND status != 1 AND date(created) >= %s AND date(created) <= %s AND uid = user.id) AS answeredticket,
-                    (SELECT COUNT(id) FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE isoverdue = 1 AND status != 5 AND date(created) >= %s AND date(created) <= %s AND uid = user.id) AS overdueticket,
-                    (SELECT COUNT(id) FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE isanswered != 1 AND status != 5 AND (lastreply != '0000-00-00 00:00:00') AND date(created) >= %s AND date(created) <= %s AND uid = user.id) AS pendingticket
+                    (SELECT COUNT(id) FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE (status = 5 OR status = 6) AND date(created) >= %s AND date(created) <= %s AND uid = user.id) AS closeticket,
+                    (SELECT COUNT(id) FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE isanswered = 1 AND status != 5 AND status != 6 AND status != 1 AND date(created) >= %s AND date(created) <= %s AND uid = user.id) AS answeredticket,
+                    (SELECT COUNT(id) FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE isoverdue = 1 AND status != 5 AND status != 6 AND date(created) >= %s AND date(created) <= %s AND uid = user.id) AS overdueticket,
+                    (SELECT COUNT(id) FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE isanswered != 1 AND status != 5 AND status != 6 AND (lastreply != '0000-00-00 00:00:00') AND date(created) >= %s AND date(created) <= %s AND uid = user.id) AS pendingticket
                     FROM `".jssupportticket::$_wpprefixforuser."js_ticket_users` AS user
                     WHERE user.wpuid != 0 AND ";
                     if(in_array('agent', jssupportticket::$_active_addons)){
@@ -914,22 +960,22 @@ class JSSTreportsModel {
         if($jsst_id) { $jsst_query .= " AND staffid = %d"; $jsst_query_args[] = $jsst_id; }
         $jsst_openticket = jssupportticket::$_db->get_results(jssupportticket::$_db->prepare($jsst_query, $jsst_query_args));
 
-        $jsst_query = "SELECT created FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE status = 5 AND date(created) >= %s AND date(created) <= %s";
+        $jsst_query = "SELECT created FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE (status = 5 OR status = 6) AND date(created) >= %s AND date(created) <= %s";
         $jsst_query_args = array($jsst_curdate, $jsst_fromdate);
         if($jsst_id) { $jsst_query .= " AND staffid = %d"; $jsst_query_args[] = $jsst_id; }
         $jsst_closeticket = jssupportticket::$_db->get_results(jssupportticket::$_db->prepare($jsst_query, $jsst_query_args));
 
-        $jsst_query = "SELECT created FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE isanswered = 1 AND status != 5 AND status != 1 AND date(created) >= %s AND date(created) <= %s";
+        $jsst_query = "SELECT created FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE isanswered = 1 AND status != 5 AND status != 6 AND status != 1 AND date(created) >= %s AND date(created) <= %s";
         $jsst_query_args = array($jsst_curdate, $jsst_fromdate);
         if($jsst_id) { $jsst_query .= " AND staffid = %d"; $jsst_query_args[] = $jsst_id; }
         $jsst_answeredticket = jssupportticket::$_db->get_results(jssupportticket::$_db->prepare($jsst_query, $jsst_query_args));
 
-        $jsst_query = "SELECT created FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE isoverdue = 1 AND status != 5 AND date(created) >= %s AND date(created) <= %s";
+        $jsst_query = "SELECT created FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE isoverdue = 1 AND status != 5 AND status != 6 AND date(created) >= %s AND date(created) <= %s";
         $jsst_query_args = array($jsst_curdate, $jsst_fromdate);
         if($jsst_id) { $jsst_query .= " AND staffid = %d"; $jsst_query_args[] = $jsst_id; }
         $jsst_overdueticket = jssupportticket::$_db->get_results(jssupportticket::$_db->prepare($jsst_query, $jsst_query_args));
 
-        $jsst_query = "SELECT created FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE isanswered != 1 AND status != 5 AND (lastreply != '0000-00-00 00:00:00') AND date(created) >= %s AND date(created) <= %s";
+        $jsst_query = "SELECT created FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE isanswered != 1 AND status != 5 AND status != 6 AND (lastreply != '0000-00-00 00:00:00') AND date(created) >= %s AND date(created) <= %s";
         $jsst_query_args = array($jsst_curdate, $jsst_fromdate);
         if($jsst_id) { $jsst_query .= " AND staffid = %d"; $jsst_query_args[] = $jsst_id; }
         $jsst_pendingticket = jssupportticket::$_db->get_results(jssupportticket::$_db->prepare($jsst_query, $jsst_query_args));
@@ -997,13 +1043,21 @@ class JSSTreportsModel {
         $jsst_query_args = array($jsst_curdate, $jsst_fromdate, $jsst_curdate, $jsst_fromdate, $jsst_curdate, $jsst_fromdate, $jsst_curdate, $jsst_fromdate, $jsst_curdate, $jsst_fromdate, $jsst_curdate, $jsst_fromdate);
         $jsst_query = "SELECT staff.photo,staff.id,staff.firstname,staff.lastname,staff.username,staff.email,user.display_name,user.user_email,user.user_nicename,
                     (SELECT COUNT(id) FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE status = 1 AND (lastreply = '0000-00-00 00:00:00') AND date(created) >= %s AND date(created) <= %s AND staffid = staff.id) AS openticket,
-                    (SELECT COUNT(id) FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE status = 5 AND date(created) >= %s AND date(created) <= %s AND staffid = staff.id) AS closeticket,
-                    (SELECT COUNT(id) FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE isanswered = 1 AND status != 5 AND status != 1 AND date(created) >= %s AND date(created) <= %s AND staffid = staff.id) AS answeredticket,
-                    (SELECT COUNT(id) FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE isoverdue = 1 AND status != 5 AND date(created) >= %s AND date(created) <= %s AND staffid = staff.id) AS overdueticket,
+                    (SELECT COUNT(id) FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE (status = 5 OR status = 6) AND date(created) >= %s AND date(created) <= %s AND staffid = staff.id) AS closeticket,
+                    (SELECT COUNT(id) FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE isanswered = 1 AND status != 5 AND status != 6 AND status != 1 AND date(created) >= %s AND date(created) <= %s AND staffid = staff.id) AS answeredticket,
+                    (SELECT COUNT(id) FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE isoverdue = 1 AND status != 5 AND status != 6 AND date(created) >= %s AND date(created) <= %s AND staffid = staff.id) AS overdueticket,
                     (SELECT COUNT(id) FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE date(created) >= %s AND date(created) <= %s AND staffid = staff.id) AS allticket,
                     (SELECT COUNT(id) FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE isanswered != 1 AND status !=  5 AND (lastreply != '0000-00-00 00:00:00') AND date(created) >= %s AND date(created) <= %s AND staffid = staff.id) AS pendingticket   ";
                     if(in_array('feedback', jssupportticket::$_active_addons)){
-                        $jsst_query .=    ",(SELECT AVG(feed.rating) FROM `" . jssupportticket::$_db->prefix . "js_ticket_feedbacks` AS feed JOIN `" . jssupportticket::$_db->prefix . "js_ticket_tickets` AS ticket ON ticket.id= feed.ticketid WHERE date(feed.created) >= %s AND date(feed.created) <= %s AND ticket.staffid = staff.id) AS avragerating ";
+                        /* The agent the score was given to, not the agent who
+                           happens to own the ticket now. `js_ticket_satisfaction`
+                           records `staffid` when the survey is created, so a
+                           ticket reassigned next month no longer rewrites last
+                           month's average - which the join to the tickets table
+                           did, silently. Answers only, or the -1 an unanswered
+                           survey carries would be averaged in as a score.
+                           (Roadmap 5.0-ANA-03) */
+                        $jsst_query .=    ",(SELECT AVG(feed.score) FROM `" . jssupportticket::$_db->prefix . "js_ticket_satisfaction` AS feed WHERE feed.state = 'answered' AND date(feed.created) >= %s AND date(feed.created) <= %s AND feed.staffid = staff.id) AS avragerating ";
                         $jsst_query_args[] = $jsst_curdate;
                         $jsst_query_args[] = $jsst_fromdate;
                     }
@@ -1035,10 +1089,18 @@ class JSSTreportsModel {
             }
         }
 
+        /* `ticket.staffid`, not `staffid`. This clause is used twice: once in
+           the count below, where the only table with a staffid is the tickets
+           table, and once in the listing further down - which the Feedback
+           add-on joins `js_ticket_satisfaction` into, and that table has a
+           staffid of its own. Unqualified, the listing failed outright with
+           "Column 'staffid' in where clause is ambiguous" and an agent opening
+           any agent's detail report got a database error instead of a page.
+           (Roadmap 5.0-ANA-03) */
         if($jsst_ticketid_string == ''){
-            $jsst_q_strig = jssupportticket::$_db->prepare("(staffid = %d)", $jsst_id);
+            $jsst_q_strig = jssupportticket::$_db->prepare("(ticket.staffid = %d)", $jsst_id);
         }else{
-            $jsst_q_strig = jssupportticket::$_db->prepare("(staffid = %d OR ticket.id IN (".$jsst_ticketid_string."))", $jsst_id);
+            $jsst_q_strig = jssupportticket::$_db->prepare("(ticket.staffid = %d OR ticket.id IN (".$jsst_ticketid_string."))", $jsst_id);
         }
 
         // Pagination
@@ -1065,7 +1127,7 @@ class JSSTreportsModel {
 
         if(in_array('timetracking', jssupportticket::$_active_addons)){
             foreach (jssupportticket::$jsst_data['staff_tickets'] as $jsst_ticket) {
-                 //$jsst_ticket->time = JSSTincluder::getJSModel('agent')->getTimeTakenByTicketId($jsst_ticket->id);
+                 //$jsst_ticket->time = JSSTincluder::getJSModel('timetracking')->getTimeTakenByTicketId($jsst_ticket->id);
                  $jsst_ticket->time = JSSTincluder::getJSModel('timetracking')->getTimeTakenByTicketIdAndStaffid($jsst_ticket->id,$jsst_id);// second parameter is staff id
             }
         }
@@ -1107,22 +1169,22 @@ class JSSTreportsModel {
         if($jsst_id) { $jsst_query .= " AND departmentid = %d"; $jsst_query_args[] = $jsst_id; }
         $jsst_openticket = jssupportticket::$_db->get_results(jssupportticket::$_db->prepare($jsst_query, $jsst_query_args));
 
-        $jsst_query = "SELECT created FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE status = 5 AND date(created) >= %s AND date(created) <= %s";
+        $jsst_query = "SELECT created FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE (status = 5 OR status = 6) AND date(created) >= %s AND date(created) <= %s";
         $jsst_query_args = array($jsst_curdate, $jsst_fromdate);
         if($jsst_id) { $jsst_query .= " AND departmentid = %d"; $jsst_query_args[] = $jsst_id; }
         $jsst_closeticket = jssupportticket::$_db->get_results(jssupportticket::$_db->prepare($jsst_query, $jsst_query_args));
 
-        $jsst_query = "SELECT created FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE isanswered = 1 AND status != 5 AND status != 1 AND date(created) >= %s AND date(created) <= %s";
+        $jsst_query = "SELECT created FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE isanswered = 1 AND status != 5 AND status != 6 AND status != 1 AND date(created) >= %s AND date(created) <= %s";
         $jsst_query_args = array($jsst_curdate, $jsst_fromdate);
         if($jsst_id) { $jsst_query .= " AND departmentid = %d"; $jsst_query_args[] = $jsst_id; }
         $jsst_answeredticket = jssupportticket::$_db->get_results(jssupportticket::$_db->prepare($jsst_query, $jsst_query_args));
 
-        $jsst_query = "SELECT created FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE isoverdue = 1 AND status != 5 AND date(created) >= %s AND date(created) <= %s";
+        $jsst_query = "SELECT created FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE isoverdue = 1 AND status != 5 AND status != 6 AND date(created) >= %s AND date(created) <= %s";
         $jsst_query_args = array($jsst_curdate, $jsst_fromdate);
         if($jsst_id) { $jsst_query .= " AND departmentid = %d"; $jsst_query_args[] = $jsst_id; }
         $jsst_overdueticket = jssupportticket::$_db->get_results(jssupportticket::$_db->prepare($jsst_query, $jsst_query_args));
 
-        $jsst_query = "SELECT created FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE isanswered != 1 AND status != 5 AND (lastreply != '0000-00-00 00:00:00') AND date(created) >= %s AND date(created) <= %s";
+        $jsst_query = "SELECT created FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE isanswered != 1 AND status != 5 AND status != 6 AND (lastreply != '0000-00-00 00:00:00') AND date(created) >= %s AND date(created) <= %s";
         $jsst_query_args = array($jsst_curdate, $jsst_fromdate);
         if($jsst_id) { $jsst_query .= " AND departmentid = %d"; $jsst_query_args[] = $jsst_id; }
         $jsst_pendingticket = jssupportticket::$_db->get_results(jssupportticket::$_db->prepare($jsst_query, $jsst_query_args));
@@ -1199,10 +1261,10 @@ class JSSTreportsModel {
         $jsst_query = "SELECT department.id,department.departmentname,email.email,
                     (SELECT COUNT(id) FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE departmentid = department.id) AS allticket,
                     (SELECT COUNT(id) FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE status = 1 AND (lastreply = '0000-00-00 00:00:00') AND date(created) >= %s AND date(created) <= %s AND departmentid = department.id) AS openticket,
-                    (SELECT COUNT(id) FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE status = 5 AND date(created) >= %s AND date(created) <= %s AND departmentid = department.id) AS closeticket,
-                    (SELECT COUNT(id) FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE isanswered = 1 AND status != 5 AND status != 1 AND date(created) >= %s AND date(created) <= %s AND departmentid = department.id) AS answeredticket,
-                    (SELECT COUNT(id) FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE isoverdue = 1 AND status != 5 AND date(created) >= %s AND date(created) <= %s AND departmentid = department.id) AS overdueticket,
-                    (SELECT COUNT(id) FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE isanswered != 1 AND status != 5 AND (lastreply != '0000-00-00 00:00:00') AND date(created) >= %s AND date(created) <= %s AND departmentid = department.id) AS pendingticket
+                    (SELECT COUNT(id) FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE (status = 5 OR status = 6) AND date(created) >= %s AND date(created) <= %s AND departmentid = department.id) AS closeticket,
+                    (SELECT COUNT(id) FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE isanswered = 1 AND status != 5 AND status != 6 AND status != 1 AND date(created) >= %s AND date(created) <= %s AND departmentid = department.id) AS answeredticket,
+                    (SELECT COUNT(id) FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE isoverdue = 1 AND status != 5 AND status != 6 AND date(created) >= %s AND date(created) <= %s AND departmentid = department.id) AS overdueticket,
+                    (SELECT COUNT(id) FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE isanswered != 1 AND status != 5 AND status != 6 AND (lastreply != '0000-00-00 00:00:00') AND date(created) >= %s AND date(created) <= %s AND departmentid = department.id) AS pendingticket
                     FROM `".jssupportticket::$_db->prefix."js_ticket_departments` AS department
                     JOIN `".jssupportticket::$_db->prefix."js_ticket_email` AS email ON department.emailid = email.id
                     WHERE department.id = %d";
@@ -1219,7 +1281,7 @@ class JSSTreportsModel {
                     LEFT JOIN `".jssupportticket::$_db->prefix."js_ticket_priorities` AS priority ON priority.id = ticket.priorityid
                     JOIN `" . jssupportticket::$_db->prefix . "js_ticket_statuses` AS status ON ticket.status = status.id
                     ".jssupportticket::$_addon_query['join']."
-                    WHERE departmentid = %d AND date(ticket.created) >= %s AND date(ticket.created) <= %s ";
+                    WHERE ticket.departmentid = %d AND date(ticket.created) >= %s AND date(ticket.created) <= %s ";
         $jsst_query = jssupportticket::$_db->prepare($jsst_query, $jsst_id, $jsst_curdate, $jsst_fromdate);
         $jsst_query .= " LIMIT " . JSSTpagination::getOffset() . ", " . JSSTpagination::getLimit();
         do_action('jsst_reset_aadon_query');
@@ -1269,22 +1331,22 @@ class JSSTreportsModel {
         if($jsst_id) { $jsst_query .= " AND uid = %d"; $jsst_query_args[] = $jsst_id; }
         $jsst_openticket = jssupportticket::$_db->get_results(jssupportticket::$_db->prepare($jsst_query, $jsst_query_args));
 
-        $jsst_query = "SELECT created FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE status = 5 AND date(created) >= %s AND date(created) <= %s";
+        $jsst_query = "SELECT created FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE (status = 5 OR status = 6) AND date(created) >= %s AND date(created) <= %s";
         $jsst_query_args = array($jsst_curdate, $jsst_fromdate);
         if($jsst_id) { $jsst_query .= " AND uid = %d"; $jsst_query_args[] = $jsst_id; }
         $jsst_closeticket = jssupportticket::$_db->get_results(jssupportticket::$_db->prepare($jsst_query, $jsst_query_args));
 
-        $jsst_query = "SELECT created FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE isanswered = 1 AND status != 5 AND status != 1 AND date(created) >= %s AND date(created) <= %s";
+        $jsst_query = "SELECT created FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE isanswered = 1 AND status != 5 AND status != 6 AND status != 1 AND date(created) >= %s AND date(created) <= %s";
         $jsst_query_args = array($jsst_curdate, $jsst_fromdate);
         if($jsst_id) { $jsst_query .= " AND uid = %d"; $jsst_query_args[] = $jsst_id; }
         $jsst_answeredticket = jssupportticket::$_db->get_results(jssupportticket::$_db->prepare($jsst_query, $jsst_query_args));
 
-        $jsst_query = "SELECT created FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE isoverdue = 1 AND status != 5 AND date(created) >= %s AND date(created) <= %s";
+        $jsst_query = "SELECT created FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE isoverdue = 1 AND status != 5 AND status != 6 AND date(created) >= %s AND date(created) <= %s";
         $jsst_query_args = array($jsst_curdate, $jsst_fromdate);
         if($jsst_id) { $jsst_query .= " AND uid = %d"; $jsst_query_args[] = $jsst_id; }
         $jsst_overdueticket = jssupportticket::$_db->get_results(jssupportticket::$_db->prepare($jsst_query, $jsst_query_args));
 
-        $jsst_query = "SELECT created FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE isanswered != 1 AND status != 5 AND (lastreply != '0000-00-00 00:00:00') AND date(created) >= %s AND date(created) <= %s";
+        $jsst_query = "SELECT created FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE isanswered != 1 AND status != 5 AND status != 6 AND (lastreply != '0000-00-00 00:00:00') AND date(created) >= %s AND date(created) <= %s";
         $jsst_query_args = array($jsst_curdate, $jsst_fromdate);
         if($jsst_id) { $jsst_query .= " AND uid = %d"; $jsst_query_args[] = $jsst_id; }
         $jsst_pendingticket = jssupportticket::$_db->get_results(jssupportticket::$_db->prepare($jsst_query, $jsst_query_args));
@@ -1352,10 +1414,10 @@ class JSSTreportsModel {
         $jsst_query = "SELECT user.display_name,user.user_email,user.user_nicename,user.id,
                     (SELECT COUNT(id) FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE uid = user.id) AS allticket,
                     (SELECT COUNT(id) FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE status = 1  AND (lastreply = '0000-00-00 00:00:00') AND date(created) >= %s AND date(created) <= %s AND uid = user.id) AS openticket,
-                    (SELECT COUNT(id) FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE status = 5 AND date(created) >= %s AND date(created) <= %s AND uid = user.id) AS closeticket,
-                    (SELECT COUNT(id) FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE isanswered = 1 AND status != 5 AND status != 1 AND date(created) >= %s AND date(created) <= %s AND uid = user.id) AS answeredticket,
-                    (SELECT COUNT(id) FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE isoverdue = 1 AND status != 5 AND date(created) >= %s AND date(created) <= %s AND uid = user.id) AS overdueticket,
-                    (SELECT COUNT(id) FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE isanswered != 1 AND status != 5 AND (lastreply != '0000-00-00 00:00:00') AND date(created) >= %s AND date(created) <= %s AND uid = user.id) AS pendingticket
+                    (SELECT COUNT(id) FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE (status = 5 OR status = 6) AND date(created) >= %s AND date(created) <= %s AND uid = user.id) AS closeticket,
+                    (SELECT COUNT(id) FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE isanswered = 1 AND status != 5 AND status != 6 AND status != 1 AND date(created) >= %s AND date(created) <= %s AND uid = user.id) AS answeredticket,
+                    (SELECT COUNT(id) FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE isoverdue = 1 AND status != 5 AND status != 6 AND date(created) >= %s AND date(created) <= %s AND uid = user.id) AS overdueticket,
+                    (SELECT COUNT(id) FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE isanswered != 1 AND status != 5 AND status != 6 AND (lastreply != '0000-00-00 00:00:00') AND date(created) >= %s AND date(created) <= %s AND uid = user.id) AS pendingticket
                     FROM `".jssupportticket::$_wpprefixforuser."js_ticket_users` AS user
                     WHERE user.id = %d";
         $jsst_query = jssupportticket::$_db->prepare($jsst_query, $jsst_curdate, $jsst_fromdate, $jsst_curdate, $jsst_fromdate, $jsst_curdate, $jsst_fromdate, $jsst_curdate, $jsst_fromdate, $jsst_curdate, $jsst_fromdate, $jsst_id);
@@ -1376,7 +1438,7 @@ class JSSTreportsModel {
                     LEFT JOIN `".jssupportticket::$_db->prefix."js_ticket_priorities` AS priority ON priority.id = ticket.priorityid
                     JOIN `" . jssupportticket::$_db->prefix . "js_ticket_statuses` AS status ON ticket.status = status.id
                     ".jssupportticket::$_addon_query['join']."
-                    WHERE uid = %d AND date(ticket.created) >= %s AND date(ticket.created) <= %s ";
+                    WHERE ticket.uid = %d AND date(ticket.created) >= %s AND date(ticket.created) <= %s ";
         $jsst_query = jssupportticket::$_db->prepare($jsst_query, $jsst_id, $jsst_curdate, $jsst_fromdate);
         $jsst_query .= " LIMIT " . JSSTpagination::getOffset() . ", " . JSSTpagination::getLimit();
         do_action('jsst_reset_aadon_query');

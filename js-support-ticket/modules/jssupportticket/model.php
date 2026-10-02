@@ -5,6 +5,22 @@ if (!defined('ABSPATH'))
 
 class JSSTjssupportticketModel {
 
+    /*
+     * Called by 4.0.0 while WordPress updates it to this version.
+     *
+     * During an update the code running is still 4.0.0's, and its
+     * upgrader_process_complete handler calls these two on the model it loads
+     * from the NEW files. Licensing moved to JSSTlicense in 5.0.0 and both went
+     * with it, so every 4.0.0 -> 5.0.0 update ended in a fatal error (found in
+     * the installation test of 26 September 2026). They stay, empty, so that
+     * update finishes. Nothing in 5.0.0 calls them.
+     */
+    function jsst_check_license_status() {
+    }
+
+    function JSSTAddonsAutoUpdate() {
+    }
+
     function getControlPanelData() {
 
         //determine user
@@ -526,87 +542,62 @@ $jsst_query = "SELECT product.product, COUNT(t.id) AS ticket_count
 
         jssupportticket::$jsst_data['jssupportticket_admin_charts_visibility'] = get_option('jssupportticket_admin_charts_visibility', $jsst_default_options);
 
-        jssupportticket::$jsst_data['update_avaliable_for_addons'] = $this->showUpdateAvaliableAlert();
-    }
-
-    function showUpdateAvaliableAlert(){
-        require_once JSST_PLUGIN_PATH.'includes/addon-updater/jsstupdater.php';
-        $jsst_JS_SUPPORTTICKETUpdater  = new JS_SUPPORTTICKETUpdater();
-        $jsst_cdnversiondata = $jsst_JS_SUPPORTTICKETUpdater->getPluginVersionDataFromCDN();
-        $jsst_not_installed = array();
-
-        $jsst_jssupportticket_addons = $this->getJSSTAddonsArray();
-        $jsst_installed_plugins = get_plugins();
-        $jsst_count = 0;
-        foreach ($jsst_jssupportticket_addons as $jsst_key1 => $jsst_value1) {
-            $jsst_matched = 0;
-            $jsst_version = "";
-            foreach ($jsst_installed_plugins as $jsst_name => $jsst_value) {
-                $jsst_install_plugin_name = str_replace(".php","",basename($jsst_name));
-                if($jsst_key1 == $jsst_install_plugin_name){
-                    $jsst_matched = 1;
-                    $jsst_version = $jsst_value["Version"];
-                    $jsst_install_plugin_matched_name = $jsst_install_plugin_name;
-                }
-            }
-            if($jsst_matched == 1){ //installed
-                $jsst_name = $jsst_key1;
-                $jsst_title = $jsst_value1['title'];
-                $jsst_img = str_replace("js-support-ticket-", "", $jsst_key1).'.png';
-                $jsst_cdnavailableversion = "";
-                foreach ($jsst_cdnversiondata as $jsst_cdnname => $jsst_cdnversion) {
-                    $jsst_install_plugin_name_simple = str_replace("-", "", $jsst_install_plugin_matched_name);
-                    if($jsst_cdnname == str_replace("-", "", $jsst_install_plugin_matched_name)){
-                        if($jsst_cdnversion > $jsst_version){ // new version available
-                            $jsst_count++;
-                        }
-                    }    
-                }
-            }
-        }
-        return $jsst_count;
     }
 
     function getJSSTAddonsArray(){
-        return array(
-            'js-support-ticket-aipoweredreply' => array('title' => esc_html(__('AI Powered Reply','js-support-ticket')), 'price' => 0, 'status' => 1),
-            'js-support-ticket-actions' => array('title' => esc_html(__('Ticket Actions','js-support-ticket')), 'price' => 0, 'status' => 1),
-            'js-support-ticket-agent' => array('title' => esc_html(__('Agents','js-support-ticket')), 'price' => 0, 'status' => 1),
-            'js-support-ticket-autoclose' => array('title' => esc_html(__('Ticket Auto Close','js-support-ticket')), 'price' => 0, 'status' => 1),
-            'js-support-ticket-faq' => array('title' => esc_html(__('FAQs','js-support-ticket')), 'price' => 0, 'status' => 1),
-            'js-support-ticket-helptopic' => array('title' => esc_html(__('Help Topic','js-support-ticket')), 'price' => 0, 'status' => 1),
-            'js-support-ticket-maxticket' => array('title' => esc_html(__('Max Tickets','js-support-ticket')), 'price' => 0, 'status' => 1),
-            'js-support-ticket-overdue' => array('title' => esc_html(__('Ticket Overdue','js-support-ticket')), 'price' => 0, 'status' => 1),
-            'js-support-ticket-smtp' => array('title' => esc_html(__('SMTP','js-support-ticket')), 'price' => 0, 'status' => 1),
-            'js-support-ticket-tickethistory' => array('title' => esc_html(__('Ticket History','js-support-ticket')), 'price' => 0, 'status' => 1),
-            'js-support-ticket-useroptions' => array('title' => esc_html(__('User Options','js-support-ticket')), 'price' => 0, 'status' => 1),
-            'js-support-ticket-mailchimp' => array('title' => esc_html(__('Mailchimp','js-support-ticket')), 'price' => 0, 'status' => 1),
-            'js-support-ticket-export' => array('title' => esc_html(__('Export','js-support-ticket')), 'price' => 0, 'status' => 1),
-            'js-support-ticket-announcement' => array('title' => esc_html(__('Announcements','js-support-ticket')), 'price' => 0, 'status' => 1),   
-            'js-support-ticket-mail' => array('title' => esc_html(__('Internal Mail','js-support-ticket')), 'price' => 0, 'status' => 1),
-            'js-support-ticket-note' => array('title' => esc_html(__('Private Note','js-support-ticket')), 'price' => 0, 'status' => 1),
-            'js-support-ticket-cannedresponses' => array('title' => esc_html(__('Canned Response','js-support-ticket')), 'price' => 0, 'status' => 1),
-            'js-support-ticket-woocommerce' => array('title' => esc_html(__('WooCommerce','js-support-ticket')), 'price' => 0, 'status' => 1),
-            'js-support-ticket-privatecredentials'=> array('title' => esc_html(__('Private Credentials','js-support-ticket')), 'price' => 0, 'status' => 1),
-            'js-support-ticket-envatovalidation' => array('title' => esc_html(__('Envato Validation','js-support-ticket')), 'price' => 0, 'status' => 1),
-            'js-support-ticket-emailcc' => array('title' => esc_html(__('Email CC','js-support-ticket')), 'price' => 0, 'status' => 1),
-            'js-support-ticket-feedback' => array('title' => esc_html(__('Feedback','js-support-ticket')), 'price' => 0, 'status' => 1),
-            'js-support-ticket-knowledgebase' => array('title' => esc_html(__('Knowledge Base','js-support-ticket')), 'price' => 0, 'status' => 1),
-            'js-support-ticket-mergeticket' => array('title' => esc_html(__('Merge Tickets','js-support-ticket')), 'price' => 0, 'status' => 1),
-            'js-support-ticket-emailpiping' => array('title' => esc_html(__('Email Piping','js-support-ticket')), 'price' => 0, 'status' => 1),
-            'js-support-ticket-timetracking' => array('title' => esc_html(__('Time Tracking','js-support-ticket')), 'price' => 0, 'status' => 1),
-            'js-support-ticket-banemail' => array('title' => esc_html(__('Ban Email','js-support-ticket')), 'price' => 0, 'status' => 1),
-            'js-support-ticket-notification' => array('title' => esc_html(__('Desktop Notification','js-support-ticket')), 'price' => 0, 'status' => 1),
-            'js-support-ticket-download' => array('title' => esc_html(__('Downloads','js-support-ticket')), 'price' => 0, 'status' => 1),
-            'js-support-ticket-agentautoassign' => array('title' => esc_html(__('Agent Auto Assign','js-support-ticket')), 'price' => 0, 'status' => 1),
-            'js-support-ticket-multiform' => array('title' => esc_html(__('Multiform','js-support-ticket')), 'price' => 0, 'status' => 1),
-            'js-support-ticket-dashboardwidgets' => array('title' => esc_html(__('Admin Widgets','js-support-ticket')), 'price' => 0, 'status' => 1),
-            'js-support-ticket-widgets' => array('title' => esc_html(__('Front-End Widgets','js-support-ticket')), 'price' => 0, 'status' => 1),
-            'js-support-ticket-paidsupport'  => array('title' => esc_html(__('Paid Support','js-support-ticket')), 'price' => 0, 'status' => 1),
-            'js-support-ticket-easydigitaldownloads' => array('title' => esc_html(__('Easy Digital Downloads','js-support-ticket')), 'price' => 0, 'status' => 1),
-            'js-support-ticket-multilanguageemailtemplates'  => array('title' => esc_html(__('Multi Language Email Templates','js-support-ticket')), 'price' => 0, 'status' => 1),
-            'js-support-ticket-autocleanup'  => array('title' => esc_html(__('Auto Cleanup','js-support-ticket')), 'price' => 0, 'status' => 1),
-            'js-support-ticket-instantresolve'  => array('title' => esc_html(__('Instant Resolve','js-support-ticket')), 'price' => 0, 'status' => 1),
+        $jsst_addons = array();
+        if (class_exists('JSSTbundle')) {
+            foreach (JSSTbundle::catalogue() as $jsst_file => $jsst_bundle) {
+                $jsst_addons[$jsst_file] = array(
+                    'title'       => esc_html($jsst_bundle['title']),
+                    'description' => $jsst_bundle['description'],
+                    'url'         => $jsst_bundle['url'],
+                    'image'       => $jsst_bundle['image'],
+                    'price'       => 0,
+                    'status'      => 1,
+                    'legacy'      => false,
+                );
+            }
+        }
+        return $jsst_addons + array(
+            'js-support-ticket-aipoweredreply' => array('title' => esc_html(__('AI Powered Reply (now free in core)', 'js-support-ticket')), 'price' => 0, 'status' => 1, 'legacy' => true),
+            'js-support-ticket-actions' => array('title' => esc_html(__('Ticket Actions', 'js-support-ticket')), 'price' => 0, 'status' => 1, 'legacy' => true),
+            'js-support-ticket-agent' => array('title' => esc_html(__('Agents', 'js-support-ticket')), 'price' => 0, 'status' => 1, 'legacy' => true),
+            'js-support-ticket-autoclose' => array('title' => esc_html(__('Ticket Auto Close', 'js-support-ticket')), 'price' => 0, 'status' => 1, 'legacy' => true),
+            'js-support-ticket-faq' => array('title' => esc_html(__('FAQs', 'js-support-ticket')), 'price' => 0, 'status' => 1, 'legacy' => true),
+            'js-support-ticket-helptopic' => array('title' => esc_html(__('Help Topic', 'js-support-ticket')), 'price' => 0, 'status' => 1, 'legacy' => true),
+            'js-support-ticket-maxticket' => array('title' => esc_html(__('Max Tickets', 'js-support-ticket')), 'price' => 0, 'status' => 1, 'legacy' => true),
+            'js-support-ticket-overdue' => array('title' => esc_html(__('Ticket Overdue', 'js-support-ticket')), 'price' => 0, 'status' => 1, 'legacy' => true),
+            'js-support-ticket-smtp' => array('title' => esc_html(__('SMTP', 'js-support-ticket')), 'price' => 0, 'status' => 1, 'legacy' => true),
+            'js-support-ticket-tickethistory' => array('title' => esc_html(__('Ticket History', 'js-support-ticket')), 'price' => 0, 'status' => 1, 'legacy' => true),
+            'js-support-ticket-useroptions' => array('title' => esc_html(__('User Options', 'js-support-ticket')), 'price' => 0, 'status' => 1, 'legacy' => true),
+            'js-support-ticket-mailchimp' => array('title' => esc_html(__('Mailchimp', 'js-support-ticket')), 'price' => 0, 'status' => 1, 'legacy' => true),
+            'js-support-ticket-export' => array('title' => esc_html(__('Export', 'js-support-ticket')), 'price' => 0, 'status' => 1, 'legacy' => true),
+            'js-support-ticket-announcement' => array('title' => esc_html(__('Announcements', 'js-support-ticket')), 'price' => 0, 'status' => 1, 'legacy' => true),
+            'js-support-ticket-mail' => array('title' => esc_html(__('Internal Mail', 'js-support-ticket')), 'price' => 0, 'status' => 1, 'legacy' => true),
+            'js-support-ticket-note' => array('title' => esc_html(__('Private Note', 'js-support-ticket')), 'price' => 0, 'status' => 1, 'legacy' => true),
+            'js-support-ticket-cannedresponses' => array('title' => esc_html(__('Canned Response', 'js-support-ticket')), 'price' => 0, 'status' => 1, 'legacy' => true),
+            'js-support-ticket-woocommerce' => array('title' => esc_html(__('WooCommerce', 'js-support-ticket')), 'price' => 0, 'status' => 1, 'legacy' => true),
+            'js-support-ticket-privatecredentials' => array('title' => esc_html(__('Private Credentials', 'js-support-ticket')), 'price' => 0, 'status' => 1, 'legacy' => true),
+            'js-support-ticket-envatovalidation' => array('title' => esc_html(__('Envato Validation', 'js-support-ticket')), 'price' => 0, 'status' => 1, 'legacy' => true),
+            'js-support-ticket-emailcc' => array('title' => esc_html(__('Email CC', 'js-support-ticket')), 'price' => 0, 'status' => 1, 'legacy' => true),
+            'js-support-ticket-feedback' => array('title' => esc_html(__('Feedback', 'js-support-ticket')), 'price' => 0, 'status' => 1, 'legacy' => true),
+            'js-support-ticket-knowledgebase' => array('title' => esc_html(__('Knowledge Base', 'js-support-ticket')), 'price' => 0, 'status' => 1, 'legacy' => true),
+            'js-support-ticket-mergeticket' => array('title' => esc_html(__('Merge Tickets', 'js-support-ticket')), 'price' => 0, 'status' => 1, 'legacy' => true),
+            'js-support-ticket-emailpiping' => array('title' => esc_html(__('Email Piping', 'js-support-ticket')), 'price' => 0, 'status' => 1, 'legacy' => true),
+            'js-support-ticket-timetracking' => array('title' => esc_html(__('Time Tracking', 'js-support-ticket')), 'price' => 0, 'status' => 1, 'legacy' => true),
+            'js-support-ticket-banemail' => array('title' => esc_html(__('Ban Email', 'js-support-ticket')), 'price' => 0, 'status' => 1, 'legacy' => true),
+            'js-support-ticket-notification' => array('title' => esc_html(__('Desktop Notification', 'js-support-ticket')), 'price' => 0, 'status' => 1, 'legacy' => true),
+            'js-support-ticket-download' => array('title' => esc_html(__('Downloads', 'js-support-ticket')), 'price' => 0, 'status' => 1, 'legacy' => true),
+            'js-support-ticket-agentautoassign' => array('title' => esc_html(__('Agent Auto Assign', 'js-support-ticket')), 'price' => 0, 'status' => 1, 'legacy' => true),
+            'js-support-ticket-multiform' => array('title' => esc_html(__('Multiform', 'js-support-ticket')), 'price' => 0, 'status' => 1, 'legacy' => true),
+            'js-support-ticket-dashboardwidgets' => array('title' => esc_html(__('Admin Widgets', 'js-support-ticket')), 'price' => 0, 'status' => 1, 'legacy' => true),
+            'js-support-ticket-widgets' => array('title' => esc_html(__('Front-End Widgets', 'js-support-ticket')), 'price' => 0, 'status' => 1, 'legacy' => true),
+            'js-support-ticket-paidsupport' => array('title' => esc_html(__('Paid Support', 'js-support-ticket')), 'price' => 0, 'status' => 1, 'legacy' => true),
+            'js-support-ticket-easydigitaldownloads' => array('title' => esc_html(__('Easy Digital Downloads', 'js-support-ticket')), 'price' => 0, 'status' => 1, 'legacy' => true),
+            'js-support-ticket-multilanguageemailtemplates' => array('title' => esc_html(__('Multi Language Email Templates', 'js-support-ticket')), 'price' => 0, 'status' => 1, 'legacy' => true),
+            'js-support-ticket-autocleanup' => array('title' => esc_html(__('Auto Cleanup', 'js-support-ticket')), 'price' => 0, 'status' => 1, 'legacy' => true),
+            'js-support-ticket-aiagent' => array('title' => esc_html(__('AI Agent', 'js-support-ticket')), 'price' => 0, 'status' => 1, 'legacy' => true),
         );
     }
 
@@ -658,6 +649,17 @@ $jsst_query = "SELECT product.product, COUNT(t.id) AS ticket_count
         return $jsst_tickets;
     }
 
+    /**
+     * The tiles on an agent's control panel, counted the way the reports count.
+     *
+     * Same pair of closed statuses as everywhere else - 5 `Closed` and 6 `Close
+     * Due To Merge` - and this function had three different answers to that
+     * question in five queries: Open and Closed already knew about 6, Answered
+     * and Pending did not, and Overdue filtered on no status at all, so a
+     * ticket that was closed last month still sat in the agent's Overdue tile
+     * forever. The charts directly below this already read the pair correctly;
+     * the tiles above them did not, on the same screen. (Roadmap 5.0-ANA-05)
+     */
     function getAgentTicketStats($jsst_staffid){
         if(!is_numeric($jsst_staffid)){
             return false;
@@ -683,14 +685,14 @@ $jsst_query = "SELECT product.product, COUNT(t.id) AS ticket_count
         FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` AS ticket
         LEFT JOIN `" . jssupportticket::$_db->prefix . "js_ticket_priorities` AS priority ON ticket.priorityid = priority.id
         LEFT JOIN `" . jssupportticket::$_db->prefix . "js_ticket_departments` AS department ON ticket.departmentid = department.id
-        WHERE (".$jsst_agent_conditions.") AND ticket.isanswered = 1 AND ticket.status != 5 AND ticket.status != 1 ";
+        WHERE (".$jsst_agent_conditions.") AND ticket.isanswered = 1 AND ticket.status != 5 AND ticket.status != 6 AND ticket.status != 1 ";
         $jsst_result['answeredticket'] = jssupportticket::$_db->get_var($jsst_query);
 
         $jsst_query = "SELECT COUNT(ticket.id)
         FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` AS ticket
         LEFT JOIN `" . jssupportticket::$_db->prefix . "js_ticket_priorities` AS priority ON ticket.priorityid = priority.id
         LEFT JOIN `" . jssupportticket::$_db->prefix . "js_ticket_departments` AS department ON ticket.departmentid = department.id
-        WHERE (".$jsst_agent_conditions.") AND ticket.isanswered != 1 AND ticket.status != 5 AND ticket.status != 1 AND (lastreply != '0000-00-00 00:00:00') ";
+        WHERE (".$jsst_agent_conditions.") AND ticket.isanswered != 1 AND ticket.status != 5 AND ticket.status != 6 AND ticket.status != 1 AND (lastreply != '0000-00-00 00:00:00') ";
         $jsst_result['pendingticket'] = jssupportticket::$_db->get_var($jsst_query);
 
         $jsst_query = "SELECT COUNT(ticket.id)
@@ -705,7 +707,7 @@ $jsst_query = "SELECT product.product, COUNT(t.id) AS ticket_count
         FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` AS ticket
         LEFT JOIN `" . jssupportticket::$_db->prefix . "js_ticket_priorities` AS priority ON ticket.priorityid = priority.id
         LEFT JOIN `" . jssupportticket::$_db->prefix . "js_ticket_departments` AS department ON ticket.departmentid = department.id
-        WHERE (".$jsst_agent_conditions.") AND ticket.isoverdue = 1 ";
+        WHERE (".$jsst_agent_conditions.") AND ticket.isoverdue = 1 AND ticket.status != 5 AND ticket.status != 6 ";
         $jsst_result['overdue'] = jssupportticket::$_db->get_var($jsst_query);
 
         $jsst_query = "SELECT COUNT(ticket.id)
@@ -947,6 +949,12 @@ $jsst_query = "SELECT product.product, COUNT(t.id) AS ticket_count
     }
 
 
+    /**
+     * The six totals on the staff control panel - the same six numbers as
+     * `JSSTreportsModel::getOverallReportData()`, and now the same definition of
+     * closed behind them, so the dashboard and the report agree about a merged
+     * ticket instead of differing by one. (Roadmap 5.0-ANA-05)
+     */
     function getStaffControlPanelData() {
 
         $jsst_query = "SELECT COUNT(id) FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` ";
@@ -955,16 +963,16 @@ $jsst_query = "SELECT product.product, COUNT(t.id) AS ticket_count
         $jsst_query = "SELECT COUNT(id) FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE status = 1 AND (lastreply = '0000-00-00 00:00:00')";
         $jsst_openticket = jssupportticket::$_db->get_var($jsst_query);
 
-        $jsst_query = "SELECT COUNT(id) FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE status = 5";
+        $jsst_query = "SELECT COUNT(id) FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE (status = 5 OR status = 6)";
         $jsst_closeticket = jssupportticket::$_db->get_var($jsst_query);
 
-        $jsst_query = "SELECT COUNT(id) FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE isanswered = 1 AND status != 5 AND status != 1";
+        $jsst_query = "SELECT COUNT(id) FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE isanswered = 1 AND status != 5 AND status != 6 AND status != 1";
         $jsst_answeredticket = jssupportticket::$_db->get_var($jsst_query);
 
-        $jsst_query = "SELECT COUNT(id) FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE isoverdue = 1 AND status != 5";
+        $jsst_query = "SELECT COUNT(id) FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE isoverdue = 1 AND status != 5 AND status != 6";
         $jsst_overdueticket = jssupportticket::$_db->get_var($jsst_query);
 
-        $jsst_query = "SELECT COUNT(id) FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE isanswered != 1 AND status != 5 AND (lastreply != '0000-00-00 00:00:00')";
+        $jsst_query = "SELECT COUNT(id) FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE isanswered != 1 AND status != 5 AND status != 6 AND (lastreply != '0000-00-00 00:00:00')";
         $jsst_pendingticket = jssupportticket::$_db->get_var($jsst_query);
 
         jssupportticket::$jsst_data['ticket_total']['allticket'] = $jsst_allticket;
@@ -986,7 +994,12 @@ $jsst_query = "SELECT product.product, COUNT(t.id) AS ticket_count
             jssupportticket::$jsst_data['total_tickets']['total_staff'] = 0;
         }
         if(in_array('feedback', jssupportticket::$_active_addons)){
-            $jsst_query = "SELECT COUNT(id) FROM `".jssupportticket::$_db->prefix."js_ticket_feedbacks`";
+            /* Answers, from the one table satisfaction is kept in since 6.5.
+               The state filter is not optional: a survey that has been sent
+               and not replied to is a row here too, and counting it would put
+               a number on this dashboard that no customer has said anything
+               to. (Roadmap 5.0-ANA-03) */
+            $jsst_query = "SELECT COUNT(id) FROM `".jssupportticket::$_db->prefix."js_ticket_satisfaction` WHERE state = 'answered'";
             jssupportticket::$jsst_data['total_tickets']['total_feedback'] = jssupportticket::$_db->get_var($jsst_query);
         }else{
             jssupportticket::$jsst_data['total_tickets']['total_feedback'] = 0;
@@ -1049,430 +1062,6 @@ $jsst_query = "SELECT product.product, COUNT(t.id) AS ticket_count
         }
     }
 
-    //translation code
-    function getListTranslations() {
-        if (!current_user_can('manage_options')) {
-            return false;
-        }
-        $jsst_nonce = JSSTrequest::getVar('_wpnonce');
-        if (!wp_verify_nonce($jsst_nonce, 'get-list-translations')) {
-            die('Security check Failed');
-        }
-        
-        $jsst_result = array('error' => false);
-
-        // --- INITIALIZE WP_FILESYSTEM ---
-        global $wp_filesystem;
-        if (empty($wp_filesystem)) {
-            do_action('jssupportticket_load_wp_file');
-        }
-        WP_Filesystem();
-        $jsst_wp_filesystem = $wp_filesystem;
-
-        $jsst_path = WP_LANG_DIR;
-        
-        // Replaced is_dir() with $jsst_wp_filesystem->is_dir()
-        if (!$jsst_wp_filesystem->is_dir($jsst_path)) {
-            $this->makeDir($jsst_path);
-        } else {
-            $jsst_path = WP_LANG_DIR . '/plugins/';
-            if (!$jsst_wp_filesystem->is_dir($jsst_path)) {
-                $this->makeDir($jsst_path);
-            }
-        }
-
-        // Replaced is_writeable() with $jsst_wp_filesystem->is_writable()
-        if (!$jsst_wp_filesystem->is_writable($jsst_path)) {
-            $jsst_result['error'] = esc_html(__('Dir is not writable', 'js-support-ticket')) . ' ' . $jsst_path;
-        } else {
-            if ($this->isConnected()) {
-                $jsst_url = "https://jshelpdesk.com/translations/api/1.0/index.php";
-                $jsst_post_data = array(
-                    'product'        => 'js-support-ticket-wp',
-                    'domain'         => get_site_url(),
-                    'producttype'    => jssupportticket::$_config['producttype'],
-                    'productcode'    => 'jsticket',
-                    'productversion' => jssupportticket::$_config['productversion'],
-                    'JVERSION'       => get_bloginfo('version'),
-                    'method'         => 'getTranslations'
-                );
-
-                $jsst_response = wp_remote_post($jsst_url, array('body' => $jsst_post_data, 'timeout' => 45, 'sslverify' => true));
-                
-                if (!is_wp_error($jsst_response) && $jsst_response['response']['code'] == 200 && isset($jsst_response['body'])) {
-                    $jsst_call_result = $jsst_response['body'];
-                } else {
-                    $jsst_call_result = false;
-                    $jsst_error = is_wp_error($jsst_response) ? $jsst_response->get_error_message() : $jsst_response['response']['message'];
-                }
-
-                $jsst_result['data'] = jssupportticketphplib::JSST_htmlentities($jsst_call_result);
-                if (!$jsst_call_result) {
-                    $jsst_result['error'] = $jsst_error;
-                }
-            } else {
-                $jsst_result['error'] = esc_html(__('Unable to connect to the server', 'js-support-ticket'));
-            }
-        }
-
-        return wp_json_encode($jsst_result);
-    }
-
-    function makeLanguageCode($jsst_lang_name){
-        $jsst_langarray = wp_get_installed_translations('core');
-        $jsst_langarray = isset($jsst_langarray['default']) ? $jsst_langarray['default'] : array();
-        $jsst_match = false;
-        if(array_key_exists($jsst_lang_name, $jsst_langarray)){
-            $jsst_lang_name = $jsst_lang_name;
-            $jsst_match = true;
-        }else{
-            $jsst_m_lang = '';
-            foreach($jsst_langarray AS $jsst_k => $jsst_v){
-                if($jsst_lang_name[0].$jsst_lang_name[1] == $jsst_k[0].$jsst_k[1]){
-                    $jsst_m_lang .= $jsst_k.', ';
-                }
-            }
-
-            if($jsst_m_lang != ''){
-                $jsst_m_lang = jssupportticketphplib::JSST_substr($jsst_m_lang, 0,strlen($jsst_m_lang) - 2);
-                $jsst_lang_name = $jsst_m_lang;
-                $jsst_match = 2;
-            }else{
-                $jsst_lang_name = $jsst_lang_name;
-                $jsst_match = false;
-            }
-        }
-
-        return array('match' => $jsst_match , 'lang_name' => $jsst_lang_name);
-    }
-
-    function validateAndShowDownloadFileName() {
-        if (!current_user_can('manage_options')) {
-            return false;
-        }
-
-        $jsst_nonce = JSSTrequest::getVar('_wpnonce');
-        if (!wp_verify_nonce($jsst_nonce, 'validate-and-show-download-filename')) {
-            die('Security check Failed');
-        }
-
-        $jsst_lang_name = JSSTrequest::getVar('langname');
-        if ($jsst_lang_name == '') {
-            return '';
-        }
-
-        $jsst_result = array();
-        $jsst_f_result = $this->makeLanguageCode($jsst_lang_name);
-        $jsst_path = WP_LANG_DIR . '/plugins/';
-        $jsst_result['error'] = false;
-
-        // --- INITIALIZE WP_FILESYSTEM ---
-        global $wp_filesystem;
-        if (!function_exists('wp_handle_upload')) {
-            do_action('jssupportticket_load_wp_file');
-        }
-        if ( ! WP_Filesystem() ) {
-            return false;
-        }
-        $jsst_wp_filesystem = $wp_filesystem;
-
-        if ($jsst_f_result['match'] === false) {
-            $jsst_result['error'] = $jsst_lang_name . ' ' . esc_html(__('Language is not installed', 'js-support-ticket'));
-        } 
-        // Replaced is_writeable($jsst_path) with $jsst_wp_filesystem->is_writable($jsst_path)
-        elseif (!$jsst_wp_filesystem->is_writable($jsst_path)) {
-            $jsst_result['error'] = $jsst_lang_name . ' ' . esc_html(__('Language directory is not writable', 'js-support-ticket')) . ': ' . $jsst_path;
-        } else {
-            $jsst_input_html = '<input id="languagecode" class="text_area" type="text" value="' . esc_attr($jsst_lang_name) . '" name="languagecode">';
-            if ($jsst_f_result['match'] === 2) {
-                $jsst_input_html .= '<div id="js-emessage-wrapper-other" style="display:block;margin:20px 0px 20px;">';
-                $jsst_input_html .= esc_html(__('Required language is not installed but similar language like', 'js-support-ticket')) . ': "<b>' . esc_html($jsst_f_result['lang_name']) . '</b>" ' . esc_html(__('is found in your system', 'js-support-ticket'));
-                $jsst_input_html .= '</div>';
-            }
-            $jsst_result['input'] = jssupportticketphplib::JSST_htmlentities($jsst_input_html);
-            $jsst_result['path'] = esc_html(__('Language Code', 'js-support-ticket'));
-        }
-
-        return wp_json_encode($jsst_result);
-    }
-
-    function getLanguageTranslation() {
-        if (!current_user_can('manage_options')) {
-            return false;
-        }
-        $jsst_nonce = JSSTrequest::getVar('_wpnonce');
-        if (!wp_verify_nonce($jsst_nonce, 'get-language-translation')) {
-            die('Security check Failed');
-        }
-        
-        $jsst_lang_name = JSSTrequest::getVar('langname');
-        $jsst_language_code = JSSTrequest::getVar('filename');
-
-        $jsst_result = array();
-        $jsst_result['error'] = false;
-        
-        // --- INITIALIZE WP_FILESYSTEM ---
-        global $wp_filesystem;
-        if (!function_exists('wp_handle_upload')) {
-            do_action('jssupportticket_load_wp_file');
-        }
-        if ( ! WP_Filesystem() ) {
-            return false;
-        }
-        $jsst_wp_filesystem = $wp_filesystem;
-
-        $jsst_path = WP_LANG_DIR . '/plugins/';
-
-        // FIX: Replaced is_dir() and mkdir()
-        if (!$jsst_wp_filesystem->is_dir($jsst_path)) {
-            $jsst_wp_filesystem->mkdir($jsst_path, 0755);
-        }
-
-        if ($jsst_lang_name == '' || $jsst_language_code == '') {
-            $jsst_result['error'] = esc_html(__('Empty values', 'js-support-ticket'));
-            return wp_json_encode($jsst_result);
-        }
-
-        $jsst_final_path = $jsst_path . 'js-support-ticket-' . $jsst_language_code . '.po';
-
-        $jsst_langarray = wp_get_installed_translations('core');
-        $jsst_langarray = $jsst_langarray['default'];
-
-        if (!array_key_exists($jsst_language_code, $jsst_langarray)) {
-            $jsst_result['error'] = $jsst_lang_name . ' ' . esc_html(__('Language is not installed', 'js-support-ticket'));
-            return wp_json_encode($jsst_result);
-        }
-        
-        // Replaced is_writeable() for the directory
-        if (!$jsst_wp_filesystem->is_writable($jsst_path)) {
-            $jsst_result['error'] = $jsst_lang_name . ' ' . esc_html(__('Language directory is not writable', 'js-support-ticket')) . ': ' . $jsst_path;
-            return wp_json_encode($jsst_result);
-        }
-
-        // Replaced file_exists() and touch()
-        if (!$jsst_wp_filesystem->exists($jsst_final_path)) {
-            $jsst_wp_filesystem->put_contents($jsst_final_path, '', FS_CHMOD_FILE);
-        }
-
-        // Replaced is_writeable() for the specific file
-        if (!$jsst_wp_filesystem->is_writable($jsst_final_path)) {
-            $jsst_result['error'] = esc_html(__('File is not writable', 'js-support-ticket')) . ': ' . $jsst_final_path;
-        } else {
-            if ($this->isConnected()) {
-                $jsst_url = "https://jshelpdesk.com/translations/api/1.0/index.php";
-                $jsst_post_data = array(
-                    'product'        => 'js-support-ticket-wp',
-                    'domain'         => get_site_url(),
-                    'producttype'    => jssupportticket::$_config['producttype'],
-                    'productcode'    => 'jsticket',
-                    'productversion' => jssupportticket::$_config['productversion'],
-                    'JVERSION'       => get_bloginfo('version'),
-                    'translationcode' => $jsst_lang_name,
-                    'method'         => 'getTranslationFile'
-                );
-
-                $jsst_response = wp_remote_post($jsst_url, array('body' => $jsst_post_data, 'timeout' => 7, 'sslverify' => true));
-                
-                if (!is_wp_error($jsst_response) && $jsst_response['response']['code'] == 200 && isset($jsst_response['body'])) {
-                    $jsst_response_body = json_decode($jsst_response['body'], true);
-                    if ($jsst_response_body && isset($jsst_response_body['file'])) {
-                        $jsst_ret = $this->writeLanguageFile($jsst_final_path, $jsst_response_body['file']);
-                        $jsst_result['data'] = esc_html(__('File successfully downloaded', 'js-support-ticket'));
-                    } else {
-                        $jsst_result['error'] = esc_html(__('Invalid response from server', 'js-support-ticket'));
-                    }
-                } else {
-                    $jsst_result['error'] = is_wp_error($jsst_response) ? $jsst_response->get_error_message() : $jsst_response['response']['message'];
-                }
-            } else {
-                $jsst_result['error'] = esc_html(__('Unable to connect to the server', 'js-support-ticket'));
-            }
-        }
-
-        return wp_json_encode($jsst_result);
-    }
-
-    function writeLanguageFile($jsst_path, $jsst_url) {
-        $jsst_result = true;
-        
-        // --- INITIALIZE WP_FILESYSTEM ---
-        global $wp_filesystem;
-        if (!function_exists('wp_handle_upload')) {
-            do_action('jssupportticket_load_wp_file');
-        }
-        if ( ! WP_Filesystem() ) {
-            return false;
-        }
-        $jsst_wp_filesystem = $wp_filesystem;
-
-        // 1. Download the file to a temporary location
-        do_action('jssupportticket_load_wp_admin_file');
-        $jsst_tmpfile = download_url($jsst_url);
-
-        if (is_wp_error($jsst_tmpfile)) {
-            return false; // Handle download failure
-        }
-
-        // 2. Use WP_Filesystem to move/copy the file
-        // Replaces copy() and handles permissions automatically
-        $jsst_copy_result = $jsst_wp_filesystem->copy($jsst_tmpfile, $jsst_path, true, FS_CHMOD_FILE);
-
-        // 3. Cleanup the temporary file
-        if ($jsst_wp_filesystem->exists($jsst_tmpfile)) {
-            $jsst_wp_filesystem->delete($jsst_tmpfile); 
-        }
-
-        if (!$jsst_copy_result) {
-            return false;
-        }
-
-        // 4. Convert PO to MO
-        $this->phpmo_convert($jsst_path);
-        
-        return $jsst_result;
-    }
-
-    /**
-     * Check if the server has an active internet connection.
-     * Uses the WordPress HTTP API instead of direct sockets.
-     */
-    function isConnected() {
-        // Ensure WordPress HTTP API is available
-        if ( ! function_exists( 'wp_remote_head' ) ) {
-            return false;
-        }
-        $jsst_response = wp_remote_head(
-            'https://www.google.com',
-            array(
-                'timeout'     => 5,
-                'redirection' => 0,
-                'sslverify'   => true,
-            )
-        );
-        if ( is_wp_error( $jsst_response ) ) {
-            return false;
-        }
-        return true;
-    }
-
-    function phpmo_convert($jsst_input, $jsst_output = false) {
-        if ( !$jsst_output )
-            $jsst_output = jssupportticketphplib::JSST_str_replace( '.po', '.mo', $jsst_input );
-        $jsst_hash = $this->phpmo_parse_po_file( $jsst_input );
-        if ( $jsst_hash === false ) {
-            return false;
-        } else {
-            $this->phpmo_write_mo_file( $jsst_hash, $jsst_output );
-            return true;
-        }
-    }
-
-    function phpmo_clean_helper($jsst_x) {
-        if (is_array($jsst_x)) {
-            foreach ($jsst_x as $jsst_k => $jsst_v) {
-                $jsst_x[$jsst_k] = $this->phpmo_clean_helper($jsst_v);
-            }
-        } else {
-            if ($jsst_x[0] == '"')
-                $jsst_x = jssupportticketphplib::JSST_substr($jsst_x, 1, -1);
-            $jsst_x = jssupportticketphplib::JSST_str_replace("\"\n\"", '', $jsst_x);
-            $jsst_x = jssupportticketphplib::JSST_str_replace('$', '\\$', $jsst_x);
-        }
-        return $jsst_x;
-    }
-    /* Parse gettext .po files. */
-    /* @link http://www.gnu.org/software/gettext/manual/gettext.html#PO-Files */
-    function phpmo_parse_po_file($jsst_in) {
-    if (!file_exists($jsst_in)){ return false; }
-    $jsst_ids = array();
-    $jsst_strings = array();
-    $jsst_language = array();
-    $jsst_lines = file($jsst_in);
-    foreach ($jsst_lines as $jsst_line_num => $jsst_line) {
-        if (strstr($jsst_line, 'msgid')){
-			//$jsst_endpos = strrchr($jsst_line, '"');
-			$jsst_endpos = strrpos($jsst_line, '"',7);
-			if($jsst_endpos > 7){ // to avoid msgid ""
-				$jsst_id = jssupportticketphplib::JSST_substr($jsst_line, 7, $jsst_endpos-7);
-				$jsst_ids[] = $jsst_id;
-			}
-        }elseif(strstr($jsst_line, 'msgstr')){
-			//$jsst_endpos = strrchr($jsst_line, '"');
-			$jsst_endpos = strrpos($jsst_line, '"',8);
-			if($jsst_endpos > 8){ // to avoid msgstr ""
-				$jsst_string = jssupportticketphplib::JSST_substr($jsst_line, 8, $jsst_endpos-8);
-				$jsst_strings[] = array($jsst_string);
-			}
-        }else{}
-    }
-    for ($jsst_i=0; $jsst_i<count($jsst_ids); $jsst_i++){
-        //Shoaib
-        if(isset($jsst_ids[$jsst_i]) && isset($jsst_strings[$jsst_i])){
-            /*if($jsst_entry['msgstr'][0] == '""'){
-                continue;
-            }*/
-            $jsst_language[$jsst_ids[$jsst_i]] = array('msgid' => $jsst_ids[$jsst_i], 'msgstr' =>$jsst_strings[$jsst_i]);
-        }
-    }
-    return $jsst_language;
-    }
-    /* Write a GNU gettext style machine object. */
-    /* @link http://www.gnu.org/software/gettext/manual/gettext.html#MO-Files */
-    function phpmo_write_mo_file($jsst_hash, $jsst_out) {
-        // sort by msgid
-        ksort($jsst_hash, SORT_STRING);
-        // our mo file data
-        $jsst_mo = '';
-        // header data
-        $jsst_offsets = array ();
-        $jsst_ids = '';
-        $jsst_strings = '';
-        foreach ($jsst_hash as $jsst_entry) {
-            $jsst_id = $jsst_entry['msgid'];
-            $jsst_str = implode("\x00", $jsst_entry['msgstr']);
-            // keep track of offsets
-            $jsst_offsets[] = array (
-                            jssupportticketphplib::JSST_strlen($jsst_ids), jssupportticketphplib::JSST_strlen($jsst_id), jssupportticketphplib::JSST_strlen($jsst_strings), jssupportticketphplib::JSST_strlen($jsst_str)
-                            );
-            // plural msgids are not stored (?)
-            $jsst_ids .= $jsst_id . "\x00";
-            $jsst_strings .= $jsst_str . "\x00";
-        }
-        // keys start after the header (7 words) + index tables ($#hash * 4 words)
-        $jsst_key_start = 7 * 4 + sizeof($jsst_hash) * 4 * 4;
-        // values start right after the keys
-        $jsst_value_start = $jsst_key_start +strlen($jsst_ids);
-        // first all key offsets, then all value offsets
-        $jsst_key_offsets = array ();
-        $jsst_value_offsets = array ();
-        // calculate
-        foreach ($jsst_offsets as $jsst_v) {
-            list ($jsst_o1, $jsst_l1, $jsst_o2, $jsst_l2) = $jsst_v;
-            $jsst_key_offsets[] = $jsst_l1;
-            $jsst_key_offsets[] = $jsst_o1 + $jsst_key_start;
-            $jsst_value_offsets[] = $jsst_l2;
-            $jsst_value_offsets[] = $jsst_o2 + $jsst_value_start;
-        }
-        $jsst_offsets = array_merge($jsst_key_offsets, $jsst_value_offsets);
-        // write header
-        $jsst_mo .= pack('Iiiiiii', 0x950412de, // magic number
-        0, // version
-        sizeof($jsst_hash), // number of entries in the catalog
-        7 * 4, // key index offset
-        7 * 4 + sizeof($jsst_hash) * 8, // value index offset,
-        0, // hashtable size (unused, thus 0)
-        $jsst_key_start // hashtable offset
-        );
-        // offsets
-        foreach ($jsst_offsets as $jsst_offset)
-            $jsst_mo .= pack('i', $jsst_offset);
-        // ids
-        $jsst_mo .= $jsst_ids;
-        // strings
-        $jsst_mo .= $jsst_strings;
-        file_put_contents($jsst_out, $jsst_mo);
-    }
-
     function stripslashesFull($jsst_input){// testing this function/.
         if (is_array($jsst_input)) {
             $jsst_input = array_map(array($this,'stripslashesFull'), $jsst_input);
@@ -1520,7 +1109,7 @@ $jsst_query = "SELECT product.product, COUNT(t.id) AS ticket_count
     function getusersearchajax() {
         $jsst_nonce = JSSTrequest::getVar('_wpnonce');
         if (! wp_verify_nonce( $jsst_nonce, 'get-usersearch-ajax') ) {
-            die( 'Security check Failed' );
+            die( esc_html__( 'Security check Failed', 'js-support-ticket' ) );
         }
         if (!$this->canBrowseUserList()) {
             return '';
@@ -1528,6 +1117,10 @@ $jsst_query = "SELECT product.product, COUNT(t.id) AS ticket_count
         $jsst_username = JSSTrequest::getVar('username');
         $jsst_name = JSSTrequest::getVar('name');
         $jsst_emailaddress = JSSTrequest::getVar('emailaddress');
+        /* The picker's single box: one term matched against name, username
+           and email together. The three separate fields are still honoured
+           for any screen that posts them. */
+        $jsst_q = trim((string) JSSTrequest::getVar('q'));
         $jsst_canloadresult = false;
         $jsst_args = array();
         $jsst_query = "SELECT DISTINCT user.id AS userid, user.name AS username, user.user_email AS useremail, user.display_name AS userdisplayname
@@ -1537,6 +1130,12 @@ $jsst_query = "SELECT product.product, COUNT(t.id) AS ticket_count
                     }else{
                         $jsst_query .= " WHERE 1 = 1 "; // to handle filter cases
                     }
+        if (jssupportticketphplib::JSST_strlen($jsst_q) > 0) {
+            $jsst_like = '%' . jssupportticket::$_db->esc_like($jsst_q) . '%';
+            $jsst_query .= " AND (user.display_name LIKE %s OR user.user_email LIKE %s OR user.name LIKE %s)";
+            array_push($jsst_args, $jsst_like, $jsst_like, $jsst_like);
+            $jsst_canloadresult = true;
+        }
         if (jssupportticketphplib::JSST_strlen($jsst_name) > 0) {
             $jsst_query .= " AND user.display_name LIKE %s";
             $jsst_args[] = '%'.$jsst_name.'%';
@@ -1558,39 +1157,7 @@ $jsst_query = "SELECT product.product, COUNT(t.id) AS ticket_count
             }
             $jsst_users = jssupportticket::$_db->get_results($jsst_query);
             if(!empty($jsst_users)){
-                $jsst_result ='
-                <div class="js-ticket-table-wrp">
-                    <div class="js-ticket-table-header">
-                        <div class="js-ticket-table-header-col js-tkt-tbl-uid">'. esc_html(__('User ID', 'js-support-ticket')).'</div>
-                        <div class="js-ticket-table-header-col js-tkt-tbl-unm">'. esc_html(__('User Name', 'js-support-ticket')).'</div>
-                        <div class="js-ticket-table-header-col js-tkt-tbl-eml">'. esc_html(__('Email Address', 'js-support-ticket')).'</div>
-                        <div class="js-ticket-table-header-col js-tkt-tbl-nam">'. esc_html(__('Name', 'js-support-ticket')).'</div>
-                    </div>
-                    <div class="js-ticket-table-body">';
-                        foreach($jsst_users AS $jsst_user){
-                            $jsst_result .='
-                            <div class="js-ticket-data-row">
-                                <div class="js-ticket-table-body-col js-tkt-tbl-uid">
-                                    <span class="js-ticket-display-block">'. esc_html(__('User ID','js-support-ticket')).'</span>'.$jsst_user->userid.'
-                                </div>
-                                <div class="js-ticket-table-body-col js-tkt-tbl-unm">
-                                    <span class="js-ticket-display-block">'. esc_html(__('User Name','js-support-ticket')).':</span>
-                                    '.esc_html($jsst_user->username).'
-                                    </a></span>
-                                </div>
-                                <div class="js-ticket-table-body-col js-tkt-tbl-eml">
-                                    <span class="js-ticket-display-block">'. esc_html(__('Email','js-support-ticket')).':</span>
-                                    <span class="js-ticket-title"><a href="#" class="js-userpopup-link" data-id="'.esc_attr($jsst_user->userid).'" data-email="'.esc_attr($jsst_user->useremail).'" data-username="'.esc_attr($jsst_user->username).'" data-name="'.esc_attr($jsst_user->userdisplayname).'">
-                                        '. esc_html($jsst_user->useremail) .'
-                                        </a></span>
-                                </div>
-                                <div class="js-ticket-table-body-col js-tkt-tbl-nam">
-                                    <span class="js-ticket-display-block">'. esc_html(__('Name','js-support-ticket')).':</span>
-                                    '.esc_attr($jsst_user->userdisplayname).'
-                                </div>
-                            </div>';
-                        }
-                $jsst_result .='</div>';
+                $jsst_result = $this->userPickTable($jsst_users);
             }else{
                 $jsst_result= JSSTlayout::getNoRecordFound();
             }
@@ -1606,18 +1173,19 @@ $jsst_query = "SELECT product.product, COUNT(t.id) AS ticket_count
         if ($jsst_ajaxCall == 1) {
             $jsst_nonce = JSSTrequest::getVar('_wpnonce');
             if (! wp_verify_nonce( $jsst_nonce, 'get-user-list-ajax') ) {
-                die( 'Security check Failed' );
+                die( esc_html__( 'Security check Failed', 'js-support-ticket' ) );
             }
         }
 
         // Administrators and agents only.
         if (!$this->canBrowseUserList()) {
-            die('Security check Failed: Insufficient permissions');
+            die(esc_html__( 'Security check Failed: Insufficient permissions', 'js-support-ticket' ));
         }
 
         // SECURITY FIX: Cast to integer to prevent SQL injection in the LIMIT clause
         $jsst_userlimit = absint(JSSTrequest::getVar('userlimit', null, 0)); 
-        $jsst_maxrecorded = 4;
+        // Ten a page: four meant paging through a dialog to find anybody.
+        $jsst_maxrecorded = 10;
         
         $jsst_query = "SELECT DISTINCT COUNT(user.id)
                     FROM `" . jssupportticket::$_wpprefixforuser . "js_ticket_users` AS user 
@@ -1647,43 +1215,49 @@ $jsst_query = "SELECT product.product, COUNT(t.id) AS ticket_count
         return $jsst_html;
     }
 
+
+    /* One user list, for the "pick a user" dialog. (Roadmap 6.5-UI-07)
+       The search result and the browse list drew the same four columns from
+       two copies of the same markup, and the copies had already drifted - one
+       of them closed a </a></span> it never opened. Both call this now. */
+    private function userPickTable($jsst_users) {
+        /* Two columns rather than four: the name, with the username and
+           address under it, and the ID. Four columns ran off a phone, and the
+           Username and Name columns usually said the same thing. The address
+           is still the .js-userpopup-link each page's setUserLink() wires, and
+           the picker makes the whole row click it. */
+        $jsst_html = '
+        <div class="jsst-table-wrap">
+            <table class="jsst-table jsst-table-dense jsst-userpick-table">
+                <thead>
+                    <tr>
+                        <th>'. esc_html(__('User', 'js-support-ticket')).'</th>
+                        <th class="jsst-col-fit jsst-num">'. esc_html(__('ID', 'js-support-ticket')).'</th>
+                    </tr>
+                </thead>
+                <tbody>';
+        foreach ($jsst_users AS $jsst_user) {
+            $jsst_display = ($jsst_user->userdisplayname !== '' && $jsst_user->userdisplayname !== null) ? $jsst_user->userdisplayname : $jsst_user->username;
+            $jsst_login = ($jsst_user->username !== $jsst_display) ? esc_html($jsst_user->username) . ' · ' : '';
+            $jsst_html .= '
+                    <tr>
+                        <td><span class="jsst-userpick-name">'. esc_html($jsst_display) .'</span>
+                            <span class="jsst-userpick-sub">'. $jsst_login .'<a href="#" class="js-userpopup-link" data-id="'. esc_attr($jsst_user->userid) .'" data-email="'. esc_attr($jsst_user->useremail) .'" data-username="'. esc_attr($jsst_user->username) .'" data-name="'. esc_attr($jsst_user->userdisplayname) .'">'. esc_html($jsst_user->useremail) .'</a></span></td>
+                        <td class="jsst-col-fit jsst-num">#'. esc_html($jsst_user->userid) .'</td>
+                    </tr>';
+        }
+        $jsst_html .= '
+                </tbody>
+            </table>
+        </div>';
+        return $jsst_html;
+    }
+
     function makeUserList($jsst_users,$jsst_total,$jsst_maxrecorded,$jsst_userlimit){
         $jsst_html = '';
         if(!empty($jsst_users)){
             if(is_array($jsst_users)){
-                $jsst_html ='
-                <div class="js-ticket-table-wrp">
-                    <div class="js-ticket-table-header">
-                        <div class="js-ticket-table-header-col js-tkt-tbl-uid">'. esc_html(__('User ID', 'js-support-ticket')).'</div>
-                        <div class="js-ticket-table-header-col js-tkt-tbl-unm">'. esc_html(__('User Name', 'js-support-ticket')).'</div>
-                        <div class="js-ticket-table-header-col js-tkt-tbl-eml">'. esc_html(__('Email Address', 'js-support-ticket')).'</div>
-                        <div class="js-ticket-table-header-col js-tkt-tbl-nam">'. esc_html(__('Name', 'js-support-ticket')).'</div>
-                    </div>
-                    <div class="js-ticket-table-body">';
-                        foreach($jsst_users AS $jsst_user){
-                            $jsst_html .='
-                            <div class="js-ticket-data-row">
-                                <div class="js-ticket-table-body-col js-tkt-tbl-uid">
-                                    <span class="js-ticket-display-block">'. esc_html(__('User ID','js-support-ticket')).'</span>'.esc_html($jsst_user->userid).'
-                                </div>
-                                <div class="js-ticket-table-body-col js-tkt-tbl-unm">
-                                    <span class="js-ticket-display-block">'. esc_html(__('User Name','js-support-ticket')).':</span>
-                                    '.esc_html($jsst_user->username).'
-                                    </a></span>
-                                </div>
-                                <div class="js-ticket-table-body-col js-tkt-tbl-eml">
-                                    <span class="js-ticket-display-block">'. esc_html(__('Email','js-support-ticket')).':</span>
-                                    <span class="js-ticket-title"><a href="#" class="js-userpopup-link" data-id="'.esc_attr($jsst_user->userid).'" data-email="'.esc_attr($jsst_user->useremail).'" data-username="'.esc_attr($jsst_user->username).'" data-name="'.esc_attr($jsst_user->userdisplayname).'">
-                                    '.esc_html($jsst_user->useremail).'
-                                    </a></span>
-                                </div>
-                                <div class="js-ticket-table-body-col js-tkt-tbl-nam">
-                                    <span class="js-ticket-display-block">'. esc_html(__('Name','js-support-ticket')).':</span>
-                                    '.esc_html($jsst_user->userdisplayname).'
-                                </div>
-                            </div>';
-                        }
-                $jsst_html .='</div>';
+                $jsst_html = $this->userPickTable($jsst_users);
             }
             $jsst_num_of_pages = ceil($jsst_total / $jsst_maxrecorded);
             $jsst_num_of_pages = ($jsst_num_of_pages > 0) ? ceil($jsst_num_of_pages) : floor($jsst_num_of_pages);
@@ -1776,6 +1350,15 @@ $jsst_query = "SELECT product.product, COUNT(t.id) AS ticket_count
         return ;
     }
 
+    /**
+     * Called by every 4.0.0-era add-on as it activates.
+     *
+     * The name is historical: it was the per-add-on licence check, against
+     * jshelpdesk.com/setup/, and a refusal ended the activation with die().
+     * 5.0.0 does not gate an add-on on a key - a licence buys updates, not the
+     * right to run what is installed - so this asks nobody and says yes. The
+     * method stays because add-ons already in the field call it by name.
+     */
     function updateDate($jsst_addon_name,$jsst_plugin_version){
         return JSSTincluder::getJSModel('premiumplugin')->verfifyAddonActivation($jsst_addon_name);
     }
@@ -1790,7 +1373,7 @@ $jsst_query = "SELECT product.product, COUNT(t.id) AS ticket_count
         }
         $jsst_nonce = JSSTrequest::getVar('_wpnonce');
         if (! wp_verify_nonce( $jsst_nonce, 'install-plugin-ajax') ) {
-             die( 'Security check Failed' ); 
+             die( esc_html__( 'Security check Failed', 'js-support-ticket' ) ); 
         }
         if(current_user_can( 'install_plugins' )){
             $jsst_pluginslug = JSSTrequest::getVar('pluginslug');
@@ -1840,7 +1423,7 @@ $jsst_query = "SELECT product.product, COUNT(t.id) AS ticket_count
         }
         $jsst_nonce = JSSTrequest::getVar('_wpnonce');
         if (! wp_verify_nonce( $jsst_nonce, 'activate-plugin-ajax') ) {
-             die( 'Security check Failed' ); 
+             die( esc_html__( 'Security check Failed', 'js-support-ticket' ) ); 
         }
         if(current_user_can( 'activate_plugins')){
             $jsst_pluginslug = JSSTrequest::getVar('pluginslug');
@@ -1896,86 +1479,13 @@ $jsst_query = "SELECT product.product, COUNT(t.id) AS ticket_count
         return $jsst_js_scriptdateformat;
     }
 
-    function getAddonTransationKey($jsst_option_name){
-        $jsst_query = jssupportticket::$_db->prepare("SELECT `option_value` FROM " . jssupportticket::$_wpprefixforuser . "options WHERE option_name = %s", $jsst_option_name);
-        $jsst_transactionKey = jssupportticket::$_db->get_var($jsst_query);
-		if($jsst_transactionKey == ""){
-			$jsst_transactionKey = get_option($jsst_option_name);
-		}
-        return $jsst_transactionKey;
-    }
-
-    function getInstalledTranslationKey(){
-        do_action('jssupportticket_load_wp_translation_install');
-        $jsst_activated_lang = get_option('WPLANG','en_US');
-        $jsst_install_lang_name = wp_get_available_translations();
-        if(isset($jsst_install_lang_name[$jsst_activated_lang])){
-            $jsst_lang_name = $this->makeLanguageCode($jsst_activated_lang);
-            $jsst_install_lang_name = $jsst_install_lang_name[$jsst_activated_lang]['english_name'];
-            if($jsst_activated_lang == "" || $jsst_activated_lang == 'en_US'){
-                update_option( 'jshd_tran_lang_exists', false);
-                return false;
-            }else{
-                // $jsst_path = JSST_PLUGIN_PATH.'languages';
-                $jsst_path = WP_LANG_DIR . '/plugins/';
-                $jsst_final_path = $jsst_path.'/js-support-ticket-'.$jsst_activated_lang.'.po';
-                if(file_exists($jsst_final_path)){
-                    update_option( 'jshd_tran_lang_exists', false);
-                    return false;
-                }
-                if(get_option( 'jshd_tran_lang_exists', '') != ''){
-                    $jsst_session = json_decode(get_option( 'jshd_tran_lang_exists', ''));
-                    if($jsst_session->code == $jsst_activated_lang){
-                        return get_option( 'jshd_tran_lang_exists');
-                    }
-                }
-                $jsst_url = "https://jshelpdesk.com/translations/api/1.0/index.php";
-                $jsst_post_data['product'] ='js-support-ticket-wp';
-                $jsst_post_data['domain'] = get_site_url();
-                $jsst_post_data['producttype'] = jssupportticket::$_config['producttype'];
-                $jsst_post_data['productcode'] = 'jsticket';
-                $jsst_post_data['productversion'] = jssupportticket::$_config['productversion'];
-                $jsst_post_data['JVERSION'] = get_bloginfo('version');
-                $jsst_post_data['translationcode'] = $jsst_activated_lang;
-                $jsst_post_data['method'] = 'getTranslationFile';
-
-                $jsst_response = wp_remote_post( $jsst_url, array('body' => $jsst_post_data,'timeout'=>7,'sslverify'=>true));
-                if( !is_wp_error($jsst_response) && $jsst_response['response']['code'] == 200 && isset($jsst_response['body']) ){
-                    $jsst_result = $jsst_response['body'];
-                }else{
-                    $jsst_result = false;
-                    if(!is_wp_error($jsst_response)){
-                       $jsst_error = $jsst_response['response']['message'];
-                    }else{
-                        $jsst_error = $jsst_response->get_error_message();
-                    }
-                }
-                if($jsst_result){
-                    $jsst_array = json_decode($jsst_result, true);
-                }else{
-                    $jsst_array = array();
-                }
-                if(is_array($jsst_array) && isset($jsst_array['file'])){
-                    $jsst_jshd_tran_lang_exists = array("code" => $jsst_activated_lang, "lang_fullname" => $jsst_install_lang_name , "name" => $jsst_lang_name);
-                    $jsst_jshd_tran_lang_exists = wp_json_encode($jsst_jshd_tran_lang_exists);
-                    update_option( 'jshd_tran_lang_exists', $jsst_jshd_tran_lang_exists);
-                    return $jsst_jshd_tran_lang_exists;
-                }else{
-                    update_option( 'jshd_tran_lang_exists', false);
-                    return false;
-                }
-            }
-        }
-        return false;
-    }
-
     function hidePopupFromAdmin(){
         if(!current_user_can('manage_options')){
             return false;
         }
         $jsst_nonce = JSSTrequest::getVar('_wpnonce');
         if (! wp_verify_nonce( $jsst_nonce, 'hide-popup-from-admin') ) {
-            die( 'Security check Failed' );
+            die( esc_html__( 'Security check Failed', 'js-support-ticket' ) );
         }
         update_option( 'jsst_hide_jsstadmin_top_banner', 1 );
     }
@@ -1997,7 +1507,7 @@ $jsst_query = "SELECT product.product, COUNT(t.id) AS ticket_count
         }
         $jsst_nonce = JSSTrequest::getVar('_wpnonce');
         if (! wp_verify_nonce( $jsst_nonce, 'review-box-action') ) {
-            die( 'Security check Failed' );
+            die( esc_html__( 'Security check Failed', 'js-support-ticket' ) );
         }
         $jsst_days = JSSTrequest::getVar('days');
         if($jsst_days == -1) {
@@ -2104,7 +1614,7 @@ $jsst_query = "SELECT product.product, COUNT(t.id) AS ticket_count
             $jsst_row = JSSTincluder::getJSTable('users');
             $jsst_data = array();
             $jsst_data['wpuid'] = $jsst_user->ID;
-            $jsst_data['name'] = $jsst_user->display_name;
+            $jsst_data['name'] = $jsst_user->user_login; // the username; the full name is display_name
             $jsst_data['display_name'] = $jsst_user->display_name;
             $jsst_data['user_nicename'] = $jsst_user->user_nicename;
             $jsst_data['user_email'] = $jsst_user->user_email;
@@ -2176,292 +1686,13 @@ $jsst_query = "SELECT product.product, COUNT(t.id) AS ticket_count
             $jsst_status = __("Not Installed","js-support-ticket");
             $jsst_action = __("Install Now","js-support-ticket");
             $jsst_actionClass = 'jsst-admin-adons-status-Install';
-            $jsst_url = admin_url("admin.php?page=premiumplugin&mjslay=step1");
+            $jsst_url = admin_url("admin.php?page=jssupportticket&jstlay=license");
             $jsst_disabled = "";
             $jsst_class = "js-btn-install-now";
             $jsst_availability = "0";
             $jsst_version = "---";
         }
         return array("status" => $jsst_status, "action" => $jsst_action, "url" => $jsst_url, "disabled" => $jsst_disabled, "class" => $jsst_class, "availability" => $jsst_availability, "actionClass" => $jsst_actionClass, "version" => $jsst_version);
-    }
-
-    function JSSTdownloadandinstalladdonfromAjax(){
-        if(!current_user_can('manage_options')){
-            return false;
-        }
-        $jsst_nonce = JSSTrequest::getVar('_wpnonce');
-        if (! wp_verify_nonce( $jsst_nonce, 'download-and-install-addon') ) {
-            die( 'Security check Failed' );
-        }
-
-        $jsst_key = JSSTrequest::getVar('dataFor');
-        $jsst_installedversion = JSSTrequest::getVar('currentVersion');
-        $jsst_newversion = JSSTrequest::getVar('cdnVersion');
-        $jsst_addon_json_array = array();
-
-        if($jsst_key != ''){
-            $jsst_addon_json_array[] = str_replace('js-support-ticket-', '', $jsst_key);
-            $jsst_plugin_slug = str_replace('js-support-ticket-', '', $jsst_key);
-        }
-        $jsst_token = get_option('transaction_key_for_'.$jsst_key);
-        $jsst_result = array();
-        $jsst_result['error'] = false;
-        if($jsst_token == ''){
-            $jsst_result['error'] = esc_html(__('Addon Installation Failed','js-support-ticket'));
-            $jsst_result = wp_json_encode($jsst_result);
-            return $jsst_result;
-        }
-        $jsst_site_url = site_url();
-        if($jsst_site_url != ''){
-            $jsst_site_url = str_replace("https://","",$jsst_site_url);
-            $jsst_site_url = str_replace("http://","",$jsst_site_url);
-        }
-        $jsst_url = 'https://jshelpdesk.com/setup/index.php?token='.$jsst_token.'&productcode='. wp_json_encode($jsst_addon_json_array).'&domain='.$jsst_site_url;
-        // verify token
-        $jsst_verifytransactionkey = $this->verifytransactionkey($jsst_token, $jsst_url);
-        if($jsst_verifytransactionkey['status'] == 0){
-            $jsst_result['error'] = $jsst_verifytransactionkey['message'];
-            $jsst_result = wp_json_encode($jsst_result);
-            return $jsst_result;
-        }
-        $jsst_install_count = 0;
-
-        $jsst_installed = $this->install_plugin($jsst_url);
-        if ( !is_wp_error( $jsst_installed ) && $jsst_installed ) {
-            // had to run two seprate loops to save token for all the addons even if some error is triggered by activation.
-            if(strstr($jsst_key, 'js-support-ticket-')){
-                update_option('transaction_key_for_'.$jsst_key,$jsst_token);
-            }
-
-            if(strstr($jsst_key, 'js-support-ticket-')){
-                $jsst_activate = activate_plugin( $jsst_key.'/'.$jsst_key.'.php' );
-                $jsst_install_count++;
-            }
-
-            // run update sql
-            if ($jsst_installedversion != $jsst_newversion) {
-                $jsst_optionname = 'jsst-addon-'. $jsst_plugin_slug .'s-version';
-                update_option($jsst_optionname, $jsst_newversion);
-                $jsst_plugin_path = WP_CONTENT_DIR;
-                $jsst_plugin_path = $jsst_plugin_path.'/plugins/'.$jsst_key.'/includes';
-                if(is_dir($jsst_plugin_path . '/sql/') && is_readable($jsst_plugin_path . '/sql/')){
-                    if($jsst_installedversion != ''){
-                        $jsst_installedversion = str_replace('.','', $jsst_installedversion);
-                    }
-                    if($jsst_newversion != ''){
-                        $jsst_newversion = str_replace('.','', $jsst_newversion);
-                    }
-                    JSSTincluder::getJSModel('premiumplugin')->getAddonUpdateSqlFromUpdateDir($jsst_installedversion,$jsst_newversion,$jsst_plugin_path . '/sql/');
-                    $jsst_updatesdir = $jsst_plugin_path.'/sql/';
-                    if(preg_match('/js-support-ticket-[a-zA-Z]+/', $jsst_updatesdir)){
-                        $this->jsstRemoveAddonUpdatesFolder($jsst_updatesdir);
-                    }
-                }else{
-                    JSSTincluder::getJSModel('premiumplugin')->getAddonUpdateSqlFromLive($jsst_installedversion,$jsst_newversion,$jsst_plugin_slug);
-                }
-            }
-
-        }else{
-            $jsst_result['error'] = esc_html(__('Addon Installation Failed','js-support-ticket'));
-            $jsst_result = wp_json_encode($jsst_result);
-            return $jsst_result;
-        }
-
-        $jsst_result['success'] = esc_html(__('Addon Installed Successfully','js-support-ticket'));
-        $jsst_result = wp_json_encode($jsst_result);
-        return $jsst_result;
-    }
-
-    function install_plugin( $jsst_plugin_zip ) {
-
-        do_action('jssupportticket_load_wp_admin_file');
-        WP_Filesystem();
-
-        $jsst_tmpfile = download_url( $jsst_plugin_zip);
-
-        if ( !is_wp_error( $jsst_tmpfile ) && $jsst_tmpfile ) {
-            $jsst_plugin_path = WP_CONTENT_DIR;
-            $jsst_plugin_path = $jsst_plugin_path.'/plugins/';
-            $jsst_path = JSST_PLUGIN_PATH.'addon.zip';
-
-            copy( $jsst_tmpfile, $jsst_path );
-
-            $jsst_unzipfile = unzip_file( $jsst_path, $jsst_plugin_path);
-
-            if ( file_exists( $jsst_path ) ) {
-                wp_delete_file( $jsst_path ); // must unlink afterwards
-            }
-            if ( file_exists( $jsst_tmpfile ) ) {
-                wp_delete_file( $jsst_tmpfile ); // must unlink afterwards
-            }
-
-            if ( is_wp_error( $jsst_unzipfile ) ) {
-                $jsst_result['error'] = esc_html(__('Addon Installation Failed','js-support-ticket')).'.';
-                $jsst_result['error'] .= " ".esc_html(jssupportticket::JSST_getVarValue($jsst_unzipfile->get_error_message()));
-                $jsst_result = wp_json_encode($jsst_result);
-                return $jsst_result;
-            } else {
-                return true;
-            }
-        }else{
-            $jsst_error_string = $jsst_tmpfile->get_error_message();
-            $jsst_result['error'] = esc_html(__('Addon Installation Failed, File download error','js-support-ticket')).'!'.$jsst_error_string;
-            $jsst_result = wp_json_encode($jsst_result);
-            return $jsst_result;
-        }
-    }
-
-    function JSSTAddonsAutoUpdate(){
-        /*
-            code for auto update check from configuration
-        */
-
-        $jsst_addons_auto_update = JSSTincluder::getJSModel('configuration')->getConfigValue('jsst_addons_auto_update');
-        if( $jsst_addons_auto_update != 1){
-            return;
-        }
-        
-        require_once JSST_PLUGIN_PATH.'includes/addon-updater/jsstupdater.php';
-        $jsst_JS_SUPPORTTICKETUpdater  = new JS_SUPPORTTICKETUpdater();
-        $jsst_cdnversiondata = $jsst_JS_SUPPORTTICKETUpdater->getPluginVersionDataFromCDN();
-
-        $jsst_jssupportticket_addons = $this->getJSSTAddonsArray();
-
-        $jsst_installed_plugins = get_plugins();
-        $jsst_need_to_update = array();
-        $jsst_site_url = JSSTincluder::getJSModel('jssupportticket')->getSiteUrl();
-        $jsst_status_prefix = 'key_status_for_js-support-ticket_';
-        $jsst_final_addon_json_array = array();
-        foreach ($jsst_jssupportticket_addons as $jsst_key1 => $jsst_value1) {
-            $jsst_matched = 0;
-            $jsst_version = "";
-            foreach ($jsst_installed_plugins as $jsst_name => $jsst_value) {
-                $jsst_install_plugin_name = jssupportticketphplib::JSST_str_replace(".php","",jssupportticketphplib::JSST_basename($jsst_name));
-                if($jsst_key1 == $jsst_install_plugin_name){
-                    $jsst_matched = 1;
-                    $jsst_version = $jsst_value["Version"];
-                    $jsst_install_plugin_matched_name = $jsst_install_plugin_name;
-                }
-            }
-            if($jsst_matched == 1){ //installed
-                $jsst_name = $jsst_key1;
-                $jsst_title = $jsst_value1['title'];
-                $jsst_cdnavailableversion = "";
-                foreach ($jsst_cdnversiondata as $jsst_cdnname => $jsst_cdnversion) {
-                    $jsst_addon_json_array = array();
-                    $jsst_addon_json_final_array = array();
-                    $jsst_install_plugin_name_simple = jssupportticketphplib::JSST_str_replace("-", "", $jsst_install_plugin_matched_name);
-                    if($jsst_cdnname == jssupportticketphplib::JSST_str_replace("-", "", $jsst_install_plugin_matched_name)){
-                        if($jsst_cdnversion > $jsst_version){ // new version available
-                            $jsst_status = 'update_available';
-                            $jsst_cdnavailableversion = $jsst_cdnversion;
-                            $jsst_plugin_slug = jssupportticketphplib::JSST_str_replace('js-support-ticket-', '', $jsst_name);
-                            // get key status from local
-                            $jsst_token = get_option('transaction_key_for_'.esc_attr($jsst_name));
-                            $jsst_key_local_status = get_option($jsst_status_prefix . $jsst_token);
-                            if($jsst_key_local_status == 1){
-                                $jsst_addon_json_array[] = jssupportticketphplib::JSST_str_replace('js-support-ticket-', '', $jsst_name);
-                                $jsst_url = 'https://jshelpdesk.com/setup/index.php?token='.esc_attr($jsst_token).'&productcode='. wp_json_encode($jsst_addon_json_array).'&domain='.$jsst_site_url;
-                                // verify token
-                                $jsst_verifytransactionkey = $this->verifytransactionkey($jsst_token, $jsst_url);
-                                
-                                if($jsst_verifytransactionkey['status'] == 1){
-                                    $jsst_final_addon_json_array[] = jssupportticketphplib::JSST_str_replace('js-support-ticket-', '', $jsst_name);
-                                    $jsst_addon_json_final_array[] = jssupportticketphplib::JSST_str_replace('js-support-ticket-', '', $jsst_name);
-                                    $jsst_need_to_update[] = array("name" => $jsst_name, "current_version" => $jsst_version, "available_version" => $jsst_cdnavailableversion, "plugin_slug" => $jsst_plugin_slug );
-                                    $jsst_final_url = 'https://jshelpdesk.com/setup/index.php?token='.esc_attr($jsst_token).'&productcode='. wp_json_encode($jsst_final_addon_json_array).'&domain='.$jsst_site_url;
-                                }
-                            }
-                        }
-                    }    
-                }
-            }
-        }
-        $jsst_token = "";
-        if(!empty($jsst_need_to_update)){
-            $jsst_installed = $this->install_plugin($jsst_final_url);
-            if ( !is_wp_error( $jsst_installed ) && $jsst_installed ) {
-                // had to run two seprate loops to save token for all the addons even if some error is triggered by activation.
-
-                // run update sql
-                foreach($jsst_need_to_update AS $jsst_update){
-                    $jsst_installedversion = $jsst_update["current_version"];
-                    $jsst_newversion = $jsst_update["available_version"];
-                    $jsst_plugin_slug = $jsst_update["plugin_slug"];
-                    $jsst_key = $jsst_update["name"];
-                    if ($jsst_installedversion != $jsst_newversion) {
-                        $jsst_optionname = 'jsst-addon-'. $jsst_plugin_slug .'s-version';
-                        update_option($jsst_optionname, $jsst_newversion);
-                        $jsst_plugin_path = WP_CONTENT_DIR;
-                        $jsst_plugin_path = $jsst_plugin_path.'/plugins/'.$jsst_key.'/includes';
-                        if(is_dir($jsst_plugin_path . '/sql/') && is_readable($jsst_plugin_path . '/sql/')){
-                            if($jsst_installedversion != ''){
-                                $jsst_installedversion = str_replace('.','', $jsst_installedversion);
-                            }
-                            if($jsst_newversion != ''){
-                                $jsst_newversion = str_replace('.','', $jsst_newversion);
-                            }
-                            JSSTincluder::getJSModel('premiumplugin')->getAddonUpdateSqlFromUpdateDir($jsst_installedversion,$jsst_newversion,$jsst_plugin_path . '/sql/');
-                            $jsst_updatesdir = $jsst_plugin_path.'/sql/';
-                            if(preg_match('/js-support-ticket-[a-zA-Z]+/', $jsst_updatesdir)){
-                                $this->jsstRemoveAddonUpdatesFolder($jsst_updatesdir);
-                            }
-                        }else{
-                            JSSTincluder::getJSModel('premiumplugin')->getAddonUpdateSqlFromLive($jsst_installedversion,$jsst_newversion,$jsst_plugin_slug);
-                        }
-                    }
-                }
-
-            }else{
-                return;
-            }
-        }
-        return;
-    }
-
-    function verifytransactionkey($jsst_transactionkey, $jsst_url){
-        $jsst_message = 1;
-        if($jsst_transactionkey != ''){
-            $jsst_response = wp_remote_post( $jsst_url );
-            if( !is_wp_error($jsst_response) && $jsst_response['response']['code'] == 200 && isset($jsst_response['body']) ){
-                $jsst_result = $jsst_response['body'];
-                $jsst_result = json_decode($jsst_result,true);
-                if(is_array($jsst_result) && isset($jsst_result[0]) && $jsst_result[0] == 0){
-                    $jsst_result['status'] = 0;
-                } else{
-                    $jsst_result['status'] = 1;
-                }
-            }else{
-                $jsst_result = false;
-                if(!is_wp_error($jsst_response)){
-                   $jsst_error = $jsst_response['response']['message'];
-                }else{
-                    $jsst_error = $jsst_response->get_error_message();
-                }
-            }
-            if(is_array($jsst_result) && isset($jsst_result['status']) && $jsst_result['status'] == 1 ){ // means everthing ok
-                $jsst_message = 1;
-            }else{
-                if(isset($jsst_result[0]) && $jsst_result[0] == 0){
-                    $jsst_error = $jsst_result[1];
-                }elseif(isset($jsst_result['error']) && $jsst_result['error'] != ''){
-                    $jsst_error = $jsst_result['error'];
-                }
-                $jsst_message = 0;
-            }
-        }else{
-            $jsst_message = 0;
-            $jsst_error = esc_html(__('Please insert activation key to proceed','js-support-ticket')).'!';
-        }
-        $jsst_array['data'] = array();
-        if ($jsst_message == 0) {
-            $jsst_array['status'] = 0;
-            $jsst_array['message'] = $jsst_error;
-        } else {
-            $jsst_array['status'] = 1;
-            $jsst_array['message'] = 'success';
-        }
-        return $jsst_array;
     }
 
     function jsstRemoveAddonUpdatesFolder($jsst_dir) {
@@ -2496,7 +1727,7 @@ $jsst_query = "SELECT product.product, COUNT(t.id) AS ticket_count
             $jsst_creds = request_filesystem_credentials(site_url());
 
             if (!WP_Filesystem($jsst_creds)) {
-                wp_die('Could not initialize the filesystem.');
+                wp_die(esc_html__( 'Could not initialize the filesystem.', 'js-support-ticket' ));
             }
         }
         $jsst_wp_filesystem = $wp_filesystem;
@@ -2536,61 +1767,6 @@ $jsst_query = "SELECT product.product, COUNT(t.id) AS ticket_count
         return;
     }
 
-    function jsst_check_license_status() {
-        // Get all distinct transaction keys
-        $jsst_query = "
-            SELECT DISTINCT option_value 
-            FROM `" . jssupportticket::$_db->prefix . "options`
-            WHERE option_name LIKE 'transaction_key_for_js-support-ticket%'
-        ";
-        $jsst_transaction_keys = jssupportticket::$_db->get_col($jsst_query);
-
-        if (empty($jsst_transaction_keys)) return;
-
-        $jsst_status_prefix = 'key_status_for_js-support-ticket_';
-        $jsst_site_url = JSSTincluder::getJSModel('jssupportticket')->getSiteUrl();
-        $jsst_show_key_expiry_msg = 0;
-
-        foreach ($jsst_transaction_keys as $jsst_key) {
-            // Build query string for GET request
-            $jsst_query_args = [
-                'token'   => $jsst_key,
-                'domain'  => $jsst_site_url,
-                'request' => 'keyexpirycheck'
-            ];
-
-            $jsst_url = add_query_arg($jsst_query_args, 'https://jshelpdesk.com/setup/index.php');
-
-            // Perform GET request
-            $jsst_response = wp_remote_get($jsst_url, [ 'timeout' => 15 ]);
-
-            if (is_wp_error($jsst_response)) {
-                continue; // Skip on error
-            }
-
-            $jsst_body = wp_remote_retrieve_body($jsst_response);
-            $jsst_data = json_decode($jsst_body, true);
-
-            if (!is_array($jsst_data) || !isset($jsst_data['status'])) {
-                continue; // Invalid response
-            }
-
-            // Save status
-            update_option($jsst_status_prefix . $jsst_key, $jsst_data['status'], false);
-
-            // Save expiry date if available
-            if ($jsst_data['status'] == 1 && !empty($jsst_data['expirydate'])) {
-                if (strtotime(current_time('mysql')) > strtotime($jsst_data['expirydate'])) {
-                    $jsst_show_key_expiry_msg = 1;
-                }
-            } else {
-                $jsst_show_key_expiry_msg = 1;
-            }
-        }
-
-        update_option('jsst_show_key_expiry_msg', $jsst_show_key_expiry_msg, false);
-    }
-    
     function jsst_get_theme_colors() {
         require_once(JSST_PLUGIN_PATH . 'includes/css/style.php');
         // Use a static variable to cache the colors after the first run.

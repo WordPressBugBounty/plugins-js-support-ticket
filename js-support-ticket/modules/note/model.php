@@ -84,6 +84,15 @@ class JSSTnoteModel {
     /**
      * Notes on one ticket, oldest first, into jssupportticket::$jsst_data[6].
      */
+    /**
+     * The notes on a ticket, with the restricted ones this person may not read
+     * taken out. (Roadmap 4.5-FE-08)
+     *
+     * Filtered here, in the one reader, rather than at each of the places that
+     * render notes - a rule every caller has to remember to apply is one they
+     * will forget, and forgetting this one shows somebody a note written about
+     * them.
+     */
     function getNotes($jsst_ticketid) {
         if (!is_numeric($jsst_ticketid))
             return false;
@@ -92,7 +101,7 @@ class JSSTnoteModel {
         // Kept so the Time Tracking add-on can still add its select and join.
         do_action('jsstgetnotes');
         do_action('jsst_aadon_getnotes');
-        $jsst_query = "SELECT note.*,note.staffid AS userid,user.display_name,user.user_email " . jssupportticket::$_addon_query['select'] . "
+        $jsst_query = "SELECT note.*,note.staffid AS userid, user.display_name " . jssupportticket::$_addon_query['select'] . "
                 FROM `" . jssupportticket::$_db->prefix . "js_ticket_notes` AS note
                 " . jssupportticket::$_addon_query['join'] . "
                 LEFT JOIN `" . jssupportticket::$_wpprefixforuser . "js_ticket_users` AS user ON user.id = note.staffid
@@ -103,6 +112,9 @@ class JSSTnoteModel {
         if (jssupportticket::$_db->last_error != null) {
             JSSTincluder::getJSModel('systemerror')->addSystemError();
             jssupportticket::$jsst_data[6] = array();
+        }
+        if (class_exists('JSSTcollab')) {
+            jssupportticket::$jsst_data[6] = JSSTcollab::filterNotes(jssupportticket::$jsst_data[6]);
         }
         do_action('jsst_reset_aadon_query');
         return;
@@ -117,6 +129,10 @@ class JSSTnoteModel {
             $jsst_allow = JSSTincluder::getJSModel('userpermissions')->checkPermissionGrantedForTask('Post Internal Note');
             if ($jsst_allow != true) {
                 JSSTmessage::setMessage(esc_html(__('You are not allowed', 'js-support-ticket')), 'error', 'agent-permissions');
+                return;
+            }
+            if (isset($jsst_data['ticketid']) && JSSTincluder::getJSModel('ticket')->isOutOfScopeForAgent($jsst_data['ticketid'], 'ticket.note')) {
+                JSSTmessage::setMessage(esc_html(__('This ticket is outside the tickets you can work on.', 'js-support-ticket')), 'error', 'agent-permissions');
                 return;
             }
         } elseif (!JSSTroles::canWriteInternalNote()) {
@@ -172,6 +188,27 @@ class JSSTnoteModel {
         if ($jsst_error == 0) {
             $jsst_noteid = $jsst_row->id;
 
+            /* Collaboration, applied where a note is actually written rather
+               than where notes are displayed - a restriction added afterwards
+               is a note that was readable by everybody for the length of one
+               request. (Roadmap 4.5-FE-08) */
+            if (class_exists('JSSTcollab')) {
+                $jsst_restricted = (isset($jsst_data['noterestrict']) && $jsst_data['noterestrict'] == 1);
+                if ($jsst_restricted) {
+                    JSSTcollab::restrictNote($jsst_noteid, JSSTcollab::NOTE_NAMED,
+                        isset($jsst_data['noteaudience']) ? (array) $jsst_data['noteaudience'] : array());
+                }
+                /* Mentions are recorded from the stored note rather than from
+                   the posted text, so what was matched is what was saved. */
+                /* The staff id, not $jsst_cuid. That variable is a
+                   js_ticket_users id - which is what this table's own staffid
+                   column holds - while a mention is recorded against
+                   js_ticket_staff ids. Passing the users id made the author's
+                   name come out wrong and stopped self-mentions being skipped. */
+                $jsst_mentionby = class_exists('JSSTcapability') ? (int) JSSTcapability::actor()['staffid'] : 0;
+                JSSTcollab::recordMentions($jsst_ticketid, $jsst_data['note'], 'note', $jsst_noteid, $jsst_mentionby);
+            }
+
             JSSTmessage::setMessage(esc_html(__('The internal note has been posted', 'js-support-ticket')), 'updated');
             $jsst_messagetype = esc_html(__('Successfully', 'js-support-ticket'));
             if ( in_array('timetracking',jssupportticket::$_active_addons) ){
@@ -220,63 +257,87 @@ class JSSTnoteModel {
 
     /**
      * Serve a note attachment to an agent or administrator, never to a customer.
+     *
+     * Refused and missing both answer with the same 404, so the response does
+     * not say whether a note id exists.
      */
     function getDownloadAttachmentById($jsst_id){
-        if(!is_numeric($jsst_id)) return false;
+        $jsst_id = absint($jsst_id);
+        if ($jsst_id === 0) {
+            JSSTincluder::notFound();
+        }
         $jsst_query = jssupportticket::$_db->prepare(
-            "SELECT ticket.attachmentdir AS foldername,ticket.id AS ticketid,note.filename
+            "SELECT note.*, ticket.attachmentdir AS foldername
                 FROM `".jssupportticket::$_db->prefix."js_ticket_notes` AS note
                 JOIN `".jssupportticket::$_db->prefix."js_ticket_tickets` AS ticket ON ticket.id = note.ticketid
                 WHERE note.id = %d",
             $jsst_id
         );
-        $jsst_object = jssupportticket::$_db->get_row($jsst_query);
-        if (empty($jsst_object) || $jsst_object->filename == '') {
-            include( get_query_template( '404' ) );
-            exit;
+        $jsst_note = jssupportticket::$_db->get_row($jsst_query);
+        if (empty($jsst_note) || $jsst_note->filename == '' || !$this->canDownloadAttachment($jsst_note)) {
+            JSSTincluder::notFound();
         }
-        $jsst_foldername = $jsst_object->foldername;
-        $jsst_filename = $jsst_object->filename;
-        $jsst_download = false;
-        if(!JSSTincluder::getObjectClass('user')->isguest()){
-            if(is_admin()){
-                $jsst_download = true;
-            }else{
-                if( in_array('agent',jssupportticket::$_active_addons) && JSSTincluder::getJSModel('agent')->isUserStaff()){
-                    $jsst_download = true;
-                }
-            }
+        $jsst_datadirectory = jssupportticket::$_config['data_directory'];
+        $jsst_wpdir = wp_upload_dir();
+        $jsst_path = $jsst_wpdir['basedir'].'/'.$jsst_datadirectory;
+        $jsst_path = $jsst_path . '/attachmentdata';
+        $jsst_path = $jsst_path . '/ticket/' . $jsst_note->foldername;
+        // The stored name is the only part of the path that is not fixed, so
+        // it is reduced to a bare file name before it is used.
+        $jsst_file = $jsst_path . '/' . jssupportticketphplib::JSST_basename($jsst_note->filename);
+        if (!file_exists($jsst_file)) {
+            JSSTincluder::notFound();
         }
-        if($jsst_download == true){
-            $jsst_datadirectory = jssupportticket::$_config['data_directory'];
-            $jsst_wpdir = wp_upload_dir();
-            $jsst_path = $jsst_wpdir['basedir'].'/'.$jsst_datadirectory;
-            $jsst_path = $jsst_path . '/attachmentdata';
-            $jsst_path = $jsst_path . '/ticket/' . $jsst_foldername;
-            // The stored name is the only part of the path that is not fixed, so
-            // it is reduced to a bare file name before it is used.
-            $jsst_file = $jsst_path . '/' . jssupportticketphplib::JSST_basename($jsst_filename);
-            if (!file_exists($jsst_file)) {
-                include( get_query_template( '404' ) );
-                exit;
-            }
-            JSSTincluder::getJSModel('jssupportticket')->generateIndexFile($jsst_path);
+        JSSTincluder::getJSModel('jssupportticket')->generateIndexFile($jsst_path);
 
-            header('Content-Description: File Transfer');
-            header('Content-Type: application/octet-stream');
-            header('Content-Disposition: attachment; filename=' . jssupportticketphplib::JSST_basename($jsst_file));
-            header('Content-Transfer-Encoding: binary');
-            header('Expires: 0');
-            header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
-            header('Pragma: public');
-            header('Content-Length: ' . filesize($jsst_file));
-            flush();
-            readfile($jsst_file);
-            exit();
-        }else{
-            include( get_query_template( '404' ) );
-            exit;
+        header('Content-Description: File Transfer');
+        header('Content-Type: application/octet-stream');
+        header('X-Content-Type-Options: nosniff');
+        header('Content-Disposition: attachment; filename="' . jssupportticketphplib::JSST_basename($jsst_file) . '"');
+        header('Content-Transfer-Encoding: binary');
+        header('Expires: 0');
+        header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+        header('Pragma: public');
+        header('Content-Length: ' . filesize($jsst_file));
+        flush();
+        readfile($jsst_file); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_readfile -- streams the file to the browser: WP_Filesystem would read it all into memory first
+        exit();
+    }
+
+    /**
+     * May the current user download this note's attachment?
+     *
+     * The same people who are shown the note on the ticket screen, asked the
+     * same way the ticket screen asks it (JSSTticketModel::getTicketForDetail()):
+     *
+     *  - a help-desk administrator, on any ticket;
+     *  - an agent governed by the Agents add-on, on a ticket inside their own
+     *    scope - All Tickets, their departments, assigned or invited;
+     *  - otherwise, anyone holding the agent capability.
+     *
+     * Never a customer, including the ticket's owner: a note is internal. And
+     * never on the strength of is_admin(), which is true for every request to
+     * admin-ajax.php and says nothing about who is asking. Only a WordPress
+     * login counts - no agent signs in through the social-login cookie.
+     *
+     * A note restricted to named colleagues stays restricted here as well, so
+     * the file cannot be fetched by an agent who is not shown the note.
+     */
+    private function canDownloadAttachment($jsst_note) {
+        if (!is_user_logged_in()) {
+            return false;
         }
+        if (JSSTroles::canManageHelpDesk()) {
+            $jsst_allowed = true;
+        } elseif (in_array('agent', jssupportticket::$_active_addons) && JSSTincluder::getJSModel('agent')->isUserStaff()) {
+            $jsst_allowed = JSSTincluder::getJSModel('ticket')->validateTicketDetailForStaff($jsst_note->ticketid);
+        } else {
+            $jsst_allowed = current_user_can(JSSTroles::CAP_TICKETS);
+        }
+        if ($jsst_allowed && class_exists('JSSTcollab')) {
+            $jsst_allowed = JSSTcollab::canSeeNote($jsst_note);
+        }
+        return (bool) $jsst_allowed;
     }
 
     /**
@@ -288,7 +349,7 @@ class JSSTnoteModel {
         $jsst_noteid = JSSTrequest::getVar('val');
         $jsst_nonce = JSSTrequest::getVar('_wpnonce');
         if (! wp_verify_nonce( $jsst_nonce, 'get-time-by-note-id-'.$jsst_noteid) ) {
-            die( 'Security check Failed' );
+            die( esc_html__( 'Security check Failed', 'js-support-ticket' ) );
         }
         if(!is_numeric($jsst_noteid)) return false;
         $jsst_query = jssupportticket::$_db->prepare(

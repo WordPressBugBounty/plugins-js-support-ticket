@@ -60,9 +60,9 @@ class JSSTcsvwriter {
         header('Content-Type: text/csv; charset=utf-8');
         header('Content-Disposition: attachment; filename="' . $jsst_filename . '"');
         header('X-Content-Type-Options: nosniff');
-        $this->jsst_handle = fopen('php://output', 'w');
+        $this->jsst_handle = fopen('php://output', 'w'); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_fopen -- php:// stream, not a file: WP_Filesystem has no API for stream wrappers
         // The BOM is what makes Excel read this as UTF-8.
-        fwrite($this->jsst_handle, "\xEF\xBB\xBF");
+        fwrite($this->jsst_handle, "\xEF\xBB\xBF"); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_fwrite -- php:// stream, not a file: WP_Filesystem has no API for stream wrappers
         return $this;
     }
 
@@ -71,8 +71,8 @@ class JSSTcsvwriter {
      * caller that wants the payload rather than a download.
      */
     public function startToMemory() {
-        $this->jsst_handle = fopen('php://temp', 'r+');
-        fwrite($this->jsst_handle, "\xEF\xBB\xBF");
+        $this->jsst_handle = fopen('php://temp', 'r+'); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_fopen -- php:// stream, not a file: WP_Filesystem has no API for stream wrappers
+        fwrite($this->jsst_handle, "\xEF\xBB\xBF"); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_fwrite -- php:// stream, not a file: WP_Filesystem has no API for stream wrappers
         return $this;
     }
 
@@ -91,7 +91,23 @@ class JSSTcsvwriter {
         foreach ($jsst_values as $jsst_value) {
             $jsst_clean[] = self::cell($jsst_value);
         }
-        fputcsv($this->jsst_handle, $jsst_clean);
+        /* All four arguments, and `''` for the escape character.
+
+           PHP's historical default is a backslash, which is not CSV: RFC 4180
+           escapes a quote by doubling it and gives a backslash no special
+           meaning. With the default, a value ending in `\\` or containing
+           `\\"` is written in a form that Excel and every standards-based
+           parser - including this plugin's own importer - reads back wrongly.
+           The phone number in the export that turned this up is exactly that
+           kind of value.
+
+           PHP 8.4 deprecated leaving it unspecified, which is how it showed:
+           the notice was printed once per row straight into `php://output`,
+           interleaved with the data, so the downloaded file was not a CSV at
+           all. Passing the argument settles both - the deprecation and the
+           escaping - and the importer is given the same `''` so that what this
+           writes round-trips. */
+        fputcsv($this->jsst_handle, $jsst_clean, ',', '"', '');
         $this->jsst_rows++;
         return $this;
     }
@@ -101,7 +117,7 @@ class JSSTcsvwriter {
      */
     public function blank() {
         if ($this->jsst_handle !== null) {
-            fwrite($this->jsst_handle, "\r\n");
+            fwrite($this->jsst_handle, "\r\n"); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_fwrite -- php:// stream, not a file: WP_Filesystem has no API for stream wrappers
         }
         return $this;
     }
@@ -135,7 +151,7 @@ class JSSTcsvwriter {
      */
     public function finish() {
         if ($this->jsst_handle !== null) {
-            fclose($this->jsst_handle);
+            fclose($this->jsst_handle); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_fclose -- php:// stream, not a file: WP_Filesystem has no API for stream wrappers
             $this->jsst_handle = null;
         }
         exit;
@@ -150,7 +166,7 @@ class JSSTcsvwriter {
         }
         rewind($this->jsst_handle);
         $jsst_out = stream_get_contents($this->jsst_handle);
-        fclose($this->jsst_handle);
+        fclose($this->jsst_handle); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_fclose -- php:// stream, not a file: WP_Filesystem has no API for stream wrappers
         $this->jsst_handle = null;
         return $jsst_out;
     }

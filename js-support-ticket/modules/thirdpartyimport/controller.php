@@ -93,7 +93,7 @@ class JSSTthirdpartyimportController {
     function importPluginData() {
         $jsst_nonce = JSSTrequest::getVar('_wpnonce');
         if (! wp_verify_nonce( $jsst_nonce, 'importPluginData') ) {
-            die( 'Security check Failed' );
+            die( esc_html__( 'Security check Failed', 'js-support-ticket' ) );
         }
         if (!current_user_can('manage_options')) { //only admin can change it.
             return false;
@@ -108,36 +108,6 @@ class JSSTthirdpartyimportController {
             JSSTincluder::getJSModel('thirdpartyimport')->importFluentSupportData();
         }
         $jsst_url = admin_url("admin.php?page=thirdpartyimport&jstlay=importresult&selected_plugin=".$jsst_selected_plugin);
-        wp_safe_redirect($jsst_url);
-        exit;
-    }
-
-    function getSupportCandyDataStats() {
-        $jsst_id = JSSTrequest::getVar('statusid');
-        $jsst_nonce = JSSTrequest::getVar('_wpnonce');
-        if (! wp_verify_nonce( $jsst_nonce, 'delete-status-'.$jsst_id) ) {
-            die( 'Security check Failed' );
-        }
-        if (!current_user_can('manage_options')) {
-            return false;
-        }
-        JSSTincluder::getJSModel('thirdpartyimport')->getSupportCandyDataStats( absint( $jsst_id ) );
-        $jsst_url = admin_url("admin.php?page=thirdpartyimport&jstlay=importresult");
-        wp_safe_redirect($jsst_url);
-        exit;
-    }
-
-    function getFluentSupportStats() {
-        $jsst_id = JSSTrequest::getVar('statusid');
-        $jsst_nonce = JSSTrequest::getVar('_wpnonce');
-        if (! wp_verify_nonce( $jsst_nonce, 'delete-status-'.$jsst_id) ) {
-            die( 'Security check Failed' );
-        }
-        if (!current_user_can('manage_options')) {
-            return false;
-        }
-        JSSTincluder::getJSModel('thirdpartyimport')->getFluentSupportStats( absint( $jsst_id ) );
-        $jsst_url = admin_url("admin.php?page=thirdpartyimport&jstlay=importresult");
         wp_safe_redirect($jsst_url);
         exit;
     }
@@ -158,7 +128,7 @@ class JSSTthirdpartyimportController {
      */
     function startmigration() {
         if (!wp_verify_nonce(JSSTrequest::getVar('_wpnonce'), 'jsst-migration-start')) {
-            die('Security check Failed');
+            die(esc_html__( 'Security check Failed', 'js-support-ticket' ));
         }
         if (!current_user_can('manage_options')) {
             return false;
@@ -236,7 +206,7 @@ class JSSTthirdpartyimportController {
      */
     function rollbackmigration() {
         if (!wp_verify_nonce(JSSTrequest::getVar('_wpnonce'), 'jsst-migration-rollback')) {
-            die('Security check Failed');
+            die(esc_html__( 'Security check Failed', 'js-support-ticket' ));
         }
         if (!current_user_can('manage_options')) {
             return false;

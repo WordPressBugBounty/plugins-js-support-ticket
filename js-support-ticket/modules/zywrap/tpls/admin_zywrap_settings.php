@@ -30,32 +30,12 @@ JSSTmessage::getMessage();
     </div>
     
     <div id="jsstadmin-data">
-        <div id="jsstadmin-wrapper-top">
-            <div id="jsstadmin-wrapper-top-left">
-                <div id="jsstadmin-breadcrunbs">
-                    <ul>
-                        <li><a href="<?php echo esc_url(admin_url('admin.php?page=jssupportticket')); ?>"><?php echo esc_html(__('Dashboard','js-support-ticket')); ?></a></li>
-                        <li><?php echo esc_html(__('Zywrap AI Settings','js-support-ticket')); ?></li>
-                    </ul>
-                </div>
-            </div>
-            <div id="jsstadmin-wrapper-top-right">
-                <div id="jsstadmin-config-btn">
-                    <a title="<?php echo esc_attr(__('Configurations','js-support-ticket')); ?>" href="<?php echo esc_url(admin_url("admin.php?page=configuration")); ?>">
-                        <img alt="<?php echo esc_attr(__('Config','js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/config.png" />
-                    </a>
-                </div>
-            </div>
-        </div>
-        
-        <div id="jsstadmin-head" class="js-ticket-zywrap-header-area">
-            <h1 class="jsstadmin-head-text js-ticket-zywrap-flex-align">
-                <span class="dashicons dashicons-admin-generic" aria-hidden="true"></span> 
-                <?php echo esc_html(__('Zywrap AI Settings', 'js-support-ticket')); ?>
-            </h1>
-        </div>
+        <?php JSSTlayout::adminPageHeader(array(
+            'title'   => __('Zywrap AI Settings', 'js-support-ticket'),
+        )); ?>
         
         <div id="jsstadmin-data-wrp" class="p0 bg-n bs-n js-ticket-zywrap-padding-25">
+            <?php if (class_exists('JSSTainav')) { JSSTainav::render('zywrap_settings'); } ?>
             
             <div class="js-ticket-zywrap-settings-grid">
                 
@@ -82,7 +62,14 @@ JSSTmessage::getMessage();
                         <div class="js-ticket-zywrap-form-group">
                             <label class="js-ticket-zywrap-label"><?php echo esc_html__('API Key', 'js-support-ticket'); ?></label>
                             <div class="js-ticket-zywrap-input-group">
-                                <input type="password" id="zywrap_api_key" value="<?php echo esc_attr($js_ticket_api_key); ?>" placeholder="sk-...">
+                                <?php /* The stored key is never written back into the page: only its last
+                                         four characters, the same rule AI Agent > Settings follows. */ ?>
+                                <input type="password" id="zywrap_api_key" value="" autocomplete="new-password" placeholder="<?php echo esc_attr($js_ticket_api_key !== ''
+                                    ? sprintf(
+                                        /* translators: %s: last four characters of the stored API key */
+                                        __('A key ending in %s is stored. Leave empty to keep it.', 'js-support-ticket'),
+                                        substr($js_ticket_api_key, -4))
+                                    : 'zw_live_...'); ?>">
                                 <button type="button" id="zywrap_save_key" class="button button-primary"><?php echo esc_html__('Save Key', 'js-support-ticket'); ?></button>
                             </div>
                             <div id="zywrap_key_msg" class="js-ticket-zywrap-msg"></div>

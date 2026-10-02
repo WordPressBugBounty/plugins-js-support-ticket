@@ -68,6 +68,7 @@ $jsst_jssupportticket_js ="
         document.getElementById('jssupportticketform').submit();
     }
     jQuery(document).ready(function(){
+        jQuery(document).on('click', 'a[href=\"#jsst-clear-filters\"]', function(e){ e.preventDefault(); resetFrom(); });
         jQuery('.date,.custom_date').datepicker({dateFormat: 'yy-mm-dd'});
         jQuery('select.js-admin-sort-select').on('change',function(e){
             e.preventDefault();
@@ -87,6 +88,20 @@ $jsst_jssupportticket_js ="
             e.preventDefault();
             var list = jQuery(this).attr('data-tab-number');
             jQuery('input#list').val(list);
+            jQuery('form#jssupportticketform').submit();
+        });
+        /* The inbox buttons are the agent filter with three particular values,
+           so they set that control and re-run the search the queue already
+           has rather than being a second way of asking the same question.
+           (Roadmap 4.5-UX-01) */
+        jQuery('button.jsst-queue-scope').click(function(e){
+            e.preventDefault();
+            /* One inbox at a time: an agent filter and a team filter
+               both applied would be an AND nobody asked for, so
+               setting either clears the other. (Roadmap 4.5-FE-05) */
+            var team = jQuery(this).attr('data-teamid');
+            jQuery('#staffid').val(team ? '' : jQuery(this).attr('data-staffid'));
+            jQuery('#teamid').val(team ? team : '');
             jQuery('form#jssupportticketform').submit();
         });
     });
@@ -227,8 +242,28 @@ $jsst_jssupportticket_js ="
                 }
             });
         }
+        /* Custom fields are copied at the moment of saving rather than kept in
+           step: their controls come in several shapes - one value, a list, tick
+           boxes - and are rebuilt here as one list per field. */
+        function syncViewCustomFields(){
+            saveform.find('.jsst-queue-viewcf').remove();
+            jQuery.each(saveform.data('customfields') || [], function(i, field){
+                filterform.find('[name=\"' + field + '\"], [name=\"' + field + '[]\"]').each(function(){
+                    var control = jQuery(this);
+                    if (control.is(':checkbox, :radio') && !control.is(':checked')) { return; }
+                    jQuery.each([].concat(control.val() || []), function(j, value){
+                        if (value === '') { return; }
+                        jQuery('<input type=\"hidden\" class=\"jsst-queue-viewcf\" />')
+                            .attr('name', saveform.data('customkey') + '[' + field + '][]')
+                            .val(value)
+                            .appendTo(saveform);
+                    });
+                });
+            });
+        }
         filterform.on('change input', 'input, select, textarea', syncViewFilters);
         saveform.on('submit', syncViewFilters);
+        saveform.on('submit', syncViewCustomFields);
         syncViewFilters();
     });
 
@@ -275,8 +310,20 @@ JSSTmessage::getMessage();
             <h1 class="jsstadmin-head-text"><?php echo esc_html(__('Tickets','js-support-ticket')); ?></h1>
             <a <?php echo esc_attr($jsst_id); ?> title="<?php echo esc_attr(__('Add', 'js-support-ticket')); ?>" class="jsstadmin-add-link button" href="?page=ticket&jstlay=addticket&formid=<?php echo esc_attr(JSSTincluder::getJSModel('ticket')->getDefaultMultiFormId()) ?>"><img alt = "<?php echo esc_attr(__('Add', 'js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/plus-icon.png" /><?php echo esc_html(__('Create Ticket','js-support-ticket')); ?></a>
         </div>
-        <div id="jsstadmin-data-wrp" class="p0 bg-n bs-n">
+        <?php /* `jsst-skin` is the only edit made to this file by the design
+                 system work: a scope for the cosmetic layer in admincss.css that
+                 brings this screen's panels, headings, buttons and fields onto the
+                 same tokens as the rest of the admin. No structure, no markup and
+                 no behaviour changed; removing this one class reverts the whole
+                 appearance change. */ ?>
+        <div id="jsstadmin-data-wrp" class="p0 bg-n bs-n jsst-skin">
             <?php
+            /* The desk's navigation, from the one description of it. The left
+               column is wp-admin's; this strip is the desk's, and it is the
+               same one the portal queue draws. (Roadmap 4.5-FE-02) */
+            if (class_exists('JSSTnavigation')) {
+                JSSTnavigation::renderNav();
+            }
             $jsst_list = JSSTrequest::getVar('list', null, null);
             if($jsst_list == null){
                 $jsst_list = jssupportticket::$_search['ticket']['list'];
@@ -286,12 +333,44 @@ JSSTmessage::getMessage();
             $jsst_list = JSSTqueue::normalizeList($jsst_list);
             $jsst_field_array = JSSTincluder::getJSModel('fieldordering')->getFieldTitleByFieldfor(1);
             $jsst_search_field_array = JSSTincluder::getJSModel('fieldordering')->getAdminSystemFieldsForSearch();
-            // The tabs and the number on each come from JSSTqueue, so the tab an
-            // agent clicks and the count beside it are the same definition. Two
-            // of them — Waiting on Agent and Waiting on Customer — are new in
-            // 4.0. (Roadmap 4.0-CORE-18)
-            $jsst_tabs = JSSTqueue::tabs();
-            $jsst_alltotal = isset(jssupportticket::$jsst_data['count']['allticket']) ? (int) jssupportticket::$jsst_data['count']['allticket'] : 0;
+            /* The tabs and the number on each come from the queue engine, so
+               the tab an agent clicks, the count beside it and the list below
+               are one definition — and all three are now scoped to what this
+               person may see. Two of the tabs, Waiting on Agent and Waiting on
+               Customer, are new in 4.0.
+               (Roadmap 4.0-CORE-18, 4.5-UX-01, 4.5-FE-04) */
+            $jsst_qenginestate = class_exists('JSSTqueueengine')
+                ? JSSTqueueengine::state(array('list' => $jsst_list))
+                : array('tabs' => array());
+            $jsst_tabs = isset($jsst_qenginestate['tabs']) ? $jsst_qenginestate['tabs'] : JSSTqueue::tabs();
+            $jsst_alltotal = isset($jsst_tabs[JSSTqueue::LIST_ALL]['total'])
+                ? (int) $jsst_tabs[JSSTqueue::LIST_ALL]['total']
+                : (isset(jssupportticket::$jsst_data['count']['allticket']) ? (int) jssupportticket::$jsst_data['count']['allticket'] : 0);
+
+            /* The queue engine: which columns this agent wants, and the
+               personal and team inboxes. Guarded, because a bootstrap that has
+               lost the include should cost the new controls rather than the
+               whole queue. (Roadmap 4.5-UX-01) */
+            $jsst_qengine    = class_exists('JSSTqueueengine');
+            $jsst_qcolumns   = $jsst_qengine ? JSSTqueueengine::visibleColumns() : array();
+            $jsst_qcatalogue = $jsst_qengine ? JSSTqueueengine::columns() : array();
+            $jsst_qscopes    = ($jsst_qengine && class_exists('JSSTworkspace')) ? JSSTworkspace::scopes() : array();
+            /* Two maps rather than one. A field the catalogue has never heard
+               of - one an add-on put on the listing screen - must pass through
+               untouched, or turning a column off here would silently remove
+               somebody else's. Only fields the catalogue knows about are
+               filtered by what this agent chose. */
+            $jsst_qknown = array();
+            $jsst_qwanted = array();
+            foreach ($jsst_qcatalogue AS $jsst_qkey => $jsst_qcolumn) {
+                if (empty($jsst_qcolumn['field'])) {
+                    continue;
+                }
+                $jsst_qknown[$jsst_qcolumn['field']] = 1;
+                if (isset($jsst_qcolumns[$jsst_qkey])) {
+                    $jsst_qwanted[$jsst_qcolumn['field']] = 1;
+                }
+            }
             ?>
             <div class="js-ticket-count">
                 <?php foreach ($jsst_tabs AS $jsst_tabkey => $jsst_tab) { ?>
@@ -301,7 +380,9 @@ JSSTmessage::getMessage();
                     if (!empty($jsst_tab['addon']) && !in_array($jsst_tab['addon'], jssupportticket::$_active_addons)) {
                         continue;
                     }
-                    $jsst_tabcount = isset(jssupportticket::$jsst_data['count'][$jsst_tab['count']]) ? (int) jssupportticket::$jsst_data['count'][$jsst_tab['count']] : 0;
+                    $jsst_tabcount = isset($jsst_tab['total'])
+                        ? (int) $jsst_tab['total']
+                        : (isset(jssupportticket::$jsst_data['count'][$jsst_tab['count']]) ? (int) jssupportticket::$jsst_data['count'][$jsst_tab['count']] : 0);
                     $jsst_tabpercentage = ($jsst_alltotal != 0) ? round(($jsst_tabcount / $jsst_alltotal) * 100) : 0;
                     $jsst_tabactive = ($jsst_list == $jsst_tabkey) ? 'active' : '';
                     ?>
@@ -327,7 +408,7 @@ JSSTmessage::getMessage();
                                 <?php
                                     echo esc_html($jsst_tab['label']);
                                     if(jssupportticket::$_config['count_on_myticket'] == 1)
-                                        echo ' ( '.esc_html($jsst_tabcount).' )';
+                                        echo ' ('.esc_html($jsst_tabcount).')';
                                 ?>
                             </div>
                         </a>
@@ -335,6 +416,63 @@ JSSTmessage::getMessage();
                 <?php } ?>
             </div>
             <?php
+            /* Personal and team inboxes. The three questions an agent asks in
+               order when they sit down - what is mine, what has nobody picked
+               up, what is my team carrying - as one row above the queue rather
+               than as a dropdown somebody has to know to use. They are the
+               agent filter with three particular values, so they set the
+               control below and re-run the search the queue already has.
+               (Roadmap 4.5-UX-01) */
+            if (!empty($jsst_qscopes) && in_array('agent', jssupportticket::$_active_addons)) {
+                $jsst_qcurrentstaff = isset(jssupportticket::$jsst_data['filter']['staffid']) ? (string) jssupportticket::$jsst_data['filter']['staffid'] : '';
+                $jsst_qcurrentteam = isset(jssupportticket::$jsst_data['filter']['teamid']) ? (string) (int) jssupportticket::$jsst_data['filter']['teamid'] : '';
+                /* The scopes say -1 for "me" so that no caller has to know its
+                   own staff id. The agent control on this form is a list of
+                   real ids, so the -1 is resolved here and nowhere else. */
+                $jsst_qactor = JSSTcapability::actor();
+                $jsst_qmine = ((int) $jsst_qactor['staffid'] > 0) ? (string) (int) $jsst_qactor['staffid'] : '';
+                ?>
+                <div class="jsst-queue-scopes">
+                    <span class="jsst-queue-scopes-label"><?php echo esc_html(__('Inbox', 'js-support-ticket')); ?></span>
+                    <?php foreach ($jsst_qscopes AS $jsst_qscopekey => $jsst_qscope) {
+                        /* "My team" and "everything I can see" are the same
+                           queue for an agent whose scope is already their
+                           departments - the difference between them is the
+                           scope clause, which is applied to every read whether
+                           the button is pressed or not. Offering both would be
+                           two buttons doing one thing. */
+                        $jsst_qcontrol = isset($jsst_qscope['control']) ? $jsst_qscope['control'] : 'staffid';
+                        if ($jsst_qcontrol === 'teamid') {
+                            /* The team queue. Its own control, because it is
+                               not a filter on one agent - the model expands
+                               the team id to its members.
+                               (Roadmap 4.5-FE-05) */
+                            $jsst_qteamvalue = isset($jsst_qscope['value']) ? (string) (int) $jsst_qscope['value'] : '';
+                            if ($jsst_qteamvalue === '' || $jsst_qteamvalue === '0') {
+                                continue;
+                            } ?>
+                            <button type="button" class="jsst-queue-scope <?php echo ($jsst_qcurrentteam === $jsst_qteamvalue) ? 'jsst-queue-scope-on' : ''; ?>" data-teamid="<?php echo esc_attr($jsst_qteamvalue); ?>"><?php echo esc_html($jsst_qscope['label']); ?></button>
+                            <?php continue;
+                        }
+                        $jsst_qvalue = isset($jsst_qscope['filters']['staffid']) ? (string) $jsst_qscope['filters']['staffid'] : '';
+                        if ($jsst_qvalue === '-1') {
+                            /* An administrator who is not on the Agents list
+                               has no staff id, so "assigned to me" would filter
+                               on nothing and quietly mean "everything" - which
+                               is a button that lies rather than a button that
+                               is missing. */
+                            if ($jsst_qmine === '') {
+                                continue;
+                            }
+                            $jsst_qvalue = $jsst_qmine;
+                        }
+                        $jsst_qon = ($jsst_qvalue === '' && $jsst_qcurrentstaff === '')
+                            || ($jsst_qvalue !== '' && $jsst_qcurrentstaff === $jsst_qvalue);
+                        ?>
+                        <button type="button" class="jsst-queue-scope <?php echo $jsst_qon ? 'jsst-queue-scope-on' : ''; ?>" data-staffid="<?php echo esc_attr($jsst_qvalue); ?>"><?php echo esc_html($jsst_qscope['label']); ?></button>
+                    <?php } ?>
+                </div>
+            <?php }
             $jsst_uid = JSSTrequest::getVar('uid',null,0);
             if(is_numeric($jsst_uid) && $jsst_uid){
                 $jsst_formaction = wp_nonce_url(admin_url("admin.php?page=ticket&jstlay=tickets&uid=".esc_attr($jsst_uid)),"my-ticket");
@@ -348,7 +486,23 @@ JSSTmessage::getMessage();
             // agent reaches for; the field-by-field controls below it are still
             // there for the times you know exactly which field you mean.
             // (Roadmap 4.0-CORE-18)
-            $jsst_savedviews = JSSTqueue::getViewsForCombobox();
+            /* The views come from the workspace descriptor rather than
+               straight from the store, so this desk and the front-end one are
+               offering one list built one way - including the ones a colleague
+               shared, marked as theirs. (Roadmap 4.5-UX-01) */
+            $jsst_savedviews = array();
+            foreach (JSSTworkspace::views() AS $jsst_savedview) {
+                $jsst_savedviews[] = (object) array(
+                    'id'   => $jsst_savedview->id,
+                    'text' => empty($jsst_savedview->mine)
+                        ? sprintf(
+                            /* translators: %s: the name of a saved view somebody else shared */
+                            esc_html(__('%s (shared)', 'js-support-ticket')),
+                            $jsst_savedview->name
+                        )
+                        : $jsst_savedview->name,
+                );
+            }
             $jsst_currentview = jssupportticket::$jsst_data['filter']['viewid'];
             ?>
             <form class="js-filter-form mt0" name="jssupportticketform" id="jssupportticketform" method="post" action="<?php echo esc_url($jsst_formaction); ?>">
@@ -356,15 +510,68 @@ JSSTmessage::getMessage();
                     <label class="screen-reader-text" for="keywords"><?php echo esc_html(__('Search tickets', 'js-support-ticket')); ?></label>
                     <?php echo wp_kses(JSSTformfield::text('keywords', jssupportticket::$jsst_data['filter']['keywords'], array('placeholder' => esc_html(__('Search subject, message, replies, customer name, e-mail or ticket ID', 'js-support-ticket')), 'class' => 'js-form-input-field jsst-queue-keywords')), JSST_ALLOWED_TAGS); ?>
                     <?php if (!empty($jsst_savedviews)) { ?>
+                        <span class="jsst-queue-views">
                         <label class="screen-reader-text" for="viewid"><?php echo esc_html(__('Saved view', 'js-support-ticket')); ?></label>
                         <?php echo wp_kses(JSSTformfield::select('viewid', $jsst_savedviews, $jsst_currentview, esc_html(__('Saved views', 'js-support-ticket')), array('class' => 'js-form-select-field jsst-queue-view')), JSST_ALLOWED_TAGS); ?>
                         <?php if (!empty($jsst_currentview) && is_numeric($jsst_currentview)) { ?>
                             <a class="jsst-queue-view-delete" onclick="return confirm('<?php echo esc_js(__('Delete this saved view?', 'js-support-ticket')); ?>');" href="<?php echo esc_url(wp_nonce_url(admin_url('admin.php?page=ticket&task=deletequeueview&action=jstask&viewid=' . (int) $jsst_currentview), 'jsst-delete-queue-view-' . (int) $jsst_currentview)); ?>"><?php echo esc_html(__('Delete view', 'js-support-ticket')); ?></a>
                         <?php } ?>
+                        </span>
                     <?php } else { ?>
                         <?php echo wp_kses(JSSTformfield::hidden('viewid', ''), JSST_ALLOWED_TAGS); ?>
                     <?php } ?>
                 </div>
+                <?php
+                /* One search box up front, with the agent and status pickers beside
+                   it; every narrower field waits behind More filters. They were all
+                   drawn at once - a second subject box, a name box, an e-mail box and
+                   a ticket-ID box beside a search that already covers all four - so
+                   the form read as ten ways to do one thing. It opens by itself when
+                   one of those fields is in use, so a filter is never hidden while
+                   it is narrowing the list. */
+                $jsst_morefilterkeys = array('subject', 'name', 'phone', 'email', 'productid', 'departmentid', 'helptopicid', 'priority', 'datestart', 'dateend', 'ticketid', 'orderid', 'tagid');
+                $jsst_morefilterson = 0;
+                foreach ($jsst_morefilterkeys AS $jsst_mfkey) {
+                    if (isset(jssupportticket::$jsst_data['filter'][$jsst_mfkey]) && jssupportticket::$jsst_data['filter'][$jsst_mfkey] !== '' && jssupportticket::$jsst_data['filter'][$jsst_mfkey] !== null) {
+                        $jsst_morefilterson++;
+                    }
+                }
+                ?>
+                <div class="jsst-queue-mainfilters">
+                <?php if ( in_array('agent',jssupportticket::$_active_addons)) {
+                    /* "Nobody" as an entry in the agent list. Until now the
+                       queue could be filtered to any agent and not to the
+                       absence of one, so the single most useful question a
+                       queue is asked - what has nobody picked up - could not be
+                       asked at all. It is first because it is the one being
+                       looked for. (Roadmap 4.5-UX-01) */
+                    $jsst_staffoptions = JSSTincluder::getJSModel('agent')->getStaffForCombobox();
+                    if (!is_array($jsst_staffoptions)) {
+                        $jsst_staffoptions = array();
+                    }
+                    array_unshift($jsst_staffoptions, (object) array('id' => '0', 'text' => esc_html(__('Unassigned', 'js-support-ticket'))));
+                    echo wp_kses(JSSTformfield::select('staffid', $jsst_staffoptions, jssupportticket::$jsst_data['filter']['staffid'], esc_html(__('Select Agent','js-support-ticket')), array('class' => 'js-form-select-field')), JSST_ALLOWED_TAGS);
+                } ?>
+                <?php echo wp_kses(JSSTformfield::select('status', JSSTincluder::getJSModel('status')->getStatusForFilter(), jssupportticket::$jsst_data['filter']['status'], esc_html(__('Select Status','js-support-ticket')), array('class' => 'js-form-select-field')), JSST_ALLOWED_TAGS); ?>
+                <?php
+                /* Company. Only once a company exists, so a desk that does not
+                   use them never sees an empty control. (Roadmap 5.5-COM-06) */
+                $jsst_companyoptions = array();
+                if (class_exists('JSSTcompanies') && JSSTcompanies::inUse()) {
+                    foreach (JSSTcompanies::all() AS $jsst_corow) {
+                        $jsst_companyoptions[] = (object) array('id' => (string) (int) $jsst_corow->id,
+                            'text' => $jsst_corow->name . ((int) $jsst_corow->status !== JSSTcompanies::STATUS_ACTIVE ? ' (' . __('archived', 'js-support-ticket') . ')' : ''));
+                    }
+                }
+                if (!empty($jsst_companyoptions)) {
+                    echo wp_kses(JSSTformfield::select('companyid', $jsst_companyoptions, isset(jssupportticket::$jsst_data['filter']['companyid']) ? jssupportticket::$jsst_data['filter']['companyid'] : '', esc_html(__('Select Company','js-support-ticket')), array('class' => 'js-form-select-field')), JSST_ALLOWED_TAGS);
+                } ?>
+                <?php echo wp_kses(JSSTformfield::submitbutton('go', esc_html(__('Search', 'js-support-ticket')), array('class' => 'button js-form-search')), JSST_ALLOWED_TAGS); ?>
+                <?php echo wp_kses(JSSTformfield::button(esc_html(__('Reset', 'js-support-ticket')), esc_html(__('Reset', 'js-support-ticket')), array('class' => 'button js-form-reset', 'onclick' => 'resetFrom();')), JSST_ALLOWED_TAGS); ?>
+                </div>
+                <details class="jsst-queue-morefilters"<?php echo $jsst_morefilterson ? ' open' : ''; ?>>
+                    <summary><?php echo esc_html(__('More filters', 'js-support-ticket')); ?><?php if ($jsst_morefilterson) { ?> <span class="jsst-queue-morefilters-count"><?php echo (int) $jsst_morefilterson; ?></span><?php } ?></summary>
+                    <div class="jsst-queue-morefilters-body">
                 <?php
                 if (!empty($jsst_search_field_array['subject'])) {
                     echo wp_kses(JSSTformfield::text('subject', jssupportticket::$jsst_data['filter']['subject'], array('placeholder' => jssupportticket::JSST_getVarValue($jsst_search_field_array['subject']),'class' => 'js-form-input-field')), JSST_ALLOWED_TAGS);
@@ -378,9 +585,6 @@ JSSTmessage::getMessage();
                 if(!empty($jsst_search_field_array['email'])) {
                     echo wp_kses(JSSTformfield::text('email', jssupportticket::$jsst_data['filter']['email'], array('placeholder' => jssupportticket::JSST_getVarValue($jsst_search_field_array['email']),'class' => 'js-form-input-field')), JSST_ALLOWED_TAGS);
                 } ?>
-                <?php if ( in_array('agent',jssupportticket::$_active_addons)) { ?>
-                    <?php echo wp_kses(JSSTformfield::select('staffid', JSSTincluder::getJSModel('agent')->getStaffForCombobox(), jssupportticket::$jsst_data['filter']['staffid'], esc_html(__('Select Agent','js-support-ticket')), array('class' => 'js-form-select-field')), JSST_ALLOWED_TAGS); ?>
-                <?php } ?>
                 <?php
                 if(!empty($jsst_search_field_array['product'])) { 
                     echo wp_kses(JSSTformfield::select('productid', JSSTincluder::getJSModel('product')->getProductForCombobox(), jssupportticket::$jsst_data['filter']['productid'], esc_html(__('Select','js-support-ticket')).' '.$jsst_search_field_array['product'], array('class' => 'js-form-select-field')), JSST_ALLOWED_TAGS);
@@ -400,7 +604,6 @@ JSSTmessage::getMessage();
                 <?php if(class_exists('WooCommerce') && in_array('woocommerce', jssupportticket::$_active_addons)){  ?>
                     <?php echo wp_kses(JSSTformfield::text('orderid', jssupportticket::$jsst_data['filter']['orderid'], array('placeholder' => jssupportticket::JSST_getVarValue($jsst_field_array['wcorderid']),'class' => 'js-form-input-field')), JSST_ALLOWED_TAGS); ?>
                 <?php } ?>
-                <?php echo wp_kses(JSSTformfield::select('status', JSSTincluder::getJSModel('status')->getStatusForFilter(), jssupportticket::$jsst_data['filter']['status'], esc_html(__('Select Status','js-support-ticket')), array('class' => 'js-form-select-field')), JSST_ALLOWED_TAGS); ?>
                 <?php
                     // Tag filter. Only offered once at least one tag exists, so a site
                     // that does not tag never sees an empty control.
@@ -413,6 +616,9 @@ JSSTmessage::getMessage();
                 <?php echo wp_kses(JSSTformfield::hidden('JSST_form_search', 'JSST_SEARCH'), JSST_ALLOWED_TAGS); ?>
                 <?php echo wp_kses(JSSTformfield::hidden('sortby', jssupportticket::$jsst_data['filter']['sortby']), JSST_ALLOWED_TAGS); ?>
                 <?php echo wp_kses(JSSTformfield::hidden('list', $jsst_list), JSST_ALLOWED_TAGS); ?>
+                <?php /* The team queue travels with the search like every other
+                         filter. (Roadmap 4.5-FE-05) */ ?>
+                <?php echo wp_kses(JSSTformfield::hidden('teamid', isset(jssupportticket::$jsst_data['filter']['teamid']) ? jssupportticket::$jsst_data['filter']['teamid'] : ''), JSST_ALLOWED_TAGS); ?>
 
                 <?php
                     $jsst_customfields = JSSTincluder::getObjectClass('customfields')->adminFieldsForSearch(1);
@@ -420,20 +626,70 @@ JSSTmessage::getMessage();
                         JSSTincluder::getObjectClass('customfields')->formCustomFieldsForSearch($jsst_field, $jsst_k, 1);
                     }
                 ?>
-                <?php echo wp_kses(JSSTformfield::submitbutton('go', esc_html(__('Search', 'js-support-ticket')), array('class' => 'button js-form-search')), JSST_ALLOWED_TAGS); ?>
-                <?php echo wp_kses(JSSTformfield::button(esc_html(__('Reset', 'js-support-ticket')), esc_html(__('Reset', 'js-support-ticket')), array('class' => 'button js-form-reset', 'onclick' => 'resetFrom();')), JSST_ALLOWED_TAGS); ?>
+                    </div>
+                </details>
             </form>
             <?php
+            /* The column picker. Its own form and its own nonce, posting to a
+               task rather than re-running the search: what a person wants to
+               see is not a filter, and folding it into the search form would
+               mean every search silently re-saved it. (Roadmap 4.5-UX-01) */
+            if ($jsst_qengine && !empty($jsst_qcatalogue)) { ?>
+                <details class="jsst-queue-columns">
+                    <summary><?php echo esc_html(__('Columns', 'js-support-ticket')); ?></summary>
+                    <form method="post" action="<?php echo esc_url(wp_nonce_url(admin_url('admin.php?page=ticket&task=savequeuecolumns&action=jstask'), 'jsst-queue-columns')); ?>">
+                        <p class="jsst-queue-columns-note"><?php echo esc_html(__('Yours alone. Everybody else keeps the columns this site is set up with, and turning one off here never hides it from them.', 'js-support-ticket')); ?></p>
+                        <?php /* Grouped rather than one flat list. On a site with a dozen
+                                 custom fields a single run of ticks is a wall, and the two
+                                 halves have different owners besides. (Roadmap 4.5-UX-01) */
+                        foreach (JSSTqueueengine::groupedColumns() AS $jsst_qgroup) { ?>
+                            <div class="jsst-queue-columns-group">
+                                <span class="jsst-queue-columns-grouphead"><?php echo esc_html($jsst_qgroup['label']); ?></span>
+                                <div class="jsst-queue-columns-list">
+                                    <?php foreach ($jsst_qgroup['columns'] AS $jsst_qkey => $jsst_qcolumn) {
+                                        $jsst_qfixed = ($jsst_qkey === 'ticketid' || $jsst_qkey === 'subject'); ?>
+                                        <label class="jsst-queue-column">
+                                            <input type="checkbox" name="queuecolumns[]" value="<?php echo esc_attr($jsst_qkey); ?>" <?php checked(isset($jsst_qcolumns[$jsst_qkey])); ?> <?php disabled($jsst_qfixed); ?> />
+                                            <span><?php echo esc_html($jsst_qcolumn['label']); ?></span>
+                                        </label>
+                                        <?php if ($jsst_qfixed) { ?>
+                                            <input type="hidden" name="queuecolumns[]" value="<?php echo esc_attr($jsst_qkey); ?>" />
+                                        <?php }
+                                    } ?>
+                                </div>
+                            </div>
+                        <?php } ?>
+                        <button type="submit" class="button button-primary"><?php echo esc_html(__('Save columns', 'js-support-ticket')); ?></button>
+                        <button type="submit" name="resetcolumns" value="1" class="button"><?php echo esc_html(__('Back to the site default', 'js-support-ticket')); ?></button>
+                    </form>
+                </details>
+            <?php }
             // Saving a view. Its own form, because it posts to a task with its
             // own nonce rather than re-running the search — but it carries a
             // hidden copy of every filter the queue is currently showing, so
             // what gets stored is exactly the queue on screen. The script below
             // keeps those hidden copies in step as the controls above change.
             // (Roadmap 4.0-CORE-18)
-            if (JSSTticketaction::canRun('View Ticket')) { ?>
-                <form class="jsst-queue-saveview" method="post" action="<?php echo esc_url(wp_nonce_url(admin_url('admin.php?page=ticket&task=savequeueview&action=jstask'), 'jsst-queue-view')); ?>">
+            //
+            // Offered only once a search has narrowed the queue to something a
+            // view can keep, so it reads as the step after searching rather
+            // than a form to fill in first. (Roadmap 4.5-UX-01)
+            if (JSSTticketaction::canRun('View Ticket') && JSSTqueue::canSaveCurrentSearch()) { ?>
+                <form class="jsst-queue-saveview" method="post" data-customfields="<?php echo esc_attr(wp_json_encode(JSSTqueue::customFieldNames())); ?>" data-customkey="<?php echo esc_attr(JSSTqueue::CUSTOM_KEY); ?>" action="<?php echo esc_url(wp_nonce_url(admin_url('admin.php?page=ticket&task=savequeueview&action=jstask'), 'jsst-queue-view')); ?>">
                     <label class="screen-reader-text" for="jsst-queue-viewname"><?php echo esc_html(__('Name for this view', 'js-support-ticket')); ?></label>
                     <input type="text" class="inputbox jsst-queue-viewname" id="jsst-queue-viewname" name="viewname" maxlength="60" placeholder="<?php echo esc_attr(__('Name this search to come back to it', 'js-support-ticket')); ?>" />
+                    <?php /* Sharing puts this view in front of every agent who
+                             can open the queue. It shares the question, not the
+                             answer: the filters go through the same scope clause
+                             as everything else, so a colleague opening it sees
+                             their own tickets matching it and never somebody
+                             else's. (Roadmap 4.5-UX-01) */
+                    if (class_exists('JSSTqueue') && JSSTqueue::canShare()) { ?>
+                        <label class="jsst-queue-share">
+                            <input type="checkbox" name="viewshared" value="1" />
+                            <span title="<?php echo esc_attr(__('Every agent and administrator will see this view in their list. Each of them still sees only the tickets they are allowed to see.', 'js-support-ticket')); ?>"><?php echo esc_html(__('Share with all agents', 'js-support-ticket')); ?></span>
+                        </label>
+                    <?php } ?>
                     <?php echo wp_kses(JSSTformfield::submitbutton('savequeueview', esc_html(__('Save view', 'js-support-ticket')), array('class' => 'button jsst-queue-saveview-apply')), JSST_ALLOWED_TAGS); ?>
                     <?php
                     // The queue as it stands, one hidden field per filter.
@@ -484,17 +740,19 @@ JSSTmessage::getMessage();
                 // Bulk actions. Every ticket runs the same single-ticket path the
                 // detail screen uses, and one reason is recorded against each.
                 // (Roadmap 4.0-CORE-05)
+                /* Which of them this agent may run comes from the workspace
+                   layer now, which puts every one to the capability service
+                   with the actor as an argument - rather than from
+                   JSSTticketaction::canRun(), which answers from whichever of
+                   the two permission systems it reaches first. The same list
+                   builds the bulk bar on the front-end desk.
+                   (Roadmap 4.5-UX-01) */
                 $jsst_bulk_allowed = array();
-                if (JSSTmergedaddon::coreOwns('actions')) {
-                    $jsst_bulk_actions = JSSTticketaction::bulkActions();
-                    foreach ($jsst_bulk_actions AS $jsst_bulk_key => $jsst_bulk_action) {
-                        if (JSSTticketaction::canRun($jsst_bulk_action['permission'])) {
-                            $jsst_bulk_allowed[] = (object) array('id' => $jsst_bulk_key, 'text' => $jsst_bulk_action['label']);
-                        }
-                    }
+                foreach (JSSTworkspace::queueBulk() AS $jsst_bulk_key => $jsst_bulk_label) {
+                    $jsst_bulk_allowed[] = (object) array('id' => $jsst_bulk_key, 'text' => $jsst_bulk_label);
                 }
                 if (!empty($jsst_bulk_allowed)) { ?>
-                    <form class="jsst-bulk-bar" method="post" action="<?php echo esc_url(wp_nonce_url(admin_url('admin.php?page=ticket&task=bulkaction&action=jstask'), 'jsst-bulk-action')); ?>">
+                    <form class="jsst-bulk-bar jsst-queue-bulk" method="post" action="<?php echo esc_url(wp_nonce_url(admin_url('admin.php?page=ticket&task=bulkaction&action=jstask'), 'jsst-bulk-action')); ?>">
                         <div class="jsst-bulk-row">
                             <label class="jsst-bulk-selectall">
                                 <input type="checkbox" id="jsst-bulk-selectall" />
@@ -527,7 +785,29 @@ JSSTmessage::getMessage();
                  * ticket, so it is the same for every row on the page — the
                  * original card layout re-ran that query for each ticket.
                  */
-                $jsst_show_assignee = in_array('agent', jssupportticket::$_active_addons) && jssupportticket::$_config['show_assignto_on_admin_tickets'] == 1;
+                /* The site's switch AND this person's column. The switch says whether
+                   this desk shows assignment at all; the column says whether they want
+                   to see it. (Roadmap 4.5-UX-01) */
+                $jsst_show_assignee = in_array('agent', jssupportticket::$_active_addons)
+                    && jssupportticket::$_config['show_assignto_on_admin_tickets'] == 1
+                    && (empty($jsst_qcatalogue) || isset($jsst_qcolumns['agent']));
+                /* May this reader amend a ticket at all, and may they force one
+                   out of existence? Asked once for the page rather than per row:
+                   neither answer depends on which ticket it is.
+
+                   `canEditTicketContent()` and not something of this template's
+                   own, because it is the exact predicate the addticket
+                   controller decides on - so the button appears when, and only
+                   when, the screen behind it will open. Drawn unconditionally,
+                   it sent a Light Agent - who holds CAP_TICKETS and CAP_NOTE and
+                   no CAP_EDIT - to a form with its fields withheld, an error
+                   across the top and a Submit button underneath. The ticket
+                   detail screen was given this same guard when that bug was
+                   found there; this listing was missed. (Roadmap 4.0-SEC-04) */
+                $jsst_can_edit_ticket = JSSTroles::canEditTicketContent();
+                $jsst_can_force_delete = current_user_can('manage_options');
+                /* Only the fallback for a site whose queue engine include is missing;
+                   the rows below ask JSSTqueueengine for this ticket's own form. */
                 $jsst_customcolumns = JSSTincluder::getObjectClass('customfields')->userFieldsData(1, 1);
                 ?>
                 <div class="jsst-queue-toolbar">
@@ -564,6 +844,19 @@ JSSTmessage::getMessage();
                     }
                     $jsst_field_array = $jsst_fields_array[$jsst_ticket->multiformid];
                     $jsst_show_on_listing_array = $jsst_show_on_listing_arrays[$jsst_ticket->multiformid];
+                    /* What this site shows, narrowed to what this agent wants
+                       to see. Fields the column catalogue has never heard of
+                       pass through untouched - they belong to whichever module
+                       put them on the listing screen, and dropping them here
+                       would be this feature quietly removing somebody else's.
+                       (Roadmap 4.5-UX-01) */
+                    if (!empty($jsst_qknown)) {
+                        foreach ($jsst_show_on_listing_array AS $jsst_listfield => $jsst_liston) {
+                            if (isset($jsst_qknown[$jsst_listfield]) && !isset($jsst_qwanted[$jsst_listfield])) {
+                                unset($jsst_show_on_listing_array[$jsst_listfield]);
+                            }
+                        }
+                    }
 
                     $jsst_ticketviamail = '';
                     if ($jsst_ticket->ticketviaemail == 1) {
@@ -609,12 +902,25 @@ JSSTmessage::getMessage();
                                         <a title="<?php echo esc_attr(__('Subject','js-support-ticket')); ?>" class="js-ticket-det-link" href="<?php echo esc_url($jsst_detailurl); ?>"><?php echo esc_html($jsst_ticket->subject); ?></a>
                                     </div>
                                     <?php
+                                    /* The company behind the address, linked to this queue
+                                       filtered to it. (Roadmap 5.5-COM-06) */
+                                    $jsst_rowcompany = !empty($jsst_companyoptions) ? JSSTcompanies::forEmail($jsst_ticket->email) : false;
+                                    if ($jsst_rowcompany) {
+                                        $jsst_companylink = wp_nonce_url(admin_url('admin.php?page=ticket&jstlay=tickets&JSST_form_search=JSST_SEARCH&list=' . JSSTqueue::LIST_ALL . '&companyid=' . (int) $jsst_rowcompany->id), 'my-ticket'); ?>
+                                        <div class="js-ticket-data-row">
+                                            <div class="js-ticket-data-row-rec">
+                                                <span class="js-ticket-title"><?php echo esc_html(__('Company', 'js-support-ticket')); ?></span>
+                                                <a class="js-ticket-value" href="<?php echo esc_url($jsst_companylink); ?>" title="<?php echo esc_attr(__('Show only this company\'s tickets', 'js-support-ticket')); ?>"><?php echo esc_html($jsst_rowcompany->name); ?></a>
+                                            </div>
+                                        </div>
+                                    <?php } ?>
+                                    <?php
                                     foreach ($jsst_show_on_listing_array AS $jsst_field_field => $jsst_field_title) {
                                         switch ($jsst_field_field) {
                                             case 'department': ?>
                                                 <div class="js-ticket-data-row">
                                                     <div class="js-ticket-data-row-rec">
-                                                        <span class="js-ticket-title"><?php echo esc_html(jssupportticket::JSST_getVarValue($jsst_field_array['department'])); ?>&nbsp;:&nbsp;</span>
+                                                        <span class="js-ticket-title"><?php echo esc_html(jssupportticket::JSST_getVarValue($jsst_field_array['department'])); ?></span>
                                                         <span class="js-ticket-value jsst-row-department" role="button" tabindex="0" data-department="<?php echo esc_attr($jsst_ticket->departmentid); ?>"><?php echo esc_html(jssupportticket::JSST_getVarValue($jsst_ticket->departmentname)); ?></span>
                                                     </div>
                                                 </div>
@@ -623,7 +929,7 @@ JSSTmessage::getMessage();
                                             case 'email': ?>
                                                 <div class="js-ticket-data-row">
                                                     <div class="js-ticket-data-row-rec">
-                                                        <span class="js-ticket-title"><?php echo esc_html(jssupportticket::JSST_getVarValue($jsst_field_array['email'])); ?>&nbsp;:&nbsp;</span>
+                                                        <span class="js-ticket-title"><?php echo esc_html(jssupportticket::JSST_getVarValue($jsst_field_array['email'])); ?></span>
                                                         <span class="js-ticket-value"><?php echo esc_html(jssupportticket::JSST_getVarValue($jsst_ticket->email)); ?></span>
                                                     </div>
                                                 </div>
@@ -632,7 +938,7 @@ JSSTmessage::getMessage();
                                             case 'phone': ?>
                                                 <div class="js-ticket-data-row">
                                                     <div class="js-ticket-data-row-rec">
-                                                        <span class="js-ticket-title"><?php echo esc_html(jssupportticket::JSST_getVarValue($jsst_field_array['phone'])); ?>&nbsp;:&nbsp;</span>
+                                                        <span class="js-ticket-title"><?php echo esc_html(jssupportticket::JSST_getVarValue($jsst_field_array['phone'])); ?></span>
                                                         <span class="js-ticket-value"><?php echo esc_html(jssupportticket::JSST_getVarValue($jsst_ticket->phone)); ?></span>
                                                     </div>
                                                 </div>
@@ -641,7 +947,7 @@ JSSTmessage::getMessage();
                                             case 'product': ?>
                                                 <div class="js-ticket-data-row">
                                                     <div class="js-ticket-data-row-rec">
-                                                        <span class="js-ticket-title"><?php echo esc_html(jssupportticket::JSST_getVarValue($jsst_field_array['product'])); ?>&nbsp;:&nbsp;</span>
+                                                        <span class="js-ticket-title"><?php echo esc_html(jssupportticket::JSST_getVarValue($jsst_field_array['product'])); ?></span>
                                                         <span class="js-ticket-value"><?php echo esc_html(jssupportticket::JSST_getVarValue($jsst_ticket->producttitle)); ?></span>
                                                     </div>
                                                 </div>
@@ -656,7 +962,7 @@ JSSTmessage::getMessage();
                                                 if (JSSTmergedaddon::featureEnabled('helptopic') && isset($jsst_ticket->topic)) { ?>
                                                     <div class="js-ticket-data-row">
                                                         <div class="js-ticket-data-row-rec">
-                                                            <span class="js-ticket-title"><?php echo esc_html(jssupportticket::JSST_getVarValue($jsst_field_array['helptopic'])); ?>&nbsp;:&nbsp;</span>
+                                                            <span class="js-ticket-title"><?php echo esc_html(jssupportticket::JSST_getVarValue($jsst_field_array['helptopic'])); ?></span>
                                                             <span class="js-ticket-value"><?php echo esc_html(jssupportticket::JSST_getVarValue($jsst_ticket->topic)); ?></span>
                                                         </div>
                                                     </div>
@@ -665,7 +971,7 @@ JSSTmessage::getMessage();
                                             case 'eddorderid': ?>
                                                 <div class="js-ticket-data-row">
                                                     <div class="js-ticket-data-row-rec">
-                                                        <span class="js-ticket-title"><?php echo esc_html(jssupportticket::JSST_getVarValue($jsst_field_array['eddorderid'])); ?>&nbsp;:&nbsp;</span>
+                                                        <span class="js-ticket-title"><?php echo esc_html(jssupportticket::JSST_getVarValue($jsst_field_array['eddorderid'])); ?></span>
                                                         <span class="js-ticket-value"><?php echo esc_html(jssupportticket::JSST_getVarValue($jsst_ticket->eddorderid)); ?></span>
                                                     </div>
                                                 </div>
@@ -677,7 +983,7 @@ JSSTmessage::getMessage();
                                                 } ?>
                                                 <div class="js-ticket-data-row">
                                                     <div class="js-ticket-data-row-rec">
-                                                        <span class="js-ticket-title"><?php echo esc_html(jssupportticket::JSST_getVarValue($jsst_field_array['eddproductid'])); ?>&nbsp;:&nbsp;</span>
+                                                        <span class="js-ticket-title"><?php echo esc_html(jssupportticket::JSST_getVarValue($jsst_field_array['eddproductid'])); ?></span>
                                                         <span class="js-ticket-value"><?php echo esc_html(jssupportticket::JSST_getVarValue($jsst_ticket->eddproductid)); ?></span>
                                                     </div>
                                                 </div>
@@ -688,14 +994,40 @@ JSSTmessage::getMessage();
                                         }
                                     }
 
+                                    /* The mood the AI read off this ticket, when the
+                                       site switched that on and the agent turned the
+                                       column on. One pill: the evidence behind it
+                                       belongs on the ticket, where there is room to
+                                       read it, and a queue cell carrying a sentence
+                                       makes every row a different height.
+                                       (Roadmap 6.0-AI-13) */
+                                    if (class_exists('JSSTaitriage') && $jsst_qengine && isset($jsst_qcolumns['aimood'])) {
+                                        if (!isset($jsst_aimoods)) {
+                                            $jsst_aimoods = JSSTaitriage::forTickets(
+                                                wp_list_pluck(jssupportticket::$jsst_data[0], 'id'));
+                                        }
+                                        $jsst_aicell = isset($jsst_aimoods[$jsst_ticket->id])
+                                            ? JSSTaitriage::cell($jsst_aimoods[$jsst_ticket->id]) : '';
+                                        if ($jsst_aicell !== '') { ?>
+                                            <div class="js-ticket-data-row jsst-row-mood">
+                                                <div class="js-ticket-data-row-rec">
+                                                    <span class="js-ticket-title"><?php echo esc_html(__('Mood','js-support-ticket')); ?></span>
+                                                    <span class="js-ticket-value"><?php echo wp_kses_post($jsst_aicell); ?></span>
+                                                </div>
+                                            </div>
+                                        <?php }
+                                    } ?>
+                                    <?php
                                     // Tags. A core object rather than a form field, so rendered
                                     // outside the configured field order, and only when the ticket
                                     // carries some. (Roadmap 4.0-CORE-17)
                                     $jsst_rowtags = isset(jssupportticket::$jsst_data['ticket_tags'][$jsst_ticket->id]) ? jssupportticket::$jsst_data['ticket_tags'][$jsst_ticket->id] : array();
-                                    if (!empty($jsst_rowtags)) { ?>
+                                    // Tags are a column like any other now, and one an agent can
+                                    // turn off. (Roadmap 4.0-CORE-17, 4.5-UX-01)
+                                    if (!empty($jsst_rowtags) && (!$jsst_qengine || isset($jsst_qcolumns['tags']))) { ?>
                                         <div class="js-ticket-data-row">
                                             <div class="js-ticket-data-row-rec">
-                                                <span class="js-ticket-title"><?php echo esc_html(__('Tags','js-support-ticket')); ?>&nbsp;:&nbsp;</span>
+                                                <span class="js-ticket-title"><?php echo esc_html(__('Tags','js-support-ticket')); ?></span>
                                                 <span class="js-ticket-value">
                                                     <?php foreach ($jsst_rowtags AS $jsst_rowtag) { ?>
                                                         <?php
@@ -721,12 +1053,22 @@ JSSTmessage::getMessage();
                                     // card layout re-ran that query for every ticket on the page.
                                     // (Roadmap 4.0-PERF-01)
                                     jssupportticket::$jsst_data['custom']['ticketid'] = $jsst_ticket->id;
-                                    foreach ($jsst_customcolumns AS $jsst_customfield) {
+                                    /* This ticket's form, and only the custom fields this person
+                                       has kept. It used to draw the default form's fields on every
+                                       row - so a ticket raised on another form showed that form's
+                                       questions, unanswered - and it drew them outside the column
+                                       choice, so a custom field turned off in the picker came back
+                                       on every row anyway. Still one query per form per page: the
+                                       engine memoises it. (Roadmap 4.5-UX-01) */
+                                    $jsst_rowcustom = $jsst_qengine
+                                        ? JSSTqueueengine::customFieldsFor($jsst_ticket->multiformid, $jsst_qcolumns)
+                                        : $jsst_customcolumns;
+                                    foreach ($jsst_rowcustom AS $jsst_customfield) {
                                         $jsst_ret = JSSTincluder::getObjectClass('customfields')->showCustomFields($jsst_customfield, 1, $jsst_ticket->params);
                                         ?>
                                         <div class="js-ticket-data-row js-tkt-custm-flds-wrp">
                                             <div class="js-ticket-data-row-rec">
-                                                <span class="js-ticket-title"><?php echo esc_html(jssupportticket::JSST_getVarValue($jsst_ret['title'])); ?>&nbsp;:&nbsp;</span>
+                                                <span class="js-ticket-title"><?php echo esc_html(jssupportticket::JSST_getVarValue($jsst_ret['title'])); ?></span>
                                                 <span class="js-ticket-value"><?php echo wp_kses($jsst_ret['value'], JSST_ALLOWED_TAGS); ?></span>
                                             </div>
                                         </div>
@@ -744,9 +1086,15 @@ JSSTmessage::getMessage();
                                     <?php if ($jsst_ticket->isoverdue == 1) { ?>
                                         <img class="ticketstatusimage <?php echo esc_attr($jsst_counter); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL) . "includes/images/over-due.png"; ?>" alt="<?php echo esc_attr(__('This ticket is marked as overdue', 'js-support-ticket')); ?>" title="<?php echo esc_attr(__('This ticket is marked as overdue', 'js-support-ticket')); ?>" />
                                     <?php } ?>
-                                    <span class="js-ticket-status" style="color:<?php echo esc_attr($jsst_ticket->statuscolour); ?>;background:<?php echo esc_attr($jsst_ticket->statusbgcolour); ?>">
-                                        <?php echo esc_html(jssupportticket::JSST_getVarValue($jsst_ticket->statustitle)); ?>
-                                    </span>
+                                    <?php /* The status badge is the Status column, drawn as a badge
+                                             rather than a labelled line. It used to render whatever the
+                                             picker said, which is why unticking every column still left
+                                             a status on every row. (Roadmap 4.5-UX-01) */
+                                    if (empty($jsst_qcatalogue) || isset($jsst_qcolumns['status'])) { ?>
+                                        <span class="js-ticket-status" style="color:<?php echo esc_attr($jsst_ticket->statuscolour); ?>;background:<?php echo esc_attr($jsst_ticket->statusbgcolour); ?>">
+                                            <?php echo esc_html(jssupportticket::JSST_getVarValue($jsst_ticket->statustitle)); ?>
+                                        </span>
+                                    <?php } ?>
                                     <?php if (!empty($jsst_show_on_listing_array['priority'])) { ?>
                                         <span class="js-ticket-priority js-ticket-wrapper-textcolor" style="background:<?php echo esc_attr($jsst_ticket->prioritycolour); ?>;"><?php echo esc_html(jssupportticket::JSST_getVarValue($jsst_ticket->priority)); ?></span>
                                     <?php } ?>
@@ -755,21 +1103,30 @@ JSSTmessage::getMessage();
                                             <div class="js-ticket-data1-title"><?php echo esc_html(__('Ticket ID', 'js-support-ticket')).':'; ?></div>
                                             <div class="js-ticket-data1-value"><?php echo esc_html($jsst_ticket->ticketid); ?></div>
                                         </div>
-                                        <?php if (empty($jsst_ticket->lastreply) || $jsst_ticket->lastreply == '0000-00-00 00:00:00') { ?>
-                                            <div class="js-ticket-data1-row">
-                                                <div class="js-ticket-data1-title"><?php echo esc_html(__('Created','js-support-ticket')).':'; ?></div>
-                                                <div class="js-ticket-data1-value"><?php echo esc_html(date_i18n(jssupportticket::$_config['date_format'], jssupportticketphplib::JSST_strtotime($jsst_ticket->created))); ?></div>
-                                            </div>
-                                        <?php } else { ?>
+                                        <?php /* One slot, two columns - the last reply where there is
+                                                 one and the date raised otherwise - so it answers for
+                                                 Last reply and for Raised, and it obeyed neither.
+                                                 (Roadmap 4.5-UX-01) */
+                                        $jsst_qhaslast  = (!empty($jsst_ticket->lastreply) && $jsst_ticket->lastreply != '0000-00-00 00:00:00');
+                                        $jsst_qwantlast = (empty($jsst_qcatalogue) || isset($jsst_qcolumns['lastreply']));
+                                        $jsst_qwantmade = (empty($jsst_qcatalogue) || isset($jsst_qcolumns['created']));
+                                        if ($jsst_qhaslast && $jsst_qwantlast) { ?>
                                             <div class="js-ticket-data1-row">
                                                 <div class="js-ticket-data1-title"><?php echo esc_html(__('Last Reply', 'js-support-ticket')).':'; ?></div>
                                                 <div class="js-ticket-data1-value"><?php echo esc_html(date_i18n(jssupportticket::$_config['date_format'], jssupportticketphplib::JSST_strtotime($jsst_ticket->lastreply))); ?></div>
                                             </div>
+                                        <?php } elseif ($jsst_qwantmade) { ?>
+                                            <div class="js-ticket-data1-row">
+                                                <div class="js-ticket-data1-title"><?php echo esc_html(__('Created','js-support-ticket')).':'; ?></div>
+                                                <div class="js-ticket-data1-value"><?php echo esc_html(date_i18n(jssupportticket::$_config['date_format'], jssupportticketphplib::JSST_strtotime($jsst_ticket->created))); ?></div>
+                                            </div>
                                         <?php } ?>
                                         <?php
                                         // The due date and the overdue state, which the card never
-                                        // showed. (Roadmap 4.0-UX-02)
-                                        if (!empty($jsst_ticket->duedate) && $jsst_ticket->duedate != '0000-00-00 00:00:00') { ?>
+                                        // showed. (Roadmap 4.0-UX-02) Under the Due column since
+                                        // 4.5-UX-01, like every other thing on this card.
+                                        if (!empty($jsst_ticket->duedate) && $jsst_ticket->duedate != '0000-00-00 00:00:00'
+                                            && (empty($jsst_qcatalogue) || isset($jsst_qcolumns['duedate']))) { ?>
                                             <div class="js-ticket-data1-row">
                                                 <div class="js-ticket-data1-title"><?php echo esc_html(__('Due', 'js-support-ticket')).':'; ?></div>
                                                 <div class="js-ticket-data1-value"><?php echo esc_html(date_i18n(jssupportticket::$_config['date_format'], jssupportticketphplib::JSST_strtotime($jsst_ticket->duedate))); ?></div>
@@ -789,15 +1146,32 @@ JSSTmessage::getMessage();
                                 </div>
                             </div>
                         </div>
+                        <?php /* Delete is asked per ticket because
+                                 TICKET_DELETE is a scoped action - on a desk
+                                 running the Agents add-on the answer can
+                                 differ from one row to the next. Enforce
+                                 delete asks manage_options, which is what
+                                 its own task handler asks. */
+                        $jsst_can_delete_ticket = class_exists('JSSTcapability')
+                            && JSSTcapability::can(JSSTcapability::TICKET_DELETE,
+                                    array('ticket' => (int) $jsst_ticket->id)); ?>
+                        <?php if ($jsst_can_edit_ticket || $jsst_can_delete_ticket || $jsst_can_force_delete) { ?>
                         <div class="js-ticket-bottom-data-part">
                             <div class="js-ticket-datapart-buttons-action">
+                                <?php if ($jsst_can_edit_ticket) { ?>
                                 <a class="js-ticket-datapart-action-btn button" title="<?php echo esc_attr(__('Edit Ticket', 'js-support-ticket')); ?>" href="?page=ticket&jstlay=addticket&jssupportticketid=<?php echo esc_attr($jsst_ticket->id); ?>"><img alt="<?php echo esc_attr(__('Edit','js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/edit-2.png" /><?php echo esc_html(__('Edit Ticket', 'js-support-ticket')); ?></a>
+                                <?php } ?>
+                                <?php if ($jsst_can_delete_ticket) { ?>
                                 <a class="js-ticket-datapart-action-btn button" title="<?php echo esc_attr(__('Delete Ticket', 'js-support-ticket')); ?>" onclick="return confirm('<?php echo esc_js(__('Are you sure you want to delete?', 'js-support-ticket')); ?>');" href="<?php echo esc_url(wp_nonce_url('?page=ticket&task=deleteticket&action=jstask&ticketid='.esc_attr($jsst_ticket->id),'delete-ticket-'.$jsst_ticket->id));?>">
                                     <img alt="<?php echo esc_attr(__('Delete', 'js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/delete-2.png" />
                                     <?php echo esc_html(__('Delete Ticket', 'js-support-ticket')); ?></a>
+                                <?php } ?>
+                                <?php if ($jsst_can_force_delete) { ?>
                                 <a title="<?php echo esc_attr(__('Enforce delete', 'js-support-ticket')); ?>" class="js-ticket-datapart-action-btn button" onclick="return confirm('<?php echo esc_js(__('Are you sure to enforce delete', 'js-support-ticket')); ?>');" href="<?php echo esc_url(wp_nonce_url('?page=ticket&task=enforcedeleteticket&action=jstask&ticketid='.esc_attr($jsst_ticket->id),'enforce-delete-ticket-'.$jsst_ticket->id))?>"><img src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/forced-delete.png" alt="<?php echo esc_attr(__('Enforce delete', 'js-support-ticket')); ?>" /><?php echo esc_html(__('Enforce delete', 'js-support-ticket')); ?></a>
+                                <?php } ?>
                             </div>
                         </div>
+                        <?php } ?>
                     </div>
                     <?php
                 }
@@ -808,7 +1182,19 @@ JSSTmessage::getMessage();
                     echo '<div class="tablenav"><div class="tablenav-pages">' . wp_kses_post(jssupportticket::$jsst_data[1]) . '</div></div>';
                 }
             } else {
-                JSSTlayout::getNoRecordFound();
+                if (!empty(jssupportticket::$jsst_data['filter']['keywords']) || !empty($jsst_morefilterson)
+                    || (isset(jssupportticket::$jsst_data['filter']['status']) && jssupportticket::$jsst_data['filter']['status'] !== '')
+                    || (isset(jssupportticket::$jsst_data['filter']['staffid']) && jssupportticket::$jsst_data['filter']['staffid'] !== '')) {
+                    JSSTlayout::getNoRecordFound(
+                        __('No tickets match these filters', 'js-support-ticket'),
+                        __('Try fewer filters, or', 'js-support-ticket'),
+                        '#jsst-clear-filters', // the search is remembered, so clearing goes through the same reset as the button
+                        __('clear them all', 'js-support-ticket'));
+                } else {
+                    JSSTlayout::getNoRecordFound(
+                        __('No tickets here', 'js-support-ticket'),
+                        __('New tickets show up in this list as soon as they arrive.', 'js-support-ticket'));
+                }
             }
             ?>
         </div>

@@ -135,7 +135,7 @@ class JSSTslugModel {
         $jsst_id = JSSTrequest::getVar('id');
         $jsst_nonce = JSSTrequest::getVar('_wpnonce');
         if (! wp_verify_nonce( $jsst_nonce, 'get-options-for-edit-slug-'.$jsst_id) ) {
-            die( 'Security check Failed' );
+            die( esc_html__( 'Security check Failed', 'js-support-ticket' ) );
         }
         $jsst_slug = JSSTrequest::getVar('slug');
         $jsst_html = '<span class="userpopup-top">
@@ -157,6 +157,62 @@ class JSSTslugModel {
         $jsst_query = jssupportticket::$_db->prepare("SELECT  defaultslug FROM `".jssupportticket::$_db->prefix."js_ticket_slug` WHERE slug = %s", $jsst_layout);
         $jsst_val = jssupportticket::$_db->get_var($jsst_query);
         return sanitize_title($jsst_val);
+    }
+
+
+    /**
+     * The desk destinations that arrived after this table was first seeded.
+     * (Roadmap 4.5-FE-02, 4.5-UX-02, 6.0-CH-01)
+     *
+     * `js_ticket_slug` is written once, by activation, and never again - so a
+     * layout added in a later release has no row, `getSlugFromFileName()`
+     * returns null, and `jssupportticket::makeUrl()` appends no route segment
+     * at all. The link then points at whatever page the reader is standing on,
+     * which is why Chat, Customers and Notifications appeared in the agent's
+     * menu and reloaded the current page when clicked. Nothing errored and
+     * nothing was refused: the URL was simply the one they were already at.
+     *
+     * Four rows rather than a migration file, because that is what this is: the
+     * seed list in `includes/activation.php` grew and existing sites need to
+     * catch up. `INSERT ... SELECT ... WHERE NOT EXISTS` so it is safe to run
+     * repeatedly and cannot disturb a slug somebody has renamed - if the
+     * filename is already there, in any spelling, this leaves it alone.
+     *
+     * The rewrite rules are built from this table by `paramregister.php`, so a
+     * new row is not reachable until they are flushed; that happens once, here,
+     * and only when a row was actually added.
+     */
+    public static function ensureDeskSlugs() {
+        $jsst_wanted = array(
+            'workspacehome' => array('desk-home', 'slug for the agent desk home'),
+            'staffchat'     => array('staff-chat', 'slug for the agent chat console'),
+            'customers'     => array('customers', 'slug for the customers page'),
+            'notifications' => array('notifications', 'slug for the notifications page'),
+        );
+
+        $jsst_table = jssupportticket::$_db->prefix . 'js_ticket_slug';
+        if (jssupportticket::$_db->get_var(
+                jssupportticket::$_db->prepare('SHOW TABLES LIKE %s', $jsst_table)) !== $jsst_table) {
+            return false;
+        }
+
+        $jsst_added = 0;
+        foreach ($jsst_wanted as $jsst_filename => $jsst_row) {
+            $jsst_exists = jssupportticket::$_db->get_var(jssupportticket::$_db->prepare(
+                'SELECT id FROM `' . $jsst_table . '` WHERE filename = %s', $jsst_filename));
+            if ($jsst_exists !== null) {
+                continue;
+            }
+            jssupportticket::$_db->insert($jsst_table, array(
+                'slug'        => $jsst_row[0],
+                'defaultslug' => $jsst_row[0],
+                'filename'    => $jsst_filename,
+                'description' => $jsst_row[1],
+                'status'      => 1,
+            ));
+            $jsst_added++;
+        }
+        return $jsst_added;
     }
 
     function getSlugFromFileName($jsst_layout,$jsst_module) {
@@ -209,7 +265,7 @@ class JSSTslugModel {
     function getAdminSearchFormDataSlug(){
         $jsst_nonce = JSSTrequest::getVar('_wpnonce');
         if (! wp_verify_nonce( $jsst_nonce, 'slug') ) {
-            die( 'Security check Failed' );
+            die( esc_html__( 'Security check Failed', 'js-support-ticket' ) );
         }
         $jsst_search_array = array();
         $jsst_search_array['slug'] = JSSTrequest::getVar('slug');

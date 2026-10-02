@@ -24,7 +24,17 @@ class JSSTcustomfields {
         }
         $jsst_cssclass = "";
         $jsst_visibleclass = "";
-        if (!empty($jsst_field->visibleparams) && $jsst_field->visibleparams != '[]'){
+        /* The Forms screen governs this question now, so the old half stands
+           down for it: no `visible` class, no watcher wiring below, and the
+           required asterisk comes back - `JSSTforms` decides both what is shown
+           and what is insisted on, and it does the second on the server as well
+           as in the page. Only for a field the migration actually moved;
+           anything it could not read keeps working exactly as it did.
+           (Roadmap 6.5-FORM-04) */
+        $jsst_formid = isset($jsst_field->multiformid) ? (int) $jsst_field->multiformid : 0;
+        $jsst_retired = class_exists('JSSTformlogicmigration')
+            && JSSTformlogicmigration::moved($jsst_field->field, $jsst_formid);
+        if (!$jsst_retired && !empty($jsst_field->visibleparams) && $jsst_field->visibleparams != '[]'){
             $jsst_visibleclass = "visible";
         }
         $jsst_html = '';
@@ -34,12 +44,49 @@ class JSSTcustomfields {
         $jsst_div4 = 'js-ticket-from-field-description';
 
 
+        /* In wp-admin these are rows of the shared form grid; on the front end
+           the customer forms keep the markup they have always had, which is why
+           only this branch moved. js-form-custm-flds-wrp stays on the wrapper
+           whatever else changes: common.js finds a conditional field by
+           .closest("div.js-form-custm-flds-wrp") and toggles `visible` on it,
+           so dropping that class would leave every conditional custom field
+           stuck in whichever state it loaded in. */
         if(is_admin()){
-            $jsst_div1 = 'js-form-wrapper js-form-custm-flds-wrp '.$jsst_visibleclass;
-            $jsst_div2 = 'js-form-title';
-            $jsst_div3 = 'js-form-value';
-            $jsst_div4 = 'js-form-description';
+            /* The width the administrator chose for this field on the Fields
+               screen - 50% or 100% - which this form has been ignoring, so every
+               custom field came out the same middling width whatever was set.
+               Unset (0) falls to a sensible default: a set of options is wide,
+               variable content and gets the full line, because in a narrow
+               column eight checkboxes stack four rows deep and leave a tall
+               empty gap beside the fields next to it. Anything else is a single
+               control and takes a normal field's width. */
+            if($jsst_field->size == 100){
+                $jsst_widthclass = 'jsst-frow-full';
+            }elseif($jsst_field->size == 50){
+                $jsst_widthclass = 'jsst-frow-md';
+            }elseif(in_array($jsst_field->userfieldtype, array('checkbox', 'radio'), true)){
+                $jsst_widthclass = 'jsst-frow-full';
+            }else{
+                $jsst_widthclass = 'jsst-frow-md';
+            }
+            $jsst_div1 = 'jsst-frow '.$jsst_widthclass.' js-form-custm-flds-wrp '.$jsst_visibleclass;
+            $jsst_div2 = 'jsst-flabel';
+            $jsst_div3 = 'jsst-fval';
+            $jsst_div4 = 'jsst-fhelp';
+            /* A set of options is a list of choices, not a row of boxes, so it
+               gets the shared check treatment - which already knows how to lay
+               out the .jsst-formfield-radio-button-wrap each option is wrapped
+               in, and how to size the control itself. */
+            if(in_array($jsst_field->userfieldtype, array('checkbox', 'radio'), true)){
+                $jsst_div3 .= ' jsst-checkgrid';
+            }
         }
+        /* Each option is a cell of that grid - the same bordered, clickable cell
+           the permission and member pickers use - so a set of options looks like
+           every other set of options in the admin rather than like bare inputs.
+           Declared here because both the checkbox and the radio branch below
+           need it. */
+        $jsst_celllass = is_admin() ? ' jsst-checkcell' : '';
 
 
         $jsst_required = $jsst_field->required;
@@ -48,7 +95,7 @@ class JSSTcustomfields {
                 return false;
             }
             $jsst_required = 1;
-            if (isset($jsst_field->visibleparams) && $jsst_field->visibleparams !='') {
+            if (!$jsst_retired && isset($jsst_field->visibleparams) && $jsst_field->visibleparams !='') {
                 $jsst_required = 0;
             }
         }
@@ -92,14 +139,21 @@ class JSSTcustomfields {
         $jsst_jsVisibleFunction = '';
         // For default function (default value setting)
         $jsst_defaultFunc = '';
-        if ($jsst_field->visible_field != null) {
-            $jsst_visibleparams = JSSTincluder::getJSModel('fieldordering')->getDataForVisibleField($jsst_field->visible_field);
+        /* The watchers this question still drives - the ones whose rules have
+           moved to the Forms screen are taken out of the list rather than the
+           whole question being dropped, so a parent with one migrated child and
+           one unreadable one goes on driving the second. */
+        $jsst_watching = class_exists('JSSTformlogicmigration')
+            ? JSSTformlogicmigration::stillWatching($jsst_field->visible_field, $jsst_formid)
+            : $jsst_field->visible_field;
+        if ($jsst_watching !== null && $jsst_watching !== '') {
+            $jsst_visibleparams = JSSTincluder::getJSModel('fieldordering')->getDataForVisibleField($jsst_watching);
             if (!empty($jsst_visibleparams)) {
-                $jsst_wpnonce = wp_create_nonce("is-field-required-".$jsst_field->visible_field);
+                $jsst_wpnonce = wp_create_nonce("is-field-required-".$jsst_watching);
                 $jsst_jsObject = wp_json_encode($jsst_visibleparams);
-                $jsst_jsVisibleFunction = " getDataForVisibleField(\"".esc_js($jsst_wpnonce)."\", this.value, \"" . esc_js($jsst_field->visible_field) . "\", " . $jsst_jsObject.");";
+                $jsst_jsVisibleFunction = " getDataForVisibleField(\"".esc_js($jsst_wpnonce)."\", this.value, \"" . esc_js($jsst_watching) . "\", " . $jsst_jsObject.");";
                 if (!empty($jsst_value) && !isset(jssupportticket::$jsst_data[0]->id)) {
-                    $jsst_defaultFunc = " getDataForVisibleField(\"".$jsst_wpnonce."\", '".esc_js($jsst_value)."', \"" . esc_js($jsst_field->visible_field) . "\", " . $jsst_jsObject.");";
+                    $jsst_defaultFunc = " getDataForVisibleField(\"".$jsst_wpnonce."\", '".esc_js($jsst_value)."', \"" . esc_js($jsst_watching) . "\", " . $jsst_jsObject.");";
                     // Attach default function on document ready
                     $jsst_jssupportticket_js = "
                         jQuery(document).ready(function(){
@@ -135,7 +189,11 @@ class JSSTcustomfields {
                     $jsst_comboOptions = array();
                     $jsst_obj_option = json_decode($jsst_field->userfieldparams);
                     $jsst_total_options= count($jsst_obj_option);
-                    if($jsst_total_options % 2 == 0)
+                    if(is_admin())
+                    {
+                        $jsst_field_width = '';
+                    }
+                    elseif($jsst_total_options % 2 == 0)
                     {
                         $jsst_field_width = 'style = " width:calc(100% / 2 - 4px); margin:2px 2px;"';
                     }else
@@ -154,7 +212,7 @@ class JSSTcustomfields {
                         if($jsst_field->readonly){
                             $jsst_readonly = 'readonly';
                         }
-                        $jsst_html .= '<div class="jsst-formfield-radio-button-wrap js-ticket-custom-radio-box" '.$jsst_field_width.'>';
+                        $jsst_html .= '<div class="jsst-formfield-radio-button-wrap js-ticket-custom-radio-box'.$jsst_celllass.'" '.$jsst_field_width.'>';
                         $jsst_html .= '<input type="checkbox" ' . esc_attr($jsst_readonly) . ' ' . esc_attr($jsst_check) . ' class="radiobutton js-ticket-append-radio-btn '.esc_attr($jsst_specialClass).esc_attr($jsst_readonlyclass).'" value="' . esc_attr($jsst_option) . '" id="' . esc_attr($jsst_field->field) . '_' . esc_attr($jsst_i) . '" name="' . esc_attr($jsst_field->field) . '[]" onclick = "'.esc_js($jsst_jsVisibleFunction).'">';
                         $jsst_html .= '<label for="' . esc_attr($jsst_field->field) . '_' . esc_attr($jsst_i) . '" id="foruf_checkbox1">' . esc_html($jsst_option) . '</label>';
                         $jsst_html .= '</div>';
@@ -202,7 +260,7 @@ class JSSTcustomfields {
                         if($jsst_field->readonly){
                             $jsst_readonly = 'tabindex=-1';
                         }
-                        $jsst_html .= '<div class="jsst-formfield-radio-button-wrap js-ticket-radio-box" '.$jsst_field_width.'>';
+                        $jsst_html .= '<div class="jsst-formfield-radio-button-wrap js-ticket-radio-box'.$jsst_celllass.'" '.$jsst_field_width.'>';
                             $jsst_html .= '<input type="radio" ' . esc_attr($jsst_check) . ' ' . esc_attr($jsst_readonly) . ' class="radiobutton js-ticket-radio-btn '.esc_attr($jsst_cssclass).' '.esc_attr($jsst_specialClass).esc_attr($jsst_readonlyclass).'" value="' . esc_attr($jsst_option) . '" id="' . esc_attr($jsst_field->field) . '_' . esc_attr($jsst_i) . '" name="' . esc_attr($jsst_field->field) . '" data-validation ="'.esc_attr($jsst_cssclass).'" onclick = "'.esc_js($jsst_jsFunction).'"> ';
                             $jsst_html .= '<label for="' . esc_attr($jsst_field->field) . '_' . esc_attr($jsst_i) . '" id="foruf_checkbox1">' . esc_html($jsst_option) . '</label>';
                         $jsst_html .= '</div>';
@@ -252,7 +310,11 @@ class JSSTcustomfields {
                 $jsst_jsFunction = '';
                 if ($jsst_field->depandant_field != null) {
                     $jsst_wpnonce = wp_create_nonce("data-for-depandant-field-".$jsst_field->depandant_field);
-                    $jsst_jsFunction = "getDataForDepandantField(\"".$jsst_wpnonce."\",\"" . $jsst_field->field . "\",\"" . $jsst_field->depandant_field . "\");";
+                    /* A dependent question can itself be the parent of the next one, and
+                       this chain passed no hint at all - so neither branch of the old
+                       reader matched and the value went up undefined. It is a select,
+                       like every dependent question. */
+                    $jsst_jsFunction = "getDataForDepandantField(\"".$jsst_wpnonce."\",\"" . $jsst_field->field . "\",\"" . $jsst_field->depandant_field . "\",1);";
                     if (!isset(jssupportticket::$jsst_data[0]->id) && !empty($jsst_field->defaultvalue)) {
                         $jsst_jssupportticket_js = "
                             jQuery(document).ready(function(){
@@ -424,7 +486,11 @@ class JSSTcustomfields {
                     $jsst_comboOptions = array();
                     $jsst_obj_option = json_decode($jsst_field->userfieldparams);
                     $jsst_total_options= count($jsst_obj_option);
-                    if($jsst_total_options % 2 == 0)
+                    if(is_admin())
+                    {
+                        $jsst_field_width = '';
+                    }
+                    elseif($jsst_total_options % 2 == 0)
                     {
                         $jsst_field_width = 'style = " width:calc(100% / 2 - 4px); margin:2px 2px;"';
                     }else
@@ -473,7 +539,14 @@ class JSSTcustomfields {
                     $jsst_jsFunction = '';
                     if ($jsst_field->depandant_field != null) {
                         $jsst_wpnonce = wp_create_nonce("data-for-depandant-field-".$jsst_field->depandant_field);
-                        $jsst_jsFunction = "getDataForDepandantField('".$jsst_wpnonce."','" . $jsst_field->field . "','" . $jsst_field->depandant_field . "',2);";
+                        /* 1, because what this branch draws is a select. It said
+                           2 - the radio answer - which was right for the control
+                           this question used to have here and wrong from the
+                           moment the filter bar started drawing it as a dropdown.
+                           The reader of this hint ignores it now and asks the
+                           page instead; it is corrected so the source does not
+                           describe a control that is not there. */
+                        $jsst_jsFunction = "getDataForDepandantField('".$jsst_wpnonce."','" . $jsst_field->field . "','" . $jsst_field->depandant_field . "',1);";
                     }
                     $jsst_html .= JSSTformfield::select($jsst_field->field, $jsst_comboOptions, $jsst_value, esc_html(__('Select', 'js-support-ticket')) . ' ' . esc_attr($jsst_field->fieldtitle), array('data-validation' => $jsst_cssclass, 'onchange' => $jsst_jsFunction, 'class' => 'inputbox js-form-select-field one'));
                 }else{
@@ -548,7 +621,8 @@ class JSSTcustomfields {
                 $jsst_jsFunction = '';
                 if ($jsst_field->depandant_field != null) {
                     $jsst_wpnonce = wp_create_nonce("data-for-depandant-field-".$jsst_field->depandant_field);
-                    $jsst_jsFunction = "getDataForDepandantField('".$jsst_wpnonce."','" . $jsst_field->field . "','" . $jsst_field->depandant_field . "');";
+                    /* Same chain, on the filter bar. */
+                    $jsst_jsFunction = "getDataForDepandantField('".$jsst_wpnonce."','" . $jsst_field->field . "','" . $jsst_field->depandant_field . "',1);";
                 }
                 //end
                 $jsst_html .= JSSTformfield::select($jsst_field->field, $jsst_comboOptions, $jsst_value, esc_html(__('Select', 'js-support-ticket')) . ' ' . esc_attr($jsst_field->fieldtitle) , array('data-validation' => $jsst_cssclass, 'onchange' => $jsst_jsFunction, 'class' => 'inputbox js-form-select-field one'));

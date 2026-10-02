@@ -177,18 +177,168 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
                                         </div>
                                     </div>
                                     <?php
-                                    // "Single / Multiple Header" chose between one header row and a
-                                    // header repeated per ticket, which existed because the old file
-                                    // widened every row to the widest ticket in the export. The CSV
-                                    // pipeline writes one header and one row per ticket, so the
-                                    // choice no longer means anything and the control is gone - it
-                                    // was already ignored here, which left the agent screen offering
-                                    // a setting the admin screen had dropped. (Roadmap 4.0-CORE-10)
-                                    ?>
+                                    /* "Export Style" - single or multiple header -
+                                       stood here until the export learned to write
+                                       one header wide enough for every form in the
+                                       file. It was already doing nothing: the admin
+                                       copy of this screen dropped it when the CSV
+                                       pipeline was written and nothing has read the
+                                       posted value since, so the radio was a control
+                                       that answered to no code. What it was for is
+                                       below - the questions each form asks, in
+                                       columns a spreadsheet can actually sort.
+                                       (Roadmap 4.0-CORE-10, 5.0-FORM-01) */
+                                    $jsst_exportmodel = JSSTincluder::getJSModel('export');
+                                    $jsst_forms = $jsst_exportmodel->formTitles();
+                                    if (count($jsst_forms) > 1) {
+                                        $jsst_formcombo = array();
+                                        foreach ($jsst_forms AS $jsst_formid => $jsst_formtitle) {
+                                            $jsst_formcombo[] = (object) array('id' => $jsst_formid, 'text' => $jsst_formtitle);
+                                        } ?>
+                                        <div class="js-ticket-from-field-wrp">
+                                            <div class="js-ticket-from-field-title"><?php echo esc_html(__('Ticket Form', 'js-support-ticket')); ?>:</div>
+                                            <div class="js-ticket-from-field js-ticket-form-field-select">
+                                                <?php echo wp_kses(JSSTformfield::select('multiformid', $jsst_formcombo, '', __('All forms', 'js-support-ticket'), array('class' => 'inputbox js-ticket-form-field-select')), JSST_ALLOWED_TAGS); ?>
+                                            </div>
+                                        </div>
+                                    <?php }
+                                    /* Custom Fields, Format and Customers, the same
+                                       three questions the wp-admin copy of this
+                                       screen asks and in the same words.
+
+                                       This screen kept the old single select while
+                                       that one was rewritten, and the gap was not
+                                       only cosmetic: one handler serves both forms,
+                                       so a form that never posts `exportformat` or
+                                       `exportanonymise` takes the defaults in
+                                       JSSTexportController::getticketsexport() -
+                                       CSV, and identifying. An agent could not
+                                       produce a spreadsheet or a PDF, and could not
+                                       anonymise a file that was leaving the
+                                       building, with nothing on the screen saying
+                                       either. The markup is this desk's own
+                                       (js-ticket-*) rather than wp-admin's; the
+                                       questions, the field names and the reasoning
+                                       are the shared ones.
+                                       (Roadmap 5.0-ANA-01, 6.5-DATA-05) */
+                                    $jsst_clashes = JSSTexportModel::clashingNames();
+                                    $jsst_asked = JSSTexportModel::questionNames();
+                                    /* The reader's own words, not a category name -
+                                       "Order number", "Site URL" tells them what the
+                                       tick puts in the file, because they are the
+                                       ones who typed those. */
+                                    $jsst_asklist = '"' . implode('", "', $jsst_asked['names']) . '"';
+                                    if ($jsst_asked['total'] > count($jsst_asked['names'])) {
+                                        $jsst_asklist .= ' ' . sprintf(
+                                            /* translators: %d is how many further questions there are. */
+                                            esc_html(__('and %d more', 'js-support-ticket')),
+                                            $jsst_asked['total'] - count($jsst_asked['names']));
+                                    } ?>
+                                    <div class="js-ticket-from-field-wrp">
+                                        <div class="js-ticket-from-field-title"><?php echo esc_html(__('Custom Fields', 'js-support-ticket')); ?>:</div>
+                                        <div class="js-ticket-from-field">
+                                            <input type="hidden" name="customfieldsui" value="1" />
+                                            <?php if (empty($jsst_asked['names'])) { ?>
+                                                <p class="js-ticket-from-field-description"><?php echo esc_html(__('Your ticket form asks nothing beyond the standard questions, so there is nothing extra to add to the file.', 'js-support-ticket')); ?></p>
+                                            <?php } else { ?>
+                                                <label>
+                                                    <input type="checkbox" name="customfieldson" value="1" checked="checked" />
+                                                    <?php echo esc_html(sprintf(
+                                                        /* translators: %s is a quoted list of the site's own question names. */
+                                                        __('Add a column for each question you ask: %s', 'js-support-ticket'),
+                                                        $jsst_asklist)); ?>
+                                                </label>
+                                                <p class="js-ticket-from-field-description"><?php echo esc_html(__('A Form column is added too, so every row shows which form that ticket was raised on.', 'js-support-ticket')); ?></p>
+                                            <?php } ?>
+                                            <?php /* The layout choice is drawn only where two forms
+                                                     genuinely ask a question by the same name, because
+                                                     that is the only case in which the two layouts
+                                                     differ by so much as one column. */
+                                            if (!empty($jsst_clashes)) { ?>
+                                                <div class="jsst-subchoice">
+                                                    <p class="js-ticket-from-field-description"><?php
+                                                        echo esc_html(sprintf(
+                                                            /* translators: %s is a list of question names, already quoted. */
+                                                            _n('%s is asked on more than one form:', '%s are asked on more than one form:', count($jsst_clashes), 'js-support-ticket'),
+                                                            '"' . implode('", "', array_slice($jsst_clashes, 0, 3)) . '"'
+                                                            . (count($jsst_clashes) > 3 ? ', …' : '')
+                                                        )); ?></p>
+                                                    <label>
+                                                        <input type="radio" name="customfields" value="<?php echo esc_attr(JSSTexportModel::FIELDS_MERGED); ?>" checked="checked" />
+                                                        <?php echo esc_html(__('One column, holding every form\'s answers together', 'js-support-ticket')); ?>
+                                                    </label>
+                                                    <label>
+                                                        <input type="radio" name="customfields" value="<?php echo esc_attr(JSSTexportModel::FIELDS_EXACT); ?>" />
+                                                        <?php echo esc_html(__('A separate column for each form, named after it', 'js-support-ticket')); ?>
+                                                    </label>
+                                                </div>
+                                            <?php } ?>
+                                        </div>
+                                    </div>
+                                    <?php $jsst_formats = class_exists('JSSTexports') ? JSSTexports::formats() : array(); ?>
                                     <div class="js-ticket-from-field-wrp">
                                         <div class="js-ticket-from-field-title"><?php echo esc_html(__('Format', 'js-support-ticket')); ?>:</div>
+                                        <div class="js-ticket-from-field js-ticket-form-field-select">
+                                            <?php if (empty($jsst_formats)) { ?>
+                                                <p class="js-ticket-from-field-description"><?php echo esc_html(__('CSV, one row per ticket. Opens directly in Excel, LibreOffice Calc, Numbers and Google Sheets.', 'js-support-ticket')); ?></p>
+                                            <?php } else { ?>
+                                                <?php /* Hand-written rather than built through
+                                                   JSSTformfield::select() because an option has to
+                                                   carry disabled() on its own - a format this server
+                                                   cannot write is shown and greyed rather than hidden,
+                                                   so the reason underneath has something to point at. */ ?>
+                                                <select name="exportformat" id="jsst-exportformat-fe" class="inputbox js-ticket-form-field-select">
+                                                    <?php foreach ($jsst_formats AS $jsst_key => $jsst_format) { ?>
+                                                        <option value="<?php echo esc_attr($jsst_key); ?>" <?php disabled(empty($jsst_format['ready'])); ?>><?php
+                                                            echo esc_html($jsst_format['label']); ?></option>
+                                                    <?php } ?>
+                                                </select>
+                                                <?php foreach ($jsst_formats AS $jsst_format) {
+                                                    if (!empty($jsst_format['ready']) || $jsst_format['reason'] === '') { continue; } ?>
+                                                    <p class="js-ticket-from-field-description"><?php echo esc_html($jsst_format['reason']); ?></p>
+                                                <?php } ?>
+                                                <?php /* PDF keeps eight columns and drops the rest, so a
+                                                   tick under Custom Fields cannot be honoured in a
+                                                   printed file. Shown rather than enforced: the tick is
+                                                   left alone so the choice survives switching back to
+                                                   CSV. */
+                                                if (!empty($jsst_asked['names'])) { ?>
+                                                    <p class="js-ticket-from-field-description jsst-pdfnote" id="jsst-pdfnote-fe" style="display:none;"><?php
+                                                        echo esc_html(__('PDF keeps eight columns so the page stays readable — your own questions are left out. Choose CSV or Spreadsheet to include them.', 'js-support-ticket')); ?></p>
+                                                    <script type="text/javascript">
+                                                        (function () {
+                                                            var jsstSel = document.getElementById('jsst-exportformat-fe');
+                                                            var jsstNote = document.getElementById('jsst-pdfnote-fe');
+                                                            if (!jsstSel || !jsstNote) { return; }
+                                                            function jsstPdfNote() {
+                                                                jsstNote.style.display = (jsstSel.value === 'pdf') ? '' : 'none';
+                                                            }
+                                                            jsstSel.addEventListener('change', jsstPdfNote);
+                                                            jsstPdfNote();
+                                                        }());
+                                                    </script>
+                                                <?php } ?>
+                                            <?php } ?>
+                                        </div>
+                                    </div>
+                                    <div class="js-ticket-from-field-wrp">
+                                        <div class="js-ticket-from-field-title"><?php echo esc_html(__('Customers', 'js-support-ticket')); ?>:</div>
                                         <div class="js-ticket-from-field">
-                                            <?php echo esc_html(__('CSV, one row per ticket. Opens directly in Excel, LibreOffice Calc, Numbers and Google Sheets.', 'js-support-ticket')); ?>
+                                            <?php /* Offered only where it can be done, exactly as the
+                                               wp-admin copy of this screen does it, and for the
+                                               reason written out there: the pseudonyms belong to the
+                                               Reporting & Compliance bundle, and a tickbox that
+                                               silently does nothing is the worst possible control to
+                                               put on this question. (Roadmap 6.5-DATA-05) */
+                                            if (class_exists('JSSTexports')) { ?>
+                                            <label>
+                                                <input type="checkbox" name="exportanonymise" value="1" />
+                                                <?php echo esc_html(__('Leave the customers out — replace each one with the same pseudonym everywhere they appear', 'js-support-ticket')); ?>
+                                            </label>
+                                            <p class="js-ticket-from-field-description"><?php echo esc_html(__('For analysis that has to leave the building. The name, login, address and telephone are replaced; the subject, the message and the custom answers are not, because those hold whatever the customer typed in and no amount of column-blanking makes that anonymous. Where a form asks for an order number or an account reference, leave the custom fields out above.', 'js-support-ticket')); ?></p>
+                                            <?php } else { ?>
+                                            <p class="js-ticket-from-field-description"><?php echo esc_html(__('Leaving the customers out needs the Reporting & Compliance add-on, which is not active on this site. Every export from here names them.', 'js-support-ticket')); ?></p>
+                                            <?php } ?>
                                         </div>
                                     </div>
                                     <div class="js-ticket-form-btn-wrp">

@@ -29,6 +29,9 @@ if (jssupportticket::$_config['offline'] == 2) {
 
         if (jssupportticket::$jsst_data['permission_granted'] == true) {
         if (!empty(jssupportticket::$jsst_data[0])) {
+        /* A company supervisor reading a colleague's ticket sees it, and
+           nothing that acts on it. (Roadmap 5.5-COM-06) */
+        $jsst_companyreadonly = !empty(jssupportticket::$jsst_data['company_readonly']);
 
         wp_enqueue_script('file_validate.js', JSST_PLUGIN_URL . 'includes/js/file_validate.js', array(), jssupportticket::$_config['productversion'], true);
         wp_enqueue_script('jquery-ui-tabs');
@@ -38,17 +41,24 @@ if (jssupportticket::$_config['offline'] == 2) {
         wp_enqueue_script('timer.js', JSST_PLUGIN_URL . 'includes/js/timer.jquery.js', array(), jssupportticket::$_config['productversion'], true);
         wp_enqueue_style('jssupportticket-venobox-css', JSST_PLUGIN_URL . 'includes/css/venobox.css', array(), jssupportticket::$_config['productversion']);
         wp_enqueue_script('venoboxjs',JSST_PLUGIN_URL.'includes/js/venobox.js', array(), jssupportticket::$_config['productversion'], true);
-        if (in_array('aipoweredreply', jssupportticket::$_active_addons)){
-            $jsst_jstmod = 'aipoweredreply';
-            $jsst_jstreplymod = 'aipoweredreply';
-        } else {
-            $jsst_jstmod = 'ticket';
-            $jsst_jstreplymod = 'reply';
-        }
+        /* Always core's own modules now. (Roadmap 6.0-AI-01) The add-on's
+           model and core's are the same two functions, and routing to the
+           add-on whenever it happened to be active meant a site that had it
+           ran a copy nobody had been fixing. JSSTmergedaddon::coreOwns()
+           makes core the owner outright, so this picks core unconditionally
+           rather than asking which copy exists. */
+        $jsst_jstmod = 'ticket';
+        $jsst_jstreplymod = 'reply';
         $jsst_jssupportticket_js ="
-            var timer_flag = 0;
+            /* The timer the Edit Time popup was opened from. */
+            var jsstEditTimer = null;
             var seconds = 0;
             function getpremade(val) {
+                /* The picker's own first option is the placeholder, and choosing it
+                   is not a request for anything. The endpoint already answers an
+                   empty string to a non-numeric id, so this changes nothing an agent
+                   sees - it just stops the round trip being made to find that out. */
+                if (!val) { return; }
                 jQuery.post(ajaxurl, {action: 'jsticket_ajax', val: val, jstmod: 'cannedresponses', task: 'getpremadeajax', ticketid: '". esc_js(jssupportticket::$jsst_data[0]->id) ."', '_wpnonce':'". esc_attr(wp_create_nonce('get-premade-ajax')) ."'}, function (data) {
                     if (data) {
                         var append = jQuery('input#append_premade1:checked').length;
@@ -64,30 +74,43 @@ if (jssupportticket::$_config['offline'] == 2) {
                 });
             }
 
-            function changeTimerStatus(val) {
-                if(timer_flag == 2){// to handle stopped timer
+            /* The reply and the internal note each have their own timer, and
+               every function here works on the one next to the button that was
+               pressed. They used to select every timer on the page, so starting
+               one started both, and a reply could post the time an agent had
+               started for a note. A timer keeps its own state: 0 not started,
+               1 running or paused, 2 stopped. */
+            function jsstTimerBox(el) {
+                return jQuery(el).closest('.timer-right');
+            }
+
+            function changeTimerStatus(val, el) {
+                var box = jsstTimerBox(el);
+                var timer = box.find('div.timer');
+                var state = timer.data('jsstTimerState') || 0;
+                if(state == 2){// to handle stopped timer
                         return;
                 }
-                if(!jQuery('span.timer-button.cls_'+val).hasClass('selected')){
-                    jQuery('span.timer-button').removeClass('selected');
-                    jQuery('span.timer-button.cls_'+val).addClass('selected');
+                var buttons = box.find('span.timer-button');
+                if(!buttons.filter('.cls_'+val).hasClass('selected')){
+                    buttons.removeClass('selected');
+                    buttons.filter('.cls_'+val).addClass('selected');
                     if(val == 1){
-                        if(timer_flag == 0){
-                            jQuery('div.timer').timer({format: '%H:%M:%S'});
+                        if(state == 0){
+                            timer.timer({format: '%H:%M:%S'});
                         }
-                        timer_flag = 1;
-                        jQuery('div.timer').timer('resume');
+                        timer.data('jsstTimerState', 1);
+                        timer.timer('resume');
                     }else if(val == 2) {
-                         jQuery('div.timer').timer('pause');
+                         timer.timer('pause');
                     }else{
-                         jQuery('div.timer').timer('remove');
-                        timer_flag = 2;
+                         timer.timer('remove');
+                        timer.data('jsstTimerState', 2);
                     }
                 }
             }
 
             jQuery(document).ready(function(){
-              changeIconTabs();
               jQuery('.venobox').venobox({
                     infinigall: true,
                     framewidth: 850,
@@ -99,119 +122,56 @@ if (jssupportticket::$_config['offline'] == 2) {
             jQuery(function(){
                 jQuery('ul li a').click(function (e) {
                     var imgID= jQuery(this).find('img').attr('id');
-                    changeIconTabs(imgID);
                   });
             });
-
-            function changeIconTabs(tabValue = ''){
-                jQuery(document).ready(function(){
-                    if(tabValue == ''){
-                        tabValue = jQuery('#ul-nav .ui-tabs-active > a > img').attr('id');
-                    }
-                    if(tabValue == 'post-reply'){
-                        jQuery('#internal-note').attr('src','". esc_url(JSST_PLUGIN_URL) ."includes/images/ticketdetailicon/internal-reply-black.png');
-                        jQuery('#dept-transfer').attr('src','". esc_url(JSST_PLUGIN_URL) ."includes/images/ticketdetailicon/department-transfer-black.png');
-                        jQuery('#assign-staff').attr('src','". esc_url(JSST_PLUGIN_URL) ."includes/images/ticketdetailicon/assign-staff-black.png');
-                        jQuery('#'+tabValue).attr('src','". esc_url(JSST_PLUGIN_URL) ."includes/images/ticketdetailicon/post-reply-white.png');
-                    }else if(tabValue == 'internal-note'){
-                        jQuery('#dept-transfer').attr('src','". esc_url(JSST_PLUGIN_URL) ."includes/images/ticketdetailicon/department-transfer-black.png');
-                        jQuery('#assign-staff').attr('src','". esc_url(JSST_PLUGIN_URL) ."includes/images/ticketdetailicon/assign-staff-black.png');
-                        jQuery('#post-reply').attr('src','". esc_url(JSST_PLUGIN_URL) ."includes/images/ticketdetailicon/post-reply-black.png');
-                        jQuery('#'+tabValue).attr('src','". esc_url(JSST_PLUGIN_URL) ."includes/images/ticketdetailicon/internal-reply-white.png');
-                    }else if(tabValue == 'dept-transfer'){
-                        jQuery('#internal-note').attr('src','". esc_url(JSST_PLUGIN_URL) ."includes/images/ticketdetailicon/internal-reply-black.png');
-                        jQuery('#assign-staff').attr('src','". esc_url(JSST_PLUGIN_URL) ."includes/images/ticketdetailicon/assign-staff-black.png');
-                        jQuery('#post-reply').attr('src','". esc_url(JSST_PLUGIN_URL) ."includes/images/ticketdetailicon/post-reply-black.png');
-                        jQuery('#'+tabValue).attr('src','". esc_url(JSST_PLUGIN_URL) ."includes/images/ticketdetailicon/department-transfer-white.png');
-                    }else if(tabValue == 'assign-staff'){
-                        jQuery('#dept-transfer').attr('src','". esc_url(JSST_PLUGIN_URL) ."includes/images/ticketdetailicon/department-transfer-black.png');
-                        jQuery('#internal-note').attr('src','". esc_url(JSST_PLUGIN_URL) ."includes/images/ticketdetailicon/internal-reply-black.png');
-                        jQuery('#post-reply').attr('src','". esc_url(JSST_PLUGIN_URL) ."includes/images/ticketdetailicon/post-reply-black.png');
-                        jQuery('#'+tabValue).attr('src','". esc_url(JSST_PLUGIN_URL) ."includes/images/ticketdetailicon/assign-staff-white.png');
-                    }
-
-                });
-            }
-            function changeIconTabsOnMouseover(){
-                jQuery(document).ready(function(){
-                    jQuery('ul li').hover(function (e) {
-                        var imgID= jQuery(this).find('img').attr('id');
-                        tabValue=imgID;
-                        if(tabValue == ''){
-                            tabValue = jQuery('#ul-nav .ui-tabs-active > a > img').attr('id');
-                        }
-                        if(tabValue == 'post-reply'){
-                            jQuery('#'+tabValue).attr('src','". esc_url(JSST_PLUGIN_URL) ."includes/images/ticketdetailicon/post-reply-white.png');
-                        }else if(tabValue == 'internal-note'){
-                            jQuery('#'+tabValue).attr('src','". esc_url(JSST_PLUGIN_URL) ."includes/images/ticketdetailicon/internal-reply-white.png');
-                        }else if(tabValue == 'dept-transfer'){
-                            jQuery('#'+tabValue).attr('src','". esc_url(JSST_PLUGIN_URL) ."includes/images/ticketdetailicon/department-transfer-white.png');
-                        }else if(tabValue == 'assign-staff'){
-                            jQuery('#'+tabValue).attr('src','". esc_url(JSST_PLUGIN_URL) ."includes/images/ticketdetailicon/assign-staff-white.png');
-                        }
-                    });
-                });
-            }
-            function changeIconTabsOnMouseOut(){
-                jQuery(document).ready(function(){
-                    jQuery('ul li').hover(function (e) {
-                        var imgID= jQuery(this).find('img').attr('id');
-                        tabValue=imgID;
-                        if(tabValue == ''){
-                            tabValue = jQuery('#ul-nav .ui-tabs-active > a > img').attr('id');
-                        }
-                        if(tabValue == 'post-reply' && !jQuery(this).hasClass('ui-tabs-active')){
-                            jQuery('#'+tabValue).attr('src','". esc_url(JSST_PLUGIN_URL) ."includes/images/ticketdetailicon/post-reply-black.png');
-                        }else if(tabValue == 'internal-note' && !jQuery(this).hasClass('ui-tabs-active')){
-                            jQuery('#'+tabValue).attr('src','". esc_url(JSST_PLUGIN_URL) ."includes/images/ticketdetailicon/internal-reply-black.png');
-                        }else if(tabValue == 'dept-transfer' && !jQuery(this).hasClass('ui-tabs-active')){
-                            jQuery('#'+tabValue).attr('src','". esc_url(JSST_PLUGIN_URL) ."includes/images/ticketdetailicon/department-transfer-black.png');
-                        }else if(tabValue == 'assign-staff' && !jQuery(this).hasClass('ui-tabs-active')){
-                            jQuery('#'+tabValue).attr('src','". esc_url(JSST_PLUGIN_URL) ."includes/images/ticketdetailicon/assign-staff-black.png');
-                        }
-                    });
-                });
-            }
-            function showEditTimerPopup(){
+            function showEditTimerPopup(el){
+                var box = jsstTimerBox(el);
+                jsstEditTimer = box.find('div.timer');
                 jQuery('form#jsst-time-edit-form').hide();
                 jQuery('form#jsst-reply-form').hide();
                 jQuery('form#jsst-note-edit-form').hide();
                 jQuery('div.edit-time-popup').show();
-                jQuery('span.timer-button').removeClass('selected');
-                if(timer_flag != 0){
-                    jQuery('div.timer').timer('pause');
+                box.find('span.timer-button').removeClass('selected');
+                if((jsstEditTimer.data('jsstTimerState') || 0) != 0){
+                    jsstEditTimer.timer('pause');
                 }
-                ex_val = jQuery('div.timer').html();
+                ex_val = jsstEditTimer.html();
                 jQuery('input#edited_time').val('');
                 jQuery('input#edited_time').val(ex_val.trim());
                 jQuery('div.jsst-popup-background').show();
                 jQuery('div#jsst-popup-wrapper').slideDown('slow');
             }
             function updateTimerFromPopup(){
+                var timer = jsstEditTimer ? jsstEditTimer : jQuery('div.timer').first();
                 val = jQuery('input#edited_time').val();
                 arr = val.split(':', 3);
-                jQuery('div.timer').html(val);
+                timer.html(val);
                 jQuery('div.jsst-popup-background').hide();
                 jQuery('div.jsst-popup-wrapper').slideUp('slow');
                 seconds = parseInt(arr[0])*3600 + parseInt(arr[1])*60 + parseInt(arr[2]);
                 if(seconds < 0){
                     seconds = 0;
                 }
-                jQuery('div.timer').timer('remove');
-                jQuery('div.timer').timer({
+                timer.timer('remove');
+                timer.timer({
                     format: '%H:%M:%S',
                     seconds: seconds,
                 });
-                jQuery('div.timer').timer('pause');
-                timer_flag = 1;
+                timer.timer('pause');
+                timer.data('jsstTimerState', 1);
                 desc = jQuery('textarea#t_desc').val();
-                jQuery('input#timer_edit_desc').val(desc);
+                timer.closest('form').find('input[name=timer_edit_desc]').val(desc);
             }
             jQuery(document).ready(function ($) {
                 //$('img.tooltip').cluetip({splitTitle: '|'});
                 jQuery( 'form' ).submit(function(e) {
-                    if(timer_flag != 0){
-                        jQuery('input#timer_time_in_seconds').val(jQuery('div.timer').data('seconds'));
+                    /* A form posts the time from its own timer, and only once
+                       that timer has been started or edited - never another
+                       form's. */
+                    var form = jQuery(this);
+                    var timer = form.find('div.timer').first();
+                    if (timer.length && (timer.data('jsstTimerState') || 0) != 0) {
+                        form.find('input[name=timer_time_in_seconds]').val(timer.data('seconds'));
                     }
                 });
                 jQuery('div#action-div a.button').click(function (e) {
@@ -417,7 +377,7 @@ if (jssupportticket::$_config['offline'] == 2) {
                     jQuery('#mergeticketid').val(mergewithticketid);
                 }
                 if(mergeticketid == mergewithticketid){
-                    alert('Primary id must be differ from merge ticket id');
+                    alert('". esc_js(__('The primary ticket must be different from the ticket being merged.', 'js-support-ticket')) ."');
                     return false;
                 }
                 jQuery('#mergeticketselection').hide();
@@ -471,7 +431,7 @@ if (jssupportticket::$_config['offline'] == 2) {
                 var content = tinymce.get(id).getContent({format: 'text'});
                 if (jQuery.trim(content) == '')
                 {
-                    alert('". esc_html(__('Some values are not acceptable please retry', 'js-support-ticket')) ."');
+                    alert('". esc_js(__('Write a message before posting.', 'js-support-ticket')) ."');
                     return false;
                 }
                 return true;
@@ -524,7 +484,6 @@ if (jssupportticket::$_config['offline'] == 2) {
                 const matchingTicketsList = jQuery("#js-ticket-matching-tickets-list");
                 const selectedTicketRepliesSection = jQuery("#js-ticket-selected-ticket-replies-section");
                 const selectedTicketRepliesContent = jQuery("#js-ticket-selected-ticket-replies-content");
-                const messageModal = jQuery("#js-ticket-message-modal");
 
                 jQuery(".js-ticket-info-icon-wrapper").hover(
                     function(e){
@@ -535,22 +494,164 @@ if (jssupportticket::$_config['offline'] == 2) {
                     }
                 );
                 
-                // Function to show custom modal
-                function showModal(message) {
-                    jQuery("#js-ticket-modal-message").text(message);
-                    messageModal.removeClass("js-ticket-hidden");
+                /* The canned response picker: type to narrow, arrows to choose.
+                   (Roadmap 4.0-CORE-03) The same control the backend thread
+                   draws, for the same reason - a select can only be searched by
+                   its first letter. Everything it needs is already in the page,
+                   so this is a filter over the DOM and no request is made until
+                   an agent picks one. */
+                (function () {
+                    var box = jQuery("#js-ticket-canned-search");
+                    if (!box.length) {
+                        return;
+                    }
+                    var list = jQuery("#js-ticket-canned-list");
+                    var none = list.find(".js-ticket-canned-none");
+                    var options = list.find(".js-ticket-canned-option");
+                    var at = -1;
+
+                    function visible() {
+                        return options.filter(":visible");
+                    }
+
+                    function open() {
+                        list.prop("hidden", false);
+                        box.attr("aria-expanded", "true");
+                    }
+
+                    function close() {
+                        list.prop("hidden", true);
+                        box.attr("aria-expanded", "false").removeAttr("aria-activedescendant");
+                        options.removeClass("is-at").attr("aria-selected", "false");
+                        at = -1;
+                    }
+
+                    /* Held as a position in the visible set rather than as an
+                       index into every option, because the set changes under it
+                       on every keystroke. */
+                    function highlight(next) {
+                        var shown = visible();
+                        options.removeClass("is-at").attr("aria-selected", "false");
+                        if (!shown.length) {
+                            at = -1;
+                            box.removeAttr("aria-activedescendant");
+                            return;
+                        }
+                        at = (next + shown.length) % shown.length;
+                        var one = shown.eq(at).addClass("is-at").attr("aria-selected", "true");
+                        box.attr("aria-activedescendant", one.attr("id"));
+                        var el = one[0];
+                        var top = el.offsetTop;
+                        var bottom = top + el.offsetHeight;
+                        var view = list[0];
+                        if (top < view.scrollTop) {
+                            view.scrollTop = top;
+                        } else if (bottom > view.scrollTop + view.clientHeight) {
+                            view.scrollTop = bottom - view.clientHeight;
+                        }
+                    }
+
+                    function filter() {
+                        var typed = jQuery.trim(box.val()).toLowerCase();
+                        var found = 0;
+                        options.each(function () {
+                            var one = jQuery(this);
+                            /* Anywhere in the title, not only at the front. */
+                            var hit = typed === "" || one.text().toLowerCase().indexOf(typed) > -1;
+                            one.toggle(hit);
+                            if (hit) { found++; }
+                        });
+                        none.prop("hidden", found > 0);
+                        open();
+                        highlight(0);
+                    }
+
+                    function choose(one) {
+                        if (!one || !one.length) {
+                            return;
+                        }
+                        box.val(one.text());
+                        close();
+                        getpremade(one.data("id"));
+                    }
+
+                    box.on("focus click", filter);
+                    box.on("input", filter);
+                    box.on("keydown", function (e) {
+                        if (e.key === "ArrowDown" || e.key === "ArrowUp") {
+                            e.preventDefault();
+                            if (list.prop("hidden")) { filter(); return; }
+                            highlight(at + (e.key === "ArrowDown" ? 1 : -1));
+                        } else if (e.key === "Enter") {
+                            /* Only when the list is open with something on it.
+                               Otherwise Enter belongs to the reply form this box
+                               sits inside, and swallowing it would stop the
+                               reply being sent. */
+                            if (!list.prop("hidden") && at > -1) {
+                                e.preventDefault();
+                                choose(visible().eq(at));
+                            }
+                        } else if (e.key === "Escape") {
+                            if (!list.prop("hidden")) {
+                                e.stopPropagation();
+                                close();
+                            }
+                        }
+                    });
+
+                    /* mousedown, not click: a click fires after the input has
+                       already lost focus, and the blur below would have closed
+                       the list out from under the pointer. */
+                    list.on("mousedown", ".js-ticket-canned-option", function (e) {
+                        e.preventDefault();
+                        choose(jQuery(this));
+                    });
+
+                    jQuery(document).on("mousedown", function (e) {
+                        if (!jQuery(e.target).closest(".js-ticket-canned").length) {
+                            close();
+                        }
+                    });
+                    box.on("blur", function () {
+                        setTimeout(function () {
+                            if (!list.is(":hover")) { close(); }
+                        }, 120);
+                    });
+                })();
+
+                /* Saying what happened, without stopping to be told it happened.
+                   (Roadmap 6.0-AI-01) The backend thread was changed first and
+                   this is the same change: a success is confirmed on the
+                   control that did it and takes its own label back two seconds
+                   later, a failure goes to a status line that stays until
+                   something replaces it. Neither blocks, so neither has to be
+                   dismissed. What was here instead was a fixed overlay across
+                   the page with an OK button, drawn to report that a line of
+                   text had gone into a box the agent was looking at. */
+                function jsstSuggestNote(message) {
+                    jQuery("#js-ticket-suggest-status").text(message || "");
                 }
 
-                // Function to hide custom modal
-                jQuery("#js-ticket-modal-close-btn").on("click", function(e) {
-                    e.preventDefault();
-                    jsReplyHideLoading();
-                    messageModal.addClass("js-ticket-hidden");
-                    jQuery("div#multiformpopupblack").hide();
-                });
+                function jsstConfirmOn(button, label) {
+                    jsstSuggestNote("");
+                    if (!button || !button.length) {
+                        return;
+                    }
+                    /* The label the button came with, kept the first time it is
+                       borrowed, so a second click while the confirmation shows
+                       does not save "Copied" as the thing to go back to. */
+                    if (typeof button.data("jsstLabel") === "undefined") {
+                        button.data("jsstLabel", button.text());
+                    }
+                    clearTimeout(button.data("jsstTimer"));
+                    button.addClass("is-done").text(label);
+                    button.data("jsstTimer", setTimeout(function () {
+                        button.removeClass("is-done").text(button.data("jsstLabel"));
+                    }, 2000));
+                }
 
                 // Function to copy text to clipboard (works in iframes)
-                function copyToClipboard(text) {
+                function copyToClipboard(text, button) {
                     const tempTextArea = document.createElement("textarea");
                     tempTextArea.value = text;
                     document.body.appendChild(tempTextArea);
@@ -559,18 +660,18 @@ if (jssupportticket::$_config['offline'] == 2) {
                         const successful = document.execCommand("copy");
                         console.log(successful);
                         if(successful) {
-                            showModal("'.__("Copied to clipboard!", "js-support-ticket").'");    
+                            jsstConfirmOn(button, "'.esc_js(__("Copied", "js-support-ticket")).'");
                         } else {
-                            showModal("'.__("Failed to copy!", "js-support-ticket").'");
+                            jsstSuggestNote("'.esc_js(__("Nothing was copied. Select the text and copy it yourself.", "js-support-ticket")).'");
                         }
                     } catch (err) {
-                        showModal("'.__("Failed to copy to clipboard. Please copy manually.", "js-support-ticket").'");
+                        jsstSuggestNote("'.esc_js(__("Nothing was copied. Select the text and copy it yourself.", "js-support-ticket")).'");
                     }
                     document.body.removeChild(tempTextArea);
                 }
 
                 // Function to append text to reply area
-                function appendToReplyArea(textToAppend) {
+                function appendToReplyArea(textToAppend, button) {
                     let currentContent = replyTextarea.val();
                     let newContent = currentContent + "\n" + textToAppend; // Append with a newline
 
@@ -582,21 +683,7 @@ if (jssupportticket::$_config['offline'] == 2) {
                     } else {
                         replyTextarea.val(newContent);
                     }
-                    showModal("'.__("Reply content appended!", "js-support-ticket").'");
-                }
-
-                // Function to filter and display replies based on dropdown selection
-                function displayFilteredReplies(ticket, filterType) {
-                    console.log(ticket);
-                    console.log(filterType);
-
-                    let filteredReplies = [];
-                    if (filterType === "marked") {
-                        filteredReplies = currentTicketAllReplies.filter(reply => reply.isMarked);
-                    } else { // "all"
-                        filteredReplies = currentTicketAllReplies;
-                    }
-                    displayTicketReplies(ticket, filteredReplies);
+                    jsstConfirmOn(button, "'.esc_js(__("Added", "js-support-ticket")).'");
                 }
 
                 // Event listener for Replies Filter dropdown
@@ -605,7 +692,7 @@ if (jssupportticket::$_config['offline'] == 2) {
                     const activeTicketItem = matchingTicketsList.find(".js-ticket-list-item.active");
                     
                     if (!activeTicketItem.length) {
-                        showModal("'.__("No ticket selected!", "js-support-ticket").'");
+                        jsstSuggestNote("'.esc_js(__("Choose a ticket first.", "js-support-ticket")).'");
                         return;
                     }
                     
@@ -633,11 +720,11 @@ if (jssupportticket::$_config['offline'] == 2) {
                             };
                             displayTicketReplies(ticket, data.data.replies);
                         } else {
-                            showModal(data.message || "'.__("Error fetching replies.", "js-support-ticket").'");
+                            jsstSuggestNote(data.message || "'.esc_js(__("Those replies could not be read.", "js-support-ticket")).'");
                         }
                     }).fail(function() {
                         jsReplyHideLoading();
-                        showModal("'.__("Failed to fetch replies. Please try again.", "js-support-ticket").'");
+                        jsstSuggestNote("'.esc_js(__("Those replies could not be read. Try again.", "js-support-ticket")).'");
                     });
                 });
 
@@ -678,38 +765,42 @@ if (jssupportticket::$_config['offline'] == 2) {
                             };
                             displayTicketReplies(ticket, data.data.replies);
                         } else {
-                            showModal(data.message || "'.__("Error fetching replies.", "js-support-ticket").'");
+                            jsstSuggestNote(data.message || "'.esc_js(__("Those replies could not be read.", "js-support-ticket")).'");
                         }
                     }).fail(function() {
                         jsReplyHideLoading();
-                        showModal("'.__("Failed to fetch replies. Please try again.", "js-support-ticket").'");
+                        jsstSuggestNote("'.esc_js(__("Those replies could not be read. Try again.", "js-support-ticket")).'");
                     });
                 });
 
-                jQuery(".js-ticket-segmented-control-option").on("click", function(e) {
-                    var actionType = jQuery(this).data("type");
-                    var selectedValue = jQuery(this).data("value"); // Get the "data-value" attribute (default, enable, disable).
-                    var selectedId = jQuery(this).data("id");
-                    
-                    // Remove the "active" class from all segmented control options.
-                    // jQuery("#js-ticket-ai-reply-status-control").find(".js-ticket-segmented-control-option").removeClass("active");
-                    jQuery(this).closest("#js-ticket-ai-reply-status-control")
-                   .find(".js-ticket-segmented-control-option")
-                   .removeClass("active");
+                /* The per-reply toggle, same as the admin thread. Two states, so it
+                   posts 0 or 2 and swaps its own label in place. Delegated,
+                   because the thread is re-rendered by ajax. */
+                jQuery(document).on("click", ".js-ticket-ai-example", function(e) {
+                    e.preventDefault();
+                    var btn = jQuery(this);
+                    var wasOff = btn.hasClass("js-ticket-ai-example-off");
+                    btn.toggleClass("js-ticket-ai-example-off", !wasOff)
+                       .attr("aria-checked", wasOff ? "true" : "false")
+                       .find("span").text(wasOff
+                           ? "'.esc_js(__('Used by AI', 'js-support-ticket')).'"
+                           : "'.esc_js(__('Not used by AI', 'js-support-ticket')).'");
+                    jQuery.post(ajaxurl, {action: "jsticket_ajax", jstmod: "reply",
+                        task: "markedAsAiPoweredReply", status: (wasOff ? 0 : 2),
+                        id: btn.data("id"), type: "reply",
+                        "_wpnonce":"'.esc_attr(wp_create_nonce("ai-powered-reply")).'"});
+                });
 
-                    // Add the "active" class to the currently clicked option.
-                    jQuery(this).addClass("active");
-
-                    // Update the value of the hidden input field.
-                    jQuery("#js-ticket-ai-reply-status-hidden").val(selectedValue);
-
-                    // Perform the AJAX request using jQuery.ajax().
-                    jQuery.post(ajaxurl, {action: "jsticket_ajax", jstmod: "reply", task: "markedAsAiPoweredReply", status:selectedValue, id: selectedId, type: actionType, "_wpnonce":"'.esc_attr(wp_create_nonce("ai-powered-reply")).'"}, function (data) {
-                        if (data) {
-                            jQuery(".jssupportticket-review-box-popup").remove();
-                            jQuery(".jssupportticket-premio-review-box").remove();
-                        }
-                    });
+                /* The ticket-level mode, now a select. One change event instead
+                   of three click handlers, and the value posted is the option
+                   the agent actually read rather than a data attribute on a
+                   button. (Roadmap 6.0-AI-01) */
+                jQuery(document).on("change", ".js-ticket-ai-mode-select", function() {
+                    var sel = jQuery(this);
+                    jQuery.post(ajaxurl, {action: "jsticket_ajax", jstmod: "reply",
+                        task: "markedAsAiPoweredReply", status: parseInt(sel.val(), 10),
+                        id: sel.data("id"), type: sel.data("type"),
+                        "_wpnonce":"'.esc_attr(wp_create_nonce("ai-powered-reply")).'"});
                 });
 
                 // Event listener for AI-Powered Reply button
@@ -734,15 +825,94 @@ if (jssupportticket::$_config['offline'] == 2) {
                 });
 
                 function fetchTicketsFromPHP(ticketId, ticketSubject, selectedFilter) {
-                    jQuery.post(ajaxurl, {action: "jsticket_ajax", ticketSubject: ticketSubject, ticketId: ticketId, filter: selectedFilter, jstmod: "'.$jsst_jstmod.'", task: "checkAIReplyTicketsBySubject", "_wpnonce":"'. esc_attr(wp_create_nonce("check-smart-reply")).'"}, function (data) {
+                    /* The answers, in one step. (Roadmap 6.0-AI-01) This asked
+                       for matching *tickets* and made the agent pick one,
+                       read its replies in a second panel, then come back -
+                       three steps to reach the sentence they wanted, the first
+                       of them a guess made from a reference number. The
+                       backend thread stopped doing that; this is the same
+                       endpoint and the same list, so the two workspaces answer
+                       the same question the same way. (Roadmap 4.5-FE-01) */
+                    jQuery.post(ajaxurl, {action: "jsticket_ajax", ticketSubject: ticketSubject, ticketId: ticketId, filter: selectedFilter, jstmod: "'.$jsst_jstmod.'", task: "getAiSuggestedReplies", "_wpnonce":"'. esc_attr(wp_create_nonce("check-smart-reply")).'"}, function (data) {
                         if(data) {
-                            displayMatchingTickets(data);
+                            displaySuggestedReplies(data);
                         } else {
-                            showModal(`'.__('Error fetching matching tickets:', 'js-support-ticket').'`);
-                            return [];
-                            jQuery(".smartReplyTickets").hide();
+                            /* This branch never cleared the spinner: the OK
+                               button on the modal did, so the panel sat
+                               spinning until somebody dismissed the message
+                               about it. */
+                            jsReplyHideLoading();
+                            jsstSuggestNote("'.esc_js(__("No suggestions could be fetched. Try again.", "js-support-ticket")).'");
                         }
                     });
+                }
+
+                /* One list, of answers, drawn exactly as the backend thread
+                   draws it. (Roadmap 6.0-AI-01) */
+                function displaySuggestedReplies(suggestions) {
+                    if (typeof suggestions === "string") {
+                        try { suggestions = JSON.parse(suggestions); } catch (e) { suggestions = []; }
+                    }
+                    if (!Array.isArray(suggestions)) { suggestions = []; }
+
+                    matchingTicketsList.empty();
+                    selectedTicketRepliesSection.addClass("js-ticket-hidden");
+                    jQuery(".js-ticket-container").show();
+                    /* The ticket filter only means anything when the answers
+                       came from tickets. With the corpus answering it was
+                       still on screen saying "All Tickets" above a passage out
+                       of the knowledge base. */
+                    var fromTickets = suggestions.length ? (suggestions[0].from !== "corpus") : true;
+                    jQuery("#js-ticket-tickets-filter").closest(".js-ticket-filter-group").toggle(fromTickets);
+
+                    if (suggestions.length === 0) {
+                        matchingTicketsList.html("<p class=\"js-ticket-id\">'.esc_js(__("Nothing similar has been answered here yet.", "js-support-ticket")).'</p>");
+                        jsReplyHideLoading();
+                        matchingTicketsSection.removeClass("js-ticket-hidden");
+                        return;
+                    }
+
+                    jQuery.each(suggestions, function (i, s) {
+                        /* Where it came from, in words. The retriever hands
+                           back source_type ("kb") and ref ("KB-1"); neither
+                           belongs in front of somebody choosing a sentence to
+                           send. The source is named, the document is named,
+                           and the document links to itself where it has an
+                           address, so it can be read in full before it is
+                           trusted. */
+                        var when = s.created ? new Date(String(s.created).replace(" ", "T")).toLocaleDateString() : "";
+                        var origin = s.source || "";
+                        if (s.reference) { origin += " #" + s.reference; }
+                        if (when) { origin += (origin ? " \u00b7 " : "") + when; }
+                        /* Deliberately NOT js-ticket-list-item: that class
+                           carries the old click handler - pick a ticket, fetch
+                           its replies - and a suggestion is not a ticket. */
+                        var item = jQuery("<li></li>").addClass("js-ticket-suggestion");
+                        var body = jQuery("<div></div>").addClass("js-ticket-suggestion-body").text(s.plain);
+                        var from = jQuery("<div></div>").addClass("js-ticket-suggestion-meta");
+                        from.append(jQuery("<span></span>").addClass("js-ticket-suggestion-origin").text(origin));
+                        var titled = jQuery("<span></span>").addClass("js-ticket-suggestion-from");
+                        if (s.url) {
+                            titled.append(jQuery("<a></a>").attr({href: s.url, target: "_blank", rel: "noopener"}).text(s.subject));
+                        } else {
+                            titled.text(s.subject);
+                        }
+                        from.append(titled);
+                        var acts = jQuery("<div></div>").addClass("js-ticket-suggestion-actions");
+                        var use = jQuery("<button></button>").attr("type", "button")
+                            .addClass("js-ticket-reply-action-btn js-ticket-suggestion-use")
+                            .text("'.esc_js(__("Use this", "js-support-ticket")).'");
+                        var cop = jQuery("<button></button>").attr("type", "button")
+                            .addClass("js-ticket-reply-action-btn js-ticket-suggestion-copy")
+                            .text("'.esc_js(__("Copy", "js-support-ticket")).'");
+                        use.on("click", function (e) { e.preventDefault(); appendToReplyArea(s.text, use); });
+                        cop.on("click", function (e) { e.preventDefault(); copyToClipboard(s.plain, cop); });
+                        acts.append(use).append(cop);
+                        item.append(body).append(from).append(acts);
+                        matchingTicketsList.append(item);
+                    });
+                    jsReplyHideLoading();
+                    matchingTicketsSection.removeClass("js-ticket-hidden");
                 }
 
                 // Function to display matching tickets
@@ -978,6 +1148,29 @@ if (jssupportticket::$_config['offline'] == 2) {
                 <div class="js-ticket-usercredentails-credentails-wrp">
                 </div>
                 <?php
+                    /* A closed ticket says so, rather than showing nothing.
+                       (Roadmap 5.5-SEC-01)
+
+                       Closing a ticket destroys its credentials - closeTicket()
+                       calls deleteCredentialsOnCloseTicket(), which blanks the
+                       encrypted data and marks the row - so there is deliberately
+                       no Add button here afterwards. But an agent reaches this
+                       popup on a closed ticket, because the button that opens it
+                       is gated on the View Credentials permission and not on the
+                       status: they are meant to still be able to read "these were
+                       removed when the ticket closed".
+
+                       On a ticket that never had any, that left an empty box with
+                       no button and nothing said - which reads as a broken popup
+                       rather than as a rule. Same argument getPrivateCredentials()
+                       makes about refusing to leave a gap where a credential was:
+                       say it in place of the control instead of removing both. */
+                    if(in_array('privatecredentials',jssupportticket::$_active_addons)
+                            && (jssupportticket::$jsst_data[0]->status == 5 || jssupportticket::$jsst_data[0]->status == 6)){ ?>
+                        <div class="js-ticket-usercredentail-data-add-new-button-wrap jsst-credential-closed">
+                            <?php echo esc_html(__('This ticket is closed. Credentials are removed when a ticket closes, and cannot be added to a closed ticket.', 'js-support-ticket')); ?>
+                        </div><?php
+                    }
                     if(in_array('privatecredentials',jssupportticket::$_active_addons) && jssupportticket::$jsst_data[0]->status != 5 && jssupportticket::$jsst_data[0]->status != 6 ){
                         $jsst_credential_add_permission = false;
                         if(in_array('agent',jssupportticket::$_active_addons) && JSSTincluder::getJSModel('agent')->isUserStaff()){
@@ -1152,7 +1345,12 @@ if (jssupportticket::$_config['offline'] == 2) {
                 return false;
             }
             function updateticketlist(pagenum,ticketid,nonce){
-                jQuery.post(ajaxurl, {action: 'jsticket_ajax',jstmod: 'mergeticket', task: 'getTicketsForMerging', ticketid:ticketid,ticketlimit:pagenum, '_wpnonce': nonce}, function (data) {
+                /* The search terms go with the page number; see the same
+                   function in admin_ticketdetail.php for what leaving them out
+                   did. */
+                var name = jQuery('input#name').val() || '';
+                var email = jQuery('input#email').val() || '';
+                jQuery.post(ajaxurl, {action: 'jsticket_ajax',jstmod: 'mergeticket', task: 'getTicketsForMerging', name: name, email: email, ticketid:ticketid,ticketlimit:pagenum, '_wpnonce': nonce}, function (data) {
                     if(data){
                         data=jQuery.parseJSON(data);
                             jQuery('div#popup-record-data').html('');
@@ -1319,12 +1517,12 @@ if (jssupportticket::$_config['offline'] == 2) {
                             </div>
                             <?php if(JSSTmergedaddon::featureEnabled('note')){ ?>
                                 <div class="js-ticket-text-editor-wrp">
-                                    <div class="js-ticket-text-editor-field-title"><?php echo esc_html(__('Type Note for', 'js-support-ticket')) ." ". esc_html(jssupportticket::JSST_getVarValue($jsst_field_array['department'])); ?></div>
+                                    <div class="js-ticket-text-editor-field-title"><?php echo esc_html(__('Reason For', 'js-support-ticket')) ." ". esc_html(jssupportticket::JSST_getVarValue($jsst_field_array['department'])) ." ". esc_html(__('Transfer', 'js-support-ticket')); ?> <span class="jsst-optional">(<?php echo esc_html(__('optional', 'js-support-ticket')); ?>)</span></div>
                                     <div class="js-ticket-text-editor-field"><?php wp_editor('', 'departmenttranfernote', array('media_buttons' => false)); ?></div>
                                 </div>
                             <?php } ?>
                             <div class="js-ticket-reply-form-button-wrp">
-                                <?php echo wp_kses(JSSTformfield::submitbutton('departmenttransferbutton', esc_html(__('Transfer', 'js-support-ticket')), array('class' => 'button js-ticket-save-button', 'onclick' => "return checktinymcebyid('departmenttranfernote');")), JSST_ALLOWED_TAGS); ?>
+                                <?php echo wp_kses(JSSTformfield::submitbutton('departmenttransferbutton', esc_html(__('Transfer', 'js-support-ticket')), array('class' => 'js-ticket-save-button')), JSST_ALLOWED_TAGS); ?>
                             </div>
                             <?php echo wp_kses(JSSTformfield::hidden('ticketid', jssupportticket::$jsst_data[0]->id), JSST_ALLOWED_TAGS); ?>
                             <?php echo wp_kses(JSSTformfield::hidden('uid', JSSTincluder::getObjectClass('user')->uid()), JSST_ALLOWED_TAGS); ?>
@@ -1358,12 +1556,12 @@ if (jssupportticket::$_config['offline'] == 2) {
                             </div>
                             <?php if(JSSTmergedaddon::featureEnabled('note')){ ?>
                                 <div class="js-ticket-text-editor-wrp">
-                                    <div class="js-ticket-text-editor-field-title"><?php echo esc_html(__('Assigning Note', 'js-support-ticket')); ?></div>
+                                    <div class="js-ticket-text-editor-field-title"><?php echo esc_html(__('Assigning Note', 'js-support-ticket')); ?> <span class="jsst-optional">(<?php echo esc_html(__('optional', 'js-support-ticket')); ?>)</span></div>
                                     <div class="js-ticket-text-editor-field"><?php wp_editor('', 'assignnote', array('media_buttons' => false)); ?></div>
                                 </div>
                             <?php } ?>
                             <div class="js-ticket-reply-form-button-wrp">
-                                <?php echo wp_kses(JSSTformfield::submitbutton('assigntostaff', esc_html(__('Assign', 'js-support-ticket')), array('class' => 'button js-ticket-save-button', 'onclick' => "return checktinymcebyid('assignnote');")), JSST_ALLOWED_TAGS); ?>
+                                <?php echo wp_kses(JSSTformfield::submitbutton('assigntostaff', esc_html(__('Assign', 'js-support-ticket')), array('class' => 'js-ticket-save-button')), JSST_ALLOWED_TAGS); ?>
                             </div>
                             <?php echo wp_kses(JSSTformfield::hidden('ticketid', jssupportticket::$jsst_data[0]->id), JSST_ALLOWED_TAGS); ?>
                             <?php echo wp_kses(JSSTformfield::hidden('uid', JSSTincluder::getObjectClass('user')->uid()), JSST_ALLOWED_TAGS); ?>
@@ -1407,17 +1605,17 @@ if (jssupportticket::$_config['offline'] == 2) {
                                     </div>
                                     <div class="timer-buttons" >
                                         <?php if(JSSTincluder::getJSModel('userpermissions')->checkPermissionGrantedForTask('Edit Time')){ ?>
-                                            <span class="timer-button" onclick="showEditTimerPopup()" >
+                                            <span class="timer-button" onclick="showEditTimerPopup(this)" >
                                                 <img alt="<?php echo esc_attr(__('image','js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/timer-edit.png"/>
                                             </span>
                                         <?php } ?>
-                                        <span class="timer-button cls_1" onclick="changeTimerStatus(1)" >
+                                        <span class="timer-button cls_1" onclick="changeTimerStatus(1, this)" >
                                             <img alt="<?php echo esc_attr(__('image','js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/play.png"/>
                                         </span>
-                                        <span class="timer-button cls_2" onclick="changeTimerStatus(2)" >
+                                        <span class="timer-button cls_2" onclick="changeTimerStatus(2, this)" >
                                             <img alt="<?php echo esc_attr(__('image','js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/pause.png"/>
                                         </span>
-                                        <span class="timer-button cls_3" onclick="changeTimerStatus(3)" >
+                                        <span class="timer-button cls_3" onclick="changeTimerStatus(3, this)" >
                                             <img alt="<?php echo esc_attr(__('image','js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/stop.png"/>
                                         </span>
                                     </div>
@@ -1460,7 +1658,7 @@ if (jssupportticket::$_config['offline'] == 2) {
                             </div>
                         </div>
                         <div class="js-ticket-reply-form-button-wrp">
-                            <?php echo wp_kses(JSSTformfield::submitbutton('postinternalnote', esc_html(__('Post Internal Note', 'js-support-ticket')), array('class' => 'button js-ticket-save-button', 'onclick' => "return checktinymcebyid('internalnote');")), JSST_ALLOWED_TAGS); ?>
+                            <?php echo wp_kses(JSSTformfield::submitbutton('postinternalnote', esc_html(__('Post Internal Note', 'js-support-ticket')), array('class' => 'js-ticket-save-button', 'onclick' => "return checktinymcebyid('internalnote');")), JSST_ALLOWED_TAGS); ?>
                         </div>
 
                         <?php echo wp_kses(JSSTformfield::hidden('ticketid', jssupportticket::$jsst_data[0]->id), JSST_ALLOWED_TAGS); ?>
@@ -1639,7 +1837,7 @@ if (jssupportticket::$_config['offline'] == 2) {
                                         $jsst_credentialpermission = JSSTincluder::getJSModel('userpermissions')->checkPermissionGrantedForTask('View Credentials');
                                         if(in_array('privatecredentials',jssupportticket::$_active_addons) && $jsst_credentialpermission){ ?>
                                             <?php $jsst_nonce = wp_create_nonce('get-private-credentials-'.jssupportticket::$jsst_data[0]->id) ?>
-                                            <a class="js-tkt-det-actn-btn" href="javascript:return false;" id="private-credentials-button" onclick="getCredentails(<?php echo esc_js(jssupportticket::$jsst_data[0]->id); ?>, '<?php echo esc_js($jsst_nonce); ?>')">
+                                            <a class="js-tkt-det-actn-btn" href="javascript:void(0);" id="private-credentials-button" onclick="getCredentails(<?php echo esc_js(jssupportticket::$jsst_data[0]->id); ?>, '<?php echo esc_js($jsst_nonce); ?>')">
                                                 <?php $jsst_query = jssupportticket::$_db->prepare("SELECT count(id) FROM `" . jssupportticket::$_db->prefix . "js_ticket_privatecredentials` WHERE status = 1 AND ticketid = %d", jssupportticket::$jsst_data[0]->id);
                                                 $jsst_cred_count = jssupportticket::$_db->get_var($jsst_query);
                                                 if ($jsst_cred_count>0) {
@@ -1653,7 +1851,7 @@ if (jssupportticket::$_config['offline'] == 2) {
                                             <?php
                                         }
                                     } else { ?>
-                                            <?php if (jssupportticket::$jsst_data[0]->status != 6) { ?>
+                                            <?php if (jssupportticket::$jsst_data[0]->status != 6 && !$jsst_companyreadonly) { ?>
                                                 <?php if (jssupportticket::$jsst_data[0]->status != 5) { ?>
                                                     <a onclick="return confirm('<?php echo esc_js(__('Are you sure to close this ticket', 'js-support-ticket')); ?>');" class="js-tkt-det-actn-btn" href="<?php echo esc_url(wp_nonce_url(jssupportticket::makeUrl(array('jstmod'=>'ticket','task'=>'closeticket','action'=>'jstask','ticketid'=> jssupportticket::$jsst_data[0]->id ,'jsstpageid'=>get_the_ID())),"close-ticket-".jssupportticket::$jsst_data[0]->id)); ?>">
                                                         <img alt="<?php echo esc_attr(__('image','js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/ticket-detail/close.png" title="<?php echo esc_attr(__('Close', 'js-support-ticket')); ?>" />
@@ -1675,7 +1873,7 @@ if (jssupportticket::$_config['offline'] == 2) {
                                                         <?php } ?>
                                                 <?php } ?>
                                             <?php } ?>
-                                            <?php if (jssupportticket::$_config['show_ticket_delete_button'] == 1) { ?>
+                                            <?php if (jssupportticket::$_config['show_ticket_delete_button'] == 1 && !$jsst_companyreadonly) { ?>
                                                 <a class="js-tkt-det-actn-btn" onclick="return confirm('<?php echo esc_js(__('Are you sure you want to delete?', 'js-support-ticket')); ?>');"  href="<?php echo esc_url(wp_nonce_url(jssupportticket::makeUrl(array('jstmod'=>'ticket','task'=>'deleteticket','action'=>'jstask','ticketid'=> jssupportticket::$jsst_data[0]->id ,'jsstpageid'=>get_the_ID())),'delete-ticket-'.jssupportticket::$jsst_data[0]->id)); ?>" data-ticketid="<?php echo esc_attr(jssupportticket::$jsst_data[0]->id); ?>">
                                                     <img alt="<?php echo esc_attr(__('image','js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/ticket-detail/delete.png" title= "<?php echo esc_attr(__('Delete', 'js-support-ticket')); ?>" />
                                                     <span><?php echo esc_html(__('Delete', 'js-support-ticket')); ?></span>
@@ -1691,9 +1889,9 @@ if (jssupportticket::$_config['offline'] == 2) {
                                                     <?php
                                                 }
                                             }
-                                            if(in_array('privatecredentials',jssupportticket::$_active_addons) && jssupportticket::$jsst_data[0]->status != 5 && jssupportticket::$jsst_data[0]->status != 6){ ?>
+                                            if(in_array('privatecredentials',jssupportticket::$_active_addons) && !$jsst_companyreadonly && jssupportticket::$jsst_data[0]->status != 5 && jssupportticket::$jsst_data[0]->status != 6){ ?>
                                                 <?php $jsst_nonce = wp_create_nonce('get-private-credentials-'.jssupportticket::$jsst_data[0]->id) ?>
-                                                <a class="js-tkt-det-actn-btn" href="javascript:return false;" id="private-credentials-button" onclick="getCredentails(<?php echo esc_js(jssupportticket::$jsst_data[0]->id); ?>, '<?php echo esc_js($jsst_nonce); ?>')">
+                                                <a class="js-tkt-det-actn-btn" href="javascript:void(0);" id="private-credentials-button" onclick="getCredentails(<?php echo esc_js(jssupportticket::$jsst_data[0]->id); ?>, '<?php echo esc_js($jsst_nonce); ?>')">
                                                     <?php $jsst_query = jssupportticket::$_db->prepare("SELECT count(id) FROM `" . jssupportticket::$_db->prefix . "js_ticket_privatecredentials` WHERE status = 1 AND ticketid = %d", jssupportticket::$jsst_data[0]->id);
                                                     $jsst_cred_count = jssupportticket::$_db->get_var($jsst_query);
                                                     if ($jsst_cred_count>0) {
@@ -1724,7 +1922,11 @@ if (jssupportticket::$_config['offline'] == 2) {
                                         <?php if(JSSTmergedaddon::featureEnabled('banemail')){ ?>
                                             <?php
                                                 $jsst_manageoptions = current_user_can('manage_options');
-                                                if (JSSTincluder::getJSModel('banemail')->isEmailBan(jssupportticket::$jsst_data[0]->email)) {
+                                                /* Asked once and kept: the combined "Ban Email And
+                                                   Close Ticket" button below needs the same answer,
+                                                   and this is a query per call. */
+                                                $jsst_emailbanned = JSSTincluder::getJSModel('banemail')->isEmailBan(jssupportticket::$jsst_data[0]->email);
+                                                if ($jsst_emailbanned) {
                                                     if ($jsst_manageoptions || JSSTincluder::getJSModel('userpermissions')->checkPermissionGrantedForTask('Unban Email')) { ?>
                                                     <a class="js-tkt-det-actn-btn" href="#" onclick="actionticket(7);">
                                                         <img alt="<?php echo esc_attr(__('image','js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/ticket-detail/un-ban.png" title="<?php echo esc_attr(__('Unban Email', 'js-support-ticket')); ?>" />
@@ -1759,7 +1961,21 @@ if (jssupportticket::$_config['offline'] == 2) {
                                                 <span><?php echo esc_html(__('Mark In Progress', 'js-support-ticket'));?></span>
                                             </a>
                                         <?php } ?>
-                                        <?php if(JSSTmergedaddon::featureEnabled('banemail') && ( current_user_can('manage_options') || JSSTincluder::getJSModel('userpermissions')->checkPermissionGrantedForTask('Ban Email And Close Ticket') ) ){ ?>
+                                        <?php /* Only while there is something left for it to do.
+                                           This button does two things, and it was offered whenever
+                                           the permission was held - so on a ticket that was already
+                                           closed with an already-banned sender it sat there
+                                           promising to ban an address that is banned and close a
+                                           ticket that is closed. Both halves have their own button
+                                           in this same bar for the partial cases: Unban/Ban above,
+                                           Close/Reopen further up. So there is nothing to reach
+                                           only through this one, and hiding it when either half is
+                                           already done takes no action away. (5 is the closed
+                                           status, as in the Close/Reopen pair above.) */
+                                        if(JSSTmergedaddon::featureEnabled('banemail')
+                                                && empty($jsst_emailbanned)
+                                                && jssupportticket::$jsst_data[0]->status != 5
+                                                && ( current_user_can('manage_options') || JSSTincluder::getJSModel('userpermissions')->checkPermissionGrantedForTask('Ban Email And Close Ticket') ) ){ ?>
                                             <a class="js-tkt-det-actn-btn" href="#" onclick="actionticket(10);">
                                                 <img alt="<?php echo esc_attr(__('image','js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL) . 'includes/images/ticket-detail/ban-email-close-ticket.png'; ?>" title="<?php echo esc_attr(__('Ban Email And Close Ticket', 'js-support-ticket')); ?>" />
                                                 <span><?php echo esc_html(__('Ban Email And Close Ticket', 'js-support-ticket')); ?></span>
@@ -1859,7 +2075,7 @@ if (jssupportticket::$_config['offline'] == 2) {
                                                                 <span class="js-ticket-download-file-title">
                                                                     <?php echo esc_html($jsst_note->filename); echo '(' . esc_html($jsst_note->filesize / 1024) . ')'; ?>
                                                                 </span>
-                                                                <a class="js-download-button" target="_blank" href="<?php echo esc_url(jssupportticket::makeUrl(array('jstmod'=>'note','task'=>'downloadbyid','action'=>'jstask','id'=> $jsst_note->id ,'jsstpageid'=>get_the_ID()))); ?>">
+                                                                <a class="js-download-button" target="_blank" href="<?php echo esc_url(jssupportticket::makeUrl(array('jstmod'=>'note','task'=>'downloadbyid','action'=>'jstask','id'=> $jsst_note->id, '_wpnonce'=> wp_create_nonce('download-note-attachment-'.$jsst_note->id), 'jsstpageid'=>get_the_ID()))); ?>">
                                                                     <img alt="<?php echo esc_attr(__('image','js-support-ticket')); ?>" class="js-ticket-download-img" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>/includes/images/ticket-detail/download.png">
                                                                 </a>
                                                             </div>
@@ -2065,6 +2281,38 @@ if (jssupportticket::$_config['offline'] == 2) {
                                                     <?php 
                                                 }
                                                  ?>
+                                                            <?php
+                                                            if (
+                                                                JSSTincluder::getJSModel('userpermissions')->checkPermissionGrantedForTask('Set AI Reply Mode for Reply') &&
+                                                                JSSTaipolicy::onsiteFeature('aipoweredreply') && 
+                                                                jssupportticket::$jsst_data[0]->uid != $jsst_reply->uid && 
+                                                                $jsst_reply->uid != 0) { ?>
+                                                            <?php /* Whether this reply may be offered to the AI as an example.
+                                                               (Roadmap 6.0-AI-01)
+
+                                                               A setting on the reply rather than something to do to it,
+                                                               so it sits in the reply's header as a labelled switch and
+                                                               is always shown. It used to be a button among Edit Reply
+                                                               and Edit Time that stayed invisible until the reply was
+                                                               hovered, which read as one more action and was easy to
+                                                               miss altogether.
+
+                                                               Off is 2 - excluded from the search - and on is 0. The
+                                                               gates above it are the portal's own: staff only, and only
+                                                               an agent whose role grants "Set AI Reply Mode for Reply".
+                                                               A customer reading their own ticket never sees it. */
+                                                            $jsst_ai_off = ((int) $jsst_reply->aireplymode === 2); ?>
+                                                            <button type="button"
+                                                                class="js-ticket-ai-example<?php echo $jsst_ai_off ? ' js-ticket-ai-example-off' : ''; ?>"
+                                                                data-type="reply" data-id="<?php echo esc_attr($jsst_reply->replyid); ?>"
+                                                                role="switch"
+                                                                aria-checked="<?php echo $jsst_ai_off ? 'false' : 'true'; ?>"
+                                                                title="<?php echo esc_attr__('Whether the AI may offer this reply as an example when answering a similar ticket. Nothing leaves your site: the suggestions are a search of your own past replies.', 'js-support-ticket'); ?>">
+                                                                <span><?php echo $jsst_ai_off
+                                                                    ? esc_html__('Not used by AI', 'js-support-ticket')
+                                                                    : esc_html__('Used by AI', 'js-support-ticket'); ?></span>
+                                                            </button>
+                                                            <?php } ?>
                                             </div>
                                             <?php
                                             if (jssupportticket::$_config['show_email_on_ticket_reply'] == 1 && !empty($jsst_field_array['email'])) {
@@ -2140,38 +2388,6 @@ if (jssupportticket::$_config['offline'] == 2) {
                                                 <?php if (in_array('agent',jssupportticket::$_active_addons) &&  jssupportticket::$jsst_data['user_staff']) {
                                                     ?>
                                                         <div class="js-ticket-thread-cnt-btm">
-                                                            <?php
-                                                            if (
-                                                                JSSTincluder::getJSModel('userpermissions')->checkPermissionGrantedForTask('Set AI Reply Mode for Reply') &&
-                                                                in_array('aipoweredreply', jssupportticket::$_active_addons) && 
-                                                                jssupportticket::$jsst_data[0]->uid != $jsst_reply->uid && 
-                                                                $jsst_reply->uid != 0) { ?>
-                                                                <!-- This section contains the AI Reply Feature -->
-                                                                <div class="js-ticket-ai-reply-status-wrapper">
-                                                                    <div class="js-ticket-ai-reply-status-control-wrp">
-                                                                        <label for="js-ticket-ai-reply-status-control">
-                                                                            <?php echo esc_html__('AI-Powered Reply Mode', 'js-support-ticket').':'; ?>
-                                                                        </label>
-                                                                        <div class="js-ticket-info-icon-wrapper">
-                                                                            <span class="js-ticket-info-icon" data-tooltip = "<?php echo esc_attr(__("Control how this individual reply influences the AI search and response generation process for future queries.",'js-support-ticket')); ?>">
-                                                                                <img alt = "<?php echo esc_attr(__('Info','js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/ticket-detail/info-icon.png" />
-                                                                            </span>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div id="js-ticket-ai-reply-status-control" class="js-ticket-segmented-control">
-                                                                        <button type="button" class="js-ticket-segmented-control-option js-ticket-default <?php echo ( intval( $jsst_reply->aireplymode ) === 0 ) ? 'active' : ''; ?>" data-value="0" data-type="reply" data-id="<?php echo esc_attr( $jsst_reply->replyid ); ?>" title="<?php echo esc_attr(__( "Default: reply included in all AI search queries.", "js-support-ticket" ) ); ?>">
-                                                                        <?php echo esc_html__( 'Default', 'js-support-ticket' ); ?>
-                                                                    </button>
-                                                                    <button type="button" class="js-ticket-segmented-control-option js-ticket-enable <?php echo ( intval( $jsst_reply->aireplymode ) === 1 ) ? 'active' : ''; ?>" data-value="1" data-type="reply" data-id="<?php echo esc_attr( $jsst_reply->replyid ); ?>" title="<?php echo esc_attr(__( "Enable: reply used in AI queries only when the Enable Tickets filter is active.", "js-support-ticket" ) ); ?>">
-                                                                            <?php echo esc_html__('Enable', 'js-support-ticket'); ?>
-                                                                        </button>
-                                                                        <button type="button" class="js-ticket-segmented-control-option js-ticket-disable <?php echo ( intval( $jsst_reply->aireplymode ) === 2 ) ? 'active' : ''; ?>" data-value="2" data-type="reply" data-id="<?php echo esc_attr( $jsst_reply->replyid ); ?>">
-                                                                            <?php echo esc_html__('Disable', 'js-support-ticket'); ?>
-                                                                        </button>
-                                                                    </div>
-                                                                </div>
-                                                                <?php
-                                                            } ?>
                                                             <div class="js-ticket-thread-date">
                                                                 <?php echo esc_html(date_i18n("l F d, Y, H:i:s", jssupportticketphplib::JSST_strtotime($jsst_reply->created))); ?>
                                                             </div>
@@ -2180,7 +2396,7 @@ if (jssupportticket::$_config['offline'] == 2) {
                                                                 if(JSSTincluder::getJSModel('userpermissions')->checkPermissionGrantedForTask('Edit Reply') && jssupportticket::$jsst_data[0]->status != 6){
                                                                     $jsst_nonce = wp_create_nonce('get-reply-data-by-id-'.$jsst_reply->replyid); ?>
                                                                     <a class="js-ticket-thread-actn-btn ticket-edit-reply-button" href="#" onclick="return showPopupAndFillValues(<?php echo esc_js($jsst_reply->replyid);?>,1, '<?php echo esc_js($jsst_nonce);?>')" >
-                                                                        <img alt="<?php echo esc_attr(__('image','js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/ticket-detail/edit-time.png" />
+                                                                        <img alt="<?php echo esc_attr(__('image','js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/ticket-detail/edit-reply.png" />
                                                                         <?php echo esc_html(__('Edit Reply','js-support-ticket'));?>
                                                                     </a>
                                                                     <?php
@@ -2189,7 +2405,7 @@ if (jssupportticket::$_config['offline'] == 2) {
                                                                     if(JSSTincluder::getJSModel('userpermissions')->checkPermissionGrantedForTask('Edit Time') && jssupportticket::$jsst_data[0]->status != 6){
                                                                         $jsst_nonce = wp_create_nonce('get-time-by-reply-id-'.$jsst_reply->replyid); ?>
                                                                         <a class="js-ticket-thread-actn-btn ticket-edit-time-button" href="#" onclick="return showPopupAndFillValues(<?php echo esc_js($jsst_reply->replyid);?>,2, '<?php echo esc_js($jsst_nonce);?>')" >
-                                                                            <img alt="<?php echo esc_attr(__('image','js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/ticket-detail/edit-time.png" />
+                                                                            <img alt="<?php echo esc_attr(__('image','js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/ticket-detail/edit-time-1.png" />
                                                                             <?php echo esc_html(__('Edit Time','js-support-ticket'));?>
                                                                         </a>
                                                                         <?php
@@ -2225,7 +2441,19 @@ if (jssupportticket::$_config['offline'] == 2) {
                         <!-- User post Reply Form Section -->
                         <div class="js-ticket-reply-forms-wrapper"><!-- Ticket Reply Forms Wrapper -->
                             <?php if($jsst_printflag == false){
-                                if (!jssupportticket::$jsst_data['user_staff']) {
+                                if (!jssupportticket::$jsst_data['user_staff'] && $jsst_companyreadonly) { ?>
+                                    <div class="js-ticket-reply-forms-heading"><?php echo esc_html(__('Read only', 'js-support-ticket')); ?></div>
+                                    <p class="js-ticket-company-readonly"><?php echo esc_html(sprintf(
+                                        /* translators: %s: the name of the colleague who raised the ticket */
+                                        __('You can read this ticket because you supervise your company\'s tickets. Only %s, who raised it, can reply to, close or reopen it.', 'js-support-ticket'),
+                                        jssupportticket::$jsst_data[0]->name !== '' ? jssupportticket::$jsst_data[0]->name : jssupportticket::$jsst_data[0]->email)); ?></p>
+                                </div>
+                                </form>
+                                <?php /* The same two closes the customer and agent branches end
+                                         with: the reply-forms wrapper, then the reply form opened
+                                         above the left column. Without them the right column was
+                                         drawn inside the left one. */ ?>
+                                <?php } elseif (!jssupportticket::$jsst_data['user_staff']) {
                                     if (jssupportticket::$jsst_data[0]->status != 5 && jssupportticket::$jsst_data[0]->lock != 1 && jssupportticket::$jsst_data[0]->status != 6): ?>
                                         <div class="js-ticket-reply-forms-heading"><?php echo esc_html(__('Reply A Message', 'js-support-ticket')); ?></div>
                                         <div id="postreply" class="js-ticket-post-reply">
@@ -2257,7 +2485,7 @@ if (jssupportticket::$_config['offline'] == 2) {
                                             </div>
                                         </div>
                                         <div class="js-ticket-reply-form-button-wrp">
-                                            <?php echo wp_kses(JSSTformfield::submitbutton('postreplybutton', esc_html(__('Post Reply', 'js-support-ticket')), array('class' => 'button js-ticket-save-button', 'onclick' => "return checktinymcebyid('message');")), JSST_ALLOWED_TAGS); ?>
+                                            <?php echo wp_kses(JSSTformfield::submitbutton('postreplybutton', esc_html(__('Post Reply', 'js-support-ticket')), array('class' => 'js-ticket-save-button', 'onclick' => "return checktinymcebyid('jsticket_message');")), JSST_ALLOWED_TAGS); ?>
                                         </div>
                                     <?php endif; ?>
                                     <?php echo wp_kses(JSSTformfield::hidden('actionid', ''), JSST_ALLOWED_TAGS); ?>
@@ -2311,17 +2539,17 @@ if (jssupportticket::$_config['offline'] == 2) {
                                                         </div>
                                                         <div class="timer-buttons" >
                                                             <?php if(JSSTincluder::getJSModel('userpermissions')->checkPermissionGrantedForTask('Edit Own Time')){ ?>
-                                                                <span class="timer-button" onclick="showEditTimerPopup()" >
+                                                                <span class="timer-button" onclick="showEditTimerPopup(this)" >
                                                                     <img alt="<?php echo esc_attr(__('image','js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/timer-edit.png"/>
                                                                 </span>
                                                             <?php } ?>
-                                                            <span class="timer-button cls_1" onclick="changeTimerStatus(1)" >
+                                                            <span class="timer-button cls_1" onclick="changeTimerStatus(1, this)" >
                                                                 <img alt="<?php echo esc_attr(__('image','js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/play.png"/>
                                                             </span>
-                                                            <span class="timer-button cls_2" onclick="changeTimerStatus(2)" >
+                                                            <span class="timer-button cls_2" onclick="changeTimerStatus(2, this)" >
                                                                 <img alt="<?php echo esc_attr(__('image','js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/pause.png"/>
                                                             </span>
-                                                            <span class="timer-button cls_3" onclick="changeTimerStatus(3)" >
+                                                            <span class="timer-button cls_3" onclick="changeTimerStatus(3, this)" >
                                                                 <img alt="<?php echo esc_attr(__('image','js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/stop.png"/>
                                                             </span>
                                                         </div>
@@ -2332,14 +2560,144 @@ if (jssupportticket::$_config['offline'] == 2) {
                                                 </div>
                                             <?php } ?>
                                             <?php
-                                            if(isset($jsst_field_array['premade']) && JSSTmergedaddon::featureEnabled('cannedresponses')){ ?>
-                                                <div class="js-ticket-premade-msg-wrp"><!-- Premade Message Wrapper -->
-                                                    <div class="js-ticket-premade-field-title"><?php echo esc_html(jssupportticket::JSST_getVarValue($jsst_field_array['premade'])); ?>&nbsp;<?php echo esc_html(__('Message','js-support-ticket')); ?></div>
-                                                    <div class="js-ticket-premade-field-wrp">
-                                                        <?php echo wp_kses(JSSTformfield::select('premadeid', JSSTincluder::getJSModel('cannedresponses')->getPreMadeMessageForCombobox(), isset(jssupportticket::$jsst_data[0]->premadeid) ? jssupportticket::$jsst_data[0]->premadeid : '', esc_html(__('Select', 'js-support-ticket').' '.jssupportticket::JSST_getVarValue($jsst_field_array['premade'])), array('class' => 'js-ticket-premade-select', 'onchange' => 'getpremade(this.value);')), JSST_ALLOWED_TAGS); ?>
-                                                        <span class="js-ticket-apend-radio-btn">
-                                                            <?php echo wp_kses(JSSTformfield::checkbox('append_premade', array('1' => esc_html(__('Append', 'js-support-ticket'))), '', array('class' => 'radiobutton js-ticket-premade-radiobtn')), JSST_ALLOWED_TAGS); ?>
+                                            /* One row, above the box, for every way of not writing this
+                                               reply from scratch. (Roadmap 6.0-AI-01, 4.5-FE-01)
+
+                                               The two were in different places and in different visual
+                                               languages: canned responses in a titled block above the
+                                               editor, and the AI suggestions below it inside a bordered
+                                               card with an icon, a product name and a sentence of
+                                               marketing. Nothing said they were alternatives for the same
+                                               job, and the one that reads an answer *before* you type was
+                                               the one placed after the box you type in.
+
+                                               Both sit above the editor now, under one sentence, in the
+                                               same shape the backend thread uses - the two agent
+                                               workspaces disagreeing about the same desk is the failure
+                                               this release exists to end. The row draws itself only if it
+                                               has something to offer: a desk with no canned responses for
+                                               this department and an agent without the AI permission get
+                                               nothing at all rather than a heading over an empty strip. */
+                                            $jsst_showai = JSSTincluder::getJSModel('userpermissions')
+                                                ->checkPermissionGrantedForTask('Use AI Powered Reply Feature');
+                                            $jsst_cannedresponses = array();
+                                            if (isset($jsst_field_array['premade']) && JSSTmergedaddon::featureEnabled('cannedresponses')) {
+                                                /* This ticket's department, the same as the backend thread.
+                                                   The list was every canned response on the desk here too,
+                                                   and the add-ticket screens have always narrowed it.
+                                                   (Roadmap 4.0-CORE-03) */
+                                                $jsst_ticketdept = isset(jssupportticket::$jsst_data[0]->departmentid)
+                                                    ? jssupportticket::$jsst_data[0]->departmentid : '';
+                                                $jsst_cannedresponses = JSSTincluder::getJSModel('cannedresponses')
+                                                    ->getPreMadeMessageForCombobox($jsst_ticketdept);
+                                            }
+                                            if ($jsst_showai || !empty($jsst_cannedresponses)) { ?>
+                                                <div class="js-ticket-suggest">
+                                                    <span class="js-ticket-suggest-lead"><?php echo esc_html__('Write this reply with help:', 'js-support-ticket'); ?></span>
+                                                    <?php if ($jsst_showai) { ?>
+                                                        <?php /* A button, not a card. "Suggested Response" sat under
+                                                           "AI Powered Reply" and "Get context-aware suggestions for
+                                                           your response." - a product name and a sentence selling
+                                                           it, on the screen of somebody who has already decided to
+                                                           use it. Named for what it does instead, with the
+                                                           magnifier that says this one looks something up. Drawn
+                                                           inline rather than from a dashicon, which is a wp-admin
+                                                           font and is not loaded out here. */ ?>
+                                                        <button type="button" id="js-ticket-ai-reply-btn" class="js-ticket-help-btn js-ticket-help-btn-primary"
+                                                                title="<?php echo esc_attr__('Finds answers already written here \u2014 your knowledge base, FAQs and past replies.', 'js-support-ticket'); ?>">
+                                                            <svg class="js-ticket-help-btn-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="11" cy="11" r="7"></circle><line x1="16.5" y1="16.5" x2="21" y2="21"></line></svg>
+                                                            <?php echo esc_html__('AI Agent', 'js-support-ticket'); ?>
+                                                        </button>
+                                                    <?php } ?>
+                                                    <?php /* And the canned responses, as a box you can type in.
+                                                       (Roadmap 4.0-CORE-03) A select can only be searched by its
+                                                       first letter, and the word an agent remembers is usually
+                                                       from the middle of the title. Filtering is done against the
+                                                       options already on the page, so typing costs no request. */
+                                                    if (!empty($jsst_cannedresponses)) { ?>
+                                                        <span class="js-ticket-canned">
+                                                            <span class="js-ticket-canned-box">
+                                                                <input type="text" id="js-ticket-canned-search" class="js-ticket-canned-search"
+                                                                       autocomplete="off" role="combobox" aria-expanded="false"
+                                                                       aria-controls="js-ticket-canned-list" aria-autocomplete="list"
+                                                                       placeholder="<?php echo esc_attr__('Canned response', 'js-support-ticket'); ?>"
+                                                                       aria-label="<?php echo esc_attr__('Search canned responses', 'js-support-ticket'); ?>" />
+                                                                <ul id="js-ticket-canned-list" class="js-ticket-canned-list" role="listbox"
+                                                                    aria-label="<?php echo esc_attr__('Canned responses', 'js-support-ticket'); ?>" hidden>
+                                                                    <?php foreach ($jsst_cannedresponses as $jsst_premade) { ?>
+                                                                        <li class="js-ticket-canned-option" role="option" aria-selected="false"
+                                                                            id="js-ticket-canned-opt-<?php echo esc_attr($jsst_premade->id); ?>"
+                                                                            data-id="<?php echo esc_attr($jsst_premade->id); ?>"><?php
+                                                                            echo esc_html(jssupportticket::JSST_getVarValue($jsst_premade->text)); ?></li>
+                                                                    <?php } ?>
+                                                                    <li class="js-ticket-canned-none" hidden><?php
+                                                                        echo esc_html__('Nothing matches', 'js-support-ticket'); ?></li>
+                                                                </ul>
+                                                            </span>
+                                                            <?php /* What the checkbox does, said in the checkbox. It read
+                                                               "Append", which names the branch rather than the choice,
+                                                               and the unticked branch is the one worth warning about:
+                                                               picking a response with this off replaces everything in
+                                                               the editor, including what the agent had already typed. */ ?>
+                                                            <span class="js-ticket-canned-append">
+                                                                <?php echo wp_kses(JSSTformfield::checkbox('append_premade',
+                                                                    array('1' => esc_html(__('Add to what I have written', 'js-support-ticket'))), '',
+                                                                    array('class' => 'radiobutton js-ticket-premade-radiobtn',
+                                                                          'title' => esc_attr__('Off, the canned response replaces everything in the box.', 'js-support-ticket'))), JSST_ALLOWED_TAGS); ?>
+                                                            </span>
                                                         </span>
+                                                    <?php } ?>
+                                                    <?php /* Where anything that went wrong is said. Empty almost
+                                                       always, and :empty takes it out of the row when it is. */ ?>
+                                                    <span class="js-ticket-suggest-status" id="js-ticket-suggest-status" role="status" aria-live="polite"></span>
+                                                </div>
+                                            <?php }
+                                            if ($jsst_showai) { ?>
+                                                <span class="js-ticket-current-ticket-title"><?php echo esc_html( jssupportticket::$jsst_data[0]->subject ); ?></span>
+                                                <span class="js-ticket-current-ticket-id"><?php echo esc_html( jssupportticket::$jsst_data[0]->id ); ?></span>
+                                                <div class="js-ticket-container">
+                                                    <div id="js-ticket-matching-tickets-section" class="js-ticket-section js-ticket-matching-tickets-section js-ticket-hidden">
+                                                        <div class="js-ticket-selected-tickets-header">
+                                                            <div class="js-ticket-section-heading"><?php echo esc_html__('Suggested replies', 'js-support-ticket'); ?></div>
+                                                            <?php /* The filter is shown only when tickets are what
+                                                               answered - the script hides it when the suggestions
+                                                               came from the knowledge base, where "Everything"
+                                                               describes nothing. */
+                                                            if(JSSTaipolicy::onsiteFeature('aipoweredreply')){ ?>
+                                                                <div class="js-ticket-filter-group">
+                                                                    <label for="js-ticket-tickets-filter" class="js-ticket-filter-label"><?php echo esc_html__('Show', 'js-support-ticket'); ?></label>
+                                                                    <select id="js-ticket-tickets-filter" class="js-ticket-filter-select">
+                                                                        <option value="all"><?php echo esc_html__('Everything', 'js-support-ticket'); ?></option>
+                                                                        <option value="marked"><?php echo esc_html__('Only preferred tickets', 'js-support-ticket'); ?></option>
+                                                                    </select>
+                                                                </div>
+                                                            <?php } ?>
+                                                            <button type="button" id="js-ticket-close-tickets-btn" class="js-ticket-close-button">
+                                                                <?php echo esc_html__('Hide', 'js-support-ticket'); ?>
+                                                            </button>
+                                                        </div>
+                                                        <ul id="js-ticket-matching-tickets-list" class="js-ticket-list">
+                                                        </ul>
+                                                    </div>
+
+                                                    <div id="js-ticket-selected-ticket-replies-section" class="js-ticket-section js-ticket-selected-replies-section js-ticket-hidden">
+                                                        <div class="js-ticket-selected-replies-header">
+                                                            <h2 class="js-ticket-section-heading" id="js-ticket-selected-ticket-replies-title"></h2>
+                                                            <?php if(JSSTaipolicy::onsiteFeature('aipoweredreply')){ ?>
+                                                                <div class="js-ticket-filter-group">
+                                                                    <label for="js-ticket-replies-filter" class="js-ticket-filter-label"><?php echo esc_html__('Filter', 'js-support-ticket').': '; ?></label>
+                                                                    <select id="js-ticket-replies-filter" class="js-ticket-filter-select">
+                                                                        <option value="all"><?php echo esc_html__('All Replies', 'js-support-ticket'); ?></option>
+                                                                        <option value="marked"><?php echo esc_html__('Enable Replies', 'js-support-ticket'); ?></option>
+                                                                    </select>
+                                                                </div>
+                                                            <?php } ?>
+                                                            <button type="button" id="js-ticket-close-replies-btn" class="js-ticket-close-button">
+                                                                <?php echo esc_html__('Close', 'js-support-ticket'); ?>
+                                                            </button>
+                                                        </div>
+                                                        <div id="js-ticket-selected-ticket-replies-content" class="js-ticket-replies-content reply-content">
+                                                        </div>
                                                     </div>
                                                 </div>
                                             <?php } ?>
@@ -2347,89 +2705,6 @@ if (jssupportticket::$_config['offline'] == 2) {
                                                 <div class="js-ticket-text-editor-field-title"><?php echo esc_html(__('Type Message','js-support-ticket')); ?></div>
                                                 <div class="js-ticket-text-editor-field"><?php wp_editor('', 'jsticket_message', array('media_buttons' => false)); ?></div>
                                             </div>
-                                            <?php
-                                            if (JSSTincluder::getJSModel('userpermissions')->checkPermissionGrantedForTask('Use AI Powered Reply Feature')) { ?>
-                                                <div class="js-ticket-ai-reply-button-wrp"><!-- AI-Powered Reply -->
-                                                    <div class="js-ticket-ai-powered-reply-wrapper">
-                                                        <div class="js-ticket-ai-powered-reply-icon">
-                                                            <img alt = "<?php echo esc_attr(__('AI Icon','js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/ticket-detail/ai-icon.png" />
-                                                        </div>
-                                                        <div class="js-ticket-ai-powered-reply-content-wrp">
-                                                            <div class="js-ticket-ai-powered-reply-content">
-                                                                <div class="js-ticket-ai-powered-reply-title">
-                                                                    <?php echo esc_html__('AI Powered Reply', 'js-support-ticket'); ?>
-                                                                </div>
-                                                                <div class="js-ticket-ai-powered-reply-text">
-                                                                    <?php echo esc_html__('Get context-aware suggestions for your response.', 'js-support-ticket'); ?>
-                                                                </div>
-                                                            </div>
-                                                            <div id="js-ticket-ai-reply-btn" class="js-ticket-ai-powered-reply-action">
-                                                                <a href="#" class="js-ticket-ai-powered-reply-button">
-                                                                    <?php echo esc_html__('Suggested Response', 'js-support-ticket'); ?>
-                                                                </a>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <span class="js-ticket-current-ticket-title"><?php echo esc_html( jssupportticket::$jsst_data[0]->subject ); ?></span>
-                                                    <span class="js-ticket-current-ticket-id"><?php echo esc_html( jssupportticket::$jsst_data[0]->id ); ?></span>
-                                                    <div class="js-ticket-container">
-                                                        <!-- Matching Tickets Section -->
-                                                        <div id="js-ticket-matching-tickets-section" class="js-ticket-section js-ticket-matching-tickets-section js-ticket-hidden">
-                                                            <div class="js-ticket-selected-tickets-header">
-                                                                <div class="js-ticket-section-heading"><?php echo esc_html__('Matching Tickets', 'js-support-ticket'); ?></div>
-                                                                <?php if(in_array('aipoweredreply', jssupportticket::$_active_addons)){ ?>
-                                                                    <div class="js-ticket-filter-group">
-                                                                        <label for="js-ticket-tickets-filter" class="js-ticket-filter-label"><?php echo esc_html__('Filter', 'js-support-ticket').': '; ?></label>
-                                                                        <select id="js-ticket-tickets-filter" class="js-ticket-filter-select">
-                                                                            <option value="all"><?php echo esc_html__('All Tickets', 'js-support-ticket'); ?></option>
-                                                                            <option value="marked"><?php echo esc_html__('Enable Tickets', 'js-support-ticket'); ?></option>
-                                                                        </select>
-                                                                    </div>
-                                                                <?php } ?>
-                                                                <button id="js-ticket-close-tickets-btn" class="js-ticket-close-button">
-                                                                    <?php echo esc_html__('Close', 'js-support-ticket'); ?>
-                                                                </button>
-                                                            </div>
-                                                            <ul id="js-ticket-matching-tickets-list" class="js-ticket-list">
-                                                                <!-- Matching tickets will be dynamically inserted here -->
-                                                            </ul>
-                                                        </div>
-
-                                                        <!-- Selected Ticket Replies Section -->
-                                                        <div id="js-ticket-selected-ticket-replies-section" class="js-ticket-section js-ticket-selected-replies-section js-ticket-hidden">
-                                                            <div class="js-ticket-selected-replies-header">
-                                                                <h2 class="js-ticket-section-heading" id="js-ticket-selected-ticket-replies-title"></h2>
-                                                                <?php if(in_array('aipoweredreply', jssupportticket::$_active_addons)){ ?>
-                                                                    <div class="js-ticket-filter-group">
-                                                                        <label for="js-ticket-replies-filter" class="js-ticket-filter-label"><?php echo esc_html__('Filter', 'js-support-ticket').': '; ?></label>
-                                                                        <select id="js-ticket-replies-filter" class="js-ticket-filter-select">
-                                                                            <option value="all"><?php echo esc_html__('All Replies', 'js-support-ticket'); ?></option>
-                                                                            <option value="marked"><?php echo esc_html__('Enable Replies', 'js-support-ticket'); ?></option>
-                                                                        </select>
-                                                                    </div>
-                                                                <?php } ?>
-                                                                <button id="js-ticket-close-replies-btn" class="js-ticket-close-button">
-                                                                    <?php echo esc_html__('Close', 'js-support-ticket'); ?>
-                                                                </button>
-                                                            </div>
-                                                            <div id="js-ticket-selected-ticket-replies-content" class="js-ticket-replies-content reply-content">
-                                                                <!-- Replies from selected ticket will be dynamically inserted here -->
-                                                            </div>
-                                                        </div>
-
-                                                        <!-- Custom Modal for Messages -->
-                                                        <div id="js-ticket-message-modal" class="js-ticket-modal js-ticket-hidden">
-                                                            <div class="js-ticket-modal-content">
-                                                                <p id="js-ticket-modal-message" class="js-ticket-modal-message"></p>
-                                                                <button id="js-ticket-modal-close-btn" class="js-ticket-modal-close-button">
-                                                                    <?php echo esc_html__('OK', 'js-support-ticket'); ?>
-                                                                </button>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <?php 
-                                            } ?>
                                             <div class="js-ticket-reply-attachments"><!-- Attachments -->
                                                 <div class="js-attachment-field-title"><?php echo esc_html(__('Attachments', 'js-support-ticket')); ?></div>
                                                 <div class="js-attachment-field">
@@ -2492,7 +2767,7 @@ if (jssupportticket::$_config['offline'] == 2) {
                                                 </div>
                                             </div>
                                             <div class="js-ticket-reply-form-button-wrp">
-                                                <?php echo wp_kses(JSSTformfield::submitbutton('postreply', esc_html(__('Post Reply', 'js-support-ticket')), array('class' => 'button js-ticket-save-button', 'onclick' => "return checktinymcebyid('message');")), JSST_ALLOWED_TAGS); ?>
+                                                <?php echo wp_kses(JSSTformfield::submitbutton('postreply', esc_html(__('Post Reply', 'js-support-ticket')), array('class' => 'js-ticket-save-button', 'onclick' => "return checktinymcebyid('jsticket_message');")), JSST_ALLOWED_TAGS); ?>
                                             </div>
                                             <?php echo wp_kses(JSSTformfield::hidden('departmentid', jssupportticket::$jsst_data[0]->departmentid), JSST_ALLOWED_TAGS); ?>
                                             <?php echo wp_kses(JSSTformfield::hidden('ticketid', jssupportticket::$jsst_data[0]->id), JSST_ALLOWED_TAGS); ?>
@@ -2519,7 +2794,7 @@ if (jssupportticket::$_config['offline'] == 2) {
                             <?php
                                 if (jssupportticket::$jsst_data[0]->status == 1) {
                                     $jsst_ticketmessage = __('Open', 'js-support-ticket');
-                                    $jsst_bgcolor = '#5bb12f';
+                                    $jsst_bgcolor = '#438323';
                                     $jsst_color1 = '#FFFFFF';
                                 } else {
                                     $jsst_ticketmessage = jssupportticket::JSST_getVarValue(jssupportticket::$jsst_data[0]->statustitle);
@@ -2744,7 +3019,7 @@ if (jssupportticket::$_config['offline'] == 2) {
                                                         </div>
                                                     </div>
                                                     <div class="js-ticket-reply-form-button-wrp">
-                                                        <?php echo wp_kses(JSSTformfield::submitbutton('changestatus', esc_html(__('Change Status', 'js-support-ticket')), array('class' => 'button js-ticket-save-button')), JSST_ALLOWED_TAGS); ?>
+                                                        <?php echo wp_kses(JSSTformfield::submitbutton('changestatus', esc_html(__('Change Status', 'js-support-ticket')), array('class' => 'js-ticket-save-button')), JSST_ALLOWED_TAGS); ?>
                                                     </div>
                                                     <?php echo wp_kses(JSSTformfield::hidden('ticketid', jssupportticket::$jsst_data[0]->id), JSST_ALLOWED_TAGS); ?>
                                                     <?php echo wp_kses(JSSTformfield::hidden('uid', JSSTincluder::getObjectClass('user')->uid()), JSST_ALLOWED_TAGS); ?>
@@ -2771,34 +3046,42 @@ if (jssupportticket::$_config['offline'] == 2) {
                         if(
                             in_array('agent',jssupportticket::$_active_addons) &&  
                             jssupportticket::$jsst_data['user_staff'] &&
-                            in_array('aipoweredreply', jssupportticket::$_active_addons) &&
+                            JSSTaipolicy::onsiteFeature('aipoweredreply') &&
                             JSSTincluder::getJSModel('userpermissions')->checkPermissionGrantedForTask('Set AI Reply Mode for Ticket')){ ?>
                             <div class="js-tkt-det-cnt js-tkt-det-tkt-prty"> <!-- Ticket Status -->
                                 <div class="js-tkt-det-hdg">
                                     <div class="js-tkt-det-hdg-txt">
-                                        <label class="js-ticket-ai-reply-status-control-label" for="js-ticket-ai-reply-status-control">
-                                            <?php echo esc_html__('AI-Powered Reply Mode', 'js-support-ticket'); ?>
-                                        </label>
-                                        <div class="js-ticket-info-icon-wrapper">
-                                            <span class="js-ticket-info-icon" data-tooltip = "<?php echo esc_attr(__("Control how this ticket and its replies influence AI search and response generation for future queries.",'js-support-ticket')); ?>">
-                                                <img alt = "<?php echo esc_attr(__('Info','js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/ticket-detail/info-icon.png" />
-                                            </span>
-                                        </div>
+                                        <?php /* One control that says what it does, the same one wp-admin
+                                           draws. (Roadmap 6.0-AI-01, 4.5-FE-01)
+
+                                           Three buttons labelled Default, Enable and Disable, with the
+                                           explanation hidden inside an info icon, asked somebody to guess
+                                           what was being enabled and then hover to find out - and hover is
+                                           not a thing a phone has, which is where half of this workspace
+                                           is read. The words are the setting now, each option a sentence
+                                           about this ticket, and the note under it is the sentence that
+                                           was in the tooltip, said once and visible.
+
+                                           A select rather than buttons: one tab stop instead of three, the
+                                           chosen value announced to a screen reader without a role="group"
+                                           and an aria-label doing that by hand, and the native list on a
+                                           phone. */ ?>
+                                        <label class="js-ticket-ai-mode-label" for="js-ticket-ai-ticket-mode"><?php
+                                            echo esc_html__('AI suggestions from this ticket', 'js-support-ticket'); ?></label>
                                     </div>
                                 </div>
-                                
-                                <div class="js-tkt-det-tkt-prty-txt js-ticket-segmented-control-wrp">
-                                    <div id="js-ticket-ai-reply-status-control" class="js-ticket-segmented-control">
-                                        <button type="button" class="js-ticket-segmented-control-option js-ticket-default <?php echo ( absint( jssupportticket::$jsst_data[0]->aireplymode ) === 0 ) ? 'active' : ''; ?>" data-value="0" data-type="ticket" data-id="<?php echo esc_attr( jssupportticket::$jsst_data[0]->id ); ?>" title="<?php echo esc_attr(__( "Default: ticket and replies included in all AI queries.", "js-support-ticket" ) ); ?>">
-                                            <?php echo esc_html__('Default', 'js-support-ticket'); ?>
-                                        </button>
-                                        <button data-type="ticket" type="button" class="js-ticket-segmented-control-option js-ticket-enable <?php echo ( absint( jssupportticket::$jsst_data[0]->aireplymode ) === 1 ) ? 'active' : ''; ?>" data-value="1" data-type="ticket" data-id="<?php echo esc_attr( jssupportticket::$jsst_data[0]->id ); ?>" title="<?php echo esc_attr(__( "Enable: ticket and replies used only when the “Enable Tickets” filter is active.", "js-support-ticket" ) ); ?>">
-                                            <?php echo esc_html__('Enable', 'js-support-ticket'); ?>
-                                        </button>
-                                        <button data-type="ticket" type="button" class="js-ticket-segmented-control-option js-ticket-disable <?php echo ( absint( jssupportticket::$jsst_data[0]->aireplymode ) === 2 ) ? 'active' : ''; ?>" data-value="2" data-type="ticket" data-id="<?php echo esc_attr( jssupportticket::$jsst_data[0]->id ); ?>" title="<?php echo esc_attr(__( "Disable: ticket and replies excluded from AI queries.", "js-support-ticket" ) ); ?>">
-                                            <?php echo esc_html__('Disable', 'js-support-ticket'); ?>
-                                        </button>
-                                    </div>
+
+                                <div class="js-tkt-det-tkt-prty-txt js-ticket-ai-reply-status-wrapper">
+                                    <select id="js-ticket-ai-ticket-mode" class="js-ticket-ai-mode-select"
+                                            data-type="ticket" data-id="<?php echo esc_attr(jssupportticket::$jsst_data[0]->id); ?>">
+                                        <option value="0" <?php selected((int) jssupportticket::$jsst_data[0]->aireplymode, 0); ?>><?php
+                                            echo esc_html__('Use it when it matches', 'js-support-ticket'); ?></option>
+                                        <option value="1" <?php selected((int) jssupportticket::$jsst_data[0]->aireplymode, 1); ?>><?php
+                                            echo esc_html__('Prefer it — a good example', 'js-support-ticket'); ?></option>
+                                        <option value="2" <?php selected((int) jssupportticket::$jsst_data[0]->aireplymode, 2); ?>><?php
+                                            echo esc_html__('Never use it', 'js-support-ticket'); ?></option>
+                                    </select>
+                                    <p class="js-ticket-ai-mode-note"><?php echo esc_html__('Whether this ticket and its replies may be offered as examples when answering a similar ticket. Nothing leaves your site.', 'js-support-ticket'); ?></p>
                                 </div>
                             </div>
                             <?php
@@ -3278,26 +3561,20 @@ if (jssupportticket::$_config['offline'] == 2) {
                                                 <div class="js-tkt-wc-order-item-value"><?php echo esc_html($jsst_paidsupport['itemname']); ?></div>
                                             </div>
                                             <div class="js-tkt-wc-order-item">
-                                                <div class="js-tkt-wc-order-item-title"><?php echo esc_html(__("Total Tickets",'js-support-ticket')); ?>:</div>
-                                                <div class="js-tkt-wc-order-item-value">
-                                                    <?php 
-                                                        if($jsst_paidsupport['totalticket']==-1){
-                                                            echo esc_html(__("Unlimited",'js-support-ticket'));
-                                                        } else {
-                                                            echo esc_html($jsst_paidsupport['totalticket']);
-                                                        }
-                                                    ?>
-                                                    </div>
-                                            </div>
-                                            <div class="js-tkt-wc-order-item">
-                                                <div class="js-tkt-wc-order-item-title"><?php echo esc_html(__("Remaining Tickets",'js-support-ticket')); ?>:</div>
+                                                <div class="js-tkt-wc-order-item-title"><?php echo esc_html(__("Credits left",'js-support-ticket')); ?>:</div>
                                                 <div class="js-tkt-wc-order-item-value">
                                                     <?php
-                                                        if($jsst_paidsupport['totalticket']==-1){
-                                                            echo esc_html(__("Unlimited",'js-support-ticket'));
-                                                        } else {
-                                                            echo esc_html($jsst_paidsupport['remainingticket']);
-                                                        }
+                                                    /* The customer's balance from the credits ledger - the
+                                                       number the new-ticket form shows them - rather than
+                                                       this order line's own old counter, which the two
+                                                       would disagree with. */
+                                                    if ($jsst_paidsupport['totalticket']==-1) {
+                                                        echo esc_html(__("Unlimited",'js-support-ticket'));
+                                                    } elseif (class_exists('JSSTsupportcredits')) {
+                                                        echo esc_html(number_format_i18n(JSSTsupportcredits::credits(jssupportticket::$jsst_data[0]->email)));
+                                                    } else {
+                                                        echo esc_html($jsst_paidsupport['remainingticket']);
+                                                    }
                                                     ?>
                                                 </div>
                                             </div>
@@ -3380,6 +3657,14 @@ if (jssupportticket::$_config['offline'] == 2) {
                                 <?php
                             }
                         }
+                        ?>
+                        <?php
+                        /* The same place on the other desk. The panel drawn
+                           here decides for itself whether whoever is looking is
+                           an agent - this template is also the customer's own
+                           view of their ticket, and a company supervisor's view
+                           of a colleague's. (Roadmap 5.5-COM-01) */
+                        JSSTincluder::prunedAction('jsst_after_ticket_details', jssupportticket::$jsst_data[0]);
                         ?>
                         <?php apply_filters('js_support_ticket_admin_details_right_last', jssupportticket::$jsst_data[0]->id); ?>
                     </div>

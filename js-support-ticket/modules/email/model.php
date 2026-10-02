@@ -33,7 +33,7 @@ class JSSTemailModel {
         $jsst_pageid = jssupportticket::getPageid();
 		$jsst_adminEmailid = jssupportticket::$_config['default_admin_email'];
 		$jsst_adminEmail = $this->getEmailById($jsst_adminEmailid);
-		
+
         switch ($jsst_mailfor) {
             case 1: // Mail For Tickets
                 switch ($jsst_action) {
@@ -1874,6 +1874,7 @@ class JSSTemailModel {
                 }
                 break;
         }
+
     }
 
 
@@ -1945,6 +1946,21 @@ class JSSTemailModel {
             return;
         }
 
+        $jsst_attachments = $this->usableAttachments($jsst_attachments);
+
+        /* Around both send paths, so anything that needs to know this
+           particular message is the help desk's own can find out.
+
+           Announced here rather than left to a wp_mail filter to work out for
+           itself, and for exactly the reason the from-address is decided here:
+           a listener on wp_mail cannot tell a ticket notification from a
+           password reset or an order receipt, and one that guessed would be
+           stamping headers on to every message the whole site sends. Email
+           Inbox 2.0 uses this to stamp a Message-ID it can thread a reply on,
+           and to mark the message as ours so it is recognised as a loop if it
+           ever comes back round. (Roadmap 5.5-CH-01, 4.5-FE-09) */
+        do_action('jsst_email_sending', $jsst_action, $jsst_actionfor);
+
         $jsst_enablesmtp = $this->checkSMTPEnableOrDisable($jsst_senderEmail);
         if ($jsst_enablesmtp) {
             $this->sendSMTPmail($jsst_recevierEmail, $jsst_subject, $jsst_body, $jsst_senderEmail, $jsst_senderName, $jsst_attachments, $jsst_action, $jsst_actionfor);
@@ -1952,6 +1968,46 @@ class JSSTemailModel {
             $this->sendEmailDefault($jsst_recevierEmail, $jsst_subject, $jsst_body, $jsst_senderEmail, $jsst_senderName, $jsst_attachments, $jsst_action, $jsst_actionfor);
         }
 
+        do_action('jsst_email_sent', $jsst_action, $jsst_actionfor);
+    }
+
+    /**
+     * Attachments as the mailer can use them: an array of files that exist.
+     *
+     * Every notification here passes '' for "no attachments". wp_mail() turns a
+     * string into a list by splitting it on new lines, so '' became array('')
+     * - one attachment with no name. WordPress's own wp_mail() catches the
+     * error that raises and sends anyway; FluentSMTP replaces wp_mail() and
+     * does not, so every help desk notification failed with "Could not access
+     * file:" while Retry from its log, which rebuilds the message without the
+     * empty entry, went through (live, 1 October 2026). Mail used to leave
+     * through the old SMTP add-on's own mailer, which never met this.
+     *
+     * Kept: every name that is a readable file. Dropped: empty names and files
+     * that are not there - a missing attachment loses the attachment, never
+     * the whole message.
+     *
+     * @param mixed $jsst_attachments '', a newline-separated string, or an array.
+     * @return array
+     */
+    private function usableAttachments($jsst_attachments) {
+        if (!is_array($jsst_attachments)) {
+            $jsst_attachments = explode("\n", str_replace("\r\n", "\n", (string) $jsst_attachments));
+        }
+        $jsst_usable = array();
+        foreach ($jsst_attachments as $jsst_name => $jsst_file) {
+            $jsst_file = is_string($jsst_file) ? trim($jsst_file) : '';
+            if ('' === $jsst_file || !is_readable($jsst_file)) {
+                continue;
+            }
+            /* wp_mail() reads a string key as the name to attach the file as. */
+            if (is_string($jsst_name) && '' !== $jsst_name) {
+                $jsst_usable[$jsst_name] = $jsst_file;
+            } else {
+                $jsst_usable[] = $jsst_file;
+            }
+        }
+        return $jsst_usable;
     }
 
     private function sendEmailDefault($jsst_recevierEmail, $jsst_subject, $jsst_body, $jsst_senderEmail, $jsst_senderName, $jsst_attachments, $jsst_action, $jsst_actionfor) {
@@ -1985,7 +2041,31 @@ class JSSTemailModel {
         }
         if (!$jsst_senderName)
             $jsst_senderName = jssupportticket::$_config['title'];
+        /* Who this plugin's mail comes from. Asked here, at the one point this
+           plugin sends, rather than through wp_mail_from - which would rebrand
+           every password reset and order receipt the site sends, from a plugin
+           somebody installed to answer support tickets. An unconfigured site
+           gets back exactly what it passed in. (Roadmap 4.5-FE-09) */
+        $jsst_identity = apply_filters('jsst_email_identity', array(
+            'name'    => $jsst_senderName,
+            'email'   => $jsst_senderEmail,
+            'replyto' => '',
+        ), array('action' => $jsst_action, 'actionfor' => $jsst_actionfor));
+        if (!empty($jsst_identity['name'])) {
+            $jsst_senderName = $jsst_identity['name'];
+        }
+        if (!empty($jsst_identity['email']) && is_email($jsst_identity['email'])) {
+            $jsst_senderEmail = $jsst_identity['email'];
+        }
         $jsst_headers[] = 'From: ' . $jsst_senderName . ' <' . $jsst_senderEmail . '>' . "\r\n";
+        if (!empty($jsst_identity['replyto']) && is_email($jsst_identity['replyto'])) {
+            /* A reply-to only where one was asked for: adding one that equals
+               the From address is noise that some clients render as a second
+               sender. */
+            if ($jsst_identity['replyto'] !== $jsst_senderEmail) {
+                $jsst_headers[] = 'Reply-To: ' . $jsst_identity['replyto'] . "\r\n";
+            }
+        }
         $jsst_headers = apply_filters('jsst_emailcc_send_email_to_cc' , $jsst_headers , $jsst_actionfor); // eg $jsst_actionfor = ticket-new
         add_filter('wp_mail_content_type', array($this,'jsst_set_html_content_type'));
         // $jsst_body = jssupportticketphplib::JSST_preg_replace('/\r?\n|\r/', '<br/>', $jsst_body);
@@ -2060,7 +2140,7 @@ class JSSTemailModel {
         );
     }
 
-    private function getDefaultSenderEmailAndName() {
+    public function getDefaultSenderEmailAndName() {
         $jsst_emailid = jssupportticket::$_config['default_alert_email'];
         if(!is_numeric($jsst_emailid)) return false;
         $jsst_query = jssupportticket::$_db->prepare("SELECT email,name FROM `" . jssupportticket::$_db->prefix . "js_ticket_email` WHERE id = %d", $jsst_emailid);
@@ -2315,7 +2395,7 @@ class JSSTemailModel {
         }
         $jsst_nonce = JSSTrequest::getVar('_wpnonce');
         if (! wp_verify_nonce( $jsst_nonce, 'send-test-email') ) {
-            die( 'Security check Failed' );
+            die( esc_html__( 'Security check Failed', 'js-support-ticket' ) );
         }
         $jsst_hosttype = JSSTrequest::getVar('hosttype');
         $jsst_hostname = JSSTrequest::getVar('hostname');
@@ -2366,7 +2446,7 @@ class JSSTemailModel {
     function getAdminSearchFormDataEmails(){
         $jsst_nonce = JSSTrequest::getVar('_wpnonce');
         if (! wp_verify_nonce( $jsst_nonce, 'emails') ) {
-            die( 'Security check Failed' );
+            die( esc_html__( 'Security check Failed', 'js-support-ticket' ) );
         }
         $jsst_search_array = array();
         $jsst_search_array['email'] = JSSTrequest::getVar('email');

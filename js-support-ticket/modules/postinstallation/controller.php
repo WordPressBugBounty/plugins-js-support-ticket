@@ -39,7 +39,8 @@ class JSSTpostinstallationController {
                     jssupportticket::$jsst_data['flag'] = JSSTrequest::getVar('flag');
                 break;
                 case 'admin_translationoption':
-                    jssupportticket::$jsst_data[0]['jstran'] = JSSTincluder::getJSModel('jssupportticket')->getInstalledTranslationKey();
+                    // This site's language, when its translation is not installed yet. (1 Oct 2026)
+                    jssupportticket::$jsst_data[0]['jstran'] = class_exists('JSSTtranslations') ? JSSTtranslations::siteLanguagePending() : null;
                     if(!jssupportticket::$jsst_data[0]['jstran']){
                         if(!in_array('feedback', jssupportticket::$_active_addons)){// to handle show hide of feed back settings.
                             $jsst_layout = 'admin_settingcomplete';
@@ -87,7 +88,7 @@ class JSSTpostinstallationController {
     static function createportalpage(){
         $jsst_nonce = JSSTrequest::getVar('_wpnonce');
         if (! wp_verify_nonce( $jsst_nonce, 'jsst-setup-createportalpage') ) {
-            die( 'Security check Failed' );
+            die( esc_html__( 'Security check Failed', 'js-support-ticket' ) );
         }
         if (!current_user_can('manage_options')) {
             JSSTmessage::setMessage(esc_html(__('You are not allowed to do this', 'js-support-ticket')), 'error', 'agent-permissions');
@@ -113,7 +114,7 @@ class JSSTpostinstallationController {
     static function dismisssetup(){
         $jsst_nonce = JSSTrequest::getVar('_wpnonce');
         if (! wp_verify_nonce( $jsst_nonce, 'jsst-setup-dismiss') ) {
-            die( 'Security check Failed' );
+            die( esc_html__( 'Security check Failed', 'js-support-ticket' ) );
         }
         if (current_user_can('manage_options')) {
             if (class_exists('JSSTsetup')) { JSSTsetup::dismiss(); }
@@ -128,7 +129,7 @@ class JSSTpostinstallationController {
         }
         $jsst_nonce = JSSTrequest::getVar('_wpnonce');
         if (! wp_verify_nonce( $jsst_nonce, 'save') ) {
-            die( 'Security check Failed' );
+            die( esc_html__( 'Security check Failed', 'js-support-ticket' ) );
         }
         $jsst_data = JSSTrequest::get('post');
         if($jsst_data['step'] != 'translationoption'){
@@ -155,7 +156,7 @@ class JSSTpostinstallationController {
         }
         $jsst_nonce = JSSTrequest::getVar('_wpnonce');
         if (! wp_verify_nonce( $jsst_nonce, 'savesampledata') ) {
-            die( 'Security check Failed' );
+            die( esc_html__( 'Security check Failed', 'js-support-ticket' ) );
         }
         $jsst_data = JSSTrequest::get('post');
         $jsst_sampledata = $jsst_data['sampledata'];

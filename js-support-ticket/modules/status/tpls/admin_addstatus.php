@@ -1,8 +1,7 @@
 <?php
    if(!defined('ABSPATH'))
     die('Restricted Access');
-?>
-<?php
+
 wp_enqueue_script('iris');
 $jsst_jssupportticket_js ="
     jQuery(document).ready(function () {
@@ -10,140 +9,107 @@ $jsst_jssupportticket_js ="
     });
 ";
 wp_add_inline_script('js-support-ticket-main-js',$jsst_jssupportticket_js);
+$jsst_s        = isset(jssupportticket::$jsst_data[0]) ? jssupportticket::$jsst_data[0] : false;
+$jsst_isedit   = !empty($jsst_s->id);
+$jsst_heading  = $jsst_isedit ? __('Edit Ticket Status', 'js-support-ticket') : __('Add Ticket Status', 'js-support-ticket');
+$jsst_nonce_id = isset($jsst_s->id) ? $jsst_s->id : '';
+$jsst_colour   = !empty($jsst_s->statuscolour) ? $jsst_s->statuscolour : '';
+$jsst_bgcolour = !empty($jsst_s->statusbgcolour) ? $jsst_s->statusbgcolour : '';
 ?>
 <div id="jsstadmin-wrapper">
     <div id="jsstadmin-leftmenu">
         <?php  JSSTincluder::getClassesInclude('jsstadminsidemenu'); ?>
     </div>
     <div id="jsstadmin-data">
-        <div id="jsstadmin-wrapper-top">
-            <div id="jsstadmin-wrapper-top-left">
-                <div id="jsstadmin-breadcrunbs">
-                    <ul>
-                        <li><a href="?page=jssupportticket" title="<?php echo esc_attr(__('Dashboard','js-support-ticket')); ?>"><?php echo esc_html(__('Dashboard','js-support-ticket')); ?></a></li>
-                        <li><?php echo esc_html(__('Add Ticket Status','js-support-ticket')); ?></li>
-                    </ul>
-                </div>
-            </div>
-            <div id="jsstadmin-wrapper-top-right">
-                <div id="jsstadmin-config-btn">
-                    <a title="<?php echo esc_attr(__('Configuration','js-support-ticket')); ?>" href="<?php echo esc_url(admin_url("admin.php?page=configuration")); ?>">
-                        <img alt = "<?php echo esc_attr(__('Configuration','js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/config.png" />
-                    </a>
-                </div>
-                <div id="jsstadmin-config-btn" class="jssticketadmin-help-btn">
-                    <a href="<?php echo esc_url(admin_url("admin.php?page=jssupportticket&jstlay=help")); ?>" title="<?php echo esc_attr(__('Help','js-support-ticket')); ?>">
-                        <img alt = "<?php echo esc_attr(__('Help','js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/help.png" />
-                    </a>
-                </div>
-                <div id="jsstadmin-vers-txt">
-                    <?php echo esc_html(__("Version",'js-support-ticket')); ?>:
-                    <span class="jsstadmin-ver"><?php echo esc_html(JSSTincluder::getJSModel('configuration')->getConfigValue('versioncode')); ?></span>
-                </div>
-            </div>
-        </div>
-        <div id="jsstadmin-head">
-            <h1 class="jsstadmin-head-text"><?php echo esc_html(__('Add Ticket Status', 'js-support-ticket')); ?></h1>
-        </div>
+        <?php JSSTlayout::adminPageHeader(array(
+            'title'  => $jsst_heading,
+            'crumbs' => array(array('text' => __('Ticket Statuses', 'js-support-ticket'), 'url' => admin_url('admin.php?page=status&jstlay=statuses'))),
+        )); ?>
         <div id="jsstadmin-data-wrp">
-            <?php $jsst_nonce_id = isset(jssupportticket::$jsst_data[0]->id) ?jssupportticket::$jsst_data[0]->id :''; ?>
             <form class="jsstadmin-form" method="post" action="<?php echo esc_url(wp_nonce_url(admin_url("?page=status&task=savestatus"),"save-status-".$jsst_nonce_id)); ?>">
-                <div class="js-form-wrapper">
-                    <div class="js-form-title"><?php echo esc_html(__('Status', 'js-support-ticket')); ?>&nbsp;<span style="color: red;" >*</span></div>
-                    <div class="js-form-value"><?php echo wp_kses(JSSTformfield::text('status', isset(jssupportticket::$jsst_data[0]->status) ? jssupportticket::$jsst_data[0]->status : '', array('class' => 'inputbox js-form-input-field', 'data-validation' => 'required')), JSST_ALLOWED_TAGS) ?></div>
-                    <?php if(!empty(jssupportticket::$jsst_data[0]->custom_status)) { ?>
-                        <div class="js-form-desc">(<?php echo esc_html( jssupportticket::$jsst_data[0]->custom_status ); ?>)</div>
-                    <?php } ?>
-                </div>
-                <div class="js-form-wrapper">
-                    <div class="js-form-title"><?php echo esc_html(__('Text Color', 'js-support-ticket')); ?>&nbsp;<span style="color: red;" >*</span></div>
-                    <div class="js-form-value">
-                        <?php
-                        $jsst_style = '';
-                        if (!empty(jssupportticket::$jsst_data[0]->statuscolour)) {
-                            $jsst_style = "background:".jssupportticket::$jsst_data[0]->statuscolour;
-                        } ?>
-                        <span style="<?php echo esc_attr($jsst_style); ?>" class="js-form-statuscolor-wrp"></span>
-                        <?php echo wp_kses(JSSTformfield::text('statuscolor', isset(jssupportticket::$jsst_data[0]->statuscolour) ? jssupportticket::$jsst_data[0]->statuscolour : '', array('class' => 'inputbox js-form-input-field js-form-statuscolor-field', 'data-validation' => 'required', 'autocomplete' => 'off')), JSST_ALLOWED_TAGS); ?>
+                <div class="jsst-formpanel">
+                    <div class="jsst-formbody">
+                        <fieldset class="jsst-fieldset">
+                            <legend class="jsst-fieldset-legend"><?php echo esc_html(__('The status', 'js-support-ticket')); ?></legend>
+                            <div class="jsst-formgrid">
+                                <div class="jsst-frow jsst-frow-md">
+                                    <label class="jsst-flabel" for="status"><?php echo esc_html(__('Status', 'js-support-ticket')); ?> <span class="jsst-req">*</span></label>
+                                    <div class="jsst-fval"><?php echo wp_kses(JSSTformfield::text('status', isset($jsst_s->status) ? $jsst_s->status : '', array('data-validation' => 'required')), JSST_ALLOWED_TAGS) ?></div>
+                                    <?php if (!empty($jsst_s->custom_status)) { ?>
+                                        <p class="jsst-fhelp"><?php echo esc_html($jsst_s->custom_status); ?></p>
+                                    <?php } ?>
+                                </div>
+                            </div>
+                        </fieldset>
+                        <fieldset class="jsst-fieldset">
+                            <legend class="jsst-fieldset-legend"><?php echo esc_html(__('How it looks', 'js-support-ticket')); ?></legend>
+                            <div class="jsst-formgrid">
+                                <div class="jsst-frow jsst-frow-sm">
+                                    <label class="jsst-flabel" for="statuscolor"><?php echo esc_html(__('Text Color', 'js-support-ticket')); ?> <span class="jsst-req">*</span></label>
+                                    <div class="jsst-fval jsst-colour">
+                                        <span class="jsst-colour-chip js-form-statuscolor-wrp" style="<?php echo esc_attr($jsst_colour ? 'background:'.$jsst_colour : ''); ?>"></span>
+                                        <?php echo wp_kses(JSSTformfield::text('statuscolor', $jsst_colour, array('class' => 'jsst-colour-input', 'data-validation' => 'required', 'autocomplete' => 'off', 'placeholder' => '#FFFFFF')), JSST_ALLOWED_TAGS); ?>
+                                    </div>
+                                </div>
+                                <div class="jsst-frow jsst-frow-sm">
+                                    <label class="jsst-flabel" for="statusbgcolor"><?php echo esc_html(__('Background Color', 'js-support-ticket')); ?> <span class="jsst-req">*</span></label>
+                                    <div class="jsst-fval jsst-colour">
+                                        <span class="jsst-colour-chip js-form-statusbgcolor-wrp" style="<?php echo esc_attr($jsst_bgcolour ? 'background:'.$jsst_bgcolour : ''); ?>"></span>
+                                        <?php echo wp_kses(JSSTformfield::text('statusbgcolor', $jsst_bgcolour, array('class' => 'jsst-colour-input', 'data-validation' => 'required', 'autocomplete' => 'off', 'placeholder' => '#000000')), JSST_ALLOWED_TAGS); ?>
+                                    </div>
+                                </div>
+                                <div class="jsst-frow jsst-frow-sm">
+                                    <span class="jsst-flabel"><?php echo esc_html(__('Preview', 'js-support-ticket')); ?></span>
+                                    <div class="jsst-fval"><span class="jsst-chip js-form-status-preview" style="<?php echo esc_attr(($jsst_colour ? 'color:'.$jsst_colour.';' : '') . ($jsst_bgcolour ? 'background:'.$jsst_bgcolour.';border-color:'.$jsst_bgcolour : '')); ?>"><?php echo esc_html(isset($jsst_s->status) && $jsst_s->status !== '' ? jssupportticket::JSST_getVarValue($jsst_s->status) : __('Status', 'js-support-ticket')); ?></span></div>
+                                    <p class="jsst-fhelp"><?php echo esc_html(__('Click a swatch to pick a colour.', 'js-support-ticket')); ?></p>
+                                </div>
+                            </div>
+                        </fieldset>
                     </div>
-                    <?php if(!empty(jssupportticket::$jsst_data[0]->custom_status)) { ?>
-                        <div class="js-form-desc js-form-status-desc"></div>
-                    <?php } ?>
-                </div>
-                <div class="js-form-wrapper">
-                    <div class="js-form-title"><?php echo esc_html(__('Background Color', 'js-support-ticket')); ?>&nbsp;<span style="color: red;" >*</span></div>
-                    <div class="js-form-value">
-                        <?php
-                        $jsst_style = '';
-                        if (!empty(jssupportticket::$jsst_data[0]->statusbgcolour)) {
-                            $jsst_style = "background:".jssupportticket::$jsst_data[0]->statusbgcolour;
-                        } ?>
-                        <span style="<?php echo esc_attr($jsst_style); ?>" class="js-form-statusbgcolor-wrp"></span>
-                        <?php echo wp_kses(JSSTformfield::text('statusbgcolor', isset(jssupportticket::$jsst_data[0]->statusbgcolour) ? jssupportticket::$jsst_data[0]->statusbgcolour : '', array('class' => 'inputbox js-form-input-field js-form-statuscolor-field', 'data-validation' => 'required', 'autocomplete' => 'off')), JSST_ALLOWED_TAGS); ?>
+                    <?php echo wp_kses(JSSTformfield::hidden('id', isset($jsst_s->id) ? $jsst_s->id : '' ), JSST_ALLOWED_TAGS); ?>
+                    <?php echo wp_kses(JSSTformfield::hidden('ordering', isset($jsst_s->ordering) ? $jsst_s->ordering : '' ), JSST_ALLOWED_TAGS); ?>
+                    <?php echo wp_kses(JSSTformfield::hidden('action', 'status_savestatus'), JSST_ALLOWED_TAGS); ?>
+                    <?php echo wp_kses(JSSTformfield::hidden('form_request', 'jssupportticket'), JSST_ALLOWED_TAGS); ?>
+                    <?php echo wp_kses(JSSTformfield::hidden('uid', JSSTincluder::getObjectClass('user')->uid()), JSST_ALLOWED_TAGS); ?>
+                    <div class="jsst-formfoot">
+                        <span class="jsst-formfoot-note"><?php echo esc_html(__('Required fields are marked', 'js-support-ticket')); ?> <span class="jsst-req" aria-hidden="true">*</span></span>
+                        <a class="jsst-btn" href="<?php echo esc_url(admin_url('admin.php?page=status&jstlay=statuses')); ?>"><?php echo esc_html(__('Cancel', 'js-support-ticket')); ?></a>
+                        <?php echo wp_kses(JSSTformfield::submitbutton('save', esc_html(__('Save Status', 'js-support-ticket')), array('class' => 'jsst-btn jsst-btn-primary')), JSST_ALLOWED_TAGS); ?>
                     </div>
-                </div>
-                <?php echo wp_kses(JSSTformfield::hidden('id', isset(jssupportticket::$jsst_data[0]->id) ? jssupportticket::$jsst_data[0]->id : '' ), JSST_ALLOWED_TAGS); ?>
-                <?php echo wp_kses(JSSTformfield::hidden('ordering', isset(jssupportticket::$jsst_data[0]->ordering) ? jssupportticket::$jsst_data[0]->ordering : '' ), JSST_ALLOWED_TAGS); ?>
-                <?php echo wp_kses(JSSTformfield::hidden('action', 'status_savestatus'), JSST_ALLOWED_TAGS); ?>
-                <?php echo wp_kses(JSSTformfield::hidden('form_request', 'jssupportticket'), JSST_ALLOWED_TAGS); ?>
-                <?php echo wp_kses(JSSTformfield::hidden('uid', JSSTincluder::getObjectClass('user')->uid()), JSST_ALLOWED_TAGS); ?>
-                <div class="js-form-button">
-                    <?php echo wp_kses(JSSTformfield::submitbutton('save', esc_html(__('Save Status', 'js-support-ticket')), array('class' => 'button js-form-save')), JSST_ALLOWED_TAGS); ?>
                 </div>
             </form>
         </div>
         <?php
         $jsst_jssupportticket_js ="
             jQuery(document).ready(function () {
-                jQuery('input#statuscolor').iris({
-                    color: jQuery('input#statuscolor').val(),
-                    onShow: function (colpkr) {
-                        jQuery(colpkr).fadeIn(500);
+                function jsstStatusPicker(field, swatch, prop) {
+                    jQuery('input#' + field).iris({
+                        color: jQuery('input#' + field).val(),
+                        change: function (c_event, ui) {
+                            var hex = ui.color.toString();
+                            jQuery(swatch).css('background', hex);
+                            jQuery('input#' + field).val(hex);
+                            jQuery('.js-form-status-preview').css(prop, hex);
+                            if (prop === 'background') {
+                                jQuery('.js-form-status-preview').css('border-color', hex);
+                            }
+                        }
+                    });
+                    jQuery('#' + field + ', ' + swatch).click(function () {
+                        jQuery('#statuscolor, #statusbgcolor').iris('hide');
+                        jQuery('#' + field).iris('show');
                         return false;
-                    },
-                    onHide: function (colpkr) {
-                        jQuery(colpkr).fadeOut(500);
-                        return false;
-                    },
-                    change: function (c_event, ui) {
-                        hex = ui.color.toString();
-                        jQuery('.js-form-statuscolor-wrp').css( 'background', hex);
-                        jQuery('.js-form-statuscolor-wrp').css( 'border', '1px solid #ebecec');
-                        jQuery('input#statuscolor').css('backgroundColor', '#' + hex).val('#' + hex);
-                    }
-                });
-                jQuery('input#statusbgcolor').iris({
-                    color: jQuery('input#statusbgcolor').val(),
-                    onShow: function (colpkr) {
-                        jQuery(colpkr).fadeIn(500);
-                        return false;
-                    },
-                    onHide: function (colpkr) {
-                        jQuery(colpkr).fadeOut(500);
-                        return false;
-                    },
-                    change: function (c_event, ui) {
-                        hex = ui.color.toString();
-                        jQuery('.js-form-statusbgcolor-wrp').css( 'background', hex);
-                        jQuery('.js-form-statusbgcolor-wrp').css( 'border', '1px solid #ebecec');
-                        jQuery('input#statusbgcolor').css('backgroundColor', '#' + hex).val('#' + hex);
-                    }
+                    });
+                }
+                jsstStatusPicker('statuscolor', '.js-form-statuscolor-wrp', 'color');
+                jsstStatusPicker('statusbgcolor', '.js-form-statusbgcolor-wrp', 'background');
+                jQuery('input#status').on('input', function () {
+                    jQuery('.js-form-status-preview').text(jQuery(this).val() || '" . esc_js(__('Status', 'js-support-ticket')) . "');
                 });
                 jQuery(document).click(function (e) {
-                    if (!jQuery(e.target).is('.colour-picker, .iris-picker, .iris-picker-inner')) {
-                        jQuery('#statuscolor').iris('hide');
-                        jQuery('#statusbgcolor').iris('hide');
+                    if (!jQuery(e.target).is('.colour-picker, .iris-picker, .iris-picker-inner, .js-form-statuscolor-wrp, .js-form-statusbgcolor-wrp')) {
+                        jQuery('#statuscolor, #statusbgcolor').iris('hide');
                     }
-                });
-                jQuery('#statuscolor').click(function (event) {
-                    jQuery('#statuscolor').iris('hide');
-                    jQuery(this).iris('show');
-                    return false;
-                });
-                jQuery('#statusbgcolor').click(function (event) {
-                    jQuery('#statusbgcolor').iris('hide');
-                    jQuery(this).iris('show');
-                    return false;
                 });
             });
         ";

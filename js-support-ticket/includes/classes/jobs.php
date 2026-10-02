@@ -148,6 +148,15 @@ class JSSTjobs {
             self::$_available = false;
             return false;
         }
+        /* This runs on `shutdown`, which fires on every request that gets that
+           far - including ones where the plugin never finished booting and
+           never set its database handle. Asking a null for a table list is a
+           fatal in the last line of the request, which is the hardest kind to
+           trace back to its cause. No handle means no queue. */
+        if (!isset(jssupportticket::$_db) || !is_object(jssupportticket::$_db)) {
+            self::$_available = false;
+            return false;
+        }
         $jsst_table = self::table();
         $jsst_found = jssupportticket::$_db->get_var(jssupportticket::$_db->prepare('SHOW TABLES LIKE %s', $jsst_table));
         self::$_available = ($jsst_found === $jsst_table);
@@ -159,6 +168,16 @@ class JSSTjobs {
      * ------------------------------------------------------------------ */
 
     public static function registerHooks() {
+        /* The self-healing schema call this class was written around, which
+           nothing was actually making. `js_ticket_jobs` is in no SQL file and
+           not in activation.php, so on a site that has never had the table the
+           queue silently did not exist - and enqueue() answers a missing table
+           by returning 0 without a word. That is not a slower fallback, it is
+           work disappearing: a webhook delivery written as pending and never
+           sent, and an automation rule waiting on a delay that never resumes.
+           On admin_init so it costs one cheap check on admin pages and nothing
+           at all on the front end. (Roadmap 5.0-API-04) */
+        add_action('admin_init', array(__CLASS__, 'ensureSchema'), 1);
         add_filter('cron_schedules', array(__CLASS__, 'addInterval'));
         add_action('init', array(__CLASS__, 'scheduleRunner'));
         add_action(self::RUNNER_HOOK, array(__CLASS__, 'run'));
@@ -169,9 +188,17 @@ class JSSTjobs {
 
     public static function addInterval($jsst_schedules) {
         if (!isset($jsst_schedules['jsst_minute'])) {
+            /* Translated only once translations may load. A plugin that
+               schedules an event while plugins are still loading makes
+               WordPress read this list before init, and translating then
+               prints "_load_textdomain_just_in_time was called incorrectly" -
+               seen on the first page after installing Agents & Teams
+               (2 Oct 2026). The label is only shown by cron tools. */
             $jsst_schedules['jsst_minute'] = array(
                 'interval' => 60,
-                'display'  => esc_html(__('Every minute (JS Help Desk queue)', 'js-support-ticket')),
+                'display'  => did_action('after_setup_theme')
+                    ? esc_html(__('Every minute (JS Help Desk queue)', 'js-support-ticket'))
+                    : 'Every minute (JS Help Desk queue)',
             );
         }
         return $jsst_schedules;

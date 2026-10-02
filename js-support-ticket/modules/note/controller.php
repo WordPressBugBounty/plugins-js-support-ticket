@@ -46,7 +46,7 @@ class JSSTnoteController {
         $jsst_ticketid = JSSTrequest::getVar('ticketid');
         $jsst_nonce = JSSTrequest::getVar('_wpnonce');
         if (! wp_verify_nonce( $jsst_nonce, 'save-note-'.$jsst_ticketid) ) {
-            die( 'Security check Failed' );
+            die( esc_html__( 'Security check Failed', 'js-support-ticket' ) );
         }
         $jsst_data = JSSTrequest::get('post');
         $jsst_note = isset($jsst_data['internalnote']) ? $jsst_data['internalnote'] : '';
@@ -60,8 +60,21 @@ class JSSTnoteController {
         exit;
     }
 
+    /**
+     * Download a note's attachment. The link carries a nonce for this note, so
+     * it only works from the ticket screen it was rendered on, for the person
+     * it was rendered for; who may download at all is decided in the model.
+     */
     function downloadbyid(){
-        $jsst_id = JSSTrequest::getVar('id');
+        $jsst_id = absint(JSSTrequest::getVar('id'));
+        $jsst_nonce = JSSTrequest::getVar('_wpnonce');
+        if (! wp_verify_nonce( $jsst_nonce, 'download-note-attachment-'.$jsst_id) ) {
+            wp_die(
+                esc_html__('This download link has expired. Reload the ticket and try again.', 'js-support-ticket'),
+                esc_html__('Access Denied', 'js-support-ticket'),
+                array('response' => 403)
+            );
+        }
         JSSTincluder::getJSModel('note')->getDownloadAttachmentById($jsst_id);
     }
 
@@ -69,7 +82,7 @@ class JSSTnoteController {
         $jsst_data = JSSTrequest::get('post');
         $jsst_nonce = JSSTrequest::getVar('_wpnonce');
         if (! wp_verify_nonce( $jsst_nonce, 'save-edited-time-'.$jsst_data['note-tikcetid']) ) {
-            die( 'Security check Failed' );
+            die( esc_html__( 'Security check Failed', 'js-support-ticket' ) );
         }
         JSSTincluder::getJSModel('note')->editTime($jsst_data);
         // Where the agent was, not what the agent may do: an agent has

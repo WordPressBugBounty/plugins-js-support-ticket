@@ -28,25 +28,9 @@ $jsst_listurl    = admin_url('admin.php?page=thirdpartyimport&jstlay=migrationpr
         <?php JSSTincluder::getClassesInclude('jsstadminsidemenu'); ?>
     </div>
     <div id="jsstadmin-data">
-        <div id="jsstadmin-wrapper-top">
-            <div id="jsstadmin-wrapper-top-left">
-                <div id="jsstadmin-breadcrunbs">
-                    <ul>
-                        <li><a href="?page=jssupportticket" title="<?php echo esc_attr(__('Dashboard','js-support-ticket')); ?>"><?php echo esc_html(__('Dashboard','js-support-ticket')); ?></a></li>
-                        <li><?php echo esc_html(__('Import from Another Help Desk','js-support-ticket')); ?></li>
-                    </ul>
-                </div>
-            </div>
-            <div id="jsstadmin-wrapper-top-right">
-                <div id="jsstadmin-vers-txt">
-                    <?php echo esc_html(__("Version",'js-support-ticket')); ?>:
-                    <span class="jsstadmin-ver"><?php echo esc_html(JSSTincluder::getJSModel('configuration')->getConfigValue('versioncode')); ?></span>
-                </div>
-            </div>
-        </div>
-        <div id="jsstadmin-head">
-            <h1 class="jsstadmin-head-text"><?php echo esc_html(__('Import from Another Help Desk', 'js-support-ticket')); ?></h1>
-        </div>
+        <?php JSSTlayout::adminPageHeader(array(
+            'title'  => __('Import from Another Help Desk', 'js-support-ticket'),
+        )); ?>
         <div id="jsstadmin-data-wrp">
 
             <?php
@@ -62,7 +46,7 @@ $jsst_listurl    = admin_url('admin.php?page=thirdpartyimport&jstlay=migrationpr
                         $jsst_inprogress->started
                     )); ?></div>
                     <div class="jsst-migration-actions">
-                        <a class="button js-form-save" href="<?php echo esc_url(admin_url('admin.php?page=thirdpartyimport&jstlay=migrationresult&token=' . rawurlencode($jsst_inprogress->token))); ?>"><?php echo esc_html(__('See where it got to', 'js-support-ticket')); ?></a>
+                        <a class="jsst-btn jsst-btn-primary" href="<?php echo esc_url(admin_url('admin.php?page=thirdpartyimport&jstlay=migrationresult&token=' . rawurlencode($jsst_inprogress->token))); ?>"><?php echo esc_html(__('See where it got to', 'js-support-ticket')); ?></a>
                     </div>
                 </div>
             <?php }
@@ -174,7 +158,7 @@ $jsst_listurl    = admin_url('admin.php?page=thirdpartyimport&jstlay=migrationpr
                         <?php if ($jsst_inprogress) { ?>
                             <span class="jsst-status-correlation"><?php echo esc_html(__('Another import has to finish first.', 'js-support-ticket')); ?></span>
                         <?php } else { ?>
-                            <a class="button js-form-save" href="<?php echo esc_url(wp_nonce_url(admin_url('admin.php?page=thirdpartyimport&task=startmigration&action=jstask&source=' . rawurlencode($jsst_source)), 'jsst-migration-start')); ?>"><?php echo esc_html(sprintf(
+                            <a class="jsst-btn jsst-btn-primary" href="<?php echo esc_url(wp_nonce_url(admin_url('admin.php?page=thirdpartyimport&task=startmigration&action=jstask&source=' . rawurlencode($jsst_source)), 'jsst-migration-start')); ?>"><?php echo esc_html(sprintf(
                                 /* translators: %s: the source help desk */
                                 __('Import from %s', 'js-support-ticket'),
                                 $jsst_report['label']

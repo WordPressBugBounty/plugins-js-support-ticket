@@ -1,3 +1,28 @@
+/* ============================================================================
+   Design tokens, portal side. (Roadmap 4.0-UX-06, 4.0-UX-08)
+
+   The same names as the admin stylesheet, so a component that exists in both
+   desks asks for the same thing in both. The two greys are the accessible
+   values: the ones they replace measured 3.1:1 and 4.5:1 against these
+   surfaces, which fails WCAG AA for the small print they are used for - and on
+   the portal that small print is read by customers, not only by staff.
+   ========================================================================= */
+:root {
+    --jsst-ink: #23282d;
+    --jsst-muted: #6b747c;
+    --jsst-faint: #6f7474;
+    --jsst-label: #606262;
+    --jsst-canvas: #ffffff;
+    --jsst-surface: #f8fafc;
+    --jsst-tint: #fbfbfb;
+    --jsst-line: #e2e4e6;
+    --jsst-hair: #f4f5f6;
+    --jsst-accent: #4f46e5;
+    --jsst-radius: 2px;
+    --jsst-radius-card: 0;
+    --jsst-control-touch: 44px;
+}
+
 /* bootstrap css */
 *[id^="js"],*[class^="js"],*[id^="js"],*[class^="js"]
 ,*[id^="js"] *,*[class^="js"] *{-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box}
@@ -28,7 +53,7 @@ div.js-ticket-fields-wrp div.js-ticket-form-field input.js-ticket-field-input, s
 .jsst-main-up-wrapper .js-ticket-visible{display: none;}
 .js-form-ticket-readonly {pointer-events: none !important; opacity: 0.7;}
 select::-ms-expand { display: none; }
-.jsst-main-up-wrapper .js-col-xs-12.js-ticket-wrapper{padding-left: 0px;padding-right: 0px;}
+.jsst-main-up-wrapper .js-col-xs-12.js-ticket-wrapper{padding-left: 15px;padding-right: 15px;}
 .js-ticket-thread .js-ticket-thread-image img{position: unset;}
 /* General Classes */
 /* BreadCrumbs */
@@ -72,7 +97,7 @@ div.js-ticket-error-message-wrapper div.js-ticket-message-image-wrapper img{marg
 div.js-ticket-error-message-wrapper div.js-ticket-message-image-wrapper div.js-ticket-message-image{display: inline-block;max-width: 100%;}
 div.js-ticket-messages-data-wrapper{float: left;width: 100%;text-align: center;}
 div.js-ticket-messages-data-wrapper span.js-ticket-messages-main-text{display: inline-block; float: left;width: 100%;font-size: 24px;padding: 20px 0; color: #dc3545; font-weight: 600;}
-div.js-ticket-messages-data-wrapper span.js-ticket-messages-block_text{display: inline-block; float: left;width: 100%;font-size: 18px; color: #6c757d;}
+div.js-ticket-messages-data-wrapper span.js-ticket-messages-block_text{display: inline-block; float: left;width: 100%;font-size: 18px; color: var(--jsst-muted, #6b747c);}
 span.js-ticket-user-login-btn-wrp{float: left;width: 100%;text-align: center;padding: 30px;}
 span.js-ticket-user-login-btn-wrp a.js-ticket-login-btn{display: inline-block;margin-right: 20px;padding: 16px 30px;min-width: 160px;border-radius: 10px;line-height: initial;font-weight: 700;cursor: pointer;transition: all 0.3s ease;text-decoration: none;display: inline-block;letter-spacing: 0.5px;}
 span.js-ticket-user-login-btn-wrp a.js-ticket-login-btn:hover {transform: translateY(-3px);filter: brightness(1.1);}
@@ -87,7 +112,7 @@ div#jsst-widget-mailnotification-wrapper{display: block;width: 100%;float: left;
 div#jsst-widget-mailnotification-wrapper:hover { box-shadow: 0 4px 10px rgba(0,0,0,0.1);}
 div#jsst-widget-mailnotification-wrapper img{width:40px;max-height: 40px;float:left;margin-right: 15px; border-radius: 50%;}
 div#jsst-widget-mailnotification-wrapper span.jsst-widget-mailnotification-upper{display: block;width: 100%; margin-bottom: 5px;}
-div#jsst-widget-mailnotification-wrapper span.jsst-widget-mailnotification-upper span.jsst-widget-mailnotification-created{float: right;white-space: nowrap;text-overflow:ellipsis;overflow: hidden; color: #6c757d; font-size: 14px;}
+div#jsst-widget-mailnotification-wrapper span.jsst-widget-mailnotification-upper span.jsst-widget-mailnotification-created{float: right;white-space: nowrap;text-overflow:ellipsis;overflow: hidden; color: var(--jsst-muted, #6b747c); font-size: 14px;}
 div#jsst-widget-mailnotification-wrapper span.jsst-widget-mailnotification-upper span.jsst-widget-mailnotification-new{font-weight: bold; color: #007bff;}	
 div#jsst-widget-mailnotification-wrapper span.jsst-widget-mailnotification-upper span.jsst-widget-mailnotification-replied{font-weight: bold; color: #28a745;}	
 
@@ -132,7 +157,7 @@ div#jsst-widget-myticket-wrapper.vertical div.jsst-widget-myticket-topbar span.j
 div#jsst-widget-myticket-wrapper div.jsst-widget-myticket-bottombar{display: flex; justify-content: space-between; align-items: center; width: 100%;float:left;}
 div#jsst-widget-myticket-wrapper div.jsst-widget-myticket-bottombar span.jsst-widget-myticket-priority{display: inline-block; padding:4px 15px;float:left;margin-right:20px;white-space: nowrap;text-overflow:ellipsis;text-align: center;overflow: hidden; border-radius: 20px; font-size: 12px;}
 div#jsst-widget-myticket-wrapper.vertical div.jsst-widget-myticket-bottombar span.jsst-widget-myticket-priority{margin-right:10px;}
-div#jsst-widget-myticket-wrapper div.jsst-widget-myticket-bottombar span.jsst-widget-myticket-from{display: block;min-width: 100px;float:left;white-space: nowrap;text-overflow:ellipsis;overflow: hidden; color: #6c757d; font-size: 14px;}
+div#jsst-widget-myticket-wrapper div.jsst-widget-myticket-bottombar span.jsst-widget-myticket-from{display: block;min-width: 100px;float:left;white-space: nowrap;text-overflow:ellipsis;overflow: hidden; color: var(--jsst-muted, #6b747c); font-size: 14px;}
 div#jsst-widget-myticket-wrapper div.jsst-widget-myticket-bottombar span.jsst-widget-myticket-from span.widget-from{}
 div#jsst-widget-myticket-wrapper div.jsst-widget-myticket-bottombar span.jsst-widget-myticket-from span.widget-fromname{}
 
@@ -172,7 +197,7 @@ div.js-ticket-radio-box input.js-ticket-radio-btn{margin-right: 8px;vertical-ali
 div.js-ticket-radio-box label{display: inline-block;margin:0px;vertical-align: middle;}
 span.js-attachment-file-box{float: left;width:100%; padding: 10px;position: relative;display:flex;align-items: center; min-height:52px;border-radius: 8px; background-color: #f8f9fa;}
 div.js-ticket-add-form-wrapper div.js-ticket-from-field-wrp{position: relative; margin-bottom: 25px;}
-span.jsst-help-block {font-size: 15px;position: relative;bottom: 7px;width: 100%;left: 0; color: #6c757d;}
+span.jsst-help-block {font-size: 15px;position: relative;bottom: 7px;width: 100%;left: 0; color: var(--jsst-muted, #6b747c);}
 select.js-ticket-select-field, select.js-ticket-premade-select{padding: 12px 15px; border-radius: 8px;}
 div.js-ticket-premade-msg-wrp div.js-ticket-premade-field-wrp select#departmentid,
 div.js-ticket-premade-msg-wrp div.js-ticket-premade-field-wrp select#staffid{padding: 12px 15px; border-radius: 8px;}
@@ -196,7 +221,7 @@ div.js-ticket-mails-btn-wrp div.js-ticket-mail-btn a.js-add-link{display: inline
 .js-ticket-wc-order-box{padding:25px; background-color: #f8f9fa; border-radius: 12px;}
 .js-ticket-wc-order-box .js-ticket-wc-order-item{display: inline-block;width: 50%;float:left;margin-bottom: 12px; font-size: 16px;}
 .js-ticket-wc-order-box .js-ticket-wc-order-item .js-ticket-wc-order-item-title{display: inline-block;margin-right: 8px; font-weight: 600; color: #495057;}
-.js-ticket-wc-order-box .js-ticket-wc-order-item .js-ticket-wc-order-item-value{display: inline-block; color: #6c757d;}
+.js-ticket-wc-order-box .js-ticket-wc-order-item .js-ticket-wc-order-item-value{display: inline-block; color: var(--jsst-muted, #6b747c);}
 .js-ticket-wc-order-box .js-ticket-wc-order-link{display: inline-block;padding: 10px 20px;cursor: pointer;margin-bottom: 8px;min-width: 140px;text-align: center; background-color: #007bff; color: #fff; border-radius: 8px; text-decoration: none; transition: background-color 0.3s ease;}
 .js-ticket-wc-order-box .js-ticket-wc-order-link:hover { background-color: #0056b3;}
 
@@ -241,10 +266,10 @@ div#multiformpopup .multiformpopup-search form .multiformpopup-fields-wrp .multi
 div#multiformpopup .multiformpopup-search form .multiformpopup-fields-wrp .multiformpopup-btn-wrp input {float: left;padding: 10px 25px;border: 1px solid;margin: 10px 5px 0;cursor: pointer; border-radius: 8px; font-weight: 500;}
 div#multiformpopup .multiformpopup-search form .multiformpopup-fields-wrp .multiformpopup-btn-wrp .multiformpopup-search-btn {background: #007bff;border-color: #007bff;color: #fff;}
 div#multiformpopup .multiformpopup-search form .multiformpopup-fields-wrp .multiformpopup-btn-wrp .multiformpopup-search-btn:hover {background: #0056b3;border-color: #0056b3;color: #fff;}
-div#multiformpopup .multiformpopup-search form .multiformpopup-fields-wrp .multiformpopup-btn-wrp .multiformpopup-reset-btn {background: #6c757d;color: #fff;}
+div#multiformpopup .multiformpopup-search form .multiformpopup-fields-wrp .multiformpopup-btn-wrp .multiformpopup-reset-btn {background: var(--jsst-muted, #6b747c);color: #fff;}
 div#multiformpopup .multiformpopup-search form .multiformpopup-fields-wrp .multiformpopup-btn-wrp .multiformpopup-reset-btn:hover {background: #5a6268;border-color: #545b62;color: #fff;}
 div#multiformpopup #multiformpopup-records-wrp {float: left;width: 100%; padding: 20px;}
-div#multiformpopup #multiformpopup-records-wrp #multiformpopup-records .multiformpopup-records-desc {text-align: center;padding: 50px 15px;color: #6c757d; font-size: 18px;}
+div#multiformpopup #multiformpopup-records-wrp #multiformpopup-records .multiformpopup-records-desc {text-align: center;padding: 50px 15px;color: var(--jsst-muted, #6b747c); font-size: 18px;}
 div#multiformpopup div.jsst-multiformpopup-header {width:100%; font-size:21px;float:left;padding: 20px; font-weight: bold;line-height: initial;display: flex;margin-bottom: 15px;}
 div#multiformpopup div.jsst-multiformpopup-header .multiformpopup-header-text{font-size:21px;}
 div#multiformpopup div.multiformpopup-header-close-img {width: 28px;height: 28px;cursor: pointer;background-image: url('data:image/svg+xml,%3csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="%234b5563" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"%3e%3cline x1="18" y1="6" x2="6" y2="18"%3e%3c/line%3e%3cline x1="6" y1="6" x2="18" y2="18"%3e%3c/line%3e%3c/svg%3e') !important;background-repeat: no-repeat !important;background-position: center center !important;background-size: contain !important;transition: transform 0.3s ease-in-out;margin-left: auto;}
@@ -296,7 +321,7 @@ div.jsst-main-up-wrapper.jsst-widget-main-up-wrapper .jsst-main-down-wrapper .js
 div.jsst-main-up-wrapper.jsst-widget-main-up-wrapper .jsst-main-down-wrapper .js-ticket-body-padding .js-ticket-body-row-downloadicon img{max-width: 100%;max-height: 100%;width: 47px;}
 div.jsst-main-up-wrapper.jsst-widget-main-up-wrapper .jsst-main-down-wrapper{display: flex;flex-direction: column;gap:1rem;}
 /* ==== Auto Cleanup ==== */
-div.jsst-main-up-wrapper .jsst-attachment-purged {display: flex;align-items: flex-start;background-color: #f8f9fa;color: #6c757d;border: 1px dashed #ced4da;padding: 8px 12px;border-radius: 4px;margin-top: 5px;margin-bottom: 5px;font-size: 13px;line-height: 1.4;transition: background-color 0.2s ease;}
+div.jsst-main-up-wrapper .jsst-attachment-purged {display: flex;align-items: flex-start;background-color: #f8f9fa;color: var(--jsst-muted, #6b747c);border: 1px dashed #ced4da;padding: 8px 12px;border-radius: 4px;margin-top: 5px;margin-bottom: 5px;font-size: 13px;line-height: 1.4;transition: background-color 0.2s ease;}
 div.jsst-main-up-wrapper .jsst-attachment-purged:hover {background-color: #f1f3f5;}
 div.jsst-main-up-wrapper .jsst-attachment-purged .jsst-purged-icon {flex-shrink: 0;margin-right: 8px;margin-top: 2px;color: #dc3545;fill: currentColor;width: 16px;height: 16px;}
 div.jsst-main-up-wrapper .jsst-attachment-purged span {flex-grow: 1;}
@@ -344,4 +369,1351 @@ a.jsst-tag-chip:hover {background: #e0e7ff;color: #312e81;text-decoration: none;
 @media (max-width: 600px) {
     .jsst-placeholders .jsst-placeholder-list {grid-template-columns: 1fr;gap: 10px;}
     .jsst-placeholders .jsst-placeholder-list li {flex-wrap: wrap;gap: 4px 8px;}
+}
+
+/* --------------------------------------------------------------------------
+   The queue engine on the front-end desk: inboxes and the column picker.
+   (Roadmap 4.5-UX-01)
+
+   The same rules as the admin side: a margin fallback under every flex gap,
+   min-width: 0 on flex children holding text, borders rather than inset
+   shadows, and a list's own indent never relied on.
+
+   One difference from the admin side, and it is the reason these were reported
+   as looking wrong: the portal's type size belongs to the theme, and this
+   plugin already says so - div.jsst-main-up-wrapper input, button, select,
+   textarea are all font-size: inherit. A theme setting a 22px body therefore
+   gets 22px controls, and an 11px label written beside them reads as a
+   misprint. Text that is meant to be quieter is sized as a fraction of the
+   page here rather than in pixels, so it stays quieter without becoming
+   unreadable on a large-typed theme or illegible on a small-typed one.
+   -------------------------------------------------------------------------- */
+.jsst-queue-scopes {width: 100%;box-sizing: border-box;display: flex;flex-wrap: wrap;align-items: center;margin: 0 0 12px;}
+.jsst-queue-scopes-label {min-width: 0;margin: 0 10px 6px 0;font-size: 0.7em;font-weight: 600;text-transform: uppercase;letter-spacing: .06em;color: var(--jsst-faint, #6f7474);}
+.jsst-queue-scope {min-width: 0;margin: 0 8px 6px 0;padding: 7px 16px;background: #fff;border: 1px solid #e2e4e6;border-radius: 14px;line-height: 1.35;color: #606262;cursor: pointer;}
+.jsst-queue-scope:hover {border-color: #c9cbd6;color: #23282d;}
+.jsst-queue-scope-on {background: #4f46e5;border-color: #4f46e5;color: #fff;}
+.jsst-queue-scope-on:hover {color: #fff;}
+@supports (gap: 1px) {
+    .jsst-queue-scopes {gap: 8px;}
+    .jsst-queue-scopes-label, .jsst-queue-scope {margin: 0;}
+}
+
+details.jsst-queue-columns {width: 100%;box-sizing: border-box;margin: 0 0 14px;}
+details.jsst-queue-columns > summary {display: list-item;padding: 6px 0;font-size: 0.8em;font-weight: 600;color: #4f46e5;cursor: pointer;}
+details.jsst-queue-columns > form {box-sizing: border-box;margin-top: 6px;padding: 12px 14px;background: #fbfbfb;border: 1px solid #e2e4e6;border-radius: 6px;}
+.jsst-queue-columns-note {margin: 0 0 10px;font-size: 0.75em;line-height: 1.6;color: var(--jsst-faint, #6f7474);}
+/* Two owners, two groups. The heading is a span rather than a heading element
+   because it labels a set of ticks inside a form, not a section of the page.
+   (Roadmap 4.5-UX-01) */
+.jsst-queue-columns-group {margin: 0 0 12px;}
+.jsst-queue-columns-group:last-of-type {margin-bottom: 0;}
+.jsst-queue-columns-grouphead {display: block;margin: 0 0 8px;font-size: 0.7em;font-weight: 600;text-transform: uppercase;letter-spacing: .06em;color: var(--jsst-faint, #6f7474);}
+.jsst-queue-columns-list {display: flex;flex-wrap: wrap;margin: 0 0 10px;}
+.jsst-queue-column {flex: 0 1 auto;min-width: 0;display: flex;align-items: center;margin: 0 16px 8px 0;font-size: 0.8em;color: #23282d;}
+.jsst-queue-column input {margin: 0 6px 0 0;}
+.jsst-queue-column span {min-width: 0;overflow-wrap: break-word;}
+@supports (gap: 1px) {
+    .jsst-queue-columns-list {gap: 8px 16px;}
+    .jsst-queue-column {margin: 0;}
+}
+
+/* The bulk bar on the front-end desk. (Roadmap 4.5-UX-01)
+   Margins carry the spacing and gap only takes over where it is supported;
+   every child holding text or an input gets min-width: 0, or one engine
+   overflows the row and the other does not. */
+.jsst-bulk-bar {width: 100%;box-sizing: border-box;margin: 0 0 14px;padding: 10px 12px;background: #fbfbfb;border: 1px solid #e2e4e6;border-radius: 6px;}
+.jsst-bulk-bar.jsst-bulk-active {border-color: #4f46e5;}
+.jsst-bulk-row {display: flex;flex-wrap: wrap;align-items: center;}
+.jsst-bulk-row > * {min-width: 0;margin: 0 8px 6px 0;}
+@supports (gap: 1px) {
+    .jsst-bulk-row {gap: 8px;}
+    .jsst-bulk-row > * {margin: 0;}
+}
+.jsst-bulk-selectall {display: flex;align-items: center;min-width: 0;font-size: 13px;color: #606262;}
+.jsst-bulk-selectall input {margin: 0 6px 0 0;}
+.jsst-bulk-reason {flex: 1 1 240px;min-width: 160px;}
+.jsst-bulk-count {font-size: 12.5px;color: #4f46e5;}
+.jsst-bulk-pick {float: left;width: 100%;margin: 0 8px 0 0;}
+
+/* -----------------------------------------------------------------------------
+   The desk in the portal: navigation strip, home panels, customers.
+   (Roadmap 4.5-FE-02)
+
+   The same class names as the wp-admin stylesheet, because the markup is
+   printed once by JSSTnavigation and rendered in both workspaces; only the
+   colours differ, and the front end keeps the indigo the rest of the portal
+   uses. Margins carry the spacing with gap layered on top where it is
+   supported, and every flex child holding text or an input carries
+   min-width: 0 - the two rules this plugin's queue screens were rewritten for.
+   -------------------------------------------------------------------------- */
+/* Same reasoning as the admin strip: it brings its own background so a theme's
+   page colour cannot make the labels unreadable. (Roadmap 4.5-FE-02)
+
+   clear: both is load-bearing on the portal. Every portal layout that prints
+   this strip - the control panel, the workspace home, Customers and the agent
+   queue - opens with a floated header wrapper, and the strip's own list is a
+   flex container, which establishes a formatting context and is therefore laid
+   out beside a float rather than under it. Beside a float the width of the
+   page that leaves it 0px wide: the panel drew, the border drew, and the six
+   links stacked invisibly inside it. It read as an empty box at the top of
+   every one of those screens. */
+/* The hairline and the radius are the portal's own, measured off the queue
+   screen's panels rather than inherited from the admin stylesheet: every other
+   white box on these pages is 1px #d1d1d1 at 12px, and a strip sitting directly
+   above them at 1px #e2e4e6 with square corners is what made the desk screens
+   read as something bolted on. (Roadmap 4.5-FE-02) */
+.jsst-nav {clear: both;flex: 0 0 100%;width: 100%;box-sizing: border-box;margin: 0 0 16px;padding: 0 4px;
+    background: #fff;border: 1px solid #d1d1d1;
+    border-radius: 12px;}
+.jsst-nav-list {display: flex;flex-wrap: wrap;margin: 0;padding: 0;list-style: none;}
+.jsst-nav-item {flex: 0 0 auto;min-width: 0;margin: 0 4px 0 0;list-style: none;}
+.jsst-nav-item a {display: flex;align-items: center;min-width: 0;padding: 10px 15px;font-size: 14px;font-weight: 600;color: #606262;text-decoration: none;border-bottom: 3px solid transparent;box-shadow: none;}
+.jsst-nav-item a:hover, .jsst-nav-item a:focus {color: #23282d;background: #fbfbfb;}
+.jsst-nav-on a {color: #4f46e5;border-bottom-color: #4f46e5;}
+.jsst-nav-label {min-width: 0;overflow-wrap: break-word;}
+.jsst-nav-count {margin-left: 7px;padding: 1px 8px;font-size: 12px;font-weight: 600;color: #fff;background: #4f46e5;border-radius: 10px;}
+@supports (gap: 1px) {
+    .jsst-nav-list {gap: 0 4px;}
+    .jsst-nav-item {margin: 0;}
+}
+
+.jsst-desk {width: 100%;box-sizing: border-box;}
+.jsst-home {display: flex;flex-wrap: wrap;width: 100%;box-sizing: border-box;margin: 0 -8px;}
+.jsst-home-panel {flex: 1 1 320px;min-width: 0;box-sizing: border-box;margin: 0 8px 16px;padding: 18px 20px;background: #fff;border: 1px solid #e2e4e6;border-radius: 8px;}
+.jsst-home-head {margin: 0 0 12px;}
+.jsst-home-title {display: flex;align-items: center;margin: 0;font-size: 14px;font-weight: 700;text-transform: uppercase;letter-spacing: .05em;color: #23282d;}
+.jsst-home-count {margin-left: 8px;padding: 1px 9px;font-size: 12px;font-weight: 600;letter-spacing: 0;color: #606262;background: #f4f5f6;border-radius: 10px;}
+.jsst-home-detail {margin: 6px 0 0;font-size: 13px;line-height: 1.6;color: var(--jsst-faint, #6f7474);}
+.jsst-home-empty {margin: 0;font-size: 13.5px;line-height: 1.7;color: var(--jsst-faint, #6f7474);}
+.jsst-home-rows {margin: 0;padding: 0;list-style: none;}
+.jsst-home-row {margin: 0;padding: 10px 0 10px 11px;list-style: none;border-top: 1px solid #f4f5f6;border-left: 3px solid transparent;}
+.jsst-home-rows > li:first-child {border-top: 0;}
+.jsst-home-late {border-left-color: #b45309;}
+.jsst-home-subject {display: block;font-size: 14px;font-weight: 600;color: #23282d;text-decoration: none;overflow-wrap: break-word;box-shadow: none;}
+.jsst-home-subject:hover, .jsst-home-subject:focus {color: #4f46e5;}
+.jsst-home-ref {margin-right: 7px;font-weight: 400;color: var(--jsst-faint, #6f7474);}
+.jsst-home-meta {display: block;margin-top: 3px;font-size: 13px;line-height: 1.6;color: var(--jsst-faint, #6f7474);overflow-wrap: break-word;}
+.jsst-home-more {display: inline-block;margin-top: 12px;font-size: 13px;font-weight: 600;color: #4f46e5;text-decoration: none;box-shadow: none;}
+@supports (gap: 1px) {
+    .jsst-home {gap: 16px;margin: 0;}
+    .jsst-home-panel {margin: 0;}
+}
+
+.jsst-people {width: 100%;box-sizing: border-box;}
+.jsst-people-lede {margin: 0 0 14px;font-size: 14px;line-height: 1.7;color: #23282d;max-width: 62em;}
+.jsst-people-note {margin: 6px 0 12px;font-size: 13px;line-height: 1.65;color: var(--jsst-faint, #6f7474);max-width: 62em;}
+.jsst-people-group {margin: 26px 0 10px;font-size: 14px;font-weight: 700;text-transform: uppercase;letter-spacing: .06em;color: var(--jsst-faint, #6f7474);}
+.jsst-people-empty {margin: 0;font-size: 13.5px;color: var(--jsst-faint, #6f7474);}
+.jsst-people-search {display: flex;flex-wrap: wrap;align-items: center;margin: 0 0 6px;}
+.jsst-people-search > * {min-width: 0;margin: 0 8px 8px 0;}
+.jsst-people-label {font-size: 13px;font-weight: 600;color: #606262;}
+.jsst-people-search input[type="text"] {flex: 1 1 260px;min-width: 0;max-width: 380px;box-sizing: border-box;}
+.jsst-people-clear {font-size: 13px;color: var(--jsst-faint, #6f7474);text-decoration: none;}
+@supports (gap: 1px) {
+    .jsst-people-search {gap: 8px;}
+    .jsst-people-search > * {margin: 0;}
+}
+
+.jsst-people-companies {display: flex;flex-wrap: wrap;margin: 0;padding: 0;list-style: none;}
+.jsst-people-company {flex: 0 1 auto;min-width: 0;margin: 0 8px 8px 0;list-style: none;}
+.jsst-people-company a {display: block;min-width: 0;padding: 9px 13px;font-size: 13.5px;color: #23282d;text-decoration: none;background: #fbfbfb;border: 1px solid #e2e4e6;border-radius: 8px;box-shadow: none;}
+.jsst-people-company a:hover, .jsst-people-company a:focus {border-color: #4f46e5;}
+.jsst-people-company-on a {border-color: #4f46e5;background: #f5f4ff;}
+.jsst-people-domain {display: block;font-weight: 600;overflow-wrap: break-word;}
+.jsst-people-figures {display: block;margin-top: 2px;font-size: 12.5px;color: var(--jsst-faint, #6f7474);}
+@supports (gap: 1px) {
+    .jsst-people-companies {gap: 8px;}
+    .jsst-people-company {margin: 0;}
+}
+
+.jsst-people-wrap {width: 100%;box-sizing: border-box;overflow-x: auto;background: #fff;border: 1px solid #e2e4e6;border-radius: 8px;}
+.jsst-people-table {width: 100%;border-collapse: collapse;}
+.jsst-people-table th, .jsst-people-table td {padding: 11px 14px;text-align: left;vertical-align: top;font-size: 13.5px;color: #23282d;border-bottom: 1px solid #f4f5f6;}
+.jsst-people-table thead th {font-size: 12px;text-transform: uppercase;letter-spacing: .05em;color: var(--jsst-faint, #6f7474);background: #fafbfb;border-bottom: 1px solid #e2e4e6;white-space: nowrap;}
+.jsst-people-table tbody tr:last-child td, .jsst-people-table tbody tr:last-child th {border-bottom: 0;}
+.jsst-people-table tbody th {width: 40%;font-weight: 600;overflow-wrap: break-word;border-left: 3px solid transparent;}
+.jsst-people-on th:first-child {border-left-color: #4f46e5;}
+.jsst-people-email {display: block;margin-top: 2px;font-size: 12.5px;font-weight: 400;color: var(--jsst-faint, #6f7474);overflow-wrap: break-word;}
+.jsst-people-guest {margin-left: 6px;font-size: 12px;font-weight: 400;color: var(--jsst-faint, #6f7474);}
+.jsst-people-paging {display: flex;flex-wrap: wrap;align-items: center;margin: 10px 0 0;font-size: 13px;}
+.jsst-people-paging > * {min-width: 0;margin: 0 12px 0 0;}
+.jsst-people-of {color: var(--jsst-faint, #6f7474);}
+@supports (gap: 1px) {
+    .jsst-people-paging {gap: 12px;}
+    .jsst-people-paging > * {margin: 0;}
+}
+
+.jsst-people-history {margin: 0;padding: 0;list-style: none;}
+.jsst-people-history li {margin: 0;padding: 10px 0;list-style: none;border-top: 1px solid #f4f5f6;}
+.jsst-people-history li:first-child {border-top: 0;}
+.jsst-people-history a {font-size: 14px;font-weight: 600;color: #23282d;text-decoration: none;overflow-wrap: break-word;box-shadow: none;}
+.jsst-people-history a:hover, .jsst-people-history a:focus {color: #4f46e5;}
+.jsst-people-ref {margin-right: 7px;font-weight: 400;color: var(--jsst-faint, #6f7474);}
+.jsst-people-when {display: block;margin-top: 2px;font-size: 13px;color: var(--jsst-faint, #6f7474);}
+
+@media screen and (max-width: 782px) {
+    .jsst-home-panel {flex: 1 1 100%;}
+    .jsst-people-table th, .jsst-people-table td {padding: 9px 10px;}
+    .jsst-people-table tbody th {width: auto;}
+    .jsst-nav-item a {padding: 9px 11px;}
+}
+
+/* ============================================================================
+   Branding. (Roadmap 4.5-FE-09)
+
+   Two small things and one honest limit.
+
+   The tokens are published by JSSTbrand into the page head as custom
+   properties, so a site's colour is one value in one place rather than a
+   search-and-replace through this file. The rules below consume them with a
+   fallback, which means a browser that never receives them - or a site that
+   has set no colour - renders exactly as it did before.
+
+   The safe-layout scope fixes the handful of things a WordPress theme most
+   often breaks in a plugin's markup: box sizing, images with no max width, and
+   tables that push the page sideways. It is deliberately small and it is not
+   a substitute for 4.0-UX-06, which is still owed: this plugin still carries a
+   float-based layout and hundreds of !important declarations, and no scoped
+   container can undo that.
+   ========================================================================= */
+.jsst-brand-logo {max-width: 100%;max-height: 60px;height: auto;margin: 0 0 12px;}
+/* The same slot as the logo, for a desk that has a name but no logo file. The
+   tab icon becomes the mark beside the name where there is one, so the two
+   halves of an identity somebody has already given us are shown together
+   rather than one of them being thrown away. Inline-flex, not block, so it
+   inherits the container's centring exactly as the logo does - the two must
+   sit in the same place, because they are the same statement. */
+.jsst-brand-wordmark {display: inline-flex;align-items: center;gap: 10px;margin: 0 0 12px;
+    font-size: 20px;font-weight: 700;line-height: 1.25;color: var(--jsst-ink, #23282d);}
+.jsst-brand-mark {flex: 0 0 auto;width: 28px;height: 28px;object-fit: contain;}
+/* The brand is the way back to the front of the desk. Colour is inherited so a
+   linked wordmark is not suddenly the theme's link blue, and the underline is
+   kept off for the same reason. */
+.jsst-brand-link {display: inline-block;color: inherit;text-decoration: none;}
+.jsst-brand-link:hover, .jsst-brand-link:focus {color: inherit;text-decoration: none;opacity: .85;}
+.jsst-poweredby {margin: 18px 0 0;font-size: 12px;text-align: center;color: var(--jsst-faint, #6f7474);}
+.jsst-poweredby a {color: var(--jsst-faint, #6f7474);text-decoration: none;}
+.jsst-poweredby a:hover, .jsst-poweredby a:focus {text-decoration: underline;}
+
+.jsst-safe {box-sizing: border-box;min-width: 0;}
+.jsst-safe *, .jsst-safe *::before, .jsst-safe *::after {box-sizing: inherit;}
+.jsst-safe img {max-width: 100%;height: auto;}
+.jsst-safe table {max-width: 100%;}
+/* Wide content scrolls inside its own box rather than widening the page: a
+   theme with a narrow content column and a plugin with a twelve-column table
+   is the single most common way this looks broken. */
+.jsst-safe .jsst-scroll {width: 100%;overflow-x: auto;}
+
+/* The brand colour, where anything asks for it. Every use carries the value
+   the plugin used before as its fallback. */
+.jsst-brand-accent {color: var(--jsst-brand-accent, #4f6df5);}
+.jsst-brand-accent-bg {background: var(--jsst-brand-accent, #4f6df5);}
+.jsst-brand-accent-border {border-color: var(--jsst-brand-accent, #4f6df5);}
+
+/* The portal desk on a phone. (Roadmap 4.5-FE-10)
+
+   The front-end agent desk is the half of this product an agent is most likely
+   to open on a phone - it is the one that does not need wp-admin. The same
+   three principles as the admin side: one column, thumb-sized targets, and
+   nothing that widens the page. */
+@media screen and (max-width: 600px) {
+    .jsst-nav-list {flex-wrap: nowrap;overflow-x: auto;-webkit-overflow-scrolling: touch;}
+    .jsst-nav-item {flex: 0 0 auto;}
+    .jsst-nav-item a {min-height: 44px;padding: 11px 13px;}
+    .jsst-home {display: block;margin: 0;}
+    .jsst-home-panel {flex: 1 1 100%;margin: 0 0 12px;padding: 14px 15px;}
+    .jsst-home-row {padding-left: 10px;}
+    .jsst-people-search {display: block;}
+    .jsst-people-search > * {display: block;width: 100%;margin: 0 0 8px;box-sizing: border-box;}
+    .jsst-poweredby {margin-top: 14px;}
+    /* Wide content scrolls in its own box; the safe-layout scope already gives
+       tables a container to do it in. */
+    .jsst-safe table, .jsst-safe .jsst-scroll {display: block;width: 100%;overflow-x: auto;}
+}
+
+/* Focus, portal side. (Roadmap 4.0-UX-08)
+
+   The same ring as the admin desk. A customer filling in a ticket form with a
+   keyboard has exactly the same right to know where they are as an agent does,
+   and the portal is the half a public-sector buyer will be testing. */
+.jsst-main-up-wrapper a:focus-visible,
+.jsst-main-up-wrapper button:focus-visible,
+.jsst-main-up-wrapper input:focus-visible,
+.jsst-main-up-wrapper select:focus-visible,
+.jsst-main-up-wrapper textarea:focus-visible,
+.jsst-nav a:focus-visible,
+.jsst-safe a:focus-visible,
+.jsst-safe button:focus-visible,
+.jsst-safe input:focus-visible,
+.jsst-safe select:focus-visible,
+.jsst-safe textarea:focus-visible {
+    outline: 2px solid var(--jsst-accent, #4f46e5);
+    outline-offset: 2px;
+    box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.9);
+}
+
+/* A block on somebody's page. (Roadmap 4.0-UX-07)
+
+   A block lands inside whatever layout the theme gives it, which is a narrower
+   and less predictable box than the plugin's own pages. These rules do the one
+   thing that matters there and nothing else: keep the plugin's markup inside
+   the column it was given. Typography is deliberately left alone so the block
+   inherits the theme's, which is what the roadmap asked for and what makes a
+   support page look like the rest of the site. */
+.jsst-block {box-sizing: border-box;max-width: 100%;min-width: 0;}
+.jsst-block img {max-width: 100%;height: auto;}
+.jsst-block table {max-width: 100%;}
+
+/* The customers search, portal side. (Roadmap 4.5-FE-02)
+
+   Same omission as the admin copy: the box had only a height and the button
+   had no rule at all. The colours are this file's own, as with every other
+   class shared between the two desks. */
+.jsst-people-search input[type="text"] {height: 44px;padding: 10px 12px;box-sizing: border-box;
+    background: var(--jsst-canvas, #fff);border: 1px solid var(--jsst-line, #e2e4e6);
+    border-radius: var(--jsst-radius, 2px);color: var(--jsst-ink, #23282d);font-size: 14px;}
+.jsst-people-search input[type="text"]:focus {border-color: var(--jsst-accent, #4f46e5);outline: none;}
+/* The same pair on the portal, in this file's own colours. */
+.jsst-people-go, .jsst-people-clear {flex: 0 0 auto;display: inline-flex;align-items: center;justify-content: center;
+    box-sizing: border-box;height: 44px;padding: 0 20px;border: 1px solid var(--jsst-line, #e2e4e6);
+    border-radius: var(--jsst-radius-card, 0);font-size: 14px;font-weight: 600;line-height: 1;
+    text-decoration: none;cursor: pointer;}
+.jsst-people-go {background: var(--jsst-accent, #4f46e5);border-color: var(--jsst-accent, #4f46e5);color: #fff;}
+.jsst-people-go:hover, .jsst-people-go:focus {opacity: .92;color: #fff;}
+.jsst-people-clear {background: var(--jsst-surface, #f8fafc);color: var(--jsst-ink, #23282d);}
+
+/* The role presets, on the desk. (Roadmap 4.5-FE-03)
+   The same block the wp-admin form draws, restyled for the front end: the
+   markup is shared, the button class is not. Margins carry the spacing and
+   `gap` is layered on inside @supports, because Chrome before 84 ignores gap in
+   flex and would run the buttons together. */
+.jsst-rolepreset {box-sizing: border-box;margin: 0 0 14px;padding: 14px 16px;background: var(--jsst-surface, #f8fafc);border: 1px solid var(--jsst-line, #ebecec);border-radius: 2px;}
+.jsst-rolepreset-label {display: block;margin: 0 0 8px;font-size: 12px;font-weight: 600;text-transform: uppercase;letter-spacing: .05em;color: var(--jsst-faint, #6f7474);}
+.jsst-rolepreset-buttons {display: flex;flex-wrap: wrap;margin: 0;}
+.jsst-rolepreset-buttons .js-ticket-button {margin: 0 8px 8px 0;min-width: 0;}
+
+/* `.js-ticket-button` itself, which the portal never actually had.
+   (Roadmap 4.5-FE-03)
+
+   The class was styled in three places and all three were somewhere else:
+   admincss.css, and the two per-layout stylesheets for the control panel and
+   the ticket detail. Neither of those two is enqueued on the role form, and
+   this stylesheet only ever sized and spaced the class - so the preset links
+   rendered as bare anchors, plain underlined text rather than anything that
+   looks like it can be clicked.
+
+   The hover was worse than the resting state and is the reason this got
+   reported. `.js-ticket-button:hover {background-color: #2b2b2b}` lives in
+   color.css and is themed in style.php, and it was the one rule that did reach
+   this page - so pointing at a preset painted a near-black slab behind
+   unpadded link-coloured text. Hence a base with the padding that colour needs
+   to sit on, and a hover foreground that stays readable on it. */
+.js-ticket-button {
+    display: inline-block;
+    padding: 10px 18px;
+    border: 1px solid var(--jsst-line, #e2e4e6);
+    border-radius: var(--jsst-radius, 4px);
+    background: var(--jsst-canvas, #ffffff);
+    color: var(--jsst-ink, #23282d);
+    font-weight: 500;
+    line-height: 1.3;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background-color .2s ease, border-color .2s ease, color .2s ease;
+}
+.js-ticket-button:hover,
+.js-ticket-button:focus {
+    /* The background is set by color.css / style.php, which is themed. Only the
+       things that rule does not say belong here, so the desk's own colour still
+       wins. */
+    color: #ffffff;
+    border-color: transparent;
+    text-decoration: none;
+}
+/* The chosen starting point, which was marked only by a class that resolved to
+   nothing on this page. */
+.js-ticket-button.js-ticket-button-primary {
+    background: var(--jsst-accent, #4f46e5);
+    border-color: var(--jsst-accent, #4f46e5);
+    color: #ffffff;
+}
+.jsst-rolepreset .jsst-hint {margin: 4px 0 0;font-size: 12px;line-height: 1.65;color: var(--jsst-faint, #6f7474);max-width: 68em;}
+@supports (gap: 1px) {
+    .jsst-rolepreset-buttons {gap: 8px;}
+    .jsst-rolepreset-buttons .js-ticket-button {margin: 0;}
+}
+
+/* --------------------------------------------------------------------------
+   The desk screens' shared furniture, in the portal. (Roadmap 4.5-FE-02)
+
+   Notifications, Customers, Live Chat and the workspace Home were built from
+   the vocabulary the wp-admin screens use - cards, fields, pills, tables - and
+   that vocabulary lives in admincss.css, which the portal does not load. So on
+   the front end every one of those classes matched no rule at all: cards drew
+   with no frame, no padding and a transparent ground, and a card title, being
+   an h2, inherited the theme's heading size - 32px on a block theme, beside
+   13px body copy. The pages were not badly designed out here; they were
+   unstyled.
+
+   Three things about how this block is written.
+
+   **Everything is scoped to `.jsst-main-up-wrapper`**, the plugin's own portal
+   wrapper. Nothing here can reach a theme's markup or another plugin's, and the
+   names are generic enough - .jsst-card, .jsst-field - that leaving them
+   unscoped would be a promise this stylesheet cannot keep. It also settles a
+   specificity fight: style.css sets `font-size: inherit` on every input, button,
+   select and textarea inside that wrapper at 0,1,2, and what gets inherited is
+   the theme body size. Two classes outrank one class and two elements, so the
+   sizes below hold without an !important.
+
+   **Sizes are stated, never inherited.** A block theme's body can be 22px and
+   its h2 32px, so anything that would otherwise take the theme's word for it
+   says its own.
+
+   **Margins carry the spacing, with `gap` layered on inside @supports** - the
+   rule this stylesheet follows throughout, because Chrome before 84 ignores gap
+   in flex and would run the children together. Directional margins are mirrored
+   in stylertl.css, which is the only thing that file holds.
+   -------------------------------------------------------------------------- */
+
+/* Lede and group heading ------------------------------------------------- */
+.jsst-main-up-wrapper .jsst-lede {
+	max-width: 62em;
+	margin: 0 0 14px;
+	font-size: 14px;
+	line-height: 1.7;
+	color: #23282d;
+}
+
+.jsst-main-up-wrapper .jsst-hint {
+	max-width: 62em;
+	margin: 6px 0 0;
+	font-size: 13px;
+	line-height: 1.65;
+	color: #6f7474;
+}
+
+.jsst-main-up-wrapper .jsst-groupheading {
+	margin: 26px 0 10px;
+	font-size: 13px;
+	font-weight: 600;
+	letter-spacing: .06em;
+	text-transform: uppercase;
+	color: #6f7474;
+}
+
+.jsst-main-up-wrapper .jsst-groupheading:first-child {
+	margin-top: 0;
+}
+
+/* Cards ------------------------------------------------------------------ */
+.jsst-main-up-wrapper .jsst-cards {
+	display: flex;
+	flex-wrap: wrap;
+	box-sizing: border-box;
+	width: 100%;
+	margin: 0;
+}
+
+.jsst-main-up-wrapper .jsst-card {
+	flex: 1 1 100%;
+	box-sizing: border-box;
+	min-width: 0;
+	margin: 0 0 16px;
+	background: #fff;
+	border: 1px solid #d1d1d1;
+	border-radius: 12px;
+}
+
+.jsst-main-up-wrapper .jsst-card-half {
+	flex: 1 1 320px;
+	margin-right: 16px;
+}
+
+.jsst-main-up-wrapper .jsst-card-half:last-child {
+	margin-right: 0;
+}
+
+.jsst-main-up-wrapper .jsst-card-head {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: baseline;
+	box-sizing: border-box;
+	padding: 14px 18px;
+	border-bottom: 1px solid #f0f1f1;
+}
+
+/* An h2 by tag, so it would otherwise take the theme's heading size. */
+.jsst-main-up-wrapper .jsst-card-title {
+	flex: 1 1 auto;
+	min-width: 0;
+	margin: 0;
+	font-size: 15px;
+	font-weight: 600;
+	line-height: 1.4;
+	color: #23282d;
+	overflow-wrap: break-word;
+}
+
+.jsst-main-up-wrapper .jsst-card-sub {
+	flex: 1 1 100%;
+	min-width: 0;
+	margin: 4px 0 0;
+	font-size: 13px;
+	line-height: 1.6;
+	color: #6f7474;
+}
+
+.jsst-main-up-wrapper .jsst-card-tools {
+	flex: 0 0 auto;
+	min-width: 0;
+}
+
+.jsst-main-up-wrapper .jsst-card-tools a,
+.jsst-main-up-wrapper .jsst-card-tools .button-link {
+	font-size: 13px;
+	color: #4f46e5;
+	text-decoration: none;
+	box-shadow: none;
+}
+
+.jsst-main-up-wrapper .jsst-card-body {
+	box-sizing: border-box;
+	padding: 16px 18px;
+}
+
+.jsst-main-up-wrapper .jsst-card-body > :first-child {
+	margin-top: 0;
+}
+
+.jsst-main-up-wrapper .jsst-card-flush {
+	padding: 0;
+}
+
+/* Forms ------------------------------------------------------------------ */
+.jsst-main-up-wrapper .jsst-form {
+	margin: 0;
+}
+
+.jsst-main-up-wrapper .jsst-fieldset {
+	margin: 0 0 18px;
+	padding: 0;
+	border: 0;
+}
+
+.jsst-main-up-wrapper .jsst-fieldset:last-of-type {
+	margin-bottom: 0;
+}
+
+.jsst-main-up-wrapper .jsst-fieldset-legend {
+	display: block;
+	width: 100%;
+	margin: 0 0 4px;
+	padding: 0;
+	font-size: 12px;
+	font-weight: 600;
+	letter-spacing: .05em;
+	text-transform: uppercase;
+	color: #6f7474;
+}
+
+.jsst-main-up-wrapper .jsst-fields {
+	display: flex;
+	flex-wrap: wrap;
+	margin: 10px 0 0;
+}
+
+/* A field shares a row but is capped, so a last row holding one field does not
+   stretch that field the whole width of the card. */
+.jsst-main-up-wrapper .jsst-field {
+	flex: 1 1 240px;
+	box-sizing: border-box;
+	max-width: 320px;
+	min-width: 0;
+	margin: 0 14px 14px 0;
+}
+
+.jsst-main-up-wrapper .jsst-field-wide {
+	flex: 1 1 100%;
+	max-width: 100%;
+	margin-right: 0;
+}
+
+.jsst-main-up-wrapper .jsst-field > label {
+	display: block;
+	margin-bottom: 5px;
+	font-size: 13px;
+	font-weight: 600;
+	color: #606262;
+}
+
+.jsst-main-up-wrapper .jsst-field input[type="text"],
+.jsst-main-up-wrapper .jsst-field input[type="email"],
+.jsst-main-up-wrapper .jsst-field input[type="url"],
+.jsst-main-up-wrapper .jsst-field input[type="number"],
+.jsst-main-up-wrapper .jsst-field input[type="search"],
+.jsst-main-up-wrapper .jsst-field select,
+.jsst-main-up-wrapper .jsst-field textarea {
+	box-sizing: border-box;
+	width: 100%;
+	max-width: 100%;
+	min-width: 0;
+	padding: 12px 15px;
+	font-size: 14px;
+	line-height: 1.5;
+	color: #23282d;
+	background: #f8fafc;
+	border: 1px solid #d1d1d1;
+	border-radius: 8px;
+	box-shadow: none;
+}
+
+.jsst-main-up-wrapper .jsst-field input[type="text"],
+.jsst-main-up-wrapper .jsst-field input[type="email"],
+.jsst-main-up-wrapper .jsst-field input[type="url"],
+.jsst-main-up-wrapper .jsst-field input[type="number"],
+.jsst-main-up-wrapper .jsst-field input[type="search"],
+.jsst-main-up-wrapper .jsst-field select {
+	height: 48px;
+}
+
+.jsst-main-up-wrapper .jsst-field textarea {
+	height: auto;
+	min-height: 96px;
+}
+
+.jsst-main-up-wrapper .jsst-field input:focus,
+.jsst-main-up-wrapper .jsst-field select:focus,
+.jsst-main-up-wrapper .jsst-field textarea:focus {
+	border-color: #4f46e5;
+	outline: 0;
+	box-shadow: none;
+}
+
+.jsst-main-up-wrapper .jsst-field-note {
+	max-width: 62em;
+	margin: 6px 0 0;
+	font-size: 13px;
+	line-height: 1.6;
+	color: #6f7474;
+}
+
+.jsst-main-up-wrapper .jsst-check {
+	display: flex;
+	align-items: flex-start;
+	min-width: 0;
+	margin: 0 0 8px;
+	font-size: 14px;
+	color: #6b747c;
+}
+
+.jsst-main-up-wrapper .jsst-check input {
+	flex: 0 0 auto;
+	width: 16px;
+	height: 16px;
+	margin: 3px 8px 0 0;
+}
+
+.jsst-main-up-wrapper .jsst-check span {
+	min-width: 0;
+	overflow-wrap: break-word;
+}
+
+.jsst-main-up-wrapper .jsst-actions {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	margin: 4px 0 0;
+}
+
+.jsst-main-up-wrapper .jsst-actions > * {
+	margin: 0 8px 0 0;
+}
+
+.jsst-main-up-wrapper .jsst-actions-note {
+	min-width: 0;
+	font-size: 12px;
+	color: #6f7474;
+}
+
+/* Pills, and the empty state --------------------------------------------- */
+.jsst-main-up-wrapper .jsst-pill {
+	display: inline-flex;
+	align-items: center;
+	min-width: 0;
+	padding: 3px 10px;
+	font-size: 12px;
+	font-weight: 600;
+	line-height: 1.5;
+	color: #23282d;
+	background: #f4f5f6;
+	border: 1px solid #e9eaea;
+	border-radius: 11px;
+}
+
+.jsst-main-up-wrapper .jsst-dot {
+	flex: 0 0 auto;
+	width: 7px;
+	height: 7px;
+	margin-right: 6px;
+	background: currentColor;
+	border-radius: 50%;
+}
+
+.jsst-main-up-wrapper .jsst-pill-ok {
+	color: #0b6b46;
+	background: #e7f5ef;
+	border-color: #c3e3d5;
+}
+
+.jsst-main-up-wrapper .jsst-pill-warn {
+	color: #8a5300;
+	background: #fdf3e4;
+	border-color: #f0dcbd;
+}
+
+.jsst-main-up-wrapper .jsst-pill-bad {
+	color: #8a1f11;
+	background: #fdeeec;
+	border-color: #f3cfca;
+}
+
+.jsst-main-up-wrapper .jsst-pill-info {
+	color: #4f46e5;
+	background: #eef0fd;
+	border-color: #d5d8f7;
+}
+
+.jsst-main-up-wrapper .jsst-pill-off {
+	color: #6f7474;
+	background: #f4f5f6;
+	border-color: #e9eaea;
+}
+
+.jsst-main-up-wrapper .jsst-empty {
+	box-sizing: border-box;
+	padding: 26px 18px;
+	text-align: center;
+}
+
+.jsst-main-up-wrapper .jsst-empty-title {
+	margin: 0;
+	font-size: 15px;
+	font-weight: 600;
+	color: #23282d;
+}
+
+.jsst-main-up-wrapper .jsst-empty-text {
+	max-width: 46em;
+	margin: 6px auto 0;
+	font-size: 13px;
+	line-height: 1.7;
+	color: #6f7474;
+}
+
+/* Tables ----------------------------------------------------------------- */
+/* The wrap scrolls, never the page: a table with six columns on a phone is the
+   commonest way a plugin breaks a theme's layout. */
+.jsst-main-up-wrapper .jsst-table-wrap {
+	width: 100%;
+	overflow-x: auto;
+	-webkit-overflow-scrolling: touch;
+}
+
+.jsst-main-up-wrapper .jsst-table {
+	width: 100%;
+	margin: 0;
+	border-collapse: collapse;
+	font-size: 14px;
+}
+
+.jsst-main-up-wrapper .jsst-table th,
+.jsst-main-up-wrapper .jsst-table td {
+	padding: 10px 12px;
+	text-align: left;
+	vertical-align: top;
+	border-bottom: 1px solid #f0f1f1;
+	overflow-wrap: break-word;
+}
+
+.jsst-main-up-wrapper .jsst-table th {
+	font-size: 12px;
+	font-weight: 600;
+	letter-spacing: .04em;
+	text-transform: uppercase;
+	color: #6f7474;
+	white-space: nowrap;
+}
+
+.jsst-main-up-wrapper .jsst-table tr:last-child td {
+	border-bottom: 0;
+}
+
+/* Notification preferences: the row labels are sentences, so they wrap and the
+   channel columns stay in view. Kept on one line they pushed the table past a
+   half-width card and hid E-mail and Browser behind a scrollbar. */
+.jsst-main-up-wrapper .jsst-table-prefs tbody th {
+	white-space: normal;
+}
+
+/* Notifications ---------------------------------------------------------- */
+.jsst-main-up-wrapper .jsst-notifs {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+.jsst-main-up-wrapper .jsst-notif {
+	display: flex;
+	align-items: flex-start;
+	margin: 0;
+	padding: 12px 18px;
+	list-style: none;
+	border-top: 1px solid #f4f5f6;
+}
+
+.jsst-main-up-wrapper .jsst-notifs > li:first-child {
+	border-top: 0;
+}
+
+/* Unread is a tint and a marker, not a colour on the text: the words have to
+   stay as readable once they have been read. */
+.jsst-main-up-wrapper .jsst-notif-new {
+	background: #f7f8ff;
+}
+
+/* The unread dot was invisible: measured 0px wide.
+
+   This rule was written for a dot that is a flex CHILD OF THE ROW - hence
+   `flex: 0 0 auto` and a top margin to line it up with the first line of text.
+   The markup puts it inside `p.jsst-notif-title` instead, which was a plain
+   block, so the flex shorthand did nothing and an `inline` span ignored the
+   width outright. `inline-block` is what makes a width mean something where
+   this element actually lives; the title line below now supplies the gap, so
+   the hand-set margin goes. */
+.jsst-main-up-wrapper .jsst-notif-dot {
+	display: inline-block;
+	flex: 0 0 auto;
+	width: 8px;
+	height: 8px;
+	margin: 0;
+	background: #4f46e5;
+	border-radius: 50%;
+}
+
+.jsst-main-up-wrapper .jsst-notif-main {
+	flex: 1 1 auto;
+	min-width: 0;
+}
+
+/* Title, and the category beside it - not running into it.
+
+   The headline and the category pill sat in one block with a text space
+   between them, so the line read as one sentence: "You were asked to work a
+   ticket Tickets I follow". A pill is a label ABOUT the notification, not the
+   end of its title, and the only thing that says so is space. A flex line with
+   a real gap also gives the unread dot somewhere to sit, and wraps the pill
+   under a long headline instead of squeezing it. */
+.jsst-main-up-wrapper .jsst-notif-title {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: 4px 10px;
+	margin: 0;
+	font-size: 14px;
+	font-weight: 600;
+	line-height: 1.5;
+	color: #23282d;
+	overflow-wrap: break-word;
+}
+
+.jsst-main-up-wrapper .jsst-notif-title a {
+	color: #23282d;
+	text-decoration: none;
+	box-shadow: none;
+}
+
+.jsst-main-up-wrapper .jsst-notif-title a:hover,
+.jsst-main-up-wrapper .jsst-notif-title a:focus {
+	color: #4f46e5;
+}
+
+.jsst-main-up-wrapper .jsst-notif-body {
+	margin: 3px 0 0;
+	font-size: 13px;
+	line-height: 1.6;
+	color: #6f7474;
+	overflow-wrap: break-word;
+}
+
+.jsst-main-up-wrapper .jsst-notif-when {
+	display: block;
+	margin: 3px 0 0;
+	font-size: 12px;
+	color: #8a8f8f;
+}
+
+/* WordPress admin button classes, in the portal. -------------------------
+
+   Third time this has bitten in one screen's work: the chat console, this
+   row's actions, and the card's own "Mark all as read". Templates shared
+   between wp-admin and the portal carry `class="button"` / `"button-link"`,
+   wp-admin styles both, and the front end has never heard of either - so they
+   fall back to the browser's own control. Measured, every time: background
+   #efefef, border 2px outset #767676, radius 0.
+
+   So it is fixed once here rather than a fourth time per component. Values are
+   `.js-ticket-button`'s, so these ARE the portal's buttons. `button-primary`
+   is excluded because something already gives it the filled accent treatment
+   and this rule must not out-specify it.
+   ----------------------------------------------------------------------- */
+.jsst-main-up-wrapper .button:not(.button-primary) {
+	display: inline-block;
+	padding: 7px 14px;
+	border: 1px solid #e2e4e6;
+	border-radius: 8px;
+	background: #ffffff;
+	color: #23282d;
+	font-size: 13px;
+	font-weight: 500;
+	line-height: 1.3;
+	text-align: center;
+	text-decoration: none;
+	box-shadow: none;
+	cursor: pointer;
+}
+.jsst-main-up-wrapper .button:not(.button-primary):hover,
+.jsst-main-up-wrapper .button:not(.button-primary):focus {
+	border-color: #4f46e5;
+	color: #4f46e5;
+}
+/* `button-link` is a text action, not a box - that is the whole point of the
+   class, and a native grey rectangle is the opposite of it. */
+.jsst-main-up-wrapper .button-link {
+	padding: 6px 4px;
+	border: 0;
+	background: none;
+	color: #6f7474;
+	font-size: 13px;
+	line-height: 1.3;
+	text-decoration: none;
+	box-shadow: none;
+	cursor: pointer;
+}
+.jsst-main-up-wrapper .button-link:hover,
+.jsst-main-up-wrapper .button-link:focus {
+	color: #4f46e5;
+	text-decoration: underline;
+}
+
+.jsst-main-up-wrapper .jsst-notif-actions {
+	flex: 0 0 auto;
+	margin-left: 12px;
+}
+/* The row's actions carry `.button` and `.button-link`, which are WORDPRESS
+   ADMIN classes - the same fault the chat console had. wp-admin styles them;
+   the portal has never heard of them, so `Open it` rendered as bare text and
+   `Mark read` as the browser's own grey control. Measured before: the anchor
+   had no background, no border and no padding; the button was a native one.
+
+   `Open it` is the action the row exists for, so it is the filled one, and
+   `Mark read` is the quiet text action `button-link` was always meant to be.
+   Values from `.js-ticket-button`, so these are the portal's own controls. */
+.jsst-main-up-wrapper .jsst-notif-actions form {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: 8px;
+	margin: 0;
+}
+.jsst-main-up-wrapper .jsst-notif-actions .button {
+	display: inline-block;
+	padding: 7px 14px;
+	border: 1px solid #4f46e5;
+	border-radius: 8px;
+	background: #4f46e5;
+	color: #ffffff;
+	font-size: 13px;
+	font-weight: 500;
+	line-height: 1.3;
+	text-align: center;
+	text-decoration: none;
+	box-shadow: none;
+	cursor: pointer;
+}
+.jsst-main-up-wrapper .jsst-notif-actions .button:hover,
+.jsst-main-up-wrapper .jsst-notif-actions .button:focus {
+	filter: brightness(.94);
+	color: #ffffff;
+}
+.jsst-main-up-wrapper .jsst-notif-actions .button-link {
+	padding: 7px 4px;
+	border: 0;
+	background: none;
+	color: var(--jsst-faint, #6f7474);
+	font-size: 13px;
+	line-height: 1.3;
+	text-decoration: none;
+	cursor: pointer;
+}
+.jsst-main-up-wrapper .jsst-notif-actions .button-link:hover,
+.jsst-main-up-wrapper .jsst-notif-actions .button-link:focus {
+	color: #4f46e5;
+	text-decoration: underline;
+}
+
+/* Browser push ----------------------------------------------------------- */
+.jsst-main-up-wrapper .jsst-push {
+	box-sizing: border-box;
+	margin: 0;
+}
+
+.jsst-main-up-wrapper .jsst-push-state {
+	margin: 0 0 10px;
+	font-size: 13px;
+	line-height: 1.6;
+	color: #6f7474;
+}
+
+/* Live chat console ------------------------------------------------------ */
+.jsst-main-up-wrapper .jsst-livechat-console,
+.jsst-main-up-wrapper .jsst-chatconsole-list {
+	box-sizing: border-box;
+	width: 100%;
+	min-width: 0;
+}
+
+/* The transcript is a STACK, and was being laid out as a row.
+
+   This rule was written for a different markup - a wrapper holding
+   `.jsst-chat-thread` and `.jsst-chat-context` side by side as two flex panes,
+   which is what the `flex: 1 1 340px` / `flex: 1 1 240px` under it are for. But
+   in the console that ships, `.jsst-chatconsole-thread` IS the transcript and
+   its children are the messages, so `display: flex` with no direction laid six
+   messages out left to right across the card - greeting, then the customer's
+   line, then a system note, all on one line.
+
+   `display: block` is what wp-admin gives it (console.css sets no display at
+   all), and the two shells are meant to be the same console. */
+.jsst-main-up-wrapper .jsst-chatconsole-thread {
+	display: block;
+	box-sizing: border-box;
+	width: 100%;
+	margin: 0;
+}
+
+.jsst-main-up-wrapper .jsst-chat-thread {
+	flex: 1 1 340px;
+	box-sizing: border-box;
+	min-width: 0;
+	max-height: 460px;
+	margin: 0 0 14px;
+	padding: 14px 16px;
+	overflow-y: auto;
+	background: #fff;
+	border: 1px solid #d1d1d1;
+	border-radius: 12px;
+}
+
+.jsst-main-up-wrapper .jsst-chat-context,
+.jsst-main-up-wrapper .jsst-chatconsole-context {
+	flex: 1 1 240px;
+	box-sizing: border-box;
+	min-width: 0;
+	margin: 0 0 14px;
+	font-size: 13px;
+	line-height: 1.65;
+	color: #6f7474;
+}
+
+/* Somebody else's line and your own, told apart by side and ground rather than
+   by colour alone. */
+.jsst-main-up-wrapper .jsst-chat-agent,
+.jsst-main-up-wrapper .jsst-chat-mine {
+	box-sizing: border-box;
+	max-width: 82%;
+	margin: 0 0 10px;
+	padding: 9px 12px;
+	font-size: 14px;
+	line-height: 1.6;
+	border-radius: 10px;
+	overflow-wrap: break-word;
+}
+
+.jsst-main-up-wrapper .jsst-chat-agent {
+	margin-right: auto;
+	color: #23282d;
+	background: #f4f5f6;
+}
+
+.jsst-main-up-wrapper .jsst-chat-mine {
+	margin-left: auto;
+	color: #fff;
+	background: #4f46e5;
+}
+
+.jsst-main-up-wrapper .jsst-chat-open,
+.jsst-main-up-wrapper .jsst-chat-waiting {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	box-sizing: border-box;
+	margin: 0 0 8px;
+	padding: 10px 14px;
+	background: #fff;
+	border: 1px solid #d1d1d1;
+	border-radius: 12px;
+}
+
+.jsst-main-up-wrapper .jsst-chat-waiting {
+	border-left: 3px solid #b45309;
+}
+
+.jsst-main-up-wrapper .jsst-chat-open-who {
+	flex: 1 1 auto;
+	min-width: 0;
+	font-weight: 600;
+	color: #23282d;
+	overflow-wrap: break-word;
+}
+
+.jsst-main-up-wrapper .jsst-chat-ticket,
+.jsst-main-up-wrapper .jsst-chat-end {
+	flex: 0 0 auto;
+	margin-left: 10px;
+	font-size: 13px;
+}
+
+.jsst-main-up-wrapper .jsst-chat-reply {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: flex-end;
+	box-sizing: border-box;
+	width: 100%;
+	margin: 10px 0 0;
+}
+
+.jsst-main-up-wrapper .jsst-chat-reply-body {
+	flex: 1 1 220px;
+	box-sizing: border-box;
+	min-width: 0;
+	margin: 0 8px 0 0;
+}
+
+@supports ( gap: 1px ) {
+	.jsst-main-up-wrapper .jsst-cards {
+		gap: 0 16px;
+	}
+
+	.jsst-main-up-wrapper .jsst-card-half {
+		margin-right: 0;
+	}
+
+	.jsst-main-up-wrapper .jsst-fields {
+		gap: 0 14px;
+	}
+
+	.jsst-main-up-wrapper .jsst-field {
+		margin: 0 0 14px;
+	}
+
+	.jsst-main-up-wrapper .jsst-actions {
+		gap: 8px;
+	}
+
+	.jsst-main-up-wrapper .jsst-actions > * {
+		margin: 0;
+	}
+
+
+	.jsst-main-up-wrapper .jsst-chat-reply {
+		gap: 8px;
+	}
+
+	.jsst-main-up-wrapper .jsst-chat-reply-body {
+		margin: 0;
+	}
+}
+
+/* One breakpoint, at the width a two-column card row stops fitting. Fields go
+   full width because a 240px minimum beside a 16px form control is a line of
+   text with nowhere to go, and the notification row's actions drop under the
+   message rather than squeezing it to nothing. */
+@media screen and ( max-width: 600px ) {
+	.jsst-main-up-wrapper .jsst-card-half {
+		flex: 1 1 100%;
+		margin-right: 0;
+	}
+
+	.jsst-main-up-wrapper .jsst-card-head,
+	.jsst-main-up-wrapper .jsst-card-body {
+		padding: 12px 14px;
+	}
+
+	.jsst-main-up-wrapper .jsst-field,
+	.jsst-main-up-wrapper .jsst-chat-reply-body {
+		flex: 1 1 100%;
+		max-width: 100%;
+		margin-right: 0;
+	}
+
+	.jsst-main-up-wrapper .jsst-notif {
+		flex-wrap: wrap;
+		padding: 12px 14px;
+	}
+
+	.jsst-main-up-wrapper .jsst-notif-actions {
+		flex: 1 1 100%;
+		margin: 8px 0 0;
+	}
+
+	.jsst-main-up-wrapper .jsst-chat-agent,
+	.jsst-main-up-wrapper .jsst-chat-mine {
+		max-width: 100%;
+	}
+
+	.jsst-main-up-wrapper .jsst-chat-ticket,
+	.jsst-main-up-wrapper .jsst-chat-end {
+		margin: 6px 0 0;
+	}
+}
+
+/* --------------------------------------------------------------------------
+   Customers, given the portal's own panel treatment. (Roadmap 4.5-FE-02)
+
+   This screen was drawn as bare sections on the page ground - a search row, a
+   row of company chips and a table - while every other screen in the portal
+   puts each section in a white panel: 1px #d1d1d1 at a 12px radius on the
+   wrapper's #f8f8f8, which is what the queue screen's counts, search and
+   sorting bars all are. Nothing here changes the markup; the sections it
+   already has become those panels.
+   -------------------------------------------------------------------------- */
+.jsst-main-up-wrapper .jsst-people-search,
+.jsst-main-up-wrapper .jsst-people-companies,
+.jsst-main-up-wrapper .jsst-people-history {
+	box-sizing: border-box;
+	margin: 0 0 16px;
+	padding: 15px;
+	background: #fff;
+	border: 1px solid #d1d1d1;
+	border-radius: 12px;
+}
+
+.jsst-main-up-wrapper .jsst-people-wrap {
+	border: 1px solid #d1d1d1;
+	border-radius: 12px;
+}
+
+.jsst-main-up-wrapper .jsst-people-search > * {
+	margin-bottom: 0;
+}
+
+.jsst-main-up-wrapper .jsst-people-search input[type="text"] {
+	border-color: #d1d1d1;
+	border-radius: 8px;
+}
+
+/* The search button and its Clear twin. (Roadmap 4.5-FE-02)
+ *
+ * Their rule further up this file already asks for a 44px box, 14px text and a
+ * card radius, and on the portal it lost all three at once. `font-size` went to
+ * this file's own `div.jsst-main-up-wrapper button { font-size: inherit }` at
+ * 0,1,2 - a single class cannot outrank it - so the button took the theme body
+ * size and rendered at 22px beside a 14px input. The height went with it: at
+ * that size the line box is taller than the box asked for, and what drew was
+ * 33px against the field's 44px, so the two never lined up. And the radius
+ * resolved to its own fallback, because `--jsst-radius-card` is declared in
+ * admincss.css and nothing declares it here, which is why a button sitting
+ * beside an 8px input had square corners.
+ *
+ * Two classes settle the specificity, and every value is stated rather than
+ * taken from a variable that may not exist on this side. 8px and #d1d1d1 are
+ * the portal's own control shape, measured off the queue screen. */
+.jsst-main-up-wrapper .jsst-people-go,
+.jsst-main-up-wrapper .jsst-people-clear {
+	box-sizing: border-box;
+	height: 44px;
+	padding: 0 20px;
+	font-size: 14px;
+	font-weight: 600;
+	line-height: 1;
+	border: 1px solid #d1d1d1;
+	border-radius: 8px;
+	text-decoration: none;
+	cursor: pointer;
+}
+
+.jsst-main-up-wrapper .jsst-people-go {
+	color: #fff;
+	background: #4f46e5;
+	border-color: #4f46e5;
+}
+
+.jsst-main-up-wrapper .jsst-people-go:hover,
+.jsst-main-up-wrapper .jsst-people-go:focus {
+	color: #fff;
+	background: #4338ca;
+	border-color: #4338ca;
+	opacity: 1;
+}
+
+.jsst-main-up-wrapper .jsst-people-go:focus-visible,
+.jsst-main-up-wrapper .jsst-people-clear:focus-visible {
+	outline: 2px solid #4f46e5;
+	outline-offset: 2px;
+}
+
+.jsst-main-up-wrapper .jsst-people-clear {
+	color: #23282d;
+	background: #fff;
+}
+
+.jsst-main-up-wrapper .jsst-people-clear:hover,
+.jsst-main-up-wrapper .jsst-people-clear:focus {
+	color: #23282d;
+	background: #f8fafc;
+	border-color: #b9bec4;
+}
+
+/* On a phone the field takes the row and the two buttons share the next one,
+   rather than a 380px input and a 116px button trying to fit in 320px. */
+@media screen and ( max-width: 600px ) {
+	.jsst-main-up-wrapper .jsst-people-search input[type="text"] {
+		flex: 1 1 100%;
+		max-width: 100%;
+	}
+
+	.jsst-main-up-wrapper .jsst-people-go,
+	.jsst-main-up-wrapper .jsst-people-clear {
+		flex: 1 1 auto;
+	}
+}
+
+/* The table's own head rule draws the hairline under the last header cell, so
+   the panel's corners are clipped rather than fighting it. */
+.jsst-main-up-wrapper .jsst-people-wrap {
+	overflow: hidden;
+	overflow-x: auto;
+}
+
+.jsst-main-up-wrapper .jsst-people-history li {
+	padding: 10px 0;
+}
+
+.jsst-main-up-wrapper .jsst-people-history li:first-child {
+	padding-top: 0;
+}
+
+.jsst-main-up-wrapper .jsst-people-history li:last-child {
+	padding-bottom: 0;
+}
+
+@media screen and ( max-width: 600px ) {
+	.jsst-main-up-wrapper .jsst-people-search,
+	.jsst-main-up-wrapper .jsst-people-companies,
+	.jsst-main-up-wrapper .jsst-people-history {
+		padding: 12px;
+	}
 }

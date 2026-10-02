@@ -67,10 +67,10 @@ class JSSTgdprModel {
         $jsst_id = isset($jsst_data['id']) ? $jsst_data['id'] : '';
         $jsst_nonce = JSSTrequest::getVar('_wpnonce');
         if (! wp_verify_nonce( $jsst_nonce, 'save-usereraserequest-'.$jsst_id) ) {
-            die( 'Security check Failed' );
+            die( esc_html__( 'Security check Failed', 'js-support-ticket' ) );
         }
         if ($jsst_data['id'] && !$this->checkCanDelete($jsst_data['id'])) { // editing existing request: verify ownership
-            die( 'Security check Failed' );
+            die( esc_html__( 'Security check Failed', 'js-support-ticket' ) );
         }
     	if (!$jsst_data['id']) { //new
     	    $jsst_data['created'] = date_i18n('Y-m-d H:i:s');
@@ -130,6 +130,12 @@ class JSSTgdprModel {
         }
     }
 
+    /**
+     * One user's own ticket history, which is data this desk hands to that user
+     * on request - so it is the last place that should be telling them a ticket
+     * is still overdue when it was closed by a merge. Closed is 5 and 6, as in
+     * the reports. (Roadmap 5.0-ANA-05)
+     */
     private function getUserDetailReportByUserId( $jsst_uid = 0){
         $jsst_curdate = JSSTrequest::getVar('date_start', 'get');
         $jsst_fromdate = JSSTrequest::getVar('date_end', 'get');
@@ -159,28 +165,28 @@ class JSSTgdprModel {
         $jsst_query .= $jsst_uid_fragment;
         $jsst_result['openticket'] = jssupportticket::$_db->get_results($jsst_query);
 
-        $jsst_query = jssupportticket::$_db->prepare("SELECT created FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE status = 5 AND created >= %s AND created <= %s", $jsst_curdate, $jsst_fromdate);
+        $jsst_query = jssupportticket::$_db->prepare("SELECT created FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE (status = 5 OR status = 6) AND created >= %s AND created <= %s", $jsst_curdate, $jsst_fromdate);
         $jsst_query .= $jsst_uid_fragment;
         $jsst_result['closeticket'] = jssupportticket::$_db->get_results($jsst_query);
 
-        $jsst_query = jssupportticket::$_db->prepare("SELECT created FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE isanswered = 1 AND status != 5 AND status != 1 AND created >= %s AND created <= %s", $jsst_curdate, $jsst_fromdate);
+        $jsst_query = jssupportticket::$_db->prepare("SELECT created FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE isanswered = 1 AND status != 5 AND status != 6 AND status != 1 AND created >= %s AND created <= %s", $jsst_curdate, $jsst_fromdate);
         $jsst_query .= $jsst_uid_fragment;
         $jsst_result['answeredticket'] = jssupportticket::$_db->get_results($jsst_query);
 
-        $jsst_query = jssupportticket::$_db->prepare("SELECT created FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE isoverdue = 1 AND status != 5 AND created >= %s AND created <= %s", $jsst_curdate, $jsst_fromdate);
+        $jsst_query = jssupportticket::$_db->prepare("SELECT created FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE isoverdue = 1 AND status != 5 AND status != 6 AND created >= %s AND created <= %s", $jsst_curdate, $jsst_fromdate);
         $jsst_query .= $jsst_uid_fragment;
         $jsst_result['overdueticket'] = jssupportticket::$_db->get_results($jsst_query);
 
-        $jsst_query = jssupportticket::$_db->prepare("SELECT created FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE isanswered != 1 AND status != 5 AND (lastreply != '0000-00-00 00:00:00' AND lastreply != '') AND created >= %s AND created <= %s", $jsst_curdate, $jsst_fromdate);
+        $jsst_query = jssupportticket::$_db->prepare("SELECT created FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE isanswered != 1 AND status != 5 AND status != 6 AND (lastreply != '0000-00-00 00:00:00' AND lastreply != '') AND created >= %s AND created <= %s", $jsst_curdate, $jsst_fromdate);
         $jsst_query .= $jsst_uid_fragment;
         $jsst_result['pendingticket'] = jssupportticket::$_db->get_results($jsst_query);
         //user detail
         $jsst_query = jssupportticket::$_db->prepare("SELECT user.display_name,user.user_email,user.user_nicename,user.id,
                     (SELECT COUNT(id) FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE status = 1  AND (lastreply = '0000-00-00 00:00:00' OR lastreply = '') AND created >= %s AND created <= %s AND uid = user.id) AS openticket,
-                    (SELECT COUNT(id) FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE status = 5 AND created >= %s AND created <= %s AND uid = user.id) AS closeticket,
-                    (SELECT COUNT(id) FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE isanswered = 1 AND status != 5 AND status != 1 AND created >= %s AND created <= %s AND uid = user.id) AS answeredticket,
-                    (SELECT COUNT(id) FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE isoverdue = 1 AND status != 5 AND created >= %s AND created <= %s AND uid = user.id) AS overdueticket,
-                    (SELECT COUNT(id) FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE isanswered != 1 AND status != 5 AND isoverdue = 1 AND (lastreply != '0000-00-00 00:00:00' AND lastreply != '') AND created >= %s AND created <= %s AND uid = user.id) AS pendingticket
+                    (SELECT COUNT(id) FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE (status = 5 OR status = 6) AND created >= %s AND created <= %s AND uid = user.id) AS closeticket,
+                    (SELECT COUNT(id) FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE isanswered = 1 AND status != 5 AND status != 6 AND status != 1 AND created >= %s AND created <= %s AND uid = user.id) AS answeredticket,
+                    (SELECT COUNT(id) FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE isoverdue = 1 AND status != 5 AND status != 6 AND created >= %s AND created <= %s AND uid = user.id) AS overdueticket,
+                    (SELECT COUNT(id) FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE isanswered != 1 AND status != 5 AND status != 6 AND isoverdue = 1 AND (lastreply != '0000-00-00 00:00:00' AND lastreply != '') AND created >= %s AND created <= %s AND uid = user.id) AS pendingticket
                     FROM `".jssupportticket::$_wpprefixforuser."js_ticket_users` AS user
                     WHERE user.id = %d",
                     $jsst_curdate, $jsst_fromdate, $jsst_curdate, $jsst_fromdate, $jsst_curdate, $jsst_fromdate, $jsst_curdate, $jsst_fromdate, $jsst_curdate, $jsst_fromdate, $jsst_id);
@@ -517,7 +523,7 @@ function deleteUserData($jsst_uid){
     function getAdminSearchFormDataGDPR(){
         $jsst_nonce = JSSTrequest::getVar('_wpnonce');
         if (! wp_verify_nonce( $jsst_nonce, 'erase-data-requests') ) {
-            die( 'Security check Failed' );
+            die( esc_html__( 'Security check Failed', 'js-support-ticket' ) );
         }
         $jsst_search_array = array();
         $jsst_search_array['email'] = jssupportticketphplib::JSST_addslashes(jssupportticketphplib::JSST_trim(JSSTrequest::getVar('email')));

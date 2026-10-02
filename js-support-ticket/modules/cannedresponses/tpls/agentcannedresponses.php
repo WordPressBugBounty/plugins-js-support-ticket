@@ -64,7 +64,7 @@ if (jssupportticket::$_config['offline'] == 2) {
                                     <?php echo esc_html(__('Canned Responses', 'js-support-ticket')) ?>
                                 </div>
                                 <div class="js-ticket-table-heading-right">
-                                    <a class="js-ticket-table-add-btn" href="<?php echo esc_url(jssupportticket::makeUrl(array('jstmod'=>'cannedresponses', 'jstlay'=>'addcannedresponse'))); ?>"><span class="js-ticket-table-add-img-wrp"><img src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/add.png" alt="Add-image"></span><?php echo esc_html(__('Add Canned Response', 'js-support-ticket')) ?></a>
+                                    <a class="js-ticket-table-add-btn" href="<?php echo esc_url(jssupportticket::makeUrl(array('jstmod'=>'cannedresponses', 'jstlay'=>'addcannedresponse'))); ?>"><span class="js-ticket-table-add-img-wrp"><img src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/add.png" alt=""></span><?php echo esc_html(__('Add Canned Response', 'js-support-ticket')) ?></a>
                                 </div>
                             </div>
                             <?php if (!empty(jssupportticket::$jsst_data[0])) { ?>

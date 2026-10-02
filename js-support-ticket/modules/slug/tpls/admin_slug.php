@@ -6,46 +6,17 @@ JSSTmessage::getMessage();
 ?>
 <!-- main wrapper -->
 <div id="jsstadmin-wrapper">
-    <div id="userpopupblack" style="display:none;"></div>
-    <div id="userpopup" style="display:none;"></div>
+    <?php JSSTlayout::adminPopupShell(); ?>
     <!-- left menu -->
     <div id="jsstadmin-leftmenu">
         <?php  JSSTincluder::getClassesInclude('jsstadminsidemenu'); ?>
     </div>
     <div id="jsstadmin-data">
         <!-- top bar -->
-        <div id="jsstadmin-wrapper-top">
-            <div id="jsstadmin-wrapper-top-left">
-                <div id="jsstadmin-breadcrunbs">
-                    <ul>
-                        <li><a href="?page=jssupportticket" title="<?php echo esc_attr(__('Dashboard','js-support-ticket')); ?>"><?php echo esc_html(__('Dashboard','js-support-ticket')); ?></a></li>
-                        <li><?php echo esc_html(__('Slug','js-support-ticket')); ?></li>
-                    </ul>
-                </div>
-            </div>
-            <div id="jsstadmin-wrapper-top-right">
-                <div id="jsstadmin-config-btn">
-                    <a title="<?php echo esc_attr(__('Configuration','js-support-ticket')); ?>" href="<?php echo esc_url(admin_url("admin.php?page=configuration")); ?>">
-                        <img alt = "<?php echo esc_attr(__('Configuration','js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/config.png" />
-                    </a>
-                </div>
-                <div id="jsstadmin-config-btn" class="jssticketadmin-help-btn">
-                    <a href="<?php echo esc_url(admin_url("admin.php?page=jssupportticket&jstlay=help")); ?>" title="<?php echo esc_attr(__('Help','js-support-ticket')); ?>">
-                        <img alt = "<?php echo esc_attr(__('Help','js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/help.png" />
-                    </a>
-                </div>
-                <div id="jsstadmin-vers-txt">
-                    <?php echo esc_html(__("Version",'js-support-ticket')); ?>:
-                    <span class="jsstadmin-ver"><?php echo esc_html(JSSTincluder::getJSModel('configuration')->getConfigValue('versioncode')); ?></span>
-                </div>
-            </div>
-        </div>
-        <div id="jsstadmin-head">
-            <h1 class="jsstadmin-head-text"><?php echo esc_html(__('Slug','js-support-ticket')); ?></h1>
-            <a class="jsstadmin-add-link button" title="<?php echo esc_attr(__('Reset','js-support-ticket')); ?>" href="<?php echo esc_url(wp_nonce_url(admin_url("admin.php?page=slug&task=resetallslugs&action=jstask"),"reset-all-slugs")); ?>">
-                <?php echo esc_html(__('Reset All','js-support-ticket')); ?>
-            </a>
-        </div>
+        <?php JSSTlayout::adminPageHeader(array(
+            'title'   => __('Slug','js-support-ticket'),
+            'actions' => array(array('text' => __('Reset All','js-support-ticket'), 'url' => wp_nonce_url(admin_url('admin.php?page=slug&task=resetallslugs&action=jstask'),'reset-all-slugs'), 'style' => 'danger')),
+        )); ?>
         <?php
         $jsst_jssupportticket_js ='
             /*Function to Show popUp,Reset*/
@@ -92,96 +63,105 @@ JSSTmessage::getMessage();
         wp_add_inline_script('js-support-ticket-main-js',$jsst_jssupportticket_js);
         ?>
         <!-- page content -->
-        <div id="jsstadmin-data-wrp" class="p0 bg-n bs-n">
-            <!-- filter form -->
-            <form class="js-filter-form slug-configform" name="jsstadmin-form" id="conjsstadmin-form" method="post" action="<?php echo esc_url(wp_nonce_url(admin_url("admin.php?page=slug&task=savehomeprefix"),"save-home-prefix")); ?>">
-                <?php echo wp_kses(JSSTformfield::text('prefix', jssupportticket::$_config['home_slug_prefix'], array('class' => 'inputbox js-form-input-field', 'placeholder' => esc_html(__('Home Slug','js-support-ticket')).' '. esc_html(__('Prefix','js-support-ticket')))),JSST_ALLOWED_TAGS); ?>
-                <?php echo wp_kses(JSSTformfield::submitbutton('btnsubmit', esc_html(__('Save','js-support-ticket')), array('class' => 'button js-form-search')),JSST_ALLOWED_TAGS); ?>
-                <?php echo wp_kses(JSSTformfield::hidden('form_request', 'jssupportticket'),JSST_ALLOWED_TAGS); ?>
-                <div class="js-form-help-text">
-                    <img src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/view-job-information.png" />
-                    <?php echo esc_html(__('This prefix will be added to slug incase of homepage links','js-support-ticket')); ?>
+        <div id="jsstadmin-data-wrp">
+
+            <?php /* The two prefixes are settings, not filters. They were two
+                     `js-filter-form` rows above the search box, so the screen
+                     opened with three identical-looking bars and no way to tell
+                     which one searched and which one saved. */ ?>
+            <div class="jsst-card">
+                <div class="jsst-card-head">
+                    <h2 class="jsst-card-title"><?php echo esc_html(__('Prefixes', 'js-support-ticket')); ?></h2>
+                    <p class="jsst-card-sub"><?php echo esc_html(__('Put in front of an address the plugin builds. Each one saves on its own.', 'js-support-ticket')); ?></p>
                 </div>
-            </form>
-            <!-- filter form -->
-            <form class="js-filter-form slug-configform" name="jsstadmin-form" id="conjsstadmin-form" method="post" action="<?php echo esc_url(wp_nonce_url(admin_url("admin.php?page=slug&task=saveprefix"),"save-prefix")); ?>">
-                <?php echo wp_kses(JSSTformfield::text('prefix', jssupportticket::$_config['slug_prefix'], array('class' => 'inputbox js-form-input-field', 'placeholder' => esc_html(__('Slug','js-support-ticket')).' '. esc_html(__('Prefix','js-support-ticket')))),JSST_ALLOWED_TAGS); ?>
-                <?php echo wp_kses(JSSTformfield::submitbutton('btnsubmit', esc_html(__('Save','js-support-ticket')), array('class' => 'button js-form-search')),JSST_ALLOWED_TAGS); ?>
-                <?php echo wp_kses(JSSTformfield::hidden('form_request', 'jssupportticket'),JSST_ALLOWED_TAGS); ?>
-                <div class="js-form-help-text">
-                    <img src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/view-job-information.png" />
-                    <?php echo esc_html(__('This prefix will be added to slug incase of conflict','js-support-ticket')); ?>
+                <div class="jsst-card-body">
+                    <div class="jsst-formgrid">
+                        <form class="jsst-frow jsst-frow-md" method="post" action="<?php echo esc_url(wp_nonce_url(admin_url("admin.php?page=slug&task=savehomeprefix"),"save-home-prefix")); ?>">
+                            <label class="jsst-flabel" for="prefix"><?php echo esc_html(__('Home slug prefix','js-support-ticket')); ?></label>
+                            <div class="jsst-fval jsst-inline">
+                                <?php echo wp_kses(JSSTformfield::text('prefix', jssupportticket::$_config['home_slug_prefix'], array('class' => 'jsst-input')),JSST_ALLOWED_TAGS); ?>
+                                <?php echo wp_kses(JSSTformfield::submitbutton('btnsubmit', esc_html(__('Save','js-support-ticket')), array('class' => 'jsst-btn jsst-btn-primary jsst-inline-save')),JSST_ALLOWED_TAGS); ?>
+                            </div>
+                            <p class="jsst-fhelp"><?php echo esc_html(__('Added to the slug on links that point at the home page.','js-support-ticket')); ?></p>
+                            <?php echo wp_kses(JSSTformfield::hidden('form_request', 'jssupportticket'),JSST_ALLOWED_TAGS); ?>
+                        </form>
+                        <form class="jsst-frow jsst-frow-md" method="post" action="<?php echo esc_url(wp_nonce_url(admin_url("admin.php?page=slug&task=saveprefix"),"save-prefix")); ?>">
+                            <label class="jsst-flabel" for="prefix"><?php echo esc_html(__('Slug prefix','js-support-ticket')); ?></label>
+                            <div class="jsst-fval jsst-inline">
+                                <?php echo wp_kses(JSSTformfield::text('prefix', jssupportticket::$_config['slug_prefix'], array('class' => 'jsst-input')),JSST_ALLOWED_TAGS); ?>
+                                <?php echo wp_kses(JSSTformfield::submitbutton('btnsubmit', esc_html(__('Save','js-support-ticket')), array('class' => 'jsst-btn jsst-btn-primary jsst-inline-save')),JSST_ALLOWED_TAGS); ?>
+                            </div>
+                            <p class="jsst-fhelp"><?php echo esc_html(__('Added only when a slug would otherwise clash with one already in use.','js-support-ticket')); ?></p>
+                            <?php echo wp_kses(JSSTformfield::hidden('form_request', 'jssupportticket'),JSST_ALLOWED_TAGS); ?>
+                        </form>
+                    </div>
                 </div>
-            </form>
-            <!-- filter form -->
-            <form class="js-filter-form" name="jsstadmin-form" id="jsstadmin-form" method="post" action="<?php echo esc_url(wp_nonce_url(admin_url("admin.php?page=slug"),"slug")); ?>">
-                <?php echo wp_kses(JSSTformfield::text('slug', jssupportticket::$jsst_data['slug'], array('class' => 'inputbox js-form-input-field', 'placeholder' => esc_html(__('Search By Slug','js-support-ticket')))),JSST_ALLOWED_TAGS); ?>
-                <?php echo wp_kses(JSSTformfield::submitbutton('btnsubmit', esc_html(__('Search','js-support-ticket')), array('class' => 'button js-form-search')),JSST_ALLOWED_TAGS); ?>
-                <?php echo wp_kses(JSSTformfield::button('reset', esc_html(__('Reset','js-support-ticket')), array('class' => 'button js-form-reset', 'onclick' => 'resetFrom();')),JSST_ALLOWED_TAGS); ?>
+            </div>
+
+            <form class="jsst-filterbar" name="jsstadmin-form" id="jsstadmin-form" method="post" action="<?php echo esc_url(wp_nonce_url(admin_url("admin.php?page=slug"),"slug")); ?>">
+                <div class="jsst-search">
+                    <span class="jsst-search-icon" aria-hidden="true"></span>
+                    <?php echo wp_kses(JSSTformfield::text('slug', jssupportticket::$jsst_data['slug'], array('class' => 'jsst-search-input', 'placeholder' => esc_html(__('Search slugs','js-support-ticket')))),JSST_ALLOWED_TAGS); ?>
+                </div>
                 <?php echo wp_kses(JSSTformfield::hidden('JSST_form_search', 'JSST_SEARCH'),JSST_ALLOWED_TAGS); ?>
+                <?php echo wp_kses(JSSTformfield::submitbutton('btnsubmit', esc_html(__('Search','js-support-ticket')), array('class' => 'jsst-btn jsst-btn-primary')),JSST_ALLOWED_TAGS); ?>
+                <?php echo wp_kses(JSSTformfield::button('reset', esc_html(__('Reset','js-support-ticket')), array('class' => 'jsst-btn', 'onclick' => 'resetFrom();')),JSST_ALLOWED_TAGS); ?>
             </form>
+
             <?php
                 if (!empty(jssupportticket::$jsst_data[0])) {
+                    $jsst_pagenum = JSSTrequest::getVar('pagenum', 'get', 1);
                     ?>
                     <form id="js-list-form" method="post" action="<?php echo esc_url(wp_nonce_url(admin_url("admin.php?page=slug&task=saveSlug"),"save-slug")); ?>">
-                        <table id="js-support-ticket-table" class="js-support-ticket-table">
-                            <thead>
-                                <tr class="js-support-ticket-table-heading">
-                                    <th class="left">
-                                        <?php echo esc_html(__('Slug List','js-support-ticket')); ?>
-                                    </th>
-                                    <th class="left">
-                                        <?php echo esc_html(__('Description','js-support-ticket')); ?>
-                                    </th>
-                                    <th>
-                                        <?php echo esc_html(__('Action','js-support-ticket')); ?>
-                                    </th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php
-                                    $jsst_pagenum = JSSTrequest::getVar('pagenum', 'get', 1);
-                                    $jsst_pageid = ($jsst_pagenum > 1) ? '&pagenum=' . $jsst_pagenum : '';
-                                    foreach (jssupportticket::$jsst_data[0] as $jsst_row){
-                                        ?>
+                        <div class="jsst-card">
+                            <div class="jsst-table-wrap">
+                            <table class="jsst-table">
+                                <thead>
+                                    <tr>
+                                        <th class="jsst-col-name"><?php echo esc_html(__('Slug','js-support-ticket')); ?></th>
+                                        <th class="jsst-col-say"><?php echo esc_html(__('Description','js-support-ticket')); ?></th>
+                                        <th class="jsst-col-act"><span class="screen-reader-text"><?php echo esc_html(__('Action','js-support-ticket')); ?></span></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php foreach (jssupportticket::$jsst_data[0] as $jsst_row){
+                                        $jsst_nonce = wp_create_nonce("get-options-for-edit-slug-".$jsst_row->id); ?>
                                         <tr>
-                                            <td class="left" id="<?php echo 'td_'.esc_attr($jsst_row->id);?>">
-                                                <?php echo esc_html($jsst_row->slug);?>
-                                            </td>
-                                            <td class="left">
-                                                <?php echo esc_html(jssupportticket::JSST_getVarValue($jsst_row->description));?>
-                                            </td>
-                                            <td>
-                                                <?php $jsst_nonce = wp_create_nonce("get-options-for-edit-slug-".$jsst_row->id); ?>
-                                                <a class="action-btn" href="#" onclick="showPopupAndSetValues('<?php echo esc_js($jsst_nonce); ?>' ,<?php echo esc_js($jsst_row->id); ?>)" title="<?php echo esc_attr(__('Edit','js-support-ticket')); ?>">
-                                                    <img src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/edit.png" alt = "<?php echo esc_attr(__('Edit','js-support-ticket')); ?>">
-                                                </a>
+                                            <?php /* The cell keeps id="td_<id>": showPopupAndSetValues()
+                                                     reads the current slug out of it and getFieldValue()
+                                                     writes the edited one back, so the table shows the
+                                                     change before the form is posted. */ ?>
+                                            <th scope="row" class="jsst-col-name jsst-mono" id="<?php echo 'td_'.esc_attr($jsst_row->id);?>"><?php echo esc_html($jsst_row->slug);?></th>
+                                            <td class="jsst-col-say"><?php echo esc_html(jssupportticket::JSST_getVarValue($jsst_row->description));?></td>
+                                            <td class="jsst-col-act">
+                                                <span class="jsst-rowactions">
+                                                    <a class="jsst-act" href="#" onclick="showPopupAndSetValues('<?php echo esc_js($jsst_nonce); ?>' ,<?php echo esc_js($jsst_row->id); ?>); return false;"><?php echo esc_html(__('Edit','js-support-ticket')); ?></a>
+                                                </span>
                                             </td>
                                         </tr>
                                         <?php echo wp_kses(JSSTformfield::hidden($jsst_row->id, $jsst_row->slug),JSST_ALLOWED_TAGS);?>
-                                        <?php
-                                    }
-                                ?>
-                            </tbody>
-                        </table>
-                        <!-- Hidden Fields -->
-                        <div class="js-filter-form-action-wrp">
-                            <?php echo wp_kses(JSSTformfield::submitbutton('btnsubmit', esc_html(__('Save','js-support-ticket')), array('class' => 'button savebutton js-form-act-btn js-form-act-btn')),JSST_ALLOWED_TAGS); ?>
-                            <div class="js-form-act-msg">
-                                <?php echo esc_html(__('This button will only save slugs on current page','js-support-ticket')); ?> !
+                                    <?php } ?>
+                                </tbody>
+                            </table>
                             </div>
                         </div>
                         <?php echo wp_kses(JSSTformfield::hidden('task', ''),JSST_ALLOWED_TAGS); ?>
                         <?php echo wp_kses(JSSTformfield::hidden('pagenum', ($jsst_pagenum > 1) ? $jsst_pagenum : ''),JSST_ALLOWED_TAGS); ?>
                         <?php echo wp_kses(JSSTformfield::hidden('form_request', 'jssupportticket'),JSST_ALLOWED_TAGS); ?>
+                        <div class="jsst-orderbar">
+                            <span class="jsst-orderbar-note"><?php echo esc_html(__('Saves the slugs on this page only.','js-support-ticket')); ?></span>
+                            <?php echo wp_kses(JSSTformfield::submitbutton('btnsubmit', esc_html(__('Save','js-support-ticket')), array('class' => 'jsst-btn jsst-btn-primary')),JSST_ALLOWED_TAGS); ?>
+                        </div>
                     </form>
-                    <?php
-                    if (jssupportticket::$jsst_data[1]) {
-                        echo '<div class="tablenav"><div class="tablenav-pages">' . wp_kses_post(jssupportticket::$jsst_data[1]) . '</div></div>';
-                    }
-                } else {
-                    JSSTlayout::getNoRecordFound();
-                }
+                    <?php JSSTlayout::adminPager(jssupportticket::$jsst_data[1]); ?>
+                <?php } else { ?>
+                    <div class="jsst-card">
+                        <?php JSSTlayout::adminEmpty(
+                            __('No slugs found.', 'js-support-ticket'),
+                            __('A slug is the readable part of an address the plugin builds for a page.', 'js-support-ticket')
+                        ); ?>
+                    </div>
+                <?php }
             ?>
         </div>
     </div>

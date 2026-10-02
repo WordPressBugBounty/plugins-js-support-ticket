@@ -56,6 +56,18 @@ if (jssupportticket::$_config['offline'] == 2) {
                             </div>
                             <div class="js-ticket-from-field-wrp">
                                 <div class="js-ticket-from-field-title">
+                                    <?php echo esc_html(__('Customer suggestions', 'js-support-ticket')); ?>
+                                </div>
+                                <div class="js-ticket-from-field">
+                                    <input type="hidden" name="customersuggestbox" value="1" />
+                                    <label>
+                                        <input type="checkbox" name="customersuggest" value="1" <?php checked(!empty(jssupportticket::$jsst_data[0]->customersuggest)); ?> />
+                                        <?php echo esc_html(__('Also suggest this to customers on the ticket form', 'js-support-ticket')); ?>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="js-ticket-from-field-wrp">
+                                <div class="js-ticket-from-field-title">
                                     <?php echo esc_html(__('Status', 'js-support-ticket')); ?>
                                 </div>
                                 <div class="js-ticket-from-field js-ticket-form-field-select">

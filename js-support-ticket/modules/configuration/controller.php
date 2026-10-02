@@ -55,7 +55,7 @@ class JSSTconfigurationController {
     static function saveconfiguration() {
         $jsst_nonce = JSSTrequest::getVar('_wpnonce');
         if (! wp_verify_nonce( $jsst_nonce, 'save-configuration') ) {
-            die( 'Security check Failed' );
+            die( esc_html__( 'Security check Failed', 'js-support-ticket' ) );
         }
         if (!current_user_can('manage_options')) { //only admin can change it.
             return false;
@@ -72,20 +72,6 @@ class JSSTconfigurationController {
         exit;
     }
 
-    // function to handle auto update configuration
-    function saveautoupdateconfiguration() {
-        $jsst_nonce = JSSTrequest::getVar('_wpnonce');
-        if (! wp_verify_nonce( $jsst_nonce, 'jsst_configuration_nonce') ) {
-             die( 'Security check Failed' );
-        }
-        if (!current_user_can('manage_options')) { //only admin can change it.
-            return false;
-        }
-        $jsst_result = JSSTincluder::getJSModel('configuration')->storeAutoUpdateConfig();
-        $jsst_url = esc_url_raw(admin_url("admin.php?page=jssupportticket&jstlay=addonstatus"));
-        wp_safe_redirect($jsst_url);
-        die();
-    }
 
 }
 

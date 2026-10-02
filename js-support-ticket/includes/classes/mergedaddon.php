@@ -133,6 +133,33 @@ class JSSTmergedaddon {
             'tables'  => array(),
             'options' => array('jsst-addon-actions-active-state', 'jsst-addon-actions-version'),
         ),
+        /* AI Powered Reply. (Roadmap 6.0-AI-01)
+         *
+         * Merged because the merge had already happened and nobody had said so.
+         * Core has carried its own checkAIReplyTicketsBySubject() in the ticket
+         * model and getFilteredReplies() in the reply model for releases; the
+         * add-on's copies were reached only because ticketdetail.php chose the
+         * add-on as the ajax module when it happened to be active. So a site
+         * with the add-on and a site without it ran two copies of the same
+         * feature, and only one of them was getting fixes.
+         *
+         * Worth being precise about what it is, because the name is the reason
+         * it was never questioned: it is not a model and it never was. It finds
+         * replies to earlier tickets whose subject and message overlap this
+         * one's, scores them, and offers them to the agent - a search over the
+         * desk's own history. That is the on-site lane, it costs nothing per
+         * use, and it is exactly what a desk that has switched every model off
+         * should still have. Which is why it belongs in the free core rather
+         * than behind a licence.
+         *
+         * No tables: its four settings are config rows and it never created one.
+         */
+        'aipoweredreply' => array(
+            'label'   => 'AI Powered Reply',
+            'version' => '600',
+            'tables'  => array(),
+            'options' => array('jsst-addon-aipoweredreply-active-state', 'jsst-addon-aipoweredreply-version'),
+        ),
     );
 
     /**
@@ -247,6 +274,14 @@ class JSSTmergedaddon {
         if (!self::coreOwns($jsst_slug)) {
             return;
         }
+        /* Not every merged capability is a module with a model of its own -
+           user options is settings on screens core already owns, and asking the
+           includer for a model it has no file for is a warning printed across
+           the top of whatever page asked. Nothing to repair is not a fault. */
+        $jsst_file = JSSTincluder::getPluginPath($jsst_slug, 'model');
+        if (!$jsst_file || !file_exists($jsst_file)) {
+            return;
+        }
         $jsst_model = JSSTincluder::getJSModel($jsst_slug);
         if (method_exists($jsst_model, 'ensureSchema')) {
             $jsst_model->ensureSchema();
@@ -299,6 +334,14 @@ class JSSTmergedaddon {
                 $jsst_dirs[] = wp_normalize_path(WP_PLUGIN_DIR . '/js-support-ticket-' . $jsst_slug . '/');
             }
         }
+        /* An add-on does not have to have been absorbed into the free core to
+           need this. `JSSTbundle` adds the directory of every add-on a bundle
+           replaced *outright* - one the bundle carries no module for, so core
+           routes nothing to it and its hooks can only fire beside the
+           replacement's. The map above stays what it says it is: capabilities
+           that are now core. This filter is how something else says "and this
+           directory too". (Roadmap 6.5-ECO-01) */
+        $jsst_dirs = (array) apply_filters('jsst_suppressed_addon_dirs', $jsst_dirs);
         if (empty($jsst_dirs)) {
             return;
         }
@@ -413,21 +456,66 @@ class JSSTmergedaddon {
         if (is_admin()) {
             add_action('admin_notices', array(__CLASS__, 'legacyAddonNotice'));
             add_action('wp_ajax_jsst_dismiss_merged_notice', array(__CLASS__, 'dismissNotice'));
+            /* And a row under the plugin itself, for the same reason JSSTbundle
+               grows one: the notice above is dismissible, so it is read once and
+               then never again, while the Plugins screen is where somebody
+               actually decides what to deactivate. A merged add-on had only the
+               notice, which meant that after one dismissal there was nothing
+               anywhere on that screen saying the feature is in the free core
+               now. (Roadmap 4.0-CORE-19) */
+            foreach (array_keys(self::redundant()) as $jsst_slug) {
+                add_action('after_plugin_row_' . self::pluginFileFor($jsst_slug),
+                    array(__CLASS__, 'pluginRow'), 10, 2);
+            }
         }
     }
+
+    /**
+     * The plugin basename of a merged add-on's legacy plugin.
+     *
+     * JSSTlegacy owns this mapping and knows the handful of add-ons whose file
+     * is not simply the directory name repeated; it is asked when it is loaded
+     * and the obvious shape used when it is not, because this runs from the
+     * bootstrap and must not depend on load order.
+     */
+    private static function pluginFileFor($jsst_slug) {
+        if (class_exists('JSSTlegacy') && method_exists('JSSTlegacy', 'pluginFile')) {
+            $jsst_file = JSSTlegacy::pluginFile($jsst_slug);
+            if (!empty($jsst_file)) {
+                return $jsst_file;
+            }
+        }
+        return 'js-support-ticket-' . $jsst_slug . '/js-support-ticket-' . $jsst_slug . '.php';
+    }
+
+    /**
+     * The row under a merged add-on on the Plugins screen.
+     *
+     * Deliberately the quieter of the two: a bundle's row is a warning because
+     * two plugins are installed and one of them wants removing, while this one
+     * is information - the capability is simply in the product now.
+     */
+    public static function pluginRow($jsst_file, $jsst_data) {
+        echo '<tr class="plugin-update-tr active"><td colspan="4" class="plugin-update colspanchange">'
+            . '<div class="update-message notice inline notice-info notice-alt"><p>'
+            . esc_html(__('Now part of the free JS Help Desk core, which is already serving this feature. This add-on is switched on but idle — deactivate it whenever it suits you. Your existing data stays in place.', 'js-support-ticket'))
+            . '</p></div></td></tr>';
+    }
+
+    /**
+     * The option namespace this class's snapshots are recorded under.
+     *
+     * Spelled exactly as it was before the mechanism moved into
+     * JSSTaddonsnapshot, so a site that is part-way through a delete when it
+     * updates still finds the snapshot it took a moment ago.
+     */
+    const SNAPSHOT_NS = 'jsst_merged_addon';
 
     /**
      * Map a plugin basename back to an add-on slug.
      */
     private static function slugFromPlugin($jsst_plugin) {
-        $jsst_dir = jssupportticketphplib::JSST_dirname((string) $jsst_plugin);
-        if ($jsst_dir === '' || $jsst_dir === '.') {
-            $jsst_dir = pathinfo((string) $jsst_plugin, PATHINFO_FILENAME);
-        }
-        if (strpos($jsst_dir, 'js-support-ticket-') !== 0) {
-            return '';
-        }
-        return jssupportticketphplib::JSST_str_replace('js-support-ticket-', '', $jsst_dir);
+        return JSSTaddonsnapshot::slugFromPlugin($jsst_plugin);
     }
 
     /**
@@ -441,26 +529,7 @@ class JSSTmergedaddon {
             return;
         }
         $jsst_map = self::map();
-        $jsst_saved = array();
-        foreach ($jsst_map[$jsst_slug]['tables'] as $jsst_table) {
-            $jsst_live = jssupportticket::$_db->prefix . $jsst_table;
-            $jsst_copy = jssupportticket::$_db->prefix . 'jsst_keep_' . $jsst_table;
-            $jsst_exists = jssupportticket::$_db->get_var(
-                jssupportticket::$_db->prepare('SHOW TABLES LIKE %s', $jsst_live)
-            );
-            if ($jsst_exists != $jsst_live) {
-                continue;
-            }
-            jssupportticket::$_db->query('DROP TABLE IF EXISTS `' . $jsst_copy . '`');
-            jssupportticket::$_db->query('CREATE TABLE `' . $jsst_copy . '` LIKE `' . $jsst_live . '`');
-            jssupportticket::$_db->query('INSERT INTO `' . $jsst_copy . '` SELECT * FROM `' . $jsst_live . '`');
-            if (jssupportticket::$_db->last_error == null) {
-                $jsst_saved[] = $jsst_table;
-            }
-        }
-        if (!empty($jsst_saved)) {
-            update_option('jsst_merged_addon_snapshot_' . $jsst_slug, $jsst_saved, false);
-        }
+        JSSTaddonsnapshot::snapshot(self::SNAPSHOT_NS, $jsst_slug, $jsst_map[$jsst_slug]['tables']);
     }
 
     /**
@@ -474,36 +543,7 @@ class JSSTmergedaddon {
         if ($jsst_slug === '' || !self::isMerged($jsst_slug)) {
             return;
         }
-        $jsst_saved = get_option('jsst_merged_addon_snapshot_' . $jsst_slug);
-        if (empty($jsst_saved) || !is_array($jsst_saved)) {
-            return;
-        }
-        $jsst_restored = false;
-        foreach ($jsst_saved as $jsst_table) {
-            $jsst_live = jssupportticket::$_db->prefix . $jsst_table;
-            $jsst_copy = jssupportticket::$_db->prefix . 'jsst_keep_' . $jsst_table;
-            $jsst_exists = jssupportticket::$_db->get_var(
-                jssupportticket::$_db->prepare('SHOW TABLES LIKE %s', $jsst_copy)
-            );
-            if ($jsst_exists != $jsst_copy) {
-                continue;
-            }
-            // Only restore what the uninstall actually removed; never overwrite
-            // a live table that survived.
-            $jsst_livexists = jssupportticket::$_db->get_var(
-                jssupportticket::$_db->prepare('SHOW TABLES LIKE %s', $jsst_live)
-            );
-            if ($jsst_livexists == $jsst_live) {
-                jssupportticket::$_db->query('DROP TABLE IF EXISTS `' . $jsst_copy . '`');
-                continue;
-            }
-            jssupportticket::$_db->query('RENAME TABLE `' . $jsst_copy . '` TO `' . $jsst_live . '`');
-            if (jssupportticket::$_db->last_error == null) {
-                $jsst_restored = true;
-            }
-        }
-        delete_option('jsst_merged_addon_snapshot_' . $jsst_slug);
-        if ($jsst_restored) {
+        if (JSSTaddonsnapshot::restore(self::SNAPSHOT_NS, $jsst_slug)) {
             update_option('jsst_merged_addon_restored_' . $jsst_slug, 1, false);
         }
     }
@@ -540,7 +580,13 @@ class JSSTmergedaddon {
         echo '<div class="notice notice-info is-dismissible jsst-merged-addon-notice" data-nonce="' . esc_attr(wp_create_nonce('jsst_merged_notice')) . '"><p>';
         echo esc_html(__('JS Help Desk 4.0 includes these features in the free core:', 'js-support-ticket'));
         echo ' <strong>' . wp_kses($jsst_names, JSST_ALLOWED_TAGS) . '</strong>. ';
-        echo esc_html(__('The matching add-ons are still active and still in charge, so nothing has changed on this site. You can deactivate them whenever you like — your existing data stays in place and the built-in version takes over.', 'js-support-ticket'));
+        /* "still active and still in charge" was an earlier draft of the
+           precedence rule and is the opposite of what coreOwns() does: core
+           serves a merged capability on every site, the add-on's files lose to
+           core's in getPluginPath() and its callbacks come off in
+           suppressLegacyHooks(). Saying the add-on is in charge tells somebody
+           the idle plugin is the load-bearing one. (Roadmap 4.0-CORE-19) */
+        echo esc_html(__('The built-in version is already running, so these add-ons are switched on but idle and nothing has changed on this site. You can deactivate them whenever you like — your existing data stays in place.', 'js-support-ticket'));
         echo '</p></div>';
         echo '<script>(function(){var n=document.querySelector(".jsst-merged-addon-notice");if(!n)return;n.addEventListener("click",function(e){if(!e.target.classList.contains("notice-dismiss"))return;var x=new XMLHttpRequest();x.open("POST",ajaxurl);x.setRequestHeader("Content-Type","application/x-www-form-urlencoded");x.send("action=jsst_dismiss_merged_notice&_wpnonce="+encodeURIComponent(n.getAttribute("data-nonce")));});})();</script>';
     }
