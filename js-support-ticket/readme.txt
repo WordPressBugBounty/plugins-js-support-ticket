@@ -3,7 +3,7 @@ Contributors: rabilal
 Tags: helpdesk, support ticket, ticketing system, customer support, knowledge base
 Requires at least: 5.5
 Tested up to: 7.1
-Stable tag: 5.0.0
+Stable tag: 5.0.1
 Requires PHP: 7.4
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
@@ -209,6 +209,17 @@ The [documentation](https://jshelpdesk.com/docs/) covers setup and every add-on,
 
 == Changelog ==
 
+= 5.0.1 =
+Fixes for 5.0.0.
+
+* Help Desk Agents without the Agents & Teams pack can reply to customers' tickets again.
+* Closing a ticket updates the Tickets screen's counts straight away.
+* Overdue options no longer appear on sites without Service Levels & Automation.
+* The slug editor shows and saves the slug correctly.
+* Create Ticket in the WordPress menu opens the form picker; the dashboard's add-on pictures are back.
+* Form conditions offer lists of products, including WooCommerce and Easy Digital Downloads products, instead of asking for an id.
+* Translations updated in all 17 languages.
+
 = 5.0.0 =
 The biggest release in JS Help Desk's history.
 
@@ -255,6 +266,9 @@ The biggest release in JS Help Desk's history.
 See the [full changelog](https://plugins.trac.wordpress.org/browser/js-support-ticket/trunk/changelog.txt).
 
 == Upgrade Notice ==
+
+= 5.0.1 =
+Fixes for 5.0.0, including Help Desk Agents being unable to reply to tickets on sites without the Agents & Teams pack. Recommended for every 5.0.0 site.
 
 = 5.0.0 =
 A major release: 12 paid features become free, add-ons regroup into nine packs, and an AI Agent arrives. Tickets, settings and old add-ons keep working. As with any major update, take a backup first.

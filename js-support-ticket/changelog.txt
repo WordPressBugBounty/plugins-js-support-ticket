@@ -4,6 +4,21 @@ JS Help Desk - full changelog
 The readme lists what changed for site owners. This file keeps the complete,
 technical notes for every release.
 
+= 5.0.1 =
+**Fixed**
+* A user with the Help Desk Agent role, without the Agents & Teams pack, could not reply to customer tickets ("You can only reply to your own tickets."), nor add attachments with a reply. The ownership check added for customers now leaves help-desk staff by role alone, as it already did administrators and Agents & Teams agents; Light Agents still cannot answer customers.
+* Closing a ticket from its page left the Tickets screen counting it as open, and the Closed count unchanged, for up to five minutes. Every change to a ticket now refreshes the counts.
+* Export and the report charts showed "Ticket Overdue" and an Overdue series on sites without Service Levels & Automation, which is what marks tickets overdue.
+* Slugs: the edit popup showed the word "text" instead of the slug, and saving it renamed the slug to "text". It now opens on the slug, saves straight away, and says so when a slug is already used by another page.
+* The dashboard's Available Addons tiles had lost eight of their nine pictures.
+* Help Desk > Create Ticket in the WordPress menu opened the default form even where the form picker is switched on. It now opens the picker, and so does the Create Ticket page reached without a form.
+* Form conditions on Product, Topic, Department or Priority offered a box for typing an id when the site had none of those yet; they now say so, with a link. WC Product and EDD Product conditions are chosen from the shop's products, and a WC Product condition matches the product behind the order line the customer picks.
+* A notice still pointed to the retired Install Add-ons screen.
+
+**Changed**
+* 91 new strings translated into all 17 languages; the translation template lists every string in this version.
+* Version 501 of the database schema records the release only; no tables change.
+
 = 5.0.0 =
 **Add-On Consolidation**
 * Add-ons reissued as nine plugins: Agents & Teams, Service Levels & Automation, Email, Knowledge & Self-Service, AI Agent, Customer Experience, Commerce, Integrations, Reporting & Compliance. Same screens, settings, URLs and tables.

@@ -112,6 +112,7 @@ $jsst_jssupportticket_js ='
 		};
 
         var chart = new google.visualization.LineChart(document.getElementById("curve_chart"));
+        jsstDropOverdue(data, options);
         chart.draw(data, options);
     }
 	/* This used to read `chart.draw(data, options)`, but chart, data and

@@ -78,6 +78,10 @@ class JSSTqueueengine {
     /** Counts already worked out this request, keyed by cache key. */
     private static $jsst_counts = array();
 
+    /** ticketsChanged(): bumped once already this request / again at shutdown. */
+    private static $jsst_bumped = false;
+    private static $jsst_again = false;
+
     /* =====================================================================
      * Wiring
      * ================================================================== */
@@ -115,6 +119,33 @@ class JSSTqueueengine {
         self::$jsst_counts = array();
         $jsst_version = (int) get_option(self::OPT_COUNTS_VERSION, 0);
         update_option(self::OPT_COUNTS_VERSION, $jsst_version + 1, false);
+    }
+
+    /**
+     * A ticket row was written or deleted. (6 October 2026)
+     *
+     * The events above only hear changes made through JSSTticketservice, and
+     * much of the plugin still changes tickets through the model - the Close
+     * button among them - so a closed ticket went on being counted as open on
+     * the Tickets screen for up to COUNTS_TTL. JSSTticketsTable calls this on
+     * every save and delete instead.
+     *
+     * The counts are bumped at once, so the page drawn after the change is
+     * right, and at most once more, at shutdown, however many tickets one
+     * request writes: an import of thousands is two option writes, not
+     * thousands.
+     */
+    public static function ticketsChanged() {
+        self::$jsst_counts = array();
+        if (!self::$jsst_bumped) {
+            self::$jsst_bumped = true;
+            self::flushCounts();
+            return;
+        }
+        if (!self::$jsst_again) {
+            self::$jsst_again = true;
+            add_action('shutdown', array(__CLASS__, 'flushCounts'), 1);
+        }
     }
 
     /* =====================================================================

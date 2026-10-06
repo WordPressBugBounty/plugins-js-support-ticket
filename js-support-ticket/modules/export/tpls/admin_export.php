@@ -133,10 +133,12 @@ $jsst_yesno = array(
                                     <label class="jsst-flabel" for="ticketstatus"><?php echo esc_html(__('Ticket Status','js-support-ticket')); ?></label>
                                     <div class="jsst-fval"><?php echo wp_kses(JSSTformfield::select('ticketstatus', JSSTincluder::getJSModel('status')->getStatusForCombobox(), '', __('Select Ticket Status', 'js-support-ticket'), array('class' => 'jsst-select')), JSST_ALLOWED_TAGS);  ?></div>
                                 </div>
+                                <?php if (in_array('overdue', jssupportticket::$_active_addons)) { /* Overdue comes with the Service Levels pack. */ ?>
                                 <div class="jsst-frow jsst-frow-sm">
                                     <label class="jsst-flabel" for="isoverdue"><?php echo esc_html(__('Ticket Overdue', 'js-support-ticket')); ?></label>
                                     <div class="jsst-fval"><?php echo wp_kses(JSSTformfield::select('isoverdue', $jsst_yesno, '', __('Select Ticket Overdue Status', 'js-support-ticket'), array('class' => 'jsst-select')), JSST_ALLOWED_TAGS);  ?></div>
                                 </div>
+                                <?php } ?>
                                 <?php
                                 /* "Single / Multiple Header" used to live here. It chose between
                                    one header row and a header repeated above every ticket, and it

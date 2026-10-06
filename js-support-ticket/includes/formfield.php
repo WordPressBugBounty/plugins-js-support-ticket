@@ -120,12 +120,23 @@ class JSSTformfield {
         if ($jsst_title != '') {
             $jsst_selectfield .= '<option value="">' . esc_html(jssupportticket::JSST_getVarValue($jsst_title)) . '</option>';
         }
+        /* "WC Product" answers with the order line, which differs on every
+           order; each option also carries the product it is, so a form
+           condition on a product can match. (6 Oct 2026) */
+        $jsst_wcitems = ('wcproductid' === $jsst_name && function_exists('wc_get_order_item_meta'));
         if (!empty($jsst_list))
             foreach ($jsst_list AS $jsst_record) {
+                $jsst_extra = '';
+                if ($jsst_wcitems && is_numeric($jsst_record->id)) {
+                    $jsst_pid = (int) wc_get_order_item_meta((int) $jsst_record->id, '_product_id', true);
+                    if ($jsst_pid > 0) {
+                        $jsst_extra = ' data-jsst-product="' . esc_attr($jsst_pid) . '"';
+                    }
+                }
                 if ((is_array($jsst_defaultvalue) && in_array($jsst_record->id, $jsst_defaultvalue)) || $jsst_defaultvalue == $jsst_record->id)
-                    $jsst_selectfield .= '<option selected="selected" value="' . esc_attr($jsst_record->id) . '">' . esc_html(jssupportticket::JSST_getVarValue($jsst_record->text)) . '</option>';
+                    $jsst_selectfield .= '<option selected="selected" value="' . esc_attr($jsst_record->id) . '"' . $jsst_extra . '>' . esc_html(jssupportticket::JSST_getVarValue($jsst_record->text)) . '</option>';
                 else
-                    $jsst_selectfield .= '<option value="' . esc_attr($jsst_record->id) . '">' . esc_html(jssupportticket::JSST_getVarValue($jsst_record->text)) . '</option>';
+                    $jsst_selectfield .= '<option value="' . esc_attr($jsst_record->id) . '"' . $jsst_extra . '>' . esc_html(jssupportticket::JSST_getVarValue($jsst_record->text)) . '</option>';
             }
 
         $jsst_selectfield .= '</select>';

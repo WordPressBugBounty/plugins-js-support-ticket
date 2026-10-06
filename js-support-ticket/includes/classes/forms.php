@@ -788,6 +788,14 @@ class JSSTforms {
             $jsst_actual = implode(', ', $jsst_actual);
         }
         $jsst_actual = trim((string) $jsst_actual);
+        /* "WC Product" is answered with the order line; a condition names the
+           product, so compare the product behind it. (6 Oct 2026) */
+        if ($jsst_rule['when'] === 'wcproductid' && ctype_digit($jsst_actual) && function_exists('wc_get_order_item_meta')) {
+            $jsst_pid = (int) wc_get_order_item_meta((int) $jsst_actual, '_product_id', true);
+            if ($jsst_pid > 0) {
+                $jsst_actual = (string) $jsst_pid;
+            }
+        }
         $jsst_wanted = trim((string) $jsst_rule['value']);
         switch ($jsst_rule['op']) {
             case 'isnot':
@@ -1242,6 +1250,12 @@ class JSSTforms {
                 for (var jsst_i = 0; jsst_i < jsst_boxes.length; jsst_i++) {
                     var jsst_box = jsst_boxes[jsst_i];
                     if ((jsst_box.type === 'checkbox' || jsst_box.type === 'radio') && !jsst_box.checked) { continue; }
+                    /* An option that names its product (WC Product) answers with it. */
+                    if (jsst_box.tagName === 'SELECT' && jsst_box.selectedIndex > -1
+                            && jsst_box.options[jsst_box.selectedIndex].getAttribute('data-jsst-product')) {
+                        jsst_out.push(jsst_box.options[jsst_box.selectedIndex].getAttribute('data-jsst-product'));
+                        continue;
+                    }
                     if (jsst_box.value !== '') { jsst_out.push(jsst_box.value); }
                 }
                 return jsst_out.join(', ');

@@ -18,6 +18,7 @@ jQuery(document).ready(function ($) {
          ['". esc_html(__('Status','js-support-ticket')) ."', '". esc_html(__('Tickets By Statuses','js-support-ticket')) ."', { role: 'style' }],
          ". wp_kses(jssupportticket::$jsst_data['bar_chart'], JSST_ALLOWED_TAGS)."
         ]);
+        jsstDropOverdue(data, null);
         var view = new google.visualization.DataView(data);
         view.setColumns([0, 1,
                        { calc: 'stringify',
@@ -108,6 +109,8 @@ jQuery(document).ready(function ($) {
         isStacked: true,
         colors:['#ff652f','#5ab9ea','#d89922','#14a76c'],
       };
+      jsstDropOverdue(data, options);
+      view = new google.visualization.DataView(data);
       var chart = new google.visualization.AreaChart(document.getElementById('stack_chart_horizontal'));
       chart.draw(view, options);
   	}

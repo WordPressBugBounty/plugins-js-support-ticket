@@ -170,12 +170,14 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
                                             <?php echo wp_kses(JSSTformfield::select('ticketstatus', JSSTincluder::getJSModel('status')->getStatusForCombobox(), '', __('Select Ticket Status', 'js-support-ticket'), array('class' => 'inputbox js-ticket-form-field-select')), JSST_ALLOWED_TAGS);  ?>
                                         </div>
                                     </div>
+                                    <?php if (in_array('overdue', jssupportticket::$_active_addons)) { /* Overdue comes with the Service Levels pack. */ ?>
                                     <div class="js-ticket-from-field-wrp">
                                         <div class="js-ticket-from-field-title"><?php echo esc_html(__('Ticket Overdue', 'js-support-ticket')); ?>:</div>
                                         <div class="js-ticket-from-field js-ticket-form-field-select">
                                             <?php echo wp_kses(JSSTformfield::select('isoverdue', $jsst_yesno, '', __('Select Ticket Overdue Status', 'js-support-ticket'), array('class' => 'inputbox js-ticket-form-field-select')), JSST_ALLOWED_TAGS);  ?>
                                         </div>
                                     </div>
+                                    <?php } ?>
                                     <?php
                                     /* "Export Style" - single or multiple header -
                                        stood here until the export learned to write

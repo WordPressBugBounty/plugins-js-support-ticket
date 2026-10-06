@@ -368,3 +368,31 @@ function jsReplyHideLoading(){
         jQuery(selector).each(function () { release(this); });
     });
 })(window.jQuery);
+
+/**
+ * Leave the Overdue series out of a report chart on a desk without the Service
+ * Levels pack, which is what marks tickets overdue: without it the series is
+ * always nothing, and a chart line for a feature the site does not have reads
+ * as something missing. Removes the column named Overdue (and its colour), or
+ * the row named Overdue in a chart that lists statuses as rows. (6 Oct 2026)
+ */
+function jsstDropOverdue(data, options) {
+    if (typeof jsstOverdue === 'undefined' || !jsstOverdue.off || !data) {
+        return;
+    }
+    for (var c = data.getNumberOfColumns() - 1; c >= 1; c--) {
+        if (data.getColumnLabel(c) === jsstOverdue.label) {
+            data.removeColumn(c);
+            if (options && options.colors && options.colors.length >= c) {
+                options.colors.splice(c - 1, 1);
+            }
+        }
+    }
+    if (data.getNumberOfColumns() > 0 && data.getColumnType(0) === 'string') {
+        for (var r = data.getNumberOfRows() - 1; r >= 0; r--) {
+            if (data.getValue(r, 0) === jsstOverdue.label) {
+                data.removeRow(r);
+            }
+        }
+    }
+}

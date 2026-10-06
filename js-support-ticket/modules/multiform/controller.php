@@ -105,6 +105,7 @@ class JSSTmultiformController {
                 jssupportticket::$jsst_data['fmoperators'] = JSSTforms::operators();
                 jssupportticket::$jsst_data['fmdepartments'] = JSSTincluder::getJSModel('department')->getDepartmentForCombobox();
                 jssupportticket::$jsst_data['fmchoices'] = self::conditionChoices(jssupportticket::$jsst_data['fmfields']);
+                jssupportticket::$jsst_data['fmempty'] = self::conditionEmpty(jssupportticket::$jsst_data['fmfields'], jssupportticket::$jsst_data['fmchoices']);
                 break;
 
             default:
@@ -142,6 +143,8 @@ class JSSTmultiformController {
             'status'     => array('status',     'getStatusForCombobox'),
             'helptopic'  => array('helptopic',  'getHelpTopicsForCombobox'),
             'product'    => array('product',    'getProductForCombobox'),
+            'wcproductid'  => true,
+            'eddproductid' => true,
         );
         $jsst_out = array();
         foreach ((array) $jsst_fields AS $jsst_key => $jsst_field) {
@@ -155,6 +158,9 @@ class JSSTmultiformController {
             if (!isset($jsst_sources[$jsst_key])) {
                 continue;
             }
+            if ('wcproductid' === $jsst_key || 'eddproductid' === $jsst_key) {
+                continue;
+            }
             list($jsst_module, $jsst_method) = $jsst_sources[$jsst_key];
             $jsst_model = JSSTincluder::getJSModel($jsst_module);
             if (!method_exists($jsst_model, $jsst_method)) {
@@ -165,6 +171,48 @@ class JSSTmultiformController {
                     continue;
                 }
                 $jsst_out[$jsst_key][] = array('v' => (string) $jsst_row->id, 't' => (string) $jsst_row->text);
+            }
+        }
+
+        /* The shop's products, for "WC Product" and "EDD Product", so a
+           condition is chosen from a list rather than typed as an id nobody
+           knows. (6 Oct 2026) A WooCommerce answer is an order line, not a
+           product; JSSTforms compares the product behind it. The newest 500
+           of each, which is every product on all but the largest shops. */
+        if (isset($jsst_fields['wcproductid']) && function_exists('wc_get_products')) {
+            foreach ((array) wc_get_products(array('status' => 'publish', 'limit' => 500, 'orderby' => 'title', 'order' => 'ASC')) AS $jsst_product) {
+                $jsst_out['wcproductid'][] = array('v' => (string) $jsst_product->get_id(), 't' => (string) $jsst_product->get_name());
+            }
+        }
+        if (isset($jsst_fields['eddproductid']) && post_type_exists('download')) {
+            foreach ((array) get_posts(array('post_type' => 'download', 'post_status' => 'publish', 'numberposts' => 500, 'orderby' => 'title', 'order' => 'ASC')) AS $jsst_download) {
+                $jsst_out['eddproductid'][] = array('v' => (string) $jsst_download->ID, 't' => (string) $jsst_download->post_title);
+            }
+        }
+        return $jsst_out;
+    }
+
+    /**
+     * Questions whose answers come from a list this site has not filled yet -
+     * no products, no topics. (6 Oct 2026)
+     *
+     * Their condition used to fall back to a box for typing an id, which looks
+     * like something to fill in and cannot match anything. The editor shows
+     * this instead, with a link to where the list is kept.
+     */
+    private static function conditionEmpty($jsst_fields, $jsst_choices) {
+        $jsst_where = array(
+            'product'      => array(__('No products yet. Add them under Products, then pick one here.', 'js-support-ticket'), admin_url('admin.php?page=product')),
+            'helptopic'    => array(__('No topics yet. Add them under Ticket Topics, then pick one here.', 'js-support-ticket'), admin_url('admin.php?page=helptopic')),
+            'department'   => array(__('No departments yet. Add them under Departments, then pick one here.', 'js-support-ticket'), admin_url('admin.php?page=department')),
+            'priority'     => array(__('No priorities yet. Add them under Priorities, then pick one here.', 'js-support-ticket'), admin_url('admin.php?page=priority')),
+            'wcproductid'  => array(__('No published WooCommerce products found.', 'js-support-ticket'), admin_url('edit.php?post_type=product')),
+            'eddproductid' => array(__('No published downloads found.', 'js-support-ticket'), admin_url('edit.php?post_type=download')),
+        );
+        $jsst_out = array();
+        foreach ($jsst_where AS $jsst_key => $jsst_say) {
+            if (isset($jsst_fields[$jsst_key]) && empty($jsst_choices[$jsst_key])) {
+                $jsst_out[$jsst_key] = array('text' => $jsst_say[0], 'url' => $jsst_say[1], 'link' => __('Open', 'js-support-ticket'));
             }
         }
         return $jsst_out;

@@ -594,7 +594,7 @@ class JSSTupgradeassistant {
         if (in_array('notgranted', $jsst_why, true)) {
             self::printBanner('info',
                 __('Some of your add-ons from before 5.0.0 are not included in your license', 'js-support-ticket'),
-                __('They keep working as they are, without further updates. The Install Add-ons screen lists which ones, and what your license does include.', 'js-support-ticket'),
+                __('They keep working as they are, without further updates. License & Add-ons lists which ones, and what your license does include.', 'js-support-ticket'),
                 array(array(admin_url(self::SCREEN), __('See which', 'js-support-ticket'), false)),
                 'upg-notgranted'
             );
@@ -605,7 +605,7 @@ class JSSTupgradeassistant {
            are not installed yet: the greeting, with the way to get them. */
         if ('' !== $jsst_greeting && !empty($jsst_plan['extra'])) {
             self::printBanner('success', $jsst_greeting,
-                __('Install the add-ons your license now includes from the Install Add-ons screen. Nothing changes on this site until you do.', 'js-support-ticket'),
+                __('Install the add-ons your license now includes from License & Add-ons. Nothing changes on this site until you do.', 'js-support-ticket'),
                 array(array(admin_url(self::SCREEN), __('Install add-ons', 'js-support-ticket'), true)),
                 'upg-welcome'
             );

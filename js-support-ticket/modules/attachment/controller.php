@@ -55,7 +55,7 @@ class JSSTattachmentController {
             );
         }
 
-        if ( ! current_user_can('manage_options') && ! ( in_array('agent', jssupportticket::$_active_addons) && JSSTincluder::getJSModel('agent')->isUserStaff() ) ) {
+        if ( ! current_user_can('manage_options') && ! current_user_can( JSSTroles::CAP_TICKETS ) && ! ( in_array('agent', jssupportticket::$_active_addons) && JSSTincluder::getJSModel('agent')->isUserStaff() ) ) {
             $jsst_owns_ticket = (!JSSTincluder::getObjectClass('user')->isguest())
                 ? JSSTincluder::getJSModel('ticket')->validateTicketDetailForUser($jsst_ticketid)
                 : JSSTincluder::getJSModel('ticket')->validateTicketDetailForVisitor($jsst_ticketid);

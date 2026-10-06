@@ -5,7 +5,7 @@
   Plugin URI: https://www.jshelpdesk.com
   Description: JS Help Desk is a trusted open source ticket system. JS Help Desk is a simple, easy to use, web-based customer support system. User can create ticket from front-end. JS Help Desk comes packed with lot features than most of the expensive(and complex) support ticket system on market. JS Help Desk provide you best industry help desk system.
   Author: JS Help Desk
-  Version: 5.0.0
+  Version: 5.0.1
   Requires at least: 5.5
   Requires PHP: 7.4
   Text Domain: js-support-ticket
@@ -155,7 +155,7 @@ class jssupportticket {
         self::$jsst_data = array();
         self::$_search = array();
         self::$_captcha = array();
-        self::$_currentversion = '500';
+        self::$_currentversion = '501';
         self::$_addon_query = array('select'=>'','join'=>'','where'=>'');
         self::$_jshdsession = JSSTincluder::getObjectClass('wphdsession');
         global $wpdb;
@@ -303,7 +303,7 @@ class jssupportticket {
                     // restore colors data end
                     update_option('jsst_currentversion', self::$_currentversion);
                     include_once JSST_PLUGIN_PATH . 'includes/updates/updates.php';
-                    JSSTupdates::checkUpdates('500');
+                    JSSTupdates::checkUpdates(self::$_currentversion);
                     JSSTincluder::getJSModel('jssupportticket')->updateColorFile();
                 }
             }
@@ -1736,6 +1736,12 @@ class jssupportticket {
         wp_enqueue_script('jquery-ui-accordion');
         wp_enqueue_script('jsst-formvalidator',JSST_PLUGIN_URL.'includes/js/jquery.form-validator.js', array(), jssupportticket::assetVersion('includes/js/jquery.form-validator.js'), true);
         wp_enqueue_script( 'js-support-ticket-main-js', JSST_PLUGIN_URL . 'includes/js/common.js', array( 'jquery' ), jssupportticket::assetVersion('includes/js/common.js'), true );
+        /* For jsstDropOverdue() in common.js: the report charts leave out the
+           Overdue series on a desk without the Service Levels pack. */
+        wp_add_inline_script('js-support-ticket-main-js', 'var jsstOverdue = ' . wp_json_encode(array(
+            'off'   => !in_array('overdue', jssupportticket::$_active_addons),
+            'label' => esc_html(__('Overdue', 'js-support-ticket')),
+        )) . ';', 'before');
         if(in_array('notification', jssupportticket::$_active_addons)){
             wp_localize_script('commonjs', 'common', array('apiKey_firebase' => jssupportticket::$_config['apiKey_firebase'],'authDomain_firebase'=> jssupportticket::$_config['authDomain_firebase'],'databaseURL_firebase'=>jssupportticket::$_config['databaseURL_firebase'], 'projectId_firebase' => jssupportticket::$_config['projectId_firebase'], 'storageBucket_firebase' => jssupportticket::$_config['storageBucket_firebase'], 'messagingSenderId_firebase' => jssupportticket::$_config['messagingSenderId_firebase']));
         }

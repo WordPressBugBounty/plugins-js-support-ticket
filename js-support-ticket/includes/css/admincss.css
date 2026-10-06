@@ -2053,7 +2053,8 @@ div.jsstadmin-add-on-page-wrp div.add-on-page-cnt div.add-on-msg a.add-on-msg-bt
 div.jsstadmin-add-on-page-wrp div.add-on-page-cnt div.add-on-list {display: grid;grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));gap: 20px;width: 100%;padding: 30px 0 45px;border-bottom: 2px solid #dbdbda;}
 div.jsstadmin-add-on-page-wrp div.add-on-page-cnt div.add-on-list div.add-on-item {display: flex;flex-direction: column;margin: 0;padding: 25px 20px;text-align: center;background: #fafafa;border: 1px solid #e6e6e6;border-radius: 12px;transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease, background .2s ease;}
 div.jsstadmin-add-on-page-wrp div.add-on-page-cnt div.add-on-list div.add-on-item:hover {border-color: #563d67;background: #fff;transform: translateY(-4px);box-shadow: 0 12px 28px 0 rgba(0,0,0,0.14);}
-div.jsstadmin-add-on-page-wrp div.add-on-page-cnt div.add-on-list div.add-on-item img.add-on-img {margin: 0 auto 18px;max-width: 100%;height: auto;}
+div.jsstadmin-add-on-page-wrp div.add-on-page-cnt div.add-on-list div.add-on-item .add-on-img {margin: 0 auto 18px;width: 64px;height: 64px;border-radius: 16px;}
+div.jsstadmin-add-on-page-wrp div.add-on-page-cnt div.add-on-list div.add-on-item .add-on-img .dashicons {font-size: 32px;width: 32px;height: 32px;}
 div.jsstadmin-add-on-page-wrp div.add-on-page-cnt div.add-on-list div.add-on-item div.add-on-name {margin-bottom: 12px;font-size: 17px;color: #23282d;font-weight: bold;line-height: 1.4;}
 div.jsstadmin-add-on-page-wrp div.add-on-page-cnt div.add-on-list div.add-on-item div.add-on-price {margin-bottom: 25px;font-weight: 700;font-size: 45px;line-height: initial;}
 div.jsstadmin-add-on-page-wrp div.add-on-page-cnt div.add-on-list div.add-on-item div.add-on-txt {flex: 1 1 auto;margin-bottom: 20px;line-height: 1.7;color: #6a6d6f;font-size: 14px;}
@@ -6294,6 +6295,9 @@ div#jsstadmin-data-wrp {width: calc(100% - 48px);margin: 0 24px 24px;padding: 5p
 #jsstadmin-wrapper .jsst-table-hooks th:nth-child(2) {width: 30%;}
 #jsstadmin-wrapper .jsst-table-hooks th:nth-child(3) {width: 36%;}
 #jsstadmin-wrapper .jsst-mono {font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;font-size: 11.5px;text-transform: uppercase;}
+/* A slug is part of an address, and addresses are lower case: shown as it is
+   typed, not upper-cased like the codes .jsst-mono is otherwise for. */
+#jsstadmin-wrapper .jsst-mono.jsst-slug {text-transform: none;}
 #jsstadmin-wrapper code.jsst-code, #jsstadmin-wrapper .jsst-code {padding: 2px 6px;border-radius: 5px;background: var(--jsst-page-bg, #f6f7f9);color: var(--jsst-text, #1a1d23);font-size: 12px;overflow-wrap: anywhere;}
 /* A fold for detail that most readers will not need. */
 #jsstadmin-wrapper .jsst-details {margin: 8px 0 0;}

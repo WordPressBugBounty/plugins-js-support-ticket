@@ -58,6 +58,7 @@ wp_add_inline_script('js-support-ticket-main-js',$jsst_jssupportticket_js);
         };
 
         var chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
+        jsstDropOverdue(data, options);
         chart.draw(data, options);
     }
 ";

@@ -46,7 +46,7 @@ class JSSTpremiumpluginModel {
     function verifyAddonSqlFile($jsst_addon_name,$jsst_addon_version){
         return wp_json_encode(array(
             'error_code' => 'jsst_legacy_addon',
-            'error'      => __('This add-on is from JS Help Desk 4.0.0 or earlier and cannot be set up on 5.0.0. Its features are in one of the 5.0.0 bundles: install that from Install Add-ons instead.', 'js-support-ticket'),
+            'error'      => __('This add-on is from JS Help Desk 4.0.0 or earlier and cannot be set up on 5.0.0. Its features are in one of the 5.0.0 bundles: install that from License & Add-ons instead.', 'js-support-ticket'),
         ));
     }
 

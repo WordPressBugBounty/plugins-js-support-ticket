@@ -128,6 +128,7 @@ $jsst_jssupportticket_js ='
 		};
 
         var chart = new google.visualization.LineChart(document.getElementById("curve_chart"));
+        jsstDropOverdue(data, options);
         chart.draw(data, options);
     }
     /* Google Charts measures the container once, at draw time. Without this a

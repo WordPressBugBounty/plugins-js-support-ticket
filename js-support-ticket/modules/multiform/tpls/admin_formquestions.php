@@ -636,6 +636,10 @@ if (!function_exists('jsst_logic_condition')) {
                     var jsstAndWord = <?php echo wp_json_encode(esc_html(__('and', 'js-support-ticket'))); ?>;
                     var jsstOrWord = <?php echo wp_json_encode(esc_html(__('or', 'js-support-ticket'))); ?>;
                     var jsstIdFields = <?php echo wp_json_encode(method_exists('JSSTforms', 'idBacked') ? JSSTforms::idBacked() : array()); ?>;
+                    /* Lists this site has not filled yet: a note and a link, not a
+                       box for typing an id. (6 Oct 2026) */
+                    var jsstEmpty = <?php echo wp_json_encode(isset(jssupportticket::$jsst_data['fmempty']) ? jssupportticket::$jsst_data['fmempty'] : array()); ?>;
+                    var jsstIdText = <?php echo wp_json_encode(__('This question is stored as an id, so a name typed here will never match. Use "has been answered" unless you know the id.', 'js-support-ticket')); ?>;
 
                     /* The answer box and the id warning, shown or hidden for what
                        the row now says. Both are decided from the row itself rather
@@ -651,11 +655,24 @@ if (!function_exists('jsst_logic_condition')) {
                         var jsstOp = jsstOpEl.value;
                         var jsstNoValue = (jsstOp === 'filled' || jsstOp === 'empty');
                         var jsstHasList = !!(jsstChoices[jsstWhen] && jsstChoices[jsstWhen].length);
-                        if (jsstCell) { jsstCell.style.display = jsstNoValue ? 'none' : ''; }
+                        var jsstNone = (!jsstNoValue && !jsstHasList && jsstEmpty[jsstWhen]) ? jsstEmpty[jsstWhen] : null;
+                        if (jsstCell) { jsstCell.style.display = (jsstNoValue || jsstNone) ? 'none' : ''; }
                         if (jsstNote) {
-                            var jsstWarn = (!jsstNoValue && jsstWhen !== '' && !jsstHasList
-                                && jsstIdFields.indexOf(jsstWhen) !== -1);
-                            jsstNote.style.display = jsstWarn ? '' : 'none';
+                            jsstNote.textContent = '';
+                            if (jsstNone) {
+                                jsstNote.appendChild(document.createTextNode(jsstNone.text + ' '));
+                                var jsstGo = document.createElement('a');
+                                jsstGo.href = jsstNone.url;
+                                jsstGo.target = '_blank';
+                                jsstGo.textContent = jsstNone.link;
+                                jsstNote.appendChild(jsstGo);
+                                jsstNote.style.display = '';
+                            } else {
+                                jsstNote.textContent = jsstIdText;
+                                var jsstWarn = (!jsstNoValue && jsstWhen !== '' && !jsstHasList
+                                    && jsstIdFields.indexOf(jsstWhen) !== -1);
+                                jsstNote.style.display = jsstWarn ? '' : 'none';
+                            }
                         }
                     }
 
@@ -733,6 +750,8 @@ if (!function_exists('jsst_logic_condition')) {
                         jsstCell.innerHTML = '';
                         jsstCell.appendChild(jsstNew);
                     }
+
+                    Array.prototype.forEach.call(jsstBox.querySelectorAll('.jsst-logic-cond'), jsstPaintCond);
 
                     jsstBox.addEventListener('change', function (jsstEvent) {
                         var jsstEl = jsstEvent.target;

@@ -97,7 +97,7 @@ class JSSTreplyModel {
             if (!$jsst_row) {
                 return false;
             }
-            if (!current_user_can('manage_options') && !(in_array('agent', jssupportticket::$_active_addons) && JSSTincluder::getJSModel('agent')->isUserStaff())) {
+            if (!current_user_can('manage_options') && !current_user_can(JSSTroles::CAP_TICKETS) && !(in_array('agent', jssupportticket::$_active_addons) && JSSTincluder::getJSModel('agent')->isUserStaff())) {
                 $jsst_owns_ticket = (!JSSTincluder::getObjectClass('user')->isguest())
                     ? JSSTincluder::getJSModel('ticket')->validateTicketDetailForUser($jsst_row->id)
                     : JSSTincluder::getJSModel('ticket')->validateTicketDetailForVisitor($jsst_row->id);
@@ -138,7 +138,13 @@ class JSSTreplyModel {
            piping (ticketviaemail, set only by the piping code; the web
            controller strips it) are authorised further down / by their route. */
         $jsst_viaemail = isset($jsst_data['ticketviaemail']) && $jsst_data['ticketviaemail'] == 1;
+        /* Help-desk staff by role count as staff here too: the free plugin's
+           Help Desk Agent and Light Agent roles (JSSTroles::CAP_TICKETS), not only
+           administrators and agents on the Agents & Teams screen. Leaving them
+           out refused every reply a role agent wrote ("You can only reply to
+           your own tickets.", reported 6 Oct 2026). */
         if (!$jsst_viaemail && !JSSTcapability::isSystem() && !current_user_can('manage_options')
+                && !current_user_can(JSSTroles::CAP_TICKETS)
                 && !(in_array('agent', jssupportticket::$_active_addons) && JSSTincluder::getJSModel('agent')->isUserStaff())) {
             $jsst_owns_ticket = (!JSSTincluder::getObjectClass('user')->isguest())
                 ? JSSTincluder::getJSModel('ticket')->validateTicketDetailForUser($jsst_id)
@@ -621,7 +627,7 @@ class JSSTreplyModel {
 			WHERE reply.id =  %d";
         $jsst_query = jssupportticket::$_db->prepare($jsst_query, $jsst_replyid);
         $jsst_replyuser = jssupportticket::$_db->get_row($jsst_query);
-        if ($jsst_replyuser && !current_user_can('manage_options') && !(in_array('agent', jssupportticket::$_active_addons) && JSSTincluder::getJSModel('agent')->isUserStaff())) {
+        if ($jsst_replyuser && !current_user_can('manage_options') && !current_user_can(JSSTroles::CAP_TICKETS) && !(in_array('agent', jssupportticket::$_active_addons) && JSSTincluder::getJSModel('agent')->isUserStaff())) {
             $jsst_owns_ticket = (!JSSTincluder::getObjectClass('user')->isguest())
                 ? JSSTincluder::getJSModel('ticket')->validateTicketDetailForUser($jsst_replyuser->jsst_reply_ticketid)
                 : JSSTincluder::getJSModel('ticket')->validateTicketDetailForVisitor($jsst_replyuser->jsst_reply_ticketid);

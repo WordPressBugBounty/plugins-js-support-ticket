@@ -81,11 +81,13 @@ if (jssupportticket::$_config['offline'] == 2) {
                                                     <span class="js-report-box-title"><?php echo esc_html(__('Pending','js-support-ticket')); ?></span>
                                                     <div class="js-report-box-color"></div>
                                                 </div>
+                                                <?php if (in_array('overdue', jssupportticket::$_active_addons)) { ?>
                                                 <div class="js-col-md-2 js-admin-report-box box4">
                                                     <span class="js-report-box-number"><?php echo esc_html($jsst_department->overdueticket); ?></span>
                                                     <span class="js-report-box-title"><?php echo esc_html(__('Overdue','js-support-ticket')); ?></span>
                                                     <div class="js-report-box-color"></div>
                                                 </div>
+                                                <?php } ?>
                                                 <div class="js-col-md-2 js-admin-report-box box5">
                                                     <span class="js-report-box-number"><?php echo esc_html($jsst_department->closeticket); ?></span>
                                                     <span class="js-report-box-title"><?php echo esc_html(__('Closed','js-support-ticket')); ?></span>

@@ -76,7 +76,7 @@
                     <div class="add-on-list">
                         <?php foreach (JSSTbundle::catalogue() as $jsst_file => $jsst_bundle) { ?>
                             <div class="add-on-item <?php echo esc_attr($jsst_bundle['slug']); ?>">
-                                <img class="add-on-img" src="<?php echo esc_url(JSST_PLUGIN_URL . 'includes/images/add-on-list/' . $jsst_bundle['image']); ?>" alt="" />
+                                <span class="jsst-lp-tile add-on-img" style="--jsst-pack:<?php echo esc_attr($jsst_bundle['color']); ?>" aria-hidden="true"><span class="dashicons dashicons-<?php echo esc_attr($jsst_bundle['icon']); ?>"></span></span>
                                 <div class="add-on-name"><?php echo esc_html($jsst_bundle['title']); ?></div>
 
                                 <div class="add-on-txt"><?php echo esc_html($jsst_bundle['description']); ?></div>

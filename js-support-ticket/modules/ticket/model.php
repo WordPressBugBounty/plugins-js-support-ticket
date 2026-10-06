@@ -2220,6 +2220,10 @@ class JSSTticketModel {
         if (jssupportticket::$_db->last_error != null) {
             JSSTincluder::getJSModel('systemerror')->addSystemError();
         }
+        /* Answered or not decides the Waiting on Agent / Customer queues. */
+        if (class_exists('JSSTqueueengine')) {
+            JSSTqueueengine::ticketsChanged();
+        }
         return;
     }
 

@@ -32,8 +32,12 @@ JSSTmessage::getMessage();
                 jQuery("form#jsstadmin-form").submit();
             }
 
+            /* The slug cell is a <th id="td_<id>"> since the table was redrawn;
+               "td#td_" found nothing, so the popup opened on the word "text"
+               and saving it renamed the slug to that. Matched by id alone now,
+               and read as text, not HTML. (6 Oct 2026) */
             function showPopupAndSetValues(nonce, id,slug) {//Showing PopUp
-                slug = jQuery("td#td_"+id).html();
+                slug = jQuery.trim(jQuery("#td_"+id).text());
                 slug_for_edit = id;
                 jQuery.post(ajaxurl, {action: "jsticket_ajax", jstmod: "slug", task: "getOptionsForEditSlug",id:id ,slug:slug, "_wpnonce": nonce}, function (data) {
                     if (data) {
@@ -53,11 +57,19 @@ JSSTmessage::getMessage();
                 }, 700);
             }
 
+            /* Save in the popup saves: it used to change only the hidden field
+               and wait for the Save button under the table, so an edit looked
+               lost - and the table did not even show it. */
             function getFieldValue() {
-                var slugvalue = jQuery("#slugedit").val();
+                var slugvalue = jQuery.trim(jQuery("#slugedit").val());
+                if (slugvalue === "") {
+                    jQuery("#slugedit").focus();
+                    return;
+                }
                 jQuery("input#"+slug_for_edit).val(slugvalue);
-                jQuery("td#td_"+slug_for_edit).html(slugvalue);
+                jQuery("#td_"+slug_for_edit).text(slugvalue);
                 closePopup();
+                jQuery("form#js-list-form").submit();
             }
         ';
         wp_add_inline_script('js-support-ticket-main-js',$jsst_jssupportticket_js);
@@ -131,7 +143,7 @@ JSSTmessage::getMessage();
                                                      reads the current slug out of it and getFieldValue()
                                                      writes the edited one back, so the table shows the
                                                      change before the form is posted. */ ?>
-                                            <th scope="row" class="jsst-col-name jsst-mono" id="<?php echo 'td_'.esc_attr($jsst_row->id);?>"><?php echo esc_html($jsst_row->slug);?></th>
+                                            <th scope="row" class="jsst-col-name jsst-mono jsst-slug" id="<?php echo 'td_'.esc_attr($jsst_row->id);?>"><?php echo esc_html($jsst_row->slug);?></th>
                                             <td class="jsst-col-say"><?php echo esc_html(jssupportticket::JSST_getVarValue($jsst_row->description));?></td>
                                             <td class="jsst-col-act">
                                                 <span class="jsst-rowactions">

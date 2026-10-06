@@ -58,5 +58,22 @@ class JSSTticketsTable extends JSSTtable {
 	function __construct() {
 		parent::__construct('tickets', 'id'); // tablename, primarykey
 	}
+
+	/* A ticket that changes state changes the queue counts. (6 October 2026) */
+	function store() {
+		$jsst_done = parent::store();
+		if ($jsst_done && class_exists('JSSTqueueengine')) {
+			JSSTqueueengine::ticketsChanged();
+		}
+		return $jsst_done;
+	}
+
+	function delete($jsst_id) {
+		$jsst_done = parent::delete($jsst_id);
+		if ($jsst_done && class_exists('JSSTqueueengine')) {
+			JSSTqueueengine::ticketsChanged();
+		}
+		return $jsst_done;
+	}
 }
 ?>

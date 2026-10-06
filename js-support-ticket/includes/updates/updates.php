@@ -41,7 +41,12 @@ class JSSTupdates {
                 // does. Recording 400 for a file that was never opened is what
                 // made the missing tables permanent, because this option is
                 // then what stops it ever being tried again.
-                if (JSSTupdates::applySqlFiles($jsst_cversion, $jsst_cversion)) {
+                /* A site that has never recorded a file is a fresh install:
+                   it needs the 5.0 file as well, which creates the 5.0
+                   tables, not only the current release's. 5.0.1 (6 Oct 2026)
+                   is the first release after it with a file of its own. */
+                $jsst_from = (false === get_option(self::APPLIED_OPTION, false)) ? '500' : $jsst_cversion;
+                if (JSSTupdates::applySqlFiles($jsst_from, $jsst_cversion)) {
                     update_option(self::APPLIED_OPTION, (string) $jsst_cversion, false);
                 }
             }

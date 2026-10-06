@@ -171,6 +171,7 @@ if (!defined('JSST_ALLOWED_TAGS')) {
             'value' => array(),
             'selected' => array(),
             'style' => array(),
+            'data-jsst-product' => array(),
         ),
         'img'      => array(
             'src'  => array(),

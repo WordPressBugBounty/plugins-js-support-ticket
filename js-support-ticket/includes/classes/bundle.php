@@ -353,21 +353,21 @@ class JSSTbundle {
      * in the dashboard tile and on the status page - because four copies of a
      * sentence is four sentences the moment one of them is edited.
      *
-     * `image` is the tile art. The nine have none of their own yet, so each
-     * points at the closest of the twenty-five, which is honest enough for a
-     * placeholder and never a missing file.
+     * `icon` and `color` are the tile: a dashicon on a tint of the colour,
+     * the same one each add-on wears on the Addons List, so the dashboard
+     * tile and the card it links to look like the same product.
      */
     public static function catalogue() {
         $jsst_art = array(
-            'agents'        => 'agent.png',
-            'servicelevels' => 'ticket-auto-close.png',
-            'emailsuite'    => 'email-piping.png',
-            'knowledge'     => 'kb.png',
-            'aiagent'       => 'instantresolve.png',
-            'experience'    => 'multiform.png',
-            'commerce'      => 'woocommerce.png',
-            'integrations'  => 'mail-chimp.png',
-            'reporting'     => 'ticket-history.png',
+            'agents'        => array('groups',        '#2563eb'),
+            'servicelevels' => array('clock',         '#b45309'),
+            'emailsuite'    => array('email-alt',     '#0e7490'),
+            'knowledge'     => array('book',          '#15803d'),
+            'aiagent'       => array('lightbulb',     '#7c3aed'),
+            'experience'    => array('format-chat',   '#db2777'),
+            'commerce'      => array('cart',          '#c2410c'),
+            'integrations'  => array('admin-plugins', '#0f766e'),
+            'reporting'     => array('chart-bar',     '#4f46e5'),
         );
         $jsst_out = array();
         foreach (self::bundles() as $jsst_slug => $jsst_bundle) {
@@ -378,7 +378,8 @@ class JSSTbundle {
                 'description' => $jsst_bundle['summary'],
                 'plugin_file' => $jsst_file . '/' . $jsst_file . '.php',
                 'url'         => 'https://jshelpdesk.com/product/' . $jsst_slug . '/',
-                'image'       => isset($jsst_art[$jsst_slug]) ? $jsst_art[$jsst_slug] : 'logo.png',
+                'icon'        => isset($jsst_art[$jsst_slug]) ? $jsst_art[$jsst_slug][0] : 'admin-plugins',
+                'color'       => isset($jsst_art[$jsst_slug]) ? $jsst_art[$jsst_slug][1] : '#4f46e5',
                 'installed'   => is_dir(self::bundlePath($jsst_slug)),
                 'active'      => self::active($jsst_slug),
             );

@@ -58,6 +58,7 @@ wp_add_inline_script('js-support-ticket-main-js',$jsst_jssupportticket_js);
         };
 
         var chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
+        jsstDropOverdue(data, options);
         chart.draw(data, options);
     }
 ";
@@ -168,11 +169,13 @@ wp_add_inline_script('ticket-google-charts-handle',$jsst_jssupportticket_js);
                         <span class="js-report-box-title"><?php echo esc_html(__('Pending','js-support-ticket')); ?></span>
                         <div class="js-report-box-color"></div>
                     </div>
+                    <?php if (in_array('overdue', jssupportticket::$_active_addons)) { ?>
                     <div class="js-col-md-2 js-admin-report-box box4">
                         <span class="js-report-box-number"><?php echo esc_html($jsst_agent->overdueticket); ?></span>
                         <span class="js-report-box-title"><?php echo esc_html(__('Overdue','js-support-ticket')); ?></span>
                         <div class="js-report-box-color"></div>
                     </div>
+                    <?php } ?>
                     <div class="js-col-md-2 js-admin-report-box box5">
                         <span class="js-report-box-number"><?php echo esc_html($jsst_agent->closeticket); ?></span>
                         <span class="js-report-box-title"><?php echo esc_html(__('Closed','js-support-ticket')); ?></span>

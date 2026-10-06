@@ -688,8 +688,8 @@ JSSTmessage::getMessage();
 
                Read from JSSTbundle::catalogue() instead, which is the manifest
                the Plugins screen, the Addons List and the status page also read.
-               The icon is the tile art that travels with each entry rather than
-               a hand-drawn SVG per row, because nine bundles with nine drawings
+               The icon and colour travel with each entry too - the same tile
+               the Addons List draws - because nine bundles with nine drawings
                is nine more things to keep in step. */
             $jsst_available_addons = [];
             foreach (JSSTbundle::catalogue() as $jsst_file => $jsst_bundle) {
@@ -698,8 +698,8 @@ JSSTmessage::getMessage();
                     'description' => $jsst_bundle['description'],
                     'plugin_file' => $jsst_bundle['plugin_file'],
                     'url'         => $jsst_bundle['url'],
-                    'icon_bg'     => 'js-hlpdsk-addon-icon-bg-blue',
-                    'icon_img'    => JSST_PLUGIN_URL . 'includes/images/add-on-list/' . $jsst_bundle['image'],
+                    'icon'        => $jsst_bundle['icon'],
+                    'color'       => $jsst_bundle['color'],
                 ];
             }
 
@@ -742,9 +742,7 @@ JSSTmessage::getMessage();
                             ?>
                             <div class="bg-white p-5 rounded-xl shadow-lg flex flex-col items-start space-y-3 border border-gray-200">
                                 <div class="flex items-center space-x-3">
-                                    <div class="bg-gray-100 p-3 rounded-lg">
-                                        <img class="w-6 h-6" src="<?php echo esc_url($jsst_addon['icon_img']); ?>" alt="" />
-                                    </div>
+                                    <span class="jsst-lp-tile" style="--jsst-pack:<?php echo esc_attr($jsst_addon['color']); ?>" aria-hidden="true"><span class="dashicons dashicons-<?php echo esc_attr($jsst_addon['icon']); ?>"></span></span>
                                     <h4 class="font-bold text-gray-800">
                                         <?php echo esc_html($jsst_addon['title']); ?>
                                     </h4>

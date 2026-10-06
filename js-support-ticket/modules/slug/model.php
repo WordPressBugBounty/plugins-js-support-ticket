@@ -48,23 +48,43 @@ class JSSTslugModel {
             return false;
         }
         $jsst_row = JSSTincluder::getJSTable('slug');
+        $jsst_taken = array();
+        $jsst_saved = 0;
         foreach ($jsst_data as $jsst_id => $jsst_slug) {
             if($jsst_id != '' && is_numeric($jsst_id)){
                 $jsst_slug = sanitize_title($jsst_slug);
                 if($jsst_slug != ''){
+                    /* Unchanged: every slug on the page is posted with the form. */
+                    if ($jsst_slug === (string) jssupportticket::$_db->get_var(jssupportticket::$_db->prepare("SELECT slug FROM " . jssupportticket::$_db->prefix . "js_ticket_slug WHERE id = %d", $jsst_id))) {
+                        continue;
+                    }
+                    /* Used by another page: refused, and now said so - the
+                       screen used to report "stored" over a slug it had
+                       skipped. The row's own unchanged slug is not a clash. */
                     $jsst_query = jssupportticket::$_db->prepare("SELECT COUNT(id) FROM " . jssupportticket::$_db->prefix . "js_ticket_slug
-                            WHERE slug = %s ", $jsst_slug);
+                            WHERE slug = %s AND id != %d", $jsst_slug, $jsst_id);
                     $jsst_slug_flag = jssupportticket::$_db->get_var($jsst_query);
                     if($jsst_slug_flag > 0){
+                        $jsst_taken[] = $jsst_slug;
                         continue;
                     }else{
                         $jsst_row->update(array('id' => $jsst_id, 'slug' => $jsst_slug));
+                        ++$jsst_saved;
                     }
                 }
             }
         }
         update_option('rewrite_rules', '');
-        JSSTmessage::setMessage(esc_html(__('Slug(s) has been stored', 'js-support-ticket')), 'updated');
+        if (!empty($jsst_taken)) {
+            JSSTmessage::setMessage(esc_html(sprintf(
+                /* translators: %s: slug(s), comma separated */
+                __('Not saved, already used by another page: %s', 'js-support-ticket'),
+                implode(', ', $jsst_taken)
+            )), 'error');
+        }
+        if ($jsst_saved > 0 || empty($jsst_taken)) {
+            JSSTmessage::setMessage(esc_html(__('Slug(s) has been stored', 'js-support-ticket')), 'updated');
+        }
         return;
     }
 
@@ -144,7 +164,7 @@ class JSSTslugModel {
                     </span>';
         $jsst_html .= '<div class="userpopup-search">
                     <div class="popup-field-title">' . esc_html(__('Slug','js-support-ticket')).' '. esc_html(__('Name','js-support-ticket')) . ' <span style="color: red;"> *</span></div>
-                         <div class="popup-field-obj">' . JSSTformfield::text('slugedit', isset($jsst_slug) ? jssupportticketphplib::JSST_trim($jsst_slug) : 'text', '', array('class' => 'inputbox one', 'data-validation' => 'required')) . '</div>
+                         <div class="popup-field-obj">' . JSSTformfield::text('slugedit', jssupportticketphplib::JSST_trim((string) $jsst_slug), array('class' => 'inputbox one', 'data-validation' => 'required')) . '</div>
                     </div>';
         $jsst_html .='<div class="popup-act-btn-wrp">
                     ' . JSSTformfield::button('save', esc_html(__('Save', 'js-support-ticket')), array('class' => 'button savebutton popup-act-btn','onClick'=>'getFieldValue();'));

@@ -1041,6 +1041,16 @@ $jsst_jssupportticket_js = '
 <?php if(in_array('multiform', jssupportticket::$_active_addons)){ ?>
     <?php JSSTlayout::adminFormPicker(); ?>
 <?php }
+/* Create Ticket reached with no form chosen - WordPress's menu from Posts or
+   the Dashboard, a bookmark - on a desk that asks which form first: show the
+   picker on arrival rather than quietly opening the default form. Only with
+   more than one form, when there is a choice to make. (6 Oct 2026) */
+$jsst_formpick_now = '';
+if (in_array('multiform', jssupportticket::$_active_addons) && jssupportticket::$_config['show_multiform_popup'] == 1
+        && $jsst_c == 'ticket' && $jsst_layout == 'addticket' && '' === (string) JSSTrequest::getVar('formid', 'get', '')
+        && (int) jssupportticket::$_db->get_var("SELECT COUNT(id) FROM `" . jssupportticket::$_db->prefix . "js_ticket_multiform` WHERE status = 1") > 1) {
+    $jsst_formpick_now = 'jQuery("a#multiformpopup").first().trigger("click");';
+}
 $jsst_jssupportticket_js ='
     jQuery(document).ready(function ($) {
         jQuery("a#multiformpopup").click(function (e) {
@@ -1065,6 +1075,17 @@ $jsst_jssupportticket_js ='
                 jQuery("div#multiformpopupblack").hide();
             });
         });
+
+        /* WordPress\'s own Help Desk > Create Ticket goes straight to the
+           default form. On a screen with this menu, it opens the form picker
+           instead, as the entry here does. (6 Oct 2026) */
+        jQuery("#adminmenu a[href$=\"page=ticket&jstlay=addticket\"]").on("click", function (e) {
+            if (jQuery("a#multiformpopup").length) {
+                e.preventDefault();
+                jQuery("a#multiformpopup").first().trigger("click");
+            }
+        });
+        '.$jsst_formpick_now.'
     });
 
     function makeMultiFormUrl(id){
