@@ -5,6 +5,33 @@ if (!defined('ABSPATH'))
 
 class JSSTlayout {
 
+    /* The WordPress login page, told where to come back to. (5.0.2)
+       With "Set Login Link" on WordPress Default Login Page every Login link
+       was a bare wp_login_url(), and wp-login.php sends anyone it is not told
+       about to /wp-admin/ - so a customer who logged in from the help desk
+       ended up in the WordPress dashboard. $jsst_redirect_url is the encoded
+       address the help desk's own login form is given (it may carry the
+       jsst_after_login tag, which JSSTloginredirect turns into the agent's or
+       the customer's queue); without one, the page being viewed. */
+    static function wpLoginUrl($jsst_redirect_url = '') {
+        $jsst_back = ($jsst_redirect_url != '') ? jssupportticketphplib::JSST_safe_decoding($jsst_redirect_url) : '';
+        if ($jsst_back == '' || !wp_http_validate_url($jsst_back)) {
+            $jsst_back = self::currentUrl();
+        }
+        return wp_login_url($jsst_back);
+    }
+
+    /* The address of the page being viewed. wp-login.php passes redirect_to
+       through wp_safe_redirect(), so another host in here goes nowhere. */
+    static function currentUrl() {
+        if (empty($_SERVER['HTTP_HOST']) || !isset($_SERVER['REQUEST_URI'])) {
+            return home_url('/');
+        }
+        $jsst_host = sanitize_text_field(wp_unslash($_SERVER['HTTP_HOST']));
+        $jsst_uri = esc_url_raw(wp_unslash($_SERVER['REQUEST_URI']));
+        return set_url_scheme('http://' . $jsst_host . $jsst_uri);
+    }
+
     /* A screen can say what is empty and what to do about it; with no
        arguments it keeps the old wording, so every other caller is unchanged. */
     static function getNoRecordFound($jsst_title = '', $jsst_text = '', $jsst_linkurl = '', $jsst_linktext = '') {
@@ -70,7 +97,8 @@ class JSSTlayout {
 						<span class="js-ticket-user-login-btn-wrp">';
 							if (JSSTincluder::getObjectClass('user')->uid() == 0) {
 								if ($jsst_loginval == 3){
-                                    $jsst_hreflink = wp_login_url();
+                                    // The button was never printed for this choice. (5.0.2)
+                                    $jsst_html .= '<a class="js-ticket-login-btn" href="'.esc_url(self::wpLoginUrl()).'" title="Login">' . esc_html(__('Login', 'js-support-ticket')) . '</a>';
                                 }
 		                        else if($jsst_loginval == 2 && $jsst_loginlink != ""){
 		                            $jsst_html .= '<a class="js-ticket-login-btn" href="'.esc_url($jsst_loginlink).'" title="Login">' . esc_html(__('Login', 'js-support-ticket')) . '</a>';
@@ -191,7 +219,8 @@ class JSSTlayout {
 						</span>
 						<span class="js-ticket-user-login-btn-wrp">';
 							if ($jsst_loginval == 3){
-                                $jsst_hreflink = wp_login_url();
+                                // The button was never printed for this choice. (5.0.2)
+                                $jsst_html .= '<a class="js-ticket-login-btn" href="'.esc_url(self::wpLoginUrl($jsst_redirect_url)).'" title="Login">' . esc_html(__('Login', 'js-support-ticket')) . '</a>';
                             }
 	                        else if($jsst_loginval == 2 && $jsst_loginlink != ""){
 	                            $jsst_html .= '<a class="js-ticket-login-btn" href="'.esc_url($jsst_loginlink).'" title="Login">' . esc_html(__('Login', 'js-support-ticket')) . '</a>';

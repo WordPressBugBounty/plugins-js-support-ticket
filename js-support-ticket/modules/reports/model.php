@@ -1114,10 +1114,10 @@ class JSSTreportsModel {
 
         //Tickets
         do_action('jsstFeedbackQueryStaff');
-        $jsst_query = "SELECT ticket.*,priority.priority, priority.prioritycolour,status.status AS statustitle,status.statuscolour,status.statusbgcolour ".jssupportticket::$_addon_query['select']."
+        $jsst_query = "SELECT ticket.*,priority.priority, priority.prioritycolour," . JSSTqueue::statusTitleSql() . " AS statustitle,status.statuscolour,status.statusbgcolour ".jssupportticket::$_addon_query['select']."
                     FROM `".jssupportticket::$_db->prefix."js_ticket_tickets` AS ticket
                     LEFT JOIN `".jssupportticket::$_db->prefix."js_ticket_priorities` AS priority ON priority.id = ticket.priorityid
-                    JOIN `" . jssupportticket::$_db->prefix . "js_ticket_statuses` AS status ON ticket.status = status.id
+                    LEFT JOIN `" . jssupportticket::$_db->prefix . "js_ticket_statuses` AS status ON ticket.status = status.id
                     ".jssupportticket::$_addon_query['join']."
                     WHERE ".$jsst_q_strig." AND date(ticket.created) >= %s AND date(ticket.created) <= %s ";
         $jsst_query = jssupportticket::$_db->prepare($jsst_query, $jsst_curdate, $jsst_fromdate);
@@ -1276,10 +1276,10 @@ class JSSTreportsModel {
 
         //Tickets
         do_action('jsstFeedbackQueryStaff');
-        $jsst_query = "SELECT ticket.*,priority.priority, priority.prioritycolour,status.status AS statustitle,status.statuscolour,status.statusbgcolour ".jssupportticket::$_addon_query['select']."
+        $jsst_query = "SELECT ticket.*,priority.priority, priority.prioritycolour," . JSSTqueue::statusTitleSql() . " AS statustitle,status.statuscolour,status.statusbgcolour ".jssupportticket::$_addon_query['select']."
                     FROM `".jssupportticket::$_db->prefix."js_ticket_tickets` AS ticket
                     LEFT JOIN `".jssupportticket::$_db->prefix."js_ticket_priorities` AS priority ON priority.id = ticket.priorityid
-                    JOIN `" . jssupportticket::$_db->prefix . "js_ticket_statuses` AS status ON ticket.status = status.id
+                    LEFT JOIN `" . jssupportticket::$_db->prefix . "js_ticket_statuses` AS status ON ticket.status = status.id
                     ".jssupportticket::$_addon_query['join']."
                     WHERE ticket.departmentid = %d AND date(ticket.created) >= %s AND date(ticket.created) <= %s ";
         $jsst_query = jssupportticket::$_db->prepare($jsst_query, $jsst_id, $jsst_curdate, $jsst_fromdate);
@@ -1433,10 +1433,10 @@ class JSSTreportsModel {
         jssupportticket::$jsst_data[1] = JSSTpagination::getPagination($jsst_total);
         //Tickets
         do_action('jsstFeedbackQueryStaff');
-        $jsst_query = "SELECT ticket.*,priority.priority, priority.prioritycolour,status.status AS statustitle,status.statuscolour,status.statusbgcolour ".jssupportticket::$_addon_query['select']."
+        $jsst_query = "SELECT ticket.*,priority.priority, priority.prioritycolour," . JSSTqueue::statusTitleSql() . " AS statustitle,status.statuscolour,status.statusbgcolour ".jssupportticket::$_addon_query['select']."
                     FROM `".jssupportticket::$_db->prefix."js_ticket_tickets` AS ticket
                     LEFT JOIN `".jssupportticket::$_db->prefix."js_ticket_priorities` AS priority ON priority.id = ticket.priorityid
-                    JOIN `" . jssupportticket::$_db->prefix . "js_ticket_statuses` AS status ON ticket.status = status.id
+                    LEFT JOIN `" . jssupportticket::$_db->prefix . "js_ticket_statuses` AS status ON ticket.status = status.id
                     ".jssupportticket::$_addon_query['join']."
                     WHERE ticket.uid = %d AND date(ticket.created) >= %s AND date(ticket.created) <= %s ";
         $jsst_query = jssupportticket::$_db->prepare($jsst_query, $jsst_id, $jsst_curdate, $jsst_fromdate);

@@ -261,6 +261,7 @@ class JSSTdeactivation {
             'jsst_workflow_settings',
             'jsst_routing',
             'jsst_routing_pointer',
+            'jsst_multiform_schema',
             'jsst_routing_log',
             'jsst_recurring_schema',
             'jsst_restapi_settings',

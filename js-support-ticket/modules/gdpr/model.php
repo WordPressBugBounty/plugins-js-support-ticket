@@ -194,10 +194,10 @@ class JSSTgdprModel {
         $jsst_result['users'] = $jsst_user;
         //Tickets
         do_action('jsstFeedbackQueryStaff');// to prepare any addon based query
-        $jsst_query = "SELECT ticket.*,priority.priority, priority.prioritycolour,status.status AS statustitle ". jssupportticket::$_addon_query['select'] ."
+        $jsst_query = "SELECT ticket.*,priority.priority, priority.prioritycolour," . JSSTqueue::statusTitleSql() . " AS statustitle ". jssupportticket::$_addon_query['select'] ."
                     FROM `".jssupportticket::$_db->prefix."js_ticket_tickets` AS ticket
                     LEFT JOIN `".jssupportticket::$_db->prefix."js_ticket_priorities` AS priority ON priority.id = ticket.priorityid
-                    JOIN `" . jssupportticket::$_db->prefix . "js_ticket_statuses` AS status ON ticket.status = status.id
+                    LEFT JOIN `" . jssupportticket::$_db->prefix . "js_ticket_statuses` AS status ON ticket.status = status.id
                     ". jssupportticket::$_addon_query['join'] . "
                     WHERE uid = %d AND ticket.created >= %s AND ticket.created <= %s ";
 

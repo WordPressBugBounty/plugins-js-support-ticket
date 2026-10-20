@@ -263,6 +263,19 @@ class JSSTqueue {
      * queues are correct on a site that has renamed, reordered or added its own
      * statuses, and correct on day one with no backfill.
      */
+    /**
+     * The status name for a ticket list, as SQL. (5.0.2)
+     *
+     * The lists joined js_ticket_statuses with an inner JOIN, so a ticket whose
+     * status row had gone - a deleted custom status, an import - was counted on
+     * the dashboard ("You have 3 open tickets") and missing from every list.
+     * They LEFT JOIN now and name such a ticket "Unknown status" instead.
+     */
+    public static function statusTitleSql() {
+        $jsst_unknown = str_replace('%', '', __('Unknown status', 'js-support-ticket'));
+        return "COALESCE(status.status, '" . esc_sql($jsst_unknown) . "')";
+    }
+
     public static function listClause($jsst_list) {
         $jsst_open = " AND ticket.status != 5 AND ticket.status != 6";
         switch ((int) $jsst_list) {

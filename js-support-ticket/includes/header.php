@@ -339,7 +339,7 @@ if (jssupportticket::$_config['tplink_login_logout_' . $jsst_linkname] == 1) {
     $jsst_loginval = JSSTincluder::getJSModel('configuration')->getConfigValue('set_login_link');
     $jsst_loginlink = JSSTincluder::getJSModel('configuration')->getConfigValue('login_link');
     if ($jsst_loginval == 3){
-        $jsst_hreflink = wp_login_url();
+        $jsst_hreflink = JSSTlayout::wpLoginUrl(); // comes back to this page (5.0.2)
     }
     else if ($jsst_loginval == 2 && $jsst_loginlink != "") {
         $jsst_hreflink = $jsst_loginlink;

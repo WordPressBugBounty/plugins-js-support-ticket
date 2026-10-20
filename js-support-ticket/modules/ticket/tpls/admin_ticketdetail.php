@@ -2145,12 +2145,13 @@ $jsst_yesno = array(
                                     <?php } ?>
                                 </div>
                             </div>
+                            <?php /* The count is every status, so the list opens on All. (5.0.2) */ ?>
                             <?php if(isset(jssupportticket::$jsst_data['nticket'])){ ?>
                             <div class="js-tkt-det-other-tkt">
-                                <a href="<?php echo esc_url(admin_url('admin.php?page=ticket&jstlay=tickets&uid='.jssupportticket::$jsst_data[0]->uid)); ?>" class="js-tkt-det-other-tkt-btn">
+                                <a href="<?php echo esc_url(admin_url('admin.php?page=ticket&jstlay=tickets&uid='.jssupportticket::$jsst_data[0]->uid.'&list='.JSSTqueue::LIST_ALL)); ?>" class="js-tkt-det-other-tkt-btn">
                                     <?php echo esc_html(__('View all','js-support-ticket')).' '.esc_html(jssupportticket::$jsst_data['nticket']).' '. esc_html(__('tickets by','js-support-ticket')).' '.esc_html(jssupportticket::$jsst_data[0]->name); ?>
                                 </a>
-                                <a href="<?php echo esc_url(admin_url('admin.php?page=ticket&jstlay=tickets&uid='.jssupportticket::$jsst_data[0]->uid)); ?>" class="js-tkt-det-other-tkt-img">
+                                <a href="<?php echo esc_url(admin_url('admin.php?page=ticket&jstlay=tickets&uid='.jssupportticket::$jsst_data[0]->uid.'&list='.JSSTqueue::LIST_ALL)); ?>" class="js-tkt-det-other-tkt-img">
                                     <img alt = "<?php echo esc_attr(__('Edit Ticket','js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/ticket-detail/new-window.png" />
                                 </a>
                             </div>

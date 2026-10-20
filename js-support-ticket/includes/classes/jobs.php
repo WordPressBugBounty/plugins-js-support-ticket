@@ -402,7 +402,12 @@ class JSSTjobs {
         $jsst_ran = 0;
 
         while (microtime(true) < $jsst_deadline && !self::outOfMemory()) {
-            $jsst_token = wp_generate_password(20, false, false);
+            /* wp_generate_password() is pluggable and not defined before
+               plugins_loaded has finished; a run started that early (the public
+               cron URL) died on it. Any unguessable claim token will do. (5.0.2) */
+            $jsst_token = function_exists('wp_generate_password')
+                ? wp_generate_password(20, false, false)
+                : bin2hex(random_bytes(10));
             $jsst_jobs = self::claim($jsst_token);
             if (empty($jsst_jobs)) {
                 break;

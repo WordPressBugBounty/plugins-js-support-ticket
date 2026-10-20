@@ -821,7 +821,33 @@ class JSSTticketController {
         exit;
     }
 
+    /* The help desk page this request was opened on, or 0. (5.0.2)
+       An e-mail "View ticket" link names a page in jsstpageid - the Ticket
+       Default Page setting at the time the mail was sent - and makeUrl() builds
+       the redirect on that page. A site that later moved its help desk kept an
+       old page there, and the link landed on a page the site no longer used
+       (in one case behind a members-only login). The page the link was actually
+       opened on is the better answer, when it is a published page that carries
+       the help desk. */
+    private static function openedOnDeskPage() {
+        $jsst_pageid = url_to_postid(JSSTlayout::currentUrl());
+        if ($jsst_pageid < 1 || get_post_status($jsst_pageid) !== 'publish') {
+            return 0;
+        }
+        $jsst_content = (string) get_post_field('post_content', $jsst_pageid);
+        foreach (array('jssupportticket', 'jssupportticket_mytickets', 'jssupportticket_addticket', 'jssupportticket_addticket_multiform') as $jsst_tag) {
+            if (has_shortcode($jsst_content, $jsst_tag)) {
+                return (int) $jsst_pageid;
+            }
+        }
+        return 0;
+    }
+
     static function showticketstatus() {
+        $jsst_opened = self::openedOnDeskPage();
+        if ($jsst_opened > 0) {
+            $_GET['jsstpageid'] = $jsst_opened; // makeUrl() reads it from the request first
+        }
         $jsst_token = JSSTrequest::getVar('token');
         if ($jsst_token == null) { // in case it come from ticket status form
             $jsst_nonce = JSSTrequest::getVar('_wpnonce');

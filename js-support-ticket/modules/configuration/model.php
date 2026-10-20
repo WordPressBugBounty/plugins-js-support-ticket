@@ -98,11 +98,9 @@ class JSSTconfigurationModel {
         $jsst_file_name = JSSTincluder::getJSModel('configuration')->getConfigValue('logo_for_desktop_notfication_url');
 
         $jsst_path = $jsst_path . '/attachmentdata/';
-        $jsst_dsk_logo_file =  $jsst_path.$jsst_file_name;
         if($jsst_file_name != ''){
-            if ( file_exists( $jsst_dsk_logo_file ) ) {
-                wp_delete_file($jsst_dsk_logo_file);
-            }
+            // Only inside attachmentdata/, whatever the stored name says. (5.0.2)
+            $this->deleteFileInside($jsst_path, $jsst_file_name);
         }
     }
 
@@ -144,6 +142,13 @@ class JSSTconfigurationModel {
         $jsst_updateColors = false;
         foreach ($jsst_data AS $jsst_key => $jsst_value) {
             $jsst_query = true;
+
+            /* Set by their upload code only, never by a form field: the form
+               has a file input for each and no text field. A posted value here
+               was how a path reached the delete calls above. (5.0.2) */
+            if ($jsst_key === 'support_custom_img' || $jsst_key === 'logo_for_desktop_notfication_url') {
+                continue;
+            }
             
             if ($jsst_key == 'screentag_position') {
                 if ($jsst_value != jssupportticket::$_config['screentag_position']) {
@@ -301,7 +306,11 @@ class JSSTconfigurationModel {
             ); // JSST_sanitizeData() function uses wordpress santize functions
             $jsst_result = wp_handle_upload($jsst_file, array('test_form' => false));
             if ( $jsst_result && ! isset( $jsst_result['error'] ) ) {
-                $this->setSupportCustomImage($jsst_file_name, $jsst_userpath);
+                /* The name WordPress saved it under, which is not the uploaded
+                   name when that is taken ("logo-1.png"): storing the uploaded
+                   name showed the older picture and, on the next change,
+                   deleted that one instead of this. (5.0.2) */
+                $this->setSupportCustomImage(wp_basename($jsst_result['file']), $jsst_userpath);
             }
             // Set everything back to normal.
             remove_filter( 'upload_dir', array($this,'jssupportticket_upload_custom_logo'));
@@ -323,14 +332,34 @@ class JSSTconfigurationModel {
         }
     }
 
+    /* Delete a file the settings name, but only inside its own folder. (5.0.2)
+       The stored name is data, not a path: it is reduced to a file name, and the
+       file is deleted only when its real location is inside $jsst_dir. Reported
+       through Wordfence: setSupportCustomImage() joined the stored value onto the
+       folder as it was, so a value of "../../wp-config.php" (writable through
+       the settings form) deleted files outside it. */
+    private function deleteFileInside($jsst_dir, $jsst_name) {
+        $jsst_name = sanitize_file_name(wp_basename((string) $jsst_name));
+        if ($jsst_name === '' || $jsst_name === '0') {
+            return false;
+        }
+        $jsst_realdir = realpath($jsst_dir);
+        $jsst_realfile = realpath(trailingslashit($jsst_dir) . $jsst_name);
+        if ($jsst_realdir === false || $jsst_realfile === false || !is_file($jsst_realfile)) {
+            return false;
+        }
+        // realpath() answers in the system's separator - backslashes on Windows.
+        if (strpos($jsst_realfile, rtrim($jsst_realdir, '/' . chr(92)) . DIRECTORY_SEPARATOR) !== 0) {
+            return false;
+        }
+        return wp_delete_file($jsst_realfile) !== false;
+    }
+
     function setSupportCustomImage($jsst_filename, $jsst_userpath){
         $jsst_query = "SELECT configvalue FROM `".jssupportticket::$_db->prefix."js_ticket_config` WHERE configname = 'support_custom_img'";
         $jsst_key = jssupportticket::$_db->get_var($jsst_query);
         if ($jsst_key) {
-            $jsst_unlinkPath = $jsst_userpath.'/'.$jsst_key;
-            if (is_file($jsst_unlinkPath)) {
-                wp_delete_file($jsst_unlinkPath);
-            }
+            $this->deleteFileInside($jsst_userpath, $jsst_key);
         }
         jssupportticket::$_db->update(jssupportticket::$_db->prefix . 'js_ticket_config', array('configvalue' => $jsst_filename), array('configname' => 'support_custom_img'));
     }

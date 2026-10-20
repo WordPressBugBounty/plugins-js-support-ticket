@@ -316,11 +316,11 @@ class JSSTticketModel {
         jssupportticket::$jsst_data['list'] = $jsst_list; // assign for reference
         // Data
         do_action('jsst_addon_staff_admin_tickets');
-        $jsst_query = "SELECT ticket.*,department.departmentname AS departmentname ,priority.priority AS priority,priority.prioritycolour AS prioritycolour,status.status AS statustitle,status.statuscolour,status.statusbgcolour, product.product AS producttitle ".jssupportticket::$_addon_query['select']."
+        $jsst_query = "SELECT ticket.*,department.departmentname AS departmentname ,priority.priority AS priority,priority.prioritycolour AS prioritycolour," . JSSTqueue::statusTitleSql() . " AS statustitle,status.statuscolour,status.statusbgcolour, product.product AS producttitle ".jssupportticket::$_addon_query['select']."
                     FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` AS ticket
                     LEFT JOIN `" . jssupportticket::$_db->prefix . "js_ticket_departments` AS department ON ticket.departmentid = department.id
                     LEFT JOIN `" . jssupportticket::$_db->prefix . "js_ticket_priorities` AS priority ON ticket.priorityid = priority.id
-                    JOIN `" . jssupportticket::$_db->prefix . "js_ticket_statuses` AS status ON ticket.status = status.id
+                    LEFT JOIN `" . jssupportticket::$_db->prefix . "js_ticket_statuses` AS status ON ticket.status = status.id
                     LEFT JOIN `" . jssupportticket::$_db->prefix . "js_ticket_products` AS product ON ticket.productid = product.id
                     ".jssupportticket::$_addon_query['join']."
                     " . $jsst_tagfilter['join'] . "
@@ -700,7 +700,7 @@ class JSSTticketModel {
                         FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` AS ticket
                         LEFT JOIN `" . jssupportticket::$_db->prefix . "js_ticket_departments` AS department ON ticket.departmentid = department.id
                         LEFT JOIN `" . jssupportticket::$_db->prefix . "js_ticket_priorities` AS priority ON ticket.priorityid = priority.id
-                        JOIN `" . jssupportticket::$_db->prefix . "js_ticket_statuses` AS status ON ticket.status = status.id
+                        LEFT JOIN `" . jssupportticket::$_db->prefix . "js_ticket_statuses` AS status ON ticket.status = status.id
                         WHERE " . $jsst_owner;
             $jsst_query .= $jsst_inquery;
             $jsst_total = jssupportticket::$_db->get_var($jsst_query);
@@ -709,12 +709,12 @@ class JSSTticketModel {
             // Data
             do_action('jsst_addon_user_my_tickets');
 
-            $jsst_query = "SELECT ticket.*,department.departmentname AS departmentname ,priority.priority AS priority,priority.prioritycolour AS prioritycolour, status.status AS statustitle, status.statuscolour, status.statusbgcolour, product.product AS producttitle ".jssupportticket::$_addon_query['select']."
+            $jsst_query = "SELECT ticket.*,department.departmentname AS departmentname ,priority.priority AS priority,priority.prioritycolour AS prioritycolour, " . JSSTqueue::statusTitleSql() . " AS statustitle, status.statuscolour, status.statusbgcolour, product.product AS producttitle ".jssupportticket::$_addon_query['select']."
                         FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` AS ticket
                         LEFT JOIN `" . jssupportticket::$_db->prefix . "js_ticket_departments` AS department ON ticket.departmentid = department.id
                         ".jssupportticket::$_addon_query['join']."
                         LEFT JOIN `" . jssupportticket::$_db->prefix . "js_ticket_priorities` AS priority ON ticket.priorityid = priority.id
-                        JOIN `" . jssupportticket::$_db->prefix . "js_ticket_statuses` AS status ON ticket.status = status.id
+                        LEFT JOIN `" . jssupportticket::$_db->prefix . "js_ticket_statuses` AS status ON ticket.status = status.id
                         LEFT JOIN `" . jssupportticket::$_db->prefix . "js_ticket_products` AS product ON ticket.productid = product.id";
             $jsst_query .= " WHERE " . $jsst_owner . $jsst_inquery;
             $jsst_query .= " ORDER BY " . jssupportticket::$_ordering . " LIMIT " . JSSTpagination::getOffset() . ", " . JSSTpagination::getLimit();
@@ -834,7 +834,7 @@ class JSSTticketModel {
                     FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` AS ticket
                     LEFT JOIN `" . jssupportticket::$_db->prefix . "js_ticket_departments` AS department ON ticket.departmentid = department.id
                     LEFT JOIN `" . jssupportticket::$_db->prefix . "js_ticket_priorities` AS priority ON ticket.priorityid = priority.id
-                    JOIN `" . jssupportticket::$_db->prefix . "js_ticket_statuses` AS status ON ticket.status = status.id
+                    LEFT JOIN `" . jssupportticket::$_db->prefix . "js_ticket_statuses` AS status ON ticket.status = status.id
                     " . $jsst_tagfilter['join'] . "
                     WHERE 1 = 1 " . $jsst_scopeclause;
         $jsst_query .= $jsst_inquery;
@@ -845,11 +845,11 @@ class JSSTticketModel {
 
         // Data
         do_action('jsst_addon_staff_my_tickets');
-        $jsst_query = "SELECT DISTINCT ticket.*,department.departmentname AS departmentname ,priority.priority AS priority,priority.prioritycolour AS prioritycolour,assignstaff.photo AS staffphoto,assignstaff.id AS staffid, assignstaff.firstname AS staffname, status.status AS statustitle, status.statusbgcolour, status.statuscolour, product.product AS producttitle ".jssupportticket::$_addon_query['select']."
+        $jsst_query = "SELECT DISTINCT ticket.*,department.departmentname AS departmentname ,priority.priority AS priority,priority.prioritycolour AS prioritycolour,assignstaff.photo AS staffphoto,assignstaff.id AS staffid, assignstaff.firstname AS staffname, " . JSSTqueue::statusTitleSql() . " AS statustitle, status.statusbgcolour, status.statuscolour, product.product AS producttitle ".jssupportticket::$_addon_query['select']."
                     FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` AS ticket
                     LEFT JOIN `" . jssupportticket::$_db->prefix . "js_ticket_departments` AS department ON ticket.departmentid = department.id
                     LEFT JOIN `" . jssupportticket::$_db->prefix . "js_ticket_priorities` AS priority ON ticket.priorityid = priority.id
-                    JOIN `" . jssupportticket::$_db->prefix . "js_ticket_statuses` AS status ON ticket.status = status.id
+                    LEFT JOIN `" . jssupportticket::$_db->prefix . "js_ticket_statuses` AS status ON ticket.status = status.id
                     LEFT JOIN `" . jssupportticket::$_db->prefix . "js_ticket_products` AS product ON ticket.productid = product.id
                     LEFT JOIN `" . jssupportticket::$_db->prefix . "js_ticket_staff` AS assignstaff ON ticket.staffid = assignstaff.id
                     ".jssupportticket::$_addon_query['join']."
@@ -1008,11 +1008,11 @@ class JSSTticketModel {
 
         do_action('jsst_ticket_detail_query');// TO HANDLE ALL THE QUERIES OF ADDONS
 
-        $jsst_query = "SELECT ticket.*,priority.priority AS priority,priority.prioritycolour AS prioritycolour,department.departmentname AS departmentname,status.status AS statustitle,status.statuscolour,status.statusbgcolour, product.product AS producttitle
+        $jsst_query = "SELECT ticket.*,priority.priority AS priority,priority.prioritycolour AS prioritycolour,department.departmentname AS departmentname," . JSSTqueue::statusTitleSql() . " AS statustitle,status.statuscolour,status.statusbgcolour, product.product AS producttitle
                      ".jssupportticket::$_addon_query['select']."
                     FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` AS ticket
                     LEFT JOIN `" . jssupportticket::$_db->prefix . "js_ticket_priorities` AS priority ON ticket.priorityid = priority.id
-                    JOIN `" . jssupportticket::$_db->prefix . "js_ticket_statuses` AS status ON ticket.status = status.id
+                    LEFT JOIN `" . jssupportticket::$_db->prefix . "js_ticket_statuses` AS status ON ticket.status = status.id
                     LEFT JOIN `" . jssupportticket::$_db->prefix . "js_ticket_products` AS product ON ticket.productid = product.id
                     LEFT JOIN `" . jssupportticket::$_db->prefix . "js_ticket_departments` AS department ON ticket.departmentid = department.id
                     ".jssupportticket::$_addon_query['join']."
@@ -1063,10 +1063,10 @@ class JSSTticketModel {
                 }
             }
             $jsst_inquery = jssupportticket::$_db->prepare($jsst_inquery, $jsst_inquery_args);
-            $jsst_query = "SELECT ticket.id,ticket.subject,ticket.status,ticket.lock,ticket.isoverdue,ticket.multiformid,priority.priority AS priority,priority.prioritycolour AS prioritycolour,department.departmentname AS departmentname,status.status AS statustitle,status.statuscolour,status.statusbgcolour
+            $jsst_query = "SELECT ticket.id,ticket.subject,ticket.status,ticket.lock,ticket.isoverdue,ticket.multiformid,priority.priority AS priority,priority.prioritycolour AS prioritycolour,department.departmentname AS departmentname," . JSSTqueue::statusTitleSql() . " AS statustitle,status.statuscolour,status.statusbgcolour
                     FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` AS ticket
                     LEFT JOIN `" . jssupportticket::$_db->prefix . "js_ticket_priorities` AS priority ON ticket.priorityid = priority.id
-                    JOIN `" . jssupportticket::$_db->prefix . "js_ticket_statuses` AS status ON ticket.status = status.id
+                    LEFT JOIN `" . jssupportticket::$_db->prefix . "js_ticket_statuses` AS status ON ticket.status = status.id
                     LEFT JOIN `" . jssupportticket::$_db->prefix . "js_ticket_departments` AS department ON ticket.departmentid = department.id";
             $jsst_query .= $jsst_inquery . " LIMIT 3 ";
             jssupportticket::$jsst_data['usertickets'] = jssupportticket::$_db->get_results($jsst_query);

@@ -4,6 +4,22 @@ JS Help Desk - full changelog
 The readme lists what changed for site owners. This file keeps the complete,
 technical notes for every release.
 
+= 5.0.2 =
+**Security**
+* Configuration: an administrator could delete files outside the help desk's folders (path traversal, CWE-22; reported through Wordfence). The settings form saved any field it was sent, so `support_custom_img` - and likewise `logo_for_desktop_notfication_url` - could be set to a path such as `../../wp-config.php`, and replacing the support image (or Remove Logo) then deleted that path. The form no longer accepts either name; both are set only by their uploads. Both deletes now reduce the stored value to a file name and delete only a file whose real location is inside `supportImg/` or `attachmentdata/`, which also covers a bad value already stored. Requires an administrator login and the settings nonce.
+
+**Fixed**
+* Replacing the support image with a file whose name was already taken stored the uploaded name, not the name WordPress saved it under (`logo-1.png`), so the older picture kept showing and the next change deleted the wrong file. The saved name is stored now.
+* Set Login Link = WordPress Default Login Page: every Login link was a bare `wp_login_url()`, and wp-login.php sends anyone it is not told about to /wp-admin/, so customers who logged in from the help desk ended up in the WordPress dashboard. The links now carry `redirect_to` - the page being viewed, or the address the help desk's own login form would be given (with its agent/customer tag) - through a new `JSSTlayout::wpLoginUrl()`. The "You are not logged in" and "Access denied" boxes computed this link but never printed it, so with this setting they had no Login button at all; they do now.
+* "View all N tickets by <customer>" on the admin ticket page, and the same button agents see on the front-end desk, opened the ticket list on its default Open tab while the number counted every status - closed tickets were missing. Both open the All tab (`list=` `JSSTqueue::LIST_ALL`).
+* An e-mail "View ticket" link redirected to the page named in it (`jsstpageid`, from the Ticket Default Page setting when the mail was sent). A site that later moved its help desk kept an old page there, and the link landed on a page the site no longer used. The link now opens on the page it was clicked from, when that is a published page carrying a help desk shortcode; otherwise as before.
+* Ticket lists - My Tickets, the agent and admin queues, the dashboard's Recent Tickets, ticket detail, the user/staff/department reports and the GDPR export - joined statuses with an inner JOIN, so a ticket whose status row had been deleted was counted ("You have 3 open tickets") but never listed. They LEFT JOIN now and show it as "Unknown status" (`JSSTqueue::statusTitleSql()`).
+* The background job runner called `wp_generate_password()` for its claim token, which is not defined before plugins_loaded has finished; a run started that early (the public cron URL) ended in a fatal error. It falls back to `random_bytes()`.
+* "Unknown column 'ordering'" on the E-mail Templates and Forms screens, on sites whose Multi Form table was created by an early Multi Form add-on. Both table definitions have the column, but they use `CREATE TABLE IF NOT EXISTS`, which never upgrades a table that is already there. A new core repair (JSSTmultiformschema, on admin_init) adds `ordering` when it is missing and numbers the existing forms by id, so they keep their order. It runs whichever copy of JSSTforms is loaded, and never creates the table itself. Its marker option, `jsst_multiform_schema`, is removed on a delete-everything uninstall.
+
+**Changed**
+* Version 502 of the database schema records the release only; no tables change.
+
 = 5.0.1 =
 **Fixed**
 * A user with the Help Desk Agent role, without the Agents & Teams pack, could not reply to customer tickets ("You can only reply to your own tickets."), nor add attachments with a reply. The ownership check added for customers now leaves help-desk staff by role alone, as it already did administrators and Agents & Teams agents; Light Agents still cannot answer customers.

@@ -1730,7 +1730,9 @@ if (jssupportticket::$_config['offline'] == 2) {
                                 <div class="js-tkt-det-other-tkt"><!-- Ticket Detail View Btn -->
                                     <?php
                                     if(in_array('agent',jssupportticket::$_active_addons) && JSSTincluder::getJSModel('agent')->isUserStaff()){
-                                        $jsst_url = jssupportticket::makeUrl(array('jstmod'=>'agent','jstlay'=>'staffmyticket','uid'=>jssupportticket::$jsst_data[0]->uid));
+                                        /* Every status, like the count. (5.0.2) As a query argument: makeUrl()
+                                           writes 'list' as a path segment that no pretty address reads back. */
+                                        $jsst_url = add_query_arg('list', JSSTqueue::LIST_ALL, jssupportticket::makeUrl(array('jstmod'=>'agent','jstlay'=>'staffmyticket','uid'=>jssupportticket::$jsst_data[0]->uid)));
                                     }else{
                                         $jsst_url = jssupportticket::makeUrl(array('jstmod'=>'ticket','jstlay'=>'myticket'));
                                     }

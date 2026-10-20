@@ -3,7 +3,7 @@ Contributors: rabilal
 Tags: helpdesk, support ticket, ticketing system, customer support, knowledge base
 Requires at least: 5.5
 Tested up to: 7.1
-Stable tag: 5.0.1
+Stable tag: 5.0.2
 Requires PHP: 7.4
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
@@ -209,6 +209,16 @@ The [documentation](https://jshelpdesk.com/docs/) covers setup and every add-on,
 
 == Changelog ==
 
+= 5.0.2 =
+Fixes for 5.0.1.
+
+* Security: fixed a file deletion issue in the settings that an administrator account could misuse (reported through Wordfence).
+* With the WordPress login page chosen for the help desk, customers return to the help desk after logging in, instead of landing in the WordPress dashboard, and the "You are not logged in" message shows its Login button again.
+* "View all N tickets by ..." on a ticket now lists all of that customer's tickets, closed ones included.
+* The "View ticket" link in e-mails opens on the help desk page it was clicked from, even if the Ticket Default Page setting points somewhere else.
+* Tickets whose status was deleted are listed again (as "Unknown status") instead of only being counted.
+* The E-mail Templates and Forms screens no longer show "Unknown column 'ordering'" on sites that used an early Multi Form add-on.
+
 = 5.0.1 =
 Fixes for 5.0.0.
 
@@ -266,6 +276,9 @@ The biggest release in JS Help Desk's history.
 See the [full changelog](https://plugins.trac.wordpress.org/browser/js-support-ticket/trunk/changelog.txt).
 
 == Upgrade Notice ==
+
+= 5.0.2 =
+Security and bug fixes for 5.0.1: a file deletion issue in the settings is fixed, customers return to the help desk after logging in on the WordPress login page, "View all tickets" includes closed tickets, and e-mail links open on your current help desk page.
 
 = 5.0.1 =
 Fixes for 5.0.0, including Help Desk Agents being unable to reply to tickets on sites without the Agents & Teams pack. Recommended for every 5.0.0 site.

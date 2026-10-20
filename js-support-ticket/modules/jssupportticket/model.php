@@ -622,7 +622,7 @@ $jsst_query = "SELECT product.product, COUNT(t.id) AS ticket_count
             staff.photo AS staffphoto,
             staff.id AS staffid,
             assignstaff.firstname AS staffname,
-            status.status AS statustitle,
+            " . JSSTqueue::statusTitleSql() . " AS statustitle,
             status.statuscolour,
             status.statusbgcolour,
             r.name AS last_reply_name,
@@ -633,7 +633,7 @@ $jsst_query = "SELECT product.product, COUNT(t.id) AS ticket_count
             LEFT JOIN `" . jssupportticket::$_db->prefix . "js_ticket_departments` AS department ON ticket.departmentid = department.id
             LEFT JOIN `" . jssupportticket::$_db->prefix . "js_ticket_staff` AS staff ON staff.uid = ticket.uid
             LEFT JOIN `" . jssupportticket::$_db->prefix . "js_ticket_staff` AS assignstaff ON ticket.staffid = assignstaff.id
-            JOIN `" . jssupportticket::$_db->prefix . "js_ticket_statuses` AS status ON status.id = ticket.status
+            LEFT JOIN `" . jssupportticket::$_db->prefix . "js_ticket_statuses` AS status ON status.id = ticket.status
             LEFT JOIN `" . jssupportticket::$_db->prefix . "js_ticket_replies` AS r 
                 ON r.id = (
                     SELECT r2.id 
@@ -834,7 +834,7 @@ $jsst_query = "SELECT product.product, COUNT(t.id) AS ticket_count
             department.departmentname AS departmentname,
             priority.priority AS priority,
             priority.prioritycolour AS prioritycolour,
-            status.status AS statustitle,
+            " . JSSTqueue::statusTitleSql() . " AS statustitle,
             status.statuscolour,
             status.statusbgcolour,
             r.name AS last_reply_name,
@@ -846,7 +846,7 @@ $jsst_query = "SELECT product.product, COUNT(t.id) AS ticket_count
             ON ticket.priorityid = priority.id
         LEFT JOIN `" . jssupportticket::$_db->prefix . "js_ticket_departments` AS department 
             ON ticket.departmentid = department.id
-        JOIN `" . jssupportticket::$_db->prefix . "js_ticket_statuses` AS status 
+        LEFT JOIN `" . jssupportticket::$_db->prefix . "js_ticket_statuses` AS status 
             ON status.id = ticket.status
         LEFT JOIN `" . jssupportticket::$_db->prefix . "js_ticket_replies` AS r 
             ON r.id = (
