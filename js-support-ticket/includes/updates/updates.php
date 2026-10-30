@@ -19,6 +19,18 @@ class JSSTupdates {
      */
     const APPLIED_OPTION = 'jsst_sql_applied';
 
+    /* A range of update files runs at most once at a time, and the same range
+       never twice within an hour. A settings table without its primary key
+       made the installed version read as 2.9.9 for ever, and every admin
+       request re-ran every file from 3.0.0 - appending settings rows and
+       adding the same FULLTEXT index until the 64-key limit. A second attempt
+       at a range means something is wrong, and repeating it is what did the
+       damage, so it is logged once and not run. */
+    const RANGE_LOCK = 'jsst_update_range_lock';
+    const RANGE_LOCK_SECONDS = 600;
+    const RANGE_LAST = 'jsst_update_range_last';
+    const RANGE_LOGGED = 'jsst_update_range_logged';
+
     static function checkUpdates($jsst_cversion=null) {
         if (is_null($jsst_cversion)) {
             $jsst_cversion = jssupportticket::$_currentversion;
@@ -52,21 +64,51 @@ class JSSTupdates {
             }
             return;
         }
+        /* The legacy screens pin an older code (the front-end dashboard asks
+           for '500' on every visit). A database already past it has nothing
+           to run; without this the range came out backwards ("504-500"),
+           took the lock, wrote last_version and logged once an hour. */
+        if ((int) $jsst_cversion < (int) $jsst_installedversion) {
+            return;
+        }
         if ($jsst_installedversion != $jsst_cversion) {
+            $jsst_range = ((int) $jsst_installedversion + 1) . '-' . $jsst_cversion;
+            if (get_transient(self::RANGE_LAST) === $jsst_range) {
+                if (!get_transient(self::RANGE_LOGGED)) {
+                    error_log(sprintf(
+                        'JS Help Desk: update files %s were already run in the last hour and the database still reports version %s. Not running them again.',
+                        $jsst_range, $jsst_installedversion));
+                    set_transient(self::RANGE_LOGGED, 1, HOUR_IN_SECONDS);
+                }
+                return false;
+            }
+            if (!self::lockRange()) {
+                return false;
+            }
+            set_transient(self::RANGE_LAST, $jsst_range, HOUR_IN_SECONDS);
 			//UPDATE the last_version of the plugin
 			$jsst_query = "REPLACE INTO `".jssupportticket::$_db->prefix."js_ticket_config` (`configname`, `configvalue`, `configfor`) VALUES ('last_version','','default');";
 			jssupportticket::$_db->query($jsst_query); //old actual
 			/*jssupportticket::$_db->show_errors(false);
 			@jssupportticket::$_db->query($jsst_query);			*/
-			$jsst_query = "SELECT configvalue FROM `".jssupportticket::$_db->prefix."js_ticket_config` WHERE configname='versioncode'";
-			$jsst_versioncode = jssupportticket::$_db->get_var($jsst_query);
-			$jsst_versioncode = jssupportticketphplib::JSST_str_replace('.','',$jsst_versioncode);
+			// The version as getInstalledVersion() reads it, not whichever
+			// versioncode row the database happens to return first.
+			$jsst_versioncode = $jsst_installedversion;
 			$jsst_query = jssupportticket::$_db->prepare("UPDATE `".jssupportticket::$_db->prefix."js_ticket_config` SET configvalue = %s WHERE configname = 'last_version';", $jsst_versioncode);
 			jssupportticket::$_db->query($jsst_query);
             $jsst_applied = JSSTupdates::applySqlFiles($jsst_installedversion + 1, $jsst_cversion);
             if ($jsst_applied === false) {
+                delete_option(self::RANGE_LOCK);
                 return false;
             }
+            /* Written explicitly, so the next request reads installed =
+               current even if a REPLACE in a file did not do it. Only for this
+               build's own release - the legacy screens that pin an older code
+               must not move the version forward. */
+            if ((string) $jsst_cversion === (string) jssupportticket::$_currentversion) {
+                self::writeVersion($jsst_cversion);
+            }
+            delete_option(self::RANGE_LOCK);
             // Only a run that targets the release this build ships records the
             // marker, and only when it actually applied something. Callers that
             // pin an older code — the legacy checkUpdates('311') /
@@ -198,14 +240,60 @@ class JSSTupdates {
         return ($jsst_content === false) ? false : $jsst_content;
     }
 
+    /**
+     * The version the database is at, as a release code ('502').
+     *
+     * The highest `versioncode` row, not the first: on a settings table that
+     * lost its primary key there is one row per update ever run, and the first
+     * one is the oldest. The update marker wins when it is higher, because it
+     * is only written after a release's file really ran. '102' only when there
+     * is no row at all.
+     */
     static function getInstalledVersion() {
-        $jsst_query = "SELECT configvalue FROM `" . jssupportticket::$_db->prefix . "js_ticket_config` WHERE configname = 'versioncode'";
-        $jsst_version = jssupportticket::$_db->get_var($jsst_query);
-        if (!$jsst_version)
-            $jsst_version = '102';
-        else
-            $jsst_version = jssupportticketphplib::JSST_str_replace('.', '', $jsst_version);
-        return $jsst_version;
+        $jsst_rows = jssupportticket::$_db->get_col("SELECT configvalue FROM `" . jssupportticket::$_db->prefix . "js_ticket_config` WHERE configname = 'versioncode'");
+        if (empty($jsst_rows)) {
+            return '102';
+        }
+        $jsst_best = 0;
+        foreach ($jsst_rows as $jsst_row) {
+            $jsst_code = (int) preg_replace('/[^0-9]/', '', (string) $jsst_row);
+            if ($jsst_code > $jsst_best) {
+                $jsst_best = $jsst_code;
+            }
+        }
+        $jsst_applied = (int) get_option(self::APPLIED_OPTION, 0);
+        if ($jsst_applied > $jsst_best) {
+            $jsst_best = $jsst_applied;
+        }
+        return $jsst_best > 0 ? (string) $jsst_best : '102';
+    }
+
+    /** Set versioncode ('5.0.2') and productversion ('502') to this release. */
+    private static function writeVersion($jsst_code) {
+        $jsst_db = jssupportticket::$_db;
+        $jsst_table = $jsst_db->prefix . 'js_ticket_config';
+        $jsst_values = array(
+            'versioncode'    => implode('.', str_split((string) $jsst_code)),
+            'productversion' => (string) $jsst_code,
+        );
+        foreach ($jsst_values as $jsst_name => $jsst_value) {
+            $jsst_db->query($jsst_db->prepare("UPDATE `" . $jsst_table . "` SET configvalue = %s WHERE configname = %s", $jsst_value, $jsst_name));
+            if (!$jsst_db->get_var($jsst_db->prepare("SELECT COUNT(*) FROM `" . $jsst_table . "` WHERE configname = %s", $jsst_name))) {
+                $jsst_db->query($jsst_db->prepare("INSERT INTO `" . $jsst_table . "` (`configname`, `configvalue`, `configfor`) VALUES (%s, %s, 'default')", $jsst_name, $jsst_value));
+            }
+        }
+    }
+
+    /** One range run at a time; a lock older than RANGE_LOCK_SECONDS was abandoned. */
+    private static function lockRange() {
+        if (add_option(self::RANGE_LOCK, time(), '', 'no')) {
+            return true;
+        }
+        if (time() - (int) get_option(self::RANGE_LOCK, 0) > self::RANGE_LOCK_SECONDS) {
+            update_option(self::RANGE_LOCK, time(), false);
+            return true;
+        }
+        return false;
     }
 
 }

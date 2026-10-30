@@ -3,6 +3,24 @@ if (!defined('ABSPATH')) die('Restricted Access');
 
 class JSSTzywrapModel {
 
+    /**
+     * May the Zywrap Co-Pilot window send anything right now?
+     *
+     * A key and an open hosted lane were all it asked, so with another engine
+     * chosen - every AI page saying "not working yet" - the window could still
+     * post ticket text to Zywrap and spend credits. It now also needs Zywrap to
+     * be the engine the site chose, the same answer every other AI tool gives.
+     */
+    public static function usable() {
+        if (get_option('jsst_zywrap_api_key', '') === '') {
+            return false;
+        }
+        if (class_exists('JSSTaiengine') && JSSTaiengine::currentId() !== 'zywrap') {
+            return false;
+        }
+        return !class_exists('JSSTaipolicy') || JSSTaipolicy::allowsEngine('zywrap');
+    }
+
     function saveApiKey() {
         $jsst_nonce = JSSTrequest::getVar('_wpnonce');
         if (!wp_verify_nonce($jsst_nonce, 'save_api_key')) {
@@ -592,6 +610,9 @@ class JSSTzywrapModel {
         if (empty($api_key)) {
             wp_send_json_error(array('message' => __('API Key is missing.', 'js-support-ticket')));
         }
+        if (!self::usable()) {
+            wp_send_json_error(array('message' => __('Zywrap is not the AI engine in use, so nothing was sent.', 'js-support-ticket')));
+        }
 
         // 2. Fetch parameters directly from $_POST to bypass JSST framework stripping
         $wrapper_code = sanitize_text_field(JSSTrequest::getVar('wrapper_code'));
@@ -700,13 +721,12 @@ class JSSTzywrapModel {
             $jsst_usage = (is_array($body_json) && isset($body_json['usage'])) ? $body_json['usage'] : array();
             $jsst_meter['ms']    = (int) $latency_ms;
             $jsst_meter['model'] = isset($body_json['model']) ? (string) $body_json['model'] : $model_code;
-            JSSTaiusage::record($jsst_meter, array(
+            // No counts in the response = "unknown" on the meter, not zero.
+            JSSTaiusage::record($jsst_meter, array_merge(array(
                 'ok'        => ($http_code === 200 && $body_json && isset($body_json['output'])),
-                'intokens'  => isset($jsst_usage['prompt_tokens']) ? (int) $jsst_usage['prompt_tokens'] : 0,
-                'outtokens' => isset($jsst_usage['completion_tokens']) ? (int) $jsst_usage['completion_tokens'] : 0,
                 'error'     => (is_array($body_json) && isset($body_json['error']) && is_string($body_json['error']))
                     ? $body_json['error'] : '',
-            ));
+            ), self::usageFrom($body_json)));
         }
 
         // 7. Output Handling
@@ -1142,12 +1162,10 @@ class JSSTzywrapModel {
         if (class_exists('JSSTaiusage')) {
             $jsst_meter['ms']    = (int) $latencyMs;
             $jsst_meter['model'] = isset($responseData['model']) ? (string) $responseData['model'] : $model;
-            JSSTaiusage::record($jsst_meter, array(
+            JSSTaiusage::record($jsst_meter, array_merge(array(
                 'ok'        => ($status === 'success'),
-                'intokens'  => isset($responseData['usage']['prompt_tokens']) ? (int) $responseData['usage']['prompt_tokens'] : 0,
-                'outtokens' => isset($responseData['usage']['completion_tokens']) ? (int) $responseData['usage']['completion_tokens'] : 0,
                 'error'     => (string) $errorMessage,
-            ));
+            ), self::usageFrom(isset($responseData) ? $responseData : array())));
         }
 
         // --- LOG USAGE ---
@@ -1243,6 +1261,41 @@ class JSSTzywrapModel {
     /** Why the last callZywrapEngine() returned false, for the caller to show. */
     public $jsst_lasterror = '';
 
+    /** Token counts from the last engine response, when it reported any. */
+    public $jsst_lastusage = array();
+
+    /**
+     * Read token counts out of a response, under whichever names it uses.
+     * Empty when it reports none - which is then logged as "unknown", never
+     * as zero.
+     */
+    public static function usageFrom($jsst_body) {
+        if (!is_array($jsst_body)) return array();
+        $jsst_places = array($jsst_body);
+        foreach (array('usage', 'tokens', 'meta', 'metadata') as $jsst_key) {
+            if (isset($jsst_body[$jsst_key]) && is_array($jsst_body[$jsst_key])) $jsst_places[] = $jsst_body[$jsst_key];
+        }
+        $jsst_names = array(
+            'in'  => array('input_tokens', 'prompt_tokens', 'inputTokens', 'promptTokens', 'input'),
+            'out' => array('output_tokens', 'completion_tokens', 'outputTokens', 'completionTokens', 'output_tokens_count'),
+        );
+        $jsst_found = array();
+        foreach ($jsst_places as $jsst_place) {
+            foreach ($jsst_names as $jsst_side => $jsst_keys) {
+                foreach ($jsst_keys as $jsst_key) {
+                    if (!isset($jsst_found[$jsst_side]) && isset($jsst_place[$jsst_key]) && is_numeric($jsst_place[$jsst_key])) {
+                        $jsst_found[$jsst_side] = (int) $jsst_place[$jsst_key];
+                    }
+                }
+            }
+        }
+        if (!isset($jsst_found['in']) && !isset($jsst_found['out'])) return array();
+        return array(
+            'intokens'  => isset($jsst_found['in']) ? $jsst_found['in'] : 0,
+            'outtokens' => isset($jsst_found['out']) ? $jsst_found['out'] : 0,
+        );
+    }
+
     private function parseEngineResponse($jsst_raw) {
         $jsst_direct = json_decode((string) $jsst_raw, true);
         if (is_array($jsst_direct) && (isset($jsst_direct['output']) || isset($jsst_direct['error']))) {
@@ -1267,6 +1320,7 @@ class JSSTzywrapModel {
            that never went through the engine registry; a chokepoint that only
            holds for the callers you remembered is not a chokepoint. */
         $this->jsst_lasterror = '';
+        $this->jsst_lastusage = array();
         if (class_exists('JSSTaipolicy') && !JSSTaipolicy::allows(JSSTaipolicy::LANE_HOSTED)) {
             $this->jsst_lasterror = __('The hosted lane is switched off in AI Agent settings.', 'js-support-ticket');
             return false;
@@ -1321,6 +1375,7 @@ class JSSTzywrapModel {
 
         // Handle Success
         if ($body_json && isset($body_json['output'])) {
+            $this->jsst_lastusage = self::usageFrom($body_json);
             return $body_json['output'];
         }
 

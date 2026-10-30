@@ -38,9 +38,17 @@ JSSTmessage::getMessage();
                 <div class="jsst-status-title"><?php echo esc_html(__('Environment', 'js-support-ticket')); ?></div>
                 <table class="jsst-status-table">
                     <?php foreach ($jsst_status['environment'] AS $jsst_k => $jsst_v) { ?>
-                        <tr><td><?php echo esc_html(str_replace('_', ' ', $jsst_k)); ?></td><td><?php echo esc_html($jsst_v !== '' ? $jsst_v : '—'); ?></td></tr>
+                        <tr><td><?php echo esc_html(str_replace('_', ' ', $jsst_k)); ?></td><td><?php
+                            if ($jsst_k === 'wp_debug_display' && $jsst_v === 'on') { ?>
+                                <span class="jsst-status-flag jsst-status-flag-bad"><?php echo esc_html(__('On — errors are shown to visitors', 'js-support-ticket')); ?></span>
+                            <?php } else {
+                                echo esc_html($jsst_v !== '' ? $jsst_v : '—');
+                            } ?></td></tr>
                     <?php } ?>
                 </table>
+                <?php if (isset($jsst_status['environment']['wp_debug_display']) && $jsst_status['environment']['wp_debug_display'] === 'on') { ?>
+                    <div class="jsst-status-note"><?php echo esc_html(__('PHP errors are printed on the page, which shows visitors your server folder paths. On a live site set WP_DEBUG_DISPLAY to false in wp-config.php.', 'js-support-ticket')); ?></div>
+                <?php } ?>
             </div>
 
             <?php
@@ -94,6 +102,32 @@ JSSTmessage::getMessage();
                                 <?php } ?></td>
                         </tr>
                     <?php } ?>
+                </table>
+            </div>
+
+            <?php $jsst_exposed = isset($jsst_status['attachments']) ? (int) $jsst_status['attachments'] : -1; ?>
+            <div class="jsst-status-card <?php echo esc_attr($jsst_exposed === 1 ? 'jsst-status-warn' : 'jsst-status-ok'); ?>">
+                <div class="jsst-status-title"><?php echo esc_html(__('Attachment protection', 'js-support-ticket')); ?></div>
+                <div class="jsst-status-note"><?php
+                    if ($jsst_exposed === 1) {
+                        echo esc_html(JSSTattachmentguard::exposedMessage());
+                    } elseif ($jsst_exposed === 0) {
+                        echo esc_html(__('A test file in the attachment folder was refused when asked for directly, so attachments open only through the help desk.', 'js-support-ticket'));
+                    } else {
+                        echo esc_html(__('The site could not request its own test file, so this could not be checked.', 'js-support-ticket'));
+                    }
+                ?></div>
+                <table class="jsst-status-table">
+                    <tr>
+                        <td><?php echo esc_html(__('Direct download of attachments', 'js-support-ticket')); ?></td>
+                        <td><?php if ($jsst_exposed === 1) { ?>
+                            <span class="jsst-status-flag jsst-status-flag-bad"><?php echo esc_html(__('Open to anyone', 'js-support-ticket')); ?></span>
+                        <?php } elseif ($jsst_exposed === 0) { ?>
+                            <span class="jsst-status-flag jsst-status-flag-ok"><?php echo esc_html(__('Blocked', 'js-support-ticket')); ?></span>
+                        <?php } else { ?>
+                            <span class="jsst-status-flag"><?php echo esc_html(__('Not checked', 'js-support-ticket')); ?></span>
+                        <?php } ?></td>
+                    </tr>
                 </table>
             </div>
 

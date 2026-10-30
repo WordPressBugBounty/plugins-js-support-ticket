@@ -82,8 +82,27 @@ class JSSTattachmentModel {
     }
 
     function storeAttachments($jsst_data) {
+        if (!JSSTroles::canAttachFiles()) {
+            if (self::filesWerePosted('filename')) {
+                JSSTmessage::setMessage(esc_html(__('Your files were not attached. You are not allowed to attach files.', 'js-support-ticket')), 'error');
+            }
+            return;
+        }
         JSSTincluder::getObjectClass('uploads')->storeTicketAttachment($jsst_data, $this);
         return;
+    }
+
+    /** Did the form actually send a file in this field (single or many)? */
+    public static function filesWerePosted($jsst_field) {
+        if (empty($_FILES[$jsst_field]['name'])) {
+            return false;
+        }
+        foreach ((array) $_FILES[$jsst_field]['name'] as $jsst_name) {
+            if ($jsst_name !== '') {
+                return true;
+            }
+        }
+        return false;
     }
 
     function storeTicketAttachment($jsst_ticketid, $jsst_replyattachmentid, $jsst_filesize, $jsst_filename) {
@@ -220,11 +239,14 @@ class JSSTattachmentModel {
      */
     function getDownloadAttachmentById($jsst_id, $jsst_inline = false){
         if(!is_numeric($jsst_id)) return false;
-        $jsst_query = "SELECT ticket.attachmentdir AS foldername,ticket.id AS ticketid,attach.filename  "
+        $jsst_query = "SELECT ticket.attachmentdir AS foldername,ticket.id AS ticketid,attach.filename,attach.deleted  "
                 . " FROM `".jssupportticket::$_db->prefix."js_ticket_attachments` AS attach "
                 . " JOIN `".jssupportticket::$_db->prefix."js_ticket_tickets` AS ticket ON ticket.id = attach.ticketid "
                 . " WHERE attach.id = %d";
         $jsst_object = jssupportticket::$_db->get_row(jssupportticket::$_db->prepare($jsst_query, $jsst_id));
+        if (empty($jsst_object)) {
+            JSSTincluder::notFound();
+        }
         $jsst_foldername = $jsst_object->foldername;
         $jsst_ticketid = $jsst_object->ticketid;
         $jsst_filename = $jsst_object->filename;
@@ -251,47 +273,9 @@ class JSSTattachmentModel {
             $jsst_path = $jsst_path .'/'.$jsst_datadirectory;
             $jsst_path = $jsst_path . '/attachmentdata';
             $jsst_path = $jsst_path . '/ticket/' . $jsst_foldername;
-            $jsst_file = $jsst_path . '/' . $jsst_filename;
-
-            // Initialize WordPress Filesystem
-            global $wp_filesystem;
-            if (!function_exists('wp_handle_upload')) {
-                do_action('jssupportticket_load_wp_file');
-            }
-            if ( ! WP_Filesystem() ) {
-                return false;
-            }
-            $jsst_wp_filesystem = $wp_filesystem;
-
-            if ($jsst_wp_filesystem->exists($jsst_file)) {
-                $jsst_imageinfo = $jsst_inline ? @getimagesize($jsst_file) : false;
-                $jsst_disposition = 'attachment';
-                $jsst_contenttype = 'application/octet-stream';
-                if (!empty($jsst_imageinfo['mime'])) {
-                    // Verified from the header, never from the extension.
-                    $jsst_contenttype = $jsst_imageinfo['mime'];
-                    $jsst_disposition = 'inline';
-                }
-                header('Content-Description: File Transfer');
-                header('Content-Type: ' . $jsst_contenttype);
-                // Stops a browser from second-guessing the type it was given.
-                header('X-Content-Type-Options: nosniff');
-                header('Content-Disposition: ' . $jsst_disposition . '; filename="' . jssupportticketphplib::JSST_basename($jsst_file) . '"');
-                header('Content-Transfer-Encoding: binary');
-                header('Expires: 0');
-                header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
-                header('Pragma: public');
-                
-                // Use $jsst_wp_filesystem instead of filesize() and readfile()
-                header('Content-Length: ' . $jsst_wp_filesystem->size($jsst_file));
-                
-                ob_clean();
-                flush();
-                
-                // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-                echo $jsst_wp_filesystem->get_contents($jsst_file);
-                exit();
-            }
+            $jsst_file = $jsst_path . '/' . jssupportticketphplib::JSST_basename($jsst_filename);
+            // Streams the file and ends the request; says why when it cannot.
+            JSSTattachmentserver::send($jsst_file, array('inline' => $jsst_inline, 'deleted' => !empty($jsst_object->deleted)));
         }else{
             JSSTincluder::notFound();
         }
@@ -340,51 +324,12 @@ class JSSTattachmentModel {
         );
 
         if (empty($jsst_foldername)) {
-            return false;
+            JSSTincluder::notFound();
         }
 
-        $jsst_datadirectory = jssupportticket::$_config['data_directory'];
-        $jsst_upload_dir = wp_upload_dir();
-
-        $jsst_path = $jsst_upload_dir['basedir'] . '/' . $jsst_datadirectory . '/attachmentdata/ticket/' . $jsst_foldername;
-        $jsst_file = $jsst_path . '/' . $jsst_filename;
-
-        // Initialize WP_Filesystem
-        global $wp_filesystem;
-        if (empty($wp_filesystem)) {
-            do_action('jssupportticket_load_wp_file');
-        }
-        if ( ! WP_Filesystem() ) {
-            return false;
-        }
-        $jsst_wp_filesystem = $wp_filesystem;
-
-        // Check if file exists using WP_Filesystem
-        if (!$jsst_wp_filesystem->exists($jsst_file)) {
-            return false;
-        }
-
-        header('Content-Description: File Transfer');
-        header('Content-Type: application/octet-stream');
-        header(
-            'Content-Disposition: attachment; filename=' . jssupportticketphplib::JSST_basename($jsst_file)
-        );
-        header('Content-Transfer-Encoding: binary');
-        header('Expires: 0');
-        header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
-        header('Pragma: public');
-        
-        header('Content-Length: ' . (int) $jsst_wp_filesystem->size($jsst_file));
-    
-        while (ob_get_level()) {
-            ob_end_clean();
-        }
-
-        flush();
-
-        // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-        echo $jsst_wp_filesystem->get_contents($jsst_file);
-        exit;
+        $jsst_file = JSSTattachmentserver::attachmentRoot() . '/ticket/' . $jsst_foldername . '/' . jssupportticketphplib::JSST_basename($jsst_filename);
+        // Streams the file and ends the request; says why when it cannot.
+        JSSTattachmentserver::send($jsst_file);
     }
 
     function getAllDownloads() {
@@ -412,11 +357,11 @@ class JSSTattachmentModel {
         }
         $jsst_path = JSST_PLUGIN_PATH;
         $jsst_path .= 'zipdownloads';
-        JSSTincluder::getJSModel('jssupportticket')->makeDir($jsst_path);
+        JSSTattachmentserver::makeTempFolder($jsst_path);
         $jsst_randomfolder = $this->getRandomFolderName($jsst_path);
         $jsst_path .= '/' . $jsst_randomfolder;
 
-        JSSTincluder::getJSModel('jssupportticket')->makeDir($jsst_path);
+        JSSTattachmentserver::makeTempFolder($jsst_path);
         $jsst_archive = new PclZip($jsst_path . '/alldownloads.zip');
         $jsst_datadirectory = jssupportticket::$_config['data_directory'];
         $jsst_maindir = wp_upload_dir();
@@ -432,62 +377,26 @@ class JSSTattachmentModel {
         // if(!is_dir($jsst_directory))
         //         return false;
 
-        $jsst_filelist = '';
-        foreach ($jsst_scanned_directory AS $jsst_file) {
-            $jsst_filelist .= $jsst_directory . '/' . $jsst_file . ',';
+        // Only the files that are really there: one missing or cleaned-up file
+        // used to stop the whole zip, with the server path in the message.
+        $jsst_files = isset($jsst_directory) ? JSSTattachmentserver::existingFiles($jsst_directory, $jsst_scanned_directory) : array();
+        if (empty($jsst_files)) {
+            JSSTattachmentserver::removeTempFolder($jsst_path);
+            JSSTattachmentserver::nothingToZip();
         }
-        $jsst_filelist = jssupportticketphplib::JSST_substr($jsst_filelist, 0, jssupportticketphplib::JSST_strlen($jsst_filelist) - 1);
-        $jsst_v_list = $jsst_archive->create($jsst_filelist, PCLZIP_OPT_REMOVE_PATH, $jsst_directory);
-
+        $jsst_v_list = $jsst_archive->create($jsst_files, PCLZIP_OPT_REMOVE_PATH, realpath($jsst_directory));
         if ($jsst_v_list == 0) {
-            die(esc_html__('Error', 'js-support-ticket') . " : '" . wp_kses($jsst_archive->errorInfo(), JSST_ALLOWED_TAGS) . "'");
+            error_log('JS Help Desk: zip of attachments failed - ' . $jsst_archive->errorInfo()); // phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_error_log
+            JSSTattachmentserver::removeTempFolder($jsst_path);
+            JSSTattachmentserver::nothingToZip();
         }
 
-        $jsst_file = $jsst_path . '/alldownloads.zip';
-
-        // --- Initialize WP_Filesystem ---
-        global $wp_filesystem;
-        if (!function_exists('wp_handle_upload')) {
-            do_action('jssupportticket_load_wp_file');
-        }
-        if ( ! WP_Filesystem() ) {
-            return false;
-        }
-        $jsst_wp_filesystem = $wp_filesystem;
-
-        if ($jsst_wp_filesystem->exists($jsst_file)) {
-            header('Content-Description: File Transfer');
-            header('Content-Type: application/octet-stream');
-            header('Content-Disposition: attachment; filename=' . jssupportticketphplib::JSST_basename($jsst_file));
-            header('Content-Transfer-Encoding: binary');
-            header('Expires: 0');
-            header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
-            header('Pragma: public');
-            
-            // Use WP_Filesystem for size
-            header('Content-Length: ' . $jsst_wp_filesystem->size($jsst_file));
-            
-            if (ob_get_level()) ob_end_clean();
-            flush();
-            
-            // Use WP_Filesystem for reading content
-            // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-            echo $jsst_wp_filesystem->get_contents($jsst_file);
-        }
-
-        // --- CLEANUP: Use WP_Filesystem for deletion ---
-        if ($jsst_wp_filesystem->exists($jsst_file)) {
-            $jsst_wp_filesystem->delete($jsst_file);
-        }
-
-        $jsst_base_zip_path = JSST_PLUGIN_PATH . 'zipdownloads/' . $jsst_randomfolder;
-        
-        // Delete index.html and the folder recursively
-        if ($jsst_wp_filesystem->exists($jsst_base_zip_path)) {
-            $jsst_wp_filesystem->delete($jsst_base_zip_path, true); // true = recursive delete
-        }
-
-        exit();
+        // The zip is temporary: sent, then its folder is removed.
+        JSSTattachmentserver::send($jsst_path . '/alldownloads.zip', array(
+            'base' => JSST_PLUGIN_PATH . 'zipdownloads',
+            'name' => 'alldownloads.zip',
+            'after' => function () use ($jsst_path) { JSSTattachmentserver::removeTempFolder($jsst_path); },
+        ));
     }
 
     function getAllReplyDownloads() {
@@ -516,11 +425,11 @@ class JSSTattachmentModel {
         }
 
         $jsst_base_path = JSST_PLUGIN_PATH . 'zipdownloads';
-        JSSTincluder::getJSModel('jssupportticket')->makeDir($jsst_base_path);
+        JSSTattachmentserver::makeTempFolder($jsst_base_path);
         $jsst_randomfolder = $this->getRandomFolderName($jsst_base_path);
         $jsst_path = $jsst_base_path . '/' . $jsst_randomfolder;
 
-        JSSTincluder::getJSModel('jssupportticket')->makeDir($jsst_path);
+        JSSTattachmentserver::makeTempFolder($jsst_path);
         $jsst_archive = new PclZip($jsst_path . '/alldownloads.zip');
         
         $jsst_datadirectory = jssupportticket::$_config['data_directory'];
@@ -537,59 +446,26 @@ class JSSTattachmentModel {
         // if(!is_dir($jsst_directory))
         //         return false;
 
-        $jsst_filelist = '';
-        foreach ($jsst_scanned_directory AS $jsst_file) {
-            $jsst_filelist .= $jsst_directory . '/' . $jsst_file . ',';
+        // Only the files that are really there: one missing or cleaned-up file
+        // used to stop the whole zip, with the server path in the message.
+        $jsst_files = isset($jsst_directory) ? JSSTattachmentserver::existingFiles($jsst_directory, $jsst_scanned_directory) : array();
+        if (empty($jsst_files)) {
+            JSSTattachmentserver::removeTempFolder($jsst_path);
+            JSSTattachmentserver::nothingToZip();
         }
-        $jsst_filelist = jssupportticketphplib::JSST_substr($jsst_filelist, 0, jssupportticketphplib::JSST_strlen($jsst_filelist) - 1);
-        
-        $jsst_v_list = $jsst_archive->create($jsst_filelist, PCLZIP_OPT_REMOVE_PATH, $jsst_directory);
+        $jsst_v_list = $jsst_archive->create($jsst_files, PCLZIP_OPT_REMOVE_PATH, realpath($jsst_directory));
         if ($jsst_v_list == 0) {
-            die(esc_html__('Error', 'js-support-ticket') . " : '" . wp_kses($jsst_archive->errorInfo(), JSST_ALLOWED_TAGS) . "'");
+            error_log('JS Help Desk: zip of attachments failed - ' . $jsst_archive->errorInfo()); // phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_error_log
+            JSSTattachmentserver::removeTempFolder($jsst_path);
+            JSSTattachmentserver::nothingToZip();
         }
 
-        $jsst_file = $jsst_path . '/alldownloads.zip';
-
-        // --- INITIALIZE WP_FILESYSTEM ---
-        global $wp_filesystem;
-        if (!function_exists('wp_handle_upload')) {
-            do_action('jssupportticket_load_wp_file');
-        }
-        if ( ! WP_Filesystem() ) {
-            return false;
-        }
-        $jsst_wp_filesystem = $wp_filesystem;
-
-        // --- FILE DOWNLOAD SECTION ---
-        if ($jsst_wp_filesystem->exists($jsst_file)) {
-            header('Content-Description: File Transfer');
-            header('Content-Type: application/octet-stream');
-            header('Content-Disposition: attachment; filename=' . esc_attr(jssupportticketphplib::JSST_basename($jsst_file)));
-            header('Content-Transfer-Encoding: binary');
-            header('Expires: 0');
-            header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
-            header('Pragma: public');
-            
-            // Use floatval or intval to escape the numeric length
-            header('Content-Length: ' . floatval($jsst_wp_filesystem->size($jsst_file))); 
-            
-            if (ob_get_level()) {
-                ob_end_clean();
-            }
-            flush();
-            
-            // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-            echo $jsst_wp_filesystem->get_contents($jsst_file); 
-            exit;
-        }
-
-        // --- CLEANUP SECTION ---
-        // Using the 'true' parameter in delete() makes it recursive (replaces rmdir and manual index.html deletion)
-        if ( $jsst_wp_filesystem->exists($jsst_path)) {
-            $jsst_wp_filesystem->delete($jsst_path, true); 
-        }
-
-        exit();
+        // The zip is temporary: sent, then its folder is removed.
+        JSSTattachmentserver::send($jsst_path . '/alldownloads.zip', array(
+            'base' => $jsst_base_path,
+            'name' => 'alldownloads.zip',
+            'after' => function () use ($jsst_path) { JSSTattachmentserver::removeTempFolder($jsst_path); },
+        ));
     }
 
     function getRandomFolderName($jsst_path) {

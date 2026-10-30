@@ -49,8 +49,7 @@ class JSSTmultiformController {
                 $jsst_id = JSSTrequest::getVar('jssupportticketid');
                 jssupportticket::$jsst_data['permission_granted'] = true;
                 if (in_array('agent', jssupportticket::$_active_addons) && JSSTincluder::getJSModel('agent')->isUserStaff()) {
-                    $jsst_per_task = ($jsst_id == null) ? 'Add Multiform' : 'Edit Multiform';
-                    jssupportticket::$jsst_data['permission_granted'] = JSSTincluder::getJSModel('userpermissions')->checkPermissionGrantedForTask($jsst_per_task);
+                    jssupportticket::$jsst_data['permission_granted'] = /* No agent permission of this name exists, so this was only ever true for administrators. Said plainly. */ current_user_can('manage_options');
                 }
                 if (jssupportticket::$jsst_data['permission_granted']) {
                     JSSTincluder::getJSModel('multiform')->getMultiformForForm($jsst_id);

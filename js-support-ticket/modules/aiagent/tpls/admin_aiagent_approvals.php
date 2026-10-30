@@ -49,9 +49,17 @@ $jsst_decide = function ($jsst_id, $jsst_what) {
 /** The evidence behind one answer, drawn the same way in both tables. */
 $jsst_evidence = function ($jsst_row) {
     $jsst_bits = array();
-    $jsst_bits[] = sprintf(
-        /* translators: %d: the engine's confidence, as a percentage */
-        esc_html(__('%d%% confident', 'js-support-ticket')), (int) $jsst_row->confidence);
+    /* 0 is what the safety checks write when they hold an answer back (a
+       missing citation, a reply its sources do not support), not the engine's
+       own view. "0% confident" next to "100% covered" made a good answer look
+       bad, so the reason is named instead. */
+    if ((int) $jsst_row->confidence === 0 && (string) $jsst_row->reason !== '') {
+        $jsst_bits[] = esc_html(__('Held by a safety check', 'js-support-ticket'));
+    } else {
+        $jsst_bits[] = sprintf(
+            /* translators: %d: the engine's confidence, as a percentage */
+            esc_html(__('%d%% confident', 'js-support-ticket')), (int) $jsst_row->confidence);
+    }
     if ($jsst_row->coverage !== null) {
         $jsst_bits[] = sprintf(
             /* translators: %d: how much of the question the best passage covered */
@@ -73,7 +81,7 @@ JSSTmessage::getMessage();
     </div>
     <div id="jsstadmin-data">
         <?php JSSTlayout::adminPageHeader(array(
-            'title'   => __('Approvals', 'js-support-ticket'),
+            'title'   => __('Automatic answers: Approvals', 'js-support-ticket'),
             'crumbs'  => array(array('text' => __('AI Agent', 'js-support-ticket'), 'url' => admin_url('admin.php?page=aiagent'))),
         )); ?>
         <div id="jsstadmin-data-wrp">
@@ -81,15 +89,15 @@ JSSTmessage::getMessage();
 
             <p class="jsst-lede">
                 <?php echo esc_html(__('Every answer the AI wrote and what happened to it. Answers below your floors wait here; sent ones can be withdrawn.', 'js-support-ticket')); ?>
-            </p><?php JSSTlayout::why(__('Every answer the AI wrote, what happened to it, and what can still be done about it. Nothing goes out below the floors you set — it waits here instead. Anything that did go out can be withdrawn.', 'js-support-ticket')); ?>
+            </p>
 
             <?php if (empty($jsst_policy['enabled'])) { ?>
                 <div class="jsst-card"><div class="jsst-card-body">
-                    <p class="jsst-hint"><?php echo esc_html(__('AI is switched off: nothing new arrives, and approving waits until it is back on.', 'js-support-ticket')); ?></p><?php JSSTlayout::why(__('AI is switched off for this site, so nothing new will arrive here. Answers already waiting stay waiting, and approving one is refused until AI is switched back on.', 'js-support-ticket')); ?>
+                    <p class="jsst-hint"><?php echo esc_html(__('AI is switched off: nothing new arrives, and approving waits until it is back on.', 'js-support-ticket')); ?></p>
                 </div></div>
             <?php } ?>
 
-            <div class="jsst-card">
+            <div class="jsst-card" id="jsst-approvalmode">
                 <div class="jsst-card-head">
                     <h2 class="jsst-card-title"><?php echo esc_html(__('How much a person has to do', 'js-support-ticket')); ?></h2>
                     <p class="jsst-card-sub"><?php echo esc_html(__('"Always ask" means always, however confident the engine is.', 'js-support-ticket')); ?></p><?php JSSTlayout::why(__('This sits above the confidence floor rather than beside it: "always ask" means always, however sure the engine says it is.', 'js-support-ticket')); ?>
@@ -125,6 +133,18 @@ JSSTmessage::getMessage();
                                 <p class="jsst-fhelp"><?php echo esc_html($jsst_def['blurb']); ?></p>
                             <?php } ?>
                         </fieldset>
+                        <?php /* The partner settings live on Rules; say what they are now. */
+                        if (class_exists('JSSTairollout')) {
+                            $jsst_rr = JSSTairollout::rules(); ?>
+                            <p class="jsst-fhelp">
+                                <?php echo esc_html(sprintf(
+                                    /* translators: 1: On or Off, 2: a confidence percentage */
+                                    __('Set on Rules: automatic answering is %1$s, and "Send when it is confident enough" needs %2$d%% confidence.', 'js-support-ticket'),
+                                    !empty($jsst_rr['enabled']) ? __('on', 'js-support-ticket') : __('off', 'js-support-ticket'),
+                                    (int) $jsst_rr['threshold'])); ?>
+                                <a href="<?php echo esc_url(admin_url('admin.php?page=aiagent&jstlay=aiagent_autopilot')); ?>"><?php echo esc_html(__('Change them on Rules', 'js-support-ticket')); ?></a>
+                            </p>
+                        <?php } ?>
                         <div class="jsst-btnrow">
                             <input type="submit" class="jsst-btn jsst-btn-primary" value="<?php echo esc_attr(__('Save', 'js-support-ticket')); ?>" />
                         </div>
@@ -174,7 +194,7 @@ JSSTmessage::getMessage();
                                         <?php } ?>
                                     </th>
                                     <td>
-                                        <?php echo esc_html(wp_html_excerpt(wp_strip_all_tags((string) $jsst_row->body), 320, '…')); ?>
+                                        <?php echo esc_html(JSSTaireview::plainPreview($jsst_row->body, 320)); ?>
                                         <?php if (!empty($jsst_sources)) { ?>
                                             <div class="jsst-chips">
                                                 <?php foreach ($jsst_sources as $jsst_source) { ?>
@@ -270,7 +290,7 @@ JSSTmessage::getMessage();
                                             <span class="jsst-table-sub"><?php echo esc_html($jsst_row->note); ?></span>
                                         <?php } ?>
                                     </td>
-                                    <td><?php echo esc_html(wp_html_excerpt(wp_strip_all_tags((string) $jsst_row->body), 220, '…')); ?></td>
+                                    <td><?php echo esc_html(JSSTaireview::plainPreview($jsst_row->body, 220)); ?></td>
                                     <td class="jsst-col-act"><span class="jsst-rowactions">
                                         <?php if ($jsst_row->state === JSSTaireview::STATE_SENT) { ?>
                                             <a class="jsst-act jsst-act-danger" href="<?php echo esc_url($jsst_decide((int) $jsst_row->id, 'retract')); ?>"

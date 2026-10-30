@@ -468,6 +468,53 @@ $jsst_jssupportticket_css .= '
         padding-left: 12px;
         border-left: 2px solid ' . $jsst_color5 . ';
     }
+
+/* The user picker (JSSTlayout::adminUserPicker), the same as on the agent
+   new ticket page. Scoped to .jsst-userpick, so it overrides the old popup
+   rules above only for this dialog. */
+div#userpopupblack {
+    background: rgba(0,0,0,0.7);
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top:0px;
+    left:0px;
+    z-index: 9989;
+}
+div#userpopup.jsst-userpick {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    width: min(640px, 92vw);
+    max-height: 80vh;
+    padding: 0;
+    z-index: 99999;
+    overflow-x: hidden;
+    overflow-y: auto;
+    transform: translate(-50%,-50%);
+    border-radius: 15px;
+    background: #fff;
+    box-sizing: border-box;
+}
+div#userpopup.jsst-userpick * {box-sizing: border-box;}
+div#userpopup.jsst-userpick .jsst-popup-header {display: flex;align-items: center;justify-content: space-between;gap: 12px;margin: 0;padding: 16px 20px;background: ' . $jsst_color1 . ';border: 0;position: sticky;top: 0;z-index: 2;}
+div#userpopup.jsst-userpick .jsst-popup-header .popup-header-text {margin: 0;color: #fff;font-size: 18px;font-weight: 600;line-height: 1.3;}
+div#userpopup.jsst-userpick .jsst-popup-header button.jsst-popup-close {flex: 0 0 auto;width: 32px;height: 32px;min-height: 0;margin: 0;padding: 0;border: 0;border-radius: 50%;background: rgba(255,255,255,.18) url(\'data:image/svg+xml,%3csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22 fill=%22none%22 stroke=%22%23ffffff%22 stroke-width=%222.5%22 stroke-linecap=%22round%22%3e%3cline x1=%2218%22 y1=%226%22 x2=%226%22 y2=%2218%22/%3e%3cline x1=%226%22 y1=%226%22 x2=%2218%22 y2=%2218%22/%3e%3c/svg%3e\') no-repeat center / 16px 16px;box-shadow: none;color: transparent;font-size: 0;line-height: 0;text-transform: none;cursor: pointer;transition: background-color .15s ease;}
+div#userpopup.jsst-userpick .jsst-popup-header button.jsst-popup-close:hover {background-color: rgba(255,255,255,.32);}
+div#userpopup.jsst-userpick .jsst-popup-header button.jsst-popup-close:focus-visible {outline: 2px solid #fff;outline-offset: 2px;}
+div#userpopup.jsst-userpick .jsst-userpick-search {margin: 0;padding: 16px 20px 0;}
+div#userpopup.jsst-userpick .jsst-userpick-bar {display: flex;flex-wrap: wrap;gap: 10px;}
+div#userpopup.jsst-userpick input.jsst-userpick-q {flex: 1 1 220px;min-width: 0;min-height: 48px;margin: 0;padding: 12px 16px;border: 1px solid ' . $jsst_color5 . ';border-radius: 10px;background: #fff;color: ' . $jsst_color4 . ';}
+div#userpopup.jsst-userpick .jsst-userpick-bar .jsst-btn {min-height: 48px;margin: 0;padding: 12px 20px;border: 1px solid ' . $jsst_color5 . ';border-radius: 10px;background: #f5f2f5;color: ' . $jsst_color4 . ';font-weight: 500;line-height: 1;cursor: pointer;}
+div#userpopup.jsst-userpick .jsst-userpick-bar .jsst-btn:hover {background: ' . $jsst_color2 . ';border-color: ' . $jsst_color2 . ';color: ' . $jsst_color7 . ';}
+div#userpopup.jsst-userpick .jsst-userpick-bar .jsst-btn-primary {background: ' . $jsst_color1 . ';border-color: ' . $jsst_color1 . ';color: ' . $jsst_color7 . ';}
+div#userpopup.jsst-userpick .jsst-userpick-records {padding: 16px 20px 20px;}
+div#userpopup.jsst-userpick .jsst-userpick-records .jsst-hint {margin: 6px 0;color: ' . $jsst_color4 . ';}
+div#userpopup.jsst-userpick .jsst-userpick-name {display: block;font-weight: 600;color: ' . $jsst_color2 . ';}
+div#userpopup.jsst-userpick .jsst-userpick-sub {display: block;margin-top: 2px;font-size: 0.9em;color: ' . $jsst_color4 . ';word-break: break-word;}
+div#userpopup.jsst-userpick tbody tr {cursor: pointer;}
+div#userpopup.jsst-userpick tbody tr:hover td {background: ' . $jsst_color3 . ';}
+div#userpopup.jsst-userpick .jsst-num {text-align: right;white-space: nowrap;}
 ';
 
 wp_add_inline_style('jssupportticket-main-css', $jsst_jssupportticket_css);

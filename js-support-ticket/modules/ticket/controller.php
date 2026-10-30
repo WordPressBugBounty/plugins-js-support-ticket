@@ -165,9 +165,8 @@ class JSSTticketController {
         if (! wp_verify_nonce( $jsst_nonce, 'lock-ticket-'.$jsst_id) ) {
             die( esc_html__( 'Security check Failed', 'js-support-ticket' ) );
         }
-        if (!current_user_can('manage_options')) {
-            return false;
-        }
+        // One gate for locking: the model asks the "Lock Ticket" permission
+        // and the ticket's scope, the same as the actions route does.
         JSSTincluder::getJSModel('actions')->lockTicket( absint( $jsst_id ) );
         if (is_admin()) {
             $jsst_url = admin_url("admin.php?page=ticket&jstlay=ticketdetail&jssupportticketid=" . esc_attr($jsst_id));
@@ -184,9 +183,8 @@ class JSSTticketController {
         if (! wp_verify_nonce( $jsst_nonce, 'unlock-ticket-'.$jsst_id) ) {
             die( esc_html__( 'Security check Failed', 'js-support-ticket' ) );
         }
-        if (!current_user_can('manage_options')) {
-            return false;
-        }
+        // One gate for locking: the model asks the "Lock Ticket" permission
+        // and the ticket's scope, the same as the actions route does.
         JSSTincluder::getJSModel('actions')->unLockTicket( absint( $jsst_id ) );
         if (is_admin()) {
             $jsst_url = admin_url("admin.php?page=ticket&jstlay=ticketdetail&jssupportticketid=" . esc_attr($jsst_id));
@@ -366,6 +364,9 @@ class JSSTticketController {
         JSSTincluder::getJSModel('ticket')->assignTicketToStaff($jsst_data);
         if (is_admin()) {
             $jsst_url = admin_url("admin.php?page=ticket&jstlay=ticketdetail&jssupportticketid=" . esc_attr($jsst_data['ticketid']));
+        } elseif (isset($jsst_data['releaseticket']) && in_array('agent', jssupportticket::$_active_addons)) {
+            // A released ticket may be outside what the agent can open now.
+            $jsst_url = jssupportticket::makeUrl(array('jstmod'=>'agent', 'jstlay'=>'staffmyticket'));
         } else {
             $jsst_url = jssupportticket::makeUrl(array('jstmod'=>'ticket', 'jstlay'=>'ticketdetail', 'jssupportticketid'=>$jsst_data['ticketid']));
         }
@@ -857,6 +858,14 @@ class JSSTticketController {
             $jsst_emailaddress = sanitize_email( JSSTrequest::getVar('email') );
             $jsst_trackingid = JSSTrequest::getVar('ticketid');
             $jsst_tickettoken = JSSTrequest::getVar('tickettoken');
+            /* Each try is a guess at an email and tracking id pair, so tries
+               are limited per visitor, as ticket submissions are. A nonce
+               would not stop this: a script can fetch a fresh one each time. */
+            if (class_exists('JSSTratelimit') && !JSSTratelimit::check('ticketstatus')) {
+                JSSTmessage::setMessage(JSSTratelimit::message(), 'error');
+                wp_safe_redirect(jssupportticket::makeUrl(array('jstmod'=>'ticket', 'jstlay'=>'ticketstatus')));
+                exit;
+            }
             if(!empty($jsst_emailaddress) AND !empty($jsst_trackingid)){
                 $jsst_token = JSSTincluder::getJSModel('ticket')->getTokenByEmailAndTrackingId($jsst_emailaddress, $jsst_trackingid);
             }else if(!empty($jsst_tickettoken)){
@@ -866,9 +875,9 @@ class JSSTticketController {
                 include_once JSST_PLUGIN_PATH . 'includes/encoder.php';
                 $jsst_encoder = new JSSTEncoder();
                 $jsst_token = $jsst_encoder->encrypt(wp_json_encode(array('token' => $jsst_token, 'sitelink' => get_option('jsst_encripted_site_link'))));
-                jssupportticketphplib::JSST_setcookie('js-support-ticket-token-tkstatus',$jsst_token ,0, COOKIEPATH);
+                jssupportticketphplib::JSST_setcookie('js-support-ticket-token-tkstatus',$jsst_token ,0, COOKIEPATH, '', is_ssl(), true);
                 if ( SITECOOKIEPATH != COOKIEPATH ){
-                    jssupportticketphplib::JSST_setcookie('js-support-ticket-token-tkstatus',$jsst_token ,0, SITECOOKIEPATH);
+                    jssupportticketphplib::JSST_setcookie('js-support-ticket-token-tkstatus',$jsst_token ,0, SITECOOKIEPATH, '', is_ssl(), true);
                 }
                 $jsst_ticketid = JSSTincluder::getJSModel('ticket')->getTicketidForVisitorUsingToken($jsst_token);
                 if ($jsst_ticketid) {
@@ -882,9 +891,9 @@ class JSSTticketController {
                 JSSTmessage::setMessage(esc_html(__('Record not found', 'js-support-ticket')), 'error');
             }
         } else {
-            jssupportticketphplib::JSST_setcookie('js-support-ticket-token-tkstatus',$jsst_token ,0, COOKIEPATH);
+            jssupportticketphplib::JSST_setcookie('js-support-ticket-token-tkstatus',$jsst_token ,0, COOKIEPATH, '', is_ssl(), true);
             if ( SITECOOKIEPATH != COOKIEPATH ){
-                jssupportticketphplib::JSST_setcookie('js-support-ticket-token-tkstatus',$jsst_token ,0, SITECOOKIEPATH);
+                jssupportticketphplib::JSST_setcookie('js-support-ticket-token-tkstatus',$jsst_token ,0, SITECOOKIEPATH, '', is_ssl(), true);
             }
             $jsst_ticketid = JSSTincluder::getJSModel('ticket')->getTicketidForVisitor($jsst_token);
             if ($jsst_ticketid) {

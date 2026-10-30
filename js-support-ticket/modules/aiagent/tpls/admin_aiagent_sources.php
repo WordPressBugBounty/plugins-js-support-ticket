@@ -157,8 +157,13 @@ JSSTmessage::getMessage();
                                     'jsst-aiagent-resync-' . $jsst_key
                                 );
                             ?>
-                                <?php $jsst_absent = empty($jsst_row['present']); ?>
-                                <tr class="<?php echo ($jsst_key === $jsst_open) ? 'jsst-row-on' : ''; ?><?php echo $jsst_absent ? ' jsst-row-unavailable' : ''; ?>" data-jsst-srcrow="<?php echo esc_attr($jsst_key); ?>">
+                                <?php $jsst_absent = empty($jsst_row['present']);
+                                /* Here, but its table is not installed: it cannot be used, so
+                                   it is greyed out like a missing add-on. A disabled box posts
+                                   nothing and the save would read that as "switched off", so
+                                   the saved choice is sent in hidden fields and kept as it is. */
+                                $jsst_frozen = !$jsst_absent && !empty($jsst_row['table_missing']); ?>
+                                <tr class="<?php echo ($jsst_key === $jsst_open) ? 'jsst-row-on' : ''; ?><?php echo ($jsst_absent || $jsst_frozen) ? ' jsst-row-unavailable' : ''; ?>" data-jsst-srcrow="<?php echo esc_attr($jsst_key); ?>">
                                     <th scope="row" class="jsst-col-name">
                                         <?php /* The name opens this source's documents; a separate "Documents" action said the same thing twice. */ ?>
                                         <?php if ($jsst_absent) { /* No documents to open: its add-on is not here. */ ?>
@@ -174,9 +179,14 @@ JSSTmessage::getMessage();
                                     </th>
                                     <td class="jsst-col-fit">
                                         <label class="jsst-check">
-                                            <input type="checkbox" name="src_<?php echo esc_attr($jsst_key); ?>" value="1" <?php checked(!$jsst_absent && !empty($jsst_row['approved'])); ?> <?php disabled($jsst_absent); ?> />
+                                            <input type="checkbox" name="src_<?php echo esc_attr($jsst_key); ?>" value="1" <?php checked(!$jsst_absent && !empty($jsst_row['approved'])); ?> <?php disabled($jsst_absent || $jsst_frozen); ?> />
                                             <span><?php echo esc_html(__('Use it', 'js-support-ticket')); ?></span>
                                         </label>
+                                        <?php if ($jsst_frozen) { ?>
+                                            <?php if (!empty($jsst_row['approved'])) { ?><input type="hidden" name="src_<?php echo esc_attr($jsst_key); ?>" value="1" /><?php } ?>
+                                            <input type="hidden" name="mode_<?php echo esc_attr($jsst_key); ?>" value="<?php echo esc_attr($jsst_row['mode']); ?>" />
+                                            <span class="jsst-table-sub"><?php echo esc_html(__('Kept as saved until it can be used', 'js-support-ticket')); ?></span>
+                                        <?php } ?>
                                         <?php if (empty($jsst_row['present']) && $jsst_row['needs'] !== '') { ?>
                                             <span class="jsst-table-sub"><?php echo esc_html(sprintf(
                                                 /* translators: %s: the name of the add-on that owns this content */
@@ -199,7 +209,7 @@ JSSTmessage::getMessage();
                                                  row and the chosen option can be cut short, so the full
                                                  wording is on the control itself. */ ?>
                                         <select class="jsst-select" id="mode_<?php echo esc_attr($jsst_key); ?>" name="mode_<?php echo esc_attr($jsst_key); ?>"
-                                                title="<?php echo esc_attr(isset($jsst_modes[$jsst_row['mode']]['label']) ? $jsst_modes[$jsst_row['mode']]['label'] : ''); ?>" <?php disabled($jsst_absent); ?>>
+                                                title="<?php echo esc_attr(isset($jsst_modes[$jsst_row['mode']]['label']) ? $jsst_modes[$jsst_row['mode']]['label'] : ''); ?>" <?php disabled($jsst_absent || $jsst_frozen); ?>>
                                             <?php foreach ($jsst_modes as $jsst_modeid => $jsst_mode) { ?>
                                                 <option value="<?php echo esc_attr($jsst_modeid); ?>" <?php selected($jsst_row['mode'], $jsst_modeid); ?>
                                                         title="<?php echo esc_attr($jsst_mode['label']); ?>"><?php
@@ -254,7 +264,7 @@ JSSTmessage::getMessage();
                                     <td class="jsst-col-act"><span class="jsst-rowactions">
                                         <?php /* Nothing to re-read or manage where the add-on
                                                  that holds the content is not running. */
-                                        if (!$jsst_absent) { ?>
+                                        if (!$jsst_absent && !$jsst_frozen) { ?>
                                         <a class="jsst-act" href="<?php echo esc_url($jsst_resync); ?>"><?php echo esc_html(__('Re-read', 'js-support-ticket')); ?></a>
                                         <?php } ?>
                                         <?php if (!$jsst_absent && !empty($jsst_row['manage'])) { ?>
@@ -284,8 +294,9 @@ JSSTmessage::getMessage();
 
             <h2 class="jsst-groupheading"><?php echo esc_html(__('Language', 'js-support-ticket')); ?></h2>
 
-            <div class="jsst-card">
-                <div class="jsst-card-head">
+            <?php /* Folded: the pill above says how many languages there are; open it to change the rule. */ ?>
+            <details class="jsst-card jsst-ai-fold">
+                <summary class="jsst-card-head">
                     <h2 class="jsst-card-title"><?php echo esc_html(__('Answering people in their own language', 'js-support-ticket')); ?></h2>
                     <div class="jsst-card-tools">
                         <?php if (count($jsst_langsurvey['languages']) > 1) { ?>
@@ -297,7 +308,7 @@ JSSTmessage::getMessage();
                             <span class="jsst-pill jsst-pill-off"><span class="jsst-dot"></span><?php echo esc_html(__('One language', 'js-support-ticket')); ?></span>
                         <?php } ?>
                     </div>
-                </div>
+                </summary>
                 <div class="jsst-card-body">
 
                     <?php if (count($jsst_langsurvey['languages']) < 2) { ?>
@@ -315,6 +326,15 @@ JSSTmessage::getMessage();
                                     <span class="jsst-chip"><?php echo esc_html(JSSTailanguages::label($jsst_code) . ' · ' . sprintf(
                                         /* translators: %s: a number of indexed passages */
                                         __('%s passages', 'js-support-ticket'), number_format_i18n((int) $jsst_n))); ?></span>
+                                <?php } ?>
+                                <?php /* The rest of the index, so this does not read as a
+                                         different total from the one above. */
+                                $jsst_untold = (int) $jsst_langsurvey['total'] - array_sum(array_map('intval', $jsst_langsurvey['languages']));
+                                if ($jsst_untold > 0) { ?>
+                                    <span class="jsst-chip"><?php echo esc_html(sprintf(
+                                        /* translators: %s: a number of indexed passages */
+                                        _n('%s passage too short to tell', '%s passages too short to tell', $jsst_untold, 'js-support-ticket'),
+                                        number_format_i18n($jsst_untold))); ?></span>
                                 <?php } ?>
                                 </div>
                             </dd>
@@ -371,7 +391,7 @@ JSSTmessage::getMessage();
                         </div>
                     </form>
                 </div>
-            </div>
+            </details>
             <?php } ?>
 
             <?php if ($jsst_open !== '' && !empty($jsst_openrow)) { ?>
@@ -561,11 +581,12 @@ JSSTmessage::getMessage();
 
             <h2 class="jsst-groupheading"><?php echo esc_html(__('Test what a question reaches', 'js-support-ticket')); ?></h2>
 
-            <div class="jsst-card">
-                <div class="jsst-card-head">
+            <?php /* A tool, not a setting: closed until a question has been asked. */ ?>
+            <details class="jsst-card jsst-ai-fold"<?php echo empty($jsst_console['ran']) && empty($jsst_console['question']) ? '' : ' open'; ?>>
+                <summary class="jsst-card-head">
                     <h2 class="jsst-card-title"><?php echo esc_html(__('Retrieval console', 'js-support-ticket')); ?></h2>
                     <p class="jsst-card-sub"><?php echo esc_html(__('Ask a question the way a customer would. This runs the same retrieval a real ticket runs, with the rules above applied, and calls no model and costs nothing.', 'js-support-ticket')); ?></p>
-                </div>
+                </summary>
 
                 <div class="jsst-card-body">
                     <form class="jsst-form" method="get" action="<?php echo esc_url(admin_url('admin.php')); ?>">
@@ -620,12 +641,45 @@ JSSTmessage::getMessage();
                             <dt><?php echo esc_html(__('Shown', 'js-support-ticket')); ?></dt>
                             <dd class="jsst-num"><strong><?php echo esc_html(number_format_i18n(count($jsst_freeresults))); ?></strong>
                                 <span class="jsst-table-sub"><?php echo esc_html(__('A result must share a word in its title, or two in its text, and score close to the best match.', 'js-support-ticket')); ?></span></dd>
+                            <?php
+                            $jsst_srctypes = class_exists('JSSTaisources') ? JSSTaisources::types() : array();
+                            $jsst_srclabel = function ($jsst_k) use ($jsst_srctypes) {
+                                return isset($jsst_srctypes[$jsst_k]['label']) ? wp_strip_all_tags($jsst_srctypes[$jsst_k]['label']) : (string) $jsst_k;
+                            };
+                            if (isset($jsst_free['searched'])) { ?>
+                            <dt><?php echo esc_html(__('Sources searched', 'js-support-ticket')); ?></dt>
+                            <dd><?php echo empty($jsst_free['searched'])
+                                ? esc_html(__('None', 'js-support-ticket'))
+                                : esc_html(implode(', ', array_map($jsst_srclabel, (array) $jsst_free['searched']))); ?></dd>
+                            <?php } ?>
                         </dl>
+                        <?php foreach ((array) (isset($jsst_free['notready']) ? $jsst_free['notready'] : array()) as $jsst_k) { ?>
+                            <p class="jsst-hint"><?php echo esc_html(sprintf(
+                                /* translators: %s: a source name, e.g. "Canned responses" */
+                                __('%s is approved but was not searched: its search index is not ready yet. It is built automatically the next time an administrator opens the admin area after an update.', 'js-support-ticket'),
+                                $jsst_srclabel($jsst_k)
+                            )); ?></p>
+                        <?php } ?>
+                        <?php foreach ((array) (isset($jsst_free['myisam']) ? $jsst_free['myisam'] : array()) as $jsst_k) { ?>
+                            <p class="jsst-hint"><?php echo esc_html(sprintf(
+                                /* translators: %s: a source name, e.g. "Canned responses" */
+                                __('Your %s table uses an older storage format. Suggestions still work, but very short words (under four letters) cannot be found in it. Convert it under System Status > Storage Engine.', 'js-support-ticket'),
+                                $jsst_srclabel($jsst_k)
+                            )); ?> <a href="<?php echo esc_url(admin_url('admin.php?page=jssupportticket&jstlay=storageengine')); ?>"><?php echo esc_html(__('Open Storage Engine', 'js-support-ticket')); ?></a></p>
+                        <?php } ?>
                     </div>
                     <?php if (empty($jsst_freeresults)) { ?>
                         <div class="jsst-empty">
                             <p class="jsst-empty-title"><?php echo esc_html(__('Nothing would be suggested', 'js-support-ticket')); ?></p>
-                            <p class="jsst-empty-text"><?php echo esc_html(__('No approved article, FAQ or page is close enough to this question. The customer sees no suggestions rather than unrelated ones.', 'js-support-ticket')); ?></p>
+                            <p class="jsst-empty-text"><?php
+                                $jsst_srcnames = empty($jsst_free['searched']) ? array() : array_map($jsst_srclabel, (array) $jsst_free['searched']);
+                                echo empty($jsst_srcnames)
+                                    ? esc_html(__('No approved source could be searched, so nothing can be suggested yet.', 'js-support-ticket'))
+                                    : esc_html(sprintf(
+                                        /* translators: %s: the sources searched, e.g. "Canned responses, FAQs" */
+                                        __('Nothing in %s is close enough to this question. The customer sees no suggestions rather than unrelated ones.', 'js-support-ticket'),
+                                        implode(', ', $jsst_srcnames)
+                                    )); ?></p>
                         </div>
                     <?php } else { ?>
                         <div class="jsst-table-wrap">
@@ -833,7 +887,7 @@ JSSTmessage::getMessage();
                         </div>
                     <?php } ?>
                 <?php } ?>
-            </div>
+            </details>
 
         </div>
     </div>

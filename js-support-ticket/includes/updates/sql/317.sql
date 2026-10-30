@@ -1,10 +1,20 @@
 REPLACE INTO `#__js_ticket_config` (`configname`, `configvalue`, `configfor`) VALUES ('versioncode','3.1.7','default');
 REPLACE INTO `#__js_ticket_config` (`configname`, `configvalue`, `configfor`) VALUES ('productversion','317','default');
 
-ALTER TABLE `#__js_ticket_replies` ADD `is_ai_draft` TINYINT(1) NOT NULL DEFAULT '0';
-ALTER TABLE `#__js_ticket_replies` ADD `ticketviaautopilot` TINYINT(1) NOT NULL DEFAULT '0';
+-- Each schema change runs only when information_schema says it is missing, so this file is safe to apply twice.
+SET @jsst_sql = (SELECT IF(COUNT(*) = 0, 'ALTER TABLE `#__js_ticket_replies` ADD `is_ai_draft` TINYINT(1) NOT NULL DEFAULT ''0''', 'DO 0') FROM information_schema.COLUMNS WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = '#__js_ticket_replies' AND COLUMN_NAME = 'is_ai_draft');
+PREPARE jsst_stmt FROM @jsst_sql;
+EXECUTE jsst_stmt;
+DEALLOCATE PREPARE jsst_stmt;
+SET @jsst_sql = (SELECT IF(COUNT(*) = 0, 'ALTER TABLE `#__js_ticket_replies` ADD `ticketviaautopilot` TINYINT(1) NOT NULL DEFAULT ''0''', 'DO 0') FROM information_schema.COLUMNS WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = '#__js_ticket_replies' AND COLUMN_NAME = 'ticketviaautopilot');
+PREPARE jsst_stmt FROM @jsst_sql;
+EXECUTE jsst_stmt;
+DEALLOCATE PREPARE jsst_stmt;
 
-ALTER TABLE `#__js_ticket_tickets` ADD FULLTEXT `jsst_ir_ft` (`subject`, `message`);
+SET @jsst_sql = (SELECT IF(COUNT(*) = 0, 'ALTER TABLE `#__js_ticket_tickets` ADD FULLTEXT `jsst_ir_ft` (`subject`, `message`)', 'DO 0') FROM information_schema.STATISTICS WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = '#__js_ticket_tickets' AND INDEX_NAME = 'jsst_ir_ft');
+PREPARE jsst_stmt FROM @jsst_sql;
+EXECUTE jsst_stmt;
+DEALLOCATE PREPARE jsst_stmt;
 
 INSERT IGNORE INTO `#__js_ticket_config` (`configname`, `configvalue`, `configfor`, `addon`) VALUES ('instantresolve_enable', '1', 'instantresolve', NULL);
 INSERT IGNORE INTO `#__js_ticket_config` (`configname`, `configvalue`, `configfor`, `addon`) VALUES ('instantresolve_min_chars', '15', 'instantresolve', NULL);

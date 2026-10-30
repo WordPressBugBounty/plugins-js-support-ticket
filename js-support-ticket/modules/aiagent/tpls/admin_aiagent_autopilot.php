@@ -59,7 +59,7 @@ JSSTmessage::getMessage();
     </div>
     <div id="jsstadmin-data">
         <?php JSSTlayout::adminPageHeader(array(
-            'title'   => __('Automatic Answers', 'js-support-ticket'),
+            'title'   => __('Automatic answers: Rules', 'js-support-ticket'),
             'crumbs'  => array(array('text' => __('AI Agent', 'js-support-ticket'), 'url' => admin_url('admin.php?page=aiagent'))),
         )); ?>
         <div id="jsstadmin-data-wrp">
@@ -67,45 +67,11 @@ JSSTmessage::getMessage();
 
             <p class="jsst-lede">
                 <?php echo esc_html(__('Who gets an answer without a person reading it first, how many, and how fast. Start with one department.', 'js-support-ticket')); ?>
-            </p><?php JSSTlayout::why(__('Who gets an answer without a person reading it first, how many they can get, and how fast. Roll it out to one department for a fortnight before you roll it out to the desk.', 'js-support-ticket')); ?>
+            </p>
 
-            <?php /* The state and the way out, above the settings. */ ?>
-            <div class="jsst-card">
-                <div class="jsst-card-head">
-                    <h2 class="jsst-card-title"><?php echo esc_html(__('Right now', 'js-support-ticket')); ?></h2>
-                    <div class="jsst-card-tools">
-                        <?php if ($jsst_status === 'ok') { ?>
-                            <span class="jsst-pill jsst-pill-warn"><span class="jsst-dot"></span><?php echo esc_html(__('Sending', 'js-support-ticket')); ?></span>
-                        <?php } elseif ($jsst_status === 'paused') { ?>
-                            <span class="jsst-pill jsst-pill-info"><span class="jsst-dot"></span><?php echo esc_html(__('Paused', 'js-support-ticket')); ?></span>
-                        <?php } else { ?>
-                            <span class="jsst-pill jsst-pill-off"><span class="jsst-dot"></span><?php echo esc_html(__('Off', 'js-support-ticket')); ?></span>
-                        <?php } ?>
-                        <a class="jsst-pill jsst-pill-info" href="<?php echo esc_url(admin_url('admin.php?page=aiagent&jstlay=aiagent_approvals')); ?>">
-                            <?php echo esc_html(sprintf(
-                                /* translators: %s: how many answers are waiting for a person */
-                                __('Approvals (%s waiting)', 'js-support-ticket'), number_format_i18n($jsst_waiting)
-                            )); ?>
-                        </a>
-                    </div>
-                </div>
-                <div class="jsst-card-body">
-                    <p class="jsst-hint"><?php echo esc_html(isset($jsst_state['detail']) ? $jsst_state['detail'] : ''); ?></p>
-
-                    <?php /* One click, its own form, its own nonce: this is the
-                             button somebody presses in a hurry, and it must not
-                             depend on the rest of the page being right. */ ?>
-                    <div class="jsst-btnrow">
-                        <?php if ($jsst_paused) { ?>
-                            <a class="jsst-btn jsst-btn-primary" href="<?php echo esc_url($jsst_pauseurl); ?>"><?php echo esc_html(__('Resume automatic answers', 'js-support-ticket')); ?></a>
-                            <span class="jsst-formfoot-note"><?php echo esc_html(__('Anything that was in flight is waiting on Approvals. Resuming does not release it.', 'js-support-ticket')); ?></span><?php JSSTlayout::why(__('Anything that was in flight when you paused is waiting on the Approvals screen. Resuming does not release it — it is waiting for a person, which is what pausing asked for.', 'js-support-ticket')); ?>
-                        <?php } else { ?>
-                            <a class="jsst-btn" href="<?php echo esc_url($jsst_pauseurl); ?>"><?php echo esc_html(__('Pause automatic answers', 'js-support-ticket')); ?></a>
-                            <span class="jsst-formfoot-note"><?php echo esc_html(__('Stops at once and changes no setting. Anything in flight is held for a person.', 'js-support-ticket')); ?></span><?php JSSTlayout::why(__('Stops at once and changes no setting, so resuming restores exactly what was running. Anything already in flight is held for a person rather than sent.', 'js-support-ticket')); ?>
-                        <?php } ?>
-                    </div>
-                </div>
-            </div>
+            <?php /* The state and the way out (Pause / Resume) are on the status
+                     line at the top of every AI screen; a second "Right now"
+                     card here said the same thing with its own pill and button. */ ?>
 
             <?php /* What the rules cover, measured rather than described. */ ?>
             <div class="jsst-card">
@@ -187,8 +153,16 @@ JSSTmessage::getMessage();
                                      and somebody who wants that and unticks this
                                      gets silence with no explanation anywhere. */ ?>
                             <p class="jsst-fhelp"><?php echo esc_html(__('Off means no answer is written for new tickets.', 'js-support-ticket')); ?></p><?php JSSTlayout::why(__('With this off nothing is written for a new ticket at all. To have answers written but never sent — the way to judge quality on real tickets — leave this on and set Approvals to propose only.', 'js-support-ticket')); ?>
+                            <?php /* The approval choice is the other half of these rules;
+                                     it is saved on Approvals, so it is named here with a
+                                     link rather than left for people to find. */
+                            $jsst_apmodes = class_exists('JSSTaireview') ? JSSTaireview::modes() : array();
+                            $jsst_apmode  = class_exists('JSSTaireview') ? JSSTaireview::mode() : ''; ?>
                             <p class="jsst-fhelp">
-                                <a href="<?php echo esc_url(admin_url('admin.php?page=aiagent&jstlay=aiagent_approvals')); ?>"><?php echo esc_html(__('Approvals: what happens to an answer once it is written', 'js-support-ticket')); ?></a>
+                                <?php if (isset($jsst_apmodes[$jsst_apmode])) {
+                                    echo esc_html(__('Once an answer is written:', 'js-support-ticket')) . ' <strong>' . esc_html($jsst_apmodes[$jsst_apmode]['label']) . '</strong>. ';
+                                } ?>
+                                <a href="<?php echo esc_url(admin_url('admin.php?page=aiagent&jstlay=aiagent_approvals') . '#jsst-approvalmode'); ?>"><?php echo esc_html(__('Change it on Approvals', 'js-support-ticket')); ?></a>
                             </p>
 
                             <label class="jsst-check">
@@ -222,7 +196,19 @@ JSSTmessage::getMessage();
                             <?php if (empty($jsst_depts)) { ?>
                                 <p class="jsst-fhelp"><?php echo esc_html(__('This site has no departments, so every ticket is in scope.', 'js-support-ticket')); ?></p>
                             <?php } else { ?>
-                                <p class="jsst-fhelp"><?php echo esc_html(__('Tick none for every department. Starting with one is safest.', 'js-support-ticket')); ?></p><?php JSSTlayout::why(__('Tick none to include every department. Ticking one is the safest way to start: pick the one whose answers are already written down.', 'js-support-ticket')); ?>
+                                <p class="jsst-fhelp"><?php echo esc_html(__('Tick none for every department. Starting with one is safest.', 'js-support-ticket')); ?></p>
+                                <?php
+                                /* Department is optional on the ticket form. Say what
+                                   happens to a ticket without one. */
+                                $jsst_defdept = class_exists('JSSTairollout') ? JSSTairollout::defaultDepartment() : 0;
+                                if ($jsst_defdept && isset($jsst_depts[$jsst_defdept])) { ?>
+                                    <p class="jsst-fhelp"><?php echo esc_html(sprintf(
+                                        /* translators: %s: the default department's name */
+                                        __('A ticket sent without a department counts as %s, your default department.', 'js-support-ticket'),
+                                        $jsst_depts[$jsst_defdept])); ?></p>
+                                <?php } elseif (!empty($jsst_rules['departments'])) { ?>
+                                    <p class="jsst-fhelp" style="color:#b32d2e"><?php echo esc_html(__('Tickets sent without a department are not answered, because there is no default department. Set one under Departments, or tick no department here.', 'js-support-ticket')); ?></p>
+                                <?php } ?>
                                 <div class="jsst-checkgrid">
                                     <?php foreach ($jsst_depts as $jsst_id => $jsst_name) { ?>
                                         <label class="jsst-checkcell">
@@ -312,7 +298,7 @@ JSSTmessage::getMessage();
                                     <div class="jsst-fval"><input type="text" id="aiagent_autopilot_display_name" name="aiagent_autopilot_display_name" value="<?php echo esc_attr($jsst_apcfg['aiagent_autopilot_display_name']); ?>" /></div>
                                 </div>
                             </div>
-                            <p class="jsst-fhelp"><?php echo esc_html(__('The name shown on AI replies and suggested answers, for example "AI Assistant".', 'js-support-ticket')); ?></p><?php JSSTlayout::why(__('The name customers see wherever the AI speaks - signed on an automatic reply, and on the suggested answer shown while they type. Something clearly not a person, such as "AI Assistant", is the honest choice.', 'js-support-ticket')); ?>
+                            <p class="jsst-fhelp"><?php echo esc_html(__('The name shown on AI replies and suggested answers, for example "AI Assistant".', 'js-support-ticket')); ?></p>
                         </fieldset>
                         <?php } ?>
                     </div>
@@ -329,6 +315,9 @@ JSSTmessage::getMessage();
                                 <div class="jsst-fval">
                                     <input type="number" id="jsst-ai-threshold" name="threshold" min="1" max="100" step="1"
                                            value="<?php echo esc_attr((int) $jsst_rules['threshold']); ?>" />
+                                    <?php if (class_exists('JSSTaireview') && JSSTaireview::mode() !== JSSTaireview::MODE_THRESHOLD) { ?>
+                                        <span class="jsst-table-sub"><?php echo esc_html(__('Not used right now: Approvals is set so that a person decides (or nothing is sent).', 'js-support-ticket')); ?></span>
+                                    <?php } ?>
                                 </div>
                             </div>
                             <div class="jsst-frow">
@@ -350,7 +339,7 @@ JSSTmessage::getMessage();
                             </div>
                         </div>
                         <p class="jsst-fhelp"><?php echo esc_html(__('Start with a floor of 85 or higher. Shadow Mode shows what a floor would release.', 'js-support-ticket')); ?></p><?php JSSTlayout::why(__('A floor of 85 or higher is the usual starting point; Shadow Mode says what a given floor would have released on your own tickets. A delay gives an agent time to reach the ticket first, and a customer cannot tell the difference between instant and a minute.', 'js-support-ticket')); ?>
-                        <p class="jsst-fhelp"><?php echo esc_html(__('The per-ticket count includes answers a person approved.', 'js-support-ticket')); ?></p><?php JSSTlayout::why(__('The per-ticket count includes answers a person approved: they were still answers the customer received, and the cap exists to stop a ticket filling with them.', 'js-support-ticket')); ?>
+                        <p class="jsst-fhelp"><?php echo esc_html(__('The per-ticket count includes answers a person approved.', 'js-support-ticket')); ?></p>
 
                         <fieldset class="jsst-fieldset">
                             <legend class="jsst-fieldset-legend"><?php echo esc_html(__('When an answer may not be sent', 'js-support-ticket')); ?></legend>
@@ -371,9 +360,9 @@ JSSTmessage::getMessage();
                 </div>
             </form>
 
-            <h2 class="jsst-groupheading"><?php echo esc_html(__('If you need to undo it', 'js-support-ticket')); ?></h2>
-
-            <div class="jsst-card">
+            <?php /* Kept, but folded: it is read in an incident, not on every visit. */ ?>
+            <details class="jsst-card jsst-ai-fold">
+                <summary class="jsst-card-head"><h2 class="jsst-card-title"><?php echo esc_html(__('If you need to undo it', 'js-support-ticket')); ?></h2></summary>
                 <div class="jsst-card-body">
                     <p class="jsst-hint"><?php echo esc_html(__('Fastest first. Each step is something this release can actually do, and each says what it does not fix.', 'js-support-ticket')); ?></p>
                     <dl class="jsst-facts">
@@ -386,7 +375,7 @@ JSSTmessage::getMessage();
                         <?php } ?>
                     </dl>
                 </div>
-            </div>
+            </details>
 
         </div>
     </div>

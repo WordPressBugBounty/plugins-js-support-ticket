@@ -45,7 +45,7 @@ JSSTmessage::getMessage();
     </div>
     <div id="jsstadmin-data">
         <?php JSSTlayout::adminPageHeader(array(
-            'title'   => __('Shadow Mode', 'js-support-ticket'),
+            'title'   => __('Automatic answers: Shadow Mode', 'js-support-ticket'),
             'crumbs'  => array(array('text' => __('AI Agent', 'js-support-ticket'), 'url' => admin_url('admin.php?page=aiagent'))),
         )); ?>
         <div id="jsstadmin-data-wrp">
@@ -62,7 +62,10 @@ JSSTmessage::getMessage();
                         <?php if ($jsst_shadowing) { ?>
                             <span class="jsst-pill jsst-pill-ok"><span class="jsst-dot"></span><?php echo esc_html(__('Shadowing', 'js-support-ticket')); ?></span>
                         <?php } else { ?>
-                            <span class="jsst-pill jsst-pill-warn"><span class="jsst-dot"></span><?php echo esc_html(__('Answers can go out', 'js-support-ticket')); ?></span>
+                            <span class="jsst-pill jsst-pill-off"><span class="jsst-dot"></span><?php echo esc_html(__('Not running', 'js-support-ticket')); ?></span>
+                            <?php /* Started here too, not only from Set up: this is the
+                                     screen people come to for it. */ ?>
+                            <a class="jsst-btn jsst-btn-sm jsst-btn-primary" href="<?php echo esc_url(wp_nonce_url(admin_url('admin.php?page=aiagent&task=runaisetup&action=jstask&step=shadow'), 'jsst-aiagent-setup')); ?>"><?php echo esc_html(__('Start shadow mode', 'js-support-ticket')); ?></a>
                         <?php } ?>
                         <a class="jsst-pill jsst-pill-info" href="<?php echo esc_url(admin_url('admin.php?page=aiagent&jstlay=aiagent_approvals')); ?>"><?php echo esc_html(__('Approvals', 'js-support-ticket')); ?></a>
                     </div>
@@ -176,8 +179,8 @@ JSSTmessage::getMessage();
                                             __('%d%% confident', 'js-support-ticket'), (int) $jsst_row->confidence
                                         )); ?></span>
                                     </th>
-                                    <td><?php echo esc_html(wp_html_excerpt(wp_strip_all_tags((string) $jsst_row->body), 300, '…')); ?></td>
-                                    <td><?php echo esc_html(wp_html_excerpt(wp_strip_all_tags((string) $jsst_row->agentbody), 300, '…')); ?></td>
+                                    <td><?php echo esc_html(JSSTaireview::plainPreview($jsst_row->body, 300)); ?></td>
+                                    <td><?php echo esc_html(JSSTaireview::plainPreview($jsst_row->agentbody, 300)); ?></td>
                                     <td>
                                         <span class="jsst-num"><strong><?php echo esc_html($jsst_agree); ?>%</strong></span>
                                         <span class="jsst-table-sub">

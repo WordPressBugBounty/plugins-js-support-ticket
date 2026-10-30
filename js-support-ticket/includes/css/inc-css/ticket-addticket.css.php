@@ -202,15 +202,33 @@ $jsst_jssupportticket_css .= '
     #jsst-instant-fix-wrapper .jsst-fix-timestamp {background: #eef2ff;color: ' . $jsst_color1 . ';padding: 2px 6px;border-radius: 3px;font-size: 12px;margin-inline-start: 6px;text-transform: none;font-weight: 500;}
     #jsst-instant-fix-wrapper .jsst-fix-title {font-weight: 600;color: ' . $jsst_color2 . ';margin: 0 0 5px 0;line-height: 1.3;display: -webkit-box;-webkit-line-clamp: 2;-webkit-box-orient: vertical;overflow: hidden;}
     #jsst-instant-fix-wrapper .jsst-fix-excerpt {font-size: 14px;color: #666;margin: 0;line-height: 1.4;display: -webkit-box;-webkit-line-clamp: 2;-webkit-box-orient: vertical;overflow: hidden;}
+    /* A quick answer, opened in its card: the full width of the grid, the
+       preview line gone, the reply laid out as written. */
+    #jsst-instant-fix-wrapper .jsst-fix-card.is-open {grid-column: 1 / -1;}
+    #jsst-instant-fix-wrapper .jsst-fix-card.is-open .jsst-fix-excerpt {display: none;}
+    #jsst-instant-fix-wrapper .jsst-fix-answer {font-size: 14px;line-height: 1.6;color: ' . $jsst_color2 . ';margin: 4px 0 0;overflow-wrap: anywhere;}
+    #jsst-instant-fix-wrapper .jsst-fix-answer[hidden] {display: none;}
+    #jsst-instant-fix-wrapper .jsst-fix-answer p {margin: 0 0 8px;}
+    #jsst-instant-fix-wrapper .jsst-fix-answer ul, #jsst-instant-fix-wrapper .jsst-fix-answer ol {margin: 0 0 8px;padding-inline-start: 22px;}
+    #jsst-instant-fix-wrapper .jsst-fix-answer ul {list-style: disc;}
+    #jsst-instant-fix-wrapper .jsst-fix-answer ol {list-style: decimal;}
+    #jsst-instant-fix-wrapper .jsst-fix-answer li {margin: 0 0 4px;}
+    #jsst-instant-fix-wrapper .jsst-fix-answer h3, #jsst-instant-fix-wrapper .jsst-fix-answer h4, #jsst-instant-fix-wrapper .jsst-fix-answer h5 {margin: 10px 0 6px;font-weight: 600;line-height: 1.3;color: ' . $jsst_color2 . ';}
+    #jsst-instant-fix-wrapper .jsst-fix-answer h3 {font-size: 1.15em;}
+    #jsst-instant-fix-wrapper .jsst-fix-answer h4 {font-size: 1.05em;}
+    #jsst-instant-fix-wrapper .jsst-fix-answer h5 {font-size: 1em;}
+    #jsst-instant-fix-wrapper .jsst-fix-answer a {color: ' . $jsst_color1 . ';text-decoration: underline;}
+    #jsst-instant-fix-wrapper .jsst-fix-toggle {align-self: flex-start;margin: 8px 0 0;padding: 0;border: 0;background: none;color: ' . $jsst_color1 . ';font-size: 14px;font-weight: 600;cursor: pointer;text-decoration: underline;}
+    #jsst-instant-fix-wrapper .jsst-fix-toggle:hover, #jsst-instant-fix-wrapper .jsst-fix-toggle:focus-visible {color: ' . $jsst_color2 . ';}
     #jsst-instant-fix-wrapper .jsst-fix-footer {text-align: center;padding-top: 12px;border-top: 1px dashed #d1d5db;margin-top: 5px;}
     #jsst-instant-fix-wrapper .jsst-fix-footer .button {background: ' . $jsst_color1 . ';color: ' . $jsst_color7 . ';border: none;padding: 8px 20px;border-radius: 4px;cursor: pointer;font-size: 15px;font-weight: 500;transition: background 0.2s;box-shadow: none;text-shadow: none;}
     #jsst-instant-fix-wrapper .jsst-fix-footer .button:hover {background: ' . $jsst_color2 . ';}
-    #jsst-instant-fix-wrapper .jsst-ai-card {background: linear-gradient(135deg, #f8fafc 0%, #eff6ff 100%) !important;border: 1px solid #bfdbfe !important;border-left: 4px solid #3b82f6 !important;padding: 15px !important;display: flex !important;align-items: flex-start !important;gap: 15px;grid-column: 1 / -1;cursor: default !important;flex-direction: column;}
+    #jsst-instant-fix-wrapper .jsst-ai-card {background: linear-gradient(135deg, #f8fafc 0%, #eff6ff 100%) !important;border: 1px solid #bfdbfe !important;border-left: 4px solid #3b82f6 !important;padding: 15px !important;display: flex !important;align-items: flex-start !important;gap: 14px;grid-column: 1 / -1;cursor: default !important;flex-direction: row;}
     #jsst-instant-fix-wrapper .jsst-ai-icon-wrp {flex-shrink: 0;min-width: 40px;width: 40px;height: 40px;background: linear-gradient(135deg, #3b82f6, #8b5cf6);border-radius: 50%;display: flex;align-items: center;justify-content: center;box-shadow: 0 4px 6px -1px rgba(59, 130, 246, 0.3);}
     #jsst-instant-fix-wrapper .jsst-ai-sparkle {width: 22px;height: 22px;color: ' . $jsst_color7 . ';}
-    #jsst-instant-fix-wrapper .jsst-ai-content {flex: 1;padding: 0 !important;}
-    #jsst-instant-fix-wrapper .jsst-ai-badge {display: inline-block;font-size: 10px;font-weight: 700;text-transform: uppercase;color: #3b82f6;background: #dbeafe;padding: 3px 8px;border-radius: 4px;margin-bottom: 8px;letter-spacing: 0.5px;}
-    #jsst-instant-fix-wrapper .jsst-ai-text {font-size: 14px;color: #1e3a8a;margin: 0;line-height: 1.6;white-space: pre-line;display: block; -webkit-line-clamp: unset;-webkit-box-orient: unset;overflow: visible;}
+    #jsst-instant-fix-wrapper .jsst-ai-content {flex: 1;padding: 0 !important;display: flex;flex-direction: column;align-items: flex-start;}
+    #jsst-instant-fix-wrapper .jsst-ai-badge {display: inline-block;width: auto;align-self: flex-start;font-size: 10px;font-weight: 700;text-transform: uppercase;color: #3b82f6;background: #dbeafe;padding: 3px 8px;border-radius: 4px;margin-bottom: 8px;letter-spacing: 0.5px;}
+    #jsst-instant-fix-wrapper .jsst-ai-text {font-size: 15px;color: #1f2937;margin: 0;line-height: 1.6;white-space: pre-line;display: block; -webkit-line-clamp: unset;-webkit-box-orient: unset;overflow: visible;}
     html[dir="rtl"] #jsst-instant-fix-wrapper {border-left: 1px solid '. $jsst_color5 .';border-right: 4px solid ' . $jsst_color1 . ';}
     html[dir="rtl"] #jsst-instant-fix-wrapper .jsst-fix-loading img {margin-right: 0;margin-left: 8px;}
     html[dir="rtl"] #jsst-instant-fix-wrapper .jsst-ai-card {border-left: 1px solid #bfdbfe !important;border-right: 4px solid #3b82f6 !important;}
@@ -318,7 +336,9 @@ $jsst_jssupportticket_css .= '
         appearance: none;
         width: 14px; /* Larger size */
         height: 14px;
-        border: 1px solid ' . $jsst_color5 . '; /* Border with secondary color */
+        /* A fixed mid-grey, not the theme\'s lightest border colour: on the
+           pale field background that one made the box nearly invisible. */
+        border: 2px solid #8c8f94;
         border-radius: 4px; /* Slightly more rounded */
         background-color: #fff;
         cursor: pointer;

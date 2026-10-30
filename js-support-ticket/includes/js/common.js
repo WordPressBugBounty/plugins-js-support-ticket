@@ -40,10 +40,20 @@ function jsstDepandantParentValue(parentf) {
     return any.length ? any.val() : '';
 }
 
+/* The form a question sits in. Forms share field names, so the server needs
+   to know which form's copy of the question to answer from. '' when the page
+   has none (the ticket list filter). */
+function jsstFormIdFor(field) {
+    var el = jQuery("[name='" + field + "'], [name='" + field + "[]']").first();
+    var form = el.closest('form');
+    var id = form.find("input[name='multiformid']").val();
+    return id ? id : '';
+}
+
 function getDataForDepandantField(wpnonce, parentf, childf, type) {
     var val = jsstDepandantParentValue(parentf);
 
-    jQuery.post(ajaxurl, {action: 'jsticket_ajax', jstmod: 'fieldordering', task: 'DataForDepandantField', fvalue: val, child: childf, '_wpnonce':wpnonce}, function (data) {
+    jQuery.post(ajaxurl, {action: 'jsticket_ajax', jstmod: 'fieldordering', task: 'DataForDepandantField', fvalue: val, child: childf, multiformid: jsstFormIdFor(parentf), '_wpnonce':wpnonce}, function (data) {
         if (data) {
             var d = jQuery.parseJSON(data);
             /* By id and by name: the id is what this has always used, and the
@@ -294,7 +304,7 @@ function deleteCutomUploadedFile (field1) {
 }
 
 function isFieldRequired (field_type, field, state, wpnonce) {
-    jQuery.post(ajaxurl, {action: 'jsticket_ajax', jstmod: 'ticket', task: 'isFieldRequired', field:field, '_wpnonce':wpnonce}, function (data) {
+    jQuery.post(ajaxurl, {action: 'jsticket_ajax', jstmod: 'ticket', task: 'isFieldRequired', field:field, multiformid: jsstFormIdFor(field), '_wpnonce':wpnonce}, function (data) {
         if (data) {
             if (data == 1 && state == 'show' && field_type == 'required') {
                 jQuery('[name="'+field+'"]').attr('data-validation', 'required');

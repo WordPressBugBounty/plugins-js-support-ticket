@@ -331,6 +331,7 @@ class JSSTdeactivation {
             // it had before the unification.
             // (Roadmap 6.0-AI-01, 6.0-AI-02, 6.0-AI-08)
             'jsst_ai_master',
+            'jsst_ai_fresh_defaults',
             'jsst_ai_lanes',
             'jsst_ai_redact',
             'jsst_ai_journal',

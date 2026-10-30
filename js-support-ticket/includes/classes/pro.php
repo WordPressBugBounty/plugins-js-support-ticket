@@ -731,6 +731,13 @@ class JSSTpro {
             : self::$jsst_legacy;
         $jsst_found = array();
         foreach (self::modules() as $jsst_slug => $jsst_ignored) {
+            /* A module whose name is also a 5.0.0 bundle's is that bundle -
+               `aiagent` is both, and the same js-support-ticket-aiagent folder -
+               so finding it active is the current product, not an old add-on.
+               The rule JSSTupgradeassistant::legacyAddons() already uses. */
+            if (class_exists('JSSTbundle') && JSSTbundle::bundle($jsst_slug)) {
+                continue;
+            }
             if (in_array($jsst_slug, $jsst_legacy, true)) {
                 $jsst_found[] = $jsst_slug;
             }

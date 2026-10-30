@@ -788,7 +788,7 @@ div.js-tkt-det-other-tkt {float: left;width: 100%;padding: 15px;background: #fef
 div.js-tkt-det-other-tkt a.js-tkt-det-other-tkt-btn {display: inline-block;text-decoration: underline;color: #4f46e5;vertical-align: middle;}
 div.js-tkt-det-other-tkt a.js-tkt-det-other-tkt-img {display: inline-block;margin-left: 7px;vertical-align: middle;}
 div.js-tkt-det-other-tkt a.js-tkt-det-other-tkt-img img {width: 15px;}
-div.js-tkt-det-tkt-msg {float: left;width: 100%;padding: 15px;line-height: 1.8;color: #575455;}
+div.js-tkt-det-tkt-msg {float: left;width: 100%;padding: 15px;line-height: 1.8;color: #575455;overflow-wrap: anywhere;}
 .js-tkt-det-left .js-tkt-det-cnt.js-tkt-det-info-wrp .js-tkt-det-tkt-msg .js-ticket-form-instruction-message {color: #575455;line-height: 1.8;}
 .js-tkt-det-left .js-tkt-det-cnt.js-tkt-det-info-wrp .js-tkt-det-tkt-msg .js-ticket-form-instruction-message p {color: #575455;line-height: 1.8;margin: 10px 0 20px;}
 .js-tkt-det-left .js-tkt-det-cnt.js-tkt-det-info-wrp .js-tkt-det-tkt-msg .js-ticket-form-instruction-message h1,
@@ -865,30 +865,67 @@ div.js-tkt-det-user div.js-tkt-det-user-cnt div.js-tkt-det-user-data .js-tkt-det
 .js-ticket-thread .js-ticket-thread-cnt .js-ticket-thread-data .js-ticket-thread-read-status-btn {float: right;padding: 5px 5px;border: 1px solid #ebecec;}
 .js-ticket-thread .js-ticket-thread-cnt .js-ticket-thread-data .js-ticket-thread-read-status-detail {position: absolute;top: 45px;right: 0;color: #6c757d;border: 1px solid #ebecec;box-shadow: 0px 3px 6px #aaa7a7;padding: 0px 8px;padding: 10px;min-width: 280px;display: none;background-color: #FFF;}
 .js-ticket-thread .js-ticket-thread-cnt .js-ticket-thread-data .js-ticket-thread-read-status-detail .js-ticket-thread-read-status-row {float: left;width: 100%;color: #575455;line-height: 1.8;}
-.js-ticket-thread .js-ticket-thread-cnt .js-ticket-thread-data.note-msg {color: #575455;line-height: 1.8;}
-.js-ticket-thread .js-ticket-thread-cnt .js-ticket-thread-data.note-msg p {color: #575455;line-height: 1.8;margin: 10px 0 20px;}
+.js-ticket-thread .js-ticket-thread-cnt .js-ticket-thread-data.note-msg {color: #575455;line-height: 1.8;overflow-wrap: anywhere;}
+.js-ticket-thread .js-ticket-thread-cnt .js-ticket-thread-data.note-msg p,
+.js-tkt-det-left .js-tkt-det-info-wrp div.js-tkt-det-tkt-msg p {color: #575455;line-height: 1.8;margin: 10px 0 20px;}
 .js-ticket-thread .js-ticket-thread-cnt .js-ticket-thread-data.note-msg h1,
+.js-tkt-det-left .js-tkt-det-info-wrp div.js-tkt-det-tkt-msg h1,
 .js-ticket-thread .js-ticket-thread-cnt .js-ticket-thread-data.note-msg h2,
+.js-tkt-det-left .js-tkt-det-info-wrp div.js-tkt-det-tkt-msg h2,
 .js-ticket-thread .js-ticket-thread-cnt .js-ticket-thread-data.note-msg h3,
+.js-tkt-det-left .js-tkt-det-info-wrp div.js-tkt-det-tkt-msg h3,
 .js-ticket-thread .js-ticket-thread-cnt .js-ticket-thread-data.note-msg h4,
+.js-tkt-det-left .js-tkt-det-info-wrp div.js-tkt-det-tkt-msg h4,
 .js-ticket-thread .js-ticket-thread-cnt .js-ticket-thread-data.note-msg h5,
-.js-ticket-thread .js-ticket-thread-cnt .js-ticket-thread-data.note-msg h6 {color: #1d2327;font-weight: 600;line-height: 1.3;margin: 1em 0 0.5em;}
-.js-ticket-thread .js-ticket-thread-cnt .js-ticket-thread-data.note-msg h1 {font-size: 2em;}
-.js-ticket-thread .js-ticket-thread-cnt .js-ticket-thread-data.note-msg h2 {font-size: 1.6em;}
-.js-ticket-thread .js-ticket-thread-cnt .js-ticket-thread-data.note-msg h3 {font-size: 1.35em;}
-.js-ticket-thread .js-ticket-thread-cnt .js-ticket-thread-data.note-msg h4 {font-size: 1.15em;}
-.js-ticket-thread .js-ticket-thread-cnt .js-ticket-thread-data.note-msg h5 {font-size: 1em;}
-.js-ticket-thread .js-ticket-thread-cnt .js-ticket-thread-data.note-msg h6 {font-size: 0.9em;}
+.js-tkt-det-left .js-tkt-det-info-wrp div.js-tkt-det-tkt-msg h5,
+.js-ticket-thread .js-ticket-thread-cnt .js-ticket-thread-data.note-msg h6,
+.js-tkt-det-left .js-tkt-det-info-wrp div.js-tkt-det-tkt-msg h6 {color: #1d2327;font-weight: 600;line-height: 1.3;margin: 1em 0 0.5em;}
+.js-ticket-thread .js-ticket-thread-cnt .js-ticket-thread-data.note-msg h1,
+.js-tkt-det-left .js-tkt-det-info-wrp div.js-tkt-det-tkt-msg h1 {font-size: 2em;}
+.js-ticket-thread .js-ticket-thread-cnt .js-ticket-thread-data.note-msg h2,
+.js-tkt-det-left .js-tkt-det-info-wrp div.js-tkt-det-tkt-msg h2 {font-size: 1.6em;}
+.js-ticket-thread .js-ticket-thread-cnt .js-ticket-thread-data.note-msg h3,
+.js-tkt-det-left .js-tkt-det-info-wrp div.js-tkt-det-tkt-msg h3 {font-size: 1.35em;}
+.js-ticket-thread .js-ticket-thread-cnt .js-ticket-thread-data.note-msg h4,
+.js-tkt-det-left .js-tkt-det-info-wrp div.js-tkt-det-tkt-msg h4 {font-size: 1.15em;}
+.js-ticket-thread .js-ticket-thread-cnt .js-ticket-thread-data.note-msg h5,
+.js-tkt-det-left .js-tkt-det-info-wrp div.js-tkt-det-tkt-msg h5 {font-size: 1em;}
+.js-ticket-thread .js-ticket-thread-cnt .js-ticket-thread-data.note-msg h6,
+.js-tkt-det-left .js-tkt-det-info-wrp div.js-tkt-det-tkt-msg h6 {font-size: 0.9em;}
 .js-ticket-thread .js-ticket-thread-cnt .js-ticket-thread-data.note-msg > h1:first-child,
+.js-tkt-det-left .js-tkt-det-info-wrp div.js-tkt-det-tkt-msg > h1:first-child,
 .js-ticket-thread .js-ticket-thread-cnt .js-ticket-thread-data.note-msg > h2:first-child,
+.js-tkt-det-left .js-tkt-det-info-wrp div.js-tkt-det-tkt-msg > h2:first-child,
 .js-ticket-thread .js-ticket-thread-cnt .js-ticket-thread-data.note-msg > h3:first-child,
+.js-tkt-det-left .js-tkt-det-info-wrp div.js-tkt-det-tkt-msg > h3:first-child,
 .js-ticket-thread .js-ticket-thread-cnt .js-ticket-thread-data.note-msg > h4:first-child,
+.js-tkt-det-left .js-tkt-det-info-wrp div.js-tkt-det-tkt-msg > h4:first-child,
 .js-ticket-thread .js-ticket-thread-cnt .js-ticket-thread-data.note-msg > h5:first-child,
-.js-ticket-thread .js-ticket-thread-cnt .js-ticket-thread-data.note-msg > h6:first-child {margin-top: 0;}
-.js-ticket-thread .js-ticket-thread-cnt .js-ticket-thread-data.note-msg ul {list-style: disc outside;margin: 1em 0;padding-left: 2.5em;}
-.js-ticket-thread .js-ticket-thread-cnt .js-ticket-thread-data.note-msg ol {list-style: decimal outside;margin: 1em 0;padding-left: 2.5em;}
-.js-ticket-thread .js-ticket-thread-cnt .js-ticket-thread-data.note-msg ul ul {list-style-type: circle;}
-.js-ticket-thread .js-ticket-thread-cnt .js-ticket-thread-data.note-msg li {margin: 0.25em 0;}
+.js-tkt-det-left .js-tkt-det-info-wrp div.js-tkt-det-tkt-msg > h5:first-child,
+.js-ticket-thread .js-ticket-thread-cnt .js-ticket-thread-data.note-msg > h6:first-child,
+.js-tkt-det-left .js-tkt-det-info-wrp div.js-tkt-det-tkt-msg > h6:first-child,
+.js-tkt-det-left .js-tkt-det-info-wrp div.js-tkt-det-tkt-msg > p:first-child {margin-top: 0;}
+.js-ticket-thread .js-ticket-thread-cnt .js-ticket-thread-data.note-msg ul,
+.js-tkt-det-left .js-tkt-det-info-wrp div.js-tkt-det-tkt-msg ul {list-style: disc outside;margin: 1em 0;padding-left: 2.5em;}
+.js-ticket-thread .js-ticket-thread-cnt .js-ticket-thread-data.note-msg ol,
+.js-tkt-det-left .js-tkt-det-info-wrp div.js-tkt-det-tkt-msg ol {list-style: decimal outside;margin: 1em 0;padding-left: 2.5em;}
+.js-ticket-thread .js-ticket-thread-cnt .js-ticket-thread-data.note-msg ul ul,
+.js-tkt-det-left .js-tkt-det-info-wrp div.js-tkt-det-tkt-msg ul ul {list-style-type: circle;}
+.js-ticket-thread .js-ticket-thread-cnt .js-ticket-thread-data.note-msg li,
+.js-tkt-det-left .js-tkt-det-info-wrp div.js-tkt-det-tkt-msg li {margin: 0.25em 0;}
+/* Quotes, links and preformatted text in a message, as the editor wrote them. */
+.js-ticket-thread .js-ticket-thread-cnt .js-ticket-thread-data.note-msg blockquote,
+.js-tkt-det-left .js-tkt-det-info-wrp div.js-tkt-det-tkt-msg blockquote {margin: 1em 0;padding: 0.5em 1em;border-left: 4px solid #c3c4c7;background: #f6f7f7;color: #50575e;}
+.js-ticket-thread .js-ticket-thread-cnt .js-ticket-thread-data.note-msg blockquote > :first-child,
+.js-tkt-det-left .js-tkt-det-info-wrp div.js-tkt-det-tkt-msg blockquote > :first-child {margin-top: 0;}
+.js-ticket-thread .js-ticket-thread-cnt .js-ticket-thread-data.note-msg blockquote > :last-child,
+.js-tkt-det-left .js-tkt-det-info-wrp div.js-tkt-det-tkt-msg blockquote > :last-child {margin-bottom: 0;}
+.js-ticket-thread .js-ticket-thread-cnt .js-ticket-thread-data.note-msg a:not([class]),
+.js-tkt-det-left .js-tkt-det-info-wrp div.js-tkt-det-tkt-msg a:not([class]) {color: #4f46e5;text-decoration: underline;}
+.js-ticket-thread .js-ticket-thread-cnt .js-ticket-thread-data.note-msg a:not([class]):hover,
+.js-tkt-det-left .js-tkt-det-info-wrp div.js-tkt-det-tkt-msg a:not([class]):hover {color: #3730a3;}
+.js-ticket-thread .js-ticket-thread-cnt .js-ticket-thread-data.note-msg pre,
+.js-tkt-det-left .js-tkt-det-info-wrp div.js-tkt-det-tkt-msg pre {white-space: pre-wrap;overflow-wrap: anywhere;}
 .js-ticket-thread .js-ticket-thread-cnt-btm {float: left;width: 100%;padding: 10px 0 0;border-top: 1px solid #ebecec;}
 .js-ticket-thread .js-ticket-thread-cnt-btm .js-ticket-thread-date {float: left;padding: 10px 0;}
 .js-ticket-thread .js-ticket-thread-actions {float: right;}
@@ -2470,53 +2507,32 @@ div.js-ticket-admin-cp-data div.js-col-md-2 {float: left;width: 24%;text-align: 
 div.a-js-form-field div#deletebutton div.js-multilang-del-btn {float: left;width: 100%;}
 div.a-js-form-field div#deletebutton div.js-multilang-del-btn button#deletetemp{padding: 12px;text-decoration: none;min-width: 10%;text-align: center;height: 44px;background: #4f46e5;border: 1px solid #4f46e5;color: #fff;margin-top: 10px;cursor: pointer;}
 
-/* admin review */
-.jssupportticket-review-box-popup *{box-sizing: border-box;}
-.jssupportticket-review-box-popup {position: fixed;width: 100%;height: 100%;z-index: 10001;background: rgba(0,0,0,0.65);top: 0;left: 0;display: none;}
-.jssupportticket-review-box-popup-content {position: fixed;top: 50%;left: 50%;width: 50%;z-index: 9999;transform: translate(-50%, -50%);box-sizing: border-box;max-height: 70%;overflow-x: hidden;overflow-y: auto;}
-.jssupportticket-review-box-popup-content-wrp{float: left;width: 100%;padding: 35px;border: 3px solid #EBBE7B;background: #FDF9EF;}
-.jssupportticket-review-box-popup-content-wrp .jssupportticket-review-box-popup-content-left{float: left;width: 40%;border: 1px solid #EBBE7B;}
-.jssupportticket-review-box-popup-content-wrp .jssupportticket-review-box-popup-content-right{float: left;width: 60%;padding: 10px 30px;}
-.jssupportticket-review-box-title {padding: 0px 0 35px 0;font-size: 32px;line-height: 40px;font-weight: 600;color: #373435;float: left;width: 100%;text-align: center;}
-.jssupportticket-review-box-options a {float: left;width: 100%;padding: 15px;border-radius: 25px;display: block;margin: 6px 0 6px 0;color: #373435;text-decoration: none;text-align: center;font-size: 20px;font-weight: 400;}
-.jssupportticket-review-box-options a:hover {text-decoration: underline;}
-.jssupportticket-review-box-options a.three-days {border:2px solid #ADDBC5;background: #DCEFE6;}
-.jssupportticket-review-box-options a.seven-days {border:2px solid #D9E7A7;background: #E9F1CE;}
-.jssupportticket-review-box-options a.ten-days {border:2px solid #D9CCE4;background: #EAE8F3;}
-.jssupportticket-review-box-options a.zero-days {color: #c0c0c0;text-decoration: underline;font-size: 22px;padding-top: 30px; line-height: 25px;}
-.jssupportticket-review-box-options a.dismiss {color: #999;}
-button.jssupportticket-close-review-box-popup {position: absolute;top: 12px;right: 10px;border: none;background: transparent;cursor: pointer;}
-a.button.button-primary.jssupportticket-review-box-btn {font-size: 14px;background: #F51366;color: #fff;border: solid 1px #F51366;border-radius: 3px;line-height: 24px;-webkit-box-shadow: 0 3px 5px -3px #333333;-moz-box-shadow: 0 3px 5px -3px #333333;box-shadow: 0 3px 5px -3px #333333;text-shadow: none;}
-.notice.notice-info.premio-notice {position: relative;padding: 1px 30px 1px 12px;}
-.js-ticket-review-default * {box-sizing: border-box;}
-.js-ticket-review-default {float: left;width: calc(100% - 5px);background: url("../images/review/bg.png") no-repeat center / cover;padding: 10px;position: relative;overflow: hidden;margin: 10px 0 5px;min-height: 115px;box-sizing: border-box;border: 2px solid #afc8e8;background-position: center;background-size: 105% 115%;background-repeat: no-repeat;margin-right: 5px;}
-.js-ticket-review-default div.js-ticket-review-default-cnt{float: left;width: 80%;color: #fff;position: relative;z-index: 1;}
-.js-ticket-review-default div.js-ticket-review-default-cnt div.js-ticket-review-default-cnt-left{float: left;}
-.js-ticket-review-default div.js-ticket-review-default-cnt div.js-ticket-review-default-cnt-left img{width: 120px;border: 1px solid #afc8e8;}
-.js-ticket-review-default div.js-ticket-review-default-cnt div.js-ticket-review-default-cnt-right{float: left;width: calc(100% - 135px);padding: 0px 0 0 15px;}
-.js-ticket-review-default div.js-ticket-review-default-cnt div.js-ticket-review-default-cnt-right div.js-ticket-review-row{float: left;width: 100%;padding: 10px 0 5px;}
-.js-ticket-review-default div.js-ticket-review-default-cnt div.js-ticket-review-default-cnt-right div.js-ticket-review-row.review-head{font-size: 23px;font-weight: 500;color: #373435;}
-.js-ticket-review-default div.js-ticket-review-default-cnt div.js-ticket-review-default-cnt-right div.js-ticket-review-row.review-description{font-size: 16px;color: #4B4B4D;}
-.js-ticket-review-default div.js-ticket-review-default-cnt div.js-ticket-review-default-cnt-right div.js-ticket-review-row a{display: inline-block;padding: 5px 10px;margin-right: 5px;height: auto;vertical-align: middle;color: #575455;text-decoration: none;}
-.js-ticket-review-default div.js-ticket-review-default-cnt div.js-ticket-review-default-cnt-right div.js-ticket-review-row a:hover{text-decoration: underline;}
-.js-ticket-review-default div.js-ticket-review-default-cnt div.js-ticket-review-default-cnt-right div.js-ticket-review-row a.review-love{border: 1px solid #F78c7E;background: #FEF5F6;}
-.js-ticket-review-default div.js-ticket-review-default-cnt div.js-ticket-review-default-cnt-right div.js-ticket-review-row a.review-sad{border: 1px solid #F4B656;background: #FFFDEF;}
-.js-ticket-review-default div.js-ticket-review-default-cnt div.js-ticket-review-default-cnt-right div.js-ticket-review-row a.review-happy{border: 1px solid #A7D493;background: #E9F5F0;}
-.js-ticket-review-default div.js-ticket-review-default-cnt div.js-ticket-review-default-cnt-right div.js-ticket-review-row a img{margin-right: 5px;}
-.js-ticket-review-default img.js-ticket-review-default-img{position: absolute;top: 23px;right: 100px;width: 300px;}
-.js-ticket-review-default .jssupportticket-premio-review-dismiss-btn{position: absolute;right: 15px;top: 10px}
-.jssupportticket-thanks-box-popup *{box-sizing: border-box;}
-.jssupportticket-thanks-box-popup {position: fixed;width: 100%;height: 100%;z-index: 10001;background: rgba(0,0,0,0.65);top: 0;left: 0;display: none;}
-.jssupportticket-thanks-box-popup-content {position: fixed;top: 50%;left: 50%;width: 50%;z-index: 9999;transform: translate(-50%, -50%);box-sizing: border-box;max-height: 70%;overflow-x: hidden;overflow-y: auto;}
-.jssupportticket-thanks-box-popup-content-wrp{float: left;width: 100%;padding: 35px;border: 2px solid #4f46e5;background: #FFF;position: relative;}
-.jssupportticket-thanks-box-popup .js-ticket-review-thanks-msg {float: left;width: 100%;padding: 30px 40px;display: inline-block;text-align: center;}
-.jssupportticket-thanks-box-popup .js-ticket-review-thanks-box {padding: 10px 0 10px 0;position: relative;text-align: center;display: none;}
-.jssupportticket-thanks-box-popup .js-ticket-review-thanks-btn {border: 0;background: transparent;position: absolute;right: 10px;top: 12px;cursor: pointer;}
-.jssupportticket-thanks-box-popup .js-ticket-review-thanks-img {float: left;width: 100%;position: relative;margin-top: 35px;height: 210px;}
-.jssupportticket-thanks-box-popup .js-ticket-review-thanks-img img {position: absolute;top: 0;bottom: 0;left: 0;right: 0;margin: auto;}
-.jssupportticket-thanks-box-popup .js-ticket-review-thanks-msg .thanks-msg-title {float: left;width: 100%;padding: 30px 0 10px;font-weight: 500;font-size: 45px;color: #373435;text-transform: capitalize;}
-.jssupportticket-thanks-box-popup .js-ticket-review-thanks-msg .thanks-msg-desc {float: left;width: 100%;font-size: 16px;color: #373435;padding: 25px 0;}
-.jssupportticket-thanks-box-popup .js-ticket-review-thanks-msg .thanks-msg-footer {float: left;width: 100%;font-size:16px;color: #373435;text-decoration: underline;}
+/* admin review request: a light card in the desk's own colours; logical properties, so RTL needs nothing extra */
+.jsst-rv {position: relative;display: flex;gap: 16px;align-items: flex-start;box-sizing: border-box;margin: 15px 20px 5px 0;margin-inline: 0 20px;padding: 18px 48px 18px 20px;padding-inline: 20px 48px;background: #fff;border: 1px solid #e5e7eb;border-inline-start: 4px solid #4f46e5;border-radius: 10px;box-shadow: 0 1px 3px rgba(17,24,39,.06);font-size: 14px;line-height: 1.5;color: #374151;}
+.jsst-rv * {box-sizing: border-box;}
+.jsst-rv [hidden] {display: none !important;}
+.jsst-rv-icon {flex: 0 0 44px;height: 44px;border-radius: 50%;background: #fef3c7;display: flex;align-items: center;justify-content: center;}
+.jsst-rv-icon svg {width: 24px;height: 24px;fill: #f59e0b;}
+.jsst-rv-body {flex: 1 1 auto;min-width: 0;}
+.jsst-rv-title {font-size: 15px;font-weight: 600;color: #111827;margin: 0 0 2px;}
+.jsst-rv-text {margin: 0 0 12px;color: #4b5563;}
+.jsst-rv-thanks .jsst-rv-text {margin: 0;}
+.jsst-rv-actions {display: flex;flex-wrap: wrap;align-items: center;gap: 8px 12px;}
+.jsst-rv-btn {display: inline-flex;align-items: center;gap: 8px;min-height: 36px;padding: 6px 14px;border: 1px solid #d1d5db;border-radius: 8px;background: #fff;color: #374151;font-size: 13px;font-weight: 500;line-height: 1.4;text-decoration: none;cursor: pointer;}
+.jsst-rv-btn:hover {background: #f9fafb;color: #111827;}
+.jsst-rv-btn.jsst-rv-primary {background: #4f46e5;border-color: #4f46e5;color: #fff;}
+.jsst-rv-btn.jsst-rv-primary:hover {background: #4338ca;border-color: #4338ca;color: #fff;}
+.jsst-rv-stars {display: inline-flex;gap: 1px;}
+.jsst-rv-stars svg {width: 14px;height: 14px;fill: #fcd34d;}
+.jsst-rv-link {padding: 4px 2px;border: 0;background: none;color: #6b7280;font-size: 13px;text-decoration: underline;cursor: pointer;}
+.jsst-rv-link:hover {color: #111827;}
+.jsst-rv-later {display: flex;flex-wrap: wrap;align-items: center;gap: 8px;margin-top: 12px;padding-top: 12px;border-top: 1px dashed #e5e7eb;color: #4b5563;font-size: 13px;}
+.jsst-rv-chip {padding: 4px 12px;border: 1px solid #c7d2fe;border-radius: 999px;background: #eef2ff;color: #3730a3;font-size: 13px;cursor: pointer;}
+.jsst-rv-chip:hover {background: #e0e7ff;}
+.jsst-rv-close {position: absolute;top: 8px;inset-inline-end: 8px;width: 32px;height: 32px;border: 0;border-radius: 6px;background: none;color: #9ca3af;font-size: 22px;line-height: 1;cursor: pointer;}
+.jsst-rv-close:hover {background: #f3f4f6;color: #374151;}
+.jsst-rv a:focus-visible, .jsst-rv button:focus-visible {outline: 2px solid #4f46e5;outline-offset: 2px;box-shadow: none;}
+@media (max-width: 782px) {.jsst-rv {margin-inline: 0 10px;padding: 16px 44px 16px 14px;padding-inline: 14px 44px;gap: 12px;}.jsst-rv-icon {flex-basis: 36px;height: 36px;}.jsst-rv-btn {min-height: 40px;}}
 /* update key */
 div#jsstadmin-data-wrp .jsstadmin-update-key-form{display: flex;width: 100%;padding:20px;background-color: #ffff;}
 div#jsstadmin-data-wrp .jsstadmin-update-key-form .jsstadmin-update-key-wrp{display: flex;width: 100%;flex-direction: column;}
@@ -2898,7 +2914,6 @@ input:checked + .toggle-switch-slider:before {transform: translateX(16px);}
 /* The one exception: License keeps its key. It moved up from Plugin Support to
    Overview (30 September 2026), and the key is how people spot it among the
    daily screens there. */
-.jsstadmin-sidebar-menu > li.menu-item-license > a > .jsst_menu-icon {display: inline-block;width: 16px;height: 16px;margin-inline-end: 8px;}
 .jsstadmin-sidebar-menu > li:not(.menu-header) > a {font-size: 13px;font-weight: 500;}
 .jsstadmin-sidebar-menu > li > a {
     display: flex;align-items: center;position: relative;
@@ -3013,19 +3028,7 @@ div#jsstadmin-wrapper div.jsst-admin-dashboard-ticket-logowrp img{width:40px;hei
 div.jsst-admin-dashboard-ticket-rightmain-wrp{width: calc(100% - 1rem - 40px);}
 
 
-@media (min-width:1750px) and (max-width:1880px){.jssupportticket-review-box-popup-content {width: 52%;}}
-@media (min-width:1650px) and (max-width:1749px){.jssupportticket-review-box-popup-content {width: 55%;}}
-@media (min-width:1500px) and (max-width:1649px){.jssupportticket-review-box-popup-content {width: 60%;}}
-@media (min-width:1380px) and (max-width:1499px){.jssupportticket-review-box-popup-content {width: 65%;}.js-ticket-review-default img.js-ticket-review-default-img {top: 30px;right: 50px;width: 250px;}}
-@media (min-width:1280px) and (max-width: 1379px){.jssupportticket-review-box-popup-content {width: 70%;}.js-ticket-review-default img.js-ticket-review-default-img {top: 30px;right: 15px;width: 220px;}}
 @media (min-width:783px) and (max-width:1280px){
-	.jssupportticket-thanks-box-popup-content {width: 70%;}
-	.jssupportticket-thanks-box-popup .js-ticket-review-thanks-msg {padding: 30px 0;}
-	.jssupportticket-thanks-box-popup .js-ticket-review-thanks-img {height: 150px;}
-	.js-ticket-review-default img.js-ticket-review-default-img {top: 30px;right: 15px;width: 250px;}
-	.js-ticket-review-default div.js-ticket-review-default-cnt {width: 70%;}
-	.js-ticket-review-default div.js-ticket-review-default-cnt div.js-ticket-review-default-cnt-right div.js-ticket-review-row a{margin-top: 2px;margin-bottom: 2px;}
-	.jssupportticket-review-box-popup-content {width: 80%;}
 }
 /* responsive */
 
@@ -3104,23 +3107,6 @@ div.jsst-admin-dashboard-ticket-rightmain-wrp{width: calc(100% - 1rem - 40px);}
 }
 @media (max-width: 782px){
 	/*review*/
-	.js-ticket-review-default {padding: 50px 20px 100px;background: url("../images/review/mobile-bg.png") no-repeat center / cover;}
-	.js-ticket-review-default div.js-ticket-review-default-cnt {width: 100%;text-align: center;}
-	.js-ticket-review-default div.js-ticket-review-default-cnt div.js-ticket-review-default-cnt-left {width: 100%;}
-	.js-ticket-review-default div.js-ticket-review-default-cnt div.js-ticket-review-default-cnt-left img {width: 150px;}
-	.js-ticket-review-default div.js-ticket-review-default-cnt div.js-ticket-review-default-cnt-right {width: 100%;padding: 35px 0;}
-	.js-ticket-review-default div.js-ticket-review-default-cnt div.js-ticket-review-default-cnt-right div.js-ticket-review-row a {padding: 10px 20px;margin: 8px;}
-	.js-ticket-review-default img.js-ticket-review-default-img {right: 0;left:0;bottom: 50px;top: unset;margin: auto;}
-	.js-ticket-review-default div.js-ticket-review-default-cnt div.js-ticket-review-default-cnt-right div.js-ticket-review-row.review-head {padding-left:60px;padding-right:60px;line-height: 28px;}
-	.js-ticket-review-default div.js-ticket-review-default-cnt div.js-ticket-review-default-cnt-right div.js-ticket-review-row.review-description {line-height: 22px;padding: 15px 15px 10px;}
-	.jssupportticket-review-box-popup-content {width: 80%;}
-	.jssupportticket-review-box-popup-content-wrp {padding-top: 50px;}
-	.jssupportticket-review-box-popup-content-wrp .jssupportticket-review-box-popup-content-left {width: 100%;}
-	.jssupportticket-review-box-popup-content-wrp .jssupportticket-review-box-popup-content-right {width: 100%;padding: 60px 0 10px;}
-	.jssupportticket-thanks-box-popup-content {width: 80%;}
-	.jssupportticket-thanks-box-popup .js-ticket-review-thanks-img {height: 100px;}
-	.jssupportticket-thanks-box-popup .js-ticket-review-thanks-msg {padding: 30px 0;line-height: 30px;}
-	.jssupportticket-thanks-box-popup .js-ticket-review-thanks-msg .thanks-msg-title {line-height: 40px;}
 	/*left menu*/
 	div#jsstadmin-leftmenu div#jsstadmin-logo{display: flex;align-items: center;flex-wrap: wrap;}
 	div#jsstadmin-leftmenu {float: left;width: 100%;margin-bottom: 10px;position: unset;}
@@ -3313,9 +3299,6 @@ div.jsst-admin-dashboard-ticket-rightmain-wrp{width: calc(100% - 1rem - 40px);}
 	div.jsstadmin-addons-list-wrp div.jsst-admin-addon-status div.jsst-admin-addon-status-addonsversion-wrp{width:100%;float: right;}
 	div.jsstadmin-addons-list-wrp div.jsst-admin-addon-status div.jsst-admin-addon-status-addonstatusbtn-wrp{width:100%;float: right;text-align: left;display: flex;justify-content: center;}
 	/*review*/
-	.js-ticket-review-default div.js-ticket-review-default-cnt div.js-ticket-review-default-cnt-right div.js-ticket-review-row a {padding: 12px 25px;margin: 8px;}
-	.js-ticket-review-default div.js-ticket-review-default-cnt div.js-ticket-review-default-cnt-right div.js-ticket-review-row.review-description {line-height: 22px;padding: 15px 0 10px;}
-	.jssupportticket-thanks-box-popup .thanks-msg-title {padding-top: 5px;font-size: 30px;}
 	/*visible*/
 	form.jsstadmin-form div.js-form-wrapper.js-form-visible-wrapper .js-form-input-field{width: calc(100% - 10px);margin: 0 5px 15px;}
 	form.jsstadmin-form div.js-form-wrapper.js-form-visible-wrapper .js-form-select-field{width: calc(100% - 10px);margin: 0 5px 15px;}
@@ -3448,11 +3431,6 @@ div.jsst-admin-dashboard-ticket-rightmain-wrp{width: calc(100% - 1rem - 40px);}
 }
 @media (max-width: 480px){
 	/*review*/
-	.js-ticket-review-default div.js-ticket-review-default-cnt div.js-ticket-review-default-cnt-right div.js-ticket-review-row a {padding: 12px 20px;margin: 8px;}
-	.js-ticket-review-default div.js-ticket-review-default-cnt div.js-ticket-review-default-cnt-right div.js-ticket-review-row.review-head {padding-left:40px;padding-right:40px;line-height: 28px;}
-	.js-ticket-review-thanks-img {margin-top: 20px;height: 75px;}
-	.jssupportticket-thanks-box-popup .thanks-msg-title {padding-top: 5px;font-size: 22px;}
-	.jssupportticket-thanks-box-popup .thanks-msg-desc {padding: 15px 0;}
 	/*configuration*/
 	.jsst_gen_body .js-ticket-configuration-row .js-ticket-configuration-title{width: 100% !important;text-align: unset !important;padding: 10px 0 !important;}
 	.jsst_gen_body .js-ticket-configuration-row .js-ticket-configuration-value{width: 100% !important;}
@@ -3946,6 +3924,7 @@ form.jsstadmin-form div.js-form-wrapper.jsst-default-topic div.jsst-default-topi
 .jsst-setup-footer {float: left;width: 100%;margin-top: 14px;color: #8a8f8f;font-size: 12px;}
 .jsst-setup-footer-note {margin-left: 8px;}
 .jsst-setup-badge {display: inline-block;min-width: 18px;padding: 0 6px;border-radius: 9px;background: #4f46e5;color: #fff;font-size: 11px;line-height: 18px;text-align: center;margin: 0 5px;}
+.jsst-setup-badge.jsst-update-badge {background: #d63638;} /* add-on updates waiting: WordPress's own update red */
 
 /* Agent Access. (Roadmap 4.0-SEC-04) */
 .jsst-access-lede {float: left;width: 100%;margin-bottom: 14px;color: #606262;font-size: 13px;line-height: 1.6;}
@@ -9490,6 +9469,28 @@ div#jsstadmin-wrapper.jsst-wizard-page div#jsstadmin-data {max-width: none;}
 #jsstadmin-wrapper .jsst-card.jsst-ai-live-warning .jsst-ai-live-title {display: block;margin: 0 0 4px;font-size: 14px;font-weight: 600;color: var(--jsst-warn, #7a4c00);}
 #jsstadmin-wrapper .jsst-card.jsst-ai-live-warning .jsst-hint {margin: 0 0 12px;}
 #jsstadmin-wrapper .jsst-card.jsst-ai-live-warning .jsst-btnrow {margin-top: 0;}
+/* The AI status line: one per AI screen, saying what is true now and the one
+   thing to press. Replaces the orange "replying automatically" card and the
+   separate "no engine" note, which could disagree with each other. */
+#jsstadmin-wrapper .jsst-ai-status {display: flex;flex-wrap: wrap;align-items: center;gap: 8px 12px;box-sizing: border-box;margin: 0 0 16px;padding: 10px 14px;
+    border: 1px solid var(--jsst-border, #e7e9ee);border-inline-start-width: 4px;border-radius: var(--jsst-r-sm, 7px);background: var(--jsst-panel, #fff);font-size: 13.5px;line-height: 1.5;}
+#jsstadmin-wrapper .jsst-ai-status-dot {flex: 0 0 auto;width: 9px;height: 9px;border-radius: 50%;background: #9ca3af;}
+#jsstadmin-wrapper .jsst-ai-status-text {flex: 1 1 280px;min-width: 0;color: var(--jsst-text-dim, #6a7280);}
+#jsstadmin-wrapper .jsst-ai-status-text strong {color: var(--jsst-text, #1a1d23);font-weight: 600;}
+#jsstadmin-wrapper .jsst-ai-status-acts {display: flex;flex-wrap: wrap;gap: 6px;}
+#jsstadmin-wrapper .jsst-ai-status-ok {border-inline-start-color: #10b981;}
+#jsstadmin-wrapper .jsst-ai-status-ok .jsst-ai-status-dot {background: #10b981;}
+#jsstadmin-wrapper .jsst-ai-status-info {border-inline-start-color: var(--jsst-accent, #4f46e5);}
+#jsstadmin-wrapper .jsst-ai-status-info .jsst-ai-status-dot {background: var(--jsst-accent, #4f46e5);}
+#jsstadmin-wrapper .jsst-ai-status-warn {border-inline-start-color: #d97706;background: var(--jsst-warn-bg, #fdf6ec);}
+#jsstadmin-wrapper .jsst-ai-status-warn .jsst-ai-status-dot {background: #d97706;}
+#jsstadmin-wrapper .jsst-ai-status-off {border-inline-start-color: #9ca3af;}
+/* A section kept for when it is needed, closed until then. */
+#jsstadmin-wrapper details.jsst-ai-fold > summary {cursor: pointer;list-style: none;}
+#jsstadmin-wrapper details.jsst-ai-fold > summary::-webkit-details-marker {display: none;}
+#jsstadmin-wrapper details.jsst-ai-fold > summary::after {content: "▸";margin-inline-start: auto;color: var(--jsst-text-faint, #98a0ac);transition: transform .15s;}
+#jsstadmin-wrapper details.jsst-ai-fold[open] > summary::after {transform: rotate(90deg);}
+#jsstadmin-wrapper details.jsst-ai-fold:not([open]) > summary {border-bottom: 0;}
 /* AI Settings > Suggestions > "Search these": the button sits under the source tags, not against them. */
 #jsstadmin-wrapper .jsst-ai-sources-link {margin: 12px 0 0;}
 
@@ -9758,3 +9759,36 @@ div.js-ticket-left div.js-ticket-data-row.jsst-row-mood .jsst-pill {padding: 0 8
     .jsst-lp-spin, .jsst-lp-pop, .jsst-lp-bar.is-busy i {animation: none;}
     .jsst-lp-bar.is-busy i {width: 100%;opacity: .5;}
 }
+
+/* Zywrap AI Settings and Prompt Lab, brought in line with the other AI
+   screens: flat cards with the shared border and spacing, the accent
+   colour on buttons, no lift on hover and a light output box. CSS only;
+   the markup and every field stay as they were. */
+#jsstadmin-wrapper .js-ticket-zywrap-card,
+#jsstadmin-wrapper .js-ticket-zywrap-mini-card,
+#jsstadmin-wrapper .js-ticket-zywrap-pg-card {border: 1px solid var(--jsst-border, #e7e9ee);border-radius: var(--jsst-radius-card, 0);box-shadow: none;padding: 16px 20px;}
+#jsstadmin-wrapper .js-ticket-zywrap-card:hover {transform: none;box-shadow: none;}
+#jsstadmin-wrapper .js-ticket-zywrap-info-box {border: 1px solid var(--jsst-info-line, #d5d8f7);background: var(--jsst-info-bg, #eef0fd);border-radius: var(--jsst-radius-card, 0);padding: 14px 20px;}
+#jsstadmin-wrapper .js-ticket-zywrap-card-title,
+#jsstadmin-wrapper .js-ticket-zywrap-pg-title {font-size: 14.5px;font-weight: 600;color: var(--jsst-text, #1a1d23);border-bottom-color: var(--jsst-border, #e7e9ee);}
+#jsstadmin-wrapper .js-ticket-zywrap-step-number {background: var(--jsst-accent, #4f46e5);}
+#jsstadmin-wrapper .js-ticket-zywrap-warning-box {background: var(--jsst-warn-bg, #fdf6ec);border: 1px solid var(--jsst-warn-line, #f0e0c4);border-radius: var(--jsst-radius, 2px);color: var(--jsst-warn, #7a4c00);}
+#jsstadmin-wrapper .js-ticket-zywrap-mini-card {padding: 16px 20px;}
+#jsstadmin-wrapper .js-ticket-zywrap-sidebar-note {margin: 12px 0 0;font-size: 12.5px;line-height: 1.6;color: var(--jsst-muted, #6b747c);}
+#jsstadmin-wrapper .js-ticket-zywrap-btn-large {height: 40px;font-size: 13.5px;}
+#jsstadmin-wrapper.js-ticket-zywrap-settings-page .button-primary,
+#jsstadmin-wrapper .js-ticket-zywrap-pg-run-btn {background: var(--jsst-accent, #4f46e5) !important;border-color: var(--jsst-accent, #4f46e5) !important;border-radius: var(--jsst-radius, 2px);}
+#jsstadmin-wrapper .js-ticket-zywrap-pg-run-btn {height: 40px !important;font-size: 13.5px !important;}
+#jsstadmin-wrapper .js-ticket-zywrap-pg-output-box {background: var(--jsst-surface, #f8fafc);color: var(--jsst-text, #1a1d23);border: 1px solid var(--jsst-border, #e7e9ee);border-radius: var(--jsst-radius, 2px);}
+#jsstadmin-wrapper .js-ticket-zywrap-pg-textarea {background: #fff;border-color: var(--jsst-border, #e7e9ee);border-radius: var(--jsst-radius, 2px);}
+/* A folded card's arrow sits in the corner, not on a line of its own under the card tools. */
+#jsstadmin-wrapper details.jsst-ai-fold > summary.jsst-card-head {position: relative;padding-inline-end: 44px;}
+#jsstadmin-wrapper details.jsst-ai-fold > summary.jsst-card-head::after {position: absolute;inset-inline-end: 20px;top: 17px;}
+#jsstadmin-wrapper details.jsst-ai-fold > summary.jsst-card-head:hover .jsst-card-title {color: var(--jsst-accent, #4f46e5);}
+/* Knowledge Sources: the short notes under "Use it" and under a status pill
+   wrap instead of widening the table past the page. */
+#jsstadmin-wrapper tr[data-jsst-srcrow] .jsst-col-fit .jsst-table-sub {white-space: normal;min-width: 9em;max-width: 16em;}
+/* The "AI is not working" note on the AI settings tabs, given the same warning
+   look and spacing as the other notes, so it does not sit against the fields. */
+#jsstadmin-wrapper .jsst-ir-warn {margin: 0 0 16px;padding: 10px 14px;background: var(--jsst-warn-bg, #fdf6ec);border: 1px solid var(--jsst-warn-line, #f0e0c4);border-radius: var(--jsst-radius, 2px);color: var(--jsst-warn, #7a4c00);font-size: 13px;line-height: 1.6;}
+#jsstadmin-wrapper .jsst-ir-warn a {color: inherit;font-weight: 600;text-decoration: underline;}

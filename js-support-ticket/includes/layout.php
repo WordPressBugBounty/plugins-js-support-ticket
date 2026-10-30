@@ -349,7 +349,9 @@ class JSSTlayout {
      * Features released as Beta in 5.0.0, and the label that says so.
      *
      * Decided 1 October 2026: Live Chat, AI Agent, the Gmail / Microsoft 365
-     * mailbox sign-in, the REST API & webhooks, and the Security screen. They
+     * mailbox sign-in, the REST API & webhooks, and the Security screen. Live
+     * Chat and AI Agent (with its Zywrap screens) left Beta on 21 October 2026,
+     * after the beta-exit fixes; the rest are still Beta. They
      * are new rather than rebuilt, and each either answers customers on its own
      * or leans on a service outside the plugin. Shown to administrators only -
      * never in the chat widget, the portal or an email. Take a feature off this
@@ -361,9 +363,6 @@ class JSSTlayout {
      */
     static function betaScreens() {
         return apply_filters('jsst_beta_screens', array(
-            array('page' => 'livechat'),
-            array('page' => 'aiagent'),
-            array('page' => 'zywrap'),
             array('jstlay' => 'api'),
             array('jstlay' => 'webhooks'),
             array('page' => 'jssupportticket', 'jstlay' => 'security'),
@@ -435,7 +434,7 @@ class JSSTlayout {
                 </a>
                 <div id="jsstadmin-vers-txt">
                     <?php echo esc_html(__('Version', 'js-support-ticket')); ?>:
-                    <span class="jsstadmin-ver"><?php echo esc_html(JSSTincluder::getJSModel('configuration')->getConfigValue('versioncode')); ?></span>
+                    <span class="jsstadmin-ver"><?php /* The plugin's own version, not a settings row: a damaged settings table could hold a 2.9.9 row ahead of the real one. */ echo esc_html(implode('.', str_split((string) jssupportticket::$_currentversion))); ?></span>
                 </div>
             </div>
         </div>
@@ -677,6 +676,15 @@ class JSSTlayout {
 
     static function adminUserPicker($jsst_args = array()) {
         $jsst_title = !empty($jsst_args['title']) ? $jsst_args['title'] : __('Select a user', 'js-support-ticket');
+        /* Which search the box and Reset run. A screen whose list is not
+           "customers" says so - the agent report lists agents - otherwise
+           searching, or pressing Reset, replaced its list with the core
+           customer list. The search named here must accept `q`. */
+        $jsst_search = wp_parse_args(isset($jsst_args['search']) ? (array) $jsst_args['search'] : array(), array(
+            'jstmod' => 'jssupportticket',
+            'task'   => 'getusersearchajax',
+            'nonce'  => 'get-usersearch-ajax',
+        ));
         $jsst_hint  = !empty($jsst_args['hint']) ? $jsst_args['hint'] : __('Search by username, name or email address to find the person you want.', 'js-support-ticket');
         ?>
         <div id="userpopupblack" class="jsst-popup-background" style="display:none;"></div>
@@ -733,7 +741,7 @@ class JSSTlayout {
         e.stopImmediatePropagation();
         if (reset) { q.value = ''; reset = false; }
         ['username', 'emailaddress', 'name'].forEach(function (f) { var el = form.querySelector('#' + f); if (el) { el.value = ''; } });
-        jQuery.post(ajaxurl, {action: 'jsticket_ajax', jstmod: 'jssupportticket', task: 'getusersearchajax', q: q.value, '_wpnonce': " . wp_json_encode(wp_create_nonce('get-usersearch-ajax')) . "}, function (data) {
+        jQuery.post(ajaxurl, {action: 'jsticket_ajax', jstmod: " . wp_json_encode((string) $jsst_search['jstmod']) . ", task: " . wp_json_encode((string) $jsst_search['task']) . ", q: q.value, '_wpnonce': " . wp_json_encode(wp_create_nonce((string) $jsst_search['nonce'])) . "}, function (data) {
             if (data) {
                 jQuery('div#userpopup-records').html(data);
                 if (typeof window.setUserLink === 'function') { window.setUserLink(); }
@@ -767,6 +775,23 @@ class JSSTlayout {
      * `#records-inner`, `.multiformpopup-header-close-img` and
      * `#jstran_loading` all have to keep their names.
      */
+    static function frontFormPickerNeeded() {
+        /* The portal's "Submit Ticket" link opens the form picker only when
+           there is a real choice. With one active form the picker listed that
+           one form, and every page still carried the hidden dialog. The
+           controller already falls back to the default form on a plain link. */
+        static $jsst_needed = null;
+        if ($jsst_needed !== null) {
+            return $jsst_needed;
+        }
+        $jsst_needed = false;
+        if (in_array('multiform', jssupportticket::$_active_addons) && jssupportticket::$_config['show_multiform_popup'] == 1) {
+            $jsst_forms = jssupportticket::$_db->get_var("SELECT COUNT(id) FROM `" . jssupportticket::$_db->prefix . "js_ticket_multiform` WHERE status = 1");
+            $jsst_needed = ((int) $jsst_forms > 1);
+        }
+        return $jsst_needed;
+    }
+
     static function adminFormPicker($jsst_args = array()) {
         static $jsst_done = false;
         if ($jsst_done) {

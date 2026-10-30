@@ -80,7 +80,7 @@ $jsst_look = array(
     ) ),
     'js-support-ticket-experience'    => array( 'format-chat', '#db2777', __( 'New: live chat', 'js-support-ticket' ), array(
         __( 'More than one ticket form', 'js-support-ticket' ),
-        __( 'Live chat on your site (beta)', 'js-support-ticket' ),
+        __( 'Live chat on your site', 'js-support-ticket' ),
         __( 'A satisfaction question when a ticket closes', 'js-support-ticket' ),
     ) ),
     'js-support-ticket-commerce'      => array( 'cart', '#c2410c', '', array(
@@ -540,7 +540,9 @@ JSSTmessage::getMessage();
                     if (!go) { return; }
                     var log = document.getElementById('jsst-upgrade-log');
                     function line(text, bad) { var li = document.createElement('li'); li.textContent = text; if (bad) { li.className = 'is-error'; } log.appendChild(li); }
-                    var tries = 0;
+                    var tries = 0, steps = 0, lastText = '';
+                    /* Stops on a "Check again" step with the link beside it. */
+                    function recheck(url) { var li = log.lastChild, a = document.createElement('a'); if (!li || !url) { return; } a.href = url; a.className = 'jsst-btn'; a.style.marginLeft = '8px'; a.textContent = <?php echo wp_json_encode( __( 'Check again', 'js-support-ticket' ) ); ?>; li.appendChild(a); }
                     function step() {
                         var body = new FormData();
                         body.append('action', 'jsst_upgrade_step');
@@ -552,8 +554,13 @@ JSSTmessage::getMessage();
                                 var d = r.data;
                                 if (d.message) { line(d.message, !d.ok && !d.retry); }
                                 if (!d.ok && d.retry) { tries += 1; if (tries <= 5) { setTimeout(step, d.retry * 1000); return; } }
-                                if (!d.ok) { go.disabled = false; return; }
+                                if (!d.ok) { recheck(d.recheck); go.disabled = false; return; }
                                 tries = 0;
+                                /* Last line of defence: a step that reports the same thing
+                                   twice running, or a run that never ends, stops here. */
+                                steps += 1;
+                                if ((d.message && d.message === lastText) || steps > 30) { line(<?php echo wp_json_encode( __( 'Stopped: the same step keeps coming back. Use Check again, then Finish upgrade.', 'js-support-ticket' ) ); ?>, true); go.disabled = false; return; }
+                                lastText = d.message || lastText;
                                 if (d.remaining > 0) { step(); } else { line(<?php echo wp_json_encode( __( 'Done. Reloading...', 'js-support-ticket' ) ); ?>); setTimeout(function () { window.location.reload(); }, 1200); }
                             })
                             .catch(function () { line(<?php echo wp_json_encode( __( 'The connection dropped. Reload the page - the upgrade carries on from where it stopped.', 'js-support-ticket' ) ); ?>, true); go.disabled = false; });

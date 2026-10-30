@@ -65,18 +65,6 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
                                     });
                                     jQuery("div#userpopup").slideDown('slow');
                                 });
-                                jQuery("form#userpopupsearch").submit(function (e) {
-                                    e.preventDefault();
-                                    var username = jQuery("input#username").val();
-                                    var name = jQuery("input#name").val();
-                                    var emailaddress = jQuery("input#emailaddress").val();
-                                    jQuery.post(ajaxurl, {action: 'jsticket_ajax', name: name, username: username, emailaddress: emailaddress, jstmod: 'jssupportticket', task: 'getusersearchajax', '_wpnonce':'<?php echo esc_attr(wp_create_nonce("get-usersearch-ajax")); ?>'}, function (data) {
-                                        if (data) {
-                                            jQuery("div#userpopup-records").html(data);
-                                            setUserLink();
-                                        }
-                                    });//jquery closed
-                                });
                                 jQuery(".userpopup-close, div#userpopupblack").click(function (e) {
                                     jQuery("div#userpopup").slideUp('slow', function () {
                                         jQuery("div#userpopupblack").hide();
@@ -85,41 +73,11 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
                                 });
                         	});
                         </script>
-                        <div id="userpopupblack" style="display:none;"></div>
-                        <div id="userpopup" style="display:none;">
-                            <div class="userpopup-top">
-                                <div class="userpopup-heading">
-                                    <?php echo esc_html(__('Select User','js-support-ticket')); ?>
-                                </div>
-                                <span class="userpopup-close"></span>
-                            </div>
-                            <div class="userpopup-search">
-                                <form id="userpopupsearch">
-                                    <div class="userpopup-fields-wrp">
-                                        <div class="userpopup-fields">
-                                            <input type="text" name="username" id="username" placeholder="<?php echo esc_attr(__('Username','js-support-ticket')); ?>" />
-                                        </div>
-                                        <div class="userpopup-fields">
-                                            <input type="text" name="name" id="name" placeholder="<?php echo esc_attr(__('Name','js-support-ticket')); ?>" />
-                                        </div>
-                                        <div class="userpopup-fields">
-                                            <input type="text" name="emailaddress" id="emailaddress" placeholder="<?php echo esc_attr(__('Email Address','js-support-ticket')); ?>"/>
-                                        </div>
-                                        <div class="userpopup-btn-wrp">
-                                            <input class="userpopup-search-btn" type="submit" value="<?php echo esc_attr(__('Search','js-support-ticket')); ?>" />
-                                            <input class="userpopup-reset-btn" type="submit" onclick="document.getElementById('name').value = '';document.getElementById('username').value = ''; document.getElementById('emailaddress').value = '';" value="<?php echo esc_attr(__('Reset','js-support-ticket')); ?>" />
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
-                            <div id="userpopup-records-wrp">
-                                <div id="userpopup-records">
-                                    <div class="userpopup-records-desc">
-                                        <?php echo esc_html(__('Use search feature to select the user','js-support-ticket')); ?>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        <?php /* The same dialog as every other user picker (it runs its
+                                 own search and Reset), not a copy of the old one: the old
+                                 copy's fields and buttons sat around the new result table
+                                 and looked like neither. */
+                        JSSTlayout::adminUserPicker(); ?>
                         <?php include_once(JSST_PLUGIN_PATH . 'includes/header.php'); ?>
                         <div class="js-ticket-add-form-wrapper">
                             <div class="js-export-wrapper" >

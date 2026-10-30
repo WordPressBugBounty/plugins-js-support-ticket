@@ -329,7 +329,17 @@ class JSSTreplyModel {
             JSSTsubmitguard::done($jsst_guardkey, (int) $jsst_row->id);
         }
 
-        if ($jsst_error == 0) {
+        /* An AI answer held for a person to approve is not a reply yet: the
+           customer has received nothing. It must not mark the ticket Replied
+           or answered (that dropped it out of the new and unanswered lists),
+           email the customer, or notify anyone. Approving it stores a fresh,
+           real reply through this same method, which does all of that then. */
+        $jsst_isdraft = !empty($jsst_data['is_ai_draft']);
+        if ($jsst_error == 0 && $jsst_isdraft) {
+            $jsst_replyid = $jsst_row->id;
+            $jsst_sendEmail = false;
+            $jsst_messagetype = esc_html(__('Successfully', 'js-support-ticket'));
+        } elseif ($jsst_error == 0) {
             $jsst_replyid = $jsst_row->id;
             //tickets attachments store
             $jsst_data['replyattachmentid'] = $jsst_replyid;
@@ -448,6 +458,10 @@ class JSSTreplyModel {
         $jsst_currentUserName = isset($jsst_current_user->display_name) ? $jsst_current_user->display_name : esc_html(__('Guest', 'js-support-ticket'));
         $jsst_eventtype = 'REPLIED_TICKET';
         $jsst_message = esc_html(__('Ticket is replied by', 'js-support-ticket')) . " ( " . esc_html($jsst_currentUserName) . " ) ";
+        if ($jsst_isdraft) {
+            $jsst_eventtype = 'AI_DRAFT';
+            $jsst_message = esc_html(__('AI draft saved, waiting for a person to approve it', 'js-support-ticket'));
+        }
         if(JSSTmergedaddon::featureEnabled('tickethistory')){
             JSSTincluder::getJSModel('tickethistory')->addActivityLog($jsst_ticketid, 1, $jsst_eventtype, $jsst_message, $jsst_messagetype);
         }

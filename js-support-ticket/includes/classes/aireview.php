@@ -35,6 +35,21 @@ if (!defined('ABSPATH'))
  */
 class JSSTaireview {
 
+    /**
+     * An answer as one line of plain text for a preview.
+     *
+     * Stripping the tags alone joins a heading to the paragraph after it
+     * ("Gift Card ExpiryThanks for..."), so block ends become breaks first.
+     */
+    public static function plainPreview($jsst_html, $jsst_length) {
+        $jsst_text = preg_replace('#</(h[1-6])>#i', '. ', (string) $jsst_html);
+        $jsst_text = preg_replace('#<br\s*/?>|</(p|div|li|tr|blockquote)>#i', ' ', $jsst_text);
+        $jsst_text = trim(preg_replace('/\s+/u', ' ', wp_strip_all_tags($jsst_text)));
+        $jsst_text = str_replace(array('.. ', '?. ', '!. ', ':. '), array('. ', '? ', '! ', ': '), $jsst_text);
+        return wp_html_excerpt($jsst_text, $jsst_length, '…');
+    }
+
+
     const TABLE          = 'js_ticket_ai_answers';
     const SCHEMA_VERSION = '6.0.1';
     const OPT_SCHEMA     = 'jsst_ai_answers_schema';
@@ -130,6 +145,73 @@ class JSSTaireview {
         JSSTschemaguard::unlock(self::OPT_SCHEMA);
     }
 
+    /**
+     * Did the AI help, this month - the number that answers "is it worth it".
+     *
+     * Solved without a person: a ticket the AI answered that no agent then
+     * had to reply to. Chats: conversations the AI answered that never
+     * reached a person. Time saved is those two counts times the minutes an
+     * agent would have spent (option jsst_ai_minutes_saved, default 6).
+     * Cost is what the AI usage log holds for the month; calls it could not
+     * price are counted beside it rather than read as free.
+     *
+     * @return array answered, needed, solved, rate, chats, chatsolved,
+     *               minutes, hours, cost, unpriced, perSolved
+     */
+    public static function results() {
+        $jsst_out = array('answered' => 0, 'needed' => 0, 'solved' => 0, 'rate' => 0, 'chats' => 0,
+            'chatsolved' => 0, 'minutes' => 0, 'hours' => 0.0, 'cost' => 0.0, 'unpriced' => 0, 'persolved' => null);
+        $jsst_since = current_time('Y-m') . '-01 00:00:00';
+        $jsst_db = jssupportticket::$_db;
+
+        if (self::available()) {
+            $jsst_out['answered'] = (int) $jsst_db->get_var($jsst_db->prepare(
+                "SELECT COUNT(DISTINCT ticketid) FROM `" . self::table() . "` WHERE state = %s AND created >= %s",
+                self::STATE_SENT, $jsst_since));
+            $jsst_out['needed'] = (int) $jsst_db->get_var($jsst_db->prepare(
+                "SELECT COUNT(DISTINCT a.ticketid) FROM `" . self::table() . "` AS a
+                   JOIN `" . $jsst_db->prefix . "js_ticket_replies` AS r
+                     ON r.ticketid = a.ticketid AND r.staffid > 0 AND r.ticketviaautopilot = 0 AND r.created > a.created
+                  WHERE a.state = %s AND a.created >= %s",
+                self::STATE_SENT, $jsst_since));
+            $jsst_out['solved'] = max(0, $jsst_out['answered'] - $jsst_out['needed']);
+            if ($jsst_out['answered'] > 0) {
+                $jsst_out['rate'] = (int) round(100 * $jsst_out['solved'] / $jsst_out['answered']);
+            }
+            // One test ticket made "100% solved". Below this a rate means nothing.
+            $jsst_out['fewdata'] = ($jsst_out['answered'] < 10);
+        }
+
+        if (class_exists('JSSTlivechat') && JSSTlivechat::available()) {
+            $jsst_row = $jsst_db->get_row($jsst_db->prepare(
+                "SELECT COUNT(id) AS jsst_total, SUM(CASE WHEN answered = 1 AND handedoff = 0 THEN 1 ELSE 0 END) AS jsst_solved
+                   FROM `" . JSSTlivechat::convos() . "` WHERE started >= %s", $jsst_since));
+            if ($jsst_row) {
+                $jsst_out['chats'] = (int) $jsst_row->jsst_total;
+                $jsst_out['chatsolved'] = (int) $jsst_row->jsst_solved;
+            }
+        }
+
+        $jsst_each = (int) apply_filters('jsst_ai_minutes_saved', (int) get_option('jsst_ai_minutes_saved', 6));
+        $jsst_out['minutes'] = max(0, $jsst_each) * ($jsst_out['solved'] + $jsst_out['chatsolved']);
+        $jsst_out['hours'] = round($jsst_out['minutes'] / 60, 1);
+
+        if (class_exists('JSSTaiusage')) {
+            $jsst_spend = JSSTaiusage::spend('month');
+            $jsst_out['cost'] = (float) $jsst_spend['cost'];
+            $jsst_out['unpriced'] = (int) $jsst_spend['unpriced'];
+            $jsst_done = $jsst_out['solved'] + $jsst_out['chatsolved'];
+            /* Calls paid from a plan's credits are recorded at $0, so a cost
+               per question with any of them in it read "$0.000" after 27 paid
+               calls. Shown only when every call has a real price. */
+            $jsst_out['plancalls'] = (int) $jsst_spend['plan'];
+            if ($jsst_done > 0 && $jsst_out['unpriced'] === 0 && $jsst_out['plancalls'] === 0) {
+                $jsst_out['persolved'] = round($jsst_out['cost'] / $jsst_done, 4);
+            }
+        }
+        return $jsst_out;
+    }
+
     public static function table() {
         return jssupportticket::$_db->prefix . self::TABLE;
     }
@@ -155,7 +237,11 @@ class JSSTaireview {
      * ------------------------------------------------------------------ */
 
     public static function mode() {
-        $jsst_mode = (string) get_option(self::OPT_MODE, self::MODE_THRESHOLD);
+        /* Never saved: a fresh desk starts at "always ask a person"; any other
+           desk keeps the threshold it has always had. See
+           JSSTactivation::markFreshAiDefaults(). */
+        $jsst_default = get_option('jsst_ai_fresh_defaults') ? self::MODE_ALWAYS : self::MODE_THRESHOLD;
+        $jsst_mode = (string) get_option(self::OPT_MODE, $jsst_default);
         return in_array($jsst_mode, array(self::MODE_THRESHOLD, self::MODE_ALWAYS, self::MODE_NEVER), true)
             ? $jsst_mode : self::MODE_THRESHOLD;
     }
@@ -212,21 +298,30 @@ class JSSTaireview {
      * not sending anything - the benchmark - or the one class that must never
      * fail cannot be measured.
      *
-     * Substring matching, deliberately. A word list would miss "cancel my
-     * subscription" written as "cancelling", and this is the wrong place to be
-     * clever: a false positive costs one ticket going to a person, which is
-     * where it was going anyway before automation existed.
+     * A term matches where a word starts, and may run on: "cancel" still
+     * catches "cancelling" and "refund" catches "refunds". It does not match
+     * inside another word. Plain substring matching did, and "issue" (which
+     * contains "sue"), "reliable" ("liable") and the like sent a large share
+     * of ordinary questions to a person with nothing saying why.
      */
     public static function neverAutomate($jsst_text) {
+        return self::neverAutomateMatch($jsst_text) !== '';
+    }
+
+    /** The term that matched, or '' - so a screen can say why. */
+    public static function neverAutomateMatch($jsst_text) {
         $jsst_text = jssupportticketphplib::JSST_strtolower(wp_strip_all_tags((string) $jsst_text));
-        if (trim($jsst_text) === '') return false;
+        if (trim($jsst_text) === '') return '';
 
         foreach (self::neverAutomateTerms() as $jsst_term) {
-            if ($jsst_term !== '' && strpos($jsst_text, $jsst_term) !== false) {
-                return true;
+            $jsst_term = trim($jsst_term);
+            if ($jsst_term === '') continue;
+            $jsst_pattern = '/(?<![\p{L}\p{N}])' . preg_quote($jsst_term, '/') . '/u';
+            if (preg_match($jsst_pattern, $jsst_text)) {
+                return $jsst_term;
             }
         }
-        return false;
+        return '';
     }
 
     /**

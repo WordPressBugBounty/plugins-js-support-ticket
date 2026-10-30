@@ -7,6 +7,7 @@ class jssupportticketadmin {
 
     function __construct() {
         add_action('admin_menu', array($this, 'mainmenu'));
+        add_action('admin_head', array($this, 'licenseMenuStyle'));
         /* The retired field list, sent to the screen that replaced it. On
            admin_init because the module controllers run while the page is being
            drawn, and a redirect from there is a "headers already sent" warning
@@ -94,6 +95,21 @@ class jssupportticketadmin {
         }
         wp_safe_redirect(admin_url('admin.php?page=agentautoassign&jstlay=availability'));
         exit;
+    }
+
+    /**
+     * Keep "License & Add-ons" and its update count on one line in WordPress's
+     * own left menu. The menu is 160px wide, and with the bubble the item is
+     * just too long, so WordPress wrapped the count onto a second line. Only
+     * that one link is touched; printed on every admin page because the menu
+     * is on every admin page, and only for those who see the item.
+     */
+    function licenseMenuStyle() {
+        if (!current_user_can('manage_options')) {
+            return;
+        }
+        echo '<style id="jsst-license-menu">#adminmenu a[href$="jstlay=license"]{white-space:nowrap}'
+            . '#adminmenu a[href$="jstlay=license"] .update-plugins{margin-left:4px}</style>' . "\n";
     }
 
     function mainmenu() {
@@ -204,6 +220,15 @@ class jssupportticketadmin {
                 $jsst_lp_mark = ((JSSTlicense::hasKey() && !JSSTlicense::isActive())
                     || (class_exists('JSSTlicencegate') && array() !== JSSTlicencegate::gated()))
                     ? ' <span class="update-plugins"><span class="plugin-count">!</span></span>' : '';
+                /* And how many add-ons have an update waiting, the same bubble
+                   WordPress puts on Plugins. From the cached report only. */
+                $jsst_lp_updates = method_exists('JSSTlicense', 'pendingUpdateCount') ? JSSTlicense::pendingUpdateCount() : 0;
+                if ($jsst_lp_updates > 0) {
+                    $jsst_lp_mark .= ' <span class="update-plugins count-' . (int) $jsst_lp_updates . '" title="' . esc_attr(sprintf(
+                        /* translators: %d: number of add-ons with an update */
+                        _n('%d add-on update available', '%d add-on updates available', $jsst_lp_updates, 'js-support-ticket'), $jsst_lp_updates))
+                        . '"><span class="plugin-count">' . (int) $jsst_lp_updates . '</span></span>';
+                }
                 add_submenu_page('jssupportticket', // parent slug
                         esc_html(__('License & Add-ons', 'js-support-ticket')), // Page title
                         esc_html(__('License & Add-ons', 'js-support-ticket')) . $jsst_lp_mark, // menu title

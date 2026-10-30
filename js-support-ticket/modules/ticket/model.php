@@ -425,6 +425,13 @@ class JSSTticketModel {
         }
         $this->getTicketListOrdering($jsst_sort);
         $this->getTicketListSorting($jsst_sort);
+        /* Within the same status (or priority, subject...), newest first. With
+           no tie-breaker MySQL returned them oldest first, so a customer's new
+           ticket landed at the bottom of My Tickets. */
+        if (jssupportticketphplib::JSST_strpos((string) jssupportticket::$_ordering, 'ticket.created') === false
+                && jssupportticketphplib::JSST_strpos((string) jssupportticket::$_ordering, 'ticket.id') === false) {
+            jssupportticket::$_ordering .= ', ticket.created DESC';
+        }
     }
 
     function combineOrSingleSearch() {
@@ -1042,7 +1049,7 @@ class JSSTticketModel {
         jssupportticket::$jsst_data['ticket_attachment'] = JSSTincluder::getJSModel('attachment')->getAttachmentForReply($jsst_id, 0);
         $this->getTicketHistory($jsst_id);
 
-        if(jssupportticket::$jsst_data[0]->uid > 0){
+        if(!empty(jssupportticket::$jsst_data[0]) && jssupportticket::$jsst_data[0]->uid > 0){
 
             //count all ticket of user
             $jsst_query = "SELECT COUNT(id) FROM `" .jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE `uid` = %d";
@@ -1575,7 +1582,23 @@ class JSSTticketModel {
         $jsst_userfield = JSSTincluder::getJSModel('fieldordering')->getUserfieldsfor(1,$jsst_data['multiformid']);
         $jsst_params = array();
         $jsst_maxfilesizeallowed = jssupportticket::$_config['file_maximum_size'];
+        /* A question the form's conditions hide is not answered, so it is not
+           saved either. The browser only hides it - whatever was typed before a
+           later answer hid it is still posted - and JSSTforms::validate() already
+           ignores it for "required". Saved as unanswered, on a new ticket and
+           on an edit alike: an edit that hides a question clears its old
+           answer too, so the ticket page, e-mails and exports - which show every
+           stored field - never show an answer the conditions say does not
+           apply. Only for this plugin's own form post, the same marker
+           JSSTforms::onValidate() uses: a ticket from the REST API, e-mail
+           piping or an automation answers no form. */
+        // phpcs:ignore WordPress.Security.NonceVerification.Missing -- reading a marker, not acting on it; the form's own handler verifies.
+        $jsst_formpost = (isset($_POST['form_request']) && $_POST['form_request'] === 'jssupportticket');
+        $jsst_formlogic = ($jsst_formpost && class_exists('JSSTforms')) ? JSSTforms::logic((int) $jsst_data['multiformid']) : array();
         foreach ($jsst_userfield AS $jsst_ufobj) {
+            if ($jsst_formlogic && !JSSTforms::isVisible($jsst_ufobj->field, $jsst_formlogic, $jsst_data)) {
+                continue;
+            }
             $jsst_vardata = '';
             if($jsst_ufobj->userfieldtype == 'file'){
                 if(isset($jsst_data[$jsst_ufobj->field.'_1']) && $jsst_data[$jsst_ufobj->field.'_1']== 0){
@@ -1608,7 +1631,7 @@ class JSSTticketModel {
 
                 if(!empty($jsst_oParams)){
                     $jsst_oParams = json_decode($jsst_oParams,true);
-                    $jsst_unpublihsedFields = JSSTincluder::getJSModel('fieldordering')->getUserUnpublishFieldsfor(1);
+                    $jsst_unpublihsedFields = JSSTincluder::getJSModel('fieldordering')->getUserUnpublishFieldsfor(1, $jsst_data['multiformid']);
                     foreach($jsst_unpublihsedFields AS $jsst_field){
                         if(isset($jsst_oParams[$jsst_field->field])){
                             $jsst_params[$jsst_field->field] = $jsst_oParams[$jsst_field->field];
@@ -1703,7 +1726,7 @@ class JSSTticketModel {
             $jsst_data['ticketid'] = $jsst_ticketid;
             if($jsst_data['ticketviaemail'] != 1){ // since ticket via emial attacments are handled saprately
                JSSTincluder::getJSModel('attachment')->storeAttachments($jsst_data);
-               JSSTmessage::setMessage(esc_html(__('Ticket created', 'js-support-ticket')), 'updated');
+               JSSTmessage::setMessage($jsst_isedit ? esc_html(__('Ticket updated', 'js-support-ticket')) : esc_html(__('Ticket created', 'js-support-ticket')), 'updated');
 
                //removing custom field attachments
                 if($jsst_customflagfordelete == true){
@@ -1927,6 +1950,12 @@ class JSSTticketModel {
                 JSSTmessage::setMessage(esc_html(__('You are not allowed', 'js-support-ticket')), 'error', 'agent-permissions');
                 return;
             }
+            // The permission says what kind of work; this says which tickets.
+            // Without it an agent could act on a ticket they cannot open.
+            if (!$this->validateTicketDetailForStaff($jsst_id)) {
+                JSSTmessage::setMessage(esc_html(__('You are not allowed', 'js-support-ticket')), 'error', 'agent-permissions');
+                return;
+            }
         }
         if ($this->canRemoveTicket($jsst_id)) {
             jssupportticket::$jsst_data['ticketid'] = $this->getTrackingIdById($jsst_id);
@@ -2036,18 +2065,6 @@ class JSSTticketModel {
 
         if (!is_numeric($jsst_id)) return false;
 
-        // --- INITIALIZE WP_FILESYSTEM ---
-        global $wp_filesystem;
-        if (!function_exists('wp_handle_upload')) {
-            do_action('jssupportticket_load_wp_file');
-            WP_Filesystem();
-        }
-        $jsst_wp_filesystem = $wp_filesystem;
-
-        $jsst_datadirectory = jssupportticket::$_config['data_directory'];
-        $jsst_maindir = wp_upload_dir();
-        $jsst_mainpath = $jsst_maindir['basedir'] . '/' . $jsst_datadirectory . '/attachmentdata';
-
         // Using prepare with your specific prefix format
         $jsst_query = jssupportticket::$_db->prepare(
             "SELECT attachmentdir FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE id = %d",
@@ -2055,22 +2072,20 @@ class JSSTticketModel {
         );
         $jsst_foldername = jssupportticket::$_db->get_var($jsst_query);
 
+        /* The folder goes with plain PHP (JSSTattachmentserver), not through
+           WP_Filesystem: that was only set up when wp_handle_upload() did not
+           exist yet - never in wp-admin - and on a host without direct file
+           access it is an FTP object that never connected; either way the
+           delete stopped with a fatal error. The attachment rows go with the
+           ticket whether or not its folder was still there, so a folder
+           removed by hand no longer leaves them behind. */
         if (!empty($jsst_foldername)) {
-            $jsst_folder_path = $jsst_mainpath . '/ticket/' . $jsst_foldername;
-
-            // Use WP_Filesystem methods instead of file_exists, glob, unlink, and rmdir
-            if ($jsst_wp_filesystem->exists($jsst_folder_path)) {
-                // 'true' makes the delete recursive, clearing all files and the folder safely
-                $jsst_wp_filesystem->delete($jsst_folder_path, true);
-
-                // Secure DELETE query
-                $jsst_delete_query = jssupportticket::$_db->prepare(
-                    "DELETE FROM `" . jssupportticket::$_db->prefix . "js_ticket_attachments` WHERE ticketid = %d",
-                    $jsst_id
-                );
-                jssupportticket::$_db->query($jsst_delete_query);
-            }
+            JSSTattachmentserver::deleteTicketFolder($jsst_foldername);
         }
+        jssupportticket::$_db->query(jssupportticket::$_db->prepare(
+            "DELETE FROM `" . jssupportticket::$_db->prefix . "js_ticket_attachments` WHERE ticketid = %d",
+            $jsst_id
+        ));
     }
 
     private function canRemoveTicket($jsst_id) {
@@ -2235,6 +2250,12 @@ class JSSTticketModel {
             if ( in_array('agent',jssupportticket::$_active_addons) && JSSTincluder::getJSModel('agent')->isUserStaff()) {
                 $jsst_allowed = JSSTincluder::getJSModel('userpermissions')->checkPermissionGrantedForTask('Close Ticket');
                 if ($jsst_allowed != true) {
+                    JSSTmessage::setMessage(esc_html(__('You are not allowed', 'js-support-ticket')), 'error', 'agent-permissions');
+                    return;
+                }
+                // The permission says what kind of work; this says which tickets.
+                // Without it an agent could act on a ticket they cannot open.
+                if (!$this->validateTicketDetailForStaff($jsst_id)) {
                     JSSTmessage::setMessage(esc_html(__('You are not allowed', 'js-support-ticket')), 'error', 'agent-permissions');
                     return;
                 }
@@ -2535,6 +2556,12 @@ class JSSTticketModel {
                 JSSTmessage::setMessage(esc_html(__('Your are not allowed', 'js-support-ticket')), 'updated');
                 return;
             }
+            // The permission says what kind of work; this says which tickets.
+            // Without it an agent could act on a ticket they cannot open.
+            if (!$this->validateTicketDetailForStaff($jsst_ticketid)) {
+                JSSTmessage::setMessage(esc_html(__('You are not allowed', 'js-support-ticket')), 'error', 'agent-permissions');
+                return;
+            }
         } elseif (!JSSTroles::canChangeTicketState()) {
             JSSTmessage::setMessage(esc_html(__('Your are not allowed', 'js-support-ticket')), 'error');
             return;
@@ -2600,7 +2627,21 @@ class JSSTticketModel {
         if (!$jsst_bysystem) {
             if ( in_array('agent',jssupportticket::$_active_addons) && JSSTincluder::getJSModel('agent')->isUserStaff()) {
                 $jsst_allow = JSSTincluder::getJSModel('userpermissions')->checkPermissionGrantedForTask('Assign Ticket To Agent');
+                if ($jsst_allow != true && (int) $jsst_data['staffid'] === 0) {
+                    /* Giving back a ticket that is yours is "Release Ticket":
+                       an agent may hold it without being allowed to assign
+                       tickets to other people. */
+                    $jsst_mystaffid = (int) JSSTincluder::getJSModel('agent')->getStaffId(JSSTincluder::getObjectClass('user')->uid());
+                    $jsst_holder = (int) $this->getStaffIdById($jsst_ticketid);
+                    $jsst_allow = $jsst_mystaffid > 0 && $jsst_holder === $jsst_mystaffid
+                        && JSSTincluder::getJSModel('userpermissions')->checkPermissionGrantedForTask('Release Ticket');
+                }
                 if ($jsst_allow != true) {
+                    JSSTmessage::setMessage(esc_html(__('You are not allowed', 'js-support-ticket')), 'error', 'agent-permissions');
+                    return;
+                }
+                // The permission says what kind of work; this says which tickets.
+                if (!$this->validateTicketDetailForStaff($jsst_ticketid)) {
                     JSSTmessage::setMessage(esc_html(__('You are not allowed', 'js-support-ticket')), 'error', 'agent-permissions');
                     return;
                 }
@@ -2612,10 +2653,14 @@ class JSSTticketModel {
         $jsst_sendEmail = true;
         $jsst_date = date_i18n('Y-m-d H:i:s');
 
+        $jsst_released = ((int) $jsst_data['staffid'] === 0);
         $jsst_row = JSSTincluder::getJSTable('tickets');
         if ($jsst_row->update(array('id' => $jsst_ticketid, 'staffid' => $jsst_data['staffid'], 'updated' => $jsst_date))) {
-            JSSTmessage::setMessage(esc_html(__('Assigned to agent', 'js-support-ticket')), 'updated');
+            JSSTmessage::setMessage($jsst_released ? esc_html(__('The ticket has been released', 'js-support-ticket')) : esc_html(__('Assigned to agent', 'js-support-ticket')), 'updated');
             $jsst_messagetype = esc_html(__('Successfully', 'js-support-ticket'));
+            if ($jsst_released) {
+                $jsst_sendEmail = false; // nobody to tell about an assignment to nobody
+            }
         } else {
             JSSTincluder::getJSModel('systemerror')->addSystemError(); // if there is an error add it to system errorrs
             JSSTmessage::setMessage(esc_html(__('Not assigned to agent', 'js-support-ticket')), 'error');
@@ -2626,8 +2671,8 @@ class JSSTticketModel {
         /* for activity log */
         $jsst_current_user = JSSTincluder::getObjectClass('user')->getJSSTCurrentUser(); // to get current user name
         $jsst_currentUserName = isset($jsst_current_user->display_name) ? $jsst_current_user->display_name : esc_html(__('Guest', 'js-support-ticket'));
-        $jsst_eventtype = esc_html(__('Assign Ticket To Agent', 'js-support-ticket'));
-        $jsst_message = esc_html(__('Ticket is assigned to agent by', 'js-support-ticket')) . " ( " . esc_html($jsst_currentUserName) . " ) ";
+        $jsst_eventtype = $jsst_released ? esc_html(__('Release Ticket', 'js-support-ticket')) : esc_html(__('Assign Ticket To Agent', 'js-support-ticket'));
+        $jsst_message = ($jsst_released ? esc_html(__('Ticket is released by', 'js-support-ticket')) : esc_html(__('Ticket is assigned to agent by', 'js-support-ticket'))) . " ( " . esc_html($jsst_currentUserName) . " ) ";
         if(JSSTmergedaddon::featureEnabled('tickethistory')){
             JSSTincluder::getJSModel('tickethistory')->addActivityLog($jsst_ticketid, 1, $jsst_eventtype, $jsst_message, $jsst_messagetype);
         }
@@ -2665,6 +2710,12 @@ class JSSTticketModel {
         if ( in_array('agent',jssupportticket::$_active_addons) && JSSTincluder::getJSModel('agent')->isUserStaff()) {
             $jsst_allow = JSSTincluder::getJSModel('userpermissions')->checkPermissionGrantedForTask('Change Ticket Priority');
             if ($jsst_allow == 0) {
+                JSSTmessage::setMessage(esc_html(__('You are not allowed', 'js-support-ticket')), 'error', 'agent-permissions');
+                return;
+            }
+            // The permission says what kind of work; this says which tickets.
+            // Without it an agent could act on a ticket they cannot open.
+            if (!$this->validateTicketDetailForStaff($jsst_id)) {
                 JSSTmessage::setMessage(esc_html(__('You are not allowed', 'js-support-ticket')), 'error', 'agent-permissions');
                 return;
             }
@@ -2802,6 +2853,12 @@ class JSSTticketModel {
                 JSSTmessage::setMessage(esc_html(__('You are not allowed', 'js-support-ticket')), 'error', 'agent-permissions');
                 return;
             }
+            // The permission says what kind of work; this says which tickets.
+            // Without it an agent could act on a ticket they cannot open.
+            if (!$this->validateTicketDetailForStaff($jsst_data['ticketid'])) {
+                JSSTmessage::setMessage(esc_html(__('You are not allowed', 'js-support-ticket')), 'error', 'agent-permissions');
+                return;
+            }
         } elseif (!current_user_can('manage_options')) {
             JSSTmessage::setMessage(esc_html(__('You are not allowed', 'js-support-ticket')), 'error', 'agent-permissions');
             return;
@@ -2836,6 +2893,12 @@ class JSSTticketModel {
         if ( in_array('agent',jssupportticket::$_active_addons) && JSSTincluder::getJSModel('agent')->isUserStaff()) {
             $jsst_allowed = JSSTincluder::getJSModel('userpermissions')->checkPermissionGrantedForTask('Reopen Ticket');
             if ($jsst_allowed != true) {
+                JSSTmessage::setMessage(esc_html(__('You are not allowed', 'js-support-ticket')), 'error', 'agent-permissions');
+                return;
+            }
+            // The permission says what kind of work; this says which tickets.
+            // Without it an agent could act on a ticket they cannot open.
+            if (!$this->validateTicketDetailForStaff($jsst_ticketid)) {
                 JSSTmessage::setMessage(esc_html(__('You are not allowed', 'js-support-ticket')), 'error', 'agent-permissions');
                 return;
             }
@@ -2973,6 +3036,12 @@ class JSSTticketModel {
         if ( in_array('agent',jssupportticket::$_active_addons) && JSSTincluder::getJSModel('agent')->isUserStaff()) {
             $jsst_allow = JSSTincluder::getJSModel('userpermissions')->checkPermissionGrantedForTask('Mark In Progress');
             if ($jsst_allow != true) {
+                JSSTmessage::setMessage(esc_html(__('You are not allowed', 'js-support-ticket')), 'error', 'agent-permissions');
+                return;
+            }
+            // The permission says what kind of work; this says which tickets.
+            // Without it an agent could act on a ticket they cannot open.
+            if (!$this->validateTicketDetailForStaff($jsst_ticketid)) {
                 JSSTmessage::setMessage(esc_html(__('You are not allowed', 'js-support-ticket')), 'error', 'agent-permissions');
                 return;
             }
@@ -3832,8 +3901,17 @@ class JSSTticketModel {
         if (! wp_verify_nonce( $jsst_nonce, 'is-field-required-'.$jsst_field) ) {
             die( esc_html__( 'Security check Failed', 'js-support-ticket' ) );
         }
+        /* The form the page is showing: forms share field names, and one form
+           can require a question another leaves optional. */
+        $jsst_formid = absint(JSSTrequest::getVar('multiformid'));
         $jsst_query = "SELECT required  FROM " . jssupportticket::$_db->prefix . "js_ticket_fieldsordering WHERE  field =%s";
-        return jssupportticket::$_db->get_var(jssupportticket::$_db->prepare($jsst_query, $jsst_field));
+        $jsst_args = array($jsst_field);
+        if ($jsst_formid > 0) {
+            $jsst_query .= " AND multiformid = %d";
+            $jsst_args[] = $jsst_formid;
+        }
+        $jsst_query .= " ORDER BY published DESC, id ASC LIMIT 1";
+        return jssupportticket::$_db->get_var(jssupportticket::$_db->prepare($jsst_query, $jsst_args));
     }
 
     function getClosedBy($jsst_id){
@@ -3911,9 +3989,16 @@ class JSSTticketModel {
 
         $jsst_agentquery = "";
         if (in_array('agent', jssupportticket::$_active_addons) && JSSTincluder::getJSModel('agent')->isUserStaff()) {
-            $jsst_allowed = JSSTincluder::getJSModel('userpermissions')->checkPermissionGrantedForTask('Limit AI Replies to Agent-Assigned Tickets');
+            $jsst_staffid = absint(JSSTincluder::getJSModel('agent')->getStaffId(JSSTincluder::getObjectClass('user')->uid()));
+            /* Was permission 86; now a visibility setting on the role and the
+               agent. The old task is still asked when an older Agents add-on is
+               the one installed. */
+            if (class_exists('JSSTvisibility') && method_exists('JSSTvisibility', 'limitsAiReplies')) {
+                $jsst_allowed = JSSTvisibility::limitsAiReplies($jsst_staffid);
+            } else {
+                $jsst_allowed = JSSTincluder::getJSModel('userpermissions')->checkPermissionGrantedForTask('Limit AI Replies to Agent-Assigned Tickets');
+            }
             if ($jsst_allowed) {
-                $jsst_staffid = absint(JSSTincluder::getJSModel('agent')->getStaffId(JSSTincluder::getObjectClass('user')->uid()));
                 $jsst_agentquery = " AND (t.staffid = %d OR t.departmentid IN (
                     SELECT dept.departmentid
                     FROM `" . jssupportticket::$_db->prefix . "js_ticket_acl_user_access_departments` AS dept
@@ -4372,13 +4457,11 @@ class JSSTticketModel {
             $jsst_results = $this->customerCannedOnly($jsst_results);
         }
 
-        /* A question somebody finished typing that nothing could answer is the
-           purest gap signal in the product - their own words, before they gave
-           up and filed a ticket. Recorded only for a settled question, or the
-           table would fill with prefixes of one. (Roadmap 6.0-AI-12) */
-        if ($jsst_settled && empty($jsst_results) && class_exists('JSSTaigaps')) {
-            JSSTaigaps::record(JSSTaigaps::KIND_SEARCH, $jsst_text);
-        }
+        /* No gap is recorded here any more. "Settled" only means the customer
+           paused typing, so the table filled with half-typed text and the same
+           question twice ("this is ticket 01", "this is ticket 01 this is
+           ticket 01"). The gap is recorded when the ticket is actually
+           submitted - JSSTaigaps::onTicketCreated(). */
 
         echo wp_json_encode($jsst_results);
         wp_die();
@@ -4398,6 +4481,58 @@ class JSSTticketModel {
      * The add-on returns arrays keyed 'type'; core's own search returns
      * objects carrying 'content_type'. Both are read.
      */
+    /** Longest reply shown in full on the form, in characters of text. */
+    const CANNED_ANSWER_MAX = 4000;
+
+    /**
+     * A canned reply as HTML a customer's page may show.
+     *
+     * Its structure is kept - numbered steps, lists and headings - and nothing
+     * else: a short allow-list through wp_kses(), which also drops scripts,
+     * event handlers and javascript: links. Headings come down to h3-h5, so a
+     * reply's h1 does not outshout the form, and links open on their own tab.
+     * Cut at CANNED_ANSWER_MAX characters of text, with "…", only when longer.
+     */
+    private static function cannedAnswerHtml($jsst_html) {
+        $jsst_html = (string) $jsst_html;
+        if (strpos($jsst_html, '<') === false) {
+            $jsst_html = wpautop($jsst_html); // plain text: keep its paragraphs and line breaks
+        }
+        // Gone with what is inside them, not left behind as stray text.
+        $jsst_html = preg_replace('#<(script|style|noscript|iframe|object|svg|template)\b[^>]*>.*?</\1\s*>#is', '', $jsst_html);
+        $jsst_html = preg_replace('#<(/?)h[12](\s[^>]*)?>#i', '<$1h3>', $jsst_html);
+        $jsst_html = preg_replace('#<(/?)h6(\s[^>]*)?>#i', '<$1h5>', $jsst_html);
+        $jsst_allowed = array(
+            'p' => array(), 'br' => array(), 'strong' => array(), 'b' => array(), 'em' => array(), 'i' => array(),
+            'ul' => array(), 'ol' => array(), 'li' => array(), 'h3' => array(), 'h4' => array(), 'h5' => array(),
+            'a' => array('href' => array(), 'title' => array()),
+        );
+        $jsst_html = trim(wp_kses($jsst_html, $jsst_allowed));
+        if (mb_strlen(wp_strip_all_tags($jsst_html)) > self::CANNED_ANSWER_MAX) {
+            // Cut by text length, never inside a tag, then close what was open.
+            $jsst_out = '';
+            $jsst_count = 0;
+            foreach (preg_split('/(<[^>]*>)/', $jsst_html, -1, PREG_SPLIT_DELIM_CAPTURE | PREG_SPLIT_NO_EMPTY) as $jsst_part) {
+                if ($jsst_part[0] === '<') { $jsst_out .= $jsst_part; continue; }
+                $jsst_left = self::CANNED_ANSWER_MAX - $jsst_count;
+                if (mb_strlen($jsst_part) >= $jsst_left) { $jsst_out .= mb_substr($jsst_part, 0, $jsst_left) . '…'; break; }
+                $jsst_out .= $jsst_part;
+                $jsst_count += mb_strlen($jsst_part);
+            }
+            $jsst_html = force_balance_tags($jsst_out);
+        }
+        // A link stays a link only to a web page or an e-mail address; any
+        // other (what wp_kses() left of javascript: and the like) is its text.
+        // target and rel are added here, after wp_kses(), so they are this
+        // code's attributes, not the reply's.
+        return preg_replace_callback('#<a\s[^>]*>(.*?)</a>#is', function ($jsst_m) {
+            if (!preg_match('#\shref="((?:https?://|mailto:)[^"]*)"#i', $jsst_m[0], $jsst_href)) {
+                return $jsst_m[1];
+            }
+            return '<a href="' . esc_url($jsst_href[1]) . '" target="_blank" rel="noopener nofollow">' . $jsst_m[1] . '</a>';
+        }, $jsst_html);
+    }
+
     private function customerCannedOnly($jsst_results) {
         $jsst_typeof = function ($jsst_item) {
             $jsst_item = (array) $jsst_item;
@@ -4418,15 +4553,22 @@ class JSSTticketModel {
             $jsst_id = (int) ((array) $jsst_item)['id'];
             if (!isset($jsst_allowed[$jsst_id])) continue;
 
-            $jsst_text = str_replace('{site_name}', get_bloginfo('name'), $jsst_allowed[$jsst_id]);
-            $jsst_text = preg_replace('/\{[a-z0-9_]+\}/i', '', $jsst_text);
-            $jsst_text = trim(preg_replace('/\s+([,.!?])/', '$1', preg_replace('/\s+/', ' ', wp_strip_all_tags($jsst_text))));
+            $jsst_raw = str_replace('{site_name}', get_bloginfo('name'), $jsst_allowed[$jsst_id]);
+            $jsst_raw = preg_replace('/\{[a-z0-9_]+\}/i', '', $jsst_raw);
+            // A space where a block ends, or "firmato.</p><h4>SPID" previews as "firmato.SPID".
+            $jsst_spaced = preg_replace('#</(p|div|li|h[1-6]|ol|ul|blockquote|tr|td|th)>|<br\s*/?>#i', '$0 ', $jsst_raw);
+            $jsst_text = trim(preg_replace('/\s+([,.!?])/', '$1', preg_replace('/\s+/', ' ', wp_strip_all_tags($jsst_spaced))));
             $jsst_text = wp_html_excerpt($jsst_text, 600, '…');
+            // The whole reply, for the card's "Show answer": the two-line
+            // excerpt is only the preview, and a saved reply has no page.
+            $jsst_answer = self::cannedAnswerHtml($jsst_raw);
             if (is_array($jsst_item)) {
                 $jsst_item['excerpt'] = $jsst_text;
+                $jsst_item['answer_html'] = $jsst_answer;
                 unset($jsst_item['matched']);
             } else {
                 $jsst_item->excerpt = $jsst_text;
+                $jsst_item->answer_html = $jsst_answer;
                 unset($jsst_item->matched);
             }
             $jsst_out[] = $jsst_item;
@@ -4552,6 +4694,84 @@ class JSSTticketModel {
     /** Option listing the sources whose table and indexes the search can use. */
     const SUGGESTION_READY_OPTION = 'jsst_ir_sources';
 
+    /** Option holding each source table's storage engine, as key => engine. */
+    const SUGGESTION_ENGINE_OPTION = 'jsst_suggestion_engines';
+
+    /** Each source's full table name, as key => table. */
+    public static function suggestionSourceTables() {
+        $jsst_out = array();
+        foreach (self::instantResolveSources() as $jsst_key => $jsst_def) {
+            $jsst_out[$jsst_key] = jssupportticket::$_db->prefix . $jsst_def['table'];
+        }
+        return $jsst_out;
+    }
+
+    /**
+     * Record which storage engine each source table is on.
+     *
+     * The search has to know, because MyISAM's natural-language FULLTEXT
+     * ignores any word found in half the rows or more - in a table of one or
+     * two canned responses that is every word, so nothing could ever match.
+     * Read here, on admin requests that already look at the schema, so the
+     * search itself never asks information_schema while somebody types.
+     */
+    public static function recordSuggestionEngines() {
+        $jsst_engines = array();
+        foreach (self::suggestionSourceTables() as $jsst_key => $jsst_full) {
+            $jsst_engine = jssupportticket::$_db->get_var(jssupportticket::$_db->prepare(
+                "SELECT ENGINE FROM information_schema.TABLES WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = %s",
+                $jsst_full
+            ));
+            if ($jsst_engine !== null && $jsst_engine !== '') {
+                $jsst_engines[$jsst_key] = (string) $jsst_engine;
+            }
+        }
+        update_option(self::SUGGESTION_ENGINE_OPTION, $jsst_engines, true);
+        return $jsst_engines;
+    }
+
+    /** Below this many rows a source is scored by word counts on any engine. */
+    const SUGGESTION_SMALL_TABLE = 20;
+
+    /**
+     * Is this source table too small for FULLTEXT relevance to mean anything?
+     *
+     * InnoDB scores a word by how rare it is across the table, so in a table
+     * of one to a few rows even a perfect match scores next to nothing (seen
+     * at 0.00000007 with one row, 1.0 with two) - or, now and then, infinity.
+     * Counted by reading at most SUGGESTION_SMALL_TABLE rows, so asking costs
+     * nothing however large the table is.
+     */
+    private static function suggestionSmallTable($jsst_full) {
+        $jsst_rows = (int) jssupportticket::$_db->get_var(
+            "SELECT COUNT(*) FROM (SELECT 1 FROM `" . $jsst_full . "` LIMIT " . (int) self::SUGGESTION_SMALL_TABLE . ") AS jsst_few"
+        );
+        return $jsst_rows < self::SUGGESTION_SMALL_TABLE;
+    }
+
+    /** Is this source's table on MyISAM, as last recorded? */
+    private static function suggestionOnMyisam($jsst_key) {
+        $jsst_engines = (array) get_option(self::SUGGESTION_ENGINE_OPTION, array());
+        return isset($jsst_engines[$jsst_key]) && strcasecmp($jsst_engines[$jsst_key], 'MyISAM') === 0;
+    }
+
+    /**
+     * The search terms as a BOOLEAN MODE query: no 50% rule, and each longer
+     * word matched by its stem the way suggestionOverlap() matches it, so
+     * "passwords" still finds "password". The terms are already plain words;
+     * operator characters are stripped all the same.
+     */
+    private static function suggestionBooleanQuery($jsst_terms) {
+        $jsst_out = array();
+        foreach ((array) $jsst_terms as $jsst_term) {
+            $jsst_term = preg_replace('/[+\-<>()~*"@]+/u', '', (string) $jsst_term);
+            if ($jsst_term === '') continue;
+            $jsst_stem = (mb_strlen($jsst_term) > 4) ? preg_replace('/(ing|ed|es|s)$/u', '', $jsst_term) : $jsst_term;
+            $jsst_out[] = $jsst_stem . '*';
+        }
+        return implode(' ', array_unique($jsst_out));
+    }
+
     /** Each FULLTEXT index on a table, as index name => its column list. */
     private function fulltextIndexes($jsst_table) {
         $jsst_rows = jssupportticket::$_db->get_results(
@@ -4650,6 +4870,7 @@ class JSSTticketModel {
         }
 
         update_option(self::SUGGESTION_READY_OPTION, $jsst_ready, true);
+        self::recordSuggestionEngines();
 
         return $jsst_created;
     }
@@ -4806,9 +5027,57 @@ class JSSTticketModel {
                 . (!empty($jsst_where) ? ' WHERE ' . implode(' AND ', $jsst_where) : '')
                 . " HAVING total_relevance > 0 ORDER BY total_relevance DESC LIMIT 3";
 
-            $jsst_rows = jssupportticket::$_db->get_results(
-                jssupportticket::$_db->prepare($jsst_sql, $jsst_args)
-            );
+            $jsst_wordscore = self::suggestionOnMyisam($jsst_key) || self::suggestionSmallTable($jsst_full);
+            if ($jsst_wordscore) {
+                /* Scored by word counts instead of FULLTEXT relevance, for two
+                   kinds of table. MyISAM: natural-language MATCH ignores every
+                   word found in half the rows or more, which on a table of one
+                   or two canned responses is every word - this source never
+                   matched at all. And any small table: there relevance is next
+                   to nothing even for a perfect match, so the result was cut as
+                   "far below the best". BOOLEAN MODE finds the rows with no 50%
+                   rule; the ranking is the same word counts the rows are
+                   already checked with: title words count three, text words
+                   one, the subject's title words four, and the subject as typed
+                   in the title ten. Larger InnoDB tables keep the query above. */
+                $jsst_bool = self::suggestionBooleanQuery($jsst_terms);
+                $jsst_bwhere = $jsst_where;
+                $jsst_bwhere[0] = "MATCH(`" . $jsst_def['title'] . "`, `" . $jsst_def['body'] . "`) AGAINST (%s IN BOOLEAN MODE)";
+                $jsst_bsql = "SELECT id, `" . $jsst_def['title'] . "` AS title,
+                        SUBSTRING(`" . $jsst_def['body'] . "`, 1, 200) AS excerpt,
+                        SUBSTRING(`" . $jsst_def['body'] . "`, 1, 4000) AS haystack
+                    FROM `" . $jsst_full . "` WHERE " . implode(' AND ', $jsst_bwhere) . " LIMIT 50";
+                $jsst_rows = ($jsst_bool === '') ? array() : jssupportticket::$_db->get_results(
+                    jssupportticket::$_db->prepare($jsst_bsql, $jsst_bool)
+                );
+                if (is_array($jsst_rows)) {
+                    foreach ($jsst_rows as $jsst_brow) {
+                        $jsst_bo = self::suggestionOverlap($jsst_terms, (string) $jsst_brow->title, (string) $jsst_brow->haystack);
+                        $jsst_score = ($jsst_w_title * $jsst_bo['title']) + ($jsst_w_body * $jsst_bo['all']);
+                        if (!empty($jsst_subjectterms)) {
+                            $jsst_so = self::suggestionOverlap($jsst_subjectterms, (string) $jsst_brow->title, '');
+                            $jsst_score += $jsst_w_subject * $jsst_so['title'];
+                        }
+                        if (mb_strlen($jsst_subjectphrase) >= 4 && mb_stripos((string) $jsst_brow->title, $jsst_subjectphrase) !== false) {
+                            $jsst_score += $jsst_w_exact;
+                        }
+                        $jsst_brow->total_relevance = $jsst_score;
+                        $jsst_brow->score_scale = 'words';
+                    }
+                    $jsst_rows = array_values(array_filter($jsst_rows, function ($jsst_brow) {
+                        return $jsst_brow->total_relevance > 0;
+                    }));
+                    usort($jsst_rows, function ($jsst_a, $jsst_b) {
+                        if ($jsst_a->total_relevance == $jsst_b->total_relevance) return 0;
+                        return ($jsst_a->total_relevance > $jsst_b->total_relevance) ? -1 : 1;
+                    });
+                    $jsst_rows = array_slice($jsst_rows, 0, 3);
+                }
+            } else {
+                $jsst_rows = jssupportticket::$_db->get_results(
+                    jssupportticket::$_db->prepare($jsst_sql, $jsst_args)
+                );
+            }
 
             /*
              * A broken source is skipped rather than allowed to take the whole
@@ -4942,15 +5211,35 @@ class JSSTticketModel {
         });
 
         /* A result far below the best one is only there because it shares a
-           word; the best one is what the question is about. Posts carry a
-           fixed 0.5 and are kept by the word rules above instead. */
-        $jsst_top = empty($jsst_results) ? 0 : (float) $jsst_results[0]->total_relevance;
-        if ($jsst_top > 1) {
-            $jsst_floor = $jsst_top * self::SUGGESTION_FLOOR;
-            $jsst_results = array_values(array_filter($jsst_results, function ($jsst_row) use ($jsst_floor) {
-                return ($jsst_row->content_type === 'posts') || ((float) $jsst_row->total_relevance >= $jsst_floor);
-            }));
+           word; the best one is what the question is about. Measured against
+           the best of its own source: relevance from one table cannot be
+           compared with another's (a perfect canned response scored 1.0
+           against an article's 9.4 because its table held two rows, and was
+           cut), nor with word counts. The list is then ordered by that share,
+           ties keeping the order above. Posts carry a fixed 0.5 and are kept
+           by the word rules above instead. */
+        $jsst_tops = array();
+        foreach ($jsst_results as $jsst_row) {
+            if ($jsst_row->content_type === 'posts') continue;
+            $jsst_k = $jsst_row->content_type;
+            $jsst_tops[$jsst_k] = max(isset($jsst_tops[$jsst_k]) ? $jsst_tops[$jsst_k] : 0, (float) $jsst_row->total_relevance);
         }
+        $jsst_kept = array();
+        foreach ($jsst_results as $jsst_i => $jsst_row) {
+            $jsst_row->place = $jsst_i; // ties keep this order on every PHP version
+            if ($jsst_row->content_type === 'posts') { $jsst_row->share = 0.5; $jsst_kept[] = $jsst_row; continue; }
+            $jsst_t = $jsst_tops[$jsst_row->content_type];
+            $jsst_row->share = ($jsst_t > 0) ? ((float) $jsst_row->total_relevance / $jsst_t) : 0;
+            // A FULLTEXT top of 1 or less is too weak to cut against, as before.
+            if (!isset($jsst_row->score_scale) && $jsst_t <= 1) { $jsst_kept[] = $jsst_row; continue; }
+            if ($jsst_row->share >= self::SUGGESTION_FLOOR) $jsst_kept[] = $jsst_row;
+        }
+        usort($jsst_kept, function ($jsst_a, $jsst_b) {
+            if ($jsst_a->share == $jsst_b->share) return $jsst_a->place - $jsst_b->place;
+            return ($jsst_a->share > $jsst_b->share) ? -1 : 1;
+        });
+        foreach ($jsst_kept as $jsst_row) { unset($jsst_row->share, $jsst_row->score_scale, $jsst_row->place); }
+        $jsst_results = $jsst_kept;
 
         return array_slice($jsst_results, 0, $jsst_limit);
     }
@@ -5016,10 +5305,34 @@ class JSSTticketModel {
      */
     public function previewBasicSuggestions($jsst_question) {
         $jsst_question = trim(preg_replace('/\s+/', ' ', (string) $jsst_question));
-        return array(
+        return array_merge(array(
             'terms'   => self::suggestionTerms($jsst_question),
             'results' => $this->getBasicFixSuggestions($jsst_question, true, $jsst_question),
-        );
+        ), self::suggestionSourceReport());
+    }
+
+    /**
+     * What the free search looked in, for the console: the approved sources it
+     * searched, the approved ones it could not (no search index yet), and the
+     * searched ones whose table is still MyISAM. Without this, "nothing
+     * matched" and "nothing was searched" looked exactly alike.
+     */
+    private static function suggestionSourceReport() {
+        $jsst_approved = class_exists('JSSTaisources') ? (array) JSSTaisources::approvedTypes() : array('kb', 'faq', 'canned', 'posts');
+        $jsst_ready = (array) get_option(self::SUGGESTION_READY_OPTION, array());
+        $jsst_out = array('searched' => array(), 'notready' => array(), 'myisam' => array());
+        foreach (self::instantResolveSources() as $jsst_key => $jsst_def) {
+            if (!in_array($jsst_key, $jsst_approved, true)) continue;
+            if ($jsst_def['addon'] !== null && !JSSTmergedaddon::featureEnabled($jsst_def['addon'])) continue;
+            if (!in_array($jsst_key, $jsst_ready, true)) {
+                $jsst_out['notready'][] = $jsst_key;
+                continue;
+            }
+            $jsst_out['searched'][] = $jsst_key;
+            if (self::suggestionOnMyisam($jsst_key)) $jsst_out['myisam'][] = $jsst_key;
+        }
+        if (in_array('posts', $jsst_approved, true)) $jsst_out['searched'][] = 'posts';
+        return $jsst_out;
     }
     
 }

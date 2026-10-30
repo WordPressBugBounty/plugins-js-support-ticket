@@ -84,6 +84,9 @@ class JSSTuser
                 }
             }
             $this->jsst_currentuser = $jsst_currentuser;
+            if ($jsst_currentuser && get_user_meta($jsst_wpuserid, 'jsst_link_guest_tickets', true)) {
+                $this->linkGuestTickets($jsst_wpuserid, $jsst_currentuser);
+            }
         } else { // wp user is not logged in
 //            do_action('jsst_userid_by_sociallogin', $this);
 
@@ -107,6 +110,28 @@ class JSSTuser
      * gets no answer of its own here, and a cookie that matched nobody is a
      * guest like any other visitor.
      */
+    /**
+     * Give a new account the tickets its owner wrote as a guest.
+     *
+     * "My Tickets" lists by uid only, so a customer who wrote in as a guest
+     * and then registered saw an empty list. Only accounts flagged by
+     * jsst_flag_guest_ticket_link() get here - ones whose email address was
+     * proven at sign-up - because matching on an address nobody checked would
+     * hand a stranger's tickets to whoever typed it in.
+     */
+    private function linkGuestTickets($jsst_wpuserid, $jsst_currentuser) {
+        delete_user_meta($jsst_wpuserid, 'jsst_link_guest_tickets');
+        $jsst_email = isset($jsst_currentuser->user_email) ? $jsst_currentuser->user_email : '';
+        if (!is_email($jsst_email) || empty($jsst_currentuser->id)) {
+            return;
+        }
+        $jsst_query = jssupportticket::$_db->prepare(
+            "UPDATE `" . jssupportticket::$_db->prefix . "js_ticket_tickets` SET uid = %d WHERE (uid = 0 OR uid IS NULL) AND email = %s",
+            (int) $jsst_currentuser->id, $jsst_email
+        );
+        jssupportticket::$_db->query($jsst_query);
+    }
+
     function isguest()
     {
         if (isset($_COOKIE['jssupportticket-socialid']) && !empty($_COOKIE['jssupportticket-socialid'])

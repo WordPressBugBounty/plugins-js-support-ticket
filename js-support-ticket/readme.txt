@@ -3,7 +3,7 @@ Contributors: rabilal
 Tags: helpdesk, support ticket, ticketing system, customer support, knowledge base
 Requires at least: 5.5
 Tested up to: 7.1
-Stable tag: 5.0.2
+Stable tag: 5.0.3
 Requires PHP: 7.4
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
@@ -24,7 +24,7 @@ There are no limits on tickets, agents or departments, no per-agent monthly fee 
 
 * **12 paid features are now free, for good.** Ticket history, internal notes, canned responses, help topics, email ban, auto cleanup, ticket limits, export, dashboard widgets, user options, ticket actions and AI Powered Reply moved from paid add-ons into the free plugin.
 * **An AI Agent that answers from what you have already written** (add-on). It reads your knowledge base, FAQs and past replies, shows its sources, says how sure it is, and hands over to a person whenever it should. You choose how far to trust it - suggestions only, drafts for an agent to approve, or answering on its own - and whether it runs on your server, on your own model or with a hosted provider.
-* **Live chat** (add-on, beta). A chat window on your site that answers from your approved content and brings in an agent the moment the customer asks.
+* **Live chat** (add-on). A chat window on your site that answers from your approved content and brings in an agent the moment the customer asks.
 * **Nine add-ons instead of more than thirty.** Grouped by the job you want done, and every paid plan includes all nine.
 * **Companies are free.** Group customers by organisation and email domain.
 * **The help desk speaks your language.** Translated into 17 languages, and the right translation installs itself.
@@ -209,6 +209,19 @@ The [documentation](https://jshelpdesk.com/docs/) covers setup and every add-on,
 
 == Changelog ==
 
+= 5.0.3 =
+Security and reliability release. Full details are in changelog.txt.
+
+* Security: fixed a script injection in the ticket image viewer (reported through Wordfence).
+* Security: stricter permission checks on ticket actions, time logs, internal mail and guest links; files received by e-mail are checked like uploads.
+* Changed: the wp-admin help desk is for administrators and the Help Desk Agent roles only, and the Attachment, Release Ticket, Mail To Agent and Assign Role To User permissions now take effect.
+* Sites upgraded from older versions: a damaged settings table that slowed down wp-admin is repaired automatically.
+* Attachments download on every host, and videos play in the ticket.
+* Quick answers on the ticket form open in full, and are suggested even when there are only a few.
+* "Finish upgrade" no longer repeats without end; it says why an add-on cannot start yet.
+* AI Agent: clearer screens, "never automate" words match whole words, and usage shows real token counts.
+* Faster: help desk styles and scripts load only on help desk pages. Plus smaller fixes; see changelog.txt.
+
 = 5.0.2 =
 Fixes for 5.0.1.
 
@@ -236,7 +249,7 @@ The biggest release in JS Help Desk's history.
 **Highlights**
 * 12 features that used to be paid are now in the free plugin: ticket history, internal notes, canned responses, help topics, email ban, auto cleanup, ticket limits, export, dashboard widgets, user options, ticket actions and AI Powered Reply.
 * New AI Agent (pack): answers from your knowledge base, FAQs and past replies, with sources, confidence, a review mode and a master switch.
-* New live chat (pack, beta) that answers from approved content and hands over to an agent.
+* New live chat (pack) that answers from approved content and hands over to an agent.
 * The paid add-ons are regrouped into nine packs, and every paid plan includes all nine.
 * Companies are now free.
 * 17 languages, installed automatically.
@@ -276,6 +289,9 @@ The biggest release in JS Help Desk's history.
 See the [full changelog](https://plugins.trac.wordpress.org/browser/js-support-ticket/trunk/changelog.txt).
 
 == Upgrade Notice ==
+
+= 5.0.3 =
+Security and reliability release: ticket permission checks, a fix for a script injection reported through Wordfence, automatic repair of a damaged settings table, attachments that download on every host, and quick answers that open in full. Recommended for all sites.
 
 = 5.0.2 =
 Security and bug fixes for 5.0.1: a file deletion issue in the settings is fixed, customers return to the help desk after logging in on the WordPress login page, "View all tickets" includes closed tickets, and e-mail links open on your current help desk page.

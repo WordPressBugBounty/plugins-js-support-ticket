@@ -75,6 +75,7 @@ class JSSTaigaps {
     public static function registerHooks() {
         add_action('admin_init', array(__CLASS__, 'ensureSchema'), 2);
         add_action('jsst_ai_gaps_prune', array(__CLASS__, 'prune'));
+        add_action('jsst-ticketcreate', array(__CLASS__, 'onTicketCreated'), 20);
         // On init, not here: scheduling reads the translated schedule labels.
         add_action('init', array(__CLASS__, 'scheduleprune'));
     }
@@ -225,10 +226,39 @@ class JSSTaigaps {
         }
         $jsst_question = jssupportticketphplib::JSST_substr($jsst_question, 0, 500);
 
-        $jsst_print = md5(self::normalise($jsst_question));
+        /* Nothing a topic can be made of - "that didn't help", "ok", a bare
+           link - is a reaction, not a question an article could answer. */
+        if (!self::terms($jsst_question)) return 0;
+
+        /* The same words typed twice in a row ("x x") are one question. */
+        $jsst_norm = self::normalise($jsst_question);
+        if (preg_match('/^(.{8,}?)(?:\s+\1)+$/u', $jsst_norm, $jsst_m)) {
+            $jsst_norm = $jsst_m[1];
+            $jsst_question = jssupportticketphplib::JSST_substr($jsst_question, 0, jssupportticketphplib::JSST_strlen($jsst_m[1]));
+        }
+
+        $jsst_print = md5($jsst_norm);
         $jsst_seen  = 'jsst_ai_gap_' . $jsst_print;
         if (get_transient($jsst_seen)) return 0;
         set_transient($jsst_seen, 1, MINUTE_IN_SECONDS);
+
+        /* A near-duplicate of a gap from the last 30 days - one contains the
+           other - is the same question, and is not stored twice. Whatever kind
+           it was recorded as: the ticket form and the AI reading the finished
+           ticket record the same question under different kinds, and it was
+           listed as "Asked 2 times" for one ticket. */
+        if (jssupportticketphplib::JSST_strlen($jsst_norm) >= 8) {
+            $jsst_recent = (array) jssupportticket::$_db->get_col(jssupportticket::$_db->prepare(
+                "SELECT question FROM `" . self::table() . "` WHERE created >= %s ORDER BY id DESC LIMIT 300",
+                gmdate('Y-m-d H:i:s', time() - 30 * DAY_IN_SECONDS)));
+            foreach ($jsst_recent as $jsst_old) {
+                $jsst_old = self::normalise($jsst_old);
+                if ($jsst_old === '' || jssupportticketphplib::JSST_strlen($jsst_old) < 8) continue;
+                if (strpos($jsst_norm, $jsst_old) !== false || strpos($jsst_old, $jsst_norm) !== false) {
+                    return 0;
+                }
+            }
+        }
 
         jssupportticket::$_db->insert(self::table(), array(
             'created'     => current_time('Y-m-d H:i:s'),
@@ -241,6 +271,36 @@ class JSSTaigaps {
         ));
 
         return (int) jssupportticket::$_db->insert_id;
+    }
+
+    /**
+     * A submitted ticket the help centre had nothing for is a gap.
+     *
+     * Asked once, when the ticket exists, with the same search the form uses
+     * (the AI Agent's retrieval when it is installed, the free search
+     * otherwise). Retrieval only - nothing is generated and nothing is paid
+     * for. Tickets an agent files for somebody are not a customer failing to
+     * find an answer, and are skipped.
+     */
+    public static function onTicketCreated($jsst_ticket) {
+        if (!is_object($jsst_ticket) || empty($jsst_ticket->id) || !self::available()) return;
+        if (current_user_can('manage_options')
+                || (class_exists('JSSTcapability') && JSSTcapability::actor()['kind'] === JSSTcapability::ACTOR_AGENT)) {
+            return;
+        }
+        $jsst_text = trim((string) $jsst_ticket->subject . ' ' . wp_strip_all_tags((string) $jsst_ticket->message));
+        if ($jsst_text === '') return;
+
+        if (class_exists('JSSTaiagentretriever')) {
+            $jsst_retriever = new JSSTaiagentretriever();
+            $jsst_found = $jsst_retriever->retrieve($jsst_text, array('profile' => 'deflect', 'is_guest' => !is_user_logged_in()));
+        } else {
+            $jsst_preview = JSSTincluder::getJSModel('ticket')->previewBasicSuggestions($jsst_text);
+            $jsst_found = isset($jsst_preview['results']) ? $jsst_preview['results'] : array();
+        }
+        if (empty($jsst_found)) {
+            self::recordForTicket(self::KIND_SEARCH, (int) $jsst_ticket->id);
+        }
     }
 
     /**
@@ -272,6 +332,10 @@ class JSSTaigaps {
     /** Lower case, no punctuation, single spaces - for the fingerprint only. */
     private static function normalise($jsst_text) {
         $jsst_text = jssupportticketphplib::JSST_strtolower((string) $jsst_text);
+        /* A pasted link is not a topic: it became "Http 2026 desk helpdesk". */
+        $jsst_text = preg_replace('#(?:https?:?//?|www\.)\S*#u', ' ', $jsst_text);
+        // What is left of a path once a privacy filter took the host out.
+        $jsst_text = preg_replace('#\S*/\S*#u', ' ', $jsst_text);
         $jsst_text = preg_replace('/[^\p{L}\p{N}\s]+/u', ' ', $jsst_text);
         return trim(preg_replace('/\s+/', ' ', $jsst_text));
     }
@@ -290,6 +354,9 @@ class JSSTaigaps {
             'are', 'was', 'were', 'will', 'would', 'could', 'should', 'please',
             'help', 'need', 'want', 'get', 'got', 'any', 'all', 'but', 'out',
             'been', 'there', 'they', 'them', 'about', 'into', 'than', 'then',
+            /* What is left of "didn't", "doesn't" once the apostrophe goes -
+               a topic called "Didn" came from "that didn't help". */
+            'didn', 'doesn', 'isn', 'wasn', 'aren', 'weren', 'won', 'couldn', 'wouldn', 'shouldn', 'haven', 'hasn',
         ));
 
         /* What the scrubbing left behind is not a topic. A question that had a
@@ -305,6 +372,7 @@ class JSSTaigaps {
         $jsst_out = array();
         foreach (explode(' ', self::normalise($jsst_text)) as $jsst_word) {
             if (jssupportticketphplib::JSST_strlen($jsst_word) < 4) continue;
+            if (ctype_digit($jsst_word)) continue;   // a year or an order number is not a topic
             if (in_array($jsst_word, $jsst_stop, true)) continue;
             if (!in_array($jsst_word, $jsst_out, true)) $jsst_out[] = $jsst_word;
         }
@@ -359,6 +427,9 @@ class JSSTaigaps {
 
         $jsst_clusters = array();
         foreach ((array) $jsst_rows as $jsst_row) {
+            /* Rows recorded before the rule in record() stay stored; they are
+               just not shown as topics. */
+            if (!self::terms($jsst_row->question)) continue;
             $jsst_joined = false;
 
             foreach ($jsst_clusters as &$jsst_cluster) {
@@ -603,10 +674,23 @@ class JSSTaigaps {
         $jsst_out = array('questions' => 0, 'missing' => 0, 'kinds' => array());
         if (!self::available()) return $jsst_out;
 
-        $jsst_rows = jssupportticket::$_db->get_results(jssupportticket::$_db->prepare(
-            "SELECT kind, COUNT(id) AS jsst_total FROM `" . self::table() . "`
-              WHERE created >= %s GROUP BY kind",
-            gmdate('Y-m-d H:i:s', time() - (max(1, (int) $jsst_days) * DAY_IN_SECONDS))));
+        /* Counted with the same rule the list uses, so the figures above it
+           and the topics below it agree: a row with nothing a topic can be
+           made of is stored but not counted. Read in PHP because that rule is
+           not something SQL can say; the window is capped like the list. */
+        $jsst_list = jssupportticket::$_db->get_results(jssupportticket::$_db->prepare(
+            "SELECT kind, question FROM `" . self::table() . "`
+              WHERE created >= %s ORDER BY id DESC LIMIT %d",
+            gmdate('Y-m-d H:i:s', time() - (max(1, (int) $jsst_days) * DAY_IN_SECONDS)), 5000));
+        $jsst_counts = array();
+        foreach ((array) $jsst_list as $jsst_one) {
+            if (!self::terms($jsst_one->question)) continue;
+            $jsst_counts[(string) $jsst_one->kind] = isset($jsst_counts[(string) $jsst_one->kind]) ? $jsst_counts[(string) $jsst_one->kind] + 1 : 1;
+        }
+        $jsst_rows = array();
+        foreach ($jsst_counts as $jsst_kind => $jsst_n) {
+            $jsst_rows[] = (object) array('kind' => $jsst_kind, 'jsst_total' => $jsst_n);
+        }
 
         $jsst_kinds = self::kinds();
         foreach ((array) $jsst_rows as $jsst_row) {

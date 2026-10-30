@@ -277,6 +277,20 @@ class JSSTaiagentController {
             wp_die(esc_html__('You are not allowed', 'js-support-ticket'));
         }
         $jsst_back = admin_url('admin.php?page=aiagent&jstlay=aiagent_settings');
+        /* Back to the tab the form was on, for the small forms that sit on a
+           tab other than the one their fields used to share. */
+        $jsst_tab = (string) JSSTrequest::getVar('tab', 'post', '');
+        if (in_array($jsst_tab, array('AISpend', 'AIAgentAI', 'AIEngine'), true)) {
+            $jsst_back .= '#' . $jsst_tab;
+        }
+
+        /* ---- the agents' Translate button: its own small form now ---- */
+        if (JSSTrequest::getVar('aitranslate', 'post', '') !== '') {
+            update_option('jsst_copilot_language', sanitize_text_field(JSSTrequest::getVar('ailanguage', 'post', '')), false);
+            JSSTmessage::setMessage(esc_html(__('Saved.', 'js-support-ticket')), 'updated');
+            wp_safe_redirect($jsst_back);
+            exit;
+        }
 
         /* ---- the switches ---- */
         if (JSSTrequest::getVar('aiswitches', 'post', '') !== '') {
@@ -362,7 +376,11 @@ class JSSTaiagentController {
                did. It is written under the same option name the Copilot still
                reads, so nothing about how Translate behaves changed - only
                where the box is. */
-            update_option('jsst_copilot_language', sanitize_text_field(JSSTrequest::getVar('ailanguage', 'post', '')), false);
+            /* The box moved to its own form; only written when posted, so
+               saving the engine never clears it. */
+            if (isset($_POST['ailanguage'])) { // phpcs:ignore WordPress.Security.NonceVerification.Missing -- nonce checked at the top of this handler
+                update_option('jsst_copilot_language', sanitize_text_field(JSSTrequest::getVar('ailanguage', 'post', '')), false);
+            }
 
             if (JSSTaiengine::currentId() !== $jsst_chosen) {
                 JSSTaipolicy::record('engine', $jsst_engines[$jsst_chosen]['label']);
@@ -373,11 +391,17 @@ class JSSTaiagentController {
                meaning to use it, so say what still has to happen rather than
                silently saving something that will refuse every request. */
             $jsst_lane = isset($jsst_engines[$jsst_chosen]['lane']) ? $jsst_engines[$jsst_chosen]['lane'] : 'hosted';
+            /* "Also switch on its lane", ticked beside the chosen engine: open
+               that one lane and nothing else. The master switch is untouched. */
+            if (JSSTaipolicy::enabled() && !JSSTaipolicy::allows($jsst_lane)
+                    && JSSTrequest::getVar('openlane_' . $jsst_chosen, 'post', '') !== '') {
+                JSSTaipolicy::setLane($jsst_lane, true);
+            }
             if (!JSSTaipolicy::allows($jsst_lane)) {
                 $jsst_lanes = JSSTaipolicy::lanes();
                 JSSTmessage::setMessage(sprintf(
                     /* translators: %s: the name of an AI lane, for example "Local model" */
-                    esc_html(__('Saved, but nothing will be sent yet: %s is switched off above.', 'js-support-ticket')),
+                    esc_html(__('Saved, but nothing will be sent yet: the %s lane is switched off. Tick "Also switch on" beside the engine, or switch it on under What AI may do.', 'js-support-ticket')),
                     isset($jsst_lanes[$jsst_lane]['label']) ? $jsst_lanes[$jsst_lane]['label'] : $jsst_lane
                 ), 'error');
             } else {
@@ -533,7 +557,10 @@ class JSSTaiagentController {
 
         switch ($jsst_do) {
             case 'approve':
+                // Sending the reply says "Reply posted" itself; one notice is enough.
+                JSSTmessage::mute();
                 $jsst_ok = JSSTaireview::approve($jsst_id, $jsst_note);
+                JSSTmessage::unmute();
                 JSSTmessage::setMessage(
                     $jsst_ok
                         ? esc_html(__('Sent to the customer.', 'js-support-ticket'))
@@ -600,6 +627,10 @@ class JSSTaiagentController {
             wp_die(esc_html__('You are not allowed', 'js-support-ticket'));
         }
         $jsst_back = admin_url('admin.php?page=aiagent&jstlay=aiagent_setup');
+        $jsst_from = (string) wp_get_referer();
+        if (strpos($jsst_from, 'jstlay=aiagent_shadow') !== false) {
+            $jsst_back = admin_url('admin.php?page=aiagent&jstlay=aiagent_shadow');
+        }
         $jsst_do   = sanitize_key(JSSTrequest::getVar('step', '', ''));
 
         switch ($jsst_do) {
@@ -706,6 +737,11 @@ class JSSTaiagentController {
             wp_die(esc_html__('You are not allowed', 'js-support-ticket'));
         }
         $jsst_back = admin_url('admin.php?page=aiagent&jstlay=aiagent_usage');
+        /* Limits and the backup engine are edited on Settings > Spending now;
+           go back to where the form was. */
+        if (JSSTrequest::getVar('back', 'post', '') === 'settings') {
+            $jsst_back = admin_url('admin.php?page=aiagent&jstlay=aiagent_settings') . '#AISpend';
+        }
 
         if (JSSTrequest::getVar('aibudget', 'post', '') !== '') {
             JSSTaiusage::setBudget(array(
@@ -968,9 +1004,16 @@ class JSSTaiagentController {
            question as "when did somebody turn the hosted lane off" and there
            should be one place that answers both. */
         if (class_exists('JSSTaipolicy') && $jsst_before != $jsst_approved) {
+            /* Written with the names people see on Knowledge Sources, not the
+               internal keys, so the Audit line reads as words. */
+            $jsst_srctypes = JSSTaisources::types();
+            $jsst_srcnames = array();
+            foreach ($jsst_approved as $jsst_k) {
+                $jsst_srcnames[] = isset($jsst_srctypes[$jsst_k]['label']) ? wp_strip_all_tags($jsst_srctypes[$jsst_k]['label']) : $jsst_k;
+            }
             JSSTaipolicy::record('sources', empty($jsst_approved)
                 ? esc_html(__('none', 'js-support-ticket'))
-                : implode(', ', $jsst_approved));
+                : implode(', ', $jsst_srcnames));
         }
 
         JSSTmessage::setMessage(

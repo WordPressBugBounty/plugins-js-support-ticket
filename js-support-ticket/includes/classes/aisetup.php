@@ -170,8 +170,22 @@ class JSSTaisetup {
         $jsst_out   = array();
         $jsst_prior = true;   // is everything before this step finished?
 
+        $jsst_checks = array();
         foreach ($jsst_steps as $jsst_key => $jsst_step) {
-            $jsst_check = self::check($jsst_key);
+            $jsst_checks[$jsst_key] = self::check($jsst_key);
+        }
+        /* The trial run is optional. A desk that went live without it showed
+           "Let it answer customers: Done" under "Shadow mode: Waiting", which
+           reads as the steps being out of order. It is marked as skipped. */
+        if (isset($jsst_checks['shadow'], $jsst_checks['live'])
+                && !empty($jsst_checks['live']['done']) && empty($jsst_checks['shadow']['done'])) {
+            $jsst_checks['shadow']['done']     = true;
+            $jsst_checks['shadow']['blocked']  = '';
+            $jsst_checks['shadow']['evidence'] = esc_html(__('Skipped: automatic answering went live without a trial run.', 'js-support-ticket'));
+        }
+
+        foreach ($jsst_steps as $jsst_key => $jsst_step) {
+            $jsst_check = $jsst_checks[$jsst_key];
 
             $jsst_step['key']      = $jsst_key;
             $jsst_step['done']     = $jsst_check['done'];
@@ -218,7 +232,11 @@ class JSSTaisetup {
                 if (!$jsst_on) {
                     $jsst_evidence = esc_html(__('AI is switched off for this site.', 'js-support-ticket'));
                 } elseif (!$jsst_ok) {
-                    $jsst_evidence = esc_html(__('No engine is set up, or the one chosen has no key and no address.', 'js-support-ticket'));
+                    /* The same exact reason the status line gives. */
+                    $jsst_why = class_exists('JSSTainav') ? JSSTainav::status() : array();
+                    $jsst_evidence = !empty($jsst_why['text'])
+                        ? esc_html(trim(str_replace(__('Suggested articles from your own content still work.', 'js-support-ticket'), '', $jsst_why['text'])))
+                        : esc_html(__('No engine is set up, or the one chosen has no key and no address.', 'js-support-ticket'));
                 } else {
                     $jsst_evidence = sprintf(
                         /* translators: %s: the name of the chosen AI engine */
@@ -285,6 +303,11 @@ class JSSTaisetup {
                             esc_html(_n('%s audience', '%s audiences', count($jsst_rules['audiences']), 'js-support-ticket')),
                             number_format_i18n(count($jsst_rules['audiences'])))
                 );
+                /* Say why it is done: a saved check, not the defaults merely existing. */
+                $jsst_evidence = ($jsst_done
+                    ? esc_html(__('Checked and saved on Automatic Answers.', 'js-support-ticket'))
+                    : esc_html(__('Not checked yet: the defaults are in use.', 'js-support-ticket')))
+                    . ' ' . $jsst_evidence;
                 if (!self::check('sources')['done']) {
                     $jsst_blocked = esc_html(__('Approve something for it to answer from first.', 'js-support-ticket'));
                 }
@@ -312,12 +335,20 @@ class JSSTaisetup {
 
             case 'live':
                 if (!class_exists('JSSTairollout')) break;
-                $jsst_done = JSSTairollout::live()
+                $jsst_switched = JSSTairollout::live()
                     && class_exists('JSSTaireview') && JSSTaireview::mode() !== JSSTaireview::MODE_NEVER;
+                /* Done only when answers can really go out. The switch alone
+                   said "Answers are going out" on a site whose engine could
+                   not write one - step 6 done while step 1 was not. */
+                $jsst_done = $jsst_switched && self::check('engine')['done'];
 
-                $jsst_evidence = $jsst_done
-                    ? esc_html(__('Answers are going out.', 'js-support-ticket'))
-                    : esc_html(__('Nothing is sent to a customer without a person.', 'js-support-ticket'));
+                if ($jsst_done) {
+                    $jsst_evidence = esc_html(__('Answers are going out.', 'js-support-ticket'));
+                } elseif ($jsst_switched) {
+                    $jsst_evidence = esc_html(__('Switched on, but nothing can go out until an engine is answering (step 1).', 'js-support-ticket'));
+                } else {
+                    $jsst_evidence = esc_html(__('Nothing is sent to a customer without a person.', 'js-support-ticket'));
+                }
 
                 if (!self::check('shadow')['done']) {
                     $jsst_blocked = esc_html(__('Shadow mode has not produced enough to judge by yet.', 'js-support-ticket'));
@@ -434,7 +465,12 @@ class JSSTaisetup {
      * this have been sent" is core's question: it is the confidence floor, the
      * never-automate rule and the approval mode, all of which are core's.
      */
-    public static function preview($jsst_question, $jsst_remember = true) {
+    /**
+     * @param array $jsst_context Optional. 'channel' => 'chat' asks for a short
+     *                            chat-style answer; 'history' is the
+     *                            conversation so far as plain text.
+     */
+    public static function preview($jsst_question, $jsst_remember = true, $jsst_context = array()) {
         $jsst_question = trim(wp_strip_all_tags((string) $jsst_question));
         if ($jsst_question === '') return false;
 
@@ -443,7 +479,7 @@ class JSSTaisetup {
                          'reason' => esc_html(__('AI is switched off for this site.', 'js-support-ticket')));
         }
 
-        $jsst_answer = apply_filters('jsst_ai_preview_answer', false, $jsst_question);
+        $jsst_answer = apply_filters('jsst_ai_preview_answer', false, $jsst_question, (array) $jsst_context);
         if (!is_array($jsst_answer)) {
             return array('available' => false,
                          'reason' => esc_html(__('No engine on this site can compose an answer, so there is nothing to preview. The AI Agent add-on is what writes them.', 'js-support-ticket')));
@@ -486,6 +522,13 @@ class JSSTaisetup {
         if (class_exists('JSSTaireview') && JSSTaireview::mode() === JSSTaireview::MODE_NEVER) {
             return array('state' => 'held',
                          'text' => esc_html(__('This site proposes only, so it would have waited on the Approvals screen.', 'js-support-ticket')));
+        }
+
+        if (class_exists('JSSTaireview') && JSSTaireview::mode() === JSSTaireview::MODE_ALWAYS) {
+            return array('state' => 'held', 'text' => sprintf(
+                /* translators: %d: the engine's confidence */
+                esc_html(__('It would have waited on the Approvals screen for a person to approve it (%d%% confident). Approvals is set to "Always ask a person first".', 'js-support-ticket')),
+                (int) $jsst_answer['confidence']));
         }
 
         $jsst_floor = class_exists('JSSTairollout') ? JSSTairollout::threshold() : 85;

@@ -56,7 +56,7 @@ JSSTmessage::getMessage();
     </div>
     <div id="jsstadmin-data">
         <?php JSSTlayout::adminPageHeader(array(
-            'title'   => __('Unanswered Questions', 'js-support-ticket'),
+            'title'   => __('Knowledge Sources: Unanswered Questions', 'js-support-ticket'),
             'crumbs'  => array(array('text' => __('AI Agent', 'js-support-ticket'), 'url' => admin_url('admin.php?page=aiagent'))),
         )); ?>
         <div id="jsstadmin-data-wrp">
@@ -221,8 +221,8 @@ JSSTmessage::getMessage();
                                 ?>
                                 <?php if (!empty($jsst_gap['covered'])) { ?>
                                     <span class="jsst-pill jsst-pill-ok"><span class="jsst-dot"></span><?php echo esc_html(__('Answerable now', 'js-support-ticket')); ?></span>
-                                <?php } elseif (empty($jsst_gap['worth'])) { ?>
-                                    <span class="jsst-pill jsst-pill-off"><span class="jsst-dot"></span><?php echo esc_html(__('Asked once', 'js-support-ticket')); ?></span>
+                                <?php } elseif (empty($jsst_gap['worth'])) {
+                                    /* No pill: "Asked once" is already the line under the title. */ ?>
                                 <?php } elseif ($jsst_missing >= $jsst_poor) { ?>
                                     <span class="jsst-pill jsst-pill-bad"><span class="jsst-dot"></span><?php echo esc_html(__('Nothing to answer from', 'js-support-ticket')); ?></span>
                                 <?php } else { ?>

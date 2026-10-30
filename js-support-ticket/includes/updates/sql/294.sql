@@ -2,22 +2,45 @@ REPLACE INTO `#__js_ticket_config` (`configname`, `configvalue`, `configfor`) VA
 REPLACE INTO `#__js_ticket_config` (`configname`, `configvalue`, `configfor`) VALUES ('productversion','294','default');
 
 
-INSERT INTO `#__js_ticket_config` (`configname`, `configvalue`, `configfor`) 
+INSERT IGNORE INTO `#__js_ticket_config` (`configname`, `configvalue`, `configfor`) 
 VALUES ('ticket_replies_ordering', 'ASC', 'ticket');
 
 
-ALTER TABLE `#__js_ticket_fieldsordering` 
-ADD `placeholder` varchar(255) DEFAULT NULL AFTER `section` ,
-ADD `description` varchar(255) DEFAULT NULL AFTER `placeholder` ,
-ADD `readonly` tinyint(4) DEFAULT 0 AFTER `visibleparams` ,
-ADD `search_admin` tinyint(4) DEFAULT NULL AFTER `search_user` ,
-ADD `adminonly` tinyint(1) DEFAULT 0 AFTER `readonly` ,
-ADD `defaultvalue` varchar(255) DEFAULT NULL AFTER `adminonly`;
+-- Each schema change runs only when information_schema says it is missing, so this file is safe to apply twice.
+SET @jsst_sql = (SELECT IF(COUNT(*) = 0, 'ALTER TABLE `#__js_ticket_fieldsordering` ADD `placeholder` varchar(255) DEFAULT NULL AFTER `section`', 'DO 0') FROM information_schema.COLUMNS WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = '#__js_ticket_fieldsordering' AND COLUMN_NAME = 'placeholder');
+PREPARE jsst_stmt FROM @jsst_sql;
+EXECUTE jsst_stmt;
+DEALLOCATE PREPARE jsst_stmt;
+SET @jsst_sql = (SELECT IF(COUNT(*) = 0, 'ALTER TABLE `#__js_ticket_fieldsordering` ADD `description` varchar(255) DEFAULT NULL AFTER `placeholder`', 'DO 0') FROM information_schema.COLUMNS WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = '#__js_ticket_fieldsordering' AND COLUMN_NAME = 'description');
+PREPARE jsst_stmt FROM @jsst_sql;
+EXECUTE jsst_stmt;
+DEALLOCATE PREPARE jsst_stmt;
+SET @jsst_sql = (SELECT IF(COUNT(*) = 0, 'ALTER TABLE `#__js_ticket_fieldsordering` ADD `readonly` tinyint(4) DEFAULT 0 AFTER `visibleparams`', 'DO 0') FROM information_schema.COLUMNS WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = '#__js_ticket_fieldsordering' AND COLUMN_NAME = 'readonly');
+PREPARE jsst_stmt FROM @jsst_sql;
+EXECUTE jsst_stmt;
+DEALLOCATE PREPARE jsst_stmt;
+SET @jsst_sql = (SELECT IF(COUNT(*) = 0, 'ALTER TABLE `#__js_ticket_fieldsordering` ADD `search_admin` tinyint(4) DEFAULT NULL AFTER `search_user`', 'DO 0') FROM information_schema.COLUMNS WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = '#__js_ticket_fieldsordering' AND COLUMN_NAME = 'search_admin');
+PREPARE jsst_stmt FROM @jsst_sql;
+EXECUTE jsst_stmt;
+DEALLOCATE PREPARE jsst_stmt;
+SET @jsst_sql = (SELECT IF(COUNT(*) = 0, 'ALTER TABLE `#__js_ticket_fieldsordering` ADD `adminonly` tinyint(1) DEFAULT 0 AFTER `readonly`', 'DO 0') FROM information_schema.COLUMNS WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = '#__js_ticket_fieldsordering' AND COLUMN_NAME = 'adminonly');
+PREPARE jsst_stmt FROM @jsst_sql;
+EXECUTE jsst_stmt;
+DEALLOCATE PREPARE jsst_stmt;
+SET @jsst_sql = (SELECT IF(COUNT(*) = 0, 'ALTER TABLE `#__js_ticket_fieldsordering` ADD `defaultvalue` varchar(255) DEFAULT NULL AFTER `adminonly`', 'DO 0') FROM information_schema.COLUMNS WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = '#__js_ticket_fieldsordering' AND COLUMN_NAME = 'defaultvalue');
+PREPARE jsst_stmt FROM @jsst_sql;
+EXECUTE jsst_stmt;
+DEALLOCATE PREPARE jsst_stmt;
 
 
-ALTER TABLE `#__js_ticket_tickets` 
-ADD `token` VARCHAR(1000) DEFAULT NULL AFTER `ticketid` ,
-ADD `productid` INT DEFAULT NULL AFTER `customticketno`; 
+SET @jsst_sql = (SELECT IF(COUNT(*) = 0, 'ALTER TABLE `#__js_ticket_tickets` ADD `token` VARCHAR(1000) DEFAULT NULL AFTER `ticketid`', 'DO 0') FROM information_schema.COLUMNS WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = '#__js_ticket_tickets' AND COLUMN_NAME = 'token');
+PREPARE jsst_stmt FROM @jsst_sql;
+EXECUTE jsst_stmt;
+DEALLOCATE PREPARE jsst_stmt;
+SET @jsst_sql = (SELECT IF(COUNT(*) = 0, 'ALTER TABLE `#__js_ticket_tickets` ADD `productid` INT DEFAULT NULL AFTER `customticketno`', 'DO 0') FROM information_schema.COLUMNS WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = '#__js_ticket_tickets' AND COLUMN_NAME = 'productid');
+PREPARE jsst_stmt FROM @jsst_sql;
+EXECUTE jsst_stmt;
+DEALLOCATE PREPARE jsst_stmt;
 
 
 CREATE TABLE IF NOT EXISTS `#__js_ticket_products` (
@@ -28,6 +51,10 @@ CREATE TABLE IF NOT EXISTS `#__js_ticket_products` (
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
 
+
+-- 2.9.4 creates the statuses table, so a missing table means this file has not run before.
+-- The status renumbering and the field defaults below run only then; a second run leaves both alone.
+SET @jsst_294_first = (SELECT COUNT(*) = 0 FROM information_schema.TABLES WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = '#__js_ticket_statuses');
 
 CREATE TABLE IF NOT EXISTS `#__js_ticket_statuses` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -40,7 +67,7 @@ CREATE TABLE IF NOT EXISTS `#__js_ticket_statuses` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=7;
 
 
-INSERT INTO `#__js_ticket_statuses` (`id`, `status`, `statuscolour`, `statusbgcolour`, `sys`, `ordering`)
+INSERT IGNORE INTO `#__js_ticket_statuses` (`id`, `status`, `statuscolour`, `statusbgcolour`, `sys`, `ordering`)
 VALUES (1, 'New', '#FFFFFF', '#5bb12f', 1, 1),
   (2, 'Waiting Reply', '#FFFFFF', '#28abe3', 1, 2),
   (3, 'In Progress', '#FFFFFF', '#69d2e7', 1, 3),
@@ -49,54 +76,50 @@ VALUES (1, 'New', '#FFFFFF', '#5bb12f', 1, 1),
   (6, 'Close Due To Merge', '#FFFFFF', '#ed1c24', 1, 6);
 
 
-UPDATE `#__js_ticket_tickets` SET status = 6 WHERE status = 5;
-UPDATE `#__js_ticket_tickets` SET status = 5 WHERE status = 4;
-UPDATE `#__js_ticket_tickets` SET status = 4 WHERE status = 3;
-UPDATE `#__js_ticket_tickets` SET status = 3 WHERE status = 2;
-UPDATE `#__js_ticket_tickets` SET status = 2 WHERE status = 1;
-UPDATE `#__js_ticket_tickets` SET status = 1 WHERE status = 0;
+-- One step, and only on the real 2.9.4 upgrade: run again, it would move every ticket up a second time.
+UPDATE `#__js_ticket_tickets` SET status = status + 1 WHERE status BETWEEN 0 AND 5 AND @jsst_294_first = 1;
 
 
 UPDATE `#__js_ticket_fieldsordering` SET userfieldtype = 'text', adminonly = 1 WHERE userfieldtype = 'admin_only';
 
 
-UPDATE `#__js_ticket_fieldsordering` SET search_admin = 1 WHERE search_user = 1 AND isuserfield = 1;
+UPDATE `#__js_ticket_fieldsordering` SET search_admin = 1 WHERE search_user = 1 AND isuserfield = 1 AND @jsst_294_first = 1;
 
 
-UPDATE `#__js_ticket_fieldsordering` SET cannotunpublish = 0 WHERE field = 'email';
-UPDATE `#__js_ticket_fieldsordering` SET cannotunpublish = 0 WHERE field = 'fullname';
-UPDATE `#__js_ticket_fieldsordering` SET cannotunpublish = 0 WHERE field = 'priority';
-UPDATE `#__js_ticket_fieldsordering` SET cannotunpublish = 0 WHERE field = 'issuesummary';
+UPDATE `#__js_ticket_fieldsordering` SET cannotunpublish = 0 WHERE field = 'email' AND @jsst_294_first = 1;
+UPDATE `#__js_ticket_fieldsordering` SET cannotunpublish = 0 WHERE field = 'fullname' AND @jsst_294_first = 1;
+UPDATE `#__js_ticket_fieldsordering` SET cannotunpublish = 0 WHERE field = 'priority' AND @jsst_294_first = 1;
+UPDATE `#__js_ticket_fieldsordering` SET cannotunpublish = 0 WHERE field = 'issuesummary' AND @jsst_294_first = 1;
 
 
-UPDATE `#__js_ticket_fieldsordering` SET cannotshowonlisting = 0, showonlisting = 1, cannotsearch = 0, search_admin = 1, search_user = 0 WHERE field = 'fullname';
-UPDATE `#__js_ticket_fieldsordering` SET cannotshowonlisting = 0, showonlisting = 0, cannotsearch = 0, search_admin = 1, search_user = 1 WHERE field = 'email';
-UPDATE `#__js_ticket_fieldsordering` SET cannotshowonlisting = 0, showonlisting = 0, cannotsearch = 0, search_admin = 0, search_user = 0 WHERE field = 'phone';
-UPDATE `#__js_ticket_fieldsordering` SET cannotshowonlisting = 0, showonlisting = 1, cannotsearch = 0, search_admin = 1, search_user = 1 WHERE field = 'department';
-UPDATE `#__js_ticket_fieldsordering` SET cannotshowonlisting = 0, showonlisting = 0, cannotsearch = 0, search_admin = 0, search_user = 0 WHERE field = 'helptopic';
-UPDATE `#__js_ticket_fieldsordering` SET cannotshowonlisting = 0, showonlisting = 1, cannotsearch = 0, search_admin = 1, search_user = 1 WHERE field = 'priority';
-UPDATE `#__js_ticket_fieldsordering` SET cannotshowonlisting = 0, showonlisting = 1, cannotsearch = 1, search_admin = 0, search_user = 0 WHERE field = 'assignto';
-UPDATE `#__js_ticket_fieldsordering` SET cannotshowonlisting = 0, showonlisting = 0, cannotsearch = 0, search_admin = 0, search_user = 0 WHERE field = 'duedate';
-UPDATE `#__js_ticket_fieldsordering` SET cannotshowonlisting = 0, showonlisting = 1, cannotsearch = 0, search_admin = 1, search_user = 1 WHERE field = 'status';
-UPDATE `#__js_ticket_fieldsordering` SET cannotshowonlisting = 1, showonlisting = 0, cannotsearch = 1, search_admin = 0, search_user = 0 WHERE field = 'envatopurchasecode';
+UPDATE `#__js_ticket_fieldsordering` SET cannotshowonlisting = 0, showonlisting = 1, cannotsearch = 0, search_admin = 1, search_user = 0 WHERE field = 'fullname' AND @jsst_294_first = 1;
+UPDATE `#__js_ticket_fieldsordering` SET cannotshowonlisting = 0, showonlisting = 0, cannotsearch = 0, search_admin = 1, search_user = 1 WHERE field = 'email' AND @jsst_294_first = 1;
+UPDATE `#__js_ticket_fieldsordering` SET cannotshowonlisting = 0, showonlisting = 0, cannotsearch = 0, search_admin = 0, search_user = 0 WHERE field = 'phone' AND @jsst_294_first = 1;
+UPDATE `#__js_ticket_fieldsordering` SET cannotshowonlisting = 0, showonlisting = 1, cannotsearch = 0, search_admin = 1, search_user = 1 WHERE field = 'department' AND @jsst_294_first = 1;
+UPDATE `#__js_ticket_fieldsordering` SET cannotshowonlisting = 0, showonlisting = 0, cannotsearch = 0, search_admin = 0, search_user = 0 WHERE field = 'helptopic' AND @jsst_294_first = 1;
+UPDATE `#__js_ticket_fieldsordering` SET cannotshowonlisting = 0, showonlisting = 1, cannotsearch = 0, search_admin = 1, search_user = 1 WHERE field = 'priority' AND @jsst_294_first = 1;
+UPDATE `#__js_ticket_fieldsordering` SET cannotshowonlisting = 0, showonlisting = 1, cannotsearch = 1, search_admin = 0, search_user = 0 WHERE field = 'assignto' AND @jsst_294_first = 1;
+UPDATE `#__js_ticket_fieldsordering` SET cannotshowonlisting = 0, showonlisting = 0, cannotsearch = 0, search_admin = 0, search_user = 0 WHERE field = 'duedate' AND @jsst_294_first = 1;
+UPDATE `#__js_ticket_fieldsordering` SET cannotshowonlisting = 0, showonlisting = 1, cannotsearch = 0, search_admin = 1, search_user = 1 WHERE field = 'status' AND @jsst_294_first = 1;
+UPDATE `#__js_ticket_fieldsordering` SET cannotshowonlisting = 1, showonlisting = 0, cannotsearch = 1, search_admin = 0, search_user = 0 WHERE field = 'envatopurchasecode' AND @jsst_294_first = 1;
 
 
-UPDATE `#__js_ticket_fieldsordering` SET cannotsearch = 0, search_admin = 1, search_user = 1 WHERE field = 'subject';
-UPDATE `#__js_ticket_fieldsordering` SET cannotsearch = 0, search_admin = 0, search_user = 1 WHERE field = 'wcorderid';
-UPDATE `#__js_ticket_fieldsordering` SET cannotsearch = 0, search_admin = 0, search_user = 1 WHERE field = 'eddorderid';
+UPDATE `#__js_ticket_fieldsordering` SET cannotsearch = 0, search_admin = 1, search_user = 1 WHERE field = 'subject' AND @jsst_294_first = 1;
+UPDATE `#__js_ticket_fieldsordering` SET cannotsearch = 0, search_admin = 0, search_user = 1 WHERE field = 'wcorderid' AND @jsst_294_first = 1;
+UPDATE `#__js_ticket_fieldsordering` SET cannotsearch = 0, search_admin = 0, search_user = 1 WHERE field = 'eddorderid' AND @jsst_294_first = 1;
 
 
-UPDATE `#__js_ticket_fieldsordering` SET cannotsearch = 1, search_admin = 0, search_user = 0 WHERE field = 'users';
-UPDATE `#__js_ticket_fieldsordering` SET cannotsearch = 1, search_admin = 0, search_user = 0 WHERE field = 'premade';
-UPDATE `#__js_ticket_fieldsordering` SET cannotsearch = 1, search_admin = 0, search_user = 0 WHERE field = 'issuesummary';
-UPDATE `#__js_ticket_fieldsordering` SET cannotsearch = 1, search_admin = 0, search_user = 0 WHERE field = 'attachments';
-UPDATE `#__js_ticket_fieldsordering` SET cannotsearch = 1, search_admin = 0, search_user = 0 WHERE field = 'internalnotetitle';
-UPDATE `#__js_ticket_fieldsordering` SET cannotsearch = 1, search_admin = 0, search_user = 0 WHERE field = 'rating';
-UPDATE `#__js_ticket_fieldsordering` SET cannotsearch = 1, search_admin = 0, search_user = 0 WHERE field = 'remarks';
+UPDATE `#__js_ticket_fieldsordering` SET cannotsearch = 1, search_admin = 0, search_user = 0 WHERE field = 'users' AND @jsst_294_first = 1;
+UPDATE `#__js_ticket_fieldsordering` SET cannotsearch = 1, search_admin = 0, search_user = 0 WHERE field = 'premade' AND @jsst_294_first = 1;
+UPDATE `#__js_ticket_fieldsordering` SET cannotsearch = 1, search_admin = 0, search_user = 0 WHERE field = 'issuesummary' AND @jsst_294_first = 1;
+UPDATE `#__js_ticket_fieldsordering` SET cannotsearch = 1, search_admin = 0, search_user = 0 WHERE field = 'attachments' AND @jsst_294_first = 1;
+UPDATE `#__js_ticket_fieldsordering` SET cannotsearch = 1, search_admin = 0, search_user = 0 WHERE field = 'internalnotetitle' AND @jsst_294_first = 1;
+UPDATE `#__js_ticket_fieldsordering` SET cannotsearch = 1, search_admin = 0, search_user = 0 WHERE field = 'rating' AND @jsst_294_first = 1;
+UPDATE `#__js_ticket_fieldsordering` SET cannotsearch = 1, search_admin = 0, search_user = 0 WHERE field = 'remarks' AND @jsst_294_first = 1;
 
-UPDATE `#__js_ticket_fieldsordering` SET cannotsearch = 0, search_admin = 0, search_user = 0 WHERE field = 'wcproductid';
-UPDATE `#__js_ticket_fieldsordering` SET cannotsearch = 1, search_admin = 0, search_user = 0 WHERE field = 'eddproductid';
-UPDATE `#__js_ticket_fieldsordering` SET cannotsearch = 0, search_admin = 0, search_user = 0 WHERE field = 'eddlicensekey';
+UPDATE `#__js_ticket_fieldsordering` SET cannotsearch = 0, search_admin = 0, search_user = 0 WHERE field = 'wcproductid' AND @jsst_294_first = 1;
+UPDATE `#__js_ticket_fieldsordering` SET cannotsearch = 1, search_admin = 0, search_user = 0 WHERE field = 'eddproductid' AND @jsst_294_first = 1;
+UPDATE `#__js_ticket_fieldsordering` SET cannotsearch = 0, search_admin = 0, search_user = 0 WHERE field = 'eddlicensekey' AND @jsst_294_first = 1;
 
 
 UPDATE `#__js_ticket_fieldsordering` AS t1
@@ -139,6 +162,7 @@ FROM (
   WHERE multiformid > 0
 ) AS forms
 LEFT JOIN `#__js_ticket_fieldsordering` fo ON fo.multiformid = forms.multiformid
+WHERE NOT EXISTS (SELECT 1 FROM `#__js_ticket_fieldsordering` x WHERE x.field = 'product' AND x.multiformid = forms.multiformid)
 GROUP BY forms.multiformid;
 
 
@@ -162,6 +186,7 @@ FROM (
   WHERE multiformid > 0
 ) AS forms
 LEFT JOIN `#__js_ticket_fieldsordering` fo ON fo.multiformid = forms.multiformid
+WHERE NOT EXISTS (SELECT 1 FROM `#__js_ticket_fieldsordering` x WHERE x.field = 'termsandconditions1' AND x.multiformid = forms.multiformid)
 GROUP BY forms.multiformid;
 
 
@@ -185,6 +210,7 @@ FROM (
   WHERE multiformid > 0
 ) AS forms
 LEFT JOIN `#__js_ticket_fieldsordering` fo ON fo.multiformid = forms.multiformid
+WHERE NOT EXISTS (SELECT 1 FROM `#__js_ticket_fieldsordering` x WHERE x.field = 'termsandconditions2' AND x.multiformid = forms.multiformid)
 GROUP BY forms.multiformid;
 
 
@@ -208,4 +234,5 @@ FROM (
   WHERE multiformid > 0
 ) AS forms
 LEFT JOIN `#__js_ticket_fieldsordering` fo ON fo.multiformid = forms.multiformid
+WHERE NOT EXISTS (SELECT 1 FROM `#__js_ticket_fieldsordering` x WHERE x.field = 'termsandconditions3' AND x.multiformid = forms.multiformid)
 GROUP BY forms.multiformid;

@@ -384,6 +384,30 @@ class JSSTaipolicy {
      * because three separate reassurances read as marketing and one specific
      * sentence reads as a fact.
      */
+    /**
+     * Where AI stands on this site, in one answer every screen shows.
+     *
+     * The Overview, the setup checklist and Live Chat each worked this out
+     * their own way, and on a site with the switch on and no engine ready they
+     * said three different things. Ask this instead.
+     *
+     * @return array state (off|noengine|ready), label, engine, lane
+     */
+    public static function status() {
+        if (!self::enabled()) {
+            return array('state' => 'off', 'engine' => '', 'lane' => '',
+                'label' => esc_html(__('AI is switched off', 'js-support-ticket')));
+        }
+        if (!class_exists('JSSTaiengine') || !JSSTaiengine::usable()) {
+            return array('state' => 'noengine', 'engine' => '', 'lane' => '',
+                'label' => esc_html(__('AI is on, but no engine is ready', 'js-support-ticket')));
+        }
+        return array('state' => 'ready', 'engine' => JSSTaiengine::currentLabel(), 'lane' => JSSTaiengine::currentLane(),
+            'label' => sprintf(
+                /* translators: %s: the name of the AI engine, for example "Zywrap" */
+                esc_html(__('AI is on - %s answers', 'js-support-ticket')), JSSTaiengine::currentLabel()));
+    }
+
     public static function notice() {
         if (!self::enabled()) {
             return esc_html(__('AI is switched off for this site. Nothing is sent anywhere.', 'js-support-ticket'));
@@ -392,10 +416,21 @@ class JSSTaipolicy {
         if (empty($jsst_states[self::LANE_LOCAL]) && empty($jsst_states[self::LANE_HOSTED])) {
             return esc_html(__('Only on-site answers are switched on. No ticket text leaves this server.', 'js-support-ticket'));
         }
-        $jsst_engine = class_exists('JSSTaiengine') ? JSSTaiengine::currentLabel() : '';
-        if ($jsst_engine === '') {
+        /* usable(), not the engine's name: currentLabel() falls back to the
+           first engine and is never empty, so this said "sent to Zywrap" on
+           sites where no engine was set up - while the setup checklist on the
+           next screen said there was none. */
+        if (!class_exists('JSSTaiengine') || !JSSTaiengine::usable()) {
+            /* An engine that is chosen but whose lane is off is not "not set up". */
+            if (class_exists('JSSTaiengine') && !self::allows(JSSTaiengine::currentLane())) {
+                return sprintf(
+                    /* translators: %s: the chosen AI engine, e.g. "Local model" */
+                    esc_html(__('Your engine is %s, but its lane is switched off, so nothing is being sent.', 'js-support-ticket')),
+                    esc_html(JSSTaiengine::currentLabel()));
+            }
             return esc_html(__('No answer engine is set up yet, so nothing is being sent.', 'js-support-ticket'));
         }
+        $jsst_engine = JSSTaiengine::currentLabel();
         return sprintf(
             /* translators: %s: the name of the configured AI engine, for example "Zywrap" */
             esc_html(__('Ticket text an agent or a rule asks about is sent to %s. Stored credentials are removed first.', 'js-support-ticket')),
@@ -531,6 +566,27 @@ class JSSTaipolicy {
             case 'sources':
                 /* translators: %s: a comma-separated list of approved content sources */
                 return sprintf(esc_html(__('Approved sources set to %s', 'js-support-ticket')), $jsst_subject);
+            /* The rest of what is journalled, each said in words rather than
+               "Setting changed". */
+            case 'autopilot-on':
+                return esc_html(__('Automatic answers switched on', 'js-support-ticket'));
+            case 'autopilot-off':
+                return esc_html(__('Automatic answers switched off', 'js-support-ticket'));
+            case 'autopilot-rules':
+                return esc_html(__('Automatic answer rules saved (audiences, departments, limits)', 'js-support-ticket'));
+            case 'autopilot-live':
+                return esc_html(__('Automatic answers allowed to reach customers (from Set up)', 'js-support-ticket'));
+            case 'autopilot-paused':
+                return esc_html(__('Automatic answers paused', 'js-support-ticket'));
+            case 'autopilot-resumed':
+                return esc_html(__('Automatic answers resumed', 'js-support-ticket'));
+            case 'approval':
+                $jsst_amodes = class_exists('JSSTaireview') ? JSSTaireview::modes() : array();
+                $jsst_alabel = isset($jsst_amodes[$jsst_subject]['label']) ? $jsst_amodes[$jsst_subject]['label'] : $jsst_subject;
+                /* translators: %s: an approval mode, e.g. "Always ask a person first" */
+                return sprintf(esc_html(__('Approvals set to "%s"', 'js-support-ticket')), $jsst_alabel);
+            case 'budget':
+                return esc_html(__('Spending limits changed', 'js-support-ticket'));
         }
         return esc_html(__('Setting changed', 'js-support-ticket'));
     }

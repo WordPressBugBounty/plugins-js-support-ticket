@@ -1101,6 +1101,31 @@ class JSSTlicense {
         return $jsst_updates;
     }
 
+    /**
+     * How many installed add-ons have a newer version waiting, for the count
+     * beside License & Add-ons in the menus.
+     *
+     * Read from the cached report only - a menu is drawn on every admin page
+     * and must never be the thing that calls the licence server. WordPress's
+     * own update check refreshes the report twice a day. Compared against the
+     * version installed now, so an add-on stops counting the moment it is
+     * updated, not twelve hours later.
+     */
+    public static function pendingUpdateCount() {
+        $jsst_cached = get_transient(self::TRANSIENT_UPDATES);
+        if (!is_array($jsst_cached) || array() === $jsst_cached) {
+            return 0;
+        }
+        $jsst_count = 0;
+        foreach ($jsst_cached as $jsst_product => $jsst_entry) {
+            if (is_array($jsst_entry) && !empty($jsst_entry['update_available'])
+                    && self::stillNewer((string) $jsst_product, $jsst_entry)) {
+                $jsst_count++;
+            }
+        }
+        return $jsst_count;
+    }
+
     /** Throw away the cached answer, so the next question is asked for real. */
     public static function forget() {
         delete_transient(self::TRANSIENT_UPDATES);
@@ -1512,8 +1537,8 @@ class JSSTlicense {
      * "Tested up to", in the form WordPress compares.
      *
      * A release says it was tested up to 7.1, meaning the 7.1 branch. WordPress
-     * compares that against 7.1.2 as a version, finds it lower, and prints
-     * "Compatibility with WordPress 7.1.2: Not tested" beside every update.
+     * compares that against 7.1.4 as a version, finds it lower, and prints
+     * "Compatibility with WordPress 7.1.4: Not tested" beside every update.
      * wordpress.org avoids this by reporting the branch's current point
      * release, so the same is done here: a major.minor that matches the
      * running branch becomes the running version.

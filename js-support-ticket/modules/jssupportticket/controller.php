@@ -53,6 +53,12 @@ class JSSTjssupportticketController {
                 // Who can do what, derived rather than described.
                 // (Roadmap 4.0-SEC-04)
                 case 'admin_agentaccess':
+                    /* Administrators only: it lists every agent's address,
+                       roles and permissions - the same reason the Permission
+                       Check screen below is theirs alone. */
+                    if (!current_user_can('manage_options')) {
+                        self::leaveTheDesk();
+                    }
                     // Guarded because a bootstrap that has lost this include
                     // should cost one screen, not the whole site.
                     jssupportticket::$jsst_data['agentaccess'] = class_exists('JSSTagentaccess') ? JSSTagentaccess::report() : array();
@@ -302,10 +308,17 @@ class JSSTjssupportticketController {
                     break;
                 // (Roadmap 4.0-OPS-02)
                 case 'admin_systemstatus':
+                    // Server paths, versions and settings: administrators only.
+                    if (!current_user_can('manage_options')) {
+                        self::leaveTheDesk();
+                    }
                     jssupportticket::$jsst_data['systemstatus'] = class_exists('JSSTsystemstatus') ? JSSTsystemstatus::report() : array();
                     break;
                 // Storage engine conversion. (Roadmap 4.0-PERF-03)
                 case 'admin_storageengine':
+                    if (!current_user_can('manage_options')) {
+                        self::leaveTheDesk();
+                    }
                     jssupportticket::$jsst_data['storageplan'] = class_exists('JSSTstorageengine') ? JSSTstorageengine::plan() : new WP_Error('jsst_missing', esc_html(__('Not available.', 'js-support-ticket')));
                     jssupportticket::$jsst_data['storagestate'] = class_exists('JSSTstorageengine') ? JSSTstorageengine::state() : array();
                     jssupportticket::$jsst_data['storagesummary'] = class_exists('JSSTstorageengine') ? JSSTstorageengine::summary() : array();
@@ -811,8 +824,11 @@ class JSSTjssupportticketController {
         $jsst_url = is_admin()
             ? admin_url('admin.php?page=' . (current_user_can('manage_options') ? 'jssupportticket' : 'ticket'))
             : jssupportticket::makeUrl(array('jstmod' => 'jssupportticket', 'jstlay' => 'controlpanel'));
-        wp_safe_redirect($jsst_url);
-        exit;
+        /* In wp-admin this runs inside the page callback, after the header is
+           out, where a redirect is two "headers already sent" warnings and an
+           empty screen. refuse() redirects while it still can and otherwise
+           says "not allowed" with a link. */
+        JSSTincluder::refuse($jsst_url);
     }
 
     static function addmissingusers() {

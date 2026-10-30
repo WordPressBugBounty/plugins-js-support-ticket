@@ -316,7 +316,7 @@ class JSSTaitriage {
 
         $jsst_done = false;
         foreach (self::automatic() as $jsst_op) {
-            $jsst_result = JSSTcopilot::run($jsst_op, $jsst_ticketid, array(), $jsst_actor);
+            $jsst_result = JSSTcopilot::run($jsst_op, $jsst_ticketid, array('feature' => 'triage'), $jsst_actor);
             if (is_wp_error($jsst_result)) continue;
 
             self::store($jsst_ticketid, $jsst_op,

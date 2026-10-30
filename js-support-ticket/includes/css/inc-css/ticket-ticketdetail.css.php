@@ -3600,6 +3600,9 @@ span.js-tkt-det-prty {color:white;}
 .js-ticket-thread .js-ticket-thread-cnt .js-ticket-thread-data.note-msg{
     flex-direction:column;
     align-items:flex-start;
+    flex-wrap:nowrap;
+    min-width:0;
+    overflow-wrap:anywhere;
 }
 .js-ticket-thread .js-ticket-thread-cnt .js-ticket-thread-data.note-msg > p,
 .js-ticket-thread .js-ticket-thread-cnt .js-ticket-thread-data.note-msg > h1,
@@ -3618,6 +3621,55 @@ span.js-tkt-det-prty {color:white;}
 }
 .js-ticket-thread .js-ticket-thread-cnt .js-ticket-thread-data.note-msg img{
     max-width:100%;
+}
+/* Message content as the editor wrote it. Sizes follow the theme text size (em),
+   the theme keeps its font and colours; the mobile thread centring stops at the message. */
+.js-ticket-thread .js-ticket-thread-cnt .js-ticket-thread-data.note-msg{
+    text-align:start;
+}
+.js-ticket-thread .js-ticket-thread-cnt .js-ticket-thread-data.note-msg h1,
+.js-ticket-thread .js-ticket-thread-cnt .js-ticket-thread-data.note-msg h2,
+.js-ticket-thread .js-ticket-thread-cnt .js-ticket-thread-data.note-msg h3,
+.js-ticket-thread .js-ticket-thread-cnt .js-ticket-thread-data.note-msg h4,
+.js-ticket-thread .js-ticket-thread-cnt .js-ticket-thread-data.note-msg h5,
+.js-ticket-thread .js-ticket-thread-cnt .js-ticket-thread-data.note-msg h6{
+    font-weight:600;
+    line-height:1.3;
+    margin:1em 0 0.5em;
+}
+.js-ticket-thread .js-ticket-thread-cnt .js-ticket-thread-data.note-msg h1{font-size:1.6em;}
+.js-ticket-thread .js-ticket-thread-cnt .js-ticket-thread-data.note-msg h2{font-size:1.4em;}
+.js-ticket-thread .js-ticket-thread-cnt .js-ticket-thread-data.note-msg h3{font-size:1.25em;}
+.js-ticket-thread .js-ticket-thread-cnt .js-ticket-thread-data.note-msg h4{font-size:1.1em;}
+.js-ticket-thread .js-ticket-thread-cnt .js-ticket-thread-data.note-msg h5{font-size:1em;}
+.js-ticket-thread .js-ticket-thread-cnt .js-ticket-thread-data.note-msg h6{font-size:0.9em;}
+.js-ticket-thread .js-ticket-thread-cnt .js-ticket-thread-data.note-msg > :first-child{
+    margin-top:0;
+}
+.js-ticket-thread .js-ticket-thread-cnt .js-ticket-thread-data.note-msg blockquote{
+    margin:1em 0;
+    padding:0.5em 1em;
+    border:0;
+    border-inline-start:4px solid ' . esc_attr($jsst_color5) . ';
+    background-color:' . esc_attr($jsst_color3) . ';
+}
+.js-ticket-thread .js-ticket-thread-cnt .js-ticket-thread-data.note-msg blockquote > :first-child{
+    margin-top:0;
+}
+.js-ticket-thread .js-ticket-thread-cnt .js-ticket-thread-data.note-msg blockquote > :last-child{
+    margin-bottom:0;
+}
+.js-ticket-thread .js-ticket-thread-cnt .js-ticket-thread-data.note-msg a:not([class]){
+    text-decoration:underline;
+}
+.js-ticket-thread .js-ticket-thread-cnt .js-ticket-thread-data.note-msg hr{
+    margin:1em 0;
+    border:0;
+    border-top:1px solid ' . esc_attr($jsst_color5) . ';
+}
+.js-ticket-thread .js-ticket-thread-cnt .js-ticket-thread-data.note-msg pre{
+    white-space:pre-wrap;
+    overflow-wrap:anywhere;
 }
 .js-ticket-thread .js-ticket-thread-cnt-btm {
     margin-top: 15px;

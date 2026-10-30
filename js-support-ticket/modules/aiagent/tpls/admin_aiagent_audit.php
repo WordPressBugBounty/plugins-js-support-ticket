@@ -44,7 +44,7 @@ JSSTmessage::getMessage();
     </div>
     <div id="jsstadmin-data">
         <?php JSSTlayout::adminPageHeader(array(
-            'title'   => __('AI Audit', 'js-support-ticket'),
+            'title'   => __('Usage & Cost: Audit', 'js-support-ticket'),
             'crumbs'  => array(array('text' => __('AI Agent', 'js-support-ticket'), 'url' => admin_url('admin.php?page=aiagent'))),
         )); ?>
         <div id="jsstadmin-data-wrp">
@@ -52,7 +52,7 @@ JSSTmessage::getMessage();
 
             <p class="jsst-lede">
                 <?php echo esc_html(__('Every engine request and every policy change. Prompts and ticket text are never stored.', 'js-support-ticket')); ?>
-            </p><?php JSSTlayout::why(__('Every request every engine has recorded, and every change anybody has made to the policy. No prompt and no ticket text is kept here — what was asked is named, not quoted.', 'js-support-ticket')); ?>
+            </p>
 
             <div class="jsst-card">
                 <div class="jsst-card-head">

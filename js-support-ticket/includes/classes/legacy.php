@@ -280,6 +280,10 @@ class JSSTlegacy {
            because it is the only part that touches the filesystem, and only
            reached on a site with no active add-ons at all. */
         foreach (array_keys(JSSTpro::modules()) as $jsst_slug) {
+            // A bundle's own folder (aiagent) is not an old add-on left behind.
+            if (class_exists('JSSTbundle') && JSSTbundle::bundle($jsst_slug)) {
+                continue;
+            }
             if (file_exists(WP_PLUGIN_DIR . '/' . self::pluginFile($jsst_slug))) {
                 return true;
             }

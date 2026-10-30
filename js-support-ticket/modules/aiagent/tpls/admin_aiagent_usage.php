@@ -58,7 +58,7 @@ JSSTmessage::getMessage();
 
             <p class="jsst-lede">
                 <?php echo esc_html(__('Every AI call, what it cost, and the limits that cap spending.', 'js-support-ticket')); ?>
-            </p><?php JSSTlayout::why(__('AI is the only part of this help desk billed by the use. This is every model call it has made, what each one cost, and the limits that stop it costing more.', 'js-support-ticket')); ?>
+            </p>
 
             <?php if (!empty($jsst_alerts)) { ?>
                 <div class="jsst-card">
@@ -136,7 +136,7 @@ JSSTmessage::getMessage();
                                 <span class="jsst-metric-label"><?php echo esc_html(__('Failed', 'js-support-ticket')); ?></span>
                             </div>
                         </div>
-                        <p class="jsst-hint"><?php echo esc_html(__('Failed calls are counted because they can still be charged.', 'js-support-ticket')); ?></p><?php JSSTlayout::why(__('Failed calls are counted because a request that was charged for and then returned an error is exactly the spend that otherwise cannot be accounted for.', 'js-support-ticket')); ?>
+                        <p class="jsst-hint"><?php echo esc_html(__('Failed calls are counted because they can still be charged.', 'js-support-ticket')); ?></p>
                     </div>
                 </div>
             </div>
@@ -147,7 +147,7 @@ JSSTmessage::getMessage();
                         <h2 class="jsst-card-title"><?php echo esc_html(__('Models with no price', 'js-support-ticket')); ?></h2>
                     </div>
                     <div class="jsst-card-body">
-                        <p class="jsst-hint"><?php echo esc_html(__('These models have no price set, so their cost is not counted. Set a price to include them.', 'js-support-ticket')); ?></p><?php JSSTlayout::why(__('These were used this month and nobody has said what they cost, so their calls are counted and their money is not. Set a price and the figures above start including them.', 'js-support-ticket')); ?>
+                        <p class="jsst-hint"><?php echo esc_html(__('These models have no price set, so their cost is not counted. Set a price to include them.', 'js-support-ticket')); ?></p>
                         <?php foreach ($jsst_unpriced as $jsst_row) { ?>
                             <form class="jsst-form" method="post" action="<?php echo esc_url($jsst_saveurl); ?>">
                                 <input type="hidden" name="aiprice" value="1" />
@@ -244,7 +244,11 @@ JSSTmessage::getMessage();
                                                     <span class="jsst-table-sub"><?php echo esc_html(__('no price set', 'js-support-ticket')); ?></span>
                                                 <?php } ?>
                                             </th>
-                                            <td class="jsst-num"><?php echo esc_html(number_format_i18n($jsst_row['tokens'])); ?></td>
+                                            <td class="jsst-num"><?php
+                                                /* A call whose engine reported no token count is not "0 tokens". */
+                                                echo ((int) $jsst_row['tokens'] > 0)
+                                                    ? esc_html(number_format_i18n($jsst_row['tokens']))
+                                                    : '<span class="jsst-table-sub">' . esc_html(__('not reported', 'js-support-ticket')) . '</span>'; ?></td>
                                             <td class="jsst-num"><?php echo esc_html(JSSTaiusage::money($jsst_row['cost'])); ?></td>
                                         </tr>
                                     <?php } ?>
@@ -321,74 +325,35 @@ JSSTmessage::getMessage();
                 </div>
             <?php } ?>
 
+            <?php /* The limits and the backup engine are settings, so they are
+                     changed under Settings > Spending; here they are only shown,
+                     beside the spending they cap. */
+            $jsst_caps = array();
+            if (!empty($jsst_budget['daymoney']))    $jsst_caps[] = sprintf(__('$%s a day', 'js-support-ticket'), number_format_i18n((float) $jsst_budget['daymoney'], 2));
+            if (!empty($jsst_budget['monthmoney']))  $jsst_caps[] = sprintf(__('$%s a month', 'js-support-ticket'), number_format_i18n((float) $jsst_budget['monthmoney'], 2));
+            if (!empty($jsst_budget['daycalls']))    $jsst_caps[] = sprintf(__('%s requests a day', 'js-support-ticket'), number_format_i18n((int) $jsst_budget['daycalls']));
+            if (!empty($jsst_budget['ticketcalls'])) $jsst_caps[] = sprintf(__('%s requests a ticket', 'js-support-ticket'), number_format_i18n((int) $jsst_budget['ticketcalls']));
+            $jsst_spare = ($jsst_fallback !== '' && isset($jsst_engines[$jsst_fallback]['label'])) ? $jsst_engines[$jsst_fallback]['label'] : ''; ?>
             <h2 class="jsst-groupheading"><?php echo esc_html(__('Limits', 'js-support-ticket')); ?></h2>
 
             <div class="jsst-card">
-                <div class="jsst-card-body">
-                    <form class="jsst-form" method="post" action="<?php echo esc_url($jsst_saveurl); ?>">
-                        <input type="hidden" name="aibudget" value="1" />
-                        <p class="jsst-hint"><?php echo esc_html(__('0 means no limit. Money limits apply to your own provider key only.', 'js-support-ticket')); ?></p><?php JSSTlayout::why(__('Leave a limit at nought to mean no limit. Money limits govern requests on your own provider key only — a request included with your licence costs you nothing, and one on your own hardware costs nothing per call, so neither is stopped by a budget for a bill that was never coming.', 'js-support-ticket')); ?>
-
-                        <div class="jsst-formgrid">
-                            <div class="jsst-frow">
-                                <label class="jsst-flabel" for="jsst-daymoney"><?php echo esc_html(__('Spend per day ($)', 'js-support-ticket')); ?></label>
-                                <div class="jsst-fval"><input type="number" step="0.01" min="0" id="jsst-daymoney" name="daymoney" value="<?php echo esc_attr(isset($jsst_budget['daymoney']) ? $jsst_budget['daymoney'] : 0); ?>" /></div>
-                            </div>
-                            <div class="jsst-frow">
-                                <label class="jsst-flabel" for="jsst-monthmoney"><?php echo esc_html(__('Spend per month ($)', 'js-support-ticket')); ?></label>
-                                <div class="jsst-fval"><input type="number" step="0.01" min="0" id="jsst-monthmoney" name="monthmoney" value="<?php echo esc_attr(isset($jsst_budget['monthmoney']) ? $jsst_budget['monthmoney'] : 0); ?>" /></div>
-                            </div>
-                            <div class="jsst-frow">
-                                <label class="jsst-flabel" for="jsst-daycalls"><?php echo esc_html(__('Requests per day', 'js-support-ticket')); ?></label>
-                                <div class="jsst-fval"><input type="number" step="1" min="0" id="jsst-daycalls" name="daycalls" value="<?php echo esc_attr(isset($jsst_budget['daycalls']) ? $jsst_budget['daycalls'] : 0); ?>" /></div>
-                            </div>
-                            <div class="jsst-frow">
-                                <label class="jsst-flabel" for="jsst-ticketcalls"><?php echo esc_html(__('Requests per ticket', 'js-support-ticket')); ?></label>
-                                <div class="jsst-fval"><input type="number" step="1" min="0" id="jsst-ticketcalls" name="ticketcalls" value="<?php echo esc_attr(isset($jsst_budget['ticketcalls']) ? $jsst_budget['ticketcalls'] : 0); ?>" /></div>
-                            </div>
-                        </div>
-                        <p class="jsst-fhelp"><?php echo esc_html(__('Request limits count every engine, priced or not.', 'js-support-ticket')); ?></p><?php JSSTlayout::why(__('The request limits count every engine, priced or not — they are the backstop that still works on a model nobody has priced.', 'js-support-ticket')); ?>
-
-                        <label class="jsst-check">
-                            <input type="checkbox" name="alerts" value="1" <?php checked(!empty($jsst_budget['alerts'])); ?> />
-                            <span><?php echo esc_html(/* translators: The % sign is a literal percent sign, not a placeholder. */ __('E-mail the site administrator at 80% of a limit, and again when it is reached', 'js-support-ticket')); ?></span>
-                        </label>
-                        <p class="jsst-fhelp"><?php echo esc_html(__('Sent once per limit per period.', 'js-support-ticket')); ?></p><?php JSSTlayout::why(__('Once per limit per period, never on every request. Changing a limit clears the warnings, because the next warning is about the new number.', 'js-support-ticket')); ?>
-
-                        <div class="jsst-btnrow">
-                            <input type="submit" class="jsst-btn jsst-btn-primary" value="<?php echo esc_attr(__('Save limits', 'js-support-ticket')); ?>" />
-                        </div>
-                    </form>
-                </div>
-            </div>
-
-            <div class="jsst-card">
                 <div class="jsst-card-head">
-                    <h2 class="jsst-card-title"><?php echo esc_html(__('When the engine cannot answer', 'js-support-ticket')); ?></h2>
+                    <h2 class="jsst-card-title"><?php echo esc_html(__('Limits and backup engine', 'js-support-ticket')); ?></h2>
+                    <div class="jsst-card-tools">
+                        <a class="jsst-btn jsst-btn-sm" href="<?php echo esc_url(admin_url('admin.php?page=aiagent&jstlay=aiagent_settings#AISpend')); ?>"><?php echo esc_html(__('Change in Settings', 'js-support-ticket')); ?></a>
+                    </div>
                 </div>
                 <div class="jsst-card-body">
-                    <form class="jsst-form" method="post" action="<?php echo esc_url($jsst_saveurl); ?>">
-                        <input type="hidden" name="aifallback" value="1" />
-                        <div class="jsst-formgrid">
-                            <div class="jsst-frow jsst-frow-full">
-                                <label class="jsst-flabel" for="jsst-fallback"><?php echo esc_html(__('Try this engine instead', 'js-support-ticket')); ?></label>
-                                <div class="jsst-fval">
-                                    <select id="jsst-fallback" name="fallback">
-                                        <option value=""><?php echo esc_html(__('Nothing — report the failure', 'js-support-ticket')); ?></option>
-                                        <?php foreach ($jsst_engines as $jsst_id => $jsst_def) {
-                                            if ($jsst_id === $jsst_current) continue; ?>
-                                            <option value="<?php echo esc_attr($jsst_id); ?>" <?php selected($jsst_fallback, $jsst_id); ?>><?php echo esc_html($jsst_def['label']); ?></option>
-                                        <?php } ?>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-                        <p class="jsst-fhelp"><?php echo esc_html(__('Used when the main engine is unreachable, rate limited or over budget.', 'js-support-ticket')); ?></p><?php JSSTlayout::why(__('Used when the chosen engine is unreachable, rate limited, overloaded, or out of budget — a local model here keeps the desk answering on hardware you already pay for once the month\'s budget is gone.', 'js-support-ticket')); ?>
-                        <p class="jsst-fhelp"><?php echo esc_html(__('Not used for a bad key, an unknown model or a refusal, which would fail the same way.', 'js-support-ticket')); ?></p><?php JSSTlayout::why(__('Never used for a rejected key, an unknown model or a refusal from the model itself: a second engine fails those the same way, and asking twice turns one bill into two.', 'js-support-ticket')); ?>
-                        <div class="jsst-btnrow">
-                            <input type="submit" class="jsst-btn jsst-btn-primary" value="<?php echo esc_attr(__('Save', 'js-support-ticket')); ?>" />
-                        </div>
-                    </form>
+                    <dl class="jsst-facts">
+                        <dt><?php echo esc_html(__('Limits', 'js-support-ticket')); ?></dt>
+                        <dd><?php echo empty($jsst_caps)
+                            ? '<span class="jsst-pill jsst-pill-warn"><span class="jsst-dot"></span>' . esc_html(__('No limit set', 'js-support-ticket')) . '</span>'
+                            : esc_html(implode(' · ', $jsst_caps)); ?></dd>
+                        <dt><?php echo esc_html(__('E-mail warnings', 'js-support-ticket')); ?></dt>
+                        <dd><?php echo esc_html(!empty($jsst_budget['alerts']) ? __('On', 'js-support-ticket') : __('Off', 'js-support-ticket')); ?></dd>
+                        <dt><?php echo esc_html(__('Backup engine', 'js-support-ticket')); ?></dt>
+                        <dd><?php echo esc_html($jsst_spare !== '' ? $jsst_spare : __('None', 'js-support-ticket')); ?></dd>
+                    </dl>
                 </div>
             </div>
 

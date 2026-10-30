@@ -111,7 +111,10 @@ if (jssupportticket::$_config['offline'] == 2) {
             }
 
             jQuery(document).ready(function(){
-              jQuery('.venobox').venobox({
+              /* Only the attachment links this page prints itself. `.venobox`
+                 alone also caught links inside ticket messages, which a
+                 customer writes, and VenoBox acts on their data-* attributes. */
+              jQuery('.js_ticketattachment > a.venobox[data-vbtype=image]').venobox({
                     infinigall: true,
                     framewidth: 850,
                     titleattr: 'data-title',
@@ -1414,7 +1417,7 @@ if (jssupportticket::$_config['offline'] == 2) {
                 <?php echo wp_kses(JSSTformfield::hidden('reply-replyid', ''), JSST_ALLOWED_TAGS); ?>
                 <?php echo wp_kses(JSSTformfield::hidden('reply-tikcetid',jssupportticket::$jsst_data[0]->id), JSST_ALLOWED_TAGS); ?>
             </form>
-            <?php if(in_array('timetracking', jssupportticket::$_active_addons)){ ?>
+            <?php if(in_array('timetracking', jssupportticket::$_active_addons) && JSSTroles::canEditTime()){ // only staff who may edit time get the forms and their nonce ?>
                 <form id="jsst-time-edit-form" style="display:none" method="post" action="<?php echo esc_url(wp_nonce_url(jssupportticket::makeUrl(array('jstmod'=>'reply','task'=>'saveeditedtime')),"save-edited-time-".jssupportticket::$jsst_data[0]->id)); ?>" >
                     <div class="js-ticket-edit-form-wrp">
                         <div class="js-ticket-edit-field-title">
@@ -1635,6 +1638,7 @@ if (jssupportticket::$_config['offline'] == 2) {
                             <div class="js-ticket-text-editor-field-title"><?php echo esc_html(__('Type Internal Note', 'js-support-ticket')); ?></div>
                             <div class="js-ticket-text-editor-field"><?php wp_editor('', 'internalnote', array('media_buttons' => false)); ?></div>
                         </div>
+                        <?php if (JSSTroles::canAttachFiles()) { ?>
                         <div class="js-ticket-reply-attachments"><!-- Attachments -->
                             <div class="js-attachment-field-title"><?php echo esc_html(__('Attachments', 'js-support-ticket')); ?></div>
                             <div class="js-attachment-field">
@@ -1651,6 +1655,7 @@ if (jssupportticket::$_config['offline'] == 2) {
                                 </span>
                             </div>
                         </div>
+                        <?php } ?>
                         <div class="js-ticket-closeonreply-wrp">
                             <div class="js-ticket-closeonreply-title"><?php echo esc_html(__('Ticket Status','js-support-ticket')); ?></div>
                             <div class="replyFormStatus js-form-title-position-reletive-left">
@@ -2243,7 +2248,8 @@ if (jssupportticket::$_config['offline'] == 2) {
                                                     <?php 
                                                 } ?>
                                                 <?php 
-                                                if(in_array('timetracking', jssupportticket::$_active_addons)){ ?>
+                                                // How long an agent spent is the team's business, not the customer's.
+                                                if(in_array('timetracking', jssupportticket::$_active_addons) && !empty(jssupportticket::$jsst_data['user_staff'])){ ?>
                                                     <?php if($jsst_reply->staffid != 0){
                                                         $jsst_hours = floor($jsst_reply->time / 3600);
                                                         $jsst_mins = floor($jsst_reply->time / 60);
@@ -2703,10 +2709,17 @@ if (jssupportticket::$_config['offline'] == 2) {
                                                     </div>
                                                 </div>
                                             <?php } ?>
+                                            <?php /* The AI Copilot, as on the wp-admin ticket page: an agent
+                                                     working here used to have none. Draws nothing without
+                                                     an engine, or for someone not allowed to use it. */
+                                            if (class_exists('JSSTcopilot')) {
+                                                JSSTcopilot::renderPanel(jssupportticket::$jsst_data[0]->id);
+                                            } ?>
                                             <div class="js-ticket-text-editor-wrp">
                                                 <div class="js-ticket-text-editor-field-title"><?php echo esc_html(__('Type Message','js-support-ticket')); ?></div>
                                                 <div class="js-ticket-text-editor-field"><?php wp_editor('', 'jsticket_message', array('media_buttons' => false)); ?></div>
                                             </div>
+                                            <?php if (JSSTroles::canAttachFiles()) { ?>
                                             <div class="js-ticket-reply-attachments"><!-- Attachments -->
                                                 <div class="js-attachment-field-title"><?php echo esc_html(__('Attachments', 'js-support-ticket')); ?></div>
                                                 <div class="js-attachment-field">
@@ -2724,6 +2737,7 @@ if (jssupportticket::$_config['offline'] == 2) {
                                                     <span id="tk_attachment_add" data-ident="tk_attachment_staff_reply_wrapper" class="tk_attachments_addform"><?php echo esc_html(__('Add More','js-support-ticket')); ?></span>
                                                 </div>
                                             </div>
+                                            <?php } ?>
                                             <div class="js-ticket-append-signature-wrp"><!-- Append Signature -->
                                                 <div class="js-ticket-append-field-title"><?php echo esc_html(__('Append Signature','js-support-ticket')); ?></div>
                                                 <div class="js-ticket-append-field-wrp">
@@ -3168,6 +3182,20 @@ if (jssupportticket::$_config['offline'] == 2) {
                                                     <a class="js-tkt-det-hdg-btn" href="#" id="agenttransfer">
                                                         <?php echo esc_html(__('Change','js-support-ticket')); ?>
                                                     </a>
+                                                <?php }
+                                                /* "Release Ticket": hand back a ticket assigned to you. */
+                                                $jsst_mystaffid = (int) JSSTincluder::getJSModel('agent')->getStaffId(JSSTincluder::getObjectClass('user')->uid());
+                                                if ($jsst_mystaffid > 0 && (int) jssupportticket::$jsst_data[0]->staffid === $jsst_mystaffid
+                                                        && JSSTincluder::getJSModel('userpermissions')->checkPermissionGrantedForTask('Release Ticket')) { ?>
+                                                    <form method="post" class="jsst-release-form" style="display:inline" action="<?php echo esc_url(wp_nonce_url(jssupportticket::makeUrl(array('jstmod'=>'ticket','task'=>'assigntickettostaff')),"assign-ticket-to-staff-".jssupportticket::$jsst_data[0]->id)); ?>">
+                                                        <?php echo wp_kses(JSSTformfield::hidden('ticketid', jssupportticket::$jsst_data[0]->id), JSST_ALLOWED_TAGS); ?>
+                                                        <?php echo wp_kses(JSSTformfield::hidden('staffid', '0'), JSST_ALLOWED_TAGS); ?>
+                                                        <?php echo wp_kses(JSSTformfield::hidden('releaseticket', '1'), JSST_ALLOWED_TAGS); ?>
+                                                        <?php echo wp_kses(JSSTformfield::hidden('action', 'ticket_assigntickettostaff'), JSST_ALLOWED_TAGS); ?>
+                                                        <?php echo wp_kses(JSSTformfield::hidden('form_request', 'jssupportticket'), JSST_ALLOWED_TAGS); ?>
+                                                        <?php echo wp_kses(JSSTformfield::hidden('jsstpageid', get_the_ID()), JSST_ALLOWED_TAGS); ?>
+                                                        <button type="submit" class="js-tkt-det-hdg-btn" title="<?php echo esc_attr(__('Give this ticket back so someone else can take it', 'js-support-ticket')); ?>"><?php echo esc_html(__('Release','js-support-ticket')); ?></button>
+                                                    </form>
                                                 <?php } ?>
                                         <?php } ?>
                                     </div>

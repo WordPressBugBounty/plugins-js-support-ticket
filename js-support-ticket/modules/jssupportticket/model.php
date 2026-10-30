@@ -1649,6 +1649,12 @@ $jsst_query = "SELECT product.product, COUNT(t.id) AS ticket_count
 
     function getSanitizedEditorData($jsst_data){
        $jsst_data = wp_filter_post_kses(wpautop($jsst_data));
+       /* `data-vbtype` is what marks a ticket page's own attachment links for the
+          image viewer, and nothing else uses it, so written content may not carry
+          it: a message can then never pass for one of those links. KSES has
+          already rewritten every attribute as name="value"; its output is
+          slashed, hence the strip and re-add. */
+       $jsst_data = addslashes(preg_replace('/\sdata-vbtype\s*=\s*"[^"]*"/i', '', stripslashes($jsst_data)));
        return $jsst_data;
     }
 
@@ -1720,51 +1726,26 @@ $jsst_query = "SELECT product.product, COUNT(t.id) AS ticket_count
     }
 
     function generateIndexFile($jsst_file_directory) {
-        global $wp_filesystem;
-
-        // Initialize the WP_Filesystem
-        if (!is_a($wp_filesystem, 'WP_Filesystem_Base')) {
-            require_once ABSPATH . 'wp-admin/includes/file.php'; // Include WP Filesystem functions
-            $jsst_creds = request_filesystem_credentials(site_url());
-
-            if (!WP_Filesystem($jsst_creds)) {
-                wp_die(esc_html__( 'Could not initialize the filesystem.', 'js-support-ticket' ));
-            }
-        }
-        $jsst_wp_filesystem = $wp_filesystem;
-
-        // Get the uploads directory path
+        /* A blank index.html in each folder from this one up to uploads, so no
+           folder lists its files. Plain PHP: these are folders PHP itself made
+           in uploads. Through WP_Filesystem a host without direct file access
+           printed the FTP login form here, or stopped the request outright -
+           in the middle of saving a ticket's attachments. */
         $jsst_uploads_dir = wp_upload_dir();
-        $jsst_uploads_path = $jsst_uploads_dir['basedir'];
+        $jsst_uploads_path = rtrim(wp_normalize_path($jsst_uploads_dir['basedir']), '/');
+        $jsst_current_dir = rtrim(wp_normalize_path($jsst_file_directory), '/');
 
-        // Normalize the paths to ensure consistency
-        $jsst_file_directory = rtrim($jsst_file_directory, '/');
-        $jsst_uploads_path = rtrim($jsst_uploads_path, '/');
-
-        // Check if the given directory is within the uploads directory
-        if (jssupportticketphplib::JSST_strpos($jsst_file_directory, $jsst_uploads_path) === 0) {
-            // Start from the given directory and move up to the uploads directory
-            $jsst_current_dir = $jsst_file_directory;
-            while ($jsst_current_dir !== $jsst_uploads_path) {
-                // Path to the index.php file in the current directory
-                $jsst_index_file = $jsst_current_dir . '/index.html';
-
-                // Create the index.php file if it does not exist
-                if (!$jsst_wp_filesystem->exists($jsst_index_file)) {
-                    $jsst_wp_filesystem->put_contents($jsst_index_file, '', FS_CHMOD_FILE); // FS_CHMOD_FILE ensures correct file permissions
-                }
-
-                // Move up to the parent directory
-                $jsst_current_dir = dirname($jsst_current_dir);
-            }
-
-            // Finally, check and create the index.php file in the uploads directory
-            $jsst_uploads_index_file = $jsst_uploads_path . '/index.html';
-            if (!$jsst_wp_filesystem->exists($jsst_uploads_index_file)) {
-                // $jsst_wp_filesystem->put_contents($jsst_uploads_index_file, '', FS_CHMOD_FILE);
-            }
+        // Only folders inside uploads.
+        if (jssupportticketphplib::JSST_strpos($jsst_current_dir, $jsst_uploads_path . '/') !== 0) {
+            return;
         }
-
+        while ($jsst_current_dir !== $jsst_uploads_path && jssupportticketphplib::JSST_strlen($jsst_current_dir) > jssupportticketphplib::JSST_strlen($jsst_uploads_path)) {
+            $jsst_index_file = $jsst_current_dir . '/index.html';
+            if (is_dir($jsst_current_dir) && !file_exists($jsst_index_file)) {
+                @file_put_contents($jsst_index_file, ''); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_file_put_contents
+            }
+            $jsst_current_dir = dirname($jsst_current_dir);
+        }
         return;
     }
 

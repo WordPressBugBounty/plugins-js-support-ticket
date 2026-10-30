@@ -232,6 +232,8 @@ class JSSTaiusage {
      */
     public static function shippedPrices() {
         return array(
+            'claude-haiku-5-5'   => array(0.10, 0.50),
+            'claude-sonnet-5-5'  => array(2.00, 10.00),
             'claude-opus-5-5'    => array(4.00, 20.00),
             'claude-opus-5'      => array(5.00, 25.00),
             'claude-sonnet-5'    => array(2.00, 10.00),
@@ -777,11 +779,18 @@ class JSSTaiusage {
         return array(
             'copilot'    => esc_html(__('Copilot actions in a ticket', 'js-support-ticket')),
             'autopilot'  => esc_html(__('Automatic answers', 'js-support-ticket')),
+            'triage'     => esc_html(__('Reading new tickets (routing and mood)', 'js-support-ticket')),
             'draft'      => esc_html(__('Drafts for an agent', 'js-support-ticket')),
             'deflection' => esc_html(__('Answers on the ticket form', 'js-support-ticket')),
             'reply'      => esc_html(__('Reply written from the ticket screen', 'js-support-ticket')),
             'playground' => esc_html(__('Prompt Lab', 'js-support-ticket')),
             'test'       => esc_html(__('Connection tests', 'js-support-ticket')),
+            /* Live Chat and Set up log under these keys; named so the usage and
+               audit tables do not show the bare code. */
+            'chat'           => esc_html(__('Live chat answers', 'js-support-ticket')),
+            'chat_summary'   => esc_html(__('Live chat summaries', 'js-support-ticket')),
+            'chat_translate' => esc_html(__('Live chat translation', 'js-support-ticket')),
+            'preview'        => esc_html(__('Set up preview', 'js-support-ticket')),
         );
     }
 

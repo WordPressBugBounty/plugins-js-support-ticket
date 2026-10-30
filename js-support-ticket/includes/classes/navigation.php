@@ -249,11 +249,17 @@ class JSSTnavigation {
         if (empty($jsst_route)) {
             return '';
         }
-        $jsst_route = array_merge($jsst_route, is_array($jsst_args) ? $jsst_args : array());
+        $jsst_extra = is_array($jsst_args) ? $jsst_args : array();
         if ($jsst_shell === JSSTworkspace::SHELL_BACKEND) {
-            return admin_url('admin.php?' . http_build_query($jsst_route));
+            return admin_url('admin.php?' . http_build_query(array_merge($jsst_route, $jsst_extra)));
         }
-        return jssupportticket::makeUrl($jsst_route);
+        /* makeUrl() turns the route into the pretty address and drops values
+           it has no slot for, so "Open customer" on the portal lost its
+           ?search= and opened the whole Customers list. Route first, then the
+           extra values on top. */
+        $jsst_url = jssupportticket::makeUrl($jsst_route);
+        $jsst_extra = array_filter($jsst_extra, function ($jsst_v) { return $jsst_v !== '' && $jsst_v !== null; });
+        return empty($jsst_extra) ? $jsst_url : add_query_arg(array_map('rawurlencode', $jsst_extra), $jsst_url);
     }
 
     /**

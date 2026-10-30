@@ -143,6 +143,12 @@ class JSSTstorageengine {
         $jsst_large = jssupportticket::$_db->get_var("SHOW VARIABLES LIKE 'innodb_large_prefix'", 1);
         $jsst_big = (in_array(strtolower((string) $jsst_format), array('dynamic', 'compressed'), true)
             || in_array(strtoupper((string) $jsst_large), array('ON', '1'), true));
+        // MySQL 5.6 on the Antelope file format offers neither DYNAMIC nor the
+        // larger prefix, whatever innodb_large_prefix says.
+        $jsst_file_format = jssupportticket::$_db->get_var("SHOW VARIABLES LIKE 'innodb_file_format'", 1);
+        if (strcasecmp((string) $jsst_file_format, 'Antelope') === 0) {
+            $jsst_big = false;
+        }
         self::$_limit = $jsst_big ? self::KEY_PREFIX_LARGE : self::KEY_PREFIX_SMALL;
         return self::$_limit;
     }
@@ -421,7 +427,105 @@ class JSSTstorageengine {
         $jsst_state['queue'] = array();
         $jsst_state['finished'] = time();
         self::save($jsst_state);
+        self::engineChanged();
         return false;
+    }
+
+    /** The suggestion search caches which engine its tables are on; tell it. */
+    private static function engineChanged() {
+        if (class_exists('JSSTincluder')) {
+            $jsst_model = JSSTincluder::getJSModel('ticket'); // loads the class
+            if (is_object($jsst_model) && method_exists($jsst_model, 'recordSuggestionEngines')) {
+                $jsst_model::recordSuggestionEngines();
+            }
+        }
+    }
+
+    /**
+     * The ROW_FORMAT to state when converting, or '' to leave it be.
+     *
+     * A bare ENGINE = InnoDB keeps the row format an old table has stored for
+     * itself (CREATE_OPTIONS), and an old MyISAM table often has one: COMPACT,
+     * which InnoDB then honours with the 767-byte index limit ("Index column
+     * size too large") although the server offers 3072 and the preview
+     * promised it; or FIXED, which InnoDB refuses outright. Where the server
+     * offers DYNAMIC - the large limit the preview checked against - it is
+     * stated. Where it does not, the preview checked against 767 already, and
+     * only a FIXED table needs a format InnoDB accepts. Going back to MyISAM
+     * states nothing.
+     */
+    private static function rowFormatFor($jsst_table, $jsst_target) {
+        if (strcasecmp($jsst_target, self::TARGET) !== 0) {
+            return '';
+        }
+        if (self::keyPrefixLimit() === self::KEY_PREFIX_LARGE) {
+            return ', ROW_FORMAT = DYNAMIC';
+        }
+        $jsst_options = (string) jssupportticket::$_db->get_var(jssupportticket::$_db->prepare(
+            "SELECT CREATE_OPTIONS FROM information_schema.TABLES WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = %s",
+            $jsst_table
+        ));
+        return (stripos($jsst_options, 'row_format=fixed') !== false) ? ', ROW_FORMAT = COMPACT' : '';
+    }
+
+    /** Small enough to convert on its own: rows and bytes. */
+    const SMALL_ROWS = 5000;
+    const SMALL_BYTES = 20971520; // 20 MB
+
+    /**
+     * Convert one small table, on its own, and record it like any other.
+     *
+     * The exception to "nothing converts on its own" above, kept narrow: only
+     * a table the caller names, only while it is small (a canned-response or
+     * FAQ table rewrites in milliseconds), only when the same check the full
+     * run uses finds nothing that would fail, and never while a run is going.
+     * It is recorded in the same state the full run keeps, so Storage Engine
+     * lists it as converted and Revert puts it back.
+     *
+     * @return string|WP_Error The engine it was on, or why it was left alone.
+     */
+    public static function convertSmall($jsst_table) {
+        if (self::isRunning()) {
+            return new WP_Error('jsst_already_running', esc_html(__('A conversion is already running.', 'js-support-ticket')));
+        }
+        if (!self::targetAvailable()) {
+            return new WP_Error('jsst_no_innodb', esc_html(__('This database does not offer InnoDB.', 'js-support-ticket')));
+        }
+        $jsst_tables = self::tables();
+        if (!isset($jsst_tables[$jsst_table])) {
+            return new WP_Error('jsst_no_table', esc_html(__('That table is no longer on this site.', 'js-support-ticket')));
+        }
+        $jsst_info = $jsst_tables[$jsst_table];
+        if (strcasecmp($jsst_info['engine'], self::TARGET) === 0) {
+            return $jsst_info['engine'];
+        }
+        if ($jsst_info['rows'] > self::SMALL_ROWS || $jsst_info['bytes'] > self::SMALL_BYTES) {
+            return new WP_Error('jsst_too_big', esc_html(__('Too large to convert on its own; Storage Engine converts it when asked.', 'js-support-ticket')));
+        }
+        // One at a time: an admin page load and the heartbeat arrive together.
+        $jsst_lock = 'jsst_engine_small_lock';
+        $jsst_held = get_option($jsst_lock);
+        if ($jsst_held && (time() - (int) $jsst_held) < 10 * MINUTE_IN_SECONDS) {
+            return new WP_Error('jsst_locked', esc_html(__('Another request is converting a table.', 'js-support-ticket')));
+        }
+        delete_option($jsst_lock);
+        if (!add_option($jsst_lock, time(), '', 'no')) {
+            return new WP_Error('jsst_locked', esc_html(__('Another request is converting a table.', 'js-support-ticket')));
+        }
+        $jsst_result = self::alter($jsst_table, self::TARGET);
+        if (!is_wp_error($jsst_result)) {
+            $jsst_state = self::state();
+            $jsst_state['done'][$jsst_table] = $jsst_result;
+            if ($jsst_state['status'] === 'idle') {
+                $jsst_state['status'] = 'complete';
+                $jsst_state['direction'] = 'convert';
+                $jsst_state['finished'] = time();
+            }
+            self::save($jsst_state);
+        }
+        delete_option($jsst_lock);
+        self::engineChanged();
+        return $jsst_result;
     }
 
     /**
@@ -453,7 +557,7 @@ class JSSTstorageengine {
         // of an admin page or swallowed by a screen that shows nothing.
         $jsst_hide = jssupportticket::$_db->hide_errors();
         // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared -- the table name comes from information_schema and the engine from a constant; neither can be parameterised.
-        jssupportticket::$_db->query("ALTER TABLE `" . esc_sql($jsst_table) . "` ENGINE = " . esc_sql($jsst_target));
+        jssupportticket::$_db->query("ALTER TABLE `" . esc_sql($jsst_table) . "` ENGINE = " . esc_sql($jsst_target) . self::rowFormatFor($jsst_table, $jsst_target));
         $jsst_error = jssupportticket::$_db->last_error;
         jssupportticket::$_db->show_errors($jsst_hide);
 

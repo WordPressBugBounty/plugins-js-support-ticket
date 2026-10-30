@@ -127,6 +127,9 @@ JSSTmessage::getMessage();
                          nothing that needs a key works until it is done. */ ?>
                 <li><a class="jsst-tab" href="#AIEngine"><?php echo esc_html__('Engine & key', 'js-support-ticket'); ?></a></li>
                 <li><a class="jsst-tab" href="#AISwitches"><?php echo esc_html__('What AI may do', 'js-support-ticket'); ?></a></li>
+                <?php if (class_exists('JSSTaiusage')) { ?>
+                    <li><a class="jsst-tab" href="#AISpend"><?php echo esc_html__('Spending', 'js-support-ticket'); ?></a></li>
+                <?php } ?>
                 <li><a class="jsst-tab" href="#AIAgentSuggestions"><?php echo esc_html__('Suggestions', 'js-support-ticket'); ?></a></li>
                 <?php if (in_array('aiagent', jssupportticket::$_active_addons)) { ?>
                     <li><a class="jsst-tab" href="#AIAgentAI"><?php echo esc_html__('Written answers', 'js-support-ticket'); ?></a></li>
@@ -146,7 +149,7 @@ JSSTmessage::getMessage();
                 <div class="jsst-card" id="AISwitches">
                     <div class="jsst-card-head">
                         <h2 class="jsst-card-title"><?php echo esc_html(__('What AI may do', 'js-support-ticket')); ?></h2>
-                        <p class="jsst-card-sub"><?php echo esc_html(__('Switch each lane on or off. With both model lanes off, suggested articles and past replies still work.', 'js-support-ticket')); ?></p><?php JSSTlayout::why(__('Each lane can be switched independently. On-site answers need no model and no network at all, so a site that switches both model lanes off still gets suggested articles and matching past replies.', 'js-support-ticket')); ?>
+                        <p class="jsst-card-sub"><?php echo esc_html(__('Switch each lane on or off. With both model lanes off, suggested articles and past replies still work.', 'js-support-ticket')); ?></p>
                     </div>
                     <div class="jsst-card-body">
 
@@ -165,10 +168,19 @@ JSSTmessage::getMessage();
 
                         <fieldset class="jsst-fieldset">
                             <legend class="jsst-fieldset-legend"><?php echo esc_html(__('The three lanes', 'js-support-ticket')); ?></legend>
+                            <?php /* The lane the chosen engine needs, named on the lane itself
+                                     when it is off - the status line says it too, but this is
+                                     where it is fixed. */
+                            $jsst_needlane = class_exists('JSSTaiengine') ? JSSTaiengine::currentLane() : ''; ?>
                             <?php foreach ($jsst_lanes as $jsst_laneid => $jsst_lane) { ?>
                                 <label class="jsst-check">
                                     <input type="checkbox" name="lane_<?php echo esc_attr($jsst_laneid); ?>" value="1" <?php checked(!empty($jsst_states[$jsst_laneid])); ?> />
                                     <span><?php echo esc_html($jsst_lane['label']); ?></span>
+                                    <?php if ($jsst_laneid === $jsst_needlane && empty($jsst_states[$jsst_laneid])) { ?>
+                                        <span class="jsst-pill jsst-pill-warn"><span class="jsst-dot"></span><?php echo esc_html(sprintf(
+                                            /* translators: %s: the chosen AI engine, e.g. "Local model" */
+                                            __('Off, but your engine (%s) needs it', 'js-support-ticket'), JSSTaiengine::currentLabel())); ?></span>
+                                    <?php } ?>
                                 </label>
                                 <p class="jsst-fhelp">
                                     <?php echo esc_html($jsst_lane['blurb']); ?>
@@ -189,7 +201,7 @@ JSSTmessage::getMessage();
                                     <p class="jsst-fhelp"><?php echo esc_html($jsst_mode['blurb']); ?></p>
                                 <?php } ?>
                             </div>
-                            <p class="jsst-fhelp"><?php echo esc_html(__('Vault credentials are never put in a prompt.', 'js-support-ticket')); ?></p><?php JSSTlayout::why(__('Credentials stored in the vault are never in a prompt at any level: they live in their own encrypted table and nothing that builds context reads it.', 'js-support-ticket')); ?>
+                            <p class="jsst-fhelp"><?php echo esc_html(__('Vault credentials are never put in a prompt.', 'js-support-ticket')); ?></p>
                         </fieldset>
 
                         <?php /* Which channels the engine may answer on moved to
@@ -202,8 +214,17 @@ JSSTmessage::getMessage();
                                  than a label on it. (Roadmap 6.0-AI-13) */ ?>
                         <?php if (class_exists('JSSTaitriage')) {
                             $jsst_auto = JSSTaitriage::automatic(); ?>
+                    </div>
+                </div>
+
+                <?php /* A feature to switch on, not a permission, so it has its own
+                         card instead of sitting among the lanes. Same form and save. */ ?>
+                <div class="jsst-card" data-jsst-for="AISwitches">
+                    <div class="jsst-card-head">
+                        <h2 class="jsst-card-title"><?php echo esc_html(__('Reading new tickets as they arrive', 'js-support-ticket')); ?></h2>
+                    </div>
+                    <div class="jsst-card-body">
                         <fieldset class="jsst-fieldset">
-                            <legend class="jsst-fieldset-legend"><?php echo esc_html(__('Reading tickets as they arrive', 'js-support-ticket')); ?></legend>
                             <p class="jsst-fhelp"><?php echo esc_html(__('When on, every new ticket is sent to your engine as it arrives. Off until you switch it on.', 'js-support-ticket')); ?></p><?php JSSTlayout::why(__('Everything else this plugin does with AI starts with somebody pressing a button. These two do not: switching one on means every new ticket is sent to your engine the moment it is filed, before anybody has read it. That is a real change to what leaves your site, and it is off until you say otherwise.', 'js-support-ticket')); ?>
                             <?php /* One per line: side by side the two read as one sentence. */ ?>
                             <div class="jsst-checkstack">
@@ -264,6 +285,15 @@ JSSTmessage::getMessage();
                                         <input type="radio" name="engine" value="<?php echo esc_attr($jsst_id); ?>" <?php checked($jsst_current, $jsst_id); ?> />
                                         <span><?php echo esc_html($jsst_engine['label']); ?></span>
                                     </label>
+                                    <?php if ($jsst_current === $jsst_id) {
+                                        /* Which one is chosen, said in words: a
+                                           radio alone was easy to miss. */
+                                        if (class_exists('JSSTaiengine') && JSSTaiengine::usable($jsst_id)) { ?>
+                                            <span class="jsst-pill jsst-pill-ok"><span class="jsst-dot"></span><?php echo esc_html(__('In use', 'js-support-ticket')); ?></span>
+                                        <?php } else { ?>
+                                            <span class="jsst-pill jsst-pill-warn"><span class="jsst-dot"></span><?php echo esc_html(__('Chosen, not working', 'js-support-ticket')); ?></span>
+                                        <?php }
+                                    } ?>
                                     <?php if (!empty($jsst_engine['recommended'])) { ?>
                                         <span class="jsst-pill jsst-pill-info"><?php echo esc_html(__('Recommended', 'js-support-ticket')); ?></span>
                                     <?php } ?>
@@ -277,6 +307,18 @@ JSSTmessage::getMessage();
                                     <?php } ?>
                                 </legend>
                                 <p class="jsst-fhelp"><?php echo esc_html($jsst_engine['blurb']); ?></p>
+                                <?php if (empty($jsst_engine['laneopen'])) {
+                                    /* The engine and the switch it needs, in one place: ticked,
+                                       saving this engine also opens its lane. Nothing else on
+                                       the switches tab is touched. */ ?>
+                                    <label class="jsst-check">
+                                        <input type="checkbox" name="openlane_<?php echo esc_attr($jsst_id); ?>" value="1" <?php checked($jsst_current, $jsst_id); ?> />
+                                        <span><?php echo esc_html(sprintf(
+                                            /* translators: %s: lane name, e.g. "Local model" */
+                                            __('Also switch on the "%s" lane when I save with this engine chosen', 'js-support-ticket'),
+                                            wp_strip_all_tags(isset($jsst_lanes[$jsst_engine['lane']]['label']) ? $jsst_lanes[$jsst_engine['lane']]['label'] : $jsst_engine['lane']))); ?></span>
+                                    </label>
+                                <?php } ?>
 
                                 <div class="jsst-formgrid">
                                     <?php if ($jsst_id === 'local') { ?>
@@ -345,19 +387,6 @@ JSSTmessage::getMessage();
                             </fieldset>
                         <?php } ?>
 
-                        <fieldset class="jsst-fieldset">
-                            <legend class="jsst-fieldset-legend"><?php echo esc_html(__('How answers are written', 'js-support-ticket')); ?></legend>
-                            <div class="jsst-formgrid">
-                                <div class="jsst-frow">
-                                    <?php /* Not the language AI answers are written in - that is
-                                             "Answer language" on Written answers. This one is only
-                                             what the agent's Translate tool falls back to. */ ?>
-                                    <label class="jsst-flabel" for="jsst-ailanguage"><?php echo esc_html(__('Translate into, by default', 'js-support-ticket')); ?></label>
-                                    <div class="jsst-fval"><input type="text" id="jsst-ailanguage" name="ailanguage" value="<?php echo esc_attr(JSSTcopilot::defaultLanguage()); ?>" size="24" /></div>
-                                    <p class="jsst-fhelp"><?php echo esc_html(__('What the agent\'s Translate tool uses when no language is picked. Write it as a word, for example English. The language of AI-written answers is set on Written answers.', 'js-support-ticket')); ?></p><?php JSSTlayout::why(__('What Translate falls back to when an agent has not picked a language. Written as you would say it — English, Deutsch, العربية — because it goes into the request as a word, not a locale code.', 'js-support-ticket')); ?>
-                                </div>
-                            </div>
-                        </fieldset>
 
                         <div class="jsst-btnrow">
                             <input type="submit" class="jsst-btn jsst-btn-primary" value="<?php echo esc_attr(__('Save engine', 'js-support-ticket')); ?>" />
@@ -383,11 +412,130 @@ JSSTmessage::getMessage();
                 </div>
             </form>
 
+            <?php /* Spending limits and the backup engine. They used to sit at the
+                     foot of Usage & Cost, a report page, where nobody looks for a
+                     setting. Same forms, same task, same saved values; only the
+                     page changed. Usage & Cost now shows them and links here. */
+            if (class_exists('JSSTaiusage')) {
+                $jsst_budget       = JSSTaiusage::budget();
+                $jsst_spendurl     = wp_nonce_url(admin_url('admin.php?page=aiagent&task=saveaibudget&action=jstask'), 'jsst-aiagent-budget');
+                $jsst_spendengines = class_exists('JSSTaiengine') ? JSSTaiengine::engines() : array();
+                $jsst_spendcurrent = class_exists('JSSTaiengine') ? JSSTaiengine::currentId() : '';
+                $jsst_fallback     = class_exists('JSSTaiengine') ? JSSTaiengine::fallbackId() : ''; ?>
+            <div id="AISpend">
+                <p class="jsst-lede"><?php echo esc_html(__('Caps on what AI may spend, and the engine to try when the main one cannot answer. What was actually spent is on Usage & Cost.', 'js-support-ticket')); ?>
+                    <a href="<?php echo esc_url(admin_url('admin.php?page=aiagent&jstlay=aiagent_usage')); ?>"><?php echo esc_html(__('Usage & Cost', 'js-support-ticket')); ?></a></p>
+                <div class="jsst-card">
+                    <div class="jsst-card-head">
+                        <h2 class="jsst-card-title"><?php echo esc_html(__('Spending limits', 'js-support-ticket')); ?></h2>
+                    </div>
+                    <div class="jsst-card-body">
+                        <form class="jsst-form" method="post" action="<?php echo esc_url($jsst_spendurl); ?>">
+                            <input type="hidden" name="aibudget" value="1" />
+                            <input type="hidden" name="back" value="settings" />
+                            <p class="jsst-hint"><?php echo esc_html(__('0 means no limit. Money limits apply to your own provider key only.', 'js-support-ticket')); ?></p><?php JSSTlayout::why(__('Leave a limit at nought to mean no limit. Money limits govern requests on your own provider key only — a request included with your licence costs you nothing, and one on your own hardware costs nothing per call, so neither is stopped by a budget for a bill that was never coming.', 'js-support-ticket')); ?>
+
+                            <div class="jsst-formgrid">
+                                <div class="jsst-frow">
+                                    <label class="jsst-flabel" for="jsst-daymoney"><?php echo esc_html(__('Spend per day ($)', 'js-support-ticket')); ?></label>
+                                    <div class="jsst-fval"><input type="number" step="0.01" min="0" id="jsst-daymoney" name="daymoney" value="<?php echo esc_attr(isset($jsst_budget['daymoney']) ? $jsst_budget['daymoney'] : 0); ?>" /></div>
+                                </div>
+                                <div class="jsst-frow">
+                                    <label class="jsst-flabel" for="jsst-monthmoney"><?php echo esc_html(__('Spend per month ($)', 'js-support-ticket')); ?></label>
+                                    <div class="jsst-fval"><input type="number" step="0.01" min="0" id="jsst-monthmoney" name="monthmoney" value="<?php echo esc_attr(isset($jsst_budget['monthmoney']) ? $jsst_budget['monthmoney'] : 0); ?>" /></div>
+                                </div>
+                                <div class="jsst-frow">
+                                    <label class="jsst-flabel" for="jsst-daycalls"><?php echo esc_html(__('Requests per day', 'js-support-ticket')); ?></label>
+                                    <div class="jsst-fval"><input type="number" step="1" min="0" id="jsst-daycalls" name="daycalls" value="<?php echo esc_attr(isset($jsst_budget['daycalls']) ? $jsst_budget['daycalls'] : 0); ?>" /></div>
+                                </div>
+                                <div class="jsst-frow">
+                                    <label class="jsst-flabel" for="jsst-ticketcalls"><?php echo esc_html(__('Requests per ticket', 'js-support-ticket')); ?></label>
+                                    <div class="jsst-fval"><input type="number" step="1" min="0" id="jsst-ticketcalls" name="ticketcalls" value="<?php echo esc_attr(isset($jsst_budget['ticketcalls']) ? $jsst_budget['ticketcalls'] : 0); ?>" /></div>
+                                </div>
+                            </div>
+                            <p class="jsst-fhelp"><?php echo esc_html(__('Request limits count every engine, priced or not.', 'js-support-ticket')); ?></p>
+
+                            <label class="jsst-check">
+                                <input type="checkbox" name="alerts" value="1" <?php checked(!empty($jsst_budget['alerts'])); ?> />
+                                <span><?php echo esc_html(/* translators: The % sign is a literal percent sign, not a placeholder. */ __('E-mail the site administrator at 80% of a limit, and again when it is reached', 'js-support-ticket')); ?></span>
+                            </label>
+                            <p class="jsst-fhelp"><?php echo esc_html(__('Sent once per limit per period.', 'js-support-ticket')); ?></p><?php JSSTlayout::why(__('Once per limit per period, never on every request. Changing a limit clears the warnings, because the next warning is about the new number.', 'js-support-ticket')); ?>
+
+                            <div class="jsst-btnrow">
+                                <input type="submit" class="jsst-btn jsst-btn-primary" value="<?php echo esc_attr(__('Save limits', 'js-support-ticket')); ?>" />
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="jsst-card">
+                    <div class="jsst-card-head">
+                        <h2 class="jsst-card-title"><?php echo esc_html(__('When the engine cannot answer', 'js-support-ticket')); ?></h2>
+                    </div>
+                    <div class="jsst-card-body">
+                        <form class="jsst-form" method="post" action="<?php echo esc_url($jsst_spendurl); ?>">
+                            <input type="hidden" name="aifallback" value="1" />
+                            <input type="hidden" name="back" value="settings" />
+                            <div class="jsst-formgrid">
+                                <div class="jsst-frow jsst-frow-full">
+                                    <label class="jsst-flabel" for="jsst-fallback"><?php echo esc_html(__('Try this engine instead', 'js-support-ticket')); ?></label>
+                                    <div class="jsst-fval">
+                                        <select id="jsst-fallback" name="fallback">
+                                            <option value=""><?php echo esc_html(__('Nothing — report the failure', 'js-support-ticket')); ?></option>
+                                            <?php foreach ($jsst_spendengines as $jsst_id => $jsst_def) {
+                                                if ($jsst_id === $jsst_spendcurrent) continue; ?>
+                                                <option value="<?php echo esc_attr($jsst_id); ?>" <?php selected($jsst_fallback, $jsst_id); ?>><?php echo esc_html($jsst_def['label']); ?></option>
+                                            <?php } ?>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <p class="jsst-fhelp"><?php echo esc_html(__('Used when the main engine is unreachable, rate limited or over budget.', 'js-support-ticket')); ?></p><?php JSSTlayout::why(__('Used when the chosen engine is unreachable, rate limited, overloaded, or out of budget — a local model here keeps the desk answering on hardware you already pay for once the month\'s budget is gone.', 'js-support-ticket')); ?>
+                            <p class="jsst-fhelp"><?php echo esc_html(__('Not used for a bad key, an unknown model or a refusal, which would fail the same way.', 'js-support-ticket')); ?></p>
+                            <div class="jsst-btnrow">
+                                <input type="submit" class="jsst-btn jsst-btn-primary" value="<?php echo esc_attr(__('Save', 'js-support-ticket')); ?>" />
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <?php /* The setting that most decides what each reply costs. It was
+                         inside Advanced, folded; here it sits with the other money
+                         settings. Its own small form posts only this field, and the
+                         save writes only fields that were posted. */
+                if (isset($jsst_cfg['aiagent_token_budget'])) { ?>
+                <div class="jsst-card">
+                    <div class="jsst-card-head">
+                        <h2 class="jsst-card-title"><?php echo esc_html(__('Cost of each reply', 'js-support-ticket')); ?></h2>
+                    </div>
+                    <div class="jsst-card-body">
+                        <form class="jsst-form" method="post" action="<?php echo esc_url($jsst_action); ?>">
+                            <input type="hidden" name="aibehaviour" value="1" />
+                            <input type="hidden" name="tab" value="AISpend" />
+                            <div class="jsst-formgrid">
+                            <?php
+                            $jsst_title = esc_html(__('Token budget per reply', 'js-support-ticket'));
+                            $jsst_field = JSSTformfield::number('aiagent_token_budget', $jsst_cfg['aiagent_token_budget'], array('min' => 200, 'max' => 8000, 'step' => 1));
+                            $jsst_description = esc_html(__('Most tokens of your content sent with one reply (200 to 8000). This is what controls cost.', 'js-support-ticket'));
+                            $jsst_why = __('Most tokens of your own content that may be sent with one reply, from 200 to 8000. This is what the AI engine actually charges for, so it is the setting that controls cost. Lower it to spend less per ticket; the best-matching passages are kept and the weakest are dropped first.', 'js-support-ticket');
+                            jsstAiSettingField($jsst_title, $jsst_field, $jsst_description, $jsst_why); $jsst_why = '';
+                            ?>
+                            </div>
+                            <div class="jsst-btnrow">
+                                <input type="submit" class="jsst-btn jsst-btn-primary" value="<?php echo esc_attr(__('Save', 'js-support-ticket')); ?>" />
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <?php } ?>
+            </div>
+            <?php } ?>
+
             <div data-jsst-for="AIAgentSuggestions">
             <h2 class="jsst-groupheading"><?php echo esc_html(__('How it behaves', 'js-support-ticket')); ?></h2>
             <p class="jsst-lede">
                 <?php echo esc_html(__('How the AI behaves once it is allowed: what it searches, how it writes and how closely it sticks to your content.', 'js-support-ticket')); ?>
-            </p><?php JSSTlayout::why(__('Everything above decides what is allowed to happen and who does it. Everything below is how it behaves once it is allowed — what is searched, how it writes, and how strictly it is held to your own content.', 'js-support-ticket')); ?>
+            </p>
             </div>
 
             <form class="jsst-form" method="post" action="<?php echo esc_url($jsst_action); ?>">
@@ -561,6 +709,21 @@ JSSTmessage::getMessage();
                             . ($jsst_ir_off
                                 ? esc_html(__('Switch AI on', 'js-support-ticket'))
                                 : esc_html(__('Set up the engine', 'js-support-ticket'))) . '</a></div>';
+                        /* The exact reason, the same words as the status line at the
+                           top: "no engine is set up" was wrong on a site that has an
+                           engine chosen whose lane is switched off. */
+                        if (class_exists('JSSTainav')) {
+                            $jsst_ir_st = JSSTainav::status();
+                            if ($jsst_ir_st['text'] !== '') {
+                                $jsst_ir_nokey = '<div class="jsst-ir-warn"><strong>' . esc_html($jsst_ir_st['title']) . '.</strong> '
+                                    . esc_html($jsst_ir_st['text']) . ' '
+                                    . esc_html(__('Nothing on this tab will run until it is fixed.', 'js-support-ticket'));
+                                if (!empty($jsst_ir_st['actions'][0])) {
+                                    $jsst_ir_nokey .= ' <a href="' . esc_url($jsst_ir_st['actions'][0][1]) . '">' . esc_html($jsst_ir_st['actions'][0][0]) . '</a>';
+                                }
+                                $jsst_ir_nokey .= '</div>';
+                            }
+                        }
                     }
                     ?>
 
@@ -568,7 +731,8 @@ JSSTmessage::getMessage();
                     <div class="jsst-card" id="AIAgentAI">
                         <div class="jsst-card-head">
                             <h2 class="jsst-card-title"><?php echo esc_html(__('Written answers', 'js-support-ticket')); ?></h2>
-                            <p class="jsst-card-sub"><?php echo esc_html(__('Settings shared by the written answer on the ticket form and the automatic replies.', 'js-support-ticket')); ?></p>
+                            <p class="jsst-card-sub"><?php echo esc_html(__('The written answer on the ticket form and the automatic replies. Who gets automatic replies, and when, is set on Rules.', 'js-support-ticket')); ?>
+                                <a href="<?php echo esc_url(admin_url('admin.php?page=aiagent&jstlay=aiagent_autopilot')); ?>"><?php echo esc_html(__('Rules', 'js-support-ticket')); ?></a></p>
                         </div>
                         <div class="jsst-card-body">
                             <div class="jsst-formgrid">
@@ -585,19 +749,65 @@ JSSTmessage::getMessage();
                         if(isset($jsst_cfg['aiagent_ai_sources_limit'])){
                             $jsst_title = esc_html(__('Passages for the ticket-form answer', 'js-support-ticket'));
                             $jsst_field = JSSTformfield::number('aiagent_ai_sources_limit', $jsst_cfg['aiagent_ai_sources_limit'], array('min' => 1, 'max' => 8, 'step' => 1));
-                            $jsst_description = esc_html(__('How many matching passages the AI may use for the answer shown on the ticket form, between 1 and 8. Automatic replies have their own limit under Advanced.', 'js-support-ticket'));
+                            $jsst_description = esc_html(__('How many matching passages the AI may use for the answer shown on the ticket form, between 1 and 8. Automatic replies have their own limit just below.', 'js-support-ticket'));
                             jsstAiSettingField($jsst_title, $jsst_field, $jsst_description);
                         }
+                        /* Beside the ticket-form limit above: two settings of the same
+                           kind were on two different tabs. Same field, same form. */
+                        if(isset($jsst_cfg['aiagent_max_chunks'])){
+                            $jsst_title = esc_html(__('Passages for automatic replies', 'js-support-ticket'));
+                            $jsst_field = JSSTformfield::number('aiagent_max_chunks', $jsst_cfg['aiagent_max_chunks'], array('min' => 1, 'max' => 8, 'step' => 1));
+                            $jsst_description = esc_html(__('How many pieces of your content the AI may be shown when writing a reply to a ticket, from 1 to 8. The answer on the ticket form has its own limit just above.', 'js-support-ticket'));
+                            jsstAiSettingField($jsst_title, $jsst_field, $jsst_description);
+                        }
+                        ?>
+                            </div>
+                        </div>
+                    </div>
+
+                    <?php /* Tone and language apply to every answer written for a
+                             customer, not only to the ticket form, so they have their
+                             own card. Same form and fields as before. */ ?>
+                    <div class="jsst-card" data-jsst-for="AIAgentAI">
+                        <div class="jsst-card-head">
+                            <h2 class="jsst-card-title"><?php echo esc_html(__('How the AI writes', 'js-support-ticket')); ?></h2>
+                            <p class="jsst-card-sub"><?php echo esc_html(__('Tone and language for every answer the AI writes for a customer: on the ticket form and in automatic replies.', 'js-support-ticket')); ?></p>
+                        </div>
+                        <div class="jsst-card-body">
+                            <div class="jsst-formgrid">
+                        <?php
                         if(isset($jsst_cfg['aiagent_ai_tone'])){
                             $jsst_title = esc_html(__('Tone', 'js-support-ticket'));
                             $jsst_field = JSSTformfield::select('aiagent_ai_tone', $jsst_ir_tones, $jsst_cfg['aiagent_ai_tone']);
-                            $jsst_description = esc_html(__('How replies should read. Used everywhere the AI writes.', 'js-support-ticket'));
+                            $jsst_description = esc_html(__('How answers should read.', 'js-support-ticket'));
                             jsstAiSettingField($jsst_title, $jsst_field, $jsst_description);
                         }
                         if(isset($jsst_cfg['aiagent_ai_language'])){
                             $jsst_title = esc_html(__('Answer language', 'js-support-ticket'));
-                            $jsst_field = JSSTformfield::text('aiagent_ai_language', $jsst_cfg['aiagent_ai_language']);
-                            $jsst_description = esc_html(__('The language AI-written answers use. Enter a language name, or "auto" to reply in whichever language the customer wrote in.', 'js-support-ticket'));
+                            /* A list instead of a free-text box. The stored values are the
+                               ones the box always took - "auto" or an English language
+                               name, which is what the prompt reads - and a value somebody
+                               typed that is not on the list is kept as its own choice. */
+                            $jsst_langnow = (string) $jsst_cfg['aiagent_ai_language'];
+                            $jsst_langlist = array((object) array('id' => 'auto', 'text' => __('The customer\'s own language (recommended)', 'js-support-ticket')));
+                            foreach (array('English', 'Arabic', 'Chinese', 'Dutch', 'French', 'German', 'Greek', 'Hebrew', 'Hindi',
+                                           'Indonesian', 'Italian', 'Japanese', 'Korean', 'Persian', 'Polish', 'Portuguese',
+                                           'Russian', 'Spanish', 'Swedish', 'Thai', 'Turkish', 'Urdu') as $jsst_langname) {
+                                $jsst_langlist[] = (object) array('id' => $jsst_langname, 'text' => __($jsst_langname, 'js-support-ticket')); // phpcs:ignore WordPress.WP.I18n.NonSingularStringLiteralText
+                            }
+                            $jsst_langids = array_map(function ($jsst_o) { return strtolower($jsst_o->id); }, $jsst_langlist);
+                            if ($jsst_langnow !== '' && !in_array(strtolower($jsst_langnow), $jsst_langids, true)) {
+                                $jsst_langlist[] = (object) array('id' => $jsst_langnow, 'text' => $jsst_langnow);
+                            }
+                            /* Selected by name whatever its case: "english" typed by hand
+                               shows as English. Saving then writes "English", which the
+                               prompt reads exactly the same way. */
+                            $jsst_langpick = ($jsst_langnow === '') ? 'auto' : $jsst_langnow;
+                            foreach ($jsst_langlist as $jsst_o) {
+                                if (strtolower($jsst_o->id) === strtolower($jsst_langpick)) { $jsst_langpick = $jsst_o->id; break; }
+                            }
+                            $jsst_field = JSSTformfield::select('aiagent_ai_language', $jsst_langlist, $jsst_langpick);
+                            $jsst_description = esc_html(__('The language AI-written answers use.', 'js-support-ticket'));
                             jsstAiSettingField($jsst_title, $jsst_field, $jsst_description);
                         }
                         /* The engine is its own tab on this same screen; a card
@@ -620,7 +830,7 @@ JSSTmessage::getMessage();
                                      preview step on Set up is the one that shows what is
                                      found for a question and what would be written. */ ?>
                             <p class="jsst-card-sub"><?php echo esc_html(__('How strictly the AI sticks to your content.', 'js-support-ticket')); ?>
-                                <a href="<?php echo esc_url(admin_url('admin.php?page=aiagent&jstlay=aiagent_setup')); ?>"><?php echo esc_html(__('Try a question on Set up first', 'js-support-ticket')); ?></a></p><?php JSSTlayout::why(__('These control how strictly the AI is held to your content. The defaults are deliberately cautious; ask a real question on Set up, which shows the passages found and the answer that would be written, before and after any change.', 'js-support-ticket')); ?>
+                                <a href="<?php echo esc_url(admin_url('admin.php?page=aiagent&jstlay=aiagent_setup')); ?>"><?php echo esc_html(__('Try a question on Set up first', 'js-support-ticket')); ?></a></p>
                         </div>
                         <div class="jsst-card-body">
                             <div class="jsst-formgrid">
@@ -643,14 +853,12 @@ JSSTmessage::getMessage();
                             $jsst_title = esc_html(__('Match needed for a reply', 'js-support-ticket'));
                             $jsst_field = JSSTformfield::number('aiagent_min_coverage_reply', $jsst_cfg['aiagent_min_coverage_reply'], array('min' => 20, 'max' => 100, 'step' => 1));
                             $jsst_description = esc_html(__('The same, for content the AI may state as fact (20 to 100). Keep it above the suggestion value.', 'js-support-ticket'));
-                            $jsst_why = __('The same measure, but for content the AI may state as fact, from 20 to 100. Keep this higher than the suggestion threshold.', 'js-support-ticket');
                             jsstAiSettingField($jsst_title, $jsst_field, $jsst_description, $jsst_why); $jsst_why = '';
                         }
                         if(isset($jsst_cfg['aiagent_require_citation'])){
                             $jsst_title = esc_html(__('Require sources', 'js-support-ticket'));
                             $jsst_field = JSSTformfield::select('aiagent_require_citation', $jsst_yesno, $jsst_cfg['aiagent_require_citation']);
                             $jsst_description = esc_html(__('Reject replies that cite nothing, or cite something they were not given.', 'js-support-ticket'));
-                            $jsst_why = __('Reject a reply that cites nothing, or cites something that was not given to it. Models invent references as readily as they invent facts.', 'js-support-ticket');
                             jsstAiSettingField($jsst_title, $jsst_field, $jsst_description, $jsst_why); $jsst_why = '';
                         }
                         if(isset($jsst_cfg['aiagent_min_overlap'])){
@@ -660,31 +868,18 @@ JSSTmessage::getMessage();
                             $jsst_why = __('How many of a reply\'s specifics - button names, menu paths, time limits - must appear in your own content, from 0 to 100. A reply below this is held as a draft instead of being sent. It ships at 65; the overview records this figure for every reply, so move it from your own replies rather than guessing.', 'js-support-ticket');
                             jsstAiSettingField($jsst_title, $jsst_field, $jsst_description, $jsst_why); $jsst_why = '';
                         }
-                        if(isset($jsst_cfg['aiagent_max_chunks'])){
-                            $jsst_title = esc_html(__('Passages for automatic replies', 'js-support-ticket'));
-                            $jsst_field = JSSTformfield::number('aiagent_max_chunks', $jsst_cfg['aiagent_max_chunks'], array('min' => 1, 'max' => 8, 'step' => 1));
-                            $jsst_description = esc_html(__('How many pieces of your content the AI may be shown when writing a reply to a ticket, from 1 to 8. The answer on the ticket form has its own limit under Written answers.', 'js-support-ticket'));
-                            jsstAiSettingField($jsst_title, $jsst_field, $jsst_description);
-                        }
                         /* Retrieval tuning - sizes, budgets and the variety knob -
                            folded away: the settings above decide whether an answer
                            may go out, these only shape what it is built from, and
                            two of them rebuild the index. */
                         echo '</div><details class="jsst-advanced-more"><summary>'
-                            . esc_html(__('Show advanced tuning', 'js-support-ticket'))
+                            . esc_html(__('Passage sizes (rarely changed)', 'js-support-ticket'))
                             . '</summary><div class="jsst-formgrid">';
                         if(isset($jsst_cfg['aiagent_char_budget'])){
                             $jsst_title = esc_html(__('Largest passage (characters)', 'js-support-ticket'));
                             $jsst_field = JSSTformfield::number('aiagent_char_budget', $jsst_cfg['aiagent_char_budget'], array('min' => 1000, 'max' => 20000, 'step' => 1));
                             $jsst_description = esc_html(__('Largest passage taken from one document (1000 to 20000 characters).', 'js-support-ticket'));
-                            $jsst_why = __('Largest amount of a single document that may be extracted as one passage, from 1000 to 20000. The overall size of a reply prompt is set by the token budget below.', 'js-support-ticket');
-                            jsstAiSettingField($jsst_title, $jsst_field, $jsst_description, $jsst_why); $jsst_why = '';
-                        }
-                        if(isset($jsst_cfg['aiagent_token_budget'])){
-                            $jsst_title = esc_html(__('Token budget per reply', 'js-support-ticket'));
-                            $jsst_field = JSSTformfield::number('aiagent_token_budget', $jsst_cfg['aiagent_token_budget'], array('min' => 200, 'max' => 8000, 'step' => 1));
-                            $jsst_description = esc_html(__('Most tokens of your content sent with one reply (200 to 8000). This is what controls cost.', 'js-support-ticket'));
-                            $jsst_why = __('Most tokens of your own content that may be sent with one reply, from 200 to 8000. This is what the AI engine actually charges for, so it is the setting that controls cost. Lower it to spend less per ticket; the best-matching passages are kept and the weakest are dropped first.', 'js-support-ticket');
+                            $jsst_why = __('Largest amount of a single document that may be extracted as one passage, from 1000 to 20000. The overall size of a reply prompt is set by the token budget on the Spending tab.', 'js-support-ticket');
                             jsstAiSettingField($jsst_title, $jsst_field, $jsst_description, $jsst_why); $jsst_why = '';
                         }
                         if(isset($jsst_cfg['aiagent_mmr_lambda'])){
@@ -722,6 +917,43 @@ JSSTmessage::getMessage();
                     <input type="submit" class="jsst-btn jsst-btn-primary" value="<?php echo esc_attr(__('Save behaviour', 'js-support-ticket')); ?>" />
                 </div>
             </form>
+
+            <?php /* The agents' Translate button: an agent tool, not an engine
+                     setting, so it sits with the other language setting. Its own
+                     small form, saved under the same option as before. */
+            if (class_exists('JSSTcopilot')) { ?>
+            <?php /* Without the AI Agent add-on there is no Written answers tab,
+                     so it stays on Engine & key there. */
+            $jsst_trtab = in_array('aiagent', jssupportticket::$_active_addons) ? 'AIAgentAI' : 'AIEngine'; ?>
+            <form class="jsst-form" method="post" action="<?php echo esc_url($jsst_action); ?>" data-jsst-for="<?php echo esc_attr($jsst_trtab); ?>">
+                <input type="hidden" name="aitranslate" value="1" />
+                <input type="hidden" name="tab" value="<?php echo esc_attr($jsst_trtab); ?>" />
+                <div class="jsst-card">
+                    <div class="jsst-card-head">
+                        <h2 class="jsst-card-title"><?php echo esc_html(__('Agents\' Translate button', 'js-support-ticket')); ?></h2>
+                        <p class="jsst-card-sub"><?php echo esc_html(__('For agents inside a ticket. Customers never see it.', 'js-support-ticket')); ?></p>
+                    </div>
+                    <div class="jsst-card-body">
+                        <fieldset class="jsst-fieldset">
+                            
+                            <div class="jsst-formgrid">
+                                <div class="jsst-frow">
+                                    <?php /* Not the language AI answers are written in - that is
+                                             "Answer language" on Written answers. This one is only
+                                             what the agent's Translate tool falls back to. */ ?>
+                                    <label class="jsst-flabel" for="jsst-ailanguage"><?php echo esc_html(__('Translate into, by default', 'js-support-ticket')); ?></label>
+                                    <div class="jsst-fval"><input type="text" id="jsst-ailanguage" name="ailanguage" value="<?php echo esc_attr(JSSTcopilot::defaultLanguage()); ?>" size="24" /></div>
+                                    <p class="jsst-fhelp"><?php echo esc_html(__('What the agent\'s Translate tool uses when no language is picked. Write it as a word, for example English. The language of answers written for customers is set just above.', 'js-support-ticket')); ?></p><?php JSSTlayout::why(__('What Translate falls back to when an agent has not picked a language. Written as you would say it — English, Deutsch, العربية — because it goes into the request as a word, not a locale code.', 'js-support-ticket')); ?>
+                                </div>
+                            </div>
+                        </fieldset>
+                        <div class="jsst-btnrow">
+                            <input type="submit" class="jsst-btn jsst-btn-primary" value="<?php echo esc_attr(__('Save', 'js-support-ticket')); ?>" />
+                        </div>
+                    </div>
+                </div>
+            </form>
+            <?php } ?>
 
         </div>
     </div>

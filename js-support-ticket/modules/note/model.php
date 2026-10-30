@@ -154,7 +154,12 @@ class JSSTnoteModel {
 
         $jsst_filesize = 0;
         $jsst_filename = '';
-        $jsst_fileresult = $this->uploadFileNote($jsst_ticketid, 'note_attachment');
+        $jsst_fileresult = false;
+        if (JSSTroles::canAttachFiles()) {
+            $jsst_fileresult = $this->uploadFileNote($jsst_ticketid, 'note_attachment');
+        } elseif (JSSTincluder::getJSModel('attachment')->filesWerePosted('note_attachment')) {
+            JSSTmessage::setMessage(esc_html(__('Your files were not attached. You are not allowed to attach files.', 'js-support-ticket')), 'error');
+        }
         if(is_array($jsst_fileresult)){
             if(isset($jsst_fileresult['filename'])){
                 $jsst_filename = $jsst_fileresult['filename'];
@@ -285,23 +290,9 @@ class JSSTnoteModel {
         // The stored name is the only part of the path that is not fixed, so
         // it is reduced to a bare file name before it is used.
         $jsst_file = $jsst_path . '/' . jssupportticketphplib::JSST_basename($jsst_note->filename);
-        if (!file_exists($jsst_file)) {
-            JSSTincluder::notFound();
-        }
-        JSSTincluder::getJSModel('jssupportticket')->generateIndexFile($jsst_path);
-
-        header('Content-Description: File Transfer');
-        header('Content-Type: application/octet-stream');
-        header('X-Content-Type-Options: nosniff');
-        header('Content-Disposition: attachment; filename="' . jssupportticketphplib::JSST_basename($jsst_file) . '"');
-        header('Content-Transfer-Encoding: binary');
-        header('Expires: 0');
-        header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
-        header('Pragma: public');
-        header('Content-Length: ' . filesize($jsst_file));
-        flush();
-        readfile($jsst_file); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_readfile -- streams the file to the browser: WP_Filesystem would read it all into memory first
-        exit();
+        // Streams the file and ends the request; says why when it cannot. Nothing
+        // is written here: on a host without direct file access that stopped it.
+        JSSTattachmentserver::send($jsst_file, array('deleted' => !empty($jsst_note->filedeleted)));
     }
 
     /**
@@ -392,6 +383,20 @@ class JSSTnoteModel {
             return false;
         if(!isset($jsst_data['note-noteid']) || !is_numeric($jsst_data['note-noteid'])){
             return;
+        }
+        // Only someone holding "Edit Time" who can see the ticket, and only for
+        // a note that really belongs to the ticket the form names.
+        $jsst_formticketid = isset($jsst_data['note-tikcetid']) ? (int) $jsst_data['note-tikcetid'] : 0;
+        if (!JSSTroles::canEditTimeOn($jsst_formticketid)) {
+            JSSTmessage::setMessage(esc_html(__('You are not allowed to edit this time', 'js-support-ticket')), 'error');
+            return false;
+        }
+        $jsst_noteticketid = jssupportticket::$_db->get_var(jssupportticket::$_db->prepare(
+            "SELECT ticketid FROM `" . jssupportticket::$_db->prefix . "js_ticket_notes` WHERE id = %d",
+            (int) $jsst_data['note-noteid']
+        ));
+        if ((int) $jsst_noteticketid !== $jsst_formticketid) {
+            return false;
         }
         // conflict resolution handling
         $jsst_up_query = '';

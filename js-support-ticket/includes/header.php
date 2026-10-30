@@ -395,7 +395,7 @@ $jsst_div .= '<div id="jsst-tabs-wrp" class="" >';
 if (isset($jsst_linkarray))
     foreach ($jsst_linkarray as $jsst_link) {
 	    $jsst_id='';
-        if(in_array('multiform', jssupportticket::$_active_addons) && jssupportticket::$_config['show_multiform_popup'] == 1){
+        if(JSSTlayout::frontFormPickerNeeded()){
             if($jsst_link['class'] == "js-ticket-openticketclass"){ $jsst_id="id=multiformpopup";}
         }
         //$jsst_div .= '<span class="jsst-header-tab ' . esc_attr($jsst_link['class']) . '"><a class="js-cp-menu-link" href="' . esc_url($jsst_link['link']) . '"><img class="cp-menu-link-img" title="'. esc_attr($jsst_link['imgtitle']). '" src="'.esc_url($jsst_link['imgsrc']).'">' . esc_html($jsst_link['title']) . '</a></span>';
@@ -405,7 +405,7 @@ if (isset($jsst_linkarray))
 $jsst_div .= '</div></div></div>';
 echo wp_kses($jsst_div, JSST_ALLOWED_TAGS);
 ?>
-<?php if(in_array('multiform', jssupportticket::$_active_addons)){ ?>
+<?php if(JSSTlayout::frontFormPickerNeeded()){ ?>
     <?php JSSTlayout::adminFormPicker(); ?>
 <?php }
 $jsst_jssupportticket_js ='

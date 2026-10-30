@@ -52,6 +52,12 @@ if (!defined('ABSPATH'))
  */
 class JSSTairollout {
 
+    /** The desk's default department id, or 0 when none is set. */
+    public static function defaultDepartment() {
+        $jsst_id = JSSTincluder::getJSModel('department')->getDefaultDepartmentID();
+        return $jsst_id ? (int) $jsst_id : 0;
+    }
+
     /** The rollout rules, as one array. */
     const OPT_RULES = 'jsst_ai_rollout';
 
@@ -528,6 +534,13 @@ class JSSTairollout {
 
         if (!empty($jsst_rules['departments'])) {
             $jsst_dept = isset($jsst_ticket['departmentid']) ? (int) $jsst_ticket['departmentid'] : 0;
+            /* Department is optional on the ticket form, and a ticket left
+               without one matched no ticked department, so it was never
+               answered and nothing said why. It is judged as the default
+               department, which is where the desk sends anything unsorted. */
+            if ($jsst_dept === 0) {
+                $jsst_dept = self::defaultDepartment();
+            }
             if (!in_array($jsst_dept, $jsst_rules['departments'], true)) {
                 return array('state' => 'off', 'reason' => 'department',
                              'detail' => esc_html(__('This department is not included in the rollout.', 'js-support-ticket')));

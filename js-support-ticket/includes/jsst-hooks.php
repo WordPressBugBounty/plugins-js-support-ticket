@@ -485,6 +485,25 @@ function jsst_update_user_profile($jsst_user_id) {
 add_action('edit_user_profile_update', 'jsst_update_user_profile');
 add_action('user_register', 'jsst_update_user_profile'); // creating a new user
 
+/* Mark a new account whose email address is known to be its owner's, so that
+   its earlier guest tickets are attached on its first visit
+   (JSSTuser::linkGuestTickets). WordPress's own sign-up form emails the
+   password link, so nobody gets in without the mailbox; an account an
+   administrator creates is trusted. Other sign-up forms (shops, membership
+   plugins) may let anyone type any address, so they are left out unless the
+   site says its addresses are verified with the jsst_link_guest_tickets_on_register
+   filter. */
+function jsst_flag_guest_ticket_link($jsst_user_id) {
+    update_user_meta((int) $jsst_user_id, 'jsst_link_guest_tickets', 1);
+}
+add_action('register_new_user', 'jsst_flag_guest_ticket_link');
+add_action('edit_user_created_user', 'jsst_flag_guest_ticket_link');
+add_action('user_register', function ($jsst_user_id) {
+    if (apply_filters('jsst_link_guest_tickets_on_register', false, $jsst_user_id)) {
+        jsst_flag_guest_ticket_link($jsst_user_id);
+    }
+}, 20);
+
 /* Translations are installed by JSSTtranslations (includes/classes/translations.php)
    since 1 October 2026. The 4.x download that stood here fetched 4.x files from
    an old CloudFront address into the plugin's own languages folder, which every

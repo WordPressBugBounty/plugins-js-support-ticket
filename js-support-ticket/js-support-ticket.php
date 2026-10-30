@@ -5,7 +5,7 @@
   Plugin URI: https://www.jshelpdesk.com
   Description: JS Help Desk is a trusted open source ticket system. JS Help Desk is a simple, easy to use, web-based customer support system. User can create ticket from front-end. JS Help Desk comes packed with lot features than most of the expensive(and complex) support ticket system on market. JS Help Desk provide you best industry help desk system.
   Author: JS Help Desk
-  Version: 5.0.2
+  Version: 5.0.3
   Requires at least: 5.5
   Requires PHP: 7.4
   Text Domain: js-support-ticket
@@ -155,7 +155,7 @@ class jssupportticket {
         self::$jsst_data = array();
         self::$_search = array();
         self::$_captcha = array();
-        self::$_currentversion = '502';
+        self::$_currentversion = '503';
         self::$_addon_query = array('select'=>'','join'=>'','where'=>'');
         self::$_jshdsession = JSSTincluder::getObjectClass('wphdsession');
         global $wpdb;
@@ -284,10 +284,21 @@ class jssupportticket {
         // admin side once per version - the search itself runs while a customer
         // types and must never build an index.
         add_action('admin_init', array($this, 'jsst_repair_suggestion_indexes'));
+        add_action('admin_init', array($this, 'jsst_convert_small_suggestion_tables'), 11);
         // Help-desk access for agents is derived from the agent list rather than
         // stored on the user, so adding or removing an agent takes effect at
         // once and an ex-agent cannot keep a stale capability. (Roadmap 3.2-CORE-01)
         add_filter('user_has_cap', array('JSSTroles', 'grantAgentCapability'), 10, 4);
+        // The old "Limit AI Replies" permission ticks move to the Agents
+        // add-on's visibility settings once, before a role or agent save can
+        // drop them. See JSSTvisibility::moveAiLimitOnce().
+        add_action('init', array($this, 'jsst_move_ai_limit'));
+    }
+
+    function jsst_move_ai_limit() {
+        if (class_exists('JSSTvisibility') && method_exists('JSSTvisibility', 'moveAiLimitOnce')) {
+            JSSTvisibility::moveAiLimitOnce();
+        }
     }
 
     function jssupportticket_upgrade_completed( $jsst_upgrader_object, $jsst_options ) {
@@ -302,6 +313,8 @@ class jssupportticket {
                     // require_once(JSST_PLUGIN_PATH . 'includes/css/style.php');
                     // restore colors data end
                     update_option('jsst_currentversion', self::$_currentversion);
+                    include_once JSST_PLUGIN_PATH . 'includes/updates/configrepair.php';
+                    JSSTconfigrepair::maybeRun(true);
                     include_once JSST_PLUGIN_PATH . 'includes/updates/updates.php';
                     JSSTupdates::checkUpdates(self::$_currentversion);
                     JSSTincluder::getJSModel('jssupportticket')->updateColorFile();
@@ -325,6 +338,12 @@ class jssupportticket {
      * database really is at this version.
      */
     function jssupportticket_maybe_upgrade_database() {
+        /* Before the version check: a settings table that lost its primary key
+           makes the installed version read wrong, so it is repaired first.
+           Once per release, administrators only; one autoloaded option read on
+           every other request. */
+        include_once JSST_PLUGIN_PATH . 'includes/updates/configrepair.php';
+        JSSTconfigrepair::maybeRun();
         if ((string) get_option('jsst_currentversion') === (string) self::$_currentversion) {
             return;
         }
@@ -891,6 +910,45 @@ class jssupportticket {
         JSSTincluder::getJSModel('ticket')->repairSuggestionIndexes();
     }
 
+    /**
+     * Move the small suggestion tables (canned responses, FAQs, articles) off
+     * MyISAM, once per version. On MyISAM their search ignores words of under
+     * four letters, and natural-language search ignores any word in half the
+     * rows, which in a table of a few rows is all of them. The search copes
+     * with MyISAM on its own; this removes the cause where it is cheap.
+     *
+     * An administrator's own admin page only - never AJAX, never the front
+     * end, never a visitor - and only tables JSSTstorageengine::convertSmall()
+     * accepts as small and safe. Everything else stays opt-in under Storage
+     * Engine, where this one is also listed and can be reverted.
+     */
+    function jsst_convert_small_suggestion_tables() {
+        if (wp_doing_ajax() || wp_doing_cron() || !current_user_can('manage_options') || !class_exists('JSSTstorageengine')) {
+            return;
+        }
+        $jsst_version = (string) jssupportticket::$_currentversion;
+        if (get_option('jsst_ir_engine_check') === $jsst_version) {
+            return;
+        }
+        update_option('jsst_ir_engine_check', $jsst_version, false);
+        $jsst_model = JSSTincluder::getJSModel('ticket'); // loads the class
+        $jsst_tables = $jsst_model::suggestionSourceTables();
+        foreach ($jsst_tables as $jsst_key => $jsst_table) {
+            $jsst_engine = jssupportticket::$_db->get_var(jssupportticket::$_db->prepare(
+                "SELECT ENGINE FROM information_schema.TABLES WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = %s",
+                $jsst_table
+            ));
+            if ($jsst_engine === null || strcasecmp((string) $jsst_engine, 'MyISAM') !== 0) {
+                continue;
+            }
+            $jsst_result = JSSTstorageengine::convertSmall($jsst_table);
+            if (is_wp_error($jsst_result)) {
+                error_log(sprintf('JS Help Desk: %s left on MyISAM: %s', $jsst_table, $jsst_result->get_error_message()));
+            }
+        }
+        $jsst_model::recordSuggestionEngines();
+    }
+
     function jsst_handle_delete_cookies(){
 
         if(isset($_COOKIE['jsst_addon_return_data'])){
@@ -1331,6 +1389,13 @@ class jssupportticket {
         // statically from the upload path, the attachment model and activation.
         // (Roadmap 4.0-SEC-03)
         include_once __DIR__ . '/includes/classes/attachmentguard.php';
+        // Warns administrators when attachments open straight from their file
+        // address. Hooked here, not in the class file: that file returns early
+        // once the class exists, so nothing after the class ever runs.
+        add_action('admin_notices', array('JSSTattachmentguard', 'exposedNotice'));
+        // Sends attachments to the browser with plain PHP, for every download
+        // and view route. Called statically from the attachment and note models.
+        include_once __DIR__ . '/includes/classes/attachmentserver.php';
         // Email delivery diagnostics. Called from the email model on every send
         // and from the Email Health screen. (Roadmap 4.0-OPS-01)
         include_once __DIR__ . '/includes/classes/mailhealth.php';
@@ -1574,9 +1639,11 @@ class jssupportticket {
            has got. The CLI is included for the same reason the benchmark is:
            the test suite is not wp-admin, and a class nothing can load is a
            class nothing can test. (Roadmap 6.0-AI-11) */
-        if (is_admin() || (defined('WP_CLI') && WP_CLI) || PHP_SAPI === 'cli') {
-            include_once __DIR__ . '/includes/classes/aisetup.php';
-        }
+        /* Everywhere now: the live chat's AI first responder and the agent
+           console's "Suggest (AI)" ask JSSTaisetup::preview(), and an agent
+           working on the front-end portal is not in wp-admin. Loaded only
+           there, the portal console said "AI: off" while wp-admin said on. */
+        include_once __DIR__ . '/includes/classes/aisetup.php';
         /* The AI Agent's menu and tab map: five groups over the AI screens.
            Admin only, like the setup checklist it reads. */
         if (is_admin() || (defined('WP_CLI') && WP_CLI) || PHP_SAPI === 'cli') {
@@ -1791,7 +1858,60 @@ class jssupportticket {
         wp_add_inline_script('jsst-formvalidator',$jsst_js);
     }
 
+    /**
+     * Is this front-end request one that shows the help desk?
+     *
+     * The portal page, any help desk address (jstmod / jstlay), a page whose
+     * content holds a help desk shortcode or block, the sidebar widget, or the
+     * floating support tab switched on for every page. Anything else - a page
+     * builder template, a widget area we did not think of - still works:
+     * JSSTincluder::include_file() loads the files when a screen is drawn.
+     */
+    public static function isDeskRequest() {
+        $jsst_forced = apply_filters('jsst_load_front_assets', null);
+        if ($jsst_forced !== null) return (bool) $jsst_forced;
+
+        if (JSSTrequest::getVar('jstmod') || JSSTrequest::getVar('jstlay') || JSSTrequest::getVar('jsstpageid')) {
+            return true;
+        }
+        if (is_active_widget(false, false, 'jsst_main_plugin_pages_widget_options')) {
+            return true;
+        }
+        if (is_singular()) {
+            $jsst_post = get_queried_object();
+            if ($jsst_post && isset($jsst_post->ID)) {
+                $jsst_portal = (int) jssupportticket::$_db->get_var("SELECT configvalue FROM `" . jssupportticket::$_db->prefix . "js_ticket_config` WHERE configname = 'default_pageid'");
+                if ($jsst_portal > 0 && (int) $jsst_post->ID === $jsst_portal) return true;
+                $jsst_content = isset($jsst_post->post_content) ? (string) $jsst_post->post_content : '';
+                if (strpos($jsst_content, '[jssupportticket') !== false || strpos($jsst_content, '<!-- wp:js-support-ticket/') !== false) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    /** Load the front-end scripts and styles, once. Safe to call late. */
+    public static function ensureFrontAssets() {
+        static $jsst_done = false;
+        if ($jsst_done || is_admin()) return;
+        $jsst_done = true;
+        self::$jsst_front_wanted = true;
+        wp_enqueue_script('jquery');
+        self::addStyleSheets();
+        // Before wp_head the styles go in the head; after it, WordPress prints them late.
+        if (did_action('wp_head')) {
+            self::jsst_register_plugin_styles();
+        }
+    }
+
+    /** Set once the front end has asked for the help desk's files. */
+    public static $jsst_front_wanted = false;
+
     public static function jsst_register_plugin_styles(){
+        if (!is_admin() && !self::$jsst_front_wanted) {
+            return; // not a help desk page
+        }
         global $wp_styles;
         if (!isset($wp_styles->queue)) {
             wp_enqueue_style('jssupportticket-main-css', JSST_PLUGIN_URL . 'includes/css/style.css', array(), jssupportticket::assetVersion('includes/css/style.css'));
@@ -1978,6 +2098,23 @@ class jssupportticket {
                 //             div#js-ticket_screentag span.text{display:inline-block;font-family:sans-serif;font-size:15px;}
                 //         </style>';
 
+                /* On a page that is not a help desk page the help desk's files are
+                   not loaded, so the tab brings its own few lines of style and
+                   hangs its script on jQuery. It used to need all of them, which
+                   put 240 KB of help desk files on every page of the site.
+                   Two of the values the tab gets on a help desk page come from
+                   style.css's general rules rather than its own, so they are
+                   written here too: without `vertical-align:middle` the image sat
+                   on the text baseline and the tab grew 8px taller on every other
+                   page, and box-sizing keeps its padding inside the same size. */
+                $jsst_tag_handle = 'js-support-ticket-main-js';
+                if (!self::$jsst_front_wanted) {
+                    wp_enqueue_script('jquery');
+                    $jsst_tag_handle = 'jquery-core';
+                    printf('<style id="jsst-screentag-css">div#js-ticket_screentag,div#js-ticket_screentag *{box-sizing:border-box}div#js-ticket_screentag{opacity:1;position:fixed;top:%1$s;left:%2$s;right:%3$s;bottom:%4$s;background:rgba(18,17,17,.5);z-index:9999;border-radius:%5$s;padding:%6$s}div#js-ticket_screentag img.js-ticket_screentag_image{margin-%7$s:10px;display:inline-block;width:40px;height:40px;vertical-align:middle}div#js-ticket_screentag a.js-ticket_screentag_anchor{color:#fff;text-decoration:none}div#js-ticket_screentag span.text{display:inline-block;font-family:sans-serif;font-size:15px}</style>',
+                        esc_attr($jsst_top), esc_attr($jsst_left), esc_attr($jsst_right), esc_attr($jsst_bottom),
+                        esc_attr($jsst_borderradius), esc_attr($jsst_padding), esc_attr($jsst_location));
+                }
                 $jsst_html ='
                         <div id="js-ticket_screentag">
                         <a class="js-ticket_screentag_anchor" href="' . esc_url(site_url('?page_id=' . jssupportticket::$_config['default_pageid'])) . '">';
@@ -2001,7 +2138,7 @@ class jssupportticket {
                                     }
                                 );
                             });';
-                        wp_add_inline_script('js-support-ticket-main-js',$jsst_jssupportticket_js);
+                        wp_add_inline_script($jsst_tag_handle, $jsst_jssupportticket_js);
                 echo wp_kses($jsst_html, JSST_ALLOWED_TAGS);
             }
         }
@@ -2396,10 +2533,21 @@ class jssupportticket {
 
 add_action('init', 'jsst_custom_init_session', 1);
 function jsst_custom_init_session() {
-    wp_enqueue_script("jquery");
-    jssupportticket::addStyleSheets();
+    /* wp-admin and ajax as before. On the front end the help desk's scripts
+       and styles are loaded only where the help desk is (see
+       jssupportticket::isDeskRequest()); they used to be on every page of the
+       site - the homepage, the blog, the shop - which slowed all of them. */
+    if (is_admin() || wp_doing_ajax()) {
+        wp_enqueue_script("jquery");
+        jssupportticket::addStyleSheets();
+    }
     // jsst_subscribe_notifications();
 }
+add_action('wp', function () {
+    if (!is_admin() && jssupportticket::isDeskRequest()) {
+        jssupportticket::ensureFrontAssets();
+    }
+});
 
 // add the filter
 $jsst_jssupportticket = new jssupportticket();

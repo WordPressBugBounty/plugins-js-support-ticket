@@ -4,6 +4,42 @@ JS Help Desk - full changelog
 The readme lists what changed for site owners. This file keeps the complete,
 technical notes for every release.
 
+= 5.0.3 =
+**Security**
+* Ticket actions (close, delete, transfer, priority, ban and close, reopen, in progress, lock, assign) and bulk actions check that the agent may view each ticket.
+* Time-log edits require the Edit Time permission, access to the ticket and a reply or note belonging to it.
+* Agent Feedback requires View Feedback; internal mail sets the sender on the server and checks ownership; five nonce-only AJAX tasks check capabilities.
+* Guest status checks are rate limited; the guest cookie is HttpOnly and SameSite; access tokens carry an HMAC (older tokens are still accepted).
+* wp-admin help desk limited to administrators and the two agent roles; Agent Access, System Status and Storage Engine are administrator-only.
+* E-mail attachments pass the upload checks (name, size, WordPress and site file types, content scan) before they are saved or recorded; refused files are logged (`JSSTuploads::storeTicketViaEmailAttachment()`).
+* Ticket image viewer: stored XSS through a link in a ticket message (CWE-79; reported through Wordfence). VenoBox shows its title as text, starts only on the page's own attachment links (`.js_ticketattachment > a.venobox[data-vbtype=image]`), and saved editor content drops `data-vbtype` (`getSanitizedEditorData()`).
+
+**Fixed**
+* Settings table without its primary key: one-time automatic rebuild that keeps the effective value of every setting, removes duplicate FULLTEXT indexes and keeps a backup table for 30 days (`JSSTconfigrepair`).
+* The installed version is read from the highest version row; update ranges are locked and never re-run within an hour; update files 281-317 are safe to run twice.
+* Edit-ticket fatal error for customers and visitors; PHP warnings for missing tickets; SQL error in the guest permission check.
+* Refused admin screens show a message instead of "headers already sent" warnings.
+* False "older, separate add-ons installed" notice on License & Add-ons.
+* AI Agent: "never automate" terms match at the start of a word, not inside one ("issue" no longer matches "sue").
+* AI Agent: usage records the real token counts, or "unknown" instead of 0.
+* Attachments: download, view and Download All go through one streaming server (`JSSTattachmentserver`) that reads with plain PHP instead of `WP_Filesystem()`, so they work on hosts where the filesystem method is not "direct" (before: a silent return, which WordPress showed as "Sorry, you are not allowed to access this page"). It checks that the real path is inside the attachment folder, sends images, video, audio and PDF inline only for those types, supports HTTP Range for video, streams instead of loading the whole file, and reports a missing or unreadable file instead of falling through.
+* Ticket form: a canned "Quick answer" was clamped to two lines with nothing to open. The card has a Show answer / Hide toggle with the whole reply as sanitised HTML (`cannedAnswerHtml()`); the preview keeps spaces between paragraphs and list items.
+* Free suggestions on MyISAM tables: natural-language FULLTEXT ignores words found in half or more of the rows, so a source with one or two rows never matched; on small InnoDB tables relevance was so low that a good match was cut as "far below the best". MyISAM sources (engine recorded by `repairSuggestionIndexes()`) and small tables are searched IN BOOLEAN MODE and ranked by word overlap.
+* Finish upgrade: an `activate` step that WordPress accepted but the pack's licence gate refused counted as done, so the page repeated "Switched on Commerce." for ever. The refusal is detected (`JSSTlicencegate::reason()`) and explained; `not_included`, `no_receipt` and `other_key` trigger one licence refresh; the same step succeeding twice stops the run; the page stops after 30 steps.
+* Storage Engine: tables carrying `row_format=FIXED` from MyISAM failed with "Index column size too large"; conversion states `ROW_FORMAT = DYNAMIC` where the server supports large index prefixes.
+* Settings-table repair also drops `subject_N` copies on (subject, message), the name MySQL gives an unnamed duplicate of `jsst_ir_ft`.
+
+**Changed**
+* Attachment, Release Ticket, Mail To Agent and Assign Role To User permissions are enforced; new Release button.
+* "Limit AI Replies" moved from permissions to role and agent visibility settings.
+* AI Agent screens grouped into tabs with one status line; Unanswered Questions without duplicates.
+* Default Claude model for new sites is Claude Haiku 5.5.
+* Front-end assets load only on help desk pages.
+* Add-on update count on License & Add-ons; admin header shows the plugin version.
+* Blocked file types are removed from the allowed-types setting on save, with a note under the field (`JSSTattachmentguard::cleanExtensionList()`).
+* Attachment protection self-test and WP_DEBUG display warning in System Status.
+* Version 503 of the database schema records the release only.
+
 = 5.0.2 =
 **Security**
 * Configuration: an administrator could delete files outside the help desk's folders (path traversal, CWE-22; reported through Wordfence). The settings form saved any field it was sent, so `support_custom_img` - and likewise `logo_for_desktop_notfication_url` - could be set to a path such as `../../wp-config.php`, and replacing the support image (or Remove Logo) then deleted that path. The form no longer accepts either name; both are set only by their uploads. Both deletes now reduce the stored value to a file name and delete only a file whose real location is inside `supportImg/` or `attachmentdata/`, which also covers a bad value already stored. Requires an administrator login and the settings nonce.

@@ -130,13 +130,20 @@ class JSSTaiengine {
                 'endpoint' => 'https://api.anthropic.com/v1/messages',
                 'models'   => array(
                     /* The default first: with no model saved the list shows its
-                       first entry, and saving untouched stores it. */
-                    'claude-opus-5'    => 'Claude Opus 5',
-                    'claude-opus-5-5'  => 'Claude Opus 5.5',
-                    'claude-sonnet-5'  => 'Claude Sonnet 5',
-                    'claude-haiku-4-5' => 'Claude Haiku 4.5',
+                       first entry, and saving untouched stores it. The default
+                       is the cheapest current model: support answers are short
+                       and grounded, and the most expensive tier as the default
+                       made every site pay for it without choosing to. The
+                       price per million tokens (in / out) is in each label so
+                       the choice is an informed one. */
+                    'claude-haiku-5-5'  => 'Claude Haiku 5.5 - $0.10 / $0.50 per 1M tokens (recommended)',
+                    'claude-sonnet-5-5' => 'Claude Sonnet 5.5 - $2 / $10 per 1M tokens',
+                    'claude-opus-5-5'   => 'Claude Opus 5.5 - $4 / $20 per 1M tokens',
+                    'claude-opus-5'     => 'Claude Opus 5 - $5 / $25 per 1M tokens',
+                    'claude-sonnet-5'   => 'Claude Sonnet 5 - $2 / $10 per 1M tokens',
+                    'claude-haiku-4-5'  => 'Claude Haiku 4.5 - $1 / $5 per 1M tokens',
                 ),
-                'default_model' => 'claude-opus-5',
+                'default_model' => 'claude-haiku-5-5',
                 'build'         => array(__CLASS__, 'buildAnthropic'),
                 'read'          => array(__CLASS__, 'readAnthropic'),
                 'keyhint'       => esc_html(__('Starts with sk-ant-. Created at console.anthropic.com.', 'js-support-ticket')),
@@ -753,16 +760,20 @@ class JSSTaiengine {
             return new WP_Error('jsst_ai_zywrap_empty', esc_html($jsst_reason));
         }
 
-        return array(
+        /* Token counts only when the response carries them. Reporting 0 made
+           every call look free: Usage & Cost showed $0 and no budget limit could
+           ever trip. Left out, the call is logged as "tokens unknown", which is
+           the truth when the proxy does not say. */
+        $jsst_out = array(
             'text'      => is_string($jsst_output) ? trim($jsst_output) : '',
             'truncated' => false,
             'model'     => 'zywrap',
-            // The proxy meters its own usage and reports it on its dashboard;
-            // reporting a guess here would put two different numbers on two
-            // screens of the same product.
-            'intokens'  => 0,
-            'outtokens' => 0,
         );
+        if (!empty($jsst_model->jsst_lastusage)) {
+            $jsst_out['intokens']  = (int) $jsst_model->jsst_lastusage['intokens'];
+            $jsst_out['outtokens'] = (int) $jsst_model->jsst_lastusage['outtokens'];
+        }
+        return $jsst_out;
     }
 
     /* ------------------------------------------------------------------ *
@@ -790,7 +801,10 @@ class JSSTaiengine {
      * instead of a paragraph that merely looks structured.
      */
     public static function buildAnthropic($jsst_call, $jsst_model, $jsst_key) {
-        $jsst_output = array('effort' => isset($jsst_call['effort']) ? $jsst_call['effort'] : 'low');
+        /* Haiku 4.5 rejects `effort`; every other listed model takes it. */
+        $jsst_output = (strpos((string) $jsst_model, 'claude-haiku-4') === 0)
+            ? array()
+            : array('effort' => isset($jsst_call['effort']) ? $jsst_call['effort'] : 'low');
         if (!empty($jsst_call['schema'])) {
             $jsst_output['format'] = array(
                 'type'   => 'json_schema',
@@ -802,11 +816,14 @@ class JSSTaiengine {
             'model'         => $jsst_model,
             'max_tokens'    => isset($jsst_call['maxtokens']) ? (int) $jsst_call['maxtokens'] : 8000,
             'system'        => $jsst_call['system'],
-            'output_config' => $jsst_output,
             'messages'      => array(
                 array('role' => 'user', 'content' => $jsst_call['prompt']),
             ),
         );
+
+        if (!empty($jsst_output)) {
+            $jsst_body['output_config'] = $jsst_output;
+        }
 
         $jsst_headers = array(
             'x-api-key'         => $jsst_key,
@@ -821,7 +838,9 @@ class JSSTaiengine {
            the one part of this request that rides a beta header, so a site that
            would rather not depend on one can switch it off and get a plain
            refusal message instead. */
-        if (apply_filters('jsst_ai_use_fallbacks', apply_filters('jsst_copilot_use_fallbacks', true))) {
+        // Haiku models have no server-side fallback, so it is not asked for.
+        if (strpos((string) $jsst_model, 'claude-haiku') !== 0
+                && apply_filters('jsst_ai_use_fallbacks', apply_filters('jsst_copilot_use_fallbacks', true))) {
             $jsst_body['fallbacks'] = 'default';
             $jsst_headers['anthropic-beta'] = 'server-side-fallback-2026-07-01';
         }

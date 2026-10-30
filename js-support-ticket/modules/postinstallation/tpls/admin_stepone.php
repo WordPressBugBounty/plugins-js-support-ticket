@@ -67,7 +67,8 @@ $jsst_date_format = array(
                                 <div class="jsst-frow jsst-frow-full">
                                     <label class="jsst-flabel" for="file_extension"><?php echo esc_html(__('Allowed file types', 'js-support-ticket')); ?> <span class="jsst-req">*</span></label>
                                     <div class="jsst-fval"><?php echo wp_kses(JSSTformfield::textarea('file_extension', $jsst_cfg('file_extension'), array('data-validation' => 'required', 'rows' => '3')), JSST_ALLOWED_TAGS); ?></div>
-                                    <p class="jsst-fhelp"><?php echo esc_html(__('Comma-separated extensions without dots, for example: jpg,png,pdf.', 'js-support-ticket')); ?></p>
+                                    <p class="jsst-fhelp"><?php echo esc_html(__('Comma-separated extensions without dots, for example: jpg,png,pdf.', 'js-support-ticket')); ?>
+                                        <?php if (class_exists('JSSTattachmentguard')) { echo ' ' . wp_kses(JSSTattachmentguard::extensionNote($jsst_cfg('file_extension')), array('strong' => array())); } ?></p>
                                 </div>
                             </div>
                         </fieldset>

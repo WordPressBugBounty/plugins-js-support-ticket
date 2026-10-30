@@ -152,6 +152,14 @@ class JSSTworkspace {
                 $jsst_installed[] = $jsst_shell;
             }
         }
+        /* wp-admin is for administrators and the two agent roles only; see
+           JSSTroles::mayUseAdminDesk(). Taken out of what is installed, so the
+           fallback below can never hand it back. Nobody on the request (a
+           guest, or the system) is left as it was. */
+        if ((int) $jsst_actor['wpuid'] > 0 && class_exists('JSSTroles')
+            && !JSSTroles::mayUseAdminDesk($jsst_actor['wpuid'])) {
+            $jsst_installed = array_values(array_diff($jsst_installed, array(self::SHELL_BACKEND)));
+        }
         if (!class_exists('JSSTvisibility') || !JSSTvisibility::governs($jsst_actor)) {
             return $jsst_installed;
         }

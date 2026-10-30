@@ -47,9 +47,11 @@ JSSTmessage::getMessage();
                             <?php echo esc_html(__('How to get your key', 'js-support-ticket')); ?>
                         </h3>
                         <ul class="js-ticket-zywrap-info-list">
-                            <li><?php echo esc_html__('Create a free account at', 'js-support-ticket'); ?> <a href="https://zywrap.com/register" target="_blank">Zywrap.com</a>.</li>
-                            <li><?php echo esc_html__('Receive 10,000 Free Credits instantly.', 'js-support-ticket'); ?></li>
-                            <li><?php echo esc_html__('Navigate to API Keys in your dashboard to generate a secret key.', 'js-support-ticket'); ?></li>
+                            <?php /* Same story as AI Agent > Settings: the key comes with the
+                                     licence, and it is one key - saved here or there, both
+                                     screens and the AI Agent use the same one. */ ?>
+                            <li><?php echo esc_html__('A key comes with your JS Help Desk licence. It is the same key as on AI Agent → Settings — saving it here or there updates both.', 'js-support-ticket'); ?></li>
+                            <li><?php echo esc_html__('Prefer your own account? Create one at', 'js-support-ticket'); ?> <a href="https://zywrap.com/register" target="_blank" rel="noopener">Zywrap.com</a> <?php echo esc_html__('and paste its key here.', 'js-support-ticket'); ?></li>
                         </ul>
                     </div>
 
@@ -167,6 +169,9 @@ JSSTmessage::getMessage();
                         <div class="js-ticket-zywrap-mini-val js-ticket-zywrap-font-small"><?php echo esc_html($js_ticket_sync_display); ?></div>
                         <div class="js-ticket-zywrap-mini-label"><?php echo esc_html__('Last Synced', 'js-support-ticket'); ?></div>
                     </div>
+
+                    <?php /* "0 wrappers · Never" read like a fault; say what they are. */ ?>
+                    <p class="js-ticket-zywrap-hint js-ticket-zywrap-sidebar-note"><?php echo esc_html__('Wrappers are ready-made reply styles from Zywrap, used by the AI reply box on a ticket and by Prompt Lab. 0 and "Never" only mean they have not been downloaded yet: use "Download & Sync Data". AI Agent answers do not need them.', 'js-support-ticket'); ?></p>
                 </div>
 
             </div>

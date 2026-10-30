@@ -187,8 +187,12 @@ $jsst_jssupportticket_js = '
            key is stored and not active - expired, suspended, or this site
            removed from it - never for a free install that has no key. */
         $jsst_licenseproblem = (class_exists('JSSTlicense') && JSSTlicense::hasKey() && !JSSTlicense::isActive())
-            || (class_exists('JSSTlicencegate') && array() !== JSSTlicencegate::gated()); ?>
-        <li class="<?php if($jsst_c == 'jssupportticket' && ($jsst_layout == 'license' || $jsst_layout == 'legacy')) echo 'active'; ?> menu-item-license"><a href="<?php echo esc_url(admin_url('admin.php?page=jssupportticket&jstlay=license')); ?>" title="<?php echo esc_attr__('License & Add-ons', 'js-support-ticket'); ?>"><svg class="jsst_menu-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 5.25a3 3 0 013 3m3 0a6 6 0 01-7.029 5.912c-.563-.097-1.159.026-1.563.43L10.5 17.25H8.25v2.25H6v2.25H2.25v-2.818c0-.597.237-1.17.659-1.591l6.499-6.499c.404-.404.527-1 .43-1.563A6 6 0 1121.75 8.25z" /></svg><span class="jsst_text"><?php echo esc_html__('License & Add-ons', 'js-support-ticket'); ?></span><?php if ($jsst_licenseproblem) { ?> <span class="jsst-setup-badge" title="<?php echo esc_attr__('Your license key is not active on this site', 'js-support-ticket'); ?>">!</span><?php } ?></a></li>
+            || (class_exists('JSSTlicencegate') && array() !== JSSTlicencegate::gated());
+        // Add-ons with an update waiting, from the cached report (see JSSTlicense::pendingUpdateCount()).
+        $jsst_addonupdates = (class_exists('JSSTlicense') && method_exists('JSSTlicense', 'pendingUpdateCount')) ? JSSTlicense::pendingUpdateCount() : 0; ?>
+        <li class="<?php if($jsst_c == 'jssupportticket' && ($jsst_layout == 'license' || $jsst_layout == 'legacy')) echo 'active'; ?> menu-item-license"><a href="<?php echo esc_url(admin_url('admin.php?page=jssupportticket&jstlay=license')); ?>" title="<?php echo esc_attr__('License & Add-ons', 'js-support-ticket'); ?>"><span class="jsst_text"><?php echo esc_html__('License & Add-ons', 'js-support-ticket'); ?></span><?php if ($jsst_licenseproblem) { ?> <span class="jsst-setup-badge" title="<?php echo esc_attr__('Your license key is not active on this site', 'js-support-ticket'); ?>">!</span><?php } ?><?php if ($jsst_addonupdates > 0) { ?> <span class="jsst-setup-badge jsst-update-badge" title="<?php echo esc_attr(sprintf(
+            /* translators: %d: number of add-ons with an update */
+            _n('%d add-on update available', '%d add-on updates available', $jsst_addonupdates, 'js-support-ticket'), $jsst_addonupdates)); ?>"><?php echo esc_html($jsst_addonupdates); ?></span><?php } ?></a></li>
     <li class="menu-header"><svg class="jsst_menu-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M16.5 6v.75m0 3v.75m0 3v.75m0 3V18m-9-5.25h5.25M7.5 15h3M3.375 5.25c-.621 0-1.125.504-1.125 1.125v3.026a2.999 2.999 0 010 5.198v3.026c0 .621.504 1.125 1.125 1.125h17.25c.621 0 1.125-.504 1.125-1.125v-3.026a2.999 2.999 0 010-5.198V6.375c0-.621-.504-1.125-1.125-1.125H3.375z" /></svg><span class="jsst_text"><?php echo esc_html__('Tickets', 'js-support-ticket'); ?></span></li>
         <li class="<?php if($jsst_c == 'ticket' && $jsst_layout == '') echo 'active'; ?>"><a href="<?php echo esc_url(admin_url('admin.php?page=ticket')); ?>" title="<?php echo esc_attr__('Tickets', 'js-support-ticket'); ?>"><?php echo esc_html__('Tickets', 'js-support-ticket'); ?></a></li>
         <?php
@@ -597,7 +601,7 @@ $jsst_jssupportticket_js = '
             <a href="<?php echo esc_url('#'); ?>" title="<?php echo esc_attr__('Ban Emails', 'js-support-ticket'); ?>"><svg class="jsst_menu-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636" /></svg><span class="jsst_text"><?php echo esc_html__('Ban Emails', 'js-support-ticket'); ?></span></a>
         </li>
     <?php } ?>
-    <li class="menu-header"><svg class="jsst_menu-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M20.25 8.511c.884.284 1.5 1.128 1.5 2.097v4.286c0 1.136-.847 2.1-1.98 2.193-.34.027-.68.052-1.02.072v3.091l-3-3c-1.354 0-2.694-.055-4.02-.163a2.115 2.115 0 01-.825-.242m9.345-8.334a2.126 2.126 0 00-.476-.095 48.64 48.64 0 00-8.048 0c-1.131.094-1.976 1.057-1.976 2.192v4.286c0 .837.46 1.58 1.155 1.951m9.345-8.334V6.637c0-1.621-1.152-3.026-2.76-3.235A48.455 48.455 0 0011.25 3c-2.115 0-4.198.137-6.24.402-1.608.209-2.76 1.614-2.76 3.235v6.226c0 1.621 1.152 3.026 2.76 3.235.577.075 1.157.14 1.74.194V21l4.155-4.155" /></svg><span class="jsst_text"><?php echo esc_html__('Live Chat', 'js-support-ticket'); ?><?php if (class_exists('JSSTlayout')) { echo JSSTlayout::betaBadge(); } // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></span></li>
+    <li class="menu-header"><svg class="jsst_menu-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M20.25 8.511c.884.284 1.5 1.128 1.5 2.097v4.286c0 1.136-.847 2.1-1.98 2.193-.34.027-.68.052-1.02.072v3.091l-3-3c-1.354 0-2.694-.055-4.02-.163a2.115 2.115 0 01-.825-.242m9.345-8.334a2.126 2.126 0 00-.476-.095 48.64 48.64 0 00-8.048 0c-1.131.094-1.976 1.057-1.976 2.192v4.286c0 .837.46 1.58 1.155 1.951m9.345-8.334V6.637c0-1.621-1.152-3.026-2.76-3.235A48.455 48.455 0 0011.25 3c-2.115 0-4.198.137-6.24.402-1.608.209-2.76 1.614-2.76 3.235v6.226c0 1.621 1.152 3.026 2.76 3.235.577.075 1.157.14 1.74.194V21l4.155-4.155" /></svg><span class="jsst_text"><?php echo esc_html__('Live Chat', 'js-support-ticket'); ?></span></li>
     <!-- ====== END AI AGENT ====== -->
 
     <?php /* Live chat, when its add-on is installed. Its own group rather than
@@ -627,7 +631,22 @@ $jsst_jssupportticket_js = '
              how the AI group greys its add-on rows. */ ?>
     <?php if (in_array('livechat', jssupportticket::$_active_addons)) { ?>
         <li class="<?php if($jsst_c == 'livechat' && ($jsst_layout == '' || $jsst_layout == 'livechat')) echo 'active'; ?>">
-            <a href="<?php echo esc_url(admin_url('admin.php?page=livechat')); ?>" title="<?php echo esc_attr__('Conversations', 'js-support-ticket'); ?>"><?php echo esc_html__('Conversations', 'js-support-ticket'); ?></a>
+            <?php
+            /* People waiting plus this person's chats with something new - the
+               same number the portal's Chat link and the console's tab name
+               show. Two cheap COUNTs; the console keeps it current. */
+            $jsst_chatcount = 0;
+            if (class_exists('JSSTlivechat') && method_exists('JSSTlivechat', 'waitingCount')) {
+                $jsst_chatcount = JSSTlivechat::waitingCount();
+                if (method_exists('JSSTlivechat', 'unreadCount') && class_exists('JSSTcapability')) {
+                    $jsst_chatactor = JSSTcapability::actor();
+                    if (!empty($jsst_chatactor['staffid'])) {
+                        $jsst_chatcount += JSSTlivechat::unreadCount((int) $jsst_chatactor['staffid']);
+                    }
+                }
+            }
+            ?>
+            <a href="<?php echo esc_url(admin_url('admin.php?page=livechat')); ?>" title="<?php echo esc_attr__('Conversations', 'js-support-ticket'); ?>"><?php echo esc_html__('Conversations', 'js-support-ticket'); ?><?php if ($jsst_chatcount > 0) { ?> <span class="jsst-menu-badge"><?php echo esc_html(number_format_i18n($jsst_chatcount)); ?></span><?php } ?></a>
         </li>
         <li class="<?php if($jsst_c == 'livechat' && $jsst_layout == 'livechat_history') echo 'active'; ?>">
             <a href="<?php echo esc_url(admin_url('admin.php?page=livechat&jstlay=livechat_history')); ?>" title="<?php echo esc_attr__('History', 'js-support-ticket'); ?>"><?php echo esc_html__('History', 'js-support-ticket'); ?></a>
@@ -650,7 +669,7 @@ $jsst_jssupportticket_js = '
     $jsst_ai_lab = (class_exists('JSSTaiengine') && JSSTaiengine::apiKey('zywrap') !== '');
     $jsst_ai_off = (class_exists('JSSTaipolicy') && !JSSTaipolicy::enabled());
     ?>
-    <li class="menu-header"><svg class="jsst_menu-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 00-2.456 2.456z" /></svg><span class="jsst_text"><?php echo esc_html__('AI Agent', 'js-support-ticket'); ?><?php if (class_exists('JSSTlayout')) { echo JSSTlayout::betaBadge(); } // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?><?php if ($jsst_ai_off) { ?><span class="jsst-menu-badge"><?php echo esc_html__('off', 'js-support-ticket'); ?></span><?php } ?></span></li>
+    <li class="menu-header"><svg class="jsst_menu-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 00-2.456 2.456z" /></svg><span class="jsst_text"><?php echo esc_html__('AI Agent', 'js-support-ticket'); ?><?php if ($jsst_ai_off) { ?><span class="jsst-menu-badge"><?php echo esc_html__('off', 'js-support-ticket'); ?></span><?php } ?></span></li>
     <?php /* ===== AI AGENT ===== (Roadmap 6.0-AI-01)
 
        One menu where there were three. Instant Resolve, Zywrap AI and AI
@@ -1048,6 +1067,7 @@ $jsst_jssupportticket_js = '
 $jsst_formpick_now = '';
 if (in_array('multiform', jssupportticket::$_active_addons) && jssupportticket::$_config['show_multiform_popup'] == 1
         && $jsst_c == 'ticket' && $jsst_layout == 'addticket' && '' === (string) JSSTrequest::getVar('formid', 'get', '')
+        && '' === (string) JSSTrequest::getVar('jssupportticketid', 'get', '') // editing: the ticket already has its form
         && (int) jssupportticket::$_db->get_var("SELECT COUNT(id) FROM `" . jssupportticket::$_db->prefix . "js_ticket_multiform` WHERE status = 1") > 1) {
     $jsst_formpick_now = 'jQuery("a#multiformpopup").first().trigger("click");';
 }

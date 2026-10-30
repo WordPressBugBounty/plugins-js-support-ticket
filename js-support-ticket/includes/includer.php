@@ -52,6 +52,12 @@ class JSSTincluder {
         }
         $jsst_filename = jssupportticketphplib::JSST_clean_file_path($jsst_filename);
         $jsst_module_name = jssupportticketphplib::JSST_clean_file_path($jsst_module_name);
+        /* A help desk screen is being drawn on the front end: its scripts and
+           styles have to be there, whatever page it is on. Before the screen's
+           own inline CSS/JS is attached to them below. */
+        if (!is_admin() && class_exists('jssupportticket')) {
+            jssupportticket::ensureFrontAssets();
+        }
         if ($jsst_module_name != null) {
             $jsst_file_path = JSSTincluder::getPluginPath($jsst_module_name,'file',$jsst_filename);
             if (file_exists(JSST_PLUGIN_PATH . 'includes/css/inc-css/' . $jsst_module_name . '-' . $jsst_filename . '.css.php')) {

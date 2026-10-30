@@ -327,8 +327,13 @@ class JSSTdepartmentModel {
         // customer picked a department. (Roadmap 4.0-CORE-20)
         $jsst_list = JSSTincluder::getJSModel('helptopic')->getHelpTopicsForCombobox($jsst_departmentid);
 
+        // The form the page is showing: each form sets its own topic question.
+        $jsst_formid = absint(JSSTrequest::getVar('multiformid'));
         $jsst_query = "SELECT required, fieldtitle FROM `" . jssupportticket::$_db->prefix . "js_ticket_fieldsordering` WHERE field='helptopic'";
-        $jsst_fieldrow = jssupportticket::$_db->get_row($jsst_query);
+        if ($jsst_formid > 0) {
+            $jsst_query = jssupportticket::$_db->prepare($jsst_query . " AND multiformid = %d", $jsst_formid);
+        }
+        $jsst_fieldrow = jssupportticket::$_db->get_row($jsst_query . " ORDER BY published DESC, id ASC LIMIT 1");
         $jsst_isRequired = isset($jsst_fieldrow->required) ? $jsst_fieldrow->required : 0;
 
         /* One endpoint rebuilds this select for two forms that style their

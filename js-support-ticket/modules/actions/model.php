@@ -68,6 +68,12 @@ class JSSTactionsModel {
             JSSTmessage::setMessage(esc_html(__('You are not allowed', 'js-support-ticket')), 'error', 'agent-permissions');
             return false;
         }
+        // May lock tickets, but is this one theirs to lock?
+        if (in_array('agent', jssupportticket::$_active_addons) && JSSTincluder::getJSModel('agent')->isUserStaff()
+                && !JSSTincluder::getJSModel('ticket')->validateTicketDetailForStaff($jsst_id)) {
+            JSSTmessage::setMessage(esc_html(__('You are not allowed', 'js-support-ticket')), 'error', 'agent-permissions');
+            return false;
+        }
         $jsst_lock = ($jsst_lock == 1) ? 1 : 0;
         $jsst_sendEmail = true;
         $jsst_reason = self::reason($jsst_data);
@@ -178,9 +184,27 @@ class JSSTactionsModel {
 
         // Each ticket runs the ordinary single-ticket path, which sets its own
         // message; one summary is printed at the end instead.
+        /* The check above only says the agent may run this action somewhere.
+           Each ticket is asked again with its id, so the scope rules (their
+           departments, their own tickets, their team) decide as they do on
+           the queue. Without this a limited agent could post any ticket id in
+           bulkticketids and close or move a ticket they can't even open.
+           An action the map does not know is asked as a view. */
+        $jsst_capability = '';
+        if (class_exists('JSSTworkspace') && class_exists('JSSTcapability')) {
+            $jsst_capability = JSSTworkspace::bulkCapability($jsst_action);
+            if ($jsst_capability === '') {
+                $jsst_capability = JSSTcapability::TICKET_VIEW;
+            }
+        }
+
         JSSTmessage::mute();
         foreach ($jsst_ids AS $jsst_id) {
             $jsst_done = false;
+            if ($jsst_capability !== '' && !JSSTcapability::can($jsst_capability, array('ticket' => $jsst_id))) {
+                $jsst_result['skipped']++;
+                continue;
+            }
             switch ($jsst_action) {
                 case 'lock':
                     $jsst_done = $this->lockTicket($jsst_id, array('actionreason' => $jsst_reason));

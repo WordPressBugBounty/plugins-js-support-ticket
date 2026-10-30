@@ -272,14 +272,6 @@ form.jsstadmin-form div.js-form-wrapper .jsst-formfield-radio-button-wrap {float
 .jsst_gen_body .js-ticket-configuration-row .js-ticket-configuration-btn{float: right;}
 div.jssticketadmin-help-btn {margin-left: unset;margin-right: 5px;}
 /*review*/
-.js-ticket-review-default {margin-right: 0;margin-left: 5px;transform: scaleX(-1);}
-.js-ticket-review-default div.js-ticket-review-default-cnt {transform: scaleX(-1);}
-.js-ticket-review-default div.js-ticket-review-default-cnt div.js-ticket-review-default-cnt-left {float: right;}
-.js-ticket-review-default div.js-ticket-review-default-cnt div.js-ticket-review-default-cnt-right {float: right;padding: 0px 15px 0 0px;}
-.js-ticket-review-default div.js-ticket-review-default-cnt div.js-ticket-review-default-cnt-right div.js-ticket-review-row a,
-.js-ticket-review-default div.js-ticket-review-default-cnt div.js-ticket-review-default-cnt-right div.js-ticket-review-row a img {margin-right: 0;margin-left: 5px;}
-.jssupportticket-review-box-popup-content-wrp .jssupportticket-review-box-popup-content-left, .jssupportticket-review-box-popup-content-wrp .jssupportticket-review-box-popup-content-right {float: right;}
-button.jssupportticket-close-review-box-popup, .jssupportticket-thanks-box-popup .js-ticket-review-thanks-btn {left: 10px;right: auto;}
 /* admin theme page */
 .jsstadmin_themepaage_mainwrp #jsstadmin-data-wrp div#theme_heading div a{margin-left: 0;}
 .jsstadmin_themepaage_mainwrp #jsstadmin-data-wrp .job_sharing_text::before{margin-right: 0;margin-left: 12px;}
@@ -331,7 +323,6 @@ div#jsst-main-wrapper div.jsst-config-topheading span.jsst-config-steps{margin-l
 }
 @media (max-width:767px) {
 	/*review*/
-	.js-ticket-review-default {padding-bottom: 150px;}
     div#jsstadmin-data {padding-right: unset;}
     div.menu-collasped-active div#jsstadmin-data {padding-right: unset;}
     
@@ -830,3 +821,11 @@ table.jsst-queue-table tbody tr.jsst-row-focused td:first-child {box-shadow: ins
 @supports (gap: 1px) {
     .js-ticket-suggestion-from, .js-ticket-suggestion-actions .js-ticket-reply-action-btn {margin-left: 0;}
 }
+
+/* Message content: lists and quotes start from the right. */
+.js-ticket-thread .js-ticket-thread-cnt .js-ticket-thread-data.note-msg ul,
+.js-ticket-thread .js-ticket-thread-cnt .js-ticket-thread-data.note-msg ol,
+.js-tkt-det-left .js-tkt-det-info-wrp div.js-tkt-det-tkt-msg ul,
+.js-tkt-det-left .js-tkt-det-info-wrp div.js-tkt-det-tkt-msg ol {padding-left: 0;padding-right: 2.5em;}
+.js-ticket-thread .js-ticket-thread-cnt .js-ticket-thread-data.note-msg blockquote,
+.js-tkt-det-left .js-tkt-det-info-wrp div.js-tkt-det-tkt-msg blockquote {border-left: 0;border-right: 4px solid #c3c4c7;}

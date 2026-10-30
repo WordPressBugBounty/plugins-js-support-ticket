@@ -178,9 +178,11 @@ class JSSTcopilot {
                 // say, not just restate what is there.
                 'effort'    => 'medium',
                 'maxtokens' => 8000,
+                'needs'     => 'knowledge',
                 'system'    => 'Write a first draft of a support reply to the customer, for an agent to edit before sending. '
                              . 'Address what they actually asked, in the same language they wrote in, in a plain and friendly register. '
-                             . 'Use only what the ticket says. Where a fact is needed that the thread does not give, write a short bracketed placeholder such as [order number] '
+                             . 'Use only what the ticket says and the help articles given with it: when an article answers the question, use its facts (times, steps, amounts). '
+                             . 'Where a fact is needed that neither gives, write a short bracketed placeholder such as [order number] '
                              . 'rather than inventing one — an agent can fill those in, but cannot tell an invented detail from a real one. '
                              . 'If the right reply is a question, ask it. Write the message only: no subject line, no signature, no notes about the draft.',
             ),
@@ -523,7 +525,7 @@ class JSSTcopilot {
                 'prompt'    => jssupportticketphplib::JSST_substr($jsst_supplied, 0, self::CONTEXT_LIMIT),
                 'effort'    => $jsst_action['effort'],
                 'maxtokens' => $jsst_action['maxtokens'],
-                'feature'   => 'copilot',
+                'feature'   => self::featureOf($jsst_options),
                 'ticket'    => 0,
             ));
 
@@ -556,6 +558,13 @@ class JSSTcopilot {
             $jsst_system .= "\n\nThe departments on this desk are: " . implode('; ', $jsst_names) . '.';
         }
 
+        /* The desk's own help articles for this ticket, from the same approved
+           sources and search the automatic answers use. Without them the draft
+           left "[timeframe]" blanks for facts the knowledge base already had. */
+        if (isset($jsst_action['needs']) && $jsst_action['needs'] === 'knowledge') {
+            $jsst_context .= self::knowledgeFor($jsst_ticketid);
+        }
+
         if (isset($jsst_action['needs']) && $jsst_action['needs'] === 'language') {
             $jsst_language = isset($jsst_options['language']) ? trim((string) $jsst_options['language']) : '';
             if ($jsst_language === '') {
@@ -573,7 +582,7 @@ class JSSTcopilot {
             'effort'    => $jsst_action['effort'],
             'maxtokens' => $jsst_action['maxtokens'],
             'schema'    => isset($jsst_action['schema']) ? $jsst_action['schema'] : null,
-            'feature'   => 'copilot',
+            'feature'   => self::featureOf($jsst_options),
             'ticket'    => (int) $jsst_ticketid,
         ));
 
@@ -588,8 +597,84 @@ class JSSTcopilot {
         // renders fields rather than printing a brace-covered blob at somebody.
         if (!empty($jsst_action['schema'])) {
             $jsst_result['fields'] = self::fieldsFrom($jsst_result['text'], $jsst_action['schema']);
+        } else {
+            $jsst_result['text'] = self::unwrapText($jsst_result['text']);
         }
         return $jsst_result;
+    }
+
+    /**
+     * Plain text out of a reply that came back wrapped as JSON.
+     *
+     * Some engines answer a free-text request with {"answer": "..."} (or the
+     * same inside a ```json fence), and the agent was shown the braces and
+     * quotes. If the whole reply is such an object, the text inside is used;
+     * anything else is left exactly as it came.
+     */
+    /**
+     * Up to three help-article passages that match this ticket, as text to
+     * append to the prompt. Empty when nothing matches or the AI add-on's
+     * search is not there.
+     */
+    /**
+     * The name the call is metered under. Copilot actions an agent pressed
+     * are "copilot"; other parts of the product that run an action through
+     * here (reading new tickets) say who they are, so the Usage page does
+     * not show their calls as Copilot work nobody asked for.
+     */
+    private static function featureOf($jsst_options) {
+        $jsst_feature = isset($jsst_options['feature']) ? sanitize_key((string) $jsst_options['feature']) : '';
+        return ($jsst_feature !== '') ? $jsst_feature : 'copilot';
+    }
+
+    public static function knowledgeFor($jsst_ticketid) {
+        if (!class_exists('JSSTaiagentretriever')) return '';
+        $jsst_ticket = jssupportticket::$_db->get_row(jssupportticket::$_db->prepare(
+            "SELECT subject, message FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE id = %d", (int) $jsst_ticketid));
+        if (!$jsst_ticket) return '';
+        // The customer's latest words matter most; the subject anchors them.
+        $jsst_last = jssupportticket::$_db->get_var(jssupportticket::$_db->prepare(
+            "SELECT message FROM `" . jssupportticket::$_db->prefix . "js_ticket_replies`
+              WHERE ticketid = %d AND staffid = 0 AND (ticketviaautopilot = 0 OR ticketviaautopilot IS NULL) AND (is_ai_draft = 0 OR is_ai_draft IS NULL)
+              ORDER BY id DESC LIMIT 1", (int) $jsst_ticketid));
+        $jsst_question = trim($jsst_ticket->subject . ' ' . wp_strip_all_tags((string) ($jsst_last ? $jsst_last : $jsst_ticket->message)));
+        $jsst_retriever = new JSSTaiagentretriever();
+        $jsst_found = $jsst_retriever->retrieve(jssupportticketphplib::JSST_substr($jsst_question, 0, 600), array('profile' => 'reply'));
+        $jsst_lines = array();
+        foreach (array_slice((array) $jsst_found, 0, 3) as $jsst_row) {
+            $jsst_row = (array) $jsst_row;
+            if (empty($jsst_row['passage'])) continue;
+            // A weak match is noise once a strong one is in hand.
+            if (!empty($jsst_lines) && isset($jsst_row['coverage']) && (int) $jsst_row['coverage'] < 70) continue;
+            $jsst_lines[] = '- ' . (isset($jsst_row['title']) ? $jsst_row['title'] . ': ' : '') . trim((string) $jsst_row['passage']);
+        }
+        if (empty($jsst_lines)) return '';
+        return "\n\nHelp articles from this desk that may answer it:\n" . implode("\n", $jsst_lines);
+    }
+
+    public static function unwrapText($jsst_text) {
+        $jsst_raw = trim((string) $jsst_text);
+        if (preg_match('/^```(?:json)?\s*(.*?)\s*```$/is', $jsst_raw, $jsst_m)) {
+            $jsst_raw = trim($jsst_m[1]);
+        }
+        if ($jsst_raw === '' || $jsst_raw[0] !== '{') {
+            return $jsst_text;
+        }
+        $jsst_obj = json_decode($jsst_raw, true);
+        if (!is_array($jsst_obj)) {
+            return $jsst_text;
+        }
+        foreach (array('answer', 'text', 'reply', 'draft', 'summary', 'output', 'content', 'response', 'result', 'message') as $jsst_key) {
+            if (isset($jsst_obj[$jsst_key]) && is_string($jsst_obj[$jsst_key]) && trim($jsst_obj[$jsst_key]) !== '') {
+                return trim($jsst_obj[$jsst_key]);
+            }
+        }
+        // One string value under any name is still the answer.
+        $jsst_strings = array_filter($jsst_obj, 'is_string');
+        if (count($jsst_obj) === 1 && count($jsst_strings) === 1) {
+            return trim(reset($jsst_strings));
+        }
+        return $jsst_text;
     }
 
     /**

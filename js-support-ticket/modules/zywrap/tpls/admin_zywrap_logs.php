@@ -48,14 +48,14 @@ JSSTmessage::getMessage();
 
             <div class="jsst-card">
                 <div class="jsst-card-head">
-                    <h2 class="jsst-card-title"><?php echo esc_html(__('Every call made to Zywrap', 'js-support-ticket')); ?></h2>
-                    <p class="jsst-card-sub"><?php echo esc_html(__('Newest first. Failed calls are also listed on their own under Zywrap errors.', 'js-support-ticket')); ?></p>
+                    <h2 class="jsst-card-title"><?php echo esc_html(__('Prompt Lab and wrapper calls', 'js-support-ticket')); ?></h2>
+                    <p class="jsst-card-sub"><?php echo esc_html(__('Newest first. Answers the AI Agent writes (chat, tickets, previews) are listed on Audit, with their cost on Usage & Cost.', 'js-support-ticket')); ?></p>
                 </div>
                 <div class="jsst-card-body jsst-card-flush">
                     <?php if (empty($jsst_logs)) {
                         JSSTlayout::adminEmpty(
                             $jsst_trace !== '' ? __('No request matches that trace ID', 'js-support-ticket') : __('No requests yet', 'js-support-ticket'),
-                            $jsst_trace !== '' ? __('Check the ID, or reset the search to see every request.', 'js-support-ticket') : __('Calls appear here as soon as anything on the desk asks Zywrap for an answer.', 'js-support-ticket'));
+                            $jsst_trace !== '' ? __('Check the ID, or reset the search to see every request.', 'js-support-ticket') : __('Calls from Prompt Lab and wrappers appear here. The AI Agent\'s own answers are on the Audit tab.', 'js-support-ticket'));
                     } else { ?>
                         <div class="jsst-table-wrap">
                             <table class="jsst-table">

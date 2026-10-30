@@ -33,6 +33,18 @@ class JSSTPostinstallationModel {
             $jsst_data['support_custom_img'] = sanitize_file_name($jsst_data['support_custom_img']); // Prevent directory traversal
         }
 
+        // Types that are never accepted come out of the list (see JSSTattachmentguard).
+        if (isset($jsst_data['file_extension']) && class_exists('JSSTattachmentguard')) {
+            $jsst_clean = JSSTattachmentguard::cleanExtensionList($jsst_data['file_extension']);
+            $jsst_data['file_extension'] = $jsst_clean['list'];
+            if (!empty($jsst_clean['removed'])) {
+                JSSTmessage::setMessage(esc_html(sprintf(
+                    /* translators: %s: file types such as php */
+                    __('Removed from the allowed file types because they are never accepted: %s.', 'js-support-ticket'),
+                    implode(', ', $jsst_clean['removed']))), 'error');
+            }
+        }
+
         foreach ($jsst_data as $jsst_key => $jsst_value) {
             $jsst_query = jssupportticket::$_db->prepare("UPDATE `" . jssupportticket::$_db->prefix . "js_ticket_config` SET `configvalue` = %s WHERE `configname`= %s", $jsst_value, $jsst_key);
             jssupportticket::$_db->query($jsst_query);

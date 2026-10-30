@@ -252,6 +252,43 @@ class JSSTroles {
     }
 
     /**
+     * May this user change the time logged against a reply or a note?
+     *
+     * The same "Edit Time" tick that shows the Edit Time button on the ticket
+     * page. The save routes used to check only a nonce, and that nonce is
+     * printed on the customer's own ticket page, so a customer could rewrite
+     * the hours on any reply.
+     */
+    public static function canEditTime() {
+        return self::resolveAgainstAddon('Edit Time', self::CAP_EDIT);
+    }
+
+    /**
+     * May this user attach files to a ticket, reply or note?
+     *
+     * Customers and administrators may (the site's file size and type rules
+     * still apply). An agent the Agents add-on governs needs the "Attachment"
+     * tick, which the role editor offered but nothing ever checked.
+     */
+    public static function canAttachFiles() {
+        if (self::canManageHelpDesk() || !self::agentAddonGoverns()) {
+            return true;
+        }
+        return JSSTincluder::getJSModel('userpermissions')->checkPermissionGrantedForTask('Attachment') == true;
+    }
+
+    /**
+     * canEditTime(), on one ticket the user is also allowed to see.
+     */
+    public static function canEditTimeOn($jsst_ticketid) {
+        $jsst_ticketid = (int) $jsst_ticketid;
+        if ($jsst_ticketid <= 0 || !self::canEditTime()) {
+            return false;
+        }
+        return JSSTcapability::can(JSSTcapability::TICKET_VIEW, array('ticket' => $jsst_ticketid));
+    }
+
+    /**
      * May this user write or remove a knowledge base article or FAQ entry?
      */
     public static function canAuthorKnowledge($jsst_task = 'Edit Knowledge Base') {
@@ -521,6 +558,29 @@ class JSSTroles {
      */
     public static function canManageHelpDesk() {
         return current_user_can('manage_options') || current_user_can(self::CAP_ADMIN);
+    }
+
+    /**
+     * May this person use the help desk in wp-admin?
+     *
+     * Administrators, and people given one of the two agent roles. An agent
+     * who is only on the Agents screen (a subscriber with a staff row) works
+     * at the front-end desk and gets no help desk page in wp-admin. Inside
+     * wp-admin the role's capabilities decide which pages open.
+     */
+    public static function mayUseAdminDesk($jsst_wpuid) {
+        $jsst_wpuid = (int) $jsst_wpuid;
+        if ($jsst_wpuid <= 0) {
+            return false;
+        }
+        if (user_can($jsst_wpuid, 'manage_options') || user_can($jsst_wpuid, self::CAP_ADMIN)) {
+            return true;
+        }
+        $jsst_user = get_userdata($jsst_wpuid);
+        if (!$jsst_user || !is_array($jsst_user->roles)) {
+            return false;
+        }
+        return (bool) array_intersect(array(self::AGENT_ROLE, self::LIGHT_AGENT_ROLE), $jsst_user->roles);
     }
 
     /**

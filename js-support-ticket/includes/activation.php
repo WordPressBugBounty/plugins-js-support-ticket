@@ -12,6 +12,29 @@ class JSSTactivation {
 	    JSSTactivation::checkUpdates();
         JSSTactivation::addCapabilites();
         JSSTincluder::getJSModel('jssupportticket')->addMissingUsers(0);
+        JSSTactivation::markFreshAiDefaults();
+    }
+
+    /**
+     * Safer AI defaults, for desks that have never set AI up.
+     *
+     * "Always ask a person first" and "canned responses are not a customer
+     * source" are the right starting point, but a desk that has been running
+     * on the old defaults - without ever pressing Save on them - must not find
+     * its behaviour changed by an update. So the new defaults apply only where
+     * no AI setting exists yet; anywhere else this does nothing and the old
+     * defaults stay exactly as they were. Activation does not run on a plain
+     * update, and a reactivated desk that already has AI settings is left
+     * alone too.
+     */
+    static function markFreshAiDefaults() {
+        foreach (array('jsst_ai_master', 'jsst_ai_engine', 'jsst_ai_lanes', 'jsst_ai_rollout',
+                       'jsst_ai_approval', 'jsst_ai_sources', 'jsst_aiagent_adopted') as $jsst_opt) {
+            if (get_option($jsst_opt, null) !== null) {
+                return;
+            }
+        }
+        add_option('jsst_ai_fresh_defaults', 1, '', false);
     }
 
     /**
@@ -25,6 +48,10 @@ class JSSTactivation {
     }
 
     static private function checkUpdates() {
+        // A settings table without its primary key is repaired before the
+        // version is read from it (see JSSTconfigrepair).
+        include_once JSST_PLUGIN_PATH . 'includes/updates/configrepair.php';
+        JSSTconfigrepair::maybeRun();
         include_once JSST_PLUGIN_PATH . 'includes/updates/updates.php';
         JSSTupdates::checkUpdates();
     }
@@ -228,8 +255,8 @@ class JSSTactivation {
                     ('aiagent_max_results', '5', 'aiagent', NULL),
                     ('aiagent_analytics', '1', 'aiagent', NULL),
                     ('productcode', 'jsticket', 'default', NULL),
-                    ('versioncode', '5.0.2', 'default', NULL),
-                    ('productversion', '502', 'default', NULL),
+                    ('versioncode', '5.0.3', 'default', NULL),
+                    ('productversion', '503', 'default', NULL),
                     ('producttype', 'free', 'default', NULL),
                     ('tve_enabled', '2', 'default', NULL),
                     ('tve_mailreadtype', '3', 'default', NULL),

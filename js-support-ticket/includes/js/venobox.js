@@ -713,7 +713,9 @@
                 /* -------- FADE-IN THE NEW CONTENT -------- */
                 function updateoverlay(){
 
-                    blocktitle.html(title);
+                    // As text: the title is read from an attribute, and .html() re-parsed
+                    // its decoded value as markup (a stored XSS through a ticket message).
+                    blocktitle.text(title);
 
                     content.find(">:first-child").addClass('figlio').css({
                         'width': framewidth,

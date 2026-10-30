@@ -49,6 +49,11 @@ $jsst_layout = isset($_GET['jstlay']) ? sanitize_text_field(wp_unslash($_GET['js
             <li class="<?php if ($jsst_item['current']) { echo 'active'; } ?>">
                 <a href="<?php echo esc_url($jsst_item['url']); ?>" title="<?php echo esc_attr($jsst_item['summary']); ?>">
                     <span class="jsst_text"><?php echo esc_html($jsst_item['label']); ?></span>
+                    <?php /* The same count the portal strip shows: people waiting
+                             plus this agent's chats with something new. */
+                    if ($jsst_item['key'] === JSSTnavigation::CHAT && !empty($jsst_item['count'])) { ?>
+                        <span class="jsst-menu-badge"><?php echo esc_html(number_format_i18n((int) $jsst_item['count'])); ?></span>
+                    <?php } ?>
                 </a>
             </li>
             <?php

@@ -314,10 +314,10 @@ class JSSTaisources {
             ),
             'scraped' => array(
                 'label'  => esc_html(__('Indexed documentation', 'js-support-ticket')),
-                'blurb'  => esc_html(__('Pages fetched from documentation sites and video descriptions. What gets crawled is set under Content Sources; what may be quoted is set here.', 'js-support-ticket')),
+                'blurb'  => esc_html(__('Pages fetched from documentation sites and video descriptions. What gets crawled is set under Web pages; what may be quoted is set here.', 'js-support-ticket')),
                 'gloss'  => esc_html(__('Pages fetched by the crawler', 'js-support-ticket')),
                 'owner'  => 'aiagent',
-                'table'  => 'js_ticket_instantfix_data',
+                'table'  => 'js_ticket_ai_documents', // renamed from js_ticket_instantfix_data by the AI add-on
                 'idcol'  => 'id',
                 'title'  => 'title',
                 'where'  => '',
@@ -424,9 +424,14 @@ class JSSTaisources {
             /* Only the defaults this site can actually read. A source whose
                add-on is missing approved by default is "approved but empty",
                which looks exactly like a broken engine. */
-            $jsst_raw = array_values(array_filter(
-                array('kb', 'faq', 'canned', 'posts'),
-                array(__CLASS__, 'present')));
+            /* Canned responses are written for agents, and WordPress posts and
+               pages are mostly blog and site text ("Hello world"), so a fresh
+               desk starts with neither as a customer source; a desk that has
+               always had them keeps them. See JSSTactivation::markFreshAiDefaults(). */
+            $jsst_defaults = get_option('jsst_ai_fresh_defaults')
+                ? array('kb', 'faq')
+                : array('kb', 'faq', 'canned', 'posts');
+            $jsst_raw = array_values(array_filter($jsst_defaults, array(__CLASS__, 'present')));
         }
 
         // A key that is no longer in the catalogue is dropped rather than
@@ -1119,7 +1124,12 @@ class JSSTaisources {
                queried live rather than chunked - so asking for a rebuild on
                their behalf would walk the whole corpus to change nothing. */
             $jsst_indexer = new JSSTaiagentindexer();
-            $jsst_indexer->purgeSourceType($jsst_key);
+            if (method_exists($jsst_indexer, 'markSourceTypeStale')) {
+                // Rewritten in place, so searches keep finding it meanwhile.
+                $jsst_indexer->markSourceTypeStale($jsst_key);
+            } else {
+                $jsst_indexer->purgeSourceType($jsst_key);
+            }
             $jsst_indexer->scheduleRebuild();
             $jsst_done = true;
         }

@@ -11,7 +11,7 @@ $jsst_jssupportticket_js ="
         $.validate();
     });
     function getChildForVisibleCombobox(val, no) {
-        jQuery.post(ajaxurl, {action: 'jsticket_ajax', val: val, jstmod: 'fieldordering', task: 'getChildForVisibleCombobox', '_wpnonce':'". esc_attr(wp_create_nonce("get-child-for-visible-combobox"))."', isAjaxCall: '1'}, function (data) {
+        jQuery.post(ajaxurl, {action: 'jsticket_ajax', val: val, jstmod: 'fieldordering', task: 'getChildForVisibleCombobox', formid: '". (int) (isset(jssupportticket::$jsst_data['formid']) ? jssupportticket::$jsst_data['formid'] : JSSTrequest::getVar('formid', '', 0)) ."', '_wpnonce':'". esc_attr(wp_create_nonce("get-child-for-visible-combobox"))."', isAjaxCall: '1'}, function (data) {
             if (data != false) {
                 jQuery('#js_or_row_'+no+' .visibleValueWrp').show();
                 jQuery('#js_or_row_'+no+' .visibleValueWrp').html(jsstDecodeHTML(data));
@@ -185,7 +185,7 @@ $jsst_jssupportticket_js ="
         jQuery('select#readonly').val('0');
     }
     function getConditionsForVisibleCombobox(val, no) {
-        jQuery.post(ajaxurl, {action: 'jsticket_ajax', val: val, jstmod: 'fieldordering', task: 'getConditionsForVisibleCombobox', '_wpnonce':'". esc_attr(wp_create_nonce("get-conditions-for-visible-combobox"))."', isAjaxCall: '1'}, function (data) {
+        jQuery.post(ajaxurl, {action: 'jsticket_ajax', val: val, jstmod: 'fieldordering', task: 'getConditionsForVisibleCombobox', formid: '". (int) (isset(jssupportticket::$jsst_data['formid']) ? jssupportticket::$jsst_data['formid'] : JSSTrequest::getVar('formid', '', 0)) ."', '_wpnonce':'". esc_attr(wp_create_nonce("get-conditions-for-visible-combobox"))."', isAjaxCall: '1'}, function (data) {
             if (data != false) {
                 jQuery('#js_or_row_'+no+' .visibleConditionWrp').show();
                 jQuery('#js_or_row_'+no+' .visibleConditionWrp').html(jsstDecodeHTML(data));
@@ -693,10 +693,10 @@ wp_add_inline_script('js-support-ticket-main-js',$jsst_jssupportticket_js);
                                                                 <div class="js-form-value jsst-vrule-row">
                                                                     <?php echo wp_kses(JSSTformfield::select('visibleParent[]', JSSTincluder::getJSModel('fieldordering')->getFieldsForVisibleCombobox(jssupportticket::$jsst_data['fieldfor'], $jsst_mformid, jssupportticket::$jsst_data[0]['userfield']->field, jssupportticket::$jsst_data[0]['userfield']->id), $jsst_orrow->visibleParent, esc_html(__('Select Parent', 'js-support-ticket')), array('class' => 'jsst-select js-form-input-field-visible', 'onchange' => 'getChildForVisibleCombobox(this.value, '.$jsst_nextorid.');getConditionsForVisibleCombobox(this.value, '.$jsst_nextorid.');')), JSST_ALLOWED_TAGS); ?>
                                                                     <span class="visibleValueWrp">
-                                                                        <?php echo wp_kses(html_entity_decode(JSSTincluder::getJSModel('fieldordering')->getChildForVisibleCombobox($jsst_orrow->visibleParent, $jsst_orrow->visibleValue)), JSST_ALLOWED_TAGS); ?>
+                                                                        <?php echo wp_kses(html_entity_decode(JSSTincluder::getJSModel('fieldordering')->getChildForVisibleCombobox($jsst_orrow->visibleParent, $jsst_orrow->visibleValue, (int) $jsst_mformid)), JSST_ALLOWED_TAGS); ?>
                                                                     </span>
                                                                     <span class="visibleConditionWrp">
-                                                                        <?php echo wp_kses(html_entity_decode(JSSTincluder::getJSModel('fieldordering')->getConditionsForVisibleCombobox($jsst_orrow->visibleParent, $jsst_orrow->visibleCondition)), JSST_ALLOWED_TAGS); ?>
+                                                                        <?php echo wp_kses(html_entity_decode(JSSTincluder::getJSModel('fieldordering')->getConditionsForVisibleCombobox($jsst_orrow->visibleParent, $jsst_orrow->visibleCondition, (int) $jsst_mformid)), JSST_ALLOWED_TAGS); ?>
                                                                     </span>
                                                                     <span onclick='deleteOrRow("js_or_row_<?php echo esc_js( $jsst_nextorid ); ?>")' class="jsst-act jsst-act-danger js-visible-conditions-delbtn">
                                                                         <?php echo esc_html(__('Remove', 'js-support-ticket')); ?>

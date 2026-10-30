@@ -198,7 +198,16 @@ class jssupportticketphplib {
         $jsst_output = null;
         if ($jsst_name != null && $jsst_domain !== null) {
             if (!headers_sent()) {
-          	    $jsst_output = setcookie($jsst_name, $jsst_value, $jsst_expires, $jsst_path, $jsst_domain, $jsst_secure, $jsst_httponly);
+                if ($jsst_httponly && PHP_VERSION_ID >= 70300) {
+                    // A cookie only the server reads (the guest ticket token)
+                    // also stays off cross-site requests.
+                    $jsst_output = setcookie($jsst_name, $jsst_value, array(
+                        'expires' => $jsst_expires, 'path' => $jsst_path, 'domain' => $jsst_domain,
+                        'secure' => $jsst_secure, 'httponly' => true, 'samesite' => 'Lax',
+                    ));
+                } else {
+                    $jsst_output = setcookie($jsst_name, $jsst_value, $jsst_expires, $jsst_path, $jsst_domain, $jsst_secure, $jsst_httponly);
+                }
             }
         }
         return $jsst_output;

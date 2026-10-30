@@ -49,6 +49,9 @@ class JSSTupgradeassistant {
     /** Record of what was done, for the screen and the License page. */
     const OPTION_LOG = 'jsst_upgrade_assistant';
 
+    /** When this site last asked the licence server again on the assistant's behalf. */
+    const REFRESHED = 'jsst_upgrade_refreshed';
+
     /** Screen the assistant lives on. */
     const SCREEN = 'admin.php?page=jssupportticket&jstlay=license';
 
@@ -200,6 +203,19 @@ class JSSTupgradeassistant {
         }
         $jsst_step = $jsst_plan['steps'][0];
         $jsst_label = self::label($jsst_step['slug']);
+        $jsst_refused = '';
+        /* The same step succeeding twice in a row means it did not change
+           what the plan sees: stop rather than go round again. */
+        if (self::justDone($jsst_step)) {
+            $jsst_reason = self::refusal($jsst_step['slug']);
+            return array(
+                'step'      => $jsst_step,
+                'ok'        => false,
+                'message'   => self::refusalMessage($jsst_label, '' !== $jsst_reason ? $jsst_reason : 'unknown'),
+                'recheck'   => self::recheckUrl(),
+                'remaining' => -1,
+            );
+        }
         /* A bundle's activation re-applies settings its old add-on stashed
            when it was last deactivated - possibly years ago - over the ones
            the site has now (29 Sep 2026 test: Knowledge Base and Announcement
@@ -214,21 +230,35 @@ class JSSTupgradeassistant {
                 set_time_limit(120);
             }
             $jsst_result = JSSTlicense::install('js-support-ticket-' . $jsst_step['slug']);
-            $jsst_ok = !is_wp_error($jsst_result) && JSSTbundle::active($jsst_step['slug']);
+            $jsst_refused = is_wp_error($jsst_result) ? '' : self::refusal($jsst_step['slug']);
+            $jsst_ok = !is_wp_error($jsst_result) && '' === $jsst_refused && JSSTbundle::active($jsst_step['slug']);
             /* The licence server allows so many requests a minute per address.
                A site installing four bundles back to back can meet that limit;
                it is not a refusal, so the page waits and asks again. */
             $jsst_error_data = is_wp_error($jsst_result) ? $jsst_result->get_error_data() : null;
             $jsst_busy = is_array($jsst_error_data) && isset($jsst_error_data['reason']) && 'rate_limited' === $jsst_error_data['reason'];
-            $jsst_message = $jsst_ok
-                ? sprintf(__('Installed %s.', 'js-support-ticket'), $jsst_label)
-                : sprintf(__('Could not install %1$s: %2$s', 'js-support-ticket'), $jsst_label, is_wp_error($jsst_result) ? $jsst_result->get_error_message() : __('it did not activate.', 'js-support-ticket'));
+            if ('' !== $jsst_refused) {
+                $jsst_message = self::refusalMessage($jsst_label, $jsst_refused);
+            } else {
+                $jsst_message = $jsst_ok
+                    ? sprintf(__('Installed %s.', 'js-support-ticket'), $jsst_label)
+                    : sprintf(__('Could not install %1$s: %2$s', 'js-support-ticket'), $jsst_label, is_wp_error($jsst_result) ? $jsst_result->get_error_message() : __('it did not activate.', 'js-support-ticket'));
+            }
         } elseif ('activate' === $jsst_step['do']) {
             $jsst_result = activate_plugin('js-support-ticket-' . $jsst_step['slug'] . '/js-support-ticket-' . $jsst_step['slug'] . '.php');
-            $jsst_ok = !is_wp_error($jsst_result);
-            $jsst_message = $jsst_ok
-                ? sprintf(__('Switched on %s.', 'js-support-ticket'), $jsst_label)
-                : sprintf(__('Could not switch on %1$s: %2$s', 'js-support-ticket'), $jsst_label, $jsst_result->get_error_message());
+            /* WordPress switching the plugin on is not enough: the pack's own
+               licence check can still keep it from running here. Counting that
+               as done sent the page round "Switched on Commerce." for ever,
+               because the next plan asked for the same step again. */
+            $jsst_refused = is_wp_error($jsst_result) ? '' : self::refusal($jsst_step['slug']);
+            $jsst_ok = !is_wp_error($jsst_result) && '' === $jsst_refused;
+            if (is_wp_error($jsst_result)) {
+                $jsst_message = sprintf(__('Could not switch on %1$s: %2$s', 'js-support-ticket'), $jsst_label, $jsst_result->get_error_message());
+            } elseif ('' !== $jsst_refused) {
+                $jsst_message = self::refusalMessage($jsst_label, $jsst_refused);
+            } else {
+                $jsst_message = sprintf(__('Switched on %s.', 'js-support-ticket'), $jsst_label);
+            }
         } else {
             $jsst_ok = self::deactivateLegacy($jsst_step['slug']);
             $jsst_by = ('core' === $jsst_step['by']) ? __('JS Help Desk itself', 'js-support-ticket') : self::label($jsst_step['by']);
@@ -261,17 +291,54 @@ class JSSTupgradeassistant {
             );
         }
 
+        /* A confirmation that is merely out of date - the plan grew, the key
+           changed, none fetched since 5.0.0 - is asked for once, as Check again
+           would, and the step is tried again in a moment with the new answer.
+           Never for another site address: that may be a staging copy, and only
+           the person can say which address the licence belongs to. */
+        if ('' !== $jsst_refused && in_array($jsst_refused, array('not_included', 'no_receipt', 'other_key'), true)
+                && !get_transient(self::REFRESHED)) {
+            set_transient(self::REFRESHED, time(), 10 * MINUTE_IN_SECONDS);
+            $jsst_fresh = JSSTlicense::refresh();
+            $jsst_data = is_wp_error($jsst_fresh) ? $jsst_fresh->get_error_data() : null;
+            if (!is_wp_error($jsst_fresh)) {
+                self::log($jsst_step, false, $jsst_message);
+                return array(
+                    'step'      => $jsst_step,
+                    'ok'        => false,
+                    'retry'     => 2,
+                    'message'   => sprintf(__('Checked your license with the license server again. Trying %s once more.', 'js-support-ticket'), $jsst_label),
+                    'remaining' => count($jsst_plan['steps']),
+                );
+            }
+            if (is_array($jsst_data) && isset($jsst_data['reason']) && 'rate_limited' === $jsst_data['reason']) {
+                delete_transient(self::REFRESHED);
+                return array(
+                    'step'      => $jsst_step,
+                    'ok'        => false,
+                    'retry'     => 60,
+                    'message'   => sprintf(__('The license server asked us to slow down. Trying %s again in a minute.', 'js-support-ticket'), $jsst_label),
+                    'remaining' => count($jsst_plan['steps']),
+                );
+            }
+            $jsst_message .= ' ' . sprintf(__('The license server could not be asked just now: %s', 'js-support-ticket'), $jsst_fresh->get_error_message());
+        }
+
         self::log($jsst_step, $jsst_ok, $jsst_message);
 
         /* A failed step must not be retried in a loop: stop, and let the
            person see the message and decide. */
         $jsst_after = self::plan();
-        return array(
+        $jsst_return = array(
             'step'      => $jsst_step,
             'ok'        => $jsst_ok,
             'message'   => $jsst_message,
             'remaining' => $jsst_ok ? count($jsst_after['steps']) : -1,
         );
+        if ('' !== $jsst_refused) {
+            $jsst_return['recheck'] = self::recheckUrl();
+        }
+        return $jsst_return;
     }
 
     /**
@@ -358,6 +425,61 @@ class JSSTupgradeassistant {
             }
         }
         return $jsst_done;
+    }
+
+    /**
+     * Why a pack WordPress has switched on still does not run here, or ''.
+     *
+     * Asked of the pack's own licence check, directly: in the request that
+     * switched it on, its code has not loaded, so JSSTbundle::active() cannot
+     * know yet. The gate class is the same file in every pack; when no pack has
+     * loaded it, the one being switched on is read.
+     */
+    private static function refusal($jsst_slug) {
+        if (!class_exists('JSSTlicencegate')) {
+            $jsst_gate = WP_PLUGIN_DIR . '/js-support-ticket-' . $jsst_slug . '/includes/licence-gate.php';
+            if (file_exists($jsst_gate)) {
+                include_once $jsst_gate;
+            }
+        }
+        if (!class_exists('JSSTlicencegate') || JSSTlicencegate::allows('js-support-ticket-' . $jsst_slug)) {
+            return '';
+        }
+        $jsst_reason = (string) JSSTlicencegate::reason();
+        return '' !== $jsst_reason ? $jsst_reason : 'not_included';
+    }
+
+    /** The reason a pack cannot start, in words a site owner can act on. */
+    private static function refusalMessage($jsst_label, $jsst_reason) {
+        if ('not_included' === $jsst_reason) {
+            /* translators: %s: add-on name */
+            return sprintf(__('%s is switched on, but it cannot start yet: your license confirmation on this site does not include it. Use Check again, then Finish upgrade. Your old add-ons stay switched on until then.', 'js-support-ticket'), $jsst_label);
+        }
+        if ('other_site' === $jsst_reason) {
+            /* translators: 1: add-on name, 2: this site's address */
+            return sprintf(__('%1$s is switched on, but it cannot start yet: your license was activated for a different site address. If this site (%2$s) is the one to use, use Check again to activate the license here. Your old add-ons stay switched on until then.', 'js-support-ticket'), $jsst_label, wp_parse_url(get_site_url(), PHP_URL_HOST));
+        }
+        /* translators: %s: add-on name */
+        return sprintf(__('%s is switched on, but it cannot start yet: this site needs a fresh license confirmation. Use Check again, then Finish upgrade. Your old add-ons stay switched on until then.', 'js-support-ticket'), $jsst_label);
+    }
+
+    /** The Check again link on the License screen. */
+    private static function recheckUrl() {
+        // Plain &, not wp_nonce_url()'s &amp;: the page sets it as a link's href directly.
+        return add_query_arg('_wpnonce', wp_create_nonce('jsst-lic-recheck'), admin_url('admin.php?page=jssupportticket&task=rechecklicense&action=jstask'));
+    }
+
+    /** Did this same install/activate step just succeed (in the last two minutes)? */
+    private static function justDone(array $jsst_step) {
+        if (!in_array($jsst_step['do'], array('install', 'activate'), true)) {
+            return false;
+        }
+        $jsst_log = get_option(self::OPTION_LOG, array());
+        $jsst_steps = (is_array($jsst_log) && !empty($jsst_log['steps'])) ? $jsst_log['steps'] : array();
+        $jsst_last = end($jsst_steps);
+        return is_array($jsst_last) && !empty($jsst_last['ok'])
+            && $jsst_last['do'] === $jsst_step['do'] && $jsst_last['slug'] === $jsst_step['slug']
+            && (time() - (int) $jsst_last['when']) < 2 * MINUTE_IN_SECONDS;
     }
 
     private static function log(array $jsst_step, $jsst_ok, $jsst_message) {

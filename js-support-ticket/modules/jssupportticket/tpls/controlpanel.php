@@ -129,7 +129,7 @@ if (jssupportticket::$_config['offline'] == 2) {
                         if (jssupportticket::$_config['cplink_openticket_user'] == 1):
                             $jsst_ajaxid = "";
                             $jsst_count ++;
-					        if(in_array('multiform',jssupportticket::$_active_addons) && jssupportticket::$_config['show_multiform_popup'] == 1){
+					        if(JSSTlayout::frontFormPickerNeeded()){
 								//show popup in case of multiform
 								$jsst_ajaxid = "id=multiformpopup";
 							}
@@ -374,7 +374,7 @@ if (jssupportticket::$_config['offline'] == 2) {
                         if (jssupportticket::$_config['cplink_openticket_staff'] == 1):
                             $jsst_ajaxid = "";
                             $jsst_count ++;
-					        if(in_array('multiform',jssupportticket::$_active_addons)&& jssupportticket::$_config['show_multiform_popup'] == 1){
+					        if(JSSTlayout::frontFormPickerNeeded()){
 								//show popup in case of multiform
 								$jsst_ajaxid = "id=multiformpopup";
 							}
@@ -711,7 +711,7 @@ if (jssupportticket::$_config['offline'] == 2) {
                 <div class="js-ticket-card">
                     <?php 
                         $jsst_id='';
-                        if(in_array('multiform',jssupportticket::$_active_addons) && jssupportticket::$_config['show_multiform_popup'] == 1){
+                        if(JSSTlayout::frontFormPickerNeeded()){
                             $jsst_id = "id=multiformpopup";
                         }
                     ?>
@@ -792,7 +792,7 @@ if (jssupportticket::$_config['offline'] == 2) {
                     $jsst_count++;
 
                     // Multiform popup
-                    if (in_array('multiform', jssupportticket::$_active_addons) && jssupportticket::$_config['show_multiform_popup'] == 1) {
+                    if(JSSTlayout::frontFormPickerNeeded()){
                         $jsst_ajaxid = "id=multiformpopup";
                     }
 

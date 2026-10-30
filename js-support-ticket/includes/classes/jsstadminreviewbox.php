@@ -15,10 +15,11 @@ if (!defined('ABSPATH'))
    so `class_exists()` was false on every route and the early return above was
    unreachable. The declaration below is what has to be protected, and it is
    `JSSTreviewbox`. (Roadmap 4.0-CORE-19) */
-if (class_exists('JSSTreviewbox')) {
-    return;
-}
-
+/* A bare `if (class_exists(...)) return;` here never let the box run: PHP
+   declares a top-level class when the file is compiled, so the check was
+   already true on the first include and the constructor below never ran.
+   Declared inside the conditional instead, as agent/shotcodes.php does. */
+if (!class_exists('JSSTreviewbox')) {
 class JSSTreviewbox {
 
     public function __construct() {
@@ -26,157 +27,97 @@ class JSSTreviewbox {
     }
 
     public function jsstadmin_notices() {
+        /* Administrators only - saving the choice (reviewBoxAction) needs
+           manage_options, so anyone else could never close it - and only on the
+           help desk's own screens and the WordPress Dashboard, not all of wp-admin. */
+        if (!current_user_can('manage_options')) {
+            return;
+        }
+        $jsst_screen = function_exists('get_current_screen') ? get_current_screen() : null;
+        $jsst_page = isset($_GET['page']) ? sanitize_key(wp_unslash($_GET['page'])) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- which screen, nothing is changed
+        $jsst_ours = ($jsst_page === 'jssupportticket' || $jsst_page === 'ticket');
+        if (!$jsst_ours && !($jsst_screen && $jsst_screen->id === 'dashboard')) {
+            return;
+        }
         $jsst_is_hidden = get_option("jssupportticket_hide_review_box");
         if($jsst_is_hidden !== false) {
             return;
         }
-        $jsst_current_count = get_option("jssupportticket_show_review_box_after");
-        if($jsst_current_count === false) {
+        $jsst_date_to_show = get_option("jssupportticket_show_review_box_after");
+        if($jsst_date_to_show === false) {
 			//jssupportticketphplib::JSST_strtotime not work porperly
             //$jsst_date = gmdate("Y-m-d", jssupportticketphplib::JSST_strtotime("+30 days"));
             $jsst_date = gmdate("Y-m-d", strtotime("+30 days"));
 			add_option("jssupportticket_show_review_box_after", $jsst_date);
             return;
-        } else if($jsst_current_count < 35) {
+        }
+        /* Both are Y-m-d strings, so comparing them as strings is comparing dates.
+           This used to also test the stored date against the number 35, which on
+           PHP 8 compares as text ("2026-..." < "35") and hid the box for good. */
+        if (gmdate("Y-m-d") < (string) $jsst_date_to_show) {
             return;
         }
-        $jsst_date_to_show = get_option("jssupportticket_show_review_box_after");
-        if($jsst_date_to_show !== false) {
-            $jsst_current_date = gmdate("Y-m-d");
-            if($jsst_current_date < $jsst_date_to_show) {
-                return;
-            }
-        }
+        $jsst_star = '<svg viewBox="0 0 20 20" aria-hidden="true" focusable="false"><path d="M10 1.6l2.6 5.3 5.8.8-4.2 4.1 1 5.8L10 14.9l-5.2 2.7 1-5.8L1.6 7.7l5.8-.8z"/></svg>';
         ?>
-        <div class="jssupportticket-premio-review-box">
-            <div class="js-ticket-review-default" id="default-review-box-jssupportticket">
-                <div class="js-ticket-review-default-cnt">
-                    <div class="js-ticket-review-default-cnt-left">
-                        <img alt="<?php echo esc_attr(__('stars','js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/review/stars-icon.png">
+        <div class="jsst-rv" id="jsst-rv" role="region" aria-label="<?php echo esc_attr(__('Rate JS Help Desk', 'js-support-ticket')); ?>">
+            <button type="button" class="jsst-rv-close" data-jsst-rv="later" aria-label="<?php echo esc_attr(__('Close', 'js-support-ticket')); ?>">&times;</button>
+            <div class="jsst-rv-icon"><?php echo $jsst_star; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- fixed SVG above ?></div>
+            <div class="jsst-rv-body">
+                <div class="jsst-rv-ask">
+                    <div class="jsst-rv-title"><?php echo esc_html(__('Enjoying JS Help Desk? Please rate us on WordPress.org', 'js-support-ticket')); ?></div>
+                    <p class="jsst-rv-text"><?php echo esc_html(__('A short review helps other site owners find the plugin and keeps it growing. It takes about a minute.', 'js-support-ticket')); ?></p>
+                    <div class="jsst-rv-actions">
+                        <a class="jsst-rv-btn jsst-rv-primary" data-jsst-rv="rate" href="https://wordpress.org/support/plugin/js-support-ticket/reviews/#new-post" target="_blank" rel="noopener noreferrer">
+                            <span class="jsst-rv-stars"><?php echo str_repeat($jsst_star, 5); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- fixed SVG above ?></span>
+                            <?php echo esc_html(__('Rate JS Help Desk', 'js-support-ticket')); ?>
+                        </a>
+                        <button type="button" class="jsst-rv-btn" data-jsst-rv="later" aria-expanded="false" aria-controls="jsst-rv-later"><?php echo esc_html(__('Maybe later', 'js-support-ticket')); ?></button>
+                        <button type="button" class="jsst-rv-link" data-jsst-rv="done"><?php echo esc_html(__('I already rated it', 'js-support-ticket')); ?></button>
+                        <button type="button" class="jsst-rv-link" data-jsst-rv="never"><?php echo esc_html(__("Don't ask again", 'js-support-ticket')); ?></button>
                     </div>
-                    <div class="js-ticket-review-default-cnt-right">
-                        <div class="js-ticket-review-row review-head">
-                            <?php echo esc_html(__("Please write appreciated review at WP Extension Directory",'js-support-ticket')); ?>
-                        </div>
-                        <div class="js-ticket-review-row review-description">
-                            <?php echo esc_html(__("We'd love to hear from you. It'll only take 2 minutes of your time, and will really help us spread the word",'js-support-ticket')); ?>
-                        </div>
-                        <div class="js-ticket-review-row">
-                            <a data-mode="love" class="jssupportticket-premio-review-box-hide-btn review-love" href="https://wordpress.org/support/plugin/js-support-ticket/reviews" target="_blank">
-                                <img alt="<?php echo esc_attr(__('love','js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/review/love.png">
-                                <?php echo esc_html(__("I'd love to help :)",'js-support-ticket')); ?>
-                            </a>
-                            <a class="jssupportticket-premio-review-box-future-btn review-sad" href="javascript:;">
-                                <img alt="<?php echo esc_attr(__('Sad','js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/review/sad.png">
-                                <?php echo esc_html(__("Not this time",'js-support-ticket')); ?>
-                            </a>
-                            <a data-mode="happy" class="jssupportticket-premio-review-box-hide-btn review-happy" href="javascript:;">
-                                <img alt="<?php echo esc_attr(__('Happy','js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/review/happy.png">
-                                <?php echo esc_html(__("I've already rated you",'js-support-ticket')); ?>
-                            </a>
-                        </div>
+                    <div class="jsst-rv-later" id="jsst-rv-later" hidden>
+                        <span><?php echo esc_html(__('Remind me in', 'js-support-ticket')); ?></span>
+                        <button type="button" class="jsst-rv-chip" data-days="3"><?php echo esc_html(__('3 days', 'js-support-ticket')); ?></button>
+                        <button type="button" class="jsst-rv-chip" data-days="10"><?php echo esc_html(__('10 days', 'js-support-ticket')); ?></button>
+                        <button type="button" class="jsst-rv-chip" data-days="30"><?php echo esc_html(__('30 days', 'js-support-ticket')); ?></button>
                     </div>
                 </div>
-                <img  class="js-ticket-review-default-img" alt="<?php echo esc_attr(__('stars','js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/review/star.png">
-                <a href="javascript:;" class="dismiss-btn jssupportticket-premio-review-dismiss-btn">
-                    <img alt="<?php echo esc_attr(__('Close','js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/review/close_icon.png">
-                </a>
-            </div>
-            <div class="js-ticket-review-thanks-box" id="review-thanks-jssupportticket">
-                <div class="jssupportticket-thanks-box-popup">
-                    <div class="jssupportticket-thanks-box-popup-content">
-                        <div class="jssupportticket-thanks-box-popup-content-wrp">
-                            <button class="jssupportticket-close-thanks-btn js-ticket-review-thanks-btn">
-                                <img alt="<?php echo esc_attr(__('Close','js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/review/close_icon.png">
-                            </button>
-                            <div class="js-ticket-review-thanks-img">
-                                <img alt="<?php echo esc_attr(__('thanks','js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/review/thank_you.png">
-                            </div>
-                            <div class="js-ticket-review-thanks-msg">
-                                <div class="thanks-msg-title"><?php echo esc_html(__("You are awesome !......",'js-support-ticket')); ?></div>
-                                <div class="thanks-msg-desc"><?php echo esc_html(__("Thanks for your support, we really appreciate it.",'js-support-ticket')); ?></div>
-                                <div class="thanks-msg-footer"><?php echo esc_html(__("JS Help Desk Team",'js-support-ticket')); ?></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="clear clearfix"></div>
-            </div>
-        </div>
-        <div class="jssupportticket-review-box-popup">
-            <div class="jssupportticket-review-box-popup-content">
-                <div class="jssupportticket-review-box-popup-content-wrp">
-                    <div class="jssupportticket-review-box-popup-content-left">
-                        <img alt="<?php echo esc_attr(__('stars','js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/review/popup-start-icon.png">
-                    </div>
-                    <div class="jssupportticket-review-box-popup-content-right">
-                        <button class="jssupportticket-close-review-box-popup">
-                            <img alt="<?php echo esc_attr(__('Close','js-support-ticket')); ?>" src="<?php echo esc_url(JSST_PLUGIN_URL); ?>includes/images/review/close_icon.png">
-                        </button>
-                        <div class="jssupportticket-review-box-title">
-                            <?php echo esc_html(__("Remind you about this later?",'js-support-ticket')); ?>
-                        </div>
-                        <div class="jssupportticket-review-box-options">
-                            <a class="three-days" href="javascript:;" data-days="3">
-                                <?php echo esc_html(__("Remind me in 3 days",'js-support-ticket')); ?>
-                            </a>
-                            <a class="seven-days" href="javascript:;" data-days="10">
-                                <?php echo esc_html(__("Remind me in 10 days",'js-support-ticket')); ?>
-                            </a>
-                            <a class="ten-days" href="javascript:;" data-days="30" class="dismiss">
-                                <?php echo esc_html(__("Remind me in 30 days",'js-support-ticket')); ?>
-                            </a>
-                            <a class="zero-days" href="javascript:;" data-days="30" class="dismiss">
-                                <?php echo esc_html(__("Don't remind me about this",'js-support-ticket')); ?>
-                            </a>
-                        </div>
-                    </div>
+                <div class="jsst-rv-thanks" hidden>
+                    <div class="jsst-rv-title"><?php echo esc_html(__('Thank you!', 'js-support-ticket')); ?></div>
+                    <p class="jsst-rv-text"><?php echo esc_html(__('Your support really helps. - The JS Help Desk Team', 'js-support-ticket')); ?></p>
                 </div>
             </div>
         </div>
         <?php
-        $jsst_jssupportticket_js ='
-            jQuery(document).ready(function(){
-                jQuery("body").addClass("has-premio-box");
-                jQuery(document).on("click", ".jssupportticket-premio-review-dismiss-btn, .jssupportticket-premio-review-box-future-btn", function(){
-                    jQuery(".jssupportticket-review-box-popup").show();
+        /* Rate: back in 30 days, in case the review was not finished. Already
+           rated or don't ask again: never. A reminder: the days chosen. */
+        $jsst_jssupportticket_js = '
+            jQuery(function($){
+                var box = $("#jsst-rv");
+                function save(days){
+                    $.post(ajaxurl, {action: "jsticket_ajax", jstmod: "jssupportticket", task: "reviewBoxAction", days: days, "_wpnonce": "' . esc_attr(wp_create_nonce("review-box-action")) . '"});
+                }
+                function thanks(){
+                    box.find(".jsst-rv-ask").attr("hidden", true);
+                    box.find(".jsst-rv-thanks").removeAttr("hidden");
+                    setTimeout(function(){ box.fadeOut(300); }, 4000);
+                }
+                box.on("click", "[data-jsst-rv=rate]", function(){ save(30); thanks(); });
+                box.on("click", "[data-jsst-rv=done]", function(){ save(-1); thanks(); });
+                box.on("click", "[data-jsst-rv=never]", function(){ save(-1); box.fadeOut(200); });
+                box.on("click", "[data-jsst-rv=later]", function(){
+                    if (!box.find(".jsst-rv-thanks").is("[hidden]")) { box.fadeOut(200); return; }
+                    var later = box.find(".jsst-rv-later");
+                    var open = later.is("[hidden]");
+                    later.attr("hidden", !open);
+                    box.find("[aria-controls=jsst-rv-later]").attr("aria-expanded", open ? "true" : "false");
+                    if (open) { later.find(".jsst-rv-chip").first().trigger("focus"); }
                 });
-                jQuery(document).on("click", ".jssupportticket-close-review-box-popup", function(){
-                    jQuery(".jssupportticket-review-box-popup").hide();
-                });
-                jQuery(document).on("click", ".jssupportticket-close-thanks-btn", function(){
-                    jQuery(".jssupportticket-review-box-popup").remove();
-                    jQuery(".jssupportticket-premio-review-box").remove();
-                });
-                jQuery(document).on("click",".jssupportticket-premio-review-box-hide-btn",function(){
-                    jQuery("#default-review-box-jssupportticket").hide();
-                    jQuery("#review-thanks-jssupportticket").show();
-                    jQuery(".jssupportticket-thanks-box-popup").show();
-                    var dataMode = jQuery(this).attr("data-mode");
-                    if (dataMode == "happy") {
-                        var dataDays = "-1";
-                    }else{
-                        var dataDays = "30";
-                    }
-                    jQuery.post(ajaxurl, {action: "jsticket_ajax", jstmod: "jssupportticket", task: "reviewBoxAction", days:dataDays, "_wpnonce":"'.esc_attr(wp_create_nonce("review-box-action")).'"}, function (data) {
-                        
-                    });
-                });
-                jQuery(document).on("click", ".jssupportticket-review-box-options a", function(){
-                    var dataDays = jQuery(this).attr("data-days");
-                    jQuery(".jssupportticket-review-box-popup").remove();
-                    jQuery(".jssupportticket-premio-review-box").remove();
-                    jQuery("body").removeClass("has-premio-box");
-                    jQuery.post(ajaxurl, {action: "jsticket_ajax", jstmod: "jssupportticket", task: "reviewBoxAction", days:dataDays, "_wpnonce":"'.esc_attr(wp_create_nonce("review-box-action")).'"}, function (data) {
-                        if (data) {
-                            jQuery(".jssupportticket-review-box-popup").remove();
-                            jQuery(".jssupportticket-premio-review-box").remove();
-                        }
-                    });
-                });
+                box.on("click", ".jsst-rv-chip", function(){ save($(this).data("days")); box.fadeOut(200); });
             });
         ';
         wp_add_inline_script('js-support-ticket-main-js',$jsst_jssupportticket_js);
     }
 }
 $JSSTreviewbox = new JSSTreviewbox();
+}

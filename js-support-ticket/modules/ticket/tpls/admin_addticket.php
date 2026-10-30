@@ -98,7 +98,7 @@ $jsst_jssupportticket_js ='
         // returns carries this screen\'s classes and placeholder rather than the
         // other form\'s. The empty state comes back from the server too, so both
         // forms show the same thing for a department with no topics.
-        jQuery.post(ajaxurl, {action: "jsticket_ajax", val: val, jstmod: "department", task: "getHelpTopicByDepartment", context: "admin", "_wpnonce":"'. esc_attr(wp_create_nonce("get-help-topic-by-department")) .'"}, function (data) {
+        jQuery.post(ajaxurl, {action: "jsticket_ajax", val: val, jstmod: "department", task: "getHelpTopicByDepartment", context: "admin", multiformid: jQuery("input[name=multiformid]").val() || "", "_wpnonce":"'. esc_attr(wp_create_nonce("get-help-topic-by-department")) .'"}, function (data) {
             if (data) {
                 jQuery("div#helptopic").html(data);
             }

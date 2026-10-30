@@ -348,12 +348,8 @@ class JSSTautocleanupModel {
         }
         $jsst_clause = $this->eligibilityClause($jsst_cutoff);
 
-        global $wp_filesystem;
-        if (empty($wp_filesystem)) {
-            require_once(ABSPATH . '/wp-admin/includes/file.php');
-            WP_Filesystem();
-        }
-
+        // Files are deleted with plain PHP (deleteFile() below), so no
+        // filesystem API is set up here.
         $jsst_datadirectory = jssupportticket::$_config['data_directory'];
         $jsst_maindir = wp_upload_dir();
         $jsst_base_path = $jsst_maindir['basedir'] . '/' . $jsst_datadirectory . '/attachmentdata/ticket/';
@@ -412,17 +408,16 @@ class JSSTautocleanupModel {
      * Delete one attachment file, refusing to step outside the attachment folder.
      */
     private function deleteFile($jsst_base_path, $jsst_folder, $jsst_filename) {
-        global $wp_filesystem;
-        $jsst_folder = jssupportticketphplib::JSST_basename((string) $jsst_folder);
-        $jsst_filename = jssupportticketphplib::JSST_basename((string) $jsst_filename);
-        if ($jsst_folder === '' || $jsst_filename === '') {
+        /* Plain PHP through JSSTattachmentserver: the global $wp_filesystem
+           this used is, on a host without direct file access, an FTP object
+           that never connected - exists() on it was a fatal error, so the
+           scheduled clean-up stopped on its first file, every run. True only
+           when a file was there and is gone, so freed bytes stay honest. */
+        $jsst_real = $jsst_base_path . jssupportticketphplib::JSST_basename((string) $jsst_folder) . '/' . jssupportticketphplib::JSST_basename((string) $jsst_filename);
+        if (!is_file($jsst_real)) {
             return false;
         }
-        $jsst_path = $jsst_base_path . $jsst_folder . '/' . $jsst_filename;
-        if (empty($wp_filesystem) || !$wp_filesystem->exists($jsst_path)) {
-            return false;
-        }
-        return (bool) $wp_filesystem->delete($jsst_path);
+        return JSSTattachmentserver::deleteTicketFile($jsst_folder, $jsst_filename);
     }
 
     /**

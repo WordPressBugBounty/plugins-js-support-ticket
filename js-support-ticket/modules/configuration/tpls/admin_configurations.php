@@ -1106,6 +1106,9 @@ $jsst_plugin_array = get_option('active_plugins');
                       $jsst_title = esc_html(__('File Extension', 'js-support-ticket'));
                       $jsst_field = JSSTformfield::textarea('file_extension', jssupportticket::$jsst_data[0]['file_extension'], array('class' => 'inputbox'));
                       $jsst_description =  esc_html(__('File extension allowed to attach', 'js-support-ticket'));
+                      if (class_exists('JSSTattachmentguard')) {
+                          $jsst_description .= '<br>' . JSSTattachmentguard::extensionNote(jssupportticket::$jsst_data[0]['file_extension']);
+                      }
                       JSST_printConfigFieldSingle($jsst_title, $jsst_field, $jsst_description);
                     }
                   ?>

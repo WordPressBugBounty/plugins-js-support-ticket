@@ -132,7 +132,7 @@ class JSSTailanguages {
         $jsst_map = array(
             'ja' => 'japanese', 'ko' => 'hangul', 'zh' => 'han', 'th' => 'thai',
             'he' => 'hebrew', 'ar' => 'arabic', 'el' => 'greek', 'hi' => 'devanagari',
-            'ru' => 'cyrillic',
+            'ru' => 'cyrillic', 'ur' => 'arabic', 'fa' => 'arabic',
         );
         return isset($jsst_map[$jsst_code]) ? $jsst_map[$jsst_code] : 'latin';
     }
@@ -197,6 +197,17 @@ class JSSTailanguages {
             foreach (self::scripts() as $jsst_code => $jsst_pattern) {
                 $jsst_hits = preg_match_all($jsst_pattern, $jsst_text);
                 if ($jsst_hits > 0 && ($jsst_hits / $jsst_letters) >= 0.20) {
+                    /* Urdu and Persian are written in Arabic script, and were
+                       reported as Arabic. Each has letters Arabic does not use:
+                       Urdu's ٹ ڈ ڑ ں ھ ہ ے, Persian's پ چ ژ گ and its own ی.
+                       Urdu also uses پ چ گ ی, so its letters are tested first. */
+                    if ($jsst_code === 'ar') {
+                        if (preg_match('/[\x{0679}\x{0688}\x{0691}\x{06BA}\x{06BE}\x{06C1}\x{06D2}]/u', $jsst_text)) {
+                            $jsst_code = 'ur';
+                        } elseif (preg_match('/[\x{067E}\x{0686}\x{0698}\x{06AF}\x{06CC}]/u', $jsst_text)) {
+                            $jsst_code = 'fa';
+                        }
+                    }
                     $jsst_out['lang']       = $jsst_code;
                     $jsst_out['script']     = self::scriptOf($jsst_code);
                     $jsst_out['confidence'] = (int) min(100, round(($jsst_hits / $jsst_letters) * 100) + 20);
@@ -577,6 +588,7 @@ class JSSTailanguages {
             'zh' => __('Chinese', 'js-support-ticket'),   'th' => __('Thai', 'js-support-ticket'),
             'he' => __('Hebrew', 'js-support-ticket'),    'ar' => __('Arabic', 'js-support-ticket'),
             'el' => __('Greek', 'js-support-ticket'),     'hi' => __('Hindi', 'js-support-ticket'),
+            'ur' => __('Urdu', 'js-support-ticket'),      'fa' => __('Persian', 'js-support-ticket'),
             'und' => __('Not determined', 'js-support-ticket'),
         );
         $jsst_code = self::normalise($jsst_code);
@@ -586,7 +598,7 @@ class JSSTailanguages {
     /** Every language this class can name, for a settings dropdown. */
     public static function known() {
         $jsst_out = array();
-        foreach (array_merge(array_keys(self::profiles()), array_keys(self::scripts())) as $jsst_code) {
+        foreach (array_merge(array_keys(self::profiles()), array_keys(self::scripts()), array('ur', 'fa')) as $jsst_code) {
             $jsst_out[$jsst_code] = self::label($jsst_code);
         }
         asort($jsst_out);

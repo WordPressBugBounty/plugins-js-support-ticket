@@ -706,7 +706,10 @@ class JSSTfieldorderingModel {
         return $jsst_data;
     }
 
-    function getChildForVisibleCombobox($jsst_perentid = null , $jsst_default = null) {
+    function getChildForVisibleCombobox($jsst_perentid = null , $jsst_default = null, $jsst_formid = null) {
+        if ($jsst_formid === null) {
+            $jsst_formid = absint(JSSTrequest::getVar('formid'));
+        }
         $jsst_isAjaxCall = JSSTrequest::getVar('isAjaxCall');
         if ($jsst_isAjaxCall == 1) {
             $jsst_nonce = JSSTrequest::getVar('_wpnonce');
@@ -721,12 +724,11 @@ class JSSTfieldorderingModel {
             return false;
         }
 
-        $jsst_query = "SELECT isuserfield, userfieldtype, field FROM `" . jssupportticket::$_db->prefix . "js_ticket_fieldsordering` WHERE field = %s";
-        $jsst_fieldType = jssupportticket::$_db->get_row(jssupportticket::$_db->prepare($jsst_query, $jsst_perentid));
+        // The field on the form being edited: forms share field names.
+        $jsst_fieldType = self::fieldOnForm($jsst_perentid, $jsst_formid, 'isuserfield, userfieldtype, field, userfieldparams');
         $jsst_showComboBox = false;
         if (isset($jsst_fieldType->isuserfield) && $jsst_fieldType->isuserfield == 1) {
-            $jsst_query = "SELECT userfieldparams AS params FROM `" . jssupportticket::$_db->prefix . "js_ticket_fieldsordering` WHERE field = %s";
-            $jsst_options = jssupportticket::$_db->get_var(jssupportticket::$_db->prepare($jsst_query, $jsst_perentid));
+            $jsst_options = $jsst_fieldType->userfieldparams;
             $jsst_options = json_decode($jsst_options);
             foreach ($jsst_options as $jsst_key => $jsst_option) {
                 $jsst_fieldtypes[$jsst_key] = (object) array('id' => $jsst_option, 'text' => $jsst_option);
@@ -763,7 +765,10 @@ class JSSTfieldorderingModel {
         return jssupportticketphplib::JSST_htmlentities($jsst_combobox);
     }
 
-    function getConditionsForVisibleCombobox($jsst_perentid = null , $jsst_default = null) {
+    function getConditionsForVisibleCombobox($jsst_perentid = null , $jsst_default = null, $jsst_formid = null) {
+        if ($jsst_formid === null) {
+            $jsst_formid = absint(JSSTrequest::getVar('formid'));
+        }
         $jsst_isAjaxCall = JSSTrequest::getVar('isAjaxCall');
         if ($jsst_isAjaxCall == 1) {
             $jsst_nonce = JSSTrequest::getVar('_wpnonce');
@@ -781,8 +786,7 @@ class JSSTfieldorderingModel {
         (object) array('id' => 1, 'text' => esc_html(__('Equal', 'js-support-ticket'))),
         (object) array('id' => 0, 'text' => esc_html(__('Not Equal', 'js-support-ticket'))));
 
-        $jsst_query = "SELECT isuserfield, userfieldtype, field FROM `" . jssupportticket::$_db->prefix . "js_ticket_fieldsordering` WHERE field = %s";
-        $jsst_fieldType = jssupportticket::$_db->get_row(jssupportticket::$_db->prepare($jsst_query, $jsst_perentid));
+        $jsst_fieldType = self::fieldOnForm($jsst_perentid, $jsst_formid, 'isuserfield, userfieldtype, field');
         if (empty($jsst_fieldType->isuserfield)) {
             if ($jsst_fieldType->field == 'email' || $jsst_fieldType->field == 'fullname' || $jsst_fieldType->field == 'phone' || $jsst_fieldType->field == 'subject' || $jsst_fieldType->field == 'issuesummary') {
                 $Conditions = array(
@@ -967,7 +971,7 @@ class JSSTfieldorderingModel {
            return false;
         if (!current_user_can('manage_options'))
             return false;
-        $jsst_query = "SELECT field,field,fieldfor FROM `".jssupportticket::$_db->prefix."js_ticket_fieldsordering` WHERE id = %d";
+        $jsst_query = "SELECT field,field,fieldfor,multiformid FROM `".jssupportticket::$_db->prefix."js_ticket_fieldsordering` WHERE id = %d";
         $jsst_result = jssupportticket::$_db->get_row(jssupportticket::$_db->prepare($jsst_query, $jsst_id));
         if ($this->userFieldCanDelete($jsst_result) == true) {
             $jsst_row = JSSTincluder::getJSTable('fieldsordering');
@@ -975,26 +979,26 @@ class JSSTfieldorderingModel {
                 JSSTincluder::getJSModel('systemerror')->addSystemError();
                 JSSTmessage::setMessage(esc_html(__('Field has not been deleted', 'js-support-ticket')),'error');
             } else {
-                $jsst_query = "SELECT id,visible_field FROM `" . jssupportticket::$_db->prefix . "js_ticket_fieldsordering` WHERE visible_field LIKE %s";
-                $jsst_results = jssupportticket::$_db->get_results(jssupportticket::$_db->prepare($jsst_query, '%'.$jsst_result->field.'%'));
+                /* Only on the deleted field's own form - forms share field
+                   names - and by whole name: matching "ufield_3" as text also
+                   cut it out of "ufield_30" to "ufield_39". */
+                $jsst_query = "SELECT id,visible_field FROM `" . jssupportticket::$_db->prefix . "js_ticket_fieldsordering` WHERE visible_field LIKE %s AND multiformid = %d";
+                $jsst_results = jssupportticket::$_db->get_results(jssupportticket::$_db->prepare($jsst_query, '%' . jssupportticket::$_db->esc_like($jsst_result->field) . '%', (int) $jsst_result->multiformid));
                 foreach ($jsst_results as $jsst_value) {
-                    $jsst_visible_field =  jssupportticketphplib::JSST_str_replace($jsst_result->field.',', '', $jsst_value->visible_field);
-                    $jsst_visible_field =  jssupportticketphplib::JSST_str_replace(','.$jsst_result->field, '', $jsst_visible_field);
-                    $jsst_visible_field =  jssupportticketphplib::JSST_str_replace($jsst_result->field, '', $jsst_visible_field);
-
+                    $jsst_names = array_filter(array_map('trim', explode(',', (string) $jsst_value->visible_field)), 'strlen');
+                    $jsst_kept = array_values(array_diff($jsst_names, array($jsst_result->field)));
+                    if (count($jsst_kept) === count($jsst_names)) {
+                        continue;
+                    }
                     $jsst_query = "UPDATE `" . jssupportticket::$_db->prefix . "js_ticket_fieldsordering` SET visible_field = %s WHERE id = %d";
-                    jssupportticket::$_db->query(jssupportticket::$_db->prepare($jsst_query, $jsst_visible_field, $jsst_value->id));
+                    jssupportticket::$_db->query(jssupportticket::$_db->prepare($jsst_query, implode(',', $jsst_kept), $jsst_value->id));
                     if (jssupportticket::$_db->last_error != null) {
 
                         JSSTincluder::getJSModel('systemerror')->addSystemError();
                     }
                 }
-                $jsst_query = "SELECT id FROM `" . jssupportticket::$_db->prefix . "js_ticket_fieldsordering` WHERE depandant_field = %s";
-                $jsst_result = jssupportticket::$_db->get_var(jssupportticket::$_db->prepare($jsst_query, $jsst_result->field));
-                if (isset($jsst_result)) {
-                    $jsst_query = "UPDATE `" . jssupportticket::$_db->prefix . "js_ticket_fieldsordering` SET depandant_field = '' WHERE id = %d";
-                    jssupportticket::$_db->query(jssupportticket::$_db->prepare($jsst_query, $jsst_result));
-                }
+                $jsst_query = "UPDATE `" . jssupportticket::$_db->prefix . "js_ticket_fieldsordering` SET depandant_field = '' WHERE depandant_field = %s AND multiformid = %d";
+                jssupportticket::$_db->query(jssupportticket::$_db->prepare($jsst_query, $jsst_result->field, (int) $jsst_result->multiformid));
                 JSSTmessage::setMessage(esc_html(__('Field has been deleted', 'js-support-ticket')),'updated');
             }
         }else{
@@ -1066,7 +1070,25 @@ class JSSTfieldorderingModel {
         return $jsst_fields;
     }
 
-    function getUserUnpublishFieldsfor($jsst_fieldfor) {
+    /**
+     * One field's row, looked up by name on one form.
+     *
+     * Forms share field names (ufield_31 on one form is ufield_31 on the next),
+     * so a lookup by name alone returned whichever form's copy came first. With
+     * no form to go on, the switched-on copy is preferred.
+     */
+    private static function fieldOnForm($jsst_field, $jsst_formid, $jsst_columns) {
+        $jsst_query = "SELECT " . $jsst_columns . " FROM `" . jssupportticket::$_db->prefix . "js_ticket_fieldsordering` WHERE field = %s";
+        $jsst_args = array((string) $jsst_field);
+        if ((int) $jsst_formid > 0) {
+            $jsst_query .= " AND multiformid = %d";
+            $jsst_args[] = (int) $jsst_formid;
+        }
+        $jsst_query .= " ORDER BY published DESC, id ASC LIMIT 1";
+        return jssupportticket::$_db->get_row(jssupportticket::$_db->prepare($jsst_query, $jsst_args));
+    }
+
+    function getUserUnpublishFieldsfor($jsst_fieldfor, $jsst_multiformid = '') {
         if (!is_numeric($jsst_fieldfor))
             return false;
         if (JSSTincluder::getObjectClass('user')->isguest()) {
@@ -1074,8 +1096,18 @@ class JSSTfieldorderingModel {
         } else {
             $jsst_published = ' published = 0 ';
         }
-        $jsst_query = "SELECT field FROM `" . jssupportticket::$_db->prefix . "js_ticket_fieldsordering` WHERE fieldfor = %d AND isuserfield = 1 AND " . $jsst_published;
-        $jsst_fields = jssupportticket::$_db->get_results(jssupportticket::$_db->prepare($jsst_query, $jsst_fieldfor));
+        /* One form only, like getUserfieldsfor(). Forms share field names
+           (ufield_31 on one form is ufield_31 on the next), so without this a
+           field switched off on another form counted as switched off here, and
+           an edit put the ticket's old answer back over the new one. */
+        $jsst_inquery = '';
+        $jsst_args = array($jsst_fieldfor);
+        if ($jsst_multiformid !== '' && $jsst_multiformid !== null && is_numeric($jsst_multiformid)) {
+            $jsst_inquery = ' AND multiformid = %d';
+            $jsst_args[] = (int) $jsst_multiformid;
+        }
+        $jsst_query = "SELECT field FROM `" . jssupportticket::$_db->prefix . "js_ticket_fieldsordering` WHERE fieldfor = %d AND isuserfield = 1 AND " . $jsst_published . $jsst_inquery;
+        $jsst_fields = jssupportticket::$_db->get_results(jssupportticket::$_db->prepare($jsst_query, $jsst_args));
         return $jsst_fields;
     }
 
@@ -1238,8 +1270,22 @@ class JSSTfieldorderingModel {
             die( esc_html__( 'Security check Failed', 'js-support-ticket' ) );
         }
         $jsst_val = JSSTrequest::getVar('fvalue');
+        /* Forms share field names, so the child is looked up on the form the
+           page is showing. A page that does not say (an older cached script, the
+           ticket list filter) gets the switched-on copy rather than whichever
+           row the database happened to return first. */
+        $jsst_formid = absint(JSSTrequest::getVar('multiformid'));
         $jsst_query = "SELECT userfieldparams,fieldtitle,depandant_field,field FROM `".jssupportticket::$_db->prefix."js_ticket_fieldsordering` WHERE field = %s";
-        $jsst_data = jssupportticket::$_db->get_row(jssupportticket::$_db->prepare($jsst_query, $jsst_childfield));
+        $jsst_args = array($jsst_childfield);
+        if ($jsst_formid > 0) {
+            $jsst_query .= " AND multiformid = %d";
+            $jsst_args[] = $jsst_formid;
+        }
+        $jsst_query .= " ORDER BY published DESC, id ASC LIMIT 1";
+        $jsst_data = jssupportticket::$_db->get_row(jssupportticket::$_db->prepare($jsst_query, $jsst_args));
+        if (empty($jsst_data)) {
+            return wp_json_encode('');
+        }
         $jsst_decoded_data = json_decode($jsst_data->userfieldparams);
         $jsst_comboOptions = array();
         $jsst_flag = 0;
@@ -1273,12 +1319,18 @@ class JSSTfieldorderingModel {
         return jssupportticketphplib::JSST_htmlentities($jsst_arg, ENT_QUOTES, 'UTF-8');
     }
 
-    function getDataForVisibleField($jsst_field) {
+    function getDataForVisibleField($jsst_field, $jsst_formid = 0) {
         $jsst_field_items = jssupportticketphplib::JSST_explode(",", $jsst_field);
         $jsst_placeholders = implode(',', array_fill(0, count($jsst_field_items), '%s'));
 
+        // Only this form's copies: forms share field names.
         $jsst_query = "SELECT field, visibleparams FROM " . jssupportticket::$_db->prefix . "js_ticket_fieldsordering WHERE field IN (" . $jsst_placeholders . ")";
-        $jsst_fields = jssupportticket::$_db->get_results(jssupportticket::$_db->prepare($jsst_query, $jsst_field_items));
+        $jsst_args = $jsst_field_items;
+        if ((int) $jsst_formid > 0) {
+            $jsst_query .= " AND multiformid = %d";
+            $jsst_args[] = (int) $jsst_formid;
+        }
+        $jsst_fields = jssupportticket::$_db->get_results(jssupportticket::$_db->prepare($jsst_query, $jsst_args));
 
         $jsst_data = array();
 
@@ -1299,18 +1351,18 @@ class JSSTfieldorderingModel {
                     foreach ($jsst_decoded as $jsst_group) {
                         if (isset($jsst_group) && is_array($jsst_group)) {
                             foreach ($jsst_group as $jsst_d) {
-                                $jsst_d->visibleParentField = self::getChildForVisibleField($jsst_d->visibleParentField);
+                                $jsst_d->visibleParentField = self::getChildForVisibleField($jsst_d->visibleParentField, $jsst_formid);
                             }
                             $jsst_data[$jsst_fieldname][] = $jsst_group; // Save group
                         } else {
                             // fallback
-                            $jsst_group->visibleParentField = self::getChildForVisibleField($jsst_group->visibleParentField);
+                            $jsst_group->visibleParentField = self::getChildForVisibleField($jsst_group->visibleParentField, $jsst_formid);
                             $jsst_data[$jsst_fieldname][] = $jsst_group;
                         }
                     }
                 } elseif (is_object($jsst_decoded)) {
                     // Old system: simple condition
-                    $jsst_decoded->visibleParentField = self::getChildForVisibleField($jsst_decoded->visibleParentField);
+                    $jsst_decoded->visibleParentField = self::getChildForVisibleField($jsst_decoded->visibleParentField, $jsst_formid);
                     $jsst_data[$jsst_fieldname][] = $jsst_decoded;
                 }
             }
@@ -1319,16 +1371,16 @@ class JSSTfieldorderingModel {
         return $jsst_data;
     }
 
-    static function getChildForVisibleField($jsst_field) {
+    static function getChildForVisibleField($jsst_field, $jsst_formid = 0) {
         $jsst_oldField = jssupportticketphplib::JSST_explode(',',$jsst_field);
         $jsst_newField = $jsst_oldField[sizeof($jsst_oldField) - 1];
-        $jsst_query = "SELECT visible_field FROM ". jssupportticket::$_db->prefix ."js_ticket_fieldsordering WHERE  field = %s";
-        $jsst_queryRun = jssupportticket::$_db->get_var(jssupportticket::$_db->prepare($jsst_query, $jsst_newField));
+        $jsst_row = self::fieldOnForm($jsst_newField, $jsst_formid, 'visible_field');
+        $jsst_queryRun = $jsst_row ? $jsst_row->visible_field : null;
         if (isset($jsst_queryRun) && $jsst_queryRun != '') {
             $jsst_data = jssupportticketphplib::JSST_explode(',',$jsst_queryRun);
             foreach ($jsst_data as $jsst_value) {
                 $jsst_field = $jsst_field.','.$jsst_value;
-                $jsst_field = Self::getChildForVisibleField($jsst_field);
+                $jsst_field = Self::getChildForVisibleField($jsst_field, $jsst_formid);
             }
         }        
         return $jsst_field;

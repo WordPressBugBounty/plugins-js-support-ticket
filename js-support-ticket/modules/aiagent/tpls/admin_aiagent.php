@@ -70,10 +70,13 @@ JSSTmessage::getMessage();
                 <div class="jsst-card-head">
                     <h2 class="jsst-card-title"><?php echo esc_html(__('How it stands', 'js-support-ticket')); ?></h2>
                     <div class="jsst-card-tools">
-                        <?php if ($jsst_on) { ?>
-                            <span class="jsst-pill jsst-pill-ok"><span class="jsst-dot"></span><?php echo esc_html(__('AI is on', 'js-support-ticket')); ?></span>
-                        <?php } else { ?>
-                            <span class="jsst-pill jsst-pill-off"><span class="jsst-dot"></span><?php echo esc_html(__('AI is switched off', 'js-support-ticket')); ?></span>
+                        <?php /* One status for every AI screen: JSSTaipolicy::status(). */
+                        $jsst_status = isset($jsst_policy['status']) ? $jsst_policy['status'] : array('state' => $jsst_on ? 'ready' : 'off', 'label' => '', 'lane' => '');
+                        $jsst_pill = ($jsst_status['state'] === 'ready') ? 'jsst-pill-ok' : (($jsst_status['state'] === 'noengine') ? 'jsst-pill-warn' : 'jsst-pill-off'); ?>
+                        <?php /* When AI is not working, the status line just above already
+                                 says so with the reason; the pill only repeated it. */
+                        if ($jsst_status['state'] === 'ready') { ?>
+                        <span class="jsst-pill <?php echo esc_attr($jsst_pill); ?>"><span class="jsst-dot"></span><?php echo esc_html($jsst_status['label']); ?></span>
                         <?php } ?>
                         <a class="jsst-pill jsst-pill-info" href="<?php echo esc_url($jsst_settingsurl); ?>"><?php echo esc_html(__('Settings', 'js-support-ticket')); ?></a>
                     </div>
@@ -114,8 +117,14 @@ JSSTmessage::getMessage();
                         <?php foreach ($jsst_lanes as $jsst_laneid => $jsst_lane) { ?>
                             <div class="jsst-metric">
                                 <span class="jsst-metric-value">
-                                    <?php if ($jsst_on && !empty($jsst_states[$jsst_laneid])) { ?>
+                                    <?php /* "On" means text really goes there now: the lane is
+                                             open and, for a model lane, the engine in it is
+                                             ready. An open lane nothing uses says so. */
+                                    $jsst_inuse = ($jsst_laneid === JSSTaipolicy::LANE_ONSITE) || ($jsst_status['state'] === 'ready' && $jsst_status['lane'] === $jsst_laneid);
+                                    if ($jsst_on && !empty($jsst_states[$jsst_laneid]) && $jsst_inuse) { ?>
                                         <span class="jsst-pill jsst-pill-ok"><span class="jsst-dot"></span><?php echo esc_html(__('On', 'js-support-ticket')); ?></span>
+                                    <?php } elseif ($jsst_on && !empty($jsst_states[$jsst_laneid])) { ?>
+                                        <span class="jsst-pill jsst-pill-info"><span class="jsst-dot"></span><?php echo esc_html(__('Allowed, not in use', 'js-support-ticket')); ?></span>
                                     <?php } else { ?>
                                         <span class="jsst-pill jsst-pill-off"><span class="jsst-dot"></span><?php echo esc_html(__('Off', 'js-support-ticket')); ?></span>
                                     <?php } ?>
@@ -125,6 +134,8 @@ JSSTmessage::getMessage();
                         <?php } ?>
                     </div>
 
+                    <?php /* Reference, not status: kept, folded. */ ?>
+                    <details class="jsst-why jsst-ai-lanehelp"><summary><?php echo esc_html(__('What each lane means', 'js-support-ticket')); ?></summary>
                     <dl class="jsst-facts">
                         <?php foreach ($jsst_lanes as $jsst_laneid => $jsst_lane) { ?>
                             <dt><?php echo esc_html($jsst_lane['label']); ?></dt>
@@ -134,16 +145,71 @@ JSSTmessage::getMessage();
                             </dd>
                         <?php } ?>
                     </dl>
+                    </details>
                 </div>
             </div>
+
+            <?php /* Did it help? The number that says whether the AI is worth
+                     having, which nothing on this screen said before.
+                     JSSTaireview::results() explains how each is counted. */
+            $jsst_results = isset(jssupportticket::$jsst_data['airesults']) ? jssupportticket::$jsst_data['airesults'] : array();
+            if (!empty($jsst_results)) { ?>
+            <div class="jsst-card">
+                <div class="jsst-card-head">
+                    <h2 class="jsst-card-title"><?php echo esc_html(__('Results this month', 'js-support-ticket')); ?></h2>
+                </div>
+                <div class="jsst-card-body">
+                    <div class="jsst-metrics">
+                        <div class="jsst-metric">
+                            <?php if (!empty($jsst_results['fewdata'])) { ?>
+                                <span class="jsst-metric-value jsst-num"><?php echo esc_html((int) $jsst_results['solved'] . ' / ' . (int) $jsst_results['answered']); ?></span>
+                                <span class="jsst-metric-label"><?php echo esc_html(__('Tickets solved without a person. Too few answered yet for a percentage (it shows from 10).', 'js-support-ticket')); ?></span>
+                            <?php } else { ?>
+                            <span class="jsst-metric-value jsst-num"><?php echo esc_html($jsst_results['rate'] . '%'); ?></span>
+                            <span class="jsst-metric-label"><?php echo esc_html(sprintf(
+                                /* translators: 1: tickets solved, 2: tickets the AI answered */
+                                __('Tickets solved without a person (%1$d of %2$d answered)', 'js-support-ticket'),
+                                (int) $jsst_results['solved'], (int) $jsst_results['answered'])); ?></span>
+                            <?php } ?>
+                        </div>
+                        <div class="jsst-metric">
+                            <span class="jsst-metric-value jsst-num"><?php echo esc_html((int) $jsst_results['chatsolved'] . ' / ' . (int) $jsst_results['chats']); ?></span>
+                            <span class="jsst-metric-label"><?php echo esc_html(__('Chats answered without a person', 'js-support-ticket')); ?></span>
+                        </div>
+                        <div class="jsst-metric">
+                            <span class="jsst-metric-value jsst-num"><?php echo esc_html(number_format_i18n((float) $jsst_results['hours'], 1) . ' h'); ?></span>
+                            <span class="jsst-metric-label"><?php echo esc_html(__('Agent time saved (estimate)', 'js-support-ticket')); ?></span>
+                        </div>
+                        <div class="jsst-metric">
+                            <span class="jsst-metric-value jsst-num"><?php echo ($jsst_results['persolved'] === null)
+                                ? (!empty($jsst_results['plancalls']) ? esc_html__('Paid from plan credits', 'js-support-ticket') : esc_html__('Unknown', 'js-support-ticket'))
+                                : esc_html('$' . number_format_i18n((float) $jsst_results['persolved'], 3)); ?></span>
+                            <span class="jsst-metric-label"><?php echo esc_html(__('AI cost per solved question', 'js-support-ticket')); ?></span>
+                        </div>
+                    </div>
+                    <p class="jsst-hint"><?php echo esc_html(sprintf(
+                        /* translators: %d: minutes counted per question solved */
+                        __('Time saved counts %d minutes for each ticket or chat solved without a person. Cost per question is shown once every AI call this month has a known price.', 'js-support-ticket'),
+                        (int) get_option('jsst_ai_minutes_saved', 6))); ?></p>
+                </div>
+            </div>
+            <?php } ?>
 
             <h2 class="jsst-groupheading"><?php echo esc_html(__('What AI does on this site', 'js-support-ticket')); ?></h2>
             <?php /* Sorted by what somebody can do about each row: use it now, add
                      a key, or add an add-on. One table of eight rows mixing the
                      three read as "most of this is broken". */
+            /* "Add a key" was the wrong advice on a site that has a key but
+               whose engine cannot run (its lane is off, say): when the status
+               line knows the reason, this group says that reason and offers the
+               same fix button. */
+            $jsst_engst  = class_exists('JSSTainav') ? JSSTainav::status() : array('state' => '');
+            $jsst_engfix = ($jsst_engst['state'] === 'noengine' && !empty($jsst_engst['actions'][0])) ? $jsst_engst['actions'][0] : null;
             $jsst_surfacegroups = array(
                 'now'   => array(__('You have now', 'js-support-ticket'), __('Works on this site as it is set up today. A row that is switched off can be switched on.', 'js-support-ticket')),
-                'key'   => array(__('Add an AI key to get', 'js-support-ticket'), __('Installed, but needs an AI engine and key. Add one under Settings.', 'js-support-ticket')),
+                'key'   => $jsst_engfix
+                    ? array(__('Waiting for a working AI engine', 'js-support-ticket'), $jsst_engst['text'])
+                    : array(__('Add an AI key to get', 'js-support-ticket'), __('Installed, but needs an AI engine and key. Add one under Settings.', 'js-support-ticket')),
                 'addon' => array(__('Needs an add-on', 'js-support-ticket'), __('Not installed on this site.', 'js-support-ticket')),
             );
             foreach ($jsst_surfacegroups as $jsst_gkey => $jsst_ghead) {
@@ -152,17 +218,24 @@ JSSTmessage::getMessage();
                     $jsst_sgroup = isset($jsst_surface['group']) ? $jsst_surface['group'] : (!empty($jsst_surface['present']) ? 'now' : 'addon');
                     if ($jsst_sgroup === $jsst_gkey) { $jsst_grows[] = $jsst_surface; }
                 }
-                if (empty($jsst_grows)) { continue; } ?>
-            <div class="jsst-card">
-                <div class="jsst-card-head">
-                    <h2 class="jsst-card-title"><?php echo esc_html($jsst_ghead[0]); ?></h2>
+                if (empty($jsst_grows)) { continue; }
+                /* What works now stays open; what needs a key or an add-on is a
+                   list to look through when wanted, so it starts closed. */
+                $jsst_fold = ($jsst_gkey !== 'now'); ?>
+            <<?php echo $jsst_fold ? 'details' : 'div'; ?> class="jsst-card<?php echo $jsst_fold ? ' jsst-ai-fold' : ''; ?>">
+                <<?php echo $jsst_fold ? 'summary' : 'div'; ?> class="jsst-card-head">
+                    <h2 class="jsst-card-title"><?php echo esc_html($jsst_ghead[0]); ?><?php if ($jsst_fold) { ?> <span class="jsst-count"><?php echo esc_html(number_format_i18n(count($jsst_grows))); ?></span><?php } ?></h2>
                     <p class="jsst-card-sub"><?php echo esc_html($jsst_ghead[1]); ?></p>
                     <?php if ($jsst_gkey === 'key') { ?>
-                        <div class="jsst-card-tools"><a class="jsst-pill jsst-pill-info" href="<?php echo esc_url($jsst_settingsurl . '#AIEngine'); ?>"><?php echo esc_html(__('Add a key', 'js-support-ticket')); ?></a></div>
+                        <?php if ($jsst_engfix) { ?>
+                            <div class="jsst-card-tools"><a class="jsst-pill jsst-pill-info" href="<?php echo esc_url($jsst_engfix[1]); ?>"><?php echo esc_html($jsst_engfix[0]); ?></a></div>
+                        <?php } else { ?>
+                            <div class="jsst-card-tools"><a class="jsst-pill jsst-pill-info" href="<?php echo esc_url($jsst_settingsurl . '#AIEngine'); ?>"><?php echo esc_html(__('Add a key', 'js-support-ticket')); ?></a></div>
+                        <?php } ?>
                     <?php } elseif ($jsst_gkey === 'addon') { ?>
                         <div class="jsst-card-tools"><a class="jsst-pill jsst-pill-info" href="<?php echo esc_url(admin_url('admin.php?page=jssupportticket&jstlay=license')); ?>"><?php echo esc_html(__('License & Add-ons', 'js-support-ticket')); ?></a></div>
                     <?php } ?>
-                </div>
+                </<?php echo $jsst_fold ? 'summary' : 'div'; ?>>
                 <div class="jsst-card-body jsst-card-flush">
                     <div class="jsst-table-wrap">
                         <table class="jsst-table">
@@ -199,7 +272,7 @@ JSSTmessage::getMessage();
                                         <?php } elseif (!empty($jsst_surface['live'])) { ?>
                                             <span class="jsst-pill jsst-pill-ok"><span class="jsst-dot"></span><?php echo esc_html(__('Live', 'js-support-ticket')); ?></span>
                                         <?php } elseif (isset($jsst_surface['haskey']) && empty($jsst_surface['haskey'])) { ?>
-                                            <span class="jsst-pill jsst-pill-off"><span class="jsst-dot"></span><?php echo esc_html(__('Needs a key', 'js-support-ticket')); ?></span>
+                                            <span class="jsst-pill jsst-pill-off"><span class="jsst-dot"></span><?php echo esc_html($jsst_engfix ? __('Engine not working', 'js-support-ticket') : __('Needs a key', 'js-support-ticket')); ?></span>
                                         <?php } elseif (empty($jsst_surface['laneopen'])) { ?>
                                             <span class="jsst-pill jsst-pill-warn"><span class="jsst-dot"></span><?php echo esc_html(__('Lane is off', 'js-support-ticket')); ?></span>
                                             <span class="jsst-table-sub"><?php
@@ -222,7 +295,7 @@ JSSTmessage::getMessage();
                         </table>
                     </div>
                 </div>
-            </div>
+            </<?php echo $jsst_fold ? 'details' : 'div'; ?>>
             <?php } ?>
 
             <h2 class="jsst-groupheading"><?php echo esc_html(__('The answer engine', 'js-support-ticket')); ?></h2>
@@ -339,10 +412,10 @@ JSSTmessage::getMessage();
                 </div>
                 <div class="jsst-card-body">
                     <?php if ($jsst_ir) { ?>
-                        <p class="jsst-hint"><?php echo esc_html(__('Knowledge Sources decides what the AI may read, down to each article, and shows what a question would find.', 'js-support-ticket')); ?></p><?php JSSTlayout::why(__('An answer is only as good as what it was allowed to read. Knowledge Sources says which of your knowledge base, FAQs, canned responses, posts, past tickets and crawled documentation are eligible — down to the individual article — and its console shows exactly which passages a question finds before any model is asked. Content Sources is the crawler behind the last of those.', 'js-support-ticket')); ?>
+                        <p class="jsst-hint"><?php echo esc_html(__('Knowledge Sources decides what the AI may read, down to each article, and shows what a question would find.', 'js-support-ticket')); ?></p><?php JSSTlayout::why(__('An answer is only as good as what it was allowed to read. Knowledge Sources says which of your knowledge base, FAQs, canned responses, posts, past tickets and crawled documentation are eligible — down to the individual article — and its console shows exactly which passages a question finds before any model is asked. Web pages is the crawler behind the last of those.', 'js-support-ticket')); ?>
                         <div class="jsst-btnrow">
                             <a class="jsst-btn" href="<?php echo esc_url($jsst_sourcesurl); ?>"><?php echo esc_html(__('Knowledge Sources', 'js-support-ticket')); ?></a>
-                            <a class="jsst-btn" href="<?php echo esc_url(admin_url('admin.php?page=aiagent&jstlay=aiagent_feeds')); ?>"><?php echo esc_html(__('Content Sources', 'js-support-ticket')); ?></a>
+                            <a class="jsst-btn" href="<?php echo esc_url(admin_url('admin.php?page=aiagent&jstlay=aiagent_feeds')); ?>"><?php echo esc_html(__('Web pages', 'js-support-ticket')); ?></a>
                             <a class="jsst-btn" href="<?php echo esc_url(admin_url('admin.php?page=aiagent&jstlay=aiagent_approvals')); ?>"><?php echo esc_html(__('Approvals', 'js-support-ticket')); ?></a>
                             <a class="jsst-btn" href="<?php echo esc_url($jsst_auditurl); ?>"><?php echo esc_html(__('Audit', 'js-support-ticket')); ?></a>
                         </div>

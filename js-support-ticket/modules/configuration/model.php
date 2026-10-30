@@ -156,6 +156,18 @@ class JSSTconfigurationModel {
                 }
             }
 
+            // Types that are never accepted come out of the list, with a notice.
+            if ($jsst_key == 'file_extension' && class_exists('JSSTattachmentguard')) {
+                $jsst_clean = JSSTattachmentguard::cleanExtensionList($jsst_value);
+                $jsst_value = $jsst_clean['list'];
+                if (!empty($jsst_clean['removed'])) {
+                    JSSTmessage::setMessage(esc_html(sprintf(
+                        /* translators: %s: file types such as php */
+                        __('Removed from the allowed file types because they are never accepted: %s.', 'js-support-ticket'),
+                        implode(', ', $jsst_clean['removed']))), 'error');
+                }
+            }
+
             if ($jsst_key == 'pagination_default_page_size') {
                 if ($jsst_value < 3) {
                     JSSTmessage::setMessage(esc_html(__('Pagination default page size not saved', 'js-support-ticket')), 'error');

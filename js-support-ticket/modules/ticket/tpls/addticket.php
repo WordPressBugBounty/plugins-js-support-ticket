@@ -37,7 +37,12 @@ $jsst_ir_track = in_array('aiagent', jssupportticket::$_active_addons)
 <div class="jsst-main-up-wrapper">
 <?php
 if (jssupportticket::$_config['offline'] == 2) {
-    if (JSSTincluder::getObjectClass('user')->uid() != 0 || jssupportticket::$_config['visitor_can_create_ticket'] == 1) {
+    if (isset(jssupportticket::$jsst_data['permission_granted']) && !jssupportticket::$jsst_data['permission_granted']) {
+        // The controller refused the edit, so the form data was never loaded.
+        // Stop here: the form below reads fieldordering and would fatal.
+        JSSTmessage::getMessage();
+        JSSTlayout::getPermissionNotGranted();
+    } elseif (JSSTincluder::getObjectClass('user')->uid() != 0 || jssupportticket::$_config['visitor_can_create_ticket'] == 1) {
         JSSTmessage::getMessage();
         wp_enqueue_script('jquery-ui-datepicker');
         wp_enqueue_script('file_validate.js', JSST_PLUGIN_URL . 'includes/js/file_validate.js', array(), jssupportticket::$_config['productversion'], true);
@@ -293,7 +298,7 @@ if (jssupportticket::$_config['offline'] == 2) {
 
                     var timestampHtml = '';
                     if(item.timestamp) {
-                        timestampHtml = '<span class=\"jsst-fix-timestamp\">⏱️ ' + jsstEscInstantResolve(item.timestamp) + '</span>';
+                        timestampHtml = '<span class=\"jsst-fix-timestamp\">' + jsstEscInstantResolve(item.timestamp) + '</span>';
                     }
 
                     /*
@@ -307,11 +312,11 @@ if (jssupportticket::$_config['offline'] == 2) {
                      */
                     var kind = item.display_type || item.type || item.content_type;
 
-                    var typeLabel = '📄 Article';
-                    if(kind === 'video' || kind === 'video_timestamp') typeLabel = '🎥 Video';
-                    else if(kind === 'kb') typeLabel = '📚 Knowledge Base';
-                    else if(kind === 'faq') typeLabel = '❓ FAQ';
-                    else if(kind === 'canned') typeLabel = '💬 Quick answer';
+                    var typeLabel = '". esc_js(__('Article', 'js-support-ticket')) ."';
+                    if(kind === 'video' || kind === 'video_timestamp') typeLabel = '". esc_js(__('Video', 'js-support-ticket')) ."';
+                    else if(kind === 'kb') typeLabel = '". esc_js(__('Knowledge Base', 'js-support-ticket')) ."';
+                    else if(kind === 'faq') typeLabel = '". esc_js(__('FAQ', 'js-support-ticket')) ."';
+                    else if(kind === 'canned') typeLabel = '". esc_js(__('Quick answer', 'js-support-ticket')) ."';
 
                     var source = jsstEscInstantResolve(item.type || item.content_type || '');
                     var id = parseInt(item.id, 10) || 0;
@@ -329,6 +334,15 @@ if (jssupportticket::$_config['offline'] == 2) {
                     html += '<span class=\"jsst-fix-type\">' + typeLabel + ' ' + timestampHtml + '</span>';
                     html += '<h4 class=\"jsst-fix-title\">' + jsstEscInstantResolve(item.title) + '</h4>';
                     html += '<p class=\"jsst-fix-excerpt\">' + jsstEscInstantResolve(item.excerpt) + '</p>';
+                    /* A quick answer has no page to open, so the whole reply
+                       opens in the card. answer_html comes from the server
+                       already reduced to a short allow-list (wp_kses) and is
+                       inserted as it is - never built here from raw text. */
+                    if (!url && typeof item.answer_html === 'string' && item.answer_html !== '') {
+                        var answerId = 'jsst-fix-answer-' + source + '-' + id;
+                        html += '<div class=\"jsst-fix-answer\" id=\"' + answerId + '\" hidden>' + item.answer_html + '</div>';
+                        html += '<button type=\"button\" class=\"jsst-fix-toggle\" aria-expanded=\"false\" aria-controls=\"' + answerId + '\">". esc_js(__('Show answer', 'js-support-ticket')) ."</button>';
+                    }
                     html += '</div>';
                     html += url ? '</a>' : '</div>';
                     // Track View (only once per item per session)
@@ -363,8 +377,9 @@ if (jssupportticket::$_config['offline'] == 2) {
                 });
                 jsstSendInstantResolveEvents();
                 
-                alert('". esc_html(__('Great! You can close this tab or submit a new ticket if you need more help.', 'js-support-ticket')) ."');
-                jQuery('#jsst-instant-fix-wrapper').hide();
+                // A note in the page, not a browser pop-up that blocks it.
+                jQuery('#jsst-instant-fix-container').html('<div class=\"jsst-fix-solved\" role=\"status\" style=\"padding:10px 12px;border-radius:6px;background:#e6f4ea;color:#0f5132;\">". esc_js(__('Great! You can close this tab or submit a new ticket if you need more help.', 'js-support-ticket')) ."</div>');
+                jQuery('#jsst-instant-fix-wrapper').show();
             }
 
             // Bind to inputs
@@ -418,6 +433,23 @@ if (jssupportticket::$_config['offline'] == 2) {
                 var jsst_fields = '#subject, #jsticket_message';
 
                 jQuery(document).on('input', jsst_fields, jsstTriggerInstantResolve);
+
+                // Show / hide a quick answer in its card; opening it counts as a click.
+                jQuery(document).on('click', '#jsst-instant-fix-container .jsst-fix-toggle', function(e) {
+                    e.preventDefault();
+                    var btn = jQuery(this);
+                    var card = btn.closest('.jsst-fix-card');
+                    var open = btn.attr('aria-expanded') !== 'true';
+                    btn.attr('aria-expanded', open ? 'true' : 'false');
+                    btn.text(open ? '". esc_js(__('Hide', 'js-support-ticket')) ."' : '". esc_js(__('Show answer', 'js-support-ticket')) ."');
+                    card.toggleClass('is-open', open);
+                    card.find('.jsst-fix-answer').prop('hidden', !open);
+                    if (open && !card.data('jsstOpened')) {
+                        card.data('jsstOpened', 1);
+                        jsstTrackInstantResolveEvent(card.data('type'), card.data('id'), 'click');
+                        jsstSendInstantResolveEvents();
+                    }
+                });
 
                 jQuery(document).on('click', '#jsst-instant-fix-container a.jsst-fix-card', function() {
                     jsstTrackInstantResolveEvent(jQuery(this).data('type'), jQuery(this).data('id'), 'click');
@@ -507,7 +539,29 @@ if (jssupportticket::$_config['offline'] == 2) {
                         jQuery('#tk_attachment_add').show();
                     }
                 });
-                $.validate();
+                /* \"You have not answered all required fields\" alone did not
+                   say which one - a terms box below the fold was easy to miss.
+                   The fields still needing an answer are named above the form. */
+                $.validate({
+                    onError: function (\$form) {
+                        var names = [];
+                        \$form.find('.error, .has-error input, .has-error select, .has-error textarea').each(function () {
+                            var \$f = jQuery(this);
+                            var \$wrap = \$f.closest('.js-ticket-from-field-wrp');
+                            var label = \$wrap.find('.js-ticket-from-field-title').first().text();
+                            if (!jQuery.trim(label)) { label = \$f.closest('label').text() || \$wrap.text(); }
+                            label = jQuery.trim(label.replace(/\\*/g, '')).split('\\n')[0];
+                            if (label && names.indexOf(label) === -1) { names.push(label); }
+                        });
+                        \$form.find('.jsst-missing-fields').remove();
+                        if (names.length) {
+                            jQuery('<div class=\"jsst-missing-fields\" role=\"alert\" style=\"margin:0 0 14px;padding:10px 12px;border-radius:6px;background:#fcf0f1;color:#8a2424;\"></div>')
+                                .text('". esc_js(__('Please complete:', 'js-support-ticket')) ." ' + names.join(', '))
+                                .prependTo(\$form);
+                        }
+                    },
+                    onSuccess: function (\$form) { \$form.find('.jsst-missing-fields').remove(); return true; }
+                });
             });
             // to get premade and append to isssue summery
             function getHelpTopicByDepartment(val) {
@@ -515,9 +569,14 @@ if (jssupportticket::$_config['offline'] == 2) {
                 // select it returns carries this form's classes and placeholder.
                 // The empty state comes back from the server too, so both forms
                 // show the same thing for a department with no topics.
-                jQuery.post(ajaxurl, {action: 'jsticket_ajax', val: val, jstmod: 'department', task: 'getHelpTopicByDepartment', context: 'front', '_wpnonce':'".esc_attr(wp_create_nonce('get-help-topic-by-department')) ."'}, function (data) {
+                jQuery.post(ajaxurl, {action: 'jsticket_ajax', val: val, jstmod: 'department', task: 'getHelpTopicByDepartment', context: 'front', multiformid: jQuery('input[name=multiformid]').val() || '', '_wpnonce':'".esc_attr(wp_create_nonce('get-help-topic-by-department')) ."'}, function (data) {
                     if (data) {
                         jQuery('div#helptopic').html(data);
+                        /* A department with no topics: nothing for the customer
+                           to choose, so the field is hidden rather than showing
+                           \"No help topic found\". */
+                        var none = (String(data).indexOf('helptopic-no-rec') !== -1);
+                        jQuery('div#helptopic').closest('.js-ticket-from-field-wrp').toggle(!none);
                     }
                 });//jquery closed
             }
@@ -640,7 +699,7 @@ if (jssupportticket::$_config['offline'] == 2) {
                 $jsst_fieldcounter = 0;
                 $jsst_eddorderid = '';
                 apply_filters('js_support_ticket_frontend_ticket_form_start',1);
-                $jsst_suggestion_target = in_array('issuesummary', array_column(jssupportticket::$jsst_data['fieldordering'], 'field')) ? 'issuesummary' : 'subject';
+                $jsst_suggestion_target = in_array('issuesummary', array_column((array) jssupportticket::$jsst_data['fieldordering'], 'field')) ? 'issuesummary' : 'subject';
                 // The topic this form opens on, and the department and priority it
                 // routes to. Resolved before the field loop because the fields
                 // can be ordered either way round, and because a topic the

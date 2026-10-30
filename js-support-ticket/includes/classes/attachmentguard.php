@@ -63,6 +63,47 @@ class JSSTattachmentguard {
     }
 
     /**
+     * The "allowed file types" setting without the types that are never accepted.
+     *
+     * An administrator could save `php` there and believe it allowed; the
+     * upload then failed with "type not allowed" and nothing said why. The
+     * setting is cleaned when it is saved so the list shows what really works.
+     * Other entries are kept exactly as typed.
+     *
+     * @return array 'list' => the cleaned comma list, 'removed' => the blocked types taken out.
+     */
+    public static function cleanExtensionList($jsst_list) {
+        $jsst_forbidden = array_map('strtolower', self::forbiddenExtensions());
+        $jsst_keep = array();
+        $jsst_removed = array();
+        foreach (explode(',', (string) $jsst_list) as $jsst_item) {
+            $jsst_item = trim($jsst_item);
+            if ($jsst_item === '') {
+                continue;
+            }
+            if (in_array(strtolower(ltrim($jsst_item, '.')), $jsst_forbidden, true)) {
+                $jsst_removed[] = strtolower(ltrim($jsst_item, '.'));
+                continue;
+            }
+            $jsst_keep[] = $jsst_item;
+        }
+        return array('list' => implode(',', $jsst_keep), 'removed' => array_values(array_unique($jsst_removed)));
+    }
+
+    /** The note shown under the setting: what is never allowed, and what is listed anyway. */
+    public static function extensionNote($jsst_current = '') {
+        $jsst_note = esc_html(__('For safety, program and server files (such as php, exe, sh and htaccess) are never accepted, even if they are listed here.', 'js-support-ticket'));
+        $jsst_clean = self::cleanExtensionList($jsst_current);
+        if (!empty($jsst_clean['removed'])) {
+            $jsst_note .= ' <strong>' . esc_html(sprintf(
+                /* translators: %s: file types such as php */
+                __('Listed now but never accepted: %s. They will be removed when you save.', 'js-support-ticket'),
+                implode(', ', $jsst_clean['removed']))) . '</strong>';
+        }
+        return $jsst_note;
+    }
+
+    /**
      * Byte signatures that mean the file can be executed by something, whatever
      * its extension says.
      */
@@ -256,25 +297,22 @@ class JSSTattachmentguard {
      *
      * Existing files are left alone: a site may have its own rules there, and
      * overwriting them would be a surprise with security consequences either
-     * way. Uses WP_Filesystem when it is available and plain writes when it is
-     * not, because this also runs on activation, where the filesystem API may
-     * not be initialised.
+     * way. Plain PHP writes: the folder is in uploads and PHP made it. The
+     * global $wp_filesystem was used when set, but on a host without direct
+     * file access it is an FTP object that never connected, and calling it
+     * ended the request with a fatal error - after the ticket was saved, so the
+     * customer saw an error page and the folder was left unprotected.
      */
     public static function protectDirectory($jsst_dir) {
         if (empty($jsst_dir) || !is_dir($jsst_dir)) {
             return false;
         }
-        global $wp_filesystem;
         foreach (self::guardFiles() as $jsst_file => $jsst_contents) {
             $jsst_target = rtrim($jsst_dir, '/\\') . '/' . $jsst_file;
             if (file_exists($jsst_target)) {
                 continue;
             }
-            if (is_object($wp_filesystem) && method_exists($wp_filesystem, 'put_contents')) {
-                $wp_filesystem->put_contents($jsst_target, $jsst_contents, defined('FS_CHMOD_FILE') ? FS_CHMOD_FILE : 0644);
-            } else {
-                @file_put_contents($jsst_target, $jsst_contents);
-            }
+            @file_put_contents($jsst_target, $jsst_contents); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_file_put_contents
         }
         return true;
     }
@@ -323,6 +361,78 @@ class JSSTattachmentguard {
             self::protectDirectory($jsst_root);
         }
         update_option('jsst_attachment_guard', self::GUARD_VERSION, false);
+    }
+
+    /**
+     * Do the protection files actually work on this server?
+     *
+     * Apache with "AllowOverride None" ignores .htaccess, and Nginx never reads
+     * it, so on many hosts the files above do nothing and an attachment opens
+     * for anybody holding its address. Nothing used to say so. This drops a
+     * small file in the ticket folder, asks the site for it over HTTP, and
+     * removes it again.
+     *
+     * Kept for a day, so the check costs one loopback request per day at most.
+     *
+     * @return int 1 = files can be downloaded directly, 0 = refused, -1 = could not tell
+     */
+    public static function probe($jsst_force = false) {
+        $jsst_cached = get_transient('jsst_attachment_exposed');
+        if (!$jsst_force && $jsst_cached !== false) {
+            return (int) $jsst_cached;
+        }
+        $jsst_result = -1;
+        $jsst_roots = self::protectedRoots();
+        $jsst_uploads = wp_upload_dir();
+        if (!empty($jsst_roots) && !empty($jsst_uploads['basedir']) && !empty($jsst_uploads['baseurl'])) {
+            $jsst_root = $jsst_roots[0];
+            if (!is_dir($jsst_root)) {
+                wp_mkdir_p($jsst_root);
+            }
+            $jsst_token = wp_generate_password(24, false);
+            $jsst_file = rtrim($jsst_root, '/\\') . '/jsst-probe-' . $jsst_token . '.txt';
+            if (@file_put_contents($jsst_file, $jsst_token) !== false) {
+                $jsst_relative = ltrim(str_replace('\\', '/', substr($jsst_file, strlen($jsst_uploads['basedir']))), '/');
+                $jsst_response = wp_remote_get($jsst_uploads['baseurl'] . '/' . $jsst_relative, array(
+                    'timeout' => 5, 'redirection' => 0, 'sslverify' => false,
+                ));
+                @unlink($jsst_file);
+                if (!is_wp_error($jsst_response)) {
+                    $jsst_code = (int) wp_remote_retrieve_response_code($jsst_response);
+                    $jsst_body = (string) wp_remote_retrieve_body($jsst_response);
+                    $jsst_result = ($jsst_code === 200 && strpos($jsst_body, $jsst_token) !== false) ? 1 : 0;
+                }
+            }
+        }
+        set_transient('jsst_attachment_exposed', (string) $jsst_result, DAY_IN_SECONDS);
+        return $jsst_result;
+    }
+
+    /** What to tell the administrator when probe() finds the folder open. */
+    public static function exposedMessage() {
+        return __('Ticket attachments can be downloaded by anyone who has the file address. Your web server ignores the protection file (.htaccess) in the attachment folder. Ask your host to allow .htaccess (AllowOverride All) for the uploads folder, or on Nginx to deny direct access to the help desk attachment folder.', 'js-support-ticket');
+    }
+
+    /**
+     * A red notice on the help desk's own admin screens while the folder is
+     * open. Only administrators see it, and only on help desk pages, so it
+     * does not follow anyone around the rest of wp-admin.
+     */
+    public static function exposedNotice() {
+        if (!current_user_can('manage_options')) {
+            return;
+        }
+        $jsst_screen = function_exists('get_current_screen') ? get_current_screen() : null;
+        $jsst_page = isset($_GET['page']) ? sanitize_key(wp_unslash($_GET['page'])) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- which screen, nothing is changed
+        $jsst_ours = ($jsst_page === 'jssupportticket' || $jsst_page === 'ticket' || $jsst_page === 'configuration');
+        if (!$jsst_ours && !($jsst_screen && $jsst_screen->id === 'dashboard')) {
+            return;
+        }
+        if (self::probe() !== 1) {
+            return;
+        }
+        echo '<div class="notice notice-error"><p><strong>' . esc_html(__('JS Help Desk:', 'js-support-ticket')) . '</strong> '
+            . esc_html(self::exposedMessage()) . '</p></div>';
     }
 
 }

@@ -14,17 +14,37 @@ if (jssupportticket::$_config['offline'] == 2) {
                 <?php echo wp_kses(jssupportticket::$_config['visitor_message'], JSST_ALLOWED_TAGS)?>
             </span>
         </div>
+        <?php
+        $jsst_token = JSSTRequest::getVar('jssupportticketid');
+        /* The short tracking ID is what a customer can keep: with their email
+           it opens the ticket on Check Ticket Status, and it is in the email
+           they get. The 64-character token is still here, folded away, for
+           anyone who wants it. */
+        $jsst_tracking = '';
+        if (is_string($jsst_token) && $jsst_token !== '') {
+            $jsst_tracking = (string) jssupportticket::$_db->get_var(jssupportticket::$_db->prepare(
+                "SELECT ticketid FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE token = %s", $jsst_token));
+        }
+        ?>
         <div class="jsst-visitor-token-message">
-            <p class="jsst-visitor-token-message-heading"><?php echo esc_html(__('Remember Your Ticket Token for Tracking (Save It!)', 'js-support-ticket')); ?></p>
-            <p class="jsst-visitor-token-message-discription"><?php echo esc_html(__("You've received a token number to track your support ticket status. This is one-time code, so please save it carefully. ", "js-support-ticket")); ?></p>
-            <p class="jsst-visitor-token-message-token-number">
-                <?php $jsst_token = JSSTRequest::getVar('jssupportticketid');?>
+            <?php if ($jsst_tracking !== '') { ?>
+                <p class="jsst-visitor-token-message-heading"><?php echo esc_html(__('Your tracking ID', 'js-support-ticket')); ?></p>
+                <p class="jsst-visitor-token-message-token-number"><?php echo esc_html($jsst_tracking); ?></p>
+                <p class="jsst-visitor-token-message-discription"><?php echo esc_html(__('We also sent it to you by email. To see your ticket later, open "Check Ticket Status" and enter your email address and this tracking ID.', 'js-support-ticket')); ?></p>
+                <details class="jsst-visitor-token-more">
+                    <summary><?php echo esc_html(__('Or use your private ticket link code', 'js-support-ticket')); ?></summary>
+            <?php } else { ?>
+                <p class="jsst-visitor-token-message-heading"><?php echo esc_html(__('Remember Your Ticket Token for Tracking (Save It!)', 'js-support-ticket')); ?></p>
+            <?php } ?>
+            <p class="jsst-visitor-token-message-token-number" style="word-break:break-all">
                 <?php echo esc_html($jsst_token);?>
                 <a title="<?php echo esc_attr(__('Copy Token','js-support-ticket')); ?>" class="mjtc-sprt-det-copy-id" id="ticketidcopybtn" success="<?php echo esc_attr(__('Copied','js-support-ticket')); ?>">
                     <?php echo esc_html(__('Copy Token','js-support-ticket')); ?>
                 </a>
             </p>
-
+            <?php if ($jsst_tracking !== '') { ?>
+                </details>
+            <?php } ?>
         </div>
 <?php
 echo wp_kses(JSSTformfield::hidden('ticketrandomid', $jsst_token), JSST_ALLOWED_TAGS);

@@ -1236,10 +1236,20 @@ class JSSTforms {
                in wp-admin: no wrapper found, the question skipped, and an
                administrator looking at the same form the customer sees
                conditioned saw all of it. (Roadmap 5.0-FORM-01) */
+            /* The redesigned wp-admin form wraps each question in `jsst-frow`
+               instead, so it was back to finding no wrapper there. That class
+               is the row of every redesigned admin screen - the email
+               templates screen carries a `multiformid` too - so it counts only
+               inside the ticket form itself, which is `adminTicketform` on the
+               admin, customer and agent screens alike. Read as an attribute:
+               the form has a hidden input called `id`, so `form.id` is that
+               input, not the form's id. */
+            var jsst_ticketform = !!(jsst_scope.getAttribute && jsst_scope.getAttribute('id') === 'adminTicketform');
             function jsst_wrapper(jsst_el) {
                 while (jsst_el && jsst_el !== document.body) {
                     if (jsst_el.classList && (jsst_el.classList.contains('js-ticket-from-field-wrp')
-                            || jsst_el.classList.contains('js-form-wrapper'))) { return jsst_el; }
+                            || jsst_el.classList.contains('js-form-wrapper')
+                            || (jsst_ticketform && jsst_el.classList.contains('jsst-frow')))) { return jsst_el; }
                     jsst_el = jsst_el.parentNode;
                 }
                 return null;
@@ -1294,6 +1304,46 @@ class JSSTforms {
                 }
                 return jsst_holds(jsst_rule);
             }
+            /* Hiding a question did not stop the browser checking it: the form
+               validator reads `data-validation` off every control, shown or
+               not, so a required question the conditions had hidden refused the
+               form with nothing on screen to fill in. While hidden its rules
+               are parked in `data-jsst-held-validation` and put back when it
+               shows. Parked, not disabled: a disabled control is not posted,
+               and the ticket save drops a custom field that is not posted, so
+               editing a ticket would have erased the stored answer.
+               printRules() runs after this and may add `length` (and
+               `data-validation-optional`) to a parked control; both are folded
+               back in, and an `optional` it added only because `required` was
+               parked is taken off again. */
+            function jsst_hold(jsst_box, jsst_hide) {
+                var jsst_els = jsst_box.querySelectorAll('[data-validation], [data-jsst-held-validation]');
+                for (var jsst_e = 0; jsst_e < jsst_els.length; jsst_e++) {
+                    var jsst_el = jsst_els[jsst_e];
+                    var jsst_now = jsst_el.getAttribute('data-validation') || '';
+                    var jsst_held = jsst_el.getAttribute('data-jsst-held-validation');
+                    var jsst_all = ((jsst_held || '') + ' ' + jsst_now).split(/\s+/);
+                    var jsst_rules_on = [];
+                    for (var jsst_r = 0; jsst_r < jsst_all.length; jsst_r++) {
+                        if (jsst_all[jsst_r] && jsst_rules_on.indexOf(jsst_all[jsst_r]) === -1) { jsst_rules_on.push(jsst_all[jsst_r]); }
+                    }
+                    if (jsst_hide) {
+                        if (jsst_held === null) {
+                            if (jsst_now === '') { continue; }
+                            jsst_el.setAttribute('data-jsst-held-optional', jsst_el.hasAttribute('data-validation-optional') ? '1' : '0');
+                        }
+                        jsst_el.setAttribute('data-jsst-held-validation', jsst_rules_on.join(' '));
+                        jsst_el.removeAttribute('data-validation');
+                    } else if (jsst_held !== null) {
+                        jsst_el.setAttribute('data-validation', jsst_rules_on.join(' '));
+                        if (jsst_rules_on.indexOf('required') !== -1 && jsst_el.getAttribute('data-jsst-held-optional') === '0') {
+                            jsst_el.removeAttribute('data-validation-optional');
+                        }
+                        jsst_el.removeAttribute('data-jsst-held-validation');
+                        jsst_el.removeAttribute('data-jsst-held-optional');
+                    }
+                }
+            }
             function jsst_paint() {
                 for (var jsst_name in jsst_rules) {
                     if (!Object.prototype.hasOwnProperty.call(jsst_rules, jsst_name)) { continue; }
@@ -1314,14 +1364,21 @@ class JSSTforms {
                            that question is shown, so the older marker is taken
                            off rather than fought with. (Roadmap 6.5-FORM-04) */
                         if (jsst_target.classList) { jsst_target.classList.remove('visible'); }
+                        jsst_hold(jsst_target, false);
                     } else {
                         jsst_target.style.display = 'none';
+                        jsst_hold(jsst_target, true);
                     }
                 }
             }
             document.addEventListener('change', jsst_paint);
             document.addEventListener('keyup', jsst_paint);
             jsst_paint();
+            /* Once more after printRules() has run, so anything it added to a
+               hidden question is parked before the form can be sent. */
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', jsst_paint);
+            }
         })();
         </script>
         <?php

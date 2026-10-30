@@ -58,9 +58,10 @@ class JSSTuploads {
         if (!function_exists('wp_handle_upload')) {
             do_action('jssupportticket_load_wp_file');
         }
-        if ( ! WP_Filesystem() ) {
-            return false;
-        }
+        /* No WP_Filesystem() check here. wp_handle_upload() moves the file with
+           plain PHP, and so does everything after it; on a host without direct
+           file access that check returned false and every attachment was
+           dropped in silence while the ticket itself was saved. */
         $this->jsst_ticketid = $jsst_ticketid;
         $this->jsst_uploadfor = 'ticket';
         // Register our path override.
@@ -162,7 +163,12 @@ class JSSTuploads {
                      * @see _wp_handle_upload() in wp-admin/includes/file.php
                      */
                     JSSTmessage::setMessage(
-                        isset($jsst_result['error']) ? $jsst_result['error'] : esc_html(__('The attachment could not be uploaded.', 'js-support-ticket')),
+                        sprintf(
+                            /* translators: 1: the attachment file name, 2: why it was not saved */
+                            esc_html(__('"%1$s" was not attached. %2$s', 'js-support-ticket')),
+                            esc_html($jsst_displayname),
+                            isset($jsst_result['error']) ? esc_html($jsst_result['error']) : esc_html(__('The file could not be saved on the server.', 'js-support-ticket'))
+                        ),
                         'error'
                     );
                 }
@@ -194,10 +200,65 @@ class JSSTuploads {
         JSSTattachmentguard::protectDirectory(dirname($jsst_file_directory));
     }
 
+    /** Why the last e-mail attachment was refused, for the caller's log. */
+    public $jsst_email_refusal = '';
+
+    /**
+     * Check a file that arrived by e-mail the way an upload is checked.
+     *
+     * The web form puts every file through the size limit, WordPress's file
+     * types, the site's allowed types and JSSTattachmentguard::validate(). Mail
+     * went straight to disk: a shell.php sent to the support address was saved
+     * under its own name. A mailbox is the least authenticated door into the
+     * help desk, so it gets the same checks.
+     *
+     * @return true|string true, or why it was refused.
+     */
+    private function checkEmailAttachment($jsst_name, $jsst_bytes) {
+        if ($jsst_name === '' || JSSTattachmentguard::isDangerousName($jsst_name)) {
+            return 'that file type is not allowed';
+        }
+        $jsst_maxkb = (int) jssupportticket::$_config['file_maximum_size'];
+        if ($jsst_maxkb > 0 && strlen($jsst_bytes) / 1024 > $jsst_maxkb) {
+            return 'it is larger than the maximum allowed file size';
+        }
+        $jsst_type = wp_check_filetype($jsst_name);
+        if (empty($jsst_type['ext']) || empty($jsst_type['type'])) {
+            return 'that file type is not allowed';
+        }
+        $jsst_allowed = array_map('trim', explode(',', strtolower((string) jssupportticket::$_config['file_extension'])));
+        if (!in_array(strtolower($jsst_type['ext']), $jsst_allowed, true)) {
+            return 'that file type is not allowed';
+        }
+        if (!function_exists('wp_tempnam')) {
+            require_once ABSPATH . 'wp-admin/includes/file.php';
+        }
+        $jsst_tmp = wp_tempnam($jsst_name);
+        if (!$jsst_tmp || file_put_contents($jsst_tmp, $jsst_bytes) === false) {
+            return 'it could not be checked';
+        }
+        $jsst_guard = JSSTattachmentguard::validate($jsst_tmp, $jsst_name);
+        @unlink($jsst_tmp);
+        return ($jsst_guard === true) ? true : wp_strip_all_tags((string) $jsst_guard);
+    }
+
+    /**
+     * Save one e-mail attachment into the ticket's folder.
+     *
+     * @return string|false The name it was saved under (record that one), or
+     *                      false when it was refused - see $jsst_email_refusal.
+     */
     function storeTicketViaEmailAttachment($jsst_idsarray,$jsst_key,$jsst_value){
+        $this->jsst_email_refusal = '';
         $jsst_ticketid = $jsst_idsarray[0];
         if(!is_numeric($jsst_ticketid))
-            return;
+            return false;
+        $jsst_name = sanitize_file_name((string) $jsst_key);
+        $jsst_check = $this->checkEmailAttachment($jsst_name, (string) $jsst_value);
+        if ($jsst_check !== true) {
+            $this->jsst_email_refusal = $jsst_check;
+            return false;
+        }
         $jsst_datadirectory = jssupportticket::$_config['data_directory'];
         $jsst_maindir = wp_upload_dir();
         $jsst_path = $jsst_maindir['basedir'];
@@ -222,8 +283,13 @@ class JSSTuploads {
         }
         $this->protectTicketAttachmentDirectoryPlain(dirname($jsst_path));
 
-        file_put_contents($jsst_path . '/' . sanitize_file_name($jsst_key), $jsst_value); // save the file
-        return true;
+        // A unique name, so a second file called the same never replaces the first.
+        $jsst_name = wp_unique_filename($jsst_path, $jsst_name);
+        if (file_put_contents($jsst_path . '/' . $jsst_name, $jsst_value) === false) { // save the file
+            $this->jsst_email_refusal = 'it could not be saved';
+            return false;
+        }
+        return $jsst_name;
     }
 
     // Same protection as protectTicketAttachmentDirectory() but for call sites that
@@ -545,7 +611,7 @@ class JSSTuploads {
     }
 
 	function uploadInternalNoteAttachment($jsst_id,$jsst_field){
-        if(!isset($_FILES[$jsst_field])){
+        if(!isset($_FILES[$jsst_field]) || empty($_FILES[$jsst_field]['name'])){
             return;
         }
         $jsst_filename = '';
@@ -553,9 +619,7 @@ class JSSTuploads {
         if (!function_exists('wp_handle_upload')) {
             do_action('jssupportticket_load_wp_file');
         }
-        if ( ! WP_Filesystem() ) {
-            return false;
-        }
+        // No WP_Filesystem() check: see storeTicketAttachment().
         $jsst_filesize = jssupportticket::$_config['file_maximum_size'];
         $this->jsst_ticketid = $jsst_id;
         $this->jsst_uploadfor = 'ticket';
@@ -571,22 +635,55 @@ class JSSTuploads {
             'size'     => jssupportticket::JSST_sanitizeData($_FILES[$jsst_field]['size'])
         ); // JSST_sanitizeData() function uses wordpress santize functions
         $jsst_uploadfilesize = jssupportticket::JSST_sanitizeData($_FILES[$jsst_field]['size']) / 1024; //kb // JSST_sanitizeData() function uses wordpress santize functions
+        $jsst_displayname = $jsst_file['name'];
         if($jsst_uploadfilesize > $jsst_filesize){
-            JSSTmessage::setMessage(esc_html(__('Error file size too large', 'js-support-ticket')), 'error');
-            return;
+            JSSTmessage::setMessage(
+                sprintf(
+                    /* translators: %s: the attachment file name */
+                    esc_html(__('"%s" was not attached because it is larger than the maximum allowed file size.', 'js-support-ticket')),
+                    esc_html($jsst_displayname)
+                ),
+                'error'
+            );
+            remove_filter( 'upload_dir', array($this,'jssupportticket_upload_dir'));
+            return false;
         }
         $jsst_filetyperesult = wp_check_filetype(sanitize_file_name($_FILES[$jsst_field]['name']));
-        if(!empty($jsst_filetyperesult['ext']) && !empty($jsst_filetyperesult['type'])){
-            $jsst_image_file_types = JSSTincluder::getJSModel('configuration')->getConfigValue('file_extension');
-            if(strstr($jsst_image_file_types, $jsst_filetyperesult['ext'])){
-
+        $jsst_image_file_types = JSSTincluder::getJSModel('configuration')->getConfigValue('file_extension');
+        // The same checks as a ticket attachment, and said out loud when refused.
+        $jsst_guard = true;
+        if (empty($jsst_filetyperesult['ext']) || empty($jsst_filetyperesult['type']) || !strstr($jsst_image_file_types, $jsst_filetyperesult['ext'])) {
+            $jsst_guard = esc_html(__('That file type is not allowed.', 'js-support-ticket'));
+        } else {
+            $jsst_guard = JSSTattachmentguard::validate($jsst_file['tmp_name'], $jsst_displayname);
+        }
+        if ($jsst_guard !== true) {
+            JSSTmessage::setMessage(
+                sprintf(
+                    /* translators: 1: the attachment file name, 2: why it was refused */
+                    esc_html(__('"%1$s" was not attached. %2$s', 'js-support-ticket')),
+                    esc_html($jsst_displayname),
+                    $jsst_guard
+                ),
+                'error'
+            );
+        }
+        if ($jsst_guard === true) {
                 $jsst_result = wp_handle_upload($jsst_file, array('test_form' => false));
                 if (isset( $jsst_result['error'] ) ) {
                     /**
                      * Error generated by _wp_handle_upload()
                      * @see _wp_handle_upload() in wp-admin/includes/file.php
                      */
-                    JSSTmessage::setMessage($jsst_result['error'], 'error');
+                    JSSTmessage::setMessage(
+                        sprintf(
+                            /* translators: 1: the attachment file name, 2: why it was not saved */
+                            esc_html(__('"%1$s" was not attached. %2$s', 'js-support-ticket')),
+                            esc_html($jsst_displayname),
+                            esc_html($jsst_result['error'])
+                        ),
+                        'error'
+                    );
                 }else{
 					$jsst_filename = jssupportticketphplib::JSST_basename( $jsst_result['file'] );
 					$jsst_filesize = $jsst_file['size'];
@@ -596,7 +693,6 @@ class JSSTuploads {
                     JSSTincluder::getJSModel('jssupportticket')->generateIndexFile($jsst_file_directory);
                     $this->protectTicketAttachmentDirectory($jsst_file_directory);
 				}
-            }
         }
         // Set everything back to normal.
         remove_filter( 'upload_dir', array($this,'jssupportticket_upload_dir'));

@@ -16,19 +16,21 @@ if (in_array('agent', jssupportticket::$_active_addons)){
 	$jsst_searchTask = 'getusersearchuserreportajax';
 	$jsst_nonce = wp_create_nonce("get-usersearch-userreport-ajax");
 	$jsst_searchNonce = wp_create_nonce("get-usersearch-userreport-ajax");
+	$jsst_picksearch = array('jstmod' => 'agent', 'task' => 'getusersearchuserreportajax', 'nonce' => 'get-usersearch-userreport-ajax');
 } else {
 	$jsst_jstmod = 'jssupportticket';
 	$jsst_task = 'getuserlistajax';
 	$jsst_searchTask = 'getusersearchajax';
 	$jsst_nonce = wp_create_nonce("get-user-list-ajax");
 	$jsst_searchNonce = wp_create_nonce("get-usersearch-ajax");
+	$jsst_picksearch = array();
 }
 $jsst_jssupportticket_js ='
     function updateuserlist(pagenum){
-        jQuery.post(ajaxurl, {action: "jsticket_ajax", jstmod: "'.$jsst_jstmod.'", task: "'.$jsst_task.'",userlimit:pagenum, "_wpnonce":"'. esc_attr($jsst_nonce).'"}, function (data) {
+        jQuery.post(ajaxurl, {action: "jsticket_ajax", jstmod: "'.$jsst_jstmod.'", task: "'.$jsst_task.'",userlimit:pagenum, q: (jQuery("#userpick-q").val() || ""), "_wpnonce":"'. esc_attr($jsst_nonce).'"}, function (data) {
             if(data){
                 jQuery("div#userpopup-records").html("");
-                jQuery("div#userpopup-records").html(jsstDecodeHTML(data));
+                jQuery("div#userpopup-records").html(data);
                 setUserLink();
             }
         });
@@ -62,7 +64,7 @@ $jsst_jssupportticket_js ='
             jQuery.post(ajaxurl, {action: "jsticket_ajax", jstmod: "'.$jsst_jstmod.'", task: "'.$jsst_task.'", "_wpnonce":"'. esc_attr($jsst_nonce).'"}, function (data) {
                 if(data){
                     jQuery("div#userpopup-records").html("");
-                    jQuery("div#userpopup-records").html(jsstDecodeHTML(data));
+                    jQuery("div#userpopup-records").html(data);
                     setUserLink();
                 }
             });
@@ -75,7 +77,7 @@ $jsst_jssupportticket_js ='
             var emailaddress = jQuery("input#emailaddress").val();
             jQuery.post(ajaxurl, {action: "jsticket_ajax", name: name, username: username, emailaddress: emailaddress, jstmod: "'.$jsst_jstmod.'", task: "'.$jsst_searchTask.'", "_wpnonce":"'. esc_attr($jsst_searchNonce) .'"}, function (data) {
                 if (data) {
-                    jQuery("div#userpopup-records").html(jsstDecodeHTML(data));
+                    jQuery("div#userpopup-records").html(data);
                     setUserLink();
                 }
             });//jquery closed
@@ -151,7 +153,7 @@ $jsst_jssupportticket_js ='
 ';
     wp_add_inline_script('ticket-google-charts-handle',$jsst_jssupportticket_js);
 ?>
-<?php JSSTlayout::adminUserPicker(); ?>
+<?php JSSTlayout::adminUserPicker(array('search' => $jsst_picksearch)); ?>
 <?php JSSTmessage::getMessage(); ?>
 
 <?php

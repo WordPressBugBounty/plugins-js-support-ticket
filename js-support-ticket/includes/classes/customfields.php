@@ -147,7 +147,7 @@ class JSSTcustomfields {
             ? JSSTformlogicmigration::stillWatching($jsst_field->visible_field, $jsst_formid)
             : $jsst_field->visible_field;
         if ($jsst_watching !== null && $jsst_watching !== '') {
-            $jsst_visibleparams = JSSTincluder::getJSModel('fieldordering')->getDataForVisibleField($jsst_watching);
+            $jsst_visibleparams = JSSTincluder::getJSModel('fieldordering')->getDataForVisibleField($jsst_watching, $jsst_formid);
             if (!empty($jsst_visibleparams)) {
                 $jsst_wpnonce = wp_create_nonce("is-field-required-".$jsst_watching);
                 $jsst_jsObject = wp_json_encode($jsst_visibleparams);
@@ -299,7 +299,7 @@ class JSSTcustomfields {
                 $jsst_comboOptions = array();
                 if ($jsst_value != null) {
                     if (!empty($jsst_field->userfieldparams)) {
-                        $jsst_obj_option = $this->getDataForDepandantFieldByParentField($jsst_field->field, $jsst_userfielddataarray);
+                        $jsst_obj_option = $this->getDataForDepandantFieldByParentField($jsst_field->field, $jsst_userfielddataarray, isset($jsst_field->multiformid) ? (int) $jsst_field->multiformid : 0);
                         foreach ($jsst_obj_option as $jsst_opt) {
                             $jsst_opt = html_entity_decode($jsst_opt);
                             $jsst_comboOptions[] = (object) array('id' => $jsst_opt, 'text' => $jsst_opt);
@@ -609,7 +609,7 @@ class JSSTcustomfields {
             case 'depandant_field':
                 $jsst_comboOptions = array();
                 if (!empty($jsst_field->userfieldparams)) {
-                    $jsst_obj_option = $this->getDataForDepandantFieldByParentField($jsst_field->field, $jsst_userfielddataarray);
+                    $jsst_obj_option = $this->getDataForDepandantFieldByParentField($jsst_field->field, $jsst_userfielddataarray, isset($jsst_field->multiformid) ? (int) $jsst_field->multiformid : 0);
                     if (!empty($jsst_obj_option)) {
                         foreach ($jsst_obj_option as $jsst_opt) {
                             $jsst_opt = html_entity_decode($jsst_opt);
@@ -754,7 +754,9 @@ class JSSTcustomfields {
         return $jsst_data;
     }
 
-    function getDataForDepandantFieldByParentField($jsst_fieldfor, $jsst_data) {
+    function getDataForDepandantFieldByParentField($jsst_fieldfor, $jsst_data, $jsst_formid = 0) {
+        // Only this form's copies: forms share field names.
+        $jsst_onform = ((int) $jsst_formid > 0) ? jssupportticket::$_db->prepare(' AND multiformid = %d', (int) $jsst_formid) : '';
         if (JSSTincluder::getObjectClass('user')->isguest()) {
             $jsst_published = ' isvisitorpublished = 1 ';
         } else {
@@ -762,7 +764,7 @@ class JSSTcustomfields {
         }
         $jsst_value = '';
         $jsst_returnarray = array();
-        $jsst_query = jssupportticket::$_db->prepare("SELECT field from " . jssupportticket::$_db->prefix . "js_ticket_fieldsordering WHERE isuserfield = 1 AND " . $jsst_published . " AND depandant_field =%s", $jsst_fieldfor);
+        $jsst_query = jssupportticket::$_db->prepare("SELECT field from " . jssupportticket::$_db->prefix . "js_ticket_fieldsordering WHERE isuserfield = 1 AND " . $jsst_published . " AND depandant_field =%s" . $jsst_onform, $jsst_fieldfor);
         $jsst_field = jssupportticket::$_db->get_var($jsst_query);
         if ($jsst_data != null) {
             foreach ($jsst_data as $jsst_key => $jsst_val) {
@@ -772,10 +774,11 @@ class JSSTcustomfields {
                 }
             }
         }
-        $jsst_query = jssupportticket::$_db->prepare("SELECT userfieldparams from " . jssupportticket::$_db->prefix . "js_ticket_fieldsordering WHERE isuserfield = 1 AND " . $jsst_published . " AND field =%s", $jsst_fieldfor);
+        $jsst_query = jssupportticket::$_db->prepare("SELECT userfieldparams from " . jssupportticket::$_db->prefix . "js_ticket_fieldsordering WHERE isuserfield = 1 AND " . $jsst_published . " AND field =%s" . $jsst_onform, $jsst_fieldfor);
         $jsst_field = jssupportticket::$_db->get_var($jsst_query);
-        $jsst_fieldarray = json_decode($jsst_field);
-        foreach ($jsst_fieldarray as $jsst_key => $jsst_val) {
+        $jsst_fieldarray = json_decode((string) $jsst_field);
+        // No copy of the question switched on for this form: nothing to offer.
+        foreach ((array) $jsst_fieldarray as $jsst_key => $jsst_val) {
             $jsst_key = html_entity_decode($jsst_key);
             if ($jsst_value == $jsst_key)
                 $jsst_returnarray = $jsst_val;

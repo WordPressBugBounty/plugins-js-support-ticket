@@ -43,8 +43,7 @@ $jsst_detail_ticketid = (isset(jssupportticket::$jsst_data[0]) && !empty(jssuppo
    coming back with a refusal, because a button that looks live and then does
    nothing is how a working desk gets reported as broken. */
 $zywrap_api_key = get_option('jsst_zywrap_api_key', '');
-$zywrap_is_active = (!empty($zywrap_api_key)
-    && (!class_exists('JSSTaipolicy') || JSSTaipolicy::allows(JSSTaipolicy::LANE_HOSTED)));
+$zywrap_is_active = JSSTincluder::getJSModel('zywrap') && JSSTzywrapModel::usable();
 $zywrap_default_lang = get_option('jsst_zywrap_default_lang', 'English');
 // ---------------------------
 
@@ -1581,7 +1580,7 @@ $jsst_yesno = array(
             </div>
         </div>
     </div>
-    <form id="jsst-reply-form" style="display:none" method="post" action="<?php echo esc_url(wp_nonce_url(admin_url("admin.php?page=reply&task=saveeditedreply&action=jstask"),"save-edited-reply-".jssupportticket::$jsst_data[0]->id)); ?>" >
+    <form id="jsst-reply-form" style="display:none" method="post" action="<?php echo esc_url(wp_nonce_url(admin_url("admin.php?page=reply&task=saveeditedreply&action=jstask"),"save-edited-reply-".$jsst_detail_ticketid)); ?>" >
         <div class="js-form-wrapper-popup">
             <div class="js-form-title-popup"><?php echo esc_html(__('Reply', 'js-support-ticket')); ?></div>
             <div class="js-form-field-popup"><?php wp_editor('', 'jsticket_replytext', array('media_buttons' => false,'editor_height' => 200, 'textarea_rows' => 20,)); ?></div>
@@ -1594,12 +1593,12 @@ $jsst_yesno = array(
 
         <?php
         if(isset(jssupportticket::$jsst_data[0])){
-            echo wp_kses(JSSTformfield::hidden('reply-tikcetid',jssupportticket::$jsst_data[0]->id), JSST_ALLOWED_TAGS);
+            echo wp_kses(JSSTformfield::hidden('reply-tikcetid',$jsst_detail_ticketid), JSST_ALLOWED_TAGS);
         } ?>
     </form>
     <?php
     if(in_array('timetracking', jssupportticket::$_active_addons)){ ?>
-        <form id="jsst-time-edit-form" style="display:none" method="post" action="<?php echo esc_url(wp_nonce_url(admin_url("admin.php?page=reply&task=saveeditedtime&action=jstask"),"save-edited-time-".jssupportticket::$jsst_data[0]->id)); ?>" >
+        <form id="jsst-time-edit-form" style="display:none" method="post" action="<?php echo esc_url(wp_nonce_url(admin_url("admin.php?page=reply&task=saveeditedtime&action=jstask"),"save-edited-time-".$jsst_detail_ticketid)); ?>" >
             <div class="js-form-wrapper-popup">
                 <div class="js-form-title-popup"><?php echo esc_html(__('Time', 'js-support-ticket')); ?></div>
                 <div class="js-form-field-popup"><?php echo wp_kses(JSSTformfield::text('edited_time', '', array('class' => 'inputbox')), JSST_ALLOWED_TAGS) ?></div>
@@ -1621,11 +1620,11 @@ $jsst_yesno = array(
                 <?php echo wp_kses(JSSTformfield::button('cancel', esc_html(__('Cancel', 'js-support-ticket')), array('class' => 'button', 'onclick'=>'closePopup();')), JSST_ALLOWED_TAGS); ?>
             </div>
             <?php echo wp_kses(JSSTformfield::hidden('reply-replyid', ''), JSST_ALLOWED_TAGS); ?>
-            <?php echo wp_kses(JSSTformfield::hidden('reply-tikcetid',jssupportticket::$jsst_data[0]->id), JSST_ALLOWED_TAGS); ?>
+            <?php echo wp_kses(JSSTformfield::hidden('reply-tikcetid',$jsst_detail_ticketid), JSST_ALLOWED_TAGS); ?>
             <?php echo wp_kses(JSSTformfield::hidden('time-confilct',''), JSST_ALLOWED_TAGS); ?>
         </form>
         <?php if(JSSTmergedaddon::featureEnabled('note') && in_array('timetracking', jssupportticket::$_active_addons)){ ?>
-        <form id="jsst-note-edit-form" style="display:none" method="post" action="<?php echo esc_url(wp_nonce_url(admin_url("admin.php?page=note&task=saveeditedtime&action=jstask"),"save-edited-time-".jssupportticket::$jsst_data[0]->id)); ?>" >
+        <form id="jsst-note-edit-form" style="display:none" method="post" action="<?php echo esc_url(wp_nonce_url(admin_url("admin.php?page=note&task=saveeditedtime&action=jstask"),"save-edited-time-".$jsst_detail_ticketid)); ?>" >
             <div class="js-form-wrapper-popup">
                 <div class="js-form-title-popup"><?php echo esc_html(__('Time', 'js-support-ticket')); ?></div>
                 <div class="js-form-field-popup"><?php echo wp_kses(JSSTformfield::text('edited_time', '', array('class' => 'inputbox')), JSST_ALLOWED_TAGS) ?></div>
@@ -1647,7 +1646,7 @@ $jsst_yesno = array(
                 <?php echo wp_kses(JSSTformfield::button('cancel', esc_html(__('Cancel', 'js-support-ticket')), array('class' => 'button', 'onclick'=>'closePopup();')), JSST_ALLOWED_TAGS); ?>
             </div>
             <?php echo wp_kses(JSSTformfield::hidden('note-noteid', ''), JSST_ALLOWED_TAGS); ?>
-            <?php echo wp_kses(JSSTformfield::hidden('note-tikcetid',jssupportticket::$jsst_data[0]->id), JSST_ALLOWED_TAGS); ?>
+            <?php echo wp_kses(JSSTformfield::hidden('note-tikcetid',$jsst_detail_ticketid), JSST_ALLOWED_TAGS); ?>
             <?php echo wp_kses(JSSTformfield::hidden('time-confilct',''), JSST_ALLOWED_TAGS); ?>
         </form>
     <?php } ?>
@@ -1728,7 +1727,10 @@ $jsst_yesno = array(
                             });
                         })
 
-                        jQuery('.venobox').venobox({
+                        /* Only the attachment links this page prints itself. `.venobox`
+                           alone also caught links inside ticket messages, which a
+                           customer writes, and VenoBox acts on their data-* attributes. */
+                        jQuery('.js_ticketattachment > a.venobox[data-vbtype=image]').venobox({
                             infinigall: true,
                             framewidth: 850,
                             titleattr: 'data-title',

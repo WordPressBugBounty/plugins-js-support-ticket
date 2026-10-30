@@ -13,6 +13,19 @@ if (!defined('ABSPATH')) die('Restricted Access');
  */
 class JSSTaiagentModel {
 
+    /**
+     * The ticket form's suggestion events (shown / opened / solved).
+     *
+     * The AI add-on records them before this is reached. This is the answer
+     * when it is not there to do so: nothing to record, and no server error.
+     */
+    function logInstantResolveEvent() {
+        if (class_exists('JSSTaiagentdata') && in_array('aiagent', jssupportticket::$_active_addons)) {
+            JSSTaiagentdata::instance()->logDeflectionEvent();
+        }
+        return '';
+    }
+
     /* ------------------------------------------------------------------ *
      * The picture
      * ------------------------------------------------------------------ */
@@ -26,6 +39,7 @@ class JSSTaiagentModel {
         jssupportticket::$jsst_data['aiengines']  = self::engineState();
         jssupportticket::$jsst_data['aiusage']    = self::usage();
         jssupportticket::$jsst_data['aicorpus']   = self::corpus();
+        jssupportticket::$jsst_data['airesults']  = class_exists('JSSTaireview') ? JSSTaireview::results() : array();
         return;
     }
 
@@ -412,6 +426,7 @@ class JSSTaiagentModel {
             'redaction' => JSSTaipolicy::redactionMode(),
             'modes'     => JSSTaipolicy::redactionModes(),
             'notice'    => JSSTaipolicy::notice(),
+            'status'    => JSSTaipolicy::status(),
         );
     }
 

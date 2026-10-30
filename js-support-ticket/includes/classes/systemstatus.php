@@ -126,6 +126,9 @@ class JSSTsystemstatus {
             'post_max'        => (string) ini_get('post_max_size'),
             'multisite'       => is_multisite() ? 'yes' : 'no',
             'wp_debug'        => (defined('WP_DEBUG') && WP_DEBUG) ? 'on' : 'off',
+            /* Errors printed on the page show visitors the server's folder
+               paths. Only true when WP_DEBUG is on and display is not turned off. */
+            'wp_debug_display' => (defined('WP_DEBUG') && WP_DEBUG && (!defined('WP_DEBUG_DISPLAY') || WP_DEBUG_DISPLAY)) ? 'on' : 'off',
         );
     }
 
@@ -292,6 +295,9 @@ class JSSTsystemstatus {
             'environment' => self::environment(),
             'cron'        => self::cron(),
             'permissions' => self::permissions(),
+            /* Whether an attachment opens straight from its file address. A
+               fresh check every time this screen opens. */
+            'attachments' => class_exists('JSSTattachmentguard') ? JSSTattachmentguard::probe(true) : -1,
             'retention'   => self::retention(),
             'errors'      => self::recentErrors(),
             /* Network-activated add-ons whose tables never got created on this
