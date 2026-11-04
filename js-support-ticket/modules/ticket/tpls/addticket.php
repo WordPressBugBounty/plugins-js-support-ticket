@@ -1171,12 +1171,25 @@ if (jssupportticket::$_config['offline'] == 2) {
 
                                 $jsst_orderlist = array();
 								if(get_current_user_id() > 0){
-									foreach(wc_get_orders(array('customer_id'=>JSSTincluder::getObjectClass('user')->wpuid(),'post_status' => 'wc-completed')) as $jsst_order){ // wp uid because of woocommerce store wp uid
-										$jsst_orderlist[] = (object) array('id' => $jsst_order->get_id(),'text'=>'#'.$jsst_order->get_id().' - '.$jsst_order->get_date_created()->date_i18n(wc_date_format()));
+									/* Orders still being processed or on hold too, not only
+									   completed ones: "where is my order?" is asked before
+									   it is completed. Up to 100, newest first (the default
+									   was the site's posts-per-page, usually 10). The
+									   label is the shop's order number, which an order-
+									   numbering plugin may make different from the ID.
+									   (customer report, 3 November 2026) */
+									foreach(wc_get_orders(array('customer_id'=>JSSTincluder::getObjectClass('user')->wpuid(),'status' => array('wc-processing', 'wc-on-hold', 'wc-completed'),'limit' => 100)) as $jsst_order){ // wp uid because of woocommerce store wp uid
+										$jsst_created = $jsst_order->get_date_created();
+										$jsst_orderlist[] = (object) array('id' => $jsst_order->get_id(),'text'=>'#'.$jsst_order->get_order_number().($jsst_created ? ' - '.$jsst_created->date_i18n(wc_date_format()) : ''));
 									}
 								}
                                 if(isset($jsst_formdata['wcorderid'])) $jsst_wcorderid = $jsst_formdata['wcorderid'];
                                 elseif(isset(jssupportticket::$jsst_data[0]->wcorderid)) $jsst_wcorderid = jssupportticket::$jsst_data[0]->wcorderid;
+                                /* "Get Help" on an order in My Account opens this form
+                                   with ?wcorderid=; it was never read, so the order had
+                                   to be picked again. Only one of the customer's own,
+                                   listed above. */
+                                elseif(isset($_GET['wcorderid']) && in_array(absint($_GET['wcorderid']), array_map(function ($jsst_o) { return (int) $jsst_o->id; }, $jsst_orderlist), true)) $jsst_wcorderid = absint($_GET['wcorderid']);
                                 else $jsst_wcorderid = '';  ?>
                                 <div class="js-ticket-from-field-wrp <?php echo esc_attr($jsst_visibleclass); ?>">
                                     <div class="js-ticket-from-field-title"><?php echo esc_html(jssupportticket::JSST_getVarValue($jsst_field->fieldtitle)); ?>&nbsp;<?php if($jsst_field->required == 1) echo '&nbsp;<span style="color:red">*</span>'; ?></div>

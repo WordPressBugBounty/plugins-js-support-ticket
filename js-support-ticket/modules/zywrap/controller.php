@@ -13,6 +13,13 @@ class JSSTzywrapController {
         jssupportticket::$jsst_data['sanitized_args']['jsst_nonce'] = esc_html(wp_create_nonce('jsst_nonce'));
         
         if (self::canaddfile($jsst_layout)) {
+            /* Logs, errors, settings and the playground show prompts, customer
+               text and the engine's configuration, and the playground spends on
+               the site's account. Administrators only, as on AI Agent, where
+               the dashboard has moved. */
+            if (!current_user_can('manage_options')) {
+                JSSTincluder::refuse(admin_url('admin.php?page=jssupportticket'));
+            }
             switch ($jsst_layout) {
                 case 'admin_zywrap':
                     /* The Zywrap dashboard's parts now live in AI Agent: status on

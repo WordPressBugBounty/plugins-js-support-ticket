@@ -55,6 +55,9 @@ class JSSTupgradeassistant {
     /** Screen the assistant lives on. */
     const SCREEN = 'admin.php?page=jssupportticket&jstlay=license';
 
+    /** Snooze key of the free-upgrade greeting, which is put away for good. */
+    const WELCOME = 'upg-welcome';
+
     public static function registerHooks() {
         add_action('wp_ajax_jsst_upgrade_step', array(__CLASS__, 'ajaxStep'));
         add_action('admin_notices', array(__CLASS__, 'banner'));
@@ -729,7 +732,7 @@ class JSSTupgradeassistant {
             self::printBanner('success', $jsst_greeting,
                 __('Install the add-ons your license now includes from License & Add-ons. Nothing changes on this site until you do.', 'js-support-ticket'),
                 array(array(admin_url(self::SCREEN), __('Install add-ons', 'js-support-ticket'), true)),
-                'upg-welcome'
+                self::WELCOME
             );
         }
     }
@@ -779,7 +782,10 @@ class JSSTupgradeassistant {
             $jsst_links .= sprintf(
                 '<a href="%1$s" style="margin-left:6px">%2$s</a>',
                 esc_url(wp_nonce_url(add_query_arg('jsst_lic_snooze', $jsst_snooze), 'jsst-lic-snooze-' . $jsst_snooze)),
-                esc_html__('Remind me in a week', 'js-support-ticket')
+                /* The greeting is put away for good (JSSTlicense::maybeSnooze()). */
+                self::WELCOME === $jsst_snooze
+                    ? esc_html__('Got it', 'js-support-ticket')
+                    : esc_html__('Remind me in a week', 'js-support-ticket')
             );
         }
         printf(

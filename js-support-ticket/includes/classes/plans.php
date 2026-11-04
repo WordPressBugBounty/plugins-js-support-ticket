@@ -64,11 +64,12 @@ class JSSTplans {
      * sites:   how many WordPress installations the licence covers.
      * support: the support level, as something a buyer can act on rather than a
      *          tier name they have to look up.
-     * ai:      the included monthly vendor-funded AI allowance, in requests, on
-     *          top of the customer's own key. Zero on Free, which is not a
-     *          limitation: the Copilot works fully on Free with the customer's
-     *          own provider key, and always will. The allowance is the thing we
-     *          pay for, so it is the thing that scales with the plan.
+     * ai:      Zywrap credits the licence adds to the connected Zywrap account
+     *          each month (5.0.4; before, a request count nothing delivered).
+     *          jshelpdesk.com decides the real amount and tells Zywrap; this is
+     *          only the figure shown before the server has answered. Zero on
+     *          Free, which is not a limitation: every engine works on Free with
+     *          the customer's own key or Zywrap's sign-up credits.
      * legacy:  retired tier names that map onto this plan.
      */
     private static $jsst_plans = array(
@@ -85,7 +86,7 @@ class JSSTplans {
             'price'   => 99,
             'sites'   => 1,
             'support' => 'Email support',
-            'ai'      => 250,
+            'ai'      => 50000,
             /* Every retired tier lands here rather than being spread across the
                paid plans by what it used to cost. The tiers differed by which
                features they unlocked, and nothing differs by that any more, so
@@ -100,7 +101,7 @@ class JSSTplans {
             'price'   => 199,
             'sites'   => 5,
             'support' => 'Priority email support',
-            'ai'      => 1000,
+            'ai'      => 200000,
             'legacy'  => array(),
         ),
         'agency' => array(
@@ -108,7 +109,7 @@ class JSSTplans {
             'price'   => 349,
             'sites'   => 25,
             'support' => 'Priority support and onboarding',
-            'ai'      => 4000,
+            'ai'      => 500000,
             'legacy'  => array('agency-lifetime', 'lifetime'),
         ),
     );

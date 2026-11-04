@@ -587,6 +587,18 @@ class JSSTaipolicy {
                 return sprintf(esc_html(__('Approvals set to "%s"', 'js-support-ticket')), $jsst_alabel);
             case 'budget':
                 return esc_html(__('Spending limits changed', 'js-support-ticket'));
+            /* A key arriving from an account is a change to where text can go,
+               like choosing the engine, so it is journalled beside it. (5.0.4) */
+            case 'zywrap-connect':
+                return ($jsst_subject !== '')
+                    /* translators: %s: the e-mail address of the Zywrap account */
+                    ? sprintf(esc_html(__('Connected to Zywrap as %s', 'js-support-ticket')), esc_html($jsst_subject))
+                    : esc_html(__('Connected to Zywrap', 'js-support-ticket'));
+            case 'zywrap-disconnect':
+                return ($jsst_subject !== '')
+                    /* translators: %s: the e-mail address of the Zywrap account */
+                    ? sprintf(esc_html(__('Disconnected from Zywrap (%s)', 'js-support-ticket')), esc_html($jsst_subject))
+                    : esc_html(__('Disconnected from Zywrap', 'js-support-ticket'));
         }
         return esc_html(__('Setting changed', 'js-support-ticket'));
     }

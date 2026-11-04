@@ -2,7 +2,7 @@
 if (!defined('ABSPATH')) die('Restricted Access');
 
 // 1. Get Data
-$js_ticket_api_key      = get_option('jsst_zywrap_api_key', '');
+$js_ticket_api_key      = JSSTaiengine::apiKey('zywrap'); // a connected account's key counts too
 $js_ticket_default_model = get_option('jsst_zywrap_default_model', '');
 $js_ticket_default_lang  = get_option('jsst_zywrap_default_lang', 'English');
 $js_ticket_last_sync     = get_option('jsst_zywrap_last_sync');
@@ -50,8 +50,8 @@ JSSTmessage::getMessage();
                             <?php /* Same story as AI Agent > Settings: the key comes with the
                                      licence, and it is one key - saved here or there, both
                                      screens and the AI Agent use the same one. */ ?>
-                            <li><?php echo esc_html__('A key comes with your JS Help Desk licence. It is the same key as on AI Agent → Settings — saving it here or there updates both.', 'js-support-ticket'); ?></li>
-                            <li><?php echo esc_html__('Prefer your own account? Create one at', 'js-support-ticket'); ?> <a href="https://zywrap.com/register" target="_blank" rel="noopener">Zywrap.com</a> <?php echo esc_html__('and paste its key here.', 'js-support-ticket'); ?></li>
+                            <li><?php echo esc_html__('Create a free Zywrap account, or connect the one you have, under AI Agent → Settings → Engine & key. It is the same key as here, so saving it in either place updates both.', 'js-support-ticket'); ?></li>
+                            <li><?php echo esc_html__('Prefer your own account? Create one at', 'js-support-ticket'); ?> <a href="<?php echo esc_url(JSSTaiengine::zywrapUrl('register')); ?>" target="_blank" rel="noopener">Zywrap.com</a> <?php echo esc_html__('and paste its key here.', 'js-support-ticket'); ?></li>
                         </ul>
                     </div>
 

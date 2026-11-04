@@ -42,7 +42,7 @@ $jsst_detail_ticketid = (isset(jssupportticket::$jsst_data[0]) && !empty(jssuppo
    else - and the important half is that they go grey rather than firing and
    coming back with a refusal, because a button that looks live and then does
    nothing is how a working desk gets reported as broken. */
-$zywrap_api_key = get_option('jsst_zywrap_api_key', '');
+$zywrap_api_key = JSSTaiengine::apiKey('zywrap');
 $zywrap_is_active = JSSTincluder::getJSModel('zywrap') && JSSTzywrapModel::usable();
 $zywrap_default_lang = get_option('jsst_zywrap_default_lang', 'English');
 // ---------------------------
@@ -2607,47 +2607,6 @@ $jsst_yesno = array(
                                 </div>
 
                                 <?php
-                                //zywrap ai
-                                // We check if the user is a customer so we don't put buttons on our own replies
-                                // Handle logic before output
-                                $is_customer_check = isset($is_customer) ? $is_customer : true;
-                                $is_latest_check   = isset($is_latest_overall) ? $is_latest_overall : (isset($is_latest) ? $is_latest : false);
-
-                                // Only where the AI add-on is set up: without it these icons did nothing.
-                                if ($is_customer_check && !empty($zywrap_is_active)) : 
-                                    $active_flag = $zywrap_is_active ? '1' : '0';
-                                    ?>
-                                    <div style="display: none;" class="js-ticket-zywrap-inline-actions">
-
-                                        <?php if ($is_latest_check) : ?>
-                                            <button type="button" class="js-ticket-zywrap-open-tab-btn js-ticket-zywrap-btn-primary" data-tab="compose" data-active="<?php echo esc_attr($active_flag); ?>">
-                                                <span class="dashicons dashicons-edit"></span> 
-                                                <?php echo esc_html(__('Reply with Co-Pilot', 'js-support-ticket')); ?>
-                                            </button>
-                                            
-                                            <button type="button" class="js-ticket-zywrap-open-tab-btn js-ticket-zywrap-btn-icon" data-tab="ask_info" data-active="<?php echo esc_attr($active_flag); ?>" title="<?php echo esc_attr__('Ask for Info', 'js-support-ticket'); ?>">
-                                                <span class="dashicons dashicons-format-chat"></span>
-                                            </button>
-                                            
-                                            <div class="js-ticket-zywrap-divider"></div>
-                                        <?php endif; ?>
-
-                                        <button type="button" class="js-ticket-zywrap-inline-ai-btn js-ticket-zywrap-btn-icon" data-wrapper="ts_support_ticket_condensed_summary_base" data-active="<?php echo esc_attr($active_flag); ?>" title="<?php echo esc_attr__('Summarize', 'js-support-ticket'); ?>">
-                                            <span class="dashicons dashicons-text-page"></span>
-                                        </button>
-                                        
-                                        <button type="button" class="js-ticket-zywrap-inline-ai-btn js-ticket-zywrap-btn-icon" data-wrapper="ee_support_ticket_detail_extraction_base" data-active="<?php echo esc_attr($active_flag); ?>" title="<?php echo esc_attr__('Extract Details', 'js-support-ticket'); ?>">
-                                            <span class="dashicons dashicons-search"></span>
-                                        </button>
-                                        
-                                        <button type="button" class="js-ticket-zywrap-inline-ai-btn js-ticket-zywrap-btn-icon" data-wrapper="tl_supp_tick_tran_loca_926d_base" data-lang="<?php echo esc_attr($zywrap_default_lang); ?>" data-active="<?php echo esc_attr($active_flag); ?>" title="<?php echo esc_attr__('Translate to', 'js-support-ticket'); ?> <?php echo esc_attr($zywrap_default_lang); ?>">
-                                            <span class="dashicons dashicons-translation"></span>
-                                        </button>
-                                    </div>
-                                    <div class="js-ticket-zywrap-inline-result" style="display:none;"></div>
-                                <?php endif; ?>
-
-                                <?php
                                     if (!empty(jssupportticket::$jsst_data['ticket_attachment'])) {
                                         $jsst_datadirectory = jssupportticket::$_config['data_directory'];
                                         $jsst_maindir = wp_upload_dir();
@@ -2810,45 +2769,6 @@ $jsst_yesno = array(
                                             <?php // A ticket link in a stored reply belongs to whoever is reading it. (Roadmap 4.0-CORE-01)
                                             echo wp_kses_post(JSSTticketlink::resolve(html_entity_decode($jsst_reply->message))); ?>
                                         </div>
-                                        <?php
-                                        // Zywrap AI Inline Actions (Threaded Replies)
-                                        $js_ticket_is_customer = ($jsst_reply->uid == jssupportticket::$jsst_data[0]->uid);
-                                        $js_ticket_is_latest   = ($key == count(jssupportticket::$jsst_data[4]) - 1);
-
-                                        // Upsell Logic: Only hide if it's NOT a customer. If it is a customer, show buttons but track active state.
-                                        if ($js_ticket_is_customer && !empty($zywrap_is_active)) :
-                                            $js_ticket_active_flag = $zywrap_is_active ? '1' : '0';
-                                            ?>
-                                            <div style="display: none;" class="js-ticket-zywrap-inline-actions">
-
-                                                <?php if ($js_ticket_is_latest) : ?>
-                                                    <button type="button" class="js-ticket-zywrap-open-tab-btn js-ticket-zywrap-btn-primary" data-tab="compose" data-active="<?php echo esc_attr($js_ticket_active_flag); ?>">
-                                                        <span class="dashicons dashicons-edit"></span> 
-                                                        <?php echo esc_html(__('Reply with Co-Pilot', 'js-support-ticket')); ?>
-                                                    </button>
-                                                    
-                                                    <button type="button" class="js-ticket-zywrap-open-tab-btn js-ticket-zywrap-btn-icon" data-tab="ask_info" data-active="<?php echo esc_attr($js_ticket_active_flag); ?>" title="<?php echo esc_attr(__('Ask for Info', 'js-support-ticket')); ?>">
-                                                        <span class="dashicons dashicons-format-chat"></span>
-                                                    </button>
-                                                    
-                                                    <div class="js-ticket-zywrap-divider"></div>
-                                                <?php endif; ?>
-
-                                                <button type="button" class="js-ticket-zywrap-inline-ai-btn js-ticket-zywrap-btn-icon" data-wrapper="ts_support_ticket_condensed_summary_base" data-active="<?php echo esc_attr($js_ticket_active_flag); ?>" title="<?php echo esc_attr(__('Summarize', 'js-support-ticket')); ?>">
-                                                    <span class="dashicons dashicons-text-page"></span>
-                                                </button>
-                                                
-                                                <button type="button" class="js-ticket-zywrap-inline-ai-btn js-ticket-zywrap-btn-icon" data-wrapper="ee_support_ticket_detail_extraction_base" data-active="<?php echo esc_attr($js_ticket_active_flag); ?>" title="<?php echo esc_attr(__('Extract Details', 'js-support-ticket')); ?>">
-                                                    <span class="dashicons dashicons-search"></span>
-                                                </button>
-                                                
-                                                <button type="button" class="js-ticket-zywrap-inline-ai-btn js-ticket-zywrap-btn-icon" data-wrapper="tl_supp_tick_tran_loca_926d_base" data-lang="<?php echo esc_attr($zywrap_default_lang); ?>" data-active="<?php echo esc_attr($js_ticket_active_flag); ?>" title="<?php echo esc_attr(__('Translate to', 'js-support-ticket')); ?> <?php echo esc_attr($zywrap_default_lang); ?>">
-                                                    <span class="dashicons dashicons-translation"></span>
-                                                </button>
-                                            </div>
-
-                                            <div class="js-ticket-zywrap-inline-result" style="display:none;"></div>
-                                        <?php endif; ?>
                                         <?php
                                             if (!empty($jsst_reply->attachments)) {
                                                 foreach ($jsst_reply->attachments AS $jsst_attachment) {
@@ -3295,8 +3215,8 @@ $jsst_yesno = array(
                                             </span>
                                         </div>
                                         <span class="tk_attachments_configform">
-                                            <small><?php esc_html(__('Maximum File Size','js-support-ticket'));
-                                            echo ' (' . esc_html(jssupportticket::$_config['file_maximum_size']); ?>KB)<br><?php esc_html(__('File Extension Type','js-support-ticket'));
+                                            <small><?php echo esc_html(__('Maximum File Size','js-support-ticket'));
+                                            echo ' (' . esc_html(jssupportticket::$_config['file_maximum_size']); ?>KB)<br><?php echo esc_html(__('File Extension Type','js-support-ticket'));
                                             echo ' (' . esc_html(jssupportticket::$_config['file_extension']) . ')'; ?></small>
                                         </span>
                                         <span id="tk_attachment_add" class="tk_attachments_addform jsst-button-bg-link"><?php echo esc_html(__('Add More File','js-support-ticket')); ?></span>
@@ -3520,8 +3440,8 @@ $jsst_yesno = array(
                                             </span>
                                         </div>
                                         <span class="tk_attachments_configform">
-                                            <small><?php esc_html(__('Maximum File Size','js-support-ticket'));
-                                            echo ' (' . esc_html(jssupportticket::$_config['file_maximum_size']); ?>KB)<br><?php esc_html(__('File Extension Type','js-support-ticket'));
+                                            <small><?php echo esc_html(__('Maximum File Size','js-support-ticket'));
+                                            echo ' (' . esc_html(jssupportticket::$_config['file_maximum_size']); ?>KB)<br><?php echo esc_html(__('File Extension Type','js-support-ticket'));
                                             echo ' (' . esc_html(jssupportticket::$_config['file_extension']) . ')'; ?></small>
                                         </span>
                                     </div>
@@ -4274,7 +4194,7 @@ $jsst_yesno = array(
                                             <div class="js-tkt-wc-order-item-title"><?php echo esc_html($jsst_field_array['wcorderid']). ' : '; ?></div>
                                             <div class="js-tkt-wc-order-item-value">
                                                 <a title="<?php echo esc_attr(__('Order','js-support-ticket')). ' : '; ?>" href="<?php echo esc_url($jsst_order->get_edit_order_url()); ?>">
-                                                    #<?php echo esc_html($jsst_order->get_id()); ?>
+                                                    #<?php echo esc_html($jsst_order->get_order_number()); ?>
                                                 </a>
                                             </div>
                                         </div>
@@ -4286,7 +4206,17 @@ $jsst_yesno = array(
                                         if($jsst_order_productid){
 												//$jsst_item = new WC_Order_Item_Product($jsst_order_productid); this line generate error if product changed
 											$jsst_items = $jsst_order->get_items();
+											/* The form stores the order line's id (the order products
+											   lookup lists lines), as the customer's ticket page reads
+											   it; a product id is still matched for older tickets. The
+											   name was unset when nothing matched, a PHP warning on
+											   every order with more than one line. */
+											$jsst_product_name = '';
 											foreach ( $jsst_items as $jsst_item ) { // get the user select product
+												if($jsst_item->get_id() == $jsst_order_productid){
+													$jsst_product_name = $jsst_item->get_name();
+													break;
+												}
 												if($jsst_item->get_product_id() == $jsst_order_productid){
 													$jsst_product_name = $jsst_item->get_name();
 												}

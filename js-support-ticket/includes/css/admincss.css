@@ -250,14 +250,18 @@ form.jsstadmin-form div.js-form-wrapper #userpopup:hover {background: #fff;color
 #adminDwnldform .tk_attachment_value_wrapperform .tk_attachment_value_text,
 #adminKbform .tk_attachment_value_wrapperform .tk_attachment_value_text {width: calc(33.33% - 10px);margin-right: 10px;}
 .tk_attachment_value_wrapperform .tk_attachment_value_text {width: 100%;margin-bottom: 10px;height: 45px;border: 1px solid #ebecec;background: #f8fafc;padding: 6px 10px;float: left;position: relative;}
-.tk_attachment_value_wrapperform .tk_attachment_value_text input {display: inline-block;text-overflow: ellipsis;width: 100%;padding: 0;}
+.tk_attachment_value_wrapperform .tk_attachment_value_text input {display: inline-block;text-overflow: ellipsis;width: calc(100% - 22px);padding: 0;}
 .tk_attachment_value_wrapperform .tk_attachment_value_text .tk_attachment_remove {position: absolute;display: inline-block;top: 9px;right: 0;background-image: url('../images/close.png');background-repeat: no-repeat;background-position: calc(100% - 5px);height: 25px;width: 25px;background-size: 100%;cursor: pointer;}
+/* The chosen files, listed under the boxes by file_validate.js: the browser's own box is too narrow to show the name. (5.0.4) */
+.tk_attachment_chosen {clear: both;display: flex;flex-wrap: wrap;gap: 6px;margin: 0 0 10px;}
+.tk_attachment_chosen .tk_attachment_chosen_file {max-width: 100%;box-sizing: border-box;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;padding: 3px 10px;border: 1px solid #c7d2fe;border-radius: 999px;background: #eef2ff;color: #312e81;font-size: 13px;line-height: 1.5;}
+.tk_attachment_chosen .tk_attachment_chosen_file::before {content: "\2713\00a0";color: #15803d;font-weight: 700;}
 .js_ticketattachment {width: calc(50% - 10px);margin-bottom: 10px;border: 1px solid #ebecec;background: #f8fafc;padding: 8px 5px;margin-right: 10px;float: left;position: relative;line-height: 22px;}
 .jsticketstafflogo {width: 150px;}
 .js_ticketattachment .js_ticketattachment_fname {float: left;width: calc(100% - 125px);overflow: hidden;text-overflow: ellipsis;height: 25px;white-space: nowrap;}
 .js_ticketattachment a {float: right;}
 .tk_attachments_desc {float: left;width: 100%;}
-.tk_attachments_configform {display: inline-block;width: 100%;}
+.tk_attachments_configform {display: inline-block;width: 100%;overflow-wrap: anywhere;}
 .jsstadmin-add-user-fields-wrp {float: left;width: calc(100% - 20px);margin: 0 10px 20px;}
 #user-field-values {float: left;width: 100%;}
 .input-field-wrapper {display: inline-block;float: left;position: relative;margin-right: 10px;margin-bottom: 10px;}
@@ -6170,7 +6174,8 @@ div#jsstadmin-data-wrp {width: calc(100% - 48px);margin: 0 24px 24px;padding: 5p
    size so it does not shout either. */
 #jsstadmin-wrapper .jsst-fhelp a,
 #jsstadmin-wrapper .jsst-lede a,
-#jsstadmin-wrapper .jsst-card-sub a {color: var(--jsst-accent, #4f46e5);text-decoration: underline;text-underline-offset: 2px;}
+#jsstadmin-wrapper .jsst-card-sub a,
+#jsstadmin-wrapper .jsst-hint a {color: var(--jsst-accent, #4f46e5);text-decoration: underline;text-underline-offset: 2px;}
 #jsstadmin-wrapper .jsst-hint {max-width: 72em;margin: 7px 0 0;color: var(--jsst-text-faint, #98a0ac);font-size: 12px;line-height: 1.6;}
 #jsstadmin-wrapper .jsst-card + .jsst-hint {margin: -8px 0 16px;}
 /* A section heading standing on the canvas, owning the card or cards under it.

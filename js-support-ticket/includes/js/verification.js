@@ -151,11 +151,60 @@
         chunk();
     }
 
+    /* A fresh token before solving. The one in the markup was minted when the
+       page was drawn, and a cached page hands every visitor that same
+       single-use token, so only the first of them could submit. admin-ajax.php
+       is not page-cached. When it can't be reached, the token the page came
+       with is used, as before. (5.0.4) */
+    function refresh(box, then) {
+        var url = box.getAttribute('data-refresh');
+        var context = box.getAttribute('data-context');
+        var finished = false;
+        function go() {
+            if (!finished) {
+                finished = true;
+                then();
+            }
+        }
+        if (!url || !context || !window.XMLHttpRequest) {
+            go();
+            return;
+        }
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', url, true);
+        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+        xhr.timeout = 8000;
+        xhr.onload = function () {
+            try {
+                var res = JSON.parse(xhr.responseText);
+                if (res && res.success && res.data && res.data.token) {
+                    box.setAttribute('data-token', res.data.token);
+                    if (typeof res.data.bits !== 'undefined') {
+                        box.setAttribute('data-bits', String(res.data.bits));
+                    }
+                    var form = box.closest ? box.closest('form') : null;
+                    var input = form ? form.querySelector('.jsst-vtoken') : document.querySelector('.jsst-vtoken');
+                    if (input) {
+                        input.value = res.data.token;
+                    }
+                }
+            } catch (e) {}
+            go();
+        };
+        xhr.onerror = go;
+        xhr.ontimeout = go;
+        xhr.send('action=jsst_vtoken&context=' + encodeURIComponent(context));
+    }
+
     function init() {
         var boxes = document.querySelectorAll('.jsst-verification-work');
         for (var i = 0; i < boxes.length; i++) {
             if (!boxes[i].getAttribute('data-solved')) {
-                solve(boxes[i]);
+                (function (box) {
+                    refresh(box, function () {
+                        solve(box);
+                    });
+                })(boxes[i]);
             }
         }
     }

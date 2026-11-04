@@ -337,8 +337,11 @@ class JSSTdeactivation {
             'jsst_ai_journal',
             'jsst_ai_engine',
             'jsst_ai_model',
+            'jsst_ai_model_anthropic',
+            'jsst_ai_model_openai',
             'jsst_ai_key_zywrap',
             'jsst_ai_key_anthropic',
+            'jsst_ai_key_openai',
             'jsst_ai_key_local',
             'jsst_ai_local_endpoint',
             'jsst_ai_local_model',
@@ -350,6 +353,16 @@ class JSSTdeactivation {
             'jsst_copilot_log',
             'jsst_copilot_batches',
             'jsst_zywrap_api_key',
+            // 5.0.4: the connected Zywrap account (it names a person's e-mail
+            // address), whether the local address is public, and the Zywrap
+            // screen's settings, which outlived their tables until now.
+            'jsst_zywrap_account',
+            'jsst_ai_credits',
+            'jsst_ai_local_public',
+            'jsst_zywrap_default_model',
+            'jsst_zywrap_default_lang',
+            'jsst_zywrap_last_sync',
+            'jsst_zywrap_data_version',
             // And the source register's bookkeeping. The schema marker goes
             // with its table for the reason the 4.5 block sets out: a marker
             // left behind tells a later reinstall the table already exists.

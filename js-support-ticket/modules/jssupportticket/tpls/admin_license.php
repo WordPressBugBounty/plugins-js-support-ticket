@@ -342,11 +342,17 @@ JSSTmessage::getMessage();
                             if ( ! empty( $jsst_plandata['support'] ) ) {
                                 $jsst_facts[] = array( __( 'Support', 'js-support-ticket' ), (string) $jsst_plandata['support'] );
                             }
-                            if ( ! empty( $jsst_plandata['ai'] ) && (int) $jsst_plandata['ai'] > 0 ) {
+                            /* Zywrap credits the licence adds each month, as jshelpdesk.com
+                               says; the plan's figure until it has answered. (5.0.4) */
+                            $jsst_aicredits = class_exists( 'JSSTaicredits' ) ? JSSTaicredits::monthly() : 0;
+                            if ( $jsst_aicredits <= 0 && ! empty( $jsst_plandata['ai'] ) ) {
+                                $jsst_aicredits = (int) $jsst_plandata['ai'];
+                            }
+                            if ( $jsst_aicredits > 0 ) {
                                 $jsst_facts[] = array( __( 'AI included', 'js-support-ticket' ), sprintf(
-                                    /* translators: %s: number of AI requests included each month */
-                                    __( '%s requests a month, on top of your own key', 'js-support-ticket' ),
-                                    number_format_i18n( (int) $jsst_plandata['ai'] )
+                                    /* translators: %s: number of Zywrap credits included each month */
+                                    __( '%s Zywrap credits a month', 'js-support-ticket' ),
+                                    number_format_i18n( $jsst_aicredits )
                                 ) );
                             }
                             if ( array() !== $jsst_facts ) { ?>

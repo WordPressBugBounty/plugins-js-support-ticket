@@ -28,6 +28,9 @@ $jsst_test    = isset(jssupportticket::$jsst_data['aitest']) ? jssupportticket::
 
 $jsst_action  = wp_nonce_url(admin_url('admin.php?page=aiagent&task=saveaisettings&action=jstask'), 'jsst-aiagent');
 $jsst_testurl = wp_nonce_url(admin_url('admin.php?page=aiagent&task=testaiengine&action=jstask'), 'jsst-aiagent-test');
+// Links, not forms: the Zywrap card sits inside the engine form, and forms cannot nest.
+$jsst_zyconnect    = wp_nonce_url(admin_url('admin.php?page=aiagent&task=zywrapconnect&action=jstask'), 'jsst-aiagent-zywrapconnect');
+$jsst_zydisconnect = wp_nonce_url(admin_url('admin.php?page=aiagent&task=zywrapdisconnect&action=jstask'), 'jsst-aiagent-zywrapdisconnect');
 
 $jsst_lanes      = isset($jsst_policy['lanes']) ? $jsst_policy['lanes'] : array();
 $jsst_states     = isset($jsst_policy['states']) ? $jsst_policy['states'] : array();
@@ -35,7 +38,9 @@ $jsst_modes      = isset($jsst_policy['modes']) ? $jsst_policy['modes'] : array(
 $jsst_redaction  = isset($jsst_policy['redaction']) ? $jsst_policy['redaction'] : 'credentials';
 $jsst_current    = isset($jsst_engines['current']) ? $jsst_engines['current'] : '';
 $jsst_enginerows = isset($jsst_engines['engines']) ? $jsst_engines['engines'] : array();
-$jsst_model      = isset($jsst_engines['model']) ? $jsst_engines['model'] : '';
+$jsst_zywrap     = isset(jssupportticket::$jsst_data['aizywrap']) ? jssupportticket::$jsst_data['aizywrap']
+                 : array('available' => false, 'account' => null, 'models' => array(), 'model' => '');
+$jsst_zysignup   = false; // set when the sign-up form is drawn, so its script is added
 
 /* The behaviour settings, which used to be four tabs on the Configuration
    screen. (Roadmap 6.0-AI-01)
@@ -307,6 +312,11 @@ JSSTmessage::getMessage();
                                     <?php } ?>
                                 </legend>
                                 <p class="jsst-fhelp"><?php echo esc_html($jsst_engine['blurb']); ?></p>
+                                <?php /* Right under the promise it breaks: the saved address
+                                         resolves to a public IP, so it is run as hosted. */
+                                if ($jsst_id === 'local' && !empty($jsst_engines['localpublic'])) { ?>
+                                    <p class="jsst-fhelp jsst-fhelp-warn"><strong><?php echo esc_html(__('This address is on the internet, so ticket text leaves your server. It\'s treated as a hosted service.', 'js-support-ticket')); ?></strong></p><?php JSSTlayout::why(__('The local lane is for a model on your own network. This address resolves to a public IP, so requests to it go to somebody else\'s server, and it needs the hosted lane switched on like any other hosted service.', 'js-support-ticket')); ?>
+                                <?php } ?>
                                 <?php if (empty($jsst_engine['laneopen'])) {
                                     /* The engine and the switch it needs, in one place: ticked,
                                        saving this engine also opens its lane. Nothing else on
@@ -324,7 +334,7 @@ JSSTmessage::getMessage();
                                     <?php if ($jsst_id === 'local') { ?>
                                         <div class="jsst-frow">
                                             <label class="jsst-flabel" for="jsst-localendpoint"><?php echo esc_html(__('Address', 'js-support-ticket')); ?></label>
-                                            <div class="jsst-fval"><input type="url" id="jsst-localendpoint" name="localendpoint" value="<?php echo esc_attr(isset($jsst_engines['endpoint']) ? $jsst_engines['endpoint'] : ''); ?>" placeholder="http://127.0.0.1:11434" /></div>
+                                            <div class="jsst-fval"><input type="url" id="jsst-localendpoint" name="localendpoint" value="<?php echo esc_attr(isset($jsst_engines['endpoint']) ? $jsst_engines['endpoint'] : ''); ?>" placeholder="http://127.0.0.1:11434"<?php /* Network administrators only on multisite; the save refuses anyone else. */ echo (is_multisite() && !current_user_can('manage_network_options')) ? ' readonly' : ''; ?> /></div>
                                             <p class="jsst-fhelp"><?php echo esc_html(__('Your model server\'s base address. A private address is fine here.', 'js-support-ticket')); ?></p><?php JSSTlayout::why(__('The base address of your model server. Ollama, LM Studio, vLLM and llama.cpp all answer the OpenAI chat-completions shape, so the path is added for you. A private address is expected here — this is not the crawler and it is not checked against the crawler\'s rules.', 'js-support-ticket')); ?>
                                         </div>
                                         <div class="jsst-frow">
@@ -350,39 +360,217 @@ JSSTmessage::getMessage();
                                         </div>
                                     <?php } ?>
 
+                                    <?php if ($jsst_id === 'zywrap' && !empty($jsst_zywrap['available'])) {
+                                        /* Connected: to whom, and the way out. Not connected: an
+                                           account made here, with the key box folded away below
+                                           for anybody who already has a key. (5.0.4) */
+                                        $jsst_zyaccount = $jsst_zywrap['account'];
+                                        $jsst_zycredits = ($jsst_zyaccount && isset($jsst_zyaccount['credits']) && $jsst_zyaccount['credits'] !== null);
+                                        if ($jsst_engine['stored'] !== '') { ?>
+                                            <div class="jsst-frow jsst-frow-full">
+                                                <span class="jsst-flabel"><?php echo esc_html(__('Zywrap account', 'js-support-ticket')); ?></span>
+                                                <div class="jsst-fval">
+                                                    <span class="jsst-pill jsst-pill-ok"><span class="jsst-dot"></span><?php
+                                                        if ($jsst_zyaccount && !empty($jsst_zyaccount['email'])) {
+                                                            echo esc_html($jsst_zycredits
+                                                                ? sprintf(
+                                                                    /* translators: 1: the Zywrap account's e-mail address, 2: its credit balance */
+                                                                    __('Connected as %1$s · %2$s credits', 'js-support-ticket'),
+                                                                    $jsst_zyaccount['email'], number_format_i18n((int) $jsst_zyaccount['credits']))
+                                                                : sprintf(
+                                                                    /* translators: %s: the Zywrap account's e-mail address */
+                                                                    __('Connected as %s', 'js-support-ticket'), $jsst_zyaccount['email']));
+                                                        } elseif ($jsst_zycredits) {
+                                                            echo esc_html(sprintf(
+                                                                /* translators: %s: the Zywrap credit balance */
+                                                                __('Connected with a key entered by hand · %s credits', 'js-support-ticket'),
+                                                                number_format_i18n((int) $jsst_zyaccount['credits'])));
+                                                        } else {
+                                                            echo esc_html(__('Connected with a key entered by hand', 'js-support-ticket'));
+                                                        } ?></span>
+                                                </div>
+                                                <p class="jsst-fhelp">
+                                                    <?php if ($jsst_zycredits && !empty($jsst_zyaccount['credits_at'])) {
+                                                        echo esc_html(sprintf(
+                                                            /* translators: %s: how long ago, e.g. "5 mins" */
+                                                            __('Balance after this site\'s last Zywrap request, %s ago.', 'js-support-ticket'),
+                                                            human_time_diff((int) $jsst_zyaccount['credits_at'])));
+                                                    } elseif ($jsst_zycredits) {
+                                                        echo esc_html(__('Balance when this site connected.', 'js-support-ticket'));
+                                                    } ?>
+                                                    <a href="<?php echo esc_url($jsst_zydisconnect); ?>"
+                                                       onclick="return confirm('<?php echo esc_js(__('Disconnect Zywrap? The key is removed from this site. It stays valid on zywrap.com until you revoke it there.', 'js-support-ticket')); ?>');"><?php echo esc_html(__('Disconnect', 'js-support-ticket')); ?></a>
+                                                </p>
+                                                <?php /* Out of credits: Zywrap refuses every request until the account is topped up. (5.0.4) */
+                                                if (get_transient(JSSTaiengine::OPT_ZYWRAP_NO_CREDITS)) { ?>
+                                                    <p class="jsst-fhelp jsst-fhelp-warn"><strong><?php echo esc_html(__('Your Zywrap credits have run out, so AI requests are refused until you top up.', 'js-support-ticket')); ?></strong></p>
+                                                <?php } ?>
+                                                <p class="jsst-fhelp">
+                                                    <a href="<?php echo esc_url(JSSTaiengine::zywrapUrl('dashboard/credits')); ?>" target="_blank" rel="noopener"><?php echo esc_html(__('Credits and top-up', 'js-support-ticket')); ?></a>
+                                                    &middot;
+                                                    <a href="<?php echo esc_url(JSSTaiengine::zywrapUrl('dashboard/apikeys')); ?>" target="_blank" rel="noopener"><?php echo esc_html(__('API keys', 'js-support-ticket')); ?></a>
+                                                </p>
+                                                <?php /* The monthly credits a paid licence adds to this account. (5.0.4) */
+                                                $jsst_zyplan = class_exists('JSSTaicredits') ? JSSTaicredits::describe($jsst_zywrap['credits'], true) : array('text' => '', 'warn' => false);
+                                                if ($jsst_zyplan['text'] !== '') { ?>
+                                                    <p class="jsst-fhelp<?php echo $jsst_zyplan['warn'] ? ' jsst-fhelp-warn' : ''; ?>"><?php echo esc_html($jsst_zyplan['text']); ?></p>
+                                                    <?php /* Its own row: a link inside .jsst-fhelp takes the help text's link colour. */
+                                                    if (!empty($jsst_zyplan['claim'])) { ?>
+                                                        <div class="jsst-btnrow">
+                                                            <a class="jsst-btn jsst-btn-primary" href="<?php echo esc_url(wp_nonce_url(admin_url('admin.php?page=aiagent&task=claimaicredits&action=jstask'), 'jsst-aiagent-claimcredits')); ?>"><?php echo esc_html(__('Claim them for this account', 'js-support-ticket')); ?></a>
+                                                        </div>
+                                                    <?php } ?>
+                                                <?php } ?>
+                                            </div>
+                                        <?php } else {
+                                            $jsst_zysignup = true;
+                                            $jsst_zyuser   = wp_get_current_user();
+                                            $jsst_zyemail  = ($jsst_zyuser && $jsst_zyuser->user_email !== '') ? $jsst_zyuser->user_email : get_option('admin_email'); ?>
+                                            <?php /* Nothing here has a name attribute: the script posts these
+                                                     two steps itself, and the engine form they sit inside
+                                                     must never carry them anywhere. Nothing is sent to Zywrap
+                                                     until the button is pressed. */ ?>
+                                            <div class="jsst-frow jsst-frow-full" data-jsst-zysignup>
+                                                <span class="jsst-flabel"><?php echo esc_html(__('Create your free Zywrap account', 'js-support-ticket')); ?></span>
+                                                <div data-jsst-zystep="email">
+                                                    <div class="jsst-formgrid">
+                                                        <div class="jsst-frow">
+                                                            <label class="jsst-flabel" for="jsst-zyemail"><?php echo esc_html(__('E-mail', 'js-support-ticket')); ?></label>
+                                                            <div class="jsst-fval"><input type="email" id="jsst-zyemail" value="<?php echo esc_attr($jsst_zyemail); ?>" autocomplete="email" /></div>
+                                                        </div>
+                                                        <div class="jsst-frow">
+                                                            <label class="jsst-flabel" for="jsst-zyname"><?php echo esc_html(__('Name (optional)', 'js-support-ticket')); ?></label>
+                                                            <div class="jsst-fval"><input type="text" id="jsst-zyname" value="" autocomplete="name" /></div>
+                                                        </div>
+                                                    </div>
+                                                    <label class="jsst-check">
+                                                        <input type="checkbox" id="jsst-zyaccept" value="1" />
+                                                        <span><?php echo wp_kses(sprintf(
+                                                            /* translators: 1: "Terms of Service", linked to Zywrap's terms, 2: "Privacy Policy", linked to Zywrap's privacy policy */
+                                                            esc_html(__('I agree to the Zywrap %1$s and %2$s. When I continue, my e-mail, name and this site\'s address are sent to Zywrap.', 'js-support-ticket')),
+                                                            '<a href="https://zywrap.com/terms" target="_blank" rel="noopener">' . esc_html(__('Terms of Service', 'js-support-ticket')) . '</a>',
+                                                            '<a href="https://zywrap.com/privacy" target="_blank" rel="noopener">' . esc_html(__('Privacy Policy', 'js-support-ticket')) . '</a>'
+                                                        ), array('a' => array('href' => array(), 'target' => array(), 'rel' => array()))); ?></span>
+                                                    </label>
+                                                    <div class="jsst-btnrow">
+                                                        <button type="button" class="jsst-btn jsst-btn-primary" data-jsst-zysend><?php echo esc_html(__('Create my free account', 'js-support-ticket')); ?></button>
+                                                    </div>
+                                                    <p class="jsst-fhelp"><?php echo esc_html(__('Already have a Zywrap account? Enter its e-mail and you\'ll be signed in instead. New accounts start with 10,000 free credits.', 'js-support-ticket')); ?></p>
+                                                    <?php $jsst_zyplan = class_exists('JSSTaicredits') ? JSSTaicredits::describe($jsst_zywrap['credits'], false) : array('text' => '');
+                                                    if ($jsst_zyplan['text'] !== '') { ?>
+                                                        <p class="jsst-fhelp"><strong><?php echo esc_html($jsst_zyplan['text']); ?></strong></p>
+                                                    <?php } ?>
+                                                </div>
+                                                <div data-jsst-zystep="code" hidden>
+                                                    <p class="jsst-fhelp" data-jsst-zysent></p>
+                                                    <div class="jsst-frow">
+                                                        <label class="jsst-flabel" for="jsst-zycode"><?php echo esc_html(__('6-digit code', 'js-support-ticket')); ?></label>
+                                                        <div class="jsst-fval"><input type="text" id="jsst-zycode" inputmode="numeric" autocomplete="one-time-code" maxlength="7" /></div>
+                                                    </div>
+                                                    <div class="jsst-btnrow">
+                                                        <button type="button" class="jsst-btn jsst-btn-primary" data-jsst-zyverify><?php echo esc_html(__('Connect', 'js-support-ticket')); ?></button>
+                                                        <button type="button" class="jsst-btn" data-jsst-zyback><?php echo esc_html(__('Use a different e-mail', 'js-support-ticket')); ?></button>
+                                                        <button type="button" class="jsst-btn" data-jsst-zyresend><?php echo esc_html(__('Send a new code', 'js-support-ticket')); ?></button>
+                                                    </div>
+                                                </div>
+                                                <p class="jsst-fhelp" role="status" aria-live="polite" data-jsst-zymsg></p>
+                                                <p class="jsst-fhelp">
+                                                    <?php echo esc_html(__('Sign in with Google or GitHub, or use two-factor sign-in?', 'js-support-ticket')); ?>
+                                                    <a href="<?php echo esc_url($jsst_zyconnect); ?>" data-jsst-zybrowser><?php echo esc_html(__('Connect with zywrap.com instead', 'js-support-ticket')); ?></a>
+                                                </p>
+                                            </div>
+                                        <?php } ?>
+                                        <div class="jsst-frow">
+                                            <label class="jsst-flabel" for="jsst-zywrapmodel"><?php echo esc_html(__('Model', 'js-support-ticket')); ?></label>
+                                            <div class="jsst-fval">
+                                                <select id="jsst-zywrapmodel" name="zywrapmodel">
+                                                    <option value=""><?php echo esc_html(__('Let Zywrap choose (recommended)', 'js-support-ticket')); ?></option>
+                                                    <?php foreach ($jsst_zywrap['models'] as $jsst_zycode => $jsst_zyname) { ?>
+                                                        <option value="<?php echo esc_attr($jsst_zycode); ?>" <?php selected($jsst_zywrap['model'], $jsst_zycode); ?>><?php echo esc_html($jsst_zyname); ?></option>
+                                                    <?php }
+                                                    /* A saved model the catalogue no longer lists is still sent,
+                                                       so it is shown rather than the select claiming Zywrap chooses. */
+                                                    if ($jsst_zywrap['model'] !== '' && !isset($jsst_zywrap['models'][$jsst_zywrap['model']])) { ?>
+                                                        <option value="<?php echo esc_attr($jsst_zywrap['model']); ?>" selected="selected"><?php echo esc_html(sprintf(
+                                                            /* translators: %s: the code of an AI model the Zywrap catalogue no longer lists */
+                                                            __('%s (no longer in the catalogue)', 'js-support-ticket'), $jsst_zywrap['model'])); ?></option>
+                                                    <?php } ?>
+                                                </select>
+                                            </div>
+                                            <p class="jsst-fhelp"><?php echo esc_html(empty($jsst_zywrap['models'])
+                                                ? __('More models are listed once the Zywrap catalogue has been synced.', 'js-support-ticket')
+                                                : __('The AI model behind Zywrap. Left to Zywrap, it picks one for each kind of request.', 'js-support-ticket')); ?></p>
+                                            <?php if (!empty($jsst_zywrap['models'])) {
+                                                /* Only the recommended choice passed the 60-ticket answer test
+                                                   (5.0.4). Some cheap models rate wrong answers as certain, so a
+                                                   chosen model on a desk that sends on confidence is flagged. */
+                                                $jsst_zyrisk = ($jsst_zywrap['model'] !== '' && class_exists('JSSTaireview')
+                                                    && JSSTaireview::mode() === JSSTaireview::MODE_THRESHOLD); ?>
+                                                <p class="jsst-fhelp<?php echo $jsst_zyrisk ? ' jsst-fhelp-warn' : ''; ?>"><?php echo esc_html(sprintf(
+                                                    /* translators: %s: the approval setting "Always ask a person first" */
+                                                    __('Automatic answers were tested with the recommended choice. With another model, set Approvals to "%s" until you have checked its answers.', 'js-support-ticket'),
+                                                    __('Always ask a person first', 'js-support-ticket'))); ?></p>
+                                            <?php } ?>
+                                        </div>
+                                    <?php } ?>
+
                                     <?php if (!empty($jsst_engine['models'])) { ?>
                                         <div class="jsst-frow">
                                             <label class="jsst-flabel" for="jsst-model-<?php echo esc_attr($jsst_id); ?>"><?php echo esc_html(__('Model', 'js-support-ticket')); ?></label>
                                             <div class="jsst-fval">
-                                                <select id="jsst-model-<?php echo esc_attr($jsst_id); ?>" name="model">
+                                                <?php /* Named per engine: with two lists on one form, a shared
+                                                         name sent only the last select's choice. (5.0.4) */ ?>
+                                                <select id="jsst-model-<?php echo esc_attr($jsst_id); ?>" name="model_<?php echo esc_attr($jsst_id); ?>">
                                                     <?php foreach ($jsst_engine['models'] as $jsst_modelid => $jsst_modelname) { ?>
-                                                        <option value="<?php echo esc_attr($jsst_modelid); ?>" <?php selected($jsst_model, $jsst_modelid); ?>><?php echo esc_html($jsst_modelname); ?></option>
+                                                        <option value="<?php echo esc_attr($jsst_modelid); ?>" <?php selected($jsst_engine['model'], $jsst_modelid); ?>><?php echo esc_html($jsst_modelname); ?></option>
                                                     <?php } ?>
                                                 </select>
                                             </div>
                                         </div>
                                     <?php } ?>
 
+                                    <?php /* With no Zywrap key yet the account form above is the way
+                                             in, so the key box is folded away for anybody who already
+                                             has one - and its hint says where a key comes from. */
+                                    $jsst_keyfold = ($jsst_id === 'zywrap' && $jsst_zysignup);
+                                    $jsst_keyhint = $jsst_keyfold
+                                        ? __('A key from the API keys page of your Zywrap account.', 'js-support-ticket')
+                                        : $jsst_engine['keyhint'];
+                                    if ($jsst_keyfold) { ?>
+                                        <details class="jsst-details jsst-frow-full">
+                                            <summary><?php echo esc_html(__('I already have an API key', 'js-support-ticket')); ?></summary>
+                                            <div class="jsst-details-body">
+                                    <?php } ?>
                                     <div class="jsst-frow">
                                         <label class="jsst-flabel" for="jsst-key-<?php echo esc_attr($jsst_id); ?>"><?php echo esc_html(__('Key', 'js-support-ticket')); ?></label>
                                         <div class="jsst-fval">
                                             <input type="password" id="jsst-key-<?php echo esc_attr($jsst_id); ?>" name="key_<?php echo esc_attr($jsst_id); ?>" value="" autocomplete="off"
-                                                   placeholder="<?php echo esc_attr($jsst_engine['stored'] !== '' ? $jsst_engine['stored'] : $jsst_engine['keyhint']); ?>" />
+                                                   placeholder="<?php echo esc_attr($jsst_engine['stored'] !== '' ? $jsst_engine['stored'] : $jsst_keyhint); ?>" />
                                         </div>
                                         <p class="jsst-fhelp">
                                             <?php if ($jsst_engine['stored'] !== '') {
-                                                echo esc_html(__('A key is stored. Leave this empty to keep it.', 'js-support-ticket')); ?>
-                                                <a href="<?php echo esc_url($jsst_forget); ?>"><?php echo esc_html(__('Forget it', 'js-support-ticket')); ?></a>
-                                            <?php } else {
-                                                echo esc_html($jsst_engine['keyhint']);
-                                                /* The old Zywrap dashboard's "get a key" link now lives here,
-                                                   where the key is actually entered. */
-                                                if ($jsst_id === 'zywrap') { ?>
-                                                    <a href="https://zywrap.com/register" target="_blank" rel="noopener"><?php echo esc_html(__('Get a free Zywrap key', 'js-support-ticket')); ?></a>
+                                                echo esc_html(__('A key is stored. Leave this empty to keep it.', 'js-support-ticket'));
+                                                /* Zywrap's goes with Disconnect, above, which clears the account too. */
+                                                if ($jsst_id !== 'zywrap' || empty($jsst_zywrap['available'])) { ?>
+                                                    <a href="<?php echo esc_url($jsst_forget); ?>"><?php echo esc_html(__('Forget it', 'js-support-ticket')); ?></a>
+                                                <?php }
+                                            } else {
+                                                echo esc_html($jsst_keyhint);
+                                                if ($jsst_keyfold) { ?>
+                                                    <a href="<?php echo esc_url(JSSTaiengine::zywrapUrl('dashboard/apikeys')); ?>" target="_blank" rel="noopener"><?php echo esc_html(__('API keys', 'js-support-ticket')); ?></a>
+                                                <?php }
+                                                /* The old Zywrap dashboard's "get a key" link, where the
+                                                   account form above is not there to make one. */
+                                                if ($jsst_id === 'zywrap' && !$jsst_keyfold) { ?>
+                                                    <a href="<?php echo esc_url(JSSTaiengine::zywrapUrl('register')); ?>" target="_blank" rel="noopener"><?php echo esc_html(__('Get a free Zywrap key', 'js-support-ticket')); ?></a>
                                                 <?php }
                                             } ?>
                                         </p>
                                     </div>
+                                    <?php if ($jsst_keyfold) { ?>
+                                            </div>
+                                        </details>
+                                    <?php } ?>
                                 </div>
                             </fieldset>
                         <?php } ?>
@@ -1003,4 +1191,107 @@ $jsst_settingtabs_js = "
 })();
 ";
 wp_add_inline_script('js-support-ticket-main-js', $jsst_settingtabs_js);
+
+/* The Zywrap sign-up, only where its form was drawn. Both steps post to this
+   site's own admin-ajax.php; the PKCE verifier never reaches the browser. On
+   success the page is drawn again, connected, on the same tab. */
+if ($jsst_zysignup) {
+    $jsst_zysignup_js = "
+(function () {
+    var box = document.querySelector('[data-jsst-zysignup]');
+    if (!box || !window.fetch || !window.FormData) { return; }
+    var cfg = " . wp_json_encode(array(
+        'ajaxurl' => admin_url('admin-ajax.php'),
+        'nonce'   => wp_create_nonce('jsst-aiagent-zywrap'),
+        'i18n'    => array(
+            /* translators: %s: an e-mail address */
+            'sentNew'      => __('Zywrap has e-mailed a 6-digit code to %s. Enter it below to finish creating your account.', 'js-support-ticket'),
+            /* translators: %s: an e-mail address */
+            'sentExisting' => __('Welcome back. Zywrap has e-mailed a 6-digit code to %s. Enter it below to connect this site to your account.', 'js-support-ticket'),
+            'resent'       => __('A new code is on its way.', 'js-support-ticket'),
+            'working'      => __('One moment...', 'js-support-ticket'),
+            'connected'    => __('Connected. Reloading...', 'js-support-ticket'),
+            'failed'       => __('Something went wrong. Please try again.', 'js-support-ticket'),
+            'needAccept'   => __('Tick the box to agree to the Zywrap Terms of Service and Privacy Policy first.', 'js-support-ticket'),
+        ),
+    )) . ";
+    var t = cfg.i18n;
+    var email = document.getElementById('jsst-zyemail');
+    var name = document.getElementById('jsst-zyname');
+    var accept = document.getElementById('jsst-zyaccept');
+    var code = document.getElementById('jsst-zycode');
+    var msg = box.querySelector('[data-jsst-zymsg]');
+    var busy = false;
+    function step(which) {
+        Array.prototype.forEach.call(box.querySelectorAll('[data-jsst-zystep]'), function (el) {
+            el.hidden = (el.getAttribute('data-jsst-zystep') !== which);
+        });
+    }
+    function say(text, bad) {
+        msg.textContent = text || '';
+        msg.classList.toggle('jsst-fhelp-warn', !!bad);
+    }
+    function wait(on) {
+        busy = on;
+        Array.prototype.forEach.call(box.querySelectorAll('button'), function (b) { b.disabled = on; });
+        if (on) { say(t.working); }
+    }
+    function post(action, fields) {
+        var body = new FormData();
+        body.append('action', action);
+        body.append('_wpnonce', cfg.nonce);
+        Object.keys(fields).forEach(function (k) { body.append(k, fields[k]); });
+        return fetch(cfg.ajaxurl, { method: 'POST', credentials: 'same-origin', body: body })
+            .then(function (r) { return r.json(); });
+    }
+    function refused(res) {
+        var data = (res && res.data) || {};
+        say(data.message || t.failed, true);
+        /* Two-factor accounts have to use the browser connect: point at it. */
+        if (data.code === 'use_browser_connect') {
+            var link = box.querySelector('[data-jsst-zybrowser]');
+            if (link) { link.focus(); }
+        }
+        /* A code that can no longer be used means starting again from the e-mail. */
+        if (data.code === 'code_unavailable' || data.code === 'expired_code') { step('email'); }
+    }
+    function send(again) {
+        if (busy) { return; }
+        if (!accept.checked) { step('email'); say(t.needAccept, true); accept.focus(); return; }
+        wait(true);
+        post('jsst_zywrap_signup_start', { email: email.value.trim(), name: name.value.trim(), accept: '1' }).then(function (res) {
+            wait(false);
+            if (!res || !res.success) { refused(res); return; }
+            box.querySelector('[data-jsst-zysent]').textContent = (res.data.existingAccount ? t.sentExisting : t.sentNew).replace('%s', res.data.email);
+            step('code');
+            say(again ? t.resent : '');
+            code.value = '';
+            code.focus();
+        }).catch(function () { wait(false); say(t.failed, true); });
+    }
+    function verify() {
+        if (busy) { return; }
+        wait(true);
+        post('jsst_zywrap_signup_verify', { code: code.value }).then(function (res) {
+            if (!res || !res.success) { wait(false); refused(res); return; }
+            say(t.connected);
+            window.location.hash = 'AIEngine';
+            window.location.reload();
+        }).catch(function () { wait(false); say(t.failed, true); });
+    }
+    box.querySelector('[data-jsst-zysend]').addEventListener('click', function () { send(false); });
+    box.querySelector('[data-jsst-zyresend]').addEventListener('click', function () { send(true); });
+    box.querySelector('[data-jsst-zyverify]').addEventListener('click', verify);
+    box.querySelector('[data-jsst-zyback]').addEventListener('click', function () { step('email'); say(''); email.focus(); });
+    /* Enter in these must not submit the engine form they sit inside. */
+    [email, name].forEach(function (el) {
+        el.addEventListener('keydown', function (e) { if (e.key === 'Enter') { e.preventDefault(); send(false); } });
+    });
+    code.addEventListener('keydown', function (e) { if (e.key === 'Enter') { e.preventDefault(); verify(); } });
+    /* Six digits typed or pasted: no need to press Connect. */
+    code.addEventListener('input', function () { if (code.value.replace(/[^0-9]/g, '').length === 6) { verify(); } });
+})();
+";
+    wp_add_inline_script('js-support-ticket-main-js', $jsst_zysignup_js);
+}
 ?>

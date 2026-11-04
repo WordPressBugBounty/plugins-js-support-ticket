@@ -1759,6 +1759,11 @@ div.js-ticket-wrapper .js-ticket-toparea {
 @media (max-width: 480px) {
     div.js-ticket-top-cirlce-count-wrp > div.js-myticket-link { flex: 1 1 45%; }
     div.js-ticket-top-cirlce-count-wrp span.js-ticket-circle-count-text { font-size: 0.62em; }
+    /* On a phone the avatar takes a full row, so the ticket details go on the
+       row under it. The "flex: 1 1 0" above came after the phone rule and won:
+       the details shared the avatar\'s row at 0px wide and ran down the card\'s
+       edge one letter per line (reported 2 November 2026). */
+    div.js-ticket-wrapper .js-ticket-toparea { flex: 1 1 100%; width: 100%; }
 }
 ';
 

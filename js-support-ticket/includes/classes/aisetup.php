@@ -468,7 +468,9 @@ class JSSTaisetup {
     /**
      * @param array $jsst_context Optional. 'channel' => 'chat' asks for a short
      *                            chat-style answer; 'history' is the
-     *                            conversation so far as plain text.
+     *                            conversation so far as plain text;
+     *                            'subject' is the ticket's subject, when
+     *                            there is one.
      */
     public static function preview($jsst_question, $jsst_remember = true, $jsst_context = array()) {
         $jsst_question = trim(wp_strip_all_tags((string) $jsst_question));
@@ -498,7 +500,8 @@ class JSSTaisetup {
 
         $jsst_answer['available'] = true;
         $jsst_answer['question']  = $jsst_question;
-        $jsst_answer['verdict']   = self::verdict($jsst_question, $jsst_answer);
+        $jsst_subject = isset($jsst_context['subject']) ? trim(wp_strip_all_tags((string) $jsst_context['subject'])) : '';
+        $jsst_answer['verdict']   = self::verdict($jsst_question, $jsst_answer, $jsst_subject);
         return $jsst_answer;
     }
 
@@ -508,13 +511,15 @@ class JSSTaisetup {
      * Asked in the same order record() asks it, so the wizard cannot say one
      * thing and the live path do another.
      */
-    private static function verdict($jsst_question, $jsst_answer) {
+    private static function verdict($jsst_question, $jsst_answer, $jsst_subject = '') {
         if (empty($jsst_answer['answered'])) {
             return array('state' => 'none',
                          'text' => esc_html(__('Nothing would have been written: this question is not covered by the approved sources.', 'js-support-ticket')));
         }
 
-        if (class_exists('JSSTaireview') && JSSTaireview::neverAutomate($jsst_question)) {
+        /* The subject as well, as the live rollout check asks it: "Refund"
+           over a polite paragraph is still a refund. */
+        if (class_exists('JSSTaireview') && JSSTaireview::neverAutomate(trim($jsst_subject . ' ' . $jsst_question))) {
             return array('state' => 'never',
                          'text' => esc_html(__('This kind of question is never answered automatically, whatever the engine thought of its own answer. It would always go to a person.', 'js-support-ticket')));
         }

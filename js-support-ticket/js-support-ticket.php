@@ -5,7 +5,7 @@
   Plugin URI: https://www.jshelpdesk.com
   Description: JS Help Desk is a trusted open source ticket system. JS Help Desk is a simple, easy to use, web-based customer support system. User can create ticket from front-end. JS Help Desk comes packed with lot features than most of the expensive(and complex) support ticket system on market. JS Help Desk provide you best industry help desk system.
   Author: JS Help Desk
-  Version: 5.0.3
+  Version: 5.0.4
   Requires at least: 5.5
   Requires PHP: 7.4
   Text Domain: js-support-ticket
@@ -144,6 +144,10 @@ class jssupportticket {
         JSSTairollout::registerHooks(); // Roadmap 6.0-AI-06
         JSSTaiusage::registerHooks();   // Roadmap 6.0-AI-07
         JSSTaigaps::registerHooks();    // Roadmap 6.0-AI-12
+        if (class_exists('JSSTzywrapconnect')) {
+            JSSTzywrapconnect::registerHooks(); // 5.0.4: Zywrap sign-up and connect
+        }
+        JSSTverification::registerHooks(); // 5.0.4: a fresh challenge for cached forms
         // Core owns the widgets now; the legacy add-on's copies are unhooked by
         // suppressLegacyHooks() above, so nothing renders twice.
         // (Roadmap 4.0-CORE-09, 4.0-CORE-19)
@@ -155,7 +159,7 @@ class jssupportticket {
         self::$jsst_data = array();
         self::$_search = array();
         self::$_captcha = array();
-        self::$_currentversion = '503';
+        self::$_currentversion = '504';
         self::$_addon_query = array('select'=>'','join'=>'','where'=>'');
         self::$_jshdsession = JSSTincluder::getObjectClass('wphdsession');
         global $wpdb;
@@ -1636,9 +1640,9 @@ class jssupportticket {
         /* The setup checklist. It reads the five registers above and stores
            almost nothing of its own, so it loads after all of them - and not on
            a customer's request, which has no reason to ask how far the setup
-           has got. The CLI is included for the same reason the benchmark is:
-           the test suite is not wp-admin, and a class nothing can load is a
-           class nothing can test. (Roadmap 6.0-AI-11) */
+           has got. The CLI is included because the test suite is not
+           wp-admin, and a class nothing can load is a class nothing can test.
+           (Roadmap 6.0-AI-11) */
         /* Everywhere now: the live chat's AI first responder and the agent
            console's "Suggest (AI)" ask JSSTaisetup::preview(), and an agent
            working on the front-end portal is not in wp-admin. Loaded only
@@ -1649,12 +1653,16 @@ class jssupportticket {
         if (is_admin() || (defined('WP_CLI') && WP_CLI) || PHP_SAPI === 'cli') {
             include_once __DIR__ . '/includes/classes/ainav.php';
         }
-        /* The grounding benchmark. Admin and CLI only - nothing on a customer
-           request has any reason to load it. (Roadmap 6.0-AI-05) */
-        if (is_admin() || (defined('WP_CLI') && WP_CLI) || PHP_SAPI === 'cli') {
-            include_once __DIR__ . '/includes/classes/aibenchmark.php';
-        }
         include_once __DIR__ . '/includes/classes/aiengine.php';
+        // The Zywrap credits a paid licence adds each month. Loaded with the
+        // engine: a Zywrap reply updates the balance on any request. (5.0.4)
+        include_once __DIR__ . '/includes/classes/aicredits.php';
+        /* Creating or connecting a Zywrap account from Engine & key. Admin
+           only, like the AI menu: its two AJAX steps and the browser coming
+           back from zywrap.com all arrive in wp-admin. (5.0.4) */
+        if (is_admin() || (defined('WP_CLI') && WP_CLI) || PHP_SAPI === 'cli') {
+            include_once __DIR__ . '/includes/classes/zywrapconnect.php';
+        }
         include_once __DIR__ . '/includes/classes/copilot.php';
         /* Routing and mood, read before anybody opens the ticket. Loaded
            outside is_admin() because its one automatic path runs under cron and

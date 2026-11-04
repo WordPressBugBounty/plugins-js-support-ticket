@@ -34,7 +34,7 @@ $jsst_bymodel   = isset(jssupportticket::$jsst_data['aibymodel']) ? jssupporttic
 $jsst_byfunded  = isset(jssupportticket::$jsst_data['aibyfunded']) ? jssupportticket::$jsst_data['aibyfunded'] : array();
 $jsst_tickets   = isset(jssupportticket::$jsst_data['aitoptickets']) ? jssupportticket::$jsst_data['aitoptickets'] : array();
 $jsst_allowance = isset(jssupportticket::$jsst_data['aiallowance']) ? (int) jssupportticket::$jsst_data['aiallowance'] : 0;
-$jsst_allowused = isset(jssupportticket::$jsst_data['aiallowused']) ? (int) jssupportticket::$jsst_data['aiallowused'] : 0;
+$jsst_allowleft = isset(jssupportticket::$jsst_data['aiallowleft']) ? jssupportticket::$jsst_data['aiallowleft'] : null;
 $jsst_engines   = isset(jssupportticket::$jsst_data['aienginelist']) ? jssupportticket::$jsst_data['aienginelist'] : array();
 $jsst_fallback  = isset(jssupportticket::$jsst_data['aifallback']) ? jssupportticket::$jsst_data['aifallback'] : '';
 $jsst_unpriced  = isset(jssupportticket::$jsst_data['aiunpriced']) ? jssupportticket::$jsst_data['aiunpriced'] : array();
@@ -72,6 +72,9 @@ JSSTmessage::getMessage();
                                         : esc_html(__('Nearly there', 'js-support-ticket')); ?>
                                 </span>
                                 <?php echo esc_html($jsst_alert['text']); ?>
+                                <?php if (!empty($jsst_alert['link'])) { ?>
+                                    <a href="<?php echo esc_url($jsst_alert['link']); ?>" target="_blank" rel="noopener"><?php echo esc_html($jsst_alert['linktext']); ?></a>
+                                <?php } ?>
                             </p>
                         <?php } ?>
                     </div>
@@ -98,11 +101,11 @@ JSSTmessage::getMessage();
                                 <span class="jsst-metric-label"><?php echo esc_html(__('Tokens', 'js-support-ticket')); ?></span>
                             </div>
                         </div>
-                        <?php if ($jsst_allowance > 0) { ?>
+                        <?php if ($jsst_allowance > 0 && $jsst_allowleft !== null) { ?>
                             <p class="jsst-hint"><?php echo esc_html(sprintf(
-                                /* translators: 1: requests used, 2: the plan's monthly allowance */
-                                __('%1$s of %2$s AI requests included with your licence used this month. Those cost you nothing and are not in the figure above.', 'js-support-ticket'),
-                                number_format_i18n($jsst_allowused), number_format_i18n($jsst_allowance)
+                                /* translators: 1: credits left, 2: the licence's monthly Zywrap credits */
+                                __('%1$s of the %2$s Zywrap credits included with your licence are left this month. They cost you nothing and are not in the figure above.', 'js-support-ticket'),
+                                number_format_i18n((int) $jsst_allowleft), number_format_i18n($jsst_allowance)
                             )); ?></p>
                         <?php } ?>
                         <?php if (!empty($jsst_month['unpriced'])) { ?>

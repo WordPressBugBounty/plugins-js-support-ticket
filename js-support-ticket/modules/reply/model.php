@@ -229,7 +229,9 @@ class JSSTreplyModel {
         if(isset($jsst_data['ticketviaautopilot']) && $jsst_data['ticketviaautopilot'] == 1){
             $jsst_currentUserName = $jsst_data['name'];
         }
-        $jsst_data['id'] = isset($jsst_data['id']) ? $jsst_data['id'] : '';
+        /* Always a new row. No caller edits through here, and a kept id let the
+           table overwrite any reply by number (security report, 1 Nov 2026). */
+        $jsst_data['id'] = '';
         $jsst_data['status'] = isset($jsst_data['status']) ? $jsst_data['status'] : '';
         $jsst_data['closeonreply'] = isset($jsst_data['closeonreply']) ? $jsst_data['closeonreply'] : '';
         $jsst_data['ticketviaemail'] = isset($jsst_data['ticketviaemail']) ? $jsst_data['ticketviaemail'] : 0;

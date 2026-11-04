@@ -51,6 +51,12 @@ class JSSTreplyController {
         /* Set by email piping, which calls the model directly. From a browser
            it would switch off the ownership and closed-ticket checks. */
         unset($jsst_data['ticketviaemail'], $jsst_data['staffid']);
+        /* This route only adds a reply; editing one is saveeditedreply, which
+           checks the reply itself. A posted id made the table update that row -
+           anyone's reply, moved onto the sender's ticket - and a posted uid
+           named any user as the author (security report, 1 November 2026). */
+        unset($jsst_data['id']);
+        $jsst_data['uid'] = JSSTincluder::getObjectClass('user')->uid();
         JSSTincluder::getJSModel('reply')->storeReplies($jsst_data);
         if (is_admin()) {
             $jsst_url = admin_url("admin.php?page=ticket&jstlay=ticketdetail&jssupportticketid=" . $jsst_ticketid);

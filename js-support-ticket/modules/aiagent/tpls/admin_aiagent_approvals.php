@@ -120,6 +120,10 @@ JSSTmessage::getMessage();
                             <span class="jsst-metric-value jsst-num"><?php echo esc_html(number_format_i18n(isset($jsst_counts['retracted']) ? (int) $jsst_counts['retracted'] : 0)); ?></span>
                             <span class="jsst-metric-label"><?php echo esc_html(__('Withdrawn', 'js-support-ticket')); ?></span>
                         </div>
+                        <div class="jsst-metric jsst-metric-quiet">
+                            <span class="jsst-metric-value jsst-num"><?php echo esc_html(number_format_i18n(isset($jsst_counts['answered']) ? (int) $jsst_counts['answered'] : 0)); ?></span>
+                            <span class="jsst-metric-label"><?php echo esc_html(__('Answered by a person', 'js-support-ticket')); ?></span>
+                        </div>
                     </div>
 
                     <form class="jsst-form" method="post" action="<?php echo esc_url($jsst_saveurl); ?>">

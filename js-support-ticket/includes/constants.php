@@ -25,6 +25,9 @@ if (!defined('JSST_ALLOWED_TAGS')) {
             'data-token' => array(),
             'data-bits' => array(),
             'data-solved' => array(),
+            // Where the browser asks for a fresh token on a cached page. (5.0.4)
+            'data-context' => array(),
+            'data-refresh' => array(),
             'aria-hidden' => array(),
         ),
         // The self-hosted verification falls back to the arithmetic question

@@ -75,10 +75,36 @@ class JSSTaiagentModel {
     }
 
     function getSettings() {
+        /* Whether the local address is on the internet decides the lane that
+           engine runs in, so it is looked up before the engines are read -
+           here and on save, never on a request that asks the engine anything. */
+        if (class_exists('JSSTaiengine')) {
+            JSSTaiengine::checkLocalAddress();
+        }
         jssupportticket::$jsst_data['aipolicy']  = self::policyState();
         jssupportticket::$jsst_data['aiengines'] = self::engineState();
+        jssupportticket::$jsst_data['aiengines']['localpublic'] = class_exists('JSSTaiengine') && JSSTaiengine::localIsPublic();
+        jssupportticket::$jsst_data['aizywrap']  = self::zywrapState();
         jssupportticket::$jsst_data['aitest']    = get_transient('jsst_ai_lasttest');
         return;
+    }
+
+    /**
+     * The Zywrap card: the account it is connected to, and the model behind it.
+     *
+     * Settings only. The account is what Zywrap said when the site connected;
+     * the models are the synced catalogue's.
+     */
+    static function zywrapState() {
+        $jsst_connect = class_exists('JSSTzywrapconnect');
+        return array(
+            'available' => $jsst_connect,
+            'account'   => $jsst_connect ? JSSTzywrapconnect::account() : null,
+            'models'    => $jsst_connect ? JSSTzywrapconnect::models() : array(),
+            'model'     => trim((string) get_option('jsst_zywrap_default_model', '')),
+            // The monthly credits a paid licence adds; asks jshelpdesk.com at most twice a day.
+            'credits'   => class_exists('JSSTaicredits') ? JSSTaicredits::state() : null,
+        );
     }
 
     /**
@@ -294,8 +320,12 @@ class JSSTaiagentModel {
         jssupportticket::$jsst_data['aibymodel']  = $jsst_have ? JSSTaiusage::breakdown('model', 'month') : array();
         jssupportticket::$jsst_data['aibyfunded'] = $jsst_have ? JSSTaiusage::breakdown('funded', 'month') : array();
         jssupportticket::$jsst_data['aitoptickets'] = $jsst_have ? JSSTaiusage::topTickets('month') : array();
+        // Refreshes the licence's monthly Zywrap credits at most twice a day.
+        if (class_exists('JSSTaicredits')) {
+            JSSTaicredits::state();
+        }
         jssupportticket::$jsst_data['aiallowance'] = $jsst_have ? JSSTaiusage::allowance() : 0;
-        jssupportticket::$jsst_data['aiallowused'] = $jsst_have ? JSSTaiusage::allowanceUsed() : 0;
+        jssupportticket::$jsst_data['aiallowleft'] = $jsst_have ? JSSTaiusage::allowanceLeft() : null;
         jssupportticket::$jsst_data['aiengines']   = self::engineState();
         jssupportticket::$jsst_data['aifallback']  = class_exists('JSSTaiengine') ? JSSTaiengine::fallbackId() : '';
         jssupportticket::$jsst_data['aienginelist'] = class_exists('JSSTaiengine') ? JSSTaiengine::engines() : array();
@@ -446,6 +476,8 @@ class JSSTaiagentModel {
                 'nokey'       => !empty($jsst_def['nokey']),
                 'recommended' => !empty($jsst_def['recommended']),
                 'models'      => isset($jsst_def['models']) ? $jsst_def['models'] : array(),
+                // This engine's own choice, whichever engine is in use. (5.0.4)
+                'model'       => empty($jsst_def['models']) ? '' : JSSTaiengine::model($jsst_id),
                 'configured'  => JSSTaiengine::configured($jsst_id),
                 'laneopen'    => class_exists('JSSTaipolicy') ? JSSTaipolicy::allows(isset($jsst_def['lane']) ? $jsst_def['lane'] : 'hosted') : true,
                 'stored'      => JSSTaiengine::keyHint($jsst_id),
@@ -453,7 +485,6 @@ class JSSTaiagentModel {
         }
         return array(
             'current'  => JSSTaiengine::currentId(),
-            'model'    => JSSTaiengine::model(),
             'engines'  => $jsst_rows,
             'endpoint' => (string) get_option(JSSTaiengine::OPT_LOCAL_ENDPOINT, ''),
             'localmodel' => (string) get_option(JSSTaiengine::OPT_LOCAL_MODEL, ''),

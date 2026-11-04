@@ -46,7 +46,7 @@ JSSTmessage::getMessage();
                         
                         <?php if (!$is_connected) : ?>
                             <div class="js-ticket-zywrap-flex-gap">
-                                <a href="https://zywrap.com/register" target="_blank" class="js-ticket-zywrap-btn-primary">
+                                <a href="<?php echo esc_url(admin_url('admin.php?page=aiagent&jstlay=aiagent_settings') . '#AIEngine'); ?>" class="js-ticket-zywrap-btn-primary">
                                     <?php echo esc_html(__('Claim 10,000 Free Credits →', 'js-support-ticket')); ?>
                                 </a>
                                 <a href="<?php echo esc_url(admin_url('admin.php?page=zywrap&jstlay=zywrap_settings')); ?>" class="js-ticket-zywrap-btn-outline">
@@ -180,7 +180,7 @@ JSSTmessage::getMessage();
                             <a href="<?php echo esc_url(admin_url('admin.php?page=zywrap&jstlay=zywrap_playground')); ?>" class="js-ticket-zywrap-link-card">
                                 <span class="dashicons dashicons-editor-code" aria-hidden="true"></span> <?php echo esc_html(__('Playground', 'js-support-ticket')); ?>
                             </a>
-                            <a href="https://www.zywrap.com/docs" target="_blank" class="js-ticket-zywrap-link-card">
+                            <a href="<?php echo esc_url(JSSTaiengine::zywrapUrl('docs')); ?>" target="_blank" class="js-ticket-zywrap-link-card">
                                 <span class="dashicons dashicons-media-document" aria-hidden="true"></span> <?php echo esc_html(__('Documentation', 'js-support-ticket')); ?>
                             </a>
                         </div>

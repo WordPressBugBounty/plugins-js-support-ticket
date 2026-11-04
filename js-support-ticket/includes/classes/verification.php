@@ -181,6 +181,43 @@ class JSSTverification {
         }
     }
 
+    /* ------------------------------------------------------------------ *
+     * A fresh challenge for a cached page (5.0.4)
+     * ------------------------------------------------------------------ */
+
+    public static function registerHooks() {
+        add_action('wp_ajax_jsst_vtoken', array(__CLASS__, 'ajaxToken'));
+        add_action('wp_ajax_nopriv_jsst_vtoken', array(__CLASS__, 'ajaxToken'));
+    }
+
+    /** The forms that may ask for one. A pack with a form of its own adds it here. */
+    private static function contexts() {
+        return (array) apply_filters('jsst_verification_contexts', array('ticket', 'register'));
+    }
+
+    /**
+     * The token in the markup is minted when the page is drawn, and a cached
+     * page hands every visitor that same one. It is single use, so only the
+     * first visitor got through ("This form has already been submitted"), and
+     * after three hours nobody did. The browser asks here before solving;
+     * admin-ajax.php is not page-cached.
+     *
+     * No nonce and no account: a token is what loading the page uncached hands
+     * out anyway, proves nothing on its own, and every check is made on submit.
+     */
+    public static function ajaxToken() {
+        nocache_headers();
+        $jsst_context = sanitize_key((string) JSSTrequest::getVar('context', 'post', ''));
+        if (self::provider() !== 'builtin' || !in_array($jsst_context, self::contexts(), true)) {
+            wp_send_json_error(null, 400);
+        }
+        $jsst_self = new self();
+        wp_send_json_success(array(
+            'token' => $jsst_self->issueToken($jsst_context),
+            'bits'  => self::powBits(),
+        ));
+    }
+
     /**
      * A fresh signed challenge. Carries the issue time and the form context, so
      * a token minted for one form cannot be replayed on another.
@@ -258,7 +295,9 @@ class JSSTverification {
         $jsst_out .= '</div>';
         $jsst_out .= '<input type="hidden" name="jsst_vtoken" class="jsst-vtoken" value="' . esc_attr($jsst_token) . '" />';
         $jsst_out .= '<input type="hidden" name="jsst_vpow" class="jsst-vpow" value="" />';
-        $jsst_out .= '<div class="jsst-verification-work" data-token="' . esc_attr($jsst_token) . '" data-bits="' . esc_attr($jsst_bits) . '">';
+        // data-refresh/-context: the browser asks for a fresh token first; see ajaxToken().
+        $jsst_out .= '<div class="jsst-verification-work" data-token="' . esc_attr($jsst_token) . '" data-bits="' . esc_attr($jsst_bits) . '"'
+            . ' data-context="' . esc_attr($jsst_context) . '" data-refresh="' . esc_url(admin_url('admin-ajax.php')) . '">';
         $jsst_out .= '<span class="jsst-verification-status" role="status">' . esc_html(__('Checking your browser…', 'js-support-ticket')) . '</span>';
         $jsst_out .= '</div>';
         // No JavaScript: the arithmetic question, which is verified through the

@@ -12,7 +12,9 @@ class JSSTzywrapModel {
      * be the engine the site chose, the same answer every other AI tool gives.
      */
     public static function usable() {
-        if (get_option('jsst_zywrap_api_key', '') === '') {
+        /* Every Zywrap key read goes through the engine registry, so a key from
+           a connected account works here as well as one typed on this screen. */
+        if (JSSTaiengine::apiKey('zywrap') === '') {
             return false;
         }
         if (class_exists('JSSTaiengine') && JSSTaiengine::currentId() !== 'zywrap') {
@@ -41,6 +43,11 @@ class JSSTzywrapModel {
 
         // Through the engine registry, so AI Agent and this screen hold one key.
         JSSTaiengine::saveKey('zywrap', sanitize_text_field($api_key));
+        // A key typed here replaces a connected account's, so its summary no longer applies.
+        delete_option('jsst_zywrap_account');
+        if (class_exists('JSSTaicredits')) {
+            JSSTaicredits::forget();
+        }
         wp_send_json_success(array('message' => __('API Key saved successfully.', 'js-support-ticket')));
     }
 
@@ -63,6 +70,7 @@ class JSSTzywrapModel {
 
         // Save safely
         update_option('jsst_zywrap_default_model', sanitize_text_field($default_model));
+        delete_transient('jsst_zywrap_model_gone');
         update_option('jsst_zywrap_default_lang', sanitize_text_field($default_lang));
 
         // Return success
@@ -82,7 +90,7 @@ class JSSTzywrapModel {
             return;
         }
 
-        $api_key = get_option('jsst_zywrap_api_key');
+        $api_key = JSSTaiengine::apiKey('zywrap');
         if (empty($api_key)) {
             wp_send_json_error(array('message' => __('Please save your API key first.', 'js-support-ticket')));
         }
@@ -538,22 +546,6 @@ class JSSTzywrapModel {
             return;
         }
 
-        /*
-        // SECURITY: ONLY ADMINS OR JSST STAFF CAN ACCESS
-        $is_admin = current_user_can('manage_options');
-        $is_staff = false;
-        
-        // Check if the JSST Agent add-on is active and the user is an agent
-        if (in_array('agent', jssupportticket::$_active_addons)) {
-            $is_staff = JSSTincluder::getJSModel('agent')->isUserStaff();
-        }
-
-        if (!$is_admin && !$is_staff) {
-            wp_send_json_error(array('message' => 'Security Error: Unauthorized access. Staff members only.'));
-            return;
-        }
-        */
-
         $use_case_code = JSSTrequest::getVar('use_case_code');
         $ticket_id = absint( JSSTrequest::getVar('ticket_id') ); // We now receive the Ticket ID
 
@@ -590,23 +582,7 @@ class JSSTzywrapModel {
             return;
         }
 
-        /*
-        // SECURITY: ONLY ADMINS OR JSST STAFF CAN ACCESS
-        $is_admin = current_user_can('manage_options');
-        $is_staff = false;
-        
-        // Check if the JSST Agent add-on is active and the user is an agent
-        if (in_array('agent', jssupportticket::$_active_addons)) {
-            $is_staff = JSSTincluder::getJSModel('agent')->isUserStaff();
-        }
-
-        if (!$is_admin && !$is_staff) {
-            wp_send_json_error(array('message' => 'Security Error: Unauthorized access. Staff members only.'));
-            return;
-        }
-        */
-
-        $api_key = get_option('jsst_zywrap_api_key');
+        $api_key = JSSTaiengine::apiKey('zywrap');
         if (empty($api_key)) {
             wp_send_json_error(array('message' => __('API Key is missing.', 'js-support-ticket')));
         }
@@ -633,6 +609,16 @@ class JSSTzywrapModel {
         $sanitized_vars = array();
         foreach ($variables as $k => $v) {
             $sanitized_vars[sanitize_text_field($k)] = sanitize_textarea_field($v);
+        }
+
+        /* The same scrub JSSTaiengine applies to everything it sends. This
+           window posts to the vendor itself, and the variables carry the ticket
+           thread, so skipping it here sent the very text the scrub exists for. */
+        if (class_exists('JSSTaipolicy')) {
+            $prompt = JSSTaipolicy::redact($prompt);
+            foreach ($sanitized_vars as $k => $v) {
+                $sanitized_vars[$k] = JSSTaipolicy::redact($v);
+            }
         }
 
         // 4. Build Payload exactly matching the Zywrap SDK Docs
@@ -700,7 +686,7 @@ class JSSTzywrapModel {
                 'Content-Type'  => 'application/json'
             ),
             'body'      => wp_json_encode($body),
-            'timeout'   => 600,
+            'timeout'   => 60, // Somebody is waiting for this answer.
             'sslverify' => true,
         ));
         $latency_ms = round((microtime(true) - $start_time) * 1000);
@@ -834,6 +820,7 @@ class JSSTzywrapModel {
         // Empty means "keep the stored key", never "delete it" (saveKey() rule).
         JSSTaiengine::saveKey('zywrap', $api_key);
         update_option('jsst_zywrap_default_model', $default_model);
+        delete_transient('jsst_zywrap_model_gone');
         update_option('jsst_zywrap_default_lang', $default_lang);
 
         wp_send_json_success(array('message' => __('Global AI Settings saved successfully.', 'js-support-ticket')));
@@ -1053,17 +1040,38 @@ class JSSTzywrapModel {
             return;
         }
 
-        $apiKey = get_option('jsst_zywrap_api_key', '');
+        $apiKey = JSSTaiengine::apiKey('zywrap');
         if (empty($apiKey)) wp_send_json_error(['message' => __('API Key is not configured.', 'js-support-ticket')]);
+        // The same answer the reply window gives: Zywrap chosen and allowed.
+        if (!self::usable()) {
+            wp_send_json_error(array('message' => __('Zywrap is not the AI engine in use, so nothing was sent.', 'js-support-ticket')));
+        }
 
         $model = sanitize_text_field(JSSTrequest::getVar('model'));
         $wrapperCode = sanitize_text_field(JSSTrequest::getVar('wrapperCode'));
-        
+
         $prompt = wp_unslash(JSSTrequest::getVar('prompt'));
         $language = sanitize_text_field(JSSTrequest::getVar('language'));
-        
+
         $variables = json_decode(wp_unslash(JSSTrequest::getVar('variables', '[]')), true);
         $overrides = json_decode(wp_unslash(JSSTrequest::getVar('overrides', '[]')), true);
+
+        /* Scrubbed like everything JSSTaiengine sends: text pasted into the
+           Prompt Lab is as likely to hold a customer's details as a ticket. */
+        if (class_exists('JSSTaipolicy')) {
+            // The overrides are merged last, so they must not carry the text back in unscrubbed.
+            if (is_array($overrides)) {
+                unset($overrides['prompt'], $overrides['variables']);
+            }
+            $prompt = JSSTaipolicy::redact($prompt);
+            if (is_array($variables)) {
+                array_walk_recursive($variables, function (&$jsst_value) {
+                    if (is_string($jsst_value)) {
+                        $jsst_value = JSSTaipolicy::redact($jsst_value);
+                    }
+                });
+            }
+        }
 
         $payloadData = [
             'wrapperCodes' => [$wrapperCode], 
@@ -1099,7 +1107,7 @@ class JSSTzywrapModel {
 
         $startTime = microtime(true);
         $response = wp_remote_post('https://api.zywrap.com/v1/proxy', [
-            'timeout' => 600,
+            'timeout' => 60, // Somebody is waiting for this answer.
             'sslverify' => true,
             'headers' => [
                 'Content-Type' => 'application/json',
@@ -1206,7 +1214,7 @@ class JSSTzywrapModel {
         $prefix = jssupportticket::$_db->prefix . "js_ticket_";
         
         $dashboard_data = array(
-            'api_key'     => get_option('jsst_zywrap_api_key', ''),
+            'api_key'     => JSSTaiengine::apiKey('zywrap'),
             'last_sync'   => get_option('jsst_zywrap_last_sync'),
             'total_reqs'  => 0,
             'total_toks'  => 0,
@@ -1265,6 +1273,39 @@ class JSSTzywrapModel {
     public $jsst_lastusage = array();
 
     /**
+     * What kind of failure the last call was - transport, api, empty or
+     * policy - and the HTTP status, so JSSTaiengine can tell "Zywrap did not
+     * answer" (worth the spare engine) from "Zywrap said no" (not).
+     */
+    public $jsst_lastkind = '';
+    public $jsst_lastcode = 0;
+
+    /** The model Zywrap says it ran the last request on. (5.0.4) */
+    public $jsst_lastmodel = '';
+
+    /**
+     * The credit balance a Zywrap reply reports, kept for Engine & key. (5.0.4)
+     *
+     * Without it the screen only knows what the account had when it
+     * connected. A key typed by hand has no account summary, so one is started
+     * with no e-mail address; saving a key clears it again.
+     */
+    public static function noteCredits($jsst_body) {
+        if (!isset($jsst_body['cost']['credits_remaining']) || !is_numeric($jsst_body['cost']['credits_remaining'])) return;
+        $jsst_account = get_option('jsst_zywrap_account');
+        if (!is_array($jsst_account)) {
+            $jsst_account = array('email' => '', 'key_name' => '', 'connected_at' => 0);
+        }
+        $jsst_account['credits']    = (int) floor((float) $jsst_body['cost']['credits_remaining']);
+        $jsst_account['credits_at'] = time();
+        update_option('jsst_zywrap_account', $jsst_account, false);
+        // What is left of the licence's monthly credits, when Zywrap says.
+        if (isset($jsst_body['cost']['plan_credits_remaining']) && class_exists('JSSTaicredits')) {
+            JSSTaicredits::noteRemaining($jsst_body['cost']['plan_credits_remaining']);
+        }
+    }
+
+    /**
      * Read token counts out of a response, under whichever names it uses.
      * Empty when it reports none - which is then logged as "unknown", never
      * as zero.
@@ -1298,7 +1339,9 @@ class JSSTzywrapModel {
 
     private function parseEngineResponse($jsst_raw) {
         $jsst_direct = json_decode((string) $jsst_raw, true);
-        if (is_array($jsst_direct) && (isset($jsst_direct['output']) || isset($jsst_direct['error']))) {
+        /* An error is `error` (the call failed), or `code` with `message` (a key
+           or limit refused it). Both are answers to read, not noise. (5.0.4) */
+        if (is_array($jsst_direct) && (isset($jsst_direct['output']) || isset($jsst_direct['error']) || isset($jsst_direct['code']))) {
             return $jsst_direct;
         }
         $jsst_found = null;
@@ -1314,6 +1357,15 @@ class JSSTzywrapModel {
         return $jsst_found;
     }
 
+    /** The words of a Zywrap error, whichever field they came in. (5.0.4) */
+    private static function errorText($jsst_body) {
+        if (!is_array($jsst_body)) return '';
+        if (isset($jsst_body['error'])) {
+            return is_string($jsst_body['error']) ? $jsst_body['error'] : (string) wp_json_encode($jsst_body['error']);
+        }
+        return isset($jsst_body['message']) ? (string) $jsst_body['message'] : (isset($jsst_body['code']) ? (string) $jsst_body['code'] : '');
+    }
+
     public function callZywrapEngine($api_key, $payload) {
         /* Asked again here even though JSSTaiengine::ask() has already asked.
            This method is public and older than the policy, so it has callers
@@ -1321,8 +1373,12 @@ class JSSTzywrapModel {
            holds for the callers you remembered is not a chokepoint. */
         $this->jsst_lasterror = '';
         $this->jsst_lastusage = array();
+        $this->jsst_lastkind = '';
+        $this->jsst_lastcode = 0;
+        $this->jsst_lastmodel = '';
         if (class_exists('JSSTaipolicy') && !JSSTaipolicy::allows(JSSTaipolicy::LANE_HOSTED)) {
             $this->jsst_lasterror = __('The hosted lane is switched off in AI Agent settings.', 'js-support-ticket');
+            $this->jsst_lastkind = 'policy';
             return false;
         }
 
@@ -1335,6 +1391,22 @@ class JSSTzywrapModel {
             'source'       => 'js-help-desk', // Changed from majestic-support to match JS Help Desk
             'prompt'       => $payload['prompt']
         );
+        /* The wrapper's own inputs, when the caller has them. A wrapper given
+           everything as one prompt has to guess which part is the question
+           and which the documentation; given its variables it applies its
+           own rules to each (instant_knowledge_answer: docs only). */
+        if (!empty($payload['variables']) && is_array($payload['variables'])) {
+            $body['variables'] = (object) $payload['variables'];
+        }
+        foreach (array('toneCode', 'language', 'model') as $jsst_field) {
+            if (!empty($payload[$jsst_field])) {
+                $body[$jsst_field] = (string) $payload[$jsst_field];
+            }
+        }
+        // A model Zywrap said it no longer has is left to Zywrap for a day; see below.
+        if (isset($body['model']) && get_transient('jsst_zywrap_model_gone') === $body['model']) {
+            unset($body['model']);
+        }
 
         $args = array(
             'headers'   => array(
@@ -1342,11 +1414,40 @@ class JSSTzywrapModel {
                 'Content-Type'  => 'application/json'
             ),
             'body'      => wp_json_encode($body),
-            'timeout'   => 600,
+            'timeout'   => 60, // As JSSTaiengine: a hung proxy must not hold a request for ten minutes.
             'sslverify' => true,
         );
 
         $response = wp_remote_post($api_url, $args);
+
+        /* Zywrap retires models, and the catalogue a site synced months ago
+           still lists them. A saved model it no longer has must not stop every
+           AI feature, so the request goes again with the model left to Zywrap,
+           and System Errors says which setting to change. A model that only
+           needs bought credits is skipped for an hour, not a day, so it comes
+           back soon after a top-up; saving the model clears either. (5.0.4) */
+        if (isset($body['model']) && !is_wp_error($response)) {
+            $jsst_check = $this->parseEngineResponse(wp_remote_retrieve_body($response));
+            $jsst_code  = (is_array($jsst_check) && isset($jsst_check['code'])) ? (string) $jsst_check['code'] : '';
+            $jsst_gone  = ($jsst_code === 'model_not_found')
+                || preg_match('/\bmodel\b.*\bnot found\b/i', self::errorText($jsst_check));
+            $jsst_paid  = ($jsst_code === 'model_requires_paid_credits');
+            if ($jsst_gone || $jsst_paid) {
+                set_transient('jsst_zywrap_model_gone', $body['model'], $jsst_paid ? HOUR_IN_SECONDS : DAY_IN_SECONDS);
+                JSSTincluder::getJSModel('systemerror')->addSystemError($jsst_paid
+                    ? sprintf(
+                        /* translators: %s: the code of an AI model */
+                        __('The model "%s" needs bought Zywrap credits, so Zywrap chose one instead. Buy credits on zywrap.com or pick another model under AI Agent > Settings > Engine & key.', 'js-support-ticket'),
+                        $body['model'])
+                    : sprintf(
+                        /* translators: %s: the code of an AI model */
+                        __('Zywrap no longer offers the model "%s", so Zywrap chose one instead. Pick another model under AI Agent > Settings > Engine & key.', 'js-support-ticket'),
+                        $body['model']));
+                unset($body['model']);
+                $args['body'] = wp_json_encode($body);
+                $response = wp_remote_post($api_url, $args);
+            }
+        }
         $latency_ms = round((microtime(true) - $start_time) * 1000);
 
         // Handle connection errors
@@ -1356,27 +1457,63 @@ class JSSTzywrapModel {
             // Use JS Help Desk's native system error logging
             JSSTincluder::getJSModel('systemerror')->addSystemError($error_msg);
             $this->jsst_lasterror = $error_msg;
+            $this->jsst_lastkind = 'transport';
             return false;
         }
 
         $raw_response = wp_remote_retrieve_body($response);
         $body_json = $this->parseEngineResponse($raw_response);
+        $this->jsst_lastcode = (int) wp_remote_retrieve_response_code($response);
 
         // Handle API Structural Errors (e.g., Insufficient credits, invalid wrapper code)
-        if ($body_json && isset($body_json['error'])) {
+        if ($body_json && !isset($body_json['output']) && (isset($body_json['error']) || isset($body_json['code']))) {
             /* translators: %s: the error message returned by the Zywrap Engine API */
-            $error_msg = sprintf( esc_html__( 'Zywrap Engine API Error: %s', 'js-support-ticket' ), esc_html( $body_json['error'] ) );
+            $error_msg = sprintf( esc_html__( 'Zywrap Engine API Error: %s', 'js-support-ticket' ), esc_html( self::errorText($body_json) ) );
             
             // Push the clean string trace message to your system error logs layout view
             JSSTincluder::getJSModel('systemerror')->addSystemError($error_msg);
+            /* Out of credits stops every AI feature on Zywrap, so it is said in
+               plain words with the place to top up, and shown on Engine & key
+               and Usage & Cost until an answer comes back. (5.0.4) */
+            $jsst_err = self::errorText($body_json);
+            if ($this->jsst_lastcode === 402
+                    || (isset($body_json['code']) && in_array($body_json['code'], array('insufficient_credits', 'model_requires_paid_credits'), true))
+                    || (stripos((string) $jsst_err, 'credit') !== false
+                        && preg_match('/insufficient|not enough|run out|ran out|exhaust|no credits|out of|balance/i', (string) $jsst_err))) {
+                set_transient(JSSTaiengine::OPT_ZYWRAP_NO_CREDITS, time(), DAY_IN_SECONDS);
+                JSSTincluder::getJSModel('systemerror')->addSystemError(sprintf(
+                    /* translators: %s: the address of the credits page on zywrap.com */
+                    __('Your Zywrap credits have run out, so Zywrap refused the request. Top up here: %s', 'js-support-ticket'),
+                    JSSTaiengine::zywrapUrl('dashboard/credits')));
+            }
             $this->jsst_lasterror = $error_msg;
+            $this->jsst_lastkind = 'api';
+            $this->jsst_lastusage = self::usageFrom($body_json);
             return false;
         }
 
         // Handle Success
         if ($body_json && isset($body_json['output'])) {
             $this->jsst_lastusage = self::usageFrom($body_json);
+            $this->jsst_lastmodel = isset($body_json['model']) ? (string) $body_json['model'] : '';
+            /* On the Zywrap screen's usage log, like the requests made there, so
+               its credit totals include the AI Agent's; and the balance Zywrap
+               reports, for Engine & key. (5.0.4) */
+            $this->log_usage($body_json, $payload['wrapper_code'], $latency_ms);
+            self::noteCredits($body_json);
+            if (get_transient(JSSTaiengine::OPT_ZYWRAP_NO_CREDITS)) {
+                delete_transient(JSSTaiengine::OPT_ZYWRAP_NO_CREDITS);
+            }
             return $body_json['output'];
+        }
+
+        /* Zywrap down: Cloudflare answers with an HTML page, not JSON. Said as
+           "unavailable", and marked so the spare engine is tried. (5.0.4) */
+        if ($this->jsst_lastcode >= 500 && !is_array(json_decode((string) $raw_response, true))) {
+            $this->jsst_lasterror = __('The AI provider is unavailable right now. Nothing was changed — try again shortly.', 'js-support-ticket');
+            JSSTincluder::getJSModel('systemerror')->addSystemError('Zywrap: HTTP ' . $this->jsst_lastcode . ' (not JSON)');
+            $this->jsst_lastkind = 'api';
+            return false;
         }
 
         /* Neither an answer nor an error: say what did come back rather than
@@ -1388,6 +1525,7 @@ class JSSTzywrapModel {
             substr(wp_strip_all_tags((string) $raw_response), 0, 200)
         );
         JSSTincluder::getJSModel('systemerror')->addSystemError($this->jsst_lasterror);
+        $this->jsst_lastkind = 'empty';
         return false;
     }
 }

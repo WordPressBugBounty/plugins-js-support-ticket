@@ -196,9 +196,47 @@ window.ZywrapFormatter = {
     toHTML: function(markdownText) {
         var preppedText = this.cleanRawMarkdown(this.escapeHTML(markdownText));
         if (typeof marked !== 'undefined') {
-            return marked.parse(preppedText, { breaks: true, gfm: true });
+            return this.sanitizeHTML(marked.parse(preppedText, { breaks: true, gfm: true }));
         }
         return preppedText;
+    },
+
+    /* The text is the model's, and escaping it first does not stop markdown
+       itself making a javascript: link or an image with a hostile src. So the
+       rendered HTML is cleaned before it reaches .html() or the editor:
+       parsed in an inert document (nothing runs, nothing loads), dangerous
+       elements and on* handlers dropped, and only http(s) and mailto links
+       kept. DOMPurify is not bundled, and this is all the output needs. */
+    sanitizeHTML: function(html) {
+        if (typeof DOMParser === 'undefined') return this.escapeHTML(html);
+        var doc = new DOMParser().parseFromString('<body>' + html + '</body>', 'text/html');
+        var isWeb = function(value, allowMail) {
+            var v = String(value || '').trim().toLowerCase();
+            return v.indexOf('http:') === 0 || v.indexOf('https:') === 0 || (allowMail && v.indexOf('mailto:') === 0);
+        };
+        var drop = doc.body.querySelectorAll('script, iframe, style, object, embed, frame, frameset, base, link, meta, form');
+        for (var d = 0; d < drop.length; d++) { drop[d].parentNode.removeChild(drop[d]); }
+
+        var all = doc.body.querySelectorAll('*');
+        for (var i = 0; i < all.length; i++) {
+            var el = all[i];
+            if (el.tagName.toLowerCase() === 'img' && !isWeb(el.getAttribute('src'), false)) {
+                if (el.parentNode) el.parentNode.removeChild(el);
+                continue;
+            }
+            var attrs = Array.prototype.slice.call(el.attributes);
+            for (var a = 0; a < attrs.length; a++) {
+                var name = attrs[a].name.toLowerCase();
+                if (name.indexOf('on') === 0) {
+                    el.removeAttribute(attrs[a].name);
+                } else if ((name === 'href' || name === 'xlink:href') && !isWeb(attrs[a].value, true)) {
+                    el.removeAttribute(attrs[a].name);
+                } else if ((name === 'src' || name === 'srcset' || name === 'action' || name === 'formaction' || name === 'data' || name === 'poster') && !isWeb(attrs[a].value, false)) {
+                    el.removeAttribute(attrs[a].name);
+                }
+            }
+        }
+        return doc.body.innerHTML;
     },
 
     toPlainText: function(markdownText) {
@@ -543,7 +581,7 @@ jQuery(document).ready(function(\$) {
                     
                     resultBox.html(headerHtml + formattedOutput);
                 } else {
-                    resultBox.html('<span style=\"color:#ef4444;\">' + zy_i18n.error_prefix + ' ' + (data.data.message || data.message) + '</span>');
+                    resultBox.html('<span style=\"color:#ef4444;\">' + zy_i18n.error_prefix + ' ' + ZywrapFormatter.escapeHTML(data.data.message || data.message) + '</span>');
                 }
             } catch(e) {
                 resultBox.html('<span style=\"color:#ef4444;\">' + zy_i18n.sys_error + '</span>');

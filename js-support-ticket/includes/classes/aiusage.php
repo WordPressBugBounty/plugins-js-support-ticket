@@ -240,6 +240,18 @@ class JSSTaiusage {
             'claude-haiku-4-5'   => array(1.00, 5.00),
             'claude-3-5-haiku'   => array(0.80, 4.00),
             'claude-3-5-sonnet'  => array(3.00, 15.00),
+            // OpenAI's list prices, Nov 2026; the first five are the engine's list.
+            'gpt-6-luna'         => array(0.10, 0.50),
+            'gpt-5.6-luna'       => array(0.20, 1.20),
+            'gpt-5.4-mini'       => array(0.75, 4.50),
+            'gpt-6.1-terra'      => array(1.00, 5.00),
+            'gpt-6.1-sol'        => array(2.00, 10.00),
+            'gpt-6-sol'          => array(2.00, 10.00),
+            'gpt-6-astra'        => array(10.00, 50.00),
+            'gpt-5.6-terra'      => array(2.00, 12.00),
+            'gpt-5.6-sol'        => array(4.00, 20.00),
+            'gpt-5.4-nano'       => array(0.20, 1.25),
+            'gpt-5.4'            => array(2.50, 15.00),
             'gpt-4o-mini'        => array(0.15, 0.60),
             'gpt-4o'             => array(2.50, 10.00),
             'gpt-4.1-mini'       => array(0.40, 1.60),
@@ -481,12 +493,31 @@ class JSSTaiusage {
         $jsst_context['ms'] = (int) round((microtime(true) - $jsst_started) * 1000);
 
         if (is_wp_error($jsst_result)) {
-            self::record($jsst_context, array('ok' => false, 'error' => $jsst_result->get_error_message()));
+            /* A refusal, a cut-off answer or one that was all thinking was
+               still billed, and the engine puts those tokens in the error's
+               data. Recorded with them, the row is priced like a success
+               instead of showing as a free call. */
+            $jsst_row  = array('ok' => false, 'error' => $jsst_result->get_error_message());
+            $jsst_data = $jsst_result->get_error_data();
+            if (is_array($jsst_data)) {
+                foreach (array('intokens', 'outtokens') as $jsst_key) {
+                    if (isset($jsst_data[$jsst_key])) {
+                        $jsst_row[$jsst_key] = (int) $jsst_data[$jsst_key];
+                    }
+                }
+            }
+            self::record($jsst_context, $jsst_row);
             return $jsst_result;
         }
 
         $jsst_row = is_array($jsst_result) ? $jsst_result : array();
         $jsst_row['ok'] = true;
+        /* Zywrap picks the model itself unless told; the one it names is the
+           one worth reading on Usage & Cost. Priced the same: from the plan. */
+        if (isset($jsst_context['engine']) && $jsst_context['engine'] === 'zywrap'
+                && !empty($jsst_row['model']) && $jsst_row['model'] !== 'zywrap') {
+            $jsst_context['model'] = (string) $jsst_row['model'];
+        }
         self::record($jsst_context, $jsst_row);
         return $jsst_result;
     }
@@ -615,17 +646,26 @@ class JSSTaiusage {
      * The plan allowance
      * ------------------------------------------------------------------ */
 
-    /** Vendor-funded requests included with this licence each month. */
+    /**
+     * Zywrap credits the licence adds each month. (5.0.4: credits on the
+     * connected Zywrap account, from jshelpdesk.com; it used to be a request
+     * count that nothing delivered.) The saved answer only: this runs after
+     * every AI request and must not wait on the licence server.
+     */
     public static function allowance() {
-        if (!class_exists('JSSTplans')) return 0;
-        $jsst_plan = JSSTplans::currentPlan();
-        return isset($jsst_plan['ai']) ? (int) $jsst_plan['ai'] : 0;
+        if (!class_exists('JSSTaicredits')) return 0;
+        $jsst_state = JSSTaicredits::cached();
+        return is_array($jsst_state) ? (int) $jsst_state['monthly'] : 0;
     }
 
-    /** Vendor-funded requests used this month. */
-    public static function allowanceUsed() {
-        $jsst_month = self::spend('month');
-        return (int) $jsst_month['plan'];
+    /** What is left of them this month, or null when Zywrap has not said. */
+    public static function allowanceLeft() {
+        if (!class_exists('JSSTaicredits')) return null;
+        $jsst_state = JSSTaicredits::cached();
+        if (!is_array($jsst_state) || $jsst_state['status'] !== 'active' || $jsst_state['plan_remaining'] === null) {
+            return null;
+        }
+        return (int) $jsst_state['plan_remaining'];
     }
 
     /* ------------------------------------------------------------------ *
@@ -690,18 +730,29 @@ class JSSTaiusage {
         /* The allowance warns and never stops - it is somebody else's meter and
            this is our estimate of it. */
         $jsst_allowance = self::allowance();
-        if ($jsst_allowance > 0) {
-            $jsst_used = (int) $jsst_month['plan'];
-            if ($jsst_used >= ($jsst_allowance * self::WARN_AT)) {
-                $jsst_out[] = array(
-                    'key'   => 'allowance',
-                    'level' => 'warn',
-                    'text'  => sprintf(
-                        /* translators: 1: requests used, 2: the plan's monthly allowance */
-                        esc_html(__('%1$s of the %2$s included AI requests on this licence have been used this month. Beyond it, requests need your own provider key.', 'js-support-ticket')),
-                        number_format_i18n($jsst_used), number_format_i18n($jsst_allowance)),
-                );
-            }
+        $jsst_left = self::allowanceLeft();
+        if ($jsst_allowance > 0 && $jsst_left !== null && $jsst_left <= $jsst_allowance * (1 - self::WARN_AT)) {
+            $jsst_out[] = array(
+                'key'   => 'allowance',
+                'level' => 'warn',
+                'text'  => sprintf(
+                    /* translators: 1: credits left, 2: the licence's monthly Zywrap credits */
+                    esc_html(__('Only %1$s of this month\'s %2$s included Zywrap credits are left. After that, Zywrap uses your account\'s own credits.', 'js-support-ticket')),
+                    number_format_i18n($jsst_left), number_format_i18n($jsst_allowance)),
+                'link'     => JSSTaiengine::zywrapUrl('dashboard/credits'),
+                'linktext' => esc_html(__('Buy more on zywrap.com', 'js-support-ticket')),
+            );
+        }
+
+        // Zywrap refused a request for want of credits: every AI feature on Zywrap has stopped.
+        if (get_transient(JSSTaiengine::OPT_ZYWRAP_NO_CREDITS)) {
+            $jsst_out[] = array(
+                'key'      => 'zywrapcredits',
+                'level'    => 'stop',
+                'text'     => esc_html(__('Your Zywrap credits have run out, so AI requests are refused until you top up.', 'js-support-ticket')),
+                'link'     => JSSTaiengine::zywrapUrl('dashboard/credits'),
+                'linktext' => esc_html(__('Buy more on zywrap.com', 'js-support-ticket')),
+            );
         }
 
         return $jsst_out;
@@ -740,7 +791,10 @@ class JSSTaiusage {
                     /* translators: %s: the site name */
                     esc_html(__('[%s] AI budget warning', 'js-support-ticket')),
                     wp_specialchars_decode(get_bloginfo('name'), ENT_QUOTES)),
-                $jsst_alert['text'] . "\n\n" . admin_url('admin.php?page=aiagent&jstlay=aiagent_usage')
+                // Plain text: the alert is escaped for the screen. (5.0.4)
+                wp_specialchars_decode($jsst_alert['text'], ENT_QUOTES) . "\n\n"
+                    . (!empty($jsst_alert['link']) ? wp_specialchars_decode($jsst_alert['linktext'], ENT_QUOTES) . ': ' . $jsst_alert['link'] . "\n\n" : '')
+                    . admin_url('admin.php?page=aiagent&jstlay=aiagent_usage')
             );
             $jsst_fired++;
         }
@@ -791,6 +845,7 @@ class JSSTaiusage {
             'chat_summary'   => esc_html(__('Live chat summaries', 'js-support-ticket')),
             'chat_translate' => esc_html(__('Live chat translation', 'js-support-ticket')),
             'preview'        => esc_html(__('Set up preview', 'js-support-ticket')),
+            'search'         => esc_html(__('Search phrases for answers', 'js-support-ticket')),
         );
     }
 
@@ -802,7 +857,8 @@ class JSSTaiusage {
 
     public static function fundedLabel($jsst_key) {
         switch ($jsst_key) {
-            case self::FUNDED_PLAN:  return esc_html(__('Included with your licence', 'js-support-ticket'));
+            // Zywrap: the licence's monthly credits first, then the account's own. (5.0.4)
+            case self::FUNDED_PLAN:  return esc_html(__('Zywrap credits', 'js-support-ticket'));
             case self::FUNDED_LOCAL: return esc_html(__('Your own hardware', 'js-support-ticket'));
         }
         return esc_html(__('Your own provider key', 'js-support-ticket'));

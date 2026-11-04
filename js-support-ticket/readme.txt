@@ -3,7 +3,7 @@ Contributors: rabilal
 Tags: helpdesk, support ticket, ticketing system, customer support, knowledge base
 Requires at least: 5.5
 Tested up to: 7.1
-Stable tag: 5.0.3
+Stable tag: 5.0.4
 Requires PHP: 7.4
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
@@ -34,7 +34,7 @@ There are no limits on tickets, agents or departments, no per-agent monthly fee 
 = Who it is for =
 
 * **Online shops** that want order questions, returns and complaints in one place instead of an overflowing inbox.
-* **Software, plugin and theme sellers** who support customers by product, licence or purchase code.
+* **Software, plugin and theme sellers** who support customers by product, license or purchase code.
 * **Agencies and freelancers** looking after many clients, each with their own tickets.
 * **Schools, clubs and internal teams** - IT, HR or facilities - who need requests tracked and answered, not lost in email.
 
@@ -209,6 +209,26 @@ The [documentation](https://jshelpdesk.com/docs/) covers setup and every add-on,
 
 == Changelog ==
 
+= 5.0.4 =
+Security and AI release: two permission fixes, Zywrap accounts from wp-admin, monthly Zywrap credits with paid licenses, an OpenAI engine, and Claude fixed. Full details are in changelog.txt.
+
+* Security: a customer, or a guest with their own ticket link, can no longer overwrite or move another user's reply, a GDPR erase request can no longer be pointed at another user, and the e-mail confirming an erasure goes to the person who asked for it.
+* Security: AI suggestions, Copilot and AI drafts check that the agent may see the ticket, and visitors who are not logged in can no longer search agent-only answers. Zywrap screens are for administrators, and text sent to Zywrap is masked like every other AI request.
+* Zywrap: create a free account (10,000 credits) or connect an existing one under AI Agent > Settings, with no key to copy. Choose the model Zywrap uses; the credit balance and each request's credits are shown.
+* Paid licenses include Zywrap credits every month: Pro 50,000, Business 200,000, Agency 500,000. Connect a Zywrap account and click "Claim them for this account"; you are e-mailed when they run low.
+* OpenAI engine: use your own OpenAI key under AI Agent > Settings > Engine & key. GPT-6 Luna is the default model; the price of each is shown in the list. Anthropic and OpenAI each keep their own model choice.
+* Claude (Anthropic engine): automatic answers and drafts no longer fail.
+* AI Agent: automatic answers keep only your own or cited links and no images; an answer approved twice is sent once; answers waiting for approval close when a person replies.
+* AI requests stop after 60 seconds, try once more when the provider is busy, and a cut-off answer is never sent.
+* Copilot Summarize uses Zywrap's ticket summary; a model Zywrap has retired falls back to Zywrap's own choice.
+* "Local model": an address on the internet is treated as a hosted service.
+* "Pass to a person" links in e-mails ask for confirmation, so mail scanners no longer reopen tickets.
+* The "Good news" banner about add-ons your license now includes has a "Got it" link that puts it away for good.
+* Fixed: on sites with page caching, only the first visitor could send the ticket form ("This form has already been submitted"). Each visitor now gets a fresh security check.
+* Fixed: attachment forms show the name and size of each chosen file, so you can see a file is attached; a refused file no longer moves the internal note's attachment to the reply.
+* Fixed: WooCommerce customers can pick orders that are still processing or on hold, "Get Help" on an order opens the ticket form with that order chosen, and tickets show the shop's order number.
+* Fixed: the agent ticket list is readable on phones; the ticket details were squeezed into a sliver beside the photo.
+
 = 5.0.3 =
 Security and reliability release. Full details are in changelog.txt.
 
@@ -290,6 +310,9 @@ See the [full changelog](https://plugins.trac.wordpress.org/browser/js-support-t
 
 == Upgrade Notice ==
 
+= 5.0.4 =
+Paid licenses now include monthly Zywrap AI credits, and you can connect a Zywrap account from wp-admin. OpenAI joins the AI engines. Visitor tickets work again on cached pages, Claude answers are fixed, and reply, GDPR and AI permission checks are stricter. Recommended for all sites.
+
 = 5.0.3 =
 Security and reliability release: ticket permission checks, a fix for a script injection reported through Wordfence, automatic repair of a damaged settings table, attachments that download on every host, and quick answers that open in full. Recommended for all sites.
 
@@ -322,12 +345,17 @@ Only when an administrator enters a license key for the paid add-ons, the plugin
 * **Without a key** nothing is sent. The free plugin never needs a license.
 * [jshelpdesk.com Privacy Policy](https://jshelpdesk.com/privacy-policy/), [Terms](https://jshelpdesk.com/terms/)
 
-= AI services (Zywrap, Anthropic) =
-The AI features that write text can use an outside AI service. All of them are off until an administrator turns them on and enters their own API key.
+= AI services (Zywrap, Anthropic, OpenAI) =
+The AI features that write text can use an outside AI service. All of them are off until an administrator turns them on and enters their own API key or connects an account.
 
 * **AI Copilot (Zywrap):** when an agent clicks an AI action such as "Generate Reply", "Summarize", "Extract Details" or "Translate", the text of that ticket thread is sent to the Zywrap API (api.zywrap.com) to produce the result. [Zywrap Privacy Policy](https://zywrap.com/privacy)
+* **Creating or connecting a Zywrap account:** Zywrap is run by WiselyHub LLC. Nothing is sent until an administrator, under AI Agent > Settings > Engine & key, ticks the consent box and presses "Create my free account", or chooses "Connect with zywrap.com instead".
+    * Asking for a code sends the e-mail address and optional name typed into the form, your site's address and a one-time security value (a PKCE challenge, which contains no personal data) to api.zywrap.com, and Zywrap e-mails a 6-digit code. Entering the code sends it, the matching security value and your site's address.
+    * Connecting on zywrap.com puts your site's address and name, the wp-admin address to come back to and two one-time security values in the link. The one-time code zywrap.com sends back is exchanged at api.zywrap.com the same way. Anything typed on zywrap.com goes to Zywrap under its own terms.
+    * Zywrap returns an API key for this site, the account's e-mail address, the key's name and the credit balance, stored in your WordPress database (options `jsst_ai_key_zywrap`, `jsst_zywrap_api_key` and `jsst_zywrap_account`). Disconnect deletes them; the key stays valid on Zywrap until you revoke it there. [Zywrap Terms of Service](https://zywrap.com/terms), [Zywrap Privacy Policy](https://zywrap.com/privacy)
 * **Hosted AI engine (Anthropic):** if an administrator chooses Anthropic as the AI engine and enters their own key, the question and the passages needed to answer it are sent to api.anthropic.com. Credentials stored in the help desk are never sent, and outgoing text can be redacted further in the AI settings. [Anthropic Privacy Policy](https://www.anthropic.com/legal/privacy)
-* **On your own server:** the AI engine can instead run without any outside service, or on a model you host yourself (for example Ollama or LM Studio), in which case nothing leaves your infrastructure.
+* **Hosted AI engine (OpenAI):** if an administrator chooses OpenAI as the AI engine and enters their own key, the question and the passages needed to answer it are sent to api.openai.com, with the same redaction. Requests ask OpenAI not to store them for later viewing (`store: false`); OpenAI says it may keep API data for up to 30 days to detect abuse and does not train on it unless you opt in. The key is stored in your WordPress database (option `jsst_ai_key_openai`). [OpenAI Services Agreement](https://openai.com/policies/services-agreement/), [OpenAI enterprise privacy](https://openai.com/policies/api-data-usage-policies/)
+* **On your own server:** the AI engine can instead run without any outside service, or on a model you host yourself (for example Ollama or LM Studio), in which case nothing leaves your infrastructure. A model address on the internet is treated as a hosted service.
 * AI Powered Reply, in the free plugin, searches replies already written on your site and contacts no one.
 
 = Marketing consent (Mailchimp) =

@@ -352,7 +352,17 @@ class JSSTaiagentController {
                address is the whole point of a local model. */
             $jsst_endpoint = trim((string) JSSTrequest::getVar('localendpoint', 'post', ''));
             if (!JSSTaiengine::validLocalEndpoint($jsst_endpoint)) {
-                JSSTmessage::setMessage(esc_html(__('The local model address must be an http or https URL, such as http://127.0.0.1:11434.', 'js-support-ticket')), 'error');
+                JSSTmessage::setMessage(esc_html(__('The local model address must be an http or https URL, such as http://127.0.0.1:11434, and not a link-local or cloud metadata address.', 'js-support-ticket')), 'error');
+                wp_safe_redirect($jsst_back);
+                exit;
+            }
+
+            /* On a network, the address makes the shared server fetch a URL,
+               and a site administrator there is not trusted with the server.
+               Only a network administrator may change it. */
+            if (is_multisite() && !current_user_can('manage_network_options')
+                    && esc_url_raw($jsst_endpoint) !== (string) get_option(JSSTaiengine::OPT_LOCAL_ENDPOINT, '')) {
+                JSSTmessage::setMessage(esc_html(__('On a multisite network only a network administrator can change the local model address.', 'js-support-ticket')), 'error');
                 wp_safe_redirect($jsst_back);
                 exit;
             }
@@ -361,15 +371,51 @@ class JSSTaiagentController {
             update_option(JSSTaiengine::OPT_LOCAL_MODEL, sanitize_text_field(JSSTrequest::getVar('localmodel', 'post', '')), false);
             update_option(JSSTaiengine::OPT_LOCAL_TIMEOUT, absint(JSSTrequest::getVar('localtimeout', 'post', JSSTaiengine::LOCAL_TIMEOUT)), false);
 
+            /* Whether the address is on the internet decides the lane the local
+               engine runs in, so it is looked up now, while it is being saved,
+               and the engine list read again for the lane check below. */
+            JSSTaiengine::checkLocalAddress(true);
+            $jsst_engines = JSSTaiengine::engines();
+
             /* A blank key box means "leave it alone". saveKey() enforces that,
                so nothing here needs to decide whether the field was shown. */
             foreach (array_keys($jsst_engines) as $jsst_id) {
-                JSSTaiengine::saveKey($jsst_id, JSSTrequest::getVar('key_' . $jsst_id, 'post', ''));
+                $jsst_saved = JSSTaiengine::saveKey($jsst_id, JSSTrequest::getVar('key_' . $jsst_id, 'post', ''));
+                /* A Zywrap key typed by hand replaces the connected account's,
+                   and "Connected as" would then name an account it is not. */
+                if ($jsst_saved && $jsst_id === 'zywrap' && class_exists('JSSTzywrapconnect')) {
+                    delete_option(JSSTzywrapconnect::OPT_ACCOUNT);
+                    if (class_exists('JSSTaicredits')) {
+                        JSSTaicredits::forget();
+                    }
+                }
             }
 
-            $jsst_model = sanitize_text_field(JSSTrequest::getVar('model', 'post', ''));
-            if ($jsst_model !== '') {
-                update_option(JSSTaiengine::OPT_MODEL, $jsst_model, false);
+            /* Each engine with a list posts its own choice to its own row. One
+               shared box let the last select on the form overwrite the other
+               engine's model. Only a model from that engine's list is kept. (5.0.4) */
+            foreach ($jsst_engines as $jsst_id => $jsst_def) {
+                if (empty($jsst_def['models'])) {
+                    continue;
+                }
+                $jsst_model = sanitize_text_field(JSSTrequest::getVar('model_' . $jsst_id, 'post', ''));
+                if ($jsst_model !== '' && isset($jsst_def['models'][$jsst_model])) {
+                    update_option(JSSTaiengine::modelOption($jsst_id), $jsst_model, false);
+                }
+            }
+
+            /* The model behind Zywrap: empty lets Zywrap choose, anything else
+               must be one the synced catalogue offers. Read with isset(), as
+               getVar() takes the empty "Let Zywrap choose" for absent. The same
+               option as the Zywrap screen's default model: one setting. */
+            if (isset($_POST['zywrapmodel']) && class_exists('JSSTzywrapconnect')) { // phpcs:ignore WordPress.Security.NonceVerification.Missing -- nonce checked at the top of this handler
+                $jsst_zymodel = sanitize_text_field(JSSTrequest::getVar('zywrapmodel', 'post', ''));
+                $jsst_zymodels = JSSTzywrapconnect::models();
+                if ($jsst_zymodel === '' || isset($jsst_zymodels[$jsst_zymodel])) {
+                    update_option('jsst_zywrap_default_model', $jsst_zymodel);
+                    // A model skipped after a refusal is tried again: saved means meant.
+                    delete_transient('jsst_zywrap_model_gone');
+                }
             }
 
             /* The one field the retired Copilot screen had that nothing else
@@ -1202,6 +1248,74 @@ class JSSTaiagentController {
             ), 'updated');
         }
         wp_safe_redirect(admin_url('admin.php?page=aiagent&jstlay=aiagent_settings'));
+        exit;
+    }
+
+    /**
+     * Connect a Zywrap account in the browser, on zywrap.com. (5.0.4)
+     *
+     * For Google or GitHub sign-in and for two-factor accounts, which the
+     * e-mailed code on Engine & key must not get round. A link with its own
+     * nonce rather than a form, because the Zywrap card sits inside the engine
+     * form and forms cannot nest. JSSTzywrapconnect::handleReturn() picks the
+     * browser up when zywrap.com sends it back.
+     */
+    static function zywrapconnect() {
+        $jsst_nonce = JSSTrequest::getVar('_wpnonce');
+        if (!wp_verify_nonce($jsst_nonce, 'jsst-aiagent-zywrapconnect')) {
+            die(esc_html__( 'Security check Failed', 'js-support-ticket' ));
+        }
+        if (!current_user_can('manage_options') || !class_exists('JSSTzywrapconnect')) {
+            wp_die(esc_html__('You are not allowed', 'js-support-ticket'));
+        }
+        // Off-site on purpose, so zywrap.com is allowed for this one redirect.
+        add_filter('allowed_redirect_hosts', function ($jsst_hosts) {
+            $jsst_hosts[] = 'zywrap.com';
+            return $jsst_hosts;
+        });
+        wp_safe_redirect(JSSTzywrapconnect::browserUrl());
+        exit;
+    }
+
+    /**
+     * Claim this licence's monthly Zywrap credits for the connected account.
+     * (5.0.4) A link with its own nonce, like zywrapconnect(), because the card
+     * sits inside the engine form.
+     */
+    static function claimaicredits() {
+        $jsst_nonce = JSSTrequest::getVar('_wpnonce');
+        if (!wp_verify_nonce($jsst_nonce, 'jsst-aiagent-claimcredits')) {
+            die(esc_html__( 'Security check Failed', 'js-support-ticket' ));
+        }
+        if (!current_user_can('manage_options') || !class_exists('JSSTaicredits')) {
+            wp_die(esc_html__('You are not allowed', 'js-support-ticket'));
+        }
+        if (JSSTaicredits::claim() !== null) {
+            JSSTmessage::setMessage(esc_html(__('Claimed. From now on, your licence\'s monthly credits go to this Zywrap account.', 'js-support-ticket')), 'updated');
+        } else {
+            JSSTmessage::setMessage(esc_html(__('The credits could not be claimed just now. Try again in a few minutes.', 'js-support-ticket')), 'error');
+        }
+        wp_safe_redirect(admin_url('admin.php?page=aiagent&jstlay=aiagent_settings') . '#AIEngine');
+        exit;
+    }
+
+    /**
+     * Forget the Zywrap key and the connected account on this site.
+     *
+     * Its own nonced action, for the reason forgetaikey() gives. The key is
+     * still valid on Zywrap until it is revoked there, and the message says so.
+     */
+    static function zywrapdisconnect() {
+        $jsst_nonce = JSSTrequest::getVar('_wpnonce');
+        if (!wp_verify_nonce($jsst_nonce, 'jsst-aiagent-zywrapdisconnect')) {
+            die(esc_html__( 'Security check Failed', 'js-support-ticket' ));
+        }
+        if (!current_user_can('manage_options') || !class_exists('JSSTzywrapconnect')) {
+            wp_die(esc_html__('You are not allowed', 'js-support-ticket'));
+        }
+        JSSTzywrapconnect::disconnect();
+        JSSTmessage::setMessage(esc_html(__('Disconnected from Zywrap. The key is gone from this site; it stays valid on zywrap.com until you revoke it there.', 'js-support-ticket')), 'updated');
+        wp_safe_redirect(admin_url('admin.php?page=aiagent&jstlay=aiagent_settings') . '#AIEngine');
         exit;
     }
 

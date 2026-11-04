@@ -2,14 +2,14 @@
 # This file is distributed under the GPLv3.
 msgid ""
 msgstr ""
-"Project-Id-Version: JS Help Desk – AI-Powered Support & Ticketing System 5.0.3\n"
+"Project-Id-Version: JS Help Desk – AI-Powered Support & Ticketing System 5.0.4\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/js-support-ticket\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-10-29T13:22:50+00:00\n"
+"POT-Creation-Date: 2026-10-31T05:27:13+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: js-support-ticket\n"
@@ -40174,4 +40174,455 @@ msgstr ""
 
 #: modules/zywrap/tpls/admin_zywrap_settings.php:308
 msgid "Server timeout."
+msgstr ""
+
+#: includes/classes/aiengine.php:802
+msgid "The answer was cut off before it finished, so it was not used."
+msgstr ""
+
+#: includes/classes/aiengine.php:850
+msgid "The local model address points at a link-local or cloud metadata address, so nothing was sent."
+msgstr ""
+
+#. translators: %s: the e-mail address of the Zywrap account
+#: includes/classes/aipolicy.php:595
+#, php-format
+msgid "Connected to Zywrap as %s"
+msgstr ""
+
+#: includes/classes/aipolicy.php:596
+msgid "Connected to Zywrap"
+msgstr ""
+
+#. translators: %s: the e-mail address of the Zywrap account
+#: includes/classes/aipolicy.php:600
+#, php-format
+msgid "Disconnected from Zywrap (%s)"
+msgstr ""
+
+#: includes/classes/aipolicy.php:601
+msgid "Disconnected from Zywrap"
+msgstr ""
+
+#: includes/classes/aireview.php:600
+msgid "A person sent a reply from the AI draft, so this was not sent again."
+msgstr ""
+
+#: includes/classes/aireview.php:602
+msgid "A person answered the ticket, so this was not sent."
+msgstr ""
+
+#: includes/classes/aireview.php:1184
+msgid "Would you like a member of our team to look at your ticket? Press the button and a person will reply on the ticket."
+msgstr ""
+
+#: includes/classes/aireview.php:1188
+msgid "Pass my ticket to a person"
+msgstr ""
+
+#: includes/classes/aireview.php:1190
+msgid "Pass to a person"
+msgstr ""
+
+#: includes/classes/aireview.php:1286
+#: modules/aiagent/tpls/admin_aiagent_approvals.php:125
+msgid "Answered by a person"
+msgstr ""
+
+#: includes/classes/aiusage.php:813
+msgid "Search phrases for answers"
+msgstr ""
+
+#: includes/classes/copilot.php:497
+msgid "You are not allowed to open this ticket."
+msgstr ""
+
+#. translators: %d: how many more times a code may be tried
+#: includes/classes/zywrapconnect.php:319
+#, php-format
+msgid "%d try left."
+msgid_plural "%d tries left."
+msgstr[0] ""
+msgstr[1] ""
+
+#. translators: %s: the e-mail address of the Zywrap account
+#: includes/classes/zywrapconnect.php:429
+#, php-format
+msgid "Connected to Zywrap as %s."
+msgstr ""
+
+#: includes/classes/zywrapconnect.php:430
+msgid "Connected to Zywrap."
+msgstr ""
+
+#: includes/classes/zywrapconnect.php:444
+msgid "That code is not right. Check the e-mail and try again."
+msgstr ""
+
+#: includes/classes/zywrapconnect.php:445
+msgid "Enter the 6-digit code from the e-mail."
+msgstr ""
+
+#: includes/classes/zywrapconnect.php:446
+msgid "That code has expired. Ask for a new one."
+msgstr ""
+
+#: includes/classes/zywrapconnect.php:447
+msgid "That code can no longer be used. Ask for a new one."
+msgstr ""
+
+#: includes/classes/zywrapconnect.php:448
+msgid "Too many attempts. Wait a few minutes and try again."
+msgstr ""
+
+#: includes/classes/zywrapconnect.php:449
+msgid "Your Zywrap account already has as many API keys as it can. Revoke one on zywrap.com, then connect again."
+msgstr ""
+
+#: includes/classes/zywrapconnect.php:450
+msgid "This Zywrap account is blocked. Contact Zywrap support."
+msgstr ""
+
+#: includes/classes/zywrapconnect.php:451
+msgid "This account uses two-factor sign-in. Use \"Connect with zywrap.com instead\" below."
+msgstr ""
+
+#: includes/classes/zywrapconnect.php:452
+msgid "This site could not reach Zywrap. Check that it can make outgoing HTTPS requests, then try again."
+msgstr ""
+
+#: includes/classes/zywrapconnect.php:453
+msgid "Enter a valid e-mail address."
+msgstr ""
+
+#: includes/classes/zywrapconnect.php:454
+msgid "Tick the box to agree to the Zywrap Terms of Service and Privacy Policy."
+msgstr ""
+
+#: includes/classes/zywrapconnect.php:455
+msgid "That connect link expired or was already used. Connect again to start over."
+msgstr ""
+
+#: includes/classes/zywrapconnect.php:456
+msgid "Connecting was cancelled on zywrap.com. Nothing was changed."
+msgstr ""
+
+#: includes/classes/zywrapconnect.php:457
+msgid "zywrap.com sent back something this could not read. Nothing was changed."
+msgstr ""
+
+#: includes/classes/zywrapconnect.php:458
+msgid "Connecting to Zywrap did not finish. Nothing was changed; try again."
+msgstr ""
+
+#: modules/aiagent/controller.php:355
+msgid "The local model address must be an http or https URL, such as http://127.0.0.1:11434, and not a link-local or cloud metadata address."
+msgstr ""
+
+#: modules/aiagent/controller.php:365
+msgid "On a multisite network only a network administrator can change the local model address."
+msgstr ""
+
+#: modules/aiagent/controller.php:1282
+msgid "Disconnected from Zywrap. The key is gone from this site; it stays valid on zywrap.com until you revoke it there."
+msgstr ""
+
+#: modules/aiagent/tpls/admin_aiagent_settings.php:319
+msgid "This address is on the internet, so ticket text leaves your server. It's treated as a hosted service."
+msgstr ""
+
+#: modules/aiagent/tpls/admin_aiagent_settings.php:319
+msgid "The local lane is for a model on your own network. This address resolves to a public IP, so requests to it go to somebody else's server, and it needs the hosted lane switched on like any other hosted service."
+msgstr ""
+
+#: modules/aiagent/tpls/admin_aiagent_settings.php:372
+msgid "Zywrap account"
+msgstr ""
+
+#. translators: 1: the Zywrap account's e-mail address, 2: its credit balance
+#: modules/aiagent/tpls/admin_aiagent_settings.php:379
+#, php-format
+msgid "Connected as %1$s · %2$s credits"
+msgstr ""
+
+#. translators: %s: the Zywrap account's e-mail address
+#: modules/aiagent/tpls/admin_aiagent_settings.php:383
+#, php-format
+msgid "Connected as %s"
+msgstr ""
+
+#. translators: %s: the Zywrap credit balance
+#: modules/aiagent/tpls/admin_aiagent_settings.php:387
+#, php-format
+msgid "Connected with a key entered by hand · %s credits"
+msgstr ""
+
+#: modules/aiagent/tpls/admin_aiagent_settings.php:390
+msgid "Connected with a key entered by hand"
+msgstr ""
+
+#. translators: %s: how long ago, e.g. "5 mins"
+#: modules/aiagent/tpls/admin_aiagent_settings.php:397
+#, php-format
+msgid "Balance after this site's last Zywrap request, %s ago."
+msgstr ""
+
+#: modules/aiagent/tpls/admin_aiagent_settings.php:400
+msgid "Balance when this site connected."
+msgstr ""
+
+#: modules/aiagent/tpls/admin_aiagent_settings.php:403
+msgid "Disconnect Zywrap? The key is removed from this site. It stays valid on zywrap.com until you revoke it there."
+msgstr ""
+
+#: modules/aiagent/tpls/admin_aiagent_settings.php:403
+msgid "Disconnect"
+msgstr ""
+
+#: modules/aiagent/tpls/admin_aiagent_settings.php:415
+msgid "Create your free Zywrap account"
+msgstr ""
+
+#: modules/aiagent/tpls/admin_aiagent_settings.php:423
+msgid "Name (optional)"
+msgstr ""
+
+#. translators: 1: "Terms of Service", linked to Zywrap's terms, 2: "Privacy
+#. Policy", linked to Zywrap's privacy policy
+#: modules/aiagent/tpls/admin_aiagent_settings.php:431
+#, php-format
+msgid "I agree to the Zywrap %1$s and %2$s. When I continue, my e-mail, name and this site's address are sent to Zywrap."
+msgstr ""
+
+#: modules/aiagent/tpls/admin_aiagent_settings.php:432
+msgid "Terms of Service"
+msgstr ""
+
+#: modules/aiagent/tpls/admin_aiagent_settings.php:433
+msgid "Privacy Policy"
+msgstr ""
+
+#: modules/aiagent/tpls/admin_aiagent_settings.php:437
+msgid "Create my free account"
+msgstr ""
+
+#: modules/aiagent/tpls/admin_aiagent_settings.php:439
+msgid "Already have a Zywrap account? Enter its e-mail and you'll be signed in instead. New accounts start with 10,000 free credits."
+msgstr ""
+
+#: modules/aiagent/tpls/admin_aiagent_settings.php:444
+msgid "6-digit code"
+msgstr ""
+
+#: modules/aiagent/tpls/admin_aiagent_settings.php:448
+msgid "Connect"
+msgstr ""
+
+#: modules/aiagent/tpls/admin_aiagent_settings.php:449
+msgid "Use a different e-mail"
+msgstr ""
+
+#: modules/aiagent/tpls/admin_aiagent_settings.php:450
+msgid "Send a new code"
+msgstr ""
+
+#: modules/aiagent/tpls/admin_aiagent_settings.php:455
+msgid "Sign in with Google or GitHub, or use two-factor sign-in?"
+msgstr ""
+
+#: modules/aiagent/tpls/admin_aiagent_settings.php:456
+msgid "Connect with zywrap.com instead"
+msgstr ""
+
+#: modules/aiagent/tpls/admin_aiagent_settings.php:464
+msgid "Let Zywrap choose (recommended)"
+msgstr ""
+
+#. translators: %s: the code of an AI model the Zywrap catalogue no longer
+#. lists
+#: modules/aiagent/tpls/admin_aiagent_settings.php:473
+#, php-format
+msgid "%s (no longer in the catalogue)"
+msgstr ""
+
+#: modules/aiagent/tpls/admin_aiagent_settings.php:478
+msgid "More models are listed once the Zywrap catalogue has been synced."
+msgstr ""
+
+#: modules/aiagent/tpls/admin_aiagent_settings.php:479
+msgid "The AI model behind Zywrap. Left to Zywrap, it picks one for each kind of request."
+msgstr ""
+
+#: modules/aiagent/tpls/admin_aiagent_settings.php:501
+msgid "A key from the API keys page of your Zywrap account."
+msgstr ""
+
+#: modules/aiagent/tpls/admin_aiagent_settings.php:505
+msgid "I already have an API key"
+msgstr ""
+
+#. translators: %s: an e-mail address
+#: modules/aiagent/tpls/admin_aiagent_settings.php:1169
+#, php-format
+msgid "Zywrap has e-mailed a 6-digit code to %s. Enter it below to finish creating your account."
+msgstr ""
+
+#. translators: %s: an e-mail address
+#: modules/aiagent/tpls/admin_aiagent_settings.php:1171
+#, php-format
+msgid "Welcome back. Zywrap has e-mailed a 6-digit code to %s. Enter it below to connect this site to your account."
+msgstr ""
+
+#: modules/aiagent/tpls/admin_aiagent_settings.php:1172
+msgid "A new code is on its way."
+msgstr ""
+
+#: modules/aiagent/tpls/admin_aiagent_settings.php:1173
+msgid "One moment..."
+msgstr ""
+
+#: modules/aiagent/tpls/admin_aiagent_settings.php:1174
+msgid "Connected. Reloading..."
+msgstr ""
+
+#: modules/aiagent/tpls/admin_aiagent_settings.php:1176
+msgid "Tick the box to agree to the Zywrap Terms of Service and Privacy Policy first."
+msgstr ""
+
+#. translators: %s: the code of an AI model
+#: modules/zywrap/model.php:1414
+#, php-format
+msgid "Zywrap no longer offers the model \"%s\", so Zywrap chose one instead. Pick another model under AI Agent > Settings > Engine & key."
+msgstr ""
+
+#: includes/aidraft-ui.php:151
+msgid "The reply could not be sent. The draft has been kept."
+msgstr ""
+
+#: module/tpls/admin_aiagent_answers.php:34
+msgid "Channel not answered automatically"
+msgstr ""
+
+#. translators: %s: the approval setting "Always ask a person first"
+#: modules/aiagent/tpls/admin_aiagent_settings.php:488
+#, php-format
+msgid "Automatic answers were tested with the recommended choice. With another model, set Approvals to \"%s\" until you have checked its answers."
+msgstr ""
+
+#: includes/classes/aiengine.php:132
+msgid "Our own engine. Create a free account right here, with 10,000 credits to start, or connect the one you have."
+msgstr ""
+
+#. translators: 1: licence plan name such as Pro, 2: number of credits
+#: includes/classes/aicredits.php:123
+#, php-format
+msgid "Your %1$s licence adds %2$s Zywrap credits every month once you connect an account."
+msgstr ""
+
+#. translators: %s: the address of another site using this licence
+#: includes/classes/aicredits.php:129
+#, php-format
+msgid "This licence's monthly credits go to the Zywrap account connected on %s."
+msgstr ""
+
+#. translators: 1: licence plan name such as Pro, 2: number of credits
+#: includes/classes/aicredits.php:134
+#, php-format
+msgid "Your %1$s licence adds %2$s credits to this account every month."
+msgstr ""
+
+#. translators: 1: number of credits, 2: a date
+#: includes/classes/aicredits.php:141
+#, php-format
+msgid "%1$s left this month. They refill on %2$s."
+msgstr ""
+
+#: includes/classes/aicredits.php:148
+msgid "Waiting for Zywrap to add them. This is checked again twice a day."
+msgstr ""
+
+#. translators: 1: credits left, 2: the licence's monthly Zywrap credits
+#: includes/classes/aiusage.php:728
+#, php-format
+msgid "Only %1$s of this month's %2$s included Zywrap credits are left. After that, Zywrap uses your account's own credits."
+msgstr ""
+
+#: includes/classes/aiusage.php:833
+msgid "Zywrap credits"
+msgstr ""
+
+#. translators: 1: credits left, 2: the licence's monthly Zywrap credits
+#: modules/aiagent/tpls/admin_aiagent_usage.php:104
+#, php-format
+msgid "%1$s of the %2$s Zywrap credits included with your licence are left this month. They cost you nothing and are not in the figure above."
+msgstr ""
+
+#. translators: %s: number of Zywrap credits included each month
+#: modules/jssupportticket/tpls/admin_license.php:354
+#, php-format
+msgid "%s Zywrap credits a month"
+msgstr ""
+
+#. translators: 1: licence plan name such as Pro, 2: number of credits
+#: includes/classes/aicredits.php:152
+#, php-format
+msgid "Your %1$s licence includes %2$s Zywrap credits every month."
+msgstr ""
+
+#: modules/aiagent/controller.php:1284
+msgid "Claimed. From now on, your licence's monthly credits go to this Zywrap account."
+msgstr ""
+
+#: modules/aiagent/controller.php:1286
+msgid "The credits could not be claimed just now. Try again in a few minutes."
+msgstr ""
+
+#: modules/aiagent/tpls/admin_aiagent_settings.php:410
+msgid "Claim them for this account"
+msgstr ""
+
+#: includes/classes/aiusage.php:731 includes/classes/aiusage.php:742
+msgid "Buy more on zywrap.com"
+msgstr ""
+
+#: includes/classes/aiusage.php:740
+#: modules/aiagent/tpls/admin_aiagent_settings.php:407
+msgid "Your Zywrap credits have run out, so AI requests are refused until you top up."
+msgstr ""
+
+#: modules/aiagent/tpls/admin_aiagent_settings.php:410
+msgid "Credits and top-up"
+msgstr ""
+
+#: modules/aiagent/tpls/admin_aiagent_settings.php:412
+#: modules/aiagent/tpls/admin_aiagent_settings.php:559
+msgid "API keys"
+msgstr ""
+
+#. translators: %s: the address of the credits page on zywrap.com
+#: modules/zywrap/model.php:1463
+#, php-format
+msgid "Your Zywrap credits have run out, so Zywrap refused the request. Top up here: %s"
+msgstr ""
+
+#: modules/zywrap/tpls/admin_zywrap_settings.php:53
+msgid "Create a free Zywrap account, or connect the one you have, under AI Agent → Settings → Engine & key. It is the same key as here, so saving it in either place updates both."
+msgstr ""
+
+#. translators: %s: the code of an AI model
+#: modules/zywrap/model.php:1436
+#, php-format
+msgid "The model \"%s\" needs bought Zywrap credits, so Zywrap chose one instead. Buy credits on zywrap.com or pick another model under AI Agent > Settings > Engine & key."
+msgstr ""
+
+#: includes/classes/aiengine.php:169
+msgid "Bring your own key. The request goes from your server to OpenAI — nothing of ours is in the middle."
+msgstr ""
+
+#: includes/classes/aiengine.php:185
+msgid "Starts with sk-. Created at platform.openai.com."
+msgstr ""
+
+#: includes/classes/aiengine.php:1025
+msgid "The AI provider account has no credit left. Add credit with the provider, or choose another engine on the AI Agent screen."
 msgstr ""

@@ -614,6 +614,26 @@ class JSSTlicense {
     }
 
     /**
+     * Ask the licence server something on this activation's behalf: the
+     * activation token and this site's address go with the body, as for
+     * /validate. Used for the monthly AI credits a licence includes. (5.0.4)
+     *
+     * @return array|WP_Error The server's answer, refusals included.
+     */
+    public static function askServer($jsst_path, $jsst_body = array()) {
+        $jsst_token = self::token();
+
+        if ('' === $jsst_token) {
+            return new WP_Error('jsst_license_notoken', 'This site holds no current activation token.');
+        }
+
+        return self::post($jsst_path, array_merge((array) $jsst_body, array(
+            'token'    => $jsst_token,
+            'site_url' => self::siteUrl(),
+        )));
+    }
+
+    /**
      * The activation token, if it has life left in it; '' otherwise.
      *
      * A minute's margin, because it is about to be sent to the server and
@@ -2204,6 +2224,15 @@ class JSSTlicense {
                 $jsst_remind = $jsst_from - 30 * DAY_IN_SECONDS;
                 $jsst_until  = $jsst_remind > time() ? $jsst_remind : $jsst_from + DAY_IN_SECONDS;
             }
+        }
+
+        /* The free-upgrade greeting (JSSTupgradeassistant::banner(), 3) only
+           offers add-ons; nothing is left unfinished. A site that wants only
+           the ones it has was asked again every week (customer report,
+           2 November 2026). "Got it" puts it away for good; License & Add-ons
+           still lists what the licence includes. */
+        if (JSSTupgradeassistant::WELCOME === $jsst_key) {
+            $jsst_until = time() + 10 * YEAR_IN_SECONDS;
         }
 
         update_user_meta(

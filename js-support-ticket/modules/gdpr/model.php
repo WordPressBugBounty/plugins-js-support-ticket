@@ -72,6 +72,15 @@ class JSSTgdprModel {
         if ($jsst_data['id'] && !$this->checkCanDelete($jsst_data['id'])) { // editing existing request: verify ownership
             die( esc_html__( 'Security check Failed', 'js-support-ticket' ) );
         }
+        /* The requester may change only the wording. A posted uid moved the
+           request onto another user, whose data the administrator would then
+           erase (security report, 1 November 2026); status and created are the
+           desk's. */
+        $jsst_data = array(
+            'id'      => $jsst_data['id'],
+            'subject' => isset($jsst_data['subject']) ? $jsst_data['subject'] : '',
+            'message' => isset($jsst_data['message']) ? $jsst_data['message'] : '',
+        );
     	if (!$jsst_data['id']) { //new
     	    $jsst_data['created'] = date_i18n('Y-m-d H:i:s');
             $jsst_data['uid'] = JSSTincluder::getObjectClass('user')->uid();
@@ -436,20 +445,47 @@ class JSSTgdprModel {
         );
 
         JSSTmessage::setMessage(esc_html(__('User identifying data erased', 'js-support-ticket')), 'updated');
-        $jsst_user_data = get_user_by('ID',$jsst_uid);
-        $jsst_email = $jsst_user_data->user_email;
-        $jsst_name = $jsst_user_data->display_name;
+        $this->mailRequester($jsst_uid);
+        return;
+    }
+
+    /**
+     * Tell the person whose data was erased or deleted. $jsst_uid is the help
+     * desk's own user id (js_ticket_users.id), not a WordPress user id; it was
+     * looked up with get_user_by('ID'), so the message went to whichever
+     * WordPress account had that number - another person, or nobody with a PHP
+     * warning (2 November 2026). The linked WordPress account gives the current
+     * address and name; without one, the help desk's own record does.
+     */
+    private function mailRequester($jsst_uid) {
+        $jsst_user = jssupportticket::$_db->get_row(jssupportticket::$_db->prepare(
+            "SELECT wpuid, user_email, display_name, name FROM `" . jssupportticket::$_db->prefix . "js_ticket_users` WHERE id = %d", $jsst_uid));
+        if (!$jsst_user) {
+            return;
+        }
+        $jsst_email = (string) $jsst_user->user_email;
+        $jsst_name = (string) ($jsst_user->display_name !== '' && $jsst_user->display_name !== null ? $jsst_user->display_name : $jsst_user->name);
+        $jsst_wpuser = ((int) $jsst_user->wpuid > 0) ? get_user_by('ID', (int) $jsst_user->wpuid) : false;
+        if ($jsst_wpuser) {
+            $jsst_email = $jsst_wpuser->user_email;
+            $jsst_name = $jsst_wpuser->display_name;
+        }
+        if (!is_email($jsst_email)) {
+            return;
+        }
         jssupportticket::$jsst_data['mail_data']['email'] = $jsst_email;
         jssupportticket::$jsst_data['mail_data']['name'] = $jsst_name;
         JSSTincluder::getJSModel('email')->sendMail(4, 1); // Mailfor, Delete Ticket
-        return;
     }
 
 function deleteUserData($jsst_uid){
     if(!is_numeric($jsst_uid) || $jsst_uid == 0){
         return false;
     }
-    $jsst_query = jssupportticket::$_db->prepare("SELECT id FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE uid = %d", $jsst_uid);
+    /* The attachment folder is read here, with the id: the ticket row is
+       deleted first below, and reading it afterwards found nothing, so the
+       files stayed on disk. */
+    $jsst_query = jssupportticket::$_db->prepare("SELECT id, attachmentdir FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE uid = %d", $jsst_uid);
     $jsst_uids = jssupportticket::$_db->get_results($jsst_query);
 
     foreach ($jsst_uids as $jsst_ticket) { // erase tickets data
@@ -474,12 +510,7 @@ function deleteUserData($jsst_uid){
         $jsst_maindir = wp_upload_dir();
         $jsst_mainpath = $jsst_maindir['basedir'] . '/' . $jsst_datadirectory . '/attachmentdata';
 
-        // Using prepare for secure query with your required prefix format
-        $jsst_query = jssupportticket::$_db->prepare(
-            "SELECT attachmentdir FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE id = %d",
-            $jsst_ticket->id
-        );
-        $jsst_foldername = jssupportticket::$_db->get_var($jsst_query);
+        $jsst_foldername = $jsst_ticket->attachmentdir;
 
         if (!empty($jsst_foldername)) {
             $jsst_folder_path = $jsst_mainpath . '/ticket/' . $jsst_foldername;
@@ -509,15 +540,9 @@ function deleteUserData($jsst_uid){
     $jsst_query = jssupportticket::$_db->prepare("UPDATE `" . jssupportticket::$_db->prefix . "js_ticket_erasedatarequests` SET status = 3 WHERE uid = %d", $jsst_uid);
     jssupportticket::$_db->query($jsst_query);
 
-    $jsst_user_data = get_user_by('ID',$jsst_uid);
 
     JSSTmessage::setMessage(esc_html(__('User data Deleted', 'js-support-ticket')), 'updated');
-    $jsst_user_data = get_user_by('ID',$jsst_uid);
-    $jsst_email = $jsst_user_data->user_email;
-    $jsst_name = $jsst_user_data->display_name;
-    jssupportticket::$jsst_data['mail_data']['email'] = $jsst_email;
-    jssupportticket::$jsst_data['mail_data']['name'] = $jsst_name;
-    JSSTincluder::getJSModel('email')->sendMail(4, 1); // Mailfor, Delete Ticket
+    $this->mailRequester($jsst_uid);
 }
 
     function getAdminSearchFormDataGDPR(){

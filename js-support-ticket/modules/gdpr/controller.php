@@ -148,6 +148,17 @@ class JSSTgdprController {
         die();
     }
 
+    /* The two actions below erase or delete a user's data, so they act only on
+       a user who filed an erase request; the request queue is their only
+       caller (security report, 1 November 2026). */
+    private static function hasEraseRequest($jsst_uid) {
+        if ($jsst_uid < 1) {
+            return false;
+        }
+        return (bool) jssupportticket::$_db->get_var(jssupportticket::$_db->prepare(
+            "SELECT id FROM `" . jssupportticket::$_db->prefix . "js_ticket_erasedatarequests` WHERE uid = %d LIMIT 1", $jsst_uid));
+    }
+
     static function deleteuserdata() {
         if (!current_user_can('manage_options')) { //only admin can change it.
             return false;
@@ -158,7 +169,11 @@ class JSSTgdprController {
             die( esc_html__( 'Security check Failed', 'js-support-ticket' ) );
         }
         $jsst_uid  = absint( JSSTrequest::getVar('jssupportticketid') );
-        $jsst_return_value = JSSTincluder::getJSModel('gdpr')->deleteUserData($jsst_uid);
+        if (self::hasEraseRequest($jsst_uid)) {
+            JSSTincluder::getJSModel('gdpr')->deleteUserData($jsst_uid);
+        } else {
+            JSSTmessage::setMessage(esc_html(__('No Record Found', 'js-support-ticket')), 'error');
+        }
         $jsst_url = admin_url("admin.php?page=gdpr&jstlay=erasedatarequests");
         wp_safe_redirect($jsst_url);
         die();
@@ -173,7 +188,11 @@ class JSSTgdprController {
             die( esc_html__( 'Security check Failed', 'js-support-ticket' ) );
         }
         $jsst_uid  = absint( JSSTrequest::getVar('jssupportticketid') );
-        $jsst_return_value = JSSTincluder::getJSModel('gdpr')->anonymizeUserData($jsst_uid);
+        if (self::hasEraseRequest($jsst_uid)) {
+            JSSTincluder::getJSModel('gdpr')->anonymizeUserData($jsst_uid);
+        } else {
+            JSSTmessage::setMessage(esc_html(__('No Record Found', 'js-support-ticket')), 'error');
+        }
         $jsst_url = admin_url("admin.php?page=gdpr&jstlay=erasedatarequests");
         wp_safe_redirect($jsst_url);
         die();

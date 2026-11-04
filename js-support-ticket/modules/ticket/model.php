@@ -3249,6 +3249,23 @@ class JSSTticketModel {
         return !JSSTcapability::can($jsst_action, array('ticket' => (int) $jsst_ticketid));
     }
 
+    /**
+     * May the logged-in support user open this ticket?
+     *
+     * validateTicketDetailForStaff() answers for agents on the Agents & Teams
+     * list and is always false without that pack. A Help Desk Agent by role
+     * alone works every ticket on such a desk (5.0.1), so the role is the
+     * answer there. The AI features ask this, not the older check, so they
+     * are not closed to the agents the free plugin supports.
+     */
+    function staffMayOpenTicket($jsst_ticketid) {
+        if (current_user_can('manage_options')) return true;
+        if (!in_array('agent', jssupportticket::$_active_addons)) {
+            return class_exists('JSSTroles') && current_user_can(JSSTroles::CAP_TICKETS);
+        }
+        return $this->validateTicketDetailForStaff($jsst_ticketid) === true;
+    }
+
     function validateTicketDetailForStaff($jsst_ticketid) {
         if(!in_array('agent', jssupportticket::$_active_addons)){
             return false;
@@ -4205,6 +4222,30 @@ class JSSTticketModel {
          * The old ticket search stays as the fallback for a desk with no AI
          * Agent installed - it is free-core behaviour and must not vanish
          * because a paid add-on is absent. */
+
+        /* The doors before either search. This task is reachable logged out
+           (the ajax handler is registered nopriv), and the corpus branch used
+           to run before anything was asked - so a guest could read the
+           knowledge base, canned responses and crawled documents through it.
+           The same nonce the ticket search checks, somebody who works
+           tickets, and, for anyone short of an administrator, a ticket they
+           may open. Everyone else gets an empty list. */
+        if (!wp_verify_nonce(JSSTrequest::getVar('_wpnonce'), 'check-smart-reply')) {
+            return json_encode(array());
+        }
+        $jsst_isadmin = current_user_can('manage_options');
+        $jsst_isstaff = (class_exists('JSSTroles') && current_user_can(JSSTroles::CAP_TICKETS))
+            || (in_array('agent', jssupportticket::$_active_addons) && JSSTincluder::getJSModel('agent')->isUserStaff());
+        if (!$jsst_isadmin && !$jsst_isstaff) {
+            return json_encode(array());
+        }
+        if (!$jsst_isadmin) {
+            $jsst_forticket = absint(JSSTrequest::getVar('ticketId'));
+            if ($jsst_forticket <= 0 || !$this->staffMayOpenTicket($jsst_forticket)) {
+                return json_encode(array());
+            }
+        }
+
         if (class_exists('JSSTaiagentretriever')
                 && (!class_exists('JSSTaipolicy') || JSSTaipolicy::allows(JSSTaipolicy::LANE_ONSITE))) {
             $jsst_fromcorpus = $this->aiSuggestionsFromCorpus();
@@ -4609,6 +4650,15 @@ class JSSTticketModel {
             // because it looks like one is in place.
             $jsst_ip  = isset($_SERVER['REMOTE_ADDR'])
                 ? sanitize_text_field(wp_unslash($_SERVER['REMOTE_ADDR'])) : '';
+            /* An IPv6 visitor is keyed by their /64. One connection is handed
+               a whole /64, so keying the full address gave anybody 2^64 fresh
+               counters to rotate through. */
+            if (filter_var($jsst_ip, FILTER_VALIDATE_IP, FILTER_FLAG_IPV6)) {
+                $jsst_packed = @inet_pton($jsst_ip);
+                if ($jsst_packed !== false && strlen($jsst_packed) === 16) {
+                    $jsst_ip = bin2hex(substr($jsst_packed, 0, 8)) . '::/64';
+                }
+            }
             $jsst_who = 'g' . md5($jsst_ip);
         }
 
@@ -4639,6 +4689,12 @@ class JSSTticketModel {
 
         if (intval($jsst_bucket['count']) >= $jsst_limit) return false;
 
+        /* And a ceiling over all guests together. The per-visitor limit bounds
+           one visitor; somebody with many addresses is many visitors, and every
+           guest summary is paid by the site. Asked after the visitor's own
+           limit, so a request refused there does not use up the site's. */
+        if ($jsst_summary && $jsst_uid < 1 && !$this->guestSummaryAllowed()) return false;
+
         $jsst_bucket['count'] = intval($jsst_bucket['count']) + 1;
 
         // Expire with the window it represents, plus a second, so the row
@@ -4647,6 +4703,57 @@ class JSSTticketModel {
         set_transient($jsst_key, $jsst_bucket, $jsst_ttl);
 
         return true;
+    }
+
+    /**
+     * May one more guest have a written answer this hour, site-wide?
+     *
+     * 200 an hour by default (filter `jsst_aiagent_guest_summary_ceiling`;
+     * 0 or less switches the ceiling off). Past it a guest still gets the
+     * links, only not the paid answer.
+     *
+     * The count has to be atomic: a transient read and written back loses
+     * increments to every request that overlaps it, and a burst - the very
+     * thing this is for - is all overlap. So it is wp_cache_incr() where a
+     * persistent object cache exists, and otherwise one options row
+     * ("hour:count") moved on by a single UPDATE, which the database applies
+     * one request at a time. One row, reused every hour, so nothing piles up.
+     */
+    private function guestSummaryAllowed() {
+        $jsst_ceiling = intval(apply_filters('jsst_aiagent_guest_summary_ceiling', 200));
+        if ($jsst_ceiling < 1) return true;
+
+        $jsst_hour = gmdate('YmdH');
+
+        if (wp_using_ext_object_cache()) {
+            $jsst_key = 'guest_ai_' . $jsst_hour;
+            wp_cache_add($jsst_key, 0, 'jsst_ratelimit', 2 * HOUR_IN_SECONDS);
+            $jsst_count = wp_cache_incr($jsst_key, 1, 'jsst_ratelimit');
+            if ($jsst_count !== false) {
+                return ((int) $jsst_count <= $jsst_ceiling);
+            }
+        }
+
+        $jsst_db = jssupportticket::$_db;
+        $jsst_name = 'jsst_ir_guest_ai_hour';
+        $jsst_db->query($jsst_db->prepare(
+            "INSERT IGNORE INTO `" . $jsst_db->options . "` (option_name, option_value, autoload) VALUES (%s, %s, 'no')",
+            $jsst_name, $jsst_hour . ':0'));
+        $jsst_db->query($jsst_db->prepare(
+            "UPDATE `" . $jsst_db->options . "`
+                SET option_value = IF(SUBSTRING_INDEX(option_value, ':', 1) = %s,
+                                      CONCAT(%s, ':', CAST(SUBSTRING_INDEX(option_value, ':', -1) AS UNSIGNED) + 1),
+                                      CONCAT(%s, ':1'))
+              WHERE option_name = %s",
+            $jsst_hour, $jsst_hour, $jsst_hour, $jsst_name));
+        $jsst_value = (string) $jsst_db->get_var($jsst_db->prepare(
+            "SELECT option_value FROM `" . $jsst_db->options . "` WHERE option_name = %s", $jsst_name));
+
+        $jsst_parts = explode(':', $jsst_value);
+        if (count($jsst_parts) !== 2 || $jsst_parts[0] !== $jsst_hour) {
+            return true;   // the counter could not be read; the per-visitor limit still holds
+        }
+        return ((int) $jsst_parts[1] <= $jsst_ceiling);
     }
 
     /**

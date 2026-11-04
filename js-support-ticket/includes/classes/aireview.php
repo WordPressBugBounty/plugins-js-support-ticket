@@ -72,6 +72,8 @@ class JSSTaireview {
     const STATE_REJECTED = 'rejected';
     /** It was sent, and then withdrawn. */
     const STATE_RETRACTED = 'retracted';
+    /** A person answered the ticket themselves; this one was never sent. */
+    const STATE_ANSWERED = 'answered';
 
     /** Retraction lookups are per ticket view; memoise the request. */
     private static $jsst_retracted = null;
@@ -540,21 +542,73 @@ class JSSTaireview {
             return false;
         }
 
-        $jsst_replyid = (int) apply_filters('jsst_ai_send_answer', 0, $jsst_row);
-        if ($jsst_replyid < 1) {
+        /* Claimed before it is sent, in one statement that only succeeds while
+           the row is still held. Two agents pressing Approve together (or one
+           pressing it twice) both read "held" above; only one of them gets
+           this row, and only that one sends. */
+        jssupportticket::$_db->query(jssupportticket::$_db->prepare(
+            "UPDATE `" . self::table() . "`
+                SET state = %s, decidedby = %d, decided = %s, note = %s
+              WHERE id = %d AND state = %s",
+            self::STATE_SENT, get_current_user_id(), current_time('Y-m-d H:i:s'),
+            substr((string) $jsst_note, 0, 255), (int) $jsst_id, self::STATE_HELD));
+        if ((int) jssupportticket::$_db->rows_affected !== 1) {
             return false;
         }
 
-        jssupportticket::$_db->update(self::table(), array(
-            'state'     => self::STATE_SENT,
-            'replyid'   => $jsst_replyid,
-            'decidedby' => get_current_user_id(),
-            'decided'   => current_time('Y-m-d H:i:s'),
-            'note'      => substr((string) $jsst_note, 0, 255),
-        ), array('id' => (int) $jsst_id));
+        $jsst_replyid = (int) apply_filters('jsst_ai_send_answer', 0, $jsst_row);
+        if ($jsst_replyid < 1) {
+            // Nothing went out, so it goes back to waiting rather than claiming a send.
+            jssupportticket::$_db->query(jssupportticket::$_db->prepare(
+                "UPDATE `" . self::table() . "`
+                    SET state = %s, decidedby = 0, decided = NULL
+                  WHERE id = %d AND state = %s AND replyid = 0",
+                self::STATE_HELD, (int) $jsst_id, self::STATE_SENT));
+            return false;
+        }
+
+        jssupportticket::$_db->update(self::table(),
+            array('replyid' => $jsst_replyid),
+            array('id' => (int) $jsst_id));
+
+        /* The engine may also have left an unsent draft of the same answer on
+           the ticket. Approved here, that draft is now a second copy waiting to
+           be sent, so it goes. */
+        jssupportticket::$_db->delete(jssupportticket::$_db->prefix . 'js_ticket_replies',
+            array('ticketid' => (int) $jsst_row->ticketid, 'is_ai_draft' => 1));
 
         self::$jsst_retracted = null;
         return true;
+    }
+
+    /**
+     * A person answered the ticket, so nothing held on it may be sent now.
+     *
+     * Called when an agent sends a reply from the AI draft: the held answer
+     * in this queue is the same answer, and approving it afterwards would send
+     * it to the customer twice. Marked as answered by a person rather than
+     * rejected - nobody judged it wrong - and kept for the shadow comparison.
+     *
+     * @return int how many held answers were closed.
+     */
+    public static function closeHeldForTicket($jsst_ticketid, $jsst_reason = '') {
+        $jsst_ticketid = (int) $jsst_ticketid;
+        if ($jsst_ticketid < 1 || !self::available()) {
+            return 0;
+        }
+        if ($jsst_reason === 'agent_sent') {
+            $jsst_note = esc_html(__('A person sent a reply from the AI draft, so this was not sent again.', 'js-support-ticket'));
+        } elseif ($jsst_reason === '') {
+            $jsst_note = esc_html(__('A person answered the ticket, so this was not sent.', 'js-support-ticket'));
+        } else {
+            $jsst_note = (string) $jsst_reason;
+        }
+        return (int) jssupportticket::$_db->query(jssupportticket::$_db->prepare(
+            "UPDATE `" . self::table() . "`
+                SET state = %s, note = %s, decidedby = %d, decided = %s
+              WHERE ticketid = %d AND state = %s",
+            self::STATE_ANSWERED, substr($jsst_note, 0, 255), get_current_user_id(),
+            current_time('Y-m-d H:i:s'), $jsst_ticketid, self::STATE_HELD));
     }
 
     /** A person said no. Nothing was sent, and the text is kept for the record. */
@@ -726,7 +780,7 @@ class JSSTaireview {
     /** How many in each state, for the badge and the metrics. */
     public static function counts() {
         $jsst_out = array(self::STATE_HELD => 0, self::STATE_SENT => 0,
-                          self::STATE_REJECTED => 0, self::STATE_RETRACTED => 0);
+                          self::STATE_REJECTED => 0, self::STATE_RETRACTED => 0, self::STATE_ANSWERED => 0);
         if (!self::available()) return $jsst_out;
 
         foreach ((array) jssupportticket::$_db->get_results(
@@ -1102,10 +1156,18 @@ class JSSTaireview {
      * tells an attacker how much of their guess was right.
      */
     public static function handleHandoff() {
-        if (!isset($_GET[self::HANDOFF_ARG])) return;
+        if (!isset($_GET[self::HANDOFF_ARG]) && !isset($_POST[self::HANDOFF_ARG])) return;
 
-        $jsst_ticketid = (int) $_GET[self::HANDOFF_ARG];
-        $jsst_given    = isset($_GET['jsst_t']) ? sanitize_text_field(wp_unslash($_GET['jsst_t'])) : '';
+        /* Opening the link only asks; pressing the button does it. Mail
+           scanners and link previews fetch every URL in a message, and when
+           the GET itself made the change, every automatic answer was "passed
+           to a person" before the customer had read it. The POST carries the
+           same signature as a hidden field, so it needs no session either. */
+        $jsst_posted   = (isset($_SERVER['REQUEST_METHOD']) && strtoupper((string) $_SERVER['REQUEST_METHOD']) === 'POST'
+                          && isset($_POST[self::HANDOFF_ARG]));
+        $jsst_source   = $jsst_posted ? $_POST : $_GET;
+        $jsst_ticketid = isset($jsst_source[self::HANDOFF_ARG]) ? (int) $jsst_source[self::HANDOFF_ARG] : 0;
+        $jsst_given    = isset($jsst_source['jsst_t']) ? sanitize_text_field(wp_unslash($jsst_source['jsst_t'])) : '';
         $jsst_expected = self::handoffToken($jsst_ticketid);
 
         if ($jsst_expected === '' || $jsst_given === '' || !hash_equals($jsst_expected, $jsst_given)) {
@@ -1114,6 +1176,18 @@ class JSSTaireview {
             wp_die(
                 esc_html(__('This link is no longer valid. Please reply to your ticket instead and a member of the team will pick it up.', 'js-support-ticket')),
                 esc_html(__('Link not valid', 'js-support-ticket')),
+                array('response' => 200, 'link_url' => esc_url(home_url('/')), 'link_text' => esc_html(__('Back to the site', 'js-support-ticket'))));
+        }
+
+        if (!$jsst_posted) {
+            nocache_headers();
+            $jsst_form = '<p>' . esc_html(__('Would you like a member of our team to look at your ticket? Press the button and a person will reply on the ticket.', 'js-support-ticket')) . '</p>'
+                . '<form method="post" action="' . esc_url(self::handoffUrl($jsst_ticketid)) . '">'
+                . '<input type="hidden" name="' . esc_attr(self::HANDOFF_ARG) . '" value="' . esc_attr($jsst_ticketid) . '" />'
+                . '<input type="hidden" name="jsst_t" value="' . esc_attr($jsst_given) . '" />'
+                . '<p><button type="submit" class="button button-primary">' . esc_html(__('Pass my ticket to a person', 'js-support-ticket')) . '</button></p>'
+                . '</form>';
+            wp_die($jsst_form, esc_html(__('Pass to a person', 'js-support-ticket')),
                 array('response' => 200, 'link_url' => esc_url(home_url('/')), 'link_text' => esc_html(__('Back to the site', 'js-support-ticket'))));
         }
 
@@ -1209,6 +1283,7 @@ class JSSTaireview {
             self::STATE_SENT      => array('label' => esc_html(__('Sent', 'js-support-ticket')),      'pill' => 'jsst-pill-ok'),
             self::STATE_REJECTED  => array('label' => esc_html(__('Rejected', 'js-support-ticket')),  'pill' => 'jsst-pill-off'),
             self::STATE_RETRACTED => array('label' => esc_html(__('Withdrawn', 'js-support-ticket')), 'pill' => 'jsst-pill-bad'),
+            self::STATE_ANSWERED  => array('label' => esc_html(__('Answered by a person', 'js-support-ticket')), 'pill' => 'jsst-pill-off'),
         );
     }
 

@@ -3396,7 +3396,7 @@ if (jssupportticket::$_config['offline'] == 2) {
                                     <div class="js-tkt-wc-order-box">
                                         <div class="js-tkt-wc-order-item">
                                             <div class="js-tkt-wc-order-item-title"><?php echo esc_html($jsst_field_array['wcorderid']); ?>:</div>
-                                            <div class="js-tkt-wc-order-item-value">#<?php echo esc_html($jsst_order->get_id()); ?></div>
+                                            <div class="js-tkt-wc-order-item-value">#<?php echo esc_html($jsst_order->get_order_number()); ?></div>
                                         </div>
                                         <div class="js-tkt-wc-order-item">
                                             <div class="js-tkt-wc-order-item-title"><?php echo esc_html(__("Status",'js-support-ticket')); ?>:</div>

@@ -69,6 +69,11 @@ class JSSTcopilot {
                              . 'Summarise the conversation: what the customer is trying to do, what has already been tried, and what is still outstanding. '
                              . 'Keep it to a short paragraph or a few lines. '
                              . 'Use only what the ticket says. If something important was never stated, say so rather than assuming it.',
+                /* On Zywrap, its support-ticket summary wrapper with the
+                   thread as its input: tested to give problem, impact, what
+                   was tried, status and next action. Other engines use the
+                   system prompt above. */
+                'zywrap'    => array('wrapper' => 'ts_support_ticket_condensed_summary_base', 'input' => 'sourceText', 'contract' => 'plain'),
             ),
             'translate' => array(
                 'label'     => esc_html(__('Translate', 'js-support-ticket')),
@@ -154,22 +159,6 @@ class JSSTcopilot {
                     'required'   => array('score', 'label', 'atrisk', 'evidence'),
                     'additionalProperties' => false,
                 ),
-            ),
-            /* Rewriting a canned response, not a ticket. The only action whose
-               subject is the library rather than a conversation, which is why
-               it takes its text from the caller - see run()'s $jsst_options
-               handling. (Roadmap 6.0-KB-02) */
-            'rewrite' => array(
-                'label'     => esc_html(__('Improve the wording', 'js-support-ticket')),
-                'title'     => esc_html(__('Tighten a canned response without changing what it says', 'js-support-ticket')),
-                'effort'    => 'low',
-                'maxtokens' => 4000,
-                'needs'     => 'text',
-                'system'    => 'Rewrite the support message below so it reads better: plainer, warmer, and shorter where it can be. '
-                             . 'Do NOT change what it says. Every step, condition, figure, deadline and policy must survive exactly as written - '
-                             . 'this text goes to customers and a rewrite that quietly changes a refund window is worse than clumsy wording. '
-                             . 'Leave every {placeholder} exactly as it is, spelled the same way, or it will stop being filled in. '
-                             . 'Return the rewritten message only, with no commentary.',
             ),
             'draft' => array(
                 'label'     => esc_html(__('Draft a reply', 'js-support-ticket')),
@@ -495,9 +484,23 @@ class JSSTcopilot {
         }
         $jsst_action = $jsst_actions[$jsst_actionkey];
 
+        /* Which ticket, not only whether. The capability says somebody works
+           tickets; it does not say they may read this one, and every action
+           here sends the whole thread to the engine and shows the answer. So
+           anyone short of an administrator is asked the question the ticket
+           screen asks. That check reads the logged-in user, so a run on
+           somebody else's behalf (cron) is allowed only for an administrator,
+           which is what triage runs as. */
+        if ((int) $jsst_ticketid > 0 && !user_can($jsst_actor, 'manage_options')) {
+            if ($jsst_actor !== get_current_user_id()
+                    || !JSSTincluder::getJSModel('ticket')->staffMayOpenTicket((int) $jsst_ticketid)) {
+                return new WP_Error('jsst_copilot_denied', esc_html(__('You are not allowed to open this ticket.', 'js-support-ticket')));
+            }
+        }
+
         /* An action pointed at supplied text rather than at a ticket.
-           Any action may be, not just the one that requires it: `rewrite` has
-           no ticket by nature, and `translate` is used both ways - on a ticket
+           Any action may be, not just one that requires it (`needs` text):
+           `translate` is used both ways - on a ticket
            an agent is reading, and on a canned response somebody is localising
            (6.0-KB-02). So the text is what decides, and the ticket context
            below is built only when there is none. */
@@ -582,6 +585,13 @@ class JSSTcopilot {
             'effort'    => $jsst_action['effort'],
             'maxtokens' => $jsst_action['maxtokens'],
             'schema'    => isset($jsst_action['schema']) ? $jsst_action['schema'] : null,
+            // The wrapper this action has on Zywrap, fed the thread as its own input; ignored by other engines.
+            'zywrap'    => !empty($jsst_action['zywrap']) ? array(
+                'wrapper'   => $jsst_action['zywrap']['wrapper'],
+                'contract'  => isset($jsst_action['zywrap']['contract']) ? $jsst_action['zywrap']['contract'] : '',
+                'prompt'    => '',
+                'variables' => array($jsst_action['zywrap']['input'] => $jsst_context),
+            ) : null,
             'feature'   => self::featureOf($jsst_options),
             'ticket'    => (int) $jsst_ticketid,
         ));
@@ -895,9 +905,10 @@ class JSSTcopilot {
             'when'      => time(),
             'ok'        => !is_wp_error($jsst_result),
             'error'     => is_wp_error($jsst_result) ? $jsst_result->get_error_message() : '',
-            'model'     => is_wp_error($jsst_result) ? '' : $jsst_result['model'],
-            'intokens'  => is_wp_error($jsst_result) ? 0 : $jsst_result['intokens'],
-            'outtokens' => is_wp_error($jsst_result) ? 0 : $jsst_result['outtokens'],
+            // Zywrap leaves the counts out when its proxy does not report them.
+            'model'     => (!is_wp_error($jsst_result) && isset($jsst_result['model'])) ? $jsst_result['model'] : '',
+            'intokens'  => (!is_wp_error($jsst_result) && isset($jsst_result['intokens'])) ? (int) $jsst_result['intokens'] : 0,
+            'outtokens' => (!is_wp_error($jsst_result) && isset($jsst_result['outtokens'])) ? (int) $jsst_result['outtokens'] : 0,
         ));
         update_option(self::OPT_LOG, array_slice($jsst_log, 0, self::LOG_LIMIT), false);
     }

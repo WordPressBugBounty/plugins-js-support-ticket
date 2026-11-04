@@ -23,15 +23,16 @@ if (class_exists('JSSTaiengine')) {
  * what 6.0-AI-01 means by unification.
  *
  * An engine is five things: which lane it runs in, where to post, how to
- * authenticate, how to shape a request, and how to read the answer. Three ship:
+ * authenticate, how to shape a request, and how to read the answer. Four ship:
  *
  *   zywrap     Our own hosted engine. The default because it is the only one
  *              that works without the site owner opening an account somewhere
- *              else first — a key comes with the licence and there is nothing
- *              to configure. Hosted lane.
+ *              else first — the account is created on the settings screen
+ *              itself. Hosted lane.
  *   anthropic  Bring your own key. Nothing of ours stands between the site and
  *              the provider: their server, their key, their bill, their data
  *              processing agreement. Hosted lane.
+ *   openai     The same, with OpenAI. (5.0.4) Hosted lane.
  *   local      A model the site owner runs — Ollama, LM Studio, vLLM,
  *              llama.cpp, anything speaking OpenAI chat completions. No key
  *              needed, no per-token cost, nothing leaving the network.
@@ -71,9 +72,21 @@ class JSSTaiengine {
     const OPT_LOCAL_ENDPOINT = 'jsst_ai_local_endpoint';
     const OPT_LOCAL_MODEL    = 'jsst_ai_local_model';
     const OPT_LOCAL_TIMEOUT  = 'jsst_ai_local_timeout';
+    /** Whether that address was found on the internet, and for which address. */
+    const OPT_LOCAL_PUBLIC   = 'jsst_ai_local_public';
 
-    /** Seconds to wait for a hosted reply before giving up on it. */
-    const TIMEOUT = 90;
+    /**
+     * Seconds to wait for a hosted reply before giving up on it.
+     *
+     * A person is waiting on almost every call - a button on the ticket
+     * screen, a customer on the form - and a minute is already long. Past it
+     * the request is not retried either: a timed-out request may still have
+     * run and been billed.
+     */
+    const TIMEOUT = 60;
+
+    /** The longest retry-after this will wait out before asking once more. */
+    const RETRY_WAIT_MAX = 10;
 
     /**
      * Seconds to wait for a local one.
@@ -115,12 +128,14 @@ class JSSTaiengine {
             'zywrap' => array(
                 'label'         => 'Zywrap',
                 'lane'          => 'hosted',
-                'blurb'         => esc_html(__('Our own engine. Comes with your licence — no account to open and no key to find.', 'js-support-ticket')),
+                /* 5.0.4: no licence ever issued a Zywrap key; the account is
+                   created or connected on this screen (JSSTzywrapconnect). */
+                'blurb'         => esc_html(__('Our own engine. Create a free account right here, with 10,000 credits to start, or connect the one you have.', 'js-support-ticket')),
                 'recommended'   => true,
                 'endpoint'      => 'https://api.zywrap.com/v1/proxy',
                 'models'        => array(),
                 'default_model' => '',
-                'keyhint'       => esc_html(__('Issued with your JS Help Desk licence.', 'js-support-ticket')),
+                'keyhint'       => esc_html(__('A key from the API keys page of your Zywrap account.', 'js-support-ticket')),
                 'ask'           => array(__CLASS__, 'askZywrap'),
             ),
             'anthropic' => array(
@@ -148,9 +163,32 @@ class JSSTaiengine {
                 'read'          => array(__CLASS__, 'readAnthropic'),
                 'keyhint'       => esc_html(__('Starts with sk-ant-. Created at console.anthropic.com.', 'js-support-ticket')),
             ),
+            'openai' => array(
+                'label'    => 'OpenAI',
+                'lane'     => 'hosted',
+                'blurb'    => esc_html(__('Bring your own key. The request goes from your server to OpenAI — nothing of ours is in the middle.', 'js-support-ticket')),
+                'endpoint' => 'https://api.openai.com/v1/chat/completions',
+                'models'   => array(
+                    /* As Anthropic's: the default first, the price in the label.
+                       All of these take structured output and reasoning effort
+                       on Chat Completions. gpt-5.4-nano is left out: OpenAI has
+                       deprecated it. (5.0.4) */
+                    'gpt-6-luna'    => 'GPT-6 Luna - $0.10 / $0.50 per 1M tokens (recommended)',
+                    'gpt-5.6-luna'  => 'GPT-5.6 Luna - $0.20 / $1.20 per 1M tokens',
+                    'gpt-5.4-mini'  => 'GPT-5.4 mini - $0.75 / $4.50 per 1M tokens',
+                    'gpt-6.1-terra' => 'GPT-6.1 Terra - $1 / $5 per 1M tokens',
+                    'gpt-6.1-sol'   => 'GPT-6.1 Sol - $2 / $10 per 1M tokens',
+                ),
+                'default_model' => 'gpt-6-luna',
+                'build'         => array(__CLASS__, 'buildOpenAi'),
+                'read'          => array(__CLASS__, 'readOpenAi'),
+                'keyhint'       => esc_html(__('Starts with sk-. Created at platform.openai.com.', 'js-support-ticket')),
+            ),
             'local' => array(
                 'label'    => esc_html(__('Local model', 'js-support-ticket')),
-                'lane'     => 'local',
+                /* An address on the internet is a hosted service whatever the
+                   engine is called, so it runs under the hosted lane's switch. */
+                'lane'     => self::localIsPublic() ? 'hosted' : 'local',
                 'blurb'    => esc_html(__('A model you run yourself. Nothing leaves your network and there is no per-token cost.', 'js-support-ticket')),
                 'endpoint' => array(__CLASS__, 'localEndpoint'),
                 'models'   => array(),
@@ -227,7 +265,19 @@ class JSSTaiengine {
         if ($jsst_current['key'] === 'local') {
             return trim((string) get_option(self::OPT_LOCAL_MODEL, ''));
         }
-        $jsst_model = trim((string) get_option(self::OPT_MODEL, ''));
+        /* Zywrap picks its own model. The shared option holds the Anthropic
+           one, and reporting that here put an Anthropic model on every Zywrap
+           row of the usage meter. */
+        if ($jsst_current['key'] === 'zywrap') {
+            return 'zywrap';
+        }
+        /* One row per engine since there are two lists to choose from (5.0.4);
+           the shared row before it still answers for a site that saved there.
+           A name from another engine's list fails the check below. */
+        $jsst_model = trim((string) get_option(self::OPT_MODEL . '_' . $jsst_current['key'], ''));
+        if ($jsst_model === '') {
+            $jsst_model = trim((string) get_option(self::OPT_MODEL, ''));
+        }
         if ($jsst_model === '') {
             $jsst_model = trim((string) get_option('jsst_copilot_model', ''));
         }
@@ -238,6 +288,11 @@ class JSSTaiengine {
             return $jsst_model;
         }
         return $jsst_current['def']['default_model'];
+    }
+
+    /** Where one engine's chosen model is stored. (5.0.4) */
+    public static function modelOption($jsst_id) {
+        return self::OPT_MODEL . '_' . (string) $jsst_id;
     }
 
     public static function byId($jsst_id) {
@@ -336,6 +391,13 @@ class JSSTaiengine {
         if ($jsst_base === '') {
             return '';
         }
+        /* Asked again on use, not only on save: a value stored before this
+           check existed, or written by something other than the form, must
+           not reach the metadata service either. No DNS here - this runs on
+           every screen that asks whether AI is configured. */
+        if (!self::validLocalEndpoint($jsst_base, false)) {
+            return '';
+        }
         $jsst_base = untrailingslashit($jsst_base);
         if (substr($jsst_base, -17) === '/chat/completions') {
             return $jsst_base;
@@ -356,16 +418,207 @@ class JSSTaiengine {
      * administrator typed on purpose, because the only route to this option is
      * the settings form and the only person who can reach it already holds
      * manage_options.
+     *
+     * The one private range refused is link-local, with the names cloud hosts
+     * give their metadata service. Nobody runs a model there, and it is where
+     * a server's own credentials can be read - so the address box must not
+     * be a way to make this server fetch them. With $jsst_resolve the name is
+     * looked up too, so a hostname pointing at 169.254.169.254 is caught.
      */
-    public static function validLocalEndpoint($jsst_url) {
+    public static function validLocalEndpoint($jsst_url, $jsst_resolve = true) {
         $jsst_url = trim((string) $jsst_url);
         if ($jsst_url === '') {
             return true;
         }
-        $jsst_scheme = wp_parse_url($jsst_url, PHP_URL_SCHEME);
-        $jsst_host   = wp_parse_url($jsst_url, PHP_URL_HOST);
-        return (in_array($jsst_scheme, array('http', 'https'), true) && !empty($jsst_host));
+        $jsst_scheme = strtolower((string) wp_parse_url($jsst_url, PHP_URL_SCHEME));
+        $jsst_host   = strtolower(trim((string) wp_parse_url($jsst_url, PHP_URL_HOST), '[]'));
+        if (!in_array($jsst_scheme, array('http', 'https'), true) || $jsst_host === '') {
+            return false;
+        }
+        $jsst_host = rtrim($jsst_host, '.');
+        if (in_array($jsst_host, array('metadata', 'metadata.google.internal', 'metadata.goog', 'instance-data', 'instance-data.ec2.internal'), true)) {
+            return false;
+        }
+        $jsst_addresses = array($jsst_host);
+        // http://2852039166/ is 169.254.169.254 written as one number.
+        if (ctype_digit($jsst_host) && (float) $jsst_host <= 4294967295) {
+            $jsst_addresses[] = long2ip((int) $jsst_host);
+        }
+        if ($jsst_resolve && !filter_var($jsst_host, FILTER_VALIDATE_IP)) {
+            $jsst_found = @gethostbynamel($jsst_host);
+            if (is_array($jsst_found)) {
+                $jsst_addresses = array_merge($jsst_addresses, $jsst_found);
+            }
+        }
+        foreach ($jsst_addresses as $jsst_address) {
+            if (self::isLinkLocal($jsst_address)) {
+                return false;
+            }
+        }
+        return true;
     }
+
+    /** 169.254.0.0/16, fe80::/10, AWS's fd00:ec2::254, and v4 inside v6. */
+    private static function isLinkLocal($jsst_address) {
+        if (filter_var($jsst_address, FILTER_VALIDATE_IP) === false) {
+            return false;
+        }
+        $jsst_packed = @inet_pton($jsst_address);
+        if ($jsst_packed === false) {
+            return false;
+        }
+        if (strlen($jsst_packed) === 16) {
+            if ($jsst_packed === inet_pton('fd00:ec2::254')) {
+                return true;
+            }
+            if (ord($jsst_packed[0]) === 0xfe && (ord($jsst_packed[1]) & 0xc0) === 0x80) {
+                return true;
+            }
+            // ::ffff:a.b.c.d and ::a.b.c.d carry an IPv4 address in the last four bytes.
+            if (substr($jsst_packed, 0, 10) === str_repeat("\0", 10)
+                    && in_array(substr($jsst_packed, 10, 2), array("\xff\xff", "\0\0"), true)) {
+                $jsst_packed = substr($jsst_packed, 12, 4);
+            } else {
+                return false;
+            }
+        }
+        return (ord($jsst_packed[0]) === 169 && ord($jsst_packed[1]) === 254);
+    }
+
+    /**
+     * Is the saved local address somewhere on the internet?
+     *
+     * The local lane promises that nothing leaves the network, and the address
+     * box takes api.openai.com as readily as 127.0.0.1. A public address is
+     * therefore run as what it is - a hosted service - and the screen says so.
+     *
+     * No DNS here: engines() asks this on every request. The settings screen
+     * and the save look the name up (checkLocalAddress()) and store the
+     * answer. A name nobody has looked up yet counts only by what it shows
+     * itself - an IP address, or a name that is local by definition.
+     */
+    public static function localIsPublic() {
+        $jsst_base = trim((string) get_option(self::OPT_LOCAL_ENDPOINT, ''));
+        if ($jsst_base === '') {
+            return false;
+        }
+        $jsst_seen = get_option(self::OPT_LOCAL_PUBLIC, array());
+        if (is_array($jsst_seen) && isset($jsst_seen['endpoint']) && $jsst_seen['endpoint'] === $jsst_base) {
+            return !empty($jsst_seen['public']);
+        }
+        return (self::addressIsPublic($jsst_base, false) === true);
+    }
+
+    /**
+     * Look the saved local address up, and store whether it is public.
+     *
+     * Called from the settings screen and on save only, never per request.
+     * The lookup is kept for an hour so the screen does not ask DNS on every
+     * visit; a save passes $jsst_fresh, because the address just changed.
+     */
+    public static function checkLocalAddress($jsst_fresh = false) {
+        $jsst_base = trim((string) get_option(self::OPT_LOCAL_ENDPOINT, ''));
+        if ($jsst_base === '') {
+            delete_option(self::OPT_LOCAL_PUBLIC);
+            return false;
+        }
+        $jsst_cache = 'jsst_ai_local_where_' . md5($jsst_base);
+        $jsst_where = $jsst_fresh ? false : get_transient($jsst_cache);
+        if ($jsst_where !== 'public' && $jsst_where !== 'private') {
+            $jsst_where = (self::addressIsPublic($jsst_base, true) === true) ? 'public' : 'private';
+            set_transient($jsst_cache, $jsst_where, HOUR_IN_SECONDS);
+        }
+        update_option(self::OPT_LOCAL_PUBLIC, array('endpoint' => $jsst_base, 'public' => ($jsst_where === 'public')), false);
+        return ($jsst_where === 'public');
+    }
+
+    /**
+     * true when the address is on the internet, false when it is on this
+     * network, null when that cannot be told (a name not looked up, or one
+     * that does not resolve). Any one public address makes it public.
+     */
+    private static function addressIsPublic($jsst_url, $jsst_resolve) {
+        $jsst_host = rtrim(strtolower(trim((string) wp_parse_url($jsst_url, PHP_URL_HOST), '[]')), '.');
+        if ($jsst_host === '') {
+            return null;
+        }
+        // Local by definition, whatever a resolver says.
+        if ($jsst_host === 'localhost' || preg_match('/\.(localhost|local|internal)$/', $jsst_host)) {
+            return false;
+        }
+        $jsst_addresses = array();
+        if (filter_var($jsst_host, FILTER_VALIDATE_IP)) {
+            $jsst_addresses[] = $jsst_host;
+        } elseif (ctype_digit($jsst_host) && (float) $jsst_host <= 4294967295) {
+            $jsst_addresses[] = long2ip((int) $jsst_host);
+        } elseif ($jsst_resolve) {
+            $jsst_found = @gethostbynamel($jsst_host);
+            if (is_array($jsst_found)) {
+                $jsst_addresses = $jsst_found;
+            }
+            // A name with no IPv4 address may still have an IPv6 one.
+            if (empty($jsst_addresses) && function_exists('dns_get_record')) {
+                foreach ((array) @dns_get_record($jsst_host, DNS_AAAA) as $jsst_record) {
+                    if (!empty($jsst_record['ipv6'])) {
+                        $jsst_addresses[] = $jsst_record['ipv6'];
+                    }
+                }
+            }
+        }
+        if (empty($jsst_addresses)) {
+            return null;
+        }
+        foreach ($jsst_addresses as $jsst_address) {
+            if (self::isPublicAddress($jsst_address)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Not loopback, RFC 1918, CGNAT 100.64/10, link-local, unique-local
+     * fc00::/7 or 0/8 - so on the internet. IPv4 inside IPv6 is read as IPv4.
+     */
+    private static function isPublicAddress($jsst_address) {
+        $jsst_packed = @inet_pton((string) $jsst_address);
+        if ($jsst_packed === false) {
+            return false;
+        }
+        if (strlen($jsst_packed) === 16) {
+            // ::ffff:a.b.c.d and ::a.b.c.d; ::1 and :: land in 0/8 below.
+            if (substr($jsst_packed, 0, 10) === str_repeat("\0", 10)
+                    && in_array(substr($jsst_packed, 10, 2), array("\xff\xff", "\0\0"), true)) {
+                $jsst_packed = substr($jsst_packed, 12, 4);
+            } else {
+                $jsst_first = ord($jsst_packed[0]);
+                if (($jsst_first & 0xfe) === 0xfc) {
+                    return false;
+                }
+                return !($jsst_first === 0xfe && (ord($jsst_packed[1]) & 0xc0) === 0x80);
+            }
+        }
+        $jsst_a = ord($jsst_packed[0]);
+        $jsst_b = ord($jsst_packed[1]);
+        return !($jsst_a === 0 || $jsst_a === 10 || $jsst_a === 127
+            || ($jsst_a === 100 && ($jsst_b & 0xc0) === 64)
+            || ($jsst_a === 169 && $jsst_b === 254)
+            || ($jsst_a === 172 && ($jsst_b & 0xf0) === 16)
+            || ($jsst_a === 192 && $jsst_b === 168));
+    }
+
+    /**
+     * A page on zywrap.com, tagged so Zywrap can tell the visit came from the
+     * help desk. (5.0.4)
+     */
+    public static function zywrapUrl($jsst_path = '') {
+        return add_query_arg(
+            array('utm_source' => 'js-help-desk', 'utm_medium' => 'plugin'),
+            'https://www.zywrap.com/' . ltrim((string) $jsst_path, '/'));
+    }
+
+    /** Set when Zywrap refused a request for want of credits; cleared by the next answer. */
+    const OPT_ZYWRAP_NO_CREDITS = 'jsst_zywrap_no_credits';
 
     public static function localTimeout() {
         $jsst_seconds = (int) get_option(self::OPT_LOCAL_TIMEOUT, self::LOCAL_TIMEOUT);
@@ -510,6 +763,7 @@ class JSSTaiengine {
             'jsst_ai_ratelimited',
             'jsst_ai_overloaded',
             'jsst_ai_budget',
+            'jsst_ai_zywrap_empty',
         ), true);
     }
 
@@ -554,6 +808,10 @@ class JSSTaiengine {
             if (isset($jsst_call['system'])) {
                 $jsst_call['system'] = JSSTaipolicy::redact($jsst_call['system']);
             }
+            // A Zywrap wrapper's own inputs leave the site too.
+            if (!empty($jsst_call['zywrap']) && is_array($jsst_call['zywrap'])) {
+                $jsst_call['zywrap'] = self::redactValues($jsst_call['zywrap']);
+            }
         }
 
         /* The context is only built where the meter exists: it names that
@@ -563,11 +821,34 @@ class JSSTaiengine {
             return JSSTaiusage::meter(
                 self::meterContext($jsst_current, $jsst_call),
                 function () use ($jsst_current, $jsst_def, $jsst_call) {
-                    return self::send($jsst_current, $jsst_def, $jsst_call);
+                    return self::whole(self::send($jsst_current, $jsst_def, $jsst_call), $jsst_call);
                 }
             );
         }
-        return self::send($jsst_current, $jsst_def, $jsst_call);
+        return self::whole(self::send($jsst_current, $jsst_def, $jsst_call), $jsst_call);
+    }
+
+    /**
+     * A cut-off answer, refused when the caller cannot use one.
+     *
+     * An agent reading a draft can see it stops mid-sentence; an automatic
+     * answer sent to a customer, or a summary on the ticket form, cannot be
+     * read first. Those callers pass `notruncate` and get an error instead.
+     * The tokens travel in the error's data: the cut-off answer was billed.
+     */
+    private static function whole($jsst_result, $jsst_call) {
+        if (is_wp_error($jsst_result) || empty($jsst_call['notruncate']) || empty($jsst_result['truncated'])) {
+            return $jsst_result;
+        }
+        $jsst_usage = array();
+        foreach (array('intokens', 'outtokens') as $jsst_key) {
+            if (isset($jsst_result[$jsst_key])) {
+                $jsst_usage[$jsst_key] = (int) $jsst_result[$jsst_key];
+            }
+        }
+        return new WP_Error('jsst_ai_truncated',
+            esc_html(__('The answer was cut off before it finished, so it was not used.', 'js-support-ticket')),
+            $jsst_usage);
     }
 
     /**
@@ -612,6 +893,10 @@ class JSSTaiengine {
         if ($jsst_endpoint === '') {
             return new WP_Error('jsst_ai_noendpoint', esc_html(__('That engine has no address to post to.', 'js-support-ticket')));
         }
+        // The local address is looked up once more right before use; see validLocalEndpoint().
+        if ($jsst_current['key'] === 'local' && !self::validLocalEndpoint($jsst_endpoint)) {
+            return new WP_Error('jsst_ai_noendpoint', esc_html(__('The local model address points at a link-local or cloud metadata address, so nothing was sent.', 'js-support-ticket')));
+        }
 
         $jsst_request = call_user_func(
             $jsst_def['build'],
@@ -623,12 +908,28 @@ class JSSTaiengine {
             return $jsst_request;
         }
 
-        $jsst_response = wp_remote_post($jsst_endpoint, array(
-            'headers'   => $jsst_request['headers'],
-            'body'      => wp_json_encode($jsst_request['body']),
-            'timeout'   => empty($jsst_def['nokey']) ? self::TIMEOUT : self::localTimeout(),
-            'sslverify' => true,
-        ));
+        /* No redirects: a provider never answers with one, and following it
+           would let the local address bounce this request somewhere the check
+           above never saw. */
+        $jsst_args = array(
+            'headers'     => $jsst_request['headers'],
+            'body'        => wp_json_encode($jsst_request['body']),
+            'timeout'     => empty($jsst_def['nokey']) ? self::TIMEOUT : self::localTimeout(),
+            'sslverify'   => true,
+            'redirection' => 0,
+        );
+        $jsst_response = wp_remote_post($jsst_endpoint, $jsst_args);
+
+        /* One more try when the provider says "busy", after the wait it asks
+           for. Not on a transport error: that includes our own timeout, and a
+           request we stopped waiting for may still have run and been billed. */
+        if (!is_wp_error($jsst_response)) {
+            $jsst_wait = self::retryWait($jsst_response);
+            if ($jsst_wait !== null) {
+                sleep($jsst_wait);
+                $jsst_response = wp_remote_post($jsst_endpoint, $jsst_args);
+            }
+        }
 
         if (is_wp_error($jsst_response)) {
             if (!empty($jsst_def['nokey'])) {
@@ -652,15 +953,56 @@ class JSSTaiengine {
             ));
         }
 
+        /* The status first. A gateway in front of the provider answers a 502
+           or 503 with an HTML page, and reading the body first turned "the
+           provider is down" into "unreadable", which the spare engine is never
+           tried for. */
         $jsst_code = (int) wp_remote_retrieve_response_code($jsst_response);
         $jsst_body = json_decode(wp_remote_retrieve_body($jsst_response), true);
+        if ($jsst_code !== 200) {
+            return self::httpError($jsst_code, is_array($jsst_body) ? $jsst_body : array());
+        }
         if (!is_array($jsst_body)) {
             return new WP_Error('jsst_ai_unreadable', esc_html(__('The AI provider sent something this could not read.', 'js-support-ticket')));
         }
-        if ($jsst_code !== 200) {
-            return self::httpError($jsst_code, $jsst_body);
-        }
         return call_user_func($jsst_def['read'], $jsst_body);
+    }
+
+    /** 429, 529 and the other 5xx: busy, not broken, so worth one more try. */
+    private static function busy($jsst_code) {
+        return ($jsst_code === 429 || ($jsst_code >= 500 && $jsst_code <= 599));
+    }
+
+    /**
+     * Seconds to wait before the one retry, or null for no retry.
+     *
+     * The provider's retry-after is honoured when it is short. A longer one
+     * means the spare engine, if there is one, is the better next step, and a
+     * person is waiting either way.
+     */
+    private static function retryWait($jsst_response) {
+        if (!self::busy((int) wp_remote_retrieve_response_code($jsst_response))) {
+            return null;
+        }
+        // An account with no credit left answers 429 too, and waiting changes nothing.
+        $jsst_body = json_decode(wp_remote_retrieve_body($jsst_response), true);
+        if (is_array($jsst_body) && self::outOfCredit($jsst_body)) {
+            return null;
+        }
+        $jsst_after = trim((string) wp_remote_retrieve_header($jsst_response, 'retry-after'));
+        if ($jsst_after === '') {
+            return 2;
+        }
+        if (is_numeric($jsst_after)) {
+            $jsst_seconds = (int) ceil((float) $jsst_after);
+        } else {
+            $jsst_when = strtotime($jsst_after);
+            $jsst_seconds = ($jsst_when === false) ? 2 : $jsst_when - time();
+        }
+        if ($jsst_seconds > self::RETRY_WAIT_MAX) {
+            return null;
+        }
+        return max(1, $jsst_seconds);
     }
 
     /**
@@ -677,6 +1019,11 @@ class JSSTaiengine {
         } elseif (isset($jsst_body['error']) && is_string($jsst_body['error'])) {
             $jsst_detail = (string) $jsst_body['error'];
         }
+        /* Not a rate limit, whatever the status says: the account has no credit
+           left. The spare engine is tried, as for a spent budget. (5.0.4) */
+        if (self::outOfCredit($jsst_body)) {
+            return new WP_Error('jsst_ai_budget', esc_html(__('The AI provider account has no credit left. Add credit with the provider, or choose another engine on the AI Agent screen.', 'js-support-ticket')));
+        }
         switch ($jsst_code) {
             case 401:
             case 403:
@@ -685,11 +1032,10 @@ class JSSTaiengine {
                 return new WP_Error('jsst_ai_model', esc_html(__('The provider does not offer the model this is set to use. Pick another on the AI Agent screen.', 'js-support-ticket')));
             case 429:
                 return new WP_Error('jsst_ai_ratelimited', esc_html(__('The AI provider is rate limiting this site. Wait a moment and try again.', 'js-support-ticket')));
-            case 529:
-            case 500:
-            case 502:
-            case 503:
-                return new WP_Error('jsst_ai_overloaded', esc_html(__('The AI provider is unavailable right now. Nothing was changed — try again shortly.', 'js-support-ticket')));
+        }
+        // 408 and every 5xx, 529 included: the provider is not answering, so the spare may.
+        if ($jsst_code === 408 || self::busy($jsst_code)) {
+            return new WP_Error('jsst_ai_overloaded', esc_html(__('The AI provider is unavailable right now. Nothing was changed — try again shortly.', 'js-support-ticket')));
         }
         return new WP_Error('jsst_ai_failed', sprintf(
             /* translators: 1: HTTP status code, 2: the provider's own error message */
@@ -697,6 +1043,16 @@ class JSSTaiengine {
             $jsst_code,
             esc_html($jsst_detail)
         ));
+    }
+
+    /** OpenAI's "no credit left", which comes as a 429 like a rate limit. (5.0.4) */
+    private static function outOfCredit($jsst_body) {
+        foreach (array('code', 'type') as $jsst_field) {
+            if (isset($jsst_body['error'][$jsst_field]) && $jsst_body['error'][$jsst_field] === 'insufficient_quota') {
+                return true;
+            }
+        }
+        return false;
     }
 
     /* ------------------------------------------------------------------ *
@@ -747,17 +1103,80 @@ class JSSTaiengine {
             return new WP_Error('jsst_ai_zywrap_missing', esc_html(__('The Zywrap engine is not available on this site.', 'js-support-ticket')));
         }
 
-        $jsst_output = $jsst_model->callZywrapEngine($jsst_key, array(
-            'wrapper_code' => $jsst_wrapper,
-            'prompt'       => $jsst_prompt,
-        ));
+        /* A caller that knows which Zywrap wrapper fits, and has its inputs,
+           says so in 'zywrap': the wrapper code, its variables, and which
+           output contract to translate back. The AI Agent's answers use
+           instant_knowledge_answer this way - the question and the help
+           passages as separate inputs, docs only - instead of everything
+           pasted into one prompt for a reply composer to decorate. (Already
+           redacted in ask().) */
+        $jsst_hint = (!empty($jsst_call['zywrap']) && is_array($jsst_call['zywrap'])) ? $jsst_call['zywrap'] : array();
+        $jsst_payload = array('wrapper_code' => $jsst_wrapper, 'prompt' => $jsst_prompt);
+        if (!empty($jsst_hint['wrapper'])) {
+            $jsst_payload['wrapper_code'] = (string) $jsst_hint['wrapper'];
+            $jsst_payload['prompt']       = isset($jsst_hint['prompt']) ? (string) $jsst_hint['prompt'] : '';
+            if (!empty($jsst_hint['variables']) && is_array($jsst_hint['variables'])) {
+                $jsst_payload['variables'] = $jsst_hint['variables'];
+            }
+        }
+        /* The model behind Zywrap, when the site picked one; otherwise Zywrap
+           decides. The Zywrap screen's default model, so one setting covers
+           every Zywrap request the product makes. */
+        $jsst_zmodel = trim((string) get_option('jsst_zywrap_default_model', ''));
+        if ($jsst_zmodel !== '') {
+            $jsst_payload['model'] = $jsst_zmodel;
+        }
+
+        $jsst_output = $jsst_model->callZywrapEngine($jsst_key, $jsst_payload);
 
         if (empty($jsst_output)) {
             // The reason, when the engine gave one; it is also in System Errors.
             $jsst_reason = (isset($jsst_model->jsst_lasterror) && $jsst_model->jsst_lasterror !== '')
                 ? $jsst_model->jsst_lasterror
                 : __('The Zywrap engine returned nothing. Details are under System > System Errors.', 'js-support-ticket');
-            return new WP_Error('jsst_ai_zywrap_empty', esc_html($jsst_reason));
+            $jsst_usage = !empty($jsst_model->jsst_lastusage) ? $jsst_model->jsst_lastusage : array();
+
+            /* Which kind of nothing decides whether the spare engine is tried.
+               Not reached, or an answer with nothing in it: the spare may do
+               better. Zywrap refusing (no credit, unknown wrapper): mapped by
+               its status, so only "busy" is worth a second engine. */
+            $jsst_kind = isset($jsst_model->jsst_lastkind) ? $jsst_model->jsst_lastkind : '';
+            $jsst_status = isset($jsst_model->jsst_lastcode) ? (int) $jsst_model->jsst_lastcode : 0;
+            if ($jsst_kind === 'transport') {
+                return new WP_Error('jsst_ai_unreachable', esc_html($jsst_reason), $jsst_usage);
+            }
+            if ($jsst_kind === 'api') {
+                if ($jsst_status === 429) {
+                    return new WP_Error('jsst_ai_ratelimited', esc_html($jsst_reason), $jsst_usage);
+                }
+                if ($jsst_status === 408 || self::busy($jsst_status)) {
+                    return new WP_Error('jsst_ai_overloaded', esc_html($jsst_reason), $jsst_usage);
+                }
+                return new WP_Error('jsst_ai_zywrap_failed', esc_html($jsst_reason), $jsst_usage);
+            }
+            if ($jsst_kind === 'policy') {
+                return new WP_Error('jsst_ai_lane_closed', esc_html($jsst_reason));
+            }
+            return new WP_Error('jsst_ai_zywrap_empty', esc_html($jsst_reason), $jsst_usage);
+        }
+
+        /* Structured wrappers can answer with the fields already decoded. The
+           callers read text, so those go back as the JSON they were; anything
+           else is not an answer. */
+        if (is_array($jsst_output) || is_object($jsst_output)) {
+            $jsst_output = wp_json_encode($jsst_output);
+        }
+        if (!is_string($jsst_output)) {
+            return new WP_Error('jsst_ai_unreadable', esc_html(__('The AI provider sent something this could not read.', 'js-support-ticket')));
+        }
+
+        if (isset($jsst_hint['contract']) && $jsst_hint['contract'] === 'knowledge_answer') {
+            $jsst_output = self::fromKnowledgeAnswer($jsst_output,
+                isset($jsst_hint['variables']['documentationSnippets']) ? $jsst_hint['variables']['documentationSnippets'] : array());
+        } elseif (isset($jsst_hint['contract']) && $jsst_hint['contract'] === 'plain') {
+            // Shown as plain text (Copilot uses textContent): Markdown's marks would show as stars and hashes.
+            $jsst_output = preg_replace(array('/^\s{0,3}#{1,6}\s*/m', '/\*\*(.+?)\*\*/s', '/__(.+?)__/s', '/^\s*[-*]\s+/m'), array('', '$1', '$1', '- '), $jsst_output);
+            $jsst_output = trim(preg_replace("/\n{3,}/", "\n\n", $jsst_output));
         }
 
         /* Token counts only when the response carries them. Reporting 0 made
@@ -765,15 +1184,115 @@ class JSSTaiengine {
            ever trip. Left out, the call is logged as "tokens unknown", which is
            the truth when the proxy does not say. */
         $jsst_out = array(
-            'text'      => is_string($jsst_output) ? trim($jsst_output) : '',
+            'text'      => trim($jsst_output),
             'truncated' => false,
-            'model'     => 'zywrap',
+            // The model Zywrap ran it on, for the meter; "zywrap" when it did not say.
+            'model'     => (isset($jsst_model->jsst_lastmodel) && $jsst_model->jsst_lastmodel !== '') ? $jsst_model->jsst_lastmodel : 'zywrap',
         );
         if (!empty($jsst_model->jsst_lastusage)) {
             $jsst_out['intokens']  = (int) $jsst_model->jsst_lastusage['intokens'];
             $jsst_out['outtokens'] = (int) $jsst_model->jsst_lastusage['outtokens'];
         }
         return $jsst_out;
+    }
+
+    /**
+     * instant_knowledge_answer's output, as the answer envelope the AI Agent
+     * reads: reply, confidence 0-100, reasoning, sources.
+     *
+     * Its own verdicts decide the confidence, so its rules hold here too: an
+     * answer it calls unsafe to send, or one it says needs a person, can be a
+     * draft at most; "insufficient" documentation is a hand-off. Its field
+     * names arrive in either case (safeToSend / safetosend), so they are read
+     * case-blind. Anything that is not its contract is passed on untouched.
+     */
+    private static function fromKnowledgeAnswer($jsst_text, $jsst_given = array()) {
+        // Decoded as it came (unwrapText() would reduce it to the answer alone), or from inside a code fence.
+        $jsst_raw = json_decode(trim((string) $jsst_text), true);
+        if (!is_array($jsst_raw) && preg_match('/\{.*\}/s', (string) $jsst_text, $jsst_brace)) {
+            $jsst_raw = json_decode($jsst_brace[0], true);
+        }
+        if (!is_array($jsst_raw)) {
+            return $jsst_text;
+        }
+        /* Keys case-blind and space-blind: the proxy has returned
+           "matchedsources", "matchedsource references" and
+           "miss inginformation" for the same contract. */
+        $jsst_j = array();
+        foreach ($jsst_raw as $jsst_k => $jsst_v) {
+            $jsst_j[preg_replace('/[^a-z]/', '', strtolower((string) $jsst_k))] = $jsst_v;
+        }
+        foreach (array_keys($jsst_j) as $jsst_k) {
+            if (strpos($jsst_k, 'matchedsource') === 0 && !isset($jsst_j['matchedsources'])) $jsst_j['matchedsources'] = $jsst_j[$jsst_k];
+            if (strpos($jsst_k, 'missinginformation') === 0 && !isset($jsst_j['missinginformation'])) $jsst_j['missinginformation'] = $jsst_j[$jsst_k];
+        }
+        if (!isset($jsst_j['answer'])) {
+            return $jsst_text;
+        }
+
+        $jsst_words = array('high' => 90, 'medium' => 60, 'low' => 30);
+        $jsst_conf  = isset($jsst_j['confidence']) ? strtolower(trim((string) $jsst_j['confidence'])) : '';
+        $jsst_conf  = isset($jsst_words[$jsst_conf]) ? $jsst_words[$jsst_conf] : (is_numeric($jsst_conf) ? (int) $jsst_conf : 0);
+        $jsst_mode  = isset($jsst_j['sourcemodeused']) ? strtolower((string) $jsst_j['sourcemodeused']) : '';
+        if ($jsst_mode === 'insufficient') {
+            $jsst_conf = 0;
+        } elseif ((isset($jsst_j['safetosend']) && $jsst_j['safetosend'] === false)
+                || !empty($jsst_j['needsescalation'])) {
+            $jsst_conf = min($jsst_conf, 60);
+        }
+
+        // The passages were given as "[KB-n] title: text"; the refs are read back from what it matched.
+        $jsst_sources = array();
+        foreach ((array) (isset($jsst_j['matchedsources']) ? $jsst_j['matchedsources'] : array()) as $jsst_m) {
+            if (preg_match_all('/KB-\d+/', is_scalar($jsst_m) ? (string) $jsst_m : wp_json_encode($jsst_m), $jsst_refs)) {
+                $jsst_sources = array_merge($jsst_sources, $jsst_refs[0]);
+            }
+        }
+        $jsst_reasons = array();
+        /* The proxy sometimes leaves matchedSources out altogether - the same
+           request, twice, carried it once. An answer that names no source may
+           still be a good draft, so it cites what it was given; but it never
+           goes to a customer on its own word. */
+        if (empty($jsst_sources)) {
+            foreach ((array) $jsst_given as $jsst_doc) {
+                if (preg_match('/^\[(KB-\d+)\]/', (string) $jsst_doc, $jsst_ref)) $jsst_sources[] = $jsst_ref[1];
+            }
+            $jsst_conf = min($jsst_conf, 60);
+            $jsst_reasons[] = 'Zywrap named no source, so this can be a draft only';
+        }
+        if (!empty($jsst_j['escalationreason'])) $jsst_reasons[] = (string) $jsst_j['escalationreason'];
+        if (!empty($jsst_j['missinginformation'])) {
+            $jsst_reasons[] = 'Missing: ' . (is_array($jsst_j['missinginformation'])
+                ? implode('; ', array_map('strval', array_filter($jsst_j['missinginformation'], 'is_scalar')))
+                : (string) $jsst_j['missinginformation']);
+        }
+        if ($jsst_mode !== '') $jsst_reasons[] = 'Zywrap source mode: ' . $jsst_mode;
+
+        // Plain text in, paragraphs out; the internal refs are not for the customer.
+        $jsst_answer = trim(preg_replace('/\s*\(?\[?KB-\d+\]?(?:\s*,\s*\[?KB-\d+\]?)*\)?/', '', (string) $jsst_j['answer']));
+        $jsst_paras  = array_filter(array_map('trim', preg_split('/\n{2,}/', $jsst_answer)));
+        $jsst_reply  = '';
+        foreach ($jsst_paras as $jsst_p) {
+            $jsst_reply .= '<p>' . nl2br(esc_html($jsst_p)) . '</p>';
+        }
+
+        return wp_json_encode(array(
+            'reply'      => $jsst_reply,
+            'confidence' => max(0, min(100, (int) $jsst_conf)),
+            'reasoning'  => implode(' | ', $jsst_reasons),
+            'sources'    => array_values(array_unique($jsst_sources)),
+        ));
+    }
+
+    /** Every string in a nested array, through the redaction policy. */
+    private static function redactValues($jsst_value) {
+        if (is_array($jsst_value)) {
+            foreach ($jsst_value as $jsst_k => $jsst_v) {
+                $jsst_value[$jsst_k] = self::redactValues($jsst_v);
+            }
+            return $jsst_value;
+        }
+        return is_string($jsst_value) ? JSSTaipolicy::redact($jsst_value) : $jsst_value;
     }
 
     /* ------------------------------------------------------------------ *
@@ -808,13 +1327,16 @@ class JSSTaiengine {
         if (!empty($jsst_call['schema'])) {
             $jsst_output['format'] = array(
                 'type'   => 'json_schema',
-                'schema' => $jsst_call['schema'],
+                'schema' => self::anthropicSchema($jsst_call['schema']),
             );
         }
 
         $jsst_body = array(
             'model'         => $jsst_model,
-            'max_tokens'    => isset($jsst_call['maxtokens']) ? (int) $jsst_call['maxtokens'] : 8000,
+            /* Never below 1024: thinking spends from the same allowance, and a
+               small cap meant for a one-word answer ran out mid-thought and
+               came back empty. */
+            'max_tokens'    => max(1024, isset($jsst_call['maxtokens']) ? (int) $jsst_call['maxtokens'] : 8000),
             'system'        => $jsst_call['system'],
             'messages'      => array(
                 array('role' => 'user', 'content' => $jsst_call['prompt']),
@@ -849,6 +1371,71 @@ class JSSTaiengine {
     }
 
     /**
+     * A schema in the subset Anthropic's structured output accepts.
+     *
+     * The callers write ordinary JSON Schema, and the API rejects the whole
+     * request - a 400, nothing answered - over a single `maxLength`. So the
+     * constraints it does not support are dropped (the reader validates what
+     * comes back anyway), every object is closed with additionalProperties
+     * false, and every property is listed as required, because structured
+     * output fills every field or none.
+     */
+    private static function anthropicSchema($jsst_schema) {
+        if (!is_array($jsst_schema)) {
+            return $jsst_schema;
+        }
+        foreach (array('minimum', 'maximum', 'exclusiveMinimum', 'exclusiveMaximum', 'multipleOf',
+                       'minLength', 'maxLength', 'pattern', 'maxItems') as $jsst_key) {
+            unset($jsst_schema[$jsst_key]);
+        }
+        if (isset($jsst_schema['minItems']) && (int) $jsst_schema['minItems'] > 1) {
+            unset($jsst_schema['minItems']);
+        }
+        if (isset($jsst_schema['format']) && !in_array($jsst_schema['format'],
+                array('date-time', 'time', 'date', 'duration', 'email', 'hostname', 'uri', 'ipv4', 'ipv6', 'uuid'), true)) {
+            unset($jsst_schema['format']);
+        }
+
+        if (isset($jsst_schema['properties']) && is_array($jsst_schema['properties'])) {
+            foreach ($jsst_schema['properties'] as $jsst_name => $jsst_sub) {
+                $jsst_schema['properties'][$jsst_name] = self::anthropicSchema($jsst_sub);
+            }
+        }
+        if (isset($jsst_schema['items']) && is_array($jsst_schema['items'])) {
+            $jsst_schema['items'] = (array_keys($jsst_schema['items']) === range(0, count($jsst_schema['items']) - 1))
+                ? array_map(array(__CLASS__, 'anthropicSchema'), $jsst_schema['items'])
+                : self::anthropicSchema($jsst_schema['items']);
+        }
+        foreach (array('anyOf', 'allOf', '$defs', 'definitions') as $jsst_key) {
+            if (isset($jsst_schema[$jsst_key]) && is_array($jsst_schema[$jsst_key])) {
+                foreach ($jsst_schema[$jsst_key] as $jsst_index => $jsst_sub) {
+                    $jsst_schema[$jsst_key][$jsst_index] = self::anthropicSchema($jsst_sub);
+                }
+            }
+        }
+
+        $jsst_type = isset($jsst_schema['type']) ? $jsst_schema['type'] : '';
+        $jsst_isobject = ($jsst_type === 'object' || (is_array($jsst_type) && in_array('object', $jsst_type, true))
+            || isset($jsst_schema['properties']));
+        if ($jsst_isobject) {
+            $jsst_schema['additionalProperties'] = false;
+            $jsst_names = (isset($jsst_schema['properties']) && is_array($jsst_schema['properties']))
+                ? array_map('strval', array_keys($jsst_schema['properties'])) : array();
+            if (empty($jsst_names)) {
+                // An empty PHP array would be sent as [] where an object is expected.
+                $jsst_schema['properties'] = new stdClass();
+            } else {
+                $jsst_required = (isset($jsst_schema['required']) && is_array($jsst_schema['required']))
+                    ? array_map('strval', $jsst_schema['required']) : array();
+                if (array_diff($jsst_names, $jsst_required)) {
+                    $jsst_schema['required'] = $jsst_names;
+                }
+            }
+        }
+        return $jsst_schema;
+    }
+
+    /**
      * Read one Messages API reply.
      *
      * Two things are checked before the text: whether the model declined, and
@@ -858,9 +1445,20 @@ class JSSTaiengine {
      * exactly the failure worth spending a few lines to avoid.
      */
     public static function readAnthropic($jsst_body) {
+        /* The usage goes on the errors too. A refusal or an answer that was
+           all thinking is still billed, and an error without its tokens was
+           recorded on the meter as costing nothing. */
+        $jsst_usage = array();
+        if (isset($jsst_body['usage']['input_tokens'])) {
+            $jsst_usage['intokens'] = (int) $jsst_body['usage']['input_tokens'];
+        }
+        if (isset($jsst_body['usage']['output_tokens'])) {
+            $jsst_usage['outtokens'] = (int) $jsst_body['usage']['output_tokens'];
+        }
+
         $jsst_stop = isset($jsst_body['stop_reason']) ? $jsst_body['stop_reason'] : '';
         if ($jsst_stop === 'refusal') {
-            return new WP_Error('jsst_ai_refused', esc_html(__('The model declined to answer this one. Nothing was written.', 'js-support-ticket')));
+            return new WP_Error('jsst_ai_refused', esc_html(__('The model declined to answer this one. Nothing was written.', 'js-support-ticket')), $jsst_usage);
         }
 
         $jsst_text = '';
@@ -873,7 +1471,7 @@ class JSSTaiengine {
         }
         $jsst_text = trim($jsst_text);
         if ($jsst_text === '') {
-            return new WP_Error('jsst_ai_empty', esc_html(__('The model returned nothing. Try again, or try a shorter ticket.', 'js-support-ticket')));
+            return new WP_Error('jsst_ai_empty', esc_html(__('The model returned nothing. Try again, or try a shorter ticket.', 'js-support-ticket')), $jsst_usage);
         }
 
         return array(
@@ -882,6 +1480,131 @@ class JSSTaiengine {
             'model'     => isset($jsst_body['model']) ? (string) $jsst_body['model'] : '',
             'intokens'  => isset($jsst_body['usage']['input_tokens']) ? (int) $jsst_body['usage']['input_tokens'] : 0,
             'outtokens' => isset($jsst_body['usage']['output_tokens']) ? (int) $jsst_body['usage']['output_tokens'] : 0,
+        );
+    }
+
+    /* ------------------------------------------------------------------ *
+     * OpenAI
+     * ------------------------------------------------------------------ */
+
+    /**
+     * Shape one Chat Completions request for OpenAI. (5.0.4)
+     *
+     * Not the local builder, which is written for the runtimes people host
+     * themselves. The current OpenAI models reason before they answer, and
+     * that changes four things: the instructions go in a `developer` message,
+     * the cap is `max_completion_tokens` and includes the reasoning, so it is
+     * the visible answer plus room to think (only the tokens used are billed),
+     * `temperature` is left at the model's own, and the effort the caller asks
+     * for is passed on. Fields come back under a strict schema, so the text
+     * is the JSON itself. `store` is off: nothing is kept by OpenAI for later
+     * viewing.
+     */
+    public static function buildOpenAi($jsst_call, $jsst_model, $jsst_key) {
+        $jsst_messages = array();
+        if (!empty($jsst_call['system'])) {
+            $jsst_messages[] = array('role' => 'developer', 'content' => $jsst_call['system']);
+        }
+        $jsst_messages[] = array('role' => 'user', 'content' => $jsst_call['prompt']);
+
+        // Every listed model takes these three; the callers ask for low or medium.
+        $jsst_effort = isset($jsst_call['effort']) ? (string) $jsst_call['effort'] : 'low';
+        if (!in_array($jsst_effort, array('low', 'medium', 'high'), true)) {
+            $jsst_effort = in_array($jsst_effort, array('xhigh', 'max'), true) ? 'high' : 'low';
+        }
+
+        $jsst_visible = isset($jsst_call['maxtokens']) ? max(1, (int) $jsst_call['maxtokens']) : 8000;
+        $jsst_body = array(
+            'model'                 => $jsst_model,
+            'messages'              => $jsst_messages,
+            'max_completion_tokens' => min(32000, $jsst_visible + 4000),
+            'reasoning_effort'      => $jsst_effort,
+            'store'                 => false,
+        );
+        if (!empty($jsst_call['schema'])) {
+            $jsst_body['response_format'] = array(
+                'type'        => 'json_schema',
+                'json_schema' => array(
+                    'name'   => 'answer',
+                    'strict' => true,
+                    'schema' => self::openaiSchema($jsst_call['schema']),
+                ),
+            );
+        }
+
+        return array(
+            'headers' => array(
+                'authorization' => 'Bearer ' . trim((string) $jsst_key),
+                'content-type'  => 'application/json',
+            ),
+            'body'    => $jsst_body,
+        );
+    }
+
+    /**
+     * A schema in the subset OpenAI's strict mode accepts.
+     *
+     * The same rules as Anthropic's - closed objects, every field required -
+     * with one format fewer: OpenAI has no `uri`.
+     */
+    private static function openaiSchema($jsst_schema) {
+        return self::withoutUri(self::anthropicSchema($jsst_schema));
+    }
+
+    private static function withoutUri($jsst_schema) {
+        if (!is_array($jsst_schema)) {
+            return $jsst_schema;
+        }
+        if (isset($jsst_schema['format']) && $jsst_schema['format'] === 'uri') {
+            unset($jsst_schema['format']);
+        }
+        // A schema here is an array with string keys; a list holds schemas.
+        foreach ($jsst_schema as $jsst_key => $jsst_sub) {
+            if (is_array($jsst_sub) && in_array($jsst_key, array('properties', 'items', 'anyOf', '$defs', 'definitions'), true)) {
+                $jsst_schema[$jsst_key] = ($jsst_key === 'items' && !isset($jsst_sub[0]))
+                    ? self::withoutUri($jsst_sub)
+                    : array_map(array(__CLASS__, 'withoutUri'), $jsst_sub);
+            }
+        }
+        return $jsst_schema;
+    }
+
+    /**
+     * Read one Chat Completions reply from OpenAI.
+     *
+     * As with Anthropic, a refusal and a cut-off answer both arrive as a
+     * successful response, so they are checked before the text. A reasoning
+     * model that spends the whole cap thinking returns no text at all, with
+     * finish_reason "length"; that is billed too, so the usage travels on the
+     * error.
+     */
+    public static function readOpenAi($jsst_body) {
+        $jsst_usage = array();
+        if (isset($jsst_body['usage']['prompt_tokens'])) {
+            $jsst_usage['intokens'] = (int) $jsst_body['usage']['prompt_tokens'];
+        }
+        // Reasoning tokens are part of completion_tokens, and billed as output.
+        if (isset($jsst_body['usage']['completion_tokens'])) {
+            $jsst_usage['outtokens'] = (int) $jsst_body['usage']['completion_tokens'];
+        }
+
+        $jsst_choice = isset($jsst_body['choices'][0]) ? $jsst_body['choices'][0] : array();
+        $jsst_finish = isset($jsst_choice['finish_reason']) ? (string) $jsst_choice['finish_reason'] : '';
+        if (!empty($jsst_choice['message']['refusal']) || $jsst_finish === 'content_filter') {
+            return new WP_Error('jsst_ai_refused', esc_html(__('The model declined to answer this one. Nothing was written.', 'js-support-ticket')), $jsst_usage);
+        }
+
+        $jsst_text = isset($jsst_choice['message']['content']) ? trim((string) $jsst_choice['message']['content']) : '';
+        if ($jsst_text === '') {
+            return new WP_Error('jsst_ai_empty', esc_html(__('The model returned nothing. Try again, or try a shorter ticket.', 'js-support-ticket')), $jsst_usage);
+        }
+
+        return array(
+            'text'      => $jsst_text,
+            'truncated' => ($jsst_finish === 'length'),
+            'model'     => isset($jsst_body['model']) ? (string) $jsst_body['model'] : '',
+            'intokens'  => isset($jsst_usage['intokens']) ? $jsst_usage['intokens'] : 0,
+            'outtokens' => isset($jsst_usage['outtokens']) ? $jsst_usage['outtokens'] : 0,
         );
     }
 
