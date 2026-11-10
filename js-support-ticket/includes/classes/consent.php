@@ -219,7 +219,7 @@ class JSSTconsent {
 
     private static function uidOf($jsst_email) {
         return (int) jssupportticket::$_db->get_var(jssupportticket::$_db->prepare(
-            'SELECT id FROM `' . jssupportticket::$_wpprefixforuser . 'js_ticket_users` WHERE user_email = %s LIMIT 1',
+            'SELECT id FROM `' . jssupportticket::$_db->prefix . 'js_ticket_users` WHERE user_email = %s LIMIT 1',
             $jsst_email));
     }
 

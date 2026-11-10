@@ -756,7 +756,17 @@ class JSSTbundle {
            built to make impossible. */
         $jsst_parent = self::parentOf($jsst_module);
         $jsst_check = ($jsst_parent !== '') ? $jsst_parent : $jsst_module;
-        return is_dir(self::bundlePath($jsst_slug) . 'modules/' . $jsst_check);
+        if (is_dir(self::bundlePath($jsst_slug) . 'modules/' . $jsst_check)) {
+            return true;
+        }
+        /* A module with no screens ships as its boot file alone. SMTP is one:
+           the old add-on never had a module folder, only the hook that sends
+           the mail, and Email Suite carries it the same way. Asking for the
+           folder alone left `smtp` out of the active add-ons on every site
+           served by Email Suite, so the SMTP fields vanished from System
+           Emails and every notification went out through wp_mail() instead
+           of the configured server - silently. (Customer report, 10 Nov 2026) */
+        return is_file(self::bundlePath($jsst_slug) . 'includes/boot/' . $jsst_check . '.php');
     }
 
     /**

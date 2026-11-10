@@ -37,6 +37,7 @@ class JSSTformhandler {
             // Before the controller file is loaded: loading it constructs the
             // controller, and a constructor already acts on the request.
             $this->refuseUnlessMayReachAdminDesk();
+            $this->refuseUnsafeAddonTask($jsst_module, $jsst_task);
             JSSTincluder::include_file($jsst_module);
             $jsst_class = 'JSST' . $jsst_module . "Controller";
             if (!class_exists($jsst_class)) {
@@ -97,6 +98,7 @@ class JSSTformhandler {
          * controller, and a constructor already acts on the request.
          */
         $this->refuseUnlessMayReachAdminDesk();
+        $this->refuseUnsafeAddonTask( $jsst_module, $jsst_action );
 
         JSSTincluder::include_file( $jsst_module );
 
@@ -152,6 +154,44 @@ class JSSTformhandler {
      * admin menu is built from, so whoever can see a screen can now use the
      * links on it, and the real decision is made where it always was.
      */
+    /*
+     * Tasks in add-on controllers that core refuses itself.
+     *
+     * Old add-ons keep working on 5.x, and a site may run one for years, so a
+     * hole in one of them is closed here as well as in the add-on: core runs
+     * this before any controller is loaded, whichever add-on version answers.
+     * (Security review, 5 November 2026.)
+     *
+     *  - agent/getstaffphoto put its id into SQL unquoted, reachable without
+     *    signing in. Only a plain number reaches it now.
+     *  - saveattachments/deleteattachment copied into the permission
+     *    controllers had no nonce and no ownership check. Nothing links to
+     *    them; the real ones live in the attachment controllers.
+     *  - every deleteattachment link is drawn with a delete-attachement-<id>
+     *    nonce, but several skipped checking it in wp-admin - so a link on
+     *    any other site could delete files through a signed-in admin.
+     */
+    private function refuseUnsafeAddonTask( $jsst_module, $jsst_task ) {
+        $jsst_refuse = false;
+        if ( 'agent' === $jsst_module && 'getstaffphoto' === $jsst_task ) {
+            $jsst_refuse = ! ctype_digit( (string) JSSTrequest::getVar( 'jssupportticketid' ) );
+        } elseif ( in_array( $jsst_module, array( 'rolepermissions', 'roleaccessdepartments', 'userpermissions' ), true )
+                && in_array( $jsst_task, array( 'saveattachments', 'deleteattachment' ), true ) ) {
+            $jsst_refuse = true;
+        } elseif ( 'deleteattachment' === $jsst_task ) {
+            $jsst_id = (string) JSSTrequest::getVar( 'id' );
+            $jsst_refuse = ! ctype_digit( $jsst_id )
+                || ! wp_verify_nonce( (string) JSSTrequest::getVar( '_wpnonce' ), 'delete-attachement-' . $jsst_id );
+        }
+        if ( $jsst_refuse ) {
+            wp_die(
+                esc_html__( 'Security check Failed', 'js-support-ticket' ),
+                esc_html__( 'Security Error', 'js-support-ticket' ),
+                array( 'response' => 403 )
+            );
+        }
+    }
+
     private function refuseUnlessMayReachAdminDesk() {
         if ( ! is_admin() ) {
             return;

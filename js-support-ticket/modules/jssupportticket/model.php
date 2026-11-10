@@ -1080,7 +1080,7 @@ $jsst_query = "SELECT product.product, COUNT(t.id) AS ticket_count
     function getUserNameById($jsst_id){
         if (!is_numeric($jsst_id))
             return false;
-        $jsst_query = jssupportticket::$_db->prepare("SELECT user_nicename AS name FROM `" . jssupportticket::$_wpprefixforuser . "js_ticket_users` WHERE id = %d", $jsst_id);
+        $jsst_query = jssupportticket::$_db->prepare("SELECT user_nicename AS name FROM `" . jssupportticket::$_db->prefix . "js_ticket_users` WHERE id = %d", $jsst_id);
         $jsst_username = jssupportticket::$_db->get_var($jsst_query);
         return $jsst_username;
     }
@@ -1125,7 +1125,7 @@ $jsst_query = "SELECT product.product, COUNT(t.id) AS ticket_count
         $jsst_canloadresult = false;
         $jsst_args = array();
         $jsst_query = "SELECT DISTINCT user.id AS userid, user.name AS username, user.user_email AS useremail, user.display_name AS userdisplayname
-                    FROM `" . jssupportticket::$_wpprefixforuser . "js_ticket_users` AS user ";
+                    FROM `" . jssupportticket::$_db->prefix . "js_ticket_users` AS user ";
                     if(in_array('agent',jssupportticket::$_active_addons)){
                         $jsst_query .= " WHERE NOT EXISTS( SELECT staff.id FROM `" . jssupportticket::$_db->prefix . "js_ticket_staff` AS staff WHERE user.id = staff.uid) ";
                     }else{
@@ -1189,7 +1189,7 @@ $jsst_query = "SELECT product.product, COUNT(t.id) AS ticket_count
         $jsst_maxrecorded = 10;
         
         $jsst_query = "SELECT DISTINCT COUNT(user.id)
-                    FROM `" . jssupportticket::$_wpprefixforuser . "js_ticket_users` AS user 
+                    FROM `" . jssupportticket::$_db->prefix . "js_ticket_users` AS user 
                     WHERE user.status = 1 ";
                     if(in_array('agent',jssupportticket::$_active_addons)){
                         $jsst_query .= " AND NOT EXISTS( SELECT staff.id FROM `" . jssupportticket::$_db->prefix . "js_ticket_staff` AS staff WHERE user.id = staff.uid) ";
@@ -1203,7 +1203,7 @@ $jsst_query = "SELECT product.product, COUNT(t.id) AS ticket_count
         
         $jsst_query = "SELECT DISTINCT user.id AS userid, user.name AS username, user.user_email AS useremail,
                     user.display_name AS userdisplayname
-                    FROM `" . jssupportticket::$_wpprefixforuser . "js_ticket_users` AS user 
+                    FROM `" . jssupportticket::$_db->prefix . "js_ticket_users` AS user 
                     WHERE user.status = 1";
                     if(in_array('agent',jssupportticket::$_active_addons)){
                         $jsst_query .= " AND NOT EXISTS( SELECT staff.id FROM `" . jssupportticket::$_db->prefix . "js_ticket_staff` AS staff WHERE user.id = staff.uid) ";

@@ -802,6 +802,10 @@ class JSSTticketController {
         if (!$jsst_allowed && in_array('agent', jssupportticket::$_active_addons) && JSSTincluder::getJSModel('agent')->isUserStaff()) {
             $jsst_allowed = (JSSTincluder::getJSModel('userpermissions')->checkPermissionGrantedForTask('Edit Ticket') == 1);
         }
+        // On a ticket this person may open. (Security review, 5 November 2026)
+        if ($jsst_allowed && !current_user_can('manage_options') && !JSSTincluder::getJSModel('ticket')->staffMayOpenTicket($jsst_id)) {
+            $jsst_allowed = false;
+        }
         if (!$jsst_allowed) {
             wp_die(esc_html__('You are not allowed', 'js-support-ticket'));
         }
@@ -891,11 +895,26 @@ class JSSTticketController {
                 JSSTmessage::setMessage(esc_html(__('Record not found', 'js-support-ticket')), 'error');
             }
         } else {
-            jssupportticketphplib::JSST_setcookie('js-support-ticket-token-tkstatus',$jsst_token ,0, COOKIEPATH, '', is_ssl(), true);
-            if ( SITECOOKIEPATH != COOKIEPATH ){
-                jssupportticketphplib::JSST_setcookie('js-support-ticket-token-tkstatus',$jsst_token ,0, SITECOOKIEPATH, '', is_ssl(), true);
+            /* A link's token is a guess like the form's when it is not one this
+               site sealed, so it counts against the same limit; and the cookie
+               it leaves is a sealed one naming the ticket, never the token as it
+               arrived. (Security review, 5 November 2026) */
+            if (class_exists('JSSTratelimit') && !JSSTratelimit::check('ticketstatus')) {
+                JSSTmessage::setMessage(JSSTratelimit::message(), 'error');
+                wp_safe_redirect(jssupportticket::makeUrl(array('jstmod'=>'ticket', 'jstlay'=>'ticketstatus')));
+                exit;
             }
             $jsst_ticketid = JSSTincluder::getJSModel('ticket')->getTicketidForVisitor($jsst_token);
+            if ($jsst_ticketid) {
+                $jsst_tickettoken = jssupportticket::$_db->get_var(jssupportticket::$_db->prepare("SELECT token FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE id = %d", $jsst_ticketid));
+                include_once JSST_PLUGIN_PATH . 'includes/encoder.php';
+                $jsst_encoder = new JSSTEncoder();
+                $jsst_cookie = $jsst_encoder->encrypt(wp_json_encode(array('token' => (string) $jsst_tickettoken, 'sitelink' => get_option('jsst_encripted_site_link'))));
+                jssupportticketphplib::JSST_setcookie('js-support-ticket-token-tkstatus',$jsst_cookie ,0, COOKIEPATH, '', is_ssl(), true);
+                if ( SITECOOKIEPATH != COOKIEPATH ){
+                    jssupportticketphplib::JSST_setcookie('js-support-ticket-token-tkstatus',$jsst_cookie ,0, SITECOOKIEPATH, '', is_ssl(), true);
+                }
+            }
             if ($jsst_ticketid) {
                 $jsst_url = jssupportticket::makeUrl(array('jstmod'=>'ticket', 'jstlay'=>'ticketdetail', 'jssupportticketid'=>$jsst_ticketid));
             } else {

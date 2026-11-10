@@ -269,7 +269,8 @@ class JSSTlicense {
             'regular_text' => isset($jsst_offer['regular_text']) ? sanitize_text_field((string) $jsst_offer['regular_text']) : '',
             'percent'      => isset($jsst_offer['percent']) ? (int) $jsst_offer['percent'] : 0,
             'from'         => substr($jsst_from, 0, 10),
-            'manage_url'   => 0 === strpos($jsst_url, 'https://') || 0 === strpos($jsst_url, 'http://localhost') ? $jsst_url : '',
+            // "http://localhost" as the host, not as a prefix - http://localhost.example.com passed.
+            'manage_url'   => 0 === strpos($jsst_url, 'https://') || (0 === strpos($jsst_url, 'http://') && 'localhost' === wp_parse_url($jsst_url, PHP_URL_HOST)) ? $jsst_url : '',
         );
     }
 
@@ -1181,23 +1182,7 @@ class JSSTlicense {
                 continue;
             }
 
-            $jsst_item = (object) array(
-                'id'            => $jsst_product,
-                'slug'          => $jsst_product,
-                'plugin'        => $jsst_file,
-                'new_version'   => isset($jsst_entry['version']) ? (string) $jsst_entry['version'] : '',
-                'url'           => 'https://jshelpdesk.com/add-ons/' . $jsst_slug . '/',
-                'package'       => isset($jsst_entry['package']) ? (string) $jsst_entry['package'] : '',
-                'requires'      => isset($jsst_entry['requires_wp']) ? (string) $jsst_entry['requires_wp'] : '',
-                'requires_php'  => isset($jsst_entry['requires_php']) ? (string) $jsst_entry['requires_php'] : '',
-                'tested'        => self::testedFor(isset($jsst_entry['tested_wp']) ? (string) $jsst_entry['tested_wp'] : ''),
-            );
-
-            /* Shown under the plugin on Dashboard > Updates, where every other
-               update looks the same as this one. */
-            if (!empty($jsst_entry['security'])) {
-                $jsst_item->upgrade_notice = __('Security update. Install it as soon as you can.', 'js-support-ticket');
-            }
+            $jsst_item = self::updateItem((string) $jsst_product, $jsst_entry);
 
             if (empty($jsst_entry['update_available']) || !self::stillNewer((string) $jsst_product, $jsst_entry)) {
                 /* Up to date. Saying so explicitly is what stops WordPress
@@ -1222,6 +1207,29 @@ class JSSTlicense {
         }
 
         return $jsst_transient;
+    }
+
+    /** One add-on's row in WordPress's update list, from the licence server's entry. */
+    private static function updateItem($jsst_product, $jsst_entry) {
+        $jsst_slug = jssupportticketphplib::JSST_str_replace('js-support-ticket-', '', (string) $jsst_product);
+        $jsst_item = (object) array(
+            'id'            => $jsst_product,
+            'slug'          => $jsst_product,
+            'plugin'        => 'js-support-ticket-' . $jsst_slug . '/js-support-ticket-' . $jsst_slug . '.php',
+            'new_version'   => isset($jsst_entry['version']) ? (string) $jsst_entry['version'] : '',
+            'url'           => 'https://jshelpdesk.com/add-ons/' . $jsst_slug . '/',
+            'package'       => isset($jsst_entry['package']) ? (string) $jsst_entry['package'] : '',
+            'requires'      => isset($jsst_entry['requires_wp']) ? (string) $jsst_entry['requires_wp'] : '',
+            'requires_php'  => isset($jsst_entry['requires_php']) ? (string) $jsst_entry['requires_php'] : '',
+            'tested'        => self::testedFor(isset($jsst_entry['tested_wp']) ? (string) $jsst_entry['tested_wp'] : ''),
+        );
+
+        /* Shown under the plugin on Dashboard > Updates, where every other
+           update looks the same as this one. */
+        if (!empty($jsst_entry['security'])) {
+            $jsst_item->upgrade_notice = __('Security update. Install it as soon as you can.', 'js-support-ticket');
+        }
+        return $jsst_item;
     }
 
     /**
@@ -2487,11 +2495,64 @@ class JSSTlicense {
         require_once ABSPATH . 'wp-admin/includes/misc.php';
         require_once ABSPATH . 'wp-admin/includes/class-wp-upgrader.php';
 
+        $jsst_name = self::bundleName($jsst_slug);
+        $jsst_before = get_plugin_data(WP_PLUGIN_DIR . '/' . $jsst_file, false, false);
+        $jsst_from = isset($jsst_before['Version']) ? (string) $jsst_before['Version'] : '';
+
+        /* Asked now, not read from the twelve-hour report: the download ticket
+           in that report lives fifteen minutes, and this button is the moment
+           it has to be good. (10 Nov 2026) */
+        self::forget();
+        $jsst_updates = self::updates(true);
+        $jsst_entry = (isset($jsst_updates[$jsst_product]) && is_array($jsst_updates[$jsst_product])) ? $jsst_updates[$jsst_product] : array();
+
+        if (empty($jsst_entry['update_available']) || !self::stillNewer($jsst_product, $jsst_entry)) {
+            wp_send_json_success(array('version' => $jsst_from));
+        }
+        if (empty($jsst_entry['package'])) {
+            wp_send_json_error(array('message' => (!empty($jsst_entry['blocked_by']) && 'requires_core' === $jsst_entry['blocked_by'] && !empty($jsst_entry['requires_core']))
+                ? sprintf(
+                    /* translators: 1: add-on name, 2: its new version, 3: the JS Help Desk version it needs */
+                    __('%1$s %2$s needs JS Help Desk %3$s or newer. Update JS Help Desk first, then update the add-on.', 'js-support-ticket'),
+                    $jsst_name, (string) $jsst_entry['version'], (string) $jsst_entry['requires_core'])
+                : sprintf(
+                    /* translators: 1: add-on name, 2: its new version */
+                    __('%1$s %2$s is available, but the license server did not send it to this site. Use Check again on the License screen; if the license has expired, renew it first.', 'js-support-ticket'),
+                    $jsst_name, (string) $jsst_entry['version'])));
+        }
+
+        /* bulk_upgrade() installs only what WordPress's own update list holds
+           for the plugin; when the list is missing it, it calls the plugin
+           "up to date" and reports success with nothing installed. The list is
+           missing it when WordPress has not built one yet, or when another
+           plugin (an update manager, a "disable updates" switch) filters it -
+           and the button then said "Updating..." and came back on the old
+           version without a word. For this one update the entry is put in
+           last, so what the licence server just sent is what is installed.
+           (Customer report, 10 Nov 2026) */
+        $jsst_item = self::updateItem($jsst_product, $jsst_entry);
+        $jsst_force = function ($jsst_list) use ($jsst_file, $jsst_item) {
+            if (!is_object($jsst_list)) {
+                $jsst_list = new stdClass();
+            }
+            if (!isset($jsst_list->response) || !is_array($jsst_list->response)) {
+                $jsst_list->response = array();
+            }
+            $jsst_list->response[$jsst_file] = $jsst_item;
+            if (isset($jsst_list->no_update) && is_array($jsst_list->no_update)) {
+                unset($jsst_list->no_update[$jsst_file]);
+            }
+            return $jsst_list;
+        };
+        add_filter('site_transient_update_plugins', $jsst_force, PHP_INT_MAX);
+
         $jsst_was_on   = is_plugin_active($jsst_file);
         $jsst_skin     = new WP_Ajax_Upgrader_Skin();
         $jsst_upgrader = new Plugin_Upgrader($jsst_skin);
         $jsst_result   = $jsst_upgrader->bulk_upgrade(array($jsst_file));
         $jsst_one      = (is_array($jsst_result) && isset($jsst_result[$jsst_file])) ? $jsst_result[$jsst_file] : $jsst_result;
+
+        remove_filter('site_transient_update_plugins', $jsst_force, PHP_INT_MAX);
 
         if (is_wp_error($jsst_one) || empty($jsst_one) || $jsst_skin->get_errors()->has_errors()) {
             $jsst_error = is_wp_error($jsst_one) ? $jsst_one : $jsst_skin->get_errors();
@@ -2505,6 +2566,14 @@ class JSSTlicense {
         }
         self::forget();
         $jsst_data = get_plugin_data(WP_PLUGIN_DIR . '/' . $jsst_file, false, false);
-        wp_send_json_success(array('version' => isset($jsst_data['Version']) ? (string) $jsst_data['Version'] : ''));
+        $jsst_now = isset($jsst_data['Version']) ? (string) $jsst_data['Version'] : '';
+        /* Never "done" on the version it started from. */
+        if ('' !== $jsst_from && self::compareVersions($jsst_now, $jsst_from) <= 0) {
+            wp_send_json_error(array('message' => sprintf(
+                /* translators: 1: add-on name, 2: the version still installed */
+                __('WordPress did not install the update: %1$s is still version %2$s. Download the add-on from your account on jshelpdesk.com and upload it under Plugins > Add New > Upload Plugin.', 'js-support-ticket'),
+                $jsst_name, $jsst_now)));
+        }
+        wp_send_json_success(array('version' => $jsst_now));
     }
 }

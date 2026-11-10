@@ -16,6 +16,22 @@ class JSSTattachmentModel {
      * test, and getDownloadAttachmentById() already accepts it for serving the
      * files themselves. (Roadmap 4.0-SEC-04)
      */
+    /**
+     * Is the current user a support agent - by the Help Desk Agent or Light
+     * Agent role (CAP_TICKETS), or by a row on the Agents screen?
+     *
+     * The ticket page and getDownloadAttachmentById() treat both alike. The
+     * view link and the "download all" checks asked only about the Agents
+     * screen, so an agent by role alone was handled as a customer: the eye
+     * icon got an empty link (the viewer spun forever) and "download all"
+     * was refused. Which tickets an agent may open is still decided by
+     * staffMayOpenTicket().
+     */
+    private function isSupportUser() {
+        return current_user_can(JSSTroles::CAP_TICKETS)
+            || (in_array('agent', jssupportticket::$_active_addons) && JSSTincluder::getJSModel('agent')->isUserStaff());
+    }
+
     private function mayReadTicketAttachments($jsst_id) {
         if (JSSTroles::canManageHelpDesk() || current_user_can(JSSTroles::CAP_TICKETS)) {
             return true;
@@ -149,6 +165,11 @@ class JSSTattachmentModel {
         if (empty($jsst_obj)) {
             return false;
         }
+        // Staff: only on a ticket they may open. (Security review, 5 November 2026)
+        if (!current_user_can('manage_options') && in_array('agent',jssupportticket::$_active_addons) && JSSTincluder::getJSModel('agent')->isUserStaff()
+                && !JSSTincluder::getJSModel('ticket')->staffMayOpenTicket($jsst_obj->ticketid)) {
+            return false;
+        }
         if(!current_user_can('manage_options') && !(in_array('agent',jssupportticket::$_active_addons) && JSSTincluder::getJSModel('agent')->isUserStaff())){
             if (!JSSTincluder::getObjectClass('user')->isguest()) {
                 $jsst_current_uid = JSSTincluder::getObjectClass('user')->uid();
@@ -195,7 +216,7 @@ class JSSTattachmentModel {
         if (!$jsst_object) {
             return false;
         }
-        if (!current_user_can('manage_options') && !(in_array('agent', jssupportticket::$_active_addons) && JSSTincluder::getJSModel('agent')->isUserStaff())) {
+        if (!current_user_can('manage_options') && !($this->isSupportUser())) {
             $jsst_owns_ticket = (!JSSTincluder::getObjectClass('user')->isguest())
                 ? JSSTincluder::getJSModel('ticket')->validateTicketReadForUser($jsst_object->ticketid)
                 : JSSTincluder::getJSModel('ticket')->validateTicketDetailForVisitor($jsst_object->ticketid);
@@ -252,11 +273,15 @@ class JSSTattachmentModel {
         $jsst_filename = $jsst_object->filename;
         $jsst_download = false;
         if(!JSSTincluder::getObjectClass('user')->isguest()){
-            if(current_user_can('manage_options') || current_user_can('jsst_support_ticket_tickets') ){
+            if(current_user_can('manage_options')){
                 $jsst_download = true;
             }else{
-                if( in_array('agent',jssupportticket::$_active_addons) && JSSTincluder::getJSModel('agent')->isUserStaff()){
-                    $jsst_download = true;
+                /* Staff download from tickets they may open, as on the ticket
+                   screen - not from every ticket on the desk by counting ids.
+                   (Security review, 5 November 2026) */
+                if( current_user_can('jsst_support_ticket_tickets') || (in_array('agent',jssupportticket::$_active_addons) && JSSTincluder::getJSModel('agent')->isUserStaff())){
+                    $jsst_download = JSSTincluder::getJSModel('ticket')->staffMayOpenTicket($jsst_ticketid)
+                        || JSSTincluder::getJSModel('ticket')->validateTicketReadForUser($jsst_ticketid);
                 }else{
                     if(JSSTincluder::getJSModel('ticket')->validateTicketReadForUser($jsst_ticketid)){
                         $jsst_download = true;
@@ -273,9 +298,12 @@ class JSSTattachmentModel {
             $jsst_path = $jsst_path .'/'.$jsst_datadirectory;
             $jsst_path = $jsst_path . '/attachmentdata';
             $jsst_path = $jsst_path . '/ticket/' . $jsst_foldername;
-            $jsst_file = $jsst_path . '/' . jssupportticketphplib::JSST_basename($jsst_filename);
+            $jsst_recorded = jssupportticketphplib::JSST_basename($jsst_filename);
+            // The name on record, or the spelling it was really saved under.
+            $jsst_file = $jsst_path . '/' . JSSTattachmentserver::storedFileName($jsst_path, $jsst_recorded);
             // Streams the file and ends the request; says why when it cannot.
-            JSSTattachmentserver::send($jsst_file, array('inline' => $jsst_inline, 'deleted' => !empty($jsst_object->deleted)));
+            // Offered under the name on record, which keeps the sender's spelling.
+            JSSTattachmentserver::send($jsst_file, array('inline' => $jsst_inline, 'name' => $jsst_recorded, 'deleted' => !empty($jsst_object->deleted)));
         }else{
             JSSTincluder::notFound();
         }
@@ -291,11 +319,15 @@ class JSSTattachmentModel {
         $jsst_download = false;
         
         if(!JSSTincluder::getObjectClass('user')->isguest()){
-            if(current_user_can('manage_options') || current_user_can('jsst_support_ticket_tickets') ){
+            if(current_user_can('manage_options')){
                 $jsst_download = true;
             }else{
-                if( in_array('agent',jssupportticket::$_active_addons) && JSSTincluder::getJSModel('agent')->isUserStaff()){
-                    $jsst_download = true;
+                /* Staff download from tickets they may open, as on the ticket
+                   screen - not from every ticket on the desk by counting ids.
+                   (Security review, 5 November 2026) */
+                if( current_user_can('jsst_support_ticket_tickets') || (in_array('agent',jssupportticket::$_active_addons) && JSSTincluder::getJSModel('agent')->isUserStaff())){
+                    $jsst_download = JSSTincluder::getJSModel('ticket')->staffMayOpenTicket($jsst_ticketid)
+                        || JSSTincluder::getJSModel('ticket')->validateTicketReadForUser($jsst_ticketid);
                 }else{
                     if(JSSTincluder::getJSModel('ticket')->validateTicketReadForUser($jsst_ticketid)){
                         $jsst_download = true;
@@ -334,9 +366,14 @@ class JSSTattachmentModel {
 
     function getAllDownloads() {
         $jsst_downloadid = absint( JSSTrequest::getVar('downloadid') );
+        // Staff: only a ticket they may open. (Security review, 5 November 2026)
+        if (!current_user_can('manage_options') && $this->isSupportUser()
+                && !JSSTincluder::getJSModel('ticket')->staffMayOpenTicket($jsst_downloadid)) {
+            return;
+        }
         //if not admin and agent
         // check for ticket owner only in case of user
-        if(!current_user_can('manage_options') && !(in_array('agent',jssupportticket::$_active_addons) && JSSTincluder::getJSModel('agent')->isUserStaff())){
+        if(!current_user_can('manage_options') && !($this->isSupportUser())){
             // in case of user check for ticket owner
             if (!JSSTincluder::getObjectClass('user')->isguest()) {
                 $jsst_current_uid = JSSTincluder::getObjectClass('user')->uid();
@@ -404,7 +441,14 @@ class JSSTattachmentModel {
         if (!is_numeric($jsst_downloadid)) {
             return;
         }
-        if(!current_user_can('manage_options') && !(in_array('agent',jssupportticket::$_active_addons) && JSSTincluder::getJSModel('agent')->isUserStaff())){
+        // Staff: only the reply of a ticket they may open. (Security review, 5 November 2026)
+        if (!current_user_can('manage_options') && $this->isSupportUser()) {
+            $jsst_staff_ticketid = jssupportticket::$_db->get_var(jssupportticket::$_db->prepare("SELECT ticketid FROM `" . jssupportticket::$_db->prefix . "js_ticket_replies` WHERE id = %d", $jsst_downloadid));
+            if (!$jsst_staff_ticketid || !JSSTincluder::getJSModel('ticket')->staffMayOpenTicket($jsst_staff_ticketid)) {
+                return;
+            }
+        }
+        if(!current_user_can('manage_options') && !($this->isSupportUser())){
             $jsst_reply_ticketid = jssupportticket::$_db->get_var(jssupportticket::$_db->prepare("SELECT ticketid FROM `" . jssupportticket::$_db->prefix . "js_ticket_replies` WHERE id = %d", $jsst_downloadid));
             if (!JSSTincluder::getObjectClass('user')->isguest()) {
                 $jsst_current_uid = JSSTincluder::getObjectClass('user')->uid();

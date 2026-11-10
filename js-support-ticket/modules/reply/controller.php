@@ -56,6 +56,11 @@ class JSSTreplyController {
            anyone's reply, moved onto the sender's ticket - and a posted uid
            named any user as the author (security report, 1 November 2026). */
         unset($jsst_data['id']);
+        /* Set by the AI add-on, which calls the model directly. From a browser
+           an autopilot flag skipped the HTML filter and let the sender name
+           the author, and an AI-draft flag hid the reply from the thread.
+           (Security review, 5 November 2026) */
+        unset($jsst_data['ticketviaautopilot'], $jsst_data['is_ai_draft'], $jsst_data['name']);
         $jsst_data['uid'] = JSSTincluder::getObjectClass('user')->uid();
         JSSTincluder::getJSModel('reply')->storeReplies($jsst_data);
         if (is_admin()) {
@@ -68,7 +73,11 @@ class JSSTreplyController {
     }
 
     static function saveeditedreply() {
-        $jsst_tikcetid = JSSTrequest::getVar('reply-tikcetid');
+        /* From the body, which editReply() acts on - not getVar(), which
+           prefers the query string: a nonce for one's own ticket in the URL
+           and another ticket's reply in the body edited that reply.
+           (Security review, 5 November 2026) */
+        $jsst_tikcetid = isset($_POST['reply-tikcetid']) ? absint(wp_unslash($_POST['reply-tikcetid'])) : 0;
         $jsst_nonce = JSSTrequest::getVar('_wpnonce');
         if (! wp_verify_nonce( $jsst_nonce, 'save-edited-reply-'.$jsst_tikcetid) ) {
             die( esc_html__( 'Security check Failed', 'js-support-ticket' ) );

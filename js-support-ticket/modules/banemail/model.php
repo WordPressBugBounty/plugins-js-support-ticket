@@ -143,7 +143,7 @@ class JSSTbanemailModel {
         $jsst_query = "SELECT banemail.* ". jssupportticket::$_addon_query['select'] ." ,user.user_nicename
 					FROM`" . jssupportticket::$_db->prefix . "js_ticket_email_banlist` AS banemail
                     ". jssupportticket::$_addon_query['join'] . "
-					LEFT JOIN `" . jssupportticket::$_wpprefixforuser . "js_ticket_users` AS user ON banemail.uid = user.id";
+					LEFT JOIN `" . jssupportticket::$_db->prefix . "js_ticket_users` AS user ON banemail.uid = user.id";
         $jsst_query .= $jsst_inquery;
         $jsst_query .= " ORDER BY banemail.created DESC ,banemail.email ASC LIMIT " . JSSTpagination::getOffset() . ", " . JSSTpagination::getLimit();
         if (!empty($jsst_args)) {

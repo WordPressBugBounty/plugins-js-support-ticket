@@ -132,6 +132,14 @@ class JSSTzywrapModel {
         if ($mode === 'FULL_RESET') {
             // --- SCENARIO A: FULL RESET (Streaming Download & Replace All) ---
             $download_url = isset($json['wrappers']['downloadUrl']) ? $json['wrappers']['downloadUrl'] : 'https://api.zywrap.com/v1/sdk/v1/download';
+            /* The API key is sent with this request, so it goes to Zywrap over
+               HTTPS and nowhere else, whatever the response named.
+               (Security review, 5 November 2026) */
+            $download_host = strtolower((string) wp_parse_url($download_url, PHP_URL_HOST));
+            if ('https' !== wp_parse_url($download_url, PHP_URL_SCHEME)
+                || ($download_host !== 'zywrap.com' && substr($download_host, -11) !== '.zywrap.com')) {
+                wp_send_json_error(array('message' => __('Download failed: ', 'js-support-ticket') . __('the download address is not a Zywrap address.', 'js-support-ticket')));
+            }
             
             // 1. Define safe paths in the uploads directory (Guaranteed write permissions)
             $upload_dir = wp_upload_dir();

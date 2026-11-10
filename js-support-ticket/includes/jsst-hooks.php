@@ -441,7 +441,7 @@ function jsst_update_user_profile($jsst_user_id) {
     if(!is_numeric($jsst_user_id)){
         return false;
     }
-    $jsst_query = jssupportticket::$_db->prepare("SELECT * FROM `" . jssupportticket::$_db->prefix . "users` WHERE id = %d", $jsst_user_id);
+    $jsst_query = jssupportticket::$_db->prepare("SELECT * FROM `" . jssupportticket::$_wpprefixforuser . "users` WHERE id = %d", $jsst_user_id);
     $jsst_user = jssupportticket::$_db->get_row($jsst_query);
 
     $jsst_uid = "";

@@ -1578,7 +1578,7 @@ class JSSTthirdpartyimportModel {
 
                 $jsst_query = "
                     SELECT user.*
-                        FROM `" . jssupportticket::$_db->prefix . "users` AS user
+                        FROM `" . jssupportticket::$_wpprefixforuser . "users` AS user
                         WHERE user.id = " . $jsst_wpuid;
                 $jsst_wpuser = jssupportticket::$_db->get_row($jsst_query);
 
@@ -2239,7 +2239,7 @@ class JSSTthirdpartyimportModel {
 
         // Users
         $jsst_missingUser = 0;
-        $jsst_query = "SELECT COUNT(id) FROM `" . jssupportticket::$_db->prefix . "users`";
+        $jsst_query = "SELECT COUNT(id) FROM `" . jssupportticket::$_wpprefixforuser . "users`";
         $jsst_users = jssupportticket::$_db->get_var($jsst_query);
         if ($jsst_users > 0) $jsst_entity_counts['user'] = $jsst_users;
 
@@ -2378,7 +2378,7 @@ class JSSTthirdpartyimportModel {
 
                 $jsst_query = "
                     SELECT user.*
-                        FROM `" . jssupportticket::$_db->prefix . "users` AS user
+                        FROM `" . jssupportticket::$_wpprefixforuser . "users` AS user
                         WHERE user.id = " . $jsst_wpuid;
                 $jsst_wpuser = jssupportticket::$_db->get_row($jsst_query);
 
@@ -2466,7 +2466,7 @@ class JSSTthirdpartyimportModel {
         }
 
         // Fetch all customers
-        $jsst_query = "SELECT id FROM `" . jssupportticket::$_db->prefix . "users`";
+        $jsst_query = "SELECT id FROM `" . jssupportticket::$_wpprefixforuser . "users`";
         $jsst_users = jssupportticket::$_db->get_results($jsst_query);
         $jsst_wpUsers = array();
         $jsst_jsstUsers = array();
@@ -2484,7 +2484,7 @@ class JSSTthirdpartyimportModel {
         if (empty($jsst_missingUsers)) return;
 
         foreach ($jsst_missingUsers as $jsst_missingUser) {
-            $jsst_query = "SELECT * FROM `" . jssupportticket::$_db->prefix . "users` WHERE id = %d";
+            $jsst_query = "SELECT * FROM `" . jssupportticket::$_wpprefixforuser . "users` WHERE id = %d";
             $jsst_customer = jssupportticket::$_db->get_row(jssupportticket::$_db->prepare($jsst_query, $jsst_missingUser));
 
             $jsst_customer_id = intval($jsst_customer->ID);
@@ -5083,7 +5083,7 @@ class JSSTthirdpartyimportModel {
                 $jsst_wpuid = intval($jsst_customer->user_id);
             }else{
                 $jsst_query = "SELECT user.ID
-                    FROM `" . jssupportticket::$_db->prefix . "users` AS user
+                    FROM `" . jssupportticket::$_wpprefixforuser . "users` AS user
                     WHERE user.user_email = %s";
                 $jsst_user = jssupportticket::$_db->get_row(jssupportticket::$_db->prepare($jsst_query, $jsst_customer->email));
                 if($jsst_user) $jsst_wpuid = intval($jsst_user->ID);
@@ -5178,7 +5178,7 @@ class JSSTthirdpartyimportModel {
                 if($jsst_agent->status == "active") $jsst_agent_status = 1; else $jsst_agent_status = 0;
 
                 $jsst_query = "SELECT user.*
-                            FROM `" . jssupportticket::$_db->prefix . "users` AS user
+                            FROM `" . jssupportticket::$_wpprefixforuser . "users` AS user
                             WHERE user.id = " . $jsst_wpuid;
                 $jsst_wpuser = jssupportticket::$_db->get_row($jsst_query);
 

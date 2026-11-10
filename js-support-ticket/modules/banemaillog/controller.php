@@ -52,6 +52,11 @@ class JSSTbanemaillogController {
         if (!current_user_can('manage_options')) { //only admin can change it.
             return false;
         }
+        // No form draws this nonce: without it a page elsewhere could post here
+        // through a signed-in admin. (Security review, 5 November 2026)
+        if (!wp_verify_nonce((string) JSSTrequest::getVar('_wpnonce'), 'save-banemaillog')) {
+            die( esc_html__( 'Security check Failed', 'js-support-ticket' ) );
+        }
         $jsst_data = JSSTrequest::get('post');
         JSSTincluder::getJSModel('banemaillog')->storebanemaillog($jsst_data);
         $jsst_url = admin_url("admin.php?page=banemaillog&jstlay=banemaillogs");

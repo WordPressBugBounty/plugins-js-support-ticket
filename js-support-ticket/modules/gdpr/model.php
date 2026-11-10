@@ -149,7 +149,9 @@ class JSSTgdprModel {
         $jsst_curdate = JSSTrequest::getVar('date_start', 'get');
         $jsst_fromdate = JSSTrequest::getVar('date_end', 'get');
         if($jsst_uid == 0 || $jsst_uid == ''){
-            $jsst_id = JSSTrequest::getVar('uid', 'get');
+            /* Nobody to export. This used to take the uid from the address,
+               which named any user. (Security review, 5 November 2026) */
+            return false;
         }else{
             $jsst_id = $jsst_uid;
             $jsst_query = jssupportticket::$_db->prepare("SELECT created FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE uid = %d ORDER BY created ASC LIMIT 1", $jsst_id);
@@ -196,7 +198,7 @@ class JSSTgdprModel {
                     (SELECT COUNT(id) FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE isanswered = 1 AND status != 5 AND status != 6 AND status != 1 AND created >= %s AND created <= %s AND uid = user.id) AS answeredticket,
                     (SELECT COUNT(id) FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE isoverdue = 1 AND status != 5 AND status != 6 AND created >= %s AND created <= %s AND uid = user.id) AS overdueticket,
                     (SELECT COUNT(id) FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE isanswered != 1 AND status != 5 AND status != 6 AND isoverdue = 1 AND (lastreply != '0000-00-00 00:00:00' AND lastreply != '') AND created >= %s AND created <= %s AND uid = user.id) AS pendingticket
-                    FROM `".jssupportticket::$_wpprefixforuser."js_ticket_users` AS user
+                    FROM `".jssupportticket::$_db->prefix."js_ticket_users` AS user
                     WHERE user.id = %d",
                     $jsst_curdate, $jsst_fromdate, $jsst_curdate, $jsst_fromdate, $jsst_curdate, $jsst_fromdate, $jsst_curdate, $jsst_fromdate, $jsst_curdate, $jsst_fromdate, $jsst_id);
         $jsst_user = jssupportticket::$_db->get_row($jsst_query);

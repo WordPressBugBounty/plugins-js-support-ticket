@@ -240,12 +240,46 @@ class JSSTattachmentserver {
         $jsst_prefix = rtrim($jsst_realdir, '/' . chr(92)) . DIRECTORY_SEPARATOR;
         $jsst_files = array();
         foreach ((array) $jsst_names as $jsst_name) {
-            $jsst_real = realpath($jsst_prefix . wp_basename((string) $jsst_name));
+            $jsst_real = realpath($jsst_prefix . self::storedFileName($jsst_realdir, $jsst_name));
             if ($jsst_real !== false && strpos($jsst_real, $jsst_prefix) === 0 && is_file($jsst_real) && is_readable($jsst_real)) {
                 $jsst_files[$jsst_real] = $jsst_real;
             }
         }
         return array_values($jsst_files);
+    }
+
+    /**
+     * The name a ticket attachment is really stored under in $jsst_dir.
+     *
+     * Usually the name on record. Files that came by e-mail through the old
+     * Email Piping add-on (2.x, used with 3.x and 4.x) are the exception: the
+     * add-on recorded the name the e-mail gave ("2026-11-05 16-34 1.pdf"),
+     * while the file was saved under WordPress's cleaned name
+     * ("2026-11-05-16-34-1.pdf"), and older versions cut the saved name at the
+     * first accented letter ("versão.png" saved as "vers"). Those files could
+     * never be downloaded. Only the same folder is looked in, for those two
+     * spellings; the name on record is returned when neither is there, so the
+     * caller reports the file missing under the name it knows. Read paths
+     * only - never used to decide which file to delete. (5.0.5)
+     */
+    public static function storedFileName($jsst_dir, $jsst_name) {
+        $jsst_name = wp_basename((string) $jsst_name);
+        $jsst_dir = rtrim((string) $jsst_dir, '/' . chr(92)) . '/';
+        if ($jsst_name === '' || is_file($jsst_dir . $jsst_name)) {
+            return $jsst_name;
+        }
+        $jsst_cut = preg_replace('/[\x80-\xFF].*$/s', '', $jsst_name);
+        $jsst_guards = array('index.php', 'index.html', 'web.config');
+        foreach (array(sanitize_file_name($jsst_name), $jsst_cut, sanitize_file_name($jsst_cut)) as $jsst_try) {
+            $jsst_try = wp_basename((string) $jsst_try);
+            if ($jsst_try === '' || $jsst_try === $jsst_name || $jsst_try[0] === '.' || in_array(strtolower($jsst_try), $jsst_guards, true)) {
+                continue;
+            }
+            if (is_file($jsst_dir . $jsst_try)) {
+                return $jsst_try;
+            }
+        }
+        return $jsst_name;
     }
 
     /** A "download all" with no file left to put in the zip; ends the request. */

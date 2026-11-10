@@ -921,7 +921,7 @@ class JSSTticketModel {
                         FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` AS ticket
                         LEFT JOIN `" . jssupportticket::$_db->prefix . "js_ticket_departments` AS department ON ticket.departmentid = department.id
                         LEFT JOIN `" . jssupportticket::$_db->prefix . "js_ticket_priorities` AS priority ON ticket.priorityid = priority.id
-                        LEFT JOIN `".jssupportticket::$_wpprefixforuser."js_ticket_users` AS user ON user.id = ticket.uid
+                        LEFT JOIN `".jssupportticket::$_db->prefix."js_ticket_users` AS user ON user.id = ticket.uid
                         LEFT JOIN `" . jssupportticket::$_db->prefix . "js_ticket_products` AS product ON ticket.productid = product.id
                         WHERE ticket.id = %d";
             $jsst_query = jssupportticket::$_db->prepare($jsst_query, $jsst_id);
@@ -1403,7 +1403,11 @@ class JSSTticketModel {
             //envato purchase code validation
             if(in_array('envatovalidation', jssupportticket::$_active_addons)){
                 $jsst_code = isset($jsst_data['envatopurchasecode']) ? $jsst_data['envatopurchasecode'] : '';
-                $jsst_pcode = isset($jsst_data['prev_envatopurchasecode']) ? $jsst_data['prev_envatopurchasecode'] : '';
+                /* The code already on the ticket, so an unchanged one is not
+                   checked again. Only an edit has one; on a new ticket a posted
+                   "previous" code equal to the new one skipped the check.
+                   (Security review, 5 November 2026) */
+                $jsst_pcode = (!empty($jsst_data['id']) && isset($jsst_data['prev_envatopurchasecode'])) ? $jsst_data['prev_envatopurchasecode'] : '';
                 $jsst_required = JSSTincluder::getJSModel('configuration')->getConfigValue('envato_license_required');
                 if($jsst_required != 1 && empty($jsst_code) && !empty($jsst_pcode)){
                     $jsst_envatoData = '';
@@ -2516,12 +2520,23 @@ class JSSTticketModel {
                 JSSTmessage::setMessage(esc_html(__('Your are not allowed', 'js-support-ticket')), 'updated');
                 return;
             }
+            /* And on a ticket this agent may open; the per-ticket nonce was the
+               only other gate. (Security review, 5 November 2026) */
+            if (!$this->staffMayOpenTicket($jsst_ticketid)) {
+                JSSTmessage::setMessage(esc_html(__('You are not allowed', 'js-support-ticket')), 'error', 'agent-permissions');
+                return;
+            }
         } elseif (!JSSTroles::canChangeTicketState()) {
             $jsst_owns_ticket = (!JSSTincluder::getObjectClass('user')->isguest()) ? $this->validateTicketDetailForUser($jsst_ticketid) : $this->validateTicketDetailForVisitor($jsst_ticketid);
             if (!$jsst_owns_ticket) {
                 JSSTmessage::setMessage(esc_html(__('Your are not allowed', 'js-support-ticket')), 'error');
                 return;
             }
+        }
+        $jsst_known = jssupportticket::$_db->get_var(jssupportticket::$_db->prepare("SELECT COUNT(id) FROM `" . jssupportticket::$_db->prefix . "js_ticket_statuses` WHERE id = %d", (int) $jsst_data['status']));
+        if (!$jsst_known) {
+            JSSTmessage::setMessage(esc_html(__('The status has not been changed', 'js-support-ticket')), 'error');
+            return false;
         }
         $jsst_date = date_i18n('Y-m-d H:i:s');
 
@@ -2775,6 +2790,12 @@ class JSSTticketModel {
                 JSSTmessage::setMessage(esc_html(__('You are not allowed', 'js-support-ticket')), 'error', 'agent-permissions');
                 return;
             }
+            /* And on a ticket this agent may open; the per-ticket nonce was the
+               only other gate. (Security review, 5 November 2026) */
+            if (!$this->staffMayOpenTicket($jsst_ticketid)) {
+                JSSTmessage::setMessage(esc_html(__('You are not allowed', 'js-support-ticket')), 'error', 'agent-permissions');
+                return;
+            }
         } elseif (!current_user_can('manage_options')) {
             JSSTmessage::setMessage(esc_html(__('You are not allowed', 'js-support-ticket')), 'error', 'agent-permissions');
             return;
@@ -2980,6 +3001,12 @@ class JSSTticketModel {
         if ( in_array('agent',jssupportticket::$_active_addons) && JSSTincluder::getJSModel('agent')->isUserStaff()) {
             $jsst_allow = JSSTincluder::getJSModel('userpermissions')->checkPermissionGrantedForTask('Unban Email');
             if ($jsst_allow != true) {
+                JSSTmessage::setMessage(esc_html(__('You are not allowed', 'js-support-ticket')), 'error', 'agent-permissions');
+                return;
+            }
+            /* And on a ticket this agent may open; the per-ticket nonce was the
+               only other gate. (Security review, 5 November 2026) */
+            if (!$this->staffMayOpenTicket($jsst_ticketid)) {
                 JSSTmessage::setMessage(esc_html(__('You are not allowed', 'js-support-ticket')), 'error', 'agent-permissions');
                 return;
             }
@@ -3257,11 +3284,23 @@ class JSSTticketModel {
      * alone works every ticket on such a desk (5.0.1), so the role is the
      * answer there. The AI features ask this, not the older check, so they
      * are not closed to the agents the free plugin supports.
+     *
+     * "Such a desk" includes one that runs the Agents pack but has not put
+     * this user on its Agents screen: the pack governs only the agents it
+     * lists (JSSTroles::agentAddonGoverns()), and the ticket page opens every
+     * ticket to everyone else holding the role. Asking the pack about them
+     * answered "no", so the agent could read a ticket but not download or
+     * view its attachments, reply, or change it. Help-desk administrators
+     * (CAP_ADMIN) open every ticket on the ticket page as well.
      */
     function staffMayOpenTicket($jsst_ticketid) {
         if (current_user_can('manage_options')) return true;
-        if (!in_array('agent', jssupportticket::$_active_addons)) {
-            return class_exists('JSSTroles') && current_user_can(JSSTroles::CAP_TICKETS);
+        if (!class_exists('JSSTroles')) {
+            return false;
+        }
+        if (JSSTroles::canManageHelpDesk()) return true;
+        if (!JSSTroles::agentAddonGoverns()) {
+            return current_user_can(JSSTroles::CAP_TICKETS);
         }
         return $this->validateTicketDetailForStaff($jsst_ticketid) === true;
     }
@@ -3387,15 +3426,27 @@ class JSSTticketModel {
         }
         $jsst_token = jssupportticket::JSST_sanitizeData($_COOKIE['js-support-ticket-token-tkstatus']); // JSST_sanitizeData() function uses wordpress santize functions
         include_once JSST_PLUGIN_PATH . 'includes/encoder.php';
+        /* Only a cookie this site sealed. A plain base64 one decoded to
+           whatever its writer chose, so anybody could make one naming an email
+           and tracking id and guess on, unlimited. (Security review, 5 Nov 2026) */
+        if (function_exists('openssl_decrypt') && !JSSTEncoder::isSealed($jsst_token)) {
+            return false;
+        }
         $jsst_encoder = new JSSTEncoder();
         $jsst_decryptedtext = $jsst_encoder->decrypt($jsst_token);
         $jsst_array = json_decode($jsst_decryptedtext, true);
+        if (!is_array($jsst_array)) {
+            return false;
+        }
         if (!empty($jsst_array['token'])) {
             $jsst_token = $jsst_array['token'];
             $jsst_query = jssupportticket::$_db->prepare("SELECT id FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE token = %s", $jsst_token);
         } else {
-            $jsst_emailaddress = $jsst_array['emailaddress'];
-            $jsst_trackingid = $jsst_array['trackingid'];
+            $jsst_emailaddress = isset($jsst_array['emailaddress']) ? (string) $jsst_array['emailaddress'] : '';
+            $jsst_trackingid = isset($jsst_array['trackingid']) ? (string) $jsst_array['trackingid'] : '';
+            if ($jsst_emailaddress === '' || $jsst_trackingid === '') {
+                return false;
+            }
             $jsst_query = jssupportticket::$_db->prepare("SELECT id FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE email = %s AND ticketid = %s", $jsst_emailaddress, $jsst_trackingid);
         }
         $jsst_ticketid = jssupportticket::$_db->get_var($jsst_query);
@@ -3524,9 +3575,14 @@ class JSSTticketModel {
     }
     function getAttachmentByTicketId($jsst_id){
         if(!is_numeric($jsst_id)) return false;
+        // Staff: only a ticket they may open. (Security review, 5 November 2026)
+        if (!current_user_can('manage_options') && (current_user_can(JSSTroles::CAP_TICKETS) || (in_array('agent',jssupportticket::$_active_addons) && JSSTincluder::getJSModel('agent')->isUserStaff()))
+                && !$this->staffMayOpenTicket($jsst_id)) {
+            return;
+        }
         //if not admin and agent
         // check for ticket owner only in case of user
-        if(!current_user_can('manage_options') && !(in_array('agent',jssupportticket::$_active_addons) && JSSTincluder::getJSModel('agent')->isUserStaff())){
+        if(!current_user_can('manage_options') && !(current_user_can(JSSTroles::CAP_TICKETS) || (in_array('agent',jssupportticket::$_active_addons) && JSSTincluder::getJSModel('agent')->isUserStaff()))){
             // in case of user check for ticket owner
             if (!JSSTincluder::getObjectClass('user')->isguest()) {
                 $jsst_current_uid = JSSTincluder::getObjectClass('user')->uid();
@@ -3938,7 +3994,7 @@ class JSSTticketModel {
         } else if($jsst_id == -1){
             $jsst_closedBy = esc_html(__('Guest', 'js-support-ticket'));
         } else {
-            $jsst_query = "SELECT display_name AS name FROM `" . jssupportticket::$_wpprefixforuser . "js_ticket_users` WHERE id = %d";
+            $jsst_query = "SELECT display_name AS name FROM `" . jssupportticket::$_db->prefix . "js_ticket_users` WHERE id = %d";
             $jsst_closedBy = jssupportticket::$_db->get_var(jssupportticket::$_db->prepare($jsst_query, $jsst_id));
         }
         return $jsst_closedBy;

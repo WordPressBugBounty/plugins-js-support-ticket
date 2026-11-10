@@ -3,7 +3,7 @@ Contributors: rabilal
 Tags: helpdesk, support ticket, ticketing system, customer support, knowledge base
 Requires at least: 5.5
 Tested up to: 7.1
-Stable tag: 5.0.4
+Stable tag: 5.0.5
 Requires PHP: 7.4
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
@@ -209,6 +209,21 @@ The [documentation](https://jshelpdesk.com/docs/) covers setup and every add-on,
 
 == Changelog ==
 
+= 5.0.5 =
+Security release from a full review of the plugin and its add-ons. Update the plugin and your add-ons promptly. Full details are in changelog.txt.
+
+* Security: the help desk now refuses requests that older Agent and Knowledge Base add-ons accepted without the right checks, so a site still running an older add-on is protected as well.
+* Security: agents work only on tickets they may open when they download attachments, edit replies, change status, tag tickets, ban e-mail addresses or use AI reply tools.
+* Security: notes, replies and time entries are only ever added; a form can no longer write over an existing one. A customer's reply can no longer pose as an automatic answer.
+* Security: the link that opens a ticket without an account can no longer be made up, and guessing it is limited in the same way as the ticket status form.
+* Security: agent names are escaped in the overall report, the GDPR export only ever contains your own data, attachment types are matched exactly, and Zywrap bundle downloads go only to Zywrap.
+* Fixed: on WordPress Multisite, a help desk on any site but the main one could not find its users: "Select User" on Add Agent and the customer picker said "No Record Found", and reports and exports read the wrong site's data.
+* Fixed: with the Email add-on, help desk e-mails were no longer sent through the SMTP server set on System Emails - they went out through WordPress's default mailer (or another mail plugin) and the SMTP fields disappeared from the System Email form. A site that still had the old SMTP add-on switched on sent every notification twice. Both fixed; the SMTP settings themselves were never lost.
+* Fixed: "Update" on License & Add-ons could say "Updating..." and leave the add-on on its old version without a message, when WordPress's own update list did not hold the update (no update check yet, or another plugin filtering updates). The button now installs what the license server offers, and says why when it cannot.
+* Fixed: attachments that came in by e-mail through the old Email Piping add-on could not be downloaded when their name had spaces or accented letters ("This attachment's file is missing on the server"). They download again, including on old tickets, and new ones are recorded under the name they are saved as.
+* Fixed: agents with the Help Desk Agent or Light Agent role who are not on the Agents screen can now open reply images in the viewer and use "Download all".
+* Fixed: the agent reports with time tracking no longer write PHP "Deprecated: Implicit conversion from float" notices to the error log on PHP 8.1 and later.
+
 = 5.0.4 =
 Security and AI release: two permission fixes, Zywrap accounts from wp-admin, monthly Zywrap credits with paid licenses, an OpenAI engine, and Claude fixed. Full details are in changelog.txt.
 
@@ -309,6 +324,9 @@ The biggest release in JS Help Desk's history.
 See the [full changelog](https://plugins.trac.wordpress.org/browser/js-support-ticket/trunk/changelog.txt).
 
 == Upgrade Notice ==
+
+= 5.0.5 =
+Security release. Fixes permission and input checks found in a full review of the plugin and its add-ons, and protects sites still running older add-ons. Also fixes SMTP sending with the Email add-on, add-on updates that did not install, the user lists on Multisite and e-mailed attachments that could not be downloaded. Update now, together with your add-ons.
 
 = 5.0.4 =
 Paid licenses now include monthly Zywrap AI credits, and you can connect a Zywrap account from wp-admin. OpenAI joins the AI engines. Visitor tickets work again on cached pages, Claude answers are fixed, and reply, GDPR and AI permission checks are stricter. Recommended for all sites.

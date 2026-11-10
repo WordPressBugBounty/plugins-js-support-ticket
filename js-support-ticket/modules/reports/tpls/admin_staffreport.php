@@ -281,9 +281,11 @@ $jsst_link_export = admin_url('admin.php?page=export&task='.esc_attr($jsst_t_nam
                             . '&date_start=' . jssupportticket::$jsst_data['filter']['date_start']
                             . '&date_end=' . jssupportticket::$jsst_data['filter']['date_end']);
                         if (in_array('timetracking', jssupportticket::$_active_addons)) {
-                            $jsst_hours = floor($jsst_agent->time[0] / 3600);
-                            $jsst_mins  = floor(floor($jsst_agent->time[0] / 60) % 60);
-                            $jsst_secs  = floor($jsst_agent->time[0] % 60);
+                            // The average is fractional (total / tickets); whole seconds keep % from raising a PHP 8.1 deprecation.
+                            $jsst_avgsecs = (int) round((float) $jsst_agent->time[0]);
+                            $jsst_hours = intdiv($jsst_avgsecs, 3600);
+                            $jsst_mins  = intdiv($jsst_avgsecs, 60) % 60;
+                            $jsst_secs  = $jsst_avgsecs % 60;
                             $jsst_avgtime = sprintf('%02d:%02d:%02d', $jsst_hours, $jsst_mins, $jsst_secs);
                         } ?>
                         <div class="jsst-reprow">

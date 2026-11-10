@@ -104,7 +104,7 @@ class JSSTnoteModel {
         $jsst_query = "SELECT note.*,note.staffid AS userid, user.display_name " . jssupportticket::$_addon_query['select'] . "
                 FROM `" . jssupportticket::$_db->prefix . "js_ticket_notes` AS note
                 " . jssupportticket::$_addon_query['join'] . "
-                LEFT JOIN `" . jssupportticket::$_wpprefixforuser . "js_ticket_users` AS user ON user.id = note.staffid
+                LEFT JOIN `" . jssupportticket::$_db->prefix . "js_ticket_users` AS user ON user.id = note.staffid
                 WHERE note.ticketid = %d ORDER BY note.id";
         jssupportticket::$jsst_data[6] = jssupportticket::$_db->get_results(
             jssupportticket::$_db->prepare($jsst_query, $jsst_ticketid)
@@ -149,7 +149,11 @@ class JSSTnoteModel {
             return false;
         }
         $jsst_ticketid = $jsst_data['ticketid'];
-        $jsst_data['id'] = isset($jsst_data['id']) ? $jsst_data['id'] : '';
+        /* Always a new note. Callers pass whole forms - the ticket form's id
+           is the ticket's - and a kept id made the table overwrite that note,
+           wherever it was. Notes are edited elsewhere. (Security review,
+           5 November 2026) */
+        $jsst_data['id'] = '';
         $jsst_data['internalnotetitle'] = isset($jsst_data['internalnotetitle']) ? $jsst_data['internalnotetitle'] : '';
 
         $jsst_filesize = 0;

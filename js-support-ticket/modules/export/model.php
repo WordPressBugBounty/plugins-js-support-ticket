@@ -454,7 +454,7 @@ class JSSTexportModel {
                 LEFT JOIN `" . jssupportticket::$_db->prefix . "js_ticket_departments` AS department ON ticket.departmentid = department.id
                 LEFT JOIN `" . jssupportticket::$_db->prefix . "js_ticket_priorities` AS priority ON ticket.priorityid = priority.id
                 LEFT JOIN `" . jssupportticket::$_db->prefix . "js_ticket_statuses` AS status ON ticket.status = status.id
-                LEFT JOIN `" . jssupportticket::$_wpprefixforuser . "js_ticket_users` AS user ON user.id = ticket.uid
+                LEFT JOIN `" . jssupportticket::$_db->prefix . "js_ticket_users` AS user ON user.id = ticket.uid
                 WHERE " . $jsst_clause['sql'] . "
                 ORDER BY ticket.id ASC
                 LIMIT %d, %d";

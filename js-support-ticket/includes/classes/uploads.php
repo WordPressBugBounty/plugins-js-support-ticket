@@ -5,6 +5,24 @@ if (!defined('ABSPATH'))
 
 class JSSTuploads {
 
+    /**
+     * Is $jsst_ext one of the comma-separated extensions in $jsst_list?
+     *
+     * A substring test passed any extension found inside another one - "ph"
+     * inside "php" was never the risk, but "htm" inside "html" or a short
+     * WordPress-known extension inside a longer listed one was. Whole items
+     * only. (Security review, 5 November 2026)
+     */
+    public static function extensionListed($jsst_list, $jsst_ext) {
+        $jsst_ext = strtolower(trim((string) $jsst_ext));
+        if ($jsst_ext === '') {
+            return false;
+        }
+        $jsst_items = array_map('trim', explode(',', strtolower((string) $jsst_list)));
+        return in_array($jsst_ext, $jsst_items, true);
+    }
+
+
     private $jsst_ticketid;
     private $jsst_articleid;
     private $jsst_downloadid;
@@ -257,6 +275,7 @@ class JSSTuploads {
         $jsst_check = $this->checkEmailAttachment($jsst_name, (string) $jsst_value);
         if ($jsst_check !== true) {
             $this->jsst_email_refusal = $jsst_check;
+            $this->fixOldPipingRow($jsst_ticketid, (string) $jsst_key, false);
             return false;
         }
         $jsst_datadirectory = jssupportticket::$_config['data_directory'];
@@ -287,9 +306,41 @@ class JSSTuploads {
         $jsst_name = wp_unique_filename($jsst_path, $jsst_name);
         if (file_put_contents($jsst_path . '/' . $jsst_name, $jsst_value) === false) { // save the file
             $this->jsst_email_refusal = 'it could not be saved';
+            $this->fixOldPipingRow($jsst_ticketid, (string) $jsst_key, false);
             return false;
         }
+        $this->fixOldPipingRow($jsst_ticketid, (string) $jsst_key, $jsst_name);
         return $jsst_name;
+    }
+
+    /**
+     * Keep the old Email Piping add-on's attachment row in step with the file.
+     *
+     * The add-on of the 3.x/4.x days (2.x, still running on sites that have not
+     * moved to Email Suite) records the attachment itself - under the name the
+     * e-mail gave, with an empty size - and only then asks for the file to be
+     * saved. The file is saved under a cleaned, unique name ("a b.pdf" becomes
+     * "a-b.pdf"), so the row pointed at a file that was not there and the
+     * attachment could never be downloaded; a refused file left a row for a
+     * file that was never saved. Its row is the ticket's newest one, with the
+     * raw name and no size - Email Suite records after saving, under the saved
+     * name and with a size, so its rows never match. (5.0.5)
+     */
+    private function fixOldPipingRow($jsst_ticketid, $jsst_raw, $jsst_saved) {
+        if ($jsst_saved === $jsst_raw || $jsst_raw === '') {
+            return;
+        }
+        $jsst_table = jssupportticket::$_db->prefix . 'js_ticket_attachments';
+        $jsst_row = jssupportticket::$_db->get_row(jssupportticket::$_db->prepare(
+            "SELECT id, filename, filesize FROM `" . $jsst_table . "` WHERE ticketid = %d ORDER BY id DESC LIMIT 1", $jsst_ticketid));
+        if (empty($jsst_row) || (string) $jsst_row->filesize !== '' || (string) $jsst_row->filename !== $jsst_raw) {
+            return;
+        }
+        if ($jsst_saved === false) {
+            jssupportticket::$_db->delete($jsst_table, array('id' => (int) $jsst_row->id));
+        } else {
+            jssupportticket::$_db->update($jsst_table, array('filename' => $jsst_saved), array('id' => (int) $jsst_row->id));
+        }
     }
 
     // Same protection as protectTicketAttachmentDirectory() but for call sites that
@@ -584,7 +635,7 @@ class JSSTuploads {
         $jsst_filetyperesult = wp_check_filetype(sanitize_file_name($_FILES[$jsst_field]['name']));
         if(!empty($jsst_filetyperesult['ext']) && !empty($jsst_filetyperesult['type'])){
             $jsst_image_file_types = JSSTincluder::getJSModel('configuration')->getConfigValue('file_extension');
-            if(strstr($jsst_image_file_types, $jsst_filetyperesult['ext'])){
+            if(self::extensionListed($jsst_image_file_types, $jsst_filetyperesult['ext'])){
 
                 $jsst_result = wp_handle_upload($jsst_file, array('test_form' => false));
                 if (isset( $jsst_result['error'] ) ) {
@@ -652,7 +703,7 @@ class JSSTuploads {
         $jsst_image_file_types = JSSTincluder::getJSModel('configuration')->getConfigValue('file_extension');
         // The same checks as a ticket attachment, and said out loud when refused.
         $jsst_guard = true;
-        if (empty($jsst_filetyperesult['ext']) || empty($jsst_filetyperesult['type']) || !strstr($jsst_image_file_types, $jsst_filetyperesult['ext'])) {
+        if (empty($jsst_filetyperesult['ext']) || empty($jsst_filetyperesult['type']) || !self::extensionListed($jsst_image_file_types, $jsst_filetyperesult['ext'])) {
             $jsst_guard = esc_html(__('That file type is not allowed.', 'js-support-ticket'));
         } else {
             $jsst_guard = JSSTattachmentguard::validate($jsst_file['tmp_name'], $jsst_displayname);

@@ -119,9 +119,11 @@ $jsst_link_export = admin_url('admin.php?page=export&task='.esc_attr($jsst_t_nam
                 $jsst_imageurl = JSST_PLUGIN_URL . "includes/images/user.png";
             }
             if (in_array('timetracking', jssupportticket::$_active_addons)) {
-                $jsst_h = floor($jsst_agent->time[0] / 3600);
-                $jsst_m = floor(floor($jsst_agent->time[0] / 60) % 60);
-                $jsst_s = floor($jsst_agent->time[0] % 60);
+                // The average is fractional (total / tickets); whole seconds keep % from raising a PHP 8.1 deprecation.
+                $jsst_avgsecs = (int) round((float) $jsst_agent->time[0]);
+                $jsst_h = intdiv($jsst_avgsecs, 3600);
+                $jsst_m = intdiv($jsst_avgsecs, 60) % 60;
+                $jsst_s = $jsst_avgsecs % 60;
                 $jsst_avgtime = sprintf('%02d:%02d:%02d', $jsst_h, $jsst_m, $jsst_s);
             }
             /* The old template opened with an empty `<a href="...">​</a>` - a

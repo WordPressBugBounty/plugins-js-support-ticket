@@ -40626,3 +40626,65 @@ msgstr ""
 #: includes/classes/aiengine.php:1025
 msgid "The AI provider account has no credit left. Add credit with the provider, or choose another engine on the AI Agent screen."
 msgstr ""
+
+#: modules/feedback/model.php (Experience)
+msgid "Feedback has already been given for this ticket"
+msgstr ""
+
+#: modules/emailpiping/model.php (Email Suite)
+msgid "named a ticket, but was not sent by anybody on it, so it was not added to that ticket."
+msgstr ""
+
+#: modules/emailpiping/tpls/admin_addticketviaemail.php (Email Suite)
+msgid "Leave blank to keep the saved password"
+msgstr ""
+
+#: modules/zywrap/model.php
+msgid "the download address is not a Zywrap address."
+msgstr ""
+
+#: js-support-ticket-commerce/includes/classes/entitlements.php
+msgid "subscription period (Beta)"
+msgstr ""
+
+#: js-support-ticket-commerce/includes/classes/entitlements.php
+msgid "Per subscription period needs WooCommerce Subscriptions to be active."
+msgstr ""
+
+#: js-support-ticket-commerce/includes/classes/entitlements.php
+msgid "Per subscription period works with rules about everybody, one customer or one support plan."
+msgstr ""
+
+#: js-support-ticket-commerce/includes/classes/entitlements.php
+msgid "this subscription period"
+msgstr ""
+
+#: js-support-ticket-commerce/modules/commerce/tpls/admin_addentitlement.php
+msgid "Choose a subscription product"
+msgstr ""
+
+#: js-support-ticket-commerce/modules/commerce/tpls/admin_addentitlement.php
+msgid "Customers with an active subscription to this product. Matched by product, so renaming it changes nothing."
+msgstr ""
+
+#: js-support-ticket-commerce/modules/commerce/tpls/admin_addentitlement.php
+msgid "Each customer's allowance starts again when their WooCommerce subscription renews - a yearly subscriber paid on 14 March gets a fresh allowance every 14 March. Works with rules about everybody, one customer or one support plan. Customers without an active subscription are passed to the next rule, so add a rule below this one for them."
+msgstr ""
+
+#. translators: 1: add-on name, 2: its new version, 3: the JS Help Desk version it needs
+#: js-support-ticket/includes/classes/license.php
+#, php-format
+msgid "%1$s %2$s needs JS Help Desk %3$s or newer. Update JS Help Desk first, then update the add-on."
+msgstr ""
+
+#. translators: 1: add-on name, 2: its new version
+#: js-support-ticket/includes/classes/license.php
+#, php-format
+msgid "%1$s %2$s is available, but the license server did not send it to this site. Use Check again on the License screen; if the license has expired, renew it first."
+msgstr ""
+
+#. translators: 1: add-on name, 2: the version still installed
+#: js-support-ticket/includes/classes/license.php
+#, php-format
+msgid "WordPress did not install the update: %1$s is still version %2$s. Download the add-on from your account on jshelpdesk.com and upload it under Plugins > Add New > Upload Plugin."
+msgstr ""

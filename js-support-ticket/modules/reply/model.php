@@ -556,7 +556,7 @@ class JSSTreplyModel {
                     JOIN `" . jssupportticket::$_db->prefix . "js_ticket_tickets` AS ticket ON ticket.id = attachment.ticketid AND attachment.replyattachmentid = %d";
         $jsst_query = jssupportticket::$_db->prepare($jsst_query, $jsst_id);
         $jsst_replyattachments = jssupportticket::$_db->get_results($jsst_query);
-        if (!empty($jsst_replyattachments) && !current_user_can('manage_options') && !(in_array('agent', jssupportticket::$_active_addons) && JSSTincluder::getJSModel('agent')->isUserStaff())) {
+        if (!empty($jsst_replyattachments) && !current_user_can('manage_options') && !(current_user_can(JSSTroles::CAP_TICKETS) || (in_array('agent', jssupportticket::$_active_addons) && JSSTincluder::getJSModel('agent')->isUserStaff()))) {
             $jsst_ticketid = $jsst_replyattachments[0]->jsst_ticketid;
             $jsst_owns_ticket = (!JSSTincluder::getObjectClass('user')->isguest())
                 ? JSSTincluder::getJSModel('ticket')->validateTicketReadForUser($jsst_ticketid)
@@ -588,6 +588,11 @@ class JSSTreplyModel {
         $jsst_actual_ticketid = jssupportticket::$_db->get_var($jsst_query);
         if ($jsst_actual_ticketid != $jsst_data['reply-tikcetid'])
             return false;
+        // And a ticket this agent may open: the permission says what, not where.
+        if (!current_user_can('manage_options') && !JSSTincluder::getJSModel('ticket')->staffMayOpenTicket($jsst_actual_ticketid)) {
+            JSSTmessage::setMessage(esc_html(__('You are not allowed to edit this reply', 'js-support-ticket')), 'error');
+            return false;
+        }
         $jsst_desc = JSSTincluder::getJSModel('jssupportticket')->getSanitizedEditorData($jsst_data['jsticket_replytext']); // use jsticket_message to avoid conflict
 
         $jsst_row = JSSTincluder::getJSTable('replies');
@@ -711,6 +716,10 @@ class JSSTreplyModel {
             if (!JSSTincluder::getJSModel('userpermissions')->checkPermissionGrantedForTask('Set AI Reply Mode for Reply')) {
                 return false;
             }
+            // On a ticket this agent may open. (Security review, 5 November 2026)
+            if (!$jsst_ticketid || !JSSTincluder::getJSModel('ticket')->staffMayOpenTicket($jsst_ticketid)) {
+                return false;
+            }
         } elseif (!current_user_can('manage_options')) {
             return false;
         }
@@ -753,6 +762,10 @@ class JSSTreplyModel {
             $has_ai_permission = JSSTincluder::getJSModel('userpermissions')->checkPermissionGrantedForTask('Use AI Powered Reply Feature');
             if (!$has_ai_permission) { // Note the "!" (NOT)
                 wp_send_json_error(['message' => __('You do not have permission to use AI features.', 'js-support-ticket')]);
+            }
+            // On a ticket this agent may open. (Security review, 5 November 2026)
+            if (!JSSTincluder::getJSModel('ticket')->staffMayOpenTicket($jsst_ticket_id)) {
+                wp_send_json_error(['message' => __('Access Denied.', 'js-support-ticket')]);
             }
         } 
         // 3. If they are NOT staff, check if they are an Administrator
@@ -827,7 +840,7 @@ class JSSTreplyModel {
         // Get WordPress administrator user IDs
         $jsst_admin_wp_ids = jssupportticket::$_db->get_col(
             "SELECT user_id
-            FROM `" . jssupportticket::$_db->prefix . "usermeta`
+            FROM `" . jssupportticket::$_wpprefixforuser . "usermeta`
             WHERE meta_key = '" . jssupportticket::$_db->prefix . "capabilities'
             AND meta_value LIKE '%administrator%'"
         );

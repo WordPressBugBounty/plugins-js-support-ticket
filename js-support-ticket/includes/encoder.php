@@ -38,6 +38,18 @@ class JSSTEncoder {
         return $jsst_b64;
     }
 
+    /**
+     * Was this made by encrypt() with a key, rather than being plain base64?
+     *
+     * decrypt() still reads plain base64, because values stored before real
+     * encryption existed are kept in that form. Anything that grants access -
+     * a visitor's ticket cookie - has to be sealed, or anybody could write one.
+     */
+    static function isSealed($jsst_input) {
+        $jsst_input = (string) $jsst_input;
+        return 0 === strpos($jsst_input, self::JSST_ENC_MARKER_V2) || 0 === strpos($jsst_input, self::JSST_ENC_MARKER);
+    }
+
     function encrypt($jsst_input) {
         if ($jsst_input === '' || $jsst_input === null) {
             return $jsst_input;

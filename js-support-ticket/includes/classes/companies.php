@@ -333,7 +333,7 @@ class JSSTcompanies {
             return false;
         }
         $jsst_email = jssupportticket::$_db->get_var(jssupportticket::$_db->prepare(
-            'SELECT user_email FROM `' . jssupportticket::$_wpprefixforuser . 'js_ticket_users` WHERE id = %d', $jsst_uid));
+            'SELECT user_email FROM `' . jssupportticket::$_db->prefix . 'js_ticket_users` WHERE id = %d', $jsst_uid));
         return ($jsst_email === null) ? false : self::forEmail($jsst_email);
     }
 
@@ -403,7 +403,7 @@ class JSSTcompanies {
         $jsst_role = ($jsst_role === self::ROLE_SUPERVISOR) ? self::ROLE_SUPERVISOR : self::ROLE_CONTACT;
         $jsst_prefix = jssupportticket::$_db->prefix;
         $jsst_uid = (int) jssupportticket::$_db->get_var(jssupportticket::$_db->prepare(
-            'SELECT id FROM `' . jssupportticket::$_wpprefixforuser . 'js_ticket_users` WHERE user_email = %s LIMIT 1', $jsst_email));
+            'SELECT id FROM `' . jssupportticket::$_db->prefix . 'js_ticket_users` WHERE user_email = %s LIMIT 1', $jsst_email));
         $jsst_existing = jssupportticket::$_db->get_row(jssupportticket::$_db->prepare(
             'SELECT id FROM `' . $jsst_prefix . 'js_ticket_company_people` WHERE email = %s LIMIT 1', $jsst_email));
 
