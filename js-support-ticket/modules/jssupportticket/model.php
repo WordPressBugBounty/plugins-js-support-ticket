@@ -1652,10 +1652,38 @@ $jsst_query = "SELECT product.product, COUNT(t.id) AS ticket_count
        /* `data-vbtype` is what marks a ticket page's own attachment links for the
           image viewer, and nothing else uses it, so written content may not carry
           it: a message can then never pass for one of those links. KSES has
-          already rewritten every attribute as name="value"; its output is
-          slashed, hence the strip and re-add. */
-       $jsst_data = addslashes(preg_replace('/\sdata-vbtype\s*=\s*"[^"]*"/i', '', stripslashes($jsst_data)));
+          already rewritten every attribute as name="value" on WordPress 7,
+          but older versions keep 'value' and bare values, so all three forms
+          are matched. Its output is slashed, hence the strip and re-add. */
+       $jsst_data = addslashes(self::removeViewerAttributes(stripslashes($jsst_data)));
        return $jsst_data;
+    }
+
+    /**
+     * Ticket content as shown on a ticket page, without the image viewer's
+     * markers (`data-vbtype`, `data-href`).
+     *
+     * getSanitizedEditorData() strips `data-vbtype` on save, but replies are
+     * shown through html_entity_decode(), so an entity-encoded tag got past
+     * that and became a real attachment-viewer link on the page (reported by
+     * Wordfence against 5.0.4). Stripping on the way out also covers content
+     * stored before this and content saved by other routes. Run after
+     * wp_kses_post().
+     */
+    function stripViewerMarkup($jsst_html){
+        return self::removeViewerAttributes((string) $jsst_html);
+    }
+
+    /**
+     * `data-vbtype` and `data-href` removed, whether the value is in double
+     * quotes, single quotes or bare: WordPress before 7.0 leaves kses output
+     * in the quoting it was written in.
+     */
+    private static function removeViewerAttributes($jsst_html) {
+        $jsst_pattern = '/\sdata-(?:vbtype|href)\s*=\s*(?:"[^"]*"|\'[^\']*\'|[^\s>]+)/i';
+        $jsst_out = preg_replace($jsst_pattern, '', (string) $jsst_html);
+        // A regex failure must not hand the markers back: plain text instead.
+        return ($jsst_out === null) ? esc_html(wp_strip_all_tags((string) $jsst_html)) : $jsst_out;
     }
 
     function getEncriptedSiteLink(){

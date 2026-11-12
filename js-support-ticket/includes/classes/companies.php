@@ -757,6 +757,10 @@ class JSSTcompanies {
         if (!self::isSupervisor($jsst_actor['email'])) {
             return '';
         }
+        // Named by address, so only an account that has proven the address. (5.0.6)
+        if (!self::addressProven($jsst_actor['email'])) {
+            return '';
+        }
         $jsst_company = self::forEmail($jsst_actor['email']);
         if (!$jsst_company) {
             return '';
@@ -771,12 +775,23 @@ class JSSTcompanies {
      * reopening are still checked against the ticket's own owner.
      */
     public static function supervisorReads($jsst_email, $jsst_ticketemail) {
-        if (!self::isSupervisor($jsst_email)) {
+        if (!self::isSupervisor($jsst_email) || !self::addressProven($jsst_email)) {
             return false;
         }
         $jsst_mine = self::forEmail($jsst_email);
         $jsst_theirs = self::forEmail($jsst_ticketemail);
         return ($jsst_mine && $jsst_theirs && (int) $jsst_mine->id === (int) $jsst_theirs->id);
+    }
+
+    /**
+     * A supervisor is named by e-mail address, and an address is something
+     * anybody can type into a sign-up form or a shop's account page. The wider
+     * reading a supervisor gets therefore needs an account that has proven the
+     * address (JSSTemailproof); until then they see their own tickets, like
+     * everybody else. (5.0.6)
+     */
+    private static function addressProven($jsst_email) {
+        return class_exists('JSSTemailproof') ? JSSTemailproof::isVerifiedEmail($jsst_email) : false;
     }
 
     /* =====================================================================

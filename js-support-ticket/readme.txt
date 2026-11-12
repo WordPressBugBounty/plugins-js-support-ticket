@@ -3,7 +3,7 @@ Contributors: rabilal
 Tags: helpdesk, support ticket, ticketing system, customer support, knowledge base
 Requires at least: 5.5
 Tested up to: 7.1
-Stable tag: 5.0.5
+Stable tag: 5.0.6
 Requires PHP: 7.4
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
@@ -209,6 +209,17 @@ The [documentation](https://jshelpdesk.com/docs/) covers setup and every add-on,
 
 == Changelog ==
 
+= 5.0.6 =
+Security and bug-fix release. Update promptly. Full details are in changelog.txt.
+
+* Security: ticket messages can no longer carry markup that the attachment image viewer acts on.
+* Security: tickets sent as a guest are added to an account only after the account confirms that e-mail address (a confirmation link is e-mailed); the same applies to company supervisors.
+* Security: the search saved between pages of a list can no longer be altered by the visitor.
+* Security: links in ticket messages can no longer run code on the admin ticket page.
+* Security: replies that arrive by e-mail are filtered like replies written on the site.
+* Fixed: answers to custom ticket fields that contained quotation marks were lost.
+* Fixed: agents with the Help Desk Agent or Light Agent role who are not on the Agents screen can now open reply images in the viewer and use "Download all".
+
 = 5.0.5 =
 Security release from a full review of the plugin and its add-ons. Update the plugin and your add-ons promptly. Full details are in changelog.txt.
 
@@ -221,7 +232,6 @@ Security release from a full review of the plugin and its add-ons. Update the pl
 * Fixed: with the Email add-on, help desk e-mails were no longer sent through the SMTP server set on System Emails - they went out through WordPress's default mailer (or another mail plugin) and the SMTP fields disappeared from the System Email form. A site that still had the old SMTP add-on switched on sent every notification twice. Both fixed; the SMTP settings themselves were never lost.
 * Fixed: "Update" on License & Add-ons could say "Updating..." and leave the add-on on its old version without a message, when WordPress's own update list did not hold the update (no update check yet, or another plugin filtering updates). The button now installs what the license server offers, and says why when it cannot.
 * Fixed: attachments that came in by e-mail through the old Email Piping add-on could not be downloaded when their name had spaces or accented letters ("This attachment's file is missing on the server"). They download again, including on old tickets, and new ones are recorded under the name they are saved as.
-* Fixed: agents with the Help Desk Agent or Light Agent role who are not on the Agents screen can now open reply images in the viewer and use "Download all".
 * Fixed: the agent reports with time tracking no longer write PHP "Deprecated: Implicit conversion from float" notices to the error log on PHP 8.1 and later.
 
 = 5.0.4 =
@@ -324,6 +334,9 @@ The biggest release in JS Help Desk's history.
 See the [full changelog](https://plugins.trac.wordpress.org/browser/js-support-ticket/trunk/changelog.txt).
 
 == Upgrade Notice ==
+
+= 5.0.6 =
+Security release: fixes for saved list searches, the ticket image viewer, links in ticket messages and e-mailed replies; also custom field answers with quotation marks, and image viewing for agents set up by WordPress role. Update now.
 
 = 5.0.5 =
 Security release. Fixes permission and input checks found in a full review of the plugin and its add-ons, and protects sites still running older add-ons. Also fixes SMTP sending with the Email add-on, add-on updates that did not install, the user lists on Multisite and e-mailed attachments that could not be downloaded. Update now, together with your add-ons.

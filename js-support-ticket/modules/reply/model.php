@@ -238,7 +238,12 @@ class JSSTreplyModel {
         $jsst_tempmessage = isset($jsst_data['jsticket_message']) ? $jsst_data['jsticket_message'] : '';
         $jsst_data = jssupportticket::JSST_sanitizeData($jsst_data); // JSST_sanitizeData() function uses wordpress santize functions
         if(isset($jsst_data['ticketviaemail']) && $jsst_data['ticketviaemail'] == 1){
-            $jsst_data['message'] = $jsst_tempmessage;
+            /* A reply that came in by e-mail is HTML somebody else wrote, and it
+               was stored as it arrived: the piping add-ons only take out style
+               and script blocks. Filtered like every other reply now, so a mail
+               cannot carry event handlers, forms or iframes into the thread or
+               into the notification mails built from it. (5.0.6) */
+            $jsst_data['message'] = JSSTincluder::getJSModel('jssupportticket')->getSanitizedEditorData($jsst_tempmessage);
         }elseif(isset($jsst_data['ticketviaautopilot']) && $jsst_data['ticketviaautopilot'] == 1){
             $jsst_data['message'] = $jsst_tempmessage;
         }else{
@@ -821,7 +826,8 @@ class JSSTreplyModel {
 
             $jsst_formatted_replies[] = [
                 'id'        => $jsst_reply->id,
-                'text'      => $jsst_reply->message,
+                // Filtered on the way out too: replies stored before 5.0.6 may be raw mail.
+                'text'      => wp_kses_post($jsst_reply->message),
                 'name'      => $jsst_name,
                 'timestamp' => $jsst_reply->created,
                 'isMarked'  => (bool) $jsst_reply->aireplymode

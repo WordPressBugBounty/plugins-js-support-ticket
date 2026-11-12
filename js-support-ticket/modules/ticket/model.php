@@ -1625,7 +1625,11 @@ class JSSTticketModel {
                 if(is_array($jsst_vardata)){
                     $jsst_vardata = implode(', ', array_filter($jsst_vardata));
                 }
-                $jsst_params[$jsst_ufobj->field] = jssupportticketphplib::JSST_htmlentities($jsst_vardata);
+                /* As sanitised, not entity-encoded: the encoding used to be undone
+                   on the whole JSON below, which turned an answer's quote mark back
+                   into a bare " inside the JSON - the answers were lost, or one
+                   answer could write another field's value. (5.0.6) */
+                $jsst_params[$jsst_ufobj->field] = (string) $jsst_vardata;
             }
         }
         if($jsst_data['id'] != ''){
@@ -1644,7 +1648,7 @@ class JSSTticketModel {
                 }
             }
         }
-        $jsst_params = html_entity_decode(wp_json_encode($jsst_params, JSON_UNESCAPED_UNICODE));
+        $jsst_params = wp_json_encode($jsst_params, JSON_UNESCAPED_UNICODE);
         $jsst_data['params'] = $jsst_params;
         //custom field code end
 
@@ -4358,7 +4362,8 @@ class JSSTticketModel {
             }
             $jsst_out[] = array(
                 'id'        => (int) $jsst_reply->id,
-                'text'      => $jsst_reply->message,
+                // Filtered here as well: replies stored before 5.0.6 may be raw mail.
+                'text'      => wp_kses_post($jsst_reply->message),
                 'plain'     => $jsst_text,
                 'created'   => $jsst_reply->created,
                 'ticket_id' => $jsst_tid,

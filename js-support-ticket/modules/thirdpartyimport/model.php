@@ -358,11 +358,11 @@ class JSSTthirdpartyimportModel {
                         if (is_array($jsst_vardata)) {
                             $jsst_vardata = implode(', ', array_filter($jsst_vardata));
                         }
-                        $jsst_params[$jsst_sc_ticket_custom_field["jshd_filedorderingfield"]] = jssupportticketphplib::JSST_htmlentities($jsst_vardata);
+                        $jsst_params[$jsst_sc_ticket_custom_field["jshd_filedorderingfield"]] = (string) $jsst_vardata;
                     }
                 }
             }
-            $jsst_ticketparams = html_entity_decode(wp_json_encode($jsst_params, JSON_UNESCAPED_UNICODE));
+            $jsst_ticketparams = wp_json_encode($jsst_params, JSON_UNESCAPED_UNICODE);
 
             // Get linked data
             $jsst_userinfo = $this->getSupportCandyTicketCustomerInfo($jsst_ticket->customer);
@@ -2991,11 +2991,11 @@ class JSSTthirdpartyimportModel {
                         if (is_array($jsst_vardata)) {
                             $jsst_vardata = implode(', ', array_filter($jsst_vardata));
                         }
-                        $jsst_params[$jsst_as_ticket_custom_field["jshd_filedorderingfield"]] = jssupportticketphplib::JSST_htmlentities($jsst_vardata);
+                        $jsst_params[$jsst_as_ticket_custom_field["jshd_filedorderingfield"]] = (string) $jsst_vardata;
                     }
                 }
             }
-            $jsst_ticketparams = html_entity_decode(wp_json_encode($jsst_params, JSON_UNESCAPED_UNICODE));
+            $jsst_ticketparams = wp_json_encode($jsst_params, JSON_UNESCAPED_UNICODE);
             $jsst_post_meta = get_post_meta($jsst_ticket->ID);
             
             
@@ -4118,12 +4118,12 @@ class JSSTthirdpartyimportModel {
                             if(is_array($jsst_vardata)){
                                 $jsst_vardata = implode(', ', array_filter($jsst_vardata));
                             }
-                            $jsst_params[$jsst_js_ticket_custom_field] = jssupportticketphplib::JSST_htmlentities($jsst_vardata);
+                            $jsst_params[$jsst_js_ticket_custom_field] = (string) $jsst_vardata;
                         }
                     }
                 }
             }
-            $jsst_ticketparams = html_entity_decode(wp_json_encode($jsst_params, JSON_UNESCAPED_UNICODE));
+            $jsst_ticketparams = wp_json_encode($jsst_params, JSON_UNESCAPED_UNICODE);
 
             // Get linked data
             $jsst_userinfo = $this->getFluentSupportTicketCustomerInfo($jsst_ticket->customer_id);

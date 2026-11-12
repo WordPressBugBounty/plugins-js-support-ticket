@@ -196,6 +196,12 @@ class jssupportticketphplib {
 
     public static function JSST_setcookie($jsst_name, $jsst_value = "", $jsst_expires = 0, $jsst_path = "", $jsst_domain = "", $jsst_secure = false, $jsst_httponly = false){
         $jsst_output = null;
+        /* The social-login identity is signed on its way out, so that only a
+           value this site wrote is believed - see jssupportticket::verifySocialCookie().
+           The Social Login add-on writes it through here. (5.0.6) */
+        if ($jsst_name === 'jssupportticket-socialid' && (string) $jsst_value !== '' && class_exists('jssupportticket')) {
+            $jsst_value = $jsst_value . '.' . jssupportticket::cookieSignature($jsst_name, (string) $jsst_value);
+        }
         if ($jsst_name != null && $jsst_domain !== null) {
             if (!headers_sent()) {
                 if ($jsst_httponly && PHP_VERSION_ID >= 70300) {

@@ -40688,3 +40688,53 @@ msgstr ""
 #, php-format
 msgid "WordPress did not install the update: %1$s is still version %2$s. Download the add-on from your account on jshelpdesk.com and upload it under Plugins > Add New > Upload Plugin."
 msgstr ""
+
+#: js-support-ticket/includes/classes/emailproof.php
+msgid "This account has no e-mail address to confirm."
+msgstr ""
+
+#: js-support-ticket/includes/classes/emailproof.php
+msgid "A confirmation link was sent a few minutes ago. Please check your inbox, or try again later."
+msgstr ""
+
+#. translators: %s: site name
+#: js-support-ticket/includes/classes/emailproof.php
+#, php-format
+msgid "[%s] Confirm your e-mail address"
+msgstr ""
+
+#. translators: 1: site name, 2: confirmation link
+#: js-support-ticket/includes/classes/emailproof.php
+#, php-format
+msgid ""
+"Please confirm that this e-mail address belongs to your account at %1$s by opening this link:\n"
+"\n"
+"%2$s\n"
+"\n"
+"Once it is confirmed, any support tickets you sent from this address before you had an account are added to your account. The link works for two days. If you did not ask for this, you can ignore this message."
+msgstr ""
+
+#: js-support-ticket/includes/classes/emailproof.php
+msgid "Thank you - your e-mail address is confirmed."
+msgstr ""
+
+#: js-support-ticket/includes/classes/emailproof.php
+msgid "That confirmation link is not valid or has expired. Sign in and ask for a new one on My Tickets."
+msgstr ""
+
+#: js-support-ticket/includes/classes/emailproof.php
+#: js-support-ticket/includes/jsst-hooks.php
+msgid "We have e-mailed you a link to confirm your address."
+msgstr ""
+
+#: js-support-ticket/includes/classes/emailproof.php
+msgid "Tickets you sent before you had an account are added once you confirm your e-mail address."
+msgstr ""
+
+#: js-support-ticket/includes/classes/emailproof.php
+msgid "Send confirmation link"
+msgstr ""
+
+#: js-support-ticket/includes/jsst-hooks.php
+msgid "Registration is not open on this site."
+msgstr ""

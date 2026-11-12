@@ -110,6 +110,10 @@ if (jssupportticket::$_config['offline'] == 2) {
     }
     /* JSSTbreadcrumbs::getBreadcrumbs(); */
     include_once(JSST_PLUGIN_PATH . 'includes/header.php');
+    // Confirming the address brings in the tickets sent before the account existed. (5.0.6)
+    if (class_exists('JSSTemailproof')) {
+        echo wp_kses(JSSTemailproof::notice(), JSST_ALLOWED_TAGS);
+    }
     if (JSSTincluder::getObjectClass('user')->uid() != 0) {
         $jsst_list = isset(jssupportticket::$_search['ticket']) ? jssupportticket::$_search['ticket']['list'] : 1;
         $jsst_open = ($jsst_list == 1) ? 'active' : '';

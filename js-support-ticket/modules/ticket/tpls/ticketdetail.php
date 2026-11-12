@@ -40,7 +40,11 @@ if (jssupportticket::$_config['offline'] == 2) {
     wp_enqueue_style('jquery.cluetip', JSST_PLUGIN_URL . 'includes/css/jquery.cluetip.css', array(), jssupportticket::$_config['productversion']);
         wp_enqueue_script('timer.js', JSST_PLUGIN_URL . 'includes/js/timer.jquery.js', array(), jssupportticket::$_config['productversion'], true);
         wp_enqueue_style('jssupportticket-venobox-css', JSST_PLUGIN_URL . 'includes/css/venobox.css', array(), jssupportticket::$_config['productversion']);
-        wp_enqueue_script('venoboxjs',JSST_PLUGIN_URL.'includes/js/venobox.js', array(), jssupportticket::$_config['productversion'], true);
+        wp_enqueue_script('venoboxjs',JSST_PLUGIN_URL.'includes/js/venobox.js', array(), jssupportticket::$_config['productversion'].'.'.filemtime(JSST_PLUGIN_PATH.'includes/js/venobox.js'), true);
+        /* Marks the AI-example toggles this page draws. A message can carry a button with the same
+           class and data-id (kses keeps both), so the click handler acts only on a toggle bearing this
+           per-page key, which stored content cannot know. (5.0.6) */
+        $jsst_aitoggle_key = wp_generate_password(16, false, false);
         /* Always core's own modules now. (Roadmap 6.0-AI-01) The add-on's
            model and core's are the same two functions, and routing to the
            add-on whenever it happened to be active meant a site that had it
@@ -782,6 +786,7 @@ if (jssupportticket::$_config['offline'] == 2) {
                 jQuery(document).on("click", ".js-ticket-ai-example", function(e) {
                     e.preventDefault();
                     var btn = jQuery(this);
+                    if (btn.attr("data-k") !== "'.esc_js($jsst_aitoggle_key).'") return; // not one this page drew
                     var wasOff = btn.hasClass("js-ticket-ai-example-off");
                     btn.toggleClass("js-ticket-ai-example-off", !wasOff)
                        .attr("aria-checked", wasOff ? "true" : "false")
@@ -2038,7 +2043,7 @@ if (jssupportticket::$_config['offline'] == 2) {
                                                 <div class="js-ticket-rows-wrp" >
                                                     <div class="js-ticket-row">
                                                         <div class="js-ticket-field-value">
-                                                           <?php echo wp_kses_post($jsst_note->note); ?>
+                                                           <?php echo JSSTincluder::getJSModel('jssupportticket')->stripViewerMarkup(wp_kses_post($jsst_note->note)); ?>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -2143,7 +2148,7 @@ if (jssupportticket::$_config['offline'] == 2) {
                                     <?php 
                                 } ?>
                                 <div class="js-ticket-thread-data note-msg">
-                                    <?php echo wp_kses_post(jssupportticket::$jsst_data[0]->message); ?>
+                                    <?php echo JSSTincluder::getJSModel('jssupportticket')->stripViewerMarkup(wp_kses_post(jssupportticket::$jsst_data[0]->message)); ?>
                                     <?php
                                     if (!empty(jssupportticket::$jsst_data['ticket_attachment'])) { ?>
                                         <div class="js-ticket-attachments-wrp">
@@ -2312,7 +2317,7 @@ if (jssupportticket::$_config['offline'] == 2) {
                                                             $jsst_ai_off = ((int) $jsst_reply->aireplymode === 2); ?>
                                                             <button type="button"
                                                                 class="js-ticket-ai-example<?php echo $jsst_ai_off ? ' js-ticket-ai-example-off' : ''; ?>"
-                                                                data-type="reply" data-id="<?php echo esc_attr($jsst_reply->replyid); ?>"
+                                                                data-type="reply" data-id="<?php echo esc_attr($jsst_reply->replyid); ?>" data-k="<?php echo esc_attr($jsst_aitoggle_key); ?>"
                                                                 role="switch"
                                                                 aria-checked="<?php echo $jsst_ai_off ? 'false' : 'true'; ?>"
                                                                 title="<?php echo esc_attr__('Whether the AI may offer this reply as an example when answering a similar ticket. Nothing leaves your site: the suggestions are a search of your own past replies.', 'js-support-ticket'); ?>">
@@ -2342,7 +2347,7 @@ if (jssupportticket::$_config['offline'] == 2) {
                                             </div>
                                             <div class="js-ticket-thread-data note-msg">
                                                 <?php // A ticket link in a stored reply belongs to whoever is reading it. (Roadmap 4.0-CORE-01)
-                                                echo wp_kses_post(JSSTticketlink::resolve(html_entity_decode($jsst_reply->message)));
+                                                echo JSSTincluder::getJSModel('jssupportticket')->stripViewerMarkup(wp_kses_post(JSSTticketlink::resolve(html_entity_decode($jsst_reply->message))));
                                                 $jsst_active_count = 0; // Counter for active attachments
                                                 ?>
                                                 <?php if (!empty($jsst_reply->attachments)) { ?>

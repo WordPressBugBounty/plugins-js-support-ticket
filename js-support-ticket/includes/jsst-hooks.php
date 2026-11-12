@@ -60,6 +60,13 @@ function jsst_authenticate_username_password($jsst_user, $jsst_username, $jsst_p
 function jsst_add_new_member()
 {
     if (isset($_POST["jsst_user_login"]) && isset($_POST['jsst_support_register_nonce']) && wp_verify_nonce($_POST['jsst_support_register_nonce'], 'jsst-support-register-nonce')) {
+        /* The form is only shown when the site lets people register; the
+           handler now asks the same question rather than trusting that the
+           form was the way in. (5.0.6) */
+        if (!get_option('users_can_register')) {
+            jsst_errors()->add('registration_closed', esc_html(__('Registration is not open on this site.', 'js-support-ticket')));
+            return;
+        }
         $jsst_user_login = sanitize_user($_POST["jsst_user_login"]);
         $jsst_user_email = sanitize_email($_POST["jsst_user_email"]);
         $jsst_user_first = sanitize_text_field($_POST["jsst_user_first"]);
@@ -184,6 +191,12 @@ function jsst_add_new_member()
 
                 // send an email to the admin alerting them of the registration
                 wp_new_user_notification($jsst_new_user_id);
+                /* The address was typed, not proven: nothing that follows from
+                   it (earlier guest tickets, a company supervisor's access) is
+                   given until the person opens this link. (5.0.6) */
+                if (class_exists('JSSTemailproof') && JSSTemailproof::sendLink($jsst_new_user_id) === true) {
+                    JSSTmessage::setMessage(esc_html(__('We have e-mailed you a link to confirm your address.', 'js-support-ticket')), 'updated');
+                }
                 // log the new user in
                 wp_set_current_user($jsst_new_user_id, $jsst_user_login);
                 wp_set_auth_cookie($jsst_new_user_id);
@@ -485,24 +498,13 @@ function jsst_update_user_profile($jsst_user_id) {
 add_action('edit_user_profile_update', 'jsst_update_user_profile');
 add_action('user_register', 'jsst_update_user_profile'); // creating a new user
 
-/* Mark a new account whose email address is known to be its owner's, so that
-   its earlier guest tickets are attached on its first visit
-   (JSSTuser::linkGuestTickets). WordPress's own sign-up form emails the
-   password link, so nobody gets in without the mailbox; an account an
-   administrator creates is trusted. Other sign-up forms (shops, membership
-   plugins) may let anyone type any address, so they are left out unless the
-   site says its addresses are verified with the jsst_link_guest_tickets_on_register
-   filter. */
-function jsst_flag_guest_ticket_link($jsst_user_id) {
-    update_user_meta((int) $jsst_user_id, 'jsst_link_guest_tickets', 1);
-}
-add_action('register_new_user', 'jsst_flag_guest_ticket_link');
-add_action('edit_user_created_user', 'jsst_flag_guest_ticket_link');
-add_action('user_register', function ($jsst_user_id) {
-    if (apply_filters('jsst_link_guest_tickets_on_register', false, $jsst_user_id)) {
-        jsst_flag_guest_ticket_link($jsst_user_id);
-    }
-}, 20);
+/* Guest tickets are given to an account once it has proven its e-mail
+   address - see JSSTemailproof (includes/classes/emailproof.php). Until 5.0.5
+   an account was marked for them on `register_new_user`, on the assumption
+   that WordPress's sign-up mails the password link; this plugin's own sign-up
+   form set the password and logged the visitor in straight away, so anybody
+   could register with a guest's address and receive that guest's tickets
+   (reported by Patchstack). */
 
 /* Translations are installed by JSSTtranslations (includes/classes/translations.php)
    since 1 October 2026. The 4.x download that stood here fetched 4.x files from

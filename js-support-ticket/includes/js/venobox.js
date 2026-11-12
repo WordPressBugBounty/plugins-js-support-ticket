@@ -90,6 +90,9 @@
                 obj.data('titleattr', option.titleattr);
 
                 obj.data('venobox', true);
+                /* A property, not data(): jQuery's data() also reads data-* attributes,
+                   so markup written into a ticket could claim to be a set-up link. */
+                this.jsstVenobox = true;
 
                 obj.on('click', function(e){
 
@@ -287,7 +290,7 @@
                         } else if (obj.data('vbtype') == 'video') {
                           loadVid(autoplay);
                         } else {
-                          content.html('<img src="'+dest+'">');
+                          content.html('').append($('<img>').attr('src', dest)); // never built as HTML: dest is a link value
                           preloadFirst();
                         }
                         option.cb_post_open(obj, gallIndex, thenext, theprev);
@@ -320,7 +323,10 @@
                     if (gallItems) {
                         items = gallItems;
                     } else {
-                        items = $('.vbox-item[data-gall="' + thisgall + '"]');
+                        /* Only links this plugin set up: anything else carrying the
+                           class and a matching data-gall (written into a message) is
+                           left out of the gallery. */
+                        items = $('.vbox-item[data-gall="' + thisgall + '"]').filter(function(){ return this.jsstVenobox === true; });
                     }
 
                     thenext = items.eq( items.index(obj) + 1 );
@@ -428,7 +434,7 @@
                       } else if (destination.data('vbtype') == 'video') {
                         loadVid(autoplay);
                       } else {
-                        content.html('<img src="'+dest+'">');
+                        content.html('').append($('<img>').attr('src', dest)); // never built as HTML: dest is a link value
                         preloadFirst();
                       }
                       obj = destination;

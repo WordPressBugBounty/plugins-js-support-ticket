@@ -5,7 +5,7 @@
   Plugin URI: https://www.jshelpdesk.com
   Description: JS Help Desk is a trusted open source ticket system. JS Help Desk is a simple, easy to use, web-based customer support system. User can create ticket from front-end. JS Help Desk comes packed with lot features than most of the expensive(and complex) support ticket system on market. JS Help Desk provide you best industry help desk system.
   Author: JS Help Desk
-  Version: 5.0.5
+  Version: 5.0.6
   Requires at least: 5.5
   Requires PHP: 7.4
   Text Domain: js-support-ticket
@@ -48,6 +48,9 @@ class jssupportticket {
     function __construct() {
         // php 8.1 issues
         require_once 'includes/jssupportticketphplib.php';
+        // Before any add-on can read them - see verifySearchCookie().
+        self::verifySearchCookie();
+        self::verifySocialCookie();
         // to check what addons are active and create an array.
         $jsst_plugin_array = get_option('active_plugins');
         $jsst_addon_array = array();
@@ -127,6 +130,7 @@ class jssupportticket {
         JSSTdraft::registerHooks();  // Roadmap 4.0-UX-04
         JSSTpresence::registerHooks(); // Roadmap 4.0-UX-05
         JSSTcompanies::registerHooks(); // Roadmap 5.5-COM-06
+        JSSTemailproof::registerHooks(); // 5.0.6
         JSSTconsent::registerHooks();   // Roadmap 5.5-SEC-02
         JSSTaisources::registerHooks(); // Roadmap 6.0-AI-02
         JSSTailanguages::registerHooks(); // Roadmap 6.0-AI-09
@@ -159,7 +163,7 @@ class jssupportticket {
         self::$jsst_data = array();
         self::$_search = array();
         self::$_captcha = array();
-        self::$_currentversion = '505';
+        self::$_currentversion = '506';
         self::$_addon_query = array('select'=>'','join'=>'','where'=>'');
         self::$_jshdsession = JSSTincluder::getObjectClass('wphdsession');
         global $wpdb;
@@ -967,6 +971,105 @@ class jssupportticket {
         }
     }
 
+    /**
+     * The saved list search (jsst_ticket_search_data) is accepted only if this
+     * site wrote it. (5.0.6)
+     *
+     * List pages keep the last search in a cookie so paging keeps the filter:
+     * base64 of JSON, read back by core and by every add-on whenever the URL
+     * carries `pagenum`. The values were saved after the search form's own
+     * escaping, and the readers put them into SQL as they found them - so a
+     * cookie written by hand, with a quote in it, put SQL into those queries
+     * for anybody, signed in or not. Rather than trust each of those readers
+     * (some live in add-ons a site may not update), the cookie now carries an
+     * HMAC over its value; here, before any of them can run, a cookie whose
+     * signature is wrong or missing is removed from $_COOKIE, and a good one is
+     * handed on as the plain value the readers have always expected. Only
+     * values this site saved itself can reach them.
+     */
+    public static function verifySearchCookie() {
+        if (!isset($_COOKIE['jsst_ticket_search_data'])) {
+            return;
+        }
+        $jsst_raw = (string) $_COOKIE['jsst_ticket_search_data'];
+        $jsst_dot = strrpos($jsst_raw, '.');
+        $jsst_ok = false;
+        if ($jsst_dot !== false) {
+            $jsst_value = substr($jsst_raw, 0, $jsst_dot);
+            $jsst_sig = substr($jsst_raw, $jsst_dot + 1);
+            $jsst_ok = ($jsst_value !== '' && hash_equals(self::searchCookieSignature($jsst_value), $jsst_sig));
+        }
+        if ($jsst_ok) {
+            $_COOKIE['jsst_ticket_search_data'] = $jsst_value;
+        } else {
+            unset($_COOKIE['jsst_ticket_search_data']);
+        }
+    }
+
+    /**
+     * The social-login identity (`jssupportticket-socialid`) is accepted only if
+     * this site wrote it. (5.0.6)
+     *
+     * With the old Social Login add-on active, the help desk takes a visitor's
+     * identity from this cookie alone: its value is the Facebook or LinkedIn
+     * user id, which is often public, so anybody who set the cookie by hand
+     * became that customer - their tickets, their replies. The add-on writes
+     * the cookie through jssupportticketphplib::JSST_setcookie(), which now
+     * signs it; here, before the help desk or the add-on reads it, a value
+     * without a good signature is removed, and a good one is handed on as the
+     * plain id they expect. Social users signed in before the update sign in
+     * once more.
+     */
+    public static function verifySocialCookie() {
+        if (!isset($_COOKIE['jssupportticket-socialid']) || $_COOKIE['jssupportticket-socialid'] === '') {
+            return;
+        }
+        $jsst_plain = self::verifiedCookieValue('jssupportticket-socialid', (string) $_COOKIE['jssupportticket-socialid']);
+        if ($jsst_plain === null) {
+            unset($_COOKIE['jssupportticket-socialid'], $_COOKIE['jssupportticket-socialmedia']);
+        } else {
+            $_COOKIE['jssupportticket-socialid'] = $jsst_plain;
+        }
+    }
+
+    /** "value.signature" back to value when the signature is this site's, otherwise null. */
+    public static function verifiedCookieValue($jsst_name, $jsst_raw) {
+        $jsst_dot = strrpos($jsst_raw, '.');
+        if ($jsst_dot === false) {
+            return null;
+        }
+        $jsst_value = substr($jsst_raw, 0, $jsst_dot);
+        $jsst_sig = substr($jsst_raw, $jsst_dot + 1);
+        if ($jsst_value === '' || !hash_equals(self::cookieSignature($jsst_name, $jsst_value), $jsst_sig)) {
+            return null;
+        }
+        return $jsst_value;
+    }
+
+    /** HMAC for a cookie this plugin signs, keyed with this site's own secrets. */
+    public static function cookieSignature($jsst_name, $jsst_value) {
+        return hash_hmac('sha256', $jsst_name . '|' . $jsst_value, self::cookieKey());
+    }
+
+    /** HMAC for the saved-search cookie, keyed with this site's own secrets. */
+    private static function searchCookieSignature($jsst_value) {
+        return hash_hmac('sha256', 'jsst_ticket_search_data|' . $jsst_value, self::cookieKey());
+    }
+
+    /** The key for signed cookies: this site's auth secrets, or one of our own. */
+    private static function cookieKey() {
+        $jsst_key = (defined('AUTH_KEY') ? AUTH_KEY : '') . (defined('SECURE_AUTH_SALT') ? SECURE_AUTH_SALT : '');
+        if (strlen($jsst_key) < 32) {
+            // wp-config without keys: a random one of our own, made once.
+            $jsst_key = (string) get_option('jsst_search_cookie_key', '');
+            if (strlen($jsst_key) < 32) {
+                $jsst_key = bin2hex(random_bytes(32));
+                update_option('jsst_search_cookie_key', $jsst_key, true);
+            }
+        }
+        return $jsst_key;
+    }
+
     public static function removeusersearchcookies(){
         if(isset($_COOKIE['jsst_ticket_search_data'])){
             jssupportticketphplib::JSST_setcookie('jsst_ticket_search_data' , '' , time() - 3600 , COOKIEPATH);
@@ -981,6 +1084,8 @@ class jssupportticket {
             return false;
         $jsst_data = wp_json_encode( $jsst_search_array );
         $jsst_data = jssupportticketphplib::JSST_safe_encoding($jsst_data);
+        // Signed, so the next page can tell it was written here - see verifySearchCookie().
+        $jsst_data .= '.' . self::searchCookieSignature($jsst_data);
         jssupportticketphplib::JSST_setcookie("jsst_ticket_search_data" , $jsst_data , 0 , COOKIEPATH);
         if ( SITECOOKIEPATH != COOKIEPATH ){
             jssupportticketphplib::JSST_setcookie('jsst_ticket_search_data' , $jsst_data , 0 , SITECOOKIEPATH);
@@ -1438,6 +1543,8 @@ class jssupportticket {
            asks it whether an actor is a supervisor, and that question is asked
            on the front-end portal as often as in wp-admin. (Roadmap 5.5-COM-06) */
         include_once __DIR__ . '/includes/classes/companies.php';
+        // Which accounts have proven their e-mail address. (5.0.6)
+        include_once __DIR__ . '/includes/classes/emailproof.php';
         /* Retiring the MailChimp add-on: the consent it should always have
            recorded, the event anything can subscribe to, and the two recipes
            that carry it onward. Loaded outside is_admin() because the checkbox
