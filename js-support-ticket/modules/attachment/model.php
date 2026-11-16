@@ -359,7 +359,34 @@ class JSSTattachmentModel {
             JSSTincluder::notFound();
         }
 
-        $jsst_file = JSSTattachmentserver::attachmentRoot() . '/ticket/' . $jsst_foldername . '/' . jssupportticketphplib::JSST_basename($jsst_filename);
+        /* Only a file a file-type custom field of this ticket names - the one
+           thing this download is linked from. Any name in the ticket's folder
+           was served, and that folder also holds the files of internal notes,
+           which the customer must never get. (5.0.7) */
+        $jsst_wanted = jssupportticketphplib::JSST_basename($jsst_filename);
+        $jsst_params = json_decode((string) jssupportticket::$_db->get_var(jssupportticket::$_db->prepare(
+            "SELECT params FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE id = %d", $jsst_id)), true);
+        $jsst_filefields = jssupportticket::$_db->get_col(
+            "SELECT field FROM `" . jssupportticket::$_db->prefix . "js_ticket_fieldsordering` WHERE fieldfor = 1 AND userfieldtype = 'file'");
+        $jsst_named = false;
+        if (is_array($jsst_params)) {
+            foreach ((array) $jsst_filefields as $jsst_field) {
+                if (!isset($jsst_params[$jsst_field]) || !is_string($jsst_params[$jsst_field]) || $jsst_params[$jsst_field] === '') {
+                    continue;
+                }
+                $jsst_stored = jssupportticketphplib::JSST_clean_file_path($jsst_params[$jsst_field]);
+                $jsst_stored = jssupportticketphplib::JSST_basename(jssupportticketphplib::JSST_str_replace(' ', '_', $jsst_stored));
+                if ($jsst_stored === $jsst_wanted) {
+                    $jsst_named = true;
+                    break;
+                }
+            }
+        }
+        if (!$jsst_named) {
+            JSSTincluder::notFound();
+        }
+
+        $jsst_file = JSSTattachmentserver::attachmentRoot() . '/ticket/' . $jsst_foldername . '/' . $jsst_wanted;
         // Streams the file and ends the request; says why when it cannot.
         JSSTattachmentserver::send($jsst_file);
     }
@@ -395,6 +422,7 @@ class JSSTattachmentModel {
         $jsst_path = JSST_PLUGIN_PATH;
         $jsst_path .= 'zipdownloads';
         JSSTattachmentserver::makeTempFolder($jsst_path);
+        JSSTattachmentserver::sweepTempFolders();
         $jsst_randomfolder = $this->getRandomFolderName($jsst_path);
         $jsst_path .= '/' . $jsst_randomfolder;
 
@@ -470,6 +498,7 @@ class JSSTattachmentModel {
 
         $jsst_base_path = JSST_PLUGIN_PATH . 'zipdownloads';
         JSSTattachmentserver::makeTempFolder($jsst_base_path);
+        JSSTattachmentserver::sweepTempFolders();
         $jsst_randomfolder = $this->getRandomFolderName($jsst_base_path);
         $jsst_path = $jsst_base_path . '/' . $jsst_randomfolder;
 

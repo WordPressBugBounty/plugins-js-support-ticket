@@ -70,9 +70,12 @@ class JSSTreportsModel {
         $jsst_query = "SELECT dept.departmentname,(SELECT COUNT(id) FROM `".jssupportticket::$_db->prefix."js_ticket_tickets` WHERE departmentid = dept.id) AS totalticket
                     FROM `".jssupportticket::$_db->prefix."js_ticket_departments` AS dept";
         $jsst_department = jssupportticket::$_db->get_results($jsst_query);
+        /* Names and colours go into the chart's <script> as JSON strings. esc_html()
+           left a backslash alone, so a department called a\ ended the string and
+           the next department's name ran as script on the reports screen. (5.0.7) */
         jssupportticket::$jsst_data['pie3d_chart1'] = "";
         foreach($jsst_department AS $jsst_dept){
-            jssupportticket::$jsst_data['pie3d_chart1'] .= "['".jssupportticket::JSST_getVarValue($jsst_dept->departmentname)."',$jsst_dept->totalticket],";
+            jssupportticket::$jsst_data['pie3d_chart1'] .= "[".wp_json_encode(jssupportticket::JSST_getVarValue($jsst_dept->departmentname)).",".(int) $jsst_dept->totalticket."],";
         }
 
         $jsst_query = "SELECT priority.priority,(SELECT COUNT(id) FROM `".jssupportticket::$_db->prefix."js_ticket_tickets` WHERE priorityid = priority.id) AS totalticket
@@ -80,7 +83,7 @@ class JSSTreportsModel {
         $jsst_department = jssupportticket::$_db->get_results($jsst_query);
         jssupportticket::$jsst_data['pie3d_chart2'] = "";
         foreach($jsst_department AS $jsst_dept){
-            jssupportticket::$jsst_data['pie3d_chart2'] .= "['".jssupportticket::JSST_getVarValue($jsst_dept->priority)."',$jsst_dept->totalticket],";
+            jssupportticket::$jsst_data['pie3d_chart2'] .= "[".wp_json_encode(jssupportticket::JSST_getVarValue($jsst_dept->priority)).",".(int) $jsst_dept->totalticket."],";
         }
         if(in_array('emailpiping', jssupportticket::$_active_addons)){
             $jsst_query = "SELECT COUNT(id) FROM `".jssupportticket::$_db->prefix."js_ticket_tickets` WHERE ticketviaemail = 1";
@@ -141,7 +144,7 @@ class JSSTreportsModel {
 
         foreach($jsst_overdueticket_pr AS $jsst_index => $jsst_pr){
             jssupportticket::$jsst_data['stack_chart_horizontal']['data'] .= "[";
-            jssupportticket::$jsst_data['stack_chart_horizontal']['data'] .= "'".jssupportticket::JSST_getVarValue($jsst_pr->priority)."',";
+            jssupportticket::$jsst_data['stack_chart_horizontal']['data'] .= wp_json_encode(jssupportticket::JSST_getVarValue($jsst_pr->priority)).",";
             jssupportticket::$jsst_data['stack_chart_horizontal']['data'] .= $jsst_overdueticket_pr[$jsst_index]->totalticket.",";
             jssupportticket::$jsst_data['stack_chart_horizontal']['data'] .= $jsst_pendingticket_pr[$jsst_index]->totalticket.",";
             jssupportticket::$jsst_data['stack_chart_horizontal']['data'] .= $jsst_answeredticket_pr[$jsst_index]->totalticket.",";
@@ -169,7 +172,7 @@ class JSSTreportsModel {
         $jsst_query = "SELECT prioritycolour FROM `".jssupportticket::$_db->prefix."js_ticket_priorities` ORDER BY priority ";
         $jsst_jsonColorList = "[";
         foreach(jssupportticket::$_db->get_results($jsst_query) as $jsst_priority){
-            $jsst_jsonColorList.= "'".$jsst_priority->prioritycolour."',";
+            $jsst_jsonColorList.= wp_json_encode((string) $jsst_priority->prioritycolour).",";
         }
         $jsst_jsonColorList .= "]";
         jssupportticket::$jsst_data['priorityColorList'] = $jsst_jsonColorList;
@@ -194,7 +197,7 @@ class JSSTreportsModel {
         foreach($jsst_department AS $jsst_dept){
             if($jsst_dept->totalticket == 0)
                 $jsst_i += 1;
-            jssupportticket::$jsst_data['pie3d_chart1'] .= "['".jssupportticket::JSST_getVarValue($jsst_dept->departmentname)."',$jsst_dept->totalticket],";
+            jssupportticket::$jsst_data['pie3d_chart1'] .= "[".wp_json_encode(jssupportticket::JSST_getVarValue($jsst_dept->departmentname)).",".(int) $jsst_dept->totalticket."],";
         }
 
         if(count($jsst_department) == $jsst_i)

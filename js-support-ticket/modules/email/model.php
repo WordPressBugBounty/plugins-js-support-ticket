@@ -22,7 +22,28 @@ class JSSTemailModel {
       id required when recever emailaddress is stored in record
      */
 
+    /** The ticket the mail being sent is about, for jsst_email_sending (0 = none). */
+    private $jsst_mailticketid = 0;
+
+    /**
+     * Send one of the help desk's notifications.
+     *
+     * The ticket it is about is handed to `jsst_email_sending` with each
+     * message, so an inbox add-on can stamp it for threading without guessing
+     * the ticket from the subject line - which most templates do not carry,
+     * and which anybody can write. (5.0.7)
+     */
     function sendMail($jsst_mailfor, $jsst_action, $jsst_id = null, $jsst_tablename = null) {
+        $jsst_previous = $this->jsst_mailticketid;
+        $this->jsst_mailticketid = ((int) $jsst_mailfor === 1 && is_numeric($jsst_id)) ? (int) $jsst_id : 0;
+        try {
+            return $this->sendMailFor($jsst_mailfor, $jsst_action, $jsst_id, $jsst_tablename);
+        } finally {
+            $this->jsst_mailticketid = $jsst_previous;
+        }
+    }
+
+    private function sendMailFor($jsst_mailfor, $jsst_action, $jsst_id = null, $jsst_tablename = null) {
         if (!is_numeric($jsst_mailfor))
             return false;
         if (!is_numeric($jsst_action))
@@ -1959,7 +1980,7 @@ class JSSTemailModel {
            Inbox 2.0 uses this to stamp a Message-ID it can thread a reply on,
            and to mark the message as ours so it is recognised as a loop if it
            ever comes back round. (Roadmap 5.5-CH-01, 4.5-FE-09) */
-        do_action('jsst_email_sending', $jsst_action, $jsst_actionfor);
+        do_action('jsst_email_sending', $jsst_action, $jsst_actionfor, (int) $this->jsst_mailticketid);
 
         $jsst_enablesmtp = $this->checkSMTPEnableOrDisable($jsst_senderEmail);
         if ($jsst_enablesmtp) {
@@ -2401,7 +2422,7 @@ class JSSTemailModel {
         $jsst_hostname = JSSTrequest::getVar('hostname');
         $jsst_ssl = JSSTrequest::getVar('ssl');
         $jsst_hostportnumber = absint( JSSTrequest::getVar('hostportnumber') );
-        $jsst_emailaddress = sanitize_email( JSSTrequest::getVar('emailaddress') );
+        $jsst_emailaddress = sanitize_email( (string) JSSTrequest::getVar('emailaddress') );
         $jsst_password = JSSTrequest::getVar('password');
         $jsst_smtpauthencation = JSSTrequest::getVar('smtpauthencation');
 

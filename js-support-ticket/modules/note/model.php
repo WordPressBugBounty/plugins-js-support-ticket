@@ -131,7 +131,9 @@ class JSSTnoteModel {
                 JSSTmessage::setMessage(esc_html(__('You are not allowed', 'js-support-ticket')), 'error', 'agent-permissions');
                 return;
             }
-            if (isset($jsst_data['ticketid']) && JSSTincluder::getJSModel('ticket')->isOutOfScopeForAgent($jsst_data['ticketid'], 'ticket.note')) {
+            // staffMayOpenTicket() as well - see the same check on replies. (5.0.7)
+            if (!isset($jsst_data['ticketid']) || !JSSTincluder::getJSModel('ticket')->staffMayOpenTicket($jsst_data['ticketid'])
+                    || JSSTincluder::getJSModel('ticket')->isOutOfScopeForAgent($jsst_data['ticketid'], 'ticket.note')) {
                 JSSTmessage::setMessage(esc_html(__('This ticket is outside the tickets you can work on.', 'js-support-ticket')), 'error', 'agent-permissions');
                 return;
             }
@@ -347,6 +349,16 @@ class JSSTnoteModel {
             die( esc_html__( 'Security check Failed', 'js-support-ticket' ) );
         }
         if(!is_numeric($jsst_noteid)) return false;
+        /* Time spent on a note is internal: administrators, and support staff
+           on a ticket they may open. Only the nonce was checked. (5.0.7) */
+        if (!current_user_can('manage_options')) {
+            $jsst_ticketid = (int) jssupportticket::$_db->get_var(jssupportticket::$_db->prepare(
+                "SELECT ticketid FROM `" . jssupportticket::$_db->prefix . "js_ticket_notes` WHERE id = %d", (int) $jsst_noteid));
+            if ($jsst_ticketid <= 0 || !JSSTroles::canWriteInternalNote()
+                    || !JSSTincluder::getJSModel('ticket')->staffMayOpenTicket($jsst_ticketid)) {
+                return false;
+            }
+        }
         $jsst_query = jssupportticket::$_db->prepare(
             "SELECT time.usertime, time.conflict, time.description,time.systemtime
                 FROM `" . jssupportticket::$_db->prefix . "js_ticket_staff_time` AS time

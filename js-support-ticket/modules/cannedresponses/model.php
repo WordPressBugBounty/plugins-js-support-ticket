@@ -438,6 +438,13 @@ class JSSTcannedresponsesModel {
 
         $jsst_ticketid = JSSTrequest::getVar('ticketid');
         $jsst_ticketid = is_numeric($jsst_ticketid) ? (int) $jsst_ticketid : 0;
+        /* The placeholders are filled from this ticket - the customer's name,
+           address, tracking link - so it has to be one the agent may open.
+           Any id was accepted. Otherwise the response comes back unfilled.
+           (5.0.7) */
+        if ($jsst_ticketid > 0 && !JSSTincluder::getJSModel('ticket')->staffMayOpenTicket($jsst_ticketid)) {
+            $jsst_ticketid = 0;
+        }
         return $this->renderPlaceholders($jsst_premade, $jsst_ticketid);
     }
 

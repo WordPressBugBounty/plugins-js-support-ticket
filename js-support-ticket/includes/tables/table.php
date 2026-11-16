@@ -45,7 +45,17 @@ class JSSTtable {
             }
         } else { // update record
             if (isset($jsst_data[$this->primarykey])) {
+                /* Only the table's own columns. Every posted key that matched a
+                   property was copied, and the class's own bookkeeping counts as
+                   properties too: a form field named `tablename` changed the
+                   table the UPDATE went to, which wpdb then read back with an
+                   unescaped query - SQL injection from any edit form. (5.0.7) */
+                $jsst_internal = array('isnew', 'primarykey', 'tablename', 'columns');
                 foreach ($jsst_data AS $jsst_k => $jsst_v) {
+                    if (!is_string($jsst_k) || in_array($jsst_k, $jsst_internal, true)
+                            || (!is_scalar($jsst_v) && $jsst_v !== null)) {
+                        continue;
+                    }
                     if (isset($this->$jsst_k)) {
                         $this->$jsst_k = $jsst_v;
                         $this->columns[$jsst_k] = $jsst_v;

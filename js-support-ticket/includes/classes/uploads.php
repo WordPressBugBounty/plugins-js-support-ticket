@@ -18,7 +18,7 @@ class JSSTuploads {
         if ($jsst_ext === '') {
             return false;
         }
-        $jsst_items = array_map('trim', explode(',', strtolower((string) $jsst_list)));
+        $jsst_items = array_map(function ($jsst_e) { return ltrim(trim($jsst_e), '.'); }, explode(',', strtolower((string) $jsst_list)));
         return in_array($jsst_ext, $jsst_items, true);
     }
 
@@ -138,7 +138,7 @@ class JSSTuploads {
                     continue;
                 }
                 $jsst_document_file_types = JSSTincluder::getJSModel('configuration')->getConfigValue('file_extension');
-                if(!stristr($jsst_document_file_types, $jsst_filetyperesult['ext'])){
+                if(!self::extensionListed($jsst_document_file_types, $jsst_filetyperesult['ext'])){
                     JSSTmessage::setMessage(
                         sprintf(
                             /* translators: %s: the attachment file name */
@@ -394,7 +394,7 @@ class JSSTuploads {
                 $jsst_filetyperesult = wp_check_filetype(sanitize_file_name($_FILES['filename']['name'][$jsst_key]));
                 if(!empty($jsst_filetyperesult['ext']) && !empty($jsst_filetyperesult['type'])){
                     $jsst_document_file_types = JSSTincluder::getJSModel('configuration')->getConfigValue('file_extension');
-                    if(stristr($jsst_document_file_types, $jsst_filetyperesult['ext'])){
+                    if(self::extensionListed($jsst_document_file_types, $jsst_filetyperesult['ext'])){
 
                         $jsst_result = wp_handle_upload($jsst_file, array('test_form' => false));
                         if ( $jsst_result && ! isset( $jsst_result['error'] ) ) {
@@ -462,7 +462,7 @@ class JSSTuploads {
                 $jsst_filetyperesult = wp_check_filetype(sanitize_file_name($_FILES['filename']['name'][$jsst_key]));
                 if(!empty($jsst_filetyperesult['ext']) && !empty($jsst_filetyperesult['type'])){
                     $jsst_document_file_types = JSSTincluder::getJSModel('configuration')->getConfigValue('file_extension');
-                    if(stristr($jsst_document_file_types, $jsst_filetyperesult['ext'])){
+                    if(self::extensionListed($jsst_document_file_types, $jsst_filetyperesult['ext'])){
                         $jsst_result = wp_handle_upload($jsst_file, array('test_form' => false));
                         if ( $jsst_result && ! isset( $jsst_result['error'] ) ) {
                             // Get the folder where the file was uploaded
@@ -523,7 +523,7 @@ class JSSTuploads {
         if(!empty($jsst_filetyperesult['ext']) && !empty($jsst_filetyperesult['type'])){
             $jsst_image_file_types = JSSTincluder::getJSModel('configuration')->getConfigValue('file_extension');
 
-            if(stristr($jsst_image_file_types, $jsst_filetyperesult['ext'])){
+            if(self::extensionListed($jsst_image_file_types, $jsst_filetyperesult['ext'])){
 
                 $jsst_result = wp_handle_upload($jsst_file, array('test_form' => false));
                 if ( $jsst_result && ! isset( $jsst_result['error'] ) ) {
@@ -578,7 +578,13 @@ class JSSTuploads {
         $jsst_filetyperesult = wp_check_filetype(sanitize_file_name($_FILES['filename']['name']));
         if(!empty($jsst_filetyperesult['ext']) && !empty($jsst_filetyperesult['type'])){
             $jsst_image_file_types = JSSTincluder::getJSModel('configuration')->getConfigValue('file_extension');
-            if(stristr($jsst_image_file_types, $jsst_filetyperesult['ext'])){
+            if(self::extensionListed($jsst_image_file_types, $jsst_filetyperesult['ext'])){
+                // The same content check every other upload gets (script inside an image, etc.). (5.0.7)
+                $jsst_guardok = JSSTattachmentguard::validate($jsst_file['tmp_name'], $jsst_file['name']);
+                if ($jsst_guardok !== true) {
+                    JSSTmessage::setMessage($jsst_guardok, 'error');
+                    return false;
+                }
 
                 $jsst_result = wp_handle_upload($jsst_file, array('test_form' => false));
                 if ( $jsst_result && ! isset( $jsst_result['error'] ) ) {
@@ -636,6 +642,12 @@ class JSSTuploads {
         if(!empty($jsst_filetyperesult['ext']) && !empty($jsst_filetyperesult['type'])){
             $jsst_image_file_types = JSSTincluder::getJSModel('configuration')->getConfigValue('file_extension');
             if(self::extensionListed($jsst_image_file_types, $jsst_filetyperesult['ext'])){
+                // The same content check every other upload gets (script inside an image, etc.). (5.0.7)
+                $jsst_guardok = JSSTattachmentguard::validate($jsst_file['tmp_name'], $jsst_file['name']);
+                if ($jsst_guardok !== true) {
+                    JSSTmessage::setMessage($jsst_guardok, 'error');
+                    return false;
+                }
 
                 $jsst_result = wp_handle_upload($jsst_file, array('test_form' => false));
                 if (isset( $jsst_result['error'] ) ) {
@@ -783,7 +795,7 @@ class JSSTuploads {
         $jsst_filetyperesult = wp_check_filetype(sanitize_file_name($_FILES['logo_for_desktop_notfication']['name']));
         if(!empty($jsst_filetyperesult['ext']) && !empty($jsst_filetyperesult['type'])){
             $jsst_image_file_types = JSSTincluder::getJSModel('configuration')->getConfigValue('file_extension');
-            if(stristr($jsst_image_file_types, $jsst_filetyperesult['ext'])){
+            if(self::extensionListed($jsst_image_file_types, $jsst_filetyperesult['ext'])){
                 $jsst_result = wp_handle_upload($jsst_file, array('test_form' => false));
                 if ( $jsst_result && ! isset( $jsst_result['error'] ) ) {
                     $jsst_filename = jssupportticketphplib::JSST_basename( $jsst_result['file'] );

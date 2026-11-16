@@ -4,6 +4,33 @@ JS Help Desk - full changelog
 The readme lists what changed for site owners. This file keeps the complete,
 technical notes for every release.
 
+= 5.0.7 =
+**Security** (second full review of core and the nine add-ons, 13 November 2026)
+* Stored XSS introduced in 5.0.6: `removeViewerAttributes()` removed `data-vbtype`/`data-href` with a regular expression after kses. It could not tell an attribute from text inside another attribute's value, so `class="X data-href = b" title="x onfocus=... autofocus"` lost its closing quote and `onfocus` became live - a customer's message ran script when an agent or administrator opened the ticket. Now removed with `WP_HTML_Tag_Processor` (on WordPress before 6.2, content that mentions either marker is shown as plain text).
+* Unauthenticated file deletion through the Agents add-on (all published versions, and the old Agent add-on): `agent/uploadStaffImage` used the posted staff id as a folder name and emptied that folder, so `999/../../..` deleted files anywhere the web server could write. `JSSTajax::refuseUnsafeAddonTask()` now refuses it before add-on code runs unless the user is signed in and any id is a plain number naming their own staff record (or they are an administrator). Fixed in Agents 1.0.4 as well.
+* `JSSTtable::setColumns()` (update) copied every posted key that matched a property, including `tablename`, `primarykey`, `columns` and `isnew`; a form field named `tablename` changed the table wpdb then read with an unescaped query (SQL injection from any edit form). Internal properties and non-scalar values are skipped.
+* Ticket creation: `limitCustomerTicketFields()` (front-end form and `JSSTticketservice::create()` for customers and guests) removes server-owned columns (staffid, status, lock, duedate, merge fields, envatodata, paidsupportitemid, notificationid, ...), keeps a department or priority only if it exists and is enabled, a WooCommerce order only if it is the customer's (and the line is on it), an EDD payment only if it is the customer's (guests: its e-mail), and an EDD licence only if it was sold with that payment. The EDD licence check also runs when the field is left out of the post, refuses statuses other than active, and is skipped without Software Licensing.
+* `JSSTcapability::ownsTicket()`: the e-mail match for guest tickets needs a proven address (`JSSTemailproof::isVerified`) and compares the WordPress account's own address.
+* `js_ticket_users.user_email` is taken from the WordPress account, never from the profile form (which wrote an unconfirmed new address at once); `jsst_sync_user_email()` follows WordPress's change on `profile_update`; one row per account. New `JSSTemailproof::provenUid()` for add-ons that hand an account what arrives from an address (used by Email Suite 1.0.4 piping).
+* Newsletter consent ticked at sign-up is recorded when the address is proven (`jsst_pending_consent`), not when it is typed.
+* Agent scope: `getTicketsForForm()` asks TICKET_EDIT for the ticket (the edit form was prefilled for any ticket); canned-response placeholders are filled only from a ticket the agent may open; ticket export applies `ticketScopeClause()` for non-administrators; adding someone else as a watcher needs TICKET_ASSIGN; replies and notes require `staffMayOpenTicket()` (the visibility check alone did nothing without its module); `getTimeByNoteID()` checks role and scope.
+* Files: `downloadbyname` serves only a name held by one of the ticket's file-type custom fields (any file in the folder was served, internal-note files included); custom-field keep/delete uses the stored name, not the form's; every upload path matches the extension exactly (`extensionListed()`; the main ticket path still used a substring test) and staff photos and custom-field files go through `JSSTattachmentguard::validate()`; download-all zips are swept after an hour and removed even when the download is cut off; `JSSTrequest::getLayout()` allows only letters, digits, `_` and `-` (`./admin_x` passed the front-end admin_ check).
+* Report charts: department and priority names and priority colours are written into the chart script as JSON (`esc_html()` left a backslash that ended the string).
+* Automatic (AI) replies are filtered like every other reply before they are stored.
+* `validateTicketDetailForUser()` compares strictly and needs a signed-in user (a visitor, user 0, owned every guest ticket and every missing id).
+* Sign-up role: any role holding a `jsst_support_ticket*` capability is refused, not only the administrator one.
+* Tracking-number lookup is rate-limited even when submission limits are switched off; IPv6 visitors count per /64. Random tracking numbers are checked for duplicates as text (`%d` made every one 0).
+* A guest who resubmits an identical ticket is no longer handed the first ticket's private link.
+* The public cron address runs each job at most once every 55 seconds.
+
+**Changed**
+* `jsst_email_sending` gets a third argument, the ticket the message is about (0 when none), so an inbox add-on can thread replies without reading the ticket from the subject.
+
+**Fixed**
+* The paid-support "Link" list on the ticket pages read purchases by the help desk user number instead of the customer's WordPress account.
+* WooCommerce sends users who cannot edit posts away from wp-admin and hides their admin bar (`woocommerce_prevent_admin_access`, `woocommerce_disable_admin_bar`); agents by role hold only help desk capabilities, so they could not reach the desk on a WooCommerce site. Users holding `jsst_support_ticket` or `jsst_support_ticket_tickets` are let through.
+* `sanitize_email()` was given null (PHP 8.1+ notice) when the ticket status lookup ran from a link without an e-mail, and in the SMTP test and sign-up handlers.
+
 = 5.0.6 =
 **Security**
 * Guest tickets taken over by registering with the guest's address (reported by Patchstack against 5.0.5, CVSS 6.5; present since 5.0.3). The plugin's sign-up form set the visitor's chosen password and logged them in at once, yet `register_new_user` marked the account to inherit every guest ticket sent from the address it typed (`jsst_flag_guest_ticket_link`, `JSSTuser::linkGuestTickets`). Now an account inherits guest tickets only for an address it has proven (`JSSTemailproof`, new): an administrator created it, the password was set from WordPress's e-mailed reset link, or the person opened a signed, two-day confirmation link (sent after sign-up, and from a button on My Tickets). The proof is the address itself, so changing it makes the account unproven again. The 5.0.3-5.0.5 marker is dropped unread. The sign-up handler also refuses to run unless the site allows registration (`users_can_register`).

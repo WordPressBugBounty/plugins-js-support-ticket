@@ -3,7 +3,7 @@ Contributors: rabilal
 Tags: helpdesk, support ticket, ticketing system, customer support, knowledge base
 Requires at least: 5.5
 Tested up to: 7.1
-Stable tag: 5.0.6
+Stable tag: 5.0.7
 Requires PHP: 7.4
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
@@ -209,6 +209,21 @@ The [documentation](https://jshelpdesk.com/docs/) covers setup and every add-on,
 
 == Changelog ==
 
+= 5.0.7 =
+Security release from a second full review of the plugin and its add-ons. Update the plugin and your add-ons promptly. Full details are in changelog.txt.
+
+* Security: a ticket message written to look like an image-viewer link could run code when an agent or administrator opened the ticket (introduced by the 5.0.6 viewer fix).
+* Security: the help desk refuses an Agents add-on request that, without signing in, could delete files on the server; sites still running an older Agents add-on are protected by this update.
+* Security: an edit form could change which database table a save went to; only a table's own columns are saved now.
+* Security: customers and guests can no longer set the assignee, status, due date or merge state of the ticket they open, or attach a WooCommerce order or Easy Digital Downloads purchase or licence that is not theirs.
+* Security: an account must confirm its e-mail address before the REST API treats it as the owner of guest tickets from that address, and before a newsletter sign-up is recorded.
+* Security: agents see and act only on tickets they may open when using the edit form, canned-response placeholders, ticket export, replies, notes and watchers.
+* Security: a customer can download only the files their ticket's file fields name, never an internal note's file; attachment types are matched exactly on every upload; report charts escape department and priority names.
+* Security: looking a ticket up by e-mail and tracking number is always rate-limited, and the public cron address runs each job at most once a minute.
+* Fixed: random tracking numbers are checked for duplicates again.
+* Fixed: on sites with WooCommerce, agents set up by WordPress role (Help Desk Agent, Light Agent) were sent to My Account instead of the help desk in wp-admin.
+* Fixed: PHP 8 notices when the ticket status page or sign-up form is opened without an e-mail address.
+
 = 5.0.6 =
 Security and bug-fix release. Update promptly. Full details are in changelog.txt.
 
@@ -334,6 +349,9 @@ The biggest release in JS Help Desk's history.
 See the [full changelog](https://plugins.trac.wordpress.org/browser/js-support-ticket/trunk/changelog.txt).
 
 == Upgrade Notice ==
+
+= 5.0.7 =
+Security release: fixes a stored script issue introduced in 5.0.6, protects sites running older Agents add-ons, and tightens ticket, upload, export and account checks found in a second full review. Update now, together with your add-ons.
 
 = 5.0.6 =
 Security release: fixes for saved list searches, the ticket image viewer, links in ticket messages and e-mailed replies; also custom field answers with quotation marks, and image viewing for agents set up by WordPress role. Update now.

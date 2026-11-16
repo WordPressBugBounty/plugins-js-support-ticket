@@ -1197,9 +1197,19 @@ class JSSTcapability {
         }
         /* A ticket raised by email before the account existed carries the
            address but no user id. Matching on it is what stops somebody who
-           later signs up being locked out of their own history. */
-        if ($jsst_actor['email'] !== '' && (int) $jsst_ticket->uid === 0) {
-            return (strtolower(trim((string) $jsst_ticket->email)) === strtolower(trim($jsst_actor['email'])));
+           later signs up being locked out of their own history.
+           Only once the account has proven it owns that address (5.0.7):
+           anybody can sign up with somebody else's address, and this matched
+           on the address alone - the REST API then let them read, answer and
+           close that person's guest tickets. Compared with the WordPress
+           account's own address, the one that was proven. */
+        if ((int) $jsst_ticket->uid === 0 && !empty($jsst_actor['wpuid'])) {
+            if (!class_exists('JSSTemailproof') || !JSSTemailproof::isVerified((int) $jsst_actor['wpuid'])) {
+                return false;
+            }
+            $jsst_wpuser = get_userdata((int) $jsst_actor['wpuid']);
+            return $jsst_wpuser
+                && strtolower(trim((string) $jsst_ticket->email)) === strtolower(trim((string) $jsst_wpuser->user_email));
         }
         return false;
     }

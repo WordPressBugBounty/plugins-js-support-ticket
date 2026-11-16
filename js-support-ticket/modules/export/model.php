@@ -125,7 +125,15 @@ class JSSTexportModel {
             $jsst_where[] = 'ticket.multiformid = %d';
             $jsst_args[] = $jsst_filters['multiformid'];
         }
-        return array('sql' => implode(' AND ', $jsst_where), 'args' => $jsst_args);
+        /* An agent exports the tickets they may open, the same rule as their
+           ticket list; the Export permission said what they may do, not on
+           which tickets, so it exported the whole desk. Administrators are
+           unrestricted. (5.0.7) */
+        $jsst_scope = '';
+        if (!current_user_can('manage_options') && class_exists('JSSTcapability')) {
+            $jsst_scope = JSSTcapability::ticketScopeClause('ticket');
+        }
+        return array('sql' => implode(' AND ', $jsst_where) . $jsst_scope, 'args' => $jsst_args);
     }
 
     /**

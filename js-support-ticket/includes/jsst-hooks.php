@@ -68,7 +68,7 @@ function jsst_add_new_member()
             return;
         }
         $jsst_user_login = sanitize_user($_POST["jsst_user_login"]);
-        $jsst_user_email = sanitize_email($_POST["jsst_user_email"]);
+        $jsst_user_email = sanitize_email(isset($_POST["jsst_user_email"]) ? (string) $_POST["jsst_user_email"] : '');
         $jsst_user_first = sanitize_text_field($_POST["jsst_user_first"]);
         $jsst_user_last = sanitize_text_field($_POST["jsst_user_last"]);
         $jsst_user_pass = sanitize_text_field($_POST["jsst_user_pass"]);
@@ -181,7 +181,15 @@ function jsst_add_new_member()
                 if (class_exists('JSSTconsent')) {
                     /* phpcs:ignore WordPress.Security.NonceVerification.Missing -- the registration form's own nonce was verified before this handler ran. */
                     $jsst_optedin = (isset($_POST['jsst_mailchimp_subscribe']) && $_POST['jsst_mailchimp_subscribe'] == 1);
-                    if ($jsst_optedin) {
+                    /* Recorded once the address is proven, not when it is typed:
+                       otherwise anybody could sign somebody else's address up
+                       to the newsletter, with a consent record saying that
+                       person agreed. JSSTemailproof::markVerified() records it.
+                       (5.0.7) */
+                    if ($jsst_optedin && class_exists('JSSTemailproof') && !JSSTemailproof::isVerified($jsst_new_user_id)) {
+                        update_user_meta($jsst_new_user_id, 'jsst_pending_consent', array('name' => trim($jsst_user_first . ' ' . $jsst_user_last)));
+                        JSSTmessage::setMessage(esc_html(__('Your newsletter subscription starts once you confirm your e-mail address.', 'js-support-ticket')), 'updated');
+                    } elseif ($jsst_optedin) {
                         JSSTconsent::onRegistration($jsst_user_email,
                             trim($jsst_user_first . ' ' . $jsst_user_last), true);
                         JSSTmessage::setMessage(esc_html(__("You have successfully subscribed to the newsletter", 'js-support-ticket')), 'updated');
@@ -464,11 +472,12 @@ function jsst_update_user_profile($jsst_user_id) {
 	$jsst_post_display_name='';
 	$jsst_post_nickname='';
 	
-	if(isset($_POST['user_id'])) $jsst_post_user_id = jssupportticket::JSST_sanitizeData($_POST['user_id']); // JSST_sanitizeData() function uses wordpress santize functions
-    if ($jsst_post_user_id == $jsst_user_id) {
-        $jsst_query = jssupportticket::$_db->prepare("SELECT id FROM `" . jssupportticket::$_db->prefix . "js_ticket_users` WHERE wpuid = %d", $jsst_user_id);
-        $jsst_id = jssupportticket::$_db->get_var($jsst_query);
-    }
+	/* The account's own row whenever it has one. Only looking it up when the
+	   form's user_id matched meant every other path (user_register from a shop
+	   or membership form) added a second row, and the help desk reads the
+	   first. (5.0.7) */
+    $jsst_query = jssupportticket::$_db->prepare("SELECT id FROM `" . jssupportticket::$_db->prefix . "js_ticket_users` WHERE wpuid = %d ORDER BY id LIMIT 1", $jsst_user_id);
+    $jsst_id = jssupportticket::$_db->get_var($jsst_query);
 	$jsst_name = "";
 	if(isset($_POST['first_name'])) $jsst_name = jssupportticket::JSST_sanitizeData($_POST['first_name']); // JSST_sanitizeData() function uses wordpress santize functions
 	if(isset($_POST['last_name'])) $jsst_name = $jsst_name. ' ' . jssupportticket::JSST_sanitizeData($_POST['last_name']); // JSST_sanitizeData() function uses wordpress santize functions
@@ -485,7 +494,14 @@ function jsst_update_user_profile($jsst_user_id) {
 		$jsst_data['name'] = ($jsst_user && $jsst_user->user_login !== '') ? $jsst_user->user_login : $jsst_post_user_login;
 		$jsst_data['display_name'] = (trim($jsst_name) !== '') ? trim($jsst_name) : ($jsst_user ? $jsst_user->display_name : '');
 		$jsst_data['user_nicename'] = ($jsst_post_nickname !== '') ? $jsst_post_nickname : ($jsst_user ? $jsst_user->user_nicename : '');
-		$jsst_data['user_email'] = sanitize_email($_POST['email']);
+		/* The address WordPress has for the account, never the one in the form.
+		   This runs before WordPress saves the profile, and a person changing
+		   their own address keeps the old one until they click WordPress's
+		   confirmation link - but the form's new address was written here at
+		   once, and e-mail piping, the user picker and paid support all match
+		   on this column. jsst_sync_user_email() below copies the address once
+		   WordPress has actually changed it. (5.0.7) */
+		$jsst_data['user_email'] = $jsst_user ? $jsst_user->user_email : '';
 		$jsst_data['issocial'] = 0;
 		$jsst_data['socialid'] = null;
 		$jsst_data['status'] = 1;
@@ -497,6 +513,37 @@ function jsst_update_user_profile($jsst_user_id) {
 
 add_action('edit_user_profile_update', 'jsst_update_user_profile');
 add_action('user_register', 'jsst_update_user_profile'); // creating a new user
+
+/* The help desk's copy of an account's address follows WordPress's, after
+   WordPress has changed it (an administrator's edit, a confirmed change, a
+   shop's account page). (5.0.7) */
+function jsst_sync_user_email($jsst_user_id) {
+    $jsst_user = get_userdata((int) $jsst_user_id);
+    if (!$jsst_user) {
+        return;
+    }
+    jssupportticket::$_db->query(jssupportticket::$_db->prepare(
+        "UPDATE `" . jssupportticket::$_db->prefix . "js_ticket_users` SET user_email = %s WHERE wpuid = %d AND user_email <> %s",
+        $jsst_user->user_email, (int) $jsst_user_id, $jsst_user->user_email));
+}
+add_action('profile_update', 'jsst_sync_user_email', 20);
+
+/* WooCommerce sends every user who cannot edit posts away from wp-admin (to My
+   Account) and hides their admin bar. Agents by role - Help Desk Agent, Light
+   Agent - hold the help desk's capabilities and nothing else, so on any site
+   with WooCommerce they could not reach the desk they work at. Only users who
+   hold a help desk capability are let through; WooCommerce decides for
+   everybody else, as before. (5.0.7) */
+function jsst_is_desk_worker() {
+    return is_user_logged_in() && class_exists('JSSTroles')
+        && (current_user_can(JSSTroles::CAP_TICKETS) || current_user_can(JSSTroles::CAP_ADMIN));
+}
+add_filter('woocommerce_prevent_admin_access', function ($jsst_prevent) {
+    return ($jsst_prevent && jsst_is_desk_worker()) ? false : $jsst_prevent;
+}, 20);
+add_filter('woocommerce_disable_admin_bar', function ($jsst_disable) {
+    return ($jsst_disable && jsst_is_desk_worker()) ? false : $jsst_disable;
+}, 20);
 
 /* Guest tickets are given to an account once it has proven its e-mail
    address - see JSSTemailproof (includes/classes/emailproof.php). Until 5.0.5

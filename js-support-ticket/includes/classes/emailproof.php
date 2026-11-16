@@ -74,6 +74,27 @@ class JSSTemailproof {
         return $jsst_user ? self::isVerified($jsst_user->ID) : false;
     }
 
+    /**
+     * The help desk user (js_ticket_users.id) whose account has proven this
+     * address, or 0. For anything that hands an account what arrives from an
+     * address - a piped e-mail, say - so that typing somebody's address at
+     * sign-up does not make their mail yours. Unproven: treat the sender as
+     * a guest; the tickets join the account once the address is proven.
+     */
+    public static function provenUid($jsst_email) {
+        $jsst_email = trim((string) $jsst_email);
+        if (!is_email($jsst_email)) {
+            return 0;
+        }
+        $jsst_user = get_user_by('email', $jsst_email);
+        if (!$jsst_user || !self::isVerified($jsst_user->ID)) {
+            return 0;
+        }
+        return (int) jssupportticket::$_db->get_var(jssupportticket::$_db->prepare(
+            "SELECT id FROM `" . jssupportticket::$_db->prefix . "js_ticket_users` WHERE wpuid = %d ORDER BY id LIMIT 1",
+            (int) $jsst_user->ID));
+    }
+
     /** Record the account's current address as proven, and give it its guest tickets. */
     public static function markVerified($jsst_wpuid) {
         $jsst_wpuid = (int) $jsst_wpuid;
@@ -85,6 +106,12 @@ class JSSTemailproof {
         // The pre-5.0.6 marker, set without any proof; never read again.
         delete_user_meta($jsst_wpuid, 'jsst_link_guest_tickets');
         self::linkGuestTickets($jsst_wpuid, $jsst_user->user_email);
+        // A newsletter "yes" given at sign-up counts from now - see jsst-hooks.php.
+        $jsst_pending = get_user_meta($jsst_wpuid, 'jsst_pending_consent', true);
+        if (is_array($jsst_pending) && class_exists('JSSTconsent')) {
+            delete_user_meta($jsst_wpuid, 'jsst_pending_consent');
+            JSSTconsent::onRegistration($jsst_user->user_email, isset($jsst_pending['name']) ? (string) $jsst_pending['name'] : '', true);
+        }
         return true;
     }
 

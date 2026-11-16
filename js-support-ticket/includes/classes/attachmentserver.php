@@ -56,6 +56,10 @@ class JSSTattachmentserver {
         if (!empty($jsst_args['deleted'])) {
             self::stop('purged', $jsst_file);
         }
+        // A temporary file is removed afterwards even if the visitor stops the download. (5.0.7)
+        if (is_callable($jsst_args['after'])) {
+            ignore_user_abort(true);
+        }
         $jsst_realbase = realpath($jsst_args['base']);
         $jsst_realfile = realpath($jsst_file);
         if ($jsst_realbase === false || $jsst_realfile === false || !is_file($jsst_realfile)) {
@@ -385,5 +389,20 @@ class JSSTattachmentserver {
             }
         }
         @rmdir($jsst_real); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_rmdir
+    }
+
+    /**
+     * Remove zip folders left behind (a download cut off half way, a server
+     * stopped mid-request) once they are an hour old. The zips are copies of
+     * ticket attachments sitting under the plugin folder, which the web server
+     * may serve directly. (5.0.7)
+     */
+    public static function sweepTempFolders() {
+        $jsst_base = JSST_PLUGIN_PATH . 'zipdownloads';
+        foreach ((array) glob(trailingslashit($jsst_base) . '*', GLOB_ONLYDIR) as $jsst_dir) {
+            if (is_dir($jsst_dir) && @filemtime($jsst_dir) < time() - HOUR_IN_SECONDS) {
+                self::removeTempFolder($jsst_dir);
+            }
+        }
     }
 }

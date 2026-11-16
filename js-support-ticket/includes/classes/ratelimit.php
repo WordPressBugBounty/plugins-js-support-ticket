@@ -67,11 +67,24 @@ class JSSTratelimit {
      * Returns true when the submission may proceed.
      */
     public static function check($jsst_action, $jsst_subject = '') {
-        if (!self::enabled() || self::exempt()) {
+        /* Looking a ticket up by e-mail and tracking id is limited even when
+           the site turns submission limits off: it is the one form where the
+           limit is what stops somebody guessing their way to other people's
+           tickets. (5.0.7) */
+        if ((!self::enabled() && $jsst_action !== 'ticketstatus') || self::exempt()) {
             return true;
         }
         if ($jsst_subject === '') {
             $jsst_subject = JSSTverification::clientIp();
+            /* An IPv6 visitor counts as their /64: one connection is given a
+               whole /64, so the full address was a fresh counter per request
+               for anybody who wanted one. (5.0.7) */
+            if (filter_var($jsst_subject, FILTER_VALIDATE_IP, FILTER_FLAG_IPV6)) {
+                $jsst_packed = @inet_pton($jsst_subject);
+                if ($jsst_packed !== false && strlen($jsst_packed) === 16) {
+                    $jsst_subject = bin2hex(substr($jsst_packed, 0, 8)) . '::/64';
+                }
+            }
         }
         if ($jsst_subject === '') {
             return true;

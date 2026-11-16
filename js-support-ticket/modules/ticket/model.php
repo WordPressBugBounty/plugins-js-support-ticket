@@ -917,6 +917,15 @@ class JSSTticketModel {
             if (!JSSTroles::canEditTicketContent()) {
                 return false;
             }
+            /* And on this ticket: the same TICKET_EDIT question storeTickets()
+               asks before saving. Only the general permission was checked, so
+               an agent could open the edit form - every field filled in - of
+               a ticket outside their departments. (5.0.7) */
+            if (true !== JSSTcapability::assert(JSSTcapability::TICKET_EDIT, array('ticket' => (int) $jsst_id))) {
+                jssupportticket::$jsst_data['permission_granted'] = false;
+                JSSTmessage::setMessage(esc_html(__('You are not allowed to edit this ticket', 'js-support-ticket')), 'error', 'agent-permissions');
+                return false;
+            }
             $jsst_query = "SELECT ticket.*,department.departmentname AS departmentname ,priority.priority AS priority,priority.prioritycolour AS prioritycolour,user.name AS user_login, product.product AS producttitle
                         FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` AS ticket
                         LEFT JOIN `" . jssupportticket::$_db->prefix . "js_ticket_departments` AS department ON ticket.departmentid = department.id
@@ -1172,7 +1181,8 @@ class JSSTticketModel {
             if($jsst_prefix) $jsst_ticketid = $jsst_prefix . $jsst_ticketid;
             if($jsst_suffix) $jsst_ticketid = $jsst_ticketid . $jsst_suffix;
             
-            $jsst_query = "SELECT count(ticketid) FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE ticketid = '%d'";
+            // As text: "%d" turned "A7KQ2X" into 0, so a random id was never really checked for a duplicate. (5.0.7)
+            $jsst_query = "SELECT count(ticketid) FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE ticketid = %s";
             $jsst_row = jssupportticket::$_db->get_var(jssupportticket::$_db->prepare($jsst_query, $jsst_ticketid));
             if($jsst_row > 0)
                 $jsst_match = 'Y';
@@ -1252,6 +1262,152 @@ class JSSTticketModel {
             $jsst_ip = jssupportticket::JSST_sanitizeData($_SERVER['REMOTE_ADDR']); // JSST_sanitizeData() function uses wordpress santize functions
         }
         return $jsst_ip;
+    }
+
+    /**
+     * A ticket as a customer or a guest may open it. (5.0.7)
+     *
+     * The form's fields were copied onto the ticket row as they came, so a
+     * customer could add any column to the post: assign the ticket to an
+     * agent, set its status, due date or lock, mark it merged - or attach a
+     * purchase that was not theirs (an order number, a product, an Envato
+     * purchase, a paid-support item), which agents then saw on the ticket as
+     * the customer's. What the server decides is removed here; what the
+     * customer picks is kept only if it is theirs to pick.
+     *
+     * Used for the front-end form and the REST API when the caller is not
+     * staff. Administrators and agents opening a ticket for someone keep every
+     * field.
+     *
+     * @param array    $jsst_data  The submission.
+     * @param int|null $jsst_wpuid The WordPress user opening it (0 = guest);
+     *                             the signed-in user when null.
+     */
+    function limitCustomerTicketFields($jsst_data, $jsst_wpuid = null) {
+        if (!is_array($jsst_data)) {
+            return $jsst_data;
+        }
+        $jsst_serverset = array('staffid', 'assigntome', 'status', 'isoverdue', 'isanswered', 'duedate',
+            'reopened', 'closed', 'closedby', 'lastreply', 'created', 'updated', 'lock', 'ticketviaemail',
+            'ticketviaemail_id', 'attachmentdir', 'feedbackemail', 'mergestatus', 'mergewith', 'mergenote',
+            'mergedate', 'multimergeparams', 'mergeuid', 'params', 'hash', 'token', 'ticketid',
+            'customticketno', 'notificationid', 'envatodata', 'paidsupportitemid', 'aireplymode',
+            'prev_envatopurchasecode', 'onbehalf');
+        foreach ($jsst_serverset as $jsst_key) {
+            unset($jsst_data[$jsst_key]);
+        }
+        $jsst_wpuid = ($jsst_wpuid === null) ? get_current_user_id() : (int) $jsst_wpuid;
+        $jsst_db = jssupportticket::$_db;
+
+        // A department or priority that exists and is in use; otherwise the defaults.
+        if (isset($jsst_data['departmentid']) && $jsst_data['departmentid'] !== '') {
+            $jsst_ok = ctype_digit((string) $jsst_data['departmentid']) && $jsst_db->get_var($jsst_db->prepare(
+                "SELECT id FROM `" . $jsst_db->prefix . "js_ticket_departments` WHERE id = %d AND status = 1",
+                (int) $jsst_data['departmentid']));
+            if (!$jsst_ok) {
+                $jsst_data['departmentid'] = '';
+            }
+        }
+        if (isset($jsst_data['priorityid']) && $jsst_data['priorityid'] !== '') {
+            $jsst_ok = ctype_digit((string) $jsst_data['priorityid']) && $jsst_db->get_var($jsst_db->prepare(
+                "SELECT id FROM `" . $jsst_db->prefix . "js_ticket_priorities` WHERE id = %d AND status = 1",
+                (int) $jsst_data['priorityid']));
+            if (!$jsst_ok) {
+                $jsst_data['priorityid'] = JSSTincluder::getJSModel('priority')->getDefaultPriorityID();
+            }
+        }
+
+        // WooCommerce: one of the customer's own orders, and a line of that order.
+        $jsst_order = null;
+        if (!empty($jsst_data['wcorderid']) && $jsst_wpuid > 0 && function_exists('wc_get_order')
+                && ctype_digit((string) $jsst_data['wcorderid'])) {
+            $jsst_candidate = wc_get_order((int) $jsst_data['wcorderid']);
+            if ($jsst_candidate instanceof WC_Order && (int) $jsst_candidate->get_customer_id() === $jsst_wpuid) {
+                $jsst_order = $jsst_candidate;
+            }
+        }
+        if ($jsst_order) {
+            $jsst_data['wcorderid'] = (int) $jsst_order->get_id();
+            if (!empty($jsst_data['wcproductid'])
+                    && !(ctype_digit((string) $jsst_data['wcproductid']) && $jsst_order->get_item((int) $jsst_data['wcproductid']))) {
+                $jsst_data['wcproductid'] = '';
+            }
+        } else {
+            unset($jsst_data['wcorderid'], $jsst_data['wcproductid']);
+        }
+
+        // Easy Digital Downloads: the customer's own payment, its products, its licence.
+        $jsst_email = isset($jsst_data['email']) ? (string) $jsst_data['email'] : '';
+        $jsst_payment = 0;
+        if (!empty($jsst_data['eddorderid'])) {
+            $jsst_payment = (ctype_digit((string) $jsst_data['eddorderid'])
+                    && $this->eddPaymentIsCustomers((int) $jsst_data['eddorderid'], $jsst_wpuid, $jsst_email))
+                ? (int) $jsst_data['eddorderid'] : 0;
+            if ($jsst_payment > 0) {
+                $jsst_data['eddorderid'] = $jsst_payment;
+            } else {
+                unset($jsst_data['eddorderid'], $jsst_data['eddproductid']);
+            }
+        } else {
+            unset($jsst_data['eddproductid']);
+        }
+        if ($jsst_payment > 0 && !empty($jsst_data['eddproductid']) && function_exists('edd_get_payment_meta_cart_details')) {
+            $jsst_ids = array();
+            foreach ((array) edd_get_payment_meta_cart_details($jsst_payment) as $jsst_line) {
+                if (isset($jsst_line['id'])) {
+                    $jsst_ids[] = (string) $jsst_line['id'];
+                }
+            }
+            if (!in_array((string) $jsst_data['eddproductid'], $jsst_ids, true)) {
+                $jsst_data['eddproductid'] = '';
+            }
+        }
+        if (isset($jsst_data['eddlicensekey']) && $jsst_data['eddlicensekey'] !== '') {
+            // Blank rather than removed: when a licence is required, storeTickets() then refuses.
+            $jsst_of = $this->eddPaymentOfLicence((string) $jsst_data['eddlicensekey']);
+            $jsst_mine = $jsst_of > 0
+                && ($jsst_payment > 0 ? $jsst_of === $jsst_payment : $this->eddPaymentIsCustomers($jsst_of, $jsst_wpuid, $jsst_email));
+            if (!$jsst_mine) {
+                $jsst_data['eddlicensekey'] = '';
+            }
+        }
+        return $jsst_data;
+    }
+
+    /** An EDD payment made by this user (or, for a guest, from this e-mail address). */
+    private function eddPaymentIsCustomers($jsst_paymentid, $jsst_wpuid, $jsst_email) {
+        if ($jsst_paymentid <= 0 || !function_exists('edd_get_payment')) {
+            return false;
+        }
+        $jsst_payment = edd_get_payment($jsst_paymentid);
+        if (!$jsst_payment || empty($jsst_payment->ID)) {
+            return false;
+        }
+        if ($jsst_wpuid > 0) {
+            return (int) $jsst_payment->user_id === (int) $jsst_wpuid;
+        }
+        return $jsst_email !== '' && strcasecmp(trim((string) $jsst_payment->email), trim($jsst_email)) === 0;
+    }
+
+    /** The EDD payment a Software Licensing key was sold with, or 0. */
+    private function eddPaymentOfLicence($jsst_key) {
+        if ($jsst_key === '' || !class_exists('EDD_Software_Licensing')) {
+            return 0;
+        }
+        $jsst_sl = EDD_Software_Licensing::instance();
+        if (method_exists($jsst_sl, 'get_license')) {
+            $jsst_licence = $jsst_sl->get_license($jsst_key, true);
+            if ($jsst_licence && !empty($jsst_licence->payment_id)) {
+                return (int) $jsst_licence->payment_id;
+            }
+        }
+        if (method_exists($jsst_sl, 'get_license_by_key') && method_exists($jsst_sl, 'get_payment_id')) {
+            $jsst_id = $jsst_sl->get_license_by_key($jsst_key);
+            if ($jsst_id) {
+                return (int) $jsst_sl->get_payment_id($jsst_id);
+            }
+        }
+        return 0;
     }
 
     function ticketValidate($jsst_emailaddress) {
@@ -1428,7 +1584,19 @@ class JSSTticketModel {
         if($jsst_data['ticketviaemail'] != 1){ // do not check in ticket via email case
             if(in_array('easydigitaldownloads', jssupportticket::$_active_addons)){
                 if(jssupportticket::$_config['verify_license_on_ticket_creation'] == 1){
-                    if(isset($jsst_data['eddlicensekey'])){
+                    /* Checked whenever the form asks for a licence, not only when
+                       the post happens to contain the field: leaving it out of
+                       the post skipped the check. Staff opening a ticket for a
+                       customer are not asked. (5.0.7) */
+                    $jsst_staffside = current_user_can('manage_options')
+                        || (in_array('agent', jssupportticket::$_active_addons) && JSSTincluder::getJSModel('agent')->isUserStaff());
+                    if (!isset($jsst_data['eddlicensekey']) && !$jsst_staffside && empty($jsst_data['id'])
+                            && class_exists('Easy_Digital_Downloads') && class_exists('EDD_Software_Licensing')
+                            && null !== JSSTincluder::getJSModel('fieldordering')->checkIsFieldRequired('eddlicensekey', $jsst_data['multiformid'])) {
+                        $jsst_data['eddlicensekey'] = '';
+                    }
+                    // Without Software Licensing there is nothing to check a key against (and the check itself would fail).
+                    if(isset($jsst_data['eddlicensekey']) && class_exists('EDD_Software_Licensing')){
                         if($jsst_data['eddlicensekey'] == ''){
                             JSSTmessage::setMessage(esc_html(__('Provide a valid license key to create a ticket.', 'js-support-ticket')), 'error');
                             return false;
@@ -1439,6 +1607,11 @@ class JSSTticketModel {
                                 return false;
                             }elseif($jsst_l_result == 'inactive'){
                                 JSSTmessage::setMessage(esc_html(__('Your license is not active, activate your license.', 'js-support-ticket')), 'error');
+                                return false;
+                            }elseif(!in_array($jsst_l_result, array('active', 'valid'), true)){
+                                /* A disabled licence, or a key that does not exist
+                                   (no status at all), used to pass. (5.0.7) */
+                                JSSTmessage::setMessage(esc_html(__('Provide a valid license key to create a ticket.', 'js-support-ticket')), 'error');
                                 return false;
                             }
                         }
@@ -1599,14 +1772,28 @@ class JSSTticketModel {
         // phpcs:ignore WordPress.Security.NonceVerification.Missing -- reading a marker, not acting on it; the form's own handler verifies.
         $jsst_formpost = (isset($_POST['form_request']) && $_POST['form_request'] === 'jssupportticket');
         $jsst_formlogic = ($jsst_formpost && class_exists('JSSTforms')) ? JSSTforms::logic((int) $jsst_data['multiformid']) : array();
+        /* The file names this ticket's file fields hold now. Keeping a file, or
+           removing one, is about the stored name: the form's copy of it (`_2`)
+           was trusted, so an edit could point a field at - or delete - any
+           file in the ticket's folder, internal-note files included. (5.0.7) */
+        $jsst_oldfileparams = array();
+        if ($jsst_isedit == true && is_numeric($jsst_data['id'])) {
+            $jsst_oldfileparams = json_decode((string) jssupportticket::$_db->get_var(jssupportticket::$_db->prepare(
+                "SELECT params FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE id = %d", $jsst_data['id'])), true);
+            if (!is_array($jsst_oldfileparams)) {
+                $jsst_oldfileparams = array();
+            }
+        }
         foreach ($jsst_userfield AS $jsst_ufobj) {
             if ($jsst_formlogic && !JSSTforms::isVisible($jsst_ufobj->field, $jsst_formlogic, $jsst_data)) {
                 continue;
             }
             $jsst_vardata = '';
+            $jsst_storedfile = ($jsst_ufobj->userfieldtype == 'file' && isset($jsst_oldfileparams[$jsst_ufobj->field]) && is_string($jsst_oldfileparams[$jsst_ufobj->field]))
+                ? $jsst_oldfileparams[$jsst_ufobj->field] : '';
             if($jsst_ufobj->userfieldtype == 'file'){
                 if(isset($jsst_data[$jsst_ufobj->field.'_1']) && $jsst_data[$jsst_ufobj->field.'_1']== 0){
-                    $jsst_vardata = $jsst_data[$jsst_ufobj->field.'_2'];
+                    $jsst_vardata = $jsst_storedfile;
                 }
                 $jsst_customflagforadd=true;
                 $jsst_custom_field_namesforadd[]=$jsst_ufobj->field;
@@ -1616,9 +1803,9 @@ class JSSTticketModel {
             }else{
                 $jsst_vardata = isset($jsst_data[$jsst_ufobj->field]) ? $jsst_data[$jsst_ufobj->field] : '';
             }
-            if(isset($jsst_data[$jsst_ufobj->field.'_1']) && $jsst_data[$jsst_ufobj->field.'_1'] == 1){
+            if(isset($jsst_data[$jsst_ufobj->field.'_1']) && $jsst_data[$jsst_ufobj->field.'_1'] == 1 && $jsst_storedfile !== ''){
                 $jsst_customflagfordelete = true;
-                $jsst_custom_field_namesfordelete[]= $jsst_data[$jsst_ufobj->field.'_2'];
+                $jsst_custom_field_namesfordelete[]= $jsst_storedfile;
             }
             if($jsst_vardata != ''){
 
@@ -1691,6 +1878,14 @@ class JSSTticketModel {
             if (true !== $jsst_claim) {
                 if ((int) $jsst_claim > 0) {
                     JSSTmessage::setMessage(esc_html(__('We already received this ticket, so it was not created twice.', 'js-support-ticket')), 'updated');
+                    /* A guest is not handed the first ticket: the page that
+                       follows shows it by its private link, and anybody who
+                       could repeat a guest's address, subject and message
+                       would have been given that link. The first request
+                       already showed it, and it is in the e-mail. (5.0.7) */
+                    if ((int) $jsst_data['uid'] === 0 && (!isset($jsst_data['ticketviaemail']) || $jsst_data['ticketviaemail'] != 1)) {
+                        return false;
+                    }
                     return (int) $jsst_claim;
                 }
                 JSSTmessage::setMessage(esc_html(__('This ticket is still being submitted. Please wait a moment and check your tickets before sending it again.', 'js-support-ticket')), 'error');
@@ -3382,9 +3577,13 @@ class JSSTticketModel {
         $jsst_query = "SELECT uid FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE id = %d";
         $jsst_uid = jssupportticket::$_db->get_var(jssupportticket::$_db->prepare($jsst_query, $jsst_id));
 
-        if ($jsst_uid == JSSTincluder::getObjectClass('user')->uid()) {
+        /* A signed-in owner only. Compared loosely, a visitor (user 0) owned
+           every guest ticket (owner 0) and every id that does not exist
+           (null). Guests prove a ticket is theirs with its token instead. (5.0.7) */
+        $jsst_me = (int) JSSTincluder::getObjectClass('user')->uid();
+        if ($jsst_uid !== null && $jsst_me > 0 && (int) $jsst_uid === $jsst_me) {
             return true;
-        }elseif($jsst_uid != '') {
+        }elseif($jsst_uid !== null && $jsst_uid != '') {
             jssupportticket::$jsst_data['error_message'] = 2;// to prompt user that he can not view this ticket.
             return;
         }else {

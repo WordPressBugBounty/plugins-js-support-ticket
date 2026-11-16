@@ -98,6 +98,11 @@ class JSSTticketservice {
         if (is_wp_error($jsst_allowed)) {
             return $jsst_allowed;
         }
+        /* A customer or guest sets only what a customer may: see
+           limitCustomerTicketFields(). Staff and the system keep every field. (5.0.7) */
+        if (isset($jsst_actor['kind']) && in_array($jsst_actor['kind'], array(JSSTcapability::ACTOR_CUSTOMER, JSSTcapability::ACTOR_GUEST), true)) {
+            $jsst_data = JSSTincluder::getJSModel('ticket')->limitCustomerTicketFields($jsst_data, isset($jsst_actor['wpuid']) ? (int) $jsst_actor['wpuid'] : 0);
+        }
         /* storeTickets() returns nothing — it is written to end in a redirect.
            It does announce the new id on jsst_after_ticket_create, and only on
            the success path, so listening for one request is how the command

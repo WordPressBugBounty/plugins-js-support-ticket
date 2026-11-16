@@ -3667,7 +3667,11 @@ if (jssupportticket::$_config['offline'] == 2) {
                                 }
                             }
                             if($jsst_linktickettoorder && in_array('agent',jssupportticket::$_active_addons) && JSSTincluder::getJSModel('agent')->isUserStaff() && JSSTincluder::getJSModel('userpermissions')->checkPermissionGrantedForTask('Link To Paid Support')){
-                                $jsst_paidsupportitems = JSSTincluder::getJSModel('paidsupport')->getPaidSupportList(jssupportticket::$jsst_data[0]->uid);
+                                /* The purchases of the ticket's customer: their WordPress account, which
+                                   is what WooCommerce knows them by, not the help desk's own user number.
+                                   (5.0.7) */
+                                $jsst_ownerwpuid = (int) jssupportticket::$_db->get_var(jssupportticket::$_db->prepare("SELECT wpuid FROM `" . jssupportticket::$_db->prefix . "js_ticket_users` WHERE id = %d", (int) jssupportticket::$jsst_data[0]->uid));
+                                $jsst_paidsupportitems = ($jsst_ownerwpuid > 0) ? JSSTincluder::getJSModel('paidsupport')->getPaidSupportList($jsst_ownerwpuid) : array();
                                 $jsst_paidsupportlist = array();
                                 foreach($jsst_paidsupportitems as $jsst_row){
                                     $jsst_paidsupportlist[] = (object) array(

@@ -106,6 +106,14 @@ class JSSTregistrationrole {
                 return false;
             }
         }
+        /* Any of the help desk's own capabilities, not only the administrator
+           one: the agent roles (tickets, replies, notes, editing ...) were
+           accepted as the role for public sign-up. (5.0.7) */
+        foreach ($jsst_caps as $jsst_cap => $jsst_granted) {
+            if ($jsst_granted && strpos((string) $jsst_cap, 'jsst_support_ticket') === 0) {
+                return false;
+            }
+        }
         return true;
     }
 

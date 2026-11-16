@@ -168,7 +168,10 @@ class JSSTreplyModel {
                 return;
             }
             // The role may reply; this ticket has to be one the agent may see.
-            if (JSSTincluder::getJSModel('ticket')->isOutOfScopeForAgent($jsst_data['ticketid'], 'ticket.reply')) {
+            // staffMayOpenTicket() as well: the visibility check alone said
+            // nothing without its module, so any ticket could be answered. (5.0.7)
+            if (!isset($jsst_data['ticketid']) || !JSSTincluder::getJSModel('ticket')->staffMayOpenTicket($jsst_data['ticketid'])
+                    || JSSTincluder::getJSModel('ticket')->isOutOfScopeForAgent($jsst_data['ticketid'], 'ticket.reply')) {
                 JSSTmessage::setMessage(esc_html(__('This ticket is outside the tickets you can work on.', 'js-support-ticket')), 'error', 'agent-permissions');
                 return;
             }
@@ -245,7 +248,10 @@ class JSSTreplyModel {
                into the notification mails built from it. (5.0.6) */
             $jsst_data['message'] = JSSTincluder::getJSModel('jssupportticket')->getSanitizedEditorData($jsst_tempmessage);
         }elseif(isset($jsst_data['ticketviaautopilot']) && $jsst_data['ticketviaautopilot'] == 1){
-            $jsst_data['message'] = $jsst_tempmessage;
+            /* Model output, shaped by whatever the customer wrote: filtered like
+               any other reply, so it cannot carry markup into the thread or the
+               notification e-mails built from the stored text. (5.0.7) */
+            $jsst_data['message'] = JSSTincluder::getJSModel('jssupportticket')->getSanitizedEditorData($jsst_tempmessage);
         }else{
             /* The form's own value first, exactly as before. A reply written by
                code — an automation rule, the REST API, an inbound webhook —

@@ -2,7 +2,7 @@
 # This file is distributed under the GPLv3.
 msgid ""
 msgstr ""
-"Project-Id-Version: JS Help Desk – AI-Powered Support & Ticketing System 5.0.4\n"
+"Project-Id-Version: JS Help Desk – AI-Powered Support & Ticketing System 5.0.7\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/js-support-ticket\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -40737,4 +40737,31 @@ msgstr ""
 
 #: js-support-ticket/includes/jsst-hooks.php
 msgid "Registration is not open on this site."
+msgstr ""
+
+#: js-support-ticket/includes/jsst-hooks.php
+msgid "Your newsletter subscription starts once you confirm your e-mail address."
+msgstr ""
+
+#. translators: %s: a size such as 30 MB
+#: js-support-ticket-emailsuite/includes/classes/emailpiping/inbox.php
+#, php-format
+msgid "A message of %s was too large to collect and was left in the mailbox, marked read."
+msgstr ""
+
+#: js-support-ticket-emailsuite/includes/classes/emailpiping/inbox.php
+msgid "It answered a message on a ticket, but was not sent by anybody on that ticket, so it was read as a new enquiry instead."
+msgstr ""
+
+#: js-support-ticket-emailsuite/modules/emailpiping/model.php
+msgid "Create User via email is on, but this site does not let anyone register (Settings, General, Membership), so no accounts were made."
+msgstr ""
+
+#: js-support-ticket-emailsuite/modules/emailpiping/model.php
+msgid "Ten accounts were made from collected mail in the last hour, so no more are made for now."
+msgstr ""
+
+#: js-support-ticket-integrations/includes/classes/chat.php
+#: js-support-ticket-integrations/includes/classes/webhooks.php
+msgid "That URL does not lead to a public address on the internet, so the help desk will not call it."
 msgstr ""

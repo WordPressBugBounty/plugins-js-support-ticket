@@ -131,6 +131,14 @@ class JSSTrequest {
         if ($jsst_layoutname == null) {
             $jsst_layoutname = $jsst_defaultvalue;
         }
+        /* A layout is a template's name: letters, digits, _ and -. Controllers
+           refuse front-end "admin_" layouts by looking at the start of the
+           name, and the file loader removes "./" afterwards - so "./admin_x"
+           passed the check and then loaded admin_x on the front end. (5.0.7) */
+        $jsst_layoutname = preg_replace('/[^A-Za-z0-9_\-]/', '', (string) $jsst_layoutname);
+        if ($jsst_layoutname === '') {
+            $jsst_layoutname = (string) $jsst_defaultvalue;
+        }
         if (is_admin()) {
             $jsst_layoutname = 'admin_' . $jsst_layoutname;
         }

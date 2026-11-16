@@ -250,6 +250,8 @@ class JSSTticketController {
         if (!current_user_can('manage_options')
                 && !(in_array('agent', jssupportticket::$_active_addons) && JSSTincluder::getJSModel('agent')->isUserStaff())) {
             $jsst_data['uid'] = (int) JSSTincluder::getObjectClass('user')->uid();
+            // Only what a customer may choose: no assignee, status or someone else's purchase. (5.0.7)
+            $jsst_data = JSSTincluder::getJSModel('ticket')->limitCustomerTicketFields($jsst_data);
         }
         // The redirects below read multiformid unconditionally. A custom
         // template or a page builder that strips hidden inputs used to make that
@@ -414,8 +416,11 @@ class JSSTticketController {
             $jsst_role = (JSSTrequest::getVar('collabrole', 'post', '') === JSSTcollab::ROLE_SECONDARY)
                 ? JSSTcollab::ROLE_SECONDARY : JSSTcollab::ROLE_WATCHER;
             /* Putting somebody else on a ticket as a second pair of hands is
-               assignment by another name, so it is governed by assignment. */
-            if ($jsst_role === JSSTcollab::ROLE_SECONDARY
+               assignment by another name, so it is governed by assignment.
+               So is making somebody else a watcher: a watcher may open the
+               ticket even outside their departments, so it was a way to give
+               another agent access without the right to assign. (5.0.7) */
+            if (($jsst_role === JSSTcollab::ROLE_SECONDARY || $jsst_who !== $jsst_me)
                     && !JSSTcapability::can(JSSTcapability::TICKET_ASSIGN, array('ticket' => $jsst_ticketid), $jsst_actor)) {
                 $jsst_result = esc_html(__('You may not put somebody else on this ticket.', 'js-support-ticket'));
             } elseif ($jsst_who > 0) {
@@ -859,7 +864,7 @@ class JSSTticketController {
             if (! wp_verify_nonce( $jsst_nonce, 'show-ticket-status') ) {
                 //die( 'Security check Failed' );
             }
-            $jsst_emailaddress = sanitize_email( JSSTrequest::getVar('email') );
+            $jsst_emailaddress = sanitize_email( (string) JSSTrequest::getVar('email') ); // (string): absent on a link visit - PHP 8 notice (5.0.7)
             $jsst_trackingid = JSSTrequest::getVar('ticketid');
             $jsst_tickettoken = JSSTrequest::getVar('tickettoken');
             /* Each try is a guess at an email and tracking id pair, so tries

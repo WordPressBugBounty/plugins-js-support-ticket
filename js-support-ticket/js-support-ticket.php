@@ -5,7 +5,7 @@
   Plugin URI: https://www.jshelpdesk.com
   Description: JS Help Desk is a trusted open source ticket system. JS Help Desk is a simple, easy to use, web-based customer support system. User can create ticket from front-end. JS Help Desk comes packed with lot features than most of the expensive(and complex) support ticket system on market. JS Help Desk provide you best industry help desk system.
   Author: JS Help Desk
-  Version: 5.0.6
+  Version: 5.0.7
   Requires at least: 5.5
   Requires PHP: 7.4
   Text Domain: js-support-ticket
@@ -163,7 +163,7 @@ class jssupportticket {
         self::$jsst_data = array();
         self::$_search = array();
         self::$_captcha = array();
-        self::$_currentversion = '506';
+        self::$_currentversion = '507';
         self::$_addon_query = array('select'=>'','join'=>'','where'=>'');
         self::$_jshdsession = JSSTincluder::getObjectClass('wphdsession');
         global $wpdb;
@@ -475,6 +475,18 @@ class jssupportticket {
     function jsst_handle_public_cronjob(){
         $jsst_action = JSSTrequest::getVar('jsstcron','get',null);
         if ($jsst_action) {
+            /* The address needs no key (schedulers are given it as it is), so
+               anybody could call it as fast as they liked and make the site
+               read every mailbox, or walk every ticket, on each request. Each
+               job now runs at most once a minute; calls in between return at
+               once. (5.0.7) */
+            if (in_array($jsst_action, array('ticketviaemail', 'updateticketstatus'), true)) {
+                $jsst_lock = 'jsst_public_cron_' . $jsst_action;
+                if (get_transient($jsst_lock)) {
+                    exit();
+                }
+                set_transient($jsst_lock, time(), 55);
+            }
             switch ($jsst_action) {
                 case 'ticketviaemail':
                     do_action('jssupporticket_ticketviaemail');

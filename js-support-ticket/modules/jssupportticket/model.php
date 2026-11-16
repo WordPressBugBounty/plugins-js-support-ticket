@@ -1648,13 +1648,11 @@ $jsst_query = "SELECT product.product, COUNT(t.id) AS ticket_count
     }
 
     function getSanitizedEditorData($jsst_data){
-       $jsst_data = wp_filter_post_kses(wpautop($jsst_data));
+       $jsst_data = wp_filter_post_kses(wpautop((string) $jsst_data)); // (string): a message-less e-mail passed null (PHP 8 notice)
        /* `data-vbtype` is what marks a ticket page's own attachment links for the
           image viewer, and nothing else uses it, so written content may not carry
-          it: a message can then never pass for one of those links. KSES has
-          already rewritten every attribute as name="value" on WordPress 7,
-          but older versions keep 'value' and bare values, so all three forms
-          are matched. Its output is slashed, hence the strip and re-add. */
+          it: a message can then never pass for one of those links. KSES output
+          is slashed, hence the strip and re-add. */
        $jsst_data = addslashes(self::removeViewerAttributes(stripslashes($jsst_data)));
        return $jsst_data;
     }
@@ -1675,15 +1673,31 @@ $jsst_query = "SELECT product.product, COUNT(t.id) AS ticket_count
     }
 
     /**
-     * `data-vbtype` and `data-href` removed, whether the value is in double
-     * quotes, single quotes or bare: WordPress before 7.0 leaves kses output
-     * in the quoting it was written in.
+     * `data-vbtype` and `data-href` removed from every tag.
+     *
+     * This runs after kses, so nothing checks its result again: it must only
+     * ever take attributes away. The first version used a regular expression,
+     * which could not tell an attribute from text inside another attribute's
+     * value - `class="a data-href = b" title="x onfocus=..."` lost its closing
+     * quote and the title's text became live attributes. WordPress's own HTML
+     * tag parser reads the markup as a browser does, so only real attributes
+     * are touched. It arrived in WordPress 6.2; before that, content that
+     * mentions either marker is shown as plain text rather than guessed at.
      */
     private static function removeViewerAttributes($jsst_html) {
-        $jsst_pattern = '/\sdata-(?:vbtype|href)\s*=\s*(?:"[^"]*"|\'[^\']*\'|[^\s>]+)/i';
-        $jsst_out = preg_replace($jsst_pattern, '', (string) $jsst_html);
-        // A regex failure must not hand the markers back: plain text instead.
-        return ($jsst_out === null) ? esc_html(wp_strip_all_tags((string) $jsst_html)) : $jsst_out;
+        $jsst_html = (string) $jsst_html;
+        if (stripos($jsst_html, 'data-vbtype') === false && stripos($jsst_html, 'data-href') === false) {
+            return $jsst_html;
+        }
+        if (!class_exists('WP_HTML_Tag_Processor')) {
+            return esc_html(wp_strip_all_tags($jsst_html));
+        }
+        $jsst_tags = new WP_HTML_Tag_Processor($jsst_html);
+        while ($jsst_tags->next_tag()) {
+            $jsst_tags->remove_attribute('data-vbtype');
+            $jsst_tags->remove_attribute('data-href');
+        }
+        return $jsst_tags->get_updated_html();
     }
 
     function getEncriptedSiteLink(){
