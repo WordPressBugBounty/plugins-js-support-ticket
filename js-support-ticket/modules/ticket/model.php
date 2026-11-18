@@ -2264,6 +2264,70 @@ class JSSTticketModel {
         return;
     }
 
+    /**
+     * Delete one ticket for the retention clean-up (5.0.8).
+     *
+     * Only JSSTautocleanupModel::purgeOldTickets() calls this, and it runs from
+     * WP-Cron with nobody signed in. It used removeEnforceTicket(), whose first
+     * line refuses anyone without manage_options - so from 4.0.0 to 5.0.7 the
+     * scheduled run deleted no ticket at all, while counting each one it tried
+     * as deleted. Whether a ticket may go is decided by the retention rule
+     * (closed, older than the interval, not excluded, not on legal hold), not
+     * by who happens to be signed in.
+     *
+     * Unlike a deletion by a person, it sends no e-mail and gives no support
+     * credit back: these tickets were answered and closed months ago, and a
+     * backlog would otherwise mail thousands of "ticket deleted" notices.
+     *
+     * @return object|false The deleted ticket's id, tracking number and closing
+     *                      date, or false when the row is still there.
+     */
+    function deleteForRetention($jsst_id) {
+        $jsst_id = (int) $jsst_id;
+        if ($jsst_id <= 0) {
+            return false;
+        }
+        $jsst_ticket = jssupportticket::$_db->get_row(jssupportticket::$_db->prepare(
+            "SELECT id, ticketid, subject, uid, closed FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE id = %d",
+            $jsst_id
+        ));
+        if (empty($jsst_ticket)) {
+            return false;
+        }
+        $this->removeTicketAttachmentsByTicketid($jsst_id);
+        if (!JSSTincluder::getJSTable('tickets')->delete($jsst_id)) {
+            return false;
+        }
+        $jsst_left = jssupportticket::$_db->get_var(jssupportticket::$_db->prepare(
+            "SELECT COUNT(id) FROM `" . jssupportticket::$_db->prefix . "js_ticket_tickets` WHERE id = %d",
+            $jsst_id
+        ));
+        if ((int) $jsst_left > 0) {
+            return false;
+        }
+        if (JSSTmergedaddon::featureEnabled('note')) {
+            JSSTincluder::getJSModel('note')->removeTicketInternalNote($jsst_id);
+        }
+        JSSTincluder::getJSModel('tag')->removeTicketTags($jsst_id);
+        JSSTincluder::getJSModel('reply')->removeTicketReplies($jsst_id);
+        /* The same event a deletion by a person emits (service-level clocks
+           are cancelled, webhooks subscribed to ticket.deleted are told),
+           marked as coming from retention so a subscriber can tell. */
+        if (class_exists('JSSTevents')) {
+            JSSTevents::emit(JSSTevents::TICKET_DELETED, array(
+                'ticket_id' => $jsst_id,
+                'ticketid'  => (string) $jsst_ticket->ticketid,
+                'subject'   => (string) $jsst_ticket->subject,
+                'uid'       => (int) $jsst_ticket->uid,
+            ), array('source' => 'retention'));
+        }
+        return (object) array(
+            'id'       => $jsst_id,
+            'ticketid' => (string) $jsst_ticket->ticketid,
+            'closed'   => (string) $jsst_ticket->closed,
+        );
+    }
+
     private function removeTicketAttachmentsByTicketid($jsst_id) {
 
         if (!is_numeric($jsst_id)) return false;

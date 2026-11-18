@@ -3,7 +3,7 @@ Contributors: rabilal
 Tags: helpdesk, support ticket, ticketing system, customer support, knowledge base
 Requires at least: 5.5
 Tested up to: 7.1
-Stable tag: 5.0.7
+Stable tag: 5.0.8
 Requires PHP: 7.4
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
@@ -209,6 +209,14 @@ The [documentation](https://jshelpdesk.com/docs/) covers setup and every add-on,
 
 == Changelog ==
 
+= 5.0.8 =
+Bug-fix release for the retention cleanup. Full details are in changelog.txt.
+
+* Fixed: the scheduled retention cleanup (Configurations, Retention) never deleted tickets. It reported up to 100 tickets removed per run, but every ticket stayed, because the scheduled run is not signed in as an administrator. Attachment cleanup was not affected.
+* Fixed: tickets deleted by the retention cleanup no longer send a "ticket deleted" e-mail to the customer, agent or administrator.
+* New: each ticket the retention cleanup deletes is recorded in the activity log with its tracking number, and the Retention settings list the tracking numbers deleted by the last run.
+* New: the jsst_retention_batch_size filter changes how many tickets one run handles (100 by default).
+
 = 5.0.7 =
 Security release from a second full review of the plugin and its add-ons. Update the plugin and your add-ons promptly. Full details are in changelog.txt.
 
@@ -349,6 +357,9 @@ The biggest release in JS Help Desk's history.
 See the [full changelog](https://plugins.trac.wordpress.org/browser/js-support-ticket/trunk/changelog.txt).
 
 == Upgrade Notice ==
+
+= 5.0.8 =
+Fixes the scheduled retention cleanup, which never deleted tickets. If you set a ticket retention interval, the cleanup starts deleting the eligible tickets, 100 per run, after this update: check the preview on the Retention settings first.
 
 = 5.0.7 =
 Security release: fixes a stored script issue introduced in 5.0.6, protects sites running older Agents add-ons, and tightens ticket, upload, export and account checks found in a second full review. Update now, together with your add-ons.

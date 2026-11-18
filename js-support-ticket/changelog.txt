@@ -4,6 +4,17 @@ JS Help Desk - full changelog
 The readme lists what changed for site owners. This file keeps the complete,
 technical notes for every release.
 
+= 5.0.8 =
+**Fixed**
+* Retention cleanup never deleted a ticket on its schedule (since 4.0.0). `purgeOldTickets()` deleted through `removeEnforceTicket()`, which refuses anyone without `manage_options`; WP-Cron runs signed out, so every ticket was refused. The loop did not check the result, so each run still reported up to 100 tickets "removed" (reported 17 Nov 2026: 3,652 eligible tickets, 100 "removed" a day, none gone). Tickets now go through `JSSTticketModel::deleteForRetention()`. Whether a ticket may go is decided by the retention rule (closed or merged, older than the interval, not excluded, not on legal hold), not by who is signed in. Attachment purging was not affected.
+* A retention deletion sends no "ticket deleted" e-mail and refunds no support credit: these tickets were answered and closed months ago. It emits `ticket.deleted` with source `retention`, so service-level clocks are cancelled and webhooks subscribed to that event are told.
+* A run counts a ticket only when its row is gone. Tickets it could not delete are counted separately in the run's message.
+
+**Changed**
+* Each ticket deleted by retention gets an activity-log entry (`RETENTION_DELETED`, source `retention`): "Ticket <tracking number> deleted by the retention cleanup (closed <date>)". It also appears in the Reporting audit export.
+* The last run's record (`jsst_autocleanup_last_run`) lists the tracking numbers it deleted, shown under "Last run" on the Retention settings. `jsst_autocleanup_history` keeps the last 30 runs.
+* New filter `jsst_retention_batch_size` (default 100, 1–1000): tickets and attachments handled per run, for a site working through a backlog.
+
 = 5.0.7 =
 **Security** (second full review of core and the nine add-ons, 13 November 2026)
 * Stored XSS introduced in 5.0.6: `removeViewerAttributes()` removed `data-vbtype`/`data-href` with a regular expression after kses. It could not tell an attribute from text inside another attribute's value, so `class="X data-href = b" title="x onfocus=... autofocus"` lost its closing quote and `onfocus` became live - a customer's message ran script when an agent or administrator opened the ticket. Now removed with `WP_HTML_Tag_Processor` (on WordPress before 6.2, content that mentions either marker is shown as plain text).

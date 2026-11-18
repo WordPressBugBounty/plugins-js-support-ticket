@@ -2,7 +2,7 @@
 # This file is distributed under the GPLv3.
 msgid ""
 msgstr ""
-"Project-Id-Version: JS Help Desk – AI-Powered Support & Ticketing System 5.0.7\n"
+"Project-Id-Version: JS Help Desk – AI-Powered Support & Ticketing System 5.0.8\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/js-support-ticket\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -40764,4 +40764,20 @@ msgstr ""
 #: js-support-ticket-integrations/includes/classes/chat.php
 #: js-support-ticket-integrations/includes/classes/webhooks.php
 msgid "That URL does not lead to a public address on the internet, so the help desk will not call it."
+msgstr ""
+
+#. translators: 1: ticket tracking number, 2: the date the ticket was closed
+#: modules/autocleanup/model.php
+#, php-format
+msgid "Ticket %1$s deleted by the retention cleanup (closed %2$s)."
+msgstr ""
+
+#. translators: %d: number of tickets
+#: modules/autocleanup/model.php
+#, php-format
+msgid "%d tickets could not be deleted; see System Errors."
+msgstr ""
+
+#: modules/configuration/tpls/admin_configurations.php
+msgid "Tracking numbers deleted in that run"
 msgstr ""

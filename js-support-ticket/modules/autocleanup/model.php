@@ -30,6 +30,26 @@ class JSSTautocleanupModel {
     /** Tickets or attachments handled per run. */
     const BATCH = 100;
 
+    /** Runs kept in jsst_autocleanup_history, newest first. */
+    const HISTORY = 30;
+
+    /** Tracking numbers deleted by the current run. */
+    private $deleted = array();
+
+    /** Ticket ids the current run selected but could not delete. */
+    private $failed = array();
+
+    /**
+     * Tickets or attachments handled per run: BATCH, or what the
+     * `jsst_retention_batch_size` filter returns (1 to 1000). A site with a
+     * large backlog can raise it for a while instead of waiting a day per
+     * hundred. (5.0.8)
+     */
+    public static function batchSize() {
+        $jsst_size = (int) apply_filters('jsst_retention_batch_size', self::BATCH);
+        return max(1, min(1000, $jsst_size));
+    }
+
     /** A ticket is only ever eligible once closed. 5 is Closed, 6 is Merged. */
     private static function closedStatuses() {
         return array(5, 6);
@@ -290,12 +310,16 @@ class JSSTautocleanupModel {
         if (!$jsst_approved && apply_filters('jsst_retention_needs_approval', false)) {
             return array('attachments' => 0, 'bytes' => 0, 'tickets' => 0, 'waiting' => true);
         }
+        $this->deleted = array();
+        $this->failed = array();
         $jsst_result = array('attachments' => 0, 'bytes' => 0, 'tickets' => 0);
         $jsst_result['attachments'] = $this->purgeOldAttachments($jsst_bytes);
         $jsst_result['bytes'] = (int) $jsst_bytes;
         $jsst_result['tickets'] = $this->purgeOldTickets();
+        $jsst_result['ticketids'] = $this->deleted;
+        $jsst_result['failed'] = count($this->failed);
 
-        if ($jsst_result['attachments'] > 0 || $jsst_result['tickets'] > 0) {
+        if ($jsst_result['attachments'] > 0 || $jsst_result['tickets'] > 0 || $jsst_result['failed'] > 0) {
             self::recordRun($jsst_result);
         }
         return $jsst_result;
@@ -303,6 +327,10 @@ class JSSTautocleanupModel {
 
     /**
      * Note what a run removed, so a deletion is never invisible after the fact.
+     *
+     * The last run, as before, plus a history of the last HISTORY runs with
+     * the tracking numbers each one deleted, so "which tickets went, and when"
+     * has an answer after the tickets themselves are gone. (5.0.8)
      */
     private static function recordRun($jsst_result) {
         $jsst_message = sprintf(
@@ -312,18 +340,30 @@ class JSSTautocleanupModel {
             (int) $jsst_result['attachments'],
             self::formatBytes($jsst_result['bytes'])
         );
-        $jsst_log = get_option('jsst_autocleanup_last_run', array());
-        if (!is_array($jsst_log)) {
-            $jsst_log = array();
+        if (!empty($jsst_result['failed'])) {
+            $jsst_message .= ' ' . sprintf(
+                /* translators: %d: number of tickets */
+                esc_html(__('%d tickets could not be deleted; see System Errors.', 'js-support-ticket')),
+                (int) $jsst_result['failed']
+            );
         }
         $jsst_log = array(
             'when'        => date_i18n('Y-m-d H:i:s'),
             'tickets'     => (int) $jsst_result['tickets'],
             'attachments' => (int) $jsst_result['attachments'],
             'bytes'       => (int) $jsst_result['bytes'],
+            'failed'      => isset($jsst_result['failed']) ? (int) $jsst_result['failed'] : 0,
+            'ticketids'   => isset($jsst_result['ticketids']) ? array_values(array_map('strval', (array) $jsst_result['ticketids'])) : array(),
             'message'     => $jsst_message,
         );
         update_option('jsst_autocleanup_last_run', $jsst_log, false);
+
+        $jsst_history = get_option('jsst_autocleanup_history', array());
+        if (!is_array($jsst_history)) {
+            $jsst_history = array();
+        }
+        array_unshift($jsst_history, $jsst_log);
+        update_option('jsst_autocleanup_history', array_slice($jsst_history, 0, self::HISTORY), false);
     }
 
     /**
@@ -332,6 +372,15 @@ class JSSTautocleanupModel {
     public static function lastRun() {
         $jsst_log = get_option('jsst_autocleanup_last_run', array());
         return is_array($jsst_log) ? $jsst_log : array();
+    }
+
+    /**
+     * The last HISTORY runs, newest first, each with the tracking numbers it
+     * deleted. (5.0.8)
+     */
+    public static function history() {
+        $jsst_history = get_option('jsst_autocleanup_history', array());
+        return is_array($jsst_history) ? $jsst_history : array();
     }
 
     /**
@@ -362,7 +411,7 @@ class JSSTautocleanupModel {
                 INNER JOIN `" . jssupportticket::$_db->prefix . "js_ticket_tickets` AS ticket ON a.ticketid = ticket.id
                 WHERE (a.deleted = 0 OR a.deleted IS NULL) AND " . $jsst_clause['sql'] . "
                 LIMIT %d",
-            array_merge($jsst_clause['args'], array(self::BATCH))
+            array_merge($jsst_clause['args'], array(self::batchSize()))
         ));
         if (is_array($jsst_attachments)) {
             foreach ($jsst_attachments as $jsst_attachment) {
@@ -385,7 +434,7 @@ class JSSTautocleanupModel {
                     INNER JOIN `" . jssupportticket::$_db->prefix . "js_ticket_tickets` AS ticket ON n.ticketid = ticket.id
                     WHERE n.filename <> '' AND (n.filedeleted = 0 OR n.filedeleted IS NULL) AND " . $jsst_clause['sql'] . "
                     LIMIT %d",
-                array_merge($jsst_clause['args'], array(self::BATCH))
+                array_merge($jsst_clause['args'], array(self::batchSize()))
             ));
             if (is_array($jsst_notes)) {
                 foreach ($jsst_notes as $jsst_note) {
@@ -437,16 +486,46 @@ class JSSTautocleanupModel {
                 WHERE " . $jsst_clause['sql'] . "
                 ORDER BY ticket.closed ASC
                 LIMIT %d",
-            array_merge($jsst_clause['args'], array(self::BATCH))
+            array_merge($jsst_clause['args'], array(self::batchSize()))
         ));
         if (empty($jsst_ids)) {
             return 0;
         }
+        /* Until 5.0.8 this called removeEnforceTicket(), which refuses anyone
+           without manage_options. WP-Cron runs signed out, so every scheduled
+           run deleted nothing and still counted every ticket it tried. Now a
+           ticket is counted only when its row is gone, and each deletion is
+           written to the activity log with its tracking number. */
         $jsst_ticketmodel = JSSTincluder::getJSModel('ticket');
+        $jsst_log = JSSTmergedaddon::featureEnabled('tickethistory') ? JSSTincluder::getJSModel('tickethistory') : null;
         $jsst_done = 0;
         foreach ($jsst_ids as $jsst_id) {
-            $jsst_ticketmodel->removeEnforceTicket((int) $jsst_id);
+            $jsst_gone = $jsst_ticketmodel->deleteForRetention((int) $jsst_id);
+            if (!$jsst_gone) {
+                $this->failed[] = (int) $jsst_id;
+                continue;
+            }
             $jsst_done++;
+            $this->deleted[] = $jsst_gone->ticketid;
+            if ($jsst_log) {
+                $jsst_log->addEvent(array(
+                    'referenceid' => (int) $jsst_gone->id,
+                    'eventfor'    => 1,
+                    'eventtype'   => 'RETENTION_DELETED',
+                    'message'     => sprintf(
+                        /* translators: 1: ticket tracking number, 2: the date the ticket was closed */
+                        esc_html(__('Ticket %1$s deleted by the retention cleanup (closed %2$s).', 'js-support-ticket')),
+                        $jsst_gone->ticketid,
+                        $jsst_gone->closed
+                    ),
+                    'messagetype' => esc_html(__('Successfully', 'js-support-ticket')),
+                    'source'      => 'retention',
+                    'uid'         => 0,
+                ));
+            }
+        }
+        if ($jsst_done > 0 && class_exists('JSSTqueueengine')) {
+            JSSTqueueengine::flushCounts();
         }
         return $jsst_done;
     }

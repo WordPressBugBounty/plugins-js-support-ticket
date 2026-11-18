@@ -2774,6 +2774,12 @@ $jsst_plugin_array = get_option('active_plugins');
                                         $jsst_lastrun['message']
                                     )); ?>
                                 </p>
+                                <?php if (!empty($jsst_lastrun['ticketids']) && is_array($jsst_lastrun['ticketids'])) { ?>
+                                    <details class="jsst-cleanup-lastrun-ids">
+                                        <summary><?php echo esc_html(__('Tracking numbers deleted in that run', 'js-support-ticket')); ?></summary>
+                                        <p><?php echo esc_html(implode(', ', array_map('strval', $jsst_lastrun['ticketids']))); ?></p>
+                                    </details>
+                                <?php } ?>
                             <?php } ?>
                         </div>
                         <?php } // end $jsst_cleanup_coreowns ?>

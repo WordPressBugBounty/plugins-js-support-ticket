@@ -211,6 +211,7 @@ class JSSTdeactivation {
             'jsst_piping_log',
             'jsst_setup_dismissed',
             'jsst_autocleanup_last_run',
+            'jsst_autocleanup_history',
             'jssupportticket_admin_charts_visibility',
             'jsst_merged_addon_notice_dismissed',
             'jsst_merged_addon_snapshot_tickethistory',
